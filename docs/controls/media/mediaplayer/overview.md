@@ -53,13 +53,11 @@ Once the video files are ready, initialize the MediaPlayer by using the `div` el
 </script>
 ```
 
-To add multiple sources for the same video, configure the quality dependent [HD feature]({% slug overview_kendoui_mediaplayer_widget %}#configuration-adding).
+To add multiple sources for the same video, configure the quality-dependent [HD feature](#configuration-Add).
 
 > **Important**
 >
-> The example on initializing the MediaPlayer above uses the `autoPlay` property. Because of the [mobile considerations listed in this article](https://developers.google.com/youtube/iframe_api_reference#Mobile_considerations), browsers on iOS do not automatically play embedded media. This limitation prevents unsolicited downloads over cellular networks at the expense of the user. The user always has to initiate a playback. For more information on this behavior, refer to [the article on audio and video HTML](https://developer.apple.com/library/safari/documentation/AudioVideo/Conceptual/Using_HTML5_Audio_Video/AudioandVideoTagBasics/AudioandVideoTagBasics.html). There are other functionality which may be limited due to iOS restrictions. You can refer to [this article](http://blog.millermedeiros.com/unsolved-html5-video-issues-on-ios/) and to other resources on the Web about this matter.
-
-
+> The example on initializing the MediaPlayer above uses the `autoPlay` property. Because of the [mobile considerations listed in this article](https://developers.google.com/youtube/iframe_api_reference#Mobile_considerations), browsers on iOS do not automatically play embedded media. This limitation prevents unsolicited downloads over cellular networks at the expense of the user. The user always has to initiate a playback. For more information on this behavior, refer to [the article on audio and video HTML](https://developer.apple.com/library/safari/documentation/AudioVideo/Conceptual/Using_HTML5_Audio_Video/AudioandVideoTagBasics/AudioandVideoTagBasics.html). There are other functionalities which may be limited due to iOS restrictions. For more information on this topic, refer to [this article](http://blog.millermedeiros.com/unsolved-html5-video-issues-on-ios/) and to other available resources on the Web.
 
 ## Configuration
 
@@ -88,7 +86,7 @@ When you add multiple sources for the video, an **HD** button is automatically d
 
 ### Change the Source Dynamically
 
-Players usually feature a different video based on user action. For a basic example and real-time implementation, refer to the [section on creating playlist]({% slug overview_kendoui_mediaplayer_widget %}#creating).
+Players usually feature a different video based on user action. For a basic example and real-time implementation, refer to the [section on creating playlists](#configuration-Create).
 
 ### Prevent Seeking Forward
 
@@ -138,7 +136,7 @@ function buttonClick() {
 }
 ```
 
-## Keyboard Support
+## Keyboard Navigation
 
 The MediaPlayer supports keyboard navigation. To enable it, use the [`navigatable`](/api/javascript/ui/mediaplayer#configuration-navigatable) property.
 
@@ -146,8 +144,8 @@ The following list provides the built-in keyboard commands of the MediaPlayer:
 
 *	`Enter`&mdash;Opens the video in the **FullScreen** mode.
 *	`Esc`&mdash;Exits the **FullScreen** mode.
-*	`Space`&mdash;Toggles **Play** / **Pause**.
-*	`M`&mdash;Toggles **Mute** / **Unmute**.
+*	`Space`&mdash;Toggles **Play** and **Pause**.
+*	`M`&mdash;Toggles **Mute** and **Unmute**.
 
 ## Localization
 

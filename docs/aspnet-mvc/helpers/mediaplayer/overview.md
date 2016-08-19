@@ -10,10 +10,6 @@ position: 1
 
 The MediaPlayer HtmlHelper extension is a server-side wrapper for the [Kendo UI MediaPlayer](https://demos.telerik.com/kendo-ui/mediaplayer/index) widget.
 
-Make sure you are familiar with the fundamental Kendo UI widget concepts and that the [Kendo UI MVC wrappers]({% slug overview_aspnetmvc %}) are set up correctly.
-
-## First Look
-
 The [Kendo UI MediaPlayer widget](http://demos.telerik.com/kendo-ui/mediaplayer/index) plays video files from static sources or streams online YouTube videos and enriches your website with dynamic content in a user-friendly interface. It provides a styled video UI functionality by using the HTML5 `<video>` element and brings powerful media capabilities to your applications without the necessity of installing additional plug-ins.
 
 The MediaPlayer also offers tight integration with the YouTube media provider. The MediaPlayer comes with the familiar and straightforward way to use Kendo UI widgets and delivers rich media web experience for websites, blogs, online TV channels, e-commerce pages, and others. In addition to the consistent and elegant built-in skins, this new addition to the bundle possesses the main feature of every Kendo UI widget&mdash;it is a useful and convenient tool designed for achieving fascinating results in a sharp time frame.  
@@ -34,7 +30,7 @@ The Kendo UI MediaPlayer widget:
 * Displays a title bar.
 * Ships HD source support.
 
-Before reading on, make sure you are familiar with the [fundamental Kendo UI widget concepts]({% slug initialize_widgets_using_jquery_plugins_installation %}).
+Before reading on, make sure you are familiar with the fundamental Kendo UI widget concepts and that the [Kendo UI MVC wrappers]({% slug overview_aspnetmvc %}) are set up correctly.
 
 ## Getting Started
 
@@ -42,7 +38,7 @@ When using local sources, consider the video formats supported by the different 
 
 ### Initialize the MediaPlayer
 
-Once the video files are ready, initialize the MediaPlayer HtmlHelper. It will render a  `div` element as its wrapper container.
+Once the video files are ready, initialize the MediaPlayer HtmlHelper. It will render a `div` element as its wrapper container.
 
 ###### Example
 
@@ -69,13 +65,11 @@ Once the video files are ready, initialize the MediaPlayer HtmlHelper. It will r
 %>
 ```
 
-To add multiple sources for the same video, configure the quality dependent [HD feature]({% slug overview_kendoui_mediaplayer_widget %}#configuration-adding).
+To add multiple sources for the same video, configure the quality-dependent [HD feature]({% slug overview_kendoui_mediaplayer_widget %}#configuration-Add).
 
 > **Important**
 >
-> The example on initializing the MediaPlayer above uses the `autoPlay` property. Because of the [mobile considerations listed in this article](https://developers.google.com/youtube/iframe_api_reference#Mobile_considerations), browsers on iOS do not automatically play embedded media. This limitation prevents unsolicited downloads over cellular networks at the expense of the user. The user always has to initiate a playback. For more information on this behavior, refer to [the article on audio and video HTML](https://developer.apple.com/library/safari/documentation/AudioVideo/Conceptual/Using_HTML5_Audio_Video/AudioandVideoTagBasics/AudioandVideoTagBasics.html). There are other functionality which may be limited due to iOS restrictions. You can refer to [this article](http://blog.millermedeiros.com/unsolved-html5-video-issues-on-ios/) and to other resources on the Web about this matter.
-
-
+> The example on initializing the MediaPlayer above uses the `autoPlay` property. Because of the [mobile considerations listed in this article](https://developers.google.com/youtube/iframe_api_reference#Mobile_considerations), browsers on iOS do not automatically play embedded media. This limitation prevents unsolicited downloads over cellular networks at the expense of the user. The user always has to initiate a playback. For more information on this behavior, refer to [the article on audio and video HTML](https://developer.apple.com/library/safari/documentation/AudioVideo/Conceptual/Using_HTML5_Audio_Video/AudioandVideoTagBasics/AudioandVideoTagBasics.html). There are other functionalities which may be limited due to iOS restrictions. For more information on this topic, refer to [this article](http://blog.millermedeiros.com/unsolved-html5-video-issues-on-ios/) and to other available resources on the Web.
 
 ## Configuration
 
@@ -118,7 +112,7 @@ When you add multiple sources for the video, an **HD** button is automatically d
 
 ### Change the Source Dynamically
 
-Players usually feature a different video based on user action. For a basic example and real-time implementation, refer to the [section on creating playlist]({% slug overview_kendoui_mediaplayer_widget %}#creating).
+Players usually feature a different video based on user action. For a basic example and real-time implementation, refer to the [section on creating playlists]({% slug overview_kendoui_mediaplayer_widget %}#configuration-Create).
 
 ### Prevent Seeking Forward
 
@@ -166,61 +160,7 @@ The example below demonstrates how to access an existing MediaPlayer instance.
 
 ### Create Playlists
 
-To implement your own **Playlist** structures, change the source of the MediaPlayer dynamically. For more information on how to do this, refer to the [introductory article on the MediaPlayer widget]({% slug overview_kendoui_mediaplayer_widget#create %}).
-
-## Keyboard Support
-
-The MediaPlayer supports keyboard navigation. To enable it, use the [`navigatable`](/api/javascript/ui/mediaplayer#configuration-navigatable) property.
-
-The following list provides the built-in keyboard commands of the MediaPlayer:
-
-*	`Enter`&mdash;Opens the video in the **FullScreen** mode.
-*	`Esc`&mdash;Exits the **FullScreen** mode.
-*	`Space`&mdash;Toggles **Play** / **Pause**.
-*	`M`&mdash;Toggles **Mute** / **Unmute**.
-
-## Localization
-
-To localize the tooltip texts from the interface, use the configuration options of the MediaPlayer.
-
-###### Example
-
-```tab-Razor
-@(Html.Kendo().MediaPlayer()
-    .Name("mediaplayer1")
-    .AutoPlay(true)
-    .HtmlAttributes(new { style = "height:360px; width:640px" })
-    .Messages(messages =>
-    {
-        messages.Play("Wiedergabe");
-        messages.Pause("Pausieren");
-    })
-    .Media(m => m
-         .Title("Herbert Grönemeyer - Der Weg")
-         .Source("Video/video1.mp4")
-    )
-)
-```
-```tab-ASPX
-<%= Html.Kendo().MediaPlayer()
-    .Name("mediaplayer1")
-    .AutoPlay(true)
-    .HtmlAttributes(new { style = "height:360px; width:640px" })
-    .Messages(messages =>
-    {
-        messages.Play("Wiedergabe");
-        messages.Pause("Pausieren");
-    })
-    .Media(m => m
-         .Title("Herbert Grönemeyer - Der Weg")
-         .Source("Video/video1.mp4")
-    )
-%>
-```
-
-For a complete list of [localizable messages](/api/javascript/ui/mediaplayer#configuration-messages), refer to the [MediaPlayer API documentation](/api/javascript/ui/mediaplayer).
-
-All Kendo UI widgets, including the MediaPlayer, also allow you to add script files and implement [global localization]({% slug overview_localization_kendoui %}) for your application.
+To implement your own **Playlist** structures, change the source of the MediaPlayer dynamically. For more information on how to do this, refer to the [introductory article on the MediaPlayer widget]({% slug overview_kendoui_mediaplayer_widget %}#configuration-Create).
 
 ## Event Handling
 
@@ -305,14 +245,65 @@ The example below demonstrates how to subscribe to events using a template deleg
 )
 ```
 
+## Keyboard Navigation
+
+The MediaPlayer supports keyboard navigation. To enable it, use the [`navigatable`](/api/javascript/ui/mediaplayer#configuration-navigatable) property.
+
+The following list provides the built-in keyboard commands of the MediaPlayer:
+
+*	`Enter`&mdash;Opens the video in the **FullScreen** mode.
+*	`Esc`&mdash;Exits the **FullScreen** mode.
+*	`Space`&mdash;Toggles **Play** / **Pause**.
+*	`M`&mdash;Toggles **Mute** / **Unmute**.
+
+## Localization
+
+To localize the tooltip texts from the interface, use the configuration options of the MediaPlayer.
+
+###### Example
+
+```tab-Razor
+@(Html.Kendo().MediaPlayer()
+    .Name("mediaplayer1")
+    .AutoPlay(true)
+    .HtmlAttributes(new { style = "height:360px; width:640px" })
+    .Messages(messages =>
+    {
+        messages.Play("Wiedergabe");
+        messages.Pause("Pausieren");
+    })
+    .Media(m => m
+         .Title("Herbert Grönemeyer - Der Weg")
+         .Source("Video/video1.mp4")
+    )
+)
+```
+```tab-ASPX
+<%= Html.Kendo().MediaPlayer()
+    .Name("mediaplayer1")
+    .AutoPlay(true)
+    .HtmlAttributes(new { style = "height:360px; width:640px" })
+    .Messages(messages =>
+    {
+        messages.Play("Wiedergabe");
+        messages.Pause("Pausieren");
+    })
+    .Media(m => m
+         .Title("Herbert Grönemeyer - Der Weg")
+         .Source("Video/video1.mp4")
+    )
+%>
+```
+
+For a complete list of [localizable messages](/api/javascript/ui/mediaplayer#configuration-messages), refer to the [MediaPlayer API documentation](/api/javascript/ui/mediaplayer).
+
+All Kendo UI widgets, including the MediaPlayer, also allow you to add script files and implement [global localization]({% slug overview_localization_kendoui %}) for your application.
+
 ## See Also
 
-**MediaPlayer related**
 * [MediaPlayer Live Sample](http://demos.telerik.com/aspnet-mvc/mediaplayer/index)
 * [Overview of the Kendo UI MediaPlayer Widget]({% slug overview_kendoui_mediaplayer_widget %})
 * [MediaPlayer JavaScript API Reference](/api/javascript/ui/mediaplayer)
-
-**Common**
 * [Overview of Telerik UI for ASP.NET MVC]({% slug overview_aspnetmvc %})
 * [Fundamentals of Telerik UI for ASP.NET MVC]({% slug fundamentals_aspnetmvc %})
 * [Telerik UI for ASP.NET MVC API Reference Folder](/api/aspnet-mvc/Kendo.Mvc/AggregateFunction)
