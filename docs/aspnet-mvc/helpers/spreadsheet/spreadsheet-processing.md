@@ -29,7 +29,7 @@ The `.NET` server-side module is distributed as a part of the [UI for ASP.NET MV
 
 The `telerik.ui.for.aspnetmvc.<version>.zip` archive contains a `spreadsheet` folder that contains assemblies for both .NET 4.0 and .NET 4.5 versions. Include a reference to the `Telerik.Web.Spreadsheet.dll` assembly for the respective framework version.
 
-The main entry point for the project is the `Telerik.Web.Spreadsheet.Workbook` class. This is a `POCO` object that mirrors the object structure of the JSON and provides format conversion methods. Under the hood, it uses the Telerik DPL to perform the actual conversion.
+The main entry point for the project is the `Telerik.Web.Spreadsheet.Workbook` class. This is a `POCO` object that mirrors the object structure of the JSON and provides format conversion methods. Under the hood, it uses TDP to perform the actual conversion.
 
 ## Supported Scenarios
 
@@ -137,7 +137,7 @@ public ActionResult Save(Telerik.Web.Spreadsheet.Workbook workbook)
 </configuration>
 ```
 
-### Convert DPL Document to Workbook
+### Convert TDP Document to Workbook
 
 Telerik Document Processing provides a full-blown model for a Spreadsheet document. Convert it to `Telerik.Web.Spreadsheet.Workbook` if you want to display the result in the Kendo UI Spreadsheet widget.
 
@@ -151,9 +151,9 @@ Telerik Document Processing provides a full-blown model for a Spreadsheet docume
     return Telerik.Web.Spreadsheet.Workbook.FromDocument(document);
 ```
 
-### Convert Workbook to DPL Document
+### Convert Workbook to TDP Document
 
-Conversely, you can start with a Kendo UI Spreadsheet model (`Telerik.Web.Spreadsheet.Workbook`) and convert it to a DPL document. Then, it can be further processed, converted, and stored as needed.
+Conversely, you can start with a Kendo UI Spreadsheet model (`Telerik.Web.Spreadsheet.Workbook`) and convert it to a TDP document. Then, it can be further processed, converted, and stored as needed.
 
 ###### Example
 
@@ -163,7 +163,7 @@ public ActionResult Process(Telerik.Web.Spreadsheet.Workbook workbook)
 {
     var document = workbook.ToDocument();
 
-    //Continue with the DPL API as usual.
+    //Continue with the TDP API as usual.
     var worksheet = document.ActiveWorksheet;
     var A1Cell = new CellIndex(0, 0);
     var B2Cell = new CellIndex(1, 1);
