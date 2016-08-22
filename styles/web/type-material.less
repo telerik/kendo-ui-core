@@ -718,7 +718,19 @@ html .km-pane-wrapper .k-header
 html body .k-button-bare {
 	&.k-state-focused,
 	&:focus {
-		box-shadow: @button-focused-shadow inset !important;
+		position: relative;
+
+		&:before {
+			content: "";
+			background-color: currentcolor;
+			opacity: 0.12;
+			border-radius: inherit;
+			height: 100%;
+			width: 100%;
+			position: absolute;
+			left: 0;
+			top: 0;
+		}
 	}
 }
 
@@ -727,6 +739,10 @@ html .k-mediaplayer-toolbar .k-button-bare {
 	&.k-state-active,
 	&.k-state-active:hover {
 		color: @accent;
+
+		&:before {
+			opacity: 0.24;
+		}
 	}
 }
 
