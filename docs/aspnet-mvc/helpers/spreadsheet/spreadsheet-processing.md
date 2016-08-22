@@ -8,9 +8,9 @@ position: 2
 
 # Server-Side Processing
 
-To export huge datasets to Excel, a well-suited solution is the new [RadSpreadStreamProcessing library](http://docs.telerik.com/devtools/document-processing/libraries/radspreadstreamprocessing/overview) which is part of the [Document Processing Library (DPL) by Progress](http://docs.telerik.com/devtools/document-processing/introduction).  
+To export huge datasets to Excel, a well-suited solution is the new [RadSpreadStreamProcessing library](http://docs.telerik.com/devtools/document-processing/libraries/radspreadstreamprocessing/overview) which is part of [Telerik Document Processing by Progress](http://docs.telerik.com/devtools/document-processing/introduction).
 
-The DPL handles the data import, export, and processing from the following formats:
+Telerik Document Processing (TDP) handles the data import, export, and processing from the following formats:
 
 * Excel Microsoft Office Open XML Spreadsheet (`.xlsx`)
 * Comma-separated values (`.csv`)
@@ -19,7 +19,7 @@ The DPL handles the data import, export, and processing from the following forma
 
 > **Important**
 >
-> The DPL module is distributed as part of the [UI for ASP.NET MVC]({% slug overview_aspnetmvc %}) and is available for the Kendo UI Enterprise and DevCraft bundles.
+> The [Telerik Document Processing libraries](http://docs.telerik.com/devtools/document-processing/introduction#libraries) are distributed as part of the [UI for ASP.NET MVC]({% slug overview_aspnetmvc %}) and are available for the Kendo UI Enterprise and DevCraft bundles.
 
 For examples on how to export Excel files, refer to the [RadSpreadProcessing library](http://docs.telerik.com/devtools/document-processing/libraries/radspreadprocessing/overview).
 
@@ -139,7 +139,7 @@ public ActionResult Save(Telerik.Web.Spreadsheet.Workbook workbook)
 
 ### Convert DPL Document to Workbook
 
-The Telerik Document Processing Library provides a full-blown model for a Spreadsheet document. Convert it to `Telerik.Web.Spreadsheet.Workbook` if you want to display the result in the Kendo UI Spreadsheet widget.
+Telerik Document Processing provides a full-blown model for a Spreadsheet document. Convert it to `Telerik.Web.Spreadsheet.Workbook` if you want to display the result in the Kendo UI Spreadsheet widget.
 
 ###### Example
 
