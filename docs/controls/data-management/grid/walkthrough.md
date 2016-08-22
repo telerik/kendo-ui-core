@@ -8,46 +8,53 @@ position: 1
 
 # Walkthrough
 
-The [Kendo UI Grid widget](http://demos.telerik.com/kendo-ui/grid/index) is a powerful fragment of the Kendo UI framework and an essential part of almost any user interface. The Grid control is quick to set up and is packed with features such as [sorting](/api/javascript/ui/grid#configuration-sortable), [grouping](/api/javascript/ui/grid#configuration-groupable), [paging](/api/javascript/ui/grid#configuration-pageable), and [editing](/api/javascript/ui/grid#events-edit).
+The [Kendo UI Grid widget](http://demos.telerik.com/kendo-ui/grid/index) is a powerful component of the Kendo UI toolkit and an essential part of almost any user interface. The Grid control is quick to set up and is packed with features such as [sorting](/api/javascript/ui/grid#configuration-sortable), [grouping](/api/javascript/ui/grid#configuration-groupable), [paging](/api/javascript/ui/grid#configuration-pageable), and [editing](/api/javascript/ui/grid#events-edit).
 
 ## Initialize the Grid
 
-To initialize a Kendo UI Grid, use either of the following primary approaches:
+Use either of the two primary approaches to create Kendo UI Grids:
 
-* From an empty `<div>` element&mdash;in this case all Grid settings are provided in the initialization script statement. This means that you have to describe the layout of the Grid in JavaScript.
-* From an HTML table&mdash;in this case some of the Grid settings can be inferred from the table structure and the HTML attributes of the elements. This means that you can describe the layout of the Grid entirely in the HTML of the table.
+* From empty `<div>` elements&mdash;in this case all Grid settings are provided in the initialization script statement. This means that you have to describe the layout of the Grid in JavaScript.
+* From HTML tables&mdash;in this case some of the Grid settings can be inferred from the table structure and the HTML attributes of the elements. This means that you can describe the layout of the Grid entirely in the HTML of the table.
 
-### From HTML Element: `<div>`
+### From Empty `<div>` Elements
 
-First start with an empty `<div>` element that has an ID.
+1. Start with an empty `<div>` element that has an ID.
 
-###### Example
+    ###### Example
 
+    ```
     <div id="grid"></div>
+    ```
 
-Now turn the `<div>` into a grid by selecting the `<div>` with a jQuery selector, and calling the `kendoGrid()` function. Since the Grid is being created based on an empty `<div>`, you have to specify the column layout by passing an array of column definition objects to the column option of the widget.
+2. Turn the `<div>` into a grid by selecting the `<div>` with a jQuery selector and by calling the `kendoGrid()` function.
+3. Specify the column layout by passing an array of column definition objects to the `column` option of the widget. This step is necessary because the Grid is being created based on an empty `<div>`.
 
-###### Example
+    ###### Example
 
+    ```
     $("#grid").kendoGrid({
         columns: [ { title: "First Name", field: "firstName" },
                    { title: "Last Name", field: "lastName"},
                    { title: "Email", field: "email" } ]
     });
+    ```
 
-Each column object has the following properties:
+    Each column object features:
 
-1. `title`&mdash;this is the text you want to appear as the column header.
-2. `field`&mdash;the field in the data set that this column should be bound to.
-3. `template`&mdash;you can specify a template for the Grid column to display instead of plain text.
-4. `width`&mdash;the desired width of the column.
+    * The `title` property, which defines the text you want to appear as the column header.
+    * The `field` property, which defines the field in the data set that this column should be bound to.
+    * The `template` property, which specifies a template instead of plain text for the Grid column to display.
+    * The `width` property, which defines the desired width of the column.
 
-### From HTML Table
+### From HTML Tables
 
-Add an HTML table. Specify the table header. Each of the `<th>` elements you specify will become a column and the text will become the column header. Column widths can be set through the `<col>` elements. Fields and templates are defined through the data attributes.
+1. Add an HTML table.
+2. Specify the table header. Each of the `<th>` elements you specify will become a column and the text will become the column header. The `<col>` elements define the widths of the columns. The data attributes define the fields and the templates.
 
-###### Example
+    ###### Example
 
+    ```
     <table id="grid">
         <colgroup>
             <col style="width:100px" />
@@ -69,24 +76,40 @@ Add an HTML table. Specify the table header. Each of the `<th>` elements you spe
             </tr>
         </tbody>
     </table>
+    ```
 
-The table can now describe the entire structure of the grid. The field that the column is bound to in the data set is specified in the `data-field` attribute of each `<th>` element. Using `data-field` attributes is highly recommended. Otherwise the content of the header cell has to meet the [requirements for data field names](/api/javascript/ui/grid#configuration-columns.field).
+    The table can now describe the entire structure of the grid. The field in the data set to which the column is bound is specified in the `data-field` attribute of each `<th>` element. It is strongly recommended to use the `data-field` attributes. Otherwise the content of the header cell has to meet the [requirements for data field names](/api/javascript/ui/grid#configuration-columns.field).
 
-Since the layout of the Grid is defined by the HTML, you only have to call the `kendoGrid()` function to create a grid.
+3. Because the layout of the Grid is defined by the HTML, you only have to call the `kendoGrid()` function to create the Grid.
 
-###### Example
+    ###### Example
 
+    ```
     $("#grid").kendoGrid();
+    ```
 
-When you create the Grid from an existing HTML table, each row from the table is added as a data-item to the dataSource of the Grid. As a result, your Grid is populated with the content from the table to reflect the information it contains.
+    When you create the Grid from an existing HTML table, each row from the table is added as a data item to the dataSource of the Grid. As a result, your Grid is populated with the content from the table and reflects the information it contains.
 
-For more information on how to create a Grid, refer to [the overview article of the Grid]({% slug overview_kendoui_grid_widget %}).
+For more information on initializing the Grid, refer to [its introductory article]({% slug overview_kendoui_grid_widget %}).
 
 ## Data Binding
 
-### Bind to Local Data
+### Configure Auto Binding
 
-The next step is to bind the Grid to data. The widget can be bound to local data by setting the `dataSource` option of the `kendoGrid` object.
+By default, the Grid is set to automatically bind to data&mdash;as soon as it is loaded, it causes the data source to query, and the data is loaded to the Grid.
+
+To disable this behavior, set the `autoBind` option of the widget to `false`, as shown below.
+
+###### Example
+
+    $("#grid").kendoGrid({
+        autoBind: false,
+        // other configuration
+    });
+
+### Bind to Local Arrays
+
+To bind the Grid to local data, set the `dataSource` option of the `kendoGrid` object.
 
 ###### Example
 
@@ -113,9 +136,9 @@ The next step is to bind the Grid to data. The widget can be bound to local data
 
 ### Bind to Remote Data
 
-The Grid can be bound to remote data by specifying the `dataSource` option. The data source can either be created outside the grid, or passed in it.
+To bind the Grid to remote data, specify the `dataSource` option. It is possible to either create the data source outside the widget, or to pass it in it.
 
-If you have multiple widgets bound to the same set of data, you have to create the data source as an object that you can refer to in different widgets. If the Grid is the only item bound to the data, create it inline.
+If multiple widgets are bound to the same data set, you have to create the data source as an object that you can refer to in different widgets. If the Grid is the only item bound to the data, create it inline.
 
 ###### Example
 
@@ -130,178 +153,209 @@ If you have multiple widgets bound to the same set of data, you have to create t
          }
     });
 
-For more information on binding the Grid to a remote data source, refer to [this article]({% slug remote_data_binding_grid %})
+For more information on this topic, refer to the article on [binding the Grid to a remote data source]({% slug remote_data_binding_grid %}).
 
-### Auto Binding
+## Height
 
-By default, the Grid is set to automatically bind to data&mdash;it will cause the data source to query as soon as it is loaded, and the data will be loaded into the Grid.
+By default, the Grid has no height and expands to fit all table rows. To provide for a backwards compatibility, the scrollable MVC wrapper of the Grid [applies a default height of 200px to its scrollable data area](/aspnet-mvc/helpers/grid/configuration#scrolling). To control the height of the widget, specify a static pixel value.
 
-To disable this behavior, set the `autoBind` option of the widget to `false`, as shown below.
-
-###### Example
-
-    $("#grid").kendoGrid({
-        autoBind: false,
-        // other configuration
-    });
-
-## Size
-
-By default, the Grid has no height and expands vertically to fit its contents. To provide backwards compatibility, the scrollable MVC wrapper of the Grid applies a height of 200px to its scrollable data area. You can control the height of the widget by specifying a static pixel value.
-
-###### Example
-
-    $("#grid").kendoGrid({
-        height: 100,
-        // other configuration
-    });
+When the height of the Grid is set, it calculates the appropriate height of its scrollable data area, so that the sum of the header rows, filter row, data, footer, and pager is equal to the expected height of the widget.
 
 **Figure 2. Grid with a fixed height and its scrolling functionality enabled**
 
 ![Grid with fixed height and scrolling](/controls/data-management/grid/grid3_1.png)
 
-Similar to all block elements, the Grid expands to a 100% width. The width of the Grid can be controlled by setting the CSS width properties for the Grid itself or for some of its ancestors. If you use hierarchy and unless the detail template is scrollable, the detail template has to be narrower than the total width of all master columns.
+For more information on setting the height, refer to the article on the [appearance of the Grid]({% slug appearance_kendoui_grid_widget %}#height).
+
+### Let the Height Vary within Limits
+
+It is possible to make the Grid expand and shrink vertically according to the number of its rows and yet within certain limits. To achieve this, apply a minimum and/or maximum height style to the scrollable data area and do not set any height of the Grid.
+
+For more information on setting the height vary within limits, refer to the article on the [appearance of the Grid]({% slug appearance_kendoui_grid_widget %}#let-the-height-vary-within-limits).
 
 ### Set a 100% Height and Auto-Resize
 
-This section is applicable to scrollable Grids only.
+To make the Grid 100% high and resize together with its parent, you need to apply a 100% height style to the widget. According to web standards, elements with a percentage height require that their parent has an explicit height. Elements that are 100% high cannot have margins, paddings, borders, or sibling elements. That is why you have to remove the default border of the Grid as well.
 
-To configure the height of the Grid to 100% and make it resize together with its parent element, configure the `<div>` of the Grid to a 100-percent height. According to web standards, elements with a percentage height require that their parent has an explicit height. This requirement applies recursively until either an element with a pixel height or the `html` element is reached. Elements of 100-percent height cannot have margins, paddings, borders, or sibling elements. That is why you have to remove the default border of the Grid as well.
+Then, you need to make sure that the inner layout of the Grid adapts to changes in the height of the `<div>` wrapper.
 
-Then subscribe to `resize` event of the browser window and execute the [`resize`]({% slug responsivewebdesign_integration_kendoui %}) method of the Grid.
+If the Grid is placed inside a Kendo UI Splitter or Kendo UI Window, you do not need to call the `resize` method because these widgets will execute it automatically.
 
-If the ing functionality of the Grid is used, execute the code below instead of the `resize` configuration option.
+If the vertical space that is available for the Grid depends on a custom resizing of the layout, which is controlled by the user, use a suitable event or method related to the layout changes to execute the `resize` method of the Grid.
 
-###### Example
+The `resize` method works for the Kendo UI versions delivered after the Kendo UI Q3 2013 release.
 
-    $("#GridID").data("kendoGrid").dataSource.fetch();
+For more information on setting the height to 100% and auto-resize the Grid, refer to the article on the [appearance of the Grid]({% slug appearance_kendoui_grid_widget %}#set-100-height-and-auto-resize).
 
-The code from this example helps measure the total height of the Grid and adjust the height of the scrollable data area.
+### Configure the Loading Indicator
 
-If you use locked&mdash;or frozen&mdash;columns in the Grid, you do not need to apply the `resize` method.
+Internally, the Grid uses the [`kendo.ui.progress`](/api/javascript/ui/ui#methods-progress) method to display a loading overlay during remote `read` requests.
 
-The `resize` method works for Kendo UI versions delivered after the Kendo UI Q3 2013 release. For older versions, use the JavaScript code from the example below (instead of `resize`), because it practically achieves the same behavior.
+If the scrolling functionality of the Grid is disabled, the overlay is displayed over the whole Grid. If scrolling is enabled, the overlay is displayed over the scrollable data area.
 
-###### Example
+For more information on initializing the Grid inside hidden containers, refer to the article on the [appearance of the Grid]({% slug appearance_kendoui_grid_widget %}#configure-the-loading-indicator).
 
-    $(window).resize(function() {
-        var gridElement = $("#grid"),
-            newHeight = gridElement.innerHeight(),
-            otherElements = gridElement.children().not(".k-grid-content"),
-            otherElementsHeight = 0;
+## Width
 
-        otherElements.each(function(){
-            otherElementsHeight += $(this).outerHeight();
-        });
+By default, the Grid has no width and behaves like a block-level element. This means that similar to all block elements it expands to a 100% width, that is, to the width of its parent element.
 
-        gridElement.children(".k-grid-content").height(newHeight - otherElementsHeight);
-    });
+The width of the Grid can be controlled by setting the CSS width properties for the Grid itself or for some of its ancestors. If you use hierarchy and unless the detail template is scrollable, the detail template has to be narrower than the total width of all master columns.
 
-### Initialize inside Hidden Containers
+If you enable the scrolling functionality of the Grid and the sum of all column widths is greater than the width of the Grid, a horizontal scrollbar appears.
 
-If a scrollable Grid with a set height is initialized inside a hidden container, the Grid will not be able to adjust its vertical layout correctly, because the JavaScript size calculations do not work for elements of a `display:none` style. Depending on the exact configuration, the widget may appear smaller than expected, or the scrollable data area may overflow.
+If you disable the scrolling functionality of the Grid and the columns do not fit, they overflow the `<div>` element of the Grid.
 
-If you apply [virtual scrolling]({% slug walkthrough_kendoui_grid_widget%}#virtual-scrolling), the vertical scrollbar will not appear.
+For more information on configuring the width of the Grid, refer to the article on the [appearance of the Grid]({% slug appearance_kendoui_grid_widget %}#width).
 
-If you do not apply virtual scrolling, apply any of the following options:
+## Columns
 
-* Initialize the Grid when its element becomes visible.
-* Manually adjust the layout of the Grid. Apply the code from the above example if you use an old Kendo UI version. You do not need to attach a window `resize` handler. As of Kendo UI Q3 2013 release onwards, you are able use [`kendo.resize()`](/api/javascript/kendo#methods-resize) or the [`resize()`]({% slug responsivewebdesign_integration_kendoui %}#individual-widget-resizing) method of the Grid.
-* Instead of setting an overall height for the Grid in its configuration, define the height for the scrollable data area only. In this case no height calculations are made.
+### Column Widths
 
-###### Example
+The columns of the Grid behave differently, depending on whether scrolling is enabled, or not.
 
-        #GridID .k-grid-content
-        {
-            height: 270px;
-        }
+By default, scrolling is enabled&mdash;except for the MVC wrapper of the Grid&mdash;and the `table-layout` style of the Grid tables is set to `fixed`. This means that all columns without a defined width will appear equally wide no matter what their content is.
 
-If you use virtual scrolling and the Grid is initialized while hidden, you have to re-fetch its dataSource when the widget becomes visible. This also readjusts the height of the scrollable data area and no other configuration is required.
+When scrolling is disabled, the `table-layout` style is set to `auto`, which is the default behavior of HTML tables. This means that if not explicitly set, the column widths are determined by the browser and by the cell content.
 
-###### Example
+For more information on configuring the column widths of the Grid, refer to the article on the [appearance of the Grid]({% slug appearance_kendoui_grid_widget %}#column-widths).
 
-    $("#GridID").data("kendoGrid").dataSource.fetch();
+### Column Resizing
 
-### Column Width
+When scrolling is disabled and a column is resized, other columns change widths too, so that the sum of all column widths remains constant. If both the columns and the Grid `<div>` already have their minimum possible widths applied, then the resizing of the columns stops working. In such scenarios, either apply a larger width to the Grid, or enable scrolling.
 
-By default, the scrolling functionality is enabled&mdash;except for the Grid MVC wrapper&mdash;and the `table-layout` style of the Grid tables is set to `fixed`. This means that all columns without a defined width will appear equally wide no matter what their content is. All set column widths will be obeyed regardless of the cell content. If the content cannot fit, it will be either wrapped or clipped.
+For more information on resizing the columns of the Grid, refer to the article on the [appearance of the Grid]({% slug appearance_kendoui_grid_widget %}#column-resizing).
 
-When the scrolling functionality is disabled, the `table-layout` style is set to `auto`. This means that if not explicitly set, the column widths are determined by the browser and by the cell content. The browser will try to obey all column widths that are set, but may readjust some columns depending on their content.
+### Locked Columns
 
-If needed, apply a fixed table layout to a non-scrollable Grid.
+Locked (frozen) columns allow part of the columns to be visible at all times during horizontal Grid scrolling.
 
-###### Example
+The Grid allows you to lock columns on one side of the table. For the feature to work properly, provide the following configuration settings:  
 
-    #GridID > table /* header + data table */
-    {
-        table-layout: fixed;
-    }
+* Enable [scrolling]({% slug appearance_kendoui_grid_widget %}#scrolling).
+* Lock at least one column initially.
+* Define the height of the Grid.
+* Set explicit pixel widths to all columns to allow the Grid to adjust the layout of the frozen and non-frozen table parts.
+* Make sure that the total width of all locked columns is equal to or less than the width of the Grid minus three times the width of the scrollbar.
 
-<!--*-->
-When you create a grid from an HTML `table`, you can set the width of the columns through the `col` elements.
+These settings ensure that at least one non-locked column is always visible and that it is possible to scroll the non-locked columns horizontally.
 
-If [scrolling](#scrolling) is enabled, and all columns have pixel widths and their sum exceeds the width of the Grid, a horizontal scrollbar appears.
+The row template and detail features are not supported in combination with column locking. It is possible to lock a column at the topmost level only, if you use [multi-column headers](http://demos.telerik.com/kendo-ui/grid/multicolumnheaders).
 
-If that sum is less than the width of the Grid, the column widths are ignored and all columns are expanded. This leads to undesired side effects&mdash;for example, when resizing columns. In old Internet Explorer versions the column widths are obeyed, but misalignment occurs. That is why it is recommended to have at least one column without a specified width. Set an explicit width for all columns only if they are set in percent, or if their sum exceeds the width of the Grid and you want to achieve horizontal scrolling.
+Frozen columns cannot be touch-scrolled, because they are wrapped in a container with an `overflow:hidden` style.
 
-If scrolling is enabled, and the Grid has no fixed width and resizes together with the browser window, apply a minimum width to its table elements. This prevents undesired side effects if the browser window size is reduced too much.
+For more information on locking columns, refer to the [article on the appearance of the Grid]({% slug appearance_kendoui_grid_widget %}#locked-columns).
 
-The example below demonstrates how to apply a minimum width to the table elements when the scrolling functionality is enabled.
+### Column Templates
 
-###### Example
+Columns need additional specific templating when they represent complex displays and not single fields.
 
-    #GridID .k-grid-header-wrap > table, /* header table */
-    #GridID .k-grid-content > table, /* data table, no virtual scrolling */
-    #GridID .k-virtual-scrollable-wrap > table /* data table, with virtual scrolling */
-    {
-        min-width: 800px;
-    }
+For more information on configuring columns by using templates in the Grid, refer to the article on [binding the Grid to a remote data source]({% slug remote_data_binding_grid %}#set-the-column-template).
 
-<!--*-->
-If scrolling is disabled, and the Grid has no fixed width and resizes together with the browser window, apply a minimum width to the widget.
+## Rows
 
-The example below demonstrates how to apply a minimum width to the Grid when the scrolling functionality is disabled.
+### Rows by Model IDs
 
-###### Example
+It is possible to get a table row in the Grid by the data item ID.
 
-    #GridID /* or use the .k-grid class to apply to all Grids */
-    {
-        min-width: 800px;
-    }
+For more information on how to retrieve rows by a model ID, refer to the article on the [appearance of the Grid]({% slug appearance_kendoui_grid_widget %}#rows-by-model-ids).
 
-<!--*-->
-Using the `Grid ID` (Name) in the above selectors is optional, so that the styles are applied to a particular Grid instance only.
+### Custom Rows When No Records Are Loaded
 
-### Use Wide Non-Scrollable Grids
+It is possible to manually add a table row with some user-friendly message when the dataSource does not return any data&mdash;for example, as a result of filtering.
 
-Basically, the Grid is a `<table>` element inside a `<div>` one. Tables can expand horizontally beyond 100% to enclose their content, while `<div>` elements lack this behavior. As a result, if the scrolling functionality of the Grid is disabled, the widget `<table>` might overflow the wrapper `<div>` and lead to a visual glitch.
+For more information on adding custom rows when no records are loaded, refer to the article on the [appearance of the Grid]({% slug appearance_kendoui_grid_widget %}#custom-rows-when-no-records-are-loaded).
 
-The possible solutions for you to apply to handle table overflowing are:
+### Row Templates  
 
-* Enable the scrolling functionality, which, by default, is disabled when using the Kendo UI Grid MVC wrapper.
-* Set a large-enough width or a min-width style for the `<div>` wrapper of the Grid.
-* Float the `<div>` wrapper of the Grid and clear the float right after the widget. Floated elements expand and shrink automatically to enclose their content when needed.
+It is possible to format any cell in the Grid by using templates within a script tag or within the template option on the column object if the Grid is initialized from a `<div>` element.
+
+**Figure 3. Grid with a row template applied**
+
+![Grid With Row Template](/controls/data-management/grid/grid8_1.png)
+
+For more information on using row templates, refer to the article on the [appearance of the Grid]({% slug appearance_kendoui_grid_widget %}#row-templates).
 
 ## Features
 
-### Virtual Scrolling
+### Selection
 
-Virtual scrolling is an alternative to paging. When enabled, the Grid loads data from the remote data source as the user scrolls vertically.
+To enable selection in the Grid, set the [`selectable`](/api/javascript/ui/grid#configuration-selectable) option to `true`. This enables the default single-row selection option.
+
+**Figure 4. Grid with enabled row selection**
+
+![Grid with enabled row selection](/controls/data-management/grid/grid4_1.png)
+
+It is also possible to set the `selectable` option to any of the following values:
+* `row`
+* `cell`
+* `multiple row`
+* `multiple cell`
+
+For more information on the selection functionality and its limitations, refer to the [introductory article of the Grid]({% slug overview_kendoui_grid_widget %}#configuration-Selection).
+
+### Paging
+
+To configure the paging functionality of the Grid, use Boolean configuration options. By default, paging&mdash;as well as grouping and sorting&mdash;are disabled, while scrolling is enabled.
+
+The paging function of the Grid is controlled by the `pageable` option. Additionally, you have to indicate to the Grid the number of records to display on each page as well as the total number of records in the dataset. Specify the `pageSize` on the data source and the field in the dataset that will contain the total count of records.
 
 ###### Example
 
     $("#grid").kendoGrid({
-        scrollable: {
-            virtual: true
-        },
-        // other configuration
+         pageable: true
+         // other configuration
     });
 
-For more information on virtual scrolling and its limitations, refer to the [article on the appearance of the Grid]({% slug appearance_kendoui_grid_widget %}#virtual-scrolling).
+For more information on paging, refer to the [introductory article of the Grid]({% slug overview_kendoui_grid_widget %}#configuration-Paging).
+
+### Grouping
+
+By default, grouping&mdash;as well as paging and sorting&mdash;are disabled, while scrolling is enabled.
+
+To enable the grouping functionality of the Grid, set the `groupable` option to `true`. This exposes a new area in the header, which informs that it is possible for the user to drop a column on it and in this way to group the Grid data by that column. It is also possible to do grouping by multiple columns by dragging a second column onto the grouping header.
+
+###### Example
+
+    $("#grid").kendoGrid({
+         groupable: true
+         // other configuration
+    });
+
+**Figure 5. Grid with its grouping functionality enabled**
+
+![Grid With Grouping Enabled](/controls/data-management/grid/grid5_1.png)
+
+**Figure 6. Grid with its data grouped by last name**
+
+![Grid Grouped By Last Name](/controls/data-management/grid/grid6_1.png)
+
+It is also possible to sort the grouped content by clicking on the grouping tab. In the previous example, click on **lastName** to sort the grouped data in descending order. Click it again to toggle to ascending order. Each of the individual groups themselves can be toggled from expanded to collapsed states by clicking on the arrow next to the respective header grouping.
+
+Grouping can be configured to work also with row templates and together with paging.
+
+For more information on the grouping functionality, refer to the [introductory article of the Grid]({% slug overview_kendoui_grid_widget %}#configuration-Grouping).
+
+### Sorting
+
+By default, sorting&mdash;as well as paging and grouping&mdash;is disabled, while scrolling is enabled.
+
+**Figure 7. Grid with its sorting functionality enabled**
+
+![Grid with Sorting Enabled](/controls/data-management/grid/grid7_1.png)
+
+Sorting is also a function that can be pushed to the server for increased performance.
+
+Sorting is supported in two formats:  
+* Single-column sorting
+* Multi-column sorting
+
+For more information on the sorting functionality, refer to the [introductory article of the Grid]({% slug overview_kendoui_grid_widget %}#configuration-Sorting).
 
 ### Scrolling
 
-By default, the scrolling functionality of the Grid is enabled. For historical reasons, however, the [Grid MVC wrapper]({% slug configuration_gridhelper_aspnetmvc %}#scrolling) does not support it. To disable the scrolling functionality, set the `scrollable` option to `false`.
+By default, the scrolling functionality of the Grid is enabled. For historical reasons, however, the [Grid MVC wrapper]({% slug configuration_gridhelper_aspnetmvc %}#scrolling) does not support it.  
+
+To disable the scrolling functionality, set the `scrollable` option to `false`.
 
 ###### Example
 
@@ -323,226 +377,41 @@ For more information on the scrolling functionality, refer to the [article on th
 
 When you enable the scrolling functionality of the Grid, its vertical scrollbar is always visible even if it is not needed. This simplifies the implementation and improves the performance of the widget.
 
-To remove the vertical scrollbar, use CSS, as shown below. When using this approach, make sure that neither the Grid, nor its data area apply fixed heights, so that they are able to shrink and expand according to the number of table rows.
+To remove the vertical scrollbar, use CSS. When using this approach, make sure that neither the Grid, nor its data area, apply fixed heights, so that they are able to shrink and expand according to the number of table rows.
+
+#### Restore Scroll Positions
+
+In some scenarios, the scroll position of the Grid might be reset when the widget is rebound. To avoid this behavior, save the scroll position in the [`dataBinding`](/api/javascript/ui/grid#events-dataBinding) event and restore it in the [`dataBound`](/api/javascript/ui/grid#events-dataBound) event.
+
+If virtual scrolling is enabled, the scrollable data container is scrolled only horizontally.
+
+### Virtual Scrolling
+
+When the Grid is bound to large datasets or when you apply large page sizes, it is important for the performance of the widget to reduce the active in-memory DOM objects.
+
+To highly optimize the binding to large sets of data, the Grid provides a built-in [UI virtualization functionality]({% slug virtualization_kendoui_combobox_widget %}).  Virtual scrolling is an alternative to paging. When enabled, the Grid loads data from the remote data source as the user scrolls vertically.
+
+To enable virtual scrolling, use the configuration demonstrated in the following example.
 
 ###### Example
 
-    #GridID .k-grid-header
-    {
-       padding: 0 !important;
-    }
-
-    #GridID .k-grid-content
-    {
-       overflow-y: visible;
-    }
-
-The `#GridID` allows the application of styles only to a particular Grid instance. To use the above styles in all Grid instances, replace the ID with the `.k-grid` CSS class.
-
-### Locked Columns
-
-Locked (frozen) columns allow part of the columns to be visible at all times during horizontal Grid scrolling.
-
-The Grid allows you to lock columns on one side of the table. For the feature to work properly, make sure the following configuration settings are provided:  
-
-* Enable [Scrolling](#scrolling).
-* Lock at least one column initially.
-* Define the height of the Grid.
-* Set explicit pixel widths to all columns.
-* Make sure that the total width of all locked columns is equal to or less than the width of the Grid minus three times the width of the scrollbar.
-
-These settings ensure that at least one non-locked column is always visible and that it is possible to scroll the non-locked columns horizontally. Note that the horizontal scrollbar will not appear if the horizontal space intended for it is not enough.
-
-The row template and detail features are not supported in combination with column locking.
-
-### Selection
-
-Enable selection in the Grid simply by setting the `selectable` option to `true`. This enables the single row selection in the Grid by default.
-
-###### Example
-
-        $("#grid").kendoGrid({
-            selectable: true,
-            // other configuration
-         });
-
-**Figure 3. Grid with its row selection functionality enabled**
-
-![Grid With Row Selection Enabled](/controls/data-management/grid/grid4_1.png)
-
-You can also set the `selectable` option to any of the following values:
-
-#### Value: row
-
-This value is set by default and enables a single row selection. It is the same as `selectable: true`.
-
-###### Example
-
-        $("#grid").kendoGrid({
-            selectable: "row",
-            // other configuration
-        });
-
-#### Value: cell
-
-The value enables individual cell selection within the Grid.
-
-###### Example
-
-        $("#grid").kendoGrid({
-            selectable: "cell",
-            // other configuration
-        });
-
-#### Value: multiple row
-
-The value allows users to select multiple rows in the Grid.
-
-###### Example
-
-        $("#grid").kendoGrid({
-            selectable: "multiple row",
-            // other configuration
-        });
-
-#### Value: multiple cell
-
-The value enables a multiple cell selection within the Grid.
-
-###### Example
-
-        $("#grid").kendoGrid({
-            selectable: "multiple cell",
-            // other configuration
-        });
-
-When the multiple selection is enabled, it is possible to select multiple rows/cells by dragging the mouse cursor to select them similar to the way you would select a block of text.
-
-> **Important**  
-> * Selection is not persisted when the Grid is rebound, that is, when paging, filtering, sorting, editing, or virtual scrolling occurs. To achieve this behavior, [use this custom implementation]({% slug howto_persist_row_selection_paging_sorting_filtering_grid %}).
->
-> * Selection performance may decrease when the page size is too large, or if no paging is used, and the Grid is rendering hundreds or thousands of items. This behavior is most frequently seen in Internet Explorer. Grouping, hierarchy, and frozen columns also have a negative impact on the selection performance, because these features make the HTML output of the Grid more complex. Therefore, it is recommended to use paging and a reasonable page size.
-
-### Paging
-
-The paging function of the Grid is controlled by the `pageable` option. You need to additionally indicate to the Grid the number of records to display on each page as well as the total number of records in the data set. Specify the `pageSize` on the data source and the field in the dataset that will contain the total count of records.
-
-    $("#grid").kendoGrid({
-         pageable: true
-         // other configuration
-    });
-
-Try to do paging operations on the server to keep from including too much data in the HTML, which can slow down page performance. To accomplish this, set the `serverPaging` option on the data source to `true`.
-
-If you decide to use server paging, be prepared to handle the requests to the server, and respond appropriately. The data source will send the following default parameters to the server when `serverPaging` is enabled:
-
-* `top`&mdash;The number of records to send back in the response.
-* `skip`&mdash;The number of records to skip from the start of the dataset.
-
-For example, if you want to show page 3 out of a 60-record dataset split into 10 records per page, the Grid would send `skip: 20`, `top: 10`.
-
-In general, Kendo UI Grid is platform-agnostic, which means that it works with HTTP requests sending and receiving JSON payload. For example, if you want to bind the widget to a specific data subset (only to а particular page), instruct the dataSource to use [`serverPaging`](/api/javascript/data/datasource#configuration-serverPaging). In this way, it will use the received data directly. The same rule applies to the filtering, grouping, aggregation, and sorting operations.
-
-### Grouping
-
-Setting the `groupable` option to `true` turns on the grouping functionality in the Grid. You can set this option either to `true`, or `false`. By default, it is set to `false`.
-
-Once grouping is enabled, a new area in the header is exposed informing you to drop a column there so you can group the data in the Grid by that column. It is possible to group by multiple columns simply by dragging a second column onto the grouping header.
-
-    $("#grid").kendoGrid({
-         groupable: true
-         // other configuration
-    });
-
-**Figure 4. Grid with its grouping functionality enabled**
-
-![Grid With Grouping Enabled](/controls/data-management/grid/grid5_1.png)
-
-**Figure 5. Grid with its data grouped by last name**
-
-![Grid Grouped By Last Name](/controls/data-management/grid/grid6_1.png)
-
-You can additionally sort the grouped content by clicking on the grouping tab. In the example above, click on **lastName** to sort the grouped data in descending order. Click it again to toggle to ascending order. Each of the individual groups themselves can be toggled from expanded to collapsed by clicking on the arrow next to the respective header grouping.
-
-#### Grouping with row templates
-
-By definition, the row template defines the row markup explicitly, while grouping requires changing the row markup. As a result, the two features can be used at the same time only if the row template includes a script, which adds additional cells, depending on the number of existing groups.
-
-    $(document).ready(function () {
-        // "window." can be omitted if the function is defined outside the document.ready closure
-        window.getGridGroupCells = function(id) {
-            var cnt = $("#" + id).data("kendoGrid").dataSource.group().length,
-                result = "";
-
-            for (var j = 0; j < cnt; j++) {
-                result += "<td class='k-group-cell'>&nbsp;</td>";
-            }
-
-            return result;
-        }
-
-        $("#GridID").kendoGrid({
-            groupable: true,
-            rowTemplate: "<tr>" +
-                "#= getGridGroupCells('GridID') #" +
-                "<td>...</td><td>...</td><td>...</td></tr>",
-            altRowTemplate: "<tr class='k-alt'>" +
-                "#= getGridGroupCells('GridID') #" +
-                "<td>...</td><td>...</td><td>...</td></tr>"
-        });
-    });
-
-#### Grouping with paging
-
-Paging occurs before grouping. Otherwise, you need to group the whole dataSource, which will greatly reduce the performance. As a result, the following behavior is exhibited:
-
-* The dataSource instance of the Grid is not aware if there are items from the displayed groups on other pages.
-* If groups are collapsed, additional items and groups from other pages cannot be displayed below the rendered items and groups. The only possible workaround is to increase the page size.
-
-### Sorting
-
-Sorting is supported in two formats&mdash;either single-column sorting, or multi-column sorting.
-
-To enable the single-column sorting, set the `sortable` option of the Grid to `true`. This will enable the default single-column sorting:
-
-    $("#grid").kendoGrid({
-         sortable: true
-         // other configuration
-    });
-
-**Figure 6. Grid with its sorting functionality enabled**
-
-![Grid With Sorting Enabled](/controls/data-management/grid/grid7_1.png)
-
-The sortable attribute also has the following settings:
-
-#### Single-column sorting
-
-Enable single-column sorting:
-
-    $("#grid").kendoGrid({
-         sortable: true
-         // other configuration
-    });
-
-#### Multi-column sorting
-
-Enable multi-column sorting:
-
-    $("#grid").kendoGrid({
-        sortable: {
-            mode: "multiple"
-        },
-        // other configuration
-    });
-
-Sorting is also a function that can be pushed to the server for increased performance. This is done through the data source itself and setting the `serverSorting` option on the data source to `true`. When you delegate sorting to the server, be prepared to receive the default parameter which is `orderBy`. This field will contain the field name of the column to sort by in the dataset.
+       $(document).ready(function(){
+          $("#grid").kendoGrid({
+             scrollable: {
+                 virtual: true
+             }
+          });
+      });
+
+For more information on virtual scrolling and its limitations, refer to the [article on the appearance of the Grid]({% slug appearance_kendoui_grid_widget %}#virtual-scrolling).
 
 ### Keyboard Navigation
 
-Keyboard navigation within the Grid is supported by the `navigatable` option. When it is set to `true`, you are able to move through the Grid using the arrow keys after you have initially selected a row or a cell. The navigation occurs at a cell level regardless of what `selectable` mode is specified. The current row or cell will be selected when the space bar is pressed.
+Keyboard navigation within the Grid is configured through the `navigatable` option. When set to `true`, it is possible to initially select a row or a cell and then move through the Grid by using the `Arrow` keys.
 
-The example below demonstrates how to enable the key navigation in a Kendo UI Grid.
+The navigation occurs at a cell level regardless of what the `selectable` mode is. To select the current row or cell, press the space bar.
+
+The example below demonstrates how to enable the key navigation in the Grid.
 
 ###### Example
 
@@ -551,178 +420,57 @@ The example below demonstrates how to enable the key navigation in a Kendo UI Gr
          // other configuration
     });
 
-The keyboard navigation of the Grid works by listening to `keydown` events on the wrapper element of the widget. The assumption is that everything the user does is in accordance with the currently focused Grid cell, not the focused element of the browser. If the Grid data cells contain hyperlinks and users want to activate them through the keyboard, the correct way to do that is to navigate to the respective Grid cell using the arrow keys, press `Enter` to focus the hyperlink inside the cell, and then press `Enter` again. Afterwards, pressing `Esc` will return focus to the table cell. The custom hyperlinks should have a `tabindex="-1"` attribute, so that they are inaccessible through tabbing.
+For more information on the keyboard navigation, refer to the [introductory article of the Grid]({% slug overview_kendoui_grid_widget %}#configuration-Keyboard).
 
-If needed, you can avoid the described procedure. The custom hyperlinks can be accessed through tabbing and activated through `Enter` by hacking and bypassing the keyboard navigation of the Grid. This is achieved by preventing event bubbling of the `keydown` event of the custom hyperlinks, so that the Grid never finds out about their `Enter` key-presses.
+## Hidden Containers
 
-### Rows
+If a scrollable Grid with a set height is initialized inside a hidden container&mdash;for example, when scrolling, virtual scrolling, or frozen columns are used&mdash;the Grid will not be able to adjust its vertical layout correctly, because the JavaScript calculations of the size do not work for elements of the `display:none` style.
 
-#### Retrieve Rows by Model IDs
+For more information on initializing the Grid inside hidden containers, refer to the article on the [appearance of the Grid]({% slug appearance_kendoui_grid_widget %}#hidden-containers).
 
-To get a Grid table row by the data item ID, follow the steps below:
+## Editing
 
-1. Make sure the [ID field is defined in the model configuration](/api/javascript/data/model#configuration-Example) of the Grid dataSource.
-2. Retrieve the row model, the model UID, and the Grid table row consecutively:
+Editing is one of the basic functionalities Kendo UI Grid supports and it allows you to manipulate the way the data is presented.
 
-    var rowModel = gridObject.dataSource.get(10249); // get method of the Kendo UI dataSource object
-    var modelUID = rowModel.get("uid"); // get method of the Kendo UI Model object
-    var tableRow = $("[data-uid='" + modelUID + "']"); // the data-uid attribute is applied to the desired table row element. This UID is rendered by the Grid automatically.
+For more information on the editing functionality, refer to the article on [editing of the Grid]({% slug editing_kendoui_grid_widget %}).
 
-#### Add Custom Rows When No Records Are Loaded
+## Adaptive Rendering
 
-When the dataSource does not return any data, for example, as a result of filtering, a table row with some user-friendly message can be manually added.
+As of the Kendo UI Q3 2013 release, the Grid widget supports adaptive enhancements, such as changes in styling and behavior, to provide consistency to the client device experience.
 
-The example below demonstrates how to add a table row in the [dataBound](/api/javascript/ui/grid#events-dataBound) event handler of the Grid.
+For more information on the responsive web design, refer to the article on the [adaptive rendering of the Grid]({% slug adaptive_rendering_kendoui_grid_widget %}).
 
-###### Example
+## Localization
 
-    function onGridDataBound(e) {
-        if (!e.sender.dataSource.view().length) {
-            var colspan = e.sender.thead.find("th:visible").length,
-                emptyRow = '<tr><td colspan="' + colspan + '">... no records ...</td></tr>';
-            e.sender.tbody.parent().width(e.sender.thead.width()).end().html(emptyRow);
-        }
-    }
+Localization is the process of adapting software to meet the requirements of local markets and different languages. Kendo widgets allow you to change the text messages that are displayed to the end user.
 
-For more detailed information on the layout options, refer to [the article about the appearance of the Grid]({% slug appearance_kendoui_grid_widget %}).    
+The Grid widget provides a way to localize the user interface by using configuration options.
 
-## Templates
+For more information on localization, refer to the article on [localizing the Grid]({% slug localization_kendoui_grid_widget %}).
 
-Using templates within a script tag, or within the template option on the column object if the Grid is initialized from a `<div>` element, can format each cell in the Grid.
+## Export to Excel
 
-The example below demonstrates how to use a template to format the email address as a hyperlink by using a template, declared in a script block.
+As of the [Kendo UI Q3 2014 (2014.3.1119) release](http://www.telerik.com/support/whats-new/kendo-ui/release-history/q3-2014), the Grid provides a built-in Excel export functionality.
 
-###### Example
+For more information on Excel export and its limitations, refer to the article on [exporting the Grid to Excel]({% slug exporting_excel_kendoui_grid_widget %}).
 
-    <script id="template" type="text/x-kendo-tmpl">
-        <tr>
-            <td>
-                #= firstName #
-            </td>
-            <td>
-                #= lastName #
-            </td>
-            <td>
-                <a href="mailto:#= email #">#= email #</a>
-            </td>
-        </tr>
-    </script>
+## Export to PDF
 
-This is then specified as a template for each row by passing it in to the `rowTemplate` option on the Grid and initializing it with the `kendo.template` function:
+As of the [Kendo UI Q3 2014 (2014.3.1119) release](http://www.telerik.com/support/whats-new/kendo-ui/release-history/q3-2014), the Grid provides a built-in PDF export functionality.
 
-    $("#grid").kendoGrid({
-        rowTemplate: kendo.template($("#template").html()),
-       // other configuration
-    });
-
-Now the email address is an interactive hyperlink, which will open a new email message.
-
-**Figure 7. Grid with a row template applied**
-
-![Grid With Row Template](/controls/data-management/grid/grid8_1.png)
+For more information on PDF export and its limitations, refer to the article on [exporting the Grid in PDF]({% slug exporting_pdf_kendoui_grid_widget %}).
 
 ## Printing
 
-When the Grid is scrollable, which is a default option except for the Grid MVC wrapper, it renders a [separate table for the header area](#scrolling). Since the browser cannot understand the relationship between the two Grid tables, it will not repeat the header row on top of every printed page. The code below addresses this issue by cloning the header row and prepending it to the printable Grid. Another option is to [disable the scrolling functionality of the Grid](#scrolling).
+In most cases, the Grid is not the only content on a page. Yet, you might want to print the Grid only.
 
-The example below demonstrates how to inject the HTML output of the Grid in a new browser window, and trigger printing.
+To print the content of the Grid only though the widget might not be the only content on the page, use either of the options:
+* Print existing web pages
+* Print new web pages
 
-###### Example
-
-    //HTML
-    <div id="grid"></div>
-
-    <script type="text/x-kendo-template" id="toolbar-template">
-        <button type="button" class="k-button" id="printGrid">Print Grid</button>
-    </script>
-
-    //JavaScript
-	function printGrid() {
-		var gridElement = $('#grid'),
-			printableContent = '',
-			win = window.open('', '', 'width=800, height=500'),
-			doc = win.document.open();
-
-		var htmlStart =
-				'<!DOCTYPE html>' +
-				'<html>' +
-				'<head>' +
-				'<meta charset="utf-8" />' +
-				'<title>Kendo UI Grid</title>' +
-				'<link href="http://kendo.cdn.telerik.com/' + kendo.version + '/styles/kendo.common.min.css" rel="stylesheet" /> ' +
-				'<style>' +
-				'html { font: 11pt sans-serif; }' +
-				'.k-grid { border-top-width: 0; }' +
-				'.k-grid, .k-grid-content { height: auto !important; }' +
-				'.k-grid-content { overflow: visible !important; }' +
-				'.k-grid .k-grid-header th { border-top: 1px solid; }' +
-				'.k-grid-toolbar, .k-grid-pager > .k-link { display: none; }' +
-				'</style>' +
-				'</head>' +
-				'<body>';
-
-		var htmlEnd =
-				'</body>' +
-				'</html>';
-
-		var gridHeader = gridElement.children('.k-grid-header');
-		if (gridHeader[0]) {
-			var thead = gridHeader.find('thead').clone().addClass('k-grid-header');
-			printableContent = gridElement
-				.clone()
-					.children('.k-grid-header').remove()
-				.end()
-					.children('.k-grid-content')
-						.find('table')
-							.first()
-								.children('tbody').before(thead)
-							.end()
-						.end()
-					.end()
-				.end()[0].outerHTML;
-		} else {
-			printableContent = gridElement.clone()[0].outerHTML;
-		}
-
-		doc.write(htmlStart + printableContent + htmlEnd);
-		doc.close();
-		win.print();
-	}
-
-	$(document).ready(function () {
-		var grid = $('#grid').kendoGrid({
-			dataSource: {
-				type: 'odata',
-				transport: {
-					read: "http://demos.telerik.com/kendo-ui/service/Northwind.svc/Products"
-				},
-				pageSize: 20,
-				serverPaging: true,
-				serverSorting: true,
-				serverFiltering: true
-			},
-			toolbar: kendo.template($('#toolbar-template').html()),
-			height: 400,
-			pageable: true,
-			columns: [
-				{ field: 'ProductID', title: 'Product ID', width: 100 },
-				{ field: 'ProductName', title: 'Product Name' },
-				{ field: 'UnitPrice', title: 'Unit Price', width: 100 },
-				{ field: 'QuantityPerUnit', title: 'Quantity Per Unit' }
-			]
-		});
-
-		$('#printGrid').click(function () {
-			printGrid();
-		});
-
-	});
-
-For more detailed information on printing the Grid, refer to [this article]({% slug printing_kendoui_grid %}).
+For more information on printing, refer to the article on [printing the Grid]({% slug printing_kendoui_grid %}).
 
 ## See Also
-
-Other articles on the Kendo UI Grid:
 
 * [Grid JavaScript API Reference](/api/javascript/ui/grid)
 * [Editing Functionality]({% slug editing_kendoui_grid_widget %})
