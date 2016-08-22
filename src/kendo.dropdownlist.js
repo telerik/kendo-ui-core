@@ -1262,6 +1262,10 @@ var __meta__ = { // jshint ignore:line
             if (this.hasOptionLabel()) {
                 if (dataItem === optionLabelText || this._text(dataItem) === optionLabelText) {
                     template = this.optionLabelTemplate;
+
+                    if (typeof this.options.optionLabel === "string" && !this.options.optionLabelTemplate) {
+                        dataItem = optionLabelText;
+                    }
                 }
             }
 
