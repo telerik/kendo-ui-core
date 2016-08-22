@@ -31,24 +31,33 @@ navigation:
     "controls/data-management/grid/how-to/AngularJS":
         title: "AngularJS"
         position: 1
+    "controls/data-management/grid/how-to/binding":
+        title: "Binding"
+        position: 2
     "controls/data-management/grid/how-to/Editing":
         title: "Editing"
-        position: 2
+        position: 3
+    "controls/data-management/grid/how-to/filtering":
+        title: "Filtering"
+        position: 4
     "controls/data-management/grid/how-to/Layout":
         title: "Appearance"
-        position: 3
+        position: 5
     "controls/data-management/grid/how-to/Selection":
         title: "Selection"
-        position: 4
+        position: 6
     "controls/data-management/grid/how-to/Templates":
         title: "Templates"
-        position: 5
+        position: 7
+    "controls/data-management/grid/how-to/hidden":
+        title: "Hidden Containers"
+        position: 8
     "controls/data-management/grid/how-to/excel":
         title: "Excel Export"
-        position: 6
+        position: 9
     "controls/data-management/grid/how-to/pdf-export":
         title: "PDF Export"
-        position: 7
+        position: 10
     "controls/editors":
         title: "Editors"
         position: 2

@@ -1,13 +1,14 @@
 ---
-title: Initialize the Grid in Window
-page_title: Initialize the Grid in Window | Kendo UI Grid
-description: "Learn how to initialize a Kendo UI Grid inside a Kendo UI Window widget by resizing it according to the dimensions of its container."
-slug: howto_initializegridinwindow_grid
+title: Bind to XML Data
+page_title: Bind to XML Data | Kendo UI Grid
+description: "Learn how to bind a Kendo UI Grid to XML data."
+previous_url: /controls/data-management/grid/how-to/bind-grid-to-xml-data.html
+slug: howto_bindgridtoxmldata_grid
 ---
 
-# Initialize the Grid in Window
+# Bind to XML Data
 
-To see the example on how to use the `activate` event when initializing a Grid within a Window so that it is resized according to the dimensions of its container, refer to [this how-to article]({% slug initialize_thegrid_window_widget %}).
+To see the example on how to bind a Kendo UI Grid to XML data, refer to [this project](https://github.com/telerik/ui-for-aspnet-mvc-examples/tree/master/grid/grid-bound-to-xml-data).
 
 ## See Also
 
