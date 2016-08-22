@@ -145,7 +145,11 @@ $.extend(true, kendo.ui.FilterCell.prototype.options.operators,{
     "startswith": "Začína s",
     "contains": "Obsahuje",
     "doesnotcontain": "Neobsahuje",
-    "endswith": "Končí s"
+    "endswith": "Končí s",
+    "isnull": "Je null",
+    "isnotnull": "Nie je null",
+    "isempty": "Je prázdne",
+    "isnotempty": "Nie je prázdne"
   },
   "number": {
     "eq": "Rovná sa",
@@ -153,7 +157,9 @@ $.extend(true, kendo.ui.FilterCell.prototype.options.operators,{
     "gte": "Je väčšie alebo sa rovná",
     "gt": "Je väčšie ako",
     "lte": "Je menšie alebo sa rovná",
-    "lt": "Je menšie ako"
+    "lt": "Je menšie ako",
+    "isnull": "Je null",
+    "isnotnull": "Nie je null"
   },
   "date": {
     "eq": "Je",
@@ -161,11 +167,15 @@ $.extend(true, kendo.ui.FilterCell.prototype.options.operators,{
     "gte": "Nasleduje alebo je",
     "gt": "Nasleduje",
     "lte": "Predchádza alebo je",
-    "lt": "Predchádza"
+    "lt": "Predchádza",
+    "isnull": "Je null",
+    "isnotnull": "Nie je null"
   },
   "enums": {
     "eq": "Je",
-    "neq": "Nie je"
+    "neq": "Nie je",
+    "isnull": "Je null",
+    "isnotnull": "Nie je null"
   }
 });
 }
