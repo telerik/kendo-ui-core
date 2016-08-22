@@ -245,6 +245,8 @@ Below are listed the steps for you to follow while handling this issue.
 
     <compilation debug="false">
 
+## Widgets
+
 ### Kendo UI MVC Wrappers Do Not Work Inside Client Templates
 
 This can happens if the wrapper is declared without `ToClientTemplate()`.
@@ -253,7 +255,12 @@ This can happens if the wrapper is declared without `ToClientTemplate()`.
 
 For more information on this issue, refer to the [article on Kendo UI wrappers fundamentals]({% slug fundamentals_aspnetmvc %}#client-templates)
 
-## Widgets
+On the other hand, note that [template script expressions](/framework/templates/overview#handle-external-templates-and-expressions) that include brackets (function calls) or arithmetic operators cannot be included in the `Name()` method of Kendo UI MVC wrappers. For example, the following implementations will trigger **invalid template** JavaScript errors:
+
+    Html.Kendo().Grid().Name("grid_#=myFunction()#")
+    Html.Kendo().Grid().Name("grid_#=myVariable1+myVariable2 #")
+
+In other words, the `Name()` of a Kendo UI MVC widget can only contain a Kendo UI template with a reference to a variable.
 
 ### Widget Value Is Not Bound to Model Property
 
