@@ -1,13 +1,14 @@
 ---
-title: Reorder Rows in Grids Using Sortable
-page_title: Reorder Rows in Grids Using Sortable | Kendo UI Grid
-description: "Learn how to use the Kendo UI Sortable widget with a Kendo UI Grid either in editable or non-editable modes."
-slug: howto_usegridandsortable_grid
+title: Reorder Rows in Nested Grids Using Sortable
+page_title: Reorder Rows in Nested Grids Using Sortable | Kendo UI Grid
+description: "Learn how to reorder rows in a child Grid using the Kendo UI Sortable widget."
+previous_url: /controls/data-management/grid/how-to/reorder-rows-nested-grids
+slug: howto_reorderrowsinnestedgrid_grid
 ---
 
-# Reorder Rows in Grids Using Sortable
+# Reorder Rows in Nested Grids Using Sortable
 
-To see the examples on how to use the Kendo UI Sortable widget with a Kendo UI Grid either in an editable or in a non-editable mode, refer to [this how-to article]({% slug howto_usesortablewithgrid_inincellediting_sortable %}).
+To see the example on how to reorder rows in a child Kendo UI Grid using the Kendo UI Sortable widget, refer to [this how-to article]({% slug howto_reorderrowsinnestedgrid_sortable %}).
 
 ## See Also
 
