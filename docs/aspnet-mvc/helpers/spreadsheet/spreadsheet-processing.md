@@ -8,9 +8,9 @@ position: 2
 
 # Server-Side Processing
 
-To export huge datasets to Excel, a well-suited solution is the new [RadSpreadStreamProcessing library](http://docs.telerik.com/devtools/document-processing/libraries/radspreadstreamprocessing/overview) which is part of [Telerik Document Processing by Progress](http://docs.telerik.com/devtools/document-processing/introduction).
+To export huge datasets to Excel, a well-suited solution is the new [RadSpreadStreamProcessing library](http://docs.telerik.com/devtools/document-processing/libraries/radspreadstreamprocessing/overview) which is part of [Telerik Document Processing (TDP by Progress](http://docs.telerik.com/devtools/document-processing/introduction).
 
-Telerik Document Processing (TDP) handles the data import, export, and processing from the following formats:
+TDP handles the data import, export, and processing from the following formats:
 
 * Excel Microsoft Office Open XML Spreadsheet (`.xlsx`)
 * Comma-separated values (`.csv`)
