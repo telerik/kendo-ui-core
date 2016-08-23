@@ -92,6 +92,14 @@ Use either of the two primary approaches to create Kendo UI Grids:
 
 For more information on initializing the Grid, refer to the [introductory article of the widget]({% slug overview_kendoui_grid_widget %}).
 
+### In Hidden Containers
+
+If a scrollable Grid with a set height is initialized inside a hidden container&mdash;for example, when scrolling, virtual scrolling, or frozen columns are used&mdash;the Grid will not be able to adjust its vertical layout correctly, because the JavaScript calculations of the size do not work for elements of the `display:none` style.
+
+When you handle the initialization of the Grid in hidden containers, it is possible to use some general as well as specific approaches depending on the particular scenario.
+
+For more information on initializing the Grid inside hidden containers and the approaches to consider, refer to the article on the [appearance of the widget]({% slug appearance_kendoui_grid_widget %}#hidden-containers).
+
 ## Data Binding
 
 ### Configure Auto Binding
@@ -441,42 +449,9 @@ The example below demonstrates how to enable the key navigation in the Grid.
 
 For more information on the keyboard navigation of the Grid, refer to the [introductory article of the widget]({% slug overview_kendoui_grid_widget %}#configuration-Keyboard).
 
-## Hidden Containers
+## Export
 
-If a scrollable Grid with a set height is initialized inside a hidden container&mdash;for example, when scrolling, virtual scrolling, or frozen columns are used&mdash;the Grid will not be able to adjust its vertical layout correctly, because the JavaScript calculations of the size do not work for elements of the `display:none` style.
-
-When you handle the initialization of the Grid in hidden containers, it is possible to use some general as well as specific approaches depending on the particular scenario.
-
-For more information on initializing the Grid inside hidden containers and the approaches to consider, refer to the article on the [appearance of the widget]({% slug appearance_kendoui_grid_widget %}#hidden-containers).
-
-## Adaptive Rendering
-
-As of the [Kendo UI Q3 2013 release](http://www.telerik.com/blogs/new-in-kendo-ui-q3-2013), the Grid widget supports adaptive enhancements, such as changes in styling and behavior, to provide consistency to the client device experience.
-
-To enable the adaptive rendering feature of the Grid, set the [`mobile`](/api/javascript/ui/grid#configuration-mobile) property to `true`, `phone`, or `tablet`.
-
-When configuring the Grid in terms of responsive web design, it is possible to:
-* Add an adaptive Grid to a Kendo UI mobile application
-* Apply height and positions to parent Grid elements
-* Destroy and adaptive Grid
-
-For more information on the responsive web design of the Grid, refer to the article on the [adaptive rendering of the widget]({% slug adaptive_rendering_kendoui_grid_widget %}).
-
-## Localization
-
-The Kendo UI widgets allow you to change the text messages that are displayed to the end user.
-
-The Grid provides options to localize messages related to the toolbar, columns, filter, grouping, and paging, by setting the following configurations:  
-* `toolbar`
-* `columnMenu`
-* `columns`
-* `filterable`
-* `groupable`
-* `pageable`
-
-For more information on localizing messages in the Grid, refer to the article on [localizing the widget]({% slug localization_kendoui_grid_widget %}).
-
-## Export to Excel
+### Excel
 
 As of the [Kendo UI Q3 2014 (2014.3.1119) release](http://www.telerik.com/support/whats-new/kendo-ui/release-history/q3-2014), the Grid provides a built-in Excel export functionality.
 
@@ -491,7 +466,7 @@ The Excel export of the Grid provides the following options and support:
 
 For more information on the Excel export of the Grid and its limitations, refer to the article on [exporting of the widget to Excel]({% slug exporting_excel_kendoui_grid_widget %}).
 
-## Export to PDF
+### PDF
 
 As of the [Kendo UI Q3 2014 (2014.3.1119) release](http://www.telerik.com/support/whats-new/kendo-ui/release-history/q3-2014), the Grid provides a built-in PDF export functionality.
 
@@ -505,6 +480,19 @@ The PDF export of the Grid provides the following options and support:
 
 For more information on the PDF export of the Grid and its limitations, refer to the article on [exporting of the widget in PDF]({% slug exporting_pdf_kendoui_grid_widget %}).
 
+## Adaptive Rendering
+
+As of the [Kendo UI Q3 2013 release](http://www.telerik.com/blogs/new-in-kendo-ui-q3-2013), the Grid widget supports adaptive enhancements, such as changes in styling and behavior, to provide consistency to the client device experience.
+
+To enable the adaptive rendering feature of the Grid, set the [`mobile`](/api/javascript/ui/grid#configuration-mobile) property to `true`, `phone`, or `tablet`.
+
+When configuring the Grid in terms of responsive web design, it is possible to:
+* Add an adaptive Grid to a Kendo UI mobile application
+* Apply height and positions to parent Grid elements
+* Destroy and adaptive Grid
+
+For more information on the responsive web design of the Grid, refer to the article on the [adaptive rendering of the widget]({% slug adaptive_rendering_kendoui_grid_widget %}).
+
 ## Printing
 
 In most cases, the Grid is not the only content on a page. Yet, you might want to print the Grid only.
@@ -514,6 +502,20 @@ To print the content of the Grid only, though the widget might not be the only c
 * Print new web pages
 
 For more information on printing the Grid, refer to the article on [printing the widget]({% slug printing_kendoui_grid %}).
+
+## Localization
+
+The Kendo UI widgets allow you to change the text messages that are displayed to the end user.
+
+The Grid provides options to localize messages related to the toolbar, columns, filter, grouping, and paging, by setting the following configurations:  
+* `toolbar`
+* `columnMenu`
+* `columns`
+* `filterable`
+* `groupable`
+* `pageable`
+
+For more information on localizing messages in the Grid, refer to the article on [localizing the widget]({% slug localization_kendoui_grid_widget %}).
 
 ## See Also
 
