@@ -141,9 +141,9 @@ For more information on how to export multiple Grids to a separate Excel sheet i
 
 ### Use Server-Side Processing
 
-To export huge datasets to Excel, a well-suited solution is the new [RadSpreadStreamProcessing library](http://docs.telerik.com/devtools/document-processing/libraries/radspreadstreamprocessing/overview) which is part of the [Document Processing Library (DPL) by Progress](http://docs.telerik.com/devtools/document-processing/introduction).  
+To export huge datasets to Excel, a well-suited solution is the new [RadSpreadStreamProcessing library](http://docs.telerik.com/devtools/document-processing/libraries/radspreadstreamprocessing/overview) which is part of the [Telerik Document Processing (TDP) by Progress](http://docs.telerik.com/devtools/document-processing/introduction).  
 
-The DPL handles the data import, export, and processing from the following formats:
+TDP handles the data import, export, and processing from the following formats:
 
 * Excel Microsoft Office Open XML Spreadsheet (`.xlsx`)
 * Comma-separated values (`.csv`)
@@ -152,7 +152,7 @@ The DPL handles the data import, export, and processing from the following forma
 
 > **Important**
 >
-> The DPL module is distributed as part of the [UI for ASP.NET MVC]({% slug overview_aspnetmvc %}) and is available for the Kendo UI Enterprise and DevCraft bundles.
+> The [Telerik Document Processing libraries](http://docs.telerik.com/devtools/document-processing/introduction#libraries) are distributed as part of the [UI for ASP.NET MVC]({% slug overview_aspnetmvc %}) and are available for the Kendo UI Enterprise and DevCraft bundles.
 
 For examples on how to export Excel files, refer to the [RadSpreadProcessing library](http://docs.telerik.com/devtools/document-processing/libraries/radspreadprocessing/overview).
 
