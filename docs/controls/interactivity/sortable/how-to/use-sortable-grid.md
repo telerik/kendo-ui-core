@@ -217,7 +217,7 @@ The main milestones of the approach are:
                view[i].dirty = true;
              }
            } else {
-             for (var i = oldIndex 1; i >= newIndex; i--) {
+             for (var i = oldIndex - 1; i >= newIndex; i--) {
                view[i].Order++;
                view[i].dirty = true;
              }
