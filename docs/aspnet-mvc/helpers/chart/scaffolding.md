@@ -32,7 +32,7 @@ Right-click the location where the Chart Controller should be generated. Select 
 
 ### Select the Scaffolder
 
-Select **Kendo UI Scaffolder** from the list of available scaffolders.
+Select **Kendo UI Scaffolder** from the list of available Scaffolders.
 
 **Figure 2. The Kendo UI Scaffolder**
 

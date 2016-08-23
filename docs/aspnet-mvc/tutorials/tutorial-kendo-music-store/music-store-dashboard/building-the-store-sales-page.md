@@ -121,7 +121,7 @@ The chart is defined by the buttons in the previous section, and so they are not
         <span class="time-sales-tab genre-sales-tab" data-period="yearly">Yearly</span>
     </div>
 
-The `genre-sales-tab` class click event handler is then defined in the Javascript.
+The `genre-sales-tab` class click event handler is then defined in the JavaScript.
 
 ###### Example
 

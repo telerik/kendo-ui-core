@@ -8,7 +8,7 @@ position: 3
 
 # Ajax Editing
 
-When configured for Аjax binding, the Kendo UI ListView for ASP.NET MVC makes Ajax requests when doing paging.
+When configured for AJAX binding, the Kendo UI ListView for ASP.NET MVC makes Ajax requests when doing paging.
 
 ## Getting Started
 
@@ -102,7 +102,7 @@ Below are listed the steps for you to follow when configuring the Kendo UI ListV
 
 The `ToDataSourceResult` method uses the `DataSourceRequest` parameter and Linq expressions to apply paging, sorting, filtering, and grouping. The JSON response of the action method will contain only a single page of data. The ListView will be bound to that data.
 
-### Additional Parametres
+### Additional Parameters
 
 To pass additional parameters to the action method, use the `Data` setting. Provide the name of a JavaScript function which will return an object containing the additional data.
 

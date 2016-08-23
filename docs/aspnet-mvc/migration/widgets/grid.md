@@ -418,7 +418,7 @@ The `updatedDataitems` configuration option is now removed. Instead, use the cod
     return model.dirty;
     });  
 
-The `deletedDataItems` configuratino option is now removed. Instead, use the code snippet below, applying private API.
+The `deletedDataItems` configuration option is now removed. Instead, use the code snippet below, applying private API.
 
     var destroyed = grid.dataSource._destroyed`
 
@@ -484,4 +484,4 @@ Other articles on migrating from Telerik Extensions:
 * [Migrate the Calendar]({% slug calendar_migrationextensions_aspnetmvc %})
 * [Migrate the Chart]({% slug chart_migrationextensions_aspnetmvc %})
 
-To see the articles on migrating Кendo UI controls from Telerik Extensions, browse [this section]({% slug combobox_migrationextensions_aspnetmvc %}).
+To see the articles on migrating Kendo UI controls from Telerik Extensions, browse [this section]({% slug combobox_migrationextensions_aspnetmvc %}).

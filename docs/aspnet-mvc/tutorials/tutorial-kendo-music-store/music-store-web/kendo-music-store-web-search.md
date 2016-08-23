@@ -68,7 +68,7 @@ These are the parts of this JavaScript and what they are doing:
 * The `minLength: 3`&mdash;Indicates that the AutoComplete dropdown is not displayed until the user enters at least three characters.
 * The `dataTextField: 'Title'`&mdash;Shows the name of the field in the data that is searched to find AutoComplete results. In this example, the AutoComplete results for albums whose titles contain the text entered by the user are shown.
 * The `placeholder: 'Search music...'`&mdash;This is the text that is displayed in the text box as a placeholder until the user clicks the input box.
-* The `dataSource: {}`&mdash;This configures the source for the AutoComplete data. The example specified the URL of the Albums service as the source. There is a lot going on in this data source, but most of it is enabling server-side filtering by using OData.
+* The `dataSource: {}`&mdash;This configures the source for the AutoComplete data. The example specified the URL of the Albums service as the source. There is a lot going on in this data source, but most of it is enabling server-side filtering by using oData.
 
 ### Customize the Dropdown Items
 
@@ -180,7 +180,7 @@ The example below demonstrates a quick breakdown of the code to do this.
           }
       }
 
-The `schema.data` and `schema.total` functions overcome a JSON formatting difference between Kendo UI and the WCF Data Services OData.
+The `schema.data` and `schema.total` functions overcome a JSON formatting difference between Kendo UI and the WCF Data Services oData.
 
 For more information on each field set on the DataSource, refer to the [DataSource documentation]({% slug basicusage_kendoui_datasourcecomponent %}).
 

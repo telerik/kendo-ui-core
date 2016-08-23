@@ -388,7 +388,7 @@ navigation:
         title: "Button"
     "*mobiledrawer":
         title: "Drawer"
-    "*mobilelanavbar":
+    "*mobilenavbar":
         title: "NavBar"
     "*mobilescrollview":
         title: "ScrollView"

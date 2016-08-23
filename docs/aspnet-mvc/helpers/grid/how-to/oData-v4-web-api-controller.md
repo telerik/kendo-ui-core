@@ -7,9 +7,9 @@ slug: howto_useodata4webapicontroller_gridaspnetmvc
 
 # Use oData v4 with WebAPI Controller
 
-The example below demonstrates how to configure the `dataSource` to communicate with the WebAPI controller through the Odata 4 protocol.
+The example below demonstrates how to configure the `dataSource` to communicate with the WebAPI controller through the oData 4 protocol.
 
-Note that Odata v4 is not fully supported. Your activities when working with Dates are limited because WebAPI does not support the `DateTime` type anymore. When it comes to dates, WebAPI now uses the `DateTimeOffset` time as a main type. However, the `DateTimeOffet` requires the Model (that the dataSource creates) to keep information for both Date and Offset which is not possible with the current architecture of the DataSource and Model of Kendo UI.
+Note that oData v4 is not fully supported. Your activities when working with Dates are limited because WebAPI does not support the `DateTime` type anymore. When it comes to dates, WebAPI now uses the `DateTimeOffset` time as a main type. However, the `DateTimeOffet` requires the Model (that the dataSource creates) to keep information for both Date and Offset which is not possible with the current architecture of the DataSource and Model of Kendo UI.
 
 To see the example on how to use oData v4 with the WebAPI controller, refer to [this project](https://github.com/telerik/ui-for-aspnet-mvc-examples/tree/master/grid/odata-v4-web-api-binding-wrappers).
 

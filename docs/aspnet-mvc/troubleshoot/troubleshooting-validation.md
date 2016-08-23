@@ -57,7 +57,7 @@ The Kendo UI Validator uses the current Kendo UI culture to determine whether a 
 
 In order for the values to be recognized as valid, use the same culture on the client and on the server as described in the [article on globalization]({% slug globalization_aspnetmvc %}).
 
-If the above solution is not feasible, because a custom date format is used, then the build-in `mvcdate` rule that comes from `kendo.aspnetmvc.min.js` needs to be overriden.
+If the above solution is not feasible, because a custom date format is used, then the build-in `mvcdate` rule that comes from `kendo.aspnetmvc.min.js` needs to be overridden.
 
 ###### Example
 

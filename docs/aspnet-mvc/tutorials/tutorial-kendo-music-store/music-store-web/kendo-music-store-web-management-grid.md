@@ -76,7 +76,7 @@ Next, define the `transport` for the DataSource. So far, you only read data from
               total: store.config.wcfSchemaTotal,
           }
 
-Each of these sets the `url` and `type` for the action. In the case of `destroy` and `update`, include the `AlbumId` in the URL itself, not as a parameter. To do this define a function instead of a string to act as the URL. Kendo UI automatically calls this function and passes in the data item that is being deleted. This allowes you to get the `AlbumID` and append it to the base URL.
+Each of these sets the `url` and `type` for the action. In the case of `destroy` and `update`, include the `AlbumId` in the URL itself, not as a parameter. To do this define a function instead of a string to act as the URL. Kendo UI automatically calls this function and passes in the data item that is being deleted. This allows you to get the `AlbumID` and append it to the base URL.
 
 ###### Example
 

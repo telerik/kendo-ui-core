@@ -118,7 +118,7 @@ by the MVC framework when it binds data from the request to parameters that the 
     return Json(response, JsonRequestBehavior.AllowGet);
 
 In the body of the function we get all of the Orders from the database in the form of a Queryable. We then call an extension method, `ToDataSourceResult`,
-on the Queryable of orders. This extension method is one that's provided by the Kendo UI MVC extenions and does all the hardwork of filtering our
+on the Queryable of orders. This extension method is one that's provided by the Kendo UI MVC extensions and does all the hard work of filtering our
 Queryable of orders based on the DataSourceRequest that we got from DataSource.
 
 `ToDataSourceResult` also provides an overload that allows you to specify a selector function. This selector function is the same as what you would

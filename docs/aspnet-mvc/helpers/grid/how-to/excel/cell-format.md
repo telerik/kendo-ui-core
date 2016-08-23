@@ -11,7 +11,7 @@ To format the cell values, set the [`format`](/api/javascript/ooxml/workbook.htm
 
 The page on how to [create a custom number format](https://support.office.com/en-us/article/Create-a-custom-number-format-78f2a361-936b-4c03-8772-09fab54be7f4) describes the formats supported by Excel.
 
-> **Importnat**
+> **Important**
 >
 > This project requires UI for ASP.NET MVC version 2014.3.1125 and later. Earlier versions do not have the `ExcelExport` event exposed through the fluent API.
 

@@ -238,7 +238,7 @@ Below are listed the steps for you to follow when configuring the Kendo UI Grid 
             }
         }
 
-**Step 8**  Return the `DataSourceResult` as JSON. Now let's configure Kendo UI Grid for ajax binding.
+**Step 8**  Return the `DataSourceResult` as JSON. Now let's configure Kendo UI Grid for AJAX binding.
 
 ###### Example
 

@@ -72,7 +72,7 @@ This code is contained in `Scripts/App/store-browse.js`.
         }
     });
 
-The `viewModel` contains three major pieces. The `albums` property is a Kendo UI DataSource that will read the albums from the server. In the code, there is a lot of configuration information passed to the DataSource constructor that sets up the server-side filtering and paging by using OData.
+The `viewModel` contains three major pieces. The `albums` property is a Kendo UI DataSource that will read the albums from the server. In the code, there is a lot of configuration information passed to the DataSource constructor that sets up the server-side filtering and paging by using oData.
 
 The `viewAlbumDetails` property contains a function that will be bound to the click on each album.  This is used to show the album details window.
 

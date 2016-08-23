@@ -80,7 +80,7 @@ The `viewModel` is a Kendo UI `Observable` object, which facilitates the updatin
 
     <h3>Featured Artist: <span data-bind="text: featuredArtistName"></span></h3>
 
-The `featuredArtistAlbums` and `topSellingAlbums` properties of the view model are both set to the [Kendo UI DataSources](http://demos.telerik.com/kendo-ui/web/datasource/index.html) that will pull remote data from our WCF Data Service. In the case of the `featuredArtistAlbums` data source, there is additional code specified that enabled server-side filtering by artist name, which is using OData.
+The `featuredArtistAlbums` and `topSellingAlbums` properties of the view model are both set to the [Kendo UI DataSources](http://demos.telerik.com/kendo-ui/web/datasource/index.html) that will pull remote data from our WCF Data Service. In the case of the `featuredArtistAlbums` data source, there is additional code specified that enabled server-side filtering by artist name, which is using oData.
 
 ## Add the Image Rotator
 

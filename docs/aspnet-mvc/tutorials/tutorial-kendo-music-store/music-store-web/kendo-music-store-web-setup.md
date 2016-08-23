@@ -75,7 +75,7 @@ These files are going to be included when running in the `Release` mode and not 
 <!--*-->
 ### Separate Libs and App Code into Bundles
 
-Most sizable web applications include a number of `.js` files. It is a good practice to separate these into bundles for third-party libraries and your own application code.
+Most sizeable web applications include a number of `.js` files. It is a good practice to separate these into bundles for third-party libraries and your own application code.
 
 Besides Kendo UI, the only third-party library the Music Store application uses is Date.js. Set a `libs` bundle for this third-party library and an `app` bundle for your own application code.
 
