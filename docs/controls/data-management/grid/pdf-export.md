@@ -10,7 +10,7 @@ position: 9
 
 As of the [Kendo UI Q3 2014 (2014.3.1119) release](http://www.telerik.com/support/whats-new/kendo-ui/release-history/q3-2014), the Grid widget provides a built-in PDF export functionality.
 
-## Set Up
+## Setup
 
 To enable PDF export, include the corresponding toolbar command and configure the export settings.
 
@@ -150,20 +150,20 @@ The example below demonstrates how to export the Grid with a fixed paper size.
 
 ### Page Template
 
-Starting from the 2016.2 release, the Grid allows you to specify a page template.
-The template can be used to position the content, add headers, footers and other elements.
-Styling is done using CSS. The template will be positioned in a container with the specified
-paper size during export.
+As of the Kendo UI 2016.2 release, the Grid allows you to specify a page template. It is possible to use the template to position the content, add headers, footers, and other elements. The styling of the exported document is done by using CSS. During the PDF export, the template is positioned in a container with the specified paper size.
 
-Available template variables include:
-* pageNumber
-* totalPages
+The following page template variables are available:
+* `pageNumber`
+* `totalPages`
 
 > **Important**
 >
-> Using a template requires setting paper size. See above.
+> It is required to set the paper size when you use a page template. For more information, refer to the section on [page templates](#page-templates).
 
-###### Example - Export With Page Template
+The example below demonstrates how to export a Grid by using a page template.
+
+###### Example
+
 ```html
     <style>
         body {

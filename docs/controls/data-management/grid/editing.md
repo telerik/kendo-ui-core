@@ -8,13 +8,13 @@ position: 4
 
 # Editing
 
-Editing is one of the basic functionalities Kendo UI Grid supports and it allows you to manipulate the way the data is presented.
+Editing is one of the basic functionalities the Kendo UI Grid supports. It allows you to manipulate the way the data is presented.
 
 ## Setup
 
-To enable the editing support for the Kendo UI Grid widget, perform the steps described below.
+To enable the editing support for the Grid, perform the steps described below.
 
-### Configure DataSource
+### Configure the Data Source
 
 The example below demonstrates how to configure the dataSource for CRUD (Create, Read, Update, Destroy) data operations.
 
@@ -41,7 +41,7 @@ The example below demonstrates how to configure the dataSource for CRUD (Create,
          //...
     });
 
-### Define Fields: schema
+### Define Fields through schema
 
 The example below demonstrates how to declare fields definitions through the DataSource `schema`.
 
@@ -79,7 +79,7 @@ The example below demonstrates how to declare fields definitions through the Dat
       }
     });
 
-### Set Options: editable
+### Set the editable Option
 
 The example below demonstrates the two alternatives to set the `editable` configuration option in the Grid.
 
@@ -100,7 +100,7 @@ The example below demonstrates the two alternatives to set the `editable` config
           }
     });
 
-If you want to enable the insertion of new records, configure the Toolbar, as shown below.
+To enable the insertion of new records, configure the Toolbar, as demonstrated in the following example.
 
 ###### Example
 
@@ -110,7 +110,7 @@ If you want to enable the insertion of new records, configure the Toolbar, as sh
          editable: true
     });
 
-If you want to delete records, define a delete command column, as demonstrated below.
+To delete records, define a delete command column, as demonstrated in the following example.
 
 ###### Example
 
@@ -126,20 +126,24 @@ If you want to delete records, define a delete command column, as demonstrated b
          editable: true
      });
 
-## Editing of Foreign Key Columns
+## Foreign Key Columns
 
-Normally, a foreign key column should be bound to a numeric data field, which points to the unique keys of a separate collection. An issue related to editing may occur if some of the values in the foreign key column are `null`. While this will not create problems in display mode, it will mislead the column editor to think it should work with object values, instead of primitive values. As a result, when a value is picked from the DropDownList, the widget will set an object value to the Grid data item (e.g. {text: "Foo", value: 3} ), instead of a numeric value (e.g. 3). This will cause the Grid cell to remain blank upon exiting edit mode.
+Normally, a foreign key column is bound to a numeric data field, which points to the unique keys of a separate collection.
 
-To avoid the above behavior, one of the following options paths be followed:
+If some of the values in the foreign key column are `null`, an issue related to editing might occur. While this does not create problems in display mode, it misleads the column editor by causing it to perceive it has to work with object values instead of primitive values. As a result, when a value is picked from the DropDownList, the widget sets an object value to the data item of the Grid (for example, `{text: "Foo", value: 3}`), instead of a numeric value (for example, `3`). This causes the Grid cell to remain blank upon exiting edit mode.
 
-* Use zeros instead of nulls to match the data values to the declared data field type.
-* Use a [custom column Editor](http://demos.telerik.com/kendo-ui/grid/editing-custom) with manually configured DropDownList that has a [`valuePrimitive`](/api/javascript/ui/dropdownlist#configuration-valuePrimitive) setting set to `true`.
+To avoid this behavior, consider any of the following options:
 
-## Using Custom Editors
+* Use zeros instead of nulls to match the data values with the declared data field type.
+* Use a [custom column editor](http://demos.telerik.com/kendo-ui/grid/editing-custom) with manually configured DropDownList that has a [`valuePrimitive`](/api/javascript/ui/dropdownlist#configuration-valuePrimitive) setting set to `true`.
 
-When a Kendo UI MultiSelect is used as a custom editor, the `save` event of the Grid is not triggered when the value of the MultiSelect is changed.
+## Custom Editors
 
-The reason for this is that the value of the MultiSelect is a reference type&mdash;`array`&mdash;which prevents the normal usage of the `model.set()` function for setting the value of the corresponding model property. To work around this behavior, define a custom data-binding mechanism. After applying this fix, the `save` event of the Grid will be triggered properly each time a new selection is added to the value of the MultiSelect.
+When a Kendo UI MultiSelect is used as a custom editor in the Grid and the value of the MultiSelect is changed, the `save` event of the Grid is not triggered.
+
+The reason for this is that the value of the MultiSelect is a reference type (`array`), which prevents the normal usage of the `model.set()` function for setting the value of the corresponding model property.
+
+To work around this behavior, define a custom data-binding mechanism. After applying this fix, the `save` event of the Grid is properly triggered each time a new selection is added to the value of the MultiSelect.
 
 To see the runnable example on this issue, refer to the article on [using the MultiSelect as a custom editor in the Grid]({% slug howto_usemultiselectascustomeditor_grid %}).
 

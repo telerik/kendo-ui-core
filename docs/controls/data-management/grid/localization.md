@@ -8,7 +8,7 @@ position: 7
 
 # Grid Localization
 
-Localization is the process of adapting software to meet the requirements of local markets and different languages. Kendo widgets allow you to change the text messages that are displayed to the end user.
+Localization is the process of adapting software to meet the requirements of local markets and different languages. The Kendo UI widgets allow you to change the text messages that are displayed to the end user.
 
 The Grid widget provides a way to localize the user interface by using configuration options.
 

@@ -189,7 +189,7 @@ When a virtualized Grid is scrolled, it renders the table rows for the reached s
 
 If the total number of items is large and the scrolling is fast, the table of the Grid can be re-rendered frequently. If, additionally, the page size is huge, the user might observe issues with the smoothness of the scrolling. In such cases, consider reducing the page size and increasing the Grid height to reduce the frequency of table re-rendering.
 
-#### Limitations of Virtual Scrolling
+#### Known Limitations
 
 * Horizontal scrolling is not virtualized.
 
@@ -445,9 +445,9 @@ Frozen columns rely on row height synchronization between the frozen and non-fro
 
 ## Rows
 
-### Rows by Model IDs
+### Model IDs
 
-It is possible to get a table row in the Grid by the data item ID. To achieve this behavior, follow the steps below:
+It is possible to get a table row in the Grid by the ID of the data item. To achieve this behavior, follow the steps below:
 
 1. Make sure the [ID field is defined in the model configuration](/api/javascript/data/model#configuration-Example) of the Grid dataSource.
 2. Retrieve the row model, the model UID, and the Grid table row consecutively:

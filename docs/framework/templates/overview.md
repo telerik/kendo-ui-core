@@ -8,7 +8,7 @@ position: 1
 
 # Templates Overview
 
-The [Kendo UI Templates](http://demos.telerik.com/kendo-ui/templates/index) provide a simple-to-use, high-performance JavaScript templating engine within the Kendo UI framework. Templates offer a way to create HTML chunks that can be automatically merged with JavaScript data. They are a substitute for traditional HTML string building in JavaScript.
+The [Kendo UI Templates](http://demos.telerik.com/kendo-ui/templates/index) provide a simple-to-use, high-performance JavaScript templating engine within the Kendo UI toolkit. Templates offer a way to create HTML chunks that can be automatically merged with JavaScript data. They are a substitute for traditional HTML string building in JavaScript.
 
 ## Basics
 
@@ -123,7 +123,7 @@ Then, to consume this external template with an expression, simply initialize a 
             function myCustomFunction (str) {
                 return str.replace(".", " ");
             }
-        
+
             //Get the external template definition using a jQuery selector
             var template = kendo.template($("#javascriptTemplate").html());
 

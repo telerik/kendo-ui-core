@@ -158,22 +158,6 @@ The [`excelExport`](/api/javascript/ui/grid#events-excelExport) event allows rev
     </script>
 ```
 
-### Column Templates
-
-The Grid does not use [column templates](/api/javascript/ui/grid#configuration-columns.template) during the Excel export&mdash;it exports only the data. The reason for this behavior is that a column template might contain arbitrary HTML which cannot be converted to Excel column values. For more information on how to use a column template that does not contain HTML, refer to [this column template example]({% slug howto_use_column_template_grid %}).
-
-### Column Format
-
-The Grid does not use [column formats](/api/javascript/ui/grid.html#configuration-columns.format) during the Excel export because some Kendo UI formats are incompatible with Excel. To format the cell values, set the [`format`](/api/javascript/ooxml/workbook.html#configuration-sheets.rows.cells.format) option of the cells.
-
-For more information on the formats that are supported by Excel, refer to [this page](https://support.office.com/en-us/article/Create-a-custom-number-format-78f2a361-936b-4c03-8772-09fab54be7f4).
-
-For more information on how to format cell values, refer to [this example]({% slug howto_format_cell_values_grid %}).
-
-### Detail Template
-
-The Grid does not export its [detail template](/api/javascript/ui/grid#configuration-detailTemplate) for the same reason as it does not export its column templates. If the detail template contains another Grid, follow [the example on the exporting a detail Grid]({% slug howto_exportto_excel_masterand_detail_grid %}).
-
 ### Row Type
 
 Each row has a `type` field that can be used to distinguish between the various row types in the Grid.
@@ -231,6 +215,24 @@ The example below demonstrates how to post files to the server.
             }
         });
     </script>
+
+### Limitations
+
+#### Column Templates
+
+The Grid does not use [column templates](/api/javascript/ui/grid#configuration-columns.template) during the Excel export&mdash;it exports only the data. The reason for this behavior is that a column template might contain arbitrary HTML which cannot be converted to Excel column values. For more information on how to use a column template that does not contain HTML, refer to [this column template example]({% slug howto_use_column_template_grid %}).
+
+#### Column Format
+
+The Grid does not use [column formats](/api/javascript/ui/grid.html#configuration-columns.format) during the Excel export because some Kendo UI formats are incompatible with Excel. To format the cell values, set the [`format`](/api/javascript/ooxml/workbook.html#configuration-sheets.rows.cells.format) option of the cells.
+
+For more information on the formats that are supported by Excel, refer to [this page](https://support.office.com/en-us/article/Create-a-custom-number-format-78f2a361-936b-4c03-8772-09fab54be7f4).
+
+For more information on how to format cell values, refer to [this example]({% slug howto_format_cell_values_grid %}).
+
+#### Detail Templates
+
+The Grid does not export its [detail template](/api/javascript/ui/grid#configuration-detailTemplate) for the same reason as it does not export its column templates. If the detail template contains another Grid, follow [the example on the exporting a detail Grid]({% slug howto_exportto_excel_masterand_detail_grid %}).
 
 ## Server-Side Processing
 
