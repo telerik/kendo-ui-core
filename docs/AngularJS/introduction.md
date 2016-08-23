@@ -31,7 +31,7 @@ To activate the Angular bindings, load `angular.js` before you load Kendo UI. Th
     <script src="angular.js"></script>
     <script src="kendo.all.js"></script>
 
-Do not forget to load the Kendo UI stylesheets too. Next when creating your AngularJS application, declare dependency on `"kendo.directives"`, as showne below.
+Do not forget to load the Kendo UI stylesheets too. Next when creating your AngularJS application, declare dependency on `"kendo.directives"`, as shown below.
 
 ###### Example
 
@@ -439,7 +439,7 @@ To watch multiple options for change, use `k-options` and pass the same variable
 
 ### State Changes
 
-Kendo UI Q1 2015 release intorduced support for `k-ng-disabled` and `k-ng-readonly` directives. By using them, you can change the `disabled` or `readonly` state of the widget based on a scope variable.
+Kendo UI Q1 2015 release introduced support for `k-ng-disabled` and `k-ng-readonly` directives. By using them, you can change the `disabled` or `readonly` state of the widget based on a scope variable.
 
 `k-ng-disabled` is supported by all widgets containing an `enabled` method, except the PanelBar and Menu widget. `k-ng-readonly` is supported by all widgets containing a `readonly` method.
 
