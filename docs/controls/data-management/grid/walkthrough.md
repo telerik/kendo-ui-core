@@ -16,6 +16,7 @@ Use either of the two primary approaches to create Kendo UI Grids:
 
 * From empty `<div>` elements&mdash;in this case all Grid settings are provided in the initialization script statement. This means that you have to describe the layout of the Grid in JavaScript.
 * From HTML tables&mdash;in this case some of the Grid settings can be inferred from the table structure and the HTML attributes of the elements. This means that you can describe the layout of the Grid entirely in the HTML of the table.
+* In hidden containers&mdash;when you initialize a scrollable Grid with a set height in a PanelBar, TabStrip, or Window, you also need to consider some additional layout specifics of the widget.
 
 ### From Empty div Elements
 
