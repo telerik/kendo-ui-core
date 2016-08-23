@@ -624,6 +624,7 @@ var __meta__ = { // jshint ignore:line
             var visible = that.popup.visible();
             var offsetTop;
             var popups;
+            var footerHeight;
 
             if (length || that.options.noDataTemplate) {
                 popups = list.add(list.parent(".k-animation-container")).show();
@@ -639,7 +640,8 @@ var __meta__ = { // jshint ignore:line
 
                 if (height !== "auto") {
                     offsetTop = that._offsetHeight();
-                    height = height - offsetTop - $(that.footer).outerHeight();
+                    footerHeight = $(that.footer).outerHeight() || 0;
+                    height = height - offsetTop - footerHeight;
                 }
 
                 that.listView.content.height(height);
