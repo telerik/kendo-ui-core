@@ -9,7 +9,7 @@ slug: howto_persist_row_selection_paging_sorting_filtering_grid
 
 The example below demonstrates how to persist the row selection in a Kendo UI Grid, while performing the data operations of paging, sorting, and filtering.
 
-> **Importnat**
+> **Important**
 >  
 > The implemented technique requires you to define an `ID` field in `schema.model`.
 

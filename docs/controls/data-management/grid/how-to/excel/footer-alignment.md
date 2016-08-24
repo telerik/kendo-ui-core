@@ -7,7 +7,7 @@ slug: howto_alignfootercells_grid
 
 # Align Footer Cells
 
-Thе example below demonstrates how to align the footer cells during excel export. Usually, HTML and CSS are used to do that, but this is not supported in Excel.
+The example below demonstrates how to align the footer cells during excel export. Usually, HTML and CSS are used to do that, but this is not supported in Excel.
 
 The demo uses the [`hAlign`](/api/javascript/ooxml/workbook#configuration-sheets.rows.cells.hAlign) option of the cell to set the alignment.
 

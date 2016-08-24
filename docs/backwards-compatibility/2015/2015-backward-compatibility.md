@@ -120,7 +120,7 @@ New rendering:
     </ul>
 ```
 
-* **DropDownList**: In order to match the Html `Select` behavior better and solve some issues related to MVVM `value` binding, the dropdownlist now allows to clear its value (deselect the selected item). This will introduce the following breaking changes:
+* **DropDownList**: In order to match the Html `Select` behavior better and solve some issues related to MVVM `value` binding, the DropDownList now allows to clear its value (deselect the selected item). This will introduce the following breaking changes:
 
     1. The widget will not select the first item, when its selected index is `-1`
     2. The widget will not select the first item, when the selected value is not present in the data source

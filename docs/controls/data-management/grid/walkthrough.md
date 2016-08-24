@@ -260,7 +260,7 @@ Using the `Grid ID` (Name) in the above selectors is optional, so that the style
 
 ### Use a Wide Non-Scrollable Grid
 
-Basically, the Grid is a `<table>` element inside a `<div>` one. Tables can expand horizontally beyond 100% to enclose their content, while `<div>` elements lack this beahvior. As a result, if the scrolling functionality of the Grid is disabled, the widget `<table>` may overflow the wrapper `<div>` and lead to a visual glitch.
+Basically, the Grid is a `<table>` element inside a `<div>` one. Tables can expand horizontally beyond 100% to enclose their content, while `<div>` elements lack this behavior. As a result, if the scrolling functionality of the Grid is disabled, the widget `<table>` may overflow the wrapper `<div>` and lead to a visual glitch.
 
 Possible solutions for table overflowing are:
 

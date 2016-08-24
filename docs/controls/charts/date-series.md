@@ -321,7 +321,7 @@ The date axis supports specifying one format per base unit.
         }
     }
 
-The [`labels.format` property](/api/dataviz/chart#xAxis.labels.format) takes priority, if specified. The global `KendoUI` culture is used for formatting the dates. It can be overriden by setting [`labels.culture` property](/api/dataviz/chart#xAxis.labels.culture).
+The [`labels.format` property](/api/dataviz/chart#xAxis.labels.format) takes priority, if specified. The global `KendoUI` culture is used for formatting the dates. It can be overridden by setting [`labels.culture` property](/api/dataviz/chart#xAxis.labels.culture).
 
 ## See Also
 

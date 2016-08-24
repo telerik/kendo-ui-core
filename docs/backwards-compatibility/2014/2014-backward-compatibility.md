@@ -187,7 +187,7 @@ This change is related to the introduction of the new FileBrowser tool.
 
 #### Breaking Changes
 
-* **Flat Theme**: Button background is now gray. The previous outcome can be achieved using **.k-primary** class.
+* **Flat Theme**: Button background is now grey. The previous outcome can be achieved using **.k-primary** class.
 
 * **Kendo UI Web mobile skins**: The new skins for the mobile widgets in Kendo UI Web are **not compatible** with the Kendo UI Mobile platform themes and shouldn't be used together. However,
 you can style your app with them if you don't include any of the Kendo UI Mobile styling (even the common CSS) - **kendo.[skin-name].mobile.min.css** includes everything needed.

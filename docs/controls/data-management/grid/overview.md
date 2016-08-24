@@ -166,7 +166,7 @@ When binding to large data sets or when using large page sizes, reducing active 
           });
       });
 
-For more information on the layout features avaialbe in the Grid, refer to:
+For more information on the layout features available in the Grid, refer to:
 
 * [Appearance of the Grid]({% slug appearance_kendoui_grid_widget %})
 

@@ -7,7 +7,7 @@ slug: howto_getthe_next_occurance_scheduler
 
 # Get next Occurrence
 
-The example below demonstrates how to get a `next` occurance of the Kendo UI `SchedulerEvent` in a Kendo UI Scheduler widget.
+The example below demonstrates how to get a `next` occurrence of the Kendo UI `SchedulerEvent` in a Kendo UI Scheduler widget.
 
 ###### Example
 

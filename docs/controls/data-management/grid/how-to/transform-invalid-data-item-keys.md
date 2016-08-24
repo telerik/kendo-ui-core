@@ -7,7 +7,7 @@ slug: howto_transforminvaliddataitemkety_grid
 
 # Transform Invalid Data Item Keys into Valid Ones
 
-Sometimes the received remote data contains fields that are not valid JavaScript identifiers. To manipulate the received data and transform it so that it can be processed by the Kendo UI DataSouce, use the `schema.parse()` method to replace the non-supported keys with supported ones.
+Sometimes the received remote data contains fields that are not valid JavaScript identifiers. To manipulate the received data and transform it so that it can be processed by the Kendo UI DataSource, use the `schema.parse()` method to replace the non-supported keys with supported ones.
 
 The example below demonstrates how to use the `schema.parse()` method to transform invalid data item keys into valid ones.
 

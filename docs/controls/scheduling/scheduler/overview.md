@@ -278,7 +278,7 @@ The example below demonstrates how to trigger the same behavior in Firefox as it
     }
 
 <!--*-->
-`17px` is a hard-coded value, which should match the scrollbar width. It can be calculated and set with Javascript before printing if desired.
+`17px` is a hard-coded value, which should match the scrollbar width. It can be calculated and set with JavaScript before printing if desired.
 
 In addition, the Scheduler needs a fixed pixel width for itself or some of its ancestors. Otherwise, it may resize during printing, which will cause the displayed absolutely positioned events to become misaligned. If the widget is part of a fluid layout, a fixed width can be set only for the printing task and then removed, as demonstrated in the example below.
 

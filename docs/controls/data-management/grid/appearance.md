@@ -222,7 +222,7 @@ Secondly, ensure that the inner Grid layout adapts to changes in the height of t
 
 If the available vertical space for the Grid depends on a custom layout resizing controlled by the user, use a suitable event or method related to the layout changes to execute the `resize` method of the Grid. In this case, call the `resize` method even if you use locked (frozen) columns.
 
-The `resize` method will work for Kendo UI versions delivered after the Kendo UI Q3 2013 release. For older versions, use the following Javascript code instead of `resize`, which practically does the same.
+The `resize` method will work for Kendo UI versions delivered after the Kendo UI Q3 2013 release. For older versions, use the following JavaScript code instead of `resize`, which practically does the same.
 
 ###### Example
 
