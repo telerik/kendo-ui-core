@@ -426,6 +426,25 @@ groupable
 telerik.com
 Date.js.
 un-minified
+kendoMobileSwipe
+colorization
+missingValues
+kendo.data.js
+kendo.model.js
+kendo.chart
+kendo.dataviz
+verticalLine
+verticalArea
+kendo.dataviz.css
+kendo.dataviz.ui
+kendo.ui
+kendo.support.pointers
+kendo.support.msPointers
+formatBlock
+kendo.resize
+checkboxes.template
+mobile.min.css
+optionLabel
  - ./accessibility/accessibility-overview.md
 2.0
 508
@@ -433,3 +452,5 @@ un-minified
 jsbin.com
 odowud
 000px
+ - backwards-compatibility/2013/2013-backward-compatibility.md
+2px
