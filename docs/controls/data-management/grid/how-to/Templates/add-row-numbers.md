@@ -7,7 +7,7 @@ slug: howto_addrownumbers_grid
 
 # Add Row Numbers
 
-The example below demonstrates how to implement row numbers to a Kendo UI Grid widget by using the [`page()`](/api/javascript/data/datasource#methods-page) and [`pageSize()`](/api/javascript/data/datasource#methods-pageSize) methods of the Kendo UI Data Source.
+The example below demonstrates how to implement row numbers in a Kendo UI Grid widget by using the [`page()`](/api/javascript/data/datasource#methods-page) and [`pageSize()`](/api/javascript/data/datasource#methods-pageSize) methods of the Kendo UI Data Source.
 
 ###### Example
 
