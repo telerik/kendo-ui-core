@@ -76,7 +76,7 @@ As of now, the following basic specifiers are supported:
 |`"divisor"`        |Requires a non-zero number. Produces a `#DIV/0!` error if the argument is zero. |
 |`"string"`         |Requires a string argument. |
 |`"boolean"`        |Requires a boolean argument. Most times you may want to use `"logical"` though. |
-|`"logical"`        |Requires a `logical` argument. That is, booleans `true` or `false`, but `1` and `0` are also accepted. It gets converted to an actual boolean. |
+|`"logical"`        |Requires a `logical` argument. That is, Booleans `true` or `false`, but `1` and `0` are also accepted. It gets converted to an actual boolean. |
 |`"date"`           |Requires a date argument. Internally, dates are stored as numbers (the number of days since December 31 1899), so this works the same as `"integer"`. It was added for consistency. |
 |`"datetime"`       |This is like `"number"`, because the time part is represented as a fraction of a day. |
 |`"anyvalue"`       |Accepts any value type. |
@@ -145,21 +145,21 @@ See the **References** section below for more information about references. The 
 
 ### Compound Type Specifiers
 
-In addition to basic type specifiers, which are strings, you can also use the following forms of type specs:
+In addition to basic type specifiers, which are strings, you can also use the following forms of type specifications:
 
 |ADDITIONAL SPECIFIER           |ACTION     |
 |:---                           |:---       |
 |`[ "null", DEFAULT ]`          |Validates a missing argument and makes it take the given `DEFAULT` value. This can be used in conjunction with `"or"` to support optional arguments. |
-|`[ "not", SPEC ]`              |Requires an argument which does not match the spec. |
-|`[ "or", SPEC, SPEC, ... ]`    |Validates an argument that passes any of the specs.|
-|`[ "and", SPEC, SPEC, ... ]`   |Validates an argument that passes all the specs.|
+|`[ "not", SPEC ]`              |Requires an argument which does not match the specification. |
+|`[ "or", SPEC, SPEC, ... ]`    |Validates an argument that passes any of the specifications.|
+|`[ "and", SPEC, SPEC, ... ]`   |Validates an argument that passes all the specifications.|
 |`[ "values", VAL1, VAL2, ... ]`|The argument must strictly equal one of the listed values.|
 |`[ "[between]", MIN, MAX ]`    |Validates an argument between the given values inclusive. Note that it does not require numeric argument. The "between" value is an alias.|
 |`[ "(between)", MIN, MAX ]`    |This is similar to "[between]" but is exclusive.|
 |`[ "[between)", MIN, MAX ]`    |Requires an argument greater than or equal to `MIN`, and strictly less than `MAX`.|
 |`[ "(between]", MIN, MAX ]`    |Requires an argument strictly greater than `MIN`, and less than or equal to `MAX`.|
 |`[ "assert", COND ]`           |Inserts an arbitrary condition literally into the code (see the **Assertions** section below).|
-|`[ "collect", SPEC ]`          |Collects all remaining arguments that pass the spec into a single array argument. This only makes sense at top level and cannot be nested in `"or"`, `"and"`, etc. Arguments not matching the `SPEC` are silently ignored, except errors. Each error aborts the calculation.|
+|`[ "collect", SPEC ]`          |Collects all remaining arguments that pass the specification into a single array argument. This only makes sense at top level and cannot be nested in `"or"`, `"and"`, etc. Arguments not matching the `SPEC` are silently ignored, except errors. Each error aborts the calculation.|
 |`[ "#collect", SPEC ]`         |This is similar to "collect", but ignores errors as well.|
 
 ### Previous Arguments Reference
@@ -200,7 +200,7 @@ You can notice though that the above function is not quite correct because it do
         [ "?", [ "assert", "$min < $max", "N/A" ] ]
     ]);
 
-The `"assert"` type spec allows you to introduce an arbitrary condition into the JavaScript code of the type checking function. An argument name of `"?"` will not actually introduce a new argument, but provide a place for such assertions. The third argument to `"assert"` is the error code that it should produce if the condition does not stand (and `#N/A!` is actually the default).
+The `"assert"` type specification allows you to introduce an arbitrary condition into the JavaScript code of the type checking function. An argument name of `"?"` will not actually introduce a new argument, but provide a place for such assertions. The third argument to `"assert"` is the error code that it should produce if the condition does not stand (and `#N/A!` is actually the default).
 
 ### Optional Arguments
 
@@ -233,7 +233,7 @@ In most cases, “optional” means that the argument takes some default value i
     ]);
 
 <!--*-->
-The type spec for `base` is: `[ "or", "number++", [ "null", 10 ] ]`. This says it should accept any number greater than zero, but if the argument is missing, defaults to 10. The implementation does not have to deal with the case that the argument is missing — it will get 10 instead.
+The type specification for `base` is: `[ "or", "number++", [ "null", 10 ] ]`. This says it should accept any number greater than zero, but if the argument is missing, defaults to 10. The implementation does not have to deal with the case that the argument is missing — it will get 10 instead.
 
 Also, note that it uses an assertion to make sure the `base` is not 1. If it is, return a `#DIV/0!` error.
 
@@ -300,7 +300,7 @@ This collects all remaining arguments that match a certain type specifier, ignor
         [ "numbers", [ "collect", "number" ] ]
     ]);
 
-The `"collect"` clause will abort when it encounters an error. If you want to ignore errors as well, use the `"#collect"` spec.
+The `"collect"` clause will abort when it encounters an error. If you want to ignore errors as well, use the `"#collect"` specification.
 
 Note that `"collect"` and `"#collect"` only make sense when being the first specifier, i.e., they cannot be nested in `"or"`, `"and"` etc.
 
@@ -479,7 +479,7 @@ It uses `this.workbook()` to retrieve the workbook, and then uses the Workbook/S
 
 ## Matrices
 
-Matrices are defined by `spreadsheet.calc.runtime.Matrix`. Your primitive can request a `Matrix` object by using the `"matrix"` type spec. In this case, it will accept a cell reference, a range reference, or a literal array. You can type literal arrays in formulas like in Excel, e.g., `{ 1, 2; 3, 4 }` (rows separated by semicolons).
+Matrices are defined by `spreadsheet.calc.runtime.Matrix`. Your primitive can request a `Matrix` object by using the `"matrix"` type specification. In this case, it will accept a cell reference, a range reference, or a literal array. You can type literal arrays in formulas like in Excel, e.g., `{ 1, 2; 3, 4 }` (rows separated by semicolons).
 
 Matrices were primarily added to deal with the “array formulas” concept in Excel. A function can return multiple values, and those will be in a `Matrix` object.
 

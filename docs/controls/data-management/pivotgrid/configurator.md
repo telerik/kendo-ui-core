@@ -8,7 +8,7 @@ position: 2
 
 # PivotConfigurator Overview
 
-The Kendo UI PivotConfigurator widget represents an OLAP cube structure and can be used to configure the column and row dimensions along with the measures fields of the [Kendo UI PivotGrid widget](http://demos.telerik.com/kendo-ui/pivotgrid/index). It is a suplementary widget, which is strongly related to the Kendo UI `PivotDataSource` component.
+The Kendo UI PivotConfigurator widget represents an OLAP cube structure and can be used to configure the column and row dimensions along with the measures fields of the [Kendo UI PivotGrid widget](http://demos.telerik.com/kendo-ui/pivotgrid/index). It is a supplementary widget, which is strongly related to the Kendo UI `PivotDataSource` component.
 
 ## Getting Started
 

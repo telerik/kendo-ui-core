@@ -16,7 +16,7 @@ The `edit(options)` method is invoked with the following options:
 
 * `range`&mdash;The cell that is currently selected as a `Range` object.
 * `rect`&mdash;The rectangle with the position of the selected cell on the screen. It has `top`, `left`, `width`, `height`, `right`, and `bottom` properties. Use this option to position the editor near the cell, for example.
-* `callback`&mdash;A function which your editor calls when a value is selected. It receives the `value` and an optional second argument `parse`. When `parse` is `true`, the `value` should be a string and it is then parsed as if inputted by the end user through the inline editor. Use this option to return a formula, for example&mdash;`callback("=sum(a1:a5)", true)`.
+* `callback`&mdash;A function which your editor calls when a value is selected. It receives the `value` and an optional second argument `parse`. When `parse` is `true`, the `value` should be a string and it is then parsed as if input by the end user through the inline editor. Use this option to return a formula, for example&mdash;`callback("=sum(a1:a5)", true)`.
 
 The `icon` property is a string which contains a CSS class name that is to be applied to the drop-down button.
 

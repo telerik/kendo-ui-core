@@ -159,7 +159,7 @@ The TreeList scrolling is enabled by default. However, the enabled scrolling fun
 
 You are able to independently control vertical and horizontal scrolling.
 
-When scrolling is enabled, the TreeList renders two tables&mdash;one for the header area and one for the scrollable data area. This ensures that the header area of the TreeList is always visible during vertical scrolling. Take the two tables into account when you need to manually make Javascript or CSS updates to the Grid tables.
+When scrolling is enabled, the TreeList renders two tables&mdash;one for the header area and one for the scrollable data area. This ensures that the header area of the TreeList is always visible during vertical scrolling. Take the two tables into account when you need to manually make JavaScript or CSS updates to the Grid tables.
 
 ###### Example
 
@@ -320,5 +320,5 @@ Other articles on Kendo UI TreeList and how-to examples:
 * [How to Show Checkbox Column]({% slug howto_showcheckboxcolumn_treelist %})
 * [How to Show Context Menu]({% slug howto_showcontextmenu_treelist %})
 * [How to Update Field in All Child Nodes]({% slug howto_updatefieldinallchildnodes_treelist %})
-* [How to Update Field in All Child Nodes in AgularJS]({% slug howto_updatefieldinallchildnodes_angularjs_treelist %})
+* [How to Update Field in All Child Nodes in AngularJS]({% slug howto_updatefieldinallchildnodes_angularjs_treelist %})
 * [JavaScript API Reference](/api/javascript/ui/treelist)

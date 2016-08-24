@@ -7,7 +7,7 @@ slug: howto_filter_using_slider_selection_listview
 
 # Filter Using Slider Selection
 
-The example below demonstrates how to filter Kendo UI ListView datasource based on a Kendo UI Slider selection, and displаys the inclusive/exclusive filтering functionality.
+The example below demonstrates how to filter Kendo UI ListView dataSource based on a Kendo UI Slider selection, and displаys the inclusive/exclusive filtering functionality.
 
 ###### Example
 

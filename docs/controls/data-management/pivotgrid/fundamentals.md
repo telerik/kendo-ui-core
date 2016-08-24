@@ -19,7 +19,7 @@ OLAP is an acronym that stands for Online Analytical Processing. It allows acces
 For detailed information on what OLAP is and the way it processes data, refer to the following articles:
 
 * [OLAP Definition, Wikipedia](http://en.wikipedia.org/wiki/Online_analytical_processing)
-* [Working with Online Analylitical Processing, MSDN Knowldege Base](http://msdn.microsoft.com/en-US/library/ms175367(v=SQL.90).aspx)
+* [Working with Online Analytical Processing, MSDN Knowledge Base](http://msdn.microsoft.com/en-US/library/ms175367(v=SQL.90).aspx)
 
 ### What Is an OLAP Cube?
 
@@ -28,7 +28,7 @@ The OLAP Cube is a data-set organized in a multidimensional manner. Every cube h
 For detailed information on what an OLAP Cube is, refer to the following articles:
 
 * [OLAP Cube, Wikipedia](http://en.wikipedia.org/wiki/OLAP_cube)
-* [Understanding OLAP Cubes, MSDN Knoweldge Base](http://msdn.microsoft.com/en-us/library/aa140038%28v=office.10%29.aspx#odc_da_whatrcubes_topic2)
+* [Understanding OLAP Cubes, MSDN Knowledge Base](http://msdn.microsoft.com/en-us/library/aa140038%28v=office.10%29.aspx#odc_da_whatrcubes_topic2)
 
 The OLAP Cube introduces concepts like facts, measures, and dimensions. For more information on these, refer to the sections below.
 
