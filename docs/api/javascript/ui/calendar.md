@@ -205,17 +205,30 @@ note that a check for an empty `date` is needed, as the widget can work with a n
 
 #### Example - specify cell template as a string
 
+    <style>
+      .exhibition{
+        background-color: #9DD0E0;
+        color:black;
+      }
+      .party{
+        color: red;
+        background-color: #ccc;
+      }
+    </style>
+    <body>
+
     <div id="calendar"></div>
     <script id="cell-template" type="text/x-kendo-template">
-        <div class="#= data.value < 10 ? 'exhibition' : 'party' #"></div>
+        <div class="#= data.value < 10 ? 'exhibition' : 'party' #">
         #= data.value #
+      </div>
     </script>
     <script>
-        $("#calendar").kendoCalendar({
-            month: {
-               content: $("#cell-template").html()
-            }
-        });
+      $("#calendar").kendoCalendar({
+        month: {
+          content: $("#cell-template").html()
+        }
+      });
     </script>
 
 ### month.empty `String`
