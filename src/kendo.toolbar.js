@@ -1111,7 +1111,7 @@ var __meta__ = { // jshint ignore:line
                     if (item.overflow.options.type === "button" && item.overflow.options.isChild) {
                         item.overflow.hide();
                         item.overflow.getParentGroup().refresh();
-                    } else if(!item.toolbar.options.hidden) {
+                    } else if(!item.overflow.options.hidden) {
                         item.overflow.hide();
                     }
                 }
