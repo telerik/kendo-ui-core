@@ -21,7 +21,7 @@ See [Widget DOM Elements](/intro/widget-basics/wrapper-element) for more informa
         // initialize the widget, which also returns the widget element
         var winElement1 = $("#myWindow").kendoWindow( { /*...*/ } ); // returns div#myWindow as a jQuery object
         var winObject = $("#myWindow").data("kendoWindow");
-        
+
         // other ways to get the widget element
         var winElement2 = $("#myWindow");
         var winElement3 = $("#myWindow").data("kendoWindow").element;
@@ -40,7 +40,7 @@ See [Widget DOM Elements](/intro/widget-basics/wrapper-element) for more informa
     <script>
         // initialize the widget
         $("#myWindow").kendoWindow( { /*...*/ } );
-        
+
         // get the wrapper
         var winWrapper = $("#myWindow").data("kendoWindow").wrapper; // returns div.k-window as a jQuery object
     </script>
@@ -60,6 +60,10 @@ Prepares the widget for safe removal from the DOM. Detaches all event handlers a
 Attaches a handler to an event. The handler is executed only once. Examples and more info can be found in the [one](/api/javascript/observable#methods-one) section of the
 `kendo.Observable` API reference.
 
+### resize
+
+Readjusts the layout of the widget. For more information, refer to the article on [responsive web design](/styles-and-layout/using-kendo-in-responsive-web-pages).
+
 ### setOptions
 
 Allows changing the widget configuration after initialization. Depending on the widget, some properties may not be changed, e.g. ones that influence the widget's HTML output (such as Grid scrollability or columns).
@@ -73,21 +77,21 @@ The options to be changed or added.
 #### Example - use setOptions to change the maximum value of a NumericTextBox
 
     <input type="number" id="ntb" value="1" />
-    
+
     <script>
-    
+
     $(function(){
         $("#ntb").kendoNumericTextBox({
             max: 5
         });
-        
+
         // ...
 
         $("#ntb").data("kendoNumericTextBox").setOptions({
             max: 10
         });
     });
-    
+
     </script>
 
 ### trigger
@@ -99,4 +103,3 @@ Executes all handlers attached to the given event. More info can be found in the
 
 Remove a previously attached event handler. More info can be found in the [unbind](/api/javascript/observable#methods-unbind) section of the
 `kendo.Observable` API reference.
-
