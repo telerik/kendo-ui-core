@@ -1285,6 +1285,7 @@ and the current group value is displayed.
 The fields which can be used in the template are:
 
 * value - the current group value
+* field - the current group field
 * average - the value of the "average" aggregate (if specified)
 * count - the value of the "count" aggregate (if specified)
 * max - the value of the "max" aggregate (if specified)
