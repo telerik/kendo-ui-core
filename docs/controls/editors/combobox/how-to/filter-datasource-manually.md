@@ -9,7 +9,7 @@ slug: howto_filter_datasource_manually_combobox
 
 The widget has a built-in detection mechanism which checks whether the data is filtered or not. This information is used by the widget to decide when to persist selected value, not existing in the source. When the source is filtered manually, the widget loses details about the DataSource state and, as a result, might fail to operate.
 
-The example below demonstrates how to filter the Kendo UI ComboBox datasource instance manually.
+The example below demonstrates how to filter the Kendo UI ComboBox dataSource instance manually.
 
 ###### Example
 
@@ -55,7 +55,7 @@ Other articles on the Kendo UI ComboBox:
 * [How to Expand ComboBox Located in Bootstrap Layout]({% slug howto_expand_widget_bootstrap_widget_combobox %})
 * [How to Implement Cascading with Local Data]({% slug howto_implement_cascading_local_data_combobox %})
 * [How to Make Visible Input Readonly]({% slug howto_make_visible_inputs_readonly_combobox %})
-* [How to Open ComboBox When onfocus is Triggered]({% slug howto_open_onfocus_combobox %})
+* [How to Open ComboBox When onFocus is Triggered]({% slug howto_open_onfocus_combobox %})
 * [How to Prevent Adding Custom Values]({% slug howto_prevent_adding_custom_values_combobox %})
 * [How to Select Items on Tab]({% slug howto_select_items_ontab_combobox %})
 * [How to Underline Matched Search]({% slug howto_underline_matched_search_combobox %})

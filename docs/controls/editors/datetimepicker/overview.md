@@ -59,7 +59,7 @@ The DateTimePicker will set the value only if the entered datetime is valid and 
 
 ### Datetime Format
 
-The exampe below demonstrates how to define the datetime format.
+The example below demonstrates how to define the datetime format.
 
 ###### Example
 
@@ -83,7 +83,7 @@ The DateTimePicker value is parsed when the user changes the content via typing.
 
 ### Time Format
 
-The exampe below demonstrates how to define the time format.
+The example below demonstrates how to define the time format.
 
 ###### Example
 

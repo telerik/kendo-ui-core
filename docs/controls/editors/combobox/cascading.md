@@ -68,7 +68,7 @@ The MVVM [value]({% slug valuebinding_mvvm_kendoui %}) binding updates the `mode
 
 If you need a synced `model`, refer to [this demo](http://dojo.telerik.com/@ggkrustev/aSAlU) which shows how to implement a [custom MVVM binding]({% slug custombinding_mvvm_kendoui %}) that will update the model accordingly.
 
-For more information on why a widget does not trigger a `change` event, refer to [this Github discussion](http://github.com/telerik/kendo-ui-core/issues/661).
+For more information on why a widget does not trigger a `change` event, refer to [this GitHub discussion](http://github.com/telerik/kendo-ui-core/issues/661).
 
 ## FAQ
 

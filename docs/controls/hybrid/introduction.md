@@ -126,7 +126,7 @@ Note that the example uses the `data-role` attribute in your HTML. This communic
 
 When the Application is initialized, this block of HTML is going to be initialized as a Kendo UI hybrid layout. The `data-id` attribute is further defined to give this layout a unique name that can be used by your views.
 
-Next, for completeness, a couple of Kendo UI hybrid widgets are introduced&mdash;Navbar and TabStrip. Note that they are also configured with the simple `data-role` attribute.
+Next, for completeness, a couple of Kendo UI hybrid widgets are introduced&mdash;NavBar and TabStrip. Note that they are also configured with the simple `data-role` attribute.
 
 ### Step 4: Create View
 
@@ -298,7 +298,7 @@ To do this in Chrome, follow the steps below:
 2. Click on the gear icon in the lower right corner.
 3. In the **Settings** window that opens, check the **Override User Agent** box.
 4. This reveals a dropdown of pre-defined browsers and devices. Select the device you want to imitate or define your own.
-5. To undo this effect, un-check the **Override** box.
+5. To undo this effect, uncheck the **Override** box.
 
 Of course, nothing replaces actual testing on mobile devices. In many cases, the Kendo UI mobile styles look better on devices than in desktop browsers. Make sure you test on an iPhone, Android, BlackBerry, or whatever devices you intend to support before deploying your application or when previewing application styles.
 

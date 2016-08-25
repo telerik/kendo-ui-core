@@ -20,7 +20,7 @@ Below are listed the notable steps for you to follow when doing this:
 
 > **Important**
 >
-> The technique below is not designed to be used and does not work in scenarios where the ComboBox is an editor of anotherdata item of a Kendo UI widget&mdash;for example, a Kendo UI Grid.
+> The technique below is not designed to be used and does not work in scenarios where the ComboBox is an editor of anotherData item of a Kendo UI widget&mdash;for example, a Kendo UI Grid.
 
 ###### Example
 
@@ -103,7 +103,7 @@ Other articles on the Kendo UI ComboBox:
 * [How to Expand ComboBox Located in Bootstrap Layout]({% slug howto_expand_widget_bootstrap_widget_combobox %})
 * [How to Implement Cascading with Local Data]({% slug howto_implement_cascading_local_data_combobox %})
 * [How to Make Visible Input Readonly]({% slug howto_make_visible_inputs_readonly_combobox %})
-* [How to Open ComboBox When onfocus is Triggered]({% slug howto_open_onfocus_combobox %})
+* [How to Open ComboBox When onFocus is Triggered]({% slug howto_open_onfocus_combobox %})
 * [How to Prevent Adding Custom Values]({% slug howto_prevent_adding_custom_values_combobox %})
 * [How to Select Items on Tab]({% slug howto_select_items_ontab_combobox %})
 * [How to Underline Matched Search]({% slug howto_underline_matched_search_combobox %})

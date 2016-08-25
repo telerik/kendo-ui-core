@@ -16,7 +16,7 @@ This is a collection of frequently asked questions and their answers about how K
 
 Local web fonts are not loaded in Windows Phone 8 (WP8) HTML5/PhoneGap apps or fonts loaded from local CSS. According to some sources, external CSS should load web fonts, but Kendo UI is not able to confirm this. As a workaround, use normal images for icons in WP8 HTML5/PhoneGap applications.
 
-### I get a gray background when I click on a link or label in Hybrid UI under WP8. Why?
+### I get a grey background when I click on a link or label in Hybrid UI under WP8. Why?
 
 By default, WP8 highlights all links when they are active (hold down). Stopping this behavior requires manually adding a meta tag to your application/site&mdash;adding the tag through JavaScript is ignored.
 

@@ -7,7 +7,7 @@ slug: howto_cascade_froma_dropdownlist_multiselect
 
 # Cascade from DropDownList
 
-The example below demonstrates how to cascade the Kendo UI Multiselect from a Kendo UI DropDownList.
+The example below demonstrates how to cascade the Kendo UI MultiSelect from a Kendo UI DropDownList.
 
 ###### Example
 

@@ -62,7 +62,7 @@ Other articles on the Kendo UI DatePicker:
 * [DatePicker JavaScript API Reference](/api/javascript/ui/datepicker)
 * [How to Create Date Masking]({% slug howto_create_date_masking_datepicker %})
 * [How to Globally Modify Default Options]({% slug howto_globally_modify_default_options_datepicker %})
-* [How to Hide the Deafult Button]({% slug howto_hide_default_button_datepicker %})
+* [How to Hide the Default Button]({% slug howto_hide_default_button_datepicker %})
 * [How to Integrate DatePicker with DateJS Library]({% slug howto_integrate_withdatejs_library_datepicker %})
 * [How to Make Input Elements Readonly]({% slug howto_make_input_elements_readonly_datepicker %})
 * [How to Resize Calendar Based on Input Width]({% slug howto_use_resize_calendar_basedon_input_width_datepicker %})

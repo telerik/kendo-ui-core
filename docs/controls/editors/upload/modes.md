@@ -51,7 +51,7 @@ In this mode Kendo UI Upload requires dedicated server handlers to store and rem
 
 ![](/controls/editors/upload/upload-async.png)
 
-The asynchrnous mode is implemented using the [HTML5 File API](https://en.wikipedia.org/wiki/HTML5_File_API). The upload will gracefully degrade and continue to function in legacy browsers using a hidden `iframe`.
+The asynchronous mode is implemented using the [HTML5 File API](https://en.wikipedia.org/wiki/HTML5_File_API). The upload will gracefully degrade and continue to function in legacy browsers using a hidden `iframe`.
 
 To implement the asynchronous mode of operation, follow the steps below:
 

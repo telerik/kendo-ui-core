@@ -319,7 +319,7 @@ Other articles on the Kendo UI ComboBox:
 
 Articles on the Kendo UI DropDownList:
 
-* [Overview of the DropDown Widget]({% slug overview_kendoui_dropdownlist_widget %})
+* [Overview of the DropDownList Widget]({% slug overview_kendoui_dropdownlist_widget %})
 * [Cascading DropDownLists]({% slug cascading_kendoui_dropdownlist_widget %})
 * [DropDownList JavaScript API Reference](/api/javascript/ui/dropdownlist)
 
