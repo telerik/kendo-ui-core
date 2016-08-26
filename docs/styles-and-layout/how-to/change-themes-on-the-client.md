@@ -10,7 +10,7 @@ position: 1
 
 The example below demonstrates a possible way to switch Kendo UI themes on the client.
 
-Тhe core functionality of the following demo is replacing CSS stylesheets on the client, which is not something related to Kendo UI and does not require any Kendo UI APIs. From this point of view, the example is provided "as is", and may need customization and tweaking depending on the specific scenario, requirements, browser support, etc.
+The core functionality of the following demo is replacing CSS stylesheets on the client, which is not something related to Kendo UI and does not require any Kendo UI APIs. From this point of view, the example is provided "as is", and may need customization and tweaking depending on the specific scenario, requirements, browser support, etc.
 
 ```html
 

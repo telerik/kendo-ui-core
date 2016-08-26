@@ -16,7 +16,7 @@ You can populate a Kendo UI Diagram for PHP with [remote binding]({% slug remote
 
 ### Configuration
 
-Below are listed the steps for you to follow when configuring the Kendo UI Diagram for PHP with Ajax biniding.
+Below are listed the steps for you to follow when configuring the Kendo UI Diagram for PHP with Ajax binding.
 
 **Step 1** Make sure you followed all the steps from the [introductory article on Telerik UI for PHP]({% slug overview_uiforphp %})&mdash;include the autoloader, JavaScript, and CSS files.
 

@@ -56,7 +56,7 @@ There are available workarounds and solutions different scenarios you might come
 
 ### Get Started - HTML5 and ASP.NET
 
-Open Visual Studio. Create a blank ASP.NET Web Application called **hello-html5**. Right-click the project, select **Add New Item**. In the **Add New Item** dialgue, select **Web Form**. Name it **Default.aspx**. Click **Add**.
+Open Visual Studio. Create a blank ASP.NET Web Application called **hello-html5**. Right-click the project, select **Add New Item**. In the **Add New Item** dialogue, select **Web Form**. Name it **Default.aspx**. Click **Add**.
 
 **Figure 1. New Web Form**
 
@@ -64,19 +64,19 @@ Open Visual Studio. Create a blank ASP.NET Web Application called **hello-html5*
 
 When the `Default.aspx` file is added, it opens in the designer. If it does not, open the file. Make sure you are viewing the HTML source of the Web Form and not the code behind.
 
-### Remove HMTL5 Doctype
+### Remove HMTL5 DOCTYPE
 
 Notice the second line in the document. This is the [`doctype` tag](http://www.w3schools.com/tags/tag_doctype.asp). It designates this document as an HTML page. The tag is very long and confusing, so remove it entirely.
 
-The new HTML5 doctype is very simple and replaces much of the unnecessary verboseness that was indicative of HTML documents previously.
+The new HTML5 DOCTYPE is very simple and replaces much of the unnecessary verboseness that was indicative of HTML documents previously.
 
-The example below demonstrates how to add the  new HTML5 doctype to your page by using a line of code where the previous doctype declaration is removed.
+The example below demonstrates how to add the  new HTML5 DOCTYPE to your page by using a line of code where the previous DOCTYPE declaration is removed.
 
 ###### Example
 
     <!doctype html>
 
-The new HTML5 doctype is not case sensitive.
+The new HTML5 DOCTYPE is not case sensitive.
 
 ### Discard Excess Attributes
 

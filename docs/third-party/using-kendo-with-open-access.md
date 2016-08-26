@@ -53,7 +53,7 @@ When asked about the Data Access approach, select **Skip Creating a Telerik Data
 
 ![Select Northwind OA](/images/oa9.png)
 
-**Step 3** The screen that loads next allows you to configure the service that is going to be created. Select **WCF Service - OData v3** and click **Next**.
+**Step 3** The screen that loads next allows you to configure the service that is going to be created. Select **WCF Service - oData v3** and click **Next**.
 
 ![Configure The Service](/images/oa10.png)
 
@@ -61,7 +61,7 @@ When asked about the Data Access approach, select **Skip Creating a Telerik Data
 
 ![Configure The entitites](/images/oa11.png)
 
-## Connect OData Service to Kendo UI Grid
+## Connect oData Service to Kendo UI Grid
 
 Now configure the front end. Wire up the Orders to a Kendo UI Grid. Kendo UI is a very rich and powerful framework that provides you with full control over the UI of your project, so make sure you explore it even further.
 

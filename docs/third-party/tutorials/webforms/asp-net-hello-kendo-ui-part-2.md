@@ -413,7 +413,7 @@ Pick a notification strategy and a standard error platform. It is better to just
 
 If you did not throw the error, the user is not aware that the `delete` failed because the row has disappeared from the grid. This is not what you want. However, the DataSource needs to know how to handle this situation. It is currently storing the object as dirty and is going to try and sync it again when it gets the chance. In this situation, it is best to rollback the change by calling `cancelChanges` on the DataSource. This can also be called directly on the Grid.
 
-The example below demonstartes how to cancel changes on a failed request.
+The example below demonstrates how to cancel changes on a failed request.
 
 ###### Example
 
