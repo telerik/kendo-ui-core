@@ -16,7 +16,7 @@ See the [DataSource configuration](/api/framework/datasource#configuration) for 
 
 ### columns `Array`
 
-The configuration of columns axis members. An array of JavaScript objects or strings. A JavaScript objects are interpreted as column descriptors. Strings are interpreted as the hierarchal name of the member.
+The configuration of columns axis members. An array of JavaScript objects or strings. A JavaScript objects are interpreted as column descriptors. Strings are interpreted as the hierarchical name of the member.
 
 #### Example - set the columns
 
@@ -64,7 +64,7 @@ If set to true the member will be expanded.
 
 ### columns.name `String`
 
-The hierarchal name of the column
+The hierarchical name of the column
 
 #### Example - set the column name
 
@@ -176,7 +176,7 @@ The name of the axis on which the measures will be displayed. Supported values a
 
 ### rows `Array`
 
-The configuration of rows axis members. An array of JavaScript objects or strings. A JavaScript objects are interpreted as rows descriptors. Strings are interpreted as the hierarchal name of the member.
+The configuration of rows axis members. An array of JavaScript objects or strings. A JavaScript objects are interpreted as rows descriptors. Strings are interpreted as the hierarchical name of the member.
 
 #### Example - set the columns
 
@@ -224,7 +224,7 @@ If set to true the member will be expanded.
 
 ### rows.name `String`
 
-The hierarchal name of the rows
+The hierarchical name of the rows
 
 #### Example - set the rows name
 
@@ -503,13 +503,13 @@ The result should have the following format and attributes:
 
 ### schema.cube `Object`
 
-The cube declaration. If configured this option will enable the client cube processing, usefull for binding to flat data. Note: This is only applicable if client cube processing is used.
+The cube declaration. If configured this option will enable the client cube processing, useful for binding to flat data. Note: This is only applicable if client cube processing is used.
 
 #### schema.cube.dimensions `Object`
 
 A set of key/value pairs which specify the field-dimension mapping for the available for processing dimensions. The key specifies the name of the field to which the dimension will be mapped. Note: The key should match the column name used in the columns definition.
 
-##### Example - define cube dimentions
+##### Example - define cube dimensions
 
     <script>
       var dataSource = new kendo.data.PivotDataSource({

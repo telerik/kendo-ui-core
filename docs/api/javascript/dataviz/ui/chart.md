@@ -93,7 +93,7 @@ The opacity of the crosshair. By default the crosshair is opaque.
 
 ### axisDefaults.crosshair.tooltip `Object`
 
-The crosshar tooltip options.
+The crossbar tooltip options.
 
 > The crosshair tooltip is displayed when the [axisDefaults.crosshair.tooltip.visible](#configuration-axisDefaults.crosshair.tooltip.visible) option is set to `true`.
 
@@ -941,7 +941,7 @@ The opacity of the crosshair. By default the crosshair is opaque.
 
 ### categoryAxis.crosshair.tooltip `Object`
 
-The crosshar tooltip options.
+The crossbar tooltip options.
 
 > The crosshair tooltip is displayed when the [categoryAxis.crosshair.tooltip.visible](#configuration-categoryAxis.crosshair.tooltip.visible) option is set to `true`.
 
@@ -18546,7 +18546,7 @@ The opacity of the crosshair. By default the crosshair is opaque.
 
 ### valueAxis.crosshair.tooltip `Object`
 
-The crosshar tooltip options.
+The crossbar tooltip options.
 
 > The crosshair tooltip is displayed when the [valueAxis.crosshair.tooltip.visible](#configuration-valueAxis.crosshair.tooltip.visible) option is set to `true`.
 
@@ -19660,7 +19660,7 @@ The number of labels to skip. By default no labels are skipped.
 Label rendering step.
 Every n-th label is rendered where n is the step
 
-#### Example - render each 2nd label
+#### Example - render each 2<sup>nd</sup> label
 
     <div id="chart"></div>
     <script>
@@ -20743,7 +20743,7 @@ The skip of the value axis minor ticks.
 
 ### valueAxis.minorUnit `Number`
 
-The interval between minor divisions. It defaults to 1/5th of the [valueAxis.majorUnit](#configuration-valueAxis.majorUnit).
+The interval between minor divisions. It defaults to 1/5<sup>th</sup> of the [valueAxis.majorUnit](#configuration-valueAxis.majorUnit).
 If the [valueAxis.type](#configuration-valueAxis.type) is set to `"log"`, the minorUnit value represents the number of divisions between two major units and defaults to the major unit minus one.
 
 #### Example - set the value axis minor unit
@@ -23044,7 +23044,7 @@ The opacity of the crosshair. By default the crosshair is opaque.
 
 ### xAxis.crosshair.tooltip `Object`
 
-The crosshar tooltip options.
+The crossbar tooltip options.
 
 > The crosshair tooltip is displayed when the [xAxis.crosshair.tooltip.visible](#configuration-xAxis.crosshair.tooltip.visible) option is set to `true`.
 
@@ -24764,9 +24764,9 @@ The following dash types are supported:
 
 ### xAxis.majorGridLines.visible `Boolean` *(default: true)*
 
-If set to `true` the chart will display the x major grid liness. By default the x major grid liness are visible.
+If set to `true` the chart will display the x major grid lines. By default the x major grid lines are visible.
 
-#### Example - hide the scatter chart x major grid liness
+#### Example - hide the scatter chart x major grid lines
 
     <div id="chart"></div>
     <script>
@@ -25486,7 +25486,7 @@ The minimum value of the axis.
 
 ### xAxis.minorUnit `Number`
 
-The interval between minor divisions. It defaults to 1/5th of the [xAxis.majorUnit](#configuration-xAxis.majorUnit).
+The interval between minor divisions. It defaults to 1/5 of the [xAxis.majorUnit](#configuration-xAxis.majorUnit).
 If the [xAxis.type](#configuration-xAxis.type) is set to `"log"`, the minorUnit value represents the number of divisions between two major units and defaults to the major unit minus one.
 
 #### Example - set the logarithmic x axis minor unit
@@ -27817,7 +27817,7 @@ The opacity of the crosshair. By default the crosshair is opaque.
 
 ### yAxis.crosshair.tooltip `Object`
 
-The crosshar tooltip options.
+The crossbar tooltip options.
 
 > The crosshair tooltip is displayed when the [yAxis.crosshair.tooltip.visible](#configuration-yAxis.crosshair.tooltip.visible) option is set to `true`.
 
@@ -29492,9 +29492,9 @@ The following dash types are supported:
 
 ### yAxis.majorGridLines.visible `Boolean` *(default: true)*
 
-If set to `true` the chart will display the x major grid liness. By default the x major grid liness are visible.
+If set to `true` the chart will display the x major grid lines. By default the x major grid lines are visible.
 
-#### Example - hide the scatter chart x major grid liness
+#### Example - hide the scatter chart x major grid lines
 
     <div id="chart"></div>
     <script>
@@ -30214,7 +30214,7 @@ The minimum value of the axis.
 
 ### yAxis.minorUnit `Number`
 
-The interval between minor divisions. It defaults to 1/5th of the [yAxis.majorUnit](#configuration-yAxis.majorUnit).
+The interval between minor divisions. It defaults to 1/5 of the [yAxis.majorUnit](#configuration-yAxis.majorUnit).
 If the [yAxis.type](#configuration-yAxis.type) is set to `"log"`, the minorUnit value represents the number of divisions between two major units and defaults to the major unit minus one.
 
 #### Example - set the logarithmic y axis minor unit

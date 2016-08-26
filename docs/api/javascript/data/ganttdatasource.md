@@ -253,7 +253,7 @@ The parent task. If this parameter is not specified, all root level tasks will b
 
 ### taskLevel
 
-Returns the level of the task in the hierrarchy. 0 for root level taks.
+Returns the level of the task in the hierarchy. 0 for root level tasks.
 
 #### Parameters
 

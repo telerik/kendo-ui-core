@@ -148,7 +148,7 @@ Accepts the same values as the [DataSource query](datasource#methods-query) meth
 
 #### Returns
 
-`Object` with `total` and `data` fields represeting the result of all operations
+`Object` with `total` and `data` fields representing the result of all operations
 
 #### Example - filtering a data collection
 

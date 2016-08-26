@@ -240,7 +240,7 @@ The new points.
 
 ### visible
 
-Gets or sets the visibilty of the current element.
+Gets or sets the visibility of the current element.
 
 #### Parameters
 
