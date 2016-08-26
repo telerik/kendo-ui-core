@@ -68,9 +68,9 @@ For detailed information, refer to [this article]({% slug dateparsing_kendoui_gl
 
 ## Support
 
-### (Deprecated) jQuery Globalize.js 0.1
+### (Deprecated) jQuery GlobalizeJS 0.1
 
-If you load globalize.js, the default globalization features in Kendo UI are overridden. Some features might not work. For example, custom number formats are unsupported in this case.
+If you load GlobalizeJS, the default globalization features in Kendo UI are overridden. Some features might not work. For example, custom number formats are unsupported in this case.
 
 > **Important**
 >

@@ -16,18 +16,18 @@ Kendo UI Templates focus on providing essential templating features needed for c
 
 ## Template Syntax
 
-Kendo UI Templates use a simple templating syntax called hash templates. With this syntax, the `#` (hash) sign is used to mark areas in a template that should be replaced by data when the template is executed. The `#` character is also used to signify the beginning and end of custom Javascript code inside the template.
+Kendo UI Templates use a simple templating syntax called hash templates. With this syntax, the `#` (hash) sign is used to mark areas in a template that should be replaced by data when the template is executed. The `#` character is also used to signify the beginning and end of custom JavaScript code inside the template.
 
 There are three ways to use the hash syntax:
 
 1. Render values as HTML: `#= #`.
 2. Use HTML encoding to display values: `#: #`.
-3. Execute arbitrary Javascript code: `# if (true) { # ... non-script content here ... # } #`.
+3. Execute arbitrary JavaScript code: `# if (true) { # ... non-script content here ... # } #`.
 
 ## Hash Literals
 
 > **Important**
-> * If your template includes a literal `#` character, which is not part of a binding expression and is not a script code marker, then you must escape that character or it causes a template compilation error. For example, this can happen if a `#` is used inside a hyperlink URL or a CSS color value. Literal `#` in Javascript strings are escaped via `\\\\#`, while literal `#` in external HTML script templates are escaped via `\\#`.
+> * If your template includes a literal `#` character, which is not part of a binding expression and is not a script code marker, then you must escape that character or it causes a template compilation error. For example, this can happen if a `#` is used inside a hyperlink URL or a CSS color value. Literal `#` in JavaScript strings are escaped via `\\\\#`, while literal `#` in external HTML script templates are escaped via `\\#`.
 > * If your template includes a `#` character, which is part of a binding expression of a nested template, then this character must be escaped as well. In this way the character is ignored by the outer template, but is handled correctly by the inner template.
 
 Find more information on how each of these Kendo UI Template syntaxes can be used in context in the sections below.

@@ -94,7 +94,7 @@ The Kendo UI Tooltip relies on the `mouseenter` and `mouseleave` events to work.
 Kendo UI Tooltip provides default configuration options that can be set during initialization. Some of the properties that can be overridden and controlled are:
 
 *   Content
-*   Position relative to the target (top, button, center, left, right)
+*   Position relative to the target (top, bottom, center, left, right)
 *   Event on which the Tooltip is going to be displayed
 *   Auto-hide behavior
 *   Height/Width

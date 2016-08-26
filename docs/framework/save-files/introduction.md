@@ -32,7 +32,7 @@ kendo.saveAs({
 
 ## Browser Support
 
-The `kendo.saveAs` will attempt to save the file using client-side API in browsers that support file creation (IE10+, Google Chrome and FireFox).
+The `kendo.saveAs` will attempt to save the file using client-side API in browsers that support file creation (IE10+, Google Chrome and Firefox).
 
 ### Set Server Proxy
 

@@ -91,7 +91,7 @@ The example below demonstrates what the `ViewModel` looks like.
 #### Walkthrough of the ViewModel Declaration
 
 * `expenses`&mdash;Instead of using a plain HTML table to display the values from the sample input form, the example is going to use a Kendo UI Grid. The `expenses` array holds the values that the grid will use as its source.
-* `type`&mdash;Instead of defining the items inline with options in the HTML, you are going to bind a `select` element to this array and also apply some Kendo UI magic to th dropedown.
+* `type`&mdash;Instead of defining the items inline with options in the HTML, you are going to bind a `select` element to this array and also apply some Kendo UI magic to the drop-down.
 * `expenseType`&mdash;This variable will be bound to whatever value is currently selected in the above mentioned dropdown.
 * `merchant`&mdash;It is bound to the value of the merchant input box.
 * `amount`&mdash;Bound to the value of the amount input box.

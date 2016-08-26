@@ -86,7 +86,7 @@ The touch feature exposes four touch events&mdash;`touchstart`, `dragstart`, `dr
 
 For a detailed event description and sample code, see the [`touch` component API reference](/api/javascript/mobile/ui/touch).
 
-### Touch Events: tap, double tap, hold
+### Touch Events: tap, doubletap, hold
 
 In addition to the `drag` events, the `tap`, `doubletap`, and `hold` events may be fired if users do not move their finger after pressing. The `hold` event minimum time and the `doubletap` maximum time between two successive taps can be set through the [`touch` configuration options](/api/javascript/mobile/ui/touch#configuration).
 
