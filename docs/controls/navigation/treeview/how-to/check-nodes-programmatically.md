@@ -1,13 +1,13 @@
 ---
-title: Check Nodes Programatically
-page_title: Check Nodes Programatically | Kendo UI TreeView
-description: "Learn how to check the checkbox of a Kendo UI TreeView node programatically."
+title: Check Nodes Programmatically
+page_title: Check Nodes Programmatically | Kendo UI TreeView
+description: "Learn how to check the checkbox of a Kendo UI TreeView node programmatically."
 slug: howto_checknodeprogramatically_treeview
 ---
 
-# Check Nodes Programatically
+# Check Nodes Programmatically
 
-The example below demonstrates how to check the checkbox of a Kendo UI TreeView node programatically.
+The example below demonstrates how to check the checkbox of a Kendo UI TreeView node programmatically.
 
 ###### Example
 
