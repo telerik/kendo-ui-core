@@ -17,7 +17,7 @@ The ToolBar consists of three main areas: ToolBar wrapper, overflow anchor, and 
 
 ## Getting Started
 
-### Intialize the ToolBar
+### Initialize the ToolBar
 
 The example below demonstrates how to initialize the ToolBar and apply its basic functionalities.
 
@@ -433,7 +433,7 @@ The example below demonstrates how to implement a Kendo UI DropDown widget in th
 
 By design, the ToolBar detects changes in the viewport width and hides the overflowing controls in the command overflow popup. This feature may be disabled by setting `resizable` option to `false`. You are able to control the way a given command behaves on resizing with its `overflow` property.
 
-> **Imporatant**
+> **Important**
 > * Commands with `overflow: "never"` should be declared first, followed by those with `overflow: "auto"`. Commands with `overflow: "always"` should be declared last.
 > * Setting the min-width of the ToolBar's element is mandatory if you want to prevent the widget from resizing below a given width.
 
@@ -474,7 +474,7 @@ The ToolBar widget exposes the following events:
 * `overflowOpen` - fires when the command overflow popup of the ToolBar opens.
 * `overflowClose` - fires when the command overflow popup of the ToolBar closes.
 
-You are also able to attach `click` and `toggle` event handlers to the buttons through the config options.
+You are also able to attach `click` and `toggle` event handlers to the buttons through the configuration options.
 
 For more information on the configuration options Kendo UI ToolBar supports, refer to the [ToolBar API](/api/javascript/ui/toolbar).
 

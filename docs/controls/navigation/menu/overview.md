@@ -224,7 +224,7 @@ The Menu renders as a `<ul>` element and expands horizontally by default. If a h
        display: inline-block;
     }
 
-In left-to-right layouts, shrinking the horizontal Menu will make the border of the last root item touch the right border of the Menu. The last item border can be removed as shwon int he example below.
+In left-to-right layouts, shrinking the horizontal Menu will make the border of the last root item touch the right border of the Menu. The last item border can be removed as shown int he example below.
 
 ###### Example
 

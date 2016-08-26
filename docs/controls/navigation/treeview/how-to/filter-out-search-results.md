@@ -77,7 +77,7 @@ The example below demonstrates how to search for tree nodes that match a text st
 Other articles on the Kendo UI TreeView:
 
 * [TreeView JavaScript API Reference](/api/javascript/ui/treeview)
-* [How to Check Nodes Programatically]({% slug howto_checknodeprogramatically_treeview %})
+* [How to Check Nodes Programmatically]({% slug howto_checknodeprogramatically_treeview %})
 * [How to Edit Nodes via Form]({% slug howto_editnodesviaform_treeview %})
 * [How to Hide Checkboxes for Root Level]({% slug howto_hidecheckboxesforrootlevel_treeview %})
 * [How to Persist Expanded State]({% slug howto_persistexpandedstate_treeview %})

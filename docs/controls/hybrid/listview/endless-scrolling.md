@@ -25,9 +25,9 @@ In virtual mode, a fixed amount of DOM elements is rendered, and then dynamicall
 
 In order for the scrolling to occur smoothly, the page size should not be too low. For example, if five items are visible on the page, at least fifteen physical DOM elements are needed, which means that the DataSource page size should be thirty or more.
 
-> Bigger DataSource page size ensures smooth scrolling, but has adverce effects on view transition performance.
+> Bigger DataSource page size ensures smooth scrolling, but has adverse effects on view transition performance.
 
-Once the ListView reaches the amount of items specified by the [schema.total](/api/framework/datasource#configuration-schema.total) setting of the datasource, the loadmore button/endless scrolling indicator is hidden.
+Once the ListView reaches the amount of items specified by the [schema.total](/api/framework/datasource#configuration-schema.total) setting of the datasource, the **Load More** button/endless scrolling indicator is hidden.
 
 > **Important**
 >

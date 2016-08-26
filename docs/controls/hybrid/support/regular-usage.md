@@ -45,7 +45,7 @@ The example below demonstrates how to instantiate a hybrid mobile Switch widget.
 
 - As a mobile application instance is missing, its features&mdash;declarative widget initialization, view transitions, and browser history binding among others&mdash;do not work.
 - Unlike the application mode, this mode primarily targets mobile web sites. Thus the mobile OS skins&mdash;Android/iOS&mdash;are not supported.
-- Certain Listview features&mdash;pull to refresh, endless scrolling, press to load more, fixed headers&mdash;rely on the mobile Scroller. The ListView widget should be instantiated in a mobile Scroller widget element.
+- Certain ListView features&mdash;pull to refresh, endless scrolling, press to load more, fixed headers&mdash;rely on the mobile Scroller. The ListView widget should be instantiated in a mobile Scroller widget element.
 - The mobile Drawer widget should have its [`container` configuration option](/api/javascript/mobile/ui/drawer#configuration-container) set. The Drawer is not going to close automatically when navigation is performed.
 
 ## See also

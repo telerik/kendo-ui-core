@@ -88,7 +88,7 @@ The example below demonstrates how to configure the properties of the ProgressBa
 
 By default, the ProgressBar is a `27em` wide `inline-block` element. The easiest cross-browser technique to make it expand and resize automatically is to apply a couple of CSS styles to the originating element.
 
-The example below demonstrates how to make the ProgressBar 100% wide and automatically resizable.
+The example below demonstrates how to make the ProgressBar 100% wide and automatically resizeable.
 
 ###### Example
 
@@ -134,7 +134,7 @@ For examples demonstrating these two approaches, refer to the [ProgressBar API r
 
 Make a reference to an existing ProgressBar instance via [`jQuery.data()`](http://api.jquery.com/jQuery.data/). Once done, use the [ProgressBar API](/api/web/progressbar) to control its behavior.
 
-The example below denmonstrates how to access an existing ProgressBer instance.
+The example below demonstrates how to access an existing ProgressBar instance.
 
 ###### Example
 

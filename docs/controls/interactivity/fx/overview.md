@@ -8,7 +8,7 @@ position: 1
 
 # FX Overview
 
-The [Kendo UI FX (Effects) instances](http://demos.telerik.com/kendo-ui/fx/expand) provide a rich, extensible, and performance-optimized toolset for element transitions. Each effect utilizes CSS transitions if possible, with a fallback to manual property value modification in older browsers. Animations can be played in reverse, which is very convenient for showing and hiding certain parts of the user interface (UI). Kendo FX uitilizes the [jQuery Deffered utility](http://api.jquery.com/category/deferred-object/) for chaining and callbacks.
+The [Kendo UI FX (Effects) instances](http://demos.telerik.com/kendo-ui/fx/expand) provide a rich, extensible, and performance-optimized toolset for element transitions. Each effect utilizes CSS transitions if possible, with a fallback to manual property value modification in older browsers. Animations can be played in reverse, which is very convenient for showing and hiding certain parts of the user interface (UI). Kendo FX utilizes the [jQuery Deferred utility](http://api.jquery.com/category/deferred-object/) for chaining and callbacks.
 
 ## Getting Started
 

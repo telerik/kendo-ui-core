@@ -32,7 +32,7 @@ When a Window is initialized, it is going to be automatically displayed as open 
 
 ### HTML Structure and DOM Placement
 
-With regard to the CSS selectors or element discovery via Javascript, take into account that, by default, the Window is created as a child of the `<body>` element. This behavior is configurable via the [`appendTo` setting](/api/javascript/ui/window#configuration-appendTo).
+With regard to the CSS selectors or element discovery via JavaScript, take into account that, by default, the Window is created as a child of the `<body>` element. This behavior is configurable via the [`appendTo` setting](/api/javascript/ui/window#configuration-appendTo).
 
 The example below demonstrates the possible markup before the initialization of the Kendo UI Window.
 
@@ -73,12 +73,12 @@ The example below demonstrates how the above page markup changes after the initi
 
 ### Defaults
 
-Kendo UI Window provides default configuration options that can be set during initialization. Some of the properties that can be overriden and controlled are:
+Kendo UI Window provides default configuration options that can be set during initialization. Some of the properties that can be overridden and controlled are:
 
 *   Minimum and maximum height and width during resizing
 *   Available user actions (`close`/`refresh`/`maximize`/`minimize`/`pin`) and the option to define custom ones
 *   Title
-*   Draggable and resizable behaviors
+*   Draggable and resizeable behaviors
 *	Initial position in pixels with regard to the page top-left corner
 *	Pinned state (whether the Window moves together with the rest of the page content during scrolling)
 
@@ -165,7 +165,7 @@ When the Window uses an `iframe` element, it does not resize automatically accor
 Kendo UI Window provides built-in support for asynchronously loading content from a URL. This URL is expected to return an HTML fragment that can be loaded in a Window content area.
 
 > **Important**
-> * Loading full pages, i.e. pages with a DOCTYPE, `html`, `head`, and `body` tags, inside the Window with AJAX is incorrect and is going to cause all sorts of undesired side-effects, including a broken DOM tree, deleted widget instances, and Javascript errors.
+> * Loading full pages, i.e. pages with a DOCTYPE, `html`, `head`, and `body` tags, inside the Window with AJAX is incorrect and is going to cause all sorts of undesired side-effects, including a broken DOM tree, deleted widget instances, and JavaScript errors.
 > * If the Window has no set dimensions, it is probably going to resize after the AJAX content is loaded. This naturally changes the position of the widget on the screen. If the Window should be centered, then either [`center`](/api/javascript/ui/window#methods-center) it in the [`refresh`](/api/javascript/ui/window#events-refresh) event handler, or set some explicit [dimensions](/api/javascript/ui/window#configuration-height).
 
 The example below demonstrates how to initialize the Window and configure its content loading.

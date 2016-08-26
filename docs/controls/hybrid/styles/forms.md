@@ -18,13 +18,13 @@ The Kendo UI Hybrid framework provides automatic platform-dependent styling of `
 >
 > To make use of native-like forms layout and to properly align widgets without additional styling, it is advisable to build and organize your mobile forms using [Kendo UI ListView for mobile](/controls/hybrid/listview/overview).
 
-The `input` elements with a picker use the native one from the current platform if it is supported. HTML5 `form` elements are fully functional only on the following platforms: iOS 5.x+, Android 4.x+, BlackBerry 6.x+, BlackBerry Playbook 1.x+. The styling still works on older platforms, but the functionality is limited to text input only. The `select` elements are also automatically styled for each platform and use the native select dialog or popup.
+The `input` elements with a picker use the native one from the current platform if it is supported. HTML5 `form` elements are fully functional only on the following platforms: iOS 5.x+, Android 4.x+, BlackBerry 6.x+, BlackBerry PlayBook 1.x+. The styling still works on older platforms, but the functionality is limited to text input only. The `select` elements are also automatically styled for each platform and use the native select dialog or popup.
 
 ## Known Limitations and Workarounds
 
 > **Important**
 > * To avoid many Android and Windows Phone 8 form issues, use native scroller in all Views that require text entry, as shown in the example below.
-> * Native scrolling is only enabled on platforms that support it, such as iOS5 or later, Android 3 or later, Windowd Phone 8. BlackBerry devices do support it, but the native scroller is flaky.
+> * Native scrolling is only enabled on platforms that support it, such as iOS5 or later, Android 3 or later, Window Phone 8. BlackBerry devices do support it, but the native scroller is flaky.
 
 The example below demonstrates how to use the native scroller in all Views that require a text entry.
 
