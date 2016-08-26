@@ -6490,6 +6490,7 @@ Fires the [edit](#events-edit) event.
     });
     var grid = $("#grid").data("kendoGrid");
     grid.addRow();
+    </script>
 
 ### autoFitColumn
 
