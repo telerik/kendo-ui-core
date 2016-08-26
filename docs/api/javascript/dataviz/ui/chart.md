@@ -20743,7 +20743,7 @@ The skip of the value axis minor ticks.
 
 ### valueAxis.minorUnit `Number`
 
-The interval between minor divisions. It defaults to 1/5<sup>th</sup> of the [valueAxis.majorUnit](#configuration-valueAxis.majorUnit).
+The interval between minor divisions. It defaults to 1/5 of the [valueAxis.majorUnit](#configuration-valueAxis.majorUnit).
 If the [valueAxis.type](#configuration-valueAxis.type) is set to `"log"`, the minorUnit value represents the number of divisions between two major units and defaults to the major unit minus one.
 
 #### Example - set the value axis minor unit
