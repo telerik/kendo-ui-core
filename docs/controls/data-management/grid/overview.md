@@ -4,7 +4,7 @@ page_title: Overview | Kendo UI Grid
 description: "Learn how to create, initialize, and enable the Kendo UI Grid widget."
 previous_url: /web/grid/introduction
 slug: overview_kendoui_grid_widget
-position: 2
+position: 1
 ---
 
 # Grid Overview
@@ -29,6 +29,8 @@ Use either of the two primary approaches to create Kendo UI Grids:
 
 * From empty `<div>` elements.
 * From HTML tables.
+
+To initialize a scrollable Grid with a set height in a PanelBar, TabStrip, or Window, you need to consider some additional layout specifics of the widget. For more information on this scenario, refer to the article on the [appearance of the Grid]({% slug appearance_kendoui_grid_widget %}#hidden-containers).
 
 #### From Empty `<div>` Elements
 

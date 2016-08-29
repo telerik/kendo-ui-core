@@ -3,103 +3,12 @@ title: Walkthrough
 page_title: Walkthrough | Kendo UI Grid
 description: "Learn how to create a grid, add an HTML table and control the features of the Kendo UI Grid widget."
 slug: walkthrough_kendoui_grid_widget
-position: 1
+position: 2
 ---
 
 # Walkthrough
 
 The [Kendo UI Grid widget](http://demos.telerik.com/kendo-ui/grid/index) is a powerful component of the Kendo UI toolkit and an essential part of almost any user interface. The Grid control is quick to set up and is packed with features such as [sorting](/api/javascript/ui/grid#configuration-sortable), [grouping](/api/javascript/ui/grid#configuration-groupable), [paging](/api/javascript/ui/grid#configuration-pageable), and [editing](/api/javascript/ui/grid#events-edit).
-
-## Initialize the Grid
-
-Use either of the two primary approaches to create Kendo UI Grids:
-
-* From empty `<div>` elements&mdash;in this case all Grid settings are provided in the initialization script statement. This means that you have to describe the layout of the Grid in JavaScript.
-* From HTML tables&mdash;in this case some of the Grid settings can be inferred from the table structure and the HTML attributes of the elements. This means that you can describe the layout of the Grid entirely in the HTML of the table.
-* In hidden containers&mdash;when you initialize a scrollable Grid with a set height in a PanelBar, TabStrip, or Window, you also need to consider some additional layout specifics of the widget.
-
-### From Empty div Elements
-
-1. Start with an empty `<div>` element that has an ID.
-
-    ###### Example
-
-    ```
-    <div id="grid"></div>
-    ```
-
-2. Turn the `<div>` into a grid by selecting the `<div>` with a jQuery selector and by calling the `kendoGrid()` function.
-3. Specify the column layout by passing an array of column definition objects to the `column` option of the widget. This step is necessary because the Grid is being created based on an empty `<div>`.
-
-    ###### Example
-
-    ```
-    $("#grid").kendoGrid({
-        columns: [ { title: "First Name", field: "firstName" },
-                   { title: "Last Name", field: "lastName"},
-                   { title: "Email", field: "email" } ]
-    });
-    ```
-
-    Each column object features:
-
-    * The `title` property, which defines the text you want to appear as the column header.
-    * The `field` property, which defines the field in the data set that this column should be bound to.
-    * The `template` property, which specifies a template instead of plain text for the Grid column to display.
-    * The `width` property, which defines the desired width of the column.
-
-### From HTML Tables
-
-1. Add an HTML table.
-2. Specify the table header. Each of the `<th>` elements you specify will become a column and the text will become the column header. The `<col>` elements define the widths of the columns. The data attributes define the fields and the templates.
-
-    ###### Example
-
-    ```
-    <table id="grid">
-        <colgroup>
-            <col style="width:100px" />
-            <col style="width:200px" />
-            <col />
-        </colgroup>
-        <thead>
-            <tr>
-                <th data-field="firstName">First Name</th>
-                <th data-field="lastName">Last Name</th>
-                <th data-field="email" data-template="<a href='mailto:#= email #'>#= email #</a>">Email</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr>
-                <td>Nancy</td>
-                <td>Davolio</td>
-                <td>email@domain.com</td>
-            </tr>
-        </tbody>
-    </table>
-    ```
-
-    The table can now describe the entire structure of the grid. The field in the data set to which the column is bound is specified in the `data-field` attribute of each `<th>` element. It is strongly recommended to use the `data-field` attributes. Otherwise the content of the header cell has to meet the [requirements for data field names](/api/javascript/ui/grid#configuration-columns.field).
-
-3. Because the layout of the Grid is defined by the HTML, you only have to call the `kendoGrid()` function to create the Grid.
-
-    ###### Example
-
-    ```
-    $("#grid").kendoGrid();
-    ```
-
-    When you create the Grid from an existing HTML table, each row from the table is added as a data item to the dataSource of the Grid. As a result, your Grid is populated with the content from the table and reflects the information it contains.
-
-For more information on initializing the Grid, refer to the [introductory article of the widget]({% slug overview_kendoui_grid_widget %}).
-
-### In Hidden Containers
-
-If a scrollable Grid with a set height is initialized inside a hidden container&mdash;for example, when scrolling, virtual scrolling, or frozen columns are used&mdash;the Grid will not be able to adjust its vertical layout correctly, because the JavaScript calculations of the size do not work for elements of the `display:none` style.
-
-When you handle the initialization of the Grid in hidden containers, it is possible to use some general as well as specific approaches depending on the particular scenario.
-
-For more information on initializing the Grid inside hidden containers and the approaches to consider, refer to the article on the [appearance of the widget]({% slug appearance_kendoui_grid_widget %}#hidden-containers).
 
 ## Data Binding
 
