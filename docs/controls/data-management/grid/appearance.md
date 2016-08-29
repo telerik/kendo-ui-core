@@ -476,42 +476,7 @@ The example below demonstrates how to add a table row in the [`dataBound`](/api/
 
 ### Row Templates
 
-It is possible to format any cell within the Grid by using templates within a script tag or within the template option on the column object if the Grid is initialized from a `<div>` element.
-
-The example below demonstrates how to use a template to format the email address as a hyperlink by using a template declared in a script block.
-
-###### Example
-
-    <script id="template" type="text/x-kendo-tmpl">
-        <tr>
-            <td>
-                #= firstName #
-            </td>
-            <td>
-                #= lastName #
-            </td>
-            <td>
-                <a href="mailto:#= email #">#= email #</a>
-            </td>
-        </tr>
-    </script>
-
-Specify this as a template for each row by passing it in to the `rowTemplate` option on the Grid and initializing it with the `kendo.template` function, as demonstrated in the following example.
-
-###### Example
-
-    $("#grid").kendoGrid({
-        rowTemplate: kendo.template($("#template").html()),
-       // other configuration
-    });
-
-In the resulting Grid, the email address is an interactive hyperlink which opens a new email message when clicked.
-
-**Figure 2. Grid with a row template applied**
-
-![Grid with row template](/controls/data-management/grid/grid8_1.png)
-
-For more information on using column templates, refer to the article on [remote data binding]({% slug remote_data_binding_grid %}#set-the-column-template).
+For more information on using row templates, refer to the [walkthrough article]({% slug walkthrough_kendoui_grid_widget %}#templates).
 
 ## Hidden Containers
 

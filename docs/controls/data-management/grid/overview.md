@@ -32,7 +32,7 @@ Use either of the two primary approaches to create Kendo UI Grids:
 
 To initialize a scrollable Grid with a set height in a PanelBar, TabStrip, or Window, you need to consider some additional layout specifics of the widget. For more information on this scenario, refer to the article on the [appearance of the Grid]({% slug appearance_kendoui_grid_widget %}#hidden-containers).
 
-#### From Empty `<div>` Elements
+#### From Empty div Elements
 
 When you initialize the Grid from an empty `<div>` element, all Grid settings are provided in the initialization script statement. This means that you have to describe the layout of the Grid in JavaScript.
 
@@ -141,235 +141,19 @@ It is not possible to define other column-related settings through HTML attribut
 
 As the code snippets initiating the Grid above demonstrate, the client object of the Grid is attached to a `<div>` in the first case and to a `<table>` in the second case. However, the generated HTML output of the Grid entirely depends on the settings of the widget and it will always be the same, regardless of the way the widget is initialized.
 
-## Configuration
+## Reference
 
-### Selection
+### Existing Instances
 
-To enable selection in the Grid, set the [`selectable`](/api/javascript/ui/grid#configuration-selectable) option to `true`. This enables the default single-row selection option.
+Refer to an existing Grid instance through the [`jQuery.data()`](http://api.jquery.com/jQuery.data/). Once a reference has been established, use the [Grid API](/api/javascript/ui/grid) to control its behavior.
 
-###### Example
-
-        $("#grid").kendoGrid({
-            selectable: true,
-            // other configuration
-         });
-
-**Figure 1. Grid with enabled row selection**
-
-![Grid with enabled row selection](/controls/data-management/grid/grid4_1.png)
-
-It is also possible to set the `selectable` option to any of the following values:
-* `row`
-* `cell`
-* `multiple row`
-* `multiple cell`
-
-#### The row Value
-
-The `row` value is set by default and enables a single row selection. It functions in the same way as the `selectable: true` configuration.
+The example below demonstrates how to access an existing Grid instance.
 
 ###### Example
 
-    $("#grid").kendoGrid({
-        selectable: "row",
-        // other configuration
-    });
+    var grid = $("#grid").data("kendoGrid");
 
-#### The cell Value
-
-The `cell` value enables the selection of individual cells within the Grid.
-
-###### Example
-
-    $("#grid").kendoGrid({
-        selectable: "cell",
-        // other configuration
-    });
-
-#### The multiple row Value
-
-The `multiple row` value allows users to select multiple rows within the Grid.
-
-###### Example
-
-    $("#grid").kendoGrid({
-        selectable: "multiple row",
-        // other configuration
-    });
-
-#### The multiple cell Value
-
-The `multiple cell` value enables the selection of multiple cells within the Grid.
-
-###### Example
-
-    $("#grid").kendoGrid({
-        selectable: "multiple cell",
-        // other configuration
-    });
-
-When the multiple selection is enabled, it is possible to select multiple rows or cells by dragging the mouse cursor and select them in a similar way to a block of text.
-
-> **Important**  
-> * Selection is not persisted when the Grid is rebound, that is, when paging, filtering, sorting, editing, or virtual scrolling occurs. To achieve such behavior, [use this custom implementation]({% slug howto_persist_row_selection_paging_sorting_filtering_grid %}).
-> * Selection performance may decrease when the page size is too large, or if no paging is used, and the Grid is rendering hundreds or thousands of items. This behavior is most frequently seen in Internet Explorer. Grouping, hierarchy, and frozen columns also have a negative impact on the selection performance, because these features make the HTML output of the Grid more complex. Therefore, it is recommended to use paging and a reasonable page size.
-
-### Paging
-
-By default, paging is disabled.
-
-The paging functionality of the Grid is controlled by the `pageable` option. To configure it, use Boolean parameters.
-
-Additionally, you have to indicate to the Grid the number of records to display on each page as well as the total number of records in the dataset. Specify the `pageSize` on the data source and the field in the dataset that will contain the total count of records.
-
-###### Example
-
-    $("#grid").kendoGrid({
-         pageable: true
-         // other configuration
-    });
-
-Try to do paging operations on the server to keep away from including too much data in the HTML, which might slow down page performance. To accomplish this, set the `serverPaging` option on the data source to `true`.
-
-If you decide to use server paging, be prepared to handle the requests to the server, and respond appropriately. When `serverPaging` is enabled, the data source will send the following default parameters to the server:
-
-* The `top` parameter defines the number of records to send back in the response.
-* The `skip` parameter defines the number of records to skip from the start of the dataset.
-
-For example, if you want to show page 3 out of a 60-record dataset split into 10 records per page, the Grid will send `skip: 20`, `top: 10`.
-
-In general, the Grid is platform-agnostic. This means that it works with HTTP requests sending and receiving JSON payload. For example, to bind the widget to a specific data subset (only to а particular page), instruct the dataSource to use [`serverPaging`](/api/javascript/data/datasource#configuration-serverPaging). In this way, it will directly use the received data. The same rule applies to the filtering, grouping, aggregation, and sorting operations.
-
-###### Example
-
-       $(document).ready(function(){
-          $("#grid").kendoGrid({
-             groupable: true,
-             scrollable: true,
-             sortable: true,
-             pageable: true
-          });
-      });
-
-### Grouping
-
-By default, grouping is disabled.
-
-To enable the grouping functionality of the Grid, set the `groupable` option to `true`. This exposes a new area in the header, which informs that it is possible for the user to drop a column on it and in this way to group the Grid data by that column. It is also possible to do grouping by multiple columns by dragging a second column onto the grouping header.
-
-###### Example
-
-    $("#grid").kendoGrid({
-         groupable: true
-         // other configuration
-    });
-
-**Figure 2. Grid with its grouping functionality enabled**
-
-![Grid With Grouping Enabled](/controls/data-management/grid/grid5_1.png)
-
-**Figure 3. Grid with its data grouped by last name**
-
-![Grid Grouped By Last Name](/controls/data-management/grid/grid6_1.png)
-
-It is also possible to sort the grouped content by clicking on the grouping tab. In the previous example, click on **lastName** to sort the grouped data in descending order. Click it again to toggle to ascending order. Each of the individual groups themselves can be toggled from expanded to collapsed states by clicking on the arrow next to the respective header grouping.
-
-Grouping can be configured to work also with:
-* Row templates
-* Paging
-
-#### Grouping with Row Templates
-
-By definition, a row template explicitly defines the row markup, while grouping requires changing the row markup. As a result, the two features can be used at the same time only if the row template includes a script which, depending on the number of existing groups, adds additional cells.
-
-###### Example
-
-    $(document).ready(function () {
-        // "window." can be omitted if the function is defined outside the document.ready closure
-        window.getGridGroupCells = function(id) {
-            var cnt = $("#" + id).data("kendoGrid").dataSource.group().length,
-                result = "";
-
-            for (var j = 0; j < cnt; j++) {
-                result += "<td class='k-group-cell'>&nbsp;</td>";
-            }
-
-            return result;
-        }
-
-        $("#GridID").kendoGrid({
-            groupable: true,
-            rowTemplate: "<tr>" +
-                "#= getGridGroupCells('GridID') #" +
-                "<td>...</td><td>...</td><td>...</td></tr>",
-            altRowTemplate: "<tr class='k-alt'>" +
-                "#= getGridGroupCells('GridID') #" +
-                "<td>...</td><td>...</td><td>...</td></tr>"
-        });
-    });
-
-#### Grouping with Paging
-
-Paging occurs before grouping. As a result, the following behavior is exhibited:
-
-* The dataSource instance of the Grid is not aware if there are items from the displayed groups on other pages.
-* If the groups are collapsed, it is not possible to display additional items and groups from other pages below the rendered items and groups. The only workaround is to increase the page size.
-
-To configure the Grid so that grouping occurs before paging, you need to group the whole dataSource. However, this setup is not recommended because it leads to a greatly reduced performance.
-
-### Sorting
-
-By default, sorting is disabled.
-
-**Figure 4. Grid with its sorting functionality enabled**
-
-![Grid with Sorting Enabled](/controls/data-management/grid/grid7_1.png)
-
-Sorting is also a function that can be pushed to the server for increased performance. This is done through the data source itself and by setting the `serverSorting` option on the data source to `true`. When you delegate the sorting to the server, you will receive the default `orderBy` parameter. This field will contain the field name of the column to sort by in the dataset.
-
-Sorting is supported in two formats:  
-* Single-column sorting
-* Multi-column sorting
-
-#### Single-Column Sorting
-
-To enable the single-column sorting, set the `sortable` option of the Grid to `true`. This enables the default single-column sorting.
-
-###### Example
-
-    $("#grid").kendoGrid({
-         sortable: true
-         // other configuration
-    });
-
-#### Multi-Column Sorting
-
-To enable the single-column sorting, set the `mode` option to `multiple`.
-
-###### Example
-
-    $("#grid").kendoGrid({
-        sortable: {
-            mode: "multiple"
-        },
-        // other configuration
-    });
-
-### Scrolling
-
-By default, the scrolling functionality of the Grid is enabled. For historical reasons, however, the [Grid MVC wrapper]({% slug configuration_gridhelper_aspnetmvc %}#scrolling) does not support it.
-
-For more information on scrolling, refer to the [article on the appearance of the Grid]({% slug appearance_kendoui_grid_widget %}#scrolling).
-
-### Virtual Scrolling
-
-When the Grid is bound to large datasets or when you apply large page sizes, it is important for the performance of the widget to reduce the active in-memory DOM objects.
-
-To highly optimize the binding to large sets of data, the Grid provides a built-in [UI virtualization functionality]({% slug virtualization_kendoui_combobox_widget %}).  Virtual scrolling is an alternative to paging. When enabled, the Grid loads data from the remote data source as the user scrolls vertically.
-
-For more information on virtual scrolling and its limitations, refer to the [article on the appearance of the Grid]({% slug appearance_kendoui_grid_widget %}#virtual-scrolling).
-
-### Keyboard Navigation
+## Keyboard Navigation
 
 Keyboard navigation within the Grid is configured through the `navigatable` option. When set to `true`, it is possible to initially select a row or a cell and then move through the Grid by using the `Arrow` keys.
 
@@ -389,18 +173,6 @@ The keyboard navigation of the Grid works by listening to the `keydown` events o
 If the data cells of the Grid contain hyperlinks and you want to activate them through the keyboard, navigate to the respective Grid cell by using the `Arrow` keys, then press `Enter` to focus the hyperlink inside the cell, and press `Enter` again. To return the focus on the table cell, press `Esc`. In order for the hyperlinks to be inaccessible through tabbing, set the `tabindex="-1"` attribute to the custom hyperlinks.
 
 It is also possible to avoid the described procedure. The custom hyperlinks can be accessed through tabbing and activated through `Enter` by hacking and bypassing the keyboard navigation of the Grid. To achieve this, prevent the event bubbling of the `keydown` event of the custom hyperlinks. In this way, the `Enter` key-presses go unnoticed by the Grid.
-
-## Reference
-
-### Existing Instances
-
-Refer to an existing Grid instance through the [`jQuery.data()`](http://api.jquery.com/jQuery.data/). Once a reference has been established, use the [Grid API](/api/javascript/ui/grid) to control its behavior.
-
-The example below demonstrates how to access an existing Grid instance.
-
-###### Example
-
-    var grid = $("#grid").data("kendoGrid");
 
 ## See Also
 
