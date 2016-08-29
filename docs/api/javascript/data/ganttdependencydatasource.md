@@ -6,10 +6,7 @@ description: Learn more about the configuration of Kendo UI GanttDependencyDataS
 
 # kendo.data.GanttDependencyDataSource
 
-The dependencies data source used by the [kendo.ui.Gantt](/api/javascript/ui/gantt) widget.
-Inherits from [kendo.data.DataSource](/api/framework/datasource). The GanttDependencyDataSource contains instances of the
-[kendo.data.GanttDependency](/api/framework/ganttdependency) class.
-
+The data source of the dependencies used by the [`kendo.ui.Gantt`](/api/javascript/ui/gantt) widget. Inherits from [`kendo.data.DataSource`](/api/framework/datasource). The `GanttDependencyDataSource` contains instances of the [`kendo.data.GanttDependency`](/api/framework/ganttdependency) class.
 
 ## Configuration
 
@@ -17,11 +14,11 @@ See the [DataSource configuration](/api/framework/datasource#configuration) for 
 
 ### schema `Object`
 
-The schema configuration of the GanttDependencyDataSource.
+The schema configuration of the `GanttDependencyDataSource`.
 
 ### schema.model `Object`
 
-The model configuration of the GanttDependencyDataSource. See [GanttDependency](/api/framework/ganttdependency#configuration) for more info.
+The model configuration of the `GanttDependencyDataSource`. See [`GanttDependency`](/api/framework/ganttdependency#configuration) for more information.
 
 #### Example - configure the dependency data source model schema
 
@@ -63,8 +60,6 @@ The model configuration of the GanttDependencyDataSource. See [GanttDependency](
 
 See the [DataSource methods](/api/framework/datasource#methods) for all inherited methods.
 
-
-
 ### dependencies
 
 Returns a list of all dependencies for a certain task.
@@ -73,7 +68,7 @@ Returns a list of all dependencies for a certain task.
 
 ##### id `String|Number|Object`
 
-The id of the gantt task, based on which the dependencies are filtered.
+The id of the Gantt task, based on which the dependencies are filtered.
 
 #### Returns
 
@@ -104,9 +99,9 @@ The id of the gantt task, based on which the dependencies are filtered.
           }
         ]
       });
-      
+
       dataSource.fetch();
-      
+
       // returns dependencies 1 and 3
       var dependencies = dataSource.dependencies(1);
     </script>
@@ -119,7 +114,7 @@ Returns a list of all predecessor dependencies for a certain task.
 
 ##### id `String|Number|Object`
 
-The id of the gantt task, based on which the dependencies are filtered.
+The id of the Gantt task, based on which the dependencies are filtered.
 
 #### Returns
 
@@ -150,9 +145,9 @@ The id of the gantt task, based on which the dependencies are filtered.
           }
         ]
       });
-      
+
       dataSource.fetch();
-      
+
       // returns dependency 3
       var dependencies = dataSource.predecessors(1);
     </script>
@@ -165,7 +160,7 @@ Returns a list of all successor dependencies for a certain task.
 
 ##### id `String|Number|Object`
 
-The id of the gantt task, based on which the dependencies are filtered.
+The id of the Gantt task, based on which the dependencies are filtered.
 
 #### Returns
 
@@ -196,10 +191,9 @@ The id of the gantt task, based on which the dependencies are filtered.
           }
         ]
       });
-      
+
       dataSource.fetch();
-      
+
       // returns dependency 1
       var dependencies = dataSource.successors(1);
     </script>
-    

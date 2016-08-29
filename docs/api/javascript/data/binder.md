@@ -61,11 +61,11 @@ The bound HTML element.
     kendo.bind(document.body, viewModel);
     </script>
 
-## Class methods
+## Class Methods
 
 ### extend
 
-Creates a new binding which inherits from the kendo.data.Binder class.
+Creates a new binding which inherits from the `kendo.data.Binder` class.
 
 #### Returns
 
@@ -99,7 +99,7 @@ A key/value pair of all methods that the new class will have.
     kendo.bind(document.body, viewModel);
     </script>
 
-#### Example - create custom Kendo UI Widget binding
+#### Example - create custom Kendo UI widget binding
 
     <input data-role="numerictextbox" id="numeric" data-bind="value: value, max: max" />
     <script>
@@ -128,6 +128,7 @@ A key/value pair of all methods that the new class will have.
 Invoked by the Kendo UI MVVM framework when the bound view model value is changed. The binder should update the UI (HTML element or Kendo UI widget) to reflect the view model change.
 
 #### Example - slide up or down the element when the bound value changes
+
     <div data-bind="slide: slideChecked" style="background: orange; width: 100px; height: 100px"></div>
     <label>Check to slide<input type="checkbox" data-bind="checked: slideChecked"></label>
     <script>

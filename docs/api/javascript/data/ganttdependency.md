@@ -6,7 +6,7 @@ description: Documentation how to get started with the GanttDependency.
 
 # kendo.data.GanttDependency
 
-The `kendo.data.GanttDependency` class represents a data item from the [kendo.data.GanttDependencyDataSource](/api/framework/ganttdependencydatasource). Inherits from [kendo.data.Model](/api/framework/model).
+The `kendo.data.GanttDependency` class represents a data item from the [`kendo.data.GanttDependencyDataSource`](/api/framework/ganttdependencydatasource). Inherits from [`kendo.data.Model`](/api/framework/model).
 
 ## Configuration
 
@@ -27,7 +27,7 @@ The mandatory unique identifier of the dependency.
 
 ### predecessorId `String|Number|Object`
 
-The  mandatory 'id' of the predecessor task.
+The  mandatory `id` of the predecessor task.
 
 #### Example - set the predecessorId of a dependency
 
@@ -42,7 +42,7 @@ The  mandatory 'id' of the predecessor task.
 
 ### successorId `String|Number|Object`
 
-The  mandatory 'id' of the successor task.
+The  mandatory `id` of the successor task.
 
 #### Example - set the successorId of a dependency
 
@@ -57,7 +57,12 @@ The  mandatory 'id' of the successor task.
 
 ### type `String|Number|Object`
 
-The type of the dependency. The type is a value between 0 and 3, representing the four different dependency types: 0 - Finish-Finish, 1 - Finish-Start, 2 - Start-Finish, 3 - Start-Start.
+The type of the dependency. The type is a value between 0 and 3, representing the four different dependency types:
+
+* 0 - Finish-Finish
+* 1 - Finish-Start
+* 2 - Start-Finish
+* 3 - Start-Start
 
 #### Example - set the type of a dependency
 
@@ -90,7 +95,7 @@ The unique identifier of the dependency.
 
 ### predecessorId `String|Number|Object`
 
-The 'id' of the predecessor task.
+The `id` of the predecessor task.
 
 #### Example - get the dependency predecessorId field
 
@@ -106,7 +111,7 @@ The 'id' of the predecessor task.
 
 ### successorId `String|Number|Object`
 
-The 'id' of the successor task.
+The `id` of the successor task.
 
 #### Example - get the dependency successorId field
 
@@ -122,7 +127,12 @@ The 'id' of the successor task.
 
 ### type `String|Number|Object`
 
-The type of the dependency. The type is a value between 0 and 3, representing the four different dependency types: 0 - Finish-Finish, 1 - Finish-Start, 2 - Start-Finish, 3 - Start-Start.
+The type of the dependency. The type is a value between 0 and 3, representing the four different dependency types:
+
+* 0 - Finish-Finish
+* 1 - Finish-Start
+* 2 - Start-Finish
+* 3 - Start-Start
 
 #### Example - get the dependency type
 
@@ -148,23 +158,25 @@ Defines a new `GanttDependency` type using the provided options.
 
 ##### options `Object`
 
-Describes the configuration options of the new gantt dependency class.
+Describes the configuration options of the new Gantt dependency class.
 
 ##### options.id `String`
 
-The name of the field which acts as an identifier of the gantt dependency.
-The identifier is used to determine if a model instance is new or existing one.
-If the value of the field specified is equal to the default value (specified through the `fields` configuration) the model is considered as new.
+The name of the field which acts as an identifier of the Gantt dependency. The identifier is used to determine if a model instance is new or existing one. If the value of the field specified is equal to the default value (specified through the `fields` configuration), the model is considered as new.
 
 ##### options.fields `Object`
 
-A set of key/value pairs the configure the model fields. The key specifies the name of the field.
-Quote the key if it contains spaces or other symbols which are not valid for a JavaScript identifier.
+A set of key/value pairs the configure the model fields. The key specifies the name of the field. Quote the key if it contains spaces or other symbols which are not valid for a JavaScript identifier.
 
 ##### options.fields.fieldName.defaultValue
 
-Specifies the which will be used for the field when a new model instance is created. Default settings depend on the type of the field. Default for "string" is `""`,
-for "number" is `0` and for "date" is `new Date()` (today).
+Specifies the value which will be used for the field when a new model instance is created. Default settings depend on the type of the field.
+
+The default for:
+
+* `"string"` is `""`.
+* `"number"` is `0`.
+* `"date"` is `new Date()` (today).
 
 ##### options.fields.fieldName.editable `Boolean`
 
@@ -176,17 +188,26 @@ Specifies if the `defaultValue` setting should be used. The default is `false`.
 
 ##### options.fields.fieldName.parse `Function`
 
-Specifies the function which will parse the field value. If not set default parsers will be used.
+Specifies the function which will parse the field value. If not set, the default parsers will be used.
 
 ##### options.fields.fieldName.type `String`
 
-Specifies the the type of the field. The available options are `"string"`, `"number"`, `"boolean"`, `"date`". The default is `"string"`.
+Specifies the type of the field.
+
+The available options are:
+
+* `"string"`
+* `"number"`
+* `"boolean"`
+* `"date`"
+
+The default is `"string"`.
 
 ##### options.fields.fieldName.validation `Object`
 
-Specifies the validation options which will be used by [Kendo Validator](/api/framework/validator).
+Specifies the validation options which will be used by the [Kendo Validator](/api/framework/validator).
 
-#### Example - define custom gantt dependency
+#### Example - define custom Gantt dependency
 
     var Dependency = kendo.data.GanttDependency.define({
         id: "id",
