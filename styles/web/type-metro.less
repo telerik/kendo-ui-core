@@ -15,6 +15,8 @@
 @validation-background-color: @warning;
 @validation-border-color: @warning;
 @validation-text-color: contrast(@validation-background-color, lighten(@warning, 80%), darken(@warning, 60%), 0.5);
+
+
 @notification-info-background-color: @info;
 @notification-info-text-color: contrast(@base, lighten(@normal-text-color, 1%), darken(@normal-text-color, 7%), 0.5);
 @notification-info-border-color: contrast(@base, lighten(@info, 1%), darken(@info, 11%), 0.5);
@@ -44,11 +46,12 @@
 @input-background-color: @base;
 @shadow-color: fadeout(contrast(@base), 80%);
 @upload-progress-background-color: @info;
-@upload-progress-text-color: contrast(@upload-progress-background-color, lighten(@info, 70%), darken(@info, 60%), 0.5);
-@upload-success-background-color: @success;
-@upload-success-text-color: contrast(@upload-success-background-color, lighten(@success, 70%), darken(@success, 60%), 0.5);
-@upload-error-background-color: @error;
-@upload-error-text-color: contrast(@upload-error-background-color, lighten(@error, 70%), darken(@error, 60%), 0.5);
+@upload-progress-text-color: contrast(@info, @info, darken(@info, 60%), 0.5);
+@upload-success-background-color: contrast(@success, @success, darken(@success, 55%), 0.5);
+@upload-success-text-color: contrast(@success, @success, darken(@success, 55%), 0.5);
+@upload-error-background-color: contrast(@error, @error, darken(@error, 53%), 0.5);
+@upload-error-text-color: contrast(@error, @error, darken(@error, 53%), 0.5);
+@upload-invalid-color: @error;
 @task-summary-color: contrast(@base, lighten(@widget-text-color, 25%), darken(@widget-text-color, 25%), 0.5);
 @task-summary-selected-color: contrast(@base, lighten(@selected-background-color, 15%), darken(@selected-background-color, 25%), 0.5);
 @loading-panel-color: @base;
@@ -1247,7 +1250,6 @@ div.k-filebrowser-dropzone em
 
 .k-file
 {
-    background-color: @active-background-color;
     border-color: @cell-border-color;
 }
 
@@ -1279,6 +1281,59 @@ div.k-filebrowser-dropzone em
 .k-file-error .k-progress
 {
     background-color: @upload-error-background-color;
+}
+
+.k-file-extension-wrapper,
+.k-multiple-files-extension-wrapper {
+    color: @disabled-text-color;
+    border-color: @disabled-text-color;
+}
+
+.k-file-invalid .k-file-name-invalid {
+    color: @upload-error-text-color;
+}
+
+.k-file-invalid-extension-wrapper,
+.k-multiple-files-invalid-extension-wrapper {
+    color: @upload-error-text-color;
+    border-color: @upload-invalid-color;
+}
+
+.k-file-extension-wrapper:before,
+.k-multiple-files-extension-wrapper:before {
+    background-color: @base;
+    border-color: transparent transparent @disabled-text-color @disabled-text-color;
+}
+
+.k-file-invalid-extension-wrapper:before,
+.k-multiple-files-invalid-extension-wrapper:before {
+    background-color: @widget-background-color;
+    border-color: transparent transparent @upload-invalid-color @upload-invalid-color;
+}
+
+.k-multiple-files-extension-wrapper:after {
+    border-top-color: @disabled-text-color;
+    border-left-color: @disabled-text-color;
+}
+
+.k-multiple-files-invalid-extension-wrapper:after {
+    border-top-color: @upload-invalid-color;
+    border-left-color: @upload-invalid-color;
+}
+
+.k-file-size,
+.k-file-information,
+.k-file-validation-message {
+    color: @disabled-text-color;
+}
+
+.k-upload .k-upload-selected {
+    color: @accent;
+    border-color: @widget-border-color;
+
+    &:hover {
+        color: @button-hover-text-color;
+    }
 }
 
 /* ImageBrowser */
