@@ -3147,13 +3147,77 @@ The label used for the check-all checkbox.
       });
     </script>
 
-
 ### filterable.operators `Object`
 
 The text of the filter operators displayed in the filter menu.
 
-> If `operators` are defined manually, then the default messages will be overridden too. If you would like to control the `operators` and still use the default messages,
-then you will need to retrieve them from the `FilterCell` prototype - `kendo.ui.FilterCell.fn.options.operators.{type}`, where type can be "string", "date", "number" and "enums".
+> * If `operators` are defined manually, the default messages will be overridden too. To control the `operators` and still use the default messages, retrieve them from the `FilterCell` prototype - `kendo.ui.FilterCell.fn.options.operators.{type}`, where the type can be `"string"`, `"date"`, `"number"`, and `"enums"`.
+> * If the same options are specific to a column, it is possible to use the [column filterable configuration of the Grid](/api/javascript/ui/grid#configuration-columns.filterable.operators).
+> * In multiple Grids, it is possible to override the filterable options of the Kendo UI FilterMenu before the Grids are initialized. Then the new filter options will be available for all Grids without further configurations.
+
+#### Example - override the filterable options in multiple Grids
+
+     <h4>Grid One</h4>
+     <div id="gridOne"></div>
+     <h4>Grid Two</h4>
+     <div id="gridTwo"></div>
+
+     <script>
+         kendo.ui.FilterMenu.fn.options.operators.string = {
+           eq: "Equal to",
+           neq: "Not equal to"
+         };
+
+         $("#gridOne").kendoGrid({
+           columns: [
+             { field: "name" },
+             { field: "age" }
+           ],
+           dataSource: {
+             data: [
+               { id: 1, name: "Jane Doe", age: 30 },
+               { id: 2, name: "John Doe", age: 33 }
+             ],
+             schema: {
+               model: {
+                 id: "id",
+                 fields: {
+                   name: { type: "string" },
+                   age: { type: "number" }
+                 }
+               }
+             }
+           },
+           filterable: {
+             extra: false
+           }
+         });
+
+         $("#gridTwo").kendoGrid({
+           columns: [
+             { field: "name" },
+             { field: "age" }
+           ],
+           dataSource: {
+             data: [
+               { id: 1, name: "Jane Doe", age: 30 },
+               { id: 2, name: "John Doe", age: 33 }
+             ],
+             schema: {
+               model: {
+                 id: "id",
+                 fields: {
+                   name: { type: "string" },
+                   age: { type: "number" }
+                 }
+               }
+             }
+           },
+           filterable: {
+             extra: false
+           }
+         });
+       </script>
 
 ### filterable.operators.string `Object`
 
@@ -3162,6 +3226,7 @@ The texts of the filter operators displayed for columns bound to string fields.
 > Omitting an operator will exclude it from the DropDownList with the available operators.
 
 #### Example - set string operators
+
     <div id="grid"></div>
     <script>
     $("#grid").kendoGrid({
