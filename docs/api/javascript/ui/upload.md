@@ -848,6 +848,12 @@ Toggles the upload enabled state.
         upload.toggle();
     </script>
 
+### upload
+
+Manually triggers the upload process.
+
+> This method is only applicable when the `async.autoUpload` option is set to `false`.
+
 #### Parameters
 
 ##### enable `Boolean`
