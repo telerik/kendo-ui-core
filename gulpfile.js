@@ -220,7 +220,7 @@ gulp.task('cjs', function() {
         .pipe(gulp.dest('dist/cjs'));
 });
 gulp.task('mdspell', shell.task(
-['mdspell ./docs/**/*.md -n -a --report']
+['cd docs && mdspell "**/*.md" -n -a --report']
 ));
 
 [ 'pro', 'core' ].forEach(function(flavor) {
