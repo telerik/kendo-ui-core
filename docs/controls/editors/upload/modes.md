@@ -30,15 +30,6 @@ The Upload is initialized from an existing file input placed in a form.
         $("#photos").kendoUpload();
     });
 
-
-
-
-    <form method="post" action="handler.php">
-        <div>
-            <input name="photos[]" id="photos" type="file" />
-        </div>
-    </form>
-
 Note the array syntax in the input name: it is used to hint the Upload handler to treat the photos as an array.
 
 For detailed information on how to send metadata to the save handler and receive metadata in the Upload widget, see [this article]({% slug metadata_upload_widget %}).
