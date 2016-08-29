@@ -57,4 +57,54 @@
 
         equal(input.attr("aria-valuenow"), "10");
     });
+
+    test("NumericTextBox adds role to the text element", function() {
+        var numeric = new NumericTextBox(input);
+
+        equal(numeric._text.attr("role"), "spinbutton");
+    });
+
+    test("NumericTextBox adds aria-valuemin", function() {
+        var numeric = new NumericTextBox(input, {
+            min: 0
+        });
+
+        equal(numeric._text.attr("aria-valuemin"), "0");
+    });
+
+    test("NumericTextBox adds aria-valuemax", function() {
+        var numeric = new NumericTextBox(input, {
+            max: 0
+        });
+
+        equal(numeric._text.attr("aria-valuemax"), "0");
+    });
+
+    test("NumericTextBox updates aria-valuemin", function() {
+        var numeric = new NumericTextBox(input);
+
+        numeric.min(10);
+        equal(numeric._text.attr("aria-valuemin"), "10");
+    });
+
+    test("NumericTextBox updates aria-valuemax", function() {
+        var numeric = new NumericTextBox(input);
+
+        numeric.max(10);
+        equal(numeric._text.attr("aria-valuemax"), "10");
+    });
+
+    test("NumericTextBox do not set aria-valuemin", function() {
+        var numeric = new NumericTextBox(input);
+
+        equal(numeric._text.attr("aria-valuemin"), undefined);
+    });
+
+    test("NumericTextBox adds aria-valuenow", function() {
+        var numeric = new NumericTextBox(input, {
+            value: 10
+        });
+
+        equal(numeric._text.attr("aria-valuenow"), "10");
+    });
 })();

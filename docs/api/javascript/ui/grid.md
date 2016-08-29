@@ -451,22 +451,26 @@ The JavaScript function executed when the user clicks the command button. The fu
 
 The function context (available via the `this` keyword) will be set to the grid instance.
 
+> Grid custom commands are rendered as anchors (`<a>`) with no `href` value. Prevent the click event in the click function in order to avoid shifting of the page scroll position.
+
 #### Example - handle the click event of the custom command button
     <div id="grid"></div>
     <script>
     $("#grid").kendoGrid({
       columns: [
         { field: "name" },
-        { command: [ {
+        { command: [{
             name: "details",
             click: function(e) {
-              // e.target is the DOM element representing the button
-              var tr = $(e.target).closest("tr"); // get the current table row (tr)
-              // get the data bound to the current table row
-              var data = this.dataItem(tr);
-              console.log("Details for: " + data.name);
+                // prevent page scroll position change
+                e.preventDefault();
+                // e.target is the DOM element representing the button
+                var tr = $(e.target).closest("tr"); // get the current table row (tr)
+                // get the data bound to the current table row
+                var data = this.dataItem(tr);
+                console.log("Details for: " + data.name);
             }
-          } ]
+          }]
        }
       ],
       dataSource: [ { name: "Jane Doe" } ]
@@ -663,14 +667,13 @@ Can be set to a JavaScript object which represents the filter cell configuration
 
 ### columns.filterable.cell.dataSource `Object|kendo.data.DataSource`
 
-Specifies custom dataSource for the AutoComplete when type of the column is string.  Can be a JavaScript object which represents a valid data source configuration, a JavaScript array or an existing [kendo.data.DataSource](/api/javascript/data/datasource)
-instance.
+Specifies a custom dataSource for the AutoComplete when the type of the column is `string`. Can be a JavaScript object which represents a valid data source configuration, a JavaScript array, or an existing [`kendo.data.DataSource`](/api/javascript/data/datasource) instance.
 
-Using the same `dataSource` instance for the Grid, and the AutoComplete is not recommended, and causes negative side effects.
+It is not recommended that you use the same `dataSource` instance for the Grid and the AutoComplete because it causes negative side effects.
 
 If the `dataSource` options is missing, a new cloned instance of the Grid's dataSource will be used.
 
-If the `dataSource` option is an existing [kendo.data.DataSource](/api/javascript/data/datasource) instance the widget will use that instance and will **not** initialize a new one.
+If the `dataSource` option is an existing [`kendo.data.DataSource`](/api/javascript/data/datasource) instance, the widget will use that instance and will _not_ initialize a new one.
 
 #### Example - custom cell filter autocomplete dataSource
 
@@ -778,9 +781,9 @@ Specifies the width of the input before it is initialized or turned into a widge
 
 ### columns.filterable.cell.suggestionOperator `String` *(default: "startswith")*
 
-Specifies the AutoComplete filter option. Possible values are same as the one for the AutoComplete filter option- "startswith", "endswith", "contains". The "contains" operator performs a case insensitive search. For case sensitive filtering, a custom filtering function can be set via the [dataSource.filter.operator](/api/javascript/data/datasource#configuration-filter.operator) option. 
+Specifies the AutoComplete `filter` option. The possible values are the same as the ones for the AutoComplete `filter` option - `"startswith"`, `"endswith"`, `"contains"`. The `"contains"` operator performs a case-insensitive search. To perform a case-sensitive filtering, set a custom filtering function through the [`dataSource.filter.operator`](/api/javascript/data/datasource#configuration-filter.operator) option.
 
-> Notice this operator is completely separate from the operator used for filtering on this column - check [operator](#configuration-columns.filterable.cell.operator).
+> This operator is completely independent from the operator used for the filtering on this column. For more inforamtion, check [`operator`](#configuration-columns.filterable.cell.operator).
 
 #### Example - Specifying suggestionOperator option for the filter cell of a column
 
@@ -1449,7 +1452,7 @@ If set to `true` the column will not be displayed in the grid. By default all co
 
 If set to `true` the column will be displayed as locked in the grid. Also see [Frozen Columns](/web/grid/walkthrough#frozen-columns-locked-columns).
 
-> Row template and detail features are not supported in combination with column locking.
+> **Important**: Row template and detail features are not supported in combination with column locking. If [multi-column headers](http://demos.telerik.com/kendo-ui/grid/multicolumnheaders) are used, it is possible to lock (freeze) a column at the topmost level only.
 
 #### Example - locked columns
     <div id="grid"></div>
@@ -2476,7 +2479,7 @@ which field to update. The other option is to use [MVVM](/framework/mvvm/overvie
     <script id="popup-editor" type="text/x-kendo-template">
       <h3>Edit Person</h3>
       <p>
-        <label>Name:<input data-bind="valueu:name" /></label>
+        <label>Name:<input data-bind="value:name" /></label>
       </p>
       <p>
         <label>Age:<input data-role="numerictextbox" data-bind="value:age" /></label>
@@ -3150,13 +3153,77 @@ The label used for the check-all checkbox.
       });
     </script>
 
-
 ### filterable.operators `Object`
 
 The text of the filter operators displayed in the filter menu.
 
-> If `operators` are defined manually, then the default messages will be overridden too. If you would like to control the `operators` and still use the default messages,
-then you will need to retrieve them from the `FilterCell` prototype - `kendo.ui.FilterCell.fn.options.operators.{type}`, where type can be "string", "date", "number" and "enums".
+> * If `operators` are defined manually, the default messages will be overridden too. To control the `operators` and still use the default messages, retrieve them from the `FilterCell` prototype - `kendo.ui.FilterCell.fn.options.operators.{type}`, where the type can be `"string"`, `"date"`, `"number"`, and `"enums"`.
+> * If the same options are specific to a column, it is possible to use the [column filterable configuration of the Grid](/api/javascript/ui/grid#configuration-columns.filterable.operators).
+> * In multiple Grids, it is possible to override the filterable options of the Kendo UI FilterMenu before the Grids are initialized. Then the new filter options will be available for all Grids without further configurations.
+
+#### Example - override the filterable options in multiple Grids
+
+     <h4>Grid One</h4>
+     <div id="gridOne"></div>
+     <h4>Grid Two</h4>
+     <div id="gridTwo"></div>
+
+     <script>
+         kendo.ui.FilterMenu.fn.options.operators.string = {
+           eq: "Equal to",
+           neq: "Not equal to"
+         };
+
+         $("#gridOne").kendoGrid({
+           columns: [
+             { field: "name" },
+             { field: "age" }
+           ],
+           dataSource: {
+             data: [
+               { id: 1, name: "Jane Doe", age: 30 },
+               { id: 2, name: "John Doe", age: 33 }
+             ],
+             schema: {
+               model: {
+                 id: "id",
+                 fields: {
+                   name: { type: "string" },
+                   age: { type: "number" }
+                 }
+               }
+             }
+           },
+           filterable: {
+             extra: false
+           }
+         });
+
+         $("#gridTwo").kendoGrid({
+           columns: [
+             { field: "name" },
+             { field: "age" }
+           ],
+           dataSource: {
+             data: [
+               { id: 1, name: "Jane Doe", age: 30 },
+               { id: 2, name: "John Doe", age: 33 }
+             ],
+             schema: {
+               model: {
+                 id: "id",
+                 fields: {
+                   name: { type: "string" },
+                   age: { type: "number" }
+                 }
+               }
+             }
+           },
+           filterable: {
+             extra: false
+           }
+         });
+       </script>
 
 ### filterable.operators.string `Object`
 
@@ -3165,6 +3232,7 @@ The texts of the filter operators displayed for columns bound to string fields.
 > Omitting an operator will exclude it from the DropDownList with the available operators.
 
 #### Example - set string operators
+
     <div id="grid"></div>
     <script>
     $("#grid").kendoGrid({
@@ -6493,6 +6561,7 @@ Fires the [edit](#events-edit) event.
     });
     var grid = $("#grid").data("kendoGrid");
     grid.addRow();
+    </script>
 
 ### autoFitColumn
 
@@ -8170,7 +8239,7 @@ If invoked prevents the data bind action. The table rows will remain unchanged a
 
 ##### e.action `String`
 
-The action that caused the dataBinding event
+The action that caused the dataBinding event. Possible values: `rebind`, `sync`, `add`, `remove`.
 
 ##### e.index `Number`
 

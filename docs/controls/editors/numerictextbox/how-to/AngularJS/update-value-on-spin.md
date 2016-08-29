@@ -25,7 +25,7 @@ The example below demonstrates how to update the NumericTextBox widget value on 
             </div>
             <div>
                 <h4>Result</h4>
-                Value: {{value}}
+                Value: {{ value }}
             </div>
         </div>
         <script>
@@ -33,7 +33,7 @@ The example below demonstrates how to update the NumericTextBox widget value on 
             .controller("mainCtrl", ['$scope',  function ($scope) {
               $scope.value = 50;
               $scope.updateValue = function() {
-                this.value = this.numeric.value();
+                $scope.value = $scope.numeric.value();
               };
             }]);
         </script>

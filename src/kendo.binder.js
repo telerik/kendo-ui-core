@@ -804,7 +804,12 @@ var __meta__ = { // jshint ignore:line
                             value = option.text;
                         }
 
-                        values.push(this._parseValue(value, this.dataType()));
+                        if (field) {
+                            values.push(value);
+                        } else {
+                            values.push(this._parseValue(value, this.dataType()));
+                        }
+
                     }
                 }
 
@@ -816,7 +821,7 @@ var __meta__ = { // jshint ignore:line
 
                     for (valueIndex = 0; valueIndex < values.length; valueIndex++) {
                         for (idx = 0, length = source.length; idx < length; idx++) {
-                            var sourceValue = this._parseValue(source[idx].get(field), this.dataType());
+                            var sourceValue = source[idx].get(field);
                             var match = (String(sourceValue) === values[valueIndex]);
                             if (match) {
                                 values[valueIndex] = source[idx];
@@ -1652,7 +1657,6 @@ var __meta__ = { // jshint ignore:line
         var role = element.getAttribute("data-" + kendo.ns + "role"),
             idx,
             bind = element.getAttribute("data-" + kendo.ns + "bind"),
-            children = element.children,
             childrenCopy = [],
             deep = true,
             bindings,
@@ -1720,6 +1724,7 @@ var __meta__ = { // jshint ignore:line
             element.kendoBindingTarget = target;
         }
 
+        var children = element.children;
         if (deep && children) {
             // https://github.com/telerik/kendo/issues/1240 for the weirdness.
             for (idx = 0; idx < children.length; idx++) {

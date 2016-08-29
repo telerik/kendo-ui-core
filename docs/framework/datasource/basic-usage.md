@@ -9,7 +9,7 @@ position: 2
 
 # Basic Usage
 
-The [Kendo UI DataSource component](http://demos.telerik.com/kendo-ui/datasource/index) plays a central role in practically all web applications built with Kendo UI. It is an abstraction for using local data&mdash;arrays of JavaScript objects&mdash;or remote data&mdash;web services returning JSON, JSONP, [OData](http://www.odata.org/) or XML. This article demonstrates some of the most common scenarios regarding the possibilities for you to apply the DataSource component to your projects.  
+The [Kendo UI DataSource component](http://demos.telerik.com/kendo-ui/datasource/index) plays a central role in practically all web applications built with Kendo UI. It is an abstraction for using local data&mdash;arrays of JavaScript objects&mdash;or remote data&mdash;web services returning JSON, JSONP, [OData](http://www.odata.org/) or XML. This article demonstrates some of the most common scenarios regarding the possibilities for you to apply the DataSource component to your projects.
 
 ## DataSource for Local and Remote Data
 
@@ -81,6 +81,167 @@ The example below demonstrates how to create a DataSource for data from another 
 The DataSource in the example is initialized to represent an in-memory cache of tweets from the search service for Twitter. This endpoint employs a [JSON](http://www.json.org/)-based endpoint contact that allows an input parameter `q` to denote a query string for the search service. Here, its value is provided by an input element on the page.
 
 Operations conducted by the DataSource against this remote endpoint are performed via [`jQuery.ajax()`](http://api.jquery.com/jQuery.ajax/) and therefore, are subject to the same security constraints as the ones enforced by the user agent. These security constraints also apply to [XHRs (XMLHttpRequests)](https://developer.mozilla.org/en-US/docs/Web/API/XMLHttpRequest) made across different domains. Since this is the case with the example above, the `dataType` configuration property is set to use [JSONP](https://en.wikipedia.org/wiki/JSONP).
+
+## Data Filtration
+
+Filtering local data is a trivial task using the DataSource. The component accepts a list of one or more filter expressions. They can be combined by using the `and` or `or` logical operators. For more details about the filter expression structure, refer to the documentation on the [`filter`](/api/javascript/data/datasource#configuration-filter) configuration option.
+
+### Local Filtering
+
+Local filtering is convenient for small datasets.
+
+Avoid it when working with large datasets because it might lead to performance issues.
+
+###### Example
+
+```tab-Data
+
+        var words = [
+            { 'w': 'kendo', 'length': 4 },
+            { 'w': 'done', 'length': 4 },
+            { 'w': 'keno', 'length': 4 },
+            { 'w': 'node', 'length': 5 }
+        ];
+```
+```tab-DataSource
+
+        var wordsDataSource = new kendo.data.DataSource({
+            data: words,
+            filter: {
+                logic: 'or',
+                filters: [
+                    { field: 'w', operator: 'contains', value: 'don' },
+                    { field: 'length', operator: 'gte', value: 5 }
+                ]
+            }
+        });
+```
+
+### Server Filtering
+
+Server filtering is convenient for large datasets.
+
+Be sure to set the [`schema`](/api/javascript/data/datasource#configuration-schema) and the [`filter`](/api/javascript/data/datasource#configuration-filter) properties as necessary.
+
+The example below features local data but the data returned by the [`transport`](/api/javascript/data/datasource#configuration-transport) is going to be evaluated the same way.
+
+###### Example
+
+```tab-Data
+        //the JSON result from "{remote service}"
+        {
+            result: [
+                { 'w': 'done', 'length': 4 },
+                { 'w': 'node', 'length': 5 }
+            ]
+        }
+```
+```tab-DataSource
+
+        var wordsDataSource = new kendo.data.DataSource({
+            serverFiltering: true,
+            transport: {
+                read: {
+                    url: "{remote service}"
+                }
+            },
+            schema: {
+                data: "result"
+            },
+            filter: {
+                logic: 'or',
+                filters: [
+                    { field: 'w', operator: 'contains', value: 'don' },
+                    { field: 'length', operator: 'gte', value: 5 }
+                ]
+            }
+        });
+```
+
+### Accent Folding
+
+The DataSource does not support `accent folding` out of the box. However, it can be easily implemented by using either local or server filtering.
+
+#### Using Local Filtering
+
+The example below demonstrates accent folding with local filtering.
+
+###### Example
+
+    <h5>DataSource will display all matching to 'Lo' search value items</h5>
+    <div id="result"></div>
+    <script>
+    var template = kendo.template("<div>#: name #</div>");
+
+    var accentMap = {
+      'ó':'o',
+      'ø':'o',
+      'ö':'o'
+    };
+
+    var accentRegExp = new RegExp(Object.keys(accentMap).join("|"), "ig");
+
+    var replace = function(value) {
+      return value.replace(accentRegExp, function(match) {
+        return accentMap[match] || match;
+      });
+    };
+
+    var dataSource = new kendo.data.DataSource({
+      change: function() {
+				$("#result").html(kendo.render(template, this.view()));
+      },
+      data: [
+        { name: "Fulanito López", age: 30 },
+        { name: "Erik Lørgensen", age: 33 },
+        { name: "Lorena Smith", age: 20 },
+        { name: "James Lö", age: 32 }
+      ],
+      filter: {
+       	field: "name",
+        operator: function(value, search) {
+          return replace(value).indexOf(search) !== -1;
+        },
+        value: "Lo"
+      }
+    });
+
+    dataSource.fetch();
+    </script>
+
+#### Using Server Filtering
+
+The example below demonstrates accent folding with server filtering.
+
+###### Example
+
+```tab-Data
+        //the 'accent folding' is done on the server
+        {
+            result: [
+                { name: "Fulanito López", age: 30 },
+                { name: "Erik Lørgensen", age: 33 },
+                { name: "Lorena Smith", age: 20 },
+                { name: "James Lö", age: 32 }
+            ]
+        }
+```
+```tab-DataSource
+
+        var wordsDataSource = new kendo.data.DataSource({
+            serverFiltering: true,
+            transport: {
+                read: {
+                    url: "{remote service}"
+                }
+            },
+            schema: {
+                data: "result"
+            },
+
+            filter: { field: "name", operator: "contains", value: "Lo" }
+        });
+```
 
 ## Grouped Data Handling
 

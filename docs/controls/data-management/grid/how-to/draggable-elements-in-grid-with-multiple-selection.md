@@ -7,7 +7,7 @@ slug: howto_use_draggable_elements_multiselection_enabled_grid
 
 # Use Draggable Elements with Multiselection Enabled
 
-The example below demonstrates how to use draggable components in Kendo UI Grid with enabled multiselection.
+The example below demonstrates how to use draggable components in a Kendo UI Grid when the multi-selection is enabled. 
 
 ###### Example
 

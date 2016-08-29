@@ -67,12 +67,10 @@ The NuGet Feed provides the following packages related to UI for ASP.NET MVC:
 - `Telerik.UI.for.AspNet.Mvc4.Trial`&mdash;Telerik UI for ASP.NET MVC 4 Trial.
 - `Telerik.UI.for.AspNet.Mvc3`&mdash;Telerik UI for ASP.NET MVC 3 Commercial.
 - `Telerik.UI.for.AspNet.Mvc3.Trial`&mdash;Telerik UI for ASP.NET MVC 3 Trial.
+- `Telerik.UI.for.AspNet.Core`&mdash;Telerik UI for ASP.NET Core MVC Commercial.
+- `Telerik.UI.for.AspNet.Core.Trial`&mdash;Telerik UI for ASP.NET Core MVC Trial.
 
 The [Kendo UI Packages]({% slug kendoui_nuget_packages %}) are listed in a separate section.
-
-> **Important**
->
-> The `Kendo.Mvc`&mdash;Telerik UI for ASP.NET Core MVC&mdash;is a pre-release package that is also available.
 
 ## See Also
 

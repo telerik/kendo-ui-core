@@ -4,7 +4,7 @@ var lazypipe = require('lazypipe');
 var less = require('gulp-less');
 var autoprefix = require('less-plugin-autoprefix');
 var logger = require('gulp-logger');
-var minifyCSS = require('gulp-minify-css');
+var cleanCss = require('gulp-clean-css');
 var replace = require('gulp-replace');
 var rename = require('gulp-rename');
 var cache = require('gulp-cached');
@@ -35,7 +35,7 @@ module.exports.fromLess = lazypipe()
 
 module.exports.minify = lazypipe()
     .pipe(logger, { after: 'Min CSS complete!', extname: '.min.css', showChange: true } )
-    .pipe(minifyCSS, cleanCssOptions)
+    .pipe(cleanCss, cleanCssOptions)
     .pipe(rename, { suffix: ".min" });
 
 module.exports.cacheLessDependencies = lazypipe()

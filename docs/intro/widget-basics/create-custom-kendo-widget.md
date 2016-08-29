@@ -209,7 +209,7 @@ The way the widget code now looks is shown in the example below.
 <!--_-->
 Notice that when you bind to the `change` event on the DataSource, you actually bind to the string value of `"change"`. As a best practice, assign these as constants at the top of the widget and then refer to the constant. The entire DataSource configuration is also moved into its own method. This is because `that` signifies the widget since it is the calling object. You can reference all widget properties off of the `that` object after assigning `that` to `this`.
 
-### Fetch form DataSource
+### Fetch from DataSource
 
 You need to add one more thing to the `dataSource` method&mdash;fetching from the DataSource if necessary. Do that by checking for the `autoBind` configuration value off of `that.options`. Then call `that.dataSource.fetch()`. Note that a `fetch` is different from a `read` because it only populates the DataSource if the DataSource is not yet read from. If a `read` is previously called on the DataSource before the widget is initialized, you are not to cause the DataSource to read again.
 

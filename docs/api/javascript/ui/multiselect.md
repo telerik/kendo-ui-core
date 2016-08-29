@@ -209,7 +209,7 @@ If the `dataSource` option is an existing [kendo.data.DataSource](/api/javascrip
 
 The field of the data item that provides the text content of the list items. The widget will filter the data source based on this field.
 
-> **Important** When `dataTextField` is defined, the`dataValueField` option also should be set.
+> **Important** When `dataTextField` is defined, the `dataValueField` option also should be set.
 
 #### Example - set the dataTextField
 
@@ -232,7 +232,7 @@ The field of the data item that provides the text content of the list items. The
 
 The field of the data item that provides the value of the widget.
 
-> **Important** When `dataValueField` is defined, the`dataTextField` option also should be set.
+> **Important** When `dataValueField` is defined, the `dataTextField` option also should be set.
 
 #### Example - set the dataValueField
 
@@ -280,6 +280,37 @@ If set to `false` the widget will be disabled and will not allow user input. The
     <script>
     $("#multiselect").kendoMultiSelect({
       enable: false
+    });
+    </script>
+
+### enforceMinLength `Boolean` *(default: false)*
+
+If set to `true` the widget will not show all items when the text of the search input cleared. By default the widget shows all items when the text of the search input is cleared. Works in conjunction with [minLength](#configuration-minLength).
+
+#### Example - enforce minLength
+
+    <input id="multiselect" />
+    <script>
+    $("#multiselect").kendoMultiSelect({
+        placeholder: "Select products...",
+        dataTextField: "ProductName",
+        dataValueField: "ProductID",
+        autoBind: false,
+        minLength: 3,
+        enforceMinLength: true,
+        dataSource: {
+            type: "odata",
+            serverFiltering: true,
+            transport: {
+                read: {
+                    url: "//demos.telerik.com/kendo-ui/service/Northwind.svc/Products",
+                }
+            }
+        },
+        value: [
+            { ProductName: "Chang", ProductID: 2 },
+            { ProductName: "Uncle Bob's Organic Dried Pears", ProductID: 7 }
+        ]
     });
     </script>
 
@@ -460,9 +491,10 @@ A zero value means that a request will be made as soon as the user focuses the w
 
 ### noDataTemplate `String|Function` *(default: "No results found.")*
 
-Specifies a static HTML content, which will be displayed if no results are found or the underlying data source is empty. The popup will open when 'noDataTemplate' is defined.
+The [template](/api/javascript/kendo#methods-template) used to render the "no data" template, which will be displayed if no results are found or the underlying data source is empty.
+The noData template receives the widget itself as a part of the data argument. The template will be evaluated on every widget data bound.
 
-> **Important** Widget does not pass a model to the noData template. Use this option only with static HTML.
+> **Important** The popup will open when 'noDataTemplate' is defined
 
 #### Example - specify headerTemplate as a string
 

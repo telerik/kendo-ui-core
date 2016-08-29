@@ -1059,4 +1059,52 @@ test("setOptions method hides footer template", 1, function() {
     equal(combobox.header, null);
 });
 
+test("setOptions re-renders noDataTemplate", function() {
+    var combobox = new ComboBox(input, {
+        noDataTemplate: "test"
+    });
+
+    combobox.setOptions({
+        noDataTemplate: "no data"
+    });
+
+    equal(combobox.noData.text(), "no data");
+});
+
+test("setOptions removes noData template", function() {
+    var combobox = new ComboBox(input, {
+        noDataTemplate: "test"
+    });
+
+    combobox.setOptions({
+        noDataTemplate: null
+    });
+
+    equal(combobox.noData, null);
+});
+    asyncTest("reset filters when _clear is clicked", 1, function() {
+        var combobox = new ComboBox(input, {
+            filter: "startswith",
+            minLength: 2,
+            // enforceMinLength: true,
+            dataValueField: "id",
+            dataTextField: "name",
+            dataSource: {
+                data: [
+                    { id: 1, name: "name1" },
+                    { id: 2, name: "name2" },
+                    { id: 3, name: "name3" }
+                ],
+                // filter: {field: "id", value: 1, operator: "equals"}
+            }
+        });
+
+        combobox.text("name");
+        combobox.search("name");
+        combobox.dataSource.bind("change", function() {
+            start();
+            equal(JSON.stringify(combobox.dataSource.filter()), JSON.stringify({"filters":[{"value":"","field":"name","operator":"startswith","ignoreCase":true}],"logic":"and"}));
+        });
+        combobox._clear.click();
+    });
 })();

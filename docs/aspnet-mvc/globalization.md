@@ -133,7 +133,50 @@ Below are listed the steps for you to follow when you want to make the widgets u
     </script>
 ```
 
-> The client-side culture must be set before any Kendo UI widgets that rely on it, are initialized.
+> **Important**
+>
+> Set the client-side culture before initializing any Kendo UI widgets that rely on it.
+
+## Use the Culture Helper
+
+The Kendo UI culture scripts are generated based on the Windows 8 formats. If you use a different version that has different date or number formats, it will lead to issues related to data binding. To avoid these side effects, use the `Html.Kendo().Culture()` helper which generates the Kendo UI culture script based on the current .NET or specified culture.
+
+### Generate Cultures
+
+The example below demonstrates how to generate the current and specified cultures.
+
+###### Example
+
+```tab-Current
+
+    @Html.Kendo().Culture()
+```
+```tab-Specified
+
+    @Html.Kendo().Culture("bg-BG")
+
+```
+
+### Include in Existing Script
+
+The Culture helper also provides the option to disable the rendering inside a script tag, so it can be included in the existing script.
+
+The example below demonstrates how to generate the current and specified cultures in an existing script file.
+
+###### Example
+
+```tab-Current
+
+    <script>
+        @Html.Kendo().Culture(false)
+    </script>
+```
+```tab-Specified
+
+    <script>
+        @Html.Kendo().Culture("bg-BG", false)
+    </script>
+```
 
 ## See Also
 

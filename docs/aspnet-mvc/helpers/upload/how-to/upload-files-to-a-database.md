@@ -11,7 +11,5 @@ To see the example on how to upload files to a database, refer to [this project]
 
 ## See Also
 
-Other articles and how-to examples on the Kendo UI Upload HtmlHelper:
-
 * [Overview of the Upload HtmlHelper]({% slug overview_uploadhelper_aspnetmvc %})
-* [How to Upload Files from Grid Popup Editors]({% slug howto_uploadfilesgridpopupeditor_uploadaspnetmvc %})
+* [UploadBuilder API Reference](/api/aspnet-mvc/Kendo.Mvc.UI.Fluent/UploadBuilder)

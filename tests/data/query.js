@@ -16,7 +16,7 @@ test("skip returns new array starting after the specified index", function () {
     equal(result.length, 1);
     equal(result[0], 2);
 });
-
+ 
 test("skip and take returns a page of records", function () {
     var q = new Query([1, 2, 3]);
 

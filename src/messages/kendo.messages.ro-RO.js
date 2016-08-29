@@ -375,4 +375,42 @@ $.extend(true, kendo.ui.Upload.prototype.options.localization,{
   "headerStatusUploading": "Uploading..."
 });
 }
+
+/* Dialog */
+
+if (kendo.ui.Dialog) {
+kendo.ui.Dialog.prototype.options.messages =
+$.extend(true, kendo.ui.Dialog.prototype.options.localization, {
+  "close": "Închide"
+});
+}
+
+/* Alert */
+
+if (kendo.ui.Alert) {
+kendo.ui.Alert.prototype.options.messages =
+$.extend(true, kendo.ui.Alert.prototype.options.localization, {
+  "okText": "O.K"
+});
+}
+
+/* Confirm */
+
+if (kendo.ui.Confirm) {
+kendo.ui.Confirm.prototype.options.messages =
+$.extend(true, kendo.ui.Confirm.prototype.options.localization, {
+  "okText": "O.K",
+  "cancel": "Anulează"
+});
+}
+
+/* Prompt */
+if (kendo.ui.Prompt) {
+kendo.ui.Prompt.prototype.options.messages =
+$.extend(true, kendo.ui.Prompt.prototype.options.localization, {
+  "okText": "O.K",
+  "cancel": "Anulează"
+});
+}
+
 })(window.kendo.jQuery);

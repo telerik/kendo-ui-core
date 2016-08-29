@@ -125,9 +125,9 @@ The example demonstrates how to upload files and select additional metadata usin
 
     </script>
 ```
-## See Also
 
-Other articles on the Kendo UI Upload:
+
+## See Also
 
 * [Upload JavaScript API Reference](/api/javascript/ui/upload)
 * [Modes of Operation]({% slug modes_upload_widget %})

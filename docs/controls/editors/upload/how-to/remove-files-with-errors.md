@@ -45,12 +45,12 @@ This example demonstrates how to remove files, which contain errors and which ha
   });
 </script>
 ```
-## See Also
 
-Other articles on the Kendo UI Upload:
+
+## See Also
 
 * [Upload JavaScript API Reference](/api/javascript/ui/upload)
 * [Modes of Operation]({% slug modes_upload_widget %})
 * [Metadata]({% slug metadata_upload_widget %})
 
-For more runnable examples on the Kendo UI Upload widget, browse its [**How To** documentation folder]({% slug howto_select_additional_metadata_upload %}).
+For more runnable examples on the Kendo UI Upload widget, browse its [**How To** documentation folder]({% slug howto_select_additional_metadata_upload %}). 

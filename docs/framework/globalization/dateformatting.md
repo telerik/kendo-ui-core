@@ -130,6 +130,7 @@ The `"Y"` or `"y"` specifier renders a year/month pattern (`"MMMM, yyyy"` for en
 | **`"tt"`**    | The AM/PM designator.
 | **`"yy"`**    | The last two characters from the year value.
 | **`"yyyy"`**  | The year full value.
+| **`"zzz"`**   | The local timezone when using formats to [parse UTC date strings]({% slug dateparsing_kendoui_globalization %}#parse-utc-date-strings).
 
 ## See Also
 

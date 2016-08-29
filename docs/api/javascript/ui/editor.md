@@ -64,6 +64,81 @@ Indicates whether the Editor should submit encoded HTML tags. By default, the su
     console.log($("#editor").val()); // logs "<p>foo</p>"
     </script>
 
+### immutables `Boolean|Object` *(default: false)*
+
+If enabled, the editor disables the editing and command execution in elements marked with editablecontent="false" attribute.
+
+#### Example
+
+    <textarea id="editor"></textarea>
+    <script>
+    $("#editor").kendoEditor({
+      tools: [
+        "bold", "italic", "underline", "justifyLeft", "justifyCenter", "justifyRight", "insertUnorderedList", "insertOrderedList", "indent", "outdent", "createLink", "unlink", "insertImage", "createTable", "viewHtml"
+      ],
+      value: '<p>editable content</p><p contenteditable="false">content, which <span style="color:red;">can not</span> be changed</p><p contenteditable="false">immutable content</p>',
+      immutables: true
+    });
+    </script>
+
+### immutables.deserialization `Function`
+
+Callback that allows custom deserialization of an immutable element. The callback accepts two arguments. The DOM element representing the immutable element in the html view and the immutable DOM element, which will be restored.
+
+#### Example
+
+    <textarea id="editor"></textarea>
+    <script>
+    $("#editor").kendoEditor({
+      tools: [
+        "bold", "italic", "underline", "justifyLeft", "justifyCenter", "justifyRight", "insertUnorderedList", "insertOrderedList", "indent", "outdent", "createLink", "unlink", "insertImage", "createTable", "viewHtml"
+      ],
+      value: '<p>editable content</p><p contenteditable="false">content, which <span style="color:red;">can not</span> be changed</p><p contenteditable="false">editable content</p>',
+      immutables: {
+        deserialization: function(node, immutable) {
+          immutable.style.backgroundColor = "red";
+        }
+      }
+    });
+    </script>
+
+### immutables.serialization `String|Function`
+
+Kendo template or a callback that allows custom serialization of an immutable element. The callback accepts DOM element as only parameter and is expected to return the HTML source of a DOM element.
+
+#### Example - specify serialization as a kendo template
+
+    <textarea id="editor"></textarea>
+    <script>
+    $("#editor").kendoEditor({
+      tools: [
+        "bold", "italic", "underline", "justifyLeft", "justifyCenter", "justifyRight", "insertUnorderedList", "insertOrderedList", "indent", "outdent", "createLink", "unlink", "insertImage", "createTable", "viewHtml"
+      ],
+      value: '<p>editable content</p><p contenteditable="false">content, which <span style="color:red;">can not</span> be changed</p><p contenteditable="false">immutable content</p>',
+      immutables: {
+          serialization: "<#= data.nodeName # data=\"immutable-element\"></#= data.nodeName #>"
+      }
+    });
+    </script>
+
+#### Example - specify serialization as a function
+
+    <textarea id="editor"></textarea>
+    <script>
+    $("#editor").kendoEditor({
+      tools: [
+        "bold", "italic", "underline", "justifyLeft", "justifyCenter", "justifyRight", "insertUnorderedList", "insertOrderedList", "indent", "outdent", "createLink", "unlink", "insertImage", "createTable", "viewHtml"
+      ],
+      value: '<p>editable content</p><p contenteditable="false">content, which <span style="color:red;">can not</span> be changed</p><p contenteditable="false">immutable content</p>',
+      immutables: {
+        serialization: function(node) {
+          var tagName = node.tagName;
+          return "<" + tagName + ">" + "</" + tagName + ">";
+        }
+      }
+    });
+    </script>
+
 ### messages `Object`
 
 Defines the text of the labels that are shown within the editor. Used primarily for localization.

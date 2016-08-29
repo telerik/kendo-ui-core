@@ -250,7 +250,7 @@ var __meta__ = { // jshint ignore:line
             url = url || paneConfig.contentUrl;
 
             if (url) {
-                pane.append("<span class='k-icon k-loading k-pane-loading' />");
+                pane.append("<span class='k-icon k-i-loading k-pane-loading' />");
 
                 if (kendo.isLocalUrl(url)) {
                     jQuery.ajax({
@@ -352,11 +352,16 @@ var __meta__ = { // jshint ignore:line
                     .toggleClass("k-splitbar-static-" + orientation,
                         !draggable && !prevCollapsible && !nextCollapsible)
                     .html(
-                        catIconIf("k-collapse-prev", prevCollapsible && !prevCollapsed && !nextCollapsed) +
-                        catIconIf("k-expand-prev", prevCollapsible && prevCollapsed && !nextCollapsed) +
-                        catIconIf("k-resize-handle", draggable) +
-                        catIconIf("k-collapse-next", nextCollapsible && !nextCollapsed && !prevCollapsed) +
-                        catIconIf("k-expand-next", nextCollapsible && nextCollapsed && !prevCollapsed)
+                        catIconIf("k-collapse-prev k-i-sarrow-n", prevCollapsible && !prevCollapsed && !nextCollapsed && orientation == VERTICAL) +
+                        catIconIf("k-collapse-prev k-i-sarrow-w", prevCollapsible && !prevCollapsed && !nextCollapsed && orientation == HORIZONTAL) +
+                        catIconIf("k-expand-prev k-i-sarrow-n", prevCollapsible && prevCollapsed && !nextCollapsed && orientation == VERTICAL) +
+                        catIconIf("k-expand-prev k-i-sarrow-w", prevCollapsible && prevCollapsed && !nextCollapsed && orientation == HORIZONTAL) +
+                        catIconIf("k-resize-handle k-i-hbar", draggable && orientation == VERTICAL) +
+                        catIconIf("k-resize-handle k-i-vbar", draggable && orientation == HORIZONTAL) +
+                        catIconIf("k-collapse-next k-i-sarrow-s", nextCollapsible && !nextCollapsed && !prevCollapsed && orientation == VERTICAL) +
+                        catIconIf("k-collapse-next k-i-sarrow-e", nextCollapsible && !nextCollapsed && !prevCollapsed && orientation == HORIZONTAL) +
+                        catIconIf("k-expand-next k-i-sarrow-s", nextCollapsible && nextCollapsed && !prevCollapsed && orientation == VERTICAL) +
+                        catIconIf("k-expand-next k-i-sarrow-e", nextCollapsible && nextCollapsed && !prevCollapsed && orientation == HORIZONTAL)
                     );
 
             if (!draggable && !prevCollapsible && !nextCollapsible) {

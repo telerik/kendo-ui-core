@@ -586,4 +586,29 @@ asyncTest("value method selects item that exists only in unfiltered source (asyn
 
         equal(multiselect.header, null);
     });
+
+    test("setOptions re-renders noDataTemplate", function() {
+        var multiselect = new MultiSelect(select, {
+            noDataTemplate: "test"
+        });
+
+        multiselect.setOptions({
+            noDataTemplate: "no data"
+        });
+
+        equal(multiselect.noData.text(), "no data");
+    });
+
+    test("setOptions removes noData template", function() {
+        var multiselect = new MultiSelect(select, {
+            noDataTemplate: "test"
+        });
+
+        multiselect.setOptions({
+            noDataTemplate: null
+        });
+
+        equal(multiselect.noData, null);
+    });
+
 })();

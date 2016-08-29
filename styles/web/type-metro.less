@@ -14,7 +14,7 @@
 @error-background-color: @error;
 @error-border-color: #e20000;
 @error-text-color: contrast(@base, lighten(@normal-text-color, 1%), darken(@normal-text-color, 20%), 0.5);
-@disabled-text-color: #cccccc;
+@disabled-text-color: contrast(@base, lighten(@base, 42%), darken(@base, 20%), 0.5);
 @validation-background-color: @warning;
 @validation-border-color: @warning;
 @validation-text-color: contrast(@validation-background-color, lighten(@warning, 80%), darken(@warning, 60%), 0.5);
@@ -47,11 +47,12 @@
 @input-background-color: @base;
 @shadow-color: fadeout(contrast(@base), 80%);
 @upload-progress-background-color: @info;
-@upload-progress-text-color: contrast(@upload-progress-background-color, lighten(@info, 70%), darken(@info, 60%), 0.5);
-@upload-success-background-color: @success;
-@upload-success-text-color: contrast(@upload-success-background-color, lighten(@success, 70%), darken(@success, 60%), 0.5);
-@upload-error-background-color: @error;
-@upload-error-text-color: contrast(@upload-error-background-color, lighten(@error, 70%), darken(@error, 60%), 0.5);
+@upload-progress-text-color: contrast(@info, @info, darken(@info, 60%), 0.5);
+@upload-success-background-color: contrast(@success, @success, darken(@success, 55%), 0.5);
+@upload-success-text-color: contrast(@success, @success, darken(@success, 55%), 0.5);
+@upload-error-background-color: contrast(@error, @error, darken(@error, 53%), 0.5);
+@upload-error-text-color: contrast(@error, @error, darken(@error, 53%), 0.5);
+@upload-invalid-color: @error;
 @task-summary-color: contrast(@base, lighten(@widget-text-color, 25%), darken(@widget-text-color, 25%), 0.5);
 @task-summary-selected-color: contrast(@base, lighten(@selected-background-color, 15%), darken(@selected-background-color, 25%), 0.5);
 @loading-panel-color: @base;
@@ -475,7 +476,9 @@ html .km-pane-wrapper .k-header
 }
 
 .k-loading,
-.k-state-hover .k-loading
+.k-state-hover .k-loading,
+.k-i-loading,
+.k-state-hover .k-i-loading
 {
     background-image: url('@{image-folder}/loading.gif');
     background-position: 50% 50%;
@@ -651,6 +654,10 @@ html .km-pane-wrapper .k-header
     background-color: @button-hover-background-color;
 }
 
+.k-button.k-state-focused {
+    color: @button-hover-text-color;
+}
+
 .k-tabstrip-scrollable .k-button-bare:hover {
     background: @button-hover-background-color !important;
 }
@@ -698,6 +705,21 @@ html .km-pane-wrapper .k-header
 .k-menu .k-state-hover>.k-state-active
 {
     background-color: transparent;
+}
+
+.k-button-bare {
+	&.k-state-focused .k-font-icon,
+	&:focus .k-font-icon {
+		text-shadow: 0 0 3px currentColor;
+	}
+}
+
+html .k-mediaplayer-toolbar .k-button-bare {
+	&:active,
+	&.k-state-active,
+	&.k-state-active:hover {
+		color: @accent;
+	}
 }
 
 .k-menu {
@@ -1023,8 +1045,7 @@ div.k-filebrowser-dropzone em
 
 .km-pane-wrapper .k-mobile-list input:not([type="checkbox"]):not([type="radio"]),
 .km-pane-wrapper .km-pane .k-mobile-list select:not([multiple]),
-.km-pane-wrapper .k-mobile-list textarea,
-.k-dropdown .k-state-focused .k-input
+.km-pane-wrapper .k-mobile-list textarea
 {
     color: @widget-text-color;
 }
@@ -1045,7 +1066,8 @@ div.k-filebrowser-dropzone em
     }
 }
 
-.k-dropdown .k-state-hover .k-input
+.k-dropdown .k-state-hover .k-input,
+.k-dropdown .k-state-focused .k-input
 {
     color: @hover-text-color;
 }
@@ -1091,7 +1113,8 @@ div.k-filebrowser-dropzone em
     color: @normal-text-color;
 }
 
-.k-upload-status .k-button:hover .k-delete {
+.k-upload-status .k-button:hover .k-delete,
+.k-upload-status .k-button:hover .k-i-delete {
     background-color: @accent;
 }
 
@@ -1228,7 +1251,6 @@ div.k-filebrowser-dropzone em
 
 .k-file
 {
-    background-color: @active-background-color;
     border-color: @cell-border-color;
 }
 
@@ -1262,6 +1284,59 @@ div.k-filebrowser-dropzone em
     background-color: @upload-error-background-color;
 }
 
+.k-file-extension-wrapper,
+.k-multiple-files-extension-wrapper {
+    color: @disabled-text-color;
+    border-color: @disabled-text-color;
+}
+
+.k-file-invalid .k-file-name-invalid {
+    color: @upload-error-text-color;
+}
+
+.k-file-invalid-extension-wrapper,
+.k-multiple-files-invalid-extension-wrapper {
+    color: @upload-error-text-color;
+    border-color: @upload-invalid-color;
+}
+
+.k-file-extension-wrapper:before,
+.k-multiple-files-extension-wrapper:before {
+    background-color: @base;
+    border-color: transparent transparent @disabled-text-color @disabled-text-color;
+}
+
+.k-file-invalid-extension-wrapper:before,
+.k-multiple-files-invalid-extension-wrapper:before {
+    background-color: @widget-background-color;
+    border-color: transparent transparent @upload-invalid-color @upload-invalid-color;
+}
+
+.k-multiple-files-extension-wrapper:after {
+    border-top-color: @disabled-text-color;
+    border-left-color: @disabled-text-color;
+}
+
+.k-multiple-files-invalid-extension-wrapper:after {
+    border-top-color: @upload-invalid-color;
+    border-left-color: @upload-invalid-color;
+}
+
+.k-file-size,
+.k-file-information,
+.k-file-validation-message {
+    color: @disabled-text-color;
+}
+
+.k-upload .k-upload-selected {
+    color: @accent;
+    border-color: @widget-border-color;
+
+    &:hover {
+        color: @button-hover-text-color;
+    }
+}
+
 /* ImageBrowser */
 
 .k-tile
@@ -1281,7 +1356,9 @@ div.k-filebrowser-dropzone em
 }
 
 .k-filebrowser .k-tile .k-folder,
-.k-filebrowser .k-tile .k-file
+.k-filebrowser .k-tile .k-file,
+.k-filebrowser .k-tile .k-i-folder,
+.k-filebrowser .k-tile .k-i-file
 {
     background-image: url('@{image-folder}/imagebrowser.png');
     background-size: auto auto;
@@ -1993,8 +2070,11 @@ html .km-pane-wrapper .km-widget,
     color: @drop-down-text-color;
 }
 
+.k-nodata {
+    color: @disabled-text-color;
+}
+
 .k-dropdown .k-input,
-.k-dropdown .k-state-focused .k-input,
 .k-menu .k-popup
 {
     color: @drop-down-text-color;
@@ -2027,6 +2107,7 @@ html .km-pane-wrapper .km-widget,
 }
 
 .k-tabstrip-items .k-state-hover .k-link,
+.k-panelbar > li > .k-link.k-state-hover,
 .k-panelbar > li.k-state-hover > .k-link,
 .k-panelbar>li.k-state-default>.k-link.k-state-hover
 {
@@ -2055,6 +2136,11 @@ html .km-pane-wrapper .km-widget,
     background-color: @active-background-color;
     .composite-background(@active-gradient);
     border-color: @active-border-color;
+}
+
+.k-tabstrip-top .k-tabstrip-items .k-state-active,
+.k-panelbar .k-tabstrip-top .k-tabstrip-items .k-state-active {
+    border-bottom-color: @active-background-color;
 }
 
 .k-tabstrip .k-content.k-state-active
@@ -2288,6 +2374,7 @@ html .km-pane-wrapper .km-widget,
 @media only screen and (-webkit-min-device-pixel-ratio: 1.2),
        only screen and (min-device-pixel-ratio: 1.2) {
     .k-icon:not(.k-loading),
+    .k-icon:not(.k-i-loading),
     .k-grouping-dropclue,
     .k-drop-hint,
     .k-callout,
@@ -2337,6 +2424,7 @@ html .km-pane-wrapper .km-widget,
     .k-webkit,
     .k-ff,
     .k-ie11,
+    .k-edge,
     .k-safari {
 
         .km-pane-wrapper .k-pager-numbers,
@@ -2526,3 +2614,78 @@ html .km-pane-wrapper .km-widget,
 @import "themes/spreadsheet.less";
 
 @spreadsheet-page-orientation-border-color: @button-border-color;
+
+/* Dialog */
+
+.k-dialog {
+    border-color: @widget-border-color;
+    .k-window-titlebar {
+        border-bottom-width: 0;
+    }
+    .k-dialog-title {
+        color: @active-text-color;
+    }
+    .k-dialog-buttongroup {
+        &.k-dialog-button-layout-stretched {
+            width: 100%;
+            .k-button {
+                display: inline-block;
+                padding: 0.9em 0 0.9em 0;
+                border-radius: 0;
+                border-bottom: 0;
+                border-width: 1px 0 0 1px;
+            }
+            li.k-button:first-child {
+            border-bottom-left-radius: @border-radius;
+            border-left: 0;
+            }
+            li.k-button:last-child {
+                border-bottom-right-radius: @border-radius;
+                border-right: 0;
+            }
+        }
+        &.k-dialog-button-layout-normal {
+            width: auto;
+            margin: 0;
+            padding: 1em;
+            text-align: left;
+            .k-button {
+                padding: 0.2em 1.5em;
+                margin-left: 0.5em;
+                &:first-child {
+                    margin-left: 0;
+                }
+            }
+        }
+    }
+}
+.k-rtl .k-dialog {
+    a.k-dialog-action.k-link {
+        top: 1em;
+        left: 1em;
+    }
+    .k-dialog-buttongroup {
+        &.k-dialog-button-layout-stretched {
+            li.k-button:first-child {
+                border-right-width: 0;
+                border-left-width: 1px;
+                border-bottom-right-radius: @border-radius;
+            }
+            li.k-button:last-child {
+                border-left-width: 0;
+                border-right-width: 1px;
+                border-bottom-left-radius: @border-radius;
+            }
+        }
+        &.k-dialog-button-layout-normal {
+            text-align: right;
+            .k-button {
+                margin-right: 0;
+                margin-left: 0.5em;
+                &:last-child {
+                    margin-left: 0;
+                }
+            }
+        }
+    }
+}

@@ -7,7 +7,7 @@ slug: howto_set_cell_color_basedon_foreignkey_values_grid
 
 # Set Cell Color Based on ForeignKey Values
 
-The example below demonstrates how to set a text cell color based on ForeignKey values in Kendo UI Grid.
+The example below demonstrates how to set the color of a text cell based on ForeignKey values in a Kendo UI Grid.
 
 ###### Example
 

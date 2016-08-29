@@ -175,6 +175,20 @@
         equal(footer.html(), multiselect.dataSource.total());
     });
 
+    test("adjust height if footer template", function() {
+        var multiselect = new MultiSelect(select, {
+            animation: false,
+            autoBind: false,
+            dataSource: ["item1", "item2", "item3", "item4", "item5"],
+            footerTemplate: "<div>Footer</div>",
+            height: 100
+        });
+
+        multiselect.open();
+
+        ok(multiselect.listView.content.height() < 100);
+    });
+
     test("MultiSelect creates DataSource", function() {
         var multiselect = new MultiSelect(select);
 
@@ -769,7 +783,7 @@
         var multiselect = select.attr("title", "foo").kendoMultiSelect().data("kendoMultiSelect");
         var title = select.attr("title");
 
-        equal(multiselect.wrapper.attr("title"), title);
+        equal(multiselect.input.attr("title"), title);
     });
 
     test("MultiSelect updates selected text when selected items are changed", function() {
@@ -841,5 +855,107 @@
         multiselect.value([1, 3, 5]);
 
         equal(multiselect.calls("_render"), 0);
+    });
+
+    //no data template
+    test("MultiSelect builds a noDataTemplate", function() {
+        var multiselect = new MultiSelect(select, {
+            noDataTemplate: "test"
+        });
+
+        ok(multiselect.noDataTemplate);
+    });
+
+    test("render nodata container", function() {
+        var multiselect = new MultiSelect(select, {
+            noDataTemplate: "test"
+        });
+
+        ok(multiselect.noData);
+        ok(multiselect.noData.hasClass("k-nodata"));
+        equal(multiselect.noData.children("div").length, 1);
+        equal(multiselect.noData.text(), multiselect.options.noDataTemplate);
+    });
+
+    test("render nodata before footerTemplate", function() {
+        var multiselect = new MultiSelect(select, {
+            noDataTemplate: "test",
+            footerTemplate: "footer"
+        });
+
+        ok(multiselect.noData.next().hasClass("k-footer"));
+    });
+
+    test("hides noData template if any data", function() {
+        var multiselect = new MultiSelect(select, {
+            dataValueField: "name",
+            dataTextField: "name",
+            dataSource: {
+                data: [
+                    { name: "item1", type: "a" },
+                    { name: "item2", type: "a" },
+                    { name: "item3", type: "b" }
+                ]
+            },
+            noDataTemplate: "no data",
+            template: '#:data.name#'
+        });
+
+        multiselect.open();
+
+        ok(!multiselect.noData.is(":visible"));
+    });
+
+    test("shows noData template if no data", function() {
+        var multiselect = new MultiSelect(select, {
+            dataValueField: "name",
+            dataTextField: "name",
+            dataSource: {
+                data: [ ]
+            },
+            noDataTemplate: "no data",
+            template: '#:data.name#'
+        });
+
+        multiselect.open();
+
+        ok(multiselect.noData.is(":visible"));
+    });
+
+    test("hides noData template if widget is bound on subsequent call", function() {
+        var multiselect = new MultiSelect(select, {
+            dataValueField: "name",
+            dataTextField: "name",
+            dataSource: {
+                data: [ ]
+            },
+            noDataTemplate: "no data",
+            template: '#:data.name#'
+        });
+
+        multiselect.open();
+
+        ok(multiselect.noData.is(":visible"));
+
+        multiselect.dataSource.data([
+            { name: "item1", type: "a" },
+            { name: "item2", type: "a" },
+            { name: "item3", type: "b" }
+        ]);
+
+        ok(!multiselect.noData.is(":visible"));
+    });
+
+    test("update noData template on dataBound", function() {
+        var multiselect = new MultiSelect(select, {
+            autoBind: true,
+            noDataTemplate: "#: instance.dataSource.total() #"
+        });
+
+        var noData = multiselect.noData;
+
+        multiselect.dataSource.data(["Item1"]);
+
+        equal(noData.text(), multiselect.dataSource.total());
     });
 })();

@@ -39,7 +39,7 @@ The example below demonstrates how to initialize Hybrid UI Collapsible based on 
 
 ###### Example
 
-    var collapsible = $("#collapsible").kendoMobileButtonGroup();
+    var collapsible = $("#collapsible").kendoMobileCollapsible();
 
 ## Customization
 

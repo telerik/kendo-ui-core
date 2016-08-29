@@ -127,7 +127,8 @@ var __meta__ = { // jshint ignore:line
             delay: 200,
             dataTextField: "",
             dataValueField: "",
-            minLength: 0,
+            minLength: 1,
+            enforceMinLength: false,
             height: 200,
             highlightFirst: true,
             filter: "none",
@@ -173,7 +174,7 @@ var __meta__ = { // jshint ignore:line
             that._inputWrapper.off(ns);
             clearTimeout(that._pasteTimeout);
 
-            that._arrow.parent().off(CLICK + " " + MOUSEDOWN);
+            that._arrow.off(CLICK + " " + MOUSEDOWN);
             that._clear.off(CLICK + " " + MOUSEDOWN);
 
             Select.fn.destroy.call(that);
@@ -185,11 +186,6 @@ var __meta__ = { // jshint ignore:line
 
         _arrowClick: function() {
             this._toggle();
-        },
-
-        _clearClick: function() {
-            this.value(null);
-            this.trigger("change");
         },
 
         _inputFocus: function() {
@@ -237,7 +233,7 @@ var __meta__ = { // jshint ignore:line
                 readonly = options.readonly,
                 wrapper = that._inputWrapper.off(ns),
                 input = that.element.add(that.input.off(ns)),
-                arrow = that._arrow.parent().off(CLICK + " " + MOUSEDOWN),
+                arrow = that._arrow.off(CLICK + " " + MOUSEDOWN),
                 clear = that._clear;
 
             if (!readonly && !disable) {
@@ -253,7 +249,7 @@ var __meta__ = { // jshint ignore:line
                 arrow.on(CLICK, proxy(that._arrowClick, that))
                      .on(MOUSEDOWN, function(e) { e.preventDefault(); });
 
-                clear.on(CLICK, proxy(that._clearClick, that))
+                clear.on(CLICK, proxy(that._clearValue, that))
                     .on(MOUSEDOWN, function(e) { e.preventDefault(); });
 
                 that.input
@@ -284,7 +280,12 @@ var __meta__ = { // jshint ignore:line
             if ((!that.listView.bound() && state !== STATE_FILTER) || state === STATE_ACCEPT) {
                 that._open = true;
                 that._state = STATE_REBIND;
-                that._filterSource();
+                if (that.options.minLength !== 1) {
+                    that.refresh();
+                    that.popup.open();
+                } else {
+                    that._filterSource();
+                }
             } else if (that._allowOpening()) {
                 that.popup.open();
                 that._focusItem();
@@ -394,6 +395,10 @@ var __meta__ = { // jshint ignore:line
 
             that._presetValue = false;
 
+            that._renderFooter();
+            that._renderNoData();
+            that._toggleNoData(!data.length);
+
             that._resizePopup();
 
             that.popup.position();
@@ -425,7 +430,6 @@ var __meta__ = { // jshint ignore:line
             }
 
             that._hideBusy();
-            that._updateFooter();
             that.trigger("dataBound");
         },
 
@@ -677,7 +681,11 @@ var __meta__ = { // jshint ignore:line
             this._blur();
         },
 
-        _filter: function(word) {
+        _inputValue: function() {
+            return this.text();
+        },
+
+        _searchByWord: function(word) {
             var that = this;
             var options = that.options;
             var dataSource = that.dataSource;
@@ -745,7 +753,7 @@ var __meta__ = { // jshint ignore:line
             input = wrapper.find(SELECTOR);
 
             if (!input[0]) {
-                wrapper.append('<span tabindex="-1" unselectable="on" class="k-dropdown-wrap k-state-default"><input ' + name + 'class="k-input" type="text" autocomplete="off"/><span tabindex="-1" unselectable="on" class="k-select"><span unselectable="on" class="k-icon k-i-arrow-s">select</span></span></span>')
+                wrapper.append('<span tabindex="-1" unselectable="on" class="k-dropdown-wrap k-state-default"><input ' + name + 'class="k-input" type="text" autocomplete="off"/><span unselectable="on" class="k-select" aria-label="select"><span class="k-icon k-i-arrow-s"></span></span></span>')
                     .append(that.element);
 
                 input = wrapper.find(SELECTOR);
@@ -760,7 +768,6 @@ var __meta__ = { // jshint ignore:line
             }
 
             input.addClass(element.className)
-                 .val(this.options.text || element.value)
                  .css({
                     width: "100%",
                     height: element.style.height
@@ -782,11 +789,12 @@ var __meta__ = { // jshint ignore:line
 
             that._focused = that.input = input;
             that._inputWrapper = $(wrapper[0].firstChild);
-            that._arrow = wrapper.find(".k-icon:last")
+            that._arrow = wrapper.find(".k-select")
                 .attr({
                     "role": "button",
                     "tabIndex": -1
                 });
+
             if (element.id) {
                 that._arrow.attr("aria-controls", that.ul[0].id);
             }

@@ -8,7 +8,9 @@
 /* AutoComplete */
 
 .k-rtl .k-autocomplete .k-loading,
-.k-rtl .k-multiselect .k-loading
+.k-rtl .k-multiselect .k-loading,
+.k-rtl .k-autocomplete .k-i-loading,
+.k-rtl .k-multiselect .k-i-loading
 {
     right: auto;
     left: 3px;
@@ -191,6 +193,8 @@
 .k-rtl .k-header > .k-header-column-menu
 {
     float: left;
+    margin-left: -.6em;
+    margin-right: 0;
 }
 
 .k-rtl .k-grid-header .k-filterable .k-link
@@ -308,7 +312,12 @@
 .k-rtl .k-dirty
 {
     border-color: #f00 #f00 transparent transparent;
-    margin: -0.45em -0.6em 0 0;
+    margin: -0.4em -0.5em 0 0;
+}
+
+.k-webkit .k-rtl .k-dirty
+{
+    margin: -0.4em 0.7em 0 0;
 }
 
 /* Pager */
@@ -515,7 +524,11 @@
     padding-left: 20px;
 }
 
-.k-rtl .k-notification-wrap > .k-i-note
+.k-rtl .k-notification-wrap > .k-i-note,
+.k-rtl .k-notification-wrap > .k-i-info,
+.k-rtl .k-notification-wrap > .k-i-success,
+.k-rtl .k-notification-wrap > .k-i-warning,
+.k-rtl .k-notification-wrap > .k-i-erorr
 {
     margin-right: 0;
     margin-left: 4px;
@@ -923,7 +936,13 @@
 .k-rtl .k-treeview .k-plus,
 .k-rtl .k-treeview .k-minus,
 .k-rtl .k-treeview .k-plus-disabled,
-.k-rtl .k-treeview .k-minus-disabled
+.k-rtl .k-treeview .k-minus-disabled,
+.k-rtl .k-treeview .k-i-plus,
+.k-rtl .k-treeview .k-i-minus,
+.k-rtl .k-treeview .k-i-plus-disabled,
+.k-rtl .k-treeview .k-i-minus-disabled,
+.k-rtl .k-treeview .k-i-expand,
+.k-rtl .k-treeview .k-i-collapse
 {
     margin-left: 0;
     margin-right: -16px;
@@ -987,4 +1006,35 @@
 {
     right: auto;
     left: .5em;
+}
+
+/* Dialog */
+
+.k-rtl .k-dialog, .k-rtl.k-dialog
+{
+    a.k-dialog-action.k-link
+    {
+        position: absolute;
+        right: auto;
+        left: 1em;
+    }
+
+    .k-dialog-buttongroup
+    {
+        &.k-dialog-button-layout-stretched
+        {
+            li.k-button:first-child
+            {
+                border-right-width: 0;
+                border-left-width: 1px;
+                border-bottom-left-radius: 0;
+            }
+            li.k-button:last-child
+            {
+                border-left-width: 0;
+                border-right-width: 0;
+                border-bottom-right-radius: 0;
+            }
+        }
+    }
 }

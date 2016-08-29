@@ -10,28 +10,15 @@ position: 4
 
 The native data format for the Spreadsheet widget is [JSON]({% slug loadand_saveas_json_spreadsheet_widget %}). There is also the built-in support for [exporting to Excel]({% slug export_toexcel_spreadsheet_widget %}) that runs in the browser.
 
-For anything beyond that, Kendo UI ships a .NET based server-side module established on [Telerik RadSpreadProcessing](http://docs.telerik.com/devtools/wpf/controls/radspreadprocessing/overview), part of the Document Processing Library.
+To export huge datasets to Excel, a well-suited solution is the new [RadSpreadStreamProcessing library](http://docs.telerik.com/devtools/document-processing/libraries/radspreadstreamprocessing/overview) which is part of [Telerik Document Processing (TDP) by Progress](http://docs.telerik.com/devtools/document-processing/introduction).  
 
-It allows importing, exporting, and processing data from various formats:
+For examples on how to export Excel files, refer to the [RadSpreadProcessing library](http://docs.telerik.com/devtools/document-processing/libraries/radspreadprocessing/overview).
 
-* Excel Microsoft Office Open XML Spreadsheet (.xlsx)
-* Comma separated values (.csv)
-* Tab separated values (.txt)
-* Portable document format (.pdf) (export only)
-
-The .NET server-side module is distributed as a part of the [UI for ASP.NET MVC bundle](/aspnet-mvc/introduction).
-
-Continue to the [Spreadsheet Processing]({% slug spreadsheet_processing_spreadsheet_mvc %}) help topic for more information.
-
-## Licensing
-
-The DPL module is available with the Kendo UI Enterprise and DevCraft bundles.
+For more information on the Spreadsheet server-side processing, refer to [this article]({% slug spreadsheet_processing_spreadsheet_mvc %}).
 
 ## See Also
 
-Other articles on Kendo UI Spreadsheet:
-
-* [API Reference](/api/javascript/ui/spreadsheet)
+* [Spreadsheet API Reference](/api/javascript/ui/spreadsheet)
 * [Load and Save Data as JSON]({% slug loadand_saveas_json_spreadsheet_widget %})
 * [Data Source Binding]({% slug bind_todata_source_spreadsheet_widget %})
 * [Export to Excel]({% slug export_toexcel_spreadsheet_widget %})

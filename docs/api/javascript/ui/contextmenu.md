@@ -642,9 +642,9 @@ Appends an item to a **ContextMenu** in the specified referenceItem's sub menu (
 
 Item to be appended, specified as a JSON object. An array of objects can also be passed.
 
-##### referenceItem `String|jQuery`
+##### referenceItem `String|jQuery` *(optional)*
 
-A reference item to append the new item in. Root context menu if not specified.
+A reference item to append the new item in. If omitted, the new item will be appended to the as a root item.
 
 #### Returns
 
@@ -695,9 +695,9 @@ If called without arguments, will close the ContextMenu. If passed an item, it w
 `kendo.ui.ContextMenu` Returns the ContextMenu object to support chaining.
 
 ### destroy
-Prepares the **ContextMenu** for safe removal from DOM. Detaches all event handlers and removes jQuery.data attributes to avoid memory leaks. Calls destroy method of any child Kendo widgets.
+Safely removes the **ContextMenu** from the DOM. Detaches all event handlers and removes jQuery.data attributes to avoid memory leaks. Calls destroy method of any child Kendo widgets.
 
-> **Important:** This method does not remove the ContextMenu element from DOM.
+If a new ContextMenu widget should be created afterwards, use a new `<ul>` for that, as the old one no longer exists.
 
 #### Example
 

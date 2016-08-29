@@ -428,4 +428,10 @@ test("toString rounds 17.115 correcly", function() {
     equal(toString(17.115, "#.##"), "17.12");
 });
 
+test("toString rounds really big numbers without crashing", function() {
+    var bigNumber = 5.4654647884512e+96;
+
+    equal(toString(bigNumber, "#,#.00"), bigNumber);
+});
+
 }());

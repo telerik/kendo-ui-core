@@ -7,7 +7,8 @@ slug: howto_showtotalstacked_charts
 
 # Show Total for Stacked Series
 
-The example below demonstrates how to place a label with the stack total on top of column or bar series in a Kendo UI Chart. It works by iterating all series and building a template expression that sums up the values of the visible series. This needs to be done initially, in the [`dataBound` event](/api/javascript/dataviz/ui/chart#events-dataBound), and on each [`legendItemClick`](/api/javascript/dataviz/ui/chart#events-legendItemClick).
+Starting with the 2016 R3 release a `stackValue` field is available in the label template, series visual and event arguments.
+You can use it to display the cumulative point value for stacked series.
 
 ###### Example
 
@@ -39,51 +40,14 @@ The example below demonstrates how to place a label with the stack total on top 
             name: "b"
           },{
             field: "c",
-            name: "c"
-          }],
-          categoryAxis: {
-            field: "category"
-          },
-          legend: {
-            visible: true,
-            position: "bottom"
-          },
-          legendItemClick: function(e) {
-            setTotalLabel(e.sender, e.seriesIndex);
-          },
-          dataBound: function(e) {
-            setTotalLabel(e.sender);
-          }
-        })
-      })
-
-      function setTotalLabel(chart, toggledSeriesIndex) {
-        var series = chart.options.series;
-        var lastSeries = {};
-        var fields = [];
-
-        for (var i = 0; i < series.length; i++) {
-          var visible = series[i].visible;
-
-          // We're about to toggle the visibility of the clicked series
-          if (i === toggledSeriesIndex) {
-            visible = !visible;
-          }
-
-          if (visible) {
-            fields.push("dataItem." + series[i].field);
-            lastSeries = series[i];
-          }
-
-          // Clean-up existing labels
-          series[i].labels = {};
-        }
-
-        lastSeries.labels = {
-          visible: true,
-          template: "#=" + fields.join("+") + "#"
-        };
-      }
+            name: "c",
+            labels: {
+                template: "#= stackValue #",
+                visible: true
+            }
+          }]
+        });
+      });
     </script>
 ```
 

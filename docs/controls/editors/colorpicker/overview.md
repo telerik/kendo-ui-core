@@ -84,20 +84,20 @@ This shows only white, black and red. Use any color in either short (3 digits) o
 
 ### More Options
 
-For more options please see the [API page](../../api/javascript/color).
+For more options please see the [API page](/api/javascript/color).
 
 ## See Also
 
 Other articles on Kendo UI ColorPicker:
 
-* [Overview of the ASP.NET MVC HtmlHelper Extension for the ColorPicker Widget](/aspnet-mvc/helpers/colorpicker/overview)
+* [Overview of the ASP.NET MVC HtmlHelper Extension for the ColorPicker Widget]({% slug overview_colorpickerhelper_aspnetmvc %})
 * [Overview of the ColorPicker JSP Tag]({% slug overview_colorpicker_uiforjsp %})
 * [Overview of the ColorPicker PHP Class](/php/widgets/colorpicker/overview)
 * [ColorPicker JavaScript API Reference](/api/javascript/ui/colorpicker)
 
 Articles on Kendo UI ColorPalette:
 
-* [Overview of the ASP.NET MVC HtmlHelper Extension for the ColorPalette Widget](/aspnet-mvc/helpers/colorpalette/overview)
+* [Overview of the ASP.NET MVC HtmlHelper Extension for the ColorPalette Widget]({% slug overview_colorpalettehelper_aspnetmvc %})
 * [Overview of the ColorPalette JSP Tag]({% slug overview_colorpalette_uiforjsp %})
 * [Overview of the ColorPalette PHP Class](/php/widgets/colorpalette/overview)
 * [ColorPalette JavaScript API Reference](/api/javascript/ui/colorpalette)

@@ -10,15 +10,19 @@ slug: troubleshooting_common_issues_multiselect_kendoui
 
 This page provides solutions for common problems you may encounter while working with the Kendo UI MultiSelect widget.
 
+## DataSource
+
+### Selected Item Is Lost When Bound to Shared DataSource
+
 > **Important**  
 >
 > This issue can also be observed in [Kendo UI ComboBox]({% slug troubleshooting_common_issues_combobox_kendoui %}) and [Kendo UI DropDownList]({% slug troubleshooting_common_issues_dropdownlist_kendoui %}). The solution demonstrated in the examples below is fully applicable to the case of them both as well.
 
-## DataSource
+The selected item of the widget is directly related to the data source view. If it does not contain the selected item, then the widget will remove its current value. Such behavior is expected.
 
-### Selected Item Loosed When Bound to Shared DataSource
+**Solution**
 
-The selected item of the widget is directly related to the data source view. If it does not contain the selected item, then the widget will remove its current value. This behavior is expected and the solution is to use separate data sources.
+Use separate data sources.
 
 The example below demonstrates a sample issue.
 
@@ -49,9 +53,13 @@ The example below demonstrates the solution to the above issue.
         dataSource: new kendo.data.DataSource({ data: ds.data() });
     });
 
+### Repetitive Requests Are Performed while Filtering in ASP.NET
+
+For more information on handling repetitive requests performed while filtering in ASP.NET, refer to [this troubleshooting topic]({% slug troubleshooting_common_issues_dropdownlist_kendoui %}#repetitive-requests-are-performed-while-filtering-in-aspnet).
+
 ## See Also
 
-Other articles on Kendo UI MultiSelect:
+Other articles on the Kendo UI MultiSelect:
 
 * [MultiSelect JavaScript API Reference](/api/javascript/ui/multiselect)
 * [Grouping Functionality]({% slug grouping_kendoui_multiselect_widget %})

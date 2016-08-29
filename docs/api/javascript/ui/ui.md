@@ -42,6 +42,8 @@ The plugin function prefix, e.g. "Mobile" will register "kendoMobileFoo".
 
 Shows or hides a semi-transparent overlay with a loading image, with styling, which depends on the used theme.
 
+The method displays a semi-transparent background and an animated GIF. It is designed to be used during **asynchronous remote data requests**. Browsers normally do not animate GIFs during rendering processes or other resource-intensive tasks in the browser's main thread. If `kendo.ui.progress()` is used while performing such tasks, then the GIF animation may stop for a while. A possible workaround is to remove the animated GIF or replace it with a non-animated image, as shown below.
+
 #### Parameters
 
 ##### element `jQuery`
@@ -203,3 +205,18 @@ The flag, which indicates whether to show or hide the loading overlay.
     });
 
     </script>
+
+#### Example - remove or change the animated image
+
+```pseudo
+    /* remove */
+    .k-loading-mask .k-loading-image {
+      background-image: none;
+    }
+     
+    /* change */
+     
+    .k-loading-mask .k-loading-image {
+      background-image: url('...non-animated.image.here...');
+    }
+```

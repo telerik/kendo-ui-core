@@ -64,7 +64,7 @@
 
         $(document).on("ajaxSend", function(e, request, settings) {
             request.abort();
-            var loading = splitter.dom.find(".k-pane-loading.k-loading");
+            var loading = splitter.dom.find(".k-pane-loading.k-i-loading");
             equal(loading.length, 1);
             ok(loading.parent().is(".k-pane:first"));
         });

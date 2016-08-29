@@ -83,7 +83,7 @@ The example below demonstrates how to set the value for a range of cells.
     </script>
 ```
 
-## Data Import/Export
+## Data Import and Export
 
 The Spreadsheet offers methods for storing and loading data in a JSON format.
 
@@ -96,6 +96,10 @@ The Spreadsheet features a built-in [export-to-Excel]({% slug export_toexcel_spr
 Individual sheets can be bound to a Data Source in a special data-driven mode.
 
 For more information on the data-binding Spreadsheet functionality, refer to the [article on biding the Spreadsheet to a data source]({% slug bind_todata_source_spreadsheet_widget %}).
+
+## Mobile Integration
+
+The Spreadsheet is primarily targeted at desktop users. Its performance and functionality are limited on mobile devices.  
 
 ## See Also
 

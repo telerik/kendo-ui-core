@@ -388,13 +388,16 @@ var ngTestModule = $.noop, ngTest = $.noop, ngScope;
         module(name, config);
     }
 
-    ngTest = function(name, assertions, setup, check) {
+    ngTest = function(name, assertions, setup, check, async) {
         asyncTest(name, assertions, function() {
             setup();
             angular.bootstrap(QUnit.fixture.children()[0], [ 'kendo.tests' ]);
             setTimeout(function() {
-                start();
-                check();
+                if (!async) {
+                    start();
+                }
+
+                check(start);
             }, 100);
         });
     }

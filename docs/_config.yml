@@ -95,9 +95,12 @@ navigation:
         title: "FX"
     "controls/interactivity/draganddrop":
         title: "Drag and Drop"
+    "controls/media":
+        title: "Media"
+        position: 11
     "controls/hybrid":
         title: "Hybrid UI"
-        position: 11
+        position: 12
     "controls/hybrid/styles":
         title: "Styles and Appearance"
         position: 5
@@ -266,12 +269,15 @@ navigation:
         position: 10
     "aspnet-mvc/helpers/hybrid":
         title: "Hybrid UI"
+    "aspnet-mvc/how-to":
+        title: "How To"
+        position: 18
     "aspnet-mvc/troubleshoot":
         title: "Troubleshooting"
-        position: 18
+        position: 19
     "aspnet-mvc/tutorials":
         title: "Tutorials"
-        position: 19
+        position: 20
     "aspnet-mvc/tutorials/quickstart":
         title: "Quick Start Guide"
         position: 1
@@ -433,8 +439,10 @@ navigation:
         title: "Validator"
     "*autocomplete":
         title: "AutoComplete"
-    "*button":
+    "*/button":
         title: "Button"
+    "*/radiobutton":
+        title: "RadioButton"
     "*calendar":
         title: "Calendar"
     "*colorpalette":
@@ -449,6 +457,8 @@ navigation:
         title: "DatePicker"
     "*datetimepicker":
         title: "DateTimePicker"
+    "*dialog":
+        title: "Dialog"
     "*dropdownlist":
         title: "DropDownList"
     "*editor":
@@ -459,6 +469,10 @@ navigation:
         title: "PivotGrid"
     "*grid":
         title: "Grid"
+    "*media":
+        title: "Media"
+    "*mediaplayer":
+        title: "MediaPlayer"
     "*spreadsheet":
         title: "Spreadsheet"
     "*import-and-export-data":

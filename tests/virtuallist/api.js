@@ -67,6 +67,15 @@
 
     //rendering
 
+    asyncTest("screenHeight method gets the content height", 1, function() {
+        var virtualList = new VirtualList(container, virtualSettings);
+
+        asyncDataSource.read().then(function() {
+            start();
+            equal(virtualList.screenHeight(), CONTAINER_HEIGHT);
+        });
+    });
+
     asyncTest("scrollTo methods scrolls to a given height", 3, function() {
         var virtualList = new VirtualList(container, virtualSettings);
 
@@ -100,6 +109,29 @@
             }, 300);
         });
     });
+
+    asyncTest("scrollWith method scrolls content down", 1, function() {
+        var virtualList = new VirtualList(container, virtualSettings);
+
+        asyncDataSource.read().then(function() {
+            start();
+            virtualList.scrollWith(200);
+            equal(virtualList.content[0].scrollTop, 200);
+        });
+    });
+
+    asyncTest("scrollWith method scrolls content up", 1, function() {
+        var virtualList = new VirtualList(container, virtualSettings);
+
+        asyncDataSource.read().then(function() {
+            start();
+            scroll(virtualList.content, 200);
+            virtualList.scrollWith(-100);
+
+            equal(virtualList.content[0].scrollTop, 100);
+        });
+    });
+
 
     //events
 
@@ -823,28 +855,6 @@
             virtualList.setOptions({ selectable: false });
             virtualList.items().first().trigger("click");
         });
-    });
-
-    test("setOptions renders noDataTemplate", 3, function() {
-        var virtualList = new VirtualList(container, $.extend(virtualSettings, {
-            noDataTemplate: "no data"
-        }));
-
-        ok(virtualList.noData);
-        ok(virtualList.noData.hasClass("k-nodata"));
-        equal(virtualList.noData.text(), "no data");
-    });
-
-    test("setOptions removes noDataTemplate", 1, function() {
-        var virtualList = new VirtualList(container, $.extend(virtualSettings, {
-            noDataTemplate: "no data"
-        }));
-
-        virtualList.setOptions({
-            noDataTemplate: null
-        });
-
-        ok(!virtualList.noData);
     });
 
     test("bound returns false if the list is not bound yet", 1, function() {
@@ -1670,17 +1680,53 @@
         }));
 
         virtualList.dataSource.read().then(function() {
-            virtualList.value(value);
+            var check = function() {
+                if (!check) { return; }
 
-            virtualList.dataSource.one("change", function() {
                 start();
                 equal(requests.length, 2);
-                equal(requests[1].page, 6);
-            });
+                equal(requests[1].page, 7); //[240, 280)
+                check = null;
+            };
+
+            virtualList.dataSource.one("change", check);
+            virtualList.value(value);
         });
     });
 
-    test("dataItemByIndex method returns a dataItem corresponding to the index", 3, function() {
+    test("dataItemByIndex method returns a dataItem from first range", 3, function() {
+        var virtualList = new VirtualList(container, $.extend(virtualSettings, {
+            dataSource: new kendo.data.DataSource({
+                transport: {
+                    read: function(options) {
+                        options.success({ data: generateData(options.data), total: 300 });
+                    }
+                },
+                serverPaging: true,
+                pageSize: 40,
+                schema: {
+                    data: "data",
+                    total: "total"
+                }
+            }),
+            height: 500,
+            itemHeight: 50,
+            valueMapper: function(o) {
+                o.success(o.value);
+            },
+            value: 0
+        }));
+
+        virtualList.dataSource.read().then(function() {
+            var dataItem = virtualList.dataItemByIndex(0);
+
+            ok(dataItem);
+            equal(dataItem.id, 0);
+            equal(dataItem.value, 0);
+        });
+    });
+
+    test("dataItemByIndex method returns a dataItem from a prefetched range", 3, function() {
         var virtualList = new VirtualList(container, $.extend(virtualSettings, {
             dataSource: new kendo.data.DataSource({
                 transport: {
@@ -1712,7 +1758,7 @@
         });
     });
 
-    test("dataItemByIndex method returns a dataItem corresponding to the index", 1, function() {
+    test("dataItemByIndex method returns null if data is not loaded", 1, function() {
         var virtualList = new VirtualList(container, $.extend(virtualSettings, {
             dataSource: new kendo.data.DataSource({
                 transport: {
@@ -1770,5 +1816,47 @@
             equal(index, 3);
         });
 
+    });
+
+    asyncTest("select method unselects prefetched item", 2, function() {
+        var virtualList = new VirtualList(container, $.extend(virtualSettings, {
+            selectable: "multiple",
+            valueMapper: function(o) {
+                o.success([256]);
+            }
+        }));
+
+        virtualList.one("listBound", function() {
+            start();
+
+            virtualList.select([256]);
+
+            equal(virtualList.value().length, 0);
+            equal(virtualList.select().length, 0);
+        });
+
+        virtualList.select([256]);
+    });
+
+    asyncTest("select method notifies for removed after valueMapper is called", 2, function() {
+        var virtualList = new VirtualList(container, $.extend(virtualSettings, {
+            selectable: "multiple",
+            valueMapper: function(o) {
+                o.success([256]);
+            },
+            value: [256]
+        }));
+
+        virtualList.one("listBound", function() {
+            virtualList.one("change", function(e) {
+                start();
+                equal(e.removed.length, 1);
+                equal(e.removed[0].index, 256);
+            });
+
+            virtualList.mapValueToIndex([256]);
+        });
+
+        virtualList.dataSource.read();
     });
 })();

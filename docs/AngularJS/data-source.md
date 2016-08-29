@@ -113,7 +113,7 @@ Note that the recommended way to update the object is to use the `set` method of
 
     $scope.gridData[0].track = "Hey you";
 
-The reason behind this is the fact that when grid columns do not declare a template property, Angular-Kendo bindings automatically initialize it with a template, which uses `{{angular}}` expressions. So, if you just set the property in the object, the display will update, but it is Angular, not Kendo, that manages the update. The grid itself would not be notified about a change in the data. In general, try to use methods of the Observable objects to manage the data as this is the only guaranteed way that widgets will properly update.
+The reason behind this is the fact that when grid columns do not declare a template property, Angular-Kendo bindings automatically initialize it with a template, which uses `{% raw %}{{angular}}{% endraw %}` expressions. So, if you just set the property in the object, the display will update, but it is Angular, not Kendo, that manages the update. The grid itself would not be notified about a change in the data. In general, try to use methods of the Observable objects to manage the data as this is the only guaranteed way that widgets will properly update.
 
 ## See Also
 

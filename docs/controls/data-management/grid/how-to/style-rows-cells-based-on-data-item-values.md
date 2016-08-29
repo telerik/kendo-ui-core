@@ -7,13 +7,13 @@ slug: howto_customize_rowsand_cells_basedon_dataitem_values_grid
 
 # Customize Rows and Cells Based on Data Item Values
 
-The example below demonstrates how to customize the Grid cells and rows based on data items values. The cases apply custom CSS classes, but the same approach can be used to apply inline styles or any other HTML attributes.
+The example below demonstrates how to customize the cells and rows of the Grid based on the values of the data items. The demo applies custom CSS classes, but its approach is still suitable even if you apply inline styles or other HTML attributes.
 
-The three options are:
+The three options to achieve the customization are:
 
-1. Use a row template. This approach is the best if you do not use hierarchy, grouping, editing, and frozen columns.
-2. Use a databound handler and iterate the table rows. This approach is suitable if you will customize all rows.
-3. Use a databound handler and iterate the data items. This approach is convenient if you will customize some of the rows.
+1. Use a row template. This approach is suitable if you do not intend to apply hierarchy, grouping, editing, and frozen columns to the Grid.
+2. Use a databound handler and iterate the table rows. This approach is suitable if you intend to customize all rows of the Grid.
+3. Use a databound handler and iterate the data items. This approach is suitable if you intend to customize only part of the Grid rows.
 
 ###### Example
 

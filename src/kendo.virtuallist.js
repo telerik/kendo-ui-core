@@ -253,7 +253,6 @@ var __meta__ = { // jshint ignore:line
             that._optionID = kendo.guid();
 
             that._templates();
-            that._noData();
 
             that.setDataSource(options.dataSource);
 
@@ -282,7 +281,6 @@ var __meta__ = { // jshint ignore:line
             placeholderTemplate: "loading...",
             groupTemplate: "#:data#",
             fixedGroupTemplate: "fixed header template",
-            noDataTemplate: null,
             mapValueTo: "index",
             valueMapper: null
         },
@@ -306,7 +304,6 @@ var __meta__ = { // jshint ignore:line
             }
 
             this._templates();
-            this._noData();
             this.refresh();
         },
 
@@ -413,8 +410,6 @@ var __meta__ = { // jshint ignore:line
 
                 that._triggerListBound();
             }
-
-            $(that.noData).toggle(!that.dataSource.flatView().length);
 
             if (isItemChange || action === "remove") {
                 result = mapChangedItems(that._selectedDataItems, e.items);
@@ -535,9 +530,10 @@ var __meta__ = { // jshint ignore:line
             if (!indexes.length) {
                 indexes = [-1];
             } else {
-                this._values = [];
-                this._selectedIndexes = [];
-                this._selectedDataItems = [];
+                var removed = this._deselect([]).removed;
+                if (removed.length) {
+                    this._triggerChange(removed, []);
+                }
             }
 
             this.select(indexes);
@@ -628,13 +624,7 @@ var __meta__ = { // jshint ignore:line
             }
 
             $.each(indexes, function(_, index) {
-                var rangeStart = Math.floor(index / take) * take;
-
-                if (index === rangeStart && rangeStart > take) {
-                    rangeStart -= take;
-                }
-
-                that._promisesList.push(that.deferredRange(rangeStart));
+                that._promisesList.push(that.deferredRange(that._getSkip(index, take)));
             });
 
             if (isEmptyList) {
@@ -648,9 +638,8 @@ var __meta__ = { // jshint ignore:line
             return that._activeDeferred;
         },
 
-        _findDataItem: function(index) {
-            var view = this.dataSource.view(),
-                group;
+        _findDataItem: function(view, index) {
+            var group;
 
             //find in grouped view
             if (this.options.type === "group") {
@@ -668,30 +657,24 @@ var __meta__ = { // jshint ignore:line
             return view[index];
         },
 
+        _getRange: function(skip, take) {
+            return this.dataSource._findRange(skip, Math.min(skip + take, this.dataSource.total()));
+        },
+
         dataItemByIndex: function(index) {
-            var that = this;
-            var dataSource = that.dataSource;
-            var oldSkip = dataSource.skip();
-            var dataItem = null;
+            var take = this.itemCount;
+            var skip = this._getSkip(index, take);
+            var view = this._getRange(skip, take);
 
-            that.mute(function() {
-                var take = that.itemCount;
-                var skip = that._getSkip(index, take);
-
-                dataSource.range(skip, take); //switch the range to get the dataItem
-
-                if (dataSource.skip() === (skip + take)) { //the range is found
-                    dataItem = that._findDataItem([index - skip]);
-                }
-
-                dataSource.range(oldSkip, take); //switch back the range
-            });
-
-            return dataItem;
+            return this._findDataItem(view, [index - skip]);
         },
 
         selectedDataItems: function() {
             return this._selectedDataItems.slice();
+        },
+
+        scrollWith: function(value) {
+            this.content.scrollTop(this.content.scrollTop() + value);
         },
 
         scrollTo: function(y) {
@@ -770,7 +753,7 @@ var __meta__ = { // jshint ignore:line
                 if (position === "top") {
                     this.scrollTo(index * itemHeight);
                 } else if (position === "bottom") {
-                    this.scrollTo((index * itemHeight + itemHeight) - this.screenHeight);
+                    this.scrollTo((index * itemHeight + itemHeight) - this._screenHeight);
                 } else if (position === "outScreen") {
                     this.scrollTo(index * itemHeight);
                 }
@@ -997,17 +980,20 @@ var __meta__ = { // jshint ignore:line
             return height;
         },
 
-        _screenHeight: function() {
-            var height = this._height(),
-                content = this.content;
+        setScreenHeight: function() {
+            var height = this._height();
 
-            content.height(height);
-            this.screenHeight = height;
+            this.content.height(height);
+            this._screenHeight = height;
+        },
+
+        screenHeight: function() {
+            return this._screenHeight;
         },
 
         _getElementLocation: function(index) {
             var scrollTop = this.content.scrollTop(),
-                screenHeight = this.screenHeight,
+                screenHeight = this._screenHeight,
                 itemHeight = this.options.itemHeight,
                 yPosition = index * itemHeight,
                 yDownPostion = yPosition + itemHeight,
@@ -1027,33 +1013,13 @@ var __meta__ = { // jshint ignore:line
             return position;
         },
 
-        _noData: function() {
-            var noData = $(this.noData);
-
-            this.angular("cleanup", function() { return { elements: noData }; });
-            kendo.destroy(noData);
-            noData.remove();
-
-            if (!this.options.noDataTemplate) {
-                this.noData = null;
-                return;
-            }
-
-            this.noData = this.content.after('<div class="k-nodata" style="display:none"></div>').next();
-
-            this.noData.html(this.templates.noDataTemplate({}));
-
-            this.angular("compile", function() { return { elements: noData }; });
-        },
-
         _templates: function() {
             var options = this.options;
             var templates = {
                 template: options.template,
                 placeholderTemplate: options.placeholderTemplate,
                 groupTemplate: options.groupTemplate,
-                fixedGroupTemplate: options.fixedGroupTemplate,
-                noDataTemplate: options.noDataTemplate
+                fixedGroupTemplate: options.fixedGroupTemplate
             };
 
             for (var key in templates) {
@@ -1107,9 +1073,9 @@ var __meta__ = { // jshint ignore:line
             }
 
             that._saveInitialRanges();
-            that._screenHeight();
             that._buildValueGetter();
-            that.itemCount = getItemCount(that.screenHeight, options.listScreens, options.itemHeight);
+            that.setScreenHeight();
+            that.itemCount = getItemCount(that._screenHeight, options.listScreens, options.itemHeight);
 
             if (that.itemCount > dataSource.total()) {
                 that.itemCount = dataSource.total();
@@ -1141,7 +1107,7 @@ var __meta__ = { // jshint ignore:line
             );
 
             that._renderItems();
-            that._calculateGroupPadding(that.screenHeight);
+            that._calculateGroupPadding(that._screenHeight);
         },
 
         _setHeight: function(height) {
@@ -1329,7 +1295,7 @@ var __meta__ = { // jshint ignore:line
         },
 
         _listItems: function() {
-            var screenHeight = this.screenHeight,
+            var screenHeight = this._screenHeight,
                 options = this.options;
 
             var theValidator = listValidator(options, screenHeight);
@@ -1389,7 +1355,7 @@ var __meta__ = { // jshint ignore:line
         _bufferSizes: function() {
             var options = this.options;
 
-            return bufferSizes(this.screenHeight, options.listScreens, options.oppositeBuffer);
+            return bufferSizes(this._screenHeight, options.listScreens, options.oppositeBuffer);
         },
 
         _indexConstraint: function(position) {
@@ -1490,17 +1456,14 @@ var __meta__ = { // jshint ignore:line
                 for (var i = 0; i < indices.length; i++) {
                     result = null;
                     position = $.inArray(indices[i], selectedIndexes);
+                    dataItem = this.dataItemByIndex(indices[i]);
 
-                    if (position === -1 && this._view[indices[i]]) {
-                        dataItem = this._view[indices[i]].item;
-
-                        if (dataItem) {
-                            for (var j = 0; j < selectedDataItems.length; j++) {
-                                match = isPrimitive(dataItem) ? selectedDataItems[j] === dataItem : valueGetter(selectedDataItems[j]) === valueGetter(dataItem);
-                                if (match) {
-                                    item = this._getElementByIndex(indices[i]);
-                                    result = this._deselectSingleItem(item, j, indices[i], removedindexesCounter);
-                                }
+                    if (position === -1 && dataItem) {
+                        for (var j = 0; j < selectedDataItems.length; j++) {
+                            match = isPrimitive(dataItem) ? selectedDataItems[j] === dataItem : valueGetter(selectedDataItems[j]) === valueGetter(dataItem);
+                            if (match) {
+                                item = this._getElementByIndex(indices[i]);
+                                result = this._deselectSingleItem(item, j, indices[i], removedindexesCounter);
                             }
                         }
                     } else {
@@ -1576,7 +1539,7 @@ var __meta__ = { // jshint ignore:line
             for (; idx < indices.length; idx++) {
                 position = -1;
                 index = indices[idx];
-                value = this._valueGetter(this._view[index].item);
+                value = this._valueGetter(this.dataItemByIndex(index));
 
                 for (j = 0; j < values.length; j++) {
                     if (value == values[j]) {
@@ -1623,7 +1586,7 @@ var __meta__ = { // jshint ignore:line
                 that.mute(function() {
                     dataSource.range(skip, take); //switch the range to get the dataItem
 
-                    dataItem = that._findDataItem([index - skip]);
+                    dataItem = that._findDataItem(dataSource.view(), [index - skip]);
                     that._selectedIndexes.push(index);
                     that._selectedDataItems.push(dataItem);
                     that._values.push(isPrimitive(dataItem) ? dataItem : valueGetter(dataItem));

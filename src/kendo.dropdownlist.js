@@ -151,6 +151,7 @@ var __meta__ = { // jshint ignore:line
             animation: {},
             filter: "none",
             minLength: 1,
+            enforceMinLength: false,
             virtual: false,
             template: null,
             valueTemplate: null,
@@ -219,7 +220,16 @@ var __meta__ = { // jshint ignore:line
                     that._prev = "";
                 }
 
-                that._filterSource();
+                if (that.filterInput && that.options.minLength !== 1) {
+                    that.refresh();
+                    that.popup.one("activate", that._focusInputHandler);
+                    that.popup.open();
+                    if (that.filterInput) {
+                        that._resizeFilterInput();
+                    }
+                } else {
+                    that._filterSource();
+                }
             } else if (that._allowOpening()) {
                 that.popup.one("activate", that._focusInputHandler);
                 that.popup.open();
@@ -332,6 +342,11 @@ var __meta__ = { // jshint ignore:line
             } else {
                 return that._textAccessor();
             }
+        },
+
+        _clearFilter: function() {
+            $(this.filterInput).val("");
+            Select.fn._clearFilter.call(this);
         },
 
         value: function(value) {
@@ -484,6 +499,10 @@ var __meta__ = { // jshint ignore:line
 
             that._presetValue = false;
 
+            that._renderFooter();
+            that._renderNoData();
+            that._toggleNoData(!data.length);
+
             that._resizePopup(true);
 
             that.popup.position();
@@ -519,7 +538,6 @@ var __meta__ = { // jshint ignore:line
             }
 
             that._hideBusy();
-            that._updateFooter();
             that.trigger("dataBound");
         },
 
@@ -554,7 +572,7 @@ var __meta__ = { // jshint ignore:line
             if (!that._prevent) {
                 clearTimeout(that._typingTimeout);
 
-                if (filtered && focusedItem && !that.trigger("select", { dataItem: dataItem, item: focusedItem })) {
+                if (!filtered && focusedItem && !that.trigger("select", { dataItem: dataItem, item: focusedItem })) {
                     that._select(focusedItem, !that.dataSource.view().length);
                 }
 
@@ -663,6 +681,10 @@ var __meta__ = { // jshint ignore:line
 
             if ((altKey && key === keys.UP) || key === keys.ESC) {
                 that._focusElement(that.wrapper);
+            }
+
+            if (that._state === STATE_FILTER && key === keys.ESC) {
+                that._clearFilter();
             }
 
             if (key === keys.ENTER && that._typingTimeout && that.filterInput && isPopupVisible) {
@@ -862,7 +884,7 @@ var __meta__ = { // jshint ignore:line
             }
         },
 
-        _filter: function(word) {
+        _searchByWord: function(word) {
             if (word) {
                 var that = this;
                 var ignoreCase = that.options.ignoreCase;
@@ -875,6 +897,10 @@ var __meta__ = { // jshint ignore:line
                     return that._matchText(that._text(dataItem), word);
                 });
             }
+        },
+
+        _inputValue: function() {
+            return this.text();
         },
 
         _search: function() {
@@ -1122,11 +1148,12 @@ var __meta__ = { // jshint ignore:line
             }
 
             if (this._isFilterEnabled()) {
-                icon = '<span unselectable="on" class="k-icon k-i-search">select</span>';
+                icon = '<span class="k-icon k-i-search"></span>';
 
                 this.filterInput = $('<input class="k-textbox"/>')
                                       .attr({
                                           placeholder: this.element.attr("placeholder"),
+                                          title: this.element.attr("title"),
                                           role: "listbox",
                                           "aria-haspopup": true,
                                           "aria-expanded": false
@@ -1146,7 +1173,7 @@ var __meta__ = { // jshint ignore:line
             span = wrapper.find(SELECTOR);
 
             if (!span[0]) {
-                wrapper.append('<span unselectable="on" class="k-dropdown-wrap k-state-default"><span unselectable="on" class="k-input">&nbsp;</span><span unselectable="on" class="k-select"><span unselectable="on" class="k-icon k-i-arrow-s">select</span></span></span>')
+                wrapper.append('<span unselectable="on" class="k-dropdown-wrap k-state-default"><span unselectable="on" class="k-input">&nbsp;</span><span unselectable="on" class="k-select" aria-label="select"><span class="k-icon k-i-arrow-s"></span></span></span>')
                        .append(that.element);
 
                 span = wrapper.find(SELECTOR);
@@ -1232,8 +1259,14 @@ var __meta__ = { // jshint ignore:line
                 dataItem = this._assignInstance(text, this._accessor());
             }
 
-            if (dataItem === optionLabelText || this._text(dataItem) === optionLabelText) {
-                template = this.optionLabelTemplate;
+            if (this.hasOptionLabel()) {
+                if (dataItem === optionLabelText || this._text(dataItem) === optionLabelText) {
+                    template = this.optionLabelTemplate;
+
+                    if (typeof this.options.optionLabel === "string" && !this.options.optionLabelTemplate) {
+                        dataItem = optionLabelText;
+                    }
+                }
             }
 
             var getElements = function(){

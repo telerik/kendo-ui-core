@@ -8,19 +8,36 @@ slug: breakingchanges2016_kendoui
 
 # Kendo UI 2016 Breaking Changes
 
-## Kendo UI 2016 R4
+## Kendo UI 2016 R3
 
 ### Changes from 2016 R2 SP1
 
 #### Breaking Changes
 
-* **DropDownList/ComboBox/MultiSelect**: The widget will not update the OPTION [`selected`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/option#attr-selected) attribute in order to keep the [`defaultSelected`](https://developer.mozilla.org/en/docs/Web/API/HTMLOptionElement#Properties) property behavior. More details can be found in this [Github issue](https://github.com/telerik/kendo-ui-core/issues/1660).
+* **DropDownList**: The widget will clear the applied filter when ESC key is pressed.
 
-* **MultiSelect**: The widget with a 'single' tag mode will deselect all selected items on BACKSPACE/DELETE keyboard press. The previous behavior cannot be reverted.
+* **DropDownList**: The widget will not select the focused item on focusout when list is filtered.
 
-* **Validator**: The email validation rule has been changed to match the [HTML5 specification suggests for browsers to use](https://html.spec.whatwg.org/multipage/forms.html#valid-e-mail-address). If the previous behavior is required, the email validation rule should be overriden by [specifing a custom rule](/controls/editors/validator/overview#custom-rules-for-validation) with the `email` key.
+* **DropDownList/ComboBox/MultiSelect**: The widget will not update the OPTION [`selected`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/option#attr-selected) attribute to keep the behavior of the  [`defaultSelected`](https://developer.mozilla.org/en/docs/Web/API/HTMLOptionElement#Properties) property. For more information, refer to this [Github issue](https://github.com/telerik/kendo-ui-core/issues/1660).
 
-## Kendo UI 2016 R3
+* **MultiSelect**: The widget with a 'single' tag mode will deselect all selected items on **Backspace** or **Delete** keyboard press. The previous behavior is impossible to revert.
+
+* **DropDownList/ComboBox**: The widget will not bind on open if `autoBind` is set to `false` and `minLength` is set to a value higher than 1.
+
+* **Validator**: The email validation rule has been changed to match the [HTML5 specification suggests for browsers to use](https://html.spec.whatwg.org/multipage/forms.html#valid-e-mail-address). If the previous behavior is required, the email validation rule should be overridden by [specifying a custom rule](/controls/editors/validator/overview#custom-rules-for-validation) with the `email` key.
+
+* **Chart**: 100% stacked series will be clipped by default. See [the related issue](https://github.com/telerik/kendo-ui-core/issues/1699) for a discussion.
+
+To get the old behavior back you have to disable clipping on the pane:
+
+```
+    $("#chart").kendoChart({
+      ...
+      panes: [{
+        clip: false
+      }]
+    });
+```
 
 ### Changes from 2016 R2
 

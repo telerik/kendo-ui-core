@@ -80,34 +80,27 @@ The examples below demonstrate the correct Visual Basic (VB) syntax when using [
 ###### Example
 
     @Code
-        Html.Kendo().Grid(Of KendoUIMvcVB.Person)() _
-            .Name("Grid") _
-            .Columns(Sub(c)
-                            c.Bound(Function(p) p.PersonID)
-                            c.Bound(Function(p) p.PersonName)
-                            c.Bound(Function(p) p.PersonBirthDate)
-                            c.Template(Sub()
-                                            @<text>server template</text>
-                                       End Sub).Title("Template column").ClientTemplate("client template")
-                     End Sub) _
-        .Pageable() _
-        .Sortable() _
-        .ToolBar(Function(t)
-                    t.Create()
-                    t.Custom().Name("myCustomCommand").Text("custom toolbar button")
-                End Function) _
-        .Filterable() _
-        .DataSource(Function(d)
-                            d.Ajax()
-                                .Read(Function(read) read.Action("Person_Read", "Home")) _
-                                .Update(Function(update) update.Action("Person_Update", "Home")) _
-                                .Create(Function(create) create.Action("Person_Create", "Home")) _
-                                .Destroy(Function(destroy) destroy.Action("Person_Destroy", "Home")) _
-                                .Model(Sub(m)
-                                            m.Id(Function(i) i.PersonID)
-                                        End Sub)
-                    End Function) _
-        .Render()
+        Html.Kendo().Grid(Of TelerikMvcAppVB.Person)() _
+    .Name("Grid") _
+    .Columns(Sub(c)
+            c.Bound(Function(p) p.PersonID)
+            c.Bound(Function(p) p.PersonName)
+            c.Bound(Function(p) p.PersonBirthDate)
+            c.Template(Sub()
+                        @<text>server template</text>
+                                End Sub).Title("Template column").ClientTemplate("client template")
+                 End Sub) _
+                    .Pageable() _
+                    .Sortable() _
+                    .Filterable() _
+                        .DataSource(Function(d)
+                                        d.Ajax() _
+                                        .Read(Function(read) read.Action("Person_Read", "GridList")) _
+                                        .Model(Sub(m)
+                                                   m.Id(Function(i) i.PersonID)
+                                               End Sub)
+                                    End Function) _
+                        .Render()
     End Code
 
 The example below demonstrates alternative ToolBar configurations.
@@ -138,11 +131,33 @@ The example below demonstrates alternative ToolBar configurations.
     Public Class HomeController
         Inherits System.Web.Mvc.Controller
 
-        Function Person_Read(<DataSourceRequest>request As DataSourceRequest) As ActionResult
-            Dim result As List(Of Person) = New List(Of Person)
-            Return Json(result.ToDataSourceResult(request))
+        Function Person_Read(<DataSourceRequest> request As DataSourceRequest) As ActionResult
+            Dim grades = New List(Of Person)()
+            grades.Add(New Person() With {
+             .PersonID = 1,
+             .PersonName = "Person1",
+             .PersonBirthDate = New DateTime(Now.Year, Now.Month, Now.Day, 10, 30, 0, 0)
+        })
+            grades.Add(New Person() With {
+             .PersonID = 2,
+             .PersonName = "Person2",
+             .PersonBirthDate = New DateTime(Now.Year, Now.Month, Now.Day, 11, 15, 0, 0)
+        })
+            Dim res As IQueryable(Of Person) = grades.AsQueryable()
+            Dim res1 As DataSourceResult = res.ToDataSourceResult(request)
+            Return Json(res1)
         End Function
 
+    End Class
+
+### Model
+
+###### Example
+
+    Public Class Person
+        Public Property PersonID As Integer
+        Public Property PersonName As String
+        Public Property PersonBirthDate As DateTime
     End Class
 
 ## Editor Template

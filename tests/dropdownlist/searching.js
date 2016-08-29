@@ -516,6 +516,37 @@
         dropdownlist.filterInput.val("").keydown();
     });
 
+    asyncTest("does not clear filter when clear input value and enforceMinLength: true", 0, function() {
+        var dropdownlist = new DropDownList(input, {
+            filter: "startswith",
+            minLength: 3,
+            enforceMinLength: true,
+            delay: 0,
+            dataSource: [
+                { text: "Black", value: "1" },
+                { text: "Orange", value: "2" },
+                { text: "Grey", value: "3" }
+            ],
+            dataTextField: "text",
+            dataValueField: "value",
+            index: 2
+        });
+
+        dropdownlist.open();
+        dropdownlist._prev = "or";
+        dropdownlist.filterInput.val("or").keydown();
+
+        dropdownlist.bind("dataBound", function() {
+            ok(false, "list should not rebind");
+        });
+
+        dropdownlist.filterInput.val("").keydown();
+
+        setTimeout(function() {
+            start();
+        }, 0);
+    });
+
     asyncTest("persist selected value if no items (select)", 1, function() {
         var dropdownlist = new DropDownList(select, {
             filter: "startswith",
@@ -542,6 +573,7 @@
 
     asyncTest("update popup height when no items are found", 1, function() {
         var dropdownlist = new DropDownList(select, {
+            noDataTemplate: "",
             filter: "startswith",
             delay: 0,
             dataSource: [
@@ -565,9 +597,9 @@
         dropdownlist.filterInput.focus().val("test").keydown();
     });
 
-    asyncTest("filter if same text is entered after blur", 1, function() {
-        var dropdownlist = new DropDownList(input, {
-            animation: false,
+    asyncTest("update popup height when no items are found and noDataTemplate is defined", 1, function() {
+        var dropdownlist = new DropDownList(select, {
+            noDataTemplate: "No data found.",
             filter: "startswith",
             delay: 0,
             dataSource: [
@@ -576,26 +608,19 @@
                 { text: "Grey", value: "3" }
             ],
             dataTextField: "text",
-            dataValueField: "value",
-            index: 2
-        });
-
-        dropdownlist.one("dataBound", function() {
-            dropdownlist.filterInput.focusout();
-
-            dropdownlist.wrapper.focus();
-            dropdownlist.open();
-
-            dropdownlist.one("dataBound", function() {
-                start();
-                ok(true);
-            });
-
-            dropdownlist.filterInput.val("or").keydown();
+            dataValueField: "value"
         });
 
         dropdownlist.open();
-        dropdownlist.filterInput.val("or").keydown();
+
+        var height = dropdownlist.ul.height();
+
+        dropdownlist.one("dataBound", function() {
+            start();
+            ok(!dropdownlist.ul.height());
+        });
+
+        dropdownlist.filterInput.focus().val("test").keydown();
     });
 
     test("search select first match of grouped list", function() {

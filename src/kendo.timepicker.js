@@ -791,7 +791,7 @@ var __meta__ = { // jshint ignore:line
             arrow = element.next("span.k-select");
 
             if (!arrow[0]) {
-                arrow = $('<span unselectable="on" class="k-select"><span unselectable="on" class="k-icon k-i-clock">select</span></span>').insertAfter(element);
+                arrow = $('<span unselectable="on" class="k-select" aria-label="select"><span class="k-icon k-i-clock"></span></span>').insertAfter(element);
             }
 
             that._arrow = arrow.attr({
@@ -851,7 +851,7 @@ var __meta__ = { // jshint ignore:line
             }
 
             that._value = date;
-            that.element.val(date ? kendo.toString(date, options.format, options.culture) : value);
+            that.element.val(kendo.toString(date || value, options.format, options.culture));
             timeView.value(date);
 
             return date;

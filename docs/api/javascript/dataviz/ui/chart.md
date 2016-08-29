@@ -73,7 +73,7 @@ The crosshair configuration options.
 
 The color of the crosshair. Accepts a valid CSS color string, including hex and rgb.
 
-### axisDefaults.crosshair.dashType `string` *(default: "solid")*
+### axisDefaults.crosshair.dashType `String` *(default: "solid")*
 
 The dash type of the crosshair.
 
@@ -666,6 +666,10 @@ This will continue until the number of intervals is less than
     });
     </script>
 
+### categoryAxis.autoBaseUnitSteps.milliseconds `Array` *(default: [1, 100, 100])*
+
+The milliseconds unit steps.
+
 ### categoryAxis.autoBaseUnitSteps.seconds `Array` *(default: [1, 2, 5, 15, 30])*
 
 The seconds unit steps.
@@ -747,6 +751,7 @@ between subsequent categories.
 The supported values are:
 
 * "fit"
+* "milliseconds"
 * "seconds"
 * "minutes"
 * "hours"
@@ -883,7 +888,7 @@ The color of the crosshair. Accepts a valid CSS color string, including hex and 
     });
     </script>
 
-### categoryAxis.crosshair.dashType `string` *(default: "solid")*
+### categoryAxis.crosshair.dashType `String` *(default: "solid")*
 
 The dash type of the crosshair.
 
@@ -4952,6 +4957,20 @@ The position of the labels.
 
 The line of the notes.
 
+### categoryAxis.notes.line.dashType `String` *(default: "solid")*
+
+The dash type of the note line.
+
+The following dash types are supported:
+
+* "dash" - a line consisting of dashes
+* "dashDot" - a line consisting of a repeating pattern of dash-dot
+* "dot" - a line consisting of dots
+* "longDash" - a line consisting of a repeating pattern of long-dash
+* "longDashDot" - a line consisting of a repeating pattern of long-dash-dot
+* "longDashDotDot" - a line consisting of a repeating pattern of long-dash-dot-dot
+* "solid" - a solid line
+
 ### categoryAxis.notes.line.width `Number`
 
 The line width of the notes.
@@ -6414,7 +6433,6 @@ The fields which can be used in the template are:
 *   series - the data series.
 *   value - the point value. (only for donut and pie charts)
 *   percentage - the point value represented as a percentage value. Available only for donut, pie and 100% stacked charts.
-*   dataItem - the original data item used to construct the point.
 
 > The text can be split into multiple lines by using line feed characters ("\n").
 
@@ -9762,7 +9780,7 @@ The label connectors options.
     });
     </script>
 
-### series.connectors.color `String`
+### series.connectors.color `String|Function`
 
 The color of the connector. Accepts a valid CSS color string, including hex and rgb.
 
@@ -11028,6 +11046,20 @@ The line of the highlighted chart series. The color is computed automatically fr
     });
     </script>
 
+### series.highlight.line.dashType `String` *(default: "solid")*
+
+The dash type of the highlight line.
+
+The following dash types are supported:
+
+* "dash" - a line consisting of dashes
+* "dashDot" - a line consisting of a repeating pattern of dash-dot
+* "dot" - a line consisting of dots
+* "longDash" - a line consisting of a repeating pattern of long-dash
+* "longDashDot" - a line consisting of a repeating pattern of long-dash-dot
+* "longDashDotDot" - a line consisting of a repeating pattern of long-dash-dot-dot
+* "solid" - a solid line
+
 ### series.highlight.line.color `String`
 
 The line color. Accepts a valid CSS color string, including hex and rgb.
@@ -11189,6 +11221,7 @@ The available argument fields are:
 * value - the point value.
 * sender - the chart instance.
 * series - the point series.
+* stackValue - the cumulative point value on the stack. Available only for stackable series.
 * percentage - the point value represented as a percentage value. Available only for donut, pie and 100% stacked charts.
 * runningTotal - the sum of point values since the last "runningTotal" [summary point](#configuration-series.summaryField). Available for waterfall series.
 * total - the sum of all previous series values. Available for waterfall series.
@@ -11767,6 +11800,7 @@ The fields which can be used in the template are:
 * dataItem - the original data item used to construct the point. Will be null if binding to array.
 * percentage - the point value represented as a percentage value. Available only for donut, pie and 100% stacked charts.
 * series - the data series
+* stackValue - the cumulative point value on the stack. Available only for stackable series.
 * value - the point value. Can be a number or object containing each bound field.
 * runningTotal - the sum of point values since the last "runningTotal" [summary point](#configuration-series.summaryField). Available for waterfall series.
 * total - the sum of all previous series values. Available for waterfall series.
@@ -12476,11 +12510,11 @@ The supported values are:
     });
     </script>
 
-### series.markers.visible `Boolean|Function` *(default: false)*
+### series.markers.visible `Boolean|Function` *(default: true)*
 
-If set to `true` the chart will display the series markers. By default chart series markers are not displayed.
+If set to `true` the chart will display the series markers. By default chart series markers are displayed.
 
-#### Example - display the chart series markers
+#### Example - hide the chart series markers
 
     <div id="chart"></div>
     <script>
@@ -12488,7 +12522,7 @@ If set to `true` the chart will display the series markers. By default chart ser
       series: [{
         type: "line",
         markers: {
-          visible: true
+          visible: false
         },
         data: [1, 2, 3]
       }]
@@ -13633,6 +13667,7 @@ The target line options.
         }
       ]
     });
+    </script>
 
 ### series.target.line.width `Object|Function`
 
@@ -13657,6 +13692,7 @@ The width of the line.
         }
       ]
     });
+    </script>
 
 ### series.targetField `String` *(default: "target")*
 
@@ -14166,6 +14202,7 @@ A function that can be used to create a custom visual for the points. Applicable
 * category - the point category.
 * dataItem - the point dataItem.
 * value - the point value.
+* stackValue - the cumulative point value on the stack. Available only for stackable series.
 * sender - the chart instance.
 * series - the point series.
 * percentage - the point value represented as a percentage value. Available only for donut, pie and 100% stacked charts.
@@ -14839,6 +14876,20 @@ The position of the labels.
 ### series.notes.line `Object`
 
 The line of the notes.
+
+### series.notes.line.dashType `String` *(default: "solid")*
+
+The dash type of the note line.
+
+The following dash types are supported:
+
+* "dash" - a line consisting of dashes
+* "dashDot" - a line consisting of a repeating pattern of dash-dot
+* "dot" - a line consisting of dots
+* "longDash" - a line consisting of a repeating pattern of long-dash
+* "longDashDot" - a line consisting of a repeating pattern of long-dash-dot
+* "longDashDotDot" - a line consisting of a repeating pattern of long-dash-dot-dot
+* "solid" - a solid line
 
 ### series.notes.line.width `Number`
 
@@ -17303,6 +17354,20 @@ The position of the labels.
 
 The line of the notes.
 
+### seriesDefaults.notes.line.dashType `String` *(default: "solid")*
+
+The dash type of the note line.
+
+The following dash types are supported:
+
+* "dash" - a line consisting of dashes
+* "dashDot" - a line consisting of a repeating pattern of dash-dot
+* "dot" - a line consisting of dots
+* "longDash" - a line consisting of a repeating pattern of long-dash
+* "longDashDot" - a line consisting of a repeating pattern of long-dash-dot
+* "longDashDotDot" - a line consisting of a repeating pattern of long-dash-dot-dot
+* "solid" - a solid line
+
 ### seriesDefaults.notes.line.width `Number`
 
 The line width of the notes.
@@ -17912,9 +17977,9 @@ The text of the chart title. You can also set the text directly for a title with
     });
     </script>
 
-### title.visible `Boolean` *(default: false)*
+### title.visible `Boolean` *(default: true)*
 
-If set to `true` the chart will display the title. By default the title is not displayed.
+If set to `true` the chart will display the title. By default the title will be displayed.
 
 #### Example - hide the title
 
@@ -22090,6 +22155,20 @@ The position of the labels.
 
 The line of the notes.
 
+### valueAxis.notes.line.dashType `String` *(default: "solid")*
+
+The dash type of the note line.
+
+The following dash types are supported:
+
+* "dash" - a line consisting of dashes
+* "dashDot" - a line consisting of a repeating pattern of dash-dot
+* "dot" - a line consisting of dots
+* "longDash" - a line consisting of a repeating pattern of long-dash
+* "longDashDot" - a line consisting of a repeating pattern of long-dash-dot
+* "longDashDotDot" - a line consisting of a repeating pattern of long-dash-dot-dot
+* "solid" - a solid line
+
 ### valueAxis.notes.line.width `Number`
 
 The line width of the notes.
@@ -22895,6 +22974,7 @@ The background color of the axis.
 
 The base time interval for the axis labels. The default baseUnit is determined automatically from the value range. Available options:
 
+* milliseconds
 * seconds
 * minutes
 * hours
@@ -26859,6 +26939,20 @@ The position of the labels.
 
 The line of the notes.
 
+### xAxis.notes.line.dashType `String` *(default: "solid")*
+
+The dash type of the note line.
+
+The following dash types are supported:
+
+* "dash" - a line consisting of dashes
+* "dashDot" - a line consisting of a repeating pattern of dash-dot
+* "dot" - a line consisting of dots
+* "longDash" - a line consisting of a repeating pattern of long-dash
+* "longDashDot" - a line consisting of a repeating pattern of long-dash-dot
+* "longDashDotDot" - a line consisting of a repeating pattern of long-dash-dot-dot
+* "solid" - a solid line
+
 ### xAxis.notes.line.width `Number`
 
 The line width of the notes.
@@ -27668,6 +27762,7 @@ The background color of the axis.
 
 The base time interval for the axis labels. The default baseUnit is determined automatically from the value range. Available options:
 
+* milliseconds
 * seconds
 * minutes
 * hours
@@ -31580,6 +31675,20 @@ The position of the labels.
 
 The line of the notes.
 
+### yAxis.notes.line.dashType `String` *(default: "solid")*
+
+The dash type of the note line.
+
+The following dash types are supported:
+
+* "dash" - a line consisting of dashes
+* "dashDot" - a line consisting of a repeating pattern of dash-dot
+* "dot" - a line consisting of dots
+* "longDash" - a line consisting of a repeating pattern of long-dash
+* "longDashDot" - a line consisting of a repeating pattern of long-dash-dot
+* "longDashDotDot" - a line consisting of a repeating pattern of long-dash-dot-dot
+* "solid" - a solid line
+
 ### yAxis.notes.line.width `Number`
 
 The line width of the notes.
@@ -32718,6 +32827,151 @@ Resolves the promise with the raw SVG document without the Data URI prefix.
         });
     </script>
 
+### findAxisByName
+
+An alias for the existing [getAxis](#methods-getAxis) method.
+
+#### Parameters
+
+##### name `String`
+
+The axis name.
+
+#### Returns
+
+`kendo.dataviz.ChartAxis` The chart axis.
+
+### findPaneByIndex
+
+Returns a [pane](/api/javascript/dataviz/chart/chart_pane) with specific index.
+
+#### Parameters
+
+##### index `Number`
+
+The pane index.
+
+#### Returns
+
+`kendo.dataviz.ChartPane` The chart pane.
+
+#### Example - use the pane chartsVisual to draw a circle behind series points
+
+    <div id="chart"></div>
+    <script>
+      var chart = $("#chart").kendoChart({
+        series: [{ data: [1, 2] }]
+      }).getKendoChart();
+
+      var pane = chart.findPaneByIndex(0);
+      var circle = new kendo.drawing.Circle(new kendo.geometry.Circle([200, 200], 100), { fill: { color: "red" }});
+
+      pane.chartsVisual.insert(0, circle);
+    </script>
+
+### findPaneByName
+
+Returns a [pane](/api/javascript/dataviz/chart/chart_pane) with specific name.
+
+#### Parameters
+
+##### name `String`
+
+The pane name.
+
+#### Returns
+
+`kendo.dataviz.ChartPane` The chart pane.
+
+#### Example - find the pane by name
+
+    <div id="chart"></div>
+    <script>
+      var chart = $("#chart").kendoChart({
+        series: [{ data: [1, 2] }],
+        panes: [{ name: "foo" }]
+      }).getKendoChart();
+
+      var pane = chart.findPaneByName("foo");
+    </script>
+
+### findSeries
+
+Returns a [series](/api/javascript/dataviz/chart/chart_series) determined from the passed function. The function is called with the options of each series until it returns true.
+
+#### Parameters
+
+##### callback `Function`
+
+The function that will be called for each series.
+
+#### Returns
+
+`kendo.dataviz.ChartSeries` The chart series.
+
+#### Example - find series that contain 3 in the data
+
+    <div id="chart"></div>
+    <script>
+      var chart = $("#chart").kendoChart({
+        series: [{ data: [1, 2] }, { data: [3, 4] }],
+      }).getKendoChart();
+
+      var series = chart.findSeries(function(series) {
+        return $.inArray(3, series.data) >= 0;
+      });
+    </script>
+
+### findSeriesByIndex
+
+Returns a [series](/api/javascript/dataviz/chart/chart_series) with specific index.
+
+#### Parameters
+
+##### index `Number`
+
+The series index.
+
+#### Returns
+
+`kendo.dataviz.ChartSeries` The chart series.
+
+#### Example - find the second series
+
+    <div id="chart"></div>
+    <script>
+      var chart = $("#chart").kendoChart({
+        series: [{ data: [1, 2] }, { data: [3, 4] }],
+      }).getKendoChart();
+
+      var series = chart.findSeriesByIndex(1);
+    </script>
+
+### findSeriesByName
+
+Returns a [series](/api/javascript/dataviz/chart/chart_series) with specific name.
+
+#### Parameters
+
+##### name `String`
+
+The series name.
+
+#### Returns
+
+`kendo.dataviz.ChartSeries` The chart series.
+
+#### Example - find the series with name "bar"
+
+    <div id="chart"></div>
+    <script>
+      var chart = $("#chart").kendoChart({
+        series: [{ name: "foo", data: [1, 2] }, { name: "bar", data: [3, 4] }],
+      }).getKendoChart();
+
+      var series = chart.findSeriesByName("bar");
+    </script>
+
 ### getAxis
 
 Returns an [axis](/api/javascript/dataviz/chart/chart_axis) with specific name.
@@ -32764,6 +33018,41 @@ The axis name.
       .lineTo(categorySlot.bottomRight().x, valueSlot.origin.y);
 
       chart.surface.draw(path);
+    </script>
+
+### hideTooltip
+
+Hides the chart tooltip.
+
+#### Example - hide the tooltip
+
+    <div id="chart"></div>
+    <script>
+      $("#chart").kendoChart({
+        series: [{ data: [1, 2] }]
+      });
+
+      var chart = $("#chart").data("kendoChart");
+
+      chart.showTooltip(function(point) {
+        return point.value === 2;
+      });
+
+      chart.hideTooltip();
+    </script>
+
+### plotArea
+
+Returns the chart [plotArea](/api/javascript/dataviz/chart/chart_plotarea).
+
+#### Example - use the plotArea backgroundVisual to change the background
+
+    <div id="chart"></div>
+    <script>
+      var chart = $("#chart").kendoChart({}).getKendoChart();
+      var plotArea = chart.plotArea();
+
+      plotArea.backgroundVisual.fill("red", 1);
     </script>
 
 ### redraw
@@ -32884,6 +33173,51 @@ The chart settings to update.
 
     var chart = $("#chart").data("kendoChart");
     chart.setOptions({ theme: "uniform" });
+    </script>
+
+### showTooltip
+
+Shows the chart tooltip for specific point or the shared tooltip for specific category. The method accepts a function which will be called for each [point](/api/javascript/dataviz/chart/chart_point) until the function returns `true`.
+
+#### Parameters
+
+##### filter `Function|Number|Date|String`
+
+The callback function which will be called for the points or the category value for a shared tooltip.
+
+#### Example - show the tooltip for a point with value equal to 2
+
+    <div id="chart"></div>
+    <script>
+      $("#chart").kendoChart({
+        series: [{ data: [1, 2] }]
+      });
+
+      var chart = $("#chart").data("kendoChart");
+
+      chart.showTooltip(function(point) {
+        return point.value === 2;
+      });
+    </script>
+
+#### Example - show the shared tooltip for category equal to "B"
+
+    <div id="chart"></div>
+    <script>
+      $("#chart").kendoChart({
+        series: [{ name: "foo", data: [1, 2] }],
+        categoryAxis: {
+          categories: ["A", "B"]
+        },
+        tooltip: {
+          visible: true,
+          shared: true
+        }
+      });
+
+      var chart = $("#chart").data("kendoChart");
+
+      chart.showTooltip("B");
     </script>
 
 ### svg
@@ -33962,6 +34296,10 @@ The series name
 
 The series data points
 
+##### e.stackValue `Object`
+
+The cumulative point value on the stack. Available only for stackable series.
+
 ##### e.value `Object`
 
 The data point value.
@@ -34066,6 +34404,10 @@ The series name
 ##### e.series.data `Array`
 
 The series data points
+
+##### e.stackValue `Object`
+
+The cumulative point value on the stack. Available only for stackable series.
 
 ##### e.value `Object`
 

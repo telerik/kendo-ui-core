@@ -28,14 +28,19 @@
             downArrow = textbox._downArrow;
 
         ok(upArrow.parent().hasClass("k-select"));
+
         ok(upArrow.hasClass("k-link"));
+        ok(upArrow.hasClass("k-link-increase"));
+        equal(upArrow.attr("aria-label"), textbox.options.upArrowText);
+
         ok(downArrow.hasClass("k-link"));
+        ok(downArrow.hasClass("k-link-decrease"));
+        equal(downArrow.attr("aria-label"), textbox.options.downArrowText);
+
         ok(upArrow.children(":first").hasClass("k-icon k-i-arrow-n"));
         ok(downArrow.children(":first").hasClass("k-icon k-i-arrow-s"));
-        equal(upArrow.children(":first").attr("title"), textbox.options.upArrowText);
-        equal(downArrow.children(":first").attr("title"), textbox.options.downArrowText);
-        equal(upArrow.children(":first").html(), textbox.options.upArrowText);
-        equal(downArrow.children(":first").html(), textbox.options.downArrowText);
+        equal(upArrow.children(":first").html(), "");
+        equal(downArrow.children(":first").html(), "");
     });
 
     test("Should render INPUT containing the formatted value", function() {
@@ -240,6 +245,24 @@
         equal(numerictextbox.wrapper.find(".k-formatted-value").attr("title"), title);
     });
 
+    test("NumericTextBox copies the input title to the visible input aria-title attr", function() {
+        var textbox = input.attr("title", "foo").kendoNumericTextBox().data("kendoNumericTextBox");
+
+        equal(textbox._text.attr("aria-title"), textbox._text.attr("title"));
+    });
+
+    test("NumericTextBox copies the formatted value to the visible input title attr", function() {
+        var textbox = new NumericTextBox(input, { value: 10 });
+
+        equal(textbox._text.attr("aria-title"), textbox._text.val());
+    });
+
+    test("NumericTextBox copies the formatted value to the visible input aria-title attr", function() {
+        var textbox = new NumericTextBox(input, { value: 10 });
+
+        equal(textbox._text.attr("title"), textbox._text.val());
+    });
+
     test("NumericTextBox is disabled when placed in disabled fieldset", function() {
         $(input).wrap('<fieldset disabled="disabled"></fieldset>');
         input.kendoNumericTextBox().data("kendoNumericTextBox");
@@ -261,4 +284,14 @@
         },200)
     });
 
+    test("widget restricts value without rounding it", function() {
+        var textbox = new NumericTextBox(input, {
+            round: false
+        });
+
+        textbox.focus();
+        textbox.element.val("10.556").blur();
+
+        equal(textbox.value(), 10.55);
+    });
 })();

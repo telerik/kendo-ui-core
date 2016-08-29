@@ -365,6 +365,20 @@ $.extend(true, kendo.ui.NumericTextBox.prototype.options,{
 });
 }
 
+/* MediaPlayer messages */
+
+if (kendo.ui.MediaPlayer) {
+kendo.ui.MediaPlayer.prototype.options.messages =
+$.extend(true, kendo.ui.MediaPlayer.prototype.options.messages,{
+  "pause": "Пауза",
+  "play": "Възпроизвеждане",
+  "mute": "Заглушаване на звука",
+  "unmute": "Включване на звука",
+  "quality": "Промяна на качеството",
+  "fullscreen": "Цял екран"
+});
+}
+
 /* Gantt */
 
 if (kendo.ui.Gantt) {
@@ -847,6 +861,44 @@ $.extend(true, kendo.ui.Scheduler.prototype.options.messages,{
   "deleteWindowTitle": "Изтрий събитие",
   "showFullDay": "Покажи цял ден",
   "showWorkDay": "Покажи работни часове"
+});
+}
+
+/* Dialog */
+
+if (kendo.ui.Dialog) {
+kendo.ui.Dialog.prototype.options.messages =
+$.extend(true, kendo.ui.Dialog.prototype.options.localization,{
+  "close": "Затвори"
+});
+}
+
+/* Alert */
+
+if (kendo.ui.Alert) {
+kendo.ui.Alert.prototype.options.messages =
+$.extend(true, kendo.ui.Alert.prototype.options.localization,{
+  "okText": "OK"
+});
+}
+
+/* Confirm */
+
+if (kendo.ui.Confirm) {
+kendo.ui.Confirm.prototype.options.messages =
+$.extend(true, kendo.ui.Confirm.prototype.options.localization,{
+  "okText": "OK",
+  "cancel": "Отказ"
+});
+}
+
+/* Prompt */
+
+if (kendo.ui.Prompt) {
+kendo.ui.Prompt.prototype.options.messages =
+$.extend(true, kendo.ui.Prompt.prototype.options.localization,{
+  "okText": "OK",
+  "cancel": "Отказ"
 });
 }
 

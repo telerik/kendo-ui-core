@@ -1,9 +1,9 @@
 ---
 title: Modes of Operation
 page_title: Modes of Operation | Kendo UI Upload
-description: "Learn how to use the different modes of operation supported by the Kendo UI Upload widget, initialize it from an existing file and how to use its asynchronous mode."
+description: "Use the different modes of operation supported by the Kendo UI Upload widget, initialize it from an existing file and how to use its asynchronous mode."
 slug: modes_upload_widget
-position: 4
+position: 5
 ---
 
 # Modes of Operation
@@ -29,15 +29,6 @@ The Upload is initialized from an existing file input placed in a form.
     $(document).ready(function() {
         $("#photos").kendoUpload();
     });
-
-
-
-
-    <form method="post" action="handler.php">
-        <div>
-            <input name="photos[]" id="photos" type="file" />
-        </div>
-    </form>
 
 Note the array syntax in the input name: it is used to hint the Upload handler to treat the photos as an array.
 

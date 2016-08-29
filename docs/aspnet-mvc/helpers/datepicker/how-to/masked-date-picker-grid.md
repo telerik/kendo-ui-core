@@ -85,4 +85,5 @@ The example below demonstrates how to add a mask to the Kendo UI DatePicker thro
 
 Other articles on the Kendo UI DataPicker HtmlHelper:
 
-* [DatePicker HtmlHelper Overview]({% slug overview_datepickerhelper_aspnetmvc %})
+* [Overview of the DatePicker HtmlHelper Overview]({% slug overview_datepickerhelper_aspnetmvc %})
+* [DatePickerBuilder API Reference](/api/aspnet-mvc/Kendo.Mvc.UI.Fluent/DatePickerBuilder)

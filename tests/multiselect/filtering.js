@@ -2,9 +2,12 @@
     var MultiSelect = kendo.ui.MultiSelect,
         select;
 
-    function popuplateSelect() {
+    function popuplateSelect(length) {
         var options = [];
-        for (var i=0; i < 5; i++) {
+
+        length = length || 5;
+
+        for (var i=0; i < length; i++) {
             options.push("<option value='" + i + "'>Option" + i + "</option>");
         }
 
@@ -244,6 +247,30 @@
             });
 
             multiselect.input.val("").keydown();
+        });
+
+        multiselect.input.focus().val("baz").keydown();
+    });
+
+    asyncTest("MultiSelect does not trigger filter on empty input if minLength & enforceMinLength", 0, function() {
+        var multiselect = new MultiSelect(select, {
+            delay: 0,
+            minLength: 3,
+            enforceMinLength: true,
+            dataSource: ["foo", "bar"],
+            filter: "contains"
+        });
+
+        multiselect.dataSource.one("change", function() {
+            multiselect.one("filtering", function(e) {
+                ok(false, "should not filter on empty input and enforceMinLength");
+            });
+
+            multiselect.input.val("").keydown();
+
+            setTimeout(function() {
+                start();
+            }, 0);
         });
 
         multiselect.input.focus().val("baz").keydown();
@@ -636,5 +663,22 @@
         });
         multiselect.open();
 
+    });
+
+    asyncTest("update popup height when no items are found", 1, function() {
+        popuplateSelect(30);
+
+        var multiselect = new MultiSelect(select);
+
+        multiselect.open();
+
+        var oldHeight = multiselect.list.height();
+
+        multiselect.one("dataBound", function() {
+            start();
+            ok(multiselect.list.height() < oldHeight);
+        });
+
+        multiselect.input.focus().val("test").keydown();
     });
 })();

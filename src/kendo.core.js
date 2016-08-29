@@ -1040,7 +1040,7 @@ function pad(number, digits, end) {
         value = value.toString().split('e');
         value = +(value[0] + 'e' + (value[1] ? (+value[1] - precision) : -precision));
 
-        return value.toFixed(precision);
+        return value.toFixed(Math.min(precision, 20));
     };
 
     var toString = function(value, fmt, culture) {
@@ -2244,10 +2244,17 @@ function pad(number, digits, end) {
 
         var result = element[type]();
 
+        if (support.mobileOS.android) {
+            // offset() is buggy in Android
+            result.top -= window.scrollY;
+            result.left -= window.scrollX;
+        }
+
         // IE10 touch zoom is living in a separate viewport
         if (support.browser.msie && (support.pointers || support.msPointers) && !positioned) {
-            result.top -= (window.pageYOffset - document.documentElement.scrollTop);
-            result.left -= (window.pageXOffset - document.documentElement.scrollLeft);
+            var sign = support.isRtl(element) ? 1 : -1;
+            result.top -= (window.pageYOffset + (sign * document.documentElement.scrollTop));
+            result.left -= (window.pageXOffset + (sign * document.documentElement.scrollLeft));
         }
 
         return result;

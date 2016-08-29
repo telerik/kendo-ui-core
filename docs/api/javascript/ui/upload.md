@@ -156,6 +156,28 @@ containing one or more fields with the same name as the original input name.
 Controls whether to send credentials (cookies, headers) for cross-site requests.
 This option will be ignored if the browser doesn't support File API.
 
+### dropZone `String`
+
+Initializes a dropzone element(s) based on a given selector that provides drag and drop file upload.
+
+#### Example
+
+	<div>
+    	<input name="files" id="files" type="file" />
+    	<div class="dropZoneElement">Drag and drop file here</div>
+	</div>
+	<script>
+	    $(document).ready(function() {
+	        $("#files").kendoUpload({
+	            async: {
+	                saveUrl: "http://my-app.localhost/save",
+					removeUrl: "http://my-app.localhost/remove"
+	            },
+	            dropZone: ".dropZoneElement"
+	        });
+	    });
+	</script>
+
 ### enabled `Boolean`*(default: true)*
 
 Enables (**true**) or disables (**false**) an **Upload**. A disabled
@@ -252,6 +274,25 @@ Sets the text of the cancel button text.
         });
     </script>
 
+### localization.clearSelectedFiles `String`
+
+Sets the text of the clear button.
+
+#### Example
+
+	<input type="file" name="files" id="photos" />
+    <script>
+        $("#photos").kendoUpload({
+            async: {
+                saveUrl: "http://my-app.localhost/save",
+                removeUrl: "http://my-app.localhost/remove"
+            },
+            localization: {
+                clearSelectedFiles: "RemoveFiles"
+            }
+        });
+    </script>
+
 ### localization.dropFilesHere `String`*(default: "drop files here to upload")*
 
 Sets the drop zone hint.
@@ -305,6 +346,63 @@ Sets the header status message for files that are being uploaded.
             },
             localization: {
                 headerStatusUploading: "customHeaderStatusUploading"
+            }
+        });
+    </script>
+
+### localization.invalidFileExtension `String`
+
+Sets the text for invalid file extension validation message.
+
+#### Example
+
+    <input type="file" name="files" id="photos" />
+    <script>
+        $("#photos").kendoUpload({
+            async: {
+                saveUrl: "http://my-app.localhost/save",
+                removeUrl: "http://my-app.localhost/remove"
+            },
+            localization: {
+                invalidFileExtension: "customInvalidFileExtension"
+            }
+        });
+    </script>
+
+### localization.invalidMaxFileSize `String`
+
+Sets the text for invalid maxFileSize validation message.
+
+#### Example
+
+    <input type="file" name="files" id="photos" />
+    <script>
+        $("#photos").kendoUpload({
+            async: {
+                saveUrl: "http://my-app.localhost/save",
+                removeUrl: "http://my-app.localhost/remove"
+            },
+            localization: {
+                invalidMaxFileSize: "customInvalidMaxFileSize"
+            }
+        });
+    </script>
+
+### localization.invalidMinFileSize `String`
+
+Sets the text for invalid minFileSize validation message.
+
+#### Example
+
+    <input type="file" name="files" id="photos" />
+    <script>
+        $("#photos").kendoUpload({
+            async: {
+                saveUrl: "http://my-app.localhost/save",
+                removeUrl: "http://my-app.localhost/remove"
+            },
+            localization: {
+                invalidMinFileSize: "customInvalidMinFileSize"
             }
         });
     </script>
@@ -521,9 +619,123 @@ The [template](/api/javascript/kendo#methods-template) used to render the files 
         });
     </script>
 
+### validation `Object`
+
+Configures the validation options for uploaded files.
+
+#### Example
+	 <input name="files" id="files" type="file" />
+	 <script>
+    	$(document).ready(function() {
+        	$("#files").kendoUpload({
+            	async: {
+                	saveUrl: "http://my-app.localhost/save",
+					removeUrl: "http://my-app.localhost/remove"
+            	},
+            	validation: {
+                	allowedExtensions: [".jpg"],
+                	maxFileSize: 900000,
+                	minFileSize: 300000
+            	}
+        });
+    });
+	</script>
+
+### validation.allowedExtensions `Array`
+
+Lists which file extensions are allowed to be uploaded.
+
+#### Example
+	<input name="files" id="files" type="file" />
+	<script>
+	    $(document).ready(function() {
+	        $("#files").kendoUpload({
+	            async: {
+	                saveUrl: "http://my-app.localhost/save",
+					removeUrl: "http://my-app.localhost/remove"
+	            },
+	            validation: {
+	                allowedExtensions: [".jpg"],
+	            }
+	        });
+	    });
+	</script>
+
+### validation.maxFileSize `Number`
+
+Defines the maximum file size that can be uploaded in bytes.
+
+#### Example
+	<input name="files" id="files" type="file" />
+	<script>
+	    $(document).ready(function() {
+	        $("#files").kendoUpload({
+	            async: {
+	                saveUrl: "http://my-app.localhost/save",
+					removeUrl: "http://my-app.localhost/remove"
+	            },
+	            validation: {
+	                maxFileSize: 900000
+	            }
+	        });
+	    });
+	</script>
+
+### validation.minFileSize `Number`
+
+Defines the minimum file size that can be uploaded in bytes.
+
+#### Example
+	<input name="files" id="files" type="file" />
+	<script>
+	    $(document).ready(function() {
+	        $("#files").kendoUpload({
+	            async: {
+	                saveUrl: "http://my-app.localhost/save",
+					removeUrl: "http://my-app.localhost/remove"
+	            },
+	            validation: {
+	                minFileSize: 300000
+	            }
+	        });
+	    });
+	</script>
+
 ## Methods
 
+### clearAllFiles
+
+Removes all files (only visually from the UI) without issuing requests to the `remove` handler.
+
+#### Example
+
+// demo
+
+### clearFile
+
+Removes all files for which the callback function returns `true` (only visually from the UI) without issuing requests to the `remove` handler.
+
+#### Example
+
+// demo
+
+### clearFileByUid
+
+Removes a file by ID (only visually from the UI) without issuing requests to the `remove` handler.
+
+#### Example
+
+    <input type="file" name="files" id="upload" />
+    <script>
+        $("#upload").kendoUpload();
+
+        var upload = $("#upload").data("kendoUpload");
+
+        upload.clearFileByUid();
+    </script>
+
 ### destroy
+
 Prepares the **Upload** for safe removal from DOM. Detaches all event handlers and removes jQuery.data attributes to avoid memory leaks. Calls destroy method of any child Kendo widgets.
 
 > **Important:** This method does not remove the Upload element from DOM.
@@ -579,6 +791,38 @@ Enables the upload.
         upload.enable();
     </script>
 
+### getFiles
+
+Retrieves the files that are currently selected.
+
+#### Example
+
+// demo
+
+### removeAllFiles
+
+Removes all files by sending a standard `remove` request to the handler.
+
+#### Example
+
+// demo
+
+### removeFile
+
+Removes all files for which the callback function returns `true` by sending a standard `remove` request to the handler.
+
+#### Example
+
+// demo
+
+### removeFileByUid
+
+Removes a file by ID by sending a standard `remove` request to the handler.
+
+#### Example
+
+// demo
+
 #### Parameters
 
 ##### enable `Boolean` *(optional)*
@@ -609,6 +853,12 @@ Toggles the upload enabled state.
 ##### enable `Boolean`
 
 (Optional) The new enabled state.
+
+### upload
+
+Manually triggers the upload process.
+
+> This method is only applicable when the `async.autoUpload` option is set to `false`.
 
 ## Events
 

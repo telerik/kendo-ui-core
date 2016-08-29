@@ -7,26 +7,19 @@ slug: howto_alternatingrows_aspnetmvcgrid
 
 # Color Alternating Rows
 
-The example below demonstrates how to customize the Excel document the Grid generates during exporting.
+The demo on how to color the alternating rows of an exported Grid to Excel uses the [`background`](/api/javascript/ooxml/workbook#configuration-sheets.rows.cells.background) option of the cell to set the background color of the alternating rows.
 
-The demo uses the [`background`](/api/javascript/ooxml/workbook#configuration-sheets.rows.cells.background) option of the cell to set the background color of the alternating rows.
-
-For more information on how Excel documents work, refer to the [introductory article on Excel]({% slug introduction_excelexport_kendoui %}).
+To see the example, refer to [this project](https://github.com/telerik/ui-for-aspnet-mvc-examples/tree/master/grid/alternating-rows).
 
 > **Important**
 >
 > This project requires UI for ASP.NET MVC version 2014.3.1125 and later. Earlier versions do not have the `ExcelExport` event exposed through the fluent API.
 
-To see the example on how to color alternating rows in the Grid, refer to [this project](https://github.com/telerik/ui-for-aspnet-mvc-examples/tree/master/grid/alternating-rows).
+For more information on how Excel documents work, refer to the [introductory article on Excel]({% slug introduction_excelexport_kendoui %}).
 
 ## See Also
 
-Other articles and how-to examples on the Kendo UI Grid HtmlHelper:
+* [Overview of the Grid HtmlHelper]({% slug overview_gridhelper_aspnetmvc %})
+* [GridBuilder API Reference](/api/aspnet-mvc/Kendo.Mvc.UI.Fluent/AutoCompleteBuilder)
 
-* [Overview of the Grid HtmlHelper]({% slug overview_uploadhelper_aspnetmvc %})
-* [How to Export Detail Grids to Excel]({% slug howto_detailgridexcelexport_aspnetmvcgrid %})
-* [How to Export Multiple Grids to Excel]({% slug howto_multiplegridexport_aspnetmvcgrid %})
-* [How to Format Cells during Excel Export]({% slug howto_cellformat_aspnetmvcgrid %})
-* [How to Use the Column Template]({% slug howto_columntemplatexport_aspnetmvcgrid %})
-
-For more runnable examples on the Kendo UI Grid HtmlHelper, browse the [how-to section of articles]({% slug howto_bindgridtodatatable_gridaspnetmvc %}).
+For more runnable examples on the Kendo UI Grid in ASP.NET MVC applications, browse its [**How To** documentation folder]({% slug howto_bindgridtodatatable_gridaspnetmvc %}).

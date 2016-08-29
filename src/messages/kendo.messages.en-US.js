@@ -145,7 +145,11 @@ $.extend(true, kendo.ui.FilterCell.prototype.options.operators,{
     "startswith": "Starts with",
     "contains": "Contains",
     "doesnotcontain": "Does not contain",
-    "endswith": "Ends with"
+    "endswith": "Ends with",
+    "isnull": "Is null",
+    "isnotnull": "Is not null",
+    "isempty": "Is empty",
+    "isnotempty": "Is not empty"
   },
   "number": {
     "eq": "Is equal to",
@@ -153,7 +157,9 @@ $.extend(true, kendo.ui.FilterCell.prototype.options.operators,{
     "gte": "Is greater than or equal to",
     "gt": "Is greater than",
     "lte": "Is less than or equal to",
-    "lt": "Is less than"
+    "lt": "Is less than",
+    "isnull": "Is null",
+    "isnotnull": "Is not null"
   },
   "date": {
     "eq": "Is equal to",
@@ -161,11 +167,15 @@ $.extend(true, kendo.ui.FilterCell.prototype.options.operators,{
     "gte": "Is after or equal to",
     "gt": "Is after",
     "lte": "Is before or equal to",
-    "lt": "Is before"
+    "lt": "Is before",
+    "isnull": "Is null",
+    "isnotnull": "Is not null"
   },
   "enums": {
     "eq": "Is equal to",
-    "neq": "Is not equal to"
+    "neq": "Is not equal to",
+    "isnull": "Is null",
+    "isnotnull": "Is not null"
   }
 });
 }
@@ -351,6 +361,20 @@ kendo.ui.NumericTextBox.prototype.options =
 $.extend(true, kendo.ui.NumericTextBox.prototype.options,{
   "upArrowText": "Increase value",
   "downArrowText": "Decrease value"
+});
+}
+
+/* MediaPlayer messages */
+
+if (kendo.ui.MediaPlayer) {
+kendo.ui.MediaPlayer.prototype.options.messages =
+$.extend(true, kendo.ui.MediaPlayer.prototype.options.messages,{
+  "pause": "Pause",
+  "play": "Play",
+  "mute": "Mute",
+  "unmute": "Unmute",
+  "quality": "Quality",
+  "fullscreen": "Full Screen"
 });
 }
 
@@ -939,6 +963,43 @@ if (kendo.ui.progress) {
 kendo.ui.progress.messages =
 $.extend(true, kendo.ui.progress.messages, {
     loading: "Loading..."
+});
+}
+
+/* Dialog */
+
+if (kendo.ui.Dialog) {
+kendo.ui.Dialog.prototype.options.messages =
+$.extend(true, kendo.ui.Dialog.prototype.options.localization, {
+  "close": "Close"
+});
+}
+
+/* Alert */
+
+if (kendo.ui.Alert) {
+kendo.ui.Alert.prototype.options.messages =
+$.extend(true, kendo.ui.Alert.prototype.options.localization, {
+  "okText": "OK"
+});
+}
+
+/* Confirm */
+
+if (kendo.ui.Confirm) {
+kendo.ui.Confirm.prototype.options.messages =
+$.extend(true, kendo.ui.Confirm.prototype.options.localization, {
+  "okText": "OK",
+  "cancel": "Cancel"
+});
+}
+
+/* Prompt */
+if (kendo.ui.Prompt) {
+kendo.ui.Prompt.prototype.options.messages =
+$.extend(true, kendo.ui.Prompt.prototype.options.localization, {
+  "okText": "OK",
+  "cancel": "Cancel"
 });
 }
 

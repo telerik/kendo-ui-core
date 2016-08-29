@@ -116,7 +116,7 @@ var __meta__ = { // jshint ignore:line
                     "aria-haspopup": true
                 });
 
-            that._clear.on("click" + ns, proxy(that._clearClick, that));
+            that._clear.on("click" + ns, proxy(that._clearValue, that));
             that._enable();
 
             that._old = that._accessor();
@@ -153,6 +153,7 @@ var __meta__ = { // jshint ignore:line
             fixedGroupTemplate: "#:data#",
             dataTextField: "",
             minLength: 1,
+            enforceMinLength: false,
             delay: 200,
             height: 200,
             filter: "startswith",
@@ -294,7 +295,7 @@ var __meta__ = { // jshint ignore:line
 
             length = word.length;
 
-            if (!length || length >= options.minLength) {
+            if ((!options.enforceMinLength && !length) || length >= options.minLength) {
                 that._open = true;
 
                 that._mute(function() {
@@ -307,13 +308,8 @@ var __meta__ = { // jshint ignore:line
                     field: options.dataTextField,
                     ignoreCase: ignoreCase
                 });
-                this.one("close", function(){
-                    var value = that.value().split(separator).join(that._defaultSeparator());
-                    if(value && value !== '') {
-                        that.value(value);
-                    }
-                });
 
+                that.one("close", $.proxy(that._unifySeparators, that));
             }
         },
 
@@ -410,10 +406,7 @@ var __meta__ = { // jshint ignore:line
             caret(element, element.val().length);
         },
 
-        _clearClick: function() {
-            this.value(null);
-            this.trigger("change");
-        },
+        _clearText: $.noop,
 
         _resetFocusItem: function() {
             var index = this.options.highlightFirst ? 0 : -1;
@@ -433,6 +426,10 @@ var __meta__ = { // jshint ignore:line
             var length = data.length;
             var isActive = that.element[0] === activeElement();
             var action;
+
+            that._renderFooter();
+            that._renderNoData();
+            that._toggleNoData(!data.length);
 
             that._resizePopup();
 
@@ -472,7 +469,6 @@ var __meta__ = { // jshint ignore:line
 
             that._hideBusy();
             that._makeUnselectable();
-            that._updateFooter();
 
             that.trigger("dataBound");
         },
@@ -512,23 +508,28 @@ var __meta__ = { // jshint ignore:line
             this._placeholder();
         },
 
+        _unifySeparators: function() {
+            this._accessor(this.value().split(this._separator()).join(this._defaultSeparator()));
+            return this;
+        },
+
         _change: function() {
             var that = this;
-            var value = that.value().split(that._separator()).join(that._defaultSeparator());
+            var value = that._unifySeparators().value();
             var trigger = value !== List.unifyType(that._old, typeof value);
 
             var valueUpdated = trigger && !that._typing;
             var itemSelected = that._oldText !== value;
 
-            that.value(value);
+            that._old = value;
+            that._oldText = value;
+
             if (valueUpdated || itemSelected) {
                 // trigger the DOM change event so any subscriber gets notified
                 that.element.trigger(CHANGE);
             }
 
             if (trigger) {
-                that._old = value;
-
                 that.trigger(CHANGE);
             }
 
@@ -560,8 +561,9 @@ var __meta__ = { // jshint ignore:line
         _keydown: function (e) {
             var that = this;
             var key = e.keyCode;
+            var listView = that.listView;
             var visible = that.popup.visible();
-            var current = this.listView.focus();
+            var current = listView.focus();
 
             that._last = key;
 
@@ -582,7 +584,7 @@ var __meta__ = { // jshint ignore:line
                 }
 
                 if (visible && current) {
-                    var dataItem = that.listView.dataItemByIndex(that.listView.getElementIndex(current));
+                    var dataItem = listView.dataItemByIndex(listView.getElementIndex(current));
                     if (that.trigger("select", { dataItem: dataItem, item: current })) {
                         return;
                     }
@@ -596,6 +598,11 @@ var __meta__ = { // jshint ignore:line
                     e.preventDefault();
                 }
                 that.close();
+            } else if (that.popup.visible() && (key === keys.PAGEDOWN || key === keys.PAGEUP)) {
+                e.preventDefault();
+
+                var direction = key === keys.PAGEDOWN ? 1 : -1;
+                listView.scrollWith(direction * listView.screenHeight());
             } else {
                 that._search();
             }
@@ -620,6 +627,7 @@ var __meta__ = { // jshint ignore:line
             that._loading.hide();
             that.element.attr("aria-busy", false);
             that._busy = null;
+            that._showClear();
         },
 
         _showBusy: function () {
@@ -632,6 +640,7 @@ var __meta__ = { // jshint ignore:line
             that._busy = setTimeout(function () {
                 that.element.attr("aria-busy", true);
                 that._loading.show();
+                that._hideClear();
             }, 100);
         },
 
@@ -689,6 +698,10 @@ var __meta__ = { // jshint ignore:line
             return separator;
         },
 
+        _inputValue: function() {
+            return this.element.val();
+        },
+
         _search: function () {
             var that = this;
             clearTimeout(that._typingTimeout);
@@ -708,7 +721,7 @@ var __meta__ = { // jshint ignore:line
         },
 
         _loader: function() {
-            this._loading = $('<span class="k-icon k-loading" style="display:none"></span>').insertAfter(this.element);
+            this._loading = $('<span class="k-icon k-i-loading" style="display:none"></span>').insertAfter(this.element);
         },
 
         _clearButton: function() {

@@ -20,6 +20,10 @@ The DataSource component can work with local data or remote data. In both cases 
 
 For detailed information on the DataSource `transport`, refer to the [DataSource API documentation](/api/javascript/data/datasource#configuration-transport).
 
+> **Important**
+>
+> All transport actions (read, update, create, destroy) must be defined in the same way&mdash;for example, as functions (when using local or custom transport), or as objects (when using remote transport). It is not possible to mix the two configuration alternatives.
+
 ### Schema
 
 The DataSource `schema` has several important roles, with the most notable ones being:
@@ -373,6 +377,8 @@ Here is a modified version of the above example, which requires the usage of a `
 If an error in the server code occurs, the server response can notify the client-side DataSource instance.
 
 For more information on handling errors in such scenarios, refer to the section about [error handling with remote transport]({% slug cruddataoperations_kendoui_datasourcecomponent %}#error-handling-with-remote-transport).
+
+For more information on handling repetitive requests performed while filtering in ASP.NET, refer to [this troubleshooting topic]({% slug troubleshooting_common_issues_dropdownlist_kendoui %}#repetitive-requests-are-performed-while-filtering-in-aspnet).
 
 ### Update (Remote)
 

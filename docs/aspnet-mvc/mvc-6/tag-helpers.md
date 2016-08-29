@@ -120,6 +120,49 @@ The Button Tag Helper configuration options are passed as attributes of the tag.
             image-url="/shared/icons/sports/snowboarding.png">Image icon</kendo-button>
 ```
 
+## Dialog Tag Helper
+
+### Overview
+
+The example below demonstrates how to define a Kendo UI Dialog by using a Tag Helper.
+
+###### Example
+
+        <kendo-dialog name="dialog1">Dialog contents</kendo-dialog>
+
+### Configuration
+
+The Dialog Tag Helper configuration options are passed as attributes of the tag. The dialog contents is placed between the opening and closing tag.
+
+###### Example
+
+```tab-cshtml
+
+        @(Html.Kendo().Dialog()
+            .Name("dialog")
+            .Title("Software Update")
+            .Content("Do you agree terms and conditions?")
+            .Width(400)
+            .Modal(false)
+            .Actions(actions =>
+                {
+                    actions.Add().Text("NO");
+                    actions.Add().Text("YES").Primary(true);
+                })
+            .Events(ev => ev.Close("dialog_close"))
+        )
+```
+```tab-tagHelper
+
+        <kendo:dialog name="dialog" title="Software Update" closable="false" modal="false" 
+                content="Do you agree terms and conditions?" close="dialog_close">
+                <kendo:dialog-actions>
+                        <kendo:dialog-action text="NO" />
+                        <kendo:dialog-action text="YES" primary="true" />
+                </kendo:dialog-actions>
+        </kendo:dialog>
+```
+
 ## Window Tag Helper
 
 ### Overview

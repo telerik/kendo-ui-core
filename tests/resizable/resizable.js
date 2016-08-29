@@ -5,6 +5,31 @@
 
     module("kendo.ui.Resizable", {
         setup: function() {
+            div = $("<div id='resizable'/></div>").appendTo(QUnit.fixture)[0];
+        },
+        teardown: function() {
+            kendo.destroy(QUnit.fixture);
+            div.remove();
+        }
+    });
+
+    test("draggable element should be the same as resizable element by default", function() {
+        var resizable = setup({});
+
+        equal(resizable.draggable.element[0], resizable.element[0]);
+    });
+
+    test("draggable element should be the same as options.draggableElement", function() {
+        var draggableElement = $("<div id='element'/></div>").appendTo(QUnit.fixture)[0];
+        var resizable = setup({
+            draggableElement: draggableElement
+        });
+
+        equal(resizable.draggable.element[0], draggableElement);
+    });
+
+    module("kendo.ui.Resizable", {
+        setup: function() {
             div = $("<div style='position:absolute;top:0;left:0'><b></b><span style='position:absolute'/></div>").appendTo(QUnit.fixture);
             handle = div.find("span");
         },

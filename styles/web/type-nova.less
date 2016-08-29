@@ -285,7 +285,9 @@ textarea.k-textbox:hover,
 
 /* Loading indicator */
 .k-loading,
-.k-state-hover .k-loading {
+.k-state-hover .k-loading,
+.k-i-loading,
+.k-state-hover .k-i-loading {
     background-image: url('@{image-folder}/loading.gif');
     background-position: 50% 50%;
 }
@@ -361,6 +363,42 @@ textarea.k-textbox:hover,
     color: @selected-text-color;
     border-color: lighten(@accent, 18%);
     background-color: lighten(@accent, 18%);
+}
+
+/* Bare Button */
+html body .k-button-bare {
+	&.k-state-focused,
+	&:focus {
+		position: relative;
+
+		&:before {
+			content: "";
+			background-color: currentcolor;
+			opacity: 0.12;
+			border-radius: inherit;
+			height: 100%;
+			width: 100%;
+			position: absolute;
+			left: 0;
+			top: 0;
+		}
+	}
+}
+
+html .k-mediaplayer-toolbar .k-button-bare {
+	&:active,
+	&.k-state-active,
+	&.k-state-active:hover {
+		color: @accent;
+
+		&:before {
+			opacity: 0.24;
+		}
+	}
+}
+
+.k-mediaplayer-toolbar .k-mediaplayer-seekbar {
+	top: -14px;
 }
 
 /* Menu */
@@ -563,6 +601,10 @@ input.k-textbox:active {
 
 .k-list-optionlabel {
     border-color: transparent;
+}
+
+.k-nodata {
+    color: @disabled-text-color;
 }
 
 /* Calendar */
@@ -1549,6 +1591,7 @@ html .km-pane-wrapper .km-widget,
     .k-webkit,
     .k-ff,
     .k-ie11,
+    .k-edge,
     .k-safari {
         /* Responsive Scheduler */
         .k-scheduler-toolbar .k-nav-current {
@@ -1561,6 +1604,7 @@ html .km-pane-wrapper .km-widget,
     .k-webkit,
     .k-ff,
     .k-ie11,
+    .k-edge,
     .k-safari {
         /* Responsive Scheduler */
         .k-nav-current > .k-link .k-lg-date-format {
@@ -1586,6 +1630,7 @@ html .km-pane-wrapper .km-widget,
     .k-webkit,
     .k-ff,
     .k-ie11,
+    .k-edge,
     .k-safari {
         .k-scheduler .k-scheduler-toolbar .k-nav-current .k-link .k-i-calendar {
             display: none;
@@ -1597,6 +1642,7 @@ html .km-pane-wrapper .km-widget,
     .k-webkit,
     .k-ff,
     .k-ie11,
+    .k-edge,
     .k-safari {
         .k-scheduler-toolbar > ul.k-scheduler-views {
             right: 13px;
@@ -1882,6 +1928,7 @@ html .km-pane-wrapper .km-widget,
     .k-webkit,
     .k-ff,
     .k-ie11,
+    .k-edge,
     .k-safari {
         .k-pager-info {
             display: none;
@@ -1893,6 +1940,7 @@ html .km-pane-wrapper .km-widget,
     .k-webkit,
     .k-ff,
     .k-ie11,
+    .k-edge,
     .k-safari {
         .k-pager-sizes {
             display: none;
@@ -1904,6 +1952,7 @@ html .km-pane-wrapper .km-widget,
     .k-webkit,
     .k-ff,
     .k-ie11,
+    .k-edge,
     .k-safari {
         .k-pager-refresh {
             display: none;
@@ -2056,3 +2105,117 @@ html .km-pane-wrapper .km-widget,
 }
 
 @spreadsheet-page-orientation-border-color: lighten(@hover-text-color, 8%);
+
+/* Dialog */
+
+.k-dialog {
+    .k-window-titlebar {
+        height: auto;
+        width: auto;
+        display: block;
+        font-size: 1em;
+        padding: 0;
+        .k-dialog-title {
+            display: inline-block;
+            padding: 1em;
+            padding-right: 2em;
+            margin: 0;
+            width: auto;
+            white-space: normal;
+            overflow: unset;
+            text-overflow: inherit;
+            font-size: 1em;
+            line-height: 1.2em;
+            box-sizing: content-box;
+        }
+    }
+    a.k-dialog-action.k-link {
+        position: absolute;
+        padding: 1em;
+        right: 0;
+        top: 0;
+        line-height: 1em;
+        cursor: pointer;
+        z-index: 10000;
+    }
+    &.k-alert .k-window-titlebar,
+    &.k-confirm .k-window-titlebar,
+    &.k-prompt .k-window-titlebar {
+        .k-dialog-title {
+            color: @normal-text-color;
+        }
+        border-bottom: none;
+    }
+    .k-content {
+        border-bottom-right-radius: @border-radius;
+        border-bottom-left-radius: @border-radius;
+    }
+    &.k-dialog-titleless .k-content {
+        border-top-right-radius: @border-radius;
+        border-top-left-radius: @border-radius;
+    }
+    .k-dialog-buttongroup {
+        &.k-dialog-button-layout-stretched {
+            width: 100%;
+            .k-button {
+                display: inline-block;
+                padding: 1em 0 1em 0;
+                border-radius: 0;
+                border-bottom: 0;
+                border-width: 1px 0 0 1px;
+            }
+            li.k-button:first-child {
+            border-bottom-left-radius: @border-radius;
+            border-left: 0;
+            }
+            li.k-button:last-child {
+                border-bottom-right-radius: @border-radius;
+                border-right: 0;
+            }
+        }
+        &.k-dialog-button-layout-normal {
+            width: auto;
+            margin: 0;
+            padding: 1em;
+            text-align: right;
+            .k-button {
+                margin-left: 0.5em;
+                &:first-child {
+                    margin-left: 0;
+                }
+            }
+        }
+    }
+}
+
+.k-rtl .k-dialog {
+    .k-window-titlebar {
+        .k-dialog-title {
+            padding-right: 1em;
+            padding-left: 2em;
+        }
+    }
+    a.k-dialog-action.k-link {
+        left: 0;
+    }
+    .k-dialog-buttongroup {
+        &.k-dialog-button-layout-stretched {
+            li.k-button:first-child {
+                border-bottom-right-radius: @border-radius;
+            }
+            li.k-button:last-child {
+                border-bottom-left-radius: @border-radius;
+            }
+        }
+        &.k-dialog-button-layout-normal {
+            text-align: left;
+            .k-button {
+                margin-left: 0;
+                margin-right: 0.5em;
+                &:first-child {
+                    margin-right: 0;
+                }
+            }
+        }
+    }
+}

@@ -41,7 +41,7 @@
 @error-text-color: contrast(@hover-background, lighten(@accent, 29%), darken(@accent, 4%), 0.5);
 @error-background-color: contrast(@selected-background, lighten(@hover-background, 24%), darken(@hover-background, 29%), 0.5);
 @error-border-color: darken(@error, 29%);
-@disabled-text-color: contrast(@base, lighten(@base, 25%), darken(@base, 29%), 0.5);
+@disabled-text-color: contrast(@base, lighten(@base, 40%), darken(@base, 15%), 0.5);
 @notification-info-background-color: @info;
 @notification-info-text-color: contrast(@info, lighten(@hover-text-color, 50%), darken(@info, 50%), 0.5);
 @notification-info-border-color: contrast(@info, lighten(@info, 1%), darken(@info, 11%), 0.5);
@@ -62,10 +62,10 @@
 @validation-border-color: @warning;
 @splitbar-background-color: saturate(@base, 1%);
 @draghandle-border-radius: 7px;
-@draghandle-border-color: darken(@success, 20%);
+@draghandle-border-color: @button-border-color;
 @draghandle-background-color: lighten(@base, 15%);
 @draghandle-shadow: none;
-@draghandle-hover-border-color: darken(@success, 23%);
+@draghandle-hover-border-color: @button-hover-border-color;
 @draghandle-hover-background-color: desaturate(@hover-background, 2%);
 @draghandle-hover-shadow: none;
 @alt-background-color: contrast(@base, lighten(@background, 3%), lighten(@base, 3%), 0.5);
@@ -81,11 +81,12 @@
 @scheduler-nonwork-background-color: contrast(@selected-background, lighten(@base, 3%), darken(@base, 5%), 0.5);
 @resize-background-color: contrast(@hover-background, lighten(@normal-text-color, 29%), darken(@normal-text-color, 1%), 0.5);
 @upload-progress-background-color: @info;
-@upload-progress-text-color: contrast(@upload-progress-background-color, lighten(@info, 70%), darken(@info, 50%), 0.5);
+@upload-progress-text-color: @header-text-color;
 @upload-success-background-color: @success;
-@upload-success-text-color: contrast(@upload-success-background-color, lighten(@success, 70%), darken(@success, 50%), 0.5);
+@upload-success-text-color: @upload-success-background-color;
 @upload-error-background-color: @error;
-@upload-error-text-color: contrast(@upload-error-background-color, lighten(@error, 70%), darken(@error, 50%), 0.5);
+@upload-invalid-color: lighten(@error, 29%);
+@upload-error-text-color: @upload-error-background-color;
 @task-summary-color: lighten(@widget-text-color, 25%);
 @task-summary-selected-color: lighten(@selected-background-color, 25%);
 @loading-panel-color: contrast(@selected-background, lighten(@background, 5%), darken(@background, 1%), 0.5);
@@ -411,6 +412,11 @@ html .km-pane-wrapper .k-header
     background-color: @header-background-color;
 }
 
+.k-mediaplayer-toolbar 
+{
+    background-color: fade(@group-background-color, 70%);
+}
+
 /* icons */
 .k-icon:hover,
 .k-state-hover .k-icon,
@@ -471,7 +477,9 @@ html .km-pane-wrapper .k-header
 }
 
 .k-loading,
-.k-state-hover .k-loading
+.k-state-hover .k-loading,
+.k-i-loading,
+.k-state-hover .k-i-loading
 {
     background-image: url('@{image-folder}/loading.gif');
     background-position: 50% 50%;
@@ -690,6 +698,21 @@ html .km-pane-wrapper .k-header
 .k-menu .k-state-hover>.k-state-active
 {
     background-color: transparent;
+}
+
+.k-button-bare {
+	&.k-state-focused .k-font-icon,
+	&:focus .k-font-icon {
+		text-shadow: 0 0 3px currentColor;
+	}
+}
+
+html .k-mediaplayer-toolbar .k-button-bare {
+	&:active,
+	&.k-state-active,
+	&.k-state-active:hover {
+	color: @accent;
+	}
 }
 
 .k-menu {
@@ -1102,7 +1125,7 @@ div.k-filebrowser-dropzone em
 
 .k-dropzone .k-upload-status
 {
-    color: @normal-text-color;
+    color: @disabled-text-color;
 }
 
 /* Progressbar */
@@ -1223,7 +1246,7 @@ div.k-filebrowser-dropzone em
 .k-file
 {
     background-color: @active-background-color;
-    border-color: @cell-border-color;
+    border-color: @widget-border-color;
 }
 
 .k-file-progress
@@ -1251,9 +1274,59 @@ div.k-filebrowser-dropzone em
     color: @upload-error-text-color;
 }
 
-.k-file-error .k-progress
+.k-file-error .k-progress,
+.k-file-invalid .k-progress
 {
     background-color: @upload-error-background-color;
+}
+
+.k-file-extension-wrapper,
+.k-multiple-files-extension-wrapper {
+    color: @disabled-text-color;
+    border-color: @disabled-text-color;
+}
+
+.k-file-invalid .k-file-name-invalid {
+    color: @error;
+}
+
+.k-file-invalid-extension-wrapper,
+.k-multiple-files-invalid-extension-wrapper {
+    color: @error;
+    border-color: @upload-invalid-color;
+}
+
+.k-file-extension-wrapper:before,
+.k-multiple-files-extension-wrapper:before {
+    background-color: @widget-background-color;
+    border-color: transparent transparent @disabled-text-color @disabled-text-color;
+}
+
+.k-file-invalid-extension-wrapper:before,
+.k-multiple-files-invalid-extension-wrapper:before {
+    background-color: @widget-background-color;
+    border-color: transparent transparent @upload-invalid-color @upload-invalid-color;
+}
+
+.k-multiple-files-extension-wrapper:after {
+    border-top-color: @disabled-text-color;
+    border-left-color: @disabled-text-color;
+}
+
+.k-multiple-files-invalid-extension-wrapper:after {
+    border-top-color: @upload-invalid-color;
+    border-left-color: @upload-invalid-color;
+}
+
+.k-file-size,
+.k-file-information,
+.k-file-validation-message {
+    color: @disabled-text-color;
+}
+
+.k-upload .k-upload-selected {
+    color: contrast(@base, @widget-text-color, @accent, .9);
+    border-color: @widget-border-color;
 }
 
 /* ImageBrowser */
@@ -1275,7 +1348,9 @@ div.k-filebrowser-dropzone em
 }
 
 .k-filebrowser .k-tile .k-folder,
-.k-filebrowser .k-tile .k-file
+.k-filebrowser .k-tile .k-file,
+.k-filebrowser .k-tile .k-i-folder,
+.k-filebrowser .k-tile .k-i-file
 {
     background-image: url('@{image-folder}/imagebrowser.png');
     background-size: auto auto;
@@ -2010,6 +2085,10 @@ textarea.k-textbox,
     color: @drop-down-text-color;
 }
 
+.k-nodata {
+    color: @disabled-text-color;
+}
+
 .k-dropdown .k-input,
 .k-dropdown .k-state-focused .k-input,
 .k-menu .k-popup
@@ -2072,6 +2151,11 @@ textarea.k-textbox,
     background-color: @active-background-color;
     .composite-background(@active-gradient);
     border-color: @active-border-color;
+}
+
+.k-tabstrip-top .k-tabstrip-items .k-state-active,
+.k-panelbar .k-tabstrip-top .k-tabstrip-items .k-state-active {
+   border-bottom-color: @widget-background-color;
 }
 
 .k-tabstrip .k-content.k-state-active
@@ -2263,14 +2347,12 @@ textarea.k-textbox,
 @checkbox-border-color: contrast(@base, lighten(@base, 1%), darken(@base, 14%), 0.5);
 @checkbox-background-color: #fff;
 @checkbox-hover-border-color: contrast(@base, lighten(@base, 2%), darken(@base, 24%), 0.5);
-@checkbox-checked-border-color: darken(@success, 20%);
 @checkbox-checked-background-color: #ffffff;
 @checkbox-checked-color: contrast(@selected-background, lighten(@accent, 1%), darken(@accent, 29%), 0.5);
 @checkbox-active-border-color: contrast(@selected-background, lighten(@accent, 1%), darken(@accent, 29%), 0.5);
 @checkbox-active-box-shadow: 0 0 3px 0 @accent;
 @checkbox-disabled-background-color: lighten(@hover-background, 21%);
 @checkbox-disabled-color: @disabled-text-color;
-@checkbox-disabled-border-color: darken(@success, 21%);
 
 @import "themes/radiobutton.less";
 
@@ -2288,6 +2370,7 @@ textarea.k-textbox,
 @media only screen and (-webkit-min-device-pixel-ratio: 1.2),
        only screen and (min-device-pixel-ratio: 1.2) {
     .k-icon:not(.k-loading),
+    .k-icon:not(.k-i-loading),
     .k-grouping-dropclue,
     .k-drop-hint,
     .k-callout,
@@ -2337,6 +2420,7 @@ textarea.k-textbox,
     .k-webkit,
     .k-ff,
     .k-ie11,
+    .k-edge,
     .k-safari {
 
         .k-pager-numbers,
@@ -2536,3 +2620,74 @@ textarea.k-textbox,
 }
 
 @spreadsheet-page-orientation-gradient: @primary-gradient;
+
+/* Dialog */
+
+.k-dialog {
+    .k-content {
+        border-bottom-right-radius: @border-radius;
+        border-bottom-left-radius: @border-radius;
+    }
+    &.k-dialog-titleless .k-content {
+        border-top-right-radius: @border-radius;
+        border-top-left-radius: @border-radius;
+    }
+    .k-dialog-buttongroup {
+        &.k-dialog-button-layout-stretched {
+            width: 100%;
+            .k-button {
+                display: inline-block;
+                padding: 0.75em 0 0.75em 0;
+                border-radius: 0;
+                border-width: 1px 0 1px 1px;
+            }
+            li.k-button:first-child {
+                border-bottom-left-radius: @border-radius;
+                border-left-width: 0;
+            }
+            li.k-button:last-child {
+                border-bottom-right-radius: @border-radius;
+                border-right-width: 0;
+            }
+        }
+        &.k-dialog-button-layout-normal {
+            width: auto;
+            margin: 0;
+            padding: 1em;
+            text-align: right;
+            .k-button {
+                margin-left: 0.5em;
+                &:first-child {
+                    margin-left: 0;
+                }
+            }
+        }
+    }
+}
+
+.k-rtl .k-dialog {
+    a.k-dialog-action.k-link {
+        top: 1em;
+        left: 1em;
+    }
+    .k-dialog-buttongroup {
+        &.k-dialog-button-layout-stretched {
+            li.k-button:first-child {
+                border-bottom-right-radius: @border-radius;
+            }
+            li.k-button:last-child {
+                border-bottom-left-radius: @border-radius;
+            }
+        }
+        &.k-dialog-button-layout-normal {
+            text-align: left;
+            .k-button {
+                margin-left: 0;
+                margin-right: 0.5em;
+                &:first-child {
+                    margin-right: 0;
+                }
+            }
+        }
+    }
+}

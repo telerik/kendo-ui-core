@@ -33,6 +33,14 @@ function create(options) {
     }, options)).data("kendoComboBox");
 }
 
+var getData = function(length) {
+    var result = [];
+    for(var idx=0; idx < length; idx++) {
+        result.push("item" + idx);
+    }
+    return result;
+};
+
 test("pressing alt + down should open popup", 1, function() {
     create();
     combobox.popup.bind("open", function(){
@@ -543,6 +551,56 @@ test("Selects first item if it is focused but not selected", 2, function() {
 
     equal(current.index(), 0);
     ok(current.hasClass("k-state-selected"));
+});
+
+test("ComboBox scrolls content down", 2, function() {
+    var combobox = new ComboBox(input, {
+        animation: false,
+        dataSource: getData(100)
+    });
+
+    stub(combobox.listView, {
+        scrollWith: combobox.listView.scrollWith
+    });
+
+    combobox.open();
+    combobox.input.press(keys.PAGEDOWN);
+
+    equal(combobox.listView.calls("scrollWith"), 1);
+    equal(combobox.listView.args("scrollWith")[0], combobox.listView.screenHeight());
+});
+
+test("ComboBox scrolls content up", 2, function() {
+    var combobox = new ComboBox(input, {
+        animation: false,
+        dataSource: getData(100)
+    });
+
+    stub(combobox.listView, {
+        scrollWith: combobox.listView.scrollWith
+    });
+
+    combobox.open();
+    combobox.input.press(keys.PAGEUP);
+
+    equal(combobox.listView.calls("scrollWith"), 1);
+    equal(combobox.listView.args("scrollWith")[0], -1 * combobox.listView.screenHeight());
+});
+
+test("ComboBox prevents default on PAGEDOWN", 1, function() {
+    var combobox = new ComboBox(input, {
+        animation: false,
+        dataSource: getData(100)
+    });
+
+    combobox.open();
+    combobox.input.trigger({
+        type: "keydown",
+        keyCode: keys.PAGEDOWN,
+        preventDefault: function() {
+            ok(true);
+        }
+    });
 });
 
 })();

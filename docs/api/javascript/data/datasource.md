@@ -344,7 +344,7 @@ The logical operation to use when the `filter.filters` option is set. The suppor
 ### filter.operator `String`
 
 The filter operator (comparison). The supported operators are: "eq" (equal to), "neq" (not equal to), "isnull" (is equal to null), "isnotnull" (is not equal to null), "lt" (less than), "lte" (less than or equal to), "gt" (greater than), "gte" (greater than or equal to),
-"startswith", "endswith", "contains", "isempty", "isnotempty". The last five are supported only for string fields.
+"startswith", "endswith", "contains", "doesnotcontain", "isempty", "isnotempty". The last five are supported only for string fields.
 
 #### Example - set the filter operator
 
@@ -366,6 +366,8 @@ The filter operator (comparison). The supported operators are: "eq" (equal to), 
 ### filter.value `Object`
 
 The value to which the [field](#configuration-filter.field) is compared. The value must be from the same type as the field.
+
+> By design, the `"\n"` is removed from the filter before the filtering is performed. That is why an `"\n"` identifier from the filter will not match data items whose corresponding fields contain new lines.
 
 #### Example - specify the filter value
     <script>
@@ -1145,7 +1147,7 @@ If set to `true`, the data source will leave the aggregate calculation to the re
 
 > Configure [`schema.aggregates`](#configuration-schema.aggregates) if you set `serverAggregates` to `true`.
 
-For more information and tips about client and server data operations, refer to the [introductory article on the DataSource]({% slug overview_kendoui_datasourcecomponent %}#mixed-data-operations-mode).  
+For more information and tips about client and server data operations, refer to the [introductory article on the DataSource]({% slug overview_kendoui_datasourcecomponent %}#mixed-data-operations-mode).
 
 #### Example - enable server aggregates
 
@@ -1179,7 +1181,7 @@ For example, the filter `{ logic: "and", filters: [ { field: "name", operator: "
 
 Use the [`parameterMap`](#configuration-transport.parameterMap) option to send the filter option in a different format.
 
-For more information and tips about client and server data operations, refer to the [introductory article on the DataSource]({% slug overview_kendoui_datasourcecomponent %}#mixed-data-operations-mode).  
+For more information and tips about client and server data operations, refer to the [introductory article on the DataSource]({% slug overview_kendoui_datasourcecomponent %}#mixed-data-operations-mode).
 
 #### Example - enable server filtering
 
@@ -1930,6 +1932,25 @@ the data source sends the parameters using jQuery's [conventions](http://api.jqu
 > The `parameterMap` method is often used to encode the parameters in JSON format.
 
 > **Important:** The `parameterMap` function will not be called when using custom functions for the read, update, create and destroy operations.
+
+If a [`transport.read.data`](#configuration-transport.read.data) function is used together with `parameterMap`, do not forget to preserve the result from the data function that will be received in the parameterMap arguments. An example is provided below. Generally, the parameterMap function is designed to transform the request payload, not add new parameters to it.
+
+```pseudo
+transport: {
+  read: {
+    url: "my-data-service-url",
+    data: function () {
+      return {
+        foo: 1
+      };
+    }
+  },
+  parameterMap: function (data, type) {
+    // if type is "read", then data is { foo: 1 }, we also want to add { "bar": 2 }
+    return kendo.stringify($.extend({ "bar": 2 }, data));
+  }
+}
+```
 
 #### Parameters
 

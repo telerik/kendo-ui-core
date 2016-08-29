@@ -17,7 +17,7 @@ This article demonstrates how to configure an ASP.NET Core MVC project that enab
 
 ## Prerequisites
 
-Make sure you install the [Microsoft ASP.NET (RC1)](http://docs.asp.net/en/latest/getting-started/installing-on-linux.html).
+Make sure you install the [Microsoft ASP.NET](http://docs.asp.net/en/latest/getting-started/installing-on-linux.html).
 
 ## Configuration
 
@@ -145,13 +145,13 @@ As a result, the response demonstrated in the example below is delivered.
 
 ### Add NuGet Packages
 
-**Step 1.** Open the `project.json` file, using a text editor, and add the `Kendo.Mvc` dependency.
+**Step 1.** Open the `project.json` file, using a text editor, and add the `Telerik.UI.for.AspNet.Core` dependency.
 
 ###### Example
 
         "dependencies": {
             ...
-            "Kendo.Mvc": "{{ site.mvcCoreVersion }}"
+            "Telerik.UI.for.AspNet.Core": "{{ site.mvcCoreVersion }}"
         }
 
 **Step 2.** Navigate to the project folder and restore the packages again.
@@ -169,6 +169,11 @@ Locate the `ConfigureServices` method and add a call to `services.AddKendo` at t
         public void ConfigureServices(IServiceCollection services)
         {
             ...
+            // Maintain property names during serialization. See:
+            // https://github.com/aspnet/Announcements/issues/194
+            services
+                .AddMvc()
+                .AddJsonOptions(options => options.SerializerSettings.ContractResolver = new DefaultContractResolver());
 
             // Add Kendo UI services to the services container
             services.AddKendo();
@@ -255,7 +260,7 @@ Now that all is done, you can see the sample page.
 
 Other articles on Telerik UI for ASP.NET MVC in ASP.NET Core MVC applications:
 
-* [Overview of Telerik UI for ASP.NET Core MVC - RC1]({% slug overview_aspnetmvc6_aspnetmvc %})
+* [Overview of Telerik UI for ASP.NET Core MVC]({% slug overview_aspnetmvc6_aspnetmvc %})
 * [Get Started with Telerik UI for ASP.NET MVC in ASP.NET Core MVC Projects]({% slug gettingstarted_aspnetmvc6_aspnetmvc %})
 * [Known Issues with Telerik UI for ASP.NET Core MVC]({% slug knownissues_aspnetmvc6_aspnetmvc %})
 * [Tag Helpers for ASP.NET Core MVC]({% slug taghelpers_aspnetmvc6_aspnetmvc %})

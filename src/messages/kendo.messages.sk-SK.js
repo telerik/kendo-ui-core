@@ -145,7 +145,11 @@ $.extend(true, kendo.ui.FilterCell.prototype.options.operators,{
     "startswith": "Začína s",
     "contains": "Obsahuje",
     "doesnotcontain": "Neobsahuje",
-    "endswith": "Končí s"
+    "endswith": "Končí s",
+    "isnull": "Je null",
+    "isnotnull": "Nie je null",
+    "isempty": "Je prázdne",
+    "isnotempty": "Nie je prázdne"
   },
   "number": {
     "eq": "Rovná sa",
@@ -153,7 +157,9 @@ $.extend(true, kendo.ui.FilterCell.prototype.options.operators,{
     "gte": "Je väčšie alebo sa rovná",
     "gt": "Je väčšie ako",
     "lte": "Je menšie alebo sa rovná",
-    "lt": "Je menšie ako"
+    "lt": "Je menšie ako",
+    "isnull": "Je null",
+    "isnotnull": "Nie je null"
   },
   "date": {
     "eq": "Je",
@@ -161,11 +167,15 @@ $.extend(true, kendo.ui.FilterCell.prototype.options.operators,{
     "gte": "Nasleduje alebo je",
     "gt": "Nasleduje",
     "lte": "Predchádza alebo je",
-    "lt": "Predchádza"
+    "lt": "Predchádza",
+    "isnull": "Je null",
+    "isnotnull": "Nie je null"
   },
   "enums": {
     "eq": "Je",
-    "neq": "Nie je"
+    "neq": "Nie je",
+    "isnull": "Je null",
+    "isnotnull": "Nie je null"
   }
 });
 }
@@ -200,7 +210,11 @@ $.extend(true, kendo.ui.FilterMenu.prototype.options.operators,{
       "startswith": "Začína s",
       "contains": "Obsahuje",
       "doesnotcontain": "Neobsahuje",
-      "endswith": "Končí s"
+      "endswith": "Končí s",
+      "isnull": "Je null",
+      "isnotnull": "Nie je null",
+      "isempty": "Je prázdne",
+      "isnotempty": "Nie je prázdne"
   },
   "number": {
       "eq": "Rovná sa",
@@ -208,7 +222,9 @@ $.extend(true, kendo.ui.FilterMenu.prototype.options.operators,{
       "gte": "Je väčšie alebo sa rovná",
       "gt": "Je väčšie ako",
       "lte": "Je menšie alebo sa rovná",
-      "lt": "Je menšie ako"
+      "lt": "Je menšie ako",
+      "isnull": "Je null",
+      "isnotnull": "Nie je null"
   },
   "date": {
       "eq": "Je",
@@ -216,11 +232,15 @@ $.extend(true, kendo.ui.FilterMenu.prototype.options.operators,{
       "gte": "Nasleduje alebo je",
       "gt": "Nasleduje",
       "lte": "Predchádza alebo je",
-      "lt": "Predchádza"
+      "lt": "Predchádza",
+      "isnull": "Je null",
+      "isnotnull": "Nie je null"
   },
   "enums": {
       "eq": "Je",
-      "neq": "Nie je"
+      "neq": "Nie je",
+      "isnull": "Je null",
+      "isnotnull": "Nie je null"
   }
 });
 }
@@ -451,7 +471,7 @@ $.extend(true, kendo.ui.Scheduler.prototype.options.messages,{
   "showWorkDay": "Zobraziť pracovný čas",
   "today": "Dnes",
   "save": "Uložiť",
-  "cancel": "Strono",
+  "cancel": "Storno",
   "destroy": "Odstrániť",
   "deleteWindowTitle": "Odstránenie udalosti",
   "ariaSlotLabel": "Vybraté od {0:t} do {1:t}",
@@ -525,8 +545,6 @@ $.extend(true, kendo.spreadsheet.messages.dialogs, {
     "save": "Uložiť",
     "cancel": "Storno",
     "remove": "Odstrániť",
-    "retry": "Opakovať",
-    "revert": "Prejsť Späť",
     "okText": "OK",
     "formatCellsDialog": {
         "title": "Formátovanie",
@@ -824,7 +842,7 @@ $.extend(true, kendo.ui.Slider.prototype.options,{
 
 if (kendo.ui.TreeList) {
 kendo.ui.TreeList.prototype.options.messages =
-$.extend(true, kendo.ui.TreeList.prototype.options.messages,{
+$.extend(true, kendo.ui.TreeList.prototype.options.messages, {
     "noRows": "Žiadne záznamy na zobrazenie",
     "loading": "Nahrávanie...",
     "requestFailed": "Požiadavka zlyhala.",
@@ -832,7 +850,7 @@ $.extend(true, kendo.ui.TreeList.prototype.options.messages,{
     "commands": {
         "edit": "Upraviť",
         "update": "Uložiť",
-        "canceledit": "Strono",
+        "canceledit": "Storno",
         "create": "Pridať nový záznam",
         "createchild": "Pridať podzáznam",
         "destroy": "Odstrániť",
@@ -841,6 +859,19 @@ $.extend(true, kendo.ui.TreeList.prototype.options.messages,{
     }
 });
 }
+
+if (kendo.ui.TreeList) {
+kendo.ui.TreeList.prototype.options.columnMenu =
+$.extend(true, kendo.ui.TreeList.prototype.options.columnMenu, {
+    "messages": {
+        "columns": "Zvoľte stĺpce",
+        "filter": "Použiť filter",
+        "sortAscending": "Usporiadať vzostupne",
+        "sortDescending": "Usporiadať zostupne"
+    }
+});
+}
+
 
 /* TreeView messages */
 
@@ -889,4 +920,42 @@ $.extend(true, kendo.ui.Validator.prototype.options.messages,{
   "dateCompare": "Koncový dátum musí byť väčší alebo rovný ako počiatočný"
 });
 }
+
+/* Dialog */
+
+if (kendo.ui.Dialog) {
+kendo.ui.Dialog.prototype.options.messages =
+$.extend(true, kendo.ui.Dialog.prototype.options.localization, {
+  "close": "Zavrieť"
+});
+}
+
+/* Alert */
+
+if (kendo.ui.Alert) {
+kendo.ui.Alert.prototype.options.messages =
+$.extend(true, kendo.ui.Alert.prototype.options.localization, {
+  "okText": "OK"
+});
+}
+
+/* Confirm */
+
+if (kendo.ui.Confirm) {
+kendo.ui.Confirm.prototype.options.messages =
+$.extend(true, kendo.ui.Confirm.prototype.options.localization, {
+  "okText": "OK",
+  "cancel": "Storno"
+});
+}
+
+/* Prompt */
+if (kendo.ui.Prompt) {
+kendo.ui.Prompt.prototype.options.messages =
+$.extend(true, kendo.ui.Prompt.prototype.options.localization, {
+  "okText": "OK",
+  "cancel": "Storno"
+});
+}
+
 })(window.kendo.jQuery);

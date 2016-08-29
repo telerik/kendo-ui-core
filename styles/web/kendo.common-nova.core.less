@@ -55,7 +55,9 @@
 }
 
 .k-tabstrip-left > .k-tabstrip-items .k-loading,
-.k-tabstrip-right > .k-tabstrip-items .k-loading
+.k-tabstrip-right > .k-tabstrip-items .k-loading,
+.k-tabstrip-left > .k-tabstrip-items .k-i-loading,
+.k-tabstrip-right > .k-tabstrip-items .k-i-loading
 {
     display: none;
 }
@@ -147,7 +149,9 @@
 }
 
 .k-autocomplete .k-loading,
-.k-multiselect .k-loading
+.k-multiselect .k-loading,
+.k-autocomplete .k-i-loading,
+.k-multiselect .k-i-loading
 {
     bottom: 10px;
 }
@@ -429,11 +433,6 @@
     margin: 6px 0;
 }
 
-.k-toolbar .k-button-group .k-tool-icon {
-    width: 24px;
-    height: 24px;
-}
-
 .k-filebrowser {
     .k-filebrowser-toolbar {
         line-height: 3.5em;
@@ -486,7 +485,8 @@ span.k-tooltip
     padding: 11px 20px 9px;
 }
 
-.k-tooltip-validation .k-warning {
+.k-tooltip-validation .k-warning,
+.k-tooltip-validation .k-i-warning {
     margin-right: 10px;
 }
 
@@ -616,16 +616,20 @@ div.k-window-content {
 
 .k-i-close,
 .k-delete,
-.k-group-delete {
+.k-group-delete,
+.k-i-delete,
+.k-i-group-delete {
     background-position: -32px -16px;
 }
 
 .k-multiselect {
-    .k-delete {
+    .k-delete,
+    .k-i-delete {
         margin-top: -2px;
     }
 
-    .k-button:not(.k-state-disabled):hover .k-delete {
+    .k-button:not(.k-state-disabled):hover .k-delete,
+    .k-button:not(.k-state-disabled):hover .k-i-delete {
         background-position: -160px -80px;
     }
 }
@@ -789,7 +793,11 @@ div.k-window-content {
     }
 }
 
-.k-notification .k-i-note {
+.k-notification .k-i-note,
+.k-notification .k-i-info,
+.k-notification .k-i-success,
+.k-notification .k-i-warning,
+.k-notification .k-i-erorr {
     background-position: -176px -240px;
 }
 

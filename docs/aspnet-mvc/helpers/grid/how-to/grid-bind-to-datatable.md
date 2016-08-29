@@ -1,13 +1,13 @@
 ---
-title: Bind the Grid to DataTable
+title: Bind Grids to DataTable
 page_title: Bind the Grid to DataTable | Kendo UI Grid HtmlHelper
-description: "Bind the Kendo UI MVC Grid to a DataTable."
+description: "Bind the Kendo UI Grid to DataTable in ASP.NET MVC applications."
 slug: howto_bindgridtodatatable_gridaspnetmvc
 ---
 
 # Bind the Grid to DataTable
 
-The example below demonstrates how to bind the UI for ASP.NET MVC Grid to a DataTable.
+The [sample project](#sample-project) below demonstrates how to bind the Kendo UI Grid to a DataTable in ASP.NET MVC applications.
 
 > **Important**
 >
@@ -15,17 +15,19 @@ The example below demonstrates how to bind the UI for ASP.NET MVC Grid to a Data
 
 ## Sample Project
 
-To see the full source code of the sample project on how to bind the Kendo UI MVC Grid to a DataTable, refer to [this GitHub project](https://github.com/telerik/ui-for-aspnet-mvc-examples/tree/master/grid/binding-to-datatable).
+The sample project example resolves two main issues, which are related to:  
+* [Editing](#editing)
+* [Aggregates](#aggregates)
 
-There are two main issues that the sample project solves. They are related to:
-* Editing
-* Aggregates
+To see the complete project, refer to [this repository on GitHub](https://github.com/telerik/ui-for-aspnet-mvc-examples/tree/master/grid/binding-to-datatable).
 
 ### Editing
 
 The Grid does not have an instance to a model object and cannot infer field types. You need to provide the model field definitions yourself.
 
-The DataTable metadata contains this information. Pull it into the model definition as illustrated in
+**Solution**
+
+The metadata of the DataTable contains this information. Pull it into the model definition as illustrated in
 [`Index.cshtml:29`](https://github.com/telerik/ui-for-aspnet-mvc-examples/blob/master/grid/binding-to-datatable/KendoUIMVC5/Views/Home/Index.cshtml#L29).
 
 ### Aggregates
@@ -38,23 +40,7 @@ Provide type-information for the requested aggregates in the `DataSourceRequest`
 
 ## See Also
 
-Other articles and how-to examples on the Kendo UI Grid HtmlHelper:
+* [Overview of the Grid HtmlHelper]({% slug overview_gridhelper_aspnetmvc %})
+* [GridBuilder API Reference](/api/aspnet-mvc/Kendo.Mvc.UI.Fluent/AutoCompleteBuilder)
 
-* [Overview of the Grid HtmlHelper]({% slug overview_uploadhelper_aspnetmvc %})
-* [How to Apply Custom Row Styles Based on Model Data]({% slug howto_applycustomrrowstylesmodeldata_gridaspnetmv %})
-* [How to Bind the Grid to the SignalR Hub]({% slug howto_bindgridtosignalrhub_gridaspnetmv %})
-* [How to Export Grid Data in PDF]({% slug howto_exportonpdf_gridaspnetmv %})
-* [How to Export Grid Data to CSV Files]({% slug howto_exportgriddatacsvfile_gridaspnetmv %})
-* [How to Export Grid Data to Excel]({% slug howto_exportgriddataasexceldocs_gridaspnetmv %})
-* [How to Handle Unauthorized Requests with Ajax-Bound Grids]({% slug howto_handleunathorizedrequestsajaxbound_gridaspnetmv %})
-* [How to Post Grid Data with Form]({% slug howto_postgriddatawithform_gridaspnetmv %})
-* [How to Post Grid Selection to Server]({% slug howto_postselectiontoserver_gridaspnetmv %})
-* [How to Preserve the Grid Server Toolbar Template after Using setOptions]({% slug howto_preserveservertemplateaftersetoptions_gridaspnetmv %})
-* [How to Use Custom JsonResult with Ajax-Bound Grids]({% slug howto_usecustomjsonresultajaxbound_gridaspnetmvc %})
-* [How to Use Grid Hierarchy with Dynamic Model Loading and DataTable]({% slug howto_usegridhierarchydynamicmodelload_gridaspnetmv %})
-* [How to Use Grid Self-Referencing Hierarchy]({% slug howto_usegridselfrefhierarchy_gridaspnetmv %})
-* [How to Use oData v4 with WebAPI Controller]({% slug howto_useodata4webapicontroller_gridaspnetmvc %})
-* [How to Use the Sortable to Reorder Grid Rows]({% slug howto_usesortabletoreorder_gridaspnetmv %})
-* [How to Use UTC on Both Client and Server]({% slug howto_useutctimeonclientandserver_gridaspnetmv %})
-
-For more runnable examples on the Kendo UI Grid HtmlHelper, browse the [how-to section of articles]({% slug howto_applycustomrowstylesbasedondata_gridaspnetmvc %}).
+For more runnable examples on the Kendo UI Grid in ASP.NET MVC applications, browse its [**How To** documentation folder]({% slug howto_applycustomrowstylesbasedondata_gridaspnetmvc %}).

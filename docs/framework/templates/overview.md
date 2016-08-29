@@ -153,6 +153,8 @@ Keep in mind that expressions even within HTML comments are executed, as demonst
 
     <!-- #alert('it is executed!')# -->
 
+Finally, note that there are limitations with regard to [using script expressions in the `Name()` method of Kendo UI MVC wrappers](/aspnet-mvc/troubleshoot/troubleshooting#kendo-ui-mvc-wrappers-do-not-work-inside-client-templates).
+
 ## Inline vs. External Templates
 
 Kendo UI Templates can be defined in either of the two ways:

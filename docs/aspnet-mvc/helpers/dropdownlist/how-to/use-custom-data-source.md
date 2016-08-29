@@ -15,6 +15,7 @@ To see the example, refer to the GitHub repo on how to [use a custom DataSource 
 
 Other articles and how-to examples on the Kendo UI DropDownList HtmlHelper:
 
-* [DropDownList HtmlHelper Overview]({% slug overview_dropdownlisthelper_aspnetmvc %})
-* [How to Cascade DropDownLists Using WebApi Service in ASP.NET MVC Apps]({% slug howto_cascadeddlusingwebapiservice_ddlaspnetmvc %})
-* [How to Cascade DropDownLists with Enabled Virtualization in ASP.NET MVC Apps]({% slug howto_cascadeddlenabledvirtualization_ddlaspnetmvc %})
+* [Overview of the DropDownList HtmlHelper]({% slug overview_dropdownlisthelper_aspnetmvc %})
+* [DropDownListBuilder API Reference](/api/aspnet-mvc/Kendo.Mvc.UI.Fluent/DropDownListBuilder)
+
+For more runnable examples on the Kendo UI DropDownLists in ASP.NET MVC applications, browse its [**How To** documentation folder]({% slug howto_cascadeddlenabledvirtualization_ddlaspnetmvc %}).

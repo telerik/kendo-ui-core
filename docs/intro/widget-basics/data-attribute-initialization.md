@@ -141,7 +141,7 @@ The example below demonstrates how to use a member function as an event handler.
 
 The data source of data-bound Kendo UI widgets can also be set via a data attribute. The value can be a JavaScript object, array, or a variable available in the global scope.
 
-### Set DataSorce to Objects
+### Set DataSource to Objects
 
 The example below demonstrates how to set the data source of a Kendo UI widget to a JavaScript object.
 

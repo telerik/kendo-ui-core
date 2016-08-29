@@ -237,6 +237,69 @@
         });
     });
 
+    asyncTest("Reject pasted value if out of range", 1, function() {
+        var textbox = new NumericTextBox(input, {
+            max: 100
+        });
+
+        stub(textbox, "_update");
+
+        input.val("1000");
+        input.trigger("paste", {
+            target: input[0]
+        });
+
+        setTimeout(function() {
+            start();
+            equal(textbox.calls("_update"), 1);
+        }, 100);
+    });
+
+    asyncTest("Reject pasted value if not valid", 1, function() {
+        var textbox = new NumericTextBox(input, {
+            restrictDecimals: 2
+        });
+
+        stub(textbox, "_update");
+
+        input.val("10.1234");
+        input.trigger("paste", {
+            target: input[0]
+        });
+
+        setTimeout(function() {
+            start();
+            equal(textbox.calls("_update"), 1);
+        }, 100);
+    });
+
+    test("Allow infinite decimal digits", 0, function() {
+        var textbox = new NumericTextBox(input);
+
+        input.val("2.22222");
+
+        input.pressKey("4", {
+            preventDefault: function() {
+                ok(false);
+            }
+        });
+    });
+
+    test("Prevent decimals digits after precision is reached", 1, function() {
+        var textbox = new NumericTextBox(input, {
+            decimals: 3,
+            restrictDecimals: true
+        });
+
+        input.val("2.222");
+
+        input.pressKey("4", {
+            preventDefault: function() {
+                ok(true);
+            }
+        });
+    });
+
     test("Focus origin input on touched", 1, function() {
         kendo.support.mobileOS = true;
 

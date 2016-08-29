@@ -393,4 +393,42 @@ $.extend(true, kendo.ui.Validator.prototype.options.messages,{
   "date": "{0} не корректная дата"
 });
 }
+
+/* Dialog */
+
+if (kendo.ui.Dialog) {
+kendo.ui.Dialog.prototype.options.messages =
+$.extend(true, kendo.ui.Dialog.prototype.options.localization, {
+  "close": "Закрыть"
+});
+}
+
+/* Alert */
+
+if (kendo.ui.Alert) {
+kendo.ui.Alert.prototype.options.messages =
+$.extend(true, kendo.ui.Alert.prototype.options.localization, {
+  "okText": "ОК"
+});
+}
+
+/* Confirm */
+
+if (kendo.ui.Confirm) {
+kendo.ui.Confirm.prototype.options.messages =
+$.extend(true, kendo.ui.Confirm.prototype.options.localization, {
+  "okText": "ОК",
+  "cancel": "Отмена"
+});
+}
+
+/* Prompt */
+if (kendo.ui.Prompt) {
+kendo.ui.Prompt.prototype.options.messages =
+$.extend(true, kendo.ui.Prompt.prototype.options.localization, {
+  "okText": "ОК",
+  "cancel": "Отмена"
+});
+}
+
 })(window.kendo.jQuery);

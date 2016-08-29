@@ -480,7 +480,7 @@ A [**fade animation**](#configuration-animation) is highly recommended with any 
 
 ### value `String`*(default: null)*
 
-Specifies the selectd tab. Should be corresponding to the dataTextField configuration and used when bound to a DataSource component.
+Specifies the selected tab. Should be corresponding to the dataTextField configuration and used when bound to a DataSource component.
 
 #### Example
 

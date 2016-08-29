@@ -24,7 +24,8 @@ var __meta__ = { // jshint ignore:line
         CHANGE = "change",
         FOCUSED = "k-state-focused",
         HOVER = "k-state-hover",
-        LOADING = "k-loading",
+        LOADING = "k-i-loading",
+        HIDDENCLASS = "k-loading-hidden",
         OPEN = "open",
         CLOSE = "close",
         CASCADE = "cascade",
@@ -81,6 +82,7 @@ var __meta__ = { // jshint ignore:line
             }
 
             that._header();
+            that._noData();
             that._footer();
             that._accessors();
             that._initValue();
@@ -101,9 +103,11 @@ var __meta__ = { // jshint ignore:line
             }
 
             this._header();
+            this._noData();
             this._footer();
 
-            this._updateFooter();
+            this._renderFooter();
+            this._renderNoData();
         },
 
         focus: function() {
@@ -149,7 +153,6 @@ var __meta__ = { // jshint ignore:line
                 dataTextField: currentOptions.dataTextField,
                 groupTemplate: currentOptions.groupTemplate,
                 fixedGroupTemplate: currentOptions.fixedGroupTemplate,
-                noDataTemplate: currentOptions.noDataTemplate,
                 template: currentOptions.template
             }, options, virtual);
 
@@ -202,6 +205,36 @@ var __meta__ = { // jshint ignore:line
             return filter && filter !== "none";
         },
 
+        _hideClear: function() {
+            var that = this;
+
+            if(that._clear) {
+                this._clear.addClass(HIDDENCLASS);
+            }
+        },
+
+        _showClear: function() {
+            var that = this;
+
+            if(that._clear) {
+                this._clear.removeClass(HIDDENCLASS);
+            }
+        },
+
+        _clearValue: function() {
+            this.listView.value([]);
+            this._clearText();
+            this._accessor("");
+            if(this._isFilterEnabled()) {
+                this._filter({word: "", open: false});
+            }
+            this._change();
+        },
+
+        _clearText: function() {
+            this.text("");
+        },
+
         _clearFilter: function() {
             if (!this.options.virtual) {
                 this.listView.bound(false);
@@ -252,6 +285,39 @@ var __meta__ = { // jshint ignore:line
             });
         },
 
+        _noData: function() {
+            var noData = $(this.noData);
+            var template = this.options.noDataTemplate;
+
+            this.angular("cleanup", function() { return { elements: noData }; });
+            kendo.destroy(noData);
+            noData.remove();
+
+            if (!template) {
+                this.noData = null;
+                return;
+            }
+
+            this.noData = $('<div class="k-nodata" style="display:none"><div></div></div>').appendTo(this.list);
+            this.noDataTemplate = typeof template !== "function" ? kendo.template(template) : template;
+        },
+
+        _renderNoData: function() {
+            var noData = this.noData;
+
+            if (!noData) {
+                return;
+            }
+
+            this._angularElement(noData, "cleanup");
+            noData.children(":first").html(this.noDataTemplate({ instance: this }));
+            this._angularElement(noData, "compile");
+        },
+
+        _toggleNoData: function(show) {
+            $(this.noData).toggle(show);
+        },
+
         _footer: function() {
             var footer = $(this.footer);
             var template = this.options.footerTemplate;
@@ -269,7 +335,7 @@ var __meta__ = { // jshint ignore:line
             this.footerTemplate = typeof template !== "function" ? kendo.template(template) : template;
         },
 
-        _updateFooter: function() {
+        _renderFooter: function() {
             var footer = this.footer;
 
             if (!footer) {
@@ -337,6 +403,41 @@ var __meta__ = { // jshint ignore:line
 
         _focus: function(candidate) {
             return this.listView.focus(candidate);
+        },
+
+        _filter: function(options) {
+            var that = this;
+            var widgetOptions = that.options;
+            var ignoreCase = widgetOptions.ignoreCase;
+            var field = widgetOptions.dataTextField;
+
+            var expression = {
+                value: ignoreCase ? options.word.toLowerCase() : options.word,
+                field: field,
+                operator: widgetOptions.filter,
+                ignoreCase: ignoreCase
+            };
+
+            that._open = options.open;
+            that._filterSource(expression);
+
+        },
+
+        search: function(word) {
+            var options = this.options;
+
+            word = typeof word === "string" ? word : this._inputValue();
+
+            clearTimeout(this._typingTimeout);
+
+            if ((!options.enforceMinLength && !word.length) || word.length >= options.minLength) {
+                this._state = "filter";
+                if (!this._isFilterEnabled()) {
+                    this._searchByWord(word);
+                } else {
+                    this._filter({word: word, open: true});
+                }
+            }
         },
 
         current: function(candidate) {
@@ -523,8 +624,9 @@ var __meta__ = { // jshint ignore:line
             var visible = that.popup.visible();
             var offsetTop;
             var popups;
+            var footerHeight;
 
-            if (length) {
+            if (length || that.options.noDataTemplate) {
                 popups = list.add(list.parent(".k-animation-container")).show();
 
                 if (!list.is(":visible")) {
@@ -538,7 +640,8 @@ var __meta__ = { // jshint ignore:line
 
                 if (height !== "auto") {
                     offsetTop = that._offsetHeight();
-                    height = height - offsetTop - $(that.footer).outerHeight();
+                    footerHeight = $(that.footer).outerHeight() || 0;
+                    height = height - offsetTop - footerHeight;
                 }
 
                 that.listView.content.height(height);
@@ -810,33 +913,6 @@ var __meta__ = { // jshint ignore:line
             }
         },
 
-        search: function(word) {
-            word = typeof word === "string" ? word : this.text();
-            var that = this;
-            var length = word.length;
-            var options = that.options;
-            var ignoreCase = options.ignoreCase;
-            var field = options.dataTextField;
-
-            clearTimeout(that._typingTimeout);
-
-            if (!length || length >= options.minLength) {
-                that._state = "filter";
-
-                if (!that._isFilterEnabled()) {
-                    that._filter(word);
-                } else {
-                    that._open = true;
-                    that._filterSource({
-                        value: ignoreCase ? word.toLowerCase() : word,
-                        field: field,
-                        operator: options.filter,
-                        ignoreCase: ignoreCase
-                    });
-                }
-            }
-        },
-
         _accessor: function(value, idx) {
             return this[this._isSelect ? "_accessorSelect" : "_accessorInput"](value, idx);
         },
@@ -903,6 +979,7 @@ var __meta__ = { // jshint ignore:line
             that._arrow.removeClass(LOADING);
             that._focused.attr("aria-busy", false);
             that._busy = null;
+            that._showClear();
         },
 
         _showBusy: function () {
@@ -918,6 +995,7 @@ var __meta__ = { // jshint ignore:line
                 if (that._arrow) { //destroyed after request start
                     that._focused.attr("aria-busy", true);
                     that._arrow.addClass(LOADING);
+                    that._hideClear();
                 }
             }, 100);
         },
@@ -1085,6 +1163,13 @@ var __meta__ = { // jshint ignore:line
                 }
                 that.close();
                 pressed = true;
+            } else if (that.popup.visible() && (key === keys.PAGEDOWN || key === keys.PAGEUP)) {
+                e.preventDefault();
+
+                var direction = key === keys.PAGEDOWN ? 1 : -1;
+                listView.scrollWith(direction * listView.screenHeight());
+
+                pressed = true;
             }
 
             return pressed;
@@ -1185,6 +1270,11 @@ var __meta__ = { // jshint ignore:line
 
         _parentWidget: function() {
             var name = this.options.name;
+
+            if (!this.options.cascadeFrom) {
+                return;
+            }
+
             var parentElement = $("#" + this.options.cascadeFrom);
             var parent = parentElement.data("kendo" + name);
 
@@ -1359,7 +1449,6 @@ var __meta__ = { // jshint ignore:line
 
             this._getter();
             this._templates();
-            this._noData();
 
             this.setDataSource(this.options.dataSource);
 
@@ -1380,8 +1469,7 @@ var __meta__ = { // jshint ignore:line
             selectable: true,
             template: null,
             groupTemplate: null,
-            fixedGroupTemplate: null,
-            noDataTemplate: null
+            fixedGroupTemplate: null
         },
 
         events: [
@@ -1430,7 +1518,6 @@ var __meta__ = { // jshint ignore:line
 
             this._getter();
             this._templates();
-            this._noData();
             this._render();
         },
 
@@ -1450,12 +1537,20 @@ var __meta__ = { // jshint ignore:line
             return this.dataSource.flatView()[index];
         },
 
+        screenHeight: function() {
+            return this.content[0].clientHeight;
+        },
+
         scrollToIndex: function(index) {
             var item = this.element[0].children[index];
 
             if (item) {
                 this.scroll(item);
             }
+        },
+
+        scrollWith: function(value) {
+            this.content.scrollTop(this.content.scrollTop() + value);
         },
 
         scroll: function (item) {
@@ -1885,26 +1980,6 @@ var __meta__ = { // jshint ignore:line
             return candidate;
         },
 
-        _noData: function() {
-            var noData = $(this.noData);
-            var template = this.templates.noDataTemplate;
-
-            this.angular("cleanup", function() { return { elements: noData }; });
-            kendo.destroy(noData);
-            noData.remove();
-
-            if (!template) {
-                this.noData = null;
-                return;
-            }
-
-            this.noData = this.content.after('<div class="k-nodata" style="display:none"></div>').next();
-
-            this.noData.html(template({}));
-
-            this.angular("compile", function() { return { elements: noData }; });
-        },
-
         _template: function() {
             var that = this;
             var options = that.options;
@@ -1928,8 +2003,7 @@ var __meta__ = { // jshint ignore:line
             var templates = {
                 template: options.template,
                 groupTemplate: options.groupTemplate,
-                fixedGroupTemplate: options.fixedGroupTemplate,
-                noDataTemplate: options.noDataTemplate
+                fixedGroupTemplate: options.fixedGroupTemplate
             };
 
             for (var key in templates) {
@@ -2135,8 +2209,6 @@ var __meta__ = { // jshint ignore:line
             that._fixedHeader();
 
             that._render();
-
-            $(that.noData).toggle(!that._view.length);
 
             that.bound(true);
 

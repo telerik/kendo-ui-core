@@ -528,7 +528,7 @@ var __meta__ = { // jshint ignore:line
             dateChanged;
 
             value = that._update(value);
-            dateChanged = +that._old != +value;
+            dateChanged = !kendo.calendar.isEqualDate(that._old, value);
 
             var valueUpdated = dateChanged && !that._typing;
             var textFormatted = oldValue !== that.element.val();
@@ -573,7 +573,7 @@ var __meta__ = { // jshint ignore:line
             icon = element.next("span.k-select");
 
             if (!icon[0]) {
-                icon = $('<span unselectable="on" class="k-select"><span unselectable="on" class="k-icon k-i-calendar">select</span></span>').insertAfter(element);
+                icon = $('<span unselectable="on" class="k-select" aria-label="select"><span class="k-icon k-i-calendar"></span></span>').insertAfter(element);
             }
 
             that._dateIcon = icon.attr({
@@ -635,7 +635,7 @@ var __meta__ = { // jshint ignore:line
 
             that._value = date;
             that.dateView.value(date);
-            that.element.val(date ? kendo.toString(date, options.format, options.culture) : value);
+            that.element.val(kendo.toString(date || value, options.format, options.culture));
             that._updateARIA(date);
 
             return date;

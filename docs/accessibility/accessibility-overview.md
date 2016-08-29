@@ -30,7 +30,7 @@ to learn more:
 
 ## See Also
 
-Other articles on Kendo UI Accessibility support:
+Other articles on the accessibility support provided by Kendo UI:
 
 * [Charts]({% slug charts_accessibility_support %})
 * [High-Contrast Theme]({% slug high_contrast_theme_accessibility_support %})

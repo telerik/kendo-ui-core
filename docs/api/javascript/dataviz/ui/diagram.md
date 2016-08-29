@@ -2308,6 +2308,7 @@ Specifies the type of the Shape using any of the built-in shape type.
 * "rectangle": this is the default option
 * "circle": a circle/ellipse
 * "image": an image
+* "text": some text
 
 ### shapeDefaults.visual `Function`
 
@@ -2318,9 +2319,11 @@ A function returning a visual element to render for a given shape. The following
 * [Path](/api/javascript/dataviz/diagram/path)
 * [Line](/api/javascript/dataviz/diagram/line)
 * [Polyline](/api/javascript/dataviz/diagram/polyline)
-* [TextBlock](/api/javascript/dataviz/diagram/textBlock)
+* [TextBlock](/api/javascript/dataviz/diagram/text_block)
 * [Image](/api/javascript/dataviz/diagram/image)
 * [Layout](/api/javascript/dataviz/diagram/layout)
+
+> Note that the visual bounding box origin must be (0, 0). If you have a complex path which coordinates cannot be easily adjusted then you can position the element as demonstrated in [this](/controls/diagrams-and-maps/diagram/how-to/adjust-path-origin) example.
 
 #### Example - how to use the visual
     <div id="diagram"></div>
@@ -2343,10 +2346,10 @@ A function returning a visual element to render for a given shape. The following
                 y: 20
             });
             g.append(fn);
-            
+
             return g;
         };
-    
+
         $("#diagram").kendoDiagram({
             dataSource: [{
                 "name" : "Telerik",
@@ -3825,7 +3828,7 @@ Fired when dragging shapes or connection.
 
 ##### e.connectionHandle `String`
 
-A value indicating which handle of the connection is being dragged. The value will be `"source"` for the source handle, `"target"` for the target handle and `undefined` if the entire connection is being dragged. 
+A value indicating which handle of the connection is being dragged. The value will be `"source"` for the source handle, `"target"` for the target handle and `undefined` if the entire connection is being dragged.
 
 ##### e.connections `Array`
 
@@ -4118,4 +4121,3 @@ The widget instance which fired the event.
 ##### e.zoom `Number`
 
 The current zoom level.
-

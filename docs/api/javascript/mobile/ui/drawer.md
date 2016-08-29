@@ -76,7 +76,9 @@ The position of the drawer. Can be `left` (default) or `right`.
 
 ### swipeToOpen `Boolean` *(default: true)*
 
-If set to `false`, swiping the view will not activate the drawer. In this case, the drawer will only be open by a designated button
+If set to `false`, swiping the view will not activate the drawer. In this case, the drawer will only be open by a designated button.
+
+`swipeToOpen` should be disabled for browsers, which use side swiping gestures for back/forward navigation, such as iOS Safari. Otherwise, users should swipe from an inner part of the view, and not from the view edge.
 
 ### swipeToOpenViews `Array`
 

@@ -24,7 +24,7 @@ var __meta__ = { // jshint ignore:line
         CLICK = "click",
         KEYDOWN = "keydown",
         DISABLED = "disabled",
-        iconTemplate = kendo.template('<a href="\\#" title="#=text#" class="k-link k-pager-nav #= wrapClassName #"><span class="k-icon #= className #">#=text#</span></a>');
+        iconTemplate = kendo.template('<a href="\\#" aria-label="#=text#" class="k-link k-pager-nav #= wrapClassName #"><span class="k-icon #= className #"></span></a>');
 
     function button(template, idx, text, numeric, title) {
         return template( {

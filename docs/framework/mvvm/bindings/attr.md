@@ -66,7 +66,7 @@ You can also set HTML5 data attributes via the `attr` binding, as demonstrated i
 
 ## Widget Support
 
-The `attr` binding is not supported by the [Kendo UI widgets](http://demos.telerik.com/kendo-ui/).
+The [Kendo UI widgets](http://demos.telerik.com/kendo-ui/) do not support the `attr` binding.
 
 ## See Also
 

@@ -384,4 +384,42 @@ $.extend(true, kendo.ui.Validator.prototype.options.messages,{
   "date": "{0} սխալ ամսաթիվ է"
 });
 }
+
+/* Dialog */
+
+if (kendo.ui.Dialog) {
+kendo.ui.Dialog.prototype.options.messages =
+$.extend(true, kendo.ui.Dialog.prototype.options.localization, {
+  "close": "սերտ"
+});
+}
+
+/* Alert */
+
+if (kendo.ui.Alert) {
+kendo.ui.Alert.prototype.options.messages =
+$.extend(true, kendo.ui.Alert.prototype.options.localization, {
+  "okText": "լավ"
+});
+}
+
+/* Confirm */
+
+if (kendo.ui.Confirm) {
+kendo.ui.Confirm.prototype.options.messages =
+$.extend(true, kendo.ui.Confirm.prototype.options.localization, {
+  "okText": "լավ",
+  "cancel": "Չեղարկել"
+});
+}
+
+/* Prompt */
+if (kendo.ui.Prompt) {
+kendo.ui.Prompt.prototype.options.messages =
+$.extend(true, kendo.ui.Prompt.prototype.options.localization, {
+  "okText": "լավ",
+  "cancel": "Չեղարկել"
+});
+}
+
 })(window.kendo.jQuery);

@@ -142,8 +142,6 @@ You can reference an existing Kendo UI Editor instance via [`jQuery.data()`](htt
 Other articles on Telerik UI for ASP.NET MVC and on the Editor:
 
 * [ASP.NET MVC API Reference: EditorBuilder](/api/aspnet-mvc/Kendo.Mvc.UI.Fluent/EditorBuilder)
-* [How to Add maxlength Editor Validations in ASP.NET MVC Apps]({% slug howto_addmaxlengthvalidation_editoraspnetmvc %})
-* [How to Store Images in Databases when Working with the Editor HtmlHelper]({% slug howto_storeimagesindatabases_editoraspnetmvc %})
 * [Overview of Telerik UI for ASP.NET MVC]({% slug overview_aspnetmvc %})
 * [Fundamentals of Telerik UI for ASP.NET MVC]({% slug fundamentals_aspnetmvc %})
 * [Scaffolding in Telerik UI for ASP.NET MVC]({% slug scaffolding_aspnetmvc %})
@@ -152,3 +150,5 @@ Other articles on Telerik UI for ASP.NET MVC and on the Editor:
 * [Telerik UI for ASP.NET MVC HtmlHelpers Folder]({% slug overview_barcodehelper_aspnetmvc %})
 * [Tutorials on Telerik UI for ASP.NET MVC]({% slug overview_timeefficiencyapp_aspnetmvc6 %})
 * [Telerik UI for ASP.NET MVC Troubleshooting]({% slug troubleshooting_aspnetmvc %})
+
+For runnable examples on the Kendo UI Editor in ASP.NET MVC applications, browse its [**How To** documentation folder]({% slug howto_addmaxlengthvalidation_editoraspnetmvc %}).

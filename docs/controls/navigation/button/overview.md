@@ -10,13 +10,13 @@ position: 1
 
 The [Kendo UI Button widget](http://demos.telerik.com/kendo-ui/button/index) provides a styled clickable UI functionality with arbitrary content. Apart from consistent Kendo UI styling, the Button provides keyboard operability for elements, which natively do not have it (e.g., `span`).
 
-Note that the content of this article necessitates your understanding of the [fundamental Kendo UI widget concepts](/widgets).
+Note that the content of this article necessitates your understanding of the [fundamental Kendo UI widget concepts]({% slug initialize_widgets_using_jquery_plugins_installation %}).
 
 ## Getting Started
 
 The Button widget can be initialized from any element with any content. However, using the `button` or `a` elements is more reasonable. When using a `button` element inside a `form`, you should be aware that the default `type` HTML attribute for buttons is `submit`. Clicking the button will submit the form and reload the page. If this is not desired, then use an explicit `type="button"` HTML attribute.
 
-Kendo UI Button can include both inline and block elements, but make sure to take into account web standards, which prohibit placing block elements (e.g., `div`, `p`) inside inline elements (e.g., `a`, `span`).
+Kendo UI Button can include both inline and block elements, but make sure to take into account web standards, which prohibit placing block elements&mdash;for example, `div` and `p`&mdash;inside inline elements&mdash;for example, `a` and `span`.
 
 Placing clickable elements with their own special behavior inside the Button widget (e.g., hyperlinks, textboxes, etc.) may cause undesired side effects.
 
@@ -53,7 +53,7 @@ Although each Button represents a separate widget instance on the page, multiple
 
 #### Apply kendo.init()
 
-This approach allows you to initialize multiple Button widgets at once, but with different configuration options. For more information, refer to [Data Attribute Initialization](/data-attribute-initialization) and [`kendo.init()` method description](/api/framework/kendo#methods-init).
+This approach allows you to initialize multiple Button widgets at once, but with different configuration options. For more information, refer to [Data Attribute Initialization]({% slug initialize_widgets_using_markup_installation %}) and [`kendo.init()` method description](/api/javascript/kendo#methods-init).
 
 ###### Example
 
@@ -77,7 +77,7 @@ This approach allows you to initialize multiple Button widgets at once, but with
 
 ### Enable or Disable Buttons
 
-The business logic of an application often requires a certain button to be temporarily disabled or enabled. Kendo UI Button can be configured to be initially disabled via its `enable` property or by initializing it from an element, which has a `disabled="disabled"` HTML attribute. The Button can also be disabled or enabled at any time with Javascript by using its `enable()` method with a boolean argument.
+The business logic of an application often requires a certain button to be temporarily disabled or enabled. Kendo UI Button can be configured to be initially disabled via its `enable` property or by initializing it from an element, which has a `disabled="disabled"` HTML attribute. The Button can also be disabled or enabled at any time with Javascript by using its `enable()` method with a Boolean argument.
 
 The example below demonstrates how to enable and disable the Button.
 
@@ -100,13 +100,13 @@ The example below demonstrates how to enable and disable the Button.
 
 	</script>
 
-For more information on the Button [`enable` property](/api/web/button#configuration-enable) and the [`enable` method](/api/web/button#methods-enable), please refer to the [Button API](/api/web/button/).    
+For more information on the Button [`enable` property](/api/javascript/ui/button#configuration-enable) and the [`enable` method](/api/javascript/ui/button#methods-enable), refer to the [Button API](/api/javascript/ui/button).    
 
 ## Add Icons
 
-The Button can accommodate an icon, which enhances the meaning of the text content. The widget provides three ways to add an icon with a classic `img` element or with a background image (usually a sprite). From web standarts' point of view, using background images is better, because the icon does not represent structural content, but is simply a decoration.
+The Button can accommodate an icon, which enhances the meaning of the text content. The widget provides three ways to add an icon with a classic `img` element or with a background image (usually a sprite). From web standards' point of view, using background images is better, because the icon does not represent structural content, but is simply a decoration.
 
-Kendo UI Button provides three properties for configuring icons - `icon`, `spriteCssClass` and `imageUrl`. Use only one of them with a particular Button instance. If you defines multiple properties, only one of them will be obeyed and according to the order stated above.
+Kendo UI Button provides three properties for configuring icons&mdash;`icon`, `spriteCssClass` and `imageUrl`. Use only one of them with a particular Button instance. If you defines multiple properties, only one of them will be obeyed and according to the order stated above.
 
 ### Background Icons
 
@@ -216,7 +216,7 @@ The example below demonstrates how to use the `imageUrl`.
 
 	</script>
 
-In order to increase the accessibility of the widget when adding an `img` element manually, an `alt` attribute is required.
+To increase the accessibility of the widget when adding an `img` element manually, apply an `alt` attribute.
 
 ### Font Icons
 
@@ -308,7 +308,7 @@ The example below demonstrates how to save and access a reference to a Button in
 
 	</script>
 
-For further reading and related information, please refer to the [Button API](/api/web/button/).
+For further reading and related information, please refer to the [Button API](/api/javascript/ui/button).
 
 Kendo UI Button can be used for creating different style of buttons, like the Floating Action Button from the Material Design theme.
 
@@ -347,7 +347,7 @@ The example below demonstrates how to create a Floating Action Button.
 
 Other articles on Kendo UI Button:
 
-* [Overview of the ASP.NET MVC HtmlHelper Extension for the Button Widget](/aspnet-mvc/helpers/button/overview)
+* [Overview of the ASP.NET MVC HtmlHelper Extension for the Button Widget]({% slug overview_buttonhelper_aspnetmvc %})
 * [Overview of the Button JSP Tag]({% slug overview_button_uiforjsp %})
-* [Overview of the Button PHP Class](/php/widgets/button/overview)
+* [Overview of the Button PHP Class]({% slug overview_button_uiforphp %})
 * [Button JavaScript API Reference](/api/javascript/ui/button)

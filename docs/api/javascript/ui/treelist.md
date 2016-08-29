@@ -104,6 +104,8 @@ The configuration of the column command(s). If set the column would display a bu
 
 Custom commands are supported by specifying the [click](#configuration-columns.command.click) option.
 
+> A command column cannot be [expandable](#configuration-columns.expandable).
+> 
 > The built-in "edit", "createChild" and "destroy" commands work *only* if editing is enabled via the [editable](#configuration-editable) option. The "edit" command supports "inline" and "popup" editing modes.
 
 #### Example - set command as array of strings
@@ -371,6 +373,8 @@ If set to `true` the column value will be HTML-encoded before it is displayed. I
 ### columns.expandable `Boolean` *(default: false)*
 
 If set to `true` the column will show the icons that are used for expanding and collapsing child rows. By default, the first column of the TreeList is expandable.
+
+> An expandable column cannot hold [commands](#configuration-columns.command).
 
 #### Example - make the second column expandable
 
@@ -3070,6 +3074,29 @@ If an `Array` value is assigned, it will be treated as the list of commands disp
         });
     </script>
 
+### toolbar.click `Function`
+
+The click handler of the toolbar command. Used for custom toolbar commands.
+
+#### Example - specify the name of the command
+
+    <div id="treeList"></div>
+    <script>
+        $("#treeList").kendoTreeList({
+          toolbar: [
+            { name: "custom", click: function() { alert("custom"); } }
+          ],
+          columns: [
+            { field: "name" },
+            { field: "age" }
+          ],
+          dataSource: [
+              { name: "Jane Doe", age: 30 },
+              { name: "John Doe", age: 33 }
+          ]
+        });
+    </script>
+
 ### toolbar.name `String`
 
 The name of the toolbar command. Either a built-in ("create", "excel", "pdf") or custom. The `name` is reflected in one of the CSS classes, which is applied to the button - `k-grid-name`.
@@ -3412,6 +3439,10 @@ This method expands the row.
 ##### row `String|Element|jQuery`
 
 A string, DOM element or jQuery object which represents the table row. A string is treated as a jQuery selector.
+
+#### Returns
+
+`Promise`
 
 #### Example
 
