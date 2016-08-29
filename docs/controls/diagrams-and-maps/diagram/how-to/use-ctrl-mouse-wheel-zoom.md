@@ -1,13 +1,13 @@
 ---
-title: Use Ctrl+Mouse Wheel to Zoom 
-page_title: Use Ctrl+Mouse Wheel to Zoom   | Kendo UI Diagram
-description: "Learn how to zoom Kendo UI Diagram widget with Ctrl+Mouse wheel."
+title: Zoom on Ctrl Keypress Only
+page_title: Zoom on Crtl Keypress Only | Kendo UI Diagram
+description: "Learn how to zoom the Kendo UI Diagram widget in and out by using the Ctrl key and the mouse wheel functionality."
 slug: howto_ctrlmousewheeltozoom_diagram
 ---
 
-# Use Ctrl+Mouse Wheel to Zoom 
+# Zoom on Ctrl Keypress Only
 
-The example below demonstrates how to setup Kendo UI Diagram to allow zooming only when `Ctrl` key is pressed.
+The example below demonstrates how to set up the Kendo UI Diagram to allow zooming in and out only when the `Ctrl` key is pressed.
 
 ###### Example
 
