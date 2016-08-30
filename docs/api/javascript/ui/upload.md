@@ -791,6 +791,12 @@ Enables the upload.
         upload.enable();
     </script>
 
+#### Parameters
+
+##### enable `Boolean` *(optional)*
+
+The argument, which defines whether to enable/disable the upload.
+
 ### getFiles
 
 Retrieves the files that are currently selected.
@@ -822,12 +828,6 @@ Removes a file by ID by sending a standard `remove` request to the handler.
 #### Example
 
 // demo
-
-#### Parameters
-
-##### enable `Boolean` *(optional)*
-
-The argument, which defines whether to enable/disable the upload.
 
 ### toggle
 
@@ -866,10 +866,7 @@ Manually triggers the upload process.
 
 Fires when the upload has been cancelled while in progress.
 
-
-
-Note: The cancel event fires only when the upload is in
-[async mode](/web/upload/modes#asynchronous-mode).
+> The `cancel` event fires only when the Upload is in [async mode](/web/upload/modes#asynchronous-mode).
 
 #### Example
 
