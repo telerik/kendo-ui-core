@@ -21,7 +21,7 @@
             NS = "kendoWindow",
             KDIALOG = ".k-dialog",
             KWINDOW = ".k-window",
-            KICONCLOSE = ".k-i-close",
+            KICONCLOSE = ".k-dialog-close",
             KCONTENTCLASS = "k-content",
             KCONTENT = ".k-content",
             KTITLELESS = "k-dialog-titleless",
@@ -747,7 +747,7 @@
             options: {
                 name: "Dialog",
                 messages: {
-                    close: "Close"
+                    close: ""
                 }
             }
         });
@@ -925,7 +925,8 @@
                     "<span class='k-dialog-title'>#= title #</span>" +
                 "</div>"
             ),
-            close: template("<a role='button' href='\\#' class='k-dialog-action k-link' aria-label='Close' tabindex='-1'><span class='k-icon k-i-close'>#= messages.close #</span></a>"),
+            close: template("<a role='button' href='\\#' class='k-button-bare k-dialog-action k-dialog-close' aria-label='Close' tabindex='-1'><span class='k-font-icon k-i-x'>#= messages.close #</span></a>"),
+            // close: template("<a role='button' href='\\#' class='k-dialog-action k-link' aria-label='Close' tabindex='-1'><span class='k-icon k-i-close'>#= messages.close #</span></a>"),
             actionbar: template("<ul class='k-dialog-buttongroup k-dialog-button-layout-#= buttonLayout #' role='toolbar' />"),
             //actionbar: "<ul class='k-dialog-buttongroup k-dialog-button-layout-normal' role='toolbar' />",
             overlay: "<div class='k-overlay' />",
