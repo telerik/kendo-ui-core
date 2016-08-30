@@ -11,7 +11,7 @@ position: 2
 
 Kendo UI provides a set of [custom elements](http://w3c.github.io/webcomponents/spec/custom/) allowing the initialization and application of Kendo UI widgets in the Web Components way.
 
-## Initialize the Widget
+## Initialize Widgets
 
 Initializing Kendo UI widgets is as simple as adding the desired custom element to the DOM. Attributes and child nodes can be used to provide values for the initialization options. Options of type `Object` are specified using JSON strings.
 
@@ -51,7 +51,7 @@ Creating widgets on the fly is also supported, as demonstrated in the example be
     </script>
 ```
 
-## Access Widget Fields and Methods
+## Access Fields and Methods
 
 When a Kendo UI widget is created as a web component from a custom HTML element, all its methods and fields are copied to this custom element. This spares the need to know which descendant of the custom element holds the widget instance.
 
