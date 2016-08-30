@@ -20,21 +20,18 @@ Because of the numerous functionalities it supports, the Grid is the most comple
 * [DataSource]({% slug overview_kendoui_datasourcecomponent %})&mdash;The DataSource is one of the pivotal Kendo UI components. It is an abstraction for using local or remote data and a key concept in understanding how the Grid functions.
 * [Remote CRUD Operations]({% slug cruddataoperations_kendoui_datasourcecomponent %}#remote-transport-crud-operations)&mdash;The section elaborates on scenarios, in which data is retrieved from and submitted to a remote data service through HTTP requests made by the Kendo UI DataSource.
 * [Remote Data Binding]({% slug remote_data_binding_grid %})&mdash;The article provides information on server filtering, paging, and other features of the Grid.
-* [Grid Editing Functionality]({% slug editing_kendoui_grid_widget %})&mdash;The editing functionality of the Grid allows you to manipulate the way its data is presented.
 * [Kendo UI Editing Functionality]({% slug kendoui_editing_gettingstarted %})&mdash;The editing functionality in some Kendo UI widgets, including the Grid, is implemented with a specific editor element or form that is bound to the model by using the [Kendo UI MVVM bindings]({% slug overview_mvvmpattern_kendoui %}).
 
 ### Initialize the Grid
 
 Use either of the two primary approaches to create Kendo UI Grids:
 
-* From empty `<div>` elements.
-* From HTML tables.
+* From an empty `<div>` element.
+* From an HTML table.
 
-To initialize a scrollable Grid with a set height in a PanelBar, TabStrip, or Window, you need to consider some additional layout specifics of the widget. For more information on this scenario, refer to the article on the [appearance of the Grid]({% slug appearance_kendoui_grid_widget %}#hidden-containers).
+#### From an Empty div
 
-#### From Empty div Elements
-
-When you initialize the Grid from an empty `<div>` element, all Grid settings are provided in the initialization script statement. This means that you have to describe the layout of the Grid in JavaScript.
+When you initialize the Grid from an empty `<div>` element, all Grid settings are provided in the initialization script statement. This means that you have to describe the layout and configuration of the Grid in JavaScript.
 
 ###### Example
 
@@ -69,9 +66,9 @@ When you initialize the Grid from an empty `<div>` element, all Grid settings ar
 
     </script>
 
-#### From HTML Tables
+#### From an HTML Table
 
-When you initialize the Grid from an HTML table, some settings of the Grid can be inferred from the table structure and the HTML attributes of the elements. This means that you can describe the layout of the Grid entirely in the HTML of the table.
+When you initialize the Grid from an HTML table, some of its settings can be inferred from the table structure and the HTML attributes of the elements. This means that you can describe the layout of the Grid entirely in the HTML of the table.
 
 The HTML table is usually already populated with data. This improves the accessibility and search engine optimization, and ensures that the user will see data even if JavaScript is disabled or there is a JavaScript error on the page.
 
@@ -116,7 +113,7 @@ The HTML table is usually already populated with data. This improves the accessi
 > **Important**  
 >
 > The Grid uses a Kendo UI DataSource instance even when the widget is created from an HTML table. The content of the cell is extracted and populates the DataSource in the following way:  
->    1. The names of the data fields in the DataSource are either created from the cell content of the header or from the `data-field` attributes of the header cells.  
+>    1. The names of the data fields in the DataSource are either created from the content of the header cells or from the `data-field` attributes of the header cells.  
 >    2. The names of the data fields have to be valid JavaScript identifiers. Therefore, it is recommended to use the `data-field` attributes. Otherwise the cell content of the header has to meet the following requirements:  
 >      * No spaces
 >      * No special characters
@@ -137,9 +134,9 @@ When the Grid is created from an existing table, you can define the following `c
 
 All attributes have to be applied to the `<th>` elements, except for the column width styles.
 
-It is not possible to define other column-related settings through HTML attributes in the `<table>`. If you have to use settings such as commands, locking, editors, custom rows, cell CSS classes, and others, skip the above attribute configuration and include all settings in the JavaScript initialization statement of the Grid. Note that you have to set the column properties through the `data-columns` attribute when using the declarative widget initialization.
+It is not possible to define other column-related settings through HTML attributes in the `<table>`. If you have to use settings, such as commands, locking, editors, custom rows, cell CSS classes, and others, skip the above attribute configuration and include all settings in the JavaScript initialization statement of the Grid. Note that you have to set the column properties through the `data-columns` attribute when using the declarative widget initialization.
 
-As the code snippets initiating the Grid above demonstrate, the client object of the Grid is attached to a `<div>` in the first case and to a `<table>` in the second case. However, the generated HTML output of the Grid entirely depends on the settings of the widget and it will always be the same, regardless of the way the widget is initialized.
+As the above code snippets demonstrate, the client object of the Grid is attached to a `<div>` in the first case and to a `<table>` in the second case. However, the generated HTML output of the Grid entirely depends on the settings of the widget and it will always be the same, regardless of the way the widget is initialized.
 
 ## Reference
 
@@ -152,27 +149,6 @@ The example below demonstrates how to access an existing Grid instance.
 ###### Example
 
     var grid = $("#grid").data("kendoGrid");
-
-## Keyboard Navigation
-
-Keyboard navigation within the Grid is configured through the `navigatable` option. When set to `true`, it is possible to initially select a row or a cell and then move through the Grid by using the `Arrow` keys.
-
-The navigation occurs at a cell level regardless of what the `selectable` mode is. To select the current row or cell, press the space bar.
-
-The example below demonstrates how to enable the key navigation in the Grid.
-
-###### Example
-
-    $("#grid").kendoGrid({
-         navigatable: true
-         // other configuration
-    });
-
-The keyboard navigation of the Grid works by listening to the `keydown` events on the wrapper element of the widget. It is assumed that everything the user does is in accordance with the currently focused Grid cell, not the focused element of the browser.
-
-If the data cells of the Grid contain hyperlinks and you want to activate them through the keyboard, navigate to the respective Grid cell by using the `Arrow` keys, then press `Enter` to focus the hyperlink inside the cell, and press `Enter` again. To return the focus on the table cell, press `Esc`. In order for the hyperlinks to be inaccessible through tabbing, set the `tabindex="-1"` attribute to the custom hyperlinks.
-
-It is also possible to avoid the described procedure. The custom hyperlinks can be accessed through tabbing and activated through `Enter` by hacking and bypassing the keyboard navigation of the Grid. To achieve this, prevent the event bubbling of the `keydown` event of the custom hyperlinks. In this way, the `Enter` key-presses go unnoticed by the Grid.
 
 ## See Also
 

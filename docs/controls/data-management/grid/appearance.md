@@ -480,61 +480,41 @@ For more information on using row templates, refer to the [walkthrough article](
 
 ## Hidden Containers
 
-If a scrollable Grid with a set height is initialized inside a hidden container&mdash;for example, when scrolling, virtual scrolling, or frozen columns are used&mdash;the Grid will not be able to adjust its vertical layout correctly, because the JavaScript calculations of the size do not work for elements of the `display:none` style.
+If a scrollable Grid with a set height is initialized inside a hidden container&mdash;for example, when scrolling, virtual scrolling, or frozen columns are used&mdash;the Grid will not be able to adjust its vertical layout correctly, because the JavaScript size calculations do not work for elements with a `display:none` style.
 
-### General Approaches
+### Symptoms
 
-Generally, consider the following approaches:
+The following behaviors can be observed if the Grid is initialized while hidden:
 
-* Apply [virtual scrolling]({% slug walkthrough_kendoui_grid_widget%}#virtual-scrolling) to make the vertical scrollbar disappear.
-* If you do not apply virtual scrolling, it is possible to use any of the following options:
-  * Initialize the Grid when its element becomes visible.
-  * Manually adjust the layout of the Grid. If you use an old Kendo UI version, apply the code from the previous example. You do not need to attach a `resize` handler of the window. As of Kendo UI Q3 2013 release onwards, it is possible to use the [`kendo.resize()`](/api/javascript/kendo#methods-resize) or the [`resize()`]({% slug responsivewebdesign_integration_kendoui %}#individual-widget-resizing) method of the Grid.
-  * Instead of setting an overall height for the Grid in its configuration, define the height for the scrollable data area only. In this case, no height calculations are made.
+* The Grid may appear smaller than expected.
+* The scrollable data area overflows the bottom border of the Grid.
+* If [virtual scrolling]({% slug walkthrough_kendoui_grid_widget%}#virtual-scrolling) is enabled, the vertical scrollbar is not visible.
+* Frozen columns are too narrow and non-frozen columns are not visible.
 
-     ###### Example
+### Solutions
 
-     ```
-        #GridID .k-grid-content
-        {
-            height: 270px;
-        }
-      ```
+* Delay the initialization of the Grid or change the order in which various Kendo UI widgets are initialized, so that the Grid is initialized after its element becomes visible.
 
-  * If you use virtual scrolling and the Grid is initialized while hidden, you have to re-fetch its dataSource when the widget becomes visible. This also readjusts the height of the scrollable data area and no other configuration is required.
+* Execute the [`resize`]({% slug responsivewebdesign_integration_kendoui %}#individual-widget-resizing) method of the Grid after the widget becomes visible.
 
-      ###### Example
+* Instead of setting an overall height for the Grid in its configuration, define the height for the scrollable data area only. In this case, no height calculations are made. This approach is applicable only if frozen columns and virtual scrolling are _not_ used.
 
-      ```
-        $("#GridID").data("kendoGrid").dataSource.fetch();
-      ```
+    ###### Example
 
-### Specific Scenarios
+    ```
+      #GridID .k-grid-content
+      {
+          height: 270px;
+      }
+    ```
 
-Depending on the exact scenario, the following behavior can be observed when the widget is eventually displayed:
+* Fetch the data source instead of calling the `resize()` method. This approach is applicable if virtual scrolling is enabled and the Kendo UI version is older than 2014.3.1119.
 
-* The scrollable data area overflows the bottom border of the Grid. This can be resolved by executing the [`resize`]({% slug responsivewebdesign_integration_kendoui %}#individual-widget-resizing) method when the Grid becomes visible. Alternatively, apply the desired height to the scrollable data area instead of the Grid widget.
+    ###### Example
 
-  ###### Example
-
-  ```
-    #GridID .k-grid-content
-    {
-        height: 270px;
-    }
-  ```
-
-* The virtual scrollbar is not visible. It is possible to resolve this issue by executing the [`resize`](/using-kendo-in-responsive-web-pages#individual-widget-resizing) method when the Grid becomes visible. For the Kendo UI Q3 2014 (2014.3.1119) release and older, apply the following statement instead of `resize()`.
-
-  ###### Example
-
-  ```
+    ```
     $("#GridID").data("kendoGrid").dataSource.fetch();
-  ```
-
-* Frozen columns are too narrow and non-frozen columns are not visible. It is possible to resolve this issue by executing the [`resize`]({% slug responsivewebdesign_integration_kendoui %}#individual-widget-resizing) method when the Grid becomes visible.
-
-In some cases, it might be possible to delay the initialization of the Grid, or change the order in which various Kendo UI widgets are initialized, so that the Grid is initialized while visible.
+    ```
 
 For more information on how to initialize the Grid inside other Kendo UI widgets which act as hidden containers, refer to the following articles:
 

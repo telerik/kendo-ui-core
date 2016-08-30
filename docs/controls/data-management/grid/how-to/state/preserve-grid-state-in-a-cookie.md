@@ -2,6 +2,7 @@
 title: Preserve Grid State in a Cookie
 page_title: Preserve Grid State in a Cookie | Kendo UI Grid
 description: "Learn how to preserve the Kendo UI Grid state in a cookie and restore it when the page is re-visited."
+previous_url: /controls/data-management/grid/how-to/preserve-grid-state-in-a-cookie
 slug: howto_preserve_gridstate_inacookie_grid
 ---
 
@@ -10,6 +11,7 @@ slug: howto_preserve_gridstate_inacookie_grid
 The example below demonstrates how to preserve the Grid state (filtering/sorting/paging/grouping and selection) in a cookie and restore it when the page is re-visited.
 
 > **Important**  
+>
 > If you are running the page directly from the hard-drive in Chrome, and not through a web server, Chrome will save no cookies for this page and persistence will not be available.
 
 ###### Example

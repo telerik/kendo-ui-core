@@ -14,7 +14,7 @@ The [Kendo UI Grid widget](http://demos.telerik.com/kendo-ui/grid/index) is a po
 
 ### Configure Auto Binding
 
-By default, the Grid is set to automatically bind to data&mdash;as soon as it is loaded, it causes the data source to query, and the data is loaded to the Grid.
+By default, the Grid is set to automatically bind to data&mdash;as soon as it is loaded, it causes the [DataSource]({% slug overview_kendoui_datasourcecomponent %}) to query, and the data is loaded to the Grid.
 
 To disable this behavior, set the `autoBind` option of the widget to `false`, as shown below.
 
@@ -287,9 +287,30 @@ To enable the single-column sorting, set the `mode` option to `multiple`.
         // other configuration
     });
 
+### Keyboard Navigation
+
+Keyboard navigation within the Grid is configured through the `navigatable` option. When set to `true`, it is possible to initially select a row or a cell and then move through the Grid by using the `Arrow` keys.
+
+The navigation occurs at a cell level regardless of what the `selectable` mode is. To select the current row or cell, press the space bar.
+
+The example below demonstrates how to enable the key navigation in the Grid.
+
+###### Example
+
+    $("#grid").kendoGrid({
+         navigatable: true
+         // other configuration
+    });
+
+The keyboard navigation of the Grid works by listening to the `keydown` events on the wrapper element of the widget. It is assumed that everything the user does is in accordance with the currently focused Grid cell, not the focused element of the browser.
+
+If the data cells of the Grid contain hyperlinks and you want to activate them through the keyboard, navigate to the respective Grid cell by using the `Arrow` keys, then press `Enter` to focus the hyperlink inside the cell, and press `Enter` again. To return the focus on the table cell, press `Esc`. In order for the hyperlinks to be inaccessible through tabbing, set the `tabindex="-1"` attribute to the custom hyperlinks.
+
+It is also possible to avoid the described procedure. The custom hyperlinks can be accessed through tabbing and activated through `Enter` by hacking and bypassing the keyboard navigation of the Grid. To achieve this, prevent the event bubbling of the `keydown` event of the custom hyperlinks. In this way, the `Enter` key-presses go unnoticed by the Grid.
+
 ## Templates
 
-### Rows
+### Row Templates
 
 It is possible to format any cell within the Grid by using templates within a script tag or within the template option on the column object if the Grid is initialized from a `<div>` element.
 
@@ -328,7 +349,7 @@ In the resulting Grid, the email address is an interactive hyperlink which opens
 
 For more information on the templating features in Kendo UI, refer to the [introductory article on templates in ASP.NET MVC applications]({% slug overview_kendoui_templatescomponent %}).
 
-### Columns
+### Column Templates
 
 Columns need additional specific templating when they represent complex displays and not single fields.
 
