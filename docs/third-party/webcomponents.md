@@ -11,7 +11,7 @@ position: 2
 
 Kendo UI provides a set of [custom elements](http://w3c.github.io/webcomponents/spec/custom/) allowing the initialization and application of the Kendo UI widgets in the Web Components way.
 
-## Initialize the Widget
+## Initialize Widgets
 
 Initializing a Kendo UI widget is as simple as adding the desired custom element to the DOM. To provide values for the initialization options, use attributes and child nodes. Specify options of the `Object` type by using JSON strings.
 
@@ -51,7 +51,7 @@ The creation of widgets on the fly is also supported, as demonstrated in the exa
     </script>
 ```
 
-## Access Widget Fields and Methods
+## Access Fields and Methods
 
 When a Kendo UI widget is created as a web component from a custom HTML element, all its methods and fields are copied to this custom element. This spares the need to know which descendant of the custom element holds the widget instance.
 
@@ -79,7 +79,7 @@ When a Kendo UI widget is created as a web component from a custom HTML element,
 
 Event handlers can be set either using the attributes of the element or by attaching them after the initialization of the widget using the  [`bind` method](/api/javascript/ui/widget#methods-bind). Attributes should follow the `on-eventname` convention and point to a handler living in the global scope.
 
-### The `init` Event
+### The init Event
 
 The Kendo UI R3 2016 release introduces a special `init` event, which is triggered once the custom element is attached to the DOM.
 
@@ -148,10 +148,9 @@ Specify the DataSource in the way you configure any other option&mdash;through t
 
 Web Components work using certain features that older browsers do not support. It is recommended to use the [`webcomponents.js`](http://webcomponents.org/polyfills/) polyfill library where wider Web Components support is required.
 
-
 > **Important**
 >
-> Since the Internet Explorer does not support custom elements at this point and relies on polyfills, the instance of the widget might not be available on the `DOMContentLoaded` or the jQuery `document.ready` event. Instead, use the [`WebComponentsReady`](http://webcomponents.org/polyfills/custom-elements/) event of the polyfill or the `init` event of the widget.
+> The widget instance might not be available on the `DOMContentLoaded` or the jQuery `document.ready` event because the Internet Explorer does not support custom elements at this point and relies on polyfills. Use the [`WebComponentsReady`](http://webcomponents.org/polyfills/custom-elements/) event of the polyfill or the `init` event of the widget instead.
 
 ## See Also
 

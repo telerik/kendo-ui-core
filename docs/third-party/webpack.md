@@ -8,13 +8,14 @@ position: 9
 
 # Webpack
 
+## Use the Kendo UI NPM Package
 
-## Include Kendo UI through the NPM package (recommended)
+The recommended approach to include Kendo UI is by using the NPM package. As of the Kendo UI 2016 Q2 SP1 release, both Kendo UI Core and Kendo UI Professional are distributed in an NPM format.
 
-As of the Kendo UI 2016 Q2 SP1 release, Both Kendo UI Core and Kendo UI Professional are distributed in an NPM format. For more details, check [the installation instructions]({% slug kendoui_npm_packages_kendoui_installation %}) and the [sample repository](https://github.com/telerik/kendo-ui-npm-example/tree/master/typescript-webpack).
+For more details, check [the installation instructions]({% slug kendoui_npm_packages_kendoui_installation %}) and the [sample repository](https://github.com/telerik/kendo-ui-npm-example/tree/master/typescript-webpack).
 
 > **Important**
-> * The typescript step is optional&mdash;the NPM package may be consumed from vanilla JavaScript or with the Babel transpiler.
+> * The typescript step is optional&mdash;the NPM package might be consumed from vanilla JavaScript or with the Babel transpiler.
 > * The Kendo UI [TypeScript typings are global](https://github.com/typings/typings/blob/master/docs/faq.md#what-are-global-dependencies). This means that TypeScript will complain if you try to import the `kendo` object. Use the global reference instead.
 
 ###### Example
@@ -30,7 +31,7 @@ import 'kendo-ui-core';
 console.log(kendo);
 ```
 
-## Include CDN or Packaged Kendo UI Scripts (AMD Format)
+## Use CDN or Packaged Kendo UI Scripts
 
 The Kendo UI packaged scripts are in an AMD-compatible format, which means that they can be used by [Webpack](http://webpack.github.io). This sections below demonstrate the necessary Webpack configuration for this setup.
 
@@ -48,9 +49,9 @@ The instructions for obtaining and building the Kendo UI Core scripts are listed
 
 Once the scripts are available and present in your project directory, the Webpack configuration demonstrated in the sections below will pick and bundle them in your project.
 
-### index.html
+###### Example
 
-```html
+```tab-index.html
     <!DOCTYPE html>
     <html>
     <head>
@@ -66,10 +67,7 @@ Once the scripts are available and present in your project directory, the Webpac
     </body>
     </html>
 ```
-
-### main.js
-
-```javascript
+```tab-main.js
     require('jquery')
 
     require('kendo.dropdownlist')
@@ -83,27 +81,24 @@ Once the scripts are available and present in your project directory, the Webpac
         ]
     });
 ```
-
-### webpack.config.js
-
-```javascript
-var path = require('path')
-module.exports = {
-    resolve: {
-        extensions: [ '', '.js', 'min.js' ],
-        root: [
-            path.resolve('.'),
-            path.resolve('../kendo/dist/js/') // the path to the minified scripts
-        ]
-    },
-    entry: './main',
-    output: {
-        filename: 'bundle.js'
+```tab-webpack.config.js
+    var path = require('path')
+    module.exports = {
+        resolve: {
+            extensions: [ '', '.js', 'min.js' ],
+            root: [
+                path.resolve('.'),
+                path.resolve('../kendo/dist/js/') // the path to the minified scripts
+            ]
+        },
+        entry: './main',
+        output: {
+            filename: 'bundle.js'
+        }
     }
-}
 ```
 
-You may test the configuration above by running the `webpack-dev-server` executable in the directory.
+You might test the configuration from the previous example by running the `webpack-dev-server` executable in the directory.
 
 ## See Also
 

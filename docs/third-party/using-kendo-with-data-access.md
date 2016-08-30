@@ -2,7 +2,7 @@
 title: Telerik Data Access
 page_title: Telerik Data Access | Kendo UI Third-Party Tools
 description: "Learn how to leverage Telerik Data Access Framework on the backend and let Kendo UI take care of the user interface."
-previous_url: /using-kendo-with-open-access
+previous_url: /using-kendo-with-open-access, /third-party/using-kendo-with-open-access.html
 slug: bindtotelerikdataaccesstool_integration_kendoui
 position: 7
 ---
@@ -61,7 +61,7 @@ When asked about the Data Access approach, select **Skip Creating a Telerik Data
 
 ![Configure The entitites](/images/oa11.png)
 
-## Connect OData Service to Kendo UI Grid
+## Connect oData to the Grid
 
 Now configure the front end. Wire up the Orders to a Kendo UI Grid. Kendo UI is a very rich and powerful framework that provides you with full control over the UI of your project, so make sure you explore it even further.
 
