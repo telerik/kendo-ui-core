@@ -176,6 +176,12 @@ The main milestones of the approach are:
            var widget = input.data("kendoNumericTextBox");
            var model = e.model;
 
+           if(widget) {
+                widget.bind("spin", function(e) {
+                  e.sender.trigger("change");
+                });
+              }
+
            input.on("keyup", function() {
              widget.value(input.val());
              widget.trigger("change");
