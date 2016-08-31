@@ -93,7 +93,7 @@ The opacity of the crosshair. By default the crosshair is opaque.
 
 ### axisDefaults.crosshair.tooltip `Object`
 
-The crossbar tooltip options.
+The crosshair tooltip options.
 
 > The crosshair tooltip is displayed when the [axisDefaults.crosshair.tooltip.visible](#configuration-axisDefaults.crosshair.tooltip.visible) option is set to `true`.
 
