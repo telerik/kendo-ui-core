@@ -929,7 +929,7 @@
             actionbar: template("<ul class='k-dialog-buttongroup k-dialog-button-layout-#= buttonLayout #' role='toolbar' />"),
             //actionbar: "<ul class='k-dialog-buttongroup k-dialog-button-layout-normal' role='toolbar' />",
             overlay: "<div class='k-overlay' />",
-            alertWrapper: template("<div class='k-widget k-dialog k-window' role='alertdialog' />"),
+            alertWrapper: template("<div class='k-widget k-dialog k-window k-dialog-centered' role='alertdialog' />"),
             alert: "<div />",
             confirm: "<div />",
             prompt: "<div />",
