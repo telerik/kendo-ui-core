@@ -71,7 +71,7 @@ By default, the Grid exports only the current page of data. To export all pages,
 
 > **Important**
 >
-> When the `allPages` option is set to `true` and `serverPaging` is enabled, the Grid will make a `"read"` request for all data. If the data items are too many, the browser may become unresponsive. In such cases, consider the implementation of [server-side export](#...).
+> When the `allPages` option is set to `true` and `serverPaging` is enabled, the Grid will make a `"read"` request for all data. If the data items are too many, the browser may become unresponsive. In such cases, consider the implementation of [server-side export](#server-side-processing).
 
 The example below demonstrates how to export all the data from a Kendo UI Grid to Excel.
 
