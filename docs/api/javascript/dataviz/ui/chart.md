@@ -941,7 +941,7 @@ The opacity of the crosshair. By default the crosshair is opaque.
 
 ### categoryAxis.crosshair.tooltip `Object`
 
-The crossbar tooltip options.
+The crosshair tooltip options.
 
 > The crosshair tooltip is displayed when the [categoryAxis.crosshair.tooltip.visible](#configuration-categoryAxis.crosshair.tooltip.visible) option is set to `true`.
 
@@ -18546,7 +18546,7 @@ The opacity of the crosshair. By default the crosshair is opaque.
 
 ### valueAxis.crosshair.tooltip `Object`
 
-The crossbar tooltip options.
+The crosshair tooltip options.
 
 > The crosshair tooltip is displayed when the [valueAxis.crosshair.tooltip.visible](#configuration-valueAxis.crosshair.tooltip.visible) option is set to `true`.
 
@@ -23044,7 +23044,7 @@ The opacity of the crosshair. By default the crosshair is opaque.
 
 ### xAxis.crosshair.tooltip `Object`
 
-The crossbar tooltip options.
+The crosshair tooltip options.
 
 > The crosshair tooltip is displayed when the [xAxis.crosshair.tooltip.visible](#configuration-xAxis.crosshair.tooltip.visible) option is set to `true`.
 
@@ -27817,7 +27817,7 @@ The opacity of the crosshair. By default the crosshair is opaque.
 
 ### yAxis.crosshair.tooltip `Object`
 
-The crossbar tooltip options.
+The crosshair tooltip options.
 
 > The crosshair tooltip is displayed when the [yAxis.crosshair.tooltip.visible](#configuration-yAxis.crosshair.tooltip.visible) option is set to `true`.
 
