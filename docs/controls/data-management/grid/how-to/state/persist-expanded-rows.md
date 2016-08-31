@@ -2,6 +2,7 @@
 title: Persist Expanded Rows after Refresh
 page_title: Persist Expanded Rows after Refresh | Kendo UI Grid
 description: "Learn how to persist expanded rows after refresh in a Kendo UI Grid."
+previous_url: /controls/data-management/grid/how-to/persist-expanded-rows
 slug: howto_persist_expanded_rows_afetrrefresh_grid
 ---
 

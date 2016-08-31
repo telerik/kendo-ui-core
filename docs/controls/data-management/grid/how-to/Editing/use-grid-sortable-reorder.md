@@ -1,13 +1,14 @@
 ---
-title: Initialize the Grid in Window
-page_title: Initialize the Grid in Window | Kendo UI Grid
-description: "Learn how to initialize a Kendo UI Grid inside a Kendo UI Window widget by resizing it according to the dimensions of its container."
-slug: howto_initializegridinwindow_grid
+title: Reorder Rows in Grids Using Sortable
+page_title: Reorder Rows in Grids Using Sortable | Kendo UI Grid
+description: "Learn how to use the Kendo UI Sortable widget with a Kendo UI Grid either in editable or non-editable modes."
+previous_url: /controls/data-management/grid/how-to/use-grid-sortable-reorder
+slug: howto_usegridandsortable_grid
 ---
 
-# Initialize the Grid in Window
+# Reorder Rows in Grids Using Sortable
 
-To see the example on how to use the `activate` event when initializing a Grid within a Window so that it is resized according to the dimensions of its container, refer to [this how-to article]({% slug initialize_thegrid_window_widget %}).
+To see the examples on how to use the Kendo UI Sortable widget with a Kendo UI Grid either in an editable or in a non-editable mode, refer to [this how-to article]({% slug howto_usesortablewithgrid_inincellediting_sortable %}).
 
 ## See Also
 

@@ -8,7 +8,9 @@ position: 6
 
 # Adaptive Rendering
 
-As of the Kendo UI Q3 2013 release, the Grid widget supports adaptive enhancements, such as changes in styling and behavior, to provide consistency to the client device experience. For instance, when filtering or editing data on a mobile device, Kendo UI slides in a new screen for the user, which is a departure from the more desktop-like inline and popup behaviors. To see those features in action, check the [adaptive rendering demos](http://demos.telerik.com/kendo-ui/m/index#grid/adaptive).
+As of the [Kendo UI Q3 2013 release](http://www.telerik.com/blogs/new-in-kendo-ui-q3-2013), the Grid supports adaptive enhancements, such as changes in styling and behavior, to provide consistency to the client device experience.
+
+For instance, when you filter or edit data on a mobile device, Kendo UI slides in a new screen for the user, which is a departure from the rather desktop-like inline and popup behaviors. To see these features in action, refer to the [adaptive rendering demos](http://demos.telerik.com/kendo-ui/m/index#grid/adaptive).
 
 ## Getting Started
 
@@ -36,11 +38,13 @@ To enable the adaptive rendering feature, set the [`mobile`](/api/javascript/ui/
     });
     </script>
 
+### Prerequisites
+
 The Kendo UI adaptive mode requires scripts, which are normally part of the Kendo UI Mobile (Hybrid) library (`kendo.mobile.min.js`). However, these scripts are also included in `kendo.web.min.js` and `kendo.all.min.js`. If you are using [individual widget scripts]({% slug include_only_what_you_need_kendoui_installation %}#individual-widget-scripts) or a [custom combined script]({% slug include_only_what_you_need_kendoui_installation %}#employ-download-builder), make sure the relevant scripts are included.
 
 ## Pane Configuration
 
-The mobile pane in which the adaptive Grid is placed does not automatically expand its height. To add an adaptive Grid to a kendo UI mobile application, set the `stretch` configuration of the respective view to `true`, or explicitly define the height of the widget.
+The mobile pane in which the adaptive Grid is placed does not automatically expand its height. To add an adaptive Grid to a Kendo UI mobile application, set the `stretch` configuration of the respective view to `true`, or explicitly define the height of the widget.
 
 ### Use the stretch Option
 
@@ -122,7 +126,7 @@ This section applies to the following cases:
 * When multiple adaptive Grids are used on the same page.
 * When the Grid is not the only content on the page.
 
-Each adaptive Grid is rendered inside a separate mobile pane. Since the position of the panes is absolute, the panes overlap. To avoid this issue, wrap each Grid inside a `<div>` container that is relatively positioned and has a set height. The absolute position is required for the transition between main and edit views to work correctly.
+Each adaptive Grid is rendered inside a separate mobile pane. Because the position of the panes is absolute, the panes overlap. To avoid this behavior, wrap each Grid inside a `<div>` container that is relatively positioned and has a set height. The absolute position is required for the transition between main and edit views to work correctly.
 
 The example below demonstrates how to add multiple adaptive Grids to the same page.
 
@@ -169,17 +173,13 @@ The recommended approach is to call [`kendo.destroy()`](/api/javascript/kendo#me
 
 ## See Also
 
-Other articles on the Kendo UI Grid:
-
-* [Blog Post for Building An Adaptive Grid and Scheduler for Kendo UI](http://blogs.telerik.com/kendoui/posts/13-10-10/building-an-adaptive-grid-and-scheduler-for-kendo-ui)
 * [Grid JavaScript API Reference](/api/javascript/ui/grid)
 * [Walkthrough of the Grid]({% slug walkthrough_kendoui_grid_widget %})
-* [Editing Functionality]({% slug editing_kendoui_grid_widget %})
+* [Editing Functionality of the Grid]({% slug editing_kendoui_grid_widget %})
 * [Appearance of the Grid]({% slug appearance_kendoui_grid_widget %})
-* [Remote Data Binding]({% slug remote_data_binding_grid %})
-* [Localization of Messages]({% slug localization_kendoui_grid_widget %})
-* [Export the Grid to Excel]({% slug exporting_excel_kendoui_grid_widget %})
-* [Export the Grid in PDF]({% slug exporting_pdf_kendoui_grid_widget %})
-* [Print the Grid]({% slug exporting_pdf_kendoui_grid_widget %})
+* [Localization of Messages in the Grid]({% slug localization_kendoui_grid_widget %})
+* [Export of the Grid to Excel]({% slug exporting_excel_kendoui_grid_widget %})
+* [Export of the Grid in PDF]({% slug exporting_pdf_kendoui_grid_widget %})
+* [Printing of the Grid]({% slug exporting_pdf_kendoui_grid_widget %})
 
 For how-to examples on the Kendo UI Grid widget, browse its [**How To** documentation folder]({% slug howto_bindto_telerik_backend_services_grid %}).

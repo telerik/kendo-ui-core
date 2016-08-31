@@ -2,6 +2,7 @@
 title: Reorder Rows in Nested Grids Using Sortable
 page_title: Reorder Rows in Nested Grids Using Sortable | Kendo UI Grid
 description: "Learn how to reorder rows in a child Grid using the Kendo UI Sortable widget."
+previous_url: /controls/data-management/grid/how-to/reorder-rows-nested-grids
 slug: howto_reorderrowsinnestedgrid_grid
 ---
 

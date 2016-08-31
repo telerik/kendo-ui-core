@@ -2,7 +2,7 @@
 title: Use MultiSelect for Column Filtering
 page_title: Use MultiSelect for Column Filtering | Kendo UI Grid
 description: "Learn how to use Kendo UI MultiSelect for column filtering in the Kendo UI Grid widget."
-previous_url: /controls/data-management/grid/how-to/filtering-array-column-using-multiselect
+previous_url: /controls/data-management/grid/how-to/filtering-array-column-using-multiselect, /controls/data-management/grid/how-to/multiselect-used-for-column-filtering.html 
 slug: howto_use_multiselect_forcolumn_filtering_grid
 ---
 

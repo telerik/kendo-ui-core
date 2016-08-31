@@ -2,6 +2,7 @@
 title: Set Cell Color Based on ForeignKey Values
 page_title: Set Cell Color Based on ForeignKey Values | Kendo UI Grid
 description: "Learn how to create custom a custom editor in a Kendo UI Grid detail template."
+previous_url: /controls/data-management/grid/how-to/cell-color-based-on-foreignkey-values
 slug: howto_set_cell_color_basedon_foreignkey_values_grid
 ---
 

@@ -1,13 +1,14 @@
 ---
-title: Reorder Rows in Grids Using Sortable
-page_title: Reorder Rows in Grids Using Sortable | Kendo UI Grid
-description: "Learn how to use the Kendo UI Sortable widget with a Kendo UI Grid either in editable or non-editable modes."
-slug: howto_usegridandsortable_grid
+title: Bind to XML Data
+page_title: Bind to XML Data | Kendo UI Grid
+description: "Learn how to bind a Kendo UI Grid to XML data."
+previous_url: /controls/data-management/grid/how-to/bind-grid-to-xml-data.html
+slug: howto_bindgridtoxmldata_grid
 ---
 
-# Reorder Rows in Grids Using Sortable
+# Bind to XML Data
 
-To see the examples on how to use the Kendo UI Sortable widget with a Kendo UI Grid either in an editable or in a non-editable mode, refer to [this how-to article]({% slug howto_usesortablewithgrid_inincellediting_sortable %}).
+To see the example on how to bind a Kendo UI Grid to XML data, refer to [this project](https://github.com/telerik/ui-for-aspnet-mvc-examples/tree/master/grid/grid-bound-to-xml-data).
 
 ## See Also
 
