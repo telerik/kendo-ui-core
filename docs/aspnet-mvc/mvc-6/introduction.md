@@ -40,7 +40,9 @@ The repositories below contain source code, instructions, and issue trackers for
 To be able to run the sample application on Windows, make sure you provide for the requirements listed below.
 
 - Download [Visual Studio 2015](https://www.visualstudio.com/en-us/downloads/download-visual-studio-vs.aspx).
-- Download [Microsoft ASP.NET and Web Tools 2015](https://www.microsoft.com/en-us/download/details.aspx?id=49959).
+- Download [Visual Studio 2015 Update 3](https://www.visualstudio.com/en-us/news/releasenotes/vs2015-update3-vs).
+- Download [NET Core 1.0.0 - VS 2015 Tooling Preview 2](https://www.microsoft.com/net/core#windows).
+- Optional Download [.NET SDK Core for Windows](https://www.microsoft.com/net/core#windows).
 - Install [SQLite3](http://mislav.net/rails/install-sqlite3/).
 - Download the matching release of the [Sample Application](https://github.com/telerik/ui-for-aspnet-mvc-6-demos/releases).
 - Open the `Kendo.Mvc.Examples.sln` solution in Visual Studio.
