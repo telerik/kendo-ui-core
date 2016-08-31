@@ -2,6 +2,7 @@
 title: Use Grid Filtering with Dynamic Default Values
 page_title: Use Grid Filtering with Dynamic Default Values | Kendo UI Grid Widget
 description: "Learn how to use dynamic default field values in a Kendo UI Grid when filtering is applied."
+previous_url: /controls/data-management/grid/how-to/use-filtering-with-dynamic-default-values.html
 slug: howto_gridfiltering_dynamicdefaultvalues_grid
 ---
 

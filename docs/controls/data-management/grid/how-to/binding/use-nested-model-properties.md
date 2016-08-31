@@ -2,6 +2,7 @@
 title: Use Nested Model Properties
 page_title: Use Nested Model Properties | Kendo UI Grid
 description: "Learn how to use use nested model properties in the Kendo UI Grid widget."
+previous_url: /controls/data-management/grid/how-to/use-nested-model-properties
 slug: howto_use_nested_model_properties_grid
 ---
 
@@ -14,7 +15,7 @@ The example below demonstrates how to use nested model properties. CRUD operatio
 ```html
     <div id="grid"></div>
     <script>
-      function getData(length, delay) {
+      function getData(length) {
         var data = [];
         var sampleDate = new Date();
         for (var j = 1; j <= length; j++) {
@@ -27,25 +28,13 @@ The example below demonstrates how to use nested model properties. CRUD operatio
             bdate: new Date(sampleDate.getTime() - j * 1000 * 60 * 60 * 24)
           }
         }
-        return {
-          json: JSON.stringify({
-            data: data
-          }),
-          delay: delay
-        };
+        return data;
       }
 
       $("#grid").kendoGrid({
         dataSource: {
-          transport: {
-            read: {
-              url: "/echo/json/",
-              type: "post",
-              data: getData(10, 1)
-            }
-          },
+          data: getData(10),
           schema: {
-            data: "data",
             model: {
               id: "id",
               fields: {

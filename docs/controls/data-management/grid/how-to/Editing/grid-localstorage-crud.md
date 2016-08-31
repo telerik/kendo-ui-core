@@ -2,6 +2,7 @@
 title: Perform CRUD Operations with Local Storage Data
 page_title: Perform CRUD Operations with Local Storage Data | Kendo UI Grid
 description: "Learn how to perform CRUD operations with local storage data in the Kendo UI Grid widget."
+previous_url: /controls/data-management/grid/how-to/grid-localstorage-crud
 slug: howto_perform_crud_operationswith_local_storage_data_grid
 ---
 

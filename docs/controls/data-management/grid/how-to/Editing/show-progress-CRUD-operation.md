@@ -2,6 +2,7 @@
 title: Show Progress for Grid CRUD Operations
 page_title: Show Progress for Grid CRUD Operations | Kendo UI Grid
 description: "Learn how to show the current progress of each CRUD operation for a Kendo UI Grid."
+previous_url: /controls/data-management/grid/how-to/show-progress-CRUD-operation
 slug: howto_show_progress_CRUD_operation
 ---
 

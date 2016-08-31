@@ -2,6 +2,7 @@
 title: Customize Rows and Cells Based on Data Item Values
 page_title: Customize Rows and Cells Based on Data Item Values | Kendo UI Grid
 description: "Learn how to customize kendo UI Grid cells and rows, based on data items values."
+previous_url: /controls/data-management/grid/how-to/style-rows-cells-based-on-data-item-values, /controls/data-management/grid/how-to/style-rows-cells-based-on-data-item-values
 slug: howto_customize_rowsand_cells_basedon_dataitem_values_grid
 ---
 

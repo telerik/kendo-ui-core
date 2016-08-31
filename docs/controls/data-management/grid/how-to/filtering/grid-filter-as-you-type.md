@@ -2,6 +2,7 @@
 title: Filter Grid as You Type
 page_title: Filter Grid as You Type | Kendo UI Grid
 description: "Learn how to filter Kendo UI Grid on the fly, as the user types in the filter row textbox."
+previous_url: /controls/data-management/grid/how-to/grid-filter-as-you-type.html
 slug: howto_filter_gridas_you_type_grid
 ---
 
