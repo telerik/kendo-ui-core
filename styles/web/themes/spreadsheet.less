@@ -90,16 +90,16 @@
 }
 
 .k-spreadsheet {
-    > .k-spreadsheet-formula-bar  {
+    .k-spreadsheet-action-bar {
         background-color: @background;
-        border-color: @spreadsheet-header-background @spreadsheet-header-background @spreadsheet-header-border;
+        border-color: @widget-border-color;
 
-        &:before {
+        .k-spreadsheet-name-editor {
             border-color: @spreadsheet-header-border;
         }
 
-        &:after {
-            border-color: @spreadsheet-header-background;
+        .k-spreadsheet-formula-bar::before {
+            border-color: @spreadsheet-header-border;
         }
     }
 
