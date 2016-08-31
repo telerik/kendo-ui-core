@@ -10,7 +10,7 @@ position: 8
 
 As of the Kendo UI Q3 2014 (2014.3.1119) release, the Grid widget provides a built-in Excel export functionality.
 
-## Set Up
+## Enable Export to Excel
 
 To enable Excel export, include the corresponding toolbar command and configure the export settings.
 
@@ -52,26 +52,26 @@ The example below demonstrates how to enable the Excel export functionality of a
     </script>
 ```
 
-To initiate Excel export via code, call the [`saveAsExcel`](/api/javascript/ui/grid.html#methods-saveAsExcel) method.
+To initiate Excel export through code, call the [`saveAsExcel`](/api/javascript/ui/grid.html#methods-saveAsExcel) method.
 
 > **Important**
-> * By default, Kendo UI Grid exports the current page of the data with sorting, filtering, grouping, and aggregates applied.
+> * By default, the Grid exports the current page of the data with sorting, filtering, grouping, and aggregates applied.
 > * The Grid uses the current column order, visibility, and dimensions to generate the Excel file.
 > * The Grid does not export the current CSS theme in the Excel file. For more information on how to change the visual appearance of the Excel document, refer to the below section about [customization of the Excel document]({% slug exporting_excel_kendoui_grid_widget %}#customize-the-excel-document).
 > * The Grid exports only data-bound columns. All columns that do not have their [field](/api/javascript/ui/grid#configuration-columns.field) option set are ignored.
-> * The [`format`](/api/javascript/ui/grid#configuration-columns.format) option is not used during export. Check [Column Format]({% slug exporting_excel_kendoui_grid_widget %}#column-format) for more info.
-> * The [`template`](/api/javascript/ui/grid#configuration-columns.template) option is not used during export. Check [Column Templates]({% slug exporting_excel_kendoui_grid_widget %}#column-templates) for more info.
-> * The [`detailTemplate`](/api/javascript/ui/grid#configuration-detailTemplate) option is not used during export. Check [Detail Template]({% slug exporting_excel_kendoui_grid_widget %}#detail-template) for more info.
+> * The [`format`](/api/javascript/ui/grid#configuration-columns.format) option is not used during export. For more information, refer to the section on [column formats]({% slug exporting_excel_kendoui_grid_widget %}#column-format).
+> * The [`template`](/api/javascript/ui/grid#configuration-columns.template) option is not used during export. For more information, refer to the section on [column templates]({% slug exporting_excel_kendoui_grid_widget %}#column-templates).
+> * The [`detailTemplate`](/api/javascript/ui/grid#configuration-detailTemplate) option is not used during export. For more information, refer to the section on [detail templates]({% slug exporting_excel_kendoui_grid_widget %}#detail-template).
 
 ## Features
 
 ### Excel Export of All Data
 
-By default, the Kendo UI Grid exports only the current page of data. To export all pages set the [`allPages`](/api/javascript/ui/grid#configuration-excel.allPages) option to `true`.
+By default, the Grid exports only the current page of data. To export all pages, set the [`allPages`](/api/javascript/ui/grid#configuration-excel.allPages) option to `true`.
 
 > **Important**
 >
-> When the `allPages` option is set to `true` and `serverPaging` is enabled, the Grid will make a `"read"` request for all data. If the data items are too many the browser may become unresponsive. Consider implementing server-side export for such cases.
+> When the `allPages` option is set to `true` and `serverPaging` is enabled, the Grid will make a `"read"` request for all data. If the data items are too many, the browser may become unresponsive. In such cases, consider the implementation of [server-side export](#server-side-processing).
 
 The example below demonstrates how to export all the data from a Kendo UI Grid to Excel.
 
@@ -110,13 +110,13 @@ The [`excelExport`](/api/javascript/ui/grid#events-excelExport) event allows cus
 
 The `workbook` event argument exposes the generated Excel workbook configuration.
 
-For a better understanding about how Excel documents work, check the [introductory help topic on Excel]({% slug introduction_excelexport_kendoui %}#excel-document-creation).
+For a better understanding about how Excel documents work, refer to the [introductory article on Excel]({% slug introduction_excelexport_kendoui %}#excel-document-creation).
 
-For information on how to use the `background` option to set the background color of alternating rows while exporting the Grid to Excel, refer to [this example]({% slug howto_configure_color_alternating_rows_grid %}).
+For more information on how to use the `background` option to set the background color of alternating rows while exporting the Grid to Excel, refer to [this example]({% slug howto_configure_color_alternating_rows_grid %}).
 
 ### Right-to-Left Support
 
-The [`excelExport`](/api/javascript/ui/grid#events-excelExport) event allows reversing the cells and setting the text alignment in order to support right-to-left (RTL) languages, as demonstrated in the example below.
+The [`excelExport`](/api/javascript/ui/grid#events-excelExport) event allows reversing the cells and setting the text alignment to support right-to-left (RTL) languages.
 
 ###### Example
 
@@ -173,9 +173,9 @@ The possible values are:
 
 Each Grid is exported in a separate Excel sheet. For more information on how to export multiple Grids in a single Excel document, see [this example]({% slug howto_export_excel_multiple_grids_grid %}).
 
-### File Saving on Server
+### Saving Files on Server
 
-In some cases it is useful to send the generated file to a remote service. Do this by preventing the default file saving and posting the `base64` encoded contents.
+It might be useful sometimes to send the generated file to a remote service. To achieve this, prevent the default file saving and post the `base64` encoded contents.
 
 The example below demonstrates how to post files to the server.
 
