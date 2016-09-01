@@ -2129,14 +2129,19 @@ html .km-pane-wrapper .km-widget,
             box-sizing: content-box;
         }
     }
+    a.k-dialog-action.k-dialog-close.k-button-bare {
+        &:before {
+            content: normal;
+        }
+    }
     a.k-dialog-action.k-dialog-close {
-        position: absolute;
         padding: 1em;
         right: 0;
         top: 0;
-        line-height: 1em;
-        cursor: pointer;
-        z-index: 10000;
+    }
+    &.k-dialog-titleless a.k-dialog-action.k-dialog-close {
+        right: 0.5em;
+        top: 0.5em;
     }
     &.k-alert .k-window-titlebar,
     &.k-confirm .k-window-titlebar,

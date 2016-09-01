@@ -298,7 +298,12 @@
                 that.appendTo.append(wrapper);
 
                 if (options.closable !== false) {
-                    wrapper.append(templates.close(options));
+                    if (options.title !== false) {
+                        titlebar.append(templates.close(options));
+                    }
+                    else {
+                        wrapper.append(templates.close(options));
+                    }
                 }
 
                 if (options.title !== false) {
@@ -926,9 +931,7 @@
                 "</div>"
             ),
             close: template("<a role='button' href='\\#' class='k-button-bare k-dialog-action k-dialog-close' aria-label='Close' tabindex='-1'><span class='k-font-icon k-i-x'>#= messages.close #</span></a>"),
-            // close: template("<a role='button' href='\\#' class='k-dialog-action k-link' aria-label='Close' tabindex='-1'><span class='k-icon k-i-close'>#= messages.close #</span></a>"),
             actionbar: template("<ul class='k-dialog-buttongroup k-dialog-button-layout-#= buttonLayout #' role='toolbar' />"),
-            //actionbar: "<ul class='k-dialog-buttongroup k-dialog-button-layout-normal' role='toolbar' />",
             overlay: "<div class='k-overlay' />",
             alertWrapper: template("<div class='k-widget k-dialog k-window' role='alertdialog' />"),
             alert: "<div />",

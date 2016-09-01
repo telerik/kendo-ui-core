@@ -3328,11 +3328,15 @@ td.k-state-focused.k-state-selected,
     a.k-dialog-action.k-dialog-close {
         position: absolute;
         padding: 1.1em;
-        right: .5em;
-        top: .5em;
+        right: 0;
+        top: 0;
         line-height: 1em;
         cursor: pointer;
         z-index: 10000;
+    }
+    &.k-dialog-titleless a.k-dialog-action.k-dialog-close {
+        right: 0.5em;
+        top: 0.5em;
     }
     .k-content {
         border-bottom-right-radius: @border-radius;
