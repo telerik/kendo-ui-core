@@ -11,10 +11,6 @@ position: 5
 
 This articles summarizes all known issues related to Telerik UI for ASP.NET MVC, version 6.
 
-> **Important**
->
-> The ASP.NET 5 Framework is still actively being developed. Tooling and APIs change frequently, often requiring extensive changes.
-
 ## ASP.NET Core MVC Framework
 
 - Data Tables are not supported. For more information on this limitation, refer to [dotnet/corefx#1039](https://github.com/dotnet/corefx/issues/1039).
