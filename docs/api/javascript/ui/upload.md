@@ -858,7 +858,13 @@ Toggles the upload enabled state.
 
 Manually triggers the upload process.
 
-> This method is only applicable when the `async.autoUpload` option is set to `false`.
+> * This method is only applicable when the `async.autoUpload` option is set to `false`.
+> * It is possible to trigger the manual upload of files by calling the `upload` method even if the Upload is disabled. In such scenarios, the Upload ignores its `enabled: false` configuration and the files are uploaded while the Upload remains inactive for the user to interact with it.  
+
+use the `upload` method to allow for a manual upload of files, the files will be uploaded, but the Upload will not be user
+
+
+When the uploading process is manually triggered, you have to check yourself whether the state of the Upload is disabled.
 
 ## Events
 
