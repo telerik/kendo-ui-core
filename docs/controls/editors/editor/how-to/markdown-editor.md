@@ -18,8 +18,8 @@ The actual transformation from HTML to Markdown is not part of the Kendo UI Edit
 ###### Example
 
 ```html
-<script src="https://npmcdn.com/markdown@0.5.0/lib/markdown.js"></script>
-<script src="https://npmcdn.com/html-md@3.0.2/dist/md.min.js"></script>
+<script src="https://unpkg.com/markdown@0.5.0/lib/markdown.js"></script>
+<script src="https://unpkg.com/html-md@3.0.2/dist/md.min.js"></script>
 
 <textarea name="editor" id="editor" cols="30" rows="10">
     You can add here some **Makrdown** content.
