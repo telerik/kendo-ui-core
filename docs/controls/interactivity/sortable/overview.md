@@ -373,6 +373,10 @@ A Sortable with radio buttons and a Hint cloned from the Sortable element will l
     </script>
 ```
 
+## Known Limitations 
+
+Kendo UI does not support integration between the Kendo UI Sortable and the Kendo UI TreeList widgets. 
+
 ## Further Reading
 
 * [Kendo UI Templates](/framework/templates/overview)
