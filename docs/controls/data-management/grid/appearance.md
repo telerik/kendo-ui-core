@@ -189,7 +189,7 @@ When a virtualized Grid is scrolled, it renders the table rows for the reached s
 
 If the total number of items is large and the scrolling is fast, the table of the Grid can be re-rendered frequently. If, additionally, the page size is huge, the user might observe issues with the smoothness of the scrolling. In such cases, consider reducing the page size and increasing the Grid height to reduce the frequency of table re-rendering.
 
-#### Known Limitations
+### Limitations of Virtual Scrolling
 
 * Horizontal scrolling is not virtualized.
 
