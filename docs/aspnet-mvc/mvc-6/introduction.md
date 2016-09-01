@@ -11,10 +11,6 @@ position: 1
 
 This article demonstrates how to use Telerik UI for ASP.NET MVC in ASP.NET Core MVC applications.
 
-> **Important**
->
-> The ASP.NET 5 framework is still actively being developed. Tooling and APIs change frequently, often requiring extensive changes. To get updated information on this, refer to the article on [known issues]({% slug knownissues_aspnetmvc6_aspnetmvc %}).
-
 ## The Basics
 
 ### Supported Environments
