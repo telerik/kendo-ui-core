@@ -1,21 +1,21 @@
 ---
 title: Tag Helpers
-page_title: Tag Helpers | Telerik UI for ASP.NET Core MVC
-description: "Learn the basics when working with Telerik Tag Helpers for ASP.NET Core MVC (aka MVC 6)."
-previous_url: /aspnet-mvc/aspnetmvc-apps/mvc-6/tag-helpers
+page_title: Tag Helpers | Telerik UI for ASP.NET Core
+description: "Learn the basics when working with Telerik Tag Helpers for ASP.NET Core (aka MVC 6 or ASP.NET Core MVC)."
+previous_url: /aspnet-mvc/aspnetmvc-apps/mvc-6/tag-helpers, /aspnet-mvc/mvc-6/tag-helpers
 slug: taghelpers_aspnetmvc6_aspnetmvc
 position: 4
 ---
 
 # Tag Helpers
 
-The Kendo UI Tag Helpers let the user configure Kendo UI widgets by using the new Tag Helpers feature in ASP.NET Core MVC.
+The Kendo UI Tag Helpers let the user configure Kendo UI widgets by using the new Tag Helpers feature in ASP.NET Core.
 
 ## Getting Started
 
 ### Add Tag Helpers
 
-To configure an ASP.NET Core MVC project that enables you to use the Kendo UI Tag Helpers, you need to add the @addTagHelper directive to your `cshtml` file as demonstrated below.
+To configure an ASP.NET Core project that enables you to use the Kendo UI Tag Helpers, you need to add the @addTagHelper directive to your `cshtml` file as demonstrated below.
 
 ###### Example
 
@@ -313,9 +313,9 @@ The `ParseFormats` option is of type `string[]` and can be assigned either by a 
 
 ## See Also
 
-Other articles on Telerik UI for ASP.NET MVC in ASP.NET Core MVC applications:
+Other articles on Telerik UI for ASP.NET MVC in ASP.NET Core applications:
 
-* [Overview of Telerik UI for ASP.NET Core MVC - RC1]({% slug overview_aspnetmvc6_aspnetmvc %})
-* [Get Started with Telerik UI for ASP.NET MVC in ASP.NET Core MVC Projects]({% slug gettingstarted_aspnetmvc6_aspnetmvc %})
-* [Get Started with Telerik UI for ASP.NET MVC in ASP.NET Core MVC Projects on Linux]({% slug gettingstartedlinux_aspnetmvc6_aspnetmvc %})
-* [Known Issues with Telerik UI for ASP.NET Core MVC]({% slug knownissues_aspnetmvc6_aspnetmvc %})
+* [Overview of Telerik UI for ASP.NET Core - RC1]({% slug overview_aspnetmvc6_aspnetmvc %})
+* [Get Started with Telerik UI for ASP.NET MVC in ASP.NET Core Projects]({% slug gettingstarted_aspnetmvc6_aspnetmvc %})
+* [Get Started with Telerik UI for ASP.NET MVC in ASP.NET Core Projects on Linux]({% slug gettingstartedlinux_aspnetmvc6_aspnetmvc %})
+* [Known Issues with Telerik UI for ASP.NET Core]({% slug knownissues_aspnetmvc6_aspnetmvc %})

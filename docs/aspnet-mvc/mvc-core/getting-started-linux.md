@@ -1,15 +1,15 @@
 ---
 title: Get Started on Linux
-page_title: Get Started on Linux | Telerik UI for ASP.NET Core MVC
-description: "Learn the basics when working with Telerik UI for ASP.NET Core MVC (aka MVC 6) on Linux."
-previous_url: /aspnet-mvc/aspnetmvc-apps/mvc-6/getting-started-linux
+page_title: Get Started on Linux | Telerik UI for ASP.NET Core
+description: "Learn the basics when working with Telerik UI for ASP.NET Core (aka MVC 6 or ASP.NET Core MVC) on Linux."
+previous_url: /aspnet-mvc/aspnetmvc-apps/mvc-6/getting-started-linux, aspnet-mvc/mvc-6/getting-started-linux
 slug: gettingstartedlinux_aspnetmvc6_aspnetmvc
 position: 3
 ---
 
 # Get Started on Linux
 
-This article demonstrates how to configure an ASP.NET Core MVC project that enables you to use Telerik UI for ASP.NET MVC on Linux.
+This article demonstrates how to configure an ASP.NET Core project that enables you to use Telerik UI for ASP.NET MVC on Linux.
 
 > **Important**  
 >
@@ -21,14 +21,14 @@ Make sure you install the [Microsoft ASP.NET](http://docs.asp.net/en/latest/gett
 
 ## Configuration
 
-To configure an ASP.NET Core MVC project that enables you to use Telerik UI for ASP.NET MVC on Linux, do the following:
+To configure an ASP.NET Core project that enables you to use Telerik UI for ASP.NET MVC on Linux, do the following:
 
 1. Create an ASP.NET MVC web site.
 2. Add the Kendo UI NuGet package.
 
-### Create ASP.NET Core MVC Web Sites
+### Create ASP.NET Core Web Sites
 
-Below are listed the steps for you to follow when creating an ASP.NET Core MVC web site. The examples use [Yeoman](http://yeoman.io/) to scaffold an empty ASP.NET application.
+Below are listed the steps for you to follow when creating an ASP.NET Core web site. The examples use [Yeoman](http://yeoman.io/) to scaffold an empty ASP.NET application.
 
 > **Important**
 >
@@ -258,9 +258,9 @@ Now that all is done, you can see the sample page.
 
 ## See Also
 
-Other articles on Telerik UI for ASP.NET MVC in ASP.NET Core MVC applications:
+Other articles on Telerik UI for ASP.NET MVC in ASP.NET Core applications:
 
-* [Overview of Telerik UI for ASP.NET Core MVC]({% slug overview_aspnetmvc6_aspnetmvc %})
-* [Get Started with Telerik UI for ASP.NET MVC in ASP.NET Core MVC Projects]({% slug gettingstarted_aspnetmvc6_aspnetmvc %})
-* [Known Issues with Telerik UI for ASP.NET Core MVC]({% slug knownissues_aspnetmvc6_aspnetmvc %})
-* [Tag Helpers for ASP.NET Core MVC]({% slug taghelpers_aspnetmvc6_aspnetmvc %})
+* [Overview of Telerik UI for ASP.NET Core]({% slug overview_aspnetmvc6_aspnetmvc %})
+* [Get Started with Telerik UI for ASP.NET MVC in ASP.NET Core Projects]({% slug gettingstarted_aspnetmvc6_aspnetmvc %})
+* [Known Issues with Telerik UI for ASP.NET Core]({% slug knownissues_aspnetmvc6_aspnetmvc %})
+* [Tag Helpers for ASP.NET Core]({% slug taghelpers_aspnetmvc6_aspnetmvc %})
