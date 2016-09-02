@@ -35,7 +35,7 @@ Initialize the RangeSlider using a jQuery selector as demonstrated in the exampl
     });
 
 > **Important**  
-> * As the RangeSlider should be initialized after the DOM is fully loaded, make sure you initilaize it within a `$(document).ready()` statement.
+> * As the RangeSlider should be initialized after the DOM is fully loaded, make sure you initialize it within a `$(document).ready()` statement.
 > * The RangeSlider requires two inputs to capture both ends of the value range. This benefits scenarios where JavaScript is disabled, in which case users will be presented with two inputs, still allowing them to input a valid range.
 
 ## Customization

@@ -9,7 +9,7 @@ slug: howto_expand_background_longlist_items_combobox
 
 The example below refers to Kendo UI ComboBox and is applicable to the AutoComplete, DropDownList and MultiSelect widgets as well.
 
-Normally, long items in the dropdown wrap to multiple lines. However, if the list item content is non-wrappable (e.g., a very long word or string with no spaces), a horizontal scrollbar will apppear. In this case, the background of the hover and select states will not expand beyond the 100% width of the dropdown, due to the way HTML elements expand in general. There are two ways to handle the issue.
+Normally, long items in the dropdown wrap to multiple lines. However, if the list item content is non-wrappable (e.g., a very long word or string with no spaces), a horizontal scrollbar will appear. In this case, the background of the hover and select states will not expand beyond the 100% width of the dropdown, due to the way HTML elements expand in general. There are two ways to handle the issue.
 
 ###### Example
 
@@ -68,7 +68,7 @@ Other articles on the Kendo UI ComboBox:
 * [How to Expand ComboBox Located in Bootstrap Layout]({% slug howto_expand_widget_bootstrap_widget_combobox %})
 * [How to Implement Cascading with Local Data]({% slug howto_implement_cascading_local_data_combobox %})
 * [How to Make Visible Input Readonly]({% slug howto_make_visible_inputs_readonly_combobox %})
-* [How to Open ComboBox When onfocus is Triggered]({% slug howto_open_onfocus_combobox %})
+* [How to Open ComboBox When onFocus is Triggered]({% slug howto_open_onfocus_combobox %})
 * [How to Prevent Adding Custom Values]({% slug howto_prevent_adding_custom_values_combobox %})
 * [How to Select Items on Tab]({% slug howto_select_items_ontab_combobox %})
 * [How to Underline Matched Search]({% slug howto_underline_matched_search_combobox %})

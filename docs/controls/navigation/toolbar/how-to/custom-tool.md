@@ -9,7 +9,7 @@ slug: howto_customtool_toolbar
 
 The example below demonstrates how to develop and register custom ToolBar tools, and in particular how to close ToolBar popup manually.
 
-> **Importnat**
+> **Important**
 >
 > The following approach works in the Kendo UI Q3 2015 release, while not in previous versions of the framework
 

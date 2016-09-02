@@ -8,7 +8,7 @@ position: 1
 
 # ResponsivePanel Overview
 
-The [Kendo UI ReponsivePanel widget](http://demos.telerik.com/kendo-ui/responsive-panel/index) allows you to hide part of a page content on small screens. This allows more space for content on mobile screens.
+The [Kendo UI ResponsivePanel widget](http://demos.telerik.com/kendo-ui/responsive-panel/index) allows you to hide part of a page content on small screens. This allows more space for content on mobile screens.
 
 > **Important**  
 >

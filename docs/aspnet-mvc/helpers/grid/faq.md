@@ -196,7 +196,7 @@ The example below demonstrates how to add a Kendo UI Menu inside a Grid column t
         .Events(ev => ev.DataBound("initMenus"))
     )
 
-**Javascript**
+**JavaScript**
 
     function initMenus(e) {
         $(".templateCell").each(function(){
@@ -244,7 +244,7 @@ The example below demonstrates how to add Kendo UI icons to custom command butto
         .Events(ev => ev.DataBound("addIcons"))
     )
 
-**Javascript**
+**JavaScript**
 
     function addIcons(e) {
         e.sender.tbody.find(".k-grid-myCommand > span").addClass("k-icon k-i-custom");

@@ -52,7 +52,7 @@ Find a sample a JSP Spring MVC application in the `\wrappers\jsp\spring-demos` f
 
 **Step 5** Browse to the location where you extracted Telerik UI for JSP. Then pick "wrappers\jsp\spring-demos" for "Root Directory". Click "Finish".
 
-**Figure 3. Import od the Kendo UI JSP demos**
+**Figure 3. Import of the Kendo UI JSP demos**
 
 ![Import Kendo UI JSP demos](images/import_maven_project.png)
 
@@ -104,7 +104,7 @@ If you intend to use CDN services, skip steps 3, 4, and 5, and check the [sectio
         <script src="resources/js/jquery.min.js"></script>
         <script src="resources/js/kendo.web.min.js"></script>
 
-**Step 6** Configure your page to include the Kendo UI dataviz JavaScript and CSS files.
+**Step 6** Configure your page to include the Kendo UI DataViz JavaScript and CSS files.
 
 > **Important**
 >

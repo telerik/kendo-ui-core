@@ -9,7 +9,7 @@ position: 2
 
 # Basic Usage
 
-The [Kendo UI DataSource component](http://demos.telerik.com/kendo-ui/datasource/index) plays a central role in practically all web applications built with Kendo UI. It is an abstraction for using local data&mdash;arrays of JavaScript objects&mdash;or remote data&mdash;web services returning JSON, JSONP, [OData](http://www.odata.org/) or XML. This article demonstrates some of the most common scenarios regarding the possibilities for you to apply the DataSource component to your projects.
+The [Kendo UI DataSource component](http://demos.telerik.com/kendo-ui/datasource/index) plays a central role in practically all web applications built with Kendo UI. It is an abstraction for using local data&mdash;arrays of JavaScript objects&mdash;or remote data&mdash;web services returning JSON, JSONP, [oData](http://www.odata.org/) or XML. This article demonstrates some of the most common scenarios regarding the possibilities for you to apply the DataSource component to your projects.
 
 ## DataSource for Local and Remote Data
 
@@ -52,13 +52,13 @@ The example below demonstrates how to create a DataSource for data from a remote
             }
         });
 
-The `remoteDataSource` variable in the example is a DataSource that is initialized to represent an in-memory cache of movie titles from the Netflix catalog service, which employs the [OData](http://www.odata.org/) protocol. It is only configured to act as a read-only source of data to any widgets to which it is bound.
+The `remoteDataSource` variable in the example is a DataSource that is initialized to represent an in-memory cache of movie titles from the Netflix catalog service, which employs the [oData](http://www.odata.org/) protocol. It is only configured to act as a read-only source of data to any widgets to which it is bound.
 
 As is the case with creating a DataSource for local data, the data provided by the Netflix catalog service is not loaded until the `.read()` method is called:
 
         remoteDataSource.read();
 
-When the DataSource is bound to a Kendo UI widget or chart, the explicit invocation may not be necessary. The default configuration of the widgets is set to automatically bind to an associated DataSource. However, this may be overriden, i.e. `autoBind`.
+When the DataSource is bound to a Kendo UI widget or chart, the explicit invocation may not be necessary. The default configuration of the widgets is set to automatically bind to an associated DataSource. However, this may be overridden, i.e. `autoBind`.
 
 The example below demonstrates how to create a DataSource for data from another remote endpoint.
 

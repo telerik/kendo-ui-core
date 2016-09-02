@@ -235,7 +235,7 @@ The `take` parameter tells you how many records you need to fetch, i.e. the page
 
 The `skip` parameter tells you how many records to skip before you start fetching records.
 
-LINQ has these functions built in and they are simple to use. Rretrieve the values off of the `Request` parameter and  then call the `skip` and `take` methods on your query to the **Employees** table.
+LINQ has these functions built in and they are simple to use. Retrieve the values off of the `Request` parameter and  then call the `skip` and `take` methods on your query to the **Employees** table.
 
 The example below demonstrates how to create a Kendo UI Grid.
 

@@ -350,7 +350,7 @@ In the **Getting Started** section of each widget's Overview article, a section 
 
 ### Widgets Display Zero Values
 
-This issue refers to the Kendo UI CombobBox widget. It supports item selection or custom values. In the latter case, the custom value is displayed as `text`, because this is how the custom value is treated.
+This issue refers to the Kendo UI ComboBox widget. It supports item selection or custom values. In the latter case, the custom value is displayed as `text`, because this is how the custom value is treated.
 
 The widget displays a `0` value if it is bound to the `non-nullable integer` or other number type. In this case, the widget retrieves the default value which is `0` and sets it, and it is a perfectly valid value. When the widget is initialized on the client, it cannot find such a data item and considers the value as a custom one. This is why it is displayed in the visible input.
 

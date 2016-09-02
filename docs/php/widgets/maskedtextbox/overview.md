@@ -75,7 +75,7 @@ The example below demonstrates how to define a custom rule for the `-` and `+` s
 
 > **Important**
 >
-> The widget supports [JavaScript Reguler Expressions](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Regular_Expressions) defined as a string or a JavaScript function.
+> The widget supports [JavaScript Regular Expressions](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Regular_Expressions) defined as a string or a JavaScript function.
 
 ## Event Handling
 

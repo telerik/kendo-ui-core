@@ -339,7 +339,7 @@ The example below demonstrates how to switch the places of the header and the fo
 
 ### Stop the Link Highlighting in Windows Phone 8
 
-By default, Windows Phone 8 highlights all links when they are active (hold down). Stopping this behavior requires manually adding a meta tag to your application or web site, as shown in the example below. Note that the adding of the tag through Javascript is ignored.
+By default, Windows Phone 8 highlights all links when they are active (hold down). Stopping this behavior requires manually adding a meta tag to your application or web site, as shown in the example below. Note that the adding of the tag through JavaScript is ignored.
 
 ###### Example
 

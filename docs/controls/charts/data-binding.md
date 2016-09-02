@@ -131,7 +131,7 @@ This category of Kendo UI Charts includes the two-dimensional [Scatter](http://d
 
 ## Bind Series to Data Source
 
-The most powerful form of data binding is to use the [Kendo UI DataSource component](/framework/datasource/overview). It supports binding to both local and remote data in a variety of formats and over different transport protocols. Examples include JSON, XML, JSONP and OData.
+The most powerful form of data binding is to use the [Kendo UI DataSource component](/framework/datasource/overview). It supports binding to both local and remote data in a variety of formats and over different transport protocols. Examples include JSON, XML, JSONP and oData.
 
 The usage of the DataSource abstraction incurs a performance overhead. For more information, refer to the article on [performance tips]({% slug tipsandtricks_kendouistyling %}).
 

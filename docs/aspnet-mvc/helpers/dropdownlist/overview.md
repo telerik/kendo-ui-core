@@ -50,7 +50,7 @@ Below are listed the steps for you to follow when configuring the Kendo UI DropD
         @model IEnumerable<MvcApplication1.Models.Product>
 ```
 
-**Step 4** Add a server bound dropdownlist.
+**Step 4** Add a server bound DropDownList.
 
 ###### Example
 
@@ -101,7 +101,7 @@ Below are listed the steps for you to follow when configuring the Kendo UI DropD
             return Json(northwind.Products, JsonRequestBehavior.AllowGet);
         }
 
-**Step4** Add an Ajax-bound DropDownList.
+**Step 4** Add an Ajax-bound DropDownList.
 
 ###### Example
 

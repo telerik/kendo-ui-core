@@ -8,7 +8,7 @@ position: 1
 
 # Gantt
 
-The Gantt HtmlHelper extension is a server-side wrapper for the [Kendo UI Gantt](/api/web/gantt) widget. It allows you to configure the Kendo UI gantt from server-side code, helps with data binding and editing.
+The Gantt HtmlHelper extension is a server-side wrapper for the [Kendo UI Gantt](/api/web/gantt) widget. It allows you to configure the Kendo UI Gantt from server-side code, helps with data binding and editing.
 
 ## Getting Started
 
@@ -83,7 +83,7 @@ Below are listed the steps for you to follow when binding the Kendo UI Gantt to 
             return Json(dependencies.AsQueryable().ToDataSourceResult(request));
         }
 
-**Step 4** Add a Gantt chart to the view and bind it to the above action methods through its two datasources.
+**Step 4** Add a Gantt chart to the view and bind it to the above action methods through its two data sources.
 
 ###### Example
 

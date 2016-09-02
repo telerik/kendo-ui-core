@@ -16,7 +16,7 @@ Though the examples below use the Grid as a sample, the configurations apply to 
 
 ### Transport
 
-The DataSource component can work with local data or remote data. In both cases the CRUD operations are managed by the Kendo UI DataSource `transport`. This is a Javascript object that can be configured to execute predefined functions or make requests to predefined URLs on certain events.
+The DataSource component can work with local data or remote data. In both cases the CRUD operations are managed by the Kendo UI DataSource `transport`. This is a JavaScript object that can be configured to execute predefined functions or make requests to predefined URLs on certain events.
 
 For detailed information on the DataSource `transport`, refer to the [DataSource API documentation](/api/javascript/data/datasource#configuration-transport).
 
@@ -310,7 +310,7 @@ For detailed information on these settings, refer to the [article about the Kend
 
 ### Read (Remote)
 
-The `read` service defined by the DataSource transport should return data in the expected format&mdash;JSON, JSONP, XML, OData. By default, the expected format is JSON. If the response is not a plain array of objects, a [`schema`](/api/javascript/data/datasource#configuration-schema) must be defined, which will describe the structure of the response and especially, [where the data is](/api/javascript/data/datasource#configuration-schema.data).
+The `read` service defined by the DataSource transport should return data in the expected format&mdash;JSON, JSONP, XML, oData. By default, the expected format is JSON. If the response is not a plain array of objects, a [`schema`](/api/javascript/data/datasource#configuration-schema) must be defined, which will describe the structure of the response and especially, [where the data is](/api/javascript/data/datasource#configuration-schema.data).
 
 The example below uses a `read` transport configuration. The assumed server response is a plain JSON array of objects.
 

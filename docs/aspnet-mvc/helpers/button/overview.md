@@ -207,7 +207,7 @@ The example below demonstrates how to use `.ImageUrl()` with no text. Note that 
 
 ### Enable and Disable Buttons
 
-The business logic of an application often requires a certain button to be temporarily enabled or disabled. The Button can be configured to be initially disabled via its `.Enable()` setting. The widget can also be disabled or enabled at any time with Javascript by using its `enable()` method with a Boolean argument.
+The business logic of an application often requires a certain button to be temporarily enabled or disabled. The Button can be configured to be initially disabled via its `.Enable()` setting. The widget can also be disabled or enabled at any time with JavaScript by using its `enable()` method with a Boolean argument.
 
 The example below demonstrates how to use `.Enable()`.
 

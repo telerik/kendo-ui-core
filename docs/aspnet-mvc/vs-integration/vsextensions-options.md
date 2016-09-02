@@ -8,7 +8,7 @@ position: 5
 
 # Visual Studio Extensions Options
 
-The Visual Studio Extensions options dialog provides settings, allowing you to configure the Telerik UI for ASP.NET MVC Visual Studio Extensions to best suit тхе  needs of your projects.
+The Visual Studio Extensions options dialog provides settings, allowing you to configure the Telerik UI for ASP.NET MVC Visual Studio Extensions to best suit the  needs of your projects.
 
 It can be accessed by clicking on **Telerik** > **VSExtensions Options**.
 

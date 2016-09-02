@@ -50,7 +50,7 @@ For more information, refer to the [Telerik UI for ASP.NET MVC troubleshooting a
 * HTTP status code [404](https://en.wikipedia.org/wiki/List_of_HTTP_status_codes#404) indicates that the requested URL cannot be found. Check if the controller and action names are spelled correctly.
 * HTTP status code [500](https://en.wikipedia.org/wiki/List_of_HTTP_status_codes#500) indicates that a server error occurred while processing the request. Check what the server response is. In most cases, it will contain the full `.NET` stacktrace. If the reason for the exception is not clear, put a break-point in the action method and break with the debugger. Also, refer to the [section on well-known exceptions](#well-known-exceptions).
 
-**Step 3** Check if you are using the `ToDataSourceResult` extension method. That method returns the data in the JSON format expected by the Kendo UI Grid. For further instrictions, refer to the [article on Grid Ajax binding]({% slug ajaxbinding_grid_aspnetmvc %}).
+**Step 3** Check if you are using the `ToDataSourceResult` extension method. That method returns the data in the JSON format expected by the Kendo UI Grid. For further instructions, refer to the [article on Grid Ajax binding]({% slug ajaxbinding_grid_aspnetmvc %}).
 
 ### Client-Side Events Are Not Raised in Server-Bound Mode
 

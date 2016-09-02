@@ -22,7 +22,7 @@ Kendo UI allows you to change the appearance of the cells via the following conf
 * [`fontName`](/api/javascript/ooxml/workbook#configuration-sheets.rows.cells.fontName)&mdash;Sets the font used to display the cell value.
 * [`fontSize`](/api/javascript/ooxml/workbook#configuration-sheets.rows.cells.fontSize)&mdash;Sets the font size of the cell value.
 * [`hAlign`](/api/javascript/ooxml/workbook#configuration-sheets.rows.cells.hAlign)&mdash;Sets the horizontal text alignment.
-* [`italic`](/api/javascript/ooxml/workbook#configuration-sheets.rows.cells.italic)&mdash;Dispalys the cell value in italic.
+* [`italic`](/api/javascript/ooxml/workbook#configuration-sheets.rows.cells.italic)&mdash;Displays the cell value in italic.
 * [`underline`](/api/javascript/ooxml/workbook#configuration-sheets.rows.cells.underline)&mdash;Displays the cell value as underlined.
 * [`vAlign`](/api/javascript/ooxml/workbook#configuration-sheets.rows.cells.vAlign)&mdash;Sets the vertical text alignment.
 

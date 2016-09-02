@@ -370,7 +370,7 @@ The example below demonstrates how to enable client data processing.
 
 ### Customize Content and Attach Event Handlers on the Fly
 
-In addition to using [server]({% slug configuration_gridhelper_aspnetmvc %}#template) and [client]({% slug configuration_gridhelper_aspnetmvc %}#clienttemplate) column templates, in some cases you may need to customize the appearance or content of the Grid data rows by using Javascript&mdash;hide, show, or modify content, attach custom event handlers, etc.
+In addition to using [server]({% slug configuration_gridhelper_aspnetmvc %}#template) and [client]({% slug configuration_gridhelper_aspnetmvc %}#clienttemplate) column templates, in some cases you may need to customize the appearance or content of the Grid data rows by using JavaScript&mdash;hide, show, or modify content, attach custom event handlers, etc.
 
 When using client-side data binding for the Grid, perform all these customizations in the [`dataBound`]({% slug overview_gridhelper_aspnetmvc %}#event-handling) event of the Grid. If the custom code is executed earlier&mdash;for example, in `document.ready`&mdash;it is very likely it has no effect, because the table rows are still not rendered at that time.
 

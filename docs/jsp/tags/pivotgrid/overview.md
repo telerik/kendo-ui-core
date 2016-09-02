@@ -76,7 +76,7 @@ Below are listed the steps for you to follow when configuring the Kendo UI Pivot
 
 ### Subscribe to Events
 
-You can subscribe to all [events exposed by Kendo UI PivtoGrid](/api/javascript/ui/pivotgrid#events) by the handler name.
+You can subscribe to all [events exposed by Kendo UI PivotGrid](/api/javascript/ui/pivotgrid#events) by the handler name.
 
 ###### Example
 

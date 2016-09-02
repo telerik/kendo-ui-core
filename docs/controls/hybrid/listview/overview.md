@@ -16,7 +16,7 @@ The Kendo UI mobile Application automatically initializes a mobile ListView for 
 
 ### Initialize from Markup
 
-The example below demonstrates how to initialize the Hybrid UI Listview widget from markup.
+The example below demonstrates how to initialize the Hybrid UI ListView widget from markup.
 
 ###### Example
 

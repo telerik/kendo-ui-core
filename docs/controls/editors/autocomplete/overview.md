@@ -81,7 +81,7 @@ To bind an AutoComplete to a remote data service, use the [DataSource component]
 
 The DataSource can be used to serve data from a variety of data services, such as [XML](http://en.wikipedia.org/wiki/XML), [JSON](http://en.wikipedia.org/wiki/JSON), and [JSONP](http://en.wikipedia.org/wiki/JSONP).
 
-To bind the widget to a remote data service by using OData through the DataSource component, follow the example below.
+To bind the widget to a remote data service by using oData through the DataSource component, follow the example below.
 
 ###### Example
 

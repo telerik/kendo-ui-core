@@ -354,7 +354,7 @@ If no source is specified the method will return the current object to which the
 
 ### targetPoint
 
-Similar to the sourcePoint, this gets the coordinates of the target of the Connection independently of its endpoint attachement.
+Similar to the sourcePoint, this gets the coordinates of the target of the Connection independently of its endpoint attachment.
 
 #### Returns
 

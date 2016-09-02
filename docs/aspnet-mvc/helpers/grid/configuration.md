@@ -176,7 +176,7 @@ The `Group` method sets the initial grouping configuration of the data source, a
 
 The `Model` method configures the model of the data source.
 
-The data field names must be valid Javascript identifiers and contain neither spaces, nor special characters. The first character should be a letter.
+The data field names must be valid JavaScript identifiers and contain neither spaces, nor special characters. The first character should be a letter.
 
 The example below demonstrates how to configure the model.
 
@@ -379,7 +379,7 @@ A bound column is declared through the `Bound` method, which specifies a data fi
 
 > **Important**
 >
-> The data field names must be valid Javascript identifiers and contain neither spaces, nor special characters. The first character should be a letter.
+> The data field names must be valid JavaScript identifiers and contain neither spaces, nor special characters. The first character should be a letter.
 
 Bound columns support the following settings:
 
@@ -405,7 +405,7 @@ Client templates defined in server-side code are URL encoded before they are sen
 
 There are two possible workarounds:
 
-* Use an auxiliary Javascript function in the global scope, which returns the desired value&mdash;for example, `"#= auxFunction(3, 5) #"`.
+* Use an auxiliary JavaScript function in the global scope, which returns the desired value&mdash;for example, `"#= auxFunction(3, 5) #"`.
 * Encode the `+` (plus) sign&mdash;for example, `"#= 3 %2b 5 #"`.
 
 The example below demonstrates how to set the column `ClientTemplate`.

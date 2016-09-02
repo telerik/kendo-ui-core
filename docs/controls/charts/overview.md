@@ -84,7 +84,7 @@ Start by creating a series that displays inline data.
 
 This results in the chart below.
 
-**Figure 2. A chart without ctegories**
+**Figure 2. A chart without categories**
 
 ![Column Chart without categories](/controls/charts/chart-column-no-categories.png)</img>
 

@@ -12,7 +12,7 @@ The [Kendo UI Sparklines widget](http://demos.telerik.com/kendo-ui/sparklines/in
 
 Generally, the Sparklines are simple, word-sized graphics that can be embedded in chunks of text, tables, or headlines. The concept for such graphics was developed by [Edward Tufte](https://en.wikipedia.org/wiki/Edward_Tufte).
 
-The Kendo UI Sparklines widget is a version of the Kedno UI Chart widget, tailored for this specific application. While Sparklines are typically line charts, other types are supported as well:
+The Kendo UI Sparklines widget is a version of the Kendo UI Chart widget, tailored for this specific application. While Sparklines are typically line charts, other types are supported as well:
 
 *   Line (default)
 *   Bar (Data Bars)

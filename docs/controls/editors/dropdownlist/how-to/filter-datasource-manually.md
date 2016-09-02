@@ -7,7 +7,7 @@ slug: howto_filter_datasource_manually_dropdownlist
 
 # Filter DataSource Manually
 
-The example below demonstrates how to filter Kendo UI DropDownList datasource instance manually.
+The example below demonstrates how to filter Kendo UI DropDownList dataSource instance manually.
 
 The widget has a built-in detection mechanism that checks whether the data is filtered or not. This information is used by the widget to decide when to persist selected value
 that does not exist in the source. When source is filtered manually, widget will lose details about the DataSource state and hence could broke.

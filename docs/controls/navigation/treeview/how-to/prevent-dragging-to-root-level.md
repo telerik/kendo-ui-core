@@ -51,7 +51,7 @@ The example below demonstrates how to handle the Kendo UI TreeView `drag` event 
 Other articles on the Kendo UI TreeView:
 
 * [TreeView JavaScript API Reference](/api/javascript/ui/treeview)
-* [How to Check Nodes Programatically]({% slug howto_checknodeprogramatically_treeview %})
+* [How to Check Nodes Programmatically]({% slug howto_checknodeprogramatically_treeview %})
 * [How to Edit Nodes via Form]({% slug howto_editnodesviaform_treeview %})
 * [How to Filter Out Search Results]({% slug howto_filetroutserachresults_treeview %})
 * [How to Hide Checkboxes for Root Level]({% slug howto_hidecheckboxesforrootlevel_treeview %})

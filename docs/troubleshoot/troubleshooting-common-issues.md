@@ -33,7 +33,7 @@ The following JavaScript errors will be thrown (depending on the browser):
 
 **Solution**
 
-Make sure that jQuery is included only before the Kendo UI JavaScript files and before any Javascript statements that depend on it.
+Make sure that jQuery is included only before the Kendo UI JavaScript files and before any JavaScript statements that depend on it.
 
 ## Widgets
 

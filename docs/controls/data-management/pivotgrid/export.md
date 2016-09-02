@@ -37,7 +37,7 @@ With the default configuration, Kendo UI PivotGrid exports the current data with
 
 The PivotGrid widget does not export the current CSS theme in the Excel file.
 
-For more information on how to change the visual appearance of the Excel document, see the section about [the Excel customizaion](#customize-the-excel-document) below.
+For more information on how to change the visual appearance of the Excel document, see the section about [the Excel customization](#customize-the-excel-document) below.
 
 The [`dataCellTemplate`](/api/javascript/ui/pivotgrid#configuration-dataCellTemplate), [`columnHeaderTemplate`](/api/javascript/ui/pivotgrid#configuration-columnHeaderTemplate), and
 the [`rowHeaderTemplate`](/api/javascript/ui/pivotgrid#configuration-rowHeaderTemplate) options are not used during export. For more information on this, see the section about the [templates](#templates) below.
@@ -56,7 +56,7 @@ Kendo UI PivotGrid does not use [`dataCellTemplate`](/api/javascript/ui/pivotgri
 
 ### JavaScript "JSZip Is Not Found" Error
 
-Clicking the **Export to Excel** button or calling the `saveAsExcel` throws an exception if the JSZip JavaScript library is not found. o solve this issue, include JSZip in the page. For more information on this, see the [introductory help topic about exporting to Excel]({% slug introduction_excelexport_kendoui %}#requirements).  
+Clicking the **Export to Excel** button or calling the `saveAsExcel` throws an exception if the JSZip JavaScript library is not found. To solve this issue, include JSZip in the page. For more information on this, see the [introductory help topic about exporting to Excel]({% slug introduction_excelexport_kendoui %}#requirements).  
 
 ### Export Not Working in Internet Explorer and Safari
 

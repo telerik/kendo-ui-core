@@ -8,7 +8,7 @@ position: 1
 
 # Editor Overview
 
-The [Kendo UI Editor widget](http://demos.telerik.com/kendo-ui/editor/index) allows you to create rich textual content by means of a `WYSIWYG` interfance. The generated widget value is an `XHTML` markup.
+The [Kendo UI Editor widget](http://demos.telerik.com/kendo-ui/editor/index) allows you to create rich textual content by means of a `WYSIWYG` interface. The generated widget value is an `XHTML` markup.
 
 ## Getting Started
 
@@ -119,13 +119,13 @@ You can make the Editor readonly by removing the `contenteditable` attribute of 
 Before the Q3 2012 (2012.3.1114) release the Editor assumed the pixel offset width of the `<textarea>` from which it was created. As of now, the widget behaves in the following way:
 
 * The Editor applies the width or height value, set via an inline style in the `<textarea>`, if such is available.
-* If the `<textarea>` is not displaying such explicit values, the Editor applies a 100% width dimension and a deafult height of 250px.
+* If the `<textarea>` is not displaying such explicit values, the Editor applies a 100% width dimension and a default height of 250px.
 
-If the `<textarea>` width and height аре applied via external CSS styles, use a similar approach to the Editor, e.g., by using its `k-editor` CSS class.
+If the `<textarea>` width and height are applied via external CSS styles, use a similar approach to the Editor, e.g., by using its `k-editor` CSS class.
 
 Note that `<textarea>` `cols` and `rows` are required attributes and they can influence the dimensions of a `<textarea>` element as well. However, browsers do not apply them in a consistent manner, so the Editor ignores them when its size is rendered.
 
-When using the classic (iframe) mode, the Editor cannot assume a very small height, because it needs some minimum reasonable space for its toolbar and editable areas. The default widget height is 250px. To set a height, which is smaller than 200px, use the approach shown in the example below.
+When using the classic (iFrame) mode, the Editor cannot assume a very small height, because it needs some minimum reasonable space for its toolbar and editable areas. The default widget height is 250px. To set a height, which is smaller than 200px, use the approach shown in the example below.
 
 ###### Example
 

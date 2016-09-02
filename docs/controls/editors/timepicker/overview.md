@@ -32,7 +32,7 @@ The DatePicker can be initialized via an `id` selector as demonstrated in the ex
 
 ## Configuration
 
-Kendo UI DatePicker provides default configuration options that can be set during initialization. Some of the properties that can be overriden and controlled are:
+Kendo UI DatePicker provides default configuration options that can be set during initialization. Some of the properties that can be overridden and controlled are:
 
 *   Selected time
 *   Minimum and/or maximum time
@@ -59,7 +59,7 @@ The TimePicker will set the value only if the entered time is valid and within t
 
 ### Time Format
 
-The exampe below demonstrates how to define the time format.
+The example below demonstrates how to define the time format.
 
 ###### Example
 

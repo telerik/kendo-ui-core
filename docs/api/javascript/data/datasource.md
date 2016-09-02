@@ -8,15 +8,23 @@ description: Easy to follow steps for DataSource component configuration, exampl
 
 ## Overview
 
-See the [DataSource Overview](/framework/datasource/overview) and [Basic Usage](/framework/datasource/basic-usage) for an introduction to DataSource.
+See the [DataSource Overview](/framework/datasource/overview) and [Basic Usage](/framework/datasource/basic-usage) for an introduction to the DataSource.
 
 ## Configuration
 
 ### aggregate `Array`
 
-The aggregate(s) which are calculated when the data source populates with data. The supported aggregates are "average", "count", "max", "min" and "sum".
+The aggregates which are calculated when the data source populates with data.
 
-> The data source calculates aggregates client-side unless the [serverAggregates](#configuration-serverAggregates) option is set to `true`.
+The supported aggregates are:
+
+* `"average"`
+* `"count"`
+* `"max"`
+* `"min"`
+* `"sum"`
+
+> The data source calculates aggregates client-side unless the [`serverAggregates`](#configuration-serverAggregates) option is set to `true`.
 
 #### Example - specify aggregates
 
@@ -40,7 +48,15 @@ The aggregate(s) which are calculated when the data source populates with data. 
 
 ### aggregate.aggregate `String`
 
-The name of the aggregate function. The supported aggregates are "average", "count", "max", "min" and "sum".
+The name of the aggregate function.
+
+The supported aggregates are:  
+
+* `"average"`
+* `"count"`
+* `"max"`
+* `"min"`
+* `"sum"`
 
 #### Example - specify aggregate function
 
@@ -84,7 +100,7 @@ The data item field which will be used to calculate the aggregates.
 
 ### autoSync `Boolean` *(default: false)*
 
-If set to `true` the data source would automatically save any changed data items by calling the [sync](#methods-sync) method. By default changes are not automatically saved.
+If set to `true` the data source would automatically save any changed data items by calling the [`sync`](#methods-sync) method. By default, changes are not automatically saved.
 
 #### Example - enable auto sync
     <script>
@@ -112,12 +128,13 @@ If set to `true` the data source would automatically save any changed data items
 
 ### batch `Boolean` *(default: false)*
 
-If set to `true` the data source will batch CRUD operation requests. For example updating two data items would cause one HTTP request instead of two. By default the data source
+If set to `true`, the data source will batch CRUD operation requests. For example, updating two data items would cause one HTTP request instead of two. By default, the data source
 makes a HTTP request for every CRUD operation.
 
-> The changed data items are sent by default as `models`. This can be changed via the [parameterMap](#configuration-transport.parameterMap) option.
+> The changed data items are sent as `models` by default. This can be changed via the [`parameterMap`](#configuration-transport.parameterMap) option.
 
-#### Example - enable batch mode
+#### Example - enable the batch mode
+
     <script>
     var dataSource = new kendo.data.DataSource({
       batch: true,
@@ -146,11 +163,12 @@ makes a HTTP request for every CRUD operation.
 
 ### data `Array|String`
 
-The array of data items which the data source contains. The data source will wrap those items as [kendo.data.ObservableObject](/api/javascript/data/observableobject) or [kendo.data.Model](/api/javascript/data/model) (if [schema.model](#configuration-schema-model) is set).
+The array of data items which the data source contains. The data source will wrap those items as [`kendo.data.ObservableObject`](/api/javascript/data/observableobject) or [`kendo.data.Model`](/api/javascript/data/model) (if [`schema.model`](#configuration-schema-model) is set).
 
-Can be set to a string value if the [schema.type](#configuration-schema.type) option is set to "xml".
+Can be set to a string value if the [`schema.type`](#configuration-schema.type) option is set to `"xml"`.
 
 #### Example - set the data items of a data source
+
     <script>
     var dataSource = new kendo.data.DataSource({
       data: [
@@ -165,6 +183,7 @@ Can be set to a string value if the [schema.type](#configuration-schema.type) op
     </script>
 
 #### Example - set the data items as an XML string
+
     <script>
     var dataSource = new kendo.data.DataSource({
       data: '<books><book id="1"><title>Secrets of the JavaScript Ninja</title></book></books>',
@@ -193,11 +212,12 @@ Can be set to a string value if the [schema.type](#configuration-schema.type) op
 
 ### filter `Array|Object`
 
-The filter(s) which is (are) applied over the data items. By default no filter is applied.
+The filters which are applied over the data items. By default, no filter is applied.
 
-> The data source filters the data items client-side unless the [serverFiltering](#configuration-serverFiltering) option is set to `true`.
+> The data source filters the data items client-side unless the [`serverFiltering`](#configuration-serverFiltering) option is set to `true`.
 
 #### Example - set a single filter
+
     <script>
     var dataSource = new kendo.data.DataSource({
       data: [
@@ -214,6 +234,7 @@ The filter(s) which is (are) applied over the data items. By default no filter i
     </script>
 
 #### Example - set filter as conjunction (and)
+
     <script>
     var dataSource = new kendo.data.DataSource({
       data: [
@@ -235,6 +256,7 @@ The filter(s) which is (are) applied over the data items. By default no filter i
     </script>
 
 #### Example - set filter as disjunction (or)
+
     <script>
     var dataSource = new kendo.data.DataSource({
       data: [
@@ -282,7 +304,7 @@ The data item field to which the filter operator is applied.
 
 ### filter.filters `Array`
 
-The nested filter expressions. Suppor the same options as [filter](#configuration-filter). Filters can be nested indefinitely.
+The nested filter expressions. Supports the same options as [`filter`](#configuration-filter). Filters can be nested indefinitely.
 
 #### Example - nested filters
 
@@ -313,7 +335,12 @@ The nested filter expressions. Suppor the same options as [filter](#configuratio
 
 ### filter.logic `String`
 
-The logical operation to use when the `filter.filters` option is set. The supported values are "and" and "or".
+The logical operation to use when the `filter.filters` option is set.
+
+The supported values are:
+
+* `"and"`
+* `"or"`
 
 #### Example - set the filter logic
 
@@ -343,8 +370,26 @@ The logical operation to use when the `filter.filters` option is set. The suppor
 
 ### filter.operator `String`
 
-The filter operator (comparison). The supported operators are: "eq" (equal to), "neq" (not equal to), "isnull" (is equal to null), "isnotnull" (is not equal to null), "lt" (less than), "lte" (less than or equal to), "gt" (greater than), "gte" (greater than or equal to),
-"startswith", "endswith", "contains", "doesnotcontain", "isempty", "isnotempty". The last five are supported only for string fields.
+The filter operator (comparison).
+
+The supported operators are:
+
+* `"eq"` (equal to)
+* `"neq"` (not equal to)
+* `"isnull"` (is equal to null)
+* `"isnotnull"` (is not equal to null)
+* `"lt"` (less than)
+* `"lte"` (less than or equal to)
+* `"gt"` (greater than)
+* `"gte"` (greater than or equal to)
+* `"startswith"`
+* `"endswith"`
+* `"contains"`
+* `"doesnotcontain"`
+* `"isempty"`
+* `"isnotempty"`
+
+ The last five are supported only for string fields.
 
 #### Example - set the filter operator
 
@@ -365,11 +410,12 @@ The filter operator (comparison). The supported operators are: "eq" (equal to), 
 
 ### filter.value `Object`
 
-The value to which the [field](#configuration-filter.field) is compared. The value must be from the same type as the field.
+The value to which the [`field`](#configuration-filter.field) is compared. The value has to be of the same type as the field.
 
 > By design, the `"\n"` is removed from the filter before the filtering is performed. That is why an `"\n"` identifier from the filter will not match data items whose corresponding fields contain new lines.
 
 #### Example - specify the filter value
+
     <script>
     var dataSource = new kendo.data.DataSource({
       data: [
@@ -387,11 +433,12 @@ The value to which the [field](#configuration-filter.field) is compared. The val
 
 ### group `Array|Object`
 
-The grouping configuration of the data source. If set the data items will be grouped when the data source is populated. By default grouping is not applied.
+The grouping configuration of the data source. If set, the data items will be grouped when the data source is populated. By default, grouping is not applied.
 
-> The data source groups the data items client-side unless the [serverGrouping](#configuration-serverGrouping) option is set to `true`.
+> The data source groups the data items client-side unless the [`serverGrouping`](#configuration-serverGrouping) option is set to `true`.
 
-#### Example - set group as an object
+#### Example - set a group as an object
+
     <script>
     var dataSource = new kendo.data.DataSource({
       data: [
@@ -415,7 +462,8 @@ The grouping configuration of the data source. If set the data items will be gro
     });
     </script>
 
-#### Example - set group as an array (subgroups)
+#### Example - set a group as an array (subgroups)
+
     <script>
     var dataSource = new kendo.data.DataSource({
       data: [
@@ -448,9 +496,18 @@ The grouping configuration of the data source. If set the data items will be gro
 
 ### group.aggregates `Array`
 
-The aggregate(s) which are calculated during grouping. The supported aggregates are "average", "count", "max", "min" and "sum".
+The aggregates which are calculated during grouping.
+
+The supported aggregates are:
+
+* `"average"`
+* `"count"`
+* `"max"`
+* `"min"`
+* `"sum"`
 
 #### Example - set group aggregates
+
     <script>
     var dataSource = new kendo.data.DataSource({
       data: [
@@ -479,9 +536,18 @@ The aggregate(s) which are calculated during grouping. The supported aggregates 
 
 ### group.aggregates.aggregate `String`
 
-The name of the aggregate function. Specifies the aggregate function. The supported aggregates are "average", "count", "max", "min" and "sum".
+The name of the aggregate function. Specifies the aggregate function.
 
-#### Example - specify aggregate function
+The supported aggregates are:
+
+* `"average"`
+* `"count"`
+* `"max"`
+* `"min"`
+* `"sum"`
+
+#### Example - specify an aggregate function
+
     <script>
     var dataSource = new kendo.data.DataSource({
       data: [
@@ -508,7 +574,7 @@ The name of the aggregate function. Specifies the aggregate function. The suppor
 
 The data item field which will be used to calculate the aggregates.
 
-#### Example - specify aggregate field
+#### Example - specify an aggregate field
 
     <script>
     var dataSource = new kendo.data.DataSource({
@@ -534,9 +600,17 @@ The data item field which will be used to calculate the aggregates.
 
 ### group.dir `String` *(default: "asc")*
 
-The sort order of the group. The supported values are "asc" (ascending order) and "desc" (descending order). The default sort order is ascending.
+The sort order of the group.
+
+The supported values are:
+
+*  `"asc"` (ascending order)
+* `"desc"` (descending order)
+
+The default sort order is ascending.
 
 #### Example - sort the groups in descending order
+
     <script>
     var dataSource = new kendo.data.DataSource({
       data: [
@@ -586,6 +660,7 @@ The data item field to group by.
 The offline storage key or custom offline storage implementation.
 
 #### Example - set offline storage key
+
     <script>
     var dataSource = new kendo.data.DataSource({
         offlineStorage: "products-offline",
@@ -599,6 +674,7 @@ The offline storage key or custom offline storage implementation.
     </script>
 
 #### Example - set custom offline storage implementation
+
     <script>
     var dataSource = new kendo.data.DataSource({
         // use sessionStorage instead of localStorage
@@ -621,9 +697,9 @@ The offline storage key or custom offline storage implementation.
 
 ### page `Number`
 
-The page of data which the data source will return when the [view](#methods-view) method is invoked or request from the remote service.
+The page of data which the data source will return when the [`view`](#methods-view) method is invoked or request from the remote service.
 
-> The data source will page the data items client-side unless the [serverPaging](#configuration-serverPaging) option is set to `true`.
+> The data source will page the data items client-side unless the [`serverPaging`](#configuration-serverPaging) option is set to `true`.
 
 #### Example - set the current page
 
@@ -647,9 +723,9 @@ The page of data which the data source will return when the [view](#methods-view
 
 ### pageSize `Number`
 
-The number of data items per page. The property has no default value, that's why if paging should be used, make sure some pageSize is set.
+The number of data items per page. The property has no default value. That is why to use paging, make sure some `pageSize` value is set.
 
-> The data source will page the data items client-side unless the [serverPaging](#configuration-serverPaging) option is set to `true`.
+> The data source will page the data items client-side unless the [`serverPaging`](#configuration-serverPaging) option is set to `true`.
 
 #### Example - set the page size
 
@@ -701,12 +777,11 @@ The configuration used to parse the remote service response.
 
 ### schema.aggregates `Function|String`
 
-The field from the response which contains the aggregate results. Can be set to a function which is called to
-return the aggregate results from the response.
+The field from the response which contains the aggregate results. Can be set to a function which is called to return the aggregate results from the response.
 
-> The `aggregates` option is used only when the [serverAggregates](#configuration-serverAggregates) option is set to `true`.
+> The `aggregates` option is used only when the [`serverAggregates`](#configuration-serverAggregates) option is set to `true`.
 
-The result of the function should be a JavaScript object which contains the aggregate results for every fields in the following format:
+The result of the function should be a JavaScript object which contains the aggregate results for every field in the following format:
 
 ```pseudo
     {
@@ -720,7 +795,7 @@ The result of the function should be a JavaScript object which contains the aggr
     }
 ```
 
-For example if the data source is configured like this:
+For example, if the data source is configured like this:
 
 ```pseudo
     var dataSource = new kendo.data.DataSource({
@@ -782,8 +857,7 @@ The aggregate results should have the following format:
 
 ### schema.data `Function|String`
 
-The field from the server response which contains the data items. Can be set to a function which is called to
-return the data items for the response.
+The field from the server response which contains the data items. Can be set to a function which is called to return the data items for the response.
 
 #### Returns
 
@@ -835,10 +909,10 @@ return the data items for the response.
 
 ### schema.errors `Function|String` *(default: "errors")*
 
-The field from the server response which contains server-side errors. Can be set to a function which is called to
-return the errors for response. If there are any errors the [error](#events-error) event will be fired.
+The field from the server response which contains server-side errors. Can be set to a function which is called to return the errors for response. If there are any errors, the [`error`](#events-error) event will be fired.
 
 #### Example - specify the error field as a string
+
     <script>
     var dataSource = new kendo.data.DataSource({
       transport: {
@@ -859,6 +933,7 @@ return the errors for response. If there are any errors the [error](#events-erro
     </script>
 
 #### Example - specify the error field as a function
+
     <script>
     var dataSource = new kendo.data.DataSource({
       transport: {
@@ -882,10 +957,9 @@ return the errors for response. If there are any errors the [error](#events-erro
 
 ### schema.groups `Function|String`
 
-The field from the server response which contains the groups. Can be set to a function which is called to
-return the groups from the response.
+The field from the server response which contains the groups. Can be set to a function which is called to return the groups from the response.
 
-> The `groups` option is used only when the [serverGrouping](#configuration-serverGrouping) option is set to `true`.
+> The `groups` option is used only when the [`serverGrouping`](#configuration-serverGrouping) option is set to `true`.
 
 The result should have the following format:
 
@@ -954,9 +1028,9 @@ The result should have the following format:
 
 The data item (model) configuration.
 
-If set to an object the [Model.define](/api/javascript/data/model#model.define) method will be used to initialize the data source model.
+If set to an object, the [`Model.define`](/api/javascript/data/model#model.define) method will be used to initialize the data source model.
 
-If set to an existing [kendo.data.Model](/api/javascript/data/model) instance the data source will use that instance and will **not** initialize a new one.
+If set to an existing [`kendo.data.Model`](/api/javascript/data/model) instance, the data source will use that instance and will **not** initialize a new one.
 
 #### Example - set the model as a JavaScript object
 
@@ -989,7 +1063,7 @@ If set to an existing [kendo.data.Model](/api/javascript/data/model) instance th
     });
     </script>
 
-#### Example - set the model as an existing kendo.data.Model instance
+#### Example - set the model as an existing `kendo.data.Model` instance
 
     <script>
     var Product = kendo.model.define({
@@ -1068,19 +1142,17 @@ The initially parsed server response that may need additional modifications.
 
 ### schema.total `Function|String`
 
-The field from the server response which contains the total number of data items. Can be set to a function which is called to
-return the total number of data items for the response.
+The field from the server response which contains the total number of data items. Can be set to a function which is called to return the total number of data items for the response.
 
-> The `schema.total` setting may be omitted when the Grid is bound to a plain `Array` (i.e. the data items' collection is not a value of a field in the server response).
-In this case, the `length` of the response `Array` will be used.
+> The `schema.total` setting may be omitted when the Grid is bound to a plain `Array` (that is, the data items' collection is not a value of a field in the server response). In this case, the `length` of the response `Array` will be used.
 
-> `schema.total` must be set if the [serverPaging](#configuration-serverPaging) option is set to `true`.
+> The `schema.total` must be set if the [`serverPaging`](#configuration-serverPaging) option is set to `true`.
 
 #### Returns
 
 `Number` The total number of data items.
 
-#### Example: set total as a string
+#### Example - set the total as a string
 
     <script>
     var dataSource = new kendo.data.DataSource({
@@ -1094,7 +1166,7 @@ In this case, the `length` of the response `Array` will be used.
     });
     </script>
 
-#### Example: set total as a function
+#### Example - set the total as a function
 
     <script>
     var dataSource = new kendo.data.DataSource({
@@ -1112,9 +1184,17 @@ In this case, the `length` of the response `Array` will be used.
 
 ### schema.type `String` *(default: "json")*
 
-The type of the response. The supported values are "xml" and "json". By default the schema interprets the server response as JSON.
+The type of the response.
+
+The supported values are:
+
+* `"xml" `
+* `"json"`
+
+By default, the schema interprets the server response as JSON.
 
 #### Example - use XML data
+
     <script>
     var dataSource = new kendo.data.DataSource({
       data: '<books><book id="1"><title>Secrets of the JavaScript Ninja</title></book></books>',
@@ -1147,7 +1227,7 @@ If set to `true`, the data source will leave the aggregate calculation to the re
 
 > Configure [`schema.aggregates`](#configuration-schema.aggregates) if you set `serverAggregates` to `true`.
 
-For more information and tips about client and server data operations, refer to the [introductory article on the DataSource]({% slug overview_kendoui_datasourcecomponent %}#mixed-data-operations-mode).
+For more information and tips about client and server data operations, refer to the [introductory article on the DataSource](/framework/datasource/overview#mixed-data-operations-mode).
 
 #### Example - enable server aggregates
 
@@ -1174,14 +1254,14 @@ By default, the [`filter`](#configuration-filter) is sent to the server followin
 
 For example, the filter `{ logic: "and", filters: [ { field: "name", operator: "startswith", value: "Jane" } ] }` is sent as:
 
-*   filter[logic]: and
-*   filter[filters][0][field]: name
-*   filter[filters][0][operator]: startswith
-*   filter[filters][0][value]: Jane
+*  `filter[logic]: and`
+*  `filter[filters][0][field]: name`
+*  `filter[filters][0][operator]: startswith`
+*  `filter[filters][0][value]: Jane`
 
 Use the [`parameterMap`](#configuration-transport.parameterMap) option to send the filter option in a different format.
 
-For more information and tips about client and server data operations, refer to the [introductory article on the DataSource]({% slug overview_kendoui_datasourcecomponent %}#mixed-data-operations-mode).
+For more information and tips about client and server data operations, refer to the [introductory article on the DataSource](/framework/datasource/overview#mixed-data-operations-mode).
 
 #### Example - enable server filtering
 
@@ -1203,12 +1283,12 @@ By default, the [`group`](#configuration-group) is sent to the server following 
 
 For example, the group `{ field: "category", dir: "desc" }` is sent as:
 
-*   group[0][field]: category
-*   group[0][dir]: desc
+*  `group[0][field]: category`
+*  `group[0][dir]: desc`
 
 Use the [`parameterMap`](#configuration-transport.parameterMap) option to send the group option in a different format.
 
-For more information and tips about client and server data operations, refer to the [introductory article on the DataSource]({% slug overview_kendoui_datasourcecomponent %}#mixed-data-operations-mode).
+For more information and tips about client and server data operations, refer to the [introductory article on the DataSource](/framework/datasource/overview#mixed-data-operations-mode).
 
 #### Example - enable server grouping
 
@@ -1230,14 +1310,14 @@ If set to `true`, the data source will leave the data item paging implementation
 
 The following options are sent to the server when server paging is enabled:
 
-- page - the page of data item to return (`1` means the first page)
-- pageSize - the number of items to return
-- skip - how many data items to skip
-- take - the number of data items to return (the same as `pageSize`)
+- `page` - the page of data item to return (`1` means the first page).
+- `pageSize` - the number of items to return.
+- `skip` - how many data items to skip.
+- `take` - the number of data items to return (the same as `pageSize`).
 
 Use the [`parameterMap`](#configuration-transport.parameterMap) option to send the paging options in a different format.
 
-For more information and tips about client and server data operations, refer to the [introductory article on the DataSource]({% slug overview_kendoui_datasourcecomponent %}#mixed-data-operations-mode).
+For more information and tips about client and server data operations, refer to the [introductory article on the DataSource](/framework/datasource/overview#mixed-data-operations-mode).
 
 #### Example - enable server paging
 
@@ -1261,12 +1341,12 @@ By default, the [`sort`](#configuration-sort) is sent to the server following jQ
 
 For example, the sort `{ field: "age", dir: "desc" }` is sent as:
 
-*   sort[0][field]: age
-*   sort[0][dir]: desc
+* `sort[0][field]: age`
+* `sort[0][dir]: desc`
 
 Use the [`parameterMap`](#configuration-transport.parameterMap) option to send the paging options in a different format.
 
-For more information and tips about client and server data operations, refer to the [introductory article on the DataSource]({% slug overview_kendoui_datasourcecomponent %}#mixed-data-operations-mode).
+For more information and tips about client and server data operations, refer to the [introductory article on the DataSource](/framework/datasource/overview#mixed-data-operations-mode).
 
 #### Example - enable server sorting
 
@@ -1325,7 +1405,12 @@ The sort order which will be applied over the data items. By default the data it
 
 ### sort.dir `String`
 
-The sort order (direction). The supported values are "asc" (ascending order) and "desc" (descending order).
+The sort order (direction).
+
+The supported values are:
+
+* `"asc"` (ascending order)
+* `"desc"` (descending order)
 
 #### Example - specify the sort order (direction)
 
@@ -1369,10 +1454,9 @@ The field by which the data items are sorted.
 
 The configuration used to load and save the data items. A data source is remote or local based on the way of it retrieves data items.
 
-Remote data sources load and save data items from and to a remote end-point (a.k.a. remote service or server). The `transport` option describes the remote service configuration - URL, HTTP verb, HTTP headers etc.
-The `transport` option can also be used to implement custom data loading and saving.
+Remote data sources load and save data items from and to a remote end-point (also known as remote service or server). The `transport` option describes the remote service configuration - URL, HTTP verb, HTTP headers, and others. The `transport` option can also be used to implement custom data loading and saving.
 
-Local data sources are bound to a JavaScript array via the [data](#configuration-data) option.
+Local data sources are bound to a JavaScript array via the [`data`](#configuration-data) option.
 
 #### Example - specify the remote service configuration
 
@@ -1393,19 +1477,16 @@ Local data sources are bound to a JavaScript array via the [data](#configuration
 
 ### transport.create `Object|String|Function`
 
-The configuration used when the data source saves newly created data items. Those are items added to the data source via the [add](#methods-add) or [insert](#methods-insert) methods.
+The configuration used when the data source saves newly created data items. Those are items added to the data source via the [`add`](#methods-add) or [`insert`](#methods-insert) methods.
 
-> The data source uses [jQuery.ajax](http://api.jquery.com/jQuery.ajax/) to make a HTTP request to the remote service. The value configured via `transport.create` is passed to [`jQuery.ajax`](http://api.jquery.com/jquery.ajax/#jQuery-ajax-settings). This means that you can set
-all options supported by `jQuery.ajax` via `transport.create` except the `success` and `error` callback functions which are used by the transport.
+> The data source uses [`jQuery.ajax`](http://api.jquery.com/jQuery.ajax/) to make a HTTP request to the remote service. The value configured via `transport.create` is passed to [`jQuery.ajax`](http://api.jquery.com/jquery.ajax/#jQuery-ajax-settings). This means that you can set all options supported by `jQuery.ajax` via `transport.create` except the `success` and `error` callback functions which are used by the transport.
 
 If the value of `transport.create` is a function, the data source invokes that function instead of `jQuery.ajax`. Check [the jQuery documentation](http://api.jquery.com/jquery.ajax/#jQuery-ajax-settings) for more details on the provided argument.
 
-If the value of `transport.create` is a string the data source uses this string as the URL of the remote service.
+If the value of `transport.create` is a string, the data source uses this string as the URL of the remote service.
 
-> *Important:* The remote service must return the inserted data items and the data item field configured as the `id` must be set. For example
-if the `id` of the data item is `ProductID` the "create" server response must be `[{ "ProductID": 79 }]`.
-
-> All transport actions (read, update, create, destroy) must be defined in the same way, e.g. as functions or as objects. Mixing the different configuration alternatives is not possible.
+> * The remote service must return the inserted data items and the data item field configured as the `id` must be set. For example, if the `id` of the data item is `ProductID`, the `"create"` server response must be `[{ "ProductID": 79 }]`.
+> * All transport actions (read, update, create, destroy) must be defined in the same way, that is, as functions or as objects. Mixing the different configuration alternatives is not possible.
 
 #### Example - set the create remote service
 
@@ -1474,10 +1555,9 @@ if the `id` of the data item is `ProductID` the "create" server response must be
 
 ### transport.create.cache `Boolean`
 
-If set to `false` the request result will not be cached by the browser. Setting cache to `false` will only work correctly with HEAD and GET requests. It works by appending *"_={timestamp}"* to the GET parameters.
-By default "jsonp" requests are not cached.
+If set to `false`, the request result will not be cached by the browser. Setting `cache` to `false` will only work correctly with HEAD and GET requests. It works by appending *"_={timestamp}"* to the GET parameters. By default, `"jsonp"` requests are not cached.
 
-Refer to the [jQuery.ajax](http://api.jquery.com/jQuery.ajax) documentation for further info.
+Refer to the [`jQuery.ajax`](http://api.jquery.com/jQuery.ajax) documentation for further info.
 
 #### Example - enable request caching
 
@@ -1494,10 +1574,10 @@ Refer to the [jQuery.ajax](http://api.jquery.com/jQuery.ajax) documentation for 
 
 ### transport.create.contentType `String`
 
-The content-type HTTP header sent to the server. Default is `"application/x-www-form-urlencoded"`. Use `"application/json"` if the content is JSON.
-Refer to the [jQuery.ajax](http://api.jquery.com/jQuery.ajax) documentation for further info.
+The content-type HTTP header sent to the server. The default is `"application/x-www-form-urlencoded"`. Use `"application/json"` if the content is JSON. Refer to the [`jQuery.ajax`](http://api.jquery.com/jQuery.ajax) documentation for further information.
 
-#### Example - set content type
+#### Example - set a content type
+
     <script>
     var dataSource = new kendo.data.DataSource({
       transport: {
@@ -1511,12 +1591,12 @@ Refer to the [jQuery.ajax](http://api.jquery.com/jQuery.ajax) documentation for 
 
 ### transport.create.data `Object|Function`
 
-Additional parameters which are sent to the remote service. The parameter names must not match reserved words, which are used by the Kendo UI DataSource for
-[sorting](#configuration-serverSorting), [filtering](#configuration-serverFiltering), [paging](#configuration-serverPaging) and [grouping](#configuration-serverGrouping).
+Additional parameters that are sent to the remote service. The parameter names must not match reserved words, which are used by the Kendo UI DataSource for [sorting](#configuration-serverSorting), [filtering](#configuration-serverFiltering), [paging](#configuration-serverPaging), and [grouping](#configuration-serverGrouping).
 
-Refer to the [jQuery.ajax](http://api.jquery.com/jQuery.ajax) documentation for further info.
+Refer to the [`jQuery.ajax`](http://api.jquery.com/jQuery.ajax) documentation for further information.
 
 #### Example - send additional parameters as an object
+
     <script>
     var dataSource = new kendo.data.DataSource({
       transport: {
@@ -1551,9 +1631,9 @@ Refer to the [jQuery.ajax](http://api.jquery.com/jQuery.ajax) documentation for 
 
 ### transport.create.dataType `String`
 
-The type of result expected from the server. Commonly used values are "json" and "jsonp".
+The type of result expected from the server. Commonly used values are `"json"` and `"jsonp"`.
 
-Refer to the [jQuery.ajax](http://api.jquery.com/jQuery.ajax) documentation for further info.
+Refer to the [`jQuery.ajax`](http://api.jquery.com/jQuery.ajax) documentation for further information.
 
 #### Example - set the data type to JSON
 
@@ -1570,13 +1650,14 @@ Refer to the [jQuery.ajax](http://api.jquery.com/jQuery.ajax) documentation for 
 
 ### transport.create.type `String` *(default: "GET")*
 
-The type of request to make ("POST", "GET", "PUT" or "DELETE"), default is "GET".
+The type of request to make (`"POST"`, `"GET"`, `"PUT"` or `"DELETE"`). The default request is `"GET"`.
 
-> The `type` option is ignored if `dataType` is set to "jsonp". JSONP always uses GET requests.
+> The `type` option is ignored if `dataType` is set to `"jsonp"`. JSONP always uses GET requests.
 
-Refer to the [jQuery.ajax](http://api.jquery.com/jQuery.ajax) documentation for further info.
+Refer to the [`jQuery.ajax`](http://api.jquery.com/jQuery.ajax) documentation for further information.
 
 #### Example - set the HTTP verb of the request
+
     <script>
     var dataSource = new kendo.data.DataSource({
       transport: {
@@ -1592,9 +1673,10 @@ Refer to the [jQuery.ajax](http://api.jquery.com/jQuery.ajax) documentation for 
 
 The URL to which the request is sent.
 
-If set to function the data source will invoke it and use the result as the URL.
+If set to function, the data source will invoke it and use the result as the URL.
 
-#### Example - specify URL as a string
+#### Example - specify the URL as a string
+
     <script>
     var dataSource = new kendo.data.DataSource({
       transport: {
@@ -1618,7 +1700,8 @@ If set to function the data source will invoke it and use the result as the URL.
     dataSource.sync();
     </script>
 
-#### Example - specify URL as a function
+#### Example - specify the URL as a function
+
     <script>
     var dataSource = new kendo.data.DataSource({
       transport: {
@@ -1646,16 +1729,15 @@ If set to function the data source will invoke it and use the result as the URL.
 
 ### transport.destroy `Object|String|Function`
 
-The configuration used when the data source destroys data items. Those are items removed from the data source via the [remove](#methods-remove) method.
+The configuration used when the data source destroys data items. Those are items removed from the data source via the [`remove`](#methods-remove) method.
 
-> The data source uses [jQuery.ajax](http://api.jquery.com/jQuery.ajax) to make a HTTP request to the remote service. The value configured via `transport.destroy` is passed to `jQuery.ajax`. This means that you can set
-all options supported by `jQuery.ajax` via `transport.destroy` except the `success` and `error` callback functions which are used by the transport.
+> The data source uses [`jQuery.ajax`](http://api.jquery.com/jQuery.ajax) to make an HTTP request to the remote service. The value configured via `transport.destroy` is passed to `jQuery.ajax`. This means that you can set all options supported by `jQuery.ajax` via `transport.destroy` except the `success` and `error` callback functions which are used by the transport.
 
 If the value of `transport.destroy` is a function, the data source invokes that function instead of `jQuery.ajax`.
 
-If the value of `transport.destroy` is a string the data source uses this string as the URL of the remote service.
+If the value of `transport.destroy` is a string, the data source uses this string as the URL of the remote service.
 
-> All transport actions (read, update, create, destroy) must be defined in the same way, e.g. as functions or as objects. Mixing the different configuration alternatives is not possible.
+> All transport actions (read, update, create, destroy) must be defined in the same way, that is, as functions or as objects. Mixing the different configuration alternatives is not possible.
 
 #### Example - set the destroy remote service
 
@@ -1740,10 +1822,9 @@ If the value of `transport.destroy` is a string the data source uses this string
 
 ### transport.destroy.cache `Boolean`
 
-If set to `false` the request result will not be cached by the browser. Setting cache to `false` will only work correctly with HEAD and GET requests. It works by appending *"_={timestamp}"* to the GET parameters.
-By default "jsonp" requests are not cached.
+If set to `false`, the request result will not be cached by the browser. Setting `cache` to `false` will only work correctly with HEAD and GET requests. It works by appending *"_={timestamp}"* to the GET parameters. By default, `"jsonp"` requests are not cached.
 
-Refer to the [jQuery.ajax](http://api.jquery.com/jQuery.ajax) documentation for further info.
+Refer to the [`jQuery.ajax`](http://api.jquery.com/jQuery.ajax) documentation for further information.
 
 #### Example - enable request caching
 
@@ -1760,10 +1841,10 @@ Refer to the [jQuery.ajax](http://api.jquery.com/jQuery.ajax) documentation for 
 
 ### transport.destroy.contentType `String`
 
-The content-type HTTP header sent to the server. Default is `"application/x-www-form-urlencoded"`. Use `"application/json"` if the content is JSON.
-Refer to the [jQuery.ajax](http://api.jquery.com/jQuery.ajax) documentation for further info.
+The content-type HTTP header sent to the server. The default is `"application/x-www-form-urlencoded"`. Use `"application/json"` if the content is JSON. Refer to the [jQuery.ajax](http://api.jquery.com/jQuery.ajax) documentation for further information.
 
-#### Example - set content type
+#### Example - set the content type
+
     <script>
     var dataSource = new kendo.data.DataSource({
       transport: {
@@ -1777,12 +1858,12 @@ Refer to the [jQuery.ajax](http://api.jquery.com/jQuery.ajax) documentation for 
 
 ### transport.destroy.data `Object|Function`
 
-Additional parameters which are sent to the remote service. The parameter names must not match reserved words, which are used by the Kendo UI DataSource for
-[sorting](#configuration-serverSorting), [filtering](#configuration-serverFiltering), [paging](#configuration-serverPaging) and [grouping](#configuration-serverGrouping).
+Additional parameters which are sent to the remote service. The parameter names must not match reserved words, which are used by the Kendo UI DataSource for [sorting](#configuration-serverSorting), [filtering](#configuration-serverFiltering), [paging](#configuration-serverPaging), and [grouping](#configuration-serverGrouping).
 
-Refer to the [jQuery.ajax](http://api.jquery.com/jQuery.ajax) documentation for further info.
+Refer to the [`jQuery.ajax`](http://api.jquery.com/jQuery.ajax) documentation for further information.
 
 #### Example - send additional parameters as an object
+
     <script>
     var dataSource = new kendo.data.DataSource({
       transport: {
@@ -1817,9 +1898,9 @@ Refer to the [jQuery.ajax](http://api.jquery.com/jQuery.ajax) documentation for 
 
 ### transport.destroy.dataType `String`
 
-The type of result expected from the server. Commonly used values are "json" and "jsonp".
+The type of result expected from the server. Commonly used values are `"json"` and `"jsonp"`.
 
-Refer to the [jQuery.ajax](http://api.jquery.com/jQuery.ajax) documentation for further info.
+Refer to the [`jQuery.ajax`](http://api.jquery.com/jQuery.ajax) documentation for further information.
 
 #### Example - set the data type to JSON
 
@@ -1836,13 +1917,14 @@ Refer to the [jQuery.ajax](http://api.jquery.com/jQuery.ajax) documentation for 
 
 ### transport.destroy.type `String`
 
-The type of request to make ("POST", "GET", "PUT" or "DELETE"), default is "GET".
+The type of request to make (`"POST"`, `"GET"`, `"PUT"` or `"DELETE"`). The default request is `"GET"`.
 
-> The `type` option is ignored if `dataType` is set to "jsonp". JSONP always uses GET requests.
+> The `type` option is ignored if `dataType` is set to `"jsonp"`. JSONP always uses GET requests.
 
-Refer to the [jQuery.ajax](http://api.jquery.com/jQuery.ajax) documentation for further info.
+Refer to the [`jQuery.ajax`](http://api.jquery.com/jQuery.ajax) documentation for further information.
 
 #### Example
+
     <script>
     var dataSource = new kendo.data.DataSource({
       transport: {
@@ -1858,9 +1940,9 @@ Refer to the [jQuery.ajax](http://api.jquery.com/jQuery.ajax) documentation for 
 
 The URL to which the request is sent.
 
-If set to function the data source will invoke it and use the result as the URL.
+If set to function, the data source will invoke it and use the result as the URL.
 
-#### Example - specify URL as a string
+#### Example - specify the URL as a string
 
     <script>
     var dataSource = new kendo.data.DataSource({
@@ -1891,7 +1973,7 @@ If set to function the data source will invoke it and use the result as the URL.
     });
     </script>
 
-#### Example - specify URL as a function
+#### Example - specify the URL as a function
 
     <script>
     var dataSource = new kendo.data.DataSource({
@@ -1926,12 +2008,10 @@ If set to function the data source will invoke it and use the result as the URL.
 
 ### transport.parameterMap `Function`
 
-The function which converts the request parameters to a format suitable for the remote service. By default
-the data source sends the parameters using jQuery's [conventions](http://api.jquery.com/jQuery.param/).
+The function which converts the request parameters to a format suitable for the remote service. By default, the data source sends the parameters using jQuery's [conventions](http://api.jquery.com/jQuery.param/).
 
-> The `parameterMap` method is often used to encode the parameters in JSON format.
-
-> **Important:** The `parameterMap` function will not be called when using custom functions for the read, update, create and destroy operations.
+> * The `parameterMap` method is often used to encode the parameters in JSON format.
+> * The `parameterMap` function will not be called when using custom functions for the read, update, create, and destroy operations.
 
 If a [`transport.read.data`](#configuration-transport.read.data) function is used together with `parameterMap`, do not forget to preserve the result from the data function that will be received in the parameterMap arguments. An example is provided below. Generally, the parameterMap function is designed to transform the request payload, not add new parameters to it.
 
@@ -1956,51 +2036,54 @@ transport: {
 
 ##### data `Object`
 
-The parameters which will be sent to the remote service. The value specified in the `data` field of the transport settings (create, read, update or destroy) is included as well.
-If [batch](#batch-boolean-default) is set to `false` the fields of the changed data items are also included.
+The parameters which will be sent to the remote service. The value specified in the `data` field of the transport settings (create, read, update or destroy) is included as well. If [`batch`](#batch-boolean-default) is set to `false`, the fields of the changed data items are also included.
 
 ##### data.aggregate `Array`
 
-The current aggregate configuration as set via the [aggregate](#configuration-aggregate) option.
-Available  if the [serverAggregates](#configuration-serverAggregates) option is set to `true` and the data source makes a "read" request.
+The current aggregate configuration as set via the [`aggregate`](#configuration-aggregate) option. Available if the [`serverAggregates`](#configuration-serverAggregates) option is set to `true` and the data source makes a `"read"` request.
 
 ##### data.group `Array`
 
-The current grouping configuration as set via the [group](#configuration-group) option.
-Available  if the [serverGrouping](#configuration-serverGrouping) option is set to `true` and the data source makes a "read" request.
+The current grouping configuration as set via the [`group`](#configuration-group) option. Available if the [`serverGrouping`](#configuration-serverGrouping) option is set to `true` and the data source makes a `"read"` request.
 
 ##### data.filter `Object`
 
-The current filter configuration as set via the [filter](#configuration-filter) option.
-Available  if the [serverFiltering](#configuration-serverFiltering) option is set to `true` and the data source makes a "read" request.
+The current filter configuration as set via the [`filter`](#configuration-filter) option. Available if the [`serverFiltering`](#configuration-serverFiltering) option is set to `true` and the data source makes a `"read"` request.
 
 ##### data.models `Array`
 
-All changed data items. Available  if there are any data item changes and the [batch](#configuration-batch) option is set to `true`.
+All changed data items. Available if there are any data item changes and the [`batch`](#configuration-batch) option is set to `true`.
 
 ##### data.page `Number`
 
-The current page. Available if the [serverPaging](#configuration-serverPaging) option is set to `true` and the data source makes a "read" request.
+The current page. Available if the [`serverPaging`](#configuration-serverPaging) option is set to `true` and the data source makes a `"read"` request.
 
 ##### data.pageSize `Number`
 
-The current page size as set via the [pageSize](#configuration-pageSize) option. Available if the [serverPaging](#configuration-serverPaging) option is set to `true` and the data source makes a "read" request.
+The current page size as set via the [`pageSize`](#configuration-pageSize) option. Available if the [`serverPaging`](#configuration-serverPaging) option is set to `true` and the data source makes a `"read"` request.
 
 ##### data.skip `Number`
 
-The number of data items to skip. Available if the [serverPaging](#configuration-serverPaging) option is set to `true` and the data source makes a "read" request.
+The number of data items to skip. Available if the [`serverPaging`](#configuration-serverPaging) option is set to `true` and the data source makes a `"read"` request.
 
 ##### data.sort `Array`
 
-The current sort configuration as set via the [sort](#configuration-sort) option. Available if the [serverSorting](#configuration-serverSorting) option is set to `true` and the data source makes a "read" request.
+The current sort configuration as set via the [`sort`](#configuration-sort) option. Available if the [`serverSorting`](#configuration-serverSorting) option is set to `true` and the data source makes a `"read"` request.
 
 ##### data.take `Number`
 
-The number of data items to return (the same as `data.pageSize`). Available if the [serverPaging](#configuration-serverPaging) option is set to `true` and the data source makes a "read" request.
+The number of data items to return (the same as `data.pageSize`). Available if the [`serverPaging`](#configuration-serverPaging) option is set to `true` and the data source makes a `"read"` request.
 
 ##### type `String`
 
-The type of the request which the data source makes. The supported values are "create", "read", "update" and "destroy".
+The type of the request which the data source makes.
+
+The supported values are:
+
+* `"create"`
+* `"read"`
+* `"update"`
+* `"destroy"`
 
 #### Returns
 
@@ -2038,7 +2121,6 @@ The type of the request which the data source makes. The supported values are "c
     });
     </script>
 
-
 #### Example - send request parameters as JSON
 
     <script>
@@ -2063,8 +2145,7 @@ The type of the request which the data source makes. The supported values are "c
 
 ### transport.push `Function`
 
-The function invoked during transport initialization which sets up push notifications. The data source will call this function only once and provide
-callbacks which will handle push notifications (data pushed from the server).
+The function invoked during transport initialization which sets up push notifications. The data source will call this function only once and provide callbacks which will handle push notifications (data pushed from the server).
 
 #### Parameters
 
@@ -2074,8 +2155,7 @@ An object containing callbacks for notifying the data source of push notificatio
 
 ##### callbacks.pushCreate `Function`
 
-Function that should be invoked to notify the data source about newly created data items that are pushed from the server. Accepts a single argument - the object pushed from the server
-which should follow the `schema.data` configuration.
+Function that should be invoked to notify the data source about newly created data items that are pushed from the server. Accepts a single argument - the object pushed from the server which should follow the `schema.data` configuration.
 
 ##### callbacks.pushDestroy `Function`
 
@@ -2130,14 +2210,13 @@ which should follow the `schema.data` configuration.
 
 The configuration used when the data source loads data items from a remote service.
 
-> The data source uses [jQuery.ajax](http://api.jquery.com/jQuery.ajax) to make a HTTP request to the remote service. The value configured via `transport.read` is passed to `jQuery.ajax`. This means that you can set
-all options supported by `jQuery.ajax` via `transport.read` except the `success` and `error` callback functions which are used by the transport.
+> The data source uses [`jQuery.ajax`](http://api.jquery.com/jQuery.ajax) to make a HTTP request to the remote service. The value configured via `transport.read` is passed to `jQuery.ajax`. This means that you can set all options supported by `jQuery.ajax` via `transport.read` except the `success` and `error` callback functions which are used by the transport.
 
 If the value of `transport.read` is a function, the data source invokes that function instead of `jQuery.ajax`.
 
-If the value of `transport.read` is a string the data source uses this string as the URL of the remote service.
+If the value of `transport.read` is a string, the data source uses this string as the URL of the remote service.
 
-> All transport actions (read, update, create, destroy) must be defined in the same way, e.g. as functions or as objects. Mixing the different configuration alternatives is not possible.
+> All transport actions (read, update, create, destroy) must be defined in the same way, that is, as functions or as objects. Mixing the different configuration alternatives is not possible.
 
 #### Example - set the read remote service
 
@@ -2157,6 +2236,7 @@ If the value of `transport.read` is a string the data source uses this string as
     </script>
 
 #### Example - send additional parameters to the remote service
+
     <input value="html5" id="search" />
     <script>
     var dataSource = new kendo.data.DataSource({
@@ -2174,6 +2254,7 @@ If the value of `transport.read` is a string the data source uses this string as
     </script>
 
 #### Example - set read as a function
+
     <script>
     var dataSource = new kendo.data.DataSource({
       transport: {
@@ -2201,10 +2282,9 @@ If the value of `transport.read` is a string the data source uses this string as
 
 ### transport.read.cache `Boolean`
 
-If set to `false` the request result will not be cached by the browser. Setting cache to `false` will only work correctly with HEAD and GET requests. It works by appending *"_={timestamp}"* to the GET parameters.
-By default "jsonp" requests are not cached.
+If set to `false`, the request result will not be cached by the browser. Setting cache to `false` will only work correctly with HEAD and GET requests. It works by appending *"_={timestamp}"* to the GET parameters. By default, `"jsonp"` requests are not cached.
 
-Refer to the [jQuery.ajax](http://api.jquery.com/jQuery.ajax) documentation for further info.
+Refer to the [`jQuery.ajax`](http://api.jquery.com/jQuery.ajax) documentation for further information.
 
 #### Example - enable request caching
 
@@ -2221,10 +2301,10 @@ Refer to the [jQuery.ajax](http://api.jquery.com/jQuery.ajax) documentation for 
 
 ### transport.read.contentType `String`
 
-The content-type HTTP header sent to the server. Default is `"application/x-www-form-urlencoded"`. Use `"application/json"` if the content is JSON.
-Refer to the [jQuery.ajax](http://api.jquery.com/jQuery.ajax) documentation for further info.
+The content-type HTTP header sent to the server. The default is `"application/x-www-form-urlencoded"`. Use `"application/json"` if the content is JSON. Refer to the [`jQuery.ajax`](http://api.jquery.com/jQuery.ajax) documentation for further information.
 
 #### Example - set content type
+
     <script>
     var dataSource = new kendo.data.DataSource({
       transport: {
@@ -2238,10 +2318,9 @@ Refer to the [jQuery.ajax](http://api.jquery.com/jQuery.ajax) documentation for 
 
 ### transport.read.data `Object|Function`
 
-Additional parameters which are sent to the remote service. The parameter names must not match reserved words, which are used by the Kendo UI DataSource for
-[sorting](#configuration-serverSorting), [filtering](#configuration-serverFiltering), [paging](#configuration-serverPaging) and [grouping](#configuration-serverGrouping).
+Additional parameters which are sent to the remote service. The parameter names must not match reserved words, which are used by the Kendo UI DataSource for [sorting](#configuration-serverSorting), [filtering](#configuration-serverFiltering), [paging](#configuration-serverPaging), and [grouping](#configuration-serverGrouping).
 
-Refer to the [jQuery.ajax](http://api.jquery.com/jQuery.ajax) documentation for further info.
+Refer to the [`jQuery.ajax`](http://api.jquery.com/jQuery.ajax) documentation for further information.
 
 #### Example - send additional parameters as an object
 
@@ -2281,9 +2360,9 @@ Refer to the [jQuery.ajax](http://api.jquery.com/jQuery.ajax) documentation for 
 
 ### transport.read.dataType `String`
 
-The type of result expected from the server. Commonly used values are "json" and "jsonp".
+The type of result expected from the server. Commonly used values are `"json"` and `"jsonp"`.
 
-Refer to the [jQuery.ajax](http://api.jquery.com/jQuery.ajax) documentation for further info.
+Refer to the [`jQuery.ajax`](http://api.jquery.com/jQuery.ajax) documentation for further information.
 
 #### Example - set the data type to JSON
 
@@ -2300,13 +2379,14 @@ Refer to the [jQuery.ajax](http://api.jquery.com/jQuery.ajax) documentation for 
 
 ### transport.read.type `String`
 
-The type of request to make ("POST", "GET", "PUT" or "DELETE"), default is "GET".
+The type of request to make (`"POST"`, `"GET"`, `"PUT"` or `"DELETE"`). The default request is `"GET"`.
 
 > The `type` option is ignored if `dataType` is set to "jsonp". JSONP always uses GET requests.
 
-Refer to the [jQuery.ajax](http://api.jquery.com/jQuery.ajax) documentation for further info.
+Refer to the [`jQuery.ajax`](http://api.jquery.com/jQuery.ajax) documentation for further information.
 
 #### Example - set the HTTP verb of the request
+
     <script>
     var dataSource = new kendo.data.DataSource({
       transport: {
@@ -2322,7 +2402,7 @@ Refer to the [jQuery.ajax](http://api.jquery.com/jQuery.ajax) documentation for 
 
 The URL to which the request is sent.
 
-If set to function the data source will invoke it and use the result as the URL.
+If set to function, the data source will invoke it and use the result as the URL.
 
 #### Example - specify URL as a string
 
@@ -2360,11 +2440,11 @@ If set to function the data source will invoke it and use the result as the URL.
 
 ### transport.signalr `Object`
 
-The configuration used when [type](#configuration-type) is set to "signalr". Configures the SignalR settings - hub, connection promise, server and client hub methods.
+The configuration used when [`type`](#configuration-type) is set to `"signalr"`. Configures the SignalR settings - hub, connection promise, server, and client hub methods.
 
 Live demo available at [demos.telerik.com/kendo-ui](http://demos.telerik.com/kendo-ui/grid/signalr).
 
-It is recommended to familiarize with the SignalR [JavaScript API](http://www.asp.net/signalr/overview/guide-to-the-api/hubs-api-guide-javascript-client).
+It is recommended to get familiar with the SignalR [JavaScript API](http://www.asp.net/signalr/overview/guide-to-the-api/hubs-api-guide-javascript-client).
 
 #### Example
 
@@ -2460,18 +2540,15 @@ Specifies the name of the server-side method of the SignalR hub responsible for 
 
 A function that will handle create, update and delete operations in a single batch.
 
-Typically you'd have `transport.read` and `transport.submit` operations defined together.
-The `transport.create`, `transport.update` and `transport.delete` operations will not be executed in this case.
+Typically, you have the `transport.read` and `transport.submit` operations defined together. The `transport.create`, `transport.update` and `transport.delete` operations will not be executed in this case.
 
-> **Important**
->
-> This function will only be invoked when the DataSource is in [batch mode](#configuration-batch)
+> This function will only be invoked when the DataSource is in [batch mode](#configuration-batch).
 
 #### Parameters
 
 ##### e.data `Object`
 
-An object containing the created (`e.data.created`), updated (`e.data.updated`) and destroyed (`e.data.destroyed`) items.
+An object containing the created (`e.data.created`), updated (`e.data.updated`), and destroyed (`e.data.destroyed`) items.
 
 ##### e.success `Function`
 
@@ -2481,7 +2558,7 @@ A callback that should be called for each operation with two parameters - items 
 
 A callback that should be called in case of failure of any of the operations.
 
-##### Example - Declare transport submit function
+##### Example - declare transport submit function
 
 <script>
     var dataSource = new kendo.data.DataSource({
@@ -2520,14 +2597,13 @@ A callback that should be called in case of failure of any of the operations.
 
 The configuration used when the data source saves updated data items. Those are data items whose fields have been updated.
 
-> The data source uses [jQuery.ajax](http://api.jquery.com/jQuery.ajax) to make a HTTP request to the remote service. The value configured via `transport.update` is passed to `jQuery.ajax`. This means that you can set
-all options supported by `jQuery.ajax` via `transport.update` except the `success` and `error` callback functions which are used by the transport.
+> The data source uses [`jQuery.ajax`](http://api.jquery.com/jQuery.ajax) to make a HTTP request to the remote service. The value configured via `transport.update` is passed to `jQuery.ajax`. This means that you can set all options supported by `jQuery.ajax` via `transport.update` except the `success` and `error` callback functions which are used by the transport.
 
 If the value of `transport.update` is a function, the data source invokes that function instead of `jQuery.ajax`.
 
-If the value of `transport.update` is a string the data source uses this string as the URL of the remote service.
+If the value of `transport.update` is a string, the data source uses this string as the URL of the remote service.
 
-> All transport actions (read, update, create, destroy) must be defined in the same way, e.g. as functions or as objects. Mixing the different configuration alternatives is not possible.
+> All transport actions (read, update, create, destroy) must be defined in the same way, that is, as functions or as objects. Mixing the different configuration alternatives is not possible.
 
 #### Example - specify update as a string
 
@@ -2596,10 +2672,9 @@ If the value of `transport.update` is a string the data source uses this string 
 
 ### transport.update.cache `Boolean`
 
-If set to `false` the request result will not be cached by the browser. Setting cache to `false` will only work correctly with HEAD and GET requests. It works by appending *"_={timestamp}"* to the GET parameters.
-By default "jsonp" requests are not cached.
+If set to `false`, the request result will not be cached by the browser. Setting `cache` to `false` will only work correctly with HEAD and GET requests. It works by appending *"_={timestamp}"* to the GET parameters. By default, `"jsonp"` requests are not cached.
 
-Refer to the [jQuery.ajax](http://api.jquery.com/jQuery.ajax) documentation for further info.
+Refer to the [`jQuery.ajax`](http://api.jquery.com/jQuery.ajax) documentation for further information.
 
 #### Example - enable request caching
 
@@ -2617,7 +2692,7 @@ Refer to the [jQuery.ajax](http://api.jquery.com/jQuery.ajax) documentation for 
 ### transport.update.contentType `String`
 
 The content-type HTTP header sent to the server. Default is `"application/x-www-form-urlencoded"`. Use `"application/json"` if the content is JSON.
-Refer to the [jQuery.ajax](http://api.jquery.com/jQuery.ajax) documentation for further info.
+Refer to the [`jQuery.ajax`](http://api.jquery.com/`jQuery.ajax`) documentation for further information.
 
 #### Example - set content type
     <script>
@@ -2634,11 +2709,12 @@ Refer to the [jQuery.ajax](http://api.jquery.com/jQuery.ajax) documentation for 
 ### transport.update.data `Object|Function`
 
 Additional parameters which are sent to the remote service. The parameter names must not match reserved words, which are used by the Kendo UI DataSource for
-[sorting](#configuration-serverSorting), [filtering](#configuration-serverFiltering), [paging](#configuration-serverPaging) and [grouping](#configuration-serverGrouping).
+[sorting](#configuration-serverSorting), [filtering](#configuration-serverFiltering), [paging](#configuration-serverPaging), and [grouping](#configuration-serverGrouping).
 
-Refer to the [jQuery.ajax](http://api.jquery.com/jQuery.ajax) documentation for further info.
+Refer to the [`jQuery.ajax`](http://api.jquery.com/jQuery.ajax) documentation for further information.
 
 #### Example - send additional parameters as an object
+
     <script>
     var dataSource = new kendo.data.DataSource({
       transport: {
@@ -2673,9 +2749,9 @@ Refer to the [jQuery.ajax](http://api.jquery.com/jQuery.ajax) documentation for 
 
 ### transport.update.dataType `String`
 
-The type of result expected from the server. Commonly used values are "json" and "jsonp".
+The type of result expected from the server. Commonly used values are `"json"` and `"jsonp"`.
 
-Refer to the [jQuery.ajax](http://api.jquery.com/jQuery.ajax) documentation for further info.
+Refer to the [`jQuery.ajax`](http://api.jquery.com/jQuery.ajax) documentation for further information.
 
 #### Example - set the data type to JSON
 
@@ -2692,11 +2768,11 @@ Refer to the [jQuery.ajax](http://api.jquery.com/jQuery.ajax) documentation for 
 
 ### transport.update.type `String`
 
-The type of request to make ("POST", "GET", "PUT" or "DELETE"), default is "GET".
+The type of request to make (`"POST"`, `"GET"`, `"PUT"` or `"DELETE"`). The default request is `"GET"`.
 
-> The `type` option is ignored if `dataType` is set to "jsonp". JSONP always uses GET requests.
+> The `type` option is ignored if `dataType` is set to `"jsonp"`. JSONP always uses GET requests.
 
-Refer to the [jQuery.ajax](http://api.jquery.com/jQuery.ajax) documentation for further info.
+Refer to the [`jQuery.ajax`](http://api.jquery.com/jQuery.ajax) documentation for further information.
 
 #### Example - set the HTTP verb of the request
     <script>
@@ -2714,9 +2790,10 @@ Refer to the [jQuery.ajax](http://api.jquery.com/jQuery.ajax) documentation for 
 
 The URL to which the request is sent.
 
-If set to function the data source will invoke it and use the result as the URL.
+If set to function, the data source will invoke it and use the result as the URL.
 
 #### Example - specify URL as a string
+
     <script>
     var dataSource = new kendo.data.DataSource({
       transport: {
@@ -2741,6 +2818,7 @@ If set to function the data source will invoke it and use the result as the URL.
     </script>
 
 #### Example - specify URL as a function
+
     <script>
     var dataSource = new kendo.data.DataSource({
       transport: {
@@ -2768,9 +2846,14 @@ If set to function the data source will invoke it and use the result as the URL.
 
 ### type `String`
 
-If set the data source will use a predefined [transport](#configuration-transport) and/or [schema](#configuration-schema).
-The supported values are "odata" which supports the [OData](http://www.odata.org) v.2 protocol, "odata-v4" which [partially supports](https://github.com/telerik/ui-for-aspnet-mvc-examples/tree/master/grid/odata-v4-web-api-binding)
-odata version 4 and "signalr".
+If set, the data source will use a predefined [`transport`](#configuration-transport) and/or [`schema`](#configuration-schema).
+
+The supported values are:
+
+* `"odata"` which supports the [OData](http://www.odata.org) v.2 protocol
+* `"odata-v4"` which [partially supports](https://github.com/telerik/ui-for-aspnet-mvc-examples/tree/master/grid/odata-v4-web-api-binding)
+odata version 4
+* `"signalr"`
 
 #### Example - enable OData support
 
@@ -2798,7 +2881,7 @@ Appends a data item to the data source.
 
 ##### model `Object|kendo.data.Model`
 
-Either a [kendo.data.Model](/api/javascript/data/model) instance or JavaScript object containing the data item field values.
+Either a [`kendo.data.Model`](/api/javascript/data/model) instance or JavaScript object containing the data item field values.
 
 #### Returns
 
@@ -2855,13 +2938,14 @@ Gets or sets the aggregate configuration.
 
 ##### value `Object|Array`
 
-The aggregate configuration. Accepts the same values as the [aggregate](#configuration-aggregate) option.
+The aggregate configuration. Accepts the same values as the [`aggregate`](#configuration-aggregate) option.
 
 #### Returns
 
 `Array` the current aggregate configuration.
 
 #### Example - set the data source aggregates
+
     <script>
     var dataSource= new kendo.data.DataSource({
       data: [
@@ -2880,6 +2964,7 @@ The aggregate configuration. Accepts the same values as the [aggregate](#configu
     </script>
 
 #### Example - get the data source aggregates
+
     <script>
     var dataSource= new kendo.data.DataSource({
       data: [
@@ -2955,19 +3040,20 @@ Returns a `kendo.data.Model` instance if the [schema.model](#configuration-schem
 
 ### cancelChanges
 
-Cancels any pending changes in the data source. Deleted data items are restored, new data items are removed and updated data items are restored to their initial state. All data item [uid](/api/javascript/data/model#fields-uid)'s will be reset.
+Cancels any pending changes in the data source. Deleted data items are restored, new data items are removed and updated data items are restored to their initial state. Every data item [`uid`](/api/javascript/data/model#fields-uid) will be reset.
 
-> Note that change event will be triggered only when all changes are reverted and will not be triggered when reverting changes for a single model instance.
+> A change event will be triggered only when all changes are reverted and will not be triggered when reverting changes for a single model instance.
 
 #### Parameters
 
 ##### model `kendo.data.Model`
 
-The optional data item (model). If specified only the changes of this data item will be discarded. If omitted all changes will be discarded.
+The optional data item (model). If specified, only the changes of this data item will be discarded. If omitted, all changes will be discarded.
 
-> Note that specifying a data item (model) for `cancelChanges` will not work if the data item was removed from the collection via `remove` method.
+> Specifying a data item (model) for `cancelChanges` will not work if the data item was removed from the collection via `remove` method.
 
 #### Example - cancel all changes
+
     <script>
     var dataSource = new kendo.data.DataSource({
       data: [
@@ -3019,16 +3105,15 @@ The optional data item (model). If specified only the changes of this data item 
 
 Gets or sets the data items of the data source.
 
-If the data source is bound to a remote service (via the [transport](#configuration-transport) option) the `data` method will return the service response.
-Every item from the response is wrapped in a [kendo.data.ObservableObject](/api/javascript/data/observableobject) or [kendo.data.Model](/api/javascript/data/model) (if the [schema.model](#configuration-schema.model) option is set).
+If the data source is bound to a remote service (via the [`transport`](#configuration-transport) option), the `data` method will return the service response.
+Every item from the response is wrapped in a [`kendo.data.ObservableObject`](/api/javascript/data/observableobject) or [`kendo.data.Model`](/api/javascript/data/model) (if the [`schema.model`](#configuration-schema.model) option is set).
 
-If the data source is bound to a JavaScript array (via the [data](#configuration-data) option) the `data` method will return the items of that array.
-Every item from the array is wrapped in a [kendo.data.ObservableObject](/api/javascript/data/observableobject) or [kendo.data.Model](/api/javascript/data/model) (if the [schema.model](#configuration-schema.model) option is set).
+If the data source is bound to a JavaScript array (via the [`data`](#configuration-data) option), the `data` method will return the items of that array.
+Every item from the array is wrapped in a [`kendo.data.ObservableObject`](/api/javascript/data/observableobject) or [`kendo.data.Model`](/api/javascript/data/model) (if the [`schema.model`](#configuration-schema.model) option is set).
 
-If the data source is grouped (via the [group](#configuration-group) option or the [group](#methods-group) method) and the [serverGrouping](#configuration-serverGrouping) is set to `true`
-the `data` method will return the group items.
+If the data source is grouped (via the [`group`](#configuration-group) option or the [group](#methods-group) method) and the [`serverGrouping`](#configuration-serverGrouping) is set to `true`, the `data` method will return the group items.
 
-> The [schema.model](#configuration-schema.model) configuration will not be used to parse the set data items. The data should be parsed in advance and the values should be provided in the correct type - date values should be JavaScript Date objects, numeric values should be JavaScript numbers, etc.
+> The [`schema.model`](#configuration-schema.model) configuration will not be used to parse the set data items. The data should be parsed in advance and the values should be provided in the correct type - date values should be JavaScript Date objects, numeric values should be JavaScript numbers, and others.
 
 Compare with the [`view`](#methods-view) method, which will return the data items that correspond to the current page, filter, sort and group configuration.
 
@@ -3040,7 +3125,7 @@ The data items which will replace the current ones in the data source. If omitte
 
 #### Returns
 
-`kendo.data.ObservableArray` the data items of the data source. Returns empty array if the data source hasn't been populated with data items via the [read](#methods-read), [fetch](#methods-fetch) or [query](#methods-query) methods.
+`kendo.data.ObservableArray` the data items of the data source. Returns empty array if the data source hasn't been populated with data items via the [`read`](#methods-read), [`fetch`](#methods-fetch) or [`query`](#methods-query) methods.
 
 #### Example - get the data items when bound to array
 
@@ -3060,6 +3145,7 @@ The data items which will replace the current ones in the data source. If omitte
     </script>
 
 #### Example - get the data items when bound to a remote service
+
     <script>
     var dataSource = new kendo.data.DataSource({
       transport: {
@@ -3092,7 +3178,7 @@ The data items which will replace the current ones in the data source. If omitte
 
 ### fetch
 
-Reads the data items from a remote service (if the [transport](#configuration-transport) option is set) or from a JavaScript array (if the [data](#configuration-data) option is set).
+Reads the data items from a remote service (if the [`transport`](#configuration-transport) option is set) or from a JavaScript array (if the [`data`](#configuration-data) option is set).
 
 > The `fetch` method makes a request to the remote service only the first time it is called if the dataSource is not configured for server operations.
 
@@ -3100,7 +3186,7 @@ Reads the data items from a remote service (if the [transport](#configuration-tr
 
 ##### callback `Function` *(optional)*
 
-The optional function which is executed when the remote request is finished.  The function context (available via the `this` keyword) will be set to the data source instance.
+The optional function which is executed when the remote request is finished. The function context (available via the `this` keyword) will be set to the data source instance.
 
 #### Returns
 
@@ -3153,13 +3239,14 @@ Gets or sets the filter configuration.
 
 ##### value `Object` *(optional)*
 
-The filter configuration. Accepts the same values as the [filter](#configuration-filter) option (**check there for more examples**).
+The filter configuration. Accepts the same values as the [`filter`](#configuration-filter) option (**check there for more examples**).
 
 #### Returns
 
 `Object` the current filter configuration. Returns `null` if no filter criteria are currently applied. Returns `undefined` if the DataSource instance has not performed filtering so far.
 
 #### Example - set the data source filter
+
     <script>
     var dataSource = new kendo.data.DataSource({
       data: [
@@ -3174,6 +3261,7 @@ The filter configuration. Accepts the same values as the [filter](#configuration
     </script>
 
 #### Example - get the data source filter
+
     <script>
     var dataSource = new kendo.data.DataSource({
       data: [
@@ -3189,9 +3277,9 @@ The filter configuration. Accepts the same values as the [filter](#configuration
 
 ### get
 
-Gets the data item (model) with the specified [id](/api/javascript/data/model#fields-id).
+Gets the data item (model) with the specified [`id`](/api/javascript/data/model#fields-id).
 
-> The `get` method requires the [schema.model](#configuration-schema.model) option to be set and the `id` of the model to be specified.
+> The `get` method requires the [`schema.model`](#configuration-schema.model) option to be set and the `id` of the model to be specified.
 
 #### Parameters
 
@@ -3223,7 +3311,7 @@ The id of the model to look for.
 
 ### getByUid
 
-Gets the data item (model) with the specified [uid](/api/javascript/data/model#fields-uid).
+Gets the data item (model) with the specified [`uid`](/api/javascript/data/model#fields-uid).
 
 #### Parameters
 
@@ -3243,7 +3331,7 @@ Gets or sets the grouping configuration.
 
 ##### value `Object|Array`
 
-The grouping configuration. Accepts the same values as the [group](#configuration-group) option.
+The grouping configuration. Accepts the same values as the [`group`](#configuration-group) option.
 
 #### Returns
 
@@ -3272,6 +3360,7 @@ The grouping configuration. Accepts the same values as the [group](#configuratio
     </script>
 
 #### Example - get the data source grouping configuration
+
     <script>
     var dataSource = new kendo.data.DataSource({
       data: [
@@ -3292,7 +3381,7 @@ Checks if the data items have changed.
 
 #### Returns
 
-`Boolean` returns `true` if the data items have changed. Otherwise, `false`.
+`Boolean` returns `true` if the data items have changed. Otherwise, returns `false`.
 
 #### Example - check if the data source has changes
 
@@ -3389,7 +3478,7 @@ The online state - `true` for online, `false` for offline.
 
 #### Returns
 
-`Boolean` the current online state - `true` if online; otherwise `false`.
+`Boolean` the current online state - `true` if online; otherwise, `false`.
 
 #### Example - set the online state
 
@@ -3419,6 +3508,7 @@ The online state - `true` for online, `false` for offline.
     dataSource.online(false);
 
 #### Example - get the online state
+
     var dataSource = kendo.data.DataSource({
         offlineStorage: "products-offline",
         transport: {
@@ -3445,7 +3535,6 @@ The online state - `true` for online, `false` for offline.
     dataSource.online(false);
     console.log(dataSource.online()); // displays "false"
 
-
 ### offlineData
 
 Gets or sets the offline state of the data source.
@@ -3458,7 +3547,7 @@ The array of data items that replace the current offline state of the data sourc
 
 #### Returns
 
-`Array` array of JavaScript objects that represent the data items. Changed data items have a `__state__` field attached. That field indicates the type of change: "create", "update" or "destroy". Unmodified data items don't have a `__state__` field.
+`Array` array of JavaScript objects that represent the data items. Changed data items have a `__state__` field attached. That field indicates the type of change: `"create"`, `"update"`, or `"destroy"`. Unmodified data items don not have a `__state__` field.
 
 #### Example - get the offline state
 
@@ -3591,7 +3680,7 @@ The new page size.
 
 ### pushCreate
 
-Appends the specified data item(s) to the data source without marking them as "new". The data source will not sync data items appended via `pushCreate`.
+Appends the specified data items to the data source without marking them as "new". The data source will not sync data items appended via `pushCreate`.
 
 > The difference between `pushCreate` and `add` is that items appended via `add` are synced with the remote service.
 
@@ -3617,6 +3706,7 @@ The data item or data items to append to the data source.
     </script>
 
 #### Example - pushCreate with multiple items
+
     <script>
     var dataSource = new kendo.data.DataSource({
       schema: {
@@ -3635,7 +3725,7 @@ The data item or data items to append to the data source.
 
 ### pushDestroy
 
-Removes the specified data item(s) from the data source without marking them as "removed". The data source will not sync data items appended via `pushDestroy`.
+Removes the specified data items from the data source without marking them as "removed". The data source will not sync data items appended via `pushDestroy`.
 
 > The difference between `pushDestroy` and `remove` is that items removed via `remove` are synced with the remote service.
 
@@ -3665,6 +3755,7 @@ The data item or data items to remove from the data source.
     </script>
 
 #### Example - pushDestroy with multiple items
+
     <script>
     var dataSource = new kendo.data.DataSource({
       schema: {
@@ -3688,8 +3779,7 @@ The data item or data items to remove from the data source.
 
 ### pushUpdate
 
-Updates the specified data item(s) without marking them as "dirty". The data source will not sync data items appended via `pushUpdate`.
-If the data items are not found (using `schema.model.id`) they will be appended.
+Updates the specified data items without marking them as "dirty". The data source will not sync data items appended via `pushUpdate`. If the data items are not found (using `schema.model.id`), they will be appended.
 
 > The difference between `pushUpdate` and updating items via their `set` method is that items updated via `set` are synced with the remote service.
 
@@ -3720,6 +3810,7 @@ The data item or data items to update.
     </script>
 
 #### Example - pushUpdate with multiple items
+
     <script>
     var dataSource = new kendo.data.DataSource({
       schema: {
@@ -3746,8 +3837,7 @@ The data item or data items to update.
 
 Executes the specified query over the data items. Makes a HTTP request if bound to a remote service.
 
-This method is useful when you need to modify several parameters of the data request at the same time (e.g. filtering and sorting).
-If you execute `filter()` and then `sort()`, the DataSource will make two separate requests. With `query()`, it will make one request.
+This method is useful when you need to modify several parameters of the data request at the same time (e.g. filtering and sorting). If you execute `filter()` and then `sort()`, the DataSource will make two separate requests. With `query()`, it will make one request.
 
 > This method will remove the current sort, filter, group, aggregates descriptors and paging information, if such are not provided as arguments.
 
@@ -3759,45 +3849,34 @@ The query options which should be applied.
 
 ##### options.aggregate `Array` *(optional)*
 
-The aggregate configuration. Accepts the same values as the [aggregate](#configuration-aggregate) option.
-The `query` method will request the remote service if the [serverAggregates](#configuration-serverAggregates)
-option is set to `true`.
+The aggregate configuration. Accepts the same values as the [`aggregate`](#configuration-aggregate) option. The `query` method will request the remote service if the [`serverAggregates`](#configuration-serverAggregates) option is set to `true`.
 
 ##### options.filter `Object|Array` *(optional)*
 
-The filter configuration. Accepts the same values as the [filter](#configuration-filter) option.
-The `query` method will request the remote service if the [serverFiltering](#configuration-serverFiltering)
-option is set to `true`.
+The filter configuration. Accepts the same values as the [`filter`](#configuration-filter) option. The `query` method will request the remote service if the [`serverFiltering`](#configuration-serverFiltering) option is set to `true`.
 
 ##### options.group `Object|Array` *(optional)*
 
-The grouping configuration. Accepts the same values as the [filter](#configuration-filter) option.
-The `query` method will request the remote service if the [serverGrouping](#configuration-serverGrouping)
-option is set to `true`.
+The grouping configuration. Accepts the same values as the [`filter`](#configuration-filter) option. The `query` method will request the remote service if the [`serverGrouping`](#configuration-serverGrouping) option is set to `true`.
 
 ##### options.page `Number` *(optional)*
 
-The page of data to return.
-The `query` method will request the remote service if the [serverPaging](#configuration-serverPaging)
-option is set to `true`.
+The page of data to return. The `query` method will request the remote service if the [`serverPaging`](#configuration-serverPaging) option is set to `true`.
 
 ##### options.pageSize `Number` *(optional)*
 
-The number of data items to return.
-The `query` method will request the remote service if the [serverPaging](#configuration-serverPaging)
-option is set to `true`.
+The number of data items to return. The `query` method will request the remote service if the [`serverPaging`](#configuration-serverPaging) option is set to `true`.
 
 ##### options.sort `Object|Array` *(optional)*
 
-The sort configuration. Accepts the same values as the [sort](#configuration-sort) option.
-The `query` method will request the remote service if the [serverSorting](#configuration-serverSorting)
-option is set to `true`.
+The sort configuration. Accepts the same values as the [`sort`](#configuration-sort) option. The `query` method will request the remote service if the [`serverSorting`](#configuration-serverSorting) option is set to `true`.
 
 #### Returns
 
 `Promise` A promise that will be resolved when the data has been loaded, or rejected if an HTTP error occurs.
 
 #### Example - query the data source
+
     <script>
     var dataSource = new kendo.data.DataSource({
       transport: {
@@ -3844,7 +3923,7 @@ option is set to `true`.
 
 ### read
 
-Reads data items from a remote service (if the [transport](#configuration-transport) option is set) or from a JavaScript array (if the [data](#configuration-data) option is set).
+Reads data items from a remote service (if the [`transport`](#configuration-transport) option is set) or from a JavaScript array (if the [`data`](#configuration-data) option is set).
 
 > The `read` method always makes a request to the remote service, unless the Data Source is [offline](#methods-online).
 offline.
@@ -3853,8 +3932,7 @@ offline.
 
 ##### data `Object` *(optional)*
 
-Optional data to pass to the remote service.
-If you need to **filter**, it is better to use the [`filter()`](#methods-filter) method or the [`query()`](#methods-query) method with a `filter` parameter.
+Optional data to pass to the remote service. If you need to **filter**, it is better to use the [`filter()`](#methods-filter) method or the [`query()`](#methods-query) method with a `filter` parameter.
 
 #### Returns
 
@@ -3910,6 +3988,7 @@ Removes the specified data item from the data source.
 The data item which should be removed.
 
 #### Example - remove a data item
+
     <script>
     var dataSource = new kendo.data.DataSource({
       data: [
@@ -3959,13 +4038,14 @@ Gets or sets the sort order which will be applied over the data items.
 
 ##### value `Object|Array`
 
-The sort configuration. Accepts the same values as the [sort](#configuration-sort) option.
+The sort configuration. Accepts the same values as the [`sort`](#configuration-sort) option.
 
 #### Returns
 
-`Array` The current sort configuration. Returns `undefined` instead of an empty array, if the DataSource instance has not performed any sorting so far.
+`Array` The current sort configuration. Returns `undefined` instead of an empty array if the DataSource instance has not performed any sorting so far.
 
 #### Example - sort the data items
+
     <script>
     var dataSource = new kendo.data.DataSource({
       data: [
@@ -3999,13 +4079,13 @@ Saves any data item changes.
 
 The `sync` method will request the remote service if:
 
-* the [transport.create](#configuration-transport.create) option is set and the data source contains new data items
-* the [transport.destroy](#configuration-transport.destroy) option is set and data items have been removed from the data source
-* the [transport.update](#configuration-transport.update) option is set and the data source contains updated data items
+* The [`transport.create`](#configuration-transport.create) option is set and the data source contains new data items.
+* The [`transport.destroy`](#configuration-transport.destroy) option is set and data items have been removed from the data source.
+* The [`transport.update`](#configuration-transport.update) option is set and the data source contains updated data items.
 
 #### Returns
 
-`Promise` A promise that will be resolved when all sync requests have finished succesfully, or rejected if any single request fails.
+`Promise` A promise that will be resolved when all sync requests have finished successfully, or rejected if any single request fails.
 
 #### Example - save the changes
 
@@ -4043,14 +4123,15 @@ The `sync` method will request the remote service if:
 
 ### total
 
-Gets the total number of data items. Uses [schema.total](#configuration-schema.total) if the [transport.read](#configuration-transport.read) option is set.
+Gets the total number of data items. Uses [`schema.total`](#configuration-schema.total) if the [`transport.read`](#configuration-transport.read) option is set.
 
 #### Returns
 
-`Number` the total number of data items. Returns the `length` of the array returned by the [data](#methods-data) method if `schema.total` or `transport.read` are not set.
-Returns `0` if the data source hasn't been populated with data items via the [read](#methods-read), [fetch](#methods-read) or [query](#methods-query) methods.
+`Number` the total number of data items. Returns the `length` of the array returned by the [`data`](#methods-data) method if `schema.total` or `transport.read` are not set.
+Returns `0` if the data source hasn't been populated with data items via the [`read`](#methods-read), [`fetch`](#methods-read), or [`query`](#methods-query) methods.
 
 #### Example - get the total number of data items
+
     <script>
     var dataSource = new kendo.data.DataSource({
       data: [
@@ -4089,11 +4170,11 @@ Gets the number of available pages.
 Returns the data items which correspond to the **current** page, filter, sort and group configuration.
 Compare with the [`data`](#methods-data) method, which will return data items from **all** pages, if **local** data binding and paging are used.
 
-To ensure that data is available this method should be used within the [change](#events-change) event handler or the [fetch](#methods-fetch) method.
+To ensure that data is available this method should be used within the [`change`](#events-change) event handler or the [`fetch`](#methods-fetch) method.
 
 #### Returns
 
-`kendo.data.ObservableArray` the data items. Returns groups if the data items are grouped (via the [group](#configuration-group) option or the [group](#methods-group) method).
+`kendo.data.ObservableArray` the data items. Returns groups if the data items are grouped (via the [`group`](#configuration-group) option or the [`group`](#methods-group) method).
 
 #### Example - get the paged and sorted data items
 
@@ -4116,6 +4197,7 @@ To ensure that data is available this method should be used within the [change](
     </script>
 
 #### Example - get the paged, sorted and grouped data items
+
     <script>
     var dataSource = new kendo.data.DataSource({
       data: [
@@ -4143,7 +4225,7 @@ To ensure that data is available this method should be used within the [change](
 
 ### change
 
-Fired when the data source is populated from a JavaScript array or a remote service, a data item is inserted, updated or removed, the data items are paged, sorted, filtered or grouped.
+Fired when the data source is populated from a JavaScript array or a remote service, a data item is inserted, updated or removed, the data items are paged, sorted, filtered, or grouped.
 
 The event handler function context (available via the `this` keyword) will be set to the data source instance.
 
@@ -4155,17 +4237,24 @@ The data source instance which fired the event.
 
 ##### e.action `String` *(optional)*
 
-String describing the action type (available for all actions other than "read"). Possible values are "itemchange", "add", "remove" and "sync".
+String describing the action type (available for all actions other than `"read"`).
+
+The possible values are:
+
+* `"itemchange"`
+* `"add"`
+* `"remove"`
+* `"sync"`
 
 ##### e.field `String` *(optional)*
 
-String describing the field that is changed (available only for "itemchange" action).
+String describing the field that is changed (available only for the `"itemchange"` action).
 
 ##### e.items `Array`
 
 The array of data items that were affected (or read).
 
-#### Example - subscribe to the "change" event during initialization
+#### Example - subscribe to the change event during initialization
 
     <script>
     var dataSource = new kendo.data.DataSource({
@@ -4183,7 +4272,7 @@ The array of data items that were affected (or read).
     dataSource.fetch();
     </script>
 
-#### Example - subscribe to the "change" event after initialization
+#### Example - subscribe to the change event after initialization
 
     <script>
     function dataSource_change(e) {
@@ -4208,7 +4297,7 @@ Fired when a request to the remote service fails.
 
 The event handler function context (available via the `this` keyword) will be set to the data source instance.
 
-> If the [schema.errors](#configuration-schema.errors) option is set and the server response contains that field then the `error` event will be fired. The
+> If the [`schema.errors`](#configuration-schema.errors) option is set and the server response contains that field then the `error` event will be fired. The
 `errors` field of the event argument will contain the errors returned by the server.
 
 #### Event Data
@@ -4223,13 +4312,14 @@ The data source instance which fired the event.
 
 ##### e.status `String`
 
-String describing the type of the error
+String describing the type of the error.
 
 ##### e.xhr `Object`
 
-The current [jqXHR](http://api.jquery.com/Types/#jqXHR).
+The current [`jqXHR`](http://api.jquery.com/Types/#jqXHR).
 
-#### Example - subscribe to the "error" event after initialization
+#### Example - subscribe to the error event after initialization
+
     <script>
     function dataSource_error(e) {
       console.log(e.status); // displays "error"
@@ -4247,7 +4337,7 @@ The current [jqXHR](http://api.jquery.com/Types/#jqXHR).
 
 ### push
 
-Fired when the data source receives a push notification or the `pushCreate`, `pushUpdate` or `pushDestroy` methods are called.
+Fired when the data source receives a push notification or the `pushCreate`, `pushUpdate`, or `pushDestroy` methods are called.
 
 #### Event Data
 
@@ -4257,13 +4347,20 @@ The array of data items that were affected by the push notification.
 
 ##### e.type `String`
 
-The type of the push notification. One of the following values: "create", "update", "destroy";
+The type of the push notification.
+
+One of the following values:
+
+* `"create"`
+* `"update"`
+* `"destroy"`
 
 ##### e.sender `kendo.data.DataSource`
 
 The data source instance which fired the event.
 
-#### Example - subscribe to the "push" event during initialization
+#### Example - subscribe to the push event during initialization
+
     <script>
     function dataSource_push(e) {
       console.log(e.type); // displays "update"
@@ -4284,14 +4381,13 @@ The data source instance which fired the event.
     dataSource.pushUpdate({ id: 1, name: "Jane Doe" });
     </script>
 
-
 ### requestEnd
 
 Fired when a remote service request is finished.
 
 The event handler function context (available via the `this` keyword) will be set to the data source instance.
 
-> The "response" argument is not available for local operations.
+> The `"response"` argument is not available for local operations.
 
 #### Event Data
 
@@ -4305,9 +4401,17 @@ The data source instance which fired the event.
 
 ##### e.type `String`
 
-The type of the request. Set to "create", "read", "update" or "destroy".
+The type of the request.
+
+Set to:
+
+* `"create"`
+* `"read"`
+* `"update"`
+* `"destroy"`
 
 #### Example - subscribe to the "requestEnd" event during initialization
+
     <script>
     var dataSource = new kendo.data.DataSource({
       transport: {
@@ -4346,6 +4450,7 @@ The type of the request. Set to "create", "read", "update" or "destroy".
     </script>
 
 #### Example - subscribe to the "requestEnd" event after initialization
+
     <script>
     function dataSource_requestEnd(e) {
       var response = e.response;
@@ -4365,7 +4470,7 @@ The type of the request. Set to "create", "read", "update" or "destroy".
     dataSource.fetch();
     </script>
 
-> The requestEvent does not hold information regarding any errors occured during the request. The error information is availale as part of the error event.
+> The `requestEvent` does not hold information regarding any errors that occurred during the request. The error information is available as part of the error event.
 
 ### requestStart
 
@@ -4385,9 +4490,17 @@ The data source instance which fired the event.
 
 ##### e.type `String`
 
-The type of the request. Set to "create", "read", "update" or "destroy".
+The type of the request.
 
-#### Example - subscribe to the "requestStart" event during initialization
+Set to:
+
+* `"create"`
+* `"read"`
+* `"update"`
+* `"destroy"`
+
+#### Example - subscribe to the requestStart event during initialization
+
     <script>
     var dataSource = new kendo.data.DataSource({
       transport: {
@@ -4403,7 +4516,8 @@ The type of the request. Set to "create", "read", "update" or "destroy".
     dataSource.fetch();
     </script>
 
-#### Example - subscribe to the "requestStart" event after initialization
+#### Example - subscribe to the requestStart event after initialization
+
     <script>
     function dataSource_requestStart(e) {
       console.log("request started");
@@ -4421,6 +4535,7 @@ The type of the request. Set to "create", "read", "update" or "destroy".
     </script>
 
 #### Example - prevent the remote request
+
     <script>
     var dataSource = new kendo.data.DataSource({
       transport: {
@@ -4441,7 +4556,7 @@ The type of the request. Set to "create", "read", "update" or "destroy".
 
 ### sync
 
-Fired after the data source saves data item changes. The data source saves the data item changes when the [sync](#methods-sync) method is called.
+Fired after the data source saves data item changes. The data source saves the data item changes when the [`sync`](#methods-sync) method is called.
 
 The event handler function context (available via the `this` keyword) will be set to the data source instance.
 
@@ -4453,7 +4568,7 @@ The event handler function context (available via the `this` keyword) will be se
 
 The data source instance which fired the event.
 
-#### Example - subscribe to the "sync" event during initialization
+#### Example - subscribe to the sync event during initialization
 
     <script>
     var dataSource = new kendo.data.DataSource({
@@ -4478,7 +4593,7 @@ The data source instance which fired the event.
     dataSource.sync();
     </script>
 
-#### Example - subscribe to the "sync" event after initialization
+#### Example - subscribe to the sync event after initialization
 
     <script>
     function dataSource_sync(e) {
@@ -4508,7 +4623,7 @@ The data source instance which fired the event.
 
 ### create
 
-Creates a data source instance using the specified configuration. If the configuration is a data source instance the same instance will be returned.
+Creates a data source instance using the specified configuration. If the configuration is a data source instance, the same instance will be returned.
 
 #### Returns
 

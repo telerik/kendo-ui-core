@@ -49,7 +49,7 @@ Then, initialize the ListView by referring the template, so that the result set 
         template: kendo.template($("#template").html())
     });
 
-This is the live example of the case dispalyed above:
+This is the live example of the case displayed above:
 
 ```html
 <div id="listView" style="max-height:400px;overflow:auto;"></div>
@@ -313,7 +313,7 @@ You can detect when users pick up items through the `change` event, which is tri
         }
     });
 
-This is the live example which demonstrates that the item selection fucntionality is enabled:
+This is the live example which demonstrates that the item selection functionality is enabled:
 
 ```html
 <div id="listView" style="max-height:400px;overflow:auto;"></div>

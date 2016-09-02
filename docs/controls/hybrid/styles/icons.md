@@ -71,7 +71,7 @@ Currently, to create custom font icons you have two options:
 
 #### Use Font Generator Service
 
-Using [Fontello](http://fontello.com/) is pretty straightforward&mdash;pick the icons, choose the Unicode characters for them, type a font name, and click **Download** to get a `.zip` file with the needed for mobile `TTF` and `WOFF` font formats, which can be directly used for icons. From the other files in there, `EOT` is not needed as it targets only Internet Explorere 6 to 8 versions and the `SVG` font can be used to further the modification.
+Using [Fontello](http://fontello.com/) is pretty straightforward&mdash;pick the icons, choose the Unicode characters for them, type a font name, and click **Download** to get a `.zip` file with the needed for mobile `TTF` and `WOFF` font formats, which can be directly used for icons. From the other files in there, `EOT` is not needed as it targets only Internet Explorer 6 to 8 versions and the `SVG` font can be used to further the modification.
 
 #### Create Icons Manually
 
@@ -258,7 +258,7 @@ To use colorizable icon masks, specify the icon image as a `box mask`&mdash;eith
 
 > **Important**
 > * WebKit masks have numerous bugs across most platforms, so consider using them only if necessary.
-> * In Android and MeeGo Webkit masks are unreliable&mdash;they can be turned into colorized rectangles by a simple CSS transformation in the wrong place. In BBOS 7.0 WebKit masks are completely broken&mdash;though they work in BBOS 6.0 and 7.1.
+> * In Android and MeeGo WebKit masks are unreliable&mdash;they can be turned into colorized rectangles by a simple CSS transformation in the wrong place. In BBOS 7.0 WebKit masks are completely broken&mdash;though they work in BBOS 6.0 and 7.1.
 
 #### Define Custom WebKit Mask for Icons
 

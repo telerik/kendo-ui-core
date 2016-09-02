@@ -47,7 +47,7 @@ It's never simple with browsers, especially when you want to ensure broad compat
 
 As confirmed by the useful [`CanIUse.com`](http://caniuse.com/#search=CORS), support for CORS is a bit of a mixed-bag. CORS is 100% ready to roll in:
 
-- Webkit browsers (Chrome, Safari, iOS, Android)
+- WebKit browsers (Chrome, Safari, iOS, Android)
 - Gecko browsers (Firefox)
 - Trident browsers (Internet Explorer 8+)
 - Presto browsers (specifically, Opera 12+)
@@ -58,7 +58,7 @@ We'll talk about handling old Opera versions more in a minute, but let's first a
 
 #### Internet Explorer and XDomainRequest
 
-Internet Explorer, pre IE10, approaches cross-origin resource sharing a bit differently. Rather than go the route of Webkit and Gecko, IE 8 and 9 do not reuse the standard Ajax `XMLHttpRequest` object for CORS requests. Instead, they introduce a brand new object for cross-origin resource sharing called [`XDomainRequest`](https://msdn.microsoft.com/en-us/library/cc288060(v=vs.85).aspx).
+Internet Explorer, pre IE10, approaches cross-origin resource sharing a bit differently. Rather than go the route of WebKit and Gecko, IE 8 and 9 do not reuse the standard Ajax `XMLHttpRequest` object for CORS requests. Instead, they introduce a brand new object for cross-origin resource sharing called [`XDomainRequest`](https://msdn.microsoft.com/en-us/library/cc288060(v=vs.85).aspx).
 
 This means your Ajax code for cross-domain calls looks 100% identical to `same-domain` calls in Chrome and Firefox, but it will have to fork in Internet Explorer to use the new XDR object with CORS requests. A pain, but a solvable problem. There are some other limits with XDR, [but we'll leave that to you to research](http://blogs.msdn.com/b/ieinternals/archive/2010/05/13/xdomainrequest-restrictions-limitations-and-workarounds.aspx).
 
@@ -99,7 +99,7 @@ There are a couple of rather "hacky" [polyfills for CORS](https://github.com/Mod
 Of course, if you can use JSONP, the argument can be made that you should just use JSONP instead of CORS for all browsers since it is still more universally supported. But let's say you're trying to "evolve" past JSONP except when you absolutely need it. In that case, you can fallback to XHR and JSONP callbacks with Opera and older browsers.
 
 3. Display an error message
-The most draconian of your choices, but given *most* browsers *do* support CORS, you could simply elect to tell the small auidence of users to update their browser. Just depends how important Opera and IE 6/7 traffic is to your site.
+The most draconian of your choices, but given *most* browsers *do* support CORS, you could simply elect to tell the small audience of users to update their browser. Just depends how important Opera and IE 6/7 traffic is to your site.
 
 The choice is yours, but clearly, you have *some* choice that should still make CORS appealing.
 

@@ -132,7 +132,7 @@ The example below demonstrates the LINQ query to select all employees.
 <!--_-->
 Since Web API operates on convention over configuration, simply naming this method [Get](http://www.w3.org/Protocols/rfc2616/rfc2616-sec9.html) is enough to designate as the method that will respond to the HTTP GET.
 
-**Figure 9. Return a LINЯ Тo SQL Object**
+**Figure 9. Return a LINLINQ to SQL Object**
 
 ![Return A LinqToSql Object](/images/webforms/hello-services-return-linq-object.png)
 
@@ -261,7 +261,7 @@ Inside the script block create a [jQuery `Document Ready`](http://api.jquery.com
 
 Inside the `Document Ready` function, select the HTML table with the `employees` id from the [DOM](http://en.wikipedia.org/wiki/Document_Object_Model) and assign it to a variable `$employees` call for later use. It is considered a good practice by some to prefix variables containing jQuery objects with a `$` so that you know that the variable represents a jQuery wrapped object when you see it later down in the code. The table is selected by its ID by using the jQuery ID Selector](http://api.jquery.com/id-selector/) (the number (`#`) sign).
 
-The exmaple below demonstrates how to select a table when the document is ready.
+The example below demonstrates how to select a table when the document is ready.
 
 ###### Example
 

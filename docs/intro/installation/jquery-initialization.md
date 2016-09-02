@@ -17,7 +17,7 @@ While it is theoretically possible to initialize several different Kendo UI widg
 
 > **Important**  
 >
-> It is strongly recommended to initialize the Kendo UI widgets from HTML elements which are part of the DOM tree. Creating widgets from [document fragments](https://developer.mozilla.org/en-US/docs/Web/API/DocumentFragment) might cause undesired side effects or Javascript errors.
+> It is strongly recommended to initialize the Kendo UI widgets from HTML elements which are part of the DOM tree. Creating widgets from [document fragments](https://developer.mozilla.org/en-US/docs/Web/API/DocumentFragment) might cause undesired side effects or JavaScript errors.
 
 ## Widget Initialization
 

@@ -7,7 +7,7 @@ slug: howto_cascademultiselectfromddl_ddl
 
 # Cascade MultiSelect from DropDownList
 
-To see the example on how to cascade a Kendo UI Multiselect from a Kendo UI DropDownList widget, refer to [this how-to article]({% slug howto_cascade_froma_dropdownlist_multiselect %}).
+To see the example on how to cascade a Kendo UI MultiSelect from a Kendo UI DropDownList widget, refer to [this how-to article]({% slug howto_cascade_froma_dropdownlist_multiselect %}).
 
 ## See Also
 

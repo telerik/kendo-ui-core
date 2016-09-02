@@ -209,7 +209,7 @@ At this time, the only widget that is aware of the dataSource hierarchy is the T
 
 ### Share HierarchicalDataSource between Widgets
 
-The example below demonstartes how to share the HierarchicalDataSource component between a Kendo UI TreeView and a Kendo UI Grid.
+The example below demonstrates how to share the HierarchicalDataSource component between a Kendo UI TreeView and a Kendo UI Grid.
 
 ###### Example
 

@@ -130,7 +130,7 @@ Below are listed the steps for you to follow when configuring the AutoComplete f
 
    $read = new \Kendo\Data\DataSourceTransportRead();
 
-   // Specify the url of the PHP page which will act as the remote service
+   // Specify the URL of the PHP page which will act as the remote service
    $read->url('products.php')
            ->contentType('application/json')
            ->type('POST');

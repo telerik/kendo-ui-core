@@ -76,7 +76,7 @@ As a result, readers are able to open a new address book entry, populated with t
 
 ### SMS
 
-Much like an email address, encode an SMS shortcode or number by creating an sms URI. For example, to create a link to the `12345` number, encode `sms:12345`. Some developers use other URI forms, such as `sms:number:subject`, and other prefixes, such as `smsto:`.
+Much like an email address, encode an SMS shortcode or number by creating an SMS URI. For example, to create a link to the `12345` number, encode `sms:12345`. Some developers use other URI forms, such as `sms:number:subject`, and other prefixes, such as `smsto:`.
 
 As a result, readers are able to open a new SMS message that is ready for users to compose and send it.
 

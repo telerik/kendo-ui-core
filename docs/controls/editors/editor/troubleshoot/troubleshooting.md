@@ -44,9 +44,9 @@ Firefox cannot handle `iframe` elements properly when they are moved to the DOM.
 
 Iframes cannot be scrollable in iOS and always expand to display all their content. A possible solution is to use the Editor's inline editing mode, which does not include an `iframe`. In this mode the Editor's value should be posted manually (see below).
 
-### Images and Tables Are Not Resizable
+### Images and Tables Are Not Resizeable
 
-Image and table resizing inside `contenteditable` elements depends on the browser. As a result of browser behavior, images may become non-resizable if a "classic" Editor (which uses an `iframe`) is created while hidden, or is hidden after its initialization and then displayed back.
+Image and table resizing inside `contenteditable` elements depends on the browser. As a result of browser behavior, images may become non-resizeable if a "classic" Editor (which uses an `iframe`) is created while hidden, or is hidden after its initialization and then displayed back.
 
 As the reason for thе issue lies in browser functionalities, it can be resolved by calling the Editor's [`refresh`](/api/javascript/ui/editor#methods-refresh) method after the Editor becomes visible. Refreshing the widget will recreate the `iframe`.
 

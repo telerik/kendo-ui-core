@@ -5,7 +5,7 @@ description: "Learn how to hide the default widget button in the Kendo UI DatePi
 slug: howto_hide_default_button_datepicker
 ---
 
-# Hide the Deafult Button
+# Hide the Default Button
 
 The example below demonstrates how to hide the default button of the Kendo UI DatePicker widget by using CSS.
 

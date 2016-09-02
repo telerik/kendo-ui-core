@@ -32,7 +32,7 @@ Initialize the Slider using a jQuery selector as demonstrated in the example bel
 
 > **Important**  
 >
-> As the Slider should be initialized after the DOM is fully loaded, make sure you initilaize it within a `$(document).ready()` statement.
+> As the Slider should be initialized after the DOM is fully loaded, make sure you initialize it within a `$(document).ready()` statement.
 
 ## Customization
 

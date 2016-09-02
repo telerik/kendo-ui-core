@@ -33,7 +33,7 @@ Represents a group that can arrange its children within a rectangle.
 
 ### rect `kendo.geometry.Rect`
 
-The rectangle within which the children should be arranged
+The rectangle within which the children should be arranged.
 
 ### options `Object`
 
@@ -45,9 +45,9 @@ The configuration options of the layout.
 
 Specifies the alignment of the content. The supported values are:
 
-* `"start"` - aligns the content to the rectangle origin
-* `"center"` - aligns the content to the rectangle center
-* `"end"` - aligns the content to the rectangle end
+* `"start"` - aligns the content to the rectangle origin.
+* `"center"` - aligns the content to the rectangle center.
+* `"end"` - aligns the content to the rectangle end.
 
 #### Example
 
@@ -80,7 +80,7 @@ Specifies the alignment of the items based on the largest one. The supported val
 
 * `"start"` - aligns the items to the start of the largest element.
 * `"center"` - aligns the items to the center of the largest element.
-* `"end"` - aligns the items to the end of the largest element
+* `"end"` - aligns the items to the end of the largest element.
 
 #### Example
 
@@ -110,9 +110,9 @@ Specifies the alignment of the items based on the largest one. The supported val
 
 Specifies how should the content be justified. The supported values are:
 
-* `"start"` - aligns the items to the rectangle origin
-* `"center"` - aligns the items to the rectangle center
-* `"end"` - aligns the items to the rectangle end
+* `"start"` - aligns the items to the rectangle origin.
+* `"center"` - aligns the items to the rectangle center.
+* `"end"` - aligns the items to the rectangle end.
 
 #### Example
 
@@ -200,8 +200,8 @@ Specifies the distance between the elements.
 
 Specifies layout orientation. The supported values are:
 
-* "horizontal" - the elements are arranged horizontally
-* "vertical" - the elements are arranged vertically
+* "horizontal" - the elements are arranged horizontally.
+* "vertical" - the elements are arranged vertically.
 
 #### Example
 

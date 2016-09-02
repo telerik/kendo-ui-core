@@ -129,7 +129,7 @@ The thousands separator (`,`) has a double role. When between any digit placehol
 | [h]           | Elapsed time, in hours                                                            |
 | [m]           | Elapsed time in minutes                                                           |
 | [s]           | Elapsed time in seconds                                                           |
-| AM/PM         | Forces hours to display in 12-hours clock, and displays `AM` or `PM` as necessary |
+| AM/PM         | Forces hours to display in 12-hour clock, and displays `AM` or `PM` as necessary |
 | am/pm         | Same as above, but displays lower-case `am` or `pm`                               |
 | A/P           | Same as above, but displays `A` or `P`                                            |
 | a/p           | Idem, but displays `a` or `p`                                                     |

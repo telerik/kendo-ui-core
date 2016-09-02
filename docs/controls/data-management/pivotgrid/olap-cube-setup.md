@@ -45,7 +45,7 @@ To configure HTTP Response Headers, specify:
 * HTTP Headers that can be used in the requests.
 * User credentials that are going to be required if an authenticated access is used.
 
-The example below demontrates the list of HTTP Response Headers that show the settings required to enable the IIS CORS behavior.
+The example below demonstrates the list of HTTP Response Headers that show the settings required to enable the IIS CORS behavior.
 
 ###### Example
 

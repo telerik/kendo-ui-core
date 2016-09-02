@@ -8,7 +8,7 @@ position: 1
 
 # Gantt Overview
 
-The [Kendo UI Gantt widget](http://demos.telerik.com/kendo-ui/gantt/index) displays a set of tasks and dependencies, which are used to visualize project planning data. The widget provides a Treelist section where the tasks can be edited, sorted and reordered in a grid-like fashion, as well as a Timeline section, where the tasks and dependencies are visualized under an adjustable time ruler, and can be resized, moved, edited and removed. It can also display the Timeline in three different views – day, week and month.
+The [Kendo UI Gantt widget](http://demos.telerik.com/kendo-ui/gantt/index) displays a set of tasks and dependencies, which are used to visualize project planning data. The widget provides a TreeList section where the tasks can be edited, sorted and reordered in a grid-like fashion, as well as a Timeline section, where the tasks and dependencies are visualized under an adjustable time ruler, and can be resized, moved, edited and removed. It can also display the Timeline in three different views – day, week and month.
 
 ## Getting Started
 
@@ -175,7 +175,7 @@ The `kendo.data.GanttTask` object has the following fields:
 * `summary Boolean` - if the task has children, or not.
 * `title String` - the title of the task.
 
-If your remote service stores and returns the gantt tasks in a different format use the `schema.model.fields` and `schema.model.id` options of the data source to describe them. The "Example - bind to a remote service" above shows how to map remote service fields to client-side Gantt task fields:
+If your remote service stores and returns the Gantt tasks in a different format use the `schema.model.fields` and `schema.model.id` options of the data source to describe them. The "Example - bind to a remote service" above shows how to map remote service fields to client-side Gantt task fields:
 
         schema: {
             model: {
@@ -268,7 +268,7 @@ If your remote service stores and returns the Gantt dependencies in a different 
 
 ### Columns
 
-The columns in the Treelist section of the Kendo UI Gantt can be idividually configured. The following configuration options are supported:
+The columns in the TreeList section of the Kendo UI Gantt can be individually configured. The following configuration options are supported:
 
 - `field` - the field from the task model which will be used to populate the column.
 - `title` - the header text of the column.

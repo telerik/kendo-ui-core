@@ -24,7 +24,7 @@ Initialize the ColorPicker by using a jQuery ID selector:
         });
     </script>
 
-The original `input` element is kept in the DOM. The `value` attribute element gets updated as the user selects a color. This allows the sumbmission of forms with ColorPicker widgets.
+The original `input` element is kept in the DOM. The `value` attribute element gets updated as the user selects a color. This allows the submission of forms with ColorPicker widgets.
 
 ## Configuration
 

@@ -282,7 +282,7 @@ Other articles and how-to examples on Kendo UI TreeView:
 * [Overview of the TreeView PHP Class](/php/widgets/treeview/overview)
 * [Bind to Flat Tables]({% slug bindtoflattables_treeview_widget %})
 * [How to Attach Methods to Data Items]({% slug howto_attache_methodsto_dataitems_treeview %})
-* [How to Check Nodes Programatically]({% slug howto_checknodeprogramatically_treeview %})
+* [How to Check Nodes Programmatically]({% slug howto_checknodeprogramatically_treeview %})
 * [How to Combine Local Data with Remote Loading]({% slug howto_combinelocaldatawithremoteloading_treeview %})
 * [How to Edit Nodes via Form]({% slug howto_editnodesviaform_treeview %})
 * [How to Expand All Nodes upon Check]({% slug howto_expandallnodes_uponcheck_treeview %})

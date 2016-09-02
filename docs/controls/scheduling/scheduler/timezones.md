@@ -48,7 +48,7 @@ Based on the specifics of the JavaScript `Date` object explained above, the Sche
 
 ### Read Events from Data Source
 
-1.  [`SchedulerEvent`](/api/javascript/data/schedulerevent) instances are created, where start/end dates are instatiated as JavaScript `Date` objects. During the process the [dates will be offset against the local time](http://www.ecma-international.org/ecma-262/6.0/#sec-localtime).
+1.  [`SchedulerEvent`](/api/javascript/data/schedulerevent) instances are created, where start/end dates are instantiated as JavaScript `Date` objects. During the process the [dates will be offset against the local time](http://www.ecma-international.org/ecma-262/6.0/#sec-localtime).
 
 2. If the [`timezone`](/api/javascript/ui/scheduler#configuration-timezone) option is defined, the widget removes the local timezone offset, converting dates to UTC. Then, it applies the defined timezone value, e.g. **America/New_York**.
 

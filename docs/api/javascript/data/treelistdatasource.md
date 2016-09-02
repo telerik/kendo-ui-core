@@ -122,4 +122,4 @@ The model whose level must be calculated.
 
 #### Returns
 
-`Number` the hierachy level of the node.
+`Number` the hierarchy level of the node.

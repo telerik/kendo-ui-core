@@ -7,7 +7,7 @@ slug: howto_persistresourcevalues_onamoveevent_scheduler
 
 # Persist Resource Values on move
 
-The example below demonstrates how to persist the event resouces on `move` in a Kendo UI Scheduler.
+The example below demonstrates how to persist the event resources on `move` in a Kendo UI Scheduler.
 
 ###### Example
 

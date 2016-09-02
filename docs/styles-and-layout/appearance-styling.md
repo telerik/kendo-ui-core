@@ -55,11 +55,11 @@ The example below demonstrates how to include the stylesheets to your project.
 > * The common CSS file must be registered before the theme CSS file. This is because the theme CSS file may need to override common styles via selectors with the same CSS specificity.
 > * Only one pair of common and theme CSS file should be registered on the page at any given time.
 
-The appearance of the Kendo UI widgets entirely depends on styles defined by the applied CSS classes. No inline styles are used, except for some very specific cases, in which these styles must be set with Javascript, depending on the browser or configuration.
+The appearance of the Kendo UI widgets entirely depends on styles defined by the applied CSS classes. No inline styles are used, except for some very specific cases, in which these styles must be set with JavaScript, depending on the browser or configuration.
 
 ### Common CSS Files
 
-Some themes require a different common (base) stylesheet that applies different dimensions. There are four `common` styleshees shipped with Kendo UI.
+Some themes require a different common (base) stylesheet that applies different dimensions. There are four `common` stylesheets shipped with Kendo UI.
 
 | CSS Files   | Contents and Application |
 |:---         |:---                     |

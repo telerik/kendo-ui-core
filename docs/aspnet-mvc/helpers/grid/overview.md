@@ -19,11 +19,11 @@ There are two ways to bind a Kendo UI Grid for ASP.NET MVC:
 * `server`&mdash;The widget makes HTTP GET requests when binding.
 * `ajax`&mdash;The widget makes Ajax requests when binding.
 
-Here are some of the differences between server and ajax bound modes:
+Here are some of the differences between server and AJAX bound modes:
 
 |**Feature**  |**Server Binding** |**Ajax Binding** |
 |:---         |:---               |:---             |
-|**Templates** |In the server-bound mode, the Grid templates use server-side expressions and .NET code&Mdash;C# or Visual Basic. Templates are executed server-side. |In the Ajax-bound mode, the Grid uses Kendo UI Templates. Templates are executed on the client side and use JavaScript. |
+|**Templates** |In the server-bound mode, the Grid templates use server-side expressions and .NET code&mdash;C# or Visual Basic. Templates are executed server-side. |In the Ajax-bound mode, the Grid uses Kendo UI Templates. Templates are executed on the client side and use JavaScript. |
 |**Full-Page Updates** |The Grid makes HTTP GET requests to ASP.NET MVC action methods which cause a full-page refresh. |The Grid makes Ajax requests which cause partial page update. The Grid retrieves only the data needed for the current page.|
 
 ### Server Binding

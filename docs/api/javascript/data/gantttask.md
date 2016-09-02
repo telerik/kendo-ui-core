@@ -6,13 +6,13 @@ description: Documentation how to get started with the GanttTask.
 
 # kendo.data.GanttTask
 
-The `kendo.data.GanttTask` class represents a data item from the [kendo.data.GanttDataSource](/api/framework/ganttdatasource). Inherits from [kendo.data.Model](/api/framework/model).
+The `kendo.data.GanttTask` class represents a data item from the [`kendo.data.GanttDataSource`](/api/framework/ganttdatasource). Inherits from [`kendo.data.Model`](/api/framework/model).
 
 ## Configuration
 
 ### end `Date`
 
-The date at which the gantt task ends. The `end` date is mandatory.
+The date at which the Gantt task ends. The `end` date is mandatory.
 
 #### Example - set the end date of a task
 
@@ -24,10 +24,10 @@ The date at which the gantt task ends. The `end` date is mandatory.
         end: new Date("2014/6/17 11:00")
     });
     </script>
-    
+
 ### expanded `Boolean` *(default: true)*
 
-If set to `true` the task is expanded and it's child tasks are visible.
+If set to `true`, the task is expanded and the tasks of its child are visible.
 
 #### Example - create collapsed task
 
@@ -40,7 +40,7 @@ If set to `true` the task is expanded and it's child tasks are visible.
         end: new Date("2014/6/17 11:00")
     });
     </script>
-    
+
 ### id `String|Number|Object`
 
 The mandatory unique identifier of the task.
@@ -74,7 +74,7 @@ The position of the task relative to its sibling tasks.
 
 ### parentId `String|Number|Object` *(default: null)*
 
-The 'id' of the parent task. Required for child tasks.
+The `id` of the parent task. Required for child tasks.
 
 #### Example - create a child task
 
@@ -97,7 +97,7 @@ The 'id' of the parent task. Required for child tasks.
 
 ### percentComplete `String|Number|Object` *(default: 0)*
 
-The percentage of completion of the task. A value between 0 and 1, representing how much of a task is completed.
+The completion percentage of the task. A value between 0 and 1, representing how much of a task is completed.
 
 #### Example - set the percentComplete of a task
 
@@ -113,7 +113,7 @@ The percentage of completion of the task. A value between 0 and 1, representing 
 
 ### start `Date`
 
-The date at which the gantt task starts. The `start` date is mandatory.
+The date at which the Gantt task starts. The `start` date is mandatory.
 
 #### Example - set the start date of a task
 
@@ -125,10 +125,10 @@ The date at which the gantt task starts. The `start` date is mandatory.
         end: new Date("2014/6/17 11:00")
     });
     </script>
-    
+
 ### summary `Boolean` *(default: true)*
 
-If set to `true` the task has child tasks.
+If set to `true`, the task has child tasks.
 
 #### Example - create summary task
 
@@ -141,10 +141,10 @@ If set to `true` the task has child tasks.
         end: new Date("2014/6/17 11:00")
     });
     </script>
-    
+
 ### title `String` *(default: "")*
 
-The title of the task which is displayed by the gantt widget.
+The title of the task which is displayed by the Gantt widget.
 
 #### Example - set the title of a task
 
@@ -161,7 +161,7 @@ The title of the task which is displayed by the gantt widget.
 
 ### end `Date`
 
-The date at which the gantt task ends.
+The date at which the Gantt task ends.
 
 #### Example - get the end date of a task
 
@@ -174,10 +174,10 @@ The date at which the gantt task ends.
     });
     console.log(task.end); // outputs the end date
     </script>
-    
-### expanded `Boolean` 
 
-If set to `true` the task is expanded and it's child tasks are visible.
+### expanded `Boolean`
+
+If set to `true`, the task is expanded and the tasks of its child are visible.
 
 #### Example - get the task expanded field
 
@@ -191,7 +191,7 @@ If set to `true` the task is expanded and it's child tasks are visible.
     });
     console.log(task.expanded); // outputs "false"
     </script>
-  
+
 ### id `String|Number|Object`
 
 The unique identifier of the task.
@@ -227,7 +227,7 @@ The position of the task relative to its sibling tasks.
 
 ### parentId `String|Number|Object`
 
-The 'id' of the parent task.
+The `id` of the parent task.
 
 #### Example - get the task parentId field
 
@@ -251,7 +251,7 @@ The 'id' of the parent task.
 
 ### percentComplete `String|Number|Object`
 
-The percentage of completion of the task.
+The completion percentage of the task.
 
 #### Example - get the task percentComplete field
 
@@ -268,7 +268,7 @@ The percentage of completion of the task.
 
 ### start `Date`
 
-The date at which the gantt task starts.
+The date at which the Gantt task starts.
 
 #### Example - get the start date of a task
 
@@ -281,10 +281,10 @@ The date at which the gantt task starts.
     });
     console.log(task.start); // outputs the start date
     </script>
-    
+
 ### summary `Boolean`
 
-If set to `true` the task has child tasks.
+If set to `true`, the task has child tasks.
 
 #### Example - get the task summary field
 
@@ -298,10 +298,10 @@ If set to `true` the task has child tasks.
     });
     console.log(task.summary); // outputs "true"
     </script>
-    
+
 ### title `String`
 
-The title of the task which is displayed by the gantt widget.
+The title of the task which is displayed by the Gantt widget.
 
 #### Example - get the title of a task
 
@@ -327,23 +327,25 @@ Defines a new `GanttTask` type using the provided options.
 
 ##### options `Object`
 
-Describes the configuration options of the new gantt task class.
+Describes the configuration options of the new Gantt task class.
 
 ##### options.id `String`
 
-The name of the field which acts as an identifier of the gantt task.
-The identifier is used to determine if a model instance is new or existing one.
-If the value of the field specified is equal to the default value (specified through the `fields` configuration) the model is considered as new.
+The name of the field which acts as an identifier of the Gantt task. The identifier is used to determine if a model instance is new or existing one. If the value of the field specified is equal to the default value (specified through the `fields` configuration), the model is considered as new.
 
 ##### options.fields `Object`
 
-A set of key/value pairs the configure the model fields. The key specifies the name of the field.
-Quote the key if it contains spaces or other symbols which are not valid for a JavaScript identifier.
+A set of key/value pairs the configure the model fields. The key specifies the name of the field. Quote the key if it contains spaces or other symbols which are not valid for a JavaScript identifier.
 
 ##### options.fields.fieldName.defaultValue
 
-Specifies the which will be used for the field when a new model instance is created. Default settings depend on the type of the field. Default for "string" is `""`,
-for "number" is `0` and for "date" is `new Date()` (today).
+Specifies the which will be used for the field when a new model instance is created. The default settings depend on the type of the field.
+
+The default for:
+
+* `"string"` is `""`.
+* `"number"` is `0`.
+* `"date"` is `new Date()` (today).
 
 ##### options.fields.fieldName.editable `Boolean`
 
@@ -355,17 +357,26 @@ Specifies if the `defaultValue` setting should be used. The default is `false`.
 
 ##### options.fields.fieldName.parse `Function`
 
-Specifies the function which will parse the field value. If not set default parsers will be used.
+Specifies the function which will parse the field value. If not set, the default parsers will be used.
 
 ##### options.fields.fieldName.type `String`
 
-Specifies the the type of the field. The available options are `"string"`, `"number"`, `"boolean"`, `"date`". The default is `"string"`.
+Specifies the type of the field.
+
+The available options are:
+
+* `"string"`
+* `"number"`
+* `"boolean"`
+* `"date`"
+
+The default is `"string"`.
 
 ##### options.fields.fieldName.validation `Object`
 
-Specifies the validation options which will be used by [Kendo Validator](/api/framework/validator).
+Specifies the validation options which will be used by the [Kendo Validator](/api/framework/validator).
 
-#### Example - define custom gantt task
+#### Example - define custom Gantt task
 
     var Task = kendo.data.GanttTask.define({
         id: "id",
@@ -384,7 +395,7 @@ Specifies the validation options which will be used by [Kendo Validator](/api/fr
 
 ### duration
 
-Returns the gantt task length in milliseconds.
+Returns the Gantt task length in milliseconds.
 
 #### Returns
 

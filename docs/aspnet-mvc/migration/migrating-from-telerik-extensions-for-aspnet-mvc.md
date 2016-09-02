@@ -34,7 +34,7 @@ The root namespace for Telerik Extensions for ASP.NET MVC was `Telerik.Web.Mvc`.
 
 **Change** The import statement in the `web.config` file should import `Kendo.Mvc.UI`.
 
-With Telerik Extensions for ASP.NET MVC, the import statement found within the `web.config` refered to `Telerik.Web.Mvc.UI`. To take use of Telerik UI for ASP.NET MVC, an import statement importing `Kendo.Mvc.UI` is needed instead.
+With Telerik Extensions for ASP.NET MVC, the import statement found within the `web.config` referred to `Telerik.Web.Mvc.UI`. To take use of Telerik UI for ASP.NET MVC, an import statement importing `Kendo.Mvc.UI` is needed instead.
 
 ### Version Support
 
@@ -127,7 +127,7 @@ Within Telerik Extensions for ASP.NET MVC, you can subscribe to a client-side ev
 
         .OnSelect(@<text> function() {} </text>)
 
-With Telerik UI for ASP.NET MVC, the second approach&mdash;using the server-side code block within the WebFroms ViewEngine&mdash;is no longer supported. The reason for this are the complications and limitations around the server-side code block because of the utilization of the `Response.Write` to add this JavaScript to the page. The third approach&mdash;using Razor&mdash;takes a string-based approach which removes these limitations. If the second approach is the one currently implemented, it is recommended to use approach number one for the migration.
+With Telerik UI for ASP.NET MVC, the second approach&mdash;using the server-side code block within the WebForms ViewEngine&mdash;is no longer supported. The reason for this are the complications and limitations around the server-side code block because of the utilization of the `Response.Write` to add this JavaScript to the page. The third approach&mdash;using Razor&mdash;takes a string-based approach which removes these limitations. If the second approach is the one currently implemented, it is recommended to use approach number one for the migration.
 
 ### ClientEvents
 
@@ -160,7 +160,7 @@ becomes
 
     .Events(events => events.Change ("foo"))
 
-### Client-Side OnLoad Event
+### Client-Side onLoad Event
 
 **Change** With Telerik UI for ASP.NET MVC, the `OnLoad` event is removed. Utilize the `document ready` event instead.
 
@@ -238,7 +238,7 @@ In some cases when developers migrate from Telerik Extensions for ASP.NET MVC to
 >
 > Using Kendo UI stylesheets and legacy themes on the same page is not supported.
 
-Generally, it is recommened that you use the Kendo UI themes and not the legacy ones. The latter are located in the `wrappers/aspnetmvc/LegacyThemes` folder of the Telerik UI for ASP.NET MVC distribution package. Legacy themes can also be referenced from the Kendo UI CDN. If so, do not forget to specify the version&mdash;for example, 2012.2.710.
+Generally, it is recommended that you use the Kendo UI themes and not the legacy ones. The latter are located in the `wrappers/aspnetmvc/LegacyThemes` folder of the Telerik UI for ASP.NET MVC distribution package. Legacy themes can also be referenced from the Kendo UI CDN. If so, do not forget to specify the version&mdash;for example, 2012.2.710.
 
 ###### Example
 

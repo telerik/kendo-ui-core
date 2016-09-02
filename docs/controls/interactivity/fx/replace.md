@@ -118,7 +118,7 @@ The example below demonstrates how to apply a faster Replace effect transition.
         </body>
     </html>
 
-> **Importnat**
+> **Important**
 >
 > You may use this technique to customize the Kendo UI Mobile view transitions.
 

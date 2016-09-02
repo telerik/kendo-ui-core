@@ -36,7 +36,7 @@ The example below demonstrates how to create a Tooltip for a single target and i
 
 #### Initialize Tooltip for Containers
 
-The example below demonstrates how to create a Tooltip for multiple targets within a container, initialize it using a jQuery selector and specfy the filter to match the target elements. By default, the Tooltip content is extracted from the `title` attribute of the target element.
+The example below demonstrates how to create a Tooltip for multiple targets within a container, initialize it using a jQuery selector and specify the filter to match the target elements. By default, the Tooltip content is extracted from the `title` attribute of the target element.
 
 ###### Example
 
@@ -91,15 +91,15 @@ The Kendo UI Tooltip relies on the `mouseenter` and `mouseleave` events to work.
 
 ### Defaults
 
-Kendo UI Tooltip provides default configuration options that can be set during initialization. Some of the properties that can be overriden and controlled are:
+Kendo UI Tooltip provides default configuration options that can be set during initialization. Some of the properties that can be overridden and controlled are:
 
 *   Content
-*   Position relative to the target (top, botton, center, left, right)
-*   Event on which the Tooltip si going to be displayed
+*   Position relative to the target (top, bottom, center, left, right)
+*   Event on which the Tooltip is going to be displayed
 *   Auto-hide behavior
 *   Height/Width
 
-The example below demonstrates how to intiialize a Tooltip and configure its main propertues.
+The example below demonstrates how to initialize a Tooltip and configure its main properties.
 
 ###### Example
 
