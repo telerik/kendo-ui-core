@@ -122,7 +122,7 @@ At this point, you have the wire frame for a basic MVC application. Next, you wi
 
 > **Tip**
 >
-> Because the **Convert to Telerik application**, **Upgrade Project**, or **Configure Project** wizards modify the `_Layout.cshtml` file, make sure you check the position of the custom CSS declarations afterward.        
+> Because the **Convert to Telerik application**, **Upgrade Project**, or **Configure Project** wizards modify the `_Layout.cshtml` file, make sure you check the position of the custom CSS declarations afterwards.        
 
 Now that your app is ready for development. Let's add some simple input components to create a nice user experience.
 

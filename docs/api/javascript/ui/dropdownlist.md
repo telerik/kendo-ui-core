@@ -540,7 +540,7 @@ Defines a jQuery selector that will be used to find a container element, where t
 
 ### popup.origin `String`
 
-Specifies how to position the popup element based on achor point. The value is
+Specifies how to position the popup element based on anchor point. The value is
 space separated "y" plus "x" position.
 
 The available "y" positions are:

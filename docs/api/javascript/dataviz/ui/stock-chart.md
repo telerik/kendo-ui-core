@@ -141,7 +141,7 @@ The opacity of the crosshair. By default the crosshair is opaque.
 
 ### navigator.categoryAxis.crosshair.tooltip `Object`
 
-The crosshar tooltip options.
+The crosshair tooltip options.
 
 > The crosshair tooltip is displayed when the [categoryAxis.crosshair.tooltip.visible](#configuration-categoryAxis.crosshair.tooltip.visible) option is set to `true`.
 
@@ -3151,7 +3151,7 @@ The dash type of the crosshair.
 
 ### categoryAxis.crosshair.tooltip `Object`
 
-The crosshar tooltip configuration options.
+The crosshair tooltip configuration options.
 
 ### categoryAxis.crosshair.tooltip.background `String`
 
@@ -8038,7 +8038,7 @@ The dash type of the crosshair.
 
 ### valueAxis.crosshair.tooltip `Object`
 
-The crosshar tooltip configuration options.
+The crosshair tooltip configuration options.
 
 ### valueAxis.crosshair.tooltip.background `String`
 

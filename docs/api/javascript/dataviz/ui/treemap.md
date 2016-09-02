@@ -52,7 +52,7 @@ The Supported values are:
 
 * squarified
 * horizontal
-* veritcal
+* vertical
 
 ### theme `String` *(default: "default")*
 

@@ -22,7 +22,7 @@ Category index at which the first value axis crosses this axis. (Only for object
 
 Category indicies at which the value axes cross the category axis. (Only for array)
 
-**Note:** Specify an index greater than or equal to the number
+**Note:**Specify an index greater than or equal to the number
 of categories to denote the far end of the axis.
 
 ### categoryAxis.categories `Array`
@@ -175,7 +175,7 @@ Configures the axis line. This will also effect major and minor ticks, but not g
 
 The color of the lines. Any valid CSS color string will work here, including hex and rgb.
 
-**Note:** This will also effect the major and minor ticks, but not the grid lines.
+**Note:**This will also effect the major and minor ticks, but not the grid lines.
 
 ### categoryAxis.line.dashType `String`*(default: "solid")*
 
@@ -309,7 +309,7 @@ The skip of the category axis major ticks.
 Configures the minor grid lines.  These are the lines that are an extension of the minor ticks through
 the body of the chart.
 
-Note that minor grid lines are not visible by default, therefore none of these settings will take effect with the minor grid lines visibility being set to **true**.
+Note that minor grid lines are not visible by default, therefore none of these settings will take effect with the minor grid lines visibility being set to**true**.
 
 ### categoryAxis.minorGridLines.color `String`*(default: "black")*
 
@@ -317,7 +317,7 @@ The color of the lines. Any valid CSS color string will work here, including hex
 rgb.
 
 Note that this setting has no effect if the visibility of the minor
-grid lines is not set to **true**.
+grid lines is not set to**true**.
 
 ### categoryAxis.minorGridLines.dashType `String`*(default: "solid")*
 
@@ -360,7 +360,7 @@ The visibility of the lines.
 The width of the lines.
 
 Note that this setting has no effect if the visibility of the minor
-grid lines is not set to **true**.
+grid lines is not set to**true**.
 
 ### categoryAxis.minorGridLines.step `Number` *(default: 1)*
 
@@ -544,8 +544,8 @@ Specialized axis for displaying chronological data.
 
 ### categoryAxis.autoBaseUnitSteps `Object`
 
-Specifies the discrete **baseUnitStep** values when
-either **baseUnit** is set to "fit" or **baseUnitStep** is set to "auto".
+Specifies the discrete**baseUnitStep**values when
+either**baseUnit**is set to "fit" or**baseUnitStep**is set to "auto".
 
 The default configuration is as follows:
 
@@ -587,20 +587,20 @@ between subsequent categories. Available options:
 * weeks
 * months
 * years
-* **fit**
+***fit**
 
-Setting **baseUnit** to "fit" will set such base unit and **baseUnitStep**
-that the total number of categories does not exceed **maxDateGroups**.
+Setting**baseUnit**to "fit" will set such base unit and**baseUnitStep**
+that the total number of categories does not exceed**maxDateGroups**.
 
 Series data is aggregated for the specified base unit by using the
-**series.aggregate** function.
+**series.aggregate**function.
 
 ### categoryAxis.baseUnitStep `Object`*(default: 1)*
 
 Sets the step (interval) between categories in base units.
-Specifiying "auto" will set the step to such value that the total number of categories does not exceed **maxDateGroups**.
+Specifiying "auto" will set the step to such value that the total number of categories does not exceed**maxDateGroups**.
 
-This option is ignored if **baseUnit** is set to "fit".
+This option is ignored if**baseUnit**is set to "fit".
 
 
 ### categoryAxis.labels.culture `String`
@@ -633,34 +633,34 @@ Date format strings
 "yyyy"
 
 The Chart will choose the appropriate format for the current `baseUnit`.
-Setting the labels **format** option will override these defaults.
+Setting the labels**format**option will override these defaults.
 
 ### categoryAxis.max `Object`
 
 The last date displayed on the axis.
 By default, the minimum date is the same as the last category.
-This is often used in combination with the **min** and **roundToBaseUnit** configuration options to
+This is often used in combination with the**min**and**roundToBaseUnit**configuration options to
 set up a fixed date range.
 
 ### categoryAxis.min `Object`
 
 The first date displayed on the axis.
 By default, the minimum date is the same as the first category.
-This is often used in combination with the **max** and **roundToBaseUnit** configuration options to
+This is often used in combination with the**max**and**roundToBaseUnit**configuration options to
 set up a fixed date range.
 
 ### categoryAxis.roundToBaseUnit `Boolean`*(default: true)*
 
 By default, the first and last dates will be rounded off to the nearest base unit.
-Specifying **false** for this option will disable this behavior.
+Specifying**false**for this option will disable this behavior.
 
-This option is most useful in combination with explicit **min** and **max** dates.
+This option is most useful in combination with explicit**min**and**max**dates.
 
 It will be ignored if either bar or column series are plotted on the axis.
 
 ### categoryAxis.weekStartDay `Number`*(default: kendo.days.Sunday)*
 
-Specifies the week start day when **baseUnit** is set to "weeks".
+Specifies the week start day when**baseUnit**is set to "weeks".
 Use the *kendo.days* constants to specify the day by name.
 
 * kendo.days.Sunday (0)
@@ -675,7 +675,7 @@ Use the *kendo.days* constants to specify the day by name.
 ### categoryAxis.maxDateGroups `Number`*(default: 10)*
 
 Specifies the maximum number of groups (categories) to produce when
-either **baseUnit** is set to "fit" or **baseUnitStep** is set to "auto".
+either**baseUnit**is set to "fit" or**baseUnitStep**is set to "auto".
 
 This option is ignored in all other cases.
 
@@ -709,7 +709,7 @@ The dash type of the crosshair.
 
 ### categoryAxis.crosshair.tooltip `Object`
 
-The crosshar tooltip configuration options.
+The crosshair tooltip configuration options.
 
 ### categoryAxis.crosshair.tooltip.background `String`
 
@@ -762,7 +762,7 @@ The padding of the tooltip.
 The tooltip template.
 Template variables:
 
-*   **value** - the point value (either a number or an object)
+*  **value**- the point value (either a number or an object)
 
 #### Example
 
@@ -2043,7 +2043,7 @@ The margin of the chart area.
 
 The data for the default sparkline series.
 
-Will be discareded if series are supplied.
+Will be discarded if series are supplied.
 
 #### Example
 
@@ -2205,11 +2205,11 @@ The supported values are:
 Array of series definitions.
 
 The series type is determined by the value of the type field.
-If a type value is missing, the type is assumed to be the one specified in seriesDefaults.
+If a type value is missing, the type is assumed to be the one specified in `seriesDefaults`.
 
 Each series type has a different set of options.
 
-> **Info:** Some options accept function as argument. They will be evaluated for each point (supplied as parameter). The theme/seriesDefaults value will be used if no value is returned.
+>**Info:**Some options accept function as argument. They will be evaluated for each point (supplied as parameter). The theme/seriesDefaults value will be used if no value is returned.
 
 ### series.type `String`*(default: "line")*
 
@@ -2225,7 +2225,7 @@ The type of the series. Available types:
 
 The series line dash type.
 
-** Applicable only to line series **
+**Applicable only to line series**
 
 #### *"solid"*
 
@@ -2264,23 +2264,23 @@ Array of data items. The data item type can be either a:
 
 ### series.explodeField `String`
 
-The data field containing a boolean value that indicates if the sector is exploded.
+The data field containing a Boolean value that indicates if the sector is exploded.
 
-** Available for pie series **
+**Available for pie series**
 
 ### series.currentField `String`
 
 The data field containing the current value.
 
-** Available for bullet and verticalBullet series. **
+**Available for bullet and verticalBullet series.**
 
 ### series.targetField `String`
 
 The data field containing the target value.
 
-** Available for bullet and verticalBullet series. **
+**Available for bullet and verticalBullet series.**
 
-** Available for pie series **
+**Available for pie series**
 
 ### series.field `String`
 
@@ -2307,7 +2307,7 @@ Configures the appearance of highlighted points.
 
 The border of highlighted points. The color is computed automatically from the base point color.
 
-** Applicable to pie series. **
+**Applicable to pie series.**
 
 ### series.highlight.border.width `Number`
 
@@ -2325,13 +2325,13 @@ The border opacity.
 
 The highlight color.
 
-** Available only for pie series **
+**Available only for pie series**
 
 ### series.highlight.opacity `Number`
 
 The opacity of the highlighted points.
 
-** Applicable to pie series. **
+**Applicable to pie series.**
 
 ### series.highlight.visible `Boolean`
 
@@ -2354,19 +2354,19 @@ The supported values are:
 * "sumOrNull" - the sum of all values for the date period. Defaults to `null` if no data points are defined.
 * "first" - the first value
 * function(values, series, dataItems, category) - user-defined aggregate function. Returns single value or data item.
-* object  - (compound aggregate) **Applicable to "candlestick" and ohlc "series"**. Specifies the aggregate for each data item field.
+* object  - (compound aggregate)**Applicable to "candlestick" and ohlc "series"**. Specifies the aggregate for each data item field.
 
 ### series.axis `String`*(default: "primary")*
 
 The name of the value axis to use.
 
-** Applicable to area, bar, column and line series **
+**Applicable to area, bar, column and line series**
 
 ### series.border `Object`
 
 The border of the points.
 
-** Applicable to bar, column and pie series **
+**Applicable to bar, column and pie series**
 
 ### series.border.color `String|Function`
 
@@ -2416,7 +2416,7 @@ The width of the border.
 
 The data field containing the point category name.
 
-** Applicable to pie series. **
+**Applicable to pie series.**
 
 ### series.color `String|Function`
 
@@ -2456,13 +2456,13 @@ The series base color. The supported values are:
 
 The data field containing the point color.
 
-** Applicable for bar, column and pie series. **
+**Applicable for bar, column and pie series.**
 
 ### series.connectors `Object`
 
 The label connectors options.
 
-** Applicable to pie series. **
+**Applicable to pie series.**
 
 ### series.connectors.color `String`
 
@@ -2480,7 +2480,7 @@ The width of the connector line.
 
 The distance between category clusters.
 
-** Applicable for bar and column series. **
+**Applicable for bar and column series.**
 
 ### series.labels `Object`
 
@@ -2490,7 +2490,7 @@ Configures the series data labels.
 
 Defines the alignment of the labels.
 
-** Available for pie series. **
+**Available for pie series.**
 
 #### *"circle"*
 
@@ -2556,7 +2556,7 @@ The text color of the labels.
 
 The distance of the labels.
 
-** Available for pie series. **
+**Available for pie series.**
 
 ### series.labels.font `String|Function`*(default: "12px Arial,Helvetica,sans-serif")*
 
@@ -2605,50 +2605,50 @@ Defines the position of the labels.
 
 The label is positioned at the top of the marker.
 
-** Applicable for area and line series. **
+**Applicable for area and line series.**
 
 #### *"center"*
 
 The label is positioned at the point center.
 
-** Applicable for bar, column, pie series. **
+**Applicable for bar, column, pie series.**
 
 #### *"insideEnd"*
 
 The label is positioned inside, near the end of the point.
 
-** Applicable for bar, column, pie series. **
+**Applicable for bar, column, pie series.**
 
 #### *"insideBase"*
 
 The label is positioned inside, near the base of the bar.
 
-** Applicable for bar and column series. **
+**Applicable for bar and column series.**
 
 #### *"outsideEnd"*
 
 The label is positioned outside, near the end of the bar.
 
-** Applicable for bar, column, pie series.
-Not applicable for stacked series. **
+**Applicable for bar, column, pie series.
+Not applicable for stacked series.**
 
 #### *"right"*
 
 The label is positioned to the right of the marker.
 
-** Applicable for area and line series. **
+**Applicable for area and line series.**
 
 #### *"below"*
 
 The label is positioned at the bottom of the marker.
 
-** Applicable for area and line series. **
+**Applicable for area and line series.**
 
 #### *"left"*
 
 The label is positioned to the left of the marker.
 
-** Applicable for area and line series. **
+**Applicable for area and line series.**
 
 ### series.labels.template `String | Function`
 
@@ -2670,7 +2670,7 @@ The fields which can be used in the template are:
 
 Line options.
 
-** Applicable to area series. **
+**Applicable to area series.**
 
 ### series.line.color `String`
 
@@ -2700,7 +2700,7 @@ The supported values are:
 
 Marker options.
 
-** Applicable to area and line series **
+**Applicable to area and line series**
 
 ### series.markers.background `String|Function`
 
@@ -2786,7 +2786,7 @@ The supported values are:
 
 Color to use for bars with negative values.
 
-** Applicable only to bar and column series. **
+**Applicable only to bar and column series.**
 
 ### series.opacity `Number`
 
@@ -2802,16 +2802,16 @@ The gradient name.
 
 Available options:
 
-* **glass** (bar and column series)
-* **roundedBevel** (pie series)
-* **sharpBevel** (pie series)
-* **none**
+***glass**(bar and column series)
+***roundedBevel**(pie series)
+***sharpBevel**(pie series)
+***none**
 
 ### series.padding `Number`
 
 The padding around the chart (equal on all sides).
 
-** Available for pie series. **
+**Available for pie series.**
 
 ### series.size `Number`
 
@@ -2830,11 +2830,11 @@ The start angle of the first segment.
 
 Space between points as proportion of the point width.
 
-** Available for bar and column series. **
+**Available for bar and column series.**
 
 ### series.stack `Boolean|String|Object` *(default: false)*
 
-A boolean value indicating if the series should be stacked.
+A Boolean value indicating if the series should be stacked.
 A string value is interpreted as [series.stack.group](#configuration-series.stack.group).
 
 > The `stack` options is supported when [series.type](#configuration-series.type) is set to "bar", "column", "line", "area", "verticalLine", "verticalArea", "radarLine", "radarArea" and "radarColumn".
@@ -2928,7 +2928,7 @@ The tooltip font.
 The tooltip format. Format variables depend on the series type:
 
 * Area, bar, column, line and pie
-    *   **0** - value
+    *  **0**- value
 
 #### Example
 
@@ -2953,10 +2953,10 @@ The padding of the tooltip.
 The tooltip template.
 Template variables:
 
-*   **value** - the point value (either a number or an object)
-*   **category** - the category name
-*   **series** - the data series
-*   **dataItem** - the original data item used to construct the point.
+*  **value**- the point value (either a number or an object)
+*  **category**- the category name
+*  **series**- the data series
+*  **dataItem**- the original data item used to construct the point.
         Will be null if binding to array.
 
 #### Example
@@ -2980,7 +2980,7 @@ Template variables:
 
 The line width.
 
-** Available for line series **
+**Available for line series**
 
 ### series.target `Object`
 
@@ -3349,10 +3349,10 @@ The label template.
 Template variables:
 
 
-*   **value** - the point value
-*   **category** - the category name
-*   **series** - the data series
-*   **dataItem** - the original data item used to construct the point.
+*  **value**- the point value
+*  **category**- the category name
+*  **series**- the data series
+*  **dataItem**- the original data item used to construct the point.
         Will be null if binding to array.
 
 ### seriesDefaults.labels.visible `Boolean`*(default: false)*
@@ -3379,7 +3379,7 @@ The default options for all pie series. For more details see the series options.
 
 ### seriesDefaults.stack `Boolean|Object` *(default: false)*
 
-A boolean value indicating if the series should be stacked.
+A Boolean value indicating if the series should be stacked.
 
 > The `stack` options is supported when [series.type](#configuration-series.type) is set to "bar", "column", "line", "area", "verticalLine", "verticalArea", "radarLine", "radarArea" and "radarColumn".
 
@@ -3486,10 +3486,10 @@ The tooltip template.
 Template variables:
 
 
-*   **value** - the point value
-*   **category** - the category name
-*   **series** - the data series
-*   **dataItem** - the original data item used to construct the point.
+*  **value**- the point value
+*  **category**- the category name
+*  **series**- the data series
+*  **dataItem**- the original data item used to construct the point.
         Will be null if binding to array.
 
 #### Example
@@ -3568,10 +3568,10 @@ The tooltip template.
 Template variables:
 
 
-*   **value** - the point value
-*   **category** - the category name
-*   **series** - the data series
-*   **dataItem** - the original data item used to construct the point.
+*  **value**- the point value
+*  **category**- the category name
+*  **series**- the data series
+*  **dataItem**- the original data item used to construct the point.
         Will be null if binding to array.
 
 #### Example
@@ -3596,8 +3596,8 @@ A value indicating if the tooltip should be shared.
 The shared tooltip template.
 Template variables:
 
-*   **points** - the category points
-*   **category** - the category name
+*  **points**- the category points
+*  **category**- the category name
 
 #### Example
 
@@ -3775,7 +3775,7 @@ Every n-th label is rendered where n is the step
 The label template.
 Template variables:
 
-*   **value** - the value
+*  **value**- the value
 
 ### valueAxis.labels.visible `Boolean`*(default: true)*
 
@@ -3891,12 +3891,12 @@ The interval between major divisions.
 ### valueAxis.max `Number`*(default: 1)*
 
 The maximum value of the axis.
-This is often used in combination with the **min** configuration option.
+This is often used in combination with the**min**configuration option.
 
 ### valueAxis.min `Number`*(default: 0)*
 
 The minimum value of the axis.
-This is often used in combination with the **max** configuration option.
+This is often used in combination with the**max**configuration option.
 
 ### valueAxis.minorGridLines `Object`
 
@@ -3906,7 +3906,7 @@ Configures the minor grid lines.  These are the lines that are an extension of t
 
 The color of the lines.
 
-Note that this has no effect if the visibility of the minor grid lines is not set to **true**.
+Note that this has no effect if the visibility of the minor grid lines is not set to**true**.
 
 ### valueAxis.minorGridLines.dashType `String`*(default: "solid")*
 
@@ -3941,7 +3941,7 @@ Specifies a line consisting of a repeating pattern of long-dash-dot.
 Specifies a line consisting of a repeating pattern of long-dash-dot-dot.
 body of the chart.
 
-Note that minor grid lines are not visible by default, therefore none of these settings will take effect without the minor grid lines visibility being set to **true**.
+Note that minor grid lines are not visible by default, therefore none of these settings will take effect without the minor grid lines visibility being set to**true**.
 
 ### valueAxis.minorGridLines.visible `Boolean`*(default: false)*
 
@@ -3951,7 +3951,7 @@ The visibility of the lines.
 
 The width of the lines.
 
-Note that this settings has no effect if the visibility of the minor grid lines is not set to **true**.
+Note that this settings has no effect if the visibility of the minor grid lines is not set to**true**.
 
 ### valueAxis.minorGridLines.step `Number` *(default: 1)*
 
@@ -4180,7 +4180,7 @@ The dash type of the crosshair.
 
 ### valueAxis.crosshair.tooltip `Object`
 
-The crosshar tooltip configuration options.
+The crosshair tooltip configuration options.
 
 ### valueAxis.crosshair.tooltip.background `String`
 
@@ -4233,7 +4233,7 @@ The padding of the tooltip.
 The tooltip template.
 Template variables:
 
-*   **value** - the point value (either a number or an object)
+*  **value**- the point value (either a number or an object)
 
 #### Example
 
@@ -5634,7 +5634,7 @@ The label sequential index or category index.
 ##### e.dataItem `Object`
 
 The original data item used to generate the label.
-** Applicable only for data bound category axis. **
+**Applicable only for data bound category axis.**
 
 ##### e.element `Object`
 

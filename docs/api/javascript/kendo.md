@@ -926,7 +926,7 @@ Returns true if the browser supports overflow-scrolling CSS property (currently 
 Returns the current device's Device to Pixel Ratio. Doesn't work in Windows Phone 8, where IE10 doesn't support it.
 
 ##### placeholder `Boolean`
-Retruns true if the browser supports input placeholders.
+Returns `true` if the browser supports input placeholders.
 
 ##### zoomLevel `Number` *(default: 1)*
 Returns the current zoom level on a mobile browser (returns 1 on desktop).

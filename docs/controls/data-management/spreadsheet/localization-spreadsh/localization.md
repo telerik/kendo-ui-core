@@ -47,7 +47,7 @@ You are also able to change widget messages by using JavaScript. Apply this appr
 
 ### Namespaces
 
-Each message has a corresponding namespace listed under a category, depending on its location or function representation within the widget. Below are all five namespace categories Kendo UI Spreadsheet usses. Click on each to see the full list of namespaces it holds.  
+Each message has a corresponding namespace listed under a category, depending on its location or function representation within the widget. Below are all five namespace categories Kendo UI Spreadsheet uses. Click on each to see the full list of namespaces it holds.  
 
 - [kendo.spreadsheet.messages.borderPalette]({% slug localization_borderpalette_messages_spreadsheet_widget%})
 - [kendo.spreadsheet.messages.dialogs]({% slug localization_dialogs_messages_spreadsheet_widget%})

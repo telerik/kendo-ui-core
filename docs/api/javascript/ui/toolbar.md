@@ -1008,7 +1008,7 @@ Defines a CSS class (or multiple classes separated by spaces) which will be used
 
 Specifies what element will be added in the ToolBar wrapper. Items with template does not have a type.
 
-> If `overflowTemplate` is not defined for a template command, than the command will be threated as `overflow: "never"`.
+> If `overflowTemplate` is not defined for a template command, than the command will be treated as `overflow: "never"`.
 
 #### Example
 

@@ -76,11 +76,11 @@ As of now, the following basic specifiers are supported:
 |`"divisor"`        |Requires a non-zero number. Produces a `#DIV/0!` error if the argument is zero. |
 |`"string"`         |Requires a string argument. |
 |`"boolean"`        |Requires a boolean argument. Most times you may want to use `"logical"` though. |
-|`"logical"`        |Requires a `logical` argument. That is, Booleans `true` or `false`, but `1` and `0` are also accepted. It gets converted to an actual boolean. |
+|`"logical"`        |Requires a `logical` argument. That is, Booleans `true` or `false`, but `1` and `0` are also accepted. It gets converted to an actual Boolean. |
 |`"date"`           |Requires a date argument. Internally, dates are stored as numbers (the number of days since December 31 1899), so this works the same as `"integer"`. It was added for consistency. |
 |`"datetime"`       |This is like `"number"`, because the time part is represented as a fraction of a day. |
 |`"anyvalue"`       |Accepts any value type. |
-|`"matrix"`         |Accepts a matrix argument. Тhis is either a range, e.g., `A1:C3`, or a literal matrix (see the **Matrices** section below). |
+|`"matrix"`         |Accepts a matrix argument. This is either a range, for example, `A1:C3`, or a literal matrix (see the **Matrices** section below). |
 |`"null"`           |Requires a null (missing) argument. The reason for this specifier will be clarified in the **Optional Arguments** section. |
 
 Again, to make it clear, some specifiers actually modify the value that your function receives. For example, you could implement a function that truncates the argument to integer, as shown below.

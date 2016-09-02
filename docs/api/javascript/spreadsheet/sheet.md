@@ -627,7 +627,7 @@ Gets or sets a flag indicating if the grid lines should be visible.
 
 #### Parameters
 
-##### showGridLiens `Boolean` *optional*
+##### showGridLines `Boolean` *optional*
 
 If passed, the method will toggle the display of the grid lines according to the value.
 

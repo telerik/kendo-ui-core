@@ -587,7 +587,7 @@ Defines a jQuery selector that will be used to find a container element, where t
 
 ### popup.origin `String`
 
-Specifies how to position the popup element based on achor point. The value is
+Specifies how to position the popup element based on anchor point. The value is
 space separated "y" plus "x" position.
 
 The available "y" positions are:
@@ -938,7 +938,7 @@ For detailed information, refer to the [article on virtualization]({% slug virtu
         }
     </script>
 
-#### Example - MultiSelect widget with а declarative virtualization config
+#### Example - MultiSelect widget with a declarative virtualization configuration
 
     <div class="demo-section k-header">
         <h4>Search for shipping name</h4>

@@ -935,7 +935,7 @@ Defines the data type of the cell value.
 Defines a *formula* or *value* used for the comparison process. Used as *only* if comparer type does not require second argument.
 
 ### sheets.rows.cells.validation.to `String`
-Defines a *formula* or *value* used for the comparison process. Will be used if comparer type requies second argument.
+Defines a *formula* or *value* used for the comparison process. Will be used if comparer type requires second argument.
 
 ### sheets.rows.cells.validation.allowNulls `Boolean`
 Specifies whether to allow nulls.

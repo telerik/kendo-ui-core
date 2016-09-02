@@ -1006,7 +1006,7 @@ Controls whether to show or not the checkAll checkbox before the other checkboxe
 
 ### columns.filterable.itemTemplate `Function`
 
-Allows customization on the logic that renderes the checkboxes when using checkbox filtering.
+Allows customization on the logic that renders the checkboxes when using checkbox filtering.
 
 #### Example - provide custom DataSource for the FilterMultiCheck filtering.
      <div id="grid"></div>

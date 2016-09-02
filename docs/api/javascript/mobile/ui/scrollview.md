@@ -131,7 +131,7 @@ Instance of DataSource that the mobile ScrollView will be bound to. *If DataSour
 
 The milliseconds that take the ScrollView to snap to the current page after released.
 
-#### Example - increase the duration of snap transtion
+#### Example - increase the duration of snap transition
 
     <div data-role="view">
       <div id="scrollView" data-role="scrollview" data-duration="500">

@@ -2753,7 +2753,7 @@ Defines text for dialog shown when an already existing file is set for upload.
 
 ### imageBrowser.messages.search `String` *(default: "Search")*
 
-Defines text for search box pleaceholder.
+Defines text for search box placeholder.
 
 #### Example
 
@@ -3579,7 +3579,7 @@ Defines text for dialog shown when an already existing file is set for upload.
 
 ### fileBrowser.messages.search `String` *(default: "Search")*
 
-Defines text for search box pleaceholder.
+Defines text for search box placeholder.
 
 #### Example
 

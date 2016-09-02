@@ -188,7 +188,7 @@ Configures the scale.
 ### scale.endAngle `Number`*(default: 210)*
 
  The end angle of the gauge.
-The gauge is rendered clockwise(0 degrees are the 180 degrees in the polar coordinat system)
+The gauge is rendered clockwise(0 degrees are the 180 degrees in the polar coordinate system)
 
 ### scale.labels `Object`
 
@@ -461,7 +461,7 @@ Reverses the scale direction - values are increase anticlockwise.
 ### scale.startAngle `Number`*(default: -30)*
 
  The start angle of the gauge.
-The gauge is rendered clockwise(0 degrees are the 180 degrees in the polar coordinat system)
+The gauge is rendered clockwise(0 degrees are the 180 degrees in the polar coordinate system)
 
 ### transitions `Boolean`*(default: true)*
 

@@ -177,7 +177,7 @@ what fields they need to change in order to update the object.
 
 Now that we send back any server-side validation errors we need a way of handling them client-side.
 This is where the `Error` event of a datasource comes in handy. As you remember from our declaration
-of the order details grid we subscribed to the `Error` event of the datsource.
+of the order details grid we subscribed to the `Error` event of the data source.
 
     .Events(events =>  events.Error("window.SalesHub.OrderDetails_Error"))
 

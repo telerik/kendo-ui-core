@@ -700,7 +700,7 @@ The **Account** View is going to display some basic information for the user suc
 
 Note that it is possible to include other widgets in the ListView items&mdash;the corresponding directives will be automatically executed. Since this View will not provide any extra functionality it does not need a controller.
 
-For а live preview, click [here](http://dojo.telerik.com/@valchev/exeS/10).
+For a live preview, click [here](http://dojo.telerik.com/@valchev/exeS/10).
 
 ## Create the Done View
 

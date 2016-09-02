@@ -3039,7 +3039,7 @@ Constraints the minimum date which can be selected via the scheduler navigation.
 
 The number of time slots to display per major tick.
 
-> Note that the minorTickCount value should set to number heigher than 0.
+> Note that the minorTickCount value should set to number greater than 0.
 
 #### Example - set the number of time slots
 
@@ -5758,7 +5758,7 @@ Get the relevant resources for a given slot.
 
 `Object` The relevant resources.
 
-#### Exampe - get the relevant resources
+#### Example - get the relevant resources
     <div id="scheduler"></div>
     <script>
     $("#scheduler").kendoScheduler({

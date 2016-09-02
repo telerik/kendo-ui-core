@@ -12,7 +12,7 @@ Represents the Kendo UI MediaPlayer widget. Inherits from [Widget](/api/javascri
 
 ### autoPlay `Boolean` *(default: false)*
 
-If set to `true` the widget will start playing the video\vidoes after initializing
+If set to `true`, the widget will start playing the video or videos after initializing.
 
 #### Example - enable automatic play
 
@@ -26,7 +26,7 @@ If set to `true` the widget will start playing the video\vidoes after initializi
 
 ### autoRepeat `Boolean` *(default: false)*
 
-If set to `true` the widget will start playing the video\vidoes after initializing
+If set to `true`, the widget will start playing the video or videos after initializing.
 
 #### Example - enable automatic play
 
@@ -40,9 +40,9 @@ If set to `true` the widget will start playing the video\vidoes after initializi
 
 ### forwardSeek `Boolean` *(default: true)*
 
-If set to `false` the user will be prevented from seeking the video forward
+If set to `false`, the user will be prevented from seeking the video forward.
 
-#### Example - enable full-screen
+#### Example - enable fullscreen
 
     <div id="mediaplayer" />
     <script>
@@ -54,9 +54,9 @@ If set to `false` the user will be prevented from seeking the video forward
 
 ### fullScreen `Boolean` *(default: false)*
 
-If set to `true` the widget will enter in full-sreen mode
+If set to `true`, the widget will enter fullscreen mode.
 
-#### Example - enable full-screen
+#### Example - enable fullscreen
 
     <div id="mediaplayer" />
     <script>
@@ -68,7 +68,7 @@ If set to `true` the widget will enter in full-sreen mode
 
 ### media `Object`
 
-The object which holds the information about the media that will be played by the control
+The object which holds the information about the media that will be played by the control.
 
 #### Example - specify a video
 
@@ -81,7 +81,7 @@ The object which holds the information about the media that will be played by th
 
 ### media.source `String`
 
-String or an array of objects that hold the URL\URLs to the videos
+String or an array of objects that hold the URL or URLs of the videos.
 
 #### Example - specify a video
 
@@ -97,8 +97,8 @@ String or an array of objects that hold the URL\URLs to the videos
     <div id="mediaplayer" />
     <script>
     $("#mediaplayer").kendoMediaPlayer({
-        media: { 
-            title: "Digital Transformation: A New Way of Thinking", 
+        media: {
+            title: "Digital Transformation: A New Way of Thinking",
             source: [ { quality: "480p", url: "The480pVideoURL" }, { quality: "720p", url: "The720pVideoURL" } ]
         }
     });
@@ -106,7 +106,7 @@ String or an array of objects that hold the URL\URLs to the videos
 
 ### media.title `String`
 
-Specifies the title of the media that will be played
+Specifies the title of the media that will be played.
 
 #### Example - specify a video
 
@@ -119,37 +119,37 @@ Specifies the title of the media that will be played
 
 ### messages `Object`
 
-The object which holds the localization strings
+The object which holds the localization strings.
 
-### messages.pause `String` 
+### messages.pause `String`
 
-Pause button tooltip message
+**Pause** button tooltip message.
 
-### messages.play `String` 
+### messages.play `String`
 
-Play button tooltip message
+**Play** button tooltip message.
 
-### messages.mute `String` 
+### messages.mute `String`
 
-Mute button tooltip message
+**Mute** button tooltip message.
 
-### messages.unmute `String` 
+### messages.unmute `String`
 
-Unmute button tooltip message
+**Unmute** button tooltip message.
 
-### messages.quality `String` 
+### messages.quality `String`
 
-Quality button tooltip message
+**Quality** button tooltip message.
 
-### messages.fullscreen `String` 
+### messages.fullscreen `String`
 
-Fullscreen button tooltip message
+**Fullscreen** button tooltip message.
 
 ### mute `Boolean` *(default: false)*
 
-If set to `true` the video will be played without sound
+If set to `true`, the video will be played without sound.
 
-#### Example - enable full-screen
+#### Example - enable fullscreen
 
     <div id="mediaplayer" />
     <script>
@@ -161,7 +161,7 @@ If set to `true` the video will be played without sound
 
 ### navigatable `Boolean` *(default: false)*
 
-If set to `true` will enable the keyboard navigation for the widget
+If set to `true`, the option enables the keyboard navigation for the widget.
 
 #### Example - keyboard navigation
 
@@ -175,7 +175,7 @@ If set to `true` will enable the keyboard navigation for the widget
 
 ### volume `Number` *(default: 100)*
 
-A value between 0 and 100 that specifies the volume of the video 
+A value between 0 and 100 that specifies the volume of the video.
 
 #### Example - set volume
 
@@ -191,7 +191,7 @@ A value between 0 and 100 that specifies the volume of the video
 
 ### fullScreen
 
-Gets or Sets the full-screen mode of the widget
+Gets or sets the fullscreen mode of the widget.
 
 #### Example
 
@@ -203,9 +203,9 @@ Gets or Sets the full-screen mode of the widget
     });
     // get a reference to the media player widget
     var mediaPlayer = $("#mediaplayer").data("kendoMediaPlayer");
-    // check if the media player is currently in full-screen mode
+    // check if the media player is currently in fullscreen mode
     mediaPlayer.fullScreen();
-    // force the widget to enter full-screen
+    // force the widget to enter fullscreen
     mediaPlayer.fullScreen(true);
     </script>
 
@@ -213,11 +213,11 @@ Gets or Sets the full-screen mode of the widget
 
 ##### value `Boolean`
 
-The value that indicates whether the widget should enter\exit full-screen
+The value that indicates whether the widget should enter or exit fullscreen.
 
 ### volume
 
-Gets or Sets a value between 0 and 100 that specifies the volume of the video 
+Gets or sets a value between 0 and 100 that specifies the volume of the video.
 
 #### Example
 
@@ -239,11 +239,11 @@ Gets or Sets a value between 0 and 100 that specifies the volume of the video
 
 ##### value `Number`
 
-The value between 0 and 100 that specifies the volume of the player
+The value between 0 and 100 that specifies the volume of the player.
 
 ### mute
 
-The value that indicates whether player is muted
+The value that indicates whether the player is muted.
 
 #### Example
 
@@ -267,11 +267,11 @@ The value that indicates whether player is muted
 
 ##### value `Boolean`
 
-The value indicates if sound should be muted
+The value indicates if the sound has to be muted.
 
 ### isEnded
 
-Gets a value indicating whether the media has finished playing
+Gets a value indicating whether the media has finished playing.
 
 #### Example
 
@@ -289,7 +289,7 @@ Gets a value indicating whether the media has finished playing
 
 ### isPaused
 
-Gets a value indicating whether the media is paused, stopped or ended
+Gets a value indicating whether the media is paused, stopped, or ended.
 
 #### Example
 
@@ -303,11 +303,11 @@ Gets a value indicating whether the media is paused, stopped or ended
     var mediaPlayer = $("#mediaplayer").data("kendoMediaPlayer");
     // check if the video has paused
     mediaPlayer.isPaused();
-    </script> 
+    </script>
 
 ### isPlaying
 
-Gets a value indicating whether the media is currently playing
+Gets a value indicating whether the media is currently playing.
 
 #### Example
 
@@ -325,7 +325,7 @@ Gets a value indicating whether the media is currently playing
 
 ### pause
 
-Halts the video currently played video
+Pauses the currently played video.
 
 #### Example
 
@@ -343,7 +343,7 @@ Halts the video currently played video
 
 ### play
 
-Forces the video to start playing
+Forces the video to start playing.
 
 #### Example
 
@@ -360,7 +360,7 @@ Forces the video to start playing
 
 ### seek
 
-Proceeds the video to a certain time
+Proceeds the video to a certain time.
 
 #### Example
 
@@ -378,13 +378,13 @@ Proceeds the video to a certain time
 
 #### Parameters
 
-##### miliseconds `Number`
+##### milliseconds `Number`
 
-The time offset in miliseconds
+The time offset in milliseconds.
 
 ### stop
 
-Stops the currently played video
+Stops the currently played video.
 
 #### Example
 
@@ -402,7 +402,7 @@ Stops the currently played video
 
 ### titlebar
 
-Gets a reference to the title bar
+Gets a reference to the title bar.
 
 #### Example
 
@@ -420,7 +420,7 @@ Gets a reference to the title bar
 
 ### toolbar
 
-Gets a reference to the toolbar
+Gets a reference to the toolbar.
 
 #### Example
 
@@ -534,7 +534,7 @@ The event handler function context (available via the `this` keyword) will be se
 
 ### volumeChange
 
-This event if fired upon changing the volume level.
+This event is fired upon changing the volume level.
 
 The event handler function context (available via the `this` keyword) will be set to the widget instance.
 

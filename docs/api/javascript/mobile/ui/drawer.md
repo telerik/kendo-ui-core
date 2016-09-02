@@ -373,7 +373,7 @@ The widget instance which fired the event.
 
 ### visible `Boolean`
 
-Holds information about the current state of the Drawer. If it is currenlty opened then the visible field will be set to true.
+Holds information about the current state of the Drawer. If it is currently opened then the visible field will be set to true.
 
 #### Example - get the current Drawer state
 

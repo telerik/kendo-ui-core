@@ -19,7 +19,7 @@ Memory leak reports are not unique to Kendo UI directives. The [Angular JS repos
 
 **Takeaways**
 
-- Use а new, clean Chrome profile for testing, because extensions might cause false leaks. Incognito mode works as well. Note that ad blockers represent quite a common cause.
+- Use a new, clean Chrome profile for testing, because extensions might cause false leaks. Incognito mode works as well. Note that ad blockers represent quite a common cause.
 - Triggering the garbage collect causes the collection of many leaked, detached DOM nodes. If this is not the case, then a real problem is present.
 - According to Igor, you must start the Chrome browser with `--js-flags="--nocrankshaft --noopt"`. However, the Kendo UI test cases did not show any effect of these flags.
 

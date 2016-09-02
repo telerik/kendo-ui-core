@@ -1286,7 +1286,7 @@ The height (in a vertical layout) or width (in a horizontal layout) between the 
 
 In the **force-directed layout** this setting defines the optimal length between 2 nodes, which directly correlates to the state of the link between them. If a link is longer than there will be a force pulling the nodes together, if the link is shorter the force will push the nodes apart. The optimal length is more and indication in the algorithm than a guarantee that all nodes will be at this distance. The result of the layout is really a combination of the incidence structure of the diagram, the initial topology (positions of the nodes) and the number of iterations.
 
-In the **layered layout** it defines the minimum distance between nodes on the same level. Due to the nature of the algorithm this distance will only be respected if the the whole crossing of links and optimimzation does not induce a shift of the siblings.
+In the **layered layout** it defines the minimum distance between nodes on the same level. Due to the nature of the algorithm this distance will only be respected if the the whole crossing of links and optimization does not induce a shift of the siblings.
 
 *This setting is specific to the force-directed layout and layered layout*
 
@@ -1424,7 +1424,7 @@ Defines the pannable key. The available values are:
 * "shift" - The activation key will be "ctrl"
 * "alt" - The activation key will be "ctrl"
 
-> This option is not aplicable for mobile defices
+> This option is not applicable for mobile devices.
 
 ### pdf `Object`
 
@@ -1807,7 +1807,7 @@ Defines the selectable key. The available values are:
 * "shift" - The activation key will be "ctrl"
 * "alt" - The activation key will be "ctrl"
 
-> This option is not aplicable for mobile defices
+> This option is not applicable for mobile devices.
 
 ### selectable.multiple `Boolean` *(default: true)*
 
@@ -1898,7 +1898,7 @@ The connector name.
 
 ### shapeDefaults.connectors.position `Function`
 
-The function that positions the connector. The function is passed a shape and should return a kendo.dataviz.diagram.Point holding the connector position as result.
+The function that positions the connector. The function is passed a shape and should return a `kendo.dataviz.diagram`.Point holding the connector position as result.
 
 ### shapeDefaults.connectors.width `Number` *(default: 8)*
 
@@ -2098,7 +2098,7 @@ Specifies if the shapes can be removed.
 
 ### shapeDefaults.editable.tools `Array`
 
-Specifies the the toolbar tools. Supports all options supported for the [toolbar.items](/api/javascript/ui/toolbar#configuration-items). Predefined tools are:
+Specifies the toolbar tools. Supports all options supported for the [toolbar.items](/api/javascript/ui/toolbar#configuration-items). Predefined tools are:
 
 * "edit" - Selected item can be edit.
 * "delete" - Selected items can be deleted.

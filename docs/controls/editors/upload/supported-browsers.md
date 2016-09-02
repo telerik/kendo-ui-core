@@ -12,7 +12,7 @@ The Kendo UI widget uses progressive enhancement to enable certain features when
 
 The table below lists each Kendo UI feature as supported by the respective browser version.
 
-| Feature                                           | IE  | Firefox  | Chrome | Safari      | Opera   |  Works w/o JavaScript
+| Feature                                           | IE  | Firefox  | Chrome | Safari      | Opera   |  Works without JavaScript
 | ---                                               | --- | ---      | ---    | ---         | ---     |  ---
 | Styled **Upload** button                          | ✓   | ✓        | ✓      | ✓           | ✓      |  ✓
 | Asynchronous upload                               | ✓   | ✓        | ✓      | ✓           | ✓      |  ✕

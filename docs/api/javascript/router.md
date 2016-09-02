@@ -14,7 +14,7 @@ Introduced with Q3 2014. If set to `false`, the router instance will perform cas
 
 If set to true, the router will use the [history pushState API](https://developer.mozilla.org/en-US/docs/Web/Guide/API/DOM/Manipulating_the_browser_history#The_pushState().C2.A0method).
 
-> The history pushState API currently has [limited support accross current browsers](http://caniuse.com/#search=pushstate).
+> The history `pushState` API currently has [limited support across current browsers](http://caniuse.com/#search=pushstate).
 
 
 ### root `String` *(default: "/")*

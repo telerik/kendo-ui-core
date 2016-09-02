@@ -4710,7 +4710,7 @@ The setter is chainable, i.e. returns the map instance.
 ##### center `Array|kendo.dataviz.map.Location`
 
 The location of the new map center.
-An array argument is assumed to be in [Latitude, Lonigude] order.
+An array argument is assumed to be in [Latitude, Longitude] order.
 
 #### Returns
 
@@ -5033,7 +5033,7 @@ Returns the layer (projected) coordinates that correspond to a geographical loca
 ##### location `Array|kendo.dataviz.map.Location`
 
 The geographic location.
-An array argument is assumed to be in [Latitude, Lonigude] order.
+An array argument is assumed to be in [Latitude, Longitude] order.
 
 ##### zoom `Number`
 
@@ -5089,7 +5089,7 @@ Returns the view (relative) coordinates that correspond to a geographical locati
 ##### location `Array|kendo.dataviz.map.Location`
 
 The geographic location.
-An array argument is assumed to be in [Latitude, Lonigude] order.
+An array argument is assumed to be in [Latitude, Longitude] order.
 
 #### Returns
 

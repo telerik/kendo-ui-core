@@ -387,7 +387,7 @@ Text that appears when ListView is refreshing (applies only if `pullToRefresh` i
 
 ### messages.releaseTemplate `String` *(default: "Release to refresh")*
 
-Text that appears when scroller is pulled beyound the threshold (applies only if `pullToRefresh` is set to `true`).
+Text that appears when scroller is pulled beyond the threshold (applies only if `pullToRefresh` is set to `true`).
 
 #### Example
 

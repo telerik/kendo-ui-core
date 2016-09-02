@@ -154,7 +154,7 @@ While older browsers, such as IE 6, 7, or 8, render semantic tags in pages, they
 
 ### Use Modernizr
 
-[Modernizr](http://modernizr.com/) is a feature detection library that helps developers know what features are supported at runtime. Additionally, Modernizer includes a pollyfill out of the box for the scenario created above with un- styled semantic tags.
+[Modernizr](http://modernizr.com/) is a feature detection library that helps developers know what features are supported at runtime. Additionally, Modernizer includes a pollyfill out of the box for the scenario created above with unstyled semantic tags.
 
 Return to Visual Studio and stop the application if necessary. Right-click the project. Select **Add Library Package Reference** > **Online** and search for Modernizr.
 

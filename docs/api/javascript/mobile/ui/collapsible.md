@@ -130,7 +130,7 @@ Sets the icon position in the header of the collapsible widget. Possible values 
 
 ### inset `Boolean`*(default: "false")*
 
-Forses inset appearance - the collapsible panel is padded from the View and receives rounded corners.
+Forces inset appearance - the collapsible panel is padded from the View and receives rounded corners.
 
 #### Example
 

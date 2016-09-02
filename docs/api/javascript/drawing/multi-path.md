@@ -10,7 +10,8 @@ Using composite paths is more efficient than drawing the paths individually.
 The interface of MultiPath mirrors that of [Path](path),
 but each moveTo command starts a new sub-path.
 
-#### Example - drawng a multi-path
+#### Example - drawing a multi-path
+
     <div id="surface" style="width: 250px; height: 250px;"></div>
     <script>
         var draw = kendo.drawing;

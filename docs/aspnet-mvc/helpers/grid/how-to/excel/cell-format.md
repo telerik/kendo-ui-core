@@ -13,7 +13,7 @@ The page on how to [create a custom number format](https://support.office.com/en
 
 To see the example on how to format the cells during the export of the Grid to Excel, refer to [this project](https://github.com/telerik/ui-for-aspnet-mvc-examples/tree/master/grid/cell-format-excel).
 
-> **Importnat**
+> **Important**
 >
 > This project requires UI for ASP.NET MVC version 2014.3.1125 and later. Earlier versions do not have the `ExcelExport` event exposed through the fluent API.
 
