@@ -1,21 +1,21 @@
 ---
 title: Overview
-page_title: Overview | Telerik UI for ASP.NET Core MVC
-description: "Download and install Telerik UI for ASP.NET Core MVC (aka MVC 6), and run the sample application."
-previous_url: /aspnet-mvc/aspnetmvc-apps/mvc-6/introduction
+page_title: Overview | Telerik UI for ASP.NET Core
+description: "Download and install Telerik UI for ASP.NET Core (aka MVC 6 or ASP.NET Core MVC), and run the sample application."
+previous_url: /aspnet-mvc/aspnetmvc-apps/mvc-6/introduction, /aspnet-mvc/mvc-6/introduction
 slug: overview_aspnetmvc6_aspnetmvc
 position: 1
 ---
 
-# Overview of Telerik UI for ASP.NET Core MVC
+# Overview of Telerik UI for ASP.NET Core
 
-This article demonstrates how to use Telerik UI for ASP.NET MVC in ASP.NET Core MVC applications.
+This article demonstrates how to use Telerik UI for ASP.NET MVC in ASP.NET Core applications.
 
 ## The Basics
 
 ### Supported Environments
 
-Telerik UI for ASP.NET Core MVC targets the stable release of the ASP.NET 5 framework. At the time of this writing this is 1.0 RTM.
+Telerik UI for ASP.NET Core targets the stable release of the ASP.NET 5 framework. At the time of this writing this is 1.0 RTM.
 
 The target runtime is [CoreCLR](https://github.com/dotnet/coreclr). The full desktop CLR is also supported.
 
@@ -67,9 +67,9 @@ To be able to run the sample application on Docker Engine (multi-platform), make
 
 ## See Also
 
-Other articles on Telerik UI for ASP.NET MVC in ASP.NET Core MVC applications:
+Other articles on Telerik UI for ASP.NET MVC in ASP.NET Core applications:
 
-* [Get Started with Telerik UI for ASP.NET MVC in ASP.NET Core MVC Projects]({% slug gettingstarted_aspnetmvc6_aspnetmvc %})
-* [Get Started with Telerik UI for ASP.NET MVC in ASP.NET Core MVC Projects on Linux]({% slug gettingstartedlinux_aspnetmvc6_aspnetmvc %})
-* [Known Issues with Telerik UI for ASP.NET Core MVC]({% slug knownissues_aspnetmvc6_aspnetmvc %})
-* [Tag Helpers for ASP.NET Core MVC]({% slug taghelpers_aspnetmvc6_aspnetmvc %})
+* [Get Started with Telerik UI for ASP.NET MVC in ASP.NET Core Projects]({% slug gettingstarted_aspnetmvc6_aspnetmvc %})
+* [Get Started with Telerik UI for ASP.NET MVC in ASP.NET Core Projects on Linux]({% slug gettingstartedlinux_aspnetmvc6_aspnetmvc %})
+* [Known Issues with Telerik UI for ASP.NET Core]({% slug knownissues_aspnetmvc6_aspnetmvc %})
+* [Tag Helpers for ASP.NET Core]({% slug taghelpers_aspnetmvc6_aspnetmvc %})
