@@ -324,7 +324,7 @@ $.extend(true, kendo.ui.Editor.prototype.options.messages,{
   "formatting": "Format",
   "viewHtml": "View HTML",
   "dialogUpdate": "Update",
-  "insertFile": "Insert file"
+  "insertFile": "Insérer un Fichier"
 });
 }
 

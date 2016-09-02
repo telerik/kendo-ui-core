@@ -1,11 +1,11 @@
 ---
-title: Bind the Grid to the SignalR Hub
-page_title: Bind the Grid to the SignalR Hub | Kendo UI Grid HtmlHelper
+title: Bind Grids to SignalR Hub
+page_title: Bind Grids to SignalR Hub | Kendo UI Grid HtmlHelper
 description: "Configure the Kendo UI Grid to show real-time push-notifications from SignalR(v2) with local hub."
 slug: howto_bindgridtosignalrhub_gridaspnetmv
 ---
 
-# Bind the Grid to the SignalR Hub
+# Bind Grids to SignalR Hub
 
 To see the example on real-time push-notifications from SignalR(v2) with a local hub, refer to [this project](https://github.com/telerik/ui-for-aspnet-mvc-examples/tree/master/grid/signalR-bound-grid).
 

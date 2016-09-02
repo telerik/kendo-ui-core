@@ -431,6 +431,11 @@ html .km-pane-wrapper .k-header
     background-color: @header-background-color;
 }
 
+.k-mediaplayer-toolbar 
+{
+    background-color: fade(@header-background-color, 80%);
+}
+
 /* icons */
 .k-icon:hover,
 .k-state-hover .k-icon,
@@ -715,7 +720,7 @@ html .km-pane-wrapper .k-header
 .k-button-bare {
 	&.k-state-focused .k-font-icon,
 	&:focus .k-font-icon {
-		box-shadow: 0 0 3px @accent;
+		text-shadow: 0 0 3px currentColor;
 	}
 }
 

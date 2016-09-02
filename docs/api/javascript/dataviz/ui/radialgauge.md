@@ -475,7 +475,7 @@ Allows setting or getting multiple Gauge values at once.
 
 #### Parameters
 
-##### values `Array`
+##### values `Array` *(optional)*
 An array of values to be set.
 
 #### Returns

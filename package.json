@@ -33,7 +33,7 @@
     "gulp-jshint": "^1.11.2",
     "gulp-less": "~3.0.3",
     "gulp-logger": "~0.0.2",
-    "gulp-minify-css": "~1.2.1",
+    "gulp-clean-css": "^2.0.0",
     "gulp-plumber": "~1.0.1",
     "gulp-progeny": "~0.1.2",
     "gulp-rename": "~1.2.2",

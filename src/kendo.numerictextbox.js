@@ -530,12 +530,16 @@ var __meta__ = { // jshint ignore:line
         },
 
         _paste: function(e) {
-            var that = this,
-                element = e.target,
-                value = element.value;
+            var that = this;
+            var element = e.target;
+            var value = element.value;
+            var numberFormat = that._format(that.options.format);
 
             setTimeout(function() {
-                if (that._parse(element.value) === NULL) {
+                var result = that._parse(element.value);
+                var isValid = that._numericRegex(numberFormat).test(element.value);
+
+                if (result === NULL || that._adjust(result) !== result || !isValid) {
                     that._update(value);
                 }
             });

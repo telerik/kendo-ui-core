@@ -494,7 +494,7 @@
                     zIndex = +wrapper.css(ZINDEX),
                     originalZIndex = zIndex;
 
-                that._center();
+                that.center();
 
                 $(KWINDOW).each(function(i, element) {
                     var windowObject = $(element),
@@ -545,6 +545,15 @@
                 }
 
                 return that;
+            },
+
+            center: function() {
+                var browser = kendo.support.browser;
+
+                if (browser.msie && Math.floor(browser.version) <= 8) {
+                    this.wrapper.removeClass('k-dialog-centered');
+                    this._center();
+                }
             },
 
             _center: function() {
@@ -909,7 +918,7 @@
         };
 
         templates = {
-            wrapper: template("<div class='k-widget k-dialog k-window' role='dialog' />"),
+            wrapper: template("<div class='k-widget k-dialog k-window k-dialog-centered' role='dialog' />"),
             action: template("<li class='k-button# if (data.primary) { # k-primary# } #' role='button'></li>"),
             titlebar: template(
                 "<div class='k-window-titlebar k-header'>" +
@@ -920,7 +929,7 @@
             actionbar: template("<ul class='k-dialog-buttongroup k-dialog-button-layout-#= buttonLayout #' role='toolbar' />"),
             //actionbar: "<ul class='k-dialog-buttongroup k-dialog-button-layout-normal' role='toolbar' />",
             overlay: "<div class='k-overlay' />",
-            alertWrapper: template("<div class='k-widget k-dialog k-window' role='alertdialog' />"),
+            alertWrapper: template("<div class='k-widget k-dialog k-window k-dialog-centered' role='alertdialog' />"),
             alert: "<div />",
             confirm: "<div />",
             prompt: "<div />",

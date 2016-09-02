@@ -24,8 +24,8 @@ $.extend(true, kendo.ui.ColorPicker.prototype.options.messages,{
 if (kendo.ui.ColumnMenu) {
 kendo.ui.ColumnMenu.prototype.options.messages =
 $.extend(true, kendo.ui.ColumnMenu.prototype.options.messages,{
-  "sortAscending": "Roustoucí",
-  "sortDescending": "Klesající",
+  "sortAscending": "Třídit vzestupně",
+  "sortDescending": "Třídit sestupně",
   "filter": "Filtr",
   "columns": "Sloupce",
   "done": "Hotovo",
@@ -145,7 +145,11 @@ $.extend(true, kendo.ui.FilterCell.prototype.options.operators,{
     "startswith": "Začíná na",
     "contains": "Obsahuje",
     "doesnotcontain": "Neobsahuje",
-    "endswith": "Končí na"
+    "endswith": "Končí na",
+    "isnull": "Je null",
+    "isnotnull": "Není null",
+    "isempty": "Je prázdná",
+    "isnotempty": "Není prázdná"
   },
   "date": {
     "eq": "Je rovno",
@@ -153,7 +157,9 @@ $.extend(true, kendo.ui.FilterCell.prototype.options.operators,{
     "gt": "Začíná po",
     "gte": "Začíná od",
     "lt": "Končí po",
-    "lte": "Končí do"
+    "lte": "Končí do",
+    "isnull": "Je null",
+    "isnotnull": "Není null"
   },
   "number": {
     "eq": "Je rovno",
@@ -161,11 +167,15 @@ $.extend(true, kendo.ui.FilterCell.prototype.options.operators,{
     "gte": "Je větší nebo rovno",
     "lt": "Je menší než",
     "lte": "Je menší nebo rovno",
-    "neq": "Je různá od"
+    "neq": "Je různá od",
+    "isnull": "Je null",
+    "isnotnull": "Není null"
   },
   "enums": {
     "eq": "Je rovno",
-    "neq": "Je různá od"
+    "neq": "Je různá od",
+    "isnull": "Je null",
+    "isnotnull": "Není null"
   }
 });
 }

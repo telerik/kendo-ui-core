@@ -25,7 +25,7 @@ Each bundle package contains a `vsdoc` directory, which contains a `vsdoc.js` an
 
 ## Features
 
-### Widget Initialization Configuration Options
+### Options for Widget Initialization
 
 ![jquery plugin](/images/vsdoc/jquery-plugin.png)
 

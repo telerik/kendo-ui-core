@@ -299,6 +299,20 @@
         equal(data.value, "");
     });
 
+    test("text method passes optionLabel text to the template", 1, function() {
+        dropdownlist = input.kendoDropDownList({
+            optionLabel: "test",
+            dataTextField: "text",
+            dataValueField: "value",
+            dataSource: [{ text: "Chai", value: 1 }],
+            value: 1
+        }).data("kendoDropDownList");
+
+        dropdownlist.text(null);
+
+        equal(dropdownlist.text(), "test");
+    });
+
     test('enable(false) should disable dropDownList', function() {
         dropdownlist = new DropDownList(input);
 

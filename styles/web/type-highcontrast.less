@@ -82,7 +82,7 @@
 @shadow-color: rgba(0, 0, 0, 0.7);
 @shadow-inset-color: darken(@base, 9%);
 @link-text-color: @normal-text-color;
-@upload-progress-background-color: @info;
+@upload-progress-background-color: @normal-text-color;
 @upload-progress-text-color: @normal-text-color;
 @upload-success-background-color: @success;
 @upload-success-text-color: @normal-text-color;
@@ -1222,6 +1222,54 @@ div.k-filebrowser-dropzone em
 .k-file-error .k-progress
 {
     background-color: @upload-error-background-color;
+}
+
+.k-file-extension-wrapper,
+.k-multiple-files-extension-wrapper {
+    color: @header-text-color;
+    border-color: @header-text-color;
+}
+
+.k-file-invalid .k-file-name-invalid {
+    color: @error;
+}
+
+.k-file-invalid-extension-wrapper,
+.k-multiple-files-invalid-extension-wrapper {
+    color: @error;
+    border-color: @error;
+}
+
+.k-file-extension-wrapper:before,
+.k-multiple-files-extension-wrapper:before {
+    background-color: @active-background-color;
+    border-color: transparent transparent @header-text-color @header-text-color;
+}
+
+.k-file-invalid-extension-wrapper:before,
+.k-multiple-files-invalid-extension-wrapper:before {
+    background-color: @active-background-color;
+    border-color: transparent transparent @error @error;
+}
+
+.k-multiple-files-extension-wrapper:after {
+    border-top-color: @header-text-color;
+    border-left-color: @header-text-color;
+}
+
+.k-multiple-files-invalid-extension-wrapper:after {
+    border-top-color: @error;
+    border-left-color: @error;
+}
+
+.k-file-size,
+.k-file-information,
+.k-file-validation-message {
+    color: @header-text-color;
+}
+
+.k-upload .k-upload-selected {
+    border-color: @widget-border-color;
 }
 
 /* ImageBrowser */

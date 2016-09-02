@@ -65,16 +65,15 @@ Telerik UI for ASP.NET MVC contains the following directories:
 * `js`&mdash;These are the minified JavaScript files.
 * `styles`&mdash;The minified CSS files and images used by the themes.
 * `src`&mdash;The complete JavaScript, CSS, and C# source code. Note that this directory is not available in the trial version.
-* `spreadsheet`&mdashl;[`Telerik.Web.Spreadsheet`]({% slug serverside_processing_spreadsheet_widget %}) assembly and its dependencies from Telerik Document Processing library.
+* `spreadsheet`&mdash;[`Telerik.Web.Spreadsheet`]({% slug serverside_processing_spreadsheet_widget %}) assembly and its dependencies from Telerik Document Processing library.
 * `wrappers\aspnetmvc\Binaries\MVC3`&mdash;The assemblies for the ASP.NET MVC 3 applications.
 * `wrappers\aspnetmvc\Binaries\MVC4`&mdash;The assemblies for the ASP.NET MVC 4 applications.
 * `wrappers\aspnetmvc\Binaries\MVC5`&mdash;The assemblies for the ASP.NET MVC 5 applications.
 * `wrappers\aspnetmvc\Examples\VS2012`&mdash;The ASP.NET MVC 4 sample application built with Visual Studio 2012.
 * `wrappers\aspnetmvc\Examples\VS2013`&mdash;The ASP.NET MVC 5 sample application built with Visual Studio 2013.
 * `wrappers\aspnetmvc\Examples\VS2015`&mdash;The ASP.NET MVC 5 sample application built with Visual Studio 2015.
-* `wrappers\aspnetmvc\Examples\MVC6`&mdash;The ASP.NET Core MVC Beta sample application built with Visual Studio 2015.
+* `wrappers\aspnetmvc\Examples\AspNet.Core`&mdash;The ASP.NET Core MVC sample application built with Visual Studio 2015.
 * `wrappers\aspnetmvc\EditorTemplates`&mdash;The ready-to-use editor templates based on the Kendo UI widgets.
-* `wrappers\aspnetmvc\LegacyThemes`&mdash;The themes ported from Telerik Extensions for ASP.NET MVC. Note that this is a discontinued product, superseded by Telerik UI for ASP.NET MVC.
 * `wrappers\aspnetmvc\Scaffolding`&mdash;The Kendo UI Scaffolder Visual Studio extension. It enables generating the Kendo UI MVC wrapper widgets declarations inside Visual Studio projects and is added in the Kendo UI Q1 2015 release.
 
 ## Sample Application

@@ -366,10 +366,22 @@ textarea.k-textbox:hover,
 }
 
 /* Bare Button */
-.k-button-bare {
-	&.k-state-focused .k-font-icon,
-	&:focus .k-font-icon {
-		text-shadow: 0 0 3px currentColor;
+html body .k-button-bare {
+	&.k-state-focused,
+	&:focus {
+		position: relative;
+
+		&:before {
+			content: "";
+			background-color: currentcolor;
+			opacity: 0.12;
+			border-radius: inherit;
+			height: 100%;
+			width: 100%;
+			position: absolute;
+			left: 0;
+			top: 0;
+		}
 	}
 }
 
@@ -377,8 +389,16 @@ html .k-mediaplayer-toolbar .k-button-bare {
 	&:active,
 	&.k-state-active,
 	&.k-state-active:hover {
-	    color: @accent;
-    }
+		color: @accent;
+
+		&:before {
+			opacity: 0.24;
+		}
+	}
+}
+
+.k-mediaplayer-toolbar .k-mediaplayer-seekbar {
+	top: -14px;
 }
 
 /* Menu */

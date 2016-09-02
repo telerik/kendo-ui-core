@@ -2013,6 +2013,25 @@ The function which converts the request parameters to a format suitable for the 
 > * The `parameterMap` method is often used to encode the parameters in JSON format.
 > * The `parameterMap` function will not be called when using custom functions for the read, update, create, and destroy operations.
 
+If a [`transport.read.data`](#configuration-transport.read.data) function is used together with `parameterMap`, do not forget to preserve the result from the data function that will be received in the parameterMap arguments. An example is provided below. Generally, the parameterMap function is designed to transform the request payload, not add new parameters to it.
+
+```pseudo
+transport: {
+  read: {
+    url: "my-data-service-url",
+    data: function () {
+      return {
+        foo: 1
+      };
+    }
+  },
+  parameterMap: function (data, type) {
+    // if type is "read", then data is { foo: 1 }, we also want to add { "bar": 2 }
+    return kendo.stringify($.extend({ "bar": 2 }, data));
+  }
+}
+```
+
 #### Parameters
 
 ##### data `Object`

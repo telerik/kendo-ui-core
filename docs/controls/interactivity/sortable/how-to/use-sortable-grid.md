@@ -176,6 +176,12 @@ The main milestones of the approach are:
            var widget = input.data("kendoNumericTextBox");
            var model = e.model;
 
+           if(widget) {
+                widget.bind("spin", function(e) {
+                  e.sender.trigger("change");
+                });
+              }
+
            input.on("keyup", function() {
              widget.value(input.val());
              widget.trigger("change");
@@ -217,7 +223,7 @@ The main milestones of the approach are:
                view[i].dirty = true;
              }
            } else {
-             for (var i = oldIndex 1; i >= newIndex; i--) {
+             for (var i = oldIndex - 1; i >= newIndex; i--) {
                view[i].Order++;
                view[i].dirty = true;
              }

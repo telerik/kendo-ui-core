@@ -718,7 +718,19 @@ html .km-pane-wrapper .k-header
 html body .k-button-bare {
 	&.k-state-focused,
 	&:focus {
-		box-shadow: @button-focused-shadow inset !important;
+		position: relative;
+
+		&:before {
+			content: "";
+			background-color: currentcolor;
+			opacity: 0.12;
+			border-radius: inherit;
+			height: 100%;
+			width: 100%;
+			position: absolute;
+			left: 0;
+			top: 0;
+		}
 	}
 }
 
@@ -727,6 +739,10 @@ html .k-mediaplayer-toolbar .k-button-bare {
 	&.k-state-active,
 	&.k-state-active:hover {
 		color: @accent;
+
+		&:before {
+			opacity: 0.24;
+		}
 	}
 }
 
@@ -3951,16 +3967,10 @@ div.k-scheduler-marquee:after {
             width: 100%;
             .k-button {
                 display: inline-block;
-                padding: 1.5em 1em 1.5em 1em;
+                padding: 1.5em 0;
                 border-radius: 0;
                 border-bottom: 0;
-                border-width: 1px 0 0 1px;
-                background: none;
-                border-color: @drop-down-border-color;
                 box-shadow: none;
-                &.k-primary {
-                    color: @selected-background;
-                }
             }
             li.k-button:first-child {
             border-bottom-left-radius: @border-radius;

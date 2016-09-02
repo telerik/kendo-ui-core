@@ -8,9 +8,9 @@ position: 9
 
 # PDF Export
 
-As of the [Kendo UI Q3 2014 (2014.3.1119) release](http://www.telerik.com/support/whats-new/kendo-ui/release-history/q3-2014) the Grid widget provides a built-in PDF export functionality.
+As of the [Kendo UI Q3 2014 (2014.3.1119) release](http://www.telerik.com/support/whats-new/kendo-ui/release-history/q3-2014), the Grid widget provides a built-in PDF export functionality.
 
-## Set Up
+## Setup
 
 To enable PDF export, include the corresponding toolbar command and configure the export settings.
 
@@ -150,20 +150,20 @@ The example below demonstrates how to export the Grid with a fixed paper size.
 
 ### Page Template
 
-Starting from the 2016.2 release, the Grid allows you to specify a page template.
-The template can be used to position the content, add headers, footers and other elements.
-Styling is done using CSS. The template will be positioned in a container with the specified
-paper size during export.
+As of the Kendo UI 2016.2 release, the Grid allows you to specify a page template. It is possible to use the template to position the content, add headers, footers, and other elements. The styling of the exported document is done by using CSS. During the PDF export, the template is positioned in a container with the specified paper size.
 
-Available template variables include:
-* pageNumber
-* totalPages
+The following page template variables are available:
+* `pageNumber`
+* `totalPages`
 
 > **Important**
 >
-> Using a template requires setting paper size. See above.
+> It is required to set the paper size when you use a page template. For more information, refer to the section on [page templates](#page-templates).
 
-###### Example - Export With Page Template
+The example below demonstrates how to export a Grid by using a page template.
+
+###### Example
+
 ```html
     <style>
         body {
@@ -388,16 +388,13 @@ Note that even with the proper CORS headers, IE9 will not be able to load images
 
 ## See Also
 
-Other articles on the Kendo UI Grid:
-
 * [Grid JavaScript API Reference](/api/javascript/ui/grid)
 * [Walkthrough of the Grid]({% slug walkthrough_kendoui_grid_widget %})
-* [Editing Functionality]({% slug editing_kendoui_grid_widget %})
+* [Editing Functionality of the Grid]({% slug editing_kendoui_grid_widget %})
 * [Appearance of the Grid]({% slug appearance_kendoui_grid_widget %})
-* [Remote Data Binding]({% slug remote_data_binding_grid %})
-* [Localization of Messages]({% slug localization_kendoui_grid_widget %})
-* [Adaptive Rendering]({% slug adaptive_rendering_kendoui_grid_widget %})
-* [Export the Grid to Excel]({% slug exporting_excel_kendoui_grid_widget %})
-* [Print the Grid]({% slug exporting_pdf_kendoui_grid_widget %})
+* [Localization of Messages in the Grid]({% slug localization_kendoui_grid_widget %})
+* [Adaptive Rendering of the Grid]({% slug adaptive_rendering_kendoui_grid_widget %})
+* [Export of the Grid to Excel]({% slug exporting_excel_kendoui_grid_widget %})
+* [Printing of the Grid]({% slug exporting_pdf_kendoui_grid_widget %})
 
 For how-to examples on the Kendo UI Grid widget, browse its [**How To** documentation folder]({% slug howto_bindto_telerik_backend_services_grid %}).

@@ -138,29 +138,31 @@ You are able to export the content of your Spreadsheet to Portable Document Form
 | Edit formulas and functions 	| <ol><li>Double-click a cell to display the formula/function in the **Formula Bar**</li> <li>Change the formula/function and press `Enter`</li></ol> |
 | Validate data				| Data validation allows you to predetermine the format and constrain the value of the content of a single cell or cells within a range, column, or row: <ol><li>Select a cell or a range of cells</li> <li>In the **Menu** click **Data** > **Data Validation** to open the **Data Validation** window</li> <li>Choose the criterion from the drop-down list of options.</li> <li>A new window with criteria-specific options appears. Use the prompts and drop-down options to set the rules for modifying the content.</li></ol> |
 | Choose data from predefined values | <p>The Spreadsheet supports the implementation of custom editors. They facilitate your input of data in a cell by providing you with predefined date and list values that are already placed in the necessary format.</p> <p>For example, if you are asked to fill in a date in a cell, clicking the icon of the custom editor of that cell provides you with a calendar. Choose the desired date without bothering about the syntax you are supposed to use to fill it in.</p> <ol><li>Select a cell.</li> <li>An icon appears right next to it. Click on it to see the options that are predefined for you to choose from. |
+| Define names for cells and ranges of cells | <p>It is possible to define a custom name for a cell or a range of cells in the Spreadsheet. As a result, instead of typing the range in formulas later on, you can directly refer to the range by its name.</p> <ol><li>Select a cell or a range of cells by using the mouse. For example, select the `A1:C3` range.</li> <li>Click on the **Name Box** of the Spreadsheet.</li> <li>Type in the name of the range that is currently selected. For example, name the range **MyRange**.</li> <li>Press `Enter`.</li> <li>Go to a cell outside the range and type in the **Formula Bar** a formula which refers to the range by its name. For example, `=SUM(MyRange)+2`.</li></ol> |
+| Delete names of cells and ranges of cells | <ol><li>Select the name of the cell or the range of cells from the **Name Box**.</li> <li>Click **X**.</li></ol> |
 
 <br>
 
 > **Important**
-> * Whenever **Cancel** is displayed as a command, click it if you want to close an active drop-down list or menu, or exit an open window, and return to the worksheet.
-> * Whenever **Apply** is displayed as a command, click it if you want an option you selected to be applied.
+> * To close an active drop-down list or menu or exit an open window and then return to the worksheet, click **Cancel** whenever displayed as a command.
+> * To apply an options you have already selected, click **Apply** whenever displayed as a command.
 
 ## Formulas and Functions
 
-The Spreadsheet widget supports many of the Excel formulas and functions as seen in the [List of Formulas and Functions](/web/spreadsheet/end-user/list-of-formulas).
+The Spreadsheet supports many of the Excel formulas and functions as seen in the [List of Formulas and Functions]({% slug list_offormulas_andfunctions_spreadsheet_widget %}).
 
 ## Keyboard Navigation
 
-The Spreadsheet widget supports many of the Excel keyboard shortcuts as shown in the [List of Keyboard Shortcuts](/web/spreadsheet/end-user/list-of-shortcuts).
+The Spreadsheet supports many of the Excel keyboard shortcuts as seen in the [List of Keyboard Shortcuts]({% slug list_ofkeyboard_shortcuts_spreadsheet_widget %}).
 
 ## Known Limitations
 
-- Because of specific requirements, browsers may not support the **Paste** command when initiated from the context menu or the **Toolbar**. If you try to apply the command in either of these ways, a popup message is displayed informing you about the limitation. Use the keyboard navigation to achieve the result.
-- Formulas which are very deeply nested might produce a stack overflow error. For example, `=sin(cos(sin(cos(...))))` or `=A1+A2+A3+...+A200`&mdash;even though the latter does not seem nested&mdash;is internally treated like `=((((...(A1+A2)+A3)+A4)+...+)+A200)`).
+- Because of specific requirements, browsers might not support the **Paste** command when it is initiated from the context menu or from the **Toolbar**. If you try to apply the command in either of these ways, a popup message is displayed informing you about the limitation. Use the keyboard navigation to achieve the desired result.
+- Formulas that are very deeply nested, such as `=sin(cos(sin(cos(...))))` or `=A1+A2+A3+...+A200`, might produce a stack overflow error. Even though the latter does not seem nested, it is internally treated as `=((((...(A1+A2)+A3)+A4)+...+)+A200)`).
 
 **Solution**
 
-Use `SUM` for cases like the second formula demonstrated above. When not possible, avoid nesting more than 100 levels deep. Note that the maximum depth depends on the browser, but 100 is considered to be a safe limit.
+Use `SUM` when your case is similar to the second example of the nested formulas above. If to use `SUM` is not possible, avoid nesting values more than 100 levels deep. Note that the maximum depth depends on the browser, but one hundred is considered to be a safe limit.
 
 ## See Also
 

@@ -72,7 +72,7 @@ For more information on why a widget does not trigger a `change` event, refer to
 
 ## FAQ
 
-### I am using cascading ComboBoxes with the "autoBind: true" option set and I need to pre-set the selected items. How to do that?
+### How to preset the selected items when using cascading ComboBoxes with autoBind: true?
 
 Set the value of the ComboBoxes&mdash;define it before initialization, as demonstrated in the example below.
 
@@ -91,7 +91,7 @@ Set the value of the ComboBoxes&mdash;define it before initialization, as demons
 
 You also can use the [`value`](/api/javascript/ui/combobox#configuration) option.
 
-### I am using ComboBoxes with load on demand (autoBind: false) and I need to pre-set the selected items. How to do that?
+### How to preset the selected items when using cascading ComboBoxes with load on demand (autoBind: false)?
 
 Set the [`value`](/api/javascript/ui/combobox#configuration) and [`text`](/api/javascript/ui/combobox#configuration) options, as demonstrated in the example below.
 
@@ -127,13 +127,13 @@ Set the [`value`](/api/javascript/ui/combobox#configuration) and [`text`](/api/j
        });
     </script>
 
-### The serverFiltering is disabled and the child ComboBox does not work. What is the reason for that?
+### Why the serverFiltering is disabled and the child ComboBox does not work?
 
 When [`serverFiltering`](/api/framework/datasource#configuration) is disabled, the ComboBox does not make any additional requests to the server. Hence, it filters the initial data using the parent's `dataValueField` property. If no items are found, the child ComboBox is left empty.
 
 To use a child ComboBox with disabled server filtering, provide all the necessary data on the client.
 
-### I cannot get the request parameters on the server. What to do now?
+### What to do when I cannot get the request parameters on the server?
 
 Check the format of the request parameters as displayed at the end of the **Initialize Cascading ComboBoxes** section of this article. Modify your server code to get them correctly.
 

@@ -1,11 +1,11 @@
 ---
-title: Display Server Validation Errors in Popup Edit Mode
-page_title: Display Server Validation Errors in Popup Edit Mode | Kendo UI Grid HtmlHelper
+title: Display Server Validation Errors in Popup Editing Mode
+page_title: Display Server Validation Errors in Popup Editing Mode | Kendo UI Grid HtmlHelper
 description: "Show server validation errors in the popup edit mode of the Kendo UI Grid."
 slug: howto_displayservervalidationerrors_gridaspnetmvc
 ---
 
-# Display Server Validation Errors in Popup Edit Mode
+# Display Server Validation Errors in Popup Editing Mode
 
 To see the example on how to display server validation errors in the popup edit mode of the Kendo UI Grid, refer to [this project](https://github.com/telerik/ui-for-aspnet-mvc-examples/tree/master/grid/popup-editing-server-validation).
 

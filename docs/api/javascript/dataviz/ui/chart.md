@@ -73,7 +73,7 @@ The crosshair configuration options.
 
 The color of the crosshair. Accepts a valid CSS color string, including hex and rgb.
 
-### axisDefaults.crosshair.dashType `string` *(default: "solid")*
+### axisDefaults.crosshair.dashType `String` *(default: "solid")*
 
 The dash type of the crosshair.
 
@@ -666,6 +666,10 @@ This will continue until the number of intervals is less than
     });
     </script>
 
+### categoryAxis.autoBaseUnitSteps.milliseconds `Array` *(default: [1, 100, 100])*
+
+The milliseconds unit steps.
+
 ### categoryAxis.autoBaseUnitSteps.seconds `Array` *(default: [1, 2, 5, 15, 30])*
 
 The seconds unit steps.
@@ -747,6 +751,7 @@ between subsequent categories.
 The supported values are:
 
 * "fit"
+* "milliseconds"
 * "seconds"
 * "minutes"
 * "hours"
@@ -883,7 +888,7 @@ The color of the crosshair. Accepts a valid CSS color string, including hex and 
     });
     </script>
 
-### categoryAxis.crosshair.dashType `string` *(default: "solid")*
+### categoryAxis.crosshair.dashType `String` *(default: "solid")*
 
 The dash type of the crosshair.
 
@@ -4951,6 +4956,20 @@ The position of the labels.
 ### categoryAxis.notes.line `Object`
 
 The line of the notes.
+
+### categoryAxis.notes.line.dashType `String` *(default: "solid")*
+
+The dash type of the note line.
+
+The following dash types are supported:
+
+* "dash" - a line consisting of dashes
+* "dashDot" - a line consisting of a repeating pattern of dash-dot
+* "dot" - a line consisting of dots
+* "longDash" - a line consisting of a repeating pattern of long-dash
+* "longDashDot" - a line consisting of a repeating pattern of long-dash-dot
+* "longDashDotDot" - a line consisting of a repeating pattern of long-dash-dot-dot
+* "solid" - a solid line
 
 ### categoryAxis.notes.line.width `Number`
 
@@ -11027,6 +11046,20 @@ The line of the highlighted chart series. The color is computed automatically fr
     });
     </script>
 
+### series.highlight.line.dashType `String` *(default: "solid")*
+
+The dash type of the highlight line.
+
+The following dash types are supported:
+
+* "dash" - a line consisting of dashes
+* "dashDot" - a line consisting of a repeating pattern of dash-dot
+* "dot" - a line consisting of dots
+* "longDash" - a line consisting of a repeating pattern of long-dash
+* "longDashDot" - a line consisting of a repeating pattern of long-dash-dot
+* "longDashDotDot" - a line consisting of a repeating pattern of long-dash-dot-dot
+* "solid" - a solid line
+
 ### series.highlight.line.color `String`
 
 The line color. Accepts a valid CSS color string, including hex and rgb.
@@ -14844,6 +14877,20 @@ The position of the labels.
 
 The line of the notes.
 
+### series.notes.line.dashType `String` *(default: "solid")*
+
+The dash type of the note line.
+
+The following dash types are supported:
+
+* "dash" - a line consisting of dashes
+* "dashDot" - a line consisting of a repeating pattern of dash-dot
+* "dot" - a line consisting of dots
+* "longDash" - a line consisting of a repeating pattern of long-dash
+* "longDashDot" - a line consisting of a repeating pattern of long-dash-dot
+* "longDashDotDot" - a line consisting of a repeating pattern of long-dash-dot-dot
+* "solid" - a solid line
+
 ### series.notes.line.width `Number`
 
 The line width of the notes.
@@ -17306,6 +17353,20 @@ The position of the labels.
 ### seriesDefaults.notes.line `Object`
 
 The line of the notes.
+
+### seriesDefaults.notes.line.dashType `String` *(default: "solid")*
+
+The dash type of the note line.
+
+The following dash types are supported:
+
+* "dash" - a line consisting of dashes
+* "dashDot" - a line consisting of a repeating pattern of dash-dot
+* "dot" - a line consisting of dots
+* "longDash" - a line consisting of a repeating pattern of long-dash
+* "longDashDot" - a line consisting of a repeating pattern of long-dash-dot
+* "longDashDotDot" - a line consisting of a repeating pattern of long-dash-dot-dot
+* "solid" - a solid line
 
 ### seriesDefaults.notes.line.width `Number`
 
@@ -22094,6 +22155,20 @@ The position of the labels.
 
 The line of the notes.
 
+### valueAxis.notes.line.dashType `String` *(default: "solid")*
+
+The dash type of the note line.
+
+The following dash types are supported:
+
+* "dash" - a line consisting of dashes
+* "dashDot" - a line consisting of a repeating pattern of dash-dot
+* "dot" - a line consisting of dots
+* "longDash" - a line consisting of a repeating pattern of long-dash
+* "longDashDot" - a line consisting of a repeating pattern of long-dash-dot
+* "longDashDotDot" - a line consisting of a repeating pattern of long-dash-dot-dot
+* "solid" - a solid line
+
 ### valueAxis.notes.line.width `Number`
 
 The line width of the notes.
@@ -22899,6 +22974,7 @@ The background color of the axis.
 
 The base time interval for the axis labels. The default baseUnit is determined automatically from the value range. Available options:
 
+* milliseconds
 * seconds
 * minutes
 * hours
@@ -26863,6 +26939,20 @@ The position of the labels.
 
 The line of the notes.
 
+### xAxis.notes.line.dashType `String` *(default: "solid")*
+
+The dash type of the note line.
+
+The following dash types are supported:
+
+* "dash" - a line consisting of dashes
+* "dashDot" - a line consisting of a repeating pattern of dash-dot
+* "dot" - a line consisting of dots
+* "longDash" - a line consisting of a repeating pattern of long-dash
+* "longDashDot" - a line consisting of a repeating pattern of long-dash-dot
+* "longDashDotDot" - a line consisting of a repeating pattern of long-dash-dot-dot
+* "solid" - a solid line
+
 ### xAxis.notes.line.width `Number`
 
 The line width of the notes.
@@ -27672,6 +27762,7 @@ The background color of the axis.
 
 The base time interval for the axis labels. The default baseUnit is determined automatically from the value range. Available options:
 
+* milliseconds
 * seconds
 * minutes
 * hours
@@ -31583,6 +31674,20 @@ The position of the labels.
 ### yAxis.notes.line `Object`
 
 The line of the notes.
+
+### yAxis.notes.line.dashType `String` *(default: "solid")*
+
+The dash type of the note line.
+
+The following dash types are supported:
+
+* "dash" - a line consisting of dashes
+* "dashDot" - a line consisting of a repeating pattern of dash-dot
+* "dot" - a line consisting of dots
+* "longDash" - a line consisting of a repeating pattern of long-dash
+* "longDashDot" - a line consisting of a repeating pattern of long-dash-dot
+* "longDashDotDot" - a line consisting of a repeating pattern of long-dash-dot-dot
+* "solid" - a solid line
 
 ### yAxis.notes.line.width `Number`
 

@@ -782,6 +782,49 @@ Sets the command which will be displayed in the scheduler footer. Currently only
 
 The configuration of the scheduler resource(s) grouping.
 
+### group.date `Boolean` *(default: false)*
+
+If set to `true` and the [group.resources](#configuration-group.resources) has some resources set the view is grouped by date.
+
+#### Example - define group by date
+    <div id="scheduler"></div>
+    <script>
+    $("#scheduler").kendoScheduler({
+      date: new Date("2013/6/6"),
+      group: {
+        resources: ["Rooms"],
+        date: true
+      },
+      dataSource: [
+        {
+          id: 1,
+          start: new Date("2013/6/6 08:00 AM"),
+          end: new Date("2013/6/6 09:00 AM"),
+          title: "Interview",
+          roomId: 1 // the event is held in "Small meeting room" whose value is 1
+        },
+        {
+          id: 2,
+          start: new Date("2013/6/6 08:00 AM"),
+          end: new Date("2013/6/6 09:00 AM"),
+          title: "Meeting",
+          roomId: 2 // the event is held in "Big meeting room" whose value is 2
+        }
+      ],
+      resources: [
+        {
+          field: "roomId",
+          name: "Rooms",
+          dataColorField: "key",
+          dataSource: [
+            { text: "Small meeting room", value: 1, key: "#aabbcc" },
+            { text: "Big meeting room", value: 2, key: "green" }
+          ]
+        }
+      ]
+    });
+    </script>
+
 ### group.resources `Array`
 
 An array of resource names by which the scheduler events will be grouped.
@@ -4677,6 +4720,58 @@ The fields which can be used in the template are:
 
 The configuration of the view resource(s) grouping.
 
+### views.group.date `Boolean` *(default: false)*
+
+If set to `true` and the [group.resources](#configuration-group.resources) has some resources set the view is grouped by date.
+
+Overrides the [date](#configuration-group.date) option of the scheduler.
+
+#### Example - define group by date
+    <div id="scheduler"></div>
+    <script>
+    $("#scheduler").kendoScheduler({
+      date: new Date("2013/6/6"),
+       views: [
+        {
+            type: "month",
+            group: {
+                date: true
+            }
+        }
+      ],
+      group: {
+        resources: ["Rooms"]       
+      },
+      dataSource: [
+        {
+          id: 1,
+          start: new Date("2013/6/6 08:00 AM"),
+          end: new Date("2013/6/6 09:00 AM"),
+          title: "Interview",
+          roomId: 1 // the event is held in "Small meeting room" whose value is 1
+        },
+        {
+          id: 2,
+          start: new Date("2013/6/6 08:00 AM"),
+          end: new Date("2013/6/6 09:00 AM"),
+          title: "Meeting",
+          roomId: 2 // the event is held in "Big meeting room" whose value is 2
+        }
+      ],
+      resources: [
+        {
+          field: "roomId",
+          name: "Rooms",
+          dataColorField: "key",
+          dataSource: [
+            { text: "Small meeting room", value: 1, key: "#aabbcc" },
+            { text: "Big meeting room", value: 2, key: "green" }
+          ]
+        }
+      ]
+    });
+    </script>
+
 ### views.group.orientation `String` *(default: "horizontal")*
 
 The orientation of the group headers. Supported values are *horizontal* or *vertical*. Note that the agenda view is always in vertical orientation.
@@ -5888,17 +5983,15 @@ Get the time slot from given element.
 
 ### view
 
-Gets or sets the current scheduler view.
+Sets the current Scheduler view.
+
+To get the current Scheduler view name, use the [`viewName` method](#methods-viewName).
 
 #### Parameters
 
 ##### type `String` *(optional)*
 
 The view type to select.
-
-#### Returns
-
-`kendo.ui.SchedulerView` the current scheduler view.
 
 #### Example - set the current view
 

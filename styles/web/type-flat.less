@@ -36,18 +36,18 @@
 @tooltip-background-color: @base;
 @tooltip-border-color: @base;
 @tooltip-text-color: @background;
-@notification-info-background-color: @info;
-@notification-info-text-color: darken(@info, 50%);
-@notification-info-border-color: darken(@info, 10%);
-@notification-success-background-color: @success;
-@notification-success-text-color: darken(@success, 50%);
-@notification-success-border-color: darken(@success, 10%);
-@notification-warning-background-color: @warning;
-@notification-warning-text-color: darken(@warning, 50%);
-@notification-warning-border-color: darken(@warning, 10%);
-@notification-error-background-color: @error;
-@notification-error-text-color: darken(@error, 30%);
-@notification-error-border-color: darken(@error, 10%);
+@notification-info-background-color:lighten(@info, 55%);
+@notification-info-text-color: @info;
+@notification-info-border-color: @info;
+@notification-success-background-color: lighten(@success, 52%);
+@notification-success-text-color: @success;
+@notification-success-border-color: @success;
+@notification-warning-background-color: lighten(@warning, 30%);
+@notification-warning-text-color: @warning;
+@notification-warning-border-color: @warning;
+@notification-error-background-color: lighten(@error, 30%);
+@notification-error-text-color: @error;
+@notification-error-border-color: @error;
 @draghandle-border-radius: 13px;
 @draghandle-border-color: @accent;
 @draghandle-background-color: @accent;
@@ -76,11 +76,11 @@
 @scheduler-nonwork-background-color: darken(@background, 4%);
 @resize-background-color: @background;
 @upload-progress-background-color: @info;
-@upload-progress-text-color: contrast(@upload-progress-background-color, lighten(@info, 70%), darken(@info, 60%), 0.5);
+@upload-progress-text-color: @widget-text-color;
 @upload-success-background-color: @success;
-@upload-success-text-color: contrast(@upload-success-background-color, lighten(@success, 70%), darken(@success, 60%), 0.5);
+@upload-success-text-color: @success;
 @upload-error-background-color: @error;
-@upload-error-text-color: contrast(@upload-error-background-color, lighten(@error, 70%), darken(@error, 60%), 0.5);
+@upload-error-text-color: @error;
 @task-summary-color: lighten(@widget-text-color, 25%);
 @task-summary-selected-color: lighten(@selected-background-color, 25%);
 @main-border-radius: @border-radius;
@@ -412,6 +412,16 @@ textarea.k-textbox:hover,
 html .km-pane-wrapper .k-header
 {
     background-color: @header-background-color;
+}
+
+.k-mediaplayer-toolbar 
+{
+    background-color: fade(@group-background-color, 70%);
+	color: @inverse-text-color;
+}
+
+.k-mediaplayer-toolbar .k-mediaplayer-seekbar {
+	top: -14px;
 }
 
 /* icons */
@@ -1196,10 +1206,20 @@ div.k-filebrowser-dropzone em
 
 /* Upload */
 
+.k-upload.k-header {
+    background: @widget-background-color;
+    border-color: @widget-border-color;
+}
+
 .k-file
 {
-    background-color: @active-background-color;
+    color: @widget-text-color;
     border-color: @cell-border-color;
+}
+
+.k-file .k-icon {
+    border-radius: 50%;
+    background-color: @widget-border-color;
 }
 
 .k-file-progress
@@ -1227,9 +1247,70 @@ div.k-filebrowser-dropzone em
     color: @upload-error-text-color;
 }
 
-.k-file-error .k-progress
-{
-    background-color: @upload-error-background-color;
+.k-file-error {
+    .k-progress {
+        background-color: @upload-error-background-color;
+    }
+
+    .k-file-extension-wrapper,
+    .k-multiple-files-extension-wrapper {
+        color: @upload-error-text-color;
+        border-color: @upload-error-text-color;
+    }
+
+    .k-file-extension-wrapper:before,
+    .k-multiple-files-extension-wrapper:before {
+        background-color: @widget-background-color;
+        border-color: transparent transparent @upload-error-text-color @upload-error-text-color;
+    }
+}
+
+.k-file-extension-wrapper,
+.k-multiple-files-extension-wrapper {
+    color: @disabled-text-color;
+    border-color: @disabled-text-color;
+}
+
+.k-file-invalid .k-file-name-invalid {
+    color: @upload-error-text-color;
+}
+
+.k-file-invalid-extension-wrapper,
+.k-multiple-files-invalid-extension-wrapper {
+    color: @upload-error-text-color;
+    border-color: @upload-error-text-color;
+}
+
+.k-file-extension-wrapper:before,
+.k-multiple-files-extension-wrapper:before {
+    background-color: @widget-background-color;
+    border-color: transparent transparent @disabled-text-color @disabled-text-color;
+}
+
+.k-file-invalid-extension-wrapper:before,
+.k-multiple-files-invalid-extension-wrapper:before {
+    background-color: @widget-background-color;
+    border-color: transparent transparent @upload-error-text-color @upload-error-text-color;
+}
+
+.k-multiple-files-extension-wrapper:after {
+    border-top-color: @disabled-text-color;
+    border-left-color: @disabled-text-color;
+}
+
+.k-multiple-files-invalid-extension-wrapper:after {
+    border-top-color: @upload-error-text-color;
+    border-left-color: @upload-error-text-color;
+}
+
+.k-file-size,
+.k-file-information,
+.k-file-validation-message {
+    color: @disabled-text-color;
+}
+
+.k-upload .k-upload-selected {
+    border-color: @widget-border-color;
 }
 
 /* ImageBrowser */
@@ -2147,6 +2228,7 @@ html .km-pane-wrapper .km-widget,
 
 //Primary buttons
 .k-primary,
+.k-upload .k-upload-button,
 .k-overflow-container .k-primary
 {
     color: @primary-button-text-color;
@@ -2158,7 +2240,8 @@ html .km-pane-wrapper .km-widget,
 }
 
 .k-primary:focus,
-.k-primary.k-state-focused
+.k-primary.k-state-focused,
+.k-upload .k-upload-button.k-state-focused
 {
     color: @primary-focused-color;
     border-color: @primary-focused-border-color;
@@ -2166,7 +2249,8 @@ html .km-pane-wrapper .km-widget,
     .box-shadow(@primary-focused-active-item-shadow);
 }
 
-.k-primary:hover
+.k-primary:hover,
+.k-upload .k-upload-button:hover
 {
     color: @primary-hover-text-color;
     border-color: @primary-hover-border-color;
@@ -2181,7 +2265,8 @@ html .km-pane-wrapper .km-widget,
     .box-shadow(@primary-focused-active-item-shadow);
 }
 
-.k-primary:active
+.k-primary:active,
+.k-upload .k-upload-button:active
 {
     color: @primary-active-text-color;
     border-color: @primary-active-border-color;
