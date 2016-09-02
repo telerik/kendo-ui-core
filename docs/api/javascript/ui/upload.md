@@ -371,7 +371,7 @@ Sets the text for invalid file extension validation message.
 
 ### localization.invalidMaxFileSize `String`
 
-Sets the text for invalid maxFileSize validation message.
+Sets the text for an invalid `maxFileSize` validation message.
 
 #### Example
 
@@ -390,7 +390,7 @@ Sets the text for invalid maxFileSize validation message.
 
 ### localization.invalidMinFileSize `String`
 
-Sets the text for invalid minFileSize validation message.
+Sets the text for an invalid `minFileSize` validation message.
 
 #### Example
 
@@ -643,7 +643,7 @@ Configures the validation options for uploaded files.
 
 ### validation.allowedExtensions `Array`
 
-Lists which file extensions are allowed to be uploaded.
+Lists which file extensions are allowed to be uploaded. Recognizes entries of both `.type` and `type` values.
 
 #### Example
 	<input name="files" id="files" type="file" />
