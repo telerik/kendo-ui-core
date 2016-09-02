@@ -6080,6 +6080,42 @@ Lorem
 Ipsum
 pollyfill
 HellojQuery
+categoryAxis.autoBaseUnitSteps.milliseconds
+categoryAxis.notes.line.dashType
+series.highlight.line.dashType
+series.notes.line.dashType
+seriesDefaults.notes.line.dashType
+valueAxis.notes.line.dashType
+xAxis.notes.line.dashType
+yAxis.notes.line.dashType
+navigator.select.mousewheel
+group.date
+views.group.date
+toolbar.click
+dropZone
+dropzone
+localization.clearSelectedFiles
+localization.invalidFileExtension
+localization.invalidMaxFileSize
+maxFileSize
+localization.invalidMinFileSize
+minFileSize
+validation.allowedExtensions
+validation.maxFileSize
+validation.minFileSize
+clearAllFiles
+clearFile
+clearFileByUid
+getFiles
+removeAllFiles
+removeFile
+removeFileByUid
+DialogBuilder
+TreeeView
+Tootlip
+arccosine
+arccotangent
+cosecant
  - ./accessibility/five-tips-for-accessible-charts-with-dataviz.md
 jsbin.com
 odowud
@@ -6286,6 +6322,7 @@ base-10
 0-length
  - controls/data-management/spreadsheet/end-user/user-guide.md
 Оr
+MyRange
  - controls/data-management/spreadsheet/format.md
 12.35M
 34.57K
@@ -6356,3 +6393,9 @@ WebResource.axd
 _VIEWSTATE
 JQuery
 TutsPlus
+ - api/javascript/ui/responsivepanel.md
+k-rpanel-toggle
+ - api/javascript/ui/scheduler.md
+workweek
+ - third-party/using-kendo-with-data-access.md
+v3
