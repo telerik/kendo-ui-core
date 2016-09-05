@@ -1442,6 +1442,83 @@ The object to load data from.  This should be **the deserialized object**, not t
         });
     </script>
 
+### defineName
+
+Define a custom name to be available in formulas.  Note that this function will
+throw an error if it can't parse the name or the value.
+
+#### Parameters
+
+##### name `String`
+
+A new name to be defined.  The names are case-insensitive.  There is no error if
+the name already exists -- the value is silently updated.
+
+To make the name available only in one sheet, you should qualify it (see example
+below).
+
+##### value `String`
+
+The value should be a valid formula, as a string (without a leading `=` sign).
+Generally a name will point to a reference.  For maximum compatibility, we
+recommend references here to be fully qualified (include the name of the sheet
+they refer to) and absolute (both row and column are prefixed with `$`).
+
+##### hidden `boolean` *(default: false)*
+
+Pass `true` in order to hide this name from the custom names dropdown in the
+toolbar.  Note that even if hidden is `false`, only reference names will be
+displayed in the dropdown.
+
+#### Example - define a few names
+
+```
+    <div id="spreadsheet"></div>
+    <script>
+        $("#spreadsheet").kendoSpreadsheet();
+        var spreadsheet = $("#spreadsheet").data("kendoSpreadsheet");
+
+        // cell reference
+        spreadsheet.defineName("MyCell", "Sheet1!$A$1");
+
+        // range reference
+        spreadsheet.defineName("MyRange", "Sheet1!$A$1:$C$3");
+
+        // qualified name
+        spreadsheet.defineName("Sheet1!Foo", "Sheet1!$B$2");
+
+        // relative reference (incompatible with other programs).
+        // relative refs in A1 notation are ambiguous, unless we know
+        // the cell where they are used, so we use the RC notation here:
+        spreadsheet.defineName("CellsAbove", "R1C[0]:R[-1]C[0]");
+
+        // arbitrary formula
+        spreadsheet.defineName("GoldenRatio", "(1+SQRT(5))/2");
+    </script>
+```
+
+After this, you can use any of those names in formulas.  For example a formula
+like `=SUM(CellsAbove)` will return the sum of the cells above it, no matter
+where it sits.
+
+Note that relative references, like the `CellsAbove` example, are not compatible
+with other spreadsheets (Excel, LibreOffice or Google Sheets).
+
+The “qualified” name `Sheet1!Foo` is visible without qualification only in
+formulas in Sheet1, so for example you can type `=Foo * Foo`.  If it's needed in
+formulas from other sheets, it must be written as `=Sheet1!Foo`.
+
+### undefineName
+
+Delete a name.
+
+#### Parameters
+
+##### name `String` - the name to remove
+
+For deleting a fully qualified name, the name of the sheet must be prefixed,
+e.g. `spreadsheet.undefineName("Sheet1!Foo")`.
+
 ## Events
 
 ### change
