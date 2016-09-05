@@ -1198,8 +1198,6 @@ var __meta__ = { // jshint ignore:line
                 wrapper[0].title = DOMelement.title;
             }
 
-            element.hide();
-
             that._focused = that.wrapper = wrapper
                               .addClass("k-widget k-dropdown k-header")
                               .addClass(DOMelement.className)
@@ -1211,6 +1209,8 @@ var __meta__ = { // jshint ignore:line
                                   "aria-haspopup": true,
                                   "aria-expanded": false
                               });
+
+            element.hide().removeAttr("accesskey");
         },
 
         _clearSelection: function(parent) {

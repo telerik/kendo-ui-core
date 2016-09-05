@@ -1405,6 +1405,14 @@
         equal(dropdownlist.wrapper.attr("accesskey"),  "w");
     });
 
+     test("remove accesskey from the element", function() {
+        input.attr("accesskey", "w");
+
+        var dropdownlist = new DropDownList(input);
+
+        notEqual(input.attr("accesskey"),  "w");
+    });
+
     test("render empty option for optionLabel with null value", function() {
         dropdownlist = select.kendoDropDownList({
           optionLabel: {
