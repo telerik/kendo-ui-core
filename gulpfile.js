@@ -246,3 +246,7 @@ gulp.task('mdspell', shell.task(
         return merge(js, styles, pkg, license, readme);
     })
 })
+
+const taskListing = require('gulp-task-listing');
+gulp.task('tasks', taskListing.withFilters(/:/));
+
