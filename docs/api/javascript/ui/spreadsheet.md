@@ -1464,7 +1464,7 @@ Generally a name will point to a reference.  For maximum compatibility, we
 recommend references here to be fully qualified (include the name of the sheet
 they refer to) and absolute (both row and column are prefixed with `$`).
 
-##### hidden `boolean` *(default: false)*
+##### hidden `Boolean` *(default: false)*
 
 Pass `true` in order to hide this name from the custom names dropdown in the
 toolbar.  Note that even if hidden is `false`, only reference names will be
