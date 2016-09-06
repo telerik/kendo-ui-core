@@ -1358,23 +1358,89 @@ input.k-textbox:active {
 }
 
 .k-file-progress .k-progress {
-    background-color: @accent;
+    background-color: darken(@info, 25%);
 }
 
 .k-file-success {
-    color: @normal-text-color;
+    color: darken(@success, 25%);
 }
 
 .k-file-success .k-progress {
-    background-color: lighten(@info, 22%);
+    background-color: darken(@success, 25%);
 }
 
 .k-file-error {
-    color: @inversed-text-color;
+    color: darken(@error, 25%);
+
+    .k-file-extension-wrapper,
+    .k-multiple-files-extension-wrapper {
+        color: darken(@error, 25%);
+        border-color: darken(@error, 25%);
+    }
+
+    .k-file-extension-wrapper:before,
+    .k-multiple-files-extension-wrapper:before {
+        background-color: @widget-background-color;
+        border-color: transparent transparent darken(@error, 25%) darken(@error, 25%);
+    }
 }
 
 .k-file-error .k-progress {
     background-color: @accent;
+}
+
+.k-file-extension-wrapper,
+.k-multiple-files-extension-wrapper {
+    color: @disabled-text-color;
+    border-color: @disabled-text-color;
+}
+
+.k-file-invalid .k-file-name-invalid {
+    color: darken(@error, 25%);
+}
+
+.k-file-invalid-extension-wrapper,
+.k-multiple-files-invalid-extension-wrapper {
+    color: darken(@error, 25%);
+    border-color: darken(@error, 25%);
+}
+
+.k-file-extension-wrapper:before,
+.k-multiple-files-extension-wrapper:before {
+    background-color: @widget-background-color;
+    border-color: transparent transparent @disabled-text-color @disabled-text-color;
+}
+
+.k-file-invalid-extension-wrapper:before,
+.k-multiple-files-invalid-extension-wrapper:before {
+    background-color: @widget-background-color;
+    border-color: transparent transparent darken(@error, 25%) darken(@error, 25%);
+}
+
+.k-multiple-files-extension-wrapper:after {
+    border-top-color: @disabled-text-color;
+    border-left-color: @disabled-text-color;
+}
+
+.k-multiple-files-invalid-extension-wrapper:after {
+    border-top-color: darken(@error, 25%);
+    border-left-color: darken(@error, 25%);
+}
+
+.k-file-size,
+.k-file-information,
+.k-file-validation-message {
+    color: @disabled-text-color;
+}
+
+.k-upload .k-upload-selected {
+    color: @accent;
+    border-color: @widget-border-color;
+
+    &:hover {
+        color: @selected-text-color;
+        background-color: @accent;
+    }
 }
 
 /* Slider */
