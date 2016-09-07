@@ -1444,31 +1444,27 @@ The object to load data from.  This should be **the deserialized object**, not t
 
 ### defineName
 
-Define a custom name to be available in formulas.  Note that this function will
-throw an error if it can't parse the name or the value.
+Define a custom name to be available and used in formulas. If the function is not able to parse the name of the value, it will throw an error.
 
 #### Parameters
 
 ##### name `String`
 
-A new name to be defined.  The names are case-insensitive.  There is no error if
-the name already exists -- the value is silently updated.
+A new name to be defined. The names are case-insensitive.
 
-To make the name available only in one sheet, you should qualify it (see example
-below).
+It is possible to provide a name that already exists. In such cases, the value is silently updated.
+
+To make the name available only in one sheet, qualify it in the way demonstrated in the next example.
 
 ##### value `String`
 
-The value should be a valid formula, as a string (without a leading `=` sign).
-Generally a name will point to a reference.  For maximum compatibility, we
-recommend references here to be fully qualified (include the name of the sheet
-they refer to) and absolute (both row and column are prefixed with `$`).
+The value has to be a valid formula in the form of a string, that is, without a leading `=` sign.
+
+Generally, a name points to a reference. For maximum compatibility, it is recommended for you to use references here that are fully qualified (include the name of the sheet they refer to) and absolute (prefix both row and column with the `$` sign).
 
 ##### hidden `Boolean` *(default: false)*
 
-Pass `true` in order to hide this name from the custom names dropdown in the
-toolbar.  Note that even if hidden is `false`, only reference names will be
-displayed in the dropdown.
+To hide this name from the custom names dropdown in the toolbar, pass `true`. Even if `hidden` is set to `false`, only reference names will be displayed in the dropdown.
 
 #### Example - define a few names
 
@@ -1497,16 +1493,9 @@ displayed in the dropdown.
     </script>
 ```
 
-After this, you can use any of those names in formulas.  For example a formula
-like `=SUM(CellsAbove)` will return the sum of the cells above it, no matter
-where it sits.
+After that, it is possible to use any of those names in formulas. For example, a formula like `=SUM(CellsAbove)` will return the sum of the cells above it, no matter where it sits. Relative references, such as the `CellsAbove` example, are not compatible with other spreadsheets, such as Excel, LibreOffice, or Google Sheets.
 
-Note that relative references, like the `CellsAbove` example, are not compatible
-with other spreadsheets (Excel, LibreOffice or Google Sheets).
-
-The “qualified” name `Sheet1!Foo` is visible without qualification only in
-formulas in Sheet1, so for example you can type `=Foo * Foo`.  If it's needed in
-formulas from other sheets, it must be written as `=Sheet1!Foo`.
+The "qualified" `Sheet1!Foo` name is visible without qualification only in formulas in **Sheet1** and, for example, you can type `=Foo * Foo`.  If you need the name in formulas from other sheets, you have to refer to it as `=Sheet1!Foo`.
 
 ### undefineName
 
@@ -1516,8 +1505,7 @@ Delete a name.
 
 ##### name `String` - the name to remove
 
-For deleting a fully qualified name, the name of the sheet must be prefixed,
-e.g. `spreadsheet.undefineName("Sheet1!Foo")`.
+To delete a fully qualified name, prefix the name of the sheet - for example, `spreadsheet.undefineName("Sheet1!Foo")`.
 
 ## Events
 
