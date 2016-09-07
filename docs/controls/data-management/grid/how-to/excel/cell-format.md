@@ -5,7 +5,7 @@ description: "Learn how to format the cell values of the Kendo UI Grid widget du
 slug: howto_format_cell_values_grid
 ---
 
-# Set Cell Format During Excel export
+# Set Cell Format During Excel Export
 
 To format the cell values, set the [`format`](/api/javascript/ooxml/workbook.html#configuration-sheets.rows.cells.format) option of the cells. The page about [creating a custom number format](https://support.office.com/en-us/article/Create-a-custom-number-format-78f2a361-936b-4c03-8772-09fab54be7f4) describes the formats, supported by Excel.
 
@@ -94,7 +94,7 @@ Other articles on the Kendo UI Grid and how-to examples related to its export to
 * [How to Align Footer Cells]({% slug howto_alignfootercells_grid %})
 * [How to Configure Color for Alternating Rows]({% slug howto_configure_color_alternating_rows_grid %})
 * [How to Export Checked Columns Only]({% slug howto_export_checked_columns_only_grid %})
-* [How to Export Detail Grids]({% slug howto_exportto_excel_masterand_detail_grid %})d
+* [How to Export Detail Grids]({% slug howto_exportto_excel_masterand_detail_grid %})
 * [How to Export Multiple Grids]({% slug howto_export_excel_multiple_grids_grid %})
 * [How to Use Column Template]({% slug howto_use_column_template_grid %})
 
