@@ -94,19 +94,20 @@ The table cells would look like this: `<td class="name-cell" style="text-align: 
 
 ### columns.command `Array`
 
-The configuration of the column command(s). If set the column would display a button for every command. Commands can be custom or built-in ("edit", "createChild" or "destroy"):
+The configuration of the column commands. If set, the column displays a button for every command. Commands can be custom or built-in.
 
-* The "edit" built-in command switches the current table row to edit mode.
+The built-in commands are:
 
-* The "createChild" built-in command adds a new child item to the current table row and switches to edit mode.
-
-* The "destroy" built-in command removes the data item to which the current table row is bound.
+* `edit` - Switches the current table row to edit mode.
+* `createChild` - Adds a new child item to the current table row and switches to edit mode.
+* `destroy` - Removes the data item to which the current table row is bound.
 
 Custom commands are supported by specifying the [click](#configuration-columns.command.click) option.
 
-> A command column cannot be [expandable](#configuration-columns.expandable).
-> 
-> The built-in "edit", "createChild" and "destroy" commands work *only* if editing is enabled via the [editable](#configuration-editable) option. The "edit" command supports "inline" and "popup" editing modes.
+> **Important**
+> * Each custom command requires you to explicitly specify its [name](/api/javascript/ui/treelist.html#configuration-columns.command.name).
+> * A command column cannot be [`expandable`](#configuration-columns.expandable).
+> * The built-in `edit`, `createChild`, and `destroy` commands work only if editing is enabled through the [`editable`](#configuration-editable) option. The `edit` command supports `inline` and `popup` editing modes.
 
 #### Example - set command as array of strings
 
@@ -210,7 +211,14 @@ The function context (available via the `this` keyword) will be set to the treel
 
 ### columns.command.name `String`
 
-The name of the command. The built-in commands are "edit", "createChild" and "destroy". When set to a custom value, it is rendered as a `data-command` attribute.
+The name of the command.
+
+The built-in commands are:
+* `edit`
+* `createChild`
+* `destroy`
+
+When set to a custom value, `columns.command.name` is rendered as a `data-command` attribute.
 
 #### Example - set the command name
 
