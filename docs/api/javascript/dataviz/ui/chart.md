@@ -12203,6 +12203,8 @@ The supported values are:
 
 > The `step` value is supported only when [series.type](#configuration-series.type) is set to "area".
 
+> For *line series*, use [series.style](#configuration-series.style).
+
 #### Example - set the chart line width
 
     <div id="chart"></div>
