@@ -180,7 +180,7 @@
             }
         });
 
-        dialog.wrapper.find(".k-i-close").click();
+        dialog.wrapper.find(".k-dialog-close").click();
     });
 
     test("open sets options.visible to true", function() {

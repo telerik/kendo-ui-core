@@ -4008,9 +4008,7 @@ div.k-scheduler-marquee:after {
     }
     .k-window-titlebar {
         border-width: 0;
-        .k-dialog-title {
-            color: @normal-text-color;
-        }
+        color: @normal-text-color;
     }
     .k-header {
         background: none;
@@ -4022,6 +4020,15 @@ div.k-scheduler-marquee:after {
             color: @normal-text-color;
         }
         border-bottom: none;
+    }
+    a.k-dialog-action.k-dialog-close.k-button-bare {
+        &:before {
+            content: normal;
+        }
+    }
+    a.k-dialog-action.k-dialog-close {
+        top: .3em;
+        right: 0;
     }
     .k-dialog-buttongroup {
         .k-button:active,
@@ -4069,8 +4076,8 @@ div.k-scheduler-marquee:after {
     }
 }
 .k-rtl .k-dialog {
-    a.k-dialog-action.k-link {
-        left: 1em;
+    a.k-dialog-action.k-dialog-close {
+        left: 0;
     }
     .k-dialog-buttongroup {
         &.k-dialog-button-layout-stretched {

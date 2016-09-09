@@ -59,13 +59,22 @@
     padding: 0;
 }
 
-.k-dialog a.k-dialog-action.k-link
+.k-dialog a.k-dialog-action.k-dialog-close
 {
     position: absolute;
-    top: 1em;
-    right: 1em;
+    right: 0;
     cursor: pointer;
     z-index: 10000;
+
+    .k-font-icon {
+        .use-font-icon();
+    }
+}
+
+.k-dialog.k-dialog-titleless a.k-dialog-action.k-dialog-close
+{
+    right: .5em;
+    top: 1em;
 }
 
 .k-dialog.k-alert .k-window-titlebar,
@@ -97,3 +106,4 @@
 {
     width: 100%;
 }
+
