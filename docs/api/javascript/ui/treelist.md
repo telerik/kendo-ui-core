@@ -104,8 +104,10 @@ The configuration of the column command(s). If set the column would display a bu
 
 Custom commands are supported by specifying the [click](#configuration-columns.command.click) option.
 
+> Each custom command requires you to explicitly specify its [name](/api/javascript/ui/treelist.html#configuration-columns.command.name).
+>
 > A command column cannot be [expandable](#configuration-columns.expandable).
-> 
+>
 > The built-in "edit", "createChild" and "destroy" commands work *only* if editing is enabled via the [editable](#configuration-editable) option. The "edit" command supports "inline" and "popup" editing modes.
 
 #### Example - set command as array of strings
