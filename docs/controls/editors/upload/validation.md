@@ -44,11 +44,11 @@ The validation messages are displayed differently depending on whether the [`asy
 
 ### Maximum File Size
 
-The `maxFileSize` property defines the maximum size allowed for a file which is intended to be uploaded to the server. If the selected file exceeds the maximum size, a validation error message (`File size too large.`) is displayed.
+The `maxFileSize` property defines the maximum size in bytes allowed of a file that is intended for upload to the server. If the selected file exceeds the maximum size, a validation error message, such as `File size too large.`, is displayed.
 
 ### Minimum File Size
 
-The `minFileSize` property defines the minimum size allowed for a file which is intended to be uploaded to the server. If the size of the selected file is less than the minimum size, a validation error message (`File size too small.`) is displayed.
+The `minFileSize` property defines the minimum size in bytes allowed of a file that is intended for upload to the server. If the size of the selected file is less than the minimum size, a validation error message, such as `File size too small.`, is displayed.
 
 ## Browser Limitations
 
