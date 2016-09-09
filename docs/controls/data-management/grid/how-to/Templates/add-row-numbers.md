@@ -30,7 +30,7 @@ The example below demonstrates how to implement row numbers in a Kendo UI Grid w
           {
             title: "#",
             template: "#= ++record #",
-            width: 30
+            width: 35
           }, {
             field: "ContactName", title: "Contact Name"
           }, {
