@@ -741,6 +741,7 @@ var __meta__ = { // jshint ignore:line
             }
 
             this.element.css(OVERFLOW, scrollable ? "" : "hidden");
+            kendo.resize(this.element.children());
             this.trigger(ACTIVATE);
         },
 
