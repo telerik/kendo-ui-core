@@ -50,6 +50,10 @@ The `maxFileSize` property defines the maximum size allowed for a file which is 
 
 The `minFileSize` property defines the minimum size allowed for a file which is intended to be uploaded to the server. If the size of the selected file is less than the minimum size, a validation error message (`File size too small.`) is displayed.
 
+## Browser Limitations
+
+Internet Explorer versions prior to version 9 provide no information on the file size. As a result, the Upload validation for the `minFileSize` and `maxFileSize` options will not work as expected.
+
 ## See Also
 
 Other articles on Kendo UI Upload:
