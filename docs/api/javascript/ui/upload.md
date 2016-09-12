@@ -709,7 +709,20 @@ Removes all files (only visually from the UI) without issuing requests to the `r
 
 #### Example
 
-// demo
+    <input name="files" id="files" type="file" />
+    <button id="clearAll" class="k-button">Clear all</button>
+    <script>
+      $(document).ready(function() {
+        $("#files").kendoUpload();
+
+        $("#clearAll").on('click', function(e){
+          e.preventDefault();
+
+          var upload = $("#files").data("kendoUpload");
+          upload.clearAllFiles();
+        })
+      });
+    </script>
 
 ### clearFile
 
@@ -717,7 +730,35 @@ Removes all files for which the callback function returns `true` (only visually 
 
 #### Example
 
-// demo
+    input name="files" id="files" type="file" />
+    <button id="clearFile" class="k-button">Clear non-image files</button>
+    <script>
+
+      $(document).ready(function() {
+        $("#files").kendoUpload({
+          async: {
+            autoUpload: false,
+            saveUrl: "http://my-app.localhost/save",
+            removeUrl: "http://my-app.localhost/remove"
+          }
+        });
+
+        $("#clearFile").on('click', function(e){
+          e.preventDefault();
+
+          var upload = $("#files").data("kendoUpload");
+          upload.clearFile(function(file){
+            switch (file[0].extension) {
+              case '.jpg':
+              case '.img':
+              case '.png':
+              case '.gif':return false;
+              default: return true;
+            }
+          });
+        })
+      });
+    </script>
 
 ### clearFileByUid
 
@@ -725,13 +766,30 @@ Removes a file by ID (only visually from the UI) without issuing requests to the
 
 #### Example
 
-    <input type="file" name="files" id="upload" />
+    <input name="files" id="files" type="file" />
+    <button id="clearSelected" class="k-button">Clear all checked</button>
+
+    <script id="fileTemplate" type="text/x-kendo-template">
+       <span class='k-progress'></span>
+       <input id='#=files[0].uid#' type='checkbox' class='k-checkbox' />
+       <label for='#=files[0].uid#' class='k-checkbox-label'>Filename: #=name#</label>
+    </script>
+    
     <script>
-        $("#upload").kendoUpload();
-
-        var upload = $("#upload").data("kendoUpload");
-
-        upload.clearFileByUid();
+      $(document).ready(function() {
+        $("#files").kendoUpload({
+          template: $("#fileTemplate").html()
+        });
+        
+        $("#clearSelected").on('click', function(e){
+          e.preventDefault();
+          var upload = $("#files").data("kendoUpload");
+          
+          upload.wrapper.find(".k-checkbox:checked").each(function() {
+          	 upload.clearFileByUid($(this).attr("id"));
+          });
+        });
+      });
     </script>
 
 ### destroy
@@ -803,7 +861,24 @@ Retrieves the files that are currently selected.
 
 #### Example
 
-// demo
+    <input name="files" id="files" type="file" />
+    <button id="getFiles" class="k-button">Show selected files count</button>
+    <script>
+
+      $(document).ready(function() {
+        $("#files").kendoUpload();
+
+        $("#getFiles").on('click', function(e){
+          e.preventDefault();
+
+          var upload = $("#files").data("kendoUpload"),
+              files = upload.getFiles();
+          
+          alert("You have selected " + files.length  + " files");
+          console.log(files);
+        })
+      });
+    </script>
 
 ### removeAllFiles
 
@@ -811,7 +886,26 @@ Removes all files by sending a standard `remove` request to the handler.
 
 #### Example
 
-// demo
+    <input name="files" id="files" type="file" />
+    <button id="removeAll" class="k-button">Remove all</button>
+    <script>
+      $(document).ready(function() {
+        $("#files").kendoUpload({
+           async: {
+            autoUpload: false,
+            saveUrl: "http://my-app.localhost/save",
+            removeUrl: "http://my-app.localhost/remove"
+          }
+        });
+
+        $("#removeAll").on('click', function(e){
+          e.preventDefault();
+
+          var upload = $("#files").data("kendoUpload");
+          upload.removeAllFiles();
+        })
+      });
+    </script>
 
 ### removeFile
 
@@ -819,7 +913,35 @@ Removes all files for which the callback function returns `true` by sending a st
 
 #### Example
 
-// demo
+    <input name="files" id="files" type="file" />
+    <button id="removeFile" class="k-button">Remove non-image files</button>
+    <script>
+
+      $(document).ready(function() {
+        $("#files").kendoUpload({
+          async: {
+            autoUpload: false,
+            saveUrl: "http://my-app.localhost/save",
+            removeUrl: "http://my-app.localhost/remove"
+          }
+        });
+
+        $("#removeFile").on('click', function(e){
+          e.preventDefault();
+
+          var upload = $("#files").data("kendoUpload");
+          upload.removeFile(function(file){
+            switch (file[0].extension) {
+              case '.jpg':
+              case '.img':
+              case '.png':
+              case '.gif':return false;
+              default: return true;
+            }
+          });
+        })
+      });
+    </script>
 
 ### removeFileByUid
 
@@ -827,7 +949,36 @@ Removes a file by ID by sending a standard `remove` request to the handler.
 
 #### Example
 
-// demo
+    <input name="files" id="files" type="file" />
+    <button id="removeSelected" class="k-button">Remove all checked</button>
+
+    <script id="fileTemplate" type="text/x-kendo-template">
+       <span class='k-progress'></span>
+       <input id='#=files[0].uid#' type='checkbox' class='k-checkbox' />
+       <label for='#=files[0].uid#' class='k-checkbox-label'>Filename: #=name#</label>
+    </script>
+    
+    <script>
+      $(document).ready(function() {
+        $("#files").kendoUpload({
+          template: $("#fileTemplate").html(),
+          async: {
+            autoUpload: false,
+            saveUrl: "http://my-app.localhost/save",
+            removeUrl: "http://my-app.localhost/remove"
+          }
+        });
+        
+        $("#removeSelected").on('click', function(e){
+          e.preventDefault();
+          var upload = $("#files").data("kendoUpload");
+          
+          upload.wrapper.find(".k-checkbox:checked").each(function() {
+          	 upload.removeFileByUid($(this).attr("id"));
+          });
+        });
+      });
+    </script>
 
 ### toggle
 
@@ -860,6 +1011,37 @@ Manually triggers the upload process.
 
 > * This method is only applicable when the `async.autoUpload` option is set to `false`.
 > * It is possible to trigger the manual upload of files by calling the `upload` method even if the Upload is disabled. In such scenarios, the Upload ignores its `enabled: false` configuration and the files are uploaded while the Upload remains inactive for the user to interact with it.  
+
+#### Example
+
+    <style>
+      .k-clear-selected,
+      .k-upload-selected {
+        display: none !important;
+      }
+    </style>
+    
+    <input name="files" id="files" type="file" />
+    <button id="uploadAll" class="k-button">Start upload</button>
+    <script>
+      
+      $(document).ready(function() {
+        $("#files").kendoUpload({
+          async: {
+            autoUpload: false,
+            saveUrl: "http://my-app.localhost/save",
+            removeUrl: "http://my-app.localhost/remove"
+          }        
+        });
+
+        $("#uploadAll").on('click', function(e){
+          e.preventDefault();
+
+          var upload = $("#files").data("kendoUpload");
+          upload.upload();
+        })
+      });
+    </script>
 
 ## Events
 
