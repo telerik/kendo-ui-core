@@ -244,6 +244,7 @@
 .k-toolbar,
 .k-tooltip,
 .k-button-group .k-tool,
+.k-popup.k-align .k-list .k-item:last-child,
 .k-upload-files
 {
     border-color: @widget-border-color;
@@ -431,7 +432,7 @@ html .km-pane-wrapper .k-header
     background-color: @header-background-color;
 }
 
-.k-mediaplayer-toolbar 
+.k-mediaplayer-toolbar
 {
     background-color: fade(@header-background-color, 80%);
 }
@@ -1253,7 +1254,7 @@ div.k-filebrowser-dropzone em
 .k-file-error
 {
     color: @upload-error-text-color;
-    
+
     .k-file-extension-wrapper,
     .k-multiple-files-extension-wrapper {
         color: @upload-error-text-color;
@@ -3472,4 +3473,8 @@ td.k-state-focused.k-state-selected,
             }
         }
     }
+}
+
+.k-editor-dialog .k-tabstrip-items {
+    border-color: @active-border-color;
 }
