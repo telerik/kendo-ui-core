@@ -84,20 +84,3 @@ Other articles on getting started with UI for ASP.NET MVC:
 * [Use Telerik UI for ASP.NET MVC in Core MVC Applications]({% slug overview_aspnetmvc6_aspnetmvc %})
 * [Use Telerik UI for ASP.NET MVC Visual Studio Extensions]({% slug overview_visualstudio_aspnetmvc %})
 * [Telerik UI for ASP.NET MVC Troubleshooting]({% slug troubleshooting_aspnetmvc %})
-
-Articles on Telerik UI for ASP.NET MVC:
-
-* [Telerik UI for ASP.NET MVC Custom DataSource]({% slug customdatasource_aspnetmvc %})
-* [Validation with Telerik UI for ASP.NET MVC]({% slug validation_aspnetmvc %})
-* [Globalization with Telerik UI for ASP.NET MVC]({% slug globalization_aspnetmvc %})
-* [Localization with Telerik UI for ASP.NET MVC]({% slug localization_aspnetmvc %})
-* [Visual Basic Syntax]({% slug visualbasic_aspnetmvc %})
-* [Telerik UI for ASP.NET MVC Wrappers vs Kendo UI Widgets]({% slug wrappersvswidgets_aspnetmvc %})
-* [Telerik UI for ASP.NET MVC Visual Studio Integration]({% slug overview_visualstudio_aspnetmvc %})
-* [Migration from Telerik Extensions]({% slug overview_migrationextensions_aspnetmvc %})
-* [Telerik UI for ASP.NET MVC HtmlHelpers]({% slug overview_autocompletehelper_aspnetmvc %})
-* [ASP.NET MVC 3]({% slug aspnetmvc3_aspnetmvc %})
-* [ASP.NET MVC 4]({% slug aspnetmvc4_aspnetmvc %})
-* [ASP.NET MVC 5]({% slug aspnetmvc5_aspnetmvc %})
-* [ASP.NET Core]({% slug overview_aspnetmvc6_aspnetmvc %})
-* [Tutorials on Telerik UI for ASP.NET MVC]({% slug overview_timeefficiencyapp_aspnetmvc6 %})
