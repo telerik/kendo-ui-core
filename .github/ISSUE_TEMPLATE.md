@@ -1,7 +1,8 @@
-### Bug report/Feature request
-_(leave only one)_
+### Bug report
 
 **For Support request - Please do not submit support request here, instead see the** [Kendo UI Premium Forums](http://www.telerik.com/forums/kendo-ui) or our [support system](http://www.telerik.com/support) **at Telerik.com** !
+
+**For Feature Requests - please submit those into [our UserVoice feedback portal](http://kendo.uservoice.com/)**
 
 ### Reproduction of the problem
 _(bug report only)_
@@ -13,10 +14,6 @@ Provide additional information if the steps for reproducing the faulty behavior 
 
 ### Expected/desired behavior
 Explain what the expected behavior of the functionality is
-
-### Reason for Suggesting the Feature
-_(feature report only)_
-Provide information about what necessitates the implementation of this feature.
 
 ### Environment
 
