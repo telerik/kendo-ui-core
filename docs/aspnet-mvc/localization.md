@@ -122,21 +122,8 @@ Below are listed the steps for you to follow when you want to add new localizati
 
 ## See Also
 
-Other articles on Telerik UI for ASP.NET MVC:
-
 * [Telerik UI for ASP.NET MVC Overview]({% slug overview_aspnetmvc %})
 * [Telerik UI for ASP.NET MVC Custom DataSource]({% slug customdatasource_aspnetmvc %})
-* [Validation with Telerik UI for ASP.NET MVC]({% slug validation_aspnetmvc %})
-* [Globalization with Telerik UI for ASP.NET MVC]({% slug globalization_aspnetmvc %})
-* [Visual Basic Syntax]({% slug visualbasic_aspnetmvc %})
-* [Telerik UI for ASP.NET MVC Wrappers vs Kendo UI Widgets]({% slug wrappersvswidgets_aspnetmvc %})
-* [Telerik UI for ASP.NET MVC Visual Studio Integration]({% slug overview_visualstudio_aspnetmvc %})
-* [Migration from Telerik Extensions]({% slug overview_migrationextensions_aspnetmvc %})
-* [Telerik UI for ASP.NET MVC HtmlHelpers]({% slug overview_autocompletehelper_aspnetmvc %})
-* [ASP.NET MVC 3]({% slug aspnetmvc3_aspnetmvc %})
-* [ASP.NET MVC 4]({% slug aspnetmvc4_aspnetmvc %})
-* [ASP.NET MVC 5]({% slug aspnetmvc5_aspnetmvc %})
-* [ASP.NET Core]({% slug overview_aspnetmvc6_aspnetmvc %})
 * [Tutorials on Telerik UI for ASP.NET MVC]({% slug overview_timeefficiencyapp_aspnetmvc6 %})
 * [Telerik UI for ASP.NET MVC Fundamentals]({% slug fundamentals_aspnetmvc %})
 * [Telerik UI for ASP.NET MVC NuGet Packages]({% slug aspnetmvc_nuget %})

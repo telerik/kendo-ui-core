@@ -4,7 +4,7 @@ page_title: Use with ASP.NET MVC 5 | Telerik UI for ASP.NET MVC
 description: "Use Telerik UI for ASP.NET MVC in ASP.NET MVC 5 applications."
 previous_url: /aspnet-mvc/aspnetmvc-apps/asp-net-mvc-5
 slug: aspnetmvc5_aspnetmvc
-position: 13
+position: 14
 ---
 
 # Use with ASP.NET MVC 5
@@ -231,8 +231,6 @@ Below are listed the steps for you to follow when using a Kendo UI widget throug
 * [Telerik UI for ASP.NET MVC Troubleshooting]({% slug troubleshooting_aspnetmvc %})
 
 ## See Also
-
-Other articles on Telerik UI for ASP.NET MVC:
 
 * [Telerik UI for ASP.NET MVC Overview]({% slug overview_aspnetmvc %})
 * [Telerik UI for ASP.NET MVC Custom DataSource]({% slug customdatasource_aspnetmvc %})
