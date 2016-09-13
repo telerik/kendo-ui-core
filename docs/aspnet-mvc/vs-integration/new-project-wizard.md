@@ -1,6 +1,6 @@
 ---
-title: New Project Wizards
-page_title: New Project Wizards | UI for ASP.NET MVC Visual Studio Integration
+title: New Project Wizard
+page_title: New Project Wizard | UI for ASP.NET MVC Visual Studio Integration
 description: "Learn how to create a new Telerik UI for ASP.NET MVC application."
 slug: newprojectwizards_visualstudio_aspnetmvc
 position: 2
@@ -14,31 +14,21 @@ This article demonstrates how to create a new Telerik UI for ASP.NET MVC applica
 
 ### The Basics
 
-The New Project wizard is used for the creation of a new Telerik UI for ASP.NET MVC application&mdash;**Telerik** > **UI for ASP.NET MVC** > **Create New Telerik Project**.
+The New Project wizard is used for the creation of a new Telerik UI for ASP.NET MVC application. You could start the New Project Wizard through the Telerik menu &mdash; **Telerik** > **UI for ASP.NET MVC** > **Create New Telerik Project** or by selecting **File** > **New** > **Project** and navigating to the Telerik ASP.NET MVC project templates under **Telerik** > **Web** node. For convenience the same project templates could be found under the **Visual C#** > **Web** and **Visual Basic** > **Web** nodes.
 
-The wizard consists of two steps:
-
-* Users specify project-wide settings.
-* Users configure the data-access layer.
+The wizard detects all the installed versions of UI for ASP.NET MVC and lists them in the Version combobox. You can select a version which you want to be applied to your project. The following options could be set into the Create new project wizard:
 
 **Figure 1. A new project wizard**
 
-![New Project Wizard](/aspnet-mvc/vs-integration/images/new1.png)
+![New Project Wizard](/aspnet-mvc/vs-integration/images/new-project.png)
 
 ### Project Settings
 
 The options on the **Project Settings** page enable you to modify the project-wise settings, such as:
 
-* **Choose project type**&mdash;Choose what project type you want to create: **Empty**, **Standard**, **Grid** and **Menu**, **Mobile with Ajax Navigation**, or **Mobile with Server Navigation**.
-* **Version**&mdash;Choose which version of Telerik UI for ASP.NET MVC to use.
-* **Add referenced assemblies to solution**&mdash;Choose whether to copy referenced assemblies to your solution folder. The assemblies will automatically be added to the source control when using the Microsoft Team Foundation Server.
+* **Choose project type** &mdash; Choose what project type you want to create: **Empty**, **Standard**, **Grid** and **Menu**, **Mobile with Ajax Navigation**, or **Mobile with Server Navigation**.
+* **Version** &mdash; Choose which version of Telerik UI for ASP.NET MVC to use.
 * **Target ASP.NET MVC Version**&mdash;Choose the targeted ASP.NET MVC version.
-* **View Engine**&mdash;Choose between Razor and WebForms.
-* **Theme**&mdash;Choose the visual theme for your Telerik UI for ASP.NET MVC application.
-* **Copy Editor Templates**&mdash;Copy the predefined editor templates to `~/Views/Shared/EditorTemplates`.
-* **Use CDN Support**&mdash;Enable or disable Kendo UI [CDN]({% slug kendoui_cdn_services_installation %}) support.
-* **Copy Global Resources**&mdash;Copy the localization files to `~/Scripts/kendo/{version}/cultures`.
-* **Add Test Project**&mdash;Choose whether to add a test project to the solution.
 
 ### New Web Application Creation
 
@@ -47,14 +37,11 @@ When you click **Finish**, the creation of a new Kendo UI web application begins
 Then, the wizard:
 
 * Creates a new ASP.NET MVC application.
-* Copies all Kendo UI scripts, including the `vsdoc` script that enables the Visual Studio IntelliSense feature, if the CDN support is disabled.
-* Copies all Kendo UI content files, if the CDN support is disabled
-* (Optional) Copies all Kendo UI global resources.
-* (Optional) Copies all Kendo UI editor templates.
-* (Optional) Copy the Kendo UI assembly to your solution folder.
+* Copies all Kendo UI scripts, including the `vsdoc` script that enables the Visual Studio IntelliSense feature.
+* Copies all Kendo UI content files.
+* Copies all Kendo UI editor templates.
+* (Optional) Copy the Kendo UI assembly to your solution folder - this option could be changed in the [Visual Studio Extensions Options]({% slug vsextensionsoptions_visualstudio_aspnetmvc %}).
 * Add reference to the `Kendo.Mvc` assembly.
-* Apply the pre-selected theme.
-* (Optional) Creates a test project.
 
 ### Modernize Inclusion
 
