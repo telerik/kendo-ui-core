@@ -13,7 +13,7 @@ The template is specified by the `data-template` attribute of the element. The v
 
 > **Important**
 >
-> The `source` binding does not support nesting widgets with source binding such as `treeview` with source binding to the view model. The nested widgets trigger a source change, which forces the root source binging to re-render its content, leading to infinitive loops. The proper way to nest widgets with source is to use the `data-source` attribute[demo]({% slug howto_rendermultipleusing_htmlsourcebinding_mvvm_treeview %}).
+> The `source` binding does not support nesting widgets with source binding such as `treeview` with source binding to the view model. The nested widgets trigger a source change, which forces the root source binging to re-render its content, leading to infinitive loops. The proper way to nest widgets with source is to use the `data-source` attribute [demo]({% slug howto_rendermultipleusing_htmlsourcebinding_mvvm_treeview %}).
 
 ## Source Binding to Array
 
