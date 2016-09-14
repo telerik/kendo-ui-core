@@ -252,16 +252,16 @@ navigation:
         position: 8
     "aspnet-mvc/mvc-core":
         title: "Use with ASP.NET Core"
-        position: 14
+        position: 15
     "aspnet-mvc/vs-integration":
         title: "Visual Studio Integration"
-        position: 15
+        position: 16
     "aspnet-mvc/migration":
         title: "Migrate From Telerik Extensions"
-        position: 16
+        position: 17
     "aspnet-mvc/helpers":
         title: "Widgets"
-        position: 17
+        position: 18
     "aspnet-mvc/helpers/grid/binding":
         title: "Binding"
         position: 6
@@ -283,13 +283,13 @@ navigation:
         title: "Hybrid UI"
     "aspnet-mvc/how-to":
         title: "How To"
-        position: 18
+        position: 19
     "aspnet-mvc/troubleshoot":
         title: "Troubleshooting"
-        position: 19
+        position: 20
     "aspnet-mvc/tutorials":
         title: "Tutorials"
-        position: 20
+        position: 21
     "aspnet-mvc/tutorials/quickstart":
         title: "Quick Start Guide"
         position: 1
