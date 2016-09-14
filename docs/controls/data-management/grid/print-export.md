@@ -29,7 +29,7 @@ The following example addresses this issue by cloning the header row and prepend
 	function printGrid() {
 		var gridElement = $('#grid'),
 			printableContent = '',
-			win = window.open('', '', 'width=800, height=500'),
+			win = window.open('', '', 'width=800, height=500, resizable=1, scrollbars=1'),
 			doc = win.document.open();
 
 		var htmlStart =
