@@ -1,12 +1,12 @@
 ---
-title: Project Wizard Upgrade
-page_title: Project Wizard Upgrade | UI for ASP.NET MVC Visual Studio Integration
+title: Upgrade Project
+page_title: Upgrade Project | UI for ASP.NET MVC Visual Studio Integration
 description: "Learn how to upgrade a Telerik UI for ASP.NET MVC application."
 slug: projectwizardupgrade_visualstudio_aspnetmvc
-position: 4
+position: 5
 ---
 
-# Project Wizard Upgrade
+# Upgrade Project
 
 This article demonstrates how to upgrade a Telerik UI for ASP.NET MVC application.
 
@@ -63,8 +63,8 @@ The **Create Backup** page allows you to:
 Other articles on Telerik UI for ASP.NET MVC Visual Studio integration:
 
 * [Visual Studio Integration Overview]({% slug overview_visualstudio_aspnetmvc %})
-* [New Project Wizard]({% slug newprojectwizards_visualstudio_aspnetmvc %})
-* [Project Wizard Configuration]({% slug projectwizardconfig_visualstudio_aspnetmvc %})
-* [Project Wizard Conversion]({% slug projectwizardcoversion_visualstudio_aspnetmvc %})
+* [Create Project]({% slug newprojectwizards_visualstudio_aspnetmvc %})
+* [Configure Project]({% slug projectwizardconfig_visualstudio_aspnetmvc %})
+* [Convert Project]({% slug projectwizardcoversion_visualstudio_aspnetmvc %})
 * [Visual Studio Extensions Options]({% slug vsextensionsoptions_visualstudio_aspnetmvc %})
-* [Latest Version Retrieval]({% slug latestversionretrieval_visualstudio_aspnetmvc %})
+* [Download New Version]({% slug latestversionretrieval_visualstudio_aspnetmvc %})

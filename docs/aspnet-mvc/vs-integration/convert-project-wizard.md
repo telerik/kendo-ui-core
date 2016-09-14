@@ -1,12 +1,12 @@
 ---
-title: Project Wizard Conversion
-page_title: Project Wizard Conversion | UI for ASP.NET MVC Visual Studio Integration
+title: Convert Project
+page_title: Convert Project | UI for ASP.NET MVC Visual Studio Integration
 description: "Learn how to convert an existing ASP.NET MVC application to a Telerik UI for ASP.NET MVC application."
 slug: projectwizardcoversion_visualstudio_aspnetmvc
-position: 5
+position: 3
 ---
 
-# Project Wizard Conversion
+# Convert Project
 
 This article demonstrates how to convert an existing ASP.NET MVC application to a Telerik UI for ASP.NET MVC application.
 
@@ -59,8 +59,8 @@ If you have an existing Telerik MVC Extensions project, you can convert it to Ke
 Other articles on Telerik UI for ASP.NET MVC Visual Studio integration:
 
 * [Visual Studio Integration Overview]({% slug overview_visualstudio_aspnetmvc %})
-* [New Project Wizard]({% slug newprojectwizards_visualstudio_aspnetmvc %})
-* [Project Wizard Configuration]({% slug projectwizardconfig_visualstudio_aspnetmvc %})
-* [Project Wizard Upgrade]({% slug projectwizardupgrade_visualstudio_aspnetmvc %})
+* [Create Project]({% slug newprojectwizards_visualstudio_aspnetmvc %})
+* [Configure Project]({% slug projectwizardconfig_visualstudio_aspnetmvc %})
+* [Upgrade Project]({% slug projectwizardupgrade_visualstudio_aspnetmvc %})
 * [Visual Studio Extensions Options]({% slug vsextensionsoptions_visualstudio_aspnetmvc %})
-* [Latest Version Retrieval]({% slug latestversionretrieval_visualstudio_aspnetmvc %})
+* [Download New Version]({% slug latestversionretrieval_visualstudio_aspnetmvc %})

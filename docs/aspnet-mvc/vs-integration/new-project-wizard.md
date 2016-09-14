@@ -1,12 +1,12 @@
 ---
-title: New Project Wizard
-page_title: New Project Wizard | UI for ASP.NET MVC Visual Studio Integration
+title: Create Project
+page_title: Create Project | UI for ASP.NET MVC Visual Studio Integration
 description: "Learn how to create a new Telerik UI for ASP.NET MVC application."
 slug: newprojectwizards_visualstudio_aspnetmvc
 position: 2
 ---
 
-# New Project Wizard
+# Create Project
 
 This article demonstrates how to create a new Telerik UI for ASP.NET MVC application.
 
@@ -14,7 +14,7 @@ This article demonstrates how to create a new Telerik UI for ASP.NET MVC applica
 
 ### The Basics
 
-The New Project wizard is used for the creation of a new Telerik UI for ASP.NET MVC application. You could start the New Project Wizard through the Telerik menu &mdash; **Telerik** > **UI for ASP.NET MVC** > **Create New Telerik Project** or by selecting **File** > **New** > **Project** and navigating to the Telerik ASP.NET MVC project templates under **Telerik** > **Web** node. For convenience the same project templates could be found under the **Visual C#** > **Web** and **Visual Basic** > **Web** nodes.
+New Telerik UI for ASP.NET MVC application is created with the New Project Wizard. You could start the New Project Wizard through the Telerik menu &mdash; **Telerik** > **UI for ASP.NET MVC** > **Create New Telerik Project** or by selecting **File** > **New** > **Project** and navigating to the Telerik ASP.NET MVC project templates under **Telerik** > **Web** node. For convenience the same project templates could be found under the **Visual C#** > **Web** and **Visual Basic** > **Web** nodes.
 
 The wizard detects all the installed versions of UI for ASP.NET MVC and lists them in the Version combobox. You can select a version which you want to be applied to your project. The following options could be set into the Create new project wizard:
 
@@ -52,8 +52,8 @@ The Kendo UI ASP.NET MVC application includes a custom stripped-down Modernizr i
 Other articles on Telerik UI for ASP.NET MVC Visual Studio integration:
 
 * [Visual Studio Integration Overview]({% slug overview_visualstudio_aspnetmvc %})
-* [Project Wizard Configuration]({% slug projectwizardconfig_visualstudio_aspnetmvc %})
-* [Project Wizard Upgrade]({% slug projectwizardupgrade_visualstudio_aspnetmvc %})
-* [Project Wizard Conversion]({% slug projectwizardcoversion_visualstudio_aspnetmvc %})
+* [Configure Project]({% slug projectwizardconfig_visualstudio_aspnetmvc %})
+* [Upgrade Project]({% slug projectwizardupgrade_visualstudio_aspnetmvc %})
+* [Convert Project]({% slug projectwizardcoversion_visualstudio_aspnetmvc %})
 * [Visual Studio Extensions Options]({% slug vsextensionsoptions_visualstudio_aspnetmvc %})
-* [Latest Version Retrieval]({% slug latestversionretrieval_visualstudio_aspnetmvc %})
+* [Download New Version]({% slug latestversionretrieval_visualstudio_aspnetmvc %})

@@ -66,8 +66,8 @@ All settings under the Kendo UI category affect only the Telerik UI for ASP.NET 
 Other articles on Telerik UI for ASP.NET MVC Visual Studio integration:
 
 * [Visual Studio Integration Overview]({% slug overview_visualstudio_aspnetmvc %})
-* [New Project Wizards]({% slug newprojectwizards_visualstudio_aspnetmvc %})
-* [Project Wizard Configuration]({% slug projectwizardconfig_visualstudio_aspnetmvc %})
-* [Project Wizard Upgrade]({% slug projectwizardupgrade_visualstudio_aspnetmvc %})
-* [Project Wizard Conversion]({% slug projectwizardcoversion_visualstudio_aspnetmvc %})
-* [Latest Version Retrieval]({% slug latestversionretrieval_visualstudio_aspnetmvc %})
+* [Create Project]({% slug newprojectwizards_visualstudio_aspnetmvc %})
+* [Configure Project]({% slug projectwizardconfig_visualstudio_aspnetmvc %})
+* [Upgrade Project]({% slug projectwizardupgrade_visualstudio_aspnetmvc %})
+* [Convert Project]({% slug projectwizardcoversion_visualstudio_aspnetmvc %})
+* [Download New Version]({% slug latestversionretrieval_visualstudio_aspnetmvc %})
