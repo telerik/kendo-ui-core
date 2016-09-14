@@ -35,7 +35,7 @@ Set the default value for the **Copy referenced assemblies to solution** option 
 Set the project upgrade notifications for detected local distributions by using the options under the **Project Upgrade Notifications for Detected Local Distributions**:
 
 - **Suggest project upgrades for Telerik product version available on my computer**&mdash;When enabled, you are prompted to upgrade upon opening a project, which is not using the latest version of Telerik products installed on your system.
-- **Suggest upgrades when an equal Dev release detected on projects using a Trial**&mdash;When enabled, you are prompted to upgrade if a licensed version is available on your system, but the current project uses a trial version.
+- **Suggest upgrades when an equal Dev release is detected on projects using a Trial**&mdash;When enabled, you are prompted to upgrade if a licensed version is available on your system, but the current project uses a trial version.
 
 ### Download Folder Selection
 
