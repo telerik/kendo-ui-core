@@ -161,7 +161,7 @@ When using virtual scrolling, the data table of the Grid is not placed inside a 
 Virtual scrolling relies on a fake scrollbar. Its size is not determined by the browser, but is calculated based on the average row height of the data that is already loaded. As a result, variable row heights may cause unexpected behavior, such as inability to scroll to the last rows on the last page.
 
 To ensure that all table rows have the same heights, use either of the options:
-* Disable text wrapping.
+* Disable text wrapping.  
 * Set an explicit row height that is large enough (as demonstrated in the example below).
 
 ###### Example
@@ -207,7 +207,7 @@ If the total number of items is large and the scrolling is fast, the table of th
 
 * Because of height-related browser limitations (which cannot be avoided), virtual scrolling works with up to one or two million records. The exact number of records depends on the browser and the row height. If you use a row count that is larger than the browser can handle, unexpected widget behavior or JavaScript errors might occur. In such cases, revert to standard paging.
 
-* Refreshing or replacing the Grid data in virtual mode should be accompanied by resetting the position of the virtual scrollbar to zero, e.g. via `$('#GridID .k-scrollbar').scrollTop(0);`.
+* Refreshing or replacing the Grid data in the virtual mode has to be accompanied by resetting the position of the virtual scrollbar to zero, for example, by using `$('#GridID .k-scrollbar').scrollTop(0);`.
 
 * Programmatic scrolling to a particular Grid row is not supported when virtual scrolling is enabled, because it is not possible to reliably predict the exact scroll offset of the row.
 
