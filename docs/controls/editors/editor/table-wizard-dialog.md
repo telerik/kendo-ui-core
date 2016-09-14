@@ -1,75 +1,90 @@
 ---
 title: Table Wizard Dialog
 page_title: Table Wizard Dialog | Kendo UI Editor
-description: "The Table Wizard Dialog enables user to add HTML tables and configure them easily in Kendo UI Editor."
+description: "Enable the user to add HTML tables and configure them easily by using the Table Wizard dialog in the Kendo UI Editor."
 slug: table_wizard_dialog_editor_widget
 position: 8
 ---
 
 # Table Wizard Dialog
 
-As of **R3 2016**, in addition to the **Insert Table** tool, users can add and configure tables using the **Table Wizard** dialog.
+As of the Kendo UI R3 2016 release and in addition to the **Insert Table** tool, the user is now able to add and configure tables by using the **Table Wizard** dialog.
 
 ![](/controls/editors/editor/table-wizard.png)
 
-## Opening the Table Wizard
+## Getting Started
 
-To insert a new table using the **Table Wizard** you can use the **Insert Table** tool and click on the **Table Wizard** button to open the dialog. Then, configure the table to be inserted and click the **OK** button.
+### Insertion of Tables  
+
+To insert a new table by using the **Table Wizard** dialog, follow the steps below:
+
+**Step 1** Open the **Insert Table** tool.  
+**Step 2** Click the **Table Wizard** button to open the dialog.  
+**Step 3** Configure the table that is to be inserted.   
+**Step 4** Click the **OK** button.  
 
 ![](/controls/editors/editor/table-wizard-open.png)
 
+### Modification of Tables
 
-To modify an existing table (or table cell) first select the table (or table cell) to edit and click on the **Table Wizard** tool in the toolbar.
+To modify an existing table or a table cell, follow the steps below:
+
+**Step 1** Select the table or the table cell to edit.  
+**Step 2** Click the **Table Wizard** tool in the toolbar.  
 
 ![](/controls/editors/editor/table-wizard-edit.png)
 
 ## Table Wizard Options
 
-The table and cell options available in the **Table Wizard** are separated in three tabs:
+The table and cell options that are available in the **Table Wizard** are displayed in three tabs:
 
-* **Table**—options for the table element;
-* **Cell**—options for the selected cell or all cells in the table;
-* **Accessibility**—accessibility-related options.
+* [**Table**](#table-tab)&mdash;The available options for the table element.
+* [**Cell**](#cell-tab)&mdash;The available options for the selected cell or all cells in the table.
+* [**Accessibility**](#accessibility-tab)&mdash;The available options related to accessibility.
 
-You can refer to the following sections for more details about each tab:
+### Table Tab
 
-### Table Options
+The **Table** tab provides the following options:
 
-* **Width**—changes the width of the table (pixel, em or percent);
-* **Height**—changes the height of the table (px, em or percent);
-* **Columns**—defines the columns of the table;
-* **Rows**—defines the rows of the table;
-* **Cell Spacing**—specifies the space between cells ([cellspacing attribute](http://www.w3schools.com/tags/att_table_cellspacing.asp));
-* **Cell Padding**—specifies the padding in the cells ([cellpadding attribute](http://www.w3schools.com/tags/att_table_cellpadding.asp));
-* **Alignment**—specifies the text alignment in the cells;
-* **Background**—specifies the background color of the table;
-* **CSS Class**—defines class names for the table element (white space-separated);
-* **ID**—defines the id of the table element;
-* **Border**—defines the border size (pixel only) and color;
-* **Border Style**—defines the border style (none,hidden,dotted,dashed,solid,double,groove,ridge,inset,outset,initial and inherit);
-* **Collapse borders**—adds an inline style to that table element with `border-collapse: collapse` rule ([border-collapse property](http://www.w3schools.com/cssref/pr_border-collapse.asp)).
+* **Width**&mdash;Changes the width of the table (in pixels, em, or percent).
+* **Height**&mdash;Changes the height of the table (in pixels, em, or percent).
+* **Columns**&mdash;Defines the columns of the table.
+* **Rows**&mdash;Defines the rows of the table.
+* **Cell Spacing**&mdash;Specifies the space between the cells ([`cellspacing` attribute](http://www.w3schools.com/tags/att_table_cellspacing.asp)).
+* **Cell Padding**&mdash;Specifies the padding in the cells ([`cellpadding` attribute](http://www.w3schools.com/tags/att_table_cellpadding.asp)).
+* **Alignment**&mdash;Specifies the text alignment in the cells.
+* **Background**&mdash;Specifies the background color of the table.
+* **CSS Class**&mdash;Defines the class names for the table element (white space-separated).
+* **ID**&mdash;Defines the id of the table element.
+* **Border**&mdash;Defines the border size (in pixels only) and color.
+* **Border Style**&mdash;Defines the border style (`none`, `hidden`, `dotted`, `dashed`, `solid`, `double`, `groove`, `ridge`, `inset`, `outset`, `initial`, and `inherit`).
+* **Collapse borders**&mdash;Adds an inline style to that table element with the `border-collapse: collapse` rule ([`border-collapse` property](http://www.w3schools.com/cssref/pr_border-collapse.asp)).
 
-### Cell Options
+### Cell Tab
 
-* **Select All Cells**—will apply the changes to all cells in the table.
-* **Width**—changes the width of the cell/cells (pixel, em or percent);
-* **Height**—changes the height of the cell/cells (pixel, em or percent);
-* **Cell Margin**—defines the margin of the cell/cells;
-* **Cell Padding**—defines the padding of the cell/cells;
-* **Alignment**—specifies the text alignment of the cell/cells;
-* **Background**—specifies the background color of the cell/cells;
-* **CSS Class**—defines class names for the cell/cells (white space-separated);
-* **ID**—defines the id of the cell/cells;
-* **Border**—defines the border size (pixel only) and color of the cell/cells;
-* **Border Style**—defines the border style (none,hidden,dotted,dashed,solid,double,groove,ridge,inset,outset,initial and inherit);
-* **Wrap text**—when unchecked applies a `white-space: nowrap` style to the cell/cells ([white-space property](http://www.w3schools.com/cssref/pr_text_white-space.asp)).
+The **Cell** tab provides the following options:
 
-### Accessibility Options
+* **Select All Cells**&mdash;Applies the changes to all cells in the table.
+* **Width**&mdash;Changes the width of the cell or cells (in pixels, em, or percent).
+* **Height**&mdash;Changes the height of the cell or cells (in pixels, em, or percent).
+* **Cell Margin**&mdash;Defines the margin of the cell or cells.
+* **Cell Padding**&mdash;Defines the padding of the cell or cells.
+* **Alignment**&mdash;Specifies the text alignment of the cell or cells.
+* **Background**&mdash;Specifies the background color of the cell or cells.
+* **CSS Class**&mdash;Defines class names for the cells (white space-separated).
+* **ID**&mdash;Defines the id of the cells.
+* **Border**&mdash;Defines the border size (in pixels only) and color of the cells.
+* **Border Style**&mdash;Defines the border style (`none`, `hidden`, `dotted`, `dashed`, `solid`, `double`, `groove`, `ridge`, `inset`, `outset`, `initial`, and `inherit`).
+* **Wrap text**&mdash;When unchecked, applies a `white-space: nowrap` style to the cells ([`white-space` property](http://www.w3schools.com/cssref/pr_text_white-space.asp)).
 
-* **Caption**—adds caption text for the table;
-* **Alignment**—defines the text alignment of the caption;
-* **Summary**—adds a [summary attribute](http://www.w3schools.com/tags/att_table_summary.asp) with the value defines to the table;
-* **Associate cells with headers**—associates the cells with the header id attributes ([Using id and headers attributes to associate data cells with header cells in data tables](https://www.w3.org/TR/WCAG20-TECHS/H43.html)).
+### Accessibility Tab
+
+The **Accessibility** tab provides the following options:
+
+* **Caption**&mdash;Adds a caption text for the table.
+* **Alignment**&mdash;Defines the text alignment of the caption.
+* **Summary**&mdash;Adds a [`summary` attribute](http://www.w3schools.com/tags/att_table_summary.asp) with the value defined to the table.
+* **Associate cells with headers**&mdash;Associates the cells with the header id attributes. For more information on using id and header attributes, refer to the article on [using id and header attributes to associate data cells with header cells in data tables](https://www.w3.org/TR/WCAG20-TECHS/H43.html)).
 
 ## See Also
 
