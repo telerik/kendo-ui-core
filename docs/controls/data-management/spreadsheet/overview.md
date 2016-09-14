@@ -95,7 +95,7 @@ The Spreadsheet features a built-in [export-to-Excel]({% slug export_toexcel_spr
 
 Individual sheets can be bound to a Data Source in a special data-driven mode.
 
-For more information on the data-binding Spreadsheet functionality, refer to the [article on biding the Spreadsheet to a data source]({% slug bind_todata_source_spreadsheet_widget %}).
+For more information on the data-binding Spreadsheet functionality, refer to the [article on binding the Spreadsheet to a data source]({% slug bind_todata_source_spreadsheet_widget %}).
 
 ## Mobile Integration
 
