@@ -195,7 +195,7 @@ If the total number of items is large and the scrolling is fast, the table of th
 
 * Either enable virtual scrolling or paging. Do not apply both features at the same time.
 
-* It is not recommended to use virtual scrolling together with grouping, hierarchy, or editing.
+* Virtual scrolling is not compatible with grouping, hierarchy, and editing.
 
 * Virtual scrolling relies on calculating the average row height based on already loaded data. Having a large variance of row heights or an unknown number of rows that are not bound to data (such as group headers) might cause unexpected behavior.
 
