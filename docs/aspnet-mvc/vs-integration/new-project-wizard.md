@@ -18,9 +18,9 @@ The New Project wizard is used for the creation of a new Telerik UI for ASP.NET 
 
 The wizard detects all the installed versions of UI for ASP.NET MVC and lists them in the Version combobox. You can select a version which you want to be applied to your project. The following options could be set into the Create new project wizard:
 
-**Figure 1. A new project wizard**
+**Figure 1. New Project Wizard**
 
-![New Project Wizard](/aspnet-mvc/vs-integration/images/new-project.png)
+![New Project Wizard](/aspnet-mvc/vs-integration/images/new_project.png)
 
 ### Project Settings
 
