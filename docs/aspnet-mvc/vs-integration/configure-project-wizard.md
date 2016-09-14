@@ -20,7 +20,7 @@ The first page ot the Project Configuration Wizard let's you change the visual t
 
 The second page of the Project Configuration Wizard enables you to modify project-wise settings, such as:
 
-- **Render Right-To-Left** &mdash; Update Master page with Right-to-left support class and add css reference for rtl styles..
+- **Render Right-To-Left** &mdash; Update Master page with Right-to-left support class and add css reference for rtl styles.
 - **Copy Global Resources** &mdash; Copy the localization files to `~/Scripts/kendo/{version}/cultures`.
 - **Use CDN Support** &mdash; Enable or disable Kendo UI [CDN]({% slug kendoui_cdn_services_installation %}) support.
 
