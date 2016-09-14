@@ -47,6 +47,7 @@ When installed, the extensions add the project templates to the New Project dial
 These are available in the language-specific nodes of the dialog as well. The **Add New Project** dialog contains the Telerik UI for ASP.NET MVC web application under both the `CSharp\Web` and `Visual Basic\Web` nodes.
 
 There are also two additional project templates
+
 * [C# Telerik ASP.NET Core MVC application]({% slug gettingstarted_aspnetmvc6_aspnetmvc %})
 * Kendo UI ASP.NET MVC 5 application
 
@@ -60,7 +61,7 @@ The new ASP.NET MVC 4 project wizard also contains the Telerik UI for ASP.NET MV
 
 Other articles on Telerik UI for ASP.NET MVC Visual Studio integration:
 
-* [New Project Wizards]({% slug newprojectwizards_visualstudio_aspnetmvc %})
+* [New Project Wizard]({% slug newprojectwizards_visualstudio_aspnetmvc %})
 * [Project Wizard Configuration]({% slug projectwizardconfig_visualstudio_aspnetmvc %})
 * [Project Wizard Upgrade]({% slug projectwizardupgrade_visualstudio_aspnetmvc %})
 * [Project Wizard Conversion]({% slug projectwizardcoversion_visualstudio_aspnetmvc %})
