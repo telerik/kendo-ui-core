@@ -22,45 +22,35 @@ To launch the Upgrade Wizard, go to the menu and click **Telerik** > **UI for AS
 
 The first screen of the Upgrade Wizard describes what will be upgraded.
 
-**Figure 2. The warning page of the Upgrade Wizard**
+**Figure 2. Information page**
 
-![Upgrade wizard warning page](/aspnet-mvc/vs-integration/images/upgrade_warning.png)
-
-In addition to the pure assembly reference change, the Upgrade Wizard provides important features, such as:
-- Check and retrieve the latest available Telerik UI for ASP.NET MVC release.
-- Change the version of Telerik UI for ASP.NET MVC in the projects the Solution uses.
+![Information page](/aspnet-mvc/vs-integration/images/upgrade_warning.png)
 
 ### Choose Projects to Update
 
-**Figure 3. Update project resources**
+On the next step the wizard lists all projects from the solution, which use Telerik UI for ASP.NET MVC. You can choose which projects will be updated (it is recommended to upgrade all projects to the chosen version) and the version which they will be upgraded to:
 
-![update Project Resources](/aspnet-mvc/vs-integration/images/upgrade1.png)
+**Figure 3. Choose projects and distribution version**
 
-The page allows you to configure the options, such as:
+![Choose projects and distribution version](/aspnet-mvc/vs-integration/images/upgrade_version.png)
 
-- **Version**&mdash;Select from all previously installed or downloaded versions using the Visual Studio Extensions.
-- **Add referenced assemblies to solution**&mdash;Choose whether to copy referenced assemblies to your solution folder. The assemblies will automatically be added to the source control when using the Microsoft Team Foundation Server.
-- **Download**&mdash;Launch the Latest Version Acquirer tool.
-- **Browse**&mdash;Browse to a location where the new version is manually downloaded and extracted.
-- **Choose Projects**&mdash;Choose which projects to be updated. It is recommended to keep all Telerik projects under the same version.
-
-> **Important**
-> * The distribution, downloaded by the Upgrade Wizard, contains only the `hotfix` files. For example, the bare bone files, needed for a project to run correctly. It does not contain the documentation or the demo project.
-> * The listed projects use Telerik UI for ASP.NET MVC 4. If the solution contains projects which use Telerik UI for ASP.NET MVC for other MVC version, they are displayed on a separate page. When you complete the wizard, all selected projects from the different pages are updated.
+> **Note**
+>
+> The listed projects target all of the supported MVC versions. When you complete the wizard all selected projects will be updated.
 
 ### Update Project Resources
 
-**Figure 4. The Update Project Resources page**
+**Figure 4. Update Project Resources page**
 
-![Update Project Resources](/aspnet-mvc/vs-integration/images/upgrade2.png)
+![Update Project Resources](/aspnet-mvc/vs-integration/images/upgrade_settings.png)
 
 The Update Project Resources page allows you to Update the editor templates in `~/Views/Shared/EditorTemplates` by choosing **Update Editor Templates**.
 
 ### Create Backup
 
-**Figure 5. The Create Backup page**
+**Figure 5. Create Backup page**
 
-![Create Backup](/aspnet-mvc/vs-integration/images/upgrade3.png)
+![Create Backup](/aspnet-mvc/vs-integration/images/upgrade_backup.png)
 
 The **Create Backup** page allows you to:
 
@@ -73,7 +63,7 @@ The **Create Backup** page allows you to:
 Other articles on Telerik UI for ASP.NET MVC Visual Studio integration:
 
 * [Visual Studio Integration Overview]({% slug overview_visualstudio_aspnetmvc %})
-* [New Project Wizards]({% slug newprojectwizards_visualstudio_aspnetmvc %})
+* [New Project Wizard]({% slug newprojectwizards_visualstudio_aspnetmvc %})
 * [Project Wizard Configuration]({% slug projectwizardconfig_visualstudio_aspnetmvc %})
 * [Project Wizard Conversion]({% slug projectwizardcoversion_visualstudio_aspnetmvc %})
 * [Visual Studio Extensions Options]({% slug vsextensionsoptions_visualstudio_aspnetmvc %})
