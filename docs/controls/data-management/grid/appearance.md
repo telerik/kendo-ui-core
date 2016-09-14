@@ -207,6 +207,8 @@ If the total number of items is large and the scrolling is fast, the table of th
 
 * Because of height-related browser limitations (which cannot be avoided), virtual scrolling works with up to one or two million records. The exact number of records depends on the browser and the row height. If you use a row count that is larger than the browser can handle, unexpected widget behavior or JavaScript errors might occur. In such cases, revert to standard paging.
 
+* Refreshing or replacing the Grid data in virtual mode should be accompanied by resetting the position of the virtual scrollbar to zero, e.g. via `$('#GridID .k-scrollbar').scrollTop(0);`.
+
 * Programmatic scrolling to a particular Grid row is not supported when virtual scrolling is enabled, because it is not possible to reliably predict the exact scroll offset of the row.
 
 * The Grid does not persist [selection](#selection) when virtual scrolling occurs. To achieve this behavior, [use this custom implementation]({% slug howto_persist_row_selection_paging_sorting_filtering_grid %}).
