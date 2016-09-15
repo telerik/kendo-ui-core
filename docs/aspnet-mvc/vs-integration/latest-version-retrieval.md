@@ -1,12 +1,12 @@
 ---
-title: Latest Version Retrieval
-page_title: Latest Version Retrieval | UI for ASP.NET MVC Visual Studio Integration
+title: Download New Version
+page_title: Download New Version | UI for ASP.NET MVC Visual Studio Integration
 description: "Learn how to keep your projects updated when using Telerik UI for ASP.NET MVC."
 slug: latestversionretrieval_visualstudio_aspnetmvc
-position: 6
+position: 8
 ---
 
-# Latest Version Retrieval
+# Download New Version
 
 With the Telerik UI for ASP.NET MVC Visual Studio Extensions you keep your projects in an up-to-date state. The Latest Version Acquirer tool automatically retrieves the latest Telerik UI for ASP.NET MVC distribution available on the Telerik website.
 
@@ -53,8 +53,8 @@ Once the download succeeds, the latest version of Telerik UI for ASP.NET MVC is 
 Other articles on Telerik UI for ASP.NET MVC Visual Studio integration:
 
 * [Visual Studio Integration Overview]({% slug overview_visualstudio_aspnetmvc %})
-* [New Project Wizards]({% slug newprojectwizards_visualstudio_aspnetmvc %})
-* [Project Wizard Configuration]({% slug projectwizardconfig_visualstudio_aspnetmvc %})
-* [Project Wizard Upgrade]({% slug projectwizardupgrade_visualstudio_aspnetmvc %})
-* [Project Wizard Conversion]({% slug projectwizardcoversion_visualstudio_aspnetmvc %})
+* [Create Project]({% slug newprojectwizards_visualstudio_aspnetmvc %})
+* [Configure Project]({% slug projectwizardconfig_visualstudio_aspnetmvc %})
+* [Upgrade Project]({% slug projectwizardupgrade_visualstudio_aspnetmvc %})
+* [Convert Project]({% slug projectwizardcoversion_visualstudio_aspnetmvc %})
 * [Visual Studio Extensions Options]({% slug vsextensionsoptions_visualstudio_aspnetmvc %})
