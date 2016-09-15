@@ -10,7 +10,7 @@ position: 6
 
 With the Telerik UI for ASP.NET MVC Visual Studio Extensions you keep your projects in an up-to-date state. The Latest Version Acquirer tool automatically retrieves the latest Telerik UI for ASP.NET MVC distribution available on the Telerik website.
 
-Once a day, upon Visual Studio launch, the extensions query the Telerik website for a new version of Telerik UI for ASP.NET MVC. A notification gets displayed when a new version is discovered.
+Once a day, upon loading a project with UI for ASP.NET MVC controls, the extensions query the Telerik website for a new version of Telerik UI for ASP.NET MVC. A notification gets displayed when a new version is discovered.
 
 **Figure 1. A displayed notification upon locating a new Telerik UI for ASP.NET MVC version**
 
@@ -20,7 +20,7 @@ Once a day, upon Visual Studio launch, the extensions query the Telerik website 
 >
 > If you disable the notifications, you can use the **Options** Dialog to activate them again.
 
-Clicking **Get Now** starts the Latest Version Acquirer tool, prompting for your Telerik credentials in its first page. If you do not have a `www.telerik.com` account, you can create one through the **Register** link.
+Clicking **Update Now** starts the Latest Version Acquirer tool, prompting for your Telerik credentials in its first page. If you do not have a `www.telerik.com` account, you can create one through the **Create an account for free** link.
 
 **Figure 2. The Get the Latest Version dialog**
 
