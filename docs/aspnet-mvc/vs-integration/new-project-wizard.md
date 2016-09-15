@@ -51,6 +51,7 @@ The Kendo UI ASP.NET MVC application includes a custom stripped-down Modernizr i
 
 Other articles on Telerik UI for ASP.NET MVC Visual Studio integration:
 
+* [Create Kendo UI Professional Project]({% slug newprojectwizard_visualstudio_kendoui %})
 * [Visual Studio Integration Overview]({% slug overview_visualstudio_aspnetmvc %})
 * [Configure Project]({% slug projectwizardconfig_visualstudio_aspnetmvc %})
 * [Upgrade Project]({% slug projectwizardupgrade_visualstudio_aspnetmvc %})

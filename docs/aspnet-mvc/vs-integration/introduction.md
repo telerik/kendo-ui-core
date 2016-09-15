@@ -49,7 +49,7 @@ These are available in the language-specific nodes of the dialog as well. The **
 There are also two additional project templates
 
 * [C# Telerik ASP.NET Core MVC application]({% slug gettingstarted_aspnetmvc6_aspnetmvc %})
-* Kendo UI ASP.NET MVC 5 application
+* [Kendo UI ASP.NET MVC 5 application]({% slug newprojectwizard_visualstudio_kendoui %})
 
 The new ASP.NET MVC 4 project wizard also contains the Telerik UI for ASP.NET MVC web application.
 

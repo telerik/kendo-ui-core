@@ -3,7 +3,7 @@ title: Upgrade Project
 page_title: Upgrade Project | UI for ASP.NET MVC Visual Studio Integration
 description: "Learn how to upgrade a Telerik UI for ASP.NET MVC application."
 slug: projectwizardupgrade_visualstudio_aspnetmvc
-position: 5
+position: 6
 ---
 
 # Upgrade Project
