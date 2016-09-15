@@ -12,10 +12,10 @@ The Telerik UI for ASP.NET MVC Visual Studio Extensions enhance the experience o
 
 The extensions handle the following major points:
 
-* Project [Creation]({% slug newprojectwizards_visualstudio_aspnetmvc %}) and [Configuration]({% slug projectwizardconfig_visualstudio_aspnetmvc %}) Wizards &mdash; web asset management, adding the required settings to `web.config`, changing the theme.
-* Project [Upgrade]({% slug projectwizardupgrade_visualstudio_aspnetmvc %}) &mdash; upgrading Telerik UI for ASP.NET MVC to a new version.
+* Project [Creation]({% slug newprojectwizards_visualstudio_aspnetmvc %}) and [Configuration]({% slug projectwizardconfig_visualstudio_aspnetmvc %}) Wizards&mdash;Web asset management, adding the required settings to `web.config`, changing the theme.
+* Project [Upgrade]({% slug projectwizardupgrade_visualstudio_aspnetmvc %})&mdash;Upgrading Telerik UI for ASP.NET MVC to a new version.
 
-The Telerik UI for ASP.NET MVC Visual Studio Extensions are distributed with the Telerik UI for ASP.NET MVC installer. They support Visual Studio 2010, 2012, 2013 and 2015, which handle ASP.NET MVC 4 and 5 applications.
+The Telerik UI for ASP.NET MVC Visual Studio Extensions are distributed with the Telerik UI for ASP.NET MVC installer. They support Visual Studio 2010, 2012, 2013, and 2015, which handle ASP.NET MVC 4 and 5 applications.
 
 > **Important**
 >
@@ -59,11 +59,9 @@ The new ASP.NET MVC 4 project wizard also contains the Telerik UI for ASP.NET MV
 
 ## See Also
 
-Other articles on Telerik UI for ASP.NET MVC Visual Studio integration:
-
-* [Create Project]({% slug newprojectwizards_visualstudio_aspnetmvc %})
-* [Configure Project]({% slug projectwizardconfig_visualstudio_aspnetmvc %})
-* [Upgrade Project]({% slug projectwizardupgrade_visualstudio_aspnetmvc %})
-* [Convert Project]({% slug projectwizardcoversion_visualstudio_aspnetmvc %})
+* [Create Projects]({% slug newprojectwizards_visualstudio_aspnetmvc %})
+* [Configure Projects]({% slug projectwizardconfig_visualstudio_aspnetmvc %})
+* [Upgrade Projects]({% slug projectwizardupgrade_visualstudio_aspnetmvc %})
+* [Convert Projects]({% slug projectwizardcoversion_visualstudio_aspnetmvc %})
 * [Visual Studio Extensions Options]({% slug vsextensionsoptions_visualstudio_aspnetmvc %})
-* [Download New Version]({% slug latestversionretrieval_visualstudio_aspnetmvc %})
+* [Download New Versions]({% slug latestversionretrieval_visualstudio_aspnetmvc %})

@@ -1,12 +1,12 @@
 ---
-title: Convert Project
-page_title: Convert Project | UI for ASP.NET MVC Visual Studio Integration
+title: Convert Projects
+page_title: Convert Projects | UI for ASP.NET MVC Visual Studio Integration
 description: "Learn how to convert an existing ASP.NET MVC application to a Telerik UI for ASP.NET MVC application."
 slug: projectwizardcoversion_visualstudio_aspnetmvc
 position: 4
 ---
 
-# Convert Project
+# Convert Projects
 
 This article demonstrates how to convert an existing ASP.NET MVC application to a Telerik UI for ASP.NET MVC application.
 
@@ -14,53 +14,53 @@ This article demonstrates how to convert an existing ASP.NET MVC application to 
 
 ### The Basics
 
-The **Convert Project Wizard** converts an existing ASP.NET MVC 4 or 5 to a Telerik UI for ASP.NET MVC application. To start the wizard, click **Telerik** > **UI for ASP.NET MVC** > **Convert to Telerik Application**.
+The **Convert Project Wizard** converts an existing ASP.NET MVC 4 or 5 to a Telerik UI for ASP.NET MVC application.
 
-The conversion wizard has three steps:
-- Distribution selection
-- Theme selection
-- Project settings
+To start the **Convert Project Wizard**, click **Telerik** > **UI for ASP.NET MVC** > **Convert to Telerik Application**.
 
-### Distribution selection
+The conversion wizard has three steps:  
+- [Distribution selection](#distribution-selection)
+- [Theme selection](#theme-selection)
+- [Project settings](#project-settings)
 
-Choose which version of Telerik UI for ASP.NET MVC to use.
+### Distribution Selection
+
+The distribution selection lets you choose the version of the Telerik UI for ASP.NET MVC you want to use.
 
 **Figure 1. Distribution selection**
 
 ![Distribution selection](/aspnet-mvc/vs-integration/images/convert_distribution.png)
 
-### Theme selection
+### Theme Selection
 
-Select visual theme for your Telerik UI for ASP.NET MVC application. 
+The theme selection lets you choose the visual theme for your Telerik UI for ASP.NET MVC application.
 
 **Figure 2. Theme selection**
 
 ![Theme selection](/aspnet-mvc/vs-integration/images/convert_theme.png)
 
-### Project settings
+### Project Settings
 
-The project settings page allows you to modify the project-wise settings, such as:
+The **Project Settings** page enables you to modify the project settings by configuring the following options:
 
-- **Render Right-To-Left** &mdash; Update Master page with Right-to-left support class and add css reference for rtl styles.
-- **Copy Editor Templates** &mdash; Copy the predefined editor templates to `~/Views/Shared/EditorTemplates`. Existing editor templates will be overwritten.
-- **Copy Global Resources** &mdash; Copy the localization files to `~/Scripts/kendo/{version}/cultures`.
-- **Use CDN Support** &mdash; Enable or disable Kendo UI [CDN]({% slug kendoui_cdn_services_installation %}) support.
+- **Render Right-To-Left**&mdash;Updates the master page with the Right-to-left support class and adds CSS reference for RTL styles.
+- **Copy Editor Templates**&mdash;Copies the predefined editor templates to `~/Views/Shared/EditorTemplates`. Existing editor templates will be overwritten.
+- **Copy Global Resources**&mdash;Copies the localization files to `~/Scripts/kendo/{version}/cultures`.
+- **Use CDN Support**&mdash;Enables or disables the [Kendo UI CDN support]({% slug kendoui_cdn_services_installation %}).
 
 **Figure 3. Project settings**
 
 ![Project settings](/aspnet-mvc/vs-integration/images/convert_settings.png)
 
-### Existing Telerik MVC Extensions Project Conversion
+### Conversion of Existing Telerik MVC Extensions Projects
 
-If you have an existing Telerik MVC Extensions project, you can convert it to Kendo UI project with the aid of the Convert Wizard. This will add the Kendo UI components to the project without removing the existing Telerik MVC Extensions content. For compatibility reasons, the Kendo UI Convert Wizard will attempt to disable the Telerik MVC Extensions embedded jQuery usage because it might interfere with the Kendo UI jQuery inclusion.
+It is possible to convert an existing Telerik MVC Extensions project by using the **Convert Project Wizard**. This adds the Kendo UI components to the project without removing the existing Telerik MVC Extensions content. For compatibility reasons, the Kendo UI Convert Wizard will attempt to disable the Telerik MVC Extensions embedded jQuery usage because it might interfere with the Kendo UI jQuery inclusion.
 
 ## See Also
 
-Other articles on Telerik UI for ASP.NET MVC Visual Studio integration:
-
 * [Visual Studio Integration Overview]({% slug overview_visualstudio_aspnetmvc %})
-* [Create Project]({% slug newprojectwizards_visualstudio_aspnetmvc %})
-* [Configure Project]({% slug projectwizardconfig_visualstudio_aspnetmvc %})
-* [Upgrade Project]({% slug projectwizardupgrade_visualstudio_aspnetmvc %})
+* [Create Projects]({% slug newprojectwizards_visualstudio_aspnetmvc %})
+* [Configure Projects]({% slug projectwizardconfig_visualstudio_aspnetmvc %})
+* [Upgrade Projects]({% slug projectwizardupgrade_visualstudio_aspnetmvc %})
 * [Visual Studio Extensions Options]({% slug vsextensionsoptions_visualstudio_aspnetmvc %})
-* [Download New Version]({% slug latestversionretrieval_visualstudio_aspnetmvc %})
+* [Download New Versions]({% slug latestversionretrieval_visualstudio_aspnetmvc %})

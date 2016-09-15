@@ -1,70 +1,74 @@
 ---
-title: Upgrade Project
-page_title: Upgrade Project | UI for ASP.NET MVC Visual Studio Integration
+title: Upgrade Projects
+page_title: Upgrade Projects | UI for ASP.NET MVC Visual Studio Integration
 description: "Learn how to upgrade a Telerik UI for ASP.NET MVC application."
 slug: projectwizardupgrade_visualstudio_aspnetmvc
 position: 6
 ---
 
-# Upgrade Project
+# Upgrade Projects
 
 This article demonstrates how to upgrade a Telerik UI for ASP.NET MVC application.
 
 ## Getting Started
 
-### Launch the Wizard
+### The Basics
 
-To launch the Upgrade Wizard, go to the menu and click **Telerik** > **UI for ASP.NET MVC** > **Upgrade Wizard**.
+The **Upgrade Project Wizard** upgrades existing Telerik UI for ASP.NET MVC applications.
+
+To open the **Upgrade Project Wizard**, click **Telerik** > **UI for ASP.NET MVC** > **Upgrade Wizard**.
 
 **Figure 1. Launch the Upgrade Wizard**
 
 ![Choose projects](/aspnet-mvc/vs-integration/images/upgrade_menu.png)
 
-The first screen of the Upgrade Wizard describes what will be upgraded.
+### Files for Upgrade
+
+The **Information Page** of the **Upgrade Project Wizard** describes the files and assemblies that are going to be upgraded.
 
 **Figure 2. Information page**
 
 ![Information page](/aspnet-mvc/vs-integration/images/upgrade_warning.png)
 
-### Choose Projects to Update
+### Projects for Upgrade
 
-On the next step the wizard lists all projects from the solution, which use Telerik UI for ASP.NET MVC. You can choose which projects will be updated (it is recommended to upgrade all projects to the chosen version) and the version which they will be upgraded to:
+On the next page, the Wizard lists all projects from the solution that use Telerik UI for ASP.NET MVC. This enables you to choose the projects that will be updated and the version to which they will be upgraded.
+
+It is recommended to upgrade all projects to the selected version.
+
+> **Important**
+>
+> The listed projects target all MVC versions that are supported. When you complete the Wizard, all selected projects will be updated.
 
 **Figure 3. Choose projects and distribution version**
 
 ![Choose projects and distribution version](/aspnet-mvc/vs-integration/images/upgrade_version.png)
 
-> **Note**
->
-> The listed projects target all of the supported MVC versions. When you complete the wizard all selected projects will be updated.
+### Project Resources for Upgrade
 
-### Update Project Resources
+The **Upgrade Project Resources** page allows you to update the editor templates in `~/Views/Shared/EditorTemplates` by choosing **Update Editor Templates**.
 
 **Figure 4. Update Project Resources page**
 
 ![Update Project Resources](/aspnet-mvc/vs-integration/images/upgrade_settings.png)
 
-The Update Project Resources page allows you to Update the editor templates in `~/Views/Shared/EditorTemplates` by choosing **Update Editor Templates**.
+### Backup Creation
 
-### Create Backup
+The **Create Backup** page provides the following options:
+
+- **Create a backup before upgarde**&mdash;Backs up your project before upgrading it. If selected, specify the backup folder in the field below the option.
+- **Don't create a backup**&mdash;Upgrades without creating a backup of your application.
+- **Show upgrade log when the Upgrade wizard finishes the upgrade**&mdash;Displays the upgrade log after the **Upgrade Wizard** finishes the upgrade.
 
 **Figure 5. Create Backup page**
 
 ![Create Backup](/aspnet-mvc/vs-integration/images/upgrade_backup.png)
 
-The **Create Backup** page allows you to:
-
-- **Create a backup before converting**&mdash;Backup your project before upgrading it.
-- **Backup location**&mdash;Specify the backup folder.
-- **Show upgrade log when the Upgrade Wizard finishes the update**&mdash;Display the upgrade log after the Upgrade Wizard finishes.
-
 ## See Also
 
-Other articles on Telerik UI for ASP.NET MVC Visual Studio integration:
-
 * [Visual Studio Integration Overview]({% slug overview_visualstudio_aspnetmvc %})
-* [Create Project]({% slug newprojectwizards_visualstudio_aspnetmvc %})
-* [Configure Project]({% slug projectwizardconfig_visualstudio_aspnetmvc %})
-* [Convert Project]({% slug projectwizardcoversion_visualstudio_aspnetmvc %})
+* [Create Projects]({% slug newprojectwizards_visualstudio_aspnetmvc %})
+* [Configure Projects]({% slug projectwizardconfig_visualstudio_aspnetmvc %})
+* [Convert Projects]({% slug projectwizardcoversion_visualstudio_aspnetmvc %})
 * [Visual Studio Extensions Options]({% slug vsextensionsoptions_visualstudio_aspnetmvc %})
-* [Download New Version]({% slug latestversionretrieval_visualstudio_aspnetmvc %})
+* [Download New Versions]({% slug latestversionretrieval_visualstudio_aspnetmvc %})
