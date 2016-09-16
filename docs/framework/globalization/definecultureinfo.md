@@ -25,7 +25,7 @@ The example below lists the default culture information.
         name: "en-US",
 		// "numberFormat" defines general number formatting rules
         numberFormat: {
-            //numberFormat has only negative pattern unline the percent and currency
+            //numberFormat has only negative pattern unlike the percent and currency
             //negative pattern: one of (n)|-n|- n|n-|n -
             pattern: ["-n"],
             //number of decimal places
@@ -105,12 +105,12 @@ The example below lists the default culture information.
                     u: "yyyy'-'MM'-'dd HH':'mm':'ss'Z'",
                     y: "MMMM, yyyy",
                     Y: "MMMM, yyyy"
-                },-
+                },
 				// the first day of the week (0 = Sunday, 1 = Monday, etc)
                 firstDay: 0
             }
         }
-    }};
+    };
 
 ### Extend Culture Information
 
