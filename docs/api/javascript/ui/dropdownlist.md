@@ -468,7 +468,7 @@ The minimum number of characters the user must type before a filter is performed
     });
     </script>
 
-### noDataTemplate `String|Function` *(default: "No results found.")*
+### noDataTemplate `String|Function` *(default: "NO DATA FOUND.")*
 
 The [template](/api/javascript/kendo#methods-template) used to render the "no data" template, which will be displayed if no results are found or the underlying data source is empty.
 The noData template receives the widget itself as a part of the data argument. The template will be evaluated on every widget data bound.
@@ -480,10 +480,7 @@ The noData template receives the widget itself as a part of the data argument. T
     <input id="dropdownlist" />
     <script>
     $("#dropdownlist").kendoDropDownList({
-      dataSource: [
-        { id: 1, name: "Apples" },
-        { id: 2, name: "Oranges" }
-      ],
+      dataSource: [],
       dataTextField: "name",
       dataValueField: "id",
       noDataTemplate: 'No Data!'
