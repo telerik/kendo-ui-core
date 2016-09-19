@@ -248,7 +248,8 @@ var __meta__ = { // jshint ignore:line
                 return;
             }
 
-            var isInputActive = that.filterInput[0] === activeElement();
+            var isInputActive = this.filterInput[0] === activeElement();
+            var caret = kendo.caret(this.filterInput[0])[0];
 
             this._prevent = true;
 
@@ -258,6 +259,7 @@ var __meta__ = { // jshint ignore:line
 
             if (isInputActive) {
                 filterInput.focus();
+                kendo.caret(filterInput[0], caret);
             }
 
             this._prevent = originalPrevent;
