@@ -14,6 +14,8 @@ slug: breakingchanges2016_kendoui
 
 #### Breaking Changes
 
+* **Icons**: Icon rendering across all widgets now have unified rendering, using the `k-i-` prefix. Code depending on icon classes may need to change.
+
 * **DropDownList**: The widget will clear the applied filter when ESC key is pressed.
 
 * **DropDownList**: The widget will not select the focused item on focusout when list is filtered.
