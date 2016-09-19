@@ -224,18 +224,14 @@ var __meta__ = { // jshint ignore:line
                     that.refresh();
                     that.popup.one("activate", that._focusInputHandler);
                     that.popup.open();
-                    if (that.filterInput) {
-                        that._resizeFilterInput();
-                    }
+                    that._resizeFilterInput();
                 } else {
                     that._filterSource();
                 }
             } else if (that._allowOpening()) {
                 that.popup.one("activate", that._focusInputHandler);
                 that.popup.open();
-                if (that.filterInput) {
-                    that._resizeFilterInput();
-                }
+                that._resizeFilterInput();
                 that._focusItem();
             }
         },
@@ -245,9 +241,28 @@ var __meta__ = { // jshint ignore:line
         },
 
         _resizeFilterInput: function () {
-            this.filterInput.css("display", "none");
-            this.filterInput.css("width", this.popup.element.css("width"));
-            this.filterInput.css("display", "inline-block");
+            var filterInput = this.filterInput;
+            var originalPrevent = this._prevent;
+
+            if (!filterInput) {
+                return;
+            }
+
+            var isInputActive = this.filterInput[0] === activeElement();
+            var caret = kendo.caret(this.filterInput[0])[0];
+
+            this._prevent = true;
+
+            filterInput.css("display", "none")
+                       .css("width", this.popup.element.css("width"))
+                       .css("display", "inline-block");
+
+            if (isInputActive) {
+                filterInput.focus();
+                kendo.caret(filterInput[0], caret);
+            }
+
+            this._prevent = originalPrevent;
         },
 
         _allowOpening: function() {
