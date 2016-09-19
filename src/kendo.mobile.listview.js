@@ -589,18 +589,21 @@ var __meta__ = { // jshint ignore:line
 
             this.scroller.makeVirtual();
 
-            this.scroller.bind("scroll", function(e) {
+            this._scroll = function(e) {
                 binder.list.update(e.scrollTop);
-            });
-
-            this.scroller.bind("scrollEnd", function(e) {
+            };
+            this.scroller.bind('scroll', this._scroll);
+            this._scrollEnd = function(e) {
                 binder.list.batchUpdate(e.scrollTop);
-            });
+            };
+            this.scroller.bind('scrollEnd', this._scrollEnd);
         },
 
         destroy: function() {
             this.list.unbind();
             this.buffer.unbind();
+            this.scroller.unbind('scroll', this._scroll);
+            this.scroller.unbind('scrollEnd', this._scrollEnd);
         },
 
         setDataSource: function(dataSource, empty) {
