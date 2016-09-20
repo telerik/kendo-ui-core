@@ -53,47 +53,6 @@
         equal(wrapper.find(".k-dialog-buttongroup").length, 0);
     });
 
-    test("adds k-dialog-centered class if brwoser is not msie", function() {
-        var msieOriginal = kendo.support.browser.msie;
-        kendo.support.browser.msie = false;
-
-        var dialog = createDialog();
-        var wrapper = dialog.wrapper;
-
-        ok(wrapper.is(".k-dialog-centered"));
-
-        kendo.support.browser.msie = msieOriginal;
-    });
-
-    test("adds k-dialog-centered class if brwoser is msie and version 9", function() {
-        var msieOriginal = kendo.support.browser.msie;
-        var versionOriginal = kendo.support.browser.version;
-        kendo.support.browser.msie = true;
-        kendo.support.browser.version = 9;
-
-        var dialog = createDialog();
-        var wrapper = dialog.wrapper;
-        ok(wrapper.is(".k-dialog-centered"));
-
-        kendo.support.browser.msie = msieOriginal;
-        kendo.support.browser.version = versionOriginal;
-    });
-
-    test("removes k-dialog-centered class if brwoser is msie and version 8", function() {
-        var msieOriginal = kendo.support.browser.msie;
-        var versionOriginal = kendo.support.browser.version;
-        kendo.support.browser.msie = true;
-        kendo.support.browser.version = 8;
-
-        var dialog = createDialog();
-        var wrapper = dialog.wrapper;
-
-        ok(!wrapper.is(".k-dialog-centered"));
-
-        kendo.support.browser.msie = msieOriginal;
-        kendo.support.browser.version = versionOriginal;
-    });
-
     test("hide close button", function() {
         var dialog = createDialog({
             closable: false

@@ -553,12 +553,7 @@
             },
 
             center: function() {
-                var browser = kendo.support.browser;
-
-                if (browser.msie && Math.floor(browser.version) <= 8) {
-                    this.wrapper.removeClass('k-dialog-centered');
-                    this._center();
-                }
+                this._center();
             },
 
             _center: function() {
@@ -923,7 +918,7 @@
         };
 
         templates = {
-            wrapper: template("<div class='k-widget k-dialog k-window k-dialog-centered' role='dialog' />"),
+            wrapper: template("<div class='k-widget k-dialog k-window' role='dialog' />"),
             action: template("<li class='k-button# if (data.primary) { # k-primary# } #' role='button'></li>"),
             titlebar: template(
                 "<div class='k-window-titlebar k-header'>" +
