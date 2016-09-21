@@ -851,7 +851,7 @@ a.k-button-bare:hover
 
 @checkbox-tick-icon-content: "\2713";
 @checkbox-border-width: 1px;
-@checkbox-size: 1em;
+@checkbox-size: 14px;
 @checkbox-check-size: @checkbox-size;
 
 // styled checkboxes
@@ -873,11 +873,13 @@ input.k-checkbox,
     }
 }
 
-.k-checkbox-label {
+.k-checkbox-label,
+.k-radio-label {
+   display: inline-block;
    position: relative;
-   padding-left: @checkbox-size + 0.5em;
+   padding-left: @checkbox-size + (4 * @checkbox-border-width);
    vertical-align: middle;
-   line-height: 0.875em;
+   line-height: 16px;
    cursor: pointer;
 }
 
@@ -921,14 +923,6 @@ input.k-checkbox,
 }
 
 //Radio buttons
-.k-radio-label {
-  position: relative;
-  padding-left: 1.5em;
-  vertical-align: middle;
-  line-height: 0.875em;
-  cursor: pointer;
-}
-
 .k-radio-label:before {
   content: "";
   position: absolute;
