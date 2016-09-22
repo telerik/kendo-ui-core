@@ -12,9 +12,10 @@ The example below demonstrates how to select multiple rows using the checkbox te
 ###### Example
 
 ```html
-  <div id="grid"></div>
+   <div id="grid"></div>
     <script>
       $("#grid").kendoGrid({
+        selectable:"multiple, row",
         dataSource: {
           data: [
             {id: 1, foo: "item1", bar: "name1"},
@@ -28,13 +29,18 @@ The example below demonstrates how to select multiple rows using the checkbox te
             {id: 9, foo: "item9", bar: "name9"}
           ]
         },
-        columns: [{
-          title: "select",
-          template: '<input class="checkbox" type="checkbox" />'
+        change: function(e) {
+          $('tr').find('[type=checkbox]').prop('checked', false);
+          $('tr.k-state-selected').find('[type=checkbox]').prop('checked', true);
         },
-                  { field: "id" },
-                  { field: "foo" },
-                  { field: "bar" }],
+        columns: [{
+            title: "select",
+            template: '<input class="checkbox" type="checkbox" />'
+          },
+          { field: "id" },
+          { field: "foo" },
+          { field: "bar" }
+        ],
         dataBound: function () {
           $(".checkbox").bind("change", function (e) {
             $(e.target).closest("tr").toggleClass("k-state-selected");
