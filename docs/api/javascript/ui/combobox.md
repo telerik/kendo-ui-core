@@ -265,11 +265,11 @@ The field of the data item that provides the value of the widget.
 
     <input id="combobox" />
     <script>
-    $("#comboBox").kendoComboBox({
-        dataSource: [{
+    $("#combobox").kendoComboBox({
+        dataSource: [
             { Name: "Parent1", Id: 1 },
             { Name: "Parent2", Id: 2 }
-        }]
+        ],
         dataTextField: "Name",
         dataValueField: "Id"
     });
