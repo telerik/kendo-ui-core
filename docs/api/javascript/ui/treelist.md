@@ -108,7 +108,7 @@ Custom commands are supported by specifying the [click](#configuration-columns.c
 >
 > A command column cannot be [expandable](#configuration-columns.expandable).
 >
-> The built-in "edit", "createChild" and "destroy" commands work *only* if editing is enabled via the [editable](#configuration-editable) option. The "edit" command supports "inline" and "popup" editing modes.
+> The built-in "edit", "createChild" and "destroy" commands work *only* if editing is enabled via the [editable](#configuration-editable) option, and the TreeList DataSource is configured for [CRUD operations](http://docs.telerik.com/kendo-ui/framework/datasource/crud). The "edit" command supports "inline" and "popup" editing modes.
 
 #### Example - set command as array of strings
 
@@ -212,7 +212,7 @@ The function context (available via the `this` keyword) will be set to the treel
 
 ### columns.command.name `String`
 
-The name of the command. The built-in commands are "edit", "createChild" and "destroy". When set to a custom value, it is rendered as a `data-command` attribute.
+The name of the command. The built-in command names are "edit", "createChild" and "destroy". Check the [`columns.command`](#configuration-columns.command) section for additional important information. When set to a custom value, the `name` is rendered as a `data-command` attribute.
 
 #### Example - set the command name
 
