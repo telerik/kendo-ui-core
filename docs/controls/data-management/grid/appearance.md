@@ -194,13 +194,14 @@ To ensure that all table rows have the same heights, use either of the options:
 <!--*-->
 When using mobile touch devices, which do not have a visible scrollbar that can be grabbed and dragged, virtual scrolling of a large number of data items (for example thousands) might hinder the easy access to all table rows, because the large number of data items will require a great deal of touch scrolling. On the other hand, using virtual scrolling with a very small number of items (for example, less than 200) does not make much sense either. Virtual scrolling on touch devices relies on drag-and-drop events, which are slower than native scrolling. This might lead to performance issues.
 
-When a virtualized Grid is scrolled, it renders the table rows for the reached scroll position on the fly. If the local data is used or if the remote data has already been loaded and cached, the rendering rate and performance depend on:
+When a virtualized Grid is scrolled, it renders the table rows for the reached scroll position on the fly. If local data is used or if the remote data has already been loaded and cached, the rendering rate and performance depend on:
+
 * The page size.
 * The Grid height.
 * The scrolling speed.
 * The total number of data items.
 
-If the total number of items is large and the scrolling is fast, the table of the Grid can be re-rendered frequently. If, additionally, the page size is huge, the user might observe issues with the smoothness of the scrolling. In such cases, consider reducing the page size and increasing the Grid height to reduce the frequency of table re-rendering.
+If the total number of items is large and the scrolling is fast, the table of the Grid can be re-rendered frequently. If, additionally, the page size is huge, the user might observe issues with the smoothness of the scrolling. In such cases, consider reducing the page size and increasing the Grid height to improve the scrolling performance.
 
 ### Limitations of Virtual Scrolling
 
