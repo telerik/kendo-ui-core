@@ -174,7 +174,7 @@ When using virtual scrolling, the data table of the Grid is not placed inside a 
 Virtual scrolling relies on a fake scrollbar. Its size is not determined by the browser, but is calculated based on the average row height of the data that is already loaded. As a result, variable row heights may cause unexpected behavior, such as inability to scroll to the last rows on the last page.
 
 To ensure that all table rows have the same heights, use either of the options:
-* Disable text wrapping.  
+* Disable text wrapping.
 * Set an explicit row height that is large enough (as demonstrated in the example below).
 
 ###### Example
