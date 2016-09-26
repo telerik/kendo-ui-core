@@ -58,6 +58,11 @@ The example below demonstrates how the CustomDataSourceBuilder equivalent.
                 .Data("Data")
                 .Total("Total")
                 .Errors("Errors")
+                .Parse(@<text>function (data) {
+                    // configure a parse function only if the response (data) must be
+                    // transformed in some way before data binding
+                    return data;
+                }</text>)
                 .Model(model => {
                     model.Id("OrderID");
                     model.Field("OrderID", typeof(int));
