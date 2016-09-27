@@ -3948,7 +3948,7 @@ The start time of the week and day views. The scheduler will display events star
     $("#scheduler").kendoScheduler({
       date: new Date("2013/6/6"),
       startTime: new Date("2013/6/6 08:00"),
-      endTime: new Date("2013/6/6 18:00")
+      endTime: new Date("2013/6/6 18:00"),
       views: ["day", "week"],
       dataSource: [
         {
