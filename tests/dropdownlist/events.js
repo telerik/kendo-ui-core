@@ -984,4 +984,31 @@
                         keyCode: kendo.keys.HOME
                     });
     });
+
+    test("widget doesn't triggers select on blur when nothing has changed", 0, function() {
+        var dropdownlist = new DropDownList(input, {
+            index: 2,
+            dataSource: ["foo", "foo1", "foo2"],
+            select: function() {
+                ok(false);
+            }
+        });
+
+        dropdownlist.wrapper.focusin().focusout();
+    });
+
+    test("widget triggers select on blur", 1, function() {
+        var dropdownlist = new DropDownList(input, {
+            dataSource: ["foo", "foo1", "foo2"],
+            highlightFirst: true,
+            select: function(e) {
+                equal(e.dataItem, "foo");
+            }
+        });
+
+        dropdownlist.value("");
+        dropdownlist.wrapper.focusin();
+        dropdownlist.open();
+        dropdownlist.wrapper.focusout();
+    });
 })();
