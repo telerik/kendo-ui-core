@@ -28,7 +28,8 @@ The example below demonstrates how to bind the [Kendo UI Grid widget](http://www
     scheme: "http"
   });
 
-  angular.module("KendoDemos", [ "kendo.directives" ]);
+  angular.module("KendoDemos", [ "kendo.directives" ])
+	.controller('MyCtrl', ["$scope", MyCtrl]);
   function MyCtrl($scope) {
     // declare dataSource bound to backend
     var dataSource = new kendo.data.DataSource({
