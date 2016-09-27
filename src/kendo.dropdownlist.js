@@ -583,11 +583,14 @@ var __meta__ = { // jshint ignore:line
             var isIFrame = window.self !== window.top;
             var focusedItem = that._focus();
             var dataItem = that._getElementDataItem(focusedItem);
+            var shouldTrigger;
 
             if (!that._prevent) {
                 clearTimeout(that._typingTimeout);
 
-                if (!filtered && focusedItem && !that.trigger("select", { dataItem: dataItem, item: focusedItem })) {
+                shouldTrigger = !filtered && focusedItem && that._value(dataItem) !== that.value();
+
+                if (shouldTrigger && !that.trigger("select", { dataItem: dataItem, item: focusedItem })) {
                     that._select(focusedItem, !that.dataSource.view().length);
                 }
 
