@@ -43,6 +43,7 @@ Defines the defaults of the connections. Whenever a connection is created, the s
 
     <div id="diagram"></div>
     <script>
+    var Point = kendo.dataviz.diagram.Point;
     $("#diagram").kendoDiagram({
        shapes:[
            {
@@ -2834,12 +2835,13 @@ Whether the addition should be recorded in the undo-redo stack.
 #### Example - adding a Connection to the diagram
 
     <script>
+    var Point = kendo.dataviz.diagram.Point;
     $("#diagram").kendoDiagram();
     var diagram = $("#diagram").data("kendoDiagram");
     var shape1 = diagram.addShape(new Point(100, 100));
     var shape2 = diagram.addShape(new Point(300, 200));
 
-    var connection = new kendo.diagram.Connection(shape1, shape2, { stroke: { color: "red" } });
+    var connection = new kendo.dataviz.diagram.Connection(shape1, shape2, { stroke: { color: "red" } });
     diagram.addConnection(connection);
     </script>
 
@@ -2860,11 +2862,12 @@ Whether the addition should be recorded in the undo-redo stack.
 #### Example - adding a shape to the diagram
 
     <script>
+    var Point = kendo.dataviz.diagram.Point;
     $("#diagram").kendoDiagram();
     var diagram = $("#diagram").data("kendoDiagram");
 
      diagram.addShape(new Point(100, 100));
-     var shape = new kendo.diagram.Shape({x:500, y:100, fill: "red"});
+     var shape = new kendo.dataviz.diagram.Shape({x:500, y:100, fill: "red"});
      diagram.addShape(shape);
     </script>
 
@@ -2921,6 +2924,7 @@ Brings one or more items into the view in function of various criteria.
 This will offset/pan the diagram to bring the rectangle at position (500,500) into view.
 
     <script>
+        var Point = kendo.dataviz.diagram.Point;
         $("#diagram").kendoDiagram();
         var diagram = $("#diagram").data("kendoDiagram");
 
@@ -2928,7 +2932,7 @@ This will offset/pan the diagram to bring the rectangle at position (500,500) in
         var shape2 = diagram.addShape(new Point(400, 100));
         var con = diagram.connect(shape1,shape2);
 
-        diagram.bringIntoView(new kendo.diagram.Rect(500, 500, 10, 10));
+        diagram.bringIntoView(new kendo.dataviz.diagram.Rect(500, 500, 10, 10));
     </script>
 
 #### Example - bring an item into view
@@ -2936,6 +2940,7 @@ This will offset/pan the diagram to bring the rectangle at position (500,500) in
 The second shape has a vertical position of 1000 and is off the screen at launch. Upon clicking the diagram this item will be in the view.
 
     <script>
+        var Point = kendo.dataviz.diagram.Point;
         var shape2;
         function init()
         {
@@ -2990,6 +2995,7 @@ The options of the new connection. See [connections](#configuration-connections)
 #### Example - connecting two shapes using the Auto-connector
 
     <script>
+    var Point = kendo.dataviz.diagram.Point;
     $("#diagram").kendoDiagram();
     var diagram = $("#diagram").data("kendoDiagram");
     var shape1 = diagram.addShape(new Point(100, 100));
@@ -3000,6 +3006,7 @@ The options of the new connection. See [connections](#configuration-connections)
 #### Example - connecting two shapes using the specific connectors
 
     <script>
+    var Point = kendo.dataviz.diagram.Point;
     $("#diagram").kendoDiagram();
     var diagram = $("#diagram").data("kendoDiagram");
     var shape1 = diagram.addShape(new Point(100, 100));
@@ -3010,6 +3017,7 @@ The options of the new connection. See [connections](#configuration-connections)
 #### Example - creating a half-floating connection
 
     <script>
+    var Point = kendo.dataviz.diagram.Point;
     $("#diagram").kendoDiagram();
     var diagram = $("#diagram").data("kendoDiagram");
     var shape = diagram.addShape(new Point(100, 100));
@@ -3453,6 +3461,7 @@ Whether the removal should be recorded in the undo-redo stack.
 #### Example - removing items
 
     <script>
+        var Point = kendo.dataviz.diagram.Point;
         $("#diagram").kendoDiagram();
         var diagram = $("#diagram").data("kendoDiagram");
 
@@ -3596,6 +3605,7 @@ Undoes the previous action.
 #### Example - undoing items removal
 
     <script>
+        var Point = kendo.dataviz.diagram.Point;
         $("#diagram").kendoDiagram();
         var diagram = $("#diagram").data("kendoDiagram");
 
