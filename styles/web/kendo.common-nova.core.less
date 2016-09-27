@@ -306,14 +306,19 @@
 }
 
 .k-multiselect-wrap .k-input {
-    height: @input-height;
+    font-size: inherit;
+    height: 2em;
 }
 
 .k-multiselect-wrap li {
     border-radius: 1.071em;
-    margin: 3px 0 3px 3px;
-    padding: 0 1.6em 0 .857em;
     line-height: 1.86em;
+}
+
+.k-multiselect-wrap .k-input,
+.k-multiselect-wrap li {
+    margin: .286em 0 .286em .286em;
+    padding: 0 1.6em 0 .857em;
 }
 
 .k-multiselect-wrap li span {
