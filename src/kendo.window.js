@@ -878,7 +878,7 @@ var __meta__ = { // jshint ignore:line
                 var scrollTop = $(window).scrollTop(),
                     windowTop = parseInt(wrapper.position().top, 10);
 
-                if (windowTop > 0 && windowTop < scrollTop) {
+                if (!that.options.pinned && windowTop > 0 && windowTop < scrollTop) {
                     if (scrollTop > 0) {
                         $(window).scrollTop(windowTop);
                     } else {
