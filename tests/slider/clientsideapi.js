@@ -24,7 +24,7 @@ test("value should set slider value", function() {
 test("value should not be null or empty string and should return old value", function() {
     var slider = newSlider();
 
-    slider.value(2)
+    slider.value(2);
 
     slider.value(" ");
 
@@ -131,6 +131,20 @@ test("value should set value to the input", function() {
     equal(slider.element.val(), value);
 });
 
+test("value should alter in change event handler", function() {
+    var rightArrow = kendo.keys.RIGHT,
+        slider = newSlider({
+           "change": function (e) {
+               e.sender.value(3);
+            }
+        }),
+        dragHandle = slider.wrapper.find(".k-draghandle").focus();
+
+    dragHandle.trigger({ type: "keydown", keyCode: rightArrow });
+
+    equal(slider.value(), 3);
+});
+
 test("enabled with false should disable slider", function () {
     var slider = newSlider({ enabled: false });
 
@@ -204,7 +218,7 @@ test("enable method should remove state disabled from the slider", function () {
 test("refresh method should not select minimum when slider increase his value from -1 to 0", function () {
     var slider = newSlider({ showButtons: true, min: -5, value: -1 });
 
-    slider.value(0)
+    slider.value(0);
 
     ok(slider.value, 0);
 });

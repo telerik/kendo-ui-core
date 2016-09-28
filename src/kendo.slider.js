@@ -977,8 +977,12 @@ var __meta__ = { // jshint ignore:line
 
         moveSelection(options.value);
 
-        that.bind([CHANGE, SLIDE, MOVE_SELECTION], function (e) {
+        that.bind([SLIDE, MOVE_SELECTION], function (e) {
             moveSelection(parseFloat(e.value, 10));
+        });
+
+        that.bind(CHANGE, function (e) {
+            moveSelection(parseFloat(e.sender.value(), 10));
         });
     };
 
