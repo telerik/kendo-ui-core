@@ -1021,6 +1021,20 @@
         equal(dialog.wrapper.find(".k-i-minimize").length, 1);
     });
 
+    test("toFront does not scroll page when windows are pinned", function() {
+        var spacerDiv = $("<div style='height:3000px'>&nbsp;</div>").appendTo(QUnit.fixture);
+        var dialog = createWindow({
+            pinned: true
+        });
+        $(window).scrollTop(200);
+        $(dialog.wrapper).css({top: 180});
+
+        dialog.toFront();
+
+        equal($(window).scrollTop(), 200);
+        spacerDiv.remove();
+    }); 
+
     function setDimensionTest(dim) {
         var options = {};
         options[dim] = 400;
