@@ -934,6 +934,9 @@ Defines the data type of the cell value.
 ### sheets.rows.cells.validation.from `String`
 Defines a *formula* or *value* used for the comparison process. Used as *only* if comparer type does not require second argument.
 
+### sheets.rows.cells.validation.showButton `Boolean` *(default: false)*
+A boolean value indicating if a button for selecting list items (dataType set to `list`) should be displayed.
+
 ### sheets.rows.cells.validation.to `String`
 Defines a *formula* or *value* used for the comparison process. Will be used if comparer type requires second argument.
 
