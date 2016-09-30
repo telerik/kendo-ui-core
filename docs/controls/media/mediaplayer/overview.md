@@ -10,7 +10,9 @@ position: 1
 
 The [Kendo UI MediaPlayer widget](http://demos.telerik.com/kendo-ui/mediaplayer/index) plays video files from static sources or streams online YouTube videos and enriches your website with dynamic content in a user-friendly interface. It provides a styled video UI functionality by using the HTML5 `<video>` element and brings powerful media capabilities to your applications without the necessity of installing additional plug-ins.
 
-The MediaPlayer also offers tight integration with the YouTube media provider. The MediaPlayer comes with the familiar and straightforward way to use Kendo UI widgets and delivers rich media web experience for websites, blogs, online TV channels, e-commerce pages, and others. In addition to the consistent and elegant built-in skins, this new addition to the bundle possesses the main feature of every Kendo UI widget&mdash;it is a useful and convenient tool designed for achieving fascinating results in a sharp time frame.  
+The MediaPlayer also offers tight integration with the YouTube media provider. The MediaPlayer comes with the familiar and straightforward way to use Kendo UI widgets and delivers rich media web experience for websites, blogs, online TV channels, e-commerce pages, and others. In addition to the consistent and elegant built-in skins, this new addition to the bundle possesses the main feature of every Kendo UI widget&mdash;it is a useful and convenient tool designed for achieving fascinating results in a sharp time frame.
+
+Following cutting-end design practices and trends, the MediaPlayer component provides a *responsive* layout, which means that its size will adapt depending on the capabilities of the client (end user) device and browser. The component will resize its area automatically to display the video in the most suitable way for the given dimensions. Since this is taken care of out-of-the-box, it will save you time and effort when developing your responsive applications.
 
  **Figure 1: A template of the MediaPlayer**
 
@@ -27,6 +29,7 @@ The Kendo UI MediaPlayer widget:
 * Displays a timeline slider with a buffer indicator allowing you to navigate the video.
 * Displays a title bar.
 * Ships HD source support.
+* Responsive layout
 
 Before reading on, make sure you are familiar with the [fundamental Kendo UI widget concepts]({% slug initialize_widgets_using_jquery_plugins_installation %}).
 
