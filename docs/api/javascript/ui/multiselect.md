@@ -852,7 +852,7 @@ Specifies the [value binding](/framework/mvvm/bindings/value) behavior for the w
 
 #### Example - specify that the View-Model field should be updated with the selected item value
 
-    <select id="multiselect" multiple="multiple" data-bind="value: values, source: products"></select>
+    <select id="multiselect" multiple="multiple" data-bind="value: selectedProductId, source: products"></select>
 
     <script>
     $("#multiselect").kendoMultiSelect({
