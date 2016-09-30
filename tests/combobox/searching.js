@@ -1054,4 +1054,19 @@ asyncTest("update popup height when no items are found", 1, function() {
 
     combobox.input.focus().val("test").keydown();
 });
+
+test("scrolls to the matched item on open", 2, function() {
+    var data = [];
+    for (var i = 0; i < 50; i++) { data.push(i); }
+
+    var combobox = new ComboBox(input, {
+        dataSource: data
+    });
+
+    debugger;
+    combobox.search("49");
+
+    ok(combobox.ul.children().eq(49).hasClass("k-state-focused"), "item is not focused");
+    ok(combobox.list.children(".k-list-scroller").scrollTop() > 200, "list is not scrolled");
+});
 })();

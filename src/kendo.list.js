@@ -709,18 +709,18 @@ var __meta__ = { // jshint ignore:line
 
         _focusItem: function() {
             var listView = this.listView;
-            var focusedItem = listView.focus();
+            var noFocusedItem = !listView.focus();
             var index = listView.select();
 
             index = index[index.length - 1];
 
-            if (index === undefined && this.options.highlightFirst && !focusedItem) {
+            if (index === undefined && this.options.highlightFirst && noFocusedItem) {
                 index = 0;
             }
 
             if (index !== undefined) {
                 listView.focus(index);
-            } else {
+            } else if (noFocusedItem) {
                 listView.scrollToIndex(0);
             }
         },
