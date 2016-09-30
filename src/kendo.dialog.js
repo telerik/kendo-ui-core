@@ -76,6 +76,8 @@
                 var that = this,
                     wrapper;
 
+                that._centerCallback = proxy(that._center, that);
+
                 that.appendTo = $(BODY);
                 if (!defined(options.visible) || options.visible === null) {
                     options.visible = element.is(VISIBLE);
@@ -522,6 +524,7 @@
 
             close: function() {
                 this._close(true);
+                this._stopCenterOnResize();
                 return this;
             },
 
@@ -554,6 +557,7 @@
 
             center: function() {
                 this._center();
+                this._centerOnResize();
             },
 
             _center: function() {
@@ -571,6 +575,20 @@
                 });
 
                 return that;
+            },
+
+            _centerOnResize: function() {
+                if (this._trackResize) {
+                    return;
+                }
+
+                kendo.onResize(this._centerCallback);
+                this._trackResize = true;
+            },
+
+            _stopCenterOnResize: function() {
+                kendo.unbindResize(this._centerCallback);
+                this._trackResize = false;
             },
 
             _removeOverlay: function() {
@@ -632,6 +650,9 @@
             destroy: function() {
                 var that = this;
                 that._destroy();
+
+                Widget.fn.destroy.call(that);
+
                 that.wrapper.remove();
                 that.wrapper = that.element = $();
             },
@@ -643,7 +664,7 @@
                 that.wrapper.off(ns);
                 that.element.off(ns);
                 that.wrapper.find(KICONCLOSE + "," + KBUTTONGROUP + " > " + KBUTTON).off(ns);
-                Widget.fn.destroy.call(that);
+                that._stopCenterOnResize();
             },
 
             title: function(html) {

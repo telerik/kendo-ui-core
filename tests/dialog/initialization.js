@@ -314,4 +314,9 @@
         var dialog = createDialog({ modal: true, visible: true }, dialogNode);
     });
 
+    test("invisible window should not track for resize", function() {
+        var dialog = createDialog({ visible: false });
+        ok(!dialog._trackResize);
+    });
+
 })();

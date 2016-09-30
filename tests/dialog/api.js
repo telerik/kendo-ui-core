@@ -287,4 +287,21 @@
         ok(dialog.options.visible);
         ok(dialog.wrapper.is(":visible"));
     });
+
+    test("center should track for resize", function() {
+        var dialog = createDialog({ visible: false });
+        trackMethodCall(dialog, "_centerOnResize");
+        dialog.center();
+
+        ok(dialog._centerOnResize.called);
+    });
+
+    test("remove resize tracking on close", function() {
+        var dialog = createDialog({ visible: true });
+        trackMethodCall(dialog, "_stopCenterOnResize");
+
+        dialog.close();
+
+        ok(dialog._stopCenterOnResize.called);
+    });
 }());
