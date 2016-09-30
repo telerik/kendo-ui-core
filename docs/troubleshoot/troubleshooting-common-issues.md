@@ -79,6 +79,28 @@ where more information can be found.
 
 **Option 2** Path jQuery. You can find more information about the possible path in the aforementioned jQuery bug report.
 
+### Unknown DataSource transport type 'json'
+
+This warning can be caused by one of the following:
+
+* invalid Kendo UI DataSource [`type`](/api/javascript/data/datasource#configuration-type) configuration, such as:
+
+    ```
+    dataSource: {
+        type: "json"
+    }
+    ```
+
+* missing JavaScript file when using a DataSource type that is not included in kendo.all.min.js, for example **aspnetmvc-ajax**, **jsdo**, etc.
+
+Specifically **`json`** is not a valid DataSource `type` and does not require a separate JavaScript file.
+
+**Solution**
+
+Use a valid `type` value, or remove the `type` property, or add the corresponding missing file (e.g. `kendo.aspnetmvc.min.js`, when using the Kendo UI MVC wrappers).
+
+Note the difference between the [dataSource `type`](/api/javascript/data/datasource#configuration-type) and the [transport actions' `type`](/api/javascript/data/datasource#configuration-transport.read.type)
+
 ### Input Widgets Do Not Raise Change Event When API Is Used
 
 The change event of an input widget is triggered only by user action. DOM elements work in the same way. If you need to trigger an event manually use the [trigger method](/api/javascript/ui/widget#methods-trigger).
