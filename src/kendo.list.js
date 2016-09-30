@@ -710,9 +710,7 @@ var __meta__ = { // jshint ignore:line
         _focusItem: function() {
             var listView = this.listView;
             var noFocusedItem = !listView.focus();
-            var index = listView.select();
-
-            index = index[index.length - 1];
+            var index = last(listView.select());
 
             if (index === undefined && this.options.highlightFirst && noFocusedItem) {
                 index = 0;
@@ -1624,7 +1622,7 @@ var __meta__ = { // jshint ignore:line
         },
 
         focusLast: function() {
-            this.focus(this.element[0].children[this.element[0].children.length - 1]);
+            this.focus(last(this.element[0].children));
         },
 
         focus: function(candidate) {
@@ -1636,8 +1634,7 @@ var __meta__ = { // jshint ignore:line
                 return that._current;
             }
 
-            candidate = that._get(candidate);
-            candidate = candidate[candidate.length - 1];
+            candidate = last(that._get(candidate));
             candidate = $(this.element[0].children[candidate]);
 
             if (that._current) {
@@ -1696,7 +1693,7 @@ var __meta__ = { // jshint ignore:line
                 return;
             }
 
-            if (singleSelection && !filtered && $.inArray(indices[indices.length - 1], selectedIndices) !== -1) {
+            if (singleSelection && !filtered && $.inArray(last(indices), selectedIndices) !== -1) {
                 if (that._dataItems.length && that._view.length) {
                     that._dataItems = [that._view[selectedIndices[0]].item];
                 }
@@ -1711,7 +1708,7 @@ var __meta__ = { // jshint ignore:line
 
             if (indices.length) {
                 if (singleSelection) {
-                    indices = [indices[indices.length - 1]];
+                    indices = [last(indices)];
                 }
 
                 added = that._select(indices);
@@ -1937,7 +1934,7 @@ var __meta__ = { // jshint ignore:line
             var added = [];
             var idx = 0;
 
-            if (indices[indices.length - 1] !== -1) {
+            if (last(indices) !== -1) {
                 that.focus(indices);
             }
 
@@ -2256,6 +2253,10 @@ var __meta__ = { // jshint ignore:line
     });
 
     ui.plugin(StaticList);
+
+    function last(list) {
+        return list[list.length - 1];
+    }
 
     function getSelectedOption(select) {
         var index = select.selectedIndex;
