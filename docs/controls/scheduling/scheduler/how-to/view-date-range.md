@@ -28,7 +28,7 @@ $(function() {
         //startDate method, which returns the start date of the view
         //endDate method, which returns the end date of the view
 
-        kendoConsole.log(kendo.format("view:: start: {0:d}; end: {1:d};", view.startDate(), view.endDate()));
+        $(".console").append("<p>" + kendo.format("view:: start: {0:d}; end: {1:d};", view.startDate(), view.endDate()) + "</p>");
     }
 
     $("#scheduler").kendoScheduler({
