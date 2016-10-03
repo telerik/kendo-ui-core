@@ -12,8 +12,8 @@ In most cases, the Grid is not the only content on a page. Yet, you might want t
 
 To achieve that, use either of these options:
 
-* Print the existing page, and hide the irrelevant content with print CSS
-* Print a separate web page with only the Grid on it
+* Print the existing page and hide the irrelevant content with print CSS.
+* Print a separate web page with only the Grid on it.
 
 ### Print Existing Web Pages
 
@@ -23,20 +23,22 @@ To print only the Grid as part of an existing web page, use a print stylesheet t
 
 The following example demonstrates how to retrieve the HTML of the Grid, inject it in a new browser window, and print the new page. This approach also addresses some other important things you need to consider:
 
-* If the Grid is scrollable, some rows or columns may not be visible on the printed paper. So the Grid height and scrollability are disabled on the print-friendly page.
-* Depending on the column width, some of the cell content may be clipped and not fully visible. This problem is resolved by forcing an automatic `table-layout` to the Grid table, which disables the ellipsis (`...`).
+* If the Grid is scrollable, some rows or columns may not be visible on the printed paper. So, the Grid height and scrollability are disabled on the print-friendly page.
+* Depending on the column width, some of the cell content may be clipped and not fully visible. This issue is resolved by forcing an automatic `table-layout` to the Grid table, which disables the ellipsis (`...`).
 * If scrolling is enabled (which is set by default except for the MVC wrapper of the Grid), the Grid renders a [separate table for the header area]({% slug appearance_kendoui_grid_widget %}#scrolling). Because the browser is not able to understand the relationship between the two Grid tables, it will not repeat the header row on top of every printed page. The example below shows how to address this issue by cloning the header table row into the data table.
-* On a side note, when printing a Grid with locked (frozen) columns, it is possible that the resulting columns or rows are misaligned, or the overall layout is broken. In such cases, it is advisable to use a separate print-friendly Grid instance with no frozen columns.
+* On a side note, when printing a Grid with locked (frozen) columns, it is possible for the resulting columns or rows to get misaligned, or for the overall layout to get broken. In such cases, it is advisable to use a separate print-friendly Grid instance with no frozen columns.
 
-###### Example - HTML
+###### Example
+
+```tab-HTML
 
     <div id="grid"></div>
 
     <script type="text/x-kendo-template" id="toolbar-template">
         <button type="button" class="k-button" id="printGrid">Print Grid</button>
     </script>
-
-###### Example - JavaScript
+```
+```tab-JavaScript
 
 	 function printGrid() {
 		var gridElement = $('#grid'),
@@ -120,6 +122,7 @@ The following example demonstrates how to retrieve the HTML of the Grid, inject 
 		});
 
 	});
+```
 
 ## See Also
 

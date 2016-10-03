@@ -1,17 +1,19 @@
 ---
-title: Show Context Menu Over Shapes
-page_title: Show Context Menu Over Shapes | Kendo UI Diagram
-description: "Learn how to show a context menu over Kendo UI Diagram shapes."
+title: Show Context Menu over Shapes
+page_title: Show Context Menu over Shapes | Kendo UI Diagram
+description: "Learn how to show a context menu over the shapes of a Kendo UI Diagram."
 slug: howto_show_context_menu_over_shapes
 ---
 
-# Show Context Menu Over Shapes
+# Show Context Menu over Shapes
 
-The example below demonstrates how to show a Kendo UI ContextMenu when pressing the right button of the mouse over diagram shapes. The main points are as follows:
+The example below demonstrates how to show a Kendo UI ContextMenu when pressing the right button of the mouse over Kendo UI Diagram shapes.
 
-* Initialize a [kendo context]({% slug overview_kendoui_contextmenu_widget %}) menu with target the diagram's id and filter by g element.
-* Handle the [open event](/api/javascript/ui/contextmenu#events-open) of the context menu. You can cancel the event if the target is a connection and store dataItem in a variable if the target is a shape.
-* Handle the [select event](/api/javascript/ui/contextmenu#events-select) of the context menu where you can perform a custom action based on the shape's context.
+To achieve this behavior, follow the main steps below:
+
+1. Initialize a [Kendo UI ContextMenu]({% slug overview_kendoui_contextmenu_widget %}) setting its target as the ID of the Diagram and filter it by a `g` element.
+2. Handle the [`open` event](/api/javascript/ui/contextmenu#events-open) of the ContextMenu. If the target is a connection, it is possible to cancel the event. If the target is a shape, it is possible to store the `dataItem` in a variable.
+3. Handle the [`select` event](/api/javascript/ui/contextmenu#events-select) of the ContextMenu where you can perform a custom action based on the context of the shape.
 
 
 ###### Example

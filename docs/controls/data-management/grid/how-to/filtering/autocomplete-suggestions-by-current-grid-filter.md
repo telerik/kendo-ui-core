@@ -1,20 +1,19 @@
 ---
-title: AutoComplete Suggestions By Current Grid Filter
-page_title: AutoComplete Suggestions By Current Grid Filter | Kendo UI Grid
-description: "Learn how to filter the Kendo UI Grid with the AutoComplete by showing results from the current grid filter."
+title: Show AutoComplete Suggestions for Current Grid Filter
+page_title: Show AutoComplete Suggestions for Current Grid Filter | Kendo UI Grid
+description: "Learn how to filter the Kendo UI Grid by using the Kendo UI AutoComplete and by showing results from the current Grid filter."
 previous_url: /controls/data-management/grid/how-to/autocomplete-suggestions-by-current-grid-filter.html
 slug: howto_autocomplete_suggestions_by_current_grid_filter
 ---
 
-# AutoComplete Suggestions By Current Grid Filter
+# Show AutoComplete Suggestions for Current Grid Filter
 
-Generally, the autocomplete filter of the grid is bound to the whole data source of the grid. You can, however, show autocomplete results only for the current grid filter by following the steps below:
+Generally, the AutoComplete filter of the Kendo UI Grid is bound to the whole data source of the Grid widget. However, it is possible to show the AutoComplete results only for the current filter of the Grid by following the steps below:
 
+1. Handle the [`dataBound` event of the Grid](/api/javascript/ui/grid#events-dataBound).
+2. Get the [data source filter of the Grid](/api/javascript/data/datasource.html#methods-filter) in the dataBound handler and set it as a filter to the AutoComplete data source.
 
-* Attach to the grid's [dataBound event](/api/javascript/ui/grid#events-dataBound).
-* Get the grid's [data source filter](/api/javascript/data/datasource.html#methods-filter) in the dataBound handler and set it as a filter to the autocomplete data source.
-
-The example below demonstrates how to filter the Kendo UI Grid via the autocomplete by considering the current grid filter. 
+The example below demonstrates how to filter the Kendo UI Grid through the AutoComplete by considering the current filter of the Grid widget.
 
 ###### Example
 

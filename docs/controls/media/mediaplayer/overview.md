@@ -12,7 +12,7 @@ The [Kendo UI MediaPlayer widget](http://demos.telerik.com/kendo-ui/mediaplayer/
 
 The MediaPlayer also offers tight integration with the YouTube media provider. The MediaPlayer comes with the familiar and straightforward way to use Kendo UI widgets and delivers rich media web experience for websites, blogs, online TV channels, e-commerce pages, and others. In addition to the consistent and elegant built-in skins, this new addition to the bundle possesses the main feature of every Kendo UI widget&mdash;it is a useful and convenient tool designed for achieving fascinating results in a sharp time frame.
 
-Following cutting-end design practices and trends, the MediaPlayer component provides a *responsive* layout, which means that its size will adapt depending on the capabilities of the client (end user) device and browser. The component will resize its area automatically to display the video in the most suitable way for the given dimensions. Since this is taken care of out-of-the-box, it will save you time and effort when developing your responsive applications.
+To respond to cutting-end design practices and trends, the MediaPlayer component provides a *responsive* layout. This means that its size adapts depending on the capabilities of the client (end user) device and browser. The component automatically resizes its area to display the video in the most suitable possible way within the provided dimensions. The responsive web design of the MediaPlayer is shipped out-of-the-box and intends to save you time and efforts when developing your responsive applications.
 
  **Figure 1: A template of the MediaPlayer**
 

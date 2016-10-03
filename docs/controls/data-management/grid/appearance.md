@@ -123,19 +123,19 @@ If virtual scrolling is enabled, the scrollable data container is `div.k-virtual
         });
     });
 
-### Adjust Grid layout on page zoom
+### Adjust Grid Layout on Page Zoom
 
-When a web page is zoomed, the browser will change the size of all page content, except the scrollbars. This will lead to misalignments between the header and data area in Grids with scrolling enabled.
+When a web page is zoomed, the browser changes the content size of all pages except for the scrollbars. This leads to misalignment between the header and the data areas in Grids that have their scrolling functionality enabled.
 
-In order to adjust the layout, execute the following code on `window.resize`:
+To adjust the layout, execute the following code on `window.resize`:
 
 ###### Example
 
     var grid = $('#GridID').data('kendoGrid');
     grid.thead.closest(".k-grid-header").css("padding-right", kendo.support.scrollbar(true));
-	
-If the Grid is in RTL mode use padding-left instead of padding-right.
-	
+
+If the Grid is in the right-to-left (RTL) mode, use the `"padding-left"` instead of the `"padding-right"` configuration.
+
 ### Virtual Scrolling
 
 Virtual scrolling is an alternative to paging. When enabled, the Grid loads data from the remote data source as the user scrolls vertically.
