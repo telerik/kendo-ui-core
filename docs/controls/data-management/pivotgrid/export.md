@@ -60,7 +60,7 @@ Clicking the **Export to Excel** button or calling the `saveAsExcel` throws an e
 
 ### Export Not Working in Internet Explorer and Safari
 
-Internet Explorer 10, or older, and Safari do not support the option of file saving and require the implementation of a [server proxy](/framework/save-files/introduction#browser-support). Set the [`proxyURL`](/api/javascript/ui/pivotgrid#configuration-excel.proxyURL) option to specify the server proxy URL.
+Internet Explorer 10, or older, and Safari do not support the option of file saving and require the implementation of a [server proxy]({% slug overview_savingfiles_kendoui %}#browser-support). Set the [`proxyURL`](/api/javascript/ui/pivotgrid#configuration-excel.proxyURL) option to specify the server proxy URL.
 
 The example below demonstrates how to specify the server proxy URL.
 
@@ -95,7 +95,7 @@ The example below demonstrates how to specify the server proxy URL.
 
 * [Learn More about Creating Excel Documents with Kendo UI]({% slug introduction_excelexport_kendoui %}})
 * [Learn How to Save Files with Kendo UI]({% slug overview_savingfiles_kendoui %})
-* [API Reference: `kendo.ooxml.Workbook`](/api/javascript/ooxml/Workbook)
+* [API Reference: `kendo.ooxml.Workbook`](/api/javascript/ooxml/workbook)
 
 ## See Also
 
