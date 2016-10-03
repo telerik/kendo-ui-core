@@ -45,12 +45,12 @@ Depending on the browser, the following JavaScript errors will be thrown:
 
 * TypeError: Object `#<Object>` has no method `kendoGrid` (in Google Chrome)
 * TypeError: `$("#Grid").kendoGrid` is not a function (in Firefox)
-* Object does not support property or method 'kendoGrid' (in Internet Explorer 9 and later)
+* Object does not support property or method `kendoGrid` (in Internet Explorer 9 and later)
 * Object does not support this property or method (in older versions of Internet Explorer)
 
 > **Important**
 >
-> All Kendo UI widgets are going to be affected by this issue, not just the Kendo UI Grid. Only the error message is different e.g. `kendoChart is not a function` or `Object has no method kendoEditor`.
+> Not just the Kendo UI Grid, but all Kendo UI widgets are affected by this issue with only the error message being different. For example, `kendoChart is not a function` or `Object has no method kendoEditor`.
 
 **Solution**
 
@@ -79,11 +79,11 @@ where more information can be found.
 
 **Option 2** Path jQuery. You can find more information about the possible path in the aforementioned jQuery bug report.
 
-### Unknown DataSource transport type 'json'
+### Unknown DataSource transport type json Warning Is Displayed
 
-This warning can be caused by one of the following:
+The `Unknown DataSource transport type json` warning might be caused by either of the following reasons:
 
-* invalid Kendo UI DataSource [`type`](/api/javascript/data/datasource#configuration-type) configuration, such as:
+* Invalid Kendo UI DataSource [`type`](/api/javascript/data/datasource#configuration-type) configuration is set. For example:
 
     ```
     dataSource: {
@@ -91,15 +91,13 @@ This warning can be caused by one of the following:
     }
     ```
 
-* missing JavaScript file when using a DataSource type that is not included in kendo.all.min.js, for example **aspnetmvc-ajax**, **jsdo**, etc.
-
-Specifically **`json`** is not a valid DataSource `type` and does not require a separate JavaScript file.
+* A JavaScript file is missing when using a DataSource type that is not included in `kendo.all.min.js`. For example, `aspnetmvc-ajax`, `jsdo`, and others. Specifically, `json` is not a valid DataSource `type` and it does not require a separate JavaScript file.
 
 **Solution**
 
-Use a valid `type` value, or remove the `type` property, or add the corresponding missing file (e.g. `kendo.aspnetmvc.min.js`, when using the Kendo UI MVC wrappers).
+Use a valid `type` value, or remove the `type` property, or add the corresponding missing file&mdash;for example, `kendo.aspnetmvc.min.js` when using the Kendo UI MVC wrappers.
 
-Note the difference between the [dataSource `type`](/api/javascript/data/datasource#configuration-type) and the [transport actions' `type`](/api/javascript/data/datasource#configuration-transport.read.type)
+Note that the [dataSource `type`](/api/javascript/data/datasource#configuration-type) differs from the [`type` of the transport actions](/api/javascript/data/datasource#configuration-transport.read.type).
 
 ### Input Widgets Do Not Raise Change Event When API Is Used
 

@@ -154,7 +154,7 @@ TDP handles the data import, export, and processing from the following formats:
 >
 > The [Telerik Document Processing libraries](http://docs.telerik.com/devtools/document-processing/introduction#libraries) are distributed as part of the [UI for ASP.NET MVC]({% slug overview_aspnetmvc %}) and are available for the Kendo UI Enterprise and DevCraft bundles.
 
-For examples on how to export Excel files, refer to the [Grid for ASP.NET MVC and Document Processing Library Integration example](https://github.com/telerik/ui-for-aspnet-mvc-examples/tree/master/grid/grid-dpl-integration) or [RadSpreadProcessing library](http://docs.telerik.com/devtools/document-processing/libraries/radspreadprocessing/overview).
+For examples on how to export Excel files, refer to the [example on the integration of the Document Processing Library and the Grid for ASP.NET MVC](https://github.com/telerik/ui-for-aspnet-mvc-examples/tree/master/grid/grid-dpl-integration), or to the information on the [RadSpreadProcessing library](http://docs.telerik.com/devtools/document-processing/libraries/radspreadprocessing/overview).
 
 ## See Also
 

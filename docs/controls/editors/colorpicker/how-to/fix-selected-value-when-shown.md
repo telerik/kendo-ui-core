@@ -1,17 +1,17 @@
 ---
-title: Fix Value of ColorPicker when Showing it Dynamically
-page_title: Fix Value of ColorPicker when Showing it Dynamically | Kendo UI DatePicker
-description: "Learn how to fix the selected value of the ColorPicker when showing it with jQuery."
+title: Fix ColorPicker Value When Showing It Dynamically
+page_title: Fix ColorPicker Value When Showing It Dynamically | Kendo UI DatePicker
+description: "Learn how to fix the selected value of the Kendo UI ColorPicker when showing it by using jQuery."
 slug: howto_fixselectedvalue_colorpicker
 ---
 
-# Fix Value of ColorPicker when Showing it Dynamically
+# Fix ColorPicker Value When Showing It Dynamically
 
-Hiding the color picker and changing its value will lead to a side effect where the pallette will render incorrect selection.  
+When you hide the Kendo UI ColorPicker and change its value, the pallette renders an incorrect selection as a side-effect from these actions.
 
-This side effect occurs because the viewport of the hidden DOM element is zero. Due to that, the position of the DOM element that represents the selected value cannot calculate its accurate position.
+The reason for this behavior is that the viewport of the hidden DOM element is zero. As a result, the position of the DOM element that represents the selected value is not able to calculate its accurate position.
 
-To handle such situations you should call the `value` method of the **FlatColorPicker** widget again after showing it. This will reassign the color and position the selection to the selected color.
+To handle such situations, call the `value` method of the Kendo UI FlatColorPicker widget again after showing it. This will reassign the color and position the selection to the selected color.
 
 ###### Example
 
@@ -31,10 +31,10 @@ To handle such situations you should call the `value` method of the **FlatColorP
 
             var colorPicker = $("#colorPickerFlat").data("kendoFlatColorPicker");
             // Set the value again when showing the DOM element
-            // in order for the selected color to be properly positioned. 
+            // in order for the selected color to be properly positioned.
             colorPicker.value(colorPicker.value());
         });
-        
+
         $("#colorPickerFlat").kendoFlatColorPicker();
 
         $("#colorPicker").kendoColorPalette({
@@ -47,10 +47,5 @@ To handle such situations you should call the `value` method of the **FlatColorP
 
 ## See Also
 
-Other articles on Kendo UI ColorPicker:
-
 * [ColorPicker JavaScript API Reference](/api/javascript/ui/colorpicker)
-
-Articles on Kendo UI ColorPalette:
-
 * [ColorPalette JavaScript API Reference](/api/javascript/ui/colorpalette)
