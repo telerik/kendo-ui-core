@@ -33157,6 +33157,8 @@ The data source to which the widget should be bound.
 
 Sets the widget options. Changes are cumulative.
 
+> The `setOptions` method recreates and rebinds the Chart instance. Calling `setOptions` in a Chart event handler is not recommended and can cause an endless loop or a JavaScript error.
+
 #### Parameters
 
 ##### options `Object`

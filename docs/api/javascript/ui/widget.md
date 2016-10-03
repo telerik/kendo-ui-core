@@ -66,7 +66,9 @@ Readjusts the layout of the widget. For more information, refer to the article o
 
 ### setOptions
 
-Allows changing the widget configuration after initialization. Depending on the widget, some properties may not be changed, e.g. ones that influence the widget's HTML output (such as Grid scrollability or columns).
+Allows changing the widget configuration after initialization. Depending on the widget, some properties may not be changed, and the method's implementation varies for each widget.
+
+> In some cases, the `setOptions` method can recreate and rebind the widget instance. Calling `setOptions` in an event handler or the respective widget is not recommended and can cause an endless loop or a JavaScript error.
 
 #### Parameters
 
