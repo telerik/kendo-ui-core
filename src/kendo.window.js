@@ -1355,13 +1355,17 @@ var __meta__ = { // jshint ignore:line
                 });
             }
 
+            var newWindowTop = y;
+            if (wnd.options.pinned) {
+                newWindowTop -= $(window).scrollTop();
+            }
             if (direction.indexOf("s") >= 0) {
-                newHeight = y - initialPosition.top - that.elementPadding - containerOffset.top;
+                newHeight = newWindowTop - initialPosition.top - that.elementPadding - containerOffset.top;
 
                 wrapper.height(constrain(newHeight, options.minHeight, options.maxHeight));
             } else if (direction.indexOf("n") >= 0) {
                 windowBottom = initialPosition.top + initialSize.height + containerOffset.top;
-                newHeight = constrain(windowBottom - y, options.minHeight, options.maxHeight);
+                newHeight = constrain(windowBottom - newWindowTop, options.minHeight, options.maxHeight);
 
                 wrapper.css({
                     top: windowBottom - newHeight - containerOffset.top,
