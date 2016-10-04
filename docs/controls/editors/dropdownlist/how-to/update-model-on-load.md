@@ -54,13 +54,13 @@ The example below demonstrates how to update an MVVM bound model on load in a Ke
           return kendo.stringify(selectedProduct, null, 4);
         },
         onOpen: function() {
-          kendoConsole.log("event :: open");
+          $(".console").append("<p>event :: open</p>");
         },
         onChange: function() {
-          kendoConsole.log("event :: change (" + this.displaySelectedProduct() + ")");
+          $(".console").append("<p>event :: change (" + this.displaySelectedProduct() + ")</p>");
         },
         onClose: function() {
-          kendoConsole.log("event :: close");
+          $(".console").append("<p>event :: close</p>");
         },
         products: [{ProductName: "test title", ProductID: "1"}]
       });

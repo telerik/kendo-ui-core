@@ -24,15 +24,15 @@ The example below demonstrates how to prevent invalid values in a Kendo UI DateT
     <script>
       $(document).ready(function() {
         function onOpen() {
-          kendoConsole.log("Open");
+          $(".console").append("<p>Open<p>");
         }
 
         function onClose() {
-          kendoConsole.log("Close");
+          $(".console").append("<p>Close<p>");
         }
 
         function onChange() {
-          kendoConsole.log("Change :: " + kendo.toString(this.value(), 'd'));
+          $(".console").append("<p>Change :: " + kendo.toString(this.value(), 'd') + "<p>");
 
           //uncomment if you do not want to wire the input change event
           /*if (this.value() === null) {

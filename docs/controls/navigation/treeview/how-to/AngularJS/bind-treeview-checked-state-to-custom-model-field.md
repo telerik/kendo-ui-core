@@ -56,9 +56,9 @@ The example below demonstrates how to bind the checked state of a Kendo UI TreeV
                 modelItem = findModelItem($scope.treeData, currentItem.id);
             updateChecked($scope.treeData, e.sender.dataSource.data());
 
-            kendoConsole.log("Check event triggered by: " + currentItem.label);
-            kendoConsole.log("Data Source isChecked custom property: " + currentItem.isChecked);
-            kendoConsole.log("Model isChecked custom property: " + modelItem.isChecked);
+            $(".console").append("<p>Check event triggered by: " + currentItem.label + "</p>");
+            $(".console").append("<p>Data Source isChecked custom property: " + currentItem.isChecked + "</p>");
+            $(".console").append("<p>Model isChecked custom property: " + modelItem.isChecked + "</p>");
 
           },
           template: "#: item.label #"
