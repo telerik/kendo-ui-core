@@ -390,7 +390,7 @@ var __meta__ = { // jshint ignore:line
         }
 
         // Angular will invoke $render when the view needs to be updated with the view value.
-        ngModel.$render = function() {
+        var viewRender = function() {
             // Update the widget with the view value.
 
             // delaying with setTimout for cases where the datasource is set thereafter.
@@ -424,6 +424,14 @@ var __meta__ = { // jshint ignore:line
                 }
             }, 0);
         };
+
+        ngModel.$render = viewRender;
+        setTimeout(function() {
+            if (ngModel.$render !== viewRender) {
+                ngModel.$render = viewRender;
+                ngModel.$render();
+            }
+        });
 
         if (isForm(element)) {
             element.on("change", function() {

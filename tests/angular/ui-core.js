@@ -723,14 +723,16 @@ withAngularTests("Angular (UI Core)", function(runTest){
         $("<form name='form'><select name='select' kendo-dropdownlist='dropDown' k-options='options' ng-model='item'></select></form>").appendTo(dom);
         expect(5);
         $scope.whenRendered(function(){
-            equal($scope.form.$dirty, false);
-            equal($scope.form.select.$dirty, false);
-            $scope.dropDown.value(2);
-            $scope.dropDown.trigger("change");
-            equal($scope.item, 2);
-            equal($scope.form.$dirty, true);
-            equal($scope.form.select.$dirty, true);
-            start();
+            setTimeout(function() {
+                equal($scope.form.$dirty, false);
+                equal($scope.form.select.$dirty, false);
+                $scope.dropDown.value(2);
+                $scope.dropDown.trigger("change");
+                equal($scope.item, 2);
+                equal($scope.form.$dirty, true);
+                equal($scope.form.select.$dirty, true);
+                start();
+            }, 100);
         });
     });
 
@@ -1113,11 +1115,15 @@ withAngularTests("Angular (UI Core)", function(runTest){
 
         var $scope = dom.scope();
 
-        $scope.$apply(function() {
-            $scope.data = [{ id: 0, text: "text0" }, { id: 1, text: "text1" }, { id: 2, text: "text2" }];
-            $scope.selectedValue = 1;
-        });
+        stop(1);
 
-        equal($scope.selectedValue, 1);
+        setTimeout(function() {
+            start();
+            $scope.$apply(function() {
+                $scope.data = [{ id: 0, text: "text0" }, { id: 1, text: "text1" }, { id: 2, text: "text2" }];
+                $scope.selectedValue = 1;
+            });
+            equal($scope.selectedValue, 1);
+        }, 100);
     });
 });
