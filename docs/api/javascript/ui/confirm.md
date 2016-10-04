@@ -55,3 +55,24 @@ The title of the Cancel button.
       }
     }).data("kendoConfirm").open();
     </script>
+
+## Fields
+
+### result `Promise`
+
+`Promise` a [jQuery promise instance](http://api.jquery.com/Types/#Promise), which can be used for callbacks, or passed to [jQuery.when](http://api.jquery.com/jQuery.when/). The jQuery Deferred object resolves to:
+
+* `done()` - when user has pressed the "OK" button;
+* `fail()` - when user has pressed the "Cancel" button.
+
+#### Example
+
+    <div id="confirm"></div>
+    <script>
+    $("#confirm").kendoConfirm({
+      content: "Do you accept?",
+      messages:{
+        okText: "OK"
+      }
+    }).data("kendoConfirm").result.done(function(){console.log("User accepted"); }).fail(function(){console.log("User rejected");});
+    </script>

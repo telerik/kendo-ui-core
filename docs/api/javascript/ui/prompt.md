@@ -55,3 +55,30 @@ The title of the Cancel button.
       }
     }).data("kendoPrompt").open();
     </script>
+
+## Fields
+
+### result `Promise`
+
+`Promise` a [jQuery promise instance](http://api.jquery.com/Types/#Promise), which can be used for callbacks, or passed to [jQuery.when](http://api.jquery.com/jQuery.when/). The jQuery Deferred object resolves to:
+
+* `done()` - when user has pressed the "OK" button and the **data** passed to the callback is the inputted text;
+* `fail()` - when user has pressed the "Cancel" button and the **data** passed to the callback is the inputted text.
+
+#### Example
+
+    <div id="prompt"></div>
+    <script>
+    $("#prompt").kendoPrompt({
+    content: "Prompt text", 
+    value: "Default input text", 
+    messages:{
+      okText: "OK"
+    }
+  }).data("kendoPrompt").result.done(function(data){
+          console.log("User accepted with text: " + data);
+      })
+      .fail(function(data){
+          console.log("User rejected with text: " + data);
+      });
+    </script>
