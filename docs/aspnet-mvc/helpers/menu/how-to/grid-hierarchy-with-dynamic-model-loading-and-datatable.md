@@ -1,8 +1,8 @@
 ---
 title: Open Window from Menu Item Click by Using Ajax
-page_title: Open Window from Menu Item Click by Using Ajax | Kendo UI Grid HtmlHelper
+page_title: Open Window from Menu Item Click by Using Ajax | Kendo UI Menu HtmlHelper
 description: "Open a window when clicking on a Kendo UI Menu item by using Ajax in ASP.NET MVC applications."
-slug: howto_openwindowfrommenuotemajax_gridaspnetmv
+slug: howto_openwindowfrommenuotemajax_menuaspnetmv
 ---
 
 # Open Window from Menu Item Click by Using Ajax
