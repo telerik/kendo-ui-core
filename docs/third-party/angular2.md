@@ -13,7 +13,7 @@ position: 3
 
 **[Kendo UI for Angular 2](http://www.telerik.com/kendo-angular-ui/)** is a new separate suite of native ng2 UI components.
 
-An additional place to follow the latest updates on Kendo UI for Angular 2 is the [Telerik blog](http://www.telerik.com/blogs/). For example, keep an eye on the posts of the [Kendo UI product manager](http://www.telerik.com/blogs/author/petyo-ivanov).
+The [Telerik blogs](http://www.telerik.com/blogs/) are an additional source for the latest updates on Kendo UI for Angular 2. For example, keep an eye on the posts of the [Kendo UI Product Manager](http://www.telerik.com/blogs/author/petyo-ivanov).
 
 ## Kendo UI Professional
 
