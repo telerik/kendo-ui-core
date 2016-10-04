@@ -130,7 +130,7 @@ There are two ways to get the source code for Kendo UI Core. You can either down
 
 In order to build Kendo UI Core, you need to have **Node.js 4.x** and **git 2.x**.
 
-For Windows you have to download and install [Git for Windows](https://git-for-windows.github.io/) and [Node.js](http://nodejs.org/download/).
+For Windows you have to download and install [Git for Windows](https://git-for-windows.github.io/) and [Node.js](http://nodejs.org/download/) and [Visual C++ Build Tools](http://landinghub.visualstudio.com/visual-cpp-build-tools).
 
 Mac OS users should install [Homebrew](http://mxcl.github.com/homebrew/). Once Homebrew is installed, run `brew install git` to install git, and `brew install node` to install Node.js.
 
