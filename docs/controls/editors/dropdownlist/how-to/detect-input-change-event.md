@@ -24,11 +24,11 @@ The example below demonstrates how to detect the Kendo UI DropDownList input cha
     <script>
       $(document).ready(function() {
         function widgetChange() {
-          kendoConsole.log("event: change (widget)");
+          $(".console").append("<p>event: change (widget)</p>");
         };
 
         function inputChange() {
-          kendoConsole.log("event: change (input)");
+          $(".console").append("<p>event: change (input)</p>");
         };
 
         var data = [

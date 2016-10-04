@@ -121,7 +121,7 @@ The example below demonstrates how to update the ListView on a dataSource item u
             },
             isVisible: true,
             onSave: function(e) {
-                kendoConsole.log("event :: save(" + kendo.stringify(e.model, null, 4) + ")");
+            $(".console").append("<p>" + "event :: save(" + kendo.stringify(e.model, null, 4) + ")" + "</p>");
             },
             products: new kendo.data.DataSource({
                 schema: {

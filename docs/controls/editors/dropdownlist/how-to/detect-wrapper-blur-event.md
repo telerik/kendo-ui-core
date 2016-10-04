@@ -24,22 +24,20 @@ The example below demonstrates how to detect the Kendo UI DropDownList wrapper b
     <script>
       $(document).ready(function() {
         function onOpen() {
-          kendoConsole.log("event: open");
+          $(".console").append("<p>event: open</p>");
         };
 
         function onClose() {
-          kendoConsole.log("event: close");
+          $(".console").append("<p>event: close</p>");
         };
 
         function onChange() {
-          kendoConsole.log("event: change");
+          $(".console").append("<p>event: change</p>");
         };
 
         function onSelect(e) {
-          if ("kendoConsole" in window) {
-            var dataItem = this.dataItem(e.item.index());
-            kendoConsole.log("event :: select (" + dataItem.text + " : " + dataItem.value + ")" );
-          }
+          var dataItem = this.dataItem(e.item.index());
+          $(".console").append("<p>event :: select (" + dataItem.text + " : " + dataItem.value + ")</p>");
         };
 
         var data = [

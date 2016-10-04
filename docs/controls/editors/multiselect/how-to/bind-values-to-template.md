@@ -60,15 +60,15 @@ The example below demonstrates how to bind the Kendo UI MultiSelect value to a t
           return kendo.stringify(selectedProduct, null, 4);
         },
         onOpen: function() {
-          kendoConsole.log("event :: open");
+          $(".console").append("<p>event :: open</p>");
         },
         onChange: function() {
           var selectedProduct = this.get("selectedProduct");
           viewModel.set("selectedProduct",selectedProduct)
-          kendoConsole.log("event :: change (" + this.displaySelectedProduct() + ")");
+          $(".console").append("<p>event :: change (" + this.displaySelectedProduct() + ")</p>");
         },
         onClose: function() {
-          kendoConsole.log("event :: close");
+          $(".console").append("<p>event :: close</p>");
         },
         products: new kendo.data.DataSource({
           transport: {

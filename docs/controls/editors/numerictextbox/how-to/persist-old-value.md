@@ -26,7 +26,7 @@ The example below demonstrates how to persist the old value of a Kendo UI Numeri
             var old = ""; //variable that persists the old value
 
             function onChange() {
-                kendoConsole.log("Change :: " + this.value() + ", old: " + old);
+                $(".console").append("<p>Change :: " + this.value() + ", old: " + old + "<p>");
                 old = this.value(); //get value of the widget
             }
 

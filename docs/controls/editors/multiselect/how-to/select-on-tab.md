@@ -20,41 +20,29 @@ The example below demonstrates how to select the first item from the popup on a 
     <script>
         $(document).ready(function() {
             function onDataBound() {
-                if ("kendoConsole" in window) {
-                    kendoConsole.log("event: dataBound");
+                  $(".console").append("<p>event: dataBound</p>");
                 }
-            }
 
             function onOpen() {
-                if ("kendoConsole" in window) {
-                    kendoConsole.log("event: open");
+                  $(".console").append("<p>event: open</p>");
                 }
-            }
 
             function onClose() {
-                if ("kendoConsole" in window) {
-                    kendoConsole.log("event: close");
+                  $(".console").append("<p>event: close</p>");
                 }
-            }
 
             function onChange() {
-                if ("kendoConsole" in window) {
-                    kendoConsole.log("event: change");
+                  $(".console").append("<p>event: change</p>");
                 }
-            }
 
             function onSelect(e) {
-                if ("kendoConsole" in window) {
-                    var dataItem = this.dataSource.view()[e.item.index()];
-                    kendoConsole.log("event :: select (" + dataItem.text + " : " + dataItem.value + ")" );
-                }
-            };
+                  var dataItem = this.dataSource.view()[e.item.index()];
+                  $(".console").append("<p>event :: select (" + dataItem.text + " : " + dataItem.value + ")</p>");
+                };
 
             function onFiltering(e) {
-                if ("kendoConsole" in window) {
-                    kendoConsole.log("event :: filtering");
+                  $(".console").append("<p>event :: filtering</p>");
                 }
-            }
 
             var data = [
                 { text: "A", value:"1" },
