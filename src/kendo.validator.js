@@ -154,7 +154,7 @@ var __meta__ = { // jshint ignore:line
                     var checkbox = input.filter("[type=checkbox]").length && !input.is(":checked"),
                         value = input.val();
 
-                    return !(hasAttribute(input, "required") && (value === "" || !value  || checkbox));
+                    return !(hasAttribute(input, "required") && (!value || value === "" || value.length === 0 || checkbox));
                 },
                 pattern: function(input) {
                     if (input.filter("[type=text],[type=email],[type=url],[type=tel],[type=search],[type=password]").filter("[pattern]").length && input.val() !== "") {
