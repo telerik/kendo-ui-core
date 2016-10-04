@@ -205,8 +205,25 @@
     });
 
     //ng-model
+    //
+    ngTest("dropdownlist respects model value", 1, function() {
+        angular.module("kendo.tests").controller("mine", function($scope) {
+            var colors = new kendo.data.ObservableArray([ { color: "red", value: 1 }, { color: "green", value: 2 }, { color: "blue", value: 3 } ]);
 
-    ngTest("dropdownlist with autoBind:false skips binding when value is null", 2, function() {
+            $scope.colors = new kendo.data.DataSource({ data: colors }),
+            $scope.selectedColor = 2;
+        });
+
+        QUnit.fixture.html('<div ng-controller=mine><select kendo-drop-down-list ng-model=selectedColor k-data-source=colors k-data-text-field="\'color\'" k-data-value-field="\'value\'" k-value-primitive="true"></select></div>');
+    },
+
+    function() {
+        var widget = QUnit.fixture.find("select").getKendoDropDownList();
+
+        equal(widget.value(), 2);
+    });
+
+    ngTest("dropdownlist with autoBind:false skips binding when value is null", 1, function() {
         angular.module("kendo.tests").controller("mine", function($scope) {
             var colors = new kendo.data.ObservableArray([ { color: "red", value: 1 }, { color: "green", value: 2 }, { color: "blue", value: 3 } ]);
 
@@ -221,7 +238,7 @@
         var widget = QUnit.fixture.find("select").getKendoDropDownList();
 
         equal(widget.listView.bound(), false);
-        equal(widget.value(), "");
+        //equal(widget.value(), "");
     });
 
     ngTest("dropdownlist respects model value on reset", 1, function() {
