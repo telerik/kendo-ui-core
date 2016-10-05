@@ -22,10 +22,10 @@ After adjusting the theme via the ThemeBuilder, click **Download theme**. This p
 * `kendo.custom.less`&mdash;The [LESS](http://lesscss.org/) that includes the custom theme. Use this file if you want to compile the theme dynamically.
 
 > **Important**
-> * Always register the [common CSS file](/styles-and-layout/appearance-styling#common-css-files) on the page, even when using ThemeBuilder-generated custom themes.
-> * Use the common CSS file, which corresponds to the Kendo UI theme that has been used as a base for your custom theme. For example, if you have created a custom theme from
+> * Always register the [common CSS file]({% slug themesandappearnce_kendoui_desktopwidgets %}#common-css-files) on the page, even when using ThemeBuilder-generated custom themes.
+> * Use the common CSS file, which corresponds to the Kendo UI theme that is used as a base for your custom theme. For example, if you have created a custom theme from
 the built-in **Material** theme, then register `kendo.common-material.min.css`.
-> * When deploying your themed application to an internal network, note that the images in the ThemeBuilder output are inferred from the page. If you are using the ThemeBuilder through the Kendo UI page, the images are going to be located on the Kendo UI CDN, and may be blocked if your customers are within an internal network without access to the CDN. In such circumstances, copy the image resources locally and change the references in the CSS/LESS output.
+> * When deploying your themed application to an internal network, the images in the ThemeBuilder output are inferred from the page. If you are using the ThemeBuilder through the Kendo UI page, the images will be located on the Kendo UI CDN and may be blocked if your customers are within an internal network without access to the CDN. In such cases, copy the image resources locally and change the references in the CSS or LESS output.
 
 ### Use LESS Output
 
