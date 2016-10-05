@@ -274,8 +274,8 @@ navigation:
     "aspnet-mvc/helpers/grid/how-to":
         title: "How To"
         position: 9
-    "aspnet-mvc/helpers/grid/how-to/editing":
-        title: "Editing"
+    "aspnet-mvc/helpers/grid/how-to/state":
+        title: "State Management"
     "aspnet-mvc/helpers/grid/troubleshoot":
         title: "Troubleshooting"
         position: 10

@@ -2,13 +2,15 @@
 title: Show Progress for Grid CRUD Operations
 page_title: Show Progress for Grid CRUD Operations | Kendo UI Grid
 description: "Learn how to show the current progress of each CRUD operation for a Kendo UI Grid."
-previous_url: /controls/data-management/grid/how-to/show-progress-CRUD-operation
+previous_url: /controls/data-management/grid/how-to/show-progress-CRUD-operation, /aspnet-mvc/helpers/grid/how-to/use-grid-with-progressbar-crud-operations
 slug: howto_show_progress_CRUD_operation
 ---
 
 # Show Progress for Grid CRUD Operations
 
 To see the example on how to show the current progress of each CRUD operation for a Kendo UI Grid, refer to [this project](https://github.com/telerik/kendo-examples-asp-net-mvc/tree/master/grid-progressbar-crud-operations). It is available in the [GitHub repository for Kendo UI examples using ASP.NET MVC](https://github.com/telerik/kendo-examples-asp-net-mvc).
+
+For an additional example on this scenario, refer to [this project](https://github.com/telerik/ui-for-aspnet-mvc-examples/tree/master/grid/GridProgressBarForCRUDOperations) too.
 
 ## See Also
 
