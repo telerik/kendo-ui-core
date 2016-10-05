@@ -1,11 +1,11 @@
 ---
-title: Pan by Using Mouse Scrolling
-page_title: Pan by Using Mouse Scrolling | Kendo UI Diagram
-description: "Learn how to pan the Kendo UI Diagram by using the mouse scrolling functionality."
-slug: howto_pan_via_mouse_scrolling
+title: Pan With Mouse Wheel
+page_title: Pan With Mouse Wheel | Kendo UI Diagram
+description: "Learn how to pan the Kendo UI Diagram with the mouse wheel."
+slug: howto_pan_with_mouse_wheel
 ---
 
-# Pan by Using Mouse Scrolling
+# Pan With Mouse Wheel
 
 The example below demonstrates how to pan the Kendo UI Diagram when scrolling with the mouse.
 
