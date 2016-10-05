@@ -1,0 +1,3 @@
+User-agent: *
+Allow:
+Sitemap: http://docs.telerik.com/kendo-ui/sitemap.xml
