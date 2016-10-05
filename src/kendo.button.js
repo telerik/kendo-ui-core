@@ -54,12 +54,12 @@ var __meta__ = { // jshint ignore:line
         },
 
         destroy: function() {
-			var that = this;
+            var that = this;
 
-			that.wrapper.off(NS);
+            that.wrapper.off(NS);
 
-			Widget.fn.destroy.call(that);
-		},
+            Widget.fn.destroy.call(that);
+        },
 
         events: [
             CLICK
@@ -126,7 +126,9 @@ var __meta__ = { // jshint ignore:line
             if (spriteCssClass || imageUrl || icon) {
                 isEmpty = true;
 
-                element.contents().not("span.k-sprite").not("span.k-icon").not("img.k-image").each(function(idx, el){
+                element.contents().filter(function() {
+                    return (!$(this).hasClass("k-sprite") && !$(this).hasClass("k-icon") && !$(this).hasClass("k-image"));
+                }).each(function(idx, el){
                     if (el.nodeType == 1 || el.nodeType == 3 && $.trim(el.nodeValue).length > 0) {
                         isEmpty = false;
                     }
