@@ -940,16 +940,16 @@
 
         templates = {
             wrapper: template("<div class='k-widget k-dialog k-window' role='dialog' />"),
-            action: template("<li class='k-button# if (data.primary) { # k-primary# } #' role='button'></li>"),
+            action: template("<button type='button' class='k-button# if (data.primary) { # k-primary# } role='button' #'></button>"),
             titlebar: template(
                 "<div class='k-window-titlebar k-header'>" +
                     "<span class='k-dialog-title'>#= title #</span>" +
                 "</div>"
             ),
             close: template("<a role='button' href='\\#' class='k-button-bare k-dialog-action k-dialog-close' aria-label='Close' tabindex='-1'><span class='k-font-icon k-i-x'>#= messages.close #</span></a>"),
-            actionbar: template("<ul class='k-dialog-buttongroup k-dialog-button-layout-#= buttonLayout #' role='toolbar' />"),
+            actionbar: template("<div class='k-dialog-buttongroup k-dialog-button-layout-#= buttonLayout #' role='toolbar' />"),
             overlay: "<div class='k-overlay' />",
-            alertWrapper: template("<div class='k-widget k-dialog k-window k-dialog-centered' role='alertdialog' />"),
+            alertWrapper: template("<div class='k-widget k-dialog k-window' role='alertdialog' />"),
             alert: "<div />",
             confirm: "<div />",
             prompt: "<div />",
