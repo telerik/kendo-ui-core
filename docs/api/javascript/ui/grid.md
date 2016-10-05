@@ -1490,6 +1490,28 @@ prevent the user from locking or unlocking this column using the user interface.
     });
     </script>
 
+### columns.minResizableWidth `Number`
+
+The pixel screen width below which the user will not be able to resize the column via the UI.
+
+> This option is meaningful when the grid is set as [resizable](#configuration-resizable).
+
+#### Example - set the column width as a number
+     <div id="grid"></div>
+     <script>
+     $("#grid").kendoGrid({
+       resizable: true,
+       columns: [
+         { field: "name", minResizableWidth: 80 },
+         { field: "age" }
+       ],
+       dataSource: [
+         { name: "Jane Doe", age: 30 },
+         { name: "John Doe", age: 33 }
+       ]
+     });
+     </script>
+
 ### columns.minScreenWidth `Number`
 
 The pixel screen width below which the column will be hidden. The setting takes precedence over the [`hidden`](/api/javascript/ui/grid#configuration-columns.hidden) setting,
