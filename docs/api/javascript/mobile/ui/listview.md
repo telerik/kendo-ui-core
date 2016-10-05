@@ -598,7 +598,9 @@ The type of the control. Can be either `flat` (default) or group. Determined aut
 
 Indicates whether the filter input must be visible or not.
 
-> **Important:** When the filter is applied it will remove all previous filter expressions applied to the DataSource.
+> **Important**
+> * When the filter is applied, it removes all previous filter expressions that have been applied to the DataSource.
+> * The DataSource configuration is required for the filtering to work properly. If initialized from Markup, the MobileListView does not support filtering.
 
 #### Example - enabled filtering
 
