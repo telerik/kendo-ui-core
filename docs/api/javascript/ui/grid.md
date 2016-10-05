@@ -6206,6 +6206,26 @@ If set to `true` the user can get the grid in unsorted state by clicking the sor
     });
     </script>
 
+### sortable.initialDirection `String` *(default: asc)*
+
+Determines the inital (from un-sorted to sorted state) sort direction. The supported values are `asc` and `desc`.
+
+#### Example - disable sorting
+
+    <div id="grid"></div>
+    <script>
+    $("#grid").kendoGrid({
+      columns: [
+        { field: "id" },
+        { field: "name" }
+      ],
+      sortable: {
+        initialDirection: "desc"
+      },
+      dataSource: [ { id: 1, name: "Jane Doe" }, { id: 2, name: "John Doe" } ]
+    });
+    </script>
+
 ### sortable.mode `String` *(default: "single")*
 
 The sorting mode. If set to "single" the user can sort by one column. If set to "multiple" the user can sort by multiple columns.
