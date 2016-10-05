@@ -40,17 +40,18 @@
 @error-border-color: darken(@error, 29%);
 @disabled-text-color: contrast(@base, lighten(@base, 40%), darken(@base, 15%), 0.5);
 @notification-info-background-color: @info;
-@notification-info-text-color: contrast(@info, lighten(@hover-text-color, 50%), darken(@info, 50%), 0.5);
-@notification-info-border-color: contrast(@info, lighten(@info, 1%), darken(@info, 11%), 0.5);
+@notification-info-text-color: #fff;
+@notification-info-border-color: @notification-info-background-color;
 @notification-success-background-color: @success;
-@notification-success-text-color: contrast(@success, lighten(@hover-text-color, 25%), darken(@success, 50%), 0.5);
-@notification-success-border-color: darken(@success, 10%);
+@notification-success-text-color: @notification-info-text-color;
+@notification-success-border-color: @notification-success-background-color;
 @notification-warning-background-color: @warning;
-@notification-warning-text-color: contrast(@warning, lighten(@hover-text-color, 22%), darken(@warning, 50%), 0.5);
-@notification-warning-border-color: contrast(@warning, lighten(@warning, 1%), darken(@warning, 3%), 0.5);
+@notification-warning-text-color: #000;
+@notification-warning-border-color: @notification-warning-background-color;
 @notification-error-background-color: @error;
-@notification-error-text-color: contrast(@error, lighten(@hover-text-color, 25%), darken(@error, 50%), 0.5);
-@notification-error-border-color: darken(@error, 10%);
+@notification-error-text-color: @notification-info-text-color;
+@notification-error-border-color: @notification-error-background-color;
+@notification-gradient: "rgba(255,255,255,.25) 0%, rgba(255,255,255,0) 100%";
 @tooltip-text-color: @header-text-color;
 @tooltip-background-color: @header-background-color;
 @tooltip-border-color: @secondary-border-color;
@@ -1502,6 +1503,10 @@ div.k-filebrowser-dropzone em
     background-color: @notification-error-background-color;
     color: @notification-error-text-color;
     border-color: @notification-error-border-color;
+}
+
+.k-widget.k-notification {
+    .composite-background(@notification-gradient);
 }
 
 /* Gantt */
