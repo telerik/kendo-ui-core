@@ -579,7 +579,7 @@
         var barNotificationWrapper = $("#bar").closest(".k-notification").parent();
 
         ok(parseInt(fooNotificationWrapper.css("top"), 10) > parseInt(barNotificationWrapper.css("top"), 10));
-        equal(fooNotificationWrapper.css("right"), barNotificationWrapper.css("right"));
+        roughlyEqual(fooNotificationWrapper.css("right"), barNotificationWrapper.css("right"), 0.15);
     });
 
     test("down popup stacking is applied", 2, function() {
@@ -595,7 +595,7 @@
         var barNotificationWrapper = $("#bar").closest(".k-notification").parent();
 
         ok(parseInt(fooNotificationWrapper.css("top"), 10) < parseInt(barNotificationWrapper.css("top"), 10));
-        equal(fooNotificationWrapper.css("right"), barNotificationWrapper.css("right"));
+        roughlyEqual(fooNotificationWrapper.css("right"), barNotificationWrapper.css("right"), 0.15);
     });
 
     test("down popup stacking is applied by default if position.top is set", 2, function() {
@@ -613,7 +613,7 @@
         var barNotificationWrapper = $("#bar").closest(".k-notification").parent();
 
         ok(parseInt(fooNotificationWrapper.css("top"), 10) < parseInt(barNotificationWrapper.css("top"), 10));
-        equal(fooNotificationWrapper.css("right"), barNotificationWrapper.css("right"));
+        roughlyEqual(fooNotificationWrapper.css("right"), barNotificationWrapper.css("right"), 0.82);
     });
 
     test("right popup stacking is applied", 2, function() {
@@ -629,7 +629,7 @@
         var barNotificationWrapper = $("#bar").closest(".k-notification").parent();
 
         ok(fooNotificationWrapper.offset().left < barNotificationWrapper.offset().left);
-        equal(fooNotificationWrapper.offset().top, barNotificationWrapper.offset().top);
+        roughlyEqual(fooNotificationWrapper.offset().top, barNotificationWrapper.offset().top, 0.82);
     });
 
     test("left popup stacking is applied", 2, function() {
@@ -645,7 +645,7 @@
         var barNotificationWrapper = $("#bar").closest(".k-notification").parent();
 
         ok(parseInt(fooNotificationWrapper.css("left"), 10) > parseInt(barNotificationWrapper.css("left"), 10));
-        equal(fooNotificationWrapper.css("top"), barNotificationWrapper.css("top"));
+        roughlyEqual(fooNotificationWrapper.css("top"), barNotificationWrapper.css("top"), 0.82);
     });
 
     test("left popup alignment is applied if left position is set", 1, function () {
@@ -662,7 +662,7 @@
         notification.show('<span id="bar">bar bar</span>');
         var barNotificationWrapper = $("#bar").closest(".k-notification").parent();
 
-        equal(fooNotificationWrapper.css("left"), barNotificationWrapper.css("left"));
+        roughlyEqual(fooNotificationWrapper.css("left"), barNotificationWrapper.css("left"), 0.15);
     });
 
     test("clicking on popup notification before allowHideAfter does not hide it", 2, function () {
