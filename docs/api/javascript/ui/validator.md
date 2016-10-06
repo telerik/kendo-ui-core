@@ -247,7 +247,9 @@ Input element to be validated.
 
 ### validate
 
-Fired when validation completes.
+Fired when the validation of the form completes.
+
+> The validate event *will not* fire while chaning individual input values.
 
 The event handler function context (available via the `this` keyword) will be set to the data source instance.
 
