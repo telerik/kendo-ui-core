@@ -7,15 +7,7 @@ function createNotification(options) {
 
 /* exported roughlyEqual */
 function roughlyEqual(actual, expected, precision) {
-    var valueAndUnitRegex = /(\d+\.?\d*)(.*)/i;
-    var actualParsed = valueAndUnitRegex.exec(actual);
-    var expectedParsed = valueAndUnitRegex.exec(expected);
-    var actualValue = actualParsed[1];
-    var expectedValue = expectedParsed[1];
-    var unitForActual = actualParsed[2];
-    var unitForExpected = expectedParsed[2];
-
-    var assertResult = (unitForActual === unitForExpected) && (Math.abs(actualValue - expectedValue) <= precision);
+    var assertResult = (Math.abs(parseFloat(actual) - parseFloat(expected)) <= precision);
     var failMessage = (assertResult ? "" : "Expectedl: " + expected + ", Actual: " + actual);
 
     equal(assertResult, true, failMessage);
