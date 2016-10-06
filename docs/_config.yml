@@ -355,6 +355,20 @@ navigation:
     "*how-to":
         title: "How To"
         position: 200
+    "*editing":
+        title: "Editing"
+    "*appearance":
+        title: "Appearance"
+    "*binding":
+        title: "Binding"
+    "*export":
+        title: "Export"
+    "*filtering":
+        title: "Filtering"
+    "*integration":
+        title: "Integration"
+    "*selection":
+        title: "Selection"
     "*angular":
         title: "AngularJS"
         position: 1
