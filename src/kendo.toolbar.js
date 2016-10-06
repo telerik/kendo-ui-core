@@ -214,9 +214,15 @@ var __meta__ = { // jshint ignore:line
                     isEmpty = true;
 
                     element.contents().not("span.k-sprite,span." + ICON + ",img.k-image").each(function(idx, el){
-                        if (el.nodeType == 1 || el.nodeType == 3 && $.trim(el.nodeValue).length > 0) {
+                        if (el.nodeType == 1) {
                             isEmpty = false;
                         }
+                    });
+
+                    element.contents().filter(function(idx, el) {
+                        return this.nodeType == 3 && $.trim(el.nodeValue).length > 0;
+                    }).each(function(){
+                        isEmpty = false;
                     });
 
                     if (isEmpty) {
