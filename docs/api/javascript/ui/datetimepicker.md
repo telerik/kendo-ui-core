@@ -184,10 +184,10 @@ All dates, which match the date portion of the selected date will be used to re-
 Specifies the navigation depth of the calendar. The following
 settings are available for the **depth** value:
 
-- *"month"* shows the days of the month
-- *"year"* shows the months of the year
-- *"decade"* shows the years of the decade
-- *"century"* shows the decades from the century
+* `"month"` - Shows the days of the month.
+* `"year"` - Shows the months of the year.
+* `"decade"` - Shows the years of the decade.
+* `"century"` - Shows the decades from the century.
 
 > Note the option will not be applied if **start** option is *lower* than **depth**. Always set both and **start** and **depth** options.
 
@@ -395,22 +395,10 @@ The template used for rendering cells in the calendar "month" view, which are ou
  Specifies the start view of the calendar.
  The following settings are available for the **start** value:
 
-#### *"month"*
-
-shows the days of the month
-
-#### *"year"*
-
-shows the months of the year
-
-#### *"decade"*
-
-shows the years of the decade
-
-#### *"century"*
-
-shows the decades from the century
-
+ * `"month"` - Shows the days of the month.
+ * `"year"` - Shows the months of the year.
+ * `"decade"` - Shows the years of the decade.
+ * `"century"` - Shows the decades from the century.
 
 #### Example - specify the initial view, which calendar renders
 
