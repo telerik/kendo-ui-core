@@ -25,8 +25,7 @@ For the sake of distinction, *Kendo UI Professional* (subject of this documentat
 
 ## See Also
 
-Articles on Kendo UI integration with third-party tools and frameworks:
-
+* [Angular 2 Migration Guide](http://ngmigrate.telerik.com/)
 * [Twitter Bootstrap]({% slug twitterbootstrapintegration_integration_kendoui %})
 * [Web Components]({% slug webcomponents_integration_kendoui %})
 * [RequireJS]({% slug requirejs_integration_kendoui %})

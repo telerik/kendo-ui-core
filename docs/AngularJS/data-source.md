@@ -127,3 +127,4 @@ Other articles on AngularJS directives and integration with Kendo UI:
 * [How to Load View in Window]({% slug window_service_angularjs_directives %})
 * [How to Nest Widgets]({% slug nest_widgets_angularjs_directives %})
 * [Troubleshooting: Common Issues]({% slug common_issues_support_angularjs %})
+* [Angular 2 Migration Guide](http://ngmigrate.telerik.com/)
