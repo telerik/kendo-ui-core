@@ -629,7 +629,7 @@ var __meta__ = { // jshint ignore:line
                     title.html(text);
                 }
 
-                titleBarHeight = titleBar.outerHeight();
+                titleBarHeight = parseInt(titleBar.outerHeight(), 10);
 
                 wrapper.css("padding-top", titleBarHeight);
                 titleBar.css("margin-top", -titleBarHeight);

@@ -12,7 +12,7 @@
             });
             $.mockjax({
                 url: /foo|telerik\.com/i,
-                responseText: "foo bar baz",
+                responseText: "foo bar baz"
             });
 
             QUnit.fixture.html(__html__['tests/window/templates-fixture.html']);
@@ -220,7 +220,7 @@
                 minHeight: 200
             });
 
-        equal(parseInt(dialog.wrapper.css("minHeight")), 200);
+        equal(parseInt(dialog.wrapper.css("minHeight"), 10), 200);
     });
 
     test("content.template", function() {
@@ -269,7 +269,7 @@
         });
 
         var titleBar = dialog.wrapper.children(".k-window-titlebar");
-        var titleBarHeight = titleBar.outerHeight();
+        var titleBarHeight = parseInt(titleBar.outerHeight(), 10);
         var margin = parseInt(titleBar.css("margin-top"), 10);
         var padding = parseInt(dialog.wrapper.css("padding-top"), 10);
 
