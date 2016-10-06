@@ -1,6 +1,6 @@
 /* Dialog */
 
-.k-dialog 
+.k-dialog
 {
     min-width: 90px;
     min-height: 3em;
@@ -8,13 +8,13 @@
     max-height: 100%;
 }
 
-.k-dialog.k-window 
+.k-window.k-dialog
 {
     position: fixed;
     padding-top: 0;
 }
 
-.k-dialog .k-window-titlebar
+.k-dialog .k-dialog-titlebar
 {
     position: static;
     margin: 0;
@@ -22,7 +22,7 @@
     width: auto;
 }
 
-.k-dialog .k-window-titlebar .k-dialog-title
+.k-dialog .k-dialog-titlebar .k-dialog-title
 {
     margin: 0;
     padding: 0;
@@ -59,7 +59,6 @@
     right: 0;
     cursor: pointer;
     z-index: 10000;
-
     .k-font-icon {
         .use-font-icon();
     }
@@ -71,9 +70,9 @@
     top: 1em;
 }
 
-.k-dialog.k-alert .k-window-titlebar,
-.k-dialog.k-confirm .k-window-titlebar,
-.k-dialog.k-prompt .k-window-titlebar
+.k-dialog.k-alert .k-dialog-titlebar,
+.k-dialog.k-confirm .k-dialog-titlebar,
+.k-dialog.k-prompt .k-dialog-titlebar
 {
     background: none;
     border-bottom: none;
@@ -100,4 +99,3 @@
 {
     width: 100%;
 }
-

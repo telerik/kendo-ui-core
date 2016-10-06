@@ -942,8 +942,8 @@
             wrapper: template("<div class='k-widget k-dialog k-window' role='dialog' />"),
             action: template("<button type='button' class='k-button# if (data.primary) { # k-primary# } role='button' #'></button>"),
             titlebar: template(
-                "<div class='k-window-titlebar k-header'>" +
-                    "<span class='k-dialog-title'>#= title #</span>" +
+                "<div class='k-window-titlebar k-dialog-titlebar k-header'>" +
+                    "<span class='k-window-title k-dialog-title'>#= title #</span>" +
                 "</div>"
             ),
             close: template("<a role='button' href='\\#' class='k-button-bare k-dialog-action k-dialog-close' aria-label='Close' tabindex='-1'><span class='k-font-icon k-i-x'>#= messages.close #</span></a>"),
