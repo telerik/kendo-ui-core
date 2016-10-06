@@ -183,21 +183,10 @@ Specifies a list of dates, which will be passed to the [month template](#configu
 Specifies the navigation depth. The following
 settings are available for the **depth** value:
 
-#### *"month"*
-
-shows the days of the month
-
-#### *"year"*
-
-shows the months of the year
-
-#### *"decade"*
-
-shows the years of the decade
-
-#### *"century"*
-
-shows the decades from the century
+* `"month"` - Shows the days of the month.
+* `"year"` - Shows the months of the year.
+* `"decade"` - Shows the years of the decade.
+* `"century"` - Shows the decades from the century.
 
 > Note the option will not be applied if **start** option is *lower* than **depth**. Always set both and **start** and **depth** options.
 
@@ -399,21 +388,10 @@ The template used for rendering cells in the "month" view, which are outside the
 Specifies the start view.
 The following settings are available for the **start** value:
 
-#### *"month"*
-
-shows the days of the month
-
-#### *"year"*
-
-shows the months of the year
-
-#### *"decade"*
-
-shows the years of the decade
-
-#### *"century"*
-
-shows the decades from the century
+* `"month"` - Shows the days of the month.
+* `"year"` - Shows the months of the year.
+* `"decade"` - Shows the years of the decade.
+* `"century"` - Shows the decades from the century.
 
 #### Example - specify the initial view, which calendar renders
 
