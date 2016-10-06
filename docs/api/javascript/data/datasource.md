@@ -1146,7 +1146,7 @@ The field from the server response which contains the total number of data items
 
 > The `schema.total` setting may be omitted when the Grid is bound to a plain `Array` (that is, the data items' collection is not a value of a field in the server response). In this case, the `length` of the response `Array` will be used.
 
-> The `schema.total` must be set if the [`serverPaging`](#configuration-serverPaging) option is set to `true`.
+> The `schema.total` must be set if the [`serverPaging`](#configuration-serverPaging) option is set to `true` or the [`schema.data`](#configuration-schema.data) option is used.
 
 #### Returns
 
