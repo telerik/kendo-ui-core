@@ -7,8 +7,14 @@ function createNotification(options) {
 
 /* exported roughlyEqual */
 function roughlyEqual(actual, expected, precision) {
-    var assertResult = (Math.abs(parseFloat(actual) - parseFloat(expected)) <= precision);
-    var failMessage = (assertResult ? "" : "Expectedl: " + expected + ", Actual: " + actual);
+    var assertResult = false;
 
-    equal(assertResult, true, failMessage);
+    if (isNaN(parseFloat(actual)) || isNaN(parseFloat(expected))) {
+        assertResult = actual === expected;
+    }
+    else {
+        assertResult = (Math.abs(parseFloat(actual) - parseFloat(expected)) <= precision);
+    }
+
+    equal(assertResult, true, "Expected: " + expected + ", Actual: " + actual);
 }
