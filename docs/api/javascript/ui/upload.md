@@ -774,17 +774,17 @@ Removes a file by ID (only visually from the UI) without issuing requests to the
        <input id='#=files[0].uid#' type='checkbox' class='k-checkbox' />
        <label for='#=files[0].uid#' class='k-checkbox-label'>Filename: #=name#</label>
     </script>
-    
+
     <script>
       $(document).ready(function() {
         $("#files").kendoUpload({
           template: $("#fileTemplate").html()
         });
-        
+
         $("#clearSelected").on('click', function(e){
           e.preventDefault();
           var upload = $("#files").data("kendoUpload");
-          
+
           upload.wrapper.find(".k-checkbox:checked").each(function() {
           	 upload.clearFileByUid($(this).attr("id"));
           });
@@ -873,7 +873,7 @@ Retrieves the files that are currently selected.
 
           var upload = $("#files").data("kendoUpload"),
               files = upload.getFiles();
-          
+
           alert("You have selected " + files.length  + " files");
           console.log(files);
         })
@@ -957,7 +957,7 @@ Removes a file by ID by sending a standard `remove` request to the handler.
        <input id='#=files[0].uid#' type='checkbox' class='k-checkbox' />
        <label for='#=files[0].uid#' class='k-checkbox-label'>Filename: #=name#</label>
     </script>
-    
+
     <script>
       $(document).ready(function() {
         $("#files").kendoUpload({
@@ -968,11 +968,11 @@ Removes a file by ID by sending a standard `remove` request to the handler.
             removeUrl: "http://my-app.localhost/remove"
           }
         });
-        
+
         $("#removeSelected").on('click', function(e){
           e.preventDefault();
           var upload = $("#files").data("kendoUpload");
-          
+
           upload.wrapper.find(".k-checkbox:checked").each(function() {
           	 upload.removeFileByUid($(this).attr("id"));
           });
@@ -1020,11 +1020,11 @@ Manually triggers the upload process.
         display: none !important;
       }
     </style>
-    
+
     <input name="files" id="files" type="file" />
     <button id="uploadAll" class="k-button">Start upload</button>
     <script>
-      
+
       $(document).ready(function() {
         $("#files").kendoUpload({
           async: {
@@ -1308,8 +1308,9 @@ An array of the selected files. Each item of the array is an object with the fol
 
 Fires when an upload / remove operation has been completed successfully.
 
-Note: The success event fires only when the upload is in
-[async mode](/web/upload/modes#asynchronous-mode).
+> **Important**
+> * The success event fires only when the upload is in [async mode](/web/upload/modes#asynchronous-mode).
+> * It is possible to cancel the event. As a result, the file will be displayed as unsuccessfully uploaded.
 
 #### Example
 
