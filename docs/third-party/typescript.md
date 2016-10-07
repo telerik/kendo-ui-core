@@ -61,7 +61,7 @@ The example below demonstrates how to inherit from an existing Kendo UI widget.
             constructor(element: Element, options?: MyDatePickerOptions) {
                 super(element, options);
             }
-            // (Otional) Override a widget method
+            // (Optional) Override a widget method
             open() {
                 // Log to the console (optional)
                 console.log("open");
