@@ -75,8 +75,7 @@ The `TagMode` enum is now by `MultiSelectTagMode`.
 
 ## See Also
 
-Other articles on Telerik UI for ASP.NET MVC in ASP.NET Core applications:
-
+* [Telerik UI for ASP.NET Core Demos and Sample Applications](http://demos.telerik.com/aspnet-core)
 * [Overview of Telerik UI for ASP.NET Core - RC1]({% slug overview_aspnetmvc6_aspnetmvc %})
 * [Get Started with Telerik UI for ASP.NET MVC in ASP.NET Core Projects]({% slug gettingstarted_aspnetmvc6_aspnetmvc %})
 * [Get Started with Telerik UI for ASP.NET MVC in ASP.NET Core Projects on Linux]({% slug gettingstartedlinux_aspnetmvc6_aspnetmvc %})

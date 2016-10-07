@@ -28,6 +28,7 @@ The repositories below contain source code, instructions, and issue trackers for
 - [ASP.NET Home](https://github.com/aspnet/home) on GitHub.
 - [ASP.NET MVC](https://github.com/aspnet/Mvc) main repository.
 - [ASP.NET MVC Announcements](https://github.com/aspnet/announcements/) for important changes.
+- [Telerik UI for ASP.NET Core Demos and Sample Applications](http://demos.telerik.com/aspnet-core)
 
 ## The Sample Application
 
@@ -67,8 +68,7 @@ To be able to run the sample application on Docker Engine (multi-platform), make
 
 ## See Also
 
-Other articles on Telerik UI for ASP.NET MVC in ASP.NET Core applications:
-
+* [Telerik UI for ASP.NET Core Demos and Sample Applications](http://demos.telerik.com/aspnet-core)
 * [Get Started with Telerik UI for ASP.NET MVC in ASP.NET Core Projects]({% slug gettingstarted_aspnetmvc6_aspnetmvc %})
 * [Get Started with Telerik UI for ASP.NET MVC in ASP.NET Core Projects on Linux]({% slug gettingstartedlinux_aspnetmvc6_aspnetmvc %})
 * [Known Issues with Telerik UI for ASP.NET Core]({% slug knownissues_aspnetmvc6_aspnetmvc %})
