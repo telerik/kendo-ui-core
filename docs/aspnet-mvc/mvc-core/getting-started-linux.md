@@ -258,8 +258,7 @@ Now that all is done, you can see the sample page.
 
 ## See Also
 
-Other articles on Telerik UI for ASP.NET MVC in ASP.NET Core applications:
-
+* [Telerik UI for ASP.NET Core Demos and Sample Applications](http://demos.telerik.com/aspnet-core)
 * [Overview of Telerik UI for ASP.NET Core]({% slug overview_aspnetmvc6_aspnetmvc %})
 * [Get Started with Telerik UI for ASP.NET MVC in ASP.NET Core Projects]({% slug gettingstarted_aspnetmvc6_aspnetmvc %})
 * [Known Issues with Telerik UI for ASP.NET Core]({% slug knownissues_aspnetmvc6_aspnetmvc %})
