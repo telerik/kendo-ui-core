@@ -880,6 +880,10 @@ Retrieves the files that are currently selected.
       });
     </script>
 
+#### Returns
+
+`Array` a collection of all currently selected files.
+
 ### removeAllFiles
 
 Removes all files by sending a standard `remove` request to the handler.
