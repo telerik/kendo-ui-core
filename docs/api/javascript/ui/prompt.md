@@ -4,9 +4,9 @@ page_title: Configuration, methods and events of Kendo UI Prompt
 description: How to initialize an Prompt UI widget, configure its properties and open it.
 ---
 
-# kendo.ui.Prompt
+# kendo.ui.Prompt : kendo.ui.Dialog
 
-Represents the Kendo UI Prompt. Inherits from [Dialog](/api/javascript/ui/dialog).
+Represents the Kendo UI Prompt.
 
 ## Configuration
 

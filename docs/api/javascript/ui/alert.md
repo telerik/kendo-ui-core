@@ -4,9 +4,9 @@ page_title: Configuration, methods and events of Kendo UI Alert
 description: How to initialize an Alert UI widget, configure its properties and open it.
 ---
 
-# kendo.ui.Alert
+# kendo.ui.Alert : kendo.ui.Dialog
 
-Represents the Kendo UI Alert. Inherits from [Dialog](/api/javascript/ui/dialog).
+Represents the Kendo UI Alert.
 
 ## Configuration
 
