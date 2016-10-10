@@ -62,7 +62,7 @@ var __meta__ = { // jshint ignore:line
         exclusionSelector = ":not(.k-item.k-separator)",
         nextSelector = exclusionSelector + ":eq(0)",
         lastSelector = exclusionSelector + ":last",
-        templateSelector = "> div:not(.k-animation-container,.k-list-container)",
+        templateSelector = "div:not(.k-animation-container,.k-list-container)",
         touchPointerTypes = { "2": 1, "touch": 1 },
 
         templates = {
@@ -607,7 +607,7 @@ var __meta__ = { // jshint ignore:line
                        var popup = $(this).data("kendoPopup");
 
                        if (popup) {
-                           popup.close();
+                           popup.close(true);
                        }
                    });
 
@@ -854,10 +854,12 @@ var __meta__ = { // jshint ignore:line
             var that = this, openHandle,
                 options = that.options,
                 target = $(kendo.eventTarget(e)),
+                targetElement = target[0],
                 nodeName = target[0] ? target[0].nodeName.toUpperCase() : "",
                 formNode = (nodeName == "INPUT" || nodeName == "SELECT" || nodeName == "BUTTON" || nodeName == "LABEL"),
                 link = target.closest("." + LINK),
                 element = target.closest(allItemsSelector),
+                itemElement = element[0],
                 href = link.attr("href"), childGroup, childGroupVisible,
                 targetHref = target.attr("href"),
                 sampleHref = $("<a href='#' />").attr("href"),
@@ -866,7 +868,11 @@ var __meta__ = { // jshint ignore:line
                 isTargetLink = (!!targetHref && targetHref !== sampleHref),
                 shouldCloseTheRootItem = (options.openOnClick && childGroupVisible && that._isRootItem(element));
 
-            if (target.closest(templateSelector, element[0]).length) {
+            while (targetElement && targetElement.parentNode != itemElement) {
+                targetElement = targetElement.parentNode;
+            }
+
+            if ($(targetElement).is(templateSelector)) {
                 return;
             }
 
