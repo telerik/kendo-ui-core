@@ -1,6 +1,6 @@
 ---
 title: NuGet Packages
-page_title: NuGet Packages | Telerik UI for ASP.NET MVC 222222222
+page_title: NuGet Packages | Telerik UI for ASP.NET MVC
 description: "Download and install Telerik UI for ASP.NET MVC from our NuGet feed."
 slug: aspnetmvc_nuget
 position: 3
