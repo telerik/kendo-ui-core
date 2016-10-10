@@ -13,7 +13,7 @@ position: 3
 
 *[Kendo UI for Angular 2](http://www.telerik.com/kendo-angular-ui/)* is a new separate suite of native ng2 UI components.
 
-The [Kendo UI for Angular 2 Roadmap](http://www.telerik.com/kendo-angular-ui/roadmap/) page provides information about our development plans with regard to new components and features.
+The [Kendo UI for Angular 2 Roadmap](http://www.telerik.com/kendo-angular-ui/roadmap/) page provides information about the development plans of the team with regard to new components and features.
 
 The [Telerik blogs](http://www.telerik.com/blogs/) are an additional source for the latest updates on Kendo UI for Angular 2. For example, keep an eye on the posts of the [Kendo UI Product Manager](http://www.telerik.com/blogs/author/petyo-ivanov).
 
