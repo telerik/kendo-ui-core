@@ -4,9 +4,9 @@ page_title: Configuration, methods and events of Kendo UI Confirm
 description: How to initialize an Confirm UI widget, configure its properties and open it.
 ---
 
-# kendo.ui.Confirm
+# kendo.ui.Confirm : kendo.ui.Dialog
 
-Represents the Kendo UI Confirm. Inherits from [Dialog](/api/javascript/ui/dialog).
+Represents the Kendo UI Confirm.
 
 ## Configuration
 
