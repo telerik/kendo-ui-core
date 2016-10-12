@@ -327,7 +327,7 @@ var __meta__ = { // jshint ignore:line
 
         text: function (text) {
             var that = this;
-            var dataItem, loweredText;
+            var loweredText;
             var ignoreCase = that.options.ignoreCase;
 
             text = text === null ? "" : text;
