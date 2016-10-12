@@ -905,10 +905,10 @@ var __meta__ = { // jshint ignore:line
             if (candidate === undefined) {
                 return that.selectedIndex;
             } else {
-                that._select(candidate);
-
-                that._old = that._accessor();
-                that._oldIndex = that.selectedIndex;
+                return that._select(candidate).done(function() {
+                    that._old = that._accessor();
+                    that._oldIndex = that.selectedIndex;
+                });
             }
         },
 
@@ -1108,11 +1108,11 @@ var __meta__ = { // jshint ignore:line
                         return;
                     }
 
-                    that._select(that._focus(), true);
-
-                    if (!that.popup.visible()) {
-                        that._blur();
-                    }
+                    that._select(that._focus(), true).done(function() {
+                        if (!that.popup.visible()) {
+                            that._blur();
+                        }
+                    });
                 }
 
                 e.preventDefault();

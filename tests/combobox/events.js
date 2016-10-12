@@ -100,10 +100,13 @@ test("select does not raise the change event", 0, function() {
     combobox.select($("<li>foo</li>"));
 });
 
-test("clicking an item raises the change event", 1, function() {
+asyncTest("clicking an item raises the change event", 1, function() {
     combobox = new ComboBox(input, {
+        dataValueField: "text",
+        dataTextField: "text",
         dataSource: [{text: "foo"}, {text: "bar"}],
         change: function() {
+            start();
             ok(true);
         }
     });
@@ -495,19 +498,20 @@ test("preventing select event during navigation reverts selection", 2, function(
     equal(current.html(), "foo");
 });
 
-test("trigger select event on blur when input text is changed", 2, function() {
+asyncTest("trigger select event on blur when input text is changed", 2, function() {
     var combobox = input.kendoComboBox({
         dataSource: ["foo", "bar"],
         select: function(e) {
+            start();
             equal(e.item[0], combobox.ul.children()[1]);
             equal(e.dataItem, combobox.dataSource.view()[1]);
         }
     }).data("kendoComboBox");
 
-    combobox.input.focus().val("bar").blur();
+    combobox.input.focus().val("bar").focusout();
 });
 
-test("do not trigger select event on blur when input text is not changed", 0, function() {
+asyncTest("do not trigger select event on blur when input text is not changed", 0, function() {
     var combobox = input.kendoComboBox({
         dataSource: ["foo", "bar"],
         select: function(e) {
@@ -515,11 +519,13 @@ test("do not trigger select event on blur when input text is not changed", 0, fu
         }
     }).data("kendoComboBox");
 
-    combobox.select(0);
-    combobox.input.focus().blur();
+    combobox.select(0).done(function() {
+        start();
+        combobox.input.focus().focusout();
+    });
 });
 
-test("prevent select event on blur returns old value", 1, function() {
+asyncTest("prevent select event on blur returns old value", 1, function() {
     var combobox = input.kendoComboBox({
         dataSource: ["foo", "bar"],
         select: function(e) {
@@ -527,10 +533,12 @@ test("prevent select event on blur returns old value", 1, function() {
         }
     }).data("kendoComboBox");
 
-    combobox.select(0);
-    combobox.input.focus().val("bar").blur();
+    combobox.select(0).then(function() {
+        start();
+        combobox.input.focus().val("bar").focusout();
 
-    equal(combobox.text(), "foo");
+        equal(combobox.text(), "foo");
+    });
 });
 
 test("ComboBox trigger blur of the hidden input", 1, function() {

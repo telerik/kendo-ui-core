@@ -475,18 +475,19 @@ var __meta__ = { // jshint ignore:line
         },
 
         _select: function(candidate, keepState) {
-            candidate = this._get(candidate);
+            var that = this;
+            candidate = that._get(candidate);
 
             if (candidate === -1) {
-                this.input[0].value = "";
-                this._accessor("");
+                that.input[0].value = "";
+                that._accessor("");
             }
 
-            this.listView.select(candidate);
-
-            if (!keepState && this._state === STATE_FILTER) {
-                this._state = STATE_ACCEPT;
-            }
+            return that.listView.select(candidate).done(function() {
+                if (!keepState && that._state === STATE_FILTER) {
+                    that._state = STATE_ACCEPT;
+                }
+            });
         },
 
         _selectValue: function(dataItem) {
@@ -613,16 +614,16 @@ var __meta__ = { // jshint ignore:line
                 }
 
                 return data === loweredText;
+            }).done(function() {
+                if (that.selectedIndex < 0) {
+                    that._accessor(text);
+                    input.value = text;
+
+                    that._triggerCascade();
+                }
+
+                that._prev = input.value;
             });
-
-            if (that.selectedIndex < 0) {
-                that._accessor(text);
-                input.value = text;
-
-                that._triggerCascade();
-            }
-
-            that._prev = input.value;
         },
 
         toggle: function(toggle) {
@@ -676,20 +677,22 @@ var __meta__ = { // jshint ignore:line
         },
 
         _click: function(e) {
+            var that = this;
             var item = e.item;
-            var dataItem = this.listView.dataItemByIndex(this.listView.getElementIndex(item));
+            var dataItem = that.listView.dataItemByIndex(that.listView.getElementIndex(item));
 
             e.preventDefault();
 
-            if (this.trigger("select", { dataItem: dataItem, item: item })) {
-                this.close();
+            if (that.trigger("select", { dataItem: dataItem, item: item })) {
+                that.close();
                 return;
             }
 
-            this._userTriggered = true;
+            that._userTriggered = true;
 
-            this._select(item);
-            this._blur();
+            that._select(item).done(function() {
+                that._blur();
+            });
         },
 
         _inputValue: function() {
