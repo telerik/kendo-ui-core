@@ -33,6 +33,10 @@ Once the ListView reaches the amount of items specified by the [schema.total](/a
 >
 > Currently, certain features, such as the grouped mode and inset styling, are not supported in virtual mode.
 
+> **Important**
+>
+> The [read](/api/framework/datasource#methods-read) method of the DataSource must be called if the total number of items is changed after editing.
+
 ## Getting Started
 
 ### Create ListViews with Endless Scrolling
