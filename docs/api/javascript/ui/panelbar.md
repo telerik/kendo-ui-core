@@ -249,7 +249,7 @@ A whitespace-delimited string of animation effects that are used when an item is
 
 ### contentUrls `Array`
 
-Sets an array with the URLs from which the **PanelBar** items content to be loaded from. If only specific items should be loaded via Ajax, then you should set the URLs to the corresponding positions in the array and set the other elements to null.   
+Sets an array with the URLs from which the **PanelBar** items content to be loaded from. If only specific items should be loaded via Ajax, then you should set the URLs to the corresponding positions in the array and set the other elements to null.
 
 #### Example - specify that the second item should be loaded remotely
 
@@ -1107,6 +1107,8 @@ The loaded content element
 ### error
 
 Fires when AJAX request results in an error.
+
+> This event won't fire if you use jQuery 3.x. More information is available [here](https://github.com/telerik/kendo-ui-core/issues/2296).
 
 #### Event Data
 
