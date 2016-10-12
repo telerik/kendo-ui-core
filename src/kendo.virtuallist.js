@@ -252,7 +252,6 @@ var __meta__ = { // jshint ignore:line
             that._selectedDataItems = [];
             that._selectedIndexes = [];
             that._rangesList = {};
-            that._activeDeferred = null;
             that._promisesList = [];
             that._optionID = kendo.guid();
 
@@ -620,7 +619,7 @@ var __meta__ = { // jshint ignore:line
                 take = this.itemCount,
                 isEmptyList = !that._promisesList.length;
 
-            if (!that._activeDeferred) {
+            if (!isActivePromise(that._activeDeferred)) {
                 that._activeDeferred = $.Deferred();
                 that._promisesList = [];
             }
@@ -632,11 +631,7 @@ var __meta__ = { // jshint ignore:line
             if (isEmptyList) {
                 $.when.apply($, that._promisesList).done(function() {
                     that._promisesList = [];
-
-                    if (that._activeDeferred) {
-                        that._activeDeferred.resolve();
-                        that._activeDeferred = null;
-                    }
+                    that._activeDeferred.resolve();
                 });
             }
 
@@ -887,7 +882,6 @@ var __meta__ = { // jshint ignore:line
             indices = result.indices;
 
             if (singleSelection) {
-                //that._activeDeferred = null;
                 prefetchStarted = false;
                 if (indices.length) {
                     indices = [lastFrom(indices)];
