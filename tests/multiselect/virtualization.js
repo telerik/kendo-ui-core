@@ -120,13 +120,15 @@
                 start();
                 var options = multiselect.element.children(":selected");
 
+                options = options.sort(function(a, b) { return parseInt(a.value) > parseInt(b.value) });
+
                 equal(options.length, 2);
 
-                equal(options[0].text, "Item 15");
-                equal(options[0].value, "15");
+                equal(options[0].text, "Item 0");
+                equal(options[0].value, "0");
 
-                equal(options[1].text, "Item 0");
-                equal(options[1].value, "0");
+                equal(options[1].text, "Item 15");
+                equal(options[1].value, "15");
             }, 300);
 
         });
