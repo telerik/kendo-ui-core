@@ -855,6 +855,22 @@ Enables the upload.
 
 The argument, which defines whether to enable/disable the upload.
 
+### focus
+
+Focuses the upload's input element.
+
+#### Example
+
+    <input type="file" name="files" id="upload" />
+    <script>
+        $("#upload").kendoUpload();
+
+        var upload = $("#upload").data("kendoUpload");
+
+        // focus the upload's input element
+        upload.focus();
+    </script>
+
 ### getFiles
 
 Retrieves the files that are currently selected.
