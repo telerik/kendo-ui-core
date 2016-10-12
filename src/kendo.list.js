@@ -1705,10 +1705,11 @@ var __meta__ = { // jshint ignore:line
                 indices = [];
             }
 
+            var deferred = $.Deferred().resolve();
             var filtered = that.isFiltered();
 
             if (filtered && !singleSelection && that._deselectFiltered(indices)) {
-                return;
+                return deferred;
             }
 
             if (singleSelection && !filtered && $.inArray(last(indices), selectedIndices) !== -1) {
@@ -1716,7 +1717,7 @@ var __meta__ = { // jshint ignore:line
                     that._dataItems = [that._view[selectedIndices[0]].item];
                 }
 
-                return;
+                return deferred;
             }
 
             result = that._deselect(indices);
@@ -1739,6 +1740,8 @@ var __meta__ = { // jshint ignore:line
                     removed: removed
                 });
             }
+
+            return deferred;
         },
 
         removeAt: function(position) {
