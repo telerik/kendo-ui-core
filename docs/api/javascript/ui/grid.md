@@ -5815,7 +5815,7 @@ Supported values:
 A piece of HTML to be included in each page.  Can be used to display headers and footers.  See the documentation in [drawDOM](/framework/drawing/drawing-dom#Template).
 
 Available template variables include:
-* pageNumber
+* pageNum
 * totalPages
 
 > **Important**
