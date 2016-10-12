@@ -221,6 +221,10 @@ var __meta__ = { // jshint ignore:line
         };
     }
 
+    function isActivePromise(promise) {
+        return promise && promise.state() !== "resolved";
+    }
+
     var VirtualList = DataBoundWidget.extend({
         init: function(element, options) {
             var that = this;
@@ -454,15 +458,13 @@ var __meta__ = { // jshint ignore:line
 
             value = toArray(value);
 
-            if (that.options.selectable === "multiple" && that.select().length && value.length) {
-                that.select(-1);
-            }
-
             if (!that._valueDeferred || that._valueDeferred.state() === "resolved") {
                 that._valueDeferred = $.Deferred();
             }
 
-            if (!value.length) {
+            var shouldClear = that.options.selectable === "multiple" && that.select().length && value.length;
+
+            if (shouldClear || !value.length) {
                 that.select(-1);
             }
 
@@ -629,9 +631,12 @@ var __meta__ = { // jshint ignore:line
 
             if (isEmptyList) {
                 $.when.apply($, that._promisesList).done(function() {
-                    that._activeDeferred.resolve();
-                    that._activeDeferred = null;
                     that._promisesList = [];
+
+                    if (that._activeDeferred) {
+                        that._activeDeferred.resolve();
+                        that._activeDeferred = null;
+                    }
                 });
             }
 
@@ -844,7 +849,7 @@ var __meta__ = { // jshint ignore:line
             var that = this,
                 indices,
                 singleSelection = that.options.selectable !== "multiple",
-                prefetchStarted = !!that._activeDeferred,
+                prefetchStarted = isActivePromise(that._activeDeferred),
                 filtered = this.isFiltered(),
                 isAlreadySelected,
                 deferred,
@@ -853,6 +858,10 @@ var __meta__ = { // jshint ignore:line
 
             if (candidate === undefined) {
                 return that._selectedIndexes.slice();
+            }
+
+            if (!that._selectDeferred || that._selectDeferred.state() === "resolved") {
+                that._selectDeferred = $.Deferred();
             }
 
             indices = that._getIndecies(candidate);
@@ -865,7 +874,8 @@ var __meta__ = { // jshint ignore:line
                 if (that._valueDeferred) {
                     that._valueDeferred.resolve();
                 }
-                return;
+
+                return that._selectDeferred.resolve().promise();
             }
 
             if (indices.length === 1 && indices[0] === -1) {
@@ -877,7 +887,7 @@ var __meta__ = { // jshint ignore:line
             indices = result.indices;
 
             if (singleSelection) {
-                that._activeDeferred = null;
+                //that._activeDeferred = null;
                 prefetchStarted = false;
                 if (indices.length) {
                     indices = [lastFrom(indices)];
@@ -893,6 +903,8 @@ var __meta__ = { // jshint ignore:line
                 if (that._valueDeferred) {
                     that._valueDeferred.resolve();
                 }
+
+                that._selectDeferred.resolve();
             };
 
             deferred = that.prefetch(indices);
@@ -904,6 +916,8 @@ var __meta__ = { // jshint ignore:line
                     done();
                 }
             }
+
+            return that._selectDeferred.promise();
         },
 
         bound: function(bound) {
