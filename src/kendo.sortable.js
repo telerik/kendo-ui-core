@@ -185,15 +185,15 @@ var __meta__ = { // jshint ignore:line
                 }
 
                 if(this._isFloating(target.element)) { //horizontal
-                    if(axisDelta.x < 0 && (moveOnDragEnter || offsetDelta.left < 0)) {
+                    if((axisDelta.x < 0 && moveOnDragEnter) || (!moveOnDragEnter && offsetDelta.left < 0)) {
                         direction = "prev";
-                    } else if(axisDelta.x > 0 && (moveOnDragEnter || offsetDelta.left > 0)) {
+                    } else if((axisDelta.x > 0 && moveOnDragEnter) || (!moveOnDragEnter &&  offsetDelta.left > 0)) {
                         direction = "next";
                     }
                 } else { //vertical
-                    if(axisDelta.y < 0 && (moveOnDragEnter || offsetDelta.top < 0)) {
+                    if((axisDelta.y < 0  && moveOnDragEnter) || (!moveOnDragEnter &&  offsetDelta.top < 0)) {
                         direction = "prev";
-                    } else if(axisDelta.y > 0 && (moveOnDragEnter || offsetDelta.top > 0)) {
+                    } else if((axisDelta.y > 0  && moveOnDragEnter) || (!moveOnDragEnter &&  offsetDelta.top > 0)) {
                         direction = "next";
                     }
                 }
