@@ -1007,6 +1007,10 @@ var __meta__ = { // jshint ignore:line
             return this;
         },
 
+        isMaximized: function() {
+            return this.options.isMaximized;
+        },
+
         minimize: function() {
             this._sizingAction("minimize", function() {
                 var that = this;
@@ -1023,6 +1027,10 @@ var __meta__ = { // jshint ignore:line
 
             return this;
         },
+
+        isMinimized: function() {
+            return this.options.isMinimized;
+        },        
 
         pin: function(force) {
             var that = this,
