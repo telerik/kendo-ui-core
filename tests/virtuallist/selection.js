@@ -9,6 +9,19 @@
         FOCUSED = "k-state-focused",
         SELECTED = "k-state-selected";
 
+    function selectAll(virtual, elements, done) {
+        var item = elements.shift();
+
+        if (item === undefined) {
+            done();
+            return;
+        }
+
+        virtual.select(item).done(function() {
+           selectAll(virtual, elements, done);
+        });
+    }
+
     function scroll(element, height) {
         element.scrollTop(height);
         element.trigger("scroll");
@@ -227,10 +240,11 @@
         }));
 
         asyncDataSource.read().then(function() {
-            start();
             var element = virtualList.items().first();
-            virtualList.select(element);
-            ok(element.hasClass(SELECTED));
+            virtualList.select(element).done(function() {
+                start();
+                ok(element.hasClass(SELECTED));
+            });
         });
     });
 
@@ -240,17 +254,17 @@
         }));
 
         asyncDataSource.read().then(function() {
-            start();
-
             var elements = [];
             elements.push(virtualList.items().eq(1));
             elements.push(virtualList.items().eq(2));
             elements.push(virtualList.items().eq(7));
 
-            for (var i = 0; i < elements.length; i++) {
-                virtualList.select(elements[i]);
-                ok(elements[i].hasClass(SELECTED));
-            }
+            selectAll(virtualList, elements, function() {
+                start();
+                ok(virtualList.items().eq(1).hasClass(SELECTED))
+                ok(virtualList.items().eq(2).hasClass(SELECTED))
+                ok(virtualList.items().eq(7).hasClass(SELECTED))
+            });
         });
     });
 
@@ -259,16 +273,24 @@
             selectable: true
         }));
 
-        asyncDataSource.read().then(function() {
+        var element;
+
+        var selectElementDone2 = function() {
+            ok(element.hasClass(SELECTED));
             start();
+        }
 
-            var element = virtualList.items().first();
-            virtualList.select(element);
+        var selectElementDone1 = function() {
             ok(element.hasClass(SELECTED));
+            virtualList.select(element).done(selectElementDone2);
+        }
 
-            virtualList.select(element);
-            ok(element.hasClass(SELECTED));
-        });
+        var asyncDataSourceThen = function() {
+            element = virtualList.items().first();
+            virtualList.select(element).done(selectElementDone1);
+        };
+
+        asyncDataSource.read().then(asyncDataSourceThen);
     });
 
     asyncTest("selecting already selected listItems visually deselects it (multiple selection)", 4, function() {
@@ -276,22 +298,30 @@
             selectable: "multiple"
         }));
 
-        asyncDataSource.read().then(function() {
+        var deselectSecondDone = function() {
             start();
 
+            ok(!virtualList.items().eq(2).hasClass(SELECTED));
+        };
+
+        var allDone = function() {
+            ok(virtualList.items().eq(1).hasClass(SELECTED));
+            ok(virtualList.items().eq(2).hasClass(SELECTED));
+            ok(virtualList.items().eq(7).hasClass(SELECTED));
+
+            virtualList.select(virtualList.items().eq(2)).done(deselectSecondDone);
+        };
+
+        var asyncDataSourceThen = function() {
             var elements = [];
             elements.push(virtualList.items().eq(1));
             elements.push(virtualList.items().eq(2));
             elements.push(virtualList.items().eq(7));
 
-            for (var i = 0; i < elements.length; i++) {
-                virtualList.select(elements[i]);
-                ok(elements[i].hasClass(SELECTED));
-            }
+            selectAll(virtualList, elements, allDone);
+        };
 
-            virtualList.select(elements[2]);
-            ok(!elements[2].hasClass(SELECTED));
-        });
+        asyncDataSource.read().done(asyncDataSourceThen);
     });
 
     asyncTest("select method updates the value of the list", 1, function() {
@@ -319,12 +349,10 @@
             elements.push(virtualList.items().eq(2));
             elements.push(virtualList.items().eq(7));
 
-            for (var i = 0; i < elements.length; i++) {
-                virtualList.select(elements[i]);
-            }
-
-            start();
-            equal(kendo.stringify(virtualList.value()), kendo.stringify([1, 2, 7]));
+            selectAll(virtualList, elements, function() {
+                start();
+                equal(kendo.stringify(virtualList.value()), kendo.stringify([1, 2, 7]));
+            });
         });
     });
 
@@ -334,10 +362,16 @@
         }));
 
         asyncDataSource.read().then(function() {
-            start();
-            virtualList.select(virtualList.items().first());
-            virtualList.select(virtualList.items().first());
-            equal(virtualList.value()[0], 0);
+            var selectTwoDone = function() {
+                start();
+                equal(virtualList.value()[0], 0);
+            };
+
+            var selectOneDone = function() {
+                virtualList.select(virtualList.items().first()).done(selectTwoDone);
+            };
+
+            virtualList.select(virtualList.items().first()).done(selectOneDone);
         });
     });
 
@@ -347,19 +381,19 @@
         }));
 
         asyncDataSource.read().then(function() {
-            start();
-
             var elements = [];
             elements.push(virtualList.items().eq(1));
             elements.push(virtualList.items().eq(2));
             elements.push(virtualList.items().eq(7));
 
-            for (var i = 0; i < elements.length; i++) {
-                virtualList.select(elements[i]);
-            }
+            var done = function() {
+                virtualList.select(virtualList.items().eq(2)).done(function() {
+                    start();
+                    equal(kendo.stringify(virtualList.value()), kendo.stringify([1, 7]));
+                });
+            };
 
-            virtualList.select(elements[1]);
-            equal(kendo.stringify(virtualList.value()), kendo.stringify([1, 7]));
+            selectAll(virtualList, elements, done);
         });
     });
 
@@ -401,11 +435,15 @@
             value: values,
             valueMapper: valueMapper
         }));
-        asyncDataSource.read().then(function() {
-            start();
-            virtualList.value(9);
-            ok(virtualList.items().eq(9).hasClass(SELECTED), "Item 9 is selected");
+
+        virtualList.bind("listBound", function() {
+            virtualList.value(9).done(function() {
+                start();
+                ok(virtualList.items().eq(9).hasClass(SELECTED), "Item 9 is not selected");
+            });
         });
+
+        asyncDataSource.read();
     });
 
     asyncTest("setting the value with the value method updates the selection (multiple selection)", 3, function() {
@@ -426,17 +464,19 @@
     });
 
     asyncTest("setting the value with the value method clears the selection in valueMapper returns null", 1, function() {
-        var values = [1, 10, 6];
+        var values = [100];
         var virtualList = new VirtualList(container, $.extend(virtualSettings, {
             selectable: true,
             value: values,
-            valueMapper: valueMapper
+            valueMapper: function(o) { o.success([-1]); }
         }));
-        asyncDataSource.read().then(function() {
+
+        virtualList.bind("listBound", function() {
             start();
-            virtualList.value(9);
-            ok(virtualList.items().eq(9).hasClass(SELECTED), "Item 9 is selected");
+            equal(virtualList.value().length, 0);
         });
+
+        asyncDataSource.read();
     });
 
     asyncTest("selection is cleared if non existing value is set through the API and the valueMapper returns no indexes", 1, function() {
@@ -448,13 +488,15 @@
             }
         }));
 
-        asyncDataSource.read().then(function() {
+        virtualList.bind("listBound", function() {
             start();
             virtualList.bind("change", function(e) {
                 ok(!virtualList.items().eq(1).hasClass(SELECTED), "Item 1 is not selected any more");
             });
             virtualList.value("");
         });
+
+        asyncDataSource.read();
     });
 
     asyncTest("selection is cleared if non existing value is set through the API and the valueMapper returns -1", 1, function() {
@@ -466,14 +508,15 @@
             }
         }));
 
-        asyncDataSource.read().then(function() {
+        virtualList.bind("listBound", function() {
             start();
             virtualList.bind("change", function(e) {
-                debugger;
                 ok(!virtualList.items().eq(1).hasClass(SELECTED), "Item 1 is not selected any more");
             });
             virtualList.value("");
         });
+
+        asyncDataSource.read();
     });
 
     asyncTest("value method works if called before the dataSource is fetched and list is created", 1, function() {
@@ -510,12 +553,12 @@
         var virtualList = new VirtualList(container, $.extend(virtualSettings, {
             selectable: true,
             change: function() {
+                start();
                 ok(true, "change is triggered");
             }
         }));
 
         asyncDataSource.read().then(function() {
-            start();
             virtualList.select(virtualList.items().first());
         });
     });
@@ -526,13 +569,16 @@
             value: 0
         }));
 
-        asyncDataSource.read().then(function() {
-            start();
+        virtualList.bind("listBound", function() {
             virtualList.one("change", function() {
-                ok(true, "change is triggered");
+                ok(false);
             });
-            virtualList.select(0);
+            virtualList.select(0).done(function() {
+                start();
+            });
         });
+
+        asyncDataSource.read();
     });
 
     asyncTest("selecting listItem selects it and saves the corresponding dataItem", 2, function() {
@@ -541,13 +587,13 @@
         }));
 
         asyncDataSource.read().then(function() {
-            start();
 
             var element = virtualList.items().first();
-            virtualList.select(element);
-
-            equal(virtualList.selectedDataItems().length, 1, "One item is selected");
-            equal(virtualList.selectedDataItems()[0], asyncDataSource.data()[0], "First item is selected");
+            virtualList.select(element).done(function() {
+                start();
+                equal(virtualList.selectedDataItems().length, 1, "One item is selected");
+                equal(virtualList.selectedDataItems()[0], asyncDataSource.data()[0], "First item is selected");
+            });
         });
     });
 
@@ -557,17 +603,17 @@
         }));
 
         asyncDataSource.read().then(function() {
-            start();
-
             var elements = [];
             elements.push(virtualList.items().eq(0));
             elements.push(virtualList.items().eq(1));
             elements.push(virtualList.items().eq(2));
 
-            for (var i = 0; i < elements.length; i++) {
-                virtualList.select(elements[i]);
-                equal(virtualList.selectedDataItems()[i], asyncDataSource.data()[i]);
-            }
+            selectAll(virtualList, elements, function() {
+                for (var i = 0; i < 3; i++) {
+                    equal(virtualList.selectedDataItems()[i], asyncDataSource.data()[i]);
+                }
+                start();
+            });
         });
     });
 
@@ -593,15 +639,17 @@
             value: [0, 7]
         }));
 
-        asyncDataSource.read().then(function() {
-            start();
-
+        virtualList.bind("listBound", function() {
             var element = virtualList.items().eq(0);
-            virtualList.select(element);
 
-            equal(virtualList.selectedDataItems().length, 1, "First item is removed");
-            equal(virtualList.selectedDataItems()[0], asyncDataSource.data()[7], "Second item is saved");
+            virtualList.select(element).done(function() {
+                start();
+                equal(virtualList.selectedDataItems().length, 1, "First item is removed");
+                equal(virtualList.selectedDataItems()[0], asyncDataSource.data()[7], "Second item is saved");
+            });
         });
+
+        asyncDataSource.read();
     });
 
     asyncTest("changing the value through the value method updates dataItems collection", 2, function() {
@@ -645,7 +693,7 @@
             selectable: "multiple"
         }));
 
-        asyncDataSource.read().then(function() {
+        virtualList.bind("listBound", function() {
             start();
 
             virtualList.bind("change", function() {
@@ -658,6 +706,8 @@
             });
             virtualList.value([0,1]);
         });
+
+        asyncDataSource.read();
     });
 
     asyncTest("not available dataItems set as values are prefetched", 3, function() {
@@ -707,15 +757,16 @@
 
         asyncDataSource.read().then(function() {
             element = virtualList.items().first();
-            virtualList.select(element);
+            virtualList.select(element).done(function() {
             ok(element.hasClass(SELECTED));
-            scroll(container, 4 * CONTAINER_HEIGHT);
-            setTimeout(function() {
-                start();
-                scroll(container, 0);
+                scroll(container, 4 * CONTAINER_HEIGHT);
+                setTimeout(function() {
+                    start();
+                    scroll(container, 0);
 
-                ok(element.hasClass(SELECTED), "First item is not selected");
-            }, 300);
+                    ok(element.hasClass(SELECTED), "First item is not selected");
+                }, 300);
+            });
         });
     });
 
@@ -725,13 +776,12 @@
         }));
 
         asyncDataSource.read().then(function() {
-            start();
-            var element1 = virtualList.items().eq(1);
-            var element2 = virtualList.items().eq(2);
-            virtualList.select(element1);
-            virtualList.select(element2);
+            var elements = [ virtualList.items().eq(1), virtualList.items().eq(2) ];
 
-            equal(virtualList.items().filter("." + SELECTED).length, 1);
+            selectAll(virtualList, elements, function() {
+                start();
+                equal(virtualList.items().filter("." + SELECTED).length, 1);
+            });
         });
     });
 
@@ -741,14 +791,13 @@
         }));
 
         asyncDataSource.read().then(function() {
-            start();
-            var element1 = virtualList.items().eq(1);
-            var element2 = virtualList.items().eq(2);
-            virtualList.select(element1);
-            virtualList.select(element2);
+            var elements = [ virtualList.items().eq(1), virtualList.items().eq(2) ];
 
-            equal(virtualList.value().length, 1);
-            equal(virtualList.value()[0], 2);
+            selectAll(virtualList, elements, function() {
+                start();
+                equal(virtualList.value().length, 1);
+                equal(virtualList.value()[0], 2);
+            });
         });
     });
 
@@ -758,14 +807,13 @@
         }));
 
         asyncDataSource.read().then(function() {
-            start();
-            var element1 = virtualList.items().eq(1);
-            var element2 = virtualList.items().eq(2);
-            virtualList.select(element1);
-            virtualList.select(element2);
+            var elements = [ virtualList.items().eq(1), virtualList.items().eq(2) ];
 
-            equal(virtualList.selectedDataItems().length, 1);
-            equal(virtualList.selectedDataItems()[0].value, 2);
+            selectAll(virtualList, elements, function() {
+                start();
+                equal(virtualList.selectedDataItems().length, 1);
+                equal(virtualList.selectedDataItems()[0].value, 2);
+            });
         });
     });
 
@@ -777,11 +825,11 @@
         }));
 
         asyncDataSource.read().then(function() {
-            start();
             var element = virtualList.items().eq(1);
-            virtualList.select(element);
-
-            ok(element.hasClass(FOCUSED));
+            virtualList.select(element).done(function() {
+                start();
+                ok(element.hasClass(FOCUSED));
+            });
         });
     });
 
@@ -791,13 +839,13 @@
         }));
 
         asyncDataSource.read().then(function() {
-            start();
             var element = virtualList.items().eq(1);
-            virtualList.select(element);
-
-            ok(element.hasClass(SELECTED));
-            equal(virtualList.value()[0], 1);
-            equal(virtualList.selectedDataItems()[0].value, 1);
+            virtualList.select(element).done(function() {
+                start();
+                ok(element.hasClass(SELECTED));
+                equal(virtualList.value()[0], 1);
+                equal(virtualList.selectedDataItems()[0].value, 1);
+            });
         });
     });
 
@@ -807,15 +855,13 @@
         }));
 
         asyncDataSource.read().then(function() {
-            start();
-            var element1 = virtualList.items().eq(1);
-            virtualList.select(element1);
+            var elements = [ virtualList.items().eq(1), virtualList.items().eq(2) ];
 
-            var element2 = virtualList.items().eq(2);
-            virtualList.select(element2);
-
-            ok(!element1.hasClass(FOCUSED));
-            ok(element2.hasClass(FOCUSED));
+            selectAll(virtualList, elements, function() {
+                start();
+                ok(!virtualList.items().eq(1).hasClass(FOCUSED));
+                ok(virtualList.items().eq(2).hasClass(FOCUSED));
+            });
         });
     });
 
@@ -825,15 +871,13 @@
         }));
 
         asyncDataSource.read().then(function() {
-            start();
-            var element1 = virtualList.items().eq(1);
-            virtualList.select(element1);
+            var elements = [ virtualList.items().eq(1), virtualList.items().eq(2) ];
 
-            var element2 = virtualList.items().eq(2);
-            virtualList.select(element2);
-
-            equal(virtualList.value().length, 1);
-            equal(virtualList.value()[0], 2);
+            selectAll(virtualList, elements, function() {
+                start();
+                equal(virtualList.value().length, 1);
+                equal(virtualList.value()[0], 2);
+            });
         });
     });
 
@@ -843,15 +887,15 @@
         }));
 
         asyncDataSource.read().then(function() {
-            start();
             virtualList.select(function(dataItem) {
                 return dataItem.value === 2;
+            }).done(function() {
+                start();
+                var element = virtualList.items().eq(2);
+                ok(element.hasClass(FOCUSED));
+                ok(element.hasClass(SELECTED));
+                equal(virtualList.value()[0], 2);
             });
-
-            var element = virtualList.items().eq(2);
-            ok(element.hasClass(FOCUSED));
-            ok(element.hasClass(SELECTED));
-            equal(virtualList.value()[0], 2);
         });
     });
 
@@ -909,9 +953,10 @@
         }));
 
         asyncDataSource.read().then(function() {
-            start();
-            virtualList.select(3);
-            equal(virtualList.select(), 3);
+            virtualList.select(3).done(function() {
+                equal(virtualList.select(), 3);
+                start();
+            });
         });
     });
 
@@ -921,11 +966,14 @@
             value: 6
         }));
 
-        asyncDataSource.read().then(function() {
-            start();
-            virtualList.select(-1);
-            equal(virtualList.value().length, 0);
+        virtualList.bind("listBound", function() {
+            virtualList.select(-1).done(function() {
+                start();
+                equal(virtualList.value().length, 0);
+            });
         });
+
+        asyncDataSource.read();
     });
 
     asyncTest("select method sets selected values when multiple elements are selected", 3, function() {
@@ -934,13 +982,14 @@
         }));
 
         asyncDataSource.read().then(function() {
-            start();
-            virtualList.select(1);
-            virtualList.select(0);
+            var done = function() {
+                start();
+                equal(virtualList.value().length, 2);
+                equal(virtualList.value()[0], 1);
+                equal(virtualList.value()[1], 0);
+            };
 
-            equal(virtualList.value().length, 2);
-            equal(virtualList.value()[0], 1);
-            equal(virtualList.value()[1], 0);
+            selectAll(virtualList, [1, 0], done);
         });
     });
 
@@ -950,14 +999,16 @@
         }));
 
         asyncDataSource.read().then(function() {
-            start();
-            virtualList.select(0);
-            virtualList.select(1);
+            var selectDone2 = function() {
+                start();
+                equal(virtualList.value().length, 0);
+            };
 
-            virtualList.select(0);
-            virtualList.select(1);
+            var selectDone1 = function() {
+                selectAll(virtualList, [0, 1], selectDone2);
+            };
 
-            equal(virtualList.value().length, 0);
+            selectAll(virtualList, [0, 1], selectDone1);
         });
     });
 
@@ -1001,16 +1052,16 @@
         }));
 
         asyncDataSource.read().then(function() {
-            start();
             var element1 = virtualList.items().eq(1);
-            virtualList.select(element1);
+            virtualList.select(element1).done(function() {
+                start();
+                var element2 = virtualList.items().eq(2);
+                virtualList.focus(element2);
 
-            var element2 = virtualList.items().eq(2);
-            virtualList.focus(element2);
-
-            ok(!element1.hasClass(FOCUSED));
-            ok(element1.hasClass(SELECTED));
-            ok(element2.hasClass(FOCUSED));
+                ok(!element1.hasClass(FOCUSED));
+                ok(element1.hasClass(SELECTED));
+                ok(element2.hasClass(FOCUSED));
+            });
         });
     });
 
@@ -1036,16 +1087,16 @@
         }));
 
         asyncDataSource.read().then(function() {
-            start();
             var element1 = virtualList.items().eq(1);
-            virtualList.select(element1);
+            virtualList.select(element1).done(function() {
+                start();
+                var element2 = virtualList.items().eq(2);
+                virtualList.focusNext();
 
-            var element2 = virtualList.items().eq(2);
-            virtualList.focusNext();
-
-            ok(!element1.hasClass(FOCUSED));
-            ok(element1.hasClass(SELECTED));
-            ok(element2.hasClass(FOCUSED));
+                ok(!element1.hasClass(FOCUSED));
+                ok(element1.hasClass(SELECTED));
+                ok(element2.hasClass(FOCUSED));
+            });
         });
     });
 
@@ -1055,16 +1106,16 @@
         }));
 
         asyncDataSource.read().then(function() {
-            start();
             var element1 = virtualList.items().eq(2);
-            virtualList.select(element1);
+            virtualList.select(element1).done(function() {
+                start();
+                var element2 = virtualList.items().eq(1);
+                virtualList.focusPrev();
 
-            var element2 = virtualList.items().eq(1);
-            virtualList.focusPrev();
-
-            ok(!element1.hasClass(FOCUSED));
-            ok(element1.hasClass(SELECTED));
-            ok(element2.hasClass(FOCUSED));
+                ok(!element1.hasClass(FOCUSED));
+                ok(element1.hasClass(SELECTED));
+                ok(element2.hasClass(FOCUSED));
+            });
         });
     });
 
@@ -1074,19 +1125,17 @@
         }));
 
         asyncDataSource.read().then(function() {
-            start();
-            virtualList.select(0);
+            virtualList.select(0).done(function() {
+                virtualList.wrapper.hide();
 
-            virtualList.wrapper.hide();
+                selectAll(virtualList, [9, 10, 11, 12], function() {
+                    virtualList.wrapper.show();
+                    virtualList.focus(12);
 
-            virtualList.select(9);
-            virtualList.select(10);
-            virtualList.select(11);
-            virtualList.select(12);
-
-            virtualList.wrapper.show();
-            virtualList.focus(12);
-            equal(virtualList.content.scrollTop(), 12 * ITEM_HEIGHT);
+                    start();
+                    equal(virtualList.content.scrollTop(), 12 * ITEM_HEIGHT);
+                });
+            });
         });
     });
 

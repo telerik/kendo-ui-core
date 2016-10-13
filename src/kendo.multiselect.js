@@ -360,19 +360,22 @@ var __meta__ = { // jshint ignore:line
                 customIndex = that._optionsMap[value];
             }
 
-            if (customIndex !== undefined) {
+            var done = function() {
+                that.currentTag(null);
+                that._change();
+                that._close();
+            };
+
+            if (customIndex === undefined) {
+                listView.select(listView.select()[position]).done(done);
+            } else {
                 option = that.element[0].children[customIndex];
                 option.selected = false;
 
                 listView.removeAt(position);
                 tag.remove();
-            } else {
-                listView.select(listView.select()[position]);
+                done();
             }
-
-            that.currentTag(null);
-            that._change();
-            that._close();
         },
 
         _tagListClick: function(e) {
@@ -680,13 +683,15 @@ var __meta__ = { // jshint ignore:line
         },
 
         _click: function(e) {
+            var that = this;
             var item = e.item;
 
             e.preventDefault();
 
-            this._select(item);
-            this._change();
-            this._close();
+            that._select(item).done(function() {
+                that._change();
+                that._close();
+            });
         },
 
         _keydown: function(e) {
@@ -743,9 +748,10 @@ var __meta__ = { // jshint ignore:line
                     that.currentTag(tag[0] ? tag : null);
                 }
             } else if (key === keys.ENTER && visible) {
-                that._select(current);
-                that._change();
-                that._close();
+                that._select(current).done(function() {
+                    that._change();
+                    that._close();
+                });
                 e.preventDefault();
             } else if (key === keys.ESC) {
                 if (visible) {
@@ -1076,8 +1082,10 @@ var __meta__ = { // jshint ignore:line
         },
 
         _select: function(candidate) {
+            var resolved = $.Deferred().resolve();
+
             if (!candidate) {
-                return;
+                return resolved;
             }
 
             var that = this;
@@ -1090,22 +1098,22 @@ var __meta__ = { // jshint ignore:line
             }
 
             if (!that._allowSelection()) {
-                return;
+                return resolved;
             }
 
             if (that.trigger(isSelected ? DESELECT : SELECT, { dataItem: dataItem, item: candidate })) {
                 that._close();
-                return;
+                return resolved;
             }
 
-            listView.select(candidate);
+            return listView.select(candidate).done(function() {
+                that._placeholder();
 
-            that._placeholder();
-
-            if (that._state === FILTER) {
-                that._state = ACCEPT;
-                listView.skipUpdate(true);
-            }
+                if (that._state === FILTER) {
+                    that._state = ACCEPT;
+                    listView.skipUpdate(true);
+                }
+            });
         },
 
         _input: function() {

@@ -83,9 +83,10 @@
 
     asyncTest("currently focused item receives ID attribute", 1, function() {
         asyncDataSource.read().then(function() {
-            start();
-            virtualList.select(virtualList.items().eq(1));
-            equal(virtualList.focus().attr("id"), virtualList._optionID);
+            virtualList.select(virtualList.items().eq(1)).done(function() {
+                start();
+                equal(virtualList.focus().attr("id"), virtualList._optionID);
+            });
         });
     });
 
