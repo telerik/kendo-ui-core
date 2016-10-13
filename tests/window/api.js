@@ -1052,4 +1052,51 @@
     test("setOptions resets maxWidth", $.proxy(setDimensionTest, this, "maxWidth"));
     test("setOptions resets minHeight", $.proxy(setDimensionTest, this, "minHeight"));
     test("setOptions resets maxHeight", $.proxy(setDimensionTest, this, "maxHeight"));
+
+    test("isMinimized is updated when minimizing window", function() {
+        var dialog = createWindow({
+                visible: true,
+                animation: false
+            });
+
+        dialog.minimize();
+
+        ok(dialog.isMinimized());
+    });
+
+    test("isMinimized is updated when restoring window", function() {
+        var dialog = createWindow({
+                visible: true,
+                animation: false
+            });
+
+        dialog.minimize();
+        dialog.restore();
+
+        ok(!dialog.isMinimized());
+    });            
+
+    test("isMaximized is updated when maximizing window", function() {
+        var dialog = createWindow({
+                visible: true,
+                animation: false
+            });
+
+        dialog.maximize();
+
+        ok(dialog.isMaximized());
+    }); 
+
+    test("isMaximized is updated when restoring window", function() {
+        var dialog = createWindow({
+                visible: true,
+                animation: false
+            });
+
+        dialog.maximize();
+        dialog.restore();
+
+        ok(!dialog.isMaximized());
+    });       
+
 })();

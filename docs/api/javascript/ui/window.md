@@ -547,6 +547,42 @@ Destroys the window and its modal overlay, if necessary. Removes the widget HTML
     dialog.destroy();
     </script>
 
+### isMaximized
+
+Indicates whether the window is maximized.
+
+### Returns
+
+`Boolean`
+
+#### Example - check if window is maximized
+
+    <div id="dialog"></div>
+    <script>
+    $("#dialog").kendoWindow();
+    var dialog = $("#dialog").data("kendoWindow");
+    dialog.maximize();
+    var maximized = dialog.isMaximized();
+    </script>    
+
+### isMinimized
+
+Indicates whether the window is minimized.
+
+### Returns
+
+`Boolean`
+
+#### Example - check if window is minimized
+
+    <div id="dialog"></div>
+    <script>
+    $("#dialog").kendoWindow();
+    var dialog = $("#dialog").data("kendoWindow");
+    dialog.minimize();
+    var minimized = dialog.isMinimized();
+    </script>   
+
 ### maximize
 
 Maximizes a Window to the entire viewing area of the user agent. Triggers the resize event.
