@@ -208,24 +208,10 @@ Defines the text of the labels that are shown within the editor. Used primarily 
     });
     </script>
 
-### messages.bold `String` *(default: "Bold")*
 
-The title of the tool that makes text bold.
+### messages.accessibilityTab `String` *(default: 'Accessibility')*
 
-#### Example
-
-    <textarea id="editor"></textarea>
-    <script>
-    $("#editor").kendoEditor({
-      messages: {
-        bold: "Bold"
-      }
-    });
-    </script>
-
-### messages.italic `String` *(default: "Italic")*
-
-The title of the tool that makes text italicized.
+The title of the Accessibility in the Table Wizard dialog.
 
 #### Example
 
@@ -233,787 +219,7 @@ The title of the tool that makes text italicized.
     <script>
     $("#editor").kendoEditor({
       messages: {
-        italic: "Italic"
-      }
-    });
-    </script>
-
-### messages.underline `String` *(default: "Underline")*
-
-The title of the tool that underlines text.
-
-#### Example
-
-    <textarea id="editor"></textarea>
-    <script>
-    $("#editor").kendoEditor({
-      messages: {
-        underline: "Underline"
-      }
-    });
-    </script>
-
-### messages.strikethrough `String` *(default: "Strikethrough")*
-
-The title of the tool that strikes through text.
-
-#### Example
-
-    <textarea id="editor"></textarea>
-    <script>
-    $("#editor").kendoEditor({
-      messages: {
-        strikethrough: "Strikethrough"
-      }
-    });
-    </script>
-
-### messages.superscript `String` *(default: "Superscript")*
-
-The title of the tool that makes text superscript.
-
-#### Example
-
-    <textarea id="editor"></textarea>
-    <script>
-    $("#editor").kendoEditor({
-      messages: {
-        superscript: "Superscript"
-      }
-    });
-    </script>
-
-### messages.subscript `String` *(default: "Subscript")*
-
-The title of the tool that makes text subscript.
-
-#### Example
-
-    <textarea id="editor"></textarea>
-    <script>
-    $("#editor").kendoEditor({
-      messages: {
-        subscript: "Subscript"
-      }
-    });
-    </script>
-
-### messages.justifyCenter `String` *(default: "Center text")*
-
-The title of the tool that aligns text in the center.
-
-#### Example
-
-    <textarea id="editor"></textarea>
-    <script>
-    $("#editor").kendoEditor({
-      messages: {
-        justifyCenter: "Center text"
-      }
-    });
-    </script>
-
-### messages.justifyLeft `String` *(default: "Align text left")*
-
-The title of the tool that aligns text on the left.
-
-#### Example
-
-    <textarea id="editor"></textarea>
-    <script>
-    $("#editor").kendoEditor({
-      messages: {
-        justifyLeft: "Align text left"
-      }
-    });
-    </script>
-
-### messages.justifyRight `String` *(default: "Align text right")*
-
-The title of the tool that aligns text on the right.
-
-#### Example
-
-    <textarea id="editor"></textarea>
-    <script>
-    $("#editor").kendoEditor({
-      messages: {
-        justifyRight: "Align text right"
-      }
-    });
-    </script>
-
-### messages.justifyFull `String` *(default: "Justify")*
-
-The title of the tool that justifies text both left and right.
-
-#### Example
-
-    <textarea id="editor"></textarea>
-    <script>
-    $("#editor").kendoEditor({
-      messages: {
-        justifyFull: "Justify"
-      }
-    });
-    </script>
-
-### messages.insertUnorderedList `String` *(default: "Insert unordered list")*
-
-The title of the tool that inserts an unordered list.
-
-#### Example
-
-    <textarea id="editor"></textarea>
-    <script>
-    $("#editor").kendoEditor({
-      messages: {
-        insertUnorderedList: "Insert unordered list"
-      }
-    });
-    </script>
-
-### messages.insertOrderedList `String` *(default: "Insert ordered list")*
-
-The title of the tool that inserts an ordered list.
-
-#### Example
-
-    <textarea id="editor"></textarea>
-    <script>
-    $("#editor").kendoEditor({
-      messages: {
-        insertOrderedList: "Insert ordered list"
-      }
-    });
-    </script>
-
-### messages.indent `String` *(default: "Indent")*
-
-The title of the tool that indents the content.
-
-#### Example
-
-    <textarea id="editor"></textarea>
-    <script>
-    $("#editor").kendoEditor({
-      messages: {
-        indent: "Indent"
-      }
-    });
-    </script>
-
-### messages.outdent `String` *(default: "Outdent")*
-
-The title of the tool that outdents the content.
-
-#### Example
-
-    <textarea id="editor"></textarea>
-    <script>
-    $("#editor").kendoEditor({
-      messages: {
-        outdent: "Outdent"
-      }
-    });
-    </script>
-
-### messages.createLink `String` *(default: "Insert hyperlink")*
-
-The title of the tool that creates hyperlinks.
-
-#### Example
-
-    <textarea id="editor"></textarea>
-    <script>
-    $("#editor").kendoEditor({
-      messages: {
-        createLink: "Insert hyperlink"
-      }
-    });
-    </script>
-
-### messages.unlink `String` *(default: "Remove hyperlink")*
-
-The title of the tool that removes hyperlinks.
-
-#### Example
-
-    <textarea id="editor"></textarea>
-    <script>
-    $("#editor").kendoEditor({
-      messages: {
-        unlink: "Remove hyperlink"
-      }
-    });
-    </script>
-
-### messages.insertImage `String` *(default: "Insert image")*
-
-The title of the tool that inserts images.
-
-#### Example
-
-    <textarea id="editor"></textarea>
-    <script>
-    $("#editor").kendoEditor({
-      messages: {
-        insertImage: "Insert image"
-      }
-    });
-    </script>
-
-### messages.insertFile `String` *(default: "Insert file")*
-
-The title of the tool that inserts links to files.
-
-#### Example
-
-    <textarea id="editor"></textarea>
-    <script>
-    $("#editor").kendoEditor({
-      messages: {
-        insertFile: "Insert file"
-      }
-    });
-    </script>
-
-### messages.insertHtml `String` *(default: "Insert HTML")*
-
-The title of the tool that inserts HTML snippets.
-
-#### Example
-
-    <textarea id="editor"></textarea>
-    <script>
-    $("#editor").kendoEditor({
-      messages: {
-        insertHtml: "Insert HTML"
-      }
-    });
-    </script>
-
-### messages.viewHtml `String` *(default: "View HTML")*
-
-The title of the tool that shows the editor value as HTML.
-
-#### Example
-
-    <textarea id="editor"></textarea>
-    <script>
-    $("#editor").kendoEditor({
-      messages: {
-        viewHtml: "View HTML"
-      }
-    });
-    </script>
-
-### messages.fontName `String` *(default: "Select font family")*
-
-The title of the tool that changes the text font.
-
-#### Example
-
-    <textarea id="editor"></textarea>
-    <script>
-    $("#editor").kendoEditor({
-      messages: {
-        fontName: "Select font family"
-      }
-    });
-    </script>
-
-### messages.fontNameInherit `String` *(default: "(inherited font)")*
-
-The text that is shown when the text font will be inherited from the surrounding page.
-
-#### Example
-
-    <textarea id="editor"></textarea>
-    <script>
-    $("#editor").kendoEditor({
-      messages: {
-        fontNameInherit: "(inherited font)"
-      }
-    });
-    </script>
-
-### messages.fontSize `String` *(default: "Select font size")*
-
-The title of the tool that changes the text size.
-
-#### Example
-
-    <textarea id="editor"></textarea>
-    <script>
-    $("#editor").kendoEditor({
-      messages: {
-        fontSize: "Select font size"
-      }
-    });
-    </script>
-
-### messages.fontSizeInherit `String` *(default: "(inherited size)")*
-
-The text that is shown when the text size will be inherited from the surrounding page.
-
-#### Example
-
-    <textarea id="editor"></textarea>
-    <script>
-    $("#editor").kendoEditor({
-      messages: {
-        fontSizeInherit: "(inherited size)"
-      }
-    });
-    </script>
-
-### messages.formatBlock `String` *(default: "Format")*
-
-The title of the tool that lets users choose block formats. Deprecated.
-
-#### Example
-
-    <textarea id="editor"></textarea>
-    <script>
-    $("#editor").kendoEditor({
-      messages: {
-        formatBlock: "Format"
-      }
-    });
-    </script>
-
-### messages.formatting `String` *(default: "Format")*
-
-The title of the tool that lets users choose block formats.
-
-#### Example
-
-    <textarea id="editor"></textarea>
-    <script>
-    $("#editor").kendoEditor({
-      messages: {
-        formatting: "Format"
-      }
-    });
-    </script>
-
-### messages.foreColor `String` *(default: "Color")*
-
-The title of the tool that changes the text color.
-
-#### Example
-
-    <textarea id="editor"></textarea>
-    <script>
-    $("#editor").kendoEditor({
-      messages: {
-        foreColor: "Color"
-      }
-    });
-    </script>
-
-### messages.backColor `String` *(default: "Background color")*
-
-The title of the tool that changes the text background color.
-
-#### Example
-
-    <textarea id="editor"></textarea>
-    <script>
-    $("#editor").kendoEditor({
-      messages: {
-        backColor: "Background color"
-      }
-    });
-    </script>
-
-### messages.style `String` *(default: "Styles")*
-
-The title of the tool that applies styling to elements. Deprecated.
-
-#### Example
-
-    <textarea id="editor"></textarea>
-    <script>
-    $("#editor").kendoEditor({
-      messages: {
-        style: "Styles"
-      }
-    });
-    </script>
-
-### messages.emptyFolder `String` *(default: "Empty Folder")*
-
-The message shown in the file- or imageBrowser when a folder is empty.
-
-#### Example
-
-    <textarea id="editor"></textarea>
-    <script>
-    $("#editor").kendoEditor({
-      messages: {
-        emptyFolder: "Empty Folder"
-      }
-    });
-    </script>
-
-### messages.uploadFile `String` *(default: "Upload")*
-
-The caption of the upload button in the file- or imageBrowser.
-
-#### Example
-
-    <textarea id="editor"></textarea>
-    <script>
-    $("#editor").kendoEditor({
-      messages: {
-        uploadFile: "Upload"
-      }
-    });
-    </script>
-
-### messages.editAreaTitle `String` *(default: "Editable area. Press F10 for toolbar.")*
-
-The title of the iframe editing area when a sandboxed editor is used. Used as a hint for screen readers.
-
-#### Example
-
-    <textarea id="editor"></textarea>
-    <script>
-    $("#editor").kendoEditor({
-      messages: {
-        editAreaTitle: "Write your comments here. Press F10 for toolbar."
-      }
-    });
-    </script>
-
-### messages.orderBy `String` *(default: "Arrange by:")*
-
-The caption of the sorting order in the file- or imageBrowser.
-
-#### Example
-
-    <textarea id="editor"></textarea>
-    <script>
-    $("#editor").kendoEditor({
-      messages: {
-        orderBy: "Arrange by:"
-      }
-    });
-    </script>
-
-### messages.orderBySize `String` *(default: "Size")*
-
-The sorting order by size in the file- or imageBrowser.
-
-#### Example
-
-    <textarea id="editor"></textarea>
-    <script>
-    $("#editor").kendoEditor({
-      messages: {
-        orderBySize: "Size"
-      }
-    });
-    </script>
-
-### messages.orderByName `String` *(default: "Name")*
-
-The sorting order by name in the file- or imageBrowser.
-
-#### Example
-
-    <textarea id="editor"></textarea>
-    <script>
-    $("#editor").kendoEditor({
-      messages: {
-        orderByName: "Name"
-      }
-    });
-    </script>
-
-### messages.invalidFileType `String` *(default: 'The selected file "{0}" is not valid. Supported file types are {1}.')*
-
-The error message shown when an invalid file type has been selected in the file- or imageBrowser.
-
-#### Example
-
-    <textarea id="editor"></textarea>
-    <script>
-    $("#editor").kendoEditor({
-      messages: {
-        invalidFileType: 'The selected file "{0}" is not valid. Supported file types are {1}.'
-      }
-    });
-    </script>
-
-### messages.deleteFile `String` *(default: 'Are you sure you want to delete "{0}"?')*
-
-The confirmation message shown when deleting files in the file- or imageBrowser.
-
-#### Example
-
-    <textarea id="editor"></textarea>
-    <script>
-    $("#editor").kendoEditor({
-      messages: {
-        deleteFile: 'Are you sure you want to delete "{0}"?'
-      }
-    });
-    </script>
-
-### messages.overwriteFile `String` *(default: 'A file with name "{0}" already exists in the current directory. Do you want to overwrite it?')*
-
-The confirmation message shown when overwriting files in the file- or imageBrowser.
-
-#### Example
-
-    <textarea id="editor"></textarea>
-    <script>
-    $("#editor").kendoEditor({
-      messages: {
-        overwriteFile: 'A file with name "{0}" already exists in the current directory. Do you want to overwrite it?'
-      }
-    });
-    </script>
-
-### messages.directoryNotFound `String` *(default: "A directory with this name was not found.")*
-
-The error message shown when the target directory is not found in the file- or imageBrowser.
-
-#### Example
-
-    <textarea id="editor"></textarea>
-    <script>
-    $("#editor").kendoEditor({
-      messages: {
-        directoryNotFound: "A directory with this name was not found."
-      }
-    });
-    </script>
-
-### messages.imageWebAddress `String` *(default: "Web address")*
-
-The caption for the image URL in the insertImage dialog.
-
-#### Example
-
-    <textarea id="editor"></textarea>
-    <script>
-    $("#editor").kendoEditor({
-      messages: {
-        imageWebAddress: "Web address"
-      }
-    });
-    </script>
-
-### messages.imageAltText `String` *(default: "Alternate text")*
-
-The caption for the image alternate text in the insertImage dialog.
-
-#### Example
-
-    <textarea id="editor"></textarea>
-    <script>
-    $("#editor").kendoEditor({
-      messages: {
-        imageAltText: "Alternate text"
-      }
-    });
-    </script>
-
-### messages.imageWidth `String` *(default: "Width (px)")*
-
-The caption for the image width in the insertImage dialog.
-
-#### Example
-
-    <textarea id="editor"></textarea>
-    <script>
-    $("#editor").kendoEditor({
-      messages: {
-        imageWidth: "Width (px)"
-      }
-    });
-    </script>
-
-### messages.imageHeight `String` *(default: "Height (px)")*
-
-The caption for the image height in the insertImage dialog.
-
-#### Example
-
-    <textarea id="editor"></textarea>
-    <script>
-    $("#editor").kendoEditor({
-      messages: {
-        imageHeight: "Height (px)"
-      }
-    });
-    </script>
-
-### messages.fileWebAddress `String` *(default: "Web address")*
-
-The caption for the file URL in the insertFile dialog.
-
-#### Example
-
-    <textarea id="editor"></textarea>
-    <script>
-    $("#editor").kendoEditor({
-      messages: {
-        fileWebAddress: "Web address"
-      }
-    });
-    </script>
-
-### messages.fileTitle `String` *(default: "Title")*
-
-The caption for the file title in the insertFile dialog.
-
-#### Example
-
-    <textarea id="editor"></textarea>
-    <script>
-    $("#editor").kendoEditor({
-      messages: {
-        fileTitle: "Title"
-      }
-    });
-    </script>
-
-### messages.linkWebAddress `String` *(default: "Web address")*
-
-The caption for the URL in the createLink dialog.
-
-#### Example
-
-    <textarea id="editor"></textarea>
-    <script>
-    $("#editor").kendoEditor({
-      messages: {
-        linkWebAddress: "Web address"
-      }
-    });
-    </script>
-
-### messages.linkText `String` *(default: "Text")*
-
-The caption for the link text in the createLink dialog.
-
-#### Example
-
-    <textarea id="editor"></textarea>
-    <script>
-    $("#editor").kendoEditor({
-      messages: {
-        linkText: "Text"
-      }
-    });
-    </script>
-
-### messages.linkToolTip `String` *(default: "ToolTip")*
-
-The caption for the link Tooltip in the createLink dialog.
-
-#### Example
-
-    <textarea id="editor"></textarea>
-    <script>
-    $("#editor").kendoEditor({
-      messages: {
-        linkToolTip: "ToolTip"
-      }
-    });
-    </script>
-
-### messages.linkOpenInNewWindow `String` *(default: "Open link in new window")*
-
-The caption for the checkbox for opening the link in a new window in the createLink dialog.
-
-#### Example
-
-    <textarea id="editor"></textarea>
-    <script>
-    $("#editor").kendoEditor({
-      messages: {
-        linkOpenInNewWindow: "Open link in new window"
-      }
-    });
-    </script>
-
-### messages.dialogUpdate `String` *(default: "Update")*
-
-The label of the update button in all editor dialogs.
-
-#### Example
-
-    <textarea id="editor"></textarea>
-    <script>
-    $("#editor").kendoEditor({
-      messages: {
-        dialogUpdate: "Update"
-      }
-    });
-    </script>
-
-### messages.dialogInsert `String` *(default: "Insert")*
-
-The label of the insert button in all editor dialogs.
-
-#### Example
-
-    <textarea id="editor"></textarea>
-    <script>
-    $("#editor").kendoEditor({
-      messages: {
-        dialogInsert: "Insert"
-      }
-    });
-    </script>
-
-### messages.dialogCancel `String` *(default: "Cancel")*
-
-The label of the cancel button in all editor dialogs.
-
-#### Example
-
-    <textarea id="editor"></textarea>
-    <script>
-    $("#editor").kendoEditor({
-      messages: {
-        dialogCancel: "Cancel"
-      }
-    });
-    </script>
-
-### messages.createTable `String` *(default: "Create table")*
-
-The title of the tool that inserts tables.
-
-#### Example
-
-    <textarea id="editor"></textarea>
-    <script>
-    $("#editor").kendoEditor({
-      messages: {
-        createTable: "Create table"
-      }
-    });
-    </script>
-
-### messages.createTableHint `String` *(default: "Create a {0} x {1} table")*
-
-The status text of the tool that inserts tables, which indicates the dimensions of the inserted table.
-
-#### Example
-
-    <textarea id="editor"></textarea>
-    <script>
-    $("#editor").kendoEditor({
-      messages: {
-        createTableHint: "Create a {0} x {1} table"
+        accessibilityTab: "Accessibility"
       }
     });
     </script>
@@ -1078,9 +284,25 @@ The title of the tool that adds table rows below the selection.
     });
     </script>
 
-### messages.deleteRow `String` *(default: "Delete row")*
+### messages.alignCenter `String` *(default: 'Align Center')*
 
-The title of the tool that deletes selected table rows.
+The title of the tool that aligns the cell text.
+
+#### Example
+
+    <textarea id="editor"></textarea>
+    <script>
+    $("#editor").kendoEditor({
+        
+      messages: {
+        alignCenter: "Align Center"
+      }
+    });
+    </script>
+
+### messages.alignCenterBottom `String` *(default: 'Align Center Bottom')*
+
+The title of the tool that aligns the cell text.
 
 #### Example
 
@@ -1088,7 +310,457 @@ The title of the tool that deletes selected table rows.
     <script>
     $("#editor").kendoEditor({
       messages: {
-        deleteRow: "Delete row"
+        alignCenterBottom: "Align Center Bottom"
+      }
+    });
+    </script>
+
+### messages.alignCenterMiddle `String` *(default: 'Align Center Middle')*
+
+The title of the tool that aligns the cell text.
+
+#### Example
+
+    <textarea id="editor"></textarea>
+    <script>
+    $("#editor").kendoEditor({
+      messages: {
+        alignCenterMiddle: "Align Center Middle"
+      }
+    });
+    </script>
+
+### messages.alignCenterTop `String` *(default: 'Align Center Top')*
+
+The title of the tool that aligns the cell text.
+
+#### Example
+
+    <textarea id="editor"></textarea>
+    <script>
+    $("#editor").kendoEditor({
+      messages: {
+        alignCenterTop: "Align Center Top"
+      }
+    });
+    </script>
+
+### messages.alignLeft `String` *(default: 'Align Left')*
+
+The title of the tool that aligns the cell text.
+
+#### Example
+
+    <textarea id="editor"></textarea>
+    <script>
+    $("#editor").kendoEditor({
+      messages: {
+        alignLeft: "Align Left"
+      }
+    });
+    </script>
+
+### messages.alignLeftBottom `String` *(default: 'Align Left Bottom')*
+
+The title of the tool that aligns the cell text.
+
+#### Example
+
+    <textarea id="editor"></textarea>
+    <script>
+    $("#editor").kendoEditor({
+      messages: {
+        alignLeftBottom: "Align Left Bottom"
+      }
+    });
+    </script>
+
+### messages.alignLeftMiddle `String` *(default: 'Align Left Middle')*
+
+The title of the tool that aligns the cell text.
+
+#### Example
+
+    <textarea id="editor"></textarea>
+    <script>
+    $("#editor").kendoEditor({
+      messages: {
+        alignLeftMiddle: "Align Left Middle"
+      }
+    });
+    </script>
+
+### messages.alignLeftTop `String` *(default: 'Align Left Top')*
+
+The title of the tool that aligns the cell text.
+
+#### Example
+
+    <textarea id="editor"></textarea>
+    <script>
+    $("#editor").kendoEditor({
+      messages: {
+        alignLeftTop: "Align Left Top"
+      }
+    });
+    </script>
+
+### messages.alignRemove `String` *(default: 'Remove Alignment')*
+
+The title of the tool that removes the cell text's alignment.
+
+#### Example
+
+    <textarea id="editor"></textarea>
+    <script>
+    $("#editor").kendoEditor({
+      messages: {
+        alignRemove: "Remove Alignment"
+      }
+    });
+    </script>
+
+### messages.alignRight `String` *(default: 'Align Right')*
+
+The title of the tool that aligns the cell text.
+
+#### Example
+
+    <textarea id="editor"></textarea>
+    <script>
+    $("#editor").kendoEditor({
+      messages: {
+        alignRight: "Align Right"
+      }
+    });
+    </script>
+
+### messages.alignRightBottom `String` *(default: 'Align Right Bottom')*
+
+The title of the tool that aligns the cell text.
+
+#### Example
+
+    <textarea id="editor"></textarea>
+    <script>
+    $("#editor").kendoEditor({
+      messages: {
+        alignRightBottom: "Align Right Bottom"
+      }
+    });
+    </script>
+
+### messages.alignRightMiddle `String` *(default: 'Align Right Middle')*
+
+The title of the tool that aligns the cell text.
+
+#### Example
+
+    <textarea id="editor"></textarea>
+    <script>
+    $("#editor").kendoEditor({
+      messages: {
+        alignRightMiddle: "Align Right Middle"
+      }
+    });
+    </script>
+
+### messages.alignRightTop `String` *(default: 'Align Right Top')*
+
+The title of the tool that aligns the cell text.
+
+#### Example
+
+    <textarea id="editor"></textarea>
+    <script>
+    $("#editor").kendoEditor({
+      messages: {
+        alignRightTop: "Align Right Top"
+      }
+    });
+    </script>
+
+### messages.alignment `String` *(default: 'Alignment')*
+
+The title of the tool that aligns the cell text.
+
+#### Example
+
+    <textarea id="editor"></textarea>
+    <script>
+    $("#editor").kendoEditor({
+      messages: {
+        alignment: "Alignment"
+      }
+    });
+    </script>
+
+### messages.associateCellsWithHeaders `String` *(default: 'Associate cells with headers')*
+
+The title of the Associate cells with headers tool.
+
+#### Example
+
+    <textarea id="editor"></textarea>
+    <script>
+    $("#editor").kendoEditor({
+      messages: {
+        associateCellsWithHeaders: "Associate cells with headers"
+      }
+    });
+    </script>
+
+### messages.backColor `String` *(default: "Background color")*
+
+The title of the tool that changes the text background color.
+
+#### Example
+
+    <textarea id="editor"></textarea>
+    <script>
+    $("#editor").kendoEditor({
+      messages: {
+        backColor: "Background color"
+      }
+    });
+    </script>
+
+### messages.background `String` *(default: 'Background')*
+
+The title of the tool that changes the text background of the tables/cells.
+
+#### Example
+
+    <textarea id="editor"></textarea>
+    <script>
+    $("#editor").kendoEditor({
+      messages: {
+        background: "Background"
+      }
+    });
+    </script>
+
+### messages.bold `String` *(default: "Bold")*
+
+The title of the tool that makes text bold.
+
+#### Example
+
+    <textarea id="editor"></textarea>
+    <script>
+    $("#editor").kendoEditor({
+      messages: {
+        bold: "Bold"
+      }
+    });
+    </script>
+
+### messages.border `String` *(default: 'Border')*
+
+The title of the tool that changes the border of tables.
+
+#### Example
+
+    <textarea id="editor"></textarea>
+    <script>
+    $("#editor").kendoEditor({
+      messages: {
+        border: "Border"
+      }
+    });
+    </script>
+
+### messages.style `String` *(default: 'Styles')*
+
+The title of the tool that applies styling to elements. Deprecated.
+
+#### Example
+
+    <textarea id="editor"></textarea>
+    <script>
+    $("#editor").kendoEditor({
+      messages: {
+        style: "Styles"
+      }
+    });
+    </script>
+
+### messages.caption `String` *(default: 'Caption')*
+
+The title of the tool that adds caption to tables.
+
+#### Example
+
+    <textarea id="editor"></textarea>
+    <script>
+    $("#editor").kendoEditor({
+      messages: {
+        caption: "Caption"
+      }
+    });
+    </script>
+
+### messages.cellMargin `String` *(default: 'Cell Margin')*
+
+The title of the tool that applies margin to table cells.
+
+#### Example
+
+    <textarea id="editor"></textarea>
+    <script>
+    $("#editor").kendoEditor({
+      messages: {
+        cellMargin: "Cell Margin"
+      }
+    });
+    </script>
+
+### messages.cellPadding `String` *(default: 'Cell Padding')*
+
+The title of the tool that applies padding to table cells.
+
+#### Example
+
+    <textarea id="editor"></textarea>
+    <script>
+    $("#editor").kendoEditor({
+      messages: {
+        cellPadding: "Cell Padding"
+      }
+    });
+    </script>
+
+### messages.cellSpacing `String` *(default: 'Cell Spacing')*
+
+The title of the tool that applies spacing to table cells.
+
+#### Example
+
+    <textarea id="editor"></textarea>
+    <script>
+    $("#editor").kendoEditor({
+      messages: {
+        cellSpacing: "Cell Spacing"
+      }
+    });
+    </script>
+
+### messages.cellTab `String` *(default: 'Cell')*
+
+The title of the Cell tab in Table Wizard dialog.
+
+#### Example
+
+    <textarea id="editor"></textarea>
+    <script>
+    $("#editor").kendoEditor({
+      messages: {
+        cellTab: "Cell"
+      }
+    });
+    </script>
+
+### messages.cleanFormatting `String` *(default: 'Clean formatting')*
+
+The title of the Clean Formatting tool.
+
+#### Example
+
+    <textarea id="editor"></textarea>
+    <script>
+    $("#editor").kendoEditor({
+      messages: {
+        cleanFormatting: "Clean formatting"
+      }
+    });
+    </script>
+
+### messages.collapseBorders `String` *(default: 'Collapse borders')*
+
+The title of the Collapse borders option in Table Wizard.
+
+#### Example
+
+    <textarea id="editor"></textarea>
+    <script>
+    $("#editor").kendoEditor({
+      messages: {
+        collapseBorders: "Collapse borders"
+      }
+    });
+    </script>
+
+### messages.columns `String` *(default: 'Columns')*
+
+The title of the Columns tool in Table Wizard.
+
+#### Example
+
+    <textarea id="editor"></textarea>
+    <script>
+    $("#editor").kendoEditor({
+      messages: {
+        columns: "Columns"
+      }
+    });
+    </script>
+
+### messages.createLink `String` *(default: "Insert hyperlink")*
+
+The title of the tool that creates hyperlinks.
+
+#### Example
+
+    <textarea id="editor"></textarea>
+    <script>
+    $("#editor").kendoEditor({
+      messages: {
+        createLink: "Insert hyperlink"
+      }
+    });
+    </script>
+
+### messages.createTable `String` *(default: "Create table")*
+
+The title of the tool that inserts tables.
+
+#### Example
+
+    <textarea id="editor"></textarea>
+    <script>
+    $("#editor").kendoEditor({
+      messages: {
+        createTable: "Create table"
+      }
+    });
+    </script>
+
+### messages.createTableHint `String` *(default: "Create a {0} x {1} table")*
+
+The status text of the tool that inserts tables, which indicates the dimensions of the inserted table.
+
+#### Example
+
+    <textarea id="editor"></textarea>
+    <script>
+    $("#editor").kendoEditor({
+      messages: {
+        createTableHint: "Create a {0} x {1} table"
+      }
+    });
+    </script>
+
+### messages.cssClass `String` *(default: 'CSS Class')*
+
+The title of the CSS Class dropdown tool.
+
+#### Example
+
+    <textarea id="editor"></textarea>
+    <script>
+    $("#editor").kendoEditor({
+      messages: {
+        cssClass: "CSS Class"
       }
     });
     </script>
@@ -1104,6 +776,906 @@ The title of the tool that deletes selected table columns.
     $("#editor").kendoEditor({
       messages: {
         deleteColumn: "Delete column"
+      }
+    });
+    </script>
+
+### messages.deleteFile `String` *(default: 'Are you sure you want to delete "{0}"?')*
+
+The confirmation message shown when deleting files in the file- or imageBrowser.
+
+#### Example
+
+    <textarea id="editor"></textarea>
+    <script>
+    $("#editor").kendoEditor({
+      messages: {
+        deleteFile: 'Are you sure you want to delete "{0}"?'
+      }
+    });
+    </script>
+
+### messages.deleteRow `String` *(default: "Delete row")*
+
+The title of the tool that deletes selected table rows.
+
+#### Example
+
+    <textarea id="editor"></textarea>
+    <script>
+    $("#editor").kendoEditor({
+      messages: {
+        deleteRow: "Delete row"
+      }
+    });
+    </script>
+
+### messages.dialogCancel `String` *(default: "Cancel")*
+
+The label of the cancel button in all editor dialogs.
+
+#### Example
+
+    <textarea id="editor"></textarea>
+    <script>
+    $("#editor").kendoEditor({
+      messages: {
+        dialogCancel: "Cancel"
+      }
+    });
+    </script>
+
+### messages.dialogInsert `String` *(default: "Insert")*
+
+The label of the insert button in all editor dialogs.
+
+#### Example
+
+    <textarea id="editor"></textarea>
+    <script>
+    $("#editor").kendoEditor({
+      messages: {
+        dialogInsert: "Insert"
+      }
+    });
+    </script>
+
+### messages.dialogOk `String` *(default: 'Ok')*
+
+The title of the OK buttons in editor's dialogs.
+
+#### Example
+
+    <textarea id="editor"></textarea>
+    <script>
+    $("#editor").kendoEditor({
+      messages: {
+        dialogOk: "Ok"
+      }
+    });
+    </script>
+
+### messages.dialogUpdate `String` *(default: "Update")*
+
+The label of the update button in all editor dialogs.
+
+#### Example
+
+    <textarea id="editor"></textarea>
+    <script>
+    $("#editor").kendoEditor({
+      messages: {
+        dialogUpdate: "Update"
+      }
+    });
+    </script>
+
+### messages.directoryNotFound `String` *(default: "A directory with this name was not found.")*
+
+The error message shown when the target directory is not found in the file- or imageBrowser.
+
+#### Example
+
+    <textarea id="editor"></textarea>
+    <script>
+    $("#editor").kendoEditor({
+      messages: {
+        directoryNotFound: "A directory with this name was not found."
+      }
+    });
+    </script>
+
+### messages.editAreaTitle `String` *(default: "Editable area. Press F10 for toolbar.")*
+
+The title of the iframe editing area when a sandboxed editor is used. Used as a hint for screen readers.
+
+#### Example
+
+    <textarea id="editor"></textarea>
+    <script>
+    $("#editor").kendoEditor({
+      messages: {
+        editAreaTitle: "Write your comments here. Press F10 for toolbar."
+      }
+    });
+    </script>
+
+### messages.emptyFolder `String` *(default: "Empty Folder")*
+
+The message shown in the file- or imageBrowser when a folder is empty.
+
+#### Example
+
+    <textarea id="editor"></textarea>
+    <script>
+    $("#editor").kendoEditor({
+      messages: {
+        emptyFolder: "Empty Folder"
+      }
+    });
+    </script>
+
+### messages.fileTitle `String` *(default: "Title")*
+
+The caption for the file title in the insertFile dialog.
+
+#### Example
+
+    <textarea id="editor"></textarea>
+    <script>
+    $("#editor").kendoEditor({
+      messages: {
+        fileTitle: "Title"
+      }
+    });
+    </script>
+
+### messages.fileWebAddress `String` *(default: "Web address")*
+
+The caption for the file URL in the insertFile dialog.
+
+#### Example
+
+    <textarea id="editor"></textarea>
+    <script>
+    $("#editor").kendoEditor({
+      messages: {
+        fileWebAddress: "Web address"
+      }
+    });
+    </script>
+
+### messages.fontName `String` *(default: "Select font family")*
+
+The title of the tool that changes the text font.
+
+#### Example
+
+    <textarea id="editor"></textarea>
+    <script>
+    $("#editor").kendoEditor({
+      messages: {
+        fontName: "Select font family"
+      }
+    });
+    </script>
+
+### messages.fontNameInherit `String` *(default: "(inherited font)")*
+
+The text that is shown when the text font will be inherited from the surrounding page.
+
+#### Example
+
+    <textarea id="editor"></textarea>
+    <script>
+    $("#editor").kendoEditor({
+      messages: {
+        fontNameInherit: "(inherited font)"
+      }
+    });
+    </script>
+
+### messages.fontSize `String` *(default: "Select font size")*
+
+The title of the tool that changes the text size.
+
+#### Example
+
+    <textarea id="editor"></textarea>
+    <script>
+    $("#editor").kendoEditor({
+      messages: {
+        fontSize: "Select font size"
+      }
+    });
+    </script>
+
+### messages.fontSizeInherit `String` *(default: "(inherited size)")*
+
+The text that is shown when the text size will be inherited from the surrounding page.
+
+#### Example
+
+    <textarea id="editor"></textarea>
+    <script>
+    $("#editor").kendoEditor({
+      messages: {
+        fontSizeInherit: "(inherited size)"
+      }
+    });
+    </script>
+
+### messages.foreColor `String` *(default: "Color")*
+
+The title of the tool that changes the text color.
+
+#### Example
+
+    <textarea id="editor"></textarea>
+    <script>
+    $("#editor").kendoEditor({
+      messages: {
+        foreColor: "Color"
+      }
+    });
+    </script>
+
+### messages.formatBlock `String` *(default: "Format")*
+
+The title of the tool that lets users choose block formats. Deprecated.
+
+#### Example
+
+    <textarea id="editor"></textarea>
+    <script>
+    $("#editor").kendoEditor({
+      messages: {
+        formatBlock: "Format"
+      }
+    });
+    </script>
+
+### messages.formatting `String` *(default: "Format")*
+
+The title of the tool that lets users choose block formats.
+
+#### Example
+
+    <textarea id="editor"></textarea>
+    <script>
+    $("#editor").kendoEditor({
+      messages: {
+        formatting: "Format"
+      }
+    });
+    </script>
+
+### messages.height `String` *(default: 'Height')*
+
+The title of the height fields.
+
+#### Example
+
+    <textarea id="editor"></textarea>
+    <script>
+    $("#editor").kendoEditor({
+      messages: {
+        height: "Height"
+      }
+    });
+    </script>
+
+### messages.id `String` *(default: 'ID')*
+
+The title of the id fields.
+
+#### Example
+
+    <textarea id="editor"></textarea>
+    <script>
+    $("#editor").kendoEditor({
+      messages: {
+        id: "ID"
+      }
+    });
+    </script>
+
+### messages.imageAltText `String` *(default: "Alternate text")*
+
+The caption for the image alternate text in the insertImage dialog.
+
+#### Example
+
+    <textarea id="editor"></textarea>
+    <script>
+    $("#editor").kendoEditor({
+      messages: {
+        imageAltText: "Alternate text"
+      }
+    });
+    </script>
+
+### messages.imageHeight `String` *(default: "Height (px)")*
+
+The caption for the image height in the insertImage dialog.
+
+#### Example
+
+    <textarea id="editor"></textarea>
+    <script>
+    $("#editor").kendoEditor({
+      messages: {
+        imageHeight: "Height (px)"
+      }
+    });
+    </script>
+
+### messages.imageWebAddress `String` *(default: "Web address")*
+
+The caption for the image URL in the insertImage dialog.
+
+#### Example
+
+    <textarea id="editor"></textarea>
+    <script>
+    $("#editor").kendoEditor({
+      messages: {
+        imageWebAddress: "Web address"
+      }
+    });
+    </script>
+
+### messages.imageWidth `String` *(default: "Width (px)")*
+
+The caption for the image width in the insertImage dialog.
+
+#### Example
+
+    <textarea id="editor"></textarea>
+    <script>
+    $("#editor").kendoEditor({
+      messages: {
+        imageWidth: "Width (px)"
+      }
+    });
+    </script>
+
+### messages.indent `String` *(default: "Indent")*
+
+The title of the tool that indents the content.
+
+#### Example
+
+    <textarea id="editor"></textarea>
+    <script>
+    $("#editor").kendoEditor({
+      messages: {
+        indent: "Indent"
+      }
+    });
+    </script>
+
+### messages.insertFile `String` *(default: "Insert file")*
+
+The title of the tool that inserts links to files.
+
+#### Example
+
+    <textarea id="editor"></textarea>
+    <script>
+    $("#editor").kendoEditor({
+      messages: {
+        insertFile: "Insert file"
+      }
+    });
+    </script>
+
+### messages.insertHtml `String` *(default: "Insert HTML")*
+
+The title of the tool that inserts HTML snippets.
+
+#### Example
+
+    <textarea id="editor"></textarea>
+    <script>
+    $("#editor").kendoEditor({
+      messages: {
+        insertHtml: "Insert HTML"
+      }
+    });
+    </script>
+
+### messages.insertImage `String` *(default: "Insert image")*
+
+The title of the tool that inserts images.
+
+#### Example
+
+    <textarea id="editor"></textarea>
+    <script>
+    $("#editor").kendoEditor({
+      messages: {
+        insertImage: "Insert image"
+      }
+    });
+    </script>
+
+### messages.insertOrderedList `String` *(default: "Insert ordered list")*
+
+The title of the tool that inserts an ordered list.
+
+#### Example
+
+    <textarea id="editor"></textarea>
+    <script>
+    $("#editor").kendoEditor({
+      messages: {
+        insertOrderedList: "Insert ordered list"
+      }
+    });
+    </script>
+
+### messages.insertUnorderedList `String` *(default: "Insert unordered list")*
+
+The title of the tool that inserts an unordered list.
+
+#### Example
+
+    <textarea id="editor"></textarea>
+    <script>
+    $("#editor").kendoEditor({
+      messages: {
+        insertUnorderedList: "Insert unordered list"
+      }
+    });
+    </script>
+
+### messages.invalidFileType `String` *(default: 'The selected file "{0}" is not valid. Supported file types are {1}.')*
+
+The error message shown when an invalid file type has been selected in the file- or imageBrowser.
+
+#### Example
+
+    <textarea id="editor"></textarea>
+    <script>
+    $("#editor").kendoEditor({
+      messages: {
+        invalidFileType: 'The selected file "{0}" is not valid. Supported file types are {1}.'
+      }
+    });
+    </script>
+
+### messages.italic `String` *(default: "Italic")*
+
+The title of the tool that makes text italicized.
+
+#### Example
+
+    <textarea id="editor"></textarea>
+    <script>
+    $("#editor").kendoEditor({
+      messages: {
+        italic: "Italic"
+      }
+    });
+    </script>
+
+### messages.justifyCenter `String` *(default: "Center text")*
+
+The title of the tool that aligns text in the center.
+
+#### Example
+
+    <textarea id="editor"></textarea>
+    <script>
+    $("#editor").kendoEditor({
+      messages: {
+        justifyCenter: "Center text"
+      }
+    });
+    </script>
+
+### messages.justifyFull `String` *(default: "Justify")*
+
+The title of the tool that justifies text both left and right.
+
+#### Example
+
+    <textarea id="editor"></textarea>
+    <script>
+    $("#editor").kendoEditor({
+      messages: {
+        justifyFull: "Justify"
+      }
+    });
+    </script>
+
+### messages.justifyLeft `String` *(default: "Align text left")*
+
+The title of the tool that aligns text on the left.
+
+#### Example
+
+    <textarea id="editor"></textarea>
+    <script>
+    $("#editor").kendoEditor({
+      messages: {
+        justifyLeft: "Align text left"
+      }
+    });
+    </script>
+
+### messages.justifyRight `String` *(default: "Align text right")*
+
+The title of the tool that aligns text on the right.
+
+#### Example
+
+    <textarea id="editor"></textarea>
+    <script>
+    $("#editor").kendoEditor({
+      messages: {
+        justifyRight: "Align text right"
+      }
+    });
+    </script>
+
+### messages.linkOpenInNewWindow `String` *(default: "Open link in new window")*
+
+The caption for the checkbox for opening the link in a new window in the createLink dialog.
+
+#### Example
+
+    <textarea id="editor"></textarea>
+    <script>
+    $("#editor").kendoEditor({
+      messages: {
+        linkOpenInNewWindow: "Open link in new window"
+      }
+    });
+    </script>
+
+### messages.linkText `String` *(default: "Text")*
+
+The caption for the link text in the createLink dialog.
+
+#### Example
+
+    <textarea id="editor"></textarea>
+    <script>
+    $("#editor").kendoEditor({
+      messages: {
+        linkText: "Text"
+      }
+    });
+    </script>
+
+### messages.linkToolTip `String` *(default: "ToolTip")*
+
+The caption for the link Tooltip in the createLink dialog.
+
+#### Example
+
+    <textarea id="editor"></textarea>
+    <script>
+    $("#editor").kendoEditor({
+      messages: {
+        linkToolTip: "ToolTip"
+      }
+    });
+    </script>
+
+### messages.linkWebAddress `String` *(default: "Web address")*
+
+The caption for the URL in the createLink dialog.
+
+#### Example
+
+    <textarea id="editor"></textarea>
+    <script>
+    $("#editor").kendoEditor({
+      messages: {
+        linkWebAddress: "Web address"
+      }
+    });
+    </script>
+
+### messages.orderBy `String` *(default: "Arrange by:")*
+
+The caption of the sorting order in the file- or imageBrowser.
+
+#### Example
+
+    <textarea id="editor"></textarea>
+    <script>
+    $("#editor").kendoEditor({
+      messages: {
+        orderBy: "Arrange by:"
+      }
+    });
+    </script>
+
+### messages.orderByName `String` *(default: "Name")*
+
+The sorting order by name in the file- or imageBrowser.
+
+#### Example
+
+    <textarea id="editor"></textarea>
+    <script>
+    $("#editor").kendoEditor({
+      messages: {
+        orderByName: "Name"
+      }
+    });
+    </script>
+
+### messages.orderBySize `String` *(default: "Size")*
+
+The sorting order by size in the file- or imageBrowser.
+
+#### Example
+
+    <textarea id="editor"></textarea>
+    <script>
+    $("#editor").kendoEditor({
+      messages: {
+        orderBySize: "Size"
+      }
+    });
+    </script>
+
+### messages.outdent `String` *(default: "Outdent")*
+
+The title of the tool that outdents the content.
+
+#### Example
+
+    <textarea id="editor"></textarea>
+    <script>
+    $("#editor").kendoEditor({
+      messages: {
+        outdent: "Outdent"
+      }
+    });
+    </script>
+
+### messages.overwriteFile `String` *(default: 'A file with name "{0}" already exists in the current directory. Do you want to overwrite it?')*
+
+The confirmation message shown when overwriting files in the file- or imageBrowser.
+
+#### Example
+
+    <textarea id="editor"></textarea>
+    <script>
+    $("#editor").kendoEditor({
+      messages: {
+        overwriteFile: 'A file with name "{0}" already exists in the current directory. Do you want to overwrite it?'
+      }
+    });
+    </script>
+
+### messages.print `String` *(default: 'Print')*
+
+The title of the Print tool.
+
+#### Example
+
+    <textarea id="editor"></textarea>
+    <script>
+    $("#editor").kendoEditor({
+      messages: {
+        print: "Print"
+      }
+    });
+    </script>
+
+### messages.rows `String` *(default: 'Rows')*
+
+The title of the Rows field in Table Wizard.
+
+#### Example
+
+    <textarea id="editor"></textarea>
+    <script>
+    $("#editor").kendoEditor({
+      messages: {
+        rows: "Rows"
+      }
+    });
+    </script>
+
+### messages.selectAllCells `String` *(default: 'Select All Cells')*
+
+The title of the Select All Cells tool.
+
+#### Example
+
+    <textarea id="editor"></textarea>
+    <script>
+    $("#editor").kendoEditor({
+      messages: {
+        selectAllCells: "Select All Cells"
+      }
+    });
+    </script>
+
+### messages.strikethrough `String` *(default: "Strikethrough")*
+
+The title of the tool that strikes through text.
+
+#### Example
+
+    <textarea id="editor"></textarea>
+    <script>
+    $("#editor").kendoEditor({
+      messages: {
+        strikethrough: "Strikethrough"
+      }
+    });
+    </script>
+
+### messages.subscript `String` *(default: "Subscript")*
+
+The title of the tool that makes text subscript.
+
+#### Example
+
+    <textarea id="editor"></textarea>
+    <script>
+    $("#editor").kendoEditor({
+      messages: {
+        subscript: "Subscript"
+      }
+    });
+    </script>
+
+### messages.summary `String` *(default: 'Summary')*
+
+The title of the Summary field in Table Wizard.
+
+#### Example
+
+    <textarea id="editor"></textarea>
+    <script>
+    $("#editor").kendoEditor({
+      messages: {
+        summary: "Summary"
+      }
+    });
+    </script>
+
+### messages.superscript `String` *(default: "Superscript")*
+
+The title of the tool that makes text superscript.
+
+#### Example
+
+    <textarea id="editor"></textarea>
+    <script>
+    $("#editor").kendoEditor({
+      messages: {
+        superscript: "Superscript"
+      }
+    });
+    </script>
+
+### messages.tableTab `String` *(default: 'Table')*
+
+The title of the Table tab in Table Wizard.
+
+#### Example
+
+    <textarea id="editor"></textarea>
+    <script>
+    $("#editor").kendoEditor({
+      messages: {
+        tableTab: "Table"
+      }
+    });
+    </script>
+
+### messages.tableWizard `String` *(default: 'Table Wizard')*
+
+The title of the Table Wizard tool.
+
+#### Example
+
+    <textarea id="editor"></textarea>
+    <script>
+    $("#editor").kendoEditor({
+      messages: {
+        tableWizard: "Table Wizard"
+      }
+    });
+    </script>
+
+### messages.underline `String` *(default: "Underline")*
+
+The title of the tool that underlines text.
+
+#### Example
+
+    <textarea id="editor"></textarea>
+    <script>
+    $("#editor").kendoEditor({
+      messages: {
+        underline: "Underline"
+      }
+    });
+    </script>
+
+### messages.unlink `String` *(default: "Remove hyperlink")*
+
+The title of the tool that removes hyperlinks.
+
+#### Example
+
+    <textarea id="editor"></textarea>
+    <script>
+    $("#editor").kendoEditor({
+      messages: {
+        unlink: "Remove hyperlink"
+      }
+    });
+    </script>
+
+### messages.uploadFile `String` *(default: "Upload")*
+
+The caption of the upload button in the file- or imageBrowser.
+
+#### Example
+
+    <textarea id="editor"></textarea>
+    <script>
+    $("#editor").kendoEditor({
+      messages: {
+        uploadFile: "Upload"
+      }
+    });
+    </script>
+
+### messages.viewHtml `String` *(default: "View HTML")*
+
+The title of the tool that shows the editor value as HTML.
+
+#### Example
+
+    <textarea id="editor"></textarea>
+    <script>
+    $("#editor").kendoEditor({
+      messages: {
+        viewHtml: "View HTML"
+      }
+    });
+    </script>
+
+### messages.width `String` *(default: 'Width')*
+
+The title of the Width fields.
+
+#### Example
+
+    <textarea id="editor"></textarea>
+    <script>
+    $("#editor").kendoEditor({
+      messages: {
+        width: "Width"
+      }
+    });
+    </script>
+
+### messages.wrapText `String` *(default: 'Wrap text')*
+
+The title of the Wrap Text option in Table Wizard.
+
+#### Example
+
+    <textarea id="editor"></textarea>
+    <script>
+    $("#editor").kendoEditor({
+      messages: {
+        wrapText: "Wrap text"
       }
     });
     </script>
