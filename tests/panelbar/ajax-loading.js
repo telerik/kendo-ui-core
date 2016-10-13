@@ -164,7 +164,7 @@
     });
 
     asyncTest("ajax content with error fires error handler and writes the error message to the console", 1, function () {
-        if (!jQuery.fn.jquery.startsWith('1')) {
+        if (jQuery.fn.jquery.substring(0,1) === '3') {
             start();
             ok(true);
             return;
