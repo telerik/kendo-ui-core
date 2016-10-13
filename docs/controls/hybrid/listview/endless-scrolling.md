@@ -30,12 +30,8 @@ In order for the scrolling to occur smoothly, the page size should not be too lo
 Once the ListView reaches the amount of items specified by the [schema.total](/api/framework/datasource#configuration-schema.total) setting of the datasource, the **Load More** button/endless scrolling indicator is hidden.
 
 > **Important**
->
-> Currently, certain features, such as the grouped mode and inset styling, are not supported in virtual mode.
-
-> **Important**
->
-> The [read](/api/framework/datasource#methods-read) method of the DataSource must be called if the total number of items is changed after editing.
+> * Currently, certain features, such as the grouped mode and inset styling, are not supported in virtual mode.
+> * If the total number of items is changed after editing, call the [`read`](/api/framework/datasource#methods-read) method of the DataSource.
 
 ## Getting Started
 
