@@ -1293,11 +1293,12 @@ var __meta__ = { // jshint ignore:line
             if (cascade) {
                 parent = that._parentWidget();
 
-                that._cascadeHandlerProxy = proxy(that._cascadeHandler, that);
-
                 if (!parent) {
                     return;
                 }
+
+                that._cascadeHandlerProxy = proxy(that._cascadeHandler, that);
+                that._cascadeFilterRequests = [];
 
                 options.autoBind = false;
 
@@ -1358,7 +1359,9 @@ var __meta__ = { // jshint ignore:line
             var that = this;
             var value = that._accessor() || that._selectedValue;
 
-            that._selectedValue = null;
+            if (!that._cascadeFilterRequests.length) {
+                that._selectedValue = null;
+            }
 
             if (that._userTriggered) {
                 that._clearSelection(parent, true);
@@ -1393,12 +1396,25 @@ var __meta__ = { // jshint ignore:line
                 expressions = that.dataSource.filter() || {};
                 removeFiltersForField(expressions, valueField);
 
-                var handler = function() {
-                    that.unbind("dataBound", handler);
+                var handler = function () {
+                    var currentHandler = that._cascadeFilterRequests.shift();
+                    if (currentHandler) {
+                        that.unbind('dataBound', currentHandler);
+                    }
+
+                    currentHandler = that._cascadeFilterRequests[0];
+                    if (currentHandler) {
+                        that.first('dataBound', currentHandler);
+                    }
+
                     that._cascadeChange(parent);
                 };
 
-                that.first("dataBound", handler);
+                that._cascadeFilterRequests.push(handler);
+
+                if (that._cascadeFilterRequests.length === 1) {
+                    that.first('dataBound', handler);
+                }
 
                 that._cascading = true;
                 that._filterSource({

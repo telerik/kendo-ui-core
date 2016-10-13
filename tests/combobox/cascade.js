@@ -1228,4 +1228,58 @@ test("third combo is bound when only local data is used", function() {
         combo3.value("item4");
     });
 
+    asyncTest("child selects correct item when multiple requests are started", 2, function() {
+        var productResults = [
+            [{ ProductID: 1, ProductName: "Chai" }],
+            [{ ProductID: 3, ProductName: "Aniseed Syrup" }]
+        ];
+
+        var combobox = new ComboBox(parent, {
+            dataTextField: "CategoryName",
+            dataValueField: "CategoryID",
+            dataSource: {
+                serverFiltering: true,
+                transport: {
+                    read: function(options) {
+                        setTimeout(function() {
+                            options.success([
+                                { CategoryID: 1, CategoryName: "Beverages" },
+                                { CategoryID: 2, CategoryName: "Condiments" }
+                            ]);
+                        });
+                    }
+                }
+            }
+        });
+
+        var combobox2 = new ComboBox(child, {
+            cascadeFrom: "parent",
+            dataTextField: "ProductName",
+            dataValueField: "ProductID",
+            dataSource: {
+                serverFiltering: true,
+                transport: {
+                    read: function(options) {
+                        setTimeout(function() {
+                            options.success(productResults.shift());
+                        });
+                    }
+                }
+            }
+        });
+
+        combobox.value("1");
+        combobox2.value("1");
+
+        combobox.one("dataBound", function() {
+            combobox.value("2");
+            combobox2.value("3");
+        });
+
+        setTimeout(function() {
+            start();
+            equal(combobox.value(), "2");
+            equal(combobox2.value(), "3");
+        }, 100);
+    });
 })();

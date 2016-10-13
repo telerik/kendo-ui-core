@@ -1281,4 +1281,61 @@
 
         ddl.ul.children().last().click();
     });
+
+    asyncTest("child selects correct item when multiple requests are started", 2, function() {
+        var productResults = [
+            [{ ProductID: 1, ProductName: "Chai" }],
+            [{ ProductID: 3, ProductName: "Aniseed Syrup" }]
+        ];
+
+        var ddl = new DropDownList(parent, {
+            optionLabel: "Select category...",
+            dataTextField: "CategoryName",
+            dataValueField: "CategoryID",
+            dataSource: {
+                serverFiltering: true,
+                transport: {
+                    read: function(options) {
+                        setTimeout(function() {
+                            options.success([
+                                { CategoryID: 1, CategoryName: "Beverages" },
+                                { CategoryID: 2, CategoryName: "Condiments" }
+                            ]);
+                        });
+                    }
+                }
+            }
+        });
+
+        var ddl2 = new DropDownList(child, {
+            cascadeFrom: "parent",
+            optionLabel: "Select product...",
+            dataTextField: "ProductName",
+            dataValueField: "ProductID",
+            dataSource: {
+                serverFiltering: true,
+                transport: {
+                    read: function(options) {
+                        setTimeout(function() {
+                            options.success(productResults.shift());
+                        });
+                    }
+                }
+            }
+        });
+
+        ddl.value("1");
+        ddl2.value("1");
+
+        ddl.one("dataBound", function() {
+            ddl.value("2");
+            ddl2.value("3");
+        });
+
+        setTimeout(function() {
+            start();
+            equal(ddl.value(), "2");
+            equal(ddl2.value(), "3");
+        }, 100);
+    });
 })();
