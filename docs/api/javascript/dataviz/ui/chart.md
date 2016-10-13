@@ -22468,9 +22468,9 @@ The background color of the label. Accepts a valid CSS color string, including h
         data: [1, 2, 3]
       }],
       valueAxis: {
-        notesdata {
-          data: [{
-            value: 1,
+        notes: {
+           data: [{
+            value: 1.1,
             label: {
               background: "red"
             }
