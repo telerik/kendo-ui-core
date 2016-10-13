@@ -285,7 +285,7 @@
         }
 
         asyncTest("slideIn:right moves the element right from - its width to 0", function() {
-            span.css({ position: "absolute", display: "block", left: 10 });
+            span.css({ position: "absolute", display: "block", left: 10, width: 10 });
 
             var position = 1;
             if (transforms) {
