@@ -20,7 +20,6 @@ GEM
     execjs (2.2.0)
     fast-stemmer (1.0.2)
     ffi (1.9.3)
-    ffi (1.9.3-x86-mingw32)
     github-markdown (0.6.5)
     hike (1.2.3)
     html-pipeline (1.8.0)
@@ -60,12 +59,10 @@ GEM
       rb-fsevent (>= 0.9.3)
       rb-inotify (>= 0.9)
     mercenary (0.3.3)
-    mini_portile (0.6.0)
+    mini_portile2 (0.6.0)
     minitest (5.3.5)
     multi_json (1.10.1)
     nokogiri (1.6.2.1)
-      mini_portile (= 0.6.0)
-    nokogiri (1.6.2.1-x86-mingw32)
       mini_portile (= 0.6.0)
     parslet (1.5.0)
       blankslate (~> 2.0)
@@ -101,7 +98,6 @@ GEM
       execjs (>= 0.3.0)
       json (>= 1.8.0)
     yajl-ruby (1.1.0)
-    yajl-ruby (1.1.0-x86-mingw32)
 
 PLATFORMS
   ruby
@@ -110,10 +106,7 @@ PLATFORMS
 DEPENDENCIES
   github-markdown
   html-pipeline
-  jekyll (= 2.0.3)
+  jekyll
   jekyll-assets
-  jekyll-sitemap (= 0.4.1)
+  jekyll-sitemap
   uglifier
-
-BUNDLED WITH
-   1.12.5
