@@ -1211,7 +1211,7 @@ test("load resolves promise upon success", function() {
         transport: {
             read: function(options) {
                 deferred = $.Deferred();
-                deferred.then(function() {
+                deferred.done(function() {
                     options.success([ { id: 1, hasChildren: true } ]);
                 });
             }
