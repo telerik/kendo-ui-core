@@ -50,7 +50,7 @@ The supported aggregates are:
 
 The name of the aggregate function.
 
-The supported aggregates are:  
+The supported aggregates are:
 
 * `"average"`
 * `"count"`
@@ -368,7 +368,7 @@ The supported values are:
     });
     </script>
 
-### filter.operator `String`
+### filter.operator `String|Function`
 
 The filter operator (comparison).
 
