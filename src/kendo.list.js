@@ -905,10 +905,10 @@ var __meta__ = { // jshint ignore:line
             if (candidate === undefined) {
                 return that.selectedIndex;
             } else {
-                that._select(candidate);
-
-                that._old = that._accessor();
-                that._oldIndex = that.selectedIndex;
+                return that._select(candidate).done(function() {
+                    that._old = that._accessor();
+                    that._oldIndex = that.selectedIndex;
+                });
             }
         },
 
@@ -1108,11 +1108,11 @@ var __meta__ = { // jshint ignore:line
                         return;
                     }
 
-                    that._select(that._focus(), true);
-
-                    if (!that.popup.visible()) {
-                        that._blur();
-                    }
+                    that._select(that._focus(), true).done(function() {
+                        if (!that.popup.visible()) {
+                            that._blur();
+                        }
+                    });
                 }
 
                 e.preventDefault();
@@ -1705,10 +1705,11 @@ var __meta__ = { // jshint ignore:line
                 indices = [];
             }
 
+            var deferred = $.Deferred().resolve();
             var filtered = that.isFiltered();
 
             if (filtered && !singleSelection && that._deselectFiltered(indices)) {
-                return;
+                return deferred;
             }
 
             if (singleSelection && !filtered && $.inArray(last(indices), selectedIndices) !== -1) {
@@ -1716,7 +1717,7 @@ var __meta__ = { // jshint ignore:line
                     that._dataItems = [that._view[selectedIndices[0]].item];
                 }
 
-                return;
+                return deferred;
             }
 
             result = that._deselect(indices);
@@ -1739,6 +1740,8 @@ var __meta__ = { // jshint ignore:line
                     removed: removed
                 });
             }
+
+            return deferred;
         },
 
         removeAt: function(position) {

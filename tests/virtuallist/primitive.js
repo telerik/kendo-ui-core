@@ -59,6 +59,18 @@
     });
 
     //selection
+    function selectAll(virtual, elements, done) {
+        var item = elements.shift();
+
+        if (!item) {
+            done();
+            return;
+        }
+
+        virtual.select(item).done(function() {
+           selectAll(virtual, elements, done);
+        });
+    }
 
     asyncTest("selecting listItem selects it as a value of the list", 1, function() {
         var virtualList = new VirtualList(container, $.extend(virtualSettings, {
@@ -66,12 +78,11 @@
         }));
 
         asyncDataSource.read().then(function() {
-            start();
-
             var element = virtualList.items().first();
-            virtualList.select(element);
-
-            equal(virtualList.value()[0], "Item 0");
+            virtualList.select(element).done(function() {
+                start();
+                equal(virtualList.value()[0], "Item 0");
+            });
         });
     });
 
@@ -81,18 +92,18 @@
         }));
 
         asyncDataSource.read().then(function() {
-            start();
-
             var elements = [];
+
             elements.push(virtualList.items().eq(1));
             elements.push(virtualList.items().eq(2));
             elements.push(virtualList.items().eq(7));
 
-            for (var i = 0; i < elements.length; i++) {
-                virtualList.select(elements[i]);
-            }
+            var done = function() {
+                start();
+                equal(kendo.stringify(virtualList.value()), kendo.stringify(["Item 1", "Item 2", "Item 7"]));
+            };
 
-            equal(kendo.stringify(virtualList.value()), kendo.stringify(["Item 1", "Item 2", "Item 7"]));
+            selectAll(virtualList, elements, done);
         });
     });
 
@@ -102,14 +113,16 @@
         }));
 
         asyncDataSource.read().then(function() {
-            start();
-
             var element = virtualList.items().first();
-            virtualList.select(element);
-            equal(virtualList.value()[0], "Item 0");
 
-            virtualList.select(element);
-            equal(virtualList.value()[0], "Item 0");
+            virtualList.select(element).done(function() {
+                equal(virtualList.value()[0], "Item 0");
+
+                virtualList.select(element).done(function() {
+                    start();
+                    equal(virtualList.value()[0], "Item 0");
+                });
+            });
         });
     });
 
@@ -119,20 +132,21 @@
         }));
 
         asyncDataSource.read().then(function() {
-            start();
-
             var elements = [];
+            var item2 = virtualList.items().eq(2);
+
             elements.push(virtualList.items().eq(1));
-            elements.push(virtualList.items().eq(2));
+            elements.push(item2);
             elements.push(virtualList.items().eq(7));
 
-            for (var i = 0; i < elements.length; i++) {
-                virtualList.select(elements[i]);
-            }
+            var done = function() {
+                virtualList.select(item2).done(function() {
+                    start();
+                    equal(kendo.stringify(virtualList.value()), kendo.stringify(["Item 1", "Item 7"]));
+                });
+            };
 
-            virtualList.select(elements[1]);
-
-            equal(kendo.stringify(virtualList.value()), kendo.stringify(["Item 1", "Item 7"]));
+            selectAll(virtualList, elements, done);
         });
     });
 
@@ -170,9 +184,10 @@
         }));
 
         asyncDataSource.read().then(function() {
-            start();
-            virtualList.value("Item 9");
-            ok(virtualList.items().eq(9).hasClass(SELECTED), "Item 9 is selected");
+            virtualList.value("Item 9").done(function() {
+                start();
+                ok(virtualList.items().eq(9).hasClass(SELECTED), "Item 9 is selected");
+            });
         });
     });
 
@@ -182,13 +197,12 @@
         }));
 
         asyncDataSource.read().then(function() {
-            start();
-
-            virtualList.value(["Item 1", "Item 5", "Item 6"]);
-
-            ok(virtualList.items().eq(1).hasClass(SELECTED), "Item 1 is selected");
-            ok(virtualList.items().eq(5).hasClass(SELECTED), "Item 5 is selected");
-            ok(virtualList.items().eq(6).hasClass(SELECTED), "Item 6 is selected");
+            virtualList.value(["Item 1", "Item 5", "Item 6"]).done(function() {
+                start();
+                ok(virtualList.items().eq(1).hasClass(SELECTED), "Item 1 is selected");
+                ok(virtualList.items().eq(5).hasClass(SELECTED), "Item 5 is selected");
+                ok(virtualList.items().eq(6).hasClass(SELECTED), "Item 6 is selected");
+            });
         });
     });
 
@@ -226,13 +240,13 @@
         }));
 
         asyncDataSource.read().then(function() {
-            start();
-
             var element = virtualList.items().first();
-            virtualList.select(element);
 
-            equal(virtualList.selectedDataItems().length, 1, "One item is selected");
-            equal(virtualList.selectedDataItems()[0], asyncDataSource.data()[0], "First item is selected");
+            virtualList.select(element).done(function() {
+                start();
+                equal(virtualList.selectedDataItems().length, 1, "One item is selected");
+                equal(virtualList.selectedDataItems()[0], asyncDataSource.data()[0], "First item is selected");
+            });
         });
     });
 
@@ -242,17 +256,18 @@
         }));
 
         asyncDataSource.read().then(function() {
-            start();
-
             var elements = [];
             elements.push(virtualList.items().eq(0));
             elements.push(virtualList.items().eq(1));
             elements.push(virtualList.items().eq(2));
 
-            for (var i = 0; i < elements.length; i++) {
-                virtualList.select(elements[i]);
-                equal(virtualList.selectedDataItems()[i], asyncDataSource.data()[i]);
-            }
+            selectAll(virtualList, elements, function() {
+                start();
+
+                for (var i = 0; i < 3; i++) {
+                    equal(virtualList.selectedDataItems()[i], asyncDataSource.data()[i]);
+                }
+            });
         });
     });
 
@@ -279,13 +294,14 @@
         }));
 
         asyncDataSource.read().then(function() {
-            start();
 
             var element = virtualList.items().eq(0);
-            virtualList.select(element);
+            virtualList.select(element).done(function() {
+                start();
 
-            equal(virtualList.selectedDataItems().length, 1, "First item is removed");
-            equal(virtualList.selectedDataItems()[0], asyncDataSource.data()[7], "Second item is saved");
+                equal(virtualList.selectedDataItems().length, 1, "First item is removed");
+                equal(virtualList.selectedDataItems()[0], asyncDataSource.data()[7], "Second item is saved");
+            });
         });
     });
 
@@ -311,9 +327,8 @@
         }));
 
         asyncDataSource.read().then(function() {
-            start();
-
             virtualList.bind("change", function() {
+                start();
                 equal(virtualList.selectedDataItems().length, 2);
                 equal(virtualList.selectedDataItems()[0], asyncDataSource.data()[0]);
                 equal(virtualList.selectedDataItems()[1], asyncDataSource.data()[1]);
@@ -328,12 +343,11 @@
             value: ["Item 7"],
             selectable: "multiple"
         }));
-        
-        asyncDataSource.read().then(function() {
-            start();
 
+        virtualList.bind("listBound", function() {
             virtualList.bind("change", function() {
                 if (count !== 1) {
+                    start();
                     equal(virtualList.selectedDataItems().length, 2);
                     equal(virtualList.selectedDataItems()[0], asyncDataSource.data()[0]);
                     equal(virtualList.selectedDataItems()[1], asyncDataSource.data()[1]);
@@ -343,6 +357,8 @@
             });
             virtualList.value(["Item 0", "Item 1"]);
         });
+
+        asyncDataSource.read();
     });
 
     asyncTest("not available dataItems are retrieved by the value method", 3, function() {
@@ -353,7 +369,7 @@
             }
         }));
 
-        asyncDataSource.one("change", function() {
+        asyncDataSource.read().done(function() {
             virtualList.bind("change", function() {
                 start();
                 equal(virtualList.selectedDataItems().length, 2);
@@ -362,8 +378,6 @@
             });
             virtualList.value(["Item 7", "Item 256"]);
         });
-        
-        asyncDataSource.read();
     });
 
     asyncTest("not available dataItems are given as null in dataItems collection (initially set items)", 3, function() {
@@ -394,15 +408,16 @@
 
         asyncDataSource.read().then(function() {
             element = virtualList.items().first();
-            virtualList.select(element);
-            ok(element.hasClass(SELECTED));
-            scroll(container, 4 * CONTAINER_HEIGHT);
-            setTimeout(function() {
-                start();
-                scroll(container, 0);
+            virtualList.select(element).done(function() {
+                ok(element.hasClass(SELECTED));
+                scroll(container, 4 * CONTAINER_HEIGHT);
+                setTimeout(function() {
+                    start();
+                    scroll(container, 0);
 
-                ok(element.hasClass(SELECTED), "First item is not selected");
-            }, 300);
+                    ok(element.hasClass(SELECTED), "First item is not selected");
+                }, 300);
+            });
         });
     });
 
@@ -412,13 +427,13 @@
         }));
 
         asyncDataSource.read().then(function() {
-            start();
             var element1 = virtualList.items().eq(1);
             var element2 = virtualList.items().eq(2);
             virtualList.select(element1);
-            virtualList.select(element2);
-
-            equal(virtualList.items().filter("." + SELECTED).length, 1);
+            virtualList.select(element2).done(function() {
+                start();
+                equal(virtualList.items().filter("." + SELECTED).length, 1);
+            });
         });
     });
 
@@ -428,31 +443,13 @@
         }));
 
         asyncDataSource.read().then(function() {
-            start();
-            var element1 = virtualList.items().eq(1);
-            var element2 = virtualList.items().eq(2);
-            virtualList.select(element1);
-            virtualList.select(element2);
+            var elements = [virtualList.items().eq(1), virtualList.items().eq(2)];
 
-            equal(virtualList.value().length, 1);
-            equal(virtualList.value()[0], "Item 2");
-        });
-    });
-
-    asyncTest("previously selected dataItem is removed (single selection)", 2, function() {
-        var virtualList = new VirtualList(container, $.extend(virtualSettings, {
-            selectable: true
-        }));
-
-        asyncDataSource.read().then(function() {
-            start();
-            var element1 = virtualList.items().eq(1);
-            var element2 = virtualList.items().eq(2);
-            virtualList.select(element1);
-            virtualList.select(element2);
-
-            equal(virtualList.selectedDataItems().length, 1);
-            equal(virtualList.selectedDataItems()[0], "Item 2");
+            selectAll(virtualList, elements, function() {
+                start();
+                equal(virtualList.value().length, 1);
+                equal(virtualList.value()[0], "Item 2");
+            });
         });
     });
 
@@ -462,31 +459,15 @@
         }));
 
         asyncDataSource.read().then(function() {
-            start();
             var element = virtualList.items().eq(1);
-            virtualList.select(element);
 
-            ok(element.hasClass(SELECTED));
-            equal(virtualList.value()[0], "Item 1");
-            equal(virtualList.selectedDataItems()[0], "Item 1");
-        });
-    });
+            virtualList.select(element).done(function() {
+                start();
 
-    asyncTest("select method changes the value", 2, function() {
-        var virtualList = new VirtualList(container, $.extend(virtualSettings, {
-            selectable: true
-        }));
-
-        asyncDataSource.read().then(function() {
-            start();
-            var element1 = virtualList.items().eq(1);
-            virtualList.select(element1);
-
-            var element2 = virtualList.items().eq(2);
-            virtualList.select(element2);
-
-            equal(virtualList.value().length, 1);
-            equal(virtualList.value()[0], "Item 2");
+                ok(element.hasClass(SELECTED));
+                equal(virtualList.value()[0], "Item 1");
+                equal(virtualList.selectedDataItems()[0], "Item 1");
+            });
         });
     });
 

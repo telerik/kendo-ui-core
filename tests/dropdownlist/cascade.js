@@ -649,6 +649,7 @@
             dataTextField: "ProductName",
             dataValueField: "ProductID",
             dataSource: {
+                serverFiltering: true,
                 transport: {
                     read: function(options) {
                         setTimeout(function() {

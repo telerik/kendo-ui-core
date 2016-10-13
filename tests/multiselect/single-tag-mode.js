@@ -206,8 +206,8 @@
             keyCode: kendo.keys.BACKSPACE
         });
 
-        var value = select.val();
+        var selectValue = multiselect.element.val() || [];
 
-        equal(value, null);
+        equal(selectValue.length, 0);
     });
 })();

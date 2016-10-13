@@ -168,8 +168,10 @@
 
         multiselect.open();
 
+        var selectValue = multiselect.element.val() || [];
+
         equal(multiselect.value().length, 0);
-        equal(multiselect.element.val(), null);
+        equal(selectValue.length, 0);
     });
 
     test("MultiSelect with autoBind:false binds only once datasource when filter", 1, function() {

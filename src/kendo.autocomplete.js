@@ -388,22 +388,24 @@ var __meta__ = { // jshint ignore:line
 
         _click: function(e) {
             var item = e.item;
-            var element = this.element;
-            var dataItem = this.listView.dataItemByIndex(this.listView.getElementIndex(item));
+            var that = this;
+            var element = that.element;
+            var dataItem = that.listView.dataItemByIndex(that.listView.getElementIndex(item));
 
             e.preventDefault();
 
-            this._active = true;
+            that._active = true;
 
-            if (this.trigger("select", { dataItem: dataItem, item: item })) {
-                this.close();
+            if (that.trigger("select", { dataItem: dataItem, item: item })) {
+                that.close();
                 return;
             }
-            this._oldText = element.val();
-            this._select(item);
-            this._blur();
+            that._oldText = element.val();
+            that._select(item).done(function() {
+                that._blur();
 
-            caret(element, element.val().length);
+                caret(element, element.val().length);
+            });
         },
 
         _clearText: $.noop,
@@ -715,9 +717,11 @@ var __meta__ = { // jshint ignore:line
         },
 
         _select: function(candidate) {
-            this._active = true;
-            this.listView.select(candidate);
-            this._active = false;
+            var that = this;
+            that._active = true;
+            return that.listView.select(candidate).done(function() {
+                that._active = false;
+            });
         },
 
         _loader: function() {

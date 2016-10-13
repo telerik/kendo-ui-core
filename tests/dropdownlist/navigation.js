@@ -596,6 +596,7 @@
 
     test("DropDownList calls focusout of wrapper on TAB", function() {
         var dropdownlist = input.kendoDropDownList({
+            animation: false,
             dataTextField: "text",
             dataValueField: "value",
             dataSource: [
@@ -605,10 +606,11 @@
             filter: "startswith"
         }).data("kendoDropDownList");
 
+
         dropdownlist.wrapper.focus();
         dropdownlist.open();
 
-        dropdownlist.wrapper.focusout(function() {
+        dropdownlist.wrapper.focusout(function(e) {
             ok(true);
         });
 
