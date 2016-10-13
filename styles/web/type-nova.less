@@ -1339,6 +1339,14 @@ input.k-textbox:active {
         background-color: @selected-background;
         border-color: @selected-background;
     }
+
+    .k-button.k-state-disabled,
+    .k-button.k-state-disabled:hover,
+    .k-button.k-state-disabled:active {
+        color: @disabled-text-color;
+        border-color: lighten(@hover-text-color, 20%);
+        background-color: @widget-background-color;
+    }
 }
 
 .k-overflow-container .k-overflow-button,
