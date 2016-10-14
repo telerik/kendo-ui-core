@@ -875,7 +875,7 @@ input.k-checkbox,
 
 .k-checkbox-label,
 .k-radio-label {
-   display: inline-block;
+   //display: inline-block;
    position: relative;
    padding-left: @checkbox-size + (4 * @checkbox-border-width);
    vertical-align: middle;
@@ -900,8 +900,8 @@ input.k-checkbox,
 .k-checkbox:indeterminate + .k-checkbox-label:after {
   content: "";
   position: absolute;
-  left: 50%;
-  top: 50%;
+  left: 8px;
+  top: 8px;
   -webkit-transform: translate(-50%, -50%);
   transform: translate(-50%, -50%);
   border-width: @checkbox-border-width;
@@ -911,7 +911,6 @@ input.k-checkbox,
   font-size: @checkbox-check-size;
   text-align: center;
   content: " ";
-  margin-left: -2px;
 }
 
 .k-checkbox:checked + .k-checkbox-label:before {
