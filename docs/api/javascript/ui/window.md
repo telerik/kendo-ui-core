@@ -551,7 +551,7 @@ Destroys the window and its modal overlay, if necessary. Removes the widget HTML
 
 Indicates whether the window is maximized.
 
-### Returns
+#### Returns
 
 `Boolean`
 
@@ -569,7 +569,7 @@ Indicates whether the window is maximized.
 
 Indicates whether the window is minimized.
 
-### Returns
+#### Returns
 
 `Boolean`
 
