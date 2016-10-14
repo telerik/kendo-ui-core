@@ -946,6 +946,96 @@ Specifies whether to allow nulls.
 ### sheets.rows.cells.validation.messageTemplate `String`
 Defines the *hint* message that will be displayed if value is invalid.
 
+The template is giving an access to the following variables: from{0}, to{1}, fromFormula{2}, toFormula{3}, dataType{4}, type{5} and comparerType{6}.
+
+#### Example - use validation template variables
+```
+<div id="example">
+      <div id="spreadsheet" style="width: 100%;"></div>
+      <script>
+        $(function() {
+          $("#spreadsheet").kendoSpreadsheet({
+            columns: 26,
+            rows: 30,
+            sheetsbar: false,
+            excel: {
+              // Required to enable Excel Export in some browsers
+              proxyURL: "//demos.telerik.com/kendo-ui/service/export"
+            },
+            sheets: [
+              {
+                name: "Validation Template",
+
+                rows: [
+                  {
+                    height: 25,
+                    cells: [
+                      {
+                        value: "15",
+                        validation: {
+                          dataType: "number",
+                          from: "B1",
+                          to:"C1",
+                          allowNulls: true,
+                          comparerType:"between" ,
+                          type: "reject",
+                          titleTemplate: "Number validation error",
+                          messageTemplate: "The number have to be between {0} and {1}"
+                        }
+
+                      },
+                      {
+                        value: "10",
+
+                      },
+                      {
+                        value: "20",
+
+                      },
+
+                    ]
+                  },
+                ],
+                columns: [
+                  {
+                    width: 100
+                  },
+                  {
+                    width: 215
+                  },
+                  {
+                    width: 115
+                  },
+                  {
+                    width: 115
+                  },
+                  {
+                    width: 115
+                  }
+                ]
+              },
+              {
+                name: "ListValues",
+                rows: [ //A1:B1
+                  {
+                    cells: [
+                      {
+                        value: true
+                      },
+                      {
+                        value: false
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          });
+        });
+      </script>
+    </div>
+```
+
 ### sheets.rows.cells.validation.titleTemplate `String`
 Defines the *hint* title that will be displayed if value is invalid.
 
