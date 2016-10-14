@@ -2438,6 +2438,7 @@ The template should contain elements whose `name` HTML attributes are set as the
 which field to update. The other option is to use [MVVM](/framework/mvvm/overview) bindings in order to bind HTML elements to data item fields.
 
 > Use the `role` data attribute to initialize Kendo UI widgets in the template. Check [data attribute initialization](/framework/data-attribute-initialization) for more info.
+> The validation that is set in `schema.model`(/api/javascript/data/datasource#configuration-schema.model) is not mapped automatically. As a result, when you use the `editable.template` option, you have to add the validation for every element manually.
 
 #### Example - customize the popup editor
 
