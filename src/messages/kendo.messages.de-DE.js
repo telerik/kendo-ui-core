@@ -315,6 +315,46 @@ $.extend(true, kendo.ui.FilterMultiCheck.prototype.options.messages,{
   "search": "Suchen"
 });
 }
+  
+  /* Gantt messages */
+
+if (kendo.ui.Gantt) {
+kendo.ui.Gantt.prototype.options.messages =
+$.extend(true, kendo.ui.Gantt.prototype.options.messages,{
+  "actions": {
+    "addChild": "Unteraufgabe hinzufügen",
+    "append": "Aufgabe hinzufügen",
+    "insertAfter": "Unter einfügen",
+    "insertBefore": "Über einfügen",
+    "pdf": "Exportieren als PDF"
+  },
+  "cancel": "Abbrechen",
+  "deleteDependencyWindowTitle": "Beziehung löschen",
+  "deleteTaskWindowTitle": "Aufgabe löschen",
+  "destroy": "Löschen",
+  "editor": {
+    "assingButton": "Zuweisen",
+    "editorTitle": "Aufgabe",
+    "end": "Ende",
+    "percentComplete": "abgeschlossen",
+    "resources": "Ressourcen",
+    "resourcesEditorTitle": "Ressourcen",
+    "resourcesHeader": "Ressourcen",
+    "start": "Start",
+    "title": "Titel",
+    "unitsHeader": "Einheiten"
+  },
+  "save": "Speichern",
+  "views": {
+    "day": "Tag",
+    "end": "Ende",
+    "month": "Monat",
+    "start": "Start",
+    "week": "Woche",
+    "year": "Jahr"
+  }
+});
+}
 
 /* Grid messages */
 
