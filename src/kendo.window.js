@@ -422,7 +422,9 @@ var __meta__ = { // jshint ignore:line
             visible: null,
             height: null,
             width: null,
-            appendTo: "body"
+            appendTo: "body",
+            isMaximized: false,
+            isMinimized: false
         },
 
         _closable: function() {
