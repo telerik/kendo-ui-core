@@ -261,16 +261,29 @@ Refer to the example below for a list of the supported properties.
           [{
             text: "Item 1",
             cssClass: "myClass",                         // Add custom CSS class to the item, optional, added 2012 Q3 SP1.
-            url: "http://www.kendoui.com"                // Link URL if navigation is needed, optional.
+            url: "http://www.kendoui.com",               // Link URL if navigation is needed, optional.
+            attr: {
+              custom: 'value',                            // Add attributes with specified values
+              other: 'value'
+            }
           },
            {
              text: "<b>Item 2</b>",
              encoded: false,                              // Allows use of HTML for item text
-             content: "text"                              // content within an item
+             content: "text",                              // content within an item
+             contentAttr: {
+               style: 'border: 1px solid red; padding: 2px;', // Add attributes to the content container
+               custom: 'value'
+             }
            },
            {
              text: "Item 3",
-             imageUrl: imgUrl, // Item image URL, optional.
+             imageAttr: {																	// Add additional image attributes
+               alt: 'Image',
+               height: '25px',
+               width: '25px'
+             },
+             imageUrl: imgUrl,                            // Item image URL, optional.
              items: [{                                    // Sub item collection
                text: "Sub Item 1"
              },
