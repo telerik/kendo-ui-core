@@ -2810,7 +2810,9 @@ var __meta__ = { // jshint ignore:line
                     var idx, length;
 
                     for (idx = 0, length = arguments.length; idx < length; idx++){
-                        that._accept(arguments[idx]);
+                        if (arguments[idx]) {
+                            that._accept(arguments[idx]);
+                        }
                     }
 
                     that._storeData(true);
