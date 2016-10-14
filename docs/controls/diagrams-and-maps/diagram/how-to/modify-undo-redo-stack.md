@@ -1,19 +1,20 @@
 ---
-title: Modify the Undo-redo Stack
-page_title: Modify the Undo-redo Stack | Kendo UI Diagram
-description: "Learn how to add custom actions to the Undo-redo Stack of the Kendo UI Diagram."
+title: Modify the Undo-Redo Stack
+page_title: Modify the Undo-Redo Stack | Kendo UI Diagram
+description: "Learn how to add custom actions to the undo-redo stack of the Kendo UI Diagram."
 slug: howto_modify_undoredo_stack
 ---
 
-# Add custom actions to the Undo-redo Stack
+# Modify the Undo-Redo Stack
 
-The example below demonstrates how to modify the undo-redo stack of the Diagram widget in order to cover custom interactions like changing the shape's color.
+The example below demonstrates how to add custom actions to the undo-redo stack of the Diagram to cover custom interactions such as changing the color of the shape.
 
 To achieve this behavior, follow the main steps below:
 
-1. Handle the event triggering the change (like the click event of the button in this sample).
-2. Declare a custom Unit class with `init`, `undo` and `redo` methods.
-3. Create an instance of this class and add the applied modification to the `UndoRedoService` of the diagram.
+1. Handle the event that triggers the change. For example, the `click` event of the button in this how-to example.
+2. Declare a custom `Unit` class by using the `init`, `undo`, and `redo` methods.
+3. Create an instance of this class.
+4. Add the applied modification to the `UndoRedoService` of the Diagram.
 
 ###### Example
 
