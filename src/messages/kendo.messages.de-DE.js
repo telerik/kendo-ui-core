@@ -10,11 +10,15 @@ $.extend(true, kendo.ui.FilterCell.prototype.options.operators,{
     "gte": "gleich oder später sind als",
     "lt": "früher sind als",
     "lte": "früher oder gleich sind",
-    "neq": "nicht gleich sind"
+    "neq": "nicht gleich sind",
+    "isnull": "Null sind",
+    "isnotnull": "nicht Null sind"
   },
   "enums": {
     "eq": "gleich sind",
-    "neq": "nicht gleich sind"
+    "neq": "nicht gleich sind",
+    "isnull": "Null sind",
+    "isnotnull": "nicht Null sind"
   },
   "number": {
     "eq": "gleich sind",
@@ -22,15 +26,21 @@ $.extend(true, kendo.ui.FilterCell.prototype.options.operators,{
     "gte": "größer als oder gleich sind",
     "lt": "kleiner sind",
     "lte": "kleiner als oder gleich sind",
-    "neq": "nicht gleich sind"
+    "neq": "nicht gleich sind",
+    "isnull": "Null sind",
+    "isnotnull": "nicht Null sind"
   },
   "string": {
     "contains": "beinhalten",
-    "doesnotcontain": "beinhalten nicht",
+    "doesnotcontain": "nicht beinhalten",
     "endswith": "enden mit",
     "eq": "gleich sind",
     "neq": "nicht gleich sind",
-    "startswith": "beginnen mit"
+    "startswith": "beginnen mit",
+    "isnull": "Null sind",
+    "isnotnull": "nicht Null sind",
+    "isempty": "leer sind",
+    "isnotempty": "nicht leer sind"
   }
 });
 }
@@ -46,11 +56,15 @@ $.extend(true, kendo.ui.FilterMenu.prototype.options.operators,{
         "gte": "gleich oder später sind als",
         "lt": "früher sind als",
         "lte": "früher oder gleich sind",
-        "neq": "nicht gleich sind"
+        "neq": "nicht gleich sind",
+        "isnull": "Null sind",
+        "isnotnull": "nicht Null sind"
     },
     "enums": {
         "eq": "gleich sind",
-        "neq": "nicht gleich sind"
+        "neq": "nicht gleich sind",
+        "isnull": "Null sind",
+        "isnotnull": "nicht Null sind"
     },
     "number": {
         "eq": "gleich sind",
@@ -58,15 +72,21 @@ $.extend(true, kendo.ui.FilterMenu.prototype.options.operators,{
         "gte": "größer als oder gleich sind",
         "lt": "kleiner sind",
         "lte": "kleiner als oder gleich sind",
-        "neq": "nicht gleich sind"
+        "neq": "nicht gleich sind",
+        "isnull": "Null sind",
+        "isnotnull": "nicht Null sind"
     },
     "string": {
         "contains": "beinhalten",
-        "doesnotcontain": "beinhalten nicht",
+        "doesnotcontain": "nicht beinhalten",
         "endswith": "enden mit",
         "eq": "gleich sind",
         "neq": "nicht gleich sind",
-        "startswith": "beginnen mit"
+        "startswith": "beginnen mit",
+        "isnull": "Null sind",
+        "isnotnull": "nicht Null sind",
+        "isempty": "leer sind",
+        "isnotempty": "nicht leer sind"
     }
 });
 }
@@ -79,7 +99,7 @@ $.extend(true, kendo.ui.ColumnMenu.prototype.options.messages,{
   "columns": "Spalten",
   "sortAscending": "Aufsteigend sortieren",
   "sortDescending": "Absteigend sortieren",
-  "settings": "Einstellungen zu Spalten",
+  "settings": "Spalteneinstellungen",
   "done": "Erledigt",
   "lock": "Sperren",
   "unlock": "Entsperren",
@@ -151,7 +171,7 @@ $.extend(true, kendo.ui.Editor.prototype.options.messages,{
   "backColor": "Hintergrundfarbe",
   "bold": "Fett",
   "createLink": "Hyperlink einfügen",
-  "deleteFile": "Sind Sie sicher, dass Sie  \"{0}\" löschen wollen?",
+  "deleteFile": "Sind Sie sicher, dass Sie \"{0}\" löschen wollen?",
   "dialogButtonSeparator": "oder",
   "dialogCancel": "Abbrechen",
   "dialogInsert": "Einfügen",
@@ -169,10 +189,10 @@ $.extend(true, kendo.ui.Editor.prototype.options.messages,{
   "imageHeight": "Höhe (px)",
   "indent": "Einzug vergrößern",
   "insertHtml": "HTML einfügen",
-  "insertImage": "Einfügen Bild",
+  "insertImage": "Bild einfügen",
   "insertOrderedList": "Numerierte Liste",
   "insertUnorderedList": "Aufzählliste",
-  "invalidFileType": "Die ausgewählte Datei  \"{0}\" ist ungültig. Unterstützte Dateitypen sind {1}.",
+  "invalidFileType": "Die ausgewählte Datei \"{0}\" ist ungültig. Unterstützte Dateitypen sind {1}.",
   "italic": "Kursiv",
   "justifyCenter": "Zentriert",
   "justifyFull": "Ausrichten",
@@ -202,7 +222,7 @@ $.extend(true, kendo.ui.Editor.prototype.options.messages,{
   "addRowBelow": "Zeile unterhalb einfügen",
   "deleteColumn": "Spalte löschen",
   "deleteRow": "Zeile löschen",
-  "dropFilesHere": "Dateien hier fallen lassen zum hochladen",
+  "dropFilesHere": "Dateien hierhin ziehen zum Hochladen",
   "formatting": "Format",
   "viewHtml": "View HTML",
   "dialogUpdate": "Aktualisieren",
@@ -229,21 +249,21 @@ $.extend(true, kendo.ui.Editor.prototype.options.messages,{
   "wrapText": "Texthülle",
   "associateCellsWithHeaders": "Zellen mit header verbinden",
   "alignLeft": "Ausrichten links",
-  "alignCenter": "Ausrichten zentrum",
-  "alignRight": "Ausrichten recht",
+  "alignCenter": "Ausrichten zentriert",
+  "alignRight": "Ausrichten rechts",
   "alignLeftTop": "Ausrichten links und oben",
-  "alignCenterTop": "Ausrichten zentrum und oben",
-  "alignRightTop": "Ausrichten recht und oben",
-  "alignLeftMiddle": "Ausrichten links und mittlere",
-  "alignCenterMiddle": "Ausrichten zentrum und mittlere",
-  "alignRightMiddle": "Ausrichten recht und mittlere",
+  "alignCenterTop": "Ausrichten zentriert und oben",
+  "alignRightTop": "Ausrichten rechts und oben",
+  "alignLeftMiddle": "Ausrichten links und mitte",
+  "alignCenterMiddle": "Ausrichten zentriert und mitte",
+  "alignRightMiddle": "Ausrichten rechts und mitte",
   "alignLeftBottom": "Ausrichten links und unten",
-  "alignCenterBottom": "Ausrichten zentrum und unten",
-  "alignRightBottom": "Ausrichten recht und unten",
-  "alignRemove": "Entfernen ausrichtung",
+  "alignCenterBottom": "Ausrichten zentriert und unten",
+  "alignRightBottom": "Ausrichten rechts und unten",
+  "alignRemove": "Ausrichtung entfernen",
   "columns": "Spalten",
   "rows": "Reihen",
-  "selectAllCells": "Wählen alle tabellenzellen"
+  "selectAllCells": "Alle Tabellenzellen auswählen"
 });
 }
 
@@ -259,7 +279,7 @@ var browserMessages = {
   "deleteFile" : 'Sind Sie sicher, dass Sie "{0}" wirklich löschen wollen?',
   "invalidFileType" : "Die ausgewählte Datei \"{0}\" ist ungültig. Unterstützte Dateitypen sind {1}.",
   "overwriteFile" : "Eine Datei namens \"{0}\" existiert bereits im aktuellen Ordner. Überschreiben?",
-  "dropFilesHere" : "Dateien hier verschieben",
+  "dropFilesHere" : "Dateien hierhin ziehen zum Hochladen",
   "search": "Suchen"
 };
 
@@ -312,7 +332,8 @@ $.extend(true, kendo.ui.FilterMultiCheck.prototype.options.messages,{
   "checkAll": "Alle auswählen",
   "clear": "Löschen",
   "filter": "Filtern",
-  "search": "Suchen"
+  "search": "Suchen",
+  "selectedItemsFormat": "{0} Element(e) ausgewählt"
 });
 }
   
@@ -367,8 +388,8 @@ $.extend(true, kendo.ui.Grid.prototype.options.messages,{
     "create": "Neuen Datensatz hinzufügen",
     "destroy": "Löschen",
     "edit": "Bearbeiten",
-    "excel": "Export nach Excel",
-    "pdf": "Export als PDF",
+    "excel": "Exportieren als Excel",
+    "pdf": "Exportieren als PDF",
     "save": "Änderungen speichern",
     "select": "Wähle",
     "update": "Aktualisieren"
@@ -387,7 +408,7 @@ $.extend(true, kendo.ui.Grid.prototype.options.messages,{
 if (kendo.ui.TreeList) {
 kendo.ui.TreeList.prototype.options.messages =
 $.extend(true, kendo.ui.TreeList.prototype.options.messages,{
-    "noRows": "Keine Aufzeichnungen zur Verfügung.",
+    "noRows": "Es sind keine Daten vorhanden",
     "loading": "Lade Daten...",
     "requestFailed": "Laden fehlgeschlagen",
     "retry": "Neu laden",
@@ -396,10 +417,10 @@ $.extend(true, kendo.ui.TreeList.prototype.options.messages,{
         "update": "Aktualisieren",
         "canceledit": "Abbrechen",
         "create": "Neuen Datensatz hinzufügen",
-        "createchild": "Neue abhängige Daten",
+        "createchild": "Neuen untergeordneten Datensatz hinzufügen",
         "destroy": "Löschen",
-        "excel": "Export nach Excel",
-        "pdf": "Export als PDF"
+        "excel": "Exportieren als Excel",
+        "pdf": "Exportieren als PDF"
     }
 });
 }
@@ -428,7 +449,7 @@ $.extend(true, kendo.ui.NumericTextBox.prototype.options,{
 if (kendo.ui.Pager) {
 kendo.ui.Pager.prototype.options.messages =
 $.extend(true, kendo.ui.Pager.prototype.options.messages,{
-  "allPages": "All",
+  "allPages": "Alle",
   "display": "Einträge {0} - {1} von {2}",
   "empty": "keine Daten",
   "first": "Zur ersten Seite",
@@ -443,35 +464,13 @@ $.extend(true, kendo.ui.Pager.prototype.options.messages,{
 });
 }
 
-/* TreeList messages */
-
-if (kendo.ui.TreeList) {
-kendo.ui.TreeList.prototype.options.messages =
-$.extend(true, kendo.ui.TreeList.prototype.options.messages, {
-    noRows: "Es sind keine Daten vorhanden",
-    loading: "Lade Daten...",
-    requestFailed: "Laden fehlgeschlagen",
-    retry: "Neu laden",
-    commands: {
-        edit: "Bearbeiten",
-        update: "Aktualisieren",
-        canceledit: "Abbrechen",
-        create: "Neuen Datensatz hinzufügen",
-        createchild: "Kind-Datensatz hinzufügen",
-        destroy: "Löschen",
-        excel: "Als Excel exportieren",
-        pdf: "Als PDF exportieren"
-    }
-});
-}
-
 /* Upload messages */
 
 if (kendo.ui.Upload) {
 kendo.ui.Upload.prototype.options.localization =
 $.extend(true, kendo.ui.Upload.prototype.options.localization,{
   "cancel": "Beenden",
-  "dropFilesHere": "Dateien hier fallen lassen zum Hochladen",
+  "dropFilesHere": "Dateien hierhin ziehen zum Hochladen",
   "remove": "Löschen",
   "retry": "Wiederholen",
   "select": "Wählen Sie...",
@@ -594,6 +593,7 @@ $.extend(true, kendo.ui.Confirm.prototype.options.localization, {
 }
 
 /* Prompt */
+
 if (kendo.ui.Prompt) {
 kendo.ui.Prompt.prototype.options.messages =
 $.extend(true, kendo.ui.Prompt.prototype.options.localization, {
