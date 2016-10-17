@@ -690,9 +690,9 @@ var __meta__ = { // jshint ignore:line
             if (cursorOffset) {
                coordinates = { left: e.x.location + cursorOffset.left, top: e.y.location + cursorOffset.top };
             } else {
-               that.hintOffset.left += e.x.delta;
-               that.hintOffset.top += e.y.delta;
-               coordinates = $.extend({}, that.hintOffset);
+                that.hintOffset.left += e.x.delta;
+                that.hintOffset.top += e.y.delta;
+                coordinates = $.extend({}, that.hintOffset);
             }
 
             if (boundaries) {
