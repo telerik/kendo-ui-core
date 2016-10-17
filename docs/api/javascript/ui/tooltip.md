@@ -376,6 +376,20 @@ The event on which the Tooltip will be shown. Predefined values are "mouseenter"
         });
       });
     </script>
+    
+#### Example - set multiple events on which the Tooltip will be shown
+
+    <span id="target" title="Tooltip content">
+      Click Me
+    </span>
+
+    <script>
+      $(document).ready(function() {
+        $("#target").kendoTooltip({
+          showOn: "click mouseenter"
+        });
+      });
+    </script>
 
 ## Methods
 
