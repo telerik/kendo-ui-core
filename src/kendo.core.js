@@ -2242,7 +2242,14 @@ function pad(number, digits, end) {
             type = "offset";
         }
 
-        var result = element[type]();
+        var offset = element[type]();
+        // clone ClientRect object to JS object (jQuery3)
+        var result = {
+            top: offset.top,
+            right: offset.right,
+            bottom: offset.bottom,
+            left: offset.left
+        };
 
         if (support.mobileOS.android) {
             // offset() is buggy in Android
