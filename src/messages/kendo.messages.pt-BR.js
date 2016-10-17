@@ -213,7 +213,7 @@ $.extend(true, kendo.ui.FilterCell.prototype.options.operators,{
     "neq": "Não é igual a",
     "isnull": "É nulo",
     "isnotnull": "É não nulo"
-  },
+  }
 });
 }
 
@@ -232,7 +232,7 @@ $.extend(true, kendo.ui.FilterMenu.prototype.options.messages,{
   "selectValue": "-Selecione uma opção-",
   "operator": "Operador",
   "value": "Valor",
-  "cancel": "Cancelar",
+  "cancel": "Cancelar"
 });
 }
 
@@ -278,7 +278,7 @@ $.extend(true, kendo.ui.FilterMenu.prototype.options.operators,{
     "neq": "Não é igual a",
     "isnull": "É nulo",
     "isnotnull": "É não nulo"
-  },
+  }
 });
 }
 
@@ -467,24 +467,24 @@ $.extend(true, kendo.ui.RecurrenceEditor.prototype.options.messages,{
   },
   "daily": {
     "repeatEvery": "Repetir todo: ",
-    "interval": " dia(s)",
+    "interval": " dia(s)"
   },
   "weekly": {
     "interval": "semana(s)",
     "repeatEvery": "Repetir todo: ",
-    "repeatOn": "Repetir em: ",
+    "repeatOn": "Repetir em: "
   },
   "monthly": {
     "repeatEvery": "Repetir todo: ",
     "repeatOn": "Repetir em: ",
     "interval": " mês(es)",
-    "day": "Dia ",
+    "day": "Dia "
   },
   "yearly": {
     "repeatEvery": "Repetir todo: ",
     "repeatOn": "Repetir em: ",
     "interval": " ano(s) ",
-    "of": " de ",
+    "of": " de "
   },
   "end": {
     "label": "Fim:",
@@ -492,14 +492,14 @@ $.extend(true, kendo.ui.RecurrenceEditor.prototype.options.messages,{
     "never": "Nunca",
     "after": "Após ",
     "occurrence": " ocorrência(s)",
-    "on": "Em ",
+    "on": "Em "
   },
   "offsetPositions": {
     "first": "primeiro",
     "second": "segundo",
     "third": "terceiro",
     "fourth": "quarto",
-    "last": "último",
+    "last": "último"
   },
   "weekdays": {
     "day": "dia",
@@ -535,7 +535,7 @@ $.extend(true, kendo.ui.Scheduler.prototype.options.messages,{
     "week": "Semana",
     "workWeek": "Semana de trabalho",
     "agenda": "Agenda",
-    "month": "Mês",
+    "month": "Mês"
   },
   "recurrenceMessages": {
     "deleteWindowTitle": "Excluir Item Recorrente",
@@ -545,7 +545,7 @@ $.extend(true, kendo.ui.Scheduler.prototype.options.messages,{
     "editWindowOccurrence": "Editar ocorrência atual",
     "editWindowSeries": "Editar série",
     "deleteRecurring": "Você deseja excluir apenas este evento ou todas as ocorrências?",
-    "editRecurring": "Você quer editar apenas este evento ou a série inteira?",
+    "editRecurring": "Você quer editar apenas este evento ou a série inteira?"
   },
   "editor": {
     "title": "Título",
@@ -562,8 +562,8 @@ $.extend(true, kendo.ui.Scheduler.prototype.options.messages,{
     "timezoneEditorButton": "Fuso horário",
     "timezoneTitle": "Fuso-horários",
     "noTimezone": "Sem fuso-horário",
-    "editorTitle": "Evento",
-  },
+    "editorTitle": "Evento"
+  }
 });
 }
 
