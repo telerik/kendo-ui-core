@@ -1250,10 +1250,10 @@ The name of the group.
             items: [
                 {
                     type: "buttonGroup",
-                    items: [
+                    buttons: [
                         { type: "button", id: "btn1", text: "Button 1", togglable: true, group: "radio" },
-                        { type: "button", id: "btn1", text: "Button 1", togglable: true, group: "radio", selected: true },
-                        { type: "button", id: "btn1", text: "Button 1", togglable: true, group: "radio" }
+                        { type: "button", id: "btn2", text: "Button 2", togglable: true, group: "radio", selected: true },
+                        { type: "button", id: "btn3", text: "Button 3", togglable: true, group: "radio" }
                     ]
                 }
             ]
