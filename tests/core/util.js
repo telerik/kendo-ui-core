@@ -18,6 +18,14 @@ test("false for undefined", function() {
     ok(!isFunction());
 });
 
+test("outer width return 0 when no element is provided", function() {
+    ok(kendo._outerWidth() === 0);
+});
+
+test("outer height return 0 when no element is provided", function() {
+    ok(kendo._outerHeight() === 0);
+});
+
 var toCamelCase = kendo.toCamelCase;
 
 test("replaces dashes with next letter in upper case", function() {

@@ -1082,6 +1082,8 @@ function pad(number, digits, end) {
     };
 
     kendo._round = round;
+    kendo._outerWidth = function (element) { return $(element).outerWidth() || 0; };
+    kendo._outerHeight = function (element) { return $(element).outerHeight() || 0; };
     kendo.toString = toString;
 })();
 
