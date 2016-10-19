@@ -8,15 +8,17 @@ position: 5
 
 # Modes of Operation
 
-Kendo UI Upload supports two modes of operation: synchronous and asynchronous.
+The Kendo UI Upload widget supports two modes of operation:   
+* [Synchronous](#synchronous-mode)
+* [Asynchronous](#asynchronous-mode)
 
 ## Synchronous Mode
 
-From a developer's perspective, a Kendo UI Upload in a synchronous mode behaves much like a regular file input. The selected files are uploaded upon form submission. Users benefit from the opportunity to select a variable number of files. This feature does not require that the browser supports a multiple file selection.
+A Kendo UI Upload in a synchronous mode behaves much like a regular file input. The selected files are uploaded upon form submission. Users benefit from the opportunity to select a variable number of files. This feature does not require that the browser supports a multiple file selection.
 
 ![](/controls/editors/upload/upload-sync.png)
 
-The Upload is initialized from an existing file input placed in a form.
+The Upload is initialized from an existing file input placed in a form. The array syntax in the input name is used to hint the Upload handler to treat the photos as an array.
 
 ###### Example
 
@@ -30,19 +32,19 @@ The Upload is initialized from an existing file input placed in a form.
         $("#photos").kendoUpload();
     });
 
-Note the array syntax in the input name: it is used to hint the Upload handler to treat the photos as an array.
-
 For detailed information on how to send metadata to the save handler and receive metadata in the Upload widget, see [this article]({% slug metadata_upload_widget %}).
 
 For more information on how to handle the uploaded files, refer to the documentation of your specific server technology.
 
 ## Asynchronous Mode
 
-In this mode Kendo UI Upload requires dedicated server handlers to store and remove uploaded files. Files are uploaded immediately or, optionally, after user confirmation. The upload request is executed out-of-band without interrupting the page flow.
+In this mode, the Kendo UI Upload requires dedicated server handlers to store and remove uploaded files. Files are uploaded immediately or, optionally, after the confirmation from the user. The upload request is executed out-of-band without interrupting the page flow.
 
 ![](/controls/editors/upload/upload-async.png)
 
 The asynchronous mode is implemented using the [HTML5 File API](https://en.wikipedia.org/wiki/HTML5_File_API). The upload will gracefully degrade and continue to function in legacy browsers using a hidden `iframe`.
+
+### Implementation
 
 To implement the asynchronous mode of operation, follow the steps below:
 
@@ -52,7 +54,7 @@ To implement the asynchronous mode of operation, follow the steps below:
 
     <input name="photos[]" id="photos" type="file" />
 
-**Step 2.** Initialize the Upload and configure asynchronous upload end-points.
+**Step 2.** Initialize the Upload and configure the asynchronous upload end-points. The array syntax for the field name is used to hint the upload handler to treat `"photos"` as an array.
 
 ###### Example
 
@@ -64,17 +66,15 @@ To implement the asynchronous mode of operation, follow the steps below:
         }
     });
 
-The array syntax for the field name is used to hint the upload handler to treat `"photos"` as an array.
-
 ### Save Handler
 
-The save handler should accept POST requests. The requests are going to contain one or more files with the same name as the `input`, in this case `"photos[]"`.
+The save handler has to accept POST requests. The requests are going to contain one or more files with the same name as the `input`, in this case `"photos[]"`.
 
 The handler is expected to return either:
 
-*   An empty response to signify success.
-*   A JSON string with `"text/plain"` content encoding. The de-serialized object is available in the `success` event handler.
-*   Any other response to signify failure.
+* An empty response to signify success.
+* A JSON string with `"text/plain"` content encoding. The de-serialized object is available in the `success` event handler.
+* Any other response to signify failure.
 
 ### Remove Handler
 
@@ -82,9 +82,9 @@ The remove handler should accept POST requests, which are configurable via the [
 
 The handler is expected to return either:
 
-*   An empty response to signify success.
-*   A JSON string with `"text/plain"` content encoding. The de-serialized object is available in the [`success`](/api/javascript/ui/upload#events-success) event handler.
-*   Any other response to signify failure.
+* An empty response to signify success.
+* A JSON string with `"text/plain"` content encoding. The de-serialized object is available in the [`success`](/api/javascript/ui/upload#events-success) event handler.
+* Any other response to signify failure.
 
 ### Asynchronous Mode Fallback
 
