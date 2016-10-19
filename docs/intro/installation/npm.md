@@ -39,9 +39,8 @@ npm install --save kendo-ui-core
 The Kendo UI Professional NPM Package, named `kendo`, is hosted on a private Git repository. To access the package, you need an _active subscription_ for Kendo UI or DevCraft.
 
 > **Important**
->
-> The credentials in the URL must be encoded&mdash;for example, `@` becomes `%40`, `#` becomes `%23` etc.
-> Ensure that you have a package.json in the preferred directory for installation. For more information on how to install an NPM package from Git, refer to the [npm install](https://docs.npmjs.com/cli/install) documentation.
+> * The credentials in the URL have to be encoded&mdash;for example, `@` becomes `%40`, `#` becomes `%23`, and so on.
+> * Ensure that you have a `package.json` file in the preferred directory for installation. For more information on how to install an NPM package from Git, refer to the [npm install](https://docs.npmjs.com/cli/install) documentation.
 
 ```sh
 username: johndoe@example.com
@@ -50,7 +49,7 @@ password: johndoe#1
 npm install --save git+https://johndoe%40example.com:johndoe%231@bower.telerik.com/npm-kendo-ui.git
 ```
 
-Optionally, specify a version. The first available is _2016.2.607_ (2016 Q2 SP1).
+Optionally, specify a version. The first available one is _2016.2.607 (2016 Q2 SP1)_.
 
 ## Credentials
 
