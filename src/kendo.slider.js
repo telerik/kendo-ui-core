@@ -14,6 +14,8 @@ var __meta__ = { // jshint ignore:line
     var kendo = window.kendo,
         Widget = kendo.ui.Widget,
         Draggable = kendo.ui.Draggable,
+        outerWidth = kendo._outerWidth,
+        outerHeight = kendo._outerHeight,
         extend = $.extend,
         format = kendo.format,
         parse = kendo.parseFloat,
@@ -61,7 +63,7 @@ var __meta__ = { // jshint ignore:line
             that._isRtl = that._isHorizontal && kendo.support.isRtl(element);
             that._position = that._isHorizontal ? "left" : "bottom";
             that._sizeFn = that._isHorizontal ? "width" : "height";
-            that._outerSize = that._isHorizontal ? "outerWidth" : "outerHeight";
+            that._outerSize = that._isHorizontal ? outerWidth : outerHeight;
 
             options.tooltip.format = options.tooltip.enabled ? options.tooltip.format || "{0}" : "{0}";
 
@@ -968,7 +970,8 @@ var __meta__ = { // jshint ignore:line
                 index = that._valueIndex = math.ceil(round(selectionValue / options.smallStep)),
                 selection = parseInt(that._pixelSteps[index], 10),
                 selectionDiv = that._trackDiv.find(".k-slider-selection"),
-                halfDragHanndle = parseInt(dragHandle[that._outerSize]() / 2, 10),
+
+                halfDragHanndle = parseInt(that._outerSize(dragHandle) / 2, 10),
                 rtlCorrection = that._isRtl ? 2 : 0;
 
             selectionDiv[that._sizeFn](that._isRtl ? that._maxSelection - selection : selection);
@@ -1220,8 +1223,8 @@ var __meta__ = { // jshint ignore:line
                 margin = 8,
                 viewport = $(window),
                 callout = that.tooltipDiv.find(".k-callout"),
-                width = that.tooltipDiv.outerWidth(),
-                height = that.tooltipDiv.outerHeight(),
+                width = outerWidth(that.tooltipDiv),
+                height = outerHeight(that.tooltipDiv),
                 dragHandles, sdhOffset, diff, anchorSize;
 
             if (that.type) {
@@ -1237,28 +1240,28 @@ var __meta__ = { // jshint ignore:line
                     left = sdhOffset.left;
                 }
 
-                anchorSize = dragHandles.eq(0).outerWidth() + 2 * margin;
+                anchorSize = outerWidth(dragHandles.eq(0)) + 2 * margin;
             } else {
                 top = offset.top;
                 left = offset.left;
-                anchorSize = element.outerWidth() + 2 * margin;
+                anchorSize = outerWidth(element) + 2 * margin;
             }
 
             if (owner._isHorizontal) {
-                left -= parseInt((width - element[owner._outerSize]()) / 2, 10);
+                left -= parseInt((width - owner._outerSize(element)) / 2, 10);
                 top -= height + callout.height() + margin;
             } else {
-                top -= parseInt((height - element[owner._outerSize]()) / 2, 10);
+                top -= parseInt((height - owner._outerSize(element)) / 2, 10);
                 left -= width + callout.width() + margin;
             }
 
             if (owner._isHorizontal) {
-                diff = that._flip(top, height, anchorSize, viewport.outerHeight() + that._scrollOffset.top);
+                diff = that._flip(top, height, anchorSize, outerHeight(viewport) + that._scrollOffset.top);
                 top += diff;
-                left += that._fit(left, width, viewport.outerWidth() + that._scrollOffset.left);
+                left += that._fit(left, width, outerWidth(viewport) + that._scrollOffset.left);
             } else {
-                diff = that._flip(left, width, anchorSize, viewport.outerWidth() + that._scrollOffset.left);
-                top += that._fit(top, height, viewport.outerHeight() + that._scrollOffset.top);
+                diff = that._flip(left, width, anchorSize, outerWidth(viewport) + that._scrollOffset.left);
+                top += that._fit(top, height, outerHeight(viewport) + that._scrollOffset.top);
                 left += diff;
             }
 
@@ -1694,7 +1697,7 @@ var __meta__ = { // jshint ignore:line
                 selectionEndIndex = math.ceil(round(selectionEndValue / options.smallStep)),
                 selectionStart = that._pixelSteps[selectionStartIndex],
                 selectionEnd = that._pixelSteps[selectionEndIndex],
-                halfHandle = parseInt(dragHandles.eq(0)[that._outerSize]() / 2, 10),
+                halfHandle = parseInt(that._outerSize(dragHandles.eq(0)) / 2, 10),
                 rtlCorrection = that._isRtl ? 2 : 0;
 
             dragHandles.eq(0).css(that._position, selectionStart - halfHandle - rtlCorrection)

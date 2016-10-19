@@ -61,10 +61,12 @@ var __meta__ = { // jshint ignore:line
 
     function containerBoundaries(container, element) {
         var offset = getOffset(container),
+            outerWidth = kendo._outerWidth,
+            outerHeight = kendo._outerHeight,
             minX = offset.left + numericCssPropery(container, "borderLeftWidth") + numericCssPropery(container, "paddingLeft"),
             minY = offset.top + numericCssPropery(container, "borderTopWidth") + numericCssPropery(container, "paddingTop"),
-            maxX = minX + container.width() - element.outerWidth(true),
-            maxY = minY + container.height() - element.outerHeight(true);
+            maxX = minX + container.width() - outerWidth(element, true),
+            maxY = minY + container.height() - outerHeight(element, true);
 
         return {
             x: { min: minX, max: maxX },

@@ -1637,6 +1637,8 @@ function pad(number, digits, end) {
     function wrap(element, autosize) {
         var browser = support.browser,
             percentage,
+            outerWidth = kendo._outerWidth,
+            outerHeight = kendo._outerHeight,
             isRtl = element.css("direction") == "rtl";
 
         if (!element.parent().hasClass("k-animation-container")) {
@@ -1652,8 +1654,8 @@ function pad(number, digits, end) {
 
             percentage = percentWidth || percentHeight;
 
-            if (!percentWidth && (!autosize || (autosize && width))) { width = element.outerWidth(); }
-            if (!percentHeight && (!autosize || (autosize && height))) { height = element.outerHeight(); }
+            if (!percentWidth && (!autosize || (autosize && width))) { width = outerWidth(element); }
+            if (!percentHeight && (!autosize || (autosize && height))) { height = outerHeight(element); }
 
             element.wrap(
                          $("<div/>")
@@ -1688,8 +1690,8 @@ function pad(number, digits, end) {
 
             if (!percentage) {
                 wrapper.css({
-                    width: element.outerWidth(),
-                    height: element.outerHeight(),
+                    width: outerWidth(element),
+                    height: outerHeight(element),
                     boxSizing: "content-box",
                     mozBoxSizing: "content-box",
                     webkitBoxSizing: "content-box"

@@ -625,7 +625,7 @@ var __meta__ = { // jshint ignore:line
                         if (!ul.find(".k-menu-group")[0] && ul.children(".k-item").length > 1) {
                             var windowHeight = $(window).height(),
                                 setScrolling = function(){
-                                    ul.css({maxHeight: windowHeight - (ul.outerHeight() - ul.height()) - kendo.getShadows(ul).bottom, overflow: "auto"});
+                                    ul.css({maxHeight: windowHeight - (kendo._outerHeight(ul) - ul.height()) - kendo.getShadows(ul).bottom, overflow: "auto"});
                                 };
 
                             if (kendo.support.browser.msie && kendo.support.browser.version <= 7) {

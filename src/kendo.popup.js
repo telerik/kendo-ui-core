@@ -16,6 +16,8 @@ var __meta__ = { // jshint ignore:line
         Widget = ui.Widget,
         support = kendo.support,
         getOffset = kendo.getOffset,
+        outerWidth = kendo._outerWidth,
+        outerHeight = kendo._outerHeight,
         OPEN = "open",
         CLOSE = "close",
         DEACTIVATE = "deactivate",
@@ -573,27 +575,27 @@ var __meta__ = { // jshint ignore:line
                 adjustSize = options.adjustSize;
 
             if (collisions[0] === "fit") {
-                location.top += that._fit(offsets.top, wrapper.outerHeight() + adjustSize.height, viewportHeight / zoomLevel);
+                location.top += that._fit(offsets.top, outerHeight(wrapper) + adjustSize.height, viewportHeight / zoomLevel);
             }
 
             if (collisions[1] === "fit") {
-                location.left += that._fit(offsets.left, wrapper.outerWidth() + adjustSize.width, viewportWidth / zoomLevel);
+                location.left += that._fit(offsets.left, outerWidth(wrapper) + adjustSize.width, viewportWidth / zoomLevel);
             }
 
             var flipPos = extend({}, location);
-            var elementHeight = element.outerHeight();
-            var wrapperHeight =  wrapper.outerHeight();
+            var elementHeight = outerHeight(element);
+            var wrapperHeight =  outerHeight(wrapper);
 
             if (!wrapper.height() && elementHeight) {
                 wrapperHeight = wrapperHeight + elementHeight;
             }
 
             if (collisions[0] === "flip") {
-                location.top += that._flip(offsets.top, elementHeight, anchor.outerHeight(), viewportHeight / zoomLevel, origins[0], positions[0], wrapperHeight);
+                location.top += that._flip(offsets.top, elementHeight, outerHeight(anchor), viewportHeight / zoomLevel, origins[0], positions[0], wrapperHeight);
             }
 
             if (collisions[1] === "flip") {
-                location.left += that._flip(offsets.left, element.outerWidth(), anchor.outerWidth(), viewportWidth / zoomLevel, origins[1], positions[1], wrapper.outerWidth());
+                location.left += that._flip(offsets.left, outerWidth(element), outerWidth(anchor), viewportWidth / zoomLevel, origins[1], positions[1], outerWidth(wrapper));
             }
 
             element.css(POSITION, ABSOLUTE);
@@ -613,10 +615,10 @@ var __meta__ = { // jshint ignore:line
                 anchorOffset = getOffset(anchor),
                 appendTo = $(that.options.appendTo),
                 appendToOffset,
-                width = element.outerWidth(),
-                height = element.outerHeight(),
-                anchorWidth = anchor.outerWidth(),
-                anchorHeight = anchor.outerHeight(),
+                width = outerWidth(element),
+                height = outerHeight(element),
+                anchorWidth = outerWidth(anchor),
+                anchorHeight = outerHeight(anchor),
                 top = anchorOffset.top,
                 left = anchorOffset.left,
                 round = Math.round;

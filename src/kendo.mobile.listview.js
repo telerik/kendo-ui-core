@@ -15,6 +15,7 @@ var __meta__ = { // jshint ignore:line
         Node = window.Node,
         mobile = kendo.mobile,
         ui = mobile.ui,
+        outerHeight = kendo._outerHeight,
         DataSource = kendo.data.DataSource,
         Widget = ui.DataBoundWidget,
         ITEM_SELECTOR = ".km-list > li, > li:not(.km-group-container)",
@@ -512,7 +513,7 @@ var __meta__ = { // jshint ignore:line
 
         enable: function() {
             this.element.show();
-            this.height = this.element.outerHeight(true);
+            this.height = outerHeight(this.element, true);
         },
 
         disable: function() {
@@ -547,7 +548,7 @@ var __meta__ = { // jshint ignore:line
                 loadMore._showLoadButton();
             });
 
-            this.height = this.element.outerHeight(true);
+            this.height = outerHeight(this.element, true);
             this.disable();
         },
 
@@ -568,7 +569,7 @@ var __meta__ = { // jshint ignore:line
         init: function(listView) {
             var binder = this;
 
-            this.chromeHeight = listView.wrapper.children().not(listView.element).outerHeight() || 0;
+            this.chromeHeight = outerHeight(listView.wrapper.children().not(listView.element));
             this.listView = listView;
             this.scroller = listView.scroller();
             this.options = listView.options;
