@@ -176,15 +176,7 @@ Defines the text of the labels that are shown within the editor. Used primarily 
         formatting: "Format",
         style: "Styles",
         viewHtml: "View HTML",
-        emptyFolder: "Empty Folder",
-        uploadFile: "Upload",
-        orderBy: "Arrange by:",
-        orderBySize: "Size",
-        orderByName: "Name",
-        invalidFileType: "The selected file \"{0}\" is not valid. Supported file types are {1}.",
-        deleteFile: "Are you sure you want to delete \"{0}\"?",
         overwriteFile: "A file with name \"{0}\" already exists in the current directory. Do you want to overwrite it?",
-        directoryNotFound: "A directory with this name was not found.",
         imageWebAddress: "Web address",
         imageAltText: "Alternate text",
         fileWebAddress: "Web address",
@@ -780,21 +772,6 @@ The title of the tool that deletes selected table columns.
     });
     </script>
 
-### messages.deleteFile `String` *(default: 'Are you sure you want to delete "{0}"?')*
-
-The confirmation message shown when deleting files in the file- or imageBrowser.
-
-#### Example
-
-    <textarea id="editor"></textarea>
-    <script>
-    $("#editor").kendoEditor({
-      messages: {
-        deleteFile: 'Are you sure you want to delete "{0}"?'
-      }
-    });
-    </script>
-
 ### messages.deleteRow `String` *(default: "Delete row")*
 
 The title of the tool that deletes selected table rows.
@@ -870,21 +847,6 @@ The label of the update button in all editor dialogs.
     });
     </script>
 
-### messages.directoryNotFound `String` *(default: "A directory with this name was not found.")*
-
-The error message shown when the target directory is not found in the file- or imageBrowser.
-
-#### Example
-
-    <textarea id="editor"></textarea>
-    <script>
-    $("#editor").kendoEditor({
-      messages: {
-        directoryNotFound: "A directory with this name was not found."
-      }
-    });
-    </script>
-
 ### messages.editAreaTitle `String` *(default: "Editable area. Press F10 for toolbar.")*
 
 The title of the iframe editing area when a sandboxed editor is used. Used as a hint for screen readers.
@@ -896,21 +858,6 @@ The title of the iframe editing area when a sandboxed editor is used. Used as a 
     $("#editor").kendoEditor({
       messages: {
         editAreaTitle: "Write your comments here. Press F10 for toolbar."
-      }
-    });
-    </script>
-
-### messages.emptyFolder `String` *(default: "Empty Folder")*
-
-The message shown in the file- or imageBrowser when a folder is empty.
-
-#### Example
-
-    <textarea id="editor"></textarea>
-    <script>
-    $("#editor").kendoEditor({
-      messages: {
-        emptyFolder: "Empty Folder"
       }
     });
     </script>
@@ -1230,21 +1177,6 @@ The title of the tool that inserts an unordered list.
     });
     </script>
 
-### messages.invalidFileType `String` *(default: 'The selected file "{0}" is not valid. Supported file types are {1}.')*
-
-The error message shown when an invalid file type has been selected in the file- or imageBrowser.
-
-#### Example
-
-    <textarea id="editor"></textarea>
-    <script>
-    $("#editor").kendoEditor({
-      messages: {
-        invalidFileType: 'The selected file "{0}" is not valid. Supported file types are {1}.'
-      }
-    });
-    </script>
-
 ### messages.italic `String` *(default: "Italic")*
 
 The title of the tool that makes text italicized.
@@ -1380,51 +1312,6 @@ The caption for the URL in the createLink dialog.
     });
     </script>
 
-### messages.orderBy `String` *(default: "Arrange by:")*
-
-The caption of the sorting order in the file- or imageBrowser.
-
-#### Example
-
-    <textarea id="editor"></textarea>
-    <script>
-    $("#editor").kendoEditor({
-      messages: {
-        orderBy: "Arrange by:"
-      }
-    });
-    </script>
-
-### messages.orderByName `String` *(default: "Name")*
-
-The sorting order by name in the file- or imageBrowser.
-
-#### Example
-
-    <textarea id="editor"></textarea>
-    <script>
-    $("#editor").kendoEditor({
-      messages: {
-        orderByName: "Name"
-      }
-    });
-    </script>
-
-### messages.orderBySize `String` *(default: "Size")*
-
-The sorting order by size in the file- or imageBrowser.
-
-#### Example
-
-    <textarea id="editor"></textarea>
-    <script>
-    $("#editor").kendoEditor({
-      messages: {
-        orderBySize: "Size"
-      }
-    });
-    </script>
-
 ### messages.outdent `String` *(default: "Outdent")*
 
 The title of the tool that outdents the content.
@@ -1436,21 +1323,6 @@ The title of the tool that outdents the content.
     $("#editor").kendoEditor({
       messages: {
         outdent: "Outdent"
-      }
-    });
-    </script>
-
-### messages.overwriteFile `String` *(default: 'A file with name "{0}" already exists in the current directory. Do you want to overwrite it?')*
-
-The confirmation message shown when overwriting files in the file- or imageBrowser.
-
-#### Example
-
-    <textarea id="editor"></textarea>
-    <script>
-    $("#editor").kendoEditor({
-      messages: {
-        overwriteFile: 'A file with name "{0}" already exists in the current directory. Do you want to overwrite it?'
       }
     });
     </script>
@@ -1616,21 +1488,6 @@ The title of the tool that removes hyperlinks.
     $("#editor").kendoEditor({
       messages: {
         unlink: "Remove hyperlink"
-      }
-    });
-    </script>
-
-### messages.uploadFile `String` *(default: "Upload")*
-
-The caption of the upload button in the file- or imageBrowser.
-
-#### Example
-
-    <textarea id="editor"></textarea>
-    <script>
-    $("#editor").kendoEditor({
-      messages: {
-        uploadFile: "Upload"
       }
     });
     </script>
