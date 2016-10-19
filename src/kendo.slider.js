@@ -571,7 +571,9 @@ var __meta__ = { // jshint ignore:line
             buttonCssClass = isHorizontal ? "k-i-arrow-w" : "k-i-arrow-s";
         }
 
-        return "<a class='k-button k-button-" + type + "' aria-label='" + options[type + "ButtonTitle"] + "'>" +
+        return "<a class='k-button k-button-" + type + "' " +
+                "title='" + options[type + "ButtonTitle"] + "' " +
+                "aria-label='" + options[type + "ButtonTitle"] + "'>" +
                 "<span class='k-icon " + buttonCssClass + "'></span></a>";
     }
 
