@@ -270,7 +270,7 @@ var __meta__ = { // jshint ignore:line
                 this.listView.setDSFilter(expression);
             }
 
-            var options = extend({}, {
+            var dataSourceState = extend({}, {
                 page: dataSource.page(),
                 pageSize: clearFilter ? dataSource.options.pageSize : dataSource.pageSize(),
                 sort: dataSource.sort(),
@@ -279,7 +279,7 @@ var __meta__ = { // jshint ignore:line
                 aggregate: dataSource.aggregate()
             }, { filter: expression });
 
-            dataSource[force ? "read" : "query"](dataSource._mergeState(options));
+            dataSource[force ? "read" : "query"](dataSource._mergeState(dataSourceState));
         },
 
         _angularElement: function(element, action) {
