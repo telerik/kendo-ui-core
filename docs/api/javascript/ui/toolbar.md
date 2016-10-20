@@ -1085,7 +1085,7 @@ Specifies the toggle event handler of the button. Applicable only for commands o
 
 Specifies the command type. Supported types are "button", "splitButton", "buttonGroup", "separator".
 
-> Specifying the type is **mandatory**. Only commands that have a `template` does not need `type`.
+> Specifying the type is **mandatory**. Only commands that have a `template` do not need a `type`.
 
 #### Example
 
