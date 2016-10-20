@@ -14,6 +14,7 @@ var __meta__ = { // jshint ignore:line
 (function($, undefined) {
     var kendo = window.kendo,
         ui = kendo.mobile.ui,
+        outerWidth = kendo._outerWidth,
         Widget = ui.Widget,
         support = kendo.support,
         CHANGE = "change",
