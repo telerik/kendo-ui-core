@@ -17,6 +17,7 @@ var __meta__ = { // jshint ignore:line
         proxy = $.proxy,
         isFunction = kendo.isFunction,
         keys = kendo.keys,
+        outerWidth = kendo._outerWidth,
 
         TOOLBAR = "k-toolbar",
         BUTTON = "k-button",
@@ -759,13 +760,13 @@ var __meta__ = { // jshint ignore:line
 
         function adjustPopupWidth() {
             var anchor = this.options.anchor,
-                computedWidth = anchor.outerWidth(),
+                computedWidth = outerWidth(anchor),
                 width;
 
             kendo.wrap(this.element).addClass("k-split-wrapper");
 
             if (this.element.css("box-sizing") !== "border-box") {
-                width = computedWidth - (this.element.outerWidth() - this.element.width());
+                width = computedWidth - (outerWidth(this.element) - this.element.width());
             } else {
                 width = computedWidth;
             }
@@ -1202,7 +1203,7 @@ var __meta__ = { // jshint ignore:line
                             .addClass("k-overflow-wrapper");
 
                         if (!that.isMobile) {
-                            wrapper.css("margin-left", (isRtl ? -1 : 1) * ((wrapper.outerWidth() - wrapper.width()) / 2 + 1));
+                            wrapper.css("margin-left", (isRtl ? -1 : 1) * ((outerWidth(wrapper) - wrapper.width()) / 2 + 1));
                         } else {
                             that.popup.container.css("max-height", (parseFloat($(".km-content:visible").innerHeight()) - 15) + "px");
                         }
@@ -1482,7 +1483,7 @@ var __meta__ = { // jshint ignore:line
                 var childrenWidth = 0;
 
                 this.element.children(":visible:not('." + STATE_HIDDEN + "')").each(function() {
-                    childrenWidth += $(this).outerWidth(true);
+                    childrenWidth += outerWidth($(this), true);
                 });
 
                 return Math.ceil(childrenWidth);
@@ -1532,7 +1533,7 @@ var __meta__ = { // jshint ignore:line
             },
 
             _showItem: function(item, containerWidth) {
-                if (item.length && containerWidth > this._childrenWidth() + item.outerWidth(true)) {
+                if (item.length && containerWidth > this._childrenWidth() + outerWidth(item, true)) {
                     item.show();
                     if (this.popup) {
                         this.popup.container
