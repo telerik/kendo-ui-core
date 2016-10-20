@@ -5057,6 +5057,10 @@ Contains two placeholders - "{0}" and "{1}" which represent the start and end da
     });
     </script>
 
+### views.selectedShortDateFormat `String`
+
+The format used to display the selected date when viewport is narrow, and the date is displayed in short ("d") format by default. Uses [kendo.format](/api/javascript/kendo#methods-format).
+
 ### views.showWorkHours `Boolean` *(default: false)*
 
 If set to true the view will be initially shown in business hours mode. By default view is displayed in full day mode.
