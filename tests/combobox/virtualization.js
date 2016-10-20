@@ -185,7 +185,6 @@
             combobox.select(1).done(function() {
                 combobox.close();
 
-                combobox.search("1");
                 combobox.one("dataBound", function() {
                     combobox.bind("dataBound", function() {
                         if (combobox.dataSource.page() > 1) { //wait until the binding is done
@@ -199,9 +198,11 @@
 
                     //select "Item 111"
                     combobox.select(2).done(function() {
-                        combobox.dataSource.filter([]);
+                        combobox._filterSource();
                     });
                 });
+
+                combobox.search("1");
             });
         });
     });
@@ -437,7 +438,6 @@
             combobox.one("dataBound", function() {
                 start();
 
-                debugger;
                 combobox.value("");
 
                 equal(combobox.dataSource.filter().filters.length, 0);
