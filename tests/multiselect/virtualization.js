@@ -306,7 +306,9 @@
         multiselect.value(10);
     });
 
-    asyncTest("request only pages related to the values after filter reset", 6, function() {
+    test("request only pages related to the values after filter reset", 5, function() {
+        jasmine.clock().install();
+
         var callsAfterFilter = [];
         var transport = {
             read: function(options) {
@@ -345,21 +347,21 @@
                 multiselect.open();
             });
 
-            multiselect.search("Item 400");
+            multiselect.search("Item 200");
         });
 
         //start binding
         multiselect.value([20, 100]);
 
-        setTimeout(function() {
-            start();
-            equal(callsAfterFilter.length, 4);
-            equal(callsAfterFilter[0].pageSize, multiselect.dataSource.options.pageSize);
-            equal(callsAfterFilter[0].skip, 0);
-            equal(callsAfterFilter[1].skip, 80);
-            equal(callsAfterFilter[2].skip, 200);
-            equal(callsAfterFilter[3].skip, 160);
-        }, 300);
+        jasmine.clock().tick(300);
+
+        equal(callsAfterFilter.length, 3);
+        equal(callsAfterFilter[0].pageSize, multiselect.dataSource.options.pageSize);
+        equal(callsAfterFilter[0].skip, 0);
+        equal(callsAfterFilter[1].skip, 80);
+        equal(callsAfterFilter[2].skip, 200);
+
+        jasmine.clock().uninstall();
     });
 
 })();
