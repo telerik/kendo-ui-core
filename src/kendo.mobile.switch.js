@@ -80,7 +80,7 @@ var __meta__ = { // jshint ignore:line
 
         refresh: function() {
             var that = this,
-                handleWidth = that.handle.outerWidth(true);
+                handleWidth = outerWidth(that.handle, true);
 
             that.width = that.wrapper.width();
 
@@ -165,7 +165,7 @@ var __meta__ = { // jshint ignore:line
         _move: function(e) {
             var that = this;
             e.preventDefault();
-            that._position(limitValue(that.position + e.x.delta, 0, that.width - that.handle.outerWidth(true)));
+            that._position(limitValue(that.position + e.x.delta, 0, that.width - outerWidth(that.handle, true)));
         },
 
         _position: function(position) {
