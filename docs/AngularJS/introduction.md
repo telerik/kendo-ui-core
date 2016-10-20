@@ -402,6 +402,51 @@ The Grid, TreeView, and ListView widgets will evaluate handlers defined with `k-
 
 The `kendoEvent` is available as well.
 
+The following example demonstrates how some of these local variables can be used:
+
+###### Example
+
+```html
+    <div id="example" ng-app="KendoDemos">
+      <div ng-controller="MyCtrl">
+        <kendo-grid options="mainGridOptions" k-on-change="onChange({ selected: selected },data,dataItem,angularDataItem)">
+        </kendo-grid>
+      </div>
+    </div>
+    <script>
+      angular.module("KendoDemos", [ "kendo.directives" ])
+        .controller("MyCtrl", function($scope){
+        $scope.onChange = function(selected,data,dataIteam,angularDataItem) {
+          console.log("Selected: "+ selected.selected,data,dataIteam,angularDataItem);
+          console.log("data: ", data);
+          console.log("dataIteam: ", dataIteam);
+          console.log("angularDataItem: ", angularDataItem);                    
+        }
+        $scope.mainGridOptions = {
+          dataSource: {
+            type: "odata",
+            transport: {
+              read: "http://demos.telerik.com/kendo-ui/service/Northwind.svc/Employees"
+            },
+            pageSize: 5,
+            serverPaging: true,
+            serverSorting: true
+          },
+          selectable:true,
+          columns: [{
+            field: "FirstName",
+            title: "First Name",
+            width: "120px"
+          },{
+            field: "LastName",
+            title: "Last Name",
+            width: "120px"
+          }]
+        };
+      })
+    </script>
+```
+
 ### Widget Update upon Option Changes
 
 You can update a widget from `controller`. Use the special `k-rebind` attribute to create a widget which automatically updates when some scope variable changes. This option will destroy the original widget and will recreate it using the changed options.
