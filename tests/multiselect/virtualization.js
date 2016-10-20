@@ -340,17 +340,17 @@
             }
         });
 
-        //simulate filter and rebind
-        multiselect.one("dataBound", function() {
-            multiselect.one("dataBound", function() {
-                multiselect.ul.children().last().click();
-                multiselect.open();
-            });
+        var filterDataBound = function() {
+            multiselect.one("change", multiselect.open);
+            multiselect.ul.children().last().click();
+        };
 
+        var initialBinding = function() {
+            multiselect.one("dataBound", filterDataBound);
             multiselect.search("Item 200");
-        });
+        };
 
-        //start binding
+        multiselect.one("dataBound", initialBinding);
         multiselect.value([20, 100]);
 
         jasmine.clock().tick(300);
