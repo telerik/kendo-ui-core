@@ -1043,10 +1043,9 @@ Defines the *hint* title that will be displayed if value is invalid.
 The vertical align setting for the cell content.
 
 Available options are:
-* left
+* top
 * center
-* right
-* justify
+* bottom
 
 ### sheets.rows.cells.wrap `Boolean`
 Will wrap the cell content if set to `true`.
