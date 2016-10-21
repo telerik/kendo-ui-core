@@ -626,7 +626,7 @@
                     var object = that._object(dom);
                     var options = object && object.options;
 
-                    return options && options.modal && options.visible && dom.is(VISIBLE);
+                    return options && options.modal && that.options.appendTo == options.appendTo && options.visible && dom.is(VISIBLE);
                 }).sort(function(a, b) {
                     return +$(a).css("zIndex") - +$(b).css("zIndex");
                 });
@@ -760,6 +760,7 @@
                 maxHeight: Infinity,
                 content: null,
                 visible: null,
+                appendTo: BODY,
                 closable: true
             }
         });
