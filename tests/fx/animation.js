@@ -49,6 +49,8 @@
     });
 
     test("kendoStop calls callback", 1, function() {
+        jasmine.clock().install();
+
         var span = kendo.jQuery("<span />");
 
         span.kendoAnimate({
@@ -60,6 +62,9 @@
         });
 
         span.kendoStop(true, true);
+
+        jasmine.clock().tick();
+        jasmine.clock().uninstall();
     });
 
     asyncTest("animate waits all effects to finish", function() {
