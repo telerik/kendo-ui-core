@@ -756,6 +756,8 @@ test("read returns promise", function() {
 });
 
 test("read resolves promise upon success", function() {
+    jasmine.clock().install();
+
     var deferred = $.Deferred();
     var dataSource = new DataSource({
         transport: {
@@ -772,16 +774,23 @@ test("read resolves promise upon success", function() {
 
     deferred.resolve();
 
+    jasmine.clock().tick();
+
     equal(readPromise.state(), "resolved");
+
+    jasmine.clock().uninstall();
 });
 
 test("read resolves promise after data was processed", function() {
+    jasmine.clock().install();
+
     var deferred = $.Deferred();
     var dataSource = new DataSource({
         transport: {
             read: function(options) {
                 deferred.then(function() {
                     options.success([ { id: 1 } ]);
+                    jasmine.clock().tick();
                 });
             }
         }
@@ -793,9 +802,14 @@ test("read resolves promise after data was processed", function() {
         });
 
     deferred.resolve();
+
+    jasmine.clock().tick();
+    jasmine.clock().uninstall();
 });
 
 test("read rejects promise upon error", function() {
+    jasmine.clock().install();
+
     var deferred = $.Deferred();
     var dataSource = new DataSource({
         transport: {
@@ -812,7 +826,11 @@ test("read rejects promise upon error", function() {
 
     deferred.resolve();
 
+    jasmine.clock().tick();
+
     equal(readPromise.state(), "rejected");
+
+    jasmine.clock().uninstall();
 });
 
 test("read rejects promise with error arguments", function() {
@@ -832,6 +850,8 @@ test("read rejects promise with error arguments", function() {
 });
 
 test("read resolves promise when requestStart is prevented", 1, function() {
+    jasmine.clock().install();
+
     var dataSource = new DataSource({
         transport: {
             read: function(options) {
@@ -847,6 +867,9 @@ test("read resolves promise when requestStart is prevented", 1, function() {
         .then(function() {
             ok(true);
         });
+
+    jasmine.clock().tick();
+    jasmine.clock().uninstall();
 });
 
 }());

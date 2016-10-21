@@ -1,8 +1,12 @@
 (function() {
 
     module("offline support", {
+        setup: function() {
+            jasmine.clock().install();
+        },
         teardown: function() {
-            localStorage.removeItem("key")
+            localStorage.removeItem("key");
+            jasmine.clock().uninstall();
         }
     });
 
@@ -48,6 +52,8 @@
         dataSource.read();
         dataSource.at(0).set("foo", "bar");
         dataSource.sync();
+        jasmine.clock().tick();
+
         dataSource.online(false);
         dataSource.read();
 
@@ -409,8 +415,8 @@
         dataSource.online(false);
         dataSource.get(1).set("foo", "bar");
         dataSource.sync();
-
         dataSource.online(true);
+        jasmine.clock().tick();
 
         equal(dataSource.get(1).foo, "baz");
     });
@@ -438,6 +444,7 @@
         dataSource.get(1).set("foo", "bar");
         dataSource.sync();
         dataSource.online(true);
+        jasmine.clock().tick();
 
         equal(dataSource.get(1).foo, "baz");
     });
@@ -653,6 +660,9 @@
         dataSource.read();
         dataSource.remove(dataSource.at(0));
         dataSource.sync();
+
+        jasmine.clock().tick();
+
         dataSource.cancelChanges();
 
         equal(dataSource.data().length, 0);
@@ -803,6 +813,8 @@
             .then(function() {
                 ok(true);
             });
+
+        jasmine.clock().tick();
     });
 
     test("read empty offline datasource does not add phantom item", function() {
