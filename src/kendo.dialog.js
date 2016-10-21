@@ -265,7 +265,8 @@
                 });
             },
 
-            _closeClick: function() {
+            _closeClick: function(e) {
+                e.preventDefault();
                 this.close();
             },
 
