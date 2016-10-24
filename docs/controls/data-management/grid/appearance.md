@@ -225,6 +225,8 @@ If the total number of items is large and the scrolling is fast, the table of th
 
 * Programmatic scrolling to a particular Grid row is not supported when virtual scrolling is enabled, because it is not possible to reliably predict the exact scroll offset of the row.
 
+* Keyboard navigation supports only up and down arrow keys when the Grid is `navigatable`. Page Up and Page Down keys scrolling is not supported.
+
 * The Grid does not persist [selection](#selection) when virtual scrolling occurs. To achieve this behavior, [use this custom implementation]({% slug howto_persist_row_selection_paging_sorting_filtering_grid %}).
 
 When virtual scrolling is not supported or recommended, revert to standard paging or non-virtual scrolling without paging, depending on the number of data items.
