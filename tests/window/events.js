@@ -421,4 +421,38 @@
 
         ok(handler.calls);
     });
+
+    test("preventing resizeStart stops resizing", function() {
+        var handler = spy();
+        var dialog = createWindow({
+            resizeStart: function(e){
+                e.preventDefault();
+            },            
+            resizeEnd: handler,
+            resize: handler
+        });
+
+        dialog.resizing.dragstart();
+        dialog.resizing.drag();
+        dialog.resizing.dragend();
+        
+        ok(!dialog.resizing.initialPosition);
+        ok(!handler.calls);
+    });
+
+    test("preventing dragstart stops dragging", function() {
+        var handler = spy();
+        var dialog = createWindow({
+            dragstart: function(e){
+                e.preventDefault();
+            },            
+            dragend: handler
+        });
+
+        dialog.dragging.dragstart();
+        dialog.dragging.dragend();
+        
+        ok(!dialog.initialWindowPosition);
+        ok(!handler.calls);
+    });            
 })();
