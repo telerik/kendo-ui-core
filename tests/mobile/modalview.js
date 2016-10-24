@@ -10,6 +10,7 @@
             kendo.effects.disable();
             root = $("<div />").appendTo($('#qunit-fixture'));
             location.hash = '';
+            jasmine.clock().install();
             // kendo.mobile.ui.Shim.fn.options.duration = 0;
             root.html('<div data-role="view">\
                 <a id="source" data-role="button" href="#modalView" data-rel="modalview">Foo</a>\
@@ -18,6 +19,7 @@
                 Hello world!\
                 </div>');
             app = new kendo.mobile.Application(root);
+            jasmine.clock().tick();
             element = root.find("[data-role=modalview]");
             source = root.find("#source");
             modalView = element.data("kendoMobileModalView");
@@ -27,6 +29,7 @@
             kendo.effects.enable();
             app.destroy();
             kendo.history.stop();
+            jasmine.clock().uninstall();
         }
     });
 
@@ -106,11 +109,13 @@
 
     module("ModalView remote loading", {
         setup: function() {
+            jasmine.clock().install();
             location.hash = "";
             kendo.mobile.ui.Shim.fn.options.duration = 0;
             root = $("<div />").appendTo($('#qunit-fixture'));
             root.html('<div data-role="view"><a data-role="button" href="/page2.html">page2</a></div>');
             app = new kendo.mobile.Application(root);
+            jasmine.clock().tick();
         },
 
         teardown: function() {
@@ -118,6 +123,7 @@
             kendo.history.stop();
             location.hash = "";
             $.mockjax.clear();
+            jasmine.clock().uninstall();
         }
     });
 
@@ -134,5 +140,7 @@
             start();
             equal(root.find("[data-role=modalview]").length, 1);
         }, 100);
+
+        jasmine.clock().tick(100);
     });
 })();

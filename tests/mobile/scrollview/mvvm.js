@@ -1,12 +1,14 @@
 (function() {
     module('scrollview mvvm', {
         setup: function() {
+            jasmine.clock().install();
             QUnit.fixture.append('<script id="scrollview-tmp" type="text/x-kendo-template"><div>#:foo#</div></scr' + 'ipt>');
             QUnit.fixture.append('<script id="scrollview-mvvm-tmp" type="text/x-kendo-template"><div data-bind="text: foo"></div></scr' + 'ipt>');
         },
 
         teardown: function() {
             kendo.destroy(QUnit.fixture);
+            jasmine.clock().uninstall();
         }
     });
 
@@ -18,6 +20,7 @@
         });
 
         var app = new kendo.mobile.Application(appContent);
+        jasmine.clock().tick();
 
         equal($("#scrollview").data("kendoMobileScrollView").items().eq(1).text(), "1");
         equal($("#scrollview").data("kendoMobileScrollView").items().eq(2).text(), "2");
@@ -30,6 +33,7 @@
             ds: [{foo: 1}, {foo: 2}]
         });
         var app = new kendo.mobile.Application(appContent);
+        jasmine.clock().tick();
 
         equal($("#scrollview").data("kendoMobileScrollView").items().eq(1).text(), "1");
         equal($("#scrollview").data("kendoMobileScrollView").items().eq(2).text(), "2");
@@ -56,6 +60,7 @@
         });
 
         var app = new kendo.mobile.Application(appContent);
+        jasmine.clock().tick();
 
         equal($("#scrollview").data("kendoMobileScrollView").items().eq(1).text(), "3");
         equal($("#scrollview").data("kendoMobileScrollView").value(), ds.at(2));
@@ -69,6 +74,7 @@
         });
 
         var app = new kendo.mobile.Application(appContent);
+        jasmine.clock().tick();
 
         var widget = $("#scrollview").data("kendoMobileScrollView");
         var oldDataSource = widget.dataSource;
@@ -94,6 +100,7 @@
         });
 
         var app = new kendo.mobile.Application(appContent);
+        jasmine.clock().tick();
 
         equal($("#scrollview").data("kendoMobileScrollView").items().length, 0);
         equal($("#scrollview").children().text(), "foo");
@@ -108,6 +115,7 @@
         });
 
         var app = new kendo.mobile.Application(appContent);
+        jasmine.clock().tick();
         var widget = $("#scrollview").data("kendoMobileScrollView");
 
         scrollViewViewModel.ds.push({foo: 3});
