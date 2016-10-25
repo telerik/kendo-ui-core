@@ -30,11 +30,11 @@ Most [Kendo UI widgets]({% slug bundle_supportfor_kendoui_components %}) have no
 
 The [hybrid UI widgets and frameworks]({% slug bundle_supportfor_kendoui_components %}) are intended for Cordova based deployments, and support the following mobile device browsers and their corresponding web view components:
 
-| BROWSER           | SUPPORTED VERSIONS            |
-| :---------------- | :---------------------------- |
-| Internet Explorer | 10 or later                   |
-| Chrome            | Current and previous          |
-| Firefox           | Not supported                 |
+| BROWSER           | SUPPORTED VERSIONS               |
+| :---------------- | :------------------------------- |
+| Internet Explorer | 10 or later on Windows Phone 8.x |
+| Chrome            | Current and previous             |
+| Firefox           | Not supported                    |
 | OS X Safari       | [6.2.6 or later](https://en.wikipedia.org/wiki/Safari_version_history#Mac)|
 
 ### Charts, Gauges, Barcodes, Diagrams and Maps
@@ -86,7 +86,7 @@ To ensure the best performance of your project, make sure that you:
     > Always specify a [DOCTYPE](http://www.sitepoint.com/web-foundations/doctypes/). Recommended DOCTYPEs include `HTML5`, `XHTML 1.1`, `XHTML 1.0 Strict` and `HTML4 Strict`. The `HTML4 Transitional` DOCTYPE fires the Quirks mode and should not be used. `XHTML 1.0 Transitional` works well in most cases, but may cause issues with the vertical positioning of icons. The correct syntax for [all DOCTYPEs](http://www.w3.org/QA/2002/04/valid-dtd-list.html) is provided on the [W3C website](http://www.w3.org/).
 
 * Internet Explorer compatibility modes are not supported. These modes can exhibit different behavior and rendering bugs as compared to the browser versions they emulate.
-* Windows Universal apps and Cordova for Windows environments are not supported, due to the [sandbox restrictions of the environment](https://msdn.microsoft.com/en-us/library/windows/apps/hh849625.aspx#Automatic_script_filtering). The recommended UI suite for this environment is [UI for Windows Universal](http://www.telerik.com/windows-universal-ui).
+* Windows Universal apps and [Cordova for Windows 10](https://cordova.apache.org/docs/en/5.1.1/guide/platforms/win8/win10-support.html) environments are not supported, due to the [sandbox restrictions of the environment](https://msdn.microsoft.com/en-us/library/windows/apps/hh849625.aspx#Automatic_script_filtering). The recommended UI suite for this environment is [UI for Windows Universal](http://www.telerik.com/windows-universal-ui).
 * Unexpected behaviors that occur only in a hybrid application, but not in a standalone supported browser, are by default considered to be triggered by the hybrid environment and unrelated to Kendo UI.
 * It is highly advisable to use [Internet Explorer Edge mode](http://blogs.msdn.com/b/ie/archive/2010/06/16/ie-s-compatibility-features-for-site-developers.aspx) via a META tag or an HTTP header:
 
