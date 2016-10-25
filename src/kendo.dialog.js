@@ -769,7 +769,7 @@
             options: {
                 name: "Dialog",
                 messages: {
-                    close: ""
+                    close: "Close"
                 }
             }
         });
@@ -947,7 +947,7 @@
                     "<span class='k-dialog-title'>#= title #</span>" +
                 "</div>"
             ),
-            close: template("<a role='button' href='\\#' class='k-button-bare k-dialog-action k-dialog-close' aria-label='Close' tabindex='-1'><span class='k-font-icon k-i-x'>#= messages.close #</span></a>"),
+            close: template("<a role='button' href='\\#' class='k-button-bare k-dialog-action k-dialog-close' title='#= messages.close #' aria-label='#= messages.close #' tabindex='-1'><span class='k-font-icon k-i-x'></span></a>"),
             actionbar: template("<ul class='k-dialog-buttongroup k-dialog-button-layout-#= buttonLayout #' role='toolbar' />"),
             overlay: "<div class='k-overlay' />",
             alertWrapper: template("<div class='k-widget k-dialog k-window k-dialog-centered' role='alertdialog' />"),
