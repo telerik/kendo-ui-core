@@ -233,7 +233,7 @@
         angular.module('kendo.tests').controller('mine', function($scope, $q) {
             $$q = $q;
         });
-
+console.log("TEST START");
         QUnit.fixture.html('<div ng-controller=mine><a kendo-mobile-button data-icon="foo"></a></div>');
     },
 
@@ -245,11 +245,11 @@
         setTimeout(function() {
             $$q(function(resolve, reject) { resolve({}); }).then(function(value) {
                 scope.foo = value;
-            });
 
-            setTimeout(function() {
-                start();
-                ok(QUnit.fixture.find("a").getKendoMobileButton());
+                 setTimeout(function() {
+                    start();
+                    ok(QUnit.fixture.find("a").getKendoMobileButton());
+                },100);
             });
         }, 100);
     });
