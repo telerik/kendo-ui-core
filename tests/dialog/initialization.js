@@ -53,6 +53,19 @@
         equal(wrapper.find(".k-dialog-buttongroup").length, 0);
     });
 
+    test("close button messages updates aria-label and title", function() {
+        var testMessage = "test_close_button";
+        var dialog = createDialog({
+            messages:{
+                close: testMessage
+            }
+        });
+        var wrapper = dialog.wrapper;
+
+        equal(wrapper.find(".k-dialog-action.k-dialog-close").attr("aria-label"), testMessage);
+        equal(wrapper.find(".k-dialog-action.k-dialog-close").attr("title"), testMessage);
+    });
+
     test("hide close button", function() {
         var dialog = createDialog({
             closable: false
