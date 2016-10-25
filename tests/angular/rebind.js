@@ -233,7 +233,7 @@
         angular.module('kendo.tests').controller('mine', function($scope, $q) {
             $$q = $q;
         });
-console.log("TEST START");
+
         QUnit.fixture.html('<div ng-controller=mine><a kendo-mobile-button data-icon="foo"></a></div>');
     },
 
