@@ -93,7 +93,7 @@ The example below demonstrates how to specify the server proxy URL.
 
 ## Further Reading
 
-* [Learn More about Creating Excel Documents with Kendo UI]({% slug introduction_excelexport_kendoui %}})
+* [Learn More about Creating Excel Documents with Kendo UI]({% slug introduction_excelexport_kendoui %})
 * [Learn How to Save Files with Kendo UI]({% slug overview_savingfiles_kendoui %})
 * [API Reference: `kendo.ooxml.Workbook`](/api/javascript/ooxml/workbook)
 

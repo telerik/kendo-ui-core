@@ -1,6 +1,7 @@
 ---
 title: Layer
 page_title: API reference for Kendo UI Map Layer
+previous_url: /api/javascript/dataviz/map/layer/shape, /api/javascript/dataviz/ui/map
 ---
 
 # kendo.dataviz.map.Layer : kendo.Class
