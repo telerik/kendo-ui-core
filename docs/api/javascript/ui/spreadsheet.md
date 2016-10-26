@@ -1057,6 +1057,9 @@ The row height in pixels. Defaults to [rowHeight](#configuration-rowHeight).
 ### sheets.rows.index `Number`
 The absolute row index. Required to ensure correct positioning.
 
+### sheets.rows.type `String`
+The table row element role, in the context of the Grid table structure.
+
 ### sheets.selection `String`
 The selected range in the sheet, e.g. "A1:B10".
 
