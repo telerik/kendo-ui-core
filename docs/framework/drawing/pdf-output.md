@@ -155,9 +155,7 @@ Compression can make a big difference in the output file size when you are using
 
 ## Supported Browsers
 
-Kendo UI PDF generator has been tested in recent versions of Chrome, Firefox, Safari, Blink-based Opera, and Internet Explorer 9 and later. Use [typed arrays](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Typed_arrays) where available to improve speed (all browsers except IE9).
-
-Internet Explorer 8 and older are not supported.
+Please check the [PDF Export section](/intro/supporting/browser-support#pdf-export) on the [Browser Support page](/intro/supporting/browser-support).
 
 ## See Also
 

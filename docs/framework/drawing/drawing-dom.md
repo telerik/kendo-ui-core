@@ -461,11 +461,7 @@ An exception to this are the `paperSize` and `margin` options that you pass to `
 
 ## Supported Browsers
 
-The HTML renderer has been tested in recent versions of Chrome, Firefox, Safari, Blink-based Opera, Internet Explorer 9 or later.
-
-> **Important**
->
-> Mobile browsers and Internet Explorer 8 or older are not supported.
+Please check the [PDF Export section](/intro/supporting/browser-support#pdf-export) on the [Browser Support page](/intro/supporting/browser-support).
 
 ## Known Limitations
 
