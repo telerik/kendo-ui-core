@@ -28,8 +28,6 @@ For a functional example, see the [Spreadsheet/DataSource Binding](http://demos.
 
 ## Known Issues
 
-The following issues are not addressed in the Beta release:
-
 * Records cannot be edited after sorting the sheet.
 
 ## See Also
