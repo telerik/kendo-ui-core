@@ -2,6 +2,7 @@
 title: Frequently Asked Questions
 page_title: Frequently Asked Questions | Kendo UI Grid HtmlHelper
 description: "Find the most frequently asked questions related to the Kendo UI Grid HtmlHelper and their answers."
+previous_url: /aspnet-mvc/helpers/grid/faq, /using-kendo-with/aspnet-mvc/helpers/grid/faq
 slug: freqaskedquestions_gridhelper_aspnetmvc
 position: 5
 ---
@@ -22,7 +23,7 @@ The example below demonstrates how to display HTML entities in Grid columns.
 
 ### How to Customize the Way Properties Are Displayed in Grid-Bound Columns?
 
-If the Grid is [server-bound](/aspnet-mvc/helpers/grid/server-binding), use the `Template` method.
+If the Grid is [server-bound]({% slug serverbinding_grid_aspnetmvc %}), use the `Template` method.
 
 The example below demonstrates how to customize the column appearance of a server-bound Grid.
 
@@ -340,7 +341,7 @@ The example below demonstrates how to convert the processed data.
 
 > **Important**  
 >
-> To flatten your data, use View Model objects, reduce the number of serialized properties, or avoid circular reference serializaton exceptions.
+> To flatten your data, use View Model objects, reduce the number of serialized properties, or avoid circular reference serialization exceptions.
 
 ### How to Avoid Circular Reference Exceptions?
 

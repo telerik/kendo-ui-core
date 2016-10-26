@@ -2,6 +2,7 @@
 title: Create Scrollable Data Items
 page_title: Create Scrollable Data Items | Kendo UI MultiSelect
 description: "Learn how to create scrollable data items in the Kendo UI MultiSelect widget."
+previous_url: /controls/editors/multiselect/how-to/scrollbale-data-items, /web/multiselect/how-to/scrollbale-data-items
 slug: howto_create_scrollable_data_items_multiselect
 ---
 

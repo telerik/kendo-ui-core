@@ -1,7 +1,7 @@
 ---
 title: Drag and Drop
 page_title: Drag and Drop | Kendo UI Upload
-description: "Upload files with the drag-and-drop functionality in asyncronous mode in the Kendo UI Upload widget."
+description: "Upload files with the drag-and-drop functionality in asynchronous mode in the Kendo UI Upload widget."
 slug: dragandrop_upload_widget
 position: 2
 ---
