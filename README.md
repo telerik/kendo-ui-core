@@ -1,5 +1,6 @@
 # Kendo UI Core
 
+
 [![Build Status](https://travis-ci.org/telerik/kendo-ui-core.svg?branch=master)](https://travis-ci.org/telerik/kendo-ui-core)
 
 ## About Kendo UI Core
