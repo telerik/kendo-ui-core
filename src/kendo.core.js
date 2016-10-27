@@ -1638,19 +1638,13 @@ function pad(number, digits, end) {
         var browser = support.browser,
             percentage,
             outerWidth = kendo._outerWidth,
-            outerHeight = kendo._outerHeight,
-            isRtl = element.css("direction") == "rtl";
+            outerHeight = kendo._outerHeight;
 
         if (!element.parent().hasClass("k-animation-container")) {
-            var shadows = getShadows(element),
-                width = element[0].style.width,
+            var width = element[0].style.width,
                 height = element[0].style.height,
                 percentWidth = percentRegExp.test(width),
                 percentHeight = percentRegExp.test(height);
-
-            if (browser.opera) { // Box shadow can't be retrieved in Opera
-                shadows.left = shadows.right = shadows.bottom = 5;
-            }
 
             percentage = percentWidth || percentHeight;
 
@@ -1662,11 +1656,7 @@ function pad(number, digits, end) {
                          .addClass("k-animation-container")
                          .css({
                              width: width,
-                             height: height,
-                             marginLeft: shadows.left * (isRtl ? 1 : -1),
-                             paddingLeft: shadows.left,
-                             paddingRight: shadows.right,
-                             paddingBottom: shadows.bottom
+                             height: height
                          }));
 
             if (percentage) {
