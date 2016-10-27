@@ -39,11 +39,9 @@ The [hybrid UI widgets and frameworks]({% slug bundle_supportfor_kendoui_compone
 
 ### PDF Export
 
-The Kendo UI PDF generator is supported in the following **desktop** browsers: Internet Explorer 9 and later, recent versions of Chrome, Firefox, Safari and Blink-based Opera.
+The Kendo UI PDF generator is tested and supported in the following **desktop** browsers: Internet Explorer 9 and later, recent versions of Chrome, Firefox, Safari and Blink-based Opera.
 
-Use [typed arrays](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Typed_arrays) in the [PDF drawing backend](/framework/drawing/pdf-output), where available, to improve speed (all browsers except IE9).
-
-PDF export is not supported in Internet Explorer 8 and older versions, mobile browsers and hybrid mobile applications, due to browser limitations and CORS-related security restrictions in hybrid apps.
+PDF export is **not** supported in Internet Explorer 8 and older versions, mobile browsers and hybrid mobile applications, due to browser limitations and CORS-related security restrictions in hybrid apps.
 
 ### Charts, Gauges, Barcodes, Diagrams and Maps
 
