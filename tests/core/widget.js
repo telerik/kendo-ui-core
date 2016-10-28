@@ -150,4 +150,65 @@ test("plugin callback is called for existing and new widgets", 2, function() {
     kendo.widgets = currentWidgets;
     kendo._widgetRegisteredCallbacks = [];
 });
+
+asyncTest("Widget can be extended with static Kendo template", function() {
+
+    var currentWidgets = kendo.widgets;
+    kendo.widgets = [];
+
+    expect(1);
+
+    var template = kendo.template('<some-element></some-element>');
+    var Widget1 = kendo.ui.Widget.extend({
+
+        options: {
+            name: "HtmlTemplateWidget",
+            prefix: ""
+        },
+        init: function(element, options) {
+
+            options = options || {};
+
+            element.getAttribute = function(key) {
+                switch (key) {
+                    case 'data-template':
+                    case 'template':
+                        return template;
+                        break;
+                    default:
+                        return Element.prototype.getAttribute.call(element, key);
+                        break;
+                }
+                
+            }
+
+            options.template = template;
+            kendo.ui.Widget.fn.init.call(this, element, options);
+
+        }
+    });
+
+    kendo.ui.plugin(Widget1);
+
+    kendo.onWidgetRegistered(function(entry) {
+
+        if(entry.name === 'kendoHtmlTemplateWidget') {
+            var el = $('<some-test-element />');
+            el.kendoHtmlTemplateWidget();
+
+            deepEqual(template, el.data("kendoHtmlTemplateWidget").options.template);
+
+            // reset the state
+            el.data("kendoHtmlTemplateWidget").destroy();
+            kendo.widgets = currentWidgets;
+            kendo._widgetRegisteredCallbacks = [];
+
+            start();
+
+        }
+
+    });
+
+});
+
 }());
