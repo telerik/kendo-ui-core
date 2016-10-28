@@ -142,3 +142,23 @@
         color: #fff;
     }
 }
+
+// TODO: After testing is completed, rename to simply `use-font-icons` and remove the original mixin from "styles/web/common/font-icons.less"
+.use-new-font-icon() {
+    text-align: center;
+    vertical-align: middle;
+    background-image: none;
+    font-family: 'WebComponentsIcons';
+    speak: none;
+    font-style: normal;
+    font-weight: normal;
+    font-variant: normal;
+    text-transform: none;
+    font-size: 16px;
+    line-height: 1;
+    text-indent: 0;
+    background-color: lime; // for testing; to be removed after all icons have been changed
+
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
