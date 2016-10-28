@@ -184,7 +184,7 @@ Whether to enable or disable the widget.
 
     <script>
         var app = new kendo.mobile.Application();
-        function change() {
+        function onChange() {
             $("#foo").data("kendoMobileButton").enable(this.check());
         }
         function onClick() {
