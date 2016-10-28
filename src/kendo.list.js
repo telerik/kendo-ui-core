@@ -259,17 +259,21 @@ var __meta__ = { // jshint ignore:line
                 return;
             }
 
-            expression = {
-                filters: expression.filters || [],
+            var newExpression = {
+                filters: [],
                 logic: "and"
             };
 
-            if (filter) {
-                expression.filters.push(filter);
+            if (isValidFilterExpr(filter)) {
+                newExpression.filters.push(filter);
+            }
+
+            if (isValidFilterExpr(expression)) {
+                newExpression.filters.push(expression);
             }
 
             if (that._cascading) {
-                this.listView.setDSFilter(expression);
+                this.listView.setDSFilter(newExpression);
             }
 
             var dataSourceState = extend({}, {
@@ -279,7 +283,7 @@ var __meta__ = { // jshint ignore:line
                 filter: dataSource.filter(),
                 group: dataSource.group(),
                 aggregate: dataSource.aggregate()
-            }, { filter: expression });
+            }, { filter: newExpression });
 
             dataSource[force ? "read" : "query"](dataSource._mergeState(dataSourceState));
         },
@@ -2325,6 +2329,18 @@ var __meta__ = { // jshint ignore:line
             changed: changed,
             unchanged: unchanged
         };
+    }
+
+    function isValidFilterExpr(expression) {
+        if (!expression || $.isEmptyObject(expression)) {
+            return false;
+        }
+
+        if (expression.filters && !expression.filters.length) {
+            return false;
+        }
+
+        return true;
     }
 
     function removeFiltersForField(expression, field) {

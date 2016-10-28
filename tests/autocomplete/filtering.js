@@ -448,4 +448,50 @@ asyncTest("update popup height when no items are found", 1, function() {
 
     autocomplete.element.focus().val("test").keydown();
 });
+
+test("removes filtering expression if field matches the dataTextField", 1, function() {
+    var autocomplete = new AutoComplete(input, {
+        dataTextField: "text",
+        dataSource: {
+            data: [{ text: "foo", value: 1 }, { text: "bar", value: 2 }, { text: "too", value: 3 }],
+            filter: {
+                logic: "or",
+                filters: [
+                    { field: "text", operator: "eq", value: "bar" },
+                    { field: "text", operator: "eq", value: "foo" }
+                ]
+            }
+        }
+    });
+
+    autocomplete.search("to");
+
+    equal(autocomplete.dataSource.filter().filters.length, 1);
+});
+
+test("keeps custom filter expresssion", 5, function() {
+    var autocomplete = new AutoComplete(input, {
+        dataTextField: "text",
+        dataSource: {
+            data: [{ text: "foo", value: 1 }, { text: "bar", value: 2 }, { text: "too", value: 3 }],
+            filter: {
+                logic: "or",
+                filters: [
+                    { field: "value", operator: "eq", value: 1 },
+                    { field: "value", operator: "eq", value: 2 }
+                ]
+            }
+        }
+    });
+
+    autocomplete.search("to");
+
+    var filters = autocomplete.dataSource.filter();
+
+    equal(filters.logic, "and");
+    equal(filters.filters.length, 2);
+    equal(filters.filters[0].field, "text");
+    equal(filters.filters[1].logic, "or");
+    equal(filters.filters[1].filters.length, 2);
+});
 }());
