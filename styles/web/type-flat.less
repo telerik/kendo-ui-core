@@ -1,4 +1,7 @@
 @sprite-image: url('@{image-folder}/sprite.png');
+@sprite-image-2x: url('@{image-folder}/sprite_2x.png');
+@sprite-kpi-image: url('@{image-folder}/sprite_kpi.png');
+@sprite-kpi-image-2x: url('@{image-folder}/sprite_kpi_2x.png');
 @tooltip-texture: none;
 @widget-text-color: @normal-text-color;
 @inverse-text-color: @background;
@@ -1578,7 +1581,7 @@ div.k-filebrowser-dropzone em
 .k-i-kpi-increase,
 .k-i-kpi-open
 {
-    background-image: url('@{image-folder}/sprite_kpi.png');
+    background-image: @sprite-kpi-image;
 }
 
 /* Border radius */
@@ -2375,7 +2378,7 @@ html .km-pane-wrapper .km-widget,
     .k-mobile-list .k-check:checked,
     .k-mobile-list .k-edit-field [type=checkbox]:checked,
     .k-mobile-list .k-edit-field [type=radio]:checked {
-        background-image: url('@{image-folder}/sprite_2x.png');
+        background-image: @sprite-image-2x;
         background-size: 340px 336px;
     }
     .k-dropdown-wrap .k-input,
@@ -2392,7 +2395,7 @@ html .km-pane-wrapper .km-widget,
     .k-i-kpi-increase,
     .k-i-kpi-open
     {
-        background-image: url('@{image-folder}/sprite_kpi_2x.png');
+        background-image: @sprite-kpi-image-2x;
         background-size: 96px 16px;
     }
 }
