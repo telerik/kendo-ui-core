@@ -725,7 +725,7 @@ The `Paging` method configures the paging functionality.
 
 ### Enable Paging
 
-To enable paging with the default settings, call the `Paegable` method without arguments.
+To enable paging with the default settings, call the `Pageable` method without arguments.
 
 ###### Example
 
