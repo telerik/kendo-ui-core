@@ -127,7 +127,7 @@ var __meta__ = { // jshint ignore:line
                 isEmpty = true;
 
                 element.contents().filter(function() {
-                    return (!$(this).hasClass("k-sprite") && !$(this).hasClass("k-icon") && !$(this).hasClass("k-image"));
+                    return (!$(this).hasClass("k-sprite") && !$(this).hasClass("p-icon") && !$(this).hasClass("k-image"));
                 }).each(function(idx, el){
                     if (el.nodeType == 1 || el.nodeType == 3 && $.trim(el.nodeValue).length > 0) {
                         isEmpty = false;
@@ -142,11 +142,11 @@ var __meta__ = { // jshint ignore:line
             }
 
             if (icon) {
-                span = element.children("span.k-icon").first();
+                span = element.children("span.p-icon").first();
                 if (!span[0]) {
-                    span = $('<span class="k-icon"></span>').prependTo(element);
+                    span = $('<span class="p-icon"></span>').prependTo(element);
                 }
-                span.addClass("k-i-" + icon);
+                span.addClass("p-i-" + icon);
             } else if (spriteCssClass) {
                 span = element.children("span.k-sprite").first();
                 if (!span[0]) {

@@ -73,21 +73,21 @@
             icon: "foo"
         });
 
-        var icon = button.data("kendoButton").element.children("span.k-icon");
+        var icon = button.data("kendoButton").element.children("span.p-icon");
 
         equal(icon.length, 1);
-        ok(icon.hasClass("k-i-foo"));
+        ok(icon.hasClass("p-i-foo"));
     });
 
-    test("icon adds corresponding class(es) to span.k-icon element if already exists", function() {
-        getButton('<span class="k-icon"></span>text').kendoButton({
+    test("icon adds corresponding class(es) to span.p-icon element if already exists", function() {
+        getButton('<span class="p-icon"></span>text').kendoButton({
             icon: "foo"
         });
 
-        var icon = button.data("kendoButton").element.children("span.k-icon");
+        var icon = button.data("kendoButton").element.children("span.p-icon");
 
         equal(icon.length, 1);
-        ok(icon.hasClass("k-i-foo"));
+        ok(icon.hasClass("p-i-foo"));
     });
 
     test("icon adds a k-button-icon class to empty button", function() {
@@ -99,7 +99,7 @@
     });
 
     test("icon adds a k-button-icon class to empty button with only an icon span inside", function() {
-        getButton('<span class="k-icon"></span>').kendoButton({
+        getButton('<span class="p-icon"></span>').kendoButton({
             icon: "foo"
         });
 

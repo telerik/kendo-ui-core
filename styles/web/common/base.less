@@ -179,7 +179,7 @@ body .k-split-button-arrow
     padding-right: .8em;
 }
 
-.k-button-icontext .k-icon,
+.k-button-icontext .p-icon,
 .k-button-icontext .k-image,
 .k-button-icontext .k-sprite
 {
@@ -189,7 +189,7 @@ body .k-split-button-arrow
     margin-left: -.3rem;
 }
 
-.k-button.k-button-icontext .k-icon,
+.k-button.k-button-icontext .p-icon,
 .k-button.k-button-icontext .k-image
 {
     vertical-align: text-top;
@@ -252,6 +252,7 @@ html body .k-button-bare.k-upload-button:hover
 .k-state-disabled,
 .k-state-disabled .k-link,
 .k-state-disabled .k-icon,
+.k-state-disabled .p-icon,
 .k-state-disabled .k-button,
 .k-state-disabled .k-draghandle,
 .k-state-disabled .k-upload-button input
@@ -408,6 +409,7 @@ html body .k-button-bare.k-upload-button:hover
 
 /* In IE7 vertical align: middle can't be overridden */
 .k-ie8 .k-icon,
+.k-ie8 .p-icon,
 .k-ie8 .k-sprite,
 .k-ie8 .k-tool-icon
 {
@@ -415,6 +417,7 @@ html body .k-button-bare.k-upload-button:hover
 }
 
 :root *> .k-icon,
+:root *> .p-icon,
 :root *> .k-sprite,
 :root *> .k-tool-icon
 {
@@ -1015,7 +1018,8 @@ input.k-checkbox + label {
     .use-font-icon();
     overflow: visible;
 }
-.p-icon:before {
+.p-icon:before,
+.k-font-icon:before {
     width: 1em;
     height: 1em;
     display: inline-block;
