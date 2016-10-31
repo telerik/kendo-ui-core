@@ -825,6 +825,57 @@ If set to `true` and the [group.resources](#configuration-group.resources) has s
     });
     </script>
 
+### groupHeaderTemplate `String|Function`
+
+The [template](/api/javascript/kendo#methods-template) used to render the group headers of scheduler day, week, workWeek and timeline views.
+
+The fields which can be used in the template are:
+
+* text `String` - the group text
+* color `String` - the group color
+* value - the group value
+* field `String` - the field of the scheduler event which contains the resource id
+* title `String` - the 'title' option of the resource
+* name  `String` - the 'name' option of the resource
+
+#### Example - set the group header template
+
+    <script id="groupHeaderTemplate" type="text/x-kendo-template">
+      <strong style="color: #=color#">#=text#</strong>
+    </script>
+    <div id="scheduler"></div>
+    <script>
+    $("#scheduler").kendoScheduler({
+      date: new Date("2013/6/6"),
+      groupHeaderTemplate: $("#groupHeaderTemplate").html(),
+      dataSource: [
+        {
+          id: 1,
+          start: new Date("2013/6/6 08:00 AM"),
+          end: new Date("2013/6/6 09:00 AM"),
+          isAllDay: true,
+          title: "Interview",
+          attendees: [1,2]
+        }
+      ],
+      group: {
+        resources: ["Attendees"],
+        orientation: "horizontal"
+      },
+      resources: [
+        {
+          field: "attendees",
+          name: "Attendees",
+          dataSource: [
+           { value: 1, text: "Alex" },
+           { value: 2, text: "Bob" }
+          ],
+          multiple: true
+        }
+      ]
+    });
+    </script>
+
 ### group.resources `Array`
 
 An array of resource names by which the scheduler events will be grouped.
@@ -4817,59 +4868,6 @@ The orientation of the group headers. Supported values are *horizontal* or *vert
             { text: "Small meeting room", value: 1, key: "#aabbcc" },
             { text: "Big meeting room", value: 2, key: "green" }
           ]
-        }
-      ]
-    });
-    </script>
-
-
-### groupHeaderTemplate `String|Function`
-
-The [template](/api/javascript/kendo#methods-template) used to render the group headers of scheduler day, week, workWeek and timeline views.
-
-The fields which can be used in the template are:
-
-* text `String` - the group text
-* color `String` - the group color
-* value - the group value
-* field `String` - the field of the scheduler event which contains the resource id
-* title `String` - the 'title' option of the resource
-* name  `String` - the 'name' option of the resource
-
-
-#### Example - set the group header template
-
-    <script id="groupHeaderTemplate" type="text/x-kendo-template">
-      <strong style="color: #=color#">#=text#</strong>
-    </script>
-    <div id="scheduler"></div>
-    <script>
-    $("#scheduler").kendoScheduler({
-      date: new Date("2013/6/6"),
-      groupHeaderTemplate: $("#groupHeaderTemplate").html(),
-      dataSource: [
-        {
-          id: 1,
-          start: new Date("2013/6/6 08:00 AM"),
-          end: new Date("2013/6/6 09:00 AM"),
-          isAllDay: true,
-          title: "Interview",
-          attendees: [1,2]
-        }
-      ],
-      group: {
-        resources: ["Attendees"],
-        orientation: "horizontal"
-      },
-      resources: [
-        {
-          field: "attendees",
-          name: "Attendees",
-          dataSource: [
-           { value: 1, text: "Alex" },
-           { value: 2, text: "Bob" }
-          ],
-          multiple: true
         }
       ]
     });
