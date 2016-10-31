@@ -527,3 +527,340 @@ $.extend(true, kendo.ui.Validator.prototype.options.messages,{
 });
 }
 })(window.kendo.jQuery);
+
+kendo.spreadsheet && kendo.spreadsheet.messages.borderPalette && (kendo.spreadsheet.messages.borderPalette = e.extend(!0, kendo.spreadsheet.messages.borderPalette, {
+		    allBorders: "所有框线",
+		    insideBorders: "内部边框",
+		    insideHorizontalBorders: "内部水平边框",
+		    insideVerticalBorders: "内部垂直边框",
+		    outsideBorders: "外边框",
+		    leftBorder: "左边框",
+		    topBorder: "上边框",
+		    rightBorder: "右边框",
+		    bottomBorder: "底部边框",
+		    noBorders: "无边框",
+		    reset: "自动",
+		    customColor: "其他颜色",
+		    apply: "确定",
+		    cancel: "取消"
+		})),
+		kendo.spreadsheet && kendo.spreadsheet.messages.dialogs && (kendo.spreadsheet.messages.dialogs = e.extend(!0, kendo.spreadsheet.messages.dialogs, {
+		    apply: "应用",
+		    save: "保存",
+		    cancel: "取消",
+		    remove: "移动",
+		    okText: "确定",
+		    formatCellsDialog: {
+		        title: "格式",
+		        categories: {
+		            number: "数字",
+		            currency: "货币",
+		            date: "日期"
+		        }
+		    },
+		    fontFamilyDialog: {
+		        title: "字体"
+		    },
+		    fontSizeDialog: {
+		        title: "字体大小"
+		    },
+		    bordersDialog: {
+		        title: "边框"
+		    },
+		    alignmentDialog: {
+		        title: "对齐方式",
+		        buttons: {
+		            justtifyLeft: "左对齐",
+		            justifyCenter: "居中对齐",
+		            justifyRight: "右对齐",
+		            justifyFull: "两端对齐",
+		            alignTop: "顶端对其",
+		            alignMiddle: "居中对齐",
+		            alignBottom: "底端对其"
+		        }
+		    },
+		    mergeDialog: {
+		        title: "合并单元格",
+		        buttons: {
+		            mergeCells: "合并",
+		            mergeHorizontally: "水平合并",
+		            mergeVertically: "垂直合并",
+		            unmerge: "取消合并"
+		        }
+		    },
+		    freezeDialog: {
+		        title: "冻结面板",
+		        buttons: {
+		            freezePanes: "冻结行列",
+		            freezeRows: "冻结行",
+		            freezeColumns: "冻结列",
+		            unfreeze: "取消冻结"
+		        }
+		    },
+		    validationDialog: {
+		        title: "数据校验",
+		        hintMessage: "请输入合法的值在 {0} 和 {1} 之间.",
+		        hintTitle: "校验 {0}",
+		        criteria: {
+		            any: "任意值",
+		            number: "数值",
+		            text: "文本",
+		            date: "日期",
+		            custom: "自定义",
+		            list: "List"
+		        },
+		        comparers: {
+		            greaterThan: "大于",
+		            lessThan: "小于",
+		            between: "区间",
+		            notBetween: "不在区间",
+		            equalTo: "等于",
+		            notEqualTo: "不等于",
+		            greaterThanOrEqualTo: "大于等于",
+		            lessThanOrEqualTo: "小于等于"
+		        },
+		        comparerMessages: {
+		            greaterThan: "大于 {0}",
+		            lessThan: "小于 {0}",
+		            between: "在 {0} 和 {1} 之间",
+		            notBetween: "不在 {0} 和 {1} 之间",
+		            equalTo: "等于 {0}",
+		            notEqualTo: "不等于 {0}",
+		            greaterThanOrEqualTo: "大于等于 {0}",
+		            lessThanOrEqualTo: "小于等于 {0}",
+		            custom: "满足公式: {0}"
+		        },
+		        labels: {
+		            criteria: "Criteria",
+		            comparer: "Comparer",
+		            min: "Min",
+		            max: "Max",
+		            value: "Value",
+		            start: "Start",
+		            end: "End",
+		            onInvalidData: "On invalid data",
+		            rejectInput: "Reject input",
+		            showWarning: "Show warning",
+		            showHint: "Show hint",
+		            hintTitle: "Hint title",
+		            hintMessage: "Hint message",
+		            ignoreBlank: "Ignore blank"
+		        },
+		        placeholders: {
+		            typeTitle: "Type title",
+		            typeMessage: "Type message"
+		        }
+		    },
+		    saveAsDialog: {
+		        title: "另存为",
+		        labels: {
+		            fileName: "文件名",
+		            saveAsType: "文件类型"
+		        }
+		    },
+		    exportAsDialog: {
+		        title: "导出",
+		        labels: {
+		            fileName: "文件名",
+		            saveAsType: "文件类型",
+		            exportArea: "页范围",
+		            paperSize: "纸张大小",
+		            margins: "页边距",
+		            orientation: "方向",
+		            print: "打印",
+		            guidelines: "导航线",
+		            center: "居中",
+		            horizontally: "垂直居中",
+		            vertically: "水平居中"
+		        }
+		    },
+		    modifyMergedDialog: {
+		        errorMessage: "无法更改合并单元格."
+		    },
+		    useKeyboardDialog: {
+		        title: "复制粘贴",
+		        errorMessage: "请使用快捷键执行如下操作：",
+		        labels: {
+		            forCopy: "复制",
+		            forCut: "剪切",
+		            forPaste: "粘贴"
+		        }
+		    },
+		    unsupportedSelectionDialog: {
+		        errorMessage: "当前操作不能应用于多行选择"
+		    },
+            linkDialog: {
+                title: '超链接',
+                labels: {
+                    text: '超链文本',
+                    url: '地址',
+                    removeLink: '移除'
+                }
+            }
+		})),
+		kendo.spreadsheet && kendo.spreadsheet.messages.filterMenu && (kendo.spreadsheet.messages.filterMenu = e.extend(!0, kendo.spreadsheet.messages.filterMenu, {
+		    sortAscending: "Sort range A to Z",
+		    sortDescending: "Sort range Z to A",
+		    filterByValue: "Filter by value",
+		    filterByCondition: "Filter by condition",
+		    apply: "Apply",
+		    search: "Search",
+		    addToCurrent: "Add to current selection",
+		    clear: "Clear",
+		    blanks: "(Blanks)",
+		    operatorNone: "None",
+		    and: "AND",
+		    or: "OR",
+		    operators: {
+		        string: {
+		            contains: "Text contains",
+		            doesnotcontain: "Text does not contain",
+		            startswith: "Text starts with",
+		            endswith: "Text ends with"
+		        },
+		        date: {
+		            eq: "Date is",
+		            neq: "Date is not",
+		            lt: "Date is before",
+		            gt: "Date is after"
+		        },
+		        number: {
+		            eq: "Is equal to",
+		            neq: "Is not equal to",
+		            gte: "Is greater than or equal to",
+		            gt: "Is greater than",
+		            lte: "Is less than or equal to",
+		            lt: "Is less than"
+		        }
+		    }
+		})),
+		kendo.spreadsheet && kendo.spreadsheet.messages.toolbar && (kendo.spreadsheet.messages.toolbar = e.extend(!0, kendo.spreadsheet.messages.toolbar, {
+		    addColumnLeft: "插入左侧列",
+		    addColumnRight: "插入右侧列",
+		    addRowAbove: "插入上方行",
+		    addRowBelow: "插入下方行",
+		    alignment: "居中对齐",
+		    alignmentButtons: {
+		        justtifyLeft: "左对齐",
+		        justifyCenter: "居中",
+		        justifyRight: "右对齐",
+		        justifyFull: "自适应",
+		        alignTop: "顶端对齐",
+		        alignMiddle: "垂直居中",
+		        alignBottom: "底端对齐"
+		    },
+		    backgroundColor: "底色",
+		    bold: "粗体",
+		    borders: "边框",
+		    colorPicker: {
+		        reset: "自动",
+		        customColor: "其他颜色"
+		    },
+		    copy: "复制",
+		    cut: "剪切",
+		    deleteColumn: "删除列",
+		    deleteRow: "删除行",
+		    excelImport: "从Excel导入",
+		    filter: "过滤",
+		    fontFamily: "字体",
+		    fontSize: "字体大小",
+		    format: "自定义格式",
+		    formatTypes: {
+		        automatic: "Automatic",
+		        number: "Number",
+		        percent: "Percent",
+		        financial: "Financial",
+		        currency: "Currency",
+		        date: "Date",
+		        time: "Time",
+		        dateTime: "Date time",
+		        duration: "Duration",
+		        moreFormats: "More formats..."
+		    },
+		    formatDecreaseDecimal: "减少小数位",
+		    formatIncreaseDecimal: "增加小数位",
+		    freeze: "冻结",
+		    freezeButtons: {
+		        freezePanes: "冻结面板",
+		        freezeRows: "冻结行",
+		        freezeColumns: "冻结列",
+		        unfreeze: "取消冻结"
+		    },
+		    italic: "斜体",
+		    merge: "合并单元格",
+		    mergeButtons: {
+		        mergeCells: "合并所以",
+		        mergeHorizontally: "水平合并",
+		        mergeVertically: "纵向合并",
+		        unmerge: "取消合并"
+		    },
+		    open: "打开",
+			exportAs:"导出..",
+		    paste: "粘贴",
+		    quickAccess: {
+		        redo: "恢复",
+		        undo: "撤销"
+		    },
+		    saveAs: "另存为",
+		    sortAsc: "升序排列",
+		    sortDesc: "降序排列",
+		    sortButtons: {
+		        sortSheetAsc: "升序",
+		        sortSheetDesc: "降序",
+		        sortRangeAsc: "升序",
+		        sortRangeDesc: "降序"
+		    },
+		    textColor: "字体颜色",
+		    textWrap: "自动换行",
+		    underline: "下划线",
+			hyperlink:"超链接",
+		    validation: "数据验证"
+		})),
+		kendo.spreadsheet && kendo.spreadsheet.messages.view && (kendo.spreadsheet.messages.view = e.extend(!0, kendo.spreadsheet.messages.view, {
+		    errors: {
+		        shiftingNonblankCells: "由于数据丢失的可能性不能插入单元格。请选择另一个插入位置或从工作表的结尾删除数据。",
+		        filterRangeContainingMerges: "您不能对合并的单元格设置过滤器",
+		        validationError: "您输入的值不满足当前单元格数据规则"
+		    },
+		    tabs: {
+		        home: "首页",
+		        insert: "插入",
+		        data: "数据"
+		    }
+		})),
+		kendo.ui.Slider && (kendo.ui.Slider.prototype.options = e.extend(!0, kendo.ui.Slider.prototype.options, {
+		    increaseButtonTitle: "增加",
+		    decreaseButtonTitle: "减少"
+		})),
+		kendo.ui.TreeView && (kendo.ui.TreeView.prototype.options.messages = e.extend(!0, kendo.ui.TreeView.prototype.options.messages, {
+		    loading: "加载中...",
+		    requestFailed: "加载失败",
+		    retry: "重试"
+		})),
+		kendo.ui.Upload && (kendo.ui.Upload.prototype.options.localization = e.extend(!0, kendo.ui.Upload.prototype.options.localization, {
+		    select: "选择...",
+		    cancel: "取消",
+		    retry: "重试",
+		    remove: "移除",
+		    uploadSelectedFiles: "上传文件",
+		    dropFilesHere: "拖拽要上传的文件到此处",
+		    statusUploading: "上传中",
+		    statusUploaded: "已上传",
+		    statusWarning: "警告",
+		    statusFailed: "失败",
+		    headerStatusUploading: "上传...",
+		    headerStatusUploaded: "完成"
+		})),
+		kendo.ui.Validator && (kendo.ui.Validator.prototype.options.messages = e.extend(!0, kendo.ui.Validator.prototype.options.messages, {
+		    required: "{0} 为必填项",
+		    pattern: "{0} 非法",
+		    min: "{0} 应该大于或等于 {1}",
+		    max: "{0} 应该小于或等于 {1}",
+		    step: "{0} 非法",
+		    email: "{0} 不是合法的邮件地址",
+		    url: "{0} 不是合法的URL",
+		    date: "{0} 不是合法的日期"
+		}))
+    }
+	(window.kendo.jQuery)
+});
