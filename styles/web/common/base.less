@@ -391,7 +391,14 @@ html body .k-button-bare.k-upload-button:hover
 }
 
 .k-button-bare .k-font-icon {
-	overflow: visible;
+    overflow: visible;
+}
+
+.k-button-bare {
+    &.k-state-focused .k-font-icon,
+    &:focus .k-font-icon {
+        text-shadow: 0 0 3px currentColor;
+    }
 }
 
 .k-icon.k-i-none
@@ -1002,8 +1009,11 @@ input.k-checkbox + label {
 
 /* Font Icons */
 .p-icon,
-.k-font-icon {
+.k-font-icon,
+.k-font-icon.k-icon,
+.k-font-icon.k-tool-icon {
     .use-font-icon();
+    overflow: visible;
 }
 .p-icon:before {
     width: initial;
@@ -1016,8 +1026,4 @@ input.k-checkbox + label {
     margin: auto 0;
     height: 1em;
     line-height: 1;
-}
-.k-icon.k-font-icon {
-    overflow: visible;
-    background-image: none;
 }
