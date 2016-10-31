@@ -94,7 +94,7 @@ Below are listed the steps for you to follow when configuring the Kendo UI ListV
 
 ## Event Handling
 
-You can subscribe to all ListView [events](/api/javascript/ui/listview#events).
+You can subscribe to all ListView [events](../../../kendo-ui/api/javascript/ui/listview#events).
 
 ### By Handler Name
 
@@ -185,7 +185,7 @@ The example below demonstrates how to subscribe to events by a template delegate
 
 ### Existing Instances
 
-You can reference an existing Kendo UI ListView instance via [`jQuery.data()`](http://api.jquery.com/jQuery.data/). Once a reference is established, use the [ListView API](/api/javascript/ui/listview#methods) to control its behavior.
+You can reference an existing Kendo UI ListView instance via [`jQuery.data()`](http://api.jquery.com/jQuery.data/). Once a reference is established, use the [ListView API](../../../kendo-ui/api/javascript/ui/listview#methods) to control its behavior.
 
 ###### Example
 
@@ -201,7 +201,7 @@ You can reference an existing Kendo UI ListView instance via [`jQuery.data()`](h
 
 Other articles on Telerik UI for ASP.NET MVC and on the ListView:
 
-* [ASP.NET MVC API Reference: ListViewBuilder](/api/aspnet-mvc/Kendo.Mvc.UI.Fluent/ListViewBuilder)
+* [ASP.NET MVC API Reference: ListViewBuilder](/api/Kendo.Mvc.UI.Fluent/ListViewBuilder)
 * [Overview of the ListView HtmlHelper]({% slug overview_listviewhelper_aspnetmvc %})
 * [Configuration of the ListView HtmlHelper]({% slug configuration_listviewhelper_aspnetmvc %})
 * [Ajax Binding of the ListView HtmlHelper]({% slug ajaxbinding_listviewhelper_aspnetmvc %})
@@ -210,7 +210,7 @@ Other articles on Telerik UI for ASP.NET MVC and on the ListView:
 * [Overview of Telerik UI for ASP.NET MVC]({% slug overview_aspnetmvc %})
 * [Fundamentals of Telerik UI for ASP.NET MVC]({% slug fundamentals_aspnetmvc %})
 * [Scaffolding in Telerik UI for ASP.NET MVC]({% slug scaffolding_aspnetmvc %})
-* [Telerik UI for ASP.NET MVC API Reference Folder](/api/aspnet-mvc/Kendo.Mvc/AggregateFunction)
+* [Telerik UI for ASP.NET MVC API Reference Folder](/api/Kendo.Mvc/AggregateFunction)
 * [Telerik UI for ASP.NET MVC HtmlHelpers Folder]({% slug overview_barcodehelper_aspnetmvc %})
 * [Tutorials on Telerik UI for ASP.NET MVC]({% slug overview_timeefficiencyapp_aspnetmvc6 %})
 * [Telerik UI for ASP.NET MVC Troubleshooting]({% slug troubleshooting_aspnetmvc %})

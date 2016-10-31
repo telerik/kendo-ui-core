@@ -28,7 +28,7 @@ Right-click the location where the Chart Controller should be generated. Select 
 
 **Figure 1. A new scaffolded item**
 
-![New Scaffolded Item](/aspnet-mvc/images/scaffolding/new_scaffolded_item.png)
+![New Scaffolded Item](/images/scaffolding/new_scaffolded_item.png)
 
 ### Select the Scaffolder
 
@@ -36,7 +36,7 @@ Select **Kendo UI Scaffolder** from the list of available Scaffolders.
 
 **Figure 2. The Kendo UI Scaffolder**
 
-![Kendo UI Scaffolder](/aspnet-mvc/images/scaffolding/kendo_ui_scaffolder.png)
+![Kendo UI Scaffolder](/images/scaffolding/kendo_ui_scaffolder.png)
 
 ### Select the Chart
 
@@ -44,7 +44,7 @@ Select the Kendo UI Chart from the available widgets to the left to scaffold.
 
 **Figure 3. The Kendo UI Chart Scaffolder**
 
-![Kendo UI Chart Scaffolder](/aspnet-mvc/helpers/chart/images/scaffolding/kendo_ui_chart.png)
+![Kendo UI Chart Scaffolder](/helpers/chart/images/scaffolding/kendo_ui_chart.png)
 
 ### Set Model and Data Context Options
 
@@ -54,19 +54,19 @@ On the next screen, you are presented with the Model and Data Context options.
 
 **Figure 4. The Grid options**
 
-![Grid options](/aspnet-mvc/helpers/grid/images/scaffolding/kendo_ui_grid1.png)
+![Grid options](/helpers/grid/images/scaffolding/kendo_ui_grid1.png)
 
 **Step 2** The **Model Class** DropDownList contains all model types from the active project. In this example, you are going to list products in the Chart. Select the **Product** entity.
 
 **Figure 5. The Model class**
 
-![Model Class](/aspnet-mvc/helpers/grid/images/scaffolding/model_class.png)
+![Model Class](/helpers/grid/images/scaffolding/model_class.png)
 
 **Step 3** From the **Data Context Class** DropDownList, select the **Entity Framework Data Model** class to be used. In this example, it is **NorthwindEntities**.  
 
 **Figure 6. The Data Context class**
 
-![Data Context Class](/aspnet-mvc/helpers/grid/images/scaffolding/data_context_class.png)
+![Data Context Class](/helpers/grid/images/scaffolding/data_context_class.png)
 
 ### Use View Model Objects
 
@@ -87,7 +87,7 @@ On the next screen, you are presented with the Model and Data Context options.
 
 **Figure 7. The ViewModel class**
 
-![ViewModel Class](/aspnet-mvc/helpers/grid/images/scaffolding/view_model_class.png)
+![ViewModel Class](/helpers/grid/images/scaffolding/view_model_class.png)
 
 > **Important**
 >
@@ -99,7 +99,7 @@ On the next screen, you are presented with the Model and Data Context options.
 
 **Figure 8. The options when setting the Chart functionalities**
 
-![Grid options](/aspnet-mvc/helpers/chart/images/scaffolding/kendo_ui_chart2.png)  
+![Grid options](/helpers/chart/images/scaffolding/kendo_ui_chart2.png)  
 
 This screen contains the Chart functionalities that you can configure before scaffolding:
 * **Data Binding Type**&mdash;Remote or Local.
@@ -109,13 +109,13 @@ This screen contains the Chart functionalities that you can configure before sca
 
 **Figure 9. The legend options**
 
-![Legend options](/aspnet-mvc/helpers/chart/images/scaffolding/legend.png)
+![Legend options](/helpers/chart/images/scaffolding/legend.png)
 
 * **Series Type**&mdash;Select the series type. Each series type shows different **Series Options** configuration.
 
 **Figure 10. The series options**
 
-![Series options](/aspnet-mvc/helpers/chart/images/scaffolding/series_options_1.png)
+![Series options](/helpers/chart/images/scaffolding/series_options_1.png)
 
 * **Add More Series**&mdash;Add one additional configuration panel for a series.
 
@@ -135,7 +135,7 @@ Other articles on Telerik UI for ASP.NET MVC and on the Chart:
 * [Overview of Telerik UI for ASP.NET MVC]({% slug overview_aspnetmvc %})
 * [Fundamentals of Telerik UI for ASP.NET MVC]({% slug fundamentals_aspnetmvc %})
 * [Scaffolding in Telerik UI for ASP.NET MVC]({% slug scaffolding_aspnetmvc %})
-* [Telerik UI for ASP.NET MVC API Reference Folder](/api/aspnet-mvc/Kendo.Mvc/AggregateFunction)
+* [Telerik UI for ASP.NET MVC API Reference Folder](/api/Kendo.Mvc/AggregateFunction)
 * [Telerik UI for ASP.NET MVC HtmlHelpers Folder]({% slug overview_barcodehelper_aspnetmvc %})
 * [Tutorials on Telerik UI for ASP.NET MVC]({% slug overview_timeefficiencyapp_aspnetmvc6 %})
 * [Telerik UI for ASP.NET MVC Troubleshooting]({% slug troubleshooting_aspnetmvc %})

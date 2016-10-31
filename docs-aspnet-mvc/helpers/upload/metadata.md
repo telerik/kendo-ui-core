@@ -169,7 +169,7 @@ Below are listed the steps for you to follow when configuring the receiving of m
             return Json(new { status = "OK" }, "text/plain");
         }
 
-**Step 2** Declare a handler for the [`success` event](/api/javascript/ui/upload#success) and process the response.
+**Step 2** Declare a handler for the [`success` event](../../../kendo-ui/api/javascript/ui/upload#success) and process the response.
 
 ###### Example
 
@@ -220,7 +220,7 @@ Other articles on Telerik UI for ASP.NET MVC and on the Upload:
 * [Overview of Telerik UI for ASP.NET MVC]({% slug overview_aspnetmvc %})
 * [Fundamentals of Telerik UI for ASP.NET MVC]({% slug fundamentals_aspnetmvc %})
 * [Scaffolding in Telerik UI for ASP.NET MVC]({% slug scaffolding_aspnetmvc %})
-* [Telerik UI for ASP.NET MVC API Reference Folder](/api/aspnet-mvc/Kendo.Mvc/AggregateFunction)
+* [Telerik UI for ASP.NET MVC API Reference Folder](/api/Kendo.Mvc/AggregateFunction)
 * [Telerik UI for ASP.NET MVC HtmlHelpers Folder]({% slug overview_autocompletehelper_aspnetmvc %})
 * [Tutorials on Telerik UI for ASP.NET MVC]({% slug overview_timeefficiencyapp_aspnetmvc6 %})
 * [Telerik UI for ASP.NET MVC Troubleshooting]({% slug troubleshooting_aspnetmvc %})

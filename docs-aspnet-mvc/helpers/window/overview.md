@@ -151,7 +151,7 @@ The example below demonstrates how to insert a complete form inside the Window.
 
 ## Event Handling
 
-You can subscribe to all Window [events](/api/javascript/ui/window#events).
+You can subscribe to all Window [events](../../../kendo-ui/api/javascript/ui/window#events).
 
 ### By Handler Name
 
@@ -227,7 +227,7 @@ The example below demonstrates how to subscribe to events by a template delegate
 
 ### Existing Instances
 
-You can reference an existing Kendo UI Window instance via [`jQuery.data()`](http://api.jquery.com/jQuery.data/). Once a reference is established, use the [Window API](/api/javascript/ui/window#methods) to control its behavior.
+You can reference an existing Kendo UI Window instance via [`jQuery.data()`](http://api.jquery.com/jQuery.data/). Once a reference is established, use the [Window API](../../../kendo-ui/api/javascript/ui/window#methods) to control its behavior.
 
 ###### Example
 
@@ -243,12 +243,12 @@ You can reference an existing Kendo UI Window instance via [`jQuery.data()`](htt
 
 Other articles on Telerik UI for ASP.NET MVC and on the Window:
 
-* [ASP.NET MVC API Reference: WindowBuilder](/api/aspnet-mvc/Kendo.Mvc.UI.Fluent/WindowBuilder)
+* [ASP.NET MVC API Reference: WindowBuilder](/api/Kendo.Mvc.UI.Fluent/WindowBuilder)
 * [Overview of Telerik UI for ASP.NET MVC]({% slug overview_aspnetmvc %})
 * [Fundamentals of Telerik UI for ASP.NET MVC]({% slug fundamentals_aspnetmvc %})
 * [Scaffolding in Telerik UI for ASP.NET MVC]({% slug scaffolding_aspnetmvc %})
 * [Overview of the Kendo UI Window Widget]({% slug overview_kendoui_window_widget %})
-* [Telerik UI for ASP.NET MVC API Reference Folder](/api/aspnet-mvc/Kendo.Mvc/AggregateFunction)
+* [Telerik UI for ASP.NET MVC API Reference Folder](/api/Kendo.Mvc/AggregateFunction)
 * [Telerik UI for ASP.NET MVC HtmlHelpers Folder]({% slug overview_autocompletehelper_aspnetmvc %})
 * [Tutorials on Telerik UI for ASP.NET MVC]({% slug overview_timeefficiencyapp_aspnetmvc6 %})
 * [Telerik UI for ASP.NET MVC Troubleshooting]({% slug troubleshooting_aspnetmvc %})

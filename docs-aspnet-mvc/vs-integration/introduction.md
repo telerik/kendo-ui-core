@@ -25,15 +25,15 @@ The Visual Studio Extensions can be accessed through the **Telerik | UI for ASP.
 
 **Figure 1. Visual Studio without Selected Projects**
 
-![Create Menu](/aspnet-mvc/vs-integration/images/create_menu.png)
+![Create Menu](/vs-integration/images/create_menu.png)
 
 **Figure 2. The selected project in Visual Studio is a standard ASP.NET MVC 4 or 5 web application**
 
-![Convert Menu](/aspnet-mvc/vs-integration/images/convert_menu.png)
+![Convert Menu](/vs-integration/images/convert_menu.png)
 
 **Figure 3. The selected project in Visual Studio is Telerik UI for ASP.NET MVC web application**
 
-![Configure Menu](/aspnet-mvc/vs-integration/images/configure_menu.png)
+![Configure Menu](/vs-integration/images/configure_menu.png)
 
 When installed, the extensions add the project templates to the New Project dialog of Visual Studio and as shown in **Figure 4**.
 
@@ -42,7 +42,7 @@ When installed, the extensions add the project templates to the New Project dial
 
 **Figure 4. The added project templates**
 
-![Project templates](/aspnet-mvc/vs-integration/images/project_template.png)
+![Project templates](/vs-integration/images/project_template.png)
 
 These are available in the language-specific nodes of the dialog as well. The **Add New Project** dialog contains the Telerik UI for ASP.NET MVC web application under both the `CSharp\Web` and `Visual Basic\Web` nodes.
 
@@ -55,7 +55,7 @@ The new ASP.NET MVC 4 project wizard also contains the Telerik UI for ASP.NET MV
 
 **Figure 5. The MVC wizard**
 
-![Mvc Wizard](/aspnet-mvc/vs-integration/images/mvc_wizard.png)
+![Mvc Wizard](/vs-integration/images/mvc_wizard.png)
 
 ## See Also
 

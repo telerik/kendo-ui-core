@@ -75,7 +75,7 @@ To add multiple sources for the same video, configure the quality-dependent [HD 
 
 ## Configuration
 
-The MediaPlayer provides properties, methods, and events to match your specific preferences. For more information on its configuration options, refer to the [MediaPlayer API documentation](/api/javascript/ui/mediaplayer).
+The MediaPlayer provides properties, methods, and events to match your specific preferences. For more information on its configuration options, refer to the [MediaPlayer API documentation](../../../kendo-ui/api/javascript/ui/mediaplayer).
 
 ### Add Multiple Sources for Quality HD Feature
 
@@ -118,7 +118,7 @@ Players usually feature a different video based on user action. For a basic exam
 
 ### Prevent Seeking Forward
 
-Application or business logic usually enforces the user to watch only the currently loaded content without the option to jump forward. The MediaPlayer provides the [`forwardSeek`](/api/javascript/ui/mediaplayer.md#forwardseek-boolean-default-true) configuration, which helps to achieve this requirement.
+Application or business logic usually enforces the user to watch only the currently loaded content without the option to jump forward. The MediaPlayer provides the [`forwardSeek`](../../../kendo-ui/api/javascript/ui/mediaplayer#configuration-forwardSeek) configuration, which helps to achieve this requirement.
 
 ### Access Existing Instances
 
@@ -166,7 +166,7 @@ To implement your own **Playlist** structures, change the source of the MediaPla
 
 ## Event Handling
 
-You can subscribe to all [MediaPlayer events](/api/javascript/ui/mediaplayer#events).
+You can subscribe to all [MediaPlayer events](../../../kendo-ui/api/javascript/ui/mediaplayer#events).
 
 ### By Handler Name
 
@@ -249,7 +249,7 @@ The example below demonstrates how to subscribe to events using a template deleg
 
 ## Keyboard Navigation
 
-The MediaPlayer supports keyboard navigation. To enable it, use the [`navigatable`](/api/javascript/ui/mediaplayer#configuration-navigatable) property.
+The MediaPlayer supports keyboard navigation. To enable it, use the [`navigatable`](../../../kendo-ui/api/javascript/ui/mediaplayer#configuration-navigatable) property.
 
 The following list provides the built-in keyboard commands of the MediaPlayer:
 
@@ -297,7 +297,7 @@ To localize the tooltip texts from the interface, use the configuration options 
 %>
 ```
 
-For a complete list of [localizable messages](/api/javascript/ui/mediaplayer#configuration-messages), refer to the [MediaPlayer API documentation](/api/javascript/ui/mediaplayer).
+For a complete list of [localizable messages](../../../kendo-ui/api/javascript/ui/mediaplayer#configuration-messages), refer to the [MediaPlayer API documentation](../../../kendo-ui/api/javascript/ui/mediaplayer).
 
 All Kendo UI widgets, including the MediaPlayer, also allow you to add script files and implement [global localization]({% slug overview_localization_kendoui %}) for your application.
 
@@ -305,10 +305,10 @@ All Kendo UI widgets, including the MediaPlayer, also allow you to add script fi
 
 * [MediaPlayer Live Sample](http://demos.telerik.com/aspnet-mvc/mediaplayer/index)
 * [Overview of the Kendo UI MediaPlayer Widget]({% slug overview_kendoui_mediaplayer_widget %})
-* [MediaPlayer JavaScript API Reference](/api/javascript/ui/mediaplayer)
+* [MediaPlayer JavaScript API Reference](../../../kendo-ui/api/javascript/ui/mediaplayer)
 * [Overview of Telerik UI for ASP.NET MVC]({% slug overview_aspnetmvc %})
 * [Fundamentals of Telerik UI for ASP.NET MVC]({% slug fundamentals_aspnetmvc %})
-* [Telerik UI for ASP.NET MVC API Reference Folder](/api/aspnet-mvc/Kendo.Mvc/AggregateFunction)
+* [Telerik UI for ASP.NET MVC API Reference Folder](/api/Kendo.Mvc/AggregateFunction)
 * [Telerik UI for ASP.NET MVC HtmlHelpers Folder]({% slug overview_autocompletehelper_aspnetmvc %})
 * [Tutorials on Telerik UI for ASP.NET MVC]({% slug overview_timeefficiencyapp_aspnetmvc6 %})
 * [Telerik UI for ASP.NET MVC Troubleshooting]({% slug troubleshooting_aspnetmvc %})

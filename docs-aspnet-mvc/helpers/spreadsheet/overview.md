@@ -159,11 +159,11 @@ Below are listed the steps for you to follow when configuring the Kendo UI Sprea
 
 **Figure 1. The final result**
 
-![Final result](/aspnet-mvc/helpers/spreadsheet/images/spreadsheet-inline.png)
+![Final result](/helpers/spreadsheet/images/spreadsheet-inline.png)
 
 ## Event Handling
 
-You can subscribe to all Spreadsheet [events](/api/javascript/ui/spreadsheet#events).
+You can subscribe to all Spreadsheet [events](../../../kendo-ui/api/javascript/ui/spreadsheet#events).
 
 ### By Handler Name
 
@@ -226,7 +226,7 @@ The example below demonstrates how to subscribe to events by a template delegate
 
 ### Existing Instances
 
-You can reference an existing Kendo UI Spreadsheet instance via [`jQuery.data()`](http://api.jquery.com/jQuery.data/). Once a reference is established, use the [Spreadsheet API](/api/javascript/ui/spreadsheet#methods) to control its behavior.
+You can reference an existing Kendo UI Spreadsheet instance via [`jQuery.data()`](http://api.jquery.com/jQuery.data/). Once a reference is established, use the [Spreadsheet API](../../../kendo-ui/api/javascript/ui/spreadsheet#methods) to control its behavior.
 
 ###### Example
 
@@ -244,13 +244,13 @@ You can reference an existing Kendo UI Spreadsheet instance via [`jQuery.data()`
 
 Other articles on Telerik UI for ASP.NET MVC and on the Spreadsheet:
 
-* [ASP.NET MVC API Reference: SpreadsheetBuilder](/api/aspnet-mvc/Kendo.Mvc.UI.Fluent/SpreadsheetBuilder)
+* [ASP.NET MVC API Reference: SpreadsheetBuilder](/api/Kendo.Mvc.UI.Fluent/SpreadsheetBuilder)
 * [Processing of the Kendo UI Spreadsheet for ASP.NET MVC]({% slug spreadsheet_processing_spreadsheet_mvc %})
 * [Overview of the Kendo UI Spreadsheet Widget]({% slug overview_spreadsheet_widget %})
 * [Overview of Telerik UI for ASP.NET MVC]({% slug overview_aspnetmvc %})
 * [Fundamentals of Telerik UI for ASP.NET MVC]({% slug fundamentals_aspnetmvc %})
 * [Scaffolding in Telerik UI for ASP.NET MVC]({% slug scaffolding_aspnetmvc %})
-* [Telerik UI for ASP.NET MVC API Reference Folder](/api/aspnet-mvc/Kendo.Mvc/AggregateFunction)
+* [Telerik UI for ASP.NET MVC API Reference Folder](/api/Kendo.Mvc/AggregateFunction)
 * [Telerik UI for ASP.NET MVC HtmlHelpers Folder]({% slug overview_barcodehelper_aspnetmvc %})
 * [Tutorials on Telerik UI for ASP.NET MVC]({% slug overview_timeefficiencyapp_aspnetmvc6 %})
 * [Telerik UI for ASP.NET MVC Troubleshooting]({% slug troubleshooting_aspnetmvc %})

@@ -14,7 +14,7 @@ To see the example on how to refer to Kendo UI from CDN with a local script fall
 Other articles on Telerik UI for ASP.NET MVC:
 
 * [Kendo UI CDN Services]({% slug kendoui_cdn_services_installation %})
-* [UI for ASP.NET MVC API Reference](api/aspnet-mvc/Kendo.Mvc/AggregateFunction)
+* [UI for ASP.NET MVC API Reference](/api/Kendo.Mvc/AggregateFunction)
 * [Telerik UI for ASP.NET MVC Overview]({% slug overview_aspnetmvc %})
 * [Telerik UI for ASP.NET MVC Custom DataSource]({% slug customdatasource_aspnetmvc %})
 * [Validation with Telerik UI for ASP.NET MVC]({% slug validation_aspnetmvc %})

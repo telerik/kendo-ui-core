@@ -76,7 +76,7 @@ The name attribute is required and must be unique. It is used as a form field na
 
 ## Event Handling
 
-You can subscribe to all Upload [events](/api/javascript/ui/upload#events).
+You can subscribe to all Upload [events](../../../kendo-ui/api/javascript/ui/upload#events).
 
 ### By Handler Name
 
@@ -152,7 +152,7 @@ The example below demonstrates how to subscribe to events by a template delegate
 
 ### Existing Instances
 
-You can reference an existing Kendo UI Upload instance via [`jQuery.data()`](http://api.jquery.com/jQuery.data/). Once a reference is established, use the [Upload API](/api/javascript/ui/upload#methods) to control its behavior.
+You can reference an existing Kendo UI Upload instance via [`jQuery.data()`](http://api.jquery.com/jQuery.data/). Once a reference is established, use the [Upload API](../../../kendo-ui/api/javascript/ui/upload#methods) to control its behavior.
 
 ###### Example
 
@@ -168,7 +168,7 @@ You can reference an existing Kendo UI Upload instance via [`jQuery.data()`](htt
 
 Other articles on Telerik UI for ASP.NET MVC and on the Upload:
 
-* [ASP.NET MVC API Reference: UploadBuilder](/api/aspnet-mvc/Kendo.Mvc.UI.Fluent/UploadBuilder)
+* [ASP.NET MVC API Reference: UploadBuilder](/api/Kendo.Mvc.UI.Fluent/UploadBuilder)
 * [Upload HtmlHelper Modes of Operation]({% slug modesoperation_uploadhelper_aspnetmvc %})
 * [Sending and Receiving Metadata with the Upload HtmlHelper]({% slug metadata_uploadhelper_aspnetmvc %})
 * [How to Upload Files from Grid Popup Editors in ASP.NET MVC Applications]({% slug howto_uploadfilesgridpopupeditor_uploadaspnetmvc %})
@@ -177,7 +177,7 @@ Other articles on Telerik UI for ASP.NET MVC and on the Upload:
 * [Overview of Telerik UI for ASP.NET MVC]({% slug overview_aspnetmvc %})
 * [Fundamentals of Telerik UI for ASP.NET MVC]({% slug fundamentals_aspnetmvc %})
 * [Scaffolding in Telerik UI for ASP.NET MVC]({% slug scaffolding_aspnetmvc %})
-* [Telerik UI for ASP.NET MVC API Reference Folder](/api/aspnet-mvc/Kendo.Mvc/AggregateFunction)
+* [Telerik UI for ASP.NET MVC API Reference Folder](/api/Kendo.Mvc/AggregateFunction)
 * [Telerik UI for ASP.NET MVC HtmlHelpers Folder]({% slug overview_autocompletehelper_aspnetmvc %})
 * [Tutorials on Telerik UI for ASP.NET MVC]({% slug overview_timeefficiencyapp_aspnetmvc6 %})
 * [Telerik UI for ASP.NET MVC Troubleshooting]({% slug troubleshooting_aspnetmvc %})

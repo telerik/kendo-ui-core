@@ -149,7 +149,7 @@ The example below demonstrates how the radio button with the **I Disagree** labe
 
 Other articles on Telerik UI for ASP.NET MVC and on the RadioButton:
 
-* [ASP.NET MVC API Reference: RadioButtonBuilder](/api/aspnet-mvc/Kendo.Mvc.UI.Fluent/RadioButtonBuilder)
+* [ASP.NET MVC API Reference: RadioButtonBuilder](/api/Kendo.Mvc.UI.Fluent/RadioButtonBuilder)
 * [Overview of Telerik UI for ASP.NET MVC]({% slug overview_aspnetmvc %})
 * [Fundamentals of Telerik UI for ASP.NET MVC]({% slug fundamentals_aspnetmvc %})
 * [Scaffolding in Telerik UI for ASP.NET MVC]({% slug scaffolding_aspnetmvc %})

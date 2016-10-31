@@ -1,571 +1,209 @@
 # The public documentation URL, used for sitemap.xml
-url: "http://docs.telerik.com/aspnet-mvc/"
+url: "http://docs.telerik.com/aspnet-mvc"
 
 # Exclude files which should not be in the output
-exclude: [readme.md, Gemfile, Gemfile.lock,api_sort.rb]
+exclude: [readme.md, Gemfile, Gemfile.lock,api_sort.rb,SlugLog.log]
 navigation:
 ## List your directory names and order here, like this:
-    "api":
+
+     "api":
         title: "API Reference"
         position: 0
-    "api/javascript/dataviz":
-        title: "dataviz"
-    "intro":
+     "getting-started":
         title: "Getting Started"
-        position: 2
-    "intro/installation":
-        title: "Prerequisites and Installation"
-        position: 1
-    "intro/widget-basics":
-        title: "Widget Basics"
-        position: 2
-    "intro/supporting":
-        title: "Additional Resources"
-        position: 3
-    "controls":
-        title: "Widgets"
-        position: 3
-    "controls/data-management":
-        title: "Data Management"
-        position: 1
-    "controls/data-management/grid/how-to/AngularJS":
-        title: "AngularJS"
-        position: 1
-    "controls/data-management/grid/how-to/Layout":
-        title: "Appearance"
-        position: 2
-    "controls/data-management/grid/how-to/binding":
-        title: "Binding"
-        position: 3
-    "controls/data-management/grid/how-to/Editing":
-        title: "Editing"
-        position: 4
-    "controls/data-management/grid/how-to/excel":
-        title: "Export to Excel"
         position: 5
-    "controls/data-management/grid/how-to/pdf-export":
-        title: "Export in PDF"
-        position: 6
-    "controls/data-management/grid/how-to/filtering":
-        title: "Filtering"
-        position: 7
-    "controls/data-management/grid/how-to/hidden":
-        title: "Hidden Containers"
-        position: 8
-    "controls/data-management/grid/how-to/Selection":
-        title: "Selection"
-        position: 9
-    "controls/data-management/grid/how-to/Templates":
-        title: "Templates"
-        position: 10
-    "controls/data-management/grid/how-to/state":
-        title: "State Management"
-        position: 11
-    "controls/editors":
-        title: "Editors"
-        position: 2
-    "controls/charts":
-        title: "Charts"
-        position: 3
-    "controls/charts/features":
-        title: "Features"
-        position: 7
-    "controls/charts/chart-types":
-        title: "Chart Types"
-        position: 8
-    "controls/charts/stockchart":
-        title: "Stock Charts"
-        position: 9
-    "controls/charts/sparkline":
-        title: "Sparklines"
-        position: 10
-    "controls/charts/treemap":
-        title: "TreeMap"
-        position: 11
-    "controls/gauges":
-        title: "Gauges"
-        position: 4
-    "controls/barcodes":
-        title: "Barcodes"
-        position: 5
-    "controls/diagrams-and-maps":
-        title: "Diagrams and Maps"
-        position: 6
-    "controls/scheduling":
-        title: "Scheduling"
-        position: 7
-    "controls/layout":
-        title: "Layout"
-        position: 8
-    "controls/navigation":
-        title: "Navigation"
-        position: 9
-    "controls/interactivity":
-        title: "Interactivity and UX"
-        position: 10
-    "controls/interactivity/fx":
-        title: "FX"
-    "controls/interactivity/draganddrop":
-        title: "Drag and Drop"
-    "controls/media":
-        title: "Media"
-        position: 11
-    "controls/hybrid":
-        title: "Hybrid UI"
-        position: 12
-    "controls/hybrid/styles":
-        title: "Styles and Appearance"
-        position: 5
-    "controls/hybrid/support":
-        title: "Support and Integration"
-        position: 6
-    "controls/hybrid/actionsheet":
-        title: "ActionSheet"
-        position: 7
-    "controls/hybrid/button":
-        title: "Button"
-        position: 8
-    "controls/hybrid/buttongroup":
-        title: "ButtonGroup"
-        position: 9
-    "controls/hybrid/collapsible":
-        title: "Collapsible"
-        position: 10
-    "controls/hybrid/drawer":
-        title: "Drawer"
-        position: 11
-    "controls/hybrid/listview":
-        title: "ListView"
-        position: 12
-    "controls/hybrid/modalview":
-        title: "ModalView"
-        position: 13
-    "controls/hybrid/navbar":
-        title: "NavBar"
-        position: 14
-    "controls/hybrid/pane":
-        title: "Pane"
-        position: 15
-    "controls/hybrid/popover":
-        title: "PopOver"
-        position: 16
-    "controls/hybrid/scroller":
-        title: "Scroller"
-        position: 17
-    "controls/hybrid/scrollview":
-        title: "ScrollView"
-        position: 18
-    "controls/hybrid/splitview":
-        title: "SplitView"
-        position: 19
-    "controls/hybrid/switch":
-        title: "Switch"
-        position: 20
-    "controls/hybrid/tabstrip":
-        title: "TabStrip"
-        position: 21
-    "controls/hybrid/view":
-        title: "View"
-        position: 22
-    "controls/hybrid/how-to":
+     "how-to":
         title: "How To"
-        position: 23
-    "controls/hybrid/how-to/application":
-        title: "Application"
-    "controls/hybrid/faq":
-        title: "Frequently Asked Questions"
-        position: 24
-    "styles-and-layout":
-        title: "Styles and Appearance"
-        position: 4
-    "framework":
-        title: "Framework and Utilities"
-        position: 5
-    "framework/datasource":
-        title: "DataSource"
-        position: 1
-    "framework/hierarchicaldatasource":
-        title: "HierarchicalDataSource"
-        position: 2
-    "framework/mvvm":
-        title: "MVVM"
-        position: 3
-    "framework/mvvm/bindings":
-        title: "Bindings"
-        position: 3
-    "framework/mvvm/how-to":
-        title: "How To"
-        position: 4
-    "framework/mvvm/tutorials":
-        title: "Tutorials"
-        position: 5
-    "framework/templates":
-        title: "Templates"
-        position: 4
-    "framework/spa":
-        title: "Single Page Applications"
-        position: 5
-    "framework/excel":
-        title: "Excel Export"
-        position: 6
-    "framework/drawing":
-        title: "Drawing API"
-        position: 7
-    "framework/globalization":
-        title: "Globalization"
-        position: 8
-    "framework/localization":
-        title: "Localization"
-        position: 9
-    "framework/class":
-        title: "Class"
-        position: 10
-    "framework/validator":
-        title: "Validator"
-        position: 11
-    "framework/save-files":
-        title: "Saving Files"
-        position: 12
-    "third-party":
-        title: "Third-Party Frameworks and Utilities"
-        position: 6
-    "third-party/tutorials":
-        title: "Tutorials"
-        position: 100
-    "third-party/tutorials/webforms":
-        title: "ASP.NET Web Forms"
-        position: 1
-    "AngularJS":
-        title: "AngularJS Directives"
-        position: 7
-    "AngularJS/how-to":
-        title: "How To"
-        position: 6
-    "AngularJS/Troubleshooting":
-        title: "Troubleshooting"
-        position: 7
-    "AngularJS/tutorials":
-        title: "Tutorials"
-        position: 8
-    "aspnet-mvc":
-        title: "UI for ASP.NET MVC"
-        position: 8
-    "aspnet-mvc/mvc-core":
-        title: "Use with ASP.NET Core"
-        position: 15
-    "aspnet-mvc/vs-integration":
+        position: 30
+     "helpers":
+        title: "Helpers"
+        position: 50
+     "vs-integration":
         title: "Visual Studio Integration"
-        position: 16
-    "aspnet-mvc/migration":
-        title: "Migrate From Telerik Extensions"
-        position: 17
-    "aspnet-mvc/helpers":
-        title: "Widgets"
-        position: 18
-    "aspnet-mvc/helpers/grid/binding":
-        title: "Binding"
-        position: 6
-    "aspnet-mvc/helpers/grid/editing":
-        title: "Editing"
-        position: 7
-    "aspnet-mvc/helpers/grid/templating":
-        title: "Templating"
-        position: 8
-    "aspnet-mvc/helpers/grid/how-to":
-        title: "How To"
-        position: 9
-    "aspnet-mvc/helpers/grid/how-to/state":
-        title: "State Management"
-    "aspnet-mvc/helpers/grid/troubleshoot":
-        title: "Troubleshooting"
-        position: 10
-    "aspnet-mvc/helpers/hybrid":
-        title: "Hybrid UI"
-    "aspnet-mvc/how-to":
-        title: "How To"
-        position: 19
-    "aspnet-mvc/troubleshoot":
-        title: "Troubleshooting"
-        position: 20
-    "aspnet-mvc/tutorials":
+        position: 60
+     "migration":
+        title: "Migration"
+        position: 70
+     "tutorials":
         title: "Tutorials"
-        position: 21
-    "aspnet-mvc/tutorials/quickstart":
-        title: "Quick Start Guide"
-        position: 1
-    "aspnet-mvc/tutorials/tutorial-aspnetmvc-quick-start/build-team-efficiency-app":
-        title: "Build the Team Efficiency Project"
-        position: 2
-    "aspnet-mvc/tutorials/tutorial-kendo-music-store":
-        title: "Build the Music Store Project"
-        position: 2
-    "aspnet-mvc/tutorials/tutorial-kendo-music-store/music-store-web":
-        title: "Build the Web Application"
-        position: 2
-    "aspnet-mvc/tutorials/tutorial-kendo-music-store/music-store-dashboard":
-        title: "Build the Dashboard"
-        position: 3
-    "aspnet-mvc/tutorials/tutorial-saleshub":
-        title: "Build the Sales Hub Project"
-        position: 2
-    "aspnet-mvc/tutorials/tutorial-saleshub/home-page":
-        title: "Build the Home Page"
-        position: 2
-    "aspnet-mvc/tutorials/tutorial-saleshub/order-page":
-        title: "Build the Order Page"
-        position: 3
-    "jsp":
-        title: "UI for JSP"
-        position: 9
-    "php":
-        title: "UI for PHP"
-        position: 10
-    "php/widgets":
-        title: "Classes"
-    "troubleshoot":
+        position: 80
+     "troubleshoot":
         title: "Troubleshooting"
-        position: 11
-    "accessibility":
-        title: "Accessibility"
-        position: 12
-    "backwards-compatibility":
-        title: "Backwards Compatibility"
-        position: 13
-    "backwards-compatibility/2012":
-        title: "2012"
-        position: 5
-    "backwards-compatibility/2013":
-        title: "2013"
-        position: 4
-    "backwards-compatibility/2014":
-        title: "2014"
-        position: 3
-    "backwards-compatibility/2015":
-        title: "2015"
-        position: 2
-    "backwards-compatibility/2016":
-        title: "2016"
-        position: 1
-    "updates":
-        title: "Updates and  Contribution"
-        position: 14
-    "copyright":
-        title: "Copyright"
-        position: 15
-    "*how-to":
-        title: "How To"
-        position: 200
-    "*angular":
-        title: "AngularJS"
-        position: 1
-    "*webpack":
-        title: "Webpack Integration"
-        position: 200
-    "*troubleshoot":
-        title: "Troubleshooting"
-        position: 201
-    "*asp.net":
-        title: "ASP.NET"
-    "*widgets":
-        title: "Widgets"
-    "*tags":
-        title: "Tags"
-    "*excel":
-        title: "Excel"
-    "*pdf-export":
-        title: "PDF Export"
-    "*mobileactionsheet":
-        title: "ActionSheet"
-    "*mobileapplication":
-        title: "Application"
-    "*mobilebuttongroup":
-        title: "ButtonGroup"
-    "*mobilelayout":
-        title: "Layout"
-    "*mobilemodalview":
-        title: "ModalView"
-    "*mobilepopover":
-        title: "PopOver"
-    "*mobilesplitview":
-        title: "SplitView"
-    "*mobileswitch":
-        title: "Switch"
-    "*mobiletabstrip":
-        title: "TabStrip"
-    "*mobilelistview":
-        title: "ListView"
-    "*mobileview":
-        title: "View"
-    "*mobilebutton":
-        title: "Button"
-    "*mobiledrawer":
-        title: "Drawer"
-    "*mobilenavbar":
-        title: "NavBar"
-    "*mobilescrollview":
-        title: "ScrollView"
-    "*barcode":
-        title: "Barcode"
-    "*stockchart":
-        title: "Stock Chart"
-    "*chart":
-        title: "Chart"
-    "*chart-types":
-        title: "Chart Types"
-        position: 8
-    "*dataviz":
-        title: "Data Visualization"
-    "*lineargauge":
-        title: "LinearGauge"
-    "*treemap":
-        title: "TreeMap"
-    "*qrcode":
-        title: "QRCode"
-    "*radialgauge":
-        title: "RadialGauge"
-    "*sparkline":
-        title: "Sparkline"
-    "*stockchart":
-        title: "StockChart"
-    "*map":
-        title: "Map"
-    "*diagram":
-        title: "Diagram"
-    "*hierarchicaldatasource":
-        title: "HierarchicalDataSource"
-    "*datasource":
-        title: "DataSource"
-    "*draganddrop":
-        title: "Drag and Drop"
-    "*fx":
-        title: "FX"
-    "*globalization":
-        title: "Globalization"
-    "*mvvm":
-        title: "MVVM"
-    "*spa":
-        title: "SPA"
-    "*templates":
-        title: "Templates"
-    "*validator":
-        title: "Validator"
-    "*autocomplete":
+        position: 90
+
+## List helpers directory names and order here, like this:
+     "helpers/autocomplete":
         title: "AutoComplete"
-    "*/button":
+        position: 1
+     "helpers/barcode":
+        title: "Barcode"
+        position: 1
+     "helpers/button":
         title: "Button"
-    "*/radiobutton":
-        title: "RadioButton"
-    "*calendar":
+        position: 1
+     "helpers/calendar":
         title: "Calendar"
-    "*colorpalette":
+        position: 1
+     "helpers/chart":
+        title: "Chart"
+        position: 1
+     "helpers/colorpalette":
         title: "ColorPalette"
-    "*flatcolorpicker":
-        title: "FlatColorPicker"
-    "*colorpicker":
+        position: 1
+     "helpers/colorpicker":
         title: "ColorPicker"
-    "*combobox":
+        position: 1
+     "helpers/combobox":
         title: "ComboBox"
-    "*datepicker":
+        position: 1
+     "helpers/datepicker":
         title: "DatePicker"
-    "*datetimepicker":
+        position: 1
+     "helpers/datetimepicker":
         title: "DateTimePicker"
-    "*dialog":
+        position: 1
+     "helpers/diagram":
+        title: "Diagram"
+        position: 1
+     "helpers/dialog":
         title: "Dialog"
-    "*dropdownlist":
+        position: 1
+     "helpers/dropdownlist":
         title: "DropDownList"
-    "*editor":
+        position: 1
+     "helpers/editor":
         title: "Editor"
-    "*gantt":
+        position: 1
+     "helpers/flatcolorpicker":
+        title: "FlatColorPicker"
+        position: 1
+     "helpers/gantt":
         title: "Gantt"
-    "*pivotgrid":
-        title: "PivotGrid"
-    "*grid":
+        position: 1
+     "helpers/grid":
         title: "Grid"
-    "*media":
-        title: "Media"
-    "*mediaplayer":
-        title: "MediaPlayer"
-    "*spreadsheet":
-        title: "Spreadsheet"
-    "*import-and-export-data":
-        title: "Import and Export Data"
-        position: 5
-    "*localization-spreadsh":
-        title: "Localization"
-        position: 6
-    "*end-user":
-        title: "For the End User"
-        position: 7
-    "*listview":
+        position: 1
+     "helpers/hybrid":
+        title: "Hybrid"
+        position: 1
+     "helpers/lineargauge":
+        title: "LinearGauge"
+        position: 1
+     "helpers/listview":
         title: "ListView"
-    "*maskedtextbox":
+        position: 1
+     "helpers/map":
+        title: "Map"
+        position: 1
+     "helpers/maskedtextbox":
         title: "MaskedTextBox"
-    "*menu":
+        position: 1
+     "helpers/mediaplayer":
+        title: "MediaPlayer"
+        position: 1
+     "helpers/menu":
         title: "Menu"
-    "*multiselect":
+        position: 1
+     "helpers/multiselect":
         title: "MultiSelect"
-    "*notification":
+        position: 1
+     "helpers/notification":
         title: "Notification"
-    "*popup":
-        title: "Popup"
-    "*numerictextbox":
+        position: 1
+     "helpers/numerictextbox":
         title: "NumericTextBox"
-    "*panelbar":
+        position: 1
+     "helpers/panelbar":
         title: "PanelBar"
-    "*pivotdatasource":
-        title: "PivotDataSource"
-    "*pivotconfigurator":
-        title: "PivotConfigurator"
-    "*progressbar":
+        position: 1
+     "helpers/pivotgrid":
+        title: "PivotGrid"
+        position: 1
+     "helpers/progressbar":
         title: "ProgressBar"
-    "*rangeslider":
-        title: "RangeSlider"
-    "*responsivepanel":
-        title: "ResponsivePanel"
-    "*scheduler":
+        position: 1
+     "helpers/qrcode":
+        title: "QRCode"
+        position: 1
+     "helpers/radialgauge":
+        title: "RadialGauge"
+        position: 1
+     "helpers/radiobutton":
+        title: "RadioButton"
+        position: 1
+     "helpers/scheduler":
         title: "Scheduler"
-    "*slider":
+        position: 1
+     "helpers/slider":
         title: "Slider"
-    "*sortable":
+        position: 1
+     "helpers/sortable":
         title: "Sortable"
-    "*splitter":
+        position: 1
+     "helpers/splitter":
         title: "Splitter"
-    "*tabstrip":
+        position: 1
+     "helpers/spreadsheet":
+        title: "SpreadSheet"
+        position: 1
+     "helpers/stockchart":
+        title: "StockChart"
+        position: 1
+     "helpers/tabstrip":
         title: "TabStrip"
-    "*timepicker":
+        position: 1
+     "helpers/timepicker":
         title: "TimePicker"
-    "*tooltip":
-        title: "Tooltip"
-    "*toolbar":
+        position: 1
+     "helpers/toolbar":
         title: "ToolBar"
-    "*treelist":
+        position: 1
+     "helpers/tooltip":
+        title: "Tooltip"
+        position: 1
+     "helpers/treelist":
         title: "TreeList"
-    "*treeview":
+        position: 1
+     "helpers/treemap":
+        title: "TreeMap"
+        position: 1
+     "helpers/treeview":
         title: "TreeView"
-    "*upload":
+        position: 1
+     "helpers/upload":
         title: "Upload"
-    "*window":
+        position: 1
+     "helpers/window":
         title: "Window"
-    "*hello-kendo-ui":
-        title: "Hello Kendo UI"
-    "*home-page":
+        position: 1
+
+## List migration directory names and order here, like this:
+     "migration/widgets":
+        title: "Widgets"
+        position: 1
+
+## List tutorials directory names and order here, like this:
+     "tutorials/quickstart":
+        title: "Quick Start"
+        position: 1
+     "tutorials/tutorial-kendo-music-store":
+        title: "Tutorial Kendo Music Store"
+        position: 1
+     "tutorials/tutorial-kendo-music-store/music-store-dashboard":
+        title: "Music Store Dashboard"
+        position: 1
+     "tutorials/tutorial-kendo-music-store/music-store-web":
+        title: "Music Store Web"
+        position: 1
+     "tutorials/tutorial-saleshub":
+        title: "Tutorial Sales Hub"
+        position: 1
+     "tutorials/tutorial-saleshub/home-page":
         title: "Home Page"
-    "*order-page":
+        position: 1
+     "tutorials/tutorial-saleshub/order-page":
         title: "Order Page"
-    "*localization":
-        title: "Localization"
-    "api/javascript":
-        title: "JavaScript"
-        position: 2
-    "api/aspnet-mvc":
-        title: "ASP.NET MVC"
-        position: 3
-    "api/jsp":
-        title: "JSP"
-        position: 4
-    "api/php":
-        title: "PHP"
-        position: 5
+        position: 1
 
 ## The application virtual path
 baseurl: /aspnet-mvc
@@ -584,51 +222,13 @@ defaults:
     values:
         layout: "page"
         category: "default"
-        product: "kendo-ui"
+        product: "aspnet-mvc"
         editable: true
 -
     scope:
         path: "aspnet-mvc"
     values:
         product: "aspnet-mvc"
--
-    scope:
-        path: "api/aspnet-mvc"
-    values:
-        product: "aspnet-mvc"
-        editable: false
--
-    scope:
-        path: "php"
-    values:
-        product: "php-ui"
--
-    scope:
-        path: "api/php"
-    values:
-        product: "php-ui"
-        editable: false
--
-    scope:
-        path: "api/jsp"
-    values:
-        product: "jsp-ui"
-        editable: false
--
-    scope:
-        path: "jsp"
-    values:
-        product: "jsp-ui"
--
-    scope:
-        path: "api"
-    values:
-        kind: "api"
--
-    scope:
-        path: "api/javascript"
-    values:
-        editableExample: "true"
 
 type_links:
     "kendo.Class": "/api/javascript/class"

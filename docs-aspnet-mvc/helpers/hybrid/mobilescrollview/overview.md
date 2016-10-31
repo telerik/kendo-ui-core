@@ -118,7 +118,7 @@ Below are listed the steps for you to follow when configuring the hybrid Kendo U
 
 ## Event Handling
 
-You can subscribe to all hybrid ScrollView [events](/api/javascript/mobile/ui/scrollview#events).
+You can subscribe to all hybrid ScrollView [events](../../../../kendo-ui/api/javascript/mobile/ui/scrollview#events).
 
 ### By Handler Name
 
@@ -172,7 +172,7 @@ The examples below demonstrates how to subscribe to events by a handler name.
 
 ### Instances
 
-You can reference a hybrid ScrollView instance by using the code from the example below. Once a reference is established, use the [hybrid ScrollView API](/api/javascript/mobile/ui/scrollview#methods) to control its behavior.
+You can reference a hybrid ScrollView instance by using the code from the example below. Once a reference is established, use the [hybrid ScrollView API](../../../../kendo-ui/api/javascript/mobile/ui/scrollview#methods) to control its behavior.
 
 ###### Example
 
@@ -195,12 +195,12 @@ You can reference a hybrid ScrollView instance by using the code from the exampl
 
 Other articles on Telerik UI for ASP.NET MVC and on the ScrollView:
 
-* [ASP.NET MVC API Reference: ScrollViewBuilder](/api/aspnet-mvc/Kendo.Mvc.UI.Fluent/MobileScrollViewBuilder)
+* [ASP.NET MVC API Reference: ScrollViewBuilder](/api/Kendo.Mvc.UI.Fluent/MobileScrollViewBuilder)
 * [Overview of the Hybrid UI ScrollView Widget]({% slug overview_hybridscrollview %})
 * [Overview of Telerik UI for ASP.NET MVC]({% slug overview_aspnetmvc %})
 * [Fundamentals of Telerik UI for ASP.NET MVC]({% slug fundamentals_aspnetmvc %})
 * [Scaffolding in Telerik UI for ASP.NET MVC]({% slug scaffolding_aspnetmvc %})
-* [Telerik UI for ASP.NET MVC API Reference Folder](/api/aspnet-mvc/Kendo.Mvc/AggregateFunction)
+* [Telerik UI for ASP.NET MVC API Reference Folder](/api/Kendo.Mvc/AggregateFunction)
 * [Telerik UI for ASP.NET MVC HtmlHelpers Folder]({% slug overview_barcodehelper_aspnetmvc %})
 * [Tutorials on Telerik UI for ASP.NET MVC]({% slug overview_timeefficiencyapp_aspnetmvc6 %})
 * [Telerik UI for ASP.NET MVC Troubleshooting]({% slug troubleshooting_aspnetmvc %})

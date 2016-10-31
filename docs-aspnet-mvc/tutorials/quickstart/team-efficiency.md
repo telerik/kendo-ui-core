@@ -139,19 +139,19 @@ Telerik UI for ASP.NET MVC is a set of server-side wrappers. A server-wrapper do
 - Allows the developer to configure a Kendo UI widget via C# or VB.NET code&mdash;set its value, data source, etc.
 - Renders the HTML and JavaScript needed to initialize the Kendo UI widget. The widget options propagate to the client side via the widget initialization script.
 
-![Server-side wrapper outputs HTML and JavaScript](images/chapter2/wrapper-output.png)
+![Server-side wrapper outputs HTML and JavaScript](/images/wrapper-output.png)
 
 #### Configuration
 
 The Kendo UI HtmlHelper exposes all Kendo UI server wrappers.
 
-![Kendo HtmlHelper extension method](images/chapter2/kendo-extension.png)
+![Kendo HtmlHelper extension method](/images/kendo-extension.png)
 
 #### Widget Options
 
 The widget options are exposed via a fluent interface.
 
-![Fluent interface](images/chapter2/fluent-interface.png)
+![Fluent interface](/images/fluent-interface.png)
 
 Below is an example of how a NumericTextBox input is created.
 
@@ -850,10 +850,10 @@ The Kendo UI DataSource has many abilities and responsibilities, among which to:
 - Process serialization formats to and from a remote endpoint.
 - [Synchronize updates, create, update, delete]({% slug cruddataoperations_kendoui_datasourcecomponent%}) to and from a remote endpoint.
 - [Maintain an in-memory cache of data, including changes]({% slug offlinesupport_kendoui_datasourcecomponent %}) for updating to a remote endpoint.
-- Calculate and maintain [aggregates](/api/javascript/data/datasource#methods-aggregate), [sorting order](/api/javascript/data/datasource#methods-sort) and [paging](/api/javascript/data/datasource#methods-page).
-- Provide a query mechanism via [filter expressions](/api/javascript/data/datasource#methods-filter).
+- Calculate and maintain [aggregates](../../../kendo-ui/api/javascript/data/datasource#methods-aggregate), [sorting order](../../../kendo-ui/api/javascript/data/datasource#methods-sort) and [paging](../../../kendo-ui/api/javascript/data/datasource#methods-page).
+- Provide a query mechanism via [filter expressions](../../../kendo-ui/api/javascript/data/datasource#methods-filter).
 
-For detailed information on the capabilities of the [DataSource]({% slug overview_kendoui_datasourcecomponent %}), refer to its [configuration API methods, and events](/api/javascript/data/datasource), and [demos](http://demos.telerik.com/kendo-ui/datasource/index).
+For detailed information on the capabilities of the [DataSource]({% slug overview_kendoui_datasourcecomponent %}), refer to its [configuration API methods, and events](../../../kendo-ui/api/javascript/data/datasource), and [demos](http://demos.telerik.com/kendo-ui/datasource/index).
 
 At this point the dashboard is showing all invoice data. Let's use the `EmployeeList` list view and `StatsFrom`/`StatsTo` date pickers to filter the invoice grid by invoking the grid's datasource.
 

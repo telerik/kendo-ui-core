@@ -13,7 +13,7 @@ Since there are many similarities between the create and edit views of an Order,
 
 **Figure 1. A screenshot of the Kendo UI Sales Hub Orders page**
 
-![kendo-saleshub-order-edit-screenshot](/aspnet-mvc/tutorial-saleshub/order-page/images/kendo-saleshub-order-edit-screenshot.png)
+![kendo-saleshub-order-edit-screenshot](/tutorials/tutorial-saleshub/order-page/images/kendo-saleshub-order-edit-screenshot.png)
 
 ## Set up the Partial View for an Order
 
@@ -23,7 +23,7 @@ can be found in **Views/Order/_Order.cshtml**.
 
 ## Set up the basic Order fields
 
-![kendo-saleshub-order-info-screenshot](/aspnet-mvc/tutorial-saleshub/order-page/images/kendo-saleshub-order-info-screenshot.png)
+![kendo-saleshub-order-info-screenshot](/tutorials/tutorial-saleshub/order-page/images/kendo-saleshub-order-info-screenshot.png)
 
 The first part of the form is where we declare the fields where the user can set the contract weight/amount,
 date, and the order number for the given order. For the sake of brevity, we'll only cover the fields which
@@ -67,7 +67,7 @@ as a parameter and will cause the extensions to generate the markup for the unde
 
 ## Set up the TabStrip
 
-![kendo-saleshub-order-tabstrip-screenshot](/aspnet-mvc/tutorial-saleshub/order-page/images/kendo-saleshub-order-tabstrip-screenshot.png)
+![kendo-saleshub-order-tabstrip-screenshot](/tutorials/tutorial-saleshub/order-page/images/kendo-saleshub-order-tabstrip-screenshot.png)
 
 The next part of the Orders view is the [Kendo TabStrip](http://demos.telerik.com/kendo-ui/web/tabstrip/index.html), which contains
 the grids for Order details and notes.
@@ -184,8 +184,8 @@ the extensions that the grid will be bound against `OrderDetailViewModel`'s.
 Here we set up each column for the Grid. Calling `Filterable(false)` allows you to selectively choose when a column cannot be filtered by the user.
 
 Calling `ClientFooterTemplate` allows you to specify a footer which is displayed for the specified column. In our case these footer templates
-make use of the [DataSource aggregates](/api/framework/datasource#configuration-aggregate) that we set up, later on, in our DataSource. As the
-client footer templates are bound client-side we use [Kendo's template syntax](/api/framework/kendo#methods-template) to tell it which aggregate
+make use of the [DataSource aggregates](../../../../kendo-ui/api/javascript/data/datasource#configuration-aggregate) that we set up, later on, in our DataSource. As the
+client footer templates are bound client-side we use [Kendo's template syntax](../../../../kendo-ui/api/javascript/kendo#methods-template) to tell it which aggregate
 to display the result of (in our case we only bind against a `sum` aggregate).
 
 The last column is a command column and we use the Grid's built-in `Edit` and `Destroy` commands.
@@ -291,13 +291,13 @@ grid is being bound against. After you `Add` an aggregate for a property you can
         ).Deferred())
 
 Setting up the Order notes grid is somewhat similar to how we set up the order details grid. Since we're display a DateTime to the user, we specify
-a ClientTemplate for the `PostedDate` column which makes use of Kendo UI's [date formatting](/framework/globalization/dateformatting)
+a ClientTemplate for the `PostedDate` column which makes use of Kendo UI's [date formatting](../../../../kendo-ui/framework/globalization/dateformatting)
 capabilities. Another difference is that we only support viewing and creating order notes, so we only provide `Read` and `Create` URLs for the
 DataSource.
 
 ## Set up the Panel Bar
 
-![kendo-saleshub-order-panelbar-screenshot](/aspnet-mvc/tutorial-saleshub/order-page/images/kendo-saleshub-order-panelbar-screenshot.png)
+![kendo-saleshub-order-panelbar-screenshot](/tutorials/tutorial-saleshub/order-page/images/kendo-saleshub-order-panelbar-screenshot.png)
 
 After the tabstrip containing the order details and order notes grid we have a [Kendo PanelBar](http://demos.telerik.com/kendo-ui/web/panelbar/index.html) which contains
 the fields for editing the payment terms of an Order, along with setting invoice comments.

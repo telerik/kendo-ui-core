@@ -39,7 +39,7 @@ However, the UI for ASP.NET MVC wrappers provide additional capabilities for use
 ### Important Resources
 
 - [Documentation - UI for ASP.NET MVC]({% slug overview_aspnetmvc %})
-- [API References - UI for ASP.NET MVC](/api/aspnet-mvc/Kendo.Mvc/AggregateFunction)
+- [API References - UI for ASP.NET MVC](/api/Kendo.Mvc/AggregateFunction)
 - [Support](http://www.telerik.com/account/support-tickets/my-support-tickets.aspx)
 
 ## Next Steps

@@ -26,7 +26,7 @@ The preferred method of getting Kendo UI is to browse to [telerik.com](http://ww
 
 **Figure 1. The Kendo UI directory structure**
 
-![kendo-commecrial-zip-layout](/aspnet-mvc/tutorial-kendo-music-store/music-store-web/images/kendo-commecrial-zip-layout.png)
+![kendo-commecrial-zip-layout](/tutorials/tutorial-kendo-music-store/music-store-web/images/kendo-commecrial-zip-layout.png)
 
 The `\js` and `\styles` folders in the root of the `.zip` file contain the minified versions of the Kendo UI `.js` and `.css` files. If you have the commercial version of Kendo UI, you may also notice the `\source` folder. This folder also contains `\js` and `\styles` folders, but these are the full, non-minified versions of the `.js` and `.css`. These are typically used for local development and debugging, but the minified versions are the ones that should be deployed in a real application. For that reason, the examples use the minified files in this project.
 
@@ -40,7 +40,7 @@ Kendo UI is also available using the NuGet package manager in Visual Studio. Sea
 
 **Figure 2. The search result for Kendo UI using the NuGet package manager**
 
-![kendo-nuget](/aspnet-mvc/tutorial-kendo-music-store/music-store-web/images/kendo-nuget.png)
+![kendo-nuget](/tutorials/tutorial-kendo-music-store/music-store-web/images/kendo-nuget.png)
 
 ### Additional Information
 

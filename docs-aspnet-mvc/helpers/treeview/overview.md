@@ -67,7 +67,7 @@ To use a custom `AuthorizeAttribute`, refer to [this link](https://github.com/te
 
 ## Event Handling
 
-You can subscribe to all TreeView [events](/api/javascript/ui/treeview#events).
+You can subscribe to all TreeView [events](../../../kendo-ui/api/javascript/ui/treeview#events).
 
 ### By Handler Name
 
@@ -143,7 +143,7 @@ The example below demonstrates how to subscribe to events by a template delegate
 
 ### Existing Instances
 
-You can reference an existing Kendo UI TreeView instance via [`jQuery.data()`](http://api.jquery.com/jQuery.data/). Once a reference is established, use the [TreeView API](/api/javascript/ui/treeview#methods) to control its behavior.
+You can reference an existing Kendo UI TreeView instance via [`jQuery.data()`](http://api.jquery.com/jQuery.data/). Once a reference is established, use the [TreeView API](../../../kendo-ui/api/javascript/ui/treeview#methods) to control its behavior.
 
 ###### Example
 
@@ -159,7 +159,7 @@ You can reference an existing Kendo UI TreeView instance via [`jQuery.data()`](h
 
 Other articles on Telerik UI for ASP.NET MVC and on the TreeView:
 
-* [ASP.NET MVC API Reference: TreeViewBuilder](/api/aspnet-mvc/Kendo.Mvc.UI.Fluent/TreeViewBuilder)
+* [ASP.NET MVC API Reference: TreeViewBuilder](/api/Kendo.Mvc.UI.Fluent/TreeViewBuilder)
 * [Ajax Binding of the TreeView HtmlHelper]({% slug ajaxbinding_treeviewhelper_aspnetmvc %})
 * [How to Bind TreeViews to XML]({% slug howto_bindtoaml_treeviewaspnetmvc %})
 * [How to Integrate with Sharepoint]({% slug howto_integratewithsharepoint_treeviewaspnetmvc %})
@@ -168,7 +168,7 @@ Other articles on Telerik UI for ASP.NET MVC and on the TreeView:
 * [Overview of Telerik UI for ASP.NET MVC]({% slug overview_aspnetmvc %})
 * [Fundamentals of Telerik UI for ASP.NET MVC]({% slug fundamentals_aspnetmvc %})
 * [Scaffolding in Telerik UI for ASP.NET MVC]({% slug scaffolding_aspnetmvc %})
-* [Telerik UI for ASP.NET MVC API Reference Folder](/api/aspnet-mvc/Kendo.Mvc/AggregateFunction)
+* [Telerik UI for ASP.NET MVC API Reference Folder](/api/Kendo.Mvc/AggregateFunction)
 * [Telerik UI for ASP.NET MVC HtmlHelpers Folder]({% slug overview_barcodehelper_aspnetmvc %})
 * [Tutorials on Telerik UI for ASP.NET MVC]({% slug overview_timeefficiencyapp_aspnetmvc6 %})
 * [Telerik UI for ASP.NET MVC Troubleshooting]({% slug troubleshooting_aspnetmvc %})

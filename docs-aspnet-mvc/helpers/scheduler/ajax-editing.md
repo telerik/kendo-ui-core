@@ -22,7 +22,7 @@ Create a new ASP.NET MVC 4 application. If you have installed the [Telerik UI fo
 
 **Figure 1. The new entity model**
 
-![New entity data model](/aspnet-mvc/helpers/scheduler/images/entity-data-model.png)
+![New entity data model](/helpers/scheduler/images/entity-data-model.png)
 
 ### Configure the Connection
 
@@ -30,7 +30,7 @@ Pick the **Generate from database** option and click **Next**. Configure a conne
 
 **Figure 2. Choose the connection**
 
-![Choose the connection](/aspnet-mvc/helpers/scheduler/images/entity-data-model.png)
+![Choose the connection](/helpers/scheduler/images/entity-data-model.png)
 
 ### Choose the Database Object
 
@@ -38,7 +38,7 @@ Choose the **Tasks** table from the `Which database objects do you want to inclu
 
 **Figure 3. Choose the Tasks table**
 
-![Choose the Tasks table](/aspnet-mvc/helpers/scheduler/images/database-objects.png)
+![Choose the Tasks table](/helpers/scheduler/images/database-objects.png)
 
 ### Include the New Class
 
@@ -295,7 +295,7 @@ Add a new class to the `~/Models` folder. Name it `TaskViewModel`.
 
 **Figure 4. The final result**
 
-![Final result](/aspnet-mvc/helpers/scheduler/images/scheduler.png)
+![Final result](/helpers/scheduler/images/scheduler.png)
 
 ## See Also
 
@@ -309,7 +309,7 @@ Other articles on Telerik UI for ASP.NET MVC and on the Scheduler:
 * [Overview of Telerik UI for ASP.NET MVC]({% slug overview_aspnetmvc %})
 * [Fundamentals of Telerik UI for ASP.NET MVC]({% slug fundamentals_aspnetmvc %})
 * [Scaffolding in Telerik UI for ASP.NET MVC]({% slug scaffolding_aspnetmvc %})
-* [Telerik UI for ASP.NET MVC API Reference Folder](/api/aspnet-mvc/Kendo.Mvc/AggregateFunction)
+* [Telerik UI for ASP.NET MVC API Reference Folder](/api/Kendo.Mvc/AggregateFunction)
 * [Telerik UI for ASP.NET MVC HtmlHelpers Folder]({% slug overview_barcodehelper_aspnetmvc %})
 * [Tutorials on Telerik UI for ASP.NET MVC]({% slug overview_timeefficiencyapp_aspnetmvc6 %})
 * [Telerik UI for ASP.NET MVC Troubleshooting]({% slug troubleshooting_aspnetmvc %})

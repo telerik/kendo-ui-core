@@ -94,7 +94,7 @@ Below are listed the steps for you to follow when configuring the hybrid Kendo U
 
 ## Event Handling
 
-You can subscribe to all hybrid Switch [events](/api/javascript/mobile/ui/switch#events).
+You can subscribe to all hybrid Switch [events](../../../../kendo-ui/api/javascript/mobile/ui/switch#events).
 
 ### By Handler Name
 
@@ -133,7 +133,7 @@ The examples below demonstrates how to subscribe to events by a handler name.
 
 ### Instances
 
-You can reference a hybrid Switch instance by using the [jQuery.data()](http://api.jquery.com/jQuery.data/) method and the value specified via the `Name()` method. Once a reference is established, use the [hybrid Switch API](/api/javascript/mobile/ui/switch#methods) to control its behavior.
+You can reference a hybrid Switch instance by using the [jQuery.data()](http://api.jquery.com/jQuery.data/) method and the value specified via the `Name()` method. Once a reference is established, use the [hybrid Switch API](../../../../kendo-ui/api/javascript/mobile/ui/switch#methods) to control its behavior.
 
 ###### Example
 
@@ -154,12 +154,12 @@ You can reference a hybrid Switch instance by using the [jQuery.data()](http://a
 
 Other articles on Telerik UI for ASP.NET MVC and on the Switch:
 
-* [ASP.NET MVC API Reference: SwitchBuilder](/api/aspnet-mvc/Kendo.Mvc.UI.Fluent/MobileSwitchBuilder)
+* [ASP.NET MVC API Reference: SwitchBuilder](/api/Kendo.Mvc.UI.Fluent/MobileSwitchBuilder)
 * [Overview of the Hybrid UI Switch Widget]({% slug overview_hybridswitch %})
 * [Overview of Telerik UI for ASP.NET MVC]({% slug overview_aspnetmvc %})
 * [Fundamentals of Telerik UI for ASP.NET MVC]({% slug fundamentals_aspnetmvc %})
 * [Scaffolding in Telerik UI for ASP.NET MVC]({% slug scaffolding_aspnetmvc %})
-* [Telerik UI for ASP.NET MVC API Reference Folder](/api/aspnet-mvc/Kendo.Mvc/AggregateFunction)
+* [Telerik UI for ASP.NET MVC API Reference Folder](/api/Kendo.Mvc/AggregateFunction)
 * [Telerik UI for ASP.NET MVC HtmlHelpers Folder]({% slug overview_barcodehelper_aspnetmvc %})
 * [Tutorials on Telerik UI for ASP.NET MVC]({% slug overview_timeefficiencyapp_aspnetmvc6 %})
 * [Telerik UI for ASP.NET MVC Troubleshooting]({% slug troubleshooting_aspnetmvc %})

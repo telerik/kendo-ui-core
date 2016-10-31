@@ -10,7 +10,7 @@ position: 3
 
 **Figure 1. An overview of the Kendo UI Music Store Sales page**
 
-![dashboard-overview](/tutorials/asp.net/kendo-music-store/music-store-dashboard/images/dashboard-overview.png)
+![dashboard-overview](/tutorials/tutorial-kendo-music-store/music-store-dashboard/images/dashboard-overview.png)
 
 The main page constitutes of the Dashboard landing page, and the navigation strip, an overview of recent sales for various periods of time, top singles and albums, and a series of gauges showing hourly data. For this view, the sample project uses a declarative approach similar to the Kendo UI Music Store itself, also using the `data-` attributes, and the [Kendo UI MVVM framework](http://demos.telerik.com/kendo-ui/web/mvvm/index.html).
 

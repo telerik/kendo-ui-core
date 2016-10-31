@@ -48,7 +48,7 @@ Below are listed the steps for you to follow when configuring the Kendo UI Progr
 
 ## Event Handling
 
-You can subscribe to all ProgressBar [events](/api/javascript/ui/progressbar#events).
+You can subscribe to all ProgressBar [events](../../../kendo-ui/api/javascript/ui/progressbar#events).
 
 ### By Handler Name
 
@@ -118,7 +118,7 @@ The example below demonstrates how to subscribe to events by a template delegate
 
 ### Existing Instances
 
-You can reference an existing Kendo UI ProgressBar instance via [`jQuery.data()`](http://api.jquery.com/jQuery.data/). Once a reference is established, use the [ProgressBar API](/api/javascript/ui/progressbar#methods) to control its behavior.
+You can reference an existing Kendo UI ProgressBar instance via [`jQuery.data()`](http://api.jquery.com/jQuery.data/). Once a reference is established, use the [ProgressBar API](../../../kendo-ui/api/javascript/ui/progressbar#methods) to control its behavior.
 
 ###### Example
 
@@ -134,12 +134,12 @@ You can reference an existing Kendo UI ProgressBar instance via [`jQuery.data()`
 
 Other articles on Telerik UI for ASP.NET MVC and on the ProgressBar:
 
-* [ASP.NET MVC API Reference: ProgressBarBuilder](/api/aspnet-mvc/Kendo.Mvc.UI.Fluent/ProgressBarBuilder)
+* [ASP.NET MVC API Reference: ProgressBarBuilder](/api/Kendo.Mvc.UI.Fluent/ProgressBarBuilder)
 * [Overview of Telerik UI for ASP.NET MVC]({% slug overview_aspnetmvc %})
 * [Fundamentals of Telerik UI for ASP.NET MVC]({% slug fundamentals_aspnetmvc %})
 * [Scaffolding in Telerik UI for ASP.NET MVC]({% slug scaffolding_aspnetmvc %})
 * [Overview of the Kendo UI ProgressBar Widget]({% slug overview_kendoui_progressbar_widget %})
-* [Telerik UI for ASP.NET MVC API Reference Folder](/api/aspnet-mvc/Kendo.Mvc/AggregateFunction)
+* [Telerik UI for ASP.NET MVC API Reference Folder](/api/Kendo.Mvc/AggregateFunction)
 * [Telerik UI for ASP.NET MVC HtmlHelpers Folder]({% slug overview_autocompletehelper_aspnetmvc %})
 * [Tutorials on Telerik UI for ASP.NET MVC]({% slug overview_timeefficiencyapp_aspnetmvc6 %})
 * [Telerik UI for ASP.NET MVC Troubleshooting]({% slug troubleshooting_aspnetmvc %})

@@ -20,7 +20,7 @@ To open the **Upgrade Project Wizard**, click **Telerik** > **UI for ASP.NET MVC
 
 **Figure 1. Launch the Upgrade Wizard**
 
-![Choose projects](/aspnet-mvc/vs-integration/images/upgrade_menu.png)
+![Choose projects](/vs-integration/images/upgrade_menu.png)
 
 ### Files for Upgrade
 
@@ -28,7 +28,7 @@ The **Information Page** of the **Upgrade Project Wizard** describes the files a
 
 **Figure 2. Information page**
 
-![Information page](/aspnet-mvc/vs-integration/images/upgrade_warning.png)
+![Information page](/vs-integration/images/upgrade_warning.png)
 
 ### Projects for Upgrade
 
@@ -42,7 +42,7 @@ It is recommended to upgrade all projects to the selected version.
 
 **Figure 3. Choose projects and distribution version**
 
-![Choose projects and distribution version](/aspnet-mvc/vs-integration/images/upgrade_version.png)
+![Choose projects and distribution version](/vs-integration/images/upgrade_version.png)
 
 ### Project Resources for Upgrade
 
@@ -50,7 +50,7 @@ The **Upgrade Project Resources** page allows you to update the editor templates
 
 **Figure 4. Update Project Resources page**
 
-![Update Project Resources](/aspnet-mvc/vs-integration/images/upgrade_settings.png)
+![Update Project Resources](/vs-integration/images/upgrade_settings.png)
 
 ### Backup Creation
 
@@ -62,7 +62,7 @@ The **Create Backup** page provides the following options:
 
 **Figure 5. Create Backup page**
 
-![Create Backup](/aspnet-mvc/vs-integration/images/upgrade_backup.png)
+![Create Backup](/vs-integration/images/upgrade_backup.png)
 
 ## See Also
 

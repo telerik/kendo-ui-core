@@ -140,6 +140,12 @@ function navigationTemplate(root) {
     };
 }
 
+function capitalizeTocFolders(e) {
+	if (e.node && e.node.text().indexOf("Helpers") == 0) {
+		e.node.addClass("capitalizeChildTitles");
+	}
+}
+
 function preventParentSelection(e) {
     var node = this.dataItem(e.node);
 

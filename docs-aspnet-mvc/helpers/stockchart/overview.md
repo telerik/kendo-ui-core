@@ -180,7 +180,7 @@ The example below demonstrates how to subscribe to events by a template delegate
 
 ### Existing Instances
 
-You can reference an existing Kendo UI StockChart instance via [`jQuery.data()`](http://api.jquery.com/jQuery.data/). Once a reference is established, use the [StockChart API](/api/javascript/dataviz/ui/stock-chart#methods) to control its behavior.
+You can reference an existing Kendo UI StockChart instance via [`jQuery.data()`](http://api.jquery.com/jQuery.data/). Once a reference is established, use the [StockChart API](../../../kendo-ui/api/javascript/dataviz/ui/stock-chart#methods) to control its behavior.
 
 ###### Example
 
@@ -196,14 +196,14 @@ You can reference an existing Kendo UI StockChart instance via [`jQuery.data()`]
 
 Other articles on Telerik UI for ASP.NET MVC and on the StockChart:
 
-* [ASP.NET MVC API Reference: StockChartBuilder](/api/aspnet-mvc/Kendo.Mvc.UI.Fluent/StockChartBuilder)
+* [ASP.NET MVC API Reference: StockChartBuilder](/api/Kendo.Mvc.UI.Fluent/StockChartBuilder)
 * [Ajax Binding of the Kendo UI StockChart for ASP.NET MVC]({% slug ajaxbinding_stockcharthelper_aspnetmvc %})
 * [Overview of the Kendo UI StockChart Widget]({% slug overview_kendoui_stockcharts %})
 * [Scaffolding of the Kendo UI Chart for ASP.NET MVC]({% slug scaffoldingchart_aspnetmvc %})
 * [Overview of Telerik UI for ASP.NET MVC]({% slug overview_aspnetmvc %})
 * [Fundamentals of Telerik UI for ASP.NET MVC]({% slug fundamentals_aspnetmvc %})
 * [Scaffolding in Telerik UI for ASP.NET MVC]({% slug scaffolding_aspnetmvc %})
-* [Telerik UI for ASP.NET MVC API Reference Folder](/api/aspnet-mvc/Kendo.Mvc/AggregateFunction)
+* [Telerik UI for ASP.NET MVC API Reference Folder](/api/Kendo.Mvc/AggregateFunction)
 * [Telerik UI for ASP.NET MVC HtmlHelpers Folder]({% slug overview_barcodehelper_aspnetmvc %})
 * [Tutorials on Telerik UI for ASP.NET MVC]({% slug overview_timeefficiencyapp_aspnetmvc6 %})
 * [Telerik UI for ASP.NET MVC Troubleshooting]({% slug troubleshooting_aspnetmvc %})

@@ -10,7 +10,7 @@ position: 9
 
 **Figure 1. A screenshot of the Kendo UI Music Store Checkout page**
 
-![kendo-checkout-screenshot](/aspnet-mvc/tutorial-kendo-music-store/music-store-web/images/kendo-checkout-screenshot.png)
+![kendo-checkout-screenshot](/tutorials/tutorial-kendo-music-store/music-store-web/images/kendo-checkout-screenshot.png)
 
 Users navigate to the Checkout page when they hover over the Shopping Cart Menu and click the **Checkout** button. This provides them with a chance to review the items in their cart. Users can change quantities or remove items from the cart and review the subtotal.
 

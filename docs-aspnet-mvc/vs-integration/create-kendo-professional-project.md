@@ -32,7 +32,7 @@ The wizard detects all the installed versions of UI for ASP.NET MVC and lists th
 
 **Figure 1. New Kendo UI Project Wizard**
 
-![New Kendo UI Project Wizard](/aspnet-mvc/vs-integration/images/create_kendo.png)
+![New Kendo UI Project Wizard](/vs-integration/images/create_kendo.png)
 
 ### Project Settings
 

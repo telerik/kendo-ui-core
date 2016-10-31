@@ -31,7 +31,7 @@ The `ClientTemplateId` is mandatory for the ListView widget. It contains the `id
 
 ## Common DataSource Settings
 
-The `DataSource` of the Kendo UI ListView for ASP.NET MVC contains configuration used by the [Kendo UI DataSource](/api/framework/datasource) object.
+The `DataSource` of the Kendo UI ListView for ASP.NET MVC contains configuration used by the [Kendo UI DataSource](../../../kendo-ui/api/javascript/data/datasource) object.
 
 Kendo UI ListView for ASP.NET MVC supports [Ajax]({% slug ajaxbinding_listviewhelper_aspnetmvc %}) type of data source.
 
@@ -57,7 +57,7 @@ Specify the action method which will destroy the existing models.
 
 ### Events
 
-Handle the [events](/api/javascript/data/datasource#events) of the Kendo UI DataSource object.
+Handle the [events](../../../kendo-ui/api/javascript/data/datasource#events) of the Kendo UI DataSource object.
 
 ###### Example
 
@@ -165,7 +165,7 @@ Other articles on Telerik UI for ASP.NET MVC and on the ListView:
 * [Overview of Telerik UI for ASP.NET MVC]({% slug overview_aspnetmvc %})
 * [Fundamentals of Telerik UI for ASP.NET MVC]({% slug fundamentals_aspnetmvc %})
 * [Scaffolding in Telerik UI for ASP.NET MVC]({% slug scaffolding_aspnetmvc %})
-* [Telerik UI for ASP.NET MVC API Reference Folder](/api/aspnet-mvc/Kendo.Mvc/AggregateFunction)
+* [Telerik UI for ASP.NET MVC API Reference Folder](/api/Kendo.Mvc/AggregateFunction)
 * [Telerik UI for ASP.NET MVC HtmlHelpers Folder]({% slug overview_barcodehelper_aspnetmvc %})
 * [Tutorials on Telerik UI for ASP.NET MVC]({% slug overview_timeefficiencyapp_aspnetmvc6 %})
 * [Telerik UI for ASP.NET MVC Troubleshooting]({% slug troubleshooting_aspnetmvc %})

@@ -59,7 +59,7 @@ Below are listed the steps for you to follow when configuring the Kendo UI Slide
 
 ## Event Handling
 
-You can subscribe to all Slider [events](/api/javascript/ui/slider#events).
+You can subscribe to all Slider [events](../../../kendo-ui/api/javascript/ui/slider#events).
 
 ### By Handler Name
 
@@ -135,7 +135,7 @@ The example below demonstrates how to subscribe to events by a template delegate
 
 ### Existing Instances
 
-You can reference an existing Kendo UI Slider instance via [`jQuery.data()`](http://api.jquery.com/jQuery.data/). Once a reference is established, use the [Slider API](/api/javascript/ui/slider#methods) to control its behavior.
+You can reference an existing Kendo UI Slider instance via [`jQuery.data()`](http://api.jquery.com/jQuery.data/). Once a reference is established, use the [Slider API](../../../kendo-ui/api/javascript/ui/slider#methods) to control its behavior.
 
 ###### Example
 
@@ -151,12 +151,12 @@ You can reference an existing Kendo UI Slider instance via [`jQuery.data()`](htt
 
 Other articles on Telerik UI for ASP.NET MVC and on the Slider:
 
-* [ASP.NET MVC API Reference: SliderBuilder](/api/aspnet-mvc/Kendo.Mvc.UI.Fluent/SliderBuilder)
+* [ASP.NET MVC API Reference: SliderBuilder](/api/Kendo.Mvc.UI.Fluent/SliderBuilder)
 * [Overview of Telerik UI for ASP.NET MVC]({% slug overview_aspnetmvc %})
 * [Fundamentals of Telerik UI for ASP.NET MVC]({% slug fundamentals_aspnetmvc %})
 * [Scaffolding in Telerik UI for ASP.NET MVC]({% slug scaffolding_aspnetmvc %})
 * [Overview of the Kendo UI Slider Widget]({% slug overview_kendoui_slider_widget %})
-* [Telerik UI for ASP.NET MVC API Reference Folder](/api/aspnet-mvc/Kendo.Mvc/AggregateFunction)
+* [Telerik UI for ASP.NET MVC API Reference Folder](/api/Kendo.Mvc/AggregateFunction)
 * [Telerik UI for ASP.NET MVC HtmlHelpers Folder]({% slug overview_autocompletehelper_aspnetmvc %})
 * [Tutorials on Telerik UI for ASP.NET MVC]({% slug overview_timeefficiencyapp_aspnetmvc6 %})
 * [Telerik UI for ASP.NET MVC Troubleshooting]({% slug troubleshooting_aspnetmvc %})

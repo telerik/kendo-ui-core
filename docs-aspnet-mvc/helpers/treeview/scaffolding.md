@@ -24,7 +24,7 @@ Below are listed the steps for you to follow when scaffolding the Kendo UI TreeV
 
 **Figure 1. Create a new Telerik MVC application**
 
-![New Telerik MVC Application](/aspnet-mvc/helpers/treeview/images/treeview-scaffolding1.png)
+![New Telerik MVC Application](/helpers/treeview/images/treeview-scaffolding1.png)
 
 **Step 2** Include an Entity Framework Data Model. Follow the steps described [in this article]({% slug ajaxbinding_treeviewhelper_aspnetmvc %}) to do that.
 
@@ -36,7 +36,7 @@ Below are listed the steps for you to follow when scaffolding the Kendo UI TreeV
 
 **Figure 2. Add a new scaffolded item**
 
-![New Scaffolded Item](/aspnet-mvc/helpers/treeview/images/treeview-scaffolding2.png)
+![New Scaffolded Item](/helpers/treeview/images/treeview-scaffolding2.png)
 
 **Step 4** Select **Kendo UI Scaffolder** from the list of available scaffolders. Next, select the **UI for MVC TreeView** widget.
 
@@ -44,7 +44,7 @@ Below are listed the steps for you to follow when scaffolding the Kendo UI TreeV
 
 **Figure 3. Configure the TreeView Scaffolder**
 
-![TreeView Scaffolder](/aspnet-mvc/helpers/treeview/images/treeview-scaffolding3.png)
+![TreeView Scaffolder](/helpers/treeview/images/treeview-scaffolding3.png)
 
 * **Controller Name**&mdash;The scaffolder will automatically generate the Action in this new Controller to initiate the query to the database.
 * **View Name**&mdash;Defines the View, which will be created and added to a new corresponding folder. It will hold the mark-up definition of the TreeView widget.
@@ -57,7 +57,7 @@ Below are listed the steps for you to follow when scaffolding the Kendo UI TreeV
 
 **Figure 4. Pick TreeView options**
 
-![TreeView options](/aspnet-mvc/helpers/treeview/images/treeview-scaffolding4.png)  
+![TreeView options](/helpers/treeview/images/treeview-scaffolding4.png)  
 
 * **Animation**&mdash;Checks to enable for expand or collapse action.
 * **DataTextField**&mdash;Defines the field, which will be used to display the text of the items.
@@ -67,7 +67,7 @@ Below are listed the steps for you to follow when scaffolding the Kendo UI TreeV
 
 **Figure 5. The result after running the generated view**
 
-![Result](/aspnet-mvc/helpers/treeview/images/treeview-scaffolding5.png)
+![Result](/helpers/treeview/images/treeview-scaffolding5.png)
 
 ## See Also
 
@@ -81,7 +81,7 @@ Articles on Telerik UI for ASP.NET MVC:
 * [Overview of Telerik UI for ASP.NET MVC]({% slug overview_aspnetmvc %})
 * [Fundamentals of Telerik UI for ASP.NET MVC]({% slug fundamentals_aspnetmvc %})
 * [Scaffolding in Telerik UI for ASP.NET MVC]({% slug scaffolding_aspnetmvc %})
-* [Telerik UI for ASP.NET MVC API Reference Folder](/api/aspnet-mvc/Kendo.Mvc/AggregateFunction)
+* [Telerik UI for ASP.NET MVC API Reference Folder](/api/Kendo.Mvc/AggregateFunction)
 * [Telerik UI for ASP.NET MVC HtmlHelpers Folder]({% slug overview_barcodehelper_aspnetmvc %})
 * [Tutorials on Telerik UI for ASP.NET MVC]({% slug overview_timeefficiencyapp_aspnetmvc6 %})
 * [Telerik UI for ASP.NET MVC Troubleshooting]({% slug troubleshooting_aspnetmvc %})

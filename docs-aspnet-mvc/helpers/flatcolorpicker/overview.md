@@ -8,7 +8,7 @@ position: 1
 
 # FlatColorPicker HtmlHelper Overview
 
-The FlatColorPicker HtmlHelper extension is a server-side wrapper for the [Kendo UI FlatColorPicker](/api/javascript/ui/flatcolorpicker) widget.
+The FlatColorPicker HtmlHelper extension is a server-side wrapper for the [Kendo UI FlatColorPicker](../../../kendo-ui/api/javascript/ui/flatcolorpicker) widget.
 
 ## Getting Started
 
@@ -48,7 +48,7 @@ Below are listed the steps for you to follow when configuring the Kendo UI FlatC
 
 ## Event Handling
 
-You can subscribe to all FlatColorPicker [events](/api/javascript/ui/flatcolorpicker#events).
+You can subscribe to all FlatColorPicker [events](../../../kendo-ui/api/javascript/ui/flatcolorpicker#events).
 
 ### By Handler Name
 
@@ -107,7 +107,7 @@ The examples below demonstrates how to subscribe to events by a handler name.
 
 ### Existing Instances
 
-Reference an existing Kendo UI FlatColorPicker instance via [`jQuery.data()`](http://api.jquery.com/jQuery.data/). Once a reference is established, use the [FlatColorPicker API](/api/javascript/ui/flatcolorpicker#methods) to control its behavior.
+Reference an existing Kendo UI FlatColorPicker instance via [`jQuery.data()`](http://api.jquery.com/jQuery.data/). Once a reference is established, use the [FlatColorPicker API](../../../kendo-ui/api/javascript/ui/flatcolorpicker#methods) to control its behavior.
 
 ###### Example
 
@@ -123,13 +123,13 @@ Reference an existing Kendo UI FlatColorPicker instance via [`jQuery.data()`](ht
 
 Other articles on Telerik UI for ASP.NET MVC and on the FlatColorPicker:
 
-* [ASP.NET MVC API Reference: FlatColorPickerBuilder](/api/aspnet-mvc/Kendo.Mvc.UI.Fluent/FlatColorPickerBuilder)
+* [ASP.NET MVC API Reference: FlatColorPickerBuilder](/api/Kendo.Mvc.UI.Fluent/FlatColorPickerBuilder)
 * [Overview of Telerik UI for ASP.NET MVC]({% slug overview_aspnetmvc %})
 * [Fundamentals of Telerik UI for ASP.NET MVC]({% slug fundamentals_aspnetmvc %})
 * [Scaffolding in Telerik UI for ASP.NET MVC]({% slug scaffolding_aspnetmvc %})
 * [Overview of the Kendo UI ColorPicker Widget]({% slug overview_kendoui_colorpicker_widget %})
 * [FlatColorPicker JavaScript API Reference](/api/javascript/ui/flatcolorpicker)
-* [Telerik UI for ASP.NET MVC API Reference Folder](/api/aspnet-mvc/Kendo.Mvc/AggregateFunction)
+* [Telerik UI for ASP.NET MVC API Reference Folder](/api/Kendo.Mvc/AggregateFunction)
 * [Telerik UI for ASP.NET MVC HtmlHelpers Folder]({% slug overview_autocompletehelper_aspnetmvc %})
 * [Tutorials on Telerik UI for ASP.NET MVC]({% slug overview_timeefficiencyapp_aspnetmvc6 %})
 * [Telerik UI for ASP.NET MVC Troubleshooting]({% slug troubleshooting_aspnetmvc %})

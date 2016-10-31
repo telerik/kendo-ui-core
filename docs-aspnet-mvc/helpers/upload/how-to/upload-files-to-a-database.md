@@ -12,4 +12,4 @@ To see the example on how to upload files to a database, refer to [this project]
 ## See Also
 
 * [Overview of the Upload HtmlHelper]({% slug overview_uploadhelper_aspnetmvc %})
-* [UploadBuilder API Reference](/api/aspnet-mvc/Kendo.Mvc.UI.Fluent/UploadBuilder)
+* [UploadBuilder API Reference](/api/Kendo.Mvc.UI.Fluent/UploadBuilder)

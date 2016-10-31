@@ -173,9 +173,9 @@ Use a pop-up edit form with a custom editor template.
 For more information on how to resolve this issue, refer to the resources listed below.
 
 * [Example: MVC Grid Popup Editing](http://demos.telerik.com/aspnet-mvc/grid/editing-popup)
-* [Example: Bind the Grid for ASP.NET MVC to a DataTable](/aspnet-mvc/helpers/grid/how-to/grid-bind-to-datatable)
+* [Example: Bind the Grid for ASP.NET MVC to a DataTable](/helpers/grid/how-to/Binding/grid-bind-to-datatable)
 * [Documentation: MVC Grid Editor Templates]({% slug editortemplates_grid_aspnetmvc %})&mdash;use a separate editor template for each data field.
-* [Documentation: Grid TemplateName setting](/api/aspnet-mvc/kendo.mvc.ui.fluent/grideditingsettingsbuilder#methods-TemplateName(System.String))&mdash;use it
+* [Documentation: Grid TemplateName setting](/api/kendo.mvc.ui.fluent/grideditingsettingsbuilder#methods-TemplateName(System.String))&mdash;use it
 to set a single edit form template for the whole edit form.
 
 ### Invalid Template Error When Nesting Client Templates
@@ -260,7 +260,7 @@ Other articles on the Kendo UI Grid for ASP.NET MVC:
 * [Binding of the Grid HtmlHelper]({% slug ajaxbinding_grid_aspnetmvc %})
 * [Editing of the Grid HtmlHelper]({% slug ajaxediting_grid_aspnetmvc %})
 * [Templating of the Grid HtmlHelper]({% slug clientdetailtemplate_grid_aspnetmvc %})
-* [API Reference of the Grid HtmlHelper](/api/aspnet-mvc/Kendo.Mvc.UI.Fluent/GridBuilder)
+* [API Reference of the Grid HtmlHelper](/api/Kendo.Mvc.UI.Fluent/GridBuilder)
 * [Overview of the Kendo UI Grid Widget]({% slug overview_kendoui_grid_widget %})
 
 Articles on Telerik UI for ASP.NET MVC:
@@ -268,7 +268,7 @@ Articles on Telerik UI for ASP.NET MVC:
 * [Overview of Telerik UI for ASP.NET MVC]({% slug overview_aspnetmvc %})
 * [Fundamentals of Telerik UI for ASP.NET MVC]({% slug fundamentals_aspnetmvc %})
 * [Scaffolding in Telerik UI for ASP.NET MVC]({% slug scaffolding_aspnetmvc %})
-* [Telerik UI for ASP.NET MVC API Reference Folder](/api/aspnet-mvc/Kendo.Mvc/AggregateFunction)
+* [Telerik UI for ASP.NET MVC API Reference Folder](/api/Kendo.Mvc/AggregateFunction)
 * [Telerik UI for ASP.NET MVC HtmlHelpers Folder]({% slug overview_barcodehelper_aspnetmvc %})
 * [Tutorials on Telerik UI for ASP.NET MVC]({% slug overview_timeefficiencyapp_aspnetmvc6 %})
 * [Telerik UI for ASP.NET MVC Troubleshooting]({% slug troubleshooting_aspnetmvc %})

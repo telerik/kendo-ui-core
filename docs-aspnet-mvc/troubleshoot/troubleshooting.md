@@ -255,7 +255,7 @@ This can happens if the wrapper is declared without `ToClientTemplate()`.
 
 For more information on this issue, refer to the [article on Kendo UI wrappers fundamentals]({% slug fundamentals_aspnetmvc %}#client-templates)
 
-On the other hand, note that [template script expressions](/framework/templates/overview#handle-external-templates-and-expressions) that include brackets (function calls) or arithmetic operators cannot be included in the `Name()` method of Kendo UI MVC wrappers. For example, the following implementations will trigger **invalid template** JavaScript errors:
+On the other hand, note that [template script expressions](../../../kendo-ui/framework/templates/overview#handle-external-templates-and-expressions) that include brackets (function calls) or arithmetic operators cannot be included in the `Name()` method of Kendo UI MVC wrappers. For example, the following implementations will trigger **invalid template** JavaScript errors:
 
     Html.Kendo().Grid().Name("grid_#=myFunction()#")
     Html.Kendo().Grid().Name("grid_#=myVariable1+myVariable2 #")

@@ -29,7 +29,7 @@ The distribution selection lets you choose the version of the Telerik UI for ASP
 
 **Figure 1. Distribution selection**
 
-![Distribution selection](/aspnet-mvc/vs-integration/images/convert_distribution.png)
+![Distribution selection](/vs-integration/images/convert_distribution.png)
 
 ### Theme Selection
 
@@ -37,7 +37,7 @@ The theme selection lets you choose the visual theme for your Telerik UI for ASP
 
 **Figure 2. Theme selection**
 
-![Theme selection](/aspnet-mvc/vs-integration/images/convert_theme.png)
+![Theme selection](/vs-integration/images/convert_theme.png)
 
 ### Project Settings
 
@@ -50,7 +50,7 @@ The **Project Settings** page enables you to modify the project settings by conf
 
 **Figure 3. Project settings**
 
-![Project settings](/aspnet-mvc/vs-integration/images/convert_settings.png)
+![Project settings](/vs-integration/images/convert_settings.png)
 
 ### Conversion of Existing Telerik MVC Extensions Projects
 

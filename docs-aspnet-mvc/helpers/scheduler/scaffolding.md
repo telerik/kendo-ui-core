@@ -30,7 +30,7 @@ Right-click the location where the `Scheduler Controller` should be generated. S
 
 **Figure 1. Add a new scaffolded item**
 
-![New Scaffolded Item](/aspnet-mvc/helpers/scheduler/images/scaffolding/scheduler_new_scaffolded_item.png)
+![New Scaffolded Item](/helpers/scheduler/images/scaffolding/scheduler_new_scaffolded_item.png)
 
 ### Select the Scaffolder
 
@@ -38,7 +38,7 @@ Select **Kendo UI Scaffolder** from the list of available scaffolders. Then choo
 
 **Figure 2. The Kendo UI Scaffolder**
 
-![Kendo UI Scaffolder](/aspnet-mvc/images/scaffolding/kendo_ui_scaffolder.png)  
+![Kendo UI Scaffolder](/images/scaffolding/kendo_ui_scaffolder.png)  
 
 ### Choose Model and Data Options
 
@@ -48,19 +48,19 @@ The next screen displays the `Model` and `Data Context` options.
 
 **Figure 3. The Controller and View names**
 
-![Scheduler options](/aspnet-mvc/helpers/scheduler/images/scaffolding/ui_for_aspnetmvc_scheduler_1.png)
+![Scheduler options](/helpers/scheduler/images/scaffolding/ui_for_aspnetmvc_scheduler_1.png)
 
 **Step 2** The **Model Class** DropDownList contains all model types from the active project. List the products in the Scheduler. In this case, select the **Product** entity.
 
 **Figure 4. The Model Class list**
 
-![Model Class](/aspnet-mvc/helpers/scheduler/images/scaffolding/ui_for_aspnetmvc_scheduler_3.png)
+![Model Class](/helpers/scheduler/images/scaffolding/ui_for_aspnetmvc_scheduler_3.png)
 
 **Step 3** From the **Data Context Class** DropDownList, select the **Entity Framework Data Model** class to be used. In this case, select **SampleEntities**. Note that the DataBase used is taken from the [offline examples]({% slug overview_aspnetmvc %}#sample-application).
 
 **Figure 5. The Data Context class**
 
-![Data Context Class](/aspnet-mvc/helpers/scheduler/images/scaffolding/ui_for_aspnetmvc_scheduler_2.png)  
+![Data Context Class](/helpers/scheduler/images/scaffolding/ui_for_aspnetmvc_scheduler_2.png)  
 
 ### Set the View Model
 
@@ -68,13 +68,13 @@ Select the fields from your original model that match the fields from the requir
 
 **Figure 6. View Model fields selection**
 
-![View Model Fields Selection](/aspnet-mvc/helpers/scheduler/images/scaffolding/ui_for_aspnetmvc_scheduler_4.png)  
+![View Model Fields Selection](/helpers/scheduler/images/scaffolding/ui_for_aspnetmvc_scheduler_4.png)  
 
 **Figure 7. The View Model class**
 
 The newly created class will later be added to the `~/Models` folder.
 
-![View Model Class](/aspnet-mvc/helpers/scheduler/images/scaffolding/ui_for_aspnetmvc_scheduler_7.png)
+![View Model Class](/helpers/scheduler/images/scaffolding/ui_for_aspnetmvc_scheduler_7.png)
 
 ### Pick the Scheduler Options
 
@@ -82,7 +82,7 @@ The newly created class will later be added to the `~/Models` folder.
 
 **Figure 8. The Scheduler options**
 
-![Scheduler options](/aspnet-mvc/helpers/scheduler/images/scaffolding/ui_for_aspnetmvc_scheduler_5.png)
+![Scheduler options](/helpers/scheduler/images/scaffolding/ui_for_aspnetmvc_scheduler_5.png)
 
 This screen contains the Scheduler functionalities that can be configured before scaffolding:  
 
@@ -96,7 +96,7 @@ This screen contains the Scheduler functionalities that can be configured before
 
 **Figure 9. The Scheduler events**
 
-![Scheduler options](/aspnet-mvc/helpers/scheduler/images/scaffolding/ui_for_aspnetmvc_scheduler_6.png)  
+![Scheduler options](/helpers/scheduler/images/scaffolding/ui_for_aspnetmvc_scheduler_6.png)  
 
 **Step 3.** When finished with the Scheduler configuration, click **Add**. The `Scheduler Controller` and the corresponding `View` are now generated.
 
@@ -112,7 +112,7 @@ Other articles on Telerik UI for ASP.NET MVC and on the Scheduler:
 * [Overview of Telerik UI for ASP.NET MVC]({% slug overview_aspnetmvc %})
 * [Fundamentals of Telerik UI for ASP.NET MVC]({% slug fundamentals_aspnetmvc %})
 * [Scaffolding in Telerik UI for ASP.NET MVC]({% slug scaffolding_aspnetmvc %})
-* [Telerik UI for ASP.NET MVC API Reference Folder](/api/aspnet-mvc/Kendo.Mvc/AggregateFunction)
+* [Telerik UI for ASP.NET MVC API Reference Folder](/api/Kendo.Mvc/AggregateFunction)
 * [Telerik UI for ASP.NET MVC HtmlHelpers Folder]({% slug overview_barcodehelper_aspnetmvc %})
 * [Tutorials on Telerik UI for ASP.NET MVC]({% slug overview_timeefficiencyapp_aspnetmvc6 %})
 * [Telerik UI for ASP.NET MVC Troubleshooting]({% slug troubleshooting_aspnetmvc %})

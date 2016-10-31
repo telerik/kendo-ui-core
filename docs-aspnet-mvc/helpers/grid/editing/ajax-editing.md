@@ -23,19 +23,19 @@ Below are listed the steps for you to follow when configuring the Kendo UI Grid 
 
 **Figure 1. A new entity data model**
 
-![New entity data model](/aspnet-mvc/helpers/grid/images/grid-entity-data-model.png)
+![New entity data model](/helpers/grid/images/grid-entity-data-model.png)
 
 **Step 3** Pick the **Generate from database** option and click **Next**. Configure a connection to the Northwind database. Click **Next**.
 
 **Figure 2. Choose the connection**
 
-![Choose the connection](/aspnet-mvc/helpers/grid/images/grid-entity-data-model.png)
+![Choose the connection](/helpers/grid/images/grid-entity-data-model.png)
 
 **Step 4** Choose the **Products** table from the **Which database objects do you want to include in your model?**. Leave all other options as they are set by default. Click **Finish**.
 
 **Figure 3. Choose the Products table**
 
-![Choose the Products table](/aspnet-mvc/helpers/grid/images/grid-database-objects.png)
+![Choose the Products table](/helpers/grid/images/grid-database-objects.png)
 
 **Step 5** Add a new class to the `~/Models` folder. Name it `ProductViewModel`.
 
@@ -228,7 +228,7 @@ Below are listed the steps for you to follow when configuring the Kendo UI Grid 
 
 **Figure 4. The final result**
 
-![Final result](/aspnet-mvc/helpers/grid/images/grid-inline-grid.png)
+![Final result](/helpers/grid/images/grid-inline-grid.png)
 
 To download the Visual Studio Project, refer to [this GitHub repository](https://github.com/telerik/ui-for-aspnet-mvc-examples/tree/master/grid/ajax-editing).
 
@@ -276,7 +276,7 @@ Server validation is often needed when performing editing. The section below dem
             return Json(new[] { product }.ToDataSourceResult(request, ModelState));
         }
 
-**Step 3** Subscribe to the [`error`](/api/framework/datasource#events-error) event of the data source. It is fired when model state errors or other unexpected problem occurs when making the Ajax request. In the event handler, display the errors and call the [`cancelChanges`](/api/javascript/ui/grid#methods-cancelChanges) method of the Grid.
+**Step 3** Subscribe to the [`error`](../../../../kendo-ui/api/javascript/data/datasource#events-error) event of the data source. It is fired when model state errors or other unexpected problem occurs when making the Ajax request. In the event handler, display the errors and call the [`cancelChanges`](../../../../kendo-ui/api/javascript/ui/grid#methods-cancelChanges) method of the Grid.
 
 ###### Example
 
@@ -399,7 +399,7 @@ Other articles on the Kendo UI Grid for ASP.NET MVC:
 * [Binding of the Grid HtmlHelper]({% slug ajaxbinding_grid_aspnetmvc %})
 * [Templating of the Grid HtmlHelper]({% slug clientdetailtemplate_grid_aspnetmvc %})
 * [Troubleshooting of the Grid HtmlHelper]({% slug troubleshoot_gridhelper_aspnetmvc %})
-* [API Reference of the Grid HtmlHelper](/api/aspnet-mvc/Kendo.Mvc.UI.Fluent/GridBuilder)
+* [API Reference of the Grid HtmlHelper](/api/Kendo.Mvc.UI.Fluent/GridBuilder)
 * [Overview of the Kendo UI Grid Widget]({% slug overview_kendoui_grid_widget %})
 
 Articles on Telerik UI for ASP.NET MVC:
@@ -407,7 +407,7 @@ Articles on Telerik UI for ASP.NET MVC:
 * [Overview of Telerik UI for ASP.NET MVC]({% slug overview_aspnetmvc %})
 * [Fundamentals of Telerik UI for ASP.NET MVC]({% slug fundamentals_aspnetmvc %})
 * [Scaffolding in Telerik UI for ASP.NET MVC]({% slug scaffolding_aspnetmvc %})
-* [Telerik UI for ASP.NET MVC API Reference Folder](/api/aspnet-mvc/Kendo.Mvc/AggregateFunction)
+* [Telerik UI for ASP.NET MVC API Reference Folder](/api/Kendo.Mvc/AggregateFunction)
 * [Telerik UI for ASP.NET MVC HtmlHelpers Folder]({% slug overview_barcodehelper_aspnetmvc %})
 * [Tutorials on Telerik UI for ASP.NET MVC]({% slug overview_timeefficiencyapp_aspnetmvc6 %})
 * [Telerik UI for ASP.NET MVC Troubleshooting]({% slug troubleshooting_aspnetmvc %})

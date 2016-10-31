@@ -11,7 +11,7 @@ position: 1
 
 **Figure 1. The customer TreeView in the Kendo UI Sales Hub**
 
-![kendo-saleshub-customer-TreeView-screenshot](/aspnet-mvc/tutorial-saleshub/home-page/images/kendo-saleshub-customer-treeview-screenshot.png)
+![kendo-saleshub-customer-TreeView-screenshot](/tutorials/tutorial-saleshub/home-page/images/kendo-saleshub-customer-treeview-screenshot.png)
 
 This article demonstrates how to create a [Kendo TreeView](http://demos.telerik.com/kendo-ui/web/treeview/index.html) on the server side.
 

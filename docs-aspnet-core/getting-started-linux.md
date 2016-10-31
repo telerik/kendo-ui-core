@@ -1,13 +1,13 @@
 ---
-title: Get Started on Linux
-page_title: Get Started on Linux | Telerik UI for ASP.NET Core
+title: Getting Started on Linux
+page_title: Getting Started on Linux | Telerik UI for ASP.NET Core
 description: "Learn the basics when working with Telerik UI for ASP.NET Core (aka MVC 6 or ASP.NET Core MVC) on Linux."
-previous_url: /aspnet-mvc/aspnetmvc-apps/mvc-6/getting-started-linux, aspnet-mvc/mvc-6/getting-started-linux
+previous_url: /aspnet-mvc/aspnetmvc-apps/mvc-6/getting-started-linux, /aspnet-mvc/mvc-6/getting-started-linux
 slug: gettingstartedlinux_aspnetmvc6_aspnetmvc
 position: 3
 ---
 
-# Get Started on Linux
+# Getting Started on Linux
 
 This article demonstrates how to configure an ASP.NET Core project that enables you to use Telerik UI for ASP.NET MVC on Linux.
 
@@ -207,7 +207,7 @@ Copy the `js` and `styles` folders from the `telerik.ui.for.aspnetmvc` archive t
 
 ![Kendo UI resources](images/resources.png)
 
-* **[Kendo UI Professional Bower package installation]({% slug kendoui_bower_packages_kendoui_installation %})**
+* **[Kendo UI Professional Bower package installation](../kendo-ui/intro/installation/bower-install)**
 
 **Step 6.** Register Kendo UI styles and scripts in `~/Views/Shared/Layout.cshtml`.
 

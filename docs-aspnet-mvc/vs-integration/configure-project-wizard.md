@@ -24,7 +24,7 @@ The first page of the **Project Configuration Wizard** enables you to change the
 
 **Figure 1. Visual theme configuration page of the Project Configuration Wizard**
 
-![Configure project theme](/aspnet-mvc/vs-integration/images/configure_theme.png)
+![Configure project theme](/vs-integration/images/configure_theme.png)
 
 Click **Next** to move on to the next page.
 
@@ -38,7 +38,7 @@ The second page of the **Project Configuration Wizard** enables you to modify th
 
 **Figure 2. Project settings configuration page of the Project Configuration Wizard**
 
-![Configure project settings](/aspnet-mvc/vs-integration/images/configure_settings.png)
+![Configure project settings](/vs-integration/images/configure_settings.png)
 
 ## See Also
 

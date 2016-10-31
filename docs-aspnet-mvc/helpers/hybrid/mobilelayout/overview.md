@@ -9,7 +9,7 @@ position: 1
 
 # Hybrid Layout HtmlHelper Overview
 
-The hybrid Layout HtmlHelper extension is a server-side wrapper for the [hybrid Kendo UI Layout](/api/javascript/mobile/ui/layout) widget. It allows you to configure the hybrid Kendo UI Layout from server-side code.
+The hybrid Layout HtmlHelper extension is a server-side wrapper for the [hybrid Kendo UI Layout](../../../../kendo-ui/api/javascript/mobile/ui/layout) widget. It allows you to configure the hybrid Kendo UI Layout from server-side code.
 
 ## Getting Started
 
@@ -152,7 +152,7 @@ Below are listed the steps for you to follow when configuring the hybrid Kendo U
 
 ## Event Handling
 
-You can subscribe to all hybrid Layout [events](/api/javascript/mobile/ui/layout#events).
+You can subscribe to all hybrid Layout [events](../../../../kendo-ui/api/javascript/mobile/ui/layout#events).
 
 ### By Handler Name
 
@@ -195,7 +195,7 @@ The examples below demonstrates how to subscribe to events by a handler name.
 
 ### Instances
 
-You can reference a hybrid Layout instance by using the code from the example below. Once a reference is established, use the [hybrid Layout API](/api/javascript/mobile/ui/layout#methods) to control its behavior.
+You can reference a hybrid Layout instance by using the code from the example below. Once a reference is established, use the [hybrid Layout API](../../../../kendo-ui/api/javascript/mobile/ui/layout#methods) to control its behavior.
 
 ###### Example
 
@@ -213,12 +213,12 @@ You can reference a hybrid Layout instance by using the code from the example be
 
 Other articles on Telerik UI for ASP.NET MVC and on the Layout:
 
-* [ASP.NET MVC API Reference: LayoutBuilder](/api/aspnet-mvc/Kendo.Mvc.UI.Fluent/MobileLayoutBuilder)
+* [ASP.NET MVC API Reference: LayoutBuilder](/api/Kendo.Mvc.UI.Fluent/MobileLayoutBuilder)
 * [Overview of the Hybrid UI Layout Widget]({% slug layout_hybridkendoui %})
 * [Overview of Telerik UI for ASP.NET MVC]({% slug overview_aspnetmvc %})
 * [Fundamentals of Telerik UI for ASP.NET MVC]({% slug fundamentals_aspnetmvc %})
 * [Scaffolding in Telerik UI for ASP.NET MVC]({% slug scaffolding_aspnetmvc %})
-* [Telerik UI for ASP.NET MVC API Reference Folder](/api/aspnet-mvc/Kendo.Mvc/AggregateFunction)
+* [Telerik UI for ASP.NET MVC API Reference Folder](/api/Kendo.Mvc/AggregateFunction)
 * [Telerik UI for ASP.NET MVC HtmlHelpers Folder]({% slug overview_barcodehelper_aspnetmvc %})
 * [Tutorials on Telerik UI for ASP.NET MVC]({% slug overview_timeefficiencyapp_aspnetmvc6 %})
 * [Telerik UI for ASP.NET MVC Troubleshooting]({% slug troubleshooting_aspnetmvc %})

@@ -23,7 +23,7 @@ All code examples assume the model demonstrated in the example below.
             public double UnitPrice { get; set; }
         }
 
-The Kendo UI Grid API is exposed via the [`Kendo.Mvc.UI.Fluent.GridBuilder`](/api/aspnet-mvc/Kendo.Mvc.UI.Fluent/GridBuilder) class. However, you do not have to instantiate that class. Use the `Grid` HtmlHelper extension method instead.
+The Kendo UI Grid API is exposed via the [`Kendo.Mvc.UI.Fluent.GridBuilder`](/api/Kendo.Mvc.UI.Fluent/GridBuilder) class. However, you do not have to instantiate that class. Use the `Grid` HtmlHelper extension method instead.
 
 ###### Example
 
@@ -31,7 +31,7 @@ The Kendo UI Grid API is exposed via the [`Kendo.Mvc.UI.Fluent.GridBuilder`](/ap
 
 ## Common DataSource Settings
 
-The [`DataSource`](/api/aspnet-mvc/Kendo.Mvc.UI.Fluent/GridBuilder#methods-Columns(System.Action<Kendo.Mvc.UI.Fluent.GridColumnFactory<T>>)) method of Kendo UI Grid for ASP.NET MVC configures the [data source](/api/javascript/ui/grid#configuration-dataSource).
+The [`DataSource`](/api/Kendo.Mvc.UI.Fluent/GridBuilder#methods-Columns(System.Action<Kendo.Mvc.UI.Fluent.GridColumnFactory<T>>)) method of Kendo UI Grid for ASP.NET MVC configures the [data source](../../../kendo-ui/api/javascript/ui/grid#configuration-dataSource).
 
 ### Aggregates
 
@@ -99,7 +99,7 @@ The example below demonstrates how to set the `destroy` action.
 <!--*-->
 ### Events
 
-The `Events` method specifies the event handlers for the data source [events](/api/javascript/data/datasource#events).
+The `Events` method specifies the event handlers for the data source [events](../../../kendo-ui/api/javascript/data/datasource#events).
 
 The example below demonstrates how to handle data source events.
 
@@ -309,7 +309,7 @@ The example below demonstrates how to enable the batch mode.
 
 ### Configuration
 
-The [`Columns`](/api/aspnet-mvc/Kendo.Mvc.UI.Fluent/GridBuilder#methods-Columns) method configures the Grid columns. If not used, the Grid creates a column for every public property of the model.
+The [`Columns`](/api/Kendo.Mvc.UI.Fluent/GridBuilder#methods-Columns) method configures the Grid columns. If not used, the Grid creates a column for every public property of the model.
 
 The example below demonstrates how to configure the Grid columns.
 
@@ -1206,7 +1206,7 @@ Other articles on the Kendo UI Grid for ASP.NET MVC:
 * [Editing of the Grid HtmlHelper]({% slug ajaxediting_grid_aspnetmvc %})
 * [Templating of the Grid HtmlHelper]({% slug clientdetailtemplate_grid_aspnetmvc %})
 * [Troubleshooting for the Grid HtmlHelper]({% slug troubleshoot_gridhelper_aspnetmvc %})
-* [API Reference of the Grid HtmlHelper](/api/aspnet-mvc/Kendo.Mvc.UI.Fluent/GridBuilder)
+* [API Reference of the Grid HtmlHelper](/api/Kendo.Mvc.UI.Fluent/GridBuilder)
 * [Overview of the Kendo UI Grid Widget]({% slug overview_kendoui_grid_widget %})
 
 Articles on Telerik UI for ASP.NET MVC:
@@ -1214,7 +1214,7 @@ Articles on Telerik UI for ASP.NET MVC:
 * [Overview of Telerik UI for ASP.NET MVC]({% slug overview_aspnetmvc %})
 * [Fundamentals of Telerik UI for ASP.NET MVC]({% slug fundamentals_aspnetmvc %})
 * [Scaffolding in Telerik UI for ASP.NET MVC]({% slug scaffolding_aspnetmvc %})
-* [Telerik UI for ASP.NET MVC API Reference Folder](/api/aspnet-mvc/Kendo.Mvc/AggregateFunction)
+* [Telerik UI for ASP.NET MVC API Reference Folder](/api/Kendo.Mvc/AggregateFunction)
 * [Telerik UI for ASP.NET MVC HtmlHelpers Folder]({% slug overview_barcodehelper_aspnetmvc %})
 * [Tutorials on Telerik UI for ASP.NET MVC]({% slug overview_timeefficiencyapp_aspnetmvc6 %})
 * [Telerik UI for ASP.NET MVC Troubleshooting]({% slug troubleshooting_aspnetmvc %})
