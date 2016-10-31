@@ -692,6 +692,7 @@ var __meta__ = { // jshint ignore:line
             });
 
             elements.remove();
+            contents.empty();
             contents.remove();
 
             that._updateContentElements();
