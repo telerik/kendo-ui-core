@@ -3408,7 +3408,7 @@ The unique axis name. Used to associate a series with a category axis using the 
     <script>
     $("#chart").kendoChart({
       categoryAxis: [
-        { name: "month", categories: [ "Jan", "Feb" ] },
+        { name: "month", categories: [ "Jan", "Feb", "Mar" ] },
         { name: "year", categories: [ 2012 ] }
       ],
       series: [
@@ -9613,6 +9613,27 @@ The width of the border in pixels.
         },
         data: [1, 2]
       }]
+    });
+    </script>
+
+### series.categoryAxis `String`
+
+The name of the category axis to use for the series.
+
+The first axis will be used if no `categoryAxis` is specified.
+
+#### Example - set the category axis name
+
+    <div id="chart"></div>
+    <script>
+    $("#chart").kendoChart({
+      categoryAxis: [
+        { name: "month", categories: [ "Jan", "Feb", "Mar" ] },
+        { name: "year", categories: [ 2012 ] }
+      ],
+      series: [
+        { categoryAxis: "month", data: [1, 2, 3] }
+      ]
     });
     </script>
 
