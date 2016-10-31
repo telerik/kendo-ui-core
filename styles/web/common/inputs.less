@@ -32,7 +32,7 @@ span.k-dropdown,
     vertical-align: middle;
 }
 
-.k-autocomplete > .k-i-close,
+.k-autocomplete > .p-i-close,
 .k-combobox > .k-dropdown-wrap > .k-i-close,
 .k-multiselect > .k-multiselect-wrap > .k-i-close {
     display: none;
@@ -40,7 +40,7 @@ span.k-dropdown,
     right: 0;
 }
 
-.k-autocomplete > .k-i-close,
+.k-autocomplete > .p-i-close,
 .k-combobox > .k-dropdown-wrap > .k-i-close {
     bottom: 0;
     top: 50%;
@@ -48,7 +48,7 @@ span.k-dropdown,
 }
 
 .k-ie8 {
-    .k-autocomplete > .k-i-close,
+    .k-autocomplete > .p-i-close,
     .k-combobox > .k-dropdown-wrap > .k-i-close {
         margin-top: -(@grid-size/2);
     }
@@ -63,7 +63,7 @@ span.k-dropdown,
     top: @grid-size/2 - 2px;
 }
 
-.k-autocomplete > .k-i-close,
+.k-autocomplete > .p-i-close,
 .k-multiselect > .k-multiselect-wrap > .k-i-close {
     margin-right: @grid-size/4 + 2px;
 }
@@ -72,14 +72,15 @@ span.k-dropdown,
 .k-combobox > .k-dropdown-wrap {
     &.k-state-hover,
     &.k-state-focused {
-        > .k-i-close {
+        > .k-i-close,
+        > .p-i-close {
             display: inline-block;
-            outline: none;         
+            outline: none;
         }
     }
 }
 
-.k-autocomplete > .k-i-close.k-loading-hidden,
+.k-autocomplete > .p-i-close.k-loading-hidden,
 .k-combobox > .k-dropdown-wrap > .k-i-close.k-loading-hidden {
     display: none;
 }
@@ -89,7 +90,7 @@ span.k-dropdown,
     &.k-state-focused {
         > .k-multiselect-wrap > .k-i-close {
             display: inline-block;
-            outline: none;         
+            outline: none;
         }
     }
 }
@@ -97,11 +98,12 @@ span.k-dropdown,
 .k-autocomplete,
 .k-combobox > .k-dropdown-wrap {
     &.k-state-border-down {
-       > .k-i-close {
+        > .k-i-close,
+        > .p-i-close {
            margin-top: -1px;
         }
-    } 
-}            
+    }
+}
 
 .k-filter-menu .k-combobox,
 .k-filter-menu .k-datepicker,
@@ -618,9 +620,8 @@ body .k-datetimepicker .k-select
     position: relative;
 }
 
-.k-autocomplete .k-loading,
 .k-multiselect .k-loading,
-.k-autocomplete .k-i-loading,
+.k-autocomplete .p-i-loading,
 .k-multiselect .k-i-loading
 {
     position: absolute;
