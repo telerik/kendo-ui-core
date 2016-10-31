@@ -999,3 +999,25 @@ input.k-checkbox + label {
     -ms-overflow-style: -ms-autohiding-scrollbar;
     -ms-scroll-snap-type: proximity;
 }
+
+/* Font Icons */
+.p-icon,
+.k-font-icon {
+    .use-font-icon();
+}
+.p-icon:before {
+    width: initial;
+    height: initial;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    margin: auto 0;
+    height: 1em;
+    line-height: 1;
+}
+.k-icon.k-font-icon {
+    overflow: visible;
+    background-image: none;
+}
