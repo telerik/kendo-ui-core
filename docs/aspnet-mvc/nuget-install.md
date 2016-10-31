@@ -18,27 +18,35 @@ Official releases, service packs, and internal builds of UI for ASP.NET MVC are 
 
 To use the Telerik NuGet Feed, set up https://nuget.telerik.com/nuget as another package source using the NuGet Package Manager or the [NuGet CLI](http://docs.nuget.org/consume/Command-Line-Reference).
 
-### Set Up NuGet Package Source Using the NuGet Package Manager
+To set up the NuGet package source, you can:
+* Use the NuGet Package Manager.
+* Use the NuGet CLI
+
+### Use the NuGet Package Manager
+
+The following steps provide information on how to set up the NuGet package source by using the NuGet Package Manager:
 
 1. Launch Visual Studio.
-1. Launch the NuGet Package Manager Settings&mdash;**Tools**/**NuGet Package Manager**/**Package Manager Settings**.
+1. Launch the NuGet Package Manager settings&mdash;**Tools** > **NuGet Package Manager** > **Package Manager Settings**.
 1. Add the https://nuget.telerik.com/nuget feed to the **Package Sources** tab.
 
-### Set Up NuGet Package Source Using the NuGet CLI
+### Use the NuGet CLI
+
+The following steps provide information on how to set up the NuGet package source by using the NuGet CLI:
 
 1. Download the [latest NuGet executable](https://dist.nuget.org/win-x86-commandline/latest/nuget.exe).
-1. Open a Command Prompt and change the path to where the `nuget.exe` is downloaded. 
-1. Execute the command from the example below. 
+1. Open a Command Prompt and change the path to where the `nuget.exe` is downloaded.
+1. Execute the command from the example below.
 
 ###### Example
 
 ```
-NuGet Sources Add -Name "telerik.com" -Source https://nuget.telerik.com/nuget 
+NuGet Sources Add -Name "telerik.com" -Source https://nuget.telerik.com/nuget
 ```
 
 ### Store Credentials
 
-To gain access to the feed, provide your Telerik account credentials. To avoid the popping up of the authentication window every time you access the feed, choose to store the credentials in the NuGet configuration file. 
+To gain access to the feed, provide your Telerik account credentials. To avoid the popping up of the authentication window every time you access the feed, choose to store the credentials in the NuGet configuration file.
 
 **Encrypted Credentials**
 
@@ -53,7 +61,7 @@ NuGet Sources Add -Name "telerik.com" -Source "https://nuget.telerik.com/nuget" 
 
 **Credentials in Clear Text**
 
-The command from the example below stores the password in clear text in the `%AppData%\NuGet\NuGet.config` file. If you are unable to connect to the feed when using encrypted credentials, use this alternative approach. 
+The command from the example below stores the password in clear text in the `%AppData%\NuGet\NuGet.config` file. If you are unable to connect to the feed when using encrypted credentials, use this alternative approach.
 
 ###### Example
 
@@ -64,11 +72,11 @@ NuGet Sources Add -Name "telerik.com" -Source "https://nuget.telerik.com/nuget" 
 
 > **Important**
 >
-> Connecting to the feed might not work when using encrypted credentials or credentials provided through the authentication window&mdash;for example, when an old version of .net restore is used to restore packages. In such cases, consider storing the credentials in clear text.
+> Connecting to the feed might not work when using encrypted credentials or credentials provided through the authentication window&mdash;for example, when an old version of `.net` restore is used to restore packages. In such cases, consider storing the credentials in clear text.
 
 ### Install NuGet Packages
 
-With this setup done, you can install packages either through the [Package Manager Console](http://docs.nuget.org/Consume/Package-Manager-Console) or through the [Package Manager Dialog](https://docs.nuget.org/consume/package-manager-dialog).
+After applying the described setup, you can now install packages either through the [Package Manager Console](http://docs.nuget.org/Consume/Package-Manager-Console) or through the [Package Manager Dialog](https://docs.nuget.org/consume/package-manager-dialog).
 
 ## List of Provided Packages
 
