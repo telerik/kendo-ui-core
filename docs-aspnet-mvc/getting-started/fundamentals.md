@@ -305,6 +305,6 @@ Other articles on getting started with UI for ASP.NET MVC:
 * [Use Telerik UI for ASP.NET MVC in MVC 3 Applications]({% slug aspnetmvc3_aspnetmvc %})
 * [Use Telerik UI for ASP.NET MVC in MVC 4 Applications]({% slug aspnetmvc4_aspnetmvc %})
 * [Use Telerik UI for ASP.NET MVC in MVC 5 Applications]({% slug aspnetmvc5_aspnetmvc %})
-* [Use Telerik UI for ASP.NET Core](../../aspnet-core/introduction)
+* [Use Telerik UI for ASP.NET Core](http://docs.telerik.com/aspnet-core/introduction)
 * [Use Telerik UI for ASP.NET MVC Visual Studio Extensions]({% slug overview_visualstudio_aspnetmvc %})
 * [Telerik UI for ASP.NET MVC Troubleshooting]({% slug troubleshooting_aspnetmvc %})

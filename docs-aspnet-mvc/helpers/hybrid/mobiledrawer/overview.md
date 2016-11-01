@@ -205,7 +205,7 @@ You can reference a hybrid Drawer instance by using the code from the example be
 Other articles on Telerik UI for ASP.NET MVC and on the Drawer:
 
 * [ASP.NET MVC API Reference: DrawerBuilder](/api/Kendo.Mvc.UI.Fluent/MobileDrawerBuilder)
-* [Overview of the Hybrid UI Drawer Widget]({% slug overview_hybriddrawer %})
+* [Overview of the Hybrid UI Drawer Widget](http://docs.telerik.com/kendo-ui/controls/hybrid/drawer/drawer)
 * [Overview of Telerik UI for ASP.NET MVC]({% slug overview_aspnetmvc %})
 * [Fundamentals of Telerik UI for ASP.NET MVC]({% slug fundamentals_aspnetmvc %})
 * [Scaffolding in Telerik UI for ASP.NET MVC]({% slug scaffolding_aspnetmvc %})

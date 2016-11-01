@@ -322,7 +322,7 @@ To see the full demo, refer to this [Grid how-to example]({% slug howto_useodata
 * [Telerik UI for ASP.NET MVC Overview]({% slug overview_aspnetmvc %})
 * [Validation with Telerik UI for ASP.NET MVC]({% slug validation_aspnetmvc %})
 * [Globalization with Telerik UI for ASP.NET MVC]({% slug globalization_aspnetmvc %})
-* [ASP.NET Core](../../aspnet-core/introduction)
+* [ASP.NET Core](http://docs.telerik.com/aspnet-core/introduction)
 * [Tutorials on Telerik UI for ASP.NET MVC]({% slug overview_timeefficiencyapp_aspnetmvc6 %})
 * [Telerik UI for ASP.NET MVC Fundamentals]({% slug fundamentals_aspnetmvc %})
 * [Scaffolding with Telerik UI for ASP.NET MVC]({% slug scaffolding_aspnetmvc %})

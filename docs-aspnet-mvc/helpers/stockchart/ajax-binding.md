@@ -120,7 +120,7 @@ Create the main and navigator data series.
 Other articles on Telerik UI for ASP.NET MVC and on the StockChart:
 
 * [Overview of the StockChart HtmlHelper]({% slug overview_stockcharthelper_aspnetmvc %})
-* [Overview of the Kendo UI StockChart Widget]({% slug overview_kendoui_stockcharts %})
+* [Overview of the Kendo UI StockChart Widget](http://docs.telerik.com/kendo-ui/controls/charts/stockchart/overview)
 * [Scaffolding of the Kendo UI Chart for ASP.NET MVC]({% slug scaffoldingchart_aspnetmvc %})
 * [Overview of Telerik UI for ASP.NET MVC]({% slug overview_aspnetmvc %})
 * [Fundamentals of Telerik UI for ASP.NET MVC]({% slug fundamentals_aspnetmvc %})

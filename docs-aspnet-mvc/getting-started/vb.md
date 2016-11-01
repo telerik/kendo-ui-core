@@ -178,7 +178,7 @@ The example below demonstrates alternative ToolBar configurations.
 * [Telerik UI for ASP.NET MVC Overview]({% slug overview_aspnetmvc %})
 * [Migration from Telerik Extensions]({% slug overview_migrationextensions_aspnetmvc %})
 * [Telerik UI for ASP.NET MVC HtmlHelpers]({% slug overview_autocompletehelper_aspnetmvc %})
-* [ASP.NET Core]({% slug overview_aspnetmvc6_aspnetmvc %})
+* [ASP.NET Core](http://docs.telerik.com/aspnet-core/introduction)
 * [Tutorials on Telerik UI for ASP.NET MVC]({% slug overview_timeefficiencyapp_aspnetmvc6 %})
 * [Telerik UI for ASP.NET MVC Fundamentals]({% slug fundamentals_aspnetmvc %})
 * [Scaffolding with Telerik UI for ASP.NET MVC]({% slug scaffolding_aspnetmvc %})

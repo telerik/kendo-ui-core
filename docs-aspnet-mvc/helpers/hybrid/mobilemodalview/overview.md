@@ -200,7 +200,7 @@ You can reference a hybrid ModalView instance by using the code from the example
 Other articles on Telerik UI for ASP.NET MVC and on the ModalView:
 
 * [ASP.NET MVC API Reference: ModalViewBuilder](/api/Kendo.Mvc.UI.Fluent/MobileModalViewBuilder)
-* [Overview of the Hybrid UI ModalView Widget]({% slug overview_hybridmodalview %})
+* [Overview of the Hybrid UI ModalView Widget](http://docs.telerik.com/kendo-ui/controls/hybrid/modalview/modalview)
 * [Overview of Telerik UI for ASP.NET MVC]({% slug overview_aspnetmvc %})
 * [Fundamentals of Telerik UI for ASP.NET MVC]({% slug fundamentals_aspnetmvc %})
 * [Scaffolding in Telerik UI for ASP.NET MVC]({% slug scaffolding_aspnetmvc %})

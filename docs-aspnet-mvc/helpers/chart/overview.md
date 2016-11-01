@@ -182,7 +182,7 @@ Other articles on Telerik UI for ASP.NET MVC and on the Chart:
 * [How to Create View Model Bound Dynamic Series in ASP.NET MVC Apps]({% slug howto_cerateviewmodelboundseries_chartaspnetmvc %})
 * [Ajax Binding of the Kendo UI Chart for ASP.NET MVC]({% slug ajaxbinding_charthelper_aspnetmvc %})
 * [Scaffolding of the Kendo UI Chart for ASP.NET MVC]({% slug scaffoldingchart_aspnetmvc %})
-* [Overview of the Kendo UI Chart Widget]({% slug overview_kendoui_charts_widget %})
+* [Overview of the Kendo UI Chart Widget](http://docs.telerik.com/kendo-ui/controls/charts/overview)
 * [Overview of Telerik UI for ASP.NET MVC]({% slug overview_aspnetmvc %})
 * [Fundamentals of Telerik UI for ASP.NET MVC]({% slug fundamentals_aspnetmvc %})
 * [Scaffolding in Telerik UI for ASP.NET MVC]({% slug scaffolding_aspnetmvc %})

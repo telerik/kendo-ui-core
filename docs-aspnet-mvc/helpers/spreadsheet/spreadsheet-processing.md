@@ -180,7 +180,7 @@ Other articles on Telerik UI for ASP.NET MVC and on the Spreadsheet:
 
 * [Load and Save Data as JSON]({% slug loadand_saveas_json_spreadsheet_widget %})
 * [Export to Excel]({% slug export_toexcel_spreadsheet_widget %})
-* [Overview of the Kendo UI Spreadsheet Widget]({% slug overview_spreadsheet_widget %})
+* [Overview of the Kendo UI Spreadsheet Widget](http://docs.telerik.com/kendo-ui/controls/data-management/spreadsheet/overview)
 * [Overview of the Spreadsheet HtmlHelper]({% slug overview_spreadsheethelper_aspnetmvc %})
 * [Overview of Telerik UI for ASP.NET MVC]({% slug overview_aspnetmvc %})
 * [Fundamentals of Telerik UI for ASP.NET MVC]({% slug fundamentals_aspnetmvc %})

@@ -181,7 +181,7 @@ You can reference a hybrid ButtonGroup instance by using the code from the examp
 Other articles on Telerik UI for ASP.NET MVC and on the ButtonGroup:
 
 * [ASP.NET MVC API Reference: Hybrid UI ButtonGroupBuilder](/api/Kendo.Mvc.UI.Fluent/MobileButtonGroupBuilder)
-* [Overview of the Hybrid UI ButtonGroup Widget]({% slug overview_hybridbuttongroup %})
+* [Overview of the Hybrid UI ButtonGroup Widget](http://docs.telerik.com/kendo-ui/controls/hybrid/buttongroup/buttongroup)
 * [Overview of Telerik UI for ASP.NET MVC]({% slug overview_aspnetmvc %})
 * [Fundamentals of Telerik UI for ASP.NET MVC]({% slug fundamentals_aspnetmvc %})
 * [Scaffolding in Telerik UI for ASP.NET MVC]({% slug scaffolding_aspnetmvc %})

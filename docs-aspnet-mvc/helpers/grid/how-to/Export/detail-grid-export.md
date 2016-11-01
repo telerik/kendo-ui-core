@@ -22,6 +22,6 @@ For more information on how to create Excel documents, refer to [this article]({
 ## See Also
 
 * [Overview of the Grid HtmlHelper]({% slug overview_gridhelper_aspnetmvc %})
-* [GridBuilder API Reference](/api/Kendo.Mvc.UI.Fluent/AutoCompleteBuilder)
+* [GridBuilder API Reference](/aspnet-mvc/api/Kendo.Mvc.UI.Fluent/GridBuilder)
 
 For more runnable examples on the Kendo UI Grid in ASP.NET MVC applications, browse its [**How To** documentation folder]({% slug howto_bindgridtodatatable_gridaspnetmvc %}).

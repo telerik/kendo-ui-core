@@ -304,8 +304,8 @@ All Kendo UI widgets, including the MediaPlayer, also allow you to add script fi
 ## See Also
 
 * [MediaPlayer Live Sample](http://demos.telerik.com/aspnet-mvc/mediaplayer/index)
-* [Overview of the Kendo UI MediaPlayer Widget]({% slug overview_kendoui_mediaplayer_widget %})
-* [MediaPlayer JavaScript API Reference](../../../kendo-ui/api/javascript/ui/mediaplayer)
+* [Overview of the Kendo UI MediaPlayer Widget](http://docs.telerik.com/kendo-ui/controls/media/mediaplayer/overview)
+* [MediaPlayer JavaScript API Reference](/kendo-ui/api/javascript/ui/mediaplayer)
 * [Overview of Telerik UI for ASP.NET MVC]({% slug overview_aspnetmvc %})
 * [Fundamentals of Telerik UI for ASP.NET MVC]({% slug fundamentals_aspnetmvc %})
 * [Telerik UI for ASP.NET MVC API Reference Folder](/api/Kendo.Mvc/AggregateFunction)

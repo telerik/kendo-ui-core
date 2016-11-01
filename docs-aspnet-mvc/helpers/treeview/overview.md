@@ -164,7 +164,7 @@ Other articles on Telerik UI for ASP.NET MVC and on the TreeView:
 * [How to Bind TreeViews to XML]({% slug howto_bindtoaml_treeviewaspnetmvc %})
 * [How to Integrate with Sharepoint]({% slug howto_integratewithsharepoint_treeviewaspnetmvc %})
 * [How to Save the State of TreeView Items]({% slug howto_savetreeviewitemsstate_treeviewaspnetmvc %})
-* [Overview of the Kendo UI TreeView Widget]({% slug overview_kendoui_treeview_widget %})
+* [Overview of the Kendo UI TreeView Widget](http://docs.telerik.com/kendo-ui/controls/navigation/treeview/overview)
 * [Overview of Telerik UI for ASP.NET MVC]({% slug overview_aspnetmvc %})
 * [Fundamentals of Telerik UI for ASP.NET MVC]({% slug fundamentals_aspnetmvc %})
 * [Scaffolding in Telerik UI for ASP.NET MVC]({% slug scaffolding_aspnetmvc %})

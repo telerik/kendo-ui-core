@@ -137,7 +137,7 @@ You can reference a hybrid NavBar instance by using the code from the example be
 Other articles on Telerik UI for ASP.NET MVC and on the NavBar:
 
 * [ASP.NET MVC API Reference: NavBarBuilder](/api/Kendo.Mvc.UI.Fluent/MobileNavBarBuilder)
-* [Overview of the Hybrid UI NavBar Widget]({% slug overview_hybridnavbar %})
+* [Overview of the Hybrid UI NavBar Widget](http://docs.telerik.com/kendo-ui/controls/hybrid/navbar/navbar)
 * [Overview of Telerik UI for ASP.NET MVC]({% slug overview_aspnetmvc %})
 * [Fundamentals of Telerik UI for ASP.NET MVC]({% slug fundamentals_aspnetmvc %})
 * [Scaffolding in Telerik UI for ASP.NET MVC]({% slug scaffolding_aspnetmvc %})
