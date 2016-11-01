@@ -53,7 +53,7 @@ To initiate the Excel export through code, call the [`saveAsExcel`](/api/javascr
 
 > **Important**
 >
-> Older browsers, such as Internet Explorer 9 and below and Safari, require the implementation of a [server proxy]({% slug overview_savingfiles_kendoui %}).
+> Older browsers, such as Internet Explorer 9 and below and Safari, require the implementation of a [server proxy](http://docs.telerik.com/kendo-ui/framework/save-files/introduction).
 
 ### Output the Result
 
@@ -113,7 +113,7 @@ The example below demonstrates how to export all the data.
 
 The [`excelExport`](../../../kendo-ui/api/javascript/ui/grid#events-excelExport) event allows the customization of the generated Excel document. The `workbook` event argument exposes the generated Excel workbook configuration.
 
-For more information on how the Excel documents work, refer to [this article]({% slug introduction_excelexport_kendoui %}).
+For more information on how the Excel documents work, refer to [this article](http://docs.telerik.com/kendo-ui/framework/excel/introduction).
 
 For more information on a possible approach to customize the generated Excel document, refer to [this runnable how-to example]({% slug howto_alternatingrows_aspnetmvcgrid %}).
 
@@ -158,9 +158,9 @@ For examples on how to export Excel files, refer to the [example on the integrat
 
 ## See Also
 
-* [Create Excel Documents with Kendo UI]({% slug introduction_excelexport_kendoui %})
-* [Save Files with Kendo UI]({% slug overview_savingfiles_kendoui %})
-* [API Reference: kendo.ooxml.Workbook](../../../kendo-ui/api/javascript/ooxml/workbook)
+* [Create Excel Documents with Kendo UI](http://docs.telerik.com/kendo-ui/framework/excel/introduction)
+* [Save Files with Kendo UI](http://docs.telerik.com/kendo-ui/framework/save-files/introduction)
+* [API Reference: kendo.ooxml.Workbook](/kendo-ui/api/javascript/ooxml/workbook)
 
 Other articles on the Kendo UI Grid for ASP.NET MVC:
 

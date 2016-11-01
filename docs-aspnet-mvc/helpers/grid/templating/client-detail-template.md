@@ -121,7 +121,7 @@ Below are listed the steps for you to follow when configuring the Kendo UI Grid 
     )
 ```
 
-**Step 10** Define the client template using the [Kendo UI template]({% slug overview_kendoui_templatescomponent %}) syntax. The context of the template is the data item&mdash;Product entity&mdash;to which the current Grid row is bound.
+**Step 10** Define the client template using the [Kendo UI template](http://docs.telerik.com/kendo-ui/framework/templates/overview) syntax. The context of the template is the data item&mdash;Product entity&mdash;to which the current Grid row is bound.
 
 > **Important**  
 >
@@ -307,7 +307,7 @@ Below are listed the steps for you to follow when configuring the Kendo UI Grid 
     )
 ```
 
-**Step 11** Define the client template using [Kendo UI Template]({% slug overview_kendoui_templatescomponent %}) syntax. The context of the template is the **Category** entity to which the current Grid row is bound. The template itself contains another Grid which is bound to the `Products_Read` action.
+**Step 11** Define the client template using [Kendo UI Template](http://docs.telerik.com/kendo-ui/framework/templates/overview) syntax. The context of the template is the **Category** entity to which the current Grid row is bound. The template itself contains another Grid which is bound to the `Products_Read` action.
 
 > **Important**  
 > * Always call the `ToClientTemplate` method when using Telerik UI for ASP.NET MVC widgets in a client template.

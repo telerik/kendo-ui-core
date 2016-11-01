@@ -134,7 +134,7 @@ In the `_Layout.cshtml` file, this template is included with the line, demonstra
 <!--_-->
 If you are not using ASP.NET MVC, you can write some additional code to load templates from external files.
 
-For more information on remote template loading, refer to the [article on external template loading]({% slug externalteplateloading_templatescomponent %}).
+For more information on remote template loading, refer to the [article on external template loading](http://docs.telerik.com/kendo-ui/framework/templates/load-remote).
 
 Now that the template is included in the body of the page, the application code is using a jQuery selector to fetch this `<script>` element by its `id` and get the contents. It then calls `kendo.template()` to process the template.
 

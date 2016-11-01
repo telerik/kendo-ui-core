@@ -395,7 +395,7 @@ Bound columns support the following settings:
 
 ### ClientTemplate
 
-A [Kendo UI template]({% slug overview_kendoui_templatescomponent %}) which specifies the way the column is displayed.
+A [Kendo UI template](http://docs.telerik.com/kendo-ui/framework/templates/overview) which specifies the way the column is displayed.
 
 > **Important**  
 >
@@ -489,7 +489,7 @@ The example below demonstrates how to specify the column format string.
             )
         )
 
-For more information on the supported formats, refer to the [article about globalization]({% slug overview_kendoui_globalization %}).
+For more information on the supported formats, refer to the [article about globalization](http://docs.telerik.com/kendo-ui/framework/globalization/overview).
 
 ### Groupable
 
@@ -646,7 +646,7 @@ Template columns have the following settings:
 
 ### ClientTemplate
 
-A [Kendo UI template]({% slug overview_kendoui_templatescomponent %}) which specifies the way the column is displayed.
+A [Kendo UI template](http://docs.telerik.com/kendo-ui/framework/templates/overview) which specifies the way the column is displayed.
 
 > **Important**  
 >

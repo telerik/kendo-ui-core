@@ -9,7 +9,7 @@ slug: howto_columntemplatexport_aspnetmvcgrid
 
 To see the example on how to use the column template as the value of the corresponding cell in the output Excel document, refer to [this project](https://github.com/telerik/ui-for-aspnet-mvc-examples/tree/master/grid/column-template-excel).
 
-For more information on how to create Excel documents, refer to [this article]({% slug introduction_excelexport_kendoui %}#create-excel-document).
+For more information on how to create Excel documents, refer to [this article](http://docs.telerik.com/kendo-ui/framework/excel/introduction#create-excel-document).
 
 > **Important**
 >

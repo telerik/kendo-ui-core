@@ -13,6 +13,6 @@ To see the example on how to configure a Kendo UI Grid with a foreign key column
 
 * [Overview of the Grid HtmlHelper]({% slug overview_gridhelper_aspnetmvc %})
 * [GridBuilder API Reference](/aspnet-mvc/api/Kendo.Mvc.UI.Fluent/GridBuilder)
-* [ComboBox Templates]({% slug overview_kendoui_combobox_widget %}#templates)
+* [ComboBox Templates](http://docs.telerik.com/kendo-ui/controls/editors/combobox/overview#templates)
 
 For more runnable examples on the Kendo UI Grid in ASP.NET MVC applications, browse its [**How To** documentation folder]({% slug howto_bindgridtodatatable_gridaspnetmvc %}).

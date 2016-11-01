@@ -18,13 +18,13 @@ Clicking the **Export to Excel** button or calling the `saveAsExcel` throws an e
 
 Include JSZip in the page.
 
-For more information on the export of the Grid to Excel, refer to [this article]({% slug overview_savingfiles_kendoui %}).
+For more information on the export of the Grid to Excel, refer to [this article](http://docs.telerik.com/kendo-ui/framework/save-files/introduction).
 
 ## Browser Specific
 
 ### Export Does Not Work in Internet Explorer and Safari
 
-Internet Explorer versions below 10 and Safari cannot save a file and require the implementation of a [server proxy]({% slug overview_savingfiles_kendoui %}).
+Internet Explorer versions below 10 and Safari cannot save a file and require the implementation of a [server proxy](http://docs.telerik.com/kendo-ui/framework/save-files/introduction).
 
 **Solution**
 
