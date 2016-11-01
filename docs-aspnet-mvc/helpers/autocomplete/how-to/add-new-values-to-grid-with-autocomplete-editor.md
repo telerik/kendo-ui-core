@@ -14,4 +14,4 @@ To see the example on how to add a new value to the Kendo UI Grid records when t
 * [Overview of the AutoComplete HtmlHelper]({% slug overview_autocompletehelper_aspnetmvc %})
 * [AutoCompleteBuilder API Reference](/api/Kendo.Mvc.UI.Fluent/AutoCompleteBuilder)
 * [Overview of the Grid HtmlHelper]({% slug overview_gridhelper_aspnetmvc %})
-* [GridBuilder API Reference](/api/Kendo.Mvc.UI.Fluent/AutoCompleteBuilder)
+* [GridBuilder API Reference](/api/Kendo.Mvc.UI.Fluent/GridBuilder)

@@ -18,13 +18,13 @@ Clicking the **Export to Excel** button or calling the `saveAsExcel` throws an e
 
 Include JSZip in the page.
 
-For more information on the export of the Grid to Excel, refer to [this article]({% slug overview_savingfiles_kendoui %}).
+For more information on the export of the Grid to Excel, refer to [this article](http://docs.telerik.com/kendo-ui/framework/save-files/introduction).
 
 ## Browser Specific
 
 ### Export Does Not Work in Internet Explorer and Safari
 
-Internet Explorer versions below 10 and Safari cannot save a file and require the implementation of a [server proxy]({% slug overview_savingfiles_kendoui %}).
+Internet Explorer versions below 10 and Safari cannot save a file and require the implementation of a [server proxy](http://docs.telerik.com/kendo-ui/framework/save-files/introduction).
 
 **Solution**
 
@@ -91,7 +91,7 @@ Other articles on the Kendo UI Grid for ASP.NET MVC:
 * [Editing of the Grid HtmlHelper]({% slug ajaxediting_grid_aspnetmvc %})
 * [Templating of the Grid HtmlHelper]({% slug clientdetailtemplate_grid_aspnetmvc %})
 * [API Reference of the Grid HtmlHelper](/api/Kendo.Mvc.UI.Fluent/GridBuilder)
-* [Overview of the Kendo UI Grid Widget]({% slug overview_kendoui_grid_widget %})
+* [Overview of the Kendo UI Grid Widget](http://docs.telerik.com/kendo-ui/controls/data-management/grid/overview)
 
 Articles on Telerik UI for ASP.NET MVC:
 
@@ -105,21 +105,21 @@ Articles on Telerik UI for ASP.NET MVC:
 
 Other articles on troubleshooting:
 
-* [Common Issues in Kendo UI]({% slug troubleshooting_common_issues_kendoui %})
-* [JavaScript Errors]({% slug troubleshooting_javascript_errors_kendoui %})
-* [Performance Issues]({% slug troubleshooting_system_memory_symptoms_kendoui %})
-* [Content Security Policy]({% slug troubleshooting_content_security_policy_kendoui %})
-* [Common Issues in Kendo UI Excel Export]({% slug troubleshooting_excel_export_kendoui %})
-* [Common Issues in Kendo UI Charts]({% slug troubleshooting_chart_widget %})
-* [Performance Issues in Kendo UI Widgets for Data Visualization]({% slug tipsandtricks_kendouistyling %})
-* [Common Issues in Kendo UI ComboBox]({% slug troubleshooting_common_issues_combobox_kendoui %})
-* [Common Issues in Kendo UI Diagram]({% slug troubleshooting_diagram_widget %})
-* [Common Issues in Kendo UI DropDownList]({% slug troubleshooting_common_issues_dropdownlist_kendoui %})
-* [Common Issues in Kendo UI Editor]({% slug troubleshooting_editor_widget %})
-* [Common Issues in Kendo UI MultiSelect]({% slug troubleshooting_common_issues_multiselect_kendoui %})
-* [Common Issues in Kendo UI Scheduler]({% slug troubleshooting_scheduler_widget %})
-* [Common Issues in Kendo UI Upload]({% slug troubleshooting_upload_widget %})
-* [Common Issues Related to Styling, Appearance, and Rendering]({% slug commonissues_troubleshooting_kendouistyling %})
+* [Common Issues in Kendo UI](http://docs.telerik.com/kendo-ui/troubleshoot/troubleshooting-common-issues)
+* [JavaScript Errors](http://docs.telerik.com/kendo-ui/troubleshoot/troubleshooting-js-errors)
+* [Performance Issues](http://docs.telerik.com/kendo-ui/troubleshoot/troubleshooting-memory-leaks)
+* [Content Security Policy](http://docs.telerik.com/kendo-ui/troubleshoot/content-security-policy)
+* [Common Issues in Kendo UI Excel Export](http://docs.telerik.com/kendo-ui/framework/excel/troubleshoot/common-issues)
+* [Common Issues in Kendo UI Charts](http://docs.telerik.com/kendo-ui/controls/charts/troubleshoot/common-issues)
+* [Performance Issues in Kendo UI Widgets for Data Visualization](http://docs.telerik.com/kendo-ui/troubleshoot/troubleshooting-memory-leaks)
+* [Common Issues in Kendo UI ComboBox](http://docs.telerik.com/kendo-ui/controls/editors/combobox/troubleshoot/troubleshooting)
+* [Common Issues in Kendo UI Diagram](http://docs.telerik.com/kendo-ui/controls/diagrams-and-maps/diagram/troubleshoot/common-issues)
+* [Common Issues in Kendo UI DropDownList](http://docs.telerik.com/kendo-ui/controls/editors/dropdownlist/troubleshoot/troubleshooting)
+* [Common Issues in Kendo UI Editor](http://docs.telerik.com/kendo-ui/controls/editors/editor/troubleshoot/troubleshooting)
+* [Common Issues in Kendo UI MultiSelect](http://docs.telerik.com/kendo-ui/controls/editors/multiselect/troubleshoot/troubleshooting)
+* [Common Issues in Kendo UI Scheduler](http://docs.telerik.com/kendo-ui/controls/scheduling/scheduler/troubleshoot/troubleshooting)
+* [Common Issues in Kendo UI Upload](http://docs.telerik.com/kendo-ui/controls/editors/upload/troubleshoot/troubleshooting)
+* [Common Issues Related to Styling, Appearance, and Rendering](http://docs.telerik.com/kendo-ui/styles-and-layout/troubleshoot/troubleshooting)
 * [Common Issues in Telerik UI for ASP.NET MVC]({% slug troubleshooting_aspnetmvc %})
 * [Validation Issues in Telerik UI for ASP.NET MVC]({% slug troubleshooting_validation_aspnetmvc %})
 * [Scaffolding Issues in Telerik UI for ASP.NET MVC]({% slug troubleshooting_scaffolding_aspnetmvc %})

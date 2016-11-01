@@ -215,7 +215,7 @@ Other articles on Telerik UI for ASP.NET MVC and on the ListView:
 * [Overview of the ListView HtmlHelper]({% slug overview_listviewhelper_aspnetmvc %})
 * [Configuration of the ListView HtmlHelper]({% slug configuration_listviewhelper_aspnetmvc %})
 * [Ajax Binding of the ListView HtmlHelper]({% slug ajaxbinding_listviewhelper_aspnetmvc %})
-* [Overview of the Kendo UI ListView Widget]({% slug overview_kendoui_listview_widget %})
+* [Overview of the Kendo UI ListView Widget](http://docs.telerik.com/kendo-ui/controls/data-management/listview/overview)
 * [Overview of Telerik UI for ASP.NET MVC]({% slug overview_aspnetmvc %})
 * [Fundamentals of Telerik UI for ASP.NET MVC]({% slug fundamentals_aspnetmvc %})
 * [Scaffolding in Telerik UI for ASP.NET MVC]({% slug scaffolding_aspnetmvc %})

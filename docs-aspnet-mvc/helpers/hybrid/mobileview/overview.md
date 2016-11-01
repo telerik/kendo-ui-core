@@ -2,7 +2,7 @@
 title: Overview
 page_title: Overview | Hybrid UI View HtmlHelper
 description: "Get started with the server-side wrapper for the hybrid Kendo UI View widget for ASP.NET MVC."
-previous_url: /aspnet-mvc/helpers/mobileview/overview
+previous_url: /kendo-ui/aspnet-mvc/helpers/mobileview/overview
 slug: overview_hybridview_aspnetmvc
 position: 1
 ---
@@ -140,7 +140,7 @@ You can reference a hybrid View instance by using the [jQuery.data()](http://api
 Other articles on Telerik UI for ASP.NET MVC and on the View:
 
 * [ASP.NET MVC API Reference: TabStripBuilder](/api/Kendo.Mvc.UI.Fluent/MobileTabStripBuilder)
-* [Overview of the Hybrid UI View Widget]({% slug overview_hybridtabstrip %})
+* [Overview of the Hybrid UI View Widget](http://docs.telerik.com/kendo-ui/controls/hybrid/view/view)
 * [Overview of Telerik UI for ASP.NET MVC]({% slug overview_aspnetmvc %})
 * [Fundamentals of Telerik UI for ASP.NET MVC]({% slug fundamentals_aspnetmvc %})
 * [Scaffolding in Telerik UI for ASP.NET MVC]({% slug scaffolding_aspnetmvc %})

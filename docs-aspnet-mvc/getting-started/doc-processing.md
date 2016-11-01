@@ -3,7 +3,7 @@ title: Telerik Document Processing
 page_title: Telerik Document Processing | Telerik UI for ASP.NET MVC
 description: "Import and export content between different formats and work with archive files by using Telerik Document Processing."
 slug: docsprocessing_aspnetmvc
-previous_url: doc-processing
+previous_url: /kendo-ui/aspnet-mvc/doc-processing
 position: 11
 ---
 
@@ -68,4 +68,4 @@ Telerik Document Processing is available as part of the following suites:
 * [Get Started with Telerik Document Processing](http://docs.telerik.com/devtools/document-processing/installation-and-deployment/installing-on-your-computer)
 * [Telerik UI for ASP.NET MVC Overview]({% slug overview_aspnetmvc %})
 * [Telerik UI for ASP.NET MVC Fundamentals]({% slug fundamentals_aspnetmvc %})
-* [Telerik UI for ASP.NET Core Overview]({% slug overview_aspnetmvc6_aspnetmvc %})
+* [Telerik UI for ASP.NET Core Overview](http://docs.telerik.com/aspnet-core/introduction)

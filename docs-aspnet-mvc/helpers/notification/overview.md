@@ -10,7 +10,7 @@ position: 1
 
 The Notification HtmlHelper extension is a server-side wrapper for the [Kendo UI Notification](https://demos.telerik.com/kendo-ui/notification/index) widget. The Kendo UI Notification widget delivers a styled UI with arbitrary content, which provides information to the user on various occasions.
 
-Before reading on, make sure you are familiar with the fundamental [Kendo UI widget concepts]({% slug initialize_widgets_using_jquery_plugins_installation %}) and
+Before reading on, make sure you are familiar with the fundamental [Kendo UI widget concepts](http://docs.telerik.com/kendo-ui/intro/installation/jquery-initialization) and
 the [Kendo UI MVC wrappers]({% slug overview_aspnetmvc %}) are setup correctly.
 
 ## Getting Started
@@ -150,7 +150,7 @@ The example below demonstrates how to enable static notifications.
 
 ### Templates
 
-Before reading on, make sure you are familiar with the concept of the [Kendo UI templates]({% slug overview_kendoui_templatescomponent %}).
+Before reading on, make sure you are familiar with the concept of the [Kendo UI templates](http://docs.telerik.com/kendo-ui/framework/templates/overview).
 
 Notifications allow configuring multiple templates. Each template is used together with its corresponding [notification type](#notification-types)&mdash;either build-in or custom. If you define a custom template for a built-in notification type, you are no longer able to use the corresponding built-in template, but you are still able to use the shorthand show methods, as demonstrated below.
 
@@ -192,7 +192,7 @@ The example below demonstrates how to use templates.
   	});
   	</script>
 
-For more information on other Notification features and behavior, such as HTML output, RTL support, or Events, refer to the [introductory article on the Kendo UI Notification]({% slug overview_kendoui_notification_widget %}). The widget events and methods are described in the [Notification API section](../../../kendo-ui/api/javascript/ui/notification).
+For more information on other Notification features and behavior, such as HTML output, RTL support, or Events, refer to the [introductory article on the Kendo UI Notification](http://docs.telerik.com/kendo-ui/controls/layout/notification/overview). The widget events and methods are described in the [Notification API section](/kendo-ui/api/javascript/ui/notification).
 
 ## See Also
 
@@ -202,7 +202,7 @@ Other articles on Telerik UI for ASP.NET MVC and on the Notification:
 * [Overview of Telerik UI for ASP.NET MVC]({% slug overview_aspnetmvc %})
 * [Fundamentals of Telerik UI for ASP.NET MVC]({% slug fundamentals_aspnetmvc %})
 * [Scaffolding in Telerik UI for ASP.NET MVC]({% slug scaffolding_aspnetmvc %})
-* [Overview of the Kendo UI Notification Widget]({% slug overview_kendoui_notification_widget %})
+* [Overview of the Kendo UI Notification Widget](http://docs.telerik.com/kendo-ui/controls/layout/notification/overview)
 * [Telerik UI for ASP.NET MVC API Reference Folder](/api/Kendo.Mvc/AggregateFunction)
 * [Telerik UI for ASP.NET MVC HtmlHelpers Folder]({% slug overview_barcodehelper_aspnetmvc %})
 * [Tutorials on Telerik UI for ASP.NET MVC]({% slug overview_timeefficiencyapp_aspnetmvc6 %})

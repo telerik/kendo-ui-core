@@ -2,7 +2,7 @@
 title: Client Detail Templates
 page_title: Client Detail Templates | Kendo UI Grid HtmlHelper
 description: "Set the detail template used during Ajax binding of the Kendo UI Grid for ASP.NET MVC."
-previous_url: /aspnet-mvc/helpers/grid/client-detail-template
+previous_url: /kendo-ui/aspnet-mvc/helpers/grid/client-detail-template
 slug: clientdetailtemplate_grid_aspnetmvc
 position: 1
 ---
@@ -121,7 +121,7 @@ Below are listed the steps for you to follow when configuring the Kendo UI Grid 
     )
 ```
 
-**Step 10** Define the client template using the [Kendo UI template]({% slug overview_kendoui_templatescomponent %}) syntax. The context of the template is the data item&mdash;Product entity&mdash;to which the current Grid row is bound.
+**Step 10** Define the client template using the [Kendo UI template](http://docs.telerik.com/kendo-ui/framework/templates/overview) syntax. The context of the template is the data item&mdash;Product entity&mdash;to which the current Grid row is bound.
 
 > **Important**  
 >
@@ -307,7 +307,7 @@ Below are listed the steps for you to follow when configuring the Kendo UI Grid 
     )
 ```
 
-**Step 11** Define the client template using [Kendo UI Template]({% slug overview_kendoui_templatescomponent %}) syntax. The context of the template is the **Category** entity to which the current Grid row is bound. The template itself contains another Grid which is bound to the `Products_Read` action.
+**Step 11** Define the client template using [Kendo UI Template](http://docs.telerik.com/kendo-ui/framework/templates/overview) syntax. The context of the template is the **Category** entity to which the current Grid row is bound. The template itself contains another Grid which is bound to the `Products_Read` action.
 
 > **Important**  
 > * Always call the `ToClientTemplate` method when using Telerik UI for ASP.NET MVC widgets in a client template.
@@ -392,7 +392,7 @@ Other articles on the Kendo UI Grid for ASP.NET MVC:
 * [Editing of the Grid HtmlHelper]({% slug ajaxediting_grid_aspnetmvc %})
 * [Troubleshooting of the Grid HtmlHelper]({% slug troubleshoot_gridhelper_aspnetmvc %})
 * [API Reference of the Grid HtmlHelper](/api/Kendo.Mvc.UI.Fluent/GridBuilder)
-* [Overview of the Kendo UI Grid Widget]({% slug overview_kendoui_grid_widget %})
+* [Overview of the Kendo UI Grid Widget](http://docs.telerik.com/kendo-ui/controls/data-management/grid/overview)
 
 Articles on Telerik UI for ASP.NET MVC:
 

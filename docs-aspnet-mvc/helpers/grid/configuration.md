@@ -395,7 +395,7 @@ Bound columns support the following settings:
 
 ### ClientTemplate
 
-A [Kendo UI template]({% slug overview_kendoui_templatescomponent %}) which specifies the way the column is displayed.
+A [Kendo UI template](http://docs.telerik.com/kendo-ui/framework/templates/overview) which specifies the way the column is displayed.
 
 > **Important**  
 >
@@ -489,7 +489,7 @@ The example below demonstrates how to specify the column format string.
             )
         )
 
-For more information on the supported formats, refer to the [article about globalization]({% slug overview_kendoui_globalization %}).
+For more information on the supported formats, refer to the [article about globalization](http://docs.telerik.com/kendo-ui/framework/globalization/overview).
 
 ### Groupable
 
@@ -646,7 +646,7 @@ Template columns have the following settings:
 
 ### ClientTemplate
 
-A [Kendo UI template]({% slug overview_kendoui_templatescomponent %}) which specifies the way the column is displayed.
+A [Kendo UI template](http://docs.telerik.com/kendo-ui/framework/templates/overview) which specifies the way the column is displayed.
 
 > **Important**  
 >
@@ -1207,7 +1207,7 @@ Other articles on the Kendo UI Grid for ASP.NET MVC:
 * [Templating of the Grid HtmlHelper]({% slug clientdetailtemplate_grid_aspnetmvc %})
 * [Troubleshooting for the Grid HtmlHelper]({% slug troubleshoot_gridhelper_aspnetmvc %})
 * [API Reference of the Grid HtmlHelper](/api/Kendo.Mvc.UI.Fluent/GridBuilder)
-* [Overview of the Kendo UI Grid Widget]({% slug overview_kendoui_grid_widget %})
+* [Overview of the Kendo UI Grid Widget](http://docs.telerik.com/kendo-ui/controls/data-management/grid/overview)
 
 Articles on Telerik UI for ASP.NET MVC:
 

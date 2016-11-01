@@ -32,7 +32,7 @@ Below are listed the steps for you to follow when configuring the Kendo UI Diagr
 <!--_-->
 **Step 2** In the view, configure the Diagram to use the action method created in the previous step.
 
-###### Example 
+###### Example
 
 ```tab-ASPX
 
@@ -162,7 +162,7 @@ Other articles on Telerik UI for ASP.NET MVC and on the Diagram:
 * [Overview of Telerik UI for ASP.NET MVC]({% slug overview_aspnetmvc %})
 * [Fundamentals of Telerik UI for ASP.NET MVC]({% slug fundamentals_aspnetmvc %})
 * [Scaffolding in Telerik UI for ASP.NET MVC]({% slug scaffolding_aspnetmvc %})
-* [Overview of the Kendo UI Diagram Widget]({% slug overview_kendoui_diagram_widget %})
+* [Overview of the Kendo UI Diagram Widget](http://docs.telerik.com/kendo-ui/controls/diagrams-and-maps/diagram/overview)
 * [Telerik UI for ASP.NET MVC API Reference Folder](/api/Kendo.Mvc/AggregateFunction)
 * [Telerik UI for ASP.NET MVC HtmlHelpers Folder]({% slug overview_autocompletehelper_aspnetmvc %})
 * [Tutorials on Telerik UI for ASP.NET MVC]({% slug overview_timeefficiencyapp_aspnetmvc6 %})

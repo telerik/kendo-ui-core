@@ -2,7 +2,7 @@
 title: Editor Templates
 page_title: Editor Templates | Kendo UI Grid HtmlHelper
 description: "Create the editing UI of a Kendo Grid ASP.NET MVC with the ASP.NET MVC editor templates."
-previous_url: /aspnet-mvc/helpers/grid/editor-templates
+previous_url: /kendo-ui/aspnet-mvc/helpers/grid/editor-templates
 slug: editortemplates_grid_aspnetmvc
 position: 2
 ---
@@ -136,7 +136,7 @@ Other articles on the Kendo UI Grid for ASP.NET MVC:
 * [Editing of the Grid HtmlHelper]({% slug ajaxediting_grid_aspnetmvc %})
 * [Troubleshooting of the Grid HtmlHelper]({% slug troubleshoot_gridhelper_aspnetmvc %})
 * [API Reference of the Grid HtmlHelper](/api/Kendo.Mvc.UI.Fluent/GridBuilder)
-* [Overview of the Kendo UI Grid Widget]({% slug overview_kendoui_grid_widget %})
+* [Overview of the Kendo UI Grid Widget](http://docs.telerik.com/kendo-ui/controls/data-management/grid/overview)
 
 Articles on Telerik UI for ASP.NET MVC:
 

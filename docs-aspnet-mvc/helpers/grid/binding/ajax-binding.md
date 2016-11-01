@@ -2,7 +2,7 @@
 title: Ajax Binding
 page_title: Ajax Binding | Kendo UI Grid HtmlHelper
 description: "Configure the Kendo UI Grid extension for Ajax binding to make Ajax requests upon paging, sorting, filtering, or grouping."
-previous_url: /aspnet-mvc/helpers/grid/ajax-binding
+previous_url: /kendo-ui/aspnet-mvc/helpers/grid/ajax-binding
 slug: ajaxbinding_grid_aspnetmvc
 position: 1
 ---
@@ -19,7 +19,7 @@ When configured for Ajax binding, the Kendo UI Grid for ASP.NET MVC makes Ajax r
 
 The Ajax-bound mode has the following features:
  - The Grid retrieves only the data (in JSON format) representing the current page. As a result, only the Grid is updated.
- - All Grid templates (column, detail) are executed client-side. They follow the [Kendo UI Template]({% slug overview_kendoui_templatescomponent %}) definition rules and may contain embedded JavaScript code.
+ - All Grid templates (column, detail) are executed client-side. They follow the [Kendo UI Template](http://docs.telerik.com/kendo-ui/framework/templates/overview) definition rules and may contain embedded JavaScript code.
 
 ### Configuration
 
@@ -374,7 +374,7 @@ In addition to using [server]({% slug configuration_gridhelper_aspnetmvc %}#temp
 
 When using client-side data binding for the Grid, perform all these customizations in the [`dataBound`]({% slug overview_gridhelper_aspnetmvc %}#event-handling) event of the Grid. If the custom code is executed earlier&mdash;for example, in `document.ready`&mdash;it is very likely it has no effect, because the table rows are still not rendered at that time.
 
-There is one exception to the above. Delegated event handlers will work, because they are attached to an ancestor element of the data rows&mdash;for example, the Grid [`table`](../../../../kendo-ui/api/javascript/ui/grid#fields-table), [`tbody`](../../../../kendo-ui/api/javascript/ui/grid#fields-tbody), or [`wrapper`]({% slug widgetwrapperandelement_references_gettingstarted %}), and the event handler code should check what the event target is.
+There is one exception to the above. Delegated event handlers will work, because they are attached to an ancestor element of the data rows&mdash;for example, the Grid [`table`](/kendo-ui/api/javascript/ui/grid#fields-table), [`tbody`](/kendo-ui/api/javascript/ui/grid#fields-tbody), or [`wrapper`](http://docs.telerik.com/kendo-ui/intro/widget-basics/wrapper-element), and the event handler code should check what the event target is.
 
 ### Prevent Ajax Response Caching
 
@@ -393,7 +393,7 @@ Other articles on the Kendo UI Grid for ASP.NET MVC:
 * [Templating of the Grid HtmlHelper]({% slug clientdetailtemplate_grid_aspnetmvc %})
 * [Troubleshooting of the Grid HtmlHelper]({% slug troubleshoot_gridhelper_aspnetmvc %})
 * [API Reference of the Grid HtmlHelper](/api/Kendo.Mvc.UI.Fluent/GridBuilder)
-* [Overview of the Kendo UI Grid Widget]({% slug overview_kendoui_grid_widget %})
+* [Overview of the Kendo UI Grid Widget](http://docs.telerik.com/kendo-ui/controls/data-management/grid/overview)
 
 Articles on Telerik UI for ASP.NET MVC:
 

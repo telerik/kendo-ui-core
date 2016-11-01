@@ -2,7 +2,7 @@
 title: Overview
 page_title: Overview | Hybrid UI Switch HtmlHelper
 description: "Get started with the server-side wrapper for the hybrid Kendo UI Switch widget for ASP.NET MVC."
-previous_url: /aspnet-mvc/helpers/mobileswitch/overview
+previous_url: /kendo-ui/aspnet-mvc/helpers/mobileswitch/overview
 slug: overview_hybridswitch_aspnetmvc
 position: 1
 ---
@@ -155,7 +155,7 @@ You can reference a hybrid Switch instance by using the [jQuery.data()](http://a
 Other articles on Telerik UI for ASP.NET MVC and on the Switch:
 
 * [ASP.NET MVC API Reference: SwitchBuilder](/api/Kendo.Mvc.UI.Fluent/MobileSwitchBuilder)
-* [Overview of the Hybrid UI Switch Widget]({% slug overview_hybridswitch %})
+* [Overview of the Hybrid UI Switch Widget](http://docs.telerik.com/kendo-ui/controls/hybrid/switch/switch)
 * [Overview of Telerik UI for ASP.NET MVC]({% slug overview_aspnetmvc %})
 * [Fundamentals of Telerik UI for ASP.NET MVC]({% slug fundamentals_aspnetmvc %})
 * [Scaffolding in Telerik UI for ASP.NET MVC]({% slug scaffolding_aspnetmvc %})

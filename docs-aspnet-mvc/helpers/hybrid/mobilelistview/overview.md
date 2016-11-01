@@ -2,7 +2,7 @@
 title: Overview
 page_title: Overview | Hybrid UI ListView HtmlHelper
 description: "Get started with the server-side wrapper for the hybrid Kendo UI ListView widget for ASP.NET MVC."
-previous_url: /aspnet-mvc/helpers/mobilelistview/overview
+previous_url: /kendo-ui/aspnet-mvc/helpers/mobilelistview/overview
 slug: overview_hybridlistview_aspnetmvc
 position: 1
 ---
@@ -288,7 +288,7 @@ The examples below demonstrates how to subscribe to events by a handler name.
 Other articles on Telerik UI for ASP.NET MVC and on the ListView:
 
 * [ASP.NET MVC API Reference: Hybrid UI ListViewBuilder](/api/Kendo.Mvc.UI.Fluent/MobileListViewBuilder)
-* [Overview of the Hybrid UI ListView Widget]({% slug overview_hybridlistview %})
+* [Overview of the Hybrid UI ListView Widget](http://docs.telerik.com/kendo-ui/controls/hybrid/listview/overview)
 * [Overview of Telerik UI for ASP.NET MVC]({% slug overview_aspnetmvc %})
 * [Fundamentals of Telerik UI for ASP.NET MVC]({% slug fundamentals_aspnetmvc %})
 * [Scaffolding in Telerik UI for ASP.NET MVC]({% slug scaffolding_aspnetmvc %})

@@ -2,7 +2,7 @@
 title: Creating Applications
 page_title: Creating Applications | Telerik UI for ASP.NET MVC
 description: "Use Telerik UI for ASP.NET MVC in ASP.NET MVC 5 applications."
-previous_url: /aspnet-mvc/aspnetmvc-apps/asp-net-mvc-5, /asp-net-mvc-5
+previous_url: /kendo-ui/aspnet-mvc/aspnetmvc-apps/asp-net-mvc-5, /kendo-ui/aspnet-mvc/asp-net-mvc-5
 slug: aspnetmvc5_aspnetmvc
 position: 14
 ---
@@ -242,9 +242,7 @@ Below are listed the steps for you to follow when using a Kendo UI widget throug
 * [Telerik UI for ASP.NET MVC Visual Studio Integration]({% slug overview_visualstudio_aspnetmvc %})
 * [Migration from Telerik Extensions]({% slug overview_migrationextensions_aspnetmvc %})
 * [Telerik UI for ASP.NET MVC HtmlHelpers]({% slug overview_autocompletehelper_aspnetmvc %})
-* [ASP.NET MVC 3]({% slug aspnetmvc3_aspnetmvc %})
-* [ASP.NET MVC 4]({% slug aspnetmvc4_aspnetmvc %})
-* [ASP.NET Core]({% slug overview_aspnetmvc6_aspnetmvc %})
+* [ASP.NET Core](http://docs.telerik.com/aspnet-core/introduction)
 * [Tutorials on Telerik UI for ASP.NET MVC]({% slug overview_timeefficiencyapp_aspnetmvc6 %})
 * [Telerik UI for ASP.NET MVC Fundamentals]({% slug fundamentals_aspnetmvc %})
 * [Telerik UI for ASP.NET MVC NuGet Packages]({% slug aspnetmvc_nuget %})

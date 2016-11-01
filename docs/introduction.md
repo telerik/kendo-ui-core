@@ -73,7 +73,7 @@ HtmlHelper extension methods (a.k.a. server-side wrappers) which allow you to co
 
 It complements the Spreadsheet component and allows you to process the data on the server, but can be used on its own as well.
 
-* [Server-Side Processing with the UI for ASP.NET MVC Spreadsheet]({% slug spreadsheet_processing_spreadsheet_mvc %})
+* [Server-Side Processing with the UI for ASP.NET MVC Spreadsheet](http://docs.telerik.com/aspnet-mvc/helpers/spreadsheet/spreadsheet-processing)
 * [Server-Side Processing with the Kendo UI Spreadsheet]({% slug serverside_processing_spreadsheet_widget %})
 * [RadSpreadProcessing Overview](http://docs.telerik.com/devtools/wpf/controls/radspreadprocessing/overview)
 

@@ -2,7 +2,7 @@
 title: Overview
 page_title: Overview | Telerik UI for ASP.NET Core
 description: "Download and install Telerik UI for ASP.NET Core (aka MVC 6 or ASP.NET Core MVC), and run the sample application."
-previous_url: /aspnet-mvc/aspnetmvc-apps/mvc-6/introduction, /aspnet-mvc/mvc-6/introduction
+previous_url: /kendo-ui/aspnet-mvc/aspnetmvc-apps/mvc-6/introduction, /kendo-ui/aspnet-mvc/mvc-6/introduction
 slug: overview_aspnetmvc6_aspnetmvc
 position: 1
 ---

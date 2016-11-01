@@ -2,7 +2,7 @@
 title: Overview
 page_title: Overview | Hybrid UI SplitView HtmlHelper
 description: "Get started with the server-side wrapper for the hybrid Kendo UI SplitView widget for ASP.NET MVC."
-previous_url: /aspnet-mvc/helpers/mobilesplitview/overview
+previous_url: /kendo-ui/aspnet-mvc/helpers/mobilesplitview/overview
 slug: overview_hybridsplitview_aspnetmvc
 position: 1
 ---
@@ -214,7 +214,7 @@ You can reference a hybrid SplitView instance by using the [jQuery.data()](http:
 Other articles on Telerik UI for ASP.NET MVC and on the SplitView:
 
 * [ASP.NET MVC API Reference: SplitViewBuilder](/api/Kendo.Mvc.UI.Fluent/MobileSplitViewBuilder)
-* [Overview of the Hybrid UI SplitView Widget]({% slug overview_hybridsplitview %})
+* [Overview of the Hybrid UI SplitView Widget](http://docs.telerik.com/kendo-ui/controls/hybrid/splitview/splitview)
 * [Overview of Telerik UI for ASP.NET MVC]({% slug overview_aspnetmvc %})
 * [Fundamentals of Telerik UI for ASP.NET MVC]({% slug fundamentals_aspnetmvc %})
 * [Scaffolding in Telerik UI for ASP.NET MVC]({% slug scaffolding_aspnetmvc %})

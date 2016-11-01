@@ -2,7 +2,7 @@
 title: Overview
 page_title: Overview | Hybrid UI PopOver HtmlHelper
 description: "Get started with the server-side wrapper for the hybrid Kendo UI PopOver widget for ASP.NET MVC."
-previous_url: /aspnet-mvc/helpers/mobilepopover/overview
+previous_url: /kendo-ui/aspnet-mvc/helpers/mobilepopover/overview
 slug: overview_hybridpopover_aspnetmvc
 position: 1
 ---
@@ -192,7 +192,7 @@ You can reference a hybrid PopOver instance by using the code from the example b
 Other articles on Telerik UI for ASP.NET MVC and on the PopOver:
 
 * [ASP.NET MVC API Reference: PopOverBuilder](/api/Kendo.Mvc.UI.Fluent/MobilePopOverBuilder)
-* [Overview of the Hybrid UI PopOver Widget]({% slug overview_hybridpopover %})
+* [Overview of the Hybrid UI PopOver Widget](http://docs.telerik.com/kendo-ui/controls/hybrid/popover/popover)
 * [Overview of Telerik UI for ASP.NET MVC]({% slug overview_aspnetmvc %})
 * [Fundamentals of Telerik UI for ASP.NET MVC]({% slug fundamentals_aspnetmvc %})
 * [Scaffolding in Telerik UI for ASP.NET MVC]({% slug scaffolding_aspnetmvc %})
