@@ -728,7 +728,7 @@ var __meta__ = { // jshint ignore:line
                         '<span class="k-selected-color"></span>' +
                     '# } #' +
                     '<span class="k-select" unselectable="on" aria-label="select">' +
-                        '<span class="k-icon k-i-arrow-s"></span>' +
+                        '<span class="p-icon p-i-arrow-60-down"></span>' +
                     '</span>' +
                 '</span>' +
             '</span>'
