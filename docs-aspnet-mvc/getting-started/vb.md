@@ -3,7 +3,7 @@ title: Visual Basic Syntax
 page_title: Visual Basic Syntax | Telerik UI for ASP.NET MVC
 description: "Apply a proper Visual Basic syntax when using lamba expressions and anonymous types inside Kendo UI MVC wrapper declarations."
 slug: visualbasic_aspnetmvc
-previous_url: vb
+previous_url: /kendo-ui/aspnet-mvc/vb
 position: 9
 ---
 

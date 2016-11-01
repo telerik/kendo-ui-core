@@ -2,7 +2,7 @@
 title: Use with ASP.NET MVC 4
 page_title: Use with ASP.NET MVC 4 | Telerik UI for ASP.NET MVC
 description: "Use Telerik UI for ASP.NET MVC in ASP.NET MVC 4 applications."
-previous_url: /aspnet-mvc/aspnetmvc-apps/asp-net-mvc-4
+previous_url: /kendo-ui/aspnet-mvc/aspnetmvc-apps/asp-net-mvc-4
 slug: aspnetmvc4_aspnetmvc
 position: 13
 ---

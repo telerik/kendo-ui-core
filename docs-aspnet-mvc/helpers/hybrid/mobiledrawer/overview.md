@@ -2,7 +2,7 @@
 title: Overview
 page_title: Overview | Hybrid UI Drawer HtmlHelper
 description: "Get started with the server-side wrapper for the hybrid Kendo UI Drawer widget for ASP.NET MVC."
-previous_url: /aspnet-mvc/helpers/mobiledrawer/overview
+previous_url: /kendo-ui/aspnet-mvc/helpers/mobiledrawer/overview
 slug: overview_hybriddrawer_aspnetmvc
 position: 1
 ---

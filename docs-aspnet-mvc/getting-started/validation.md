@@ -3,7 +3,7 @@ title: Validation
 page_title: Validation | Telerik UI for ASP.NET MVC
 description: "Use client-side validation with Telerik UI for ASP.NET MVC."
 slug: validation_aspnetmvc
-previous_url: validation
+previous_url: /kendo-ui/aspnet-mvc/validation
 position: 6
 ---
 

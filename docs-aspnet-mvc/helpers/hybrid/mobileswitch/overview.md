@@ -2,7 +2,7 @@
 title: Overview
 page_title: Overview | Hybrid UI Switch HtmlHelper
 description: "Get started with the server-side wrapper for the hybrid Kendo UI Switch widget for ASP.NET MVC."
-previous_url: /aspnet-mvc/helpers/mobileswitch/overview
+previous_url: /kendo-ui/aspnet-mvc/helpers/mobileswitch/overview
 slug: overview_hybridswitch_aspnetmvc
 position: 1
 ---

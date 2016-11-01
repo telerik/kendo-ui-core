@@ -2,7 +2,7 @@
 title: Filter Orders on the Server
 page_title: Filter Orders on the Server | Kendo UI Sales Hub Tutorial
 description: "Learn how to do server-side filtering of customer orders in the Kendo UI Sales Hub project by using Telerik UI for ASP.NET MVC."
-previous_url: /tutorials/asp.net/saleshub/home-page/kendo-saleshub-filtering-orders-server-side
+previous_url: /kendo-ui/tutorials/asp.net/saleshub/home-page/kendo-saleshub-filtering-orders-server-side
 slug: filterordersonserver_saleshubtutorial_aspnetmvc
 position: 3
 ---

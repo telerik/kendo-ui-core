@@ -2,7 +2,7 @@
 title: Custom Binding
 page_title: Custom Binding | Kendo UI Grid HtmlHelper
 description: "Use and configure Kendo UI Grid for ASP.NET MVC for server custom binding."
-previous_url: /aspnet-mvc/helpers/grid/custom-binding
+previous_url: /kendo-ui/aspnet-mvc/helpers/grid/custom-binding
 slug: custombinding_grid_aspnetmvc
 position: 3
 ---

@@ -2,7 +2,7 @@
 title: Overview
 page_title: Overview | Hybrid UI ModalView HtmlHelper
 description: "Get started with the server-side wrapper for the hybrid Kendo UI ModalView widget for ASP.NET MVC."
-previous_url: /aspnet-mvc/helpers/mobilemodalview/overview
+previous_url: /kendo-ui/aspnet-mvc/helpers/mobilemodalview/overview
 slug: overview_hybridmodalview_aspnetmvc
 position: 1
 ---
