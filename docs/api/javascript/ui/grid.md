@@ -6775,7 +6775,7 @@ Returns the index of the specified table cell. Skips group and detail table cell
 
 ##### cell `String|Element|jQuery`
 
-A string, DOM element or jQuery object which represents the table cell. A string is treated as a jQuery selector.
+A string, DOM element or jQuery object which represents the table cell. A string is treated as a jQuery selector. If there are locked columns in the Grid, the jQuery object, representing the cell, must be passed as an argument.
 
 #### Returns
 
