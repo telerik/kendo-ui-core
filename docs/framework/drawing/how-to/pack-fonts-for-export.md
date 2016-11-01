@@ -1,24 +1,28 @@
 ---
-title: Pack fonts for PDF export
-page_title: Pack fonts for PDF export | Kendo UI Drawing API
+title: Pack Fonts for PDF Export
+page_title: Pack Fonts for PDF Export | Kendo UI Drawing API
 description: "Learn how to transform the content during export while applying the Kendo UI Drawing API."
 slug: howto_packfontsforpdfexport_drawingapi
 ---
 
-# Pack fonts for PDF export
+# Pack Fonts for PDF Export
 
-For a quality PDF output, it is essential that our library has access to the same fonts that the browser uses to display the elements that you need to output.  Otherwise the layout of the PDF will look broken and non-ASCII characters might not be displayed properly.
+To provide better quality for the output in PDF, the library needs to have access to the same fonts as the browser uses to display the elements that are produced. Otherwise, neither the layout of the PDF, nor the non-ASCII characters are properly displayed.
 
-Declaring fonts is somewhat painful:
+To declare the fonts, you need to:   
+- Write the appropriate `@font-face` rules in the CSS.
+- Host the CSS file on the same domain as the page.
+- Keep the font files on the same domain too. Otherwise, you need to make sure that the server, which hosts the fonts, sends the proper [HTTP access control (CORS) headers](https://developer.mozilla.org/en-US/docs/Web/HTTP/Access_control_CORS).
 
-- you must write the appropriate `@font-face` rules in the CSS
-- you must host the CSS file on the same domain as the page
-- you must keep the font files on the same domain too, or otherwise, make sure that the server hosting the fonts sends the proper [HTTP access control (CORS) headers](https://developer.mozilla.org/en-US/docs/Web/HTTP/Access_control_CORS).
-- you cannot serve the page over `file:///` URL-s (which can be useful, for example in mobile apps)
+Also, when declaring the fonts, it is not possible to serve the page over the `file:///` URLs when needed&mdash;for example in mobile applications. 
 
-The [@telerik/kendo-pack-fonts](https://www.npmjs.com/package/@telerik/kendo-pack-fonts) utility packs one or more fonts into JavaScript code. You can then load that code with a `<script>` tag and it will work no matter where you store it (no need for CORS headers).  It will also work if the page is loaded on `file://` URL, because no AJAX request is needed to load the fonts in Kendo PDF library.
+Thе [`@telerik/kendo-pack-fonts`](https://www.npmjs.com/package/@telerik/kendo-pack-fonts) module packs one or more fonts into JavaScript code. In this way, you can load that code by using a `<script>` tag. 
 
-Please see the project README for more information.
+The packed code works:  
+* Regardless of the location you store it&mdash;this means that you do not need CORS headers.   
+* Even if the page is loaded to the `file://` URL, because you do not need an AJAX request to load the fonts into the Kendo UI PDF library.   
+
+For more information, refer to [the project on GitHub](https://github.com/telerik/kendo-pack-fonts).
 
 ## See Also
 
