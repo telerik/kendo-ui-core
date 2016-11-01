@@ -69,6 +69,8 @@ The example below demonstrates how to make all Kendo widgets use this font.
 > * In order for automatic font discovery to work, your CSS must reside on the same domain as the web page.
 > * Kendo UI bundles the DejaVu font family and will fall back to it for a few names, such as Times New Roman, Arial, or Courier, or generics, such as serif, sans-serif, or monospace, if no alternate fonts are specified. This is so that Unicode works by default. However, the layout problem will remain&mdash;the PDF output will be slightly different from the browser unless the exact same fonts are used.
 
+It is possible to use fonts without the necessity to host them on the same domain. For more information on this alternative approach which also works when the page is loaded over the `file://` URLs, refer to the article on how to [pack fonts for PDF export]({% slug howto_packfontsforpdfexport_drawingapi %}).
+
 ### Images in PDF
 
 Images are exported correctly only if they have the correct extension. For example, if PNG images with a JPG extension are displayed on the page, they might not show up in the exported PDF, or might cause exceptions in the PDF reader.
@@ -321,7 +323,7 @@ If you need different horizontal or vertical scale factors, pass either an array
 
 ### Split Page Content
 
-To prevent elements from being split across pages, use the `keepTogether` option. It should be a CSS selector, passable to jQuery.  
+To prevent elements from being split across pages, use the `keepTogether` option. It should be a CSS selector, passable to jQuery.
 
 ###### Example
 
