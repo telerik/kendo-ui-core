@@ -444,6 +444,8 @@ The Grid allows you to lock columns on one side of the table. For the feature to
 
 These settings ensure that at least one non-locked column is always visible and that it is possible to scroll the non-locked columns horizontally. Note that the horizontal scrollbar will not appear if the horizontal space intended for it is not enough.
 
+The locked columns can be positioned only on the left side of the Grid, positioning them on the right side is not supported.
+
 The row template and detail features are not supported in combination with column locking. It is possible to lock a column at the topmost level only, if you use [multi-column headers](http://demos.telerik.com/kendo-ui/grid/multicolumnheaders).
 
 Frozen columns cannot be touch-scrolled, because they are wrapped in a container with an `overflow:hidden` style. This limitation can be worked around on desktop devices with the help of the mousewheel event, but such an alternative on touch devices does not exist.
