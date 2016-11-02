@@ -22,7 +22,7 @@ Surfaces are listed in their order of preference. You can request a specific [`t
 
 ## PDF Export
 
-Please check the [PDF Export section](/intro/supporting/browser-support#pdf-export) on the [Browser Support page](/intro/supporting/browser-support).
+For more information on the provided [browser support]({% slug wbe_browserand_operating_system_support %}), refer to the section on [PDF export]({% slug wbe_browserand_operating_system_support %}}#pdf-export).
 
 ## See Also
 
