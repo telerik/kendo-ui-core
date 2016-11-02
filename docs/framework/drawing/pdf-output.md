@@ -82,7 +82,7 @@ The example below demonstrates how to get the PDF as a `Blob` object in browsers
 The following options are currently supported:
 
 - `paperSize`&mdash;This option can be either a paper name, such as A4, an array of two numbers, such as paper width and height, or `"auto"`. By default, it is `"auto"`, which means the paper size will be just enough to fit the drawing. If numbers are specified, they are assumed to be in a typographic points unit. A point is 1/72 of an inch. Strings of the form `297mm`" can also be used. The supported units are `mm`, `cm`, `in` and `pt`. The available paper sizes are: `A0-A10`, `B0-B10`, `C0-C10`, `Executive`, `Folio`, `Legal`, `Letter`, `Tabloid`.
-- `margin`&mdash;This option indicates the paper margins. It must be an object containing `top`, `left`, `right`, and `bottom` numbers which specify the paper margins. Again, if numbers are passed, they are assumed to be in points. By using strings you can specify units. When `paperSize` is `"auto"`, the dimensions are adjusted to include the margin. 
+- `margin`&mdash;This option indicates the paper margins. It must be an object containing `top`, `left`, `right`, and `bottom` numbers which specify the paper margins. Again, if numbers are passed, they are assumed to be in points. By using strings you can specify units. When `paperSize` is `"auto"`, the dimensions are adjusted to include the margin.
 - `landscape` (Boolean, default `false`)&mdash;If `true` is specified, the paper dimensions will be rotated if needed, so that the width is the larger edge.
 - `title`, `author`, `subject`, `keywords`, `creator`&mdash;These are the optional strings to be included in the PDF information dictionary.
 - `date`&mdash;This `Date` object is optional and specifies the creation date of the document. The default value is the current date/time (`new Date()`).
@@ -155,7 +155,7 @@ Compression can make a big difference in the output file size when you are using
 
 ## Supported Browsers
 
-Please check the [PDF Export section](/intro/supporting/browser-support#pdf-export) on the [Browser Support page](/intro/supporting/browser-support).
+For more information on the provided [browser support]({% slug wbe_browserand_operating_system_support %}), refer to the section on [PDF export]({% slug wbe_browserand_operating_system_support %}}#pdf-export).
 
 ## See Also
 

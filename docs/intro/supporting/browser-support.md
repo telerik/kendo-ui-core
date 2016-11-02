@@ -37,13 +37,7 @@ The [hybrid UI widgets and frameworks]({% slug bundle_supportfor_kendoui_compone
 | Firefox           | Not supported                    |
 | OS X Safari       | [6.2.6 or later](https://en.wikipedia.org/wiki/Safari_version_history#Mac)|
 
-### PDF Export
-
-The Kendo UI PDF generator is tested and supported in the following **desktop** browsers: Internet Explorer 9 and later, recent versions of Chrome, Firefox, Safari and Blink-based Opera.
-
-PDF export is **not** supported in Internet Explorer 8 and older versions, mobile browsers and hybrid mobile applications, due to browser limitations and CORS-related security restrictions in hybrid apps (for example, loading of locally stored font files is not possible in hybrid apps). Exporting may work on some mobile devices and in specific scenarios, but official support cannot be claimed at this time.
-
-### Charts, Gauges, Barcodes, Diagrams and Maps
+### Charts, Gauges, Barcodes, Diagrams, and Maps
 
 [Kendo UI widgets rendering data visualization]({% slug bundle_supportfor_kendoui_components %}) may require more recent browser versions as well. If you want to use them in your project, consider the information below.
 
@@ -70,6 +64,19 @@ PDF export is **not** supported in Internet Explorer 8 and older versions, mobil
 | Internet Explorer | 10                            | Dashed lines in canvas are not supported, which affects the image export as well |
 |                   |                               | Android 2.x, therefore, uses non-interactive canvas output |
 | Android           | 2.3                           | The Canvas rendering mode is only supported
+
+### PDF Export
+
+The Kendo UI PDF generator is tested and supported in the following _desktop_ browsers:
+
+* Internet Explorer 9 and later.
+* Latest Chrome, Firefox, Safari, and Blink-based Opera versions.
+
+Officially, PDF export is not supported on mobile because of browser limitations and CORS-related security restrictions in hybrid applications. For example, it is not possible to load locally stored font files in hybrid applications. Though exporting in PDF might work on some mobile devices in specific scenarios, PDF export is _not_ supported in:
+
+* Internet Explorer 8 and older
+* Mobile browsers
+* Hybrid mobile applications
 
 ### Best Performance
 
