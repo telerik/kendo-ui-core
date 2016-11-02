@@ -444,15 +444,7 @@ The Grid allows you to lock columns on one side of the table. For the feature to
 
 These settings ensure that at least one non-locked column is always visible and that it is possible to scroll the non-locked columns horizontally. Note that if the horizontal space intended for it is not enough, the horizontal scrollbar does not appear.
 
-The locked columns can be positioned only on the left side of the Grid. Positioning them on the right side is not supported.
-
-The row template and detail features are not supported in combination with column locking. It is possible to lock a column at the topmost level only, if you use [multi-column headers](http://demos.telerik.com/kendo-ui/grid/multicolumnheaders).
-
 Frozen columns cannot be touch-scrolled, because they are wrapped in a container with an `overflow:hidden` style. This limitation can be worked around on desktop devices with the help of the mousewheel event, but such an alternative on touch devices does not exist.
-
-> **Important**  
->
-> The [JavaScript API of the Grid](/api/javascript/ui/grid) allows you to lock and unlock columns on the fly. However, this is possible only if at least one column is initially locked during initialization. The HTML output and script behavior of the Grid are very different when frozen columns are used. That is why the widget cannot switch between frozen and unfrozen mode after initialization.
 
 Frozen columns rely on row height synchronization between the frozen and non-frozen parts. Some browsers, such as Internet Explorer 9 and Firefox, require a `line-height` style set in pixels. Otherwise, the synchronization might not work properly possibly because of sub-pixel quirks.
 
@@ -462,6 +454,11 @@ Frozen columns rely on row height synchronization between the frozen and non-fro
     {
         line-height: 18px;
     }
+
+> **Important**  
+> * The [JavaScript API of the Grid](/api/javascript/ui/grid) allows you to lock and unlock columns on the fly. However, this is possible only if at least one column is initially locked during initialization. The HTML output and script behavior of the Grid are very different when frozen columns are used. That is why the widget cannot switch between frozen and unfrozen mode after initialization.
+> * The locked columns can be positioned only on the left side of the Grid. Positioning them on the right side is not supported.
+> * The row template and detail features are not supported in combination with column locking. It is possible to lock a column at the topmost level only, if you use [multi-column headers](http://demos.telerik.com/kendo-ui/grid/multicolumnheaders).
 
 ## Rows
 
