@@ -12,7 +12,7 @@ To see the example on how to use the Kendo UI MultiSelect as a filter in Kendo U
 ## See Also
 
 * [Overview of the Grid HtmlHelper]({% slug overview_gridhelper_aspnetmvc %})
-* [GridBuilder API Reference](/aspnet-mvc/api/Kendo.Mvc.UI.Fluent/GridBuilder)
+* [GridBuilder API Reference](/api/Kendo.Mvc.UI.Fluent/GridBuilder)
 * [Overview of the MultiSelect HtmlHelper]({% slug overview_multiselecthelper_aspnetmvc %})
 * [MultiSelectBuilder API Reference](/aspnet-mvc/api/Kendo.Mvc.UI.Fluent/MultiSelectBuilder)
 

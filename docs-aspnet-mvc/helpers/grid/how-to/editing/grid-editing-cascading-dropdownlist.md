@@ -12,7 +12,7 @@ To see the example on how to configure the Kendo UI Grid to handle its cascading
 ## See Also
 
 * [Overview of the Grid HtmlHelper]({% slug overview_gridhelper_aspnetmvc %})
-* [GridBuilder API Reference](/aspnet-mvc/api/Kendo.Mvc.UI.Fluent/GridBuilder)
+* [GridBuilder API Reference](/api/Kendo.Mvc.UI.Fluent/GridBuilder)
 * [Overview of the DropDownList HtmlHelper]({% slug overview_dropdownlisthelper_aspnetmvc %})
 * [DropDownListBuilder API Reference](/aspnet-mvc/api/Kendo.Mvc.UI.Fluent/DropDownListBuilder)
 

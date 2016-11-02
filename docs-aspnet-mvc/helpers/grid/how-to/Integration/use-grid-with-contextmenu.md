@@ -12,7 +12,7 @@ To see the example on how to use the Kendo UI Grid with the Kendo UI ContextMenu
 ## See Also
 
 * [Overview of the Grid HtmlHelper]({% slug overview_gridhelper_aspnetmvc %})
-* [GridBuilder API Reference](/aspnet-mvc/api/Kendo.Mvc.UI.Fluent/GridBuilder)
+* [GridBuilder API Reference](/api/Kendo.Mvc.UI.Fluent/GridBuilder)
 * [Overview of the ContextMenu HtmlHelper](/api/Kendo.Mvc.UI.Fluent/ContextMenuBuilder)
 * [ContextMenuBuilder API Reference](/aspnet-mvc/api/Kendo.Mvc.UI.Fluent/ContextMenuBuilder)
 

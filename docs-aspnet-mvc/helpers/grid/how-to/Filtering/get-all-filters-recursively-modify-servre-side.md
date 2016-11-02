@@ -12,6 +12,6 @@ To see the example on how to get all Kendo UI Grid filters recursively and modif
 ## See Also
 
 * [Overview of the Grid HtmlHelper]({% slug overview_gridhelper_aspnetmvc %})
-* [GridBuilder API Reference](/aspnet-mvc/api/Kendo.Mvc.UI.Fluent/GridBuilder)
+* [GridBuilder API Reference](/api/Kendo.Mvc.UI.Fluent/GridBuilder)
 
 For more runnable examples on the Kendo UI Grid in ASP.NET MVC applications, browse its [**How To** documentation folder]({% slug howto_applycustomrowstylesbasedondata_gridaspnetmvc %}).
