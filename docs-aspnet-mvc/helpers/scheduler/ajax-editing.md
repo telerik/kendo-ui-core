@@ -305,7 +305,7 @@ Other articles on Telerik UI for ASP.NET MVC and on the Scheduler:
 * [Scaffolding of the Scheduler HtmlHelper]({% slug scaffoldingscheduler_aspnetmvc %})
 * [Resources of the Scheduler HtmlHelper]({% slug scaffoldingscheduler_aspnetmvc %})
 * [Scheduler HtmlHelper How-To Examples]({% slug howto_bindtowebapicontroller_scheduleraspnetmvc %})
-* [Overview of the Kendo UI Scheduler Widget]({% slug overview_kendoui_scheduler_widget %})
+* [Overview of the Kendo UI Scheduler Widget](http://docs.telerik.com/kendo-ui/controls/scheduling/scheduler/overview)
 * [Overview of Telerik UI for ASP.NET MVC]({% slug overview_aspnetmvc %})
 * [Fundamentals of Telerik UI for ASP.NET MVC]({% slug fundamentals_aspnetmvc %})
 * [Scaffolding in Telerik UI for ASP.NET MVC]({% slug scaffolding_aspnetmvc %})

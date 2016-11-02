@@ -13,11 +13,11 @@ To see the example on how to export multiple Kendo UI Grids to the same Excel do
 >
 > This project requires UI for ASP.NET MVC version 2014.3.1125 and later. Earlier versions do not have the `ExcelExport` event exposed through the fluent API.
 
-For more information on how to create Excel documents, refer to [this article]({% slug introduction_excelexport_kendoui %}#create-excel-document).
+For more information on how to create Excel documents, refer to [this article](http://docs.telerik.com/kendo-ui/framework/excel/introduction#create-excel-document).
 
 ## See Also
 
 * [Overview of the Grid HtmlHelper]({% slug overview_gridhelper_aspnetmvc %})
-* [GridBuilder API Reference](/api/Kendo.Mvc.UI.Fluent/AutoCompleteBuilder)
+* [GridBuilder API Reference](/api/Kendo.Mvc.UI.Fluent/GridBuilder)
 
 For more runnable examples on the Kendo UI Grid in ASP.NET MVC applications, browse its [**How To** documentation folder]({% slug howto_bindgridtodatatable_gridaspnetmvc %}).

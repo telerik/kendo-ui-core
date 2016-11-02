@@ -3,7 +3,7 @@ title: Custom DataSource
 page_title: Custom DataSource | Telerik UI for ASP.NET MVC
 description: "Use the CustomDataSource builder available for the Telerik UI for ASP.NET MVC HtmlHelpers."
 slug: customdatasource_aspnetmvc
-previous_url: custom-datasource
+previous_url: /kendo-ui/aspnet-mvc/custom-datasource
 position: 5
 ---
 
@@ -15,7 +15,7 @@ This article provides information on how to use the CustomDataSource builder ava
 
 ### The Basics
 
-The CustomDataSource builder is created to allow a full control over the DataSource options listed in the [client-side API](../../kendo-ui/api/javascript/data/datasource). By applying the CustomDataSource builder, you benefit from using the MVC wrappers. For example, the wrappers are enabled to generate validation attributes, editors, etc., while utilizing the flexibility of JavaScript. The CustomDataSource builder can also be used in more advanced scenarios where the regular DataSource builders prevent you from fully customizing the options of the DataSource.
+The CustomDataSource builder is created to allow a full control over the DataSource options listed in the [client-side API](/kendo-ui/api/javascript/data/datasource). By applying the CustomDataSource builder, you benefit from using the MVC wrappers. For example, the wrappers are enabled to generate validation attributes, editors, etc., while utilizing the flexibility of JavaScript. The CustomDataSource builder can also be used in more advanced scenarios where the regular DataSource builders prevent you from fully customizing the options of the DataSource.
 
 ### Initial Setup
 
@@ -322,7 +322,7 @@ To see the full demo, refer to this [Grid how-to example]({% slug howto_useodata
 * [Telerik UI for ASP.NET MVC Overview]({% slug overview_aspnetmvc %})
 * [Validation with Telerik UI for ASP.NET MVC]({% slug validation_aspnetmvc %})
 * [Globalization with Telerik UI for ASP.NET MVC]({% slug globalization_aspnetmvc %})
-* [ASP.NET Core](../../aspnet-core/introduction)
+* [ASP.NET Core](http://docs.telerik.com/aspnet-core/introduction)
 * [Tutorials on Telerik UI for ASP.NET MVC]({% slug overview_timeefficiencyapp_aspnetmvc6 %})
 * [Telerik UI for ASP.NET MVC Fundamentals]({% slug fundamentals_aspnetmvc %})
 * [Scaffolding with Telerik UI for ASP.NET MVC]({% slug scaffolding_aspnetmvc %})

@@ -2,7 +2,7 @@
 title: Overview
 page_title: Overview | Kendo UI Sales Hub Tutorial
 description: "Learn how to build the Kendo UI Sales Hub sample project by using Telerik UI for ASP.NET MVC."
-previous_url: /tutorials/asp.net/saleshub/kendo-saleshub-intro
+previous_url: /kendo-ui/tutorials/asp.net/saleshub/kendo-saleshub-intro
 slug: overview_saleshubtutorial_aspnetmvc
 position: 1
 ---

@@ -2,7 +2,7 @@
 title: Overview
 page_title: Overview | Hybrid UI Button HtmlHelper
 description: "Get started with the server-side wrapper for the hybrid Kendo UI Button widget for ASP.NET MVC."
-previous_url: /aspnet-mvc/helpers/mobilebutton/overview
+previous_url: /kendo-ui/aspnet-mvc/helpers/mobilebutton/overview
 slug: overview_hybridbutton_aspnetmvc
 position: 1
 ---
@@ -157,7 +157,7 @@ You can reference a hybrid Button instance by using the code from the example be
 Other articles on Telerik UI for ASP.NET MVC and on the Button:
 
 * [ASP.NET MVC API Reference: Hybrid UI ButtonBuilder](/api/Kendo.Mvc.UI.Fluent/MobileButtonBuilder)
-* [Overview of the Hybrid UI Button Widget]({% slug overview_hybridactionsheet %})
+* [Overview of the Hybrid UI Button Widget](http://docs.telerik.com/kendo-ui/controls/hybrid/button/button)
 * [Overview of Telerik UI for ASP.NET MVC]({% slug overview_aspnetmvc %})
 * [Fundamentals of Telerik UI for ASP.NET MVC]({% slug fundamentals_aspnetmvc %})
 * [Scaffolding in Telerik UI for ASP.NET MVC]({% slug scaffolding_aspnetmvc %})

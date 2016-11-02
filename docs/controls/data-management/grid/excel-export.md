@@ -240,7 +240,7 @@ To export huge datasets to Excel, a well-suited solution is the new [RadSpreadSt
 
 For examples on how to export Excel files, refer to the [RadSpreadProcessing library](http://docs.telerik.com/devtools/document-processing/libraries/radspreadprocessing/overview).
 
-For more information on the Grid server-side processing, refer to [this article]({% slug excelexport_gridhelper_aspnetmvc %}#use-server-side-processing).
+For more information on the Grid server-side processing, refer to [this article](http://docs.telerik.com/aspnet-mvc/helpers/grid/excel-export#use-server-side-processing).
 
 ## Troubleshooting
 

@@ -2,7 +2,7 @@
 title: Overview
 page_title: Overview | Hybrid UI TabStrip HtmlHelper
 description: "Get started with the server-side wrapper for the hybrid Kendo UI TabStrip widget for ASP.NET MVC."
-previous_url: /aspnet-mvc/helpers/mobiletabstrip/overview
+previous_url: /kendo-ui/aspnet-mvc/helpers/mobiletabstrip/overview
 slug: overview_hybridtabstrip_aspnetmvc
 position: 1
 ---
@@ -184,7 +184,7 @@ You can reference a hybrid TabStrip instance by using the [jQuery.data()](http:/
 Other articles on Telerik UI for ASP.NET MVC and on the TabStrip:
 
 * [ASP.NET MVC API Reference: TabStripBuilder](/api/Kendo.Mvc.UI.Fluent/MobileTabStripBuilder)
-* [Overview of the Hybrid UI TabStrip Widget]({% slug overview_hybridtabstrip %})
+* [Overview of the Hybrid UI TabStrip Widget](http://docs.telerik.com/kendo-ui/controls/hybrid/tabstrip/tabstrip)
 * [Overview of Telerik UI for ASP.NET MVC]({% slug overview_aspnetmvc %})
 * [Fundamentals of Telerik UI for ASP.NET MVC]({% slug fundamentals_aspnetmvc %})
 * [Scaffolding in Telerik UI for ASP.NET MVC]({% slug scaffolding_aspnetmvc %})

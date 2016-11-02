@@ -118,7 +118,7 @@ Below are listed the steps for you to follow when configuring the Kendo UI Windo
 
 When a complete form should be inserted inside a Window, end the Window declaration with `.Render();` and wrap it in a non-rendering code block. This requirement does not apply if the form is defined through plain HTML tags (`&lt;form&gt;...&lt;/form&gt;`).
 
-For more information on this topic, refer to the [article on using the Kendo UI Window with a form]({% slug overview_kendoui_window_widget %}#using-kendo-ui-window-with-a-form).
+For more information on this topic, refer to the [article on using the Kendo UI Window with a form](http://docs.telerik.com/kendo-ui/controls/layout/window/overview#using-kendo-ui-window-with-a-form).
 
 The example below demonstrates how to insert a complete form inside the Window.
 
@@ -151,7 +151,7 @@ The example below demonstrates how to insert a complete form inside the Window.
 
 ## Event Handling
 
-You can subscribe to all Window [events](../../../kendo-ui/api/javascript/ui/window#events).
+You can subscribe to all Window [events](/kendo-ui/api/javascript/ui/window#events).
 
 ### By Handler Name
 
@@ -227,7 +227,7 @@ The example below demonstrates how to subscribe to events by a template delegate
 
 ### Existing Instances
 
-You can reference an existing Kendo UI Window instance via [`jQuery.data()`](http://api.jquery.com/jQuery.data/). Once a reference is established, use the [Window API](../../../kendo-ui/api/javascript/ui/window#methods) to control its behavior.
+You can reference an existing Kendo UI Window instance via [`jQuery.data()`](http://api.jquery.com/jQuery.data/). Once a reference is established, use the [Window API](/kendo-ui/api/javascript/ui/window#methods) to control its behavior.
 
 ###### Example
 
@@ -247,7 +247,7 @@ Other articles on Telerik UI for ASP.NET MVC and on the Window:
 * [Overview of Telerik UI for ASP.NET MVC]({% slug overview_aspnetmvc %})
 * [Fundamentals of Telerik UI for ASP.NET MVC]({% slug fundamentals_aspnetmvc %})
 * [Scaffolding in Telerik UI for ASP.NET MVC]({% slug scaffolding_aspnetmvc %})
-* [Overview of the Kendo UI Window Widget]({% slug overview_kendoui_window_widget %})
+* [Overview of the Kendo UI Window Widget](http://docs.telerik.com/kendo-ui/controls/layout/window/overview)
 * [Telerik UI for ASP.NET MVC API Reference Folder](/api/Kendo.Mvc/AggregateFunction)
 * [Telerik UI for ASP.NET MVC HtmlHelpers Folder]({% slug overview_autocompletehelper_aspnetmvc %})
 * [Tutorials on Telerik UI for ASP.NET MVC]({% slug overview_timeefficiencyapp_aspnetmvc6 %})

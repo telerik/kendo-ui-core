@@ -291,7 +291,7 @@ Other articles on Telerik UI for ASP.NET MVC and on the TreeList:
 
 * [ASP.NET MVC API Reference: TreeListBuilder](/api/Kendo.Mvc.UI.Fluent/TreeListBuilder)
 * [How to Export Multiple TreeLists to Excel]({% slug howto_exportmultipletoexcel_treelistaspnetmvc %})
-* [Overview of the Kendo UI TreeList Widget]({% slug overview_kendoui_treelist_widget %})
+* [Overview of the Kendo UI TreeList Widget](http://docs.telerik.com/kendo-ui/controls/data-management/treelist/overview)
 * [Overview of Telerik UI for ASP.NET MVC]({% slug overview_aspnetmvc %})
 * [Fundamentals of Telerik UI for ASP.NET MVC]({% slug fundamentals_aspnetmvc %})
 * [Scaffolding in Telerik UI for ASP.NET MVC]({% slug scaffolding_aspnetmvc %})

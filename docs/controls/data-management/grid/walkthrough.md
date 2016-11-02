@@ -373,8 +373,8 @@ The Grid provides other configuration options as well. The basic ones deliver th
 ## See Also
 
 * [Grid JavaScript API Reference](/api/javascript/ui/grid)
-* [Client Detail Templates]({% slug clientdetailtemplate_grid_aspnetmvc %})
-* [Server Detail Templates]({% slug servertemplates_grid_aspnetmvc %})
-* [Editor Templates]({% slug editortemplates_grid_aspnetmvc %})
+* [Client Detail Templates](http://docs.telerik.com/aspnet-mvc/helpers/grid/templating/client-detail-template)
+* [Server Detail Templates](http://docs.telerik.com/aspnet-mvc/helpers/grid/templating/server-detail-template)
+* [Editor Templates](http://docs.telerik.com/aspnet-mvc/helpers/grid/templating/editor-templates)
 
 For how-to examples on the Kendo UI Grid widget, browse its [**How To** documentation folder]({% slug howto_bindto_telerik_backend_services_grid %}).

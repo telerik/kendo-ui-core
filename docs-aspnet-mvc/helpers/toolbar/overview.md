@@ -92,11 +92,11 @@ Below are listed the steps for you to follow when configuring the Kendo UI ToolB
        )
 ```
 
-For more information on supported command types, refer to [this link]({% slug overview_kendoui_toolbar_widget %}#command-types).
+For more information on supported command types, refer to [this link](http://docs.telerik.com/kendo-ui/controls/navigation/toolbar/overview#command-types).
 
 ## Event Handling
 
-You can subscribe to all ToolBar [events](../../../kendo-ui/api/javascript/ui/toolbar#events).
+You can subscribe to all ToolBar [events](/kendo-ui/api/javascript/ui/toolbar#events).
 
 ### By Handler Name
 
@@ -155,7 +155,7 @@ The examples below demonstrates how to subscribe to events by a handler name.
 
 ### Existing Instances
 
-You can reference an existing Kendo UI ToolBar instance via [`jQuery.data()`](http://api.jquery.com/jQuery.data/). Once a reference is established, use the [ToolBar API](../../../kendo-ui/api/javascript/ui/toolbar#methods) to control its behavior.
+You can reference an existing Kendo UI ToolBar instance via [`jQuery.data()`](http://api.jquery.com/jQuery.data/). Once a reference is established, use the [ToolBar API](/kendo-ui/api/javascript/ui/toolbar#methods) to control its behavior.
 
 ###### Example
 
@@ -174,7 +174,7 @@ Other articles on Telerik UI for ASP.NET MVC and on the ToolBar:
 * [Overview of Telerik UI for ASP.NET MVC]({% slug overview_aspnetmvc %})
 * [Fundamentals of Telerik UI for ASP.NET MVC]({% slug fundamentals_aspnetmvc %})
 * [Scaffolding in Telerik UI for ASP.NET MVC]({% slug scaffolding_aspnetmvc %})
-* [Overview of the Kendo UI ToolBar Widget]({% slug overview_kendoui_toolbar_widget %})
+* [Overview of the Kendo UI ToolBar Widget](http://docs.telerik.com/kendo-ui/controls/navigation/toolbar/overview)
 * [Telerik UI for ASP.NET MVC API Reference Folder](/api/Kendo.Mvc/AggregateFunction)
 * [Telerik UI for ASP.NET MVC HtmlHelpers Folder]({% slug overview_autocompletehelper_aspnetmvc %})
 * [Tutorials on Telerik UI for ASP.NET MVC]({% slug overview_timeefficiencyapp_aspnetmvc6 %})

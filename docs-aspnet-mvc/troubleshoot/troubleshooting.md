@@ -11,7 +11,7 @@ position: 1
 
 This page provides solutions to common issues you may encounter while working with Telerik UI for ASP.NET MVC.
 
-Because Telerik UI for ASP.NET MVC is powered by Kendo UI, check the [general article on Kendo UI troubleshooting]({% slug troubleshooting_common_issues_kendoui %}) for more issues and their solutions.
+Because Telerik UI for ASP.NET MVC is powered by Kendo UI, check the [general article on Kendo UI troubleshooting](http://docs.telerik.com/kendo-ui/troubleshoot/troubleshooting-common-issues) for more issues and their solutions.
 
 ## JavaScript
 
@@ -23,7 +23,7 @@ This error is triggered in the following cases:
 * jQuery is included after the Telerik UI for ASP.NET MVC script files.
 * jQuery is included after a Kendo UI widget or an MVC wrapper declaration.
 
-For more symptoms on that, refer to the [article on JavaScript errors]({% slug troubleshooting_javascript_errors_kendoui %}).
+For more symptoms on that, refer to the [article on JavaScript errors](http://docs.telerik.com/kendo-ui/troubleshoot/troubleshooting-js-errors).
 
 **Solution**
 
@@ -31,13 +31,13 @@ Make sure that jQuery is included before the Telerik UI for ASP.NET MVC JavaScri
 
 ### Widgets Are Unavailable or Undefined
 
-If jQuery is included more than once in the page, all existing jQuery plugins (including Kendo UI) are wiped out. This symptom also occurs if the [required Kendo UI JavaScript files]({% slug javascript_prerequisites_kendoui_installation %}) are not included.
+If jQuery is included more than once in the page, all existing jQuery plugins (including Kendo UI) are wiped out. This symptom also occurs if the [required Kendo UI JavaScript files](http://docs.telerik.com/kendo-ui/intro/installation/prerequisites) are not included.
 
-For more symptoms, check the [article on troubleshooting]({% slug troubleshooting_common_issues_kendoui %}#kendo-ui-widgets-are-unavailable-or-undefined).
+For more symptoms, check the [article on troubleshooting](http://docs.telerik.com/kendo-ui/troubleshoot/troubleshooting-common-issues#kendo-ui-widgets-are-unavailable-or-undefined).
 
 **Solution**
 
-Make sure jQuery is not included more than once in your page. Remove any duplicate `script` references to jQuery. Include all [required Kendo UI JavaScript files]({% slug javascript_prerequisites_kendoui_installation %}).
+Make sure jQuery is not included more than once in your page. Remove any duplicate `script` references to jQuery. Include all [required Kendo UI JavaScript files](http://docs.telerik.com/kendo-ui/intro/installation/prerequisites).
 
 If the application is also using Telerik Extensions for ASP.NET MVC, tell the `ScriptRegistrar` not to include jQuery, as demonstrated in the example below.
 
@@ -255,7 +255,7 @@ This can happens if the wrapper is declared without `ToClientTemplate()`.
 
 For more information on this issue, refer to the [article on Kendo UI wrappers fundamentals]({% slug fundamentals_aspnetmvc %}#client-templates)
 
-On the other hand, note that [template script expressions](../../../kendo-ui/framework/templates/overview#handle-external-templates-and-expressions) that include brackets (function calls) or arithmetic operators cannot be included in the `Name()` method of Kendo UI MVC wrappers. For example, the following implementations will trigger **invalid template** JavaScript errors:
+On the other hand, note that [template script expressions](/kendo-ui/framework/templates/overview#handle-external-templates-and-expressions) that include brackets (function calls) or arithmetic operators cannot be included in the `Name()` method of Kendo UI MVC wrappers. For example, the following implementations will trigger **invalid template** JavaScript errors:
 
     Html.Kendo().Grid().Name("grid_#=myFunction()#")
     Html.Kendo().Grid().Name("grid_#=myVariable1+myVariable2 #")
@@ -457,7 +457,7 @@ You have two alternative options to tackle this scenario:
 * Clear the `ModelState` in the controller's action method after the `POST`.
 * Set `Encode(false)` for the Editor and set an `[AllowHtml]` attribute to the model property, so that the Editor's value is submitted non-encoded.
 
-For additional tips on the Editor widget, refer to the [troubleshooting article on common Kendo UI Editor issues]({% slug troubleshooting_editor_widget %}).
+For additional tips on the Editor widget, refer to the [troubleshooting article on common Kendo UI Editor issues](http://docs.telerik.com/kendo-ui/controls/editors/editor/troubleshoot/troubleshooting).
 
 ## See Also
 
@@ -469,18 +469,18 @@ Other articles on troubleshooting:
 * [Excel Export with the Grid ASP.NET MVC HtmlHelper Extension]({% slug excelissues_gridhelper_aspnetmvc %})
 * [Common Issues in the Spreadsheet ASP.NET MVC HtmlHelper Extension]({% slug troubleshoot_spreadsheethelper_aspnetmvc %})
 * [Common Issues in the Upload ASP.NET MVC HtmlHelper Extension]({% slug troubleshoot_uploadhelper_aspnetmvc %})
-* [Common Issues in Kendo UI]({% slug troubleshooting_common_issues_kendoui %})
-* [Kendo UI JavaScript Errors]({% slug troubleshooting_javascript_errors_kendoui %})
-* [Kendo UI Performance Issues]({% slug troubleshooting_system_memory_symptoms_kendoui %})
-* [Kendo UI Content Security Policy]({% slug troubleshooting_content_security_policy_kendoui %})
-* [Common Issues in Kendo UI Excel Export]({% slug troubleshooting_excel_export_kendoui %})
-* [Common Issues in Kendo UI Charts]({% slug troubleshooting_chart_widget %})
-* [Performance Issues in Kendo UI Widgets for Data Visualization]({% slug tipsandtricks_kendouistyling %})
-* [Common Issues in Kendo UI ComboBox]({% slug troubleshooting_common_issues_combobox_kendoui %})
-* [Common Issues in Kendo UI Diagram]({% slug troubleshooting_diagram_widget %})
-* [Common Issues in Kendo UI DropDownList]({% slug troubleshooting_common_issues_dropdownlist_kendoui %})
-* [Common Issues in Kendo UI Editor]({% slug troubleshooting_editor_widget %})
-* [Common Issues in Kendo UI MultiSelect]({% slug troubleshooting_common_issues_multiselect_kendoui %})
-* [Common Issues in Kendo UI Scheduler]({% slug troubleshooting_scheduler_widget %})
-* [Common Issues in Kendo UI Upload]({% slug troubleshooting_upload_widget %})
-* [Common Issues Related to Styling, Appearance, and Rendering]({% slug commonissues_troubleshooting_kendouistyling %})
+* [Common Issues in Kendo UI](http://docs.telerik.com/kendo-ui/troubleshoot/troubleshooting-common-issues)
+* [JavaScript Errors](http://docs.telerik.com/kendo-ui/troubleshoot/troubleshooting-js-errors)
+* [Performance Issues](http://docs.telerik.com/kendo-ui/troubleshoot/troubleshooting-memory-leaks)
+* [Content Security Policy](http://docs.telerik.com/kendo-ui/troubleshoot/content-security-policy)
+* [Common Issues in Kendo UI Excel Export](http://docs.telerik.com/kendo-ui/framework/excel/troubleshoot/common-issues)
+* [Common Issues in Kendo UI Charts](http://docs.telerik.com/kendo-ui/controls/charts/troubleshoot/common-issues)
+* [Performance Issues in Kendo UI Widgets for Data Visualization](http://docs.telerik.com/kendo-ui/troubleshoot/troubleshooting-memory-leaks)
+* [Common Issues in Kendo UI ComboBox](http://docs.telerik.com/kendo-ui/controls/editors/combobox/troubleshoot/troubleshooting)
+* [Common Issues in Kendo UI Diagram](http://docs.telerik.com/kendo-ui/controls/diagrams-and-maps/diagram/troubleshoot/common-issues)
+* [Common Issues in Kendo UI DropDownList](http://docs.telerik.com/kendo-ui/controls/editors/dropdownlist/troubleshoot/troubleshooting)
+* [Common Issues in Kendo UI Editor](http://docs.telerik.com/kendo-ui/controls/editors/editor/troubleshoot/troubleshooting)
+* [Common Issues in Kendo UI MultiSelect](http://docs.telerik.com/kendo-ui/controls/editors/multiselect/troubleshoot/troubleshooting)
+* [Common Issues in Kendo UI Scheduler](http://docs.telerik.com/kendo-ui/controls/scheduling/scheduler/troubleshoot/troubleshooting)
+* [Common Issues in Kendo UI Upload](http://docs.telerik.com/kendo-ui/controls/editors/upload/troubleshoot/troubleshooting)
+* [Common Issues Related to Styling, Appearance, and Rendering](http://docs.telerik.com/kendo-ui/styles-and-layout/troubleshoot/troubleshooting)

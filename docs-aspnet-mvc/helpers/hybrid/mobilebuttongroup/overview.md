@@ -2,7 +2,7 @@
 title: Overview
 page_title: Overview | Hybrid UI ButtonGroup HtmlHelper
 description: "Get started with the server-side wrapper for the hybrid Kendo UI ButtonGroup widget for ASP.NET MVC."
-previous_url: /aspnet-mvc/helpers/mobilebuttongroup/overview
+previous_url: /kendo-ui/aspnet-mvc/helpers/mobilebuttongroup/overview
 slug: overview_hybridbuttongroup_aspnetmvc
 position: 1
 ---
@@ -181,7 +181,7 @@ You can reference a hybrid ButtonGroup instance by using the code from the examp
 Other articles on Telerik UI for ASP.NET MVC and on the ButtonGroup:
 
 * [ASP.NET MVC API Reference: Hybrid UI ButtonGroupBuilder](/api/Kendo.Mvc.UI.Fluent/MobileButtonGroupBuilder)
-* [Overview of the Hybrid UI ButtonGroup Widget]({% slug overview_hybridbuttongroup %})
+* [Overview of the Hybrid UI ButtonGroup Widget](http://docs.telerik.com/kendo-ui/controls/hybrid/buttongroup/buttongroup)
 * [Overview of Telerik UI for ASP.NET MVC]({% slug overview_aspnetmvc %})
 * [Fundamentals of Telerik UI for ASP.NET MVC]({% slug fundamentals_aspnetmvc %})
 * [Scaffolding in Telerik UI for ASP.NET MVC]({% slug scaffolding_aspnetmvc %})

@@ -18,7 +18,7 @@ Official releases, service packs and internal builds are available for registere
 
 ### Install NuGet Packages
 
-See the [NuGet installation instructions]({% slug aspnetmvc_nuget %}) in the UI for ASP.NET MVC documentation.
+See the [NuGet installation instructions](http://docs.telerik.com/aspnet-mvc/getting-started/nuget-install) in the UI for ASP.NET MVC documentation.
 
 ### Local Content Distribution
 
@@ -36,7 +36,7 @@ The NuGet Feed provides the following packages related to the UI for ASP.NET MVC
 
 > **Important**
 >
-> The [UI for ASP.NET MVC packages]({% slug aspnetmvc_nuget %}) are listed in a separate section.
+> The [UI for ASP.NET MVC packages](http://docs.telerik.com/aspnet-mvc/getting-started/nuget-install) are listed in a separate section.
 
 ## See Also
 

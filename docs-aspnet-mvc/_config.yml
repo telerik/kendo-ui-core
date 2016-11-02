@@ -11,176 +11,128 @@ navigation:
         position: 0
      "getting-started":
         title: "Getting Started"
-        position: 5
+        position: 3
      "how-to":
         title: "How To"
-        position: 30
+        position: 4
      "helpers":
-        title: "Helpers"
-        position: 50
+        title: "Widgets"
+        position: 5
      "vs-integration":
         title: "Visual Studio Integration"
-        position: 60
+        position: 6
      "migration":
         title: "Migration"
-        position: 70
+        position: 7
      "tutorials":
         title: "Tutorials"
-        position: 80
+        position: 8
      "troubleshoot":
         title: "Troubleshooting"
-        position: 90
+        position: 9
 
 ## List helpers directory names and order here, like this:
      "helpers/autocomplete":
         title: "AutoComplete"
-        position: 1
      "helpers/barcode":
         title: "Barcode"
-        position: 1
      "helpers/button":
         title: "Button"
-        position: 1
      "helpers/calendar":
         title: "Calendar"
-        position: 1
      "helpers/chart":
         title: "Chart"
-        position: 1
      "helpers/colorpalette":
         title: "ColorPalette"
-        position: 1
      "helpers/colorpicker":
         title: "ColorPicker"
-        position: 1
      "helpers/combobox":
         title: "ComboBox"
-        position: 1
      "helpers/datepicker":
         title: "DatePicker"
-        position: 1
      "helpers/datetimepicker":
         title: "DateTimePicker"
-        position: 1
      "helpers/diagram":
         title: "Diagram"
-        position: 1
      "helpers/dialog":
         title: "Dialog"
-        position: 1
      "helpers/dropdownlist":
         title: "DropDownList"
-        position: 1
      "helpers/editor":
         title: "Editor"
-        position: 1
      "helpers/flatcolorpicker":
         title: "FlatColorPicker"
-        position: 1
      "helpers/gantt":
         title: "Gantt"
-        position: 1
      "helpers/grid":
         title: "Grid"
-        position: 1
      "helpers/hybrid":
         title: "Hybrid"
-        position: 1
      "helpers/lineargauge":
         title: "LinearGauge"
-        position: 1
      "helpers/listview":
         title: "ListView"
-        position: 1
      "helpers/map":
         title: "Map"
-        position: 1
      "helpers/maskedtextbox":
         title: "MaskedTextBox"
-        position: 1
      "helpers/mediaplayer":
         title: "MediaPlayer"
-        position: 1
      "helpers/menu":
         title: "Menu"
-        position: 1
      "helpers/multiselect":
         title: "MultiSelect"
-        position: 1
      "helpers/notification":
         title: "Notification"
-        position: 1
      "helpers/numerictextbox":
         title: "NumericTextBox"
-        position: 1
      "helpers/panelbar":
         title: "PanelBar"
-        position: 1
      "helpers/pivotgrid":
         title: "PivotGrid"
-        position: 1
      "helpers/progressbar":
         title: "ProgressBar"
-        position: 1
      "helpers/qrcode":
         title: "QRCode"
-        position: 1
      "helpers/radialgauge":
         title: "RadialGauge"
-        position: 1
      "helpers/radiobutton":
         title: "RadioButton"
-        position: 1
      "helpers/scheduler":
         title: "Scheduler"
-        position: 1
      "helpers/slider":
         title: "Slider"
-        position: 1
      "helpers/sortable":
         title: "Sortable"
-        position: 1
      "helpers/splitter":
         title: "Splitter"
-        position: 1
      "helpers/spreadsheet":
         title: "SpreadSheet"
-        position: 1
      "helpers/stockchart":
         title: "StockChart"
-        position: 1
      "helpers/tabstrip":
         title: "TabStrip"
-        position: 1
      "helpers/timepicker":
         title: "TimePicker"
-        position: 1
      "helpers/toolbar":
         title: "ToolBar"
-        position: 1
      "helpers/tooltip":
         title: "Tooltip"
-        position: 1
      "helpers/treelist":
         title: "TreeList"
-        position: 1
      "helpers/treemap":
         title: "TreeMap"
-        position: 1
      "helpers/treeview":
         title: "TreeView"
-        position: 1
      "helpers/upload":
         title: "Upload"
-        position: 1
      "helpers/window":
         title: "Window"
-        position: 1
 
 ## List migration directory names and order here, like this:
      "migration/widgets":
         title: "Widgets"
-        position: 1
+        position: 2
 
 ## List tutorials directory names and order here, like this:
      "tutorials/quickstart":
@@ -188,22 +140,22 @@ navigation:
         position: 1
      "tutorials/tutorial-kendo-music-store":
         title: "Tutorial Kendo Music Store"
-        position: 1
+        position: 2
      "tutorials/tutorial-kendo-music-store/music-store-dashboard":
         title: "Music Store Dashboard"
-        position: 1
+        position: 2
      "tutorials/tutorial-kendo-music-store/music-store-web":
         title: "Music Store Web"
-        position: 1
+        position: 3
      "tutorials/tutorial-saleshub":
         title: "Tutorial Sales Hub"
-        position: 1
+        position: 3
      "tutorials/tutorial-saleshub/home-page":
         title: "Home Page"
-        position: 1
+        position: 2
      "tutorials/tutorial-saleshub/order-page":
         title: "Order Page"
-        position: 1
+        position: 3
 
 ## The application virtual path
 baseurl: /aspnet-mvc

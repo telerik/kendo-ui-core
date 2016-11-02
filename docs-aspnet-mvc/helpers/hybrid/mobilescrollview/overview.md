@@ -2,7 +2,7 @@
 title: Overview
 page_title: Overview | Hybrid UI ScrollView HtmlHelper
 description: "Get started with the server-side wrapper for the hybrid Kendo UI ScrollView widget for ASP.NET MVC."
-previous_url: /aspnet-mvc/helpers/mobilescrollview/overview
+previous_url: /kendo-ui/aspnet-mvc/helpers/mobilescrollview/overview
 slug: overview_hybridscrollview_aspnetmvc
 position: 1
 ---
@@ -196,7 +196,7 @@ You can reference a hybrid ScrollView instance by using the code from the exampl
 Other articles on Telerik UI for ASP.NET MVC and on the ScrollView:
 
 * [ASP.NET MVC API Reference: ScrollViewBuilder](/api/Kendo.Mvc.UI.Fluent/MobileScrollViewBuilder)
-* [Overview of the Hybrid UI ScrollView Widget]({% slug overview_hybridscrollview %})
+* [Overview of the Hybrid UI ScrollView Widget](http://docs.telerik.com/kendo-ui/controls/hybrid/scrollview/overview)
 * [Overview of Telerik UI for ASP.NET MVC]({% slug overview_aspnetmvc %})
 * [Fundamentals of Telerik UI for ASP.NET MVC]({% slug fundamentals_aspnetmvc %})
 * [Scaffolding in Telerik UI for ASP.NET MVC]({% slug scaffolding_aspnetmvc %})

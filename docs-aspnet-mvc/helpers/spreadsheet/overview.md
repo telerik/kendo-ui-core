@@ -246,7 +246,7 @@ Other articles on Telerik UI for ASP.NET MVC and on the Spreadsheet:
 
 * [ASP.NET MVC API Reference: SpreadsheetBuilder](/api/Kendo.Mvc.UI.Fluent/SpreadsheetBuilder)
 * [Processing of the Kendo UI Spreadsheet for ASP.NET MVC]({% slug spreadsheet_processing_spreadsheet_mvc %})
-* [Overview of the Kendo UI Spreadsheet Widget]({% slug overview_spreadsheet_widget %})
+* [Overview of the Kendo UI Spreadsheet Widget](http://docs.telerik.com/kendo-ui/controls/data-management/spreadsheet/overview)
 * [Overview of Telerik UI for ASP.NET MVC]({% slug overview_aspnetmvc %})
 * [Fundamentals of Telerik UI for ASP.NET MVC]({% slug fundamentals_aspnetmvc %})
 * [Scaffolding in Telerik UI for ASP.NET MVC]({% slug scaffolding_aspnetmvc %})

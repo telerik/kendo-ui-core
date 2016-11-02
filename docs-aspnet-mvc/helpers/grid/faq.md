@@ -61,7 +61,7 @@ The example below demonstrates how to customize the column appearance of a serve
 >
 > The `Template` method needs a [templated Razor delegate](http://haacked.com/archive/2011/02/27/templated-razor-delegates.aspx) when used in Razor views. The bound item is available through the `@item` parameter.
 
-If the Grid is [Ajax-bound]({% slug ajaxbinding_grid_aspnetmvc %}), use the `ClientTemplate` method. The value should be a string, which represents a valid [Kendo UI Template]({% slug overview_kendoui_templatescomponent %}).
+If the Grid is [Ajax-bound]({% slug ajaxbinding_grid_aspnetmvc %}), use the `ClientTemplate` method. The value should be a string, which represents a valid [Kendo UI Template](http://docs.telerik.com/kendo-ui/framework/templates/overview).
 
 The example below demonstrates how to customize the column appearance of an Ajax-bound Grid.
 
@@ -579,7 +579,7 @@ Other articles on the Kendo UI Grid for ASP.NET MVC:
 * [Templating of the Grid HtmlHelper]({% slug clientdetailtemplate_grid_aspnetmvc %})
 * [Troubleshooting for the Grid HtmlHelper]({% slug troubleshoot_gridhelper_aspnetmvc %})
 * [API Reference of the Grid HtmlHelper](/api/Kendo.Mvc.UI.Fluent/GridBuilder)
-* [Overview of the Kendo UI Grid Widget]({% slug overview_kendoui_grid_widget %})
+* [Overview of the Kendo UI Grid Widget](http://docs.telerik.com/kendo-ui/controls/data-management/grid/overview)
 
 Articles on Telerik UI for ASP.NET MVC:
 

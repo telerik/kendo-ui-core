@@ -2,7 +2,7 @@
 title: Overview
 page_title: Overview | Hybrid UI Application HtmlHelper
 description: "Get started with the server-side wrapper for the hybrid Kendo UI Application widget for ASP.NET MVC."
-previous_url: /aspnet-mvc/helpers/mobileapplication/overview
+previous_url: /kendo-ui/aspnet-mvc/helpers/mobileapplication/overview
 slug: overview_hybridapplication_aspnetmvc
 position: 1
 ---
@@ -295,7 +295,7 @@ You can reference a hybrid Application instance by using the code from the examp
 Other articles on Telerik UI for ASP.NET MVC and on the Application:
 
 * [ASP.NET MVC API Reference: ApplicationBuilder](/api/Kendo.Mvc.UI.Fluent/MobileApplicationBuilder)
-* [Overview of the Hybrid UI Application Widget]({% slug overview_hybridapplication %})
+* [Overview of the Hybrid UI Application Widget](http://docs.telerik.com/kendo-ui/controls/hybrid/application)
 * [Overview of Telerik UI for ASP.NET MVC]({% slug overview_aspnetmvc %})
 * [Fundamentals of Telerik UI for ASP.NET MVC]({% slug fundamentals_aspnetmvc %})
 * [Scaffolding in Telerik UI for ASP.NET MVC]({% slug scaffolding_aspnetmvc %})

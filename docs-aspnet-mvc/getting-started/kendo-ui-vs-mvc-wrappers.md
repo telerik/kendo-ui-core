@@ -3,7 +3,7 @@ title: Wrappers vs Widgets
 page_title: Wrappers vs Widgets | Telerik UI for ASP.NET MVC
 description: "Compare the HTML- and JavaScript-based Kendo UI widgets and their ASP.NET MVC wrappers."
 slug: wrappersvswidgets_aspnetmvc
-previous_url: kendo-ui-vs-mvc-wrappers
+previous_url: /kendo-ui/aspnet-mvc/kendo-ui-vs-mvc-wrappers
 position: 10
 ---
 
@@ -34,8 +34,8 @@ The vanilla HTML/JavaScript Kendo UI widgets (Kendo UI Professional) provide the
 
 * They allow for a complete server-platform independence. The widgets can be used with any web server and server framework&mdash;including ASP.NET MVC. For example, you can build Single Page Applications with any RESTful backend.
 * They provide full control over the placement of the initialization scripts&mdash;server wrappers render the widgets' initialization scripts right after the widget's HTML output. Even if you use [deferred initialization]({% slug fundamentals_aspnetmvc %}), the scripts are still kept in the View. When using plain (non-wrapper) Kendo UI widgets, you write the initialization scripts yourself and can move them to external script files.
-* They support the integration with the [MVVM]({% slug overview_mvvmpattern_kendoui %}), [AngularJS]({% slug angularjs_integration_directives %}), and [Single Page Application]({% slug overview_kendoui_singlepageapplication %}) development patterns. Server-side wrappers are not intended to be used with these.
-* [Visual Studio IntelliSense]({% slug visualstudiointellisense_integration_kendoui %}) is supported for the client-side API.
+* They support the integration with the [MVVM](http://docs.telerik.com/kendo-ui/framework/mvvm/overview), [AngularJS](http://docs.telerik.com/kendo-ui/AngularJS/introduction), and [Single Page Application](http://docs.telerik.com/kendo-ui/framework/spa/overview) development patterns. Server-side wrappers are not intended to be used with these.
+* [Visual Studio IntelliSense](http://docs.telerik.com/kendo-ui/third-party/vs-intellisense) is supported for the client-side API.
 
 ## Conclusion
 
