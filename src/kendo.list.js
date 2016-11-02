@@ -249,7 +249,7 @@ var __meta__ = { // jshint ignore:line
             var options = that.options;
             var dataSource = that.dataSource;
             var expression = extend({}, dataSource.filter() || {});
-            var clearFilter = expression.filters && expression.filters.length && !filter;
+            var resetPageSettings = filter || (expression.filters && expression.filters.length && !filter);
 
             var removed = removeFiltersForField(expression, options.dataTextField);
 
@@ -271,8 +271,8 @@ var __meta__ = { // jshint ignore:line
             }
 
             var dataSourceState = extend({}, {
-                page: dataSource.page(),
-                pageSize: clearFilter ? dataSource.options.pageSize : dataSource.pageSize(),
+                page: resetPageSettings ? 1 : dataSource.page(),
+                pageSize: resetPageSettings ? dataSource.options.pageSize : dataSource.pageSize(),
                 sort: dataSource.sort(),
                 filter: dataSource.filter(),
                 group: dataSource.group(),
