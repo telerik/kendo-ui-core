@@ -67,7 +67,7 @@ Once the video files are ready, initialize the MediaPlayer HtmlHelper. It will r
 %>
 ```
 
-To add multiple sources for the same video, configure the quality-dependent [HD feature]({% slug overview_kendoui_mediaplayer_widget %}#configuration-Add).
+To add multiple sources for the same video, configure the quality-dependent [HD feature](http://docs.telerik.com/kendo-ui/controls/media/mediaplayer/overview#configuration-Add).
 
 > **Important**
 >
@@ -75,7 +75,7 @@ To add multiple sources for the same video, configure the quality-dependent [HD 
 
 ## Configuration
 
-The MediaPlayer provides properties, methods, and events to match your specific preferences. For more information on its configuration options, refer to the [MediaPlayer API documentation](../../../kendo-ui/api/javascript/ui/mediaplayer).
+The MediaPlayer provides properties, methods, and events to match your specific preferences. For more information on its configuration options, refer to the [MediaPlayer API documentation](/kendo-ui/api/javascript/ui/mediaplayer).
 
 ### Add Multiple Sources for Quality HD Feature
 
@@ -114,11 +114,11 @@ When you add multiple sources for the video, an **HD** button is automatically d
 
 ### Change the Source Dynamically
 
-Players usually feature a different video based on user action. For a basic example and real-time implementation, refer to the [section on creating playlists]({% slug overview_kendoui_mediaplayer_widget %}#configuration-Create).
+Players usually feature a different video based on user action. For a basic example and real-time implementation, refer to the [section on creating playlists](http://docs.telerik.com/kendo-ui/controls/media/mediaplayer/overview#configuration-Create).
 
 ### Prevent Seeking Forward
 
-Application or business logic usually enforces the user to watch only the currently loaded content without the option to jump forward. The MediaPlayer provides the [`forwardSeek`](../../../kendo-ui/api/javascript/ui/mediaplayer#configuration-forwardSeek) configuration, which helps to achieve this requirement.
+Application or business logic usually enforces the user to watch only the currently loaded content without the option to jump forward. The MediaPlayer provides the [`forwardSeek`](/kendo-ui/api/javascript/ui/mediaplayer#configuration-forwardSeek) configuration, which helps to achieve this requirement.
 
 ### Access Existing Instances
 
@@ -162,11 +162,11 @@ The example below demonstrates how to access an existing MediaPlayer instance.
 
 ### Create Playlists
 
-To implement your own **Playlist** structures, change the source of the MediaPlayer dynamically. For more information on how to do this, refer to the [introductory article on the MediaPlayer widget]({% slug overview_kendoui_mediaplayer_widget %}#configuration-Create).
+To implement your own **Playlist** structures, change the source of the MediaPlayer dynamically. For more information on how to do this, refer to the [introductory article on the MediaPlayer widget](http://docs.telerik.com/kendo-ui/controls/media/mediaplayer/overview#configuration-Create).
 
 ## Event Handling
 
-You can subscribe to all [MediaPlayer events](../../../kendo-ui/api/javascript/ui/mediaplayer#events).
+You can subscribe to all [MediaPlayer events](/kendo-ui/api/javascript/ui/mediaplayer#events).
 
 ### By Handler Name
 
@@ -249,7 +249,7 @@ The example below demonstrates how to subscribe to events using a template deleg
 
 ## Keyboard Navigation
 
-The MediaPlayer supports keyboard navigation. To enable it, use the [`navigatable`](../../../kendo-ui/api/javascript/ui/mediaplayer#configuration-navigatable) property.
+The MediaPlayer supports keyboard navigation. To enable it, use the [`navigatable`](/kendo-ui/api/javascript/ui/mediaplayer#configuration-navigatable) property.
 
 The following list provides the built-in keyboard commands of the MediaPlayer:
 
@@ -297,9 +297,9 @@ To localize the tooltip texts from the interface, use the configuration options 
 %>
 ```
 
-For a complete list of [localizable messages](../../../kendo-ui/api/javascript/ui/mediaplayer#configuration-messages), refer to the [MediaPlayer API documentation](../../../kendo-ui/api/javascript/ui/mediaplayer).
+For a complete list of [localizable messages](/kendo-ui/api/javascript/ui/mediaplayer#configuration-messages), refer to the [MediaPlayer API documentation](/kendo-ui/api/javascript/ui/mediaplayer).
 
-All Kendo UI widgets, including the MediaPlayer, also allow you to add script files and implement [global localization]({% slug overview_localization_kendoui %}) for your application.
+All Kendo UI widgets, including the MediaPlayer, also allow you to add script files and implement [global localization](http://docs.telerik.com/kendo-ui/framework/localization/overview) for your application.
 
 ## See Also
 

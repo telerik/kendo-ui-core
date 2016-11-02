@@ -17,7 +17,7 @@ To keep time in the UTC format, apply an explicit transformation to the dates on
 
 > **Important**
 >
-> If you use formats for parsing UTC date strings, [apply the `zzz` specifier]({% slug dateparsing_kendoui_globalization %}#parse-utc-date-strings) to render the local time. Otherwise, the current browser timezone offset will apply.
+> If you use formats for parsing UTC date strings, [apply the `zzz` specifier](http://docs.telerik.com/kendo-ui/framework/globalization/dateparsing#parse-utc-date-strings) to render the local time. Otherwise, the current browser timezone offset will apply.
 
 Below are listed the two corresponding steps for you to follow.
 

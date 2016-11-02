@@ -182,7 +182,7 @@ The example below demonstrates a quick breakdown of the code to do this.
 
 The `schema.data` and `schema.total` functions overcome a JSON formatting difference between Kendo UI and the WCF Data Services oData.
 
-For more information on each field set on the DataSource, refer to the [DataSource documentation]({% slug basicusage_kendoui_datasourcecomponent %}).
+For more information on each field set on the DataSource, refer to the [DataSource documentation](http://docs.telerik.com/kendo-ui/framework/datasource/overview).
 
 ### Handle Search Results Selections
 

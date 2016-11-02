@@ -10,7 +10,7 @@ position: 2
 
 The Kendo UI Upload supports two modes of operation&mdash;synchronous and asynchronous. This article explains how to use these modes with ASP.NET MVC.
 
-For general information, refer to the article on the [widget's modes of operation]({% slug overview_kendoui_upload_widget %}).
+For general information, refer to the article on the [widget's modes of operation](http://docs.telerik.com/kendo-ui/controls/editors/upload/overview).
 
 ## Synchronous Mode
 

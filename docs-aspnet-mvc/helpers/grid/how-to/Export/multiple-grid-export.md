@@ -13,7 +13,7 @@ To see the example on how to export multiple Kendo UI Grids to the same Excel do
 >
 > This project requires UI for ASP.NET MVC version 2014.3.1125 and later. Earlier versions do not have the `ExcelExport` event exposed through the fluent API.
 
-For more information on how to create Excel documents, refer to [this article]({% slug introduction_excelexport_kendoui %}#create-excel-document).
+For more information on how to create Excel documents, refer to [this article](http://docs.telerik.com/kendo-ui/framework/excel/introduction#create-excel-document).
 
 ## See Also
 

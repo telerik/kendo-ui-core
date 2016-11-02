@@ -8,7 +8,7 @@ position: 1
 
 # PivotGrid HtmlHelper Overview
 
-The PivotGrid HtmlHelper extension is a server-side wrapper for the [Kendo UI PivotGrid](../../../kendo-ui/api/javascript/ui/pivotgrid) widget. It allows you to configure the Kendo UI PivotGrid from server-side code and helps you with data binding.
+The PivotGrid HtmlHelper extension is a server-side wrapper for the [Kendo UI PivotGrid](/kendo-ui/api/javascript/ui/pivotgrid) widget. It allows you to configure the Kendo UI PivotGrid from server-side code and helps you with data binding.
 
 ## Getting Started
 
@@ -18,8 +18,8 @@ The Kendo UI PivotGrid for ASP.NET MVC supports Ajax data-binding to HTTP access
 
 For more information on the OLAP concepts, refer to the articles about:
 
-- [PivotGrid Fundamentals]({% slug fundamentals_pivotgrid_widget %})
-- [Setting Up OLAP Cubes]({% slug olap_cube_setup_pivotgrid_widget %})
+- [PivotGrid Fundamentals](http://docs.telerik.com/kendo-ui/controls/data-management/pivotgrid/overview)
+- [Setting Up OLAP Cubes](http://docs.telerik.com/kendo-ui/controls/data-management/pivotgrid/fundamentals)
 
 To use Telerik OLAP service, refer to [http://demos.telerik.com/olap/msmdpump.dll](http://demos.telerik.com/olap/msmdpump.dll).
 

@@ -228,13 +228,13 @@ The example below demonstrates how to use `.Enable()`.
             .Content("Disabled button") %>
 ```
 
-For more information on the [`enable` method of the Button](../../../kendo-ui/api/javascript/ui/button#methods-enable), refer to the [API of the Button control](../../../kendo-ui/api/javascript/ui/button).
+For more information on the [`enable` method of the Button](/kendo-ui/api/javascript/ui/button#methods-enable), refer to the [API of the Button control](/kendo-ui/api/javascript/ui/button).
 
 ## Reference
 
 ### Existing Instances
 
-For more information on how to access an instance, refer to the [introductory article on the Button]({% slug overview_kendoui_button_widget %}).
+For more information on how to access an instance, refer to the [introductory article on the Button](http://docs.telerik.com/kendo-ui/controls/navigation/button/overview).
 
 ## See Also
 

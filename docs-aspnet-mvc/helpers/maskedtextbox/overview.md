@@ -48,7 +48,7 @@ Below are listed the steps for you to follow when configuring the Kendo UI Maske
 
 ### Define Mask Values
 
-The MaskedTextBox has [a list of predefined mask rules]({% slug overview_kendoui_maskedtextbox_widget%}#configuration-Rules), which can be used to compose the mask of a widget.
+The MaskedTextBox has [a list of predefined mask rules](http://docs.telerik.com/kendo-ui/controls/editors/maskedtextbox/overview#configuration-Rules), which can be used to compose the mask of a widget.
 
 The example below demonstrates how to set a `zip code` mask
 
@@ -108,7 +108,7 @@ The example below demonstrates how to define a custom rule for the `-` (minus) a
 
 ## Event Handling
 
-You can subscribe to all MaskedTextBox [events](../../../kendo-ui/api/javascript/ui/maskedtextbox#events).
+You can subscribe to all MaskedTextBox [events](/kendo-ui/api/javascript/ui/maskedtextbox#events).
 
 ### By Handler Name
 
@@ -165,7 +165,7 @@ The examples below demonstrates how to subscribe to events by a handler name.
 
 ### Existing Instances
 
-You can reference an existing Kendo UI MaskedTextBox instance via [`jQuery.data()`](http://api.jquery.com/jQuery.data/). Once a reference is established, use the [MaskedTextBox API](../../../kendo-ui/api/javascript/ui/maskedtextbox#methods) to control its behavior.
+You can reference an existing Kendo UI MaskedTextBox instance via [`jQuery.data()`](http://api.jquery.com/jQuery.data/). Once a reference is established, use the [MaskedTextBox API](/kendo-ui/api/javascript/ui/maskedtextbox#methods) to control its behavior.
 
 ###### Example
 

@@ -8,7 +8,7 @@ position: 4
 
 # Resources
 
-The Scheduler HtmlHelper extension supports assigning Scheduler events to a set of predefined [resources]({% slug resources_kendoui_scheduler_widget %}).
+The Scheduler HtmlHelper extension supports assigning Scheduler events to a set of predefined [resources](http://docs.telerik.com/kendo-ui/controls/scheduling/scheduler/overview).
 
 ## Configuration
 
