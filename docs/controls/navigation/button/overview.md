@@ -347,7 +347,7 @@ The example below demonstrates how to create a Floating Action Button.
 
 Other articles on Kendo UI Button:
 
-* [Overview of the ASP.NET MVC HtmlHelper Extension for the Button Widget]({% slug overview_buttonhelper_aspnetmvc %})
+* [Overview of the ASP.NET MVC HtmlHelper Extension for the Button Widget](http://docs.telerik.com/aspnet-mvc/helpers/button/overview)
 * [Overview of the Button JSP Tag]({% slug overview_button_uiforjsp %})
 * [Overview of the Button PHP Class]({% slug overview_button_uiforphp %})
 * [Button JavaScript API Reference](/api/javascript/ui/button)

@@ -12,7 +12,7 @@ The [Kendo UI Grid widget](http://demos.telerik.com/kendo-ui/grid/index) support
 
 ## Scrolling
 
-By default, the scrolling functionality of the Grid is enabled. For historical reasons, however, the [Grid MVC wrapper]({% slug configuration_gridhelper_aspnetmvc %}#scrolling) does not support it. To disable the scrolling functionality, set the `scrollable` option to `false`.
+By default, the scrolling functionality of the Grid is enabled. For historical reasons, however, the [Grid MVC wrapper](http://docs.telerik.com/aspnet-mvc/helpers/grid/configuration#scrolling) does not support it. To disable the scrolling functionality, set the `scrollable` option to `false`.
 
 ###### Example
 
@@ -233,7 +233,7 @@ When virtual scrolling is not supported or recommended, revert to standard pagin
 
 ## Height
 
-By default, the Grid has no height and expands to fit all table rows. To provide for a backwards compatibility, the scrollable MVC wrapper of the Grid [applies a default height of 200px to its scrollable data area](/aspnet-mvc/helpers/grid/configuration#scrolling). To control the height of the widget, specify a static pixel value.
+By default, the Grid has no height and expands to fit all table rows. To provide for a backwards compatibility, the scrollable MVC wrapper of the Grid [applies a default height of 200px to its scrollable data area](http://docs.telerik.com/aspnet-mvc/helpers/grid/configuration#scrolling). To control the height of the widget, specify a static pixel value.
 
 ###### Example
 
@@ -264,7 +264,7 @@ In some special scenarios it is possible to set a height style to the scrollable
 >
 > This approach is not applicable when virtual scrolling is enabled.
 
-It is possible to make the Grid expand and shrink vertically according to the number of its rows and yet within certain limits. To achieve this, apply a minimum and/or maximum height style to the scrollable data area and do not set any height of the Grid. If you use the MVC wrapper of the Grid, make sure you [remove the default data area height]({% slug configuration_gridhelper_aspnetmvc %}#scrolling).
+It is possible to make the Grid expand and shrink vertically according to the number of its rows and yet within certain limits. To achieve this, apply a minimum and/or maximum height style to the scrollable data area and do not set any height of the Grid. If you use the MVC wrapper of the Grid, make sure you [remove the default data area height](http://docs.telerik.com/aspnet-mvc/helpers/grid/configuration#scrolling).
 
 ###### Example
 
