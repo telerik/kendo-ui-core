@@ -21,9 +21,9 @@ To handle this case you should implement further your Editor Template by adding 
     .Tag("div")
     .Tools(tools => tools.Clear().Bold().Italic().Underline())
     .Events(events => events.Change(@"function (ev){
-    var hiddenINput =  $('#" + Html.NameFor(model => model) + @"');
-    hiddenINput.val(ev.sender.value());
-    hiddenINput.change();
+    var hiddenInput =  $('#" + Html.NameFor(model => model) + @"');
+    hiddenInput.val(ev.sender.value());
+    hiddenInput.change();
 }"))
 ) 
 
