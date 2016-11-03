@@ -6,7 +6,7 @@ slug: newproject_visualstudio_aspnetcore
 position: 4
 ---
 
-# Create Kendo UI Professional Projects
+# Create Telerik UI for ASP.NET Core Projects
 
 This article demonstrates how to create a new Telerik UI for ASP.NET Core application.
 
@@ -18,11 +18,11 @@ You could create Telerik UI for ASP.NET Core project through the Telerik menu — 
 
 **Figure 1. New Telerik UI for ASP.NET Core through the Telerik menu**
 
-![New Kendo UI Project Wizard](/vs-integration/images/create-new-core.png)
+![UI for ASP.NET Core menu entry](/vs-integration/images/create-new-core.png)
 
 **Figure 2. The added project templates**
 
-![New Kendo UI Project Wizard](/vs-integration/images/add-template-core.png)
+![New UI for ASP.NET Core Project Template](/vs-integration/images/add-template-core.png)
 
 ### Prerequisites
 To be able to run the sample application, make sure you provide for the requirements listed below
