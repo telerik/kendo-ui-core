@@ -68,7 +68,7 @@ Below are listed the steps for you to follow when creating an ASP.NET Core web s
 
         yo aspnet
 
-As a result, the response demonstrated in the example below is shown.
+A similar result to the response demonstrated in the example below should be shown.
 
 ###### Example
 
@@ -97,21 +97,21 @@ As a result, the response demonstrated in the example below is shown.
 
 **Step 6.** Select the **Web Application Basic** option by using the keyboard arrow keys and press `Enter`. Create the name of the new application. Note that you can skip this step and use the default name by pressing `Enter`. After setting the name, the generator creates the desired folder and the selected application.
 
-As a result, the response demonstrated in the example below is shown.
+> **Note**
+>
+> Yeoman gets improved in time and the steps above might change. For that, you can refer to [Yeoman resources](http://yeoman.io/). 
 
-###### Example
-
-        Your project is now created, you can use the following commands to get going
-            cd "WebApplicationBasic"
-            dnu restore
-            dnu build (optional, build will also happen when it's run)
-            dnx web
+When finished, the scaffolded project should be ready.
 
 **Step 7.** Navigate to the created folder and execute the command from the example below.
 
+> **Note**
+>
+> For up to date commands refer to [.NET Core Get Started guide for ASP.NET](https://docs.asp.net/en/latest/getting-started.html)
+
 ###### Example
 
-        dnu restore
+        dotnet restore
 
 As a result, the packages are downloaded from NuGet. The end of the response looks similar to the one demonstrated in the example below.
 
@@ -119,15 +119,13 @@ As a result, the packages are downloaded from NuGet. The end of the response loo
 
         Restore complete, 10070ms elapsed
 
-        Feeds used:
-            https://api.nuget.org/v3-flatcontainer/
         kendo@kendo-docker:~/Projects/WebApplicationBasic$
 
 **Step 8.** Start the application by using the command from the example below.
 
 ###### Example
 
-        dnx web
+        dotnet run
 
 As a result, the response demonstrated in the example below is delivered.
 
@@ -145,27 +143,30 @@ As a result, the response demonstrated in the example below is delivered.
 
 ### Add NuGet Packages
 
-**Step 1.** Open the `project.json` file, using a text editor, and add the `Telerik.UI.for.AspNet.Core` dependency.
+**Step 1.** Open the `project.json` file, using a text editor, add the `Telerik.UI.for.AspNet.Core` dependency, and replace `productVersion` with an actual **Telerik UI for AspNet Core** version, e.g., `2016.3.914`.
 
 ###### Example
 
         "dependencies": {
             ...
-            "Telerik.UI.for.AspNet.Core": "{{ site.mvcCoreVersion }}"
+            "Telerik.UI.for.AspNet.Core": "productVersion"
         }
 
 **Step 2.** Navigate to the project folder and restore the packages again.
 
 ###### Example
 
-        dnu restore
+        dotnet restore
 
 **Step 3.** Open `Startup.cs`, using a text editor (IDE) and update it as described below.
 
 Locate the `ConfigureServices` method and add a call to `services.AddKendo` at the end.
 
 ###### Example
-
+        
+        ...
+        using Newtonsoft.Json.Serialization;
+        ...
         public void ConfigureServices(IServiceCollection services)
         {
             ...
@@ -248,7 +249,7 @@ Copy the `js` and `styles` folders from the `telerik.ui.for.aspnetmvc` archive t
 
 ###### Example
 
-        dnx web
+        dotnet run
 
 Now that all is done, you can see the sample page.
 
