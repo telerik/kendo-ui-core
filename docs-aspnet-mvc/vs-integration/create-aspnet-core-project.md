@@ -25,11 +25,13 @@ You could create Telerik UI for ASP.NET Core project through the Telerik menu — 
 ![New UI for ASP.NET Core Project Template](/vs-integration/images/add-template-core.png)
 
 ### Prerequisites
-To be able to run the sample application, make sure you provide for the requirements listed below
-1. Download [Visual Studio 2015](https://www.visualstudio.com/en-us/downloads/download-visual-studio-vs.aspx).
-2. Download [Visual Studio 2015 Update 3](https://www.visualstudio.com/en-us/news/releasenotes/vs2015-update3-vs).
-3. Download [NET Core 1.0.0 - VS 2015 Tooling Preview 2](https://www.microsoft.com/net/core#windows).
-4. Optional Download [.NET SDK Core for Windows](https://www.microsoft.com/net/core#windows).
+
+To be able to run the application, make sure you provide for the requirements listed below.
+
+- Download [Visual Studio 2015](https://www.visualstudio.com/en-us/downloads/download-visual-studio-vs.aspx).
+- Download [Visual Studio 2015 Update 3](https://www.visualstudio.com/en-us/news/releasenotes/vs2015-update3-vs).
+- Download [NET Core 1.0.0 - VS 2015 Tooling Preview 2](https://www.microsoft.com/net/core#windows).
+- Optional Download [.NET SDK Core for Windows](https://www.microsoft.com/net/core#windows).
 
 ## See Also
 
