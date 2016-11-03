@@ -1,7 +1,7 @@
 ---
-title: Create UI for ASP.NET Core Project
+title: Create UI for ASP.NET Core Projects
 page_title: Create UI for ASP.NET Core Projects | UI for ASP.NET Core Visual Studio Integration
-description: "Learn how to create a new UI for ASP.NET Core application."
+description: "Learn how to create new user interfaces for ASP.NET Core applications."
 slug: newproject_visualstudio_aspnetcore
 position: 4
 ---
@@ -14,9 +14,12 @@ This article demonstrates how to create a new Telerik UI for ASP.NET Core applic
 
 ### The Basics
 
-You could create Telerik UI for ASP.NET Core project through the Telerik menu — Telerik > UI for ASP.NET Core > Create New Telerik Project or by selecting File > New > Project and navigating to the Telerik UI for ASP.NET Core project templates under Telerik > Web node.
+To create a new Telerik UI for ASP.NET Core project, choose either of the following approaches:
 
-**Figure 1. New Telerik UI for ASP.NET Core through the Telerik menu**
+* From the Telerik menu, select **Telerik** > **UI for ASP.NET Core** > **Create New Telerik Project**.
+* Under **Telerik** > **Web**, select **File** > **New** > **Project and navigating to the Telerik UI for ASP.NET Core project templates**.
+
+**Figure 1. A new Telerik UI for ASP.NET Core project created from the Telerik menu**
 
 ![UI for ASP.NET Core menu entry](/vs-integration/images/create-new-core.png)
 
@@ -31,7 +34,7 @@ To be able to run the application, make sure you provide for the requirements li
 - Download [Visual Studio 2015](https://www.visualstudio.com/en-us/downloads/download-visual-studio-vs.aspx).
 - Download [Visual Studio 2015 Update 3](https://www.visualstudio.com/en-us/news/releasenotes/vs2015-update3-vs).
 - Download [NET Core 1.0.0 - VS 2015 Tooling Preview 2](https://www.microsoft.com/net/core#windows).
-- Optional Download [.NET SDK Core for Windows](https://www.microsoft.com/net/core#windows).
+- (Optional) Download [.NET SDK Core for Windows](https://www.microsoft.com/net/core#windows).
 
 ## See Also
 
