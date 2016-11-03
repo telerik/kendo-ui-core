@@ -822,8 +822,12 @@ var __meta__ = { // jshint ignore:line
                 });
             } else {
                 items.each(function(idx) {
-                    var currentContent = contentElements.eq(idx),
+                    var currentContent = contentElements.eq(idx);
+                    var id = currentContent.attr("id");
+
+                    if (!id) {
                         id = tabStripID + (idx+1);
+                    }
 
                     this.setAttribute("aria-controls", id);
 
