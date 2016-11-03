@@ -198,37 +198,6 @@ The following table provides information on the template directives that are sup
 |TreeView         |`k-template`                 |
 |Validator        |`k-error-template`           |
 
-### Form Validation
-
-AngularJS provides a built-in form validation functionality. However, `k-ng-model` does not update the internal [`$dirty` and `$pristine` properties](https://docs.angularjs.org/api/ng/type/form.FormController). That is why, to use `$dirty` and `$pristine` configuration options, manually update them when the value of the widget changes.
-
-The example below demonstrates how to do the update by using `$watch`.
-
-###### Example
-
-``` html
-    <div ng-app="app" ng-controller="MyCtrl">
-       <form name="myForm">
-         <input kendo-numeric-text-box="kntb2" k-min="0" k-max="100" k-ng-model="value2">
-         <br><br>
-         Dirty: {% raw %}{{myForm.$dirty}}{% endraw %}
-         <br />
-         Pristine: {% raw %}{{myForm.$pristine}}{% endraw %}
-       </form>
-    </div>
-    <script>
-      angular.module("app", [ "kendo.directives" ]).controller("MyCtrl", function($scope) {
-       var watch = $scope.$watch('value2', function(newValue, oldValue){
-          if(oldValue != newValue){
-            $scope.myForm.$dirty = true;
-            $scope.myForm.$pristine = false;
-            watch();
-          }
-        })
-      });
-    </script>
-```
-
 ### Scope Bindings
 
 #### Bind Values: ng-model
