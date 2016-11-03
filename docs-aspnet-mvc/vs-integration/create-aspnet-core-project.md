@@ -3,7 +3,7 @@ title: Create UI for ASP.NET Core Project
 page_title: Create UI for ASP.NET Core Projects | UI for ASP.NET Core Visual Studio Integration
 description: "Learn how to create a new UI for ASP.NET Core application."
 slug: newproject_visualstudio_aspnetcore
-position: 3
+position: 4
 ---
 
 # Create Kendo UI Professional Projects

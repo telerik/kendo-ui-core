@@ -3,7 +3,7 @@ title: Download New Versions
 page_title: Download New Versions | UI for ASP.NET MVC Visual Studio Integration
 description: "Learn how to keep your projects updated when using Telerik UI for ASP.NET MVC."
 slug: latestversionretrieval_visualstudio_aspnetmvc
-position: 8
+position: 9
 ---
 
 # Download New Versions
