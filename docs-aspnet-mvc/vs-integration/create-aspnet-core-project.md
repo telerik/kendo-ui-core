@@ -35,4 +35,4 @@ To be able to run the sample application, make sure you provide for the requirem
 
 * [Visual Studio Integration Overview]({% slug overview_visualstudio_aspnetmvc %})
 * [Visual Studio Extensions Options]({% slug vsextensionsoptions_visualstudio_aspnetmvc %})
-* [Visual Studio Extensions Options]({% slug gettingstarted_aspnetmvc6_aspnetmvc %})
+* [Getting started with ASP.NET Core]({% slug gettingstarted_aspnetmvc6_aspnetmvc %})
