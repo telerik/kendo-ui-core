@@ -6,7 +6,7 @@ slug: newproject_visualstudio_aspnetcore
 position: 4
 ---
 
-# Create Telerik UI for ASP.NET Core Projects
+# Create Telerik UI for ASP.NET Core Project
 
 This article demonstrates how to create a new Telerik UI for ASP.NET Core application.
 
