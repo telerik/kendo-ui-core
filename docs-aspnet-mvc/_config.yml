@@ -66,6 +66,22 @@ navigation:
         title: "Gantt"
      "helpers/grid":
         title: "Grid"
+     "*appearance":
+        title: "Appearance"
+     "*binding":
+        title: "Binding"
+     "*editing":
+        title: "Editing"
+     "*export":
+        title: "Export"
+     "*filtering":
+        title: "Filtering"
+     "*integration":
+        title: "Integration"
+     "*selection":
+        title: "Selection"
+     "*state":
+        title: "State"
      "helpers/hybrid":
         title: "Hybrid"
      "helpers/lineargauge":
