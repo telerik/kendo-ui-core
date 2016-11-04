@@ -68,7 +68,7 @@ Below are listed the steps for you to follow when creating an ASP.NET Core web s
 
         yo aspnet
 
-A similar result to the response demonstrated in the example below should be shown.
+The example below demonstrates a similar result to the response that is expected to show.
 
 ###### Example
 
@@ -97,17 +97,17 @@ A similar result to the response demonstrated in the example below should be sho
 
 **Step 6.** Select the **Web Application Basic** option by using the keyboard arrow keys and press `Enter`. Create the name of the new application. Note that you can skip this step and use the default name by pressing `Enter`. After setting the name, the generator creates the desired folder and the selected application.
 
-> **Note**
+> **Important**
 >
-> Yeoman gets improved in time and the steps above might change. For that, you can refer to [Yeoman resources](http://yeoman.io/). 
+> Yeoman gets improved in time and the steps above might change. For more information, refer to the [Yeoman resources](http://yeoman.io/).
 
 When finished, the scaffolded project should be ready.
 
 **Step 7.** Navigate to the created folder and execute the command from the example below.
 
-> **Note**
+> **Important**
 >
-> For up to date commands refer to [.NET Core Get Started guide for ASP.NET](https://docs.asp.net/en/latest/getting-started.html)
+> For up-to-date commands, refer to the [guide on getting started with .NET Core](https://docs.asp.net/en/latest/getting-started.html)
 
 ###### Example
 
@@ -143,7 +143,7 @@ As a result, the response demonstrated in the example below is delivered.
 
 ### Add NuGet Packages
 
-**Step 1.** Open the `project.json` file, using a text editor, add the `Telerik.UI.for.AspNet.Core` dependency, and replace `productVersion` with an actual **Telerik UI for AspNet Core** version, e.g., `2016.3.914`.
+**Step 1.** Open the `project.json` file, using a text editor, add the `Telerik.UI.for.AspNet.Core` dependency, and replace `productVersion` with an actual **Telerik UI for AspNet Core** version&mdash;for example, `2016.3.914`.
 
 ###### Example
 
@@ -163,7 +163,7 @@ As a result, the response demonstrated in the example below is delivered.
 Locate the `ConfigureServices` method and add a call to `services.AddKendo` at the end.
 
 ###### Example
-        
+
         ...
         using Newtonsoft.Json.Serialization;
         ...

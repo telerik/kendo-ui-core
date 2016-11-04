@@ -1,21 +1,21 @@
 ---
-title: Using Inline Editor in Editor Template
-page_title: Using Inline Editor in Editor Template | Kendo UI Editor HtmlHelper
-description: "Using Inline Editor in Editor Template in ASP.NET MVC applications."
+title: Use Inline Editors in Editor Templates
+page_title: Use Inline Editors in Editor Templates | Kendo UI Editor HtmlHelper
+description: "Use an inline Editor in an Editor template in ASP.NET MVC applications."
 slug: howto_useinlineeditorineditortemplate_editoraspnetmvc
 ---
 
-# Using Inline Editor in Editor Template
+# Use Inline Editors in Editor Templates
 
-Using the Kendo Editor in Inline mode in an MVC Editor Template will lead you to a not posted content to the action. That is because Inlinde mode will render a DOM element that is not a form field and thus, no data is sent. 
+When you use the Kendo UI Editor in inline mode in an MVC Editor template, the posting of content to the action is prevented. The reason for this behavior is that the inline mode renders a DOM element which is not a form field and, therefore, no data is sent.
 
-To handle this case you should implement further your Editor Template by adding a hidden input and update it when Kendo Editor's content is changed. 
+To handle this scenario, implement further the Editor template by adding a hidden input and update it when the content of the Kendo UI Editor changes.
 
 ###### Example
 
 ```tab-Razor
 @model string
-    
+
 @(Html.Kendo().EditorFor(model => model)
     .Name(Html.NameFor(model => model) + "_Editor")
     .Tag("div")
@@ -25,7 +25,7 @@ To handle this case you should implement further your Editor Template by adding 
     hiddenInput.val(ev.sender.value());
     hiddenInput.change();
 }"))
-) 
+)
 
 @Html.HiddenFor(model => model)
 ```
