@@ -210,6 +210,23 @@
 
         equal(document.activeElement.id, "input2");
         spacerDiv.remove();
-    });    
+    });
+
+    test("shift + tab should not take overflow anchor into account when resizable is false", 1, function() {
+        var getPrevFocusable = spy();
+        var toolbar = container.kendoToolBar({
+            items: [
+                { type: "button", id: "foo", text: "foo" },
+                { type: "button", id: "bar", text: "bar" }
+            ],
+            resizable: false
+        }).data("kendoToolBar");
+        toolbar._getPrevFocusable = getPrevFocusable;
+
+        $("#bar.k-button").focus();
+        $("#bar.k-button").press(keys.TAB, true);
+
+        ok(!getPrevFocusable.calls);
+    });            
 
 })();

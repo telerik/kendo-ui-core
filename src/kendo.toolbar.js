@@ -1390,8 +1390,9 @@ var __meta__ = { // jshint ignore:line
                             lastHasFocus = true;
                         }
                     }
-
-                    if (e.shiftKey && items.index(element) === 1) {
+                    
+                    var isFirstTool = items.index(element) === items.not(".k-overflow-anchor").first().index();
+                    if (e.shiftKey && isFirstTool) {
                         if (element.is("." + BUTTON_GROUP)) {
                             firstHasFocus = target.is(":first-child");
                         } else {
@@ -1406,7 +1407,7 @@ var __meta__ = { // jshint ignore:line
 
                     if (firstHasFocus) {
                         e.preventDefault();
-                        var prevFocusable = this._getPrevFocusable(this.wrapper);                      
+                        var prevFocusable = this._getPrevFocusable(this.wrapper);                  
                         if (prevFocusable) {
                             prevFocusable.focus();
                         }
@@ -1440,11 +1441,15 @@ var __meta__ = { // jshint ignore:line
             },
 
             _getPrevFocusable: function(element) {
+                if (element.is("html")) {
+                    return element;
+                }
+
                 var elementToFocus, prevElement, 
                     prevElements = element.prevAll();
                 prevElements.each(function(){
                     prevElement = $(this);
-                    if (prevElement.is(":kendoFocusable") || prevElement.is("body")) {
+                    if (prevElement.is(":kendoFocusable")) {
                         elementToFocus = prevElement;
                         return false;
                     } else if (prevElement.find(":kendoFocusable").length > 0) {
