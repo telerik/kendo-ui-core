@@ -3,7 +3,7 @@ title: Custom DataSource
 page_title: Custom DataSource | Telerik UI for ASP.NET MVC
 description: "Use the CustomDataSource builder available for the Telerik UI for ASP.NET MVC HtmlHelpers."
 slug: customdatasource_aspnetmvc
-previous_url: /kendo-ui/aspnet-mvc/custom-datasource
+previous_url: /custom-datasource
 position: 5
 ---
 

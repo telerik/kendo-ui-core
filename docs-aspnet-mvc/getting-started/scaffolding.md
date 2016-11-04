@@ -3,7 +3,7 @@ title: Scaffolding
 page_title: Scaffolding | Telerik UI for ASP.NET MVC
 description: "Learn how to use the Kendo UI Scaffolder extension."
 slug: scaffolding_aspnetmvc
-previous_url: /kendo-ui/aspnet-mvc/scaffolding
+previous_url: /scaffolding
 position: 4
 ---
 

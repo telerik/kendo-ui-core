@@ -2,7 +2,7 @@
 title: Getting Started
 page_title: Getting Started | Telerik UI for ASP.NET Core
 description: "Learn the basics when working with Telerik UI for ASP.NET Core (aka MVC 6 or ASP.NET Core MVC)."
-previous_url: /kendo-ui/aspnet-mvc/aspnetmvc-apps/mvc-6/getting-started, /kendo-ui/aspnet-mvc/mvc-6/getting-started
+previous_url: /aspnetmvc-apps/mvc-6/getting-started, /mvc-6/getting-started
 slug: gettingstarted_aspnetmvc6_aspnetmvc
 position: 2
 ---

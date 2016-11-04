@@ -2,7 +2,7 @@
 title: Overview
 page_title: Overview | Hybrid UI ButtonGroup HtmlHelper
 description: "Get started with the server-side wrapper for the hybrid Kendo UI ButtonGroup widget for ASP.NET MVC."
-previous_url: /kendo-ui/aspnet-mvc/helpers/mobilebuttongroup/overview
+previous_url: /helpers/mobilebuttongroup/overview
 slug: overview_hybridbuttongroup_aspnetmvc
 position: 1
 ---

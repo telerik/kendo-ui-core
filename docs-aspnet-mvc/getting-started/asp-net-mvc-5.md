@@ -2,7 +2,7 @@
 title: Creating Applications
 page_title: Creating Applications | Telerik UI for ASP.NET MVC
 description: "Use Telerik UI for ASP.NET MVC in ASP.NET MVC 5 applications."
-previous_url: /kendo-ui/aspnet-mvc/aspnetmvc-apps/asp-net-mvc-5, /kendo-ui/aspnet-mvc/asp-net-mvc-5
+previous_url: /aspnetmvc-apps/asp-net-mvc-5, /asp-net-mvc-5
 slug: aspnetmvc5_aspnetmvc
 position: 14
 ---
