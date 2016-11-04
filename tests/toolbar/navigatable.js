@@ -197,4 +197,19 @@
         $(".k-overflow-anchor").press(keys.DOWN, false, true);
     });
 
+    test("shift + tab moves focus from first focusable element in toolbar to last focusable element before toolbar", 1, function() {
+        var spacerDiv = $("<div><input type='text' id='input1' /><input type='text' id='input2' /></div>").prependTo(QUnit.fixture);
+        var toolbar = container.kendoToolBar({
+            items: [
+                { type: "button", id: "foo", text: "foo" }
+            ]
+        }).data("kendoToolBar");
+
+        $("#foo.k-button").focus();
+        $("#foo.k-button").press(keys.TAB, true);
+
+        equal(document.activeElement.id, "input2");
+        spacerDiv.remove();
+    });    
+
 })();
