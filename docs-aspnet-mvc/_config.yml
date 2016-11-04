@@ -82,6 +82,8 @@ navigation:
         title: "Selection"
      "*state":
         title: "State"
+     "*how-to":
+        title: "How To"
      "helpers/hybrid":
         title: "Hybrid"
      "helpers/lineargauge":
