@@ -209,7 +209,11 @@ angular.module("app", ["kendo.directives"]).controller("MyCtrl", function($scope
 </script>
 ```
 
-When aggregates are used, the `column` and `aggregate` information is available in the Grid `footerTemplate` via `{{ column }}` and `{{ aggregate }}` respectively. The following example shows how to use the `sum` aggregate in a `footerTemplate`, and apply an angular currency pipe to it:
+When you use aggregates, the `column` and `aggregate` information becomes available in the `footerTemplate` of the Grid through `{% raw %}{{ column }}{% endraw %}` and `{% raw %}{{ aggregate }}{% endraw %}` respectively.
+
+The example below demonstrates how to use the `sum` aggregate in a `footerTemplate` and apply an Angular currency pipe to it.
+
+###### Example
 
 ```
 <div id="example" ng-app="KendoDemos">    
@@ -237,13 +241,13 @@ When aggregates are used, the `column` and `aggregate` information is available 
         columns: [
           { field: "ProductName", title: "Product Name", width: 200,
             template: "{{dataItem.ProductName}}",
-           footerTemplate: "Column title: {{ column.title }}"
+           footerTemplate: "Column title: {% raw %}{{ column.title }}{% endraw %}"
           },
           { field: "UnitPrice", title: "Unit Price", width: 80,
-             footerTemplate: "{{ aggregate.sum | currency : $ : 3 }}"
+             footerTemplate: "{% raw %}{{ aggregate.sum | currency : $ : 3 }}{% endraw %}"
           },
           { field: "UnitsInStock", title: "Units In Stock", width: 80,
-           footerTemplate: "{{ aggregate.sum }}"
+           footerTemplate: "{% raw %}{{ aggregate.sum }}{% endraw %}"
           }
         ]
       };      
