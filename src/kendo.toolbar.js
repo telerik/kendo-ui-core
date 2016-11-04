@@ -1406,7 +1406,10 @@ var __meta__ = { // jshint ignore:line
 
                     if (firstHasFocus) {
                         e.preventDefault();
-                        this.wrapper.prev(":kendoFocusable").focus();
+                        var prevFocusable = this._getPrevFocusable(this.wrapper);                      
+                        if (prevFocusable) {
+                            prevFocusable.focus();
+                        }
                     }
                 }
 
@@ -1433,6 +1436,26 @@ var __meta__ = { // jshint ignore:line
                     this.userEvents.trigger("tap", { target: target });
 
                     return;
+                }
+            },
+
+            _getPrevFocusable: function(element) {
+                var elementToFocus, prevElement, 
+                    prevElements = element.prevAll();
+                prevElements.each(function(){
+                    prevElement = $(this);
+                    if (prevElement.is(":kendoFocusable") || prevElement.is("body")) {
+                        elementToFocus = prevElement;
+                        return false;
+                    } else if (prevElement.find(":kendoFocusable").length > 0) {
+                        elementToFocus = prevElement.find(":kendoFocusable").last();
+                        return false;
+                    }
+                });
+                if (elementToFocus) {
+                    return elementToFocus;
+                } else {
+                    return this._getPrevFocusable(element.parent());                    
                 }
             },
 
