@@ -252,7 +252,6 @@
         var contextMenu = new kendo.ui.ContextMenu("#context-menu", { target: "#menu-container", appendTo: "#menu-container"});
 
         ok($('#context-menu').parent().is("#menu-container"));
-        debugger;
         contextMenu.destroy();
         menuContainer.remove();
     });
