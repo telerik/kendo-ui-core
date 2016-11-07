@@ -133,7 +133,7 @@
             setTimeout(function() {
                 start();
                 ok(combobox.listView.items().eq(0).hasClass("k-state-selected"));
-            }, 100);
+            }, 200);
         });
     });
 
