@@ -38,7 +38,7 @@
                     '           <li>Sub Item 3</li>' +
                     '       </ul>' +
                     '   </li>' +
-                    '</ul>'
+                    '</ul>' 
             );
             menu = new kendo.ui.ContextMenu("#menu", { animation: false, target: "#target" });
         },
@@ -245,5 +245,17 @@
         target = $(".filter:last");
         target.click();
     });
+
+    test("the element containing the context menu should be the element it was appended to",1, function(){
+        var menuContainer = $('<div id="menu-container">&nbsp;</div>').appendTo(QUnit.fixture);
+        var secondContextMenu = $('<div id="context-menu">&nbsp;</div>').appendTo(QUnit.fixture);
+        var contextMenu = new kendo.ui.ContextMenu("#context-menu", { target: "#menu-container", appendTo: "#menu-container"});
+
+        ok($('#context-menu').parent().is("#menu-container"));
+        debugger;
+        contextMenu.destroy();
+        menuContainer.remove();
+    });
+
 })();
 
