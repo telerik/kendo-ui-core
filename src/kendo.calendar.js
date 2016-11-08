@@ -349,7 +349,7 @@ var __meta__ = { // jshint ignore:line
                 that._focus(value);
             }
 
-            if (view === views[options.depth] && selectedValue && !that.options.disableDates(selectedValue)*) {
+            if (view === views[options.depth] && selectedValue && !that.options.disableDates(selectedValue)) {
                 that._class("k-state-selected", selectedValue);
             }
 
