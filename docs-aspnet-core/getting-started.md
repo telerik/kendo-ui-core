@@ -196,6 +196,10 @@ Now that all is done, you can see the sample page.
 
 ![Sample page](images/sample-page.png)
 
+### Use ASP.NET Core and Yeoman
+
+For more information on using ASP.NET Core applications, Yeoman and the Kendo UI suite for Angular 2, refer to [Ed Charbeneau's blog post](http://www.telerik.com/blogs/cooking-with-aspnet-core-and-angular-2).
+
 ## See Also
 
 Other articles on Telerik UI for ASP.NET MVC in ASP.NET Core applications:
