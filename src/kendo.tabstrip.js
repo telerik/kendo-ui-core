@@ -797,37 +797,38 @@ var __meta__ = { // jshint ignore:line
             }
         },
 
+        _elementId: function(element, idx) {
+            var elementId = element.attr("id");
+            var wrapperId = this.element.attr("id");
+
+            if (!elementId || elementId.indexOf(wrapperId + "-") > -1) {
+                var tabStripID = (wrapperId || kendo.guid()) + "-";
+
+                return tabStripID + (idx + 1);
+            }
+
+            return elementId;
+        },
+
         _updateContentElements: function() {
             var that = this,
                 contentUrls = that.options.contentUrls || [],
                 items = that.tabGroup.find(".k-item"),
-                tabStripID = (that.element.attr("id") || kendo.guid()) + "-",
-                contentElements = that.wrapper.children("div");
+                contentElements = that.wrapper.children("div"),
+                contentId = this._elementId.bind(that);
 
             if (contentElements.length && (items.length > contentElements.length)) {
                 contentElements.each(function(idx) {
-                    var currentIndex = parseInt(this.id.replace(tabStripID, ""), 10),
-                        item = items.filter("[aria-controls=" + tabStripID + currentIndex + "]"),
-                        id = tabStripID + (idx+1);
+                    var item = items.filter("[aria-controls=" + (this.id || 0) + "]");
+                    var id = contentId(item, idx);
 
-                    item.data("aria", id);
+                    this.setAttribute("aria-controls", id);
                     this.setAttribute("id", id);
-                });
-
-                items.each(function() {
-                    var item = $(this);
-
-                    this.setAttribute("aria-controls", item.data("aria"));
-                    item.removeData("aria");
                 });
             } else {
                 items.each(function(idx) {
                     var currentContent = contentElements.eq(idx);
-                    var id = currentContent.attr("id");
-
-                    if (!id) {
-                        id = tabStripID + (idx+1);
-                    }
+                    var id = contentId(currentContent, idx);
 
                     this.setAttribute("aria-controls", id);
 
