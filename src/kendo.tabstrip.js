@@ -145,7 +145,7 @@ var __meta__ = { // jshint ignore:line
                 item
                     .contents()      // exclude groups, real links, templates and empty text nodes
                     .filter(function() { return (!this.nodeName.match(excludedNodesRegExp) && !(this.nodeType == 3 && !trim(this.nodeValue))); })
-                    .wrapAll("<span class='" + LINK + "'/>");
+                    .wrapAll("<span UNSELECTABLE='on' class='" + LINK + "'/>");
             }
         });
 
