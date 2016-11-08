@@ -101,7 +101,7 @@ var __meta__ = { // jshint ignore:line
                             e.preventDefault();
                         }
 
-                        if (that.options.disableDates(value) && that._view.name == "month") {
+                        if (that._view.name == "month" && that.options.disableDates(value)) {
                             return;
                         }
 
@@ -289,7 +289,6 @@ var __meta__ = { // jshint ignore:line
                 vertical = view !== undefined && view !== that._index,
                 to, currentView, compare,
                 disabled;
-
             if (!value) {
                 value = currentValue;
             }
@@ -350,7 +349,7 @@ var __meta__ = { // jshint ignore:line
                 that._focus(value);
             }
 
-            if (view === views[options.depth] && selectedValue && !that.options.disableDates(selectedValue)) {
+            if (view === views[options.depth] && selectedValue /*&& !that.options.disableDates(selectedValue)*/) {
                 that._class("k-state-selected", selectedValue);
             }
 
@@ -636,7 +635,7 @@ var __meta__ = { // jshint ignore:line
                 .removeAttr(ID);
             }
 
-            if (date) {
+            if (date && that._view.name == "month") {
                 disabledDate = that.options.disableDates(date);
             }
 
@@ -678,7 +677,7 @@ var __meta__ = { // jshint ignore:line
 
             adjustDST(value, 0);
 
-            if (that.options.disableDates(value) && that._view.name == "month") {
+            if (that._view.name == "month" && that.options.disableDates(value)) {
                 value = that._value;
             }
 
@@ -752,6 +751,7 @@ var __meta__ = { // jshint ignore:line
         },
 
         _navigate: function(arrow, modifier) {
+            debugger;
             var that = this,
             index = that._index + 1,
             currentValue = new DATE(+that._current);
