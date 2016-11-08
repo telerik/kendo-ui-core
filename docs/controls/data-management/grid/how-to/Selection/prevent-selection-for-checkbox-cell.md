@@ -27,7 +27,7 @@ The example below demonstrates how to prevent the cell selection functionality f
             "foo"
           ],
           selectable: "multiple cell"
-        }).on(kendo.support.msPointers ? "pointerup" : "mouseup", ".k-grid-content tr > td:first-child", function () {
+        }).on(kendo.support.pointers ? "pointerup" : "mouseup", ".k-grid-content tr > td:first-child", function () {
 
           grid.selectable.one("select", function(e) {
             e.preventDefault();
