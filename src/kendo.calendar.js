@@ -349,7 +349,7 @@ var __meta__ = { // jshint ignore:line
                 that._focus(value);
             }
 
-            if (view === views[options.depth] && selectedValue /*&& !that.options.disableDates(selectedValue)*/) {
+            if (view === views[options.depth] && selectedValue) {
                 that._class("k-state-selected", selectedValue);
             }
 
@@ -751,7 +751,6 @@ var __meta__ = { // jshint ignore:line
         },
 
         _navigate: function(arrow, modifier) {
-            debugger;
             var that = this,
             index = that._index + 1,
             currentValue = new DATE(+that._current);
