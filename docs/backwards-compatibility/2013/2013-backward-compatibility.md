@@ -138,7 +138,7 @@ New rendering:
 
 #### ASP.NET MVC
 
-Some ASP.NET MVC applications may be broken if using other libraries incompatible with jQuery 1.9.1. Further details available in the [troubleshooting guide](/aspnet-mvc/troubleshooting#javascript-error-that-live-method-is-unavailable,-undefined-or-unsupported)
+Some ASP.NET MVC applications may be broken if using other libraries incompatible with jQuery 1.9.1. Further details available in the [troubleshooting guide](/aspnet-mvc/troubleshoot/troubleshooting#javascript-error-that-live-method-is-unavailable,-undefined-or-unsupported)
 
 ## See Also
 
