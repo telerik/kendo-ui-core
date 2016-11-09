@@ -2692,7 +2692,7 @@ Refer to the [`jQuery.ajax`](http://api.jquery.com/jQuery.ajax) documentation fo
 ### transport.update.contentType `String`
 
 The content-type HTTP header sent to the server. Default is `"application/x-www-form-urlencoded"`. Use `"application/json"` if the content is JSON.
-Refer to the [`jQuery.ajax`](http://api.jquery.com/`jQuery.ajax`) documentation for further information.
+Refer to the [`jQuery.ajax`](http://api.jquery.com/jQuery.ajax) documentation for further information.
 
 #### Example - set content type
     <script>
