@@ -1,0 +1,68 @@
+# The public documentation URL, used for sitemap.xml
+url: "http://docs.telerik.com/aspnet-core"
+
+# Exclude files which should not be in the output
+exclude: [readme.md, Gemfile, Gemfile.lock,api_sort.rb]
+navigation:
+
+
+## List your directory names and order here, like this:
+
+   
+
+## The application virtual path
+baseurl: /aspnet-core
+
+## The Kendo UI version used
+cdnVersion: "2016.2.607"
+
+## The MVC Core version used
+mvcCoreVersion: "2016.2.616"
+
+## Assign layout and category per different paths
+defaults:
+-
+    scope:
+        path: ""
+    values:
+        layout: "page"
+        category: "default"
+        product: "aspnet-core"
+        editable: true
+-
+    scope:
+        path: "aspnet-core"
+    values:
+        product: "aspnet-core"
+
+
+type_links:
+    "kendo.Class": "/api/javascript/class"
+    "kendo.data.DataSource": "/api/javascript/data/datasource"
+    "Array": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array"
+    "Blob": "https://developer.mozilla.org/en/docs/Web/API/Blob"
+    "File": "https://developer.mozilla.org/en-US/docs/Web/API/File"
+    "Boolean": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Boolean"
+    "Function": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function"
+    "jQuery": "http://api.jquery.com/Types/#jQuery"
+    "Promise": "http://api.jquery.com/Types/#Promise"
+    "Object": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object"
+    "Number": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number"
+    "String": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String"
+
+# Aliases available in the markdown template. The below will expand {{site.foo}} to Bar in the output
+# "foo": "Bar"
+
+# The google services configuration
+google_tag_manager: GTM-6X92
+google_custom_search: '001595215763381649090:eblhnfskwrk'
+
+# Assets pipeline configuration
+assets:
+    cachebust: soft
+    js_compressor: uglifier
+    gzip: false
+
+## Do not edit below this line
+safe: false
+markdown: MarkdownProcessor

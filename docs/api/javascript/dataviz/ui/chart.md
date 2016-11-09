@@ -32669,7 +32669,7 @@ The drawing surface of the Chart. See [Drawing API](http://docs.telerik.com/kend
                 type: "column", data: [1, 2]
             }],
             render: function(e) {
-                e.surface.bind("mouseenter", onShapeMouseEnter);
+                e.sender.surface.bind("mouseenter", onShapeMouseEnter);
             }
         });
 

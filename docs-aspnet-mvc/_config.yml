@@ -1,0 +1,232 @@
+# The public documentation URL, used for sitemap.xml
+url: "http://docs.telerik.com/aspnet-mvc"
+
+# Exclude files which should not be in the output
+exclude: [readme.md, Gemfile, Gemfile.lock,api_sort.rb,SlugLog.log]
+navigation:
+## List your directory names and order here, like this:
+
+     "api":
+        title: "API Reference"
+        position: 0
+     "getting-started":
+        title: "Getting Started"
+        position: 3
+     "how-to":
+        title: "How To"
+        position: 4
+     "helpers":
+        title: "Widgets"
+        position: 5
+     "vs-integration":
+        title: "Visual Studio Integration"
+        position: 6
+     "migration":
+        title: "Migration"
+        position: 7
+     "tutorials":
+        title: "Tutorials"
+        position: 8
+     "troubleshoot":
+        title: "Troubleshooting"
+        position: 9
+
+## List helpers directory names and order here, like this:
+     "helpers/autocomplete":
+        title: "AutoComplete"
+     "helpers/barcode":
+        title: "Barcode"
+     "helpers/button":
+        title: "Button"
+     "helpers/calendar":
+        title: "Calendar"
+     "helpers/chart":
+        title: "Chart"
+     "helpers/colorpalette":
+        title: "ColorPalette"
+     "helpers/colorpicker":
+        title: "ColorPicker"
+     "helpers/combobox":
+        title: "ComboBox"
+     "helpers/datepicker":
+        title: "DatePicker"
+     "helpers/datetimepicker":
+        title: "DateTimePicker"
+     "helpers/diagram":
+        title: "Diagram"
+     "helpers/dialog":
+        title: "Dialog"
+     "helpers/dropdownlist":
+        title: "DropDownList"
+     "helpers/editor":
+        title: "Editor"
+     "helpers/flatcolorpicker":
+        title: "FlatColorPicker"
+     "helpers/gantt":
+        title: "Gantt"
+     "helpers/grid":
+        title: "Grid"
+     "*appearance":
+        title: "Appearance"
+     "*binding":
+        title: "Binding"
+     "*editing":
+        title: "Editing"
+     "*export":
+        title: "Export"
+     "*filtering":
+        title: "Filtering"
+     "*integration":
+        title: "Integration"
+     "*selection":
+        title: "Selection"
+     "*state":
+        title: "State"
+     "*how-to":
+        title: "How To"
+     "helpers/hybrid":
+        title: "Hybrid"
+     "helpers/lineargauge":
+        title: "LinearGauge"
+     "helpers/listview":
+        title: "ListView"
+     "helpers/map":
+        title: "Map"
+     "helpers/maskedtextbox":
+        title: "MaskedTextBox"
+     "helpers/mediaplayer":
+        title: "MediaPlayer"
+     "helpers/menu":
+        title: "Menu"
+     "helpers/multiselect":
+        title: "MultiSelect"
+     "helpers/notification":
+        title: "Notification"
+     "helpers/numerictextbox":
+        title: "NumericTextBox"
+     "helpers/panelbar":
+        title: "PanelBar"
+     "helpers/pivotgrid":
+        title: "PivotGrid"
+     "helpers/progressbar":
+        title: "ProgressBar"
+     "helpers/qrcode":
+        title: "QRCode"
+     "helpers/radialgauge":
+        title: "RadialGauge"
+     "helpers/radiobutton":
+        title: "RadioButton"
+     "helpers/scheduler":
+        title: "Scheduler"
+     "helpers/slider":
+        title: "Slider"
+     "helpers/sortable":
+        title: "Sortable"
+     "helpers/splitter":
+        title: "Splitter"
+     "helpers/spreadsheet":
+        title: "SpreadSheet"
+     "helpers/stockchart":
+        title: "StockChart"
+     "helpers/tabstrip":
+        title: "TabStrip"
+     "helpers/timepicker":
+        title: "TimePicker"
+     "helpers/toolbar":
+        title: "ToolBar"
+     "helpers/tooltip":
+        title: "Tooltip"
+     "helpers/treelist":
+        title: "TreeList"
+     "helpers/treemap":
+        title: "TreeMap"
+     "helpers/treeview":
+        title: "TreeView"
+     "helpers/upload":
+        title: "Upload"
+     "helpers/window":
+        title: "Window"
+
+## List migration directory names and order here, like this:
+     "migration/widgets":
+        title: "Widgets"
+        position: 2
+
+## List tutorials directory names and order here, like this:
+     "tutorials/quickstart":
+        title: "Quick Start"
+        position: 1
+     "tutorials/tutorial-kendo-music-store":
+        title: "Tutorial Kendo Music Store"
+        position: 2
+     "tutorials/tutorial-kendo-music-store/music-store-dashboard":
+        title: "Music Store Dashboard"
+        position: 2
+     "tutorials/tutorial-kendo-music-store/music-store-web":
+        title: "Music Store Web"
+        position: 3
+     "tutorials/tutorial-saleshub":
+        title: "Tutorial Sales Hub"
+        position: 3
+     "tutorials/tutorial-saleshub/home-page":
+        title: "Home Page"
+        position: 2
+     "tutorials/tutorial-saleshub/order-page":
+        title: "Order Page"
+        position: 3
+
+## The application virtual path
+baseurl: /aspnet-mvc
+
+## The Kendo UI version used
+cdnVersion: "2016.2.607"
+
+## The MVC Core version used
+mvcCoreVersion: "2016.2.616"
+
+## Assign layout and category per different paths
+defaults:
+-
+    scope:
+        path: ""
+    values:
+        layout: "page"
+        category: "default"
+        product: "aspnet-mvc"
+        editable: true
+-
+    scope:
+        path: "aspnet-mvc"
+    values:
+        product: "aspnet-mvc"
+
+type_links:
+    "kendo.Class": "/api/javascript/class"
+    "kendo.data.DataSource": "/api/javascript/data/datasource"
+    "Array": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array"
+    "Blob": "https://developer.mozilla.org/en/docs/Web/API/Blob"
+    "File": "https://developer.mozilla.org/en-US/docs/Web/API/File"
+    "Boolean": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Boolean"
+    "Function": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function"
+    "jQuery": "http://api.jquery.com/Types/#jQuery"
+    "Promise": "http://api.jquery.com/Types/#Promise"
+    "Object": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object"
+    "Number": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number"
+    "String": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String"
+
+# Aliases available in the markdown template. The below will expand {{site.foo}} to Bar in the output
+# "foo": "Bar"
+
+# The google services configuration
+google_tag_manager: GTM-6X92
+google_custom_search: '001595215763381649090:eblhnfskwrk'
+
+# Assets pipeline configuration
+assets:
+    cachebust: soft
+    js_compressor: uglifier
+    gzip: false
+
+## Do not edit below this line
+safe: false
+markdown: MarkdownProcessor

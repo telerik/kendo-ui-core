@@ -142,6 +142,7 @@ Find more information in the [`groupable.messages`](/api/javascript/ui/grid#conf
             display: "{0} - {1} of {2} items", //{0} is the index of the first record on the page, {1} - index of the last record on the page, {2} is the total amount of records
             empty: "No items to display",
             page: "Page",
+	    allPages: "All",
             of: "of {0}", //{0} is total amount of pages
             itemsPerPage: "items per page",
             first: "Go to the first page",

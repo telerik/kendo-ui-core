@@ -2295,6 +2295,34 @@ Only applicable for the formatting tool. Specifies the context in which the opti
     });
     </script>
 
+### tools.palette `String|Array` *(default: null)*
+
+Specifies the [color palette](/api/javascript/ui/colorpicker#configuration-palette) for "foreColor" and "backColor" tools.
+
+#### Example - "websafe" palette
+
+    <textarea id="editor"></textarea>
+    <script>
+    $("#editor").kendoEditor({
+        tools: [{
+            name: "foreColor",
+            palette: "websafe"
+        }]
+    });
+    </script>
+
+#### Example - list of colors
+
+    <textarea id="editor"></textarea>
+    <script>
+    $("#editor").kendoEditor({
+        tools: [{
+            name: "backColor",
+            palette: ["#f0d0c9", "#e2a293", "#d4735e", "#65281a"]
+        }]
+    });
+    </script>
+
 ### tools.template `String`
 
 The kendo template that will be used for rendering the given tool.

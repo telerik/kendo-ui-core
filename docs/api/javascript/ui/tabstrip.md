@@ -1124,6 +1124,8 @@ The loaded content element that is retrieved via AJAX.
 
 Triggered when an AJAX request results in an error.
 
+> This event won't fire if you use jQuery 3.x. More information is available [here](https://github.com/telerik/kendo-ui-core/issues/2304).
+
 #### Event Data
 
 ##### e.xhr `jqXHR`

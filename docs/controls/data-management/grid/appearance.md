@@ -12,7 +12,7 @@ The [Kendo UI Grid widget](http://demos.telerik.com/kendo-ui/grid/index) support
 
 ## Scrolling
 
-By default, the scrolling functionality of the Grid is enabled. For historical reasons, however, the [Grid MVC wrapper]({% slug configuration_gridhelper_aspnetmvc %}#scrolling) does not support it. To disable the scrolling functionality, set the `scrollable` option to `false`.
+By default, the scrolling functionality of the Grid is enabled. For historical reasons, however, the [Grid MVC wrapper](http://docs.telerik.com/aspnet-mvc/helpers/grid/configuration#scrolling) does not support it. To disable the scrolling functionality, set the `scrollable` option to `false`.
 
 ###### Example
 
@@ -174,7 +174,7 @@ When using virtual scrolling, the data table of the Grid is not placed inside a 
 Virtual scrolling relies on a fake scrollbar. Its size is not determined by the browser, but is calculated based on the average row height of the data that is already loaded. As a result, variable row heights may cause unexpected behavior, such as inability to scroll to the last rows on the last page.
 
 To ensure that all table rows have the same heights, use either of the options:
-* Disable text wrapping.
+* Disable text wrapping.  
 * Set an explicit row height that is large enough (as demonstrated in the example below).
 
 ###### Example
@@ -225,7 +225,7 @@ If the total number of items is large and the scrolling is fast, the table of th
 
 * Programmatic scrolling to a particular Grid row is not supported when virtual scrolling is enabled, because it is not possible to reliably predict the exact scroll offset of the row.
 
-* Keyboard navigation supports only up and down arrow keys when the Grid is `navigatable`. Page Up and Page Down keys scrolling is not supported.
+* When the Grid is `navigatable`, keyboard navigation supports only the `Up Arrow` and `Down Arrow` keys. The `Page Up` and `Page Down` key scrolling is not supported.
 
 * The Grid does not persist [selection](#selection) when virtual scrolling occurs. To achieve this behavior, [use this custom implementation]({% slug howto_persist_row_selection_paging_sorting_filtering_grid %}).
 
@@ -233,7 +233,7 @@ When virtual scrolling is not supported or recommended, revert to standard pagin
 
 ## Height
 
-By default, the Grid has no height and expands to fit all table rows. To provide for a backwards compatibility, the scrollable MVC wrapper of the Grid [applies a default height of 200px to its scrollable data area](/aspnet-mvc/helpers/grid/configuration#scrolling). To control the height of the widget, specify a static pixel value.
+By default, the Grid has no height and expands to fit all table rows. To provide for a backwards compatibility, the scrollable MVC wrapper of the Grid [applies a default height of 200px to its scrollable data area](http://docs.telerik.com/aspnet-mvc/helpers/grid/configuration#scrolling). To control the height of the widget, specify a static pixel value.
 
 ###### Example
 
@@ -264,7 +264,7 @@ In some special scenarios it is possible to set a height style to the scrollable
 >
 > This approach is not applicable when virtual scrolling is enabled.
 
-It is possible to make the Grid expand and shrink vertically according to the number of its rows and yet within certain limits. To achieve this, apply a minimum and/or maximum height style to the scrollable data area and do not set any height of the Grid. If you use the MVC wrapper of the Grid, make sure you [remove the default data area height]({% slug configuration_gridhelper_aspnetmvc %}#scrolling).
+It is possible to make the Grid expand and shrink vertically according to the number of its rows and yet within certain limits. To achieve this, apply a minimum and/or maximum height style to the scrollable data area and do not set any height of the Grid. If you use the MVC wrapper of the Grid, make sure you [remove the default data area height](http://docs.telerik.com/aspnet-mvc/helpers/grid/configuration#scrolling).
 
 ###### Example
 
