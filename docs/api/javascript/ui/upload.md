@@ -1104,35 +1104,6 @@ List of the files that were uploaded or removed . Each file has:
 *   size - the file size in bytes (null if not available)
 *   uid - the unique identifier of the file or batch of files
 
-### clear
-
-Triggered when files are cleared by clicking on the "Clear" button. Note: Cancelling this event will prevent the clearing the selected files. 
-
-#### Wire-up an event handler that triggered when a user clears selected files
-
-    <input type="file" name="files" id="photos" />
-    <script>
-        $("#photos").kendoUpload({
-            async: {
-                saveUrl: "http://my-app.localhost/save",
-                removeUrl: "http://my-app.localhost/remove",
-				autoUpload: false
-            },
-            clear: onClear
-        });
-
-        function onClear(e) {
-			// Optionally cancel the clear operation by calling preventDefault method
-            e.preventDefault();
-        };
-    </script>
-
-#### Event Data
-
-##### e `Object`
-
-A custom event object. The event can be cancelled just like when using a standard jQuery event object via `e.preventDefault();`
-
 ### complete
 
 Fires when all active uploads have completed either successfully or with errors.

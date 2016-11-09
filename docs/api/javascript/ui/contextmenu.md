@@ -285,35 +285,6 @@ Defines the open animation duration in milliseconds.
          });
     </script>
 
-### appendTo `String|jQuery`*(default: document.body)*
-
-Which DOM element the ContextMenu will be appended to. The element needs to be relatively positioned.
-
-#### Example
-
-    <div id="container">Container</div>
-    <ul id="context-menu">
-        <li>Item 1
-            <ul>
-                <li>Sub Item 1</li>
-                <li>Sub Item 2</li>
-                <li>Sub Item 3</li>
-            </ul>
-        </li>
-        <li>Item 2
-            <ul>
-                <li>Sub Item 1</li>
-                <li>Sub Item 2</li>
-                <li>Sub Item 3</li>
-            </ul>
-        </li>
-    </ul>
-    <script>
-        $("#context-menu").kendoContextMenu({
-            appendTo: "#container"
-        });
-    </script>
-
 ### closeOnClick `Boolean`*(default: true)*
 
  Specifies that sub menus should close after item selection (provided they won't navigate).
