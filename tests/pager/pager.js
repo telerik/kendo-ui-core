@@ -242,6 +242,23 @@
         equal(pager.find(".k-pager-info").text(), "1 - 1 of 5 items");
     });
 
+    test("info start page does not exeed total when deleting records", function(){
+        var pager = setup({
+            data: [{ id: 1 }, { id: 2 }, { id: 3 }, { id: 4 }],
+            pageSize: 2
+        });
+
+        dataSource.read();
+        dataSource.page(2);
+
+        //delete the last two records
+        dataSource.remove(dataSource.at(2));
+        dataSource.remove(dataSource.at(2));
+
+        equal(pager.find(".k-pager-info").text(), "2 - 2 of 2 items");
+    });
+
+
     test("pager does not displays info if info is set to false", function(){
         var pager = setup({}, { info: false });
             dataSource.read();
