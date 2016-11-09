@@ -463,7 +463,7 @@ An exception to this are the `paperSize` and `margin` options that you pass to `
 
 ## Supported Browsers
 
-For more information on the provided [browser support]({% slug wbe_browserand_operating_system_support %}), refer to the section on [PDF export]({% slug wbe_browserand_operating_system_support %}}#pdf-export).
+For more information on the provided [browser support]({% slug wbe_browserand_operating_system_support %}), refer to the section on [PDF export]({% slug wbe_browserand_operating_system_support %}#pdf-export).
 
 ## Known Limitations
 
