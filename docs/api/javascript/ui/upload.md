@@ -730,7 +730,7 @@ Removes all files for which the callback function returns `true` (only visually 
 
 #### Example
 
-    input name="files" id="files" type="file" />
+    <input name="files" id="files" type="file" />
     <button id="clearFile" class="k-button">Clear non-image files</button>
     <script>
 
