@@ -13,7 +13,7 @@ To achieve this behavior, follow the main steps below:
 
 1. Handle the diagram's `load` event and check whether the selected item is shape.
 2. If the clicked object is a shape, assign a handler to the standard `keyPress` event of the `window` object.
-2. Use the `Shape` `bounds()` method in order to move the shape depending on the pressed key.
+3. Use the `Shape` `bounds()` method in order to move the shape depending on the pressed key.
 
 ###### Example
 
