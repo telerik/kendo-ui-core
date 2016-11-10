@@ -32,20 +32,29 @@ Kendo UI Professional is one of the commercial versions of Kendo UI. It is a com
 
 Kendo UI Complete incorporates all the products in the Kendo UI family - Kendo UI Professional, [UI for ASP.NET MVC](/aspnet-mvc/introduction), [UI for JSP](/jsp/introduction) and [UI for PHP](http://docs.telerik.com/kendo-ui/php/introduction).
 
-In addition, you receive a license for the
-[RadSpreadProcessing](http://www.telerik.com/products/wpf/spreadsheet-processing.aspx)
-library for .NET.
+In addition, you receive a license for the [RadSpreadProcessing](http://www.telerik.com/products/wpf/spreadsheet-processing.aspx) library for .NET.
 
 #### UI for ASP.NET MVC
 
-[Telerik<sup>®</sup> UI for ASP.NET MVC by Progress](/aspnet-mvc/introduction) is a Kendo UI product flavor which targets ASP.NET MVC developers. It includes all Kendo UI Professional components as well as
-HtmlHelper extension methods (a.k.a. server-side wrappers) which allow you to configure the Kendo UI widgets via C# code.
+[Telerik<sup>®</sup> UI for ASP.NET MVC by Progress](/aspnet-mvc/introduction) is a Kendo UI product flavor which targets ASP.NET MVC developers. It includes all Kendo UI Professional components as well as HtmlHelper extension methods (a.k.a. server-side wrappers) which allow you to configure the Kendo UI widgets via C# code.
 
 * [List of Kendo UI Components]({% slug bundle_supportfor_kendoui_components %})
 * [Browser Support]({% slug wbe_browserand_operating_system_support %})
-* [Evaluate UI for ASP.NET MVC](http://www.telerik.com/download/aspnet-mvc)
+* [Evaluate UI for ASP.NET MVC](https://www.telerik.com/download-trial-file/v2/ui-for-asp.net-mvc)
 * [Get a License](http://www.telerik.com/purchase/aspnet-mvc)
 * [Licensee Agreement](http://www.telerik.com/purchase/license-agreement/aspnet-mvc)
+* [Documentation](http://docs.telerik.com/aspnet-mvc/introduction)
+
+#### UI for ASP.NET Core
+
+[Telerik<sup>®</sup> UI for ASP.NET Core by Progress](/aspnet-core/introduction) supports the .NET Core runtime. It includes all Kendo UI Professional components as well as the Kendo UI Tag Helpers that help you configure the Kendo UI widgets using the new Tag Helpers feature in ASP.NET Core.
+
+* [List of Kendo UI Components]({% slug bundle_supportfor_kendoui_components %})
+* [Browser Support]({% slug wbe_browserand_operating_system_support %})
+* [Evaluate UI for ASP.NET Core](https://www.telerik.com/download-trial-file/v2/ui-for-asp.net-mvc)
+* [Get a License](http://www.telerik.com/purchase/aspnet-mvc)
+* [Licensee Agreement](http://www.telerik.com/purchase/license-agreement/aspnet-mvc)
+* [Documentation](http://docs.telerik.com/aspnet-core/introduction)
 
 #### UI for JSP
 
@@ -56,6 +65,7 @@ HtmlHelper extension methods (a.k.a. server-side wrappers) which allow you to co
 * [Evaluate UI for JSP](http://www.telerik.com/download/jsp-ui)
 * [Get a License](http://www.telerik.com/purchase/jsp-ui)
 * [Licensee Agreement](http://www.telerik.com/purchase/license-agreement/jsp-ui)
+* [Documentation](/jsp/introduction)
 
 #### UI for PHP
 
@@ -66,6 +76,7 @@ HtmlHelper extension methods (a.k.a. server-side wrappers) which allow you to co
 * [Evaluate UI for PHP](http://www.telerik.com/download/php-ui)
 * [Get a License](http://www.telerik.com/purchase/php-ui)
 * [Licensee Agreement](http://www.telerik.com/purchase/license-agreement/php-ui)
+* [Documentation](/php/introduction)
 
 #### RadSpreadProcessing
 
