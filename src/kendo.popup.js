@@ -84,6 +84,7 @@ var __meta__ = { // jshint ignore:line
             }
 
             parentPopup = $(that.options.anchor).closest(".k-popup,.k-group").filter(":not([class^=km-])"); // When popup is in another popup, make it relative.
+			if(BODY === "body") BODY = document.body;
             options.appendTo = $($(options.appendTo)[0] || parentPopup[0] || BODY);
 
             that.element.hide()
