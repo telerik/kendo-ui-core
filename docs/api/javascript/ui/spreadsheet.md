@@ -1102,7 +1102,7 @@ The available tools are:
 * **fontSize**, **fontFamily**
 * **alignment**
 * **textWrap**
-* [**formatDecreaseDecimal**, **formatIncreateDecimal**]
+* [**formatDecreaseDecimal**, **formatIncreaseDecimal**]
 * **format**
 * **merge**
 * **freeze**
