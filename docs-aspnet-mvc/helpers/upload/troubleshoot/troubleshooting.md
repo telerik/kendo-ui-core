@@ -52,6 +52,18 @@ Override these settings in the `web.config` file. Below are listed the steps for
                 </security>
         </system.webServer>
 
+### The upload never ends in Safari on iOS and OSX
+
+The issue is due to Safari bug and happens only with enabled **Windows authentication and disabled Anonymous Authentication**. It is reproducible with a standard `<input type="file" name="file" enctype="multipart/form-data" />` HTML element in ASP.NET MVC and Web Forms apps.
+
+**Affected components**
+
+Since the File Browser dialogs of the Kendo UI Editor for ASP.NET MVC rely on the Upload component, the problem can happen when uploading images and other files through them on MAC Safari.
+
+**Solution**
+
+The solution solely depends on Apples decision whether and when to fix this browser issue, but you can try to workaround it with the suggestions provided in this StackOverflow thread: [Programmatically enable or disable anonymous authentication in IIS](http://stackoverflow.com/questions/28419304/programmatically-enable-or-disable-anonymous-authentication-in-iis), i.e. build a separate web service for file upload with authentication setting as Anonymous for Safari scenarios, and the main app authentication setting as Windows Authentication.
+
 ## Requests
 
 ### Requests to ASP.NET MVC Actions Are Blocked during Upload
