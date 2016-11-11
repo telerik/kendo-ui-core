@@ -99,13 +99,13 @@
     top: 5px;
 }
 
-#page-nav .k-plus { background: url(../images/plus.png); }
-#page-nav .k-minus { background: url(../images/minus.png); }
+#page-nav .k-i-expand { background: url(../images/plus.png); }
+#page-nav .k-i-collapse { background: url(../images/minus.png); }
 #page-nav .article { top: 6px; background: url(../images/file.png); }
 #page-nav .k-state-selected .article { background: url(../images/file-white.png); }
 
-#page-nav .k-group .k-group .k-plus { background: url(../images/folder-close.png); }
-#page-nav .k-group .k-group .k-minus { background: url(../images/folder-open.png); }
+#page-nav .k-group .k-group .k-i-expand { background: url(../images/folder-close.png); }
+#page-nav .k-group .k-group .k-i-collapse { background: url(../images/folder-open.png); }
 
 /* Nav Level 1 */
 
