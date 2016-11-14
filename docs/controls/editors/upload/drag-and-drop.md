@@ -12,7 +12,7 @@ Users can select files by dropping them over the Kendo UI Upload. As of the Kend
 
 > **Important**
 >
-> The drag-and-drop functionality is only available in the [asynchronous mode]({% slug modes_upload_widget %}s#asynchronous-mode) and requires a [supported browser]({% slug browsersupport_upload_widget %}).
+> The drag-and-drop functionality is only available in the [asynchronous mode]({% slug modes_upload_widget %}#asynchronous-mode) and requires a [supported browser]({% slug browsersupport_upload_widget %}).
 
 ## Select and Upload Files
 
