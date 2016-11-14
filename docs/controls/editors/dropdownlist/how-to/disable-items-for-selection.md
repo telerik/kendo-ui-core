@@ -1,14 +1,15 @@
 ---
-title: Disable Items For Selection
-page_title: Disable Items For Selection | Kendo UI DropDownList
+title: Disable Items for Selection
+page_title: Disable Items for Selection | Kendo UI DropDownList
 description: "Learn how to disable items for selection within a Kendo UI DropDownList."
 slug: howto_disable_items_for_selection_dropdownlist
 ---
 
-# Disable Items For Selection
+# Disable Items for Selection
 
-One way of making items appear disabled in a Kendo UI DropDownList is by applying the CSS class `k-state-disabled` in a Kendo UI Template.
-To prevent future selection of disabled items, add an event handler to the [`select`](/api/javascript/ui/dropdownlist#events-select) event and call `e.preventDefault()`.
+One way of making items appear disabled in a Kendo UI DropDownList is by applying the CSS `k-state-disabled` class in a Kendo UI Template.
+
+To prevent the future selection of disabled items, add an event handler to the [`select`](/api/javascript/ui/dropdownlist#events-select) event and call `e.preventDefault()`.
 
 ###### Example
 
