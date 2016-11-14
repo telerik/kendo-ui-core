@@ -70,6 +70,8 @@ navigation:
         title: "Appearance"
      "*binding":
         title: "Binding"
+     "*troubleshoot":
+        title: "Troubleshooting"
      "*editing":
         title: "Editing"
      "*export":
