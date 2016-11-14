@@ -1260,7 +1260,7 @@ Returns an array with the sheets in the workbook.
 ### fromFile
 Clears the spreadsheets and populates it with data from the specified Excel (.xlsx) file.
 
-> Requires Internet Explorer 10 or a recent version of other browsers.
+> Requires Internet Explorer 10 or a recent version of other browsers. The JSZip library is a [`prerequisite`](/intro/installation/prerequisites#jszip-library) for the import from file functionality.
 
 #### Parameters
 
