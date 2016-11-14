@@ -297,7 +297,7 @@ var dojoApi = (function($) {
                 angular = '';
             }
 
-            if (!(/ooxml|excel/i).test(snippet)) {
+            if (!(/ooxml|excel|spreadsheet/i).test(snippet)) {
                 jszip  = '';
             }
 
@@ -343,7 +343,7 @@ var dojoApi = (function($) {
             }
 
             pre.hide();
-            
+
             $(element).addClass("active-button");
             $(element).next().removeClass("active-button");
         },
@@ -382,7 +382,7 @@ var dojoApi = (function($) {
             contents[0].open();
             contents[0].write(html);
             contents[0].close();
-            
+
             $(element).addClass("active-button");
             $(element).prev().removeClass("active-button");
         },
