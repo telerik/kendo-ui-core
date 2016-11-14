@@ -22,7 +22,7 @@ Make sure that the action parameter is of type `IEnumerable<HttpPostedFileBase>`
 >
 > Using HttpPostedFile does not work.
 
-### Uploading Large Files Is Impossible
+### The Upload of Large Files Is Impossible
 
 By default, ASP.NET limits the size of the maximum upload to 4MB. Additionally, IIS 7 and later limits the request size to 30MB.
 
@@ -52,17 +52,17 @@ Override these settings in the `web.config` file. Below are listed the steps for
                 </security>
         </system.webServer>
 
-### The upload never ends in Safari on iOS and OSX
+### The Upload Never Ends in Safari on iOS and OSX
 
-The issue is due to Safari bug and happens only with enabled **Windows authentication and disabled Anonymous Authentication**. It is reproducible with a standard `<input type="file" name="file" enctype="multipart/form-data" />` HTML element in ASP.NET MVC and Web Forms apps.
+The issue is caused by a bug in Safari and occurs only when the **Windows authentication and disabled Anonymous Authentication** setting is enabled. It is reproducible with a standard `<input type="file" name="file" enctype="multipart/form-data" />` HTML element in ASP.NET MVC and Web Forms applications.
 
-**Affected components**
-
-Since the File Browser dialogs of the Kendo UI Editor for ASP.NET MVC rely on the Upload component, the problem can happen when uploading images and other files through them on MAC Safari.
+> **Important**
+>
+> Because the **File Browser** dialogs of the Kendo UI Editor for ASP.NET MVC rely on the Upload control, the issue might occur when uploading images and other files through them on MAC Safari.
 
 **Solution**
 
-The solution solely depends on Apples decision whether and when to fix this browser issue, but you can try to workaround it with the suggestions provided in this StackOverflow thread: [Programmatically enable or disable anonymous authentication in IIS](http://stackoverflow.com/questions/28419304/programmatically-enable-or-disable-anonymous-authentication-in-iis), i.e. build a separate web service for file upload with authentication setting as Anonymous for Safari scenarios, and the main app authentication setting as Windows Authentication.
+The solution solely depends on a dedicated decision by Apple about whether and when to fix this browser issue. However, you can work around it by applying the suggestions provided in the [Programmatically enable or disable anonymous authentication in IIS](http://stackoverflow.com/questions/28419304/programmatically-enable-or-disable-anonymous-authentication-in-iis) StackOverflow thread. This means to build a separate web service for file upload with an authentication setting, such as **Anonymous** for Safari scenarios, and the main application authentication setting, such as **Windows Authentication**.
 
 ## Requests
 

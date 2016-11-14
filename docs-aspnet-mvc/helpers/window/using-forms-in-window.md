@@ -1,28 +1,28 @@
 ---
-title: Using Forms in Kendo Window
-page_title: Overview | Kendo UI Window HtmlHelper
-description: "This article illustrates an option to handle forms in MVC loaded in Kendo Window."
+title: Using Forms
+page_title: Using Forms | Kendo UI Window HtmlHelper
+description: "Handle forms in when working with a Kendo UI Window in ASP.NET MVC applications."
 slug: using_formsinwindow_aspnetmvc
 position: 2
 ---
 
-# Using Forms in Kendo Window
+# Using Forms
 
-In this article you can learn the basic concepts to handle views with forms in a **Kendo Window** popup, show validation messages from the model's state and close the window on valid model.
+This article provides basic information about handling views with forms in a Kendo UI Window popup, showing validation messages from the state of the model, and closing the Window on a valid model.
 
-With **Kendo Window for MVC** you can use the `LoadContentFrom` method to load content from a view into the popup's content ([Load-on-Demand Content]({%slug overview_windowhelper_aspnetmvc%}#load-on-demand-content). This is a typical situation render forms and show validation on the page.
+The Kendo UI Window widget for ASP.NET MVC enables you to use the `LoadContentFrom` method to load content from a view into the popup content ([Load-on-Demand Content]({%slug overview_windowhelper_aspnetmvc%}#load-on-demand-content)).
 
-> **Tip**
+> **Important**
 >
-> If you are going to use AJAX forms you can follow the [Update Window with AJAX Forms]({%slug howto_update_ajax_forms_windowaspnetmv%}) article.
+> If you use AJAX forms, refer to the article on [updating the Kendo UI Window with AJAX forms]({%slug howto_update_ajax_forms_windowaspnetmv%}).
 
-With **Kendo Window** you can create a popup form, but there are conceptual differences that should be considered during the implementation of such a popup.
+Though the Window allows the creation of popup forms, you need to consider the conceptual differences during their implementation. Typically, if you load a view into a Kendo UI Window, it does not act as a separate browser window. This means that any returned data from the form submit action loads into the main page and eventually might lead to unexpected results.
 
-Typically, Loading a view in **Kendo Window** does not make it to act as a separate browser window. Thus, any returned data from the form submit action will load into the main page and eventually lead you to an unexpected result. This can be handled by rendering the content in an iframe.
+To handle this behavior, render the content in an iframe.
 
-###### Index.cshtml
+###### Example
 
-```cshtml
+```tab-Index.cshtml
 @(Html.Kendo().Window()
     .Name("PopupForm")
     .Title("My Form")
@@ -39,20 +39,14 @@ Typically, Loading a view in **Kendo Window** does not make it to act as a separ
     }
 </script>
 ```
-
-###### HomeController.cs
-
-```cs
+```tab-HomeController.cs
 public ActionResult GetForm()
 {
     // Return the view with the form
     return View("Form");
 }
 ```
-
-###### Form.cshtml
-
-```cshtml
+```tab-Form.cshtml
 @* As this is loaded in an iframe, the view should have a layout in order to load an entire HTML page. *@
 @{
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -73,10 +67,7 @@ public ActionResult GetForm()
     )
 }
 ```
-
-###### MyModel.cs
-
-```cs
+```tab-MyModel.cs
 public class MyModel
 {
     [Required]
@@ -87,10 +78,7 @@ public class MyModel
     public string Description { get; set; }
 }
 ```
-
-###### MyModelController.cs
-
-```cs
+```tab-MyModelController.cs
 [HttpPost]
 public ActionResult MyModel_Create(MyModel model)
 {
