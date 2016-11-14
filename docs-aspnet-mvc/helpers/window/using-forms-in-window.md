@@ -8,8 +8,8 @@ position: 2
 
 # Using Forms in Kendo Window
 
-In this article you can learn the basic concepts to handle views with forms in a **Kendo Window** popup, show validation messages from the model's state and close the window on valid model. 
- 
+In this article you can learn the basic concepts to handle views with forms in a **Kendo Window** popup, show validation messages from the model's state and close the window on valid model.
+
 With **Kendo Window for MVC** you can use the `LoadContentFrom` method to load content from a view into the popup's content ([Load-on-Demand Content]({%slug overview_windowhelper_aspnetmvc%}#load-on-demand-content). This is a typical situation render forms and show validation on the page.
 
 > **Tip**
@@ -18,7 +18,7 @@ With **Kendo Window for MVC** you can use the `LoadContentFrom` method to load c
 
 With **Kendo Window** you can create a popup form, but there are conceptual differences that should be considered during the implementation of such a popup.
 
-Typically, Loading a view in **Kendo Window** does not make it to act as a separate browser window. Thus, any returned data from the form submit action will load into the main page and eventually lead you to an unexpected result. This can be handled by rendering the content in an iframe. 
+Typically, Loading a view in **Kendo Window** does not make it to act as a separate browser window. Thus, any returned data from the form submit action will load into the main page and eventually lead you to an unexpected result. This can be handled by rendering the content in an iframe.
 
 ###### Index.cshtml
 
@@ -96,7 +96,7 @@ public ActionResult MyModel_Create(MyModel model)
 {
     if (!ModelState.IsValid)
     {
-        /* If model is invalid, as expected, return the same 
+        /* If model is invalid, as expected, return the same
         view and send the invalid model to update validation. */
         return View("Form", model);
     }
@@ -114,12 +114,8 @@ Other articles on Telerik UI for ASP.NET MVC and on the Window:
 * [Overview of Telerik UI for ASP.NET MVC]({% slug overview_aspnetmvc %})
 * [Fundamentals of Telerik UI for ASP.NET MVC]({% slug fundamentals_aspnetmvc %})
 * [Scaffolding in Telerik UI for ASP.NET MVC]({% slug scaffolding_aspnetmvc %})
-* [Overview of the Kendo UI Window Widget]({% slug overview_kendoui_window_widget %})
+* [Overview of the Kendo UI Window Widget](http://docs.telerik.com/kendo-ui/controls/layout/window/overview)
 * [Telerik UI for ASP.NET MVC API Reference Folder](/api/aspnet-mvc/Kendo.Mvc/AggregateFunction)
 * [Telerik UI for ASP.NET MVC HtmlHelpers Folder]({% slug overview_autocompletehelper_aspnetmvc %})
 * [Tutorials on Telerik UI for ASP.NET MVC]({% slug overview_timeefficiencyapp_aspnetmvc6 %})
 * [Telerik UI for ASP.NET MVC Troubleshooting]({% slug troubleshooting_aspnetmvc %})
-
-
- 
-
