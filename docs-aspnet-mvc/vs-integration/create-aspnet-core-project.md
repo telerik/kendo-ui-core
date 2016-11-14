@@ -40,4 +40,4 @@ To be able to run the application, make sure you provide for the requirements li
 
 * [Visual Studio Integration Overview]({% slug overview_visualstudio_aspnetmvc %})
 * [Visual Studio Extensions Options]({% slug vsextensionsoptions_visualstudio_aspnetmvc %})
-* [Getting started with ASP.NET Core]({% slug gettingstarted_aspnetmvc6_aspnetmvc %})
+* [Getting started with ASP.NET Core](http://docs.telerik.com/aspnet-core/introduction)
