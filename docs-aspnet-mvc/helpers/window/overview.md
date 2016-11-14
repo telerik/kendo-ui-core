@@ -151,7 +151,7 @@ The example below demonstrates how to insert a complete form inside the Window.
 
 ## Event Handling
 
-You can subscribe to all Window [events](/kendo-ui/api/javascript/ui/window#events).
+You can subscribe to all Window [events](http://docs.telerik.com/kendo-ui/api/javascript/ui/window#events).
 
 ### By Handler Name
 

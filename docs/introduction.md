@@ -36,7 +36,7 @@ In addition, you receive a license for the [RadSpreadProcessing](http://www.tele
 
 #### UI for ASP.NET MVC
 
-[Telerik<sup>®</sup> UI for ASP.NET MVC by Progress](/aspnet-mvc/introduction) is a Kendo UI product flavor which targets ASP.NET MVC developers. It includes all Kendo UI Professional components as well as HtmlHelper extension methods (a.k.a. server-side wrappers) which allow you to configure the Kendo UI widgets via C# code.
+[Telerik<sup>®</sup> UI for ASP.NET MVC by Progress](http://docs.telerik.com/aspnet-mvc/introduction) is a Kendo UI product flavor which targets ASP.NET MVC developers. It includes all Kendo UI Professional components as well as HtmlHelper extension methods (a.k.a. server-side wrappers) which allow you to configure the Kendo UI widgets via C# code.
 
 * [List of Kendo UI Components]({% slug bundle_supportfor_kendoui_components %})
 * [Browser Support]({% slug wbe_browserand_operating_system_support %})
@@ -47,7 +47,7 @@ In addition, you receive a license for the [RadSpreadProcessing](http://www.tele
 
 #### UI for ASP.NET Core
 
-[Telerik<sup>®</sup> UI for ASP.NET Core by Progress](/aspnet-core/introduction) supports the .NET Core runtime. It includes all Kendo UI Professional components as well as the Kendo UI Tag Helpers that help you configure the Kendo UI widgets using the new Tag Helpers feature in ASP.NET Core.
+[Telerik<sup>®</sup> UI for ASP.NET Core by Progress](http://docs.telerik.com/aspnet-core/introduction) supports the .NET Core runtime. It includes all Kendo UI Professional components as well as the Kendo UI Tag Helpers that help you configure the Kendo UI widgets using the new Tag Helpers feature in ASP.NET Core.
 
 * [List of Kendo UI Components]({% slug bundle_supportfor_kendoui_components %})
 * [Browser Support]({% slug wbe_browserand_operating_system_support %})
@@ -69,7 +69,7 @@ In addition, you receive a license for the [RadSpreadProcessing](http://www.tele
 
 #### UI for PHP
 
-[Telerik<sup>®</sup> UI for PHP by Progress](http://docs.telerik.com/kendo-ui/php/introduction) is a Kendo UI product flavor which targets the PHP web application developers. It includes PHP classes for configuring all Kendo UI Professional widgets.
+[Telerik<sup>®</sup> UI for PHP by Progress](/php/introduction) is a Kendo UI product flavor which targets the PHP web application developers. It includes PHP classes for configuring all Kendo UI Professional widgets.
 
 * [List of Kendo UI Components]({% slug bundle_supportfor_kendoui_components %})
 * [Browser Support]({% slug wbe_browserand_operating_system_support %})
