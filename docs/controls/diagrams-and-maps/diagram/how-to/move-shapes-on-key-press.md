@@ -1,19 +1,17 @@
 ---
 title: Move Shapes with Arrow Keys
 page_title: Move Shapes with Arrow Keys | Kendo UI Diagram
-description: "Learn how to add to move the shapes Kendo UI Diagram by pressing the keyboard arrow keys."
+description: "Learn how to move the shapes of a Kendo UI Diagram by pressing the keyboard arrow keys."
 slug: howto_move_shapes_with_arrow_keys
 ---
 
 # Move Shapes with Arrow Keys
 
-The example below demonstrates how to move the shapes of a diagram when pressing the keyboard arrow buttons.
+To move the shapes of a Kendo UI Diagram by pressing the keyboard arrow keys, follow the main steps below:
 
-To achieve this behavior, follow the main steps below:
-
-1. Handle the diagram's `load` event and check whether the selected item is shape.
+1. Handle the `load` event of the Diagram and check whether the selected item is a shape.
 2. If the clicked object is a shape, assign a handler to the standard `keyPress` event of the `window` object.
-3. Use the `Shape` `bounds()` method in order to move the shape depending on the pressed key.
+3. To move the shape depending on the pressed key, use the `bounds()` method of the `Shape`.
 
 ###### Example
 
@@ -43,7 +41,7 @@ To achieve this behavior, follow the main steps below:
 
         function attachMoveHandler(e) {
             var shape = e.item;
-          
+
             if (shape instanceof kendo.dataviz.diagram.Shape) {
                 if (!shape.from) {
                     $(window).keydown(moveShape);
