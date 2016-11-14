@@ -28,6 +28,7 @@ The repositories below contain source code, instructions, and issue trackers for
 - [ASP.NET Home](https://github.com/aspnet/home) on GitHub.
 - [ASP.NET MVC](https://github.com/aspnet/Mvc) main repository.
 - [ASP.NET MVC Announcements](https://github.com/aspnet/announcements/) for important changes.
+- [Telerik UI for ASP.NET Core Demos and Sample Applications](http://demos.telerik.com/aspnet-core).
 
 ## The Sample Application
 
