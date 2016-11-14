@@ -287,7 +287,7 @@ Defines the open animation duration in milliseconds.
 
 ### appendTo `String|jQuery`*(default: document.body)*
 
-Which DOM element the ContextMenu will be appended to. The element needs to be relatively positioned.
+The DOM element to which the ContextMenu will be appended. The element needs to be relatively positioned.
 
 #### Example
 
