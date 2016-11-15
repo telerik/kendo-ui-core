@@ -821,6 +821,7 @@ var __meta__ = { // jshint ignore:line
             });
             if (this.options.clearButton) {
                 this._clear.insertAfter(this.input);
+                this.wrapper.addClass("k-combobox-clearable");
             }
         },
 
