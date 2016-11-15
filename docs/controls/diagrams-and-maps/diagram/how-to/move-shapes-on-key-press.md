@@ -90,6 +90,6 @@ Other articles on the Kendo UI Diagram:
 
 * [JavaScript API Reference](/api/javascript/dataviz/ui/diagram)
 * [How to Pan with Mouse Wheel]({% slug howto_pan_with_mouse_wheel %})
-* [How to Drag and Drop on Existing Shapes]({% slug howto_draganddrop_onshapes_diagra %})
+* [How to Drag and Drop on Existing Shapes]({% slug howto_draganddrop_onshapes_diagram %})
 
 For more runnable examples on the Kendo UI Diagram, browse the [**How To** documentation folder]({% slug howto_changeshapevisualelements_dynamically_diagram %}).
