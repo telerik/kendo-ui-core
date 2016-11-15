@@ -5,7 +5,7 @@ description: "Learn how to show a Tooltip for the Kendo UI TreeList rows."
 slug: howto_showtooltip_treelist
 ---
 
-# Show Context Menu
+# Show Tooltip
 
 The example below demonstrates how to show a Tooltip for the Kendo UI TreeList rows.
 
