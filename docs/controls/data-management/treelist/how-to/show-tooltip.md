@@ -1,13 +1,17 @@
 ---
-title: Show Tooltip
-page_title: Show Tooltip | Kendo UI TreeList
-description: "Learn how to show a Tooltip for the Kendo UI TreeList rows."
+title: Show Extra Information in Tooltip
+page_title: Show Extra Information in Tooltip | Kendo UI TreeList
+description: "Learn how to show additional information about a Kendo UI TreeList entry by using the Kendo UI Tooltip widget."
 slug: howto_showtooltip_treelist
 ---
 
-# Show Tooltip
+# Show Extra Information in Tooltip
 
-The example below demonstrates how to show a Tooltip for the Kendo UI TreeList rows.
+Sometimes you might need to show additional information about an entry in a Kendo UI TreeList.
+
+A possible way to achieve this behavior is to use a Kendo UI Tooltip that displays the information when the user hovers with the mouse over the TreeList node.
+
+The example below demonstrates how to customize the information displayed by the Tooltip by configuring the `dataItem` property.
 
 ###### Example
 

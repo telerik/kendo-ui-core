@@ -47,7 +47,7 @@ The example below demonstrates how to declare fields definitions through the Dat
 
 > **Important**  
 >
-> Define the id field of the data items in schema.model.id. This ensures the correct adding, editing, and deleting of items.
+> Define the `id` field of the data items in `schema.model.id`. This ensures the correct adding, editing, and deleting of items.
 
 ###### Example
 
