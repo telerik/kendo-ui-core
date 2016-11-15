@@ -1251,4 +1251,20 @@ test("update noData template on dataBound", function() {
     equal(noData.text(), combobox.dataSource.total());
 });
 
+test("adds class to the wrapper if clearButton is enabled", function() {
+    var combobox = new ComboBox(input, {
+        clearButton: true
+    });
+
+    ok(combobox.wrapper.hasClass("k-combobox-clearable"));
+});
+
+test("does not add k-combobox-clearable class if clearButton is turned off", function() {
+    var combobox = new ComboBox(input, {
+        clearButton: false
+    });
+
+    ok(!combobox.wrapper.hasClass("k-combobox-clearable"));
+});
+
 })();
