@@ -16,6 +16,8 @@ var __meta__ = { // jshint ignore:line
         Draggable = kendo.ui.Draggable,
         isPlainObject = $.isPlainObject,
         activeElement = kendo._activeElement,
+        outerWidth = kendo._outerWidth,
+        outerHeight = kendo._outerHeight,
         proxy = $.proxy,
         extend = $.extend,
         each = $.each,
@@ -633,7 +635,7 @@ var __meta__ = { // jshint ignore:line
                     title.html(text);
                 }
 
-                titleBarHeight = titleBar.outerHeight();
+                titleBarHeight = parseInt(outerHeight(titleBar), 10);
 
                 wrapper.css("padding-top", titleBarHeight);
                 titleBar.css("margin-top", -titleBarHeight);
@@ -1255,7 +1257,7 @@ var __meta__ = { // jshint ignore:line
                 });
 
             wrapper.find(".k-window-title")
-                .css(isRtl ? "left" : "right", wrapper.find(".k-window-actions").outerWidth() + 10);
+                .css(isRtl ? "left" : "right", outerWidth(wrapper.find(".k-window-actions")) + 10);
 
             contentHtml.css("visibility", "").show();
 
@@ -1479,9 +1481,9 @@ var __meta__ = { // jshint ignore:line
             };
 
             if (actions.length > 0) {
-                wnd.minLeftPosition = actions.outerWidth() + parseInt(actions.css("right"), 10) - element.outerWidth();
+                wnd.minLeftPosition = outerWidth(actions) + parseInt(actions.css("right"), 10) - outerWidth(element);
             } else {
-                wnd.minLeftPosition =  20 - element.outerWidth(); // at least 20px remain visible
+                wnd.minLeftPosition =  20 - outerWidth(element); // at least 20px remain visible
             }
 
             wnd.minLeftPosition -= containerOffset.left;

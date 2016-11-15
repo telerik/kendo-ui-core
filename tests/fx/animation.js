@@ -49,6 +49,8 @@
     });
 
     test("kendoStop calls callback", 1, function() {
+        jasmine.clock().install();
+
         var span = kendo.jQuery("<span />");
 
         span.kendoAnimate({
@@ -60,6 +62,9 @@
         });
 
         span.kendoStop(true, true);
+
+        jasmine.clock().tick();
+        jasmine.clock().uninstall();
     });
 
     asyncTest("animate waits all effects to finish", function() {
@@ -285,7 +290,7 @@
         }
 
         asyncTest("slideIn:right moves the element right from - its width to 0", function() {
-            span.css({ position: "absolute", display: "block", left: 10 });
+            span.css({ position: "absolute", display: "block", left: 10, width: 10 });
 
             var position = 1;
             if (transforms) {

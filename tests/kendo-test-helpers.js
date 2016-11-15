@@ -169,6 +169,7 @@ function mousewheel(element, delta) {
 
 // Silence logging for the tests
 kendo.suppressLog = true;
+$.mockjaxSettings.logging = false;
 
 (function() {
     var domContentsLength;
@@ -308,7 +309,6 @@ function withAngularTests(moduleName, func) {
     });
 
     $.mockjaxSettings.responseTime = 0;
-    $.mockjaxSettings.logging = false;
 
     $.mockjax({
         url: "ajax-template.html",

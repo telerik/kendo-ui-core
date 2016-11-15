@@ -406,8 +406,8 @@ var __meta__ = { // jshint ignore:line
             right = position.left + position.width,
             bottom = position.top + position.height;
 
-        elementPosition.right = elementPosition.left + element.outerWidth();
-        elementPosition.bottom = elementPosition.top + element.outerHeight();
+        elementPosition.right = elementPosition.left + kendo._outerWidth(element);
+        elementPosition.bottom = elementPosition.top + kendo._outerHeight(element);
 
         return !(elementPosition.left > right||
             elementPosition.right < position.left ||

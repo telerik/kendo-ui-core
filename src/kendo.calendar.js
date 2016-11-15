@@ -27,6 +27,8 @@ var __meta__ = { // jshint ignore:line
         emptyCellTemplate = template('<td role="gridcell">&nbsp;</td>', { useWithBlock: false }),
         browser = kendo.support.browser,
         isIE8 = browser.msie && browser.version < 9,
+        outerHeight = kendo._outerHeight,
+        outerWidth = kendo._outerWidth,
         ns = ".kendoCalendar",
         CLICK = "click" + ns,
         KEYDOWN_NS = "keydown" + ns,
@@ -535,7 +537,7 @@ var __meta__ = { // jshint ignore:line
                 active = that._active,
                 horizontal = that.options.animation.horizontal,
                 effects = horizontal.effects,
-                viewWidth = from.outerWidth();
+                viewWidth = outerWidth(from);
 
             if (effects && effects.indexOf(SLIDE) != -1) {
                 from.add(to).css({ width: viewWidth });
@@ -581,7 +583,7 @@ var __meta__ = { // jshint ignore:line
             if (effects && effects.indexOf("zoom") != -1) {
                 to.css({
                     position: "absolute",
-                    top: from.prev().outerHeight(),
+                    top: outerHeight(from.prev()),
                     left: 0
                 }).insertBefore(from);
 

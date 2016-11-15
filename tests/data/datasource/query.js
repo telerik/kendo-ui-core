@@ -1677,6 +1677,8 @@ test("fetch triggers change event", function() {
 });
 
 test("fetch calls supplied callback only once on multiple fetches", function() {
+    jasmine.clock().install();
+
     var view,
         called = 0,
         dataSource = new DataSource({
@@ -1690,11 +1692,17 @@ test("fetch calls supplied callback only once on multiple fetches", function() {
 
     dataSource.fetch();
 
+    jasmine.clock().tick();
+
     ok(view);
     equal(called, 1);
+
+    jasmine.clock().uninstall();
 });
 
 test("fetch callback is called with dataSource context", function() {
+    jasmine.clock().install();
+
     var dataSource = new DataSource({
         data: [{foo: 1, bar: "1"}]
     });
@@ -1702,6 +1710,9 @@ test("fetch callback is called with dataSource context", function() {
     dataSource.fetch(function() {
         equal(this, dataSource);
     });
+
+    jasmine.clock().tick();
+    jasmine.clock().uninstall();
 });
 
 test("fetch callback is not called when requestStart is prevented", function() {
@@ -2077,13 +2088,19 @@ test("fetch returns a promise", function() {
 });
 
 test("change event resolves the promise when bound to local array", function() {
+    jasmine.clock().install();
+
     var dataSource = new DataSource({
         data: [{ id: 1, foo: "bar" }]
     });
 
     var promise = dataSource.fetch();
 
+    jasmine.clock().tick();
+
     equal(promise.state(), "resolved");
+
+    jasmine.clock().uninstall();
 });
 
 asyncTest("custom transport resolves the promess when the success method is called", 1, function() {
@@ -2149,6 +2166,8 @@ test("query returns promise for local operations", function() {
 });
 
 test("query resolves promise after data has been processed", function() {
+    jasmine.clock().install();
+
     var dataSource = new DataSource({
         data: [
             { id: 1 }
@@ -2161,9 +2180,14 @@ test("query resolves promise after data has been processed", function() {
         .then(function() {
             ok(true);
         });
+
+    jasmine.clock().tick();
+    jasmine.clock().uninstall();
 });
 
 test("query resolves promise when requestStart is prevented", function() {
+    jasmine.clock().install();
+
     var dataSource = new DataSource({
         data: [
             { id: 1 }
@@ -2178,6 +2202,9 @@ test("query resolves promise when requestStart is prevented", function() {
         .then(function() {
             ok(true);
         });
+
+    jasmine.clock().tick();
+    jasmine.clock().uninstall();
 });
 
 }());

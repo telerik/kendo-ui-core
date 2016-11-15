@@ -14,6 +14,8 @@ var __meta__ = { // jshint ignore:line
 (function($, undefined) {
     var kendo = window.kendo,
         ui = kendo.ui,
+        outerWidth = kendo._outerWidth,
+        outerHeight = kendo._outerHeight,
         Widget = ui.Widget,
         keys = kendo.keys,
         support = kendo.support,
@@ -615,9 +617,9 @@ var __meta__ = { // jshint ignore:line
                 var element = $(this);
 
                 if (element.hasClass("k-list-filter")) {
-                    offsetHeight += element.children().outerHeight();
+                    offsetHeight += outerHeight(element.children());
                 } else {
-                    offsetHeight += element.outerHeight();
+                    offsetHeight += outerHeight(element);
                 }
             });
 
@@ -647,7 +649,7 @@ var __meta__ = { // jshint ignore:line
 
                 if (height !== "auto") {
                     offsetTop = that._offsetHeight();
-                    footerHeight = $(that.footer).outerHeight() || 0;
+                    footerHeight = outerHeight($(that.footer)) || 0;
                     height = height - offsetTop - footerHeight;
                 }
 
@@ -672,14 +674,14 @@ var __meta__ = { // jshint ignore:line
             }
 
             computedStyle = window.getComputedStyle ? window.getComputedStyle(wrapper[0], null) : 0;
-            computedWidth = parseFloat(computedStyle  && computedStyle.width) || wrapper.outerWidth();
+            computedWidth = parseFloat(computedStyle  && computedStyle.width) || outerWidth(wrapper);
 
             if (computedStyle && browser.msie) { // getComputedStyle returns different box in IE.
                 computedWidth += parseFloat(computedStyle.paddingLeft) + parseFloat(computedStyle.paddingRight) + parseFloat(computedStyle.borderLeftWidth) + parseFloat(computedStyle.borderRightWidth);
             }
 
             if (list.css("box-sizing") !== "border-box") {
-                width = computedWidth - (list.outerWidth() - list.width());
+                width = computedWidth - (outerWidth(list) - list.width());
             } else {
                 width = computedWidth;
             }

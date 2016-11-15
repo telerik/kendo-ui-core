@@ -1206,6 +1206,8 @@ test("Node without children resolves load promise immediately", function() {
 });
 
 test("load resolves promise upon success", function() {
+    jasmine.clock().install();
+
     var deferred;
     var dataSource = new HierarchicalDataSource({
         transport: {
@@ -1222,13 +1224,19 @@ test("load resolves promise upon success", function() {
 
     deferred.resolve();
 
+    jasmine.clock().tick();
+
     var loadPromise = dataSource.get(1).load();
 
     equal(loadPromise.state(), "pending");
 
     deferred.resolve();
 
+    jasmine.clock().tick();
+
     equal(loadPromise.state(), "resolved");
+
+   jasmine.clock().uninstall();
 });
 
 }());

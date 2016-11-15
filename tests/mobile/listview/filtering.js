@@ -6,15 +6,18 @@
 
     module("mobile listview filtering", {
         setup: function() {
+            jasmine.clock().install();
             var root = $("<div />").append('<div data-role="view"><ul/></div>');
             $("#qunit-fixture").html(root);
             ul = root.find('ul');
             application = new kendo.mobile.Application(root);
+            jasmine.clock().tick();
         },
         teardown: function() {
             application.destroy();
             $("#qunit-fixture").empty();
             kendo.history.stop();
+            jasmine.clock().uninstall();
         }
     });
 

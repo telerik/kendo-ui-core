@@ -24,7 +24,7 @@ test("value should set slider value", function() {
 test("value should not be null or empty string and should return old value", function() {
     var slider = newSlider();
 
-    slider.value(2)
+    slider.value(2);
 
     slider.value(" ");
 
@@ -204,7 +204,7 @@ test("enable method should remove state disabled from the slider", function () {
 test("refresh method should not select minimum when slider increase his value from -1 to 0", function () {
     var slider = newSlider({ showButtons: true, min: -5, value: -1 });
 
-    slider.value(0)
+    slider.value(0);
 
     ok(slider.value, 0);
 });

@@ -245,11 +245,11 @@
         setTimeout(function() {
             $$q(function(resolve, reject) { resolve({}); }).then(function(value) {
                 scope.foo = value;
-            });
 
-            setTimeout(function() {
-                start();
-                ok(QUnit.fixture.find("a").getKendoMobileButton());
+                 setTimeout(function() {
+                    start();
+                    ok(QUnit.fixture.find("a").getKendoMobileButton());
+                },100);
             });
         }, 100);
     });

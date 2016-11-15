@@ -19,6 +19,8 @@ var __meta__ = { // jshint ignore:line
         trim = $.trim,
         extend = $.extend,
         template = kendo.template,
+        outerWidth = kendo._outerWidth,
+        outerHeight = kendo._outerHeight,
         Widget = ui.Widget,
         excludedNodesRegExp = /^(a|div)$/i,
         NS = ".kendoTabStrip",
@@ -841,7 +843,7 @@ var __meta__ = { // jshint ignore:line
 
             that.contentElements = that.contentAnimators = that.wrapper.children("div"); // refresh the contents
 
-            that.tabsHeight = that.tabGroup.outerHeight() +
+            that.tabsHeight = outerHeight(that.tabGroup) +
                               parseInt(that.wrapper.css("border-top-width"), 10) +
                               parseInt(that.wrapper.css("border-bottom-width"), 10);
 
@@ -889,7 +891,7 @@ var __meta__ = { // jshint ignore:line
                     activeDiv = contentDivs.filter(":visible"),
                     marginStyleProperty = "margin-" + tabPosition,
                     tabGroup = that.tabGroup,
-                    margin = tabGroup.outerWidth();
+                    margin = outerWidth(tabGroup);
 
                 var minHeight = Math.ceil(tabGroup.height()) -
                     parseInt(activeDiv.css("padding-top"), 10) -
@@ -911,7 +913,7 @@ var __meta__ = { // jshint ignore:line
         _sizeScrollWrap: function (element) {
             if (element.is(":visible")) {
                 var tabPosition = this.options.tabPosition;
-                var h = Math.floor(element.outerHeight(true)) + (tabPosition === "left" || tabPosition === "right" ? 2 : this.tabsHeight);
+                var h = Math.floor(outerHeight(element, true)) + (tabPosition === "left" || tabPosition === "right" ? 2 : this.tabsHeight);
 
                 this.scrollWrap.css("height", h).css("height");
             }
@@ -988,7 +990,7 @@ var __meta__ = { // jshint ignore:line
                     scrollPrevButton = that._scrollPrevButton = that.wrapper.children(".k-tabstrip-prev");
                     scrollNextButton = that._scrollNextButton = that.wrapper.children(".k-tabstrip-next");
 
-                    that.tabGroup.css({ marginLeft: scrollPrevButton.outerWidth() + 9, marginRight: scrollNextButton.outerWidth() + 12 });
+                    that.tabGroup.css({ marginLeft: outerWidth(scrollPrevButton) + 9, marginRight: outerWidth(scrollNextButton) + 12 });
 
                     scrollPrevButton.on("mousedown" + NS, function () {
                         that._nowScrollingTabs = true;
@@ -1032,7 +1034,7 @@ var __meta__ = { // jshint ignore:line
             var that = this,
                 tabGroup = that.tabGroup,
                 currentScrollOffset = tabGroup.scrollLeft(),
-                itemWidth = item.outerWidth(),
+                itemWidth = outerWidth(item),
                 itemOffset = that._isRtl ? item.position().left : item.position().left - tabGroup.children().first().position().left,
                 tabGroupWidth = tabGroup[0].offsetWidth,
                 tabGroupPadding = Math.ceil(parseFloat(tabGroup.css("padding-left"))),
@@ -1161,7 +1163,7 @@ var __meta__ = { // jshint ignore:line
                 contentHolder = that.contentHolder(itemIndex),
                 contentElement = contentHolder.closest(".k-content");
 
-            that.tabsHeight = that.tabGroup.outerHeight() +
+            that.tabsHeight = outerHeight(that.tabGroup) +
                               parseInt(that.wrapper.css("border-top-width"), 10) +
                               parseInt(that.wrapper.css("border-bottom-width"), 10);
 

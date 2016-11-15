@@ -491,23 +491,25 @@
 
         setup('<div data-role="view" data-init="initListView"><div id="listview" style="height:300px"></div></div>');
 
-        $.mockjax.clear();
-        $.mockjax({ url: "foo.json", responseText: ["foo", "bar", "baz"] });
+        $(function () {
+            $.mockjax.clear();
+            $.mockjax({ url: "foo.json", responseText: ["foo", "bar", "baz"] });
 
-        function secondAssert() {
-            start();
-            equal(listview.children().length, 3);
-        }
+            function secondAssert() {
+                start();
+                equal(listview.children().length, 3);
+            }
 
-        function firstAssert() {
-            equal(listview.children().length, 2);
-            ds.unbind("change", firstAssert);
-            ds.bind("change", secondAssert);
+            function firstAssert() {
+                equal(listview.children().length, 2);
+                ds.unbind("change", firstAssert);
+                ds.bind("change", secondAssert);
 
-            application.scroller().trigger("pull");
-        }
+                application.scroller().trigger("pull");
+            }
 
-        ds.bind("change", firstAssert);
+            ds.bind("change", firstAssert);
+        });
     });
 
     asyncTest("Pull to refresh always sends page number 1", 1, function(){
@@ -536,22 +538,26 @@
         };
 
         setup('<div data-role="view" data-init="initListView"><div id="listview" style="height:300px"></div></div>');
-        var scroller = application.scroller();
 
-        $.mockjax.clear();
-        $.mockjax({ url: "foo.json", responseText: ["foo", "bar", "baz"] });
+        $(function() {
+            var scroller = application.scroller();
 
-        function firstAssert() {
             $.mockjax.clear();
-            scroller.trigger("pull");
-            start();
-        }
+            $.mockjax({ url: "foo.json", responseText: ["foo", "bar", "baz"] });
 
-        ds.bind("change", firstAssert);
+            function firstAssert() {
+                $.mockjax.clear();
+                scroller.trigger("pull");
+                start();
+            }
+
+            ds.bind("change", firstAssert);
+        });
     });
 
     test("Pull to refresh calls pull to refresh callback", 1, function(){
         var listview;
+
         window.initListView = function(e) {
             listview = e.view.element.find("#listview");
             listview.kendoMobileListView({
@@ -562,9 +568,14 @@
                 }
             });
         };
-
+ 
+        jasmine.clock().install();
         setup('<div data-role="view" data-init="initListView"><div id="listview" style="height:300px"></div></div>');
+
+        jasmine.clock().tick();
         application.scroller().trigger("pull");
+
+        jasmine.clock().uninstall();
     });
 
     asyncTest("Pull to refresh passes first item to the callback", 2, function(){
@@ -605,13 +616,16 @@
         };
 
         setup('<div data-role="view" data-init="initListView"><div id="listview" style="height:300px"></div></div>');
-        var scroller = application.scroller();
 
-        $.mockjax.clear();
-        $.mockjax({ url: "foo.json", responseText: ["foo1"] });
+        $(function() {
+            var scroller = application.scroller();
 
-        ds.bind("change", function() {
-            scroller.trigger("pull");
+            $.mockjax.clear();
+            $.mockjax({ url: "foo.json", responseText: ["foo1"] });
+
+            ds.bind("change", function() {
+                scroller.trigger("pull");
+            });
         });
     });
 })();

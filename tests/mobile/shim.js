@@ -3,6 +3,7 @@
 
     module("Mobile Shim", {
         setup: function () {
+            jasmine.clock().install();
             root = QUnit.fixture;
             root.html('<div data-role="view"><div id="shim"></div></div>').wrapInner("<div />");
             this.mobileOS = kendo.support.mobileOS;
@@ -14,6 +15,8 @@
             if (shim) {
                 shim.destroy();
             }
+
+            jasmine.clock().uninstall();
         }
     });
 
@@ -30,6 +33,8 @@
 
     test("initialized in app.pane.element", 1, function(){
         var a = new kendo.mobile.Application(app);
+        jasmine.clock().tick();
+
         shim = new kendo.mobile.ui.Shim(root.find("#shim"), {});
         ok(shim.shim.parent()[0] == a.pane.element[0]);
         a.destroy();
@@ -37,29 +42,31 @@
 
     test("defaults to forced application platform os", 1, function(){
         var a = new kendo.mobile.Application(app, { platform: "android" });
+        jasmine.clock().tick();
+
         shim = new kendo.mobile.ui.Shim(root.find("#shim"), {});
         ok(shim.popup.options.origin == "center center");
         a.destroy();
     });
 
-    asyncTest("triggers hide when popup is closed", 1, function(){
+    test("triggers hide when popup is closed", 2, function(){
         kendo.mobile.application = null;
         shim = new kendo.mobile.ui.Shim(root.find("#shim"), { modal: false });
         shim.show();
 
-        shim.bind("hide", function() {
-            setTimeout(function() {
-                start();
-                ok(!shim.shim.is(":visible"));
-            }, 210);
-        });
+        ok(shim.shim.is(":visible"));
 
         shim.popup._resize({});
+
+        jasmine.clock().tick(1000);
+
+        ok(!shim.shim.is(":visible"));
     });
 
-    asyncTest("does not trigger hide from the API", 2, function(){
+    test("does not trigger hide from the API", 2, function(){
         kendo.mobile.application = null;
         shim = new kendo.mobile.ui.Shim(root.find("#shim"), { modal: false });
+
         shim.show();
 
         var called = false;
@@ -68,12 +75,11 @@
             called = true;
         });
 
-        setTimeout(function() {
-            start();
-            ok(!called);
-            ok(!shim.shim.is(":visible"));
-        }, 210);
-
         shim.hide();
+
+        jasmine.clock().tick(1000);
+
+        ok(!called);
+        ok(!shim.shim.is(":visible"));
     });
 })();

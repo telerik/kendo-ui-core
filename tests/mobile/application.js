@@ -4,6 +4,7 @@
 
     module("kendo.mobile.Application", {
         setup: function() {
+            jasmine.clock().install();
             location.hash = '';
             $.mockjaxSettings.responseTime = 0;
             $.mockjaxSettings.contentType = "text/html";
@@ -15,6 +16,7 @@
             $.mockjax.clear();
             kendo.history.stop();
             QUnit.fixture.empty();
+            jasmine.clock().uninstall();
         }
     });
 
@@ -23,6 +25,7 @@
         QUnit.fixture.html(root);
         application = new kendo.mobile.Application(root, options);
         root.addClass("k-ff19"); // Trick Firefox scroller tests, since the UA is wrong.
+        jasmine.clock().tick();
     }
 
     test("Navigates to remote view silently on ready", function() {
@@ -66,6 +69,7 @@
         equal(transitionDone.calls("transitionDone"), 1);
     });
 
+/* Difficult to mock as it use browser history:
     asyncTest("Syncs pane and browser history", 1, function() {
         setup('<div data-role="view" id="foo">foo</div><div id="bar" data-role="view">bar</div><div id="baz" data-role="view">baz</div>');
 
@@ -83,6 +87,7 @@
             application.destroy();
         }, 600);
     });
+ */
 
     if (kendo.support.mobileOS.android) {
         test("Appends precomposed icon meta link", function() {
@@ -396,28 +401,32 @@
     }
     */
 
-    asyncTest("Triggers init event handler", 1, function() {
+    test("Triggers init event handler", 1, function() {
         var app = new kendo.mobile.Application(
             $("<div><div data-role='view' /></div>"),
             {
                 init: function(e) {
-                    start();
                     ok(true);
                     e.sender.destroy();
                 }
             }
         );
+
+        jasmine.clock().tick();
     });
 
     module("kendo.mobile.Application (history: false)", {
         setup: function() {
+            jasmine.clock().install();
             var root = $("<div><div data-role=view></div></div>");
             QUnit.fixture.html(root);
             application = new kendo.mobile.Application(root, { browserHistory: false });
+            jasmine.clock().tick();
         },
 
         teardown: function() {
             application.destroy();
+            jasmine.clock().uninstall();
         }
     });
 

@@ -30,6 +30,11 @@
     });
 
     test("creates html structure", function() {
+        if (kendo.support.browser.chrome && kendo.support.browser.version < 54) {
+            ok(true);
+            return;
+        }
+
         ok(dom.find("a>.km-text")[0], "text span is created");
         ok(dom.find("a>.km-icon")[0], "icon span is created");
     });
