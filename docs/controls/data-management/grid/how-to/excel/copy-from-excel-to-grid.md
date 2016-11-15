@@ -53,14 +53,16 @@ The example below demonstrates how to create a Kendo UI Grid that supports pasti
             var data = [];
 
             for (var i = 0; i < rows.length; i++) {
-              // get the cells - split by tab
               var cells = rows[i].split('\t');
-              // add a new item in the grid
-              grid.dataSource.add({
-                Name: cells[0],
-                Age: cells[1]
+              data.push({
+                FirstName: cells[0],
+                SerialNo: cells[1],
+                Option: cells[2],
+                Quantity: cells[3]
               });
-            }
+              
+            };
+            grid.dataSource.data(data);
           });
         }).on('focusout', function() {
           // remove the textarea when it loses focus
