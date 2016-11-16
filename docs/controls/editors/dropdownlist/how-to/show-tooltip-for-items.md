@@ -1,13 +1,17 @@
 ---
-title: Show list items details in a Kendo UI ToolTip
-page_title: Show list items details in a Kendo UI ToolTip | Kendo UI DropDownList
-description: "Learn how to show list items details in a Kendo UI ToolTip"
+title: Show List Item Details in ToolTip
+page_title: Show List Item Details in ToolTip | Kendo UI DropDownList
+description: "Learn how to show details for Kendo UI DropDownList items by using a Kendo UI Tooltip."
 slug: howto_show_list_items_details_in_tooltip_dropdownlist
 ---
 
-# Show list items details in a Kendo UI ToolTip
+# Show List Item Details in ToolTip
 
-The example below demonstrates how to show list items details in a Kendo UI ToolTip.
+Sometimes you might need to show additional information about a list item in a Kendo UI DropDownList.
+
+A possible way to achieve this behavior is to use a Kendo UI Tooltip that displays the details when the user hovers with the mouse over the DropDownList item.
+
+The example below demonstrates how to customize the information displayed in the Tooltip depending on the respective data item fields.
 
 ###### Example
 
@@ -32,12 +36,12 @@ The example below demonstrates how to show list items details in a Kendo UI Tool
     position: 'right',
     content: function(e){
       var item = ddl.dataItem($(e.target));
-      
+
       var result = '<h3>' + item.name + '</h3>' +
-					'<h4>' + item.email + '</h4>' + 
-          'Address: <hr />' + 
-          '<p>Street: ' + item.address.street + '</p>' + 
-          '<p>Suite: ' + item.address.suite + '</p>' + 
+					'<h4>' + item.email + '</h4>' +
+          'Address: <hr />' +
+          '<p>Street: ' + item.address.street + '</p>' +
+          '<p>Suite: ' + item.address.suite + '</p>' +
           '<p>ZIP Code: ' + item.address.zipcode + '</p>';
 
       return result;

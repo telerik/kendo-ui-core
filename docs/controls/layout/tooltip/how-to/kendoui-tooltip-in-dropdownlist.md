@@ -1,15 +1,15 @@
 ---
-title: Show Tooltip for Kendo UI DropDownList items
-page_title: Show Tooltip for Kendo UI DropDownList items | Kendo UI ToolTip
-description: "Learn how to show additional information about the Kendo UI DropDownList items in a Kendo UI Tooltip widget."
+title: Show Tooltip for DropDownList Items
+page_title: Show Tooltip for DropDownList Items | Kendo UI ToolTip
+description: "Learn how to show details for Kendo UI DropDownList items by using a Kendo UI Tooltip."
 slug: howto_showtooltipfordropdownlistitems_tooltip
 ---
 
-# Show Tooltip for DropDownList items
+# Show Tooltip for DropDownList Items
 
-Sometimes you might need to show additional information about an item in a Kendo UI DropDownList.
+Sometimes you might need to show additional information about a list item in a Kendo UI DropDownList.
 
-A possible way to achieve this is to use a Kendo UI Tooltip that displays the information when the user hovers with the mouse over the list item.
+A possible way to achieve this behavior is to use a Kendo UI Tooltip that displays the details when the user hovers with the mouse over the DropDownList item.
 
 To see the example, refer to [this how-to article]({% slug howto_show_list_items_details_in_tooltip_dropdownlist %}).
 
