@@ -1617,7 +1617,7 @@ After the section's closing tag `</section>`, add a new `div` with a `class` of 
 	                .Name("menuPanelOpen")
 	                .Content("menu")
 	                .Icon("hbars")
-	                .HtmlAttributes(new { @class = "k-rpanel-toggle" }
+	                .HtmlAttributes(new { @class = "k-rpanel-toggle" })
 	    )
 	</div>
 
