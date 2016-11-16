@@ -8734,7 +8734,9 @@ If invoked the grid will not save the generated file.
 
 Fired when the user is about to filter the DataSource via the filter UI.
 
-The event handler function context (available via the `this` keyword) will be set to the widget instance.
+The event handler function context (available via the `this` keyword) will be set to the widget instance. 
+
+Introduced in the Kendo UI 2016 R3 (2016.3.914) release.
 
 #### Event Data
 
@@ -8825,6 +8827,8 @@ Fired when the user is about to group the DataSource or modify the group descrip
 
 The event handler function context (available via the `this` keyword) will be set to the widget instance.
 
+Introduced in the Kendo UI 2016 R3 (2016.3.914) release.
+
 #### Event Data
 
 ##### e.groups `Array`
@@ -8901,6 +8905,8 @@ The widget instance which fired the event.
 Fired when the user is about change the current page index of DataSource via the pager UI.
 
 The event handler function context (available via the `this` keyword) will be set to the widget instance.
+
+Introduced in the Kendo UI 2016 R3 (2016.3.914) release.
 
 #### Event Data
 
@@ -9394,6 +9400,8 @@ The widget instance which fired the event.
 Fired when the user is about to modify the current state of sort descriptors of DataSource via the sort UI.
 
 The event handler function context (available via the `this` keyword) will be set to the widget instance.
+
+Introduced in the Kendo UI 2016 R3 (2016.3.914) release.
 
 #### Event Data
 
