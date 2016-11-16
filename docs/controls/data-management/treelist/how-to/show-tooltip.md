@@ -1,5 +1,5 @@
 ---
-title: Show Extra Information in Tooltip
+title: Show List Entry Details in Tooltip
 page_title: Show Extra Information in Tooltip | Kendo UI TreeList
 description: "Learn how to show additional information about a Kendo UI TreeList entry by using the Kendo UI Tooltip widget."
 slug: howto_showtooltip_treelist
