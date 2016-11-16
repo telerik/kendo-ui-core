@@ -11,6 +11,17 @@ position: 2
 
 Kendo UI provides a set of [custom elements](http://w3c.github.io/webcomponents/spec/custom/) allowing the initialization and application of the Kendo UI widgets in the Web Components way.
 
+## Include Scripts
+
+Starting from the Kendo UI 2017.R1 release, the WebComponents integration is not loaded by default. To add it to your project, you need to include it separately.
+
+###### Example
+
+```html
+    <script src="http://kendo.cdn.telerik.com/{{ site.cdnVersion }}/js/kendo.all.min.js"></script>
+    <script src="http://kendo.cdn.telerik.com/{{ site.cdnVersion }}/js/kendo.webcomponents.min.js"></script>
+```
+
 ## Initialize Widgets
 
 Initializing a Kendo UI widget is as simple as adding the desired custom element to the DOM. To provide values for the initialization options, use attributes and child nodes. Specify options of the `Object` type by using JSON strings.
