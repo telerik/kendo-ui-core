@@ -155,7 +155,7 @@ Compression can make a big difference in the output file size when you are using
 
 ## Supported Browsers
 
-For more information on the provided [browser support]({% slug wbe_browserand_operating_system_support %}), refer to the section on [PDF export]({% slug wbe_browserand_operating_system_support %}}#pdf-export).
+For more information on the provided [browser support]({% slug wbe_browserand_operating_system_support %}), refer to the section on [PDF export]({% slug wbe_browserand_operating_system_support %}#pdf-export).
 
 ## See Also
 
