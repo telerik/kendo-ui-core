@@ -11,7 +11,7 @@ Sometimes you might need to show additional information about an entry in a Kend
 
 A possible way to achieve this behavior is to use a Kendo UI Tooltip that displays the information when the user hovers with the mouse over the TreeList node.
 
-The example below demonstrates how to customize the information displayed by the Tooltip by configuring the `dataItem` property.
+The example below demonstrates how to customize the information displayed in the Tooltip depending on the respective data item fields.
 
 ###### Example
 
