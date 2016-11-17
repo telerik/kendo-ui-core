@@ -1,4 +1,15 @@
 (function ($, undefined) {
+
+/* Calendar messages */
+
+if (kendo.ui.Calendar) {
+kendo.ui.Calendar.prototype.options.messages =
+$.extend(true, kendo.ui.Calendar.prototype.options.messages,{
+  "Wk": "Wk",
+  "Week": "Week"
+});
+}
+
 /* FlatColorPicker messages */
 
 if (kendo.ui.FlatColorPicker) {
