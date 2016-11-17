@@ -445,7 +445,9 @@ if (kendo.ui.FlatColorPicker) {
 kendo.ui.FlatColorPicker.prototype.options.messages =
 $.extend(true, kendo.ui.FlatColorPicker.prototype.options.messages,{
   "apply": "Приложи",
-  "cancel": "Откажи"
+  "cancel": "Откажи",
+  "noColor": "без цвят",
+  "clearColor": "Махни цвета"
 });
 }
 
@@ -455,7 +457,9 @@ if (kendo.ui.ColorPicker) {
 kendo.ui.ColorPicker.prototype.options.messages =
 $.extend(true, kendo.ui.ColorPicker.prototype.options.messages,{
   "apply": "Приложи",
-  "cancel": "Откажи"
+  "cancel": "Откажи",
+  "noColor": "без цвят",
+  "clearColor": "Махни цвета"
 });
 }
 

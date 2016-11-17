@@ -788,6 +788,19 @@ span.k-numerictextbox
         display: inline-block;
         height: 2em;
         width: 2em;
+        .p-i-line {
+            font-size: 2em;
+            color: #FF525E;
+            -moz-transform: scaleX(-1);
+            -o-transform: scaleX(-1);
+            -webkit-transform: scaleX(-1);
+            transform: scaleX(-1);
+            filter: FlipH;
+            -ms-filter: "FlipH";
+        }
+        .p-i-line:before {
+            content: "\e512";
+        }
     }
     .k-tool-icon {
         position: relative;
@@ -870,7 +883,7 @@ span.k-numerictextbox
 {
     position: relative;
     display: inline-block;
-    width: 250px;
+    width: 265px;
     padding-bottom: 5px;
 
     div& {
@@ -885,10 +898,23 @@ span.k-numerictextbox
 
         input.k-color-value {
             font-family: Consolas,"Ubuntu Mono","Lucida Console","Courier New",monospace;
-            padding: .75em .3em .65em 1em;
+            padding: .75em .1em .65em .65em;
             border: 0;
             margin: 0;
-            width: 70%;
+            width: 82%;
+        }
+        .k-color-input {
+            background-color: #ffffff;
+            display: inline-block;
+            width: 84%;
+        }
+        .k-clear-color {
+            padding: .4em;
+            line-height: 0;
+            .k-i-reset-color:before {
+                content: "\e511";
+                color: 	#8a8c99;
+            }
         }
     }
 
