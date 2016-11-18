@@ -986,7 +986,7 @@ var __meta__ = { // jshint ignore:line
                     that._nowScrollingTabs = false;
                     that._isRtl = kendo.support.isRtl(that.element);
 
-                    that.wrapper.append(scrollButtonHtml("prev", "k-i-arrow-w") + scrollButtonHtml("next", "k-i-arrow-e"));
+                    that.wrapper.append(scrollButtonHtml("prev", "k-i-arrow-60-left") + scrollButtonHtml("next", "k-i-arrow-60-right"));
 
                     scrollPrevButton = that._scrollPrevButton = that.wrapper.children(".k-tabstrip-prev");
                     scrollNextButton = that._scrollNextButton = that.wrapper.children(".k-tabstrip-next");

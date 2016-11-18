@@ -36,12 +36,12 @@ module("menu api", {
         QUnit.fixture.append(
             '    <ul id="menu" class="k-widget k-reset k-header k-menu" style="visibility: hidden; top: -10000px">' +
             '        <li class="k-item k-state-default" style=""><span class="k-link">ASP.NET MVC<span' +
-            '                class="k-icon k-i-arrow-s"></span></span>' +
+            '                class="k-icon k-i-arrow-60-down"></span></span>' +
             '            <ul class="k-group">' +
             '                <li class="k-item k-state-default"><span class="k-link">Grid</span>' +
             '                </li>' +
             '                <li class="k-item k-state-default"><span class="k-link">Menu<span' +
-            '                class="k-icon k-i-arrow-e"></span></span>' +
+            '                class="k-icon k-i-arrow-60-right"></span></span>' +
             '                    <ul class="k-group">' +
             '                        <li class="k-item k-state-default"><span class="k-link">Grid</span>' +
             '                        </li>' +
@@ -55,7 +55,7 @@ module("menu api", {
             '                <li class="k-item k-state-default"><span class="k-link">TabStrip</span></li>' +
             '            </ul>' +
             '        </li><li class="k-item k-state-default"><span class="k-link">Silverlight<span' +
-            '                class="k-icon k-i-arrow-s"></span></span>' +
+            '                class="k-icon k-i-arrow-60-down"></span></span>' +
             '            <ul class="k-group">' +
             '                <li class="k-item k-state-default"><span class="k-link">GridView</span>' +
             '                </li>' +
@@ -67,7 +67,7 @@ module("menu api", {
             '                                                      class="k-link">... and 28 more!</a></li>' +
             '            </ul>' +
             '        </li><li class="k-item k-state-default"><span class="k-link">ASP.NET AJAX<span' +
-            '                class="k-icon k-i-arrow-s"></span></span>' +
+            '                class="k-icon k-i-arrow-60-down"></span></span>' +
             '            <ul class="k-group">' +
             '                <li class="k-item k-state-default"><span class="k-link">Grid</span></li>' +
             '                <li class="k-item k-state-default"><span class="k-link">Editor</span>' +
@@ -77,7 +77,7 @@ module("menu api", {
             '                                                      class="k-link">... and 28 more!</a></li>' +
             '            </ul>' +
             '        </li><li class="k-item k-state-default"><a href="#Menu-4" class="k-link">OpenAccess ORM<span' +
-            '                class="k-icon k-i-arrow-s"></span></a>' +
+            '                class="k-icon k-i-arrow-60-down"></span></a>' +
             '            <ul class="k-group">' +
             '                <li class="k-item">' +
             '                    <div id="Menu-4" class="k-content">' +
@@ -92,7 +92,7 @@ module("menu api", {
             '            </ul>' +
             '        </li><li class="k-item k-state-default"><span class="k-link">Reporting</span></li><li class="k-item k-state-default"><span class="k-link">Sitefinity ASP.NET CMS</span>' +
             '        </li><li style="border-right: 0;" class="k-item k-state-default"><span class="k-link">Other products<span' +
-            '                class="k-icon k-i-arrow-s"></span></span>' +
+            '                class="k-icon k-i-arrow-60-down"></span></span>' +
             '            <ul class="k-group">' +
             '                <li class="k-item k-state-default"><span class="k-link">Web Testing Tools</span>' +
             '                </li>' +

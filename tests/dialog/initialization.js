@@ -34,7 +34,7 @@
         ok(wrapper.is(".k-widget.k-dialog.k-window"));
         ok(wrapperChildren.eq(0).is(".k-window-titlebar"));
         ok(wrapperChildren.eq(0).children().eq(1).is(".k-dialog-action.k-dialog-close"));
-        ok(wrapperChildren.eq(0).children().eq(1).children().eq(0).is(".k-font-icon.k-i-x"));
+        ok(wrapperChildren.eq(0).children().eq(1).children().eq(0).is(".k-icon.k-i-close"));
         ok(wrapperChildren.eq(1).is(".k-content"));
         equal(wrapper.find(".k-dialog-buttongroup").length, 0);
     });
@@ -48,7 +48,7 @@
 
         ok(wrapper.is(".k-widget.k-dialog.k-window"));
         ok(wrapperChildren.eq(0).is(".k-dialog-action.k-dialog-close"));
-        ok(wrapperChildren.eq(0).children().eq(0).is(".k-font-icon.k-i-x"));
+        ok(wrapperChildren.eq(0).children().eq(0).is(".k-icon.k-i-close"));
         ok(wrapperChildren.eq(1).is(".k-content"));
         equal(wrapper.find(".k-dialog-buttongroup").length, 0);
     });

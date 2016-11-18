@@ -725,11 +725,11 @@ var __meta__ = { // jshint ignore:line
         },
 
         _loader: function() {
-            this._loading = $('<span class="p-icon p-i-loading" style="display:none"></span>').insertAfter(this.element);
+            this._loading = $('<span class="k-icon k-i-loading" style="display:none"></span>').insertAfter(this.element);
         },
 
         _clearButton: function() {
-            this._clear = $('<span unselectable="on" class="p-icon p-i-close" title="clear"></span>').attr({
+            this._clear = $('<span unselectable="on" class="k-icon k-i-close" title="clear"></span>').attr({
                 "role": "button",
                 "tabIndex": -1
             });

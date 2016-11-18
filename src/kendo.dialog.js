@@ -1,4 +1,4 @@
-﻿(function(f, define) {
+(function(f, define) {
     define(["./kendo.core", "./kendo.popup"], f);
 })(function() {
 
@@ -948,7 +948,7 @@
                     "<span class='k-window-title k-dialog-title'>#= title #</span>" +
                 "</div>"
             ),
-            close: template("<a role='button' href='\\#' class='k-button-bare k-dialog-action k-dialog-close' title='#= messages.close #' aria-label='#= messages.close #' tabindex='-1'><span class='k-font-icon k-i-x'></span></a>"),
+            close: template("<a role='button' href='\\#' class='k-button-bare k-dialog-action k-dialog-close' title='#= messages.close #' aria-label='#= messages.close #' tabindex='-1'><span class='k-icon k-i-close'></span></a>"),
             actionbar: template("<div class='k-dialog-buttongroup k-dialog-button-layout-#= buttonLayout #' role='toolbar' />"),
             overlay: "<div class='k-overlay' />",
             alertWrapper: template("<div class='k-widget k-dialog k-window' role='alertdialog' />"),

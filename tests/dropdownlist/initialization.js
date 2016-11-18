@@ -106,7 +106,7 @@
         ok(spanArrow.is("span"));
         ok(spanArrow.hasClass("k-select"));
         ok(arrow.is("span"));
-        ok(arrow.hasClass("k-icon k-i-arrow-s"));
+        ok(arrow.hasClass("k-icon k-i-arrow-60-down"));
         equal(arrow.html(), "");
     });
 
@@ -1103,7 +1103,7 @@
         var icon = filterHeader.find("input").next();
 
         ok(icon[0]);
-        ok(icon.hasClass("k-i-search"));
+        ok(icon.hasClass("k-i-zoom"));
     });
 
     test("widget does not retrieve data attributes if options are set", function() {

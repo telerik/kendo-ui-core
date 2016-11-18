@@ -299,7 +299,7 @@ var __meta__ = { // jshint ignore:line
             var closeButton = target.hasClass("k-select") || target.hasClass("k-icon");
 
             if (closeButton) {
-                closeButton = !target.closest(".k-select").children(".k-i-arrow-s").length;
+                closeButton = !target.closest(".k-select").children(".k-i-arrow-60-down").length;
             }
 
             if (notInput && !(closeButton && kendo.support.mobileOS)) {
@@ -381,7 +381,7 @@ var __meta__ = { // jshint ignore:line
         _tagListClick: function(e) {
             var target = $(e.currentTarget);
 
-            if (!target.children(".k-i-arrow-s").length) {
+            if (!target.children(".k-i-arrow-60-down").length) {
                 this._removeTag(target.closest(LI));
             }
         },
@@ -1171,7 +1171,7 @@ var __meta__ = { // jshint ignore:line
                         '</span><span unselectable="on" aria-label="' +
                         (isMultiple ? "delete" : "open") +
                         '" class="k-select"><span class="k-icon ' +
-                        (isMultiple ? "k-i-close" : "k-i-arrow-s") + '">' +
+                        (isMultiple ? "k-i-close" : "k-i-arrow-60-down") + '">' +
                         '</span></span></li>';
             };
         },

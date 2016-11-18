@@ -566,9 +566,9 @@ var __meta__ = { // jshint ignore:line
         var buttonCssClass = "";
 
         if (type == "increase") {
-            buttonCssClass = isHorizontal ? "k-i-arrow-e" : "k-i-arrow-n";
+            buttonCssClass = isHorizontal ? "k-i-arrow-60-right" : "k-i-arrow-60-up";
         } else {
-            buttonCssClass = isHorizontal ? "k-i-arrow-w" : "k-i-arrow-s";
+            buttonCssClass = isHorizontal ? "k-i-arrow-60-left" : "k-i-arrow-60-down";
         }
 
         return "<a class='k-button k-button-" + type + "' " +

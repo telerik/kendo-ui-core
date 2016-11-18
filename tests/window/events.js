@@ -88,7 +88,7 @@
                 }
             });
 
-        dialog.wrapper.find(".k-i-minimize").trigger("click");
+        dialog.wrapper.find(".k-i-window-minimize").trigger("click");
 
         equal(triggers, 1);
     });
@@ -102,7 +102,7 @@
                 }
             });
 
-        dialog.wrapper.find(".k-i-maximize").trigger("click");
+        dialog.wrapper.find(".k-i-window-maximize").trigger("click");
 
         equal(triggers, 1);
     });

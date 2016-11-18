@@ -14,7 +14,7 @@
             }
         });
 
-        splitter.dom.find(".k-collapse-prev").trigger("click");
+        splitter.dom.find(".k-i-arrow-60-left").trigger("click");
 
         ok(triggered);
         equal(triggered.pane, splitter.dom.find(".k-pane:first")[0]);
@@ -28,7 +28,7 @@
             }
         });
 
-        splitter.dom.find(".k-collapse-prev").trigger("click");
+        splitter.dom.find(".k-i-arrow-60-left").trigger("click");
 
         ok(!splitter.dom.find(".k-pane:first").data("pane").collapsed);
     });
@@ -44,7 +44,7 @@
             called = pane;
         };
 
-        splitter.dom.find(".k-collapse-prev").trigger("click");
+        splitter.dom.find(".k-i-arrow-60-left").trigger("click");
 
         equal(called, splitter.dom.find(".k-pane:first")[0]);
     });
@@ -94,7 +94,7 @@
             }
         });
 
-        splitter.dom.find(".k-expand-prev").trigger("click");
+        splitter.dom.find(".k-i-arrow-60-right").trigger("click");
 
         ok(triggered);
         equal(triggered.pane, splitter.dom.find(".k-pane:first")[0]);
@@ -108,7 +108,7 @@
             }
         });
 
-        splitter.dom.find(".k-expand-prev").trigger("click");
+        splitter.dom.find(".k-i-arrow-60-right").trigger("click");
 
         ok(splitter.dom.find(".k-pane:first").data("pane").collapsed);
     });
@@ -123,7 +123,7 @@
             called = pane;
         };
 
-        splitter.dom.find(".k-expand-prev").trigger("click");
+        splitter.dom.find(".k-i-arrow-60-right").trigger("click");
 
         equal(called, splitter.dom.find(".k-pane:first")[0]);
     });
@@ -237,7 +237,7 @@
         splitter.object.collapse(".k-pane:first");
 
         ok(splitter.dom.find(".k-splitbar").is(":not(.k-splitbar-draggable-horizontal)"));
-        ok(!splitter.dom.find(".k-splitbar .k-collapse-next").length);
+        ok(!splitter.dom.find(".k-splitbar .k-i-arrow-60-left").length);
     });
 
     test("collapsing pane disables collapsing of previous pane", function() {
@@ -248,7 +248,7 @@
         splitter.object.collapse(".k-pane:last");
 
         ok(splitter.dom.find(".k-splitbar").is(":not(.k-splitbar-draggable-horizontal)"));
-        ok(!splitter.dom.find(".k-splitbar .k-collapse-prev").length);
+        ok(!splitter.dom.find(".k-splitbar .k-i-arrow-60-right").length);
     });
 
     test("collapsing the last fluid pane distributes remaining size to neighbour pane", function() {
@@ -306,7 +306,7 @@
             ]
         });
 
-        splitter.dom.find(".k-collapse-prev")
+        splitter.dom.find(".k-i-arrow-60-left")
             .trigger("mousedown")
             .trigger("mouseup")
             .trigger("click");
@@ -319,7 +319,7 @@
             panes: [ { collapsible: true }, {} ]
         });
 
-        splitter.dom.find(".k-collapse-prev")
+        splitter.dom.find(".k-i-arrow-60-left")
             .trigger("mousedown")
 
         splitter.dom.find(".k-overlay:first")
@@ -337,9 +337,9 @@
             ]
         });
 
-        splitter.dom.find(".k-collapse-prev").click();
+        splitter.dom.find(".k-i-arrow-60-left").click();
 
-        splitter.dom.find(".k-expand-prev").click();
+        splitter.dom.find(".k-i-arrow-60-right").click();
 
         equal(splitter.dom.find(".k-pane:first").width(), 100);
     });
@@ -361,7 +361,7 @@
             keyCode: keys.ENTER
         });
 
-        splitbar.find(".k-collapse-prev").click();
+        splitbar.find(".k-i-arrow-60-left").click();
 
         equal(splitter.dom.find(".k-pane:first").width(), 0);
     });
@@ -374,7 +374,7 @@
             ]
         });
 
-        splitter.dom.find(".k-collapse-prev").click();
+        splitter.dom.find(".k-i-arrow-60-left").click();
 
         equal(splitter.dom.find(".k-pane:first").width(), 20);
     });
@@ -398,7 +398,7 @@
             ]
         });
 
-        splitter.dom.find(".k-collapse-prev").click();
+        splitter.dom.find(".k-i-arrow-60-left").click();
 
         ok(splitter.dom.find(".k-pane:first").hasClass("k-state-collapsed"));
     });

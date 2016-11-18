@@ -228,7 +228,6 @@ var __meta__ = { // jshint ignore:line
                         element.addClass(BUTTON_ICON_TEXT);
                     }
                 }
-
                 if (icon) {
                     span = element.children("span." + ICON).first();
                     if (!span[0]) {
@@ -238,7 +237,7 @@ var __meta__ = { // jshint ignore:line
                 } else if (spriteCssClass) {
                     span = element.children("span.k-sprite").first();
                     if (!span[0]) {
-                        span = $('<span class="k-sprite"></span>').prependTo(element);
+                        span = $('<span class="k-sprite ' + ICON + '"></span>').prependTo(element);
                     }
                     span.addClass(spriteCssClass);
                 } else if (imageUrl) {
@@ -465,7 +464,7 @@ var __meta__ = { // jshint ignore:line
                 this.toolbar = toolbar;
 
                 this.mainButton = new ToolBarButton($.extend({}, options, { hidden: false }), toolbar);
-                this.arrowButton = $('<a class="' + BUTTON + " " + SPLIT_BUTTON_ARROW + '"><span class="' + (options.mobile ? "km-icon km-arrowdown" : "k-icon k-i-arrow-s") + '"></span></a>');
+                this.arrowButton = $('<a class="' + BUTTON + " " + SPLIT_BUTTON_ARROW + '"><span class="' + (options.mobile ? "km-icon km-arrowdown" : "k-icon k-i-arrow-60-down") + '"></span></a>');
                 this.popupElement = $('<ul class="' + LIST_CONTAINER + '"></ul>');
 
                 this.mainButton.element
@@ -620,7 +619,6 @@ var __meta__ = { // jshint ignore:line
 
                 this.mainButton = new OverflowButton($.extend({ isChild: true }, options));
                 this.mainButton.element.appendTo(element);
-
                 for (var i = 0; i < items.length; i++) {
                     item = new OverflowButton($.extend({ mobile: options.mobile, isChild: true }, items[i]), this.toolbar);
                     item.element.appendTo(element);
@@ -1187,7 +1185,7 @@ var __meta__ = { // jshint ignore:line
                     that.overflowAnchor.append('<span class="km-icon km-more"></span>');
                     overflowContainer = actionSheetWrap(overflowContainer);
                 } else {
-                    that.overflowAnchor.append('<span class="k-icon k-i-arrow-s"></span>');
+                    that.overflowAnchor.append('<span class="k-icon k-i-arrow-60-down"></span>');
                 }
 
                 that.popup = new kendo.ui.Popup(overflowContainer, {

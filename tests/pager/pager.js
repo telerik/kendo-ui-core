@@ -370,25 +370,25 @@
     test("shows prev button", function() {
         var pager = setup({}, { previousNext: true });
 
-        equal(pager.find(".k-i-arrow-w").length, 1);
+        equal(pager.find(".k-i-arrow-60-left").length, 1);
     });
 
     test("shows first button", function() {
         var pager = setup({}, { previousNext: true });
 
-        equal(pager.find(".k-pager-first .k-i-seek-w").length, 1);
+        equal(pager.find(".k-pager-first .k-i-arrow-end-left").length, 1);
     });
 
     test("shows next button", function() {
         var pager = setup({}, { previousNext: true });
 
-        equal(pager.find(".k-i-arrow-e").length, 1);
+        equal(pager.find(".k-i-arrow-60-right").length, 1);
     });
 
     test("shows last button", function() {
         var pager = setup({}, { previousNext: true });
 
-        equal(pager.find(".k-pager-last .k-i-seek-e").length, 1);
+        equal(pager.find(".k-pager-last .k-i-arrow-end-right").length, 1);
     });
 
     test("first button is disabled on the first page", function() {
@@ -408,7 +408,7 @@
     test("prev button is disabled on the first page", function() {
         var pager = setup({}, { previousNext: true });
 
-        ok(pager.find(".k-i-arrow-w").parent().hasClass("k-state-disabled"));
+        ok(pager.find(".k-i-arrow-60-left").parent().hasClass("k-state-disabled"));
     });
 
     test("prev button is enabled on any page but first", function() {
@@ -417,7 +417,7 @@
         dataSource.read();
         dataSource.page(2);
 
-        ok(!pager.find(".k-i-arrow-w").parent().hasClass("k-state-disabled"));
+        ok(!pager.find(".k-i-arrow-60-left").parent().hasClass("k-state-disabled"));
     });
 
     test("prev button page data attribute is set to page minus one", function() {
@@ -426,7 +426,7 @@
         dataSource.read();
         dataSource.page(3);
 
-        equal(pager.find(".k-i-arrow-w").parent().data(kendo.ns + "page"), 2);
+        equal(pager.find(".k-i-arrow-60-left").parent().data(kendo.ns + "page"), 2);
     });
 
     test("next button is disabled on the last page", function() {
@@ -434,14 +434,14 @@
 
         dataSource.read();
         dataSource.page(5);
-        ok(pager.find(".k-i-arrow-e").parent().hasClass("k-state-disabled"));
+        ok(pager.find(".k-i-arrow-60-right").parent().hasClass("k-state-disabled"));
     });
 
     test("next button is enabled on any page but last", function() {
         var pager = setup({}, { previousNext: true });
 
         dataSource.read();
-        ok(!pager.find(".k-i-arrow-e").parent().hasClass("k-state-disabled"));
+        ok(!pager.find(".k-i-arrow-60-right").parent().hasClass("k-state-disabled"));
     });
 
     test("next button page data attribute is set to page plus one", function() {
@@ -450,7 +450,7 @@
         dataSource.read();
         dataSource.page(3);
 
-        equal(pager.find(".k-i-arrow-e").parent().data(kendo.ns + "page"), 4);
+        equal(pager.find(".k-i-arrow-60-right").parent().data(kendo.ns + "page"), 4);
     });
 
     test("last button is disabled on the last page", function() {
@@ -507,7 +507,7 @@
             autoBind: false
         });
 
-        ok(!pager.find(".k-i-arrow-w").parent().hasClass("k-state-disabled"));
+        ok(!pager.find(".k-i-arrow-60-left").parent().hasClass("k-state-disabled"));
     });
 
     test("next is enabled if the data source is read before pager init", function() {
@@ -524,7 +524,7 @@
             autoBind: false
         });
 
-        ok(!pager.find(".k-i-arrow-e").parent().hasClass("k-state-disabled"));
+        ok(!pager.find(".k-i-arrow-60-right").parent().hasClass("k-state-disabled"));
     });
 
     test("last is enabled if the data source is read before pager init", function() {
@@ -647,7 +647,7 @@
     test("displays refresh button", function() {
         var pager = setup({}, { refresh: true });
 
-        equal(pager.find(".k-i-refresh").length, 1);
+        equal(pager.find(".k-i-reload").length, 1);
     });
 
     test("clicking the refresh button reads from the data source", function() {
@@ -660,7 +660,7 @@
             }
         });
 
-        pager.find(".k-i-refresh").click();
+        pager.find(".k-i-reload").click();
 
         equal(dataSource.calls("read"), 1);
     });

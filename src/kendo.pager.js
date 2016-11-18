@@ -15,10 +15,10 @@ var __meta__ = { // jshint ignore:line
         ui = kendo.ui,
         Widget = ui.Widget,
         proxy = $.proxy,
-        FIRST = ".k-i-seek-w",
-        LAST = ".k-i-seek-e",
-        PREV = ".k-i-arrow-w",
-        NEXT = ".k-i-arrow-e",
+        FIRST = ".k-i-arrow-end-left",
+        LAST = ".k-i-arrow-end-right",
+        PREV = ".k-i-arrow-60-left",
+        NEXT = ".k-i-arrow-60-right",
         CHANGE = "change",
         NS = ".kendoPager",
         CLICK = "click",
@@ -164,7 +164,7 @@ var __meta__ = { // jshint ignore:line
             if (options.refresh) {
                 if (!that.element.find(".k-pager-refresh").length) {
                     that.element.append('<a href="#" class="k-pager-refresh k-link" title="' + options.messages.refresh +
-                        '"><span class="k-icon k-i-refresh"></span></a>');
+                        '"><span class="k-icon k-i-reload"></span></a>');
                 }
 
                 that.element.on(CLICK + NS, ".k-pager-refresh", proxy(that._refreshClick, that));

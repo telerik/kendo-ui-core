@@ -96,7 +96,7 @@ test("include arrow after input.k-input", function(){
    ok(spanArrow.is("span"));
    ok(spanArrow.hasClass("k-select"));
    ok(arrow.is("span"));
-   ok(arrow.hasClass("p-icon p-i-arrow-60-down"));
+   ok(arrow.hasClass("k-icon k-i-arrow-60-down"));
    equal(arrow.html(), "");
 });
 
@@ -1101,7 +1101,7 @@ test("ComboBox opens the popup if noDataTemplate", function() {
         noDataTemplate: "no data"
     });
 
-    combobox.wrapper.find(".p-icon:last").click();
+    combobox.wrapper.find(".k-icon:last").click();
 
     ok(combobox.popup.visible());
 });
@@ -1111,7 +1111,7 @@ test("ComboBox doesn't open the popup if no data", function() {
         noDataTemplate: ""
     });
 
-    combobox.wrapper.find(".p-icon:last").click();
+    combobox.wrapper.find(".k-icon:last").click();
 
     ok(!combobox.popup.visible());
 });
@@ -1144,7 +1144,7 @@ test("ComboBox does not bind on open if minLength & autoBind: false", function()
     combobox.dataSource.bind("change", function() {
         ok(false, "dataSource should not be read");
     })
-    combobox.wrapper.find(".p-icon:last").click();
+    combobox.wrapper.find(".k-icon:last").click();
 
     ok(combobox.popup.visible());
 });
