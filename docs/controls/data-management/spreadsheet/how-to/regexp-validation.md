@@ -1,11 +1,11 @@
 ---
-title: Create Custom RegExp-Based Functions
-page_title: Create Custom RegExp-Based Functions
+title: Create Custom RegExp-Based Validation
+page_title: Create Custom RegExp-Based Validation
 description: "Learn how to create RegExp-based validation rules in a Kendo UI Spreadsheet."
 slug: howto_regexp_based_validation
 ---
 
-# Create Custom RegExp-Based Functions
+# Create Custom RegExp-Based Validation
 
 The [validation types](/api/javascript/spreadsheet/range#methods-validation) of the Kendo UI Spreadsheet do not directly support RegExp-based rules.
 
