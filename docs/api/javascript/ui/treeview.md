@@ -858,7 +858,7 @@ The nodes that are to be expanded.
 
 ### expandPath
 
-Expands all nodes to a given element. Nodes may be loaded from a remote end-point.
+Expands all nodes from a provided path array, including the last node. Nodes may be loaded from a remote end-point.
 
 #### Parameters
 
