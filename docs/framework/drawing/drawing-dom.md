@@ -43,7 +43,7 @@ The `drawing.drawDOM` takes a jQuery selector or object, or a plain DOM node, an
 
 ### Custom Fonts in PDF
 
-If you need PDF output, your document should declare the fonts that it uses using [CSS `font-face` declarations](https://developer.mozilla.org/en-US/docs/Web/CSS/@font-face) for optimal layout and Unicode support. Since Kendo UI 2014 Q3 SP1, the Kendo UI PDF generator is able to dig such declarations directly from the CSS and you do not need to manually call [`pdf.defineFont`](/framework/drawing/pdf-output.html#using-custom-fonts).
+If you need PDF output, your document should declare the fonts that it uses using [CSS `font-face` declarations](https://developer.mozilla.org/en-US/docs/Web/CSS/@font-face) for optimal layout and Unicode support. Since Kendo UI 2014 Q3 SP1, the Kendo UI PDF generator is able to dig such declarations directly from the CSS and you do not need to manually call [`pdf.defineFont`](/api/javascript/pdf#methods-defineFont).
 
 The example below demonstrates a sample CSS declaration.
 
