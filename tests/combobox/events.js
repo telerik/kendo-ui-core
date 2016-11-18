@@ -290,7 +290,7 @@ test("open event when click _arrow", 2, function() {
         }
     }).data("kendoComboBox");
 
-    input.data("kendoComboBox").wrapper.find(".k-icon").trigger(CLICK);
+    input.data("kendoComboBox").wrapper.find(".p-icon").trigger(CLICK);
 });
 
 test("open event should be cancellable", function() {

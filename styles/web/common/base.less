@@ -376,21 +376,6 @@ html body .k-button-bare.k-upload-button:hover
     }
 }
 
-.k-icon,
-.k-sprite,
-.k-tool-icon
-{
-    display: inline-block;
-    width: @grid-size;
-    height: @grid-size;
-    overflow: hidden;
-    background-repeat: no-repeat;
-    font-size: 0;
-    line-height: 0;
-    text-align: center;
-    .disable-high-contrast();
-}
-
 .k-button-bare .k-font-icon {
     overflow: visible;
 }
@@ -1026,7 +1011,7 @@ input.k-checkbox + label {
     display: inline-block;
 }
 
-.k-icon,
+.p-icon,
 .k-tool-icon,
 .k-grouping-dropclue,
 .k-drop-hint,
@@ -1038,7 +1023,9 @@ input.k-checkbox + label {
 .k-gantt-views > .k-current-view > .k-link:after {
     .use-font-icon();
 }
-.k-icon:before {
+.p-icon:before {
+    width: initial;
+    height: initial;
     position: absolute;
     top: 0;
     bottom: 0;

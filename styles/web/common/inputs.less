@@ -33,15 +33,15 @@ span.k-dropdown,
 }
 
 .k-autocomplete > .p-i-close,
-.k-combobox > .k-dropdown-wrap > .k-i-close,
-.k-multiselect > .k-multiselect-wrap > .k-i-close {
+.k-combobox > .k-dropdown-wrap > .p-i-close,
+.k-multiselect > .k-multiselect-wrap > .p-i-close {
     display: none;
     position: absolute;
     right: 0;
 }
 
 .k-autocomplete > .p-i-close,
-.k-combobox > .k-dropdown-wrap > .k-i-close {
+.k-combobox > .k-dropdown-wrap > .p-i-close {
     bottom: 0;
     top: 50%;
     transform: translateY(-50%);
@@ -49,22 +49,22 @@ span.k-dropdown,
 
 .k-ie8 {
     .k-autocomplete > .p-i-close,
-    .k-combobox > .k-dropdown-wrap > .k-i-close {
+    .k-combobox > .k-dropdown-wrap > .p-i-close {
         margin-top: -(@grid-size/2);
     }
 }
 
-.k-combobox > .k-dropdown-wrap > .k-i-close {
+.k-combobox > .k-dropdown-wrap > .p-i-close {
     font-size: 100%;
     right: 2.4em;
 }
 
-.k-multiselect > .k-multiselect-wrap > .k-i-close {
+.k-multiselect > .k-multiselect-wrap > .p-i-close {
     top: @grid-size/2 - 2px;
 }
 
 .k-autocomplete > .p-i-close,
-.k-multiselect > .k-multiselect-wrap > .k-i-close {
+.k-multiselect > .k-multiselect-wrap > .p-i-close {
     margin-right: @grid-size/4 + 2px;
 }
 
@@ -72,7 +72,6 @@ span.k-dropdown,
 .k-combobox > .k-dropdown-wrap {
     &.k-state-hover,
     &.k-state-focused {
-        > .k-i-close,
         > .p-i-close {
             display: inline-block;
             outline: none;
@@ -81,14 +80,14 @@ span.k-dropdown,
 }
 
 .k-autocomplete > .p-i-close.k-loading-hidden,
-.k-combobox > .k-dropdown-wrap > .k-i-close.k-loading-hidden {
+.k-combobox > .k-dropdown-wrap > .p-i-close.k-loading-hidden {
     display: none;
 }
 
 .k-multiselect {
     &.k-state-hover,
     &.k-state-focused {
-        > .k-multiselect-wrap > .k-i-close {
+        > .k-multiselect-wrap > .p-i-close {
             display: inline-block;
             outline: none;
         }
@@ -98,7 +97,6 @@ span.k-dropdown,
 .k-autocomplete,
 .k-combobox > .k-dropdown-wrap {
     &.k-state-border-down {
-        > .k-i-close,
         > .p-i-close {
            margin-top: -1px;
         }
