@@ -70,6 +70,20 @@ test("binding raises the dataBinding event", 1, function() {
     });
 });
 
+test("items are updated on change event of the dataSource", 2, function() {
+    var tabstrip = new kendo.ui.TabStrip(dom, {
+        dataTextField: "foo",
+        dataUrlField: "bar",
+        dataSource: [{ foo: "foo", bar: "index.html" }]
+    });
+
+    equal(dom.find("li").text(), "foo");
+
+    tabstrip.dataSource.view()[0].set("bar", "newvalue");
+
+    equal(tabstrip._contentUrls[0], "newvalue");
+});
+
 test("binding raises the dataBound event", 1, function() {
     var tabstrip = new kendo.ui.TabStrip(dom, {
         dataBound: function() {

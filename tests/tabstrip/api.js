@@ -31,6 +31,8 @@ function Load(e) {
 
 module('tabstrip api', {
     setup: function() {
+        jasmine.clock().install();
+
         QUnit.fixture.append(
             ' <div class="k-widget k-tabstrip k-header" id="tabstrip" style="visibility: hidden;">' +
             '    <ul class="k-reset k-tabstrip-items">' +
@@ -125,10 +127,46 @@ module('tabstrip api', {
         $("#tabstrip").kendoTabStrip({ animation: false, select: Select, activate: Activate });
         $("#parent-tabstrip").kendoTabStrip({ animation: false });
         $("#child-tabstrip").kendoTabStrip({ animation: false });
+
+    $.mockjax({
+        url: "index1.html",
+        response: function() {
+            this.responseText = 'Content 1';
+        }
+    });
+
+    $.mockjax({
+        url: "index2.html",
+        response: function() {
+            this.responseText = 'Content 2';
+        }
+    });
+
+    $.mockjax({
+        url: "index3.html",
+        response: function() {
+            this.responseText = 'Content 3';
+        }
+    });
+
     },
     teardown: function() {
+        jasmine.clock().uninstall();
+
         kendo.destroy(QUnit.fixture);
     }
+});
+
+test('select method should select second item', function() {
+    var tabstrip = getTabStrip();
+    var item = getRootItem(1);
+
+    ok(item.attr("aria-controls") !== undefined);
+    ok(item.attr("aria-controls") !== "undefined");
+
+    tabstrip.select(item);
+
+    ok(item.hasClass('k-state-active'));
 });
 
 test('clicking item with url should navigate', function() {
@@ -195,21 +233,14 @@ asyncTest('clicking should raise onActivate event when the new contentElement is
         equal(height, Math.round(tabstrip.scrollWrap.height()));
         start();
     }, 10);
+
+    jasmine.clock().tick(10);
 });
 
 test('clicking first item should select it', function() {
     var item = getRootItem(0);
 
     item.find('.k-link').trigger('click');
-
-    ok(item.hasClass('k-state-active'));
-});
-
-test('select method should select second item', function() {
-    var tabstrip = getTabStrip();
-    var item = getRootItem(1);
-
-    tabstrip.select(item);
 
     ok(item.hasClass('k-state-active'));
 });
@@ -322,9 +353,203 @@ test('insertAfter method moves a tab and its content elements if called with exi
 
     try {
         tabStrip.insertAfter("li:contains(Tab 1)", "li:last-child");
+        equal(tabStrip.tabGroup.children("li:last-child").text(), "Tab 1");
+        equal(tabStrip.element.children("div:last-child").text(), "Content 1");
+    } finally {
+        tabStrip.destroy();
+    }
+});
 
-        ok(tabStrip.tabGroup.children("li:last-child").text() == "Tab 1");
-        ok(tabStrip.element.children("div:last-child").text() == "Content 1");
+test('insertAfter method moves a tab and its content elements when contentUrls option is used', 3, function() {
+    var tabStrip = $("<div><ul><li>Tab 1</li><li>Tab 2</li></ul></div>").kendoTabStrip({
+        contentUrls: [
+            'index1.html',
+            'index2.html'
+        ]
+    }).data("kendoTabStrip");
+
+    try {
+        tabStrip.insertAfter("li:contains(Tab 1)", "li:last-child");
+        tabStrip.activateTab(tabStrip.tabGroup.children("li:last-child"));
+        jasmine.clock().tick();
+
+        equal(tabStrip.tabGroup.children("li:last-child").text(), "Tab 1");
+        equal(tabStrip.element.children("div:last-child").text(), "Content 1");
+        equal(tabStrip._contentUrls[1], 'index1.html');
+    } finally {
+        tabStrip.destroy();
+    }
+});
+
+test('insertAfter method adds contentUrl', 3, function() {
+    var tabStrip = $("<div><ul><li>Tab 2</li></ul></div>").kendoTabStrip({
+        contentUrls: [
+            'index2.html'
+        ]
+    }).data("kendoTabStrip");
+
+    try {
+        tabStrip.insertAfter({text: "Tab 1", contentUrl: "index1.html"}, "li:last-child");
+        tabStrip.activateTab(tabStrip.tabGroup.children("li:last-child"));
+        jasmine.clock().tick();
+
+        equal(tabStrip.tabGroup.children("li:last-child").text(), "Tab 1");
+        equal(tabStrip.element.children("div:last-child").text(), "Content 1");
+        equal(tabStrip._contentUrls[1], 'index1.html');
+    } finally {
+        tabStrip.destroy();
+    }
+});
+
+test('insertBefore method moves a tab and its content elements when contentUrls option is used', 3, function() {
+    var tabStrip = $("<div><ul><li>Tab 1</li><li>Tab 2</li></ul></div>").kendoTabStrip({
+        contentUrls: [
+            'index1.html',
+            'index2.html'
+        ]
+    }).data("kendoTabStrip");
+
+    try {
+        tabStrip.insertBefore("li:contains(Tab 2)", "li:first-child");
+        tabStrip.activateTab(tabStrip.tabGroup.children("li:first-child"));
+        jasmine.clock().tick();
+
+        equal(tabStrip.tabGroup.children("li:first-child").text(), "Tab 2");
+        equal($(tabStrip.element.children("div")[0]).text(), "Content 2");
+        equal(tabStrip._contentUrls[0], 'index2.html');
+    } finally {
+        tabStrip.destroy();
+    }
+});
+
+test('insertBefore method moves a tab and its content elements to new index', 3, function() {
+    var tabStrip = $("<div><ul><li>Tab 1</li><li>Tab 2</li></ul></div>").kendoTabStrip({
+        contentUrls: [
+            'index1.html',
+            'index2.html'
+        ]
+    }).data("kendoTabStrip");
+
+    try {
+        tabStrip.element.find("li:first").before(tabStrip.element.find("li:last"));
+        tabStrip.insertBefore("li:contains(Tab 2)", "li:contains(Tab 1)");
+        tabStrip.activateTab(tabStrip.tabGroup.children("li:first-child"));
+        jasmine.clock().tick();
+
+        equal(tabStrip.tabGroup.children("li:first-child").text(), "Tab 2");
+        equal($(tabStrip.element.children("div")[0]).text(), "Content 2");
+        equal(tabStrip._contentUrls[0], 'index2.html');
+    } finally {
+        tabStrip.destroy();
+    }
+});
+
+/* Not sure if we should support previous invalid behavior where the tab is moved in DOM but not the content.
+test('insertBefore method works when the same tab is passed to both parameters', 3, function() {
+    var tabStrip = $("<div><ul><li>Tab 1</li><li>Tab 2</li><li>Tab 3</li></ul></div>").kendoTabStrip({
+        contentUrls: [
+            'index1.html',
+            'index2.html',
+            'index3.html'
+        ]
+    }).data("kendoTabStrip");
+
+    try {
+        tabStrip.activateTab(tabStrip.tabGroup.children("li:first-child"));
+        jasmine.clock().tick(200);
+        tabStrip.element.find("li:first").before(tabStrip.element.find("li:contains(Tab 2)"));
+        tabStrip.insertBefore("li:contains(Tab 2)", "li:contains(Tab 2)");
+        tabStrip.activateTab(tabStrip.tabGroup.children("li:first-child"));
+        jasmine.clock().tick(200);
+
+        equal(tabStrip.tabGroup.children("li:first-child").text(), "Tab 2");
+        equal($(tabStrip.element.children("div")[0]).text(), "Content 2");
+        equal(tabStrip._contentUrls[0], 'index2.html');
+    } finally {
+        tabStrip.destroy();
+    }
+});*/
+
+test('insertBefore method adds contentUrl', 4, function() {
+    var tabStrip = $("<div><ul><li>Tab 3</li><li>Tab 1</li></ul></div>").kendoTabStrip({
+        contentUrls: [
+            //null, this scenario is not supported!
+            "index3.html",
+            'index1.html'
+        ]
+    }).data("kendoTabStrip");
+
+    try {
+        tabStrip.insertBefore({text: "Tab 2", contentUrl: "index2.html"}, "li:last-child");
+        tabStrip.activateTab(tabStrip.tabGroup.children("li:nth-child(2)"));
+        jasmine.clock().tick();
+
+        equal(tabStrip.tabGroup.children("li:nth-child(2)").text(), "Tab 2");
+        equal($(tabStrip.element.children("div")[1]).text(), "Content 2");
+        equal(tabStrip._contentUrls[1], 'index2.html');
+        equal(tabStrip._contentUrls.length, 3);
+    } finally {
+        tabStrip.destroy();
+    }
+});
+
+test('remove method removes corresponding content url', 2, function() {
+    var tabStrip = $("<div><ul><li>Tab 1</li><li>Tab 2</li><li>Tab 3</li></ul></div>").kendoTabStrip({
+        contentUrls: [
+            'index1.html',
+            'index2.html',
+            'index3.html'
+        ]
+    }).data("kendoTabStrip");
+
+    try {
+        tabStrip.remove(tabStrip.tabGroup.find("li:nth-child(2)"));
+
+        equal(tabStrip.tabGroup.children("li:nth-child(2)").text(), "Tab 3");
+        equal(tabStrip._contentUrls[1], 'index3.html');
+    } finally {
+        tabStrip.destroy();
+    }
+});
+
+test('append method adds corresponding content url', 2, function() {
+    var tabStrip = $("<div><ul><li>Tab 1</li></ul></div>").kendoTabStrip({
+        contentUrls: [
+            'index1.html'
+        ]
+    }).data("kendoTabStrip");
+
+    try {
+        tabStrip.append({
+            text: "Tab 3",
+            content: "someContent",
+            contentUrl: "index3.html"
+        });
+
+        equal(tabStrip.tabGroup.children("li:nth-child(2)").text(), "Tab 3");
+        equal(tabStrip._contentUrls[1], 'index3.html');
+    } finally {
+        tabStrip.destroy();
+    }
+});
+
+test('setOptions method update content Urls', 1, function() {
+    var tabStrip = $("<div><ul><li>Tab 1</li><li>Tab 2</li><li>Tab 3</li></ul></div>").kendoTabStrip({
+        contentUrls: [
+            'index1.html',
+            'index2.html'
+        ]
+    }).data("kendoTabStrip");
+
+    try {
+        tabStrip.setOptions({
+            contentUrls: [
+                'index1.html',
+                'index3.html'
+            ]
+        });
+
+        equal(tabStrip._contentUrls[1], 'index3.html');
     } finally {
         tabStrip.destroy();
     }
