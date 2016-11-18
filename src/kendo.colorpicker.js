@@ -899,20 +899,22 @@ var __meta__ = { // jshint ignore:line
                         }
                         that.wrapper.children(".k-picker-wrap").removeClass("k-state-focused");
                         var color = selector._selectOnHide();
+                        var selectorColor = selector.value();
+                        var value = that.value();
+                        var options = selector.options;
                         if (!color) {
                             setTimeout(function(){
                                 if (that.wrapper) {
                                     that.wrapper.focus();
                                 }
                             });
-                            var selectorColor = selector.value();
-                            var value = that.value();
-                            if (!selector.options._closing && selector.options._clearedColor && !value && selectorColor) {
+
+                            if (!options._closing && options._clearedColor && !value && selectorColor) {
                                 that._select(selectorColor, true);
                             } else {
                                 that._updateUI(that.color());
                             }
-                        } else {
+                        } else if (!(options._clearedColor && !value)) {
                             that._select(color);
                         }
                     },
