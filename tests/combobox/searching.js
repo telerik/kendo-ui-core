@@ -1063,7 +1063,6 @@ test("scrolls to the matched item on open", 2, function() {
         dataSource: data
     });
 
-    debugger;
     combobox.search("49");
 
     ok(combobox.ul.children().eq(49).hasClass("k-state-focused"), "item is not focused");
