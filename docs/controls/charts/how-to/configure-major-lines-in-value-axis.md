@@ -1,21 +1,18 @@
 ---
-title: Calculate major unit for value axis dynamically
-page_title: Calculate major unit for value axis dynamically | Kendo UI Charts
-description: "Learn how to calculate major unit for value axis dynamically."
+title: Calculate and Set Major Unit for Value Axis
+page_title: Calculate and Set Major Unit for Value Axis | Kendo UI Charts
+description: "Learn how to dynamically calculate and set the major unit for the value axis in a Kendo UI Chart."
 slug: howto_calculatemajorunit_charts
 ---
 
-# Use custom dynamically calculated major unit
+# Calculate and Set Major Unit for Value Axis
 
-This example shows how to calculate and set the major unit for the value axis. The axis has to be named. The effective axis range is available in the render event handler.
+To calculate and set the major unit for the values axis in a Kendo UI Chart, note that you need to name the axis. The effective axis range is available in the `render` event handler.
 
-Here is the API reference for the relevant methods and events, used in the example:
-
-[`render event`](http://docs.telerik.com/kendo-ui/api/javascript/dataviz/ui/chart#events-render)
-
-[`getAxis() method`](http://docs.telerik.com/kendo-ui/api/javascript/dataviz/ui/chart#methods-getAxis)
-
-[`kendo.dataviz.ChartAxis` API](http://docs.telerik.com/kendo-ui/api/javascript/dataviz/chart/chart_axis)
+The API reference for the relevant methods and events that are used in the following example are:
+* The [`render` event](/api/javascript/dataviz/ui/chart#events-render)
+* The [`getAxis()` method](/api/javascript/dataviz/ui/chart#methods-getAxis)
+* The [`kendo.dataviz.ChartAxis` API](/api/javascript/dataviz/chart/chart_axis)
 
 ###### Example
 
@@ -58,7 +55,7 @@ Here is the API reference for the relevant methods and events, used in the examp
           },
           categoryAxis: {
             labels: {
-              format: "HH:mm", 
+              format: "HH:mm",
               rotation: 315
             },
             crosshair: {
@@ -96,10 +93,10 @@ Here is the API reference for the relevant methods and events, used in the examp
             var range = e.sender.getAxis("value").range();
             var majorUnit = range.max / 3;
             var axis = e.sender.options.valueAxis;
-            
+
             if (axis.majorUnit !== majorUnit) {
               axis.majorUnit = majorUnit;
-              
+
               // We need to redraw the chart to apply the changes
               e.sender.redraw();
             }            
