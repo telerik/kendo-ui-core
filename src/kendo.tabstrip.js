@@ -746,10 +746,15 @@ var __meta__ = { // jshint ignore:line
         },
 
         _create: function (tab) {
-            var plain = $.isPlainObject(tab),
-                that = this, tabs, contents, content, newTabsCreated = false;
+            var that = this,
+            tabs,
+            contents,
+            content,
+            newTabsCreated = false;
 
-            if (plain || $.isArray(tab)) {
+            tab = tab instanceof kendo.data.ObservableArray ? tab.toJSON() : tab;
+
+            if ($.isPlainObject(tab) || $.isArray(tab)) {
                 tab = $.isArray(tab) ? tab : [tab];
                 newTabsCreated = true;
 

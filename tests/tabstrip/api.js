@@ -533,6 +533,27 @@ test('append method adds corresponding content url', 2, function() {
     }
 });
 
+test('append method works with ObservableArray', 2, function() {
+    var tabStrip = $("<div><ul><li>Tab 1</li></ul></div>").kendoTabStrip({
+        contentUrls: [
+            'index1.html'
+        ]
+    }).data("kendoTabStrip");
+
+    try {
+        tabStrip.append(new kendo.data.ObservableArray([{
+            text: "Tab 3",
+            content: "someContent",
+            contentUrl: "index3.html"
+        }]));
+
+        equal(tabStrip.tabGroup.children("li:nth-child(2)").text(), "Tab 3");
+        equal(tabStrip._contentUrls[1], 'index3.html');
+    } finally {
+        tabStrip.destroy();
+    }
+});
+
 test('setOptions method update content Urls', 1, function() {
     var tabStrip = $("<div><ul><li>Tab 1</li><li>Tab 2</li><li>Tab 3</li></ul></div>").kendoTabStrip({
         contentUrls: [
