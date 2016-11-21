@@ -25,8 +25,6 @@ Below are listed the script files for the Kendo UI desktop widgets for mobile-re
 | | kendo.binder.js | Editing feature (optional) |
 | | kendo.editable.js | Editing feature (optional) |
 | | kendo.draganddrop.js | Editing feature (optional) |
-| | kendo.fx.js | Editing feature (optional) |
-| | kendo.mobile.scroller.js | Editing feature (optional) |
 | | kendo.window.js | Editing feature (optional) |
 | | kendo.calendar.js | Filtering feature (optional) |
 | | kendo.popup.js | Filtering feature (optional) |
@@ -112,15 +110,11 @@ Below are listed the script files for the Kendo UI desktop widgets for mobile-re
 | | kendo.dropdownlist.js | Configurator feature (optional) |
 | | kendo.treeview.js | Configurator feature (optional) |
 | | kendo.menu.js | Configurator feature (optional) |
-| | kendo.fx.js | Configurator feature (optional) |
-| | kendo.mobile.scroller.js | Configurator feature (optional) |
 | | kendo.window.js | Configurator feature (optional) |
 | | kendo.pivot.fieldmenu.js | Configurator feature (optional) |
 | | kendo.pivot.configurator.js | Configurator feature (optional) |
 | | kendo.popup.js | Filtering feature (optional) |
 | | kendo.menu.js | Filtering feature (optional) |
-| | kendo.fx.js | Filtering feature (optional) |
-| | kendo.mobile.scroller.js | Filtering feature (optional) |
 | | kendo.window.js | Filtering feature (optional) |
 | | kendo.treeview.js | Filtering feature (optional) |
 | | kendo.list.js | Filtering feature (optional) |
@@ -154,8 +148,6 @@ Below are listed the script files for the Kendo UI desktop widgets for mobile-re
 | | kendo.tabstrip.js | |
 | | kendo.toolbar.js | |
 | | kendo.treeview.js | |
-| | kendo.fx.js | |
-| | kendo.mobile.scroller.js | |
 | | kendo.window.js | |
 | | kendo.validator.js | |
 | | kendo.excel.js | |
@@ -185,8 +177,6 @@ Below are listed the script files for the Kendo UI desktop widgets for mobile-re
 | | kendo.binder.js | Editing feature (optional) |
 | | kendo.editable.js | Editing feature (optional) |
 | | kendo.draganddrop.js | Editing feature (optional) |
-| | kendo.fx.js | Editing feature (optional) |
-| | kendo.mobile.scroller.js | Editing feature (optional) |
 | | kendo.window.js | Editing feature (optional) |
 | | kendo.userevents.js | Selection feature (optional) |
 | | kendo.selectable.js | Selection feature (optional) |

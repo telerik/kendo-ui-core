@@ -22,8 +22,6 @@ Below are listed the script files for the Kendo UI Scheduling widgets.&nbsp;&nbs
 | | kendo.userevents.js | |
 | | kendo.draganddrop.js | |
 | | kendo.resizable.js | |
-| | kendo.fx.js | |
-| | kendo.mobile.scroller.js | |
 | | kendo.window.js | |
 | | kendo.dom.js | |
 | | kendo.touch.js | |
@@ -55,8 +53,6 @@ Below are listed the script files for the Kendo UI Scheduling widgets.&nbsp;&nbs
 | | kendo.editable.js | |
 | | kendo.multiselect.js | |
 | | kendo.draganddrop.js | |
-| | kendo.fx.js | |
-| | kendo.mobile.scroller.js | |
 | | kendo.window.js | |
 | | kendo.timepicker.js | |
 | | kendo.datetimepicker.js | |
@@ -66,6 +62,8 @@ Below are listed the script files for the Kendo UI Scheduling widgets.&nbsp;&nbs
 | | kendo.scheduler.agendaview.js | Scheduler Agenda View feature (optional) |
 | | kendo.scheduler.monthview.js | Scheduler Month View feature (optional) |
 | | kendo.scheduler.timelineview.js | Scheduler Timeline View feature (optional) |
+| | kendo.fx.js | Scheduler adaptive rendering feature (optional) |
+| | kendo.mobile.scroller.js | Scheduler adaptive rendering feature (optional) |
 | | kendo.view.js | Scheduler adaptive rendering feature (optional) |
 | | kendo.mobile.view.js | Scheduler adaptive rendering feature (optional) |
 | | kendo.mobile.loader.js | Scheduler adaptive rendering feature (optional) |

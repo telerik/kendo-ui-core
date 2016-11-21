@@ -15,10 +15,7 @@ Below are listed the script files for the Kendo UI Layout widgets.&nbsp;&nbsp;
 | [Notification](http://demos.telerik.com/kendo-ui/notification/index) | jquery.js | |
 | | kendo.core.js | |
 | | kendo.popup.js | |
-| | kendo.fx.js | |
-| | kendo.userevents.js | |
-| | kendo.draganddrop.js | |
-| | kendo.mobile.scroller.js | |
+| | kendo.fx.js | Animation feature (optional) |
 | | kendo.notification.js | |
 | [Responsive Panel](http://demos.telerik.com/kendo-ui/responsive-panel/index) | jquery.js | |
 | | kendo.core.js | |
@@ -38,8 +35,7 @@ Below are listed the script files for the Kendo UI Layout widgets.&nbsp;&nbsp;
 | | kendo.core.js | |
 | | kendo.userevents.js | |
 | | kendo.draganddrop.js | |
-| | kendo.fx.js | |
-| | kendo.mobile.scroller.js | |
+| | kendo.fx.js | Animation feature (optional) |
 | | kendo.window.js | |
 
 ## See Also

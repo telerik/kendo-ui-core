@@ -74,8 +74,6 @@ Below are listed the script files for the Kendo UI Editors widgets.&nbsp;&nbsp;
 | | kendo.dropdownlist.js | |
 | | kendo.userevents.js | |
 | | kendo.draganddrop.js | |
-| | kendo.fx.js | |
-| | kendo.mobile.scroller.js | |
 | | kendo.window.js | |
 | | kendo.color.js | |
 | | kendo.slider.js | |
