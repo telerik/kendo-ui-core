@@ -236,7 +236,8 @@ var __meta__ = { // jshint ignore:line
 
         open: function(target) {
             this.popup.show(target);
-
+            this.trigger('open');
+	    
             if (!this.initialOpen) {
                 if (!this.pane.navigateToInitial()) {
                     this.pane.navigate("");
@@ -255,6 +256,7 @@ var __meta__ = { // jshint ignore:line
         },
 
         close: function() {
+            this.trigger('close');
             this.popup.hide();
         },
 
