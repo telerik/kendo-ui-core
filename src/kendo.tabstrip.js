@@ -1052,6 +1052,8 @@ var __meta__ = { // jshint ignore:line
                 if (tabGroupScrollWidth > wrapperOffsetWidth && !that._scrollableModeActive) {
                     that._nowScrollingTabs = false;
                     that._isRtl = kendo.support.isRtl(that.element);
+                    var mouseDown = kendo.support.mobileOS ? "touchstart" : "mousedown";
+                    var mouseUp = kendo.support.mobileOS ? "touchend" : "mouseup";
 
                     that.wrapper.append(scrollButtonHtml("prev", "k-i-arrow-w") + scrollButtonHtml("next", "k-i-arrow-e"));
 
@@ -1060,17 +1062,17 @@ var __meta__ = { // jshint ignore:line
 
                     that.tabGroup.css({ marginLeft: outerWidth(scrollPrevButton) + 9, marginRight: outerWidth(scrollNextButton) + 12 });
 
-                    scrollPrevButton.on("mousedown" + NS, function () {
+                    scrollPrevButton.on(mouseDown + NS, function () {
                         that._nowScrollingTabs = true;
                         that._scrollTabsByDelta(options.scrollable.distance * (that._isRtl ? 1 : -1));
                     });
 
-                    scrollNextButton.on("mousedown" + NS, function () {
+                    scrollNextButton.on(mouseDown + NS, function () {
                         that._nowScrollingTabs = true;
                         that._scrollTabsByDelta(options.scrollable.distance * (that._isRtl ? -1 : 1));
                     });
 
-                    scrollPrevButton.add(scrollNextButton).on("mouseup" + NS, function () {
+                    scrollPrevButton.add(scrollNextButton).on(mouseUp + NS, function () {
                         that._nowScrollingTabs = false;
                     });
 
