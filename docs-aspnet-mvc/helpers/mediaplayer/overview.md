@@ -75,7 +75,7 @@ To add multiple sources for the same video, configure the quality-dependent [HD 
 
 ## Configuration
 
-The MediaPlayer provides properties, methods, and events to match your specific preferences. For more information on its configuration options, refer to the [MediaPlayer API documentation](/kendo-ui/api/javascript/ui/mediaplayer).
+The MediaPlayer provides properties, methods, and events to match your specific preferences. For more information on its configuration options, refer to the [MediaPlayer API documentation](http://docs.telerik.com/kendo-ui/api/javascript/ui/mediaplayer).
 
 ### Add Multiple Sources for Quality HD Feature
 
