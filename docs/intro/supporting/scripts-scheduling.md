@@ -22,6 +22,8 @@ Below are listed the script files for the Kendo UI Scheduling widgets.&nbsp;&nbs
 | | kendo.userevents.js | |
 | | kendo.draganddrop.js | |
 | | kendo.resizable.js | |
+| | kendo.fx.js | |
+| | kendo.mobile.scroller.js | |
 | | kendo.window.js | |
 | | kendo.dom.js | |
 | | kendo.touch.js | |
@@ -53,28 +55,28 @@ Below are listed the script files for the Kendo UI Scheduling widgets.&nbsp;&nbs
 | | kendo.editable.js | |
 | | kendo.multiselect.js | |
 | | kendo.draganddrop.js | |
+| | kendo.fx.js | |
+| | kendo.mobile.scroller.js | |
 | | kendo.window.js | |
 | | kendo.timepicker.js | |
 | | kendo.datetimepicker.js | |
 | | kendo.scheduler.recurrence.js | |
 | | kendo.scheduler.view.js | |
-| | kendo.scheduler.dayview.js | Scheduler Day View feature |
-| | kendo.scheduler.agendaview.js | Scheduler Agenda View feature |
-| | kendo.scheduler.monthview.js | Scheduler Month View feature |
-| | kendo.scheduler.timelineview.js | Scheduler Timeline View feature |
-| | kendo.fx.js | Scheduler adaptive rendering feature |
-| | kendo.mobile.scroller.js | Scheduler adaptive rendering feature |
-| | kendo.view.js | Scheduler adaptive rendering feature |
-| | kendo.mobile.view.js | Scheduler adaptive rendering feature |
-| | kendo.mobile.loader.js | Scheduler adaptive rendering feature |
-| | kendo.mobile.pane.js | Scheduler adaptive rendering feature |
-| | kendo.mobile.popover.js | Scheduler adaptive rendering feature |
-| | kendo.mobile.shim.js | Scheduler adaptive rendering feature |
-| | kendo.mobile.actionsheet.js | Scheduler adaptive rendering feature |
-| | kendo.color.js | PDF export feature |
-| | kendo.drawing.js | PDF export feature |
-| | kendo.pdf.js | PDF export feature |
-| | kendo.timezones.js | Timezones feature |
+| | kendo.scheduler.dayview.js | Scheduler Day View feature (optional) |
+| | kendo.scheduler.agendaview.js | Scheduler Agenda View feature (optional) |
+| | kendo.scheduler.monthview.js | Scheduler Month View feature (optional) |
+| | kendo.scheduler.timelineview.js | Scheduler Timeline View feature (optional) |
+| | kendo.view.js | Scheduler adaptive rendering feature (optional) |
+| | kendo.mobile.view.js | Scheduler adaptive rendering feature (optional) |
+| | kendo.mobile.loader.js | Scheduler adaptive rendering feature (optional) |
+| | kendo.mobile.pane.js | Scheduler adaptive rendering feature (optional) |
+| | kendo.mobile.popover.js | Scheduler adaptive rendering feature (optional) |
+| | kendo.mobile.shim.js | Scheduler adaptive rendering feature (optional) |
+| | kendo.mobile.actionsheet.js | Scheduler adaptive rendering feature (optional) |
+| | kendo.color.js | PDF export feature (optional) |
+| | kendo.drawing.js | PDF export feature (optional) |
+| | kendo.pdf.js | PDF export feature (optional) |
+| | kendo.timezones.js | Timezones feature (optional) |
 | | kendo.scheduler.js | |
 
 ## See Also

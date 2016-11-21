@@ -15,12 +15,14 @@ Below are listed the script files for Kendo UI Barcodes widgets.&nbsp;&nbsp;
 | [Barcode](http://demos.telerik.com/kendo-ui/barcode/index) | jquery.js | |
 | | kendo.core.js | |
 | | kendo.color.js | |
+| | kendo.popup.js | |
 | | kendo.drawing.js | |
 | | kendo.dataviz.core.js | |
 | | kendo.dataviz.barcode.js | |
 | [QRCode](http://demos.telerik.com/kendo-ui/qrcode/index) | jquery.js | |
 | | kendo.core.js | |
 | | kendo.color.js | |
+| | kendo.popup.js | |
 | | kendo.drawing.js | |
 | | kendo.dataviz.core.js | |
 | | kendo.dataviz.qrcode.js | |

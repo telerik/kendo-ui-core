@@ -15,6 +15,7 @@ Below are listed the script files for the Kendo UI Gauges widgets.&nbsp;&nbsp;
 | [Gauge](http://demos.telerik.com/kendo-ui/linear-gauge/index) | jquery.js | |
 | | kendo.core.js | |
 | | kendo.color.js | |
+| | kendo.popup.js | |
 | | kendo.drawing.js | |
 | | kendo.dataviz.core.js | |
 | | kendo.dataviz.themes.js | |

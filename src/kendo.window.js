@@ -7,7 +7,13 @@ var __meta__ = { // jshint ignore:line
     name: "Window",
     category: "web",
     description: "The Window widget displays content in a modal or non-modal HTML window.",
-    depends: [ "draganddrop" ]
+    depends: [ "draganddrop", "mobile.scroller" ],
+    features: [ {
+        id: "fx",
+        name: "Animation",
+        description: "Support for animation",
+        depends: [ "fx" ]
+    } ]
 };
 
 (function($, undefined) {
@@ -358,7 +364,7 @@ var __meta__ = { // jshint ignore:line
             actions = $.map(actions, function(action) {
                 return { name: (windowSpecificCommands.indexOf(action.toLowerCase()) > - 1) ? "window-" + action : action };
             });
-            
+
             container.html(kendo.render(templates.action, actions));
         },
 
@@ -1035,7 +1041,7 @@ var __meta__ = { // jshint ignore:line
 
         isMinimized: function() {
             return this.options.isMinimized;
-        },        
+        },
 
         pin: function(force) {
             var that = this,
@@ -1327,7 +1333,7 @@ var __meta__ = { // jshint ignore:line
             that._preventDragging = wnd.trigger(RESIZESTART);
             if (that._preventDragging) {
                 return;
-            }            
+            }
 
             that.elementPadding = parseInt(wrapper.css("padding-top"), 10);
             that.initialPosition = kendo.getOffset(wrapper, "position");
@@ -1528,7 +1534,7 @@ var __meta__ = { // jshint ignore:line
         },
 
         dragcancel: function (e) {
-            if (this._preventDragging) { 
+            if (this._preventDragging) {
                 return;
             }
             this._finishDrag();
@@ -1537,7 +1543,7 @@ var __meta__ = { // jshint ignore:line
         },
 
         dragend: function () {
-            if (this._preventDragging) { 
+            if (this._preventDragging) {
                 return;
             }
             $(this.owner.wrapper)

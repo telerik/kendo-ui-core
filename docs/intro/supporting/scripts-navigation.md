@@ -32,9 +32,9 @@ Below are listed the script files for the Kendo UI Navigation widgets.&nbsp;&nbs
 | [TreeView](http://demos.telerik.com/kendo-ui/treeview/index) | jquery.js | |
 | | kendo.core.js | |
 | | kendo.data.js | |
-| | kendo.userevents.js | Drag & Drop feature |
-| | kendo.draganddrop.js | Drag & Drop feature |
-| | kendo.treeview.draganddrop.js | Drag & Drop feature |
+| | kendo.userevents.js | Drag & Drop feature (optional) |
+| | kendo.draganddrop.js | Drag & Drop feature (optional) |
+| | kendo.treeview.draganddrop.js | Drag & Drop feature (optional) |
 | | kendo.treeview.js | |
 
 ## See Also
