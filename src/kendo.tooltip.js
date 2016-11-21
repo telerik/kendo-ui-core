@@ -7,7 +7,13 @@ var __meta__ = { // jshint ignore:line
     name: "Tooltip",
     category: "web",
     description: "The Tooltip widget displays a popup hint for a given html element.",
-    depends: [ "core", "popup" ]
+    depends: [ "core", "popup" ],
+    features: [ {
+        id: "fx",
+        name: "Animation",
+        description: "Support for animation",
+        depends: [ "fx" ]
+    } ]
 };
 
 (function($, undefined) {

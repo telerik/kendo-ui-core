@@ -20,21 +20,21 @@ Below are listed the script files for the Kendo UI Diagrams and Maps widgets.&nb
 | | kendo.draganddrop.js | |
 | | kendo.mobile.scroller.js | |
 | | kendo.color.js | |
-| | kendo.popup.js | Editing feature |
+| | kendo.popup.js | |
 | | kendo.drawing.js | |
 | | kendo.dataviz.core.js | |
 | | kendo.dataviz.themes.js | |
 | | kendo.toolbar.js | |
-| | kendo.pdf.js | PDF export feature |
-| | kendo.calendar.js | Editing feature |
-| | kendo.datepicker.js | Editing feature |
-| | kendo.numerictextbox.js | Editing feature |
-| | kendo.validator.js | Editing feature |
-| | kendo.binder.js | Editing feature |
-| | kendo.editable.js | Editing feature |
-| | kendo.window.js | Editing feature |
-| | kendo.list.js | Editing feature |
-| | kendo.dropdownlist.js | Editing feature |
+| | kendo.pdf.js | PDF export feature (optional) |
+| | kendo.calendar.js | Editing feature (optional) |
+| | kendo.datepicker.js | Editing feature (optional) |
+| | kendo.numerictextbox.js | Editing feature (optional) |
+| | kendo.validator.js | Editing feature (optional) |
+| | kendo.binder.js | Editing feature (optional) |
+| | kendo.editable.js | Editing feature (optional) |
+| | kendo.window.js | Editing feature (optional) |
+| | kendo.list.js | Editing feature (optional) |
+| | kendo.dropdownlist.js | Editing feature (optional) |
 | | kendo.dataviz.diagram.js | |
 | [Map](http://demos.telerik.com/kendo-ui/map/index) | jquery.js | |
 | | kendo.core.js | |
