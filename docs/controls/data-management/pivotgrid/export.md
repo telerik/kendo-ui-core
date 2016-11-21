@@ -46,7 +46,7 @@ the [`rowHeaderTemplate`](/api/javascript/ui/pivotgrid#configuration-rowHeaderTe
 
 The [`excelExport`](/api/javascript/ui/grid#events-excelExport) event allows customization of the generated Excel document. The `workbook` event argument exposes the generated Excel workbook configuration.
 
-For a better understanding about how Excel documents work, check the [introductory help topic on Excel]({% slug introduction_excelexport_kendoui %}}#create-excel-document).
+For a better understanding about how Excel documents work, check the [introductory help topic on Excel]({% slug introduction_excelexport_kendoui %}#create-excel-document).
 
 ### Templates
 
