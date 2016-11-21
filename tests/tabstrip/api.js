@@ -444,7 +444,6 @@ test('insertBefore method moves a tab and its content elements to new index', 3,
     }
 });
 
-/* Not sure if we should support previous invalid behavior where the tab is moved in DOM but not the content.
 test('insertBefore method works when the same tab is passed to both parameters', 3, function() {
     var tabStrip = $("<div><ul><li>Tab 1</li><li>Tab 2</li><li>Tab 3</li></ul></div>").kendoTabStrip({
         contentUrls: [
@@ -456,11 +455,19 @@ test('insertBefore method works when the same tab is passed to both parameters',
 
     try {
         tabStrip.activateTab(tabStrip.tabGroup.children("li:first-child"));
-        jasmine.clock().tick(200);
+        jasmine.clock().tick();
+
         tabStrip.element.find("li:first").before(tabStrip.element.find("li:contains(Tab 2)"));
         tabStrip.insertBefore("li:contains(Tab 2)", "li:contains(Tab 2)");
+
+        //required as the animations currently can't be turned off'
+        tabStrip.tabGroup.children("[data-animating]").removeAttr("data-animating");
+        tabStrip.contentAnimators.filter(".k-state-active").each(function() {
+            $(this).removeClass("k-state-active");
+        })
+
         tabStrip.activateTab(tabStrip.tabGroup.children("li:first-child"));
-        jasmine.clock().tick(200);
+        jasmine.clock().tick();
 
         equal(tabStrip.tabGroup.children("li:first-child").text(), "Tab 2");
         equal($(tabStrip.element.children("div")[0]).text(), "Content 2");
@@ -468,7 +475,41 @@ test('insertBefore method works when the same tab is passed to both parameters',
     } finally {
         tabStrip.destroy();
     }
-});*/
+});
+
+test('insertAfter method works when the same tab is passed to both parameters', 3, function() {
+    var tabStrip = $("<div><ul><li>Tab 1</li><li>Tab 2</li><li>Tab 3</li></ul></div>").kendoTabStrip({
+        contentUrls: [
+            'index1.html',
+            'index2.html',
+            'index3.html'
+        ]
+    }).data("kendoTabStrip");
+
+    try {
+        tabStrip.activateTab(tabStrip.tabGroup.children("li:last-child"));
+        jasmine.clock().tick();
+
+        tabStrip.element.find("li:last").after(tabStrip.element.find("li:contains(Tab 2)"));
+        tabStrip.insertAfter("li:contains(Tab 2)", "li:contains(Tab 2)");
+
+        //required as the animations currently can't be turned off'
+        tabStrip.tabGroup.children("[data-animating]").removeAttr("data-animating");
+        tabStrip.contentAnimators.filter(".k-state-active").each(function() {
+            $(this).removeClass("k-state-active");
+        })
+
+        tabStrip.activateTab(tabStrip.tabGroup.children("li:last-child"));
+        jasmine.clock().tick();
+
+        equal(tabStrip.tabGroup.children("li:last-child").text(), "Tab 2");
+        equal($(tabStrip.element.children("div")[2]).text(), "Content 2");
+        equal(tabStrip._contentUrls[2], 'index2.html');
+    } finally {
+        tabStrip.destroy();
+    }
+});
+
 
 test('insertBefore method adds contentUrl', 4, function() {
     var tabStrip = $("<div><ul><li>Tab 3</li><li>Tab 1</li></ul></div>").kendoTabStrip({

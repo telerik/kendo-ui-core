@@ -665,7 +665,11 @@ var __meta__ = { // jshint ignore:line
         },
 
         insertBefore: function (tab, referenceTab) {
-            referenceTab = this.tabGroup.find(referenceTab);
+            if ($(tab).is($(referenceTab))) {
+                referenceTab = this.tabGroup.find(referenceTab).next();
+            } else {
+                referenceTab = this.tabGroup.find(referenceTab);
+            };
 
             var that = this,
                 inserted = that._create(tab),
@@ -690,7 +694,11 @@ var __meta__ = { // jshint ignore:line
         },
 
         insertAfter: function (tab, referenceTab) {
-            referenceTab = this.tabGroup.find(referenceTab);
+            if ($(tab).is($(referenceTab))) {
+                referenceTab = this.tabGroup.find(referenceTab).prev();
+            } else {
+                referenceTab = this.tabGroup.find(referenceTab);
+            };
 
             var that = this,
                 inserted = that._create(tab),
