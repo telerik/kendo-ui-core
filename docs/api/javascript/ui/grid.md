@@ -3154,6 +3154,38 @@ The label used for the check-all checkbox.
       });
     </script>
 
+### filterable.mode `String` *(default: "menu")*
+
+If set to `row` the user would be able to filter via extra row added below the headers. By default filtering is using the `menu` mode.
+
+Can also be set to the following string values:
+
+- "row" - the user can filter via extra row within the header.
+- "menu" - the user can filter via the menu after clicking the filter icon.
+- "menu, row" - the user can filter with both modes above enabled.
+
+> When the `filterable.mode` property is set to `"row"` or `"menu, row"`, the Grid dataSource instance is copied and applied to the Kendo UI AutoComplete widgets used for string filtering.
+This will cause one additional read request per string column. The AutoComplete dataSources do not perform paging and will use a collection of the unique column values only.
+
+#### Example - set mode option to use both "menu" and "row" modes simultaneously
+
+        <div id="grid"></div>
+        <script>
+            $("#grid").kendoGrid({
+                columns: [
+                    { field: "name" },
+                    { field: "age" }
+                ],
+                filterable: {
+                    mode: "menu, row"
+                },
+                dataSource: [
+                    { name: "Jane Doe", age: 30 },
+                    { name: "John Doe", age: 33 }
+                ]
+          });
+        </script>
+
 ### filterable.operators `Object`
 
 The text of the filter operators displayed in the filter menu.
@@ -4319,38 +4351,6 @@ The text of the "isnotnull" filter operator.
       }
     });
     </script>
-
-### filterable.mode `String` *(default: "menu")*
-
-If set to `row` the user would be able to filter via extra row added below the headers. By default filtering is using the `menu` mode.
-
-Can also be set to the following string values:
-
-- "row" - the user can filter via extra row within the header.
-- "menu" - the user can filter via the menu after clicking the filter icon.
-- "menu, row" - the user can filter with both modes above enabled.
-
-> When the `filterable.mode` property is set to `"row"` or `"menu, row"`, the Grid dataSource instance is copied and applied to the Kendo UI AutoComplete widgets used for string filtering.
-This will cause one additional read request per string column. The AutoComplete dataSources do not perform paging and will use a collection of the unique column values only.
-
-#### Example - set mode option to use both "menu" and "row" modes simultaneously
-
-        <div id="grid"></div>
-        <script>
-            $("#grid").kendoGrid({
-                columns: [
-                    { field: "name" },
-                    { field: "age" }
-                ],
-                filterable: {
-                    mode: "menu, row"
-                },
-                dataSource: [
-                    { name: "Jane Doe", age: 30 },
-                    { name: "John Doe", age: 33 }
-                ]
-          });
-        </script>
 
 ### groupable `Boolean|Object` *(default: false)*
 
