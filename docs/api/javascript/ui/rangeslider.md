@@ -100,11 +100,21 @@ Detaches event handlers and removes data entries in order to avoid memory leaks.
 
 #### Example
 
-	// deatach events
-	$("#rangeSlider").data("kendoRangeSlider").destroy();
+    <div id="rangeslider" style="width: 200px;">
+        <input />
+        <input />
+    </div>
+    <script>
+        $(document).ready(function() {
+            $("#rangeslider").kendoRangeSlider();
+            var rangeSlider = $("#rangeslider").getKendoRangeSlider();
+  	    // deatach events
+	    $("#rangeSlider").data("kendoRangeSlider").destroy();
 
-	// remove slider html from DOM
-    $("#rangeSlider").closest(".k-slider").remove();
+		// remove slider html from DOM
+		$("#rangeSlider").closest(".k-slider").remove();
+        });
+    </script>
 
 ### enable
 
@@ -112,14 +122,24 @@ Enable/Disable the **RangeSlider** widget.
 
 #### Example
 
-    // get a reference to the range slider widget
-    var rangeSlider = $("#rangeSlider").data("kendoRangeSlider");
+	<div id="rangeslider" style="width: 200px;">
+        <input />
+        <input />
+    </div>
+    <script>
+        $(document).ready(function() {
+            $("#rangeslider").kendoRangeSlider();
+            var rangeSlider = $("#rangeslider").getKendoRangeSlider();
+  	        // get a reference to the range slider widget
+			var rangeSlider = $("#rangeSlider").data("kendoRangeSlider");
 
-    // disables the range slider
-    rangeSlider.enable(false);
+			// disables the range slider
+			rangeSlider.enable(false);
 
-    // enables the range slider
-    rangeSlider.enable(true);
+			// enables the range slider
+			rangeSlider.enable(true);
+        });
+    </script>
 
 #### Parameters
 
@@ -135,9 +155,18 @@ selection values.
 
 #### Example
 
-    var rangeSider = $("#rangeSlider").data("kendoRangeSlider");
-    rangeSlider.value();
-
+	<div id="rangeslider" style="width: 200px;">
+        <input />
+        <input />
+    </div>
+    <script>
+        $(document).ready(function() {
+            $("#rangeslider").kendoRangeSlider();
+            var rangeSlider = $("#rangeslider").getKendoRangeSlider();
+  	        rangeSlider.value();
+        });
+    </script>
+    
 #### Parameters
 
 ##### selectionStart `Number`
