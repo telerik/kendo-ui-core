@@ -87,7 +87,6 @@
                     triggers++;
                 }
             });
-
         dialog.wrapper.find(".k-i-window-minimize").trigger("click");
 
         equal(triggers, 1);

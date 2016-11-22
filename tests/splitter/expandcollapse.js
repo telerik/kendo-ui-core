@@ -337,9 +337,9 @@
             ]
         });
 
-        splitter.dom.find(".k-i-arrow-60-left").click();
+        splitter.dom.find(".k-i-arrow-60-up").click();
 
-        splitter.dom.find(".k-i-arrow-60-right").click();
+        splitter.dom.find(".k-i-arrow-60-down").click();
 
         equal(splitter.dom.find(".k-pane:first").width(), 100);
     });

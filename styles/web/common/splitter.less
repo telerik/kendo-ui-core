@@ -79,20 +79,63 @@
     background-color: #f00;
 }
 
-.k-splitbar-horizontal .k-icon
-{
-    position: absolute;
-    top: 50%;
-    width: 5px;
-    height: 20px;
-    margin-top: -10px;
+.k-splitbar-horizontal 
+{ 
+    .k-icon
+    {
+        position: absolute;
+        top: 50%;
+        margin-top: -10px;
+    }
+
+    .k-i-arrow-60-right { 
+        margin-left:-2px
+    }
+
+     &.k-splitbar-draggable-horizontal .k-i-arrow-60-right { 
+        margin-top: 13px; 
+    }
+
+    .k-i-arrow-60-left 
+    { 
+        margin-left:-3px
+    }
+
+    &.k-splitbar-draggable-horizontal .k-i-arrow-60-left 
+    { 
+        margin-top: -28px; 
+    }
 }
 
-.k-i-arrow-60-left, .k-i-arrow-60-right,
-.k-i-arrow-60-right, .k-i-arrow-60-left { cursor: pointer; }
+.k-splitbar-vertical 
+{
+    .k-i-arrow-60-up 
+    { 
+        margin-top: -2px;
+    }
 
-.k-splitbar-horizontal .k-i-arrow-60-left { margin-top: -31px; }
-.k-splitbar-horizontal .k-i-arrow-60-right { margin-top: 11px; }
+    .k-i-arrow-60-down 
+    { 
+        margin-top: -2px;
+    }
+
+     &.k-splitbar-draggable-vertical .k-i-arrow-60-up 
+    { 
+        margin-left: -17px; 
+    }
+
+     &.k-splitbar-draggable-vertical .k-i-arrow-60-down 
+    { 
+        margin-left: 23px; 
+    }
+}
+
+.k-i-arrow-60-up, 
+.k-i-arrow-60-right,
+.k-i-arrow-60-down, 
+.k-i-arrow-60-left { 
+    cursor: pointer; 
+}
 
 .k-splitbar-static-horizontal
 {
@@ -108,43 +151,76 @@
 {
     position: absolute;
     left: 50%;
-    width: 20px;
-    height: 5px;
-    margin-left: -10px;
 }
-
-.k-splitbar-vertical .k-i-arrow-60-left { margin-left: -31px; }
-.k-splitbar-vertical .k-i-arrow-60-right { margin-left: 11px; }
 
 .k-splitbar-draggable-vertical .k-resize-handle,
 .k-splitbar-draggable-horizontal .k-resize-handle
 {
     display: inline-block;
+    border-radius: 1px;
 }
 
-.k-splitbar-horizontal .k-resize-handle { background-position: -165px -6px; }
-.k-splitbar-horizontal-hover > .k-resize-handle { background-position: -181px -6px; }
-.k-splitbar-horizontal .k-i-arrow-60-left,
-.k-splitbar-horizontal .k-i-arrow-60-left { background-position: -6px -174px; }
-.k-splitbar-horizontal-hover > .k-i-arrow-60-left,
-.k-splitbar-horizontal-hover > .k-i-arrow-60-left { background-position: -22px -174px; }
-.k-splitbar-horizontal .k-i-arrow-60-right,
-.k-splitbar-horizontal .k-i-arrow-60-right { background-position: -5px -142px; }
-.k-splitbar-horizontal-hover > .k-i-arrow-60-right,
-.k-splitbar-horizontal-hover > .k-i-arrow-60-right { background-position: -21px -142px; }
+.k-splitbar-draggable-horizontal .k-resize-handle 
+{
+    width: 3px;
+    height: 16px;
+    margin-left: 1px;
+}
 
-.k-splitbar-vertical .k-resize-handle { background-position: -38px -309px; }
-.k-splitbar-vertical-hover > .k-resize-handle { background-position: -70px -309px; }
-.k-splitbar-vertical .k-i-arrow-60-left,
-.k-splitbar-vertical .k-i-arrow-60-left { background-position: 2px -134px; }
-.k-splitbar-vertical-hover > .k-i-arrow-60-left,
-.k-splitbar-vertical-hover > .k-i-arrow-60-left { background-position: -14px -134px; }
-.k-splitbar-vertical .k-i-arrow-60-right,
-.k-splitbar-vertical .k-i-arrow-60-right { background-position: 2px -165px; }
-.k-splitbar-vertical-hover > .k-i-arrow-60-right,
-.k-splitbar-vertical-hover > .k-i-arrow-60-right { background-position: -14px -165px; }
+.k-splitbar-draggable-vertical .k-resize-handle 
+{
+    width: 16px;
+    height: 3px;
+    margin-top: 1px;
+}
+
+.k-splitbar {
+    .k-i-arrow-60-up,
+    .k-i-arrow-60-right,
+    .k-i-arrow-60-down,
+    .k-i-arrow-60-left {
+        font-size: 10px;
+    }
+}
 
 .k-splitter-resizing
 {
     overflow: hidden;
+}
+
+.k-rtl 
+{
+    .k-splitbar-horizontal 
+    { 
+        .k-resize-handle
+        {
+            margin-right: 1px;
+        }
+
+        .k-i-arrow-60-right { 
+            margin-top: 13px; 
+            margin-right: -3px
+        }
+
+        .k-i-arrow-60-left 
+        { 
+            margin-top: -28px; 
+            margin-right: -2px
+        }
+    }
+
+    .k-splitbar-vertical 
+    {
+        .k-i-arrow-60-up 
+        { 
+            margin-top: -2px;
+            margin-left: -17px; 
+        }
+
+        .k-i-arrow-60-down 
+        { 
+            margin-top: -2px;
+            margin-left: 23px; 
+        }
+    }
 }
