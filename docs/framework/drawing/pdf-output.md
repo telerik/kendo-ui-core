@@ -107,7 +107,9 @@ The Kendo UI Drawing API allows you to specify fonts with the `font` option of `
     var text = new drawing.Text("Hello World", new geo.Point(100, 100));
     text.options.set("font", "30px Verdana");
 
-In order for this to render correctly as PDF, your code must have access to the TTF files. Ideally, they must be the same fonts that the browser uses to render on screen. However, you cannot access the fonts from the client-side JavaScript on the machine where the browser runs, so they must be provided on the server, and the paths to them must be declared. Since Kendo UI 2014 Q3 SP1, the Kendo UI PDF generator is able to dig [CSS `@font-face` declarations](https://developer.mozilla.org/en-US/docs/Web/CSS/@font-face) directly from the stylesheets. "Manually" calling the [`pdf.defineFont()`](/api/javascript/pdf#methods-defineFont) method is no longer necessary. For more information how to embed fonts only using CSS at-rules - check `this`({% slug drawingofhtmlelements_drawingapi %}#configuration-Custom) section. 
+In order for this configuration to render the content correctly as PDF, your code must have access to the TTF files. Ideally, they must be the same fonts that the browser uses to render on screen. However, you cannot access the fonts from the client-side JavaScript on the machine where the browser runs, so they must be provided on the server and the paths to them must be declared. As of the Kendo UI 2014 Q3 SP1 release, the Kendo UI PDF generator is able to dig the [CSS `@font-face` declarations](https://developer.mozilla.org/en-US/docs/Web/CSS/@font-face) directly from the stylesheets. You no longer need to call the [`pdf.defineFont()`](/api/javascript/pdf#methods-defineFont) method manually.
+
+For more information on how to embed fonts only using CSS at-rules, refer to the section on [drawing custom fonts in PDF]({% slug drawingofhtmlelements_drawingapi %}#configuration-Custom).
 
 To manually define fonts, see the example below:
 
