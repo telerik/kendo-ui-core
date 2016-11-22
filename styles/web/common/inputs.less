@@ -782,13 +782,13 @@ span.k-numerictextbox
 
     .k-selected-color {
         vertical-align: top;
-        line-height: 0;
         display: inline-block;
         height: 2em;
         width: 2em;
         .p-i-line {
             font-size: 2em;
             color: #FF525E;
+            display: inline-block;
             -moz-transform: scaleX(-1);
             -o-transform: scaleX(-1);
             -webkit-transform: scaleX(-1);
@@ -797,7 +797,7 @@ span.k-numerictextbox
             -ms-filter: "FlipH";
         }
         .p-i-line:before {
-            content: "\e512";
+            content: "\e510";
         }
     }
     .k-tool-icon {
@@ -902,21 +902,41 @@ span.k-numerictextbox
             width: 82%;
         }
         .k-color-input {
-            background-color: #ffffff;
+            background-color: #fff;
             display: inline-block;
             width: 84%;
+            text-align: left;
         }
         .k-clear-color {
             padding: .4em;
             line-height: 0;
-            .k-i-reset-color {
-                background-image: none;
-            }
             .k-i-reset-color:before {
-                content: "\e511";
-                color: 	#8a8c99;
+                color: 	#000;
+                opacity: 0.8;
+            }
+            .k-i-reset-color:hover,
+            .k-i-reset-color:active {
+                opacity: 1;
             }
         }
+    }
+
+    .k-clear-color-container .k-clear-color.k-state-focused:active {
+        color: inherit;
+    }
+    .k-clear-color-container .k-clear-color:active {
+        color: 	#000;
+        opacity: 1;
+    }
+    .k-selected-color .k-clear-color,
+    .k-clear-color-container .k-clear-color {
+        .k-i-reset-color {
+            background-image: none;
+        }
+    }
+
+    .k-clear-color-container {
+        text-align: left;
     }
 
     .k-hsv-rectangle {

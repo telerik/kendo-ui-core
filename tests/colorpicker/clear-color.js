@@ -6,6 +6,7 @@
     });
 
     function createPicker(options) {
+        options = $.extend(options || {}, {clearButton: true, preview: true});
         return $("<input name='foo' />").appendTo(QUnit.fixture).kendoColorPicker(options).data("kendoColorPicker");
     }
 
