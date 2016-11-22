@@ -9,7 +9,7 @@ var __meta__ = { // jshint ignore:line
     description: "The Notification widget displays user alerts.",
     depends: [ "core", "popup" ],
     features: [ {
-        id: "fx",
+        id: "notification-fx",
         name: "Animation",
         description: "Support for animation",
         depends: [ "fx" ]
