@@ -2118,7 +2118,6 @@ var __meta__ = { // jshint ignore:line
 
             if (action) {
                 e.preventDefault();
-                debugger;
                 this[action]();
                 return false;
             }
