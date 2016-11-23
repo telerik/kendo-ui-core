@@ -12419,6 +12419,24 @@ The background color of the series markers.
     });
     </script>
 
+#### Example - set the chart series markers background via function
+
+    <div id="chart"></div>
+    <script>
+    $("#chart").kendoChart({
+      series: [{
+        type: "line",
+        markers: {
+          visible: true,
+          background: function (e) {
+            return e.series.color; // will match the series color
+          }
+        },
+        data: [1, 2, 3]
+      }]
+    });
+    </script>
+
 ### series.markers.border `Object|Function`
 
 The border of the markers.
