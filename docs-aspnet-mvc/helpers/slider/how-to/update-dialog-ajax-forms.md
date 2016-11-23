@@ -1,29 +1,26 @@
 ---
-title: Use RangeSliderFor method 
-page_title: Use RangeSliderFor method  | Kendo UI RangeSlider HtmlHelper
-description: "This article shows how you can use RangeSliderFor method to update a model in ASP.NET MVC applications."
+title: Use the RangeSliderFor Method
+page_title: Use the RangeSliderFor Method | Kendo UI RangeSlider HtmlHelper
+description: "Use the RangeSliderFor method to update a model in ASP.NET MVC applications."
 slug: howto_userangesliderfor_slideraspnetmv
 ---
 
-# Use RangeSliderFor method 
+# Use the RangeSliderFor Method
 
-The RangeSlider helper renders two hidden inputs behind the scenes. That helps you to consume and process a model property that holds an array of two numbers (start and end).
+The RangeSlider HtmlHelper renders two hidden inputs behind the scenes. This behavior helps you consume and process a model property that holds an array of two numbers&mdash;start and end.
 
-The following example showcases a very basic example of how such model can be used, consumed and updated with the RangeSliderFor method.
+The example below demonstrates a very basic approach for using, consuming, and updating such a model with the `RangeSliderFor` method.
 
 ##### Example
 
-**MyModel.cs**
-```CSharp
+```tab-MyModel.cs
 public class MyModel
 {
     public int ID { get; set; }
     public double[] values { get; set; }
 }
 ```
-
-**HomeController.cs**
-```CSharp
+```tab-HomeController.cs
 public ActionResult Index()
 {
     return View(new MyModel { ID = 1, values=new double[] { 1, 2 } });
@@ -35,8 +32,7 @@ public ActionResult UpdateMyModel(MyModel model)
     return View("Index", model);
 }
 ```
-
-```Razor
+```tab-Razor
 @model TelerikMvcApp.Models.MyModel
 
 @using (Html.BeginForm("UpdateMyModel", "Home"))
