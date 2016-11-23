@@ -443,8 +443,8 @@ var __meta__ = { // jshint ignore:line
             element.wrap(createWrapper(options, element, that._isHorizontal)).hide();
 
             if (options.showButtons) {
-                element.before(createButton(options, "increase", that._isHorizontal))
-                       .before(createButton(options, "decrease", that._isHorizontal));
+                element.before(createButton(options, "increase", that._isHorizontal, that._isRtl))
+                       .before(createButton(options, "decrease", that._isHorizontal, that._isRtl));
             }
 
             element.before(createTrack(options, element));
@@ -562,13 +562,21 @@ var __meta__ = { // jshint ignore:line
                "'></div></div>";
     }
 
-    function createButton (options, type, isHorizontal) {
+    function createButton (options, type, isHorizontal, isRtl) {
         var buttonCssClass = "";
 
-        if (type == "increase") {
-            buttonCssClass = isHorizontal ? "k-i-arrow-60-right" : "k-i-arrow-60-up";
+        if(isHorizontal) {
+            if ((!isRtl && type == "increase") || (isRtl && type != "increase")) {
+                buttonCssClass = "k-i-arrow-60-right";
+            } else {
+                buttonCssClass = "k-i-arrow-60-left";
+            }
         } else {
-            buttonCssClass = isHorizontal ? "k-i-arrow-60-left" : "k-i-arrow-60-down";
+            if (type == "increase") {
+                buttonCssClass = "k-i-arrow-60-up";
+            } else {
+                buttonCssClass = "k-i-arrow-60-down";
+            }
         }
 
         return "<a class='k-button k-button-" + type + "' " +
