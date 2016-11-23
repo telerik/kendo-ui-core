@@ -300,7 +300,7 @@ var __meta__ = { // jshint ignore:line
         item = $(item);
 
         item.find("> .k-link > [class*=k-i-arrow]:not(.k-sprite)").remove();
-        
+
         item.filter(":has(.k-menu-group)")
             .children(".k-link:not(:has([class*=k-i-arrow]:not(.k-sprite)))")
             .each(function () {
@@ -1201,6 +1201,10 @@ var __meta__ = { // jshint ignore:line
         _focusHandler: function (e) {
             var that = this,
                 item = $(kendo.eventTarget(e)).closest(allItemsSelector);
+
+            if (item.hasClass(DISABLEDSTATE)) {
+                return;
+            }
 
             setTimeout(function () {
                 that._moveHover([], item);
