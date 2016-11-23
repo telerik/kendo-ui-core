@@ -1584,4 +1584,62 @@
         equal(validator.errors().length, 1);
     });
 
+    test("validateInput is triggered when input becomes invalid", 1, function() {
+        container.append($('<input type="text" id="foo1" name="foo1" required="required" />'));
+        var validator = setup(container);
+        validator.bind("validateInput", function(e) {
+            ok(!e.valid);
+        });        
+
+        validator.validateInput(container.find("#foo1").get(0));
+    });
+
+    test("validateInput is triggered when input becomes valid", 1, function() {
+        container.append($('<input type="text" id="foo1" name="foo1" required="required" />'));
+        var validator = setup(container);
+        var input = container.find("#foo1").get(0);
+        validator.validateInput(input);
+        input.value = "text";
+        validator.bind("validateInput", function(e) {
+            ok(e.valid);
+        });    
+
+        validator.validateInput(input);
+    });
+
+    test("validateInput is not triggered when input validation state does not change", 0, function() {
+        container.append($('<input type="text" id="foo1" name="foo1" required="required" /><input type="text" id="foo2" name="foo2" required="required" aria-invalid="true" />'));
+        var validator = setup(container);
+        var input = container.find("#foo1").get(0);
+        var input2 = container.find("#foo2").get(0);
+        validator.bind("validateInput", function(e) {
+            ok(true);
+        });
+        input.value = "text";
+        
+        validator.validateInput(input);
+        validator.validateInput(input2);
+    });
+
+    test("validateInput is triggered with full form validation", 2, function() {
+        container.append($('<input type="text" id="foo1" name="foo1" required="required" /><input type="text" id="foo2" name="foo2" required="required" />'));
+        var validator = setup(container);
+        validator.bind("validateInput", function(e) {
+            ok(true);
+        });
+
+        validator.validate();
+    });
+
+    test("validateInput contains data for the validated input", 1, function() {
+        container.append($('<input type="text" id="foo1" name="foo1" required="required" /><input type="text" id="foo2" name="foo2" />'));
+        var validator = setup(container);
+        var input = container.find("#foo1");
+        validator.bind("validateInput", function(e) {
+            equal(input.attr("id"), e.input.attr("id"));
+        });
+
+        validator.validate();
+    });                                               
+
 })();

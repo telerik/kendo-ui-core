@@ -294,3 +294,55 @@ True if validation is passed, otherwise false.
             console.log("valid" + e.valid);
         });
       </script>
+
+### validateInput
+
+Fired when the validation state of an input changes from valid to invalid or vice versa.
+
+The event handler function context (available via the `this` keyword) will be set to the validator instance.
+
+#### Event Data
+
+##### e.input `jQuery`
+
+The object of the validated input.
+
+##### e.sender `kendo.ui.Validator`
+
+The validator instance which fired the event.
+
+##### e.valid `Boolean`
+
+True if validation is passed, otherwise false.
+
+#### Example - subscribe to the "validateInput" event during initialization
+
+      <form>
+        <input name="username" required /> <br />
+        <button id="save">Save</button>
+      </form>
+
+      <script>
+        // attach a validator to the container
+        $("form").kendoValidator({
+            validateInput: function(e) {
+                console.log("input " + e.input.attr("name") + " changed to valid: " + e.valid);
+            }
+        });
+      </script>
+
+#### Example - subscribe to the "validateInput" event after initialization
+
+      <form>
+        <input name="username" required /> <br />
+        <button id="save">Save</button>
+      </form>
+
+      <script>
+        // attach a validator to the container and get a reference
+        var validatable = $("form").kendoValidator().data("kendoValidator");
+
+        validatable.bind("validateInput", function(e) {
+            console.log("input " + e.input.attr("name") + " changed to valid: " + e.valid);
+        });
+      </script>      

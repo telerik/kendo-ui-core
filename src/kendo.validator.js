@@ -28,6 +28,10 @@ var __meta__ = { // jshint ignore:line
         NAME = "name",
         FORM = "form",
         NOVALIDATE = "novalidate",
+        //events
+        VALIDATE = "validate",
+        CHANGE = "change",
+        VALIDATE_INPUT = "validateInput",        
         proxy = $.proxy,
         patternMatcher = function(value, pattern) {
             if (typeof pattern === "string") {
@@ -132,7 +136,7 @@ var __meta__ = { // jshint ignore:line
             that._isValidated = false;
         },
 
-        events: [ "validate", "change" ],
+        events: [ VALIDATE, CHANGE, VALIDATE_INPUT ],
 
         options: {
             name: "Validator",
@@ -242,7 +246,7 @@ var __meta__ = { // jshint ignore:line
             this.validateInput(element);
 
             if (this.value() !== state) {
-                this.trigger("change");
+                this.trigger(CHANGE);
             }
         },
 
@@ -302,10 +306,10 @@ var __meta__ = { // jshint ignore:line
                 result = this.validateInput(this.element);
             }
 
-            this.trigger("validate", { valid: result });
+            this.trigger(VALIDATE, { valid: result });
 
             if (isValid !== result) {
-                this.trigger("change");
+                this.trigger(CHANGE);
             }
 
             return result;
@@ -331,8 +335,8 @@ var __meta__ = { // jshint ignore:line
                     return true;
 
                 })).hide(),
-                messageText;
-
+                messageText,
+                wasValid = !input.attr("aria-invalid");
             input.removeAttr("aria-invalid");
 
             if (!valid) {
@@ -355,6 +359,10 @@ var __meta__ = { // jshint ignore:line
                 input.attr("aria-invalid", true);
             } else {
                 delete that._errors[fieldName];
+            }
+
+            if (wasValid !== valid) {
+                this.trigger(VALIDATE_INPUT, { valid: valid, input: input });
             }
 
             input.toggleClass(INVALIDINPUT, !valid);
