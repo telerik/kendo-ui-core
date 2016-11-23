@@ -206,7 +206,6 @@ var __meta__ = { // jshint ignore:line
                     });
             } else {
                 that._contentUrls.length = that.tabGroup.find("li.k-item").length;
-                that._contentUrls.fill(null);
             }
 
             that.wrapper
