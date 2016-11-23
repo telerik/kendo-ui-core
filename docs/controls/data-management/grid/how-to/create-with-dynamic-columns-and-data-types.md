@@ -18,7 +18,7 @@ The example below demonstrates how to create a Kendo UI Grid with column and dat
     <script>
       var isDateField =[];
       $.ajax({
-        url: "http://runner.telerik.io/fullscreen/iveBA.json",
+        url: "http://www.mocky.io/v2/5835e736110000020e0c003c",
         dataType: "json",
         success: function(result) {
           generateGrid(result);
