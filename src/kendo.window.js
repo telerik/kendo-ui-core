@@ -7,13 +7,7 @@ var __meta__ = { // jshint ignore:line
     name: "Window",
     category: "web",
     description: "The Window widget displays content in a modal or non-modal HTML window.",
-    depends: [ "draganddrop" ],
-    features: [ {
-        id: "window-fx",
-        name: "Animation",
-        description: "Support for animation",
-        depends: [ "fx" ]
-    } ]
+    depends: [ "draganddrop" ]
 };
 
 (function($, undefined) {
