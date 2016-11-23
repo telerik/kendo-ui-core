@@ -669,7 +669,7 @@ var __meta__ = { // jshint ignore:line
                 referenceTab = this.tabGroup.find(referenceTab).next();
             } else {
                 referenceTab = this.tabGroup.find(referenceTab);
-            };
+            }
 
             var that = this,
                 inserted = that._create(tab),
@@ -698,7 +698,7 @@ var __meta__ = { // jshint ignore:line
                 referenceTab = this.tabGroup.find(referenceTab).prev();
             } else {
                 referenceTab = this.tabGroup.find(referenceTab);
-            };
+            }
 
             var that = this,
                 inserted = that._create(tab),
