@@ -22,7 +22,7 @@ This articles summarizes all known issues related to Telerik UI for ASP.NET MVC,
 
 - Limited set of helpers. Interim releases will add more widgets.
 - Localization is a work in progress. For a discussion, refer to [aspnet/Home/issues/1124](https://github.com/aspnet/Home/issues/1142).
-- [`Deferred()`](/aspnet-mvc/fundamentals.html#deferred-initialization) can be invoked only as a last setting.
+- [`Deferred()`](http://docs.telerik.com/aspnet-mvc/getting-started/fundamentals#configuration-Deferred) can be invoked only as a last setting.
 
 ###### Example
 
