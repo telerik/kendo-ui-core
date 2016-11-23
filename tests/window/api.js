@@ -529,6 +529,7 @@
             animation: false,
             actions: ["Pin"]
         });
+
         equal(dialog.wrapper.find(".k-i-pin").length, 1);
         equal(dialog.wrapper.find(".k-i-unpin").length, 0);
 
