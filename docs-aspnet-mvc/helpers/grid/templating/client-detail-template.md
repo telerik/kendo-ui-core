@@ -2,7 +2,7 @@
 title: Client Detail Templates
 page_title: Client Detail Templates | Kendo UI Grid HtmlHelper
 description: "Set the detail template used during Ajax binding of the Kendo UI Grid for ASP.NET MVC."
-previous_url: /kendo-ui/aspnet-mvc/helpers/grid/client-detail-template
+previous_url: /helpers/grid/client-detail-template
 slug: clientdetailtemplate_grid_aspnetmvc
 position: 1
 ---

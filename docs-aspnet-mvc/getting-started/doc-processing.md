@@ -3,7 +3,7 @@ title: Telerik Document Processing
 page_title: Telerik Document Processing | Telerik UI for ASP.NET MVC
 description: "Import and export content between different formats and work with archive files by using Telerik Document Processing."
 slug: docsprocessing_aspnetmvc
-previous_url: /kendo-ui/aspnet-mvc/doc-processing
+previous_url: /doc-processing
 position: 11
 ---
 

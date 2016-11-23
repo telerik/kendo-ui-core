@@ -2,7 +2,7 @@
 title: Batch Editing
 page_title: Batch Editing | Kendo UI Grid HtmlHelper
 description: "Enable cell editing mode and batch updates in Kendo UI Grid for ASP.NET MVC."
-previous_url: /kendo-ui/aspnet-mvc/helpers/grid/batch-editing
+previous_url: /helpers/grid/batch-editing
 slug: batchediting_grid_aspnetmvc
 position: 1
 ---

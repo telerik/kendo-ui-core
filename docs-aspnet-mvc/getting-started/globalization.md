@@ -3,7 +3,7 @@ title: Globalization
 page_title: Globalization | Telerik UI for ASP.NET MVC
 description: "Use different cultures with Telerik UI for ASP.NET MVC."
 slug: globalization_aspnetmvc
-previous_url: /kendo-ui/aspnet-mvc/globalization
+previous_url: /globalization
 position: 7
 ---
 

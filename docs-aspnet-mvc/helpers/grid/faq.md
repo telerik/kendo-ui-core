@@ -476,7 +476,7 @@ The Kendo UI Grid for ASP.NET MVC uses the `Html.EditorForModel` to create the e
 
 The [Custom Object Templates](http://bradwilson.typepad.com/blog/2009/10/aspnet-mvc-2-templates-part-4-custom-object-templates.html) blog post contains a lot of information about creating a custom editor template.
 
-The [Custom Popup Editor](http://docs.telerik.com/kendo-ui/aspnet-mvc/helpers/grid/how-to/editing/custom-popup-editor) code library project contains a ready-to-run project.
+The [Custom Popup Editor](http://docs.telerik.com/helpers/grid/how-to/editing/custom-popup-editor) code library project contains a ready-to-run project.
 
 > **Important**  
 >

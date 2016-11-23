@@ -2,7 +2,7 @@
 title: Known Issues
 page_title: Known Issues | Telerik UI for ASP.NET Core
 description: "Read about known issues when using Telerik UI for ASP.NET MVC in ASP.NET 5 and ASP.NET Core (aka MVC 6 or ASP.NET Core MVC)."
-previous_url: /kendo-ui/aspnet-mvc/aspnetmvc-apps/mvc-6/known-issues, /kendo-ui/aspnet-mvc/mvc-6/known-issues
+previous_url: /aspnetmvc-apps/mvc-6/known-issues, /mvc-6/known-issues
 slug: knownissues_aspnetmvc6_aspnetmvc
 position: 5
 ---

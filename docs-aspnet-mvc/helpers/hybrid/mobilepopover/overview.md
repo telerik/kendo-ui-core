@@ -2,7 +2,7 @@
 title: Overview
 page_title: Overview | Hybrid UI PopOver HtmlHelper
 description: "Get started with the server-side wrapper for the hybrid Kendo UI PopOver widget for ASP.NET MVC."
-previous_url: /kendo-ui/aspnet-mvc/helpers/mobilepopover/overview
+previous_url: /helpers/mobilepopover/overview
 slug: overview_hybridpopover_aspnetmvc
 position: 1
 ---

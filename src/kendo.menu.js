@@ -1468,7 +1468,8 @@ var __meta__ = { // jshint ignore:line
                                 collision: that.options.popupCollision || "fit",
                                 animation: that.options.animation,
                                 activate: that._triggerProxy,
-                                deactivate: that._triggerProxy
+                                deactivate: that._triggerProxy,
+                                appendTo: that.options.appendTo
                             }).data("kendoPopup");
 
             that._targetChild = contains(that.target[0], that.popup.element[0]);

@@ -140,12 +140,12 @@ Specifies the element that will be used as an anchor. The widget will open next 
 
 ### appendTo `String|jQuery`*(default: document.body)*
 
-Which element the popup will be appended to.
+Which element the popup will be appended to. The element needs to be relatively positioned.
 
 #### Example - append to different element
 
     <input id="datepicker" />
-    <div id="container"></div>
+    <div id="container" style="position: relative"></div>
 
     <div id="popup">CONTENT</div>
 

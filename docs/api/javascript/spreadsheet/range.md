@@ -434,7 +434,7 @@ Fills a range with values inferred from a source range.  This method employs som
 ##### srcRange `Range | String`
 
 The source range.  It must have the same number of rows or the same number of columns as the current range — otherwise
-an exception will be thrown ("Incompatible auto-fill ranges").
+an exception will be thrown (a `Range.FillError` object having `code` property `"incompatibleRanges"`).
 
 ##### direction `Number` *optional*
 
@@ -448,7 +448,7 @@ fill direction can be inferred from their positions, so it can be missing.  For 
 In this case it will select vertical reverse filling, because the target range is above the source range.
 
 If the ranges are not adjacent and the direction is missing, an exception will be thrown if the ranges don't start
-either on same column or on the same row ("Cannot determine fill direction").
+either on same column or on the same row (`"noFillDirection"` error code).
 
 Possible values for direction:
 
@@ -474,7 +474,16 @@ Possible values for direction:
             [ 5, "Wed", "Foo 2" ]
         ]);
 
-        sheet.range("A3:C10").fillFrom("A1:C2");
+        try {
+            sheet.range("A3:C10").fillFrom("A1:C2");
+        } catch(ex) {
+            if (ex instanceof kendo.spreadsheet.Range.FillError) {
+                // can be "incompatibleRanges" or "noFillDirection"
+                console.log(ex.code);
+            } else {
+                throw ex;
+            }
+        }
     </script>
 ```
 

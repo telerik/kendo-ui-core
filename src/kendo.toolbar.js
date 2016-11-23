@@ -1391,8 +1391,9 @@ var __meta__ = { // jshint ignore:line
                             lastHasFocus = true;
                         }
                     }
-
-                    if (e.shiftKey && items.index(element) === 1) {
+                    
+                    var isFirstTool = items.index(element) === items.not(".k-overflow-anchor").first().index();
+                    if (e.shiftKey && isFirstTool) {
                         if (element.is("." + BUTTON_GROUP)) {
                             firstHasFocus = target.is(":first-child");
                         } else {
@@ -1407,7 +1408,10 @@ var __meta__ = { // jshint ignore:line
 
                     if (firstHasFocus) {
                         e.preventDefault();
-                        this.wrapper.prev(":kendoFocusable").focus();
+                        var prevFocusable = this._getPrevFocusable(this.wrapper);                  
+                        if (prevFocusable) {
+                            prevFocusable.focus();
+                        }
                     }
                 }
 
@@ -1434,6 +1438,30 @@ var __meta__ = { // jshint ignore:line
                     this.userEvents.trigger("tap", { target: target });
 
                     return;
+                }
+            },
+
+            _getPrevFocusable: function(element) {
+                if (element.is("html")) {
+                    return element;
+                }
+
+                var elementToFocus, prevElement, 
+                    prevElements = element.prevAll();
+                prevElements.each(function(){
+                    prevElement = $(this);
+                    if (prevElement.is(":kendoFocusable")) {
+                        elementToFocus = prevElement;
+                        return false;
+                    } else if (prevElement.find(":kendoFocusable").length > 0) {
+                        elementToFocus = prevElement.find(":kendoFocusable").last();
+                        return false;
+                    }
+                });
+                if (elementToFocus) {
+                    return elementToFocus;
+                } else {
+                    return this._getPrevFocusable(element.parent());                    
                 }
             },
 

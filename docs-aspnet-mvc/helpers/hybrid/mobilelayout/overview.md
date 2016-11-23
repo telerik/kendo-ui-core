@@ -2,7 +2,7 @@
 title: Overview
 page_title: Overview | Hybrid UI Layout HtmlHelper
 description: "Get started with the server-side wrapper for the hybrid Kendo UI Layout widget for ASP.NET MVC."
-previous_url: /kendo-ui/aspnet-mvc/helpers/mobilelayout/overview
+previous_url: /helpers/mobilelayout/overview
 slug: overview_hybridlayout_aspnetmvc
 position: 1
 ---

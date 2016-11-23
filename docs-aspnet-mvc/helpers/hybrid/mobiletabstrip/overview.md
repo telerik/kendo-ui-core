@@ -2,7 +2,7 @@
 title: Overview
 page_title: Overview | Hybrid UI TabStrip HtmlHelper
 description: "Get started with the server-side wrapper for the hybrid Kendo UI TabStrip widget for ASP.NET MVC."
-previous_url: /kendo-ui/aspnet-mvc/helpers/mobiletabstrip/overview
+previous_url: /helpers/mobiletabstrip/overview
 slug: overview_hybridtabstrip_aspnetmvc
 position: 1
 ---
