@@ -7,7 +7,13 @@ var __meta__ = { // jshint ignore:line
     name: "Window",
     category: "web",
     description: "The Window widget displays content in a modal or non-modal HTML window.",
-    depends: [ "draganddrop" ]
+    depends: [ "draganddrop" ],
+    features: [ {
+        id: "window-fx",
+        name: "Animation",
+        description: "Support for animation",
+        depends: [ "fx" ]
+    } ]
 };
 
 (function($, undefined) {
@@ -57,7 +63,7 @@ var __meta__ = { // jshint ignore:line
         ERROR = "error",
         OVERFLOW = "overflow",
         ZINDEX = "zIndex",
-        MINIMIZE_MAXIMIZE = ".k-window-actions .k-i-window-minimize,.k-window-actions .k-i-window",
+        MINIMIZE_MAXIMIZE = ".k-window-actions .k-i-minimize,.k-window-actions .k-i-maximize",
         KPIN = ".k-i-pin",
         KUNPIN = ".k-i-unpin",
         PIN_UNPIN = KPIN + "," + KUNPIN,
@@ -353,10 +359,9 @@ var __meta__ = { // jshint ignore:line
             var actions = this.options.actions;
             var titlebar = this.wrapper.children(KWINDOWTITLEBAR);
             var container = titlebar.find(".k-window-actions");
-            var windowSpecificCommands = [ "maximize", "minimize" ];
 
             actions = $.map(actions, function(action) {
-                return { name: (windowSpecificCommands.indexOf(action.toLowerCase()) > - 1) ? "window-" + action : action };
+                return { name: action };
             });
 
             container.html(kendo.render(templates.action, actions));
@@ -523,12 +528,13 @@ var __meta__ = { // jshint ignore:line
         },
 
         _actionForIcon: function(icon) {
-            var iconClass = /\bk-i(-\w+)+\b/.exec(icon[0].className)[0];
+            var iconClass = /\bk-i-\w+\b/.exec(icon[0].className)[0];
+
             return {
                 "k-i-close": "_close",
-                "k-i-window-maximize": "maximize",
-                "k-i-window-minimize": "minimize",
-                "k-i-window-restore": "restore",
+                "k-i-maximize": "maximize",
+                "k-i-minimize": "minimize",
+                "k-i-restore": "restore",
                 "k-i-refresh": "refresh",
                 "k-i-pin": "pin",
                 "k-i-unpin": "unpin"
@@ -539,6 +545,7 @@ var __meta__ = { // jshint ignore:line
             if (this._closing) {
                 return;
             }
+
             var icon = $(e.target).closest(".k-window-action").find(".k-icon");
             var action = this._actionForIcon(icon);
 
@@ -930,7 +937,7 @@ var __meta__ = { // jshint ignore:line
                 })
                 .removeClass(MAXIMIZEDSTATE)
                 .find(".k-window-content,.k-resize-handle").show().end()
-                .find(".k-window-titlebar .k-i-window-restore").parent().remove().end().end()
+                .find(".k-window-titlebar .k-i-restore").parent().remove().end().end()
                 .find(MINIMIZE_MAXIMIZE).parent().show().end().end()
                 .find(PIN_UNPIN).parent().show();
 
@@ -970,7 +977,7 @@ var __meta__ = { // jshint ignore:line
             wrapper
                 .children(KWINDOWRESIZEHANDLES).hide().end()
                 .children(KWINDOWTITLEBAR).find(MINIMIZE_MAXIMIZE).parent().hide()
-                    .eq(0).before(templates.action({ name: "window-restore" }));
+                    .eq(0).before(templates.action({ name: "Restore" }));
 
             callback.call(that);
 
@@ -1035,7 +1042,7 @@ var __meta__ = { // jshint ignore:line
 
         isMinimized: function() {
             return this.options.isMinimized;
-        },
+        },        
 
         pin: function(force) {
             var that = this,
@@ -1327,7 +1334,7 @@ var __meta__ = { // jshint ignore:line
             that._preventDragging = wnd.trigger(RESIZESTART);
             if (that._preventDragging) {
                 return;
-            }
+            }            
 
             that.elementPadding = parseInt(wrapper.css("padding-top"), 10);
             that.initialPosition = kendo.getOffset(wrapper, "position");
@@ -1528,7 +1535,7 @@ var __meta__ = { // jshint ignore:line
         },
 
         dragcancel: function (e) {
-            if (this._preventDragging) {
+            if (this._preventDragging) { 
                 return;
             }
             this._finishDrag();
@@ -1537,7 +1544,7 @@ var __meta__ = { // jshint ignore:line
         },
 
         dragend: function () {
-            if (this._preventDragging) {
+            if (this._preventDragging) { 
                 return;
             }
             $(this.owner.wrapper)
