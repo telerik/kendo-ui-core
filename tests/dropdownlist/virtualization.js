@@ -217,4 +217,28 @@
 
         dropdownlist.value(10);
     });
+
+    asyncTest("clear filter when set new value", 2, function() {
+        var mappedDataItem = { value: 300, text: "Item300" };
+        var dropdownlist = new DropDownList(select, {
+            height: CONTAINER_HEIGHT,
+            animation: false,
+            filter: "contains",
+            dataTextField: "text",
+            dataValueField: "value",
+            dataSource: createAsyncDataSource(),
+            virtual: {
+                mapValueTo: "dataItem",
+                valueMapper: function(o) { setTimeout(function() { o.success(mappedDataItem); }, 0); },
+                itemHeight: 20
+            },
+            value: mappedDataItem.value
+        });
+
+        dropdownlist.one("dataBound", function() {
+            start();
+            equal(dropdownlist.value(), mappedDataItem.value);
+            equal(dropdownlist.text(), mappedDataItem.text);
+        });
+    });
 })();
