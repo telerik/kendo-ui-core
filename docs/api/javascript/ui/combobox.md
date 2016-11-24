@@ -554,7 +554,7 @@ refer to [Popup](/api/javascript/ui/popup) documentation.
         <input id="combobox" />
     </div>
     <script>
-    $("#combobox").kendoCombobox({
+    $("#combobox").kendoComboBox({
       dataSource: [
         { id: 1, name: "Apples" },
         { id: 2, name: "Oranges" }
@@ -577,7 +577,7 @@ Defines a jQuery selector that will be used to find a container element, where t
         <input id="combobox" />
     </div>
     <script>
-    $("#combobox").kendoCombobox({
+    $("#combobox").kendoComboBox({
       dataSource: [
         { id: 1, name: "Apples" },
         { id: 2, name: "Oranges" }
@@ -611,7 +611,7 @@ The available "x" positions are:
         <input id="combobox" />
     </div>
     <script>
-    $("#combobox").kendoCombobox({
+    $("#combobox").kendoComboBox({
       dataSource: [
         { id: 1, name: "Apples" },
         { id: 2, name: "Oranges" }
@@ -645,7 +645,7 @@ The available "x" positions are:
         <input id="combobox" />
     </div>
     <script>
-    $("#combobox").kendoCombobox({
+    $("#combobox").kendoComboBox({
       dataSource: [
         { id: 1, name: "Apples" },
         { id: 2, name: "Oranges" }
