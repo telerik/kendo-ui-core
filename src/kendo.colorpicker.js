@@ -594,13 +594,17 @@ var __meta__ = { // jshint ignore:line
         },
         _template: kendo.template(
             '# if (preview) { #' +
-                '<div class="k-selected-color"><div class="k-selected-color-display"><div class="k-color-input"><input class="k-color-value" placeholder="#: messages.noColor #" #= !data.input ? \'style=\"visibility: hidden;\"\' : \"\" #>' +
-                '# if (clearButton) { #' +
+                '<div class="k-selected-color"><div class="k-selected-color-display"><div class="k-color-input"><input class="k-color-value" ' +
+                    '# if (clearButton && !_standalone) { #' +
+                        'placeholder="#: messages.noColor #" ' +
+                    '# } #' +
+                    '#= !data.input ? \'style=\"visibility: hidden;\"\' : \"\" #>' +
+                '# if (clearButton && !_standalone) { #' +
                     '<span class="k-clear-color k-button-bare" title="#: messages.clearColor #"></span>' +
                 '# } #' +
                 '</div></div></div>' +
             '# } #' +
-             '# if (clearButton && !preview) { #' +
+             '# if (clearButton && !_standalone && !preview) { #' +
                     '<div class="k-clear-color-container"><span class="k-clear-color k-button-bare">#: messages.clearColor #</span></div>' +
              '# } #' +
             '<div class="k-hsv-rectangle"><div class="k-hsv-gradient"></div><div class="k-draghandle"></div></div>' +
