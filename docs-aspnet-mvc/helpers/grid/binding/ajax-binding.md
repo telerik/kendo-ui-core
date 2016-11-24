@@ -374,7 +374,7 @@ In addition to using [server]({% slug configuration_gridhelper_aspnetmvc %}#temp
 
 When using client-side data binding for the Grid, perform all these customizations in the [`dataBound`]({% slug overview_gridhelper_aspnetmvc %}#event-handling) event of the Grid. If the custom code is executed earlier&mdash;for example, in `document.ready`&mdash;it is very likely it has no effect, because the table rows are still not rendered at that time.
 
-There is one exception to the above. Delegated event handlers will work, because they are attached to an ancestor element of the data rows&mdash;for example, the Grid [`table`](/kendo-ui/api/javascript/ui/grid#fields-table), [`tbody`](/kendo-ui/api/javascript/ui/grid#fields-tbody), or [`wrapper`](http://docs.telerik.com/kendo-ui/intro/widget-basics/wrapper-element), and the event handler code should check what the event target is.
+There is one exception to the above. Delegated event handlers will work, because they are attached to an ancestor element of the data rows&mdash;for example, the Grid [`table`](http://docs.telerik.com/kendo-ui/api/javascript/ui/grid#fields-table), [`tbody`](http://docs.telerik.com/kendo-ui/api/javascript/ui/grid#fields-tbody), or [`wrapper`](http://docs.telerik.com/kendo-ui/intro/widget-basics/wrapper-element), and the event handler code should check what the event target is.
 
 ### Prevent Ajax Response Caching
 

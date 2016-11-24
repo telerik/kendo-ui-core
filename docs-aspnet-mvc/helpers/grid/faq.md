@@ -215,7 +215,7 @@ The Menu requires the Grid cells to allow overflowing, which is disabled by defa
 
 ### How to Change the Format of Bound Columns?
 
-Use the [`Format`](/api/aspnet-mvc/Kendo.Mvc.UI.Fluent/GridBoundColumnBuilder#formatsystem.string) method. The value should be a valid [`number`](../../../kendo-ui/api/javascript/kendo#standard-number-formats) or [`date`](../../../kendo-ui/api/javascript/kendo#standard-date-formats) format.
+Use the [`Format`](/api/Kendo.Mvc.UI.Fluent/GridBoundColumnBuilder#formatsystem.string) method. The value should be a valid [`number`](../../../kendo-ui/api/javascript/kendo#standard-number-formats) or [`date`](../../../kendo-ui/api/javascript/kendo#standard-date-formats) format.
 
 The example below demonstrates how to specify the format of a bound column.
 
@@ -476,7 +476,7 @@ The Kendo UI Grid for ASP.NET MVC uses the `Html.EditorForModel` to create the e
 
 The [Custom Object Templates](http://bradwilson.typepad.com/blog/2009/10/aspnet-mvc-2-templates-part-4-custom-object-templates.html) blog post contains a lot of information about creating a custom editor template.
 
-The [Custom Popup Editor](http://docs.telerik.com/helpers/grid/how-to/editing/custom-popup-editor) code library project contains a ready-to-run project.
+The [Custom Popup Editor]({% slug howto_usecustompopupeditors_gridaspnetmvc %}) code library project contains a ready-to-run project.
 
 > **Important**  
 >

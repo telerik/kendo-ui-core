@@ -7,7 +7,7 @@ slug: howto_alternatingrows_aspnetmvcgrid
 
 # Color Alternating Rows
 
-The demo on how to color the alternating rows of an exported Grid to Excel uses the [`background`](/kendo-ui/api/javascript/ooxml/workbook#configuration-sheets.rows.cells.background) option of the cell to set the background color of the alternating rows.
+The demo on how to color the alternating rows of an exported Grid to Excel uses the [`background`](http://docs.telerik.com/kendo-ui/api/javascript/ooxml/workbook#configuration-sheets.rows.cells.background) option of the cell to set the background color of the alternating rows.
 
 To see the example, refer to [this project](https://github.com/telerik/ui-for-aspnet-mvc-examples/tree/master/grid/alternating-rows).
 

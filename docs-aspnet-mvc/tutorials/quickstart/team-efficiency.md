@@ -850,10 +850,10 @@ The Kendo UI DataSource has many abilities and responsibilities, among which to:
 - Process serialization formats to and from a remote endpoint.
 - [Synchronize updates, create, update, delete](http://docs.telerik.com/kendo-ui/framework/datasource/crud) to and from a remote endpoint.
 - [Maintain an in-memory cache of data, including changes](http://docs.telerik.com/kendo-ui/framework/datasource/offline) for updating to a remote endpoint.
-- Calculate and maintain [aggregates](/kendo-ui/api/javascript/data/datasource#methods-aggregate), [sorting order](/kendo-ui/api/javascript/data/datasource#methods-sort) and [paging](/kendo-ui/api/javascript/data/datasource#methods-page).
-- Provide a query mechanism via [filter expressions](/kendo-ui/api/javascript/data/datasource#methods-filter).
+- Calculate and maintain [aggregates](http://docs.telerik.com/kendo-ui/api/javascript/data/datasource#methods-aggregate), [sorting order](http://docs.telerik.com/kendo-ui/api/javascript/data/datasource#methods-sort) and [paging](http://docs.telerik.com/kendo-ui/api/javascript/data/datasource#methods-page).
+- Provide a query mechanism via [filter expressions](http://docs.telerik.com/kendo-ui/api/javascript/data/datasource#methods-filter).
 
-For detailed information on the capabilities of the [DataSource](http://docs.telerik.com/kendo-ui/framework/datasource/overview), refer to its [configuration API methods, and events](/kendo-ui/api/javascript/data/datasource), and [demos](http://demos.telerik.com/kendo-ui/datasource/index).
+For detailed information on the capabilities of the [DataSource](http://docs.telerik.com/kendo-ui/framework/datasource/overview), refer to its [configuration API methods, and events](http://docs.telerik.com/kendo-ui/api/javascript/data/datasource), and [demos](http://demos.telerik.com/kendo-ui/datasource/index).
 
 At this point the dashboard is showing all invoice data. Let's use the `EmployeeList` list view and `StatsFrom`/`StatsTo` date pickers to filter the invoice grid by invoking the grid's datasource.
 

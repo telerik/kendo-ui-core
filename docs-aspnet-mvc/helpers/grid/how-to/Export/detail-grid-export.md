@@ -7,7 +7,7 @@ slug: howto_detailgridexcelexport_aspnetmvcgrid
 
 # Export Detail Grids to Excel
 
-The demo on how to export the detail Grids and merge their workbooks with the master Grid workbook uses the [`excelExport`](/kendo-ui/api/javascript/ui/grid#events-excelExport) event to get the workbook of the detail Grids. The event is prevented to avoid saving an Excel file for every detail Grid.
+The demo on how to export the detail Grids and merge their workbooks with the master Grid workbook uses the [`excelExport`](http://docs.telerik.com/kendo-ui/api/javascript/ui/grid#events-excelExport) event to get the workbook of the detail Grids. The event is prevented to avoid saving an Excel file for every detail Grid.
 
 To see the example on how to export all expanded detail Grids, refer to [this Visual Studio project](https://github.com/telerik/ui-for-aspnet-mvc-examples/tree/master/grid/detail-grid-excel-export).
 
