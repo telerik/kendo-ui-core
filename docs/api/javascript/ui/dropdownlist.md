@@ -115,6 +115,22 @@ Controls whether to bind the widget to the data source on initialization.
     });
     </script>
 
+### autoWidth `Boolean`
+
+If set to `true` the widget will avoid wrapping longer item labels by automatically adjusting the popup element's width.
+
+#### Example - enable autoWidth
+
+    <input id="dropdownlist" style="width: 100px;" />
+    <script>
+    $("#dropdownlist").kendoDropDownList({
+      autoWidth: true,
+      dataSource: {
+        data: ["Short item", "An item with really, really long text"]
+      }
+    });
+    </script>
+
 ### cascadeFrom `String`
 
 Use it to set the Id of the parent DropDownList widget.

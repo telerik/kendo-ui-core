@@ -140,6 +140,22 @@ Controls whether to close the widget suggestion list on item selection.
     });
     </script>
 
+### autoWidth `Boolean`
+
+If set to `true` the widget will avoid wrapping longer item labels by automatically adjusting the popup element's width.
+
+#### Example - enable autoWidth
+
+    <input id="multiselect" style="width: 100px;" />
+    <script>
+    $("#multiselect").kendoMultiSelect({
+      autoWidth: true,
+      dataSource: {
+        data: ["Short item", "An item with really, really long text"]
+      }
+    });
+    </script>
+
 ### clearButton `Boolean` *(default: true)*
 
 Unless this options is set to `false`, a button will appear when hovering the widget. Clicking that button will reset the widget's value and will trigger the change event.
