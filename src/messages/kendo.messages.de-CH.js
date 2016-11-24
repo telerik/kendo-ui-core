@@ -109,13 +109,13 @@
   if (kendo.ui.FilterMenu) {
     kendo.ui.FilterMenu.prototype.options.messages =
       $.extend(true, kendo.ui.FilterMenu.prototype.options.messages, {
-        "and": "Und",
+        "and": "und",
         "clear": "Löschen",
         "filter": "Filtern",
         "info": "Zeilen mit Wert anzeigen, der",
         "isFalse": "falsch",
         "isTrue": "richtig",
-        "or": "Oder",
+        "or": "oder",
         "selectValue": "-Wählen Sie-",
         "cancel": "Abbrechen",
         "operator": "Operator",
