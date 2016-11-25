@@ -108,6 +108,22 @@ Controls whether to bind the widget to the data source on initialization.
     });
     </script>
 
+### autoWidth `Boolean`
+
+If set to `true`, the widget automatically adjusts the width of the popup element and does not wrap up the item label.
+
+#### Example - enable autoWidth
+
+    <input id="combobox" style="width: 100px;" />
+    <script>
+    $("#combobox").kendoComboBox({
+      autoWidth: true,
+      dataSource: {
+        data: ["Short item", "An item with really, really long text"]
+      }
+    });
+    </script>
+
 ### cascadeFrom `String`
 
 Use it to set the Id of the parent ComboBox widget.
