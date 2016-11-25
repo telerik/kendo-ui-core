@@ -109,10 +109,10 @@ Detaches event handlers and removes data entries in order to avoid memory leaks.
             $("#rangeslider").kendoRangeSlider();
             var rangeSlider = $("#rangeslider").getKendoRangeSlider();
   	    // deatach events
-	    $("#rangeSlider").data("kendoRangeSlider").destroy();
+	    $("#rangeslider").data("kendoRangeSlider").destroy();
 
 		// remove slider html from DOM
-		$("#rangeSlider").closest(".k-slider").remove();
+		$("#rangeslider").closest(".k-slider").remove();
         });
     </script>
 
@@ -131,7 +131,7 @@ Enable/Disable the **RangeSlider** widget.
             $("#rangeslider").kendoRangeSlider();
             var rangeSlider = $("#rangeslider").getKendoRangeSlider();
   	        // get a reference to the range slider widget
-			var rangeSlider = $("#rangeSlider").data("kendoRangeSlider");
+			var rangeSlider = $("#rangeslider").data("kendoRangeSlider");
 
 			// disables the range slider
 			rangeSlider.enable(false);
