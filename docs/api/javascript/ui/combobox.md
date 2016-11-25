@@ -110,7 +110,7 @@ Controls whether to bind the widget to the data source on initialization.
 
 ### autoWidth `Boolean`
 
-If set to `true` the widget will avoid wrapping longer item labels by automatically adjusting the popup element's width.
+If set to `true`, the widget automatically adjusts the width of the popup element and does not wrap up the item label.
 
 #### Example - enable autoWidth
 

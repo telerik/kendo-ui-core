@@ -284,6 +284,22 @@ Customize the width of a drop-down list and change its dimensions by using the j
         multiselect.list.width(400);
     </script>
 
+### Adjustment of the Popup Width
+
+It is possible to let the popup element automatically adjust its width according to the length of the item label it displays. When the `autoWidth` option is set to `true`, the popup shows the content on one line and does not wrap it up.
+
+###### Example
+
+    <input id="multiselect" style="width: 100px;" />
+    <script>
+    $("#multiselect").kendoMultiSelect({
+      autoWidth: true,
+      dataSource: {
+        data: ["Short item", "An item with really, really long text"]
+      }
+    });
+    </script>
+
 ### Access of Drop-Down List Element
 
 The drop-down list renders an ID attribute, generated from the ID of the widget and the `-list` suffix.
