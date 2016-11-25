@@ -1882,11 +1882,13 @@ function pad(number, digits, end) {
         support.msPointers = window.MSPointerEvent;
         support.pointers = window.PointerEvent;
 
+        var docStyle = document.documentElement.style;
         var transitions = support.transitions = false,
             transforms = support.transforms = false,
             elementProto = "HTMLElement" in window ? HTMLElement.prototype : [];
 
-        support.hasHW3D = ("WebKitCSSMatrix" in window && "m11" in new window.WebKitCSSMatrix()) || "MozPerspective" in document.documentElement.style || "msPerspective" in document.documentElement.style;
+        support.hasHW3D = ("WebKitCSSMatrix" in window && "m11" in new window.WebKitCSSMatrix()) || "MozPerspective" in docStyle || "msPerspective" in docStyle;
+        support.cssFlexbox = ("flexWrap" in docStyle) || ("WebkitFlexWrap" in docStyle) || ("msFlexWrap" in docStyle);
 
         each([ "Moz", "webkit", "O", "ms" ], function () {
             var prefix = this.toString(),
@@ -2106,7 +2108,7 @@ function pad(number, digits, end) {
             }
         };
 
-        support.cssBorderSpacing = typeof document.documentElement.style.borderSpacing != "undefined" && !(support.browser.msie && support.browser.version < 8);
+        support.cssBorderSpacing = typeof docStyle.borderSpacing != "undefined" && !(support.browser.msie && support.browser.version < 8);
 
         (function(browser) {
             // add browser-specific CSS class
@@ -2133,6 +2135,10 @@ function pad(number, digits, end) {
             }
             if (support.mobileOS) {
                 cssClass += " k-mobile";
+            }
+
+            if (!support.cssFlexbox) {
+                cssClass += " k-no-flexbox";
             }
 
             docElement.addClass(cssClass);
