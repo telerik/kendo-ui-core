@@ -18,6 +18,7 @@ var __meta__ = { // jshint ignore:line
         each = $.each,
         trim = $.trim,
         extend = $.extend,
+        isFunction = kendo.isFunction,
         template = kendo.template,
         outerWidth = kendo._outerWidth,
         outerHeight = kendo._outerHeight,
@@ -145,7 +146,7 @@ var __meta__ = { // jshint ignore:line
                 item
                     .contents()      // exclude groups, real links, templates and empty text nodes
                     .filter(function() { return (!this.nodeName.match(excludedNodesRegExp) && !(this.nodeType == 3 && !trim(this.nodeValue))); })
-                    .wrapAll("<span class='" + LINK + "'/>");
+                    .wrapAll("<span UNSELECTABLE='on' class='" + LINK + "'/>");
             }
         });
 
@@ -174,6 +175,8 @@ var __meta__ = { // jshint ignore:line
 
             options = that.options;
 
+            that._contentUrls = options.contentUrls || [];
+
             that._wrapper();
 
             that._isRtl = kendo.support.isRtl(that.wrapper);
@@ -192,11 +195,17 @@ var __meta__ = { // jshint ignore:line
 
             that._scrollable();
 
-            if (that.options.contentUrls) {
+            if (that._contentUrls.length) {
                 that.wrapper.find(".k-tabstrip-items > .k-item")
                     .each(function(index, item) {
-                        $(item).find(">." + LINK).data(CONTENTURL, that.options.contentUrls[index]);
+                        var url = that._contentUrls[index];
+
+                        if (typeof url === 'string') {
+                            $(item).find(">." + LINK).data(CONTENTURL, url);
+                        }
                     });
+            } else {
+                that._contentUrls.length = that.tabGroup.find("li.k-item").length;
             }
 
             that.wrapper
@@ -453,9 +462,14 @@ var __meta__ = { // jshint ignore:line
                 if (e.field === options.dataTextField) {
                     that.tabGroup.children().eq(idx).find(".k-link").text(view[0].get(e.field));
                 }
+
+                if (e.field === options.dataUrlField) {
+                    that._contentUrls[idx] = view[0].get(e.field);
+                }
             } else {
                 that.trigger("dataBinding");
                 that.remove("li");
+                that._contentUrls = [];
                 that.append(tabs);
                 that.trigger("dataBound");
             }
@@ -486,6 +500,10 @@ var __meta__ = { // jshint ignore:line
                 animation = that.options.animation;
 
             that._animations(options);
+
+            if (options.contentUrls) {
+                that._contentUrls = options.contentUrls;
+            }
 
             options.animation = extend(true, animation, options.animation);
 
@@ -594,10 +612,11 @@ var __meta__ = { // jshint ignore:line
         reload: function (element) {
             element = this.tabGroup.find(element);
             var that = this;
+            var contentUrls = that._contentUrls;
 
             element.each(function () {
                 var item = $(this),
-                    contentUrl = item.find("." + LINK).data(CONTENTURL),
+                    contentUrl = item.find("." + LINK).data(CONTENTURL) || contentUrls[item.index()],
                     content = that.contentHolder(item.index());
 
                 if (contentUrl) {
@@ -632,43 +651,71 @@ var __meta__ = { // jshint ignore:line
             return that;
         },
 
+        _appendUrlItem: function(url) {
+            this._contentUrls.push(url);
+        },
+
+        _moveUrlItem: function(from, to) {
+            this._contentUrls.splice(to, 0, this._contentUrls.splice(from, 1)[0]);
+        },
+
+        _removeUrlItem: function(index) {
+            this._contentUrls.splice(index, 1);
+        },
+
         insertBefore: function (tab, referenceTab) {
-            referenceTab = this.tabGroup.find(referenceTab);
+            if ($(tab).is($(referenceTab))) {
+                referenceTab = this.tabGroup.find(referenceTab).next();
+            } else {
+                referenceTab = this.tabGroup.find(referenceTab);
+            }
 
             var that = this,
                 inserted = that._create(tab),
-                referenceContent = $(that.contentElement(referenceTab.index()));
+                referenceContent = that.element.find("#" + referenceTab.attr("aria-controls"));
 
             each(inserted.tabs, function (idx) {
                 var contents = inserted.contents[idx];
+                var fromIndex = inserted.newTabsCreated ? that._contentUrls.length - (inserted.tabs.length - idx) : $(contents).index() - 1;
+
                 referenceTab.before(this);
                 referenceContent.before(contents);
+
+                that._moveUrlItem(fromIndex, $(this).index());
                 that.angular("compile", function(){ return { elements: [ contents ] }; });
             });
 
             updateFirstLast(that.tabGroup);
-            that._updateContentElements();
+            that._updateContentElements(inserted.newTabsCreated);
             that.resize(true);
 
             return that;
         },
 
         insertAfter: function (tab, referenceTab) {
-            referenceTab = this.tabGroup.find(referenceTab);
+            if ($(tab).is($(referenceTab))) {
+                referenceTab = this.tabGroup.find(referenceTab).prev();
+            } else {
+                referenceTab = this.tabGroup.find(referenceTab);
+            }
 
             var that = this,
                 inserted = that._create(tab),
-                referenceContent = $(that.contentElement(referenceTab.index()));
+                referenceContent = that.element.find("#" + referenceTab.attr("aria-controls"));
 
             each(inserted.tabs, function (idx) {
                 var contents = inserted.contents[idx];
+                var fromIndex = inserted.newTabsCreated ? that._contentUrls.length - (inserted.tabs.length - idx) : $(contents).index() - 1;
+
                 referenceTab.after(this);
                 referenceContent.after(contents);
+
+                that._moveUrlItem(fromIndex, $(this).index());
                 that.angular("compile", function(){ return { elements: [ contents ] }; });
             });
 
             updateFirstLast(that.tabGroup);
-            that._updateContentElements();
+            that._updateContentElements(inserted.newTabsCreated);
             that.resize(true);
 
             return that;
@@ -686,8 +733,12 @@ var __meta__ = { // jshint ignore:line
             }
 
             contents = elements.map(function () {
-                var content = that.contentElement($(this).index());
+                var idx = $(this).index();
+                var content = that.contentElement(idx);
+
                 kendo.destroy(content);
+                that._removeUrlItem(idx);
+
                 return content;
             });
 
@@ -702,13 +753,21 @@ var __meta__ = { // jshint ignore:line
         },
 
         _create: function (tab) {
-            var plain = $.isPlainObject(tab),
-                that = this, tabs, contents, content;
+            var that = this,
+            tabs,
+            contents,
+            content,
+            newTabsCreated = false;
 
-            if (plain || $.isArray(tab)) {
+            tab = tab instanceof kendo.data.ObservableArray ? tab.toJSON() : tab;
+
+            if ($.isPlainObject(tab) || $.isArray(tab)) {
                 tab = $.isArray(tab) ? tab : [tab];
+                newTabsCreated = true;
 
                 tabs = map(tab, function (value, idx) {
+                            that._appendUrlItem(tab[idx].contentUrl || null);
+
                             return $(TabStrip.renderItem({
                                 group: that.tabGroup,
                                 item: extend(value, { index: idx })
@@ -730,18 +789,20 @@ var __meta__ = { // jshint ignore:line
                 }
                 contents = $();
                 tabs.each(function () {
-                    content = $("<div class='" + CONTENT + "'/>");
                     if (/k-tabstrip-items/.test(this.parentNode.className)) {
-                        var index = parseInt(this.getAttribute("aria-controls").replace(/^.*-/, ""), 10) - 1;
-                        content = $(that.contentElement(index));
+                        var element = that.element.find("#" + this.getAttribute("aria-controls"));
+                        content = element;
+                    } else {
+                        content = $("<div class='" + CONTENT + "'/>");
                     }
+
                     contents = contents.add(content);
                 });
 
                 updateTabClasses(tabs);
             }
 
-            return { tabs: tabs, contents: contents };
+            return { tabs: tabs, contents: contents, newTabsCreated: newTabsCreated };
         },
 
         _toggleDisabled: function(element, enable) {
@@ -793,37 +854,49 @@ var __meta__ = { // jshint ignore:line
                 updateTabClasses(tabs);
 
                 updateFirstLast(that.tabGroup);
-                that._updateContentElements();
+                that._updateContentElements(true);
             }
         },
 
-        _updateContentElements: function() {
+        _elementId: function(element, idx) {
+            var elementId = element.attr("id");
+            var wrapperId = this.element.attr("id");
+
+            if (!elementId || elementId.indexOf(wrapperId + "-") > -1) {
+                var tabStripID = (wrapperId || kendo.guid()) + "-";
+
+                return tabStripID + (idx + 1);
+            }
+
+            return elementId;
+        },
+
+        _updateContentElements: function(isInitialUpdate) {
             var that = this,
-                contentUrls = that.options.contentUrls || [],
+                contentUrls = that._contentUrls,
                 items = that.tabGroup.find(".k-item"),
-                tabStripID = (that.element.attr("id") || kendo.guid()) + "-",
-                contentElements = that.wrapper.children("div");
+                contentElements = that.wrapper.children("div"),
+                _elementId = that._elementId.bind(that);
 
             if (contentElements.length && (items.length > contentElements.length)) {
                 contentElements.each(function(idx) {
-                    var currentIndex = parseInt(this.id.replace(tabStripID, ""), 10),
-                        item = items.filter("[aria-controls=" + tabStripID + currentIndex + "]"),
-                        id = tabStripID + (idx+1);
+                    var id = _elementId($(this), idx);
+                    var item = items.filter("[aria-controls=" + (this.id || 0) + "]")[0];
 
-                    item.data("aria", id);
+                    if (!item && isInitialUpdate) {
+                         item = items[idx];
+                    }
+
+                    if (item) {
+                        item.setAttribute("aria-controls", id);
+                    }
+
                     this.setAttribute("id", id);
-                });
-
-                items.each(function() {
-                    var item = $(this);
-
-                    this.setAttribute("aria-controls", item.data("aria"));
-                    item.removeData("aria");
                 });
             } else {
                 items.each(function(idx) {
-                    var currentContent = contentElements.eq(idx),
-                        id = tabStripID + (idx+1);
+                    var currentContent = contentElements.eq(idx);
+                    var id = _elementId(currentContent, idx);
 
                     this.setAttribute("aria-controls", id);
 
@@ -929,7 +1002,8 @@ var __meta__ = { // jshint ignore:line
                 link = item.find("." + LINK),
                 href = link.attr(HREF),
                 collapse = that.options.collapsible,
-                contentHolder = that.contentHolder(item.index()),
+                index = item.index(),
+                contentHolder = that.contentHolder(index),
                 prevent, isAnchor;
 
             if (item.closest(".k-widget")[0] != that.wrapper[0]) {
@@ -940,7 +1014,7 @@ var __meta__ = { // jshint ignore:line
                 return true;
             }
 
-            isAnchor = link.data(CONTENTURL) || (href && (href.charAt(href.length - 1) == "#" || href.indexOf("#" + that.element[0].id + "-") != -1));
+            isAnchor = link.data(CONTENTURL) || that._contentUrls[index] || (href && (href.charAt(href.length - 1) == "#" || href.indexOf("#" + that.element[0].id + "-") != -1));
             prevent = !href || isAnchor;
 
             if (that.tabGroup.children("[data-animating]").length) {
@@ -985,6 +1059,8 @@ var __meta__ = { // jshint ignore:line
                 if (tabGroupScrollWidth > wrapperOffsetWidth && !that._scrollableModeActive) {
                     that._nowScrollingTabs = false;
                     that._isRtl = kendo.support.isRtl(that.element);
+                    var mouseDown = kendo.support.mobileOS ? "touchstart" : "mousedown";
+                    var mouseUp = kendo.support.mobileOS ? "touchend" : "mouseup";
 
                     that.wrapper.append(scrollButtonHtml("prev", "k-i-arrow-60-left") + scrollButtonHtml("next", "k-i-arrow-60-right"));
 
@@ -993,17 +1069,17 @@ var __meta__ = { // jshint ignore:line
 
                     that.tabGroup.css({ marginLeft: outerWidth(scrollPrevButton) + 9, marginRight: outerWidth(scrollNextButton) + 12 });
 
-                    scrollPrevButton.on("mousedown" + NS, function () {
+                    scrollPrevButton.on(mouseDown + NS, function () {
                         that._nowScrollingTabs = true;
                         that._scrollTabsByDelta(options.scrollable.distance * (that._isRtl ? 1 : -1));
                     });
 
-                    scrollNextButton.on("mousedown" + NS, function () {
+                    scrollNextButton.on(mouseDown + NS, function () {
                         that._nowScrollingTabs = true;
                         that._scrollTabsByDelta(options.scrollable.distance * (that._isRtl ? -1 : 1));
                     });
 
-                    scrollPrevButton.add(scrollNextButton).on("mouseup" + NS, function () {
+                    scrollPrevButton.add(scrollNextButton).on(mouseUp + NS, function () {
                         that._nowScrollingTabs = false;
                     });
 
@@ -1181,7 +1257,7 @@ var __meta__ = { // jshint ignore:line
 
             item.attr("data-animating", true);
 
-            var isAjaxContent = (item.children("." + LINK).data(CONTENTURL) || false) && contentHolder.is(EMPTY),
+            var isAjaxContent = (item.children("." + LINK).data(CONTENTURL) || that._contentUrls[itemIndex] || false) && contentHolder.is(EMPTY),
                 showContentElement = function () {
                     that.tabGroup.find("." + TABONTOP).removeClass(TABONTOP);
                     item.addClass(TABONTOP) // change these directly to bring the tab on top.
@@ -1264,14 +1340,11 @@ var __meta__ = { // jshint ignore:line
             }
 
             var contentElements = this.contentElements && this.contentElements[0] && !kendo.kineticScrollNeeded ? this.contentElements : this.contentAnimators;
-
-            itemIndex = contentElements && itemIndex < 0 ? contentElements.length + itemIndex : itemIndex;
-
-            var idTest = new RegExp("-" + (itemIndex + 1) + "$");
+            var id = $(this.tabGroup.children()[itemIndex]).attr("aria-controls");
 
             if (contentElements) {
                 for (var i = 0, len = contentElements.length; i < len; i++) {
-                    if (idTest.test(contentElements.eq(i).closest(".k-content")[0].id)) {
+                    if (contentElements.eq(i).closest(".k-content")[0].id == id) {
                         return contentElements[i];
                     }
                 }
@@ -1312,10 +1385,10 @@ var __meta__ = { // jshint ignore:line
                 setTimeout(oldProgressAnimation, 40);
             }
 
-            url = url || link.data(CONTENTURL) || link.attr(HREF);
+            url = url || link.data(CONTENTURL) || that._contentUrls[element.index()] || link.attr(HREF);
             that.inRequest = true;
 
-            that.xhr = $.ajax({
+            var ajaxOptions = {
                 type: "GET",
                 cache: false,
                 url: url,
@@ -1416,7 +1489,17 @@ var __meta__ = { // jshint ignore:line
 
                     that.trigger(CONTENTLOAD, { item: element[0], contentElement: content[0] });
                 }
-            });
+            };
+
+            if (typeof url === "object") {
+                ajaxOptions = $.extend(true, {}, ajaxOptions, url);
+
+                if (isFunction(ajaxOptions.url)) {
+                    ajaxOptions.url = ajaxOptions.url();
+                }
+            }
+
+            that.xhr = $.ajax(ajaxOptions);
         }
     });
 
