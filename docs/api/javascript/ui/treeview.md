@@ -1586,6 +1586,8 @@ Pre-defined status classes are:
         - Indicates an invalid operation. Using this class will automatically
           make the drop operation invalid, so there will be no need to call
           `setValid(false)` in the `drop` event.
+		  
+> Please note that from version 2016.3.914 the naming convention for pre-defined status classes is k-i-className. 
 
 > Note that status classes are returned without the `k-` prefix by `e.statusClass`, but this prefix is required when setting a predefined status class via `e.setStatusClass`. A prefix is not required if setting a custom status CSS class.
 
