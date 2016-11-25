@@ -101,6 +101,22 @@ The effect(s) to use when playing the open animation. Multiple effects should be
 
 [Complete list of available animations](/api/javascript/effects/common)
 
+### autoWidth `Boolean`
+
+If set to `true`, the widget automatically adjusts the width of the popup element and does not wrap up the item label.
+
+#### Example - enable autoWidth
+
+    <input id="autocomplete" style="width: 100px;" />
+    <script>
+    $("#autocomplete").kendoAutoComplete({
+      autoWidth: true,
+      dataSource: {
+        data: ["Short item", "An item with really, really long text"]
+      }
+    });
+    </script>
+
 ### dataSource `Object|Array|kendo.data.DataSource`
 
 The data source of the widget which is used to display suggestions for the current value. Can be a JavaScript object which represents a valid data source configuration, a JavaScript array or an existing [kendo.data.DataSource](/api/javascript/data/datasource)
