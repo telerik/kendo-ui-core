@@ -6080,6 +6080,8 @@ Can also be set to the following string values:
 - "multiple, row" - the user can select multiple rows.
 - "multiple, cell" - the user can select multiple cells.
 
+> When the selectable property is set to "multiple, row" or "multiple, cell" the Grid cannot be scrollable on mobile devices as both are listening on the same event.
+
 #### Example - set selectable as a boolean
     <div id="grid"></div>
     <script>
