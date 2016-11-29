@@ -397,7 +397,7 @@ The example below demonstrates how to define a Kendo UI ResponsivePanel by using
 
 ### Configuration
 
-The ResponsivePanel Tag Helper configuration options are passed as attributes of the tag.
+The configuration options of the ResponsivePanel Tag Helper are passed as attributes of the tag.
 
 ###### Example
 
@@ -471,8 +471,6 @@ The ResponsivePanel Tag Helper configuration options are passed as attributes of
             </div>
         </kendo-responsivepanel>
 ```
-
-
 
 ## See Also
 
