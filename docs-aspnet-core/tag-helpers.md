@@ -354,6 +354,126 @@ The `ParseFormats` option is of type `string[]` and can be assigned either by a 
         <kendo-datetimepicker name="datetimepicker" parse-formats="ViewBag.ParseDates"></kendo-datetimepicker>
 
 
+
+## ResponsivePanel Tag Helper
+
+### Overview
+
+The example below demonstrates how to define a Kendo UI ResponsivePanel by using a Tag Helper.
+
+###### Example
+
+        <kendo-responsivepanel name="slidebar" breakpoint="1000" orientation="left">
+            <div id="profile" class="widget">
+                <h3>Profile</h3>
+                <div>
+                    <div class="profile-photo"></div>
+                    <h4>Lynda Schleifer</h4>
+                    <p>Sales Associate</p>
+                </div>
+            </div>
+            <div id="teammates" class="widget">
+                <h3>Teammates</h3>
+                <div>
+                    <div class="team-mate">
+                        <img src="@Url.Content("~/content/web/panelbar/andrew.jpg")" alt="Andrew Fuller">
+                        <h4>Andrew Fuller</h4>
+                        <p>Team Lead</p>
+                    </div>
+                    <div class="team-mate">
+                        <img src="@Url.Content("~/content/web/panelbar/nancy.jpg")" alt="Nancy Leverling">
+                        <h4>Nancy Leverling</h4>
+                        <p>Sales Associate</p>
+                    </div>
+                    <div class="team-mate">
+                        <img src="@Url.Content("~/content/web/panelbar/robert.jpg")" alt="Robert King">
+                        <h4>Robert King</h4>
+                        <p>Business System Analyst</p>
+                    </div>
+                </div>
+            </div>
+        </kendo-responsivepanel>
+
+
+### Configuration
+
+The ResponsivePanel Tag Helper configuration options are passed as attributes of the tag.
+
+###### Example
+
+```tab-cshtml
+
+        @(Html.Kendo().ResponsivePanel()
+            .Name("sidebar")
+            .Breakpoint(1000)
+            .Orientation("left")
+            .Content(@<text>
+                <div id="profile" class="widget">
+                    <h3>Profile</h3>
+                    <div>
+                        <div class="profile-photo"></div>
+                        <h4>Lynda Schleifer</h4>
+                        <p>Sales Associate</p>
+                    </div>
+                </div>
+                <div id="teammates" class="widget">
+                    <h3>Teammates</h3>
+                    <div>
+                        <div class="team-mate">
+                            <img src="@Url.Content("~/content/web/panelbar/andrew.jpg")" alt="Andrew Fuller">
+                            <h4>Andrew Fuller</h4>
+                            <p>Team Lead</p>
+                        </div>
+                        <div class="team-mate">
+                            <img src="@Url.Content("~/content/web/panelbar/nancy.jpg")" alt="Nancy Leverling">
+                            <h4>Nancy Leverling</h4>
+                            <p>Sales Associate</p>
+                        </div>
+                        <div class="team-mate">
+                            <img src="@Url.Content("~/content/web/panelbar/robert.jpg")" alt="Robert King">
+                            <h4>Robert King</h4>
+                            <p>Business System Analyst</p>
+                        </div>
+                    </div>
+                </div>
+            </text>)
+        )
+```
+```tab-tagHelper
+        <kendo-responsivepanel name="slidebar" breakpoint="1000" orientation="left">
+            <div id="profile" class="widget">
+                <h3>Profile</h3>
+                <div>
+                    <div class="profile-photo"></div>
+                    <h4>Lynda Schleifer</h4>
+                    <p>Sales Associate</p>
+                </div>
+            </div>
+            <div id="teammates" class="widget">
+                <h3>Teammates</h3>
+                <div>
+                    <div class="team-mate">
+                        <img src="@Url.Content("~/content/web/panelbar/andrew.jpg")" alt="Andrew Fuller">
+                        <h4>Andrew Fuller</h4>
+                        <p>Team Lead</p>
+                    </div>
+                    <div class="team-mate">
+                        <img src="@Url.Content("~/content/web/panelbar/nancy.jpg")" alt="Nancy Leverling">
+                        <h4>Nancy Leverling</h4>
+                        <p>Sales Associate</p>
+                    </div>
+                    <div class="team-mate">
+                        <img src="@Url.Content("~/content/web/panelbar/robert.jpg")" alt="Robert King">
+                        <h4>Robert King</h4>
+                        <p>Business System Analyst</p>
+                    </div>
+                </div>
+            </div>
+        </kendo-responsivepanel>
+```
+
+
+
 ## See Also
 
 Other articles on Telerik UI for ASP.NET MVC in ASP.NET Core applications:
