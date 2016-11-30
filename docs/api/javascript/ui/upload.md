@@ -888,6 +888,10 @@ Retrieves the files that are currently selected.
 
 Removes all files by sending a standard `remove` request to the handler.
 
+> **Important**
+>
+> If you invoke the `removeAllFiles` method, the `remove` event will not be triggered.
+
 #### Example
 
     <input name="files" id="files" type="file" />
@@ -914,6 +918,10 @@ Removes all files by sending a standard `remove` request to the handler.
 ### removeFile
 
 Removes all files for which the callback function returns `true` by sending a standard `remove` request to the handler.
+
+> **Important**
+>
+> If you invoke the `removeFile` method, the `remove` event will not be triggered.
 
 #### Example
 
@@ -950,6 +958,10 @@ Removes all files for which the callback function returns `true` by sending a st
 ### removeFileByUid
 
 Removes a file by ID by sending a standard `remove` request to the handler.
+
+> **Important**
+>
+> If you invoke the `removeFileByUid` method, the `remove` event will not be triggered.
 
 #### Example
 
