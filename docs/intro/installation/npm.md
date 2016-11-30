@@ -34,7 +34,7 @@ npm install --save kendo-ui-core
 
 > **Important**
 >
-> The Git repository as an NPM endpoint is a _temporary solution_. Kendo UI are working on a private NPM registry setup, which is expected to be available by the end of 2016.
+> The Git repository as an NPM endpoint is a _temporary solution_. Kendo UI are working on a private NPM registry setup, which is expected to be available with the 2017 R1 release.
 
 The Kendo UI Professional NPM Package, named `kendo`, is hosted on a private Git repository. To access the package, you need an _active subscription_ for Kendo UI or DevCraft.
 
