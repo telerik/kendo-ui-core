@@ -98,17 +98,17 @@ var __meta__ = { // jshint ignore:line
     }
 
     function restoreTitleAttributeForElement(element) {
-        var title = element.data(kendo.ns + "title");
+        var title = element.data(kendo.ns + "kendo_title");
         if (title) {
             element.attr("title", title);
-            element.removeData(kendo.ns + "title");
+            element.removeData(kendo.ns + "kendo_title");
         }
     }
 
     function saveTitleAttributeForElement(element) {
         var title = element.attr("title");
         if (title) {
-            element.data(kendo.ns + "title", title);
+            element.data(kendo.ns + "kendo_title", title);
             element.attr("title", "");
         }
     }
