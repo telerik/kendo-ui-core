@@ -192,6 +192,42 @@ test("month view renders days", function() {
     equal(div.find("tbody").find("a").length, 42);
 });
 
+test("month view renders week number column when enabled", function() {
+    var today = new Date(),
+        days = kendo.culture().calendar.days,
+        //TODO week messages to be added in the calendar?
+        WEEK = {
+            Week: "Week",
+            Wk: "WK"
+        },
+        cells;
+        
+
+    div.html(calendar.views[0].content({
+        date: today,
+        empty: template.empty,
+        messages : WEEK,
+        showWeekNumber: true,
+        content: template.content,
+        min: new Date(2000, 10, 10),
+        max: new Date(2020, 10, 10),
+        disableDates: $.noop
+    }));
+
+    cells = div.find("tbody").find("td");
+
+    
+
+    equal(div.find("thead").find("th").length, 8);
+    equal(div.find("thead").find("th").eq(0).html(), WEEK.Wk);
+    equal(div.find("thead").find("th").eq(0).attr("title"),  WEEK.Week);
+    ok(cells.eq(0).hasClass("weekNumber"));
+
+    equal(div.find("tbody").find("tr").length, 6);
+    equal(div.find("tbody").find("td").length, 48);
+    equal(div.find("tbody").find("a").length, 48);
+});
+
 test("month view's content method honors culture", function() {
     var today = new Date(),
         days = kendo.getCulture("bg-BG").calendars.standard.days;
@@ -635,6 +671,20 @@ test("century title renders century title", function() {
     var max = new Date(2100, 9, 10);
 
     equal(calendar.views[3].title(today, min, max), "2000-2099");
+});
+
+test("century view renders century class", function() {
+    var today = new Date(2011, 9, 10);
+
+    div.html(calendar.views[3].content({
+        date: today,
+        min: new Date(1800, 10, 10),
+        max: new Date(2220, 10, 10)
+    }));
+
+    calendar.addClassToViewContainer(calendar.views[3].name, div.find("table"), calendar.views[3].name);
+
+    ok(div.find("table.k-content").hasClass("century"));
 });
 
 test("century title renders century title within min/max values", function() {
