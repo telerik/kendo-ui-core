@@ -890,7 +890,7 @@ Removes all files by sending a standard `remove` request to the handler.
 
 > **Important**
 >
-> If you invoke the `removeAllFiles` method, the `remove` event will not be triggered.
+> Invoking the `removeAllFiles` method will not trigger the `remove` event.
 
 #### Example
 
@@ -921,7 +921,7 @@ Removes all files for which the callback function returns `true` by sending a st
 
 > **Important**
 >
-> If you invoke the `removeFile` method, the `remove` event will not be triggered.
+> Invoking the `removeFile` method will not trigger the `remove` event.
 
 #### Example
 
@@ -961,7 +961,7 @@ Removes a file by ID by sending a standard `remove` request to the handler.
 
 > **Important**
 >
-> If you invoke the `removeFileByUid` method, the `remove` event will not be triggered.
+> Invoking the `removeFileByUid` method will not trigger the `remove` event.
 
 #### Example
 
