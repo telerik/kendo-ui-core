@@ -760,6 +760,10 @@ Removes all files for which the callback function returns `true` (only visually 
       });
     </script>
 
+#### Parameters
+
+##### callback `Function`
+
 ### clearFileByUid
 
 Removes a file by ID (only visually from the UI) without issuing requests to the `remove` handler.
@@ -791,6 +795,10 @@ Removes a file by ID (only visually from the UI) without issuing requests to the
         });
       });
     </script>
+
+#### Parameters
+
+##### uid `String`
 
 ### destroy
 
@@ -955,6 +963,10 @@ Removes all files for which the callback function returns `true` by sending a st
       });
     </script>
 
+#### Parameters
+
+##### callback `Function`
+
 ### removeFileByUid
 
 Removes a file by ID by sending a standard `remove` request to the handler.
@@ -995,6 +1007,10 @@ Removes a file by ID by sending a standard `remove` request to the handler.
         });
       });
     </script>
+
+#### Parameters
+
+##### uid `String`
 
 ### toggle
 
