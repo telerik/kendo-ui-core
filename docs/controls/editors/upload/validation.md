@@ -16,8 +16,8 @@ The example below demonstrates a sample configuration for validation.
 
         validation: {
     		allowedExtensions: [".jpg", ".rar"],
-    		maxFileSize: 200000,
-    		minFileSize: 800000
+    		maxFileSize: 800000,
+    		minFileSize: 200000
 		}
 
 ## Types of Validation
