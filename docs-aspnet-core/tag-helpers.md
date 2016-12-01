@@ -472,6 +472,113 @@ The configuration options of the ResponsivePanel Tag Helper are passed as attrib
         </kendo-responsivepanel>
 ```
 
+## Splitter Tag Helper
+
+### Overview
+
+The example below demonstrates how to define a Kendo UI Splitter by using a Tag Helper.
+
+###### Example
+
+    <kendo-splitter name="vertical" orientation="SplitterOrientation.Vertical">
+        <kendo-splitter-pane scrollable="false" collapsible="false">
+            <div id="top-pane">
+                <kendo-splitter name="horizontal" style="height: 100%; width:100%;" orientation="SplitterOrientation.Horizontal">
+                    <kendo-splitter-pane size="220px" collapsible="true">
+                        <div id="left-pane">
+                            <div class="pane-content">
+                                <h3>Inner splitter / left pane</h3>
+                                <p>Resizable and collapsible.</p>
+                            </div>
+                        </div>
+                    </kendo-splitter-pane>
+                    <kendo-splitter-pane>
+                        <div id="center-pane">
+                            <div class="pane-content">
+                                <h3>Inner splitter / center pane</h3>
+                                <p>Resizable only.</p>
+                            </div>
+                        </div>
+                    </kendo-splitter-pane>
+                    <kendo-splitter-pane size="220px" collapsible="true">
+                        <div id="right-pane">
+                            <div class="pane-content">
+                                <h3>Inner splitter / right pane</h3>
+                                <p>Resizable and collapsible.</p>
+                            </div>
+                        </div>
+                    </kendo-splitter-pane>
+                </kendo-splitter>
+            </div>
+        </kendo-splitter-pane>
+        <kendo-splitter-pane size="100px" collapsible="false">
+            <div id="middle-pane">
+                <div class="pane-content">
+                    <h3>Outer splitter / middle pane</h3>
+                    <p>Resizable only.</p>
+                </div>
+            </div>
+        </kendo-splitter-pane>
+        <kendo-splitter-pane size="100px" collapsible="false" resizable="false">
+            <div id="bottom-pane">
+                <div class="pane-content">
+                    <h3>Outer splitter / bottom pane</h3>
+                    <p>Non-resizable and non-collapsible.</p>
+                </div>
+            </div>
+        </kendo-splitter-pane>
+    </kendo-splitter>
+
+
+One important thing to note is that the splitter pane tags do not render div elements automatically. Therefore, the container elements should be defined explicitly and all the pane content should be placed inside these parent wrappers, as demonstrated in the example above. You can check the result of this declarative definition in the [Splitter Tag Helper](http://demos.telerik.com/aspnet-core/splitter/tag-helper) live sample.
+
+
+### Configuration
+
+The Splitter Tag Helper supports all the configuration options that the HtmlHelper does. They are passed as attributes of the tag.
+
+###### Example
+
+```tab-cshtml
+
+        @(Html.Kendo().Splitter()
+            .Name("splitter1")
+            .Orientation(SplitterOrientation.Vertical)
+            .Panes(p =>
+            {
+                p.Add()
+                .HtmlAttributes(new { id = "top-pane" })
+                .Collapsed(false)
+                .CollapsedSize("240px")
+                .Collapsible(true)
+                .LoadContentFrom("optionalUrl")
+                .MaxSize("240px")
+                .MinSize("240px")
+                .Resizable(true)
+                .Scrollable(true)
+                .Size("240px")
+                .Content(@<div class="pane-content">
+                    Top Pane Content
+                </div>);
+            })
+        )
+```
+```tab-tagHelper
+
+        <kendo-splitter name="splitter1" orientation="SplitterOrientation.Vertical">
+            <kendo-splitter-pane collapsed="false" collapsed-size="240px" collapsible="true"
+                                 content-url="optionalUrl" max-size="240px" min-size="240px"
+                                 resizable="true" scrollable="true" size="240px">
+                <div id="top-pane">
+                    <div class="pane-content">
+                        Top Pane Content
+                    </div>
+                </div>
+            </kendo-splitter-pane>
+        </kendo-splitter>
+```
+
+
 ## See Also
 
 Other articles on Telerik UI for ASP.NET MVC in ASP.NET Core applications:
