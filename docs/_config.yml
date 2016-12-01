@@ -290,6 +290,10 @@ navigation:
         position: 200
     "*editing":
         title: "Editing"
+    "*accessibility":
+        title: "Accessibility"
+    "*state":
+        title: "State Management"
     "*appearance":
         title: "Appearance"
     "*binding":
