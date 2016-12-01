@@ -12,4 +12,4 @@ To see the example on how to use hierarchy binding with the Kendo UI PanelBar in
 ## See Also
 
 * [Overview of the PanelBar HtmlHelper]({% slug overview_panelbarhelper_aspnetmvc %})
-* [PanelBarBuilder API Reference](/api/aspnet-mvc/Kendo.Mvc.UI.Fluent/PanelBarBuilder)
+* [PanelBarBuilder API Reference](/api/Kendo.Mvc.UI.Fluent/PanelBarBuilder)

@@ -146,11 +146,27 @@ Detaches event handlers and removes data entries in order to avoid memory leaks.
 
 #### Example
 
-	// deatach events
+    <input id="slider" style="width: 300px" />
+    <script>
+      $("#slider").kendoSlider({
+        precision: 4,
+        smallStep:0.0001,
+        largeStep:0.0001,
+        min:0,
+        max:0.0004,
+        value: 0.0002,
+        tooltip: {
+          format: "{0:#,#.####}"
+        }
+      });
+	  
+	  	// deatach events
 	$("#slider").data("kendoSlider").destroy();
 
 	// remove slider html from DOM
     $("#slider").closest(".k-slider").remove();
+	
+    </script>
 
 ### enable
 
@@ -158,6 +174,20 @@ Enable/Disable the **Slider** widget.
 
 #### Example
 
+    <input id="slider" style="width: 300px" />
+    <script>
+      $("#slider").kendoSlider({
+        precision: 4,
+        smallStep:0.0001,
+        largeStep:0.0001,
+        min:0,
+        max:0.0004,
+        value: 0.0002,
+        tooltip: {
+          format: "{0:#,#.####}"
+        }
+      });
+	  
     // get a reference to the slider widget
     var slider = $("#slider").data("kendoSlider");
 
@@ -166,6 +196,8 @@ Enable/Disable the **Slider** widget.
 
     // enables the slider
     slider.enable(true);
+	
+    </script>
 
 #### Parameters
 
@@ -180,8 +212,27 @@ a number representing the underlying value.
 
 #### Example
 
+    <input id="slider" style="width: 300px" />
+    <script>
+      $("#slider").kendoSlider({
+        precision: 4,
+        smallStep:0.0001,
+        largeStep:0.0001,
+        min:0,
+        max:0.0004,
+        value: 0.0002,
+        tooltip: {
+          format: "{0:#,#.####}"
+        }
+      });
+	  
     var slider = $("#slider").data("kendoSlider");
     var sliderValue = slider.value();
+	console.log(sliderValue);
+	
+    </script>
+
+    
 
 #### Parameters
 

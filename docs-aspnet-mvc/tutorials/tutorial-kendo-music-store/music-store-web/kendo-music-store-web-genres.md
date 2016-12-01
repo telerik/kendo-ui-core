@@ -14,7 +14,7 @@ The **Genre** listing is going to display all albums according to a selected gen
 
 **Figure 1. A snapshot of the Kendo UI Music Store genre lists**
 
-![kendo-genre-screenshot](/aspnet-mvc/tutorial-kendo-music-store/music-store-web/images/kendo-genre-screenshot.png)
+![kendo-genre-screenshot](/tutorials/tutorial-kendo-music-store/music-store-web/images/kendo-genre-screenshot.png)
 
 ### Create the HTML
 
@@ -30,7 +30,7 @@ The `data-role="listview"` attribute tells Kendo UI that this element will be tu
 The `data-bind="source: albums"` tells the widget which property on the view model contains the data to list.
 The `data-template="album-template"` indicates the name of the template to use for each Album.
 
-Note that we are reusing the same Album template from the [Main Page](kendo-music-store-home-lists) list views
+Note that we are reusing the same Album template from the [Main Page]({% slug createthehomepage_muscistorewebapp_aspnetmvc %}) list views
 by using the same ASP.NET MVC partial on both pages. This is a great way to keep the Albums looking and
 behaving consistently between the two views.
 

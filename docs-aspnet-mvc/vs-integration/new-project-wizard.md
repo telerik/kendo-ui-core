@@ -34,7 +34,7 @@ The wizard detects all the installed versions of UI for ASP.NET MVC and lists th
 
 **Figure 1. New Project Wizard**
 
-![New Project Wizard](/aspnet-mvc/vs-integration/images/new_project.png)
+![New Project Wizard](/vs-integration/images/new_project.png)
 
 ### Project Settings
 

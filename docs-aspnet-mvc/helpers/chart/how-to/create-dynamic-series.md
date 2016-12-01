@@ -56,6 +56,6 @@ To see the full examples, refer to the GitHub repository of the [sample project 
 Other articles and how-to examples on the Kendo UI Chart HtmlHelper:
 
 * [Overview of the Chart HtmlHelper]({% slug overview_dropdownlisthelper_aspnetmvc %})
-* [ChartBuilder API Reference](/api/aspnet-mvc/Kendo.Mvc.UI.Fluent/ChartBuilder)
+* [ChartBuilder API Reference](/api/Kendo.Mvc.UI.Fluent/ChartBuilder)
 
 For more runnable examples on the Kendo UI Chart in ASP.NET MVC applications, browse its [**How To** documentation folder]({% slug howto_bindtosignalr_chartaspnetmvc %}).

@@ -12,7 +12,7 @@ Represents the Kendo UI Mobile Scroller widget. Inherits from [kendo.mobile.ui.W
 
 ### elastic `Boolean`*(default: true)*
 
-Weather or not to allow out of bounds dragging and easing.
+Whether or not to allow out of bounds dragging and easing.
 
 #### Example
     <div data-role="view">

@@ -277,12 +277,15 @@
     test("Nested ListView does not remove inset style of the content", 1, function() {
         var root = $("<div />").append("<div data-role='view'><ul data-role='listview' data-style='inset'><ul data-role='listview'></ul></ul></div>");
         $("#qunit-fixture").append(root);
+        jasmine.clock().install();
         application = new kendo.mobile.Application(root);
+        jasmine.clock().tick();
 
         var content = application.pane.view().content;
 
         ok(content.hasClass("km-insetcontent"));
         application.destroy()
+        jasmine.clock().uninstall();
     });
 
     test("removes wrapper on destroy", 1, function() {

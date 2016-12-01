@@ -7,7 +7,13 @@ var __meta__ = { // jshint ignore:line
     name: "Tooltip",
     category: "web",
     description: "The Tooltip widget displays a popup hint for a given html element.",
-    depends: [ "core", "popup" ]
+    depends: [ "core", "popup" ],
+    features: [ {
+        id: "tooltip-fx",
+        name: "Animation",
+        description: "Support for animation",
+        depends: [ "fx" ]
+    } ]
 };
 
 (function($, undefined) {
@@ -92,17 +98,17 @@ var __meta__ = { // jshint ignore:line
     }
 
     function restoreTitleAttributeForElement(element) {
-        var title = element.data(kendo.ns + "title");
+        var title = element.data(kendo.ns + "kendo_title");
         if (title) {
             element.attr("title", title);
-            element.removeData(kendo.ns + "title");
+            element.removeData(kendo.ns + "kendo_title");
         }
     }
 
     function saveTitleAttributeForElement(element) {
         var title = element.attr("title");
         if (title) {
-            element.data(kendo.ns + "title", title);
+            element.data(kendo.ns + "kendo_title", title);
             element.attr("title", "");
         }
     }
@@ -377,8 +383,8 @@ var __meta__ = { // jshint ignore:line
                     pageX = e.pageX,
                     pageY = e.pageY;
 
-                offset.right = offset.left + element.outerWidth();
-                offset.bottom = offset.top + element.outerHeight();
+                offset.right = offset.left + kendo._outerWidth(element);
+                offset.bottom = offset.top + kendo._outerHeight(element);
 
                 if (pageX > offset.left && pageX < offset.right && pageY > offset.top && pageY < offset.bottom) {
                     return;

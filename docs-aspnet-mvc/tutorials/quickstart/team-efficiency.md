@@ -2,7 +2,7 @@
 title: Build the Team Efficiency Dashboard Project
 page_title: Build the Team Efficiency Dashboard Project | Team Efficiency Dashboard Tutorial
 description: "Start a new project, add Telerik UI for MVC to it, and install the quick start boilerplate while building the Team Efficiency Dashboard application by using Telerik UI for ASP.NET MVC."
-previous_url: /aspnet-mvc/tutorials/tutorial-aspnetmvc-quick-start/build-team-efficiency-app/chapter1, /aspnet-mvc/tutorials/tutorial-aspnetmvc-quick-start/build-team-efficiency-app/chapter2, /aspnet-mvc/tutorials/tutorial-aspnetmvc-quick-start/build-team-efficiency-app/chapter3, /aspnet-mvc/tutorials/tutorial-aspnetmvc-quick-start/build-team-efficiency-app/chapter4, /aspnet-mvc/tutorials/tutorial-aspnetmvc-quick-start/build-team-efficiency-app/chapter5, /aspnet-mvc/tutorials/tutorial-aspnetmvc-quick-start/build-team-efficiency-app/chapter6, /aspnet-mvc/tutorials/tutorial-aspnetmvc-quick-start/build-team-efficiency-app/chapter7, /aspnet-mvc/tutorials/tutorial-aspnetmvc-quick-start/build-team-efficiency-app/chapter8, /aspnet-mvc/tutorials/tutorial-aspnetmvc-quick-start/build-team-efficiency-app/chapter9, /aspnet-mvc/tutorials/tutorial-aspnetmvc-quick-start/build-team-efficiency-app/chapter10
+previous_url: /tutorials/tutorial-aspnetmvc-quick-start/build-team-efficiency-app/chapter1, /tutorials/tutorial-aspnetmvc-quick-start/build-team-efficiency-app/chapter2, /tutorials/tutorial-aspnetmvc-quick-start/build-team-efficiency-app/chapter3, /tutorials/tutorial-aspnetmvc-quick-start/build-team-efficiency-app/chapter4, /tutorials/tutorial-aspnetmvc-quick-start/build-team-efficiency-app/chapter5, /tutorials/tutorial-aspnetmvc-quick-start/build-team-efficiency-app/chapter6, /tutorials/tutorial-aspnetmvc-quick-start/build-team-efficiency-app/chapter7, /tutorials/tutorial-aspnetmvc-quick-start/build-team-efficiency-app/chapter8, /tutorials/tutorial-aspnetmvc-quick-start/build-team-efficiency-app/chapter9, /tutorials/tutorial-aspnetmvc-quick-start/build-team-efficiency-app/chapter10
 slug: gettingupandrunning_timeefficiencyapp_aspnetmvc6
 position: 2
 ---
@@ -139,19 +139,19 @@ Telerik UI for ASP.NET MVC is a set of server-side wrappers. A server-wrapper do
 - Allows the developer to configure a Kendo UI widget via C# or VB.NET code&mdash;set its value, data source, etc.
 - Renders the HTML and JavaScript needed to initialize the Kendo UI widget. The widget options propagate to the client side via the widget initialization script.
 
-![Server-side wrapper outputs HTML and JavaScript](images/chapter2/wrapper-output.png)
+![Server-side wrapper outputs HTML and JavaScript](/images/wrapper-output.png)
 
 #### Configuration
 
 The Kendo UI HtmlHelper exposes all Kendo UI server wrappers.
 
-![Kendo HtmlHelper extension method](images/chapter2/kendo-extension.png)
+![Kendo HtmlHelper extension method](/images/kendo-extension.png)
 
 #### Widget Options
 
 The widget options are exposed via a fluent interface.
 
-![Fluent interface](images/chapter2/fluent-interface.png)
+![Fluent interface](/images/fluent-interface.png)
 
 Below is an example of how a NumericTextBox input is created.
 
@@ -474,7 +474,7 @@ In this chapter you will learn about the Kendo UI ListView control and client-si
 
 #### Overview
 
-The purpose of [Kendo UI ListView]({% slug basic_usage_kendoui_listview_widget %}) is to display a custom layout of data-bound items through templates. The ListView is ideally suited for scenarios where you wish to display a list of items in a consistent manner.
+The purpose of [Kendo UI ListView](http://docs.telerik.com/kendo-ui/controls/data-management/listview/overview) is to display a custom layout of data-bound items through templates. The ListView is ideally suited for scenarios where you wish to display a list of items in a consistent manner.
 
 The ListView is designed to put you back in control when it comes to displaying data. It does not provide a default rendering of data-bound items, but, instead, relies entirely on templates to define how a list of items&mdash;including alternating items and items being edited&mdash;is displayed.
 
@@ -589,7 +589,7 @@ The ListView is almost complete. However, the ListView still needs a template to
 
 ### Overview
 
-The [Kendo UI Templates]({% slug overview_kendoui_templatescomponent %}) provide a simple-to-use, high-performance JavaScript templating engine within the Kendo UI framework. Templates offer a way to create HTML chunks that can be automatically merged with JavaScript data. They are a substitute for traditional HTML string building in JavaScript.
+The [Kendo UI Templates](http://docs.telerik.com/kendo-ui/framework/templates/overview) provide a simple-to-use, high-performance JavaScript templating engine within the Kendo UI framework. Templates offer a way to create HTML chunks that can be automatically merged with JavaScript data. They are a substitute for traditional HTML string building in JavaScript.
 
 Kendo UI Templates use a simple templating syntax called hash templates. With this syntax, the `#` (hash) sign is used to mark areas in a template that should be replaced by data when the template is executed. The `#` character is also used to signify the beginning and end of custom JavaScript code inside the template.
 
@@ -845,15 +845,15 @@ The [Kendo UI DataSource component](http://demos.telerik.com/kendo-ui/datasource
 
 The Kendo UI DataSource has many abilities and responsibilities, among which to:
 
-- [Retrieve data from a remote endpoint]({% slug corsdatafetching_anotherdomain_datasourcecomponent %}).
-- Maintain the [structure and type of the data (schema)]({% slug cruddataoperations_kendoui_datasourcecomponent%}#schema).
+- [Retrieve data from a remote endpoint](http://docs.telerik.com/kendo-ui/framework/datasource/cors).
+- Maintain the [structure and type of the data (schema)](http://docs.telerik.com/kendo-ui/framework/datasource/crud#schema).
 - Process serialization formats to and from a remote endpoint.
-- [Synchronize updates, create, update, delete]({% slug cruddataoperations_kendoui_datasourcecomponent%}) to and from a remote endpoint.
-- [Maintain an in-memory cache of data, including changes]({% slug offlinesupport_kendoui_datasourcecomponent %}) for updating to a remote endpoint.
-- Calculate and maintain [aggregates](/api/javascript/data/datasource#methods-aggregate), [sorting order](/api/javascript/data/datasource#methods-sort) and [paging](/api/javascript/data/datasource#methods-page).
-- Provide a query mechanism via [filter expressions](/api/javascript/data/datasource#methods-filter).
+- [Synchronize updates, create, update, delete](http://docs.telerik.com/kendo-ui/framework/datasource/crud) to and from a remote endpoint.
+- [Maintain an in-memory cache of data, including changes](http://docs.telerik.com/kendo-ui/framework/datasource/offline) for updating to a remote endpoint.
+- Calculate and maintain [aggregates](http://docs.telerik.com/kendo-ui/api/javascript/data/datasource#methods-aggregate), [sorting order](http://docs.telerik.com/kendo-ui/api/javascript/data/datasource#methods-sort) and [paging](http://docs.telerik.com/kendo-ui/api/javascript/data/datasource#methods-page).
+- Provide a query mechanism via [filter expressions](http://docs.telerik.com/kendo-ui/api/javascript/data/datasource#methods-filter).
 
-For detailed information on the capabilities of the [DataSource]({% slug overview_kendoui_datasourcecomponent %}), refer to its [configuration API methods, and events](/api/javascript/data/datasource), and [demos](http://demos.telerik.com/kendo-ui/datasource/index).
+For detailed information on the capabilities of the [DataSource](http://docs.telerik.com/kendo-ui/framework/datasource/overview), refer to its [configuration API methods, and events](http://docs.telerik.com/kendo-ui/api/javascript/data/datasource), and [demos](http://demos.telerik.com/kendo-ui/datasource/index).
 
 At this point the dashboard is showing all invoice data. Let's use the `EmployeeList` list view and `StatsFrom`/`StatsTo` date pickers to filter the invoice grid by invoking the grid's datasource.
 
@@ -1617,7 +1617,7 @@ After the section's closing tag `</section>`, add a new `div` with a `class` of 
 	                .Name("menuPanelOpen")
 	                .Content("menu")
 	                .Icon("hbars")
-	                .HtmlAttributes(new { @class = "k-rpanel-toggle" }
+	                .HtmlAttributes(new { @class = "k-rpanel-toggle" })
 	    )
 	</div>
 

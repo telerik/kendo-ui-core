@@ -2,14 +2,14 @@
 title: Create the Search Box
 page_title: Create the Search Box | Kendo UI Sales Hub Tutorial
 description: "Learn how to create the Search box in the Kendo UI Sales Hub project by using Telerik UI for ASP.NET MVC."
-previous_url: /tutorials/asp.net/saleshub/kendo-saleshub-search-box
+previous_url: /kendo-ui/tutorials/asp.net/saleshub/kendo-saleshub-search-box
 slug: createsearchbox_saleshubtutorial_aspnetmvc
 position: 3
 ---
 
 # Create the Search Box
 
-![kendo-saleshub-search-box-screenshot](/aspnet-mvc/tutorial-saleshub/images/kendo-saleshub-search-box-screenshot.png)
+![kendo-saleshub-search-box-screenshot](/tutorials/tutorial-saleshub/images/kendo-saleshub-search-box-screenshot.png)
 
 The Search Box in SalesHub allows users to search for Orders based on their Order Number. It is
 implemented using a [Kendo AutoComplete](http://demos.telerik.com/kendo-ui/web/autocomplete/index.html)
@@ -18,7 +18,7 @@ box. The search results displayed in the dropdown are limited to the first 20 re
 the user can press enter and it will open a [Kendo Window](http://demos.telerik.com/kendo-ui/web/window/index.html)
 that will display all of the search results.
 
-![kendo-saleshub-search-results-screenshot](/aspnet-mvc/tutorial-saleshub/images/kendo-saleshub-search-results-screenshot.png)
+![kendo-saleshub-search-results-screenshot](/tutorials/tutorial-saleshub/images/kendo-saleshub-search-results-screenshot.png)
 
 ## Set up the AutoComplete
 

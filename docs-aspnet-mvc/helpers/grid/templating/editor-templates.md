@@ -2,7 +2,7 @@
 title: Editor Templates
 page_title: Editor Templates | Kendo UI Grid HtmlHelper
 description: "Create the editing UI of a Kendo Grid ASP.NET MVC with the ASP.NET MVC editor templates."
-previous_url: /aspnet-mvc/helpers/grid/editor-templates
+previous_url: /helpers/grid/editor-templates
 slug: editortemplates_grid_aspnetmvc
 position: 2
 ---
@@ -135,15 +135,15 @@ Other articles on the Kendo UI Grid for ASP.NET MVC:
 * [Binding of the Grid HtmlHelper]({% slug ajaxbinding_grid_aspnetmvc %})
 * [Editing of the Grid HtmlHelper]({% slug ajaxediting_grid_aspnetmvc %})
 * [Troubleshooting of the Grid HtmlHelper]({% slug troubleshoot_gridhelper_aspnetmvc %})
-* [API Reference of the Grid HtmlHelper](/api/aspnet-mvc/Kendo.Mvc.UI.Fluent/GridBuilder)
-* [Overview of the Kendo UI Grid Widget]({% slug overview_kendoui_grid_widget %})
+* [API Reference of the Grid HtmlHelper](/api/Kendo.Mvc.UI.Fluent/GridBuilder)
+* [Overview of the Kendo UI Grid Widget](http://docs.telerik.com/kendo-ui/controls/data-management/grid/overview)
 
 Articles on Telerik UI for ASP.NET MVC:
 
 * [Overview of Telerik UI for ASP.NET MVC]({% slug overview_aspnetmvc %})
 * [Fundamentals of Telerik UI for ASP.NET MVC]({% slug fundamentals_aspnetmvc %})
 * [Scaffolding in Telerik UI for ASP.NET MVC]({% slug scaffolding_aspnetmvc %})
-* [Telerik UI for ASP.NET MVC API Reference Folder](/api/aspnet-mvc/Kendo.Mvc/AggregateFunction)
+* [Telerik UI for ASP.NET MVC API Reference Folder](/api/Kendo.Mvc/AggregateFunction)
 * [Telerik UI for ASP.NET MVC HtmlHelpers Folder]({% slug overview_barcodehelper_aspnetmvc %})
 * [Tutorials on Telerik UI for ASP.NET MVC]({% slug overview_timeefficiencyapp_aspnetmvc6 %})
 * [Telerik UI for ASP.NET MVC Troubleshooting]({% slug troubleshooting_aspnetmvc %})

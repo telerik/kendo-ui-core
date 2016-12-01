@@ -769,6 +769,19 @@ The time value to set for a DateTimePicker, expressed as a Date object or as a s
 
 `Date` The time value of a DateTimePicker.
 
+> * This method **does not trigger** [change](#events-change) event.
+This could affect [MVVM value binding](/framework/mvvm/bindings/value). The model bound to the widget will not be updated.
+You can overcome this behavior trigerring the `change` event manually using [trigger("change")](/api/javascript/observable#methods-trigger) method.
+
+    <input id="datetimepicker" />
+    <script>
+    $("#datetimepicker").kendoDateTimePicker();
+
+    var datepicker = $("#datetimepicker").data("kendoDateTimePicker");
+    datepicker.value(new Date(2016, 10, 1));
+    datepicker.trigger("change");
+    </script>
+
 #### Example - gets the value of the widget
 
     <input id="datetimepicker" />

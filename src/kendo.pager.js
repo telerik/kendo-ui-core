@@ -15,16 +15,16 @@ var __meta__ = { // jshint ignore:line
         ui = kendo.ui,
         Widget = ui.Widget,
         proxy = $.proxy,
-        FIRST = ".k-i-seek-w",
-        LAST = ".k-i-seek-e",
-        PREV = ".k-i-arrow-w",
-        NEXT = ".k-i-arrow-e",
+        FIRST = ".k-i-arrow-end-left",
+        LAST = ".k-i-arrow-end-right",
+        PREV = ".k-i-arrow-60-left",
+        NEXT = ".k-i-arrow-60-right",
         CHANGE = "change",
         NS = ".kendoPager",
         CLICK = "click",
         KEYDOWN = "keydown",
         DISABLED = "disabled",
-        iconTemplate = kendo.template('<a href="\\#" aria-label="#=text#" class="k-link k-pager-nav #= wrapClassName #"><span class="k-icon #= className #"></span></a>');
+        iconTemplate = kendo.template('<a href="\\#" aria-label="#=text#" title="#=text#" class="k-link k-pager-nav #= wrapClassName #"><span class="k-icon #= className #"></span></a>');
 
     function button(template, idx, text, numeric, title) {
         return template( {
@@ -164,7 +164,7 @@ var __meta__ = { // jshint ignore:line
             if (options.refresh) {
                 if (!that.element.find(".k-pager-refresh").length) {
                     that.element.append('<a href="#" class="k-pager-refresh k-link" title="' + options.messages.refresh +
-                        '"><span class="k-icon k-i-refresh"></span></a>');
+                        '"><span class="k-icon k-i-reload"></span></a>');
                 }
 
                 that.element.on(CLICK + NS, ".k-pager-refresh", proxy(that._refreshClick, that));
@@ -300,7 +300,7 @@ var __meta__ = { // jshint ignore:line
             if (options.info) {
                 if (total > 0) {
                     html = kendo.format(options.messages.display,
-                        (page - 1) * pageSize + 1, // first item in the page
+                        Math.min((page - 1) * pageSize + 1, total), // first item in the page
                         Math.min(page * pageSize, total), // last item in the page
                     total);
                 } else {

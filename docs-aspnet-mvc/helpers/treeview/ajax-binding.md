@@ -33,13 +33,13 @@ Below are listed the steps for you to follow when configuring the Kendo UI TreeV
 
 **Figure 1. A new entity model**
 
-![New entity data model](/aspnet-mvc/helpers/treeview/images/tree-entity-data-model.png)
+![New entity data model](/helpers/treeview/images/tree-entity-data-model.png)
 
 **Step 2** Select the **Employees** table and click **Finish**.
 
 **Figure 2. Choose the Employees table**
 
-![Choose the Employees table](/aspnet-mvc/helpers/treeview/images/tree-employees-table.png)
+![Choose the Employees table](/helpers/treeview/images/tree-employees-table.png)
 
 ### Configure the New Action Method
 
@@ -118,7 +118,7 @@ Below are listed the steps for you to follow when configuring the Kendo UI TreeV
 
 **Figure 3. The final result**
 
-![Final result](/aspnet-mvc/helpers/treeview/images/tree-employees.png)
+![Final result](/helpers/treeview/images/tree-employees.png)
 
 ## See Also
 
@@ -128,11 +128,11 @@ Other articles on Telerik UI for ASP.NET MVC and on the TreeView:
 * [How to Bind TreeViews to XML]({% slug howto_bindtoaml_treeviewaspnetmvc %})
 * [How to Integrate with Sharepoint]({% slug howto_integratewithsharepoint_treeviewaspnetmvc %})
 * [How to Save the State of TreeView Items]({% slug howto_savetreeviewitemsstate_treeviewaspnetmvc %})
-* [Overview of the Kendo UI TreeView Widget]({% slug overview_kendoui_treeview_widget %})
+* [Overview of the Kendo UI TreeView Widget](http://docs.telerik.com/kendo-ui/controls/navigation/treeview/overview)
 * [Overview of Telerik UI for ASP.NET MVC]({% slug overview_aspnetmvc %})
 * [Fundamentals of Telerik UI for ASP.NET MVC]({% slug fundamentals_aspnetmvc %})
 * [Scaffolding in Telerik UI for ASP.NET MVC]({% slug scaffolding_aspnetmvc %})
-* [Telerik UI for ASP.NET MVC API Reference Folder](/api/aspnet-mvc/Kendo.Mvc/AggregateFunction)
+* [Telerik UI for ASP.NET MVC API Reference Folder](/api/Kendo.Mvc/AggregateFunction)
 * [Telerik UI for ASP.NET MVC HtmlHelpers Folder]({% slug overview_barcodehelper_aspnetmvc %})
 * [Tutorials on Telerik UI for ASP.NET MVC]({% slug overview_timeefficiencyapp_aspnetmvc6 %})
 * [Telerik UI for ASP.NET MVC Troubleshooting]({% slug troubleshooting_aspnetmvc %})

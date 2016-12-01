@@ -517,7 +517,7 @@ The example below demonstrates how to use ToolBar events.
 
 Other articles on Kendo UI ToolBar:
 
-* [Overview of the ASP.NET MVC HtmlHelper Extension for the ToolBar Widget]({% slug overview_toolbarhelper_aspnetmvc %})
+* [Overview of the ASP.NET MVC HtmlHelper Extension for the ToolBar Widget](http://docs.telerik.com/aspnet-mvc/helpers/toolbar/overview)
 * [Overview of the ToolBar JSP Tag]({% slug overview_toolbar_uiforjsp %})
 * [Overview of the ToolBar PHP Class]({% slug overview_toolbar_uiforphp %})
 * [How to Close ToolBar Popup Manually]({% slug howto_closetoolbarpopupmanually_toolbar %})

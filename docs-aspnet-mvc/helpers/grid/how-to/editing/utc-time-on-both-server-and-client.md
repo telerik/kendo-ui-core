@@ -17,7 +17,7 @@ To keep time in the UTC format, apply an explicit transformation to the dates on
 
 > **Important**
 >
-> If you use formats for parsing UTC date strings, [apply the `zzz` specifier]({% slug dateparsing_kendoui_globalization %}#parse-utc-date-strings) to render the local time. Otherwise, the current browser timezone offset will apply.
+> If you use formats for parsing UTC date strings, [apply the `zzz` specifier](http://docs.telerik.com/kendo-ui/framework/globalization/dateparsing#parse-utc-date-strings) to render the local time. Otherwise, the current browser timezone offset will apply.
 
 Below are listed the two corresponding steps for you to follow.
 
@@ -99,6 +99,6 @@ To see the example on how to use UTC time on both the client and the server, ref
 ## See Also
 
 * [Overview of the Grid HtmlHelper]({% slug overview_gridhelper_aspnetmvc %})
-* [GridBuilder API Reference](/api/aspnet-mvc/Kendo.Mvc.UI.Fluent/AutoCompleteBuilder)
+* [GridBuilder API Reference](/api/Kendo.Mvc.UI.Fluent/GridBuilder)
 
 For more runnable examples on the Kendo UI Grid in ASP.NET MVC applications, browse its [**How To** documentation folder]({% slug howto_applycustomrowstylesbasedondata_gridaspnetmvc %}).

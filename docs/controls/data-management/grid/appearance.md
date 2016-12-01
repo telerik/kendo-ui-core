@@ -12,7 +12,7 @@ The [Kendo UI Grid widget](http://demos.telerik.com/kendo-ui/grid/index) support
 
 ## Scrolling
 
-By default, the scrolling functionality of the Grid is enabled. For historical reasons, however, the [Grid MVC wrapper]({% slug configuration_gridhelper_aspnetmvc %}#scrolling) does not support it. To disable the scrolling functionality, set the `scrollable` option to `false`.
+By default, the scrolling functionality of the Grid is enabled. For historical reasons, however, the [Grid MVC wrapper](http://docs.telerik.com/aspnet-mvc/helpers/grid/configuration#scrolling) does not support it. To disable the scrolling functionality, set the `scrollable` option to `false`.
 
 ###### Example
 
@@ -221,9 +221,11 @@ If the total number of items is large and the scrolling is fast, the table of th
 
 * Because of height-related browser limitations (which cannot be avoided), virtual scrolling works with up to one or two million records. The exact number of records depends on the browser and the row height. If you use a row count that is larger than the browser can handle, unexpected widget behavior or JavaScript errors might occur. In such cases, revert to standard paging.
 
-* Refreshing or replacing the Grid data in the virtual mode has to be accompanied by resetting the position of the virtual scrollbar to zero, for example, by using `$('#GridID .k-scrollbar').scrollTop(0);`.
+* Refreshing or replacing the Grid data in the virtual mode has to be accompanied by resetting the position of the virtual scrollbar to zero&mdash;for example, by using `$('#GridID .k-scrollbar').scrollTop(0);`. In some scenarios, you might also need to call the [`refresh()` method](http://docs.telerik.com/kendo-ui/api/javascript/ui/grid#methods-refresh).
 
 * Programmatic scrolling to a particular Grid row is not supported when virtual scrolling is enabled, because it is not possible to reliably predict the exact scroll offset of the row.
+
+* When the Grid is `navigatable`, keyboard navigation supports only the `Up Arrow` and `Down Arrow` keys. The `Page Up` and `Page Down` key scrolling is not supported.
 
 * The Grid does not persist [selection](#selection) when virtual scrolling occurs. To achieve this behavior, [use this custom implementation]({% slug howto_persist_row_selection_paging_sorting_filtering_grid %}).
 
@@ -231,7 +233,7 @@ When virtual scrolling is not supported or recommended, revert to standard pagin
 
 ## Height
 
-By default, the Grid has no height and expands to fit all table rows. To provide for a backwards compatibility, the scrollable MVC wrapper of the Grid [applies a default height of 200px to its scrollable data area](/aspnet-mvc/helpers/grid/configuration#scrolling). To control the height of the widget, specify a static pixel value.
+By default, the Grid has no height and expands to fit all table rows. To provide for a backwards compatibility, the scrollable MVC wrapper of the Grid [applies a default height of 200px to its scrollable data area](http://docs.telerik.com/aspnet-mvc/helpers/grid/configuration#scrolling). To control the height of the widget, specify a static pixel value.
 
 ###### Example
 
@@ -262,7 +264,7 @@ In some special scenarios it is possible to set a height style to the scrollable
 >
 > This approach is not applicable when virtual scrolling is enabled.
 
-It is possible to make the Grid expand and shrink vertically according to the number of its rows and yet within certain limits. To achieve this, apply a minimum and/or maximum height style to the scrollable data area and do not set any height of the Grid. If you use the MVC wrapper of the Grid, make sure you [remove the default data area height]({% slug configuration_gridhelper_aspnetmvc %}#scrolling).
+It is possible to make the Grid expand and shrink vertically according to the number of its rows and yet within certain limits. To achieve this, apply a minimum and/or maximum height style to the scrollable data area and do not set any height of the Grid. If you use the MVC wrapper of the Grid, make sure you [remove the default data area height](http://docs.telerik.com/aspnet-mvc/helpers/grid/configuration#scrolling).
 
 ###### Example
 
@@ -440,15 +442,9 @@ The Grid allows you to lock columns on one side of the table. For the feature to
 * Set explicit pixel widths to all columns to allow the Grid to adjust the layout of the frozen and non-frozen table parts.
 * Make sure that the total width of all locked columns is equal to or less than the width of the Grid minus three times the width of the scrollbar.
 
-These settings ensure that at least one non-locked column is always visible and that it is possible to scroll the non-locked columns horizontally. Note that the horizontal scrollbar will not appear if the horizontal space intended for it is not enough.
-
-The row template and detail features are not supported in combination with column locking. It is possible to lock a column at the topmost level only, if you use [multi-column headers](http://demos.telerik.com/kendo-ui/grid/multicolumnheaders).
+These settings ensure that at least one non-locked column is always visible and that it is possible to scroll the non-locked columns horizontally. Note that if the horizontal space intended for it is not enough, the horizontal scrollbar does not appear.
 
 Frozen columns cannot be touch-scrolled, because they are wrapped in a container with an `overflow:hidden` style. This limitation can be worked around on desktop devices with the help of the mousewheel event, but such an alternative on touch devices does not exist.
-
-> **Important**  
->
-> The [JavaScript API of the Grid](/api/javascript/ui/grid) allows you to lock and unlock columns on the fly. However, this is possible only if at least one column is initially locked during initialization. The HTML output and script behavior of the Grid are very different when frozen columns are used. That is why the widget cannot switch between frozen and unfrozen mode after initialization.
 
 Frozen columns rely on row height synchronization between the frozen and non-frozen parts. Some browsers, such as Internet Explorer 9 and Firefox, require a `line-height` style set in pixels. Otherwise, the synchronization might not work properly possibly because of sub-pixel quirks.
 
@@ -458,6 +454,11 @@ Frozen columns rely on row height synchronization between the frozen and non-fro
     {
         line-height: 18px;
     }
+
+> **Important**  
+> * The [JavaScript API of the Grid](/api/javascript/ui/grid) allows you to lock and unlock columns on the fly. However, this is possible only if at least one column is initially locked during initialization. The HTML output and script behavior of the Grid are very different when frozen columns are used. That is why the widget cannot switch between frozen and unfrozen mode after initialization.
+> * The locked columns can be positioned only on the left side of the Grid. Positioning them on the right side is not supported.
+> * The row template and detail features are not supported in combination with column locking. It is possible to lock a column at the topmost level only, if you use [multi-column headers](http://demos.telerik.com/kendo-ui/grid/multicolumnheaders).
 
 ## Rows
 

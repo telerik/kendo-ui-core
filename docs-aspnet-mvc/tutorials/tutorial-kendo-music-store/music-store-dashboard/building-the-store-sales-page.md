@@ -10,7 +10,7 @@ position: 4
 
 **Figure 1. A snapshot of the Kendo UI Music Store Sales Overview page**
 
-![sales-overview](/tutorials/asp.net/kendo-music-store/music-store-dashboard/images/sales-overview.png)
+![sales-overview](/tutorials/tutorial-kendo-music-store/music-store-dashboard/images/sales-overview.png)
 
 This page is constructed to show a collection of data visualization graphs, exposing several different views of store data. The page is dominated by a general sales graph, which can be filtered by five different dimensions, selectable by the buttons to the left of graph.
 
@@ -28,15 +28,15 @@ For example, the chart type can be changed from a bar graph to a line graph by u
 
 **Figure 2. A bar graph representation of the Sales Overview page**
 
-![sales-by-genre-bar](/tutorials/asp.net/kendo-music-store/music-store-dashboard/images/sales-by-genre-bar.png)
+![sales-by-genre-bar](/tutorials/tutorial-kendo-music-store/music-store-dashboard/images/sales-by-genre-bar.png)
 
 **Figure 3. A line graph representation of the Sales Overview page**
 
-![sales-by-genre-line](/tutorials/asp.net/kendo-music-store/music-store-dashboard/images/sales-by-genre-line.png)
+![sales-by-genre-line](/tutorials/tutorial-kendo-music-store/music-store-dashboard/images/sales-by-genre-line.png)
 
 **Figure 4. The side buttons through which the graphic representation of the data can be changed**
 
-![sales-by-genre-bar-button-highlight](/tutorials/asp.net/kendo-music-store/music-store-dashboard/images/sales-by-genre-bar-button-highlight.png)
+![sales-by-genre-bar-button-highlight](/tutorials/tutorial-kendo-music-stores/music-store-dashboard/images/sales-by-genre-bar-button-highlight.png)
 
 The **Sales By Genre** and **Searches By Genre** charts are built similarly, with simple declarative markup and powerful JavaScript piping. The chart is contained within its own `<div>`, with an accompanying `<span>` that contains the buttons for changing the chart type. The **Sales By Genre** chart is constructed as demonstrated in the example below.
 
@@ -103,11 +103,11 @@ The **Sales By Genre** and **Searches By Genre** charts also provide a method to
 
 **Figure 5. A chart graph displaying Weekly data**
 
-![sales-by-genre-bar-weekly](/tutorials/asp.net/kendo-music-store/music-store-dashboard/images/sales-by-genre-bar.png)
+![sales-by-genre-bar-weekly](/tutorials/tutorial-kendo-music-store/music-store-dashboard/images/sales-by-genre-bar.png)
 
 **Figure 6. A chart graph displaying Monthly data**
 
-![sales-by-genre-bar-monthly](/tutorials/asp.net/kendo-music-store/music-store-dashboard/images/sales-by-genre-bar-monthly.png)
+![sales-by-genre-bar-monthly](/tutorials/tutorial-kendo-music-store/music-store-dashboard/images/sales-by-genre-bar-monthly.png)
 
 As before, the two charts are constructed similarly, with declarative markup, JavaScript, and jQuery.
 

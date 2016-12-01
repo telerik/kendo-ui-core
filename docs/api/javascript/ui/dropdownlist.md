@@ -115,6 +115,22 @@ Controls whether to bind the widget to the data source on initialization.
     });
     </script>
 
+### autoWidth `Boolean`
+
+If set to `true`, the widget automatically adjusts the width of the popup element and does not wrap up the item label.
+
+#### Example - enable autoWidth
+
+    <input id="dropdownlist" style="width: 100px;" />
+    <script>
+    $("#dropdownlist").kendoDropDownList({
+      autoWidth: true,
+      dataSource: {
+        data: ["Short item", "An item with really, really long text"]
+      }
+    });
+    </script>
+
 ### cascadeFrom `String`
 
 Use it to set the Id of the parent DropDownList widget.
@@ -1294,6 +1310,7 @@ The search value.
 
 Gets or sets the selected item. Selects the item provided as an argument and updates the value and text of the widget.
 
+> * If the widget is not bound (e.g. `autoBind` is set to `false`), the `select` method will **not** pre-fetch the data before continuing with the selection and value setting (unlike the [value](#methods-value) method), and no item will be selected.
 > * The numeric argument indicates the item index in the dropdown, not in the dataSource. If an [`optionLabel`](#configuration-optionLabel) is used, the dropdown item index can be obtained by incrementing the respective dataSource item index by 1.
 > * When **virtualization** is enabled, the method **does not support** selection with a *function predicate*. The predicate function looks only
 in the current datasource view, which represents only the active range/page. Hence it will not work properly.

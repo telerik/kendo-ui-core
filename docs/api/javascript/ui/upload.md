@@ -730,7 +730,7 @@ Removes all files for which the callback function returns `true` (only visually 
 
 #### Example
 
-    input name="files" id="files" type="file" />
+    <input name="files" id="files" type="file" />
     <button id="clearFile" class="k-button">Clear non-image files</button>
     <script>
 
@@ -759,6 +759,10 @@ Removes all files for which the callback function returns `true` (only visually 
         })
       });
     </script>
+
+#### Parameters
+
+##### callback `Function`
 
 ### clearFileByUid
 
@@ -791,6 +795,10 @@ Removes a file by ID (only visually from the UI) without issuing requests to the
         });
       });
     </script>
+
+#### Parameters
+
+##### uid `String`
 
 ### destroy
 
@@ -904,6 +912,10 @@ Retrieves the files that are currently selected.
 
 Removes all files by sending a standard `remove` request to the handler.
 
+> **Important**
+>
+> Invoking the `removeAllFiles` method will not trigger the `remove` event.
+
 #### Example
 
     <input name="files" id="files" type="file" />
@@ -930,6 +942,10 @@ Removes all files by sending a standard `remove` request to the handler.
 ### removeFile
 
 Removes all files for which the callback function returns `true` by sending a standard `remove` request to the handler.
+
+> **Important**
+>
+> Invoking the `removeFile` method will not trigger the `remove` event.
 
 #### Example
 
@@ -963,9 +979,17 @@ Removes all files for which the callback function returns `true` by sending a st
       });
     </script>
 
+#### Parameters
+
+##### callback `Function`
+
 ### removeFileByUid
 
 Removes a file by ID by sending a standard `remove` request to the handler.
+
+> **Important**
+>
+> Invoking the `removeFileByUid` method will not trigger the `remove` event.
 
 #### Example
 
@@ -999,6 +1023,10 @@ Removes a file by ID by sending a standard `remove` request to the handler.
         });
       });
     </script>
+
+#### Parameters
+
+##### uid `String`
 
 ### toggle
 
@@ -1104,6 +1132,34 @@ List of the files that were uploaded or removed . Each file has:
 *   size - the file size in bytes (null if not available)
 *   uid - the unique identifier of the file or batch of files
 
+### clear
+
+Triggered when files are cleared by clicking on the "Clear" button. Note: Cancelling this event will prevent the clearing the selected files.
+
+#### Wire-up an event handler that triggered when a user clears selected files
+
+    <input type="file" name="files" id="photos" />
+    <script>
+        $("#photos").kendoUpload({
+            async: {
+                saveUrl: "http://my-app.localhost/save",
+                removeUrl: "http://my-app.localhost/remove",
+				autoUpload: false
+            },
+            clear: onClear
+        });
+
+        function onClear(e) {
+			// Optionally cancel the clear operation by calling preventDefault method
+            e.preventDefault();
+        };
+    </script>
+
+#### Event Data
+
+##### e `Object`
+
+A custom event object. The event can be cancelled just like when using a standard jQuery event object via `e.preventDefault();`
 
 ### complete
 

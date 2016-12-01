@@ -14,6 +14,8 @@ var __meta__ = { // jshint ignore:line
 (function($, undefined) {
     var kendo = window.kendo,
         ui = kendo.ui,
+        outerWidth = kendo._outerWidth,
+        outerHeight = kendo._outerHeight,
         Widget = ui.Widget,
         keys = kendo.keys,
         support = kendo.support,
@@ -249,6 +251,7 @@ var __meta__ = { // jshint ignore:line
             var options = that.options;
             var dataSource = that.dataSource;
             var expression = extend({}, dataSource.filter() || {});
+            var resetPageSettings = filter || (expression.filters && expression.filters.length && !filter);
 
             var removed = removeFiltersForField(expression, options.dataTextField);
 
@@ -256,24 +259,33 @@ var __meta__ = { // jshint ignore:line
                 return;
             }
 
-            expression = {
-                filters: expression.filters || [],
+            var newExpression = {
+                filters: [],
                 logic: "and"
             };
 
-            if (filter) {
-                expression.filters.push(filter);
+            if (isValidFilterExpr(filter)) {
+                newExpression.filters.push(filter);
+            }
+
+            if (isValidFilterExpr(expression)) {
+                newExpression.filters.push(expression);
             }
 
             if (that._cascading) {
-                this.listView.setDSFilter(expression);
+                this.listView.setDSFilter(newExpression);
             }
 
-            if (!force) {
-                dataSource.filter(expression);
-            } else {
-                dataSource.read(dataSource._mergeState({ filter: expression }));
-            }
+            var dataSourceState = extend({}, {
+                page: resetPageSettings ? 1 : dataSource.page(),
+                pageSize: resetPageSettings ? dataSource.options.pageSize : dataSource.pageSize(),
+                sort: dataSource.sort(),
+                filter: dataSource.filter(),
+                group: dataSource.group(),
+                aggregate: dataSource.aggregate()
+            }, { filter: newExpression });
+
+            dataSource[force ? "read" : "query"](dataSource._mergeState(dataSourceState));
         },
 
         _angularElement: function(element, action) {
@@ -609,9 +621,9 @@ var __meta__ = { // jshint ignore:line
                 var element = $(this);
 
                 if (element.hasClass("k-list-filter")) {
-                    offsetHeight += element.children().outerHeight();
+                    offsetHeight += outerHeight(element.children());
                 } else {
-                    offsetHeight += element.outerHeight();
+                    offsetHeight += outerHeight(element);
                 }
             });
 
@@ -641,7 +653,7 @@ var __meta__ = { // jshint ignore:line
 
                 if (height !== "auto") {
                     offsetTop = that._offsetHeight();
-                    footerHeight = $(that.footer).outerHeight() || 0;
+                    footerHeight = outerHeight($(that.footer)) || 0;
                     height = height - offsetTop - footerHeight;
                 }
 
@@ -666,14 +678,14 @@ var __meta__ = { // jshint ignore:line
             }
 
             computedStyle = window.getComputedStyle ? window.getComputedStyle(wrapper[0], null) : 0;
-            computedWidth = parseFloat(computedStyle  && computedStyle.width) || wrapper.outerWidth();
+            computedWidth = parseFloat(computedStyle  && computedStyle.width) || outerWidth(wrapper);
 
             if (computedStyle && browser.msie) { // getComputedStyle returns different box in IE.
                 computedWidth += parseFloat(computedStyle.paddingLeft) + parseFloat(computedStyle.paddingRight) + parseFloat(computedStyle.borderLeftWidth) + parseFloat(computedStyle.borderRightWidth);
             }
 
             if (list.css("box-sizing") !== "border-box") {
-                width = computedWidth - (list.outerWidth() - list.width());
+                width = computedWidth - (outerWidth(list) - list.width());
             } else {
                 width = computedWidth;
             }
@@ -2317,6 +2329,18 @@ var __meta__ = { // jshint ignore:line
             changed: changed,
             unchanged: unchanged
         };
+    }
+
+    function isValidFilterExpr(expression) {
+        if (!expression || $.isEmptyObject(expression)) {
+            return false;
+        }
+
+        if (expression.filters && !expression.filters.length) {
+            return false;
+        }
+
+        return true;
     }
 
     function removeFiltersForField(expression, field) {

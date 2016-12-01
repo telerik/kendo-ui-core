@@ -1449,6 +1449,46 @@ The field by which the data items are sorted.
       console.log(data[0].age); // displays "33"
     });
     </script>
+	
+### sort.compare `Function`
+
+Function which can be used for custom comparing of the DataSource items.
+
+#### Example - use a custom compare function to compare items in the DataSource
+
+<div id="grid"></div>
+    <script>
+      var numbers = {
+        "one"  : 1,
+        "two"  : 2,
+        "three": 3
+      };
+
+      var dataSource = new kendo.data.DataSource({
+        data: [
+          { id: 1, item: "two" },
+          { id: 2, item: "one" },
+          { id: 3, item: "three" }
+        ],
+        sort: { field: "item", dir: "asc", compare: function(a, b) {          
+          return numbers[a.item] - numbers[b.item];
+        } 
+              }
+      });
+
+      $("#grid").kendoGrid({
+        dataSource: dataSource,
+        sortable: true,
+        columns: [{
+          field: "item",
+          sortable: {
+            compare: function(a, b) {
+              return numbers[a.item] - numbers[b.item];
+            }
+          }
+        }]
+      });
+    </script>
 
 ### transport `Object`
 
@@ -2692,7 +2732,7 @@ Refer to the [`jQuery.ajax`](http://api.jquery.com/jQuery.ajax) documentation fo
 ### transport.update.contentType `String`
 
 The content-type HTTP header sent to the server. Default is `"application/x-www-form-urlencoded"`. Use `"application/json"` if the content is JSON.
-Refer to the [`jQuery.ajax`](http://api.jquery.com/`jQuery.ajax`) documentation for further information.
+Refer to the [`jQuery.ajax`](http://api.jquery.com/jQuery.ajax) documentation for further information.
 
 #### Example - set content type
     <script>

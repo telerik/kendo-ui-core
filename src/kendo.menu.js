@@ -196,9 +196,9 @@ var __meta__ = { // jshint ignore:line
                 var result = "k-icon";
 
                 if (group.horizontal) {
-                    result += " k-i-arrow-s";
+                    result += " k-i-arrow-60-down";
                 } else {
-                    result += " k-i-arrow-e";
+                    result += " k-i-arrow-60-right";
                 }
 
                 return result;
@@ -304,11 +304,28 @@ var __meta__ = { // jshint ignore:line
         item.filter(":has(.k-menu-group)")
             .children(".k-link:not(:has([class*=k-i-arrow]:not(.k-sprite)))")
             .each(function () {
-                var item = $(this),
-                    parent = item.parent().parent();
-
-                item.append("<span class='k-icon " + (parent.hasClass(MENU + "-horizontal") ? "k-i-arrow-s" : "k-i-arrow-e") + "'/>");
+                var item = $(this);
+                var arrowCssClass = getArrowCssClass(item);
+                item.append("<span class='k-icon " + arrowCssClass + "'/>");
             });
+    }
+
+    function getArrowCssClass (item) {
+        var arrowCssClass,
+            parent = item.parent().parent(),
+            isRtl = kendo.support.isRtl(parent);
+
+        if (parent.hasClass(MENU + "-horizontal")) {
+            arrowCssClass = " k-i-arrow-60-down";
+        } else {
+            if (isRtl) {
+                arrowCssClass = " k-i-arrow-60-left";
+            }
+            else {
+                arrowCssClass = " k-i-arrow-60-right";
+            }
+        }
+        return arrowCssClass;
     }
 
     function updateFirstLast (item) {
@@ -625,7 +642,7 @@ var __meta__ = { // jshint ignore:line
                         if (!ul.find(".k-menu-group")[0] && ul.children(".k-item").length > 1) {
                             var windowHeight = $(window).height(),
                                 setScrolling = function(){
-                                    ul.css({maxHeight: windowHeight - (ul.outerHeight() - ul.height()) - kendo.getShadows(ul).bottom, overflow: "auto"});
+                                    ul.css({maxHeight: windowHeight - (kendo._outerHeight(ul) - ul.height()) - kendo.getShadows(ul).bottom, overflow: "auto"});
                                 };
 
                             if (kendo.support.browser.msie && kendo.support.browser.version <= 7) {
@@ -1185,6 +1202,10 @@ var __meta__ = { // jshint ignore:line
             var that = this,
                 item = $(kendo.eventTarget(e)).closest(allItemsSelector);
 
+            if (item.hasClass(DISABLEDSTATE)) {
+                return;
+            }
+
             setTimeout(function () {
                 that._moveHover([], item);
                 if (item.children(".k-content")[0]) {
@@ -1468,7 +1489,8 @@ var __meta__ = { // jshint ignore:line
                                 collision: that.options.popupCollision || "fit",
                                 animation: that.options.animation,
                                 activate: that._triggerProxy,
-                                deactivate: that._triggerProxy
+                                deactivate: that._triggerProxy,
+                                appendTo: that.options.appendTo
                             }).data("kendoPopup");
 
             that._targetChild = contains(that.target[0], that.popup.element[0]);

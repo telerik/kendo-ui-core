@@ -3,7 +3,7 @@ title: Configure Projects
 page_title: Configure Projects | UI for ASP.NET MVC Visual Studio Integration
 description: "Learn how to configure a Telerik UI for ASP.NET MVC application."
 slug: projectwizardconfig_visualstudio_aspnetmvc
-position: 5
+position: 6
 ---
 
 # Configure Projects
@@ -24,7 +24,7 @@ The first page of the **Project Configuration Wizard** enables you to change the
 
 **Figure 1. Visual theme configuration page of the Project Configuration Wizard**
 
-![Configure project theme](/aspnet-mvc/vs-integration/images/configure_theme.png)
+![Configure project theme](/vs-integration/images/configure_theme.png)
 
 Click **Next** to move on to the next page.
 
@@ -34,11 +34,11 @@ The second page of the **Project Configuration Wizard** enables you to modify th
 
 - **Render Right-To-Left**&mdash;Updates the master page with the Right-to-left support class and adds CSS reference for RTL styles.
 - **Copy Global Resources**&mdash;Copies the localization files to `~/Scripts/kendo/{version}/cultures`.
-- **Use CDN Support**&mdash;Enables or disables the [Kendo UI CDN support]({% slug kendoui_cdn_services_installation %}).
+- **Use CDN Support**&mdash;Enables or disables the [Kendo UI CDN support](http://docs.telerik.com/kendo-ui/intro/installation/cdn-service).
 
 **Figure 2. Project settings configuration page of the Project Configuration Wizard**
 
-![Configure project settings](/aspnet-mvc/vs-integration/images/configure_settings.png)
+![Configure project settings](/vs-integration/images/configure_settings.png)
 
 ## See Also
 

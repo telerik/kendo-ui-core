@@ -34,6 +34,11 @@ Indicates whether the pager refresh method will be called within its initializat
           dataSource: dataSource
         });
     </script>
+    <style>
+      #pager{
+       margin-top: 100px;
+      }
+    </style>
 
 ### buttonCount `Number`*(default: 10)*
 Defines the number of buttons displayed in the numeric pager.
@@ -60,6 +65,11 @@ Defines the number of buttons displayed in the numeric pager.
 
         dataSource.read();
     </script>
+    <style>
+        #pager {
+  	      margin-top: 100px;
+        }
+    </style>
 
 ### dataSource `Object|kendo.data.DataSource`
 Instance of kendo DataSource. See the [**kendo.data.DataSource**](/api/javascript/data/datasource).
@@ -87,6 +97,11 @@ This option is mandatory because the Pager is tightly connected with DataSource.
 
         dataSource.read();
     </script>
+    <style>
+        #pager {
+  	      margin-top: 100px;
+        }
+    </style>
 
 If the Pager is used with another widget then we usually specify this Pager like object of options for given widget. In that case the DataSource is automatically injected to the Pager from the widget. See example for a Grid below.
 
@@ -132,11 +147,16 @@ The template for selected page number link.
 
         $("#pager").kendoPager({
           dataSource: dataSource,
-          selectTemplate: '<li><span style="color:red">#=text#</span></li>'
+          selectTemplate: '<li class="k-link"><span style="color:red">#=text#</span></li>'
         });
 
         dataSource.read();
     </script>
+    <style>
+      #pager {
+       margin-top: 100px;
+      }
+    </style>
 
 ### linkTemplate `String`
 The template for page number links.
@@ -162,6 +182,11 @@ The template for page number links.
 
         dataSource.read();
     </script>
+    <style>
+      #pager {
+       margin-top: 100px;
+      }
+    </style>
 
 ### info `Boolean`*(default: true)*
 Defines if a label showing current paging information will be displayed.
@@ -188,6 +213,11 @@ Defines if a label showing current paging information will be displayed.
 
         dataSource.read();
     </script>
+    <style>
+      #pager {
+       margin-top: 100px;
+      }
+    </style>
 
 ### input `Boolean`*(default: false)*
 Defines if an input element which allows the user to navigate to given page will be displayed.
@@ -214,6 +244,11 @@ Defines if an input element which allows the user to navigate to given page will
 
         dataSource.read();
     </script>
+    <style>
+      #pager {
+       margin-top: 100px;
+      }
+    </style>
 
 ### numeric `Boolean`*(default: true)*
 Defines if numeric portion of the pager will be shown.
@@ -239,6 +274,11 @@ Defines if numeric portion of the pager will be shown.
 
         dataSource.read();
     </script>
+    <style>
+      #pager {
+       margin-top: 100px;
+      }
+    </style>
 
 
 ### pageSizes `Boolean|Array` *(default: false)*
@@ -271,6 +311,11 @@ If a `pageSize` setting is provided for the data source then this value will be 
 
         dataSource.read();
     </script>
+    <style>
+      #pager {
+       margin-top: 100px;
+      }
+    </style>
 
 #### Example - show the page size drop-down with custom values
     <div id="pager"></div>
@@ -293,6 +338,11 @@ If a `pageSize` setting is provided for the data source then this value will be 
 
         dataSource.read();
     </script>
+    <style>
+      #pager {
+       margin-top: 100px;
+      }
+    </style>
 
 
 ### previousNext `Boolean`*(default: true)*
@@ -319,6 +369,11 @@ Defines if buttons for navigating to the first, last, previous and next pages wi
 
         dataSource.read();
     </script>
+    <style>
+      #pager {
+       margin-top: 100px;
+      }
+    </style>
 
 ### refresh `Boolean`*(default: false)*
 Defines if a refresh button will be displayed. Click on that button will call DataSource read() method to get actual data.
@@ -344,6 +399,11 @@ Defines if a refresh button will be displayed. Click on that button will call Da
 
         dataSource.read();
     </script>
+    <style>
+      #pager {
+       margin-top: 100px;
+      }
+    </style>
 
 ### messages `Object`
 Defines texts shown within the pager. Use this option to customize or localize the pager messages.
@@ -379,6 +439,11 @@ Contains three placeholders:
 
         dataSource.read();
     </script>
+    <style>
+      #pager {
+       margin-top: 100px;
+      }
+    </style>
 
 ### messages.empty `String`*(default: "No items to display")*,
 The text displayed when the DataSource view does no contain items.
@@ -388,12 +453,7 @@ The text displayed when the DataSource view does no contain items.
 
     <script>
         var dataSource = new kendo.data.DataSource({
-          data: [
-            { productName: "Tea", category: "Beverages" },
-            { productName: "Coffee", category: "Beverages" },
-            { productName: "Ham", category: "Food" },
-            { productName: "Bread", category: "Food" }
-          ],
+          data: [],
           pageSize: 2
         });
 
@@ -406,6 +466,11 @@ The text displayed when the DataSource view does no contain items.
 
         dataSource.read();
     </script>
+    <style>
+      #pager {
+       margin-top: 100px;
+      }
+    </style>
 
 ### messages.allPages `String`*(default: "All")*,
 The text displayed for the item that represents the allPages option when allPages is enabled.
@@ -426,14 +491,20 @@ The text displayed for the item that represents the allPages option when allPage
 
         $("#pager").kendoPager({
           dataSource: dataSource,
-          input: true,
+          numeric: false,
+          pageSizes: [ 2, 3, 'all'],
           messages: {
-            allPages: "All Pages"
+            allPages: "See All"
           }
         });
 
         dataSource.read();
     </script>
+    <style>
+      #pager {
+       margin-top: 100px;
+      }
+    </style>
 
 ### messages.page `String`*(default: "Page")*,
 The label displayed before the pager input.
@@ -455,6 +526,7 @@ The label displayed before the pager input.
         $("#pager").kendoPager({
           dataSource: dataSource,
           input: true,
+          numeric: false,
           messages: {
             page: "Enter page"
           }
@@ -462,6 +534,11 @@ The label displayed before the pager input.
 
         dataSource.read();
     </script>
+    <style>
+      #pager {
+       margin-top: 100px;
+      }
+    </style>
 
 ### messages.of `String`*(default: "of {0}")*,
 The label displayed before the pager input. Uses [kendo.format](/api/javascript/kendo#methods-format). Contains one optional placeholder {0} which represents the total number of pages.
@@ -483,6 +560,7 @@ The label displayed before the pager input. Uses [kendo.format](/api/javascript/
         $("#pager").kendoPager({
           dataSource: dataSource,
           input: true,
+          numeric: false,
           messages: {
             of: "from {0}"
           }
@@ -490,6 +568,11 @@ The label displayed before the pager input. Uses [kendo.format](/api/javascript/
 
         dataSource.read();
     </script>
+    <style>
+      #pager {
+       margin-top: 100px;
+      }
+    </style>
 
 ### messages.itemsPerPage `String`*(default: "items per page")*,
 The label displayed after the page size DropDownList.
@@ -511,6 +594,7 @@ The label displayed after the page size DropDownList.
         $("#pager").kendoPager({
           dataSource: dataSource,
           pageSizes: true,
+          numeric:false,
           messages: {
             itemsPerPage: "data items per page"
           }
@@ -518,6 +602,11 @@ The label displayed after the page size DropDownList.
 
         dataSource.read();
     </script>
+    <style>
+      #pager {
+       margin-top: 100px;
+      }
+    </style>
 
 ### messages.first `String`*(default: "Go to the first page")*,
 The tooltip of the button which navigates to the first page.
@@ -545,6 +634,11 @@ The tooltip of the button which navigates to the first page.
 
         dataSource.read();
     </script>
+    <style>
+      #pager {
+       margin-top: 100px;
+      }
+    </style>
 
 ### messages.previous `String`*(default: "Go to the previous page")*,
 The tooltip of the button which navigates to the previous page.
@@ -572,6 +666,11 @@ The tooltip of the button which navigates to the previous page.
 
         dataSource.read();
     </script>
+    <style>
+      #pager {
+       margin-top: 100px;
+      }
+    </style>
 
 ### messages.next `String`*(default: "Go to the next page")*,
 The tooltip of the button which navigates to the next page.
@@ -599,6 +698,11 @@ The tooltip of the button which navigates to the next page.
 
         dataSource.read();
     </script>
+    <style>
+      #pager {
+       margin-top: 100px;
+      }
+    </style>
 
 ### messages.last `String`*(default: "Go to the last page")*,
 The tooltip of the button which navigates to the last page.
@@ -626,6 +730,11 @@ The tooltip of the button which navigates to the last page.
 
         dataSource.read();
     </script>
+    <style>
+      #pager {
+       margin-top: 100px;
+      }
+    </style>
 
 ### messages.refresh `String`*(default: "Refresh")*,
 The tooltip of the refresh button.
@@ -653,6 +762,11 @@ The tooltip of the refresh button.
 
         dataSource.read();
     </script>
+    <style>
+      #pager {
+       margin-top: 100px;
+      }
+    </style>
 
 ## Methods
 
@@ -682,6 +796,11 @@ Returns the number of pages.
 
         console.log(pager.totalPages()); // displays "2"
     </script>
+    <style>
+      #pager {
+       margin-top: 100px;
+      }
+    </style>
 
 #### Returns
 
@@ -713,6 +832,11 @@ Returns the page size - maximum number of items allowed on one page.
 
         console.log(pager.pageSize()); // displays "2"
     </script>
+    <style>
+      #pager {
+       margin-top: 100px;
+      }
+    </style>
 
 #### Returns
 
@@ -744,6 +868,11 @@ Gets or sets the current page.
 
         console.log(pager.page()); // displays "1"
     </script>
+    <style>
+      #pager {
+       margin-top: 100px;
+      }
+    </style>
 
 #### Example - set current page
     <div id="pager"></div>
@@ -767,6 +896,11 @@ Gets or sets the current page.
 
         pager.page(2);
     </script>
+    <style>
+      #pager {
+       margin-top: 100px;
+      }
+    </style>
 
 #### Parameters
 
@@ -804,6 +938,11 @@ Updates all values of pager elements so that these values fit the values of Data
 
         pager.refresh();
     </script>
+    <style>
+      #pager {
+       margin-top: 100px;
+      }
+    </style>
 
 ### destroy
 
@@ -833,6 +972,11 @@ Unbinds all callbacks created within pager initialization. This method doesn't r
 
         pager.destroy();
     </script>
+    <style>
+      #pager {
+       margin-top: 100px;
+      }
+    </style>
 
 ## Events
 
@@ -868,6 +1012,11 @@ The widget instance which fired the event.
           }
         });
     </script>
+    <style>
+      #pager {
+       margin-top: 100px;
+      }
+    </style>
 
 #### Example - subscribe to the "change" event after initialization
     <div id="pager"></div>
@@ -895,3 +1044,8 @@ The widget instance which fired the event.
 
         pager.bind("change", pager_change);
     </script>
+    <style>
+      #pager {
+       margin-top: 100px;
+      }
+    </style>

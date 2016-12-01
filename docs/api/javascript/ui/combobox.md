@@ -108,6 +108,22 @@ Controls whether to bind the widget to the data source on initialization.
     });
     </script>
 
+### autoWidth `Boolean`
+
+If set to `true`, the widget automatically adjusts the width of the popup element and does not wrap up the item label.
+
+#### Example - enable autoWidth
+
+    <input id="combobox" style="width: 100px;" />
+    <script>
+    $("#combobox").kendoComboBox({
+      autoWidth: true,
+      dataSource: {
+        data: ["Short item", "An item with really, really long text"]
+      }
+    });
+    </script>
+
 ### cascadeFrom `String`
 
 Use it to set the Id of the parent ComboBox widget.
@@ -538,7 +554,7 @@ refer to [Popup](/api/javascript/ui/popup) documentation.
         <input id="combobox" />
     </div>
     <script>
-    $("#combobox").kendoCombobox({
+    $("#combobox").kendoComboBox({
       dataSource: [
         { id: 1, name: "Apples" },
         { id: 2, name: "Oranges" }
@@ -561,7 +577,7 @@ Defines a jQuery selector that will be used to find a container element, where t
         <input id="combobox" />
     </div>
     <script>
-    $("#combobox").kendoCombobox({
+    $("#combobox").kendoComboBox({
       dataSource: [
         { id: 1, name: "Apples" },
         { id: 2, name: "Oranges" }
@@ -595,7 +611,7 @@ The available "x" positions are:
         <input id="combobox" />
     </div>
     <script>
-    $("#combobox").kendoCombobox({
+    $("#combobox").kendoComboBox({
       dataSource: [
         { id: 1, name: "Apples" },
         { id: 2, name: "Oranges" }
@@ -629,7 +645,7 @@ The available "x" positions are:
         <input id="combobox" />
     </div>
     <script>
-    $("#combobox").kendoCombobox({
+    $("#combobox").kendoComboBox({
       dataSource: [
         { id: 1, name: "Apples" },
         { id: 2, name: "Oranges" }
@@ -1214,6 +1230,8 @@ The filter value.
 ### select
 
 Gets or sets the selected item. Selects the item provided as an argument and updates the value and text of the widget.
+
+> **Important:** If the widget is not bound (e.g. `autoBind` is set to `false`), the `select` method will **not** pre-fetch the data before continuing with the selection and value setting (unlike the [value](#methods-value) method), and no item will be selected.
 
 > **Important:** When **virtualization** is enabled, the method **does not support** selection with a *function predicate*. The predicate function looks only
 in the current datasource view, which represents only the active range/page. Hence it will not work properly.

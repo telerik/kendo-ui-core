@@ -17,6 +17,7 @@ var __meta__ = { // jshint ignore:line
         proxy = $.proxy,
         isFunction = kendo.isFunction,
         keys = kendo.keys,
+        outerWidth = kendo._outerWidth,
 
         TOOLBAR = "k-toolbar",
         BUTTON = "k-button",
@@ -227,7 +228,6 @@ var __meta__ = { // jshint ignore:line
                         element.addClass(BUTTON_ICON_TEXT);
                     }
                 }
-
                 if (icon) {
                     span = element.children("span." + ICON).first();
                     if (!span[0]) {
@@ -237,7 +237,7 @@ var __meta__ = { // jshint ignore:line
                 } else if (spriteCssClass) {
                     span = element.children("span.k-sprite").first();
                     if (!span[0]) {
-                        span = $('<span class="k-sprite"></span>').prependTo(element);
+                        span = $('<span class="k-sprite ' + ICON + '"></span>').prependTo(element);
                     }
                     span.addClass(spriteCssClass);
                 } else if (imageUrl) {
@@ -464,7 +464,7 @@ var __meta__ = { // jshint ignore:line
                 this.toolbar = toolbar;
 
                 this.mainButton = new ToolBarButton($.extend({}, options, { hidden: false }), toolbar);
-                this.arrowButton = $('<a class="' + BUTTON + " " + SPLIT_BUTTON_ARROW + '"><span class="' + (options.mobile ? "km-icon km-arrowdown" : "k-icon k-i-arrow-s") + '"></span></a>');
+                this.arrowButton = $('<a class="' + BUTTON + " " + SPLIT_BUTTON_ARROW + '"><span class="' + (options.mobile ? "km-icon km-arrowdown" : "k-icon k-i-arrow-60-down") + '"></span></a>');
                 this.popupElement = $('<ul class="' + LIST_CONTAINER + '"></ul>');
 
                 this.mainButton.element
@@ -619,7 +619,6 @@ var __meta__ = { // jshint ignore:line
 
                 this.mainButton = new OverflowButton($.extend({ isChild: true }, options));
                 this.mainButton.element.appendTo(element);
-
                 for (var i = 0; i < items.length; i++) {
                     item = new OverflowButton($.extend({ mobile: options.mobile, isChild: true }, items[i]), this.toolbar);
                     item.element.appendTo(element);
@@ -759,13 +758,13 @@ var __meta__ = { // jshint ignore:line
 
         function adjustPopupWidth() {
             var anchor = this.options.anchor,
-                computedWidth = anchor.outerWidth(),
+                computedWidth = outerWidth(anchor),
                 width;
 
             kendo.wrap(this.element).addClass("k-split-wrapper");
 
             if (this.element.css("box-sizing") !== "border-box") {
-                width = computedWidth - (this.element.outerWidth() - this.element.width());
+                width = computedWidth - (outerWidth(this.element) - this.element.width());
             } else {
                 width = computedWidth;
             }
@@ -1186,7 +1185,7 @@ var __meta__ = { // jshint ignore:line
                     that.overflowAnchor.append('<span class="km-icon km-more"></span>');
                     overflowContainer = actionSheetWrap(overflowContainer);
                 } else {
-                    that.overflowAnchor.append('<span class="k-icon k-i-arrow-s"></span>');
+                    that.overflowAnchor.append('<span class="k-icon k-i-arrow-60-down"></span>');
                 }
 
                 that.popup = new kendo.ui.Popup(overflowContainer, {
@@ -1202,7 +1201,7 @@ var __meta__ = { // jshint ignore:line
                             .addClass("k-overflow-wrapper");
 
                         if (!that.isMobile) {
-                            wrapper.css("margin-left", (isRtl ? -1 : 1) * ((wrapper.outerWidth() - wrapper.width()) / 2 + 1));
+                            wrapper.css("margin-left", (isRtl ? -1 : 1) * ((outerWidth(wrapper) - wrapper.width()) / 2 + 1));
                         } else {
                             that.popup.container.css("max-height", (parseFloat($(".km-content:visible").innerHeight()) - 15) + "px");
                         }
@@ -1390,8 +1389,9 @@ var __meta__ = { // jshint ignore:line
                             lastHasFocus = true;
                         }
                     }
-
-                    if (e.shiftKey && items.index(element) === 1) {
+                    
+                    var isFirstTool = items.index(element) === items.not(".k-overflow-anchor").first().index();
+                    if (e.shiftKey && isFirstTool) {
                         if (element.is("." + BUTTON_GROUP)) {
                             firstHasFocus = target.is(":first-child");
                         } else {
@@ -1406,7 +1406,10 @@ var __meta__ = { // jshint ignore:line
 
                     if (firstHasFocus) {
                         e.preventDefault();
-                        this.wrapper.prev(":kendoFocusable").focus();
+                        var prevFocusable = this._getPrevFocusable(this.wrapper);                  
+                        if (prevFocusable) {
+                            prevFocusable.focus();
+                        }
                     }
                 }
 
@@ -1433,6 +1436,30 @@ var __meta__ = { // jshint ignore:line
                     this.userEvents.trigger("tap", { target: target });
 
                     return;
+                }
+            },
+
+            _getPrevFocusable: function(element) {
+                if (element.is("html")) {
+                    return element;
+                }
+
+                var elementToFocus, prevElement, 
+                    prevElements = element.prevAll();
+                prevElements.each(function(){
+                    prevElement = $(this);
+                    if (prevElement.is(":kendoFocusable")) {
+                        elementToFocus = prevElement;
+                        return false;
+                    } else if (prevElement.find(":kendoFocusable").length > 0) {
+                        elementToFocus = prevElement.find(":kendoFocusable").last();
+                        return false;
+                    }
+                });
+                if (elementToFocus) {
+                    return elementToFocus;
+                } else {
+                    return this._getPrevFocusable(element.parent());                    
                 }
             },
 
@@ -1482,7 +1509,7 @@ var __meta__ = { // jshint ignore:line
                 var childrenWidth = 0;
 
                 this.element.children(":visible:not('." + STATE_HIDDEN + "')").each(function() {
-                    childrenWidth += $(this).outerWidth(true);
+                    childrenWidth += outerWidth($(this), true);
                 });
 
                 return Math.ceil(childrenWidth);
@@ -1532,7 +1559,7 @@ var __meta__ = { // jshint ignore:line
             },
 
             _showItem: function(item, containerWidth) {
-                if (item.length && containerWidth > this._childrenWidth() + item.outerWidth(true)) {
+                if (item.length && containerWidth > this._childrenWidth() + outerWidth(item, true)) {
                     item.show();
                     if (this.popup) {
                         this.popup.container

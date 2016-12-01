@@ -8,7 +8,7 @@ position: 1
 
 # PivotGrid HtmlHelper Overview
 
-The PivotGrid HtmlHelper extension is a server-side wrapper for the [Kendo UI PivotGrid](/api/web/pivotgrid) widget. It allows you to configure the Kendo UI PivotGrid from server-side code and helps you with data binding.
+The PivotGrid HtmlHelper extension is a server-side wrapper for the [Kendo UI PivotGrid](/kendo-ui/api/javascript/ui/pivotgrid) widget. It allows you to configure the Kendo UI PivotGrid from server-side code and helps you with data binding.
 
 ## Getting Started
 
@@ -18,8 +18,8 @@ The Kendo UI PivotGrid for ASP.NET MVC supports Ajax data-binding to HTTP access
 
 For more information on the OLAP concepts, refer to the articles about:
 
-- [PivotGrid Fundamentals]({% slug fundamentals_pivotgrid_widget %})
-- [Setting Up OLAP Cubes]({% slug olap_cube_setup_pivotgrid_widget %})
+- [PivotGrid Fundamentals](http://docs.telerik.com/kendo-ui/controls/data-management/pivotgrid/overview)
+- [Setting Up OLAP Cubes](http://docs.telerik.com/kendo-ui/controls/data-management/pivotgrid/fundamentals)
 
 To use Telerik OLAP service, refer to [http://demos.telerik.com/olap/msmdpump.dll](http://demos.telerik.com/olap/msmdpump.dll).
 
@@ -97,18 +97,18 @@ Below are listed the steps for you to follow when configuring the Kendo UI Pivot
 
 **Figure 1. The finished application**
 
-![Final result](/aspnet-mvc/helpers/pivotgrid/images/pivotgrid.png)
+![Final result](/helpers/pivotgrid/images/pivotgrid.png)
 
 ## See Also
 
 Other articles on Telerik UI for ASP.NET MVC and on the PivotGrid:
 
-* [ASP.NET MVC API Reference: PivotGridBuilder](/api/aspnet-mvc/Kendo.Mvc.UI.Fluent/PivotGridBuilder)
+* [ASP.NET MVC API Reference: PivotGridBuilder](/api/Kendo.Mvc.UI.Fluent/PivotGridBuilder)
 * [Overview of Telerik UI for ASP.NET MVC]({% slug overview_aspnetmvc %})
 * [Fundamentals of Telerik UI for ASP.NET MVC]({% slug fundamentals_aspnetmvc %})
 * [Scaffolding in Telerik UI for ASP.NET MVC]({% slug scaffolding_aspnetmvc %})
-* [Overview of the Kendo UI PivotGrid Widget]({% slug overview_kendoui_pivotgrid_widget %})
-* [Telerik UI for ASP.NET MVC API Reference Folder](/api/aspnet-mvc/Kendo.Mvc/AggregateFunction)
+* [Overview of the Kendo UI PivotGrid Widget](http://docs.telerik.com/kendo-ui/controls/data-management/pivotgrid/overview)
+* [Telerik UI for ASP.NET MVC API Reference Folder](/api/Kendo.Mvc/AggregateFunction)
 * [Telerik UI for ASP.NET MVC HtmlHelpers Folder]({% slug overview_barcodehelper_aspnetmvc %})
 * [Tutorials on Telerik UI for ASP.NET MVC]({% slug overview_timeefficiencyapp_aspnetmvc6 %})
 * [Telerik UI for ASP.NET MVC Troubleshooting]({% slug troubleshooting_aspnetmvc %})

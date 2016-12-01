@@ -16,6 +16,6 @@ To see the example, refer to the GitHub repo on how to [cascade the DropDownList
 Other articles and how-to examples on the Kendo UI DropDownList HtmlHelper:
 
 * [Overview of the DropDownList HtmlHelper]({% slug overview_dropdownlisthelper_aspnetmvc %})
-* [DropDownListBuilder API Reference](/api/aspnet-mvc/Kendo.Mvc.UI.Fluent/DropDownListBuilder)
+* [DropDownListBuilder API Reference](/api/Kendo.Mvc.UI.Fluent/DropDownListBuilder)
 
 For more runnable examples on the Kendo UI DropDownLists in ASP.NET MVC applications, browse its [**How To** documentation folder]({% slug howto_handlecascadingddlsingrid_ddlaspnetmvc %}).

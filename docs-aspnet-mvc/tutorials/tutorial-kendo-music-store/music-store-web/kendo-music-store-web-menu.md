@@ -10,7 +10,7 @@ position: 2
 
 **Figure 1. Overview of the main menu**
 
-![kendo-menu-overview](/aspnet-mvc/tutorial-kendo-music-store/music-store-web/images/kendo-menu-overview.png)
+![kendo-menu-overview](/tutorials/tutorial-kendo-music-store/music-store-web/images/kendo-menu-overview.png)
 
 The main menu of the Music Store application features some of the [Kendo UI Menu widget functionalities](http://demos.telerik.com/kendo-ui/web/menu/index.html) and consists of the items listed below:
 
@@ -59,7 +59,7 @@ The code from the example above creates the pull-down item.
 
 **Figure 2. Overview of the pull-down Genres menu item**
 
-![kendo-menu-pulldown-placeholder](/aspnet-mvc/tutorial-kendo-music-store/music-store-web/images/kendo-menu-pulldown-placeholder.png)
+![kendo-menu-pulldown-placeholder](/tutorials/tutorial-kendo-music-store/music-store-web/images/kendo-menu-pulldown-placeholder.png)
 
 You can replace your placeholder `<li>` elements with an MVC partial that loads the list of **Genres**.
 
@@ -112,7 +112,7 @@ This creates the `<div>` content displayed in a drop-down menu item, as shown in
 
 **Figure 3. The Kendo UI pull-down content in a drop-down menu item**
 
-![kendo-menu-pulldown-content](/aspnet-mvc/tutorial-kendo-music-store/music-store-web/images/kendo-menu-pulldown-content.png)
+![kendo-menu-pulldown-content](/tutorials/tutorial-kendo-music-store/music-store-web/images/kendo-menu-pulldown-content.png)
 
 ## See Also
 

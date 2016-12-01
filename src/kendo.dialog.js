@@ -1,4 +1,4 @@
-﻿(function(f, define) {
+(function(f, define) {
     define(["./kendo.core", "./kendo.popup"], f);
 })(function() {
 
@@ -265,7 +265,8 @@
                 });
             },
 
-            _closeClick: function() {
+            _closeClick: function(e) {
+                e.preventDefault();
                 this.close();
             },
 
@@ -626,7 +627,7 @@
                     var object = that._object(dom);
                     var options = object && object.options;
 
-                    return options && options.modal && options.visible && dom.is(VISIBLE);
+                    return options && options.modal && that.options.appendTo == options.appendTo && options.visible && dom.is(VISIBLE);
                 }).sort(function(a, b) {
                     return +$(a).css("zIndex") - +$(b).css("zIndex");
                 });
@@ -760,6 +761,7 @@
                 maxHeight: Infinity,
                 content: null,
                 visible: null,
+                appendTo: BODY,
                 closable: true
             }
         });
@@ -768,7 +770,7 @@
             options: {
                 name: "Dialog",
                 messages: {
-                    close: ""
+                    close: "Close"
                 }
             }
         });
@@ -946,7 +948,7 @@
                     "<span class='k-window-title k-dialog-title'>#= title #</span>" +
                 "</div>"
             ),
-            close: template("<a role='button' href='\\#' class='k-button-bare k-dialog-action k-dialog-close' aria-label='Close' tabindex='-1'><span class='k-font-icon k-i-x'>#= messages.close #</span></a>"),
+            close: template("<a role='button' href='\\#' class='k-button-bare k-dialog-action k-dialog-close' title='#= messages.close #' aria-label='#= messages.close #' tabindex='-1'><span class='k-icon k-i-close'></span></a>"),
             actionbar: template("<div class='k-dialog-buttongroup k-dialog-button-layout-#= buttonLayout #' role='toolbar' />"),
             overlay: "<div class='k-overlay' />",
             alertWrapper: template("<div class='k-widget k-dialog k-window' role='alertdialog' />"),

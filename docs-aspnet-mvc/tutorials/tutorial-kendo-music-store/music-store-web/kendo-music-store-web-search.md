@@ -10,7 +10,7 @@ position: 6
 
 **Figure 1. A snapshot of Kendo UI Music Store Search box functionality**
 
-![kendo-search-overview](/aspnet-mvc/tutorial-kendo-music-store/music-store-web/images/kendo-search-overview.png)
+![kendo-search-overview](/tutorials/tutorial-kendo-music-store/music-store-web/images/kendo-search-overview.png)
 
 The Music Store application provides a text box for searching the store by an album title. To implement this functionality, use a [Kendo UI AutoComplete widget](http://demos.telerik.com/kendo-ui/web/autocomplete/index.html). This aims at having the AutoComplete box query the server for albums that match the entered user text and having the filtering performed server-side by applying a [remote DataSource](http://demos.telerik.com/kendo-ui/web/datasource/remote-data.html). The results are then listed together with the album art, title, and artist name, and are clickable, so that users are able to get details about the album.
 
@@ -134,7 +134,7 @@ In the `_Layout.cshtml` file, this template is included with the line, demonstra
 <!--_-->
 If you are not using ASP.NET MVC, you can write some additional code to load templates from external files.
 
-For more information on remote template loading, refer to the [article on external template loading]({% slug externalteplateloading_templatescomponent %}).
+For more information on remote template loading, refer to the [article on external template loading](http://docs.telerik.com/kendo-ui/framework/templates/load-remote).
 
 Now that the template is included in the body of the page, the application code is using a jQuery selector to fetch this `<script>` element by its `id` and get the contents. It then calls `kendo.template()` to process the template.
 
@@ -182,7 +182,7 @@ The example below demonstrates a quick breakdown of the code to do this.
 
 The `schema.data` and `schema.total` functions overcome a JSON formatting difference between Kendo UI and the WCF Data Services oData.
 
-For more information on each field set on the DataSource, refer to the [DataSource documentation]({% slug basicusage_kendoui_datasourcecomponent %}).
+For more information on each field set on the DataSource, refer to the [DataSource documentation](http://docs.telerik.com/kendo-ui/framework/datasource/overview).
 
 ### Handle Search Results Selections
 

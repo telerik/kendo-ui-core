@@ -7,80 +7,90 @@ slug: howto_createdynamiccolumnsdatatypes_grid
 
 # Create Grids with Dynamic Columns and Data Types
 
-The example below demonstrates how to create a Kendo UI Grid with column and data-field information that is retrieved during runtime.
+The example below demonstrates how to create a Kendo UI Grid with column and data-field information that is retrieved during runtime. 
 
 ###### Example
 
 ```html
 
-    <div id="grid" style="width:600px;"></div>
+    <div id="grid" style="width:1000px;"></div>
 
     <script>
-        var dateFields = [];
-        $.ajax({
-          url: "http://demos.telerik.com/kendo-ui/service/products",
-          dataType: "jsonp",
-          success: function(result) {
-            generateGrid(result)
-          }
-        });
-
-        function generateGrid(gridData) {
-
-          var model = generateModel(gridData[0]);
-          var parseFunction;
-
-          //
-          var grid = $("#grid").kendoGrid({
-            dataSource: {
-              data: gridData,
-              pageSize: 5
-            },
-            toolbar: ["create", "save"],
-            editable: true,
-            sortable: true,
-            pageable: true
-          });
+      var isDateField =[];
+      $.ajax({
+        url: "http://www.mocky.io/v2/5835e736110000020e0c003c",
+        dataType: "json",
+        success: function(result) {
+          generateGrid(result);
         }
+      });
 
-        function generateModel(gridData) {
-          var model = {};
-          model.id = "ID";
-          var fields = {};
-          for (var property in gridData) {
-            var propType = typeof gridData[property];
-
-            if (propType == "number") {
-              fields[property] = {
-                type: "number",
-                validation: {
-                  required: true
-                }
-              };
-            } else if (propType == "boolean") {
-              fields[property] = {
-                type: "boolean",
-                validation: {
-                  required: true
-                }
-              };
-            } else if (propType == "string") {
-              var parsedDate = kendo.parseDate(gridData[property]);
-              if (parsedDate) {
-                fields[property] = {
-                  type: "date",
-                  validation: {
-                    required: true
-                  }
-                };
-                dateFields.push(property);
-              } else {
-                fields[property] = {
-                  validation: {
-                    required: true
-                  }
-                };
+      function generateGrid(response) {
+        var model = generateModel(response);
+        var columns = generateColumns(response);
+        
+        var grid = $("#grid").kendoGrid({
+          dataSource: {
+            transport:{
+              read:  function(options){
+                options.success(response.data);
               }
+            },
+            pageSize: 5,
+            schema: {
+              model: model
+            }
+          },
+          columns: columns,
+          pageable: true,
+          editable:true  
+        });
+      }
+
+      function generateColumns(response){
+        var columnNames = response["columns"];
+        return columnNames.map(function(name){
+          return { field: name, format: (isDateField[name] ? "{0:D}" : "") };
+        })
+      }
+
+      function generateModel(response) {
+
+        var sampleDataItem = response["data"][0];
+
+        var model = {};
+        var fields = {};
+        for (var property in sampleDataItem) {
+          if(property.indexOf("ID") !== -1){
+            model["id"] = property;
+          }
+          var propType = typeof sampleDataItem[property];
+
+          if (propType === "number" ) {
+            fields[property] = {
+              type: "number",
+              validation: {
+                required: true
+              }
+            };
+            if(model.id === property){
+              fields[property].editable = false;
+              fields[property].validation.required = false;
+            }
+          } else if (propType === "boolean") {
+            fields[property] = {
+              type: "boolean"
+            };
+          } else if (propType === "string") {
+            var parsedDate = kendo.parseDate(sampleDataItem[property]);
+            if (parsedDate) {
+              fields[property] = {
+                type: "date",
+                validation: {
+                  required: true
+                }
+              };
+              isDateField[property] = true;
             } else {
               fields[property] = {
                 validation: {
@@ -88,13 +98,20 @@ The example below demonstrates how to create a Kendo UI Grid with column and dat
                 }
               };
             }
-
+          } else {
+            fields[property] = {
+              validation: {
+                required: true
+              }
+            };
           }
-          model.fields = fields;
-
-          return model;
         }
-      </script>
+
+        model.fields = fields;
+
+        return model;
+      }
+    </script>
 ```
 
 ## See Also

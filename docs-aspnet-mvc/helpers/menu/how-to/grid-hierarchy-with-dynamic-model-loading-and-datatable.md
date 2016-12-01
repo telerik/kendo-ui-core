@@ -12,4 +12,4 @@ To see the example on how to open a window when clicking on a Kendo UI Menu item
 ## See Also
 
 * [Overview of the Menu HtmlHelper]({% slug overview_menu_aspnetmvc %})
-* [MenuBuilder API Reference](/api/aspnet-mvc/Kendo.Mvc.UI.Fluent/MenuBuilder)
+* [MenuBuilder API Reference](/api/Kendo.Mvc.UI.Fluent/MenuBuilder)

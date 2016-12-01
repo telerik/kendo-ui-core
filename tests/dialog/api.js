@@ -183,6 +183,16 @@
         dialog.wrapper.find(".k-dialog-close").click();
     });
 
+    test("closing dialog from close handler prevents link default behavior", 1, function() {
+        var dialog = createDialog();
+        var closeElemenet = dialog.wrapper.find(".k-dialog-close");
+        closeElemenet.on("click", function(e){ 
+            ok(e.isDefaultPrevented()); 
+        });
+
+        closeElemenet.click();
+    });    
+
     test("open sets options.visible to true", function() {
         var dialog = createDialog({ visible: false });
 

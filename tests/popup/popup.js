@@ -827,4 +827,20 @@
 
         kendo.support.resize = defaultResize;
     });
+
+    test("exclude shadows during positioning", function() {
+        var body = $(document.body);
+        var defaultMargin = body.css("margin");
+        var localAnchor = $("<div style='background:blue;'>anchor</div>").appendTo(QUnit.fixture);
+
+        body.css("margin", 0);
+        div.css("box-shadow", "0 2px 2px 0 rgba(0,0,0,.3)");
+
+        popup = new Popup(div, { anchor: localAnchor });
+        popup.open();
+
+        equal(localAnchor[0].getBoundingClientRect().left, div[0].getBoundingClientRect().left);
+
+        body.css("margin", defaultMargin);
+    });
 })();

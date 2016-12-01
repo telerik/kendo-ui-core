@@ -101,8 +101,8 @@ The [template](/api/javascript/kendo#methods-template) which renders the alterna
 
 ### autoBind `Boolean` *(default: true)*
 
-If set to `false` the widget will not bind to the data source during initialization. In this case data binding will occur when the [change](/api/javascript/data/datasource#events-change) event of the
-data source is fired. By default the widget will bind to the data source specified in the configuration.
+If set to `false`, the Grid will not bind to the data source during initialization, i.e. it will not call the [`fetch`](/api/javascript/data/datasource#methods-fetch) method of the [dataSource](#fields-dataSource) instance. In such scenarios data binding will occur when the [change](/api/javascript/data/datasource#events-change) event of the
+dataSource instance is fired. By default, `autoBind` is set to `true` and the widget will bind to the data source specified in the configuration.
 
 > Setting `autoBind` to `false` is useful when multiple widgets are bound to the same data source. Disabling automatic binding ensures that the shared data source doesn't make more than one request to the remote service.
 
@@ -3199,6 +3199,38 @@ The label used for the check-all checkbox.
       });
     </script>
 
+### filterable.mode `String` *(default: "menu")*
+
+If set to `row` the user would be able to filter via extra row added below the headers. By default filtering is using the `menu` mode.
+
+Can also be set to the following string values:
+
+- "row" - the user can filter via extra row within the header.
+- "menu" - the user can filter via the menu after clicking the filter icon.
+- "menu, row" - the user can filter with both modes above enabled.
+
+> When the `filterable.mode` property is set to `"row"` or `"menu, row"`, the Grid dataSource instance is copied and applied to the Kendo UI AutoComplete widgets used for string filtering.
+This will cause one additional read request per string column. The AutoComplete dataSources do not perform paging and will use a collection of the unique column values only.
+
+#### Example - set mode option to use both "menu" and "row" modes simultaneously
+
+        <div id="grid"></div>
+        <script>
+            $("#grid").kendoGrid({
+                columns: [
+                    { field: "name" },
+                    { field: "age" }
+                ],
+                filterable: {
+                    mode: "menu, row"
+                },
+                dataSource: [
+                    { name: "Jane Doe", age: 30 },
+                    { name: "John Doe", age: 33 }
+                ]
+          });
+        </script>
+
 ### filterable.operators `Object`
 
 The text of the filter operators displayed in the filter menu.
@@ -4364,38 +4396,6 @@ The text of the "isnotnull" filter operator.
       }
     });
     </script>
-
-### filterable.mode `String` *(default: "menu")*
-
-If set to `row` the user would be able to filter via extra row added below the headers. By default filtering is using the `menu` mode.
-
-Can also be set to the following string values:
-
-- "row" - the user can filter via extra row within the header.
-- "menu" - the user can filter via the menu after clicking the filter icon.
-- "menu, row" - the user can filter with both modes above enabled.
-
-> When the `filterable.mode` property is set to `"row"` or `"menu, row"`, the Grid dataSource instance is copied and applied to the Kendo UI AutoComplete widgets used for string filtering.
-This will cause one additional read request per string column. The AutoComplete dataSources do not perform paging and will use a collection of the unique column values only.
-
-#### Example - set mode option to use both "menu" and "row" modes simultaneously
-
-        <div id="grid"></div>
-        <script>
-            $("#grid").kendoGrid({
-                columns: [
-                    { field: "name" },
-                    { field: "age" }
-                ],
-                filterable: {
-                    mode: "menu, row"
-                },
-                dataSource: [
-                    { name: "Jane Doe", age: 30 },
-                    { name: "John Doe", age: 33 }
-                ]
-          });
-        </script>
 
 ### groupable `Boolean|Object` *(default: false)*
 
@@ -6125,6 +6125,8 @@ Can also be set to the following string values:
 - "multiple, row" - the user can select multiple rows.
 - "multiple, cell" - the user can select multiple cells.
 
+> When the selectable property is set to "multiple, row" or "multiple, cell" the Grid cannot be scrollable on mobile devices as both are listening on the same event.
+
 #### Example - set selectable as a boolean
     <div id="grid"></div>
     <script>
@@ -6775,7 +6777,7 @@ Returns the index of the specified table cell. Skips group and detail table cell
 
 ##### cell `String|Element|jQuery`
 
-A string, DOM element or jQuery object which represents the table cell. A string is treated as a jQuery selector.
+A string, DOM element or jQuery object which represents the table cell. A string is treated as a jQuery selector. If there are locked columns in the Grid, the jQuery object, representing the cell, must be passed as an argument.
 
 #### Returns
 
@@ -8799,7 +8801,9 @@ If invoked the grid will not save the generated file.
 
 Fired when the user is about to filter the DataSource via the filter UI.
 
-The event handler function context (available via the `this` keyword) will be set to the widget instance.
+The event handler function context (available via the `this` keyword) will be set to the widget instance. 
+
+Introduced in the Kendo UI 2016 R3 (2016.3.914) release.
 
 #### Event Data
 
@@ -8890,6 +8894,8 @@ Fired when the user is about to group the DataSource or modify the group descrip
 
 The event handler function context (available via the `this` keyword) will be set to the widget instance.
 
+Introduced in the Kendo UI 2016 R3 (2016.3.914) release.
+
 #### Event Data
 
 ##### e.groups `Array`
@@ -8966,6 +8972,8 @@ The widget instance which fired the event.
 Fired when the user is about change the current page index of DataSource via the pager UI.
 
 The event handler function context (available via the `this` keyword) will be set to the widget instance.
+
+Introduced in the Kendo UI 2016 R3 (2016.3.914) release.
 
 #### Event Data
 
@@ -9459,6 +9467,8 @@ The widget instance which fired the event.
 Fired when the user is about to modify the current state of sort descriptors of DataSource via the sort UI.
 
 The event handler function context (available via the `this` keyword) will be set to the widget instance.
+
+Introduced in the Kendo UI 2016 R3 (2016.3.914) release.
 
 #### Event Data
 

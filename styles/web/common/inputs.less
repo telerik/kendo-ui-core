@@ -74,7 +74,7 @@ span.k-dropdown,
     &.k-state-focused {
         > .k-i-close {
             display: inline-block;
-            outline: none;         
+            outline: none;
         }
     }
 }
@@ -89,7 +89,7 @@ span.k-dropdown,
     &.k-state-focused {
         > .k-multiselect-wrap > .k-i-close {
             display: inline-block;
-            outline: none;         
+            outline: none;
         }
     }
 }
@@ -97,11 +97,11 @@ span.k-dropdown,
 .k-autocomplete,
 .k-combobox > .k-dropdown-wrap {
     &.k-state-border-down {
-       > .k-i-close {
+        > .k-i-close {
            margin-top: -1px;
         }
-    } 
-}            
+    }
+}
 
 .k-filter-menu .k-combobox,
 .k-filter-menu .k-datepicker,
@@ -180,7 +180,7 @@ span.k-dropdown,
 .k-calendar,
 .k-treeview,
 .k-pager-wrap,
-.k-grid-header .k-link,
+.k-grid-header .k-i-link-horizontal,
 .k-header-column-menu
 {
     -webkit-touch-callout: none;
@@ -393,6 +393,16 @@ span.k-datetimepicker .k-select+.k-select
     padding-bottom: 0.3em;
 }
 
+.k-combobox-clearable {
+    .k-input {
+        padding-right: 1.9em;
+        box-sizing: border-box;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        height: @input-height + .354em;
+    }
+}
+
 /* fix missing bottom border on browser zoom in Chrome */
 .k-webkit .k-combobox .k-dropdown-wrap:before,
 .k-webkit .k-picker-wrap:before,
@@ -589,6 +599,7 @@ body .k-datetimepicker .k-select
     border-color: #C5C5C5;
     background-color: #FFF;
     min-height: 2.04em;
+    padding-right: @grid-size + (@grid-size/4 + 2px);
 }
 
 .k-multiselect-wrap .k-input
@@ -617,7 +628,6 @@ body .k-datetimepicker .k-select
     position: relative;
 }
 
-.k-autocomplete .k-loading,
 .k-multiselect .k-loading,
 .k-autocomplete .k-i-loading,
 .k-multiselect .k-i-loading
@@ -638,7 +648,7 @@ body .k-datetimepicker .k-select
     top: 0;
     bottom: 0;
     right: 0;
-    padding: .1em .2em;
+    padding: .03em .2em;
 }
 
 /* Date/Time Pickers */
@@ -651,6 +661,17 @@ body .k-datetimepicker .k-select
 .k-datetimepicker .k-select
 {
     width: 3.8em;
+
+    .k-link-date 
+    {
+        margin-left: -.285em;
+    }
+
+    .k-link-time 
+    {
+        margin-right: -.285em;
+        margin-left: .428em;
+    }
 }
 
 .k-datetimepicker .k-picker-wrap .k-icon
@@ -742,7 +763,7 @@ span.k-numerictextbox
     margin: 0;
 }
 
-.k-numerictextbox .k-link
+.k-numerictextbox .k-i-link-horizontal
 {
     display: block;
     height: 1em;
@@ -753,7 +774,9 @@ span.k-numerictextbox
 }
 
 .k-numerictextbox .k-icon
-{
+{   
+    display: block;
+    margin: auto;
     height: 11px;
 }
 
@@ -772,10 +795,23 @@ span.k-numerictextbox
 
     .k-selected-color {
         vertical-align: top;
-        line-height: 0;
         display: inline-block;
         height: 2em;
         width: 2em;
+        .p-i-line {
+            font-size: 2em;
+            color: #FF525E;
+            display: inline-block;
+            -moz-transform: scaleX(-1);
+            -o-transform: scaleX(-1);
+            -webkit-transform: scaleX(-1);
+            transform: scaleX(-1);
+            filter: FlipH;
+            -ms-filter: "FlipH";
+        }
+        .p-i-line:before {
+            content: "\e510";
+        }
     }
     .k-tool-icon {
         position: relative;
@@ -858,7 +894,7 @@ span.k-numerictextbox
 {
     position: relative;
     display: inline-block;
-    width: 250px;
+    width: 265px;
     padding-bottom: 5px;
 
     div& {
@@ -873,11 +909,47 @@ span.k-numerictextbox
 
         input.k-color-value {
             font-family: Consolas,"Ubuntu Mono","Lucida Console","Courier New",monospace;
-            padding: .75em .3em .65em 1em;
+            padding: .75em .1em .65em .65em;
             border: 0;
             margin: 0;
-            width: 70%;
+            width: 82%;
         }
+        .k-color-input {
+            background-color: #fff;
+            display: inline-block;
+            width: 84%;
+            text-align: left;
+        }
+        .k-clear-color {
+            padding: .4em;
+            line-height: 0;
+            .k-i-reset-color:before {
+                color: 	#000;
+                opacity: 0.8;
+            }
+            .k-i-reset-color:hover,
+            .k-i-reset-color:active {
+                opacity: 1;
+            }
+        }
+    }
+
+    .k-clear-color-container .k-clear-color.k-state-focused:active {
+        color: inherit;
+    }
+    .k-clear-color-container .k-clear-color:active {
+        color: 	#000;
+        opacity: 1;
+    }
+    .k-selected-color .k-clear-color,
+    .k-clear-color-container .k-clear-color {
+        .k-i-reset-color {
+            background-image: none;
+        }
+    }
+
+    .k-clear-color-container {
+        text-align: left;
     }
 
     .k-hsv-rectangle {

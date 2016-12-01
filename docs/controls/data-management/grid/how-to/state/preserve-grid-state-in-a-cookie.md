@@ -133,7 +133,7 @@ The example below demonstrates how to preserve the Grid state (filtering/sorting
                 }
             }
         }
-<script>
+</script>
 ```
 
 ## See Also

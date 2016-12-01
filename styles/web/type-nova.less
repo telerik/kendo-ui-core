@@ -20,6 +20,24 @@
 @import "themes/type.less";
 
 /* Main colors */
+.k-icon {
+    color: @normal-text-color;
+    &:hover {
+        color: @hover-text-color;
+    }
+}
+
+.k-button .k-icon {
+    color: @normal-text-color;
+    &:hover {
+        color: @normal-text-color;
+    }
+}
+
+.k-splitbar .k-resize-handle {
+    background-color: @normal-text-color;
+}
+
 .k-in,
 .k-item,
 .k-window-action {
@@ -41,7 +59,6 @@
 .k-filter-row > th,
 .k-editable-area,
 .k-separator,
-.k-colorpicker .k-i-arrow-s,
 .k-textbox > input,
 .k-autocomplete,
 .k-dropdown-wrap,
@@ -142,10 +159,8 @@
     background-color: @background;
 }
 
-.k-icon,
-.k-tool-icon,
 .k-grouping-dropclue,
-.k-drop-hint,
+.k-i-drag-and-drop,
 .k-column-menu .k-sprite,
 .k-grid-mobile .k-resize-handle-inner:before,
 .k-grid-mobile .k-resize-handle-inner:after,
@@ -231,7 +246,6 @@ textarea.k-textbox:hover,
 .k-numerictextbox,
 .k-picker-wrap,
 .k-numeric-wrap,
-.k-colorpicker,
 .k-tooltip,
 .k-upload {
     border-radius: @inputs-border-radius;
@@ -255,15 +269,6 @@ textarea.k-textbox:hover,
 }
 
 /* Default icons opacity */
-.k-icon,
-.k-button .k-image,
-.k-panelbar > .k-state-active > .k-header > .k-icon,
-.k-panelbar > .k-state-active > .k-header .k-state-default .k-icon,
-.k-tabstrip-scrollable .k-button:active .k-icon,
-.k-tabstrip .k-button .k-icon
- {
-    opacity: .4;
-}
 
 .k-primary .k-icon,
 .k-state-active .k-icon,
@@ -279,7 +284,7 @@ textarea.k-textbox:hover,
 .k-splitbar.k-state-focused .k-icon,
 .k-scheduler-toolbar .k-icon,
 .k-gantt-toolbar .k-icon,
-.k-toolbar .k-overflow-anchor.k-state-border-down .k-i-more,
+.k-toolbar .k-overflow-anchor.k-state-border-down .k-i-more-vertical,
 .k-panelbar > .k-state-active > .k-header .k-state-active .k-icon {
     opacity: 1;
 }
@@ -290,8 +295,9 @@ textarea.k-textbox:hover,
 
 /* Loading indicator */
 .k-loading,
-.k-state-hover .k-loading,
 .k-i-loading,
+.k-i-loading,
+.k-state-hover .k-loading,
 .k-state-hover .k-i-loading {
     background-image: url('@{image-folder}/loading.gif');
     background-position: 50% 50%;
@@ -402,7 +408,7 @@ html .k-mediaplayer-toolbar .k-button-bare {
 	}
 }
 
-.k-mediaplayer-toolbar .k-mediaplayer-seekbar {
+.k-mediaplayer-seekbar {
 	top: -14px;
 }
 
@@ -1073,6 +1079,7 @@ input.k-textbox:active {
     font-weight: bold;
 }
 
+.k-grid .k-filter-row:hover,
 .k-pivot-rowheaders .k-grid tr:hover {
     background: none;
 }

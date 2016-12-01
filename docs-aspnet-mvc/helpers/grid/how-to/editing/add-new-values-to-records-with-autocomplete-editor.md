@@ -12,8 +12,8 @@ To see the example on how to add a new value to the Kendo UI Grid records when t
 ## See Also
 
 * [Overview of the Grid HtmlHelper]({% slug overview_gridhelper_aspnetmvc %})
-* [GridBuilder API Reference](/api/aspnet-mvc/Kendo.Mvc.UI.Fluent/AutoCompleteBuilder)
+* [GridBuilder API Reference](/api/Kendo.Mvc.UI.Fluent/GridBuilder)
 * [Overview of the AutoComplete HtmlHelper]({% slug overview_autocompletehelper_aspnetmvc %})
-* [AutoCompleteBuilder API Reference](/api/aspnet-mvc/Kendo.Mvc.UI.Fluent/AutoCompleteBuilder)
+* [AutoCompleteBuilder API Reference](/api/Kendo.Mvc.UI.Fluent/AutoCompleteBuilder)
 
 For more runnable examples on the Kendo UI Grid in ASP.NET MVC applications, browse its [**How To** documentation folder]({% slug howto_applycustomrowstylesbasedondata_gridaspnetmvc %}).

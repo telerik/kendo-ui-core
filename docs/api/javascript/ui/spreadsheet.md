@@ -1043,10 +1043,9 @@ Defines the *hint* title that will be displayed if value is invalid.
 The vertical align setting for the cell content.
 
 Available options are:
-* left
+* top
 * center
-* right
-* justify
+* bottom
 
 ### sheets.rows.cells.wrap `Boolean`
 Will wrap the cell content if set to `true`.
@@ -1056,6 +1055,9 @@ The row height in pixels. Defaults to [rowHeight](#configuration-rowHeight).
 
 ### sheets.rows.index `Number`
 The absolute row index. Required to ensure correct positioning.
+
+### sheets.rows.type `String`
+The table row element role, in the context of the Grid table structure.
 
 ### sheets.selection `String`
 The selected range in the sheet, e.g. "A1:B10".
@@ -1100,7 +1102,7 @@ The available tools are:
 * **fontSize**, **fontFamily**
 * **alignment**
 * **textWrap**
-* [**formatDecreaseDecimal**, **formatIncreateDecimal**]
+* [**formatDecreaseDecimal**, **formatIncreaseDecimal**]
 * **format**
 * **merge**
 * **freeze**
@@ -1258,7 +1260,7 @@ Returns an array with the sheets in the workbook.
 ### fromFile
 Clears the spreadsheets and populates it with data from the specified Excel (.xlsx) file.
 
-> Requires Internet Explorer 10 or a recent version of other browsers.
+> Requires Internet Explorer 10 or a recent version of other browsers. The JSZip library is a [`prerequisite`](/intro/installation/prerequisites#jszip-library) for the import from file functionality.
 
 #### Parameters
 

@@ -22,7 +22,7 @@ Make sure that the action parameter is of type `IEnumerable<HttpPostedFileBase>`
 >
 > Using HttpPostedFile does not work.
 
-### Uploading Large Files Is Impossible
+### The Upload of Large Files Is Impossible
 
 By default, ASP.NET limits the size of the maximum upload to 4MB. Additionally, IIS 7 and later limits the request size to 30MB.
 
@@ -51,6 +51,18 @@ Override these settings in the `web.config` file. Below are listed the steps for
                     </requestFiltering>
                 </security>
         </system.webServer>
+
+### The Upload Never Ends in Safari on iOS and OSX
+
+The issue is caused by a bug in Safari and occurs only when the **Windows authentication and disabled Anonymous Authentication** setting is enabled. It is reproducible with a standard `<input type="file" name="file" enctype="multipart/form-data" />` HTML element in ASP.NET MVC and Web Forms applications.
+
+> **Important**
+>
+> Because the **File Browser** dialogs of the Kendo UI Editor for ASP.NET MVC rely on the Upload control, the issue might occur when uploading images and other files through them on MAC Safari.
+
+**Solution**
+
+The solution solely depends on a dedicated decision by Apple about whether and when to fix this browser issue. However, you can work around it by applying the suggestions provided in the [Programmatically enable or disable anonymous authentication in IIS](http://stackoverflow.com/questions/28419304/programmatically-enable-or-disable-anonymous-authentication-in-iis) StackOverflow thread. This means to build a separate web service for file upload with an authentication setting, such as **Anonymous** for Safari scenarios, and the main application authentication setting, such as **Windows Authentication**.
 
 ## Requests
 
@@ -82,11 +94,11 @@ Other articles on Telerik UI for ASP.NET MVC and on the Upload:
 * [Sending and Receiving Metadata with the Upload HtmlHelper]({% slug metadata_uploadhelper_aspnetmvc %})
 * [How to Upload Files from Grid Popup Editors in ASP.NET MVC Applications]({% slug howto_uploadfilesgridpopupeditor_uploadaspnetmvc %})
 * [How to Upload Files to Databases in ASP.NET MVC Applications]({% slug howto_uploadfilesdatabases_uploadaspnetmvc %})
-* [Overview of the Kendo UI Upload Widget]({% slug overview_kendoui_upload_widget %})
+* [Overview of the Kendo UI Upload Widget](http://docs.telerik.com/kendo-ui/controls/editors/upload/overview)
 * [Overview of Telerik UI for ASP.NET MVC]({% slug overview_aspnetmvc %})
 * [Fundamentals of Telerik UI for ASP.NET MVC]({% slug fundamentals_aspnetmvc %})
 * [Scaffolding in Telerik UI for ASP.NET MVC]({% slug scaffolding_aspnetmvc %})
-* [Telerik UI for ASP.NET MVC API Reference Folder](/api/aspnet-mvc/Kendo.Mvc/AggregateFunction)
+* [Telerik UI for ASP.NET MVC API Reference Folder](/api/Kendo.Mvc/AggregateFunction)
 * [Telerik UI for ASP.NET MVC HtmlHelpers Folder]({% slug overview_autocompletehelper_aspnetmvc %})
 * [Tutorials on Telerik UI for ASP.NET MVC]({% slug overview_timeefficiencyapp_aspnetmvc6 %})
 
@@ -98,18 +110,18 @@ Other articles on troubleshooting:
 * [Common Issues in the Grid ASP.NET MVC HtmlHelper Extension]({% slug troubleshoot_gridhelper_aspnetmvc %})
 * [Excel Export with the Grid ASP.NET MVC HtmlHelper Extension]({% slug excelissues_gridhelper_aspnetmvc %})
 * [Common Issues in the Spreadsheet ASP.NET MVC HtmlHelper Extension]({% slug troubleshoot_spreadsheethelper_aspnetmvc %})
-* [Common Issues in Kendo UI]({% slug troubleshooting_common_issues_kendoui %})
-* [Kendo UI JavaScript Errors]({% slug troubleshooting_javascript_errors_kendoui %})
-* [Kendo UI Performance Issues]({% slug troubleshooting_system_memory_symptoms_kendoui %})
-* [Kendo UI Content Security Policy]({% slug troubleshooting_content_security_policy_kendoui %})
-* [Common Issues in Kendo UI Excel Export]({% slug troubleshooting_excel_export_kendoui %})
-* [Common Issues in Kendo UI Charts]({% slug troubleshooting_chart_widget %})
-* [Performance Issues in Kendo UI Widgets for Data Visualization]({% slug tipsandtricks_kendouistyling %})
-* [Common Issues in Kendo UI ComboBox]({% slug troubleshooting_common_issues_combobox_kendoui %})
-* [Common Issues in Kendo UI Diagram]({% slug troubleshooting_diagram_widget %})
-* [Common Issues in Kendo UI DropDownList]({% slug troubleshooting_common_issues_dropdownlist_kendoui %})
-* [Common Issues in Kendo UI Editor]({% slug troubleshooting_editor_widget %})
-* [Common Issues in Kendo UI MultiSelect]({% slug troubleshooting_common_issues_multiselect_kendoui %})
-* [Common Issues in Kendo UI Scheduler]({% slug troubleshooting_scheduler_widget %})
-* [Common Issues in Kendo UI Upload]({% slug troubleshooting_upload_widget %})
-* [Common Issues Related to Styling, Appearance, and Rendering]({% slug commonissues_troubleshooting_kendouistyling %})
+* [Common Issues in Kendo UI](http://docs.telerik.com/kendo-ui/troubleshoot/troubleshooting-common-issues)
+* [JavaScript Errors](http://docs.telerik.com/kendo-ui/troubleshoot/troubleshooting-js-errors)
+* [Performance Issues](http://docs.telerik.com/kendo-ui/troubleshoot/troubleshooting-memory-leaks)
+* [Content Security Policy](http://docs.telerik.com/kendo-ui/troubleshoot/content-security-policy)
+* [Common Issues in Kendo UI Excel Export](http://docs.telerik.com/kendo-ui/framework/excel/troubleshoot/common-issues)
+* [Common Issues in Kendo UI Charts](http://docs.telerik.com/kendo-ui/controls/charts/troubleshoot/common-issues)
+* [Performance Issues in Kendo UI Widgets for Data Visualization](http://docs.telerik.com/kendo-ui/troubleshoot/troubleshooting-memory-leaks)
+* [Common Issues in Kendo UI ComboBox](http://docs.telerik.com/kendo-ui/controls/editors/combobox/troubleshoot/troubleshooting)
+* [Common Issues in Kendo UI Diagram](http://docs.telerik.com/kendo-ui/controls/diagrams-and-maps/diagram/troubleshoot/common-issues)
+* [Common Issues in Kendo UI DropDownList](http://docs.telerik.com/kendo-ui/controls/editors/dropdownlist/troubleshoot/troubleshooting)
+* [Common Issues in Kendo UI Editor](http://docs.telerik.com/kendo-ui/controls/editors/editor/troubleshoot/troubleshooting)
+* [Common Issues in Kendo UI MultiSelect](http://docs.telerik.com/kendo-ui/controls/editors/multiselect/troubleshoot/troubleshooting)
+* [Common Issues in Kendo UI Scheduler](http://docs.telerik.com/kendo-ui/controls/scheduling/scheduler/troubleshoot/troubleshooting)
+* [Common Issues in Kendo UI Upload](http://docs.telerik.com/kendo-ui/controls/editors/upload/troubleshoot/troubleshooting)
+* [Common Issues Related to Styling, Appearance, and Rendering](http://docs.telerik.com/kendo-ui/styles-and-layout/troubleshoot/troubleshooting)

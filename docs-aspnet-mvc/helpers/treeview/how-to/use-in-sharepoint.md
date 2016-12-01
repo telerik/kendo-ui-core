@@ -12,4 +12,4 @@ To see the example on how to use the SharePoint Sandbox Visual Web Part to add t
 ## See Also
 
 * [Overview of the TreeView HtmlHelper]({% slug overview_treeviewhelper_aspnetmvc %})
-* [TreeViewBuilder API Reference](/api/aspnet-mvc/Kendo.Mvc.UI.Fluent/TreeViewBuilder)
+* [TreeViewBuilder API Reference](/api/Kendo.Mvc.UI.Fluent/TreeViewBuilder)

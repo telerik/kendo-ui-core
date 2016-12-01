@@ -16,13 +16,13 @@ In the Music Store sample project, the shopping cart embedded in a menu item is 
 
 **Figure 1. A screen mockup of the embedded shopping cart**
 
-![kendo-cart-menu-mockup](/aspnet-mvc/tutorial-kendo-music-store/music-store-web/images/kendo-cart-menu-mockup.png)
+![kendo-cart-menu-mockup](/tutorials/tutorial-kendo-music-store/music-store-web/images/kendo-cart-menu-mockup.png)
 
 Though at first the implementation of the embedded shopping cart seemed to be tough, the figure below demonstrates it implemented in the project.
 
 **Figure 2. The embedded shopping cart implemented in the Kendo UI Music Store web app project**
 
-![kendo-cart-menu-mockup](/aspnet-mvc/tutorial-kendo-music-store/music-store-web/images/kendo-cart-menu-screenshot.png)
+![kendo-cart-menu-mockup](/tutorials/tutorial-kendo-music-store/music-store-web/images/kendo-cart-menu-screenshot.png)
 
 Instead of trying to use the standard Kendo UI Menu widget and getting the `Total` and `Checkout` as the last items, the project opts for building a custom Kendo UI widget. This Cart Menu widget is actually more of a composite widget because it is one widget composed of others&mdash;a Menu and a ListView.
 

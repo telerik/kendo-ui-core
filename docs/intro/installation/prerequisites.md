@@ -2,7 +2,7 @@
 title: JavaScript Prerequisites
 page_title: JavaScript Prerequisites | Kendo UI Getting Started
 description: "Learn about the JavaScript prerequisites for installing Kendo UI widgets and frameworks."
-previous_url: /install/prerequisites, /javascript-dependencies, /intro/prerequisites
+previous_url: /install/prerequisites, /javascript-dependencies, /intro/prerequisites, /technical-requirements
 slug: javascript_prerequisites_kendoui_installation
 position: 5
 ---
@@ -25,6 +25,7 @@ The following list provides jQuery compatibility information about the major Ken
 
 | Major Releases												                                         | jQuery Version    | Comments  |
 | :---															                                             | :---			         | :---	     |
+| [Kendo UI 2016.3.914 (R3 2016)](http://www.telerik.com/support/whats-new/kendo-ui/release-history/kendo-ui-r3-2016)	|1.12.3| Also compatible with 1.10.x and 2.1.x|
 | [Kendo UI 2016.2.504 (R2 2016)](http://www.telerik.com/support/whats-new/kendo-ui/release-history/kendo-ui-q2-2016)	|1.12.3| Also compatible with 1.10.x and 2.1.x|
 | [Kendo UI 2016.1.112 (Q1 2016)](http://www.telerik.com/support/whats-new/kendo-ui/release-history/kendo-ui-q1-2016)	|1.9.1| Also compatible with 1.10.x and 2.1.x|
 | [Kendo UI 2015.3.930 (Q3 2015)](http://www.telerik.com/support/whats-new/kendo-ui/release-history/q3-2015)	|1.9.1| Also compatible with 1.10.x and 2.1.x|
@@ -57,6 +58,7 @@ As of the Kendo UI 2014 Q2 release, Kendo UI widgets support [AngularJS](https:/
 
 | Major Releases												           | AngularJS Version     | Comments  |
 | :---															               | :---			       	     | :---	     |
+| [Kendo UI 2016.3.914 (R3 2016)](http://www.telerik.com/support/whats-new/kendo-ui/release-history/kendo-ui-r3-2016) |1.4*, 1.5*|Kendo UI provides [limited `ngModel` support]({% slug common_issues_support_angularjs %}#widgets-with-ng-model-directives-reflect-no-model-value) for AngularJS 1.5*. |
 | [Kendo UI 2016.2.504 (R2 2016)](http://www.telerik.com/support/whats-new/kendo-ui/release-history/kendo-ui-q2-2016) |1.4*, 1.5*|Kendo UI provides [limited `ngModel` support]({% slug common_issues_support_angularjs %}#widgets-with-ng-model-directives-reflect-no-model-value) for AngularJS 1.5*. |
 | [Kendo UI 2016.1.112 (Q1 2016)](http://www.telerik.com/support/whats-new/kendo-ui/release-history/kendo-ui-q1-2016) |1.4*, 1.5*|Kendo UI provides [limited `ngModel` support]({% slug common_issues_support_angularjs %}#widgets-with-ng-model-directives-reflect-no-model-value) for AngularJS 1.5*. |
 | [Kendo UI 2015.3.930 (Q3 2015)](http://www.telerik.com/support/whats-new/kendo-ui/release-history/q3-2015)		      |1.4*, 1.5*|Kendo UI provides [limited `ngModel` support]({% slug common_issues_support_angularjs %}#widgets-with-ng-model-directives-reflect-no-model-value) for AngularJS 1.5*. |
@@ -73,7 +75,7 @@ As of the Kendo UI 2014 Q2 release, Kendo UI widgets support [AngularJS](https:/
 
 ### JSZip Library
 
-The [JSZip library](https://stuk.github.io/jszip/) is a necessary prerequisite for configuring your widgets so as to support the [Excel export feature]({% slug introduction_excelexport_kendoui %}). The Excel export feature was first included in the [Kendo UI 2014.3.1119 (Q3 2014) release]({% slug breakingchanges2014_kendoui%}). However, you need the JSZip library only if you want to support the Excel export feature.
+The [JSZip library](https://stuk.github.io/jszip/) is a necessary prerequisite for configuring your widgets so as to support the [Excel export feature]({% slug introduction_excelexport_kendoui %}) as well as the import of Excel files in the Kendo UI Spreadsheet. The Excel export feature was first included in the [Kendo UI 2014.3.1119 (Q3 2014) release]({% slug breakingchanges2014_kendoui%}). You should include the JSZip library only if you wish to provide the Excel export or import [`fromFile()`](/api/javascript/ui/spreadsheet#methods-fromFile) functionalities.
 
 ### Tag Placement: script
 

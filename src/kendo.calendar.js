@@ -27,6 +27,8 @@ var __meta__ = { // jshint ignore:line
         emptyCellTemplate = template('<td role="gridcell">&nbsp;</td>', { useWithBlock: false }),
         browser = kendo.support.browser,
         isIE8 = browser.msie && browser.version < 9,
+        outerHeight = kendo._outerHeight,
+        outerWidth = kendo._outerWidth,
         ns = ".kendoCalendar",
         CLICK = "click" + ns,
         KEYDOWN_NS = "keydown" + ns,
@@ -99,7 +101,7 @@ var __meta__ = { // jshint ignore:line
                             e.preventDefault();
                         }
 
-                        if (that.options.disableDates(value) && that._view.name == "month") {
+                        if (that._view.name == "month" && that.options.disableDates(value)) {
                             return;
                         }
 
@@ -287,7 +289,6 @@ var __meta__ = { // jshint ignore:line
                 vertical = view !== undefined && view !== that._index,
                 to, currentView, compare,
                 disabled;
-
             if (!value) {
                 value = currentValue;
             }
@@ -536,7 +537,7 @@ var __meta__ = { // jshint ignore:line
                 active = that._active,
                 horizontal = that.options.animation.horizontal,
                 effects = horizontal.effects,
-                viewWidth = from.outerWidth();
+                viewWidth = outerWidth(from);
 
             if (effects && effects.indexOf(SLIDE) != -1) {
                 from.add(to).css({ width: viewWidth });
@@ -582,7 +583,7 @@ var __meta__ = { // jshint ignore:line
             if (effects && effects.indexOf("zoom") != -1) {
                 to.css({
                     position: "absolute",
-                    top: from.prev().outerHeight(),
+                    top: outerHeight(from.prev()),
                     left: 0
                 }).insertBefore(from);
 
@@ -634,7 +635,7 @@ var __meta__ = { // jshint ignore:line
                 .removeAttr(ID);
             }
 
-            if (date) {
+            if (date && that._view.name == "month") {
                 disabledDate = that.options.disableDates(date);
             }
 
@@ -676,7 +677,7 @@ var __meta__ = { // jshint ignore:line
 
             adjustDST(value, 0);
 
-            if (that.options.disableDates(value) && that._view.name == "month") {
+            if (that._view.name == "month" && that.options.disableDates(value)) {
                 value = that._value;
             }
 
@@ -734,9 +735,9 @@ var __meta__ = { // jshint ignore:line
 
             if (!element.find(".k-header")[0]) {
                 element.html('<div class="k-header">' +
-                    '<a href="#" role="button" class="k-link k-nav-prev"><span class="k-icon k-i-arrow-w"></span></a>' +
+                    '<a href="#" role="button" class="k-link k-nav-prev"><span class="k-icon k-i-arrow-60-left"></span></a>' +
                     '<a href="#" role="button" aria-live="assertive" aria-atomic="true" class="k-link k-nav-fast"></a>' +
-                    '<a href="#" role="button" class="k-link k-nav-next"><span class="k-icon k-i-arrow-e"></span></a>' +
+                    '<a href="#" role="button" class="k-link k-nav-next"><span class="k-icon k-i-arrow-60-right"></span></a>' +
                 '</div>');
             }
 

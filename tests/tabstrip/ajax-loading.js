@@ -14,13 +14,7 @@ function Select(e) {
 
 
 var tabstrip;
-
-module('tabstrip ajax loading', {
-    setup: function() {
-        kendo.effects.disable();
-
-        QUnit.fixture.append(
-            '<div id="tabstrip">' +
+var template = '<div id="tabstrip">' +
             '    <ul>' +
             '        <li class="k-state-active">ASP.NET MVC</li>' +
             '        <li class="k-state-disabled">Silverlight</li>' +
@@ -28,6 +22,8 @@ module('tabstrip ajax loading', {
             '        <li>OpenAccess ORM</li>' +
             '        <li>Reporting</li>' +
             '        <li>Sitefinity ASP.NET CMS</li>' +
+            '        <li>Loading using url from options</li>' +
+            '        <li>Loading using url from function</li>' +
             '    </ul>' +
             '    <div>' +
             '        <ul>' +
@@ -44,8 +40,41 @@ module('tabstrip ajax loading', {
             '    <div></div>' +
             '    <div></div>' +
             '    <div></div>' +
-            '</div>'
-        );
+            '    <div></div>' +
+            '    <div></div>' +
+            '</div>';
+
+var tabstripSetup = function() {
+    QUnit.fixture.append(template);
+
+    var localCounter = 0;
+
+    tabstrip = new kendo.ui.TabStrip("#tabstrip", {
+        animation: false,
+        select: Select,
+        contentUrls: [
+            'ajax-view-one.html',
+            'ajax-view-two.html',
+            'ajax-view-one.html',
+            'ajax-view-three.html',
+            'ajax-view-one.html',
+            'error.html',
+            {
+                url: 'ajax-view-from-options.html'
+            },
+            {
+                url: function() {
+                    localCounter++;
+                    return 'ajax-view-from-function' + localCounter + '.html';
+                }
+            }
+        ]
+    });
+};
+
+module('tabstrip ajax loading', {
+    setup: function() {
+        kendo.effects.disable();
 
         $.mockjaxSettings.responseTime = 0;
 
@@ -70,13 +99,7 @@ module('tabstrip ajax loading', {
             }
         });
 
-        tabstrip = new kendo.ui.TabStrip("#tabstrip", {
-            animation: false,
-            select: Select,
-            contentUrls: [
-                'ajax-view-one.html', 'ajax-view-two.html', 'ajax-view-one.html', 'ajax-view-two.html', 'ajax-view-one.html', 'error.html'
-            ]
-        });
+        tabstripSetup();
     },
 
     teardown: function () {
@@ -147,4 +170,114 @@ asyncTest("ajax content with error fires error handler and writes the error mess
     item.click();
 });
 
+module('tabstrip ajax loading using options', {
+    setup: function() {
+        kendo.effects.disable();
+        jasmine.clock().install();
+        $.mockjaxSettings.responseTime = 0;
+    },
+
+    teardown: function () {
+        kendo.effects.enable();
+        jasmine.clock().uninstall();
+        tabstrip.destroy();
+    }
+});
+
+test('ajax content url from options should be supported', 2, function() {
+    $.mockjax({
+        url: "ajax-view-from-options.html",
+        response: function() {
+            ok(true);
+        }
+    });
+
+    tabstripSetup();
+
+    var item = getRootItem(6);
+
+    item.click();
+
+    jasmine.clock().tick();
+
+    ok(!item.find('> .k-link').data('contentUrl'));
+});
+
+test('ajax content url from options should be supported when reloading tab', 3, function() {
+    $.mockjax({
+        url: "ajax-view-from-options.html",
+        response: function() {
+            ok(true);
+        }
+    });
+
+    tabstripSetup();
+
+    var item = getRootItem(6);
+
+    item.click();
+    jasmine.clock().tick();
+
+    tabstrip.reload(item);
+    jasmine.clock().tick();
+
+    ok(!item.find('> .k-link').data('contentUrl'));
+});
+
+test('ajax content url should be supported when reloading tab', 3, function() {
+    var calls = 0;
+
+    $.mockjax({
+        url: "ajax-view-three.html",
+        response: function() {
+            ok(true);
+        }
+    });
+
+    tabstripSetup();
+
+    var item = getRootItem(3);
+
+    item.click();
+    jasmine.clock().tick();
+
+    tabstrip.reload(item);
+    jasmine.clock().tick();
+
+    ok(item.find('> .k-link').data('contentUrl'));
+});
+
+test('ajax content url from function should supported', 3, function() {
+    var firstUrlCalls = 0;
+    $.mockjax({
+        url: "ajax-view-from-function1.html",
+        response: function() {
+            firstUrlCalls++;
+
+            ok(true && firstUrlCalls < 2);
+
+            var item = getRootItem(7);
+
+            tabstrip.reload($(item));
+            jasmine.clock().tick();
+        }
+    });
+
+    $.mockjax({
+        url: "ajax-view-from-function2.html",
+        response: function() {
+            ok(true);
+        }
+    });
+
+    tabstripSetup();
+
+    var item = getRootItem(7);
+
+    item.click();
+    jasmine.clock().tick();
+
+
+    ok(!item.find('> .k-link').data('contentUrl'));
+});
 })();

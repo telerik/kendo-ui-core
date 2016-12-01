@@ -12,4 +12,4 @@ To see the example on how to bind the Kendo UI TreeView to XML in ASP.NET MVC ap
 ## See Also
 
 * [Overview of the TreeView HtmlHelper]({% slug overview_treeviewhelper_aspnetmvc %})
-* [TreeViewBuilder API Reference](/api/aspnet-mvc/Kendo.Mvc.UI.Fluent/TreeViewBuilder)
+* [TreeViewBuilder API Reference](/api/Kendo.Mvc.UI.Fluent/TreeViewBuilder)

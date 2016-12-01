@@ -1082,6 +1082,8 @@ function pad(number, digits, end) {
     };
 
     kendo._round = round;
+    kendo._outerWidth = function (element, includeMargin) { return $(element).outerWidth(includeMargin || false) || 0; };
+    kendo._outerHeight = function (element, includeMargin) { return $(element).outerHeight(includeMargin || false) || 0; };
     kendo.toString = toString;
 })();
 
@@ -1635,34 +1637,26 @@ function pad(number, digits, end) {
     function wrap(element, autosize) {
         var browser = support.browser,
             percentage,
-            isRtl = element.css("direction") == "rtl";
+            outerWidth = kendo._outerWidth,
+            outerHeight = kendo._outerHeight;
 
         if (!element.parent().hasClass("k-animation-container")) {
-            var shadows = getShadows(element),
-                width = element[0].style.width,
+            var width = element[0].style.width,
                 height = element[0].style.height,
                 percentWidth = percentRegExp.test(width),
                 percentHeight = percentRegExp.test(height);
 
-            if (browser.opera) { // Box shadow can't be retrieved in Opera
-                shadows.left = shadows.right = shadows.bottom = 5;
-            }
-
             percentage = percentWidth || percentHeight;
 
-            if (!percentWidth && (!autosize || (autosize && width))) { width = element.outerWidth(); }
-            if (!percentHeight && (!autosize || (autosize && height))) { height = element.outerHeight(); }
+            if (!percentWidth && (!autosize || (autosize && width))) { width = outerWidth(element); }
+            if (!percentHeight && (!autosize || (autosize && height))) { height = outerHeight(element); }
 
             element.wrap(
                          $("<div/>")
                          .addClass("k-animation-container")
                          .css({
                              width: width,
-                             height: height,
-                             marginLeft: shadows.left * (isRtl ? 1 : -1),
-                             paddingLeft: shadows.left,
-                             paddingRight: shadows.right,
-                             paddingBottom: shadows.bottom
+                             height: height
                          }));
 
             if (percentage) {
@@ -1686,8 +1680,8 @@ function pad(number, digits, end) {
 
             if (!percentage) {
                 wrapper.css({
-                    width: element.outerWidth(),
-                    height: element.outerHeight(),
+                    width: outerWidth(element),
+                    height: outerHeight(element),
                     boxSizing: "content-box",
                     mozBoxSizing: "content-box",
                     webkitBoxSizing: "content-box"
@@ -1888,11 +1882,13 @@ function pad(number, digits, end) {
         support.msPointers = window.MSPointerEvent;
         support.pointers = window.PointerEvent;
 
+        var docStyle = document.documentElement.style;
         var transitions = support.transitions = false,
             transforms = support.transforms = false,
             elementProto = "HTMLElement" in window ? HTMLElement.prototype : [];
 
-        support.hasHW3D = ("WebKitCSSMatrix" in window && "m11" in new window.WebKitCSSMatrix()) || "MozPerspective" in document.documentElement.style || "msPerspective" in document.documentElement.style;
+        support.hasHW3D = ("WebKitCSSMatrix" in window && "m11" in new window.WebKitCSSMatrix()) || "MozPerspective" in docStyle || "msPerspective" in docStyle;
+        support.cssFlexbox = ("flexWrap" in docStyle) || ("WebkitFlexWrap" in docStyle) || ("msFlexWrap" in docStyle);
 
         each([ "Moz", "webkit", "O", "ms" ], function () {
             var prefix = this.toString(),
@@ -2112,7 +2108,7 @@ function pad(number, digits, end) {
             }
         };
 
-        support.cssBorderSpacing = typeof document.documentElement.style.borderSpacing != "undefined" && !(support.browser.msie && support.browser.version < 8);
+        support.cssBorderSpacing = typeof docStyle.borderSpacing != "undefined" && !(support.browser.msie && support.browser.version < 8);
 
         (function(browser) {
             // add browser-specific CSS class
@@ -2139,6 +2135,10 @@ function pad(number, digits, end) {
             }
             if (support.mobileOS) {
                 cssClass += " k-mobile";
+            }
+
+            if (!support.cssFlexbox) {
+                cssClass += " k-no-flexbox";
             }
 
             docElement.addClass(cssClass);
@@ -2242,13 +2242,14 @@ function pad(number, digits, end) {
             type = "offset";
         }
 
-        var result = element[type]();
-
-        if (support.mobileOS.android) {
-            // offset() is buggy in Android
-            result.top -= window.scrollY;
-            result.left -= window.scrollX;
-        }
+        var offset = element[type]();
+        // clone ClientRect object to JS object (jQuery3)
+        var result = {
+            top: offset.top,
+            right: offset.right,
+            bottom: offset.bottom,
+            left: offset.left
+        };
 
         // IE10 touch zoom is living in a separate viewport
         if (support.browser.msie && (support.pointers || support.msPointers) && !positioned) {
@@ -2873,7 +2874,11 @@ function pad(number, digits, end) {
             if (value !== undefined) {
 
                 if (templateRegExp.test(option)) {
-                    value = kendo.template($("#" + value).html());
+                    if(typeof value === "string") {
+                        value = kendo.template($("#" + value).html());
+                    } else {
+                        value = element.getAttribute(option);
+                    }
                 }
 
                 result[option] = value;

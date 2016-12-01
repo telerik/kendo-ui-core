@@ -3,7 +3,7 @@ title: Convert Projects
 page_title: Convert Projects | UI for ASP.NET MVC Visual Studio Integration
 description: "Learn how to convert an existing ASP.NET MVC application to a Telerik UI for ASP.NET MVC application."
 slug: projectwizardcoversion_visualstudio_aspnetmvc
-position: 4
+position: 5
 ---
 
 # Convert Projects
@@ -29,7 +29,7 @@ The distribution selection lets you choose the version of the Telerik UI for ASP
 
 **Figure 1. Distribution selection**
 
-![Distribution selection](/aspnet-mvc/vs-integration/images/convert_distribution.png)
+![Distribution selection](/vs-integration/images/convert_distribution.png)
 
 ### Theme Selection
 
@@ -37,7 +37,7 @@ The theme selection lets you choose the visual theme for your Telerik UI for ASP
 
 **Figure 2. Theme selection**
 
-![Theme selection](/aspnet-mvc/vs-integration/images/convert_theme.png)
+![Theme selection](/vs-integration/images/convert_theme.png)
 
 ### Project Settings
 
@@ -46,11 +46,11 @@ The **Project Settings** page enables you to modify the project settings by conf
 - **Render Right-To-Left**&mdash;Updates the master page with the Right-to-left support class and adds CSS reference for RTL styles.
 - **Copy Editor Templates**&mdash;Copies the predefined editor templates to `~/Views/Shared/EditorTemplates`. Existing editor templates will be overwritten.
 - **Copy Global Resources**&mdash;Copies the localization files to `~/Scripts/kendo/{version}/cultures`.
-- **Use CDN Support**&mdash;Enables or disables the [Kendo UI CDN support]({% slug kendoui_cdn_services_installation %}).
+- **Use CDN Support**&mdash;Enables or disables the [Kendo UI CDN support](http://docs.telerik.com/kendo-ui/intro/installation/cdn-service).
 
 **Figure 3. Project settings**
 
-![Project settings](/aspnet-mvc/vs-integration/images/convert_settings.png)
+![Project settings](/vs-integration/images/convert_settings.png)
 
 ### Conversion of Existing Telerik MVC Extensions Projects
 

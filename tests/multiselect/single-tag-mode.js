@@ -43,9 +43,9 @@
 
         equal(tag.children().length, 2);
         equal(tag.children().eq(0).html(), "1 item(s) selected");
-        equal(tag.find(".k-select").children(".k-i-arrow-s").length, 1);
+        equal(tag.find(".k-select").children(".k-i-arrow-60-down").length, 1);
         equal(tag.find(".k-select").attr("aria-label"), "open");
-        equal(tag.find(".k-select").children(".k-i-arrow-s").html(), "");
+        equal(tag.find(".k-select").children(".k-i-arrow-60-down").html(), "");
     });
 
     test("Widget renders a single tag using a custom template with 'values' and 'maxTotal'", function() {
@@ -61,7 +61,7 @@
 
         equal(tag.children().length, 2);
         equal(tag.children().eq(0).html(), "1 selected of 15");
-        equal(tag.find(".k-select").children(".k-i-arrow-s").length, 1);
+        equal(tag.find(".k-select").children(".k-i-arrow-60-down").length, 1);
     });
 
     test("Widget passes 'dataitems' and 'total' value to the single tag template", function() {
@@ -77,7 +77,7 @@
 
         equal(tag.children().length, 2);
         equal(tag.children().eq(0).html(), "1 (1) selected of 15");
-        equal(tag.find(".k-select").children(".k-i-arrow-s").length, 1);
+        equal(tag.find(".k-select").children(".k-i-arrow-60-down").length, 1);
     });
 
     test("Widget passes 'dataitems' and 'total' value to the single tag template", function() {
@@ -93,7 +93,7 @@
 
         equal(tag.children().length, 2);
         equal(tag.children().eq(0).html(), "1 (1) selected of 15");
-        equal(tag.find(".k-select").children(".k-i-arrow-s").length, 1);
+        equal(tag.find(".k-select").children(".k-i-arrow-60-down").length, 1);
     });
 
     test("Updates the text of the selected tag when value is changed", function() {

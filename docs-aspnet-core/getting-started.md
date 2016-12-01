@@ -1,13 +1,13 @@
 ---
-title: Get Started
-page_title: Get Started | Telerik UI for ASP.NET Core
+title: Getting Started
+page_title: Getting Started | Telerik UI for ASP.NET Core
 description: "Learn the basics when working with Telerik UI for ASP.NET Core (aka MVC 6 or ASP.NET Core MVC)."
-previous_url: /aspnet-mvc/aspnetmvc-apps/mvc-6/getting-started, /aspnet-mvc/mvc-6/getting-started
+previous_url: /aspnetmvc-apps/mvc-6/getting-started, /mvc-6/getting-started
 slug: gettingstarted_aspnetmvc6_aspnetmvc
 position: 2
 ---
 
-# Get Started
+# Getting Started
 
 This article demonstrates how to configure an ASP.NET Core project to use Telerik UI for ASP.NET MVC.
 
@@ -45,7 +45,7 @@ Below are listed the steps for you to follow when creating an ASP.NET Core web s
 
 ### Add NuGet Packages
 
-Set up the [Telerik NuGet Private Feed]({% slug aspnetmvc_nuget %}#set-up-nuget-package-source) before continuing.
+Set up the [Telerik NuGet Private Feed](../aspnet-mvc/getting-started/nuget-install#set-up-nuget-package-source) before continuing.
 
 **Step 1** Open the NuGet Package Manager.
 
@@ -53,7 +53,7 @@ Set up the [Telerik NuGet Private Feed]({% slug aspnetmvc_nuget %}#set-up-nuget-
 
 ![NuGet package manager](images/manage-nuget-packages.png)
 
-**Step 2** Choose the [Telerik package source]({% slug aspnetmvc_nuget %}#set-up-nuget-package-source) and search for `Telerik.UI.for.AspNet.Core`.
+**Step 2** Choose the [Telerik package source](../aspnet-mvc/getting-started/nuget-install#set-up-nuget-package-source) and search for `Telerik.UI.for.AspNet.Core`.
 
 **Step 3** Install the `Telerik.UI.for.AspNet.Core` package. This should add a line to you `project.json` similar to the one shown below.
 
@@ -111,7 +111,7 @@ Copy the `js` and `styles` folders from the `telerik.ui.for.aspnetmvc` archive t
 
 ![Kendo UI resources](images/kendo-ui-wwwroot.png)
 
-* **[Kendo UI Professional Bower package installation]({% slug kendoui_bower_packages_kendoui_installation %})**
+* **[Kendo UI Professional Bower package installation](../kendo-ui/intro/installation/bower-install)**
 
 **Step 7** Register the Kendo UI styles and scripts in `~/Views/Shared/Layout.cshtml`.
 

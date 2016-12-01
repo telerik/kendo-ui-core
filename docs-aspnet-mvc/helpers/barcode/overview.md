@@ -46,7 +46,7 @@ Below are listed the steps for you to follow when configuring the Kendo UI Barco
         )
 ```
 
-**Step 4** Choose the appropriate symbology (encoding) from the available options listed [here](/api/javascript/dataviz/ui/barcode#configuration-type). Specify it through the Encoding method which accepts an `enum` value.
+**Step 4** Choose the appropriate symbology (encoding) from the available options listed [here](../../../kendo-ui/api/javascript/dataviz/ui/barcode#configuration-type). Specify it through the Encoding method which accepts an `enum` value.
 
 ###### Example
 
@@ -71,7 +71,7 @@ Below are listed the steps for you to follow when configuring the Kendo UI Barco
 
 ### Existing Instances
 
-You can reference an existing Kendo UI Barcode instance via [`jQuery.data()`](http://api.jquery.com/jQuery.data/). Once a reference is established, use the [Barcode API](/api/javascript/dataviz/ui/barcode#methods) to control its behavior.
+You can reference an existing Kendo UI Barcode instance via [`jQuery.data()`](http://api.jquery.com/jQuery.data/). Once a reference is established, use the [Barcode API](../../../kendo-ui/api/javascript/dataviz/ui/barcode#methods) to control its behavior.
 
 ###### Example
 
@@ -88,12 +88,12 @@ You can reference an existing Kendo UI Barcode instance via [`jQuery.data()`](ht
 
 Other articles on Telerik UI for ASP.NET MVC and on the Barcode:
 
-* [ASP.NET MVC API Reference: BarCodeBuilder](/api/aspnet-mvc/Kendo.Mvc.UI.Fluent/BarcodeBuilder)
+* [ASP.NET MVC API Reference: BarCodeBuilder](/api/Kendo.Mvc.UI.Fluent/BarcodeBuilder)
 * [Overview of Telerik UI for ASP.NET MVC]({% slug overview_aspnetmvc %})
 * [Fundamentals of Telerik UI for ASP.NET MVC]({% slug fundamentals_aspnetmvc %})
 * [Scaffolding in Telerik UI for ASP.NET MVC]({% slug scaffolding_aspnetmvc %})
-* [Overview of the Kendo UI Barcode Widget]({% slug overview_kendoui_barcode_widget %})
-* [Telerik UI for ASP.NET MVC API Reference Folder](/api/aspnet-mvc/Kendo.Mvc/AggregateFunction)
+* [Overview of the Kendo UI Barcode Widget](http://docs.telerik.com/kendo-ui/controls/barcodes/barcode/overview)
+* [Telerik UI for ASP.NET MVC API Reference Folder](/api/Kendo.Mvc/AggregateFunction)
 * [Telerik UI for ASP.NET MVC HtmlHelpers Folder]({% slug overview_autocompletehelper_aspnetmvc %})
 * [Tutorials on Telerik UI for ASP.NET MVC]({% slug overview_timeefficiencyapp_aspnetmvc6 %})
 * [Telerik UI for ASP.NET MVC Troubleshooting]({% slug troubleshooting_aspnetmvc %})

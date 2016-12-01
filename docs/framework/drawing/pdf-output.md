@@ -82,7 +82,7 @@ The example below demonstrates how to get the PDF as a `Blob` object in browsers
 The following options are currently supported:
 
 - `paperSize`&mdash;This option can be either a paper name, such as A4, an array of two numbers, such as paper width and height, or `"auto"`. By default, it is `"auto"`, which means the paper size will be just enough to fit the drawing. If numbers are specified, they are assumed to be in a typographic points unit. A point is 1/72 of an inch. Strings of the form `297mm`" can also be used. The supported units are `mm`, `cm`, `in` and `pt`. The available paper sizes are: `A0-A10`, `B0-B10`, `C0-C10`, `Executive`, `Folio`, `Legal`, `Letter`, `Tabloid`.
-- `margin`&mdash;This option indicates the paper margins. It must be an object containing `top`, `left`, `right`, and `bottom` numbers which specify the paper margins. Again, if numbers are passed, they are assumed to be in points. By using strings you can specify units. When `paperSize` is `"auto"`, the dimensions are adjusted to include the margin. 
+- `margin`&mdash;This option indicates the paper margins. It must be an object containing `top`, `left`, `right`, and `bottom` numbers which specify the paper margins. Again, if numbers are passed, they are assumed to be in points. By using strings you can specify units. When `paperSize` is `"auto"`, the dimensions are adjusted to include the margin.
 - `landscape` (Boolean, default `false`)&mdash;If `true` is specified, the paper dimensions will be rotated if needed, so that the width is the larger edge.
 - `title`, `author`, `subject`, `keywords`, `creator`&mdash;These are the optional strings to be included in the PDF information dictionary.
 - `date`&mdash;This `Date` object is optional and specifies the creation date of the document. The default value is the current date/time (`new Date()`).
@@ -107,7 +107,11 @@ The Kendo UI Drawing API allows you to specify fonts with the `font` option of `
     var text = new drawing.Text("Hello World", new geo.Point(100, 100));
     text.options.set("font", "30px Verdana");
 
-In order for this to render correctly as PDF, your code must have access to the TTF files. Ideally, they must be the same fonts that the browser uses to render on screen. However, you cannot access the fonts from the client-side JavaScript on the machine where the browser runs, so they must be provided on the server, and the paths to them must be declared as demonstrated in the example below.
+In order for this configuration to render the content correctly as PDF, your code must have access to the TTF files. Ideally, they must be the same fonts that the browser uses to render on screen. However, you cannot access the fonts from the client-side JavaScript on the machine where the browser runs, so they must be provided on the server and the paths to them must be declared. As of the Kendo UI 2014 Q3 SP1 release, the Kendo UI PDF generator is able to dig the [CSS `@font-face` declarations](https://developer.mozilla.org/en-US/docs/Web/CSS/@font-face) directly from the stylesheets. You no longer need to call the [`pdf.defineFont()`](/api/javascript/pdf#methods-defineFont) method manually.
+
+For more information on how to embed fonts only using CSS at-rules, refer to the section on [drawing custom fonts in PDF]({% slug drawingofhtmlelements_drawingapi %}#configuration-Custom).
+
+To manually define fonts, see the example below:
 
 ###### Example
 
@@ -155,9 +159,7 @@ Compression can make a big difference in the output file size when you are using
 
 ## Supported Browsers
 
-Kendo UI PDF generator has been tested in recent versions of Chrome, Firefox, Safari, Blink-based Opera, and Internet Explorer 9 and later. Use [typed arrays](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Typed_arrays) where available to improve speed (all browsers except IE9).
-
-Internet Explorer 8 and older are not supported.
+For more information on the provided [browser support]({% slug wbe_browserand_operating_system_support %}), refer to the section on [PDF export]({% slug wbe_browserand_operating_system_support %}#pdf-export).
 
 ## See Also
 

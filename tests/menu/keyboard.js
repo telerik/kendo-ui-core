@@ -16,9 +16,9 @@ module("menu keyboard navigation", {
             '<ul id="menu" data-role="menu" class="k-widget k-reset k-header k-menu k-menu-horizontal" tabindex="0">' +
             '    <li class="k-item k-state-default k-first"><span class="k-link">' +
             '        First Item' +
-            '        <span class="k-icon k-i-arrow-s"></span></span><ul class="k-group">' +
+            '        <span class="k-icon k-i-arrow-60-down"></span></span><ul class="k-group">' +
             '            <li class="k-item k-state-default k-first"><span class="k-link">Sub Item 1</span></li>' +
-            '            <li class="k-item k-state-disabled k-last"><span class="k-link">Sub Item 2 <span class="k-icon k-i-arrow-e"></span></span>' +
+            '            <li class="k-item k-state-disabled k-last"><span class="k-link">Sub Item 2 <span class="k-icon k-i-arrow-60-right"></span></span>' +
             '                <ul class="k-group">' +
             '                    <li class="k-item k-state-default k-first"><span class="k-link">Sub sub Item 1</span></li>' +
             '                </ul>' +
@@ -27,14 +27,14 @@ module("menu keyboard navigation", {
             '    </li>' +
             '    <li class="k-item k-state-default"><a class="k-link" href="http://foo" id="fooLink">' +
             '        Second Item' +
-            '        <span class="k-icon k-i-arrow-s"></span></a><ul class="k-group">' +
+            '        <span class="k-icon k-i-arrow-60-down"></span></a><ul class="k-group">' +
             '            <li class="k-item k-state-default k-first"><span class="k-link">Sub Item 1</span></li>' +
             '            <li class="k-item k-state-default k-last"><span class="k-link">Sub Item 2</span></li>' +
             '        </ul>' +
             '    </li>' +
             '    <li class="k-item k-state-disabled k-last"><span class="k-link">' +
             '        Third Item' +
-            '        <span class="k-icon k-i-arrow-s"></span></span><ul class="k-group">' +
+            '        <span class="k-icon k-i-arrow-60-down"></span></span><ul class="k-group">' +
             '            <li class="k-item k-state-default k-first"><span class="k-link">Sub Item 1</span></li>' +
             '            <li class="k-item k-state-default k-last"><span class="k-link">Sub Item 2</span></li>' +
             '        </ul>' +

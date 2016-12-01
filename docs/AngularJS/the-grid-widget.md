@@ -1,14 +1,14 @@
 ---
-title: Grid Settings
-page_title: Grid Settings | AngularJS Directives
+title: Grid Settings and Usage
+page_title: Grid Settings and Usage | AngularJS Directives
 description: "Learn the tips and tricks about how to use Kendo UI Grid widget in AngularJS."
 slug: grid_settings_angularjs_directives
 position: 4
 ---
 
-# Grid Settings
+# Grid Settings and Usage
 
-[The Grid](http://www.telerik.com/kendo-ui/grid) is one of the most complex Kendo UI widgets. This chapter outlines some of its particularities regarding the AngularJS integration supported by Kendo UI.
+[The Grid](http://www.telerik.com/kendo-ui/grid) is one of the most complex Kendo UI widgets. This article outlines some of its particularities regarding the AngularJS integration supported by Kendo UI.
 
 ## Escaping Execution of Title Expression
 
@@ -207,6 +207,52 @@ angular.module("app", ["kendo.directives"]).controller("MyCtrl", function($scope
   };
 });
 </script>
+```
+
+When you use aggregates, the `column` and `aggregate` information becomes available in the `footerTemplate` of the Grid through `{% raw %}{{ column }}{% endraw %}` and `{% raw %}{{ aggregate }}{% endraw %}` respectively.
+
+3The example below demonstrates how to use the `sum` aggregate in a `footerTemplate` and apply an Angular currency pipe to it.
+
+###### Example
+
+```
+<div id="example" ng-app="KendoDemos">    
+    <div ng-controller="MyCtrl">      
+        <kendo-grid k-scope-field="myGrid" options="mainGridOptions" k-data-source="ds"></kendo-grid>
+    </div>
+  </div>
+
+  <script>
+    angular.module("KendoDemos", [ "kendo.directives" ])
+    .controller("MyCtrl", function($scope){
+
+      $scope.ds = new kendo.data.DataSource({
+        data: [
+          { ProductID: 1, ProductName: "Chai", UnitPrice: 18, UnitsInStock: 39 },
+          { ProductID: 2, ProductName: "Chang", UnitPrice: 19, UnitsInStock: 17 },
+          { ProductID: 3, ProductName: "Aniseed Syrup", UnitPrice: 10, UnitsInStock: 13 }
+        ],
+ 				aggregate: [
+          	{field: "UnitPrice", aggregate: "sum"},
+            {field: "UnitsInStock", aggregate: "sum"}
+        ]});      
+
+      $scope.mainGridOptions = {              
+        columns: [
+          { field: "ProductName", title: "Product Name", width: 200,
+            template: "{{dataItem.ProductName}}",
+           footerTemplate: "Column title: {% raw %}{{ column.title }}{% endraw %}"
+          },
+          { field: "UnitPrice", title: "Unit Price", width: 80,
+             footerTemplate: "{% raw %}{{ aggregate.sum | currency : $ : 3 }}{% endraw %}"
+          },
+          { field: "UnitsInStock", title: "Units In Stock", width: 80,
+           footerTemplate: "{% raw %}{{ aggregate.sum }}{% endraw %}"
+          }
+        ]
+      };      
+    });
+  </script>
 ```
 
 > **Important**

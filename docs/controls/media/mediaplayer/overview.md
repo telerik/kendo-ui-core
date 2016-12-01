@@ -2,6 +2,7 @@
 title: Overview
 page_title: Overview | Kendo UI MediaPlayer
 description: "Learn how to initialize the Kendo UI MediaPlayer widget and apply its other options."
+previous_url: /web/mediaplayer/overview, /getting-started/web/mediaplayer/overview
 slug: overview_kendoui_mediaplayer_widget
 position: 1
 ---
@@ -93,7 +94,7 @@ Players usually feature a different video based on user action. For a basic exam
 
 ### Prevent Seeking Forward
 
-Application or business logic usually enforces the user to watch only the currently loaded content without the option to jump forward. The MediaPlayer provides the [`forwardSeek`](/api/javascript/ui/mediaplayer.md#forwardseek-boolean-default-true) configuration, which helps to achieve this requirement.
+Application or business logic usually enforces the user to watch only the currently loaded content without the option to jump forward. The MediaPlayer provides the [`forwardSeek`](/api/javascript/ui/mediaplayer#forwardseek-boolean-default-true) configuration, which helps to achieve this requirement.
 
 ### Access Existing Instances
 

@@ -2,7 +2,7 @@
 title: Forms
 page_title: Forms | Kendo UI Hybrid Components
 description: "Use Kendo UI hybrid forms in mobile application development"
-previous_url: /controls/hybrid/forms/forms
+previous_url: /controls/hybrid/forms/forms, /controls/hybrid/forms, /mobile/forms
 slug: forms_hybridkendoui
 position: 1
 ---
@@ -16,7 +16,7 @@ The Kendo UI Hybrid framework provides automatic platform-dependent styling of `
 
 > **Important**
 >
-> To make use of native-like forms layout and to properly align widgets without additional styling, it is advisable to build and organize your mobile forms using [Kendo UI ListView for mobile](/controls/hybrid/listview/overview).
+> To make use of native-like forms layout and to properly align widgets without additional styling, it is advisable to build and organize your mobile forms using [Kendo UI ListView for mobile]({% slug overview_hybridlistview %}).
 
 The `input` elements with a picker use the native one from the current platform if it is supported. HTML5 `form` elements are fully functional only on the following platforms: iOS 5.x+, Android 4.x+, BlackBerry 6.x+, BlackBerry PlayBook 1.x+. The styling still works on older platforms, but the functionality is limited to text input only. The `select` elements are also automatically styled for each platform and use the native select dialog or popup.
 

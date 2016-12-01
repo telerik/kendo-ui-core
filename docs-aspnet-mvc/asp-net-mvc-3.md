@@ -2,7 +2,7 @@
 title: Use with ASP.NET MVC 3
 page_title: Use with ASP.NET MVC 3 | Telerik UI for ASP.NET MVC
 description: "Use Telerik UI for ASP.NET MVC in ASP.NET MVC 3 applications."
-previous_url: /aspnet-mvc/aspnetmvc-apps/asp-net-mvc-3
+previous_url: /aspnetmvc-apps/asp-net-mvc-3
 slug: aspnetmvc3_aspnetmvc
 position: 12
 ---
@@ -33,7 +33,7 @@ Below are listed the steps for you to follow when creating a new ASP.NET MVC 3 a
 
 **Figure 1. The new ASP.NET MVC 3 application**
 
-![New ASP.NET MVC 3 Application](/aspnet-mvc/images/mvc3-new-app.png)
+![New ASP.NET MVC 3 Application](/images/mvc3-new-app.png)
 
 ## Add Telerik UI for ASP.NET MVC
 
@@ -61,7 +61,7 @@ Below are listed the steps for you to follow when copying the required JavaScrip
 
 **Figure 2. Kendo UI directories in the Solution Explorer**
 
-![Kendo directories in Solution Explorer](/aspnet-mvc/images/mvc3-solution.png)
+![Kendo directories in Solution Explorer](/images/mvc3-solution.png)
 
 After the needed JavaScript and CSS files are added to the application, you can include them.
 
@@ -228,7 +228,7 @@ Below are listed the steps for you to follow when using a Kendo UI widget throug
 
 **Figure 3. The final result**
 
-![Final result](/aspnet-mvc/images/mvc3-final.png)
+![Final result](/images/mvc3-final.png)
 
 ## Next Steps
 

@@ -56,12 +56,10 @@
 .k-dialog a.k-dialog-action.k-dialog-close
 {
     position: absolute;
+    top: .35em;
     right: 0;
     cursor: pointer;
     z-index: 10000;
-    .k-font-icon {
-        .use-font-icon();
-    }
 }
 
 .k-dialog.k-dialog-titleless a.k-dialog-action.k-dialog-close
@@ -98,4 +96,8 @@
 .k-dialog .k-prompt-container .k-textbox
 {
     width: 100%;
+}
+
+.k-dialog .k-button {
+    box-sizing: border-box;
 }

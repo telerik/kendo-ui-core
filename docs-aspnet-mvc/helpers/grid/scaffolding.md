@@ -26,13 +26,13 @@ Below are listed the steps for you to follow when scaffolding the Kendo UI Grid.
 
 **Figure 1. Add a new scaffolded item**
 
-![New Scaffolded Item](/aspnet-mvc/images/scaffolding/new_scaffolded_item.png)
+![New Scaffolded Item](/images/scaffolding/new_scaffolded_item.png)
 
 **Step 3** Select **Kendo UI Scaffolder** from the list of available scaffolders.
 
 **Figure 2. Choose the Kendo UI Scaffolder**
 
-![Kendo UI Scaffolder](/aspnet-mvc/images/scaffolding/kendo_ui_scaffolder.png)
+![Kendo UI Scaffolder](/images/scaffolding/kendo_ui_scaffolder.png)
 
 **Step 4** On the next screen, you are presented with the **Model** and **Data Context** options.
 
@@ -40,19 +40,19 @@ Enter the **Controller** and **View** names.
 
 **Figure 3. Provide the controller name**
 
-![Grid options](/aspnet-mvc/helpers/grid/images/scaffolding/kendo_ui_grid1.png)
+![Grid options](/helpers/grid/images/scaffolding/kendo_ui_grid1.png)
 
 The **Model Class** DropDownList contains all model types from the active project. In this example, you list products in the Grid. Select the **Product** entity.
 
 **Figure 4. Choose the Model class**
 
-![Model Class](/aspnet-mvc/helpers/grid/images/scaffolding/model_class.png)
+![Model Class](/helpers/grid/images/scaffolding/model_class.png)
 
 From the **Data Context Class** DropDownList, select the **Entity Framework Data Model** class to be used. In this example it is **NorthwindEntities**.  
 
 **Figure 5. Choose the Data Context class**
 
-![Data Context Class](/aspnet-mvc/helpers/grid/images/scaffolding/data_context_class.png)
+![Data Context Class](/helpers/grid/images/scaffolding/data_context_class.png)
 
 **Step 5** (Optional) In some scenarios it is convenient to use view model objects instead of the entities returned by the Entity Framework. If this is the case, check the **Use an existing ViewModel** checkbox. It displays a DropDownList similar to the first one, from which you can select the ViewModel to be used.
 
@@ -71,7 +71,7 @@ Select the **ProductViewModel** class from the **ViewModel Class** DropDownList.
 
 **Figure 6. Select the ViewModel class**
 
-![ViewModel Class](/aspnet-mvc/helpers/grid/images/scaffolding/view_model_class.png)
+![ViewModel Class](/helpers/grid/images/scaffolding/view_model_class.png)
 
 > **Important**  
 >
@@ -81,7 +81,7 @@ Select the **ProductViewModel** class from the **ViewModel Class** DropDownList.
 
 **Figure 7. Pick Grid options**
 
-![Grid options](/aspnet-mvc/helpers/grid/images/scaffolding/kendo_ui_grid2.png)  
+![Grid options](/helpers/grid/images/scaffolding/kendo_ui_grid2.png)  
 
 This screen contains the Grid functionalities that can be configured before scaffolding:
 
@@ -90,13 +90,13 @@ This screen contains the Grid functionalities that can be configured before scaf
 
   **Figure 8. Choose the editable options**
 
-  ![Editable options](/aspnet-mvc/helpers/grid/images/scaffolding/editable.png)  
+  ![Editable options](/helpers/grid/images/scaffolding/editable.png)  
 
 * `Filterable`&mdash;Enable the filtering of the Grid and select the filter mode.  
 
   **Figure 9. Select the filterable options**
 
-  ![Filterable options](/aspnet-mvc/helpers/grid/images/scaffolding/filterable.png)  
+  ![Filterable options](/helpers/grid/images/scaffolding/filterable.png)  
 
 * `Column Menu`&mdash;Enable the column menu.
 * `Navigatable`&mdash;Enable the keyboard navigation.
@@ -107,13 +107,13 @@ This screen contains the Grid functionalities that can be configured before scaf
 
   **Figure 10. Pick the selectable options**
 
-  ![Selectable options](/aspnet-mvc/helpers/grid/images/scaffolding/selectable.png)  
+  ![Selectable options](/helpers/grid/images/scaffolding/selectable.png)  
 
 * `Sortable`&mdash;Enable the sorting and specify the sorting mode.  
 
   **Figure 11. The sortable options**
 
-  ![Sortable options](/aspnet-mvc/helpers/grid/images/scaffolding/sortable.png)  
+  ![Sortable options](/helpers/grid/images/scaffolding/sortable.png)  
 
 * `Excel Export`&mdash;Enable the Excel export functionality.
 * `PDF Export`&mdash;Enable the PDF export functionality.
@@ -122,7 +122,7 @@ This screen contains the Grid functionalities that can be configured before scaf
 
 **Figure 12. The Events item in the Grid options**
 
-![Grid options](/aspnet-mvc/helpers/grid/images/scaffolding/kendo_ui_grid3.png)  
+![Grid options](/helpers/grid/images/scaffolding/kendo_ui_grid3.png)  
 
 From this screen you could select the Grid events that you would like to attach handlers to.
 
@@ -144,15 +144,15 @@ Other articles on the Kendo UI Grid for ASP.NET MVC:
 * [Editing of the Grid HtmlHelper]({% slug ajaxediting_grid_aspnetmvc %})
 * [Templating of the Grid HtmlHelper]({% slug clientdetailtemplate_grid_aspnetmvc %})
 * [Troubleshooting for the Grid HtmlHelper]({% slug troubleshoot_gridhelper_aspnetmvc %})
-* [API Reference of the Grid HtmlHelper](/api/aspnet-mvc/Kendo.Mvc.UI.Fluent/GridBuilder)
-* [Overview of the Kendo UI Grid Widget]({% slug overview_kendoui_grid_widget %})
+* [API Reference of the Grid HtmlHelper](/api/Kendo.Mvc.UI.Fluent/GridBuilder)
+* [Overview of the Kendo UI Grid Widget](http://docs.telerik.com/kendo-ui/controls/data-management/grid/overview)
 
 Articles on Telerik UI for ASP.NET MVC:
 
 * [Overview of Telerik UI for ASP.NET MVC]({% slug overview_aspnetmvc %})
 * [Fundamentals of Telerik UI for ASP.NET MVC]({% slug fundamentals_aspnetmvc %})
 * [Scaffolding in Telerik UI for ASP.NET MVC]({% slug scaffolding_aspnetmvc %})
-* [Telerik UI for ASP.NET MVC API Reference Folder](/api/aspnet-mvc/Kendo.Mvc/AggregateFunction)
+* [Telerik UI for ASP.NET MVC API Reference Folder](/api/Kendo.Mvc/AggregateFunction)
 * [Telerik UI for ASP.NET MVC HtmlHelpers Folder]({% slug overview_barcodehelper_aspnetmvc %})
 * [Tutorials on Telerik UI for ASP.NET MVC]({% slug overview_timeefficiencyapp_aspnetmvc6 %})
 * [Telerik UI for ASP.NET MVC Troubleshooting]({% slug troubleshooting_aspnetmvc %})

@@ -27,7 +27,7 @@ layout: index
             select: preventParentSelection,
             template: navigationTemplate("{{site.baseurl}}/"),
             dataBound: expandNavigation("{{page.url | remove_first: '/' }}")
-        });
+        }).data("kendoTreeView").bind("dataBound", capitalizeTocFolders);
         </script>
     </div>
     

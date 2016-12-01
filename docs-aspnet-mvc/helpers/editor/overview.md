@@ -66,7 +66,7 @@ The Editor value is posted as a string and mapped to a variable with the name of
 
 ## Event Handling
 
-You can subscribe to all Editor [events](/api/javascript/ui/editor#events).
+You can subscribe to all Editor [events](../../../kendo-ui/api/javascript/ui/editor#events).
 
 ### By Handler Name
 
@@ -125,7 +125,7 @@ The examples below demonstrates how to subscribe to events by a handler name.
 
 ### Existing Instances
 
-You can reference an existing Kendo UI Editor instance via [`jQuery.data()`](http://api.jquery.com/jQuery.data/). Once a reference is established, use the [Editor API](/api/javascript/ui/editor#methods) to control its behavior.
+You can reference an existing Kendo UI Editor instance via [`jQuery.data()`](http://api.jquery.com/jQuery.data/). Once a reference is established, use the [Editor API](../../../kendo-ui/api/javascript/ui/editor#methods) to control its behavior.
 
 ###### Example
 
@@ -141,12 +141,13 @@ You can reference an existing Kendo UI Editor instance via [`jQuery.data()`](htt
 
 Other articles on Telerik UI for ASP.NET MVC and on the Editor:
 
-* [ASP.NET MVC API Reference: EditorBuilder](/api/aspnet-mvc/Kendo.Mvc.UI.Fluent/EditorBuilder)
+* [ASP.NET MVC API Reference: EditorBuilder](/api/Kendo.Mvc.UI.Fluent/EditorBuilder)
 * [Overview of Telerik UI for ASP.NET MVC]({% slug overview_aspnetmvc %})
+* [Import and Export Various Documents]({% slug overview_importexportdpl_aspnetmvc %})
 * [Fundamentals of Telerik UI for ASP.NET MVC]({% slug fundamentals_aspnetmvc %})
 * [Scaffolding in Telerik UI for ASP.NET MVC]({% slug scaffolding_aspnetmvc %})
-* [Overview of the Kendo UI Editor Widget]({% slug overview_kendoui_editor_widget %})
-* [Telerik UI for ASP.NET MVC API Reference Folder](/api/aspnet-mvc/Kendo.Mvc/AggregateFunction)
+* [Overview of the Kendo UI Editor Widget](http://docs.telerik.com/kendo-ui/controls/editors/editor/overview)
+* [Telerik UI for ASP.NET MVC API Reference Folder](/api/Kendo.Mvc/AggregateFunction)
 * [Telerik UI for ASP.NET MVC HtmlHelpers Folder]({% slug overview_barcodehelper_aspnetmvc %})
 * [Tutorials on Telerik UI for ASP.NET MVC]({% slug overview_timeefficiencyapp_aspnetmvc6 %})
 * [Telerik UI for ASP.NET MVC Troubleshooting]({% slug troubleshooting_aspnetmvc %})

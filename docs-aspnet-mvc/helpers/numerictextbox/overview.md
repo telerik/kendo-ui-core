@@ -52,7 +52,7 @@ Below are listed the steps for you to follow when configuring the Kendo UI Numer
 
 ## Event Handling
 
-You can subscribe to all NumericTextBox [events](/api/javascript/ui/numerictextbox#events).
+You can subscribe to all NumericTextBox [events](../../../kendo-ui/api/javascript/ui/numerictextbox#events).
 
 ### By Handler Name
 
@@ -128,7 +128,7 @@ The example below demonstrates how to subscribe to events by a template delegate
 
 ### Existing Instances
 
-You can reference an existing Kendo UI NumericTextBox instance via [`jQuery.data()`](http://api.jquery.com/jQuery.data/). Once a reference is established, use the [NumericTextBox API](/api/javascript/ui/numerictextbox#methods) to control its behavior.
+You can reference an existing Kendo UI NumericTextBox instance via [`jQuery.data()`](http://api.jquery.com/jQuery.data/). Once a reference is established, use the [NumericTextBox API](../../../kendo-ui/api/javascript/ui/numerictextbox#methods) to control its behavior.
 
 ###### Example
 
@@ -145,12 +145,12 @@ You can reference an existing Kendo UI NumericTextBox instance via [`jQuery.data
 
 Other articles on Telerik UI for ASP.NET MVC and on the NumericTextBox:
 
-* [ASP.NET MVC API Reference: NumericTextBoxBuilder](/api/aspnet-mvc/Kendo.Mvc.UI.Fluent/NumericTextBoxBuilder)
+* [ASP.NET MVC API Reference: NumericTextBoxBuilder](/api/Kendo.Mvc.UI.Fluent/NumericTextBoxBuilder)
 * [Overview of Telerik UI for ASP.NET MVC]({% slug overview_aspnetmvc %})
 * [Fundamentals of Telerik UI for ASP.NET MVC]({% slug fundamentals_aspnetmvc %})
 * [Scaffolding in Telerik UI for ASP.NET MVC]({% slug scaffolding_aspnetmvc %})
-* [Overview of the Kendo UI NumericTextBox Widget]({% slug overview_kendoui_numerictextbox_widget %})
-* [Telerik UI for ASP.NET MVC API Reference Folder](/api/aspnet-mvc/Kendo.Mvc/AggregateFunction)
+* [Overview of the Kendo UI NumericTextBox Widget](http://docs.telerik.com/kendo-ui/controls/editors/numerictextbox/overview)
+* [Telerik UI for ASP.NET MVC API Reference Folder](/api/Kendo.Mvc/AggregateFunction)
 * [Telerik UI for ASP.NET MVC HtmlHelpers Folder]({% slug overview_autocompletehelper_aspnetmvc %})
 * [Tutorials on Telerik UI for ASP.NET MVC]({% slug overview_timeefficiencyapp_aspnetmvc6 %})
 * [Telerik UI for ASP.NET MVC Troubleshooting]({% slug troubleshooting_aspnetmvc %})

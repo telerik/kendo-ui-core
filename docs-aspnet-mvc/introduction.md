@@ -8,7 +8,7 @@ position: 1
 
 # Telerik<sup>®</sup> UI for ASP.NET MVC by Progress
 
-[Telerik UI for ASP.NET MVC](http://www.telerik.com/aspnet-mvc) is a set of server-side wrappers that allows using the [Kendo UI widgets]({% slug welcometo_kendoui %}) from C# or VB.NET code.
+[Telerik UI for ASP.NET MVC](http://www.telerik.com/aspnet-mvc) is a set of server-side wrappers that allows using the [Kendo UI widgets](../kendo-ui/introduction) from C# or VB.NET code.
 
 This article shows how to download Telerik UI for ASP.NET MVC, install it and then run a sample ASP.NET MVC application.
 
@@ -65,7 +65,7 @@ Telerik UI for ASP.NET MVC contains the following directories:
 * `js`&mdash;These are the minified JavaScript files.
 * `styles`&mdash;The minified CSS files and images used by the themes.
 * `src`&mdash;The complete JavaScript, CSS, and C# source code. Note that this directory is not available in the trial version.
-* `spreadsheet`&mdash;[`Telerik.Web.Spreadsheet`]({% slug serverside_processing_spreadsheet_widget %}) assembly and its dependencies from Telerik Document Processing library.
+* `spreadsheet`&mdash;[`Telerik.Web.Spreadsheet`](../kendo-ui/controls/data-management/spreadsheet/import-and-export-data/server-side-processing) assembly and its dependencies from Telerik Document Processing library.
 * `wrappers\aspnetmvc\Binaries\MVC3`&mdash;The assemblies for the ASP.NET MVC 3 applications.
 * `wrappers\aspnetmvc\Binaries\MVC4`&mdash;The assemblies for the ASP.NET MVC 4 applications.
 * `wrappers\aspnetmvc\Binaries\MVC5`&mdash;The assemblies for the ASP.NET MVC 5 applications.
@@ -99,7 +99,7 @@ Below are the steps for you to follow when running the sample application.
 
 **Figure 1 The start-up screen of the sample application**
 
-![Telerik UI for ASP.NET MVC Sample Application](/aspnet-mvc/images/demos.png)
+![Telerik UI for ASP.NET MVC Sample Application](/images/demos.png)
 
 ### Contents
 
@@ -121,7 +121,7 @@ After you run the sample application, read through the following articles, relat
 * [Use Telerik UI for ASP.NET MVC in MVC 3 Applications]({% slug aspnetmvc3_aspnetmvc %})
 * [Use Telerik UI for ASP.NET MVC in MVC 4 Applications]({% slug aspnetmvc4_aspnetmvc %})
 * [Use Telerik UI for ASP.NET MVC in MVC 5 Applications]({% slug aspnetmvc5_aspnetmvc %})
-* [Use Telerik UI for ASP.NET Core]({% slug overview_aspnetmvc6_aspnetmvc %})
+* [Use Telerik UI for ASP.NET Core](../aspnet-core/introduction)
 * [Use Telerik UI for ASP.NET MVC Visual Studio Extensions]({% slug overview_visualstudio_aspnetmvc %})
 * [Telerik UI for ASP.NET MVC Troubleshooting]({% slug troubleshooting_aspnetmvc %})
 

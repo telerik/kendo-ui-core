@@ -215,7 +215,7 @@ When the Menu items are removed because of lacking permissions, a parent item ma
 
 ## Event Handling
 
-You can subscribe to all Menu [events](/api/javascript/ui/menu#events).
+You can subscribe to all Menu [events](../../../kendo-ui/api/javascript/ui/menu#events).
 
 ### By Handler Name
 
@@ -291,7 +291,7 @@ The example below demonstrates how to subscribe to events by a template delegate
 
 ### Existing Instances
 
-You can reference an existing Kendo UI Menu instance via [`jQuery.data()`](http://api.jquery.com/jQuery.data/). Once a reference is established, use the [Menu API](/api/javascript/ui/menu#methods) to control its behavior.
+You can reference an existing Kendo UI Menu instance via [`jQuery.data()`](http://api.jquery.com/jQuery.data/). Once a reference is established, use the [Menu API](../../../kendo-ui/api/javascript/ui/menu#methods) to control its behavior.
 
 ###### Example
 
@@ -307,13 +307,13 @@ You can reference an existing Kendo UI Menu instance via [`jQuery.data()`](http:
 
 Other articles on Telerik UI for ASP.NET MVC and on the Menu:
 
-* [ASP.NET MVC API Reference: MenuBuilder](/api/aspnet-mvc/Kendo.Mvc.UI.Fluent/MenuBuilder)
-* [ASP.NET MVC API Reference: MenuItemBuilder](/api/aspnet-mvc/Kendo.Mvc.UI.Fluent/MenuItemBuilder)
+* [ASP.NET MVC API Reference: MenuBuilder](/api/Kendo.Mvc.UI.Fluent/MenuBuilder)
+* [ASP.NET MVC API Reference: MenuItemBuilder](/api/Kendo.Mvc.UI.Fluent/MenuItemBuilder)
 * [Overview of Telerik UI for ASP.NET MVC]({% slug overview_aspnetmvc %})
 * [Fundamentals of Telerik UI for ASP.NET MVC]({% slug fundamentals_aspnetmvc %})
 * [Scaffolding in Telerik UI for ASP.NET MVC]({% slug scaffolding_aspnetmvc %})
-* [Overview of the Kendo UI Menu Widget]({% slug overview_kendoui_menu_widget %})
-* [Telerik UI for ASP.NET MVC API Reference Folder](/api/aspnet-mvc/Kendo.Mvc/AggregateFunction)
+* [Overview of the Kendo UI Menu Widget](http://docs.telerik.com/kendo-ui/controls/navigation/menu/overview)
+* [Telerik UI for ASP.NET MVC API Reference Folder](/api/Kendo.Mvc/AggregateFunction)
 * [Telerik UI for ASP.NET MVC HtmlHelpers Folder]({% slug overview_barcodehelper_aspnetmvc %})
 * [Tutorials on Telerik UI for ASP.NET MVC]({% slug overview_timeefficiencyapp_aspnetmvc6 %})
 * [Telerik UI for ASP.NET MVC Troubleshooting]({% slug troubleshooting_aspnetmvc %})

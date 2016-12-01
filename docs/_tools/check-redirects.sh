@@ -10,7 +10,7 @@ err_count=0
 
 # List of URLs to check: <from> <to>
 urls="
-/kendo-ui/api/wrappers/jsp /kendo-ui/api/jsp/alert
+/kendo-ui/api/wrappers/jsp /kendo-ui/api/jsp/autoComplete
 /kendo-ui/api/web/grid /kendo-ui/api/javascript/ui/grid
 /kendo-ui/api/mobile/application /kendo-ui/api/javascript/mobile/application
 /kendo-ui/api/mobile/scrollview /kendo-ui/api/javascript/mobile/ui/scrollview
@@ -61,9 +61,9 @@ urls="
 /kendo-ui/tutorials/accessibility/accessibility-overview /kendo-ui/accessibility/accessibility-overview
 /kendo-ui/getting-started/introduction /kendo-ui/introduction
 /kendo-ui/using-kendo-with/introduction /kendo-ui/introduction
-/kendo-ui/tutorials/asp.net/kendo-music-store/kendo-music-store-intro /kendo-ui/aspnet-mvc/tutorials/tutorial-kendo-music-store/kendo-music-store-intro
-/kendo-ui/aspnet-mvc/tutorial-kendo-music-store/kendo-music-store-intro /kendo-ui/aspnet-mvc/tutorials/tutorial-kendo-music-store/kendo-music-store-intro
-/kendo-ui/aspnet-mvc/tutorial-saleshub/kendo-saleshub-intro /kendo-ui/aspnet-mvc/tutorials/tutorial-saleshub/kendo-saleshub-intro
+/kendo-ui/tutorials/asp.net/kendo-music-store/kendo-music-store-intro /aspnet-mvc/tutorials/tutorial-kendo-music-store/kendo-music-store-intro
+/kendo-ui/aspnet-mvc/tutorial-kendo-music-store/kendo-music-store-intro /aspnet-mvc/tutorials/tutorial-kendo-music-store/kendo-music-store-intro
+/kendo-ui/aspnet-mvc/tutorial-saleshub/kendo-saleshub-intro /aspnet-mvc/tutorials/tutorial-saleshub/kendo-saleshub-intro
 /kendo-ui/ /kendo-ui/introduction
 /kendo-ui/api/javascript/ui/RangeSlider /kendo-ui/api/javascript/ui/rangeslider
 /kendo-ui/api/javascript/ui/Splitter /kendo-ui/api/javascript/ui/splitter

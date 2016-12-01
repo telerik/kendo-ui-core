@@ -3518,7 +3518,7 @@ If set to true the newly selected items will be added to the existing selection.
 
 ### selectAll
 
-Selects all shapes and connections.
+Selects all shapes and the connections between them (without the point-to-point connections).
 
 ### selectArea
 

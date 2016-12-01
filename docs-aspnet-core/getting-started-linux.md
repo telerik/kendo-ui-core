@@ -1,13 +1,13 @@
 ---
-title: Get Started on Linux
-page_title: Get Started on Linux | Telerik UI for ASP.NET Core
+title: Getting Started on Linux
+page_title: Getting Started on Linux | Telerik UI for ASP.NET Core
 description: "Learn the basics when working with Telerik UI for ASP.NET Core (aka MVC 6 or ASP.NET Core MVC) on Linux."
-previous_url: /aspnet-mvc/aspnetmvc-apps/mvc-6/getting-started-linux, aspnet-mvc/mvc-6/getting-started-linux
+previous_url: /aspnetmvc-apps/mvc-6/getting-started-linux, /mvc-6/getting-started-linux
 slug: gettingstartedlinux_aspnetmvc6_aspnetmvc
 position: 3
 ---
 
-# Get Started on Linux
+# Getting Started on Linux
 
 This article demonstrates how to configure an ASP.NET Core project that enables you to use Telerik UI for ASP.NET MVC on Linux.
 
@@ -68,7 +68,7 @@ Below are listed the steps for you to follow when creating an ASP.NET Core web s
 
         yo aspnet
 
-As a result, the response demonstrated in the example below is shown.
+The example below demonstrates a similar result to the response that is expected to show.
 
 ###### Example
 
@@ -97,21 +97,21 @@ As a result, the response demonstrated in the example below is shown.
 
 **Step 6.** Select the **Web Application Basic** option by using the keyboard arrow keys and press `Enter`. Create the name of the new application. Note that you can skip this step and use the default name by pressing `Enter`. After setting the name, the generator creates the desired folder and the selected application.
 
-As a result, the response demonstrated in the example below is shown.
+> **Important**
+>
+> Yeoman gets improved in time and the steps above might change. For more information, refer to the [Yeoman resources](http://yeoman.io/).
 
-###### Example
-
-        Your project is now created, you can use the following commands to get going
-            cd "WebApplicationBasic"
-            dnu restore
-            dnu build (optional, build will also happen when it's run)
-            dnx web
+When finished, the scaffolded project should be ready.
 
 **Step 7.** Navigate to the created folder and execute the command from the example below.
 
+> **Important**
+>
+> For up-to-date commands, refer to the [guide on getting started with .NET Core](https://docs.asp.net/en/latest/getting-started.html)
+
 ###### Example
 
-        dnu restore
+        dotnet restore
 
 As a result, the packages are downloaded from NuGet. The end of the response looks similar to the one demonstrated in the example below.
 
@@ -119,15 +119,13 @@ As a result, the packages are downloaded from NuGet. The end of the response loo
 
         Restore complete, 10070ms elapsed
 
-        Feeds used:
-            https://api.nuget.org/v3-flatcontainer/
         kendo@kendo-docker:~/Projects/WebApplicationBasic$
 
 **Step 8.** Start the application by using the command from the example below.
 
 ###### Example
 
-        dnx web
+        dotnet run
 
 As a result, the response demonstrated in the example below is delivered.
 
@@ -145,20 +143,20 @@ As a result, the response demonstrated in the example below is delivered.
 
 ### Add NuGet Packages
 
-**Step 1.** Open the `project.json` file, using a text editor, and add the `Telerik.UI.for.AspNet.Core` dependency.
+**Step 1.** Open the `project.json` file, using a text editor, add the `Telerik.UI.for.AspNet.Core` dependency, and replace `productVersion` with an actual **Telerik UI for AspNet Core** version&mdash;for example, `2016.3.914`.
 
 ###### Example
 
         "dependencies": {
             ...
-            "Telerik.UI.for.AspNet.Core": "{{ site.mvcCoreVersion }}"
+            "Telerik.UI.for.AspNet.Core": "productVersion"
         }
 
 **Step 2.** Navigate to the project folder and restore the packages again.
 
 ###### Example
 
-        dnu restore
+        dotnet restore
 
 **Step 3.** Open `Startup.cs`, using a text editor (IDE) and update it as described below.
 
@@ -166,6 +164,9 @@ Locate the `ConfigureServices` method and add a call to `services.AddKendo` at t
 
 ###### Example
 
+        ...
+        using Newtonsoft.Json.Serialization;
+        ...
         public void ConfigureServices(IServiceCollection services)
         {
             ...
@@ -207,7 +208,7 @@ Copy the `js` and `styles` folders from the `telerik.ui.for.aspnetmvc` archive t
 
 ![Kendo UI resources](images/resources.png)
 
-* **[Kendo UI Professional Bower package installation]({% slug kendoui_bower_packages_kendoui_installation %})**
+* **[Kendo UI Professional Bower package installation](../kendo-ui/intro/installation/bower-install)**
 
 **Step 6.** Register Kendo UI styles and scripts in `~/Views/Shared/Layout.cshtml`.
 
@@ -248,7 +249,7 @@ Copy the `js` and `styles` folders from the `telerik.ui.for.aspnetmvc` archive t
 
 ###### Example
 
-        dnx web
+        dotnet run
 
 Now that all is done, you can see the sample page.
 

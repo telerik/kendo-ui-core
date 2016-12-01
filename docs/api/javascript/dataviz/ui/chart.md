@@ -3408,7 +3408,7 @@ The unique axis name. Used to associate a series with a category axis using the 
     <script>
     $("#chart").kendoChart({
       categoryAxis: [
-        { name: "month", categories: [ "Jan", "Feb" ] },
+        { name: "month", categories: [ "Jan", "Feb", "Mar" ] },
         { name: "year", categories: [ 2012 ] }
       ],
       series: [
@@ -9616,6 +9616,27 @@ The width of the border in pixels.
     });
     </script>
 
+### series.categoryAxis `String`
+
+The name of the category axis to use for the series.
+
+The first axis will be used if no `categoryAxis` is specified.
+
+#### Example - set the category axis name
+
+    <div id="chart"></div>
+    <script>
+    $("#chart").kendoChart({
+      categoryAxis: [
+        { name: "month", categories: [ "Jan", "Feb", "Mar" ] },
+        { name: "year", categories: [ 2012 ] }
+      ],
+      series: [
+        { categoryAxis: "month", data: [1, 2, 3] }
+      ]
+    });
+    </script>
+
 ### series.categoryField `String` *(default: "category")*
 
 The data item field which contains the category name or date.
@@ -12392,6 +12413,24 @@ The background color of the series markers.
         markers: {
           visible: true,
           background: "green"
+        },
+        data: [1, 2, 3]
+      }]
+    });
+    </script>
+
+#### Example - set the chart series markers background via function
+
+    <div id="chart"></div>
+    <script>
+    $("#chart").kendoChart({
+      series: [{
+        type: "line",
+        markers: {
+          visible: true,
+          background: function (e) {
+            return e.series.color; // will match the series color
+          }
         },
         data: [1, 2, 3]
       }]
@@ -32648,7 +32687,7 @@ The drawing surface of the Chart. See [Drawing API](http://docs.telerik.com/kend
                 type: "column", data: [1, 2]
             }],
             render: function(e) {
-                e.surface.bind("mouseenter", onShapeMouseEnter);
+                e.sender.surface.bind("mouseenter", onShapeMouseEnter);
             }
         });
 

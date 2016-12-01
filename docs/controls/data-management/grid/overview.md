@@ -161,7 +161,7 @@ The example below demonstrates how to access an existing Grid instance.
 * [Export of the Grid to Excel]({% slug exporting_excel_kendoui_grid_widget %})
 * [Export of the Grid in PDF]({% slug exporting_pdf_kendoui_grid_widget %})
 * [Printing of the Grid]({% slug exporting_pdf_kendoui_grid_widget %})
-* [Overview of the ASP.NET MVC HtmlHelper Extension for the Grid Widget]({% slug overview_gridhelper_aspnetmvc %})
+* [Overview of the ASP.NET MVC HtmlHelper Extension for the Grid Widget](http://docs.telerik.com/aspnet-mvc/helpers/grid/overview)
 * [Overview of the Grid JSP Tag]({% slug overview_grid_uiforjsp %})
 * [Overview of the Grid PHP Class]({% slug overview_grid_uiforphp %})
 

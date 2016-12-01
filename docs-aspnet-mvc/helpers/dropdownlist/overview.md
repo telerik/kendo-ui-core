@@ -333,11 +333,11 @@ For more information, refer to the [demo on grouping](http://demos.telerik.com/a
 
 > **Important**
 >
-> The data source sorts the grouped data either in ascending or descending order. If you want to persist a specific group order, use the [server grouping feature](/api/javascript/data/datasource#configuration-serverGrouping). Use the DataSource `ServerGrouping` method to define the `serverGrouping` option.
+> The data source sorts the grouped data either in ascending or descending order. If you want to persist a specific group order, use the [server grouping feature](../../../kendo-ui/api/javascript/data/datasource#configuration-serverGrouping). Use the DataSource `ServerGrouping` method to define the `serverGrouping` option.
 
 ## Event Handling
 
-You can subscribe to all DropDownList [events](/api/javascript/ui/dropdownlist#events).
+You can subscribe to all DropDownList [events](../../../kendo-ui/api/javascript/ui/dropdownlist#events).
 
 ### By Handler Name
 
@@ -414,7 +414,7 @@ The examples below demonstrates how to subscribe to events by a handler name.
 
 ### Existing Instances
 
-You can reference an existing Kendo UI DropDownList instance via [`jQuery.data()`](http://api.jquery.com/jQuery.data/). Once a reference is established, use the [DropDownList API](/api/javascript/ui/dropdownlist#methods) to control its behavior.
+You can reference an existing Kendo UI DropDownList instance via [`jQuery.data()`](http://api.jquery.com/jQuery.data/). Once a reference is established, use the [DropDownList API](../../../kendo-ui/api/javascript/ui/dropdownlist#methods) to control its behavior.
 
 ###### Example
 
@@ -430,15 +430,15 @@ You can reference an existing Kendo UI DropDownList instance via [`jQuery.data()
 
 Other articles on Telerik UI for ASP.NET MVC and on the DropDownList:
 
-* [ASP.NET MVC API Reference: DropDownListBuilder](/api/aspnet-mvc/Kendo.Mvc.UI.Fluent/DropDownListBuilder)
+* [ASP.NET MVC API Reference: DropDownListBuilder](/api/Kendo.Mvc.UI.Fluent/DropDownListBuilder)
 * [How to Cascade DropDownLists Using WebApi Service in ASP.NET MVC Apps]({% slug howto_cascadeddlusingwebapiservice_ddlaspnetmvc %})
 * [How to Cascade DropDownLists with Enabled Virtualization in ASP.NET MVC Apps]({% slug howto_cascadeddlenabledvirtualization_ddlaspnetmvc %})
 * [How to Use Custom DataSource to Bind to ToDataSourceResult Output in ASP.NET MVC Apps]({% slug howto_usecustomdatasource_bindtodatasourceoutput_ddlaspnetmvc %})
 * [Overview of Telerik UI for ASP.NET MVC]({% slug overview_aspnetmvc %})
 * [Fundamentals of Telerik UI for ASP.NET MVC]({% slug fundamentals_aspnetmvc %})
 * [Scaffolding in Telerik UI for ASP.NET MVC]({% slug scaffolding_aspnetmvc %})
-* [Overview of the Kendo UI DropDownList Widget]({% slug overview_kendoui_dropdownlist_widget %})
-* [Telerik UI for ASP.NET MVC API Reference Folder](/api/aspnet-mvc/Kendo.Mvc/AggregateFunction)
+* [Overview of the Kendo UI DropDownList Widget](http://docs.telerik.com/kendo-ui/controls/editors/dropdownlist/overview)
+* [Telerik UI for ASP.NET MVC API Reference Folder](/api/Kendo.Mvc/AggregateFunction)
 * [Telerik UI for ASP.NET MVC HtmlHelpers Folder]({% slug overview_barcodehelper_aspnetmvc %})
 * [Tutorials on Telerik UI for ASP.NET MVC]({% slug overview_timeefficiencyapp_aspnetmvc6 %})
 * [Telerik UI for ASP.NET MVC Troubleshooting]({% slug troubleshooting_aspnetmvc %})

@@ -1,6 +1,7 @@
 (function() {
 
 var tabstrip;
+var mobileOs = false;
 
 function createTabStrip(options) {
     tabstrip = new kendo.ui.TabStrip("#tabstrip", $.extend({
@@ -14,8 +15,7 @@ function createNonScrollableTabStrip(options) {
     }, options));
 }
 
-module('tabstrip scrolling', {
-    setup: function() {
+function setupDom() {
         kendo.effects.disable();
 
         QUnit.fixture.append(
@@ -55,6 +55,11 @@ module('tabstrip scrolling', {
             '    <div>content 2</div>' +
             '</div>'
         );
+}
+
+module('tabstrip scrolling', {
+    setup: function() {
+        setupDom();
     },
 
     teardown: function () {
@@ -198,5 +203,41 @@ test('right scrolling button appears if browser window width is reduced', 2, fun
 
     ok(buttonNext.is(":visible"));
 });
+
+module('tabstrip mobile scrolling', {
+    setup: function() {
+        setupDom();
+        mobileOs = kendo.support.mobileOS;
+        kendo.support.mobileOS = true;
+    },
+
+    teardown: function () {
+        kendo.effects.enable();
+        tabstrip.destroy();
+        kendo.support.mobileOS = mobileOs;
+    }
+});
+
+test('right scrolling button scrolls to the right by delta when clicked', 1, function () {
+    createTabStrip();
+
+    tabstrip.tabGroup.scrollLeft(0);
+    tabstrip.wrapper.children(".k-tabstrip-next").trigger("touchstart").trigger("touchend");
+    tabstrip.tabGroup.finish();
+
+    equal(tabstrip.tabGroup.scrollLeft(), tabstrip.options.scrollable.distance);
+});
+
+test('left scrolling button scrolls to the left by delta when clicked', 1, function () {
+    createTabStrip();
+
+    tabstrip.tabGroup.scrollLeft(999);
+    var initialScrollPosition = tabstrip.tabGroup.scrollLeft();
+    tabstrip.wrapper.children(".k-tabstrip-prev").trigger("touchstart").trigger("touchend");
+    tabstrip.tabGroup.finish();
+
+    equal(tabstrip.tabGroup.scrollLeft(), initialScrollPosition - tabstrip.options.scrollable.distance);
+});
+
 
 })();

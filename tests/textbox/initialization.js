@@ -37,8 +37,8 @@
         ok(downArrow.hasClass("k-link-decrease"));
         equal(downArrow.attr("aria-label"), textbox.options.downArrowText);
 
-        ok(upArrow.children(":first").hasClass("k-icon k-i-arrow-n"));
-        ok(downArrow.children(":first").hasClass("k-icon k-i-arrow-s"));
+        ok(upArrow.children(":first").hasClass("k-icon k-i-arrow-60-up"));
+        ok(downArrow.children(":first").hasClass("k-icon k-i-arrow-60-down"));
         equal(upArrow.children(":first").html(), "");
         equal(downArrow.children(":first").html(), "");
     });

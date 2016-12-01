@@ -2,7 +2,7 @@
 title: Known Issues
 page_title: Known Issues | Telerik UI for ASP.NET Core
 description: "Read about known issues when using Telerik UI for ASP.NET MVC in ASP.NET 5 and ASP.NET Core (aka MVC 6 or ASP.NET Core MVC)."
-previous_url: /aspnet-mvc/aspnetmvc-apps/mvc-6/known-issues, /aspnet-mvc/mvc-6/known-issues
+previous_url: /aspnetmvc-apps/mvc-6/known-issues, /mvc-6/known-issues
 slug: knownissues_aspnetmvc6_aspnetmvc
 position: 5
 ---
@@ -22,7 +22,7 @@ This articles summarizes all known issues related to Telerik UI for ASP.NET MVC,
 
 - Limited set of helpers. Interim releases will add more widgets.
 - Localization is a work in progress. For a discussion, refer to [aspnet/Home/issues/1124](https://github.com/aspnet/Home/issues/1142).
-- [`Deferred()`](/aspnet-mvc/fundamentals.html#deferred-initialization) can be invoked only as a last setting.
+- [`Deferred()`](http://docs.telerik.com/aspnet-mvc/getting-started/fundamentals#configuration-Deferred) can be invoked only as a last setting.
 
 ###### Example
 

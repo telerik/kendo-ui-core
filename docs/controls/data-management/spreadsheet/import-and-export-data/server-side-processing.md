@@ -14,7 +14,7 @@ To export huge datasets to Excel, a well-suited solution is the new [RadSpreadSt
 
 For examples on how to export Excel files, refer to the [RadSpreadProcessing library](http://docs.telerik.com/devtools/document-processing/libraries/radspreadprocessing/overview).
 
-For more information on the Spreadsheet server-side processing, refer to [this article]({% slug spreadsheet_processing_spreadsheet_mvc %}).
+For more information on the Spreadsheet server-side processing, refer to [this article](http://docs.telerik.com/aspnet-mvc/helpers/spreadsheet/spreadsheet-processing).
 
 ## See Also
 

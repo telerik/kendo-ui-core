@@ -742,6 +742,10 @@ The function to be throttled.
 
 The amount of time that needs to pass before a subsequent function call is made.
 
+#### Returns
+
+`Function` the throttled function
+
 ### touchScroller
 
 Enables kinetic scrolling on touch devices

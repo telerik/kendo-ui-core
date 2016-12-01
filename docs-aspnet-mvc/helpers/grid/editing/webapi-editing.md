@@ -2,7 +2,7 @@
 title: Web API Editing
 page_title: Web API Editing | Kendo UI Grid HtmlHelper
 description: "Implement CRUD data operations with a Web API controller for the Kendo UI Grid for ASP.NET MVC."
-previous_url: /aspnet-mvc/helpers/grid/webapi-editing
+previous_url: /helpers/grid/webapi-editing
 slug: webapi_editing_grid_aspnetmvc
 position: 3
 ---
@@ -23,7 +23,7 @@ Below are listed the steps for you to follow when implementing the CRUD data ope
 
 **Figure 1. A new entity data model**
 
-![New entity data model](/aspnet-mvc/helpers/grid/images/grid-entity-data-model.png)
+![New entity data model](/helpers/grid/images/grid-entity-data-model.png)
 
 **Step 3** Select **Generate from database** and click **Next**. Configure a connection to the Northwind database. Click **Next**.
 
@@ -31,7 +31,7 @@ Below are listed the steps for you to follow when implementing the CRUD data ope
 
 **Figure 2. Choosing the connection**
 
-![Choose the Products table](/aspnet-mvc/helpers/grid/images/grid-database-objects.png)
+![Choose the Products table](/helpers/grid/images/grid-database-objects.png)
 
 **Step 4** Right click the `Controllers` folder in Visual Studio solution explorer. Select **Add** > **Controller**.
 
@@ -39,7 +39,7 @@ Below are listed the steps for you to follow when implementing the CRUD data ope
 
 **Figure 2. Adding the Controller**
 
-![Add Controller](/aspnet-mvc/helpers/grid/images/grid-api-controller.png)
+![Add Controller](/helpers/grid/images/grid-api-controller.png)
 
 **Step 6** Open `Controllers/ProductsController.cs`.
 
@@ -151,7 +151,7 @@ Below are listed the steps for you to follow when implementing the CRUD data ope
 
 **Figure 3. The final result**
 
-![Final result](/aspnet-mvc/helpers/grid/images/grid-inline-grid.png)
+![Final result](/helpers/grid/images/grid-inline-grid.png)
 
 ## See Also
 
@@ -165,15 +165,15 @@ Other articles on the Kendo UI Grid for ASP.NET MVC:
 * [Binding of the Grid HtmlHelper]({% slug ajaxbinding_grid_aspnetmvc %})
 * [Templating of the Grid HtmlHelper]({% slug clientdetailtemplate_grid_aspnetmvc %})
 * [Troubleshooting of the Grid HtmlHelper]({% slug troubleshoot_gridhelper_aspnetmvc %})
-* [API Reference of the Grid HtmlHelper](/api/aspnet-mvc/Kendo.Mvc.UI.Fluent/GridBuilder)
-* [Overview of the Kendo UI Grid Widget]({% slug overview_kendoui_grid_widget %})
+* [API Reference of the Grid HtmlHelper](/api/Kendo.Mvc.UI.Fluent/GridBuilder)
+* [Overview of the Kendo UI Grid Widget](http://docs.telerik.com/kendo-ui/controls/data-management/grid/overview)
 
 Articles on Telerik UI for ASP.NET MVC:
 
 * [Overview of Telerik UI for ASP.NET MVC]({% slug overview_aspnetmvc %})
 * [Fundamentals of Telerik UI for ASP.NET MVC]({% slug fundamentals_aspnetmvc %})
 * [Scaffolding in Telerik UI for ASP.NET MVC]({% slug scaffolding_aspnetmvc %})
-* [Telerik UI for ASP.NET MVC API Reference Folder](/api/aspnet-mvc/Kendo.Mvc/AggregateFunction)
+* [Telerik UI for ASP.NET MVC API Reference Folder](/api/Kendo.Mvc/AggregateFunction)
 * [Telerik UI for ASP.NET MVC HtmlHelpers Folder]({% slug overview_barcodehelper_aspnetmvc %})
 * [Tutorials on Telerik UI for ASP.NET MVC]({% slug overview_timeefficiencyapp_aspnetmvc6 %})
 * [Telerik UI for ASP.NET MVC Troubleshooting]({% slug troubleshooting_aspnetmvc %})

@@ -961,7 +961,7 @@ var __meta__ = { // jshint ignore:line
                 }
             }
 
-            return this._getElementByIndex(element.index);
+            return element ? this._getElementByIndex(element.index) : $();
         },
 
         _clean: function() {

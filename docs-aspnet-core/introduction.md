@@ -2,7 +2,7 @@
 title: Overview
 page_title: Overview | Telerik UI for ASP.NET Core
 description: "Download and install Telerik UI for ASP.NET Core (aka MVC 6 or ASP.NET Core MVC), and run the sample application."
-previous_url: /aspnet-mvc/aspnetmvc-apps/mvc-6/introduction, /aspnet-mvc/mvc-6/introduction
+previous_url: /aspnetmvc-apps/mvc-6/introduction, /mvc-6/introduction
 slug: overview_aspnetmvc6_aspnetmvc
 position: 1
 ---
@@ -28,6 +28,7 @@ The repositories below contain source code, instructions, and issue trackers for
 - [ASP.NET Home](https://github.com/aspnet/home) on GitHub.
 - [ASP.NET MVC](https://github.com/aspnet/Mvc) main repository.
 - [ASP.NET MVC Announcements](https://github.com/aspnet/announcements/) for important changes.
+- [Telerik UI for ASP.NET Core Demos and Sample Applications](http://demos.telerik.com/aspnet-core).
 
 ## The Sample Application
 

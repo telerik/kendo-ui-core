@@ -178,14 +178,14 @@ public ActionResult Process(Telerik.Web.Spreadsheet.Workbook workbook)
 
 Other articles on Telerik UI for ASP.NET MVC and on the Spreadsheet:
 
-* [Load and Save Data as JSON]({% slug loadand_saveas_json_spreadsheet_widget %})
-* [Export to Excel]({% slug export_toexcel_spreadsheet_widget %})
-* [Overview of the Kendo UI Spreadsheet Widget]({% slug overview_spreadsheet_widget %})
+* [Load and Save Data as JSON](http://docs.telerik.com/kendo-ui/controls/data-management/spreadsheet/import-and-export-data/json)
+* [Export to Excel](http://docs.telerik.com/kendo-ui/controls/data-management/spreadsheet/import-and-export-data/export-to-excel)
+* [Overview of the Kendo UI Spreadsheet Widget](http://docs.telerik.com/kendo-ui/controls/data-management/spreadsheet/overview)
 * [Overview of the Spreadsheet HtmlHelper]({% slug overview_spreadsheethelper_aspnetmvc %})
 * [Overview of Telerik UI for ASP.NET MVC]({% slug overview_aspnetmvc %})
 * [Fundamentals of Telerik UI for ASP.NET MVC]({% slug fundamentals_aspnetmvc %})
 * [Scaffolding in Telerik UI for ASP.NET MVC]({% slug scaffolding_aspnetmvc %})
-* [Telerik UI for ASP.NET MVC API Reference Folder](/api/aspnet-mvc/Kendo.Mvc/AggregateFunction)
+* [Telerik UI for ASP.NET MVC API Reference Folder](/api/Kendo.Mvc/AggregateFunction)
 * [Telerik UI for ASP.NET MVC HtmlHelpers Folder]({% slug overview_barcodehelper_aspnetmvc %})
 * [Tutorials on Telerik UI for ASP.NET MVC]({% slug overview_timeefficiencyapp_aspnetmvc6 %})
 * [Telerik UI for ASP.NET MVC Troubleshooting]({% slug troubleshooting_aspnetmvc %})

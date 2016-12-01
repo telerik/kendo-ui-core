@@ -36,19 +36,19 @@ Below are listed the steps for you to follow when configuring the Kendo UI Grid 
 
 **Figure 1. A new entity data model**
 
-![New entity data model](/aspnet-mvc/helpers/grid/images/grid-entity-data-model.png)
+![New entity data model](/helpers/grid/images/grid-entity-data-model.png)
 
 **Step 3**  Pick the **Generate from database** option and click **Next**. Configure a connection to the Northwind database. Click **Next**.
 
 **Figure 2. Choose the connection**
 
-![Choose the connection](/aspnet-mvc/helpers/grid/images/grid-entity-data-model.png)
+![Choose the connection](/helpers/grid/images/grid-entity-data-model.png)
 
 **Step 4** Choose the **Products** table from the `Which database objects do you want to include in your model?`. Leave all other options as they are set by default. Click **Finish**.
 
 **Figure 3. Choose the Products table**
 
-![Choose the Products table](/aspnet-mvc/helpers/grid/images/grid-database-objects.png)
+![Choose the Products table](/helpers/grid/images/grid-database-objects.png)
 
 **Step 5** Open **HomeController.cs** and modify the `Index` action method.
 
@@ -106,13 +106,13 @@ Below are listed the steps for you to follow when configuring the Kendo UI Grid 
 
 **Figure 4. The final result**
 
-![Final result](/aspnet-mvc/helpers/grid/images/grid-bound-grid.png)
+![Final result](/helpers/grid/images/grid-bound-grid.png)
 
 ## Reference
 
 ### Existing Instances
 
-You can reference an existing Kendo UI Grid instance via [`jQuery.data()`](http://api.jquery.com/jQuery.data/). Once a reference is established, use the [Grid API](/api/javascript/ui/grid#methods) to control its behavior.
+You can reference an existing Kendo UI Grid instance via [`jQuery.data()`](http://api.jquery.com/jQuery.data/). Once a reference is established, use the [Grid API](../../../kendo-ui/api/javascript/ui/grid#methods) to control its behavior.
 
 ###### Example
 
@@ -134,7 +134,7 @@ You can reference an existing Kendo UI Grid instance via [`jQuery.data()`](http:
 
 ## Event Handling
 
-You can subscribe to all Grid [events](/api/javascript/ui/grid#events).
+You can subscribe to all Grid [events](../../../kendo-ui/api/javascript/ui/grid#events).
 
 ### By Handler Name
 
@@ -210,7 +210,7 @@ The example below demonstrates how to subscribe to events by a template delegate
 
 Other articles on the Kendo UI Grid for ASP.NET MVC:
 
-* [ASP.NET MVC API Reference: GridBuilder](/api/aspnet-mvc/Kendo.Mvc.UI.Fluent/GridBuilder)
+* [ASP.NET MVC API Reference: GridBuilder](/api/Kendo.Mvc.UI.Fluent/GridBuilder)
 * [Overview of the Grid HtmlHelper]({% slug overview_gridhelper_aspnetmvc %})
 * [Configuration of the Grid HtmlHelper]({% slug configuration_gridhelper_aspnetmvc %})
 * [Scaffolding]({% slug scaffoldinggrid_aspnetmvc %})
@@ -220,15 +220,15 @@ Other articles on the Kendo UI Grid for ASP.NET MVC:
 * [Editing of the Grid HtmlHelper]({% slug ajaxediting_grid_aspnetmvc %})
 * [Templating of the Grid HtmlHelper]({% slug clientdetailtemplate_grid_aspnetmvc %})
 * [Troubleshooting for the Grid HtmlHelper]({% slug troubleshoot_gridhelper_aspnetmvc %})
-* [API Reference of the Grid HtmlHelper](/api/aspnet-mvc/Kendo.Mvc.UI.Fluent/GridBuilder)
-* [Overview of the Kendo UI Grid Widget]({% slug overview_kendoui_grid_widget %})
+* [API Reference of the Grid HtmlHelper](/api/Kendo.Mvc.UI.Fluent/GridBuilder)
+* [Overview of the Kendo UI Grid Widget](http://docs.telerik.com/kendo-ui/controls/data-management/grid/overview)
 
 Articles on Telerik UI for ASP.NET MVC:
 
 * [Overview of Telerik UI for ASP.NET MVC]({% slug overview_aspnetmvc %})
 * [Fundamentals of Telerik UI for ASP.NET MVC]({% slug fundamentals_aspnetmvc %})
 * [Scaffolding in Telerik UI for ASP.NET MVC]({% slug scaffolding_aspnetmvc %})
-* [Telerik UI for ASP.NET MVC API Reference Folder](/api/aspnet-mvc/Kendo.Mvc/AggregateFunction)
+* [Telerik UI for ASP.NET MVC API Reference Folder](/api/Kendo.Mvc/AggregateFunction)
 * [Telerik UI for ASP.NET MVC HtmlHelpers Folder]({% slug overview_barcodehelper_aspnetmvc %})
 * [Tutorials on Telerik UI for ASP.NET MVC]({% slug overview_timeefficiencyapp_aspnetmvc6 %})
 * [Telerik UI for ASP.NET MVC Troubleshooting]({% slug troubleshooting_aspnetmvc %})

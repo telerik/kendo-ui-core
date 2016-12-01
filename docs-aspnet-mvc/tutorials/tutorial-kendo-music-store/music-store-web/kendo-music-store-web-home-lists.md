@@ -16,7 +16,7 @@ This page is contained in the `Views\Home\Index.cshtml` and `Scripts\App\home-in
 
 **Figure 1. A snapshot of the Kendo UI Music Store main lists**
 
-![kendo-music-store-web-main-lists-screenshot](/aspnet-mvc/tutorial-kendo-music-store/music-store-web/images/kendo-music-store-web-main-lists-screenshot.png)
+![kendo-music-store-web-main-lists-screenshot](/tutorials/tutorial-kendo-music-store/music-store-web/images/kendo-music-store-web-main-lists-screenshot.png)
 
 To implement the lists of the **Featured Artist** and **Top Selling** albums, start with simple HTML markup to represent the two ListView widgets.
 

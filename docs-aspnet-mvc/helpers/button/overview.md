@@ -228,24 +228,24 @@ The example below demonstrates how to use `.Enable()`.
             .Content("Disabled button") %>
 ```
 
-For more information on the [`enable` method of the Button](/api/javascript/ui/button#methods-enable), refer to the [API of the Button control](/api/javascript/ui/button).
+For more information on the [`enable` method of the Button](/kendo-ui/api/javascript/ui/button#methods-enable), refer to the [API of the Button control](/kendo-ui/api/javascript/ui/button).
 
 ## Reference
 
 ### Existing Instances
 
-For more information on how to access an instance, refer to the [introductory article on the Button]({% slug overview_kendoui_button_widget %}).
+For more information on how to access an instance, refer to the [introductory article on the Button](http://docs.telerik.com/kendo-ui/controls/navigation/button/overview).
 
 ## See Also
 
 Other articles on Telerik UI for ASP.NET MVC and on the Button:
 
-* [ASP.NET MVC API Reference: ButtonBuilder](/api/aspnet-mvc/Kendo.Mvc.UI.Fluent/ButtonBuilder)
+* [ASP.NET MVC API Reference: ButtonBuilder](/api/Kendo.Mvc.UI.Fluent/ButtonBuilder)
 * [Overview of Telerik UI for ASP.NET MVC]({% slug overview_aspnetmvc %})
 * [Fundamentals of Telerik UI for ASP.NET MVC]({% slug fundamentals_aspnetmvc %})
 * [Scaffolding in Telerik UI for ASP.NET MVC]({% slug scaffolding_aspnetmvc %})
-* [Overview of the Kendo UI Button Widget]({% slug overview_kendoui_button_widget %})
-* [Telerik UI for ASP.NET MVC API Reference Folder](/api/aspnet-mvc/Kendo.Mvc/AggregateFunction)
+* [Overview of the Kendo UI Button Widget](http://docs.telerik.com/kendo-ui/controls/navigation/button/overview)
+* [Telerik UI for ASP.NET MVC API Reference Folder](/api/Kendo.Mvc/AggregateFunction)
 * [Telerik UI for ASP.NET MVC HtmlHelpers Folder]({% slug overview_autocompletehelper_aspnetmvc %})
 * [Tutorials on Telerik UI for ASP.NET MVC]({% slug overview_timeefficiencyapp_aspnetmvc6 %})
 * [Telerik UI for ASP.NET MVC Troubleshooting]({% slug troubleshooting_aspnetmvc %})

@@ -2,7 +2,7 @@
 title: Overview
 page_title: Overview | Hybrid UI SplitView HtmlHelper
 description: "Get started with the server-side wrapper for the hybrid Kendo UI SplitView widget for ASP.NET MVC."
-previous_url: /aspnet-mvc/helpers/mobilesplitview/overview
+previous_url: /helpers/mobilesplitview/overview
 slug: overview_hybridsplitview_aspnetmvc
 position: 1
 ---
@@ -115,7 +115,7 @@ Below are listed the steps for you to follow when configuring the hybrid Kendo U
 
 ## Event Handling
 
-You can subscribe to all hybrid SplitView [events](/api/javascript/mobile/ui/splitview#events).
+You can subscribe to all hybrid SplitView [events](../../../../kendo-ui/api/javascript/mobile/ui/splitview#events).
 
 ### By Handler Name
 
@@ -184,7 +184,7 @@ The examples below demonstrates how to subscribe to events by a handler name.
 
 ### Instances
 
-You can reference a hybrid SplitView instance by using the [jQuery.data()](http://api.jquery.com/jQuery.data/) method and the value specified via the `Name()` method. Once a reference is established, use the [hybrid SplitView API](/api/javascript/mobile/ui/splitview#methods) to control its behavior.
+You can reference a hybrid SplitView instance by using the [jQuery.data()](http://api.jquery.com/jQuery.data/) method and the value specified via the `Name()` method. Once a reference is established, use the [hybrid SplitView API](../../../../kendo-ui/api/javascript/mobile/ui/splitview#methods) to control its behavior.
 
 ###### Example
 
@@ -213,12 +213,12 @@ You can reference a hybrid SplitView instance by using the [jQuery.data()](http:
 
 Other articles on Telerik UI for ASP.NET MVC and on the SplitView:
 
-* [ASP.NET MVC API Reference: SplitViewBuilder](/api/aspnet-mvc/Kendo.Mvc.UI.Fluent/MobileSplitViewBuilder)
-* [Overview of the Hybrid UI SplitView Widget]({% slug overview_hybridsplitview %})
+* [ASP.NET MVC API Reference: SplitViewBuilder](/api/Kendo.Mvc.UI.Fluent/MobileSplitViewBuilder)
+* [Overview of the Hybrid UI SplitView Widget](http://docs.telerik.com/kendo-ui/controls/hybrid/splitview/splitview)
 * [Overview of Telerik UI for ASP.NET MVC]({% slug overview_aspnetmvc %})
 * [Fundamentals of Telerik UI for ASP.NET MVC]({% slug fundamentals_aspnetmvc %})
 * [Scaffolding in Telerik UI for ASP.NET MVC]({% slug scaffolding_aspnetmvc %})
-* [Telerik UI for ASP.NET MVC API Reference Folder](/api/aspnet-mvc/Kendo.Mvc/AggregateFunction)
+* [Telerik UI for ASP.NET MVC API Reference Folder](/api/Kendo.Mvc/AggregateFunction)
 * [Telerik UI for ASP.NET MVC HtmlHelpers Folder]({% slug overview_barcodehelper_aspnetmvc %})
 * [Tutorials on Telerik UI for ASP.NET MVC]({% slug overview_timeefficiencyapp_aspnetmvc6 %})
 * [Telerik UI for ASP.NET MVC Troubleshooting]({% slug troubleshooting_aspnetmvc %})

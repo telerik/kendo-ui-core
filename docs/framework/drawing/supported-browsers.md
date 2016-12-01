@@ -20,9 +20,9 @@ Surfaces are listed in their order of preference. You can request a specific [`t
 | Canvas  | 10+  | ✓     | ✓       | ✓      | ✓   | ✓
 | VML     | 7+   | ✕     | ✕       | ✕      | ✕   | ✕
 
-## PDF Output
+## PDF Export
 
-Generating PDF files is supported in Internet Explorer 9 and later and in all other major desktop browsers.
+For more information on the provided [browser support]({% slug wbe_browserand_operating_system_support %}), refer to the section on [PDF export]({% slug wbe_browserand_operating_system_support %}#pdf-export).
 
 ## See Also
 

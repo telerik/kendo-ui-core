@@ -29,6 +29,21 @@ Applicable only for the HSV selector, when a [`pallete`](#configuration-palette)
     })
     </script>
 
+### clearButton `Boolean` *(default: false)*
+
+Specifies whether the widget should display the 'Clear color' button.
+
+Applicable only for the HSV selector, when a [`pallete`](#configuration-palette) is not specified.
+
+#### Example
+
+    <input id="colorpicker" type="color" />
+    <script>
+    $("#colorpicker").kendoColorPicker({
+      clearButton: false
+    });
+    </script>
+
 ### columns `Number`
 
 The number of columns to show in the color dropdown when a [`pallete`](#configuration-palette) is specified.

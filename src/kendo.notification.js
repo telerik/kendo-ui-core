@@ -7,7 +7,13 @@ var __meta__ = { // jshint ignore:line
     name: "Notification",
     category: "web",
     description: "The Notification widget displays user alerts.",
-    depends: [ "core", "popup" ]
+    depends: [ "core", "popup" ],
+    features: [ {
+        id: "notification-fx",
+        name: "Animation",
+        description: "Support for animation",
+        depends: [ "fx" ]
+    } ]
 };
 
 (function($, undefined) {

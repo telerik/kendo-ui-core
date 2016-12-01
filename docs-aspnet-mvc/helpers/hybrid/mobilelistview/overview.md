@@ -2,7 +2,7 @@
 title: Overview
 page_title: Overview | Hybrid UI ListView HtmlHelper
 description: "Get started with the server-side wrapper for the hybrid Kendo UI ListView widget for ASP.NET MVC."
-previous_url: /aspnet-mvc/helpers/mobilelistview/overview
+previous_url: /helpers/mobilelistview/overview
 slug: overview_hybridlistview_aspnetmvc
 position: 1
 ---
@@ -228,7 +228,7 @@ Below are listed the steps for you to follow when configuring the hybrid Kendo U
 
 ### Instances
 
-You can reference a hybrid Layout instance by using the [jQuery.data()](http://api.jquery.com/jQuery.data/) method and the value specified through the `Name()` method. Once a reference is established, use the [hybrid ListView API](/api/javascript/mobile/ui/listview#methods) to control its behavior.
+You can reference a hybrid Layout instance by using the [jQuery.data()](http://api.jquery.com/jQuery.data/) method and the value specified through the `Name()` method. Once a reference is established, use the [hybrid ListView API](../../../../kendo-ui/api/javascript/mobile/ui/listview#methods) to control its behavior.
 
 ###### Example
 
@@ -244,7 +244,7 @@ You can reference a hybrid Layout instance by using the [jQuery.data()](http://a
 
 ## Event Handling
 
-You can subscribe to all hybrid ListView [events](/api/javascript/mobile/ui/listview#events).
+You can subscribe to all hybrid ListView [events](../../../../kendo-ui/api/javascript/mobile/ui/listview#events).
 
 ### By Handler Name
 
@@ -287,12 +287,12 @@ The examples below demonstrates how to subscribe to events by a handler name.
 
 Other articles on Telerik UI for ASP.NET MVC and on the ListView:
 
-* [ASP.NET MVC API Reference: Hybrid UI ListViewBuilder](/api/aspnet-mvc/Kendo.Mvc.UI.Fluent/MobileListViewBuilder)
-* [Overview of the Hybrid UI ListView Widget]({% slug overview_hybridlistview %})
+* [ASP.NET MVC API Reference: Hybrid UI ListViewBuilder](/api/Kendo.Mvc.UI.Fluent/MobileListViewBuilder)
+* [Overview of the Hybrid UI ListView Widget](http://docs.telerik.com/kendo-ui/controls/hybrid/listview/overview)
 * [Overview of Telerik UI for ASP.NET MVC]({% slug overview_aspnetmvc %})
 * [Fundamentals of Telerik UI for ASP.NET MVC]({% slug fundamentals_aspnetmvc %})
 * [Scaffolding in Telerik UI for ASP.NET MVC]({% slug scaffolding_aspnetmvc %})
-* [Telerik UI for ASP.NET MVC API Reference Folder](/api/aspnet-mvc/Kendo.Mvc/AggregateFunction)
+* [Telerik UI for ASP.NET MVC API Reference Folder](/api/Kendo.Mvc/AggregateFunction)
 * [Telerik UI for ASP.NET MVC HtmlHelpers Folder]({% slug overview_barcodehelper_aspnetmvc %})
 * [Tutorials on Telerik UI for ASP.NET MVC]({% slug overview_timeefficiencyapp_aspnetmvc6 %})
 * [Telerik UI for ASP.NET MVC Troubleshooting]({% slug troubleshooting_aspnetmvc %})

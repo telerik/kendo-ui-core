@@ -713,8 +713,13 @@ var __meta__ = { // jshint ignore:line
     });
 
     function buttonHtml(direction, text) {
-        var className = "k-i-arrow-" + (direction === "increase" ? "n" : "s");
-        return '<span unselectable="on" class="k-link k-link-' + direction + '" aria-label="' + text + '"><span unselectable="on" class="k-icon ' + className + '"></span></span>';
+        var className = "k-i-arrow-" + (direction === "increase" ? "60-up" : "60-down");
+
+        return (
+            '<span unselectable="on" class="k-link k-link-' + direction + '" aria-label="' + text + '" title="' + text + '">' +
+                '<span unselectable="on" class="k-icon ' + className + '"></span>' +
+            '</span>'
+        );
     }
 
     function truncate(value, precision) {

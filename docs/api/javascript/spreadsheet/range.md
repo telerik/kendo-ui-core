@@ -304,6 +304,102 @@ The column(s) which filters should be cleared.
 
 ```
 
+### editor
+
+Gets or sets the editor of the cells in the range.
+
+##### value `String` *optional*
+
+The name of the custom cell editor, registered as [described in this help article](http://docs.telerik.com/kendo-ui/controls/data-management/spreadsheet/custom-editors)
+
+#### Returns
+
+`String` name of the custom cell editor.
+
+#### Example
+
+```
+<div id="spreadsheet" style="width: 100%;"></div>
+  <script>
+    kendo.spreadsheet.registerEditor("color", function(){
+        var context, dlg, model;
+
+        // Further delay the initialization of the UI until the `edit` method is
+        // actually called, so here just return the object with the required API.
+
+        return {
+            edit: function(options) {
+                context = options;
+                open();
+            },
+            icon: "k-font-icon k-i-background"
+        };
+
+        // This function actually creates the UI if not already there, and
+        // caches the dialog and the model.
+        function create() {
+            if (!dlg) {
+                model = kendo.observable({
+                    value: "#000000",
+                    ok: function() {
+                        // This is the result when OK is clicked. Invoke the
+                        // callback with the value.
+                        context.callback(model.value);
+                        dlg.close();
+                    },
+                    cancel: function() {
+                        dlg.close();
+                    }
+                });
+                var el = $("<div data-visible='true' data-role='window' data-modal='true' data-resizable='false' data-title='Select color'>" +
+                           "  <div data-role='flatcolorpicker' data-bind='value: value'></div>" +
+                           "  <div style='margin-top: 1em; text-align: right'>" +
+                           "    <button style='width: 5em' class='k-button' data-bind='click: ok'>OK</button>" +
+                           "    <button style='width: 5em' class='k-button' data-bind='click: cancel'>Cancel</button>" +
+                           "  </div>" +
+                           "</div>");
+                kendo.bind(el, model);
+
+                // Cache the dialog.
+                dlg = el.getKendoWindow();
+            }
+        }
+
+        function open() {
+            create();
+            dlg.open();
+            dlg.center();
+
+            // If the selected cell already contains some value, reflect
+            // it in the custom editor.
+            var value = context.range.value();
+            if (value != null) {
+                model.set("value", value);
+            }
+        }
+    });
+
+   $(function() {
+       $("#spreadsheet").kendoSpreadsheet({
+           sheetsbar: false,
+           excel: {
+               // Required to enable Excel Export in some browsers
+               proxyURL: "//demos.telerik.com/kendo-ui/service/export"
+           },
+           sheets: [{
+               rows: [{
+                   cells: [
+                       { value: "Select color:", bold: true },
+                       { background: "#fef0cd",
+                         editor: "color" }
+                   ]
+               }]
+           }]
+       });
+   });
+  </script>
+```
+
 ### enable
 
 Gets or sets the disabled state of the cells in the range.
@@ -338,7 +434,7 @@ Fills a range with values inferred from a source range.  This method employs som
 ##### srcRange `Range | String`
 
 The source range.  It must have the same number of rows or the same number of columns as the current range — otherwise
-an exception will be thrown ("Incompatible auto-fill ranges").
+an exception will be thrown (a `Range.FillError` object having `code` property `"incompatibleRanges"`).
 
 ##### direction `Number` *optional*
 
@@ -352,7 +448,7 @@ fill direction can be inferred from their positions, so it can be missing.  For 
 In this case it will select vertical reverse filling, because the target range is above the source range.
 
 If the ranges are not adjacent and the direction is missing, an exception will be thrown if the ranges don't start
-either on same column or on the same row ("Cannot determine fill direction").
+either on same column or on the same row (`"noFillDirection"` error code).
 
 Possible values for direction:
 
@@ -378,7 +474,16 @@ Possible values for direction:
             [ 5, "Wed", "Foo 2" ]
         ]);
 
-        sheet.range("A3:C10").fillFrom("A1:C2");
+        try {
+            sheet.range("A3:C10").fillFrom("A1:C2");
+        } catch(ex) {
+            if (ex instanceof kendo.spreadsheet.Range.FillError) {
+                // can be "incompatibleRanges" or "noFillDirection"
+                console.log(ex.code);
+            } else {
+                throw ex;
+            }
+        }
     </script>
 ```
 

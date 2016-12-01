@@ -12,7 +12,7 @@ When an album is clicked from any page, the album details are shown in a popup w
 
 **Figure 1. A snapshot of the Kendo UI Music Store Album Details window**
 
-![kendo-album-details-window](/aspnet-mvc/tutorial-kendo-music-store/music-store-web/images/kendo-album-details-window.png)
+![kendo-album-details-window](/tutorials/tutorial-kendo-music-store/music-store-web/images/kendo-album-details-window.png)
 
 ## Configuration
 

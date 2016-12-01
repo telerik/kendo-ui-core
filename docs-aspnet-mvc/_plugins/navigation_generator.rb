@@ -22,6 +22,11 @@ module Jekyll
 
                 url = page.url.sub('/', '')
 
+	            #exclude MVC3 and MVC4 articles from the TOC
+				next if url.include? "asp-net-mvc-3"
+
+                next if url.include? "asp-net-mvc-4"
+
                 segments = url.split('/')
 
                 segments.each_with_index do |segment, index|

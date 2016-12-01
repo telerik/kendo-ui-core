@@ -2,7 +2,7 @@
 title: Copy Data from Excel
 page_title: Copy Data from Excel | Kendo UI Grid
 description: "Learn how to copy data from Excel in a Kendo UI Grid."
-previous_url: /controls/data-management/grid/how-to/copy-from-excel-to-grid.html
+previous_url: /controls/data-management/grid/how-to/copy-from-excel-to-grid.html, /controls/data-management/grid/how-to/copy-from-excel-to-grid, /web/grid/how-to/copy-from-excel-to-grid
 slug: howto_copy_datafrom_excel_grid
 ---
 
@@ -53,14 +53,16 @@ The example below demonstrates how to create a Kendo UI Grid that supports pasti
             var data = [];
 
             for (var i = 0; i < rows.length; i++) {
-              // get the cells - split by tab
               var cells = rows[i].split('\t');
-              // add a new item in the grid
-              grid.dataSource.add({
-                Name: cells[0],
-                Age: cells[1]
+              data.push({
+                FirstName: cells[0],
+                SerialNo: cells[1],
+                Option: cells[2],
+                Quantity: cells[3]
               });
-            }
+              
+            };
+            grid.dataSource.data(data);
           });
         }).on('focusout', function() {
           // remove the textarea when it loses focus

@@ -17,7 +17,11 @@ function setup(options) {
 
 module("data source sync", {
     setup: function() {
+        jasmine.clock().install();
         setup();
+    },
+    teardown: function() {
+        jasmine.clock().uninstall();
     }
 });
 
@@ -188,7 +192,7 @@ test("sync calls the destroy method of the transport if there are destroyed mode
     equal(dataSource.transport.calls("destroy"), 1);
 });
 
-test("sync calls schange after destroy", function() {
+test("sync calls change after destroy", function() {
     var model = dataSource.get(1),
         wasCalled = false;
 
@@ -197,6 +201,8 @@ test("sync calls schange after destroy", function() {
         wasCalled = true;
     });
     dataSource.sync();
+
+    jasmine.clock().tick();
 
     ok(wasCalled);
 });
@@ -692,6 +698,9 @@ test("total is correct after removing all items syncing and canceling the change
     dataSource.remove(dataSource.get(2));
 
     dataSource.sync();
+
+    jasmine.clock().tick();
+
     dataSource.cancelChanges();
 
     equal(dataSource.total(), 0);
@@ -714,9 +723,13 @@ test("total is correct after removing all items, syncing adding new one and canc
 
     dataSource.add({});
 
+    jasmine.clock().tick();
+
     dataSource.sync();
 
     dataSource.cancelChanges();
+
+    jasmine.clock().tick();
 
     equal(dataSource.total(), 1);
 });
@@ -757,6 +770,7 @@ test("total is updated after removing all items and adding new with autoSync", f
 
     dataSource.add({});
 
+    jasmine.clock().tick();
     equal(dataSource.total(), 1);
 });
 
@@ -792,6 +806,8 @@ test("sync returns promise when offline", 2, function() {
     ok($.isFunction(promise.then));
 
     promise.then($.proxy(ok, this, true));
+
+    jasmine.clock().tick();
 });
 
 test("sync calls the create method of the transport if submit is defined but not in batch mode", function() {

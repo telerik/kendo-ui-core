@@ -10,7 +10,7 @@ position: 11
 
 **Figure 1. A screenshot of the Kendo UI Music Store management charts**
 
-![kendo-manage-charts-screenshot](/aspnet-mvc/tutorial-kendo-music-store/music-store-web/images/kendo-manage-charts-screenshot.png)
+![kendo-manage-charts-screenshot](/tutorials/tutorial-kendo-music-store/music-store-web/images/kendo-manage-charts-screenshot.png)
 
 When logged in the Music Store as an administrator, an additional button titled **Manage Store** is available in the upper-right corner. This opens the management graphs which can be used to monitor the sales status of the store. This page uses [Kendo UI widgets rendering data visualization](http://demos.telerik.com/kendo-ui/dataviz/overview/index.html) to display the graphs.
 

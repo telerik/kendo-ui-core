@@ -2,7 +2,7 @@
 title: Client Detail Templates
 page_title: Client Detail Templates | Kendo UI Grid HtmlHelper
 description: "Set the detail template used during Ajax binding of the Kendo UI Grid for ASP.NET MVC."
-previous_url: /aspnet-mvc/helpers/grid/client-detail-template
+previous_url: /helpers/grid/client-detail-template
 slug: clientdetailtemplate_grid_aspnetmvc
 position: 1
 ---
@@ -27,19 +27,19 @@ Below are listed the steps for you to follow when configuring the Kendo UI Grid 
 
 **Figure 1. A new entity data model**
 
-![New entity data model](/aspnet-mvc/helpers/grid/images/grid-entity-data-model.png)
+![New entity data model](/helpers/grid/images/grid-entity-data-model.png)
 
 **Step 3** Select **Generate from database** and click **Next**. Configure a connection to the **Northwind** database. Click **Next**.
 
 **Figure 2. Choosing a connection**
 
-![Choose the connection](/aspnet-mvc/helpers/grid/images/grid-entity-data-model.png)
+![Choose the connection](/helpers/grid/images/grid-entity-data-model.png)
 
 **Step 4** Choose the **Products** table from the **Which database objects do you want to include in your model?**. Leave all other options as they are set by default. Click **Finish**.
 
 **Figure 3. Choosing the Products table**
 
-![Choose the Products table](/aspnet-mvc/helpers/grid/images/grid-database-objects.png)
+![Choose the Products table](/helpers/grid/images/grid-database-objects.png)
 
 **Step 5** Open `HomeController.cs` and add a new action method which will return the Products as JSON. The Grid makes Ajax requests to this action.
 
@@ -121,7 +121,7 @@ Below are listed the steps for you to follow when configuring the Kendo UI Grid 
     )
 ```
 
-**Step 10** Define the client template using the [Kendo UI template]({% slug overview_kendoui_templatescomponent %}) syntax. The context of the template is the data item&mdash;Product entity&mdash;to which the current Grid row is bound.
+**Step 10** Define the client template using the [Kendo UI template](http://docs.telerik.com/kendo-ui/framework/templates/overview) syntax. The context of the template is the data item&mdash;Product entity&mdash;to which the current Grid row is bound.
 
 > **Important**  
 >
@@ -181,7 +181,7 @@ Below are listed the steps for you to follow when configuring the Kendo UI Grid 
 
 **Figure 4. The final result**
 
-![Client detail template](/aspnet-mvc/helpers/grid/images/grid-detail-template.png)
+![Client detail template](/helpers/grid/images/grid-detail-template.png)
 
 To download the Visual Studio Project, refer to [this GitHub repository](https://github.com/telerik/ui-for-aspnet-mvc-examples/tree/master/grid/client-detail-template).
 
@@ -195,13 +195,13 @@ Below are listed the steps for you to follow when configuring the Kendo UI Grid 
 
 **Figure 1. A new entity data model**
 
-![New entity data model](/aspnet-mvc/helpers/grid/images/grid-entity-data-model.png)
+![New entity data model](/helpers/grid/images/grid-entity-data-model.png)
 
 **Step 3**  Select **Generate from database** and click **Next**. Configure a connection to the **Northwind** database. Click **Next**.
 
 **Figure 2. Choosing the connection**
 
-![Choose the connection](/aspnet-mvc/helpers/grid/images/grid-entity-data-model.png)
+![Choose the connection](/helpers/grid/images/grid-entity-data-model.png)
 
 **Step 4** Choose the **Products** and **Categories** tables from **Which database objects do you want to include in your model?**. Leave all other options as they are set by default. Click **Finish**.
 
@@ -307,7 +307,7 @@ Below are listed the steps for you to follow when configuring the Kendo UI Grid 
     )
 ```
 
-**Step 11** Define the client template using [Kendo UI Template]({% slug overview_kendoui_templatescomponent %}) syntax. The context of the template is the **Category** entity to which the current Grid row is bound. The template itself contains another Grid which is bound to the `Products_Read` action.
+**Step 11** Define the client template using [Kendo UI Template](http://docs.telerik.com/kendo-ui/framework/templates/overview) syntax. The context of the template is the **Category** entity to which the current Grid row is bound. The template itself contains another Grid which is bound to the `Products_Read` action.
 
 > **Important**  
 > * Always call the `ToClientTemplate` method when using Telerik UI for ASP.NET MVC widgets in a client template.
@@ -371,7 +371,7 @@ Below are listed the steps for you to follow when configuring the Kendo UI Grid 
 
 **Figure 3. The final result**
 
-![Client hierarchy](/aspnet-mvc/helpers/grid/images/grid-hierarchy.png)
+![Client hierarchy](/helpers/grid/images/grid-hierarchy.png)
 
 To download the Visual Studio Project, refer to [this GitHub repository]((https://github.com/telerik/ui-for-aspnet-mvc-examples/tree/master/grid/client-hierarchy).
 
@@ -391,15 +391,15 @@ Other articles on the Kendo UI Grid for ASP.NET MVC:
 * [Binding of the Grid HtmlHelper]({% slug ajaxbinding_grid_aspnetmvc %})
 * [Editing of the Grid HtmlHelper]({% slug ajaxediting_grid_aspnetmvc %})
 * [Troubleshooting of the Grid HtmlHelper]({% slug troubleshoot_gridhelper_aspnetmvc %})
-* [API Reference of the Grid HtmlHelper](/api/aspnet-mvc/Kendo.Mvc.UI.Fluent/GridBuilder)
-* [Overview of the Kendo UI Grid Widget]({% slug overview_kendoui_grid_widget %})
+* [API Reference of the Grid HtmlHelper](/api/Kendo.Mvc.UI.Fluent/GridBuilder)
+* [Overview of the Kendo UI Grid Widget](http://docs.telerik.com/kendo-ui/controls/data-management/grid/overview)
 
 Articles on Telerik UI for ASP.NET MVC:
 
 * [Overview of Telerik UI for ASP.NET MVC]({% slug overview_aspnetmvc %})
 * [Fundamentals of Telerik UI for ASP.NET MVC]({% slug fundamentals_aspnetmvc %})
 * [Scaffolding in Telerik UI for ASP.NET MVC]({% slug scaffolding_aspnetmvc %})
-* [Telerik UI for ASP.NET MVC API Reference Folder](/api/aspnet-mvc/Kendo.Mvc/AggregateFunction)
+* [Telerik UI for ASP.NET MVC API Reference Folder](/api/Kendo.Mvc/AggregateFunction)
 * [Telerik UI for ASP.NET MVC HtmlHelpers Folder]({% slug overview_barcodehelper_aspnetmvc %})
 * [Tutorials on Telerik UI for ASP.NET MVC]({% slug overview_timeefficiencyapp_aspnetmvc6 %})
 * [Telerik UI for ASP.NET MVC Troubleshooting]({% slug troubleshooting_aspnetmvc %})

@@ -69,6 +69,13 @@ test("TabStrip adds aria-controls to the tab items", function() {
     equal(div.find("li[role=tab]").eq(0).attr("aria-controls"), "test-1");
 });
 
+test("TabStrip does not replace the id attributes of content items", function() {
+    div = $('<div id="test"><ul><li>foo</li><li>bar</li></ul><div id="customId">foo content</div><div>bar content</div></div>')
+            .kendoTabStrip();
+
+    equal(div.find(".k-content").attr("id"), "customId");
+});
+
 test("TabStrip render aria-controls with guid if no id", function() {
     div = $('<div><ul><li>foo</li><li>bar</li></ul><div>foo content</div><div>bar content</div></div>')
             .kendoTabStrip();

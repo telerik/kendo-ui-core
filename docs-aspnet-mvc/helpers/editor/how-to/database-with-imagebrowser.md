@@ -16,6 +16,6 @@ To see the example, refer to the GitHub repo on how to [use databases as an `Ima
 Other articles and how-to examples on the Kendo UI Editor HtmlHelper:
 
 * [Editor HtmlHelper Overview]({% slug overview_editorhelper_aspnetmvc %})
-* [EditorBuilder API Reference](/api/aspnet-mvc/Kendo.Mvc.UI.Fluent/EditorBuilder)
+* [EditorBuilder API Reference](/api/Kendo.Mvc.UI.Fluent/EditorBuilder)
 
 For more runnable examples on the Kendo UI Editor in ASP.NET MVC applications, browse its [**How To** documentation folder]({% slug howto_addmaxlengthvalidation_editoraspnetmvc %}).

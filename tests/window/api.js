@@ -1018,7 +1018,7 @@
             actions: [ "Minimize", "Close" ]
         });
 
-        equal(dialog.wrapper.find(".k-i-minimize").length, 1);
+        equal(dialog.wrapper.find(".k-i-window-minimize").length, 1);
     });
 
     test("toFront does not scroll page when windows are pinned", function() {
