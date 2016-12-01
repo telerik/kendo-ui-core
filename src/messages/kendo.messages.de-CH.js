@@ -400,7 +400,7 @@
           "cancelDelete": "Abbrechen",
           "confirmDelete": "Löschen"
         },
-        "noRecords": "Keine Aufzeichnungen zur Verfügung."
+        "noRecords": "Keine Datensätze verfügbar."
       });
   }
 
@@ -409,7 +409,7 @@
   if (kendo.ui.TreeList) {
     kendo.ui.TreeList.prototype.options.messages =
       $.extend(true, kendo.ui.TreeList.prototype.options.messages, {
-        "noRows": "Es sind keine Daten vorhanden",
+        "noRows": "Keine Datensätze verfügbar.",
         "loading": "Lade Daten...",
         "requestFailed": "Laden fehlgeschlagen",
         "retry": "Neu laden",

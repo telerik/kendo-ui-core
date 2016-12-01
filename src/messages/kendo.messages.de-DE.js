@@ -409,7 +409,7 @@
   if (kendo.ui.TreeList) {
     kendo.ui.TreeList.prototype.options.messages =
       $.extend(true, kendo.ui.TreeList.prototype.options.messages, {
-        "noRows": "Keine Datensätze verfügbar",
+        "noRows": "Keine Datensätze verfügbar.",
         "loading": "Lade Daten...",
         "requestFailed": "Laden fehlgeschlagen",
         "retry": "Neu laden",
