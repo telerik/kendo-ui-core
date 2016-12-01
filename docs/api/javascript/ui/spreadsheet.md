@@ -23,28 +23,28 @@ The number of columns in the document.
 ### defaultCellStyle `Object`
 The default cell styles to be applyied to sheet cells.
 
-#### defaultCellStyle.background `String`
+### defaultCellStyle.background `String`
 The background [CSS color](https://developer.mozilla.org/en-US/docs/Web/CSS/color_value) of the cell.
 
-#### defaultCellStyle.color `String`
+### defaultCellStyle.color `String`
 The text [CSS color](https://developer.mozilla.org/en-US/docs/Web/CSS/color_value) of the cell.
 
-#### defaultCellStyle.fontFamily `String`
+### defaultCellStyle.fontFamily `String`
 The font family for the cell.
 
-#### defaultCellStyle.fontSize `String`
+### defaultCellStyle.fontSize `String`
 The font size of the cell in pixels.
 
-#### defaultCellStyle.Italic `Boolean`
+### defaultCellStyle.Italic `Boolean`
 Sets the cell font to italic, if set to true.
 
-#### defaultCellStyle.bold `Boolean`
+### defaultCellStyle.bold `Boolean`
 Sets the cell font to bold, if set to true.
 
-#### defaultCellStyle.underline `Boolean`
+### defaultCellStyle.underline `Boolean`
 Sets the cell font to underline, if set to true.
 
-#### defaultCellStyle.wrap `Boolean`
+### defaultCellStyle.wrap `Boolean`
 Sets the cell wrap, if set to true.
 
 ### headerHeight `Number` *(default: 20)*
