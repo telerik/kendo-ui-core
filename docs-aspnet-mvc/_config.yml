@@ -75,11 +75,11 @@ navigation:
      "helpers/grid/templating":
         title: "Templates"
         position: 8
-     "helpers/grid/troubleshoot":
-        title: "Troubeshooting"
-        position: 9
      "helpers/grid/how-to":
         title: "How To"
+        position: 9
+     "helpers/grid/troubleshoot":
+        title: "Troubeshooting"
         position: 10
      "*appearance":
         title: "Appearance"
