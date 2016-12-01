@@ -66,6 +66,21 @@ navigation:
         title: "Gantt"
      "helpers/grid":
         title: "Grid"
+     "helpers/grid/binding":
+        title: "Binding"
+        position: 6
+     "helpers/grid/editing":
+        title: "Editing"
+        position: 7
+     "helpers/grid/templating":
+        title: "Templates"
+        position: 8
+     "helpers/grid/troubleshoot":
+        title: "Troubeshooting"
+        position: 9
+     "helpers/grid/how-to":
+        title: "How To"
+        position: 10
      "*appearance":
         title: "Appearance"
      "*binding":
@@ -83,7 +98,7 @@ navigation:
      "*selection":
         title: "Selection"
      "*state":
-        title: "State"
+        title: "State Management"
      "*how-to":
         title: "How To"
      "helpers/hybrid":
