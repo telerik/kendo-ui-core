@@ -208,6 +208,13 @@
     }
 }
 
+.k-button .k-icon {
+    color: @button-text-color;
+    &:hover {
+        color: @button-text-color;
+    }
+}
+
 .k-splitbar .k-resize-handle {
     background-color: @normal-text-color;
 }
@@ -496,6 +503,8 @@ html .km-pane-wrapper .k-header
     border-color: transparent;
 }
 
+.k-icon,
+.k-tool-icon,
 .k-grouping-dropclue,
 .k-i-drag-and-drop,
 .k-column-menu .k-sprite,
@@ -1024,6 +1033,11 @@ div.k-filebrowser-dropzone em,
 .k-draghandle.k-state-selected:hover
 {
     background-position: 50% 50%;
+}
+
+.k-tool-icon
+{
+    background-image: @sprite-image;
 }
 
 .k-state-hover>.k-link,
@@ -1594,6 +1608,16 @@ div.k-filebrowser-dropzone em
 }
 
 /* PivotGrid */
+
+.k-i-arrow-60-down,
+.k-i-stop,
+.k-i-minus,
+.k-i-arrow-60-up,
+.k-i-arrow-60-up,
+.k-i-circle
+{
+    background-image: @sprite-kpi-image;
+}
 
 /* Border radius */
 .k-block,
@@ -2368,11 +2392,40 @@ html .km-pane-wrapper .km-widget,
 // Retina sprite
 @media only screen and (-webkit-min-device-pixel-ratio: 1.2),
        only screen and (min-device-pixel-ratio: 1.2) {
+    .k-icon:not(.k-loading):not(.k-i-loading),
+    .k-icon:not(.k-i-loading),
+    .k-grouping-dropclue,
+    .k-i-drag-and-drop,
+    .k-callout,
+    .k-tool-icon,
+    .k-state-hover .k-tool-icon,
+    .k-state-active .k-tool-icon,
+    .k-state-active.k-state-hover .k-tool-icon,
+    .k-state-selected .k-tool-icon,
+    .k-state-selected.k-state-hover .k-tool-icon,
+    .k-column-menu .k-sprite,
+    .k-mobile-list .k-check:checked,
+    .k-mobile-list .k-edit-field [type=checkbox]:checked,
+    .k-mobile-list .k-edit-field [type=radio]:checked {
+        background-image: @sprite-image-2x;
+        background-size: 340px 336px;
+    }
     .k-dropdown-wrap .k-input,
     .k-picker-wrap .k-input,
     .k-numeric-wrap .k-input
     {
         border-radius: @inner-border-radius 0 0 @inner-border-radius;
+    }
+
+    .k-i-arrow-60-down,
+    .k-i-stop,
+    .k-i-minus,
+    .k-i-arrow-60-up,
+    .k-i-arrow-60-up,
+    .k-i-circle
+    {
+        background-image: @sprite-kpi-image-2x;
+        background-size: 96px 16px;
     }
 }
 

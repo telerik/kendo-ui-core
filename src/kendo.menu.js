@@ -307,6 +307,10 @@ var __meta__ = { // jshint ignore:line
                 var item = $(this);
                 var arrowCssClass = getArrowCssClass(item);
                 item.append("<span class='k-icon " + arrowCssClass + "'/>");
+                var item = $(this),
+                    parent = item.parent().parent();
+
+                item.append("<span class='k-icon " + (parent.hasClass(MENU + "-horizontal") ? "k-i-arrow-60-down" : "k-i-arrow-60-right") + "'/>");
             });
     }
 

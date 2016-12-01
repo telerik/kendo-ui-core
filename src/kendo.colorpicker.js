@@ -744,7 +744,7 @@ var __meta__ = { // jshint ignore:line
                             '<span class="k-selected-color"></span>' +
                         '</span>' +
                     '# } else { #' +
-                        '<span class="k-selected-color"><span class="p-icon p-i-line" style="display: none;"></span></span>' +
+                        '<span class="k-selected-color"><span class="k-icon k-i-line" style="display: none;"></span></span>' +
                     '# } #' +
                     '<span class="k-select" unselectable="on" aria-label="select">' +
                         '<span class="k-icon k-i-arrow-60-down"></span>' +
@@ -788,7 +788,7 @@ var __meta__ = { // jshint ignore:line
             }
         },
         _noColorIcon: function(){
-            return this.wrapper.find(".k-picker-wrap > .k-selected-color > .p-icon.p-i-line");
+            return this.wrapper.find(".k-picker-wrap > .k-selected-color > .k-icon.k-i-line");
         },
         color: ColorSelector.fn.color,
         value: ColorSelector.fn.value,
@@ -872,7 +872,7 @@ var __meta__ = { // jshint ignore:line
                 }).data("kendoPopup");
 
                 selector.element.find(".k-clear-color").kendoButton({
-                    spriteCssClass: "k-icon p-icon k-i-reset-color",
+                    spriteCssClass: "k-icon k-i-reset-color",
                     click: function(e) {
                         selector.options._clearedColor = true;
                         that.value(null);
