@@ -298,8 +298,8 @@ If set, the ToolBar will render an image with the specified URL in the button.
         {
           type: "buttonGroup",
           buttons: [
-            { text: "foo", imageUrl: "/sports/snowboarding.png" },
-            { text: "bar", imageUrl: "/sports/snowboarding.png" }
+            { text: "foo", imageUrl: baseUrl + "/sports/snowboarding.png" },
+            { text: "bar", imageUrl: baseUrl + "/sports/snowboarding.png" }
           ]
         }
       ]
