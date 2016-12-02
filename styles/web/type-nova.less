@@ -21,15 +21,19 @@
 
 /* Main colors */
 .k-icon {
-    color: @normal-text-color;
+    color: @selected-text-color;
     &:hover {
-        color: @hover-text-color;
+        color: @selected-text-color;
     }
 }
 
-.k-button .k-icon {
+.k-tool.k-state-hover,
+.k-tool.k-state-hover .k-icon
+.k-button .k-icon,
+.k-editor-dropdown .k-icon,
+.k-tool-icon.k-icon {
     color: @normal-text-color;
-    &:hover {
+     &:hover {
         color: @normal-text-color;
     }
 }
@@ -258,7 +262,6 @@ textarea.k-textbox:hover,
 }
 
 /* Default icons opacity */
-.k-icon,
 .k-button .k-image,
 .k-panelbar > .k-state-active > .k-header > .k-icon,
 .k-panelbar > .k-state-active > .k-header .k-state-default .k-icon,

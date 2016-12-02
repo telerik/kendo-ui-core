@@ -197,26 +197,22 @@
 }
 
 /* main colors */
-.k-icon {
+.k-icon,
+.k-group-indicator .k-icon,
+.k-button .k-icon,
+.k-group-indicator .k-icon,
+.k-button .k-icon {
+    color: @header-text-color;
+    &:hover {
+        color: @header-text-color;
+    }
+}
+
+.k-editor-dropdown .k-icon,
+.k-tool-icon.k-icon {
     color: @normal-text-color;
     &:hover {
-        color: @hover-text-color;
-    }
-}
-
-.k-group-indicator .k-icon,
-.k-button .k-icon {
-    color: @header-text-color;
-    &:hover {
-        color: @header-text-color;
-    }
-}
-
-.k-group-indicator .k-icon,
-.k-button .k-icon {
-    color: @header-text-color;
-    &:hover {
-        color: @header-text-color;
+        color: @normal-text-color;
     }
 }
 
@@ -477,7 +473,6 @@ html .km-pane-wrapper .k-header
     opacity:1;
 }
 
-.k-icon,
 .k-state-disabled .k-icon,
 .k-column-menu .k-sprite,
 .k-pager-numbers .k-current-page .k-link:after,
@@ -2400,7 +2395,6 @@ div.k-splitbar.k-state-focused .k-icon,
     opacity:1;
 }
 
-.k-tool-icon,
 .k-splitbar .k-icon,
 .k-pivot-configurator-settings .k-icon
 {

@@ -192,11 +192,13 @@
     }
 }
 
-.k-button .k-icon {
+.k-tool-icon.k-icon {
     color: @button-text-color;
-    &:hover {
-        color: @button-text-color;
-    }
+}
+
+.k-tool.k-state-hover,
+.k-tool.k-state-hover .k-icon {
+    color: @selected-text-color;
 }
 
 .k-splitbar .k-resize-handle {
@@ -467,7 +469,6 @@ html .km-pane-wrapper .k-header
 }
 
 //Normal state
-.k-icon,
 .k-state-disabled .k-icon,
 .k-column-menu .k-sprite,
 .k-pager-numbers .k-current-page .k-link:after,
