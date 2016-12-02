@@ -124,7 +124,7 @@ Gets the parent of the array if such parent exists.
     console.log(array.parent()); // outputs "undefined"
     var observable = kendo.observable({ numbers: [1, 2] });
     var numbers = observable.get("numbers");
-    console.log(numbersperson.parent() === observable); // outputs "true"
+    console.log(numbers.parent() === observable); // outputs "true"
     </script>
 
 ### pop
