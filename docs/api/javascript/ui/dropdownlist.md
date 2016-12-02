@@ -119,6 +119,8 @@ Controls whether to bind the widget to the data source on initialization.
 
 If set to `true`, the widget automatically adjusts the width of the popup element and does not wrap up the item label.
 
+> Note: Virtualized list doesn't support the auto-width functionality.
+
 #### Example - enable autoWidth
 
     <input id="dropdownlist" style="width: 100px;" />
