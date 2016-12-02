@@ -144,6 +144,8 @@ Controls whether to close the widget suggestion list on item selection.
 
 If set to `true`, the widget automatically adjusts the width of the popup element and does not wrap up the item label.
 
+> Note: Virtualized list doesn't support the auto-width functionality.
+
 #### Example - enable autoWidth
 
     <input id="multiselect" style="width: 100px;" />
