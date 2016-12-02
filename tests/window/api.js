@@ -1033,7 +1033,7 @@
 
         equal($(window).scrollTop(), 200);
         spacerDiv.remove();
-    }); 
+    });
 
     function setDimensionTest(dim) {
         var options = {};
@@ -1074,7 +1074,7 @@
         dialog.restore();
 
         ok(!dialog.isMinimized());
-    });            
+    });
 
     test("isMaximized is updated when maximizing window", function() {
         var dialog = createWindow({
@@ -1085,7 +1085,7 @@
         dialog.maximize();
 
         ok(dialog.isMaximized());
-    }); 
+    });
 
     test("isMaximized is updated when restoring window", function() {
         var dialog = createWindow({
@@ -1097,6 +1097,6 @@
         dialog.restore();
 
         ok(!dialog.isMaximized());
-    });       
+    });
 
 })();

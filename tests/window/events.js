@@ -87,6 +87,7 @@
                     triggers++;
                 }
             });
+
         dialog.wrapper.find(".k-i-window-minimize").trigger("click");
 
         equal(triggers, 1);
@@ -426,7 +427,7 @@
         var dialog = createWindow({
             resizeStart: function(e){
                 e.preventDefault();
-            },            
+            },
             resizeEnd: handler,
             resize: handler
         });
@@ -434,7 +435,7 @@
         dialog.resizing.dragstart();
         dialog.resizing.drag();
         dialog.resizing.dragend();
-        
+
         ok(!dialog.resizing.initialPosition);
         ok(!handler.calls);
     });
@@ -444,14 +445,14 @@
         var dialog = createWindow({
             dragstart: function(e){
                 e.preventDefault();
-            },            
+            },
             dragend: handler
         });
 
         dialog.dragging.dragstart();
         dialog.dragging.dragend();
-        
+
         ok(!dialog.initialWindowPosition);
         ok(!handler.calls);
-    });            
+    });
 })();
