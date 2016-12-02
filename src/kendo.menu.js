@@ -304,12 +304,10 @@ var __meta__ = { // jshint ignore:line
         item.filter(":has(.k-menu-group)")
             .children(".k-link:not(:has([class*=k-i-arrow]:not(.k-sprite)))")
             .each(function () {
-                var item = $(this);
-                var arrowCssClass = getArrowCssClass(item);
-                var parent = item.parent().parent();
+                var item = $(this),
+                    arrowCssClass = getArrowCssClass(item);
 
                 item.append("<span class='k-icon " + arrowCssClass + "'/>");
-                item.append("<span class='k-icon " + (parent.hasClass(MENU + "-horizontal") ? "k-i-arrow-60-down" : "k-i-arrow-60-right") + "'/>");
             });
     }
 
