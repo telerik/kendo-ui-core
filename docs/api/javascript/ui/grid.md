@@ -1699,7 +1699,7 @@ The text that is displayed in the column header cell. If not set the [field](#co
 
 ### columns.width `String|Number`
 
-The width of the column. Numeric values are treated as pixels. **For more important information, please refer to [Column Widths](/web/grid/walkthrough#column-widths)**.
+The width of the column. Numeric values are treated as pixels. **For more important information, please refer to [Column Widths]({appearance_kendoui_grid_widget}#column-widths)**.
 
 #### Example - set the column width as a string
      <div id="grid"></div>
