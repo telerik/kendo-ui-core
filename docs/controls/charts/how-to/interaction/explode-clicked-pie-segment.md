@@ -2,12 +2,15 @@
 title: Explode Clicked Pie Chart Segment
 page_title: Explode Clicked Pie Chart Segment | Kendo UI Charts
 description: "Learn how to explode a clicked segment in a Kendo UI Pie Chart."
+previous_url: /controls/charts/how-to/explode-clicked-pie-segment
 slug: howto_explodeclickedsegment_piecharts
 ---
 
 # Explode Clicked Pie Chart Segment
 
-The example below demonstrates how to explode a clicked segment in a Kendo UI Pie Chart.
+To improve the visualization of the data illustrated in a Kendo UI Pie Chart, you might need to explode a segment that was clicked by the user.
+
+The example below demonstrates how to achieve this behavior.
 
 ###### Example
 

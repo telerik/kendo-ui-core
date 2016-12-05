@@ -2,6 +2,7 @@
 title: Integrate Kendo UI PivotGrid with Charts
 page_title: Integrate Kendo UI PivotGrid with Charts | Kendo UI Charts
 description: "Learn how to integrate a Kendo UI PivotGrid widget with a Kendo UI Chart widget."
+previous_url: /controls/data-management/pivotgrid/how-to/chart-integration
 slug: howto_integratewithpivotgrid_charts
 ---
 

@@ -2,14 +2,17 @@
 title: Expand Clickable Area of Points
 page_title: Expand Clickable Area of Points | Kendo UI Charts
 description: "Learn how to extend the clickable or touchable area of points in a Kendo UI Chart."
+previous_url: /controls/charts/how-to/expand-clickable-area
 slug: howto_extendclickableareaofpoints_charts
 ---
 
 # Expand Clickable Area of Points
 
-In some scenarios Kendo UI Charts produce series of points that are too small to be reliably clicked or touched. It is possible to expand the active area by adding a transparent element as part of the [`visual`](/api/javascript/dataviz/ui/chart#configuration-series.visual).
+In some scenarios, the Kendo UI Charts produce series of points that are too small to be reliably clicked or touched.
 
-The example below demonstrates how to expand the clickable or touchable area of points in a bar series.
+It is possible to expand the active area by adding a transparent element as part of the [`visual`](/api/javascript/dataviz/ui/chart#configuration-series.visual) configuration.
+
+The example below demonstrates how to achieve this behavior in a Bar Charts series.
 
 ###### Example
 
