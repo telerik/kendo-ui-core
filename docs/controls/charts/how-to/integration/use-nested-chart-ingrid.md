@@ -7,7 +7,9 @@ slug: howto_usenestedchartsgrid_charts
 
 # Use Nested Charts in Grid
 
-To see the example on how to nest a Kendo UI Chart inside the Grid template, refer to [this how-to article]({% slug howto_use_nested_charts_grid %}).
+Your project might require you to nest a Kendo UI Chart inside a Kendo UI Grid template.
+
+To see the example on how to handle the scenario, refer to [this how-to article]({% slug howto_use_nested_charts_grid %}).
 
 ## See Also
 

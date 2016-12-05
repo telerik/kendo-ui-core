@@ -7,9 +7,12 @@ slug: howto_showtooltipforaxislabels_charts
 
 # Use Drawing API to Show Custom Tooltip for categoryAxis Labels
 
-The example below demonstrates how to display a tooltip for `categoryAxis` labels through the [drawing API]({% slug overview_kendoui_drawingapi %}). The tooltip is displayed when hovering a `categoryAxis` label.
+It is possible for you to display a tooltip for `categoryAxis` labels through the [drawing API]({% slug overview_kendoui_drawingapi %}).
+
+The example below demonstrates how to achieve this behavior. Note that the tooltip is displayed when hovering a `categoryAxis` label.
 
 ###### Example
+
 ```html
 <div id="chart"></div>
 <div class="customTooltip">CustomTooltip</div>

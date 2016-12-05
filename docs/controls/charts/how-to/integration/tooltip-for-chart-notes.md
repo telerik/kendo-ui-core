@@ -7,9 +7,12 @@ slug: howto_showtooltipfornotes_charts
 
 # Show Tooltip for Chart Notes
 
-The example below demonstrates how to attach a [Kendo UI Tootlip](/api/javascript/ui/tooltip) to Chart notes and display it when a [note is hovered](/api/javascript/dataviz/ui/chart#events-noteHover).
+You can attach a [Kendo UI Tootlip](/api/javascript/ui/tooltip) to Kendo UI Chart notes and display it when a [note is hovered](/api/javascript/dataviz/ui/chart#events-noteHover).
+
+The example below demonstrates how to achieve this behavior.
 
 ###### Example
+
 ```html
 
 	<div class="chartWrapper" content="tooltipContent" >
