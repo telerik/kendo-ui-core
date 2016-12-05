@@ -7,7 +7,9 @@ slug: howto_aggregatedata_piecharts
 
 # Aggregate Pie Chart Data
 
-The example below demonstrates how to aggregate data in Kendo UI Pie Charts via the [dataSource aggregates](/api/javascript/data/datasource#configuration-aggregate) and to override the sort order of categories.
+In some scenarios, you might need to aggregate Pie Chart data and to override the sort order of the categories.
+
+The example below demonstrates how to achieve this behavior by using the [dataSource aggregates](/api/javascript/data/datasource#configuration-aggregate).
 
 ###### Example
 

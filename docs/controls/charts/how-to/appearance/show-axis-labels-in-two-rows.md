@@ -1,44 +1,54 @@
 ---
-title: Display Time on Value Axis
-page_title: Display Time on Value Axis | Kendo UI Charts
-description: "Learn how to display time on the value axis of categorical Kendo UI Charts."
-slug: howto_displaytimeonvalueaxis_charts
+title: Show Category Axis Labels on Multiple Lines
+page_title: Show Category Axis Labels on Multiple Lines | Kendo UI Charts
+description: "Learn how to insert line breaks in Category Axis labels when working with Kendo UI Charts."
+previous_url: /controls/charts/how-to/show-axis-labels-in-two-rows
+slug: howto_showlabelsintworows_charts
 ---
 
-# Display Time on Value Axis
+# Show Category Axis Labels on Multiple Lines
 
-The `valueAxis` on categorical Kendo UI Charts supports the display of numbers only.
+Sometimes you might need to display long labels in a Kendo UI Chart. To make the content look more compact and better organized, it is possible to break the content of the labels into multiple lines.   
 
-However, it is possible to render date and time values by representing the dates as numeric values.
-
-> **Important**
->
-> Kendo UI Scatter Charts support the display of dates on the `xAxis` and `yAxis` natively.
-
-The example below demonstrates how to display time on the value axis of categorical Kendo UI Charts.
+The example below demonstrates how to insert newline symbols in the Category Axis labels to achieve this behavior.
 
 ###### Example
 
 ```html
+
     <div id="chart"></div>
     <script>
+      var data = [{
+        value: 1,
+        category: "Category Foo"
+      },{
+        value: 2,
+        category: "Category Bar"
+      }, {
+        value: 3,
+        category: "Category Baz"
+      }];
+
       $("#chart").kendoChart({
-        series: [{
-          data: [new Date("2015/01/01 01:22").getTime(),
-                 new Date("2015/01/01 02:24").getTime()]
-        }],
-        valueAxis: {
-          labels: {
-            template: "#= kendo.format('{0:HH:mm}', new Date(value)) #"
-          },
-          min: new Date("2015/01/01").getTime(),
-          majorUnit: 20 * 60 * 1000 // 20 minutes step
+        dataSource: {
+          data: data
         },
-        tooltip: {
-          visible: true,
-          template: "#= kendo.format('{0:HH:mm}', new Date(value)) #"
+        series: [{
+          type: "column",
+          name: "Series Name",
+          field: "value"
+        }],
+        categoryAxis: {
+          field: "category",
+          labels: {
+            template: labelTemplate
+          }
         }
       });
+
+      function labelTemplate(e) {
+        return e.value.split(" ").join("\n");
+      }
     </script>
 ```
 

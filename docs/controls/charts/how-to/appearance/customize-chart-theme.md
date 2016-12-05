@@ -1,43 +1,57 @@
 ---
-title: Display Time on Value Axis
-page_title: Display Time on Value Axis | Kendo UI Charts
-description: "Learn how to display time on the value axis of categorical Kendo UI Charts."
-slug: howto_displaytimeonvalueaxis_charts
+title: Customize Chart Themes
+page_title: Customize Chart Themes | Kendo UI Charts
+description: "Learn how to create a custom theme for a Kendo UI Chart."
+previous_url: /controls/charts/how-to/customize-chart-theme
+slug: howto_customizechartthemes_charts
 ---
 
-# Display Time on Value Axis
+# Customize Chart Themes
 
-The `valueAxis` on categorical Kendo UI Charts supports the display of numbers only.
+Your project might require a theme that is different from the default ones the Kendo UI Chart supports.
 
-However, it is possible to render date and time values by representing the dates as numeric values.
-
-> **Important**
->
-> Kendo UI Scatter Charts support the display of dates on the `xAxis` and `yAxis` natively.
-
-The example below demonstrates how to display time on the value axis of categorical Kendo UI Charts.
+The example below demonstrates how to create a custom theme for a Kendo UI Chart.
 
 ###### Example
 
 ```html
-    <div id="chart"></div>
+    <div id="chart" />
     <script>
-      $("#chart").kendoChart({
-        series: [{
-          data: [new Date("2015/01/01 01:22").getTime(),
-                 new Date("2015/01/01 02:24").getTime()]
-        }],
-        valueAxis: {
-          labels: {
-            template: "#= kendo.format('{0:HH:mm}', new Date(value)) #"
-          },
-          min: new Date("2015/01/01").getTime(),
-          majorUnit: 20 * 60 * 1000 // 20 minutes step
-        },
-        tooltip: {
-          visible: true,
-          template: "#= kendo.format('{0:HH:mm}', new Date(value)) #"
+      var themes = kendo.dataviz.ui.themes;
+      var MyTheme = kendo.deepExtend(
+        // Deep copy
+        {},
+
+        // Base theme      
+        themes.silver,
+
+        {
+          chart: {
+            // Can contain any chart settings
+            seriesColors: ["#000022", "#000044", "#000066", "#000088", "#0000aa", "#0000cc", "#0000ee"]
+          }
         }
+      );
+
+      themes.MyTheme = MyTheme;
+
+      $("#chart").kendoChart({
+        theme: "MyTheme",
+        series: [{
+          data: [1]
+        }, {
+          data: [1]
+        }, {
+          data: [1]
+        }, {
+          data: [1]
+        }, {
+          data: [1]
+        }, {
+          data: [1]
+        }, {
+          data: [1]
+        }]
       });
     </script>
 ```

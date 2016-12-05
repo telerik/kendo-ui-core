@@ -1,21 +1,16 @@
 ---
-title: Display Time on Value Axis
-page_title: Display Time on Value Axis | Kendo UI Charts
-description: "Learn how to display time on the value axis of categorical Kendo UI Charts."
-slug: howto_displaytimeonvalueaxis_charts
+title: Shorten Chart Labels
+page_title: Shorten Chart Labels | Kendo UI Charts
+description: "Learn how to shorten long Kendo UI Chart labels to a more readable format."
+previous_url: /controls/charts/how-to/shorten-chart-labels
+slug: howto_shortenchartlabels_charts
 ---
 
-# Display Time on Value Axis
+# Shorten Chart Labels
 
-The `valueAxis` on categorical Kendo UI Charts supports the display of numbers only.
+In some scenarios, you might need to make a long Kendo UI Chart label short to make it more structured and comprehensible.
 
-However, it is possible to render date and time values by representing the dates as numeric values.
-
-> **Important**
->
-> Kendo UI Scatter Charts support the display of dates on the `xAxis` and `yAxis` natively.
-
-The example below demonstrates how to display time on the value axis of categorical Kendo UI Charts.
+The example below demonstrates how to shorten long Chart labels and turn them into a more readable format.
 
 ###### Example
 
@@ -23,22 +18,37 @@ The example below demonstrates how to display time on the value axis of categori
     <div id="chart"></div>
     <script>
       $("#chart").kendoChart({
+        title: {
+          text: "Gross domestic product growth /GDP annual %/"
+        },
+        legend: {
+          position: "top"
+        },
+        seriesDefaults: {
+          type: "column"
+        },
         series: [{
-          data: [new Date("2015/01/01 01:22").getTime(),
-                 new Date("2015/01/01 02:24").getTime()]
+          name: "Series 1",
+          data: [10, 20, 30]
         }],
-        valueAxis: {
+        categoryAxis: {
+          categories: ["Long category", "Very long category", "Very Very long category"],
           labels: {
-            template: "#= kendo.format('{0:HH:mm}', new Date(value)) #"
-          },
-          min: new Date("2015/01/01").getTime(),
-          majorUnit: 20 * 60 * 1000 // 20 minutes step
+            template: "#= shortLabels(value)#"
+          }
         },
         tooltip: {
           visible: true,
-          template: "#= kendo.format('{0:HH:mm}', new Date(value)) #"
+          format: "{0}%",
+          template: "#= series.name #: #= value #"
         }
       });
+      function shortLabels(value) {
+        if (value.length > 5) {
+          value = value.substring(0, 10);
+          return value + "...";
+        }
+      }
     </script>
 ```
 
