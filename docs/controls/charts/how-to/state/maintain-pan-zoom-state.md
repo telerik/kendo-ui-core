@@ -2,12 +2,13 @@
 title: Maintain Pan and Zoom State on Rebind
 page_title: Maintain Pan and Zoom State | Kendo UI Charts
 description: "Learn how to maintain the axis range after rebinding a Kendo UI Chart."
+previous_url: /controls/charts/how-to/maintain-pan-zoom-state
 slug: howto_panandzoomrebind_charts
 ---
 
 # Maintain Pan and Zoom State on Rebind
 
-The Chart will normally reset the axis range after the data source fetches new data. If the user has panned or zoomed the Chart, they will see the initial view port after the new data is loaded.
+Normally, the Kendo UI Chart resets the axis range after the data source fetches new data. If users pan or zoom the Chart, they will see the initial viewport after the new data is loaded. 
 
 The example below demonstrates how to store and load the axis range. Changes are detected in the [`drag`](/api/javascript/dataviz/ui/chart#events-drag) and [`zoom`](/api/javascript/dataviz/ui/chart#events-zoom) events. The axis range is restored in the [`dataBound` event](/api/javascript/dataviz/ui/chart#events-dataBound).
 
