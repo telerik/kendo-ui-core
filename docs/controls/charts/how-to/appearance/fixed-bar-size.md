@@ -1,45 +1,38 @@
 ---
-title: Display Time on Value Axis
-page_title: Display Time on Value Axis | Kendo UI Charts
-description: "Learn how to display time on the value axis of categorical Kendo UI Charts."
-slug: howto_displaytimeonvalueaxis_charts
+title: Use Fixed Bar Size
+page_title: Use Fixed Bar Size | Kendo UI Charts
+description: "Learn how to use bars of a fixed size when working with the Kendo UI Charts."
+previous_url: /controls/charts/how-to/fixed-bar-size
+slug: howto_usefixedbarsize_charts
 ---
 
-# Display Time on Value Axis
+# Use Fixed Bar Size
 
-The `valueAxis` on categorical Kendo UI Charts supports the display of numbers only.
+You might need to set the size of the default drawing element of the bars to the same size.
 
-However, it is possible to render date and time values by representing the dates as numeric values.
-
-> **Important**
->
-> Kendo UI Scatter Charts support the display of dates on the `xAxis` and `yAxis` natively.
-
-The example below demonstrates how to display time on the value axis of categorical Kendo UI Charts.
+The example below demonstrates how to use the [`series.visual`](/api/javascript/dataviz/ui/chart#configuration-series.visual) function to scale the default drawing element of the bars and achieve this behavior.
 
 ###### Example
 
 ```html
     <div id="chart"></div>
     <script>
+      var BAR_SIZE = 10;
       $("#chart").kendoChart({
         series: [{
-          data: [new Date("2015/01/01 01:22").getTime(),
-                 new Date("2015/01/01 02:24").getTime()]
-        }],
-        valueAxis: {
-          labels: {
-            template: "#= kendo.format('{0:HH:mm}', new Date(value)) #"
-          },
-          min: new Date("2015/01/01").getTime(),
-          majorUnit: 20 * 60 * 1000 // 20 minutes step
-        },
-        tooltip: {
-          visible: true,
-          template: "#= kendo.format('{0:HH:mm}', new Date(value)) #"
-        }
+          type: "bar",
+          data: [1, 2],
+          visual: function(e) {
+            //create the default visual
+            var visual = e.createVisual();        
+            //scale it so that it has the predefined size
+            visual.transform(kendo.geometry.transform().scale(1, BAR_SIZE / e.rect.size.height, e.rect.center() ));
+            return visual;
+          }
+        }]            
       });
     </script>
+    </div>
 ```
 
 ## See Also

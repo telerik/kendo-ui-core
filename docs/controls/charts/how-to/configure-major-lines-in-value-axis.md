@@ -7,7 +7,9 @@ slug: howto_calculatemajorunit_charts
 
 # Calculate and Set Major Unit for Value Axis
 
-To calculate and set the major unit for the values axis in a Kendo UI Chart, note that you need to name the axis. The effective axis range is available in the `render` event handler.
+Sometimes you might need to calculate and set the major unit for the values axis in a Kendo UI Chart.
+
+In this scenario, you also need to name the axis. The effective axis range is available in the `render` event handler.
 
 The API reference for the relevant methods and events that are used in the following example are:
 * The [`render` event](/api/javascript/dataviz/ui/chart#events-render)

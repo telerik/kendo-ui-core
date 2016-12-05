@@ -7,15 +7,17 @@ slug: howto_createtimeline_usingrangebars_charts
 
 # Create Timeline Using Range Bars
 
-This example demonstrates how to display a daily timeline for two users in a Kendo UI Chart.
+You might need to display a daily timeline for two users in a Kendo UI Chart.
 
 > **Important**
-> * The time of the day is represented as a time span, relative to a fixed date, e.g. 01.Jan.
+> * The time of the day is represented as a time span, relative to a fixed date&mdash;for example, 01.Jan.
 > * Each slot has a unique ID.
-> * The data source is grouped by ID to create one series per data item. This is important as normally a series can have only one data point per category.
+> * To create one series per data site, the data source is grouped by ID. This is important because, normally, a series can have only one data point per category.
 > * Categories are bound to model fields.
-> * Series spacing is set to -1 (-100%), so that series can line up with each other. Normally, they are rendered one below the other.
+> * Series spacing is set to `-1` (-100%), so that series can line up with each other. Normally, they are rendered one below the other.
 > * Value axis labels are formatted to display the time of the day and are spaced one hour apart.
+
+The example below demonstrates how to create a timeline by using range bars.
 
 ###### Example
 
