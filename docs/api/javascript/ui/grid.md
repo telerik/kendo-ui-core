@@ -1654,7 +1654,7 @@ The text that is displayed in the column header cell. If not set the [field](#co
 
 ### columns.width `String|Number`
 
-The width of the column. Numeric values are treated as pixels. **For more important information, please refer to [Column Widths]({appearance_kendoui_grid_widget}#column-widths)**.
+The width of the column. Numeric values are treated as pixels. **For more important information, please refer to [Column Widths](/controls/data-management/grid/appearance#column-widths)**.
 
 #### Example - set the column width as a string
      <div id="grid"></div>
@@ -8736,7 +8736,7 @@ If invoked the grid will not save the generated file.
 
 Fired when the user is about to filter the DataSource via the filter UI.
 
-The event handler function context (available via the `this` keyword) will be set to the widget instance. 
+The event handler function context (available via the `this` keyword) will be set to the widget instance.
 
 Introduced in the Kendo UI 2016 R3 (2016.3.914) release.
 
