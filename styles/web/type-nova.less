@@ -20,13 +20,14 @@
 @import "themes/type.less";
 
 /* Main colors */
-.k-icon {
+.k-header .k-icon {
     color: @selected-text-color;
     &:hover {
         color: @selected-text-color;
     }
 }
 
+.k-icon,
 .k-tool.k-state-hover,
 .k-tool.k-state-hover .k-icon
 .k-button .k-icon,
@@ -35,6 +36,16 @@
     color: @normal-text-color;
      &:hover {
         color: @normal-text-color;
+    }
+}
+
+.k-button-icon {
+    .k-icon {
+        opacity: .5;
+    }
+
+    &:hover .k-icon {
+        opacity: 1;
     }
 }
 

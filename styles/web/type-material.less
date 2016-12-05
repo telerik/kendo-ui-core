@@ -208,11 +208,24 @@
     }
 }
 
+.k-toolbar .k-icon,
 .k-editor-dropdown .k-icon,
-.k-tool-icon.k-icon {
+.k-tool-icon.k-icon,
+.k-button-icontext .k-icon,
+.k-button-icon .k-icon {
     color: @normal-text-color;
     &:hover {
         color: @normal-text-color;
+    }
+}
+
+.k-button-icon {
+    .k-icon {
+        opacity: .8;
+    }
+
+    &:hover .k-icon {
+        opacity: 1;
     }
 }
 
