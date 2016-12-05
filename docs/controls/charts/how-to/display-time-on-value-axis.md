@@ -7,11 +7,13 @@ slug: howto_displaytimeonvalueaxis_charts
 
 # Display Time on Value Axis
 
-The `valueAxis` on categorical Kendo UI Charts supports the display of numbers only. However, it is possible to render date and time values by representing the dates as numeric values.
+The `valueAxis` on categorical Kendo UI Charts supports the display of numbers only.
+
+However, it is possible to render date and time values by representing the dates as numeric values.
 
 > **Important**
 >
-> Kendo UI Scatter Charts support displaying dates on the `xAxis` and `yAxis` natively.
+> Kendo UI Scatter Charts support the display of dates on the `xAxis` and `yAxis` natively.
 
 The example below demonstrates how to display time on the value axis of categorical Kendo UI Charts.
 

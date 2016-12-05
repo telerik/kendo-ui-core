@@ -7,7 +7,9 @@ slug: howto_usehyperlinks_inaxislabels_charts
 
 # Use Hyperlinks in Axes Labels
 
-The example below demonstrates how to use hyperlinks in the axes labels of Kendo UI Charts.
+It is possible to use hyperlinks in the axes labels of a Kendo UI Chart.
+
+The example below demonstrates how to achieve this behavior.
 
 ###### Example
 

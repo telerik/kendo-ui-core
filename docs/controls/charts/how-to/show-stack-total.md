@@ -7,8 +7,9 @@ slug: howto_showtotalstacked_charts
 
 # Show Total for Stacked Series
 
-Starting with the 2016 R3 release a `stackValue` field is available in the label template, series visual and event arguments.
-You can use it to display the cumulative point value for stacked series.
+Starting with the 2016 R3 release, a `stackValue` field is available in the label template, the series visual, and the event arguments.
+
+It is possible to use this configuration to display the cumulative point value for stacked series, as demonstrated in the example below.
 
 ###### Example
 

@@ -7,7 +7,9 @@ slug: howto_addhtmltoaxeslabels_charts
 
 # Use HTML for Axes Labels
 
-The example below demonstrates how to use HTML for `categoryAxis.labels` via the [`visual`](/api/javascript/dataviz/ui/chart.html#configuration-categoryAxis.labels.visual) option.
+Your project might require you to use HTML for the `categoryAxis.labels` configuration.   
+
+The example below demonstrates how to achieve this through the [`visual`](/api/javascript/dataviz/ui/chart.html#configuration-categoryAxis.labels.visual) option.
 
 ###### Example
 
