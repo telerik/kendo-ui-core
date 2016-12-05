@@ -5,8 +5,6 @@ description: "Learn how to bind a Kendo UI Chart to Kendo UI PivotGrid data."
 slug: howto_bindcharttopivotgrid_charts
 ---
 
-no previous_url
-
 # Bind Charts to PivotGrid Data
 
 To see the example on how to bind a Kendo UI Chart to PivotGrid data, refer to [this how-to article]({% slug howto_integratewith_kendoui_chart_pivotgrid %}).

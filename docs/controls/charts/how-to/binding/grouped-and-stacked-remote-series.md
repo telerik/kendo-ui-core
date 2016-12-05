@@ -2,17 +2,20 @@
 title: Create Stacked and Grouped Series Bound to Remote Data
 page_title: Create Stacked and Grouped Series Bound to Remote Data | Kendo UI Charts
 description: "Learn how to bind a Kendo UI Chart with multiple stack groups to remote data."
+previous_url: /controls/charts/how-to/grouped-and-stacked-remote-series
 slug: howto_stackedgroupedseriesremote_charts
 ---
 
 # Create Stacked and Grouped Series Bound to Remote Data
 
-The example below demonstrates how to create a stacked and grouped Kendo UI Chart bound to remote data. The [**Bar Charts / Stacked and grouped bars** demo](http://demos.telerik.com/kendo-ui/bar-charts/grouped-stacked-bar) demonstrates the same scenario for inline data.
+To create Stacked and Grouped Chart series that are grouped to remote data:
 
-The implementation consists of two steps:
+1. Assign an unique Group ID value to each **Gender** / **Age Group** combination.
+1. Set the stack name for each series to match the **Gender** field in the [`dataBound` event](/api/javascript/dataviz/ui/chart#events-dataBound).
 
-1. Assign an unique Group ID value to each Gender / Age Group combination.
-1. Set the stack name for each series to match the Gender field in the [`dataBound ` event](/api/javascript/dataviz/ui/chart#events-dataBound).
+To see the same scenario for inline data, refer to the [**Bar Charts / Stacked and grouped bars** demo](http://demos.telerik.com/kendo-ui/bar-charts/grouped-stacked-bar).
+
+The example below demonstrates how to implement the steps previously described.
 
 ###### Example
 
