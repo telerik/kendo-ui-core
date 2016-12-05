@@ -8,7 +8,9 @@ slug: howto_bindcharttospreadsheetdata_charts
 
 # Bind Charts to Spreadsheet Data
 
-To see the example on how to extract Kendo UI Spreadsheet data and populate a Kendo UI Chart, refer to [this how-to article]({% slug howto_bindcharttosheet_spreadsheet_widget %}).
+Your project might require you to extract Kendo UI Spreadsheet data and populate a Kendo UI Chart.
+
+To see the example on how to handle the scenario, refer to [this how-to article]({% slug howto_bindcharttosheet_spreadsheet_widget %}).
 
 ## See Also
 

@@ -2,12 +2,15 @@
 title: Fit PDF Exported Chart to Page
 page_title: Fit PDF Exported Chart to Page | Kendo UI Charts
 description: "Learn how to explode a clicked segment in a Kendo UI Pie Chart."
+previous_url: /controls/charts/how-to/fit-exported-chart-in-pdf
 slug: howto_fitpdfexportedcharttopage_charts
 ---
 
 # Fit PDF Exported Chart to Page
 
-The example below demonstrates how to fit a PDF-exported Kendo UI Chart to a page.
+Sometimes when exporting a Kendo UI Chart, its content might overflow the borders of the page.
+
+The example below demonstrates how to work around this issue and fit a PDF-exported Kendo UI Chart to a page.
 
 ###### Example
 

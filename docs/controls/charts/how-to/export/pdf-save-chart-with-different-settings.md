@@ -2,12 +2,15 @@
 title: Apply Chart Settings for Exported PDF Only
 page_title: Apply Chart Settings for Exported PDF Only | Kendo UI Charts
 description: "Learn how to apply changes, visible only in the exported PDF."
+previous_url: /controls/charts/how-to/pdf-save-chart-with-different-settings
 slug: howto_apply_settings_for_PDF_only_charts
 ---
 
 # Apply Chart Settings for Exported PDF Only
 
-The example below demonstrates how to apply changes, visible only in the exported PDF.
+The Kendo UI Chart provides an option to apply changes that are visible in the content exported in PDF.   
+
+The example below demonstrates how to achieve this behavior.
 
 ###### Example
 
