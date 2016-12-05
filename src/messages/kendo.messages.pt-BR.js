@@ -26,7 +26,7 @@ kendo.ui.ColumnMenu.prototype.options.messages =
 $.extend(true, kendo.ui.ColumnMenu.prototype.options.messages,{
   "sortAscending": "Ordenar Ascendente",
   "sortDescending": "Ordenar Descendente",
-  "filter": "Filtrar",
+  "filter": "Filtro",
   "columns": "Colunas",
   "done": "Feito",
   "settings": "Configurações de Colunas",
@@ -385,9 +385,9 @@ if (kendo.ui.MediaPlayer) {
 kendo.ui.MediaPlayer.prototype.options.messages =
 $.extend(true, kendo.ui.MediaPlayer.prototype.options.messages,{
   "pause": "Pausar",
-  "play": "Começar",
-  "mute": "Mutar",
-  "unmute": "Desmutar",
+  "play": "Iniciar",
+  "mute": "Mudo",
+  "unmute": "Ativar som",
   "quality": "Qualidade",
   "fullscreen": "Tela cheia"
 });
@@ -418,9 +418,9 @@ $.extend(true, kendo.ui.Pager.prototype.options.messages,{
 if (kendo.ui.PivotGrid) {
 kendo.ui.PivotGrid.prototype.options.messages =
 $.extend(true, kendo.ui.PivotGrid.prototype.options.messages,{
-  "measureFields": "Solte os campos aqui",
-  "columnFields": "Solte as colunas aqui",
-  "rowFields": "Solte as linhas aqui"
+  "measureFields": "Soltar campos de dados aqui",
+  "columnFields": "Soltar campos de coluna aqui",
+  "rowFields": "Soltar campos de linha aqui"
 });
 }
 
@@ -429,11 +429,11 @@ $.extend(true, kendo.ui.PivotGrid.prototype.options.messages,{
 if (kendo.ui.PivotFieldMenu) {
 kendo.ui.PivotFieldMenu.prototype.options.messages =
 $.extend(true, kendo.ui.PivotFieldMenu.prototype.options.messages,{
-  "info": "Exibir itens com o valor:",
-  "filterFields": "Filtrar campos",
+  "info": "Mostrar itens com valor que:",
+  "filterFields": "Filtro de campos",
   "filter": "Filtro",
   "include": "Incluir campos...",
-  "title": "Campos para incluir",
+  "title": "Campos a incluir",
   "clear": "Limpar",
   "ok": "Ok",
   "cancel": "Cancelar",
@@ -443,7 +443,7 @@ $.extend(true, kendo.ui.PivotFieldMenu.prototype.options.messages,{
     "startswith": "Começa com",
     "endswith": "Termina com",
     "eq": "É igual à",
-    "neq": "É diferente de"
+    "neq": "Não é igual a"
   }
 });
 }
@@ -573,17 +573,17 @@ if (kendo.spreadsheet && kendo.spreadsheet.messages.borderPalette) {
 kendo.spreadsheet.messages.borderPalette =
 $.extend(true, kendo.spreadsheet.messages.borderPalette,{
   "allBorders": "Todas as bordas",
-  "insideBorders": "Bordas internas",
-  "insideHorizontalBorders": "Bordas internas horizontais",
-  "insideVerticalBorders": "Bordas internas verticais",
-  "outsideBorders": "Bordas externas",
+  "insideBorders": "Dentro das bordas",
+  "insideHorizontalBorders": "Dentro das bordas horizontais",
+  "insideVerticalBorders": "Dentro das bordas verticais",
+  "outsideBorders": "Fora das bordas",
   "leftBorder": "Borda esquerda",
-  "topBorder": "Borda acima",
+  "topBorder": "Borda superior",
   "rightBorder": "Borda direta",
   "bottomBorder": "Borda inferior",
   "noBorders": "Sem bordas",
-  "reset": "Resetar cor",
-  "customColor": "Cor customizada...",
+  "reset": "Redefinir cor",
+  "customColor": "Cor personalizada...",
   "apply": "Aplicar",
   "cancel": "Cancelar"
 });
@@ -600,7 +600,7 @@ $.extend(true, kendo.spreadsheet.messages.dialogs,{
   "revert": "Reverter",
   "okText": "OK",
   "formatCellsDialog": {
-    "title": "Formato",
+    "title": "Formatar",
     "categories": {
       "number": "Número",
       "currency": "Moeda",
@@ -619,13 +619,13 @@ $.extend(true, kendo.spreadsheet.messages.dialogs,{
   "alignmentDialog": {
     "title": "Alinhamento",
     "buttons": {
-     "justtifyLeft": "Alinha à esquerda",
+     "justtifyLeft": "Alinhar à esquerda",
      "justifyCenter": "Centralizar",
-     "justifyRight": "Alinha à direita",
-     "justifyFull": "Justificado",
-     "alignTop": "Alinha ao topo",
-     "alignMiddle": "Alinha ao meio",
-     "alignBottom": "Alinha abaixo"
+     "justifyRight": "Alinhar à direita",
+     "justifyFull": "Justificar",
+     "alignTop": "Alinhar no topo",
+     "alignMiddle": "Alinhar no meio",
+     "alignBottom": "Alinhar abaixo"
     }
   },
   "mergeDialog": {
@@ -647,8 +647,8 @@ $.extend(true, kendo.spreadsheet.messages.dialogs,{
     }
   },
   "validationDialog": {
-    "title": "Validação de dados",
-    "hintMessage": "Favor inserir {0} válido {1}.",
+    "title": "Data de validade",
+    "hintMessage": "Por favor entre com um {0} valor válido {1}.",
     "hintTitle": "Validação {0}",
     "criteria": {
       "any": "Qualquer valor",
@@ -662,22 +662,22 @@ $.extend(true, kendo.spreadsheet.messages.dialogs,{
       "greaterThan": "maior que",
       "lessThan": "menor que",
       "between": "entre",
-      "notBetween": "não entre",
-      "equalTo": "igual à",
-      "notEqualTo": "diferente de",
-      "greaterThanOrEqualTo": "maior ou igual à",
-      "lessThanOrEqualTo": "menor ou igual à"
+      "notBetween": "não está entre",
+      "equalTo": "igual",
+      "notEqualTo": "não é igual",
+      "greaterThanOrEqualTo": "maior ou igual que",
+      "lessThanOrEqualTo": "menor ou igual que"
     },
     "comparerMessages": {
       "greaterThan": "maior que {0}",
       "lessThan": "menor que {0}",
       "between": "entre {0} e {1}",
-      "notBetween": "não entre {0} e {1}",
+      "notBetween": "não está entre {0} e {1}",
       "equalTo": "igual à {0}",
-      "notEqualTo": "diferente de {0}",
+      "notEqualTo": "não é igual a {0}",
       "greaterThanOrEqualTo": "maior ou igual à {0}",
       "lessThanOrEqualTo": "menor ou igual à {0}",
-      "custom": "que satisfaz a fórmula: {0}"
+      "custom": "Isso satisfaz a fórmula: {0}"
     },
     "labels": {
       "criteria": "Critério",
@@ -685,39 +685,39 @@ $.extend(true, kendo.spreadsheet.messages.dialogs,{
       "min": "Min",
       "max": "Max",
       "value": "Valor",
-      "start": "Começa",
-      "end": "Termina",
+      "start": "Inicio",
+      "end": "Fim",
       "onInvalidData": "Em dados inválidos",
       "rejectInput": "Rejeitar entrada",
-      "showWarning": "Exibir erros",
-      "showHint": "Exibir dicas",
+      "showWarning": "Mostrar aviso",
+      "showHint": "Mostrar dica",
       "hintTitle": "Título da dica",
       "hintMessage": "Mensagem de dica",
-      "ignoreBlank": "Ignorar vázio"
+      "ignoreBlank": "Ignorar em branco"
     },
     "placeholders": {
-      "typeTitle": "Título do tipo",
-      "typeMessage": "Mensagem do tipo"
+      "typeTitle": "Escrea o título",
+      "typeMessage": "Escreva a mensagem"
     }
   },
   "saveAsDialog": {
     "title": "Salvar como...",
     "labels": {
       "fileName": "Nome do arquivo",
-      "saveAsType": "Salvar com o tipo"
+      "saveAsType": "Salvar como tipo"
     }
   },
   "exportAsDialog": {
     "title": "Exportar...",
     "labels": {
       "fileName": "Nome do arquivo",
-      "saveAsType": "Salvar com o tipo",
+      "saveAsType": "Salvar como tipo",
       "exportArea": "Exportar",
       "paperSize": "Tamanho do papel",
       "margins": "Margens",
       "orientation": "Orientação",
       "print": "Imprimir",
-      "guidelines": "Linhas guia",
+      "guidelines": "Diretrizes",
       "center": "Centralizar",
       "horizontally": "Horizontalmente",
       "vertically": "Verticalmente"
@@ -727,16 +727,16 @@ $.extend(true, kendo.spreadsheet.messages.dialogs,{
     "errorMessage": "Não é possível alterar parte de uma célula mesclada."
   },
   "useKeyboardDialog": {
-    "title": "Copiando e colando",
-    "errorMessage": "Estas ações não podem ser invocadas através do menu. Por favor, use os atalhos de teclado:",
+    "title": "Copiar e colar",
+    "errorMessage": "Estas ações não podem ser invocadas através do menu. Use os atalhos do teclado ao invés disso:",
     "labels": {
-      "forCopy": "para copiar",
-      "forCut": "para cortar",
+      "forCopy": "para copia",
+      "forCut": "para recortar",
       "forPaste": "para colar"
     }
   },
   "unsupportedSelectionDialog": {
-    "errorMessage": "Essa ação não pode ser executada em seleção múltipla."
+    "errorMessage": "Essa ação não pode ser realizada na seleção múltipla."
   }
 });
 }
@@ -744,34 +744,34 @@ $.extend(true, kendo.spreadsheet.messages.dialogs,{
 if (kendo.spreadsheet && kendo.spreadsheet.messages.filterMenu) {
 kendo.spreadsheet.messages.filterMenu =
 $.extend(true, kendo.spreadsheet.messages.filterMenu,{
-  "sortAscending": "Ordenar intervalo de A à Z",
-  "sortDescending": "Ordenar intervalo de Z à A",
-  "filterByValue": "Filtrar pelo valor",
+  "sortAscending": "Classificar de A a Z",
+  "sortDescending": "Classificar de Z a A",
+  "filterByValue": "Filtrar por valor",
   "filterByCondition": "Filtrar pela condição",
   "apply": "Aplicar",
   "search": "Procurar",
-  "addToCurrent": "Adicionar a seleção atual",
+  "addToCurrent": "Adicionar à lista",
   "clear": "Limpar",
-  "blanks": "(Brancos)",
+  "blanks": "(Vazio)",
   "operatorNone": "Nenhum",
   "and": "E",
   "or": "OU",
   "operators": {
     "string": {
-      "contains": "Conteúdo do texto",
-      "doesnotcontain": "Não contém no texto",
-      "startswith": "O texto começa com",
-      "endswith": "O texto termina com"
+      "contains": "Texto contém",
+      "doesnotcontain": "Texto não contém",
+      "startswith": "Texto começa com",
+      "endswith": "Texto termina com"
     },
     "date": {
-      "eq":  "Data igual",
-      "neq": "Data diferente",
-      "lt":  "Data anterior",
-      "gt":  "Data posterior"
+      "eq":  "É igual a",
+      "neq": "Não é igual a",
+      "lt":  "É anterior a",
+      "gt":  "É posterior a"
     },
     "number": {
       "eq": "É igual à",
-      "neq": "Deferente de",
+      "neq": "Não é igual a",
       "gte": "É maior ou igual à",
       "gt": "É maior que",
       "lte": "É menor ou igual à",
@@ -793,36 +793,36 @@ $.extend(true, kendo.spreadsheet.messages.toolbar,{
     "justtifyLeft": "Alinhar à esquerda",
     "justifyCenter": "Centralizar",
     "justifyRight": "Alinha à direita",
-    "justifyFull": "Justificado",
-    "alignTop": "Alinhar ao topo",
-    "alignMiddle": "Alinhar ao meio",
+    "justifyFull": "Justificar",
+    "alignTop": "Alinhar acima",
+    "alignMiddle": "Alinhar no meio",
     "alignBottom": "Alinhar abaixo"
   },
   "backgroundColor": "Fundo",
   "bold": "Negrito",
   "borders": "Bordas",
   "colorPicker": {
-    "reset": "Resetar cor",
+    "reset": "Redefinir cor",
     "customColor": "Cor personalizada..."
   },
   "copy": "Copiar",
-  "cut": "Cortar",
+  "cut": "Recortar",
   "deleteColumn": "Excluir coluna",
   "deleteRow": "Excluir linha",
   "excelImport": "Importar do Excel...",
-  "filter": "Filtrar",
+  "filter": "Filtro",
   "fontFamily": "Fonte",
   "fontSize": "Tamanho da fonte",
   "format": "Formato personalizado...",
   "formatTypes": {
     "automatic": "Automático",
     "number": "Número",
-    "percent": "Porcentagel",
+    "percent": "Porcentagem",
     "financial": "Financeiro",
     "currency": "Moeda",
     "date": "Data",
-    "time": "Horário",
-    "dateTime": "Data e horário",
+    "time": "Hora",
+    "dateTime": "Data hora",
     "duration": "Duração",
     "moreFormats": "Mais formatos..."
   },
@@ -851,17 +851,17 @@ $.extend(true, kendo.spreadsheet.messages.toolbar,{
   },
   "saveAs": "Salvar como...",
   "sortAsc": "Ordenar ascendente",
-  "sortDesc": "Ordenar descendente",
+  "sortDesc": "Classificar decrescente",
   "sortButtons": {
-    "sortSheetAsc": "Ordenar folha de A à Z",
-    "sortSheetDesc": "Ordenar folha de Z à A",
-    "sortRangeAsc": "Ordenar folha de A à Z",
-    "sortRangeDesc": "Ordenar folha de Z à A"
+    "sortSheetAsc": "Classificar folha de A à Z",
+    "sortSheetDesc": "Classificar folha de Z à A",
+    "sortRangeAsc": "Ordenar intervalo de A a Z",
+    "sortRangeDesc": "Ordenar intervalo de Z a A"
   },
   "textColor": "Cor do texto",
-  "textWrap": "Quebrar texto",
+  "textWrap": "Envolver texto",
   "underline": "Sublinhado",
-  "validation": "Validação de dados..."
+  "validation": "Data de validade..."
 });
 }
 
@@ -869,14 +869,14 @@ if (kendo.spreadsheet && kendo.spreadsheet.messages.view) {
 kendo.spreadsheet.messages.view =
 $.extend(true, kendo.spreadsheet.messages.view,{
   "errors": {
-    "shiftingNonblankCells": "Impossível inserir celulas, devido a possibilidade de perda dos dados. Selecione outro local ou excluir os dados a partir do final da planilha.",
-    "filterRangeContainingMerges": "Impossível criar filtro dentro de uma faixa contendo fusões.",
-    "validationError": "O valor introduzido viola as regras de validação definidas na célula."
+    "shiftingNonblankCells": "Não é possível inserir células devido à possibilidade de perda de dados. Selecione outro local de inserção ou exclua os dados do final de sua planilha.",
+    "filterRangeContainingMerges": "Não é possível criar um filtro dentro de um intervalo que contém mesclagens.",
+    "validationError": "O valor inserido viola as regras de validação definidas na célula."
   },
   "tabs": {
-    "home": "Começo",
+    "home": "Principal",
     "insert": "Inserir",
-    "data": "Dados"
+    "data": "Dado"
   }
 });
 }
@@ -886,8 +886,8 @@ $.extend(true, kendo.spreadsheet.messages.view,{
 if (kendo.ui.Slider) {
 kendo.ui.Slider.prototype.options =
 $.extend(true, kendo.ui.Slider.prototype.options,{
-  "increaseButtonTitle": "Incrementar",
-  "decreaseButtonTitle": "Decrementar"
+  "increaseButtonTitle": "Aumentar",
+  "decreaseButtonTitle": "Diminuir"
 });
 }
 
@@ -898,14 +898,14 @@ kendo.ui.TreeList.prototype.options.messages =
 $.extend(true, kendo.ui.TreeList.prototype.options.messages,{
   "noRows": "Sem resultados",
   "loading": "Carregando...",
-  "requestFailed": "Requisição falhou.",
+  "requestFailed": "Falha na solicitação.",
   "retry": "Tentar novamente",
   "commands": {
       "edit": "Editar",
       "update": "Atualizar",
       "canceledit": "Cancelar",
-      "create": "Adicionar novo",
-      "createchild": "Adicionar sub registro",
+      "create": "Adicionar novo registo",
+      "createchild": "Adicionar registro filho",
       "destroy": "Excluir",
       "excel": "Exportar para Excel",
       "pdf": "Exportar para PDF"
@@ -917,10 +917,10 @@ if (kendo.ui.TreeList) {
 kendo.ui.TreeList.prototype.options.columnMenu =
 $.extend(true, kendo.ui.TreeList.prototype.options.columnMenu, {
     "messages": {
-        "columns": "Escolha as colunas",
+        "columns": "Escolher colunas",
         "filter": "Aplicar filtro",
-        "sortAscending": "Ord (asc)",
-        "sortDescending": "Ord (desc)"
+        "sortAscending": "Classificar (asc)",
+        "sortDescending": "Classificar (desc)"
     }
 });
 }
