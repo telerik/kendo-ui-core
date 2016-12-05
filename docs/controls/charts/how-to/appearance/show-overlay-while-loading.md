@@ -1,13 +1,16 @@
 ---
-title: Show Overlay While Loading
-page_title: Show Overlay While Loading | Kendo UI Charts
+title: Show Overlay while Loading
+page_title: Show Overlay while Loading | Kendo UI Charts
 description: "Learn how to show a loading indicator while the data of a Kendo UI Chart is loading."
+previous_url: /controls/charts/how-to/show-overlay-while-loading
 slug: howto_showoverlaywhileloading_charts
 ---
 
-# Show Overlay While Loading
+# Show Overlay while Loading
 
-The example below demonstrates how to show a loading indicator while while the data of a Kendo UI Chart is loading. The loading indicator is cleared in the [`render`](/api/javascript/dataviz/ui/chart#events-render) event.
+In some cases, the loading of a Chart might take longer time than the user expects. For such scenarios, you can configure the Kendo UI Chart to show the progress of the process.
+
+The example below demonstrates how to display a loading indicator while the data of a Kendo UI Chart is loading. The loading indicator is cleared in the [`render`](/api/javascript/dataviz/ui/chart#events-render) event.
 
 > **Important**
 >

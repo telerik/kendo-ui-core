@@ -2,12 +2,15 @@
 title: Use Linear Gradient As Background in Bars
 page_title: Use Linear Gradient As Background in Bars | Kendo UI Charts
 description: "Learn how to use linear gradients as background in bars when working with the Kendo UI Charts."
+previous_url: /controls/charts/how-to/linear-gradient-bars
 slug: howto_uselineargradient_inbars_charts
 ---
 
 # Use Linear Gradient As Background in Bars
 
-The example below demonstrates how to use the Linear Gradient as a background in bars when working with Kendo UI Charts.
+Some projects might require the setting of custom backgrounds in Kendo UI Bar Charts.
+
+The example below demonstrates how to use the Linear Gradient as such when working with Kendo UI Charts.
 
 ###### Example
 

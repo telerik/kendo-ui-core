@@ -2,18 +2,21 @@
 title: Use FontAwesome in Labels
 page_title: Use FontAwesome in Labels | Kendo UI Charts
 description: "Learn how to include FontAwesome icons in Kendo UI Chart labels."
+previous_url: /controls/charts/how-to/font-awesome-icons
 slug: howto_fontawesomeicons_charts
 ---
 
 # Use FontAwesome in Labels
 
-The Chart labels cannot contain HTML markup, so you are not able to use FontAwesome via CSS styles. Below are listed the options to work around this.
+The Chart labels cannot contain HTML markup, so you are not able to implement FontAwesome icons by using CSS styles.
+
+To work around this behavior, use either of the following options:
+* [Apply Unicode code points](#apply-unicode-code-points)
+* [Render custom visuals](#render-custom-visuals)
 
 ## Apply Unicode Code Points
 
-The simplest approach is to use the Unicode symbols from the font directly.
-
-An obvious drawback is that you are limited to FontAwesome for the entire label.
+Using the Unicode symbols from the font directly is the most common approach to achieve this behavior. However, an obvious drawback is that you are limited to FontAwesome for the entire label.
 
 ### To Series Labels
 
@@ -99,7 +102,7 @@ The example below demonstrates how to use FontAwesome icons in series notes with
 
 Visual templates are the most flexible way to override the rendering of the Chart elements. They allow you to construct the labels by using the [Drawing API]({% slug overview_kendoui_drawingapi %}).
 
-The example below demonstrates how to construct a visual using two [Text](/api/javascript/drawing/text) shapes and position them in a [Layout](/api/javascript/drawing/layout). The first `Text` element contains the FontAwesome icon. The second one is a plain text label.
+The example below demonstrates how to construct a visual that uses two [Text](/api/javascript/drawing/text) shapes and to position them in a [Layout](/api/javascript/drawing/layout). The first `Text` element contains the FontAwesome icon. The second one is a plain text label.
 
 ###### Example
 

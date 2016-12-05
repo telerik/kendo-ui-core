@@ -2,12 +2,15 @@
 title: Show Message When Chart Has No Data
 page_title: Show Message When Chart Has No Data | Kendo UI Charts
 description: "Learn how to show a message if the data source of a Kendo UI Chart is empty."
+previous_url: /controls/charts/how-to/show-no-data-available-message
 slug: howto_showemptymessage_whencharthasnodata_charts
 ---
 
 # Show Message When Chart Has No Data
 
-The example below demonstrates how to show a message if the data source of a Kendo UI Chart is empty. Note that the `<div>` element of the message is positioned and decorated via CSS.
+You can configure the Kendo UI Chart to display a message when its data source is empty.
+
+The example below demonstrates how to achieve such behavior. Note that the `<div>` element of the message is positioned and decorated through CSS.
 
 ###### Example
 

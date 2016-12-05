@@ -2,12 +2,15 @@
 title: Show Labels over Nested Donuts
 page_title: Show Labels over Nested Donuts | Kendo UI Charts
 description: "Learn how to show labels over nested rings of a Kendo UI Donut Chart."
+previous_url: /controls/charts/how-to/show-labels-for-inner-ring-donut
 slug: howto_showlabelsovernesteddonuts_charts
 ---
 
 # Show Labels over Nested Donuts
 
-The example below demonstrates how to place the labels of a Kendo UI Donut Chart over the nested rings.
+The Kendo UI Donut Chart provides an option to display the labels over its nested rings.
+
+The example below demonstrates how to configure such behavior.
 
 ###### Example
 

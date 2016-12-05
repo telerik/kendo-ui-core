@@ -2,18 +2,21 @@
 title: Render Custom Plot Bands
 page_title: Render Custom Plot Bands | Kendo UI Charts
 description: "Learn how to create your own plot bands as a custom overlay in a Kendo UI Chart."
+previous_url: /controls/charts/how-to/custom-plot-bands
 slug: howto_rendercustomplotbands_charts
 ---
 
 # Render Custom Plot Bands
 
-The example below demonstrates how to create our own plot bands as a custom overlay. Create custom elements in the [`render` event](/api/javascript/dataviz/ui/chart#events-render) to ensure they survive redraws. Note that you can extend the techniques shown here to create much more complex annotations as well.
+You might need to create your own plot bands as a custom overlay.
 
-For a list of all available drawing primitives, refer to the [Drawing API article](/framework/drawing/overview).
+To achieve this behavior, create custom elements in the [`render` event](/api/javascript/dataviz/ui/chart#events-render) to ensure they survive redraws. Note that you can extend the techniques shown here to create much more complex annotations as well.
+
+For a list of all available drawing primitives, refer to the introductory article on the [Drawing API]({% slug overview_kendoui_drawingapi %}).
 
 ## In Column Charts
 
-The example below demonstrates how to render a custom plot band in a column Kendo UI Chart.
+The example below demonstrates how to render a custom plot band in a Column Kendo UI Chart.
 
 ###### Example
 
@@ -83,7 +86,7 @@ The example below demonstrates how to render a custom plot band in a column Kend
 
 ## In Bar Charts
 
-The example below demonstrates how to render a custom plot band in a bar Kendo UI Chart.
+The example below demonstrates how to render a custom plot band in a Bar Kendo UI Chart.
 
 ###### Example
 

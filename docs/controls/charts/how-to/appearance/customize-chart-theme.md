@@ -2,10 +2,13 @@
 title: Customize Chart Themes
 page_title: Customize Chart Themes | Kendo UI Charts
 description: "Learn how to create a custom theme for a Kendo UI Chart."
+previous_url: /controls/charts/how-to/customize-chart-theme
 slug: howto_customizechartthemes_charts
 ---
 
 # Customize Chart Themes
+
+Your project might require a theme that is different from the default ones the Kendo UI Chart supports.
 
 The example below demonstrates how to create a custom theme for a Kendo UI Chart.
 

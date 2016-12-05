@@ -2,18 +2,21 @@
 title: Implement Color-Coded Ranges in Bars
 page_title: Implement Color-Coded Ranges in Bars | Kendo UI Charts
 description: "Learn how to implement color-coded ranges in bars when working with the Kendo UI Charts."
+previous_url: /controls/charts/how-to/color-coded-bars
 slug: howto_implementcolorcodedranges_inbars_charts
 ---
 
 # Implement Color-Coded Ranges in Bars
 
-Color ranges can be used to convey additional information, e.g. value composition. This is usually implemented through stacked bar series. However, if you wish to convey more flexibility, consider the chart below.
+Color ranges can be used to convey additional information&mdash;for example, value composition.
+
+This behavior is usually achieved through stacked bar series. However, if you need to convey more flexibility, consider the following Chart.
 
 **Figure 1. Color ranges in a Kendo UI Chart**
 
 ![Color-coded ranges](/controls/charts/how-to/images/color-coded-bars.png)
 
-You can implement this functionality by defining a [`series.visual`](/api/javascript/dataviz/ui/chart#configuration-series.visual) that draws the ranges dynamically. Note that the visual remains in use until the next [`render` event](/api/javascript/dataviz/ui/chart#events-render). This allows you to update it asynchronously or in real-time.
+To implement this functionality, define a [`series.visual`](/api/javascript/dataviz/ui/chart#configuration-series.visual) that draws the ranges dynamically. Note that the visual remains in use until the next [`render` event](/api/javascript/dataviz/ui/chart#events-render). This allows you to update it asynchronously or in real-time.
 
 The example below demonstrates how to implement color-coded ranges (stripes) in bars when working with Kendo UI Charts.
 

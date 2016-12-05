@@ -2,12 +2,15 @@
 title: Shorten Chart Labels
 page_title: Shorten Chart Labels | Kendo UI Charts
 description: "Learn how to shorten long Kendo UI Chart labels to a more readable format."
+previous_url: /controls/charts/how-to/shorten-chart-labels
 slug: howto_shortenchartlabels_charts
 ---
 
 # Shorten Chart Labels
 
-The example below demonstrates how to shorten long Kendo UI Chart labels to a more readable format.
+In some scenarios, you might need to make a long Kendo UI Chart label short to make it more structured and comprehensible.
+
+The example below demonstrates how to shorten long Chart labels and turn them into a more readable format.
 
 ###### Example
 

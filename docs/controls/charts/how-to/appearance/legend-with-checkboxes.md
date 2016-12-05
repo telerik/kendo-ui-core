@@ -1,17 +1,20 @@
 ---
-title: Display Checkboxes Next to Legend Items
-page_title: Display Checkboxes Next to Legend Items | Kendo UI Charts
+title: Display Checkboxes next to Legend Items
+page_title: Display Checkboxes next to Legend Items | Kendo UI Charts
 description: "Learn how to customize the appearance of legend items in Kendo UI Charts."
+previous_url: /controls/charts/how-to/legend-with-checkboxes
 slug: howto_displaycheckboxes_nexttolegenditems_charts
 ---
 
-# Display Checkboxes Next to Legend Items
+# Display Checkboxes next to Legend Items
 
-The [`legend.item.visual`](/api/javascript/dataviz/ui/chart#configuration-legend.item.visual) can be overridden to render custom text, images, and shapes. Draw a checkbox that matches the visible state of the series. The checkbox is represented by using an [Unicode Ballot Box symbol](https://en.wikipedia.org/wiki/Checkbox#Unicode).
+The [`legend.item.visual`](/api/javascript/dataviz/ui/chart#configuration-legend.item.visual) can be overridden to render custom text, images, and shapes.
+
+For example, you might need to draw a checkbox that matches the visible state of the series. In this case, the checkbox is represented by using an [Unicode Ballot Box symbol](https://en.wikipedia.org/wiki/Checkbox#Unicode).
 
 For a list of all available drawing primitives, refer to the [Drawing API article](/framework/drawing/overview).
 
-The example below demonstrates how to customize the appearance of legend items in Kendo UI Charts.
+The example below demonstrates how to customize the appearance of the legend items in a Kendo UI Chart.
 
 ###### Example
 

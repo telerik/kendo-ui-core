@@ -1,15 +1,16 @@
 ---
-title: Set RTL Alignment to Charts
-page_title: Set RTL Alignment to Charts | Kendo UI Charts
+title: Achieve RTL Alignment by Using the Drawing API
+page_title: Achieve RTL Alignment by Using the Drawing API | Kendo UI Charts
 description: "Learn how to set an RTL alignment to a Kendo UI Chart widget."
+previous_url: /controls/charts/how-to/set-rtl-alignment
 slug: howto_setrtlalignment_charts
 ---
 
-# Set RTL Alignment to Charts
+# Achieve RTL Alignment by Using the Drawing API
 
-Currently, the Kendo UI widgets for data visualization provide no official [right-to-left (RTL) support]({% slug right_toleft_languages_accessibility_support %}). However, you are able to achieve a similar outcome in a Kendo UI Chart widget through its configuration options.
+Currently, the Kendo UI widgets for data visualization do not provide official [right-to-left (RTL) support]({% slug right_toleft_languages_accessibility_support %}).
 
-The example below demonstrates how to set an RTL alignment in a Kendo UI Chart.
+However, you can achieve a similar outcome in a Kendo UI Chart by using the [Drawing API]({% slug overview_kendoui_drawingapi %}), as demonstrated in the example below.
 
 ###### Example
 

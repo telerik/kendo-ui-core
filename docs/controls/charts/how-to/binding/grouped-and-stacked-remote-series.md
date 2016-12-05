@@ -7,7 +7,7 @@ slug: howto_stackedgroupedseriesremote_charts
 
 # Create Stacked and Grouped Series Bound to Remote Data
 
-The example below demonstrates how to create a stacked and grouped Kendo UI Chart bound to remote data. The [**Bar Charts** > **Stacked and grouped bars** demo](http://demos.telerik.com/kendo-ui/bar-charts/grouped-stacked-bar) demonstrates the same scenario for inline data.
+The example below demonstrates how to create a stacked and grouped Kendo UI Chart bound to remote data. The [**Bar Charts / Stacked and grouped bars** demo](http://demos.telerik.com/kendo-ui/bar-charts/grouped-stacked-bar) demonstrates the same scenario for inline data.
 
 The implementation consists of two steps:
 

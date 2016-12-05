@@ -2,12 +2,15 @@
 title: Create Gradients from Left to Right with Multi-Color Values
 page_title: Create Gradients from Left to Right with Multi-Color Values | Kendo UI Charts
 description: "Learn how to create left-to-right gradients with three-color values in a Kendo UI Chart."
+previous_url: /controls/charts/how-to/create-left-to-right-gradient-multi-color-values
 slug: howto_creategradientleftrightmulticolors_charts
 ---
 
 # Create Gradients from Left to Right with Multi-Color Values
 
-The example below demonstrates how to create left-to-right gradients with three-color values in a Kendo UI Chart.
+The Kendo UI Chart supports the option to create left-to-right gradients with multi-color values.
+
+The example below demonstrates how to create such gradients with three-color values.
 
 ###### Example
 

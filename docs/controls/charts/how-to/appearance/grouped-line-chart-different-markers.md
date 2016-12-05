@@ -2,12 +2,15 @@
 title: Set Marker Types for Grouped Line Charts
 page_title: Set Marker Types for Grouped Line Charts | Kendo UI Charts
 description: "Learn how to set different marker types to each series in a grouped Kendo UI Line Chart."
+previous_url: /controls/charts/how-to/grouped-line-chart-different-markers
 slug: howto_setdifrerentmarkers_forgroupedlinecharts_charts
 ---
 
 # Set Marker Types for Grouped Line Charts
 
-The example below demonstrates how to set different marker types to each series in a grouped Kendo UI Line Chart.
+Some projects might require you to set different marker types to each series in a Kendo UI Line Chart.
+
+The example below demonstrates how to achieve this behavior.
 
 ###### Example
 

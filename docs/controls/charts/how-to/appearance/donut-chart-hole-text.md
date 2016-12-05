@@ -2,12 +2,18 @@
 title: Place Text in Donut Chart Center
 page_title: Place Text in Donut Chart Center | Kendo UI Charts
 description: "Learn how to place some text in the center of a Kendo UI Donut Chart."
+previous_url: /controls/charts/how-to/donut-chart-hole-text
 slug: howto_placetextinthecentre_donutcharts
 ---
 
 # Place Text in Donut Chart Center
 
-To display some text in the center of a Kendo UI Donut Chart, use the [`render` event](/api/javascript/dataviz/ui/chart#events-render) to plot Text and other Shapes. First of all, you must locate the center point. The [`series.visual`](/api/javascript/dataviz/ui/chart#configuration-series.visual) provides this information.
+In some scenarios, you might need to display some content in the center of a Kendo UI Donut Chart.
+
+To achieve this behavior:
+
+1. Locate the center point. For more information, refer to the [`series.visual`](/api/javascript/dataviz/ui/chart#configuration-series.visual) API call.    
+2. Plot `Text` or other `Shapes` to achieve this behavior by using the [`render` event](/api/javascript/dataviz/ui/chart#events-render).
 
 The example below demonstrates how to place some text in the center of a Kendo UI Donut Chart.
 

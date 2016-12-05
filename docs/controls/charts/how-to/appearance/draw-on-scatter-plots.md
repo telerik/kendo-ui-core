@@ -2,16 +2,22 @@
 title: Draw on Scatter Plots Surface
 page_title: Draw on Scatter Plots Surface | Kendo UI Charts
 description: "Learn how to draw freely on the surface of a Kendo UI Chart with scatter series."
+previous_url: /controls/charts/how-to/draw-on-scatter-plots
 slug: howto_drawonscatterplotssurface_charts
 ---
 
 # Draw on Scatter Plots Surface
 
-The example below demonstrates how to draw freely on the surface of a Kendo UI Chart with scatter series.
+The Kendo UI Chart with scatter series provides an option for you to freely draw on its surface.
 
-First, draw a rectangle with gradient fill on a scatter plot at specified coordinates. Create custom elements in the [`render` event](/api/javascript/dataviz/ui/chart#events-render) to ensure they survive redraws.
+To achieve this behavior:
 
-For a list of all available drawing primitives, refer to the [Drawing API article](/framework/drawing/overview).
+1. Draw a rectangle with gradient fill on a scatter plot at specified coordinates.
+2. Create custom elements in the [`render` event](/api/javascript/dataviz/ui/chart#events-render) to ensure they survive redraws.
+
+For a list of all available drawing primitives, refer to the introductory article on the [Drawing API]({% slug overview_kendoui_drawingapi %}).
+
+The example below demonstrates how to draw freely on the Scatter plot surface.
 
 ###### Example
 

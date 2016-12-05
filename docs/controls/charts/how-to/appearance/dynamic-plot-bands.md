@@ -2,12 +2,15 @@
 title: Create Dynamic Plot Bands
 page_title: Create Dynamic Plot Bands | Kendo UI Charts
 description: "Learn how to create dynamic plot bands for Kendo UI Charts."
+previous_url: /controls/charts/how-to/dynamic-plot-bands
 slug: howto_createdynamicplotbands_charts
 ---
 
 # Create Dynamic Plot Bands
 
-The example below demonstrates how to create dynamic plot bands for Kendo UI Charts.
+You might need to highlight data in a Kendo UI Chart by using dynamic plot bands.
+
+The example below demonstrates how to achieve this behavior.
 
 ###### Example
 

@@ -2,12 +2,15 @@
 title: Use Fixed Bar Size
 page_title: Use Fixed Bar Size | Kendo UI Charts
 description: "Learn how to use bars of a fixed size when working with the Kendo UI Charts."
+previous_url: /controls/charts/how-to/fixed-bar-size
 slug: howto_usefixedbarsize_charts
 ---
 
 # Use Fixed Bar Size
 
-The example below demonstrates how to use the [`series.visual`](/api/javascript/dataviz/ui/chart#configuration-series.visual) function to scale the default drawing element of the bars so that it always has the same size.
+You might need to set the size of the default drawing element of the bars to the same size.
+
+The example below demonstrates how to use the [`series.visual`](/api/javascript/dataviz/ui/chart#configuration-series.visual) function to scale the default drawing element of the bars and achieve this behavior.
 
 ###### Example
 
