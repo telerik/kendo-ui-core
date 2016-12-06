@@ -391,6 +391,14 @@ The event on which the Tooltip will be shown. Predefined values are "mouseenter"
       });
     </script>
 
+## Fields
+
+### popup `kendo.ui.Popup`
+
+Holds the Kendo UI [`Popup`](/api/javascript/ui/popup) instance, which manages the showing and hiding of the tooltips at the appropriate position.
+
+The `popup` field can be used to apply custom CSS classes and styles, or any other attributes to the Popup's [`element` or `wrapper`](/intro/widget-basics/wrapper-element).
+    
 ## Methods
 
 ### show
