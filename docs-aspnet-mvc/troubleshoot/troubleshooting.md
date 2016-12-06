@@ -68,13 +68,17 @@ Below are listed the packages you need to update through [NuGet](https://www.nug
 >
 > In ASP.NET MVC 3 applications `jquery.unobtrusive-ajax` and `jquery.validate.unobtrusive` are not installed as NuGet packages. Install them separately. The packages are [`Microsoft.jQuery.Unobtrusive.Ajax`](https://www.nuget.org/packages/Microsoft.jQuery.Unobtrusive.Ajax) and [`Microsoft.jQuery.Unobtrusive.Validation`](https://www.nuget.org/packages/Microsoft.jQuery.Unobtrusive.Validation). First, delete `jquery.unobtrusive-ajax.js`, `jquery.unobtrusive-ajax.min.js`, `jquery.validate.unobtrusive.js`, and `jquery.validate.unobtrusive.min.js` from your `~/Sripts` folder. Then, install `Microsoft.jQuery.Unobtrusive.Ajax` and `Microsoft.jQuery.Unobtrusive.Validation`.
 
-### DOM-based Open Redirection in kendo.aspnetmvc.min.js
+### DOM-Based Open Redirection Issue in kendo.aspnetmvc.min.js Is Reported
 
-Some JavaScript security tools may report a possible DOM-based open redirection issue in kendo.aspnetmvc.min.js.
+Some JavaScript security tools report a possible DOM-based open redirection issue in the `kendo.aspnetmvc.min.js` file.
 
-The relevant part of the source code is used when a Kendo UI Grid widget is server-bound, and data operations (paging, sorting, etc) reload the whole web page. The code takes the query string portion of the current URL, manipulates some of the parameter values (e.g. the page number) and sets it as a new `location.href`. So, in standard scenarios, the same page will be loaded, but with different query string parameters (which should be subject to server-side validation as a best practice anyway). In theory, it is possible to configure a different URL rather than the current page in the Grid DataSource settings, however, this is under developer control. If the configured URL is changed by a third party, this means that the application is already compromised.
+The relevant part of the source code is used when a Kendo UI Grid is server-bound and data operations, such as paging and sorting, reload the whole web page. The code takes the query string portion of the current URL, manipulates some of the parameter values, such as the page number, and sets it as a new `location.href`. In standard scenarios, the same page will be loaded as a result, but with different query string parameters which, anyway, should be subject to server-side validation as a best practice.
 
-We do not see any justifiable reason for concern and this item can be marked as a **false positive**.
+In theory, it is possible to configure a different URL rather than the current page in the DataSource settings of the Grid. However, this is under the control of the developer. If the configured URL is changed by a third party, the application is already compromised.
+
+**Solution**
+
+This issue does not represent a justifiable reason for concern and can be marked as a false positive.
 
 ## Server Side
 
