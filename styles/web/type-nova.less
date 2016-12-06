@@ -20,7 +20,16 @@
 @import "themes/type.less";
 
 /* Main colors */
-.k-header .k-icon {
+/* main colors */
+div.k-header .k-icon,
+.k-group-indicator .k-icon,
+.k-button .k-icon,
+.k-group-indicator .k-icon,
+.k-primary.k-button .k-icon,
+.k-dropdown-wrap.k-state-hovered .k-select .k-icon,
+.k-dropdown-wrap.k-state-active .k-select .k-icon,
+a.k-state-active.k-button-icon .k-icon,
+.k-tabstrip-wrapper .k-spreadsheet-quick-access-toolbar .k-icon {
     color: @selected-text-color;
     &:hover {
         color: @selected-text-color;
@@ -28,14 +37,18 @@
 }
 
 .k-icon,
-.k-tool.k-state-hover,
-.k-tool.k-state-hover .k-icon
-.k-button .k-icon,
+.k-widget .k-icon,
+.k-dialog-titlebar.k-header .k-icon,
 .k-editor-dropdown .k-icon,
-.k-tool-icon.k-icon {
-    color: @normal-text-color;
-     &:hover {
-        color: @normal-text-color;
+.k-tool-icon.k-icon,
+.k-widget.k-header .k-icon,
+.k-button .k-icon,
+.k-button-icontext .k-icon,
+.k-button-icon .k-icon,
+.k-header.k-tabstrip .k-icon {
+    color: lighten(@hover-text-color, 8%);
+    &:hover {
+        color: lighten(@hover-text-color, 8%);
     }
 }
 
