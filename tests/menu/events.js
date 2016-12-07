@@ -156,4 +156,91 @@ asyncTest("open event can be canceled", 1, function() {
 });
 
 
+test("item select is triggered when items are loaded via dataSource", function() {
+    var menuDiv = $("<div id='dataBoundMenu'></div>").appendTo(QUnit.fixture);
+    var selectCount = 0;
+    var raiseCount = function () {
+        selectCount++;
+    };
+    $("#dataBoundMenu").kendoMenu({
+        dataSource: [
+            {
+                text: "Item 1",
+                select: raiseCount,
+                items: [
+                    {
+                        text: "Item 2",
+                        select: raiseCount,
+                        items: [
+                            {
+                                text: "Item 3",
+                                select: raiseCount,
+                            }
+                        ]               
+                    }
+                ]               
+            }                      
+        ]
+    });
+    var dataBoundMenu = $("#dataBoundMenu").data("kendoMenu");
+
+    var items = $('.k-item', dataBoundMenu.element);
+    items.each(function() {
+        $(this).children(".k-link").trigger(CLICK);
+    });
+
+    equal(selectCount, 3);
+    menuDiv.remove();
+});
+
+test("item select is triggered when items are loaded via append", function() {
+    var selectCount = 0;
+    menu.append([
+        {
+            text: "New Item",
+            select: function(e){
+                selectCount++;
+            }
+        }
+    ]);
+
+    $('.k-item', menu.element).last().children(".k-link").trigger(CLICK);
+    
+    equal(selectCount, 1);
+});
+
+test("item select is triggered when items are loaded via insertAfter", function() {
+    var selectCount = 0;
+    menu.insertAfter(
+        [{
+            text: "New Item",
+            select: function(e){
+                selectCount++;
+            }
+        }],
+        "> li:last-child"
+    );
+
+    $('.k-item', menu.element).last().children(".k-link").trigger(CLICK);
+    
+    equal(selectCount, 1);
+});
+
+test("item select is triggered when items are loaded via insertBefore", function() {
+    var selectCount = 0;
+    menu.insertBefore(
+        [{
+            text: "New Item",
+            select: function(e){
+                selectCount++;
+            }
+        }],
+        "> li:first-child"
+    );
+
+    $('.k-item', menu.element).first().children(".k-link").trigger(CLICK);
+    
+    equal(selectCount, 1);
+});
+
 })();

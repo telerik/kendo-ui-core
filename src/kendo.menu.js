@@ -320,6 +320,35 @@ var __meta__ = { // jshint ignore:line
         item.filter(":last-child").addClass(LAST);
     }
 
+    function storeItemSelectEventHandler (element, options) {
+        var selectHandler = getItemSelectEventHandler(options);
+        if(selectHandler) {
+            setItemData(element, selectHandler);
+        }
+
+        if (options.items) {
+            $(element).children("ul").children("li").each(function(i){
+                storeItemSelectEventHandler(this, options.items[i]);
+            });
+        }
+    }
+
+    function setItemData (element, selectHandler) {
+        $(element).children(".k-link").data({
+            selectHandler : selectHandler
+        });
+    }
+
+    function getItemSelectEventHandler (options) {
+        var selectHandler = options.select,
+            isFunction = kendo.isFunction;
+
+        if (selectHandler && isFunction(selectHandler)) {
+            return selectHandler;
+        }
+        return null;
+    }              
+
     var Menu = Widget.extend({
         init: function(element, options) {
             var that = this;
@@ -462,26 +491,28 @@ var __meta__ = { // jshint ignore:line
 
             var inserted = this._insert(item, referenceItem, referenceItem.length ? referenceItem.find("> .k-menu-group, > .k-animation-container > .k-menu-group") : null);
 
-            each(inserted.items, function () {
+            each(inserted.items, function (i) {               
                 inserted.group.append(this);
                 updateArrow(this);
+                storeItemSelectEventHandler(this, item[i] || item);
             });
 
             updateArrow(referenceItem);
             updateFirstLast(inserted.group.find(".k-first, .k-last").add(inserted.items));
 
             return this;
-        },
+        },     
 
         insertBefore: function (item, referenceItem) {
             referenceItem = this.element.find(referenceItem);
 
             var inserted = this._insert(item, referenceItem, referenceItem.parent());
 
-            each(inserted.items, function () {
+            each(inserted.items, function (i) {
                 referenceItem.before(this);
                 updateArrow(this);
                 updateFirstLast(this);
+                storeItemSelectEventHandler(this, item[i] || item);
             });
 
             updateFirstLast(referenceItem);
@@ -494,10 +525,11 @@ var __meta__ = { // jshint ignore:line
 
             var inserted = this._insert(item, referenceItem, referenceItem.parent());
 
-            each(inserted.items, function () {
+            each(inserted.items, function (i) {
                 referenceItem.after(this);
                 updateArrow(this);
                 updateFirstLast(this);
+                storeItemSelectEventHandler(this, item[i] || item);
             });
 
             updateFirstLast(referenceItem);
@@ -805,7 +837,7 @@ var __meta__ = { // jshint ignore:line
             element.removeClass("k-menu-init");
 
             items.each(function () {
-                updateItemClasses(this);
+                updateItemClasses(this);             
             });
         },
 
@@ -881,7 +913,7 @@ var __meta__ = { // jshint ignore:line
                 return;
             }
 
-            if (!e.handled && that._triggerEvent({ item: element[0], type: SELECT }) && !formNode) { // We shouldn't stop propagation and shoudn't prevent form elements.
+            if (!e.handled && that._triggerSelect(target, itemElement) && !formNode) { // We shouldn't stop propagation and shoudn't prevent form elements.
                 e.preventDefault();
             }
 
@@ -919,6 +951,35 @@ var __meta__ = { // jshint ignore:line
                 return;
             }
             that[openHandle](element);
+        },
+
+        _triggerSelect: function (target, itemElement) {
+            var selectHandler = target.data("selectHandler"),
+                itemSelectEventData;
+
+            if (selectHandler) {
+                itemSelectEventData = this._getEventData(target);
+                selectHandler.call(this, itemSelectEventData);
+            }
+
+            var isSelectItemDefaultPrevented = itemSelectEventData && itemSelectEventData.isDefaultPrevented();
+            var isSelectDefaultPrevented = this._triggerEvent({ item: itemElement, type: SELECT });
+            return isSelectItemDefaultPrevented || isSelectDefaultPrevented;          
+        },
+
+        _getEventData: function (target) {
+            var eventData = { 
+                sender: this, 
+                target: target,
+                _defaultPrevented: false,
+                preventDefault: function () {
+                    this._defaultPrevented = true;
+                },
+                isDefaultPrevented: function () {
+                    return this._defaultPrevented;
+                }
+            };
+            return eventData;
         },
 
         _documentClick: function (e) {
