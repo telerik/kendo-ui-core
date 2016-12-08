@@ -72,7 +72,7 @@ var __meta__ = { // jshint ignore:line
             spriteCssClass: "dataSpriteCssClassField",
             imageUrl: "dataImageUrlField"
         },
-        nodeIcon,
+        itemIcon,
         rendering = {
             aria: function(item) {
                 var attr = "";
@@ -166,12 +166,12 @@ var __meta__ = { // jshint ignore:line
         items.filter(":last-child").addClass(LAST);
     }
 
-     function updateNodeHtml(node) {
-        var wrapper = node,
-            group = node.children("ul"),
+     function updateNodeHtml(item) {
+        var wrapper = item,
+            group = item.children("ul"),
             toggleButton = wrapper.children(".k-link").children(".k-icon");
 
-        if (node.hasClass("k-panelbar")) {
+        if (item.hasClass("k-panelbar")) {
             return;
         }
 
@@ -183,8 +183,8 @@ var __meta__ = { // jshint ignore:line
         }
      }
 
-    nodeIcon = function(node) {
-        return node.children("span").children(".k-icon");
+    itemIcon = function(item) {
+        return item.children("span").children(".k-icon");
     };
 
     var PanelBar = kendo.ui.DataBoundWidget.extend({
@@ -544,12 +544,12 @@ var __meta__ = { // jshint ignore:line
             }
         },
 
-        _progress: function(node, showProgress) {
+        _progress: function(item, showProgress) {
             var element = this.element;
             var loadingText = this.templates.loading({ messages: this.options.messages });
 
             if (arguments.length == 1) {
-                showProgress = node;
+                showProgress = item;
 
                 if (showProgress) {
                     element.html(loadingText);
@@ -558,7 +558,7 @@ var __meta__ = { // jshint ignore:line
                 }
             }
             else {
-                 nodeIcon(node).toggleClass("k-i-loading", showProgress).removeClass("k-i-refresh");
+                 itemIcon(item).toggleClass("k-i-loading", showProgress).removeClass("k-i-refresh");
             }
         },
 
@@ -682,7 +682,7 @@ var __meta__ = { // jshint ignore:line
             if (node) {
                 this._progress(node, false);
                 this._expanded(node, false);
-                nodeIcon(node).addClass("k-i-refresh");
+                itemIcon(node).addClass("k-i-refresh");
                 e.node.loaded(false);
             } else {
                 this._progress(false);
@@ -697,7 +697,7 @@ var __meta__ = { // jshint ignore:line
         },
 
          items: function() {
-            return this.element.find(".k-item > div:first-child");
+            return this.element.find(".k-item > span:first-child");
         },
 
         setDataSource: function(dataSource) {
@@ -900,8 +900,8 @@ var __meta__ = { // jshint ignore:line
                 .attr(ARIA_DISABLED, !enable);
         },
 
-       dataItem: function(node) {
-            var uid = $(node).closest(ITEM).attr(kendo.attr("uid")),
+       dataItem: function(item) {
+            var uid = $(item).closest(ITEM).attr(kendo.attr("uid")),
                 dataSource = this.dataSource;
 
             return dataSource && dataSource.getByUid(uid);
