@@ -166,7 +166,7 @@ var __meta__ = { // jshint ignore:line
         items.filter(":last-child").addClass(LAST);
     }
 
-     function updateNodeHtml(item) {
+     function updateItemHtml(item) {
         var wrapper = item,
             group = item.children("ul"),
             toggleButton = wrapper.children(".k-link").children(".k-icon");
@@ -595,7 +595,7 @@ var __meta__ = { // jshint ignore:line
             parentNode.children(".k-group").empty();
             var items = item.children.data();
             if (!items.length) {
-                updateNodeHtml(parentNode);
+                updateItemHtml(parentNode);
             } else {
                 this.append(item.children, parentNode);
 
@@ -641,7 +641,7 @@ var __meta__ = { // jshint ignore:line
                     return;
                 }
 
-                return this._updateNodes(items, e.field);
+                return this._updateItems(items, e.field);
             }
         
             if (node) {
@@ -653,7 +653,7 @@ var __meta__ = { // jshint ignore:line
             } else if (action == "remove") {
                 this.remove(this.findByUid(items[0].uid));
             } else if (action == "itemchange") {
-                this._updateNodes(items);
+                this._updateItems(items);
             } else if (action == "itemloaded") {
                 this._refreshChildren(node, parentNode);
             } else {
@@ -831,7 +831,7 @@ var __meta__ = { // jshint ignore:line
               }
         },
 
-        _updateNodes: function (items, field) {
+        _updateItems: function (items, field) {
             var that = this;
             var i, node, nodeWrapper, item;
             var context = { panelBar: that.options, item: item, group: {} };
