@@ -806,7 +806,6 @@ var __meta__ = { // jshint ignore:line
                     if (typeof value === "string") {
                         return $(value);
                     } else {
-                        value.items = [];
                         return $(that.renderItem({
                             group: groupData,
                             item: extend(value, { index: idx })
