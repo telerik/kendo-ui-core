@@ -24,11 +24,11 @@ The Visual Studio Extensions can be accessed through the **Telerik | UI for ASP.
 
 **Figure 1. Visual Studio without Selected Projects**
 
-![Create Menu](/images/vs-integration/create-project-core.png)
+![Create Menu](images/vs-integration/create-project-core.png)
 
 **Figure 2. The added project template**
 
-![Project Templates](/images/vs-integration/project-template-core.png)
+![Project Templates](images/vs-integration/project-template-core.png)
 
 This is available in the language-specific nodes of the dialog as well. The **Add New Project** dialog contains the Telerik UI for ASP.NET Core MVC web application under the `CSharp\Web` node.
 
