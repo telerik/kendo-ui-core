@@ -599,12 +599,12 @@ var __meta__ = { // jshint ignore:line
             } else {
                 this.append(item.children, parentNode);
 
-                children = parentNode.children(".k-group");
+                children = parentNode.children(".k-group").children("li");
 
                 for (i = 0; i < children.length; i++) {
                     child = children.eq(i);
                     this.trigger("itemChange", {
-                        item: child.children("div"),
+                        item: child,
                         data: this.dataItem(child),
                         ns: ui
                     });
@@ -743,6 +743,7 @@ var __meta__ = { // jshint ignore:line
                             $.map(fieldBindings, function(x) {
                                 return "function(d){ return " + kendo.expr(x) + "}";
                             }).join(",") + "];";
+                result += "if(item.level){return levels[Math.min(item.level(), " + count + "-1)](item);}else";
                 result += "{return levels["+ count + "-1](item)}";
             }
 
@@ -869,7 +870,9 @@ var __meta__ = { // jshint ignore:line
                     }
 
                     if (field == "expanded") {
-                        that._toggleItem(nodeWrapper, false, item[field]);
+                        if (!nodeWrapper.hasClass(DISABLEDCLASS)) {
+                            that._toggleItem(nodeWrapper, false, item[field]);
+                        }
                     } else if (field == "enabled") {
                         that.enable(nodeWrapper, !item[field]);
                     }
@@ -1409,7 +1412,7 @@ var __meta__ = { // jshint ignore:line
                  dataItem.set("expanded", true);
             }
 
-             if (dataItem && !expanded && !loaded) {
+             if (dataItem && (!expanded || expanded === "true") && !loaded) {
                  if (that.options.loadOnDemand) {
                      this._progress(element, true);
                  }
