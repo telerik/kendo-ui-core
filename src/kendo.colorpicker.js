@@ -1,5 +1,5 @@
 (function(f, define){
-    define([ "./kendo.core", "./kendo.color", "./kendo.popup", "./kendo.slider", "./kendo.userevents" ], f);
+    define([ "./kendo.core", "./kendo.color", "./kendo.popup", "./kendo.slider", "./kendo.userevents", "./kendo.button" ], f);
 })(function(){
 
 var __meta__ = { // jshint ignore:line
@@ -7,7 +7,7 @@ var __meta__ = { // jshint ignore:line
     name: "Color tools",
     category: "web",
     description: "Color selection widgets",
-    depends: [ "core", "color", "popup", "slider", "userevents" ]
+    depends: [ "core", "color", "popup", "slider", "userevents", "button" ]
 };
 
 (function($, parseInt, undefined){
