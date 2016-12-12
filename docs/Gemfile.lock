@@ -98,11 +98,9 @@ GEM
       execjs (>= 0.3.0)
       json (>= 1.8.0)
     yajl-ruby (1.1.0)
-    yajl-ruby (1.1.0-x86-mingw32)
 
 PLATFORMS
   ruby
-  x86-mingw32
 
 DEPENDENCIES
   github-markdown
@@ -111,6 +109,3 @@ DEPENDENCIES
   jekyll-assets
   jekyll-sitemap
   uglifier
-
-BUNDLED WITH
-   1.13.6
