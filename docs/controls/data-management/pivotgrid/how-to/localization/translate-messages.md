@@ -2,6 +2,7 @@
 title: Translate PivotGrid Messages
 page_title: Translate PivotGrid Messages | Kendo UI PivotGrid
 description: "Learn how to translate the messages of a Kendo UI PivotGrid widget."
+previous_url: /controls/data-management/pivotgrid/how-to/translate-messages
 slug: howto_translate_pivotgrid_messages_pivotgrid
 ---
 

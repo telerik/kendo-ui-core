@@ -1,15 +1,18 @@
 ---
-title: Render Row Header Caption As Anchor
-page_title: Render Row Header Caption As Anchor | Kendo UI PivotGrid
+title: Render Row Header Captions As Anchors
+page_title: Render Row Header Captions As Anchors | Kendo UI PivotGrid
 description: "Learn how to render a row header captino as an anchor in a Kendo UI PivotGrid widget."
+previous_url: /controls/data-management/pivotgrid/how-to/render-anchor
 slug: howto_render_rowheader_captionas_anchor_pivotgrid
 ---
 
-# Render Row Header Caption As Anchor
+# Render Row Header Captions As Anchors
 
-The example below demonstrates how to use [`rowHeaderTemplate`](/api/javascript/ui/pivotgrid#configuration-rowHeaderTemplate) to render some of the row header caption fields as anchors.
+The PivotGrid allows you to render header captions as anchors.
 
-Apply the same approach when [`columnHeaderTemplate`](/api/javascript/ui/pivotgrid#configuration-columnHeaderTemplate) or [`dataCellTemplate`](/api/javascript/ui/pivotgrid#configuration-dataCellTemplate) options are used.
+To render column and cell caption fields as anchors, use the [`columnHeaderTemplate`](/api/javascript/ui/pivotgrid#configuration-columnHeaderTemplate) or the [`dataCellTemplate`](/api/javascript/ui/pivotgrid#configuration-dataCellTemplate) options respectively.
+
+To render row header caption fields as anchors, use the [`rowHeaderTemplate`](/api/javascript/ui/pivotgrid#configuration-rowHeaderTemplate) option. The example below demonstrates how to achieve this behavior.
 
 ###### Example
 

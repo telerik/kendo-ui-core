@@ -2,12 +2,15 @@
 title: Drill Down Navigation Always Starting from Root Tuple
 page_title: Drill Down Navigation Always Starting from Root Tuple | Kendo UI PivotGrid
 description: "Learn how to make the Kendo UI PivotGrid widget drill down on expand, always starting from the expanded member."
+previous_url: /controls/data-management/pivotgrid/how-to/drill-down-with-root-tuple
 slug: howto_drill_down_navigation_startingfrom_root_tuple_pivotgrid
 ---
 
 # Drill Down Navigation Always Starting from Root Tuple
 
-The example below demonstrates how to change the widget's configuration on member expand. In this way the Kendo UI PivotGrid widget drills down on expand, but always starting from the expanded member.
+The example below demonstrates how to change the configuration of the Kendo UI PivotGrid on member expand.
+
+In this way, the widget drills down on `expand` always starting from the expanded member.
 
 ###### Example
 

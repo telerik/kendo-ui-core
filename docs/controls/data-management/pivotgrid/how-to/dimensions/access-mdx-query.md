@@ -1,23 +1,20 @@
 ---
-title: Right-Align Text
-page_title: Right-Align Text | Kendo UI PivotGrid
-description: "Learn how to right-align the text of data cells in a Kendo UI PivotGrid widget."
-slug: howto_right_align_text_pivotgrid
+title: Access MDX Query
+page_title: Access MDX Query | Kendo UI PivotGrid
+description: "Learn how to access a MultiDimensional eXpressions (MDS) query in a Kendo UI PivotGrid widget."
+previous_url: /controls/data-management/pivotgrid/how-to/access-mdx-query
+slug: howto_access_mdx_query_pivotgrid
 ---
 
-# Right-Align Text
+# Access MDX Query
 
-The example below demonstrates how to right-align the text of data cells in a Kendo UI PivotGrid widget.
+Sometimes you might need to override the DataSource generated query in a Kendo UI PivotGrid.  
+
+To achieve this behavior, access the generated [MDX Query](https://en.wikipedia.org/wiki/MultiDimensional_eXpressions), as demonstrated in the example below.
 
 ###### Example
 
 ```html
-<style>
-      .k-pivot-table .k-grid-content td {
-          text-align: right;
-      }
-</style>
-
 <div id="example">
     <div id="pivotgrid"></div>
 
@@ -37,7 +34,14 @@ The example below demonstrates how to right-align the text of data cells in a Ke
                             catalog: "Adventure Works DW 2008R2",
                             cube: "Adventure Works"
                         },
-                        read: "http://demos.telerik.com/olap/msmdpump.dll"
+                        read: "http://demos.telerik.com/olap/msmdpump.dll",
+                      parameterMap: function(options, type) {
+                        var query = kendo.data.transports.xmla.fn.options.parameterMap(options, type);
+
+                        //modify the query here if needed
+
+                        return query;
+                      }
                     },
                     schema: {
                         type: "xmla"
@@ -47,11 +51,6 @@ The example below demonstrates how to right-align the text of data cells in a Ke
                     }
                 }
             }).data("kendoPivotGrid");
-
-            $("#configurator").kendoPivotConfigurator({
-                filterable: true,
-                dataSource: pivotgrid.dataSource
-            });
         });
     </script>
 </div>
