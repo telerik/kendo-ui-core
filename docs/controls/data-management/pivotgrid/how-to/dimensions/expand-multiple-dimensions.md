@@ -2,12 +2,17 @@
 title: Expand Multiple Column Dimensions
 page_title: Expand Multiple Column Dimensions | Kendo UI PivotGrid
 description: "Learn how to expand multiple column dimensions by using the dataBound event in a Kendo UI PivotGrid widget."
+previous_url: /controls/data-management/pivotgrid/how-to/expand-multiple-dimensions
 slug: howto_expand_multiple_column_dimensions_pivotgrid
 ---
 
 # Expand Multiple Column Dimensions
 
-The example below demonstrates how to expand multiple column dimensions using widget's [`dataBound`](/api/javascript/ui/pivotgrid#events-dataBound) event.
+You might need to reset the expanding that has occurred and revert to your CMS.
+
+In order for the expand to properly work, set fully qualified names to the expanded tuples as shown in the following code snippet with the `[Calendar Year].&[2005]` configuration.
+
+The example below demonstrates how to expand multiple column dimensions by using the [`dataBound`](/api/javascript/ui/pivotgrid#events-dataBound) event of the PivotGrid.
 
 ###### Example
 

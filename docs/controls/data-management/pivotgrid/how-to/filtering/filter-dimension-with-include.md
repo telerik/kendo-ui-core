@@ -1,62 +1,22 @@
 ---
-title: Translate PivotGrid Messages
-page_title: Translate PivotGrid Messages | Kendo UI PivotGrid
-description: "Learn how to translate the messages of a Kendo UI PivotGrid widget."
-slug: howto_translate_pivotgrid_messages_pivotgrid
+title: Filter Using include Operator
+page_title: Filter Using include Operator | Kendo UI PivotGrid
+description: "Learn how to use the include operator to filter the data in a Kendo UI PivotGrid widget."
+previous_url: /controls/data-management/pivotgrid/how-to/filter-dimension-with-include
+slug: howto_use_include_operator_pivotgrid
 ---
 
-# Translate PivotGrid Messages
+# Filter Using include Operator
 
-The example below demonstrates how to translate the messages of a Kendo UI PivotGrid widget.
+You can filter the data in a Kendo UI PivotGrid widget by using the `include` operator.
+
+The example below demonstrates how to achieve this behavior.
 
 ###### Example
 
 ```html
 <div id="example">
     <div id="pivotgrid"></div>
-    <script>
-      //messages
-      kendo.ui.PivotSettingTarget.fn.options.messages = {
-        empty: "Translated 'Drop fields here'"
-      };
-
-      kendo.ui.PivotFieldMenu.fn.options.messages = {
-        info: "Translated 'info'",
-        sortAscending: "Translated 'sortAsc'",
-        sortDescending: "Translated 'sortDesc'",
-        filterFields: "Translated 'filterFields'",
-        filter: "Translated 'filter'",
-        include: "Translated 'include'",
-        title: "Translated 'title'",
-        clear: "Translated 'clear'",
-        ok: "Translated 'ok'",
-        cancel: "Translated 'cancel'",
-        operators: {
-            contains: "Translated 'contains'",
-            doesnotcontain: "Translated 'doesnotcontain'",
-            startswith: "Translated 'startswith'",
-            endswith: "Translated endswith'",
-            eq: "Translated 'eq'",
-            neq: "Translated 'neq'"
-        }
-      };
-
-      kendo.ui.PivotConfigurator.fn.options.messages = {
-        measures: "Translated 'measures'",
-        columns: "Translated 'columns'",
-        rows: "Translated 'rows'",
-        measuresLabel: "Translated 'measuresLabel'",
-        columnsLabel: "Translated 'columnsLabel'",
-        rowsLabel: "Translated 'rowsLabel'",
-        fieldsLabel: "Translated 'fieldsLabel'"
-      };
-
-      kendo.ui.PivotGrid.fn.options.messages = {
-        measureFields: "Translated measure fields",
-        columnFields: "Translated column fields",
-        rowFields: "Translated row fields"
-      };
-    </script>
 
     <script>
         $(document).ready(function () {
@@ -81,7 +41,12 @@ The example below demonstrates how to translate the messages of a Kendo UI Pivot
                     },
                     error: function (e) {
                         alert("error: " + kendo.stringify(e.errors[0]));
-                    }
+                   },
+                   filter: [{
+                       field: "[Date].[Calendar]",
+                       operator: "in",
+                       value: "[Date].[Calendar].[Calendar Year].&[2005],[Date].[Calendar].[Calendar Semester].&[2005]&[2],[Date].[Calendar].[Calendar Semester].&[2007]&[1],[Date].[Calendar].[Calendar Semester].&[2008]&[2]"
+                   }]
                 }
             }).data("kendoPivotGrid");
         });
