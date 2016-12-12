@@ -13,6 +13,8 @@ The example below demonstrates how to modify the generated `Workbook` object fro
 
 ```html
 <div id="example">
+
+    <button id="export">Export</button>
     <div id="pivotgrid"></div>
     <script>
         $(document).ready(function () {
