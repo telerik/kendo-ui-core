@@ -145,6 +145,13 @@ When Kendo UI is used with jQuery `1.12.0` or `2.2.0`, some issues with the popu
 
 Find more details at [https://github.com/telerik/kendo-ui-core/issues/1375](https://github.com/telerik/kendo-ui-core/issues/1375).
 
+### Incorrect Appearance or Errors with Hidden Widgets
+
+If you show widgets that have been in an initially hidden container, you should call their [resize()](/api/javascript/ui/widget#methods-resize) method after you show them.
+
+You should avoid initializing widgets on elements with `style="display: none;"` because they may not be able to calculate dimensions, positions or even throw errors because such calculations are not available for elements that are not rendered by the browser. Often delaying the widget initialization until after it is shown will resolve the problem and improve the page performance.
+
+
 ## CDN
 
 ### Scripts or Stylesheets Do Not Load from CDN
