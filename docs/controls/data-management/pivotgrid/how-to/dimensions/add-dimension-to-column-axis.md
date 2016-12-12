@@ -1,13 +1,14 @@
 ---
-title: Format Dates in Dimension Labels
-page_title: Format Dates in Dimension Labels | Kendo UI PivotGrid
-description: "Learn how to format date values in dimension labels in the Kendo UI PivotGrid widget."
-slug: howto_format_date_query_pivotgrid
+title: Add Dimension to Column Axis
+page_title: Add Dimension to Column Axis | Kendo UI PivotGrid
+description: "Learn how to use the PivotGrid API to add a new dimension to the column axis in a Kendo UI PivotGrid widget."
+previous_url: /controls/data-management/pivotgrid/how-to/add-dimention-to-column-axis
+slug: howto_add_dimension_column_axis_pivotgrid
 ---
 
-# Format Dates in Dimension Labels
+# Add Dimension to Column Axis
 
-The example below demonstrates how to format date values in the dimension labels in the Kendo UI PivotGrid widget.
+The example below demonstrates how to use the [Kendo UI PivotGrid API](http://docs.telerik.com/kendo-ui/api/javascript/ui/pivotgrid) to add a new dimension to the column axis of the widget.
 
 ###### Example
 
@@ -15,30 +16,14 @@ The example below demonstrates how to format date values in the dimension labels
 <script src="http://demos.telerik.com/kendo-ui/content/shared/js/products.js"></script>
 
 <div id="example">
+    <button id="add">Add "ProductName"</button>
     <div id="pivotgrid"></div>
-
-    <div class="responsive-message"></div>
-
-    <script id="rowTemplate" type="text/x-kendo-template">
-      # if (member.name.indexOf("LastSupply") === 0 && member.name !== "LastSupply") { #
-          #: kendo.toString(kendo.parseDate(member.caption), "d") #
-      # } else { #
-          #: member.caption #
-      # } #
-    </script>
 
     <script>
         $(document).ready(function () {
-            var d = new Date();
-            products.forEach(function(p) {
-              p.LastSupply = new Date(d);
-              d.setDate(d.getDate() + 1);
-            });
-
             var pivotgrid = $("#pivotgrid").kendoPivotGrid({
                 columnWidth: 120,
                 height: 570,
-                rowHeaderTemplate: $("#rowTemplate").html(),
                 dataSource: {
                     data: products,
                     schema: {
@@ -48,7 +33,6 @@ The example below demonstrates how to format date values in the dimension labels
                                 UnitPrice: { type: "number" },
                                 UnitsInStock: { type: "number" },
                                 Discontinued: { type: "boolean" },
-                                LastSupply: { type: "date" },
                                 CategoryName: { field: "Category.CategoryName" }
                             }
                         },
@@ -59,16 +43,24 @@ The example below demonstrates how to format date values in the dimension labels
                                 Discontinued: { caption: "Discontinued" }
                             },
                             measures: {
-                                "Sum": { field: "UnitPrice", format: "{0:c}", aggregate: "sum" },
-                                "Average": { field: "UnitPrice", format: "{0:c}", aggregate: "average" }
+                                "Sum": { field: "UnitPrice", format: "{0:c}", aggregate: "sum" }
                             }
                         }
                     },
-                    columns: [{ name: "CategoryName", expand: true }, { name: "ProductName" } ],
-                    rows: [{ name: "Discontinued", expand: true }, { name: "LastSupply", expand: false }],
+                    columns: [{ name: "CategoryName", expand: true }],
+                    rows: [{ name: "Discontinued", expand: true }],
                     measures: ["Sum"]
                 }
             }).data("kendoPivotGrid");
+
+            $("#add").click(function() {
+                var ds = pivotgrid.dataSource;
+                var columns = ds.columns();
+
+                columns.push("ProductName");
+
+                ds.columns(columns);
+            });
         });
     </script>
 </div>

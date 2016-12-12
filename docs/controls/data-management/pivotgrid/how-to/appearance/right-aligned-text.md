@@ -1,17 +1,24 @@
 ---
-title: Make Include fields Window Modal
-page_title: Make Include fields Window Modal | Kendo UI PivotGrid
-description: "Learn how to make the Include fields filter window modal in a Kendo UI PivotGrid widget."
-slug: howto_make_include_fields_window_modal_pivotgrid
+title: Right-Align Text
+page_title: Right-Align Text | Kendo UI PivotGrid
+description: "Learn how to right-align the text of data cells in a Kendo UI PivotGrid widget."
+previous_url: /controls/data-management/pivotgrid/how-to/right-aligned-text
+slug: howto_right_align_text_pivotgrid
 ---
 
-# Make Include fields Window Modal
+# Right-Align Text
 
-The example below demonstrates how to make the **Include fields** filter window modal in a Kendo UI PivotGrid widget.
+The example below demonstrates how to right-align the text of data cells in a Kendo UI PivotGrid widget.
 
 ###### Example
 
 ```html
+<style>
+      .k-pivot-table .k-grid-content td {
+          text-align: right;
+      }
+</style>
+
 <div id="example">
     <div id="pivotgrid"></div>
 
@@ -31,14 +38,7 @@ The example below demonstrates how to make the **Include fields** filter window 
                             catalog: "Adventure Works DW 2008R2",
                             cube: "Adventure Works"
                         },
-                        read: "http://demos.telerik.com/olap/msmdpump.dll",
-                      parameterMap: function(options, type) {
-                        var query = kendo.data.transports.xmla.fn.options.parameterMap(options, type);
-
-                        //modify the query here if needed
-
-                        return query;
-                      }
+                        read: "http://demos.telerik.com/olap/msmdpump.dll"
                     },
                     schema: {
                         type: "xmla"
@@ -49,14 +49,9 @@ The example below demonstrates how to make the **Include fields** filter window 
                 }
             }).data("kendoPivotGrid");
 
-            //wire 'Include fields' open
-            $("[data-role=pivotsettingtarget]").each(function(_, setting) {
-              var fieldMenu = $(setting).data("kendoPivotSettingTarget").fieldMenu;
-                            if (fieldMenu) {
-                fieldMenu.includeWindow.bind("open", function(e) {
-                    e.sender.setOptions({ modal: true }); //set modality to `true`
-                });
-              }
+            $("#configurator").kendoPivotConfigurator({
+                filterable: true,
+                dataSource: pivotgrid.dataSource
             });
         });
     </script>
@@ -73,6 +68,7 @@ Other articles and how-to examples on the Kendo UI PivotGrid:
 * [How to Expand Multiple Column Dimensions]({% slug howto_expand_multiple_column_dimensions_pivotgrid %})
 * [How to Filter by Using the "include" Operator]({% slug howto_use_include_operator_pivotgrid %})
 * [How to Integrate with Kendo UI Chart]({% slug howto_integratewith_kendoui_chart_pivotgrid %})
+* [How to Make the Include fields Window Modal]({% slug howto_make_include_fields_window_modal_pivotgrid %})
 * [How to Modify Measure Tag Captions]({% slug howto_modify_measure_tag_captions_pivotgrid %})
 * [How to Reload PivotGrid Configuration Options]({% slug howto_reload_configuration_options_pivotgrid %})
 * [How to Reset Expand State]({% slug howto_reset_expand_state_pivotgrid %})

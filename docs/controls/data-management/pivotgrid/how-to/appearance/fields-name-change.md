@@ -1,18 +1,22 @@
 ---
-title: Filter Using include Operator
-page_title: Filter Using include Operator | Kendo UI PivotGrid
-description: "Learn how to use the include operator to filter the data in a Kendo UI PivotGrid widget."
-slug: howto_use_include_operator_pivotgrid
+title: Change PivotGrid Field Names
+page_title: Change PivotGrid Field Names | Kendo UI PivotGrid
+description: "Learn how to change the field names in a Kendo UI PivotGrid widget."
+previous_url: /controls/data-management/pivotgrid/how-to/fields-name-change
+slug: howto_change_pivotgrid_fields_names_pivotgrid
 ---
 
-# Filter Using include Operator
+# Change PivotGrid Field Names
 
-The example below demonstrates how to use the `include` operator to filter the data in a Kendo UI PivotGrid widget.
+It is possible to modify and control the content that is rendered by the field names of the Kendo UI PivotGrid widget.
+
+The example below demonstrates how to change the text displayed by the **[Date].[Calendar]** and **[Product].[Category]** fields in a PivotGrid.
 
 ###### Example
 
 ```html
 <div id="example">
+    <div id="configurator"></div>
     <div id="pivotgrid"></div>
 
     <script>
@@ -21,6 +25,17 @@ The example below demonstrates how to use the `include` operator to filter the d
                 filterable: true,
                 columnWidth: 200,
                 height: 580,
+                dataBound: function() {                          
+                  var fields = this.columnFields.add(this.rowFields).add(this.measureFields);
+
+                  fields.find(".k-button")
+                  	.each(function(_, item) {
+                    	item = $(item);
+                    	var text = item.data("name").split(".").slice(-1) + "";
+
+                    	item.contents().eq(0).replaceWith(text);
+                  	});
+                },
                 dataSource: {
                     type: "xmla",
                     columns: [{ name: "[Date].[Calendar]", expand: true }, { name: "[Product].[Category]" } ],
@@ -38,16 +53,19 @@ The example below demonstrates how to use the `include` operator to filter the d
                     },
                     error: function (e) {
                         alert("error: " + kendo.stringify(e.errors[0]));
-                   },
-                   filter: [{
-                       field: "[Date].[Calendar]",
-                       operator: "in",
-                       value: "[Date].[Calendar].[Calendar Year].&[2005],[Date].[Calendar].[Calendar Semester].&[2005]&[2],[Date].[Calendar].[Calendar Semester].&[2007]&[1],[Date].[Calendar].[Calendar Semester].&[2008]&[2]"
-                   }]
+                    }
                 }
-            }).data("kendoPivotGrid");
+            }).data("kendoPivotGrid");                   
         });
     </script>
+    <style>
+        #pivotgrid
+        {
+            display: inline-block;
+            vertical-align: top;
+            width: 70%;
+        }               
+    </style>
 </div>
 ```
 
@@ -56,10 +74,12 @@ The example below demonstrates how to use the `include` operator to filter the d
 Other articles and how-to examples on the Kendo UI PivotGrid:
 
 * [PivotGrid JavaScript API Reference](/api/javascript/ui/pivotgrid)
+* [How to Access MDX Query]({% slug howto_access_mdx_query_pivotgrid %})
 * [How to Change Data Source Dynamically]({% slug howto_change_datasource_dynamically_pivotgrid %})
 * [How to Drill Down Navigation Always Starting from Root Tuple]({% slug howto_drill_down_navigation_startingfrom_root_tuple_pivotgrid %})
-* [How to Expand Multiple Column Dimensions]({% slug howto_expand_multiple_column_dimensions_pivotgrid %})
-* [How to Filter by Using the "include" Operator]({% slug howto_use_include_operator_pivotgrid %})
+* [How to Expand the Include fields TreeView]({% slug howto_expand_include_fields_treeview_pivotgrid %})
+* [How to Filter by Using the include Operator]({% slug howto_use_include_operator_pivotgrid %})
+* [How to Format Dates in Dimension Labels]({% slug howto_format_date_query_pivotgrid %})
 * [How to Integrate with Kendo UI Chart]({% slug howto_integratewith_kendoui_chart_pivotgrid %})
 * [How to Make the Include fields Window Modal]({% slug howto_make_include_fields_window_modal_pivotgrid %})
 * [How to Modify Measure Tag Captions]({% slug howto_modify_measure_tag_captions_pivotgrid %})

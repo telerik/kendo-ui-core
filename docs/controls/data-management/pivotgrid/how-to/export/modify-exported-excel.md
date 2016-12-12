@@ -1,24 +1,51 @@
 ---
-title: Expand Include fields TreeView
-page_title: Expand Include fields TreeView | Kendo UI PivotGrid
-description: "Learn how to access the Include fields TreeView widget and expand the root node on window open in a Kendo UI PivotGrid widget."
-slug: howto_expand_include_fields_treeview_pivotgrid
+title: Modify Exported Excel Files
+page_title: Modify Exported Excel Files | Kendo UI PivotGrid
+description: "Learn how to modify the generated Excel file from a Kendo UI PivotGrid widget so you can apply different styles and values to it."
+previous_url: /controls/data-management/pivotgrid/how-to/modify-exported-excel
+slug: howto_modify_exported_excel_files_pivotgrid
 ---
 
-# Expand Include fields TreeView
+# Modify Exported Excel Files
 
-The example below demonstrates how to access the **Include fields** TreeView widget and expand the root node on a window `open` event.
+You can apply different style and value changes to a Kendo UI PivtoGrid exported to Excel by modifying the generated `Workbook` object.
+
+The example below demonstrates how to achieve this behavior.
 
 ###### Example
 
 ```html
 <div id="example">
-    <div id="configurator"></div>
-    <div id="pivotgrid"></div>
 
+    <button id="export">Export</button>
+    <div id="pivotgrid"></div>
     <script>
         $(document).ready(function () {
             var pivotgrid = $("#pivotgrid").kendoPivotGrid({
+                excel: {
+                    fileName: "Kendo UI PivotGrid Export.xlsx",
+                    proxyURL: "//demos.telerik.com/kendo-ui/service/export",
+                    filterable: true
+                },
+                excelExport: function(e) {
+                  var sheet = e.workbook.sheets[0];
+                  var rows = sheet.rows;
+                  var rowIdx, colIdx, cells, cell;
+
+                  for (rowIdx = 0; rowIdx < rows.length; rowIdx++) {
+                    if (rows[rowIdx].type === "data") {
+                      cells = rows[rowIdx].cells;
+
+                      for (colIdx = sheet.freezePane.colSplit; colIdx < cells.length; colIdx++) {
+                        cell = cells[colIdx];
+
+                        cell.background = "#aabbcc";
+                        cell.value = kendo.toString(cell.value, "c");
+                      }
+                    }
+                  }
+                },
+                dataCellTemplate: $("dataCellTemplate").html(),
                 filterable: true,
                 sortable: true,
                 columnWidth: 200,
@@ -44,27 +71,8 @@ The example below demonstrates how to access the **Include fields** TreeView wid
                 }
             }).data("kendoPivotGrid");
 
-            $("#configurator").kendoPivotConfigurator({
-                dataSource: pivotgrid.dataSource,
-                filterable: true,
-                sortable: true,
-                height: 580
-            });
-
-            //wire 'Include fields' open
-            $("[data-role=pivotsettingtarget]").each(function(_, setting) {
-              var fieldMenu = $(setting).data("kendoPivotSettingTarget").fieldMenu; //get setting FieldMenu
-
-              if (fieldMenu) {
-                fieldMenu.includeWindow.bind("open", function() { //wire open event of the 'Include Fields' window
-                  var treeView = fieldMenu.treeView;
-                  if (treeView) {
-                    treeView.one("dataBound", function() {
-                      treeView.expand(".k-item:first"); //Expand the root node
-                    });
-                  }
-                });
-              }
+            $("#export").click(function() {
+                pivotgrid.saveAsExcel();
             });
         });
     </script>
