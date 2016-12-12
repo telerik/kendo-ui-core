@@ -10,7 +10,7 @@ slug: howto_change_pivotgrid_fields_names_pivotgrid
 
 It is possible to modify and control the content that is rendered by the field names of the Kendo UI PivotGrid widget.
 
-The example below demonstrates how to change the text displayed by the **[Calendar]** and **[Category]** fields in a PivotGrid.
+The example below demonstrates how to change the text displayed by the **[Date].[Calendar]** and **[Product].[Category]** fields in a PivotGrid.
 
 ###### Example
 

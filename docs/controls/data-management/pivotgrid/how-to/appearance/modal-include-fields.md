@@ -8,7 +8,7 @@ slug: howto_make_include_fields_window_modal_pivotgrid
 
 # Make the Include Fields Window Modal
 
-The example below demonstrates how to access the **Fields to include** filter window and render it as a confirmation dialog in a PivotGrid widget.
+The example below demonstrates how to access the **Fields to include** filter window and render it as a modal dialog in a PivotGrid widget.
 
 ###### Example
 
