@@ -100,19 +100,26 @@ The example below demonstrates how to use the chart series options to render the
           series: chart.options.series,
           onMouseEnter: function (e) {
             var name = e.data.name;
-            chart.toggleHighlight(true, name);
+            var series = chart.findSeriesByName(name);
+            series.toggleHighlight(true);
           },
           onMouseLeave: function (e) {
             var name = e.data.name;
-            chart.toggleHighlight(false, name);
+            var series = chart.findSeriesByName(name);
+            series.toggleHighlight(false);
           },
           onClick: function (e) {
+            var name = e.data.name;
+            var series = chart.findSeriesByName(name);
+			
+            if(e.data.visible){
+              series.toggleVisibility(false);
+            }
+            else{
+              series.toggleVisibility(true);
+            }
+            
             e.data.set("visible", !e.data.visible);
-            var options = {
-              series: this.series.toJSON(),
-              transitions: false
-            };
-            chart.setOptions(options);
           },
           markerColor: function(e) {
             return e.get("visible") ? e.color : "grey";
