@@ -86,6 +86,9 @@ Below are listed the script files for the Kendo UI Editors widgets.&nbsp;&nbsp;
 | | kendo.resizable.js | Resize handle feature (optional) |
 | | kendo.drawing.js | PDF export feature (optional) |
 | | kendo.pdf.js | PDF export feature (optional) |
+| | kendo.tabstrip.js | Table Wizard dialog feature (optional) |
+| | kendo.numerictextbox.js | Table Wizard dialog feature (optional) |
+| | kendo.button.js | Table Wizard dialog feature (optional) |
 | | kendo.editor.js | |
 | [MaskedTextBox](http://demos.telerik.com/kendo-ui/maskedtextbox/index) | jquery.js | |
 | | kendo.core.js | |
