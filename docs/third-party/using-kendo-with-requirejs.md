@@ -21,7 +21,7 @@ The minified Kendo UI JavaScript files are [AMD modules](https://en.wikipedia.or
 
 ### Load from Local Directory
 
-The example below demonstrates how to load the Kendo UI JavaScript files from a local directory, e.g. `js/my-kendo-scripts`. It is assumed that all Kendo UI scripts files are available there.
+The code snippet below demonstrates how to load the Kendo UI JavaScript files from a local directory&mdash;for example, `js/my-kendo-scripts`. It is assumed that all Kendo UI scripts files are available there.
 
 ###### Example
 
