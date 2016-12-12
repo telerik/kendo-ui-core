@@ -288,12 +288,18 @@ navigation:
     "*how-to":
         title: "How To"
         position: 200
+    "*localization":
+        title: "Localization"
     "*editing":
         title: "Editing"
     "*interaction":
         title: "Interaction"
     "*state":
         title: "State Management"
+    "*sorting":
+        title: "Sorting"
+    "*dimensions":
+        title: "Managing Dimensions"
     "*appearance":
         title: "Appearance"
     "*binding":

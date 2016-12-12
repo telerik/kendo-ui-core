@@ -1,76 +1,52 @@
 ---
-title: Modify Exported Excel Files
-page_title: Modify Exported Excel Files | Kendo UI PivotGrid
-description: "Learn how to modify the generated Excel file from a Kendo UI PivotGrid widget so you can apply different styles and values to it."
-slug: howto_modify_exported_excel_files_pivotgrid
+title: Filter Dimensions
+page_title: Filter Dimensions | Kendo UI PivotGrid
+description: "Learn how to filter a dimension in a Kendo UI PivotGrid widget."
+previous_url: /controls/data-management/pivotgrid/how-to/filter-dimension
+slug: howto_filter_dimensions_pivotgrid
 ---
 
-# Modify Exported Excel Files
+# Filter Dimensions
 
-The example below demonstrates how to modify the generated `Workbook` object from a Kendo UI PivotGrid so you can apply different style and value changes.
+The example below demonstrates how use the [`filter`](/api/javascript/data/datasource#configuration-filter) option of the Data Source to filter the result set.
 
 ###### Example
 
 ```html
 <div id="example">
-
-    <button id="export">Export</button>
     <div id="pivotgrid"></div>
+
     <script>
         $(document).ready(function () {
             var pivotgrid = $("#pivotgrid").kendoPivotGrid({
-                excel: {
-                    fileName: "Kendo UI PivotGrid Export.xlsx",
-                    proxyURL: "//demos.telerik.com/kendo-ui/service/export",
-                    filterable: true
-                },
-                excelExport: function(e) {
-                  var sheet = e.workbook.sheets[0];
-                  var rows = sheet.rows;
-                  var rowIdx, colIdx, cells, cell;
-
-                  for (rowIdx = 0; rowIdx < rows.length; rowIdx++) {
-                    if (rows[rowIdx].type === "data") {
-                      cells = rows[rowIdx].cells;
-
-                      for (colIdx = sheet.freezePane.colSplit; colIdx < cells.length; colIdx++) {
-                        cell = cells[colIdx];
-
-                        cell.background = "#aabbcc";
-                        cell.value = kendo.toString(cell.value, "c");
-                      }
-                    }
-                  }
-                },
-                dataCellTemplate: $("dataCellTemplate").html(),
                 filterable: true,
-                sortable: true,
                 columnWidth: 200,
                 height: 580,
                 dataSource: {
                     type: "xmla",
                     columns: [{ name: "[Date].[Calendar]", expand: true }, { name: "[Product].[Category]" } ],
                     rows: [{ name: "[Geography].[City]" }],
-                    measures: ["[Measures].[Reseller Freight Cost]"],
+                    measures: ["[Measures].[Internet Sales Amount]"],
                     transport: {
                         connection: {
                             catalog: "Adventure Works DW 2008R2",
                             cube: "Adventure Works"
                         },
-                        read: "//demos.telerik.com/olap/msmdpump.dll"
+                        read: "http://demos.telerik.com/olap/msmdpump.dll"
                     },
                     schema: {
                         type: "xmla"
                     },
                     error: function (e) {
                         alert("error: " + kendo.stringify(e.errors[0]));
-                    }
+                   },
+                   filter: {
+                       field: "[Date].[Calendar]",
+                       operator: "endswith",
+                       value: "2005"
+                   }
                 }
             }).data("kendoPivotGrid");
-
-            $("#export").click(function() {
-                pivotgrid.saveAsExcel();
-            });
         });
     </script>
 </div>

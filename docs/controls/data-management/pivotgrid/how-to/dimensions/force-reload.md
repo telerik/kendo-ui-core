@@ -2,6 +2,7 @@
 title: Force Data Source Reload
 page_title: Force Data Source Reload | Kendo UI PivotGrid
 description: "Learn how to reload the data of the Kendo UI PivotGrid widget."
+previous_url: /controls/data-management/pivotgrid/how-to/force-reload
 slug: howto_force_data_source_reload_pivotgrid
 ---
 

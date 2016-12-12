@@ -1,13 +1,14 @@
 ---
-title: Access MDX Query
-page_title: Access MDX Query | Kendo UI PivotGrid
-description: "Learn how to access a MultiDimensional eXpressions (MDS) query in a Kendo UI PivotGrid widget."
-slug: howto_access_mdx_query_pivotgrid
+title: Sort Dimensions
+page_title: Sort Dimensions | Kendo UI PivotGrid
+description: "Learn how to sort dimensions in a Kendo UI PivotGrid widget."
+previous_url: /controls/data-management/pivotgrid/how-to/sort-dimension
+slug: howto_sort_dimensions_pivotgrid
 ---
 
-# Access MDX Query
+# Sort Dimensions
 
-The example below demonstrates how to access the generated [MultiDimensional eXpressions (MDX)](https://en.wikipedia.org/wiki/MultiDimensional_eXpressions) query in a Kendo UI PivotGrid widget.
+The example below demonstrates how use data source [`sort`](/api/javascript/data/datasource#configuration-sort) option to sort the result set.
 
 ###### Example
 
@@ -31,21 +32,18 @@ The example below demonstrates how to access the generated [MultiDimensional eXp
                             catalog: "Adventure Works DW 2008R2",
                             cube: "Adventure Works"
                         },
-                        read: "http://demos.telerik.com/olap/msmdpump.dll",
-                      parameterMap: function(options, type) {
-                        var query = kendo.data.transports.xmla.fn.options.parameterMap(options, type);
-
-                        //modify the query here if needed
-
-                        return query;
-                      }
+                        read: "http://demos.telerik.com/olap/msmdpump.dll"
                     },
                     schema: {
                         type: "xmla"
                     },
                     error: function (e) {
                         alert("error: " + kendo.stringify(e.errors[0]));
-                    }
+                   },
+                   sort: [{
+                       field: "[Date].[Calendar]",
+                       dir: "asc" //or desc
+                   }]
                 }
             }).data("kendoPivotGrid");
         });

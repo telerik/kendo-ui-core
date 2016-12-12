@@ -1,18 +1,26 @@
 ---
-title: Sort Dimensions
-page_title: Sort Dimensions | Kendo UI PivotGrid
-description: "Learn how to sort dimensions in a Kendo UI PivotGrid widget."
-slug: howto_sort_dimensions_pivotgrid
+title: Reset Expand State
+page_title: Reset Expand State | Kendo UI PivotGrid
+description: "Learn how to reset expand/collapse state and fetch the data again in a Kendo UI PivotGrid widget."
+previous_url: /controls/data-management/pivotgrid/how-to/reset-expand-state
+slug: howto_reset_expand_state_pivotgrid
 ---
 
-# Sort Dimensions
+# Reset Expand State
 
-The example below demonstrates how use data source [`sort`](/api/javascript/data/datasource#configuration-sort) option to sort the result set.
+The example below demonstrates how to reset the expand/collapse state and fetch the data again in a Kendo UI PivotGrid widget.
 
 ###### Example
 
 ```html
 <div id="example">
+    <ol>
+        <li>Expand "CY 2005" member</li>
+        <li>Click "reset" button</li>
+    <ol>
+    <br />
+    <button id="reset">Reset</button>
+    <br />
     <div id="pivotgrid"></div>
 
     <script>
@@ -31,20 +39,28 @@ The example below demonstrates how use data source [`sort`](/api/javascript/data
                             catalog: "Adventure Works DW 2008R2",
                             cube: "Adventure Works"
                         },
-                        read: "http://demos.telerik.com/olap/msmdpump.dll"
+                        read: "http://demos.telerik.com/olap/msmdpump.dll",
+                      parameterMap: function(options, type) {
+                        var query = kendo.data.transports.xmla.fn.options.parameterMap(options, type);
+
+                        //modify the query here if needed
+
+                        return query;
+                      }
                     },
                     schema: {
                         type: "xmla"
                     },
                     error: function (e) {
                         alert("error: " + kendo.stringify(e.errors[0]));
-                   },
-                   sort: [{
-                       field: "[Date].[Calendar]",
-                       dir: "asc" //or desc
-                   }]
+                    }
                 }
             }).data("kendoPivotGrid");
+
+            $("#reset").click(function() {
+                pivotgrid.dataSource.trigger("stateReset");
+                pivotgrid.dataSource.read();
+            });
         });
     </script>
 </div>
@@ -63,7 +79,6 @@ Other articles and how-to examples on the Kendo UI PivotGrid:
 * [How to Make the Include fields Window Modal]({% slug howto_make_include_fields_window_modal_pivotgrid %})
 * [How to Modify Measure Tag Captions]({% slug howto_modify_measure_tag_captions_pivotgrid %})
 * [How to Reload PivotGrid Configuration Options]({% slug howto_reload_configuration_options_pivotgrid %})
-* [How to Reset Expand State]({% slug howto_reset_expand_state_pivotgrid %})
 * [How to Show Tooltip with Data Cell Information]({% slug howto_show_tooltip_withdata_cellinformation_pivotgrid %})
 * [How to Translate PivotConfigurator Field Items]({% slug howto_translate_pivotconfigurator_messages_pivotgrid %})
 
