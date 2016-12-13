@@ -1277,6 +1277,27 @@ The sheet to set as active.
     </script>
 ```
 
+### cellContextMenu
+Gets the cell contextMenu instance.
+
+#### Returns
+
+`kendo.ui.ContextMenu` The menu instance.
+
+### rowHeaderContextMenu
+Gets the row header contextMenu instance.
+
+#### Returns
+
+`kendo.ui.ContextMenu` The menu instance.
+
+### colHeaderContextMenu
+Gets the column header contextMenu instance.
+
+#### Returns
+
+`kendo.ui.ContextMenu` The menu instance.
+
 ### sheets
 Returns an array with the sheets in the workbook.
 
