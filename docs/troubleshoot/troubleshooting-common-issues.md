@@ -135,15 +135,27 @@ There are two ways to avoid this problem:
 
 ### Widgets Do Not Work Correctly on Touch Devices
 
-Client libraries, which interfere with touch events, such as FastClick, are not compatible with Kendo UI and may break the widgets' behavior, e.g. cause a dropdown to close immediately after opening.
+Client libraries that interfere with touch events, such as FastClick, are not compatible with Kendo UI and may break the behavior of the widgets. For example, they may cause a drop-down list to close immediately after opening.
+
+**Solution**
 
 For more information on this issue, refer to [What Exactly Is... The 300ms Click Delay](http://www.telerik.com/blogs/what-exactly-is.....-the-300ms-click-delay).
 
 ### Widget Popup Is Offset Incorrectly in Internet Explorer
 
-When Kendo UI is used with jQuery `1.12.0` or `2.2.0`, some issues with the popup positioning could occur. The popup is offset incorrectly when the page is scrolled. The investigation showed that the issue is due to a bug in the aforementioned jQuery version. According to their bug tracker, it will be addressed in the next patch release of jQuery.
+When Kendo UI is used with jQuery `1.12.0` or `2.2.0`, some issues with the popup positioning might occur. The popup is offset incorrectly when the page is scrolled.
 
-Find more details at [https://github.com/telerik/kendo-ui-core/issues/1375](https://github.com/telerik/kendo-ui-core/issues/1375).
+**Solution**
+
+The reason for this issue is a bug in the aforementioned jQuery version. According to jQuery's bug tracker, it will be addressed in the next patch release of jQuery. For more details, refer to [https://github.com/telerik/kendo-ui-core/issues/1375](https://github.com/telerik/kendo-ui-core/issues/1375).
+
+### Incorrect Appearance or Errors Occur in Hidden Widgets
+
+If you display widgets that have been in an initially hidden container, call their [`resize()`](/api/javascript/ui/widget#methods-resize) method after you show them. Initializing widgets on elements with the `style="display: none;"` configuration might cause errors, such as inability to calculate dimensions and positions or even throw errors. The reason for this behavior is that such calculations are not available for elements that are not rendered by the browser.
+
+**Solution**
+
+Usually, delaying the widget initialization until after it is displayed resolves the issue and improves the page performance.
 
 ## CDN
 
@@ -161,7 +173,9 @@ For a solution, refer to [Serving Font Files]({% slug hybridiconfonts_hybridkend
 
 By default, IIS does not serve files with unknown extensions. The mime types can be specified either through the IIS management console (inetmgr) or in the site `Web.config`.
 
-The example below demonstrates how to configure the IIS Web.config. Note the mime is removed first to avoid clashes if it is already defined.
+**Solution**
+
+The example below demonstrates how to configure the IIS `Web.config`. Note the mime is removed first to avoid clashes if it is already defined.
 
 ###### Example
 

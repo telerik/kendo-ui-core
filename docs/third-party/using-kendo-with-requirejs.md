@@ -21,16 +21,16 @@ The minified Kendo UI JavaScript files are [AMD modules](https://en.wikipedia.or
 
 ### Load from Local Directory
 
-The example below demonstrates how to load the Kendo UI JavaScript files from a local directory, e.g. `js/kendo`.
+The code snippet below demonstrates how to load the Kendo UI JavaScript files from a local directory&mdash;for example, `js/my-kendo-scripts`. It is assumed that all Kendo UI scripts files are available there.
 
 ###### Example
 
-```html
+```pseudo
 <!DOCTYPE HTML>
 <html>
     <head>
-        <link rel="stylesheet" href="../dist/styles/web/kendo.common-material.core.min.css">
-        <link rel="stylesheet" href="../dist/styles/web/kendo.material.min.css">
+        <link rel="stylesheet" href="/styles/my-kendo-styles/kendo.common.core.min.css" />
+        <link rel="stylesheet" href="/styles/my-kendo-styles/kendo.default.min.css" />
         <!-- Include RequireJS -->
         <script src="http://cdnjs.cloudflare.com/ajax/libs/require.js/2.1.1/require.js"></script>
     </head>
@@ -38,7 +38,7 @@ The example below demonstrates how to load the Kendo UI JavaScript files from a 
         <select id="dropdownlist"></select>
         <script>
         require.config({
-          baseUrl: "js/kendo", // the path where the kendo scripts are present
+          baseUrl: "js/my-kendo-scripts/", // the path where the kendo scripts are present
           paths: {
             "jquery": "http://code.jquery.com/jquery-1.9.1.min",
           }
