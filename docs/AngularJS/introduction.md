@@ -23,7 +23,7 @@ Kendo UI is seamlessly used with AngularJS. It is possible to integrate the two 
 
 ## AngularJS-Kendo UI Bindings
 
-The AngularJS bindings are now integrated into Kendo UI. If you are using one of the bundles, such as `kendo.all.min.js`, the required code is already there. If you load individual Kendo UI files, also load `kendo.angular.js` or `kendo.angular.min.js`. It has be loaded after `kendo.core`.
+The AngularJS bindings are now integrated into Kendo UI. If you are using one of the bundles, such as `kendo.all.min.js`, the required code is already there. If you load individual Kendo UI files, also load `kendo.angular.js` or `kendo.angular.min.js`. It has to be loaded after `kendo.core.js`.
 
 To activate the Angular bindings, load `angular.js` before you load Kendo UI and load the scripts in the following order.
 
