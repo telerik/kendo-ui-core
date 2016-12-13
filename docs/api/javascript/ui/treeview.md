@@ -1512,7 +1512,7 @@ The node whose children have been changed. If the changes have occurred on the r
 
     <div id="treeview"></div>
     <script>
-    function tree_databound(e) {
+    function tree_dataBound(e) {
       console.log("DataBound", e.node);
     }
     $("#treeview").kendoTreeView({
