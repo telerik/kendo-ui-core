@@ -1652,6 +1652,78 @@ To delete a fully qualified name, prefix the name of the sheet - for example, `s
 
 ## Events
 
+### insertSheet
+
+Triggered when sheet is inserted. Introduced in 2017 Q1.
+
+#### Event Data
+
+##### e.sender `kendo.ui.Spreadsheet`
+
+The widget instance which fired the event.
+
+##### e.preventDefault `Function`
+
+If invoked the spreadsheet will not insert the sheet.
+
+### removeSheet
+
+Triggered when sheet will be removed. Introduced in 2017 Q1.
+
+#### Event Data
+
+##### e.sender `kendo.ui.Spreadsheet`
+
+The widget instance which fired the event.
+
+##### e.sheet `kendo.spreadsheet.Sheet`
+
+The sheet instance which will be removed.
+
+##### e.preventDefault `Function`
+
+If invoked the spreadsheet will not remove the sheet.
+
+### renameSheet
+
+Triggered when sheet will be renamed. Introduced in 2017 Q1.
+
+#### Event Data
+
+##### e.sender `kendo.ui.Spreadsheet`
+
+The widget instance which fired the event.
+
+##### e.sheet `kendo.spreadsheet.Sheet`
+
+The sheet instance which will be renamed.
+
+##### e.newSheetName `String`
+
+The new sheet name.
+
+##### e.preventDefault `Function`
+
+If invoked the spreadsheet will not rename the sheet.
+
+### selectSheet
+
+Triggered when sheet will be activated. Introduced in 2017 Q1.
+
+#### Event Data
+
+##### e.sender `kendo.ui.Spreadsheet`
+
+The widget instance which fired the event.
+
+##### e.sheet `kendo.spreadsheet.Sheet`
+
+The sheet instance which will be activated.
+
+##### e.preventDefault `Function`
+
+If invoked the spreadsheet will not activate the sheet.
+
 ### change
 
 Triggered when a value in the spreadsheet has been changed. Introduced in 2016.Q1.SP1.
