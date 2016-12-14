@@ -1607,7 +1607,7 @@ var __meta__ = { // jshint ignore:line
             return that.templates.item(extend(options, {
                 itemWrapper: that.templates.itemWrapper,
                 renderContent: that.renderContent,
-                arrow: item.items || item.hasChildren || item.content || item.contentUrl ? that.templates.arrow : empty,
+                arrow: (item.items && item.items.length > 0) || item.hasChildren || item.content || item.contentUrl ? that.templates.arrow : empty,
                 subGroup: !options.loadOnDemand || item.expanded ? that.renderGroup : empty
             }, rendering));
         },
