@@ -74,19 +74,19 @@ var __meta__ = { // jshint ignore:line
         },
         itemIcon,
         rendering = {
-            aria: function(item) {
-                var attr = "";
+        aria: function(item) {
+            var attr = "";
 
-    if (item.items || item.content || item.contentUrl) {
-            attr += ARIA_EXPANDED + "='" + (item.expanded ? "true" : "false") + "' ";
-        }
+            if (item.items || item.content || item.contentUrl || item.expanded) {
+                attr += ARIA_EXPANDED + "='" + (item.expanded ? "true" : "false") + "' ";
+            }
 
-        if (item.enabled === false) {
-            attr += ARIA_DISABLED + "='true'";
-        }
+            if (item.enabled === false) {
+                attr += ARIA_DISABLED + "='true'";
+            }
 
-        return attr;
-    },
+            return attr;
+        },
 
     wrapperCssClass: function (group, item) {
         var result = "k-item",
@@ -124,8 +124,8 @@ var __meta__ = { // jshint ignore:line
 
         return result;
     },
-    textAttributes: function(item) {
-        return item.url ? " href='" + item.url + "'" : "";
+    textAttributes: function(url) {
+        return url ? " href='" + url + "'" : "";
     },
     arrowClass: function(item) {
         var result = "k-icon";
@@ -136,9 +136,6 @@ var __meta__ = { // jshint ignore:line
     },
     text: function(item) {
          return item.encoded === false ? item.text : kendo.htmlEncode(item.text);
-    },
-    tag: function(item) {
-        return item.url || item.contentUrl ? "a" : "span";
     },
     groupAttributes: function(group) {
         return group.expanded !== true ? " style='display:none'" : "";
@@ -361,7 +358,7 @@ var __meta__ = { // jshint ignore:line
                      "# var contentUrl = contentUrl(item); #" +
                      "# var tag = url||contentUrl ? 'a' : 'span'; #" +
                    
-                    "<#= tag # class='#= textClass(item, group) #' #= contentUrl ##= textAttributes(item) #>" +
+                    "<#= tag # class='#= textClass(item, group) #' #= contentUrl ##= textAttributes(url) #>" +
                         "# if (imageUrl) { #" +
                               "<img class='k-image' alt='' src='#= imageUrl #' />" +
                         "# } #" +
@@ -496,7 +493,7 @@ var __meta__ = { // jshint ignore:line
                 var that = this;
 
                 items = $(items);
-                items.children(LINKSELECTOR).children(".k-icon").remove();
+                items.children(LINKSELECTOR).children(".k-panelbar-collapse, .k-panelbar-expand").remove();
            
                 items
                     .filter(function() {

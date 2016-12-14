@@ -3,7 +3,7 @@
     var createPanelBar = PanelBarHelpers.fromOptions;
     var panelbarFromHtml = PanelBarHelpers.fromHtml;
 
-    module("DataSource binding", PanelBarHelpers.noAnimationMoudle);
+    module("DataSource binding", PanelBarHelpers.noAnimationModule);
 
     function controlledRead() {
         var queue = [];

@@ -33,7 +33,7 @@
             }
         },
 
-        noAnimationMoudle: {
+        noAnimationModule: {
             setup: function() {
                 kendo.effects.disable();
             },
