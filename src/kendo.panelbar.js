@@ -1414,6 +1414,7 @@ var __meta__ = { // jshint ignore:line
                  }
                  this._toggleGroup(childGroup, isVisible);
                  element.children(".k-group,.k-content").remove();
+                 prevent = true;
 
                  dataItem.load();
              } else {
