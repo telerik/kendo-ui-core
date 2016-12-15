@@ -1348,6 +1348,9 @@ var __meta__ = { // jshint ignore:line
                     .attr("tabindex", 0)
                     .focus(function() {
                         var element = $(this).find(":kendoFocusable:first");
+                        if (element.length === 0) {
+                            return;
+                        }
 
                         if (element.is("." + OVERFLOW_ANCHOR)) {
                             element = findFocusableSibling(element, "next");
