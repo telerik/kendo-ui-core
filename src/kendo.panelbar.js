@@ -835,7 +835,15 @@ var __meta__ = { // jshint ignore:line
             var render = field != "expanded";
 
             if (field == "selected") {
-                that.select(that.findByUid(items[0].uid));
+                if(items[0][field]){
+                    var currentNode = that.findByUid(items[0].uid);
+
+                    if (!currentNode.hasClass(DISABLEDCLASS)) {
+                        that.select(currentNode);
+                    }
+                }else{
+                    that.clearSelection();
+                }               
             } else {
                 var elements = $.map(items, function(item) {
                     return that.findByUid(item.uid);
@@ -867,10 +875,15 @@ var __meta__ = { // jshint ignore:line
 
                     if (field == "expanded") {
                         if (!nodeWrapper.hasClass(DISABLEDCLASS)) {
-                            that._toggleItem(nodeWrapper, false, item[field]);
+                            that._toggleItem(nodeWrapper, !item[field], true);
                         }
                     } else if (field == "enabled") {
-                        that.enable(nodeWrapper, !item[field]);
+                        that.enable(nodeWrapper, item[field]);
+                         if (!item[field]) {
+                            if (item.selected) {
+                                item.set("selected", false);
+                            }
+                         }
                     }
 
                     if (nodeWrapper.length) {
@@ -1404,11 +1417,15 @@ var __meta__ = { // jshint ignore:line
         
              var loaded = dataItem && dataItem.loaded();
 
-             if (dataItem && !expanded) {
-                 dataItem.set("expanded", true);
+            if (dataItem && !expanded) {
+              dataItem.set("expanded", !isVisible);
+              
+              if (isVisible) {
+                  return;
+              }
             }
 
-             if (dataItem && (!expanded || expanded === "true") && !loaded) {
+             if (dataItem && (!expanded) && !loaded) {
                  if (that.options.loadOnDemand) {
                      this._progress(element, true);
                  }
