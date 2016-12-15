@@ -117,6 +117,20 @@
         equal(document.activeElement.id, "bar");
     });
 
+    test("focuses no item if none of the items is focusable and resizable: false", 1, function() {
+        var toolbar = container.kendoToolBar({
+            items: [
+                { template: "<span class='btn k-button'>foo</span>" },
+                { template: "<span class='btn k-button'>bar</span>" }
+            ],
+            resizable: false
+        }).data("kendoToolBar");
+
+        toolbar.element.focus();
+
+        equal(document.activeElement.id, "toolbar");
+    });    
+
     test("tab moves focus to the overflow popup anchor if the activeElement is last focusable", 1, function() {
         var toolbar = container.kendoToolBar({
             items: [
