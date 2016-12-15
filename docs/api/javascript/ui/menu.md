@@ -294,6 +294,12 @@ Refer to the example below for a list of the supported properties.
            {
              text: "Item 4",
              spriteCssClass: "imageClass3"                // Item image sprite CSS class, optional.
+           },
+           {
+             text: "Item 5",
+             select: function(e) {                        // Item select event handler, optional 
+                // handle event
+             }
            }]
         })
       });
