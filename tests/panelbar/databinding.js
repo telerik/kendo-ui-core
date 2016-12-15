@@ -721,22 +721,5 @@
         jasmine.clock().tick();
         jasmine.clock().uninstall();
     });
-
-    //test("appending to unloaded remote node calls read once", 1, function() {
-    //    jasmine.clock().install();
-    //    var read = controlledRead();
-
-    //    createPanelBar({ dataSource: { transport: { read: read } } });
-
-    //    read.resolve([ {id: 1, text: "foo", hasChildren: true} ]);
-    //    jasmine.clock().tick();
-
-    //    panelbarObject.append({ text: "bar", hasChildren: true }, $(".k-item:first"));
-
-    //    read.resolve([]);
-    //    jasmine.clock().tick();
-
-    //    equal(read.queueLength(), 0);
-    //    jasmine.clock().uninstall();
-    //});
+   
 })();

@@ -875,7 +875,7 @@ var __meta__ = { // jshint ignore:line
 
                     if (field == "expanded") {
                         if (!nodeWrapper.hasClass(DISABLEDCLASS)) {
-                            that._toggleItem(nodeWrapper, !item[field], true);
+                            that._toggleItem(nodeWrapper, !item[field], item[field] ? "true": true);
                         }
                     } else if (field == "enabled") {
                         that.enable(nodeWrapper, item[field]);
@@ -1415,23 +1415,21 @@ var __meta__ = { // jshint ignore:line
                 prevent, content,
                 dataItem = that.dataItem(element);
         
-             var loaded = dataItem && dataItem.loaded();
+            var loaded = dataItem && dataItem.loaded();
 
             if (dataItem && !expanded) {
-              dataItem.set("expanded", !isVisible);
-              
-              if (isVisible) {
-                  return;
-              }
+                dataItem.set("expanded", !isVisible);
+                prevent = dataItem.hasChildren;
+                return prevent;
             }
 
-             if (dataItem && (!expanded) && !loaded) {
+             if (dataItem && (!expanded || expanded === "true") &&  !loaded) {
                  if (that.options.loadOnDemand) {
                      this._progress(element, true);
                  }
                  this._toggleGroup(childGroup, isVisible);
-                 element.children(".k-group,.k-content").remove();
-                 prevent = dataItem.hasChildren;
+                 element.children(".k-group,.k-content").remove();    
+                 prevent = dataItem.hasChildren;          
 
                  dataItem.load();
              } else {
