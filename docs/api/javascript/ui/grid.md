@@ -313,6 +313,23 @@ Custom commands are supported by specifying the [click](#configuration-columns.c
     });
     </script>
 
+### columns.command.visible `Function`
+
+The JavaScript function executed on initialization of the row which will determine whether the command button will be visible. The function receives a the data item object for the row as an argument.
+
+#### Example - set the command name
+    <div id="grid"></div>
+    <script>
+    $("#grid").kendoGrid({
+      columns: [
+        { field: "name" },
+        { command: [{ name: "edit", visible: function(dataItem) { return dataItem.name==="Jane" } }] }
+      ],
+      editable: "popup",
+      dataSource: [ { name: "Jane" }, { name: "Bill" } ]
+    });
+    </script>
+
 ### columns.command.name `String`
 
 The name of the command. The built-in commands are "edit" and "destroy". Can be set to a custom value.
