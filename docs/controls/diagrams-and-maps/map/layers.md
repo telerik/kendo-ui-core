@@ -19,6 +19,7 @@ Tile layers are suitable for displaying raster maps from popular online provider
 * [OpenWeatherMap](http://openweathermap.org/)
 * [ArcGIS](https://developers.arcgis.com/en/)
 * [Here (Nokia) Maps](https://developer.here.com/rest-apis/documentation/enterprise-map-tile) and many more
+* Or any other Map Tile service supporting the [WGS 84 projection standards](https://en.wikipedia.org/wiki/World_Geodetic_System)
 
 Dedicated support is available for [Microsoft Bing](http://msdn.microsoft.com/en-us/library/ff701713.aspx). Note that it requires you to [obtain an API key](http://msdn.microsoft.com/en-us/library/ff428642.aspx).
 
