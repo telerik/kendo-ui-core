@@ -874,9 +874,7 @@ var __meta__ = { // jshint ignore:line
                     }
 
                     if (field == "expanded") {
-                        if (!nodeWrapper.hasClass(DISABLEDCLASS)) {
-                            that._toggleItem(nodeWrapper, !item[field], item[field] ? "true": true);
-                        }
+                        that._toggleItem(nodeWrapper, !item[field], item[field] ? "true": true);
                     } else if (field == "enabled") {
                         that.enable(nodeWrapper, item[field]);
                          if (!item[field]) {
