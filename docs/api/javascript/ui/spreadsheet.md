@@ -1724,6 +1724,182 @@ The sheet instance which will be activated.
 
 If invoked the spreadsheet will not activate the sheet.
 
+### unhideColumn
+
+Triggered when column will be shown. Introduced in 2017 Q1.
+
+#### Event Data
+
+##### e.sender `kendo.ui.Spreadsheet`
+
+The widget instance which fired the event.
+
+##### e.sheet `kendo.spreadsheet.Sheet`
+
+The sheet instance which will be affected.
+
+##### e.index `Number`
+
+The index of the column.
+
+##### e.preventDefault `Function`
+
+If invoked the spreadsheet will execute the change.
+
+### unhideRow
+
+Triggered when row will be shown. Introduced in 2017 Q1.
+
+#### Event Data
+
+##### e.sender `kendo.ui.Spreadsheet`
+
+The widget instance which fired the event.
+
+##### e.sheet `kendo.spreadsheet.Sheet`
+
+The sheet instance which will be affected.
+
+##### e.index `Number`
+
+The index of the row.
+
+##### e.preventDefault `Function`
+
+If invoked the spreadsheet will execute the change.
+
+### hideColumn
+
+Triggered when column will be hidden. Introduced in 2017 Q1.
+
+#### Event Data
+
+##### e.sender `kendo.ui.Spreadsheet`
+
+The widget instance which fired the event.
+
+##### e.sheet `kendo.spreadsheet.Sheet`
+
+The sheet instance which will be affected.
+
+##### e.index `Number`
+
+The index of the column.
+
+##### e.preventDefault `Function`
+
+If invoked the spreadsheet will execute the change.
+
+### hideRow
+
+Triggered when row will be hidden. Introduced in 2017 Q1.
+
+#### Event Data
+
+##### e.sender `kendo.ui.Spreadsheet`
+
+The widget instance which fired the event.
+
+##### e.sheet `kendo.spreadsheet.Sheet`
+
+The sheet instance which will be affected.
+
+##### e.index `Number`
+
+The index of the row.
+
+##### e.preventDefault `Function`
+
+If invoked the spreadsheet will execute the change.
+
+### deleteColumn
+
+Triggered when column will be deleted. Introduced in 2017 Q1.
+
+#### Event Data
+
+##### e.sender `kendo.ui.Spreadsheet`
+
+The widget instance which fired the event.
+
+##### e.sheet `kendo.spreadsheet.Sheet`
+
+The sheet instance which will be affected.
+
+##### e.index `Number`
+
+The index of the column.
+
+##### e.preventDefault `Function`
+
+If invoked the spreadsheet will execute the change.
+
+### deleteRow
+
+Triggered when row will be deleted. Introduced in 2017 Q1.
+
+#### Event Data
+
+##### e.sender `kendo.ui.Spreadsheet`
+
+The widget instance which fired the event.
+
+##### e.sheet `kendo.spreadsheet.Sheet`
+
+The sheet instance which will be affected.
+
+##### e.index `Number`
+
+The index of the row.
+
+##### e.preventDefault `Function`
+
+If invoked the spreadsheet will execute the change.
+
+### insertColumn
+
+Triggered when column will be inserted. Introduced in 2017 Q1.
+
+#### Event Data
+
+##### e.sender `kendo.ui.Spreadsheet`
+
+The widget instance which fired the event.
+
+##### e.sheet `kendo.spreadsheet.Sheet`
+
+The sheet instance which will be affected.
+
+##### e.index `Number`
+
+The index of the column.
+
+##### e.preventDefault `Function`
+
+If invoked the spreadsheet will execute the change.
+
+### insertRow
+
+Triggered when row will be inserted. Introduced in 2017 Q1.
+
+#### Event Data
+
+##### e.sender `kendo.ui.Spreadsheet`
+
+The widget instance which fired the event.
+
+##### e.sheet `kendo.spreadsheet.Sheet`
+
+The sheet instance which will be affected.
+
+##### e.index `Number`
+
+The index of the row.
+
+##### e.preventDefault `Function`
+
+If invoked the spreadsheet will execute the change.
+
 ### change
 
 Triggered when a value in the spreadsheet has been changed. Introduced in 2016.Q1.SP1.
