@@ -52,7 +52,9 @@ As the reason for thе issue lies in browser functionalities, it can be resolved
 
 Another possible approach is to use the Editor's inline mode, i.e., create the Editor from a `div` element.
 
-To achieve image or table resizing in browsers such as Google Chrome 46 that do not normally support it, implement a [custom Editor tool](http://demos.telerik.com/kendo-ui/editor/custom-tools).
+Table row and column resizing is implemented in the Editor widget as of R3 2016. The users can drag the cell borders with the mouse to resize the row or column.
+
+To achieve image resizing or table resizing for versions prior to R3 2016, in browsers such as Google Chrome 46 that do not normally support it, implement a [custom Editor tool](http://demos.telerik.com/kendo-ui/editor/custom-tools).
 
 ### Back and Forward Browser Buttons Display Raw HTML
 
