@@ -247,6 +247,27 @@ A whitespace-delimited string of animation effects that are used when an item is
         });
     </script>
 
+### autoBind `Boolean` *(default: true)*
+
+If set to `false` the widget will not bind to the data source during initialization. In this case data binding will occur when the [change](/api/javascript/data/datasource#events-change) event of the
+data source is fired. By default the widget will bind to the data source specified in the configuration.
+
+> Setting `autoBind` to `false` is useful when multiple widgets are bound to the same data source. Disabling automatic binding ensures that the shared data source does not make more than one request to the remote service.
+
+#### Example - disable automatic binding
+
+    <div id="panelbar"></div>
+    <script>
+    var dataSource = new kendo.data.HierarchicalDataSource({
+      data: [ { text: "Jane Doe" }, { text: "John Doe" }]
+    });
+    $("#panelbar").kendoPanelBar({
+      autoBind: false,
+      dataSource: dataSource
+    });
+    dataSource.read(); // "read()" will fire the "change" event of the dataSource and the widget will be bound
+    </script>
+
 ### contentUrls `Array`
 
 Sets an array with the URLs from which the **PanelBar** items content to be loaded from. If only specific items should be loaded via Ajax, then you should set the URLs to the corresponding positions in the array and set the other elements to null.
@@ -272,14 +293,50 @@ Sets an array with the URLs from which the **PanelBar** items content to be load
         });
     </script>
 
-### dataSource `Object|Array`
+### dataImageUrlField `String` *(default: null)*
 
-The data source of the widget which is used to render its items. Can be a JSON object/Array that contains an item or an Array of items to be rendered.
-Refer to the example below for a list of the supported properties.
+Sets the field of the data item that provides the image URL of the **PanelBar** nodes.
 
-#### Example
+#### Example - specify custom image URL field
 
-    <ul id="panelbar"></ul>
+    <div id="panelbar"></div>
+    <script>
+    var items = [
+      { text: "Baseball", image: "http://demos.telerik.com/kendo-ui/content/shared/icons/sports/baseball.png" },
+      { text: "Golf", image: "http://demos.telerik.com/kendo-ui/content/shared/icons/sports/golf.png" }
+    ];
+    $("#panelbar").kendoPanelBar({
+      dataImageUrlField: "image",
+      dataSource: items
+    });
+    </script>
+
+### dataSource `Object|Array|kendo.data.HierarchicalDataSource`
+
+The data source of the widget which is used render nodes. Can be a JavaScript object which represents a valid data source configuration, a JavaScript array or an existing [kendo.data.HierarchicalDataSource](/api/javascript/data/hierarchicaldatasource) instance.
+
+If the `dataSource` option is set to a JavaScript object or array the widget will initialize a new [kendo.data.HierarchicalDataSource](/api/javascript/data/hierarchicaldatasource) instance using that value as data source configuration.
+
+If the `dataSource` option is an existing [kendo.data.HierarchicalDataSource](/api/javascript/data/hierarchicaldatasource) instance the widget will use that instance and will **not** initialize a new one.
+
+#### Example - set dataSource as a JavaScript object
+
+    <div id="panelbar"></div>
+    <script>
+    $("#panelbar").kendoTreeView({
+      dataSource: {
+        data: [
+          { text: "foo", items: [
+            { text: "bar" }
+          ] }
+        ]
+      }
+    });
+    </script>
+
+#### Example - set dataSource as a JavaScript array
+
+   <ul id="panelbar"></ul>
 
     <script>
       $("#panelbar").kendoPanelBar({
@@ -318,6 +375,112 @@ Refer to the example below for a list of the supported properties.
       });
     </script>
 
+#### Example - set dataSource as an existing kendo.data.HierarchicalDataSource instance
+
+    <div id="panelbar"></div>
+    <script>
+    var dataSource = new kendo.data.HierarchicalDataSource({
+      transport: {
+        read: {
+          url: "http://demos.telerik.com/kendo-ui/service/Employees",
+          dataType: "jsonp"
+        }
+      },
+      schema: {
+        model: {
+          id: "EmployeeId",
+          hasChildren: "HasEmployees"
+        }
+      }
+    });
+
+    $("#panelbar").kendoPanelBar({
+      dataSource: dataSource,
+      dataTextField: "FullName"
+    });
+    </script>
+
+### dataSpriteCssClassField `String` *(default: null)*
+
+Sets the field of the data item that provides the sprite CSS class of the nodes.
+If an array, each level uses the field that is at the same index in the array, or the last item in the array.
+
+#### Example
+
+    <style>
+        #panelbar .k-sprite {
+            background-image: url("http://demos.telerik.com/kendo-ui/content/shared/styles/flags.png");
+        }    
+    </style>
+    <div id="panelbar"></div>
+    <script>
+    var items = [
+      { text: "Brazil", sprite: "brazilFlag" },
+      { text: "India", sprite: "indiaFlag" }
+    ];
+    $("#panelbar").kendoPanelBar({
+      dataSpriteCssClassField: "sprite",
+      dataSource: items
+    });
+    </script>
+
+### dataTextField `String|Array` *(default: null)*
+
+Sets the field of the data item that provides the text content of the nodes.
+If an array, each level uses the field that is at the same index in the array, or the last item in the array.
+
+#### Example
+
+    <div id="panelbar"></div>
+    <script>
+    var items = [
+      { ProductName: "Tea", items: [
+        { ProductName: "Green Tea" },
+        { ProductName: "Black Tea" }
+      ] },
+      { ProductName: "Coffee" }
+    ];
+    $("#panelbar").kendoPanelBar({
+      dataTextField: "ProductName",
+      dataSource: items
+    });
+    </script>
+
+#### Example - using different fields on different levels
+
+    <div id="panelbar"></div>
+    <script>
+    var items = [
+      { CategoryName: "Tea", items: [
+        { ProductName: "Green Tea" },
+        { ProductName: "Black Tea" }
+      ] },
+      { CategoryName: "Coffee" }
+    ];
+    $("#panelbar").kendoPanelBar({
+      dataTextField: [ "CategoryName", "ProductName" ],
+      dataSource: items
+    });
+    </script>
+
+### dataUrlField `String` *(default: null)*
+
+Sets the field of the data item that provides the link URL of the nodes.
+
+#### Example
+
+    <div id="panelbar"></div>
+    <script>
+    var items = [
+      { text: "Tea", LinksTo: "http://tea.example.com" },
+      { text: "Coffee", LinksTo: "http://coffee.example.com" }
+    ];
+    $("#panelbar").kendoPanelBar({
+      dataUrlField: "LinksTo",
+      dataSource: items
+    });
+    </script>
+
 ### expandMode `String`*(default: "multiple")*
 
 Specifies how the **PanelBar** items are displayed when opened and closed. The following values
@@ -353,6 +516,146 @@ Display multiple values at one time; opening an item has no visual impact on any
         $("#panelbar").kendoPanelBar({
             expandMode: "single"
         });
+    </script>
+
+### loadOnDemand `Boolean` *(default: true)*
+
+Indicates whether the child DataSources should be fetched lazily when parent groups get expanded.
+Setting this to false causes all child DataSources to be loaded at initialization time.
+
+#### Example - force lazy loading of sublevels
+
+    <div id="panelbar"></div>
+    <script>
+    $("#panelbar").kendoPanelBar({
+      loadOnDemand: true,
+      dataSource: [
+        { text: "foo", items: [
+          { text: "bar" }
+        ] }
+      ]
+    });
+    </script>
+
+### messages `Object`
+
+The text messages displayed in the widget. Use it to customize or localize the messages.
+
+#### Example - customize TreeView messages
+
+    <div id="panelbar"></div>
+    <script>
+    $("#panelbar").kendoPanelBar({
+      dataSource: {
+        transport: {
+          read: function(options) {
+            // request always fails after 1s
+            setTimeout(function() {
+              options.error({});
+            }, 1000);
+          }
+        }
+      },
+      messages: {
+        retry: "Wiederholen",
+        requestFailed: "Anforderung fehlgeschlagen.",
+        loading: "Laden..."
+      }
+    });
+    </script>
+
+### messages.loading `String` *(default: "Loading...")*
+
+The text message shown while the root level items are loading.
+
+#### Example - customize loading message
+
+    <div id="panelbar"></div>
+    <script>
+    $("#panelbar").kendoPanelBar({
+      dataSource: {
+        transport: {
+          read: function(options) {
+            // request always fails after 1s
+            setTimeout(function() {
+              options.error({});
+            }, 1000);
+          }
+        }
+      },
+      messages: {
+        loading: "Laden..."
+      }
+    });
+    </script>
+
+### messages.requestFailed `String` *(default: "Request failed.")*
+
+The text message shown when an error occurs while fetching the content.
+
+#### Example - customize requestFailed message
+
+    <div id="panelbar"></div>
+    <script>
+    $("#panelbar").kendoPanelBar({
+      dataSource: {
+        transport: {
+          read: function(options) {
+            // request always fails after 1s
+            setTimeout(function() {
+              options.error({});
+            }, 1000);
+          }
+        }
+      },
+      messages: {
+        requestFailed: "Anforderung fehlgeschlagen."
+      }
+    });
+    </script>
+
+### messages.retry `String` *(default: "Retry")*
+
+The text message shown in the retry button.
+
+#### Example - customize retry message
+
+    <div id="panelbar"></div>
+    <script>
+    $("#panelbar").kendoPanelBar({
+      dataSource: {
+        transport: {
+          read: function(options) {
+            // request always fails after 1s
+            setTimeout(function() {
+              options.error({});
+            }, 1000);
+          }
+        }
+      },
+      messages: {
+        retry: "Wiederholen"
+      }
+    });
+    </script>
+
+### template `String|Function`
+
+Template for rendering each node.
+
+#### Example
+
+    <div id="panelbar"></div>
+    <script>
+    $("#panelbar").kendoPanelBar({
+      template: "#= item.text # (#= item.inStock #)",
+      dataSource: [
+        { text: "foo", inStock: 7, items: [
+          { text: "bar", inStock: 2 },
+          { text: "baz", inStock: 5 }
+        ] }
+      ]
+    });
     </script>
 
 ## Methods
