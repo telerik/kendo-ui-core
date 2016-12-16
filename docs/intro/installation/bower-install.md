@@ -77,7 +77,15 @@ You can also add the package to the `bower.json` file.
 C:\> SETX HOME %USERPROFILE%
 ```
 
-**Step 3** Add the credentials using the format in the example above.
+**Step 3** Add the credentials using the format in the example bellow:
+
+###### Example
+
+```
+machine bower.telerik.com
+    login my-telerik.identity@example.com
+    password mysecret
+```
 
 Git might have problems resolving your home directory if it contains spaces in its path&mdash;for example, `c:\Documents and Settings\jane`). Therefore, update your `%HOME%` environment variable to point to a directory having no spaces in its name.
 
@@ -130,11 +138,11 @@ The Git client, bundled in Visual Studio, is unable to authenticate with the Ken
 
 Use a Windows port of Git and your stored credentials instead of the built-in client.
 
-1. Set up [stored credentials](#store-credentials-windows).
+1. Set up [stored credentials](#store-on-windows).
 1. Install [Git for Windows](https://git-for-windows.github.io/).
 1. Right-click the **Bower** folder under **Dependencies**.
 1. Select **Configure external tools**.
-1. Uncheck `$(DevEnvDir)\Extensions\Microsoft\Web Tools\External\git`.
+1. Uncheck `$(DevEnvDir)\Extensions\Microsoft\Web Tools\External\git` and/or `$(VSINSTALLDIR)\Web\External\git`.
 1. Add a new entry `C:\Program Files\Git\bin`, or your installation location.
 
 **Figure 1. Add a new entry**
