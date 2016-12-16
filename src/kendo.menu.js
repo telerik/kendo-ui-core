@@ -39,8 +39,9 @@ var __meta__ = { // jshint ignore:line
         ACTIVATE = "activate",
         DEACTIVATE = "deactivate",
         POINTERDOWN = "touchstart" + NS + " MSPointerDown" + NS + " pointerdown" + NS,
-        pointers = kendo.support.pointers,
-        msPointers = kendo.support.msPointers,
+        msie = kendo.support.browser.msie,
+        pointers = msie && kendo.support.pointers,
+        msPointers = msie && kendo.support.msPointers,
         allPointers = msPointers || pointers,
         MOUSEENTER = pointers ? "pointerover" : (msPointers ? "MSPointerOver" : "mouseenter"),
         MOUSELEAVE = pointers ? "pointerout" : (msPointers ? "MSPointerOut" : "mouseleave"),
@@ -365,7 +366,7 @@ var __meta__ = { // jshint ignore:line
             return selectHandler;
         }
         return null;
-    }              
+    }
 
     var Menu = Widget.extend({
         init: function(element, options) {
@@ -509,7 +510,7 @@ var __meta__ = { // jshint ignore:line
 
             var inserted = this._insert(item, referenceItem, referenceItem.length ? referenceItem.find("> .k-menu-group, > .k-animation-container > .k-menu-group") : null);
 
-            each(inserted.items, function (i) {               
+            each(inserted.items, function (i) {
                 inserted.group.append(this);
                 updateArrow(this);
                 storeItemSelectEventHandler(this, item[i] || item);
@@ -519,7 +520,7 @@ var __meta__ = { // jshint ignore:line
             updateFirstLast(inserted.group.find(".k-first, .k-last").add(inserted.items));
 
             return this;
-        },     
+        },
 
         insertBefore: function (item, referenceItem) {
             referenceItem = this.element.find(referenceItem);
@@ -855,7 +856,7 @@ var __meta__ = { // jshint ignore:line
             element.removeClass("k-menu-init");
 
             items.each(function () {
-                updateItemClasses(this);             
+                updateItemClasses(this);
             });
         },
 
@@ -982,12 +983,12 @@ var __meta__ = { // jshint ignore:line
 
             var isSelectItemDefaultPrevented = itemSelectEventData && itemSelectEventData.isDefaultPrevented();
             var isSelectDefaultPrevented = this._triggerEvent({ item: itemElement, type: SELECT });
-            return isSelectItemDefaultPrevented || isSelectDefaultPrevented;          
+            return isSelectItemDefaultPrevented || isSelectDefaultPrevented;
         },
 
         _getEventData: function (target) {
-            var eventData = { 
-                sender: this, 
+            var eventData = {
+                sender: this,
                 target: target,
                 _defaultPrevented: false,
                 preventDefault: function () {
