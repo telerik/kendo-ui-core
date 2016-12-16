@@ -28,16 +28,15 @@
         equal(div.parent().css("zIndex"), "12");
     });
 
-    asyncTest("mousedown outside the element should close it", function(){
-        div.kendoPopup( {
+    test("mousedown outside the element should close it", 1, function(){
+        popup = new Popup(div, {
             anchor: anchor,
             close: function() {
                 ok(true);
-                start();
             }
-        }).data("kendoPopup").open();
+        });
 
-        popup = div.data("kendoPopup");
+        popup.open();
 
         $(document.documentElement).mousedown();
     });
@@ -842,5 +841,37 @@
         equal(localAnchor[0].getBoundingClientRect().left, div[0].getBoundingClientRect().left);
 
         body.css("margin", defaultMargin);
+    });
+
+    var svgWrapper;
+
+    module("kendo.ui.Popup (multiple bodies)", {
+        setup: function() {
+            kendo.effects.disable();
+            var foreignObjectHtml = '<foreignObject width="100" height="50" requiredExtensions="http://www.w3.org/1999/xhtml"><body xmlns="http://www.w3.org/1999/xhtml"><h1>HTML Foreign Object</h1></body></foreignObject>';
+
+            svgWrapper = $('<svg width="400px" height="300px" viewBox="0 0 400 300" xmlns="http://www.w3.org/2000/svg"></svg>').appendTo(document.body);
+            svgWrapper.append(foreignObjectHtml);
+
+            div = $("<div style='background:red'>popup</div>");
+            anchor = $("<div style='background:blue;position:absolute;left:100px;top:100px;'>anchor</div>").appendTo(QUnit.fixture);
+        },
+        teardown: function() {
+            if (popup) {
+                popup.destroy();
+            }
+
+            div.add(anchor).remove();
+            svgWrapper.remove();
+            kendo.effects.enable();
+        }
+    });
+
+    test("appends to document.body", function() {
+        popup = new Popup(div, { anchor: anchor });
+
+        popup.open();
+
+        equal(div.closest("body")[0], document.body);
     });
 })();
