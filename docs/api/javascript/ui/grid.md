@@ -462,6 +462,27 @@ The CSS class applied to the command button.
     }
     </style>
 
+### columns.command.iconClass `String`
+
+The CSS class applied to the command button icon span.
+
+#### Example - set the CSS class of the command icon span
+    <div id="grid"></div>
+    <script>
+    $("#grid").kendoGrid({
+      columns: [
+        { field: "name" },
+        { command: [{ iconClass: "k-icon k-i-delete", name: "remove", text: "Remove",click:myRemove }] }
+      ],
+      editable: true,
+      dataSource: [ { name: "Jane Doe" } ]
+    });
+    function myRemove(e){
+        //...
+    }
+    </script>
+    
+
 ### columns.command.click `Function`
 
 The JavaScript function executed when the user clicks the command button. The function receives a [jQuery Event](http://api.jquery.com/category/events/event-object/) as an argument.
