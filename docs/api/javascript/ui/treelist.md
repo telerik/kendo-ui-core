@@ -176,6 +176,30 @@ The CSS class applied to the command button.
         });
     </script>
 
+### columns.command.imageClass `String`
+
+The CSS class applied to icon span of the command button.
+
+#### Example - set the CSS class of the command icon
+
+    <div id="treeList"></div>
+    <script>
+        var dataSource = new kendo.data.TreeListDataSource({
+          data: [ { name: "Jane Doe" }, { name: "John Doe" }]
+        });
+        $("#treeList").kendoTreeList({
+          columns: [
+              { field: "name" },
+              { command: [{ name: "remove", imageClass: "k-icon k-i-delete", click:myRemove }] }
+          ],
+          editable: true,
+          dataSource: dataSource
+        });
+        function myRemove(e){
+            //...
+        }
+    </script>
+
 ### columns.command.click `Function`
 
 The JavaScript function executed when the user clicks the command button. The function receives a [jQuery Event](http://api.jquery.com/category/events/event-object/) as an argument.
