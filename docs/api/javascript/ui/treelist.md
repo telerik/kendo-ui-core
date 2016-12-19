@@ -190,14 +190,20 @@ The CSS class applied to icon span of the command button.
         $("#treeList").kendoTreeList({
           columns: [
               { field: "name" },
-              { command: [{ name: "remove", imageClass: "k-icon k-i-delete", click:myRemove }] }
+              { command: [
+                {
+                  name: "remove",
+                  text: "Remove",
+                  imageClass: "k-i-delete", // show delete icon
+                  click: function(e) {
+                      // button click handler
+                  }
+                }
+              ] }
           ],
           editable: true,
           dataSource: dataSource
         });
-        function myRemove(e){
-            //...
-        }
     </script>
 
 ### columns.command.click `Function`
