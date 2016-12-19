@@ -205,7 +205,7 @@ The [`Surface.create`](/api/javascript/drawing/surface#create) method, as demons
             surface.draw(group);
         </script>
 
-The default output is an SVG with fallback to Canvas.
+The default output is an SVG with a fallback to Canvas.
 
 ## See Also
 
