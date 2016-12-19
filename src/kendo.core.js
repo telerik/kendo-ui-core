@@ -3807,6 +3807,27 @@ function pad(number, digits, end) {
 
             return last;
         }
+        //returns 0 for first week
+        function weekInYear(date, weekStart){
+            var year, days;
+
+            date = new Date(date.getFullYear(), date.getMonth(), date.getDate());
+            adjustDST(date, 0);
+
+            year = date.getFullYear();
+
+            if (weekStart !== undefined) {
+                setDayOfWeek(date, weekStart, -1);
+                date.setDate(date.getDate() + 4);
+            } else {
+                date.setDate(date.getDate() + (4 - (date.getDay() || 7)));
+            }
+
+            adjustDST(date, 0);
+            days = Math.floor((date.getTime() - new Date(year, 0, 1, -6)) / 86400000);
+
+            return 1 + Math.floor(days / 7);
+        }
 
         function getDate(date) {
             date = new Date(date.getFullYear(), date.getMonth(), date.getDate(), 0, 0, 0);
@@ -3934,6 +3955,7 @@ function pad(number, digits, end) {
             toInvariantTime: toInvariantTime,
             firstDayOfMonth: firstDayOfMonth,
             lastDayOfMonth: lastDayOfMonth,
+            weekInYear: weekInYear,
             getMilliseconds: getMilliseconds
         };
     })();

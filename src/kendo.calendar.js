@@ -18,6 +18,7 @@ var __meta__ = { // jshint ignore:line
         keys = kendo.keys,
         parse = kendo.parseDate,
         adjustDST = kendo.date.adjustDST,
+        weekInYear = kendo.date.weekInYear,
         extractFormat = kendo._extractFormat,
         template = kendo.template,
         getCulture = kendo.getCulture,
@@ -25,6 +26,8 @@ var __meta__ = { // jshint ignore:line
         transitionOrigin = transitions ? transitions.css + "transform-origin" : "",
         cellTemplate = template('<td#=data.cssClass# role="gridcell"><a tabindex="-1" class="k-link" href="\\#" data-#=data.ns#value="#=data.dateString#">#=data.value#</a></td>', { useWithBlock: false }),
         emptyCellTemplate = template('<td role="gridcell">&nbsp;</td>', { useWithBlock: false }),
+        //TODO modify the template HTML according to the provided design 
+        weekNumberTemplate = template('<td class="k-alt"><a>#= data.weekNumber #</a></td>', { useWithBlock: false }),
         browser = kendo.support.browser,
         isIE8 = browser.msie && browser.version < 9,
         outerHeight = kendo._outerHeight,
@@ -70,7 +73,7 @@ var __meta__ = { // jshint ignore:line
             century: 3
         };
 
-    var Calendar = Widget.extend({
+    var Calendar = Widget.extend({      
         init: function(element, options) {
             var that = this, value, id;
 
@@ -155,6 +158,7 @@ var __meta__ = { // jshint ignore:line
             footer : "",
             format : "",
             month : {},
+            showWeekNumber: false,
             start: MONTH,
             depth: MONTH,
             animation: {
@@ -331,9 +335,11 @@ var __meta__ = { // jshint ignore:line
                     dates: options.dates,
                     format: options.format,
                     culture: culture,
-                    disableDates: options.disableDates
+                    disableDates: options.disableDates,
+                    showWeekNumber: options.showWeekNumber
                 }, that[currentView.name])));
-
+                
+                addClassToViewContainer(CENTURY, to, currentView.name);
                 makeUnselectable(to);
                 var replace = from && from.data("start") === to.data("start");
                 that._animate({
@@ -869,11 +875,13 @@ var __meta__ = { // jshint ignore:line
                 footer = options.footer,
                 month = options.month,
                 content = month.content,
+                weekNumber = month.weekNumber,
                 empty = month.empty;
 
             that.month = {
                 content: template('<td#=data.cssClass# role="gridcell"><a tabindex="-1" class="k-link#=data.linkClass#" href="#=data.url#" ' + kendo.attr("value") + '="#=data.dateString#" title="#=data.title#">' + (content || "#=data.value#") + '</a></td>', { useWithBlock: !!content }),
-                empty: template('<td role="gridcell">' + (empty || "&nbsp;") + "</td>", { useWithBlock: !!empty })
+                empty: template('<td role="gridcell">' + (empty || "&nbsp;") + "</td>", { useWithBlock: !!empty }),
+                weekNumber: template('<td class="k-alt"><a>' + (weekNumber || "#= data.weekNumber #") + "</a></td>", { useWithBlock: !!weekNumber })
             };
 
             that.footer = footer !== false ? template(footer || '#= kendo.toString(data,"D","' + options.culture +'") #', { useWithBlock: false }) : null;
@@ -926,6 +934,7 @@ var __meta__ = { // jshint ignore:line
                 format = options.format,
                 culture = options.culture,
                 navigateUrl = options.url,
+                showWeekNumber = options.showWeekNumber,
                 hasUrl = navigateUrl && dates[0],
                 currentCalendar = getCalendarInfo(culture),
                 firstDayIdx = currentCalendar.firstDay,
@@ -938,7 +947,10 @@ var __meta__ = { // jshint ignore:line
                 toDateString = that.toDateString,
                 today = new DATE(),
                 html = '<table tabindex="0" role="grid" class="k-content" cellspacing="0" data-start="' + toDateString(start) + '"><thead><tr role="row">';
-
+                if (showWeekNumber) {
+                    html += '<th scope="col"></th>';
+                }
+                
                 for (; idx < 7; idx++) {
                     html += '<th scope="col" title="' + names[idx] + '">' + shortNames[idx] + '</th>';
                 }
@@ -952,6 +964,8 @@ var __meta__ = { // jshint ignore:line
                     perRow: 7,
                     html: html += '</tr></thead><tbody><tr role="row">',
                     start: start,
+                    showWeekNumber: showWeekNumber,
+                    weekNumber: options.weekNumber,
                     min: new DATE(min.getFullYear(), min.getMonth(), min.getDate()),
                     max: new DATE(max.getFullYear(), max.getMonth(), max.getDate()),
                     content: options.content,
@@ -996,6 +1010,12 @@ var __meta__ = { // jshint ignore:line
                             linkClass: linkClass,
                             url: url
                         };
+                    },
+                    weekNumberBuild: function(date) {
+                        return {
+                            weekNumber: weekInYear(date, date),
+                            currentDate: date
+                        };          
                     }
                 });
             },
@@ -1246,15 +1266,25 @@ var __meta__ = { // jshint ignore:line
             start = options.start,
             setter = options.setter,
             build = options.build,
+            weekNumberBuild = options.weekNumberBuild,
             length = options.cells || 12,
+            showWeekNumber = options.showWeekNumber,
             cellsPerRow = options.perRow || 4,
+            weekNumber = options.weekNumber || weekNumberTemplate,
             content = options.content || cellTemplate,
-            empty = options.empty || emptyCellTemplate,
+            empty = options.empty || emptyCellTemplate,      
             html = options.html || '<table tabindex="0" role="grid" class="k-content k-meta-view" cellspacing="0"><tbody><tr role="row">';
+            if(showWeekNumber) {
+                html += weekNumber(weekNumberBuild(start));
+            }
+            
 
         for(; idx < length; idx++) {
             if (idx > 0 && idx % cellsPerRow === 0) {
                 html += '</tr><tr role="row">';
+                if(showWeekNumber) {
+                    html += weekNumber(weekNumberBuild(start));
+                }
             }
 
             start = new DATE(start.getFullYear(), start.getMonth(), start.getDate(), 0, 0, 0);
@@ -1366,6 +1396,12 @@ var __meta__ = { // jshint ignore:line
         }
     }
 
+    function addClassToViewContainer(className, element, currentView) {
+        if(className == currentView) {
+            element.addClass(className);
+        }
+    }
+
     function inArray(date, dates) {
         for(var i = 0, length = dates.length; i < length; i++) {
             if (date === +dates[i]) {
@@ -1457,6 +1493,7 @@ var __meta__ = { // jshint ignore:line
     calendar.makeUnselectable =  makeUnselectable;
     calendar.restrictValue = restrictValue;
     calendar.isInRange = isInRange;
+    calendar.addClassToViewContainer = addClassToViewContainer;
     calendar.normalize = normalize;
     calendar.viewsEnum = views;
     calendar.disabled = getDisabledExpr;
