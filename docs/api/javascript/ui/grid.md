@@ -5897,7 +5897,7 @@ A scale factor.  In many cases, text size on screen will be too big for print, s
 
 The URL of the server side proxy which will stream the file to the end user.
 
-A proxy will be used when the browser isn't capable of saving files locally e.g. Internet Explorer 9 and Safari.
+A proxy will be used when the browser is not capable of saving files locally, for example, Internet Explorer 9 and Safari.
 
 The developer is responsible for implementing the server-side proxy.
 
