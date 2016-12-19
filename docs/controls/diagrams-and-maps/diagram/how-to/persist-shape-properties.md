@@ -1,17 +1,17 @@
 ---
 title: Persist Shape Properties
 page_title: Persist Shape Properties | Kendo UI Diagram
-description: "Learn how to persist shape properties in Kendo Diagram."
+description: "Learn how to persist Shape properties in the Kendo UI Diagram widget."
 slug: howto_persistshapeproperties_diagram
 ---
 
 # Persist Shape Properties
 
-The example below demonstrates how to use the browser's session storage to persist Shape properties so that when user reloads the page, position and other properties are stored. 
+In real-live applications, you can easily store the position and other properties of the Diagram in the data source you use by applying the `DataSource` methods that correspond to your project.
 
-In real-live application you can store that easily to the data source you are using by using the DataSource methods accordingly to the case you have. 
+By using the same approach, you can persist the data source of the connections, the additional shape properties that are used in the custom visual, and others.
 
-Using the same technique you can persist connections' data source, additional shape properties used in custom visual and so on.
+The example below demonstrates how to use the session storage of the browser to persist the `Shape` properties of the Diagram, so that when the user reloads the page, the position and other properties of the widget are stored.
 
 ###### Example
 
@@ -20,7 +20,7 @@ Using the same technique you can persist connections' data source, additional sh
 <div id="diagram"></div>
   <script>
     var originalData = [{ "Id": 1, "JobTitle": "President", "Color": "", "x": 50, "y": 100 }, { "Id": 2, "JobTitle": "VP Finance", "Color": "#3399cc", "x": 200, "y": 200 }, { "Id": 3, "JobTitle": "VP Customer Relations", "Color": "#3399cc", "x": 300, "y": 300 }, { "Id": 4, "JobTitle": "VP Human Resources", "Color": "#3399cc", "x": 400, "y": 400 }];
-    
+
     $(function () {
         $(document).ready(function () {
             createDiagram();
@@ -28,17 +28,17 @@ Using the same technique you can persist connections' data source, additional sh
 
         function createDiagram() {
           	var dataShapes = JSON.parse(sessionStorage.getItem("shapes"));
-            
+
           	if(!dataShapes || dataShapes.length == 0){
-          		sessionStorage.setItem("shapes", JSON.stringify(originalData)); 
+          		sessionStorage.setItem("shapes", JSON.stringify(originalData));
               dataShapes = originalData;
             }else{
               dataShapes = JSON.parse(sessionStorage.getItem("shapes"));
-            } 
-          
-             
+            }
+
+
             var dataConnections = [{ "Id": 1, "FromShapeId": 1, "ToShapeId": 2, "Text": null }, { "Id": 2, "FromShapeId": 1, "ToShapeId": 3, "Text": null }, { "Id": 3, "FromShapeId": 1, "ToShapeId": 4, "Text": null }];
-            
+
           $("#diagram").kendoDiagram({
                 dataSource: ({
                     data: dataShapes,
@@ -57,13 +57,13 @@ Using the same technique you can persist connections' data source, additional sh
                       var dataSourceData = ev.sender.view().toJSON();
 
                     	for (i = 0; i < dataSourceData.length; i++){
-                        
+
                         var item = dataSourceData[i];
                       	newData.push({
-                        	"Id": item.id, 
-                          "JobTitle": item.JobTitle, 
-                          "Color": item.Color, 
-                          "x": item.x, 
+                        	"Id": item.id,
+                          "JobTitle": item.JobTitle,
+                          "Color": item.Color,
+                          "x": item.x,
                           "y": item.y
                         });
                       }
@@ -105,10 +105,10 @@ Using the same technique you can persist connections' data source, additional sh
                 }
             });
             var diagram = $("#diagram").getKendoDiagram();
-            
+
             diagram.bringIntoView(diagram.shapes);
         }
-       
+
         function visualTemplate(options) {
             var dataviz = kendo.dataviz;
             var g = new dataviz.diagram.Group();
