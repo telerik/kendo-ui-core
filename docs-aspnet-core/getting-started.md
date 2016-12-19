@@ -113,7 +113,7 @@ Copy the `js` and `styles` folders from the `telerik.ui.for.aspnetmvc` archive t
 
 * **[Kendo UI Professional Bower package installation](../kendo-ui/intro/installation/bower-install)**
 
-**Step 7** Register the Kendo UI styles and scripts in `~/Views/Shared/Layout.cshtml`.
+**Step 7** Register the Kendo UI styles and scripts in `~/Views/Shared/_Layout.cshtml`.
 
 ###### Example
 
@@ -184,7 +184,7 @@ The example below demonstrates how to use HTML helpers. Add the snippet to `~/Vi
                     .Deferred()
             )
 
-            @* All initialization scripts are rendered to the bottom of the page, see Layout.cshtml *@
+            @* All initialization scripts are rendered to the bottom of the page, see _Layout.cshtml *@
             @section scripts {
                 @Html.Kendo().DeferredScripts()
             }
