@@ -494,7 +494,7 @@ var __meta__ = { // jshint ignore:line
 
                 items = $(items);
                 items.children(LINKSELECTOR).children(".k-panelbar-collapse, .k-panelbar-expand").remove();
-           
+
                 items
                     .filter(function() {
                         var dataItem = that.dataItem(this);
@@ -1468,7 +1468,7 @@ var __meta__ = { // jshint ignore:line
                 .attr(ARIA_EXPANDED, !visibility)
                 .attr(ARIA_HIDDEN, visibility)
                 .toggleClass(ACTIVECLASS, !visibility)
-                .find("> .k-link > .k-icon")
+                .find("> .k-link > .k-panelbar-collapse, .k-panelbar-expand")
                     .toggleClass("k-i-arrow-60-up", !visibility)
                     .toggleClass("k-panelbar-collapse", !visibility)
                     .toggleClass("k-i-arrow-60-down", visibility)
