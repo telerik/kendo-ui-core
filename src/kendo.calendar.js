@@ -27,7 +27,7 @@ var __meta__ = { // jshint ignore:line
         cellTemplate = template('<td#=data.cssClass# role="gridcell"><a tabindex="-1" class="k-link" href="\\#" data-#=data.ns#value="#=data.dateString#">#=data.value#</a></td>', { useWithBlock: false }),
         emptyCellTemplate = template('<td role="gridcell">&nbsp;</td>', { useWithBlock: false }),
         //TODO modify the template HTML according to the provided design 
-        weekNumberTemplate = template('<td class="weekNumber"><a>#= data.weekNumber #</a></td>', { useWithBlock: false }),
+        weekNumberTemplate = template('<td class="k-alt"><a>#= data.weekNumber #</a></td>', { useWithBlock: false }),
         browser = kendo.support.browser,
         isIE8 = browser.msie && browser.version < 9,
         outerHeight = kendo._outerHeight,
@@ -63,10 +63,6 @@ var __meta__ = { // jshint ignore:line
         NEXTARROW = "_nextArrow",
         ARIA_DISABLED = "aria-disabled",
         ARIA_SELECTED = "aria-selected",
-        WEEK = {
-            Week: "Week",
-            Wk: "WK"
-        },
         proxy = $.proxy,
         extend = $.extend,
         DATE = Date,
@@ -163,7 +159,6 @@ var __meta__ = { // jshint ignore:line
             format : "",
             month : {},
             showWeekNumber: false,
-            messages : WEEK,
             start: MONTH,
             depth: MONTH,
             animation: {
@@ -341,8 +336,7 @@ var __meta__ = { // jshint ignore:line
                     format: options.format,
                     culture: culture,
                     disableDates: options.disableDates,
-                    showWeekNumber: options.showWeekNumber,
-                    messages: options.messages
+                    showWeekNumber: options.showWeekNumber
                 }, that[currentView.name])));
                 
                 addClassToViewContainer(CENTURY, to, currentView.name);
@@ -887,8 +881,7 @@ var __meta__ = { // jshint ignore:line
             that.month = {
                 content: template('<td#=data.cssClass# role="gridcell"><a tabindex="-1" class="k-link#=data.linkClass#" href="#=data.url#" ' + kendo.attr("value") + '="#=data.dateString#" title="#=data.title#">' + (content || "#=data.value#") + '</a></td>', { useWithBlock: !!content }),
                 empty: template('<td role="gridcell">' + (empty || "&nbsp;") + "</td>", { useWithBlock: !!empty }),
-                //TODO modify according to the design 
-                weekNumber: template('<td class="weekNumber"><a>' + (weekNumber || "#= data.weekNumber #") + "</a></td>", { useWithBlock: !!weekNumber })
+                weekNumber: template('<td class="k-alt"><a>' + (weekNumber || "#= data.weekNumber #") + "</a></td>", { useWithBlock: !!weekNumber })
             };
 
             that.footer = footer !== false ? template(footer || '#= kendo.toString(data,"D","' + options.culture +'") #', { useWithBlock: false }) : null;
@@ -955,7 +948,7 @@ var __meta__ = { // jshint ignore:line
                 today = new DATE(),
                 html = '<table tabindex="0" role="grid" class="k-content" cellspacing="0" data-start="' + toDateString(start) + '"><thead><tr role="row">';
                 if (showWeekNumber) {
-                    html += '<th scope="col" title='+ options.messages.Week +'>'+ options.messages.Wk +'</th>';
+                    html += '<th scope="col"></th>';
                 }
                 
                 for (; idx < 7; idx++) {

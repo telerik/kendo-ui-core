@@ -195,18 +195,12 @@ test("month view renders days", function() {
 test("month view renders week number column when enabled", function() {
     var today = new Date(),
         days = kendo.culture().calendar.days,
-        //TODO week messages to be added in the calendar?
-        WEEK = {
-            Week: "Week",
-            Wk: "WK"
-        },
         cells;
         
 
     div.html(calendar.views[0].content({
         date: today,
         empty: template.empty,
-        messages : WEEK,
         showWeekNumber: true,
         content: template.content,
         min: new Date(2000, 10, 10),
@@ -219,9 +213,7 @@ test("month view renders week number column when enabled", function() {
     
 
     equal(div.find("thead").find("th").length, 8);
-    equal(div.find("thead").find("th").eq(0).html(), WEEK.Wk);
-    equal(div.find("thead").find("th").eq(0).attr("title"),  WEEK.Week);
-    ok(cells.eq(0).hasClass("weekNumber"));
+    ok(cells.eq(0).hasClass("k-alt"));
 
     equal(div.find("tbody").find("tr").length, 6);
     equal(div.find("tbody").find("td").length, 48);

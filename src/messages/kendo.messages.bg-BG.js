@@ -1,14 +1,4 @@
 (function ($, undefined) {
-/* Calendar messages */
-
-if (kendo.ui.Calendar) {
-kendo.ui.Calendar.prototype.options.messages =
-$.extend(true, kendo.ui.Calendar.prototype.options.messages,{
-  "Wk": "Сд",
-  "Week": "Седмица"
-});
-}
-
 /* Validator */
 if (kendo.ui.Validator) {
 kendo.ui.Validator.prototype.options.messages =
