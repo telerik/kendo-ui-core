@@ -19,8 +19,6 @@ The clipping path for this element.
 The path instance will be monitored for changes.
 It can be replaced by calling the [clip](#methods-clip) method.
 
-> The VML surface (IE 8 and earlier) will clip to the path bounding rectangle.
-
 #### Example - setting clipping path on an element
     <div id="surface"></div>
     <script>
@@ -42,7 +40,7 @@ It can be replaced by calling the [clip](#methods-clip) method.
 ### cursor `String`
 The element [CSS cursor](https://developer.mozilla.org/en-US/docs/Web/CSS/cursor).
 
-Applicable to SVG and VML outputs.
+Applicable to SVG output.
 
 #### Example - set hand cursor on an element
     <div id="surface"></div>
@@ -87,8 +85,6 @@ Returns the bounding box of the element with transformations applied.
 
 ### clip
 Gets or sets the element clipping path.
-
-> The VML surface (IE 8 and earlier) will clip to the path bounding rectangle.
 
 #### Example - setting clipping path on an element
     <div id="surface"></div>

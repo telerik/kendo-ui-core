@@ -9,7 +9,7 @@ position: 1
 
 # Chart Overview
 
-The [Kendo UI Charts](http://demos.telerik.com/kendo-ui/) use modern browser technologies to render high-quality data visualizations. All graphics are rendered on the client using [Scalable Vector Graphics (SVG)](https://en.wikipedia.org/wiki/Scalable_Vector_Graphics) with a fallback to [Canvas](http://www.canvasgfx.com/) and [Vector Markup Language (VML)](https://en.wikipedia.org/wiki/Vector_Markup_Language).
+The [Kendo UI Charts](http://demos.telerik.com/kendo-ui/) use modern browser technologies to render high-quality data visualizations. All graphics are rendered on the client using [Scalable Vector Graphics (SVG)](https://en.wikipedia.org/wiki/Scalable_Vector_Graphics) with a fallback to [Canvas](http://www.canvasgfx.com/).
 
 Kendo UI Charts support the following series types:
 

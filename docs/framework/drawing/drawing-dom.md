@@ -12,7 +12,7 @@ The [Kendo UI Drawing API](http://demos.telerik.com/kendo-ui/drawing/index) supp
 
 ## Getting Started
 
-Using the `drawing.drawDOM` function you can draw a DOM element into a [`drawing.Group`](/api/dataviz/drawing/group), which you are then able to render with one of the supported backends into SVG, PDF, HTML5 `<canvas>`, or VML format.
+Using the `drawing.drawDOM` function you can draw a DOM element into a [`drawing.Group`](/api/dataviz/drawing/group), which you are then able to render with one of the supported backends into SVG, PDF or HTML5 `<canvas>` format.
 
 The DOM element must be appended to the document and fully rendered, meaning that you cannot draw an element which has the `display: none`, or the `visibility: hidden` options. Assume that you have the following HTML in the page:
 

@@ -2182,9 +2182,6 @@ The type of the gradient. Supported values are:
 * linear
 * radial
 
-Note that support for radial gradients in VML (IE8 and below) is limited.
-Not all configurations are guaranteed to work.
-
 ### shapeDefaults.fill.gradient.center `Array`
 The center of the radial gradient.
 
@@ -2632,9 +2629,6 @@ The type of the gradient. Supported values are:
 
 * linear
 * radial
-
-Note that support for radial gradients in VML (IE8 and below) is limited.
-Not all configurations are guaranteed to work.
 
 ### shapes.fill.gradient.center `Array`
 The center of the radial gradient.

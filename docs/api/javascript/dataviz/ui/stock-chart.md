@@ -5568,7 +5568,6 @@ If it is not supported by the browser, the Chart will switch to the first availa
 The supported values are:
 
 * "svg" - renders the widget as inline SVG document, if available
-* "vml" - renders the widget as VML, if available
 * "canvas" - renders the widget as a Canvas element, if available.
 
 ### Example - Render as Canvas, if supported

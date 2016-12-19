@@ -88,7 +88,7 @@ The example below demonstrates how to take advantage of these classes.
 ###### Example
 
     .k-ie { /* styles to be applied to all versions of Internet Explorer */ }
-    .k-ie7 { /* styles to be applied to IE7 only */ }
+    .k-ie9 { /* styles to be applied to IE9 only */ }
     .k-ff { /* styles to be applied to all versions of Firefox */ }
 
 <!--*-->

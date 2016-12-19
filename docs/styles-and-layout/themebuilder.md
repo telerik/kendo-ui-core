@@ -18,7 +18,7 @@ The [Kendo UI ThemeBuilder](http://demos.telerik.com/kendo-ui/themebuilder/web.h
 After adjusting the theme via the ThemeBuilder, click **Download theme**. This provides the following files:
 
 * `kendo.custom.css`&mdash;This is the custom theme for most widgets. You are able to use this theme instead of any `kendo.[theme].css` one.
-* `kendo.custom.json`&mdash;The custom theme for charting widgets, the ones that use `SVG`/`VML`/`Canvas` rendering. Use the contents of this file to [create a custom Chart theme]({% slug howto_customizechartthemes_charts %}) and then set a custom theme name via the [`theme` configuration option](/api/javascript/dataviz/ui/chart#configuration-theme).
+* `kendo.custom.json`&mdash;The custom theme for charting widgets, the ones that use `SVG`/`Canvas` rendering. Use the contents of this file to [create a custom Chart theme]({% slug howto_customizechartthemes_charts %}) and then set a custom theme name via the [`theme` configuration option](/api/javascript/dataviz/ui/chart#configuration-theme).
 * `kendo.custom.less`&mdash;The [LESS](http://lesscss.org/) that includes the custom theme. Use this file if you want to compile the theme dynamically.
 
 > **Important**

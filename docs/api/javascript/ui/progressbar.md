@@ -149,8 +149,6 @@ Specifies if the progress status will be shown.
 
 Specifies the type of the **ProgressBar**. The supported types are **value**, **percent** and **chunk**.
 
-> **Important** The **chunk** progress type is not supported in Internet Explorer 7.
-
 #### Example - set the type of the ProgressBar
 
 	<div id="progressbar"></div>
