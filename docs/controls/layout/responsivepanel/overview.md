@@ -12,7 +12,7 @@ The [Kendo UI ResponsivePanel widget](http://demos.telerik.com/kendo-ui/responsi
 
 > **Important**  
 >
-> CSS3 media queries are supported in Internet Explorer 9 and later versions. This means that Kendo UI ResponsivePanel does not support Internet Explorer 7 and Internet Explorer 8.
+> CSS3 media queries are supported in Internet Explorer 9 and later versions.
 
 ## Configuration
 

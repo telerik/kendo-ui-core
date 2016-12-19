@@ -378,7 +378,6 @@ Note that even with the proper CORS headers, IE9 will not be able to load images
 
 * The maximum document size is limited to 5080x5080mm (200x200 inches) by the PDF 1.5 specification. Larger files might not open in all viewers.
 * Older browsers, such as Internet Explorer 9 and Safari, require the implementation of a server proxy. For more information on this, refer to [the `proxyUrl` configuration section](/api/javascript/ui/grid#configuration-pdf.proxyURL).
-* PDF export is not supported in Internet Explorer 8 and older.
 
 ## Further Reading
 

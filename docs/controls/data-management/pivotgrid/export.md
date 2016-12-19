@@ -16,7 +16,6 @@ PDF export is enabled by default when `kendo.all.min.js`, `kendo.web.min.js`, or
 
 > **Important**  
 > * Exporting in older browsers, such as Internet Explorer 9 and older, or Safari, requires the implementation of a server proxy. For more information, see the [`proxyUrl` configuration sections above](/api/javascript/ui/pivotgrid#configuration-pdf).
-> * PDF export is not supported in Internet Explorer 8 and older browser versions.
 
 ## Excel Export
 

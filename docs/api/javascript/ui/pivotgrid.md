@@ -635,7 +635,7 @@ Supported values:
 
 The URL of the server side proxy which will stream the file to the end user.
 
-A proxy will be used when the browser isn't capable of saving files locally e.g. Internet Explorer 9 and Safari. PDF export is not supported in Internet Explorer 8 and below.
+A proxy will be used when the browser isn't capable of saving files locally e.g. Internet Explorer 9 and Safari.
 
 The developer is responsible for implementing the server-side proxy.
 

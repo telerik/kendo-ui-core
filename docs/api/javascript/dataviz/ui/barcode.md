@@ -17,7 +17,6 @@ The supported values are:
 
 * "canvas" - renders the widget as a Canvas element, if available.
 * "svg" - renders the widget as inline SVG document, if available
-* "vml" - renders the widget as VML, if available
 
 #### Example - Render as SVG, if supported
 

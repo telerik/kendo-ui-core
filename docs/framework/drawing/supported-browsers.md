@@ -18,7 +18,6 @@ Surfaces are listed in their order of preference. You can request a specific [`t
 | ---     | ---  | ---   | ---     | ---    | --- | ---
 | SVG     | 9+   | ✓     | ✓       | ✓      | ✓   | 4+
 | Canvas  | 10+  | ✓     | ✓       | ✓      | ✓   | ✓
-| VML     | 7+   | ✕     | ✕       | ✕      | ✕   | ✕
 
 ## PDF Export
 

@@ -12,12 +12,11 @@ position: 4
 The [Kendo UI Gauges, Charts, Barcodes, Diagrams, and Maps](http://demos.telerik.com/kendo-ui/) widgets support the following rendering targets:
 
 * SVG
-* VML
 * Canvas
 
 ## Mode Selection
 
-The rendering mode is automatically chosen based on availability. The order is SVG > VML > Canvas for all widgets rendering data visualization except for the Barcode and QRCode. These components do not require interactivity and default to Canvas rendering. You can set the preferred rendering mode in the [`renderAs`](/api/dataviz/chart#configuration-renderAs) option.
+The rendering mode is automatically chosen based on availability. The order is SVG > Canvas for all widgets rendering data visualization except for the Barcode and QRCode. These components do not require interactivity and default to Canvas rendering. You can set the preferred rendering mode in the [`renderAs`](/api/dataviz/chart#configuration-renderAs) option.
 
 The example below demonstrates how to configure the preferred rendering mode to Canvas by using the `renderAs` option.
 
@@ -39,7 +38,6 @@ The example below demonstrates how to configure the preferred rendering mode to 
 The rendering modules are available as separate files:
 
 * `kendo.dataviz.svg(.min).js`
-* `kendo.dataviz.vml(.min).js`
 * `kendo.dataviz.canvas(.min).js`
 
 You must include at least one, the rest are optional.
@@ -57,11 +55,6 @@ Some rendering modes impose limitations on the available features. Below is a sh
 ### SVG
 
 * None
-
-### VML
-
-* Gradient overlays are not supported for Kendo UI Donut Charts.
-* Reduced performance, especially in Internet Explorer 8 version.
 
 ### Canvas
 

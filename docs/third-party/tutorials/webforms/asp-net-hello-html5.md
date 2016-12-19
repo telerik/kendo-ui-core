@@ -46,7 +46,7 @@ The JavaScript Application Programming Interface (API) is one of the most import
 
 ### Browser Support
 
-HTML5 is entirely dependent on the browser in which the application is running, which usually is not within the capacity of developers to control. This is more difficult for ASP.NET developers who usually target the Internet Explorer (IE). Older IE versions, such as IE 7 or 8, are terribly fragmented, and their support for HTML5 is not good enough. IE 9 and later versions feature a significant improvement in this direction.
+HTML5 is entirely dependent on the browser in which the application is running, which usually is not within the capacity of developers to control. This is more difficult for ASP.NET developers who usually target the Internet Explorer (IE). IE 9 and later versions feature a significant improvement in this direction.
 
 HTML5 has more to do with the browser technology rather than with ASP.NET. ASP.NET is as capable as any other platform of producing HTML5 applications. Due to the enterprise adoption of the entire Microsoft stack (Windows, Office, Active Directory, and IE), however, ASP.NET developers are sometimes limited in their ability to move their web applications forward into the HTML5 space.
 

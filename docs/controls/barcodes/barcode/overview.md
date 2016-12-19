@@ -8,7 +8,7 @@ position: 1
 
 # Barcode Overview
 
-The [Kendo UI Barcode widget](http://demos.telerik.com/kendo-ui/barcode/index) is used to represent data in a machine-readable format. All graphics are rendered on the client using [Scalable Vector Graphics (SVG)](http://www.w3.org/Graphics/SVG/) with a fallback to [Vector Markup Language (VML)](https://en.wikipedia.org/wiki/Vector_Markup_Language) for legacy browsers.
+The [Kendo UI Barcode widget](http://demos.telerik.com/kendo-ui/barcode/index) is used to represent data in a machine-readable format. All graphics are rendered on the client using [Scalable Vector Graphics (SVG)](http://www.w3.org/Graphics/SVG/).
 
 ## Getting Started
 

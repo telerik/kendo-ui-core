@@ -6,9 +6,6 @@ page_title: API reference for Kendo UI Drawing API RadialGradient
 # kendo.drawing.RadialGradient : kendo.drawing.Gradient
 Represents a radial color gradient.
 
-Note that support for radial gradients in VML is limited.
-Not all configurations are guaranteed to work.
-
 #### Example - creating a radial gradient
     <div id="surface" />
     <script>
