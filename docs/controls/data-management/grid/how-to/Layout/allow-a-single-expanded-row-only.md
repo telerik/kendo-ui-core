@@ -1,16 +1,20 @@
 ---
-title: Allow only one master Grid row to be expanded
-page_title: Allow only one master Grid row to be expanded | Kendo UI Grid
-description: "Learn how to allow only one Kendo UI Grid master row to be expanded at any given time."
+title: Allow Single Row in Master Grid to be Expanded
+page_title: Allow Single Row in Master Grid to be Expanded | Kendo UI Grid
+description: "Learn how to allow only one of the rows in a master Kendo UI Grid to be expanded at any time."
 slug: howto_allowonlyasingleexpandedrow_grid
 ---
 
-# Allow only one Grid row to be expanded
+# Allow Single Row in Master Grid to be Expanded
 
-Sometimes the scenario requirements demand only one row to be expanded at a given time. This example demonstrates how to collapse any previously expanded Grid row (if any) when another one is expanded. It involves the following steps:
+Sometimes a scenario might require the expanding of a single row in a master Grid at a specific time.
 
-* Handle the [`detailExpand`](http://docs.telerik.com/kendo-ui/api/javascript/ui/grid#events-detailExpand) event
-* Find any previously expanded row, and collapse it if it via the [`collapseRow()`](http://docs.telerik.com/kendo-ui/api/javascript/ui/grid#methods-collapseRow) method
+To achieve this behavior:
+
+* Handle the [`detailExpand`](http://docs.telerik.com/kendo-ui/api/javascript/ui/grid#events-detailExpand) event.
+* Find any previously expanded rows and collapse them by using the [`collapseRow()`](http://docs.telerik.com/kendo-ui/api/javascript/ui/grid#methods-collapseRow) method.
+
+The example below demonstrates how to collapse a Grid row that was previously expanded (if any) when the user expands a new one.
 
 ###### Example
 
@@ -64,7 +68,7 @@ Sometimes the scenario requirements demand only one row to be expanded at a give
 	      ]
 	    }).data('kendoGrid');
 	  });
-	
+
 	  function detailInit(e) {
 	    $("<div/>").appendTo(e.detailCell).kendoGrid({
 	      dataSource: {
