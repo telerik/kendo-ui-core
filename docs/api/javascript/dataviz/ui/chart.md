@@ -9401,7 +9401,7 @@ The supported values are:
 * "vml" - renders the widget as VML, if available
 * "canvas" - renders the widget as a Canvas element, if available.
 
-### Example - Render as Canvas, if supported
+#### Example - Render as Canvas, if supported
 
     <div id="chart"></div>
     <script>
