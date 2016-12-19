@@ -48,13 +48,13 @@ Iframes cannot be scrollable in iOS and always expand to display all their conte
 
 Image and table resizing inside `contenteditable` elements depends on the browser. As a result of browser behavior, images may become non-resizeable if a "classic" Editor (which uses an `iframe`) is created while hidden, or is hidden after its initialization and then displayed back.
 
-As the reason for thе issue lies in browser functionalities, it can be resolved by calling the Editor's [`refresh`](/api/javascript/ui/editor#methods-refresh) method after the Editor becomes visible. Refreshing the widget will recreate the `iframe`.
+The reason for the issue lies in browser functionalities. That is why it can be resolved by calling the [`refresh`](/api/javascript/ui/editor#methods-refresh) method of the Editor after the Editor becomes visible. Refreshing the widget recreates the `iframe`.
 
-Another possible approach is to use the Editor's inline mode, i.e., create the Editor from a `div` element.
+Another possible approach is to use the inline mode of the Editor, that is, to create the Editor from a `div` element.
 
-Table row and column resizing is implemented in the Editor widget as of R3 2016. The users can drag the cell borders with the mouse to resize the row or column.
+As of the R3 2016 release, resizing of table rows and columns has been implemented in the Editor. To resize the row or column of the Editor, the user can drag the cell borders with the mouse.
 
-To achieve image resizing or table resizing for versions prior to R3 2016, in browsers such as Google Chrome 46 that do not normally support it, implement a [custom Editor tool](http://demos.telerik.com/kendo-ui/editor/custom-tools).
+To resize an image or a table in versions prior to R3 2016 and in browsers that do not normally support it, such as Google Chrome 46, implement a [custom Editor tool](http://demos.telerik.com/kendo-ui/editor/custom-tools).
 
 ### Back and Forward Browser Buttons Display Raw HTML
 

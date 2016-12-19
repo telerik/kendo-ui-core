@@ -35,9 +35,9 @@ To modify an existing table or a table cell, follow the steps below:
 ![](/controls/editors/editor/table-wizard-edit.png)
 
 
-> **Tip**
+> **Important**
 >
-> You can resize the table rows and columns by dragging the cell border with the mouse even without the table wizard dialog.
+> Even without the table wizard dialog, you can resize the table rows and columns by dragging the cell border with the mouse.
 
 ## Table Wizard Options
 
