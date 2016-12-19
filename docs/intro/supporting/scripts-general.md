@@ -1,4 +1,5 @@
 ---
+comment: THIS FILE IS AUTO-GENERATED, MANUAL CHANGES ARE OVERWRITTEN. TO UPDATE THE CONTENT, UPDATE COMPONENT DEPENDENCIES AND RUN `rake js_dependencies`.
 title: Script Files for Data Management Widgets
 page_title: Script Files for Data Management Widgets | Kendo UI Getting Started
 description: "Listing of required script files for the Kendo UI Data Management Widgets"
@@ -137,6 +138,7 @@ Below are listed the script files for the Kendo UI desktop widgets for mobile-re
 | | kendo.userevents.js | |
 | | kendo.draganddrop.js | |
 | | kendo.slider.js | |
+| | kendo.button.js | |
 | | kendo.colorpicker.js | |
 | | kendo.list.js | |
 | | kendo.combobox.js | |

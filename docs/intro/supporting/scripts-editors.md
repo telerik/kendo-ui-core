@@ -1,4 +1,5 @@
 ---
+comment: THIS FILE IS AUTO-GENERATED, MANUAL CHANGES ARE OVERWRITTEN. TO UPDATE THE CONTENT, UPDATE COMPONENT DEPENDENCIES AND RUN `rake js_dependencies`.
 title: Script Files for Editors
 page_title: Script Files for Editors | Kendo UI Getting Started
 description: "Listing of required script files for the Kendo UI Editors"
@@ -30,6 +31,7 @@ Below are listed the script files for the Kendo UI Editors widgets.&nbsp;&nbsp;
 | | kendo.userevents.js | |
 | | kendo.draganddrop.js | |
 | | kendo.slider.js | |
+| | kendo.button.js | |
 | | kendo.colorpicker.js | |
 | [ComboBox](http://demos.telerik.com/kendo-ui/combobox/index) | jquery.js | |
 | | kendo.core.js | |
@@ -77,6 +79,7 @@ Below are listed the script files for the Kendo UI Editors widgets.&nbsp;&nbsp;
 | | kendo.window.js | |
 | | kendo.color.js | |
 | | kendo.slider.js | |
+| | kendo.button.js | |
 | | kendo.colorpicker.js | |
 | | kendo.selectable.js | Image Browser feature (optional) |
 | | kendo.listview.js | Image Browser feature (optional) |
@@ -84,11 +87,10 @@ Below are listed the script files for the Kendo UI Editors widgets.&nbsp;&nbsp;
 | | kendo.filebrowser.js | Image Browser feature (optional) |
 | | kendo.imagebrowser.js | Image Browser feature (optional) |
 | | kendo.resizable.js | Resize handle feature (optional) |
+| | kendo.tabstrip.js | Table wizard dialog feature (optional) |
+| | kendo.numerictextbox.js | Table wizard dialog feature (optional) |
 | | kendo.drawing.js | PDF export feature (optional) |
 | | kendo.pdf.js | PDF export feature (optional) |
-| | kendo.tabstrip.js | Table Wizard dialog feature (optional) |
-| | kendo.numerictextbox.js | Table Wizard dialog feature (optional) |
-| | kendo.button.js | Table Wizard dialog feature (optional) |
 | | kendo.editor.js | |
 | [MaskedTextBox](http://demos.telerik.com/kendo-ui/maskedtextbox/index) | jquery.js | |
 | | kendo.core.js | |
