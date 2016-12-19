@@ -1407,6 +1407,66 @@ The loaded content element
         });
     </script>
 
+### dataBound
+
+Triggered after the dataSource change event has been processed (adding/removing items);
+
+#### Event Data
+
+##### e.node `jQuery`
+
+The node whose children have been changed. If the changes have occurred on the root level, this parameter is undefined.
+
+#### Example - subscribe to the "dataBound" event during initialization
+
+    <div id="panelbar"></div>
+    <script>
+    $("#panelbar").kendoPanelBar({
+      dataSource: [
+        { text: "foo", items: [
+          { text: "bar" }
+        ] }
+      ],
+      dataBound: function(e) {
+        console.log("DataBound", e.node);
+      }
+    });
+    </script>
+
+#### Example - subscribe to the "dataBound" event after initialization
+
+    <div id="panelbar"></div>
+    <script>
+    function panelbar_dataBound(e) {
+      console.log("DataBound", e.node);
+    }
+    $("#panelbar").kendoPanelBar({
+      dataSource: [
+        { text: "foo", items: [
+          { text: "bar" }
+        ] }
+      ]
+    });
+    var panelbar = $("#panelbar").data("kendoPanelBar");
+    panelbar.bind("dataBound", panelbar_dataBound);
+    </script>
+
+#### Example - show an empty message when no items have been loaded from the server
+
+    <div id="panelbar"></div>
+    <script>
+      $("#panelbar").kendoPanelBar({
+        dataSource: [],
+        dataBound: function(e) {
+          if (!this.dataSource.data().length) {
+            this.element.append("<p class='no-items'>No items yet.</p>");
+          } else {
+            this.element.find(".no-items").remove();
+          }
+        }
+      });
+    </script>
+
 ### error
 
 Fires when AJAX request results in an error.
