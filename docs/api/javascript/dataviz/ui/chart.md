@@ -11784,16 +11784,16 @@ The top padding of the labels.
 
 The position of the labels.
 
-* "above" - the label is positioned at the top of the marker. ** Applicable for series that render points, incl. bubble. **
-* "below" - the label is positioned at the bottom of the marker. ** Applicable for series that render points, incl. bubble. **
-* "center" - the label is positioned at the point center. ** Applicable for bar, column, donut, pie, funnel, radarColumn and waterfall series. **
-* "insideBase" - the label is positioned inside, near the base of the bar. ** Applicable for bar, column and waterfall series. **
-* "insideEnd" - the label is positioned inside, near the end of the point. ** Applicable for bar, column, donut, pie, radarColumn and waterfall series. **
-* "left" - the label is positioned to the left of the marker. ** Applicable for series that render points, incl. bubble. **
-* "outsideEnd" - the label is positioned outside, near the end of the point. ** Applicable for bar, column, donut, pie, radarColumn and waterfall series. Not applicable for stacked series.
-* "right" - the label is positioned to the right of the marker. ** Applicable for series that render points, incl. bubble. **
-* "top" - the label is positioned at the top of the segment. ** Applicable for funnel series **
-* "bottom" - the label is positioned at the bottom of the segment. ** Applicable for funnel series **
+* "above" - the label is positioned at the top of the marker. **Applicable for series that render points, incl. bubble.**
+* "below" - the label is positioned at the bottom of the marker. **Applicable for series that render points, incl. bubble.**
+* "center" - the label is positioned at the point center. **Applicable for bar, column, donut, pie, funnel, radarColumn and waterfall series.**
+* "insideBase" - the label is positioned inside, near the base of the bar. **Applicable for bar, column and waterfall series.**
+* "insideEnd" - the label is positioned inside, near the end of the point. **Applicable for bar, column, donut, pie, radarColumn and waterfall series.**
+* "left" - the label is positioned to the left of the marker. **Applicable for series that render points, incl. bubble.**
+* "outsideEnd" - the label is positioned outside, near the end of the point. **Applicable for bar, column, donut, pie, radarColumn and waterfall series. Not applicable for stacked series.**
+* "right" - the label is positioned to the right of the marker. **Applicable for series that render points, incl. bubble.**
+* "top" - the label is positioned at the top of the segment. **Applicable for funnel series.**
+* "bottom" - the label is positioned at the bottom of the segment. **Applicable for funnel series.**
 
 
 #### Example - set the chart series label position
@@ -11811,6 +11811,28 @@ The position of the labels.
     });
     </script>
 
+### series.labels.rotation `String|Number`
+
+The rotation angle of the labels. By default, the labels are not rotated. 
+
+#### Example 
+
+     <div id="chart"></div>
+        <script>
+        $("#chart").kendoChart({
+            seriesDefaults: {
+              type: "column",
+            },
+            series: [{ 
+                data: [1, 2, 3], 
+                labels: {
+                    visible: true,
+                    rotation: 310
+                }
+            }]
+        });
+      </script>
+      
 ### series.labels.template `String|Function`
 
 The [template](/api/javascript/kendo#methods-template) which renders the chart series label.
@@ -15809,6 +15831,26 @@ The top padding of the labels.
       ]
     });
     </script>
+
+### seriesDefaults.labels.rotation `String|Number`
+
+The rotation angle of the labels. By default, the labels are not rotated. 
+
+     <div id="chart"></div>
+        <script>
+        $("#chart").kendoChart({
+            seriesDefaults: {
+              type: "column",
+              labels: {
+                visible: true,
+                rotation: 310
+              }
+            },
+            series: [
+               { data: [1, 2, 3] }
+             ]
+        });
+      </script>
 
 ### seriesDefaults.labels.template `String|Function`
 
