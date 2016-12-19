@@ -1,13 +1,13 @@
 ---
-title: Add Kendo Validator in MVVM 
-page_title: Add Kendo Validator in MVVM  | Kendo UI Validator
-description: "Learn how to fully integrate the Kendo UI Validator in MVVM scenario."
+title: Add the Validator to MVVM
+page_title: Add the Validator to MVVM | Kendo UI Validator
+description: "Learn how to fully integrate the Kendo UI Validator in an MVVM scenario."
 slug: howto_addvalidatormvvm_validator
 ---
 
-# Add Kendo Validator in MVVM 
+# Add the Validator to MVVM
 
-The example below demonstrates how to fully integrate the Kendo UI Validator in MVVM scenario using the Observeble's [change event](/api/javascript/data/observableobject#events-change) and the Kendo Validator's [validate method](/api/javascript/ui/validator#methods-validate).
+The example below demonstrates how to fully integrate the Kendo UI Validator in an MVVM scenario by using the [`change` event](/api/javascript/data/observableobject#events-change) of the Observable and the [`validate` method](/api/javascript/ui/validator#methods-validate) of the Validator.
 
 ###### Example
 
@@ -34,7 +34,7 @@ The example below demonstrates how to fully integrate the Kendo UI Validator in 
   </div>
   <script>
       var kendoValidator;
-    
+
       $(document).ready(function() {
           var viewModel = kendo.observable({
               firstName: "John",
@@ -45,7 +45,7 @@ The example below demonstrates how to fully integrate the Kendo UI Validator in 
               confirmed: false,
               register: function(e) {
                   e.preventDefault();
-                  
+
                   if (kendoValidator.validate()) {
                       // If the form is valid, the Validator will return true
                       this.set("confirmed", true);
@@ -61,14 +61,14 @@ The example below demonstrates how to fully integrate the Kendo UI Validator in 
           });
 
           kendo.bind($("#example"), viewModel);
-        
+
           $("form").kendoValidator({
             validateOnBlur: false // Disable the default validation on blur
           });
-          
+
           // Get the validator instance
           kendoValidator = $("form").getKendoValidator();
-    
+
           viewModel.bind("change", function(e) {
               // validate on model change
               kendoValidator.validate();
@@ -76,7 +76,7 @@ The example below demonstrates how to fully integrate the Kendo UI Validator in 
       });
   </script>
 
-  
+
   <style>        
       .demo-section > div {
           float: left;
