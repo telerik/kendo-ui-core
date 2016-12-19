@@ -40,7 +40,7 @@ It can be replaced by calling the [clip](#methods-clip) method.
 ### cursor `String`
 The element [CSS cursor](https://developer.mozilla.org/en-US/docs/Web/CSS/cursor).
 
-Applicable to SVG output.
+Applicable to an SVG output.
 
 #### Example - set hand cursor on an element
     <div id="surface"></div>
