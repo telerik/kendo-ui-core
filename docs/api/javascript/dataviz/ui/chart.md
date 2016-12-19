@@ -9400,7 +9400,7 @@ The supported values are:
 * "svg" - renders the widget as inline SVG document, if available
 * "canvas" - renders the widget as a Canvas element, if available.
 
-### Example - Render as Canvas, if supported
+#### Example - Render as Canvas, if supported
 
     <div id="chart"></div>
     <script>
