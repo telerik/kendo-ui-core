@@ -232,16 +232,16 @@ The example below demonstrates the solution of the test issue above.
 
 ## Styles and Themes
 
-### Icons Disappeared after Upgrade
+### Icons Disappear after Upgrade
 
-As of **R1 2017**, Kendo UI widgets utilize font-icons instead of sprites. This made some CSS obsolete and thus removed from the built-in styles. 
+As of the R1 2017 release, Kendo UI widgets utilize font-icons instead of sprites. This approach outdates some CSS, which are now removed from the built-in styles.
 
 **Solution**
 
-Add these styles in your application in order to add backward compatibility for any custom icons added:
+To provide for the backward compatibility of any custom icons you add to your project, include the following styles in your application:
 
 ```css
-/* Backward compatibility support for custom sprites */
+/* Provides backward compatibility support for custom sprites */
 .k-sprite {
     display: inline-block;
     width: 16px;
