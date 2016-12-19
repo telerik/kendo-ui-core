@@ -461,7 +461,7 @@ The widget provides a mobile specific stylization when placed within the header 
 
 For more information on the mobile rendering feature, refer to the [demo page on the ToolBar acting as ActionBar](http://demos.telerik.com/kendo-ui/m/index#navbar/index).
 
-Also, the mobile View of the Toolbar exposes an additional option to align tools to the left or right side of the widget—`items.align`. You can check out the [How-to: Use Mobile View of ToolBar]({%slug howto_usemobileview_toolbar%}) article.
+The mobile view of the Toolbar exposes an additional option for aligning tools to the left or to the right side of the widget. This behavior is achieved by using the `items.align` configuration. For more information, refer to the article on [using the mobile view of the ToolBar]({% slug howto_usemobileview_toolbar %}).
 
 ## ToolBar API
 
