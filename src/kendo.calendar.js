@@ -26,8 +26,7 @@ var __meta__ = { // jshint ignore:line
         transitionOrigin = transitions ? transitions.css + "transform-origin" : "",
         cellTemplate = template('<td#=data.cssClass# role="gridcell"><a tabindex="-1" class="k-link" href="\\#" data-#=data.ns#value="#=data.dateString#">#=data.value#</a></td>', { useWithBlock: false }),
         emptyCellTemplate = template('<td role="gridcell">&nbsp;</td>', { useWithBlock: false }),
-        //TODO modify the template HTML according to the provided design 
-        weekNumberTemplate = template('<td class="k-alt"><a>#= data.weekNumber #</a></td>', { useWithBlock: false }),
+        weekNumberTemplate = template('<td class="k-alt">#= data.weekNumber #</td>', { useWithBlock: false }),
         browser = kendo.support.browser,
         isIE8 = browser.msie && browser.version < 9,
         outerHeight = kendo._outerHeight,
@@ -881,7 +880,7 @@ var __meta__ = { // jshint ignore:line
             that.month = {
                 content: template('<td#=data.cssClass# role="gridcell"><a tabindex="-1" class="k-link#=data.linkClass#" href="#=data.url#" ' + kendo.attr("value") + '="#=data.dateString#" title="#=data.title#">' + (content || "#=data.value#") + '</a></td>', { useWithBlock: !!content }),
                 empty: template('<td role="gridcell">' + (empty || "&nbsp;") + "</td>", { useWithBlock: !!empty }),
-                weekNumber: template('<td class="k-alt"><a>' + (weekNumber || "#= data.weekNumber #") + "</a></td>", { useWithBlock: !!weekNumber })
+                weekNumber: template('<td class="k-alt">' + (weekNumber || "#= data.weekNumber #") + "</td>", { useWithBlock: !!weekNumber })
             };
 
             that.footer = footer !== false ? template(footer || '#= kendo.toString(data,"D","' + options.culture +'") #', { useWithBlock: false }) : null;
@@ -1398,7 +1397,7 @@ var __meta__ = { // jshint ignore:line
 
     function addClassToViewContainer(className, element, currentView) {
         if(className == currentView) {
-            element.addClass(className);
+            element.addClass("k-" + className);
         }
     }
 

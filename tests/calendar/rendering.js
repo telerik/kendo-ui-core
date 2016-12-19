@@ -217,7 +217,6 @@ test("month view renders week number column when enabled", function() {
 
     equal(div.find("tbody").find("tr").length, 6);
     equal(div.find("tbody").find("td").length, 48);
-    equal(div.find("tbody").find("a").length, 48);
 });
 
 test("month view's content method honors culture", function() {
@@ -676,7 +675,7 @@ test("century view renders century class", function() {
 
     calendar.addClassToViewContainer(calendar.views[3].name, div.find("table"), calendar.views[3].name);
 
-    ok(div.find("table.k-content").hasClass("century"));
+    ok(div.find("table.k-content").hasClass("k-century"));
 });
 
 test("century title renders century title within min/max values", function() {
