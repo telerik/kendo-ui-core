@@ -178,7 +178,7 @@ The CSS class applied to the command button.
 
 ### columns.command.imageClass `String`
 
-The CSS class applied to icon span of the command button.
+The CSS class applied to the icon span of the command button.
 
 #### Example - set the CSS class of the command icon
 
