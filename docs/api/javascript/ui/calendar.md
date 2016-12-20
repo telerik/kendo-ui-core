@@ -262,7 +262,7 @@ note that a check for an empty `date` is needed, as the widget can work with a n
         });
     </script>
 
-### showWeekNumber `String`*(default: false)*
+### showWeekNumber `Boolean` *(default: false)*
 
 If set to `true` a week of the year will be shown on the left side of the calendar. It is possible to define a template in order to customize what will be displayed.  
 
