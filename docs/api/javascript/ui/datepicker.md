@@ -340,6 +340,32 @@ The template to be used for rendering the cells in "month" view, which are betwe
     });
     </script>
 
+### month.weekNumber `String`
+
+ The template to be used for rendering the cells in "week" column. By default, the widget renders the calculated week of the year.
+
+#### Example - specify week number template as a string
+
+    <style>
+      .italic{
+        font-style: italic;
+      }
+    </style>
+    <body>
+
+    <div id="calendar"></div>
+    <script id="week-template" type="text/x-kendo-template">
+       <a class="italic">#= data.weekNumber #</a>
+    </script>
+    <script>
+      $("#calendar").kendoCalendar({
+        showWeekNumber: true,
+        month: {
+          weekNumber: $("#week-template").html()
+        }
+      });
+    </script>
+
 ### month.empty `String`
 
 The template used for rendering cells in the "month" view, which are outside the min/max range.
@@ -364,6 +390,19 @@ The template used for rendering cells in the "month" view, which are outside the
            empty: '<span style="color:\\#ccc;padding:0 .45em 0 .1em;">#= data.value #</span>'
         }
     });
+    </script>
+
+### showWeekNumber `Boolean` *(default: false)*
+
+If set to `true` a week of the year will be shown on the left side of the calendar. It is possible to define a template in order to customize what will be displayed.  
+
+#### Example - enable the week of the year option
+
+    <div id="calendar"></div>
+    <script>
+        $("#calendar").kendoCalendar({
+            showWeekNumber: true
+        });
     </script>
 
 ### parseFormats `Array`
