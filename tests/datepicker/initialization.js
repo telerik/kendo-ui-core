@@ -133,7 +133,7 @@ test("create dateview", function() {
 });
 
 test("dateView should have correct options", function() {
-    var datepicker = input.kendoDatePicker({open: function() {}, close: $.noop}).data("kendoDatePicker"),
+    var datepicker = input.kendoDatePicker({open: function() {}, close: $.noop, showWeekNumber: true}).data("kendoDatePicker"),
         dateView = datepicker.dateView,
         options = dateView.options,
         dpOptions = datepicker.options;
@@ -143,6 +143,7 @@ test("dateView should have correct options", function() {
     equal(options.value, dpOptions.value);
     equal(+options.min, +dpOptions.min);
     equal(+options.max, +dpOptions.max);
+    equal(+options.showWeekNumber, +dpOptions.showWeekNumber);
     notEqual(options.change, dpOptions.change);
 });
 

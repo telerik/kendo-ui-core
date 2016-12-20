@@ -132,6 +132,7 @@ var __meta__ = { // jshint ignore:line
                 max: options.max,
                 min: options.min,
                 month: options.month,
+                showWeekNumber: options.showWeekNumber,
                 start: options.start,
                 disableDates: options.disableDates
             });
