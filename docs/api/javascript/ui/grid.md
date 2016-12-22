@@ -494,6 +494,28 @@ The function context (available via the `this` keyword) will be set to the grid 
     });
     </script>
 
+### columns.editable `Function`
+
+The JavaScript function executed when the cell/row is about to be opened for edit. The result returned will determine whether an editor for the column will be created.
+
+#### Example - conditionally edit a cell
+    <div id="grid"></div>
+    <script>
+    $("#grid").kendoGrid({
+      columns: [
+        { field: "name" },
+        { 
+          field: "salary",
+		      editable: function (dataItem) {
+              return dataItem.name === "Jane";
+          }
+        }
+      ],
+      editable: true,
+      dataSource: [ { name: "Jane", salary: 2000 }, { name: "Bill", salary: 2000 } ]
+    });
+    </script>    
+
 ### columns.editor `Function`
 
 Provides a way to specify a custom editing UI for the column. Use the `container` parameter to create the editing UI.
