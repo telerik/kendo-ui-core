@@ -491,7 +491,6 @@
 
         textbox.value(10);
 
-        equal(textbox._text.attr("aria-title"), title);
         equal(textbox._text.attr("title"), title);
     });
 
@@ -500,12 +499,10 @@
 
         textbox.value(10);
 
-        equal(textbox._text.attr("aria-title"), 10);
         equal(textbox._text.attr("title"), 10);
 
         textbox.value(20);
 
-        equal(textbox._text.attr("aria-title"), 20);
         equal(textbox._text.attr("title"), 20);
     });
 })();

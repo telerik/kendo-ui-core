@@ -38,7 +38,6 @@ var __meta__ = { // jshint ignore:line
         SELECTED = "k-state-selected",
         STATEDISABLED = "k-state-disabled",
         ARIA_DISABLED = "aria-disabled",
-        ARIA_READONLY = "aria-readonly",
         INTEGER_REGEXP = /^(-)?(\d*)$/,
         NULL = null,
         proxy = $.proxy,
@@ -160,8 +159,7 @@ var __meta__ = { // jshint ignore:line
 
                 text.removeAttr(DISABLED)
                     .removeAttr(READONLY)
-                    .attr(ARIA_DISABLED, false)
-                    .attr(ARIA_READONLY, false);
+                    .attr(ARIA_DISABLED, false);
 
                 that._upArrowEventHandler.bind("press", function(e) {
                     e.preventDefault();
@@ -187,8 +185,7 @@ var __meta__ = { // jshint ignore:line
 
                 text.attr(DISABLED, disable)
                     .attr(READONLY, readonly)
-                    .attr(ARIA_DISABLED, disable)
-                    .attr(ARIA_READONLY, readonly);
+                    .attr(ARIA_DISABLED, disable);
             }
         },
 
@@ -651,7 +648,7 @@ var __meta__ = { // jshint ignore:line
                 }
                 value = value.replace(POINT, numberFormat[POINT]);
             } else {
-                value = "";
+                value = null;
             }
 
             that.element.val(value);
@@ -667,7 +664,6 @@ var __meta__ = { // jshint ignore:line
             }
 
             input.attr("title", this._initialTitle || input.val());
-            input.attr("aria-title", this._initialTitle || input.val());
         },
 
         _wrapper: function() {
