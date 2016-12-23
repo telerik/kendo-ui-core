@@ -1207,7 +1207,7 @@ A jQuery object of the visible input element, where the user types.
     var multiselect = $("#multiselect").data("kendoMultiSelect");
 
     var input = multiselect.input;
-    <script>
+    </script>
 
 ### options `Object`
 An object, which holds the options of the widget.
@@ -1221,7 +1221,7 @@ An object, which holds the options of the widget.
     var multiselect = $("#multiselect").data("kendoMultiSelect");
 
     var options = multiselect.options;
-    <script>
+    </script>
 
 ### list `jQuery`
 A jQuery object of the drop-down list element.
@@ -1235,7 +1235,7 @@ A jQuery object of the drop-down list element.
     var multiselect = $("#multiselect").data("kendoMultiSelect");
 
     var list = multiselect.list;
-    <script>
+    </script>
 
 ### ul `jQuery`
 A jQuery object of the `ul` element, which holds the available options.
@@ -1249,7 +1249,7 @@ A jQuery object of the `ul` element, which holds the available options.
     var multiselect = $("#multiselect").data("kendoMultiSelect");
 
     var ul = multiselect.ul;
-    <script>
+    </script>
 
 ### tagList `jQuery`
 A jQuery object of the `ul` element, which holds the selected tags.
@@ -1263,7 +1263,7 @@ A jQuery object of the `ul` element, which holds the selected tags.
     var multiselect = $("#multiselect").data("kendoMultiSelect");
 
     var tagList = multiselect.tagList;
-    <script>
+    </script>
 
 ## Methods
 
