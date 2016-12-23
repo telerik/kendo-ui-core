@@ -321,6 +321,10 @@ Add days to a date object.
 
 The date object to add days to.
 
+##### numberOfDaysToAdd `Number`
+
+The number of days to be added to the target date.
+
 #### Returns
 
 `Date` Returns a new date object with added days.
