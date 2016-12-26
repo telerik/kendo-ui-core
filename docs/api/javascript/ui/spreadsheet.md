@@ -1914,6 +1914,20 @@ The widget instance which fired the event.
 
 The [Range](/api/javascript/spreadsheet/range) that is selected.
 
+### changeFormat
+
+Triggered when range format is changed from the UI. Introduced in 2017 Q1.
+
+#### Event Data
+
+##### e.sender `kendo.ui.Spreadsheet`
+
+The widget instance which fired the event.
+
+##### e.range `kendo.spreadsheet.Range`
+
+The [Range](/api/javascript/spreadsheet/range) which format is changed.
+
 ### change
 
 Triggered when a value in the spreadsheet has been changed. Introduced in 2016.Q1.SP1.
