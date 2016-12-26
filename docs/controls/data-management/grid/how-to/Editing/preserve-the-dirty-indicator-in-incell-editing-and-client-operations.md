@@ -7,7 +7,7 @@ slug: howto_preserve_dirty_indicator_incell_editing_client_operations_grid
 
 # Preserve Dirty Indicator in Incell Editing and Client Operations
 
-The example below demonstrates how to preserve the dirty indicator in incell editing and client operations in the Kendo UI Grid widget.
+The example below demonstrates how to preserve the dirty indicator in incell editing and client operations, as well as when new rows are added, in the Kendo UI Grid widget.
 
 ###### Example
 
@@ -79,8 +79,7 @@ The example below demonstrates how to preserve the dirty indicator in incell edi
         });
 
         function dirtyField(data, fieldName){
-          	var hasClass = $("[data-uid=" + data.uid + "]").find(".k-dirty-cell").length < 1;
-            if(data.dirty && data.dirtyFields[fieldName] && hasClass){
+            if(data.dirty && data.dirtyFields[fieldName]){
                 return "<span class='k-dirty'></span>"
             }
             else{
