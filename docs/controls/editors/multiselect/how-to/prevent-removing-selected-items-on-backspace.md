@@ -1,13 +1,13 @@
 ---
-title: Prevent deleting selected items on Backspace
-page_title: Prevent deleting selected items on Backspace | Kendo UI MultiSelect
+title: Prevent the Deletion of Selected Items on Backspace
+page_title: Prevent the Deletion of Selected Items on Backspace | Kendo UI MultiSelect
 description: "Learn how to prevent deleting a selected item on pressing the Backspace key in the input of the Kendo UI MultiSelect widget."
 slug: howto_prevent_deleting_selected_items_on_backspace_multiselect
 ---
 
-# Prevent deleting selected items on backspace in the widget's input
+# Prevent the Deletion of Selected Items on Backspace
 
-The example below demonstrates how to prevent deleting selected items on a `Backspace` keypress in the Kendo UI MultiSelect widget.
+The following example demonstrates how to prevent the deletion of selected items on a `Backspace` key-press in the Kendo UI MultiSelect widget.
 
 ###### Example
 
@@ -38,9 +38,9 @@ The example below demonstrates how to prevent deleting selected items on a `Back
           if(e.which === 8 && !e.target.value.length){
             e.stopImmediatePropagation();  
             e.preventDefault();
-          } 
+          }
       });
-      
+
       $._data(input[0]).events.keydown.reverse();
     </script>
 ```
