@@ -2147,7 +2147,7 @@ Check [Detail Template](http://demos.telerik.com/kendo-ui/grid/detailtemplate) f
 > The detail template content cannot be wider than the total width of all master columns, unless the detail template is scrollable.
 
 #### Example - specify detail template as a function
-    <script id="detail-template">
+    <script id="detail-template" type="text/x-kendo-template">
       <div>
         Name: #: name #
       </div>
