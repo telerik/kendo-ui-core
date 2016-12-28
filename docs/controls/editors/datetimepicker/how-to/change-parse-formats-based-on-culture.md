@@ -1,15 +1,15 @@
 ---
-title: Use current culture's default date format as parse format
-page_title: Use the current culture's default date format as parse format | Kendo UI DateTimePicker
-description: "Learn how to use the current culture's default date format as parse format for the Kendo UI DateTimePicker widget."
+title: Use Current Culture Default Date Format as Parse Format
+page_title: Use Current Culture Default Date Format as Parse Format | Kendo UI DateTimePicker
+description: "Learn how to use the default date format of the current culture as a parse format for the Kendo UI DateTimePicker widget."
 slug: howto_use_current_culture_date_format_in_datetimepicker
 ---
 
-# Use current culture's default date format as parse format
+# Use Current Culture Default Date Format as Parse Format
 
-The default behavior of the Kendo UI DateTimePicker widget is to treat a value with no time part as invalid, unless the corresponding format is provided in the `parseFormats` option.
+The default behavior of the Kendo UI DateTimePicker widget is to treat a value with no time part as invalid unless the corresponding format is provided in the `parseFormats` option.
 
-The following example shows how to add the current culture's default short date format to the `parseFormats` array, so that when the time portion is removed from the DateTimePicker's input, the value will still be parsed as a valid date.
+The following example demonstrates how to add the default short date format of the current culture to the `parseFormats` array, so that when the time portion is removed from the DateTimePicker input, the value is still parsed as a valid date.
 
 ###### Example
 
