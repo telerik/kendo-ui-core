@@ -649,13 +649,20 @@ input.k-textbox:active {
 
 /* Calendar */
 .k-calendar {
-    th {
+    th,
+    .k-alt {
         color: lighten(@hover-text-color, 8%);
     }
 
     td {
         border-radius: 50%;
         border-color: transparent;
+    }
+
+    .k-alt {
+        border-radius: 0;
+        background-color: @secondary-widget-background-color;
+        font-weight: normal;
     }
 
     .k-content .k-link,
