@@ -432,7 +432,7 @@ The color value of the `#ccc` border has to match the color of the cell border f
 
 ### Locked Columns
 
-Locked (frozen) columns allow part of the columns to be visible at all times during horizontal Grid scrolling. Separate tables are created for the "locked" and the scrollable sections of the Grid. This should be considered when writing custom code, relying on selectors, targeting the Grid table. The locked columns are inside of a `.k-grid-content-locked` element, while the scrollable content is inside of a `.k-grid-content` one.  
+Locked (frozen) columns allow part of the columns to be visible at all times during horizontal Grid scrolling. When writing custom code, relying on selectors, or targeting the Grid table, you need to consider that the Grid creates separate tables for its locked and scrollable sections. The locked columns are inside a `.k-grid-content-locked` element and the scrollable content is inside a `.k-grid-content` one.  
 
 The Grid allows you to lock columns on one side of the table. For the feature to work properly, provide the following configuration settings:  
 
