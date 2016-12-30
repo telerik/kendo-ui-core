@@ -6,15 +6,15 @@ slug: custom_functions_spreadsheet_widget
 position: 4
 ---
 
-# Custom Functions (“primitives”)
+# Custom Functions
 
-You can make your own JavaScript functions available in formulas by calling the `kendo.spreadsheet.defineFunction(name, func)`. The first argument (`string`) is the name for your function in formulas (case-insensitive), and the second one is a JavaScript function (the implementation).
+In formulas, you can create your own custom JavaScript functions ("primitives") by calling the `kendo.spreadsheet.defineFunction(name, func)`. The first argument (`string`) is the name for your function in formulas (case-insensitive), and the second one is a JavaScript function (the implementation).
 
 ## Primitives
 
 ### Synchronous Primitives
 
-The example below demonstrates how to define a function that calculates the distance between two points.
+The following example demonstrates how to define a function that calculates the distance between two points.
 
 ###### Example
 
@@ -30,13 +30,13 @@ The example below demonstrates how to define a function that calculates the dist
         [ "y2", "number" ]
     ]);
 
-If you include the above JavaScript code, you can then use `DISTANCE` in formulas. For example, you can type in a cell `=DISTANCE(2, 2, 5, 6)` to find the distance between coordinate points `(2,2)` and `(5,6)`, or you can use the function in combined expressions such as `=DISTANCE(0, 0, 1, 1) + DISTANCE(2, 2, 5, 6)`, etc.
+If you include the above JavaScript code, you can then use `DISTANCE` in formulas. For example, to find the distance between coordinate points `(2,2)` and `(5,6)`, type in a cell `=DISTANCE(2, 2, 5, 6)`. Optionally, you can use the function in combined expressions such as `=DISTANCE(0, 0, 1, 1) + DISTANCE(2, 2, 5, 6)`.
 
-Note that in the above example `defineFunction` returns an object that has an `args` method. Using it, you can specify the expected types of arguments. If the function is called with mismatching argument types, the spreadsheet runtime will automatically return an error and your implementation will not even be called. This frees you from manually writing code that does argument type checking, and provides a nice declarative syntax instead.
+In the above example, `defineFunction` returns an object that has an `args` method. You can use it to specify the expected types of arguments. If the function is called with mismatching argument types, the runtime of the Spreadsheet automatically returns an error and your implementation is not called. This spares the time for manually writing code that does argument type checking and provides a nice declarative syntax instead.
 
 ### Asynchronous Primitives
 
-Suppose you have a way to retrieve currency information from some remote server, you can define a primitive to make this information available in formulas. Note that we call `argsAsync` instead of `args` to define an asynchronous function.
+To retrieve currency information from a remote server, define a primitive to make this information available in formulas. To define an asynchronous function, call `argsAsync` instead of `args`.
 
 ###### Example
 
@@ -53,15 +53,15 @@ Suppose you have a way to retrieve currency information from some remote server,
 
 > **Important**
 >
-> The `argsAsync` passes a callback as first argument to your implementation function. Call that with the return value.
+> The `argsAsync` passes a callback as the first argument to your implementation function, which you need to call with the return value.
 
-Now you can do the following in formulas: `=CURRENCY("EUR", "USD")`, `=A1 * CURRENCY("EUR", "USD")` etc. Note that the callback is invisible in formulas. The second formula shows that even though the implementation itself is asynchronous, it can be used in formulas in a synchronous way (i.e., the result yielded by `CURRENCY` will be multiplied with the value in A1).
+It is possible to use new approaches in formulas such as `=CURRENCY("EUR", "USD")` and `=A1 * CURRENCY("EUR", "USD")`. Note that the callback is invisible in formulas. The second formula shows that even though the implementation itself is asynchronous, it can be used in formulas in a synchronous way&mdash;that is, the result yielded by `CURRENCY` is multiplied by the value in **A1**.
 
-The rest of this page deals with argument types. Also, the last section explains what happens if you do not invoke `args`/`argsAsync` — that is a pretty low level and we advise against using that form.
+The rest of this article provides information on argument types.
 
-## Check Argument Types
+## Checking Argument Types
 
-As can be seen in the examples above, both `args` and `argsAsync` expect a single array argument. It contains one definition for each argument. Each definition is in turn an array where the first element is the argument name (note that it must be a valid JavaScript identifier), and the second element is a type specifier.
+As can be seen in the examples above, both `args` and `argsAsync` expect a single array argument. It contains one definition for each argument. Each definition is in turn an array where the first element is the argument name that has to be a valid JavaScript identifier and the second element is a type specifier.
 
 ### Basic Type Specifiers
 
@@ -97,7 +97,7 @@ If you call `=TRUNCATE(12.634)`, the result is `12`. You can also call `=TRUNCAT
 
 ### Getting Error Values
 
-By default, if an argument is an error, your function is not called at all and that error is returned.  
+By default, if an argument is an error, your function is not called and that error is returned.  
 
 ###### Example
 
@@ -107,7 +107,7 @@ By default, if an argument is an error, your function is not called at all and t
         [ "value", "anyvalue" ]
     ]);
 
-With this implementation, typing `=ISERROR(1/0)` returns `#DIV/0!` instead of `true`&mdash;the error is passed over, aborting computation. To allow errors to go through, append a `!` to the type.
+With this implementation, when you type `=ISERROR(1/0)`, `#DIV/0!` instead of `true` is returned&mdash;the error is passed over and aborts the computation. To allow the passing of errors, append a `!` to the type.
 
 ###### Example
 
@@ -115,13 +115,13 @@ With this implementation, typing `=ISERROR(1/0)` returns `#DIV/0!` instead of `t
         [ "value", "anyvalue!" ]
     ]);
 
-This time `true` is returned.
+The result is that `true` is returned.
 
 ### Reference Type Specifiers
 
-All the above type specifiers force references. For this reason `=TRUNCATE(A5)` also works&mdash;the function gets the value in `A5` cell. If `A5` contains a formula, the runtime library makes sure you get the current value (that is, `A5` is evaluated first). All of this goes under the hood and you need not worry about it.
+All above-mentioned type specifiers force references. FBecasues of this, `=TRUNCATE(A5)` also works. The function gets the value in the `A5` cell. If `A5` contains a formula, the runtime library verifies you get the current value&mdash;that is, `A5` is evaluated first. All of this goes under the hood and you need not worry about it.
 
-However, sometimes you might need to write functions that receive a reference, instead of a resolved value. One example is Excel's `ROW` function. In its basic form, it takes a cell reference and returns its row number, as demonstrated in the example below. The actual `ROW` function is more complicated.
+Sometimes you might need to write functions that receive a reference instead of a resolved value. Such an example is the `ROW` function of Excel. In its basic form, it takes a cell reference and returns its row number, as demonstrated in the following example. The actual `ROW` function is more complicated.
 
 ###### Example
 
@@ -132,20 +132,22 @@ However, sometimes you might need to write functions that receive a reference, i
         [ "reference", "cell" ]
     ]);
 
-If you now call `=ROW(A5)`, you get a `5`, regardless of what is in cell `A5`: it could be empty, or it is possible that this very formula sits in the `A5` cell and there must be no circular reference error in such a case.
+If you now call `=ROW(A5)`, you get `5` as a result, regardless of the content in the `A5` cell&mdash;it might be empty or it is possible that this very formula sits in the `A5` cell and there must be no circular reference error in such a case.
 
-See the **References** section below for more information about references. The related type specifiers are just listed here:
+See the **References** section below for more information about references.
+
+The following table lists the related type specifiers:
 
 |TYPE SPECIFIER   |ACTION     |
 |:---             |:---       |
-|`"ref"`          |Allows any reference argument and your implementation gets it as such. |
+|`"ref"`          |Allows any reference argument and your implementation gets it as such.|
 |`"area"`         |Allows a cell or a range argument (`CellRef` or `RangeRef` instance). |
-|`"cell"`         |Allows a cell argument (`CellRef` instance).|
-|`"anything"`     |Allows any argument type. The difference to `anyvalue` is that this one does not force references, that is, if a reference is passed, it will remain a reference instead of being replaced by its value. |
+|`"cell"`         |Allows a cell argument (`CellRef` instance).                          |
+|`"anything"`     |Allows any argument type. The difference to `anyvalue` is that this one does not force references&mdash;that is, if a reference is passed, it remains a reference instead of being replaced by its value. |
 
 ### Compound Type Specifiers
 
-In addition to basic type specifiers, which are strings, you can also use the following forms of type specifications:
+In addition to the basic type specifiers that are strings, you can also use the following forms of type specifications:
 
 |ADDITIONAL SPECIFIER           |ACTION     |
 |:---                           |:---       |
@@ -164,7 +166,7 @@ In addition to basic type specifiers, which are strings, you can also use the fo
 
 ### Previous Arguments Reference
 
-In certain clauses you might need to be able to refer to values of previously type-checked arguments. For example, let us say you want to write a primitive that takes a minimum, a maximum, and a value that must be between them, and should return as a fraction the position of that value between min and max.
+In certain clauses you might need to refer to values of previously type-checked arguments. For example, if you want to write a primitive that takes a minimum, a maximum, and a value that must be between them, and should return as a fraction the position of that value between min and max.
 
 ###### Example
 
@@ -177,18 +179,16 @@ In certain clauses you might need to be able to refer to values of previously ty
                      [ "[between]", "$min", "$max" ] ] ]
     ]);
 
-Focus on the type specifier for `"value"`:
+Note the type specifier for `"value"`:
 
     [ "and", "number",
       [ "[between]", "$min", "$max" ] ]
 
-That says the parameter must be a number, and it must be between `min` and `max`. To refer to a previous argument, prefix the identifier with a `$` character.
-
-This works for arguments of `"between"` (and friends), `"assert"`, `"values"` and `"null"`.
+The code requires that the parameter is a number and that it has to be between `min` and `max`. To refer to a previous argument, prefix the identifier with a `$` character. This approach works for arguments of `"between"` (and friends), `"assert"`, `"values"` and `"null"`.
 
 ### Arbitrary Assertions
 
-You can notice though that the above function is not quite correct because it does not check that `max` is actually greater than `min`. To do that, use `"assert"`:
+The above function is not quite correct because it does not check that `max` is actually greater than `min`. To do that, use `"assert"`, as demonstrated in the following example.
 
     defineFunction("my.position", function(min, max, value){
         return (value - min) / (max - min);
@@ -200,11 +200,13 @@ You can notice though that the above function is not quite correct because it do
         [ "?", [ "assert", "$min < $max", "N/A" ] ]
     ]);
 
-The `"assert"` type specification allows you to introduce an arbitrary condition into the JavaScript code of the type checking function. An argument name of `"?"` will not actually introduce a new argument, but provide a place for such assertions. The third argument to `"assert"` is the error code that it should produce if the condition does not stand (and `#N/A!` is actually the default).
+The `"assert"` type specification allows you to introduce an arbitrary condition into the JavaScript code of the type-checking function. An argument name of `"?"` does not actually introduce a new argument, but provides a place for such assertions. The third argument to `"assert"` is the error code that it should produce if the condition does not stand (and `#N/A!` is actually the default).
 
 ### Optional Arguments
 
-As hinted above, you can use the `"null"` specifier to support optional arguments. Since it was already discussed above, here is the actual definition of the `ROW` function:
+As hinted above, you can use the `"null"` specifier to support optional arguments.
+
+The following example demonstrates the actual definition of the `ROW` function.
 
     defineFunction("row", function(ref){
         if (!ref) {
@@ -220,9 +222,11 @@ As hinted above, you can use the `"null"` specifier to support optional argument
         [ "ref", [ "or", "area", "null" ]]
     ]);
 
-This says that the argument can either be an area (a cell or a range), or `null` (that is, missing). By using the `"or"` combiner, you make it accept either of these. If the argument is missing, your function will get `null`. In such a case it should return the row of the current formula, which you get by `this.formula.row` (details in the **Context Object** section).
+The code requires that the argument can either be an area (a cell or a range) or `null` (that is, missing). By using the `"or"` combiner, you make it accept either of these. If the argument is missing, your function gets `null`. In such cases, it has to return the row of the current formula that you get by `this.formula.row`. For more details, refer to the [section on context objects](#context-objects).
 
-In most cases, “optional” means that the argument takes some default value if one is not provided. For example, the `LOG` function computes the logarithm of the argument to a base, but if the base is not specified it defaults to 10. Here is the implementation:
+In most cases, “optional” means that the argument takes some default value if one is not provided. For example, the `LOG` function computes the logarithm of the argument to a base, but if the base is not specified, it defaults to 10.
+
+The following example demonstrates this implementation.
 
     defineFunction("log", function(num, base){
         return Math.log(num) / Math.log(base);
@@ -233,13 +237,11 @@ In most cases, “optional” means that the argument takes some default value i
     ]);
 
 <!--*-->
-The type specification for `base` is: `[ "or", "number++", [ "null", 10 ] ]`. This says it should accept any number greater than zero, but if the argument is missing, defaults to 10. The implementation does not have to deal with the case that the argument is missing — it will get 10 instead.
-
-Also, note that it uses an assertion to make sure the `base` is not 1. If it is, return a `#DIV/0!` error.
+The type specification for `base` is: `[ "or", "number++", [ "null", 10 ] ]`. This says it should accept any number greater than zero, but if the argument is missing, defaults to 10. The implementation does not have to deal with the case that the argument is missing — it will get 10 instead. Note that it uses an assertion to make sure the `base` is not 1. If the `base` is 1, a `#DIV/0!` error is returned.
 
 ### Return Errors
 
-If you need to return an error code, you must return a `spreadsheet.CalcError` object.
+To return an error code, return a `spreadsheet.CalcError` object.
 
 ###### Example
 
@@ -256,9 +258,9 @@ If you need to return an error code, you must return a `spreadsheet.CalcError` o
 
 > **Important**
 >
-> For convenience, for synchronous primitives (that is, if you use `args`, not `argsAsync`) you can also `throw` a `CalcError` object.
+> For convenience, you can also `throw` a `CalcError` object for synchronous primitives&mdash;that is, if you use `args` and not `argsAsync`.
 
-Note that it is possible to do the above via an assertion as well:
+Note that it is possible to do the above through an assertion as well, as demonstrated in the following example.
 
     defineFunction("tan", function(x){
         return Math.tan(x);
@@ -269,13 +271,13 @@ Note that it is possible to do the above via an assertion as well:
 
 ### Variable Argument List
 
-The type checking mechanism will error out when your primitive receives more arguments than specified. There are a few ways to receive all remaining arguments without errors.
+The type checking mechanism errors out when your primitive receives more arguments than specified. There are a few ways to receive all remaining arguments without errors.
 
-#### The `"rest"` type specifier
+#### The `"rest"` Type Specifier
 
-The simplest way is to use the `"rest"` type specifier. In such cases the last argument will be an array containing all remaining arguments, whatever types they might be.
+The simplest way is to use the `"rest"` type specifier. In such cases, the last argument is an array that contains all remaining arguments, whatever types they might be.
 
-The example below demonstrates how to use a function that joins arguments with a separator, producing a string.
+The following example demonstrates how to use a function that joins arguments with a separator producing a string.
 
 ###### Example
 
@@ -286,11 +288,13 @@ The example below demonstrates how to use a function that joins arguments with a
         [ "list", "rest" ]
     ]);
 
-This allows for `=JOIN("-", 1, 2, 3)` which returns `1-2-3`, as well as `=JOIN(".")` which returns the empty string (since the list will be empty).
+This allows for `=JOIN("-", 1, 2, 3)` which returns `1-2-3` and for `=JOIN(".")` which returns the empty string because the list will be empty.
 
-#### The `"collect"` clauses
+#### The `"collect"` Clauses
 
-This collects all remaining arguments that match a certain type specifier, ignoring the others (except errors). You would use this in functions like `SUM` which sums all numeric arguments, but does not care about empty or text arguments. Here is the definition of `SUM`:
+The `"collect"` clauses collect all remaining arguments that match a certain type specifier, ignoring all others except for the errors. You can use them in functions like `SUM` that sums all numeric arguments, but does not care about empty or text arguments.
+
+The following example demonstrates the definition of `SUM`.
 
     defineFunction("sum", function(numbers){
         return numbers.reduce(function(sum, num){
@@ -300,13 +304,13 @@ This collects all remaining arguments that match a certain type specifier, ignor
         [ "numbers", [ "collect", "number" ] ]
     ]);
 
-The `"collect"` clause will abort when it encounters an error. If you want to ignore errors as well, use the `"#collect"` specification.
+The `"collect"` clause aborts when it encounters an error. To ignore errors as well, use the `"#collect"` specification. Note that `"collect"` and `"#collect"` only make sense when either is the first specifier&mdash;that is, they cannot be nested in `"or"`, `"and"`, and the like.
 
-Note that `"collect"` and `"#collect"` only make sense when being the first specifier, i.e., they cannot be nested in `"or"`, `"and"` etc.
+#### Other Type-Checked Arguments
 
-#### Type-checked rest arguments
+There are functions that allow an arbitrary number of arguments of specific types. For example, the `SUMPRODUCT` function takes an arbitrary number of arrays, multiplies the corresponding numbers in these arrays, and then returns the sum of the products. In this case, you need at least two arrays.
 
-There are functions that allow an arbitrary number of arguments, but those arguments must be of certain types. For example, the `SUMPRODUCT` function takes an arbitrary number of arrays, and multiplies corresponding numbers in those arrays, and then returns the sum of these products. There must be at least two arrays. Here is the argument specification:
+The following example demonstrates the argument specification.
 
     [
         [ "a1", "matrix" ],
@@ -316,9 +320,9 @@ There are functions that allow an arbitrary number of arguments, but those argum
                     [ "assert", "$a2.height == $a1.height" ] ] ] ]
     ]
 
-The `"+"` in the second definition means that one or more arguments must follow. So the `a2` argument that is defined there can repeat. Also, notice how you can use assertions to make sure the matrices have the same shape as the first one (`a1`).
+The `"+"` in the second definition means that one or more arguments are expected to follow and that the `a2` argument, defined there, can repeat. Notice how you can use assertions to make sure the matrices have the same shape as the first one (`a1`).
 
-For another example, look at the `SUMIFS` function ([see Excel documentation](https://support.office.com/en-us/article/SUMIFS-function-c9e748f5-7ea7-455d-9406-611cebce642b)). It takes a `sum_range`, a `criteria_range` and a `criteria`. These are the required arguments. Then, any number of `criteria_range` and `criteria` arguments can follow. In particular, criteria ranges must all have the same shape (width/height). Here is the argument definition for `SUMIFS`:
+For another example, look at the `SUMIFS` function ([see Excel documentation](https://support.office.com/en-us/article/SUMIFS-function-c9e748f5-7ea7-455d-9406-611cebce642b)). It takes a `sum_range`, a `criteria_range`, and a `criteria`. These are the required arguments. Then, any number of `criteria_range` and `criteria` arguments can follow. In particular, criteria ranges must all have the same shape (width/height). Here is the argument definition for `SUMIFS`:
 
     [
         [ "range", "matrix" ],
@@ -330,17 +334,17 @@ For another example, look at the `SUMIFS` function ([see Excel documentation](ht
           [ "c2", "anyvalue" ] ]
     ]
 
-The repeating part now is simply enclosed in an array, not preceded by `"+"`. This tells the system that any number may follow (so perhaps zero), while `"+"` requires at least one argument.
+The repeating part now is simply enclosed in an array, not preceded by `"+"`. This indicates to the system that any number might follow, including zero, while `"+"` requires at least one argument.
 
 ## Date and Time Representation
 
-Dates are stored as the number of days since 1899-12-31 (that being day one). In Excel, day one is 1900-01-01, but for historical reasons Excel assumes that 1900 is a leap year (see [leap year bug](https://en.wikipedia.org/wiki/Leap_year_bug)). In Excel, day 60 yields an invalid date (1900-02-29), which means that date calculations involving dates before and after 1900-03-01 produce wrong results.
+Dates are stored as the number of days since 1899-12-31 that is considered to be the first date. In Excel, the first day is 1900-01-01, but for historical reasons Excel assumes that 1900 is a leap year. For more information, refer to the article on the [leap year bug](https://en.wikipedia.org/wiki/Leap_year_bug). In Excel, day 60 yields an invalid date (1900-02-29), which means that date calculations involving dates before and after 1900-03-01 produce wrong results.
 
-In order to be compatible with Excel, and to avoid implementing this bug, the Spreadsheet uses 1899-12-31 as the base date. Dates that are greater than or equal to 1900-03-31 have the same numeric representation as in Excel, while dates before 1900-03-31 are smaller by 1.
+To be compatible with Excel and to avoid the unwilling implementation of this bug, the Spreadsheet uses 1899-12-31 as the base date. Dates that are greater than or equal to 1900-03-31 have the same numeric representation as in Excel, while dates before 1900-03-31 are smaller by 1.
 
-Time is kept as a fraction of a day, i.e., 0.5 means 12:00:00. For example, the date and time `Sep 27 1983 12:35:59` is numerically stored as `30586.524988425925`. To verify that in Excel, paste this number in a cell and then format it as date/time.
+Time is kept as a fraction of a day&mdash;that is, 0.5 means 12:00:00. For example, the date and time `Sep 27 1983 12:35:59` is numerically stored as `30586.524988425925`. To verify that in Excel, paste this number in a cell and then format it as a date or time.
 
-Functions to pack/unpack dates are available in `spreadsheet.calc.runtime`.
+Functions to pack or unpack dates are available in `spreadsheet.calc.runtime`.
 
 ###### Example
 
@@ -361,11 +365,11 @@ Functions to pack/unpack dates are available in `spreadsheet.calc.runtime`.
     console.log(runtime.packTime(13, 35, 0, 0)); // hours, minutes, seconds, ms
     console.log(runtime.dateToSerial(new Date()))
 
-Note that the serial date representation does not carry any timezone information, so the functions involving `Date` objects (`serialToDate` and `dateToSerial`) will use the local components, not UTC. Excel seems to do the same.
+Note that the serial date representation does not carry any timezone information, so the functions involving `Date` objects (`serialToDate` and `dateToSerial`) use the local components and not UTC&mdash;as Excel does.
 
 ## References
 
-As mentioned earlier, certain type specifiers allow you to get a reference in your function rather than the resolved value. It is important to note that when you do so, you cannot rely on the values in those cells to be calculated, so if your function might need the values as well, you have to compute them. Since the function that does that is asynchronous, your primitive must be defined in asynchronous style as well.
+As mentioned earlier, certain type specifiers allow you to get a reference in your function rather than the resolved value. Note that when you do so, you cannot rely on the values in those cells to be calculated. As a result, if your function might need the values as well, you have to compute them. Because the function which does this is asynchronous, your primitive has to be defined in an asynchronous style as well.
 
 ###### Example
 
@@ -382,81 +386,62 @@ As mentioned earlier, certain type specifiers allow you to get a reference in yo
         [ "x", "cell" ]
     ]);
 
-This function accepts a cell argument, so you can only call it like `=test(B4)`. It calls `this.resolveCells` from the context object in order to make sure the cell value is calculated. Without this step, if the cell actually contains a formula, the value returned by `this.getRefData` could be outdated. Then it prints some information about that cell.
+This function accepts a cell argument and you can only call it like `=test(B4)`. It calls `this.resolveCells` from the context object to verify that the cell value is calculated. Without this step and if the cell actually contains a formula, the value returned by `this.getRefData` could be outdated. Then it prints some information about that cell.
 
-The subsections below discuss the types of references that your primitive can receive.
+The following list explains the types of references that your primitive can receive:
+* `spreadsheet.Ref`&mdash;A base class only. All references inherit from it, but no direct instance of this object should ever be created. The class is exported just to make it easier to check whether something is a reference: `x instanceof spreadsheet.Ref`.
+* `spreadsheet.NULLREF`&mdash;An object (a singleton) and not a class. It represents the `NULL` reference, and could occur, for example, when you intersect two disjoint ranges, or when a formula depends on a cell that has been deleted. For example, when you put in some cell `=test(B5)` and then right-click on column `B` and delete it. To test when something is the `NULL` reference, just do `x === spreadsheet.NULLREF`.
+* `spreadsheet.CellRef`&mdash;Represents a cell reference. Note that the references here follow the same programming language concept. They do not contain data. Instead they just point to where the data is. So a cell reference contains 3 essential properties:
+    - `sheet` — the name of the sheet that this cell points to (as a string)
+    - `row` — the row number, zero-based
+    - `col` — the column number, zero-based
+* `spreadsheet.RangeRef`&mdash;A range reference. It contains `topLeft` and `bottomRight`, which are `CellRef` objects.
+* `spreadsheet.UnionRef`&mdash;A union. It contains a `refs` property, which is an array of references (it can be empty). A `UnionRef` can be created by the union operator, which is the comma.
 
-### `spreadsheet.Ref`
-
-`spreadsheet.Ref` is a base class only. All references inherit from it, but no direct instance of this object should ever be created. The class is exported just to make it easier to check whether something is a reference: `x instanceof spreadsheet.Ref`.
-
-### `spreadsheet.NULLREF`
-
-`spreadsheet.NULLREF` is not a class, but an object (a singleton). It represents the `NULL` reference, and could occur, for example, when you intersect two disjoint ranges, or when a formula depends on a cell that has been deleted. For example, when you put in some cell `=test(B5)` and then right-click on column `B` and delete it.
-
-To test when something is the `NULL` reference, just do `x === spreadsheet.NULLREF`.
-
-### `spreadsheet.CellRef`
-
-`spreadsheet.CellRef` represents a cell reference. Note that the references here follow the same programming language concept. They do not contain data. Instead they just point to where the data is. So a cell reference contains 3 essential properties:
-
-- `sheet` — the name of the sheet that this cell points to (as a string)
-- `row` — the row number, zero-based
-- `col` — the column number, zero-based
-
-### `spreadsheet.RangeRef`
-
-`spreadsheet.RangeRef` is a range reference. It contains `topLeft` and `bottomRight`, which are `CellRef` objects.
-
-### `spreadsheet.UnionRef`
-
-`spreadsheet.UnionRef` is a union. It contains a `refs` property, which is an array of references (it can be empty). A `UnionRef` can be created by the union operator, which is the comma.
-
-The example below demonstrates how to use a function that takes an arbitrary reference and returns its type of reference.
+The following example demonstrates how to use a function that takes an arbitrary reference and returns its type of reference.
 
 ###### Example
 
-    defineFunction("refkind", function(x){
-        if (x === spreadsheet.NULLREF) {
-            return "null";
-        }
-        if (x instanceof spreadsheet.CellRef) {
-            return "cell";
-        }
-        if (x instanceof spreadsheet.RangeRef) {
-            return "range";
-        }
-        if (x instanceof spreadsheet.UnionRef) {
-            return "union";
-        }
-        return "unknown";
-    }).args([
-        [ "x", "ref" ]
-    ]);
+      defineFunction("refkind", function(x){
+          if (x === spreadsheet.NULLREF) {
+              return "null";
+          }
+          if (x instanceof spreadsheet.CellRef) {
+              return "cell";
+          }
+          if (x instanceof spreadsheet.RangeRef) {
+              return "range";
+          }
+          if (x instanceof spreadsheet.UnionRef) {
+              return "union";
+          }
+          return "unknown";
+      }).args([
+          [ "x", "ref" ]
+      ]);
 
-The example below demonstrates how to use a function that takes an arbitrary reference and returns the total number of cells it covers.
 
-###### Example
+The following example demonstrates how to use a function that takes an arbitrary reference and returns the total number of cells it covers.
 
-    defineFunction("countcells", function(x){
-        var count = 0;
-        function add(x) {
-            if (x instanceof spreadsheet.CellRef) {
-                count++;
-            } else if (x instanceof spreadsheet.RangeRef) {
-                count += x.width() * x.height();
-            } else if (x instanceof spreadsheet.UnionRef) {
-                x.refs.forEach(add);
-            } else {
-                // unknown reference type.
-                throw new CalcError("REF");
-            }
-        }
-        add(x);
-        return count;
-    }).args([
-        [ "x", "ref" ]
-    ]);
+      defineFunction("countcells", function(x){
+          var count = 0;
+          function add(x) {
+              if (x instanceof spreadsheet.CellRef) {
+                  count++;
+              } else if (x instanceof spreadsheet.RangeRef) {
+                  count += x.width() * x.height();
+              } else if (x instanceof spreadsheet.UnionRef) {
+                  x.refs.forEach(add);
+              } else {
+                  // unknown reference type.
+                  throw new CalcError("REF");
+              }
+          }
+          add(x);
+          return count;
+      }).args([
+          [ "x", "ref" ]
+      ]);
 
 You can now say:
 
@@ -467,23 +452,23 @@ You can now say:
 
 Here is a function that returns the background color of some cell:
 
-    defineFunction("backgroundof", function(cell){
-        var workbook = this.workbook();
-        var sheet = workbook.sheetByName(cell.sheet);
-        return sheet.range(cell).background();
-    }).args([
-        [ "cell", "cell" ]
-    ]);
+      defineFunction("backgroundof", function(cell){
+          var workbook = this.workbook();
+          var sheet = workbook.sheetByName(cell.sheet);
+          return sheet.range(cell).background();
+      }).args([
+          [ "cell", "cell" ]
+      ]);
 
 It uses `this.workbook()` to retrieve the workbook, and then uses the Workbook/Sheet/Range APIs to fetch the background color of the given cell.
 
 ## Matrices
 
-Matrices are defined by `spreadsheet.calc.runtime.Matrix`. Your primitive can request a `Matrix` object by using the `"matrix"` type specification. In this case, it will accept a cell reference, a range reference, or a literal array. You can type literal arrays in formulas like in Excel, e.g., `{ 1, 2; 3, 4 }` (rows separated by semicolons).
+Matrices are defined by `spreadsheet.calc.runtime.Matrix`. Your primitive can request a `Matrix` object by using the `"matrix"` type specification. In this case, it can accept a cell reference, a range reference, or a literal array. You can type literal arrays in formulas like in Excel, e.g., `{ 1, 2; 3, 4 }` (rows separated by semicolons).
 
 Matrices were primarily added to deal with the “array formulas” concept in Excel. A function can return multiple values, and those will be in a `Matrix` object.
 
-The example below demonstrates how to use a function that doubles each number in a range and returns a matrix of the same shape.
+The following example demonstrates how to use a function that doubles each number in a range and returns a matrix of the same shape.
 
 ###### Example
 
@@ -495,9 +480,9 @@ The example below demonstrates how to use a function that doubles each number in
         [ "m", "matrix" ]
     ]);
 
-You can now type in some cell "=doublematrix(A1:B2)" and it will return a matrix, that is, fill all the required cells to the right and bottom from where this formula is defined with the doubled values. As of now, this is different from Excel, where in order to get all values returned by an array formula you have to pre-select the range, and save the formula with CTRL-SHIFT-ENTER.
+You can now type `"=doublematrix(A1:B2)"` in a cell. This returns a matrix&mdash;that is, fills all the required cells to the right and bottom from where this formula is defined with the doubled values. As of now, this behavior is different from Excel where to get all values that are returned by an array formula, you have to preselect the range and save the formula with the `CTRL`+`SHIFT`+`ENTER` keyboard shortcut.
 
-Here is a list of interesting methods/properties provided by the `Matrix` objects.
+The following table lists some of the methods and properties the `Matrix` objects provide.
 
 |METHOD OR PROPERTY           |DESCRIPTION|
 |:---                         |:---|
@@ -515,11 +500,13 @@ Here is a list of interesting methods/properties provided by the `Matrix` object
 
 ## Context Object
 
-Every time a formula is evaluated, a special `Context` object is created and each primitive function involved is invoked in the context of that object, that is, it will be accessible as `this`. Here are a few methods that this object provides.
+Every time a formula is evaluated, a special `Context` object is created and each involved primitive function is invoked in the context of that object&mdash;that is, it is accessible as `this`.
+
+The following table demonstrates some of the methods the `Context` object provides.
 
 |METHOD                           |DESCRIPTION|
 |:---                             |:---       |
-|`resolveCells(array, callback)`  |Makes sure that all references in the given array are resolved before invoking your callback&mdash;that is, executes any formula. If this array turns out to include the very cell where the current formula lives, it returns a `#CIRCULAR!` error. Elements that are not references are ignored. |
+|`resolveCells(array, callback)`  |Verifies that all references in the given array are resolved before invoking your callback&mdash;that is, executes any formula. If this array turns out to include the cell where the current formula lives, it returns a `#CIRCULAR!` error. Elements that are not references are ignored. |
 |`cellValues(array)`              |Returns as a flat array the values in any reference that exist in the given array. Elements that are not references are copied over.
 |`asMatrix(arg)`                  |Converts the given argument to a matrix, if possible. It accepts a `RangeRef` object or a plain JavaScript non-empty array. Additionally, if a `Matrix` object is provided, it is returned as is.|
 |`workbook()`                     |Returns the `Workbook` object where the current formula is evaluated. |
@@ -529,9 +516,13 @@ Additionally, there is a `formula` property, an object representing the current 
 
 ## Not Calling `args` or `argsAsync`
 
-If `args` or `argsAsync` are not called, the primitive function will receive exactly two arguments: a callback to be invoked with the result, and an array that will contain the arguments passed in the formula.
+This section explains what happens if you do not invoke `args` or `argsAsync`. It is recommended that you do not use that form.
 
-The example below demonstrates how to use a function that adds two things.
+If `args` or `argsAsync` are not called, the primitive function receives exactly two arguments:
+* A callback to be invoked with the result.
+* An array that contains the arguments passed in the formula.
+
+The following example demonstrates how to use a function that adds two things.
 
 ###### Example
 

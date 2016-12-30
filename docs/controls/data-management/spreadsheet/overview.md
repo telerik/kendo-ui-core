@@ -8,25 +8,23 @@ position: 1
 
 # Spreadsheet Overview
 
-The [Kendo UI Spreadsheet widget](http://demos.telerik.com/kendo-ui/spreadsheet/index) allows editing and visualization of tabular data with a variety of cell formatting options, styles and themes. Out of the box, the Spreadsheet supports:
+The [Kendo UI Spreadsheet widget](http://demos.telerik.com/kendo-ui/spreadsheet/index) allows editing and visualization of tabular data with a variety of cell formatting options, styles, and themes.
 
-* Multiple sheets
-* Excel like selection and active cell
-* Insert and delete cells, rows and columns
-* Cell editing, validation
-* Frozen panes
-* Merged Cells
-* Resizing of rows and columns
-* Cell formatting, including different fonts and font sizes
-* Selection of cell color and background color
-* Bold, italics and underline
-* Vertical and horizontal cell alignment
-* Text wrapping
-* Cell borders
-* Several data formatting options: Number; Currency; Accounting; Date; Time; Percentage; Fraction; Scientific; Text; Special; Custom
-* A broad range of formulas in different categories: Logical, Text, Date, and Time
+Out of the box, the Spreadsheet supports:
 
-Each of these features is exposed as a UI for the end user, as well as is exposed as API calls for you as a developer for further UI customization.
+* Selection and activation of cells that are functionally similar to ones in Excel.
+* Selection of cell and background colors.
+* Validation, insertion, deletion, editing, and merging of cells.
+* Vertical and horizontal alignment of cells.
+* Formatting of cells, including the provision of fonts and font sizes, application of borders, rendering of content in bold, italics and underline styles.
+* Formatting of data, including the provision of the number, currency, accounting, date, time, percentage, fraction, scientific, text, special, and custom options.
+* Applying formulas in categories such as logical, text, date, and time.
+* Resizing, insertion, and deletion of rows and columns.
+* Multiple sheets.
+* Frozen panes.
+* Text wrapping.
+
+Each of these features is exposed as a user interface (UI) to the end user and as API calls for further UI customization to the developer.
 
 > **Important**  
 >
@@ -34,9 +32,9 @@ Each of these features is exposed as a UI for the end user, as well as is expose
 
 ## Getting Started
 
-### Initialize the Spreadsheet
+### Initializing the Spreadsheet
 
-Instantiate the Spreadsheet widget by using an empty `<div>` element, as demonstrated in the example below.
+To instantiate the Spreadsheet, use an empty `<div>` element, as demonstrated in the following example.
 
 ###### Example
 
@@ -50,19 +48,19 @@ Instantiate the Spreadsheet widget by using an empty `<div>` element, as demonst
     </script>
 ```
 
-For more details on the instantiation mechanism of Kendo UI widgets, refer to the [widget initialization help article]({% slug initialize_widgets_using_jquery_plugins_installation %}).
+For more details on the instantiation mechanism of Kendo UI widgets, refer to the article on [widget initialization]({% slug initialize_widgets_using_jquery_plugins_installation %}).
 
-Find the detailed list of configuration options supported by the Spreadsheet, including sheet and data configuration, in the [Spreadsheet API reference topic](/api/javascript/ui/spreadsheet).
+To find the detailed list of configuration options supported by the Spreadsheet, including sheet and data configuration, refer to the [API reference of the Spreadsheet](/api/javascript/ui/spreadsheet).
 
-## Spreadsheet API
+### Using the Spreadsheet API
 
-The Spreadsheet widget instance [exposes a few methods](/api/javascript/ui/spreadsheet#methods) for sheet instance retrieval, insertion, and deletion. The most commonly used one is the [`activeSheet`](/api/javascript/ui/spreadsheet#methods-activeSheet).
+The Spreadsheet instance exposes [methods](/api/javascript/ui/spreadsheet#methods) for sheet instance retrieval, insertion, and deletion. The most commonly used one is the [`activeSheet`](/api/javascript/ui/spreadsheet#methods-activeSheet) method.
 
-The [`sheet` object instance](/api/javascript/spreadsheet/sheet) interface gives you the ability to get/set various sheet level settings and data.
+The [`sheet`](/api/javascript/spreadsheet/sheet) object instance interface enables you to get and set settings and data on the sheet level.
 
-The sheet `range` method is used to retrieve a [`range`](/api/javascript/spreadsheet/range) instance which may be used to manipulate one or more cell regions of the sheet. The `range` is retrieved using a string with an [A1](https://msdn.microsoft.com/en-us/library/bb211395.aspx) or an [RC notation](http://excelribbon.tips.net/T008803_Understanding_R1C1_References.html).
+The `range` method is used to retrieve a [`range`](/api/javascript/spreadsheet/range) instance that you can use to manipulate one or more cell regions of the sheet. To retrieve the `range` method, use a string with an [A1](https://msdn.microsoft.com/en-us/library/bb211395.aspx) or an [RC notation](http://excelribbon.tips.net/T008803_Understanding_R1C1_References.html).
 
-The example below demonstrates how to set the value for a range of cells.
+The following example demonstrates how to set the value for a range of cells.
 
 ###### Example
 
@@ -87,19 +85,19 @@ The example below demonstrates how to set the value for a range of cells.
 
 The Spreadsheet offers methods for storing and loading data in a JSON format.
 
-For more information on the data import and export functionality in the Spreadsheet, refer to the [article on storing as JSON](import-and-export-data/overview).
+For more information on the data import and export functionality in the Spreadsheet, refer to the [article on storing content as JSON]({% slug loadand_saveas_json_spreadsheet_widget %}).
 
-The Spreadsheet features a built-in [export-to-Excel]({% slug export_toexcel_spreadsheet_widget %}) functionality which is also fully actionable in the browser.
+The Spreadsheet features a built-in [export-to-Excel]({% slug export_toexcel_spreadsheet_widget %}) functionality which is fully actionable in the browser.
 
 ## Data Binding
 
-Individual sheets can be bound to a Data Source in a special data-driven mode.
+You can bind individual sheets to a Data Source in a special data-driven mode.
 
 For more information on the data-binding Spreadsheet functionality, refer to the [article on binding the Spreadsheet to a data source]({% slug bind_todata_source_spreadsheet_widget %}).
 
 ## Mobile Integration
 
-The Spreadsheet is primarily targeted at desktop users. Its performance and functionality are limited on mobile devices.  
+The Spreadsheet is primarily targeted at desktop users. Its performance and functionalities are limited on mobile devices.  
 
 ## See Also
 

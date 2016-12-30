@@ -8,9 +8,15 @@ position: 3
 
 # Custom Cell Editors
 
-Custom editors are helpers that make it easier for the user to enter a correct value. For example, a custom editor allows the user to enter a date in a cell by picking it from a calendar, rather than typing it. This functionality is achieved by applying data validation with the `Date` criteria, and selecting the **Display button to show calendar** checkbox. Another built-in editor is for the `List` validation criterion&mdash;it displays a popup displaying the allowed values.
+Custom editors are helpers that make it easier for the user to enter a correct value.
+
+For example, a custom editor allows the user to enter a date in a cell by picking it from a calendar rather than typing it. This functionality is achieved by applying data validation with the `Date` criteria, and selecting the **Display button to show calendar** checkbox. Another built-in editor is for the `List` validation criterion&mdash;it displays a popup displaying the allowed values.
+
+## Definition  
 
 To define custom editors, use `kendo.spreadsheet.registerEditor(name, editor)`. The `name` is an ID of your choice, which you will later use to select this particular editor on a `Range`. The `editor` can be an object or a function. As an object, it should currently have an `edit` method, and an `icon` property, as explained below.
+
+## Configuration
 
 The `edit(options)` method is invoked with the following options:
 
@@ -22,7 +28,7 @@ The `icon` property is a string which contains a CSS class name that is to be ap
 
 When the `editor` is a function, it is called the first time a cell, having this editor, is displayed. It returns an object as in the case above&mdash;having the `edit` method and the `icon` property, and the result is cached. Use this trick to delay the initialization of the editor until it is first needed.
 
-The example below demonstrates how to set up a color-picking custom editor.
+The following example demonstrates how to set up a color-picking custom editor.
 
 ###### Example
 
@@ -108,17 +114,17 @@ The example below demonstrates how to set up a color-picking custom editor.
   </script>
 ```
 
-Once the editor is defined, apply it through the API to any cell.
+After the editor is defined, you can apply it to any cell through the API.
 
 ###### Example
 
     var sheet = spreadsheet.activeSheet();
     sheet.range("A5").editor("color");
 
-Now, when the user selects `A5`, a button that shows the icon is displayed next to the cell. When clicked, the custom color picker pops up and allows the user to
+As a result, when the user selects `A5`, a button that shows the icon is displayed next to the cell. When clicked, the custom color picker pops up and allows the user to
 select a color.
 
-The `edit` method provides a complete flexibility. Use a Popup widget as an example&mdash;you are not obliged, nor required to use a Window. Cache the UI if you know that no two instances will be displayed simultaneously, or create a fresh instance each time the `edit` is invoked. Note that the example above refers to a modal dialog.
+The `edit` method provides a complete flexibility. As an example, you can use a Popup widget&mdash;you are not obliged, nor required to use a Window. If you know that no two instances will be displayed simultaneously, cache the UI or create a fresh instance each time the `edit` is invoked. Note that the example above refers to a modal dialog.
 
 ## See Also
 
