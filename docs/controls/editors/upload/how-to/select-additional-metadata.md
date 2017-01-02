@@ -84,7 +84,8 @@ The example demonstrates how to upload files and select additional metadata usin
                 #example .file-heading
                 {
                     font-family: Arial;
-                    font-size: 1.1em;
+                    font-size: 1.0em;
+                    line-height: 35px;
                     display: inline-block;
                     float: left;
                     margin: 0 20px 0 20px;
