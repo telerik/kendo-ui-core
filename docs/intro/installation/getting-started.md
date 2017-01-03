@@ -1,28 +1,32 @@
 ---
-title: Get Started with Kendo UI
-page_title: Get Started with Kendo UI | Kendo UI Getting Started
+title: Getting Started with Kendo UI
+page_title: Getting Started with Kendo UI | Kendo UI Getting Started
 description: "Host Kendo UI in your project, download the Bower packages, or install it by using the CDN services."
-previous_url: /install/onsite, /getting-started, /intro/getting-started, /using-kendo-with, /getting-started/using-kendo-with, 
+previous_url: /install/onsite, /getting-started, /intro/getting-started, /using-kendo-with, /getting-started/using-kendo-with,
 slug: getting_started_installation_kendoui
 position: 1
 ---
 
-# Get Started with Kendo UI
-
-## Host Kendo UI in Your Project
+# Getting Started with Kendo UI
 
 Depending on your preferences and the requirements of your project, you can:
 
-* [Download Kendo UI for a Trial Period](http://www.telerik.com/download/kendo-ui)
-* [Get Your Commercial License for Telerik Kendo UI® Professional](http://www.telerik.com/purchase/kendo-ui)
-* [Get Your Commercial License for Telerik UI for ASP.NET MVC](http://www.telerik.com/purchase/aspnet-mvc)
-* [Get Your Commercial License for Telerik UI for JSP](http://www.telerik.com/purchase/jsp-ui)
-* [Get Your Commercial License for Telerik UI for PHP](http://www.telerik.com/purchase/php-ui)
-* [Use the GitHub Open-Source License for Telerik Kendo UI® Core](https://github.com/telerik/kendo-ui-core)
+* Download [Kendo UI for a Trial Period](http://www.telerik.com/download/kendo-ui).
+* Get your [Commercial License for Telerik Kendo UI® Professional](http://www.telerik.com/purchase/kendo-ui).
+* Get your [Commercial License for Telerik UI for ASP.NET MVC](http://www.telerik.com/purchase/aspnet-mvc).
+* Get your [Commercial License for Telerik UI for JSP](http://www.telerik.com/purchase/jsp-ui).
+* Get your [Commercial License for Telerik UI for PHP](http://www.telerik.com/purchase/php-ui).
+* Use the [GitHub Open-Source License for Telerik Kendo UI® Core](https://github.com/telerik/kendo-ui-core).
 
-### Download
+## Hosting Kendo UI in Your Project
 
-Once you [download any of the Kendo UI bundles](http://www.telerik.com/download/kendo-ui), the folders listed below are hosted in your local repository.
+To host Kendo UI in your project, you need to:
+* [Download the bundles](#download).
+* [Add the CSS and JavaScript references](#add-css-and-javascript-references).
+
+### Download the Bundles
+
+After you [download any of the Kendo UI bundles](http://www.telerik.com/download/kendo-ui), the folders listed below are hosted in your local repository.
 
 |FOLDERS 						|CONTENTS |
 |:---								|:---			|
@@ -40,7 +44,7 @@ To use Kendo UI in your project, include the required JavaScript and CSS files.
 
 **Step 1** Extract the `/js` and `/styles` directories from the bundle archive and copy them to your web application root directory.  
 
-**Step 2** Include the Kendo UI JavaScript and CSS files in the `head` tag of your HTML document. Make sure the common CSS file is registered _before_ the theme CSS file.
+**Step 2** Include the Kendo UI JavaScript and CSS files in the `head` tag of your HTML document. Verify that the common CSS file is registered before the theme CSS file.
 
 ###### Example
 
@@ -77,7 +81,7 @@ To use Kendo UI in your project, include the required JavaScript and CSS files.
 
 **Step 3** Initialize a Widget.
 
-The example below demonstrates how to initialize the [DatePicker widget](http://demos.telerik.com/kendo-ui/datepicker/index).
+The following example demonstrates how to initialize the [DatePicker widget](http://demos.telerik.com/kendo-ui/datepicker/index).
 
 ###### Example
 
@@ -90,7 +94,7 @@ The example below demonstrates how to initialize the [DatePicker widget](http://
         });
         </script>
 
-The example below demonstrates the full initialization of the [DatePicker widget](http://demos.telerik.com/kendo-ui/datepicker/index).
+The following example demonstrates the full initialization of the [DatePicker widget](http://demos.telerik.com/kendo-ui/datepicker/index).
 
 ###### Example
 
@@ -113,31 +117,33 @@ The example below demonstrates the full initialization of the [DatePicker widget
         </body>
     </html>
 
-## Install Bower Packages
+## Installing Bower Packages
+
+[Bower](https://bower.io/) is a popular package manager for the web that handles frameworks, libraries, assets, and utilities.
+
+### Overview
+
+Kendo UI maintains 2 Bower packages:
+* Kendo UI Core.
+* Kendo UI Professional.
+
+All official releases, service packs, and internal builds are uploaded to both of them. For more information, refer to the article on [installing the Kendo UI Bower packages]({% slug kendoui_bower_packages_kendoui_installation %}).
 
 ### Delimiter for Recurrence Exceptions
 
-**Breaking Change** As of the Kendo UI 2016 Q2 (2016.2.504) release, the Scheduler substitutes the semicolon as the delimiter type for recurrence exception with the comma. Also, the widget no longer adds a trailing delimiter to a recurrence exception.
+As of the Kendo UI 2016 Q2 (2016.2.504) release:
+* The Scheduler substitutes the semicolon (`;`) as the delimiter type for recurrence exception with the comma (`,`).
+* The Scheduler no longer adds a trailing delimiter to a recurrence exception.
 
-The change was driven by the [RFC 5545](http://tools.ietf.org/html/rfc5545#page-120) specification. Note that the previously demonstrated behavior was incorrect.
+The change was driven by the [RFC 5545](http://tools.ietf.org/html/rfc5545#page-120) specification. Note that the previously demonstrated behavior had been incorrect.
 
-### Bower Packages
+## Using CDN Services
 
-[Bower](https://bower.io/) is a popular package manager for the web. Kendo UI maintains 2 bower packages, namely Kendo UI Core and Kendo UI Professional. Official releases, service packs and internal builds are uploaded to both of them.
+Kendo UI CDN is hosted on [Amazon CloudFront](https://aws.amazon.com/cloudfront/). To access the CDN Service, you can use different approaches. For more information, refer to the article on [installing the Kendo UI CDN Service]({% slug kendoui_cdn_services_installation %}).
 
-For more information on installing Kendo UI as a Bower package, see [this article]({% slug kendoui_bower_packages_kendoui_installation %}).
+## Including Only What You Need
 
-## Use CDN Services
-
-Kendo UI CDN is hosted on [Amazon CloudFront](https://aws.amazon.com/cloudfront/). To access the CDN Service, you can use different approaches.
-
-For more information on installing Kendo UI CDN Service, see [this article]({% slug kendoui_cdn_services_installation %}).
-
-## Include Only What You Need
-
-Add to your project only what it requires by picking the right combined scripts, building a custom combined script, or using Gulp to build a custom script.
-
-For more information on customizing the scripts you need, see [this article]({% slug include_only_what_you_need_kendoui_installation %}).
+Add to your project only what it requires by picking the right combined scripts, building a custom combined script, or using Gulp to build a custom script. For more information, refer to the article on [customizing the scripts you need]({% slug include_only_what_you_need_kendoui_installation %}).
 
 ## See Also
 

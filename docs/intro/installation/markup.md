@@ -9,29 +9,36 @@ position: 7
 
 # Markup Widget Initialization
 
-In addition to the [jQuery plugin syntax]({% slug initialize_widgets_using_jquery_plugins_installation %}), the Kendo UI widgets might be instantiated based on custom HTML attributes in several ways:
+In addition to the [jQuery plugin syntax]({% slug initialize_widgets_using_jquery_plugins_installation %}), the Kendo UI widgets might be instantiated based on custom HTML attributes.
 
-**Option 1** The [View]({% slug viewclass_kendoui_singlepageapplication %}) and the [mobile Application]({% slug overview_hybridapplication %}) instantiate widgets based on the `role` HTML5 `data` attributes. Both use the [MVVM]({% slug overview_mvvmpattern_kendoui %}) internally.  
+## Overview
 
-**Option 2** The `kendo.bind` method scans the passed DOM element contents for the `data-role` attributes and instantiates the respective widgets.  
+You can initialize widgets based on custom HTML attributes in the following ways:
 
-**Option 3** The Kendo UI [AngularJS]({% slug angularjs_integration_directives %}) directives support declarative initialization based on custom element attributes or custom tag names.
-
-> **Important**
->
-> The `data` attribute initialization is not designed to be combined with the Kendo UI server wrappers. The usage of wrappers is equivalent to [jQuery plug-in syntax initialization]({% slug initialize_widgets_using_jquery_plugins_installation %}). To create Kendo UI widget instances through the [MVVM]({% slug overview_mvvmpattern_kendoui %}) or [AngularJS]({% slug angularjs_integration_directives %}) mechanisms, use no server wrappers for these instances.
-
-While it is theoretically possible to initialize several different Kendo UI widgets from the same DOM element through the [jQuery plug-in syntax]({% slug initialize_widgets_using_jquery_plugins_installation %}), this is not recommended and is not supported with declarative initialization from markup.
+* **Option 1** The [View]({% slug viewclass_kendoui_singlepageapplication %}) and the [mobile Application]({% slug overview_hybridapplication %}) instantiate widgets based on the `role` HTML5 `data` attributes. Both use the [MVVM]({% slug overview_mvvmpattern_kendoui %}) internally.  
+* **Option 2** The `kendo.bind` method scans the passed DOM element contents for the `data-role` attributes and instantiates the respective widgets.  
+* **Option 3** The Kendo UI [AngularJS]({% slug angularjs_integration_directives %}) directives support declarative initialization based on custom element attributes or custom tag names.
 
 > **Important**
 >
-> It is strongly recommended to initialize Kendo UI widgets from HTML elements, which are part of the DOM tree. The creation of widgets from [document fragments](https://developer.mozilla.org/en-US/docs/Web/API/DocumentFragment) might cause undesired side effects or JavaScript errors.
+> The `data` attribute initialization is not designed to be combined with the Kendo UI server wrappers. The usage of wrappers is equivalent to [jQuery plug-in syntax initialization]({% slug initialize_widgets_using_jquery_plugins_installation %}). To create Kendo UI widget instances through the [MVVM]({% slug overview_mvvmpattern_kendoui %}) or [AngularJS]({% slug angularjs_integration_directives %}) mechanisms, do not use server wrappers for these instances.
 
-## Declarative Widgets
+While it is theoretically possible to initialize several different Kendo UI widgets from the same DOM element through the [jQuery plug-in syntax]({% slug initialize_widgets_using_jquery_plugins_installation %}), it is not supported with the declarative initialization from markup.
 
-### In SPA View
+> **Important**
+>
+> It is strongly recommended to initialize the Kendo UI widgets from HTML elements, which are part of the DOM tree. The creation of widgets from [document fragments](https://developer.mozilla.org/en-US/docs/Web/API/DocumentFragment) might cause undesired side effects or lead to JavaScript errors.
 
-The example below refers to a Single-Page-Application (SPA) View with an AutoComplete widget in the template. For more information on the SPA View, see the article on [building Single Page Applications]({% slug overview_kendoui_singlepageapplication %}).
+## Declarative Initialization
+
+You can declaratively initialize widgets:
+* In [Single-Page-Application (SPA) Views](#in-spa-views).
+* In the [Model-View-ViewModel (MVVM) architectural pattern](#in-mvvm).
+* In [Hybrid UI Applications](#in-hybrid-ui-applications).
+
+### In SPA Views
+
+The following example refers to a (SPA) View with an AutoComplete widget in the template. For more information on the SPA View, refer to the [article on building Single Page Applications]({% slug overview_kendoui_singlepageapplication %}).
 
 ###### Example
 
@@ -47,9 +54,9 @@ The example below refers to a Single-Page-Application (SPA) View with an AutoCom
     </script>
 ```
 
-### In MVVM Pattern
+### In MVVM
 
-The example below refers to an MVVM-bound DOM element with an AutoComplete widget.
+The following example refers to an MVVM-bound DOM element with an AutoComplete widget.
 
 ###### Example
 
@@ -67,11 +74,11 @@ The example below refers to an MVVM-bound DOM element with an AutoComplete widge
 
 > **Important**
 >
-> The `data-bind` attribute syntax establishes a two-way binding between the widget options&mdash;in that case, the data source&mdash;and the view model field (the `source`). For more information, refer to the [MVVM introduction help topic]({% slug overview_mvvmpattern_kendoui %}).
+> The `data-bind` attribute syntax establishes a two-way binding between the widget options&mdash;in this case, the Data Source&mdash;and the view model field (the `source`). For more information, refer to the [introductory article on MVVM]({% slug overview_mvvmpattern_kendoui %}).
 
 ### In Hybrid UI Applications
 
-The example below refers to a Kendo UI hybrid Application with a view and an AutoComplete widget. For more information about Hybrid UI applications, refer to the article on [building hybrid mobile applications]({% slug overview_hybridkendoui %}).
+The following example refers to a Kendo UI hybrid Application with a View and an AutoComplete widget. For more information about the Hybrid UI applications, refer to the [article on building hybrid mobile applications]({% slug overview_hybridkendoui %}).
 
 ###### Example
 
@@ -99,11 +106,15 @@ The example below refers to a Kendo UI hybrid Application with a view and an Aut
 
 ## Configuration
 
-In addition to the `data-role` attribute, the declarative initialization parses other data attributes and passes them as configuration options to the widget constructor. For more information on the supported data attributes and on how to bind them to widget events, see the [section on data attributes]({% slug dataattributes_configuration_installation %}).
+To configure widgets that are declaratively initialized, you need to be aware of some specifics such as the parsing of the `data` attributes and the AngularJS directives.  
+
+### The data Attributes
+
+In addition to the `data-role` attribute, the declarative initialization parses other `data` attributes and passes them as configuration options to the widget constructor. For more information on the supported data attributes and on how to bind them to widget events, refer to the [section on data attributes]({% slug dataattributes_configuration_installation %}).
 
 ### AngularJS Directives
 
-The example below refers to the Kendo UI AngularJS AutoComplete directive. For more information on the features of the Kendo UI AngularJS directives, see the [introductory article on AngularJS]({% slug angularjs_integration_directives %}).
+The following example refers to the AngularJS directive in the Kendo UI AutoComplete. For more information on the features of the Kendo UI AngularJS directives, refer to the [introductory article on AngularJS]({% slug angularjs_integration_directives %}).
 
 ###### Example
 

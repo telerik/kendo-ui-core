@@ -9,9 +9,10 @@ position: 1
 
 # Welcome to Kendo UI!
 
+Kendo UI<sup>®</sup> by Progress is an HTML5 user interface framework for building interactive and high-performance websites and applications.
+
 ## Overview
 
-Kendo UI<sup>®</sup> by Progress is an HTML5 user interface framework for building interactive and high-performance websites and applications.
 The framework comes with a library of 70+ UI widgets, an abundance of data-visualization gadgets, client-side data source, built-in MVVM (Model-View-ViewModel) library. Kendo UI provides AngularJS and Bootstrap integration.
 
 [Check Out Kendo UI Online Demos](http://demos.telerik.com/kendo-ui/)
@@ -20,7 +21,7 @@ Kendo UI is distributed as part of several product units that you can choose fro
 
 ### Kendo UI Professional
 
-Kendo UI Professional is one of the commercial versions of Kendo UI. It is a comprehensive framework providing 70+ Kendo UI widgets, and includes a simple and consistent programming interface, a rock-solid DataSource, out-of-the-box themes, an MVVM framework, and more. Kendo UI Professional includes widgets for enterprise-grade line-of-business applications and is suitable for creating professional websites that require expert and timely technical support.
+Kendo UI Professional is one of the commercial versions of Kendo UI. It is a comprehensive framework providing 70+ Kendo UI widgets, and includes a simple and consistent programming interface, a rock-solid Data Source, out-of-the-box themes, an MVVM framework, and more. Kendo UI Professional includes widgets for enterprise-grade line-of-business applications and is suitable for creating professional websites that require expert and timely technical support.
 
 * [List of Kendo UI Components]({% slug bundle_supportfor_kendoui_components %})
 * [Browser Support]({% slug wbe_browserand_operating_system_support %})
@@ -30,9 +31,14 @@ Kendo UI Professional is one of the commercial versions of Kendo UI. It is a com
 
 ### Kendo UI Complete
 
-Kendo UI Complete incorporates all the products in the Kendo UI family - Kendo UI Professional, [UI for ASP.NET MVC](/aspnet-mvc/introduction), [UI for JSP](/jsp/introduction) and [UI for PHP](http://docs.telerik.com/kendo-ui/php/introduction).
+Kendo UI Complete incorporates all the products in the Kendo UI family:
 
-In addition, you receive a license for the [RadSpreadProcessing](http://www.telerik.com/products/wpf/spreadsheet-processing.aspx) library for .NET.
+* Kendo UI Professional
+* [UI for ASP.NET MVC](/aspnet-mvc/introduction)
+* [UI for JSP](/jsp/introduction)
+* [UI for PHP](http://docs.telerik.com/kendo-ui/php/introduction).
+
+In addition, you also receive a license for the [RadSpreadProcessing](http://www.telerik.com/products/wpf/spreadsheet-processing.aspx) library for .NET.
 
 #### UI for ASP.NET MVC
 

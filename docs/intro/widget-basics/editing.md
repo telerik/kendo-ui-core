@@ -8,23 +8,25 @@ position: 5
 
 # Editing Functionality
 
-The editing functionality in some Kendo UI widgets is implemented with a specific editor element/form that is bound to the model using the [Kendo UI MVVM]({% slug overview_mvvmpattern_kendoui %}) bindings.
+Some Kendo UI widgets provide an editing functionality that is implemented with a specific editor element or form bound to the model by using the [Kendo UI MVVM]({% slug overview_mvvmpattern_kendoui %}) bindings.
 
 These Kendo UI widgets are:
 
-* [Grid]({% slug overview_kendoui_grid_widget %})
-* [ListView]({% slug overview_kendoui_listview_widget %})
-* [TreeList]({% slug overview_kendoui_treelist_widget %})
-* [Scheduler]({% slug overview_kendoui_scheduler_widget %})
-* [Gantt]({% slug overview_kendoui_gantt_widget %})
+* The [Kendo UI Grid]({% slug overview_kendoui_grid_widget %}).
+* The [Kendo UI ListView]({% slug overview_kendoui_listview_widget %}).
+* The [Kendo UI TreeList]({% slug overview_kendoui_treelist_widget %}).
+* The [Kendo UI Scheduler]({% slug overview_kendoui_scheduler_widget %}).
+* The [Kendo UI Gantt]({% slug overview_kendoui_gantt_widget %}).
 
 ## Getting Started
 
+You can configure the editing functionality through setting the available options, such as `editable` and `editable.template`, while the widgets that support it share some common events such as `edit`, `save`, and `remove`.
+
 ### Options
 
-The Kendo UI widgets which support editing have the following configuration options:
+The Kendo UI widgets that support editing have the following configuration options:
 
-- `editable`&mdash;This option controls whether the editing is enabled or not. For instance, the editing functionality in the Kendo UI Grid widget is disabled by default. For detailed information, refer to [the API article on editing of the Grid](/api/javascript/ui/grid#configuration-editable).
+- `editable`&mdash;Controls whether the editing is enabled or not. For instance, the editing functionality in the Kendo UI Grid widget is disabled by default. For detailed information, refer to [the API article on editing of the Grid](/api/javascript/ui/grid#configuration-editable).
 - `editable.template`&mdash;Allows you to define a custom editor template.
 
 > **Important**
@@ -33,9 +35,9 @@ The Kendo UI widgets which support editing have the following configuration opti
 
 ### Events
 
-The Kendo UI widgets which support editing have the following common events:
+The Kendo UI widgets that support editing have the following common events:
 
-- `edit`&mdash;This event is triggered before the editor form is shown. The UI elements are already bound to the model.
+- `edit`&mdash;Triggered before the editor form is shown. The UI elements are already bound to the model.
 - `save`&mdash;Triggered before the model is saved. The editor form is still open.
 - `remove`&mdash;Triggered before the model is removed.
 
@@ -55,7 +57,7 @@ For more information on how to set up the editing functionality in Kendo UI widg
 
 ## Basic Concepts
 
-### How Widgets Edit Model Instances
+### Building Editor Forms
 
 A Kendo UI widget builds an editor form dynamically based on the [`schema.model`](/api/javascript/data/model#methods-Model.define) structure and more specifically the `fields` collection, as demonstrated in the example below.
 
@@ -92,11 +94,11 @@ Once the form is created, the widget performs the following actions:
 >
 > The editor form is created and bound before the `edit` event is triggered, and is already populated.
 
-### How Specific Models Are Bound to Editor Forms
+### Binding Specific Models to Editor Forms
 
 When the `edit` event is triggered, the widget gets the corresponding model and binds the generated or custom editor form to it through the [Kendo UI MVVM pattern]({% slug overview_mvvmpattern_kendoui %}). The connection between the model fields and the form editors is done by using the [`value` binding]({% slug valuebinding_mvvm_kendoui %}).
 
-This connection abides to the following rules:
+This connection respects the following rules:
 
 - On initial load, the editor form is populated using the model values.
 - The model is updated when the related `editor` triggers a `change` event. The `value binding` gets its value and populates the model field.
@@ -104,7 +106,7 @@ This connection abides to the following rules:
 
 ## Common Scenarios
 
-### Define Custom Editor Templates
+### Defining Custom Editor Templates
 
 When the default editor form does not cover your business needs, create a custom editor form. As mentioned in the [section on getting started](#getting-started) section, the Kendo UI widgets provide an `editable.template` option that allows you to define a custom editor form.
 
@@ -117,7 +119,7 @@ The following rules apply to the editor template:
 >
 > The widget uses only one editor form for the `create` and `update` actions.
 
-### Define Model Default Values
+### Defining Model Default Values
 
 By default, the model fields have predefined values based on the field type. Note that you are also able to define the field as `nullable`.
 
@@ -139,13 +141,13 @@ If you want to define a specific default value, use the `schema.model.fields.def
 >
 > The value of the editor will be lost in favor of the model value.
 
-### Get References to Specific Editor Controls
+### Getting References to Specific Editor Controls
 
 You are able to access a particular editor element from the editor form by using the `edit` event of the widget.
 
 For a sample demo which demonstrates how to accomplish this task, refer to [this runnable example]({% slug howto_access_editor_controlsin_edit_events_grid %}).
 
-### Update Models by Using Specific Editors
+### Updating Models by Using Specific Editors
 
 If you want to modify the `model` by updating the relevant editor, trigger the `change` event manually. Thus you notify the `value binding` of the change and the model is updated accordingly.
 
@@ -153,7 +155,7 @@ If you want to modify the `model` by updating the relevant editor, trigger the `
 >
 > The Kendo UI widgets have their own [`trigger` method](/api/javascript/observable#methods-trigger), which must be used to trigger the `change` event.
 
-### Add Additional Editors without Using Kendo UI MVVM Bindings
+### Adding Additional Editors without Using Kendo UI MVVM Bindings
 
 > **Important**
 >
@@ -177,7 +179,7 @@ To do this, follow the steps below:
 
 For a sample demo that demonstrates how to add a control to the editor form, refer to [this runnable example]({% slug howto_add_controlsto_custom_event_editor_scheduler %}).
 
-### Access Models before Editing
+### Accessing Models before Editing
 
 Wire the `edit` event of the widget. You will get the model from the passed arguments.
 
@@ -191,15 +193,17 @@ Wire the `edit` event of the widget. You will get the model from the passed argu
 >
 > The Scheduler passes the `e.event` field instead of the `model` one. The event is an instance of the [`SchedulerEvent`](/api/javascript/data/schedulerevent) class. For more details, see the corresponding `edit` event API documentation of the respective Kendo UI widget.
 
-### Access Models by UID
+### Accessing Models by UID
 
 Every model has a unique identifier. It is applied to the HTML element that holds the editor form. You are able to recognize that element by the `data-uid` HTML attribute. Use that `uid` value to get the model from the DataSource of the widget by using [`getByUid` method](/api/javascript/data/datasource#methods-getByUid).
 
-### Find Out Whether Models Are New
+### Finding Out If Models Are New
 
 If you need to differentiate between `create` and `update` actions, use the [`Model.isNew()` method](/api/javascript/data/model#methods-isNew).
 
 ## Troubleshooting
+
+This section provides solutions for common issues you might encounter while configuring the editing functionality.
 
 ### Model Field Values in Edit Events Are Not Updated
 

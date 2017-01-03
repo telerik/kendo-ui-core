@@ -9,6 +9,8 @@ position: 5
 
 # JavaScript Prerequisites
 
+Kendo UI is a jQuery-based library that also supports AngularJS integration.  
+
 ## jQuery
 
 The Kendo UI library is based on [jQuery](http://jquery.com/). All Kendo UI bundles include the corresponding minified jQuery library in the `js` directory.
@@ -19,9 +21,9 @@ The Kendo UI library is based on [jQuery](http://jquery.com/). All Kendo UI bund
 
 ### Supported jQuery Versions
 
-The current official version of Kendo UI requires jQuery 1.12.3. There are cases when a new jQuery version is released. This new version usually introduces breaking changes and is not compatible with the existing Kendo UI versions. In such cases, it is recommended that you use the previous jQuery version until the next official Kendo UI version which resolves the problem is released. Normally, the jQuery version that is shipped with the Kendo UI service packs is not changed, but is updated in major releases.
+The current official version of Kendo UI requires jQuery 1.12.3. Usually, each newly released jQuery version introduces breaking changes and is not compatible with the existing Kendo UI versions. In such cases, use the previous jQuery version until the next official Kendo UI version that resolves the issue is released. Normally, the jQuery version that is shipped with the Kendo UI service packs is not changed but is updated in major releases.
 
-The following list provides jQuery compatibility information about the major Kendo UI releases and their corresponding service packs:
+The following table provides a list of the jQuery versions that are compatible with the major Kendo UI releases and their corresponding service packs.
 
 | Major Releases												                                         | jQuery Version    | Comments  |
 | :---															                                             | :---			         | :---	     |
@@ -43,13 +45,13 @@ The following list provides jQuery compatibility information about the major Ken
 | [Kendo UI 2012.1.322 (Q1 2012)]({% slug breakingchanges2012_kendoui %}#kendo-ui-2012-q1-20121322)	        |1.7.1| - |
 | [Kendo UI 2011.3.1129 (Q3 2011)]({% slug breakingchanges2012_kendoui %}#changes-from-2011-q3-sp1-201131407)  |1.7.1| - |
 
-### Previous Versions Required
+### Required Previous Versions
 
-Occasionally, a legacy web application might require an older jQuery version with which Kendo UI components are not compatible. In such cases, use a recent jQuery version together with [jQuery `Migrate`](https://github.com/jquery/jquery-migrate/). The plug-in restores the jQuery features that have been depreciated and provides for the required backward compatibility.
+Occasionally, a legacy web application might require an older jQuery version with which Kendo UI components are not compatible. In such cases, use a recent jQuery version together with the [jQuery Migrate plug-in](https://github.com/jquery/jquery-migrate/). It restores the jQuery features that have been depreciated and provides for the required backward compatibility.
 
 ## AngularJS
 
-As of the Kendo UI 2014 Q2 release, Kendo UI widgets support [AngularJS](https://angularjs.org/) integration. To activate the AngularJS directives, install the AngularJS library. Just like jQuery, its minified format is located is in the `js` directory of the Kendo UI bundle you have downloaded.
+As of the Kendo UI 2014 Q2 release, the Kendo UI widgets support [AngularJS](https://angularjs.org/) integration. To activate the AngularJS directives, install the AngularJS library. Just like jQuery, its minified format is located is in the `js` directory of the Kendo UI bundle you downloaded.
 
 > **Important**
 >
@@ -76,13 +78,13 @@ As of the Kendo UI 2014 Q2 release, Kendo UI widgets support [AngularJS](https:/
 
 ### JSZip Library
 
-The [JSZip library](https://stuk.github.io/jszip/) is a necessary prerequisite for configuring your widgets so as to support the [Excel export feature]({% slug introduction_excelexport_kendoui %}) as well as the import of Excel files in the Kendo UI Spreadsheet. The Excel export feature was first included in the [Kendo UI 2014.3.1119 (Q3 2014) release]({% slug breakingchanges2014_kendoui%}). You should include the JSZip library only if you wish to provide the Excel export or import [`fromFile()`](/api/javascript/ui/spreadsheet#methods-fromFile) functionalities.
+The [JSZip library](https://stuk.github.io/jszip/) is a necessary prerequisite for your widgets to support the [Excel export feature]({% slug introduction_excelexport_kendoui %}) as well as the import of Excel files in the Kendo UI Spreadsheet. The Excel export feature was first included in the [Kendo UI 2014.3.1119 (Q3 2014) release]({% slug breakingchanges2014_kendoui%}). Include the JSZip library only if you wish to provide the Excel export or import [`fromFile()`](/api/javascript/ui/spreadsheet#methods-fromFile) functionalities.
 
-### Tag Placement: script
+### The script Tag Placement
 
-Generally, it is recommended that you place the `script` tags before the closing `body` tag, so that the scripts are loaded and executed after the HTML markup. Usually, the Kendo UI widget initialization statements are executed in the `document.ready` event through a jQuery handler. This means that jQuery must be registered _before_ any Kendo UI widget initialization statements. When using the client-side Kendo UI widgets, you can control the placement of the initialization statements, so that the jQuery script file can be registered at the bottom of the document.
+Generally, it is recommended that you place the `script` tags before the closing `body` tag, so that the scripts are loaded and executed after the HTML markup. Usually, the Kendo UI widget initialization statements are executed in the `document.ready` event through a jQuery handler. This means that jQuery must be registered _before_ any Kendo UI widget initialization statements. When using the client-side Kendo UI widgets, you can control the placement of the initialization statements so that the jQuery script file can be registered at the bottom of the document.
 
-The server-side wrappers for the Kendo UI widgets are self-initialized. This means that each initialization script is rendered right after the HTML markup of the widget. In this case, the Kendo UI scripts can still be registered at the end of the document, but the jQuery script must be registered in the `body` before the first Kendo UI widget on the document, or in the document `head`.
+The server-side wrappers for the Kendo UI widgets are self-initialized. This means that each initialization script is rendered right after the HTML markup of the widget. In such cases, the Kendo UI scripts can still be registered at the end of the document while the jQuery script must be registered in the `body` before the first Kendo UI widget on the document, or in the document `head`.
 
 ## See Also
 

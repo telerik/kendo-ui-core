@@ -8,35 +8,34 @@ position: 4
 
 # NuGet Packages
 
-[NuGet](https://www.nuget.org) is a popular .NET package manager.
+[NuGet](https://www.nuget.org) is a popular open-source .NET package manager.
 
-Telerik maintains a number of NuGet packages related to Kendo UI.
+## Overview
 
-Official releases, service packs and internal builds are available for registered users only.
+Telerik maintains a number of NuGet packages related to Kendo UI. All official releases, service packs, and internal builds are available for registered users only.
 
-## Use the Telerik Private NuGet Feed
+## Telerik Private NuGet Feed
 
-### Install NuGet Packages
+### Installation
 
-See the [NuGet installation instructions](http://docs.telerik.com/aspnet-mvc/getting-started/nuget-install) in the UI for ASP.NET MVC documentation.
+To install Telerik NuGet packages, refer to the article on [getting started with the Telerik UI for ASP.NET MVC](http://docs.telerik.com/aspnet-mvc/getting-started/nuget-install).
 
 ### Local Content Distribution
 
-After installing the packages, the content scripts and stylesheets are copied to your application, as outlined below:
+After installing the packages, the content scripts and stylesheets are copied to your application as follows:
 * `/Scripts/kendo/<version>/`&mdash;Contains the minified JavaScript files.
-* `/Content/kendo/<version>/`&mdash;Consists of the minified CSS files and theme images.
+* `/Content/kendo/<version>/`&mdash;Contains the minified CSS files and theme images.
 
-## List of Provided Packages
+### Provided Packages
 
 The NuGet Feed provides the following packages related to the UI for ASP.NET MVC:
+* `KendoUIProfessional`&mdash;Kendo UI for ASP.NET MVC 5 Commercial.
+* `KendoUIProfessional.Trial`&mdash;Kendo UI Trial.
+* `KendoUICore`&mdash;Kendo UI Core.
 
-- `KendoUIProfessional`&mdash;Kendo UI for ASP.NET MVC 5 Commercial.
-- `KendoUIProfessional.Trial`&mdash;Kendo UI Trial.
-- `KendoUICore`&mdash;Kendo UI Core.
-
-> **Important**
->
-> The [UI for ASP.NET MVC packages](http://docs.telerik.com/aspnet-mvc/getting-started/nuget-install) are listed in a separate section.
+    > **Important**
+    >
+    > The packages for [Telerik UI for ASP.NET MVC](http://docs.telerik.com/aspnet-mvc/getting-started/nuget-install) are listed in a separate section.
 
 ## See Also
 
