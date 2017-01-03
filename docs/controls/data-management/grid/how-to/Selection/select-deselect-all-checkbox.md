@@ -1,13 +1,15 @@
 ---
-title: Select/deselect all rows with with a "select all" header Checkbox
-page_title:  Select/deselect all rows with with a "select all" header Checkbox | Kendo UI Grid
-description: "Select/deselect all rows with with a "select all" header Checkbox in the Kendo UI Grid widget."
+title: Select or Deselect All Rows with Select All Header Checkbox
+page_title: Select or Deselect All Rows with Select All Header Checkbox | Kendo UI Grid
+description: "Select or deselect all rows with a **Select All** header checkbox in the Kendo UI Grid widget."
 slug: howto_select_deselect_all_rowswith_checkboxes_grid
 ---
 
-# Select/deselect all rows with with a "select all" header Checkbox
+# Select or Deselect All Rows with Select All Header Checkbox
 
-The example below demonstrates how to select/deselect all rows in the Kendo UI Grid widget via a "select all" checkbox in the header of the template checkbox column. Selecting multiple rows via the checkboxes can be also performed. Custom styling of the checkboxes is shown as well.
+The example below demonstrates how to select or deselect all rows in a Kendo UI Grid by checking the **Select All** header of the template checkbox column.
+
+You can also select multiple rows by using the checkboxes and apply custom styling of the checkboxes.
 
 ###### Example
 
@@ -91,7 +93,7 @@ The example below demonstrates how to select/deselect all rows in the Kendo UI G
           toolbar: ["create"],
           columns: [
             //define template column with checkbox and attach click event handler
-            { 
+            {
               title: 'Select All',
               headerTemplate: `<input type="checkbox" id="header-chb" class="k-checkbox">
 <label class="k-checkbox-label" for="header-chb"></label>`,
