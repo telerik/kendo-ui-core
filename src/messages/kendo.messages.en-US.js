@@ -96,6 +96,7 @@ $.extend(true, kendo.ui.Editor.prototype.options.messages,{
   "dialogInsert": "Insert",
   "dialogButtonSeparator": "or",
   "dialogCancel": "Cancel",
+  "cleanFormatting": "Clean formatting",
   "createTable": "Create table",
   "addColumnLeft": "Add column on the left",
   "addColumnRight": "Add column on the right",
