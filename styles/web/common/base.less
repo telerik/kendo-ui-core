@@ -302,7 +302,7 @@ html body .k-button-bare.k-upload-button:hover
     .k-button:not(.k-state-disabled):hover &,
     .k-textbox:hover &,
     .k-button:active & {
-        .sprite-position(@row - @size, @column);
+        .sprite-position((@row - @size), @column);
     }
 }
 
@@ -337,7 +337,7 @@ html body .k-button-bare.k-upload-button:hover
     .k-button:not(.k-state-disabled):hover &,
     .k-textbox:hover &,
     .k-button:active & {
-        .sprite-position(@row + 1, @column, @size);
+        .sprite-position((@row + 1), @column, @size);
     }
 }
 
@@ -367,7 +367,7 @@ html body .k-button-bare.k-upload-button:hover
     .k-rtl .k-button:not(.k-state-disabled):hover &,
     .k-rtl .k-textbox:hover &,
     .k-rtl .k-button:active & {
-        .sprite-position(@row + 1, @column, @size);
+        .sprite-position((@row + 1), @column, @size);
 
         & when (@icon-positioning = "material") {
             .sprite-position(@row, @column);
@@ -858,7 +858,7 @@ input.k-checkbox,
 .k-radio-label {
    display: inline-block;
    position: relative;
-   padding-left: @checkbox-size + (4 * @checkbox-border-width);
+   padding-left: (@checkbox-size + (4 * @checkbox-border-width));
    vertical-align: text-top;
    line-height: 16px;
    cursor: pointer;

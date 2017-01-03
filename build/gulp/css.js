@@ -30,7 +30,13 @@ var cleanCssOptions = {
 
 module.exports.fromLess = lazypipe()
     .pipe(logger, { after: 'LESS complete!', extname: '.css', showChange: true })
-    .pipe(less, { relativeUrls: true, plugins: [new autoprefix({ browsers: browsers }) ] })
+    .pipe(less, {
+      strictMath: 'on',
+      relativeUrls: true,
+      plugins: [
+        new autoprefix({ browsers: browsers })
+      ]
+    })
     .pipe(replace, /\.\.\/mobile\//g, ''); // temp hack for the discrepancy between source and generated "source"
 
 module.exports.minify = lazypipe()

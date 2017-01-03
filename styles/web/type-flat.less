@@ -87,8 +87,8 @@
 @task-summary-color: lighten(@widget-text-color, 25%);
 @task-summary-selected-color: lighten(@selected-background-color, 25%);
 @main-border-radius: @border-radius;
-@list-border-radius: @main-border-radius - 1;
-@inner-border-radius: @main-border-radius - 1.2;
+@list-border-radius: (@main-border-radius - 1);
+@inner-border-radius: (@main-border-radius - 1.2);
 @slider-border-radius: 13px;
 @header-text-color: @background;
 @header-background-color: @base;
@@ -1892,7 +1892,7 @@ div.k-filebrowser-dropzone em
 
 .k-scheduler-mobile .k-event
 {
-    border-radius: @inner-border-radius - 1;
+    border-radius: (@inner-border-radius - 1);
 }
 
 /* Adaptive Grid */

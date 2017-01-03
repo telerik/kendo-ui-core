@@ -94,8 +94,8 @@
 @shadow-color: rgba(0, 0, 0, .3);
 @shadow-inset-color: contrast(@base, lighten(@success, 27%), darken(@success, 9%), 0.5);
 @main-border-radius: @border-radius;
-@list-border-radius: @main-border-radius - 1;
-@inner-border-radius: @main-border-radius - 1;
+@list-border-radius: (@main-border-radius - 1);
+@inner-border-radius: (@main-border-radius - 1);
 @slider-border-radius: 13px;
 @default-icon-opacity: 0.9;
 @calendar-border-radius: 4px;
@@ -1940,7 +1940,7 @@ div.k-filebrowser-dropzone em
 
 .k-scheduler-mobile .k-event
 {
-    border-radius: @inner-border-radius - 1;
+    border-radius: (@inner-border-radius - 1);
 }
 
 /* Adaptive Grid */

@@ -58,8 +58,8 @@
 @tooltip-border-color: darken(@normal-text-color, 21%);
 @tooltip-text-color: @normal-text-color;
 @main-border-radius: 13px;
-@list-border-radius: @main-border-radius - 1;
-@inner-border-radius: @main-border-radius - 1;
+@list-border-radius: (@main-border-radius - 1);
+@inner-border-radius: (@main-border-radius - 1);
 @slider-border-radius: 13px;
 @draghandle-border-radius: 0;
 @draghandle-border-color: @button-border-color;
@@ -1855,7 +1855,7 @@ div.k-filebrowser-dropzone em
 
 .k-scheduler-mobile .k-event
 {
-    border-radius: @inner-border-radius - 1;
+    border-radius: (@inner-border-radius - 1);
 }
 
 /* Adaptive Grid */
