@@ -50,7 +50,7 @@ In addition, `startswith`, `endswith`, `contains`, `doesnotstartwith` and `doesn
         sheet.range("A1:C4").values(values);
 
         var filter = new kendo.spreadsheet.CustomFilter({
-            operator: "or",
+            logic: "or",
             criteria: [
                 { operator: "starstwith", value: "Jo" },
                 { operator: "starstwith", value: "Ja" }
