@@ -1,13 +1,15 @@
 ---
-title: Add Image Preview Before Uploading File
-page_title: Upload Files and Add Image Preview | Kendo UI Upload
+title: Add Image Previews before Uploading Files
+page_title: Add Image Previews before Uploading Files | Kendo UI Upload
 description: "Learn how to add an image preview to a file with the Kendo UI Upload widget."
 slug: howto_add_image_preview
 ---
 
-# Add Image Preview Before Uploading File
+# Add Image Previews before Uploading Files
 
-The example demonstrates how to read the file in the select event of the Kendo UI Upload widget in order to add an image preview.
+Depending on your project, you might need to add an image preview before you upload a file when working with the Kendo UI Upload widget.
+
+The following example demonstrates how to add an image preview and read the file in the `select` event of the Upload.
 
 ###### Example
 
