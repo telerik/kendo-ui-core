@@ -9,23 +9,27 @@ position: 1
 
 # Widget DOM Elements
 
-Each Kendo UI widget instance keeps references to two elements&mdash;`element` and `wrapper`. The hybrid Kendo UI widgets have an `element` reference only.
+Each Kendo UI widget instance keeps references to the `element` and `wrapper` elements.
+
+The Kendo UI Hybrid widgets have an `element` reference only.
 
 ## References
 
+The `element` is the element from which the widget is initialized while the `wrapper` is the outermost element, which is a part of the widget.
+
 ### Element
 
-The `element` is the element from which the widget is initialized. Depending on the widget, it may be visible&mdash;as in the AutoComplete, Calendar, DatePicker and other&mdash;or hidden&mdash;as in the DropDownList and Upload. A reference to this element is also returned by the initialization statement.
+Depending on the widget, `element` might be visible&mdash;as in the AutoComplete, Calendar, DatePicker, or hidden&mdash;as in the DropDownList and Upload. A reference to this element is also returned by the initialization statement.
 
-For more information, see the [`element`](/api/javascript/ui/widget#fields-element) section in the [widget API](/api/javascript/ui/widget).
+For more information, refer to the [`element`](/api/javascript/ui/widget#fields-element) configuration in the [widget API](/api/javascript/ui/widget).
 
 ### Wrapper
 
-The `wrapper` is the outermost element, which is a part of the widget. Depending on the widget and the exact scenario, the wrapper and the element might match. For example, if the Grid is initialized from a `<div>`, the two references match. But if the Grid is initialized from a `<table>`, then `element` points to the `<table>`, while `wrapper` points to the wrapper `<div>`.
+Depending on the widget and the exact scenario, the `wrapper` and the `element` might match. For example, if the Grid is initialized from a `<div>`, the two references match. But if the Grid is initialized from a `<table>`, then `element` points to `<table>`, while `wrapper` points to `<div>`.
 
-For more information, see the [`wrapper`](/api/javascript/ui/widget#fields-wrapper) section in the [widget API](/api/javascript/ui/widget).
+For more information, refer to the [`wrapper`](/api/javascript/ui/widget#fields-wrapper) configuration in the [widget API](/api/javascript/ui/widget).
 
-The example below demonstrates how to use the `element` and `wrapper` references.
+The following example demonstrates how to use the `element` and `wrapper` references.
 
 ###### Example
 
@@ -49,7 +53,7 @@ The example below demonstrates how to use the `element` and `wrapper` references
 
 A reference to the widget wrapper might be needed when doing DOM or CSS manipulations. For example, to hide a widget, hide the `wrapper`. Hiding the `element` might partially hide the widget or not hide it at all. The `wrapper` is also the most suitable HTML node for appending custom CSS classes.
 
-Obtaining a reference to the widget `element` from the widget object is a relatively rare scenario, but might be helpful in some cases, especially when hardcoding IDs in jQuery selectors is not desired.
+Obtaining a reference to the `element` of the widget from the widget object is a relatively rare scenario, but might be helpful in some cases, especially when hardcoding IDs in jQuery selectors is not desired.
 
 ## See Also
 

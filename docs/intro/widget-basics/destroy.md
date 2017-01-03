@@ -1,38 +1,45 @@
 ---
-title: Destroy Widgets
-page_title: Destroy Widgets | Kendo UI Getting Started
+title: Destroying Widgets
+page_title: Destroying Widgets | Kendo UI Getting Started
 description: "Destroy Kendo UI widgets."
 previous_url: /framework/widgets/destroy
 slug: destroywidgets_kendoui_gettingstarted
 position: 4
 ---
 
-# Destroy Widgets
+# Destroying Widgets
+
+Every Kendo UI widget features a `destroy` method.
 
 ## Overview
 
-Every Kendo UI widget has a `destroy` method which:
+The `destroy` method of the Kendo UI widgets:
 
-1. Deletes the widget instance (client object). It is no longer accessible and all its event handlers stop working.
-1. Removes auto-generated HTML content, which is **outside** the widget, e.g. detached popups, dropdowns, etc. The main widget HTML remains intact and if needed, it should be removed from the DOM manually.
-The Window widget is an exception, as it represents a detached popup on its own.
-1. Destroys all child widgets with the help of [`kendo.destroy()` method](/api/framework/kendo#methods-destroy).
+* Deletes the widget instance (client object). It is no longer accessible and all its event handlers stop working.
+* Removes auto-generated HTML content, which is outside the widget&mdash;for example, detached popups and dropdowns. The main HTML of the widget remains intact and if needed, you have to manually remove it from the DOM. The Window widget is an exception because it represents a detached popup on its own.
+* Destroys all child widgets with the help of the [`kendo.destroy()` method](/api/framework/kendo#methods-destroy).
 
 ## Options
 
+It is possible for you to:
+* [Destroy widgets manually](#destroy-widgets-manually).
+* [Destroy widgets automatically](#destroy-widgets-automatically).
+* [Destroy widgets that are created through the MVVM pattern](#destroy-widgets-created-through-mvvm).
+* [Destroy multiple widgets](#destroy-multiple-widgets).
+
 ### Destroy Widgets Manually
 
-You may wish to manually destroy widgets in several possible cases:
+You might need to manually destroy widgets in the following possible cases:
 
 * The widget is no longer needed.
-* The widget is placed inside a container, which will be updated via an Ajax request or DOM replacement. Destroying nested widgets in such cases is strongly recommended to prevent memory leaks or other unexpected side effects.
-* The widget settings and behavior must be drastically changed, which cannot be achieved via available API methods.
+* The widget is placed inside a container, which will be updated through an Ajax request or DOM replacement. Destroying nested widgets in such cases is strongly recommended to prevent memory leaks or other unexpected side effects.
+* The widget settings and behavior must be drastically changed, which cannot be achieved through the available API methods.
 
 > **Important**
 >
-> Creating a new widget instance from the leftovers of a destroyed widget might work, but is not recommended. Initialize new widgets from different, such as newly appended, DOM elements. In some cases it is also possible to empty the widget container and initialize a new instance from the empty element.
+> Avoid creating a new widget instance from the leftovers of a destroyed widget. To initialize new widgets, use different, newly appended DOM elements. In some cases it is also possible to empty the widget container and initialize a new instance from the empty element.
 
-The example below demonstrates how to destroy and remove a Kendo UI Grid widget.
+The following example demonstrates how to destroy and remove a Kendo UI Grid widget.
 
 ###### Example
 
@@ -51,15 +58,15 @@ The example below demonstrates how to destroy and remove a Kendo UI Grid widget.
 <!--*-->
 ### Destroy Widgets Automatically
 
-Kendo UI widgets are destroyed automatically when the web page is unloaded.
+The Kendo UI widgets are destroyed automatically when the web page is unloaded.
 
-### Destroy Widgets Created via MVVM
+### Destroy Widgets Created through MVVM
 
-To properly destroy widgets [created declaratively]({% slug dataattributes_configuration_installation %}) via the [Kendo UI MVVM mechanism]({% slug overview_mvvmpattern_kendoui %}), first use the [`kendo.unbind()`](/api/javascript/kendo#methods-unbind) method to remove any MVVM bindings related to the widget, and then call [`kendo.destroy()`](/api/framework/kendo#methods-destroy) for the appropriate container, or the [`destroy()`](/api/javascript/ui/widget#methods-destroy) method of each widget inside this container.
+To properly destroy widgets [created declaratively]({% slug dataattributes_configuration_installation %}) through the [Kendo UI MVVM mechanism]({% slug overview_mvvmpattern_kendoui %}), first use the [`kendo.unbind()`](/api/javascript/kendo#methods-unbind) method to remove any MVVM bindings related to the widget, and then call [`kendo.destroy()`](/api/framework/kendo#methods-destroy) for the appropriate container, or the [`destroy()`](/api/javascript/ui/widget#methods-destroy) method of each widget inside this container.
 
 ### Destroy Multiple Widgets
 
-In addition to destroying a particular Kendo UI widget, the Kendo UI framework provides a [`kendo.destroy()` method](/api/framework/kendo#methods-destroy), which can destroy multiple widgets, which are placed inside a given container.
+In addition to destroying a particular Kendo UI widget, the Kendo UI framework provides a [`kendo.destroy()` method](/api/framework/kendo#methods-destroy), which can destroy multiple widgets that are placed inside a specific container.
 
 ## See Also
 

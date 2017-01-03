@@ -1,17 +1,21 @@
 ---
 title: CDN Services
 page_title: CDN Services | Kendo UI Getting Started
-description: "Install Kendo UI widgets by using CDN services."
+description: "Install Kendo UI widgets by using the Kendo UI CDN services."
 previous_url: /install/cdn
 slug: kendoui_cdn_services_installation
-position: 3
+position: 2
 ---
 
 # CDN Services
 
-The Kendo UI CDN is hosted on the [Amazon CloudFront](https://aws.amazon.com/cloudfront/). To access the Kendo UI CDN Service, use either of the options described below.
+The Kendo UI CDN is hosted on the [Amazon CloudFront](https://aws.amazon.com/cloudfront/).
 
-## Protocols
+## Accessing the CDN
+
+To access the Kendo UI CDN Services, you can use either:
+* The HTTP protocol, or
+* The HTTPS protocol.
 
 ### Use the HTTP
 
@@ -27,39 +31,41 @@ For example, the `{{ site.cdnVersion }}` version can be loaded from:
 >
 > Only the Kendo UI official releases and service packs are uploaded to the CDN. Internal builds are not published to the CDN.
 
-To load the minified Kendo UI Core script, which is available as of Kendo UI Q1 2014 SP1, use the `http://kendo.cdn.telerik.com/{{ site.cdnVersion }}/js/kendo.ui.core.min.js` URL.
+As of the Kendo UI Q1 2014 SP1 release, the minified Kendo UI Core scripts have been available. To load them, use the `http://kendo.cdn.telerik.com/{{ site.cdnVersion }}/js/kendo.ui.core.min.js` URL.
 
 > **Important**
 >
-> The http://cdn.kendostatic.com/ URL remains active, but is no longer recommended for new projects.
+> The http://cdn.kendostatic.com/ URL remains active but is no longer recommended for new projects.
 
 ### Use the HTTPS
 
-To access the Kendo UI CDN service through the HTTPS protocol, use the same host name as above, and replace the scheme (protocol) with `https`&mdash;`https://kendo.cdn.telerik.com/{{ site.cdnVersion }}/js/kendo.all.min.js`.
+To access the Kendo UI CDN service through the HTTPS protocol, use the same host name as above and replace the scheme (protocol) with `https`&mdash;`https://kendo.cdn.telerik.com/{{ site.cdnVersion }}/js/kendo.all.min.js`.
 
 > **Important**
 >
-> The https://da7xgjtj801h2.cloudfront.net/ URL remains active, but is no longer recommended for new projects.
+> The https://da7xgjtj801h2.cloudfront.net/ URL remains active but is no longer recommended for new projects.
 
 ## Troubleshooting
 
+This section provides solutions for common issues you might encounter while using the Kendo UI CDN services.
+
 ### Handle Disruption and Connection Issues
 
-Although the [Amazon CloudFront service](https://aws.amazon.com/cloudfront/) provides a reliable level of uptime support, you might encounter disruption or connection troubles. After you check the status of the systems at [http://status.aws.amazon.com/](http://status.aws.amazon.com/), the CDN status is reported as healthy and is operates normally.
+Although the [Amazon CloudFront service](https://aws.amazon.com/cloudfront/) provides a reliable level of uptime support, you might encounter disruption or connection issues. After you check the status of the systems at [http://status.aws.amazon.com/](http://status.aws.amazon.com/), the CDN status is reported as healthy and operates normally.
 
-You might be experiencing Internet or network connectivity problems, or DNS problems, or it is possible that firewalls, antivirus, or other security software incorrectly filters out the CDN scripts or modifies (breaks) them on-the-fly.
-
-**Solution**
-
-Contact your system administrator because remote investigation of connection problems is outside the scope of Kendo UI support.
-
-### Refer Kendo UI from CDN with Local Script Fallback
-
-Kendo UI internal builds are not uploaded on CDN, because they are intended only for clients with a commercial license. Only major releases and service packs are uploaded on the Kendo UI CDN.
+You might be experiencing Internet, network connectivity, or DNS problems. It is also possible that firewalls, antivirus, or other security software incorrectly filters out the CDN scripts or modifies (breaks) them on-the-fly.
 
 **Solution**
 
-Use private CDN services for internal builds. It is recommendable to implement a local fallback when using any kind of CDN.
+Contact your system administrator because remote investigation of connection problems is outside the scope of the Kendo UI Support Team.
+
+### Refer Kendo UI from CDN with Local Script Fallbacks
+
+The Kendo UI internal builds are not uploaded on CDN, because they are intended only for clients with a commercial license. Only major releases and service packs are uploaded on the Kendo UI CDN.
+
+**Solution**
+
+For internal builds, use private CDN services. It is recommended to implement a local fallback when using any kind of CDN.
 
 ###### Example
 
@@ -101,7 +107,7 @@ Use private CDN services for internal builds. It is recommendable to implement a
 
 > **Important**
 >
-> For more information on the topic, see [Scott Hanselman's blog post **Fallback from CDN to Local Scripts**](http://www.hanselman.com/blog/CDNsFailButYourScriptsDontHaveToFallbackFromCDNToLocalJQuery.aspx).
+> For more information on the topic, refer to [Scott Hanselman's blog post **Fallback from CDN to Local Scripts**](http://www.hanselman.com/blog/CDNsFailButYourScriptsDontHaveToFallbackFromCDNToLocalJQuery.aspx).
 
 ## See Also
 

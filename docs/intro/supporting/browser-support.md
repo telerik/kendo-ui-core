@@ -9,9 +9,11 @@ position: 1
 
 # Web Browser and Operating System Support
 
+The Kendo UI components are designed to support all major browsers and operating systems.
+
 ## Web Browser Support
 
-The [Kendo UI components](http://demos.telerik.com/kendo-ui/) are designed to support all major browsers and to operate without the worries of a cross-browser compatibility, standards compliance, or touch-device support. However, depending on the specifics of your project and the components you prefer to use, the browser support provided by Kendo UI widgets might vary between the versions.
+The [Kendo UI widgets](http://demos.telerik.com/kendo-ui/) can seamlessly operate without concerns for cross-browser compatibility, standards compliance, or touch-device support. However, depending on the specifics of your project and the components you prefer to use, the browser support provided by Kendo UI widgets might vary between the versions.
 
 ### General
 
@@ -37,9 +39,9 @@ The [hybrid UI widgets and frameworks]({% slug bundle_supportfor_kendoui_compone
 | Firefox           | Not supported                    |
 | OS X Safari       | [6.2.6 or later](https://en.wikipedia.org/wiki/Safari_version_history#Mac)|
 
-### Charts, Gauges, Barcodes, Diagrams, and Maps
+### Data Visualizing Widgets
 
-[Kendo UI widgets rendering data visualization]({% slug bundle_supportfor_kendoui_components %}) may require more recent browser versions as well. If you want to use them in your project, consider the information below.
+[Kendo UI widgets rendering data visualization]({% slug bundle_supportfor_kendoui_components %}), such as Charts, Gauges, Barcodes, Diagrams, and Maps, might require more recent browser versions as well. If you want to use them in your project, consider the information below.
 
 **Fully supported browsers**
 
@@ -71,8 +73,8 @@ The Kendo UI PDF generator is tested and supported in the following _desktop_ br
 
 Officially, PDF export is not supported on mobile because of browser limitations and CORS-related security restrictions in hybrid applications. For example, it is not possible to load locally stored font files in hybrid applications. Though exporting in PDF might work on some mobile devices in specific scenarios, PDF export is _not_ supported in:
 
-* Mobile browsers
-* Hybrid mobile applications
+* Mobile browsers.
+* Hybrid mobile applications.
 
 ### Best Performance
 
@@ -115,6 +117,8 @@ To ensure the best performance of your project, make sure that you:
     ```
 
 ## Operating System Support
+
+The following table lists the operating systems and their versions that are compatible with Kendo UI.
 
 | PLATFORM          | VERSION               |
 | :---------------- | :-------------------- |
