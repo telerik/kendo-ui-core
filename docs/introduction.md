@@ -26,7 +26,7 @@ Kendo UI Professional is one of the commercial versions of Kendo UI. It is a com
 * [Browser Support]({% slug wbe_browserand_operating_system_support %})
 * [Evaluate Kendo UI Professional](http://www.telerik.com/download/kendo-ui)
 * [Get a License](http://www.telerik.com/purchase/kendo-ui)
-* [Licensee Agreement](http://www.telerik.com/purchase/license-agreement/kendo-ui-professional)
+* [License Agreement](http://www.telerik.com/purchase/license-agreement/kendo-ui-professional)
 
 ### Kendo UI Complete
 
@@ -42,7 +42,7 @@ In addition, you receive a license for the [RadSpreadProcessing](http://www.tele
 * [Browser Support]({% slug wbe_browserand_operating_system_support %})
 * [Evaluate UI for ASP.NET MVC](https://www.telerik.com/download-trial-file/v2/ui-for-asp.net-mvc)
 * [Get a License](http://www.telerik.com/purchase/aspnet-mvc)
-* [Licensee Agreement](http://www.telerik.com/purchase/license-agreement/aspnet-mvc)
+* [License Agreement](http://www.telerik.com/purchase/license-agreement/aspnet-mvc)
 * [Documentation](http://docs.telerik.com/aspnet-mvc/introduction)
 
 #### UI for ASP.NET Core
@@ -53,7 +53,7 @@ In addition, you receive a license for the [RadSpreadProcessing](http://www.tele
 * [Browser Support]({% slug wbe_browserand_operating_system_support %})
 * [Evaluate UI for ASP.NET Core](https://www.telerik.com/download-trial-file/v2/ui-for-asp.net-mvc)
 * [Get a License](http://www.telerik.com/purchase/aspnet-mvc)
-* [Licensee Agreement](http://www.telerik.com/purchase/license-agreement/aspnet-mvc)
+* [License Agreement](http://www.telerik.com/purchase/license-agreement/aspnet-mvc)
 * [Documentation](http://docs.telerik.com/aspnet-core/introduction)
 
 #### UI for JSP
@@ -64,7 +64,7 @@ In addition, you receive a license for the [RadSpreadProcessing](http://www.tele
 * [Browser Support]({% slug wbe_browserand_operating_system_support %})
 * [Evaluate UI for JSP](http://www.telerik.com/download/jsp-ui)
 * [Get a License](http://www.telerik.com/purchase/jsp-ui)
-* [Licensee Agreement](http://www.telerik.com/purchase/license-agreement/jsp-ui)
+* [License Agreement](http://www.telerik.com/purchase/license-agreement/jsp-ui)
 * [Documentation](/jsp/introduction)
 
 #### UI for PHP
@@ -75,7 +75,7 @@ In addition, you receive a license for the [RadSpreadProcessing](http://www.tele
 * [Browser Support]({% slug wbe_browserand_operating_system_support %})
 * [Evaluate UI for PHP](http://www.telerik.com/download/php-ui)
 * [Get a License](http://www.telerik.com/purchase/php-ui)
-* [Licensee Agreement](http://www.telerik.com/purchase/license-agreement/php-ui)
+* [License Agreement](http://www.telerik.com/purchase/license-agreement/php-ui)
 * [Documentation](/php/introduction)
 
 #### RadSpreadProcessing
