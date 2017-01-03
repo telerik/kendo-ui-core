@@ -740,7 +740,7 @@ var __meta__ = { // jshint ignore:line
             '<span role="textbox" aria-haspopup="true" class="k-widget k-colorpicker k-header">' +
                 '<span class="k-picker-wrap k-state-default">' +
                     '# if (toolIcon) { #' +
-                        '<span class="k-tool-icon #= toolIcon #">' +
+                        '<span class="k-icon k-tool-icon #= toolIcon #">' +
                             '<span class="k-selected-color"></span>' +
                         '</span>' +
                     '# } else { #' +
