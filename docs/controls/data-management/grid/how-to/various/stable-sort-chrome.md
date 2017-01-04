@@ -2,6 +2,7 @@
 title: Implement Stable Sort in Chrome
 page_title: Implement Stable Sort in Chrome | Kendo UI Grid
 description: "Learn how to implement a stable sort in Google Chrome when using the Kendo UI Grid widget."
+previous_url: /controls/data-management/grid/how-to/stable-sort-chrome
 slug: howto_implement_stable_sortin_chrome_grid
 ---
 

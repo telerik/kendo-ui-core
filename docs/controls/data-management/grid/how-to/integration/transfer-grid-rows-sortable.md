@@ -1,13 +1,14 @@
 ---
-title: Create Reorderable Grids with Restricted Rows Using Sortable
-page_title: Create Reorderable Grids with Restricted Rows Using Sortable | Kendo UI Grid
-description: "Learn how to restrict rows reordering in a Kendo UI Grid with a Kendo UI Sortable widget."
-slug: howto_restrictreordergridrowssortable_grid
+title: Transfer Rows in Grids Using Sortable
+page_title: Transfer Rows in Grids Using Sortable | Kendo UI Sortable
+description: "Learn how to move a row from one Kendo UI Grid to another using the Kendo UI Sortable widget."
+previous_url: /controls/data-management/grid/how-to/transfer-grid-rows-sortable
+slug: howto_transferrowsingridsortable_grid
 ---
 
-# Create Reorderable Grids with Restricted Rows Using Sortable
+# Transfer Rows in Grids Using Sortable
 
-To see the example on how to reorder Kendo UI Grid rows using the Kendo UI Sortable widget and disable the top rows from reordering, refer to [this how-to article]({% slug howto_restrict_reordergridrows_sortable %}).
+To see the example on how to move a row from one Kendo UI Grid to another by dragging it from the first Grid to the second one and vice versa, refer to [this how-to article]({% slug howto_transfergridrows_sortable %}).
 
 ## See Also
 

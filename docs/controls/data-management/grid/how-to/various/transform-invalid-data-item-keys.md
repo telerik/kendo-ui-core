@@ -2,6 +2,7 @@
 title: Transform Invalid Data Item Keys into Valid Ones
 page_title: Transform Invalid Data Item Keys into Valid Ones | Kendo UI Grid
 description: "Learn how to use the `schema.parse()` method to replace the non-supported keys with supported ones in the Kendo UI Grid."
+previous_url: /controls/data-management/grid/how-to/transform-invalid-data-item-keys
 slug: howto_transforminvaliddataitemkety_grid
 ---
 

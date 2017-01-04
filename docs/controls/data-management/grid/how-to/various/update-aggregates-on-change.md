@@ -2,6 +2,7 @@
 title: Update Aggregates on Change
 page_title: Update Aggregates on Change | Kendo UI Grid Widget
 description: "Learn how to update the aggregates shown by the Kendo UI Grid when a value is changed."
+previous_url: /controls/data-management/grid/how-to/update-aggregates-on-change
 slug: howto_update_aggregatesonchange_grid
 ---
 

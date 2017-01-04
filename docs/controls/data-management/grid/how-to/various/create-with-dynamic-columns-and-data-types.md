@@ -2,12 +2,13 @@
 title: Create Grids with Dynamic Columns and Data Types
 page_title: Create Grids with Dynamic Columns and Data Types | Kendo UI Grid
 description: "Learn how to create a Kendo UI Grid with column and data fields information which is retrieved during runtime."
+previous_url: /controls/data-management/grid/how-to/create-with-dynamic-columns-and-data-types
 slug: howto_createdynamiccolumnsdatatypes_grid
 ---
 
 # Create Grids with Dynamic Columns and Data Types
 
-The example below demonstrates how to create a Kendo UI Grid with column and data-field information that is retrieved during runtime. 
+The example below demonstrates how to create a Kendo UI Grid with column and data-field information that is retrieved during runtime.
 
 ###### Example
 
@@ -28,7 +29,7 @@ The example below demonstrates how to create a Kendo UI Grid with column and dat
       function generateGrid(response) {
         var model = generateModel(response);
         var columns = generateColumns(response);
-        
+
         var grid = $("#grid").kendoGrid({
           dataSource: {
             transport:{
