@@ -9,7 +9,7 @@
         setup: function() {
             kendo.effects.disable();
             div = $("<div style='background:red'>popup</div>");
-            anchor = $("<div style='background:blue;position:absolute;left:100px;top:100px;'>anchor</div>").appendTo(QUnit.fixture);
+            anchor = $("<div style='background:blue;position:absolute;left:100px;top:100px;'>anchor</div>").appendTo($("#qunit-fixture"));
         },
         teardown: function() {
             if (popup) {
@@ -21,7 +21,7 @@
     });
 
     test("updates zIndex based on anchor container property", function() {
-        QUnit.fixture.css({ zIndex: 2, position: 'relative' });
+        $("#qunit-fixture").css({ zIndex: 2, position: 'relative' });
         popup = new Popup(div, { anchor: anchor });
 
         popup.open();
@@ -495,7 +495,7 @@
     });
 
     asyncTest("triggering the toggleEvent on the toggleTarget toggles the popup", function() {
-        var toggleTarget = $("<div />").appendTo(QUnit.fixture);
+        var toggleTarget = $("<div />").appendTo($("#qunit-fixture"));
         popup = new Popup(div, {
             open: function() {
                 ok(true);
@@ -508,7 +508,7 @@
     });
 
     test("update position of the popup on window.onresize", function() {
-        var toggleTarget = $("<div />").appendTo(QUnit.fixture);
+        var toggleTarget = $("<div />").appendTo($("#qunit-fixture"));
 
         var called = false,
             MyPopup = Popup.extend({
@@ -563,7 +563,7 @@
                 }
             });
 
-        var toggleTarget = $("<div />").appendTo(QUnit.fixture);
+        var toggleTarget = $("<div />").appendTo($("#qunit-fixture"));
 
         popup = new MyPopup(div, {
             animation: false,
@@ -583,7 +583,7 @@
                 }
             });
 
-        var toggleTarget = $("<div />").appendTo(QUnit.fixture);
+        var toggleTarget = $("<div />").appendTo($("#qunit-fixture"));
 
         popup = new MyPopup(div, {
             animation: false,
@@ -604,7 +604,7 @@
                 }
             });
 
-        var toggleTarget = $("<div />").appendTo(QUnit.fixture);
+        var toggleTarget = $("<div />").appendTo($("#qunit-fixture"));
         popup = new MyPopup(div, {
             animation: false,
             collision: "flip",
@@ -624,7 +624,7 @@
                 }
             });
 
-        var toggleTarget = $("<div />").appendTo(QUnit.fixture);
+        var toggleTarget = $("<div />").appendTo($("#qunit-fixture"));
         popup = new MyPopup(div, {
             animation: false,
             collision: "flip flip",
@@ -728,7 +728,7 @@
     });
 
     test("gets biggest zindex if sibling container does not have zIndex", function() {
-        var anchor = $("<div style='background:blue'>anchor</div>").appendTo($("<div />").appendTo(QUnit.fixture));
+        var anchor = $("<div style='background:blue'>anchor</div>").appendTo($("<div />").appendTo($("#qunit-fixture")));
         anchor.wrap('<div style="z-index:2; position: relative;" />');
 
         popup = new Popup(div, { anchor: anchor });
@@ -751,7 +751,7 @@
     });
 
     test("add direction class to the anchor and popup", function() {
-        anchor = $("<div style='background:blue;position:absolute;left:100px;top:100px;'><div class='k-dropdown-wrap'>anchor</div></div>").appendTo(QUnit.fixture);
+        anchor = $("<div style='background:blue;position:absolute;left:100px;top:100px;'><div class='k-dropdown-wrap'>anchor</div></div>").appendTo($("#qunit-fixture"));
         popup = new Popup(div, { anchor: anchor });
         popup.open();
 
@@ -761,7 +761,7 @@
     });
 
     test("removes direction class from the anchor and popup", function() {
-        anchor = $("<div style='background:blue;position:absolute;left:100px;top:100px;'><div class='k-dropdown-wrap'>anchor</div></div>").appendTo(QUnit.fixture);
+        anchor = $("<div style='background:blue;position:absolute;left:100px;top:100px;'><div class='k-dropdown-wrap'>anchor</div></div>").appendTo($("#qunit-fixture"));
         popup = new Popup(div, { anchor: anchor });
 
         popup.open();
@@ -830,7 +830,7 @@
     test("exclude shadows during positioning", function() {
         var body = $(document.body);
         var defaultMargin = body.css("margin");
-        var localAnchor = $("<div style='background:blue;'>anchor</div>").appendTo(QUnit.fixture);
+        var localAnchor = $("<div style='background:blue;'>anchor</div>").appendTo($("#qunit-fixture"));
 
         body.css("margin", 0);
         div.css("box-shadow", "0 2px 2px 0 rgba(0,0,0,.3)");
@@ -854,7 +854,7 @@
             svgWrapper.append(foreignObjectHtml);
 
             div = $("<div style='background:red'>popup</div>");
-            anchor = $("<div style='background:blue;position:absolute;left:100px;top:100px;'>anchor</div>").appendTo(QUnit.fixture);
+            anchor = $("<div style='background:blue;position:absolute;left:100px;top:100px;'>anchor</div>").appendTo($("#qunit-fixture"));
         },
         teardown: function() {
             if (popup) {
