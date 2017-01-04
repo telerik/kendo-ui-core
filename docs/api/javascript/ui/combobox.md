@@ -673,6 +673,20 @@ If set to `true` the widget will automatically use the first suggestion as its v
     });
     </script>
 
+### syncValueAndText `Boolean`*(default: true)*
+
+When set to `true` the widget will automatically set selected value to the typed custom text. Set the option to `false` to
+clear the selected value but keep the custom text.
+
+#### Example - disable automatic sync between value and text
+
+    <input id="combobox" />
+    <script>
+    $("#combobox").kendoComboBox({
+      syncValueAndText: true
+    });
+    </script>
+
 ### headerTemplate `String|Function`
 
 Specifies a static HTML content, which will be rendered as a header of the popup element.

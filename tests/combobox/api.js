@@ -399,6 +399,22 @@ test("text should set custom value", function() {
     equal(combobox.text(), "custom");
 });
 
+test("text should set custom text and keep value empty", function() {
+    var combobox = new ComboBox(input, {
+        dataTextField: "text",
+        dataValueField: "value",
+        dataSource: [{text: "foo", value: 1}, {text:2, value:2}],
+        syncValueAndText: false
+    });
+
+    combobox.select(1);
+    combobox.text("custom");
+
+    ok(!combobox.ul.children().hasClass(SELECTED));
+    equal(combobox.value(), "");
+    equal(combobox.text(), "custom");
+});
+
 test("text method selects item depending on ignoreCase option", function() {
     var combobox = new ComboBox(input, {
         dataSource: ["foo", "Foo"],

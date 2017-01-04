@@ -365,6 +365,17 @@ test("allow custom value", 1, function() {
     equal(combobox.value(), "ffff");
 });
 
+test("allow custom text when sync is disabled", 2, function() {
+    create({
+        syncValueAndText: false
+    });
+
+    combobox.input.val("ffff").blur();
+
+    equal(combobox.value(), "");
+    equal(combobox.text(), "ffff");
+});
+
 asyncTest("do not search if text does not changed", 1, function() {
     create({
         delay: 0
@@ -889,6 +900,34 @@ test("text method should set custom value to already added custom option", 2, fu
         change: function() {
             equal(this.value(), values.shift());
         }
+    });
+
+    var input = combobox.input;
+
+    input.focus().val("unknown");
+    combobox.search();
+    input.blur();
+
+    input.focus().val("unknown2");
+    combobox.search();
+    input.blur();
+});
+
+test("text method should set custom text to already added custom option keeping value empty", 4, function() {
+    var values = ["unknown", "unknown2"];
+    var select = $("<select></select>");
+
+    combobox = new ComboBox(select, {
+        dataTextField: "text",
+        dataValueField: "value",
+        dataSource: data,
+        filter: "contains",
+        delay: 0,
+        change: function() {
+            equal(this.text(), values.shift());
+            equal(this.value(), "");
+        },
+        syncValueAndText: false
     });
 
     var input = combobox.input;

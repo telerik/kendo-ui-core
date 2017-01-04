@@ -142,7 +142,8 @@ var __meta__ = { // jshint ignore:line
             template: null,
             groupTemplate: "#:data#",
             fixedGroupTemplate: "#:data#",
-            clearButton: true
+            clearButton: true,
+            syncValueAndText: true
         },
 
         events:[
@@ -178,6 +179,31 @@ var __meta__ = { // jshint ignore:line
             that._clear.off(CLICK + " " + MOUSEDOWN);
 
             Select.fn.destroy.call(that);
+        },
+
+        _change: function() {
+            var that = this;
+            var text = that.text();
+            var hasText = text && text !== that._oldText && text !== that.options.placeholder;
+            var index = that.selectedIndex;
+            var isCustom = index === -1;
+
+            if (!that.options.syncValueAndText && !that.value() && isCustom && hasText) {
+                that._old = "";
+                that._oldIndex = index;
+                that._oldText = text;
+
+                if (!that._typing) {
+                    // trigger the DOM change event so any subscriber gets notified
+                    that.element.trigger(CHANGE);
+                }
+
+                that.trigger(CHANGE);
+                that._typing = false;
+                return;
+            }
+
+            Select.fn._change.call(that);
         },
 
         _focusHandler: function() {
@@ -503,7 +529,11 @@ var __meta__ = { // jshint ignore:line
             this.selectedIndex = idx;
 
             if (idx === -1 && !dataItem) {
-                value = text = this.input[0].value;
+                text = this.input[0].value;
+                if (this.options.syncValueAndText) {
+                    value = text;
+                }
+
                 this.listView.focus(-1);
             } else {
                 if (dataItem) {
@@ -616,8 +646,11 @@ var __meta__ = { // jshint ignore:line
                 return data === loweredText;
             }).done(function() {
                 if (that.selectedIndex < 0) {
-                    that._accessor(text);
                     input.value = text;
+
+                    if (that.options.syncValueAndText) {
+                        that._accessor(text);
+                    }
 
                     that._triggerCascade();
                 }

@@ -189,14 +189,29 @@ test("clicking an item raises the change event of HTML select", 1, function() {
     combobox.ul.children().eq(1).trigger(CLICK);
 });
 
-test("raise change on custom value", 3, function() {
+test("raise change on custom value", 2, function() {
     combobox = new ComboBox(input, {
         dataSource: [{text: "foo"}, {text: "bar"}],
         change: function() {
-            ok(true);
             equal(combobox._old, "foo");
             equal(combobox.value(), "foo");
         }
+    });
+
+    combobox.input
+            .focus()
+            .val("foo")
+            .focusout();
+});
+
+test("raise change on custom text with empty value", 2, function() {
+    combobox = new ComboBox(input, {
+        dataSource: [{text: "foo"}, {text: "bar"}],
+        change: function() {
+            equal(combobox.value(), "");
+            equal(combobox.text(), "foo");
+        },
+        syncValueAndText: false
     });
 
     combobox.input
@@ -220,7 +235,24 @@ test("raise change on custom value if element is select", 2, function() {
             .focus()
             .val("custom value")
             .focusout();
+});
 
+test("raise change on custom text with empty value (select)", 2, function() {
+    var select = $("<select><option value=1>foo1</option><option value=3>foo3</option></select>");
+    combobox = new ComboBox(select, {
+        dataSource: [{text: "foo"}, {text: "bar"}],
+        syncValueAndText: false
+    });
+
+    select.bind("change", function() {
+        equal(combobox.value(), "");
+        equal(combobox.text(), "custom value");
+    });
+
+    combobox.input
+            .focus()
+            .val("custom value")
+            .focusout();
 });
 
 test("raise change if empty input after selection", 1, function() {
@@ -272,6 +304,26 @@ asyncTest("change on custom value and ENTER", 2, function() {
 
     combobox = new ComboBox(select, {
         delay: 0
+    });
+
+    combobox.input.focus();
+    combobox.input.val("test");
+    combobox.input.press(60); //some letter
+    combobox.input.press(kendo.keys.ENTER);
+});
+
+asyncTest("change on ENTER with custom text and empty value", 2, function() {
+    var select = $("<select><option value=1>foo1</option><option value=3>foo3</option></select>").appendTo(QUnit.fixture);
+
+    select.bind("change", function() {
+        start();
+        equal(combobox.value(), "");
+        equal(combobox.text(), "test");
+    });
+
+    combobox = new ComboBox(select, {
+        delay: 0,
+        syncValueAndText: false
     });
 
     combobox.input.focus();
