@@ -42,7 +42,7 @@ var __meta__ = { // jshint ignore:line
         TEMPLATE = '<div class="k-notification-wrap">' +
                 '<span class="k-icon k-i-#=typeIcon#">#=typeIcon#</span>' +
                 '#=content#' +
-                '<span class="k-icon k-i-close">Hide</span>' +
+                '<span class="k-icon k-i-close" title="Hide"></span>' +
             '</div>',
         SAFE_TEMPLATE = TEMPLATE.replace("#=content#", "#:content#");
 
