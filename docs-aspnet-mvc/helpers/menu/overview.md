@@ -287,6 +287,24 @@ The example below demonstrates how to subscribe to events by a template delegate
         )
 ```
 
+### Handle Select of a Menu Item 
+
+The example below demonstrates how to subscribe to the select of a single menu item.
+
+###### Example
+
+```tab-Razor
+
+        @(Html.Kendo().Menu()
+            .Name("menu")
+            .Items(items =>
+            {
+                items.Add().Text("First Item");
+                items.Add().Text("Second Item").HtmlAttributes(new { @onclick = "alert('select');" });
+            })
+        )
+```
+
 ## Reference
 
 ### Existing Instances
