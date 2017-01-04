@@ -20,7 +20,6 @@
 @import "themes/type.less";
 
 /* Main colors */
-/* main colors */
 div.k-header .k-icon,
 .k-group-indicator .k-icon,
 .k-button .k-icon,
@@ -29,6 +28,7 @@ div.k-header .k-icon,
 .k-dropdown-wrap.k-state-hovered .k-select .k-icon,
 .k-dropdown-wrap.k-state-active .k-select .k-icon,
 a.k-state-active.k-button-icon .k-icon,
+.k-header .k-button-group .k-state-selected .k-icon,
 .k-tabstrip-wrapper .k-spreadsheet-quick-access-toolbar .k-icon {
     color: @selected-text-color;
     &:hover {
@@ -48,19 +48,9 @@ a.k-state-active.k-button-icon .k-icon,
 .k-button-icontext .k-icon,
 .k-button-icon .k-icon,
 .k-header.k-tabstrip .k-icon {
-    color: lighten(@hover-text-color, 8%);
+    color: @normal-text-color;
     &:hover {
-        color: lighten(@hover-text-color, 8%);
-    }
-}
-
-.k-button-icon {
-    .k-icon {
-        opacity: .5;
-    }
-
-    &:hover .k-icon {
-        opacity: 1;
+        color: @normal-text-color;
     }
 }
 
