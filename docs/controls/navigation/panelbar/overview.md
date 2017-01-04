@@ -18,6 +18,7 @@ You can create a PanelBar in the following ways:
 
 * Through HTML markup
 * Through JSON data object
+* Through the usage of dynamic data binding either to a local, or a remote data source. This approach is suitable for larger data sets and for data that frequently changes.(`available from R1 2017`)
 
 > **Important**
 >
@@ -90,6 +91,64 @@ The example below demonstrates how to initialize a PanelBar by using a JSON data
         ]
       });
     </script>
+
+#### Through Data Binding to Local Array
+
+The example below demonstrates how to create a PanelBar and bind it to a local data source. (`the approach is available from R1 2017`)
+
+###### Example
+
+    <div id="panelBar"></div>
+
+    <script>
+    $(document).ready(function() {
+        $("#panelBar").kendoPanelBar({
+            dataSource: [
+                {
+                    text: "Item 1",
+                    expanded: true,
+                    items: [
+                        { text: "Item 1.1" },
+                        { text: "Item 1.2" }
+                    ]
+                },
+                { text: "Item 2" }
+            ]
+        })
+    });
+    </script>
+
+#### Through Data Binding to Remote Service
+
+The example below demonstrates how to create a PanelBar and bind it to a remote HierarchicalDataSource. (`the approach is available from R1 2017`)
+
+###### Example
+
+    <div id="panelBar"></div>
+
+    <script>
+    $(document).ready(function() {
+        $("#panelBar").kendoPanelBar({
+            dataTextField: "FullName",
+            dataSource: {
+                transport: {
+                    read: {
+                        url: "http://demos.telerik.com/kendo-ui/service/Employees",
+                        dataType: "jsonp"
+                    }
+                },
+                schema: {
+                    model: {
+                        id: "EmployeeId",
+                        hasChildren: "HasEmployees"
+                    }
+                }
+            }
+        })
+    });
+    </script>
+
+For a complete reference on how to bind the PanelBar to different service end-points, refer to the [`HierarchicalDataSource` API article](/api/framework/hierarchicaldatasource).
 
 ## Configuration
 
@@ -189,6 +248,49 @@ The example below demonstrates how to add a new root PanelBar item.
             panelBar.element.children("li:last")
         );
     </script>
+### dataItem Manipulations
+
+As of the R1 2017 release the [PanelBar API](/api/javascript/ui/panelbar) provides methods for dynamically manage the state of the items trough their `dataItems`.
+
+To disable, expand or select certain PanelBar item you can get a reference to its dataItem and use the desirable method.
+
+The example below demonstrates the usage of the disable, expand and select methods.
+
+###### Example
+
+    <div id="panelBar"></div>
+    <button id="btn1" class="k-button">Update Data Item</button>   
+    <script>
+     $(document).ready(function() {
+            $("#panelBar").kendoPanelBar({
+                dataSource: [
+                    {
+                        text: "Item 1",
+                        expanded: false,
+                        items: [
+                            { text: "Item 1.1" },
+                            { text: "Item 1.2" }
+                        ]
+                    },
+                    { text: "Item 2" }
+                ]
+            })
+        $("#btn1").on('click', function(){
+            var panelBar = $("#panelBar").data("kendoPanelBar");  
+            var dataItem = panelBar.dataItem(".k-item:first"); // get reference to the first item
+            dataItem.set("expanded", true); //set the item as expanded 
+            dataItem.set("enabled", false); //set the item as enabled
+            //dataItem.set("selected", true);  set the item as selected 
+     })        
+    });
+    </script>
+
+### Retry Data Bind
+
+As of the R1 2017 release the PanelBar provides an inbuilt functionality to attempt a retry if the initial data binding had failed.
+Regardless of the reason for the failure, you will be prompt with a `Request failed.` message and with a `Retry` button which allows you to initiate new data binding:
+
+![PanelBar areas](/controls/navigation/panelbar/retry-request-failed.png)
 
 ## See Also
 
