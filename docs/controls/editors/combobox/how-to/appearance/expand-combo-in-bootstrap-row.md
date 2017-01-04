@@ -1,13 +1,16 @@
 ---
-title: Expand ComboBox Located in Bootstrap Layout
-page_title: Expand ComboBox Located in Bootstrap Layout | Kendo UI ComboBox
+title: Expand ComboBoxes in Bootstrap Layouts
+page_title: Expand ComboBoxes in Bootstrap Layouts | Kendo UI ComboBox
 description: "Learn how to expand Kendo UI ComboBox located in a Bootstrap layout."
+previous_url: /controls/editors/combobox/how-to/expand-combo-in-bootstrap-row
 slug: howto_expand_widget_bootstrap_widget_combobox
 ---
 
-# Expand ComboBox Located in Bootstrap Layout
+# Expand ComboBoxes in Bootstrap Layouts
 
-The example below demonstrates how to expand Kendo UI ComboBox located in a Bootstrap layout. Basically, the approach is to set the input width to 100%.
+The following example demonstrates how to expand a Kendo UI ComboBox located in a Bootstrap layout.
+
+Basically, the approach is to set the input width to 100%.
 
 ###### Example
 

@@ -2,12 +2,13 @@
 title: Select Items on Tab
 page_title: Select Items on Tab | Kendo UI ComboBox
 description: "Learn how to select an item on pressing `Tab` in the Kendo UI ComboBox widget."
+previous_url: /controls/editors/combobox/how-to/select-on-tab
 slug: howto_select_items_ontab_combobox
 ---
 
 # Select Items on Tab
 
-The example below demonstrates how to select an item on pressing `Tab`.
+The following example demonstrates how to select an item in a Kendo UI ComboBox on pressing the `Tab` key.
 
 ###### Example
 

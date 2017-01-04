@@ -1,13 +1,14 @@
 ---
-title: Blur the ComboBox after Select
-page_title: Blur the ComboBox after Select | Kendo UI ComboBox
-description: "Learn how to blur the Kendo UI ComboBox after it has been selected."
+title: Blur the ComboBox after Selection
+page_title: Blur the ComboBox after Selection | Kendo UI ComboBox
+description: "Learn how to blur the input in a Kendo UI ComboBox after an option has been selected."
+previous_url: /controls/editors/combobox/how-to/blur-on-select
 slug: howto_blur_after_select_combobox
 ---
 
-#  Blur the ComboBox after Select
+#  Blur the ComboBox after Selection
 
-The example below demonstrates how to blur the ComboBox after select.
+The following example demonstrates how to blur the input in a Kendo UI ComboBox after an option has been selected.
 
 ###### Example
 

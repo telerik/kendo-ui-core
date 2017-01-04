@@ -1,13 +1,14 @@
 ---
 title: Configure Deferred Value Binding
 page_title: Configure Deferred Value Binding | Kendo UI ComboBox
-description: "Learn how to configure deferred value binding in Kendo UI ComboBox."
+description: "Learn how to configure a deferred value binding in a Kendo UI ComboBox."
+previous_url: /controls/editors/combobox/how-to/deferred-value-binding
 slug: howto_configure_deffered_value_binding_combobox
 ---
 
 # Configure Deferred Value Binding
 
-The example below demonstrates how to configure deferred value binding.
+The following example demonstrates how to configure a deferred value binding in a Kendo UI ComboBox.
 
 ###### Example
 

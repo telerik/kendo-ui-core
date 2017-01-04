@@ -1,15 +1,18 @@
 ---
-title: Expand Background of Long List Items
-page_title: Expand Background of Long List Items | Kendo UI ComboBox
-description: "Learn how to expand the background of long list items in Kendo UI ComboBox, AutoComplete, DropDownList, and MultiSelect widgets."
+title: Expand Backgrounds of Long List Items
+page_title: Expand Backgrounds of Long List Items | Kendo UI ComboBox
+description: "Learn how to expand the background of long list items in a Kendo UI ComboBox widget."
+previous_url: /controls/editors/combobox/how-to/expand-list-item-background
 slug: howto_expand_background_longlist_items_combobox
 ---
 
-# Expand Background of Long List Items
+# Expand Backgrounds of Long List Items
 
-The example below refers to Kendo UI ComboBox and is applicable to the AutoComplete, DropDownList and MultiSelect widgets as well.
+Normally, long items in the drop-down list of a Kendo UI ComboBox wrap to multiple lines.
 
-Normally, long items in the dropdown wrap to multiple lines. However, if the list item content is non-wrappable (e.g., a very long word or string with no spaces), a horizontal scrollbar will appear. In this case, the background of the hover and select states will not expand beyond the 100% width of the dropdown, due to the way HTML elements expand in general. There are two ways to handle the issue.
+However, if the list item content is non-wrappable&mdash;for example, a very long word or a string without spaces&mdash;a horizontal scrollbar appears. In this case, the background of the hover and select states does not expand beyond the 100% width of the drop-down list because of the way HTML elements expand in general.
+
+The following example demonstrates how to handle this issue and works for the Kendo UI ComboBox, AutoComplete, DropDownList, and MultiSelect widgets.
 
 ###### Example
 

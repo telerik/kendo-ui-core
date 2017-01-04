@@ -1,15 +1,18 @@
 ---
 title: Filter DataSource Manually
-page_title: Filter DataSource Manually| Kendo UI ComboBox
-description: "Learn how to filter DataSource instance manually in the Kendo UI ComboBox widget."
+page_title: Filter DataSource Manually | Kendo UI ComboBox
+description: "Learn how to manually filter the Data Source instance in a Kendo UI ComboBox widget."
+previous_url: /controls/editors/combobox/how-to/filter-datasource-manually
 slug: howto_filter_datasource_manually_combobox
 ---
 
 # Filter DataSource Manually
 
-The widget has a built-in detection mechanism which checks whether the data is filtered or not. This information is used by the widget to decide when to persist selected value, not existing in the source. When the source is filtered manually, the widget loses details about the DataSource state and, as a result, might fail to operate.
+The Kendo UI ComboBox has a built-in detection mechanism that checks whether the data is filtered or not.
 
-The example below demonstrates how to filter the Kendo UI ComboBox dataSource instance manually.
+This information is used by the widget to decide when to persist the selected value that does not exist in the source. When the source is manually filtered, the ComboBox loses the details about the state of the Data Source and, as a result, might fail to operate.
+
+The following example demonstrates how to manually filter the Data Source instance of the Kendo UI ComboBox.
 
 ###### Example
 

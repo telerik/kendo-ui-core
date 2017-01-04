@@ -1,13 +1,19 @@
 ---
-title: Clear Filter on Open
-page_title: Clear Filter on Open | Kendo UI ComboBox
-description: "Learn how to clear Kendo UI ComboBox filter on open."
-slug: howto_clear_filter_open_combobox
+title: Search for Items by Dragging to Input
+page_title: Search for Items by Dragging to Input | Kendo UI ComboBox
+description: "Learn how to support the search for an external item by dragging it to the input field of a Kendo UI ComboBox widget."
+previous_url: /controls/editors/combobox/how-to/native-drag-and-drop-support
+slug: howto_search_items_dragging_toinput_combobox
 ---
 
-# Clear Filter on Open
+# Search for Items by Dragging to Input
 
-The example below demonstrates how to clear the ComboBox filter on open.
+The following example demonstrates how to make a read-only text visible in the input field of a Kendo UI ComboBox widget.
+
+To see how the example works:
+* Select `Chai` from the `Drag: Chai` field.
+* Drag it to the input field of the ComboBox.
+* Release the mouse.
 
 ###### Example
 
@@ -15,6 +21,7 @@ The example below demonstrates how to clear the ComboBox filter on open.
   <div id="example">
     <div class="demo-section k-header">
       <h4>Products</h4>
+      <div> Drag: Chai </div>
       <input id="products" style="width: 400px" />
     </div>
     <script>
@@ -34,15 +41,20 @@ The example below demonstrates how to clear the ComboBox filter on open.
                 url: "http://demos.telerik.com/kendo-ui/service/Northwind.svc/Products",
               }
             }
-          },
-          open: function() {
-            var filters = this.dataSource.filter();
-
-            if (filters) {
-              //clear applied filters
-              this.dataSource.filter({});
-            }
           }
+        });
+
+        //Wire the drop event
+        var combobox = $("#products").data("kendoComboBox");
+
+        combobox.input.on("drop", function(e) {
+          var input = e.currentTarget;
+          var droppedText = e.originalEvent.dataTransfer.getData("text");
+
+          setTimeout(function() {
+            input.value = droppedText;
+            combobox.search(droppedText);
+          });
         });
       });
     </script>

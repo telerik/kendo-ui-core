@@ -1,13 +1,14 @@
 ---
 title: Implement Cascading with Local Data
 page_title: Implement Cascading with Local Data | Kendo UI ComboBox
-description: "Learn how to implement cascading with local data in Kendo UI ComboBox."
+description: "Learn how to cascade Kendo UI ComboBoxes when working with local data."
+previous_url: /controls/editors/combobox/how-to/cascading-with-local-data
 slug: howto_implement_cascading_local_data_combobox
 ---
 
 # Implement Cascading with Local Data
 
-The example below demonstrates how to implement cascading with local data.
+The following example demonstrates how to cascade Kendo UI ComboBoxes when working with local data.
 
 ###### Example
 

@@ -1,26 +1,31 @@
 ---
-title: Make Visible Inputs Readonly
-page_title: Make Visible Inputs Readonly | Kendo UI ComboBox
-description: "Learn how to make a visible input readonly in the Kendo UI ComboBox widget."
-slug: howto_make_visible_inputs_readonly_combobox
+title: Underline Matched Searches
+page_title: Underline Matched Searches | Kendo UI ComboBox
+description: "Learn how to underline a matched input-field search in a Kendo UI ComboBox widget."
+previous_url: /controls/editors/combobox/how-to/underline-matched-search
+slug: howto_underline_matched_search_combobox
 ---
 
-# Make Visible Inputs Readonly
+# Underline Matched Searches
 
-The example below demonstrates how to make a visible input to the Kendo UI ComboBox readonly.
+The following example demonstrates how to underline a matched input-field search in a Kendo UI ComboBox widget.
 
 ###### Example
 
 ```html
-<div id="example" role="application">
-<form>
-  <h4>T-shirt Fabric</h4>
-  <input id="fabric" placeholder="Select fabric..." />
-</form>
+<input id="fabric" placeholder="Select fabric..." />
 <script>
+  function formatValue(value, text) {
+    var textMatcher = new RegExp(text, "ig");
+
+    return value.replace(textMatcher, function(match) {
+      return "<u>" + match + "</u>";
+    });
+  }
+
   $(document).ready(function() {
     // create ComboBox from input HTML element
-    $("#fabric").kendoComboBox({
+    var combo = $("#fabric").kendoComboBox({
       dataTextField: "text",
       dataValueField: "value",
       dataSource: [
@@ -30,21 +35,14 @@ The example below demonstrates how to make a visible input to the Kendo UI Combo
         { text: "Rib Knit", value: "4" }
       ],
       filter: "contains",
-      suggest: true,
-      index: 3
-    });
+      suggest: true
+    }).data("kendoComboBox");
 
-    var fabric = $("#fabric").data("kendoComboBox");
-
-    fabric.input.attr("readonly", true)
-    .on("keydown", function(e) {
-      if (e.keyCode === 8) {
-        e.preventDefault();
-      }
+    combo.setOptions({
+      template: $.proxy(kendo.template("#= formatValue(text, this.text()) #"), combo)
     });
   });
 </script>
-</div>
 ```
 
 ## See Also
@@ -56,9 +54,9 @@ Other articles on the Kendo UI ComboBox:
 * [How to Configure Deferred Value Binding]({% slug howto_configure_deffered_value_binding_combobox %})
 * [How to Expand ComboBox Located in Bootstrap Layout]({% slug howto_expand_widget_bootstrap_widget_combobox %})
 * [How to Implement Cascading with Local Data]({% slug howto_implement_cascading_local_data_combobox %})
+* [How to Make Visible Input Readonly]({% slug howto_make_visible_inputs_readonly_combobox %})
 * [How to Open ComboBox When onFocus is Triggered]({% slug howto_open_onfocus_combobox %})
 * [How to Prevent Adding Custom Values]({% slug howto_prevent_adding_custom_values_combobox %})
 * [How to Select Items on Tab]({% slug howto_select_items_ontab_combobox %})
-* [How to Underline Matched Search]({% slug howto_underline_matched_search_combobox %})
 
 For more runnable examples on the Kendo UI ComboBox, check its [how-to articles]({% slug howto_define_virtual_option_combobox %}).

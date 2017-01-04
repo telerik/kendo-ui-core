@@ -316,6 +316,10 @@ navigation:
         title: "Filtering"
     "*integration":
         title: "Integration"
+    "*cascade":
+        title: "Cascading"
+    "*customize":
+        title: "Customizing Behavior"
     "*other":
         title: "Other"
     "*selection":

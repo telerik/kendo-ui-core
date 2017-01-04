@@ -1,13 +1,14 @@
 ---
-title: Disable Child Cascading ComboBoxes
-page_title: Disable Child Cascading ComboBoxes | Kendo UI ComboBox
-description: "Learn how to disable a child cascading Kendo UI ComboBox widget."
+title: Disable Cascading Children ComboBoxes
+page_title: Disable Cascading Children ComboBoxes | Kendo UI ComboBox
+description: "Learn how to disable a cascading child Kendo UI ComboBox."
+previous_url: /controls/editors/combobox/how-to/disable-child-combo
 slug: howto_disable_child_cascading_combobox
 ---
 
-# Disable Child Cascading ComboBoxes
+# Disable Cascading Children ComboBoxes
 
-The example below demonstrates how to disable a child cascading ComboBox widget.
+The following example demonstrates how to disable a cascading child Kendo UI ComboBox.
 
 ###### Example
 

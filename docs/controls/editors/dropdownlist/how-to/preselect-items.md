@@ -9,6 +9,8 @@ slug: howto_preselect_items_dropdownlist
 
 The example below demonstrates how to preselect items in a Kendo UI DropDownList.
 
+This approach is also applicable for the Kendo UI ComboBox.
+
 ###### Example
 
 ```html

@@ -1,13 +1,14 @@
 ---
 title: Preselect Items
 page_title: Preselect Items | Kendo UI ComboBox
-description: "Learn how to preselect items in a Kendo UI ComboBox widget."
+description: "Learn how to select items in a Kendo UI ComboBox widget in advance."
+previous_url: /controls/editors/combobox/how-to/preselect-items
 slug: howto_preselect_items_combobox
 ---
 
 # Preselect Items
 
-The example as described in the related help article for [Kendo UI DropDownList widget]({% slug howto_preselect_items_dropdownlist %}) is applicable to Kendo UI ComboBox as well.
+To see the example, refer to the article on how to [preselect items in a Kendo UI DropDownList]({% slug howto_preselect_items_dropdownlist %}).  
 
 ## See Also
 
