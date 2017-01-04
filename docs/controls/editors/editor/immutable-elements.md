@@ -8,13 +8,13 @@ position: 7
 
 # Immutable Elements
 
-The immutable feature enables you to add HTML elements which cannot be edited by the user.
+The immutable feature enables you to add HTML elements that cannot be edited by the user.
 
 ## Configuration
 
 ### Enable and Add Immutable Elements
 
-The immutable elements in the content area are defined by setting the [`contenteditable`](https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/contentEditable) DOM attribute to `false`. To make the Editor prevent the user from editing this element, also enable the [`immutables`](/api/javascript/ui/editor#configuration-immutables) option.
+To define the immutable elements in the content area, set the [`contenteditable`](https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/contentEditable) DOM attribute to `false`. To make the Editor prevent the user from editing this element, you also need to enable the [`immutables`](/api/javascript/ui/editor#configuration-immutables) option.
 
 ###### Example
 
@@ -113,7 +113,7 @@ The `immutables.serialization` configuration option accepts the following parame
 
 The [`immutables.deserialization`](/api/javascript/ui/editor#configuration-immutables.deserialization) does the opposite of the `immutables.serialization` one&mdash;it takes the HTML representation from the **viewHtml** dialog and alters the immutable DOM element based on the logic implemented in the callback function.
 
-The example below demonstrates how to use the `immutables.serialization` and `immutables.deserialization` options to expose the CSS `text-align` property in the **viewHtml** dialog so that the user is able to change it from the HTML code.
+The following example demonstrates how to use the `immutables.serialization` and `immutables.deserialization` options to expose the CSS `text-align` property in the **viewHtml** dialog so that the user is able to change it from the HTML code.
 
 ###### Example
 
@@ -138,11 +138,11 @@ The example below demonstrates how to use the `immutables.serialization` and `im
 
 ### Apply Default Decoration to Immutables
 
-To decorate all `contenteditable="false"` elements so that user experience (UX) is improved, it is possible to use a CSS rule.
+To decorate all `contenteditable="false"` elements and improve user experience (UX), use a CSS rule.
 
-If you are using the [Classic mode]({% slug overview_kendoui_editor_widget %}#classic-mode), add the CSS rule to an external CSS file adjoined to the [Editor's stylesheet collection](/api/javascript/ui/editor#onfiguration-stylesheets).
+If you use the [classic mode]({% slug overview_kendoui_editor_widget %}#classic-mode), add the CSS rule to an external CSS file adjoined to the [stylesheet collection](/api/javascript/ui/editor#configuration-stylesheets) of the Editor.
 
-If you are using the [Inline mode]({% slug overview_kendoui_editor_widget %}#inline-mode), just place the CSS rule in the page as shown in the example below.
+If you use the [inline mode]({% slug overview_kendoui_editor_widget %}#inline-mode), place the CSS rule on the page as demonstrated in the following example.
 
 ###### Example
 

@@ -1,18 +1,18 @@
 ---
-title: Set Selections
-page_title: Set Selections | Kendo UI Editor
-description: "Learn how to use the `range` object and set desired selections in the Kendo UI Editor widget."
+title: Setting Selections
+page_title: Setting Selections | Kendo UI Editor
+description: "Learn how to use the `range` object and set the desired selections in the Kendo UI Editor widget."
 slug: set_selections_editor_widget
 position: 4
 ---
 
-# Set Selections
+# Setting Selections
 
-The Editor widget works with standard [`range` objects](https://developer.mozilla.org/en/docs/Web/API/Range) that provide a polyfill for Internet Explorer versions that do not fully support them.
+The Editor works with standard [`range`](https://developer.mozilla.org/en/docs/Web/API/Range) objects that provide a polyfill for Internet Explorer versions that do not fully support them.
 
-To set the Editor selection, you need to create a `Range` object that specifies the desired selection, and pass it to the [`selectRange` method](/api/javascript/ui/editor#methods-selectRange)
+To set the Editor selection, create a `Range` object that specifies the desired selection and pass it to the [`selectRange`](/api/javascript/ui/editor#methods-selectRange) method.
 
-The example below demonstrates how to set the Editor selections.
+The following example demonstrates how to set the Editor selections.
 
 ###### Example
 
@@ -38,9 +38,17 @@ The example below demonstrates how to set the Editor selections.
       editor.selectRange(range);
     </script>
 
-Notice that the second parameter of the `setStart` and `setEnd` methods work differently with the `Element` and `Text` nodes. For `Text` nodes the range boundary is set between the characters of the node: 0 means "before all characters", 1 means "between the first and the second character". For `Element` nodes the range boundary is set between the child nodes: 0 means "at the start of the element", and `element.childNodes.length` means "after all children".
+Note that the second parameter of the `setStart` and `setEnd` methods works differently with the `Element` and `Text` nodes.
 
-For more information, see the [in-depth tutorial on `Range` objects on Quirksmode](http://www.quirksmode.org/dom/range_intro.html).
+For the `Text` nodes, the range boundary is set between the characters of the node
+* `0` means "before all characters".
+* `1` means "between the first and the second character".
+
+For the `Element` nodes, the range boundary is set between the child nodes:
+* `0` means "at the start of the element".
+* `element.childNodes.length` means "after all children".
+
+For more information, refer to the [tutorial on `Range` objects on Quirksmode](http://www.quirksmode.org/dom/range_intro.html).
 
 ## See Also
 

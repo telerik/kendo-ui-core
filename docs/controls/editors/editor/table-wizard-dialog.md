@@ -14,40 +14,40 @@ As of the Kendo UI R3 2016 release and in addition to the **Insert Table** tool,
 
 ## Getting Started
 
-### Insertion of Tables  
+### Insert Tables  
 
-To insert a new table by using the **Table Wizard** dialog, follow the steps below:
+To insert a new table by using the **Table Wizard** dialog:
 
-**Step 1** Open the **Insert Table** tool.  
-**Step 2** Click the **Table Wizard** button to open the dialog.  
-**Step 3** Configure the table that is to be inserted.   
-**Step 4** Click the **OK** button.  
+1. Open the **Insert Table** tool.  
+1. To open the dialog, click the **Table Wizard** button.  
+1. Configure the table that is to be inserted.   
+1. Click the **OK** button.  
 
 ![](/controls/editors/editor/table-wizard-open.png)
 
-### Modification of Tables
+### Modify Tables
 
-To modify an existing table or a table cell, follow the steps below:
+To modify an existing table or a table cell:
 
-**Step 1** Select the table or the table cell to edit.  
-**Step 2** Click the **Table Wizard** tool in the toolbar.  
+1. Select the table or the table cell to edit.  
+1. Click the **Table Wizard** tool in the toolbar.  
 
 ![](/controls/editors/editor/table-wizard-edit.png)
 
 
 > **Important**
 >
-> Even without the table wizard dialog, you can resize the table rows and columns by dragging the cell border with the mouse.
+> Even without using the table wizard dialog, you can resize the table rows and columns by dragging the cell border with the mouse.
 
 ## Table Wizard Options
 
-The table and cell options that are available in the **Table Wizard** are displayed in three tabs:
+The table and cell options that are available in the **Table Wizard** are displayed in the following three tabs:
 
-* [**Table**](#table-tab)&mdash;The available options for the table element.
-* [**Cell**](#cell-tab)&mdash;The available options for the selected cell or all cells in the table.
-* [**Accessibility**](#accessibility-tab)&mdash;The available options related to accessibility.
+* [**Table**](#table)&mdash;The available options for the table element.
+* [**Cell**](#cell)&mdash;The available options for the selected cell or all cells in the table.
+* [**Accessibility**](#accessibility)&mdash;The available options related to accessibility.
 
-### Table Tab
+### Table
 
 The **Table** tab provides the following options:
 
@@ -65,7 +65,7 @@ The **Table** tab provides the following options:
 * **Border Style**&mdash;Defines the border style (`none`, `hidden`, `dotted`, `dashed`, `solid`, `double`, `groove`, `ridge`, `inset`, `outset`, `initial`, and `inherit`).
 * **Collapse borders**&mdash;Adds an inline style to that table element with the `border-collapse: collapse` rule ([`border-collapse` property](http://www.w3schools.com/cssref/pr_border-collapse.asp)).
 
-### Cell Tab
+### Cell
 
 The **Cell** tab provides the following options:
 
@@ -82,7 +82,7 @@ The **Cell** tab provides the following options:
 * **Border Style**&mdash;Defines the border style (`none`, `hidden`, `dotted`, `dashed`, `solid`, `double`, `groove`, `ridge`, `inset`, `outset`, `initial`, and `inherit`).
 * **Wrap text**&mdash;When unchecked, applies a `white-space: nowrap` style to the cells ([`white-space` property](http://www.w3schools.com/cssref/pr_text_white-space.asp)).
 
-### Accessibility Tab
+### Accessibility
 
 The **Accessibility** tab provides the following options:
 
