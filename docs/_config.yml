@@ -40,11 +40,11 @@ navigation:
     "controls/data-management/grid/how-to/Editing":
         title: "Editing"
         position: 4
-    "controls/data-management/grid/how-to/excel":
-        title: "Export to Excel"
-        position: 5
     "controls/data-management/grid/how-to/pdf-export":
         title: "Export in PDF"
+        position: 5
+    "controls/data-management/grid/how-to/excel":
+        title: "Export to Excel"
         position: 6
     "controls/data-management/grid/how-to/filtering":
         title: "Filtering"
@@ -52,15 +52,21 @@ navigation:
     "controls/data-management/grid/how-to/hidden":
         title: "Hidden Containers"
         position: 8
+    "controls/data-management/grid/how-to/integration":
+        title: "Integration"
+        position: 9
     "controls/data-management/grid/how-to/Selection":
         title: "Selection"
-        position: 9
-    "controls/data-management/grid/how-to/Templates":
-        title: "Templates"
         position: 10
     "controls/data-management/grid/how-to/state":
         title: "State Management"
         position: 11
+    "controls/data-management/grid/how-to/Templates":
+        title: "Templates"
+        position: 12
+    "controls/data-management/grid/how-to/various":
+        title: "Various"
+        position: 13
     "controls/editors":
         title: "Editors"
         position: 2
@@ -310,6 +316,8 @@ navigation:
         title: "Filtering"
     "*integration":
         title: "Integration"
+    "*other":
+        title: "Other"
     "*selection":
         title: "Selection"
     "*angular":

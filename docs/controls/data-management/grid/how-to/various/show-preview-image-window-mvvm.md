@@ -2,6 +2,7 @@
 title: Show Image Preview in Window Using MVVM
 page_title: Show Image Preview in Window Using MVVM | Kendo UI Grid
 description: "Learn how to show a preview of an image in a window using MVVM in a Kendo UI Grid."
+previous_url: /controls/data-management/grid/how-to/show-preview-image-window-mvvm
 slug: howto_show_preview_image_window_MVVM
 ---
 
