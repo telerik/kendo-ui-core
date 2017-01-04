@@ -7,7 +7,7 @@ slug: howto_define_virtual_option_combobox
 
 # Define Virtual Configuration Declaratively
 
-The example below demonstrates how to define the [`virtual`](/api/javascript/ui/combobox#configuration-virtual) option of the Kendo UI ComboBox widget by using the `data-*` attribute.
+The following example demonstrates how to define the [`virtual`](/api/javascript/ui/combobox#configuration-virtual) option of the Kendo UI ComboBox widget by using the `data-*` attribute.
 
 ###### Example
 

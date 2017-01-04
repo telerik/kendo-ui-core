@@ -1,13 +1,14 @@
 ---
-title: Add Option Label Manually
-page_title: Add Option Label Manually | Kendo UI ComboBox
-description: "Learn how to add option label manually in Kendo UI ComboBox."
-slug: howto_add_option_label_manually_combobox
+title: Clear Filter on Opening
+page_title: Clear Filter on Opening | Kendo UI ComboBox
+description: "Learn how to clear the filter of the Kendo UI ComboBox on opening the widget."
+previous_url: /controls/editors/combobox/how-to/clear-filter-on-open
+slug: howto_clear_filter_open_combobox
 ---
 
-# Add Option Label Manually
+# Clear Filter on Opening
 
-The example below demonstrates how to add option label manually.
+The following example demonstrates how to clear the filter of the Kendo UI ComboBox on opening the widget.
 
 ###### Example
 
@@ -24,7 +25,8 @@ The example below demonstrates how to add option label manually.
           dataTextField: "ProductName",
           dataValueField: "ProductID",
           filter: "contains",
-          index: 0,
+          autoBind: false,
+          minLength: 3,
           dataSource: {
             type: "odata",
             serverFiltering: true,
@@ -32,9 +34,14 @@ The example below demonstrates how to add option label manually.
               read: {
                 url: "http://demos.telerik.com/kendo-ui/service/Northwind.svc/Products",
               }
-            },
-            requestEnd: function(e) {
-              e.response.d.results.unshift({ ProductID:'', ProductName:'All' });
+            }
+          },
+          open: function() {
+            var filters = this.dataSource.filter();
+
+            if (filters) {
+              //clear applied filters
+              this.dataSource.filter({});
             }
           }
         });
@@ -56,7 +63,6 @@ Other articles on the Kendo UI ComboBox:
 * [ComboBox JavaScript API Reference](/api/javascript/ui/combobox)
 * [How to Bypass Boundary Detection]({% slug howto_bypass_boudary_detection_combobox %})
 * [How to Configure Deferred Value Binding]({% slug howto_configure_deffered_value_binding_combobox %})
-* [How to Define Virtual Configuration Declaratively]({% slug howto_define_virtual_option_combobox %})
 * [How to Expand ComboBox Located in Bootstrap Layout]({% slug howto_expand_widget_bootstrap_widget_combobox %})
 * [How to Implement Cascading with Local Data]({% slug howto_implement_cascading_local_data_combobox %})
 * [How to Make Visible Input Readonly]({% slug howto_make_visible_inputs_readonly_combobox %})

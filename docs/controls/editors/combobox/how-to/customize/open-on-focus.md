@@ -1,13 +1,14 @@
 ---
-title: Open ComboBox When onfocus is Triggered
-page_title: Open ComboBox When onfocus is Triggered | Kendo UI ComboBox
+title: Open ComboBox When onfocus Is Triggered
+page_title: Open ComboBox When onfocus Is Triggered | Kendo UI ComboBox
 description: "Learn how to make the Kendo UI ComboBox widget open when the `onfocus` event is triggered by the user."
+previous_url: /controls/editors/combobox/how-to/open-on-focus
 slug: howto_open_onfocus_combobox
 ---
 
-# Open ComboBox When onFocus is Triggered
+# Open ComboBox When onFocus Is Triggered
 
-The example below demonstrates how to make the dropdown list of a ComboBox open when users trigger the `onfocus` event.
+The following example demonstrates how to make the dropdown list of a Kendo UI ComboBox open when the user triggers the `onfocus` event.
 
 #### Example:
 

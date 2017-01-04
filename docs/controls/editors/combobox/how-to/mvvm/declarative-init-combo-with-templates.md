@@ -1,13 +1,14 @@
 ---
-title: Declaratively Initialize ComboBox with Templates
-page_title: Declaratively Initialize ComboBox with Templates | Kendo UI ComboBox
-description: "Learn how to declaratively initialize Kendo UI ComboBox with templates."
+title: Initialize ComboBoxes with Templates Declaratively
+page_title: Initialize ComboBoxes with Templates Declaratively | Kendo UI ComboBox
+description: "Learn how to declaratively initialize a Kendo UI ComboBox with templates."
+previous_url: /controls/editors/combobox/how-to/declarative-init-combo-with-templates
 slug: howto_declaratively_initialize_with_templates_combobox
 ---
 
-# Declaratively Initialize ComboBox with Templates
+# Initialize ComboBoxes with Templates Declaratively
 
-The example below demonstrates how to declaratively initialize the ComboBox widget with templates.
+The following example demonstrates how to declaratively initialize a Kendo UI ComboBox with templates.
 
 ###### Example
 

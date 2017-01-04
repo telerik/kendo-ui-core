@@ -1,13 +1,14 @@
 ---
 title: Bypass Boundary Detection
 page_title: Bypass Boundary Detection | Kendo UI ComboBox
-description: "Learn how to bypass boundary detection in Kendo UI ComboBox."
+description: "Learn how to auto-size the popup height in a Kendo UI ComboBox."
+previous_url: /controls/editors/combobox/how-to/bypass-boundary-detection
 slug: howto_bypass_boudary_detection_combobox
 ---
 
 # Bypass Boundary Detection
 
-The example below demonstrates how to make readonly visible input of Kendo UI ComboBox.
+The following example demonstrates how to auto-size the popup height in a Kendo UI ComboBox.
 
 ###### Example
 

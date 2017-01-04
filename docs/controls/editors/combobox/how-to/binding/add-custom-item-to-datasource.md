@@ -1,18 +1,19 @@
 ---
-title: Add Custom Items to the Datasource
-page_title: Add Custom Items to the Datasource | Kendo UI ComboBox
+title: Add Custom Items to the Data Source
+page_title: Add Custom Items to the Data Source | Kendo UI ComboBox
 description: "Learn how to add a custom item to the Kendo UI ComboBox DataSource."
+previous_url: /controls/editors/combobox/how-to/add-custom-item-to-datasource
 slug: howto_add_custom_item_to_datasource
 ---
 
-# Add Custom Items to the ComboBox DataSource
+# Add Custom Items to the ComboBox Data Source
 
-The example below demonstrates how to save an entered custom item to the remote dataSource of the Kendo UI ComboBox.
+The following example demonstrates how to save an entered custom item to the remote dataSource of the Kendo UI ComboBox.
 
-Below are listed the notable steps for you to follow when doing this:
+To achieve this:
 
 * Configure the ComboBox DataSource for [`create`](/framework/datasource/crud) operations.
-* Use the [`change` event](/api/javascript/ui/combobox#events-change) of the ComboBox to detect when custom text is typed.
+* Use the [`change` event](/api/javascript/ui/combobox#events-change) of the ComboBox to detect when a custom text is typed.
 * In the `change` handler, check what the [index of the selected item](/api/javascript/ui/combobox#methods-select ) is or retrieve the [current data item](/api/javascript/ui/combobox#methods-dataItem).
 * If the selected index is `-1` (minus one), or if the data item is `null`, obtain the custom user input with the [`text()`](/api/javascript/ui/combobox#methods-text) method.
 * [Add](/api/javascript/data/datasource#methods-add) a new data item to the ComboBox [dataSource](/api/javascript/ui/combobox#fields-dataSource ). This will trigger a request to the remote service if [`autoSync`](/api/javascript/data/datasource#configuration-autoSync) is set to `true`. Otherwise, [`sync()`](/api/javascript/data/datasource#methods-sync) manually.
@@ -20,7 +21,7 @@ Below are listed the notable steps for you to follow when doing this:
 
 > **Important**
 >
-> The technique below is not designed to be used and does not work in scenarios where the ComboBox is an editor of anotherData item of a Kendo UI widget&mdash;for example, a Kendo UI Grid.
+> This approach is not designed to be used and to work in scenarios where the ComboBox is an editor of a Kendo UI `anotherData` widget item such as the Kendo UI Grid.
 
 ###### Example
 

@@ -1,13 +1,14 @@
 ---
-title: Search for Items by Dragging to Input
-page_title: Search for Items by Dragging to Input | Kendo UI ComboBox
-description: "Learn how to suport the search for an external item by dragging it to the input field of the Kendo UI ComboBox widget."
-slug: howto_search_items_dragging_toinput_combobox
+title: Prevent Adding Custom Values
+page_title: Prevent Adding Custom Values | Kendo UI ComboBox
+description: "Learn how to prevent adding custom values to a Kendo UI ComboBox widget."
+previous_url: /controls/editors/combobox/how-to/prevent-custom-values
+slug: howto_prevent_adding_custom_values_combobox
 ---
 
-# Search for Items by Dragging to Input
+# Prevent Adding Custom Values
 
-The example below demonstrates how to make a readonly text visible in the input field of the Kendo UI ComboBox widget. To try out the example, select `Chai` from the `Drag: Chai` field, drag it to the input field of the ComboBox and release the mouse.
+The following example demonstrates how to prevent adding custom values to a Kendo UI ComboBox.
 
 ###### Example
 
@@ -15,7 +16,6 @@ The example below demonstrates how to make a readonly text visible in the input 
   <div id="example">
     <div class="demo-section k-header">
       <h4>Products</h4>
-      <div> Drag: Chai </div>
       <input id="products" style="width: 400px" />
     </div>
     <script>
@@ -35,20 +35,15 @@ The example below demonstrates how to make a readonly text visible in the input 
                 url: "http://demos.telerik.com/kendo-ui/service/Northwind.svc/Products",
               }
             }
+          },
+          change: function(e) {
+            var widget = e.sender;
+
+            if (widget.value() && widget.select() === -1) {
+              //custom has been selected
+              widget.value(""); //reset widget
+            }
           }
-        });
-
-        //Wire the drop event
-        var combobox = $("#products").data("kendoComboBox");
-
-        combobox.input.on("drop", function(e) {
-          var input = e.currentTarget;
-          var droppedText = e.originalEvent.dataTransfer.getData("text");
-
-          setTimeout(function() {
-            input.value = droppedText;
-            combobox.search(droppedText);
-          });
         });
       });
     </script>
@@ -72,7 +67,6 @@ Other articles on the Kendo UI ComboBox:
 * [How to Implement Cascading with Local Data]({% slug howto_implement_cascading_local_data_combobox %})
 * [How to Make Visible Input Readonly]({% slug howto_make_visible_inputs_readonly_combobox %})
 * [How to Open ComboBox When onFocus is Triggered]({% slug howto_open_onfocus_combobox %})
-* [How to Prevent Adding Custom Values]({% slug howto_prevent_adding_custom_values_combobox %})
 * [How to Select Items on Tab]({% slug howto_select_items_ontab_combobox %})
 * [How to Underline Matched Search]({% slug howto_underline_matched_search_combobox %})
 
