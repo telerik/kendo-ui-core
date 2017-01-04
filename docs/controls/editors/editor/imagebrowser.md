@@ -8,21 +8,21 @@ position: 2
 
 # Image Browser
 
-By default the **Insert Image** tool opens a simple dialog which allows you to type in or paste the URL of an image and, optionally, specify a tooltip.
+By default, the **Insert Image** tool opens a simple dialog that allows you to type in or paste the URL of an image and, optionally, specify a tooltip.
 
 ![Insert Image Dialog](/controls/editors/editor/editor-insert-image.png)
 
 ## Overview
 
-From Q3 2012 release onwards the Editor supports a new way of picking an image by browsing a list of predefined files and directories. Uploading new images is also supported.
+As of the Q3 2012 release, the Editor has supported a new way of picking an image by browsing a list of predefined files and directories. Uploading new images is also supported.
 
 ![Image Browser Dialog](/controls/editors/editor/editor-image-browser.png)
 
-The image browser needs a server-side implementation to retrieve and upload the files and directories.
+To retrieve and upload the files and directories, the image browser needs a server-side implementation.
 
 ## Configuration
 
-The image browser tool can be configured through the [`imagebrowser` configuration option](/api/javascript/ui/editor#configuration-imageBrowser).
+The image browser tool can be configured through the [`imagebrowser`](/api/javascript/ui/editor#configuration-imageBrowser) configuration option.
 
 ###### Example
 
@@ -41,13 +41,13 @@ The image browser tool can be configured through the [`imagebrowser` configurati
          });
       });
 
-The default requests and responses for the `create/read/destroy/upload` operations are as follows:
+The following list provides information about the default requests and responses for the `create`, `read`, `destroy`, and `upload` operations.
 
-- `create` - makes a request for the creation of a directory with the parameters below and does not expect a response:
+- `create`&mdash;Makes a request for the creation of a directory with the following parameters and does not expect a response.
 
         { "name": "New folder name", "type": "d", "path": "foo/" }
 
-- `read` - sends the `path` parameter to specify the path which is browsed and expects a file listing in the format below:
+- `read`&mdash;Sends the `path` parameter to specify the path which is browsed and expects a file listing in the following format.
 
         [
             { "name": "foo.png", "type": "f", "size": 73289 },
@@ -57,18 +57,17 @@ The default requests and responses for the `create/read/destroy/upload` operatio
 
     Where `name` is the file or directory name, `type` is either an **f** for a file or a **d** for a directory, and `size` is the file size (optional).
 
-- `destroy` - makes a request with the following parameters:
+- `destroy`&mdash;Makes a request with the following parameters.
+    - `name`&mdash;The file or directory to be deleted.
+    - `path`&mdash;The directory in which the file or the directory resides.
+    - `type`&mdash;Whether a file or a directory is to be deleted (an **f** or a **d**).
+    - `size`&mdash;(Optional) The file size, as provided by the `read` response.
 
-    - `name` - the file or directory to be deleted.
-    - `path` - the directory in which the file or the directory resides.
-    - `type` - whether a file or a directory is to be deleted (an **f** or a **d**).
-    - `size` - optional, the file size, as provided by the `read` response.
-
-- `upload` - makes a request to the `uploadUrl`. The request payload consists of the uploaded file and expects a `file` object in response:
+- `upload`&mdash;Makes a request to the `uploadUrl`. The request payload consists of the uploaded file and expects a `file` object in response.
 
         { "name": "foo.png", "type": "f", "size": 12345 }
 
-All of these can be changed through the [`imagebrowser` configuration](/api/javascript/ui/editor#configuration-imageBrowser).
+You can update all of these requests and responses through the [`imagebrowser`](/api/javascript/ui/editor#configuration-imageBrowser) configuration.
 
 ## See Also
 

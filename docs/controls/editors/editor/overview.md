@@ -8,13 +8,15 @@ position: 1
 
 # Editor Overview
 
-The [Kendo UI Editor widget](http://demos.telerik.com/kendo-ui/editor/index) allows you to create rich textual content by means of a `WYSIWYG` interface. The generated widget value is an `XHTML` markup.
+The [Kendo UI Editor widget](http://demos.telerik.com/kendo-ui/editor/index) allows you to create rich textual content through a What-You-See-Is-What-You-Get (WYSIWYG) interface.
+
+The generated widget value is an `XHTML` markup.
 
 ## Getting Started
 
 ### Initialize the Editor
 
-Initialize the Editor widget by using an existing `HTML` element and a jQuery selector.
+To initialize the Editor, use an existing `HTML` element and a jQuery selector.
 
 ###### Example
 
@@ -26,15 +28,17 @@ Initialize the Editor widget by using an existing `HTML` element and a jQuery se
 
 ## Modes
 
-The Editor assumes two mode types depending on the element from which it is created: classic and inline.
+Depending on the element from which the Editor is created, it assumes 2 mode types:
+* The [classic mode type](#classic-mode).
+* The [inline mode type](#inline-mode).
 
 ### Classic Mode
 
-If you initialize the Editor from a `<textarea>`, it assumes its classic mode. The `textarea` is hidden and used to hold the value of the widget. A `contenteditable iframe` is created for you to type in. In the past, `iframes` were the only element which allowed content editability in most browsers.
+If you initialize the Editor from a `<textarea>` element, it assumes its classic mode. The `textarea` is not visible and is used to hold the value of the widget. You can type in the `contenteditable iframe` that is created. In the past, `iframes` used to be the only element that allowed for the content to be editable in most browsers.
 
-The classic Editor is able to post its value automatically, because it is based on a `form` element. The Editor tools are always visible. The Editor's content does not reside on the main web page, so the page styling does not influence the editable content. If custom styles need to be applied to the editable content, they must be [injected via the Editor's configuration](/api/javascript/ui/editor#configuration-stylesheets).
+The classic Editor posts its value automatically because it is based on a `form` element. The tools of the Editor are always visible. Its content does not reside on the main web page and the styling of the page does not influence the editable content. To apply custom styles to the editable content, [inject them through the configuration of the Editor](/api/javascript/ui/editor#configuration-stylesheets).
 
-[Classic Editor Demo](http://demos.telerik.com/kendo-ui/web/editor/index.html)
+[Demo of the Classic Mode Editor](http://demos.telerik.com/kendo-ui/web/editor/index.html)
 
 ### Inline Mode
 
@@ -42,21 +46,25 @@ If you initialize the Editor from a `<div>`, it assumes its inline mode. The ori
 
 > **Important**
 >
-> While it is possible to initialize an inline Editor from a non-`div` element, such as `p`, `h1`, and others, it is strongly recommended that you use the `<div>`. Table elements cannot be used for creating an inline Editor because of Internet Explorer browser limitations.
+> While it is possible to initialize an inline Editor from a non-`div` element, such as `p` or `h1`, it is strongly recommended that you use the `<div>` one. Do not use `<table>` elements for creating inline Editors because of Internet Explorer browser limitations.
 
-The inline Editor is not able to post its value and [this is something you must take care of](/web/editor/troubleshoot/troubleshooting). The Editor tools are only visible when the widget is focused. The Editor's content resides on the main web page, so the page styling can influence the editable content.
+The inline Editor does not post its value. Posting the value of an inline Editor is a matter that [you need to take care of]({% slug troubleshooting_editor_widget %}). The tools of the Editor are only visible when the widget is focused. Its content resides on the main web page and the styling of the page influences the editable content.
 
-[Inline Editor Demo](http://demos.telerik.com/kendo-ui/web/editor/inline-editing.html)
+[Demo of the Inline Mode Editor](http://demos.telerik.com/kendo-ui/web/editor/inline-editing.html)
 
 > **Important**  
 >
-> Due to the limited `iframe` support of the iOS Safari browser, the inline mode of the Editor is recommended to use on iOS devices.
+> Because of the limited `iframe` support provided by the iOS Safari browser, it is recommended to use the inline Editor mode on iOS devices.
 
 ## Configuration
 
-It is possible to configure the Editor tools through the [`tools` configuration option](/api/web/editor#tools).
+To configure the Editor tools, use the [`tools`](/api/web/editor#tools) configuration option.
 
 ### Define Sets of Editor Tools
+
+If you do not define a set of specific tools, the Editor creates a set of default tools for text formatting.
+
+The following example demonstrates how to implement a set of specific Editor tools.
 
 ###### Example
 
@@ -71,13 +79,11 @@ It is possible to configure the Editor tools through the [`tools` configuration 
           });
       });
 
-If you define no specific tools, the Editor creates its default set of tools for text formatting.
-
 ### Specify Custom Tools
 
-Beside the available built-in tools, the Editor functionality can be extended through custom tools, defined in the `tools` array.
+Apart from the available built-in tools, the Editor functionality can be extended through custom tools that are defined in the `tools` array.
 
-The example below demonstrates how to add a custom tool button.
+The following example demonstrates how to add a custom tool button. To allow styling where `toolName` is the name specified in the custom tool configuration, the custom buttons get a `k-toolName` CSS class. The `undo` and `redo` tool names are reserved.
 
 ###### Example
 
@@ -95,11 +101,11 @@ The example below demonstrates how to add a custom tool button.
            ]
        });
 
-The custom buttons get a `k-toolName` CSS class to allow styling, where `toolName` is the name specified in the custom tool configuration. Note that `undo` and `redo` are reserved tool names.
+### Apply Read-Only Functionalities
 
-### Apply Readonly Functionality
+To make the Editor read-only, remove the `contenteditable` attribute of the [`body`](/api/javascript/ui/editor#fields-body) element. While the Editor is read-only, the hyperlinks in its content become active and clicking on them navigates the page. To avoid this behavior, prevent the hyperlink clicks.
 
-You can make the Editor readonly by removing the `contenteditable` attribute of the widget's [`body`](/api/javascript/ui/editor#fields-body). While the Editor is readonly, the hyperlinks in its content become active and clicking on them will navigate the page. If this is undesired, prevent the hyperlink clicks.
+The following example demonstrates how to apply a read-only functionality to the Editor.
 
 ###### Example
 
@@ -114,18 +120,24 @@ You can make the Editor readonly by removing the `contenteditable` attribute of 
 
 ## Display
 
+The Editor provides options for configuring its appearance, such as its size.
+
 ### Size
 
-Before the Q3 2012 (2012.3.1114) release the Editor assumed the pixel offset width of the `<textarea>` from which it was created. As of now, the widget behaves in the following way:
+Prior to the Q3 2012 (2012.3.1114) release, the Editor assumed the pixel offset width of the `<textarea>` from which it was created.
 
-* The Editor applies the width or height value, set via an inline style in the `<textarea>`, if such is available.
-* If the `<textarea>` is not displaying such explicit values, the Editor applies a 100% width dimension and a default height of 250px.
+The current behavior of the widget is as follows:
 
-If the `<textarea>` width and height are applied via external CSS styles, use a similar approach to the Editor, e.g., by using its `k-editor` CSS class.
+* If a width or a height value is set through an inline style in the `<textarea>` element, the Editor applies it.
+* If the `<textarea>` does not display such explicit values, the Editor applies a 100% width dimension and a default height of 250px.
 
-Note that `<textarea>` `cols` and `rows` are required attributes and they can influence the dimensions of a `<textarea>` element as well. However, browsers do not apply them in a consistent manner, so the Editor ignores them when its size is rendered.
+If the `<textarea>` width and height are applied through external CSS styles, use a similar approach to the Editor&mdash;for example, by using its `k-editor` CSS class.
 
-When using the classic (iFrame) mode, the Editor cannot assume a very small height, because it needs some minimum reasonable space for its toolbar and editable areas. The default widget height is 250px. To set a height, which is smaller than 200px, use the approach shown in the example below.
+The `<textarea>`, `cols`, and `rows` attributes are required. They can influence the dimensions of a `<textarea>` element as well. However, browsers do not apply them in a consistent manner and the Editor ignores them when its size is rendered.
+
+When using the classic (iFrame) mode, the Editor does not assume a very small height because it needs some minimum reasonable space for its toolbar and editable areas. The default widget height is 250px.
+
+To set a height that is smaller than 200px, use the approach demonstrated in the following example.
 
 ###### Example
 
@@ -167,13 +179,13 @@ When using the classic (iFrame) mode, the Editor cannot assume a very small heig
 </script>
 ```
 
-If the Editor's height should be smaller than 100px, then use the widget's [inline mode](#inline-mode).
+To set a height that is smaller than 100px, use the [inline mode](#inline-mode) of the Editor.
 
-When using the MVC wrapper of the Editor, apply the CSS class via `.HtmlAttributes()`.
+When using the MVC wrapper of the Editor, apply the CSS class through `.HtmlAttributes()`.
 
 ### Default Content Styling
 
-Kendo UI Editor uses an `iframe` and applies some default CSS styles to its content when the [classic mode](#classic-mode) is enabled. This allows the widget to override the default browser styling. The styles are shown in the code snippet below. They are targeting mostly headings, paragraphs, links, lists, and tables. All tables inside the Editor obtain a `k-table` class, which is not included in the widget's value.
+When the [classic mode](#classic-mode) is enabled, the Editor uses an `iframe` and applies some default CSS styles to its content. This behavior overrides the default browser styling that are shown in the following example and that target mainly headings, paragraphs, links, lists, and tables. All tables inside the Editor obtain a `k-table` class, which is not included in the value of the widget.
 
 ###### Example
 
@@ -257,13 +269,13 @@ Kendo UI Editor uses an `iframe` and applies some default CSS styles to its cont
       padding: 0;
     }
 
-There may be scenarios when the above styles are undesired and need to be removed or overridden. To remove all the styles, execute the following code after the Editor has been initialized:
+To avoid the default content styles demonstrated in the previous example, remove or override them after the Editor is initialized by executing the following code.
 
     var editor = $("#EditorID").data("kendoEditor");
     var styleTag = editor.body.parentNode.getElementsByTagName("style")[0];
     styleTag.parentNode.removeChild(styleTag);
 
-To override the above styles, use custom styles with [higher specificity](https://developer.mozilla.org/en-US/docs/Web/CSS/Specificity) selectors and inject those custom styles in an [Editor stylesheet](http://demos.telerik.com/kendo-ui/editor/styles). When doing so, it is not required to customize the widget's Formatting tool.
+You can also use custom styles with [higher specificity](https://developer.mozilla.org/en-US/docs/Web/CSS/Specificity) selectors and inject those custom styles in an [Editor stylesheet](http://demos.telerik.com/kendo-ui/editor/styles). In such cases, you do not have to customize the Formatting tool of the Editor.
 
 ## See Also
 

@@ -1,20 +1,20 @@
 ---
-title: Pasting
-page_title: Pasting | Kendo UI Editor
+title: Pasting Content
+page_title: Pasting Content | Kendo UI Editor
 description: "Paste content from HTML and MS Word documents to the Kendo UI Editor widget."
 slug: pasting_editor_widget
 position: 6
 ---
 
-# Pasting
+# Pasting Content
 
-Pasting from other HTML and MS Word documents to the Kendo UI Editor widget is essential for the end-user experience.
+Pasting content from HTML and Microsoft (MS) Word documents to the Kendo UI Editor is essential for the end-user experience.
 
 This article demonstrates the basic concepts of pasting to editable elements as well as the built-in features provided by the Editor, which help to fine-tune the final results.
 
 ## Basic Concepts
 
-The Editor facilitates the DOM clipboard events. Therefore, any content that is pasted is first processed by the browser.
+The Editor facilitates the DOM clipboard events. Any content that is pasted is first processed by the browser.
 
 After the browser processes the content, the [`pasteCleanup`](/api/javascript/ui/editor#configuration-pasteCleanup) options are applied to help you control what is going to be pasted.
 
@@ -34,7 +34,7 @@ The built-in [`pasteCleanup`](/api/javascript/ui/editor#configuration-pasteClean
 * [`msConvertLists`](/api/javascript/ui/editor#configuration-pasteCleanup.msConvertLists)&mdash;Converts MS Word lists to HTML lists; enabled by default.
 * [`custom`](/api/javascript/ui/editor#configuration-pasteCleanup.custom)&mdash;Uses a callback function to create [s custom `pasteCleanup` option](#create-your-own-pastecleanup-fucntion).
 
-The example below demonstrates how to copy the HTML content above the Editor and paste it in the content area. Because of the enabled `span` option, `span` tags are removed.
+The following example demonstrates how to copy the HTML content above the Editor and paste it in the content area. Because of the enabled `span` option, the `span` tags are removed.
 
 ###### Example
 
@@ -53,13 +53,13 @@ The example below demonstrates how to copy the HTML content above the Editor and
 
 ### Paste from MS Word
 
-The `pasteCleanup` options starting with an `ms` prefix target MS Word. They intend to offer more control over pasting content from MS Word. Most browsers translate MS Word content to HTML, but no strict rules or specification leading to proper results exist. That is why, these options deliver a better cross-browser outcome in such cases.
+The `pasteCleanup` options starting with an `ms` prefix target MS Word. They offer more control over the pasting of content from MS Word. Most browsers translate MS Word content to HTML, but strict rules or specification leading to proper results do not exist. That is why, in such cases, these options deliver a better cross-browser outcome.
 
-The `msTags` and the `msAllFormatting` options strip MS Word specific tags. MS Word specific tags are some valid XML nodes that MS Word uses to render text formatting and decoration. Some browsers do not translate these tags and they are just inserted into the content area on pasting. This causes the HTML to be invalid. Additionally, the `msAllFormatting` option removes the font-name and font-size stylization.
+The `msTags` and the `msAllFormatting` options strip MS Word specific tags. MS Word specific tags are some valid XML nodes that MS Word uses to render text formatting and decoration. Some browsers do not translate these tags and they are just inserted into the content area on pasting. This makes the HTML invalid. Additionally, the `msAllFormatting` option removes the font-name and font-size stylization.
 
 The `msConvertLists` is an option that enables the end user to successfully paste MS Word lists and convert them to proper HTML lists on pasting. Only few browsers support this feature and lists are pasted as plain `<p>` tags.
 
-The example below demonstrates how to adjust the MS Word specific options. Click on preview and see the result by pasting some content from MS Word.
+The following example demonstrates how to adjust the MS Word specific options. To see the result, paste some content from MS Word and click on **PREVIEW**.
 
 ###### Example
 
@@ -78,9 +78,9 @@ The example below demonstrates how to adjust the MS Word specific options. Click
 
 ### Create Custom pasteCleanup Functions
 
-The `custom` field is a powerful way to define your own logic to clean the pasted HTML through the assignment of a callback function. The exposed argument of this callback is the HTML that is passed through all other `pasteCleanup` options. Implement your own logic that modifies the exposed HTML and return it as a `string`.
+The `custom` field is a powerful way to define your own logic to clean the pasted HTML through the assignment of a callback function. The exposed argument of this callback is the HTML that is passed through all other `pasteCleanup` options. In this way, you can implement your own logic that modifies the exposed HTML and return it as a `string`.
 
-The example below demonstrates a simple logic to strip the `<strong>` tags from the pasted HTML content.
+The following example demonstrates a simple logic to strip the `<strong>` tags from the pasted HTML content.
 
 ###### Example
 

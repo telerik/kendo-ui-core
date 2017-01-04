@@ -8,61 +8,95 @@ slug: troubleshooting_editor_widget
 
 # Common Issues
 
-This page provides solutions for common issues you may encounter while working with the Kendo UI Editor widget.
+This page provides solutions for common issues you might encounter while working with the Kendo UI Editor widget.
 
 ## Pasting
 
-### Pasting Displays Nothing: Internet Explorer
+### Pasting Displays Nothing in Internet Explorer
 
-Pasting in the Editor requires permission to access **Clipboard** data. This may require users with strict security settings to add the site in the trusted site zone, or to adjust their Internet options so that the **Allow Programmatic Clipboard Access** setting is set to either **Allowed** or **Prompt**.
+Pasting in the Editor requires permission to access **Clipboard** data.
+
+**Solution**
+
+Users with strict security settings might be required to apply either of the following approaches:   
+
+* Add the site in the trusted site zone.  
+* Adjust their Internet options so that the **Allow Programmatic Clipboard Access** setting is set to either **Allowed** or **Prompt**.
 
 ### Pasted MS Word Styles Are Not Retained
 
-By design, the Editor strives to output a clean, XHTML-compatible markup. Because of that, the widget cleans up invalid styles set by Microsoft Word, and removes the most presentational styles. Such styles include the colors applied by the current theme and the default MS Word font and size. Ideally, the output of the Editor should be styled via a stylesheet provided through the [stylesheets configuration option](/api/javascript/ui/editor#configuration-stylesheets). This allows all pasted content to be styled in a consistent manner across your site.
+By design, the Editor strives to output a clean and XHTML-compatible markup. That is why, the widget cleans up invalid styles set by Microsoft Word and removes the most presentational styles. Such styles include the colors applied by the current theme and the default MS Word font and size.
 
-If wrong pasting removes semantics or actual content along with the styles, submit a bug report and attach an MS Word document that reproduces the problem.
+**Solution**
+
+Ideally, the output of the Editor has to be styled via a stylesheet provided through the [stylesheets configuration option](/api/javascript/ui/editor#configuration-stylesheets). It allows for the whole pasted content to be consistently styled across your site.
+
+If wrong pasting removes semantics or actual content along with the styles:
+
+1. Submit a bug report.
+1. Attach an MS Word document that reproduces the issue.
 
 ## Editing and Formatting
 
 ### Formatting Shows BOM Characters in Editable Area
 
-The Editor uses BOM characters to correctly handle some ranges. These characters become visible if there is a problem with the page encoding. To debug this, follow the steps:
+The Editor uses BOM characters to correctly handle some ranges. If there is an issue with the page encoding, these characters become visible.
 
-1. If you observe the problem in the [online demos](http://demos.telerik.com/kendo-ui/editor), this might mean that your browser has enforced an encoding that is different from the UTF-8 one. This scenario is not supported.
+**Solution**
 
-1. If the online demos behave properly, change the Kendo UI script references so they are loaded from the CDN `http://kendo.cdn.telerik.com/2014.2.716/js/kendo.all.min.js`. If your page is now working correctly, then your local script files are served with the wrong encoding, or are corrupted. Copy over the scripts (the files, not their content) from the official distribution, and see if the problem persists.
+To handle this behavior, refer to the following scenarios:
 
-1. If the problem is still visible on your page, and the scripts are loaded via the CDN, then it is likely that the page is served with the wrong formatting. Make sure the page, as well as its layout pages, are saved and served in UTF-8.
+1. If you observe the problem in the [online demos](http://demos.telerik.com/kendo-ui/editor), your browser might have enforced an encoding that is different from the UTF-8 one. This scenario is not supported.
+1. If the online demos behave properly, change the Kendo UI script references so they are loaded from the CDN (http://kendo.cdn.telerik.com/2014.2.716/js/kendo.all.min.js). If your page is now working correctly, your local script files are served with the wrong encoding, or are corrupted. Copy over the scripts (the files, not their content) from the official distribution, and see if the issue persists.
+1. If the problem is still visible on your page, and the scripts are loaded through the CDN, the page might be served with the wrong formatting. Verify that the page as well as its layout pages are saved and served in UTF-8.
 
-### Editor in Popup Is Readonly: Firefox
+### Editor in Popup Is Read-Only in Firefox
 
-Firefox cannot handle `iframe` elements properly when they are moved to the DOM. When an Editor is used inside a popup, which moves elements to the DOM, the popup (e.g., a Kendo UI Window, a jQuery dialog, etc.) must be initialized first, or you must call the [`refresh` method](/api/javascript/ui/editor#methods-refresh).
+Firefox cannot handle `iframe` elements properly when they are moved to the DOM.
+
+**Solution**
+
+When you use an Editor inside a popup, which moves elements to the DOM, either first initialize the popup (for example, a Kendo UI Window, a jQuery dialog, or other) or call the [`refresh`](/api/javascript/ui/editor#methods-refresh) method.
 
 ## Layout and Display
 
 ### Editor in iPad Expands instead of Being Scrollable
 
-Iframes cannot be scrollable in iOS and always expand to display all their content. A possible solution is to use the Editor's inline editing mode, which does not include an `iframe`. In this mode the Editor's value should be posted manually (see below).
+Iframes cannot be scrollable in iOS and always expand to display all their content.
 
-### Images and Tables Are Not Resizeable
+**Solution**
 
-Image and table resizing inside `contenteditable` elements depends on the browser. As a result of browser behavior, images may become non-resizeable if a "classic" Editor (which uses an `iframe`) is created while hidden, or is hidden after its initialization and then displayed back.
+Use the inline Editor mode that excludes an `iframe`. When in inline mode, you need to manually post the value of the Editor (see below).
 
-The reason for the issue lies in browser functionalities. That is why it can be resolved by calling the [`refresh`](/api/javascript/ui/editor#methods-refresh) method of the Editor after the Editor becomes visible. Refreshing the widget recreates the `iframe`.
+### Images and Tables Are Not Resizable
+
+Image and table resizing inside `contenteditable` elements depends on the browser. As a result, images may not resize if a classic-mode Editor (which uses an `iframe`) is created while hidden, or is hidden after its initialization and then displayed back.
+
+The reason for the issue is the functionalities of the browser.
+
+**Solution**
+
+Call the [`refresh`](/api/javascript/ui/editor#methods-refresh) method of the Editor after the widget becomes visible. Refreshing the widget recreates the `iframe`.
 
 Another possible approach is to use the inline mode of the Editor, that is, to create the Editor from a `div` element.
 
-As of the R3 2016 release, resizing of table rows and columns has been implemented in the Editor. To resize the row or column of the Editor, the user can drag the cell borders with the mouse.
-
-To resize an image or a table in versions prior to R3 2016 and in browsers that do not normally support it, such as Google Chrome 46, implement a [custom Editor tool](http://demos.telerik.com/kendo-ui/editor/custom-tools).
+> **Important**
+> * As of the R3 2016 release, resizing of table rows and columns has been implemented in the Editor. To resize a row or a column of the Editor, the user can drag the cell borders with the mouse.
+> * To resize an image or a table in versions prior to the R3 2016 release and in browsers that do not normally support it, such as Google Chrome 46, implement a [custom Editor tool](http://demos.telerik.com/kendo-ui/editor/custom-tools).
 
 ### Back and Forward Browser Buttons Display Raw HTML
 
-The Editor stores its value encoded by default. When the page is retrieved from the `bfcache` (back-forward cache), the `textarea` value is persisted encoded and the Editor encodes it again. This process can be easily observed if you navigate several times back and forth. On each navigation, the Editor value will be encoded once more. To resolve the problem, set the [`encoded`](/api/javascript/ui/editor#configuration-encoded) property to `false`, and expect the Editor value to be posted unencoded to the server. If you are using ASP.NET, be sure to either disable the ASP.NET security validation, or set the `AllowHtml` attribute on the model field that will receive the HTML string. Here is some more [information about requesting validation in ASP.NET](http://blogs.learnnowonline.com/blog/bid/199703/ASP-NET-MVC-Request-Validation-Protection-AllowHtml-Attribute).
+By default, the Editor stores its value encoded. When the page is retrieved from the `bfcache` (back-forward cache), the `textarea` value is persisted as encoded and the Editor encodes it again. This process can be easily observed if you navigate several times back and forth. On each navigation, the Editor value is encoded once more.
 
-Another option is to enable the [inline Editor mode](/web/editor/overview#classic-mode-vs-inline-mode), which does not use an `iframe` and a `textarea`. In this case, however, the Editor's value must be [submitted manually](/getting-started/web/editor/troubleshooting#inline-editor-value-is-not-posted-to-the-server).
+**Solution**
 
-The browser's back-forward cache can be disabled by attaching a `window.unload` handler.
+Set the [`encoded`](/api/javascript/ui/editor#configuration-encoded) property to `false`. The value of the Editor is expected to be posted unencoded to the server.
+
+If you are using ASP.NET, make sure that you either disable the ASP.NET security validation or set the `AllowHtml` attribute on the model field that will receive the HTML string. For more information, refer to the documentation on [requesting validation in ASP.NET](http://blogs.learnnowonline.com/blog/bid/199703/ASP-NET-MVC-Request-Validation-Protection-AllowHtml-Attribute).
+
+Another option is to enable the [inline Editor mode](/web/editor/overview#classic-mode-vs-inline-mode) which does not use an `iframe` and a `textarea`. In this case, however, you have to [manually submit the value of the Editor]({% slug troubleshooting_editor_widget %}#inline-editor-value-is-not-posted-to-the-server).
+
+The back-forward cache of the browser can be disabled by attaching a `window.unload` handler, as demonstrated in the following example.
 
 ###### Example
 
@@ -74,7 +108,13 @@ The browser's back-forward cache can be disabled by attaching a `window.unload` 
 
 ### Inline Value Is Not Posted to Server
 
-Since the inline Editor is initialized from a non-`form` element, it is not posted to the server by design. If you need to submit the editor value along with the `form`, use the following approach:
+Because the inline Editor is initialized from a non-`form` element, it is not posted to the server by design.
+
+**Solution**
+
+To submit the value of the Editor along with the `form`, use the approach demonstrated in the following example.
+
+###### Example
 
     <form>
       <div id="comment" contentEditable></div>
