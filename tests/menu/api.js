@@ -33,7 +33,7 @@ var menu,
 
 module("menu api", {
     setup: function () {
-        QUnit.fixture.append(
+        $("#qunit-fixture").append(
             '    <ul id="menu" class="k-widget k-reset k-header k-menu" style="visibility: hidden; top: -10000px">' +
             '        <li class="k-item k-state-default" style=""><span class="k-link">ASP.NET MVC<span' +
             '                class="k-icon k-i-arrow-60-down"></span></span>' +
@@ -106,7 +106,7 @@ module("menu api", {
         menu = new kendo.ui.Menu("#menu", { animation: false, select: Select, open: Open, close: Close, hoverDelay: 0, popupCollision: "flip" });
     },
     teardown: function() {
-        kendo.destroy(QUnit.fixture);
+        kendo.destroy($("#qunit-fixture"));
     }
 });
 
