@@ -90,9 +90,9 @@ var __meta__ = { // jshint ignore:line
             that._header();
 
             that._footer(that.footer);
-
+            
             id = element
-                    .addClass("k-widget k-calendar")
+                    .addClass("k-widget k-calendar " + (options.weekNumber ? " k-week-number" : ""))
                     .on(MOUSEENTER_WITH_NS + " " + MOUSELEAVE, CELLSELECTOR, mousetoggle)
                     .on(KEYDOWN_NS, "table.k-content", proxy(that._move, that))
                     .on(CLICK, CELLSELECTOR, function(e) {
@@ -157,7 +157,7 @@ var __meta__ = { // jshint ignore:line
             footer : "",
             format : "",
             month : {},
-            showWeekNumber: false,
+            weekNumber: false,
             start: MONTH,
             depth: MONTH,
             animation: {
@@ -335,10 +335,10 @@ var __meta__ = { // jshint ignore:line
                     format: options.format,
                     culture: culture,
                     disableDates: options.disableDates,
-                    showWeekNumber: options.showWeekNumber
+                    isWeekColumnVisible: options.weekNumber
                 }, that[currentView.name])));
                 
-                addClassToViewContainer(CENTURY, to, currentView.name);
+                addClassToViewContainer(to, currentView.name);
                 makeUnselectable(to);
                 var replace = from && from.data("start") === to.data("start");
                 that._animate({
@@ -933,7 +933,7 @@ var __meta__ = { // jshint ignore:line
                 format = options.format,
                 culture = options.culture,
                 navigateUrl = options.url,
-                showWeekNumber = options.showWeekNumber,
+                isWeekColumnVisible = options.isWeekColumnVisible,
                 hasUrl = navigateUrl && dates[0],
                 currentCalendar = getCalendarInfo(culture),
                 firstDayIdx = currentCalendar.firstDay,
@@ -946,7 +946,7 @@ var __meta__ = { // jshint ignore:line
                 toDateString = that.toDateString,
                 today = new DATE(),
                 html = '<table tabindex="0" role="grid" class="k-content" cellspacing="0" data-start="' + toDateString(start) + '"><thead><tr role="row">';
-                if (showWeekNumber) {
+                if (isWeekColumnVisible) {
                     html += '<th scope="col"></th>';
                 }
                 
@@ -963,7 +963,7 @@ var __meta__ = { // jshint ignore:line
                     perRow: 7,
                     html: html += '</tr></thead><tbody><tr role="row">',
                     start: start,
-                    showWeekNumber: showWeekNumber,
+                    isWeekColumnVisible: isWeekColumnVisible,
                     weekNumber: options.weekNumber,
                     min: new DATE(min.getFullYear(), min.getMonth(), min.getDate()),
                     max: new DATE(max.getFullYear(), max.getMonth(), max.getDate()),
@@ -1267,13 +1267,13 @@ var __meta__ = { // jshint ignore:line
             build = options.build,
             weekNumberBuild = options.weekNumberBuild,
             length = options.cells || 12,
-            showWeekNumber = options.showWeekNumber,
+            isWeekColumnVisible = options.isWeekColumnVisible,
             cellsPerRow = options.perRow || 4,
             weekNumber = options.weekNumber || weekNumberTemplate,
             content = options.content || cellTemplate,
             empty = options.empty || emptyCellTemplate,      
             html = options.html || '<table tabindex="0" role="grid" class="k-content k-meta-view" cellspacing="0"><tbody><tr role="row">';
-            if(showWeekNumber) {
+            if(isWeekColumnVisible) {
                 html += weekNumber(weekNumberBuild(start));
             }
             
@@ -1281,7 +1281,7 @@ var __meta__ = { // jshint ignore:line
         for(; idx < length; idx++) {
             if (idx > 0 && idx % cellsPerRow === 0) {
                 html += '</tr><tr role="row">';
-                if(showWeekNumber) {
+                if(isWeekColumnVisible) {
                     html += weekNumber(weekNumberBuild(start));
                 }
             }
@@ -1395,10 +1395,8 @@ var __meta__ = { // jshint ignore:line
         }
     }
 
-    function addClassToViewContainer(className, element, currentView) {
-        if(className == currentView) {
-            element.addClass("k-" + className);
-        }
+    function addClassToViewContainer(element, currentView) {
+        element.addClass("k-" + currentView);
     }
 
     function inArray(date, dates) {
