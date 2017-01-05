@@ -201,7 +201,7 @@ test("month view renders week number column when enabled", function() {
     div.html(calendar.views[0].content({
         date: today,
         empty: template.empty,
-        showWeekNumber: true,
+        isWeekColumnVisible: true,
         content: template.content,
         min: new Date(2000, 10, 10),
         max: new Date(2020, 10, 10),
@@ -673,7 +673,7 @@ test("century view renders century class", function() {
         max: new Date(2220, 10, 10)
     }));
 
-    calendar.addClassToViewContainer(calendar.views[3].name, div.find("table"), calendar.views[3].name);
+    calendar.addClassToViewContainer(div.find("table"), calendar.views[3].name);
 
     ok(div.find("table.k-content").hasClass("k-century"));
 });
