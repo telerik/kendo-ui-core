@@ -287,7 +287,7 @@ The following example demonstrates how to subscribe to events by a template dele
         )
 ```
 
-### By Single Menu Items
+### By an HTML Attribute
 
 The following example demonstrates how to subscribe to the `select` event of a single Menu item.
 
