@@ -68,7 +68,7 @@
 @draghandle-hover-border-color: @accent;
 @draghandle-hover-background-color: @accent;
 @draghandle-hover-shadow: 0 0 0 8px RGBA(63, 81, 181, 0.3);
-@alt-background-color: contrast(@background, lighten(@background, 14%), darken(@background, 2%), 0.5);
+@alt-background-color: contrast(@background, lighten(@background, 14%), darken(@background, 5%), 0.5);
 @nested-alt-background-color: darken(@alt-background-color, 8%);
 @cell-border-color: #e7e7e7;
 @column-highlight-background-color: #e9e9e9;
@@ -2728,13 +2728,13 @@ border-color: @widget-border-color;
 border-radius: @calendar-border-radius;
 }
 
-.k-calendar .k-content th,
-.k-calendar .k-alt {
+.k-calendar .k-content th {
 background-color: @widget-background-color;
 }
 
 .k-calendar .k-alt {
     border-radius: 0;
+    background-color: @alt-background-color;
 }
 
 .k-calendar .k-header .k-state-hover {
