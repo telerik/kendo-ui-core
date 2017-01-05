@@ -947,7 +947,7 @@ var __meta__ = { // jshint ignore:line
                 today = new DATE(),
                 html = '<table tabindex="0" role="grid" class="k-content" cellspacing="0" data-start="' + toDateString(start) + '"><thead><tr role="row">';
                 if (isWeekColumnVisible) {
-                    html += '<th scope="col"></th>';
+                    html += '<th scope="col" class="k-alt"></th>';
                 }
                 
                 for (; idx < 7; idx++) {
