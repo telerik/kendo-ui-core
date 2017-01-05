@@ -54,6 +54,10 @@ a.k-state-active.k-button-icon .k-icon,
     }
 }
 
+.k-widget.k-notification.k-notification .k-icon {
+    color: inherit;
+}
+
 .k-splitbar .k-resize-handle {
     background-color: @normal-text-color;
 }
@@ -736,7 +740,7 @@ input.k-textbox:active {
 
 /* Notification */
 .k-widget.k-notification.k-notification-info {
-    color: darken(@info, 27%);
+    color: darken(saturate(adjust-hue(@info, -1.7575), 28.3784), 42.9412);
     background-color: @info;
     border-color: @info;
 }
