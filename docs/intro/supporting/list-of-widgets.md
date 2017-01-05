@@ -73,6 +73,7 @@ The following table lists all Kendo UI components with regard to their support b
 | [Splitter](http://demos.telerik.com/kendo-ui/splitter/index)          | <span class="tag-success">Yes</span>| <span class="tag-success">Yes</span> | <span class="tag-success">Yes</span>            |
 | [Tooltip](http://demos.telerik.com/kendo-ui/tooltip/index)            | <span class="tag-success">Yes</span> | <span class="tag-success">Yes</span> | <span class="tag-success">Yes</span>           |
 | [Window](http://demos.telerik.com/kendo-ui/window/index)              | <span class="tag-success">Yes</span> | <span class="tag-success">Yes</span> | <span class="tag-success">Yes</span>           |
+| [Dialog](http://demos.telerik.com/kendo-ui/dialog/index)              | <span class="tag-success">Yes</span> | <span class="tag-success">Yes</span> | <span class="tag-success">Yes</span>           |
 | **Navigation**            |
 | [Button](http://demos.telerik.com/kendo-ui/button/index)              | <span class="tag-success">Yes</span> | <span class="tag-success">Yes</span> | <span class="tag-success">Yes</span>           |
 | [ButtonGroup](http://demos.telerik.com/kendo-ui/buttongroup/index)    | <span class="tag-success">Yes</span> | <span class="tag-success">Yes</span> | <span class="tag-success">Yes</span>           |
@@ -87,6 +88,8 @@ The following table lists all Kendo UI components with regard to their support b
 | [ProgressBar](http://demos.telerik.com/kendo-ui/progressbar/index)    | <span class="tag-success">Yes</span> | <span class="tag-success">Yes</span> | <span class="tag-success">Yes</span>           |
 | [Sortable](http://demos.telerik.com/kendo-ui/sortable/index)          | <span class="tag-success">Yes</span> | <span class="tag-success">Yes</span> | <span class="tag-success">Yes</span>           |
 | [Styling](http://demos.telerik.com/kendo-ui/styling/index)            | <span class="tag-success">Yes</span> | <span class="tag-success">Yes</span> | <span class="tag-success">Yes</span>           |
+| **Media**  |
+| [Media Player](http://demos.telerik.com/kendo-ui/mediaplayer/index)   | <span class="tag-neutral">No</span> | <span class="tag-success">Yes</span> | <span class="tag-success">Yes</span>           |
 | **Hybrid UI**     |
 | [Widgets](http://demos.telerik.com/kendo-ui/m/index)                  | <span class="tag-success">Yes</span> | <span class="tag-success">Yes</span> | <span class="tag-success">Yes</span>           |
 | [Mobile Application](http://demos.telerik.com/kendo-ui/m/index)       | <span class="tag-success">Yes</span> | <span class="tag-success">Yes</span> | <span class="tag-success">Yes</span>           |
