@@ -14,15 +14,15 @@ The Menu HtmlHelper extension is a server-side wrapper for the [Kendo UI Menu](h
 
 ### The Basics
 
-There are a few ways to bind a Kendo UI Menu for ASP.NET MVC:
+To bind a Kendo UI Menu for ASP.NET MVC, apply any of the following approaches:
 
-* Use items builder&mdash;Manually define the properties of each Menu item.
-* Sitemap binding&mdash;Uses a sitemap to create the items of the Menu.
-* Model binding&mdash;Use a collection of objects to create the items of the Menu.
+* Use an items builder&mdash;Manually define the properties of each Menu item.
+* Use a sitemap binding&mdash;Set a sitemap to create the items of the Menu.
+* Use a model binding&mdash;Set a collection of objects to create the items of the Menu.
 
 ### Items Builder
 
-Below are listed the steps for you to follow when defining the items of a Kendo UI Menu.
+To define the items of a Kendo UI Menu:
 
 **Step 1** Make sure you followed all the steps from the [introductory article on Telerik UI for ASP.NET MVC]({% slug overview_aspnetmvc %}).
 
@@ -64,7 +64,7 @@ Below are listed the steps for you to follow when defining the items of a Kendo 
 
 ### Sitemap Binding
 
-Below are listed the steps for you to follow when binding a Kendo UI Menu to a sitemap.
+To bind a Kendo UI Menu to a sitemap:
 
 **Step 1** Make sure you followed all the steps from the [introductory article on Telerik UI for ASP.NET MVC]({% slug overview_aspnetmvc %}).
 
@@ -120,7 +120,7 @@ Below are listed the steps for you to follow when binding a Kendo UI Menu to a s
 
 ### Model Binding
 
-Below are listed the steps for you to follow when binding a Kendo UI Menu to a hierarchical model.
+To bind a Kendo UI Menu to a hierarchical model:
 
 **Step 1** Make sure you followed all the steps from the [introductory article on Telerik UI for ASP.NET MVC]({% slug overview_aspnetmvc %}).
 
@@ -217,9 +217,9 @@ When the Menu items are removed because of lacking permissions, a parent item ma
 
 You can subscribe to all Menu [events](../../../kendo-ui/api/javascript/ui/menu#events).
 
-### By Handler Name
+### By Handler Names
 
-The examples below demonstrates how to subscribe to events by a handler name.
+The following example demonstrates how to subscribe to events by a handler name.
 
 ###### Example
 
@@ -262,9 +262,9 @@ The examples below demonstrates how to subscribe to events by a handler name.
         </script>
 ```
 
-### By Template Delegate
+### By Template Delegates
 
-The example below demonstrates how to subscribe to events by a template delegate.
+The following example demonstrates how to subscribe to events by a template delegate.
 
 ###### Example
 
@@ -287,9 +287,9 @@ The example below demonstrates how to subscribe to events by a template delegate
         )
 ```
 
-### Handle Select of a Menu Item 
+### By Single Menu Items
 
-The example below demonstrates how to subscribe to the select of a single menu item.
+The following example demonstrates how to subscribe to the `select` event of a single Menu item.
 
 ###### Example
 
@@ -309,7 +309,7 @@ The example below demonstrates how to subscribe to the select of a single menu i
 
 ### Existing Instances
 
-You can reference an existing Kendo UI Menu instance via [`jQuery.data()`](http://api.jquery.com/jQuery.data/). Once a reference is established, use the [Menu API](../../../kendo-ui/api/javascript/ui/menu#methods) to control its behavior.
+To reference an existing Kendo UI Menu instance, use [`jQuery.data()`](http://api.jquery.com/jQuery.data/). After you establish a reference, use the [Menu API](../../../kendo-ui/api/javascript/ui/menu#methods) to control the behavior of the widget.
 
 ###### Example
 
