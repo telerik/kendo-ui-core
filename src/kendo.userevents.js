@@ -344,8 +344,7 @@ var __meta__ = { // jshint ignore:line
                 if (support.browser.version < 11) {
                     element.css("-ms-touch-action", "pinch-zoom double-tap-zoom");
                 } else {
-                    var defaultAction = kendo.support.browser.chrome ? 'pan-y' : 'none';
-                    element.css("touch-action", options.touchAction || defaultAction);
+                    element.css("touch-action", options.touchAction || "none");
                 }
             }
 
