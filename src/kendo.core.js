@@ -1879,8 +1879,6 @@ function pad(number, digits, end) {
         }
 
         support.touch = "ontouchstart" in window;
-        support.msPointers = window.MSPointerEvent;
-        support.pointers = window.PointerEvent;
 
         var docStyle = document.documentElement.style;
         var transitions = support.transitions = false,
@@ -2001,7 +1999,6 @@ function pad(number, digits, end) {
         var mobileOS = support.mobileOS = support.detectOS(navigator.userAgent);
 
         support.wpDevicePixelRatio = mobileOS.wp ? screen.width / 320 : 0;
-        support.kineticScrollNeeded = mobileOS && (support.touch || support.msPointers || support.pointers);
 
         support.hasNativeScrolling = false;
 
@@ -2223,6 +2220,11 @@ function pad(number, digits, end) {
         support.hashChange = ("onhashchange" in window) && !(support.browser.msie && (!documentMode || documentMode <= 8)); // old IE detection
 
         support.customElements = ("registerElement" in window.document);
+
+        var chrome = support.browser.chrome;
+        support.msPointers = !chrome && window.MSPointerEvent;
+        support.pointers = !chrome && window.PointerEvent;
+        support.kineticScrollNeeded = mobileOS && (support.touch || support.msPointers || support.pointers);
     })();
 
 
