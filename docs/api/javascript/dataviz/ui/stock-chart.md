@@ -25,7 +25,7 @@ The data item field value must be either:
 
 The data navigator configuration options.
 
-### navigator.categoryAxis `Array|Object`
+### navigator.categoryAxis `Object`
 
 The category axis configuration options.
 
