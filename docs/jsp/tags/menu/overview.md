@@ -86,9 +86,9 @@ You can subscribe to all [events exposed by Kendo UI Menu](/api/javascript/ui/me
         </script>
 
 
-### Provide Inline Code
+### Attach to Menu Item Select Event
 
-The example below demonstrates how to subscribe to events by providing inline JavaScript code.
+The following example demonstrates how to subscribe to the `select` event of a single Menu item.
 
 ###### Example
 
