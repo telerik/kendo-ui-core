@@ -91,7 +91,24 @@ The example below demonstrates how to subscribe to events by providing inline Ja
         echo $menu->render();
         ?>
 
-<!--*-->
+### Attach to Menu Item Select Event
+
+The following example demonstrates how to subscribe to the `select` event of a single Menu item.
+
+###### Example
+
+        <?php
+        $menu = new \Kendo\UI\Menu('menu');
+
+        $item1 = new \Kendo\UI\MenuItem('item 1');
+                $item1->select("alert('select');");
+                
+        $menu->addItem($item1);
+
+        echo $menu->render();
+        ?>
+
+
 ## Reference
 
 ### Client-Side Instances
