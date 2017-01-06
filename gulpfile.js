@@ -223,25 +223,29 @@ gulp.task('mdspell', shell.task(
 ['cd docs && mdspell "**/*.md" -n -a --report']
 ));
 
-[ 'pro', 'core' ].forEach(function(flavor) {
-    gulp.task('npm-' + flavor, [ 'cjs', 'styles' ] , function() {
-        var js = gulp.src('dist/cjs/**/*').pipe(gulp.dest('dist/npm/js'));
+[ 'pro', 'core' ].forEach((flavor) => {
+    gulp.task('npm-' + flavor, [  ] , function() {
+        const dest = 'dist/npm-' + flavor;
 
-        var styles = gulp.src('dist/styles/**/*').pipe(gulp.dest('dist/npm/css'));
+        const js = gulp.src('dist/cjs/**/*')
+                    .pipe(gulp.dest(dest + '/js'));
 
-        var pkg = gulp.src('build/package-' + flavor + '.json')
+        const styles = gulp.src('dist/styles/**/*')
+                    .pipe(gulp.dest(dest + '/css'));
+
+        const pkg = gulp.src('build/package-' + flavor + '.json')
                     .pipe(replace("$KENDO_VERSION", kendoVersion))
                     .pipe(rename('package.json'))
-                    .pipe(gulp.dest('dist/npm'));
+                    .pipe(gulp.dest(dest));
 
-        var license = gulp.src('resources/legal/npm/' + flavor + '.txt')
+        const license = gulp.src('resources/legal/npm/' + flavor + '.txt')
                     .pipe(replace("$YEAR", new Date().getFullYear()))
                     .pipe(rename('LICENSE'))
-                    .pipe(gulp.dest('dist/npm'));
+                    .pipe(gulp.dest(dest));
 
-        var readme = gulp.src('resources/npm/' + flavor + '-README.md')
+        const readme = gulp.src('resources/npm/' + flavor + '-README.md')
                     .pipe(rename('README.md'))
-                    .pipe(gulp.dest('dist/npm'));
+                    .pipe(gulp.dest(dest));
 
         return merge(js, styles, pkg, license, readme);
     })
