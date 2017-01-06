@@ -540,6 +540,9 @@ cdnVersion: "2016.2.607"
 ## The MVC Core version used
 mvcCoreVersion: "2016.2.616"
 
+## Progress NPM Registry
+registry_url: 'https://registry.npm.telerik.com/'
+
 ## Assign layout and category per different paths
 defaults:
 -
