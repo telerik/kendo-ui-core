@@ -40,7 +40,7 @@ var __meta__ = { // jshint ignore:line
         NS = ".kendoNotification",
         WRAPPER = '<div class="k-widget k-notification"></div>',
         TEMPLATE = '<div class="k-notification-wrap">' +
-                '<span class="k-icon k-i-#=typeIcon#">#=typeIcon#</span>' +
+                '<span class="k-icon k-i-#=typeIcon#" title="#=typeIcon#"></span>' +
                 '#=content#' +
                 '<span class="k-icon k-i-close" title="Hide"></span>' +
             '</div>',
