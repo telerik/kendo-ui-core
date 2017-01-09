@@ -938,7 +938,7 @@ populated at the time the template function is called, if the Grid uses remote b
                         }
                     }
                 },
-                { field: "age" } ],
+                { field: "size" } ],
             filterable: { mode: "row" },
             dataSource: [ { color: "#ff0000", size: 30 }, { color: "#000000", size: 33 }] });
     </script>
@@ -5084,15 +5084,17 @@ If a `pageSize` setting is provided for the data source then this value will be 
         { field: "productName" },
         { field: "category" }
       ],
-      dataSource: [
-        { productName: "Tea", category: "Beverages" },
-        { productName: "Coffee", category: "Beverages" },
-        { productName: "Ham", category: "Food" },
-        { productName: "Bread", category: "Food" }
-      ],
-      pageable: {
-        pageSizes: true
-      }
+      dataSource: {
+	    data: [
+		  { productName: "Tea", category: "Beverages" },
+		  { productName: "Coffee", category: "Beverages" },
+		  { productName: "Ham", category: "Food" },
+		  { productName: "Bread", category: "Food" }
+	    ],
+	    pageSize: 2,
+        pageable: {
+          pageSizes: true
+        }
     });
     </script>
 
