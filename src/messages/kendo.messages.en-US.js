@@ -673,6 +673,10 @@ $.extend(true, kendo.spreadsheet.messages.dialogs,{
       "unfreeze": "Unfreeze panes"
     }
   },
+  "confirmationDialog": {
+    "text": "Are you sure you want to remove this sheet?",
+    "title": "Sheet remove"
+  },
   "validationDialog": {
     "title": "Data Validation",
     "hintMessage": "Please enter a valid {0} value {1}.",
