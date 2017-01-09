@@ -96,7 +96,7 @@ The example below demonstrates how to use FontAwesome icons with the Kendo UI Gr
       .k-header-column-menu .k-sprite:before,
       .k-column-menu .k-icon:before,
       .k-column-menu .k-sprite:before,
-      .k-grid-pager .k-icon:before {       
+      .k-grid-pager .k-icon:before {
         display: inline-block;
         padding-top: 0.5em;
         color: #2e2e2e;
@@ -150,7 +150,7 @@ The example below demonstrates how to use FontAwesome icons with the Kendo UI Gr
       .k-grid-pager .k-pager-numbers .k-current-page .k-pager-nav:after {
         content: "\f047";
       }
-    </style>				
+    </style>
 ```
 
 ## See Also
