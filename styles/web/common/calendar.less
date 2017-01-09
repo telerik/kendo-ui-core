@@ -1,11 +1,16 @@
 /* Calendar */
+@calendar-cell-width: ((34px / 14px) * 1em);
 
 .k-calendar
 {
     position: relative;
     display: inline-block;
-    width: 16.917em;
+    width: (@calendar-cell-width * 7);
     overflow: hidden;
+}
+
+.k-week-number {
+    width: (@calendar-cell-width * 8);
 }
 
 .k-calendar td,
