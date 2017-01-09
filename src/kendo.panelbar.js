@@ -214,7 +214,7 @@ var __meta__ = { // jshint ignore:line
             that._templates();
 
             that._initData(hasDataSource);
-   
+
             that._updateClasses();
 
             that._animations(options);
@@ -332,7 +332,7 @@ var __meta__ = { // jshint ignore:line
                  if (that.options.autoBind) {
                     that._progress(true);
 
-                    that.dataSource.fetch(); 
+                    that.dataSource.fetch();
                  }
             }
         },
@@ -370,7 +370,7 @@ var __meta__ = { // jshint ignore:line
                      "# var spriteCssClass = " + fieldAccessor("spriteCssClass") + "(item); #" +
                      "# var contentUrl = contentUrl(item); #" +
                      "# var tag = url||contentUrl ? 'a' : 'span'; #" +
-                   
+
                     "<#= tag # class='#= textClass(item, group) #' #= contentUrl ##= textAttributes(url) #>" +
                         "# if (imageUrl) { #" +
                               "<img class='k-image' alt='' src='#= imageUrl #' />" +
@@ -379,7 +379,7 @@ var __meta__ = { // jshint ignore:line
                         "# if (spriteCssClass) { #" +
                             "<span class='k-sprite #= spriteCssClass #'></span>" +
                         "# } #" +
-                      "#= data.panelBar.options.template(data) #" + 
+                      "#= data.panelBar.options.template(data) #" +
                       "#= arrow(data) #" +
                     "</#= tag #>"
                 ),
@@ -395,7 +395,7 @@ var __meta__ = { // jshint ignore:line
                         "# } #" +
                     "</li>"
                 ),
-                loading: template("<div class='k-icon k-i-loading' /> #: data.messages.loading #"),
+                loading: template("<div class='k-item'><span class='k-icon k-loading'></span> #: data.messages.loading #</div>"),
                 retry: template(
                     "#: data.messages.requestFailed # " +
                     "<button class='k-button k-request-retry'>#: data.messages.retry #</button>"
@@ -517,7 +517,7 @@ var __meta__ = { // jshint ignore:line
                                 $(this).find(".k-content").length > 0;
                 }
 
-                        return dataItem.hasChildren || dataItem.content || dataItem.contentUrl;                     
+                        return dataItem.hasChildren || dataItem.content || dataItem.contentUrl;
                     })
                     .children(".k-link:not(:has([class*=k-i-arrow]))")
                     .each(function () {
@@ -597,7 +597,7 @@ var __meta__ = { // jshint ignore:line
 
             this.element.append(rootItemsHtml);
             this._angularCompileElements(rootItemsHtml, items);
-        }, 
+        },
 
         _refreshChildren: function(item, parentNode) {
             var i, children, child;
@@ -620,7 +620,7 @@ var __meta__ = { // jshint ignore:line
                         data: this.dataItem(child),
                         ns: ui
                     });
-                }             
+                }
             }
         },
 
@@ -644,7 +644,7 @@ var __meta__ = { // jshint ignore:line
             var node = e.node;
             var action = e.action;
             var items = e.items;
-            var parentNode = this.wrapper;        
+            var parentNode = this.wrapper;
             var loadOnDemand = options.loadOnDemand;
 
             if (e.field) {
@@ -654,7 +654,7 @@ var __meta__ = { // jshint ignore:line
 
                 return this._updateItems(items, e.field);
             }
-        
+
             if (node) {
                 parentNode = this.findByUid(node.uid);
                 this._progress(parentNode, false);
@@ -673,11 +673,11 @@ var __meta__ = { // jshint ignore:line
 
             if (action != "remove") {
                 for (var k = 0; k < items.length; k++) {
-                
+
                     if (!loadOnDemand || items[k].expanded) {
                         var tempItem = items[k];
                         if (tempItem.hasChildren  && tempItem.items && tempItem.items.length === 0) {
-                                tempItem.load();                           
+                                tempItem.load();
                         }
                     }
                 }
@@ -802,7 +802,7 @@ var __meta__ = { // jshint ignore:line
                       group = $('<ul role="group" aria-hidden="true" class="k-group k-panel" style="display:none"></ul>');
                       parentNode.append(group);
                       wrapper = group;
-                  }                
+                  }
 
                   children = wrapper.children("li");
               }
@@ -858,7 +858,7 @@ var __meta__ = { // jshint ignore:line
                     }
                 }else{
                     that.clearSelection();
-                }               
+                }
             } else {
                 var elements = $.map(items, function(item) {
                     return that.findByUid(item.uid);
@@ -1432,7 +1432,7 @@ var __meta__ = { // jshint ignore:line
                 url = link.attr(HREF),
                 prevent, content,
                 dataItem = that.dataItem(element);
-        
+
             var loaded = dataItem && dataItem.loaded();
 
             if (dataItem && !expanded) {
@@ -1446,8 +1446,8 @@ var __meta__ = { // jshint ignore:line
                      this._progress(element, true);
                  }
                  this._toggleGroup(childGroup, isVisible);
-                 element.children(".k-group,.k-content").remove();    
-                 prevent = dataItem.hasChildren;          
+                 element.children(".k-group,.k-content").remove();
+                 prevent = dataItem.hasChildren;
 
                  dataItem.load();
              } else {
@@ -1468,7 +1468,7 @@ var __meta__ = { // jshint ignore:line
                         }
                     }
              }
-      
+
             return prevent;
         },
 
@@ -1627,7 +1627,7 @@ var __meta__ = { // jshint ignore:line
             if(dataItem){
                  dataItem.set("selected", true);
             }
-           
+
             that.trigger(CHANGE);
         },
 
