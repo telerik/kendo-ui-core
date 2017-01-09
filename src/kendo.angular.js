@@ -47,7 +47,7 @@ var __meta__ = { // jshint ignore:line
             Scheduler   : 'SchedulerDataSource',
             PivotGrid   : 'PivotDataSource',
             PivotConfigurator   : 'PivotDataSource',
-            PanelBar    : '$PLAIN',
+            PanelBar    : 'HierarchicalDataSource',
             Menu        : "$PLAIN",
             ContextMenu : "$PLAIN"
         };
@@ -778,7 +778,8 @@ var __meta__ = { // jshint ignore:line
         MobileBackButton    : "a",
         MobileDetailButton  : "a",
         ListView       : "ul",
-        MobileListView : "ul",
+        MobileListView: "ul",
+        PanelBar       : "ul",
         TreeView       : "ul",
         Menu           : "ul",
         ContextMenu    : "ul",
@@ -1180,7 +1181,7 @@ var __meta__ = { // jshint ignore:line
     });
 
     // for the Grid and ListView we add `data` and `selected` too.
-    defadvice([ "ui.Grid", "ui.ListView", "ui.TreeView" ], "$angular_makeEventHandler", function(event, scope, handler){
+    defadvice([ "ui.Grid", "ui.ListView", "ui.TreeView", "ui.PanelBar" ], "$angular_makeEventHandler", function(event, scope, handler){
         if (event != "change") {
             return this.next();
         }
@@ -1424,7 +1425,8 @@ var __meta__ = { // jshint ignore:line
         "ListView": [ "EditTemplate", "Template", "AltTemplate" ],
         "Pager": [ "SelectTemplate", "LinkTemplate" ],
         "PivotGrid": [ "ColumnHeaderTemplate", "DataCellTemplate", "RowHeaderTemplate" ],
-        "Scheduler": [ "AllDayEventTemplate", "DateHeaderTemplate", "EventTemplate", "MajorTimeHeaderTemplate", "MinorTimeHeaderTemplate" ],
+        "Scheduler": ["AllDayEventTemplate", "DateHeaderTemplate", "EventTemplate", "MajorTimeHeaderTemplate", "MinorTimeHeaderTemplate"],
+        "PanelBar": [ "Template" ],
         "TreeView": [ "Template" ],
         "Validator": [ "ErrorTemplate" ]
     };

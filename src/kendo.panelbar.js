@@ -244,7 +244,7 @@ var __meta__ = { // jshint ignore:line
                 that.expand(content.parent(), false);
             }
 
-            if (!$.isPlainObject(options.dataSource)) {
+            if (!options.dataSource) {
                 that._angularCompile();
             }
 
@@ -256,6 +256,7 @@ var __meta__ = { // jshint ignore:line
             COLLAPSE,
             SELECT,
             ACTIVATE,
+            CHANGE,
             ERROR,
             DATABOUND,
             CONTENTLOAD
@@ -289,6 +290,18 @@ var __meta__ = { // jshint ignore:line
                 return {
                     elements: that.element.children("li"),
                     data: [{ dataItem: that.options.$angular}]
+                };
+            });
+        },
+
+        _angularCompileElements: function(html, items) {
+            var that = this;
+            that.angular("compile", function(){
+                return {
+                    elements: html,
+                    data: $.map(items, function(item) {
+                        return [{ dataItem: item }];
+                    })
                 };
             });
         },
@@ -583,7 +596,7 @@ var __meta__ = { // jshint ignore:line
             });
 
             this.element.append(rootItemsHtml);
-            this._angularCompile();
+            this._angularCompileElements(rootItemsHtml, items);
         }, 
 
         _refreshChildren: function(item, parentNode) {
@@ -593,6 +606,8 @@ var __meta__ = { // jshint ignore:line
             var items = item.children.data();
             if (!items.length) {
                 updateItemHtml(parentNode);
+                children = parentNode.children(".k-group").children("li");
+                this._angularCompileElements(children, items);
             } else {
                 this.append(item.children, parentNode);
 
@@ -605,8 +620,7 @@ var __meta__ = { // jshint ignore:line
                         data: this.dataItem(child),
                         ns: ui
                     });
-                }
-                this._angularCompile();
+                }             
             }
         },
 
@@ -821,7 +835,8 @@ var __meta__ = { // jshint ignore:line
                        itemsHtml[i].insertAfter(children[index - 1]);
                   }
                }
-        
+
+            that._angularCompileElements(itemsHtml, items);
               if (that.dataItem(parentNode)) {
                   that.dataItem(parentNode).hasChildren = true;
                   that.updateArrow(parentNode);
@@ -917,8 +932,8 @@ var __meta__ = { // jshint ignore:line
             return dataSource && dataSource.getByUid(uid);
        },
 
-        select: function (element) {
-            var that = this;
+       select: function (element) {
+           var that = this;
 
             if (element === undefined) {
                 return that.element.find(selectableItems).parent();
@@ -1230,6 +1245,11 @@ var __meta__ = { // jshint ignore:line
                 that._updateItemsClasses(items);
             }
 
+            if (!item.length){
+                item = [item];
+            }
+
+            that._angularCompileElements(items, item);
             return { items: items, group: parent };
         },
 
@@ -1589,7 +1609,8 @@ var __meta__ = { // jshint ignore:line
             var that = this,
                 element = that.element,
                 item = link.parent(ITEM),
-                selected = that._selected;
+                selected = that._selected,
+                dataItem = that.dataItem(item);
 
             if (selected) {
                 selected.removeAttr(ARIA_SELECTED);
@@ -1603,6 +1624,11 @@ var __meta__ = { // jshint ignore:line
             link.addClass(SELECTEDCLASS);
             link.parentsUntil(element, ITEM).filter(":has(.k-header)").addClass(HIGHLIGHTCLASS);
             that._current(item[0] ? item : null);
+            if(dataItem){
+                 dataItem.set("selected", true);
+            }
+           
+            that.trigger(CHANGE);
         },
 
         _animations: function(options) {
@@ -1614,7 +1640,7 @@ var __meta__ = { // jshint ignore:line
         renderItem: function (options) {
             var that = this;
                 options = extend({ panelBar: that, group: {} }, options);
-        
+
             var empty = that.templates.empty,
                 item = options.item;
 
