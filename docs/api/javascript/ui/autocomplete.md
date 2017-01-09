@@ -745,12 +745,12 @@ For more information, refer to the [article on virtualization]({% slug virtualiz
 
 ### virtual.valueMapper `Function`*(default: null)*
 
-The `valueMapper` function is **mandatory** for the functionality of the virtualized widget.
-The widget calls the `valueMapper` function when the widget receives a value, that is not fetched from the remote server yet.
-The widget will pass the selected value(s) in the `valueMapper` function. In turn, the valueMapper implementation should return the **respective data item(s) index/indices**.
+> **Important**
+>
+> As of the Kendo UI R3 2016 release, the implementation of the `valueMapper` function is not necessary.
 
 #### Example - AutoComplete with a virtualized list
-
+	// the example is relevant to Kendo UI versions prior to 2016.3.914
     <input id="orders" style="width: 400px" />
     <script>
         $(document).ready(function() {
