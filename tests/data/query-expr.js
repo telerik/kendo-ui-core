@@ -371,28 +371,28 @@ test("startswith", function() {
     equal(compile({
         logic: "and",
         filters: [ { field: "foo", value: "bar", operator: "startswith" } ]
-    }), "((d.foo || '').toLowerCase().lastIndexOf('bar', 0) == 0)");
+    }), "((d.foo || '').toLowerCase().lastIndexOf(\"bar\", 0) == 0)");
 });
 
 test("endswith", function() {
     equal(compile({
         logic: "and",
         filters: [ { field: "foo", value: "bar", operator: "endswith" } ]
-        }), "((d.foo || '').toLowerCase().indexOf('bar', (d.foo || '').toLowerCase().length - 3) >= 0)");
+        }), "((d.foo || '').toLowerCase().indexOf(\"bar\", (d.foo || '').toLowerCase().length - 3) >= 0)");
 });
 
 test("contains", function() {
     equal(compile({
         logic: "and",
         filters: [ { field: "foo", value: "bar", operator: "contains" } ]
-    }), "((d.foo || '').toLowerCase().indexOf('bar') >= 0)");
+    }), "((d.foo || '').toLowerCase().indexOf(\"bar\") >= 0)");
 });
 
 test("contains with apostrophe", function() {
     equal(compile({
         logic: "and",
         filters: [ { field: "foo", value: "'", operator: "contains" } ]
-    }), "((d.foo || '').toLowerCase().indexOf('\\'') >= 0)");
+    }), "((d.foo || '').toLowerCase().indexOf(\"'\") >= 0)");
 });
 
 test("using function as field", function() {
@@ -420,14 +420,14 @@ test("using function as operator with string value", function() {
     equal(compile({
         logic: "and",
         filters: [ { value: 'bar', operator: $.noop } ]
-    }), "(__o[0](d, 'bar'))");
+    }), "(__o[0](d, \"bar\"))");
 });
 
 test("using function as operator with string value that contains apostrophe", function() {
     equal(compile({
         logic: "and",
         filters: [ { value: "b'ar", operator: $.noop } ]
-    }), "(__o[0](d, 'b\\'ar'))");
+    }), "(__o[0](d, \"b'ar\"))");
 });
 
 test("using function as operator with date value", function() {
@@ -584,32 +584,32 @@ test("string neq", function() {
     equal(compile({
         logic: "and",
         filters: [ { operator: "neq", value: "foo"} ]
-    }), "(((d || '')+'').toLowerCase() != 'foo')");
+    }), "(((d || '')+'').toLowerCase() != \"foo\")");
 });
 test("string filtering is case insensitive by default", function() {
     equal(compile({
         logic: "and",
         filters: [ { operator: "neq", value: "Foo"} ]
-    }), "(((d || '')+'').toLowerCase() != 'foo')");
+    }), "(((d || '')+'').toLowerCase() != \"foo\")");
 });
 
 test("apostrophe in strings is escaped", function() {
     equal(compile({
         filters: [ { operator: "eq", value: "f'oo"} ]
-    }), "(((d || '')+'').toLowerCase() == 'f\\'oo')");
+    }), "(((d || '')+'').toLowerCase() == \"f'oo\")");
 });
 
 test("string filtering is case sensitive", function() {
     equal(compile({
         logic: "and",
         filters: [ { ignoreCase: false, operator: "neq", value: "Foo"} ]
-    }), "(d != 'Foo')");
+    }), "(d != \"Foo\")");
 });
 
 test("carriage return in strings is escaped", function() {
     equal(compile({
         filters: [ { operator: "eq", value: "foo \r\n bar"} ]
-    }), "(((d || '')+'').toLowerCase() == 'foo  bar')");
+    }), "(((d || '')+'').toLowerCase() == \"foo  bar\")");
 });
 
 }());

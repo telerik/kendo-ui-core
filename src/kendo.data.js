@@ -69,9 +69,7 @@ var __meta__ = { // jshint ignore:line
         unshift = [].unshift,
         toString = {}.toString,
         stableSort = kendo.support.stableSort,
-        dateRegExp = /^\/Date\((.*?)\)\/$/,
-        newLineRegExp = /(\r+|\n+)/g,
-        quoteRegExp = /(?=['\\])/g;
+        dateRegExp = /^\/Date\((.*?)\)\/$/;
 
     var ObservableArray = Observable.extend({
         init: function(array, type) {
@@ -1015,24 +1013,39 @@ var __meta__ = { // jshint ignore:line
 
     var operators = (function(){
 
-        function quote(value) {
-            return value.replace(quoteRegExp, "\\").replace(newLineRegExp, "");
+        function quote(str) {
+            if (typeof str == "string") {
+                str = str.replace(/[\r\n]+/g, "");
+            }
+            return JSON.stringify(str);
+        }
+
+        function textOp(impl) {
+            return function(a, b, ignore) {
+                if (ignore) {
+                    a = "(" + a + " || '').toLowerCase()";
+                    if (b) {
+                        b = b.toLowerCase();
+                    }
+                }
+                if (b) {
+                    b = quote(b);
+                }
+                return impl(a, b, ignore);
+            };
         }
 
         function operator(op, a, b, ignore) {
-            var date;
-
             if (b != null) {
                 if (typeof b === STRING) {
-                    b = quote(b);
-                    date = dateRegExp.exec(b);
+                    var date = dateRegExp.exec(b);
                     if (date) {
                         b = new Date(+date[1]);
                     } else if (ignore) {
-                        b = "'" + b.toLowerCase() + "'";
+                        b = quote(b.toLowerCase());
                         a = "((" + a + " || '')+'').toLowerCase()";
                     } else {
-                        b = "'" + b + "'";
+                        b = quote(b);
                     }
                 }
 
@@ -1051,12 +1064,7 @@ var __meta__ = { // jshint ignore:line
                 if (value && value.getTime) {
                     return "new Date(" + value.getTime() + ")";
                 }
-
-                if (typeof value == "string") {
-                    return "'" + quote(value) + "'";
-                }
-
-                return "" + value;
+                return quote(value);
             },
             eq: function(a, b, ignore) {
                 return operator("==", a, b, ignore);
@@ -1076,90 +1084,26 @@ var __meta__ = { // jshint ignore:line
             lte: function(a, b, ignore) {
                 return operator("<=", a, b, ignore);
             },
-            startswith: function(a, b, ignore) {
-                if (ignore) {
-                    a = "(" + a + " || '').toLowerCase()";
-                    if (b) {
-                        b = b.toLowerCase();
-                    }
-                }
-
-                if (b) {
-                    b = quote(b);
-                }
-
-                return a + ".lastIndexOf('" + b + "', 0) == 0";
-            },
-            doesnotstartwith: function(a, b, ignore) {
-                if (ignore) {
-                    a = "(" + a + " || '').toLowerCase()";
-                    if (b) {
-                        b = b.toLowerCase();
-                    }
-                }
-
-                if (b) {
-                    b = quote(b);
-                }
-
-                return a + ".lastIndexOf('" + b + "', 0) == -1";
-            },
-            endswith: function(a, b, ignore) {
-                if (ignore) {
-                    a = "(" + a + " || '').toLowerCase()";
-                    if (b) {
-                        b = b.toLowerCase();
-                    }
-                }
-
-                if (b) {
-                    b = quote(b);
-                }
-
-                return a + ".indexOf('" + b + "', " + a + ".length - " + (b || "").length + ") >= 0";
-            },
-            doesnotendwith: function(a, b, ignore) {
-                if (ignore) {
-                    a = "(" + a + " || '').toLowerCase()";
-                    if (b) {
-                        b = b.toLowerCase();
-                    }
-                }
-
-                if (b) {
-                    b = quote(b);
-                }
-
-                return a + ".indexOf('" + b + "', " + a + ".length - " + (b || "").length + ") < 0";
-            },
-            contains: function(a, b, ignore) {
-                if (ignore) {
-                    a = "(" + a + " || '').toLowerCase()";
-                    if (b) {
-                        b = b.toLowerCase();
-                    }
-                }
-
-                if (b) {
-                    b = quote(b);
-                }
-
-                return a + ".indexOf('" + b + "') >= 0";
-            },
-            doesnotcontain: function(a, b, ignore) {
-                if (ignore) {
-                    a = "(" + a + " || '').toLowerCase()";
-                    if (b) {
-                        b = b.toLowerCase();
-                    }
-                }
-
-                if (b) {
-                    b = quote(b);
-                }
-
-                return a + ".indexOf('" + b + "') == -1";
-            },
+            startswith: textOp(function(a, b) {
+                return a + ".lastIndexOf(" + b + ", 0) == 0";
+            }),
+            doesnotstartwith: textOp(function(a, b) {
+                return a + ".lastIndexOf(" + b + ", 0) == -1";
+            }),
+            endswith: textOp(function(a, b) {
+                var n = b ? b.length - 2 : 0;
+                return a + ".indexOf(" + b + ", " + a + ".length - " + n + ") >= 0";
+            }),
+            doesnotendwith: textOp(function(a, b) {
+                var n = b ? b.length - 2 : 0;
+                return a + ".indexOf(" + b + ", " + a + ".length - " + n + ") < 0";
+            }),
+            contains: textOp(function(a, b) {
+                return a + ".indexOf(" + b + ") >= 0";
+            }),
+            doesnotcontain: textOp(function(a, b) {
+                return a + ".indexOf(" + b + ") == -1";
+            }),
             isempty: function(a) {
                 return a + " === ''";
             },
