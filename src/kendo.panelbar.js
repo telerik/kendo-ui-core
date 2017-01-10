@@ -395,7 +395,7 @@ var __meta__ = { // jshint ignore:line
                         "# } #" +
                     "</li>"
                 ),
-                loading: template("<div class='k-item'><span class='k-icon k-loading'></span> #: data.messages.loading #</div>"),
+                loading: template("<div class='k-item'><span class='k-icon k-i-loading'></span> #: data.messages.loading #</div>"),
                 retry: template(
                     "#: data.messages.requestFailed # " +
                     "<button class='k-button k-request-retry'>#: data.messages.retry #</button>"
@@ -568,7 +568,7 @@ var __meta__ = { // jshint ignore:line
                 }
             }
             else {
-                 itemIcon(item).toggleClass("k-i-loading", showProgress).removeClass("k-i-refresh");
+                itemIcon(item).toggleClass("k-i-loading", showProgress).removeClass("k-i-refresh");
             }
         },
 
