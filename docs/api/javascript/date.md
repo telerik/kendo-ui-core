@@ -72,6 +72,33 @@ One (`1`) indicates the day after the current one (default value). Minus one (`-
 		console.log(kendo.date.dayOfWeek(targetDate, 1, -1)); // Mon Oct 31 2016 15:25:11 GMT+0200 (FLE Standard Time)
     </script>
 
+### weekInYear
+
+Returns week number of a specific date. According to the ISO-8601 standard, weeks starting on Monday. 
+The first week of the year is the week that contains that year's first Thursday (='First 4-day week').
+The method allows defining diffent start day by using the second parameter. 
+
+#### Parameters
+
+##### date `Date`
+
+The given date.
+
+##### weekStart `Date` *(optional)*
+
+The date representing what day of week is considered as a starting point. This parameter is optional because by default Monday is considered as a first day of the week.  
+
+#### Returns
+
+`Number` A number resenting the week number of a given date.
+
+#### Example
+    <script>
+        //no weekStart is passed so Monday will be considered as starting point for week
+        console.log(kendo.date.weekInYear(new Date(2017, 0, 9))); // 2 
+        //Sunday is passed as week start
+        console.log(kendo.date.weekInYear(new Date(2017, 0, 9), new Date(2017, 0, 8))); // 3
+    </script>
 
 ### getDate
 
