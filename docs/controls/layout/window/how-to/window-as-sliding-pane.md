@@ -1,13 +1,15 @@
 ---
-title: Use Kendo Window as Sliding Pane
-page_title: Use Kendo Window as Sliding Pane | Kendo UI Window
+title: Use Windows as Sliding Panes
+page_title: Use Windows as Sliding Panes | Kendo UI Window
 description: "Learn how Use Kendo UI Window as Sliding Pane."
 slug: howto_windowasslidingpane_window
 ---
 
-# Use Kendo Window as Sliding Pane
+# Use Windows as Sliding Panes
 
-You can see here a simple Kendo Window configuration that will accomplish the visual effect of a sliding UI component in your page.
+You can configure the Kendo UI Window so it acquires the visual effect of a sliding UI component.  
+
+The following example demonstrates how to make the Window behave as a sliding pane.
 
 ###### Example
 
@@ -44,7 +46,7 @@ You can see here a simple Kendo Window configuration that will accomplish the vi
     },
     visible: false
   });
-  
+
   $("#openWindow").click(function(){
     var dialog = $("#dialog").getKendoWindow();
     dialog.open();

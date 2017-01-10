@@ -86,7 +86,7 @@ You can subscribe to all [events exposed by Kendo UI Menu](/api/javascript/ui/me
         </script>
 
 
-### Attach to Menu Item Select Event
+### Attach to select Events of Single Menu Items
 
 The following example demonstrates how to subscribe to the `select` event of a single Menu item.
 
