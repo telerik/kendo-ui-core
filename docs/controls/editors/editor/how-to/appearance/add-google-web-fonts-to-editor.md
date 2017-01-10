@@ -2,12 +2,13 @@
 title: Add Google WebFonts to the Editor
 page_title: Add Google WebFonts to the Editor | Kendo UI Editor
 description: "Learn how to add Google WebFonts in the Kendo UI Editor widget."
+previous_url: /controls/editors/editor/how-to/add-google-web-fonts-to-editor
 slug: howto_add_google_webfonts_editor
 ---
 
 # Add Google WebFonts to the Editor
 
-This example demonstrates how to include Google Web Fonts to the Kendo UI Editor.
+The following example demonstrates how to include Google Web Fonts to the Kendo UI Editor.
 
 ###### Example
 

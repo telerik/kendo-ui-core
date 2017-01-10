@@ -2,16 +2,19 @@
 title: Handle Blur and Focus Events
 page_title: Handle Blur and Focus Events | Kendo UI Editor
 description: "Learn how to handle the blur and the focus events of a Kendo UI Editor."
+previous_url: /controls/editors/editor/how-to/handle-blur-and-focus-events
 slug: howto_handleblurandfocusevents_editor
 ---
 
 # Handle Blur and Focus Events
 
-The Kendo UI Editor does not expose `focus` and `blur` events as built-in functionalities. However, it is possible for you to handle them by using JavaScript and regardless of the initialization mode you apply to the widget.
+The Kendo UI Editor does not expose `focus` and `blur` events as built-in functionalities.
 
-For more information on how to handle the `blur` and `focus` events in AngularJS applications, refer to this [how-to article]({% slug howto_handleblurandfocuseventsangular_editor %}).
+However, regardless of the initialization mode you apply to the widget, it is possible for you to handle them by using JavaScript.
 
-The following snippet provides an example of handling the `blur` and the `focus` events of the Kendo UI Editor.
+For more information on how to handle the `blur` and `focus` events in AngularJS applications, refer to the [how-to article on AngularJS]({% slug howto_handleblurandfocuseventsangular_editor %}).
+
+The following example demonstrates how to handle the `blur` and the `focus` events of the Editor.
 
 ###### Example
 

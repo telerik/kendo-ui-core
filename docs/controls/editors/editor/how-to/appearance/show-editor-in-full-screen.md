@@ -2,12 +2,15 @@
 title: Show Editor in Full Screen
 page_title: Show Editor in Full Screen | Kendo UI Editor
 description: "Learn how to show the Kendo UI Editor widget in full screen."
+previous_url: /controls/editors/editor/how-to/show-editor-in-full-screen
 slug: howto_show_infull_screen_editor
 ---
 
 # Show Editor in Full Screen
 
-The example below demonstrates how to use the [Full-screen API](https://fullscreen.spec.whatwg.org/) to show the Editor in full screen.
+It is possible for you to show the Kendo UI Editor in full screen by using the [Full-screen API](https://fullscreen.spec.whatwg.org/).
+
+The following example demonstrates how to apply this approach.
 
 ###### Example
 

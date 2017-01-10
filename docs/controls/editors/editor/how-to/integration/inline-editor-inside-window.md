@@ -1,15 +1,20 @@
 ---
-title: Use Inline Editor inside Windows
-page_title: Use Inline Editor inside Windows | Kendo UI Editor
+title: Use Inline Editor inside Kendo UI Windows
+page_title: Use Inline Editor inside Kendo UI Windows | Kendo UI Editor
 description: "Learn how to use an inline Kendo UI Editor inside a window."
+previous_url: /controls/editors/editor/how-to/inline-editor-inside-window
 slug: howto_use_inline_editor_inside_windows_editor
 ---
 
-# Use Inline Editor inside Windows
+# Use Inline Editor inside Kendo UI Windows
 
-The inline Editor uses a popup toolbar, which is placed inside a Kendo UI Window instance. When several Kendo UI Window instances are open, the recently focused one always moves on top of all others. This may lead to the Editor toolbar being hidden behind the Window instance that holds the Editor itself.
+The inline Editor uses a popup toolbar, which is placed inside a Kendo UI Window instance.
 
-The example below demonstrates how to handle such a scenario. Enforce a fixed `z-index` style to the Window that holds the Editor. Use an `!important` clause with the `z-index` style.
+When several Kendo UI Window instances are open, the most recently focused one always moves on top of all others. This might lead to the Editor toolbar being hidden behind the Window instance that holds the Editor itself.
+
+The following example demonstrates how to handle such a scenario by:
+* Enforcing a fixed `z-index` style to the Window that holds the Editor.
+* Using an `!important` clause with the `z-index` style.
 
 ###### Example
 

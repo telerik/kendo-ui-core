@@ -2,12 +2,13 @@
 title: Create Auto-Expanding Editors
 page_title: Create Auto-Expanding Editors | Kendo UI Editor
 description: "Learn how to make the Editor automatically expand."
+previous_url: /controls/editors/editor/how-to/auto-expanding-editor
 slug: howto_make_the_editor_auto_expanding_editor
 ---
 
 # Create Auto-Expanding Editors
 
-The example below demonstrates how to create an auto-expanding Kendo UI Editor.
+The following example demonstrates how to create an auto-expanding Kendo UI Editor.
 
 ###### Example
 

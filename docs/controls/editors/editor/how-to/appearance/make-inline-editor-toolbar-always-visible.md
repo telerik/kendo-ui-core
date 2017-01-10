@@ -2,14 +2,17 @@
 title: Make Inline Editor Toolbar Always Visible
 page_title: Make Inline Editor Toolbar Always Visible | Kendo UI Editor
 description: "Learn how to make the inline Editor toolbar always visible."
+previous_url: /controls/editors/editor/how-to/make-inline-editor-toolbar-always-visible
 slug: howto_make_inline_editor_toolbar_always_visible
 ---
 
 # Make Inline Editor Toolbar Always Visible
 
-By design, the inline Editor's toolbar shows up when the widget is focused and is hidden when the Editor is blurred.
+By design, the toolbar of the inline Editor shows up when the widget is focused and gets hidden when the Editor is blurred.
 
-The example below demonstrates how to force the toolbar to be always visible.
+It is possible to override this behavior.
+
+The following example demonstrates how to force the toolbar to be always visible.
 
 ###### Example
 

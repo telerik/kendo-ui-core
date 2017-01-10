@@ -1,15 +1,18 @@
 ---
-title: Insert HTML Content via Custom Popup Tools
-page_title: Insert HTML Content via Custom Popup Tools | Kendo UI Editor
+title: Insert HTML Content through Custom Popup Tools
+page_title: Insert HTML Content through Custom Popup Tools | Kendo UI Editor
 description: "Learn how to insert HTML content via custom Kendo UI Editor tools."
+previous_url: /controls/editors/editor/how-to/insert-html-via-custom-popup-tool
 slug: howto_insert_html_content_custom_popup_tool_editor
 ---
 
-# Insert HTML Content via Custom Popup Tools
+# Insert HTML Content through Custom Popup Tools
 
-The HTML markup in the Window resembles the one used internally by the Kendo UI widgets (e.g. Grid popup editing, Editor dialogs, etc.). However, this is not required.
+The HTML markup in the Window resembles the HTML markup internally used by the Kendo UI widgets&mdash;for example, the popup editing of the Grid and the Editor dialogs.
 
-For additional information about the code used below, refer to:
+However, this is not required as demonstrated in the following example. It shows how to use a custom Kendo UI Editor tool and a Kendo UI Window for inserting HTML content in the Editor.
+
+For additional information about the code used in the example, refer to:
 
 * [How to Configure Editor Tools](/api/javascript/ui/editor#configuration-tools)
 * [How to Execute Editor Commands](/api/javascript/ui/editor#methods-exec)
@@ -17,8 +20,6 @@ For additional information about the code used below, refer to:
 * [How to Configure a Window](/api/javascript/ui/window)
 * [How to Obtain Widget's Element from Its Client Object](/framework/widgets/wrapper-element)
 * [Notes on Destroying Windows]({% slug overview_kendoui_window_widget %}#configuration-Destroy)
-
-The example below demonstrates how to use a custom Kendo UI Editor tool and a Kendo UI Window for inserting HTML content in the Editor.
 
 ###### Example
 
