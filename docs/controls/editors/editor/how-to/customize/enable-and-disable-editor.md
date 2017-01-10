@@ -2,12 +2,13 @@
 title: Enable and Disable the Editor
 page_title: Enable and Disable the Editor | Kendo UI Editor
 description: "Learn how to enable and disable the Kendo UI Editor."
+previous_url: /controls/editors/editor/how-to/enable-and-disable-editor
 slug: howto_enable_and_disable_the_editor_editor
 ---
 
 # Enable and Disable the Editor
 
-The example below demonstrates how to enable and disable the Kendo UI Editor.
+The following example demonstrates how to enable and disable the Kendo UI Editor.
 
 ###### Example
 

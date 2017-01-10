@@ -2,14 +2,15 @@
 title: Drag and Drop Images
 page_title: Drag and Drop Images | Kendo UI Editor
 description: "Learn how drag and drop images in the Kendo UI Editor widget."
+previous_url: /controls/editors/editor/how-to/drag-and-drop-images
 slug: howto_drag_and_drop_images_editor
 ---
 
 # Drag and Drop Images
 
-The example below demonstrates how to drag and drop images to the Kendo UI Editor.
+The following example demonstrates how to drag and drop images in the Kendo UI Editor.
 
-The demo uses a TreeView as an image source. However, this is not required and you can use any custom HTML markup in combination with the [Kendo UI Drag and Drop framework](http://demos.telerik.com/kendo-ui/web/dragdrop/index.html).
+As an image source, the demo uses a TreeView. However, you can use any custom HTML markup in combination with the [Kendo UI Drag and Drop framework](http://demos.telerik.com/kendo-ui/web/dragdrop/index.html).
 
 ###### Example
 

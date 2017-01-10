@@ -1,22 +1,25 @@
 ---
 title: Get Reference to Child Widgets
 page_title: Get Reference to Child Widgets | Kendo UI Editor
-description: "Learn how to get a reference to the ImageBrowser's and FileBrowser's child widgets in the Kendo UI Editor widget."
+description: "Learn how to get a reference to the ImageBrowser and FileBrowser child widgets in the Kendo UI Editor widget."
+previous_url: /controls/editors/editor/how-to/get-reference-to-imagebrowser-child-widgets
 slug: howto_get_referenceto_child_widgets_editor
 ---
 
 # Get Reference to Child Widgets
 
-The Editor's ImageBrowser and FileBrowser widgets internally use the Kendo UI Upload, ListView, and DropDownList widgets. The example below demonstrates how to obtain these widgets' client-side objects.
+The ImageBrowser and FileBrowser components of the Editor internally use the Kendo UI Upload, ListView, and DropDownList widgets.
 
-The FileBrowser-related code is identical to the ImageBrowser one, with two exceptions:
+The following example demonstrates how to obtain these client-side objects of the widget.
 
-* The `.k-insertFile` CSS class should be used instead of `.k-insertImage` to attach the `click` handler.
-* `var fileBrowser = $(".k-filebrowser").data("kendoFileBrowser");` should be used instead of `var imageBrowser = $(".k-imagebrowser").data("kendoImageBrowser");`.
+The FileBrowser-related code is identical to the ImageBrowser one except for:
 
-Once the [ListView](/api/javascript/ui/listview), [Upload](/api/javascript/ui/upload) and [DropDownList](/api/javascript/ui/dropdownlist) widget objects are available, one can use their APIs to attach events with [`bind()`](/intro/installation/events-and-methods#bind-to-events-after-widget-initialization) or perform other customizations, which may not be otherwise supported.
+* To attach the `click` handler, use the `.k-insertFile` CSS class instead of the `.k-insertImage` one.
+* Use `var fileBrowser = $(".k-filebrowser").data("kendoFileBrowser");` instead of `var imageBrowser = $(".k-imagebrowser").data("kendoImageBrowser");`.
 
-Note that the `transport` configurations below are over-simplified and invalid.
+To attach events with [`bind()`](/intro/installation/events-and-methods#bind-to-events-after-widget-initialization) or to perform other customizations that may not be otherwise supported, use the API calls of the [ListView](/api/javascript/ui/listview), [Upload](/api/javascript/ui/upload) and [DropDownList](/api/javascript/ui/dropdownlist) widget objects after they are available.
+
+The following `transport` configurations are over-simplified and invalid.
 
 ###### Example
 

@@ -1,19 +1,22 @@
 ---
-title: Create Markdown Editor
-page_title: Create Markdown Editor | Kendo UI Editor
-description: "Learn how to use Kendo Editor widget and customize it to generate Markdown"
+title: Create Markdown Editors
+page_title: Create Markdown Editors | Kendo UI Editor
+description: "Learn how to use the Kendo UI Editor widget and customize it to generate Markdown."
+previous_url: /controls/editors/editor/how-to/markdown-editor
 slug: howto_create_markdown_editor
 ---
 
-# Create Markdown Editor
+# Create Markdown Editors
 
-The code below demonstrates how to transform the Kendo UI Editor widget into a Markdown editor by using third-party JS libraries.
+You can transform the Kendo UI Editor widget into a Markdown editor by using third-party JS libraries.
 
 ![](markdown_video.gif)
 
-The introduced code relies on the [`deserialization`](/api/javascript/ui/editor#configuration-deserialization) and [`serialization`](/api/javascript/ui/editor#configuration-serialization) options in the Kendo UI Editor. These are configured by applying custom options to call the methods necessary for the conversion from HTML to Markdown.
+The following example relies on the [`deserialization`](/api/javascript/ui/editor#configuration-deserialization) and [`serialization`](/api/javascript/ui/editor#configuration-serialization) options provided by the Kendo UI Editor. These are configured by applying custom options to call the methods that are necessary for the conversion from HTML to Markdown.
 
-The actual transformation from HTML to Markdown is not part of the Kendo UI Editor, but can be accomplished by using third-party JS libraries. For the example, the demo below applies the MIT licensed [markdown-js](https://github.com/evilstreak/markdown-js) and [html-md](https://www.npmjs.com/package/html-md) libraries. However, you might use any other library that suits the situation best.
+The actual transformation from HTML to Markdown is not part of the Kendo UI Editor and can be accomplished by using third-party JS libraries. For the example, the following example applies the MIT licensed [markdown-js](https://github.com/evilstreak/markdown-js) and [html-md](https://www.npmjs.com/package/html-md) libraries. However, you might use any other library that best suits your project.
+
+The following example demonstrates how transform the Kendo UI Editor widget into a Markdown editor by using third-party JS libraries.
 
 ###### Example
 

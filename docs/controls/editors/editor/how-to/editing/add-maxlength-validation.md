@@ -1,13 +1,14 @@
 ---
-title: Add Max-Length Validation
-page_title: Add Max-Length Validation | Kendo UI Editor
-description: "Learn how to add max-length validation in the Kendo UI Editor widget."
+title: Add maxLength Validation
+page_title: Add maxLength Validation | Kendo UI Editor
+description: "Learn how to add a maxLength validation to the Kendo UI Editor widget."
+previous_url: /controls/editors/editor/how-to/add-maxlength-validation
 slug: howto_add_max_length_validation_editor
 ---
 
-# Add Max-Length Validation
+# Add maxLength Validation
 
-The example below demonstrates how to define custom Kendo UI validators to check the length of the text content, or the length of the HTML content in a Kendo UI Editor.
+The following example demonstrates how to define custom Kendo UI validators to check the length of the text content or the length of the HTML content in a Kendo UI Editor.
 
 ###### Example
 

@@ -1,17 +1,18 @@
 ---
-title: Set Caret Position
-page_title: Set Caret Position | Kendo UI Editor
+title: Set Caret Positions
+page_title: Set Caret Positions | Kendo UI Editor
 description: "Learn how to set the caret position in a Kendo UI Editor widget."
+previous_url: /controls/editors/editor/how-to/set-caret-position-using-javascript
 slug: howto_set_caret_position_editor
 ---
 
-# Set Caret Position
+# Set Caret Positions
 
-The examples below demonstrate how to set the position of the caret inside a Kendo UI inline Editor by using JavaScript.
+To set the position of the caret inside an inline Kendo UI Editor by using JavaScript, you can use a position index or search for a string.  
 
-The first sample uses a position index, while the second one searches for a string. The exact implementation in other scenarios will vary, depending on the business logic and used DOM/Range APIs.
+The exact implementation in other scenarios varies, depending on the business logic and used DOM/Range APIs.
 
-The example below demonstrates how to set a caret position to a specified index.
+The following example demonstrates how to use a position index&mdash;that is, it sets a caret position inside the Editor to a specified index.
 
 ###### Example
 
@@ -44,7 +45,7 @@ The example below demonstrates how to set a caret position to a specified index.
     </script>
 ```
 
-The example below demonstrates how to set a caret position to the start of a string.
+The following example demonstrates how to search for a string&mdash;that is, it sets the a caret position to the start of a string.
 
 ###### Example
 

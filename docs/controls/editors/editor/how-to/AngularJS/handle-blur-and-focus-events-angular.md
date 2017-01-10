@@ -1,21 +1,23 @@
 ---
-title: Handle Blur and Focus Events in AngularJS
-page_title: Handle Blur and Focus Events in AngularJS | Kendo UI Editor
+title: Handle Blur and Focus Events
+page_title: Handle Blur and Focus Events | Kendo UI Editor
 description: "Learn how to handle the blur and the focus events of a Kendo UI Editor in AngularJS."
 slug: howto_handleblurandfocuseventsangular_editor
 ---
 
-# Handle Blur and Focus Events in AngularJS
+# Handle Blur and Focus Events
 
-The Kendo UI Editor does not expose `focus` and `blur` events as built-in functionalities. However, it is possible for you to handle them in AngularJS through a custom directive and depending on the mode of widget initialization.
+The Kendo UI Editor does not expose `focus` and `blur` events as built-in functionalities.
 
-The Editor can be initialized either from a `<textarea>` HTML element&mdash;[the classic mode]({% slug overview_kendoui_editor_widget %}#classic-mode), or from a `<div>` HTML element&mdash;[the inline mode]({% slug overview_kendoui_editor_widget %}#inline-mode). Depending on which mode you apply to render the widget, use either of the approaches provided by the examples below.
+However, you can handle them in AngularJS by using a custom directive depending on the mode of the widget initialization.
 
 For more information on how to handle the `blur` and `focus` events outside the AngularJS context, refer to this [how-to article]({% slug howto_handleblurandfocusevents_editor %}).
 
-## Classic Mode
+## In Classic Modes
 
-The example below demonstrates how to handle the `blur` and the `focus` events of the Kendo UI Editor in AngularJS when initialized from a `<textarea>` HTML element.
+The Editor can be initialized from a `<textarea>` HTML element&mdash;[the classic mode]({% slug overview_kendoui_editor_widget %}#classic-mode).
+
+The following example demonstrates how to handle the `blur` and the `focus` events in AngularJS when the Editor is in the classic mode.
 
 ###### Example
 
@@ -58,9 +60,11 @@ The example below demonstrates how to handle the `blur` and the `focus` events o
         </script>
 ```
 
-## Inline Mode
+## In Inline Modes
 
-The example below demonstrates how to handle the `blur` and the `focus` events of the Kendo UI Editor in AngularJS when initialized from a `<div>` HTML element.
+The Editor can be initialized from a `<div>` HTML element&mdash;[the inline mode]({% slug overview_kendoui_editor_widget %}#inline-mode).
+
+The following example demonstrates how to handle the `blur` and the `focus` events in AngularJS when the Editor is in the inline mode.
 
 ###### Example
 

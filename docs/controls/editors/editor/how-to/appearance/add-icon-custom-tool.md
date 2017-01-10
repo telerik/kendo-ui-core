@@ -2,14 +2,17 @@
 title: Add Icon or Image to a Custom Tool
 page_title: Add Icon or Image to a Custom Tool | Kendo UI Editor
 description: "Learn how to add an icon or a plain image to a custom tool in the Kendo UI Editor widget."
+previous_url: /controls/editors/editor/how-to/add-icon-custom-tool
 slug: howto_add_add_icon_custom_tool
 ---
 
-# Add Icon or Image to a Custom Tool
+# Add Icons or Images to a Custom Tool
 
-When you create a custom tool, whether to render an image or an icon in its appearance depends on further CSS stylization. To such a visual element, use the automatically generated class name taken from the tool and follow the `k-[ToolName]` pattern.
+When you create a custom tool, it depends on the further CSS stylization whether to render an image or an icon in its appearance.
 
-The example below demonstrates how to decorate your own custom tools with a background image or a FontAwesome icon.
+To add such visual elements, use the automatically generated class name taken from the tool and follow the `k-[ToolName]` pattern.
+
+The following example demonstrates how to decorate your own custom tool with a background image or a FontAwesome icon.
 
 ###### Example
 

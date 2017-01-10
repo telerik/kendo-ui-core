@@ -2,12 +2,13 @@
 title: Resize the Editor by Dragging
 page_title: Resize the Editor by Dragging | Kendo UI Editor
 description: "Learn how to resize the Kendo UI Editor widget by dragging."
+previous_url: /controls/editors/editor/how-to/resize-editor-by-dragging
 slug: howto_resize_the_editor_by_dragging_editor
 ---
 
 # Resize the Editor by Dragging
 
-The example below demonstrates how to resize the Kendo UI Editor by dragging its bottom-right corner.
+The following example demonstrates how to resize the Kendo UI Editor by dragging its bottom-right corner.
 
 ###### Example
 

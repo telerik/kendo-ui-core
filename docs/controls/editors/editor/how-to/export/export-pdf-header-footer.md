@@ -1,19 +1,20 @@
 ---
-title: Export Headers and Footers to PDF Files
-page_title: Export Headers and Footers to PDF Files | Kendo UI Editor
-description: "Learn how to create a template for the Drawing API and use it for exporting headers and footers to PDF files."
+title: Export Headers and Footers in PDF
+page_title: Export Headers and Footers in PDF | Kendo UI Editor
+description: "Learn how to create a template for the Drawing API and use it for exporting headers and footers to PDF files when working with the Kendo UI Editor."
+previous_url: /controls/editors/editor/how-to/export-pdf-header-footer
 slug: howto_export_pdf_header_footer
 ---
 
-# Export Headers and Footers to PDF Files
+# Export Headers and Footers in PDF
 
-The example below demonstrates how to use the Template feature of the [Drawing DOM API]({% slug drawingofhtmlelements_drawingapi %}#configuration-Template:) to generate header and footer elements to the exported PDF document.
+The following example demonstrates how to use the Template feature of the [Drawing DOM API]({% slug drawingofhtmlelements_drawingapi %}#configuration-Template:) to generate header and footer elements in the exported PDF document.
 
 To style the header and footer elements:
 
-* Use an inline style tag, as in the example below.
-* Add an external CSS file to the [`options.stylesheets array`](/api/javascript/ui/editor#configuration-stylesheets) and apply the needed decoration if the [Classic mode]({% slug overview_kendoui_editor_widget %}#classic-mode) is used, ;
-* Directly reference the implemented CSS file to the page if the [Inline mode]({%slug overview_kendoui_editor_widget%}#inline-mode) is used.
+* Use an inline style tag, as in the following example.
+* If the Editor is in its [classic mode]({% slug overview_kendoui_editor_widget %}#classic-mode), add an external CSS file to the [`options.stylesheets array`](/api/javascript/ui/editor#configuration-stylesheets) and apply the needed decoration.
+* If the Editor is in its [inline mode]({%slug overview_kendoui_editor_widget%}#inline-mode), directly reference the implemented CSS file to the page.
 
 ###### Example
 
