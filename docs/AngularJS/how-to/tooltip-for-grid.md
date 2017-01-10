@@ -1,39 +1,35 @@
 ---
-title: Tooltips for Grid Elements
-page_title: Tooltips for Grid Elements | AngularJS Directives
-description: "Learn how to create Tooltips for Grid elements in Angular and Kendo."
+title: Create Tooltips for Grid Elements
+page_title: Create Tooltips for Grid Elements | AngularJS Directives
+description: "Learn how to create Kendo UI Tooltips for the elements of a Kendo UI Grid in AngularJS applications."
 slug: tooltip_for_grid_angularjs_directives
 ---
 
-# Tooltips for Grid Elements
+# Create Tooltips for Grid Elements
 
-This article shows how you can have a Kendo Tooltip show for elements inside a Kendo Grid in AngularJS.
+In AngularJS applications, it is possible for you to create and show Kendo UI Tooltips for the elements of a Kendo UI Grid.
 
-There are four key components:
-
-1. Define a Tooltip widget **around** the grid declaration.
-
-1. Define the tooltip settings in the `$scope`, together with the grid's settings.
-
-1. Prepare a jQuery selector that will match the elements you want and set it to the `filter` property of the tooltip.
-
-1. Define the `content` property so it returns the desired information (e.g., based on the target element contents, data-* attributes or other logic).
+To apply this behavior:   
+1. Define a Kendo UI Tooltip widget around the Grid declaration.   
+1. Together with the Grid settings, define the Tooltip settings in the `$scope`.   
+1. Prepare a jQuery selector that will match the elements you want and set it to the `filter` property of the Tooltip.   
+1. Define the `content` property so it returns the desired information&mdash;for example, based on the target element contents, the `data-*` attributes, or other logic.   
 
 ###### Example
 
 	<div id="example" ng-app="KendoDemos">
 		<div ng-controller="MyCtrl">
-	
+
 			<kendo-tooltip k-options="ttipOptions">
-	
+
 				<kendo-grid options="mainGridOptions">
 				</kendo-grid>
-	
+
 			</kendo-tooltip>
-	
+
 		</div>
 	</div>
-	
+
 	<script>
 		angular.module("KendoDemos", ["kendo.directives"])
 			.controller("MyCtrl", function ($scope) {
