@@ -47,6 +47,11 @@ slug: breakingchanges2017_kendoui
 
 ####Table 1: Changed Icon CSS Classes
 
+<!--
+stylesheet in _assets/stylesheets/icon-font.css
+fonts in fonts/
+ -->
+
 <table class="obsolete-classes">
         <thead>
             <tr>
@@ -150,7 +155,6 @@ slug: breakingchanges2017_kendoui
         </tbody>
     </table>
 
- <link rel="stylesheet" href="font-icon-styles.css" type="text/css" />
 
 ## See Also
 

@@ -38,6 +38,11 @@ Kendo UI delivers more than 400 integrated font icons for its [web widgets and c
 * [Social Share](#social-share)
 * [Files and Folders](#files-and-folders)
 
+<!--
+stylesheet in _assets/stylesheets/icon-font.css
+fonts in fonts/
+ -->
+
 ###Layout and Navigation
 
 <ul class="WebComponentsIcons">
@@ -524,9 +529,6 @@ Kendo UI delivers more than 400 integrated font icons for its [web widgets and c
     <li><span class="k-icon k-i-file-horizontal"></span> .k-i-file-horizontal</li>
 
 </ul>
-
-
-<link rel="stylesheet" href="font-icon-styles.css" type="text/css" />
 
 ## See Also
 
