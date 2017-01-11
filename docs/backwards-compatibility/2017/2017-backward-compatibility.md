@@ -150,6 +150,7 @@ slug: breakingchanges2017_kendoui
         </tbody>
     </table>
 
+ <link rel="stylesheet" href="font-icon-styles.css" type="text/css" />
 
 ## See Also
 
