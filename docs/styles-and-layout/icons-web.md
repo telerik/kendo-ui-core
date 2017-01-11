@@ -102,7 +102,7 @@ fonts in fonts/
     <li><span class="k-icon k-i-more-horizontal"></span> .k-i-more-horizontal</li>
 </ul>
 
- ### Actions
+### Actions
 
 <ul class="WebComponentsIcons">
     <li><span class="k-icon k-i-undo"></span> .k-i-undo</li>
