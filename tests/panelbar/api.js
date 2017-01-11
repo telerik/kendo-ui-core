@@ -34,7 +34,7 @@
             QUnit.fixture.append(
                 '<ul id="panelbar">' +
                 '    <li class="k-item k-state-default"><span class="k-link k-header">Mail<span' +
-                '            class="k-icon k-i-arrow-60-down k-panelbar-expand"></span></span>' +
+                '            class="k-icon k-i-arrow-s k-panelbar-expand"></span></span>' +
                 '        <ul style="display: none;" class="k-group">' +
                 '            <li class="k-item k-state-default"><span class="k-link">Personal Folders</span>' +
                 '            </li>' +
@@ -53,7 +53,7 @@
                 '        </ul>' +
                 '    </li>' +
                 '    <li class="k-item k-state-disabled"><span class="k-link k-header">Contacts<span' +
-                '            class="k-icon k-i-arrow-60-down k-panelbar-expand"></span></span>' +
+                '            class="k-icon k-i-arrow-s k-panelbar-expand"></span></span>' +
                 '        <ul class="k-group" style="display: none;">' +
                 '            <li class="k-item k-state-default"><span class="k-link">My Contacts</span>' +
                 '            </li>' +
@@ -66,7 +66,7 @@
                 '        </ul>' +
                 '    </li>' +
                 '    <li class="k-item k-state-default"><span class="k-link k-header">Tasks<span' +
-                '            class="k-icon k-i-arrow-60-down k-panelbar-expand"></span></span>' +
+                '            class="k-icon k-i-arrow-s k-panelbar-expand"></span></span>' +
                 '        <ul class="k-group" style="display: none;">' +
                 '            <li class="k-item k-state-default"><span class="k-link">My Tasks</span>' +
                 '            </li>' +
@@ -79,7 +79,7 @@
                 '        </ul>' +
                 '    </li>' +
                 '    <li class="k-item k-state-active"><span class="k-link k-header k-state-selected">Notes<span' +
-                '            class="k-icon k-i-arrow-60-up k-panelbar-collapse"></span></span>' +
+                '            class="k-icon k-i-arrow-n k-panelbar-collapse"></span></span>' +
                 '        <ul class="k-group" style="display: block;">' +
                 '            <li class="k-item k-state-default"><span class="k-link">My Notes</span>' +
                 '            </li>' +
@@ -92,7 +92,7 @@
                 '        </ul>' +
                 '    </li>' +
                 '    <li class="k-item k-state-default"><span class="k-link k-header">Folders List<span' +
-                '            class="k-icon k-i-arrow-60-down k-panelbar-expand"></span></span>' +
+                '            class="k-icon k-i-arrow-s k-panelbar-expand"></span></span>' +
                 '        <ul class="k-group" style="display: none;">' +
                 '            <li class="k-item k-state-default"><span class="k-link">My Client.Net</span>' +
                 '            </li>' +
@@ -216,15 +216,15 @@
 
         var icons = empty_panelbar.find(".k-item > .k-link > .k-icon");
 
-        ok(icons.eq(0).is(".k-panelbar-expand.k-i-arrow-60-down"));
-        ok(icons.eq(1).is(".k-panelbar-expand.k-i-arrow-60-down"));
-        ok(icons.eq(2).is(".k-panelbar-expand.k-i-arrow-60-down"));
+        ok(icons.eq(0).is(".k-panelbar-expand.k-i-arrow-s"));
+        ok(icons.eq(1).is(".k-panelbar-expand.k-i-arrow-s"));
+        ok(icons.eq(2).is(".k-panelbar-expand.k-i-arrow-s"));
     });
 
     test('dataSource should show collapse arrows for expanded items', function () {
         new PanelBar(empty_panelbar, { dataSource: [ { text: "Item 1", content: "Test", expanded: true } ] });
 
-        ok(empty_panelbar.find(".k-item > .k-link > .k-icon").is(".k-panelbar-collapse.k-i-arrow-60-up"));
+        ok(empty_panelbar.find(".k-item > .k-link > .k-icon").is(".k-panelbar-collapse.k-i-arrow-n"));
     });
 
     test('setOptions resets the animation', function() {
