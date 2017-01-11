@@ -14,7 +14,7 @@ slug: breakingchanges2017_kendoui
 #### Breaking Changes
 
 * **Icons**: **All icons are now font icons**, raster images and images sprites are no longer used. The implications are as follows:
-	* **Icon classes are changed** in order to be unified around semantic meaning. If your code depends on them (e.g., for DOM traversal), you may need to update it according to the **Table 1** below.
+	* **Icon classes are changed** in order to be unified around semantic meaning. If your code depends on them (e.g., for DOM traversal), you may need to update it according to the **Table 1** below. You can find the full list of available icons and classes in the latest release in the [Web Font Icons]({% slug webfonticons_kendoui_desktopwidgets %}) article.
 	* The **font-size: 0;** rule is **no longer applied** to elements using Kendo icons. Thus, if they have **text**, it will now show up and obscure the icon. You should move it to a **title** attribute.
 	
 		**Example 1:**
