@@ -43,7 +43,7 @@ stylesheet in _assets/stylesheets/icon-font.css
 fonts in fonts/
  -->
 
-###Layout and Navigation
+### Layout and Navigation
 
 <ul class="WebComponentsIcons">
     <li><span class="k-icon k-i-arrow-45-up-right"></span> .k-i-arrow-45-up-right<br /> .k-i-collapse-ne<br /> .k-i-resize-ne</li>
@@ -102,7 +102,7 @@ fonts in fonts/
     <li><span class="k-icon k-i-more-horizontal"></span> .k-i-more-horizontal</li>
 </ul>
 
- ###Actions
+ ### Actions
 
 <ul class="WebComponentsIcons">
     <li><span class="k-icon k-i-undo"></span> .k-i-undo</li>
@@ -179,7 +179,7 @@ fonts in fonts/
     <li><span class="k-icon k-i-minus-sm"></span> .k-i-minus-sm</li>
 </ul>
 
-###Media
+### Media
 
 <ul class="WebComponentsIcons">
     <li><span class="k-icon k-i-play"></span> .k-i-play</li>
@@ -196,7 +196,7 @@ fonts in fonts/
     <li><span class="k-icon k-i-audio"></span> .k-i-audio</li>
 </ul>
 
-###Toggle
+### Toggle
 
 <ul class="WebComponentsIcons">
     <li><span class="k-icon k-i-heart-outline"></span> .k-i-heart-outline<br /> .k-i-fav-outline<br /> .k-i-favorite-outline</li>
@@ -212,7 +212,7 @@ fonts in fonts/
     <li><span class="k-icon k-i-radiobutton-checked"></span> .k-i-radiobutton-checked</li>
 </ul>
 
-###Alerts and Notifications
+### Alerts and Notifications
 
 <ul class="WebComponentsIcons">
     <li><span class="k-icon k-i-notification"></span> .k-i-notification<br /> .k-i-bell</li>
@@ -221,7 +221,7 @@ fonts in fonts/
     <li><span class="k-icon k-i-warning"></span> .k-i-warning<br /> .k-i-exception<br /> .k-i-error</li>
 </ul>
 
-###Images
+### Images
 
 <ul class="WebComponentsIcons">
     <li><span class="k-icon k-i-photo-camera"></span> .k-i-photo-camera</li>
@@ -269,7 +269,7 @@ fonts in fonts/
     <li><span class="k-icon k-i-reset-color"></span> .k-i-reset-color<br /> .k-i-paint-remove<br /> .k-i-background-remove</li>
 </ul>
 
-###Editing
+### Editing
 
 <ul class="WebComponentsIcons">
     <li><span class="k-icon k-i-page-properties"></span> .k-i-page-properties</li>
@@ -428,7 +428,7 @@ fonts in fonts/
     <li><span class="k-icon k-i-image-absolute-position"></span> .k-i-image-absolute-position</li>
 </ul>
 
-###Mapping
+### Mapping
 
 <ul class="WebComponentsIcons">
     <li><span class="k-icon k-i-globe-outline"></span> .k-i-globe-outline</li>
@@ -439,7 +439,7 @@ fonts in fonts/
     <li><span class="k-icon k-i-unpin"></span> .k-i-unpin</li>
 </ul>
 
-###Social Share
+### Social Share
 
 <ul class="WebComponentsIcons">
     <li><span class="k-icon k-i-share"></span> .k-i-share</li>
@@ -489,7 +489,7 @@ fonts in fonts/
     <li><span class="k-icon k-i-youtube-box"></span> .k-i-youtube-box</li>
 </ul>
 
-###Files and Folders
+### Files and Folders
 
 <ul class="WebComponentsIcons">
     <li><span class="k-icon k-i-folder"></span> .k-i-folder</li>
