@@ -1,10 +1,10 @@
 @font-face {
     font-family: 'WebComponentsIcons';
-    src:url('font/WebComponentsIcons.eot');
-    src:url('fonts/WebComponentsIcons.eot') format('embedded-opentype'),
-        url('font/WebComponentsIcons.woff') format('woff'),
-        url('font/WebComponentsIcons.ttf') format('truetype'),
-        url('font/WebComponentsIcons.svg') format('svg');
+    src:url('../fonts/WebComponentsIcons.eot');
+    src:url('../fonts/WebComponentsIcons.eot') format('embedded-opentype'),
+        url('../fonts/WebComponentsIcons.woff') format('woff'),
+        url('../fonts/WebComponentsIcons.ttf') format('truetype'),
+        url('../fonts/WebComponentsIcons.svg') format('svg');
     font-weight: normal;
     font-style: normal;
 }
