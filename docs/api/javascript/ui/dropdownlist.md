@@ -435,7 +435,17 @@ The height of the suggestion popup in pixels. The default value is 200 pixels.
     <input id="dropdownlist" />
     <script>
     $("#dropdownlist").kendoDropDownList({
-      height: 500
+      dataTextField: "ProductName",
+      dataValueField: "ProductID",
+	  height: 500,
+      dataSource: {
+        transport: {
+          read: {
+            dataType: "jsonp",
+            url: "//demos.telerik.com/kendo-ui/service/Products",
+          }
+        }
+      }
     });
     </script>
 
