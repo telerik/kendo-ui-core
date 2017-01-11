@@ -22,11 +22,10 @@ The example below demonstrates how to sort stacked series values in a grouped Ke
     <div id="chart"></div>
     <script>
 
-      var _globalTimeOut,
-          redrawChart = true,
-          myValues = {};
-      
-      
+      var needsSort,
+          stackValues = {};
+
+
       var data = [{
         daysOut: 1,
         type: "A",
@@ -68,31 +67,42 @@ The example below demonstrates how to sort stacked series values in a grouped Ke
           field: "daysOut",
           type: "bar",
           categoryField: "requestor",
-          labels: {background: "", visible: true, template: "# if(stackValue) { myValues[category] = stackValue; } triggerSorting(); #"},
+          labels: {background: "", visible: true, template: "# if(stackValue) { stackValues[category] = stackValue; } #"},
           stack: true
         }],
+        dataBound: function() {
+          // Sort on data change
+          needsSort = true;
+          stackValues = {};
+        },
+        legendItemClick: function() {
+          // Sort on series toggle
+          needsSort = true;
+        },
+        render: function(e) {
+          triggerSorting(e);
+        }
       });
 
-      function triggerSorting() {
-          window.clearTimeout(_globalTimeOut);
-          _globalTimeOut = window.setTimeout(function () {
-              if (redrawChart) {
-                  redrawChart = false;
-                  var axis = $("#chart").data("kendoChart").options.categoryAxis;
-                  axis.categories = axis.categories.sort(function (a, b) {
-                      if (myValues[a] < myValues[b]) {
-                          return -1;
-                      }
-                      if (myValues[a] > myValues[b]) {
-                          return 1;
-                      }
+      function triggerSorting(e) {
+        if (!needsSort) {
+          return;          
+        }
+        
+        needsSort = false;
+        var axis = e.sender.options.categoryAxis;
+        axis.categories = axis.categories.sort(function (a, b) {
+          if (stackValues[a] < stackValues[b]) {
+            return -1;
+          }
+          if (stackValues[a] > stackValues[b]) {
+            return 1;
+          }
 
-                      return 0;
-                  });
+          return 0;
+        });
 
-                  $("#chart").data("kendoChart").redraw();
-              }
-          }, 10)
+        e.sender.redraw();
       }
     </script>
 ```
