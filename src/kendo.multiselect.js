@@ -1181,7 +1181,7 @@ var __meta__ = { // jshint ignore:line
         },
 
         _clearButton: function() {
-            this._clear = $('<span deselectable="on" class="k-icon k-i-close" title="clear"></span>').attr({
+            this._clear = $('<span deselectable="on" class="k-icon k-clear-value k-i-close" title="clear"></span>').attr({
                 "role": "button",
                 "tabIndex": -1
             });
