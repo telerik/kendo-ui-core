@@ -1,5 +1,5 @@
 ---
-title: UI for ASP.NET MVC Backwards Compatibility
+title: Backwards Compatibility
 page_title: Backwards Compatibility | Telerik UI for ASP.NET MVC
 description: "Learn about the breaking changes and backwards compatibility released by Telerik UI for ASP.NET MVC."
 slug: breakingchanges_mvc
