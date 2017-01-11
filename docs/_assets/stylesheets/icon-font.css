@@ -45,28 +45,28 @@
     font-size: 32px;
 }
 
-.obsolete-classes {
+#page-article table.obsolete-classes {
     width: 100%;
     max-width: 900px;
     text-align: left;
     border-collapse: collapse;
 }
 
-.obsolete-classes th,
-.obsolete-classes td {
+#page-article table.obsolete-classes th,
+#page-article table.obsolete-classes td {
     padding: 10px 0;
     border-bottom: 1px solid #ececec;
 }
 
-.obsolete-classes th {
+#page-article table.obsolete-classes th {
     padding: 0 0 5px;
 }
 
-.old-class {
+#page-article table.obsolete-classes .old-class {
     color: #f31700;
 }
 
-.new-class {
+#page-article table.obsolete-classes .new-class {
     color: #5ec232;
 }
 
