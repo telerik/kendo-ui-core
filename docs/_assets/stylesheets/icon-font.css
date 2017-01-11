@@ -55,6 +55,7 @@
 #page-article table.obsolete-classes th,
 #page-article table.obsolete-classes td {
     padding: 10px 0;
+	border: 0;
     border-bottom: 1px solid #ececec;
 }
 
