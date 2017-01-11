@@ -1,11 +1,13 @@
 ---
-title: Kendo UI 2015 Breaking Changes
-page_title: Kendo UI 2015 Breaking Changes | Kendo UI Backwards Compatibility
+title: 2015 Releases
+page_title: 2015 Releases | Kendo UI Backwards Compatibility
 description: "Learn about the breaking changes and backwards compatibility released by Kendo UI in 2015."
+previous_url: /backwards-compatibility/2015/2015-backward-compatibility
 slug: breakingchanges2015_kendoui
+position: 3
 ---
 
-# Kendo UI 2015 Breaking Changes
+# 2015 Releases
 
 ## Kendo UI 2015 Q3
 

@@ -1,11 +1,12 @@
 ---
-title: Kendo UI 2017 Breaking Changes
-page_title: Kendo UI 2017 Breaking Changes | Kendo UI Backwards Compatibility
+title: 2017 Releases
+page_title: 2017 Releases | Kendo UI Backwards Compatibility
 description: "Learn about the breaking changes and backwards compatibility released by Kendo UI in 2017."
 slug: breakingchanges2017_kendoui
+position: 1
 ---
 
-# Kendo UI 2017 Breaking Changes
+# 2017 Releases
 
 ## Kendo UI 2017 R1
 
@@ -16,36 +17,26 @@ slug: breakingchanges2017_kendoui
 * **Icons**: **All icons are now font icons**, raster images and images sprites are no longer used. The implications are as follows:
 	* **Icon classes are changed** in order to be unified around semantic meaning. If your code depends on them (e.g., for DOM traversal), you may need to update it according to the **Table 1** below. You can find the full list of available icons and classes in the latest release in the [Web Font Icons]({% slug webfonticons_kendoui_desktopwidgets %}) article.
 	* The **font-size: 0;** rule is **no longer applied** to elements using Kendo icons. Thus, if they have **text**, it will now show up and obscure the icon. You should move it to a **title** attribute.
-	
-		**Example 1:**
-		
-		Old:
 
-		````
-		<span class="k-icon k-i-close">Hide</span> 
-		````
+		###### Example
 
-		New:
-
-		````
+		```tab-Old
+		<span class="k-icon k-i-close">Hide</span>
+		```
+		```tab-New
 		<span class="k-icon k-i-close" title="Hide"></span>
-		````
+		```
 
-		**Example 2:**
-		
-		Old:
+		###### Example
 
-		````
+		```tab-Old
 		<a href=""><span class="k-icon k-i-close">Hide</span></a>
-		````
-
-		New:
-
-		````
+		```
+		```tab-New
 		<a href="" title="Hide"><span class="k-icon k-i-close"></span>
-		````
+		```
 
-####Table 1: Changed Icon CSS Classes
+**Table 1. Changed Icon CSS Classes**
 
 <!--
 stylesheet in _assets/stylesheets/icon-font.css
@@ -154,7 +145,6 @@ fonts in fonts/
             <tr><td class="ref-icon"><span class="k-icon k-i-volume-off"></span></td><td class="old-class">.k-i-volume-mute</td><td class="new-class">.k-i-volume-off</td></tr>
         </tbody>
     </table>
-
 
 ## See Also
 

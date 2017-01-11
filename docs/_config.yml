@@ -268,26 +268,8 @@ navigation:
         title: "Accessibility"
         position: 12
     "backwards-compatibility":
-        title: "Backwards Compatibility"
+        title: "Breaking Changes"
         position: 13
-    "backwards-compatibility/2012":
-        title: "2012"
-        position: 6
-    "backwards-compatibility/2013":
-        title: "2013"
-        position: 5
-    "backwards-compatibility/2014":
-        title: "2014"
-        position: 4
-    "backwards-compatibility/2015":
-        title: "2015"
-        position: 3
-    "backwards-compatibility/2016":
-        title: "2016"
-        position: 2
-    "backwards-compatibility/2017":
-        title: "2017"
-        position: 1
     "updates":
         title: "Updates and  Contribution"
         position: 14

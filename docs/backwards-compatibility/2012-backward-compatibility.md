@@ -1,11 +1,13 @@
 ---
-title: Kendo UI 2012 Breaking Changes
-page_title: Kendo UI 2012 Breaking Changes | Kendo UI Backwards Compatibility
+title: 2012 Releases  
+page_title: 2012 Releases | Kendo UI Backwards Compatibility
 description: "Learn about the breaking changes and backwards compatibility released by Kendo UI in 2012."
+previous_url: /backwards-compatibility/2012/2012-backward-compatibility
 slug: breakingchanges2012_kendoui
+position: 6
 ---
 
-# Kendo UI 2012 Breaking Changes
+# 2012 Releases
 
 ## Kendo UI 2012 Q3 SP1
 
