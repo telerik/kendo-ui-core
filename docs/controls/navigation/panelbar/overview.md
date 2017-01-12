@@ -77,10 +77,9 @@ The example below demonstrates how to initialize a PanelBar by using a JSON data
             expanded: true,                                 // Item is rendered expanded
             items: [{                                       // Sub-item collection
               text: "Sub Item 1"
-            },
-                    {
-                      text: "Sub Item 2"
-                    }]
+            }, {
+              text: "Sub Item 2"
+            }]
           },
           {
             text: "Item 5",
