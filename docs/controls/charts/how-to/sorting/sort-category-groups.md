@@ -2,6 +2,7 @@
 title: Sort Categories in Grouped Charts
 page_title: Sort Categories in Grouped Charts | Kendo UI Charts
 description: "Learn how to sort the categories in a grouped Kendo UI Chart."
+previous_url: /controls/charts/how-to/sort-category-groups
 slug: howto_sortcategorisinagroupedchart_charts
 ---
 
