@@ -872,7 +872,7 @@ var __meta__ = { // jshint ignore:line
                 }).data("kendoPopup");
 
                 selector.element.find(".k-clear-color").kendoButton({
-                    spriteCssClass: "k-icon k-i-reset-color",
+                    icon: "reset-color",
                     click: function(e) {
                         selector.options._clearedColor = true;
                         that.value(null);
