@@ -2,6 +2,7 @@
 title: Sort Stacked Series in Grouped Charts
 page_title: Sort Stacked Series in Grouped Charts | Kendo UI Charts
 description: "Learn how to sort the stacked series in a grouped Kendo UI Chart."
+previous_url: /controls/charts/how-to/sort-stacked-series-groups
 slug: howto_sortstackedseriesinagroupedchart_charts
 ---
 
@@ -22,9 +23,9 @@ The example below demonstrates how to sort stacked series values in a grouped Ke
     <div id="chart"></div>
     <script>
 
-      var needsSort,
-          stackValues = {};
-
+      var _globalTimeOut,
+          redrawChart = true,
+          myValues = {};
 
       var data = [{
         daysOut: 1,
@@ -88,7 +89,7 @@ The example below demonstrates how to sort stacked series values in a grouped Ke
         if (!needsSort) {
           return;          
         }
-        
+
         needsSort = false;
         var axis = e.sender.options.categoryAxis;
         axis.categories = axis.categories.sort(function (a, b) {
