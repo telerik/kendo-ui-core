@@ -14,26 +14,30 @@ position: 1
 
 #### Breaking Changes
 
-* **Icons**: **All icons are now font icons**, raster images and images sprites are no longer used. The implications are as follows:
-	* **Icon classes are changed** in order to be unified around semantic meaning. If your code depends on them (e.g., for DOM traversal), you may need to update it according to the **Table 1** below. You can find the full list of available icons and classes in the latest release in the [Web Font Icons]({% slug webfonticons_kendoui_desktopwidgets %}) article.
-	* The **font-size: 0;** rule is **no longer applied** to elements using Kendo icons. Thus, if they have **text**, it will now show up and obscure the icon. You should move it to a **title** attribute.
+**Icons**
+
+**All icons are now font icons.** Raster images and images sprites are no longer used. The implications are as follows:
+
+* To be unified around the semantic meaning, **icon classes are changed**. If your code depends on them, for example, for DOM traversal, you might need to update it according to **Table 1** below. For the full list of available icons and classes in the latest release, refer to the article on [web font icons]({% slug webfonticons_kendoui_desktopwidgets %}).
+
+* The `font-size: 0;` rule is **no longer applied** to elements using Kendo UI icons. In this way, if they have **text**, it will now show up and obscure the icon. You should move it to a **title** attribute.
 
 		###### Example
 
 		```tab-Old
-		<span class="k-icon k-i-close">Hide</span>
+				<span class="k-icon k-i-close">Hide</span>
 		```
 		```tab-New
-		<span class="k-icon k-i-close" title="Hide"></span>
+				<span class="k-icon k-i-close" title="Hide"></span>
 		```
 
 		###### Example
 
 		```tab-Old
-		<a href=""><span class="k-icon k-i-close">Hide</span></a>
+				<a href=""><span class="k-icon k-i-close">Hide</span></a>
 		```
 		```tab-New
-		<a href="" title="Hide"><span class="k-icon k-i-close"></span>
+				<a href="" title="Hide"><span class="k-icon k-i-close"></span>
 		```
 
 **Table 1. Changed Icon CSS Classes**
