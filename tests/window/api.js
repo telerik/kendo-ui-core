@@ -715,6 +715,30 @@
         equal(dialog.wrapper.find(".k-i-pin:visible").length, 0);
     });
 
+    test("maximize() hides the maximize icon", function() {
+        var dialog = createWindow({
+                visible: true,
+                actions: ["Maximize"],
+                animation: false
+            });
+
+        dialog.maximize();
+
+        equal(dialog.wrapper.find(".k-i-window-maximize:visible").length, 0);
+    });
+
+    test("maximize() shows the restore icon", function() {
+        var dialog = createWindow({
+                visible: true,
+                actions: ["Maximize"],
+                animation: false
+            });
+
+        dialog.maximize();
+
+        equal(dialog.wrapper.find(".k-i-window-restore:visible").length, 1);
+    });
+
     test("maximize() adds a k-window-maximized class", function() {
         var dialog = createWindow({
                 visible: true,

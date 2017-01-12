@@ -63,7 +63,7 @@
             ERROR = "error",
             OVERFLOW = "overflow",
             ZINDEX = "zIndex",
-            MINIMIZE_MAXIMIZE = ".k-window-actions .k-i-window-minimize,.k-window-actions .k-i-window",
+            MINIMIZE_MAXIMIZE = ".k-window-actions .k-i-window-minimize,.k-window-actions .k-i-window-maximize",
             KPIN = ".k-i-pin",
             KUNPIN = ".k-i-unpin",
             PIN_UNPIN = KPIN + "," + KUNPIN,
