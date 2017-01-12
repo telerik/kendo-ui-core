@@ -49,6 +49,10 @@ The `input` value (its text) is bound via the `data-bind` attribute to the `name
 
 Finally, bind the View to the View-Model. This is done by calling the `kendo.bind` method:
 
+### Set data-* Options
+
+Please check the naming convention for setting the configuration options of the Kendo UI MVVM widgets [set data options](http://docs.telerik.com/kendo-ui/intro/widget-basics/data-attribute-initialization#set-data--options)
+
 ###### Example
 
     kendo.bind($("#view"), viewModel);
