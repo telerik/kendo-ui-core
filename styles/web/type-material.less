@@ -197,30 +197,10 @@
 }
 
 /* main colors */
-div.k-header .k-icon,
-.k-group-indicator .k-icon,
-.k-button .k-icon,
-.k-group-indicator .k-icon,
-.k-primary.k-button .k-icon,
-a.k-state-active.k-button-icon .k-icon,
-.k-tabstrip-wrapper .k-spreadsheet-quick-access-toolbar .k-icon {
-    color: @header-text-color;
-    &:hover {
-        color: @header-text-color;
-    }
+.k-icon {
+    color: inherit;
 }
-
-.k-icon,
-.k-widget .k-icon,
-.k-dialog-titlebar.k-header .k-icon,
-.k-editor-dropdown .k-icon,
-.k-tool-icon.k-icon,
-.k-widget.k-header .k-icon,
-.k-button .k-icon,
-.k-button-icontext .k-icon,
-.k-button-icon .k-icon,
-.k-header.k-tabstrip .k-icon,
-.k-select .k-link .k-icon {
+a.k-icon {
     color: @normal-text-color;
     &:hover {
         color: @normal-text-color;
@@ -1998,6 +1978,7 @@ html .km-pane-wrapper .km-widget,
 {
     .composite-background(@widget-gradient);
     background-position: 50% 50%;
+    color: @drop-down-text-color;
     background-color: @drop-down-background;
     border-color: @drop-down-border-color;
 }
@@ -2279,6 +2260,9 @@ html .km-pane-wrapper .km-widget,
     border-left-color: @alt-background-color;
 }
 
+.k-editor .k-tool {
+    color: inherit;
+}
 .k-editor .k-tool:focus
 {
    outline: 0;
