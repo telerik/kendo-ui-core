@@ -179,15 +179,6 @@ var __meta__ = { // jshint ignore:line
                 });
             }
 
-            if (popup.options.anchor !== document.body && popup.options.origin.indexOf(RIGHT) > 0) {
-                popup.bind("open", function () {
-                    var shadows = kendo.getShadows(popup.element);
-                    setTimeout(function () {
-                        popup.wrapper.css("left", parseFloat(popup.wrapper.css("left")) + shadows.left + shadows.right);
-                    });
-                });
-            }
-
             if (options.hideOnClick) {
                 popup.bind("activate", function() {
                     if (attachDelay) {
