@@ -15,10 +15,13 @@ position: 6
 
 #### Breaking Changes
 
-* **Cascading ComboBoxes/DropDownLists:** The parameterMap of the child widget's dataSource is called before the change event of the parent widget.
-Use [cascade](/api/javascript/ui/combobox#cascade) event instead of change event.
+**Cascading ComboBoxes/DropDownLists**
 
-* Telerik UI for ASP.NET MVC: Remove Slide effect. Use SlideIn instead.
+The `parameterMap` of the child widget dataSource is called before the `change` event of the parent widget. Use the [`cascade`](/api/javascript/ui/combobox#cascade) event instead of the `change` event.
+
+**Telerik UI for ASP.NET MVC**
+
+Removed the Slide effect. Use SlideIn instead.
 
 ## Kendo UI 2012 Q3
 
@@ -26,12 +29,13 @@ Use [cascade](/api/javascript/ui/combobox#cascade) event instead of change event
 
 #### Breaking Changes
 
-* **Mobile:** the kendoMobileSwipe plugin is obsolete - replace its usage with the **touch** widget.
+**Mobile**
 
-* **Mobile:** WebKit mask icons are now deprecated and font icons are used instead. If you have custom icons, they might break after the upgrade.
-Add the following CSS rule to fix them /if you have data-icon="custom" on them, or use .km-icon to remove all non-custom icons/:
+* The `kendoMobileSwipe` plugin is obsolete. Replace its usage with the **touch** widget.
 
-```
+* The WebKit mask icons are now deprecated and font icons are used instead. If you have custom icons, they might break after the upgrade. If you have `data-icon="custom"` on them or use `.km-icon` to remove all non-custom icons, add the following CSS rule to fix them:
+
+    ```
         .km-root .km-pane .km-view .km-custom {
             background-size: 100% 100%;
             -webkit-background-clip: border-box;
@@ -43,39 +47,40 @@ Add the following CSS rule to fix them /if you have data-icon="custom" on them, 
         {
             visibility: hidden;
         }
-```
+    ```
 
-Additionally it should be noted that the mask icons used **background-color** for colorization, while the font ones use **color**
-and custom colorization (but not on custom icons) **should be updated** after the upgrade. For example a rule like this:
+    Additionally, the mask icons have to use **background-color** for colorization, while the font ones use **color**  and custom colorization (but not on custom icons) **have to be updated** after the upgrade. For example, a rule like this:
 
-```
+    ```
         .km-ios .km-tabstrip .km-icon {
             background-color: rgb(20, 30, 40);
         }
-```
+    ```
 
-should be changed to this:
+    should be changed to this:
 
-```
+    ```
         .km-ios .km-tabstrip .km-icon {
             color: rgb(20, 30, 40);
         }
-```
+    ```
 
-* **DataViz:** Widgets now require theme-specific stylesheets. For example:
+**DataViz**
 
-```
+* Widgets now require theme-specific stylesheets.
+
+    ```
         <link href="styles/kendo.dataviz.min.css" rel="stylesheet" />
-```
+    ```
 
-if using the Default skin, should be updated to:
+    If using the Default skin, the above snippet should be updated to:
 
-```
+    ```
         <link href="styles/kendo.dataviz.min.css" rel="stylesheet" />
         <link href="styles/kendo.dataviz.default.min.css" rel="stylesheet" />
-```
+    ```
 
-* **DataViz:** missingValues defaults to "zero" for area, stacked area and stacked line series. The previous default was "gap" which can lead to incorrect results.
+* The `missingValues` defaults to `"zero"` for Area, Stacked Area and Stacked Line series. The previous default was `"gap"` which can lead to incorrect results.
 
 ## Kendo UI 2012 Q2
 
@@ -83,11 +88,11 @@ if using the Default skin, should be updated to:
 
 #### Breaking Changes
 
-*  **All Widgets:** All arrows have been renamed to better reflect their direction and size. For instance:
+**All Widgets**
 
-Old rendering:
+All arrows have been renamed to better reflect their direction and size. For example:
 
-```
+```tab-Old
 	.k-arrow-up
 	.k-arrow-next
 	.k-arrow-down
@@ -95,10 +100,7 @@ Old rendering:
 	.k-arrow-first
 	.k-arrow-last
 ```
-
-New rendering:
-
-```
+```tab-New
 	.k-i-arrow-n
 	.k-i-arrow-e
 	.k-i-arrow-s
@@ -107,46 +109,42 @@ New rendering:
 	.k-i-seek-e
 ```
 
-For more information check the [Styling Icons demo](http://demos.telerik.com/kendo-ui/web/styling/icons.html).
+For more information, refer to the [demo on styling icons](http://demos.telerik.com/kendo-ui/web/styling/icons.html).
 
-*  **Popup:** Popup based widgets nested in other Popup based widgets create their Popup container inside the Popup parent. This means that a DropDownList created inside an already initialized Menu will create its list inside the Menu item's parent Popup.
+**Popup**
 
-*  **TreeView:** The TreeView widget now depends on kendo.data.js
+Popup-based widgets nested in other Popup-based widgets create their Popup container inside the Popup parent. This means that a DropDownList created inside an already initialized Menu will create its list inside the parent Popup of the Menu item.
 
-*  **TreeView:** Using the API methods will re-create the HTML of the nodes. In order to get the new reference to the nodes, use the return value of the methods.
+**TreeView**
 
-Old rendering:
+* The TreeView widget now depends on `kendo.data.js`.
 
-```
-     var foo = treeviewObject.findByText("foo");
-     treeviewObject.append(foo);
-     // starting with 2012 Q2, foo will point to a DOM node that is removed from the document
-     foo.text("bar: foo");
-```
+* Using the API methods will re-create the HTML of the nodes. To get the new reference to the nodes, use the `return` value of the methods.
 
-New rendering:
+    ```tab-Old
+         var foo = treeviewObject.findByText("foo");
+         treeviewObject.append(foo);
+         // starting with 2012 Q2, foo will point to a DOM node that is removed from the document
+         foo.text("bar: foo");
+    ```
+    ```tab-New
+         var foo = treeviewObject.findByText("foo");
+         foo = treeviewObject.append(foo);
+          foo.text("bar: foo");
+    ```
 
-```
-     var foo = treeviewObject.findByText("foo");
-     foo = treeviewObject.append(foo);
-      foo.text("bar: foo");
-```
+**DataViz**
 
-* **DataViz:** Refresh() no longer invokes Read() of the DataSource.
+`Refresh()` no longer invokes `Read()` of the DataSource.
 
-Old rendering:
-
-```
-    var chart = $("#chart").data("kendoChart");
-    chart.refresh();
-```
-
-New rendering:
-
-```
-   var chart = $("#chart").data("kendoChart");
-   chart.dataSource.read();
-```
+    ```tab-Old
+        var chart = $("#chart").data("kendoChart");
+        chart.refresh();
+    ```
+    ```tab-New
+       var chart = $("#chart").data("kendoChart");
+       chart.dataSource.read();
+    ```
 
 ## Kendo UI 2012 Q1 (2012.1.322)
 
@@ -156,62 +154,56 @@ New rendering:
 
 > **Important**
 >
-> The combined JavaScript file `kendo.all.js` is available only in the Kendo Complete package. The corresponding file in Kendo Web is called `kendo.web.js`. Use it instead of `kendo.all.js`.
+> The combined `kendo.all.js` JavaScript file is available only in the Kendo UI Complete package. The corresponding file in Kendo UI Web is called `kendo.web.js`. Use it instead of `kendo.all.js`.
 
-*  **Data:** `kendo.model.js` file has been removed. The content of kendo.model.js file has been consolidated with the kendo.data.js content.
-*  **Data:** `Model.id` is no longer a function. It is a field.
+**Data**
 
-Old rendering:
+* The `kendo.model.js` file has been removed. The content of the `kendo.model.js` file has been consolidated with the `kendo.data.js` content.
+* `Model.id` is no longer a function. It is a field.
 
-```
-	var model = dataSource.get(42);
-	var modelId = model.id(); //42
-```
+    ```tab-Old
+    	var model = dataSource.get(42);
+    	var modelId = model.id(); //42
+    ```
+    ```tab-New
+    	var model = dataSource.get(42);
+    	var modelId = model.id; //42
+    ```
 
-New rendering:
+*  The `DataSource` contains `ObservableObject` instances instead of raw JavaScript objects.
 
-```
-	var model = dataSource.get(42);
-	var modelId = model.id; //42
-```
+**Grid**
 
-*  **Data:** The `DataSource` contains ObservableObject instances instead of raw JavaScript objects.
+The Grid widget is now using the `uid` field of the Model instead of the `id`. A new `uid` field is introduced to the DataSource Model, which represents its unique id. The Grid row data attribute has been changed to use this field. To retrieve a Model instance by its `uid`, the `getByUid` method of the DataSource should be used.
 
-*  **Grid:** The Grid widget is now using the `uid` field of the Model instead of the `id`. A new uid field is introduced to the DataSource's Model, which represents its unique id. The Grid row data attribute has been changed to use this field. Note that in order to retrieve Model instance by its uid, DataSource's `getByUid` method should be used.
-
-Old rendering:
-
-```
+```tab-Old
 	<tr data-id="42"><!--...--></tr>
 ```
-
-New rendering:
-
-```
+```tab-New
 	<tr data-uid=”aaaaa-bbbbb-ddddd-gggg”><!--...--></tr>
 ```
 
-*  **DataViz:** The kendo.chart(.min).js file is replaced by kendo.dataviz(.min).js
+**DataViz**
 
-*  **DataViz:** The axis orientation property deprecated in favor of dedicated verticalLine and verticalArea chart types
+* The `kendo.chart(.min).js` file is replaced by `kendo.dataviz(.min).js`.
 
-*  **DataViz:** The suite now requires kendo.dataviz.css to be included
+* The axis orientation property is now deprecated in favor of the dedicated `verticalLine` and `verticalArea` Chart types.
 
-*  **DataViz:** The Chart widget is now in the kendo.dataviz.ui namespace. Previously it was part of kendo.ui
+* The suite now requires `kendo.dataviz.css` to be included.
 
-*  **Other:** `dataValueField` and `dataTextField` of DropDownList, ComboBox and AutoComplete, are set to empty string by default. In order to get your old code working, you will need to list the fields manually, like this:
+* The Chart widget is now in the `kendo.dataviz.ui` namespace. Previously, it was part of `kendo.ui`.
 
-Old rendering:
+**Other**
 
-```
+The `dataValueField` and `dataTextField` configurations of the DropDownList, ComboBox, and AutoComplete are set to empty string by default. To revert to the previous behavior, list the fields manually:
+
+```tab-Old
 	$("#combobox").kendoComboBox([
 		{text: "Item 1", value: "item1"},
 		{text: "Item 2", value: "item2"}
 	]);
 ```
-New rendering:
-
-```
+```tab-New
 	$("#combobox").kendoComboBox({
 		dataTextField: "text",
 		dataValueField: "value",
@@ -226,6 +218,7 @@ New rendering:
 
 Other articles on Kendo UI breaking changes and backwards compatibility:
 
+* [Kendo UI 2017 Breaking Changes]({% slug breakingchanges2017_kendoui %})
 * [Kendo UI 2016 Breaking Changes]({% slug breakingchanges2016_kendoui %})
 * [Kendo UI 2015 Breaking Changes]({% slug breakingchanges2015_kendoui %})
 * [Kendo UI 2014 Breaking Changes]({% slug breakingchanges2014_kendoui %})
