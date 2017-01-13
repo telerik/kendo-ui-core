@@ -1,21 +1,21 @@
 ---
-title: Documentation Updates
-page_title: Documentation Updates | Updates and Contribution
-description: "Learn about the latest updates in Kendo UI documentation released in 2016."
+title: 2016 Documentation Updates
+page_title: 2016 Documentation Updates | Updates and Contribution
+description: "The latest updates in the documentation shipped with Kendo UI and released in 2016."
 slug: documentation_updates_2016_kendoui
-position: 1
+position: 2
 ---
 
-# Documentation Updates
+# 2016 Documentation Updates
 
-## November 2016
+## November
 
 The UI for ASP.NET MVC documentation is now split into UI for ASP.NET MVC and UI for ASP.NET Core. The domains diverged from the existing Kendo UI documentation and are hosted on the following individual websites:
 
 * [UI for ASP.NET MVC](http://docs.telerik.com/aspnet-mvc/introduction)
 * [UI for ASP.NET Core](http://docs.telerik.com/aspnet-core/introduction)
 
-## August 2016
+## August
 
 ### Existing
 
@@ -99,7 +99,7 @@ The files that are now changed with regard to their internal structure are:
     </tr>
 </table>
 
-## May 2016
+## May
 
 Below are listed the Kendo UI R2 2016 release changes in the documentation as compared to the Kendo UI Q1 2016 SP1 ones.
 
@@ -186,7 +186,7 @@ The **Copyright** notice is now added.
     </tr>
 </table>
 
-## March 2016
+## March
 
 ### New
 
@@ -267,7 +267,7 @@ Below are listed the Kendo UI Q1 2016 SP1 (2016.1.226) release changes in the do
     </tr>
 </table>
 
-## January 2016
+## January
 
 ### Existing
 
@@ -279,3 +279,7 @@ Below are listed the Kendo UI Q1 2016 release changes in documentation as compar
 * The newly created **Troubleshooting** folder holds all existing general Kendo UI issues, which are now split into topics, so that a particular issue can be much more easily located. This approach resulted in articles such as [**Performance Issues**]({% slug troubleshooting_system_memory_symptoms_kendoui %}) and [**Content Security Policy**]({% slug troubleshooting_content_security_policy_kendoui %}).
 * The new **Backwards Compatibility** folder contains all Kendo UI breaking changes now divided depending on the year of their release.
 * The headings in nearly half of the existing help topics are now shortened and improved with a focus on building a much clearer and easy-to-access internal structure as well as suiting the new web design of the Documentation hub. The work on building a consistent style of inter-linking related topics via the newly-added **See Also** section is going on, too.
+
+## See Also
+
+* [2017 Documentation Updates]({% slug documentation_updates_2017_kendoui %})
