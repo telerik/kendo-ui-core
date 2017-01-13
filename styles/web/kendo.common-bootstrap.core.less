@@ -71,6 +71,18 @@ input.k-textbox {
     margin-right: 8px;
 }
 
+.k-colorpicker {
+    @picker-icon-height: 2.28571428em;
+    .k-selected-color {
+        width: @picker-icon-height;
+        height: @picker-icon-height;
+
+        .k-i-line {
+            font-size: @picker-icon-height;
+        }
+    }
+}
+
 .k-combobox > .k-dropdown-wrap > .k-i-close {
     right: 2.55em;
 }
