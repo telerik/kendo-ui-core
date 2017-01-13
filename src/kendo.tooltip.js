@@ -34,7 +34,7 @@ var __meta__ = { // jshint ignore:line
         CONTENTLOAD = "contentLoad",
         REQUESTSTART = "requestStart",
         KCONTENTFRAME = "k-content-frame",
-        TEMPLATE = '<div role="tooltip" class="k-widget k-tooltip#if (!autoHide) {# k-tooltip-closable#}#">#if (!autoHide) {# <div class="k-tooltip-button"><a href="\\#" class="k-icon k-i-close">close</a></div> #}#' +
+        TEMPLATE = '<div role="tooltip" class="k-widget k-tooltip#if (!autoHide) {# k-tooltip-closable#}#">#if (!autoHide) {# <div class="k-tooltip-button"><a href="\\#" class="k-icon k-i-close" title="Close"></a></div> #}#' +
                 '<div class="k-tooltip-content"></div>' +
                 '#if (callout){ #<div class="k-callout k-callout-#=dir#"></div>#}#' +
             '</div>',
