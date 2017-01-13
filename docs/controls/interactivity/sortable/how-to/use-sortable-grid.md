@@ -99,7 +99,7 @@ The main milestones of the approach are:
            .appendTo(container);
        };
 
-* If a Kendo UI widget is used as an editor, its `change` event should be manually triggered at the `edit` event of the Grid widget.
+* If a Kendo UI widget is used as an editor, its `change` event should be manually triggered in the `edit` event of the Grid widget.
 
 ###### Example
 
@@ -115,7 +115,11 @@ The main milestones of the approach are:
          var widget = input.data("kendoNumericTextBox");
          var model = e.model;
 
-         input.on("keyup", function() {
+         input.on("keyup", function(e) {
+           if(e.key === kendo.culture().numberFormat["."]) {
+             // for Kendo UI NumericTextBox only
+             return;
+           }
            widget.value(input.val());
            widget.trigger("change");
          });
@@ -182,7 +186,11 @@ The main milestones of the approach are:
                 });
               }
 
-           input.on("keyup", function() {
+           input.on("keyup", function(e) {
+             if(e.key === kendo.culture().numberFormat["."]) {
+                // for Kendo UI NumericTextBox only
+               return;
+             }
              widget.value(input.val());
              widget.trigger("change");
            });
