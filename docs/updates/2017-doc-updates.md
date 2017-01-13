@@ -10,6 +10,8 @@ position: 1
 
 ## January
 
+### Existing
+
 The how-to articles that refer to the sorting options the Charts provide are now grouped in the [**Sorting**]({% slug howto_sortcategorisinagroupedchart_charts %}) folder.   
 
 ## See Also
