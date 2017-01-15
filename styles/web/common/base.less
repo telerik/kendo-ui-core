@@ -442,12 +442,22 @@ html .k-error-colored
 /* loading */
 
 .k-loading,
-.k-i-loading,
 .k-loading-image
 {
     background-color: transparent;
     background-repeat: no-repeat;
     background-position: center center;
+}
+
+.k-icon.k-i-loading {
+    background-color: transparent;
+    background-repeat: no-repeat;
+    background-position: center center;
+
+    &::before {
+        content: "";
+        display: none;
+    }
 }
 
 .k-loading-mask,
