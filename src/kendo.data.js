@@ -1145,10 +1145,10 @@ var __meta__ = { // jshint ignore:line
                 return a + " !== ''";
             },
             isnull: function(a) {
-                return "(" + a + " === null || " + a + " === undefined)";
+                return "(" + a + " == null)";
             },
             isnotnull: function(a) {
-                return "(" + a + " !== null && " + a + " !== undefined)";
+                return "(" + a + " != null)";
             }
         };
     })();
