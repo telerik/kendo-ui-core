@@ -1022,16 +1022,12 @@ var __meta__ = { // jshint ignore:line
 
         function textOp(impl) {
             return function(a, b, ignore) {
+                b += "";
                 if (ignore) {
                     a = "(" + a + " || '').toLowerCase()";
-                    if (b) {
-                        b = b.toLowerCase();
-                    }
+                    b = b.toLowerCase();
                 }
-                if (b) {
-                    b = quote(b);
-                }
-                return impl(a, b, ignore);
+                return impl(a, quote(b), ignore);
             };
         }
 
@@ -1057,6 +1053,36 @@ var __meta__ = { // jshint ignore:line
             }
 
             return a + " " + op + " " + b;
+        }
+
+        function getMatchRegexp(pattern) {
+            // take a pattern, as supported by Excel match filter, and
+            // convert it to the equivalent JS regular expression.
+            // Excel patterns support:
+            //
+            //   * - match any sequence of characters
+            //   ? - match a single character
+            //
+            // to match a literal * or ?, they must be prefixed by a tilde (~)
+            for (var rx = "/^", esc = false, i = 0; i < pattern.length; ++i) {
+                var ch = pattern.charAt(i);
+                if (esc) {
+                    rx += "\\" + ch;
+                } else if (ch == "~") {
+                    esc = true;
+                    continue;
+                } else if (ch == "*") {
+                    rx += ".*";
+                } else if (ch == "?") {
+                    rx += ".";
+                } else if (".+^$()[]{}|\\/\n\r\u2028\u2029\xA0".indexOf(ch) >= 0) {
+                    rx += "\\" + ch;
+                } else {
+                    rx += ch;
+                }
+                esc = false;
+            }
+            return rx + "$/";
         }
 
         return {
@@ -1103,6 +1129,14 @@ var __meta__ = { // jshint ignore:line
             }),
             doesnotcontain: textOp(function(a, b) {
                 return a + ".indexOf(" + b + ") == -1";
+            }),
+            matches: textOp(function(a, b){
+                b = b.substring(1, b.length - 1);
+                return getMatchRegexp(b) + ".test(" + a + ")";
+            }),
+            doesnotmatch: textOp(function(a, b){
+                b = b.substring(1, b.length - 1);
+                return "!" + getMatchRegexp(b) + ".test(" + a + ")";
             }),
             isempty: function(a) {
                 return a + " === ''";
