@@ -535,10 +535,10 @@ navigation:
 baseurl: /kendo-ui
 
 ## The Kendo UI version used
-cdnVersion: "2016.3.1028"
+cdnVersion: "2016.3.1118"
 
 ## The MVC Core version used
-mvcCoreVersion: "2016.3.1028"
+mvcCoreVersion: "2016.3.1118"
 
 ## Assign layout and category per different paths
 defaults:
