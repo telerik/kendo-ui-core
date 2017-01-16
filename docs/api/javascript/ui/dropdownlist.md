@@ -1783,7 +1783,7 @@ The widget instance which fired the event.
 Fired when an item from the popup is selected by the user either with mouse/tap or with keyboard navigation.
 
 > * The event is not fired when an item is selected programmatically.
-> * Since version Q1 2015 (2015.1.318), the [option label has been moved outside the item list DOM collection](/backward-compatibility#kendo-ui-2015-q1). As a result, `jQuery.index()` can no longer be used to reliably detect if the option label is the selected dropdown item. A more appropriate approach would be to check if the selected dataItem value is an empty string, and/or check if the selected dateItem's text is equal to the `optionLabel` string.
+> * Since version Q1 2015 (2015.1.318), the [option label has been moved outside the item list DOM collection]({% slug breakingchanges2015_kendoui %}#kendo-ui-2015-q1). As a result, `jQuery.index()` can no longer be used to reliably detect if the option label is the selected dropdown item. A more appropriate approach would be to check if the selected dataItem value is an empty string, and/or check if the selected dateItem's text is equal to the `optionLabel` string.
 >   *  `e.sender.dataItem(e.item)[e.sender.options.dataValueField] == ""`
 >   *  `e.sender.dataItem(e.item)[e.sender.options.dataTextField] == e.sender.options.optionLabel`
 
