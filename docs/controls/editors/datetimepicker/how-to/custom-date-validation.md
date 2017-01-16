@@ -18,16 +18,12 @@ The example below demonstrates how to create a custom date validation.
       <span class="k-invalid-msg" data-for="datetimepicker"></span>
     </div>
 
-
     <script>
       $(document).ready(function () {
         // create DateTimePicker from input HTML element
         $("#datetimepicker").kendoDateTimePicker({
           value:new Date(),
-          parseFormats: ["MM/dd/yyyy"],
-          change: function(e) {
-
-          }
+          parseFormats: ["MM/dd/yyyy"]
         });
 
         var validator = $("#example").kendoValidator({
@@ -44,9 +40,6 @@ The example below demonstrates how to create a custom date validation.
             datepicker: "Please enter valid date!"
           }
         }).data("kendoValidator");
-
-
-
       });
     </script>
     <style scoped>
