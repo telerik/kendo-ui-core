@@ -87,7 +87,7 @@ var __meta__ = { // jshint ignore:line
             "vertical": { offset: "left", size: "outerWidth" }
         },
         DEFAULTCONTENT = function(e) {
-            return e.target.data(kendo.ns + "kendo_title");
+            return e.target.data(kendo.ns + "title");
         };
 
     function restoreTitle(element) {
