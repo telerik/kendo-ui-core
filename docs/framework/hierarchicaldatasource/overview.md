@@ -205,7 +205,7 @@ The configuration above creates a two-level HierarchicalDataSource&mdash;categor
 
 ### Bind Widgets to HierarchicalDataSource
 
-At this time, the only widget that is aware of the dataSource hierarchy is the TreeView. However, since the HierarchicalDataSource component inherits from the DataSource component, you can share the root level of the hierarchy with any DataSource-enabled component.
+Currently, the Kendo UI widgets that are aware of the dataSource hierarchy are the TreeView and the PanelBar. However, since the HierarchicalDataSource component inherits from the DataSource component, you can share the root level of the hierarchy with any DataSource-enabled component.
 
 ### Share HierarchicalDataSource between Widgets
 
