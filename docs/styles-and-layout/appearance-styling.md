@@ -1,13 +1,13 @@
 ---
-title: Themes and Layout
-page_title: Themes and Layout | Kendo UI Styles and Appearance
+title: LESS-Based Themes
+page_title: LESS-Based Themes | Kendo UI Styles and Appearance
 description: "Learn how to define CSS classes in the Kendo UI desktop widgets to change their appearance and customize their style further."
 previous_url: /web/appearance-styling, /web/appearance-rtl, /dataviz/appearance-styling
 slug: themesandappearnce_kendoui_desktopwidgets
 position: 1
 ---
 
-# Themes and Layout
+# LESS-Based Themes
 
 All [Kendo UI widgets](http://demos.telerik.com/kendo-ui/) arrive with a number of predefined themes.
 
@@ -63,12 +63,12 @@ Some themes require a different common (base) stylesheet that applies different 
 
 | CSS Files   | Contents and Application |
 |:---         |:---                     |
-| **`kendo.common.css`**                | This is the default base stylesheet, which is required by the majority of the Kendo UI themes. |
-| **`kendo.common-bootstrap.css`**      | The base stylesheet for the Bootstrap theme. Use this file instead of `kendo.common.css` and only with `kendo.bootstrap.css` theme file to achieve Bootstrap-like widget dimensions. |
-| **`kendo.common-material.css`**       | The base stylesheet for the Material and MaterialBlack themes. Use this file instead of `kendo.common.css` and only with `kendo.material.css` or `kendo.materialblack.css` theme files. |
-| **`kendo.common-nova.css`**           | The base stylesheet for the Nova theme. Use this file instead of `kendo.common.css` and only with `kendo.nova.css`. |
-| **`kendo.common-fiori.css`**          | The base stylesheet for the Fiori theme available in the enterprise bundles of Kendo UI. Use this file instead of `kendo.common.css` and only with `kendo.fiori.css`. |
-| **`kendo.common-office365.css`**      | The base stylesheet for the Office365 theme available in the enterprise bundles of Kendo UI. Use this file instead of `kendo.common.css` and only with `kendo.office365.css`. |
+| `kendo.common.css`                | This is the default base stylesheet, which is required by the majority of the Kendo UI themes. |
+| `kendo.common-bootstrap.css`      | The base stylesheet for the Bootstrap theme. Use this file instead of `kendo.common.css` and only with `kendo.bootstrap.css` theme file to achieve Bootstrap-like widget dimensions. |
+| `kendo.common-material.css`       | The base stylesheet for the Material and MaterialBlack themes. Use this file instead of `kendo.common.css` and only with `kendo.material.css` or `kendo.materialblack.css` theme files. |
+| `kendo.common-nova.css`           | The base stylesheet for the Nova theme. Use this file instead of `kendo.common.css` and only with `kendo.nova.css`. |
+| `kendo.common-fiori.css`          | The base stylesheet for the Fiori theme available in the enterprise bundles of Kendo UI. Use this file instead of `kendo.common.css` and only with `kendo.fiori.css`. |
+| `kendo.common-office365.css`      | The base stylesheet for the Office365 theme available in the enterprise bundles of Kendo UI. Use this file instead of `kendo.common.css` and only with `kendo.office365.css`. |
 
 ### Theme-Related Folders
 
@@ -102,19 +102,19 @@ Kendo UI widgets use primitives, meaning that different HTML elements in differe
 
 | CSS Class   | Behavior  |
 |:---         |:---       |
-| **`k-widget`**  | The class is applied to the widget wrapper to set a border, text and background color. In addition to `k-widget`, every widget has its own specific CSS class, such as `k-menu`, `k-panelbar`, `k-tabstrip`, etc.|
-| **`k-header`**  | Applied to Grid headers, Menu top level items, PanelBar top level items, TabStrip items, and DropDownLists to set a background image and a background color. |
-| **`k-link`**    | Applied to hyperlinks and clickable text items to set a text color.|
-| **`k-button`**  | Applied to elements that are expected to look like push buttons. The class sets a text color, background color, background image, and hover styling. This is the recommended class for styling form buttons.|
-| **`k-input`**   | Applied to textboxes inside input widgets like ComboBox and AutoComplete to set border, text and background color.|
-| **`k-textbox`** | Same as `k-input`, but used for standalone (generic) `input` elements that are not part of a widget. This is the recommended class for styling form `input` elements as it provides the same look, height, and vertical alignment as the Kendo UI input widgets.|
-| **`k-checkbox`**| Applied to checkboxes inside the TreeView widget, when checkboxes are enabled for it.|
-| **`k-group`** and **`k-content`**| Applied to various containers to set a background and border color. |
-| **`k-popup`**   | Applied to popup containers that are detached from their opener component and are placed in the `body` element. |
-| **`k-icon`** and **`k-sprite`**| Applied to elements that display part of a sprite image as background to initialize their dimensions. |
-| **`k-image`**   | Applied to inline images to set their dimensions. |
-| **`k-item`**    | Applied to various repeating widget items, e.g. Menu, TabStrip, TreeView, PanelBar, ComboBox, DropDownList, etc. This CSS class does not apply any particular global styles and sports `display: block`.|
-| **`k-first`** and **`k-last`** | Set on the first and the last `k-item` respectively, where a special type of styling is needed, e.g. rounded corners and removing borders. |
+| `k-widget`  | The class is applied to the widget wrapper to set a border, text and background color. In addition to `k-widget`, every widget has its own specific CSS class, such as `k-menu`, `k-panelbar`, `k-tabstrip`, etc.|
+| `k-header`  | Applied to Grid headers, Menu top level items, PanelBar top level items, TabStrip items, and DropDownLists to set a background image and a background color. |
+| `k-link`    | Applied to hyperlinks and clickable text items to set a text color.|
+| `k-button`  | Applied to elements that are expected to look like push buttons. The class sets a text color, background color, background image, and hover styling. This is the recommended class for styling form buttons.|
+| `k-input`   | Applied to textboxes inside input widgets like ComboBox and AutoComplete to set border, text and background color.|
+| `k-textbox` | Same as `k-input`, but used for standalone (generic) `input` elements that are not part of a widget. This is the recommended class for styling form `input` elements as it provides the same look, height, and vertical alignment as the Kendo UI input widgets.|
+| `k-checkbox`| Applied to checkboxes inside the TreeView widget, when checkboxes are enabled for it.|
+| `k-group` and `k-content`| Applied to various containers to set a background and border color. |
+| `k-popup`   | Applied to popup containers that are detached from their opener component and are placed in the `body` element. |
+| `k-icon` and `k-sprite`| Applied to elements that display part of a sprite image as background to initialize their dimensions. |
+| `k-image`   | Applied to inline images to set their dimensions. |
+| `k-item`    | Applied to various repeating widget items, e.g. Menu, TabStrip, TreeView, PanelBar, ComboBox, DropDownList, etc. This CSS class does not apply any particular global styles and sports `display: block`.|
+| `k-first` and `k-last` | Set on the first and the last `k-item` respectively, where a special type of styling is needed, e.g. rounded corners and removing borders. |
 
 ### The k-state Classes
 
@@ -122,13 +122,13 @@ The appearance of a component may well depend on its state, which is also tied t
 
 | `k-state` Class   | Behavior  |
 |:---               |:---       |
-| **`k-state-default`** | This class is applied on items to set their default appearance background and colors. |
-| **`k-state-hover`**   | Set to items when they are hovered to apply their hovered look. |
-| **`k-state-focused`** | Applied on focused, mostly `input` elements and the DropDownList. |
-| **`k-state-active`**  | Set on activated `k-link` elements. |
-| **`k-state-selected`**| Set to selected items to apply their selected look like in the PanelBar and TabStrip. |
-| **`k-state-disabled`** | Applied to disabled items. |
-| **`k-state-error`**   | Can be used with form fields that have an invalid value. |
+| `k-state-default` | This class is applied on items to set their default appearance background and colors. |
+| `k-state-hover`   | Set to items when they are hovered to apply their hovered look. |
+| `k-state-focused` | Applied on focused, mostly `input` elements and the DropDownList. |
+| `k-state-active`  | Set on activated `k-link` elements. |
+| `k-state-selected`| Set to selected items to apply their selected look like in the PanelBar and TabStrip. |
+| `k-state-disabled` | Applied to disabled items. |
+| `k-state-error`   | Can be used with form fields that have an invalid value. |
 
 ### Other
 

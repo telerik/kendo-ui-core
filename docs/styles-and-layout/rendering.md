@@ -4,7 +4,7 @@ page_title: Rendering Modes for Data Visualization | Kendo UI Styles and Appeara
 description: "Learn how to configure the rendering modes for data visualization in Kendo UI."
 previous_url: /dataviz/rendering
 slug: renderingmodesfor_datavisualization_kendouistyling
-position: 4
+position: 5
 ---
 
 # Rendering Modes for Data Visualization

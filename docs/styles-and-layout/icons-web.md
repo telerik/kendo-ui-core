@@ -4,7 +4,7 @@ page_title: Web Font Icons | Kendo UI Styles and Appearance
 description: "Check out the full list of the web font icons for the Kendo UI desktop widgets."
 previous_url: /web/icons-web
 slug: webfonticons_kendoui_desktopwidgets
-position: 6
+position: 7
 ---
 
 # Web Font Icons

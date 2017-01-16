@@ -4,7 +4,7 @@ page_title: ThemeBuilder Overview | Kendo UI Styles and Appearance
 description: "Learn how to modify the Kendo UI themes so that they match the look and feel of your website or application."
 previous_url: /themebuilder
 slug: themebuilder_overview_kendouistyling
-position: 3
+position: 4
 ---
 
 # ThemeBuilder Overview
