@@ -32,7 +32,7 @@ To add the project template, select it from the drop-down list of options.
 
 **Figure 2. The added project template**
 
-![Project Templates](/vs-integration/images/project-template-core.png)
+![Project Templates](vs-integration/images/project-template-core.png)
 
 The added project template is available in the language-specific nodes of the dialog as well. The **Add New Project** dialog contains the Telerik UI for ASP.NET Core MVC web application under the **CSharp\Web** node.
 
