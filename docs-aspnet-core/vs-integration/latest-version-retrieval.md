@@ -14,10 +14,6 @@ With the Telerik UI for ASP.NET Core Visual Studio Extensions you keep your proj
 
 ![Get latest version](images/lva1.png)
 
-> **Important**
->
-> You cannot use the tool if you have a trial license. Attempting to download a distribution results in an error message.
-
 Check for any additional information about the release by clicking the **Release Notes** link. This starts a browser, navigating to a page with the release notes related to the specific version.
 
 Use the **Save my password** checkbox to avoid having to enter your Telerik credentials multiple times. The persistence is done in a secure manner and credentials are saved in a per-user context. Other users on the machine do not have access to your stored credentials.
@@ -27,7 +23,9 @@ The download starts automatically after a confirmation window.
 **Figure 2, 3 and 4. The dialog indicating the download progress**
 
 ![Get latest version](images/lva2.png)
+
 ![Get latest version](images/lva3.png)
+
 ![Get latest version](images/lva4.png)
 
 Once the download succeeds, the latest version of Telerik UI for ASP.NET Core is available to use in the **New Project Wizard**.
