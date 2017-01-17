@@ -40,7 +40,7 @@ The wizard detects all the installed versions of UI for ASP.NET Core and lists t
 
 The **Create New Project** page enables you to modify the project settings by configuring the following options:
 
-* **Project type**&mdash;Choose the desired project type: **Empty**, **Standard**, **Grid**, and **Menu**.
+* **Project type**&mdash;Choose the desired project type: **Empty**, **Standard**, **Grid and Menu**.
 * **Version**&mdash;Choose the version of Telerik UI for ASP.NET Core you want to use.
 
 ### New ASP.NET Core Application Creation
