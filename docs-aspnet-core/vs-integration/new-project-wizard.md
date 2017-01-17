@@ -34,7 +34,7 @@ The wizard detects all the installed versions of UI for ASP.NET Core and lists t
 
 **Figure 1. New Project Wizard**
 
-![New Project Wizard](/images/vs-integration/new-project-wizard-core.png)
+![New Project Wizard](/vs-integration/images/new-project-wizard-core.png)
 
 ### Project Settings
 

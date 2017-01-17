@@ -12,7 +12,7 @@ With the Telerik UI for ASP.NET Core Visual Studio Extensions you keep your proj
 
 **Figure 1. The Get the Latest Version dialog**
 
-![Get latest version](/images/vs-integration/lva1.png)
+![Get latest version](/vs-integration/images/lva1.png)
 
 > **Important**
 >
@@ -26,9 +26,9 @@ The download starts automatically after a confirmation window.
 
 **Figure 2, 3 and 4. The dialog indicating the download progress**
 
-![Get latest version](/images/vs-integration/lav2.png)
-![Get latest version](/images/vs-integration/lav3.png)
-![Get latest version](/images/vs-integration/lav4.png)
+![Get latest version](/vs-integration/images/lav2.png)
+![Get latest version](/vs-integration/images/lav3.png)
+![Get latest version](/vs-integration/images/lav4.png)
 
 Once the download succeeds, the latest version of Telerik UI for ASP.NET Core is available to use in the **New Project Wizard**.
 
