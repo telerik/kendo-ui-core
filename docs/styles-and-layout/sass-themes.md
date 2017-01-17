@@ -8,17 +8,18 @@ position: 2
 
 # SASS-Based Themes
 
-As of the R1 2017 release, the Kendo UI distribution has included SASS-based themes. 
+As of the R1 2017 release, the Kendo UI distribution includes SASS-based themes.
+
+Currently, Kendo UI delivers a single SASS theme. This is the Kendo UI "Default v2" theme which is a modern update of the Kendo UI Default theme.
+
+The work on revamping the Kendo UI Bootstrap theme has also started and the new theme is soon expected to be available.
 
 ## Overview
 
-Apart from being written in a different language, the SASS-based themes demonstrate subtle differences from the LESS-based ones. This article outlines those differences and shows how you can use the SASS-based themes.
+Apart from being written in a different language, the SASS-based themes demonstrate subtle differences from the LESS-based ones.
+This article outlines those differences and shows how you can use the SASS-based themes.
 
-Currently, Kendo UI delivers a single SASS theme that is available. This is the Kendo UI Default v2 theme which is a modern update of the Kendo UI Default theme. 
-
-The work on revamping the Kendo UI Bootstrap theme has also started and the new theme is soon expected to be available. 
-
-## Differences 
+## Differences
 
 In Kendo UI, the SASS-based themes demonstrate the following differences from the LESS-based ones:
 
@@ -32,20 +33,23 @@ In Kendo UI, the SASS-based themes demonstrate the following differences from th
 To get the SASS-based Kendo UI themes, you can:
 
 * Use the pre-build CSS files.
-* Use the NPM packages. 
+* Use the NPM packages.
 
 ### Using Pre-Built CSS
 
 To get a complete theme by using its pre-built CSS files, apply either of the following approaches:
 
-- Use the CSS files that are shipped with the Kendo UI distribution.
-- Use the NPM package which contains a pre-built `dist/all.css` CSS file.
+- Use the CSS files that are shipped with the Kendo UI distribution. For example, the "Default v2" theme is distributed as `styles/kendo.default-v2.min.css`.
+- Use the NPM package which contains a pre-built `dist/all.css` CSS file for the theme. See below for instructions on how to obtain the NPM package.
 
 ### Using NPM Packages
 
-The SASS-based themes are available on the Progress NPM registry. 
+The SASS-based themes are available as packages on the Progress NPM registry:
 
-Currently, Kendo UI delivers the Kendo UI Default v2 package available as @progress/kendo-theme-default.
+* `@progress/kendo-theme-default` "Default v2"
+
+To access the Progress NPM registry you need an *Telerik account with active commercial license*.
+See [Kendo UI Professional - Installation]({% slug kendoui_npm_packages_kendoui_installation %}#kendo-ui-professional) for instructions on how to access the registry.
 
 ## Customizing the Themes
 
@@ -78,9 +82,9 @@ To customize a SASS-based theme, create a `.scss` file and consume the theme pac
 
 ## Contribution
 
-To contribute to the development of the Kendo UI Default v2 theme, checkout the [telerik/kendo-theme-default](https://github.com/telerik/kendo-theme-default) GitHub repositiory it is stored in. 
+To contribute to the development of the Kendo UI "Default v2" theme, checkout the [telerik/kendo-theme-default](https://github.com/telerik/kendo-theme-default) GitHub repositiory it is stored in.
 
-## See Also 
+## See Also
 
 Other articles on styling, appearance, and rendering of Kendo UI widgets:
 
