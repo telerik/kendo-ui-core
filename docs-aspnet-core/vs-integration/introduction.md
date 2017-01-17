@@ -1,6 +1,6 @@
 ---
 title: Overview
-page_title: Overview | Telerik UI for ASP.NET Core
+page_title: Overview | UI for ASP.NET Core Visual Studio Integration
 description: "Learn how to enhance your experience in developing web applications with ASP.NET Core."
 slug: overview_visualstudio_aspnetcore
 position: 1
