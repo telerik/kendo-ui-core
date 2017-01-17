@@ -154,8 +154,8 @@ fonts in fonts/
 
 Other articles on Kendo UI breaking changes and backwards compatibility:
 
-* [Kendo UI 2016 Breaking Changes]({% slug breakingchanges2016_kendoui %})
-* [Kendo UI 2015 Breaking Changes]({% slug breakingchanges2015_kendoui %})
-* [Kendo UI 2014 Breaking Changes]({% slug breakingchanges2014_kendoui %})
-* [Kendo UI 2013 Breaking Changes]({% slug breakingchanges2013_kendoui %})
-* [Kendo UI 2012 Breaking Changes]({% slug breakingchanges2012_kendoui %})
+* [2016 Breaking Changes]({% slug breakingchanges2016_kendoui %})
+* [2015 Breaking Changes]({% slug breakingchanges2015_kendoui %})
+* [2014 Breaking Changes]({% slug breakingchanges2014_kendoui %})
+* [2013 Breaking Changes]({% slug breakingchanges2013_kendoui %})
+* [2012 Breaking Changes]({% slug breakingchanges2012_kendoui %})
