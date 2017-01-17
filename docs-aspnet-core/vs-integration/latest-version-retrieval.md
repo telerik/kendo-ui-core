@@ -26,9 +26,9 @@ The download starts automatically after a confirmation window.
 
 **Figure 2, 3 and 4. The dialog indicating the download progress**
 
-![Get latest version](images/lav2.png)
-![Get latest version](images/lav3.png)
-![Get latest version](images/lav4.png)
+![Get latest version](images/lva2.png)
+![Get latest version](images/lva3.png)
+![Get latest version](images/lva4.png)
 
 Once the download succeeds, the latest version of Telerik UI for ASP.NET Core is available to use in the **New Project Wizard**.
 
