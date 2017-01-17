@@ -57,3 +57,4 @@ As a result, the wizard:
 ## See Also
 
 * [Visual Studio Integration Overview]({% slug overview_visualstudio_aspnetcore %})
+* [Download New Versions]({% slug latestversionretrieval_visualstudio_aspnetcore %})

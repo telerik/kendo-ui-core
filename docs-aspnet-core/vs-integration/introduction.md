@@ -40,7 +40,5 @@ The added project template is available in the language-specific nodes of the di
 
 Other articles on Telerik UI for ASP.NET MVC in ASP.NET Core applications:
 
-* [Overview of Telerik UI for ASP.NET Core]({% slug overview_aspnetmvc6_aspnetmvc %})
-* [Get Started with Telerik UI for ASP.NET MVC in ASP.NET Core Projects]({% slug gettingstarted_aspnetmvc6_aspnetmvc %})
-* [Known Issues with Telerik UI for ASP.NET Core]({% slug knownissues_aspnetmvc6_aspnetmvc %})
-* [Tag Helpers for ASP.NET Core]({% slug taghelpers_aspnetmvc6_aspnetmvc %})
+* [Create Project]({% slug newprojectwizards_visualstudio_aspnetcore %})
+* [Download New Versions]({% slug latestversionretrieval_visualstudio_aspnetcore %})
