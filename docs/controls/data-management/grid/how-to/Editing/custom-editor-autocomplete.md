@@ -7,7 +7,7 @@ slug: howto_use_autocompleteas_custom_column_editor_grid
 
 # Use AutoComplete as Custom Column Editor
 
-The example below demonstrates how to use the AutoComplete widget as a custom column editor.
+The following example demonstrates how to use the AutoComplete widget as a custom column editor.
 
 > **Important**  
 > Kendo UI AutoComplete works with a single data item field, which means that the selected value is directly set to the `model` field. If you want to work with `<value,text>` pairs, use the ComboBox, DropDownList, or MultiSelect widgets.

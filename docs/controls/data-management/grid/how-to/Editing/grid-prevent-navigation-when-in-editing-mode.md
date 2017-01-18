@@ -7,7 +7,7 @@ slug: howto_prevent_page_navigation_inedit_mode_grid
 
 # Prevent Page Navigation in Edit Mode
 
-The examples below demonstrate how to prevent page navigation when Kendo UI Grid is in a batch, or inline edit mode.
+The following examples demonstrate how to prevent page navigation when Kendo UI Grid is in a batch, or inline edit mode.
 
 ## Batch Edit Mode
 

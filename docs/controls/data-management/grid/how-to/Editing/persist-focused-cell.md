@@ -7,7 +7,7 @@ slug: howto_persist_focused_grid_cell_grid
 
 # Persist Focused Grid Cells After Rebind
 
-The example below demonstrates how to persist a focused Grid cell after rebind. The example implies the usage of in-cell editing, the built-in keyboard navigation, and the [`autoSync:true`](/api/javascript/data/datasource#configuration-autoSync) configuration for the Kendo UI Grid [DataSource instance](/api/javascript/data/datasource).
+The following example demonstrates how to persist a focused Grid cell after rebind. The example implies the usage of in-cell editing, the built-in keyboard navigation, and the [`autoSync:true`](/api/javascript/data/datasource#configuration-autoSync) configuration for the Kendo UI Grid [DataSource instance](/api/javascript/data/datasource).
 
 The functionality relies on the following milestones:
 

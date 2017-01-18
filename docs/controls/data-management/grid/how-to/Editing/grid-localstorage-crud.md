@@ -8,7 +8,7 @@ slug: howto_perform_crud_operationswith_local_storage_data_grid
 
 # Perform CRUD Operations with Local Storage Data
 
-The example below demonstrates how to perform CRUD operations with local storage data.
+The following example demonstrates how to perform CRUD operations with local storage data.
 
 ###### Example
 

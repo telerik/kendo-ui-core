@@ -7,7 +7,7 @@ slug: howto_prevent_editingfor_boolean_based_records_grid
 
 # Prevent Editing for Boolean Based Records
 
-The example below demonstrates how to prevent editing for a record based on a Boolean field in the data item.
+The following example demonstrates how to prevent editing for a record based on a Boolean field in the data item.
 
 ###### Example
 

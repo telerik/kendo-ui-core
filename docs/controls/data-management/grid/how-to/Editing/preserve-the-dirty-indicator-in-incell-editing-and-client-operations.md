@@ -7,7 +7,7 @@ slug: howto_preserve_dirty_indicator_incell_editing_client_operations_grid
 
 # Preserve Dirty Indicator in Incell Editing and Client Operations
 
-The example below demonstrates how to preserve the dirty indicator in incell editing and client operations, as well as when new rows are added, in the Kendo UI Grid widget.
+The following example demonstrates how to preserve the dirty indicator in incell editing and client operations, as well as when new rows are added, in the Kendo UI Grid widget.
 
 ###### Example
 

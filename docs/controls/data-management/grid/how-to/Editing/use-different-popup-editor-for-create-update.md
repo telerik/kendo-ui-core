@@ -7,7 +7,7 @@ slug: howto_use_different_poup_editors_for_create_update_operations
 
 # Use Different Popup Editors for Create and Update Operations
 
-The example below demonstrates how to use different popup editors in a Kendo UI Grid for the Create and Update operations.
+The following example demonstrates how to use different popup editors in a Kendo UI Grid for the Create and Update operations.
 
 ###### Example
 

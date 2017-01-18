@@ -7,7 +7,7 @@ slug: howto_usemultiselectascustomeditor_grid
 
 # Use MultiSelect as Custom Editor in Grid
 
-The example below demonstrates how to use the Kendo UI MultiSelect as a custom editor in the Kendo UI Grid widget.
+The following example demonstrates how to use the Kendo UI MultiSelect as a custom editor in the Kendo UI Grid widget.
 
 ###### Example
 

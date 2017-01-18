@@ -7,7 +7,7 @@ slug: howto_add_new_rows_when_tabbingoutof_thelast_one_grid
 
 # Add New Rows When Tabbing Out of the Last One
 
-The example below demonstrates how to add a new row when the user navigates out of the last row in the Kendo UI Grid widget.
+The following example demonstrates how to add a new row when the user navigates out of the last row in the Kendo UI Grid widget.
 
 ###### Example
 

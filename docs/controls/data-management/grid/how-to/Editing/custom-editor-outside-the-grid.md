@@ -7,7 +7,7 @@ slug: howto_use_show_custom_editor_selected_item_outside_grid
 
 # Show Custom Editor Using the Selected Item outside the Grid
 
-The example below demonstrates how to use a custom editor outside Kendo UI Grid, which uses the currently selected item.
+The following example demonstrates how to use a custom editor outside Kendo UI Grid, which uses the currently selected item.
 
 ###### Example
 

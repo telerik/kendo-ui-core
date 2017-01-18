@@ -7,7 +7,7 @@ slug: howto_render_editor_column_template_grid
 
 # Render Grid Editor in Column Template
 
-The example below demonstrates how to render an input editor in a column template and provide the editing functionality.
+The following example demonstrates how to render an input editor in a column template and provide the editing functionality.
 
 ###### Example
 

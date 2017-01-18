@@ -7,7 +7,7 @@ slug: howto_edit_records_using_external_forms_grid
 
 # Edit Records Using External Forms
 
-The example below demonstrates how to configure editing by using a custom UI form, create editors for the `string`, `number`, and `boolean` fields, and add validation.
+The following example demonstrates how to configure editing by using a custom UI form, create editors for the `string`, `number`, and `boolean` fields, and add validation.
 
 ###### Example
 

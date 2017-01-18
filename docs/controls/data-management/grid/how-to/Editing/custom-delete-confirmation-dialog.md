@@ -8,7 +8,7 @@ slug: howto_customize_delete_confirmation_dialog_grid
 
 # Customize Confirmation Window
 
-The example below demonstrates how to customize the default **Delete** confirmation alert box by using Kendo UI templates, the Window widget, and the `remove` dataSource method of Kendo UI Grid.
+The following example demonstrates how to customize the default **Delete** confirmation alert box by using Kendo UI templates, the Window widget, and the `remove` dataSource method of Kendo UI Grid.
 
 ###### Example
 

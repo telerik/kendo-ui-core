@@ -7,7 +7,7 @@ slug: howto_usethe_multiselect_aseditor_commaseparated_stringfields_grid
 
 # Use MultiSelect as CSV Editor
 
-The example below demonstrates how to implement custom binding and use it for Kendo UI MultiSelect in order to edit a string field, containing a list of comma-separated values.
+The following example demonstrates how to implement custom binding and use it for Kendo UI MultiSelect in order to edit a string field, containing a list of comma-separated values.
 
 ###### Example
 

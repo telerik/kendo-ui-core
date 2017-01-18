@@ -8,7 +8,7 @@ slug: howto_add_cascading_dropdown_list_editors_grid
 
 # Add Cascading DropDownList Editors
 
-The examples below demonstrate how to add cascading DropDownList editors to a Kendo UI Grid.
+The following examples demonstrate how to add cascading DropDownList editors to a Kendo UI Grid.
 
 > **Important**  
 >

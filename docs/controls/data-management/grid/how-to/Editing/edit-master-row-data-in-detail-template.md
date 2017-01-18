@@ -7,7 +7,7 @@ slug: howto_edit_recordsin_children_grid
 
 # Edit Records in Child Grids
 
-The example below demonstrates how to edit records in a child Kendo UI Grid.
+The following example demonstrates how to edit records in a child Kendo UI Grid.
 
 ###### Example
 

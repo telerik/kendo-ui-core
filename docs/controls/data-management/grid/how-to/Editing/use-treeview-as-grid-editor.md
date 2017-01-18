@@ -7,7 +7,7 @@ slug: howto_usethe_treeview_aseditor_grid
 
 # Use TreeView as Custom Editor
 
-The example below demonstrates how to use Kendo UI TreeView for batch editing in the Kendo UI Grid widget.
+The following example demonstrates how to use Kendo UI TreeView for batch editing in the Kendo UI Grid widget.
 
 ###### Example
 

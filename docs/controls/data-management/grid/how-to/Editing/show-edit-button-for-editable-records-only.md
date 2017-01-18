@@ -7,7 +7,7 @@ slug: howto_show_editfor_editable_records_only_grid
 
 # Show Edit Buttons for Editable Records Only
 
-The example below demonstrates how to show **Edit** buttons only for records that meet certain criteria in the Kendo UI Grid widget.
+The following example demonstrates how to show **Edit** buttons only for records that meet certain criteria in the Kendo UI Grid widget.
 
 ###### Example
 

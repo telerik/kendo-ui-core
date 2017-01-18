@@ -7,7 +7,7 @@ slug: howto_increase_popup_edit_formand_textbox_grid
 
 # Increase Popup Edit Form and Textbox Width
 
-The example below demonstrates how to increase the width of the popup edit form and textbox width in the Kendo UI Grid widget.
+The following example demonstrates how to increase the width of the popup edit form and textbox width in the Kendo UI Grid widget.
 
 ###### Example
 

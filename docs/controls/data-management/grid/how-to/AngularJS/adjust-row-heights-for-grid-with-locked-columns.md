@@ -1,17 +1,17 @@
 ---
-title: Adjust row heights for a Grid with locked columns with a column template that uses ng-if
-page_title: Adjust row heights for a Grid with locked columns, and a column template that uses ng-if | Kendo UI Grid
-description: "Learn how to adjust row heights for a Grid with locked columns, and column template that uses ng-if in an AngularJS application."
+title: Adjust Row Heights with ng-if Column Templates When Columns Are Locked
+page_title: Adjust Row Heights with ng-if Column Templates When Columns Are Locked | Kendo UI Grid
+description: "Learn how to adjust row heights for a Kendo UI Grid with locked columns and a column template that uses `ng-if` in AngularJS applications."
 slug: howto_adjust_row_heights_template_locked_columns_grid
 ---
 
-# Adjust row heights for a Grid with locked columns with a column template that uses ng-if
+# Adjust Row Heights with ng-if Column Templates When Columns Are Locked
 
-The example below demonstrates how to create a adjust row heights for a Grid with locked columns with a column template that uses ng-if. 
+You might have to handle a scenario with locked columns where the content of the column template is initially hidden through the `ng-if` directive.
 
-When the scenario involves locked columns, and the column template content is initially hidden via ng-if directive, showing it later can cause an issue with proper calculating the row heights for the locked and unlocked parts of the Grid. 
+In such cases, showing the content later might cause issues related to the proper calculation of the row heights for the locked and unlocked parts of the Grid. To avoid such possible behavior, when the scope value that controls the visibility of the template content is changed, conditionally call the [`resize()`](api/javascript/kendo#methods-resize) and [`refresh()`](/api/javascript/ui/grid#methods-refresh) methods of the Grid in its [`dataBound`](/api/javascript/ui/grid#events-dataBound) event.
 
-This can be avoided with conditional calls to the Grid [`resize()`](api/javascript/kendo#methods-resize) and [`refresh()`](/api/javascript/ui/grid#methods-refresh) methods when the scope value, controlling the visibility of the template content is changed, and in the Grid's [`dataBound`](/api/javascript/ui/grid#events-dataBound) event.
+The following example demonstrates how to adjust the row heights in a Kendo UI Grid with locked columns and with a column template that uses the `ng-if` directive.
 
 ###### Example
 
@@ -59,7 +59,7 @@ This can be avoided with conditional calls to the Grid [`resize()`](api/javascri
           sortable: true,
           dataBound: function(e){
               if(!$scope.visible){
-              	e.sender.resize(true); 
+              	e.sender.resize(true);
               }
           },
           pageable: true,
@@ -85,7 +85,7 @@ This can be avoided with conditional calls to the Grid [`resize()`](api/javascri
 
         $scope.toggleVisible = function(){
           $scope.visible = !$scope.visible;  
-          $scope.grid.refresh(); 
+          $scope.grid.refresh();
         }
       })
     </script>

@@ -1,19 +1,21 @@
 ---
-title: Use detail template editor in inline editing mode
-page_title: Edit Records using detail template along with inline editing | Kendo UI Grid
-description: "Learn how to edit records using a different detail template in editing mode."
+title: Use Detail Template Editors in Inline Editing Modes
+page_title: Use Detail Template Editors in Inline Editing Modes | Kendo UI Grid
+description: "Learn how to edit records by using a different detail template in the editing mode of the Kendo UI Grid."
 slug: howto_edit_records_via_detail_template_editor_in_inline_mode
 ---
 
-# Use detail template editor in inline editing mode
+# Use Detail Template Editors in Inline Editing Modes
 
-The example below demonstrates how to edit records using detail template along with inline editing.
+You project might require you to edit records by using a detail template along with the inline editing mode of the Grid.
 
-To achieve the described functionality, follow the steps below:
+To achieve this behavior:
 
-* Use the [`detailTemplate`](/api/javascript/ui/grid#configuration-detailTemplate) configuration option to create a template that contains the views for both read-only and editing mode.
-* Handle the [`edit event`](/api/javascript/ui/grid#events-edit) to bind the custom editor from the detail template to the respective model field, and toggle the visibility of the detail template views (show the editor and hide the one, used for displaying the value).
-* In a similar manner, handle the [`save`](/api/javascript/ui/grid#events-save) and [`cancel`](/api/javascript/ui/grid#events-cancel) events to toggle back the detail template views.
+* Use the [`detailTemplate`](/api/javascript/ui/grid#configuration-detailTemplate) configuration option to create a template that contains the views for both the read-only and the editing mode.
+* Handle the [`edit` event](/api/javascript/ui/grid#events-edit) to bind the custom editor from the detail template to the respective model field. Toggle the visibility of the detail template views&mdash;that is, show the editor and hide the one, used for displaying the value.
+* Similarly, handle the [`save`](/api/javascript/ui/grid#events-save) and the [`cancel`](/api/javascript/ui/grid#events-cancel) events to toggle back the detail template views.
+
+The following example demonstrates how to edit records by using a different detail template in the editing mode of the Grid.
 
 ###### Example
 
@@ -32,7 +34,7 @@ To achieve the described functionality, follow the steps below:
     { id: 1, from: "Jane Doe", to: "Someone else", cc: "Boss", text: "Message content" },
     { id: 2, from: "John Doe", to: "Jane Doe", cc: "Manager", text: "Other message content" }
   ];
-  
+
 $("#grid").kendoGrid({
   columns: [
     { field: "from" },
@@ -68,7 +70,7 @@ $("#grid").kendoGrid({
             return;
           }
         });
-        
+
         data.splice(indexToDelete, 1);
         options.success();
       }
@@ -99,7 +101,7 @@ $("#grid").kendoGrid({
     var detailRow = e.container.next('.k-detail-row');
     		detailRow.find('#text-container').toggle();
     		detailRow.find('#text-editor').toggle();
-    		
+
   },
   cancel: function(e){
     var detailRow = e.container.next('.k-detail-row');

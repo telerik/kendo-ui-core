@@ -7,7 +7,7 @@ slug: howto_use_editors_basedon_dataitem_property_grid
 
 # Use Editors Based on Data Item Property
 
-The example below demonstrates how to use different editors based on a property from the current data item record.
+The following example demonstrates how to use different editors based on a property from the current data item record.
 
 ###### Example
 
