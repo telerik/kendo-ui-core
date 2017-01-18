@@ -216,7 +216,7 @@ The example below demonstrates the solution of the test issue above.
 
 ###### Example
 
-    $("#dialog").kendoWinodow({
+    $("#dialog").kendoWindow({
         // load complete page...
         content: "/foo",
         // ... and show it in an iframe
