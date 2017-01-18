@@ -1,5 +1,5 @@
 ---
-title:Integrate The ResponsivePanel With The Menu In AngularJS
+title: Integrate The ResponsivePanel With The Menu In AngularJS
 page_title: Integrate The ResponsivePanel With The Menu In AngularJS | Kendo UI ResponsivePanel
 description: "Learn how to integrate the ResponsivePanel with the Menu in AngularJS"
 slug: howto_integrateresponsivepanelwithmenuinangularjs_responsivepanel
