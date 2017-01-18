@@ -573,7 +573,7 @@ The `hold` event represents a jQuery `mousedown` event and contains all the even
       $("#draggable").kendoDraggable({
         holdToDrag: true,
         hold: function(e) {
-            $("draggable").css("background", "red");
+            $("#draggable").css("background", "red");
         },
         hint: function(element) {
           var hintElement = $("<div id='hint'></div>");
