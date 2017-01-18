@@ -158,7 +158,6 @@ The following example demonstrates how to achieve this behavior.
     </script>
 ```
 
-
 ## See Also
 
 * [Overview of the ResponsivePanel]({% slug overview_kendoui_responsivepanel_widget %})
