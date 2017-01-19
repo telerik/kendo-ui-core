@@ -14,8 +14,12 @@ The following example demonstrates how to obtain these client-side objects of th
 
 The FileBrowser-related code is identical to the ImageBrowser one except for:
 
-* To attach the `click` handler, use the `.k-insertFile` CSS class instead of the `.k-insertImage` one.
+* To attach the `click` handler, use the `.k-i-file-add` CSS class instead of the `.k-i-image` one.
 * Use `var fileBrowser = $(".k-filebrowser").data("kendoFileBrowser");` instead of `var imageBrowser = $(".k-imagebrowser").data("kendoImageBrowser");`.
+
+> **Important**
+>
+> If you are using version older than 2017 R1 the classes to use in order to get the button elements are `.k-insertFile` and `.k-insertImage`.
 
 To attach events with [`bind()`](/intro/installation/events-and-methods#bind-to-events-after-widget-initialization) or to perform other customizations that may not be otherwise supported, use the API calls of the [ListView](/api/javascript/ui/listview), [Upload](/api/javascript/ui/upload) and [DropDownList](/api/javascript/ui/dropdownlist) widget objects after they are available.
 
@@ -57,7 +61,7 @@ The following `transport` configurations are over-simplified and invalid.
         var editor = $("#editor").data("kendoEditor");
 
         // attach a click handler on the tool button, which opens the ImageBrowser dialog
-        editor.toolbar.element.find(".k-insertImage").parent().click(function(){
+        editor.toolbar.element.find(".k-i-image").parent().click(function(){
             // a setTimeout is required, otherwise the ImageBrowser widget will still not be initialized
             setTimeout(function(){
                 // retrieve the ImageBrowser widget object
@@ -79,7 +83,7 @@ The following `transport` configurations are over-simplified and invalid.
         });
 
         // attach a click handler on the tool button, which opens the FileBrowser dialog
-        editor.toolbar.element.find(".k-insertFile").parent().click(function(){
+        editor.toolbar.element.find(".k-i-file-add").parent().click(function(){
             // a setTimeout is required, otherwise the FileBrowser widget will still not be initialized
             setTimeout(function(){
                 // retrieve the ImageBrowser widget object
