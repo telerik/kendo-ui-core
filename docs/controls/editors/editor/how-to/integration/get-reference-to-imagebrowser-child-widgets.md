@@ -19,7 +19,7 @@ The FileBrowser-related code is identical to the ImageBrowser one except for:
 
 > **Important**
 >
-> If you are using version older than 2017 R1 the classes to use in order to get the button elements are `.k-insertFile` and `.k-insertImage`.
+> If you are using the 2017 R1 version or later, use the `.k-insertFile` and `.k-insertImage` classes to get the button elements. 
 
 To attach events with [`bind()`](/intro/installation/events-and-methods#bind-to-events-after-widget-initialization) or to perform other customizations that may not be otherwise supported, use the API calls of the [ListView](/api/javascript/ui/listview), [Upload](/api/javascript/ui/upload) and [DropDownList](/api/javascript/ui/dropdownlist) widget objects after they are available.
 
