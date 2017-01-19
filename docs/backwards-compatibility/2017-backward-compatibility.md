@@ -22,23 +22,23 @@ position: 1
 
 * The `font-size: 0;` rule is **no longer applied** to elements using Kendo UI icons. In this way, if they have **text**, it will now show up and obscure the icon. You should move it to a **title** attribute.
 
-		###### Example
+	###### Example
 
-		```tab-Old
-				<span class="k-icon k-i-close">Hide</span>
-		```
-		```tab-New
-				<span class="k-icon k-i-close" title="Hide"></span>
-		```
+	```tab-Old
+			<span class="k-icon k-i-close">Hide</span>
+	```
+	```tab-New
+			<span class="k-icon k-i-close" title="Hide"></span>
+	```
 
-		###### Example
+	###### Example
 
-		```tab-Old
-				<a href=""><span class="k-icon k-i-close">Hide</span></a>
-		```
-		```tab-New
-				<a href="" title="Hide"><span class="k-icon k-i-close"></span>
-		```
+	```tab-Old
+			<a href=""><span class="k-icon k-i-close">Hide</span></a>
+	```
+	```tab-New
+			<a href="" title="Hide"><span class="k-icon k-i-close"></span>
+	```
 
 **Table 1. Changed Icon CSS Classes**
 
