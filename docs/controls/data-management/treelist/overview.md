@@ -185,12 +185,12 @@ For more information on the scrolling functionality of the TreeList, refer to th
 * [Columns and Column Widths]({% slug appearance_kendoui_grid_widget %}#columns)
 * [Locked Columns]({% slug appearance_kendoui_grid_widget %}#locked-columns)
 
-More information about TreeList scrolling is available in the [Grid Appearance](controls/data-management/grid/appearance) help article, as the two widgets are similar with this regard.
+More information about TreeList scrolling is available in the [Grid Appearance](/controls/data-management/grid/appearance) help article, as the two widgets are similar with this regard.
 
-* [Set 100% Height and Auto-Resize](controls/data-management/grid/appearance#set-100-height-and-auto-resize)
-* [Remove the Vertical Scrollbar](controls/data-management/grid/appearance#remove-the-vertical-scrollbar)
-* [Columns and Column Widths](controls/data-management/grid/appearance#columns)
-* [Locked Columns](controls/data-management/grid/appearance#locked-columns)
+* [Set 100% Height and Auto-Resize](/controls/data-management/grid/appearance#set-100-height-and-auto-resize)
+* [Remove the Vertical Scrollbar](/controls/data-management/grid/appearance#remove-the-vertical-scrollbar)
+* [Columns and Column Widths](/controls/data-management/grid/appearance#columns)
+* [Locked Columns](/controls/data-management/grid/appearance#locked-columns)
 
 ## TreeList API
 
