@@ -836,7 +836,7 @@ If set to `true` the column will be visible in the grid column menu. By default 
 
 ### columns.locked `Boolean` *(default: false)*
 
-If set to `true` the column will be displayed as locked in the treelist. Also see [Frozen Columns](/web/grid/walkthrough#frozen-columns-locked-columns).
+If set to `true` the column will be displayed as locked (frozen) in the treelist. Also see the information about [Frozen Columns](/controls/data-management/grid/appearance#locked-columns) in the Grid Appearance article.
 
 #### Example - locked columns
 
