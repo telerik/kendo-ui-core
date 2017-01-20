@@ -9,9 +9,9 @@ slug: howto_adjust_row_heights_template_locked_columns_grid
 
 The example below demonstrates how to create a adjust row heights for a Grid with locked columns with a column template that uses ng-if. 
 
-When the scenario involves locked columns, and the column template content is initially hidden via ng-if directive, showing it later can cause an issue with proper calculating the row heights for the locked and unlocked parts of the Grid. 
+In such cases, showing the content later might cause issues related to the proper calculation of the row heights for the locked and unlocked parts of the Grid. To avoid such possible behavior, when the scope value that controls the visibility of the template content is changed, conditionally call the [`resize()`](/api/javascript/kendo#methods-resize) and [`refresh()`](/api/javascript/ui/grid#methods-refresh) methods of the Grid in its [`dataBound`](/api/javascript/ui/grid#events-dataBound) event.
 
-This can be avoided with conditional calls to the Grid [`resize()`](api/javascript/kendo#methods-resize) and [`refresh()`](/api/javascript/ui/grid#methods-refresh) methods when the scope value, controlling the visibility of the template content is changed, and in the Grid's [`dataBound`](/api/javascript/ui/grid#events-dataBound) event.
+This can be avoided with conditional calls to the Grid [`resize()`](/api/javascript/kendo#methods-resize) and [`refresh()`](/api/javascript/ui/grid#methods-refresh) methods when the scope value, controlling the visibility of the template content is changed, and in the Grid's [`dataBound`](/api/javascript/ui/grid#events-dataBound) event.
 
 ###### Example
 
