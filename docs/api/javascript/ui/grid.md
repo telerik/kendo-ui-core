@@ -1489,7 +1489,7 @@ If set to `true` the column will not be displayed in the grid. By default all co
 
 ### columns.locked `Boolean` *(default: false)*
 
-If set to `true` the column will be displayed as locked in the grid. Also see [Frozen Columns](/web/grid/walkthrough#frozen-columns-locked-columns).
+If set to `true` the column will be displayed as locked (frozen) in the grid. Also see the information about [Locked Columns](/controls/data-management/grid/appearance#locked-columns) in the Grid Appearance article.
 
 > **Important**: Row template and detail features are not supported in combination with column locking. If [multi-column headers](http://demos.telerik.com/kendo-ui/grid/multicolumnheaders) are used, it is possible to lock (freeze) a column at the topmost level only.
 
