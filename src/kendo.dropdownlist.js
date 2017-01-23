@@ -200,6 +200,7 @@ var __meta__ = { // jshint ignore:line
 
             that._arrow.off();
             that._arrow = null;
+            that._arrowIcon = null;
 
             that.optionLabel.off();
         },
@@ -1203,7 +1204,8 @@ var __meta__ = { // jshint ignore:line
 
             that.span = span;
             that._inputWrapper = $(wrapper[0].firstChild);
-            that._arrow = wrapper.find(".k-icon");
+            that._arrow = wrapper.find(".k-select");
+            that._arrowIcon = that._arrow.find(".k-icon");
         },
 
         _wrapper: function() {
