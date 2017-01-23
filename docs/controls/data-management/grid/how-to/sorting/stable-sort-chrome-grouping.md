@@ -1,17 +1,19 @@
 ---
-title: Implement Stable Sort for Grouped Data in Chrome
-page_title: Implement Stable Sort for Grouped Data in Chrome | Kendo UI Grid
+title: Implement Stable Sorting for Grouped Data in Chrome
+page_title: Implement Stable Sorting for Grouped Data in Chrome | Kendo UI Grid
 description: "Learn how to implement a stable sort for grouped data in Google Chrome when using the Kendo UI Grid widget."
 slug: howto_implement_stable_sortwithgroupingin_chrome_grid
 ---
 
-# Implement Stable Sort in Chrome
+# Implement Stable Sorting in Chrome
 
-The implementation of the built-in sorting algorithm in Google Chrome [is not guaranteed to be stable](https://bugs.chromium.org/p/v8/issues/detail?id=90). A [non-stable sorting algorithm](https://en.wikipedia.org/wiki/Sorting_algorithm#Stability) may cause items with the same sorting order to change places.
+The implementation of the built-in sorting algorithm in Google Chrome [is not guaranteed to be stable](https://bugs.chromium.org/p/v8/issues/detail?id=90). A [non-stable sorting algorithm](https://en.wikipedia.org/wiki/Sorting_algorithm#Stability) might cause items with the same sorting order to change places.
 
-When the Grid is grouped by a given field, you can [`sort the items`](/api/javascript/data/datasource#methods-sort) within each group in the preferred order programmatically in the [`group event`](/api/javascript/ui/grid#events-group) handler of the Kendo UI Grid:
+When the Grid is grouped by a given field, you can use the [`sort`](/api/javascript/data/datasource#methods-sort) method in the [`group`](/api/javascript/ui/grid#events-group) event handler of the Grid to programmatically sort the items within each group in the preferred order.
 
-###### Example - a stable sort function using a position field
+The following example demonstrates how to apply a stable sort function by using a position field in the Grid.
+
+###### Example
 
 ```html
 <div id="grid"></div>
@@ -52,7 +54,7 @@ When the Grid is grouped by a given field, you can [`sort the items`](/api/javas
 
                 return a.Value - b.Value;
               }
-            }); 
+            });
           }
         },
         groupable: true,

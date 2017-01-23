@@ -178,12 +178,12 @@ When scrolling is enabled, the TreeList renders two tables&mdash;one for the hea
 >
 > If you want to achieve a maximum TreeList accessibility with assistive technologies, disable the scrolling feature.
 
-More information about TreeList scrolling is available in the [Grid Appearance](/controls/data-management/grid/appearance) help article, as the two widgets are similar with this regard.
+For more information on the scrolling functionality of the TreeList, refer to the article on the [appearance of the Grid]({% slug appearance_kendoui_grid_widget %})&mdash;in this respect, the two widgets are similar.
 
-* [Set 100% Height and Auto-Resize](/controls/data-management/grid/appearance#set-100-height-and-auto-resize)
-* [Remove the Vertical Scrollbar](/controls/data-management/grid/appearance#remove-the-vertical-scrollbar)
-* [Columns and Column Widths](/controls/data-management/grid/appearance#columns)
-* [Locked Columns](/controls/data-management/grid/appearance#locked-columns)
+* [Set 100% Height and Auto-Resize]({% slug appearance_kendoui_grid_widget %}#set-100-height-and-auto-resize)
+* [Remove the Vertical Scrollbar]({% slug appearance_kendoui_grid_widget %}#remove-the-vertical-scrollbar)
+* [Columns and Column Widths]({% slug appearance_kendoui_grid_widget %}#columns)
+* [Locked Columns]({% slug appearance_kendoui_grid_widget %}#locked-columns)
 
 ## TreeList API
 
