@@ -60,7 +60,7 @@ The example below demonstrates how to register a two-way binding. As a result, b
 ```html
     <input data-bind="numericValue: number" />
     Input value: <span data-bind="text: number" />
-    
+
     <script>
         kendo.data.binders.numericValue = kendo.data.Binder.extend({
             init: function(element, bindings, options) {
@@ -118,7 +118,7 @@ The example below demonstrates how to bind the max value of a Kendo UI NumericTe
             $(that.element).data("kendoNumericTextBox").max(value); //update the widget
         }
     });
-    
+
     //View-Model source
     var viewModel = kendo.observable({
         value: 5,
@@ -127,65 +127,64 @@ The example below demonstrates how to bind the max value of a Kendo UI NumericTe
 
     kendo.bind(document.body, viewModel);    
     </script>
-
-
 ```
 
-#### Custom Widget Binding In TypeScript
+#### Custom Binding in TypeScript
 
-The example demonstrates how to use custom widget binding in TypeScript. It shows how to bind the max value of a Kendo UI NumericTextBox widget. As a result, the widget is updated when the View-Model changes.
-
+The following example demonstrates how to bind the max value of a Kendo UI NumericTextBox by using the custom widget biding approach. As a result, the widget is updated when the View-Model changes.
 
 ###### Example
 
-<input data-role="numerictextbox" id="numeric" data-bind="value: value, max: max" />​
+```
+    <input data-role="numerictextbox" id="numeric" data-bind="value: value, max: max" />​
 
-/// <reference path="jquery.d.ts" />
-/// <reference path="kendo.all.d.ts" />
+    /// <reference path="jquery.d.ts" />
+    /// <reference path="kendo.all.d.ts" />
 
-module kendo.data.binders.widget {
+    module kendo.data.binders.widget {
 
-    export class max extends kendo.data.Binder {
-        init(widget, bindings, options) {
-            //call the base constructor
-            kendo.data.Binder.fn.init.call(this, widget.element[0], bindings, options);
+        export class max extends kendo.data.Binder {
+            init(widget, bindings, options) {
+                //call the base constructor
+                kendo.data.Binder.fn.init.call(this, widget.element[0], bindings, options);
+            }
+
+            refresh() {
+                var that = this,
+                value = that.bindings["max"].get(); //get the value from the View-Model
+                that.element.max(value);
+            }
         }
+    }
 
-        refresh() {
-            var that = this,
-            value = that.bindings["max"].get(); //get the value from the View-Model
-            that.element.max(value);
+    class NumericOptions extends kendo.data.ObservableObject {
+        value = 5;
+        max = 10;
+
+        constructor() {
+            super();
+
+            super.init(this);
         }
     }
-}
 
-class NumericOptions extends kendo.data.ObservableObject {
-    value = 5;
-    max = 10;
+    class ViewModel extends kendo.data.ObservableObject {
+        person = new NumericOptions();
 
-    constructor() {
-        super();
+        constructor() {
+            super();
 
-        super.init(this);
+            super.init(this);
+        }
     }
-}
 
-class ViewModel extends kendo.data.ObservableObject {
-    person = new NumericOptions();
+    $(function () {
+        var viewModel = new NumericOptions();
 
-    constructor() {
-        super();
+        kendo.bind(document.body, viewModel);
 
-        super.init(this);
-    }
-}
-
-$(function () {
-    var viewModel = new NumericOptions();
-
-    kendo.bind(document.body, viewModel);
-
-});
+    });
+```
 
 #### Breakdown of Code Elements
 
