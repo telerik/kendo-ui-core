@@ -762,7 +762,7 @@ span.k-numerictextbox
     margin: 0;
 }
 
-.k-numerictextbox .k-i-link-horizontal
+.k-numerictextbox .k-link
 {
     display: block;
     height: 1em;
@@ -771,12 +771,25 @@ span.k-numerictextbox
     border-width: 0;
     padding: 0;
 }
+ .k-link-increase {
+        background: pink;
+      }
+      .k-link-increase .k-icon {
+        background: purple;
+      }
 
+      .k-link-decrease {
+        background: green;
+      }
+
+      .k-link-decrease .k-icon {
+        background: yellow;
+      }
 .k-numerictextbox .k-icon
 {
     display: block;
     margin: auto;
-    height: 11px;
+    height: 100%;
 }
 
 .k-numeric-wrap .k-input::-webkit-inner-spin-button
@@ -838,8 +851,8 @@ span.k-numerictextbox
     .k-select {
         cursor: pointer;
     }
-    .k-picker-wrap .k-icon {		
-        overflow:visible;		
+    .k-picker-wrap .k-icon {
+        overflow:visible;
     }
 }
 
