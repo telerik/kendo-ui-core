@@ -22,11 +22,11 @@ For more details, check [the installation instructions]({% slug kendoui_npm_pack
 
 ```typescript
 // This won't work
-import kendo from 'kendo-ui-core';
+import kendo from '@progress/kendo-ui-core';
 
 // This works
 
-import 'kendo-ui-core';
+import '@progress/kendo-ui-core';
 
 console.log(kendo);
 ```
