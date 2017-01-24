@@ -368,7 +368,9 @@ A string, DOM element or jQuery object which represents the listview item. A str
 
 ### dataItems
 
-Returns the array that is bound to the widget
+#### Returns
+
+`kendo.data.ObservableArray` Returns the observable array that is bound to the widget
 
 #### Example
 
