@@ -17,8 +17,8 @@ For more information on possible setups, refer to the [sample repository on GitH
 ## Overview
 
 Kendo UI maintains 2 NPM packages:
-* Kendo UI Core
-* Kendo UI Professional
+* [Kendo UI Core](#kendo-ui-core)
+* [Kendo UI Professional](#kendo-ui-professional)
 
 Official releases, service packs, and internal builds are published for each package.
 
@@ -32,7 +32,7 @@ The Kendo UI Core NPM Package is published as [`kendo-ui-core`](https://www.npmj
 
 The package is accessible without credentials.
 
-##### Example
+###### Example
 
 ```sh
 npm install --save kendo-ui-core
@@ -67,25 +67,23 @@ The Kendo UI Professional NPM Package, named `@progress/kendo-ui` is available a
     [ '2017.1.118' ]
     ```
 
-#### Example
+    ###### Example
 
-```sh
-npm install --save @progress/kendo-ui
-```
+    ```sh
+    npm install --save @progress/kendo-ui
+    ```
 
-### Legacy Package (Git repo)
+### Legacy Package (Git Repo)
 
-The legacy `kendo` package, accessible via "git+https://bower.telerik.com/npm-kendo-ui/npm-kendo.git", will not be updated after May 2017.
-
-The repository itself will remain active.
+The legacy `kendo` package, accessible through **git+https://bower.telerik.com/npm-kendo-ui/npm-kendo.git**, will not be updated after May 2017. The repository itself will remain active.
 
 ### Authenticating Build Agents
 
-Your credentials can be used to authenticate build agents running on Travis CI, Visual Studio Team Services and others.
+Your credentials can be used to authenticate build agents running on Travis CI, Visual Studio Team Services, and others.
 
 After logging in, the `~/.npmrc` (on Windows - `%HOMEDRIVE%%HOMEPATH%\.npmrc`) will be populated with an authentication token that can be copied to build agents.
 
-> The token will remain valid until executing `npm logout --scope=@progress` or the expiration date of your license.
+> The token will remain valid until you execute `npm logout --scope=@progress` or until your license expires.
 
 #### Travis CI
 
@@ -97,12 +95,11 @@ before_install:
   - echo "//registry.npm.telerik.com/:_authToken=\"$PROGRESS_REGISTRY_TOKEN\"" >> .npmrc
 ```
 
-Here `PROGRESS_REGISTRY_TOKEN` is an environment variable set in the [project configuration](https://docs.travis-ci.com/user/environment-variables/#Defining-Variables-in-Repository-Settings)
-or [as encrypted variable](https://docs.travis-ci.com/user/environment-variables/#Defining-encrypted-variables-in-.travis.yml).
+Here `PROGRESS_REGISTRY_TOKEN` is an environment variable set in the [project configuration](https://docs.travis-ci.com/user/environment-variables/#Defining-Variables-in-Repository-Settings) or [as an encrypted variable](https://docs.travis-ci.com/user/environment-variables/#Defining-encrypted-variables-in-.travis.yml).
 
 #### Visual Studio Team Services
 
-You can authenticate directly on the build machine or [store the npmrc file per-project](https://www.visualstudio.com/en-us/docs/package/npm/npmrc#project-vs-user-configuration).
+You can authenticate directly on the build machine or [store the `npmrc` file per-project](https://www.visualstudio.com/en-us/docs/package/npm/npmrc#project-vs-user-configuration).
 
 ## Troubleshooting
 
