@@ -166,7 +166,7 @@ angular.module("app", ["kendo.directives"]).controller("MyCtrl", function($scope
 
 ### Templates
 
-The Grid supports a lot of user-customizable templates. You can define the `rowTemplate` if you want to completely customize the way each row is displayed, or define individual cell templates by adding a `template` property to your column definitions. The difference from applying plain Kendo is that when the Grid is created with the AngularJS directive, the templates can contain live `\{\{angular\}\}` bits. Both `rowTemplate` and `columns.template` are compiled with AngularJS in a scope containing a `dataItem` variable, which points to the data model of the current item.
+The Grid supports a lot of user-customizable templates. You can define the `rowTemplate` if you want to completely customize the way each row is displayed, or define individual cell templates by adding a `template` property to your column definitions. The difference from applying plain Kendo is that when the Grid is created with the AngularJS directive, the templates can contain live `\{\{angular\}\}` bits. The `rowTemplate`, `columns.template` and `columns.groupFooterTemplate` are compiled with AngularJS in a scope containing a `dataItem` variable, which points to the data model of the current item. The `dataItem` in a `groupFooterTemplate` is an object with fields and their corresponding aggregates.
 
 The example below demonstrates how to set the Grid row template (`rowTemplate`) in AngularJS via markup. It is also possible to define it in the Grid options object, as when not using Angular.
 
@@ -210,44 +210,53 @@ angular.module("app", ["kendo.directives"]).controller("MyCtrl", function($scope
 ```
 
 When you use aggregates, the `column` and `aggregate` information becomes available in the `footerTemplate` of the Grid through `{% raw %}{{ column }}{% endraw %}` and `{% raw %}{{ aggregate }}{% endraw %}` respectively.
+To access the aggregates of the columns in the `groupFooterTemplate` use the `dataItem` variable with the `dataItem.field.aggregate` syntax.
 
-3The example below demonstrates how to use the `sum` aggregate in a `footerTemplate` and apply an Angular currency pipe to it.
+The example below demonstrates how to use the `sum` aggregate in a `footerTemplate` and a `groupFooterTemplate` and apply an Angular currency pipe to it.
 
 ###### Example
 
-```
-<div id="example" ng-app="KendoDemos">    
+```html
+<script src="http://demos.telerik.com/kendo-ui/content/shared/js/products.js"></script>
+
+  <div id="example" ng-app="KendoDemos">
     <div ng-controller="MyCtrl">      
-        <kendo-grid k-scope-field="myGrid" options="mainGridOptions" k-data-source="ds"></kendo-grid>
+      <kendo-grid options="mainGridOptions" k-data-source="ds"></kendo-grid>
     </div>
   </div>
 
   <script>
     angular.module("KendoDemos", [ "kendo.directives" ])
-    .controller("MyCtrl", function($scope){
+      .controller("MyCtrl", function($scope){
 
       $scope.ds = new kendo.data.DataSource({
-        data: [
-          { ProductID: 1, ProductName: "Chai", UnitPrice: 18, UnitsInStock: 39 },
-          { ProductID: 2, ProductName: "Chang", UnitPrice: 19, UnitsInStock: 17 },
-          { ProductID: 3, ProductName: "Aniseed Syrup", UnitPrice: 10, UnitsInStock: 13 }
-        ],
- 				aggregate: [
-          	{field: "UnitPrice", aggregate: "sum"},
-            {field: "UnitsInStock", aggregate: "sum"}
+        pageSize: 20,
+        data: products,
+        group: {
+          field: "CategoryID", aggregates: [
+            { field: "UnitPrice", aggregate: "sum" },
+            { field: "UnitsInStock", aggregate: "sum" }
+          ]
+        },
+        aggregate: [
+          { field: "UnitPrice", aggregate: "sum" },
+          { field: "UnitsInStock", aggregate: "sum" }
         ]});      
 
-      $scope.mainGridOptions = {              
+      $scope.mainGridOptions = {
+        height: 500,
         columns: [
           { field: "ProductName", title: "Product Name", width: 200,
-            template: "{{dataItem.ProductName}}",
-           footerTemplate: "Column title: {% raw %}{{ column.title }}{% endraw %}"
+            template: "{{ dataItem.ProductName }}"
           },
           { field: "UnitPrice", title: "Unit Price", width: 80,
-             footerTemplate: "{% raw %}{{ aggregate.sum | currency : $ : 3 }}{% endraw %}"
+            footerTemplate: "{{ column.title }} : {{ aggregate.sum | currency }}",
+            groupFooterTemplate:"{{ dataItem.UnitPrice.sum | currency }}"
           },
           { field: "UnitsInStock", title: "Units In Stock", width: 80,
-           footerTemplate: "{% raw %}{{ aggregate.sum }}{% endraw %}"
+            aggregates: ["sum"],
+            footerTemplate: "{{ column.title }} : {{ aggregate.sum }}",
+            groupFooterTemplate: "{{ dataItem.UnitsInStock.sum }}"
           }
         ]
       };      
