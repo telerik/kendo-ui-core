@@ -247,16 +247,16 @@ The example below demonstrates how to use the `sum` aggregate in a `footerTempla
         height: 500,
         columns: [
           { field: "ProductName", title: "Product Name", width: 200,
-            template: "{{ dataItem.ProductName }}"
+            template: "{% raw %}{{ dataItem.ProductName }}{% endraw %}"
           },
           { field: "UnitPrice", title: "Unit Price", width: 80,
-            footerTemplate: "{{ column.title }} : {{ aggregate.sum | currency }}",
-            groupFooterTemplate:"{{ dataItem.UnitPrice.sum | currency }}"
+            footerTemplate: "{% raw %}{{ column.title }}{% endraw %} : {% raw %}{{ aggregate.sum | currency }}{% endraw %}",
+            groupFooterTemplate:"{% raw %}{{ dataItem.UnitPrice.sum | currency }}{% endraw %}"
           },
           { field: "UnitsInStock", title: "Units In Stock", width: 80,
             aggregates: ["sum"],
-            footerTemplate: "{{ column.title }} : {{ aggregate.sum }}",
-            groupFooterTemplate: "{{ dataItem.UnitsInStock.sum }}"
+            footerTemplate: "{% raw %}{{ column.title }}{% endraw %} : {% raw %}{{ aggregate.sum }}{% endraw %}",
+            groupFooterTemplate: "{% raw %}{{ dataItem.UnitsInStock.sum }}{% endraw %}"
           }
         ]
       };      
