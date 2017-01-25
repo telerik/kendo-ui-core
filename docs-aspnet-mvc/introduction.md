@@ -1,4 +1,4 @@
----
+﻿---
 title: Overview
 page_title: Overview | Telerik UI for ASP.NET MVC
 description: "Download and install Telerik UI for ASP.NET MVC, and run a sample application."
@@ -56,7 +56,7 @@ Run Telerik UI for ASP.NET MVC installer. The automatic setup will guide you thr
 
 ### Location
 
-The setup installs Telerik UI for ASP.NET MVC in `C:\Program Files (x86)\Telerik\Telerik UI for ASP.NET MVC<version>`.
+The setup installs Telerik UI for ASP.NET MVC in `C:\Program Files (x86)\Telerik\UI for ASP.NET MVC<version>`.
 
 ### Distribution Contents
 
