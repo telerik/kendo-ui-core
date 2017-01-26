@@ -1040,6 +1040,23 @@ test("reset value when _clear is clicked", 1, function() {
     equal(combobox.value(), "");
 });
 
+test("reset value when _clear is clicked (equal value and text)", 1, function() {
+    select = $("<select></select>");
+    var combobox = new ComboBox(select, {
+        filter: "contains",
+        dataValueField: "id",
+        dataTextField: "name",
+        dataSource: [
+            { id: "name1", name: "name1" },
+            { id: "name2", name: "name2" }
+        ],
+        value: "name2"
+    });
+
+    combobox._clear.click();
+    equal(combobox.value(), "");
+});
+
 test("setOptions method updates footer template", 1, function() {
     var combobox = new ComboBox(input, { });
 
