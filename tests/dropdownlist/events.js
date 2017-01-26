@@ -405,6 +405,19 @@
         equal(current.html(), "foo");
     });
 
+    test("shouldn't trigger select when value has not changed (TAB)", 0, function() {
+        var dropdownlist = new DropDownList(input, {
+            dataSource: ["foo", "bar"]
+        });
+
+        dropdownlist.bind("select", function() {
+            ok(false);
+        });
+
+        dropdownlist.wrapper.focus();
+        dropdownlist.wrapper.press(kendo.keys.TAB);
+    });
+
     test("DropDownList triggers cascade on initial load", 1, function() {
         input.kendoDropDownList({
             dataSource: ["foo", "bar"],
