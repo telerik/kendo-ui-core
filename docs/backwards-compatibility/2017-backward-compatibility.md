@@ -8,7 +8,7 @@ position: 1
 
 # 2017 Releases
 
-## Kendo UI 2017 R2
+## Kendo UI 2017 R1 SP1
 
 ### Changes from 2017 R1
 
