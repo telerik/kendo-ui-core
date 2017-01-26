@@ -407,7 +407,12 @@
 
     test("shouldn't trigger select when value has not changed (TAB)", 0, function() {
         var dropdownlist = new DropDownList(input, {
-            dataSource: ["foo", "bar"]
+            dataSource: [
+                { id: 1, name: "foo" },
+                { id: 2, name: "bar" }
+            ],
+            dataValueField: "id",
+            dataTextField: "name"
         });
 
         dropdownlist.bind("select", function() {
@@ -416,6 +421,24 @@
 
         dropdownlist.wrapper.focus();
         dropdownlist.wrapper.press(kendo.keys.TAB);
+    });
+
+    test("shouldn't trigger select when value has not changed (BLUR)", 0, function() {
+        var dropdownlist = new DropDownList(input, {
+            dataSource: [
+                { id: 1, name: "foo" },
+                { id: 2, name: "bar" }
+            ],
+            dataValueField: "id",
+            dataTextField: "name"
+        });
+
+        dropdownlist.bind("select", function() {
+            ok(false);
+        });
+
+        dropdownlist.wrapper.focus();
+        dropdownlist.wrapper.focusout();
     });
 
     test("DropDownList triggers cascade on initial load", 1, function() {

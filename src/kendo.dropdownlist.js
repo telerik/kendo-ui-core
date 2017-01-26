@@ -595,7 +595,7 @@ var __meta__ = { // jshint ignore:line
                     that.element.blur();
                 };
 
-                shouldTrigger = !filtered && focusedItem && that._value(dataItem) !== that.value();
+                shouldTrigger = !filtered && focusedItem && that._value(dataItem) !==  List.unifyType(that.value(), typeof that._value(dataItem));
 
                 if (shouldTrigger && !that.trigger("select", { dataItem: dataItem, item: focusedItem })) {
                     that._select(focusedItem, !that.dataSource.view().length).done(done);
