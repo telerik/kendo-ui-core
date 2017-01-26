@@ -5163,23 +5163,32 @@ If a `pageSize` setting is provided for the data source then this value will be 
 
     <div id="grid"></div>
     <script>
-    $("#grid").kendoGrid({
-      columns: [
-        { field: "productName" },
-        { field: "category" }
-      ],
-      dataSource: {
-	    data: [
-		  { productName: "Tea", category: "Beverages" },
-		  { productName: "Coffee", category: "Beverages" },
-		  { productName: "Ham", category: "Food" },
-		  { productName: "Bread", category: "Food" }
-	    ],
-	    pageSize: 2,
+      $("#grid").kendoGrid({
+        columns: [
+          { field: "productName" },
+          { field: "category" }
+        ],
+        dataSource: {
+          data: [
+            { productName: "Tea", category: "Beverages" },
+            { productName: "Coffee", category: "Beverages" },
+            { productName: "Water", category: "Beverages" },
+            { productName: "Juice", category: "Beverages" },
+            { productName: "Decaffeinated Coffee", category: "Beverages" },
+            { productName: "Iced Tea", category: "Beverages" },
+            { productName: "Ham", category: "Food" },
+            { productName: "Bread", category: "Food" },
+            { productName: "Eggs", category: "Food" },
+            { productName: "Bacon", category: "Food" },
+            { productName: "Chips", category: "Food" },
+            { productName: "Fish", category: "Food" }
+          ],
+          pageSize: 4
+        },
         pageable: {
           pageSizes: true
         }
-    });
+      });
     </script>
 
 #### Example - specify the page sizes as array
