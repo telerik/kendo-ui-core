@@ -1033,12 +1033,12 @@
         dropdownlist.wrapper.focusin().focusout();
     });
 
-    test("widget triggers select on blur", 1, function() {
+    test("widget shouldn't trigger select on blur", 0, function() {
         var dropdownlist = new DropDownList(input, {
             dataSource: ["foo", "foo1", "foo2"],
             highlightFirst: true,
             select: function(e) {
-                equal(e.dataItem, "foo");
+                ok(false);
             }
         });
 
