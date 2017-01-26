@@ -8,6 +8,16 @@ position: 1
 
 # 2017 Releases
 
+## Kendo UI 2017 R2
+
+### Changes from 2017 R1
+
+#### Breaking Changes
+
+**DropDownList**
+
+* The widget will not select the focused item on click outside (on blur).
+
 ## Kendo UI 2017 R1
 
 ### Changes from 2016 R3 SP2
