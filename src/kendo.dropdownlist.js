@@ -573,35 +573,21 @@ var __meta__ = { // jshint ignore:line
 
         _focusoutHandler: function() {
             var that = this;
-            var filtered = that._state === STATE_FILTER;
             var isIFrame = window.self !== window.top;
-            var focusedItem = that._focus();
-            var dataItem = that._getElementDataItem(focusedItem);
-            var shouldTrigger;
 
             if (!that._prevent) {
                 clearTimeout(that._typingTimeout);
 
-                var done = function() {
-                    if (support.mobileOS.ios && isIFrame) {
-                        that._change();
-                    } else {
-                        that._blur();
-                    }
-
-                    that._inputWrapper.removeClass(FOCUSED);
-                    that._prevent = true;
-                    that._open = false;
-                    that.element.blur();
-                };
-
-                shouldTrigger = !filtered && focusedItem && that._value(dataItem) !==  List.unifyType(that.value(), typeof that._value(dataItem));
-
-                if (shouldTrigger && !that.trigger("select", { dataItem: dataItem, item: focusedItem })) {
-                    that._select(focusedItem, !that.dataSource.view().length).done(done);
+                if (support.mobileOS.ios && isIFrame) {
+                    that._change();
                 } else {
-                    done();
+                    that._blur();
                 }
+
+                that._inputWrapper.removeClass(FOCUSED);
+                that._prevent = true;
+                that._open = false;
+                that.element.blur();
             }
         },
 
