@@ -2,7 +2,7 @@
 title: Initialize the Grid in Window
 page_title: Initialize the Grid in Window | Kendo UI Grid
 description: "Learn how to initialize a Kendo UI Grid inside a Kendo UI Window widget by resizing it according to the dimensions of its container."
-previous_url: /controls/data-management/grid/how-to/initiliaze-in-window.html
+previous_url: /controls/data-management/grid/how-to/initiliaze-in-window
 slug: howto_initializegridinwindow_grid
 ---
 

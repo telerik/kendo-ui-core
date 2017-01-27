@@ -2,6 +2,7 @@
 title: Add Controls to Custom Editor
 page_title: Add Controls to Custom Editor | Kendo UI Scheduler
 description: "Learn how to add Kendo UI controls to a custom event editor in a Kendo UI Scheduler widget."
+previous_url: /kendo-mvc/web/scheduler/how-to/add-control-to-customeditor
 slug: howto_add_controlsto_custom_event_editor_scheduler
 ---
 

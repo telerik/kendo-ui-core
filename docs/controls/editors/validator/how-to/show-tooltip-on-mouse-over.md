@@ -2,6 +2,7 @@
 title: Show Tooltip on Mouse Over
 page_title: Show Tooltip on Mouse Over | Kendo UI Validator
 description: "Learn how to show a toolbar on mouse over in the Kendo UI Validator."
+previous_url: /framework/validator/how-to/show-tooltip-on-mouse-over
 slug: howto_showtooltiponmouseover_validator
 ---
 

@@ -2,6 +2,7 @@
 title: Delete Rows Selected with Checkboxes
 page_title: Delete Rows Selected with Checkboxes | Kendo UI Grid
 description: "Learn how to delete multiple rows selected with checkboxes in a Kendo UI Grid widget."
+previous_url: /web/grid/how-to/Editing/delete-multiple-columns-with-checkboxes
 slug: howto_delete_rows_selectedwith_checkboxes_grid
 ---
 

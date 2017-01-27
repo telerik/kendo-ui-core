@@ -2,7 +2,7 @@
 title: Reorder Rows in Grids
 page_title: Reorder Rows in Grids | Kendo UI Sortable
 description: "Learn how to use the Kendo UI Sortable widget with a Kendo UI Grid either in editable or non-editable modes."
-previous_url: /controls/interactivity/sortable/how-to/reorder-grid-rows, /controls/interactivity/sortable/how-to/batch-editable-grid
+previous_url: /controls/interactivity/sortable/how-to/reorder-grid-rows, /controls/interactivity/sortable/how-to/batch-editable-grid, /web/sortable/how-to/angularjs-reorder-grid-rows
 slug: howto_usesortablewithgrid_inincellediting_sortable
 ---
 

@@ -2,6 +2,7 @@
 title: Use MutationObserver to Add Red Border and Hide Tooltip
 page_title: Use MutationObserver to Add Red Border and Hide Tooltip | Kendo UI Validator
 description: "Learn how to use MutationObserver to add a red border and hide the tooltip in the Kendo UI Validator."
+previous_url: /framework/validator/how-to/use-mutation-observer
 slug: howto_usemutationobserver_addborderandhidetooltip_validator
 ---
 
