@@ -1,4 +1,4 @@
-﻿---
+---
 title: Overview
 page_title: Overview | Telerik UI for ASP.NET MVC
 description: "Download and install Telerik UI for ASP.NET MVC, and run a sample application."
