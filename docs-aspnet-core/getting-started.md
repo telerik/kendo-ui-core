@@ -45,7 +45,9 @@ Below are listed the steps for you to follow when creating an ASP.NET Core web s
 
 ### Add NuGet Packages
 
-Set up the [Telerik NuGet Private Feed](../aspnet-mvc/getting-started/nuget-install#set-up-nuget-package-source) before continuing.
+> **Important**
+>
+> Set up the [Telerik NuGet Private Feed](../aspnet-mvc/getting-started/nuget-install#set-up-nuget-package-source) before continuing. Ensure that you **store the password in clear text** because .NET Core tooling does not support encryption.
 
 **Step 1** Open the NuGet Package Manager.
 
