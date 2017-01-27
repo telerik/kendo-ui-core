@@ -13,11 +13,11 @@ This article demonstrates how to configure an ASP.NET Core project that enables 
 
 > **Important**  
 >
-> The following steps are tested on Ubuntu 14.04.
+> The following steps are tested on Ubuntu 14.04 and 16.04. and on MacOS X El Capitan 10.11.6.
 
 ## Prerequisites
 
-Make sure you install the [Microsoft ASP.NET](http://docs.asp.net/en/latest/getting-started/installing-on-linux.html).
+Make sure you install the [Microsoft ASP.NET](http://docs.asp.net/en/latest/getting-started/installing-on-linux.html) and **NuGet**.
 
 ## Configuration
 
@@ -58,7 +58,7 @@ Below are listed the steps for you to follow when creating an ASP.NET Core web s
 
 ###### Example
 
-        kendo@kendo-docker:~$ mkdir Projects$
+        kendo@kendo-docker:~$ mkdir Projects
         kendo@kendo-docker:~$ cd Projects/
         kendo@kendo-docker:~/Projects$
 
@@ -141,7 +141,7 @@ As a result, the response demonstrated in the example below is delivered.
 
 ![Web application in browser](images/website.png)
 
-### Add NuGet Packages
+### Add the Telerik.UI.for.AspNet.Core NuGet Package
 
 **Step 1.** Open the `project.json` file, using a text editor, add the `Telerik.UI.for.AspNet.Core` dependency, and replace `productVersion` with an actual **Telerik UI for AspNet Core** version&mdash;for example, `2016.3.914`.
 
@@ -152,13 +152,49 @@ As a result, the response demonstrated in the example below is delivered.
             "Telerik.UI.for.AspNet.Core": "productVersion"
         }
 
-**Step 2.** Navigate to the project folder and restore the packages again.
+**Step 2.** Add the private Telerik NuGet feed. Make sure that you **store the password in clear text** because the .NET Core tooling does not support encryption.
+
+###### Example 
+
+```sh
+NuGet Sources Add -Name "telerik.com" -Source "https://nuget.telerik.com/nuget" -UserName "your telerik.com login email" -Password "your telerik.com password" -StorePasswordInClearText
+```
+
+
+**Step 3.** Restore restore the packages again by running `dotnet restore`.
+
+You may get an error similar to the following: `error: Unable to resolve 'Telerik.UI.for.AspNet.Core (>= 2017.1.118)' for '.NETCoreApp,Version=v1.1'.`. It is caused by issues in the tooling (see the following GitHub issues: in [Nuget/Home](https://github.com/NuGet/Home/issues/4413) and in [dotnet/core](https://github.com/dotnet/core/issues/453)). See below for workarounds.
+
+When using NuGet to add a private feed, `NuGet Sources Add` writes in `~/.config/NuGet/NuGet.Config` file. But when using `dotnet restore` the `~/.nuget/NuGet/NuGet.Config` file is used to read the `packageSources` and `packageSourceCredentials`. 
+
+Until this is fixed in the tooling you have two options:
+
+ * Copy your `telerik.com` credentials manually from `~/.config/NuGet/NuGet.Config` to `~/.nuget/NuGet/NuGet.Config`.
+ * Or, create a `NuGet.Config` file in the project folder with the contents from `~/.config/NuGet/NuGet.Config`.
 
 ###### Example
 
-        dotnet restore
+```
+<?xml version="1.0" encoding="utf-8"?>
+<configuration>
+  <packageSources>
+    <add key="nuget.org" value="https://api.nuget.org/v3/index.json" protocolVersion="3" />
+    <add key="telerik.com" value="https://nuget.telerik.com/nuget" />
+  </packageSources>
+  <packageSourceCredentials>
+    <telerik.com>
+      <add key="Username" value="your.telerik.com@email.login" />
+      <add key="ClearTextPassword" value="your.telerik.com.password.in.clear.text" />
+    </telerik.com>
+  </packageSourceCredentials>
+</configuration>
+```   
+        
+        
 
-**Step 3.** Open `Startup.cs`, using a text editor (IDE) and update it as described below.
+
+
+**Step 4.** Open `Startup.cs`, using a text editor (IDE) and update it as described below.
 
 Locate the `ConfigureServices` method and add a call to `services.AddKendo` at the end.
 
