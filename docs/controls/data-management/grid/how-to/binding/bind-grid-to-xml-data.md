@@ -2,7 +2,7 @@
 title: Bind to XML Data
 page_title: Bind to XML Data | Kendo UI Grid
 description: "Learn how to bind a Kendo UI Grid to XML data."
-previous_url: /controls/data-management/grid/how-to/bind-grid-to-xml-data.html
+previous_url: /controls/data-management/grid/how-to/bind-grid-to-xml-data
 slug: howto_bindgridtoxmldata_grid
 ---
 

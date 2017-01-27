@@ -2,6 +2,7 @@
 title: Adjust Row Height with Virtual Scrolling
 page_title:  Adjust Row Height with Virtual Scrolling | Kendo UI Grid
 description: "Learn how to adjust row height when virtual scrolling is enabled in the Kendo UI Grid widget."
+previous_url: /mvc/kendo-ui/controls/data-management/grid/how-to/Layout/edit-row-height-with-virtual-scrolling
 slug: howto_adjust_row_height_withvirtual_scrolling_grid
 ---
 

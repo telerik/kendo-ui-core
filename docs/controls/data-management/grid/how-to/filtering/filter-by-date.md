@@ -2,7 +2,7 @@
 title: Filter by Date Only
 page_title: Filter by Date Only | Kendo UI Grid
 description: "Learn how to filter date columns in the Kendo UI Grid widget."
-previous_url: /controls/data-management/grid/how-to/filter-by-date.html
+previous_url: /controls/data-management/grid/how-to/filter-by-date
 slug: howto_filter_date_columns_grid
 ---
 

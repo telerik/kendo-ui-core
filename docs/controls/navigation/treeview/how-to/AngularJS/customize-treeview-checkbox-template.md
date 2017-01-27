@@ -2,6 +2,7 @@
 title: Customize Checkbox Templates
 page_title: Customize Checkbox Templates | Kendo UI TreeView
 description: "Learn how to customize the checkbox template of a Kendo UI TreeView in AngularJS applications."
+previous_url: /controls/navigation/treeview/how-to/AngularJS/use-checkbox-template-show-nested-items-under-elements
 slug: howto_customizecheckboxtemplate_angulartreeview
 ---
 
