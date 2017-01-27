@@ -2,6 +2,7 @@
 title: Use OData v4 with WebAPI Controller
 page_title: Use OData v4 with WebAPI Controller | Kendo UI Grid HtmlHelper
 description: "Configure the Kendo UI Grid to use the enum type for both displaying and editing in ASP.NET MVC applications."
+previous_url: /aspnet-mvc/helpers/grid/how-to/oData-v4-web-api-controller
 slug: howto_useodata4webapicontroller_gridaspnetmvc
 ---
 
