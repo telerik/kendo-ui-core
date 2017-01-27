@@ -83,7 +83,11 @@ gulp.task("less",function() {
     var minCss = css.pipe(clone())
         .pipe(gulpIf(makeSourceMaps, sourcemaps.init()))
         .pipe(cssUtils.minify())
-        .pipe(gulpIf(makeSourceMaps, sourcemaps.write("./")));
+        .pipe(gulpIf(makeSourceMaps, sourcemaps.write("./", {
+            mapSources: function(sourcePath) {
+                return sourcePath.replace(/(styles|mobile|web)\//, "");
+            }
+        })));
 
     return merge(css, minCss)
         .pipe(gulp.dest('dist/styles'));
