@@ -1426,7 +1426,6 @@ var __meta__ = { // jshint ignore:line
         "Pager": [ "SelectTemplate", "LinkTemplate" ],
         "PivotGrid": [ "ColumnHeaderTemplate", "DataCellTemplate", "RowHeaderTemplate" ],
         "Scheduler": ["AllDayEventTemplate", "DateHeaderTemplate", "EventTemplate", "MajorTimeHeaderTemplate", "MinorTimeHeaderTemplate"],
-        "PanelBar": [ "Template" ],
         "TreeView": [ "Template" ],
         "Validator": [ "ErrorTemplate" ]
     };
