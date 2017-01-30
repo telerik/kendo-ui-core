@@ -2,7 +2,7 @@
 title: Getting Started with Kendo UI
 page_title: Getting Started with Kendo UI | Kendo UI Getting Started
 description: "Host Kendo UI in your project, download the Bower packages, or install it by using the CDN services."
-previous_url: /install/onsite, /getting-started, /intro/getting-started, /using-kendo-with, /getting-started/using-kendo-with,
+previous_url: /install/onsite, /getting-started, /intro/getting-started, /using-kendo-with, /getting-started/using-kendo-with, /bootstrapper
 slug: getting_started_installation_kendoui
 position: 1
 ---
