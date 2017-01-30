@@ -388,7 +388,7 @@ var __meta__ = { // jshint ignore:line
                     "<li role='menuitem' #=aria(item)#class='#= wrapperCssClass(group, item) #'" +
                          kendo.attr("uid") + "='#= item.uid #'>" +
                         "#= itemWrapper(data) #" +
-                        "# if (item.items) { #" +
+                        "# if (item.items && item.items.length > 0) { #" +
                         "#= subGroup({ items: item.items, panelBar: panelBar, group: { expanded: item.expanded } }) #" +
                         "# } else if (item.content || item.contentUrl) { #" +
                         "#= renderContent(data) #" +
@@ -436,10 +436,24 @@ var __meta__ = { // jshint ignore:line
             that._animating = true;
 
             useAnimation = useAnimation !== false;
+            //  var wrapper = element.children(".k-group");
 
+            // if (!wrapper.length) {
+            //     group = $('<ul role="group" aria-hidden="true" class="k-group k-panel" style="display:none"></ul>');
+            //     element.append(group);
+            //     wrapper = group;
+            // }
             element.each(function (index, item) {
                 item = $(item);
-                var groups = item.find(GROUPS).add(item.find(CONTENTS));
+                var wrapper = element.children(".k-group,.k-content");
+
+                if (!wrapper.length) {
+                    var group = $('<ul role="group" aria-hidden="true" class="k-group k-panel" style="display:none"></ul>');
+                    element.append(group);
+                    wrapper = group;
+                }
+
+                 var groups = wrapper.add(item.find(CONTENTS));
 
                 if (!item.hasClass(DISABLEDCLASS) && groups.length > 0) {
 
@@ -1413,7 +1427,7 @@ var __meta__ = { // jshint ignore:line
                     return prevent;
                 }
             }
-
+            
             if (contents.length) {
                 var visibility = contents.is(VISIBLE);
 
@@ -1441,7 +1455,7 @@ var __meta__ = { // jshint ignore:line
                 return prevent;
             }
 
-             if (dataItem && (!expanded || expanded === "true") &&  !loaded) {
+             if (dataItem && (!expanded || expanded === "true") &&  !loaded && !dataItem.content) {
                  if (that.options.loadOnDemand) {
                      this._progress(element, true);
                  }
@@ -1454,7 +1468,7 @@ var __meta__ = { // jshint ignore:line
                    if (childGroup.length) {
                         this._toggleGroup(childGroup, isVisible);
                         prevent = true;
-                    } else {
+                   } else {
                         content = element.children("."  + CONTENT);
 
                         if (content.length) {
