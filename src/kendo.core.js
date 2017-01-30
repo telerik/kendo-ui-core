@@ -963,7 +963,7 @@ function pad(number, digits, end) {
             }
 
             if (hasGroup) {
-                number = groupInteger(number, start + (negative ? 1 : 0), Math.max(end, (integerLength + start)), numberFormat);
+                number = groupInteger(number, start + (negative && !hasNegativeFormat ? 1 : 0), Math.max(end, (integerLength + start)), numberFormat);
             }
 
             if (end >= start) {
