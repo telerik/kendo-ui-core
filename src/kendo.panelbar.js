@@ -436,21 +436,13 @@ var __meta__ = { // jshint ignore:line
             that._animating = true;
 
             useAnimation = useAnimation !== false;
-            //  var wrapper = element.children(".k-group");
 
-            // if (!wrapper.length) {
-            //     group = $('<ul role="group" aria-hidden="true" class="k-group k-panel" style="display:none"></ul>');
-            //     element.append(group);
-            //     wrapper = group;
-            // }
             element.each(function (index, item) {
                 item = $(item);
                 var wrapper = element.children(".k-group,.k-content");
 
                 if (!wrapper.length) {
-                    var group = $('<ul role="group" aria-hidden="true" class="k-group k-panel" style="display:none"></ul>');
-                    element.append(group);
-                    wrapper = group;
+                    wrapper =  that._addGroupElement(element);
                 }
 
                  var groups = wrapper.add(item.find(CONTENTS));
@@ -805,7 +797,7 @@ var __meta__ = { // jshint ignore:line
         },
 
         _appendItems: function(index, items, parentNode) {
-            var that = this, children, wrapper, group;
+            var that = this, children, wrapper;
 
               if (parentNode.hasClass("k-panelbar")) {
                   children = parentNode.children("li");
@@ -813,9 +805,7 @@ var __meta__ = { // jshint ignore:line
               } else {
                   wrapper = parentNode.children(".k-group");
                   if (!wrapper.length) {
-                      group = $('<ul role="group" aria-hidden="true" class="k-group k-panel" style="display:none"></ul>');
-                      parentNode.append(group);
-                      wrapper = group;
+                      wrapper =  that._addGroupElement(parentNode);
                   }
 
                   children = wrapper.children("li");
@@ -1405,6 +1395,12 @@ var __meta__ = { // jshint ignore:line
 
             that._updateSelected(link);
 
+            var wrapper = item.children(".k-group,.k-content");
+
+            if (!wrapper.length) {
+                wrapper =  that._addGroupElement(item);
+            }
+
             contents = item.find(GROUPS).add(item.find(CONTENTS));
             href = link.attr(HREF);
             isAnchor = href && (href.charAt(href.length - 1) == "#" || href.indexOf("#" + that.element[0].id + "-") != -1);
@@ -1533,6 +1529,13 @@ var __meta__ = { // jshint ignore:line
             that._animating = false;
         },
 
+        _addGroupElement: function(element) {
+            var group = $('<ul role="group" aria-hidden="true" class="k-group k-panel" style="display:none"></ul>');
+
+            element.append(group);
+            return group;
+        },
+
         _collapseAllExpanded: function (item) {
             var that = this, children, stopExpand = false;
 
@@ -1554,6 +1557,15 @@ var __meta__ = { // jshint ignore:line
                                 that._toggleGroup(content, true);
                             }
                         });
+
+                 that.one("complete", function() {
+                    setTimeout(function() {
+                        children.each(function (index, child) {
+                            var dataItem = that.dataItem(child);
+                            dataItem.set("expanded", false);
+                        });
+                    });
+                });
             }
 
             return stopExpand;
