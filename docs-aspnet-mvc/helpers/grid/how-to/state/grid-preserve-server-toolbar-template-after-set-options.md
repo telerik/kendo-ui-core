@@ -7,7 +7,7 @@ slug: howto_preserveservertemplateaftersetoptions_gridaspnetmv
 
 # Preserve the Grid Server Toolbar Template after Using setOptions
 
-It is required to preserve the server toolbar template of the Grid because of [existing limitations of the `setOptions` method](/api/javascript/ui/grid#methods-setOptions). To see the example on achieving this behavior, refer to [this project](https://github.com/telerik/ui-for-aspnet-mvc-examples/tree/master/grid/grid-preserve-server-toolbar-template-after-set-options).
+It is required to preserve the server toolbar template of the Grid because of [existing limitations of the `setOptions` method](../../../../../kendo-ui/api/javascript/ui/grid#methods-setOptions). To see the example on achieving this behavior, refer to [this project](https://github.com/telerik/ui-for-aspnet-mvc-examples/tree/master/grid/grid-preserve-server-toolbar-template-after-set-options).
 
 ## See Also
 
