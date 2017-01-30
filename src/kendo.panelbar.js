@@ -1562,7 +1562,10 @@ var __meta__ = { // jshint ignore:line
                     setTimeout(function() {
                         children.each(function (index, child) {
                             var dataItem = that.dataItem(child);
-                            dataItem.set("expanded", false);
+
+                            if(dataItem){
+                                dataItem.set("expanded", false);
+                            }
                         });
                     });
                 });
