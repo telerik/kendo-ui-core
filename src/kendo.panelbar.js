@@ -1397,7 +1397,7 @@ var __meta__ = { // jshint ignore:line
 
             var wrapper = item.children(".k-group,.k-content");
 
-            if (!wrapper.length) {
+            if (!wrapper.length && ((item.items && item.items.length > 0) || item.hasChildren || item.content || item.contentUrl)) {
                 wrapper =  that._addGroupElement(item);
             }
 
