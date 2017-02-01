@@ -617,6 +617,9 @@ var __meta__ = { // jshint ignore:line
             } else {
                 this.append(item.children, parentNode);
 
+                if(this.options.loadOnDemand){
+                    this._toggleGroup(parentNode.children(".k-group"), false);
+                }
                 children = parentNode.children(".k-group").children("li");
 
                 for (i = 0; i < children.length; i++) {
@@ -682,7 +685,7 @@ var __meta__ = { // jshint ignore:line
 
                     if (!loadOnDemand || items[k].expanded) {
                         var tempItem = items[k];
-                        if (tempItem.hasChildren  && tempItem.items && tempItem.items.length === 0) {
+                        if (this._hasChildItems(tempItem)) {
                                 tempItem.load();
                         }
                     }
@@ -1396,8 +1399,10 @@ var __meta__ = { // jshint ignore:line
             that._updateSelected(link);
 
             var wrapper = item.children(".k-group,.k-content");
-
-            if (!wrapper.length && ((item.items && item.items.length > 0) || item.hasChildren || item.content || item.contentUrl)) {
+            var dataItem = this.dataItem(item);
+            
+            if (!wrapper.length && ((that.options.loadOnDemand && dataItem && dataItem.hasChildren) ||
+             this._hasChildItems(item) || item.content || item.contentUrl)) {
                 wrapper =  that._addGroupElement(item);
             }
 
@@ -1434,7 +1439,10 @@ var __meta__ = { // jshint ignore:line
 
             return prevent;
         },
-
+        _hasChildItems: function (item) {
+            return (item.items && item.items.length > 0) || item.hasChildren;
+        },
+        
         _toggleItem: function (element, isVisible, expanded) {
             var that = this,
                 childGroup = element.find(GROUPS),
@@ -1455,7 +1463,7 @@ var __meta__ = { // jshint ignore:line
                  if (that.options.loadOnDemand) {
                      this._progress(element, true);
                  }
-                 this._toggleGroup(childGroup, isVisible);
+
                  element.children(".k-group,.k-content").remove();
                  prevent = dataItem.hasChildren;
 
@@ -1676,7 +1684,7 @@ var __meta__ = { // jshint ignore:line
             return that.templates.item(extend(options, {
                 itemWrapper: that.templates.itemWrapper,
                 renderContent: that.renderContent,
-                arrow: (item.items && item.items.length > 0) || item.hasChildren || item.content || item.contentUrl ? that.templates.arrow : empty,
+                arrow: that._hasChildItems(item) || item.content || item.contentUrl ? that.templates.arrow : empty,
                 subGroup: !options.loadOnDemand || item.expanded ? that.renderGroup : empty
             }, rendering));
         },
