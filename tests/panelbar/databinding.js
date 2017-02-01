@@ -203,7 +203,7 @@
             i++;
 
             options.success([
-                { id: i, hasChildren: true, text: "foo " + i }
+                { id: i, hasChildren: i === 1, text: "foo " + i }
             ]);
         }
 
