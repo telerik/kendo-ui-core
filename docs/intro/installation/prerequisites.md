@@ -27,9 +27,9 @@ The following table provides a list of the jQuery versions that are compatible w
 
 | Major Releases												                                         | jQuery Version    | Comments  |
 | :---															                                             | :---			         | :---	     |
-| [Kendo UI 2016.3.1118 (R3 2016 SP2)](http://www.telerik.com/support/whats-new/kendo-ui/release-history/kendo-ui-r3-2016-sp2)	|1.12.3| Also compatible with 1.10.x, 2.1.x and 3.1.1|
-| [Kendo UI 2016.3.914 (R3 2016)](http://www.telerik.com/support/whats-new/kendo-ui/release-history/kendo-ui-r3-2016)	|1.12.3| Also compatible with 1.10.x and 2.1.x|
-| [Kendo UI 2016.2.504 (R2 2016)](http://www.telerik.com/support/whats-new/kendo-ui/release-history/kendo-ui-q2-2016)	|1.12.3| Also compatible with 1.10.x and 2.1.x|
+| [Kendo UI 2016.3.1118 (R3 2016 SP2)](http://www.telerik.com/support/whats-new/kendo-ui/release-history/kendo-ui-r3-2016-sp2)	|1.12.3| Also compatible with 1.10.x, 2.2.x and 3.1.1|
+| [Kendo UI 2016.3.914 (R3 2016)](http://www.telerik.com/support/whats-new/kendo-ui/release-history/kendo-ui-r3-2016)	|1.12.3| Also compatible with 1.10.x and 2.2.x|
+| [Kendo UI 2016.2.504 (R2 2016)](http://www.telerik.com/support/whats-new/kendo-ui/release-history/kendo-ui-q2-2016)	|1.12.3| Also compatible with 1.10.x and 2.2.x|
 | [Kendo UI 2016.1.112 (Q1 2016)](http://www.telerik.com/support/whats-new/kendo-ui/release-history/kendo-ui-q1-2016)	|1.9.1| Also compatible with 1.10.x and 2.1.x|
 | [Kendo UI 2015.3.930 (Q3 2015)](http://www.telerik.com/support/whats-new/kendo-ui/release-history/q3-2015)	|1.9.1| Also compatible with 1.10.x and 2.1.x|
 | [Kendo UI 2015.2.624 (Q2 2015)](http://www.telerik.com/support/whats-new/kendo-ui/release-history/q2-2015)	|1.9.1| Also compatible with 1.10.x and 2.1.x|
