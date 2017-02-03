@@ -677,14 +677,14 @@ AngularJS creates a new scope for the content placed in a window. The reason for
 
 #### Get AngularJS Scope Attached to Pop-Up Window
 
-The available workaround is to either access the widget directly by using its jQuery object or to access the newly-created child scope. Basically, you need to find the window or popup element and get the scope from it.
+The available workaround is to use the [`appendTo`](http://docs.telerik.com/kendo-ui/api/javascript/ui/window#configuration-appendTo) option to append the window to another HTML element which is part of the angular application and scope or initialize the AngularJS application on the body. The first approach is shown below and it demonstrates how to find the window or popup element and get the scope from it.
 
 ###### Example
 
 ````html
     <div id="example" ng-app="KendoDemos">
         <div class="demo-section k-header" ng-controller="MyCtrl">
-            <div kendo-window="wnd"></div>
+            <div kendo-window="wnd" k-append-to="'#example'"></div>
         </div>
     </div>
     <script>
@@ -693,6 +693,7 @@ The available workaround is to either access the widget directly by using its jQ
           $scope.$on("kendoRendered", function(e) {
             //retrieve the child scope from the window element
             var childScope = angular.element($scope.wnd.element).scope();
+            console.log(childScope);
           });
         });
     </script>
