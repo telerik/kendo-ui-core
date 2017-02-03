@@ -183,6 +183,10 @@ test("toString decimal number -0.001 with negative format rounds number", functi
     equal(toString(-0.001, "####;-(#.#)"), "-(0.0)");
 });
 
+test("toString decimal number -1000 with negative format", function() {
+    equal(toString(-1000, "#,##0;(#,##0);-"), "(1,000)");
+});
+
 test("toString decimal number -123", function() {
     equal(toString(-123, "####;-(#.00)"), "-(123.00)");
 });
