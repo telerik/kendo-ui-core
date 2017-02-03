@@ -244,6 +244,31 @@ Sets an array with the URLs from which the tabs content to be loaded from. If on
         });
     </script>
 
+As from the *Q1 2017* release this option can contain configuration objects that are passed to [`jQuery.ajax`](http://api.jquery.com/jquery.ajax/#jQuery-ajax-settings), used by the widget for remote requests.
+This means that you can set options supported by `jQuery.ajax` via these configuration objects like `cache`, `url`, `type` etc.
+
+    <div id="tabstrip">
+        <ul>
+            <li>Tab 1</li>
+            <li>Ajax Tab</li>
+        </ul>
+        <div>Content 1</div>
+        <div></div>
+    </div>
+
+    <script>
+        $("#tabstrip").kendoTabStrip({
+            contentUrls: [
+                null,
+                {
+                    url: "http://demos.telerik.com/kendo-ui/content/web/tabstrip/ajax/ajaxContent1.html",
+                    cache: true
+                }
+            ]
+        });
+    </script>
+
+
 ### dataContentField `String`*(default: "")*
 
 Sets the field of the data item that provides the text content of the tab content element.
