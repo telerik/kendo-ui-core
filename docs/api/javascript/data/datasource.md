@@ -1001,6 +1001,7 @@ The result should have the following format:
       transport: {
         /* transport configuration */
       },
+      group:[{field: "field"}],
       serverGrouping: true,
       schema: {
         groups: "groups" // groups are returned in the "groups" field of the response
@@ -1015,6 +1016,7 @@ The result should have the following format:
       transport: {
         /* transport configuration */
       },
+      group:[{field: "field"}],
       serverGrouping: true,
       schema: {
         groups: function(response) {
