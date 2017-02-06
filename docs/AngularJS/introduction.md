@@ -677,7 +677,12 @@ AngularJS creates a new scope for the content placed in a window. The reason for
 
 #### Get AngularJS Scope Attached to Pop-Up Window
 
-The available workaround is to use the [`appendTo`](http://docs.telerik.com/kendo-ui/api/javascript/ui/window#configuration-appendTo) option to append the window to another HTML element which is part of the angular application and scope or initialize the AngularJS application on the body. The first approach is shown below and it demonstrates how to find the window or popup element and get the scope from it.
+The available workaround is either:
+
+* To use the [`appendTo`](http://docs.telerik.com/kendo-ui/api/javascript/ui/window#configuration-appendTo) option to append the window to another HTML element which is part of the Angular application and scope, or
+* To initialize the AngularJS application on the body.
+
+The following example demonstrates the first approach and it shows how to find the window or popup element and get the scope from it.
 
 ###### Example
 
