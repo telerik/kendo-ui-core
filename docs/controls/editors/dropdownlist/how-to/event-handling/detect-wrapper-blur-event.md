@@ -1,18 +1,19 @@
 ---
-title: Detect Input Change Events
-page_title: Detect Input Change Events | Kendo UI DropDownList
-description: "Learn how to detect the Kendo UI DropDownList input change event."
-slug: howto_detect_input_change_events_dropdownlist
+title: Detect Wrapper Blur Events
+page_title: Detect Wrapper Blur Events | Kendo UI DropDownList
+description: "Learn how to detect the Kendo UI DropDownList wrapper blur event."
+previous_url: /controls/editors/dropdownlist/how-to/detect-wrapper-blur-event
+slug: howto_detect_wrapper_blur_events_dropdownlist
 ---
 
-# Detect Input Change Events
+# Detect Wrapper Blur Events
 
-The example below demonstrates how to detect the Kendo UI DropDownList input change event.
+The following example demonstrates how to detect the `blur` event of the Kendo UI DropDownList wrapper.
 
 ###### Example
 
 ```html
-  <div id="example">
+<div id="example">
     <div class="demo-section k-header">
       <h4 class="title">DropDownList</h4>
       <input id="dropdownlist" style="width: 400px;"/>
@@ -23,12 +24,21 @@ The example below demonstrates how to detect the Kendo UI DropDownList input cha
     </div>
     <script>
       $(document).ready(function() {
-        function widgetChange() {
-          $(".console").append("<p>event: change (widget)</p>");
+        function onOpen() {
+          $(".console").append("<p>event: open</p>");
         };
 
-        function inputChange() {
-          $(".console").append("<p>event: change (input)</p>");
+        function onClose() {
+          $(".console").append("<p>event: close</p>");
+        };
+
+        function onChange() {
+          $(".console").append("<p>event: change</p>");
+        };
+
+        function onSelect(e) {
+          var dataItem = this.dataItem(e.item.index());
+          $(".console").append("<p>event: select (" + dataItem.text + " : " + dataItem.value + ")</p>");
         };
 
         var data = [
@@ -41,10 +51,17 @@ The example below demonstrates how to detect the Kendo UI DropDownList input cha
           dataTextField: "text",
           dataValueField: "value",
           dataSource: data,
-          change: widgetChange
+          select: onSelect,
+          change: onChange,
+          close: onClose,
+          open: onOpen
         });
 
-        $("#dropdownlist").change(inputChange);
+        var wrapper = $("#dropdownlist").data("kendoDropDownList").wrapper;
+
+        wrapper.blur(function() {
+          $(".console").append("<p>event: wrapper blur</p>");
+        });
       });
     </script>            
     <style scoped>

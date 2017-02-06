@@ -8,7 +8,9 @@ position: 1
 
 # DropDownList Overview
 
-The [Kendo UI DropDownList widget](http://demos.telerik.com/kendo-ui/dropdownlist/index) displays a list of values and allows for a single selection from the list. The user input is restricted within the predefined options.
+The [Kendo UI DropDownList widget](http://demos.telerik.com/kendo-ui/dropdownlist/index) displays a list of values and allows for a single selection from the list.
+
+The user input is restricted within the predefined options.
 
 To apply a keyboard input, use the [Kendo UI ComboBox control]({% slug overview_kendoui_combobox_widget %}).
 
@@ -16,21 +18,21 @@ To apply a keyboard input, use the [Kendo UI ComboBox control]({% slug overview_
 
 ### Initialize the DropDownList
 
-The Kendo UI DropDownList widget can be initialized in three ways:
+The Kendo UI DropDownList widget can be initialized in 3 ways:
 
 1. By using the `<option>` tag of an existing `<select>` element with defined data items.
-2. By binding the widget to a local data array and using the `<input>` or `<select>` element.
-3. By binding the widget to a remote data service and using the `<input>` or `<select>` element.
+2. By binding the widget to a local data array and using the `<input>` or the `<select>` element.
+3. By binding the widget to a remote data service and using the `<input>` or the `<select>` element.
 
 The DropDownList looks and operates consistently regardless of the initialization type you choose to apply.
 
 > **Important**
-> * As a DropDownList must be initialized after the DOM is fully loaded, make sure you create it within a `$(document).ready()` statement.
+> * Verify that you create the DropDownList within a `$(document).ready()` statement because the widget has to be initialized after the DOM is fully loaded.
 > * The widget copies any styles and CSS classes from the input element to the wrapper element and visible input.
 
-**Use the `<option>` tag of an existing `<select>` element**
+#### Use option Tags of Existing select Elements
 
-The example below demonstrates how to initialize the DropDownList from an existing `<select>` element with defined data items.
+The following example demonstrates how to initialize the DropDownList from an existing `<select>` element with defined data items.
 
 ###### Example
 
@@ -46,11 +48,11 @@ The example below demonstrates how to initialize the DropDownList from an existi
         });
     </script>
 
-**Bind to a local data array**
+#### Bind to Local Data Arrays
 
-Bind the DropDownList to local data arrays through the [DataSource component]({% slug overview_kendoui_datasourcecomponent %})&mdash;an abstraction for local and remote data. Local arrays are appropriate for limited value options.
+To initialize the DropDownList by binding the widget to a local data array and utilizing the `<input>` or the `<select>` element, use the [Data Source component]({% slug overview_kendoui_datasourcecomponent %}). It is an abstraction for local and remote data. Local arrays are appropriate for limited value options.
 
-The example below demonstrates how to initialize the DropDownList by binding it to a local data array.
+The following example demonstrates how to initialize the DropDownList by using this approach.
 
 ###### Example
 
@@ -69,11 +71,11 @@ The example below demonstrates how to initialize the DropDownList by binding it 
       });
     </script>
 
-**Bind to a remote data service**
+#### Bind to Remote Data Services
 
-Bind the DropDownList to remote data arrays through the [DataSource component]({% slug overview_kendoui_datasourcecomponent %})&mdash;an abstraction for local and remote data. Remote data binding is appropriate for larger data sets, so that items are loaded on demand when displayed. The DataSource can be used to serve data from a variety of data services, such as [XML](http://en.wikipedia.org/wiki/XML), [JSON](http://en.wikipedia.org/wiki/JSON), and [JSONP](http://en.wikipedia.org/wiki/JSONP).
+To initialize the DropDownList by binding the widget to remote data arrays and utilizing the `<input>` or the `<select>` element, use the [Data Source component]({% slug overview_kendoui_datasourcecomponent %}). It is an abstraction for local and remote data. Remote data binding is appropriate for larger data sets, so that items are loaded on demand when displayed. You can use the DataSource for serving data from a variety of data services such as [XML](http://en.wikipedia.org/wiki/XML), [JSON](http://en.wikipedia.org/wiki/JSON), and [JSONP](http://en.wikipedia.org/wiki/JSONP).
 
-The example below demonstrates how to initialize the DropDownList by binding it to a remote data service.
+The following example demonstrates how to initialize the DropDownList by using this approach.
 
 ###### Example
 
@@ -101,7 +103,9 @@ The DropDownList uses [Kendo UI templates](/framework/templates/overview) to pro
 
 ### Item Templates
 
-The example below demonstrates how to define an item template.
+The item template manages the way the list items of a DropDownList are rendered.  
+
+The following example demonstrates how to define an item template.
 
 ###### Example
 
@@ -132,7 +136,9 @@ The example below demonstrates how to define an item template.
 
 ### Value Templates
 
-The example below demonstrates how to define a value template.
+The value template manages the way the selected value of a DropDownList is rendered.  
+
+The following example demonstrates how to define a value template.
 
 > **Important**
 >
@@ -167,9 +173,9 @@ The example below demonstrates how to define a value template.
 
 ### Header Templates
 
-The DropDownList allows you to render a pop-up header.
+The header template manages the way the pop-up header of a DropDownList is rendered.
 
-The example below demonstrates how to define a header template.
+The following example demonstrates how to define a header template.
 
 ###### Example
 
@@ -200,9 +206,9 @@ The example below demonstrates how to define a header template.
 
 ### Footer Templates
 
-The DropDownList allows you to render a pop-up footer. The footer is re-rendered on every DataSource change. The context of the template is the widget itself.
+The footer template manages the way the pop-up footer of a DropDownList is rendered. The footer is re-rendered on every change of the Data Source. The context of the template is the widget itself.
 
-The example below demonstrates how to define a footer template.
+The following example demonstrates how to define a footer template.
 
 ###### Example
 
@@ -235,11 +241,11 @@ The example below demonstrates how to define a footer template.
 
 The DropDownList widget displays `noDataTemplate` in the popup when the data source is empty.
 
-The example below demonstrates how to define a `noDataTemplate` template.
+The following example demonstrates how to define a `noDataTemplate` template.
 
 > **Important**
 >
-> When the `noDataTemplate` option is defined, the widget will always open the popup element.
+> When the `noDataTemplate` option is defined, the widget always opens the popup element.
 
 ###### Example
 
@@ -270,9 +276,9 @@ The example below demonstrates how to define a `noDataTemplate` template.
 
 ## Configuration
 
-### Change of Drop-Down List Width
+### Change the List Width
 
-Customize the width of a drop-down list and change its dimensions by using the jQuery `width()` method.
+To customize the width of a drop-down list and change its dimensions, use the jQuery `width()` method.
 
 ###### Example
 
@@ -285,7 +291,7 @@ Customize the width of a drop-down list and change its dimensions by using the j
       });
     </script>
 
-The example below demonstrates how to set the list dimensions through MVVM binding.
+The following example demonstrates how to set the list dimensions through an MVVM binding.
 
 ###### Example
 
@@ -302,9 +308,9 @@ The example below demonstrates how to set the list dimensions through MVVM bindi
   </script>
 ```
 
-### Adjustment of the Popup Width
+### Adjust the Popup Width
 
-It is possible to let the popup element automatically adjust its width according to the length of the item label it displays. When the `autoWidth` option is set to `true`, the popup shows the content on one line and does not wrap it up.
+You can let the popup element automatically adjust its width according to the length of the item label it displays. When the `autoWidth` option is set to `true`, the popup shows the content on one line and does not wrap it up.
 
 ###### Example
 
@@ -318,7 +324,7 @@ It is possible to let the popup element automatically adjust its width according
     });
     </script>
 
-### Access of Drop-Down List Element
+### Access *-list Elements
 
 The drop-down list renders an ID attribute, generated from the ID of the widget and the `-list` suffix.
 
@@ -344,7 +350,7 @@ The ID can be used to style the element or to access a specific element inside t
       });
     </script>
 
-### Support for Elements: label
+### Support label Elements
 
 Because of its complex rendering, focusing the widget by using a `label` element requires additional implementation. For more information about how to do it, check [this Kendo UI Dojo snippet](http://dojo.telerik.com/uSeho).
 

@@ -8,7 +8,7 @@ position: 3
 
 # Virtualization
 
-The virtualization functionality described in the related help article for the [Kendo UI ComboBox widget](/web/combobox/virtualization) is applicable to the Kendo UI DropDownList.
+For more information on how to use virtualization in a Kendo UI DropDownList widget, refer to the article on the [virtualization of the Kendo UI ComboBox widget]({% slug virtualization_kendoui_combobox_widget %}). The approaches described in it are applicable for the DropDownList. 
 
 ## See Also
 

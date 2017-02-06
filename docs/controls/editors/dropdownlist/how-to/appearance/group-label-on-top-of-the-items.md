@@ -2,12 +2,15 @@
 title: Move Group Labels on Top of Items
 page_title: Move Group Labels on Top of Items | Kendo UI DropDownList
 description: "Learn how to move the group label on top of the items in a Kendo UI DropDownList widget."
+previous_url: /controls/editors/dropdownlist/how-to/group-label-on-top-of-the-items
 slug: howto_move_group_label_ontopof_items_dropdownlist
 ---
 
 # Move Group Labels on Top of Items
 
-The example below demonstrates how to move the group label on top of the items in a Kendo UI DropDownList. The approach is also applicable to Kendo UI [ComboBox](http://demos.telerik.com/kendo-ui/combobox/index) and [MultiSelect](http://demos.telerik.com/kendo-ui/multiselect/index) widgets.
+The DropDownList provides an option for grouping its list items by certain criteria and showing the group labels and grouped items within the drop-down list.
+
+The following example demonstrates how to move the group label on top of the grouped items in a Kendo UI DropDownList. The approach is also applicable to the [ComboBox](http://demos.telerik.com/kendo-ui/combobox/index) and [MultiSelect](http://demos.telerik.com/kendo-ui/multiselect/index) widgets.
 
 ###### Example
 

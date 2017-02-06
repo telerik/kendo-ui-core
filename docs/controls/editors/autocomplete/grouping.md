@@ -8,7 +8,7 @@ position: 2
 
 # Grouping
 
-The grouping functionality described in the related help article for [Kendo UI ComboBox widget](/web/combobox/grouping) is applicable to Kendo UI AutoComplete.
+For more information on how use grouping in a Kendo UI AutoComplete widget, refer to the article on [grouping the Kendo UI ComboBox widget]({% slug grouping_kendoui_combobox_widget %}). The approaches described in it are applicable for the AutoComplete.
 
 ## See Also
 

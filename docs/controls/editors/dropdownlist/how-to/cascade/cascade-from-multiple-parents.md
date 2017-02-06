@@ -2,12 +2,15 @@
 title: Cascade from Multiple Parents
 page_title: Cascade from Multiple Parents | Kendo UI DropDownList
 description: "Learn how to cascade Kendo UI DropDownList widgets from multiple parents."
+previous_url: /controls/editors/dropdownlist/how-to/cascade-from-multiple-parents
 slug: howto_cascade_multiple_parents_dropdownlist
 ---
 
 # Cascade from Multiple Parents
 
-The example below demonstrates how to cascade Kendo UI DropDownLists from multiple parents.
+Depending on your project, you might need to cascade DropDownLists from multiple parents.
+
+The following example demonstrates how to achieve this behavior.
 
 ###### Example
 
