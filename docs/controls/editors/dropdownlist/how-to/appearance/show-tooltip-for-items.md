@@ -2,6 +2,7 @@
 title: Show List Item Details in ToolTip
 page_title: Show List Item Details in ToolTip | Kendo UI DropDownList
 description: "Learn how to show details for Kendo UI DropDownList items by using a Kendo UI Tooltip."
+previous_url: /controls/editors/dropdownlist/how-to/show-tooltip-for-items
 slug: howto_show_list_items_details_in_tooltip_dropdownlist
 ---
 
@@ -11,7 +12,7 @@ Sometimes you might need to show additional information about a list item in a K
 
 A possible way to achieve this behavior is to use a Kendo UI Tooltip that displays the details when the user hovers with the mouse over the DropDownList item.
 
-The example below demonstrates how to customize the information displayed in the Tooltip depending on the respective data item fields.
+The following example demonstrates how to customize the information displayed in the Tooltip depending on the respective data item fields.
 
 ###### Example
 

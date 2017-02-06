@@ -302,6 +302,8 @@ navigation:
         title: "Export"
     "*filtering":
         title: "Filtering"
+    "*event-handling":
+        title: "Event Handling"
     "*integration":
         title: "Integration"
     "*cascade":

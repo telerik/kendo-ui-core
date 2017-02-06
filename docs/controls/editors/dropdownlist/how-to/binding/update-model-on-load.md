@@ -1,13 +1,14 @@
 ---
-title: Update MVVM Bound Models on Load
-page_title: Update MVVM Bound Models on Load | Kendo UI DropDownList
+title: Update MVVM-Bound Models on Load
+page_title: Update MVVM-Bound Models on Load | Kendo UI DropDownList
 description: "Learn how to update MVVM bound models on load in a Kendo UI DropDownList widget."
+previous_url: /controls/editors/dropdownlist/how-to/update-model-on-load
 slug: howto_update_mvvm_model_onload_dropdownlist
 ---
 
-# Update MVVM Bound Models on Load
+# Update MVVM-Bound Models on Load
 
-The example below demonstrates how to update an MVVM bound model on load in a Kendo UI DropDownList.
+The following example demonstrates how to update an MVVM-bound model on load in a Kendo UI DropDownList.
 
 ###### Example
 

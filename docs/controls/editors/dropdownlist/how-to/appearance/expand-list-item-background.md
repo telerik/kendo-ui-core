@@ -1,13 +1,14 @@
 ---
-title: Add New Items
-page_title: Add New Items | Kendo UI DropDownList
-description: "Learn how to add new items to a Kendo UI DropDownList."
-slug: howto_addnewitems_dropdownlist
+title: Expand Backgrounds of Long List Items
+page_title: Expand Backgrounds of Long List Items | Kendo UI DropDownList
+description: "Learn how to expand the background of long list items in Kendo UI ComboBox, AutoComplete, DropDownList, and MultiSelect widgets."
+previous_url: /controls/editors/dropdownlist/how-to/expand-list-item-background
+slug: howto_expand_background_longlist_items_dropdownlist
 ---
 
-# Add New Items
+# Expand Backgrounds of Long List Items
 
-To see the example on how to add a new item to a Kendo UI DropDownList, refer to [this online demo](http://demos.telerik.com/kendo-ui/dropdownlist/addnewitem).
+To see the example, refer to the article on [expanding the background of long list items in Kendo UI DropDownLists]({% slug howto_expand_background_longlist_items_combobox %}).
 
 ## See Also
 

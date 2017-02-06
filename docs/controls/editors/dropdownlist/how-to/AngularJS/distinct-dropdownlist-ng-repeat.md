@@ -1,16 +1,19 @@
 ---
-title: Cascade Lists Using `ng-repeat`
-page_title: Cascade Lists Using `ng-repeat` | Kendo UI DropDownList
+title: Cascade Lists by Using ng-repeat
+page_title: Cascade Lists by Using ng-repeat | Kendo UI DropDownList
 description: "Learn how to cascade Kendo UI DropDownList widgets with `ng-repeat` and using distinct values."
 slug: howto_cascade_withngrepeat_distinct_values_dropdownlist
 ---
 
-# Cascade Lists Using `ng-repeat`
+# Cascade Lists by Using ng-repeat
 
-The example below demonstrates how to use `ng-repeat` to add extra drop-down lists on a parent selection. Every new child is bound with distinct values.
+The following example demonstrates how to use the `ng-repeat` Angular directive to add extra drop-down lists on a parent selection.
+
+Every new child is bound with distinct values.
 
 > **Important**  
-> Note that the use of `ng-repeat` has some limitations that need to be taken into account. For more information on this, refer to the [notes on `ng-repeat`](http://docs.telerik.com/kendo-ui/AngularJS/notes-on-ng-repeat) help article.
+>
+> When applied, the `ng-repeat` directive demonstrates some limitations. For more information on this issue, refer to the [notes on `ng-repeat`](http://docs.telerik.com/kendo-ui/AngularJS/notes-on-ng-repeat).
 
 ```html
     <script type="text/javascript">

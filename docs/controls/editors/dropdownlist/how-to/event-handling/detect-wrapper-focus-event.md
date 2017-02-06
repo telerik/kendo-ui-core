@@ -1,13 +1,33 @@
 ---
-title: Cascade MultiSelect from DropDownList
-page_title: Cascade MultiSelect from DropDownList | Kendo UI DropDownList
-description: "Learn how to cascade a Kendo UI MultiSelect widget from a Kendo UI DropDownList."
-slug: howto_cascademultiselectfromddl_ddl
+title: Detect Wrapper Focus Events
+page_title: Detect Wrapper Focus Events | Kendo UI DropDownList
+description: "Learn how to detect the Kendo UI DropDownList wrapper focus event."
+previous_url: /controls/editors/dropdownlist/how-to/detect-wrapper-focus-event
+slug: howto_detect_wrapper_focus_events_dropdownlist
 ---
 
-# Cascade MultiSelect from DropDownList
+# Detect Wrapper Focus Events
 
-To see the example on how to cascade a Kendo UI MultiSelect from a Kendo UI DropDownList widget, refer to [this how-to article]({% slug howto_cascade_froma_dropdownlist_multiselect %}).
+The following example demonstrates how to detect the `focus` event of the Kendo UI DropDownList wrapper.
+
+###### Example
+
+```html
+  <input id="ddl1" class="ddl" />
+  <input id="ddl2" class="ddl" />
+  <input id="ddl3" class="ddl" />
+  <input id="ddl4" class="ddl" />
+
+  <script>
+    $(function() {
+      $(".ddl").kendoDropDownList();
+
+      $(".ddl").on("focus", function() {
+        console.log("focus");
+      });
+    });
+  </script>
+```
 
 ## See Also
 
@@ -16,7 +36,6 @@ Other articles on the Kendo UI DropDownList:
 * [DropDownList JavaScript API Reference](/api/javascript/ui/dropdownlist)
 * [How to Automatically Adjust the Width of a DropDownList]({% slug howto_automatically_adjust_width_dropdownlist %})
 * [How to Create DropDownLists with Long Items]({% slug howto_create_listswith_long_items_dropdownlist %})
-* [How to Detect Wrapper Focus Events]({% slug howto_detect_wrapper_focus_events_dropdownlist %})
 * [How to Move the Group Label on Top of Items]({% slug howto_move_group_label_ontopof_items_dropdownlist %})
 * [How to Prevent Popup Closure on Scroll]({% slug howto_prevent_popup_closure_onscroll_dropdownlist %})
 * [How to Remove Items]({% slug howto_remove_items_dropdownlist %})

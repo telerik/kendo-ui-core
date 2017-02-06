@@ -2,12 +2,13 @@
 title: Set DataSource Dynamically
 page_title: Set DataSource Dynamically | Kendo UI DropDownList
 description: "Learn how to dynamically set DataSource in a Kendo UI DropDownList widget."
+previous_url: /controls/editors/dropdownlist/how-to/set-datasource-dynamically
 slug: howto_set_datasource_dynamically_dropdownlist
 ---
 
 # Set DataSource Dynamically
 
-The example below demonstrates how to dynamically set the DataSource in a Kendo UI DropDownList widget.
+The following example demonstrates how to dynamically set the DataSource in a Kendo UI DropDownList widget.
 
 ###### Example
 

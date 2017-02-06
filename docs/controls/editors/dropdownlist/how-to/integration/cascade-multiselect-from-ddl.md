@@ -1,41 +1,14 @@
 ---
-title: Create Lists with Long Items
-page_title: Create Lists with Long Items | Kendo UI DropDownList
-description: "Learn how to create Kendo UI DropDownLists with long items."
-slug: howto_create_listswith_long_items_dropdownlist
+title: Cascade MultiSelect from DropDownList
+page_title: Cascade MultiSelect from DropDownList | Kendo UI DropDownList
+description: "Learn how to cascade a Kendo UI MultiSelect widget from a Kendo UI DropDownList."
+previous_url: /controls/editors/dropdownlist/how-to/cascade-multiselect-from-ddl
+slug: howto_cascademultiselectfromddl_ddl
 ---
 
-# Create Lists with Long Items
+# Cascade MultiSelects from DropDownLists
 
-The example below demonstrates how to create Kendo UI DropDownLists with long items.
-
-###### Example
-
-```html
-<div id="div">
-    <select id="ddl">
-        <option>lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum</option>
-        <option>item 2</option>
-        <option>item 3</option>
-    </select>
-</div>
-<script>
-    $("#ddl").kendoDropDownList().parent().css("width", "100%");
-</script>
-<style>
-html { font: 12px sans-serif; }
-
-#div { width: 300px; }
-
-.k-list-container .k-item {
-    white-space: nowrap;
-    float: left;
-    clear: left;
-    min-width: 100%;
-    box-sizing: border-box;
-}
-</style>
-```
+To see the example, refer to the article on [cascading a Kendo UI MultiSelect from a Kendo UI DropDownList]({% slug howto_cascade_froma_dropdownlist_multiselect %}).
 
 ## See Also
 
@@ -43,6 +16,7 @@ Other articles on the Kendo UI DropDownList:
 
 * [DropDownList JavaScript API Reference](/api/javascript/ui/dropdownlist)
 * [How to Automatically Adjust the Width of a DropDownList]({% slug howto_automatically_adjust_width_dropdownlist %})
+* [How to Create DropDownLists with Long Items]({% slug howto_create_listswith_long_items_dropdownlist %})
 * [How to Detect Wrapper Focus Events]({% slug howto_detect_wrapper_focus_events_dropdownlist %})
 * [How to Move the Group Label on Top of Items]({% slug howto_move_group_label_ontopof_items_dropdownlist %})
 * [How to Prevent Popup Closure on Scroll]({% slug howto_prevent_popup_closure_onscroll_dropdownlist %})

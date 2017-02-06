@@ -8,7 +8,7 @@ position: 2
 
 # Grouping
 
-The grouping functionality described in the related help article for the [Kendo UI ComboBox widget](/web/combobox/grouping) is applicable to the Kendo UI DropDownList.
+For more information on how use grouping in a Kendo UI DropDownList widget, refer to the article on [grouping the Kendo UI ComboBox widget]({% slug grouping_kendoui_combobox_widget %}). The approaches described in it are applicable for the DropDownList. 
 
 ## See Also
 

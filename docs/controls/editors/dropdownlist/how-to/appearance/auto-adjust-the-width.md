@@ -2,24 +2,26 @@
 title: Adjust Width Automatically
 page_title: Adjust Width Automatically | Kendo UI DropDownList
 description: "Learn how to automatically adjust the width of a Kendo UI DropDownList widget."
+previous_url: /controls/editors/dropdownlist/how-to/auto-adjust-the-width
 slug: howto_automatically_adjust_width_dropdownlist
 ---
 
 # Adjust Width Automatically
 
-The examples below demonstrate how to automatically adjust the width of a DropDownList, depending on its list items.
+You can automatically adjust the width of the DropDownList depending on its list items.
 
-To adjust the width automatically, follow the steps below.
+To achieve this behavior:
 
-**Step 1** Reset the list width of the widget to `auto`. Perform it after initialization.
+1. After the widget is initialized, reset the list width of the widget to `auto`.
+2. In the `adjustDropDownWidth` function, add the scrollbar width to the list width.
 
-**Step 2** Add the scrollbar width to the list width. Perform it in the `adjustDropDownWidth` function.
-
-There are two possible scenarios.
+There are 2 possible scenarios:
 
 **Scenario 1** The DropDownList is already bound when it is opened. In this case, execute `adjustDropDownWidth` in the [`open`](/api/javascript/ui/dropdownlist#events-open) event.
 
 **Scenario 2** The DropDownList triggers a remote request after it is opened. In this case, execute `adjustDropDownWidth` in the [`dataBound`](/api/javascript/ui/dropdownlist#events-dataBound) event.
+
+The following example demonstrates how to automatically adjust the width of a DropDownList depending on its list items.
 
 ###### Example
 

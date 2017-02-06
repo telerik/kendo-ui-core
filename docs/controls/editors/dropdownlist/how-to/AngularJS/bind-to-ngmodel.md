@@ -9,13 +9,13 @@ slug: howto_bindobjectstongmodel_dropdownlist
 
 To bind an object to the `ngModel` in a Kendo UI DropDownList, use the `k-ng-model`.
 
-The `k-ng-model` binding does not update the internal `$dirty` and `$pristine` properties, used by the built-in AngularJS validation. This approach works also for the Kendo UI ComboBox widget. 
+The `k-ng-model` binding does not update the internal `$dirty` and `$pristine` properties that are used by the built-in AngularJS validation. This approach also works for the [Kendo UI ComboBox]({% slug overview_kendoui_combobox_widget %}) widget.
 
 For more information and an example on how to manually set this configuration, refer to the section on [form validation]({% slug angularjs_integration_directives %}#form-validation).
 
 For more information on the differences between the `ng-model` and `k-ng-model` bindings, refer to the section on [scope bindings]({% slug angularjs_integration_directives %}#scope-bindings).
 
-For more information on how to alternatively use the Kendo UI Validator, refer to [this demo](http://demos.telerik.com/kendo-ui/validator/angular) and to the [introductory article on the Validator]({% slug overview_kendoui_validator_widget %}).
+For more information on how to alternatively use the Kendo UI Validator, refer to the [runnable example on validation](http://demos.telerik.com/kendo-ui/validator/angular) and to the [introductory article of the Validator]({% slug overview_kendoui_validator_widget %}).
 
 ## See Also
 

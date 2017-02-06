@@ -5,9 +5,9 @@ description: "Learn how to use a required attribute to validate the Kendo UI Dro
 slug: howto_validate_using_required_attributes_dropdownlist
 ---
 
-# Validate Lists Using Required Attributes
+# Validate Lists by Using Required Attributes
 
-The example below demonstrates how to use a required attribute, along with `ng-model`, to validate a DropDownList in AngularJS applications.
+The following example demonstrates how to validate a DropDownList in AngularJS applications by using a required attribute along with `ng-model`.
 
 ```html
 <div ng-app="inputExample">

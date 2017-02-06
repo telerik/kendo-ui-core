@@ -2,16 +2,19 @@
 title: Prevent Popup Closure on Scroll
 page_title: Prevent Popup Closure on Scroll | Kendo UI DropDownList
 description: "Learn how to prevent popup closure on scrolling when users reach the end of the list in a Kendo UI DropDownList widget."
+previous_url: /controls/editors/dropdownlist/how-to/prevent-close-on-scroll
 slug: howto_prevent_popup_closure_onscroll_dropdownlist
 ---
 
 # Prevent Popup Closure on Scroll
 
-The example below demonstrates how to prevent the closure of the popup when users scroll the dropdown list and reach the end of a Kendo UI DropDownList. Normally, in such cases the browser will start scrolling the page, which will close the dropdown list.
+Normally, when the popup item list is open and the user scrolls it to the end, the browser starts scrolling the page, which closes the drop-down list itself.
+
+The DropDownList widget enables you to prevent this behavior and to make the popup remain open in such cases. The following example demonstrates how to achieve this behavior.
 
 > **Important**  
-> Kendo UI versions 2014.3 and older require a different implementation, namely:  
-> `stopScroll(widget.ul);` instead of `stopScroll(widget.ul.parent());`
+>
+> The Kendo UI 2014.3 and earlier versions require a different approach from the one demonstrated in the example. If you use any of these versions, you can prevent the closure of the popup by implementing the `stopScroll(widget.ul);` configuration instead of the `stopScroll(widget.ul.parent());` one.
 
 ###### Example
 
