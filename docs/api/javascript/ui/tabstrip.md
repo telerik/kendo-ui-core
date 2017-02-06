@@ -244,8 +244,7 @@ Sets an array with the URLs from which the tabs content to be loaded from. If on
         });
     </script>
 
-As from the *Q1 2017* release this option can contain configuration objects that are passed to [`jQuery.ajax`](http://api.jquery.com/jquery.ajax/#jQuery-ajax-settings), used by the widget for remote requests.
-This means that you can set options supported by `jQuery.ajax` via these configuration objects like `cache`, `url`, `type` etc.
+As of the Kendo UI Q1 2017 release, this option can contain configuration objects that are passed to [`jQuery.ajax`](http://api.jquery.com/jquery.ajax/#jQuery-ajax-settings), used by the widget for remote requests. This means that you can set options supported by `jQuery.ajax` through configuration objects such as `cache`, `url`, `type`, and others.
 
     <div id="tabstrip">
         <ul>
