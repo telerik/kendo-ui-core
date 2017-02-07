@@ -8,15 +8,17 @@ position: 1
 
 # ComboBox Overview
 
-The [Kendo UI ComboBox widget](http://demos.telerik.com/kendo-ui/combobox/index) displays a list of values and allows for a single selection from that list. It enables the user to enter custom values through the keyboard. The ComboBox represents a richer version of the `<select>` element and provides support for local and remote data binding, item templates, and configurable options for controlling the list behavior.
+The [Kendo UI ComboBox widget](http://demos.telerik.com/kendo-ui/combobox/index) displays a list of values and allows for a single selection from that list.
 
-To restrict the user input, use the [Kendo UI DropDownList widget](http://demos.telerik.com/kendo-ui/dropdownlist/index).
+It enables the user to enter custom values through the keyboard. The ComboBox represents a richer version of the `<select>` element and provides support for local and remote data binding, item templates, and configurable options for controlling the list behavior.
+
+To restrict the user input, use the [Kendo UI DropDownList](http://demos.telerik.com/kendo-ui/dropdownlist/index).
 
 ## Getting Started
 
 ### Initialize the ComboBox
 
-The Kendo UI ComboBox widget can be initialized in three ways:
+You can initialize the Kendo UI ComboBox widget in any of the following ways:
 
 1. By using the `<option>` tag of an existing `<select>` element with defined data items.
 2. By binding the widget to a local data array and using the `<input>` element.
@@ -25,12 +27,14 @@ The Kendo UI ComboBox widget can be initialized in three ways:
 The ComboBox looks and operates consistently regardless of the initialization type you choose to apply.
 
 > **Important**  
-> * As a ComboBox must be initialized after the DOM is fully loaded, make sure you create it within a `$(document).ready()` statement.
-> * The widget copies any styles and CSS classes from the input element to the wrapper element and visible input.
+> * Verify that you create the ComboBox within a `$(document).ready()` statement because the widget has to be initialized after the DOM is fully loaded.
+> * The widget copies any styles and CSS classes from the `input` element to the `wrapper` element and visible input.
 
-**Use the `<option>` tag of an existing `<select>` element**
+#### Use option Tags of Existing select Elements
 
-The example below demonstrates how to initialize the ComboBox from an existing `<select>` element with defined data items.
+To initialize the ComboBox by binding the widget to a local data array and utilizing the `<select>` element, use the [Data Source component]({% slug overview_kendoui_datasourcecomponent %}). It is an abstraction for local and remote data. Local arrays are appropriate for limited value options.
+
+The following example demonstrates how to initialize the ComboBox by using this approach.
 
 ###### Example
 
@@ -46,13 +50,11 @@ The example below demonstrates how to initialize the ComboBox from an existing `
         });
     </script>
 
-**Bind to a local data array**
+#### Bind to Local Data Arrays
 
-Bind the ComboBox to local data arrays through the [DataSource component]({% slug overview_kendoui_datasourcecomponent %})&mdash;an abstraction for local and remote data.
+To initialize the ComboBox by binding the widget to a local data array and utilizing the `<input>` element, use the [Data Source component]({% slug overview_kendoui_datasourcecomponent %}). It is an abstraction for local and remote data. Local arrays are appropriate for limited value options.
 
-Local arrays are appropriate for limited value options.
-
-The example below demonstrates how to initialize the ComboBox by binding it to local data arrays.
+The following example demonstrates how to initialize the ComboBox by using this approach.
 
 ###### Example
 
@@ -71,13 +73,11 @@ The example below demonstrates how to initialize the ComboBox by binding it to l
       });
     </script>
 
-**Bind to a remote data service**
+#### Bind to Remote Data Services
 
-Bind the ComboBox to remote data arrays through the [DataSource component]({% slug overview_kendoui_datasourcecomponent %})&mdash;an abstraction for local and remote data.
+To initialize the ComboBox by binding the widget to remote data arrays and utilizing the `<input>` element, use the [Data Source component]({% slug overview_kendoui_datasourcecomponent %}). It is an abstraction for local and remote data. Remote data binding is appropriate for larger data sets, so that items are loaded on demand when displayed. You can use the DataSource for serving data from a variety of data services such as [XML](http://en.wikipedia.org/wiki/XML), [JSON](http://en.wikipedia.org/wiki/JSON), and [JSONP](http://en.wikipedia.org/wiki/JSONP).
 
-Remote data binding is appropriate for larger data sets, so that items are loaded on demand when displayed. The DataSource can be used to serve data from a variety of data services, such as [XML](http://en.wikipedia.org/wiki/XML), [JSON](http://en.wikipedia.org/wiki/JSON), and [JSONP](http://en.wikipedia.org/wiki/JSONP).
-
-The example below demonstrates how to initialize the ComboBox by binding it to a remote data service.
+The following example demonstrates how to initialize the ComboBox by using this approach.
 
 ###### Example
 
@@ -106,9 +106,13 @@ The example below demonstrates how to initialize the ComboBox by binding it to a
 
 The ComboBox uses [Kendo UI templates](/framework/templates/overview) to provide full control over the way pop-up items are rendered.
 
+For more information on the capabilities and syntax of the templates, refer to the [documentation]({% slug overview_kendoui_templatescomponent %}).
+
 ### Item Templates
 
-The example below demonstrates how to define an item template.
+The item template manages the way the list items of a ComboBox are rendered.  
+
+The following example demonstrates how to define an item template.
 
 ###### Example
 
@@ -139,7 +143,9 @@ The example below demonstrates how to define an item template.
 
 ### Header Templates
 
-The ComboBox allows you to render a pop-up header. The example below demonstrates how to define a header template.
+The header template manages the way the pop-up header of a ComboBox is rendered.
+
+The ComboBox allows you to render a pop-up header. The following example demonstrates how to define a header template.
 
 ###### Example
 
@@ -170,9 +176,9 @@ The ComboBox allows you to render a pop-up header. The example below demonstrate
 
 ### Footer Templates
 
-The ComboBox allows you to render a pop-up footer. The footer is re-rendered on every DataSource change. The context of the template is the widget itself.
+The footer template manages the way the pop-up footer of a ComboBox is rendered. The footer is re-rendered on every change of the Data Source. The context of the template is the widget itself.
 
-The example below demonstrates how to define a footer template.
+The following example demonstrates how to define a footer template.
 
 ###### Example
 
@@ -205,11 +211,11 @@ The example below demonstrates how to define a footer template.
 
 The ComboBox widget displays `noDataTemplate` in the popup when the data source is empty.
 
-The example below demonstrates how to define a `noDataTemplate` template.
+The following example demonstrates how to define a `noDataTemplate` template.
 
 > **Important**
 >
-> When the `noDataTemplate` option is defined, the widget will always open the popup element.
+> When the `noDataTemplate` option is defined, the widget always opens the popup element.
 
 ###### Example
 
@@ -240,7 +246,7 @@ The example below demonstrates how to define a `noDataTemplate` template.
 
 ## Configuration
 
-### Change of Drop-Down List Width
+### Change the List Width
 
 To customize the width of a drop-down list and change its dimensions, use the jQuery `width()` method.
 
@@ -255,9 +261,9 @@ To customize the width of a drop-down list and change its dimensions, use the jQ
         combobox.list.width(400);
     </script>
 
-### Adjustment of the Popup Width
+### Adjust the Popup Width
 
-It is possible to let the popup element automatically adjust its width according to the length of the item label it displays. When the `autoWidth` option is set to `true`, the popup shows the content on one line and does not wrap it up.
+You can let the popup element automatically adjust its width according to the length of the item label it displays. When the `autoWidth` option is set to `true`, the popup shows the content on one line and does not wrap it up.
 
 ###### Example
 
@@ -271,7 +277,7 @@ It is possible to let the popup element automatically adjust its width according
     });
     </script>
 
-### Access of Drop-Down List Element
+### Access *-list Elements
 
 The drop-down list renders an ID attribute, generated from the ID of the widget and the `-list` suffix.
 
@@ -297,19 +303,21 @@ The ID can be used to style the element or to access a specific element inside t
       });
     </script>
 
-### Support for label Elements
+### Support label Elements
 
 Because of its complex rendering, the focusing of the widget by using a `label` element requires additional implementation. For more information on how to do it, refer to [this Kendo UI Dojo snippet](http://dojo.telerik.com/uSeho).
 
-### Input Removal
+### Remove Input Values
 
-The ComboBox enables you to remove the values from the input area of the widget through the `clearButton` configuration option. By default, it is enabled and set to `true`. As a result, a **x** button appears in the input area on hover. When clicked, it resets the value of the widget and triggers the `change` event.
+The ComboBox enables you to remove the values from the input area of the widget through the `clearButton` configuration option. By default, the option is enabled and is set to `true`. As a result, a **x** button appears in the input area on hover. When clicked, it resets the value of the widget and triggers the `change` event.
 
 ## Reference
 
 ### Existing Instances
 
-You can refer an existing ComboBox widget via [jQuery.data()](http://api.jquery.com/jQuery.data/):
+To refer an existing ComboBox widget, use the [jQuery.data()](http://api.jquery.com/jQuery.data/) configuration option.
+
+###### Example
 
     <input id="comboBox" />
 

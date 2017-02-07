@@ -2,12 +2,13 @@
 title: Select the First Item on TAB
 page_title: Select the First Item on TAB | Kendo UI MultiSelect
 description: "Learn how to select the first item from the popup on a TAB keypress in the Kendo UI MultiSelect widget."
+previous_url: /controls/editors/multiselect/how-to/select-on-tab
 slug: howto_select_thefirst_itemon_tab_multiselect
 ---
 
 # Select the First Item on TAB
 
-The example below demonstrates how to select the first item from the popup on a `Tab` keypress in the Kendo UI MultiSelect widget.
+The following example demonstrates how to select the first item from the popup on a `Tab` key-press in a Kendo UI MultiSelect widget.
 
 ###### Example
 

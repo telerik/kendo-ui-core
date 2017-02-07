@@ -2,12 +2,13 @@
 title: Create Cascading MultiSelects
 page_title: Create Cascading MultiSelects | Kendo UI MultiSelect
 description: "Learn how to create cascading Kendo UI MultiSelect widgets."
+previous_url: /controls/editors/multiselect/how-to/cascading-multiselects
 slug: howto_create_cascading_widgets_multiselect
 ---
 
 # Create Cascading MultiSelects
 
-The example below demonstrates how to cascade multiple Kendo UI MultiSelect widgets.
+The following example demonstrates how to cascade multiple Kendo UI MultiSelect widgets.
 
 ###### Example
 

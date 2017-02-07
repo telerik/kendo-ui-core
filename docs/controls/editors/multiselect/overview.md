@@ -8,13 +8,15 @@ position: 1
 
 # MultiSelect Overview
 
-The [Kendo UI MultiSelect widget](http://demos.telerik.com/kendo-ui/multiselect/index) displays a list of options and allows multiple selections from this list. The widget represents a richer version of the `<select>` element and provides support for local and remote data binding, item and tag templates, and configurable options for controlling the list behavior.
+The [Kendo UI MultiSelect widget](http://demos.telerik.com/kendo-ui/multiselect/index) displays a list of options and allows multiple selections from this list.
+
+The widget represents a richer version of the `<select>` element and provides support for local and remote data binding, item and tag templates, and configurable options for controlling the list behavior.
 
 ## Getting Started
 
 ### Initialize the MultiSelect
 
-The Kendo UI MultiSelect widget can be initialized in three ways:
+You can initialize the Kendo UI MultiSelect widget in any of the following ways:
 
 1. By using the `<option>` tag of an existing `<select>` element with defined data items.
 2. By binding the widget to a local data array and using the `<select>` element.
@@ -23,12 +25,14 @@ The Kendo UI MultiSelect widget can be initialized in three ways:
 The MultiSelect looks and operates consistently regardless of the initialization type you choose to apply.
 
 > **Important**
-> * As a MultiSelect must be initialized after the DOM is fully loaded, make sure you create it within a `$(document).ready()` statement.
-> * The widget copies any styles and CSS classes from the input element to the wrapper element and visible input.
+> * Verify that you create the MultiSelect within a `$(document).ready()` statement because the widget has to be initialized after the DOM is fully loaded.
+> * The widget copies any styles and CSS classes from the `input` element to the `wrapper` element and visible input.
 
-**Use the `<option>` tag of an existing `<select>` element**
+#### Use option Tags of Existing select Elements
 
-The example below demonstrates how to initialize the MultiSelect from an existing `<select>` element with defined data items.
+To initialize the MultiSelect by binding the widget to a local data array and utilizing the `<select>` element, use the [Data Source component]({% slug overview_kendoui_datasourcecomponent %}). It is an abstraction for local and remote data. Local arrays are appropriate for limited value options.
+
+The following example demonstrates how to initialize the MultiSelect by using this approach.
 
 ###### Example
 
@@ -44,13 +48,11 @@ The example below demonstrates how to initialize the MultiSelect from an existin
         });
     </script>
 
-**Bind to a local data array**
+#### Bind to Local Data Arrays
 
-Bind the MultiSelect to local data arrays through the [DataSource component]({% slug overview_kendoui_datasourcecomponent %})&mdash;an abstraction for local and remote data.
+To initialize the MultiSelect by binding the widget to a local data array and utilizing the `<input>` or the `<select>` element, use the [Data Source component]({% slug overview_kendoui_datasourcecomponent %}). It is an abstraction for local and remote data. Local arrays are appropriate for limited value options.
 
-Local arrays are appropriate for limited value options.
-
-The example below demonstrates how to initialize the MultiSelect by binding it to local data arrays.
+The following example demonstrates how to initialize the MultiSelect by using this approach.
 
 ###### Example
 
@@ -69,13 +71,11 @@ The example below demonstrates how to initialize the MultiSelect by binding it t
       });
     </script>
 
-**Bind to a remote data service**
+#### Bind to Remote Data Services
 
-Bind the MultiSelect to remote data arrays through the [DataSource component]({% slug overview_kendoui_datasourcecomponent %})&mdash;an abstraction for local and remote data.
+To initialize the MultiSelect by binding the widget to remote data arrays and utilizing the `<input>` or the `<select>` element, use the [Data Source component]({% slug overview_kendoui_datasourcecomponent %}). It is an abstraction for local and remote data. Remote data binding is appropriate for larger data sets, so that items are loaded on demand when displayed. You can use the DataSource for serving data from a variety of data services such as [XML](http://en.wikipedia.org/wiki/XML), [JSON](http://en.wikipedia.org/wiki/JSON), and [JSONP](http://en.wikipedia.org/wiki/JSONP).
 
-Remote data binding is appropriate for larger data sets, so that items are loaded on-demand, when displayed. The DataSource can be used to serve data from a variety of data services, such as [XML](http://en.wikipedia.org/wiki/XML), [JSON](http://en.wikipedia.org/wiki/JSON), and [JSONP](http://en.wikipedia.org/wiki/JSONP).
-
-The example below demonstrates how to initialize the MultiSelect by binding it to a remote data service.
+The following example demonstrates how to initialize the MultiSelect by using this approach.
 
 ###### Example
 
@@ -102,9 +102,13 @@ The example below demonstrates how to initialize the MultiSelect by binding it t
 
 The MultiSelect uses [Kendo UI templates](/framework/templates/overview) to provide full control over the way an item, a tag, or a header is rendered.
 
+For more information on the capabilities and syntax of the templates, refer to the [documentation]({% slug overview_kendoui_templatescomponent %}).
+
 ### Item Templates
 
-The example below demonstrates how to define an item template.
+The item template manages the way the list items of a MultiSelect are rendered.  
+
+The following example demonstrates how to define an item template.
 
 ###### Example
 
@@ -135,7 +139,9 @@ The example below demonstrates how to define an item template.
 
 ### Tag Templates
 
-The example below demonstrates how to define a tag template.
+The value template manages the way the tag of a MultiSelect is rendered.
+
+The following example demonstrates how to define a tag template.
 
 ###### Example
 
@@ -166,9 +172,9 @@ The example below demonstrates how to define a tag template.
 
 ### Header Templates
 
-The MultiSelect allows you to render a pop-up header.
+The header template manages the way the pop-up header of a MultiSelect is rendered.
 
-The example below demonstrates how to define a header template.
+The following example demonstrates how to define a header template.
 
 ###### Example
 
@@ -199,9 +205,9 @@ The example below demonstrates how to define a header template.
 
 ### Footer Templates
 
-The MultiSelect allows you to render a pop-up footer. The footer is re-rendered on every DataSource change. The context of the template is the widget itself.
+The footer template manages the way the pop-up footer of a MultiSelect is rendered. The footer is re-rendered on every change of the Data Source. The context of the template is the widget itself.
 
-The example below demonstrates how to define a footer template.
+The following example demonstrates how to define a footer template.
 
 ###### Example
 
@@ -234,11 +240,11 @@ The example below demonstrates how to define a footer template.
 
 The MultiSelect widget displays `noDataTemplate` in the popup when the data source is empty.
 
-The example below demonstrates how to define a `noDataTemplate` template.
+The following example demonstrates how to define a `noDataTemplate` template.
 
 > **Important**
 >
-> When the `noDataTemplate` option is defined, the widget will always open the popup element.
+> When the `noDataTemplate` option is defined, the widget always opens the popup element.
 
 ###### Example
 
@@ -269,9 +275,9 @@ The example below demonstrates how to define a `noDataTemplate` template.
 
 ## Configuration
 
-### Change of Drop-Down List Width
+### Change the List Width
 
-Customize the width of a drop-down list and change its dimensions by using the jQuery `width()` method.
+To customize the width of a drop-down list and change its dimensions, use the jQuery `width()` method.
 
 ###### Example
 
@@ -284,9 +290,9 @@ Customize the width of a drop-down list and change its dimensions by using the j
         multiselect.list.width(400);
     </script>
 
-### Adjustment of the Popup Width
+### Adjust the Popup Width
 
-It is possible to let the popup element automatically adjust its width according to the length of the item label it displays. When the `autoWidth` option is set to `true`, the popup shows the content on one line and does not wrap it up.
+You can let the popup element automatically adjust its width according to the length of the item label it displays. When the `autoWidth` option is set to `true`, the popup shows the content on one line and does not wrap it up.
 
 ###### Example
 
@@ -300,7 +306,7 @@ It is possible to let the popup element automatically adjust its width according
     });
     </script>
 
-### Access of Drop-Down List Element
+### Access *-list Elements
 
 The drop-down list renders an ID attribute, generated from the ID of the widget and the `-list` suffix.
 
@@ -326,11 +332,11 @@ The ID can be used to style the element or to access a specific element inside t
       });
     </script>
 
-### Pre-Selected Values
+### Preselect Values
 
 When the `autoBind` option is set to `false` you need to specify a list of data items instead of just list of strings. This functionality is supported in 2013 Q1 SP1 release and later versions of Kendo UI.
 
-The example below demonstrates how to pre-select values on initial loading.
+The following example demonstrates how to pre-select values on initial loading.
 
 ###### Example
 
@@ -359,17 +365,17 @@ The example below demonstrates how to pre-select values on initial loading.
         });
     </script>
 
-### Scrollable Content
+### Manage Scrollable Content
 
-By design, when adding items that do not fit in the existing free space, the MultiSelect expands vertically. To achieve limited expansion and scrolling, use CSS and JavaScript code. [The example in the Dojo](http://dojo.telerik.com/axeMa) demonstrates how to do this.
+By design, when the user adds items that do not fit in the existing free space, the MultiSelect expands vertically. To achieve limited expansion and scrolling, refer to the Dojo example on how to handle this issue by [using CSS and JavaScript code](http://dojo.telerik.com/axeMa).
 
-### Support for label Element
+### Support label Elements
 
-Because of its complex rendering, focusing the widget by using a label element requires additional implementation. For more information about how to do it, check this [Kendo UI Dojo snippet](http://dojo.telerik.com/uSeho).
+Because of its complex rendering, focusing the widget by using a `label` element requires additional implementation. For more information about how to do it, check [this Kendo UI Dojo snippet](http://dojo.telerik.com/uSeho).
 
-### Input Removal
+### Remove Input Values
 
-The MultiSelect enables you to remove the values from the input area of the widget through the `clearButton` configuration option. By default, it is enabled and set to `true`. As a result, a **x** button appears in the input area on hover. When clicked, it resets the value of the widget and triggers the `change` event.
+The MultiSelect enables you to remove the values from the input area of the widget through the `clearButton` configuration option. By default, the option is enabled and is set to `true`. As a result, a **x** button appears in the input area on hover. When clicked, it resets the value of the widget and triggers the `change` event.
 
 ## See Also
 

@@ -8,13 +8,15 @@ position: 1
 
 # AutoComplete Overview
 
-The [Kendo UI AutoComplete widget](http://demos.telerik.com/kendo-ui/autocomplete/index) provides suggestions depending on the typed text. It also allows multiple value entries. The suggestions shown by the widget can come from a local array or from a remote data service.
+The [Kendo UI AutoComplete widget](http://demos.telerik.com/kendo-ui/autocomplete/index) provides suggestions depending on the typed text.
+
+It also allows multiple value entries. The suggestions shown by the widget can come from a local array or from a remote data service.
 
 ## Getting Started
 
 ### Initialize the AutoComplete
 
-Initialize the AutoComplete widget by using a jQuery selector.
+To initialize the AutoComplete widget, use a jQuery selector.
 
 ###### Example
 
@@ -26,7 +28,7 @@ Initialize the AutoComplete widget by using a jQuery selector.
 
 > **Important**
 >
-> The widget copies any styles and CSS classes from the input element to the wrapper element.
+> The widget copies any styles and CSS classes from the `input` element to the `wrapper` element.
 
 ###### Example
 
@@ -40,20 +42,23 @@ Initialize the AutoComplete widget by using a jQuery selector.
 
 ## Configuration
 
-### Suggestions
+### Manage Suggestions
 
-There are two primary ways to provide AutoComplete suggestions:
+To provide AutoComplete suggestions, you can use either of the 2 primary ways:
 
-1.  From a local data array
-2.  From a remote data service
+1.  Bind to a local data array.
+2.  Bind to a remote data service.
 
 Locally defined values are best for small, fixed sets of suggestions. Remote suggestions must be used for larger data sets. When used with the `DataSource` component, the filtering of large remote data services can be pushed to the server as well, which maximizes the client-side performance.
 
-**Bind to a local data array**
+#### Bind to Local Data Arrays
 
-To configure and provide the AutoComplete suggestions locally, either pass an array directly to its constructor, or set the `dataSource` property to a local array.
+To configure and provide the AutoComplete suggestions locally, either:
 
-To directly initialize a local data array in `constructor`, follow the example below.
+* Pass an array directly to its constructor, or
+* Set the `dataSource` property to a local array.
+
+To directly initialize a local data array in `constructor`, refer to the following example.
 
 ###### Example
 
@@ -63,7 +68,7 @@ To directly initialize a local data array in `constructor`, follow the example b
         $("#autoComplete").kendoAutoComplete(["Item1", "Item2", "Item3"]);
     </script>
 
-To bind the widget to a local data array by using the `dataSource` property, follow the example below.
+To bind the widget to a local data array by using the `dataSource` property, refer to the following example.
 
 ###### Example
 
@@ -75,13 +80,11 @@ To bind the widget to a local data array by using the `dataSource` property, fol
         });
     </script>
 
-**Bind to a remote data service**
+#### Bind to Remote Data Services
 
-To bind an AutoComplete to a remote data service, use the [DataSource component]({% slug overview_kendoui_datasourcecomponent %})&mdash;an abstraction for local and remote data.
+To initialize the AutoComplete by binding the widget to a remote data service, use the [Data Source component]({% slug overview_kendoui_datasourcecomponent %}). It is an abstraction for local and remote data. Remote data binding is appropriate for larger data sets, so that items are loaded on demand when displayed. You can use the DataSource for serving data from a variety of data services such as [XML](http://en.wikipedia.org/wiki/XML), [JSON](http://en.wikipedia.org/wiki/JSON), and [JSONP](http://en.wikipedia.org/wiki/JSONP).
 
-The DataSource can be used to serve data from a variety of data services, such as [XML](http://en.wikipedia.org/wiki/XML), [JSON](http://en.wikipedia.org/wiki/JSON), and [JSONP](http://en.wikipedia.org/wiki/JSONP).
-
-To bind the widget to a remote data service by using oData through the DataSource component, follow the example below.
+To bind the widget to a remote data service by using oData through the Data Source component, refer to the following example.
 
 ###### Example
 
@@ -98,7 +101,7 @@ To bind the widget to a remote data service by using oData through the DataSourc
         });
     });
 
-To bind the widget to a JSONP service by using the Kendo UI DataSource, follow the example below.
+To bind the widget to a JSONP service by using the Data Source component, refer to the following example.
 
 ###### Example
 
@@ -130,9 +133,9 @@ To bind the widget to a JSONP service by using the Kendo UI DataSource, follow t
      })
     });
 
-### Change of Drop-Down List Width
+### Change the List Width
 
-To customize the width of a drop-down list and change its dimensions by using the jQuery `width()` method, follow the example below.
+To customize the width of a drop-down list and change its dimensions, use the jQuery `width()` method.
 
 ###### Example
 
@@ -145,9 +148,9 @@ To customize the width of a drop-down list and change its dimensions by using th
         autoComplete.list.width(400);
     </script>
 
-### Adjustment of the Popup Width
+### Adjust the Popup Width
 
-It is possible to let the popup element automatically adjust its width according to the length of the item label it displays. When the `autoWidth` option is set to `true`, the popup shows the content on one line and does not wrap it up.
+You can let the popup element automatically adjust its width according to the length of the item label it displays. When the `autoWidth` option is set to `true`, the popup shows the content on one line and does not wrap it up.
 
 ###### Example
 
@@ -162,7 +165,7 @@ It is possible to let the popup element automatically adjust its width according
     </script>
 
 
-### Access of Drop-Down List Element
+### Access *-list Elements
 
 The drop-down list renders an ID attribute, generated from the ID of the widget and the `-list` suffix.
 
@@ -188,19 +191,21 @@ The ID can be used to style the element or to access a specific element inside t
       });
     </script>
 
-### Input Removal
+### Remove Input Values
 
-The AutoComplete enables you to remove the values from the input area of the widget through the `clearButton` configuration option. By default, it is enabled and set to `true`. As a result, a **x** button appears in the input area on hover. When clicked, it resets the value of the widget and triggers the `change` event.
+The AutoComplete enables you to remove the values from the input area of the widget through the `clearButton` configuration option. By default, the option is enabled and is set to `true`. As a result, a **x** button appears in the input area on hover. When clicked, it resets the value of the widget and triggers the `change` event.
 
 ## Templates
 
-The AutoComplete widget uses Kendo UI templates to enable control over the way an item and a pop-up header is rendered. For more information on the capabilities and syntax of the templates, refer to the [documentation]({% slug overview_kendoui_templatescomponent %}).
+The AutoComplete uses [Kendo UI templates](/framework/templates/overview) to provide full control over the way an item and a pop-up header is rendered.
+
+For more information on the capabilities and syntax of the templates, refer to the [documentation]({% slug overview_kendoui_templatescomponent %}).
 
 ### Item Templates
 
-The AutoComplete widget uses Kendo UI templates to control the way drop-down items are rendered.
+The item template manages the way the list items of an AutoComplete are rendered.  
 
-The example below demonstrates how to define an item template.
+The following example demonstrates how to define an item template.
 
 ###### Example
 
@@ -230,9 +235,9 @@ The example below demonstrates how to define an item template.
 
 ### Header Templates
 
-The AutoComplete widget provides the rendering of a pop-up header.
+The header template manages the way the pop-up header of an AutoComplete is rendered.
 
-The example below demonstrates how to define a header template.
+The following example demonstrates how to define a header template.
 
 ###### Example
 
@@ -262,9 +267,9 @@ The example below demonstrates how to define a header template.
 
 ### Footer Templates
 
-The AutoComplete allows you to render a pop-up footer. The footer is re-rendered on every DataSource change. The context of the template is the widget itself.
+The footer template manages the way the pop-up footer of an AutoComplete is rendered. The footer is re-rendered on every change of the Data Source. The context of the template is the widget itself.
 
-The example below demonstrates how to define a footer template.
+The following example demonstrates how to define a footer template.
 
 ###### Example
 
@@ -296,11 +301,11 @@ The example below demonstrates how to define a footer template.
 
 The AutoComplete widget displays `noDataTemplate` in the popup when the data source is empty.
 
-The example below demonstrates how to define a `noDataTemplate` template.
+The following example demonstrates how to define a `noDataTemplate` template.
 
 > **Important**
 >
-> When the `noDataTemplate` option is defined, the widget will always open the popup element.
+> When the `noDataTemplate` option is defined, the widget always opens the popup element.
 
 ###### Example
 

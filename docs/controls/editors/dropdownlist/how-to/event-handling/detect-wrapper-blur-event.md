@@ -1,12 +1,12 @@
 ---
-title: Detect Wrapper Blur Events
-page_title: Detect Wrapper Blur Events | Kendo UI DropDownList
-description: "Learn how to detect the Kendo UI DropDownList wrapper blur event."
+title: Detect Wrapper blur Events
+page_title: Detect Wrapper blur Events | Kendo UI DropDownList
+description: "Learn how to detect the blur event of the Kendo UI DropDownList wrapper."
 previous_url: /controls/editors/dropdownlist/how-to/detect-wrapper-blur-event
 slug: howto_detect_wrapper_blur_events_dropdownlist
 ---
 
-# Detect Wrapper Blur Events
+# Detect Wrapper blur Events
 
 The following example demonstrates how to detect the `blur` event of the Kendo UI DropDownList wrapper.
 

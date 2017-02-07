@@ -1,13 +1,14 @@
 ---
-title: Use MultiSelect with Bootstrap Modal Window
-page_title: Use MultiSelect with Bootstrap Modal Window | Kendo UI MultiSelect
+title: Use MultiSelects with Bootstrap Modal Windows
+page_title: Use MultiSelects with Bootstrap Modal Windows | Kendo UI MultiSelect
 description: "Learn how to use the Kendo UI MultiSelect widget with a Bootstrap modal window."
+previous_url: /controls/editors/multiselect/how-to/using-widget-with-boostrap-modal
 slug: howto_use_multiselect_with_bootstrap_modal_window_multiselect
 ---
 
-# Use MultiSelect with Bootstrap Modal Window
+# Use MultiSelects with Bootstrap Modal Windows
 
-The example below demonstrates how to use the Kendo UI MultiSelect widget with a Bootstrap modal window and bind values.
+The following example demonstrates how to use the Kendo UI MultiSelect widget with a Bootstrap modal window and bind values.
 
 ###### Example
 

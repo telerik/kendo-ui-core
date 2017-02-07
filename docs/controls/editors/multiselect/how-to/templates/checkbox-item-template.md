@@ -1,13 +1,14 @@
 ---
-title: Create Checkbox Custom Item Template
-page_title: Create Checkbox Custom Item Template | Kendo UI MultiSelect
-description: "Learn how to create a multiselect with checkboxes"
+title: Create Checkbox Custom Item Templates
+page_title: Create Checkbox Custom Item Templates | Kendo UI MultiSelect
+description: "Learn how to create a Kendo UI MultiSelect with checkboxes."
+previous_url: /controls/editors/multiselect/how-to/checkbox-item-template
 slug: howto_checkbox_custom_item_template_multiselect
 ---
 
-# Create Checkbox Custom Item Template
+# Create Checkbox Custom Item Templates
 
-The example below demonstrates how to create a Kendo UI MultiSelect widget with checkboxes.
+The following example demonstrates how to create a Kendo UI MultiSelect widget with checkboxes.
 
 ###### Example
 

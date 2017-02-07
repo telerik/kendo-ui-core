@@ -1,14 +1,14 @@
 ---
 title: Expand Backgrounds of Long List Items
 page_title: Expand Backgrounds of Long List Items | Kendo UI DropDownList
-description: "Learn how to expand the background of long list items in Kendo UI ComboBox, AutoComplete, DropDownList, and MultiSelect widgets."
+description: "Learn how to expand the background of long list items in the Kendo UI ComboBox, AutoComplete, DropDownList, and MultiSelect widgets."
 previous_url: /controls/editors/dropdownlist/how-to/expand-list-item-background
 slug: howto_expand_background_longlist_items_dropdownlist
 ---
 
 # Expand Backgrounds of Long List Items
 
-To see the example, refer to the article on [expanding the background of long list items in Kendo UI DropDownLists]({% slug howto_expand_background_longlist_items_combobox %}).
+To see the example, refer to the article on [expanding the background of long list items in Kendo UI ComboBoxes]({% slug howto_expand_background_longlist_items_combobox %}).
 
 ## See Also
 

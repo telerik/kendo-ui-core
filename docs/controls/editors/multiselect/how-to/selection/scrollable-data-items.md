@@ -1,14 +1,14 @@
 ---
-title: Scroll the Selected Items
-page_title: Scroll the Selected Items | Kendo UI MultiSelect
+title: Scroll Selected Items
+page_title: Scroll Selected Items | Kendo UI MultiSelect
 description: "Learn how to create scrollable data items in the Kendo UI MultiSelect widget."
-previous_url: /controls/editors/multiselect/how-to/scrollbale-data-items, /web/multiselect/how-to/scrollbale-data-items
+previous_url: /controls/editors/multiselect/how-to/scrollbale-data-items, /web/multiselect/how-to/scrollbale-data-items, /controls/editors/multiselect/how-to/scrollable-data-items
 slug: howto_create_scrollable_data_items_multiselect
 ---
 
-# Scroll the Selected Items
+# Scroll Selected Items
 
-The example below demonstrates how to create a scrollable list of the selected items in a Kendo UI MultiSelect widget.
+The following example demonstrates how to create a scrollable list of the selected items in a Kendo UI MultiSelect widget.
 
 ###### Example
 

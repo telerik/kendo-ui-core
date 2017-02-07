@@ -2,12 +2,13 @@
 title: Select All Values with Single Selection
 page_title: Select All Values with Single Selection | Kendo UI MultiSelect
 description: "Learn how to create a dataItem that holds an all- value that will select all the items in the Kendo UI MultiSelect widget."
+previous_url: /controls/editors/multiselect/how-to/select-all-values-with-one-selection
 slug: howto_select_allvalues_witha_single_selection_multiselect
 ---
 
 # Select All Values with Single Selection
 
-The example below demonstrates how to create a `dataItem` that holds an `all`-value, which selects all items in the Kendo UI MultiSelect widget.
+The following example demonstrates how to create a `dataItem` that holds an `all`-value, which selects all items in the Kendo UI MultiSelect widget.
 
 ###### Example
 

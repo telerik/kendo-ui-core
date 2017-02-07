@@ -1,20 +1,20 @@
 ---
-title: Use MultiSelect for Column Filtering in Grid
-page_title: Use MultiSelect for Column Filtering in Grid | Kendo UI MultiSelect
-description: "Learn how to use the Kendo UI MultiSelect for column filtering in the Kendo UI Grid widget."
-slug: howto_usemultiselectforgridcolumnfiltering_multiselect
+title: Expand Backgrounds of Long List Items
+page_title: Expand Backgrounds of Long List Items | Kendo UI MultiSelect
+description: "Learn how to expand the background of long list items in the Kendo UI ComboBox, AutoComplete, DropDownList, and MultiSelect widgets."
+previous_url: /controls/editors/multiselect/how-to/expand-list-item-background
+slug: howto_expand_background_longlist_items_multiselect
 ---
 
-# Use MultiSelect for Column Filtering in Grid
+# Expand Backgrounds of Long List Items
 
-To see the example on how to use Kendo UI MultiSelect as a column filter for the Grid, refer to [this how-to article]({% slug howto_use_multiselect_forcolumn_filtering_grid %}).
+To see the example, refer to the article on [expanding the background of long list items in Kendo UI ComboBoxes]({% slug howto_expand_background_longlist_items_combobox %}).
 
 ## See Also
 
 Other articles on the Kendo UI MultiSelect:
 
 * [MultiSelect JavaScript API Reference](/api/javascript/ui/multiselect)
-* [How to Cascade from DropDownList]({% slug howto_cascade_froma_dropdownlist_multiselect %})
 * [How to Filter Values in Widgets Sharing the Same Data]({% slug howto_filter_valuesin_widgetswith_shared_data_multiselect %})
 * [How to Preselect Items Using MVVM Binding]({% slug howto_preselect_items_byusing_mvvm_binding_multiselect %})
 * [How to Reorder Selected Items]({% slug howto_reorder_selected_items_multiselect %})

@@ -1,13 +1,16 @@
 ---
-title: Use MultiSelect as Column Editor in Grid
-page_title: Use MultiSelect as Column Editor in Grid | Kendo UI MultiSelect
+title: Use MultiSelects as Column Editors in Grids
+page_title: Use MultiSelects as Column Editors in Grids | Kendo UI MultiSelect
 description: "Learn how to use a Kendo UI MultiSelect for a column editor in the Kendo UI Grid."
+previous_url: /controls/editors/multiselect/how-to/use-multiselect-column-editor-grid
 slug: howto_usemultiselectgridcolumneditor
 ---
 
-# Use MultiSelect as Column Editor in Grid
+# Use MultiSelects as Column Editors in Grids
 
-To see the example on how to use a Kendo UI MultiSelect for a column editor in the Kendo UI Grid, refer to [this project](https://github.com/telerik/kendo-examples-asp-net-mvc/tree/master/multiselect-in-grid). It is available in the [GitHub repository for Kendo UI examples using ASP.NET MVC](https://github.com/telerik/kendo-examples-asp-net-mvc).
+To see the example, refer to the project on [using the Kendo UI MultiSelect for a column editor in the Grid](https://github.com/telerik/kendo-examples-asp-net-mvc/tree/master/multiselect-in-grid).
+
+It is available in the GitHub repository for the [Kendo UI examples that use ASP.NET MVC](https://github.com/telerik/kendo-examples-asp-net-mvc).
 
 ## See Also
 

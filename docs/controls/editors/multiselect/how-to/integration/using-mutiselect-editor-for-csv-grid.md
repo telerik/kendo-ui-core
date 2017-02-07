@@ -1,19 +1,21 @@
 ---
-title: Expand Backgrounds of Long List Items
-page_title: Expand Backgrounds of Long List Items | Kendo UI MultiSelect
-description: "Learn how to expand the background of long list items in Kendo UI ComboBox, AutoComplete, DropDownList, and MultiSelect widgets."
-slug: howto_expand_background_longlist_items_multiselect
+title: Use MultiSelects as CSV Editors in Grids
+page_title: Use MultiSelects as CSV Editors in Grids | Kendo UI MultiSelect
+description: "Learn how to use the Kendo UI MultiSelect as an editor for comma-separated string fields in the Kendo UI Grid widget."
+previous_url: /controls/editors/multiselect/how-to/using-mutiselect-editor-for-csv-grid
+slug: howto_usemultiselecteditorcsvgrid_multiselect
 ---
 
-# Expand Backgrounds of Long List Items
+# Use MultiSelects as CSV Editors in Grids
 
-To see the example on how to expand the background of long list items in a Kendo UI MultiSelect, refer to [this article]({% slug howto_expand_background_longlist_items_combobox %}).
+To see the example, refer to the article on implementing and using custom binding for the [Kendo UI MultiSelect to edit a string field that contains a list of comma-separated values]({% slug howto_usethe_multiselect_aseditor_commaseparated_stringfields_grid %}).
 
 ## See Also
 
 Other articles on the Kendo UI MultiSelect:
 
 * [MultiSelect JavaScript API Reference](/api/javascript/ui/multiselect)
+* [How to Cascade from DropDownList]({% slug howto_cascade_froma_dropdownlist_multiselect %})
 * [How to Filter Values in Widgets Sharing the Same Data]({% slug howto_filter_valuesin_widgetswith_shared_data_multiselect %})
 * [How to Preselect Items Using MVVM Binding]({% slug howto_preselect_items_byusing_mvvm_binding_multiselect %})
 * [How to Reorder Selected Items]({% slug howto_reorder_selected_items_multiselect %})

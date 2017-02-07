@@ -1,12 +1,12 @@
 ---
-title: Detect Input Change Events
-page_title: Detect Input Change Events | Kendo UI DropDownList
+title: Detect Input change Events
+page_title: Detect Input change Events | Kendo UI DropDownList
 description: "Learn how to detect the Kendo UI DropDownList input change event."
 previous_url: /controls/editors/dropdownlist/how-to/detect-input-change-event
 slug: howto_detect_input_change_events_dropdownlist
 ---
 
-# Detect Input Change Events
+# Detect Input change Events
 
 The `change` event of the DropDownList fires when the value of the widget is changed by the user.
 

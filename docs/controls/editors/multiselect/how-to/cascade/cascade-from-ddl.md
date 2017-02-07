@@ -1,13 +1,14 @@
 ---
-title: Cascade from DropDownList
-page_title: Cascade from DropDownList | Kendo UI MultiSelect
+title: Cascade from DropDownLists
+page_title: Cascade from DropDownLists | Kendo UI MultiSelect
 description: "Learn how to cascade the Kendo UI MultiSelect widget from a Kendo UI DropDownList."
+previous_url: /controls/editors/multiselect/how-to/cascade-from-ddl
 slug: howto_cascade_froma_dropdownlist_multiselect
 ---
 
-# Cascade from DropDownList
+# Cascade from DropDownLists
 
-The example below demonstrates how to cascade the Kendo UI MultiSelect from a Kendo UI DropDownList.
+The following example demonstrates how to cascade the Kendo UI MultiSelect from a Kendo UI DropDownList.
 
 ###### Example
 

@@ -2,6 +2,7 @@
 title: Prevent the Deletion of Selected Items on Backspace
 page_title: Prevent the Deletion of Selected Items on Backspace | Kendo UI MultiSelect
 description: "Learn how to prevent deleting a selected item on pressing the Backspace key in the input of the Kendo UI MultiSelect widget."
+previous_url: /controls/editors/multiselect/how-to/prevent-removing-selected-items-on-backspace
 slug: howto_prevent_deleting_selected_items_on_backspace_multiselect
 ---
 

@@ -1,22 +1,23 @@
 ---
-title: Reorder Selected Items
-page_title: Reorder Selected Items | Kendo UI MultiSelect
-description: "Learn how to reorder selected items in the Kendo UI Multiselect widget by using Kendo UI Sortable."
-slug: howto_reorder_selected_items_multiselect
+title: Select or Deselect All Items
+page_title: Select or Deselect All Items | Kendo UI MultiSelect
+description: "Learn how to select or deselect all items in the Kendo UI MultiSelect widget."
+previous_url: /controls/editors/multiselect/how-to/select-deselect-all-items
+slug: howto_select_and_deselect_allitems_multiselect
 ---
 
-# Reorder Selected Items
+# Select or Deselect All Items
 
-The example below demonstrates how to use the Kendo UI Sortable to reorder the selected values in a Kendo UI MultiSelect widget.
+The following example demonstrates how to select or deselect all items in the Kendo UI MultiSelect widget by using external buttons.
 
 ###### Example
 
 ```html
-     <div id="example" role="application">
-      <form method="post" action="http://trykendoui.telerik.com/@ggkrustev/oDEW">
+    <div id="example" role="application">
+      <div class="demo-section k-header">
         <h2>Invite Attendees</h2>
         <label for="required">Required</label>
-        <select id="required" name="required" multiple="multiple" data-placeholder="Select attendees...">
+        <select id="required" multiple="multiple" data-placeholder="Select attendees...">
           <option>Steven White</option>
           <option>Nancy King</option>
           <option>Nancy Davolio</option>
@@ -37,20 +38,44 @@ The example below demonstrates how to use the Kendo UI Sortable to reorder the s
           <option>Nige Buchanan</option>
           <option>Laura Fuller</option>
         </select>
-        <button>Post</button>
-      </form>
+        <button class="k-button" id="select">Select All</button>
+        <button class="k-button" id="deselect">Deselect All</button>
+      </div>
+      <style scoped>
+        .demo-section {
+          width: 350px;
+          min-height: 140px;
+        }
+        .demo-section h2 {
+          font-weight: normal;
+        }
+        .demo-section label {
+          display: inline-block;
+          margin: 15px 0 5px 0;
+        }
+        .demo-section select {
+          width: 350px;
+        }
+        #get {
+          float: right;
+          margin: 25px auto 0;
+        }
+      </style>
       <script>
         $(document).ready(function() {
           // create MultiSelect from select HTML element
           var required = $("#required").kendoMultiSelect().data("kendoMultiSelect");
 
-          required.tagList.kendoSortable({
-            hint:function(element) {
-              return element.clone().addClass("hint");
-            },
-            placeholder:function(element) {
-              return element.clone().addClass("placeholder").text("drop here");
-            }
+          $("#select").click(function() {
+            var values = $.map(required.dataSource.data(), function(dataItem) {
+              return dataItem.value;
+            });
+
+            required.value(values);
+          });
+
+          $("#deselect").click(function() {
+            required.value([]);
           });
         });
       </script>
@@ -65,6 +90,7 @@ Other articles on the Kendo UI MultiSelect:
 * [How to Cascade from DropDownList]({% slug howto_cascade_froma_dropdownlist_multiselect %})
 * [How to Filter Values in Widgets Sharing the Same Data]({% slug howto_filter_valuesin_widgetswith_shared_data_multiselect %})
 * [How to Preselect Items Using MVVM Binding]({% slug howto_preselect_items_byusing_mvvm_binding_multiselect %})
+* [How to Reorder Selected Items]({% slug howto_reorder_selected_items_multiselect %})
 * [How to Select All Values with Single Selection]({% slug howto_select_allvalues_witha_single_selection_multiselect %})
 * [How to Use MultiSelect with Bootstrap Modal Window]({% slug howto_use_multiselect_with_bootstrap_modal_window_multiselect %})
 * [How to Wire Blur Event of the Filter Input]({% slug howto_wire_blur_event_ofthe_filtеr_input_multiselect %})
