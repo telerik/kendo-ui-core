@@ -7,7 +7,7 @@ slug: howto_bindobjectstongmodel_combobox
 
 # Bind Objects to ngModel
 
-To see the example, refer to the article on [binding objects to `ngModel` instead of primitive values in a Kendo UI ComboBox widget]({% slug howto_bindobjectstongmodel_dropdownlist %}).
+To see the example, refer to the article on [binding objects to `ngModel` instead of primitive values]({% slug howto_bindobjectstongmodel_dropdownlist %}) in the DropDownList.
 
 ## See Also
 

@@ -1,23 +1,25 @@
 ---
-title: Restrict User Input
-page_title: Restrict User Input | Kendo UI AutoComplete
-description: "Learn how to restrict user input in a Kendo UI AutoComplete widget."
-slug: howto_restrict_user_input_autocomplete
+title: Show No-Records-Found Messages
+page_title: Show No-Records-Found Messages | Kendo UI AutoComplete
+description: "Learn how to add customized templates in a Kendo UI AutoComplete widget."
+previous_url: /controls/editors/autocomplete/how-to/add-no-records-custom-template
+slug: howto_add_customized_templates_autocomplete
 ---
 
-# Restrict User Input
+# Show No-Records-Found Messages
 
-The example below demonstrates how to restrict user input in a Kendo UI AutoComplete widget.
+The following example demonstrates how to add a customized template when the entered values do not match any of the suggestions in the Kendo UI AutoComplete.
 
-#### Example:
+###### Example
 
 ```html
-     <div id="example">
+    <div id="example">
       <div id="shipping">
         <label for="countries" class="info">Choose shipping countries:</label>
         <input id="countries" />
         <div class="hint">Start typing the name of an European country</div>
       </div>
+
       <script>
         $(document).ready(function () {
           var data = [
@@ -74,27 +76,37 @@ The example below demonstrates how to restrict user input in a Kendo UI AutoComp
           ];
 
           //create AutoComplete UI component
-          $("#countries").kendoAutoComplete({
+          var widget = $("#countries").kendoAutoComplete({
             dataSource: data,
             filter: "startswith",
             placeholder: "Select country...",
-            change: function() {
-              var found = false;
-              var value = this.value();
-              var data = this.dataSource.view();
+            headerTemplate: '<div class="noDataMessage">No results found</div>',
+            separator: ", ",
+            dataBound: function() {
+              var noItems = this.list.find(".noDataMessage");
 
-              for(var idx = 0, length = data.length; idx < length; idx++) {
-                if (data[idx] === value) {
-                  found = true;
-                  break;
-                }
+              if (!this.dataSource.view()[0]) {
+                noItems.show();
+                this.popup.open();
+              } else {
+                noItems.hide();
               }
+            },
+            close: function(e) {
+              var widget = e.sender;
 
-              if (!found) {
-                this.value("");
-                alert("Custom values are not allowed");
+              if (!widget.shouldClose && !this.dataSource.view()[0]) {
+                e.preventDefault();
               }
             }
+          }).data("kendoAutoComplete");
+
+          widget.element.on("blur", function() {
+            widget.shouldClose = true;
+
+            widget.close();
+
+            widget.shouldClose = false;
           });
         });
       </script>
@@ -138,5 +150,6 @@ Other articles on the Kendo UI AutoComplete:
 * [AutoComplete JavaScript API Reference](/api/javascript/ui/autocomplete)
 * [How to Dynamically Change DataSource Based on User Selections]({% slug howto_change_datasource_dynamically_autocomplete %})
 * [How to Highlight Matched Values]({% slug howto_highlight_matched_values_autocomplete %})
+* [How to Restrict Other Users]({% slug howto_restrict_user_input_autocomplete %})
 
 For more runnable examples on the Kendo UI AutoComplete, browse its [**How To** documentation folder]({% slug howto_use_custom_angularjs_templates_autocomplete %}).

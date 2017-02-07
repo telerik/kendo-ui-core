@@ -1,13 +1,14 @@
 ---
 title: Change DataSource Dynamically
 page_title: Change DataSource Dynamically | Kendo UI AutoComplete
-description: "Learn how to dynamically change the DataSource based on user selections made through radio buttons in a Kendo UI AutoComplete widget."
+description: "Learn how to dynamically change the DataSource based on user selections that are made through radio buttons in a Kendo UI AutoComplete widget."
+previous_url: /controls/editors/autocomplete/how-to/change-datasource-dynamically
 slug: howto_change_datasource_dynamically_autocomplete
 ---
 
 # Change DataSource Dynamically
 
-The example below demonstrates how to dynamically change the `DataSource` based on user selections made through radio buttons in a Kendo UI AutoComplete widget.
+The following example demonstrates how to dynamically change the `DataSource` based on user selections that are made through radio buttons in a Kendo UI AutoComplete widget.
 
 ###### Example
 

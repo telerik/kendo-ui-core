@@ -1,22 +1,23 @@
 ---
-title: Highlight Matched Values
-page_title: Highlight Matched Values | Kendo UI AutoComplete
-description: "Learn how to highlight matched values in a Kendo UI AutoComplete widget."
-slug: howto_highlight_matched_values_autocomplete
+title: Prevent Custom Input
+page_title: Prevent Custom Input  | Kendo UI AutoComplete
+description: "Learn how to allow only existing values in a Kendo UI AutoComplete widget."
+previous_url: /controls/editors/autocomplete/how-to/prevent-custom-input
+slug: howto_preventcustominput_autocomplete
 ---
 
-# Highlight Matched Values
+# Prevent Custom Input
 
-The example below demonstrates how to highlight the matched values from the AutoComplete suggestions based on the value entered by the user.
+The following example demonstrates how to allow only existing values in a Kendo UI AutoComplete widget.
 
 ###### Example
 
 ```html
-    <div id="example">
+     <div id="example">
       <div id="shipping">
         <label for="countries" class="info">Choose shipping countries:</label>
         <input id="countries" />
-        <div class="hint">Start typing the name of a European country</div>
+        <div class="hint">Start typing the name of an European country</div>
       </div>
       <script>
         $(document).ready(function () {
@@ -78,18 +79,25 @@ The example below demonstrates how to highlight the matched values from the Auto
             dataSource: data,
             filter: "startswith",
             placeholder: "Select country...",
-            separator: ", ",
-            template: $.proxy(kendo.template("#= formatValue(data, this.val()) #"), $("#countries"))
+            change: function() {
+              var found = false;
+              var value = this.value();
+              var data = this.dataSource.view();
+
+              for(var idx = 0, length = data.length; idx < length; idx++) {
+                if (data[idx] === value) {
+                  found = true;
+                  break;
+                }
+              }
+
+              if (!found) {
+                this.value("");
+                alert("Custom values are not allowed");
+              }
+            }
           });
         });
-
-        function formatValue(itemText, text) {
-          var textMatcher = new RegExp(text, "ig");
-
-          return itemText.replace(textMatcher, function(match) {
-            return "<strong>" + match + "</strong>";
-          });
-        }
       </script>
       <style scoped>
         .info {
@@ -129,7 +137,7 @@ The example below demonstrates how to highlight the matched values from the Auto
 Other articles on the Kendo UI AutoComplete:
 
 * [AutoComplete JavaScript API Reference](/api/javascript/ui/autocomplete)
-* [How to Dynamically Change DataSource Based on User Selections]({% slug howto_change_datasource_dynamically_autocomplete %})
+* [How to Highlight Matched Values]({% slug howto_highlight_matched_values_autocomplete %})
 * [How to Restrict Other Users]({% slug howto_restrict_user_input_autocomplete %})
 
 For more runnable examples on the Kendo UI AutoComplete, browse its [**How To** documentation folder]({% slug howto_use_custom_angularjs_templates_autocomplete %}).
