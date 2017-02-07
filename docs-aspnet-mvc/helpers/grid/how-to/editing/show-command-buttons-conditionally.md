@@ -1,7 +1,7 @@
 ---
 title: Show Command Buttons Conditionally
 page_title: Show Command Buttons Conditionally | Kendo UI Grid HtmlHelper
-description: "Configure the Kendo UI Grid for ASP.NET MVC to display a command button depending on a value in the Model."
+description: "Learn how to configure the Kendo UI Grid for ASP.NET MVC to display a command button depending on a value in the Model."
 slug: howto_showcommandbuttonsconditionally_gridaspnetmv
 ---
 
