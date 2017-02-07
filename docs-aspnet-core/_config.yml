@@ -9,6 +9,32 @@ navigation:
 ## List your directory names and order here, like this:
 
 
+     "api":
+        title: "API Reference"
+        position: 0
+     "getting-started":
+        title: "Getting Started"
+        position: 3
+     "how-to":
+        title: "How To"
+        position: 4
+     "helpers":
+        title: "Widgets"
+        position: 5
+     "vs-integration":
+        title: "Visual Studio Integration"
+        position: 6
+     "migration":
+        title: "Migration"
+        position: 7
+     "tutorials":
+        title: "Tutorials"
+        position: 8
+     "troubleshoot":
+        title: "Troubleshooting"
+        position: 9
+
+
 
 ## The application virtual path
 baseurl: /aspnet-core
