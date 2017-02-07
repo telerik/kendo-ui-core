@@ -1,7 +1,7 @@
 ---
 title: Grouping
 page_title: Grouping | Kendo UI ComboBox
-description: "Learn how to configure grouping in Kendo UI ComboBox, DropDownList, AutoComplete and MultiSelect widgets."
+description: "Learn how to configure grouping in the Kendo UI ComboBox, DropDownList, AutoComplete and MultiSelect widgets."
 slug: grouping_kendoui_combobox_widget
 position: 2
 ---

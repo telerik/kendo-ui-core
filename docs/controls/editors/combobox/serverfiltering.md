@@ -1,7 +1,7 @@
 ---
 title: Server Filtering
 page_title: Server Filtering | Kendo UI ComboBox
-description: "Learn how to configure server filetring in Kendo UI ComboBox, DropDownList, AutoComplete and MultiSelect widgets."
+description: "Learn how to configure server filtering in Kendo UI ComboBox, DropDownList, AutoComplete and MultiSelect widgets."
 slug: server_filtering_kendoui_combobox_widget
 position: 4
 ---
