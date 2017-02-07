@@ -1,15 +1,16 @@
 ---
-title: Prevent Custom Input
-page_title: Prevent Custom Input  | Kendo UI AutoComplete
-description: "Learn how to allow only existing values in a Kendo UI AutoComplete widget."
-slug: howto_preventcustominput_autocomplete
+title: Restrict User Input
+page_title: Restrict User Input | Kendo UI AutoComplete
+description: "Learn how to restrict user input in a Kendo UI AutoComplete widget."
+previous_url: /controls/editors/autocomplete/how-to/restrict-user-input
+slug: howto_restrict_user_input_autocomplete
 ---
 
-# Prevent Custom Input
+# Restrict User Input
 
-The example below demonstrates how to allow only existing values in a Kendo UI AutoComplete widget.
+The following example demonstrates how to restrict user input in a Kendo UI AutoComplete widget.
 
-###### Example
+#### Example:
 
 ```html
      <div id="example">
@@ -136,7 +137,7 @@ The example below demonstrates how to allow only existing values in a Kendo UI A
 Other articles on the Kendo UI AutoComplete:
 
 * [AutoComplete JavaScript API Reference](/api/javascript/ui/autocomplete)
+* [How to Dynamically Change DataSource Based on User Selections]({% slug howto_change_datasource_dynamically_autocomplete %})
 * [How to Highlight Matched Values]({% slug howto_highlight_matched_values_autocomplete %})
-* [How to Restrict Other Users]({% slug howto_restrict_user_input_autocomplete %})
 
 For more runnable examples on the Kendo UI AutoComplete, browse its [**How To** documentation folder]({% slug howto_use_custom_angularjs_templates_autocomplete %}).

@@ -7,7 +7,7 @@ slug: howto_use_custom_angularjs_templates_autocomplete
 
 # Use Custom Templates
 
-The example below demonstrates how to use AngularJS templates inside the Kendo UI templates of the AutoComplete widget.
+The following example demonstrates how to use AngularJS templates inside the Kendo UI templates of the AutoComplete widget.
 
 ###### Example
 

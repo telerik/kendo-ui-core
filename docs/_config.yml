@@ -294,6 +294,8 @@ navigation:
         title: "Sorting"
     "*dimensions":
         title: "Managing Dimensions"
+    "*input":
+        title: "Managing Inputs"
     "*appearance":
         title: "Appearance"
     "*binding":

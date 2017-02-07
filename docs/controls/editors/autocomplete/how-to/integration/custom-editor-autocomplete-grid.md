@@ -1,13 +1,14 @@
 ---
-title: Expand Backgrounds of Long List Items
-page_title: Expand Backgrounds of Long List Items | Kendo UI AutoComplete
-description: "Learn how to expand the background of long list items in Kendo UI ComboBox, AutoComplete, DropDownList, and MultiSelect widgets."
-slug: howto_expand_background_longlist_items_autocomplete
+title: Use AutoCompletes as Custom Grid Column Editors
+page_title: Use AutoCompletes as Custom Grid Column Editors | Kendo UI AutoComplete
+description: "Learn how to use AutoComplete as a custom column editor in the Kendo UI Grid widget."
+previous_url: /controls/editors/autocomplete/how-to/custom-editor-autocomplete-grid
+slug: howto_usecustomcolumneditorgrid_autocomplete
 ---
 
-# Expand Backgrounds of Long List Items
+# Use AutoCompletes as Custom Grid Column Editors
 
-To see the example on how to expand the background of long list items in a Kendo UI AutoComplete, refer to [this article]({% slug howto_expand_background_longlist_items_combobox %}).
+To see the example, refer to the article on [using the Kendo UI AutoComplete widget as a custom column editor for the Grid]({% slug howto_use_autocompleteas_custom_column_editor_grid %}).
 
 ## See Also
 

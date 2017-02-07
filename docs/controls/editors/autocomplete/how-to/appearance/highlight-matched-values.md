@@ -1,13 +1,14 @@
 ---
-title: Show No Records Found Message
-page_title: Show No Records Found Message | Kendo UI AutoComplete
-description: "Learn how to add customized templates in a Kendo UI AutoComplete widget."
-slug: howto_add_customized_templates_autocomplete
+title: Highlight Matched Values
+page_title: Highlight Matched Values | Kendo UI AutoComplete
+description: "Learn how to highlight matched values in a Kendo UI AutoComplete widget."
+previous_url: /controls/editors/autocomplete/how-to/highlight-matched-values
+slug: howto_highlight_matched_values_autocomplete
 ---
 
-# Show No Records Found Message
+# Highlight Matched Values
 
-The example below demonstrates how to add a customized template when the entered values do not match any of the suggestions.
+The following example demonstrates how to highlight the matched values from the AutoComplete suggestions based on the value entered by the user.
 
 ###### Example
 
@@ -16,9 +17,8 @@ The example below demonstrates how to add a customized template when the entered
       <div id="shipping">
         <label for="countries" class="info">Choose shipping countries:</label>
         <input id="countries" />
-        <div class="hint">Start typing the name of an European country</div>
+        <div class="hint">Start typing the name of a European country</div>
       </div>
-
       <script>
         $(document).ready(function () {
           var data = [
@@ -75,39 +75,22 @@ The example below demonstrates how to add a customized template when the entered
           ];
 
           //create AutoComplete UI component
-          var widget = $("#countries").kendoAutoComplete({
+          $("#countries").kendoAutoComplete({
             dataSource: data,
             filter: "startswith",
             placeholder: "Select country...",
-            headerTemplate: '<div class="noDataMessage">No results found</div>',
             separator: ", ",
-            dataBound: function() {
-              var noItems = this.list.find(".noDataMessage");
-
-              if (!this.dataSource.view()[0]) {
-                noItems.show();
-                this.popup.open();
-              } else {
-                noItems.hide();
-              }
-            },
-            close: function(e) {
-              var widget = e.sender;
-
-              if (!widget.shouldClose && !this.dataSource.view()[0]) {
-                e.preventDefault();
-              }
-            }
-          }).data("kendoAutoComplete");
-
-          widget.element.on("blur", function() {
-            widget.shouldClose = true;
-
-            widget.close();
-
-            widget.shouldClose = false;
+            template: $.proxy(kendo.template("#= formatValue(data, this.val()) #"), $("#countries"))
           });
         });
+
+        function formatValue(itemText, text) {
+          var textMatcher = new RegExp(text, "ig");
+
+          return itemText.replace(textMatcher, function(match) {
+            return "<strong>" + match + "</strong>";
+          });
+        }
       </script>
       <style scoped>
         .info {
@@ -148,7 +131,6 @@ Other articles on the Kendo UI AutoComplete:
 
 * [AutoComplete JavaScript API Reference](/api/javascript/ui/autocomplete)
 * [How to Dynamically Change DataSource Based on User Selections]({% slug howto_change_datasource_dynamically_autocomplete %})
-* [How to Highlight Matched Values]({% slug howto_highlight_matched_values_autocomplete %})
 * [How to Restrict Other Users]({% slug howto_restrict_user_input_autocomplete %})
 
 For more runnable examples on the Kendo UI AutoComplete, browse its [**How To** documentation folder]({% slug howto_use_custom_angularjs_templates_autocomplete %}).
