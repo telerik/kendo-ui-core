@@ -14,13 +14,13 @@ navigation:
         position: 0
      "getting-started":
         title: "Getting Started"
+        position: 2
+     "helpers":
+        title: "Widgets"
         position: 3
      "how-to":
         title: "How To"
         position: 4
-     "helpers":
-        title: "Widgets"
-        position: 5
      "vs-integration":
         title: "Visual Studio Integration"
         position: 6

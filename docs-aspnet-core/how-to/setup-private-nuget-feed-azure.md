@@ -1,19 +1,21 @@
 ---
-title: How to setup Private NuGet feed for Azure
-page_title: How to setup Private NuGet feed for Azure | Telerik UI for ASP.NET Core
-description: "You can see here how you can setup the private NuGet feed in Azure to publish an ASP.NET Core application referencing Telerik UI for ASP.NET Core assembly."
-slug: howto_setupprivatefeedazure
-position: 1
+title: Set Up Private NuGet Feed for Azure
+page_title: Set Up Private NuGet Feed for Azure | Telerik UI for ASP.NET Core
+description: "Learn how to set up the private NuGet feed in Azure to publish an ASP.NET Core application that references the Telerik UI for ASP.NET Core assembly."
+slug: howto_setupprivatefeedazure_aspnetcore
 ---
 
-# How to setup Private NuGet feed for Azure
+# Set Up Private NuGet Feed for Azure
 
-The following instructions will enable you to do add a private NuGet feed when running MSBuild on a Build machine such as hosted by Azure.
+Depending on your project, you might need to set up the private NuGet feed in Azure to publish an ASP.NET Core application that references the Telerik UI for ASP.NET Core assembly.
 
-1. Add NuGet.config to WebApp project in Visual Studio
+To achieve this behavior, follow the instructions which enable you to do add a private NuGet feed when running an MSBuild on a Build machine such as one hosted by Azure.
 
-2. Add new item NuGet.config to same directory as project.json and edit as below, setting your own username and password (in clear text) as needed to logon to the Telerik site:
+1. Add `NuGet.config` to the WebApp project in Visual Studio.
 
+1. Add a new `NuGet.config` item to the same directory as the `project.json` file is located.
+
+1. Set your own username and password (in clear text) that are needed to log in to the Telerik site. The following example demonstrates how to do this.
 
         <?xml version="1.0" encoding="utf-8"?>
         <configuration>
@@ -29,14 +31,22 @@ The following instructions will enable you to do add a private NuGet feed when r
         </configuration>
 
 
-3. Edit Build Definition to add step for NuGet installer - In Visual Studio 
-   1. select Team Explorer, Builds
-   1. select Build Definition, right click | Edit Build Definition. This opens the Build Definition in your browser - see attached screen shot ![image](images/azure-nuget-feed.png)
+1. Set the **Build Definitions** editor in Visual Studio to add a step for the NuGet installer. To achieve this:
 
-4. In Build Definition editor add build step = Nuget Installer, drag/drop to top of list and specify the solution file as well as the NugGet.config
+   1. Select **Team Explorer** > **Builds**.
+   1. Select **Build Definitions** and right-click **Edit Build Definitions**. This operation opens the **Build Definitions** in your browser, as shown in the following screenshot.
 
-5. Save
+   ![image](images/azure-nuget-feed.png)
 
-6. Save your changes to source control for the WebApp in Visual Studio - i.e. the Build Definition and NuGet.config
+1. In the **Build Definitions** editor, add a **Nuget Installer** build step by clicking **Add build step...**.
 
-7. Queue a New Build
+1. Drag-and-drop the **Nuget Installer** build step to the top of the build steps list. Specify the solution and the `NugGet.config` files and then save them.
+
+1. Save your changes to the source control for the WebApp in Visual Studio&mdash;that is, the **Build Definitions** and the **NuGet.config** file.
+
+1. To build the application, click **Queue a new build**.
+
+## See Also
+
+* [Visual Studio Integration]({% slug overview_visualstudio_aspnetcore %})
+* [Known Issues in Telerik UI for ASP.NET Core]({% slug knownissues_aspnetmvc6_aspnetmvc %})

@@ -1,15 +1,15 @@
 ---
-title: Getting Started
-page_title: Getting Started | Telerik UI for ASP.NET Core
+title: Getting Started with Telerik UI for ASP.NET Core
+page_title: Getting Started with Telerik UI for ASP.NET Core | Telerik UI for ASP.NET Core
 description: "Learn the basics when working with Telerik UI for ASP.NET Core (aka MVC 6 or ASP.NET Core MVC)."
 previous_url: /aspnetmvc-apps/mvc-6/getting-started, /mvc-6/getting-started
 slug: gettingstarted_aspnetmvc6_aspnetmvc
-position: 2
+position: 1
 ---
 
-# Getting Started
+# Getting Started with Telerik UI for ASP.NET Core
 
-This article demonstrates how to configure an ASP.NET Core project to use Telerik UI for ASP.NET MVC.
+This article demonstrates how to configure an ASP.NET Core project to use Telerik UI for ASP.NET Core.
 
 ## Prerequisites
 
@@ -191,8 +191,6 @@ Below are listed the steps for you to follow when creating an ASP.NET Core web s
     ![Sample page](images/sample-page.png)
 
 ## See Also
-
-Other articles on Telerik UI for ASP.NET MVC in ASP.NET Core applications:
 
 * [Overview of Telerik UI for ASP.NET Core]({% slug overview_aspnetmvc6_aspnetmvc %})
 * [Get Started with Telerik UI for ASP.NET MVC in ASP.NET Core Projects on Linux]({% slug gettingstartedlinux_aspnetmvc6_aspnetmvc %})
