@@ -55,6 +55,8 @@ The example below demonstrates how to initialize the Menu by using HTML markup.
 
 The example below demonstrates how to initialize the Menu by using a JSON data object
 
+By initializing the Menu using JSON, you can use assign a select handler for each item by assigning a function to the `select` property.
+
 ###### Example
 
     <ul id="menu"></ul>
@@ -77,16 +79,24 @@ The example below demonstrates how to initialize the Menu by using a JSON data o
              text: "Item 3",
              imageUrl: "http://www.telerik.com/test.jpg", // (Optional) Item image URL
              items: [{                                    // Sub-item collection
-               text: "Sub Item 1"
-             },
-                     {
-                       text: "Sub Item 2"
-                     }]
+                    text: "Sub Item 1"
+                },
+                {
+                    text: "Sub Item 2"
+                }]
            },
            {
              text: "Item 4",
              spriteCssClass: "imageClass3"                // (Optional) Item image sprite CSS class
-           }]
+           },
+           {
+             text: "Item 5",
+             select: function(e) {                        // Item select event handler, optional 
+                // e.sender - returns reference to the Kendo Menu widget
+                // e.target - returns the clicked element. Typically, the span.k-link element.
+                
+                // handle event
+             }]
         })
       });
     </script>
