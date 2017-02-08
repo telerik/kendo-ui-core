@@ -68,8 +68,6 @@ To be able to run the sample application on Docker Engine (multi-platform), make
 
 ## See Also
 
-Other articles on Telerik UI for ASP.NET MVC in ASP.NET Core applications:
-
 * [Get Started with Telerik UI for ASP.NET MVC in ASP.NET Core Projects]({% slug gettingstarted_aspnetmvc6_aspnetmvc %})
 * [Get Started with Telerik UI for ASP.NET MVC in ASP.NET Core Projects on Linux]({% slug gettingstartedlinux_aspnetmvc6_aspnetmvc %})
 * [Known Issues with Telerik UI for ASP.NET Core]({% slug knownissues_aspnetmvc6_aspnetmvc %})

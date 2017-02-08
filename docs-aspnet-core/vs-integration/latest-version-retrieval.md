@@ -20,13 +20,17 @@ The Telerik UI for ASP.NET Core Visual Studio (VS) extensions help you keep your
 
 2. Use the **Save my password** checkbox to avoid having to enter your Telerik credentials multiple times. The persistence is securely done and the credentials are saved in a per-user context. Other users on the machine do not have access to your stored credentials.
 
-3. In the dialog that appears, confirm the download. The latest version then automatically starts to download.
+3. In the dialog that appears, confirm the download. The latest version then automatically starts to download. **Figures 2**, **3**, and **4** show the dialog that indicates the download progress.  
 
-  **Figure 2, 3, and 4. The dialog indicating the download progress**
+  **Figure 2**
 
   ![Get latest version](images/lva2.png)
 
+  **Figure 3**
+
   ![Get latest version](images/lva3.png)
+
+  **Figure 4**
 
   ![Get latest version](images/lva4.png)
 
