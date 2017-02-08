@@ -3175,6 +3175,31 @@ The text displayed by the command button. If not set the [name](#configuration-t
         });
     </script>
 
+## Fields
+
+### columns `Array`
+
+The columns of the treelist initialized from the [columns](#configuration-columns) option. Every item from the `columns` array has the same fields as the corresponding [columns](#configuration-columns) option.
+
+#### Example - iterate the grid columns
+    <div id="treelist"></div>
+	<script>
+		$("#treelist").kendoTreeList({
+		  columns: [
+		    { field: "name" },
+		    { field: "age" }
+		  ],
+		  dataSource: [
+		    { name: "Jane Doe", age: 30 },
+		    { name: "John Doe", age: 33 }
+		  ]
+		});
+		var treelist = $("#treelist").data("kendoTreeList");
+		for (var i = 0; i < treelist.columns.length; i++) {
+		  console.log(treelist.columns[i].field); // displays "name" and then "age"
+		}
+	</script>
+
 ## Methods
 
 ### addRow
