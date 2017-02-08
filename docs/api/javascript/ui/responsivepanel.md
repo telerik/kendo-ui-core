@@ -22,7 +22,7 @@ If set to `false` the widget will not close when the page content is touched, af
     </nav>
 
     <article>
-        <button class="k-rpanel-toggle"><span class="k-icon k-i-hbars"></span></button>
+        <button class="k-rpanel-toggle"><span class="k-icon k-i-menu"></span></button>
 
         Content
     </article>
@@ -45,7 +45,7 @@ Specifies the page width at which the widget will be hidden and its toggle butto
     </nav>
 
     <article>
-        <button class="k-rpanel-toggle"><span class="k-icon k-i-hbars"></span></button>
+        <button class="k-rpanel-toggle"><span class="k-icon k-i-menu"></span></button>
 
         Content
     </article>
@@ -63,7 +63,7 @@ Specifies the direction from which the hidden element will open up, once the tog
 #### Example
 
     <header>
-        <button class="k-rpanel-toggle"><span class="k-icon k-i-hbars"></span></button>
+        <button class="k-rpanel-toggle"><span class="k-icon k-i-menu"></span></button>
         Logo
     </header>
 
@@ -89,7 +89,7 @@ Specifies the selector for the toggle button that will show and hide the respons
 #### Example
 
     <header>
-        <button class="toggle-button"><span class="k-icon k-i-hbars"></span></button>
+        <button class="toggle-button"><span class="k-icon k-i-menu"></span></button>
         Logo
     </header>
 
@@ -118,7 +118,7 @@ Closes the responsive panel.
 #### Example
 
     <header>
-        <button class="k-rpanel-toggle"><span class="k-icon k-i-hbars"></span></button>
+        <button class="k-rpanel-toggle"><span class="k-icon k-i-menu"></span></button>
         Logo
     </header>
 
@@ -160,7 +160,7 @@ Prepares the widget for safe removal from DOM. Detaches all event handlers and r
     </nav>
 
     <article>
-        <button class="k-rpanel-toggle"><span class="k-icon k-i-hbars"></span></button>
+        <button class="k-rpanel-toggle"><span class="k-icon k-i-menu"></span></button>
 
         Content
     </article>
@@ -185,7 +185,7 @@ Opens the responsive panel.
     </nav>
 
     <article>
-        <button id="open-button"><span class="k-icon k-i-hbars"></span></button>
+        <button id="open-button"><span class="k-icon k-i-menu"></span></button>
         Content
     </article>
 
@@ -215,7 +215,7 @@ Triggered before the responsive panel is closed. Cancellable.
     </nav>
 
     <article>
-        <button class="k-rpanel-toggle"><span class="k-icon k-i-hbars"></span></button>
+        <button class="k-rpanel-toggle"><span class="k-icon k-i-menu"></span></button>
 
         Content
     </article>
@@ -241,7 +241,7 @@ Triggered before the responsive panel is closed. Cancellable.
     </nav>
 
     <article>
-        <button class="k-rpanel-toggle"><span class="k-icon k-i-hbars"></span></button>
+        <button class="k-rpanel-toggle"><span class="k-icon k-i-menu"></span></button>
 
         Content
     </article>
@@ -271,7 +271,7 @@ Triggered before the responsive panel is opened. Cancellable.
     </nav>
 
     <article>
-        <button class="k-rpanel-toggle"><span class="k-icon k-i-hbars"></span></button>
+        <button class="k-rpanel-toggle"><span class="k-icon k-i-menu"></span></button>
 
         Content
     </article>
@@ -297,7 +297,7 @@ Triggered before the responsive panel is opened. Cancellable.
     </nav>
 
     <article>
-        <button class="k-rpanel-toggle"><span class="k-icon k-i-hbars"></span></button>
+        <button class="k-rpanel-toggle"><span class="k-icon k-i-menu"></span></button>
 
         Content
     </article>
