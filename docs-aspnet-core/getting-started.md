@@ -101,7 +101,7 @@ Below are listed the steps for you to follow when creating an ASP.NET Core web s
 
 6. Copy the Kendo UI client-side resources. You can use either of the following approaches:
 
-    * Manual installation&mdash;To manually install the resources, copy the `js` and `styles` folders from the `telerik.ui.for.aspnetmvc` archive to `wwwroot\lib\kendo-ui`. The archive is located at Downloads -> UI for ASP.NET MVC section of your www.telerik.com account.
+    * Manual installation&mdash;To manually install the resources, copy the `js` and `styles` folders from the `telerik.ui.for.aspnetmvc` archive to `wwwroot\lib\kendo-ui`. The archive is located in **Downloads** > **UI for ASP.NET MVC** of your [www.telerik.com](http://www.telerik.com/) account.
 
         **Figure 2. Kendo UI resources**
 
