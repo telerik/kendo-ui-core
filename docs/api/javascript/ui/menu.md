@@ -298,6 +298,9 @@ Refer to the example below for a list of the supported properties.
            {
              text: "Item 5",
              select: function(e) {                        // Item select event handler, optional 
+                // e.sender - returns reference to the Kendo Menu widget
+                // e.target - returns the clicked element. Typically, the span.k-link element.
+                
                 // handle event
              }
            }]
