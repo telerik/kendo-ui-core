@@ -23,16 +23,16 @@ navigation:
         position: 4
      "vs-integration":
         title: "Visual Studio Integration"
-        position: 6
+        position: 5
      "migration":
         title: "Migration"
-        position: 7
+        position: 6
      "tutorials":
         title: "Tutorials"
-        position: 8
+        position: 7
      "troubleshoot":
         title: "Troubleshooting"
-        position: 9
+        position: 8
 
 
 
