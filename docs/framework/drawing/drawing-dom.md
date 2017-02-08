@@ -471,7 +471,7 @@ For more information on the provided [browser support]({% slug wbe_browserand_op
 - Images hosted on different domains will not be rendered, unless permissive [Cross-Origin HTTP headers](https://developer.mozilla.org/en-US/docs/Web/HTML/CORS_enabled_image) are provided by the server. Similarly, fonts might not be possible to load cross-domain. Even with the proper CORS headers, Internet Explorer 9 will not be able to load images or fonts from another domain, and could raise an uncatchable security exception. If you need to support Internet Explorer 9, make sure to host images and fonts on the same domain as the application.
 - Images will not be exported in IE if their source is an SVG document. These are considered to be tainted.
 - Exporting might not work when loading the page from a local file (`file://` protocol) due to CORS restrictions.
-- Exporting vertically aligned elements with automatic page-breaking.
+- Exporting vertically aligned elements might not work well with automatic page-breaking.
 - The content of the `<iframe>` and `<svg>` elements is not processed. For example, it will not be exported by the Drawing API.
 - A `<canvas>` will be rendered as an image, but only if it is non-tainted, meaning if it does not display images from another domain.
 - CSS box-shadow, text-shadow, and radial gradients are omitted. Linear gradients are supported.
