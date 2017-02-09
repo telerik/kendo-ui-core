@@ -47,7 +47,7 @@ Below are listed the steps for you to follow when creating an ASP.NET Core web s
 
 > **Important**
 >
-> Before you continue, set up the [Telerik NuGet Private Feed](../aspnet-mvc/getting-started/nuget-install#set-up-nuget-package-source). Store the password in clear text because the .NET Core tooling does not support encryption.
+> Before you continue, set up the [Telerik NuGet Private Feed](../../aspnet-mvc/getting-started/nuget-install#set-up-nuget-package-source). Store the password in clear text because the .NET Core tooling does not support encryption.
 
 1. Open the NuGet Package Manager.
 
@@ -55,7 +55,7 @@ Below are listed the steps for you to follow when creating an ASP.NET Core web s
 
   ![NuGet package manager](images/manage-nuget-packages.png)
 
-2. Choose the [Telerik package source](../aspnet-mvc/getting-started/nuget-install#set-up-nuget-package-source) and search for `Telerik.UI.for.AspNet.Core`.
+2. Choose the [Telerik package source](../../aspnet-mvc/getting-started/nuget-install#set-up-nuget-package-source) and search for `Telerik.UI.for.AspNet.Core`.
 
 3. Install the `Telerik.UI.for.AspNet.Core` package. This should add a line to you `project.json` similar to the one shown below.
 
