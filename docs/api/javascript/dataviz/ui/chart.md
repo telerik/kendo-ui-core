@@ -13467,7 +13467,7 @@ See the related [gap](#configuration-series.gap) setting.
 A boolean value indicating if the series should be stacked.
 A string value is interpreted as [series.stack.group](#configuration-series.stack.group).
 
-> The `stack` options is supported when [series.type](#configuration-series.type) is set to "bar", "column", "line", "area", "verticalLine", "verticalArea", "radarLine", "radarArea" or "radarColumn". All series in the chart must be of the same type.
+> The `stack` options is supported when [series.type](#configuration-series.type) is set to "bar", "column", "line", "area", "verticalLine", "verticalArea", "radarLine", "radarArea" or "radarColumn". All series in the stack must be of the same type.
 
 > Stack settings of the first series are inherited as a default value by the rest of the series, in case they are not overridden.
 
