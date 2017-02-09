@@ -1455,11 +1455,11 @@ var __meta__ = { // jshint ignore:line
 
             if (dataItem && !expanded) {
                 dataItem.set("expanded", !isVisible);
-                prevent = dataItem.hasChildren;
+                prevent = dataItem.hasChildren || !!dataItem.content || !!dataItem.contentUrl;
                 return prevent;
             }
 
-             if (dataItem && (!expanded || expanded === "true") &&  !loaded && !dataItem.content) {
+             if (dataItem && (!expanded || expanded === "true") &&  !loaded && !dataItem.content && !dataItem.contentUrl) {
                  if (that.options.loadOnDemand) {
                      this._progress(element, true);
                  }
