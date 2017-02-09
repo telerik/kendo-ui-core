@@ -7,15 +7,11 @@ slug: howto_addnewlinesinsteadofnewparaonenter_editoraspnetmvc
 
 # Add New Lines instead of New Paragraphs on Enter
 
-The demo below demonstrates how to add a new line instead of a new paragraph on enter in ASP.NET MVC applications.
-
-To see the example, refer to the GitHub repo on how to [add a new line instead of a new paragraph on enter](https://github.com/telerik/ui-for-aspnet-mvc-examples/tree/master/editor/enter-linebreak-shift-enter-paragraph).
+To see the example, refer to the project on how to [add a new line instead of a new paragraph on `Enter` key-press](https://github.com/telerik/ui-for-aspnet-mvc-examples/tree/master/editor/enter-linebreak-shift-enter-paragraph) in ASP.NET MVC applications.
 
 ## See Also
-
-Other articles and how-to examples on the Kendo UI Editor HtmlHelper:
 
 * [Editor HtmlHelper Overview]({% slug overview_editorhelper_aspnetmvc %})
 * [EditorBuilder API Reference](/api/Kendo.Mvc.UI.Fluent/EditorBuilder)
 
-For more runnable examples on the Kendo UI Editor in ASP.NET MVC applications, browse its [**How To** documentation folder]({% slug howto_addmaxlengthvalidation_editoraspnetmvc %}).
+For more runnable examples on the Kendo UI Editor in ASP.NET MVC applications, browse its [**How To** documentation folder](/helpers/editor/how-to/).

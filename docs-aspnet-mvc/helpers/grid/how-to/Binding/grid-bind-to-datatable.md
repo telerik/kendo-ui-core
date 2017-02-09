@@ -7,7 +7,7 @@ slug: howto_bindgridtodatatable_gridaspnetmvc
 
 # Bind the Grid to DataTable
 
-The [sample project](#sample-project) below demonstrates how to bind the Kendo UI Grid to a DataTable in ASP.NET MVC applications.
+The following [sample project](#sample-project) demonstrates how to bind the Kendo UI Grid to a DataTable in ASP.NET MVC applications.
 
 > **Important**
 >
@@ -16,6 +16,7 @@ The [sample project](#sample-project) below demonstrates how to bind the Kendo U
 ## Sample Project
 
 The sample project example resolves two main issues, which are related to:  
+
 * [Editing](#editing)
 * [Aggregates](#aggregates)
 
@@ -43,4 +44,4 @@ Provide type-information for the requested aggregates in the `DataSourceRequest`
 * [Overview of the Grid HtmlHelper]({% slug overview_gridhelper_aspnetmvc %})
 * [GridBuilder API Reference](/api/Kendo.Mvc.UI.Fluent/GridBuilder)
 
-For more runnable examples on the Kendo UI Grid in ASP.NET MVC applications, browse its [**How To** documentation folder]({% slug howto_applycustomrowstylesbasedondata_gridaspnetmvc %}).
+For more runnable examples on the Kendo UI Grid in ASP.NET MVC applications, browse its [**How To** documentation folder](/helpers/grid/how-to/Appearance/).

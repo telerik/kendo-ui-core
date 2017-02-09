@@ -11,9 +11,7 @@ position: 11
 
 Telerik Document Processing is a set of UI-independent and cross-platform libraries that let you process content between different formats and work with archive files.
 
-## Overview
-
-### List of Libraries
+## List of Libraries
 
 Telerik Document Processing includes the following available libraries:
 
@@ -23,7 +21,7 @@ Telerik Document Processing includes the following available libraries:
 * [**RadWordsProcessing**](http://docs.telerik.com/devtools/document-processing/libraries/radwordsprocessing/overview) Create, import, and export DOCX, HTML, RTF and TXT documents, and export them to PDF.
 * [**RadZipLibrary**](http://docs.telerik.com/devtools/document-processing/libraries/radziplibrary/overview) Compress and decompress ZIP files.
 
-### Supported File Formats
+## Supported File Formats
 
 The Telerik Document Processing libraries support the following file formats:
 
@@ -36,7 +34,7 @@ The Telerik Document Processing libraries support the following file formats:
 * XLSX
 * ZIP
 
-### Available Assemblies
+## Available Assemblies
 
 Telerik Document Processing supports .NET 4 and .NET 4.5. To handle the demands of your project, take the required assembly from the **Bin40** or **Bin45** folder respectively:
 

@@ -9,9 +9,11 @@ position: 10
 
 # Wrappers vs Widgets
 
-From a client-side point of view, the vanilla HTML/JavaScript Kendo UI widgets and their ASP.NET MVC wrappers (UI helpers) represent the same thing and provide the same capabilities. However, there are some implementation specifications to consider before choosing one product over the other.
+From a client-side point of view, the vanilla HTML/JavaScript Kendo UI widgets and their ASP.NET MVC wrappers (UI helpers) represent the same thing and provide the same capabilities.
 
-## Lists of Pros
+However, before choosing one product over another, you need to consider existing implementation specifications.
+
+## List of Pros and Cons
 
 ### Telerik UI for ASP.NET MVC Wrappers
 

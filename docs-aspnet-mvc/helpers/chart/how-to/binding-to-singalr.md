@@ -3,6 +3,7 @@ title: Bind to SignalR Hubs
 page_title: Bind to SignalR Hubs | Kendo UI Chart HtmlHelper
 description: "Bind a Chart to a SignalR hub in ASP.NET MVC applications."
 slug: howto_bindtosignalr_chartaspnetmvc
+position: 0
 ---
 
 # Bind to SignalR Hubs
@@ -13,9 +14,7 @@ To see the example, refer to the GitHub repo with the [sample project of a Signa
 
 ## See Also
 
-Other articles and how-to examples on the Kendo UI Chart HtmlHelper:
-
 * [Overview of the Chart HtmlHelper]({% slug overview_dropdownlisthelper_aspnetmvc %})
 * [ChartBuilder API Reference](/api/Kendo.Mvc.UI.Fluent/ChartBuilder)
 
-For more runnable examples on the Kendo UI Chart in ASP.NET MVC applications, browse its [**How To** documentation folder]({% slug howto_cerateviewmodelboundseries_chartaspnetmvc %}).
+For more runnable examples on the Kendo UI Chart in ASP.NET MVC applications, browse its **How To** documentation folder.

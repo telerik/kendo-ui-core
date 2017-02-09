@@ -16,39 +16,39 @@ The Calendar HtmlHelper extension is a server-side wrapper for the [Kendo UI Cal
 
 Below are listed the steps for you to follow when configuring the Kendo UI Calendar.
 
-**Step 1** Make sure you followed all the steps from the [introductory article on Telerik UI for ASP.NET MVC]({% slug overview_aspnetmvc %}).
+1. Make sure you followed all the steps from the [introductory article on Telerik UI for ASP.NET MVC]({% slug overview_aspnetmvc %}).
 
-**Step 2** Create a new action method which renders the view.
+1. Create a new action method which renders the view.
 
-###### Example
+    ###### Example
 
-        public ActionResult Index()
-        {
-            return View();
-        }
+            public ActionResult Index()
+            {
+                return View();
+            }
 
-**Step 3** Add a Calendar.
+1. Add a Calendar.
 
-###### Example
+    ###### Example
 
-```tab-ASPX
+    ```tab-ASPX
 
-        <%: Html.Kendo().Calendar()
-            .Name("calendar") //The name of the Calendar is mandatory. It specifies the "id" attribute of the widget.
-            .Min(new DateTime(2010, 1, 1, 10, 0, 0)) //Set the min time of the Calendar.
-            .Max(new DateTime(2010, 1, 1, 20, 0, 0)) //Set the min date of the Calendar.
-            .Value(DateTime.Now) //Set the value of the Calendar.
-        %>
-```
-```tab-Razor
+            <%: Html.Kendo().Calendar()
+                .Name("calendar") //The name of the Calendar is mandatory. It specifies the "id" attribute of the widget.
+                .Min(new DateTime(2010, 1, 1, 10, 0, 0)) //Set the min time of the Calendar.
+                .Max(new DateTime(2010, 1, 1, 20, 0, 0)) //Set the min date of the Calendar.
+                .Value(DateTime.Now) //Set the value of the Calendar.
+            %>
+    ```
+    ```tab-Razor
 
-        @(Html.Kendo().Calendar()
-            .Name("calendar") //The name of the Calendar is mandatory. It specifies the "id" attribute of the widget.
-            .Min(new DateTime(2010, 1, 1, 10, 0, 0)) //Set the min time of the Calendar.
-            .Max(new DateTime(2010, 1, 1, 20, 0, 0)) //Set the min date of the Calendar.
-            .Value(DateTime.Now) //Set the value of the Calendar.
-        )
-```
+            @(Html.Kendo().Calendar()
+                .Name("calendar") //The name of the Calendar is mandatory. It specifies the "id" attribute of the widget.
+                .Min(new DateTime(2010, 1, 1, 10, 0, 0)) //Set the min time of the Calendar.
+                .Max(new DateTime(2010, 1, 1, 20, 0, 0)) //Set the min date of the Calendar.
+                .Value(DateTime.Now) //Set the value of the Calendar.
+            )
+    ```
 
 ## Event Handling
 
@@ -56,7 +56,7 @@ You can subscribe to all Calendar [events](../../../kendo-ui/api/javascript/ui/c
 
 ### By Handler Name
 
-The examples below demonstrates how to subscribe to events by a handler name.
+The following example demonstrates how to subscribe to events by a handler name.
 
 ###### Example
 
@@ -101,7 +101,7 @@ The examples below demonstrates how to subscribe to events by a handler name.
 
 ### By Template Delegate
 
-The example below demonstrates how to subscribe to events by a template delegate.
+The following example demonstrates how to subscribe to events by a template delegate.
 
 ###### Example
 

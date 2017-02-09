@@ -7,7 +7,7 @@ slug: howto_create_masked_datepickers_datepickaspnetmvc
 
 # Create Masked DatePickers
 
-The example below demonstrates how to add a mask to the Kendo UI DatePicker through a custom Kendo UI widget.
+The following example demonstrates how to add a mask to the Kendo UI DatePicker through a custom Kendo UI widget.
 
 ###### Example
 
@@ -82,8 +82,6 @@ The example below demonstrates how to add a mask to the Kendo UI DatePicker thro
 ```
 
 ## See Also
-
-Other articles on the Kendo UI DataPicker HtmlHelper:
 
 * [Overview of the DatePicker HtmlHelper Overview]({% slug overview_datepickerhelper_aspnetmvc %})
 * [DatePickerBuilder API Reference](/api/Kendo.Mvc.UI.Fluent/DatePickerBuilder)

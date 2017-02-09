@@ -23,63 +23,63 @@ There are two ways to bind a Kendo UI Chart for ASP.NET MVC:
 
 Below are listed the steps for you to follow when configuring the Kendo UI Chart for server binding to the to the list of **InternetUsers**.
 
-**Step 1** Make sure you followed all the steps from the [introductory article on Telerik UI for ASP.NET MVC]({% slug overview_aspnetmvc %}).
+1. Make sure you followed all the steps from the [introductory article on Telerik UI for ASP.NET MVC]({% slug overview_aspnetmvc %}).
 
-**Step 2** Create a new action method and pass the **InternetUsers** list as the model.
+1. Create a new action method and pass the **InternetUsers** list as the model.
 
-###### Example
+    ###### Example
 
-        public ActionResult Index()
-        {
-            return View(ChartDataRepository.InternetUsers());
-        }
+            public ActionResult Index()
+            {
+                return View(ChartDataRepository.InternetUsers());
+            }
 
-**Step 3** Make your view strongly typed.
+1. Make your view strongly typed.
 
-###### Example
+    ###### Example
 
-```tab-ASPX
+    ```tab-ASPX
 
-        <%@ Page Language="C#" MasterPageFile="~/Views/Shared/Site.Master"
-           Inherits="System.Web.Mvc.ViewPage<IEnumerable<MvcApplication1.Models.InternetUsers>>" %>
-```
-```tab-Razor
+            <%@ Page Language="C#" MasterPageFile="~/Views/Shared/Site.Master"
+               Inherits="System.Web.Mvc.ViewPage<IEnumerable<MvcApplication1.Models.InternetUsers>>" %>
+    ```
+    ```tab-Razor
 
-        @model IEnumerable<MvcApplication1.Models.InternetUsers>
-```
+            @model IEnumerable<MvcApplication1.Models.InternetUsers>
+    ```
 
-**Step 4** Add a server-bound Chart.
+1. Add a server-bound Chart.
 
-###### Example
+    ###### Example
 
-```tab-ASPX
+    ```tab-ASPX
 
-        <%: Html.Kendo().Chart(Model) //The Chart will be bound to the Model which is the InternetUsers list.
-                .Name("internetUsersChart") //The name of the Chart is mandatory. It specifies the "id" attribute of the widget.
-                .Title("Internet Users")
-                .Series(series => {
-                    series.Bar(model => model.Value) //Create a Bar Chart series bound to the "Value" property.
-                          .Name("United States");
-                })
-                .CategoryAxis(axis => axis
-                    .Categories(model => model.Year)
-                )
-        %>
-```
-```tab-Razor
+            <%: Html.Kendo().Chart(Model) //The Chart will be bound to the Model which is the InternetUsers list.
+                    .Name("internetUsersChart") //The name of the Chart is mandatory. It specifies the "id" attribute of the widget.
+                    .Title("Internet Users")
+                    .Series(series => {
+                        series.Bar(model => model.Value) //Create a Bar Chart series bound to the "Value" property.
+                              .Name("United States");
+                    })
+                    .CategoryAxis(axis => axis
+                        .Categories(model => model.Year)
+                    )
+            %>
+    ```
+    ```tab-Razor
 
-        @(Html.Kendo().Chart(Model) //The Chart will be bound to the Model which is the InternetUsers list
-              .Name("internetUsersChart") //The name of the Chart is mandatory. It specifies the "id" attribute of the widget.
-              .Title("Internet Users")
-              .Series(series => {
-                  series.Bar(model => model.Value) //Create a Bar Chart series bound to the "Value" property.
-                        .Name("United States");
-              })
-              .CategoryAxis(axis => axis
-                  .Categories(model => model.Year)
-              )
-        )
-```
+            @(Html.Kendo().Chart(Model) //The Chart will be bound to the Model which is the InternetUsers list
+                  .Name("internetUsersChart") //The name of the Chart is mandatory. It specifies the "id" attribute of the widget.
+                  .Title("Internet Users")
+                  .Series(series => {
+                      series.Bar(model => model.Value) //Create a Bar Chart series bound to the "Value" property.
+                            .Name("United States");
+                  })
+                  .CategoryAxis(axis => axis
+                      .Categories(model => model.Year)
+                  )
+            )
+    ```
 
 ## Event Handling
 
@@ -87,7 +87,7 @@ You can subscribe to all Chart [events](../../../kendo-ui/api/javascript/dataviz
 
 ### By Handler Name
 
-The examples below demonstrates how to subscribe to events by a handler name.
+The following example demonstrates how to subscribe to events by a handler name.
 
 ###### Example
 
@@ -134,7 +134,7 @@ The examples below demonstrates how to subscribe to events by a handler name.
 
 ### By Template Delegate
 
-The example below demonstrates how to subscribe to events by a template delegate.
+The following example demonstrates how to subscribe to events by a template delegate.
 
 ###### Example
 
@@ -161,7 +161,7 @@ The example below demonstrates how to subscribe to events by a template delegate
 
 ### Existing Instances
 
-You can reference an existing Kendo UI Chart instance via [`jQuery.data()`](http://api.jquery.com/jQuery.data/). Once a reference is established, use the [Chart API](../../../kendo-ui/api/javascript/dataviz/ui/chart#methods) to control its behavior.
+To reference an existing Kendo UI Chart instance, use the [`jQuery.data()`](http://api.jquery.com/jQuery.data/) configuration. Once a reference is established, use the [Chart API](../../../kendo-ui/api/javascript/dataviz/ui/chart#methods) to control its behavior.
 
 ###### Example
 
@@ -174,8 +174,6 @@ You can reference an existing Kendo UI Chart instance via [`jQuery.data()`](http
       </script>
 
 ## See Also
-
-Other articles on Telerik UI for ASP.NET MVC and on the Chart:
 
 * [ASP.NET MVC API Reference: ChartBuilder](/api/Kendo.Mvc.UI.Fluent/ChartBuilder)
 * [How to Bind to SignalR Hubs in ASP.NET MVC Apps]({% slug howto_bindtosignalr_chartaspnetmvc %})

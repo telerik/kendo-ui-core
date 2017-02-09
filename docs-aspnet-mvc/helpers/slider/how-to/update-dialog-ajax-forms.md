@@ -7,9 +7,11 @@ slug: howto_userangesliderfor_slideraspnetmv
 
 # Use the RangeSliderFor Method
 
-The RangeSlider HtmlHelper renders two hidden inputs behind the scenes. This behavior helps you consume and process a model property that holds an array of two numbers&mdash;start and end.
+The RangeSlider HtmlHelper renders two hidden inputs behind the scenes.
 
-The example below demonstrates a very basic approach for using, consuming, and updating such a model with the `RangeSliderFor` method.
+This behavior helps you consume and process a model property that holds an array of 2 numbers&mdash;start and end.
+
+The following example demonstrates a very basic approach for using, consuming, and updating such a model with the `RangeSliderFor` method.
 
 ##### Example
 
@@ -44,8 +46,6 @@ public ActionResult UpdateMyModel(MyModel model)
 ```
 
 ## See Also
-
-Other articles on Telerik UI for ASP.NET MVC and on the Slider:
 
 * [ASP.NET MVC API Reference: SliderBuilder](/api/Kendo.Mvc.UI.Fluent/SliderBuilder)
 * [Overview of Telerik UI for ASP.NET MVC]({% slug overview_aspnetmvc %})

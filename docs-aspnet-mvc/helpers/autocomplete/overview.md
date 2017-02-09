@@ -23,115 +23,115 @@ There are two ways to bind a Kendo UI AutoComplete for ASP.NET MVC:
 
 Below are listed the steps for you to follow when configuring the Kendo UI AutoComplete for server binding to the Northwind **Products** table using Linq to SQL.
 
-**Step 1** Make sure you followed all the steps from the [introductory article on Telerik UI for ASP.NET MVC]({% slug overview_aspnetmvc %}).
+1. Make sure you followed all the steps from the [introductory article on Telerik UI for ASP.NET MVC]({% slug overview_aspnetmvc %}).
 
-**Step 2** Create a new action method and pass the **Products** table as the model.
+1. Create a new action method and pass the **Products** table as the model.
 
-###### Example
+    ###### Example
 
-        public ActionResult Index()
-        {
-            NorthwindDataContext northwind = new NorthwindDataContext();
+            public ActionResult Index()
+            {
+                NorthwindDataContext northwind = new NorthwindDataContext();
 
-            return View(northwind.Products);
-        }
+                return View(northwind.Products);
+            }
 
-**Step 3** Make your view strongly typed.
+1. Make your view strongly typed.
 
-###### Example
+    ###### Example
 
-```tab-ASPX
+    ```tab-ASPX
 
-     <%@ Page Language="C#" MasterPageFile="~/Views/Shared/Site.Master"
-     Inherits="System.Web.Mvc.ViewPage<IEnumerable<MvcApplication1.Models.Product>>" %>
-```
-```tab-Razor
+         <%@ Page Language="C#" MasterPageFile="~/Views/Shared/Site.Master"
+         Inherits="System.Web.Mvc.ViewPage<IEnumerable<MvcApplication1.Models.Product>>" %>
+    ```
+    ```tab-Razor
 
-     @model IEnumerable<MvcApplication1.Models.Product>
-```
+         @model IEnumerable<MvcApplication1.Models.Product>
+    ```
 
-**Step 4** Add a server bound AutoComplete.
+1. Add a server bound AutoComplete.
 
-###### Example
+    ###### Example
 
-```tab-ASPX
+    ```tab-ASPX
 
-    <%: Html.Kendo().AutoComplete()
-        .Name("productAutoComplete") //The name of the AutoComplete is mandatory. It specifies the "id" attribute of the widget.
-        .DataTextField("ProductName") //Specify which property of the Product to be used by the AutoComplete.
-        .BindTo(Model)   //Pass the list of Products to the AutoComplete.
-        .Filter("contains") //Define the type of the filter, which AutoComplete will use.
-    %>
-```
-```tab-Razor
+        <%: Html.Kendo().AutoComplete()
+            .Name("productAutoComplete") //The name of the AutoComplete is mandatory. It specifies the "id" attribute of the widget.
+            .DataTextField("ProductName") //Specify which property of the Product to be used by the AutoComplete.
+            .BindTo(Model)   //Pass the list of Products to the AutoComplete.
+            .Filter("contains") //Define the type of the filter, which AutoComplete will use.
+        %>
+    ```
+    ```tab-Razor
 
-    @(Html.Kendo().AutoComplete()
-      .Name("productAutoComplete") //The name of the AutoComplete is mandatory. It specifies the "id" attribute of the widget.
-      .DataTextField("ProductName") //Specify which property of the Product to be used by the AutoComplete.
-      .BindTo(Model)   //Pass the list of Products to the AutoComplete.
-      .Filter("contains") //Define the type of the filter, which AutoComplete will use.
-    )
-```
+        @(Html.Kendo().AutoComplete()
+          .Name("productAutoComplete") //The name of the AutoComplete is mandatory. It specifies the "id" attribute of the widget.
+          .DataTextField("ProductName") //Specify which property of the Product to be used by the AutoComplete.
+          .BindTo(Model)   //Pass the list of Products to the AutoComplete.
+          .Filter("contains") //Define the type of the filter, which AutoComplete will use.
+        )
+    ```
 
 ### Ajax Binding
 
 Below are listed the steps for you to follow when configuring the Kendo UI AutoComplete for Ajax binding to the Northwind **Products** table using Linq to SQL.
 
-**Step 1** Make sure you followed all the steps from the [introductory article on Telerik UI for ASP.NET MVC]({% slug overview_aspnetmvc %}).
+1. Make sure you followed all the steps from the [introductory article on Telerik UI for ASP.NET MVC]({% slug overview_aspnetmvc %}).
 
-**Step 2** Create an action method which renders the view.
+1. Create an action method which renders the view.
 
-###### Example
+    ###### Example
 
-        public ActionResult Index()
-        {
-            return View();
-        }
+            public ActionResult Index()
+            {
+                return View();
+            }
 
-**Step 3** Create a new action method and pass the **Products** table as JSON result.
+1. Create a new action method and pass the **Products** table as JSON result.
 
-###### Example
+    ###### Example
 
-        public JsonResult GetProducts()
-        {
-            NorthwindDataContext northwind = new NorthwindDataContext();
-            return Json(northwind.Products, JsonRequestBehavior.AllowGet);
-        }
+            public JsonResult GetProducts()
+            {
+                NorthwindDataContext northwind = new NorthwindDataContext();
+                return Json(northwind.Products, JsonRequestBehavior.AllowGet);
+            }
 
-**Step 4** Add an Ajax-bound AutoComplete.
+1. Add an Ajax-bound AutoComplete.
 
-###### Example
+    ###### Example
 
-```tab-ASPX
+    ```tab-ASPX
 
-    <%: Html.Kendo().AutoComplete()
-        .Name("productAutoComplete") //The name of the AutoComplete is mandatory. It specifies the "id" attribute of the widget.
-        .DataTextField("ProductName") //Specify which property of the Product to be used by the AutoComplete.
-        .DataSource(source =>
-        {
-           source.Read(read =>
+        <%: Html.Kendo().AutoComplete()
+            .Name("productAutoComplete") //The name of the AutoComplete is mandatory. It specifies the "id" attribute of the widget.
+            .DataTextField("ProductName") //Specify which property of the Product to be used by the AutoComplete.
+            .DataSource(source =>
+            {
+               source.Read(read =>
+               {
+                    read.Action("GetProducts", "Home"); //Set the Action and Controller names.
+               })
+               .ServerFiltering(true); //If true, the DataSource will not filter the data on the client.
+            })
+        %>
+    ```
+    ```tab-Razor
+
+        @(Html.Kendo().AutoComplete()
+          .Name("productAutoComplete") //The name of the AutoComplete is mandatory. It specifies the "id" attribute of the widget.
+          .DataTextField("ProductName") //Specify which property of the Product to be used by the AutoComplete.
+          .DataSource(source =>
            {
-                read.Action("GetProducts", "Home"); //Set the Action and Controller names.
+              source.Read(read =>
+              {
+                   read.Action("GetProducts", "Home"); //Set the Action and Controller names.
+              })
+              .ServerFiltering(true); //If true, the DataSource will not filter the data on the client.
            })
-           .ServerFiltering(true); //If true, the DataSource will not filter the data on the client.
-        })
-    %>
-```
-```tab-Razor
-
-    @(Html.Kendo().AutoComplete()
-      .Name("productAutoComplete") //The name of the AutoComplete is mandatory. It specifies the "id" attribute of the widget.
-      .DataTextField("ProductName") //Specify which property of the Product to be used by the AutoComplete.
-      .DataSource(source =>
-       {
-          source.Read(read =>
-          {
-               read.Action("GetProducts", "Home"); //Set the Action and Controller names.
-          })
-          .ServerFiltering(true); //If true, the DataSource will not filter the data on the client.
-       })
-    )
-```
+        )
+    ```
 
 > **Important**
 >
@@ -141,76 +141,76 @@ Below are listed the steps for you to follow when configuring the Kendo UI AutoC
 
 Below are listed the steps for you to follow when configuring the Kendo UI AutoComplete to use a custom DataSource and thus bind to a `ToDataSourceResult` instance.
 
-**Step 1** Make sure you followed all the steps from the [introductory article on Telerik UI for ASP.NET MVC]({% slug overview_aspnetmvc %}).
+1. Make sure you followed all the steps from the [introductory article on Telerik UI for ASP.NET MVC]({% slug overview_aspnetmvc %}).
 
-**Step 2** Create an action method which renders the view.
+1. Create an action method which renders the view.
 
-###### Example
+    ###### Example
 
-        public ActionResult Index()
-        {
-            return View();
-        }
+            public ActionResult Index()
+            {
+                return View();
+            }
 
-**Step 3** Create a new action method and pass the **Products** table as JSON result.
+1. Create a new action method and pass the **Products** table as JSON result.
 
-###### Example
+    ###### Example
 
-        public JsonResult GetProducts([DataSourceRequest] DataSourceRequest request)
-        {
-            NorthwindDataContext northwind = new NorthwindDataContext();
+            public JsonResult GetProducts([DataSourceRequest] DataSourceRequest request)
+            {
+                NorthwindDataContext northwind = new NorthwindDataContext();
 
-            return Json(northwind.Products.ToDataSourceResult(request));
-        }
+                return Json(northwind.Products.ToDataSourceResult(request));
+            }
 
-**Step 4** Add an Ajax bound AutoComplete.
+1. Add an Ajax bound AutoComplete.
 
-###### Example
+    ###### Example
 
-```tab-ASPX
+    ```tab-ASPX
 
-    <%: Html.Kendo().AutoComplete()
-        .Name("productAutoComplete")
-        .DataTextField("ProductName") //Specify which property of the Product to be used by the autocomplete as a text.
-        .DataSource(source =>
-        {
-            source.Custom()
-                  .ServerFiltering(true)
-                  .Type("aspnetmvc-ajax") //Set this type if you want to use DataSourceRequest and ToDataSourceResult instances.
-                  .Transport(transport =>
-                  {
-                      transport.Read("GetProducts", "Home");
-                  })
-                  .Schema(schema =>
-                  {
-                      schema.Data("Data") //Define the [data](http://docs.telerik.com/kendo-ui/api/javascript/data/datasource#configuration-schema.data) option.
-                            .Total("Total"); //Define the [total](http://docs.telerik.com/kendo-ui/api/javascript/data/datasource#configuration-schema.total) option.
-                  });
-        })
-    %>
-```
-```tab-Razor
+        <%: Html.Kendo().AutoComplete()
+            .Name("productAutoComplete")
+            .DataTextField("ProductName") //Specify which property of the Product to be used by the autocomplete as a text.
+            .DataSource(source =>
+            {
+                source.Custom()
+                      .ServerFiltering(true)
+                      .Type("aspnetmvc-ajax") //Set this type if you want to use DataSourceRequest and ToDataSourceResult instances.
+                      .Transport(transport =>
+                      {
+                          transport.Read("GetProducts", "Home");
+                      })
+                      .Schema(schema =>
+                      {
+                          schema.Data("Data") //Define the [data](http://docs.telerik.com/kendo-ui/api/javascript/data/datasource#configuration-schema.data) option.
+                                .Total("Total"); //Define the [total](http://docs.telerik.com/kendo-ui/api/javascript/data/datasource#configuration-schema.total) option.
+                      });
+            })
+        %>
+    ```
+    ```tab-Razor
 
-    @(Html.Kendo().AutoComplete()
-        .Name("productAutoComplete")
-        .DataTextField("ProductName") //Specify which property of the Product to be used by the autocomplete as a text.
-        .DataSource(source =>
-        {
-            source.Custom()
-                  .ServerFiltering(true)
-                  .Type("aspnetmvc-ajax") //Set this type if you want to use DataSourceRequest and ToDataSourceResult instances.
-                  .Transport(transport =>
-                  {
-                      transport.Read("GetProducts", "Home");
-                  })
-                  .Schema(schema =>
-                  {
-                      schema.Data("Data") //Define the [data](http://docs.telerik.com/kendo-ui/api/javascript/data/datasource#configuration-schema.data) option.
-                            .Total("Total"); //Define the [total](http://docs.telerik.com/kendo-ui/api/javascript/data/datasource#configuration-schema.total) option.
-                  });
-        })
-    )
-```
+        @(Html.Kendo().AutoComplete()
+            .Name("productAutoComplete")
+            .DataTextField("ProductName") //Specify which property of the Product to be used by the autocomplete as a text.
+            .DataSource(source =>
+            {
+                source.Custom()
+                      .ServerFiltering(true)
+                      .Type("aspnetmvc-ajax") //Set this type if you want to use DataSourceRequest and ToDataSourceResult instances.
+                      .Transport(transport =>
+                      {
+                          transport.Read("GetProducts", "Home");
+                      })
+                      .Schema(schema =>
+                      {
+                          schema.Data("Data") //Define the [data](http://docs.telerik.com/kendo-ui/api/javascript/data/datasource#configuration-schema.data) option.
+                                .Total("Total"); //Define the [total](http://docs.telerik.com/kendo-ui/api/javascript/data/datasource#configuration-schema.total) option.
+                      });
+            })
+        )
+    ```
 
 ### Parameter Sending to Server
 
@@ -264,7 +264,7 @@ Below are listed the steps for you to follow when configuring the Kendo UI AutoC
     </script>
 ```
 
-The example below demonstrates how the `GetProducts` method is used.
+The following example demonstrates how the `GetProducts` method is used.
 
 ###### Example
 
@@ -298,7 +298,7 @@ For more information, refer to the [demo on grouping](http://demos.telerik.com/a
 
 > **Important**
 >
-> The data source sorts the grouped data either in ascending or descending order. If you want to persist a specific group order, use the [server grouping feature](../../../kendo-ui/api/javascript/data/datasource#configuration-serverGrouping). Use the DataSource `ServerGrouping` method to define the `serverGrouping` option.
+> The data source sorts the grouped data either in ascending or descending order. To persist a specific group order, use the [server grouping feature](../../../kendo-ui/api/javascript/data/datasource#configuration-serverGrouping). To define the `serverGrouping` option, use the DataSource `ServerGrouping` method.
 
 ## Event Handling
 
@@ -306,7 +306,7 @@ You can subscribe to all AutoComplete [events](../../../kendo-ui/api/javascript/
 
 ### By Handler Name
 
-The example below demonstrates how to subscribe to events by a handler name.
+The following example demonstrates how to subscribe to events by a handler name.
 
 ###### Example
 
@@ -353,7 +353,7 @@ The example below demonstrates how to subscribe to events by a handler name.
 
 ### By Template Delegate
 
-The example below demonstrates how to subscribe to events by a template delegate.
+The following example demonstrates how to subscribe to events by a template delegate.
 
 ###### Example
 
@@ -381,7 +381,7 @@ The example below demonstrates how to subscribe to events by a template delegate
 
 ### Existing Instances
 
-You can reference an existing Kendo UI AutoComplete instance via [`jQuery.data()`](http://api.jquery.com/jQuery.data/). Once a reference is established, use the [AutoComplete API](../../../kendo-ui/api/javascript/ui/autocomplete#methods) to control its behavior.
+To reference an existing Kendo UI AutoComplete instance, use the [`jQuery.data()`](http://api.jquery.com/jQuery.data/) configuration. Once a reference is established, use the [AutoComplete API](../../../kendo-ui/api/javascript/ui/autocomplete#methods) to control its behavior.
 
 ###### Example
 
@@ -394,8 +394,6 @@ You can reference an existing Kendo UI AutoComplete instance via [`jQuery.data()
       </script>
 
 ## See Also
-
-Other articles on Telerik UI for ASP.NET MVC and on the AutoComplete:
 
 * [ASP.NET MVC API Reference: AutoCompleteBuilder](/api/Kendo.Mvc.UI.Fluent/AutoCompleteBuilder)
 * [Overview of Telerik UI for ASP.NET MVC]({% slug overview_aspnetmvc %})

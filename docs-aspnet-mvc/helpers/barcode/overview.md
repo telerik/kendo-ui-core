@@ -16,62 +16,62 @@ The Barcode HtmlHelper extension is a server-side wrapper for the [Kendo UI Barc
 
 Below are listed the steps for you to follow when configuring the Kendo UI Barcode.
 
-**Step 1** Make sure you followed all the steps from the [introductory article on Telerik UI for ASP.NET MVC]({% slug overview_aspnetmvc %}).
+1. Make sure you followed all the steps from the [introductory article on Telerik UI for ASP.NET MVC]({% slug overview_aspnetmvc %}).
 
-**Step 2** Create a new action method which renders the view.
+1. Create a new action method which renders the view.
 
-###### Example
+    ###### Example
 
-        public ActionResult Index()
-        {
-            return View();
-        }
+            public ActionResult Index()
+            {
+                return View();
+            }
 
-**Step 3** Add a Barcode.
+1. Add a Barcode.
 
-###### Example
+    ###### Example
 
-```tab-ASPX
+    ```tab-ASPX
 
-        <%: Html.Kendo().Barcode()
-                .Name("barcode") //The name of the Barcode is mandatory. It specifies the "id" attribute of the widget.
-                .Value("foo") //Set the value of the Barcode.
-        %>
-```
-```tab-Razor
+            <%: Html.Kendo().Barcode()
+                    .Name("barcode") //The name of the Barcode is mandatory. It specifies the "id" attribute of the widget.
+                    .Value("foo") //Set the value of the Barcode.
+            %>
+    ```
+    ```tab-Razor
 
-        @(Html.Kendo().Barcode()
-              .Name("barcode") //The name of the Barcode is mandatory. It specifies the "id" attribute of the widget.
-              .Value("foo") //Set the value of the Barcode.
-        )
-```
+            @(Html.Kendo().Barcode()
+                  .Name("barcode") //The name of the Barcode is mandatory. It specifies the "id" attribute of the widget.
+                  .Value("foo") //Set the value of the Barcode.
+            )
+    ```
 
-**Step 4** Choose the appropriate symbology (encoding) from the available options listed [here](../../../kendo-ui/api/javascript/dataviz/ui/barcode#configuration-type). Specify it through the Encoding method which accepts an `enum` value.
+1. Choose the appropriate symbology (encoding) from the available options listed [here](../../../kendo-ui/api/javascript/dataviz/ui/barcode#configuration-type). Specify it through the Encoding method which accepts an `enum` value.
 
-###### Example
+    ###### Example
 
-```tab-ASPX
+    ```tab-ASPX
 
-        <%: Html.Kendo().Barcode()
-                .Name("barcode")
-                .Encoding(BarcodeSymbology.EAN13) //By default, Code39 encoding is used.
-                .Value("foo")
-        %>
-```
-```tab-Razor
+            <%: Html.Kendo().Barcode()
+                    .Name("barcode")
+                    .Encoding(BarcodeSymbology.EAN13) //By default, Code39 encoding is used.
+                    .Value("foo")
+            %>
+    ```
+    ```tab-Razor
 
-        @(Html.Kendo().Barcode()
-              .Name("barcode")
-              .Encoding(BarcodeSymbology.EAN13) //By default, Code39 encoding is used.
-              .Value("foo")
-        )
-```
+            @(Html.Kendo().Barcode()
+                  .Name("barcode")
+                  .Encoding(BarcodeSymbology.EAN13) //By default, Code39 encoding is used.
+                  .Value("foo")
+            )
+    ```
 
 ## Reference
 
 ### Existing Instances
 
-You can reference an existing Kendo UI Barcode instance via [`jQuery.data()`](http://api.jquery.com/jQuery.data/). Once a reference is established, use the [Barcode API](../../../kendo-ui/api/javascript/dataviz/ui/barcode#methods) to control its behavior.
+To reference an existing Kendo UI Barcode instance, use the [`jQuery.data()`](http://api.jquery.com/jQuery.data/) configuration. Once a reference is established, use the [Barcode API](../../../kendo-ui/api/javascript/dataviz/ui/barcode#methods) to control its behavior.
 
 ###### Example
 

@@ -7,13 +7,11 @@ slug: howto_implementdraganddrop_scheduleraspnetmvc
 
 # Implement Drag-and-Drop Support
 
-The example below demonstrates how to implement the drag-and-drop functionality between a Kendo UI Grid and Scheduler in ASP.NET MVC applications.
-
-To see the example, refer to [this GitHub repository](https://github.com/telerik/ui-for-aspnet-mvc-examples/tree/master/scheduler/scheduler-drag-and-drop).
+To see the example, refer to the project on how to [implement the drag-and-drop functionality between a Kendo UI Grid and Scheduler](https://github.com/telerik/ui-for-aspnet-mvc-examples/tree/master/scheduler/scheduler-drag-and-drop) in ASP.NET MVC applications.
 
 ## See Also
 
 * [Overview of the Scheduler HtmlHelper]({% slug overview_schedulerhelper_aspnetmvc %})
 * [SchedulerBuilder API Reference](/api/Kendo.Mvc.UI.Fluent/SchedulerBuilder)
 
-For more runnable examples on the Kendo UI Scheduler in ASP.NET MVC applications, browse its [**How To** documentation folder]({% slug howto_bindtowebapicontroller_scheduleraspnetmvc %}).
+For more runnable examples on the Kendo UI Scheduler in ASP.NET MVC applications, browse its [**How To** documentation folder](/helpers/scheduler/how-to/).

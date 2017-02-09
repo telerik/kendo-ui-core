@@ -11,11 +11,9 @@ position: 3
 
 Telerik maintains a NuGet Feed for registered users.
 
-[NuGet](https://www.nuget.org) is a popular .NET package manager.
+[NuGet](https://www.nuget.org) is a popular .NET package manager. Official releases, service packs and internal builds of UI for ASP.NET MVC are available for registered users.
 
-Official releases, service packs and internal builds of UI for ASP.NET MVC are available for registered users.
-
-## Use the Telerik Private NuGet Feed
+## The Telerik Private NuGet Feed
 
 To use the Telerik NuGet Feed as a Package Source, use the [NuGet CLI](http://docs.nuget.org/consume/Command-Line-Reference).
 
@@ -27,13 +25,13 @@ As of now, Visual Studio does not provide a UI for configuring authenticated NuG
 1. Open a Command Prompt and change the path to where the `nuget.exe` is downloaded.
 1. Execute the command from the example below.
 
-**Store Encrypted Credentials**
+#### Store Encrypted Credentials
 
 The command from the example below stores a token in the `%AppData%\NuGet\NuGet.config` file. Your original credentials cannot be obtained from this token.
 
 > **Important**
 >
-> If you are unable to connect to the feed using encrypted credentials, try the alternative approach of storing credentials in clear text below.
+> If you are unable to connect to the feed by using encrypted credentials, try the alternative approach of storing credentials in clear text.
 
 ###### Example
 
@@ -42,9 +40,9 @@ NuGet Sources Add -Name "telerik.com" -Source "https://nuget.telerik.com/nuget" 
       -UserName "your login email" -Password "your password"
 ```
 
-**Store Credentials in Clear Text**
+#### Store Credentials in Clear Text
 
-The command from the example below stores the password in clear text in the `%AppData%\NuGet\NuGet.config` file. Use this alternative approach if you are unable to connect to the feed using encrypted credentials.
+The command from the example below stores the password in clear text in the `%AppData%\NuGet\NuGet.config` file. If you are unable to connect to the feed using encrypted credentials, use this alternative approach.
 
 ###### Example
 
@@ -74,8 +72,6 @@ The NuGet Feed provides the following packages related to UI for ASP.NET MVC:
 The [Kendo UI Packages](../../kendo-ui/intro/installation/nuget-install) are listed in a separate section.
 
 ## See Also
-
-Other articles on getting started with UI for ASP.NET MVC:
 
 * [Telerik UI for ASP.NET MVC Fundamentals]({% slug fundamentals_aspnetmvc %})
 * [Scaffolding with Telerik UI for ASP.NET MVC]({% slug scaffolding_aspnetmvc %})

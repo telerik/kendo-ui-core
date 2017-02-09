@@ -7,11 +7,9 @@ slug: howto_update_ajax_forms_windowaspnetmv
 
 # Update Kendo UI Windows with AJAX Forms
 
-To see the example on updating AJAX forms with the validation in a Kendo UI Window in ASP.NET MVC applications, refer to [this project](https://github.com/telerik/ui-for-aspnet-mvc-examples/tree/master/window/KendoWindow-Ajax-Form).
+To see the example, refer to the project on how to [update AJAX forms with the validation in a Kendo UI Window](https://github.com/telerik/ui-for-aspnet-mvc-examples/tree/master/window/KendoWindow-Ajax-Form) in ASP.NET MVC applications.
 
 ## See Also
-
-Other articles on Telerik UI for ASP.NET MVC and on the Window:
 
 * [ASP.NET MVC API Reference: WindowBuilder](/api/aspnet-mvc/Kendo.Mvc.UI.Fluent/WindowBuilder)
 * [Overview of Telerik UI for ASP.NET MVC]({% slug overview_aspnetmvc %})

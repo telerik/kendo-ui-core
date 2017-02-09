@@ -92,8 +92,6 @@ In order for the values to be recognized as valid when using a non-default cultu
 
 ## See Also
 
-Other articles on troubleshooting:
-
 * [Common Issues in Telerik UI for ASP.NET MVC]({% slug troubleshooting_aspnetmvc %})
 * [Scaffolding Issues in Telerik UI for ASP.NET MVC]({% slug troubleshooting_scaffolding_aspnetmvc %})
 * [Common Issues in the Grid ASP.NET MVC HtmlHelper Extension]({% slug troubleshoot_gridhelper_aspnetmvc %})

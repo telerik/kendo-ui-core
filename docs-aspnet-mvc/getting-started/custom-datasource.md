@@ -21,7 +21,7 @@ The CustomDataSource builder is created to allow a full control over the DataSou
 
 Using the CustomDataSource builder, even for small customizations, requires additional attention as all predefined settings, introduced by the regular DataSource builders, are removed.
 
-The example below demonstrates how to convert a regular [Grid](http://demos.telerik.com/kendo-ui/grid/index) AjaxDataSourceBuilder to a CustomDataSource builder.
+The following example demonstrates how to convert a regular [Grid](http://demos.telerik.com/kendo-ui/grid/index) AjaxDataSourceBuilder to a CustomDataSource builder.
 
 ###### Example
 
@@ -39,7 +39,7 @@ The example below demonstrates how to convert a regular [Grid](http://demos.tele
         )
     )
 
-The example below demonstrates how the CustomDataSourceBuilder equivalent.
+The following example demonstrates how the CustomDataSourceBuilder equivalent.
 
 ###### Example
 
@@ -81,7 +81,7 @@ The example below demonstrates how the CustomDataSourceBuilder equivalent.
 
 To set a JavaScript function or object as an option for the DataSource, use the `ClientHandlerDescriptor` class.
 
-The example below demonstrates how to set a JavaScript function for the `Read` operation of the Scheduler by utilizing the `ClientHandlerDescriptor` type included in the `Kendo.Mvc` namespace. This class allows code rendering as-is, without the need of string wrapping. In this way the JavaScript functions and objects can be set to apply various options from the CustomDataSource.
+The following example demonstrates how to set a JavaScript function for the `Read` operation of the Scheduler by utilizing the `ClientHandlerDescriptor` type included in the `Kendo.Mvc` namespace. This class allows code rendering as-is, without the need of string wrapping. In this way the JavaScript functions and objects can be set to apply various options from the CustomDataSource.
 
 ###### Example
 
@@ -128,7 +128,7 @@ The example below demonstrates how to set a JavaScript function for the `Read` o
 
 ### Model Fields Setup as Functions
 
-The example below demonstrates how to set the default value of the `EmployeeID` field to a JavaScript function. This is applicable in the cases where the default value should be dynamic. For instance, a case when the user inserts a new record while the `EmployeeID` column specifies a filter value different from the default one.
+The following example demonstrates how to set the default value of the `EmployeeID` field to a JavaScript function. This is applicable in the cases where the default value should be dynamic. For instance, a case when the user inserts a new record while the `EmployeeID` column specifies a filter value different from the default one.
 
 ###### Example
 
@@ -181,7 +181,7 @@ The example below demonstrates how to set the default value of the `EmployeeID` 
 
 ### Custom DataType CRUD Operations Setup
 
-The example below demonstrates how to bind the Grid to the Kendo UI online demo service that serves `jsonp` data.
+The following example demonstrates how to bind the Grid to the Kendo UI online demo service that serves `jsonp` data.
 
 To see the full demo, refer to the [introductory article on Telerik UI for ASP.NET MVC]({% slug overview_aspnetmvc %}#sample-application).
 
@@ -242,7 +242,7 @@ To see the full demo, refer to the [introductory article on Telerik UI for ASP.N
 
 ### Grid Binding to oData
 
-The example below demonstrates how to bind the Grid to the oData service.
+The following example demonstrates how to bind the Grid to the oData service.
 
 To see the full demo, refer to the [introductory article on Telerik UI for ASP.NET MVC]({% slug overview_aspnetmvc %}#sample-application).
 
@@ -277,7 +277,7 @@ To see the full demo, refer to the [introductory article on Telerik UI for ASP.N
 
 ### Grid Binding to oData v4
 
-The example below demonstrates how to use the CustomDataSource builder to bind the Grid wrapper to oData v4 service.
+The following example demonstrates how to use the CustomDataSource builder to bind the Grid wrapper to oData v4 service.
 
 To see the full demo, refer to this [Grid how-to example]({% slug howto_useodata4webapicontroller_gridaspnetmvc %}).
 

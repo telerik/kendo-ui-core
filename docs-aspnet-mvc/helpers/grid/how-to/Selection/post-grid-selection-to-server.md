@@ -8,11 +8,11 @@ slug: howto_postselectiontoserver_gridaspnetmv
 
 # Post Grid Selection to Server
 
-To see the example on how to post the Grid selection to the server, refer to [this project](https://github.com/telerik/ui-for-aspnet-mvc-examples/tree/master/grid/post-grid-selection-to-server).
+To see the example, refer to the project on how to [post the Grid selection to the server](https://github.com/telerik/ui-for-aspnet-mvc-examples/tree/master/grid/post-grid-selection-to-server).
 
 ## See Also
 
 * [Overview of the Grid HtmlHelper]({% slug overview_gridhelper_aspnetmvc %})
 * [GridBuilder API Reference](/api/Kendo.Mvc.UI.Fluent/GridBuilder)
 
-For more runnable examples on the Kendo UI Grid in ASP.NET MVC applications, browse its [**How To** documentation folder]({% slug howto_applycustomrowstylesbasedondata_gridaspnetmvc %}).
+For more runnable examples on the Kendo UI Grid in ASP.NET MVC applications, browse its [**How To** documentation folder](/helpers/grid/how-to/Appearance/).

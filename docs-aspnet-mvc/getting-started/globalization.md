@@ -9,40 +9,42 @@ position: 7
 
 # Globalization
 
-Globalization is the process of designing and developing an application that works in multiple cultures and languages. The culture defines specific information for the number formats, week and month names, date and time formats, etc.
+Globalization is the process of designing and developing an application that works in multiple cultures and languages.
+
+The culture defines specific information for the number formats, week and month names, date and time formats, etc.
 
 ## Apply Cultures
 
 Below are listed the steps for you to follow when you want to make Telerik UI for ASP.NET MVC use a culture that is different from the default one, which is `en-US`.
 
-**Step 1** Copy the required culture JavaScript file from the `\js\culture\` directory of your Telerik UI for ASP.NET MVC installation to the `~/Scripts/cultures/` directory of your application. Use the Spanish `es-ES` culture for the example.
+1. Copy the required culture JavaScript file from the `\js\culture\` directory of your Telerik UI for ASP.NET MVC installation to the `~/Scripts/cultures/` directory of your application. Use the Spanish `es-ES` culture for the example.
 
-**Step 2** Include the corresponding culture JavaScript file after the other JavaScript product files.
+1. Include the corresponding culture JavaScript file after the other JavaScript product files.
 
-###### Example
+    ###### Example
 
-```tab-ASPX
+    ```tab-ASPX
 
-      <script src="<%= Url.Content("~/Scripts/jquery.min.js") %>"></script>
-      <script src="<%= Url.Content("~/Scripts/kendo.all.min.js") %>"></script>
-      <script src="<%= Url.Content("~/Scripts/kendo.aspnetmvc.min.js") %>"></script>
-      <script src="<%= Url.Content("~/Scripts/cultures/kendo.culture.es-ES.min.js") %>"></script>
-```
-```tab-Razor
+          <script src="<%= Url.Content("~/Scripts/jquery.min.js") %>"></script>
+          <script src="<%= Url.Content("~/Scripts/kendo.all.min.js") %>"></script>
+          <script src="<%= Url.Content("~/Scripts/kendo.aspnetmvc.min.js") %>"></script>
+          <script src="<%= Url.Content("~/Scripts/cultures/kendo.culture.es-ES.min.js") %>"></script>
+    ```
+    ```tab-Razor
 
-      <script src="@Url.Content("~/Scripts/jquery.min.js")"></script>
-      <script src="@Url.Content("~/Scripts/kendo.all.min.js")"></script>
-      <script src="@Url.Content("~/Scripts/kendo.aspnetmvc.min.js")"></script>
-      <script src="@Url.Content("~/Scripts/cultures/kendo.culture.es-ES.min.js")"></script>
-```
+          <script src="@Url.Content("~/Scripts/jquery.min.js")"></script>
+          <script src="@Url.Content("~/Scripts/kendo.all.min.js")"></script>
+          <script src="@Url.Content("~/Scripts/kendo.aspnetmvc.min.js")"></script>
+          <script src="@Url.Content("~/Scripts/cultures/kendo.culture.es-ES.min.js")"></script>
+    ```
 
-**Step 3** Set the current culture by calling the [`kendo.culture`](../../kendo-ui/api/javascript/kendo#methods-culture) method. Note that you must add the script block after the culture JavaScript file.
+1. Set the current culture by calling the [`kendo.culture`](../../kendo-ui/api/javascript/kendo#methods-culture) method. Note that you must add the script block after the culture JavaScript file.
 
-###### Example
+    ###### Example
 
-      <script>
-      kendo.culture("es-ES");
-      </script>
+          <script>
+          kendo.culture("es-ES");
+          </script>
 
 After performing these steps, all Kendo UI widgets included in the product will use the `es-ES` culture for parsing and formatting dates and numbers.
 

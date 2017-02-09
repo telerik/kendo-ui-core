@@ -473,8 +473,6 @@ For additional tips on the Editor widget, refer to the [troubleshooting article 
 
 ## See Also
 
-Other articles on troubleshooting:
-
 * [Validation Issues in Telerik UI for ASP.NET MVC]({% slug troubleshooting_validation_aspnetmvc %})
 * [Scaffolding Issues in Telerik UI for ASP.NET MVC]({% slug troubleshooting_scaffolding_aspnetmvc %})
 * [Common Issues in the Grid ASP.NET MVC HtmlHelper Extension]({% slug troubleshoot_gridhelper_aspnetmvc %})
