@@ -9,9 +9,9 @@ position: 2
 
 # Fundamentals
 
-## Overview of Server-Side Wrappers
-
 Telerik UI for ASP.NET MVC is a set of server-side wrappers.
+
+## Overview of Server-Side Wrappers
 
 A server-side wrapper:
 
@@ -34,7 +34,7 @@ The Kendo UI [HtmlHelper](http://www.asp.net/mvc/overview/older-versions-1/views
 
 ### Widget Options
 
-The widget options are exposed via [fluent interface](https://en.wikipedia.org/wiki/Fluent_interface).
+The widget options are exposed through a [fluent interface](https://en.wikipedia.org/wiki/Fluent_interface).
 
 **Figure 3. Application of fluent interface**
 
@@ -50,9 +50,9 @@ To set an option, call the corresponding method and pass the required option val
           .Spinners(false) // disable the spinners
     )
 
-### Name
+### Setting the Name
 
-You must set the `Name` option of a Kendo UI server-side wrapper. The value will be used as the `id` and `name` HTML attributes&mdash;the `name` HTML attribute is set only for input widgets such as the DatePicker, NumericTextBox, DropDownList, etc. The `id` HTML attribute is used to initialize the Kendo UI widget.
+You have to set the `Name` option of a Kendo UI server-side wrapper. The value will be used as the `id` and `name` HTML attributes&mdash;the `name` HTML attribute is set only for input widgets such as the DatePicker, NumericTextBox, DropDownList, etc. The `id` HTML attribute is used to initialize the Kendo UI widget.
 
 IDs (Names) of widgets should meet the requirements for valid HTML `ID` attributes. They should not contain spaces and special characters, and should start with a letter.
 
@@ -64,82 +64,82 @@ Alternatively, use `NumericTextBoxFor`. All Kendo UI server-side wrappers which 
 
 > **Important**
 >
-> Widget `Name` options must always be unique in the context of the whole web page. If a partial view is loaded multiple times, each instance of this partial view must render all widgets with unique `Name` options (IDs). Failure to do so results in duplicate element IDs on the page, and only one widget instance is initialized and works properly&mdash;the one, which occurs first in the HTML markup.
+> The `Name` options of the widgets always have to be unique in the context of the whole web page. If a partial view is loaded multiple times, each instance of this partial view has to render all widgets with unique `Name` options (IDs). If you fail to meet this requirement, duplicate element IDs render on the page and only the widget instance which occurs first in the HTML markup initializes and works properly.
 
-### Deferred Initialization
+### Deferring Initialization
 
 The server-side wrapper outputs the Kendo UI widget initialization script right after the widget HTML markup, which may not be always desired. For example, if the script files are registered at the bottom of the page, or when nesting Kendo UI widgets. To move initialization statements, follow the steps below.
 
-**Step 1** Call the `Deferred` method of the wrapper. This suppresses the immediate script statement rendering.
+1. Call the `Deferred` method of the wrapper. This suppresses the immediate script statement rendering.
 
-###### Example
+    ###### Example
+
+            @(Html.Kendo().NumericTextBox()
+                  .Name("age")
+                  .Deferred()
+            )
+
+1. Call the `DeferredScripts` method. This outputs all previously deferred initialization statements.
+
+    ###### Example
+
+            @Html.Kendo().DeferredScripts()
+
+1. The `DeferredScripts` method accepts a Boolean parameter, which determines whether script elements should be rendered automatically. This is useful if you want to render the deferred initialization scripts inside existing script element.
+
+    ###### Example
+
+        <script>
+            @Html.Kendo().DeferredScripts(false)
+        </script>
+
+1. Render the deferred initialization script of a particular widget via the `DeferredScriptsFor` method.
+
+    ###### Example
 
         @(Html.Kendo().NumericTextBox()
               .Name("age")
               .Deferred()
         )
+        <!-- other code -->
+        @Html.Kendo().DeferredScriptsFor("age")
 
-**Step 2** Call the `DeferredScripts` method. This outputs all previously deferred initialization statements.
+1. The `DeferredScriptsFor` method can also suppress the output of script elements around the initialization script.
 
-###### Example
+    ###### Example
 
-        @Html.Kendo().DeferredScripts()
+        <script>
+        @Html.Kendo().DeferredScriptsFor("age", false)
+        </script>
 
-**Step 3** The `DeferredScripts` method accepts a Boolean parameter, which determines whether script elements should be rendered automatically. This is useful if you want to render the deferred initialization scripts inside existing script element.
-
-###### Example
-
-    <script>
-        @Html.Kendo().DeferredScripts(false)
-    </script>
-
-**Step 4** Render the deferred initialization script of a particular widget via the `DeferredScriptsFor` method.
-
-###### Example
-
-    @(Html.Kendo().NumericTextBox()
-          .Name("age")
-          .Deferred()
-    )
-    <!-- other code -->
-    @Html.Kendo().DeferredScriptsFor("age")
-
-**Step 5** The `DeferredScriptsFor` method can also suppress the output of script elements around the initialization script.
-
-###### Example
-
-    <script>
-    @Html.Kendo().DeferredScriptsFor("age", false)
-    </script>
-
-### Event Handling
+### Handling Events
 
 To subscribe to the client-side events exposed by a Kendo UI widget, use the `Events` method.
 
-**Step 1** Specify the name of the JavaScript function which will handle the event.
+1. Specify the name of the JavaScript function which will handle the event.
 
-###### Example
+    ###### Example
 
-        @(Html.Kendo().NumericTextBox()
-              .Name("age")
-              .Events(events =>
-                  events.Change("age_change") // handle the "change" event
-                        .Spin("age_spin")     // handle the "spin" event
-              )
-        )
+            @(Html.Kendo().NumericTextBox()
+                  .Name("age")
+                  .Events(events =>
+                      events.Change("age_change") // handle the "change" event
+                            .Spin("age_spin")     // handle the "spin" event
+                  )
+            )
 
-**Step 2** Declare the event handlers.
+1. Declare the event handlers.
 
-###### Example
+    ###### Example
 
-        <script>
-        function age_change(e) {
-            // handle the event
-        }
-        function age_spin(e) {
-            // handle the event
-        }
-        </script>
+            <script>
+            function age_change(e) {
+                // handle the event
+            }
+            function age_spin(e) {
+                // handle the event
+            }
+            </script>
 
 ## Customization
 
@@ -199,9 +199,9 @@ By default, every Kendo UI MVC server-side wrapper renders a script element with
         })
     </script>
 
-### BeginForm() inside Content Containers
+### Form Rendering
 
-If `Html.BeginForm()` or `Ajax.BeginForm()` should be included inside a Kendo UI widget `.Content()`. The correct way to do it is to use the widget helper's `.Render();` method and wrap the widget declaration in a non-rendering code block, e.g. `@{}` instead of `@()`. Otherwise, the form is rendered outside the widget and any form fields inside the widget are not submitted as expected.
+If `Html.BeginForm()` or `Ajax.BeginForm()` should be included inside a Kendo UI widget `.Content()`. The correct way to do it is to use the `.Render();` helper method and wrap the widget declaration in a non-rendering code block. For example, `@{}` instead of `@()`. Otherwise, the form is rendered outside the widget and the form fields inside the widget are not submitted as expected.
 
 The approach is required with widgets such as the Window, TabStrip, Splitter, and PanelBar. The approach is not required if the form is placed inside a partial view, which is loaded with Ajax via `.LoadContentFrom()`, or if a plain HTML `<form>` tag is used.
 
@@ -223,13 +223,16 @@ The approach is required with widgets such as the Window, TabStrip, Splitter, an
 
 ## Bundling
 
-### Overview
-
 The bundling technique is used to combine resources and improve the loading time by reducing the number of requests to the server. Bundling is disabled in development (debug configuration) by default.
 
-There are two ways to enable bundling in development. The first one is to disable debugging, by setting `debug="false"` in `web.config` within the compilation element. The second one is to set `BundleTable.EnableOptimizations=true` within the `RegisterBundles` static method. The latter setting will override the `"debug"` value in `web.config`.
+### Enabling Bundling
 
-It is important to note that bundling can cause problems with relative paths in stylesheets. For example, the DejaVu font included in the common stylesheet uses such a path. The solution is to rewrite the URLs to absolute ones using the `CssRewriteUrlTransform`, as shown below.
+There are 2 ways to enable bundling in development:
+
+* Disable debugging by setting `debug="false"` in `web.config` within the compilation element.
+* Set `BundleTable.EnableOptimizations=true` within the `RegisterBundles` static method. This overrides the `"debug"` value in `web.config`.
+
+Note that bundling can cause problems with relative paths in stylesheets. For example, the **DejaVu** font included in the common stylesheet uses such a path. The solution is to rewrite the URLs to absolute ones using the `CssRewriteUrlTransform`, as shown below.
 
 ###### Example
 
@@ -296,8 +299,6 @@ The following implementation is also correct, assuming that the Kendo UI Default
 The above explanation and requirements are applicable to all stylesheets that use relative image URLs. This is not a limitation of Kendo UI. Theoretically, CSS files can use absolute image URLs, and then the virtual bundle URL can be random, but such an implementation is suitable only for custom tailor-made stylesheets, which are intended to work in a specific application.
 
 ## See Also
-
-Other articles on getting started with UI for ASP.NET MVC:
 
 * [Telerik UI for ASP.NET MVC Overview]({% slug overview_aspnetmvc %})
 * [Telerik UI for ASP.NET MVC NuGet Packages]({% slug aspnetmvc_nuget %})

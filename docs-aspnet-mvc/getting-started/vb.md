@@ -9,7 +9,7 @@ position: 9
 
 # Visual Basic Syntax
 
-The examples below demonstrate the correct Visual Basic (VB) syntax when using [lamba expressions](http://msdn.microsoft.com/en-us/library/bb531253.aspx) and [anonymous types](http://msdn.microsoft.com/en-us/library/bb384767.aspx) inside Kendo UI MVC wrapper declarations.
+This article demonstrates the correct Visual Basic (VB) syntax when you use [lamba expressions](http://msdn.microsoft.com/en-us/library/bb531253.aspx) and [anonymous types](http://msdn.microsoft.com/en-us/library/bb384767.aspx) inside the Kendo UI MVC wrapper declarations.
 
 ## Editor
 
@@ -104,7 +104,7 @@ The examples below demonstrate the correct Visual Basic (VB) syntax when using [
                         .Render()
     End Code
 
-The example below demonstrates alternative ToolBar configurations.
+The following example demonstrates alternative ToolBar configurations.
 
 ###### Example
 

@@ -26,8 +26,6 @@ To bind the AutoComplete to any collection, define the `DataTextField`. Note tha
 
 ## See Also
 
-Other articles on migrating from Telerik Extensions:
-
 * [Migrate the Calendar]({% slug calendar_migrationextensions_aspnetmvc %})
 * [Migrate the Chart]({% slug chart_migrationextensions_aspnetmvc %})
 

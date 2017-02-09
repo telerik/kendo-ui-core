@@ -78,8 +78,6 @@ In the view, configure the Chart to use the action method created in the previou
 
 ## See Also
 
-Other articles on Telerik UI for ASP.NET MVC and on the Chart:
-
 * [Overview of the Kendo UI Chart for ASP.NET MVC]({% slug overview_charthelper_aspnetmvc %})
 * [How to Bind to SignalR Hubs in ASP.NET MVC Apps]({% slug howto_bindtosignalr_chartaspnetmvc %})
 * [How to Create View Model Bound Dynamic Series in ASP.NET MVC Apps]({% slug howto_cerateviewmodelboundseries_chartaspnetmvc %})

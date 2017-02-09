@@ -7,9 +7,9 @@ slug: howto_useinlineeditorineditortemplate_editoraspnetmvc
 
 # Use Inline Editors in Editor Templates
 
-When you use the Kendo UI Editor in inline mode in an MVC Editor template, the posting of content to the action is prevented. The reason for this behavior is that the inline mode renders a DOM element which is not a form field and, therefore, no data is sent.
+When you use the Kendo UI Editor in the inline editing mode in an MVC Editor template, the posting of content to the action is prevented.
 
-To handle this scenario, implement further the Editor template by adding a hidden input and update it when the content of the Kendo UI Editor changes.
+The reason for this behavior is that the inline mode renders a DOM element which is not a form field and, therefore, no data is sent. To handle this scenario, implement further the Editor template by adding a hidden input and update it when the content of the Kendo UI Editor changes.
 
 ###### Example
 
@@ -32,9 +32,7 @@ To handle this scenario, implement further the Editor template by adding a hidde
 
 ## See Also
 
-Other articles and how-to examples on the Kendo UI Editor HtmlHelper:
-
 * [Editor HtmlHelper Overview]({% slug overview_editorhelper_aspnetmvc %})
 * [EditorBuilder API Reference](/api/Kendo.Mvc.UI.Fluent/EditorBuilder)
 
-For more runnable examples on the Kendo UI Editor in ASP.NET MVC applications, browse its [**How To** documentation folder]({% slug howto_addmaxlengthvalidation_editoraspnetmvc %}).
+For more runnable examples on the Kendo UI Editor in ASP.NET MVC applications, browse its [**How To** documentation folder](/helpers/editor/how-to/).

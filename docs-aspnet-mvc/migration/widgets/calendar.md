@@ -57,8 +57,6 @@ This article demonstrates the ASP.NET MVC server-side API for the Kendo UI Calen
 
 ## See Also
 
-Other articles on migrating from Telerik Extensions:
-
 * [Migrate the AutoComplete]({% slug autocomplete_migrationextensions_aspnetmvc %})
 * [Migrate the Chart]({% slug chart_migrationextensions_aspnetmvc %})
 

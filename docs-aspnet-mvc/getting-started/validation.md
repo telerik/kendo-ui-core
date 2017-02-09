@@ -28,100 +28,100 @@ The Kendo UI Validator also creates rules for the unobtrusive attributes that ar
 
 Below are listed the steps for you to follow when using the Kendo UI Validator with the `DataAnnotation` attributes.
 
-**Step 1** Create a `class` and add the needed `DataAnnotation` attributes.
+1. Create a `class` and add the needed `DataAnnotation` attributes.
 
-###### Example
+    ###### Example
 
-        public class OrderViewModel
-        {
-            [HiddenInput(DisplayValue = false)]
-            public int OrderID { get; set; }
+            public class OrderViewModel
+            {
+                [HiddenInput(DisplayValue = false)]
+                public int OrderID { get; set; }
 
-            [Required]
-            [Display(Name = "Customer")]
-            public string CustomerID { get; set; }
+                [Required]
+                [Display(Name = "Customer")]
+                public string CustomerID { get; set; }
 
-            [StringLength(15)]
-            [Display(Name = "Ship Country")]
-            public string ShipCountry { get; set; }
+                [StringLength(15)]
+                [Display(Name = "Ship Country")]
+                public string ShipCountry { get; set; }
 
-            [Range(1, int.MaxValue, ErrorMessage = "Freight should be greater than 1")]
-            [DataType(DataType.Currency)]
-            public decimal? Freight { get; set; }
+                [Range(1, int.MaxValue, ErrorMessage = "Freight should be greater than 1")]
+                [DataType(DataType.Currency)]
+                public decimal? Freight { get; set; }
 
-            [Display(Name = "Order Date")]
-            public DateTime? OrderDate { get; set; }
-        }
+                [Display(Name = "Order Date")]
+                public DateTime? OrderDate { get; set; }
+            }
 
-**Step 2** Pass an instance of the model to the view.
+1. Pass an instance of the model to the view.
 
-###### Example
+    ###### Example
 
-        public ActionResult Create()
-        {
-            ViewData["customers"] = GetCustomers();
-            return View(new OrderViewModel());
-        }
+            public ActionResult Create()
+            {
+                ViewData["customers"] = GetCustomers();
+                return View(new OrderViewModel());
+            }
 
-**Step 3** Create the editors in the view based on the model, and initialize the Kendo UI Validator on the form.
+1. Create the editors in the view based on the model, and initialize the Kendo UI Validator on the form.
 
-###### Example
+    ###### Example
 
-        @model OrderViewModel
+            @model OrderViewModel
 
-        @using (Html.BeginForm()) {
-            <fieldset>
-                <legend>Order</legend>
+            @using (Html.BeginForm()) {
+                <fieldset>
+                    <legend>Order</legend>
 
-                @Html.HiddenFor(model => model.OrderID)
+                    @Html.HiddenFor(model => model.OrderID)
 
-                <div class="editor-label">
-                    @Html.LabelFor(model => model.CustomerID)
-                </div>
-                <div class="editor-field">
-                    @(
-                        Html.Kendo().DropDownListFor(model => model.CustomerID)
-                            .OptionLabel("Select Customer")
-                            .BindTo(ViewData["customers"] as SelectList)
-                    )
-                    @Html.ValidationMessageFor(model => model.CustomerID)
-                </div>
+                    <div class="editor-label">
+                        @Html.LabelFor(model => model.CustomerID)
+                    </div>
+                    <div class="editor-field">
+                        @(
+                            Html.Kendo().DropDownListFor(model => model.CustomerID)
+                                .OptionLabel("Select Customer")
+                                .BindTo(ViewData["customers"] as SelectList)
+                        )
+                        @Html.ValidationMessageFor(model => model.CustomerID)
+                    </div>
 
-                <div class="editor-label">
-                    @Html.LabelFor(model => model.ShipCountry)
-                </div>
-                <div class="editor-field">
-                    @Html.EditorFor(model => model.ShipCountry)
-                    @Html.ValidationMessageFor(model => model.ShipCountry)
-                </div>
+                    <div class="editor-label">
+                        @Html.LabelFor(model => model.ShipCountry)
+                    </div>
+                    <div class="editor-field">
+                        @Html.EditorFor(model => model.ShipCountry)
+                        @Html.ValidationMessageFor(model => model.ShipCountry)
+                    </div>
 
-                <div class="editor-label">
-                    @Html.LabelFor(model => model.Freight)
-                </div>
-                <div class="editor-field">
-                    @Html.Kendo().NumericTextBoxFor(model => model.Freight)
-                    @Html.ValidationMessageFor(model => model.Freight)
-                </div>
+                    <div class="editor-label">
+                        @Html.LabelFor(model => model.Freight)
+                    </div>
+                    <div class="editor-field">
+                        @Html.Kendo().NumericTextBoxFor(model => model.Freight)
+                        @Html.ValidationMessageFor(model => model.Freight)
+                    </div>
 
-                <div class="editor-label">
-                    @Html.LabelFor(model => model.OrderDate)
-                </div>
-                <div class="editor-field">
-                    @Html.Kendo().DatePickerFor(model => model.OrderDate)
-                    @Html.ValidationMessageFor(model => model.OrderDate)
-                </div>
+                    <div class="editor-label">
+                        @Html.LabelFor(model => model.OrderDate)
+                    </div>
+                    <div class="editor-field">
+                        @Html.Kendo().DatePickerFor(model => model.OrderDate)
+                        @Html.ValidationMessageFor(model => model.OrderDate)
+                    </div>
 
-                <p>
-                    <input type="submit" value="Save" />
-                </p>
-            </fieldset>
-        }
+                    <p>
+                        <input type="submit" value="Save" />
+                    </p>
+                </fieldset>
+            }
 
-        <script>
-            $(function () {
-                $("form").kendoValidator();
-            });
-        </script>
+            <script>
+                $(function () {
+                    $("form").kendoValidator();
+                });
+            </script>
 
 ### Implement Custom Attributes
 
@@ -131,119 +131,117 @@ To demonstrate this scenario, include a `ShippedDate` field to the model and imp
 
 Below are listed the steps for you to follow when implementing custom attributes.
 
-**Step 1** Create a `class` that inherits from `ValidationAttribute` and `IClientValidatable`, and implement the `IsValid` and `GetClientValidationRules` methods.
+1. Create a `class` that inherits from `ValidationAttribute` and `IClientValidatable`, and implement the `IsValid` and `GetClientValidationRules` methods.
 
-###### Example
+    ###### Example
 
-        [AttributeUsage(AttributeTargets.Property, AllowMultiple = false, Inherited = true)]
-        public class GreaterDateAttribute : ValidationAttribute, IClientValidatable
-        {
-            public string EarlierDateField { get; set; }
-
-            protected override ValidationResult IsValid(object value, ValidationContext validationContext)
+            [AttributeUsage(AttributeTargets.Property, AllowMultiple = false, Inherited = true)]
+            public class GreaterDateAttribute : ValidationAttribute, IClientValidatable
             {
-                DateTime? date = value != null ? (DateTime?)value : null;
-                var earlierDateValue = validationContext.ObjectType.GetProperty(EarlierDateField)
-                    .GetValue(validationContext.ObjectInstance, null);
-                DateTime? earlierDate = earlierDateValue != null ? (DateTime?)earlierDateValue : null;
+                public string EarlierDateField { get; set; }
 
-                if (date.HasValue && earlierDate.HasValue && date <= earlierDate)
+                protected override ValidationResult IsValid(object value, ValidationContext validationContext)
                 {
-                    return new ValidationResult(ErrorMessage);
+                    DateTime? date = value != null ? (DateTime?)value : null;
+                    var earlierDateValue = validationContext.ObjectType.GetProperty(EarlierDateField)
+                        .GetValue(validationContext.ObjectInstance, null);
+                    DateTime? earlierDate = earlierDateValue != null ? (DateTime?)earlierDateValue : null;
+
+                    if (date.HasValue && earlierDate.HasValue && date <= earlierDate)
+                    {
+                        return new ValidationResult(ErrorMessage);
+                    }
+
+                    return ValidationResult.Success;
                 }
 
-                return ValidationResult.Success;
-            }
-
-            public IEnumerable<ModelClientValidationRule> GetClientValidationRules(ModelMetadata metadata, ControllerContext context)
-            {
-                var rule = new ModelClientValidationRule
+                public IEnumerable<ModelClientValidationRule> GetClientValidationRules(ModelMetadata metadata, ControllerContext context)
                 {
-                    ErrorMessage = ErrorMessage,
-                    ValidationType = "greaterdate"
-                };
+                    var rule = new ModelClientValidationRule
+                    {
+                        ErrorMessage = ErrorMessage,
+                        ValidationType = "greaterdate"
+                    };
 
-                rule.ValidationParameters["earlierdate"] = EarlierDateField;
+                    rule.ValidationParameters["earlierdate"] = EarlierDateField;
 
-                yield return rule;
+                    yield return rule;
+                }
             }
-        }
 
-**Step 2** Decorate the `ShippedDate` property with the newly implemented attribute.
+2. Decorate the `ShippedDate` property with the newly implemented attribute.
 
-###### Example
+    ###### Example
 
-        public class OrderViewModel
-        {
-            //omitted for brevity
+            public class OrderViewModel
+            {
+                //omitted for brevity
 
-            [Display(Name = "Order Date")]
-            [DataType(DataType.Date)]
-            public DateTime? OrderDate { get; set; }
+                [Display(Name = "Order Date")]
+                [DataType(DataType.Date)]
+                public DateTime? OrderDate { get; set; }
 
-            [GreaterDate(EarlierDateField = "OrderDate", ErrorMessage = "Shipped date should be after Order date")]
-            [DataType(DataType.Date)]
-            public DateTime? ShippedDate { get; set; }
-        }
+                [GreaterDate(EarlierDateField = "OrderDate", ErrorMessage = "Shipped date should be after Order date")]
+                [DataType(DataType.Date)]
+                public DateTime? ShippedDate { get; set; }
+            }
 
+1. Implement a Kendo UI Validator rule that will handle all inputs with the `data-val-greaterdate` attribute.
 
-**Step 3** Implement a Kendo UI Validator rule that will handle all inputs with the `data-val-greaterdate` attribute.
+    ###### Example
 
-###### Example
+            @model OrderViewModel
 
-        @model OrderViewModel
+            @using (Html.BeginForm()) {
+                <fieldset>
+                    <legend>Order</legend>
 
-        @using (Html.BeginForm()) {
-            <fieldset>
-                <legend>Order</legend>
+                    @Html.HiddenFor(model => model.OrderID)
 
-                @Html.HiddenFor(model => model.OrderID)
+                    <div class="editor-label">
+                        @Html.LabelFor(model => model.OrderDate)
+                    </div>
+                    <div class="editor-field">
+                        @Html.DatePickerFor(model => model.OrderDate)
+                        @Html.ValidationMessageFor(model => model.OrderDate)
+                    </div>
 
-                <div class="editor-label">
-                    @Html.LabelFor(model => model.OrderDate)
-                </div>
-                <div class="editor-field">
-                    @Html.DatePickerFor(model => model.OrderDate)
-                    @Html.ValidationMessageFor(model => model.OrderDate)
-                </div>
+                    <div class="editor-label">
+                        @Html.LabelFor(model => model.ShippedDate)
+                    </div>
+                    <div class="editor-field">
+                        @Html.DatePickerFor(model => model.ShippedDate)
+                        @Html.ValidationMessageFor(model => model.ShippedDate)
+                    </div>
 
-                <div class="editor-label">
-                    @Html.LabelFor(model => model.ShippedDate)
-                </div>
-                <div class="editor-field">
-                    @Html.DatePickerFor(model => model.ShippedDate)
-                    @Html.ValidationMessageFor(model => model.ShippedDate)
-                </div>
+                    <p>
+                        <input type="submit" value="Save" />
+                    </p>
+                </fieldset>
+            }
 
-                <p>
-                    <input type="submit" value="Save" />
-                </p>
-            </fieldset>
-        }
+            <script>
+                $(function () {
+                    $("form").kendoValidator({
+                        rules: {
+                            greaterdate: function (input) {
+                                if (input.is("[data-val-greaterdate]") && input.val() != "") {
+                                    var date = kendo.parseDate(input.val()),
+                                        earlierDate = kendo.parseDate($("[name='" + input.attr("data-val-greaterdate-earlierdate") + "']").val());
+                                    return !date || !earlierDate || earlierDate.getTime() < date.getTime();
+                                }
 
-        <script>
-            $(function () {
-                $("form").kendoValidator({
-                    rules: {
-                        greaterdate: function (input) {
-                            if (input.is("[data-val-greaterdate]") && input.val() != "") {
-                                var date = kendo.parseDate(input.val()),
-                                    earlierDate = kendo.parseDate($("[name='" + input.attr("data-val-greaterdate-earlierdate") + "']").val());
-                                return !date || !earlierDate || earlierDate.getTime() < date.getTime();
+                                return true;
                             }
-
-                            return true;
+                        },
+                        messages: {
+                            greaterdate: function (input) {
+                                return input.attr("data-val-greaterdate");
+                            }
                         }
-                    },
-                    messages: {
-                        greaterdate: function (input) {
-                            return input.attr("data-val-greaterdate");
-                        }
-                    }
+                    });
                 });
-            });
-        </script>
-
+            </script>
 
 ### Apply Custom Attributes in Editable Widgets
 
@@ -295,23 +293,23 @@ Editable widgets, such as the Kendo UI Grid and ListView, initialize the Validat
 
 Below are listed the steps for you to follow when using the jQuery validation with the Kendo UI widgets.
 
-**Step 1** Add the latest version of the [`jquery.validate`](http://www.nuget.org/packages/jQuery.Validation/) and [`jquery.validate.unobtrusive`](http://www.nuget.org/packages/Microsoft.jQuery.Unobtrusive.Validation/) scripts to the project.
+1. Add the latest version of the [`jquery.validate`](http://www.nuget.org/packages/jQuery.Validation/) and [`jquery.validate.unobtrusive`](http://www.nuget.org/packages/Microsoft.jQuery.Unobtrusive.Validation/) scripts to the project.
 
-**Step 2** Include them in the view in which you want to validate the user input or in the layout.
+1. Include them in the view in which you want to validate the user input or in the layout.
 
-**Step 3** Override the default ignore setting after including the scripts to enable validation of hidden elements. For instance, widgets like the Kendo UI DropDownList and NumericTextBox have a hidden input to keep the value.
+1. Override the default ignore setting after including the scripts to enable validation of hidden elements. For instance, widgets like the Kendo UI DropDownList and NumericTextBox have a hidden input to keep the value.
 
-###### Example
+    ###### Example
 
-        <script src="@Url.Content("~/Scripts/jquery.validate.min.js")"></script>
-        <script src="@Url.Content("~/Scripts/jquery.validate.unobtrusive.min.js")"></script>
-        <script type="text/javascript">
-            $.validator.setDefaults({
-                ignore: ""
-            });
-        </script>
+            <script src="@Url.Content("~/Scripts/jquery.validate.min.js")"></script>
+            <script src="@Url.Content("~/Scripts/jquery.validate.unobtrusive.min.js")"></script>
+            <script type="text/javascript">
+                $.validator.setDefaults({
+                    ignore: ""
+                });
+            </script>
 
-**Step 4** Define the model and create the editors the same way as shown in the [section on using the Kendo UI Validator with `DataAnnotation` attributes](#use-dataAnnotation-attributes).
+1. Define the model and create the editors the same way as shown in the [section on using the Kendo UI Validator with `DataAnnotation` attributes](#use-dataAnnotation-attributes).
 
 ### Change Widget Styles When Validation Errors Occur
 

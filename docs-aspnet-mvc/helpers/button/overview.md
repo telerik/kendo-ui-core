@@ -24,7 +24,7 @@ Placing clickable elements with their own special behavior inside the Button&mda
 
 ### Initialization
 
-The example below demonstrates how to initialize the Button by using the default `button` tag.
+The following example demonstrates how to initialize the Button by using the default `button` tag.
 
 ###### Example
 
@@ -43,7 +43,7 @@ The example below demonstrates how to initialize the Button by using the default
             .Content("Text button") %>
 ```
 
-The example below demonstrates how to initialize the Button by using the `anchor` tag.
+The following example demonstrates how to initialize the Button by using the `anchor` tag.
 
 ###### Example
 
@@ -82,7 +82,7 @@ The difference between the two settings is that `.Icon()` is intended to be used
 
 For a list of available icon names, refer to the [Icons demo](http://demos.telerik.com/kendo-ui/web/styling/icons.html).
 
-The example below demonstrates how to add a background icon by using `.Icon()`.
+The following example demonstrates how to add a background icon by using `.Icon()`.
 
 ###### Example
 
@@ -101,13 +101,13 @@ The example below demonstrates how to add a background icon by using `.Icon()`.
             .Content("Cancel") %>
 ```
 
-The above configuration is expected to produce the HTML output from the example below.
+The above configuration is expected to produce the HTML output from the following example.
 
 ###### Example
 
         <button type="button" id="cancelButton" class="k-button k-button-icontext"><span class="k-icon k-cancel"></span>Cancel</button>
 
-The example below demonstrates how to add a background icon by using `.SpriteCssClass()`.
+The following example demonstrates how to add a background icon by using `.SpriteCssClass()`.
 
 ###### Example
 
@@ -126,7 +126,7 @@ The example below demonstrates how to add a background icon by using `.SpriteCss
             .Content("Sprite button") %>
 ```
 
-The above configuration is expected to produce the HTML output from the example below.
+The above configuration is expected to produce the HTML output from the following example.
 
 ###### Example
 
@@ -136,7 +136,7 @@ Technically, `.SpriteCssClass("k-icon k-cancel")` can be used to achieve the sam
 
 The Button uses an existing `span` element if it is supplied as `.Content()`&mdash;for example, if you want to have a Button with no text. The `span` element must have a `k-sprite` CSS class.
 
-The example below demonstrates how to use a button with no text.
+The following example demonstrates how to use a button with no text.
 
 ###### Example
 
@@ -159,7 +159,7 @@ The example below demonstrates how to use a button with no text.
 
 Image icons are applied via the `.ImageUrl()` property and are displayed as an `img` element.
 
-The example below demonstrates how to use `.ImageUrl()`.
+The following example demonstrates how to use `.ImageUrl()`.
 
 ###### Example
 
@@ -178,13 +178,13 @@ The example below demonstrates how to use `.ImageUrl()`.
             .Content("Image button") %>
 ```
 
-The above configuration is expected to produce the HTML output from the example below.
+The above configuration is expected to produce the HTML output from the following example.
 
 ###### Example
 
         <button type="button" id="imageButton" class="k-button k-button-icontext"><img class="k-image" src="/images/myIcon.gif" alt="icon" />Image button</button>
 
-The example below demonstrates how to use `.ImageUrl()` with no text. Note that an `img` tag should be placed inside the Button content. The image should have a `k-image` CSS class.
+The following example demonstrates how to use `.ImageUrl()` with no text. Note that an `img` tag should be placed inside the Button content. The image should have a `k-image` CSS class.
 
 ###### Example
 
@@ -209,7 +209,7 @@ The example below demonstrates how to use `.ImageUrl()` with no text. Note that 
 
 The business logic of an application often requires a certain button to be temporarily enabled or disabled. The Button can be configured to be initially disabled via its `.Enable()` setting. The widget can also be disabled or enabled at any time with JavaScript by using its `enable()` method with a Boolean argument.
 
-The example below demonstrates how to use `.Enable()`.
+The following example demonstrates how to use `.Enable()`.
 
 ###### Example
 
@@ -237,8 +237,6 @@ For more information on the [`enable` method of the Button](/kendo-ui/api/javasc
 For more information on how to access an instance, refer to the [introductory article on the Button](http://docs.telerik.com/kendo-ui/controls/navigation/button/overview).
 
 ## See Also
-
-Other articles on Telerik UI for ASP.NET MVC and on the Button:
 
 * [ASP.NET MVC API Reference: ButtonBuilder](/api/Kendo.Mvc.UI.Fluent/ButtonBuilder)
 * [Overview of Telerik UI for ASP.NET MVC]({% slug overview_aspnetmvc %})

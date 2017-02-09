@@ -9,7 +9,9 @@ position: 4
 
 # Scaffolding
 
-As of the Kendo UI Q1 2015 release, Telerik UI for ASP.NET MVC contains the Kendo UI Scaffolder extension. It allows you to generate MVC-wrapper widget declarations together with the related Controller action methods. Currently, the Kendo UI Grid, Scheduler, and Chart widgets can be scaffolded. More widgets will be added in future releases.
+As of the Kendo UI Q1 2015 release, Telerik UI for ASP.NET MVC contains the Kendo UI Scaffolder extension.
+
+It allows you to generate MVC-wrapper widget declarations together with the related Controller action methods. Currently, the Kendo UI Grid, Scheduler, and Chart widgets can be scaffolded. More widgets will be added in future releases.
 
 ## Getting Started
 
@@ -30,23 +32,23 @@ You could also manually install it by navigating to the **wrappers\aspnetmvc\Sca
 
 To use the Kendo UI Scaffolder Visual Studio extension, follow the steps below.
 
-**Step 1** The Kendo UI Scaffolder extension could be accessed through the **New Scaffolded Item...** menu which has different items depending on the currently installed Scaffolders.
+1. The Kendo UI Scaffolder extension could be accessed through the **New Scaffolded Item...** menu which has different items depending on the currently installed Scaffolders.
 
-**Figure 1. New scaffolded items**
+    **Figure 1. New scaffolded items**
 
-![New Scaffolded Item](/images/scaffolding/new_scaffolded_item.png)
+    ![New Scaffolded Item](/images/scaffolding/new_scaffolded_item.png)
 
-**Step 2** Select the **Kendo UI Scaffolder** from the next menu.
+1. Select the **Kendo UI Scaffolder** from the next menu.
 
-**Figure 2. Kendo UI Scaffolder**
+    **Figure 2. Kendo UI Scaffolder**
 
-![Kendo UI Scaffolder](/images/scaffolding/kendo_ui_scaffolder.png)
+    ![Kendo UI Scaffolder](/images/scaffolding/kendo_ui_scaffolder.png)
 
-**Step 3** This brings up the Kendo UI scaffolding configuration panel to choose between the Kendo UI Grid, Chart, or Scheduler controls.
+1. This brings up the Kendo UI scaffolding configuration panel to choose between the Kendo UI Grid, Chart, or Scheduler controls.
 
-**Figure 3. Kendo UI Scaffolder widget selection**
+    **Figure 3. Kendo UI Scaffolder widget selection**
 
-![Kendo UI Scaffolder Widget Selection](/images/scaffolding/widget_select.png)
+    ![Kendo UI Scaffolder Widget Selection](/images/scaffolding/widget_select.png)
 
 For detailed information on possible configuration options, refer to the following articles:
 

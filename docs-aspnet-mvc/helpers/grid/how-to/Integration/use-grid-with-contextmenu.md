@@ -7,7 +7,7 @@ slug: howto_usegridwithontextmenu_gridaspnetmv
 
 # Use Grid with Kendo UI ContextMenu
 
-To see the example on how to use the Kendo UI Grid with the Kendo UI ContextMenu in ASP.NET MVC applications, refer to [this project](https://github.com/telerik/ui-for-aspnet-mvc-examples/tree/master/grid/grid-with-context-menu).
+To see the example, refer to the project on how to [use the Kendo UI Grid with the Kendo UI ContextMenu](https://github.com/telerik/ui-for-aspnet-mvc-examples/tree/master/grid/grid-with-context-menu) in ASP.NET MVC applications.
 
 ## See Also
 
@@ -16,4 +16,4 @@ To see the example on how to use the Kendo UI Grid with the Kendo UI ContextMenu
 * [Overview of the ContextMenu HtmlHelper](/api/Kendo.Mvc.UI.Fluent/ContextMenuBuilder)
 * [ContextMenuBuilder API Reference](/aspnet-mvc/api/Kendo.Mvc.UI.Fluent/ContextMenuBuilder)
 
-For more runnable examples on the Kendo UI Grid in ASP.NET MVC applications, browse its [**How To** documentation folder]({% slug howto_applycustomrowstylesbasedondata_gridaspnetmvc %}).
+For more runnable examples on the Kendo UI Grid in ASP.NET MVC applications, browse its [**How To** documentation folder](/helpers/grid/how-to/Appearance/).

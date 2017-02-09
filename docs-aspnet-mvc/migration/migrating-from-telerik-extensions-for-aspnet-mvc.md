@@ -247,8 +247,6 @@ Generally, it is recommended that you use the Kendo UI themes and not the legacy
 
 ## See Also
 
-Other articles on migrating from Telerik Extensions:
-
 * [Migrate the AutoComplete]({% slug autocomplete_migrationextensions_aspnetmvc %})
 * [Migrate the Calendar]({% slug calendar_migrationextensions_aspnetmvc %})
 * [Migrate the Chart]({% slug chart_migrationextensions_aspnetmvc %})
