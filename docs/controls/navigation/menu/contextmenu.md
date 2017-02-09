@@ -174,8 +174,6 @@ The example below demonstrates how to add a new root ContextMenu item.
 
 ## See Also
 
-Articles and how-to examples on Kendo UI Menu:
-
 * [Overview of the Menu Widget]({% slug overview_kendoui_menu_widget %})
 * [How to Create Split Button]({% slug howto_createa_split_button_menu %})
 * [How to Execute Custom Click Actions Based on Class Name]({% slug howto_execute_custom_click_actions_basedon_classnames_menu %})

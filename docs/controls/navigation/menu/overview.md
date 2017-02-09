@@ -91,10 +91,10 @@ By initializing the Menu using JSON, you can use assign a select handler for eac
            },
            {
              text: "Item 5",
-             select: function(e) {                        // Item select event handler, optional 
+             select: function(e) {                        // Item select event handler, optional
                 // e.sender - returns reference to the Kendo Menu widget
                 // e.target - returns the clicked element. Typically, the span.k-link element.
-                
+
                 // handle event
              }]
         })
@@ -262,8 +262,6 @@ Kendo UI Menu supports the following keyboard shortcuts and user actions:
 | (`Shift`+) `Tab`              | Blurs the Menu and moves the focus to the next (previous) focusable page element  |
 
 ## See Also
-
-Other articles and how-to examples on Kendo UI Menu:
 
 * [Context Menu]({% slug overview_kendoui_contextmenu_widget %})
 * [How to Create Split Button]({% slug howto_createa_split_button_menu %})

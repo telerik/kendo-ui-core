@@ -1,24 +1,26 @@
 ---
 title: Handle Unique Identifiers with Menu Items
 page_title: Handle Unique Identifiers with Menu Items | Kendo UI Menu
-description: "Learn how to Handle Unique Identifiers with Menu Items in the Kendo UI Menu widget."
+description: "Learn how to handle unique identifiers with Kendo UI Menu items."
 slug: howto_handleuniqueidentifiers_menu
 ---
 
 # Handle Unique Identifiers with Menu Items
 
-Commonly, it is required to handle custom identifiers with click handlers (or in this case the [select event](/api/javascript/ui/menu#events-select)). As the Kendo Menu mainly uses the HTML elements rendered to provide functionality, you can use custom HTML attributes to serve you as unique identifiers in your code.  
+Commonly, you are required to handle custom identifiers with click handlers or, as in this case, by using the [`select`](/api/javascript/ui/menu#events-select) event.
 
-With that you can programmatically:
+To provide for the functionality, the Kendo UI Menu mainly uses the HTML elements that are rendered. That is why you can use custom HTML attributes to serve you as unique identifiers in your code.  
 
-* Identify the item clicked;
-* Utilize values specific to the item different than text;
-* Remove a specific item from the Menu vy identifying it via attribute;
-* Run specific logic for a particular item(s). 
+In this way, you can programmatically:
 
-In the examples below you can examine how to handle a custom command attribute to accomplish some specific application requirements (like the ones mentioned in the list above).
+* Identify the clicked item.
+* Utilize values that are specific to the item other than text.
+* Remove a specific item from the Menu by identifying it through an attribute.
+* Run the specific logic for particular items.
 
-## Bound with JSON Data 
+The following examples demonstrate how to handle a custom command attribute to accomplish specific application requirements such as the ones mentioned in the previous list.
+
+## Bound with JSON Data
 
 ###### Example
 
@@ -53,7 +55,7 @@ In the examples below you can examine how to handle a custom command attribute t
         select: function (ev){
             var clickedItem = $(ev.item);
             var command = clickedItem.attr("command");
-            
+
             if(command){
                 alert(command);
             }
@@ -67,7 +69,7 @@ In the examples below you can examine how to handle a custom command attribute t
 </script>
 ```
 
-## Created with HTML elements
+## Created with HTML Elements
 
 ###### Example
 
@@ -85,7 +87,7 @@ In the examples below you can examine how to handle a custom command attribute t
         select: function (ev){
             var clickedItem = $(ev.item);
             var command = clickedItem.data("command");
-            
+
             if(command){
                 alert(command);
             }
@@ -105,8 +107,6 @@ In the examples below you can examine how to handle a custom command attribute t
 ```
 
 ## See Also
-
-Other articles on the Kendo UI Menu:
 
 * [Menu JavaScript API Reference](/api/javascript/ui/menu)
 * [How to Create Split Button]({% slug howto_createa_split_button_menu %})

@@ -2,7 +2,7 @@
 title: Handle Unique Identifiers with Menu Items
 page_title: Handle Unique Identifiers with Menu Items | Kendo UI Menu HtmlHelper
 description: "Learn how to handle unique identifiers with Kendo UI Menu items in ASP.NET MVC applications."
-slug: howto_handleuniqueidentifiers_menu
+slug: howto_handleuniqueidentifiers_menuaspnetmvc
 ---
 
 # Handle Unique Identifiers with Menu Items
