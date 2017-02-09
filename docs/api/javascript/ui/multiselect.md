@@ -470,7 +470,7 @@ If set to `false` case-sensitive search will be performed to find suggestions. T
     });
     </script>
 
-### minLength `Number`*(default: 0)*
+### minLength `Number`*(default: 1)*
 
 The minimum number of characters the user must type before a search is performed. Set to a higher value if the search could match a lot of items.
 A zero value means that a request will be made as soon as the user focuses the widget.
