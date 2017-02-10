@@ -85,7 +85,7 @@ Therefore, the binding of the sales totals passes back through to the view. `ken
 
 These lists are created through the combination between HTML markup, templating, and MVVM bindings, with the data provided by a remote DataSource.
 
-The example below starts with the markup.
+The following example starts with the markup.
 
 ###### Example
 

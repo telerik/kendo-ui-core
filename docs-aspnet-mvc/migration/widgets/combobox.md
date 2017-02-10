@@ -351,4 +351,4 @@ Not supported
 * [Migrate the Calendar]({% slug calendar_migrationextensions_aspnetmvc %})
 * [Migrate the Chart]({% slug chart_migrationextensions_aspnetmvc %})
 
-To see the articles on migrating Kendo UI controls from Telerik Extensions, browse [this section]({% slug datepicker_migrationextensions_aspnetmvc %}).
+To see the articles on migrating Kendo UI controls from Telerik Extensions, browse the [**Widgets** folder]({% slug autocomplete_migrationextensions_aspnetmvc %}).

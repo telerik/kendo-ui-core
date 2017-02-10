@@ -10,69 +10,67 @@ position: 1
 
 The Upload HtmlHelper extension is a server-side wrapper for the [Kendo UI Upload](https://demos.telerik.com/kendo-ui/upload/index) widget.
 
-## Getting Started
-
-### Configuration
+## Configuration
 
 Below are listed the steps for you to follow when configuring the Kendo UI Upload.
 
-**Step 1** Make sure you followed all the steps from the [introductory article on Telerik UI for ASP.NET MVC]({% slug overview_aspnetmvc %}).
+1. Make sure you followed all the steps from the [introductory article on Telerik UI for ASP.NET MVC]({% slug overview_aspnetmvc %}).
 
-**Step 2** Create a new action method which renders the view.
+1. Create a new action method which renders the view.
 
-###### Example
+    ###### Example
 
-        public ActionResult Index()
-        {
-            return View();
-        }
-
-**Step 3** Add the Upload to the view.
-
-###### Example
-
-```tab-ASPX
-
-        <%: Html.Kendo().Upload()
-                .Name("attachments")
-                .Async(async => async
-                    .Save("Save", "Home")
-                )
-        %>
-```
-```tab-Razor
-
-        @(Html.Kendo().Upload()
-                .Name("attachments")
-                .Async(async => async
-                    .Save("Save", "Home")
-                )
-        )
-```
-
-The name attribute is required and must be unique. It is used as a form field name in the requests to the server.
-
-**Step 4** Implement the `Save` controller action.
-
-###### Example
-
-        public ActionResult Save(IEnumerable<HttpPostedFileBase> attachments)
-        {
-            //The Name of the Upload component is "attachments".
-            foreach (var file in attachments)
+            public ActionResult Index()
             {
-                //Some browsers send file names with a full path. You only care about the file name.
-                var fileName = Path.GetFileName(file.FileName);
-                var destinationPath = Path.Combine(Server.MapPath("~/App_Data"), fileName);
-
-                file.SaveAs(destinationPath);
+                return View();
             }
 
-            //Return an empty string to signify success.
-            return Content("");
-        }
+1. Add the Upload to the view.
 
-**Step 5** Build and run the application. The uploaded files appear in the `App_Data` folder.
+    ###### Example
+
+    ```tab-ASPX
+
+            <%: Html.Kendo().Upload()
+                    .Name("attachments")
+                    .Async(async => async
+                        .Save("Save", "Home")
+                    )
+            %>
+    ```
+    ```tab-Razor
+
+            @(Html.Kendo().Upload()
+                    .Name("attachments")
+                    .Async(async => async
+                        .Save("Save", "Home")
+                    )
+            )
+    ```
+
+    The name attribute is required and must be unique. It is used as a form field name in the requests to the server.
+
+1. Implement the `Save` controller action.
+
+    ###### Example
+
+            public ActionResult Save(IEnumerable<HttpPostedFileBase> attachments)
+            {
+                //The Name of the Upload component is "attachments".
+                foreach (var file in attachments)
+                {
+                    //Some browsers send file names with a full path. You only care about the file name.
+                    var fileName = Path.GetFileName(file.FileName);
+                    var destinationPath = Path.Combine(Server.MapPath("~/App_Data"), fileName);
+
+                    file.SaveAs(destinationPath);
+                }
+
+                //Return an empty string to signify success.
+                return Content("");
+            }
+
+1. Build and run the application. The uploaded files appear in the `App_Data` folder.
 
 ## Event Handling
 
@@ -80,7 +78,7 @@ You can subscribe to all Upload [events](../../../kendo-ui/api/javascript/ui/upl
 
 ### By Handler Name
 
-The examples below demonstrates how to subscribe to events by a handler name.
+The following example demonstrates how to subscribe to events by a handler name.
 
 ###### Example
 
@@ -125,7 +123,7 @@ The examples below demonstrates how to subscribe to events by a handler name.
 
 ### By Template Delegate
 
-The example below demonstrates how to subscribe to events by a template delegate.
+The following example demonstrates how to subscribe to events by a template delegate.
 
 ###### Example
 
@@ -152,7 +150,7 @@ The example below demonstrates how to subscribe to events by a template delegate
 
 ### Existing Instances
 
-You can reference an existing Kendo UI Upload instance via [`jQuery.data()`](http://api.jquery.com/jQuery.data/). Once a reference is established, use the [Upload API](../../../kendo-ui/api/javascript/ui/upload#methods) to control its behavior.
+To reference an existing Kendo UI Upload instance, use the [`jQuery.data()`](http://api.jquery.com/jQuery.data/) configuration option. Once a reference is established, use the [Upload API](../../../kendo-ui/api/javascript/ui/upload#methods) to control its behavior.
 
 ###### Example
 
@@ -165,8 +163,6 @@ You can reference an existing Kendo UI Upload instance via [`jQuery.data()`](htt
         </script>
 
 ## See Also
-
-Other articles on Telerik UI for ASP.NET MVC and on the Upload:
 
 * [ASP.NET MVC API Reference: UploadBuilder](/api/Kendo.Mvc.UI.Fluent/UploadBuilder)
 * [Upload HtmlHelper Modes of Operation]({% slug modesoperation_uploadhelper_aspnetmvc %})

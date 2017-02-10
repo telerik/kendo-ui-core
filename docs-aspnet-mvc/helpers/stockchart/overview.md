@@ -23,67 +23,67 @@ There are two ways to bind a Kendo UI StockChart for ASP.NET MVC:
 
 Below are listed the steps for you to follow when configuring the Kendo UI StockChart for server binding.
 
-**Step 1** Make sure you followed all the steps from the [introductory article on Telerik UI for ASP.NET MVC]({% slug overview_aspnetmvc %}).
+1. Make sure you followed all the steps from the [introductory article on Telerik UI for ASP.NET MVC]({% slug overview_aspnetmvc %}).
 
-**Step 2** Create a new action method and pass the data list as the model.
+1. Create a new action method and pass the data list as the model.
 
-###### Example
+    ###### Example
 
-        public ActionResult Index()
-        {
-            return View(ChartDataRepository.BoeingStockData());
-        }
+            public ActionResult Index()
+            {
+                return View(ChartDataRepository.BoeingStockData());
+            }
 
-**Step 3** Make your view strongly typed.
+1. Make your view strongly typed.
 
-###### Example
+    ###### Example
 
-```tab-ASPX
+    ```tab-ASPX
 
-        <%@ Page Language="C#" MasterPageFile="~/Views/Shared/Site.Master"
-           		 Inherits="System.Web.Mvc.ViewPage<IEnumerable<Kendo.Mvc.Examples.Models.StockDataPoint>>" %>
-```
-```tab-Razor
+            <%@ Page Language="C#" MasterPageFile="~/Views/Shared/Site.Master"
+               		 Inherits="System.Web.Mvc.ViewPage<IEnumerable<Kendo.Mvc.Examples.Models.StockDataPoint>>" %>
+    ```
+    ```tab-Razor
 
-        @model IEnumerable<Kendo.Mvc.Examples.Models.StockDataPoint>
-```
+            @model IEnumerable<Kendo.Mvc.Examples.Models.StockDataPoint>
+    ```
 
-**Step 4** Add a server-bound StockChart.
+1. Add a server-bound StockChart.
 
-###### Example
+    ###### Example
 
-```tab-ASPX
+    ```tab-ASPX
 
-        <%: Html.Kendo().StockChart(Model)
-        .Name("stockChart")
-        .Title("The Boeing Company (NYSE:BA)")
-        .DateField("Date")
-        .Series(series => {
-            series.Candlestick(s => s.Open, s => s.High, s => s.Low, s => s.Close);
-        })
-        .Navigator(nav => nav
+            <%: Html.Kendo().StockChart(Model)
+            .Name("stockChart")
+            .Title("The Boeing Company (NYSE:BA)")
+            .DateField("Date")
             .Series(series => {
-                series.Line(s => s.Volume);
+                series.Candlestick(s => s.Open, s => s.High, s => s.Low, s => s.Close);
             })
-        )
-        %>
-```
-```tab-Razor
+            .Navigator(nav => nav
+                .Series(series => {
+                    series.Line(s => s.Volume);
+                })
+            )
+            %>
+    ```
+    ```tab-Razor
 
-        @(Html.Kendo().StockChart(Model)
-        .Name("stockChart")
-        .Title("The Boeing Company (NYSE:BA)")
-        .DateField("Date")
-        .Series(series => {
-            series.Candlestick(s => s.Open, s => s.High, s => s.Low, s => s.Close);
-        })
-        .Navigator(nav => nav
+            @(Html.Kendo().StockChart(Model)
+            .Name("stockChart")
+            .Title("The Boeing Company (NYSE:BA)")
+            .DateField("Date")
             .Series(series => {
-                series.Line(s => s.Volume);
+                series.Candlestick(s => s.Open, s => s.High, s => s.Low, s => s.Close);
             })
-        )
-        )
-```
+            .Navigator(nav => nav
+                .Series(series => {
+                    series.Line(s => s.Volume);
+                })
+            )
+            )
+    ```
 
 ## Event Handling
 
@@ -91,7 +91,7 @@ You can subscribe to all StockChart [events](/api/javascript/dataviz/ui/stock-ch
 
 ### By Handler Name
 
-The examples below demonstrates how to subscribe to events by a handler name.
+The following example demonstrates how to subscribe to events by a handler name.
 
 ###### Example
 
@@ -148,7 +148,7 @@ The examples below demonstrates how to subscribe to events by a handler name.
 
 ### By Template Delegate
 
-The example below demonstrates how to subscribe to events by a template delegate.
+The following example demonstrates how to subscribe to events by a template delegate.
 
 ###### Example
 
@@ -180,7 +180,7 @@ The example below demonstrates how to subscribe to events by a template delegate
 
 ### Existing Instances
 
-You can reference an existing Kendo UI StockChart instance via [`jQuery.data()`](http://api.jquery.com/jQuery.data/). Once a reference is established, use the [StockChart API](../../../kendo-ui/api/javascript/dataviz/ui/stock-chart#methods) to control its behavior.
+To reference an existing Kendo UI StockChart instance, use the [`jQuery.data()`](http://api.jquery.com/jQuery.data/) configuration option. Once a reference is established, use the [StockChart API](../../../kendo-ui/api/javascript/dataviz/ui/stock-chart#methods) to control its behavior.
 
 ###### Example
 
@@ -193,8 +193,6 @@ You can reference an existing Kendo UI StockChart instance via [`jQuery.data()`]
       </script>
 
 ## See Also
-
-Other articles on Telerik UI for ASP.NET MVC and on the StockChart:
 
 * [ASP.NET MVC API Reference: StockChartBuilder](/api/Kendo.Mvc.UI.Fluent/StockChartBuilder)
 * [Ajax Binding of the Kendo UI StockChart for ASP.NET MVC]({% slug ajaxbinding_stockcharthelper_aspnetmvc %})

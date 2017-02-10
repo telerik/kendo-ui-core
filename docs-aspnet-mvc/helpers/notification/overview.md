@@ -23,7 +23,7 @@ If the Notification element is used to contain static (non-popup) notifications,
 
 ### Initialization
 
-The example below demonstrates how to initialize the Notification.
+The following example demonstrates how to initialize the Notification.
 
 ###### Example
 
@@ -53,7 +53,7 @@ The Notification provides several built-in notification types&mdash;`"info"`, `"
 
 For further details, refer to the [section on templates]({% slug overview_notificatiomhelper_aspnetmvc %}#templates).
 
-The example below demonstrates the built-in Notification types.
+The following example demonstrates the built-in Notification types.
 
 ###### Example
 
@@ -85,7 +85,7 @@ By default, the notifications remain visible for 5 seconds and then disappear. C
 
 If needed, automatic hiding by clicking anywhere on the notifications can be disabled. In this case the notifications can be dismissed only with the button, if present. In addition, manually hiding a notification can be postponed. The benefit of this feature is to prevent accidental hiding of notifications, which have just appeared. By default, postponing is disabled.
 
-The example below demonstrates how to manage the hide settings of the Notification.
+The following example demonstrates how to manage the hide settings of the Notification.
 
 ###### Example
 
@@ -111,7 +111,7 @@ By default, popups are pinned&mdash;when the page is scrolled, they do not move.
 
 If the popup content varies and stacking is likely to occur, explicitly define dimensions, so that the popups are aligned and look better when stacked next to one another.
 
-The example below demonstrates how to manage the position, stacking, and size of the Notification.
+The following example demonstrates how to manage the position, stacking, and size of the Notification.
 
 ###### Example
 
@@ -136,7 +136,7 @@ There may be cases when the popup notifications appear too quickly or are too ma
 
 Notifications can also display static messages, which do not overlay other elements, but instead take part in the normal flow of the page content. In this case, positioning settings do not make sense and are ignored. Stacking can be downwards (by default) or upwards. Static notifications are displayed if a target container is specified. A single widget instance can display either popup or static notifications, not both at the same time.
 
-The example below demonstrates how to enable static notifications.
+The following example demonstrates how to enable static notifications.
 
 ###### Example
 
@@ -154,7 +154,7 @@ Before reading on, make sure you are familiar with the concept of the [Kendo UI 
 
 Notifications allow configuring multiple templates. Each template is used together with its corresponding [notification type](#notification-types)&mdash;either build-in or custom. If you define a custom template for a built-in notification type, you are no longer able to use the corresponding built-in template, but you are still able to use the shorthand show methods, as demonstrated below.
 
-The example below demonstrates how to use templates.
+The following example demonstrates how to use templates.
 
 ###### Example
 
@@ -195,8 +195,6 @@ The example below demonstrates how to use templates.
 For more information on other Notification features and behavior, such as HTML output, RTL support, or Events, refer to the [introductory article on the Kendo UI Notification](http://docs.telerik.com/kendo-ui/controls/layout/notification/overview). The widget events and methods are described in the [Notification API section](/kendo-ui/api/javascript/ui/notification).
 
 ## See Also
-
-Other articles on Telerik UI for ASP.NET MVC and on the Notification:
 
 * [ASP.NET MVC API Reference: NotificationBuilder](/api/Kendo.Mvc.UI.Fluent/NotificationBuilder)
 * [Overview of Telerik UI for ASP.NET MVC]({% slug overview_aspnetmvc %})

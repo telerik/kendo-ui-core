@@ -88,41 +88,41 @@ This issue does not represent a justifiable reason for concern and can be marked
 
 Below are listed the steps for you to follow to fix this issue.
 
-**Step 1** Make sure the `Kendo.Mvc.UI` namespace is imported in `web.config`.
+1. Make sure the `Kendo.Mvc.UI` namespace is imported in `web.config`.
 
-* If you are using the WebForms view engine, open the `web.config` file in the root folder of your application. Add `<add namespace="Kendo.Mvc.UI" />` before the closing `namespaces` tag.
+    * If you are using the WebForms view engine, open the `web.config` file in the root folder of your application. Add `<add namespace="Kendo.Mvc.UI" />` before the closing `namespaces` tag.
 
-###### Example
+        ###### Example
 
-             <namespaces>
-                 <add namespace="System.Web.Mvc" />
-                 <add namespace="System.Web.Mvc.Ajax" />
-                 <add namespace="System.Web.Mvc.Html" />
-                 <add namespace="System.Web.Routing" />
-                 <add namespace="System.Linq" />
-                 <add namespace="System.Collections.Generic" />
-                 <add namespace="Kendo.Mvc.UI" />
-             </namespaces>
-
-* If you are using the Razor view engine, open the `web.config` file which is in the `Views` folder of your application. Add `<add namespace="Kendo.Mvc.UI" />` before the closing `namespaces` tag.
-
-###### Example
-
-             <system.web.webPages.razor>
-                 <pages pageBaseType="System.Web.Mvc.WebViewPage">
                      <namespaces>
                          <add namespace="System.Web.Mvc" />
                          <add namespace="System.Web.Mvc.Ajax" />
                          <add namespace="System.Web.Mvc.Html" />
                          <add namespace="System.Web.Routing" />
+                         <add namespace="System.Linq" />
+                         <add namespace="System.Collections.Generic" />
                          <add namespace="Kendo.Mvc.UI" />
                      </namespaces>
-                 </pages>
-             </system.web.webPages.razor>
 
-**Step 2** Rebuild your solution.
+    * If you are using the Razor view engine, open the `web.config` file which is in the `Views` folder of your application. Add `<add namespace="Kendo.Mvc.UI" />` before the closing `namespaces` tag.
 
-**Step 3** Close and open again the view you were editing. IntelliSense should be working now.
+        ###### Example
+
+                     <system.web.webPages.razor>
+                         <pages pageBaseType="System.Web.Mvc.WebViewPage">
+                             <namespaces>
+                                 <add namespace="System.Web.Mvc" />
+                                 <add namespace="System.Web.Mvc.Ajax" />
+                                 <add namespace="System.Web.Mvc.Html" />
+                                 <add namespace="System.Web.Routing" />
+                                 <add namespace="Kendo.Mvc.UI" />
+                             </namespaces>
+                         </pages>
+                     </system.web.webPages.razor>
+
+1. Rebuild your solution.
+
+1. Close and open again the view you were editing. IntelliSense should be working now.
 
 ### Html.Kendo().SomeKendoWidgetFor() Does Not Update Bound Properties on Server
 
@@ -136,7 +136,7 @@ Omit specifying the `Name()` or use the same `Name()` as the name of the propert
 
 This can happen if the nested wrappers are declared within code blocks, which output content directly, for example, `<%= %>` or `<%: %>`. An `Invalid expression term ')'` exception is thrown.
 
-The example below demonstrates a wrong approach to avoid the issue.
+The following example demonstrates a wrong approach to avoid the issue.
 
 ###### Example
 
@@ -154,7 +154,7 @@ The example below demonstrates a wrong approach to avoid the issue.
 
 **Solution**
 
-The example below demonstrates the proper approach to avoid the issue.
+The following example demonstrates the proper approach to avoid the issue.
 
 ###### Example
 
@@ -236,26 +236,26 @@ For more information on the ASP.NET debug mode, refer to the Scott Guthrie's [Do
 
 Below are listed the steps for you to follow while handling this issue.
 
-**Step 1** Disable security trimming if not needed or during development. Enable it again when deploying the site.
+1. Disable security trimming if not needed or during development. Enable it again when deploying the site.
 
-```tab-ASPX
+    ```tab-ASPX
 
-            <%: Html.Kendo().Menu()
-                    .SecurityTrimming(false)
-            %>
-```
-```tab-Razor
+                <%: Html.Kendo().Menu()
+                        .SecurityTrimming(false)
+                %>
+    ```
+    ```tab-Razor
 
-            @(Html.Kendo().Menu()
-                  .SecurityTrimming(false)
-            )
-```
+                @(Html.Kendo().Menu()
+                      .SecurityTrimming(false)
+                )
+    ```
 
-**Step 2** Disable debug mode. Set the `debug` attribute of the `compilation` element in the `web.config` to `false`.
+1. Disable debug mode. Set the `debug` attribute of the `compilation` element in the `web.config` to `false`.
 
-###### Example
+    ###### Example
 
-    <compilation debug="false">
+        <compilation debug="false">
 
 ## Widgets
 
@@ -296,35 +296,37 @@ Apply either of the two options below:
 
 * Verify that `GET` requests are allowed.
 
-###### Example
+    ###### Example
 
-        public JsonResult GetCascadeCategories()
-        {
-            var northwind = new NorthwindDataContext();
+            public JsonResult GetCascadeCategories()
+            {
+                var northwind = new NorthwindDataContext();
 
-            return Json(northwind.Categories, **JsonRequestBehavior.AllowGet**);
-        }
+                return Json(northwind.Categories, **JsonRequestBehavior.AllowGet**);
+            }
 
 * Change HTTP verb of the DataSource.
 
-```tab-ASPX
+    ###### Example
 
-            <%: Html.Kendo().ComboBox()
-                    .Name("ComboBox")
-                    .DataSource(read => {
-                        read.Action("GetCascadeCategories", "ComboBox").Type(HttpVerbs.Post);
-                    })
-            %>
-```
-```tab-Razor
+    ```tab-ASPX
 
-            @(Html.Kendo().ComboBox()
-                  .Name("ComboBox")
-                  .DataSource(read => {
-                      read.Action("GetCascadeCategories", "ComboBox").Type(HttpVerbs.Post);
-                  })
-            )
-```
+                <%: Html.Kendo().ComboBox()
+                        .Name("ComboBox")
+                        .DataSource(read => {
+                            read.Action("GetCascadeCategories", "ComboBox").Type(HttpVerbs.Post);
+                        })
+                %>
+    ```
+    ```tab-Razor
+
+                @(Html.Kendo().ComboBox()
+                      .Name("ComboBox")
+                      .DataSource(read => {
+                          read.Action("GetCascadeCategories", "ComboBox").Type(HttpVerbs.Post);
+                      })
+                )
+    ```
 
 ### Widgets Do Not Work with Remote Binding and Throw No Errors
 
@@ -336,29 +338,29 @@ Apply either of the two options below:
 
 * Return a simple array of data.
 
-###### Example
+    ###### Example
 
-        public JsonResult GetCascadeCategories()
-        {
-            var northwind = new NorthwindDataContext();
+            public JsonResult GetCascadeCategories()
+            {
+                var northwind = new NorthwindDataContext();
 
-            //TODO: Do not use northwind.Categories.ToDataSourceResult();
+                //TODO: Do not use northwind.Categories.ToDataSourceResult();
 
-            return Json(northwind.Categories, **JsonRequestBehavior.AllowGet**);
-        }
+                return Json(northwind.Categories, **JsonRequestBehavior.AllowGet**);
+            }
 
 * Return the `Data` property only.
 
-###### Example
+    ###### Example
 
-        public JsonResult GetCascadeCategories([DataSourceRequest] DataSourceRequest request)
-        {
-            var northwind = new NorthwindDataContext();
+            public JsonResult GetCascadeCategories([DataSourceRequest] DataSourceRequest request)
+            {
+                var northwind = new NorthwindDataContext();
 
-            return Json(northwind.Categories.ToDataSourceResult(request).Data, **JsonRequestBehavior.AllowGet**);
-        }
+                return Json(northwind.Categories.ToDataSourceResult(request).Data, **JsonRequestBehavior.AllowGet**);
+            }
 
-In the **Getting Started** section of each widget's Overview article, a section related to the widget configuration fro Ajax binding can be found. In it find how to return data to the client.
+More information on how to configure Kendo UI widgets for Ajax binding and return data to the client, refer to the overview article of each widget. 
 
 ### Widgets Display Zero Values
 
@@ -427,14 +429,14 @@ Choose either of the options to overcome this behavior:
 * Force the `check for newer versions of stored pages` [(link)](https://support.microsoft.com/en-us/kb/263070).
 * Disable caching using HTTP headers.
 
-###### Example
+    ###### Example
 
-    [OutputCache(Duration=0,NoStore=true,VaryByParam="None")]
-    public JsonResult Index()
-    {
-        //TODO: return the updated data here!
-        return Json(new string[] {});
-    }
+        [OutputCache(Duration=0,NoStore=true,VaryByParam="None")]
+        public JsonResult Index()
+        {
+            //TODO: return the updated data here!
+            return Json(new string[] {});
+        }
 
 ## Date Picker HtmlHelpers
 

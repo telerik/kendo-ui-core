@@ -96,8 +96,6 @@ public ActionResult MyModel_Create(MyModel model)
 
 ## See Also
 
-Other articles on Telerik UI for ASP.NET MVC and on the Window:
-
 * [ASP.NET MVC API Reference: WindowBuilder](/api/aspnet-mvc/Kendo.Mvc.UI.Fluent/WindowBuilder)
 * [Overview of Telerik UI for ASP.NET MVC]({% slug overview_aspnetmvc %})
 * [Fundamentals of Telerik UI for ASP.NET MVC]({% slug fundamentals_aspnetmvc %})

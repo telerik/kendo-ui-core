@@ -46,10 +46,11 @@ None of the widgets features the `OnLoad` event anymore. Use the `$(document).re
             .Change(“change”)
         )
 ```
+
 ## See Also
 
 * [Migrate the AutoComplete]({% slug autocomplete_migrationextensions_aspnetmvc %})
 * [Migrate the Calendar]({% slug calendar_migrationextensions_aspnetmvc %})
 * [Migrate the Chart]({% slug chart_migrationextensions_aspnetmvc %})
 
-To see the articles on migrating Kendo UI controls from Telerik Extensions, browse [this section]({% slug combobox_migrationextensions_aspnetmvc %}).
+To see the articles on migrating Kendo UI controls from Telerik Extensions, browse the [**Widgets** folder]({% slug autocomplete_migrationextensions_aspnetmvc %}).

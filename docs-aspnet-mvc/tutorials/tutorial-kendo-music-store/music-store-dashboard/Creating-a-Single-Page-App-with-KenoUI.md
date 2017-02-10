@@ -122,7 +122,7 @@ Each route must be defined and the Music Dashboard does this in a method called 
 
 Each route is defined by a URL and a callback method. The URL is the route or value defined after the `#` (hash). SPAs rely on an old technique of using a `#` in a URL to define a unique URL. When the `#` value changes in a URL, the browser does not send the request to the server. Instead it looks for the target on the page and also fires a `hashchange` event. The Kendo UI Router object is wired to the `hashchange` event and executes the route's corresponding callback when the event fires.
 
-The example below demonstrates a truncated callback method and routes defined for each view in the Music Dashboard application.
+The following example demonstrates a truncated callback method and routes defined for each view in the Music Dashboard application.
 
 ###### Example
 

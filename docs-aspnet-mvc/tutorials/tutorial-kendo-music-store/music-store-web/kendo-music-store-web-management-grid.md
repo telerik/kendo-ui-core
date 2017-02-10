@@ -249,7 +249,7 @@ The Music Store uses the jQuery `$.Deferred()` functionality to asynchronously l
 
 In this example the `value` is the ID of the item, and `text` is its display name. These lists need to be loaded before populating the grid, but the `DataSource.read()` method used to read the data is asynchronous. That is why defers are used to load the data asynchronously and continue loading the grid when both genres and artists finish loading. Once these lists are loaded, use the `column.values` property to set it as the foreign key lookup for a column.
 
-The example below demonstrates how to define the Genre column.
+The following example demonstrates how to define the Genre column.
 
 ###### Example
 

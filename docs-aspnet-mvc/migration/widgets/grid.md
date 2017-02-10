@@ -379,13 +379,13 @@ Localization is essentially handled automatically. Changing the current .NET UI 
 
 To change the built-in localization strings, follow the steps listed below.
 
-**Step 1** Edit the resource files in the source code project and create a custom build of the assembly.
+1. Edit the resource files in the source code project and create a custom build of the assembly.
 
-**Step 2** Set the corresponding property of the widget.
+1. Set the corresponding property of the widget.
 
-###### Example
+    ###### Example
 
-    grid.Filterable(filter => filter.Messages(msg => msg.IsTrue("is true")));
+        grid.Filterable(filter => filter.Messages(msg => msg.IsTrue("is true")));
 
 ## Client-Side API
 
@@ -482,4 +482,4 @@ The `OnRowDataBound` event is now removed. Use the `DataBound` one instead and a
 * [Migrate the Calendar]({% slug calendar_migrationextensions_aspnetmvc %})
 * [Migrate the Chart]({% slug chart_migrationextensions_aspnetmvc %})
 
-To see the articles on migrating Kendo UI controls from Telerik Extensions, browse [this section]({% slug combobox_migrationextensions_aspnetmvc %}).
+To see the articles on migrating Kendo UI controls from Telerik Extensions, browse the [**Widgets** folder]({% slug autocomplete_migrationextensions_aspnetmvc %}).

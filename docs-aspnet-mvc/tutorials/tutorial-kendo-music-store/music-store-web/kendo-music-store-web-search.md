@@ -80,7 +80,7 @@ Each AutoComplete item in the dropdown will be a `<li>` element. Within that ele
 
 The template property may be set to a string&mdash;for example `template: "foo"`&mdash;and each result would render `<li>foo</li>`. To make more intricate templates, you can use `#...#` to put in JavaScript and calculated the values.
 
-The example below demonstrates a better template.
+The following example demonstrates a better template.
 
 ###### Example
 
@@ -107,7 +107,7 @@ Including a template in the body of your HTML is done by placing the tag demonst
 
 The `type` is always `"text/x-kendo-template"`, and the `id` is the unique name of your template. The HTML for your template then goes inside the `<script>` tags.
 
-The example below demonstrates the template for the auto-complete search box.
+The following example demonstrates the template for the auto-complete search box.
 
 ###### Example
 
@@ -146,7 +146,7 @@ Now that the template is included in the body of the page, the application code 
 
 Ideally, the server is expected to perform the filtering for the search AutoComplete box. Kendo UI supports both client and server-side filtering, but in a real music store, you would not want to return every album title in the store to the client.
 
-The example below demonstrates a quick breakdown of the code to do this.
+The following example demonstrates a quick breakdown of the code to do this.
 
 ###### Example
 

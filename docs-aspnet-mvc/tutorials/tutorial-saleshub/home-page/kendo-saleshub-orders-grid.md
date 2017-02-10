@@ -29,7 +29,7 @@ The first part of the declaration from this example instructs the Kendo UI MVC e
 
 ### Define Columns
 
-The example below declares what columns the Grid needs to have.
+The following example declares what columns the Grid needs to have.
 
 ###### Example
 

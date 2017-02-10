@@ -151,7 +151,7 @@ At this point the window element can be appended to the end of the page.
 
 Now the element and its contents are part of the DOM, but they are still plain HTML.
 
-The example below demonstrates how to turn the element into a Kendo UI Window widget.
+The following example demonstrates how to turn the element into a Kendo UI Window widget.
 
 ###### Example
 

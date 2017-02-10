@@ -54,7 +54,7 @@ ASP.NET MVC 4 is able to bundle and minify JavaScript and Style Sheets. The Musi
 
 Also, in the `Debug` mode the bundler does not include minified files by default.
 
-The example below demonstrates the making of a bundle from the Kendo UI `.css` files.
+The following example demonstrates the making of a bundle from the Kendo UI `.css` files.
 
 ###### Example
 
@@ -132,7 +132,7 @@ The `Release` version of the `web.config` file set debug to `false`.
 
 You are now able to add Kendo UI and any other third-party libraries to the pages. The Music Store uses the `Views\Shared\_Layout.cshtml` master page, so add Kendo UI here. Make sure that the Kendo UI JavaScript files come after jQuery. For styling, include `kendo.common.min.css`, plus one of the Kendo UI themes.
 
-The example below demonstrates how to use the `kendo.default.min.css` which is the Default theme.
+The following example demonstrates how to use the `kendo.default.min.css` which is the Default theme.
 
 ###### Example
 

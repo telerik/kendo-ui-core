@@ -44,23 +44,23 @@ Select **Kendo UI Scaffolder** from the list of available scaffolders. Then choo
 
 The next screen displays the `Model` and `Data Context` options.
 
-**Step 1** Enter the `Controller` and `View` names.
+1. Enter the `Controller` and `View` names.
 
-**Figure 3. The Controller and View names**
+    **Figure 3. The Controller and View names**
 
-![Scheduler options](/helpers/scheduler/images/scaffolding/ui_for_aspnetmvc_scheduler_1.png)
+    ![Scheduler options](/helpers/scheduler/images/scaffolding/ui_for_aspnetmvc_scheduler_1.png)
 
-**Step 2** The **Model Class** DropDownList contains all model types from the active project. List the products in the Scheduler. In this case, select the **Product** entity.
+1. The **Model Class** DropDownList contains all model types from the active project. List the products in the Scheduler. In this case, select the **Product** entity.
 
-**Figure 4. The Model Class list**
+    **Figure 4. The Model Class list**
 
-![Model Class](/helpers/scheduler/images/scaffolding/ui_for_aspnetmvc_scheduler_3.png)
+    ![Model Class](/helpers/scheduler/images/scaffolding/ui_for_aspnetmvc_scheduler_3.png)
 
-**Step 3** From the **Data Context Class** DropDownList, select the **Entity Framework Data Model** class to be used. In this case, select **SampleEntities**. Note that the DataBase used is taken from the [offline examples]({% slug overview_aspnetmvc %}#sample-application).
+1. From the **Data Context Class** DropDownList, select the **Entity Framework Data Model** class to be used. In this case, select **SampleEntities**. Note that the DataBase used is taken from the [offline examples]({% slug overview_aspnetmvc %}#sample-application).
 
-**Figure 5. The Data Context class**
+    **Figure 5. The Data Context class**
 
-![Data Context Class](/helpers/scheduler/images/scaffolding/ui_for_aspnetmvc_scheduler_2.png)  
+    ![Data Context Class](/helpers/scheduler/images/scaffolding/ui_for_aspnetmvc_scheduler_2.png)  
 
 ### Set the View Model
 
@@ -78,31 +78,29 @@ The newly created class will later be added to the `~/Models` folder.
 
 ### Pick the Scheduler Options
 
-**Step 1** Click **Scheduler Options**.
+1. Click **Scheduler Options**.
 
-**Figure 8. The Scheduler options**
+    **Figure 8. The Scheduler options**
 
-![Scheduler options](/helpers/scheduler/images/scaffolding/ui_for_aspnetmvc_scheduler_5.png)
+    ![Scheduler options](/helpers/scheduler/images/scaffolding/ui_for_aspnetmvc_scheduler_5.png)
 
-This screen contains the Scheduler functionalities that can be configured before scaffolding:  
+    This screen contains the Scheduler functionalities that can be configured before scaffolding:  
 
-* **DataSource Type**&mdash;Ajax or WebApi.
-* **Edit operations**&mdash;Configures the operations to be included (**Create**, **Update**, **Destroy**, **Resize**, **Move**).
-* **Other options** > **PDF Export**&mdash;Enables the PDF export functionality.
-* **Other options** > **Selectable**&mdash;Enables the selection functionality.
-* **Scheduler Views**&mdash;Opts for the desired views.
+    * **DataSource Type**&mdash;Ajax or WebApi.
+    * **Edit operations**&mdash;Configures the operations to be included (**Create**, **Update**, **Destroy**, **Resize**, **Move**).
+    * **Other options** > **PDF Export**&mdash;Enables the PDF export functionality.
+    * **Other options** > **Selectable**&mdash;Enables the selection functionality.
+    * **Scheduler Views**&mdash;Opts for the desired views.
 
-**Step 2** Click **Events**. Select the Scheduler events that you want to attach handlers to.
+1. Click **Events**. Select the Scheduler events that you want to attach handlers to.
 
-**Figure 9. The Scheduler events**
+    **Figure 9. The Scheduler events**
 
-![Scheduler options](/helpers/scheduler/images/scaffolding/ui_for_aspnetmvc_scheduler_6.png)  
+    ![Scheduler options](/helpers/scheduler/images/scaffolding/ui_for_aspnetmvc_scheduler_6.png)  
 
-**Step 3.** When finished with the Scheduler configuration, click **Add**. The `Scheduler Controller` and the corresponding `View` are now generated.
+1. When finished with the Scheduler configuration, click **Add**. The `Scheduler Controller` and the corresponding `View` are now generated.
 
 ## See Also
-
-Other articles on Telerik UI for ASP.NET MVC and on the Scheduler:
 
 * [Overview of the Scheduler HtmlHelper]({% slug overview_schedulerhelper_aspnetmvc %})
 * [Ajax Binding of the Scheduler HtmlHelper]({% slug ajaxbinding_schedulerhelper_aspnetmvc %})

@@ -24,84 +24,84 @@ There are several ways to define content for the Kendo UI Tooltip for ASP.NET MV
 
 Below are listed the steps for you to follow when configuring the Kendo UI Tooltip.
 
-**Step 1** Make sure you followed all the steps from the [introductory article on Telerik UI for ASP.NET MVC]({% slug overview_aspnetmvc %}).
+1. Make sure you followed all the steps from the [introductory article on Telerik UI for ASP.NET MVC]({% slug overview_aspnetmvc %}).
 
-**Step 2** Create a new action method.
+1. Create a new action method.
 
-###### Example
+    ###### Example
 
-        public ActionResult Index()
-        {
-            return View();
-        }
+            public ActionResult Index()
+            {
+                return View();
+            }
 
-**Step 3** Add a Tooltip.
+1. Add a Tooltip.
 
-###### Example
+    ###### Example
 
-```tab-ASPX
+    ```tab-ASPX
 
-         <%: Html.Kendo().Tooltip()
-             .For("#container") //The for option of the Tooltip is mandatory.
-                                //It is a jQuery selector which specifies the element or the container for the elements for which the Tooltip will be shown.
-             .Filter("a[title]") //The jQuery selector which narrows the elements within the container for which the Tooltip will be shown.
-             .Content("custom text")
-         %>
-```
-```tab-Razor
+             <%: Html.Kendo().Tooltip()
+                 .For("#container") //The for option of the Tooltip is mandatory.
+                                    //It is a jQuery selector which specifies the element or the container for the elements for which the Tooltip will be shown.
+                 .Filter("a[title]") //The jQuery selector which narrows the elements within the container for which the Tooltip will be shown.
+                 .Content("custom text")
+             %>
+    ```
+    ```tab-Razor
 
-         @(Html.Kendo().Tooltip()
-             .For("#container") //The for option of the Tooltip is mandatory.
-                                //It is a jQuery selector which specifies the element or the container for the elements for which the Tooltip will be shown.
-             .Filter("a[title]") //The jQuery selector which narrows the elements within the container for which the Tooltip will be shown.
-             .Content("custom text")
-         )
-```
+             @(Html.Kendo().Tooltip()
+                 .For("#container") //The for option of the Tooltip is mandatory.
+                                    //It is a jQuery selector which specifies the element or the container for the elements for which the Tooltip will be shown.
+                 .Filter("a[title]") //The jQuery selector which narrows the elements within the container for which the Tooltip will be shown.
+                 .Content("custom text")
+             )
+    ```
 
 ### Load-on-Demand Content
 
 Below are listed the steps for you to follow when configuring the Kendo UI Tooltip with a load-on-demand content.
 
-**Step 1** Make sure you followed all the steps from the [introductory article on Telerik UI for ASP.NET MVC]({% slug overview_aspnetmvc %}).
+1. Make sure you followed all the steps from the [introductory article on Telerik UI for ASP.NET MVC]({% slug overview_aspnetmvc %}).
 
-**Step 2** Create a new action method which renders the view.
+1. Create a new action method which renders the view.
 
-###### Example
+    ###### Example
 
-        public ActionResult Index()
-        {
-            return View();
-        }
+            public ActionResult Index()
+            {
+                return View();
+            }
 
-**Step 3** Create an action method which renders the content.
+1. Create an action method which renders the content.
 
-###### Example
+    ###### Example
 
-        public ActionResult AjaxContent()
-        {
-            return View();
-        }
+            public ActionResult AjaxContent()
+            {
+                return View();
+            }
 
-**Step 4** Add a Tooltip.
+1. Add a Tooltip.
 
-###### Example
+    ###### Example
 
-```tab-ASPX
+    ```tab-ASPX
 
-        <%: Html.Kendo().Tooltip()
-               .For("#container") //The for option of the Tooltip is mandatory.
-                                //It is a jQuery selector which specifies the element or the container for the elements for which the Tooltip will be shown.
-               .LoadContentFrom("AjaxContent", "Tooltip") //Define the Action and Controller names.
-        %>
-```
-```tab-Razor
+            <%: Html.Kendo().Tooltip()
+                   .For("#container") //The for option of the Tooltip is mandatory.
+                                    //It is a jQuery selector which specifies the element or the container for the elements for which the Tooltip will be shown.
+                   .LoadContentFrom("AjaxContent", "Tooltip") //Define the Action and Controller names.
+            %>
+    ```
+    ```tab-Razor
 
-        @(Html.Kendo().Tooltip()
-               .For("#container") //The for option of the Tooltip is mandatory.
-                                //It is a jQuery selector which specifies the element or the container for the elements for which the Tooltip will be shown.
-               .LoadContentFrom("AjaxContent", "Tooltip") //Define the Action and Controller names.
-        )
-```
+            @(Html.Kendo().Tooltip()
+                   .For("#container") //The for option of the Tooltip is mandatory.
+                                    //It is a jQuery selector which specifies the element or the container for the elements for which the Tooltip will be shown.
+                   .LoadContentFrom("AjaxContent", "Tooltip") //Define the Action and Controller names.
+            )
+    ```
 
 ## Event Handling
 
@@ -109,7 +109,7 @@ You can subscribe to all Tooltip [events](../../../kendo-ui/api/javascript/ui/to
 
 ### By Handler Name
 
-The examples below demonstrates how to subscribe to events by a handler name.
+The following example demonstrates how to subscribe to events by a handler name.
 
 ###### Example
 
@@ -154,7 +154,7 @@ The examples below demonstrates how to subscribe to events by a handler name.
 
 ### By Template Delegate
 
-The example below demonstrates how to subscribe to events by a template delegate.
+The following example demonstrates how to subscribe to events by a template delegate.
 
 ###### Example
 
@@ -181,7 +181,7 @@ The example below demonstrates how to subscribe to events by a template delegate
 
 ### Existing Instances
 
-You can reference an existing Kendo UI Tooltip instance via [`jQuery.data()`](http://api.jquery.com/jQuery.data/). Once a reference is established, use the [Tooltip API](../../../kendo-ui/api/javascript/ui/tooltip#methods) to control its behavior.
+To reference an existing Kendo UI Tooltip instance, use the [`jQuery.data()`](http://api.jquery.com/jQuery.data/) configuration option. Once a reference is established, use the [Tooltip API](../../../kendo-ui/api/javascript/ui/tooltip#methods) to control its behavior.
 
 ###### Example
 
@@ -194,8 +194,6 @@ You can reference an existing Kendo UI Tooltip instance via [`jQuery.data()`](ht
         </script>
 
 ## See Also
-
-Other articles on Telerik UI for ASP.NET MVC and on the Tooltip:
 
 * [ASP.NET MVC API Reference: TooltipBuilder](/api/Kendo.Mvc.UI.Fluent/TooltipBuilder)
 * [Overview of Telerik UI for ASP.NET MVC]({% slug overview_aspnetmvc %})
