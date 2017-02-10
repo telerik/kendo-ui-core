@@ -16,7 +16,7 @@ Make sure you are familiar with the fundamental Kendo UI widget concepts and tha
 
 ### The Basics
 
-The Kendo UI Button widget can be initialized from any element, defined via the `.Tag()` fluent method. However, using the `button` or `a` elements is more reasonable. A `button` tag is used by default, unless otherwise specified.
+The Kendo UI Button widget can be initialized from any element, defined through the `.Tag()` fluent method. However, using the `button` or `a` elements is more reasonable. A `button` tag is used by default, unless otherwise specified.
 
 The Button can include both inline and block elements defined via `.Content()`. Take into account the web standards, which prohibit placing block elements, such as `div`, and `p`, inside inline elements, such as `a` and `span`.
 
@@ -66,21 +66,15 @@ The following example demonstrates how to initialize the Button by using the `an
 
 The Button can accommodate an icon, which enhances the meaning of the text content. The widget provides three ways to add an icon with a classic `img` element or with a background image, usually a sprite. Taking web standards into consideration, using background images is better, because the icon does not represent structural content, but it's simply a decoration.
 
-There are three settings that are available in the Button to configure icons:
+To configure the icons in the Buttons, use just one of the following available settings at a time:
 
 * `.Icon()`
 * `.SpriteCssClass()`
 * `.ImageUrl()`
 
-Use only one at a time.
-
 ### Background Icons
 
-Background icons are applied via the `.Icon()` or `.SpriteCssClass()` fluent methods and are displayed as a background of a `span` element.
-
-The difference between the two settings is that `.Icon()` is intended to be used for built-in Kendo UI icons, which are part of the theme sprite.
-
-For a list of available icon names, refer to the [Icons demo](http://demos.telerik.com/kendo-ui/web/styling/icons.html).
+Background icons are applied via the `.Icon()` or `.SpriteCssClass()` fluent methods and are displayed as a background of a `span` element. The difference between the two settings is that `.Icon()` is intended to be used for built-in Kendo UI icons, which are part of the theme sprite. For a list of available icon names, refer to the [Icons demo](http://demos.telerik.com/kendo-ui/web/styling/icons.html).
 
 The following example demonstrates how to add a background icon by using `.Icon()`.
 
@@ -132,9 +126,7 @@ The above configuration is expected to produce the HTML output from the followin
 
       <button type="button" id="spriteButton" class="k-button k-button-icontext"><span class="k-sprite myIconClass"></span>Sprite button</button>
 
-Technically, `.SpriteCssClass("k-icon k-cancel")` can be used to achieve the same result as `.Icon("cancel")`, but `.Icon()` spares you the need to set two CSS classes at the same time and provides a certain level of abstraction.
-
-The Button uses an existing `span` element if it is supplied as `.Content()`&mdash;for example, if you want to have a Button with no text. The `span` element must have a `k-sprite` CSS class.
+Technically, `.SpriteCssClass("k-icon k-cancel")` can be used to achieve the same result as `.Icon("cancel")`, but `.Icon()` spares you the need to set two CSS classes at the same time and provides a certain level of abstraction. The Button uses an existing `span` element if it is supplied as `.Content()`&mdash;for example, if you want to have a Button with no text. The `span` element must have a `k-sprite` CSS class.
 
 The following example demonstrates how to use a button with no text.
 

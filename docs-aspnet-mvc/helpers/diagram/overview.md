@@ -20,48 +20,48 @@ The Kendo UI Diagram for ASP.NET MVC can be bound through Ajax binding. This mea
 
 Below are listed the steps for you to follow when configuring the Kendo UI Diagram for ASP.NET MVC.
 
-**Step 1** Return the data as JSON.
+1. Return the data as JSON.
 
-###### Example
+    ###### Example
 
-        public ActionResult _OrgChart()
-        {
-            return Json(DiagramDataRepository.OrgChart(), JsonRequestBehavior.AllowGet);
-        }
+            public ActionResult _OrgChart()
+            {
+                return Json(DiagramDataRepository.OrgChart(), JsonRequestBehavior.AllowGet);
+            }
 
 <!--_-->
-**Step 2** In the view, configure the Diagram to use the action method created in the previous step.
+1. In the view, configure the Diagram to use the action method created in the previous step.
 
-###### Example
+    ###### Example
 
-```tab-ASPX
+    ```tab-ASPX
 
-        <%= Html.Kendo().Diagram()
-                .Name("diagram")
-                .DataSource(dataSource => dataSource
-                    .Read(read => read
-                        .Action("_OrgChart", "Diagram") //Specify the action method and controller names.
+            <%= Html.Kendo().Diagram()
+                    .Name("diagram")
+                    .DataSource(dataSource => dataSource
+                        .Read(read => read
+                            .Action("_OrgChart", "Diagram") //Specify the action method and controller names.
+                        )
+                        .Model(m => m.Children("Items"))
                     )
-                    .Model(m => m.Children("Items"))
-                )
-                .Layout(l => l.Type(DiagramLayoutType.Layered))
-        %>
+                    .Layout(l => l.Type(DiagramLayoutType.Layered))
+            %>
 
-```
-```tab-Razor
+    ```
+    ```tab-Razor
 
-        @(Html.Kendo().Diagram()
-                .Name("diagram")
-                .DataSource(dataSource => dataSource
-                    .Read(read => read
-                        .Action("_OrgChart", "Diagram") //Specify the action method and controller names.
+            @(Html.Kendo().Diagram()
+                    .Name("diagram")
+                    .DataSource(dataSource => dataSource
+                        .Read(read => read
+                            .Action("_OrgChart", "Diagram") //Specify the action method and controller names.
+                        )
+                        .Model(m => m.Children("Items"))
                     )
-                    .Model(m => m.Children("Items"))
-                )
-                .Layout(l => l.Type(DiagramLayoutType.Layered))
-        )
+                    .Layout(l => l.Type(DiagramLayoutType.Layered))
+            )
 
-```
+    ```
 
 ## Event Handling
 
@@ -69,7 +69,7 @@ You can subscribe to all Diagram [events](../../../kendo-ui/api/javascript/datav
 
 ### By Handler Name
 
-The examples below demonstrates how to subscribe to events by a handler name.
+The following example demonstrates how to subscribe to events by a handler name.
 
 ###### Example
 
@@ -120,7 +120,7 @@ The examples below demonstrates how to subscribe to events by a handler name.
 
 ### By Template Delegate
 
-The example below demonstrates how to subscribe to events by a template delegate.
+The following example demonstrates how to subscribe to events by a template delegate.
 
 ###### Example
 
@@ -142,7 +142,7 @@ The example below demonstrates how to subscribe to events by a template delegate
 
 ### Existing Instances
 
-You can reference an existing Kendo UI Diagram instance via [`jQuery.data()`](http://api.jquery.com/jQuery.data/). Once a reference is established, use the [Diagram API](../../../kendo-ui/api/javascript/dataviz/ui/diagram#methods) to control its behavior.
+To reference an existing Kendo UI Diagram instance, use the [`jQuery.data()`](http://api.jquery.com/jQuery.data/) configuration option. Once a reference is established, use the [Diagram API](../../../kendo-ui/api/javascript/dataviz/ui/diagram#methods) to control its behavior.
 
 ###### Example
 
@@ -155,8 +155,6 @@ You can reference an existing Kendo UI Diagram instance via [`jQuery.data()`](ht
         </script>
 
 ## See Also
-
-Other articles on Telerik UI for ASP.NET MVC and on the Diagram:
 
 * [ASP.NET MVC API Reference: DiagramBuilder](/api/Kendo.Mvc.UI.Fluent/DiagramBuilder)
 * [Overview of Telerik UI for ASP.NET MVC]({% slug overview_aspnetmvc %})

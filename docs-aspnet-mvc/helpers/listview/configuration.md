@@ -156,8 +156,6 @@ Specify the action method which will update the existing models.
 
 ## See Also
 
-Other articles on Telerik UI for ASP.NET MVC and on the ListView:
-
 * [Overview of the ListView HtmlHelper]({% slug overview_listviewhelper_aspnetmvc %})
 * [Ajax Binding of the ListView HtmlHelper]({% slug ajaxbinding_listviewhelper_aspnetmvc %})
 * [Editing of the ListView HtmlHelper]({% slug eiditing_listviewhelper_aspnetmvc %})

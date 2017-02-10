@@ -10,9 +10,7 @@ position: 1
 
 The Calendar HtmlHelper extension is a server-side wrapper for the [Kendo UI Calendar](https://demos.telerik.com/kendo-ui/calendar/index) widget.
 
-## Getting Started
-
-### Configuration
+## Configuration
 
 Below are listed the steps for you to follow when configuring the Kendo UI Calendar.
 
@@ -128,7 +126,7 @@ The following example demonstrates how to subscribe to events by a template dele
 
 ### Existing Instances
 
-You can reference an existing Kendo UI Calendar instance via [`jQuery.data()`](http://api.jquery.com/jQuery.data/). Once a reference is established, use the [Calendar API](../../../kendo-ui/api/javascript/ui/calendar#methods) to control its behavior.
+To reference an existing Kendo UI Calendar instance, use the [`jQuery.data()`](http://api.jquery.com/jQuery.data/) configuration option. Once a reference is established, use the [Calendar API](../../../kendo-ui/api/javascript/ui/calendar#methods) to control its behavior.
 
 ###### Example
 
@@ -141,8 +139,6 @@ You can reference an existing Kendo UI Calendar instance via [`jQuery.data()`](h
         </script>
 
 ## See Also
-
-Other articles on Telerik UI for ASP.NET MVC and on the Calendar:
 
 * [ASP.NET MVC API Reference: CalendarBuilder](/api/Kendo.Mvc.UI.Fluent/CalendarBuilder)
 * [Overview of Telerik UI for ASP.NET MVC]({% slug overview_aspnetmvc %})

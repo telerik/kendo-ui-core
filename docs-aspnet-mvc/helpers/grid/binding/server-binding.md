@@ -25,7 +25,7 @@ There are a few ways to do this:
 
 ### Bind to the View Model
 
-The examples below demonstrate how to bind to the view model.
+The following example demonstrate how to bind to the view model.
 
 ###### Example
 
@@ -76,7 +76,7 @@ To download the Visual Studio Project, refer to [this GitHub repository](https:/
 
 ### Use ViewData or ViewBag Items Binding
 
-The example below demonstrates how to bind to an item from the `ViewData` or `ViewBag`.
+The following example demonstrates how to bind to an item from the `ViewData` or `ViewBag`.
 
 ###### Example
 
@@ -120,7 +120,7 @@ The example below demonstrates how to bind to an item from the `ViewData` or `Vi
 
 ### Apply the BindTo Method
 
-The example below demonstrates how to use the `BindTo` method.
+The following example demonstrates how to use the `BindTo` method.
 
 ```tab-Action
 
@@ -178,7 +178,7 @@ For more information on how a typical URL would look like, refer to [this locati
 
 Sometimes the action method, which renders the view containing the Grid, may need additional data.
 
-The example below demonstrates how to pass them.
+The following example demonstrates how to pass them.
 
 ###### Example
 

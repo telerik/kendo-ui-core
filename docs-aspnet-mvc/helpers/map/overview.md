@@ -16,47 +16,47 @@ The Map HtmlHelper extension is a server-side wrapper for the [Kendo UI Map](htt
 
 Below are listed the steps for you to follow when configuring the Kendo UI Map.
 
-**Step 1** Make sure you followed all the steps from the [introductory article on Telerik UI for ASP.NET MVC]({% slug overview_aspnetmvc %}).
+1. Make sure you followed all the steps from the [introductory article on Telerik UI for ASP.NET MVC]({% slug overview_aspnetmvc %}).
 
-**Step 2** Create a new action method which renders the view.
+1. Create a new action method which renders the view.
 
-###### Example
+    ###### Example
 
-    public ActionResult Index()
-    {
-        return View();
-    }
-
-**Step 3** Add a Map.
-
-###### Example
-
-```tab-ASPX
-
-    <%: Html.Kendo().Map()
-        .Name("map")
-        .Layers(layers =>
+        public ActionResult Index()
         {
-            layers.Add()
-                .Type(MapLayerType.Tile)
-                .UrlTemplate("http://#= subdomain #.tile.openstreetmap.org/#= zoom #/#= x #/#= y #.png")
-                .Subdomains("a", "b", "c");
-        })
-    %>
-```
-```tab-Razor
+            return View();
+        }
 
-    @(Html.Kendo().Map()
-        .Name("map")
-        .Layers(layers =>
-        {
-            layers.Add()
-                .Type(MapLayerType.Tile)
-                .UrlTemplate("http://#= subdomain #.tile.openstreetmap.org/#= zoom #/#= x #/#= y #.png")
-                .Subdomains("a", "b", "c");
-        })
-    )
-```
+1. Add a Map.
+
+    ###### Example
+
+    ```tab-ASPX
+
+        <%: Html.Kendo().Map()
+            .Name("map")
+            .Layers(layers =>
+            {
+                layers.Add()
+                    .Type(MapLayerType.Tile)
+                    .UrlTemplate("http://#= subdomain #.tile.openstreetmap.org/#= zoom #/#= x #/#= y #.png")
+                    .Subdomains("a", "b", "c");
+            })
+        %>
+    ```
+    ```tab-Razor
+
+        @(Html.Kendo().Map()
+            .Name("map")
+            .Layers(layers =>
+            {
+                layers.Add()
+                    .Type(MapLayerType.Tile)
+                    .UrlTemplate("http://#= subdomain #.tile.openstreetmap.org/#= zoom #/#= x #/#= y #.png")
+                    .Subdomains("a", "b", "c");
+            })
+        )
+    ```
 
 ## Event Handling
 
@@ -64,7 +64,7 @@ You can subscribe to all Map [events](../../../kendo-ui/api/javascript/dataviz/u
 
 ### By Handler Name
 
-The examples below demonstrates how to subscribe to events by a handler name.
+The following example demonstrates how to subscribe to events by a handler name.
 
 ###### Example
 
@@ -113,7 +113,7 @@ The examples below demonstrates how to subscribe to events by a handler name.
 
 ### By Template Delegate
 
-The example below demonstrates how to subscribe to events by a template delegate.
+The following example demonstrates how to subscribe to events by a template delegate.
 
 ###### Example
 
@@ -142,7 +142,7 @@ The example below demonstrates how to subscribe to events by a template delegate
 
 ### Existing Instances
 
-You can reference an existing Kendo UI Map instance via [`jQuery.data()`](http://api.jquery.com/jQuery.data/). Once a reference is established, use the [Map API](../../../kendo-ui/api/javascript/dataviz/ui/map#methods) to control its behavior.
+To reference an existing Kendo UI Map instance, use the [`jQuery.data()`](http://api.jquery.com/jQuery.data/) configuration option. Once a reference is established, use the [Map API](../../../kendo-ui/api/javascript/dataviz/ui/map#methods) to control its behavior.
 
 ###### Example
 
@@ -155,8 +155,6 @@ You can reference an existing Kendo UI Map instance via [`jQuery.data()`](http:/
     </script>
 
 ## See Also
-
-Other articles on Telerik UI for ASP.NET MVC and on the Map:
 
 * [ASP.NET MVC API Reference: MapBuilder](/api/Kendo.Mvc.UI.Fluent/MapBuilder)
 * [Overview of Telerik UI for ASP.NET MVC]({% slug overview_aspnetmvc %})

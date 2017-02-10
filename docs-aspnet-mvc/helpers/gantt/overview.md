@@ -10,147 +10,143 @@ position: 1
 
 The Gantt HtmlHelper extension is a server-side wrapper for the [Kendo UI Gantt](../../../kendo-ui/api/web/gantt) widget. It allows you to configure the Kendo UI Gantt from server-side code, helps with data binding and editing.
 
-## Getting Started
-
-### Configuration
+## Configuration
 
 Below are listed the steps for you to follow when binding the Kendo UI Gantt to tasks and dependencies on the server.
 
-**Step 1** Make sure you followed all the steps from the [introductory article on Telerik UI for ASP.NET MVC]({% slug overview_aspnetmvc %}).
+1. Make sure you followed all the steps from the [introductory article on Telerik UI for ASP.NET MVC]({% slug overview_aspnetmvc %}).
 
-**Step 2** Create two view models that will be used to transmit the Gantt data to the client side. One is used for the tasks, and the other one for the dependencies between the tasks.
+1. Create two view models that will be used to transmit the Gantt data to the client side. One is used for the tasks, and the other one for the dependencies between the tasks.
 
-###### Example
+    ###### Example
 
-        public class TaskViewModel : IGanttTask
-        {
-            public int TaskID { get; set; }
-            public int? ParentID { get; set; }
-
-            public string Title { get; set; }
-
-            private DateTime start;
-            public DateTime Start
+            public class TaskViewModel : IGanttTask
             {
-                get { return start; }
-                set { start = value.ToUniversalTime(); }
+                public int TaskID { get; set; }
+                public int? ParentID { get; set; }
+
+                public string Title { get; set; }
+
+                private DateTime start;
+                public DateTime Start
+                {
+                    get { return start; }
+                    set { start = value.ToUniversalTime(); }
+                }
+
+                private DateTime end;
+                public DateTime End
+                {
+                    get { return end; }
+                    set { end = value.ToUniversalTime(); }
+                }
+
+                public bool Summary { get; set; }
+                public bool Expanded { get; set; }
+                public decimal PercentComplete { get; set; }
+                public int OrderId { get; set; }
             }
 
-            private DateTime end;
-            public DateTime End
+
+            public class DependencyViewModel : IGanttDependency
             {
-                get { return end; }
-                set { end = value.ToUniversalTime(); }
+                public int DependencyID { get; set; }
+
+                public int PredecessorID { get; set; }
+                public int SuccessorID { get; set; }
+                public int Type { get; set; }
             }
 
-            public bool Summary { get; set; }
-            public bool Expanded { get; set; }
-            public decimal PercentComplete { get; set; }
-            public int OrderId { get; set; }
-        }
+1. In the HomeController, create two action methods that return the tasks and dependencies as JSON.
 
+    ###### Example
 
-        public class DependencyViewModel : IGanttDependency
-        {
-            public int DependencyID { get; set; }
+            public JsonResult Tasks([DataSourceRequest] DataSourceRequest request)
+            {
+                var tasks = new List<TaskViewModel> {
+                    new TaskViewModel { TaskID = 1, Title = "My Project", Start = new DateTime(2014,8,21,11,00,00), End = new DateTime(2014,8,25,18,30,00), Summary = true, Expanded = true, ParentID = null, OrderId = 1 },
+                    new TaskViewModel { TaskID = 2, ParentID = 1, Title = "Task 1", Start = new DateTime(2014,8,21,11,00,00), End = new DateTime(2014,8,23,14,30,00), OrderId = 2 },
+                    new TaskViewModel { TaskID = 3, ParentID = 1, Title = "Task 2", Start = new DateTime(2014,8,21,15,00,00), End = new DateTime(2014,8,25,18,00,00), OrderId = 3 }
+                };
 
-            public int PredecessorID { get; set; }
-            public int SuccessorID { get; set; }
-            public int Type { get; set; }
-        }
+                return Json(tasks.AsQueryable().ToDataSourceResult(request));
+            }
 
-**Step 3** In the HomeController, create two action methods that return the tasks and dependencies as JSON.
+            public JsonResult Dependencies([DataSourceRequest] DataSourceRequest request)
+            {
+                var dependencies = new List<DependencyViewModel> {
+                    new DependencyViewModel { DependencyID = 100, PredecessorID = 2, SuccessorID = 3, Type = 0 }
+                };
 
-###### Example
+                return Json(dependencies.AsQueryable().ToDataSourceResult(request));
+            }
 
-        public JsonResult Tasks([DataSourceRequest] DataSourceRequest request)
-        {
-            var tasks = new List<TaskViewModel> {
-                new TaskViewModel { TaskID = 1, Title = "My Project", Start = new DateTime(2014,8,21,11,00,00), End = new DateTime(2014,8,25,18,30,00), Summary = true, Expanded = true, ParentID = null, OrderId = 1 },
-                new TaskViewModel { TaskID = 2, ParentID = 1, Title = "Task 1", Start = new DateTime(2014,8,21,11,00,00), End = new DateTime(2014,8,23,14,30,00), OrderId = 2 },
-                new TaskViewModel { TaskID = 3, ParentID = 1, Title = "Task 2", Start = new DateTime(2014,8,21,15,00,00), End = new DateTime(2014,8,25,18,00,00), OrderId = 3 }
-            };
+1. Add a Gantt chart to the view and bind it to the above action methods through its two data sources.
 
-            return Json(tasks.AsQueryable().ToDataSourceResult(request));
-        }
+    ###### Example
 
-        public JsonResult Dependencies([DataSourceRequest] DataSourceRequest request)
-        {
-            var dependencies = new List<DependencyViewModel> {
-                new DependencyViewModel { DependencyID = 100, PredecessorID = 2, SuccessorID = 3, Type = 0 }
-            };
+    ```tab-ASPX
 
-            return Json(dependencies.AsQueryable().ToDataSourceResult(request));
-        }
-
-**Step 4** Add a Gantt chart to the view and bind it to the above action methods through its two data sources.
-
-###### Example
-
-```tab-ASPX
-
-        <%= Html.Kendo().Gantt<TelerikMvcApp14.Models.TaskViewModel, TelerikMvcApp14.Models.DependencyViewModel>()
-            .Name("Gantt")
-            .DataSource(ds => ds
-                .Read(read => read
-                    .Action("Tasks", "Home")
+            <%= Html.Kendo().Gantt<TelerikMvcApp14.Models.TaskViewModel, TelerikMvcApp14.Models.DependencyViewModel>()
+                .Name("Gantt")
+                .DataSource(ds => ds
+                    .Read(read => read
+                        .Action("Tasks", "Home")
+                    )
+                    .Model(m =>
+                    {
+                        m.Id(f => f.TaskID);
+                        m.ParentId(f => f.ParentID);
+                        m.OrderId(f => f.OrderId);
+                        m.Field(f => f.Expanded).DefaultValue(true);
+                    })
                 )
-                .Model(m =>
-                {
-                    m.Id(f => f.TaskID);
-                    m.ParentId(f => f.ParentID);
-                    m.OrderId(f => f.OrderId);
-                    m.Field(f => f.Expanded).DefaultValue(true);
-                })
-            )
-            .DependenciesDataSource(ds => ds
-                .Read(read => read
-                    .Action("Dependencies", "Home")
+                .DependenciesDataSource(ds => ds
+                    .Read(read => read
+                        .Action("Dependencies", "Home")
+                    )
+                    .Model(m =>
+                    {
+                        m.Id(f => f.DependencyID);
+                        m.PredecessorId(f => f.PredecessorID);
+                        m.SuccessorId(f => f.SuccessorID);
+                        m.Type(f => f.Type);
+                    })
                 )
-                .Model(m =>
-                {
-                    m.Id(f => f.DependencyID);
-                    m.PredecessorId(f => f.PredecessorID);
-                    m.SuccessorId(f => f.SuccessorID);
-                    m.Type(f => f.Type);
-                })
-            )
-        %>
-```
-```tab-Razor
+            %>
+    ```
+    ```tab-Razor
 
-        @(Html.Kendo().Gantt<TelerikMvcApp14.Models.TaskViewModel, TelerikMvcApp14.Models.DependencyViewModel>()
-            .Name("Gantt")
-            .DataSource(ds => ds
-                .Read(read => read
-                    .Action("Tasks", "Home")
+            @(Html.Kendo().Gantt<TelerikMvcApp14.Models.TaskViewModel, TelerikMvcApp14.Models.DependencyViewModel>()
+                .Name("Gantt")
+                .DataSource(ds => ds
+                    .Read(read => read
+                        .Action("Tasks", "Home")
+                    )
+                    .Model(m =>
+                    {
+                        m.Id(f => f.TaskID);
+                        m.ParentId(f => f.ParentID);
+                        m.OrderId(f => f.OrderId);
+                        m.Field(f => f.Expanded).DefaultValue(true);
+                    })
                 )
-                .Model(m =>
-                {
-                    m.Id(f => f.TaskID);
-                    m.ParentId(f => f.ParentID);
-                    m.OrderId(f => f.OrderId);
-                    m.Field(f => f.Expanded).DefaultValue(true);
-                })
-            )
-            .DependenciesDataSource(ds => ds
-                .Read(read => read
-                    .Action("Dependencies", "Home")
+                .DependenciesDataSource(ds => ds
+                    .Read(read => read
+                        .Action("Dependencies", "Home")
+                    )
+                    .Model(m =>
+                    {
+                        m.Id(f => f.DependencyID);
+                        m.PredecessorId(f => f.PredecessorID);
+                        m.SuccessorId(f => f.SuccessorID);
+                        m.Type(f => f.Type);
+                    })
                 )
-                .Model(m =>
-                {
-                    m.Id(f => f.DependencyID);
-                    m.PredecessorId(f => f.PredecessorID);
-                    m.SuccessorId(f => f.SuccessorID);
-                    m.Type(f => f.Type);
-                })
             )
-        )
-```
+    ```
 
 ## See Also
-
-Other articles on Telerik UI for ASP.NET MVC and on the Gantt:
 
 * [ASP.NET MVC API Reference: GanttBuilder](/api/Kendo.Mvc.UI.Fluent/GanttBuilder)
 * [Server Binding of the Gantt HtmlHelper]({% slug serverbinding_gantthelper_aspnetmvc %})

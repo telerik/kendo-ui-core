@@ -16,35 +16,35 @@ The Editor HtmlHelper extension is a server-side wrapper for the [Kendo UI Edito
 
 Below are listed the steps for you to follow when configuring the Kendo UI Editor.
 
-**Step 1** Make sure you followed all the steps from the [introductory article on Telerik UI for ASP.NET MVC]({% slug overview_aspnetmvc %}).
+1. Make sure you followed all the steps from the [introductory article on Telerik UI for ASP.NET MVC]({% slug overview_aspnetmvc %}).
 
-**Step 2** Create a new action method which renders the view.
+1. Create a new action method which renders the view.
 
-###### Example
+    ###### Example
 
-        public ActionResult Index()
-        {
-            return View();
-        }
+            public ActionResult Index()
+            {
+                return View();
+            }
 
-**Step 3** Add an Editor.
+1. Add an Editor.
 
-###### Example
+    ###### Example
 
-```tab-ASPX
+    ```tab-ASPX
 
-        <%: Html.Kendo().Editor()
-                .Name("editor") //The name of the Editor is mandatory. It specifies the "id" attribute of the widget.
-                .Value("<p>Initial value</p>") //Set the value of the Editor.
-        %>
-```
-```tab-Razor
+            <%: Html.Kendo().Editor()
+                    .Name("editor") //The name of the Editor is mandatory. It specifies the "id" attribute of the widget.
+                    .Value("<p>Initial value</p>") //Set the value of the Editor.
+            %>
+    ```
+    ```tab-Razor
 
-        @(Html.Kendo().Editor()
-              .Name("editor") //The name of the Editor is mandatory. It specifies the "id" attribute of the widget.
-              .Value("<p>Initial value</p>") //Set the value of the Editor.
-        )
-```
+            @(Html.Kendo().Editor()
+                  .Name("editor") //The name of the Editor is mandatory. It specifies the "id" attribute of the widget.
+                  .Value("<p>Initial value</p>") //Set the value of the Editor.
+            )
+    ```
 
 ### Server Value Processing
 
@@ -70,7 +70,7 @@ You can subscribe to all Editor [events](../../../kendo-ui/api/javascript/ui/edi
 
 ### By Handler Name
 
-The examples below demonstrates how to subscribe to events by a handler name.
+The following example demonstrates how to subscribe to events by a handler name.
 
 ###### Example
 
@@ -105,6 +105,8 @@ The examples below demonstrates how to subscribe to events by a handler name.
 
 ### By Template Delegate
 
+The following example demonstrates how to subscribe to events by a template delegate.
+
 ###### Example
 
 ```tab-Razor
@@ -125,7 +127,7 @@ The examples below demonstrates how to subscribe to events by a handler name.
 
 ### Existing Instances
 
-You can reference an existing Kendo UI Editor instance via [`jQuery.data()`](http://api.jquery.com/jQuery.data/). Once a reference is established, use the [Editor API](../../../kendo-ui/api/javascript/ui/editor#methods) to control its behavior.
+To reference an existing Kendo UI Editor instance, use the [`jQuery.data()`](http://api.jquery.com/jQuery.data/) configuration option. Once a reference is established, use the [Editor API](../../../kendo-ui/api/javascript/ui/editor#methods) to control its behavior.
 
 ###### Example
 
@@ -139,8 +141,6 @@ You can reference an existing Kendo UI Editor instance via [`jQuery.data()`](htt
 
 ## See Also
 
-Other articles on Telerik UI for ASP.NET MVC and on the Editor:
-
 * [ASP.NET MVC API Reference: EditorBuilder](/api/Kendo.Mvc.UI.Fluent/EditorBuilder)
 * [Overview of Telerik UI for ASP.NET MVC]({% slug overview_aspnetmvc %})
 * [Import and Export Various Documents]({% slug overview_importexportdpl_aspnetmvc %})
@@ -152,4 +152,4 @@ Other articles on Telerik UI for ASP.NET MVC and on the Editor:
 * [Tutorials on Telerik UI for ASP.NET MVC]({% slug overview_timeefficiencyapp_aspnetmvc6 %})
 * [Telerik UI for ASP.NET MVC Troubleshooting]({% slug troubleshooting_aspnetmvc %})
 
-For runnable examples on the Kendo UI Editor in ASP.NET MVC applications, browse its [**How To** documentation folder]({% slug howto_addmaxlengthvalidation_editoraspnetmvc %}).
+For runnable examples on the Kendo UI Editor in ASP.NET MVC applications, browse its [**How To** documentation folder](/helpers/editor/how-to/).

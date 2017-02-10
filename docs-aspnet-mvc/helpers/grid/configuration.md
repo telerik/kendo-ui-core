@@ -58,7 +58,7 @@ The `Aggregates` method sets the aggregates, as demonstrated in the example belo
 
 The `Create` method sets the action method which is responsible for saving new data items.
 
-The example below demonstrates how to set the `create` action.
+The following example demonstrates how to set the `create` action.
 
 ###### Example
 
@@ -77,7 +77,7 @@ The example below demonstrates how to set the `create` action.
 
 The `Destroy` method sets the action method which is responsible for destroying data items.
 
-The example below demonstrates how to set the `destroy` action.
+The following example demonstrates how to set the `destroy` action.
 
 ###### Example
 
@@ -101,7 +101,7 @@ The example below demonstrates how to set the `destroy` action.
 
 The `Events` method specifies the event handlers for the data source [events](../../../kendo-ui/api/javascript/data/datasource#events).
 
-The example below demonstrates how to handle data source events.
+The following example demonstrates how to handle data source events.
 
 ###### Example
 
@@ -178,7 +178,7 @@ The `Model` method configures the model of the data source.
 
 The data field names must be valid JavaScript identifiers and contain neither spaces, nor special characters. The first character should be a letter.
 
-The example below demonstrates how to configure the model.
+The following example demonstrates how to configure the model.
 
 ###### Example
 
@@ -205,7 +205,7 @@ The example below demonstrates how to configure the model.
 
 The `PageSize` method sets the page size used during paging. The default page size is `10`.
 
-The example below demonstrates how to set the page size.
+The following example demonstrates how to set the page size.
 
 ###### Example
 
@@ -222,7 +222,7 @@ The example below demonstrates how to set the page size.
 
 The `Read` method sets the action method which is responsible for reading data items and for returning them as JSON.
 
-The example below demonstrates how to set the `read` action.
+The following example demonstrates how to set the `read` action.
 
 ###### Example
 
@@ -259,7 +259,7 @@ The `Sort` method sets the initial sorting, as demonstrated in the example below
 
 The `Update` method sets the action method which is responsible for saving updated data items.
 
-The example below demonstrates how to set the `update` action.
+The following example demonstrates how to set the `update` action.
 
 ###### Example
 
@@ -285,7 +285,7 @@ The example below demonstrates how to set the `update` action.
 
 The `Batch` method configures the batch `create`, `update` and `destroy` operations. By default, the batch operations are disabled.
 
-The example below demonstrates how to enable the batch mode.
+The following example demonstrates how to enable the batch mode.
 
 ###### Example
 
@@ -311,7 +311,7 @@ The example below demonstrates how to enable the batch mode.
 
 The [`Columns`](/api/Kendo.Mvc.UI.Fluent/GridBuilder#methods-Columns) method configures the Grid columns. If not used, the Grid creates a column for every public property of the model.
 
-The example below demonstrates how to configure the Grid columns.
+The following example demonstrates how to configure the Grid columns.
 
 ###### Example
 
@@ -408,7 +408,7 @@ There are two possible workarounds:
 * Use an auxiliary JavaScript function in the global scope, which returns the desired value&mdash;for example, `"#= auxFunction(3, 5) #"`.
 * Encode the `+` (plus) sign&mdash;for example, `"#= 3 %2b 5 #"`.
 
-The example below demonstrates how to set the column `ClientTemplate`.
+The following example demonstrates how to set the column `ClientTemplate`.
 
 ###### Example
 
@@ -428,7 +428,7 @@ The example below demonstrates how to set the column `ClientTemplate`.
 
 The `Encoded` method configures the HTML encoding of the bound property value. By default, it is set to `true` which means that the column values are encoded.
 
-The example below demonstrates how to prevent `html` encoding.
+The following example demonstrates how to prevent `html` encoding.
 
 ###### Example
 
@@ -449,7 +449,7 @@ The example below demonstrates how to prevent `html` encoding.
 
 The `Filterable` method enables or disables the filtering UI. By default, it is set to `true` which means that the bound Grid columns can be filtered using the filtering UI.
 
-The example below demonstrates how to disable filtering.
+The following example demonstrates how to disable filtering.
 
 ###### Example
 
@@ -471,7 +471,7 @@ The example below demonstrates how to disable filtering.
 
 The `Format` method specifies the format used when displaying the value of the bound property. By default, it is empty.
 
-The example below demonstrates how to specify the column format string.
+The following example demonstrates how to specify the column format string.
 
 ###### Example
 
@@ -495,7 +495,7 @@ For more information on the supported formats, refer to the [article about globa
 
 The `Groupable` method enables or disables the dragging of the column header to group by its bound property. By default, it is set to `true` which means that the bound Grid columns can be dragged for grouping.
 
-The example below demonstrates how to disable grouping.
+The following example demonstrates how to disable grouping.
 
 ###### Example
 
@@ -517,7 +517,7 @@ The example below demonstrates how to disable grouping.
 
 The `Sortable` method enables or disables the sorting by that column.
 
-The example below demonstrates how to disable the sorting.
+The following example demonstrates how to disable the sorting.
 
 ###### Example
 
@@ -547,7 +547,7 @@ In WebForms, the template is a [server-side code block](https://msdn.microsoft.c
 
 In Razor the template is a [templated Razor delegate](http://haacked.com/archive/2011/02/27/templated-razor-delegates.aspx/).
 
-The example below demonstrates how to set the column template.
+The following example demonstrates how to set the column template.
 
 ###### Example
 
@@ -589,7 +589,7 @@ The `Title` method sets the text displayed in the header of the column. By defau
 
 The `Title` should not include non-encoded HTML content. Use a `HeaderTemplate` instead.
 
-The example below demonstrates how to set the column title.
+The following example demonstrates how to set the column title.
 
 ###### Example
 
@@ -609,7 +609,7 @@ The example below demonstrates how to set the column title.
 
 The `Width` method sets the width of the column in pixels or other units. By default, the width is not set and the column would try to accommodate its content.
 
-The example below demonstrates how to set the column width.
+The following example demonstrates how to set the column width.
 
 ###### Example
 
@@ -652,7 +652,7 @@ A [Kendo UI template](http://docs.telerik.com/kendo-ui/framework/templates/overv
 >
 > The `ClientTemplate` is used when the Grid is configured for [Ajax binding]({% slug ajaxbinding_grid_aspnetmvc %}).
 
-The example below demonstrates how to set the template column client template.
+The following example demonstrates how to set the template column client template.
 
 ###### Example
 
@@ -675,7 +675,7 @@ The example below demonstrates how to set the template column client template.
 
 The `Title` method sets the text displayed in the header of the column. By default, it is empty.
 
-The example below demonstrates how to set the template column title.
+The following example demonstrates how to set the template column title.
 
 ###### Example
 
@@ -699,7 +699,7 @@ The example below demonstrates how to set the template column title.
 
 The `Width` method sets the width of the column in pixels or other units. By default, the width is not set and the column would try to accommodate its content.
 
-The example below demonstrates how to set the template column width.
+The following example demonstrates how to set the template column width.
 
 ###### Example
 
@@ -756,7 +756,7 @@ To enable paging with the default settings, call the `Paegable` method without a
 
 The `ButtonCount` method specifies the number of numeric buttons that should be displayed in the pager. By default, the number of displayed buttons is 10.
 
-The example below demonstrates how to specify a custom button count.
+The following example demonstrates how to specify a custom button count.
 
 ###### Example
 
@@ -773,7 +773,7 @@ The example below demonstrates how to specify a custom button count.
 
 The `Enabled` method enables or disables paging. Use it when paging based on a condition should be enabled.
 
-The example below demonstrates how to conditionally enable paging.
+The following example demonstrates how to conditionally enable paging.
 
 ###### Example
 
@@ -792,7 +792,7 @@ The `Info` method specifies whether to show additional paging info. By default, 
 
 If the Grid is empty, the pager would show `"No items to display"`. The paging info is displayed by default.
 
-The example below demonstrates how to hide the paging info.
+The following example demonstrates how to hide the paging info.
 
 ###### Example
 
@@ -809,7 +809,7 @@ The example below demonstrates how to hide the paging info.
 
 The `Input` method specifies whether to show a textbox for typing in a page number. By default, such a textbox is not shown.
 
-The example below demonstrates how to show a textbox for the page number.
+The following example demonstrates how to show a textbox for the page number.
 
 ###### Example
 
@@ -843,7 +843,7 @@ The available messages are:
 
 The `Display` method sets the pager info message. By default, it is set to `"{0} - {1} of {2} items"`. The placeholders represent the first item in the page, the last item in the page, and the total number of items in the Grid.
 
-The example below demonstrates how to set the display message.
+The following example demonstrates how to set the display message.
 
 ###### Example
 
@@ -862,7 +862,7 @@ The example below demonstrates how to set the display message.
 
 The `Empty` method configures the pager info message displayed when there are no items in the Grid. By default, it is set to `"No items to display"`.
 
-The example below demonstrates how to set the empty message.
+The following example demonstrates how to set the empty message.
 
 ###### Example
 
@@ -881,7 +881,7 @@ The example below demonstrates how to set the empty message.
 
 The `First` method sets the tooltip displayed when the user hovers over the `"first"` button of the pager. Clicking that button navigates to the first page. By default, it is set to `"Go to the first page"`.
 
-The example below demonstrates how to set the first message.
+The following example demonstrates how to set the first message.
 
 ###### Example
 
@@ -900,7 +900,7 @@ The example below demonstrates how to set the first message.
 
 The `ItemsPerPage` method sets the label displayed when page sizes dropdown is displayed. By default, it is set to `"items per page`".
 
-The example below demonstrates how to set the items per page message.
+The following example demonstrates how to set the items per page message.
 
 ###### Example
 
@@ -920,7 +920,7 @@ The example below demonstrates how to set the items per page message.
 
 The `Last` method sets the tooltip displayed when the user hovers over the `"last"` button of the pager. Clicking that button, navigates to the last page. By default, it is set to `"Go to the last page"`.
 
-The example below demonstrates how to set the last message.
+The following example demonstrates how to set the last message.
 
 ###### Example
 
@@ -939,7 +939,7 @@ The example below demonstrates how to set the last message.
 
 The `Next` method configures the tooltip displayed when the user hovers over the `"next"` button of the pager. Clicking that button navigates to the next page. By default, it is set to `"Go to the next page"`.
 
-The example below demonstrates how to set the `next` message.
+The following example demonstrates how to set the `next` message.
 
 ###### Example
 
@@ -958,7 +958,7 @@ The example below demonstrates how to set the `next` message.
 
 The `Of` method configures the label displayed after the page textbox. By default, it is set to `"of {0}"`. The placeholder contains the total number of pages.
 
-The example below demonstrates how to set the `of` message.
+The following example demonstrates how to set the `of` message.
 
 ###### Example
 
@@ -978,7 +978,7 @@ The example below demonstrates how to set the `of` message.
 
 The `Page` method configures the label displayed before the page textbox. By default, it is set to `"Page"`.
 
-The example below demonstrates how to set the `page` message.
+The following example demonstrates how to set the `page` message.
 
 ###### Example
 
@@ -998,7 +998,7 @@ The example below demonstrates how to set the `page` message.
 
 The `Previous` method sets the tooltip displayed when the user hovers over the `"previous"` button of the pager. Clicking that button navigates to the previous page. By default, it is set to `"Go to the previous page"`.
 
-The example below demonstrates how to set the `previous` message.
+The following example demonstrates how to set the `previous` message.
 
 ###### Example
 
@@ -1017,7 +1017,7 @@ The example below demonstrates how to set the `previous` message.
 
 The `Refresh` method sets the tooltip displayed when the user hovers over the `"refresh"` button of the pager. Clicking that button refreshes the current page. By default, it is set to `"Refresh"`.
 
-The example below demonstrates how to set the `refresh` message.
+The following example demonstrates how to set the `refresh` message.
 
 ###### Example
 
@@ -1037,7 +1037,7 @@ The example below demonstrates how to set the `refresh` message.
 
 The `Numeric` method sets the numeric pager. When enabled the pager will display numeric pager buttons. Numeric paging is enabled by default.
 
-The example below demonstrates how to disable the numeric pager.
+The following example demonstrates how to disable the numeric pager.
 
 ###### Example
 
@@ -1056,7 +1056,7 @@ The example below demonstrates how to disable the numeric pager.
 
 The `PageSizes` method enables or disables the page size dropdown. When enabled, the pager displays a dropdown which allows the user to change the page size to a predefined value. The page size dropdown is disabled by default.
 
-The example below demonstrates how to enable the page size dropdown.
+The following example demonstrates how to enable the page size dropdown.
 
 ###### Example
 
@@ -1071,7 +1071,7 @@ The example below demonstrates how to enable the page size dropdown.
             )
          )
 
-The example below demonstrates how to enable the page size dropdowns with custom page sizes.
+The following example demonstrates how to enable the page size dropdowns with custom page sizes.
 
 ###### Example
 
@@ -1090,7 +1090,7 @@ The example below demonstrates how to enable the page size dropdowns with custom
 
 The `PreviousNext` method enables or disables the `previous/next/first/last` pager buttons. These buttons navigate to the corresponding page when clicked. By default, the method is enabled.
 
-The example below demonstrates how to disable the `previous` and `next` pager buttons.
+The following example demonstrates how to disable the `previous` and `next` pager buttons.
 
 ###### Example
 
@@ -1109,7 +1109,7 @@ The example below demonstrates how to disable the `previous` and `next` pager bu
 
 The `Refresh` method enables or disables the `refresh` pager button. Clicking that button reloads the current page. By default, the method is disabled.
 
-The example below demonstrates how to show the `refresh` button.
+The following example demonstrates how to show the `refresh` button.
 
 ###### Example
 
@@ -1130,7 +1130,7 @@ The Grid can show a built-in or custom message to the user when there are no rec
 
 ### Default Built-In Message
 
-The example below demonstrates how to enable the default built-in `No Records` message.
+The following example demonstrates how to enable the default built-in `No Records` message.
 
 ###### Example
 
@@ -1141,7 +1141,7 @@ The example below demonstrates how to enable the default built-in `No Records` m
 
 ### Custom Message
 
-The example below demonstrates how to define a custom `No Records` message. In this case, the custom message is be displayed centered inside the empty Grid's data area.
+The following example demonstrates how to define a custom `No Records` message. In this case, the custom message is be displayed centered inside the empty Grid's data area.
 
 ###### Example
 
@@ -1152,7 +1152,7 @@ The example below demonstrates how to define a custom `No Records` message. In t
 
 ### Non-Centered Custom Message
 
-The example below demonstrates how to define a non-centered custom `No Records` message. In this case, the custom message is displayed with no centering styles applied, which allows an easier and more advanced appearance customization through custom CSS code.
+The following example demonstrates how to define a non-centered custom `No Records` message. In this case, the custom message is displayed with no centering styles applied, which allows an easier and more advanced appearance customization through custom CSS code.
 
 ###### Example
 
@@ -1163,7 +1163,7 @@ The example below demonstrates how to define a non-centered custom `No Records` 
 
 ### External Template Message  
 
-The example below demonstrates how to define a custom `No Records` message with an external Kendo UI template. This case is the same as the above one, but the template is defined outside the Grid declaration.
+The following example demonstrates how to define a custom `No Records` message with an external Kendo UI template. This case is the same as the above one, but the template is defined outside the Grid declaration.
 
 ###### Example
 

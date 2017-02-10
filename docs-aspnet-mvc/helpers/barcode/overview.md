@@ -10,9 +10,7 @@ position: 1
 
 The Barcode HtmlHelper extension is a server-side wrapper for the [Kendo UI Barcode](https://demos.telerik.com/kendo-ui/barcode/index) widget.
 
-## Getting Started
-
-### Configuration
+## Configuration
 
 Below are listed the steps for you to follow when configuring the Kendo UI Barcode.
 
@@ -71,7 +69,7 @@ Below are listed the steps for you to follow when configuring the Kendo UI Barco
 
 ### Existing Instances
 
-To reference an existing Kendo UI Barcode instance, use the [`jQuery.data()`](http://api.jquery.com/jQuery.data/) configuration. Once a reference is established, use the [Barcode API](../../../kendo-ui/api/javascript/dataviz/ui/barcode#methods) to control its behavior.
+To reference an existing Kendo UI Barcode instance, use the [`jQuery.data()`](http://api.jquery.com/jQuery.data/) configuration option. Once a reference is established, use the [Barcode API](../../../kendo-ui/api/javascript/dataviz/ui/barcode#methods) to control its behavior.
 
 ###### Example
 

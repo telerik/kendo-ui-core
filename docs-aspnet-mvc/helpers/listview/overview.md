@@ -16,81 +16,81 @@ The ListView HtmlHelper extension is a server-side wrapper for the [Kendo UI Lis
 
 Below are listed the steps for you to follow when configuring the Kendo UI ListView.
 
-**Step 1** Make sure you followed all the steps from the [introductory article on Telerik UI for ASP.NET MVC]({% slug overview_aspnetmvc %}).
+1. Make sure you followed all the steps from the [introductory article on Telerik UI for ASP.NET MVC]({% slug overview_aspnetmvc %}).
 
-**Step 2** Create a new action method and pass the **Products** table as the model.
+1. Create a new action method and pass the **Products** table as the model.
 
-###### Example
+    ###### Example
 
-        public ActionResult Index()
-        {
-            NorthwindDataContext northwind = new NorthwindDataContext();
+            public ActionResult Index()
+            {
+                NorthwindDataContext northwind = new NorthwindDataContext();
 
-            return View(northwind.Products);
-        }
+                return View(northwind.Products);
+            }
 
-    		public ActionResult Products_Read([DataSourceRequest] DataSourceRequest request)
-        {
-    			  NorthwindDataContext northwind = new NorthwindDataContext();
+        		public ActionResult Products_Read([DataSourceRequest] DataSourceRequest request)
+            {
+        			  NorthwindDataContext northwind = new NorthwindDataContext();
 
-            return Json(northwind.Products.ToDataSourceResult(request));
-        }
+                return Json(northwind.Products.ToDataSourceResult(request));
+            }
 
-**Step 3** Make your view strongly typed.
+1. Make your view strongly typed.
 
-###### Example
+    ###### Example
 
-```tab-ASPX
+    ```tab-ASPX
 
-        <%@ Page Language="C#" MasterPageFile="~/Views/Shared/Site.Master"
-           Inherits="System.Web.Mvc.ViewPage<IEnumerable<MvcApplication1.Models.Product>>" %>
-```
-```tab-Razor
+            <%@ Page Language="C#" MasterPageFile="~/Views/Shared/Site.Master"
+               Inherits="System.Web.Mvc.ViewPage<IEnumerable<MvcApplication1.Models.Product>>" %>
+    ```
+    ```tab-Razor
 
-        @model IEnumerable<MvcApplication1.Models.Product>
-```
+            @model IEnumerable<MvcApplication1.Models.Product>
+    ```
 
-**Step 4** Add the ListView wrapper.
+1. Add the ListView wrapper.
 
-###### Example
+    ###### Example
 
-```tab-Template
+    ```tab-Template
 
-		    <script type="text/x-kendo-tmpl" id="template">
-    			<div class="product">
-			        <img src="@Url.Content("~/content/web/foods/")#=ProductID#.jpg" alt="#=ProductName# image" />
-			        <h3>#=ProductName#</h3>
-			        <dl>
-			            <dt>Price:</dt>
-			            <dd>#=kendo.toString(UnitPrice, "c")#</dd>
-			        </dl>
-		    	</div>
-			  </script>
-```
-```tab-ASPX
+    		    <script type="text/x-kendo-tmpl" id="template">
+        			<div class="product">
+    			        <img src="@Url.Content("~/content/web/foods/")#=ProductID#.jpg" alt="#=ProductName# image" />
+    			        <h3>#=ProductName#</h3>
+    			        <dl>
+    			            <dt>Price:</dt>
+    			            <dd>#=kendo.toString(UnitPrice, "c")#</dd>
+    			        </dl>
+    		    	</div>
+    			  </script>
+    ```
+    ```tab-ASPX
 
-        <%: Html.Kendo().ListView(Model) //The ListView will be initially bound to the Model which is the Products table.
-                  .Name("productListView") //The name of the ListView is mandatory. It specifies the "id" attribute of the widget.
-				.TagName("div") //The tag name of the ListView is mandatory. It specifies the element which wraps all ListView items.
-                  .ClientTemplateId("template") //This template will be used for rendering the ListView items.
-				.DataSource(dataSource => {
-    				  	dataSource.Read(read => read.Action("Products_Read", "ListView"));
-			  }) //DataSource configuration. It will be used on paging.
-                  .Pageable() //Enable paging.
-        %>
-```
-```tab-Razor
+            <%: Html.Kendo().ListView(Model) //The ListView will be initially bound to the Model which is the Products table.
+                      .Name("productListView") //The name of the ListView is mandatory. It specifies the "id" attribute of the widget.
+    				.TagName("div") //The tag name of the ListView is mandatory. It specifies the element which wraps all ListView items.
+                      .ClientTemplateId("template") //This template will be used for rendering the ListView items.
+    				.DataSource(dataSource => {
+        				  	dataSource.Read(read => read.Action("Products_Read", "ListView"));
+    			  }) //DataSource configuration. It will be used on paging.
+                      .Pageable() //Enable paging.
+            %>
+    ```
+    ```tab-Razor
 
-        @(Html.Kendo().ListView(Model) //The ListView will be initially bound to the Model which is the Products table.
-                  .Name("productListView") //The name of the ListView is mandatory. It specifies the "id" attribute of the widget.
-				.TagName("div") //The tag name of the ListView is mandatory. It specifies the element which wraps all ListView items.
-                  .ClientTemplateId("template") //This template will be used for rendering the ListView items.
-				.DataSource(dataSource => {
-    				  	dataSource.Read(read => read.Action("Products_Read", "ListView"));
-			  }) //DataSource configuration. It will be used on paging.
-                  .Pageable() //Enable paging.
-        )
-```
+            @(Html.Kendo().ListView(Model) //The ListView will be initially bound to the Model which is the Products table.
+                      .Name("productListView") //The name of the ListView is mandatory. It specifies the "id" attribute of the widget.
+    				.TagName("div") //The tag name of the ListView is mandatory. It specifies the element which wraps all ListView items.
+                      .ClientTemplateId("template") //This template will be used for rendering the ListView items.
+    				.DataSource(dataSource => {
+        				  	dataSource.Read(read => read.Action("Products_Read", "ListView"));
+    			  }) //DataSource configuration. It will be used on paging.
+                      .Pageable() //Enable paging.
+            )
+    ```
 
 ## Event Handling
 
@@ -98,7 +98,7 @@ You can subscribe to all ListView [events](../../../kendo-ui/api/javascript/ui/l
 
 ### By Handler Name
 
-The examples below demonstrates how to subscribe to events by a handler name.
+The following example demonstrates how to subscribe to events by a handler name.
 
 ###### Example
 
@@ -153,7 +153,7 @@ The examples below demonstrates how to subscribe to events by a handler name.
 
 ### By Template Delegate
 
-The example below demonstrates how to subscribe to events by a template delegate.
+The following example demonstrates how to subscribe to events by a template delegate.
 
 ###### Example
 
@@ -185,7 +185,7 @@ The example below demonstrates how to subscribe to events by a template delegate
 
 ### Existing Instances
 
-You can reference an existing Kendo UI ListView instance via [`jQuery.data()`](http://api.jquery.com/jQuery.data/). Once a reference is established, use the [ListView API](../../../kendo-ui/api/javascript/ui/listview#methods) to control its behavior.
+To reference an existing Kendo UI ListView instance,. use the [`jQuery.data()`](http://api.jquery.com/jQuery.data/) configuration option. Once a reference is established, use the [ListView API](../../../kendo-ui/api/javascript/ui/listview#methods) to control its behavior.
 
 ###### Example
 
@@ -198,8 +198,6 @@ You can reference an existing Kendo UI ListView instance via [`jQuery.data()`](h
         </script>
 
 ## See Also
-
-Other articles on Telerik UI for ASP.NET MVC and on the ListView:
 
 * [ASP.NET MVC API Reference: ListViewBuilder](/api/Kendo.Mvc.UI.Fluent/ListViewBuilder)
 * [Overview of the ListView HtmlHelper]({% slug overview_listviewhelper_aspnetmvc %})
