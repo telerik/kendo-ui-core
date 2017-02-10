@@ -9,86 +9,86 @@ position: 1
 
 # Hybrid Button HtmlHelper Overview
 
-The hybrid Button HtmlHelper extension is a server-side wrapper for the [hybrid Kendo UI Button](http://demos.telerik.com/kendo-ui/m/index#mobile-button/index) widget. It allows you to configure the hybrid Kendo UI Button from server-side code.
+The hybrid Button HtmlHelper extension is a server-side wrapper for the [hybrid Kendo UI Button](http://demos.telerik.com/kendo-ui/m/index#mobile-button/index) widget.
 
-## Getting Started
+It allows you to configure the hybrid Kendo UI Button from server-side code.
 
-### Configuration
+## Configuration
 
 Below are listed the steps for you to follow when configuring the hybrid Kendo UI Button for ASP.NET MVC.
 
-**Step 1** Create a new ASP.NET MVC 4 application. If you have installed the [Telerik UI for ASP.NET MVC Visual Studio Extensions]({% slug overview_aspnetmvc %}#kendo-ui-for-asp.net-mvc-visual-studio-extensions), create a Telerik UI for ASP.NET MVC application. If you decide not to use the Telerik UI for ASP.NET MVC Visual Studio Extensions, follow the steps from the [introductory article]({% slug overview_aspnetmvc %}) to add Telerik UI for ASP.NET MVC to the application.
+1. Create a new ASP.NET MVC 4 application. If you have installed the [Telerik UI for ASP.NET MVC Visual Studio Extensions]({% slug overview_aspnetmvc %}#kendo-ui-for-asp.net-mvc-visual-studio-extensions), create a Telerik UI for ASP.NET MVC application. If you decide not to use the Telerik UI for ASP.NET MVC Visual Studio Extensions, follow the steps from the [introductory article]({% slug overview_aspnetmvc %}) to add Telerik UI for ASP.NET MVC to the application.
 
-**Step 2** Open `HomeController.cs` and modify the `Index` action method.
+1. Open `HomeController.cs` and modify the `Index` action method.
 
-###### Example
+    ###### Example
 
-        public ActionResult Index()
-        {
-            ViewBag.Message = "Welcome to ASP.NET MVC!";
+            public ActionResult Index()
+            {
+                ViewBag.Message = "Welcome to ASP.NET MVC!";
 
-            return View();
-        }
+                return View();
+            }
 
-**Step 3** Add a hybrid Kendo UI Button to the `Index` view. Like most hybrid Kendo UI widgets, the Button must be initialized within the hybrid View content.
+1. Add a hybrid Kendo UI Button to the `Index` view. Like most hybrid Kendo UI widgets, the Button must be initialized within the hybrid View content.
 
-###### Example
+    ###### Example
 
-```tab-ASPX
+    ```tab-ASPX
 
-        <% Html.Kendo().MobileView()
+            <% Html.Kendo().MobileView()
+                    .Name("button-view")
+                    .Title("Inbox")
+                    .Content(() =>
+                    {
+                        %>
+
+                        <%: Html.Kendo().MobileButton()
+                                .Name("mobile-button2")
+                                .Text("Trigger Event 2")
+                                .HtmlAttributes(new { style = "margin: 2em; text-align: center;" })
+                        %>
+                        <%
+                    })
+                    .Render();
+            %>
+    ```
+    ```tab-Razor
+
+            @(Html.Kendo().MobileView()
                 .Name("button-view")
                 .Title("Inbox")
-                .Content(() =>
-                {
-                    %>
+                .Content(
+                    @<text>
 
-                    <%: Html.Kendo().MobileButton()
+                    @(Html.Kendo().MobileButton()
                             .Name("mobile-button2")
                             .Text("Trigger Event 2")
                             .HtmlAttributes(new { style = "margin: 2em; text-align: center;" })
-                    %>
-                    <%
-                })
-                .Render();
-        %>
-```
-```tab-Razor
+                    )
 
-        @(Html.Kendo().MobileView()
-            .Name("button-view")
-            .Title("Inbox")
-            .Content(
-                @<text>
+                </text>)
+            )
+    ```
 
-                @(Html.Kendo().MobileButton()
-                        .Name("mobile-button2")
-                        .Text("Trigger Event 2")
-                        .HtmlAttributes(new { style = "margin: 2em; text-align: center;" })
-                )
+1. Initialize the mobile application.
 
-            </text>)
-        )
-```
+    ###### Example
 
-**Step 4** Initialize the mobile application.
+    ```tab-ASPX
 
-###### Example
+            <%: Html.Kendo().MobileApplication()
+                    .ServerNavigation(true)
+            %>
+    ```
+    ```tab-Razor
 
-```tab-ASPX
-
-        <%: Html.Kendo().MobileApplication()
+            @(Html.Kendo().MobileApplication()
                 .ServerNavigation(true)
-        %>
-```
-```tab-Razor
+            )
+    ```
 
-        @(Html.Kendo().MobileApplication()
-            .ServerNavigation(true)
-        )
-```
-
-**Step 5** Build and run the application.
+1. Build and run the application.
 
 ## Event Handling
 
@@ -96,7 +96,7 @@ You can subscribe to all hybrid Button [events](../../../../kendo-ui/api/javascr
 
 ### By Handler Name
 
-The examples below demonstrates how to subscribe to events by a handler name.
+The following example demonstrates how to subscribe to events by a handler name.
 
 ###### Example
 
@@ -153,8 +153,6 @@ You can reference a hybrid Button instance by using the code from the example be
         </script>
 
 ## See Also
-
-Other articles on Telerik UI for ASP.NET MVC and on the Button:
 
 * [ASP.NET MVC API Reference: Hybrid UI ButtonBuilder](/api/Kendo.Mvc.UI.Fluent/MobileButtonBuilder)
 * [Overview of the Hybrid UI Button Widget](http://docs.telerik.com/kendo-ui/controls/hybrid/button/button)
