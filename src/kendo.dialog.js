@@ -292,7 +292,7 @@
                     options = that.options,
                     isRtl = kendo.support.isRtl(content),
                     titlebar = $(templates.titlebar(options)),
-                    titlebarActions = titlebar.find(".k-window-actions");
+                    titlebarActions = titlebar.find(".k-window-actions"),
                     titleId = (content.id || kendo.guid()) + "_title",
                     wrapper = $(that.wrapperTemplate(options));
 
