@@ -69,8 +69,11 @@ The [hybrid UI widgets and frameworks]({% slug bundle_supportfor_kendoui_compone
 The Kendo UI PDF generator is tested and supported in the following _desktop_ browsers:
 
 * Internet Explorer 9 and later.
-_\* [Internet Explorer 9 and Safari do not support the option for saving a file and require the implementation of a server proxy](http://docs.telerik.com/kendo-ui/controls/data-management/grid/pdf-export#server-proxy)._ 
 * Latest Chrome, Firefox, Safari, and Blink-based Opera versions.
+
+> **Important**
+>
+> Internet Explorer 9 and Safari do not support the option for saving files. To achieve this, you need to [implement a server proxy]({% slug exporting_pdf_kendoui_grid_widget %}#server-proxy).
 
 Officially, PDF export is not supported on mobile because of browser limitations and CORS-related security restrictions in hybrid applications. For example, it is not possible to load locally stored font files in hybrid applications. Though exporting in PDF might work on some mobile devices in specific scenarios, PDF export is _not_ supported in:
 
