@@ -105,6 +105,36 @@ navigation:
         title: "How To"
      "helpers/hybrid":
         title: "Hybrid"
+     "*mobileactionsheet":
+        title: "ActionSheet"
+     "*mobileapplication":
+        title: "Application"
+     "*mobilebutton":
+        title: "Button"
+     "*mobilebuttongroup":
+        title: "ButtonGroup"
+     "*mobiledrawer":
+        title: "Drawer"
+     "*mobilelayout":
+        title: "Layout"
+     "*mobilelistview":
+        title: "ListView"
+     "*mobilemodalview":
+        title: "ModalView"
+     "*mobilenavbar":
+        title: "NavBar"
+     "*mobilepopover":
+        title: "PopOver"
+     "*mobilescrollview":
+        title: "ScrollView"
+     "*mobilesplitview":
+        title: "SplitView"
+     "*mobileswitch":
+        title: "Switch"
+     "*mobiletabstrip":
+        title: "TabStrip"
+     "*mobileview":
+        title: "View"
      "helpers/lineargauge":
         title: "LinearGauge"
      "helpers/listview":

@@ -9,72 +9,72 @@ position: 1
 
 # Hybrid View HtmlHelper Overview
 
-The hybrid View HtmlHelper extension is a server-side wrapper for the [hybrid Kendo UI View](http://demos.telerik.com/kendo-ui/m/index#mobile-view/index) widget. It allows you to configure the hybrid Kendo UI View from server-side code.
+The hybrid View HtmlHelper extension is a server-side wrapper for the [hybrid Kendo UI View](http://demos.telerik.com/kendo-ui/m/index#mobile-view/index) widget.
 
-## Getting Started
+It allows you to configure the hybrid Kendo UI View from server-side code.
 
-### Configuration
+## Configuration
 
 Below are listed the steps for you to follow when configuring the hybrid Kendo UI View for ASP.NET MVC.
 
-**Step 1** Create a new ASP.NET MVC 4 application. If you have installed the [Telerik UI for ASP.NET MVC Visual Studio Extensions]({% slug overview_aspnetmvc %}#kendo-ui-for-asp.net-mvc-visual-studio-extensions), create a Telerik UI for ASP.NET MVC application. If you decide not to use the Telerik UI for ASP.NET MVC Visual Studio Extensions, follow the steps from the [introductory article]({% slug overview_aspnetmvc %}) to add Telerik UI for ASP.NET MVC to the application.
+1. Create a new ASP.NET MVC 4 application. If you have installed the [Telerik UI for ASP.NET MVC Visual Studio Extensions]({% slug overview_aspnetmvc %}#kendo-ui-for-asp.net-mvc-visual-studio-extensions), create a Telerik UI for ASP.NET MVC application. If you decide not to use the Telerik UI for ASP.NET MVC Visual Studio Extensions, follow the steps from the [introductory article]({% slug overview_aspnetmvc %}) to add Telerik UI for ASP.NET MVC to the application.
 
-**Step 2** Open `HomeController.cs` and modify the `Index` action method.
+1. Open `HomeController.cs` and modify the `Index` action method.
 
-###### Example
+    ###### Example
 
-        public ActionResult Index()
-        {
-            return View();
-        }
+            public ActionResult Index()
+            {
+                return View();
+            }
 
-**Step 3** Add a Kendo UI View to the `Index` view.
+1. Add a Kendo UI View to the `Index` view.
 
-###### Example
+    ###### Example
 
-```tab-ASPX
+    ```tab-ASPX
 
-        <% Html.Kendo().MobileView()
-                .Title("View Title")
-                .Content(() =>
-                {
-                    %>
-                        View Content Template
-                    <%
-                })
-                .Render();
-        %>
-```
-```tab-Razor
+            <% Html.Kendo().MobileView()
+                    .Title("View Title")
+                    .Content(() =>
+                    {
+                        %>
+                            View Content Template
+                        <%
+                    })
+                    .Render();
+            %>
+    ```
+    ```tab-Razor
 
-        @(Html.Kendo().MobileView()
-                .Title("View Title")
-                .Content(
-                    @<text>
-                        View Content Template
-                    </text>
-                )
-        )
-```
+            @(Html.Kendo().MobileView()
+                    .Title("View Title")
+                    .Content(
+                        @<text>
+                            View Content Template
+                        </text>
+                    )
+            )
+    ```
 
-**Step 4** Initialize the mobile application.
+1. Initialize the mobile application.
 
-###### Example
+    ###### Example
 
-```tab-ASPX
+    ```tab-ASPX
 
-        <%: Html.Kendo().MobileApplication()
+            <%: Html.Kendo().MobileApplication()
+                    .ServerNavigation(true)
+            %>
+    ```
+    ```tab-Razor
+
+            @(Html.Kendo().MobileApplication()
                 .ServerNavigation(true)
-        %>
-```
-```tab-Razor
+            )
+    ```
 
-        @(Html.Kendo().MobileApplication()
-            .ServerNavigation(true)
-        )
-```
-
-**Step 5** Build and run the application.
+1. Build and run the application.
 
 ## Event Handling
 
@@ -82,7 +82,7 @@ You can subscribe to all hybrid View [events](../../../../kendo-ui/api/javascrip
 
 ### By Handler Name
 
-The examples below demonstrates how to subscribe to events by a handler name.
+The following example demonstrates how to subscribe to events by a handler name.
 
 ###### Example
 
@@ -121,7 +121,7 @@ The examples below demonstrates how to subscribe to events by a handler name.
 
 ### Instances
 
-You can reference a hybrid View instance by using the [jQuery.data()](http://api.jquery.com/jQuery.data/) method and the value specified via the `Name()` method. Once a reference is established, use the [hybrid View API](../../../../kendo-ui/api/javascript/mobile/ui/view#methods) to control its behavior.
+You can reference a hybrid View instance by using the [jQuery.data()](http://api.jquery.com/jQuery.data/) method and the value specified through the `Name()` method. Once a reference is established, use the [hybrid View API](../../../../kendo-ui/api/javascript/mobile/ui/view#methods) to control its behavior.
 
 ###### Example
 
@@ -136,8 +136,6 @@ You can reference a hybrid View instance by using the [jQuery.data()](http://api
       </script>
 
 ## See Also
-
-Other articles on Telerik UI for ASP.NET MVC and on the View:
 
 * [ASP.NET MVC API Reference: TabStripBuilder](/api/Kendo.Mvc.UI.Fluent/MobileTabStripBuilder)
 * [Overview of the Hybrid UI View Widget](http://docs.telerik.com/kendo-ui/controls/hybrid/view/view)

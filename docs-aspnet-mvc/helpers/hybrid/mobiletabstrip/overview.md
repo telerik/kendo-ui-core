@@ -9,94 +9,94 @@ position: 1
 
 # Hybrid TabStrip HtmlHelper Overview
 
-The hybrid TabStrip HtmlHelper extension is a server-side wrapper for the [hybrid Kendo UI TabStrip](http://demos.telerik.com/kendo-ui/m/index#mobile-tabstrip/index) widget. It allows you to configure the hybrid Kendo UI TabStrip from server-side code.
+The hybrid TabStrip HtmlHelper extension is a server-side wrapper for the [hybrid Kendo UI TabStrip](http://demos.telerik.com/kendo-ui/m/index#mobile-tabstrip/index) widget.
 
-## Getting Started
+It allows you to configure the hybrid Kendo UI TabStrip from server-side code.
 
-### Configuration
+## Configuration
 
 Below are listed the steps for you to follow when configuring the hybrid Kendo UI TabStrip for ASP.NET MVC.
 
-**Step 1** Create a new ASP.NET MVC 4 application. If you have installed the [Telerik UI for ASP.NET MVC Visual Studio Extensions]({% slug overview_aspnetmvc %}#kendo-ui-for-asp.net-mvc-visual-studio-extensions), create a Telerik UI for ASP.NET MVC application. If you decide not to use the Telerik UI for ASP.NET MVC Visual Studio Extensions, follow the steps from the [introductory article]({% slug overview_aspnetmvc %}) to add Telerik UI for ASP.NET MVC to the application.
+1. Create a new ASP.NET MVC 4 application. If you have installed the [Telerik UI for ASP.NET MVC Visual Studio Extensions]({% slug overview_aspnetmvc %}#kendo-ui-for-asp.net-mvc-visual-studio-extensions), create a Telerik UI for ASP.NET MVC application. If you decide not to use the Telerik UI for ASP.NET MVC Visual Studio Extensions, follow the steps from the [introductory article]({% slug overview_aspnetmvc %}) to add Telerik UI for ASP.NET MVC to the application.
 
-**Step 2** Open `HomeController.cs` and modify the `Index` action method.
+1. Open `HomeController.cs` and modify the `Index` action method.
 
-###### Example
+    ###### Example
 
-        public ActionResult Index()
-        {
-            ViewBag.Message = "Welcome to ASP.NET MVC!";
+            public ActionResult Index()
+            {
+                ViewBag.Message = "Welcome to ASP.NET MVC!";
 
-            return View();
-        }
+                return View();
+            }
 
-**Step 3** Add a Kendo UI TabStrip to the `Index` view. Like most hybrid Kendo UI widgets, the TabStrip must be initialized within the hybrid View content.
+1. Add a Kendo UI TabStrip to the `Index` view. Like most hybrid Kendo UI widgets, the TabStrip must be initialized within the hybrid View content.
 
-###### Example
+    ###### Example
 
-```tab-ASPX
+    ```tab-ASPX
 
-        <% Html.Kendo().MobileView()
+            <% Html.Kendo().MobileView()
+                    .Name("tabstrip-view")
+                    .Title("Inbox")
+                    .Footer(() =>
+                    {
+                        %>
+
+                        <%: Html.Kendo().MobileTabStrip()
+                                .Items(items =>
+                                {
+                                    items.Add().Icon("contacts").Text("Profile");
+                                    items.Add().Icon("history").Text("Sales");
+                                    items.Add().Icon("favorites").Text("Rating");
+                                    items.Add().Icon("settings").Text("Settings");
+                                })
+                        %>
+                        <%
+                    })
+                    .Render();
+            %>
+    ```
+    ```tab-Razor
+
+            @(Html.Kendo().MobileView()
                 .Name("tabstrip-view")
                 .Title("Inbox")
-                .Footer(() =>
-                {
-                    %>
+                .Footer(
+                    @<text>
 
-                    <%: Html.Kendo().MobileTabStrip()
-                            .Items(items =>
-                            {
-                                items.Add().Icon("contacts").Text("Profile");
-                                items.Add().Icon("history").Text("Sales");
-                                items.Add().Icon("favorites").Text("Rating");
-                                items.Add().Icon("settings").Text("Settings");
-                            })
-                    %>
-                    <%
-                })
-                .Render();
-        %>
-```
-```tab-Razor
+                    @(Html.Kendo().MobileTabStrip()
+                        .Items(items =>
+                        {
+                            items.Add().Icon("contacts").Text("Profile");
+                            items.Add().Icon("history").Text("Sales");
+                            items.Add().Icon("favorites").Text("Rating");
+                            items.Add().Icon("settings").Text("Settings");
+                        })
+                    )
 
-        @(Html.Kendo().MobileView()
-            .Name("tabstrip-view")
-            .Title("Inbox")
-            .Footer(
-                @<text>
+                </text>)
+            )
+    ```
 
-                @(Html.Kendo().MobileTabStrip()
-                    .Items(items =>
-                    {
-                        items.Add().Icon("contacts").Text("Profile");
-                        items.Add().Icon("history").Text("Sales");
-                        items.Add().Icon("favorites").Text("Rating");
-                        items.Add().Icon("settings").Text("Settings");
-                    })
-                )
+1. Initialize the mobile application.
 
-            </text>)
-        )
-```
+    ###### Example
 
-**Step 4** Initialize the mobile application.
+    ```tab-ASPX
 
-###### Example
+            <%: Html.Kendo().MobileApplication()
+                    .ServerNavigation(true)
+            %>
+    ```
+    ```tab-Razor
 
-```tab-ASPX
-
-        <%: Html.Kendo().MobileApplication()
+            @(Html.Kendo().MobileApplication()
                 .ServerNavigation(true)
-        %>
-```
-```tab-Razor
+            )
+    ```
 
-        @(Html.Kendo().MobileApplication()
-            .ServerNavigation(true)
-        )
-```
-
-**Step 5** Build and run the application.
+1. Build and run the application.
 
 ## Event Handling
 
@@ -104,7 +104,7 @@ You can subscribe to all hybrid TabStrip [events](../../../../kendo-ui/api/javas
 
 ### By Handler Name
 
-The examples below demonstrates how to subscribe to events by a handler name.
+The following example demonstrates how to subscribe to events by a handler name.
 
 ###### Example
 
@@ -158,7 +158,7 @@ The examples below demonstrates how to subscribe to events by a handler name.
 
 ### Instances
 
-You can reference a hybrid TabStrip instance by using the [jQuery.data()](http://api.jquery.com/jQuery.data/) method and the value specified via the `Name()` method. Once a reference is established, use the [hybrid TabStrip API](../../../../kendo-ui/api/javascript/mobile/ui/tabstrip#methods) to control its behavior.
+You can reference a hybrid TabStrip instance by using the [jQuery.data()](http://api.jquery.com/jQuery.data/) method and the value specified through the `Name()` method. Once a reference is established, use the [hybrid TabStrip API](../../../../kendo-ui/api/javascript/mobile/ui/tabstrip#methods) to control its behavior.
 
 ###### Example
 
@@ -180,8 +180,6 @@ You can reference a hybrid TabStrip instance by using the [jQuery.data()](http:/
         </script>
 
 ## See Also
-
-Other articles on Telerik UI for ASP.NET MVC and on the TabStrip:
 
 * [ASP.NET MVC API Reference: TabStripBuilder](/api/Kendo.Mvc.UI.Fluent/MobileTabStripBuilder)
 * [Overview of the Hybrid UI TabStrip Widget](http://docs.telerik.com/kendo-ui/controls/hybrid/tabstrip/tabstrip)
