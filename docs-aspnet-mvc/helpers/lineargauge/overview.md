@@ -16,53 +16,53 @@ The LinearGauge HtmlHelper extension is a server-side wrapper for the [Kendo Lin
 
 Below are listed the steps for you to follow when configuring the Kendo UI LinearGauge.
 
-**Step 1** Make sure you followed all the steps from the [introductory article on Telerik UI for ASP.NET MVC]({% slug overview_aspnetmvc %}).
+1. Make sure you followed all the steps from the [introductory article on Telerik UI for ASP.NET MVC]({% slug overview_aspnetmvc %}).
 
-**Step 2** Create a new action method which renders the view.
+1. Create a new action method which renders the view.
 
-###### Example
+    ###### Example
 
-        public ActionResult Index()
-        {
-            return View();
-        }
+            public ActionResult Index()
+            {
+                return View();
+            }
 
-**Step 3** Add a LinearGauge.
+1. Add a LinearGauge.
 
-###### Example
+    ###### Example
 
-```tab-ASPX
+    ```tab-ASPX
 
-        <%: Html.Kendo().LinearGauge()
-                .Name("linearGauge") //The name of the LinearGauge is mandatory. It specifies the "id" attribute of the widget.
-                .Scale(scale => scale
-                    .Min(0) //Set the min value of the LinearGauge.
-                    .Max(200) //Set the min value of the LinearGauge.
-                )
-                .Pointer(pointer => pointer
-                    .Value(10) //Set the value of the LinearGauge.
-                )
-        %>
-```
-```tab-Razor
+            <%: Html.Kendo().LinearGauge()
+                    .Name("linearGauge") //The name of the LinearGauge is mandatory. It specifies the "id" attribute of the widget.
+                    .Scale(scale => scale
+                        .Min(0) //Set the min value of the LinearGauge.
+                        .Max(200) //Set the min value of the LinearGauge.
+                    )
+                    .Pointer(pointer => pointer
+                        .Value(10) //Set the value of the LinearGauge.
+                    )
+            %>
+    ```
+    ```tab-Razor
 
-        @(Html.Kendo().LinearGauge()
-              .Name("linearGauge") //The name of the LinearGauge is mandatory. It specifies the "id" attribute of the widget.
-              .Scale(scale => scale
-                  .Min(0) //Set the min value of the LinearGauge.
-                  .Max(200) //Set the min value of the LinearGauge.
-              )
-              .Pointer(pointer => pointer
-                  .Value(10) //Set the value of the LinearGauge.
-              )
-        )
-```
+            @(Html.Kendo().LinearGauge()
+                  .Name("linearGauge") //The name of the LinearGauge is mandatory. It specifies the "id" attribute of the widget.
+                  .Scale(scale => scale
+                      .Min(0) //Set the min value of the LinearGauge.
+                      .Max(200) //Set the min value of the LinearGauge.
+                  )
+                  .Pointer(pointer => pointer
+                      .Value(10) //Set the value of the LinearGauge.
+                  )
+            )
+    ```
 
 ## Reference
 
 ### Existing Instances
 
-You can reference an existing Kendo UI LinearGauge instance via [`jQuery.data()`](http://api.jquery.com/jQuery.data/). Once a reference is established, use the [LinearGauge API](../../../kendo-ui/api/javascript/dataviz/ui/lineargauge#methods) to control its behavior.
+To reference an existing Kendo UI LinearGauge instance, use the [`jQuery.data()`](http://api.jquery.com/jQuery.data/) configuration option. Once a reference is established, use the [LinearGauge API](../../../kendo-ui/api/javascript/dataviz/ui/lineargauge#methods) to control its behavior.
 
 ###### Example
 
@@ -75,8 +75,6 @@ You can reference an existing Kendo UI LinearGauge instance via [`jQuery.data()`
         </script>
 
 ## See Also
-
-Other articles on Telerik UI for ASP.NET MVC and on the LinearGauge:
 
 * [ASP.NET MVC API Reference: LinearGaugeBuilder](/api/Kendo.Mvc.UI.Fluent/LinearGaugeBuilder)
 * [Overview of Telerik UI for ASP.NET MVC]({% slug overview_aspnetmvc %})

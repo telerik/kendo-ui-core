@@ -18,7 +18,7 @@ By default, the Kendo UI Grid for ASP.NET MVC makes POST requests when configure
 
 Make sure this file is included after the other Kendo UI JavaScript files. For more information, refer to the [ASP.NET MVC introductory article]({% slug overview_aspnetmvc %}).
 
-The example below demonstrates the correct order of JavaScript files.
+The following example demonstrates the correct order of JavaScript files.
 
 ###### Example
 
@@ -39,18 +39,18 @@ There are various reasons which may cause this.
 
 Below are listed the steps for you to follow when troubleshooting this issue.
 
-**Step 1** Use your browser developer console to check for any JavaScript errors. In most browsers pressing `F12` displays the developer console. Address all JavaScript errors.
+1. Use your browser developer console to check for any JavaScript errors. In most browsers pressing `F12` displays the developer console. Address all JavaScript errors.
 
-For more information, refer to the [Telerik UI for ASP.NET MVC troubleshooting article]({% slug troubleshooting_aspnetmvc %}).
+    For more information, refer to the [Telerik UI for ASP.NET MVC troubleshooting article]({% slug troubleshooting_aspnetmvc %}).
 
-**Step 2** Check the **Network**&mdash;or **Net** in Firebug&mdash;tab of the browser developer console. Look for a failed HTTP request for the action method configured via the `DataSource` Grid setting.
+1. Check the **Network**&mdash;or **Net** in Firebug&mdash;tab of the browser developer console. Look for a failed HTTP request for the action method configured via the `DataSource` Grid setting.
 
-* HTTP status code [401](https://en.wikipedia.org/wiki/List_of_HTTP_status_codes#401) indicates that the required authentication has failed or has not been provided yet.
-* HTTP status code [403](https://en.wikipedia.org/wiki/List_of_HTTP_status_codes#403) indicates that the request is not authorized. Perhaps the current user does not have     the required permissions.
-* HTTP status code [404](https://en.wikipedia.org/wiki/List_of_HTTP_status_codes#404) indicates that the requested URL cannot be found. Check if the controller and action names are spelled correctly.
-* HTTP status code [500](https://en.wikipedia.org/wiki/List_of_HTTP_status_codes#500) indicates that a server error occurred while processing the request. Check what the server response is. In most cases, it will contain the full `.NET` stacktrace. If the reason for the exception is not clear, put a break-point in the action method and break with the debugger. Also, refer to the [section on well-known exceptions](#well-known-exceptions).
+    * HTTP status code [401](https://en.wikipedia.org/wiki/List_of_HTTP_status_codes#401) indicates that the required authentication has failed or has not been provided yet.
+    * HTTP status code [403](https://en.wikipedia.org/wiki/List_of_HTTP_status_codes#403) indicates that the request is not authorized. Perhaps the current user does not have     the required permissions.
+    * HTTP status code [404](https://en.wikipedia.org/wiki/List_of_HTTP_status_codes#404) indicates that the requested URL cannot be found. Check if the controller and action names are spelled correctly.
+    * HTTP status code [500](https://en.wikipedia.org/wiki/List_of_HTTP_status_codes#500) indicates that a server error occurred while processing the request. Check what the server response is. In most cases, it will contain the full `.NET` stacktrace. If the reason for the exception is not clear, put a break-point in the action method and break with the debugger. Also, refer to the [section on well-known exceptions](#well-known-exceptions).
 
-**Step 3** Check if you are using the `ToDataSourceResult` extension method. That method returns the data in the JSON format expected by the Kendo UI Grid. For further instructions, refer to the [article on Grid Ajax binding]({% slug ajaxbinding_grid_aspnetmvc %}).
+1. Check if you are using the `ToDataSourceResult` extension method. That method returns the data in the JSON format expected by the Kendo UI Grid. For further instructions, refer to the [article on Grid Ajax binding]({% slug ajaxbinding_grid_aspnetmvc %}).
 
 ### Client-Side Events Are Not Raised in Server-Bound Mode
 
@@ -70,17 +70,17 @@ Make sure the JavaScript file for that culture is included. For additional infor
 
 ### Column Templates Are Not Displayed
 
-**Case 1** The column template is not displayed if the server template is set but the Grid is configured for Ajax binding.
+* **Case 1** The column template is not displayed if the server template is set but the Grid is configured for Ajax binding.
 
-**Solution**
+    **Solution**
 
-Set the [`ClientTemplate`]({% slug configuration_gridhelper_aspnetmvc %}#clienttemplate) as well.
+    Set the [`ClientTemplate`]({% slug configuration_gridhelper_aspnetmvc %}#clienttemplate) as well.
 
-**Case 2** The column template might also not be displayed if only the client template is set but the Grid is configured for server binding.
+* **Case 2** The column template might also not be displayed if only the client template is set but the Grid is configured for server binding.
 
-**Solution**
+    **Solution**
 
-Set the [Template]({% slug configuration_gridhelper_aspnetmvc %}#template) as well.
+    Set the [Template]({% slug configuration_gridhelper_aspnetmvc %}#template) as well.
 
 ### "X" DataSource Configuration Option Is Not Available
 
@@ -116,24 +116,24 @@ This exception is thrown when the length of the JSON response exceeds the defaul
 
 Below are listed some of the possible solutions for you to apply when resolving this issue.
 
-**Option 1** Enable paging by calling the `Pageable` method.
+* **Option 1** Enable paging by calling the `Pageable` method.
 
-**Option 2** Serialize only the required properties of your model by [using a View Model]({% slug freqaskedquestions_gridhelper_aspnetmvc %}#how-to-convert-my-models-to-view-model-objects).
+* **Option 2** Serialize only the required properties of your model by [using a View Model]({% slug freqaskedquestions_gridhelper_aspnetmvc %}#how-to-convert-my-models-to-view-model-objects).
 
-**Option 3** Manually serialize the `DataSourceResult`.
+* **Option 3** Manually serialize the `DataSourceResult`.
 
-###### Example
+    ###### Example
 
-        public ActionResult Read([DataSourceRequest] DataSourceRequest request)
-        {
-            var data = GetData();
-            var serializer = new JavaScriptSerializer();
-            var result = new ContentResult();
-            serializer.MaxJsonLength = Int32.MaxValue; // Whatever max length you want here
-            result.Content = serializer.Serialize(data.ToDataSourceResult(request));
-            result.ContentType = "application/json";
-            return result;
-        }
+            public ActionResult Read([DataSourceRequest] DataSourceRequest request)
+            {
+                var data = GetData();
+                var serializer = new JavaScriptSerializer();
+                var result = new ContentResult();
+                serializer.MaxJsonLength = Int32.MaxValue; // Whatever max length you want here
+                result.Content = serializer.Serialize(data.ToDataSourceResult(request));
+                result.ContentType = "application/json";
+                return result;
+            }
 
 ### Sensitive Information Error Message
 
@@ -192,13 +192,11 @@ Consider the following scenario:
 
 In the above scenario, the widget **C** will not be rendered correctly and will cause an `Invalid template` JavaScript error.
 
-The easiest way to avoid the JavaScript error is the following:
+The easiest way to avoid the JavaScript error is to:
 
-**Step 1** Move the declaration of widget **C** to a separate partial view.
+1. Move the declaration of widget **C** to a separate partial view.
 
-**Step 2** Render the partial view in the main View where Grid **A** is defined.
-
-In this case widget **C** will not exist in a nested template context and its HTML/JavaScript output will not need any escaping.
+1. Render the partial view in the main View where Grid **A** is defined. In this case widget **C** will not exist in a nested template context and its HTML/JavaScript output will not need any escaping.
 
 ## Culture Formats
 
@@ -210,7 +208,7 @@ If the Grid does not display numbers and dates in the right format that correspo
 
 ### Culture-Specific Kendo UI JavaScript
 
-The example below demonstrates how to include culture-specific Kendo UI JavaScript.
+The following example demonstrates how to include culture-specific Kendo UI JavaScript.
 
 ###### Example
 
@@ -221,7 +219,7 @@ The example below demonstrates how to include culture-specific Kendo UI JavaScri
 
 ### JavaScript for Current Cultures
 
-The example below demonstrates how to include JavaScript for the current culture.
+The following example demonstrates how to include JavaScript for the current culture.
 
 ###### Example
 

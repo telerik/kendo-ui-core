@@ -161,7 +161,7 @@ The following example demonstrates how to subscribe to events by a template dele
 
 ### Existing Instances
 
-To reference an existing Kendo UI Chart instance, use the [`jQuery.data()`](http://api.jquery.com/jQuery.data/) configuration. Once a reference is established, use the [Chart API](../../../kendo-ui/api/javascript/dataviz/ui/chart#methods) to control its behavior.
+To reference an existing Kendo UI Chart instance, use the [`jQuery.data()`](http://api.jquery.com/jQuery.data/) configuration option. Once a reference is established, use the [Chart API](../../../kendo-ui/api/javascript/dataviz/ui/chart#methods) to control its behavior.
 
 ###### Example
 

@@ -12,17 +12,17 @@ navigation:
      "getting-started":
         title: "Getting Started"
         position: 3
-     "how-to":
-        title: "How To"
-        position: 4
      "helpers":
         title: "Widgets"
-        position: 5
+        position: 4
      "vs-integration":
         title: "Visual Studio Integration"
-        position: 6
+        position: 5
      "migration":
         title: "Migration"
+        position: 6
+     "how-to":
+        title: "How To"
         position: 7
      "tutorials":
         title: "Tutorials"
@@ -30,6 +30,8 @@ navigation:
      "troubleshoot":
         title: "Troubleshooting"
         position: 9
+
+
 
 ## List helpers directory names and order here, like this:
      "helpers/autocomplete":

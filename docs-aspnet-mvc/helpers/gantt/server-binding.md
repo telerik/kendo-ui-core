@@ -307,8 +307,6 @@ Below are listed the data model classes for the Tasks and Dependencies and the a
 
 ## See Also
 
-Other articles on Telerik UI for ASP.NET MVC and on the Chart:
-
 * [Overview of the Kendo UI Gantt HtmlHelper]({% slug overview_gantthelper_aspnetmvc %})
 * [Overview of Telerik UI for ASP.NET MVC]({% slug overview_aspnetmvc %})
 * [Fundamentals of Telerik UI for ASP.NET MVC]({% slug fundamentals_aspnetmvc %})

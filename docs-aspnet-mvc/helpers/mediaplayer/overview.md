@@ -124,7 +124,7 @@ Application or business logic usually enforces the user to watch only the curren
 
 To access an existing MediaPlayer instance, use the `.data()` jQuery method, executed by the jQuery object of the originating element.
 
-The example below demonstrates how to access an existing MediaPlayer instance.
+The following example demonstrates how to access an existing MediaPlayer instance.
 
 ###### Example
 
@@ -219,7 +219,7 @@ The examples below demonstrates how to subscribe to events using a handler name.
 
 ### By Template Delegate
 
-The example below demonstrates how to subscribe to events using a template delegate.
+The following example demonstrates how to subscribe to events using a template delegate.
 
 ###### Example
 

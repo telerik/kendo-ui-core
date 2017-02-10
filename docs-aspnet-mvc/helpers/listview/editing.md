@@ -14,7 +14,7 @@ Below are the steps for you to follow when configuring the Kendo UI ListView for
 
 ### Define the Item Template
 
-The example below demonstrates how to define the item template for the Kendo UI ListView.
+The following example demonstrates how to define the item template for the Kendo UI ListView.
 
 ###### Example
 
@@ -49,7 +49,7 @@ The example below demonstrates how to define the item template for the Kendo UI 
 
 ### Set the Editor Template
 
-The example below demonstrates how to define the `EditorTemplate` for the model.
+The following example demonstrates how to define the `EditorTemplate` for the model.
 
 		@model Kendo.Mvc.Examples.Models.ProductViewModel
 		<div class="product-view">
@@ -87,7 +87,7 @@ The example below demonstrates how to define the `EditorTemplate` for the model.
 
 ###	Enable Editing
 
-The example below demonstrates how to enable the ListView editing.
+The following example demonstrates how to enable the ListView editing.
 
 ###### Example
 
@@ -100,7 +100,7 @@ The example below demonstrates how to enable the ListView editing.
 
 ### Specify the Action Methods
 
-The example below demonstrates how to specify the action methods which will handle the `Create`, `Update` and `Destroy` operations.
+The following example demonstrates how to specify the action methods which will handle the `Create`, `Update` and `Destroy` operations.
 
 ###### Example
 
@@ -121,7 +121,7 @@ The example below demonstrates how to specify the action methods which will hand
 
 ### Determine the Model Property
 
-The example below demonstrates how to specify the property of the model which is the unique identifier (primary key).
+The following example demonstrates how to specify the property of the model which is the unique identifier (primary key).
 
 ###### Example
 
@@ -142,7 +142,7 @@ The example below demonstrates how to specify the property of the model which is
 
 ### Implement the Action Methods
 
-The example below demonstrates how to implement the `read` action method.
+The following example demonstrates how to implement the `read` action method.
 
 ###### Example
 
@@ -151,7 +151,7 @@ The example below demonstrates how to implement the `read` action method.
             return Json(ProductRepository.All().ToDataSourceResult(request));
         }
 
-The example below demonstrates how to implement the `create` action method.
+The following example demonstrates how to implement the `create` action method.
 
 ###### Example
 
@@ -167,7 +167,7 @@ The example below demonstrates how to implement the `create` action method.
             return Json(new [] { product }.ToDataSourceResult(request, ModelState));
         }
 
-The example below demonstrates how to implement the `update` action method.
+The following example demonstrates how to implement the `update` action method.
 
 ###### Example
 
@@ -192,7 +192,7 @@ The example below demonstrates how to implement the `update` action method.
             return Json(ModelState.ToDataSourceResult());
         }
 
-The example below demonstrates how to implement the `destroy` action method.
+The following example demonstrates how to implement the `destroy` action method.
 
 ###### Example
 
@@ -209,8 +209,6 @@ The example below demonstrates how to implement the `destroy` action method.
         }
 
 ## See Also
-
-Other articles on Telerik UI for ASP.NET MVC and on the ListView:
 
 * [Overview of the ListView HtmlHelper]({% slug overview_listviewhelper_aspnetmvc %})
 * [Configuration of the ListView HtmlHelper]({% slug configuration_listviewhelper_aspnetmvc %})

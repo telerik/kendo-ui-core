@@ -11,206 +11,204 @@ position: 3
 
 This article demonstrates how to configure the Kendo UI Grid for ASP.NET MVC for server editing.
 
-## Getting Started
-
-### Configuration
+## Configuration
 
 Below are listed the steps for you to follow when configuring the Kendo UI Grid for ASP.NET MVC for server editing.
 
-**Step 1** Define a command column for the `Edit` and `Destroy` commands.
+1. Define a command column for the `Edit` and `Destroy` commands.
 
-###### Example
+    ###### Example
 
-        <%: Html.Kendo().Grid<MvcApplication1.Models.Product>()
-                .Name("Home")
-                .Columns(columns =>
-                {
-                    columns.Bound(p => p.ProductName);
-                    columns.Bound(p => p.UnitPrice).Width(140);
-                    columns.Bound(p => p.UnitsInStock).Width(140);
-                    columns.Bound(p => p.Discontinued).Width(100);
-                    // Add the "Edit" and "Destroy" commands.
-                    columns.Command(command => { command.Edit(); command.Destroy(); }).Width(200);
-                })
-        %>
+            <%: Html.Kendo().Grid<MvcApplication1.Models.Product>()
+                    .Name("Home")
+                    .Columns(columns =>
+                    {
+                        columns.Bound(p => p.ProductName);
+                        columns.Bound(p => p.UnitPrice).Width(140);
+                        columns.Bound(p => p.UnitsInStock).Width(140);
+                        columns.Bound(p => p.Discontinued).Width(100);
+                        // Add the "Edit" and "Destroy" commands.
+                        columns.Command(command => { command.Edit(); command.Destroy(); }).Width(200);
+                    })
+            %>
 
-**Step 2** Set the editing mode to `InLine`.
+1. Set the editing mode to `InLine`.
 
-###### Example
+    ###### Example
 
-        <%: Html.Kendo().Grid<MvcApplication1.Models.Product>()
-                .Name("Home")
-                .Columns(columns =>
-                {
-                    columns.Bound(p => p.ProductName);
-                    columns.Bound(p => p.UnitPrice).Width(140);
-                    columns.Bound(p => p.UnitsInStock).Width(140);
-                    columns.Bound(p => p.Discontinued).Width(100);
-                    columns.Command(command => { command.Edit(); command.Destroy(); }).Width(200);
-                })
-                // Set the edit mode to "InLine".
-                .Editable(editable => editable.Mode(GridEditMode.InLine))
-        %>
+            <%: Html.Kendo().Grid<MvcApplication1.Models.Product>()
+                    .Name("Home")
+                    .Columns(columns =>
+                    {
+                        columns.Bound(p => p.ProductName);
+                        columns.Bound(p => p.UnitPrice).Width(140);
+                        columns.Bound(p => p.UnitsInStock).Width(140);
+                        columns.Bound(p => p.Discontinued).Width(100);
+                        columns.Command(command => { command.Edit(); command.Destroy(); }).Width(200);
+                    })
+                    // Set the edit mode to "InLine".
+                    .Editable(editable => editable.Mode(GridEditMode.InLine))
+            %>
 
-**Step 3** Add the `Create` command to the Grid toolbar.
+1. Add the `Create` command to the Grid toolbar.
 
-###### Example
+    ###### Example
 
-        <%: Html.Kendo().Grid<MvcApplication1.Models.Product>()
-                .Name("Home")
-                .Columns(columns =>
-                {
-                    columns.Bound(p => p.ProductName);
-                    columns.Bound(p => p.UnitPrice).Width(140);
-                    columns.Bound(p => p.UnitsInStock).Width(140);
-                    columns.Bound(p => p.Discontinued).Width(100);
-                    columns.Command(command => { command.Edit(); command.Destroy(); }).Width(200);
-                })
-                // Add the "Create" command.
-                .ToolBar(commands => commands.Create())
-                .Editable(editable => editable.Mode(GridEditMode.InLine))
-        %>
+            <%: Html.Kendo().Grid<MvcApplication1.Models.Product>()
+                    .Name("Home")
+                    .Columns(columns =>
+                    {
+                        columns.Bound(p => p.ProductName);
+                        columns.Bound(p => p.UnitPrice).Width(140);
+                        columns.Bound(p => p.UnitsInStock).Width(140);
+                        columns.Bound(p => p.Discontinued).Width(100);
+                        columns.Command(command => { command.Edit(); command.Destroy(); }).Width(200);
+                    })
+                    // Add the "Create" command.
+                    .ToolBar(commands => commands.Create())
+                    .Editable(editable => editable.Mode(GridEditMode.InLine))
+            %>
 
-**Step 4** Specify the action methods which will handle the `Create`, `Update` and `Destroy` operations.
+1. Specify the action methods which will handle the `Create`, `Update` and `Destroy` operations.
 
-###### Example
+    ###### Example
 
-        <%: Html.Kendo().Grid<MvcApplication1.Models.Product>()
-                .Name("Home")
-                .Columns(columns =>
-                {
-                    columns.Bound(p => p.ProductName);
-                    columns.Bound(p => p.UnitPrice).Width(140);
-                    columns.Bound(p => p.UnitsInStock).Width(140);
-                    columns.Bound(p => p.Discontinued).Width(100);
-                    columns.Command(command => { command.Edit(); command.Destroy(); }).Width(200);
-                })
-                .ToolBar(toolbar => toolbar.Create())
-                .Editable(editable => editable.Mode(GridEditMode.InLine))
-                .DataSource(dataSource => dataSource
-                    .Server()
-                    // Configure CRUD. -->
-                    .Create(create => create.Action("Create", "Home"))
-                    .Read(read => read.Action("Index", "Home"))
-                    .Update(update => update.Action("Update", "Home"))
-                    .Destroy(destroy => destroy.Action("Destroy", "Home"))
-                    // <-- Configure CRUD.
-                )
-        %>
+            <%: Html.Kendo().Grid<MvcApplication1.Models.Product>()
+                    .Name("Home")
+                    .Columns(columns =>
+                    {
+                        columns.Bound(p => p.ProductName);
+                        columns.Bound(p => p.UnitPrice).Width(140);
+                        columns.Bound(p => p.UnitsInStock).Width(140);
+                        columns.Bound(p => p.Discontinued).Width(100);
+                        columns.Command(command => { command.Edit(); command.Destroy(); }).Width(200);
+                    })
+                    .ToolBar(toolbar => toolbar.Create())
+                    .Editable(editable => editable.Mode(GridEditMode.InLine))
+                    .DataSource(dataSource => dataSource
+                        .Server()
+                        // Configure CRUD. -->
+                        .Create(create => create.Action("Create", "Home"))
+                        .Read(read => read.Action("Index", "Home"))
+                        .Update(update => update.Action("Update", "Home"))
+                        .Destroy(destroy => destroy.Action("Destroy", "Home"))
+                        // <-- Configure CRUD.
+                    )
+            %>
 
-**Step 5** Specify the property of the model which is the unique identifier (primary key).
+1. Specify the property of the model which is the unique identifier (primary key).
 
-###### Example
+    ###### Example
 
-        <%: Html.Kendo().Grid<MvcApplication1.Models.Product>()
-                .Name("Home")
-                .Columns(columns =>
-                {
-                    columns.Bound(p => p.ProductName);
-                    columns.Bound(p => p.UnitPrice).Width(140);
-                    columns.Bound(p => p.UnitsInStock).Width(140);
-                    columns.Bound(p => p.Discontinued).Width(100);
-                    columns.Command(command => { command.Edit(); command.Destroy(); }).Width(200);
-                })
-                .ToolBar(toolbar => toolbar.Create())
-                .Editable(editable => editable.Mode(GridEditMode.InLine))
-                .DataSource(dataSource => dataSource
-                    .Server()
-                    // Specify that the ProductID property is the unique identifier of the model.
-                    .Model(model => model.Id(p => p.ProductID))
-                    .Create(create => create.Action("Create", "Home"))
-                    .Read(read => read.Action("Index", "Home"))
-                    .Update(update => update.Action("Update", "Home"))
-                    .Destroy(destroy => destroy.Action("Destroy", "Home"))
-                )
-        %>
+            <%: Html.Kendo().Grid<MvcApplication1.Models.Product>()
+                    .Name("Home")
+                    .Columns(columns =>
+                    {
+                        columns.Bound(p => p.ProductName);
+                        columns.Bound(p => p.UnitPrice).Width(140);
+                        columns.Bound(p => p.UnitsInStock).Width(140);
+                        columns.Bound(p => p.Discontinued).Width(100);
+                        columns.Command(command => { command.Edit(); command.Destroy(); }).Width(200);
+                    })
+                    .ToolBar(toolbar => toolbar.Create())
+                    .Editable(editable => editable.Mode(GridEditMode.InLine))
+                    .DataSource(dataSource => dataSource
+                        .Server()
+                        // Specify that the ProductID property is the unique identifier of the model.
+                        .Model(model => model.Id(p => p.ProductID))
+                        .Create(create => create.Action("Create", "Home"))
+                        .Read(read => read.Action("Index", "Home"))
+                        .Update(update => update.Action("Update", "Home"))
+                        .Destroy(destroy => destroy.Action("Destroy", "Home"))
+                    )
+            %>
 
-**Step 6** Implement the `Read` action method.
+1. Implement the `Read` action method.
 
-###### Example
+    ###### Example
 
-        public ActionResult Index()
-        {
-            return View(ProductRepository.All());
-        }
-
-**Step 7** Implement the `Create` action method.
-
-###### Example
-
-        [AcceptVerbs(HttpVerbs.Post)]
-        public ActionResult Create(Product product)
-        {
-            if (ModelState.IsValid)
+            public ActionResult Index()
             {
-                // The model is valid. Insert the product and re-display the Grid.
-                ProductRepository.Insert(product);
-
-                // GridRouteValues() is an extension method which returns the
-                // route values defining the Grid state - current page, sort expression, filter etc.
-                RouteValueDictionary routeValues = this.GridRouteValues();
-
-                return RedirectToAction("Index", routeValues);
+                return View(ProductRepository.All());
             }
 
-            // The model is invalid. Render the current view to show any validation errors.
-            return View("Index", ProductRepository.All());
-        }
+1. Implement the `Create` action method.
 
-**Step 8** Implement the `Update` action method.
+    ###### Example
 
-###### Example
-
-        [AcceptVerbs(HttpVerbs.Post)]
-        public ActionResult Update(Product product)
-        {
-            if (ModelState.IsValid)
+            [AcceptVerbs(HttpVerbs.Post)]
+            public ActionResult Create(Product product)
             {
-                // The model is valid. Update the product and re-display the Grid.
-                ProductRepository.Update(product);
+                if (ModelState.IsValid)
+                {
+                    // The model is valid. Insert the product and re-display the Grid.
+                    ProductRepository.Insert(product);
 
-                // GridRouteValues() is an extension method which returns the
-                // route values defining the Grid state - current page, sort expression, filter etc.
-                RouteValueDictionary routeValues = this.GridRouteValues();
+                    // GridRouteValues() is an extension method which returns the
+                    // route values defining the Grid state - current page, sort expression, filter etc.
+                    RouteValueDictionary routeValues = this.GridRouteValues();
 
-                return RedirectToAction("Index", routeValues);
+                    return RedirectToAction("Index", routeValues);
+                }
+
+                // The model is invalid. Render the current view to show any validation errors.
+                return View("Index", ProductRepository.All());
             }
 
-            // The model is invalid. Render the current view to show any validation errors.
-            return View("Index", ProductRepository.All());
-        }
+1. Implement the `Update` action method.
 
-**Step 9** Implement the `Destroy` action method.
+    ###### Example
 
-###### Example
-
-        [AcceptVerbs(HttpVerbs.Post)]
-        public ActionResult Destroy(int productID)
-        {
-            // Find a product with ProductID equal to the id action parameter.
-            Product product = ProductRepository.One(p => p.ProductID == productID);
-
-            RouteValueDictionary routeValues;
-
-            if (product == null)
+            [AcceptVerbs(HttpVerbs.Post)]
+            public ActionResult Update(Product product)
             {
-                // A product with the specified id does not exist. Re-display the Grid.
+                if (ModelState.IsValid)
+                {
+                    // The model is valid. Update the product and re-display the Grid.
+                    ProductRepository.Update(product);
 
-                // GridRouteValues() is an extension method which returns the
-                // route values defining the Grid state - current page, sort expression, filter etc.
+                    // GridRouteValues() is an extension method which returns the
+                    // route values defining the Grid state - current page, sort expression, filter etc.
+                    RouteValueDictionary routeValues = this.GridRouteValues();
+
+                    return RedirectToAction("Index", routeValues);
+                }
+
+                // The model is invalid. Render the current view to show any validation errors.
+                return View("Index", ProductRepository.All());
+            }
+
+1. Implement the `Destroy` action method.
+
+    ###### Example
+
+            [AcceptVerbs(HttpVerbs.Post)]
+            public ActionResult Destroy(int productID)
+            {
+                // Find a product with ProductID equal to the id action parameter.
+                Product product = ProductRepository.One(p => p.ProductID == productID);
+
+                RouteValueDictionary routeValues;
+
+                if (product == null)
+                {
+                    // A product with the specified id does not exist. Re-display the Grid.
+
+                    // GridRouteValues() is an extension method which returns the
+                    // route values defining the Grid state - current page, sort expression, filter etc.
+                    routeValues = this.GridRouteValues();
+
+                    return RedirectToAction("Index", routeValues);
+                }
+
+                // Delete the record.
+                ProductRepository.Delete(product);
+
                 routeValues = this.GridRouteValues();
 
+                // Re-display the Grid.
                 return RedirectToAction("Index", routeValues);
             }
-
-            // Delete the record.
-            ProductRepository.Delete(product);
-
-            routeValues = this.GridRouteValues();
-
-            // Re-display the Grid.
-            return RedirectToAction("Index", routeValues);
-        }
 
 > **Important**  
 >

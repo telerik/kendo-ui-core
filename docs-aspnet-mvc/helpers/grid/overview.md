@@ -30,89 +30,89 @@ Here are some of the differences between server and AJAX bound modes:
 
 Below are listed the steps for you to follow when configuring the Kendo UI Grid for server binding to the Northwind **Products** table using.
 
-**Step 1** Create a new ASP.NET MVC 4 application. If you have installed the [Telerik UI for ASP.NET MVC Visual Studio Extensions]({% slug overview_aspnetmvc %}#requirements), create a Telerik UI for ASP.NET MVC application. Name the application `KendoGridServerBinding`. If you decided not to use the Telerik UI for ASP.NET MVC Visual Studio Extensions, follow the steps from the [introductory article]({% slug overview_aspnetmvc %}) to add Telerik UI for ASP.NET MVC to the application.
+1. Create a new ASP.NET MVC 4 application. If you have installed the [Telerik UI for ASP.NET MVC Visual Studio Extensions]({% slug overview_aspnetmvc %}#requirements), create a Telerik UI for ASP.NET MVC application. Name the application `KendoGridServerBinding`. If you decided not to use the Telerik UI for ASP.NET MVC Visual Studio Extensions, follow the steps from the [introductory article]({% slug overview_aspnetmvc %}) to add Telerik UI for ASP.NET MVC to the application.
 
-**Step 2** Add a new `Entity Framework Data Model`. Right-click the `~/Models` folder in the solution explorer and pick **Add new item**. Choose **Data** > **ADO.NET Entity Data Model** in the **Add New Item** dialog. Name the model `Northwind.edmx` and click **Next**. This starts the **Entity Data Model Wizard**.
+1. Add a new `Entity Framework Data Model`. Right-click the `~/Models` folder in the solution explorer and pick **Add new item**. Choose **Data** > **ADO.NET Entity Data Model** in the **Add New Item** dialog. Name the model `Northwind.edmx` and click **Next**. This starts the **Entity Data Model Wizard**.
 
-**Figure 1. A new entity data model**
+    **Figure 1. A new entity data model**
 
-![New entity data model](/helpers/grid/images/grid-entity-data-model.png)
+    ![New entity data model](/helpers/grid/images/grid-entity-data-model.png)
 
-**Step 3**  Pick the **Generate from database** option and click **Next**. Configure a connection to the Northwind database. Click **Next**.
+1.  Pick the **Generate from database** option and click **Next**. Configure a connection to the Northwind database. Click **Next**.
 
-**Figure 2. Choose the connection**
+    **Figure 2. Choose the connection**
 
-![Choose the connection](/helpers/grid/images/grid-entity-data-model.png)
+    ![Choose the connection](/helpers/grid/images/grid-entity-data-model.png)
 
-**Step 4** Choose the **Products** table from the `Which database objects do you want to include in your model?`. Leave all other options as they are set by default. Click **Finish**.
+1. Choose the **Products** table from the `Which database objects do you want to include in your model?`. Leave all other options as they are set by default. Click **Finish**.
 
-**Figure 3. Choose the Products table**
+    **Figure 3. Choose the Products table**
 
-![Choose the Products table](/helpers/grid/images/grid-database-objects.png)
+    ![Choose the Products table](/helpers/grid/images/grid-database-objects.png)
 
-**Step 5** Open **HomeController.cs** and modify the `Index` action method.
+1. Open **HomeController.cs** and modify the `Index` action method.
 
-###### Example
+    ###### Example
 
-      public ActionResult Index()
-      {
-          ViewBag.Message = "Welcome to ASP.NET MVC!";
-          var northwind = new NorthwindEntities();
-          //Get the Products entities and add them to the ViewBag.
-          ViewBag.Products = northwind.Products;
-          return View();
-      }
+          public ActionResult Index()
+          {
+              ViewBag.Message = "Welcome to ASP.NET MVC!";
+              var northwind = new NorthwindEntities();
+              //Get the Products entities and add them to the ViewBag.
+              ViewBag.Products = northwind.Products;
+              return View();
+          }
 
-**Step 6** Add a Kendo UI Grid to the `Index` view.
+1. Add a Kendo UI Grid to the `Index` view.
 
-###### Example
+    ###### Example
 
-```tab-ASPX
+    ```tab-ASPX
 
-      <%: Html.Kendo().Grid((IEnumerable<KendoGridServerBinding.Models.Product>)ViewBag.Products) //Bind the grid to ViewBag.Products
-              .Name("grid")
-              .Columns(columns =>
-              {
-                  //Create a column bound to the ProductID property.
-                  columns.Bound(product => product.ProductID);
-                  //Create a column bound to the ProductName property.
-                  columns.Bound(product => product.ProductName);
-                  //Create a column bound to the UnitsInStock property.
-                  columns.Bound(product => product.UnitsInStock);
-              })
-              .Pageable() //Enable the paging.
-              .Sortable() //Enable the sorting.
-      %>
-```
-```tab-Razor
+          <%: Html.Kendo().Grid((IEnumerable<KendoGridServerBinding.Models.Product>)ViewBag.Products) //Bind the grid to ViewBag.Products
+                  .Name("grid")
+                  .Columns(columns =>
+                  {
+                      //Create a column bound to the ProductID property.
+                      columns.Bound(product => product.ProductID);
+                      //Create a column bound to the ProductName property.
+                      columns.Bound(product => product.ProductName);
+                      //Create a column bound to the UnitsInStock property.
+                      columns.Bound(product => product.UnitsInStock);
+                  })
+                  .Pageable() //Enable the paging.
+                  .Sortable() //Enable the sorting.
+          %>
+    ```
+    ```tab-Razor
 
-      @(Html.Kendo().Grid((IEnumerable<KendoGridServerBinding.Models.Product>)ViewBag.Products) //Bind the grid to ViewBag.Products
-            .Name("grid")
-            .Columns(columns =>
-            {
-                //Create a column bound to the ProductID property.
-                columns.Bound(product => product.ProductID);
-                //Create a column bound to the ProductName property.
-                columns.Bound(product => product.ProductName);
-                //Create a column bound to the UnitsInStock property.
-                columns.Bound(product => product.UnitsInStock);
-            })
-            .Pageable() //Enable the paging.
-            .Sortable() //Enable the sorting.
-      )
-```
+          @(Html.Kendo().Grid((IEnumerable<KendoGridServerBinding.Models.Product>)ViewBag.Products) //Bind the grid to ViewBag.Products
+                .Name("grid")
+                .Columns(columns =>
+                {
+                    //Create a column bound to the ProductID property.
+                    columns.Bound(product => product.ProductID);
+                    //Create a column bound to the ProductName property.
+                    columns.Bound(product => product.ProductName);
+                    //Create a column bound to the UnitsInStock property.
+                    columns.Bound(product => product.UnitsInStock);
+                })
+                .Pageable() //Enable the paging.
+                .Sortable() //Enable the sorting.
+          )
+    ```
 
-**Step 7** Build and run the application.
+1. Build and run the application.
 
-**Figure 4. The final result**
+    **Figure 4. The final result**
 
-![Final result](/helpers/grid/images/grid-bound-grid.png)
+    ![Final result](/helpers/grid/images/grid-bound-grid.png)
 
 ## Reference
 
 ### Existing Instances
 
-You can reference an existing Kendo UI Grid instance via [`jQuery.data()`](http://api.jquery.com/jQuery.data/). Once a reference is established, use the [Grid API](../../../kendo-ui/api/javascript/ui/grid#methods) to control its behavior.
+To reference an existing Kendo UI Grid instance, use the [`jQuery.data()`](http://api.jquery.com/jQuery.data/) configuration option. Once a reference is established, use the [Grid API](../../../kendo-ui/api/javascript/ui/grid#methods) to control its behavior.
 
 ###### Example
 
@@ -138,7 +138,7 @@ You can subscribe to all Grid [events](../../../kendo-ui/api/javascript/ui/grid#
 
 ### By Handler Name
 
-The examples below demonstrates how to subscribe to events by a handler name.
+The following example demonstrates how to subscribe to events by a handler name.
 
 ###### Example
 
@@ -183,7 +183,7 @@ The examples below demonstrates how to subscribe to events by a handler name.
 
 ### By Template Delegate
 
-The example below demonstrates how to subscribe to events by a template delegate.
+The following example demonstrates how to subscribe to events by a template delegate.
 
 ###### Example
 

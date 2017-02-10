@@ -8,7 +8,7 @@ position: 0
 
 # Cascade DropDownLists with Enabled Virtualization
 
-To implement cascading DropDownList widgets and still virtualize the data is simple because virtualization requires you to use a custom data source configuration.
+To implement cascading DropDownList widgets and still virtualize the data is simple, because virtualization requires you to use a custom data source configuration.
 
 It enables the usage of the `DataSourceRequest` and `ToDataSourceResult` methods, which internally parse all filter and page expression information, and apply it directly to the data.
 

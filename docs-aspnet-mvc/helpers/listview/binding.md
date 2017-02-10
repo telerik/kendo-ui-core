@@ -16,89 +16,89 @@ When configured for AJAX binding, the Kendo UI ListView for ASP.NET MVC makes Aj
 
 Below are listed the steps for you to follow when configuring the Kendo UI ListView for ASP.NET MVC for Ajax binding.
 
-**Step 1** Add a new action method which returns data to populate the ListView.
+1. Add a new action method which returns data to populate the ListView.
 
-###### Example
+    ###### Example
 
-        public ActionResult Products_Read()
-        {
-            var products = new NorthwindDataContext().Products;
-        }
+            public ActionResult Products_Read()
+            {
+                var products = new NorthwindDataContext().Products;
+            }
 
-**Step 2** Add a new parameter of type `Kendo.UI.DataSourceRequest`. It will contain the current ListView request information. Decorate that parameter with the `Kendo.UI.DataSourceRequestAttribute`. This attribute is responsible for populating the `DataSourceRequest` object.
+1. Add a new parameter of type `Kendo.UI.DataSourceRequest`. It will contain the current ListView request information. Decorate that parameter with the `Kendo.UI.DataSourceRequestAttribute`. This attribute is responsible for populating the `DataSourceRequest` object.
 
-###### Example
+    ###### Example
 
-        public ActionResult Products_Read([DataSourceRequest]DataSourceRequest request)
-        {
-            var products = new NorthwindDataContext().Products;
-        }
+            public ActionResult Products_Read([DataSourceRequest]DataSourceRequest request)
+            {
+                var products = new NorthwindDataContext().Products;
+            }
 
-**Step 3** Use the `ToDataSourceResult` extension method to convert your `IQueryable` or `IEnumerable` to a `Kendo.UI.DataSourceResult` object. This extension method will page, filter, sort, or group your data using the information provided by the `DataSourceRequest` object. To use the `ToDataSourceResult` extension method, import the `Kendo.Mvc.Extensions` namespace.
+1. Use the `ToDataSourceResult` extension method to convert your `IQueryable` or `IEnumerable` to a `Kendo.UI.DataSourceResult` object. This extension method will page, filter, sort, or group your data using the information provided by the `DataSourceRequest` object. To use the `ToDataSourceResult` extension method, import the `Kendo.Mvc.Extensions` namespace.
 
-###### Example
+    ###### Example
 
-        public ActionResult Products_Read([DataSourceRequest]DataSourceRequest request)
-        {
-            var products = new NorthwindDataContext().Products;
+            public ActionResult Products_Read([DataSourceRequest]DataSourceRequest request)
+            {
+                var products = new NorthwindDataContext().Products;
 
-            DataSourceResult result = products.ToDataSourceResult(request);
-        }
+                DataSourceResult result = products.ToDataSourceResult(request);
+            }
 
-**Step 4** Return the `DataSourceResult` as JSON.
+1. Return the `DataSourceResult` as JSON.
 
-###### Example
+    ###### Example
 
-        public ActionResult Products_Read([DataSourceRequest]DataSourceRequest request)
-        {
-            var products = new NorthwindDataContext().Products;
+            public ActionResult Products_Read([DataSourceRequest]DataSourceRequest request)
+            {
+                var products = new NorthwindDataContext().Products;
 
-            DataSourceResult result = products.ToDataSourceResult(request);
+                DataSourceResult result = products.ToDataSourceResult(request);
 
-            return Json(result);
-        }
+                return Json(result);
+            }
 
-**Step 5** In the view, configure the ListView to use the action method created in the previous steps.
+1. In the view, configure the ListView to use the action method created in the previous steps.
 
-###### Example
+    ###### Example
 
-```tab-Item Template
+    ```tab-Item-Template
 
-            <script type="text/x-kendo-tmpl" id="template">
-                <div class="product">
-                    <img src="@Url.Content("~/content/web/foods/")${ProductID}.jpg" alt="${ProductName} image" />
-                    <h3>${ProductName}</h3>
-                    <dl>
-                        <dt>Price:</dt>
-                        <dd>${kendo.toString(UnitPrice, "c")}</dd>
-                    </dl>
-                </div>
-            </script>
-```
-```tab-ASPX
+                <script type="text/x-kendo-tmpl" id="template">
+                    <div class="product">
+                        <img src="@Url.Content("~/content/web/foods/")${ProductID}.jpg" alt="${ProductName} image" />
+                        <h3>${ProductName}</h3>
+                        <dl>
+                            <dt>Price:</dt>
+                            <dd>${kendo.toString(UnitPrice, "c")}</dd>
+                        </dl>
+                    </div>
+                </script>
+    ```
+    ```tab-ASPX
 
-            <%: Html.Kendo().ListView<MvcApplication1.Models.Product>()
-                .Name("ListView")
-                .TagName("div")
-                .ClientTemplateId("template")
-                .DataSource(dataSource => dataSource
-                    .Read(read => read.Action("Products_Read", "Home")) // Specify the action method and controller name
+                <%: Html.Kendo().ListView<MvcApplication1.Models.Product>()
+                    .Name("ListView")
+                    .TagName("div")
+                    .ClientTemplateId("template")
+                    .DataSource(dataSource => dataSource
+                        .Read(read => read.Action("Products_Read", "Home")) // Specify the action method and controller name
+                    )
+                    .Pageable()
+                %>
+    ```
+    ```tab-Razor
+
+                @(Html.Kendo().ListView<MvcApplication1.Models.Product>()
+                    .Name("ListView")
+                    .TagName("div")
+                    .ClientTemplateId("template")
+                    .DataSource(dataSource => dataSource
+                        .Read(read => read.Action("Products_Read", "Home")) // Specify the action method and controller name
+                    )
+                    .Pageable()
                 )
-                .Pageable()
-            %>
-```
-```tab-Razor
-
-            @(Html.Kendo().ListView<MvcApplication1.Models.Product>()
-                .Name("ListView")
-                .TagName("div")
-                .ClientTemplateId("template")
-                .DataSource(dataSource => dataSource
-                    .Read(read => read.Action("Products_Read", "Home")) // Specify the action method and controller name
-                )
-                .Pageable()
-            )
-```
+    ```
 
 The `ToDataSourceResult` method uses the `DataSourceRequest` parameter and Linq expressions to apply paging, sorting, filtering, and grouping. The JSON response of the action method will contain only a single page of data. The ListView will be bound to that data.
 
@@ -106,7 +106,7 @@ The `ToDataSourceResult` method uses the `DataSourceRequest` parameter and Linq 
 
 To pass additional parameters to the action method, use the `Data` setting. Provide the name of a JavaScript function which will return an object containing the additional data.
 
-The example below demonstrates the action method.
+The following example demonstrates the action method.
 
 ###### Example
 
@@ -116,11 +116,11 @@ The example below demonstrates the action method.
           }
 
 
-The example below demonstrates how to send additional data.
+The following example demonstrates how to send additional data.
 
 ###### Example
 
-``tab-ASPX
+```tab-ASPX
 
           <%: Html.Kendo().ListView<MvcApplication1.Models.Product>()
                   .Name("ListView")
@@ -141,7 +141,7 @@ The example below demonstrates how to send additional data.
           }
           </script>
 ```
-```tag-Razor
+```tab-Razor
 
           @(Html.Kendo().ListView<MvcApplication1.Models.Product>()
               .Name("ListView")
@@ -176,8 +176,6 @@ can be changed by disabling `ServerOperation`.
     )
 
 ## See Also
-
-Other articles on Telerik UI for ASP.NET MVC and on the ListView:
 
 * [Overview of the ListView HtmlHelper]({% slug overview_listviewhelper_aspnetmvc %})
 * [Configuration of the ListView HtmlHelper]({% slug configuration_listviewhelper_aspnetmvc %})
