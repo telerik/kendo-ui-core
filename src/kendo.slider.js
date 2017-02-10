@@ -838,9 +838,15 @@ var __meta__ = { // jshint ignore:line
             that.wrapper
                 .find(".k-button")
                 .off(MOUSE_DOWN)
-                .on(MOUSE_DOWN, kendo.preventDefault)
+                .on(MOUSE_DOWN, function(e) {
+                    e.preventDefault();
+                    $(this).addClass("k-state-active");
+                })
                 .off(MOUSE_UP)
-                .on(MOUSE_UP, kendo.preventDefault)
+                .on(MOUSE_UP, function(e) {
+                    e.preventDefault();
+                    $(this).removeClass("k-state-active");
+                })
                 .off("mouseleave" + NS)
                 .on("mouseleave" + NS, kendo.preventDefault)
                 .off(MOUSE_OVER)

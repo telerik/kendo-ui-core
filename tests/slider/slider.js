@@ -349,6 +349,28 @@ test("slider should render large ticks with min value bigger then 0 correctly", 
     });
 });
 
+test("should add active state and remove it", function () {
+    var slider = newSlider({
+            min: 0,
+            max: 11,
+            largeStep: 1
+        });
+
+    slider.resize();
+
+    slider.wrapper.find(".k-button-increase").trigger("mousedown");
+    slider.wrapper.find(".k-button-decrease").trigger("mousedown");
+
+    ok(slider.wrapper.find(".k-button-increase").hasClass("k-state-active"));
+    ok(slider.wrapper.find(".k-button-decrease").hasClass("k-state-active"));
+
+    slider.wrapper.find(".k-button-increase").trigger("mouseup");
+    slider.wrapper.find(".k-button-decrease").trigger("mouseup");
+
+    ok(!slider.wrapper.find(".k-button-increase").hasClass("k-state-active"));
+    ok(!slider.wrapper.find(".k-button-decrease").hasClass("k-state-active"));
+});
+
 asyncTest("slider should restore its original value on form reset", function () {
     QUnit.fixture.append('<form id="sliderForm" action=""><div><input id="singleSlider" value="1" /></div></form>');
     var slider = new Slider($("#singleSlider")[0], { tooltip: { enabled: false } });
