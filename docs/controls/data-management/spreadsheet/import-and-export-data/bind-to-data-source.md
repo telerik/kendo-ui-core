@@ -29,7 +29,7 @@ For a functional example, see the [Spreadsheet/DataSource Binding](http://demos.
 ## Known Issues
 
 * Records cannot be edited after sorting the sheet.
-* The data of the DataSource the Spreadsheet will be bound to should contain data items. Binding to a DataSource with an empty data will lead to undesired side effects.
+* The data of the DataSource to which the Spreadsheet will be bound has to contain data items. Binding the widget to a DataSource with empty data leads to undesired side effects.
 
 ## See Also
 
