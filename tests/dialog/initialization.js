@@ -31,12 +31,13 @@
         var wrapper = dialog.wrapper;
         var wrapperChildren = wrapper.children();
 
-        ok(wrapper.is(".k-widget.k-dialog.k-window"));
-        ok(wrapperChildren.eq(0).is(".k-window-titlebar"));
-        ok(wrapperChildren.eq(0).children().eq(1).is(".k-dialog-action.k-dialog-close"));
-        ok(wrapperChildren.eq(0).children().eq(1).children().eq(0).is(".k-icon.k-i-close"));
-        ok(wrapperChildren.eq(1).is(".k-content"));
-        equal(wrapper.find(".k-dialog-buttongroup").length, 0);
+        ok(wrapper.is(".k-widget.k-window.k-dialog"));
+        ok(wrapperChildren.eq(0).is(".k-window-titlebar.k-dialog-titlebar"));
+        ok(wrapperChildren.eq(0).children().eq(1).is(".k-window-actions.k-dialog-actions"));
+        ok(wrapperChildren.eq(0).children().eq(1).children().eq(0).is(".k-window-action.k-dialog-action.k-dialog-close"));
+        ok(wrapperChildren.eq(0).children().eq(1).children().eq(0).children().eq(0).is(".k-icon.k-i-close"));
+        ok(wrapperChildren.eq(1).is(".k-content.k-window-content.k-dialog-content"));
+        equal(wrapper.find(".k-button-group.k-dialog-buttongroup").length, 0);
     });
 
     test("adds close button to wrapper if titleless", function() {
