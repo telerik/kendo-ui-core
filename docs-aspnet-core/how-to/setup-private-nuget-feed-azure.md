@@ -17,6 +17,8 @@ To achieve this behavior, follow the instructions which enable you to do add a p
 
 1. Set your own username and password (in clear text) that are needed to log in to the Telerik site. The following example demonstrates how to do this.
 
+    ###### Example 
+
         <?xml version="1.0" encoding="utf-8"?>
         <configuration>
             <packageSources>
