@@ -56,7 +56,7 @@ Widgets, such as the ComboBox, DropDownList, MultiSelect, and NumericTextBox, hi
 
 **Solution**
 
-Place the widget inside the `label` element which in turn focuses the first visible element. Note that if the `for` attribute is applied to the `label` element, the respective widget would not be focused, so this attribute should not be used.
+Place the widget inside the `label` element which in turn focuses the first visible element. Avoid using the `for` attribute because when it is applied to the `label` element, the respective widget does not focus.
 
 ###### Example
 
