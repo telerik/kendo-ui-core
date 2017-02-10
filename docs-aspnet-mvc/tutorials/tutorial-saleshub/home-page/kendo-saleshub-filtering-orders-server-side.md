@@ -22,7 +22,7 @@ that the orders grid uses has been configured to do server-side operations.
 
 To support filtering on the server side in the **Orders** Grid, enable `ServerOperation` for the Grid on the DataSource declaration.
 
-The example below is an excerpt from the declaration of the **Orders** Grid&mdash;which can be found in **Views/Home/Index.cshtml**&mdash;which shows the configuration of the DataSource.
+The following example is an excerpt from the declaration of the **Orders** Grid&mdash;which can be found in **Views/Home/Index.cshtml**&mdash;which shows the configuration of the DataSource.
 
 ###### Example
 
@@ -41,7 +41,7 @@ For the full declaration for the **Orders** Grid, refer to **Views/Home/Index.cs
 
 To make the supporting server-side filtering easier, the Kendo UI MVC extensions expose a few classes and functions which handle this approach. The extensions provide `DataSourceRequest`, `DataSourceResponse`, and `ToDataSourceResult` to help with the server-side filtering.
 
-The example below demonstrates part of the code in `Api/CustomerOrdersController.cs` that supports this behavior.
+The following example demonstrates part of the code in `Api/CustomerOrdersController.cs` that supports this behavior.
 
 ###### Example
 
@@ -88,7 +88,7 @@ The implementation for the `CustomerOrdersController` is short, because the Kend
 
 **Breakdown of Code**
 
-The example below demonstrates the first chunk of code.
+The following example demonstrates the first chunk of code.
 
 ###### Example
 
@@ -190,7 +190,7 @@ After the `dataItem` and the jQuery object for the node are present, you need to
 
 Now you need to call the `updateGridCustomerFilter` function, which takes a `customerId` as a parameter. Because the `data-customer-id` attribute was added to all of the customer nodes when the TreeView was generated on the server side, you need to retrieve that value from the jQuery object by calling the `data` function on it.
 
-The example below demonstrates the function which commands the update of the filters on the Grid.
+The following example demonstrates the function which commands the update of the filters on the Grid.
 
 ###### Example
 

@@ -43,7 +43,7 @@ Note the `buildSocialStatsSeries` and `buildSocialStatsValueAxis` functions. The
 
 ![social-tiles](/tutorials/tutorial-kendo-music-store/music-store-dashboard/images/social-tiles.png)
 
-These tiles are constructed by using standard declarative markup in HTML and JavaScript events. The example below demonstrates the HTML.
+These tiles are constructed by using standard declarative markup in HTML and JavaScript events. The following example demonstrates the HTML.
 
 ###### Example
 

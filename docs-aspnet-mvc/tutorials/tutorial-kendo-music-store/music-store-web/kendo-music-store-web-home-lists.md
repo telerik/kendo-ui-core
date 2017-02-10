@@ -101,7 +101,7 @@ Start by setting up a property on the view model to hold the URLs for the images
 
 The `bannerImages` property is just a simple array of image URLs. Next, make our custom binding. The best practice is to separate your custom Kendo UI extensions into a separate file, or into multiple files if they become large. In this case, put your custom binder in `Scripts\App\kendo-custom-bindings.js`.
 
-The example below demonstrates what the basic layout for the custom binder is.
+The following example demonstrates what the basic layout for the custom binder is.
 
 ###### Example
 
@@ -131,7 +131,7 @@ The `destroy` function is called when the binder is removed or cleaned up. Any t
 
 For the image rotator, your `init` function fetches the array of images to rotate, and a time delay value from a `data-rotate-delay` attribute to use to time the image change. It also defines a `doImageRotation` function that gets assigned to the binding, so you can get and use the function in the `refresh` method.
 
-The example below demonstrates what the `init` function contains.
+The following example demonstrates what the `init` function contains.
 
 ###### Example
 
@@ -162,7 +162,7 @@ The `this.bindings` contains all the bindings that are being applied to this ele
 
 The `refresh` function is called as the array of images is bound to the element, so that it knows to update.
 
-The example below demonstrates what the code is.
+The following example demonstrates what the code is.
 
 ###### Example
 

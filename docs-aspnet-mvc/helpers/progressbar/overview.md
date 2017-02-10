@@ -10,41 +10,39 @@ position: 1
 
 The ProgressBar HtmlHelper extension is a server-side wrapper for the [Kendo UI ProgressBar](https://demos.telerik.com/kendo-ui/progressbar/index) widget.
 
-## Getting Started
-
-### Configuration
+## Configuration
 
 Below are listed the steps for you to follow when configuring the Kendo UI ProgressBar.
 
-**Step 1** Make sure you followed all the steps from the [introductory article on Telerik UI for ASP.NET MVC]({% slug overview_aspnetmvc %}).
+1. Make sure you followed all the steps from the [introductory article on Telerik UI for ASP.NET MVC]({% slug overview_aspnetmvc %}).
 
-**Step 2** Create a new action method which renders the view.
+1. Create a new action method which renders the view.
 
-###### Example
+	###### Example
 
-			public ActionResult Index()
-	         {
-	           return View();
-	         }
+				public ActionResult Index()
+		         {
+		           return View();
+		         }
 
-**Step 3** Add a ProgressBar.
+1. Add a ProgressBar.
 
-###### Example
+	###### Example
 
-```tab-ASPX
+	```tab-ASPX
 
-			<%= Html.Kendo().ProgressBar()
-                    .Name("progressBar") // The name of the ProgressBar is mandatory. It specifies the "id" attribute of the widget.
-                    .Type(ProgressBarType.Percent)
-            %>
-```
-```tab-Razor
+				<%= Html.Kendo().ProgressBar()
+	                    .Name("progressBar") // The name of the ProgressBar is mandatory. It specifies the "id" attribute of the widget.
+	                    .Type(ProgressBarType.Percent)
+	            %>
+	```
+	```tab-Razor
 
-			@(Html.Kendo().ProgressBar()
-                  .Name("progressBar") // The name of the ProgressBar is mandatory. It specifies the "id" attribute of the widget.
-                  .Type(ProgressBarType.Percent)
-            )
-```
+				@(Html.Kendo().ProgressBar()
+	                  .Name("progressBar") // The name of the ProgressBar is mandatory. It specifies the "id" attribute of the widget.
+	                  .Type(ProgressBarType.Percent)
+	            )
+	```
 
 ## Event Handling
 
@@ -52,7 +50,7 @@ You can subscribe to all ProgressBar [events](../../../kendo-ui/api/javascript/u
 
 ### By Handler Name
 
-The examples below demonstrates how to subscribe to events by a handler name.
+The following example demonstrates how to subscribe to events by a handler name.
 
 ###### Example
 
@@ -97,7 +95,7 @@ The examples below demonstrates how to subscribe to events by a handler name.
 
 ### By Template Delegate
 
-The example below demonstrates how to subscribe to events by a template delegate.
+The following example demonstrates how to subscribe to events by a template delegate.
 
 ###### Example
 
@@ -118,7 +116,7 @@ The example below demonstrates how to subscribe to events by a template delegate
 
 ### Existing Instances
 
-You can reference an existing Kendo UI ProgressBar instance via [`jQuery.data()`](http://api.jquery.com/jQuery.data/). Once a reference is established, use the [ProgressBar API](../../../kendo-ui/api/javascript/ui/progressbar#methods) to control its behavior.
+To reference an existing Kendo UI ProgressBar instance, use the [`jQuery.data()`](http://api.jquery.com/jQuery.data/) configuration option. Once a reference is established, use the [ProgressBar API](../../../kendo-ui/api/javascript/ui/progressbar#methods) to control its behavior.
 
 ###### Example
 
@@ -131,8 +129,6 @@ You can reference an existing Kendo UI ProgressBar instance via [`jQuery.data()`
 	    </script>
 
 ## See Also
-
-Other articles on Telerik UI for ASP.NET MVC and on the ProgressBar:
 
 * [ASP.NET MVC API Reference: ProgressBarBuilder](/api/Kendo.Mvc.UI.Fluent/ProgressBarBuilder)
 * [Overview of Telerik UI for ASP.NET MVC]({% slug overview_aspnetmvc %})

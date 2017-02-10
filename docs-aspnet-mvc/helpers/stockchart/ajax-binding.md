@@ -45,7 +45,7 @@ In the view, configure the Chart to use the action method created in the previou
 
 ###### Example
 
-```tba-WebForms
+```tab-WebForms
 
 	     <%: Html.Kendo().StockChart<Kendo.Mvc.Examples.Models.StockDataPoint>()
 	      .Name("stockChart")
@@ -116,8 +116,6 @@ Create the main and navigator data series.
 ```
 
 ## See Also
-
-Other articles on Telerik UI for ASP.NET MVC and on the StockChart:
 
 * [Overview of the StockChart HtmlHelper]({% slug overview_stockcharthelper_aspnetmvc %})
 * [Overview of the Kendo UI StockChart Widget](http://docs.telerik.com/kendo-ui/controls/charts/stockchart/overview)

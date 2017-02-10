@@ -123,7 +123,7 @@ When the call to `.kendoCartMenu()` is made, the passed-in options object is pas
             dataSource: store.cart.getCart()
         }
 
-The example below demonstrates the calling of the `init` function.
+The following example demonstrates the calling of the `init` function.
 
 ###### Example
 
@@ -131,7 +131,7 @@ The example below demonstrates the calling of the `init` function.
 
 Then, Kendo UI takes the options parameter and uses it to extend the widget's defined options.
 
-The example below demonstrates what the `this.options` will be when that method call returns.
+The following example demonstrates what the `this.options` will be when that method call returns.
 
 ###### Example
 
@@ -142,7 +142,7 @@ The example below demonstrates what the `this.options` will be when that method 
             dataSource: store.cart.getCart()
         }
 
-The example below demonstrates what to call in the `init` function.
+The following example demonstrates what to call in the `init` function.
 
 ###### Example
 

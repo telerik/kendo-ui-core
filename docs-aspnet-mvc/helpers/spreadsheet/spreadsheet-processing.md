@@ -176,8 +176,6 @@ public ActionResult Process(Telerik.Web.Spreadsheet.Workbook workbook)
 
 ## See Also
 
-Other articles on Telerik UI for ASP.NET MVC and on the Spreadsheet:
-
 * [Load and Save Data as JSON](http://docs.telerik.com/kendo-ui/controls/data-management/spreadsheet/import-and-export-data/json)
 * [Export to Excel](http://docs.telerik.com/kendo-ui/controls/data-management/spreadsheet/import-and-export-data/export-to-excel)
 * [Overview of the Kendo UI Spreadsheet Widget](http://docs.telerik.com/kendo-ui/controls/data-management/spreadsheet/overview)

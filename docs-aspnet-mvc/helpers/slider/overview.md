@@ -23,39 +23,39 @@ There are two types of Sliders:
 
 Below are listed the steps for you to follow when configuring the Kendo UI Slider.
 
-**Step 1** Make sure you followed all the steps from the [introductory article on Telerik UI for ASP.NET MVC]({% slug overview_aspnetmvc %}).
+1. Make sure you followed all the steps from the [introductory article on Telerik UI for ASP.NET MVC]({% slug overview_aspnetmvc %}).
 
-**Step 2** Create a new action method which renders the view.
+1. Create a new action method which renders the view.
 
-###### Example
+    ###### Example
 
-        public ActionResult Index()
-        {
-            return View();
-        }
+            public ActionResult Index()
+            {
+                return View();
+            }
 
-**Step 3** Add a Slider.
+1. Add a Slider.
 
-###### Example
+    ###### Example
 
-```tab-ASPX
+    ```tab-ASPX
 
-        <%: Html.Kendo().Slider()
-                .Name("slider") //The name of the Slider is mandatory. It specifies the "id" attribute of the widget.
-                .Min(0) //Set min value of the Slider.
-                .Max(100) //Set min value of the Slider.
-                .Value(20) //Set the value of the Slider.
-        %>
-```
-```tab-Razor
+            <%: Html.Kendo().Slider()
+                    .Name("slider") //The name of the Slider is mandatory. It specifies the "id" attribute of the widget.
+                    .Min(0) //Set min value of the Slider.
+                    .Max(100) //Set min value of the Slider.
+                    .Value(20) //Set the value of the Slider.
+            %>
+    ```
+    ```tab-Razor
 
-        @(Html.Kendo().Slider()
-              .Name("slider") //The name of the Slider is mandatory. It specifies the "id" attribute of the widget.
-              .Min(0) //Set min value of the Slider.
-              .Max(100) //Set min value of the Slider.
-              .Value(20) //Set the value of the Slider.
-        )
-```
+            @(Html.Kendo().Slider()
+                  .Name("slider") //The name of the Slider is mandatory. It specifies the "id" attribute of the widget.
+                  .Min(0) //Set min value of the Slider.
+                  .Max(100) //Set min value of the Slider.
+                  .Value(20) //Set the value of the Slider.
+            )
+    ```
 
 ## Event Handling
 
@@ -63,7 +63,7 @@ You can subscribe to all Slider [events](../../../kendo-ui/api/javascript/ui/sli
 
 ### By Handler Name
 
-The examples below demonstrates how to subscribe to events by a handler name.
+The following example demonstrates how to subscribe to events by a handler name.
 
 ###### Example
 
@@ -108,7 +108,7 @@ The examples below demonstrates how to subscribe to events by a handler name.
 
 ### By Template Delegate
 
-The example below demonstrates how to subscribe to events by a template delegate.
+The following example demonstrates how to subscribe to events by a template delegate.
 
 ###### Example
 
@@ -135,7 +135,7 @@ The example below demonstrates how to subscribe to events by a template delegate
 
 ### Existing Instances
 
-You can reference an existing Kendo UI Slider instance via [`jQuery.data()`](http://api.jquery.com/jQuery.data/). Once a reference is established, use the [Slider API](../../../kendo-ui/api/javascript/ui/slider#methods) to control its behavior.
+To reference an existing Kendo UI Slider instance, use the [`jQuery.data()`](http://api.jquery.com/jQuery.data/) configuration option. Once a reference is established, use the [Slider API](../../../kendo-ui/api/javascript/ui/slider#methods) to control its behavior.
 
 ###### Example
 
@@ -148,8 +148,6 @@ You can reference an existing Kendo UI Slider instance via [`jQuery.data()`](htt
         </script>
 
 ## See Also
-
-Other articles on Telerik UI for ASP.NET MVC and on the Slider:
 
 * [ASP.NET MVC API Reference: SliderBuilder](/api/Kendo.Mvc.UI.Fluent/SliderBuilder)
 * [Overview of Telerik UI for ASP.NET MVC]({% slug overview_aspnetmvc %})

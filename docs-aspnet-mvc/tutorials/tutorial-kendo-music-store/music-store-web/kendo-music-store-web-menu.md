@@ -91,7 +91,7 @@ This partial outputs a list of `<li>` elements that work as links to each Genre.
 
 The Kendo UI Menu control allows adding any content to a drop-down menu item. It does not have to be a list of selectable items like the **Genres**. To add content to a menu item, include a `<ul>` element with a single `<li>` element. Within that element, use a `<div>` to specify the content.
 
-The example below demonstrates how to add this content for the **About** menu item.
+The following example demonstrates how to add this content for the **About** menu item.
 
 ###### Example
 

@@ -16,18 +16,82 @@ The Spreadsheet HtmlHelper extension is a server-side wrapper for the [Kendo UI 
 
 Below are listed the steps for you to follow when configuring the Kendo UI Spreadsheet for ASP.NET MVC to bind to inline data.
 
-**Step 1** Create a new ASP.NET MVC 5 application using any of the following templates:
+1. Create a new ASP.NET MVC 5 application using any of the following templates:
 
 * Telerik UI for ASP.NET MVC application. It is available after installing the [Telerik UI for ASP.NET MVC Visual Studio Extensions]({% slug overview_aspnetmvc %}).
 * Default Visual Studio template. Follow the steps from the [introductory article on Telerik UI for ASP.NET MVC]({% slug overview_aspnetmvc %}) to set up to the application.
 
-**Step 2** Add a Kendo UI Spreadsheet to the `Index` view in `Views/Home/Index.cshtml`.
+1. Add a Kendo UI Spreadsheet to the `Index` view in `Views/Home/Index.cshtml`.
 
-###### Example
+    ###### Example
 
-```tab-ASPX
+    ```tab-ASPX
 
-      <%:Html.Kendo().Spreadsheet()
+          <%:Html.Kendo().Spreadsheet()
+              .Name("spreadsheet")
+              .Sheets(sheets => {
+                  sheets.Add()
+                      .Name("Food Order")
+                      .MergedCells("A1:F1", "C15:E15")
+                      .Columns(columns =>
+                      {
+                          columns.Add().Width(100);
+                          columns.Add().Width(215);
+                          columns.Add().Width(115);
+                          columns.Add().Width(115);
+                          columns.Add().Width(115);
+                          columns.Add().Width(155);
+                      })
+                      .Rows(rows =>
+                      {
+                          rows.Add().Height(50).Cells(cells =>
+                          {
+                              cells.Add()
+                                  .Value("My Company")
+                                  .FontSize(25)
+                                  .Background("rgb(142,196,65)")
+                                  .TextAlign(SpreadsheetTextAlign.Center)
+                                  .Color("white");
+                          });
+
+                          rows.Add().Height(25).Cells(cells =>
+                          {
+                              cells.Add()
+                                  .Value("ID")
+                                  .Background("rgb(212,223,50)")
+                                  .TextAlign(SpreadsheetTextAlign.Center);
+
+                              cells.Add()
+                                  .Value("Product")
+                                  .Background("rgb(212,223,50)")
+                                  .TextAlign(SpreadsheetTextAlign.Center);
+
+                              cells.Add()
+                                  .Value("Quantity")
+                                  .Background("rgb(212,223,50)")
+                                  .TextAlign(SpreadsheetTextAlign.Center);
+
+                              cells.Add()
+                                  .Value("Price")
+                                  .Background("rgb(212,223,50)")
+                                  .TextAlign(SpreadsheetTextAlign.Center);
+
+                              cells.Add()
+                                  .Value("Tax")
+                                  .Background("rgb(212,223,50)")
+                                  .TextAlign(SpreadsheetTextAlign.Center);
+
+                              cells.Add()
+                                  .Value("Amount")
+                                  .Background("rgb(212,223,50)")
+                                  .TextAlign(SpreadsheetTextAlign.Center);
+                          });
+                      });
+                  })
+          %>
+    ```
+    ```tab-Razor
+          @(Html.Kendo().Spreadsheet()
           .Name("spreadsheet")
           .Sheets(sheets => {
               sheets.Add()
@@ -88,78 +152,14 @@ Below are listed the steps for you to follow when configuring the Kendo UI Sprea
                       });
                   });
               })
-      %>
-```
-```tab-Razor
-      @(Html.Kendo().Spreadsheet()
-      .Name("spreadsheet")
-      .Sheets(sheets => {
-          sheets.Add()
-              .Name("Food Order")
-              .MergedCells("A1:F1", "C15:E15")
-              .Columns(columns =>
-              {
-                  columns.Add().Width(100);
-                  columns.Add().Width(215);
-                  columns.Add().Width(115);
-                  columns.Add().Width(115);
-                  columns.Add().Width(115);
-                  columns.Add().Width(155);
-              })
-              .Rows(rows =>
-              {
-                  rows.Add().Height(50).Cells(cells =>
-                  {
-                      cells.Add()
-                          .Value("My Company")
-                          .FontSize(25)
-                          .Background("rgb(142,196,65)")
-                          .TextAlign(SpreadsheetTextAlign.Center)
-                          .Color("white");
-                  });
+          )
+    ```
 
-                  rows.Add().Height(25).Cells(cells =>
-                  {
-                      cells.Add()
-                          .Value("ID")
-                          .Background("rgb(212,223,50)")
-                          .TextAlign(SpreadsheetTextAlign.Center);
+1. Build and run the application.
 
-                      cells.Add()
-                          .Value("Product")
-                          .Background("rgb(212,223,50)")
-                          .TextAlign(SpreadsheetTextAlign.Center);
+    **Figure 1. The final result**
 
-                      cells.Add()
-                          .Value("Quantity")
-                          .Background("rgb(212,223,50)")
-                          .TextAlign(SpreadsheetTextAlign.Center);
-
-                      cells.Add()
-                          .Value("Price")
-                          .Background("rgb(212,223,50)")
-                          .TextAlign(SpreadsheetTextAlign.Center);
-
-                      cells.Add()
-                          .Value("Tax")
-                          .Background("rgb(212,223,50)")
-                          .TextAlign(SpreadsheetTextAlign.Center);
-
-                      cells.Add()
-                          .Value("Amount")
-                          .Background("rgb(212,223,50)")
-                          .TextAlign(SpreadsheetTextAlign.Center);
-                  });
-              });
-          })
-      )
-```
-
-**Step 3** Build and run the application.
-
-**Figure 1. The final result**
-
-![Final result](/helpers/spreadsheet/images/spreadsheet-inline.png)
+    ![Final result](/helpers/spreadsheet/images/spreadsheet-inline.png)
 
 ## Event Handling
 
@@ -167,7 +167,7 @@ You can subscribe to all Spreadsheet [events](../../../kendo-ui/api/javascript/u
 
 ### By Handler Name
 
-The examples below demonstrates how to subscribe to events by a handler name.
+The following example demonstrates how to subscribe to events by a handler name.
 
 ###### Example
 
@@ -204,7 +204,7 @@ The examples below demonstrates how to subscribe to events by a handler name.
 
 ### By Template Delegate
 
-The example below demonstrates how to subscribe to events by a template delegate.
+The following example demonstrates how to subscribe to events by a template delegate.
 
 ###### Example
 
@@ -226,7 +226,7 @@ The example below demonstrates how to subscribe to events by a template delegate
 
 ### Existing Instances
 
-You can reference an existing Kendo UI Spreadsheet instance via [`jQuery.data()`](http://api.jquery.com/jQuery.data/). Once a reference is established, use the [Spreadsheet API](../../../kendo-ui/api/javascript/ui/spreadsheet#methods) to control its behavior.
+To reference an existing Kendo UI Spreadsheet instance, use the [`jQuery.data()`](http://api.jquery.com/jQuery.data/) configuration option. Once a reference is established, use the [Spreadsheet API](../../../kendo-ui/api/javascript/ui/spreadsheet#methods) to control its behavior.
 
 ###### Example
 
@@ -241,8 +241,6 @@ You can reference an existing Kendo UI Spreadsheet instance via [`jQuery.data()`
       </script>
 
 ## See Also
-
-Other articles on Telerik UI for ASP.NET MVC and on the Spreadsheet:
 
 * [ASP.NET MVC API Reference: SpreadsheetBuilder](/api/Kendo.Mvc.UI.Fluent/SpreadsheetBuilder)
 * [Processing of the Kendo UI Spreadsheet for ASP.NET MVC]({% slug spreadsheet_processing_spreadsheet_mvc %})

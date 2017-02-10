@@ -24,7 +24,7 @@ This code is located in `Scripts/App/storemanager-graphs.js`.
 
 The page contains a date range selector that can be used to choose whether to view a day, week, month, or year of data. This selector is represented by a [Kendo UI ListView widget](http://demos.telerik.com/kendo-ui/web/listview/index.html). The main graph is represented by a [Kendo UI Chart widget](http://demos.telerik.com/kendo-ui/dataviz/overview/index.html).
 
-The example below demonstrates the HTML that is used.
+The following example demonstrates the HTML that is used.
 
 ###### Example
 

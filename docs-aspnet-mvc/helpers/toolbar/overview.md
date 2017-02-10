@@ -14,7 +14,7 @@ The ToolBar HtmlHelper extension is a server-side wrapper for the [Kendo UI Tool
 
 ### Initialization
 
-The example below demonstrates how to initialize the ToolBar.  
+The following example demonstrates how to initialize the ToolBar.  
 
 ###### Example
 
@@ -56,43 +56,43 @@ The example below demonstrates how to initialize the ToolBar.
 
 Below are listed the steps for you to follow when configuring the Kendo UI ToolBar.
 
-**Step 1** Make sure you followed all the steps from the [introductory article on Telerik UI for ASP.NET MVC]({% slug overview_aspnetmvc %}).
+1. Make sure you followed all the steps from the [introductory article on Telerik UI for ASP.NET MVC]({% slug overview_aspnetmvc %}).
 
-**Step 2** Create a new action method which renders the view.
+1. Create a new action method which renders the view.
 
-###### Example
+    ###### Example
 
-      public ActionResult Index()
-      {
-          return View();
-      }
+          public ActionResult Index()
+          {
+              return View();
+          }
 
-**Step 3** Add a ToolBar.
+1. Add a ToolBar.
 
-###### Example
+    ###### Example
 
-```tab-ASPX
+    ```tab-ASPX
 
-       <%: Html.Kendo().ToolBar()
-           .Resizable(true)   //Enable or disable the resizing feature.
+           <%: Html.Kendo().ToolBar()
+               .Resizable(true)   //Enable or disable the resizing feature.
 
-           .Items(items => {  //Define the widget commands.
-              items.Add().Type(CommandType.Button).Text("Button");
-           })
-       %>
-```
-```tab-Razor
+               .Items(items => {  //Define the widget commands.
+                  items.Add().Type(CommandType.Button).Text("Button");
+               })
+           %>
+    ```
+    ```tab-Razor
 
-       @(Html.Kendo().ToolBar()
-           .Resizable(true)   //Enable or disable the resizing feature.
+           @(Html.Kendo().ToolBar()
+               .Resizable(true)   //Enable or disable the resizing feature.
 
-           .Items(items => {  //Define the widget commands.
-              items.Add().Type(CommandType.Button).Text("Button");
-           })
-       )
-```
+               .Items(items => {  //Define the widget commands.
+                  items.Add().Type(CommandType.Button).Text("Button");
+               })
+           )
+    ```
 
-For more information on supported command types, refer to [this link](http://docs.telerik.com/kendo-ui/controls/navigation/toolbar/overview#command-types).
+For more information, refer to the article on [supported command types](http://docs.telerik.com/kendo-ui/controls/navigation/toolbar/overview#command-types).
 
 ## Event Handling
 
@@ -100,7 +100,7 @@ You can subscribe to all ToolBar [events](/kendo-ui/api/javascript/ui/toolbar#ev
 
 ### By Handler Name
 
-The examples below demonstrates how to subscribe to events by a handler name.
+The following example demonstrates how to subscribe to events by a handler name.
 
 ###### Example
 
@@ -155,7 +155,7 @@ The examples below demonstrates how to subscribe to events by a handler name.
 
 ### Existing Instances
 
-You can reference an existing Kendo UI ToolBar instance via [`jQuery.data()`](http://api.jquery.com/jQuery.data/). Once a reference is established, use the [ToolBar API](/kendo-ui/api/javascript/ui/toolbar#methods) to control its behavior.
+To reference an existing Kendo UI ToolBar instance, use the [`jQuery.data()`](http://api.jquery.com/jQuery.data/) configuration option. Once a reference is established, use the [ToolBar API](/kendo-ui/api/javascript/ui/toolbar#methods) to control its behavior.
 
 ###### Example
 
@@ -167,8 +167,6 @@ You can reference an existing Kendo UI ToolBar instance via [`jQuery.data()`](ht
       </script>
 
 ## See Also
-
-Other articles on Telerik UI for ASP.NET MVC and on the ToolBar:
 
 * [ASP.NET MVC API Reference: ToolBarBuilder](/api/Kendo.Mvc.UI.Fluent/ToolBarBuilder)
 * [Overview of Telerik UI for ASP.NET MVC]({% slug overview_aspnetmvc %})

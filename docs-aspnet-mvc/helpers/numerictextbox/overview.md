@@ -10,45 +10,43 @@ position: 1
 
 The NumericTextBox HtmlHelper extension is a server-side wrapper for the [Kendo UI NumericTextBox](https://demos.telerik.com/kendo-ui/numerictextbox/index) widget.
 
-## Getting Started
-
-### Configuration
+## Configuration
 
 Below are listed the steps for you to follow when configuring the Kendo UI NumericTextBox.
 
-**Step 1** Make sure you followed all the steps from the [introductory article on Telerik UI for ASP.NET MVC]({% slug overview_aspnetmvc %}).
+1. Make sure you followed all the steps from the [introductory article on Telerik UI for ASP.NET MVC]({% slug overview_aspnetmvc %}).
 
-**Step 2** Create a new action method which renders the view.
+1. Create a new action method which renders the view.
 
-###### Example
+    ###### Example
 
-        public ActionResult Index()
-        {
-            return View();
-        }
+            public ActionResult Index()
+            {
+                return View();
+            }
 
-**Step 3** Add a NumericTextBox.
+1. Add a NumericTextBox.
 
-###### Example
+    ###### Example
 
-```tab-ASPX
+    ```tab-ASPX
 
-        <%: Html.Kendo().NumericTextBox()
-                .Name("numerictextbox") //The name of the NumericTextBox is mandatory. It specifies the "id" attribute of the widget.
-                .Min(-100) //Set the min value of the NumericTextBox.
-                .Max(100) //Set the min value of the NumericTextBox.
-                .Value(10) //Set the value of the NumericTextBoxNumericTextBox.
-        %>
-```
-```tab-Razor
+            <%: Html.Kendo().NumericTextBox()
+                    .Name("numerictextbox") //The name of the NumericTextBox is mandatory. It specifies the "id" attribute of the widget.
+                    .Min(-100) //Set the min value of the NumericTextBox.
+                    .Max(100) //Set the min value of the NumericTextBox.
+                    .Value(10) //Set the value of the NumericTextBoxNumericTextBox.
+            %>
+    ```
+    ```tab-Razor
 
-        @(Html.Kendo().NumericTextBox()
-              .Name("numerictextbox") //The name of the NumericTextBox is mandatory. It specifies the "id" attribute of the widget.
-              .Min(-100) //Set the min value of the NumericTextBox.
-              .Max(100) //Set the min value of the NumericTextBox.
-              .Value(10) //Set the value of the NumericTextBox.
-        )
-```
+            @(Html.Kendo().NumericTextBox()
+                  .Name("numerictextbox") //The name of the NumericTextBox is mandatory. It specifies the "id" attribute of the widget.
+                  .Min(-100) //Set the min value of the NumericTextBox.
+                  .Max(100) //Set the min value of the NumericTextBox.
+                  .Value(10) //Set the value of the NumericTextBox.
+            )
+    ```
 
 ## Event Handling
 
@@ -56,7 +54,7 @@ You can subscribe to all NumericTextBox [events](../../../kendo-ui/api/javascrip
 
 ### By Handler Name
 
-The example below demonstrates how to subscribe to events by a handler name.
+The following example demonstrates how to subscribe to events by a handler name.
 
 ###### Example
 
@@ -101,7 +99,7 @@ The example below demonstrates how to subscribe to events by a handler name.
 
 ### By Template Delegate
 
-The example below demonstrates how to subscribe to events by a template delegate.
+The following example demonstrates how to subscribe to events by a template delegate.
 
 ###### Example
 
@@ -128,7 +126,7 @@ The example below demonstrates how to subscribe to events by a template delegate
 
 ### Existing Instances
 
-You can reference an existing Kendo UI NumericTextBox instance via [`jQuery.data()`](http://api.jquery.com/jQuery.data/). Once a reference is established, use the [NumericTextBox API](../../../kendo-ui/api/javascript/ui/numerictextbox#methods) to control its behavior.
+To reference an existing Kendo UI NumericTextBox instance, use the [`jQuery.data()`](http://api.jquery.com/jQuery.data/) configuration option. Once a reference is established, use the [NumericTextBox API](../../../kendo-ui/api/javascript/ui/numerictextbox#methods) to control its behavior.
 
 ###### Example
 
@@ -142,8 +140,6 @@ You can reference an existing Kendo UI NumericTextBox instance via [`jQuery.data
 
 
 ## See Also
-
-Other articles on Telerik UI for ASP.NET MVC and on the NumericTextBox:
 
 * [ASP.NET MVC API Reference: NumericTextBoxBuilder](/api/Kendo.Mvc.UI.Fluent/NumericTextBoxBuilder)
 * [Overview of Telerik UI for ASP.NET MVC]({% slug overview_aspnetmvc %})

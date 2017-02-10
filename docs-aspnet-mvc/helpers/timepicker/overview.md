@@ -16,39 +16,39 @@ The TimePicker HtmlHelper extension is a server-side wrapper for the [Kendo UI T
 
 Below are listed the steps for you to follow when configuring the Kendo UI TimePicker.
 
-**Step 1** Make sure you followed all the steps from the [introductory article on Telerik UI for ASP.NET MVC]({% slug overview_aspnetmvc %}).
+1. Make sure you followed all the steps from the [introductory article on Telerik UI for ASP.NET MVC]({% slug overview_aspnetmvc %}).
 
-**Step 2** Create a new action method which renders the view.
+1. Create a new action method which renders the view.
 
-###### Example
+    ###### Example
 
-        public ActionResult Index()
-        {
-            return View();
-        }
+            public ActionResult Index()
+            {
+                return View();
+            }
 
-**Step 3** Add a TimePicker.
+1. Add a TimePicker.
 
-###### Example
+    ###### Example
 
-```tab-ASPX
+    ```tab-ASPX
 
-        <%: Html.Kendo().TimePicker()
-                .Name("timepicker") //The name of the TimePicker is mandatory. It specifies the "id" attribute of the widget.
-                .Min(new DateTime(2010, 1, 1, 10, 0, 0)) //Set the min time of the TimePicker.
-                .Max(new DateTime(2010, 1, 1, 20, 0, 0)) //Set the min date of the TimePicker.
-                .Value(DateTime.Now) //Set the value of the TimePicker.
-        %>
-```
-```tab-Razor
+            <%: Html.Kendo().TimePicker()
+                    .Name("timepicker") //The name of the TimePicker is mandatory. It specifies the "id" attribute of the widget.
+                    .Min(new DateTime(2010, 1, 1, 10, 0, 0)) //Set the min time of the TimePicker.
+                    .Max(new DateTime(2010, 1, 1, 20, 0, 0)) //Set the min date of the TimePicker.
+                    .Value(DateTime.Now) //Set the value of the TimePicker.
+            %>
+    ```
+    ```tab-Razor
 
-        @(Html.Kendo().TimePicker()
-              .Name("timepicker") //The name of the TimePicker is mandatory. It specifies the "id" attribute of the widget.
-              .Min(new DateTime(2010, 1, 1, 10, 0, 0)) //Set the min time of the TimePicker.
-              .Max(new DateTime(2010, 1, 1, 20, 0, 0)) //Set the min date of the TimePicker.
-              .Value(DateTime.Now) //Set the value of the TimePicker.
-        )
-```
+            @(Html.Kendo().TimePicker()
+                  .Name("timepicker") //The name of the TimePicker is mandatory. It specifies the "id" attribute of the widget.
+                  .Min(new DateTime(2010, 1, 1, 10, 0, 0)) //Set the min time of the TimePicker.
+                  .Max(new DateTime(2010, 1, 1, 20, 0, 0)) //Set the min date of the TimePicker.
+                  .Value(DateTime.Now) //Set the value of the TimePicker.
+            )
+    ```
 
 ## Event Handling
 
@@ -56,7 +56,7 @@ You can subscribe to all TimePicker [events](../../../kendo-ui/api/javascript/ui
 
 ### By Handler Name
 
-The examples below demonstrates how to subscribe to events by a handler name.
+The following example demonstrates how to subscribe to events by a handler name.
 
 ###### Example
 
@@ -111,7 +111,7 @@ The examples below demonstrates how to subscribe to events by a handler name.
 
 ### By Template Delegate
 
-The example below demonstrates how to subscribe to events by a template delegate.
+The following example demonstrates how to subscribe to events by a template delegate.
 
 ```tab-Razor
 
@@ -136,7 +136,7 @@ The example below demonstrates how to subscribe to events by a template delegate
 
 ### Existing Instances
 
-You can reference an existing Kendo UI TimePicker instance via [`jQuery.data()`](http://api.jquery.com/jQuery.data/). Once a reference is established, use the [TimePicker API](../../../kendo-ui/api/javascript/ui/timepicker#methods) to control its behavior.
+To reference an existing Kendo UI TimePicker instance, use the [`jQuery.data()`](http://api.jquery.com/jQuery.data/) configuration option. Once a reference is established, use the [TimePicker API](../../../kendo-ui/api/javascript/ui/timepicker#methods) to control its behavior.
 
 ###### Example
 
@@ -149,8 +149,6 @@ You can reference an existing Kendo UI TimePicker instance via [`jQuery.data()`]
         </script>
 
 ## See Also
-
-Other articles on Telerik UI for ASP.NET MVC and on the TimePicker:
 
 * [ASP.NET MVC API Reference: TimePickerBuilder](/api/Kendo.Mvc.UI.Fluent/TimePickerBuilder)
 * [Overview of Telerik UI for ASP.NET MVC]({% slug overview_aspnetmvc %})

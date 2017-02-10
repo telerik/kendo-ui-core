@@ -8,11 +8,9 @@ position: 1
 
 # Telerik Extensions Migration Overview
 
-This article aims at demonstrating these differences and at providing a general overview of issues that might occur when migrating from Telerik Extensions for ASP.NET MVC to Telerik UI for ASP.NET MVC.
+This article provides a general overview of issues that might occur when migrating from Telerik Extensions for ASP.NET MVC to Telerik UI for ASP.NET MVC.
 
-Telerik UI for ASP.NET MVC differs in many ways from Telerik Extensions for ASP.NET MVC. Some of these differences are breaking changes.
-
-Because of the greater changes in terms of assembly names and namespaces, both Telerik Extensions for ASP.NET MVC and Telerik UI for ASP.NET MVC can be used in the same project, side-by-side. This enables you to migrate an application component by component, without the need to immediately remove all Telerik Extensions components.
+Telerik UI for ASP.NET MVC differs in many ways from Telerik Extensions for ASP.NET MVC. Some of these differences are breaking changes. Because of the greater changes in terms of assembly names and namespaces, both Telerik Extensions for ASP.NET MVC and Telerik UI for ASP.NET MVC can be used in the same project, side-by-side. This enables you to migrate an application component by component, without the need to immediately remove all Telerik Extensions components.
 
 Below are listed the major changes coming from Telerik UI for ASP.NET MVC. Each change marks a difference between Kendo UI and the Telerik Extensions for ASP.NET MVC. For each there is a quick summary of the change as well as a detailed description of the modifications.
 
@@ -106,26 +104,26 @@ even use the custom download builder tool to create a single customized JavaScri
 
 Within Telerik Extensions for ASP.NET MVC, you can subscribe to a client-side event handler in three ways.
 
-**Option 1** Use the name of the event handler.
+* **Option 1** Use the name of the event handler.
 
-###### Example
+    ###### Example
 
-        .OnSelect("onSelect")
-        <script>function onSelect() {}</script>
+            .OnSelect("onSelect")
+            <script>function onSelect() {}</script>
 
-**Option 2** Apply a server-side code block in the WebForms ViewEngine.
+* **Option 2** Apply a server-side code block in the WebForms ViewEngine.
 
-###### Example
+    ###### Example
 
-        .OnSelect(() => { %>
-            function() { }
-        <% });
+            .OnSelect(() => { %>
+                function() { }
+            <% });
 
-**Option 3** Use inline templates for the Razor ViewEngine.
+* **Option 3** Use inline templates for the Razor ViewEngine.
 
-###### Example
+    ###### Example
 
-        .OnSelect(@<text> function() {} </text>)
+            .OnSelect(@<text> function() {} </text>)
 
 With Telerik UI for ASP.NET MVC, the second approach&mdash;using the server-side code block within the WebForms ViewEngine&mdash;is no longer supported. The reason for this are the complications and limitations around the server-side code block because of the utilization of the `Response.Write` to add this JavaScript to the page. The third approach&mdash;using Razor&mdash;takes a string-based approach which removes these limitations. If the second approach is the one currently implemented, it is recommended to use approach number one for the migration.
 

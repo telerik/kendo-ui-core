@@ -24,7 +24,7 @@ By providing a DataSource to bind against for cart data, all parts of the applic
 
 ### Track the Total Price
 
-The example below demonstrates when the `getCart()` function creates a DataSource to represent the cart data and adds an aggregate for the totals.
+The following example demonstrates when the `getCart()` function creates a DataSource to represent the cart data and adds an aggregate for the totals.
 
 ###### Example
 
@@ -50,7 +50,7 @@ When an item changes, the `change` event is triggered, which calls a function th
 
 There is also an `aggregate` defined on the DataSource that sums up the values of the `Total` properties.
 
-The example below demonstrates how to define a convenience function on the cart that retrieves the value of the aggregate.
+The following example demonstrates how to define a convenience function on the cart that retrieves the value of the aggregate.
 
 ###### Example
 

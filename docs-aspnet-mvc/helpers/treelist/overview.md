@@ -16,122 +16,122 @@ The TreeList HtmlHelper extension is a server-side wrapper for the [Kendo UI Tre
 
 Below are listed the steps for you to follow when configuring the Kendo UI TreeList to do server binding to the Northwind database, the **Employees** table.
 
-**Step 1** Create a new ASP.NET MVC 4 application. If you have installed the [Telerik UI for ASP.NET MVC Visual Studio Extensions]({% slug overview_aspnetmvc %}#requirements), create a Telerik UI for ASP.NET MVC application. Name the application `KendoGridServerBinding`. If you decided not to use the Telerik UI for ASP.NET MVC Visual Studio Extensions, follow the steps from the [introductory article]({% slug overview_aspnetmvc %}) to add Telerik UI for ASP.NET MVC to the application.
+1. Create a new ASP.NET MVC 4 application. If you have installed the [Telerik UI for ASP.NET MVC Visual Studio Extensions]({% slug overview_aspnetmvc %}#requirements), create a Telerik UI for ASP.NET MVC application. Name the application `KendoGridServerBinding`. If you decided not to use the Telerik UI for ASP.NET MVC Visual Studio Extensions, follow the steps from the [introductory article]({% slug overview_aspnetmvc %}) to add Telerik UI for ASP.NET MVC to the application.
 
-**Step 2** Add a new `Entity Framework Data Model`. Right-click the `~/Models` folder in the solution explorer and pick **Add new item**. Choose **Data** > **ADO.NET Entity Data Model** in the **Add New Item** dialog. Name the model `Northwind.edmx` and click **Next**. This starts the **Entity Data Model Wizard**.
+1. Add a new `Entity Framework Data Model`. Right-click the `~/Models` folder in the solution explorer and pick **Add new item**. Choose **Data** > **ADO.NET Entity Data Model** in the **Add New Item** dialog. Name the model `Northwind.edmx` and click **Next**. This starts the **Entity Data Model Wizard**.
 
-**Figure 1. A new entity model**
+    **Figure 1. A new entity model**
 
-![New entity data model](/helpers/treelist/images/treelist-new-entity-data-model.png)
+    ![New entity data model](/helpers/treelist/images/treelist-new-entity-data-model.png)
 
-**Step 3**  Pick the **Generate from database** option and click **Next**. Configure a connection to the Northwind database. Click **Next**.
+1. Pick the **Generate from database** option and click **Next**. Configure a connection to the Northwind database. Click **Next**.
 
-**Figure 2. Choose the connection**
+    **Figure 2. Choose the connection**
 
-![Choose the connection](/helpers/treelist/images/treelist-entity-data-model.png)
+    ![Choose the connection](/helpers/treelist/images/treelist-entity-data-model.png)
 
-**Step 4** Choose the **Employees** table from the `Which database objects do you want to include in your model?`. Leave all other options as they are set by default. Click **Finish**.
+1. Choose the **Employees** table from the `Which database objects do you want to include in your model?`. Leave all other options as they are set by default. Click **Finish**.
 
-**Figure 3. Choose the Employees table**
+    **Figure 3. Choose the Employees table**
 
-![Choose the Employees table](/helpers/treelist/images/treelist-database-objects.png)
+    ![Choose the Employees table](/helpers/treelist/images/treelist-database-objects.png)
 
-**Step 5** Right-click the `~/Models` folder in the solution explorer and add a new `EmployeeViewModel` class.
+1. Right-click the `~/Models` folder in the solution explorer and add a new `EmployeeViewModel` class.
 
-###### Example
+    ###### Example
 
-          public class EmployeeViewModel
-          {
-              public int? EmployeeID { get; set; }
+              public class EmployeeViewModel
+              {
+                  public int? EmployeeID { get; set; }
 
-              public string FirstName { get; set; }
+                  public string FirstName { get; set; }
 
-              public string LastName { get; set; }
+                  public string LastName { get; set; }
 
-              public int? ReportsTo { get; set; }
+                  public int? ReportsTo { get; set; }
 
-              public string Address { get; set; }
+                  public string Address { get; set; }
 
-              public bool hasChildren { get; set; }
-          }
+                  public bool hasChildren { get; set; }
+              }
 
-**Step 6** Open `HomeController.cs` and create new `TreeList_Read` action method.
+1. Open `HomeController.cs` and create new `TreeList_Read` action method.
 
-###### Example
+    ###### Example
 
-        public JsonResult TreeList_Read([DataSourceRequest] DataSourceRequest request)
-        {
-            var northwind = new NortwindEntities();
+            public JsonResult TreeList_Read([DataSourceRequest] DataSourceRequest request)
+            {
+                var northwind = new NortwindEntities();
 
-            var result = northwind.Employees.ToTreeDataSourceResult(request,
-                employee => employee.EmployeeID,
-                employee => employee.ReportsTo,
-                employee => new EmployeeViewModel
-                {
-                    EmployeeID = employee.EmployeeID,
-                    ReportsTo = employee.ReportsTo,
-                    FirstName = employee.FirstName,
-                    LastName = employee.LastName,
-                    Address = employee.Address,
-                    hasChildren = employee.Employees1.Any()
-                }
-            );
+                var result = northwind.Employees.ToTreeDataSourceResult(request,
+                    employee => employee.EmployeeID,
+                    employee => employee.ReportsTo,
+                    employee => new EmployeeViewModel
+                    {
+                        EmployeeID = employee.EmployeeID,
+                        ReportsTo = employee.ReportsTo,
+                        FirstName = employee.FirstName,
+                        LastName = employee.LastName,
+                        Address = employee.Address,
+                        hasChildren = employee.Employees1.Any()
+                    }
+                );
 
-            return Json(result, JsonRequestBehavior.AllowGet);
-        }
+                return Json(result, JsonRequestBehavior.AllowGet);
+            }
 
-**Step 7** Add a Kendo UI TreeList to the `Index` view.
+1. Add a Kendo UI TreeList to the `Index` view.
 
-###### Example
+    ###### Example
 
-```tab-ASPX
+    ```tab-ASPX
 
-        <%:Html.Kendo().TreeList<KendoTreeListBinding.Models.EmployeeViewModel>()
-            .Name("treelist")
-            .Columns(columns =>
-                {
-                columns.Add().Field(e => e.FirstName).Width(220);
-                columns.Add().Field(e => e.LastName).Width(160);
-                columns.Add().Field(e => e.Address);
-                })
-            .Sortable()
-            .DataSource(dataSource => dataSource
-                .Read(read => read.Action("TreeList_Read", "Home"))
-                .Model(m => {
-                    m.Id(f => f.EmployeeID);
-                    m.ParentId(f => f.ReportsTo);
+            <%:Html.Kendo().TreeList<KendoTreeListBinding.Models.EmployeeViewModel>()
+                .Name("treelist")
+                .Columns(columns =>
+                    {
+                    columns.Add().Field(e => e.FirstName).Width(220);
+                    columns.Add().Field(e => e.LastName).Width(160);
+                    columns.Add().Field(e => e.Address);
                     })
-                )
-            .Height(540)
-        %>
-```
-```tab-Razor
+                .Sortable()
+                .DataSource(dataSource => dataSource
+                    .Read(read => read.Action("TreeList_Read", "Home"))
+                    .Model(m => {
+                        m.Id(f => f.EmployeeID);
+                        m.ParentId(f => f.ReportsTo);
+                        })
+                    )
+                .Height(540)
+            %>
+    ```
+    ```tab-Razor
 
-        @(Html.Kendo().TreeList<KendoTreeListBinding.Models.EmployeeViewModel>()
-            .Name("treelist")
-            .Columns(columns =>
-                {
-                columns.Add().Field(e => e.FirstName).Width(220);
-                columns.Add().Field(e => e.LastName).Width(160);
-                columns.Add().Field(e => e.Address);
-                })
-            .Sortable()
-            .DataSource(dataSource => dataSource
-                .Read(read => read.Action("TreeList_Read", "Home"))
-                .Model(m => {
-                    m.Id(f => f.EmployeeID);
-                    m.ParentId(f => f.ReportsTo);
+            @(Html.Kendo().TreeList<KendoTreeListBinding.Models.EmployeeViewModel>()
+                .Name("treelist")
+                .Columns(columns =>
+                    {
+                    columns.Add().Field(e => e.FirstName).Width(220);
+                    columns.Add().Field(e => e.LastName).Width(160);
+                    columns.Add().Field(e => e.Address);
                     })
-                )
-            .Height(540)
-        )
-```
+                .Sortable()
+                .DataSource(dataSource => dataSource
+                    .Read(read => read.Action("TreeList_Read", "Home"))
+                    .Model(m => {
+                        m.Id(f => f.EmployeeID);
+                        m.ParentId(f => f.ReportsTo);
+                        })
+                    )
+                .Height(540)
+            )
+    ```
 
-**Step 8** Build and run the application.
+1. Build and run the application.
 
-**Figure 4. The final result**
+    **Figure 4. The final result**
 
-![Final result](/helpers/treelist/images/treelist-bound.png)
+    ![Final result](/helpers/treelist/images/treelist-bound.png)
 
 ## Event Handling
 
@@ -139,7 +139,7 @@ You can subscribe to all TreeList [events](../../../kendo-ui/api/javascript/ui/t
 
 ### By Handler Name
 
-The examples below demonstrates how to subscribe to events by a handler name.
+The following example demonstrates how to subscribe to events by a handler name.
 
 ###### Example
 
@@ -214,7 +214,7 @@ The examples below demonstrates how to subscribe to events by a handler name.
 
 ### By Template Delegate
 
-The example below demonstrates how to subscribe to events by a template delegate.
+The following example demonstrates how to subscribe to events by a template delegate.
 
 ###### Example
 
@@ -256,7 +256,7 @@ The example below demonstrates how to subscribe to events by a template delegate
 
 ### Existing Instances
 
-You can reference an existing Kendo UI TreeList instance via [`jQuery.data()`](http://api.jquery.com/jQuery.data/). Once a reference is established, use the [TreeList API](../../../kendo-ui/api/javascript/ui/treelist#methods) to control its behavior.
+To reference an existing Kendo UI TreeList instance, use the [`jQuery.data()`](http://api.jquery.com/jQuery.data/) configuration option. Once a reference is established, use the [TreeList API](../../../kendo-ui/api/javascript/ui/treelist#methods) to control its behavior.
 
 ###### Example
 
@@ -286,8 +286,6 @@ You can reference an existing Kendo UI TreeList instance via [`jQuery.data()`](h
       </script>
 
 ## See Also
-
-Other articles on Telerik UI for ASP.NET MVC and on the TreeList:
 
 * [ASP.NET MVC API Reference: TreeListBuilder](/api/Kendo.Mvc.UI.Fluent/TreeListBuilder)
 * [How to Export Multiple TreeLists to Excel]({% slug howto_exportmultipletoexcel_treelistaspnetmvc %})

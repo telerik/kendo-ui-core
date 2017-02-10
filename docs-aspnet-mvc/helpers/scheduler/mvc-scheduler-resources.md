@@ -14,7 +14,7 @@ The Scheduler HtmlHelper extension supports assigning Scheduler events to a set 
 
 ### Single Resources
 
-The example below demonstrates how to add a Scheduler resource and bind it to local data.
+The following example demonstrates how to add a Scheduler resource and bind it to local data.
 
 ###### Example
 
@@ -98,8 +98,6 @@ The Scheduler HtmlHelper extension supports unlimited resource types. For exampl
     )
 
 ## See Also
-
-Other articles on Telerik UI for ASP.NET MVC and on the Scheduler:
 
 * [Overview of the Scheduler HtmlHelper]({% slug overview_schedulerhelper_aspnetmvc %})
 * [Ajax Binding of the Scheduler HtmlHelper]({% slug ajaxbinding_schedulerhelper_aspnetmvc %})
