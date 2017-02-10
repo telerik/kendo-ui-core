@@ -223,7 +223,7 @@ Below are listed the steps for you to follow when creating an ASP.NET Core web s
 
         ![Kendo UI resources](images/resources.png)
 
-    * Bower package installation&mdash;For more information on how to achieve this, refer to the [Kendo UI Professional Bower package installation](../kendo-ui/intro/installation/bower-install).
+    * Bower package installation&mdash;For more information on how to achieve this, refer to the [Kendo UI Professional Bower package installation](../../kendo-ui/intro/installation/bower-install).
 
 6. Register the Kendo UI styles and scripts in `~/Views/Shared/Layout.cshtml`.
 
