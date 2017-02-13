@@ -216,7 +216,7 @@ var __meta__ = { // jshint ignore:line
 
                     element.contents().filter(function() {
                         return (!$(this).hasClass("k-sprite") && !$(this).hasClass(ICON) && !$(this).hasClass("k-image"));
-                    }).each(function(idx, el){                        
+                    }).each(function(idx, el){
                         if (el.nodeType == 1 || el.nodeType == 3 && $.trim(el.nodeValue).length > 0) {
                             isEmpty = false;
                         }
@@ -1392,7 +1392,7 @@ var __meta__ = { // jshint ignore:line
                             lastHasFocus = true;
                         }
                     }
-                    
+
                     var isFirstTool = items.index(element) === items.not(".k-overflow-anchor").first().index();
                     if (e.shiftKey && isFirstTool) {
                         if (element.is("." + BUTTON_GROUP)) {
@@ -1409,7 +1409,7 @@ var __meta__ = { // jshint ignore:line
 
                     if (firstHasFocus) {
                         e.preventDefault();
-                        var prevFocusable = this._getPrevFocusable(this.wrapper);                  
+                        var prevFocusable = this._getPrevFocusable(this.wrapper);
                         if (prevFocusable) {
                             prevFocusable.focus();
                         }
@@ -1447,7 +1447,7 @@ var __meta__ = { // jshint ignore:line
                     return element;
                 }
 
-                var elementToFocus, prevElement, 
+                var elementToFocus, prevElement,
                     prevElements = element.prevAll();
                 prevElements.each(function(){
                     prevElement = $(this);
@@ -1462,7 +1462,7 @@ var __meta__ = { // jshint ignore:line
                 if (elementToFocus) {
                     return elementToFocus;
                 } else {
-                    return this._getPrevFocusable(element.parent());                    
+                    return this._getPrevFocusable(element.parent());
                 }
             },
 

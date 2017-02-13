@@ -72,7 +72,7 @@ var __meta__ = { // jshint ignore:line
             century: 3
         };
 
-    var Calendar = Widget.extend({      
+    var Calendar = Widget.extend({
         init: function(element, options) {
             var that = this, value, id;
 
@@ -90,7 +90,7 @@ var __meta__ = { // jshint ignore:line
             that._header();
 
             that._footer(that.footer);
-            
+
             id = element
                     .addClass("k-widget k-calendar " + (options.weekNumber ? " k-week-number" : ""))
                     .on(MOUSEENTER_WITH_NS + " " + MOUSELEAVE, CELLSELECTOR, mousetoggle)
@@ -337,7 +337,7 @@ var __meta__ = { // jshint ignore:line
                     disableDates: options.disableDates,
                     isWeekColumnVisible: options.weekNumber
                 }, that[currentView.name])));
-                
+
                 addClassToViewContainer(to, currentView.name);
                 makeUnselectable(to);
                 var replace = from && from.data("start") === to.data("start");
@@ -949,7 +949,7 @@ var __meta__ = { // jshint ignore:line
                 if (isWeekColumnVisible) {
                     html += '<th scope="col" class="k-alt"></th>';
                 }
-                
+
                 for (; idx < 7; idx++) {
                     html += '<th scope="col" title="' + names[idx] + '">' + shortNames[idx] + '</th>';
                 }
@@ -1014,7 +1014,7 @@ var __meta__ = { // jshint ignore:line
                         return {
                             weekNumber: weekInYear(date, date),
                             currentDate: date
-                        };          
+                        };
                     }
                 });
             },
@@ -1271,12 +1271,12 @@ var __meta__ = { // jshint ignore:line
             cellsPerRow = options.perRow || 4,
             weekNumber = options.weekNumber || weekNumberTemplate,
             content = options.content || cellTemplate,
-            empty = options.empty || emptyCellTemplate,      
+            empty = options.empty || emptyCellTemplate,
             html = options.html || '<table tabindex="0" role="grid" class="k-content k-meta-view" cellspacing="0"><tbody><tr role="row">';
             if(isWeekColumnVisible) {
                 html += weekNumber(weekNumberBuild(start));
             }
-            
+
 
         for(; idx < length; idx++) {
             if (idx > 0 && idx % cellsPerRow === 0) {

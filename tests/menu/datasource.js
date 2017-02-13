@@ -46,7 +46,7 @@
         });
 
         menu.element.find("li:first").empty();
-        
+
         var listItemContents = menu.element.html();
         var classAttributesCount = (listItemContents.match(/class/g) || []).length;
 
@@ -83,9 +83,9 @@
                 }]
             }]
         });
- 
+
         var subItem = menu.element.find(".myClass");
- 
+
         equal(subItem.length, 1);
     });
 
@@ -151,4 +151,4 @@
         ok(content.hasClass("k-group"));
         ok(content.hasClass("k-menu-group"));
     });
-})();   
+})();

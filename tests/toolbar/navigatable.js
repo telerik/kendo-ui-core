@@ -129,7 +129,7 @@
         toolbar.element.focus();
 
         equal(document.activeElement.id, "toolbar");
-    });    
+    });
 
     test("tab moves focus to the overflow popup anchor if the activeElement is last focusable", 1, function() {
         var toolbar = container.kendoToolBar({
@@ -241,6 +241,6 @@
         $("#bar.k-button").press(keys.TAB, true);
 
         ok(!getPrevFocusable.calls);
-    });            
+    });
 
 })();

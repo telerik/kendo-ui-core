@@ -135,7 +135,7 @@ test('right scrolling button scrolls to the right by delta when clicked', 1, fun
     tabstrip.tabGroup.scrollLeft(0);
     tabstrip.wrapper.children(".k-tabstrip-next").trigger("mousedown").trigger("mouseup");
     tabstrip.tabGroup.finish();
-    
+
     equal(tabstrip.tabGroup.scrollLeft(), tabstrip.options.scrollable.distance);
 });
 

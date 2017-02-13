@@ -1589,7 +1589,7 @@
         var validator = setup(container);
         validator.bind("validateInput", function(e) {
             ok(!e.valid);
-        });        
+        });
 
         validator.validateInput(container.find("#foo1").get(0));
     });
@@ -1602,7 +1602,7 @@
         input.value = "text";
         validator.bind("validateInput", function(e) {
             ok(e.valid);
-        });    
+        });
 
         validator.validateInput(input);
     });
@@ -1616,7 +1616,7 @@
             ok(true);
         });
         input.value = "text";
-        
+
         validator.validateInput(input);
         validator.validateInput(input2);
     });
@@ -1640,6 +1640,6 @@
         });
 
         validator.validate();
-    });                                               
+    });
 
 })();

@@ -9,11 +9,11 @@
         QUnit.fixture.html("<div kendo-mobile-application id='app'>" +
             "<kendo-mobile-split-view id='splitview'>" +
                 "<kendo-mobile-pane id='side-pane'>" +
-                    "<kendo-mobile-view id='side-home'>Side</kendo-mobile-view>" + 
+                    "<kendo-mobile-view id='side-home'>Side</kendo-mobile-view>" +
                 "<kendo-mobile-pane>" +
 
                 "<kendo-mobile-pane id='main-pane'>" +
-                    "<kendo-mobile-view id='main-home'>Main</kendo-mobile-view>" + 
+                    "<kendo-mobile-view id='main-home'>Main</kendo-mobile-view>" +
                 "<kendo-mobile-pane>" +
             "<kendo-mobile-split-view>" +
         "</div>");
@@ -28,11 +28,11 @@
         QUnit.fixture.html("<div kendo-mobile-application id='app'>" +
             "<kendo-mobile-split-view id='splitview' k-style=\"'vertical'\">" +
                 "<kendo-mobile-pane id='side-pane'>" +
-                    "<kendo-mobile-view id='side-home'>Side</kendo-mobile-view>" + 
+                    "<kendo-mobile-view id='side-home'>Side</kendo-mobile-view>" +
                 "<kendo-mobile-pane>" +
 
                 "<kendo-mobile-pane id='main-pane'>" +
-                    "<kendo-mobile-view id='main-home'>Main</kendo-mobile-view>" + 
+                    "<kendo-mobile-view id='main-home'>Main</kendo-mobile-view>" +
                 "<kendo-mobile-pane>" +
             "<kendo-mobile-split-view>" +
         "</div>");
@@ -47,11 +47,11 @@
         QUnit.fixture.html("<div kendo-mobile-application id='app'>" +
             "<kendo-mobile-split-view id='splitview' k-style=\"'vertical'\">" +
                 "<kendo-mobile-pane id='side-pane'>" +
-                    "<kendo-mobile-view id='side-home'>Side</kendo-mobile-view>" + 
+                    "<kendo-mobile-view id='side-home'>Side</kendo-mobile-view>" +
                 "</kendo-mobile-pane>" +
 
                 "<kendo-mobile-pane id='main-pane'>" +
-                    "<kendo-mobile-view id='main-home'>Main</kendo-mobile-view>" + 
+                    "<kendo-mobile-view id='main-home'>Main</kendo-mobile-view>" +
                 "</kendo-mobile-pane>" +
             "<kendo-mobile-split-view>" +
         "</div>");
@@ -62,7 +62,7 @@
 
         ok(sidePane.getKendoMobilePane());
         ok(mainPane.getKendoMobilePane());
-    });  
+    });
 
 }());
 

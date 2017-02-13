@@ -31,7 +31,7 @@ var __meta__ = { // jshint ignore:line
         //events
         VALIDATE = "validate",
         CHANGE = "change",
-        VALIDATE_INPUT = "validateInput",        
+        VALIDATE_INPUT = "validateInput",
         proxy = $.proxy,
         patternMatcher = function(value, pattern) {
             if (typeof pattern === "string") {

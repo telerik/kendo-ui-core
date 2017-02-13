@@ -1400,7 +1400,7 @@ var __meta__ = { // jshint ignore:line
 
             var wrapper = item.children(".k-group,.k-content");
             var dataItem = this.dataItem(item);
-            
+
             if (!wrapper.length && ((that.options.loadOnDemand && dataItem && dataItem.hasChildren) ||
              this._hasChildItems(item) || item.content || item.contentUrl)) {
                 wrapper =  that._addGroupElement(item);
@@ -1428,7 +1428,7 @@ var __meta__ = { // jshint ignore:line
                     return prevent;
                 }
             }
-            
+
             if (contents.length) {
                 var visibility = contents.is(VISIBLE);
 
@@ -1442,7 +1442,7 @@ var __meta__ = { // jshint ignore:line
         _hasChildItems: function (item) {
             return (item.items && item.items.length > 0) || item.hasChildren;
         },
-        
+
         _toggleItem: function (element, isVisible, expanded) {
             var that = this,
                 childGroup = element.find(GROUPS),
