@@ -186,12 +186,12 @@
     test("closing dialog from close handler prevents link default behavior", 1, function() {
         var dialog = createDialog();
         var closeElemenet = dialog.wrapper.find(".k-dialog-close");
-        closeElemenet.on("click", function(e){ 
-            ok(e.isDefaultPrevented()); 
+        closeElemenet.on("click", function(e){
+            ok(e.isDefaultPrevented());
         });
 
         closeElemenet.click();
-    });    
+    });
 
     test("open sets options.visible to true", function() {
         var dialog = createDialog({ visible: false });
@@ -278,7 +278,7 @@
             }]
         });
 
-        dialog.wrapper.find(".k-button").click();
+        dialog.wrapper.find(".k-dialog-buttongroup .k-button").click();
         ok(!dialog.options.visible);
         ok(!dialog.wrapper.is(":visible"));
     });
@@ -293,7 +293,7 @@
             }]
         });
 
-        dialog.wrapper.find(".k-button").click();
+        dialog.wrapper.find(".k-dialog-buttongroup .k-button").click();
         ok(dialog.options.visible);
         ok(dialog.wrapper.is(":visible"));
     });
