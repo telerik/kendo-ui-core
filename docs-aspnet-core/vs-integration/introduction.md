@@ -26,7 +26,7 @@ To access the Visual Studio Extensions, use the **Telerik | UI for ASP.NET Core*
 
 ![Create Menu](images/create-project-core.png)
 
-To add the project template, select it from the drop-down list of options.  
+To add the project template, select it from the drop-down list of options.
 
 **Figure 2. The added project template**
 

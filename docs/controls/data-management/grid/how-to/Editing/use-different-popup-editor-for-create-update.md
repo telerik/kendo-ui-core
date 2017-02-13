@@ -12,9 +12,9 @@ The following example demonstrates how to use different popup editors in a Kendo
 ###### Example
 
 ```html
-     <script src="http://demos.kendoui.com/content/shared/js/products.js"></script>
+    <script src="http://demos.kendoui.com/content/shared/js/products.js"></script>
     <div id="grid"></div>
-    <script>  
+    <script>
       $(document).ready(function(){
         var dataSource = new kendo.data.DataSource({
           pageSize: 5,
@@ -38,7 +38,7 @@ The following example demonstrates how to use different popup editors in a Kendo
             template: $("#template").html()
           },
           dataSource: dataSource,
-          pageable: true,      
+          pageable: true,
           edit:function(e){
             $('#categories').kendoDropDownList({
               optionLabel: "Select category...",
@@ -81,8 +81,8 @@ The following example demonstrates how to use different popup editors in a Kendo
 
         });
       })
-    </script>  
-    <script type="text/x-kendo-template" id="template">    
+    </script>
+    <script type="text/x-kendo-template" id="template">
     #if(data.isNew()) {#
         #var createTemp = kendo.template($("\#createTemplate").html());#
         #=createTemp(data)#
@@ -91,10 +91,10 @@ The following example demonstrates how to use different popup editors in a Kendo
         #=createTemp(data)#
     #}#
     </script>
-    <script type="text/x-kendo-template" id="createTemplate">    
+    <script type="text/x-kendo-template" id="createTemplate">
     <input id="categories" style="margin-left:10px">
     </script>
-    <script type="text/x-kendo-template" id="editTemplate">    
+    <script type="text/x-kendo-template" id="editTemplate">
     <input id="products" style="margin-left:10px">
     </script>
     <script>

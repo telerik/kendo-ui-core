@@ -62,7 +62,7 @@ This data is bound to an external `DataSource`, which is pulled and bound to the
                   lastMonth: kendo.toString(response.LastMonth, "c")
               };
               return [item];
-          }  
+          }
         },
         change: function (data) {
             console.log(data.items[0]);

@@ -42,7 +42,7 @@ Below are listed the steps for you to follow when configuring the Kendo UI Pivot
 
 ###### Example
 
-        <c:url value="http://demos.telerik.com/olap/msmdpump.dll" var="transportReadUrl" />  
+        <c:url value="http://demos.telerik.com/olap/msmdpump.dll" var="transportReadUrl" />
 
 **Step 5** Add a `pivotgrid` tag.
 
@@ -50,11 +50,11 @@ Below are listed the steps for you to follow when configuring the Kendo UI Pivot
 
         <kendo:pivotGrid name="pivotgrid">
     		<kendo:pivotDataSource type="xmla">
-    			<kendo:pivotDataSource-columns>				
+    			<kendo:pivotDataSource-columns>
     				<kendo:pivotDataSource-column name="[Date].[Calendar]" expand="true"/>
     				<kendo:pivotDataSource-column name="[Geography].[City]"/>
     			</kendo:pivotDataSource-columns>
-    			<kendo:pivotDataSource-rows>				
+    			<kendo:pivotDataSource-rows>
     				<kendo:pivotDataSource-row name="[Product].[Product]"/>
     			</kendo:pivotDataSource-rows>
     			<kendo:pivotDataSource-measures>
@@ -64,9 +64,9 @@ Below are listed the steps for you to follow when configuring the Kendo UI Pivot
     			</kendo:pivotDataSource-schema>
     			<kendo:pivotDataSource-transport>
     				<kendo:pivotDataSource-transport-connection catalog="Adventure Works DW 2008R2" cube="Adventure Works"/>
-    				<kendo:pivotDataSource-transport-discover url="${transportReadUrl}" dataType="text" contentType="text/xml" type="POST">					
+    				<kendo:pivotDataSource-transport-discover url="${transportReadUrl}" dataType="text" contentType="text/xml" type="POST">
     				</kendo:pivotDataSource-transport-discover>
-    				<kendo:pivotDataSource-transport-read url="${transportReadUrl}" dataType="text" contentType="text/xml" type="POST">					
+    				<kendo:pivotDataSource-transport-read url="${transportReadUrl}" dataType="text" contentType="text/xml" type="POST">
     				</kendo:pivotDataSource-transport-read>
     			</kendo:pivotDataSource-transport>
     		</kendo:pivotDataSource>
@@ -86,11 +86,11 @@ You can subscribe to all [events exposed by Kendo UI PivotGrid](/api/javascript/
 
         <kendo:pivotGrid name="pivotgrid" dataBound="pivotgrid_dataBound" expandMember="pivotgrid_expandMember" collapseMember="pivotgrid_collapseMember">
     		<kendo:pivotDataSource type="xmla">
-    			<kendo:pivotDataSource-columns>				
+    			<kendo:pivotDataSource-columns>
     				<kendo:pivotDataSource-column name="[Date].[Calendar]" expand="true"/>
     				<kendo:pivotDataSource-column name="[Geography].[City]"/>
     			</kendo:pivotDataSource-columns>
-    			<kendo:pivotDataSource-rows>				
+    			<kendo:pivotDataSource-rows>
     				<kendo:pivotDataSource-row name="[Product].[Product]"/>
     			</kendo:pivotDataSource-rows>
     			<kendo:pivotDataSource-measures>
@@ -100,9 +100,9 @@ You can subscribe to all [events exposed by Kendo UI PivotGrid](/api/javascript/
     			</kendo:pivotDataSource-schema>
     			<kendo:pivotDataSource-transport>
     				<kendo:pivotDataSource-transport-connection catalog="Adventure Works DW 2008R2" cube="Adventure Works"/>
-    				<kendo:pivotDataSource-transport-discover url="${transportReadUrl}" dataType="text" contentType="text/xml" type="POST">					
+    				<kendo:pivotDataSource-transport-discover url="${transportReadUrl}" dataType="text" contentType="text/xml" type="POST">
     				</kendo:pivotDataSource-transport-discover>
-    				<kendo:pivotDataSource-transport-read url="${transportReadUrl}" dataType="text" contentType="text/xml" type="POST">					
+    				<kendo:pivotDataSource-transport-read url="${transportReadUrl}" dataType="text" contentType="text/xml" type="POST">
     				</kendo:pivotDataSource-transport-read>
     			</kendo:pivotDataSource-transport>
     		</kendo:pivotDataSource>

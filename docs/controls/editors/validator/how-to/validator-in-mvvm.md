@@ -77,7 +77,7 @@ The example below demonstrates how to fully integrate the Kendo UI Validator in 
   </script>
 
 
-  <style>        
+  <style>
       .demo-section > div {
           float: left;
           margin-bottom: 2em;

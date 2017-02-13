@@ -285,7 +285,7 @@ The title of the tool that aligns the cell text.
     <textarea id="editor"></textarea>
     <script>
     $("#editor").kendoEditor({
-        
+
       messages: {
         alignCenter: "Align Center"
       }

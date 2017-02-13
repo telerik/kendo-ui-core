@@ -33,7 +33,7 @@ The following example below also demonstrates how to create variables to hold va
 
 In this example, notice:
 
-1. The entire thing is wrapped in a self-executing anonymous function, so as to protect the global namespace. jQuery is passed in as a reference to make sure `$` is jQuery.   
+1. The entire thing is wrapped in a self-executing anonymous function, so as to protect the global namespace. jQuery is passed in as a reference to make sure `$` is jQuery.
 2. The widget itself extends the base widget class so it is given the uppercase name of `MyWidget`&mdash;or whatever the name of your widget is for that matter. This is generally considered a best practice when naming classes in JavaScript as opposed to regular objects.
 
 ## Add Initialization Methods
@@ -153,7 +153,7 @@ You can also create a DataSource just by specifying its configuration values inl
 
 This example specifies a DataSource configuration, but does not actually create an instance of one. The `kendo.data.DataSource.create(that.options.dataSource)` takes this configuration object and returns a new DataSource instance with the specified configuration.
 
-> **Important**  
+> **Important**
 >
 > To replicate the Kendo UI MultiSelect data binding behavior, assign the binding explicitly: `kendo.data.binders.widget.multiSelectCustom = kendo.data.binders.widget.multiselect;`.
 

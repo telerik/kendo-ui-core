@@ -15,7 +15,7 @@ Represents the Kendo UI Confirm.
 Defines the text of the labels that are shown within the confirm dialog. Used primarily for localization.
 
 #### Example
-    
+
     <div id="confirm"></div>
     <script>
     $("#confirm").kendoConfirm({

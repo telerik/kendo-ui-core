@@ -13,7 +13,7 @@ The Kendo UI tag helper help you configure the Kendo UI widgets by using the tag
 
 ## Getting Started
 
-Tag helpers can be added and further configured through predefined strongly typed attributes, and enable you to handle the events of the widgets.  
+Tag helpers can be added and further configured through predefined strongly typed attributes, and enable you to handle the events of the widgets.
 
 ### Adding Tag Helpers
 

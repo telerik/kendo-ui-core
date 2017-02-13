@@ -36,7 +36,7 @@ The following example demonstrates how to prevent editing for a record based on 
               }}
           },
           pageSize: 20
-        });  
+        });
         var grid = $("#grid").kendoGrid({
           dataSource: dataSource1,
           pageable: true,

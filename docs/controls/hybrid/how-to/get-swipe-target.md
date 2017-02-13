@@ -1,5 +1,5 @@
 ---
-title: Get the Swipe Target  
+title: Get the Swipe Target
 page_title: Get the Swipe Target | Kendo UI Hybrid Components
 description: "Learn how to get the reference of the swiped element in touchStart and then use it in the swipe handler."
 slug: howto_gettheswipetarget_hybridui

@@ -7,7 +7,7 @@ slug: howto_integrateresponsivepanelwithmenuinangularjs_responsivepanel
 
 # Integrate ResponsivePanels with Menus in AngularJS
 
-When working in AngularJS applications, your project might require you to implement a Kendo UI Menu widget in a Kendo UI ResponsivePanel.  
+When working in AngularJS applications, your project might require you to implement a Kendo UI Menu widget in a Kendo UI ResponsivePanel.
 
 The following example demonstrates how to achieve this behavior.
 
@@ -15,7 +15,7 @@ The following example demonstrates how to achieve this behavior.
 
 ```html
 <div id="example" ng-app="KendoDemos">
-      <div class="demo-section k-content" ng-controller="MyCtrl">    
+      <div class="demo-section k-content" ng-controller="MyCtrl">
         <button class="k-rpanel-toggle"><i class="k-icon k-i-menu"></i></button>
 
         <div kendo-responsive-panel style="overflow:visible">

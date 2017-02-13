@@ -130,7 +130,7 @@ An `img` tag should be placed inside the **Button** content. The image should ha
                 ->imageUrl('/images/myIcon.gif')
                 ->content('<img alt="image" class="k-image" />');
 
-    echo $imageButton->render();    
+    echo $imageButton->render();
 
 ### Buttons without Text
 

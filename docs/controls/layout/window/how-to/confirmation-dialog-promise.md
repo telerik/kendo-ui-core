@@ -13,7 +13,7 @@ The example below demonstrates how to create a confirmation dialog in a Kendo UI
 
 ```html
     <script id="confirmationTemplate" type="text/x-kendo-template">
-    <div class="popupMessage"></div>            
+    <div class="popupMessage"></div>
       </br>
     <hr/>
     <div class="dialog_buttons">

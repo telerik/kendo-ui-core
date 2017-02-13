@@ -50,7 +50,7 @@ If set to `false`, the user will be prevented from seeking the video forward.
         forwardSeek: true,
         media: { title: "Digital Transformation: A New Way of Thinking", source: "https://www.youtube.com/watch?v=gNlya720gbk" }
     });
-    </script>    
+    </script>
 
 ### fullScreen `Boolean` *(default: false)*
 
@@ -115,7 +115,7 @@ Specifies the title of the media that will be played.
     $("#mediaplayer").kendoMediaPlayer({
         media: { title: "Digital Transformation: A New Way of Thinking", source: "https://www.youtube.com/watch?v=gNlya720gbk" }
     });
-    </script>      
+    </script>
 
 ### messages `Object`
 
@@ -321,7 +321,7 @@ Gets a value indicating whether the media is currently playing.
     var mediaPlayer = $("#mediaplayer").data("kendoMediaPlayer");
     // check if the video is playing
     mediaPlayer.isPlaying();
-    </script>     
+    </script>
 
 ### pause
 

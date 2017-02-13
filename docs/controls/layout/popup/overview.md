@@ -95,7 +95,7 @@ To align the Popup to a specific element, use the `anchor` option. The Popup ope
       });
     </script>
 
-### Append to Elements  
+### Append to Elements
 
 To specify the element to which the Popup must be appended, use the `appendTo` configuration option. By default, the `document.body` option is used.
 

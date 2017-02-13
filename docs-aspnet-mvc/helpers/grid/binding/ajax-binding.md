@@ -150,7 +150,7 @@ To download the Visual Studio Project, refer to [this GitHub repository](https:/
 
 The `ToDataSourceResult` method uses the `DataSourceRequest` parameter and LINQ expressions to page, sort, filter, and group your data. The JSON response of the action method will contain only a single page of data and the Grid will be bound to that data.
 
-> **Important**  
+> **Important**
 >
 > If your data is `IQueryable<T>` returned by a LINQ-enabled provider&Mdash;Entity Framework, LINQ to SQL, Telerik OpenAccess, NHibernate or other&mdash;the LINQ expressions, created by the `ToDataSourceResult` method, are converted to SQL and executed by the database server.
 

@@ -19,7 +19,7 @@ The following example demonstrates how to define the Button by using the Button 
 
 ## Configuration
 
-The Button tag helper configuration options are passed as attributes of the tag. 
+The Button tag helper configuration options are passed as attributes of the tag.
 
 ###### Example
 

@@ -23,10 +23,10 @@ The following example demonstrates how to add a new row when the user navigates 
       var dataSource = new kendo.data.DataSource({
         //data: data,
         transport: {
-          read: function(e) {                                
+          read: function(e) {
             e.success(data);
           },
-          update: function(e) {                                
+          update: function(e) {
             e.success();
           },
           create: function(e) {
@@ -49,16 +49,16 @@ The following example demonstrates how to add a new row when the user navigates 
       });
 
       var grid= $("#grid").kendoGrid({
-        dataSource: dataSource,  
-        scrollable: false,   
+        dataSource: dataSource,
+        scrollable: false,
         navigatable: true,
         editable : {
           createAt : "bottom"
-        },      
+        },
         navigatable: true,
         toolbar:  ["save","cancel", "create"],
-        columns: ["Id", "Name", "Position", {field:"ContractDate",format:"{0:d}"}]            
-      }).data("kendoGrid");     
+        columns: ["Id", "Name", "Position", {field:"ContractDate",format:"{0:d}"}]
+      }).data("kendoGrid");
 
       grid.tbody.on('keydown',function(e){
         if($(e.target).closest('td').is(':last-child') && $(e.target).closest('tr').is(':last-child')){

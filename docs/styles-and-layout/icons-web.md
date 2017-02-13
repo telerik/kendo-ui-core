@@ -19,7 +19,7 @@ The following example demonstrates how to achieve this behavior.
 
 ```html
     <span class="k-icon k-i-copy"></span>
-```   
+```
 
 The following example demonstrates how to add a font icon to a Kendo UI Button.
 
@@ -29,7 +29,7 @@ The following example demonstrates how to add a font icon to a Kendo UI Button.
     <a class="k-button" href="#">
         <span class="k-icon k-i-copy"></span> Copy
     </a>
-```  
+```
 
 ## List of Font Icons
 

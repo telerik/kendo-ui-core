@@ -18,14 +18,14 @@ You can create new Telerik UI for ASP.NET Core applications by using the **Creat
 
 To start the **Create New Project Wizard**, follow either of the approaches below.
 
-**Approach 1**   
+**Approach 1**
 
-1. Go to the Telerik menu.   
+1. Go to the Telerik menu.
 2. Click **Telerik** > **UI for ASP.NET Core** > **Create New Telerik Project**.
 
 **Approach 2**
 
-1. Click **File** > **New** > **Project**.     
+1. Click **File** > **New** > **Project**.
 2. Navigate to the Telerik ASP.NET Core MVC project templates under **Telerik** > **Web**.
 
 For convenience, the same project templates are located under the **Visual C#** > **Web** and **Visual C#** > **.NET Core** nodes.
@@ -47,13 +47,13 @@ You can modify the project settings by configuring the options on the **Create N
 
 After configuring the project settings, click **Finish** to start creating the new ASP.NET Core application.
 
-As a result, the wizard:  
+As a result, the wizard:
 
-* Creates a new ASP.NET Core application.  
-* Copies all Kendo UI scripts.   
-* Copies all Kendo UI content files.   
-* Copies all Kendo UI editor templates.    
-* Adds a package reference to the `Telerik.UI.for.AspNet.Core` NuGet package.   
+* Creates a new ASP.NET Core application.
+* Copies all Kendo UI scripts.
+* Copies all Kendo UI content files.
+* Copies all Kendo UI editor templates.
+* Adds a package reference to the `Telerik.UI.for.AspNet.Core` NuGet package.
 
 ## See Also
 

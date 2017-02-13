@@ -15,7 +15,7 @@ Represents the Kendo UI Prompt.
 Defines the text of the labels that are shown within the prompt dialog. Used primarily for localization.
 
 #### Example
-    
+
     <div id="prompt"></div>
     <script>
     $("#prompt").kendoPrompt({
@@ -70,8 +70,8 @@ The title of the Cancel button.
     <div id="prompt"></div>
     <script>
     $("#prompt").kendoPrompt({
-    content: "Prompt text", 
-    value: "Default input text", 
+    content: "Prompt text",
+    value: "Default input text",
     messages:{
       okText: "OK"
     }

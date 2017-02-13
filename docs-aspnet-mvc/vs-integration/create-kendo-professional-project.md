@@ -18,14 +18,14 @@ New Telerik Kendo UI Professional applications are created by using the **Create
 
 To start the **Create New Project Wizard**, follow either of the approaches below.
 
-**Approach 1**  
+**Approach 1**
 
-1. Go to the Telerik menu.   
+1. Go to the Telerik menu.
 2. Click **Telerik** > **Kendo UI Professional** > **Create New Kendo UI Project** .
 
-**Approach 2**   
+**Approach 2**
 
-1. Click **File** > **New** > **Project**.     
+1. Click **File** > **New** > **Project**.
 2. Navigate to the Kendo UI ASP.NET MVC 5 project templates under **Telerik** > **Web**.
 
 The wizard detects all the installed versions of UI for ASP.NET MVC and lists them in the **Version** combobox. This enables you to select a version you want to apply to your project.
@@ -45,7 +45,7 @@ The **Create New Project** page enables you to modify the project settings by co
 
 After configuring the project settings, click **Finish** to start the creation of the new Kendo UI Professional application.
 
-As a result, the wizard:  
+As a result, the wizard:
 * Creates a new ASP.NET MVC application.
 * Copies all Kendo UI scripts.
 * Copies all Kendo UI content files.

@@ -16,7 +16,7 @@ The end cap configuration or type name.
 
     <div id="diagram"></div>
     <script>
-      $("#diagram").kendoDiagram({ 
+      $("#diagram").kendoDiagram({
         shapes: [{
           visual: function() {
             var group = new kendo.dataviz.diagram.Group();
@@ -30,7 +30,7 @@ The end cap configuration or type name.
             return group;
           }
         }]
-      });       
+      });
     </script>
 
 ### endCap.fill `String|Object`
@@ -144,7 +144,7 @@ The start cap configuration or type name.
 
     <div id="diagram"></div>
     <script>
-      $("#diagram").kendoDiagram({ 
+      $("#diagram").kendoDiagram({
         shapes: [{
           x: 10,
           y: 10,
@@ -160,7 +160,7 @@ The start cap configuration or type name.
             return group;
           }
         }]
-      });       
+      });
     </script>
 
 ### startCap.fill `String|Object`

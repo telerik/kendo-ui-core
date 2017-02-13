@@ -10,7 +10,7 @@ position: 6
 
 Kendo UI exposes methods which convert the specified string to a [`Number`](https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Number) object using the culture's specific settings.
 
-## Settings 
+## Settings
 
 ### Parse As Whole Number
 

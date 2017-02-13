@@ -20,7 +20,7 @@ Kendo UI maintains 2 Bower packages:
 All official releases, service packs, and internal builds are uploaded to both of them.
 
 > **Important**
->  
+>
 > The Kendo UI Professional Bower package is available only for commercial license holders. For more information, refer to the [list of the Kendo UI components and their bundle support]({% slug bundle_supportfor_kendoui_components %}).
 
 ## Installation
@@ -61,13 +61,13 @@ You can also add the package to the `bower.json` file, as the following example 
 }
 ```
 
-> **Important**  
+> **Important**
 >
 > During the installation of the Bower package, you might be requested to confirm your credentials more than once. For further information on how to store your username and password, refer to the following [section on credentials](#credentials).
 
 ## Credentials
 
-To avoid being asked multiple times to provide your credentials while installing the Kendo UI Bower packages, you can preserve them for a future reference.  
+To avoid being asked multiple times to provide your credentials while installing the Kendo UI Bower packages, you can preserve them for a future reference.
 
 ### Choose Storage Options
 
@@ -77,7 +77,7 @@ To avoid being asked multiple times to provide your credentials while installing
 
 ### Store on Windows
 
-> **Important**  
+> **Important**
 >
 > Caching your credentials is required if you use the Kendo UI Bower package in an ASP.NET vNext project.
 
@@ -142,7 +142,7 @@ The cause of this issue is that the underlying Git installation is missing the c
 
 Follow the steps in [this help article](http://blogs.msdn.com/b/phkelley/archive/2014/01/20/adding-a-corporate-or-self-signed-certificate-authority-to-git-exe-s-store.aspx).
 
-> **Important**  
+> **Important**
 > * The 1.9.5 Git build does not work with the Bower package.
 > * If you need to use the `@` symbol in the URL for accessing the Kendo UI Bower repository because of network restrictions or admin rules, for example, make sure you encode it as `https://firstname.lasname**%40**domain.com@bower.telerik.com/bower-kendo-ui.git`.
 

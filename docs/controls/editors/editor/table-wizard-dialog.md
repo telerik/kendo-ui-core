@@ -14,14 +14,14 @@ As of the Kendo UI R3 2016 release and in addition to the **Insert Table** tool,
 
 ## Getting Started
 
-### Insert Tables  
+### Insert Tables
 
 To insert a new table by using the **Table Wizard** dialog:
 
-1. Open the **Insert Table** tool.  
-1. To open the dialog, click the **Table Wizard** button.  
-1. Configure the table that is to be inserted.   
-1. Click the **OK** button.  
+1. Open the **Insert Table** tool.
+1. To open the dialog, click the **Table Wizard** button.
+1. Configure the table that is to be inserted.
+1. Click the **OK** button.
 
 ![](/controls/editors/editor/table-wizard-open.png)
 
@@ -29,8 +29,8 @@ To insert a new table by using the **Table Wizard** dialog:
 
 To modify an existing table or a table cell:
 
-1. Select the table or the table cell to edit.  
-1. Click the **Table Wizard** tool in the toolbar.  
+1. Select the table or the table cell to edit.
+1. Click the **Table Wizard** tool in the toolbar.
 
 ![](/controls/editors/editor/table-wizard-edit.png)
 

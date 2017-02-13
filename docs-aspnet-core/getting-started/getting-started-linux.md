@@ -11,7 +11,7 @@ position: 2
 
 This article demonstrates how to configure an ASP.NET Core project that enables you to use Telerik UI for ASP.NET MVC on Linux.
 
-> **Important**  
+> **Important**
 >
 > The following steps are tested on Ubuntu 14.04 and 16.04. and on MacOS X El Capitan 10.11.6.
 
@@ -75,8 +75,8 @@ Below are listed the steps for you to follow when creating an ASP.NET Core web s
                `---------´   |   marvellous ASP.NET 5   |
                 ( _´U`_ )    |        generator!        |
                 /___A___\    '--------------------------'
-                 |  ~  |     
-               __'.___.'__   
+                 |  ~  |
+               __'.___.'__
              ´   `  |° ´ Y `
 
             ? What type of application do you want to create?
@@ -177,7 +177,7 @@ Below are listed the steps for you to follow when creating an ASP.NET Core web s
             </telerik.com>
           </packageSourceCredentials>
         </configuration>
-        ```   
+        ```
 
 4. Open `Startup.cs` by using a text editor (IDE) and update it in the way demonstrated in the following examples.
 

@@ -50,7 +50,7 @@ The example below demonstrates how to show Kendo UI Tooltip for Kendo UI Grid co
               style: 'white-space: nowrap '
             }  }],
           editable: "incell"
-        }).data("kendoGrid");  
+        }).data("kendoGrid");
 
         $("#grid").kendoTooltip({
           filter: "td:nth-child(2)", //this filter selects the second column's cells

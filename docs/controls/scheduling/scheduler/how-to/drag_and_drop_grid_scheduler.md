@@ -189,7 +189,7 @@ $(function() {
                 end: new Date("2013/6/13 13:30")
             },
             {
-                taskID: 5,  
+                taskID: 5,
                 ownerId: 2,
                 title: "Now You See Me",
                 image: "../../content/web/scheduler/now-you-see-me.jpg",
@@ -206,7 +206,7 @@ $(function() {
                 start: new Date("2013/6/13 19:00"),
                 end: new Date("2013/6/13 20:30")
             },
-            {   
+            {
                 taskID: 7,
                 ownerId: 3,
                 title: "The Internship",

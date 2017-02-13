@@ -28,7 +28,7 @@ For an online accessible OLAP service for test purposes, use `http://demos.teler
 
 ## Enable Cross-Domain Access
 
-> **Important**  
+> **Important**
 > This step is not required if the cube is not intended to be requested from different domains.
 
 For detailed information on Cross-Origin Resource Sharing (CORS), follow [this link](https://developer.mozilla.org/en-US/docs/Web/HTTP/Access_control_CORS).

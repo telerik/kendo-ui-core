@@ -97,7 +97,7 @@ To ensure the best performance of your project, make sure that you:
 * Exporting a zoomed in or zoomed out page to PDF is not supported.
 * [Quirks mode](http://www.quirksmode.org/css/quirksmode.html) is not supported.
 
-    > **Important**  
+    > **Important**
     >
     > Always specify a [DOCTYPE](http://www.sitepoint.com/web-foundations/doctypes/). Recommended DOCTYPEs include `HTML5`, `XHTML 1.1`, `XHTML 1.0 Strict` and `HTML4 Strict`. The `HTML4 Transitional` DOCTYPE fires the Quirks mode and should not be used. `XHTML 1.0 Transitional` works well in most cases, but may cause issues with the vertical positioning of icons. The correct syntax for [all DOCTYPEs](http://www.w3.org/QA/2002/04/valid-dtd-list.html) is provided on the [W3C website](http://www.w3.org/).
 

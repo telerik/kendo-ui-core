@@ -7,7 +7,7 @@ slug: howto_windowasslidingpane_window
 
 # Use Windows as Sliding Panes
 
-You can configure the Kendo UI Window so it acquires the visual effect of a sliding UI component.  
+You can configure the Kendo UI Window so it acquires the visual effect of a sliding UI component.
 
 The following example demonstrates how to make the Window behave as a sliding pane.
 

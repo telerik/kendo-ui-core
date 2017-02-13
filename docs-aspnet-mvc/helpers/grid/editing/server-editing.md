@@ -210,7 +210,7 @@ Below are listed the steps for you to follow when configuring the Kendo UI Grid 
                 return RedirectToAction("Index", routeValues);
             }
 
-> **Important**  
+> **Important**
 >
 > The Kendo UI Grid for ASP.NET MVC uses `form` elements internally when the server editing is enabled. This means that you are not able to place the widget in another `form` element on the page, because the nesting of forms is not a standard-compliant characteristic.
 

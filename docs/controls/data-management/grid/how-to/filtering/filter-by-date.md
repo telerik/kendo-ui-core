@@ -51,7 +51,7 @@ To create the helper field, follow the steps below:
                 event.EventDate = kendo.toString(event.EventDateTime, 'yyyy/MM/dd');
                 events.push(event);
               }
-              return events;            	
+              return events;
             },
             model: {
               id: "EventID",
@@ -135,7 +135,7 @@ To achieve the filter change, follow the steps below:
               fields: {
                 date: { type: "date" }
               }
-            }  
+            }
           },
           data: [ { date: new Date() }, { date: new Date() } ]
         }

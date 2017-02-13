@@ -15,7 +15,7 @@ Represents the Kendo UI Alert.
 Defines the text of the labels that are shown within the alert dialog. Used primarily for localization.
 
 #### Example
-    
+
     <div id="alert"></div>
     <script>
     $("#alert").kendoAlert({
