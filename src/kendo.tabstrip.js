@@ -162,7 +162,7 @@ var __meta__ = { // jshint ignore:line
     }
 
     function scrollButtonHtml(buttonClass, iconClass) {
-        return "<span class='k-button k-button-icon k-button-bare k-tabstrip-" + buttonClass + "' unselectable='on'><span class='k-icon " + iconClass + "'></span></span>";
+        return "<span class='k-button k-button-icon k-bare k-tabstrip-" + buttonClass + "' unselectable='on'><span class='k-icon " + iconClass + "'></span></span>";
     }
 
     var TabStrip = Widget.extend({

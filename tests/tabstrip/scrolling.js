@@ -114,7 +114,7 @@ test('scrolling CSS class is not applied to TabStrip if not needed and tabPositi
 test('scrolling buttons are rendered if tabs do not fit', 3, function () {
     createTabStrip();
 
-    var buttons = tabstrip.wrapper.children(".k-button.k-button-icon.k-button-bare");
+    var buttons = tabstrip.wrapper.children(".k-button.k-button-icon.k-bare");
 
     equal(buttons.length, 2);
     ok(buttons.eq(0).is(".k-tabstrip-prev"));
@@ -124,7 +124,7 @@ test('scrolling buttons are rendered if tabs do not fit', 3, function () {
 test('scrolling buttons are not rendered if tabs fit', 1, function () {
     createNonScrollableTabStrip();
 
-    var buttons = tabstrip.wrapper.children(".k-button.k-button-icon.k-button-bare");
+    var buttons = tabstrip.wrapper.children(".k-button.k-button-icon.k-bare");
 
     equal(buttons.length, 0);
 });
@@ -135,7 +135,7 @@ test('right scrolling button scrolls to the right by delta when clicked', 1, fun
     tabstrip.tabGroup.scrollLeft(0);
     tabstrip.wrapper.children(".k-tabstrip-next").trigger("mousedown").trigger("mouseup");
     tabstrip.tabGroup.finish();
-    
+
     equal(tabstrip.tabGroup.scrollLeft(), tabstrip.options.scrollable.distance);
 });
 

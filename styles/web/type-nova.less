@@ -394,26 +394,32 @@ textarea.k-textbox:hover,
 }
 
 /* Bare Button */
-html body .k-button-bare {
+.k-button.k-bare {
+    position: relative;
+
+    &:before {
+        content: "";
+        background-color: currentcolor;
+        opacity: 0.12;
+        border-radius: inherit;
+        height: 100%;
+        width: 100%;
+        position: absolute;
+        left: 0;
+        top: 0;
+        display: none;
+    }
+
     &.k-state-focused,
     &:focus {
-        position: relative;
 
         &:before {
-            content: "";
-            background-color: currentcolor;
-            opacity: 0.12;
-            border-radius: inherit;
-            height: 100%;
-            width: 100%;
-            position: absolute;
-            left: 0;
-            top: 0;
+            display: block;
         }
     }
 }
 
-html .k-mediaplayer-toolbar .k-button-bare {
+.k-mediaplayer-toolbar .k-button.k-bare {
     &:active,
     &.k-state-active,
     &.k-state-active:hover {
@@ -2246,7 +2252,7 @@ html .km-pane-wrapper .km-widget,
             box-sizing: content-box;
         }
     }
-    a.k-dialog-action.k-dialog-close.k-button-bare {
+    a.k-dialog-action.k-dialog-close.k-button.k-bare {
         &:before {
             content: normal;
         }
