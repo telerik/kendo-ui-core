@@ -79,6 +79,34 @@ Below are listed the steps for you to follow when configuring the Kendo UI TreeL
 
                 return Json(result, JsonRequestBehavior.AllowGet);
             }
+    > **Important**
+    >
+    > As of the Kendo UI R1 2017 SP1 release, you can use the `ToTreeDataSourceResultAsync` extension method to provide the asynchronous functionality of `ToTreeDataSourceResult` by leveraging the `async` and `await` features of the .NET Framework.
+
+    The following example demonstrates how to implement the `ToTreeDataSourceResultAsync` extension method in your project.
+
+    ###### Example
+
+            public async Task<JsonResult> TreeList_Read([DataSourceRequest] DataSourceRequest request)
+            {
+                var northwind = new NortwindEntities();
+
+                var result = await northwind.Employees.ToTreeDataSourceResultAsync(request,
+                    employee => employee.EmployeeID,
+                    employee => employee.ReportsTo,
+                    employee => new EmployeeViewModel
+                    {
+                        EmployeeID = employee.EmployeeID,
+                        ReportsTo = employee.ReportsTo,
+                        FirstName = employee.FirstName,
+                        LastName = employee.LastName,
+                        Address = employee.Address,
+                        hasChildren = employee.Employees1.Any()
+                    }
+                );
+
+                return Json(result, JsonRequestBehavior.AllowGet);
+            }
 
 1. Add a Kendo UI TreeList to the `Index` view.
 

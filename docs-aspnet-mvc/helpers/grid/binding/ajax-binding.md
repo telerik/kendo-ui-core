@@ -78,6 +78,21 @@ Below are listed the steps for you to follow when configuring the Kendo UI Grid 
     > **Important**
     >
     > The `ToDataSourceResult()` method will page, sort, filter, and group the collection that is passed to it. If this collection is already paged, the method returns an empty result. To perform the data operations manually, use [custom binding]({% slug custombinding_grid_aspnetmvc %}) instead.
+    >
+    > As of the Kendo UI R1 2017 SP1 release, you can use the `ToDataSourceResultAsync` extension method to provide the asynchronous functionality of `ToDataSourceResult` by leveraging the `async` and `await` features of the .NET Framework.
+
+    The following example demonstrates how to implement the `ToDataSourceResultAsync` extension method in your project.
+
+    ###### Example
+
+            public async Task<ActionResult> Products_Read([DataSourceRequest]DataSourceRequest request)
+            {
+                using (var northwind = new NorthwindEntities())
+                {
+                    IQueryable<Product> products = northwind.Products;
+                    DataSourceResult result = await products.ToDataSourceResultAsync(request);
+                }
+            }
 
 1. Return the `DataSourceResult` as JSON. Configure the Kendo UI Grid for Ajax binding.
 
@@ -92,7 +107,19 @@ Below are listed the steps for you to follow when configuring the Kendo UI Grid 
                     return Json(result);
                 }
             }
+    The same thing applies when you use the asynchronous `ToDataSourceResultAsync` counterpart, as demonstrated in the following example.
 
+    ###### Example
+
+            public async Task<ActionResult> Products_Read([DataSourceRequest]DataSourceRequest request)
+            {
+                using (var northwind = new NorthwindEntities())
+                {
+                    IQueryable<Product> products = northwind.Products;
+                    DataSourceResult result = await products.ToDataSourceResultAsync(request);
+                    return Json(result);
+                }
+            }
 1. In the view, configure the Grid to use the action method created in the previous steps.
 
     ###### Example
