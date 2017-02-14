@@ -96,8 +96,7 @@
 
 /* button */
 
-.k-button,
-.k-button-bare
+.k-button
 {
     display: inline-block;
     margin: 0;
@@ -115,20 +114,12 @@
 .k-state-disabled .k-button:hover,
 .k-button.k-state-disabled:hover,
 .k-state-disabled .k-button:active,
-.k-button.k-state-disabled:active,
-.k-button-bare[disabled],
-.k-button-bare.k-state-disabled,
-.k-state-disabled .k-button-bare,
-.k-state-disabled .k-button-bare:hover,
-.k-button-bare.k-state-disabled:hover,
-.k-state-disabled .k-button-bare:active,
-.k-button-bare.k-state-disabled:active
+.k-button.k-state-disabled:active
 {
     cursor: default;
 }
 
-a.k-button,
-a.k-button-bare
+a.k-button
 {
     .prohibit-selection;
     text-decoration: none;
@@ -141,9 +132,7 @@ a.k-button-bare
 }
 
 button.k-button::-moz-focus-inner,
-input.k-button::-moz-focus-inner,
-.button.k-button-bare::-moz-focus-inner,
-input.k-button-bare::-moz-focus-inner
+input.k-button::-moz-focus-inner
 {
     padding: 0;
     border: 0;
@@ -195,15 +184,14 @@ body .k-split-button-arrow
     vertical-align: text-top;
 }
 
-html body .k-button-bare
-{
-    background: none !important; /*spares long selectors*/
+// Bare button
+.k-button.k-bare {
+    border-color: transparent !important;
     color: inherit;
-    border-width: 0;
-    opacity: 0.7;
-    box-shadow: none;
+    background: none !important;
+    box-shadow: none !important;
+    opacity: .7;
 
-    &,
     &:hover,
     &.k-state-hover,
     &:active,
@@ -214,10 +202,7 @@ html body .k-button-bare
 
     &:focus,
     .k-state-focused {
-        background: none;
-        box-shadow: none !important;
-        border-color: transparent;
-        opacity: 0.8;
+        opacity: .8;
     }
 
     &:hover,
@@ -226,11 +211,21 @@ html body .k-button-bare
     &.k-state-active {
         opacity: 1;
     }
-}
 
-html body .k-button-bare.k-upload-button:hover
-{
-    color: inherit;
+    // Icon
+    .k-icon,
+    .k-font-icon {
+        overflow: visible;
+    }
+
+    &:focus,
+    .k-state-focused {
+        .k-icon,
+        .k-font-icon {
+            text-shadow: 0 0 3px currentColor;
+        }
+    }
+
 }
 
 /* link */
@@ -372,18 +367,6 @@ html body .k-button-bare.k-upload-button:hover
         & when (@icon-positioning = "material") {
             .sprite-position(@row, @column);
         }
-    }
-}
-
-.k-button-bare .k-icon,
-.k-button-bare .k-font-icon {
-    overflow: visible;
-}
-
-.k-button-bare {
-    &.k-state-focused .k-font-icon,
-    &:focus .k-font-icon {
-        text-shadow: 0 0 3px currentColor;
     }
 }
 
@@ -656,7 +639,6 @@ html .k-error-colored
 }
 
 .k-button,
-.k-button-bare,
 .k-textbox,
 .k-autocomplete,
 div.k-window-content,
@@ -682,8 +664,7 @@ div.k-window-content,
     padding: 0;
 }
 
-a.k-button:hover,
-a.k-button-bare:hover
+a.k-button:hover
 {
     text-decoration: none;
 }

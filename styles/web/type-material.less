@@ -725,27 +725,33 @@ html .km-pane-wrapper .k-header
     border-color: @focused-border-color;
 }
 
-.k-button-bare {
+.k-button.k-bare {
+    position: relative;
+
+    &:before {
+        content: "";
+        background-color: currentcolor;
+        opacity: 0.12;
+        border-radius: inherit;
+        height: 100%;
+        width: 100%;
+        position: absolute;
+        left: 0;
+        top: 0;
+        z-index: -1;
+        display: none;
+    }
+
     &.k-state-focused,
     &:focus {
-        position: relative;
 
         &:before {
-            content: "";
-            background-color: currentcolor;
-            opacity: 0.12;
-            border-radius: inherit;
-            height: 100%;
-            width: 100%;
-            position: absolute;
-            left: 0;
-            top: 0;
-            z-index: -1;
+            display: block;
         }
     }
 }
 
-.k-mediaplayer-toolbar .k-button-bare {
+.k-mediaplayer-toolbar .k-button.k-bare {
     &:active,
     &.k-state-active,
     &.k-state-active:hover {
@@ -3981,7 +3987,7 @@ div.k-scheduler-marquee:after {
         }
         border-bottom: none;
     }
-    a.k-dialog-action.k-dialog-close.k-button-bare {
+    a.k-dialog-action.k-dialog-close.k-button.k-bare {
         &:before {
             content: normal;
         }

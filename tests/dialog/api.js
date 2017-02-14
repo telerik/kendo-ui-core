@@ -278,7 +278,7 @@
             }]
         });
 
-        dialog.wrapper.find(".k-button").click();
+        dialog.wrapper.find(".k-dialog-buttongroup .k-button").click();
         ok(!dialog.options.visible);
         ok(!dialog.wrapper.is(":visible"));
     });
@@ -293,7 +293,7 @@
             }]
         });
 
-        dialog.wrapper.find(".k-button").click();
+        dialog.wrapper.find(".k-dialog-buttongroup .k-button").click();
         ok(dialog.options.visible);
         ok(dialog.wrapper.is(":visible"));
     });
