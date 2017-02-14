@@ -441,6 +441,7 @@ The Grid allows you to lock columns on one side of the table. For the feature to
 * Define the height of the Grid.
 * Set explicit pixel widths to all columns to allow the Grid to adjust the layout of the frozen and non-frozen table parts.
 * Make sure that the total width of all locked columns is equal to or less than the width of the Grid minus three times the width of the scrollbar.
+* Make sure that the Grid is not [initialized inside a hidden container](#hidden-containers).
 
 These settings ensure that at least one non-locked column is always visible and that it is possible to scroll the non-locked columns horizontally. Note that if the horizontal space intended for it is not enough, the horizontal scrollbar does not appear.
 
