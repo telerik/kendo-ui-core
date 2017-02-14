@@ -366,12 +366,12 @@ note that a check for an empty `date` is needed, as the widget can work with a n
     </style>
     <body>
 
-    <div id="calendar"></div>
+    <input id="datetimepicker1" />
     <script id="week-template" type="text/x-kendo-template">
        <a class="italic">#= data.weekNumber #</a>
     </script>
     <script>
-      $("#calendar").kendoCalendar({
+      $("#datetimepicker1").kendoDateTimePicker({
         weekNumber: true,
         month: {
           weekNumber: $("#week-template").html()
@@ -411,9 +411,9 @@ If set to `true` a week of the year will be shown on the left side of the calend
 
 #### Example - enable the week of the year option
 
-    <div id="calendar"></div>
+    <input id="datetimepicker1" />
     <script>
-        $("#calendar").kendoCalendar({
+        $("#datetimepicker1").kendoDateTimePicker({
             weekNumber: true
         });
     </script>
