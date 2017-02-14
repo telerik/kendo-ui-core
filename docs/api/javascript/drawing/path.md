@@ -4,7 +4,7 @@ page_title: API reference for Kendo UI Drawing API Path
 ---
 
 # kendo.drawing.Path : kendo.drawing.Element
-Draws a path consisting of linear or cubic Bézier curve segments.
+Represents a path consisting of linear or cubic Bézier curve segments.
 
 #### Example - draw a path
     <div id="surface" style="width: 250px; height: 250px;"></div>
@@ -27,6 +27,20 @@ The configuration options.
 
 ## Class methods
 
+### fromArc
+Create a curve from the given arc.
+
+#### Parameters
+
+##### arc `kendo.geometry.Arc`
+The source arc to trace.
+
+##### options `Object` *optional*
+The [configuration](#configuration) options for the path.
+
+#### Returns
+`kendo.drawing.Path` The newly constructed path.
+
 ### fromPoints
 Create a straight path from the given points.
 
@@ -34,6 +48,9 @@ Create a straight path from the given points.
 
 ##### points `Array`
 Array of [kendo.geometry.Point](../geometry/point) objects or [x, y] arrays.
+
+##### options `Object` *optional*
+The [configuration](#configuration) options for the path.
 
 #### Returns
 `kendo.drawing.Path` The newly constructed path.
@@ -46,6 +63,9 @@ Create a straight path from the given rectangle.
 
 ##### rect `kendo.geometry.Rect`
 The source rectangle to trace.
+
+##### options `Object` *optional*
+The [configuration](#configuration) options for the path.
 
 #### Returns
 `kendo.drawing.Path` The newly constructed path.
