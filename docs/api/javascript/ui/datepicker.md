@@ -359,12 +359,12 @@ The template to be used for rendering the cells in "month" view, which are betwe
     </style>
     <body>
 
-    <div id="calendar"></div>
+    <input id="datepicker1" />
     <script id="week-template" type="text/x-kendo-template">
        <a class="italic">#= data.weekNumber #</a>
     </script>
     <script>
-      $("#calendar").kendoCalendar({
+      $("#datepicker1").kendoDatePicker({
         weekNumber: true,
         month: {
           weekNumber: $("#week-template").html()
@@ -404,9 +404,9 @@ If set to `true` a week of the year will be shown on the left side of the calend
 
 #### Example - enable the week of the year option
 
-    <div id="calendar"></div>
+    <input id="datepicker1" />
     <script>
-        $("#calendar").kendoCalendar({
+        $("#datepicker1").kendoDatePicker({
             weekNumber: true
         });
     </script>
