@@ -4,12 +4,12 @@ page_title: API reference for Kendo UI Drawing API Gradient
 ---
 
 # kendo.drawing.Gradient : kendo.Class
-An abstract base class representing common members of all drawing elements.
+An abstract base class representing common members of all gradients.
 
 ## Constructor Parameters
 
 ### options `Object`
-The configuration of this Group.
+The configuration of this gradient.
 
 ## Configuration
 
