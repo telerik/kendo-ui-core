@@ -8,7 +8,7 @@ position: 5
 
 # Appearance
 
-The appearance of Kendo UI Charts is controlled by some CSS, but mostly by JavaScript style options, unlike the other Kendo UI components in the suite, which use only CSS for styling.
+The appearance of Kendo UI Charts is controlled mostly by JavaScript style options, unlike the other Kendo UI components in the suite, which use only CSS for styling.
 
 ## Chart Structure
 
@@ -47,7 +47,28 @@ The Kendo UI Chart widgets come with [a set of predefined themes](/styles-and-la
 
 > **Important**
 >
-> As of the Kendo UI Q2 2015 (2015.2.624) release, [all CSS code related to the rendering of data visualization, i.e. referring to Gauges, Charts, Barcodes, Diagrams, and Maps, has been moved to the web widgets' CSS files]({% slug breakingchanges2015_kendoui %}). Please remove any legacy references to `kendo.dataviz.css` and `kendo.dataviz.[theme].css`.
+> As of the Kendo UI R2 2015 (2015.2.624) release, [all CSS code related to the rendering of data visualization, i.e. referring to Gauges, Charts, Barcodes, Diagrams, and Maps, has been moved to the web widgets' CSS files]({% slug breakingchanges2015_kendoui %}). Please remove any legacy references to `kendo.dataviz.css` and `kendo.dataviz.[theme].css`.
+
+### SASS Themes
+
+Starting with the Kendo UI R2 2017 SP1, the Chart can be styled with [SASS-based themes]({% slug sassbasedthemes_kendoui %}).
+
+When the theme is set to "inherit" the component will read colors and fonts from the theme variables.
+
+###### Example
+
+    $("#chart").kendoChart({
+        theme: "inherit",
+        series: [{
+            type: "bar",
+            name: "United States",
+            data: [67.96, 68.93, 75, 74, 78]
+        }],
+        categoryAxis: {
+            categories: [2005, 2006, 2007, 2008, 2009]
+        }
+    });
+
 
 ### Transitions
 
