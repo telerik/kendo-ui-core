@@ -3509,7 +3509,22 @@ Template variables:
 
 ### theme `String`
 
-Sets Chart theme. Available themes: default, blueOpal, black.
+The sparkline theme. This can be either a built-in theme or "inherit".
+When set to "inherit" the sparkline will read the variables from the [SASS-based themes]({% slug sassbasedthemes_kendoui %}).
+
+The supported values are:
+
+* "inherit" - special value, see notes
+* "black"
+* "blueopal"
+* "bootstrap"
+* "default"
+* "highcontrast"
+* "metro"
+* "metroblack"
+* "moonlight"
+* "silver"
+* "uniform"
 
 ### tooltip `Object`
 

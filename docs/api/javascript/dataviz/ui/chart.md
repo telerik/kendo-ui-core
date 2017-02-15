@@ -17591,10 +17591,12 @@ A function that can be used to create a custom visual for the notes. The availab
 
 ### theme `String`
 
-The chart theme.
+The chart theme. This can be either a built-in theme or "inherit".
+When set to "inherit" the chart will read the variables from the [SASS-based themes]({% slug sassbasedthemes_kendoui %}).
 
 The supported values are:
 
+* "inherit" - special value, see notes
 * "black"
 * "blueopal"
 * "bootstrap"
