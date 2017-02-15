@@ -861,7 +861,7 @@ var __meta__ = { // jshint ignore:line
                     var currentNode = that.findByUid(items[0].uid);
 
                     if (!currentNode.hasClass(DISABLEDCLASS)) {
-                        that.select(currentNode);
+                        that.select(currentNode, true);
                     }
                 }else{
                     that.clearSelection();
@@ -939,7 +939,7 @@ var __meta__ = { // jshint ignore:line
             return dataSource && dataSource.getByUid(uid);
        },
 
-       select: function (element) {
+       select: function (element, skipChange) {
            var that = this;
 
             if (element === undefined) {
@@ -960,7 +960,7 @@ var __meta__ = { // jshint ignore:line
                             return that;
                         }
 
-                        that._updateSelected(link);
+                        that._updateSelected(link, skipChange);
                     });
             }
 
@@ -1640,7 +1640,7 @@ var __meta__ = { // jshint ignore:line
             return that.trigger(eventName, { item: element[0] });
         },
 
-        _updateSelected: function(link) {
+        _updateSelected: function(link, skipChange) {
             var that = this,
                 element = that.element,
                 item = link.parent(ITEM),
@@ -1663,7 +1663,9 @@ var __meta__ = { // jshint ignore:line
                  dataItem.set("selected", true);
             }
 
-            that.trigger(CHANGE);
+            if(!skipChange){
+                that.trigger(CHANGE);
+            }
         },
 
         _animations: function(options) {
