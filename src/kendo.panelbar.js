@@ -960,9 +960,7 @@ var __meta__ = { // jshint ignore:line
                             return that;
                         }
 
-                        if (!that._triggerEvent(SELECT, item)) {
-                            that._updateSelected(link);
-                        }
+                        that._updateSelected(link);
                     });
             }
 
