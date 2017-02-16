@@ -72,6 +72,14 @@ var __meta__ = { // jshint ignore:line
                  options.max = max;
              }
 
+             if(options.factor && options.max) {
+                 options.max = options.max*options.factor;
+             }
+
+             if(options.factor && options.min) {
+                 options.min = options.min*options.factor;
+             }
+
              if (!isStep && step !== NULL) {
                  options.step = step;
              }
@@ -129,6 +137,7 @@ var __meta__ = { // jshint ignore:line
             format: "n",
             spinners: true,
             placeholder: "",
+            factor: 1,
             upArrowText: "Increase value",
             downArrowText: "Decrease value"
         },
@@ -308,10 +317,18 @@ var __meta__ = { // jshint ignore:line
         },
 
         _blur: function() {
-            var that = this;
+            var that = this,
+                factor = that.options.factor,
+                curreValue = that.element.val();
 
             that._toggleText(true);
-            that._change(that.element.val());
+            if(factor && factor !== 1){
+                curreValue = parseFloat(curreValue);
+                if(curreValue !== null) {
+                    curreValue = curreValue/factor;
+                }
+            }
+            that._change(curreValue);
         },
 
         _click: function(e) {
@@ -434,6 +451,7 @@ var __meta__ = { // jshint ignore:line
                 text.attr("accesskey", accessKey);
                 element.accessKey = "";
             }
+
 
             that._text = text.addClass(element.className)
                              .attr({
@@ -588,6 +606,10 @@ var __meta__ = { // jshint ignore:line
                 that._focusin();
             }
 
+            if(that.options.factor && value) {
+                value = value/that.options.factor;
+            }
+
             value += that.options.step * step;
 
             that._update(that._adjust(value));
@@ -620,6 +642,7 @@ var __meta__ = { // jshint ignore:line
         _update: function(value) {
             var that = this,
                 options = that.options,
+                factor = options.factor,
                 format = options.format,
                 decimals = options.decimals,
                 culture = that._culture(),
@@ -642,6 +665,9 @@ var __meta__ = { // jshint ignore:line
             that._placeholder(kendo.toString(value, format, culture));
 
             if (isNotNull) {
+                if(factor) {
+                    value =  parseFloat(that._round(value*factor, decimals), 10);
+                }
                 value = value.toString();
                 if (value.indexOf("e") !== -1) {
                     value = that._round(+value, decimals);
