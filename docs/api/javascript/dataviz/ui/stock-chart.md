@@ -7106,12 +7106,12 @@ Template variables:
 
 ### theme `String`
 
-The chart theme. This can be either a built-in theme or "inherit".
-When set to "inherit" the chart will read the variables from the [SASS-based themes]({% slug sassbasedthemes_kendoui %}).
+The chart theme. This can be either a built-in theme or "sass".
+When set to "sass" the chart will read the variables from the [SASS-based themes]({% slug sassbasedthemes_kendoui %}).
 
 The supported values are:
 
-* "inherit" - special value, see notes
+* "sass" - special value, see notes
 * "black"
 * "blueopal"
 * "bootstrap"
