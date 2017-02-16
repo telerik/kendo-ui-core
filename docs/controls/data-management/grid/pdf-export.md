@@ -371,6 +371,7 @@ The example below demonstrates how to handle custom fonts.
 All [known limitations]({% slug drawingofhtmlelements_drawingapi %}#known-limitations) of the HTML Drawing module apply. Most importantly:
 
 * Right-to-left text is not supported.
+* Exporting a hierarchical Grid is not supported.
 * PDF export is not supported when the Grid has a locked (frozen) column enabled. If the algorithm decides to move a node to the next page, all DOM nodes that follow it will be also moved, although there might be enough space for part of them on the current page.
 * Images hosted on different domains might not be rendered, unless permissive [Cross-Origin HTTP headers](https://developer.mozilla.org/en-US/docs/Web/HTML/CORS_enabled_image) are provided by the server. Similarly, fonts might not be possible to load cross-domain.
 
