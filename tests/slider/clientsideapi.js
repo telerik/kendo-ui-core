@@ -21,6 +21,66 @@ test("value should set slider value", function() {
     equal(slider.value(), 9);
 });
 
+test("min method should get min value", function() {
+    var slider = newSlider();
+
+    equal(slider.min(), 0);
+});
+
+test("max method should get max value", function() {
+    var slider = newSlider();
+
+    equal(slider.max(), 10);
+});
+
+test("min method should set min value", function() {
+    var slider = newSlider();
+
+    slider.min(5);
+
+    equal(slider.element.parent().find(".k-slider-items").children("li").first().attr("title"), "5");
+});
+
+test("max method should set max value", function() {
+    var slider = newSlider();
+
+    slider.max(15);
+
+    equal(slider.element.parent().find(".k-slider-items").children("li").last().attr("title"), "15");
+});
+
+test("setOptions min should set min value", function() {
+    var slider = newSlider();
+
+    slider.setOptions({"min": 5});
+
+    equal(slider.element.parent().find(".k-slider-items").children("li").first().attr("title"), "5");
+});
+
+test("setOptions max should set max value", function() {
+    var slider = newSlider();
+
+    slider.setOptions({"max": 15});
+
+    equal(slider.element.parent().find(".k-slider-items").children("li").last().attr("title"), "15");
+});
+
+test("setOptions smallStep should set smallStep value", function() {
+    var slider = newSlider();
+
+    slider.setOptions({"smallStep": 2});
+
+    equal(slider.element.parent().find(".k-slider-items").children("li").eq(1).attr("title"), "2");
+});
+
+test("setOptions largeStep should set largeStep value", function() {
+    var slider = newSlider();
+
+    slider.setOptions({"largeStep": 2});
+
+    equal(slider.element.parent().find(".k-slider-items").children("li").eq(2).hasClass("k-tick-large"), true);
+});
+
 test("value should not be null or empty string and should return old value", function() {
     var slider = newSlider();
 

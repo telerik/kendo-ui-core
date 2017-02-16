@@ -205,6 +205,112 @@ Enable/Disable the **Slider** widget.
 
 The argument, which defines whether to enable/disable the **Slider**.
 
+### max
+
+Gets/Sets the max value of the **Slider**.
+
+#### Parameters
+
+##### value `Number | String`
+
+The max value to set.
+
+#### Returns
+
+`Number` The max value of the **Slider**.
+
+#### Example - get the max value of the **Slider**
+
+    <input id="slider" />
+    <script>
+    $("#slider").kendoSlider();
+
+    var slider = $("#slider").data("kendoSlider");
+
+    var max = slider.max();
+
+    console.log(max);
+    </script>
+
+#### Example - set the max value of the **Slider**
+
+    <input id="slider" />
+    <script>
+    $("#slider").kendoSlider();
+
+    var slider = $("#slider").data("kendoSlider");
+
+    slider.max(20);
+    </script>
+
+### min
+
+Gets/Sets the min value of the **Slider**.
+
+#### Parameters
+
+##### value `Number | String`
+
+The min value to set.
+
+#### Returns
+
+`Number` The min value of the **Slider**.
+
+#### Example - get the min value of the **Slider**
+
+    <input id="slider" />
+    <script>
+    $("#slider").kendoSlider();
+
+    var slider = $("#slider").data("kendoSlider");
+
+    var min = slider.min();
+
+    console.log(min);
+    </script>
+
+#### Example - set the min value of the **Slider**
+
+    <input id="slider" />
+    <script>
+    $("#slider").kendoSlider();
+
+    var slider = $("#slider").data("kendoSlider");
+
+    slider.min(-10);
+    </script>
+
+### setOptions
+
+Changes the initial **Slider** configuration.
+
+#### Parameters
+
+##### options `Object`
+
+The new configuration options. It can be used for changing "min", "max", "smallStep" and "largeStep" options of the **Slider**.
+
+#### Example
+
+    <input id="slider" />
+    <script>
+    $("#slider").kendoSlider({
+        min: -10,
+        max: 20,
+        smallStep: 2,
+    });
+
+    var slider = $("#slider").data("kendoSlider");
+
+    slider.setOptions({
+        min: -5,
+        max: 5,
+        smallStep: 1,
+        largeStep: 2
+    });
+    </script>
+
 ### value
 
 Gets or sets the value of a **Slider**. It accepts a string or number as parameters and returns
