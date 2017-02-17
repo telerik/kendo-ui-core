@@ -14,7 +14,7 @@ You can utilize the Upgrade Project Wizard:
 
 ### Manual update
 
-1) Replace all Kendo UI relatred scripts, styles and images with the desired version of Telerik UI for ASP.NET MVC. The latest or the desired version of Kendo UI can be downloaded from the Download section of your account.
+1) Replace all Telerik UI for ASP.NET MVC related scripts, styles and images with the desired version of Telerik UI for ASP.NET MVC. The latest or the desired version of Kendo UI can be downloaded from the Download section of your account.
 
 2) Change the reference to the new Kendo.MVC dll. Please make sure that the dll is for the correct version of ASP.NET MVC.
 
