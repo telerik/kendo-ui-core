@@ -72,14 +72,6 @@ var __meta__ = { // jshint ignore:line
                  options.max = max;
              }
 
-             if(options.factor && options.max) {
-                 options.max = options.max*options.factor;
-             }
-
-             if(options.factor && options.min) {
-                 options.min = options.min*options.factor;
-             }
-
              if (!isStep && step !== NULL) {
                  options.step = step;
              }
@@ -105,8 +97,8 @@ var __meta__ = { // jshint ignore:line
                  });
              }
 
-             element.attr("aria-valuemin", options.min)
-                    .attr("aria-valuemax", options.max);
+             element.attr("aria-valuemin", options.min !== NULL ? options.min*options.factor : options.min)
+                    .attr("aria-valuemax", options.max !== NULL ? options.max*options.factor : options.max);
 
              options.format = extractFormat(options.format);
 
@@ -456,8 +448,8 @@ var __meta__ = { // jshint ignore:line
             that._text = text.addClass(element.className)
                              .attr({
                                  "role": "spinbutton",
-                                 "aria-valuemin": options.min,
-                                 "aria-valuemax": options.max
+                                 "aria-valuemin": options.min !== NULL ? options.min*options.factor : options.min,
+                                 "aria-valuemax": options.max !== NULL ? options.max*options.factor : options.max
                              });
         },
 
