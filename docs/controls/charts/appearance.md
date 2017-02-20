@@ -51,9 +51,9 @@ The Kendo UI Chart widgets come with [a set of predefined themes](/styles-and-la
 
 ### SASS Themes
 
-Starting with the Kendo UI R2 2017 SP1, the Chart can be styled with [SASS-based themes]({% slug sassbasedthemes_kendoui %}).
+As of the Kendo UI R2 2017 SP1 release, the Chart provides styling options through [SASS-based themes]({% slug sassbasedthemes_kendoui %}).
 
-When the theme is set to "inherit" the component will read colors and fonts from the theme variables.
+When the theme is set to `"inherit"`, the component reads colors and fonts from the theme variables.
 
 ###### Example
 
