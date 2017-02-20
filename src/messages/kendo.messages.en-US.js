@@ -976,14 +976,18 @@ $.extend(true, kendo.ui.Upload.prototype.options.localization,{
   "cancel": "Cancel",
   "retry": "Retry",
   "remove": "Remove",
+  "clearSelectedFiles": "Clear",
   "uploadSelectedFiles": "Upload files",
-  "dropFilesHere": "drop files here to upload",
+  "dropFilesHere": "Drop files here to upload",
   "statusUploading": "uploading",
   "statusUploaded": "uploaded",
   "statusWarning": "warning",
   "statusFailed": "failed",
   "headerStatusUploading": "Uploading...",
-  "headerStatusUploaded": "Done"
+  "headerStatusUploaded": "Done",
+  "invalidMaxFileSize": "File size too large.",
+  "invalidMinFileSize": "File size too small.",
+  "invalidFileExtension": "File type not allowed."
 });
 }
 

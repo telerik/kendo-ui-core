@@ -837,7 +837,11 @@ if (kendo.ui.Upload) {
 kendo.ui.Upload.prototype.options.localization =
 $.extend(true, kendo.ui.Upload.prototype.options.localization,{
   "cancel": "Спри",
-  "dropFilesHere": "преместете с мишката файлове тук за да ги качите",
+  "clearSelectedFiles": "Изчисти файловете",
+  "dropFilesHere": "Преместете с мишката файлове тук за да ги качите",
+  "invalidMaxFileSize": "Размерът на файла е твърде голям.",
+  "invalidMinFileSize": "Размерът на файла е твърде малък.",
+  "invalidFileExtension": "Този тип файл не е разрешен.",
   "remove": "Премахни",
   "retry": "Опитай отново",
   "select": "Избери...",
@@ -845,8 +849,8 @@ $.extend(true, kendo.ui.Upload.prototype.options.localization,{
   "statusUploaded": "качен",
   "statusUploading": "качва се",
   "uploadSelectedFiles": "Качи файловете",
-  "headerStatusUploaded": "Done",
-  "headerStatusUploading": "Uploading..."
+  "headerStatusUploaded": "Готово",
+  "headerStatusUploading": "Качване..."
 });
 }
 
