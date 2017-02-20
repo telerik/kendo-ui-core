@@ -76,10 +76,8 @@ Below are listed the steps for you to follow when configuring the Kendo UI Grid 
             }
 
     > **Important**
-    >
-    > The `ToDataSourceResult()` method will page, sort, filter, and group the collection that is passed to it. If this collection is already paged, the method returns an empty result. To perform the data operations manually, use [custom binding]({% slug custombinding_grid_aspnetmvc %}) instead.
-    >
-    > As of the Kendo UI R1 2017 SP1 release, you can use the `ToDataSourceResultAsync` extension method to provide the asynchronous functionality of `ToDataSourceResult` by leveraging the `async` and `await` features of the .NET Framework.
+    > * The `ToDataSourceResult()` method will page, sort, filter, and group the collection that is passed to it. If this collection is already paged, the method returns
+    > * As of the Kendo UI R1 2017 SP1 release, you can use the `ToDataSourceResultAsync` extension method to provide the asynchronous functionality of `ToDataSourceResult` by leveraging the `async` and `await` features of the .NET Framework.
 
     The following example demonstrates how to implement the `ToDataSourceResultAsync` extension method in your project.
 
