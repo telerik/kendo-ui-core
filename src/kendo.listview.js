@@ -260,7 +260,7 @@ var __meta__ = { // jshint ignore:line
 
             that._angularItems("compile");
 
-            that.trigger(DATABOUND);
+            that.trigger(DATABOUND, { action: e.action || "rebind", items: e.items, index: e.index });
         },
 
         _pageable: function() {
