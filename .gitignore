@@ -11,6 +11,7 @@ dist/
 .DS_Store
 .JustCode
 .bundle/
+.idea/
 .livereload
 .dir-locals.el
 !src/jquery.min.js
