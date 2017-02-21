@@ -1,3 +1,11 @@
+---
+title: Updating Instructions
+page_title: Updating Instructions | Telerik UI for ASP.NET MVC
+description: "Learn How to Update the Version of Telerik UI for ASP.NET MVC."
+slug: updatingnstructions_mvc
+position: 500
+---
+
 # Upgrading a Trial to a Developer License or to a Newer Version
 
 This article explains how to upgrade the version of the Telerik UI for ASP.NET MVC wrappers and how to switch from a Trial to a Developer license.
