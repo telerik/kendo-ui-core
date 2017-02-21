@@ -3819,6 +3819,41 @@ The data item or data items to remove from the data source.
     console.log(dataSource.hasChanges()); // displays "false"
     </script>
 
+### pushInsert
+
+Appends the specified data items to the data source without marking them as "new". The data source will not sync data items appended via `pushInsert`.
+
+> The difference between `pushInsert` and `insert` is that items appended via `insert` are synced with the remote service.
+
+#### Parameters
+
+##### index `Number`
+
+The zero-based index at which the data item will be inserted.
+
+##### items `Object|Array`
+
+The data item or data items to append to the data source.
+
+#### Example - pushInsert with a single item
+
+    <script>
+    var dataSource = new kendo.data.DataSource({
+      schema: {
+        model: {
+          id: "id"
+        }
+      }
+    });
+    //create sample data set:
+    dataSource.pushCreate([{ id: 1, name: "John Doe" }, { id: 2, name: "Alex" }]);
+
+    //insert record at specified index
+    dataSource.pushInsert(1, { id: 2, name: "Peter" });
+    console.log(dataSource.at(1).name); // displays "Peter"
+    console.log(dataSource.at(1).isNew()); // displays "false"
+    </script>
+
 ### pushUpdate
 
 Updates the specified data items without marking them as "dirty". The data source will not sync data items appended via `pushUpdate`. If the data items are not found (using `schema.model.id`), they will be appended.
