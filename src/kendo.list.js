@@ -987,7 +987,7 @@ var __meta__ = { // jshint ignore:line
         _hideBusy: function () {
             var that = this;
             clearTimeout(that._busy);
-            that._arrow.removeClass(LOADING);
+            that._arrowIcon.removeClass(LOADING);
             that._focused.attr("aria-busy", false);
             that._busy = null;
             that._showClear();
@@ -1003,9 +1003,9 @@ var __meta__ = { // jshint ignore:line
             }
 
             that._busy = setTimeout(function () {
-                if (that._arrow) { //destroyed after request start
+                if (that._arrowIcon) { //destroyed after request start
                     that._focused.attr("aria-busy", true);
-                    that._arrow.addClass(LOADING);
+                    that._arrowIcon.addClass(LOADING);
                     that._hideClear();
                 }
             }, 100);
