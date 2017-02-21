@@ -12,7 +12,7 @@ The [Kendo UI Grid widget](http://demos.telerik.com/kendo-ui/grid/index) support
 
 ## Scrolling
 
-By default, the scrolling functionality of the Grid is enabled. For historical reasons, however, the [Grid MVC wrapper](http://docs.telerik.com/aspnet-mvc/helpers/grid/configuration#scrolling) does not support it. To disable the scrolling functionality, set the `scrollable` option to `false`.
+The scrolling functionality of the Grid is enabled by default. To disable the scrolling functionality, set the `scrollable` option to `false`. On the other hand, the [Grid MVC wrapper](http://docs.telerik.com/aspnet-mvc/helpers/grid/configuration#scrolling) has scrolling disabled by default for historical reasons, but it can be enabled.
 
 ###### Example
 
