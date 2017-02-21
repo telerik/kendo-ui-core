@@ -57,7 +57,7 @@ Creates a new instance with the same width and height.
 
 #### Returns
 
-`kendo.geometry.Size` A new Size instance with the same coordinates.
+`kendo.geometry.Size` A new Size instance with the same dimensions.
 
 
 ### equals

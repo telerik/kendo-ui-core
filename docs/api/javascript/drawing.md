@@ -125,7 +125,7 @@ The [page template](/framework/drawing/drawing-dom#page-template-headers-and-foo
             });
         });
     </script>
-    
+
 #### Example - Exporting a DOM element to a PDF file (via Base64-encoded string)
     <div id="calendar"></div>
     <script>
@@ -150,7 +150,7 @@ The [page template](/framework/drawing/drawing-dom#page-template-headers-and-foo
         });
     </script>
 
-#### Example - Exporting a DOM element to a PDF Base64-encoded string and send it to the server via jQuery.post() 
+#### Example - Exporting a DOM element to a PDF Base64-encoded string and send it to the server via jQuery.post()
     <div id="calendar"></div>
     <script>
         $("#calendar").kendoCalendar();
@@ -215,10 +215,10 @@ The root group containing all elements to export.
 ##### options `Object`
 Parameters for the exported image.
 
-##### options.width `String`
+##### options.width `Number`
 The width of the exported image. Defaults to the scene width.
 
-##### options.height `String`
+##### options.height `Number`
 The height of the exported image. Defaults to the scene height.
 
 ##### options.cors `String` *(default: "anonymous")*
@@ -446,7 +446,7 @@ An array with the drawing elements that should be stacked.
 
       var pathA = Path.fromRect(pathRect);
       var pathB = Path.fromRect(pathRect);
-			var pathC = Path.fromRect(pathRect);
+      var pathC = Path.fromRect(pathRect);
 
       draw.stack([pathA, pathB, pathC]);
 

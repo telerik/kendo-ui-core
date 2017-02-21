@@ -33,7 +33,7 @@ The b (2, 1) member of the matrix.
 
 ### c `Number`
 
-The a (1, 2) member of the matrix.
+The c (1, 2) member of the matrix.
 
 
 ### d `Number`
