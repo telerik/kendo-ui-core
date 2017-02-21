@@ -139,6 +139,24 @@ test("pushCreate inserts a new item in the data source", function() {
     equal(dataSource.at(0).foo, "foo");
 });
 
+test("pushInsert inserts a new item in the data source without specifying index", function() {
+    var dataSource = new DataSource();
+
+    dataSource.pushInsert({ foo: "foo" });
+
+    equal(dataSource.at(0).foo, "foo");
+});
+
+test("pushInsert inserts a new item in specified index", function() {
+    var dataSource = new DataSource();
+
+    dataSource.pushCreate([{ foo: "bar"}, { foo: "baz" }, {foo: "bat"}]);
+
+    dataSource.pushInsert(1, { foo: "foo" });
+
+    equal(dataSource.at(1).foo, "foo");
+});
+
 test("pushCreate does not wrap observable objects", function() {
     var dataSource = new DataSource();
 
