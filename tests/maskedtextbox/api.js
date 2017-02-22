@@ -319,4 +319,24 @@
 
         equal(maskedtextbox.calls("_mask"), 2);
     });
+
+    test("value method does not strip the last character from the value", function() {
+        var maskedtextbox = new MaskedTextBox(input, {
+            mask: "\\1\\0A\\ 00\\ 00\\ 000\\ 00\\ L0\\ \\00",
+        });
+
+        maskedtextbox.value("100 14 36 085 17 W6 00");
+
+        equal(input.val(), "100 14 36 085 17 W6 00");
+    });
+
+    test("value method does not strip the last character from the value", function() {
+        var maskedtextbox = new MaskedTextBox(input, {
+            mask: "(9\\9\\9) \\000-0000",
+        });
+
+        maskedtextbox.value("(123) 456-7890");
+
+        equal(input.val(), "(199) 023-4567");
+    });
 })();

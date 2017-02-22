@@ -169,6 +169,7 @@ var __meta__ = { // jshint ignore:line
             element.val(value ? emptyMask : "");
 
             this._mask(0, this._maskLength, value);
+            this._unmaskedValue = null;
 
             value = element.val();
             this._oldValue = value;
@@ -485,7 +486,10 @@ var __meta__ = { // jshint ignore:line
             if (!value) {
                 return "";
             }
-
+            
+            if(this._unmaskedValue === value) {
+                return this._unmaskedValue;
+            }
             value = (value + "").split("");
 
             var chr;
@@ -524,7 +528,7 @@ var __meta__ = { // jshint ignore:line
                     break;
                 }
             }
-
+            this._unmaskedValue = result;
             return result;
         },
 
