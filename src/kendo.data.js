@@ -3004,6 +3004,8 @@ var __meta__ = { // jshint ignore:line
 
             that.trigger(REQUESTSTART, { type: "submit" });
 
+            that.trigger(PROGRESS);
+
             that.transport.submit(extend({
                 success: function(response, type) {
                     var promise = $.grep(promises, function(x) {
@@ -3071,6 +3073,8 @@ var __meta__ = { // jshint ignore:line
 
             return $.Deferred(function(deferred) {
                 that.trigger(REQUESTSTART, { type: type });
+
+                that.trigger(PROGRESS);
 
                 that.transport[type].call(that.transport, extend({
                     success: function(response) {

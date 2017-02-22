@@ -666,6 +666,54 @@ test("requestStart contains request type for destroy request", function() {
     dataSource.sync();
 });
 
+test("progress is called for each sync request", 3, function() {
+    var dataSource = new DataSource({
+        schema: {
+            model: { id: "id" }
+        },
+        data: [{ id: 1, foo: "bar"},{ id: 2, foo: "baz"}]
+    });
+
+    dataSource.read();
+
+    dataSource.bind("progress", function() {
+        ok(true);
+    });
+
+    dataSource.add();
+
+    dataSource.remove(dataSource.get(1));
+
+    dataSource.get(2).set("foo", "moo");
+
+    dataSource.sync();
+});
+
+test("progress is called when batch operations are used", 1, function() {
+    var dataSource = new DataSource({
+        transport: {
+            read: function() {},
+            submit: function() {}
+        },
+        schema: {
+            model: { id: "id" }
+        },
+        data: [{ id: 1, foo: "bar"},{ id: 2, foo: "baz"}],
+        batch: true
+    });
+
+    dataSource.read();
+
+    dataSource.bind("progress", function() {
+        ok(true);
+    });
+
+    dataSource.add(new Model());
+    dataSource.add(new Model());
+
+    dataSource.sync();
+});
+
 test("total is correct after removing all items", function() {
     var dataSource = new DataSource({
         schema: {
