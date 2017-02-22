@@ -3830,7 +3830,7 @@ function pad(number, digits, end) {
             return 1 + Math.floor(days / 7);
         }
 
-        function weekInYear(date, weekStartDay){
+        function weekInYear(date, weekStartDay){   
             var prevWeekDate = addDays(date, -7);
             var nextWeekDate = addDays(date, 7);
 
