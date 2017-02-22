@@ -2581,7 +2581,12 @@ var __meta__ = { // jshint ignore:line
             return model;
         },
 
-        pushCreate: function(items) {
+        pushInsert: function(index, items) {
+            if (!items) {
+                items = index;
+                index = 0;
+            }
+
             if (!isArray(items)) {
                 items = [items];
             }
@@ -2594,7 +2599,7 @@ var __meta__ = { // jshint ignore:line
                 for (var idx = 0; idx < items.length; idx ++) {
                     var item = items[idx];
 
-                    var result = this.add(item);
+                    var result = this.insert(index, item);
 
                     pushed.push(result);
 
@@ -2605,6 +2610,8 @@ var __meta__ = { // jshint ignore:line
                     }
 
                     this._pristineData.push(pristine);
+
+                    index++;
                 }
             } finally {
                 this.options.autoSync = autoSync;
@@ -2616,6 +2623,10 @@ var __meta__ = { // jshint ignore:line
                     items: pushed
                 });
             }
+        },
+
+        pushCreate: function(items) {
+            this.pushInsert(this._data.length, items);
         },
 
         pushUpdate: function(items) {
