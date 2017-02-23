@@ -14,6 +14,7 @@ var __meta__ = { // jshint ignore:line
     var kendo = window.kendo,
         ui = kendo.ui,
         Widget = ui.Widget,
+        Class = kendo.Class,
         support = kendo.support,
         getOffset = kendo.getOffset,
         outerWidth = kendo._outerWidth,
@@ -40,6 +41,7 @@ var __meta__ = { // jshint ignore:line
         ACTIVECHILDREN = ".k-picker-wrap, .k-dropdown-wrap, .k-link",
         MOUSEDOWN = "down",
         DOCUMENT_ELEMENT = $(document.documentElement),
+        proxy = $.proxy,
         WINDOW = $(window),
         SCROLL = "scroll",
         cssPrefix = support.transitions.css,
@@ -669,9 +671,67 @@ var __meta__ = { // jshint ignore:line
             };
         }
     });
-
+    
     ui.plugin(Popup);
+    
+    var tabKeyTrapNS = "kendoTabKeyTrap";
+    var focusableNodesSelector = "a[href], area[href], input:not([disabled]), select:not([disabled]), textarea:not([disabled]), button:not([disabled]), iframe, object, embed, [tabindex], *[contenteditable]";
+    var TabKeyTrap = Class.extend({
+        init: function(element) {
+            this.element = $(element);
+            this.element.autoApplyNS(tabKeyTrapNS);
+        },
+
+        trap: function() {
+            this.element.on("keydown", proxy(this._keepInTrap, this));
+        },
+
+        removeTrap: function() {
+            this.element.kendoDestroy(tabKeyTrapNS);
+        },
+
+        destroy: function() {
+            this.element.kendoDestroy(tabKeyTrapNS);
+            this.element = undefined;
+        },
+
+        _keepInTrap: function(e) {
+
+            if (e.which !== 9) {
+                return;
+            }
+            var target = e.target;
+            var elements = this.element.find(focusableNodesSelector).filter(':visible[tabindex!=-1]');
+            var focusableItems = elements.sort(function(prevEl,nextEl) {
+                return prevEl.tabIndex - nextEl.tabIndex;
+            });
+            var focusableItemsCount = focusableItems.length;
+            var lastIndex = focusableItemsCount - 1;
+            var focusedItemIndex = focusableItems.index(target);                             
+
+            if (e.shiftKey) {
+                if (focusedItemIndex === 0) {
+                    focusableItems.get(lastIndex).focus();
+                }
+                else {
+                    focusableItems.get(focusedItemIndex - 1).focus();
+                }
+            }
+            else {
+                if (focusedItemIndex === lastIndex) {
+                    focusableItems.get(0).focus();
+                }
+                else {
+                    focusableItems.get(focusedItemIndex + 1).focus();
+                }
+            }
+            e.preventDefault();
+        }
+    });
+    ui.Popup.TabKeyTrap = TabKeyTrap;
 })(window.kendo.jQuery);
+
+    
 
 return window.kendo;
 

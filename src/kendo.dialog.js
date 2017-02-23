@@ -14,6 +14,7 @@
         var kendo = window.kendo,
             Class = kendo.Class,
             Widget = kendo.ui.Widget,
+            TabKeyTrap = kendo.ui.Popup.TabKeyTrap,
             proxy = $.proxy,
             template = kendo.template,
             keys = kendo.keys,
@@ -959,53 +960,6 @@
             prompt: "<div />",
             promptInputContainer: "<div class='k-prompt-container'><input type='text' class='k-textbox' /></div>"
         };
-
-        var tabKeyTrapNS = "kendoTabKeyTrap";
-        var focusableNodesSelector = "a[href], area[href], input:not([disabled]), select:not([disabled]), textarea:not([disabled]), button:not([disabled]), iframe, object, embed, [tabindex], *[contenteditable]";
-        var TabKeyTrap = Class.extend({
-            init: function(element) {
-                this.element = $(element);
-                this.element.autoApplyNS(tabKeyTrapNS);
-            },
-
-            trap: function() {
-                this.element.on("keydown", proxy(this._keepInTrap, this));
-            },
-
-            removeTrap: function() {
-                this.element.kendoDestroy(tabKeyTrapNS);
-            },
-
-            destroy: function() {
-                this.element.kendoDestroy(tabKeyTrapNS);
-                this.element = undefined;
-            },
-
-            _keepInTrap: function(e) {
-                if (e.which !== 9) {
-                    return;
-                }
-
-                var target = e.target;
-                var focusableItems = this.element.find(focusableNodesSelector).filter(':visible[tabindex!=-1]');
-                var focusableItemsCount = focusableItems.length;
-                var lastIndex = focusableItemsCount - 1;
-                var focusedItemIndex = focusableItems.index(target);
-
-                if (e.shiftKey) {
-                    if (focusedItemIndex === 0) {
-                        focusableItems.get(lastIndex).focus();
-                        e.preventDefault();
-                    }
-                }
-                else {
-                    if (focusedItemIndex === lastIndex) {
-                        focusableItems.get(0).focus();
-                        e.preventDefault();
-                    }
-                }
-            }
-        });
 
         kendo.alert = kendoAlert;
         kendo.confirm = kendoConfirm;
