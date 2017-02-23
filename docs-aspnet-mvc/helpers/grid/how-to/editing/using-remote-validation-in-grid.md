@@ -1,23 +1,23 @@
 ---
-title: Using Remote Validation in Grid
-page_title: Using Remote Validation in Grid | Kendo UI Grid HtmlHelper
-description: "Configure Remote Validation in Kendo Grid"
+title: Implement Remote Validation
+page_title: Implement Remote Validation | Kendo UI Grid HtmlHelper
+description: "Configure the remote validation functionality in the Kendo UI Grid in ASP.NET MVC applications."
 slug: howto_usingremotevalidationingrid_gridaspnetmvc
 ---
 
+# Implement Remote Validation
 
-# Using Remote Validation in Grid
+As of the Kendo UI R1 2017 SP1 release, you can use remote validation with the Grid HtmlHelper.
 
+To see the example, refer to the demo on [configuring remote validation in the Grid](http://demos.telerik.com/aspnet-mvc/grid/editing-remote-validation).
 
-Since R1 2017 SP1 you can use Remote Validation with the Grid HtmlHelper. You can see an example of the functionality in [this demo](http://demos.telerik.com/aspnet-mvc/grid/editing-remote-validation).
+Remote validation is suitable for informing the user whether a value is valid right after the filed editor gets blurred. While you can consider the functionality as a real-time user assistant, avoid relying on it for receiving a valid entry for the field. Only the popup and inline edit modes support remote validation.
 
-Remote Validation is suitable for scenarios where you need to inform the user if a value is valid just after the editor for the field is blurred. It should be considered as a real-time assistant to the user and the developer should not rely on it for receiving valid entry for the field.
+## The Procedure
 
-You can use the Remote Validation with PopUp and InLine edit modes only.
+To start using the remote validation in the Grid:
 
-
-1. To use the feature you should add a custom rule in the Kendo Validator. The rule below should work in most sceanarios. However, you may need to adjust it to fit your specific requirements.
-
+1. Add a custom rule in the Kendo UI Validator. The one demonstrated in the following example is expected to work in most scenarios. However, you may need to adjust it to fit your specific requirements.
 
     ###### Example
 
@@ -77,9 +77,7 @@ You can use the Remote Validation with PopUp and InLine edit modes only.
         })(jQuery, kendo);
     ```
 
-
-2. To configure the validation on the server you need to add the [RemoteAttribute](https://msdn.microsoft.com/en-us/library/system.web.mvc.remoteattribute(v=vs.98).aspx) to the field in the Model. In the example this is done for the `ProductName` field.
-
+2. Add the [`RemoteAttribute`](https://msdn.microsoft.com/en-us/library/system.web.mvc.remoteattribute(v=vs.98).aspx) to the Model field to configure the validation on the server. The following example demonstrates how to apply this configuration to the `ProductName` field.
 
     ###### Example
 
@@ -94,9 +92,7 @@ You can use the Remote Validation with PopUp and InLine edit modes only.
         }
     ```
 
-
-3. Now you need to add the custom server-side logic that would validate the user input. The `RemoteAttribute` in the previous step specifies that this validation will be performed in a method called `IsProductName_Available` located in `ValidationController`. This is custom logic and should be implemented per-case. In the example below the code is checking if the entered `ProductName` already exists.
-
+3. Add the custom server-side logic that will validate the user input. The `RemoteAttribute` in the previous example specifies that the validation will be performed in a `IsProductName_Available` method located in `ValidationController`. This is a custom approach and has to be implemented per case. In the following example, the code checks whether the entered `ProductName` already exists.
 
     ###### Example
 
@@ -128,12 +124,11 @@ You can use the Remote Validation with PopUp and InLine edit modes only.
     ```
 
 
-### Limitations:
+## Known Limitations
 
-* Using Remote Validation with Batch (InCell) edit mode is not supported because the InCell editing handles the blur event of the input element to close the cell for editing and since the Remote Validation is async operation, the cell will be closed before the response.
-* With PopUp or InLine edit modes, if the user blurs the editor for a field with Remote Validation and clicks on the Update button before the response from the Remote Validation, the update/create operation will be performed with the invalid value. This means that in order to ensure a valid entry, the same rule from the Remote Validation should be included in the server validation as well.  
+* The batch (incell) edit mode does not support remote validation. The reason for that is that in the incell edit mode, the handling of the input element's `blur` event closes the cell for editing. On the other hand, the remote validation is an async operation which means that the cell will be closed before the response.
 
-
+* If the user blurs the field editor by using remote validation in the popup or inline edit mode and then clicks on the **Update** button before the response from the remote validation arrives, the `update` or `create` operation will be performed with an invalid value. To ensure a valid entry, include the remote validation rule in the server validation.  
 
 ## See Also
 
