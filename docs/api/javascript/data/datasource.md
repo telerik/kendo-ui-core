@@ -18,11 +18,11 @@ The aggregates which are calculated when the data source populates with data.
 
 The supported aggregates are:
 
-* `"average"`
-* `"count"`
-* `"max"`
-* `"min"`
-* `"sum"`
+* `"average"` - Only for Number.
+* `"count"` - String, Number and Date.
+* `"max"` - Number and Date.
+* `"min"` - Number and Date.
+* `"sum"` - Only for Number.
 
 > The data source calculates aggregates client-side unless the [`serverAggregates`](#configuration-serverAggregates) option is set to `true`.
 
