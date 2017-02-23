@@ -12,7 +12,6 @@
 
     (function($, undefined) {
         var kendo = window.kendo,
-            Class = kendo.Class,
             Widget = kendo.ui.Widget,
             TabKeyTrap = kendo.ui.Popup.TabKeyTrap,
             proxy = $.proxy,
