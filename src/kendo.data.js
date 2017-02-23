@@ -1428,7 +1428,7 @@ var __meta__ = { // jshint ignore:line
             current,
             length,
             compiled,
-            predicate, 
+            predicate,
             data = this.data,
             fields,
             operators,
@@ -3601,8 +3601,8 @@ var __meta__ = { // jshint ignore:line
                 this._aggregateResult = this._calculateAggregates(this._data, options);
                 this.view(result.data);
                 this.trigger(REQUESTEND, { type: "read" });
-                    this.trigger(CHANGE, { items: result.data });
-                }
+                this.trigger(CHANGE, { items: result.data });
+            }
 
             return $.Deferred().resolve(isPrevented).promise();
         },
