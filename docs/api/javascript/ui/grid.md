@@ -7875,6 +7875,56 @@ The index of the column or the [field](#configuration-columns.field) to which th
 
 ## Events
 
+### beforeEdit
+
+Fired when the user try to edit or create a data item, before the editor is created. Can be used for preventing the editing depending on custom logic.
+
+The event handler function context (available via the `this` keyword) will be set to the widget instance.
+
+#### Event Data
+
+##### e.model `kendo.data.Model`
+
+The data item which is going to be edited. Use its [isNew](/api/javascript/data/model#methods-isNew) method to check if the data item is new (created) or not (edited).
+
+##### e.sender `kendo.ui.Grid`
+
+The widget instance which fired the event.
+
+#### Example - subscribe to the "beforeEdit" event during initialization
+    <div id="grid"></div>
+    <script>
+    $("#grid").kendoGrid({
+      columns: [
+        { field: "id" },
+        { field: "name" },
+        { field: "age" },
+        { command: "edit" }
+      ],
+      dataSource: {
+        data: [
+          { id: 1, name: "Jane Doe", age: 30 },
+          { id: 2, name: "John Doe", age: 33 }
+        ],
+        schema: {
+          model: {
+            id: "id",
+            fields: {
+              "id": { type: "number" }
+            }
+          }
+        }
+      },
+      editable: "popup",
+      toolbar:["create"],
+      edit: function(e) {
+        if (!e.model.isNew()) {
+          e.preventDefault();
+        }
+      }
+    });
+    </script>
+
 ### cancel
 
 Fired when the user clicks the "cancel" button (in inline or popup [editing mode](#configuration-editable.mode)) or closes the popup window.
