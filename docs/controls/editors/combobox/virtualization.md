@@ -118,13 +118,13 @@ In this case, the `pageSize` will be set to `80`, because ((520 / 26) * 4) is eq
 
 ## Value Mapping
 
-### Overview of the Function
-
 > **Important**
 >
 > As of the Kendo UI R3 2016 release, the implementation of the `valueMapper` function is optional. It is required only if the widget contains an initial value or if the `value` method is used.
 
-Unlike simple Data and UI virtualization, the `valueMapper` was introduced because the ComboBox needs to maintain the selected item and to display the selected data item based on the value alone. To display the selected text, the widget needs to retrieve the selected data item which is part of a particular data page that is unknown to you. The required information is gathered with the `valueMapper` callback. It passes the selected value and requests the corresponding `row` index or `dataItem` of that value depending on the `mapValueTo` configuration option.
+Unlike simple Data and UI virtualization, the `valueMapper` was introduced because the ComboBox needs to maintain the selected item and to display the selected data item based on the value alone. To display the selected text, the widget needs to retrieve the selected data item which is part of a particular data page that is unknown to you. The required information is gathered with the `valueMapper` callback. It passes the selected value and requests the corresponding row `index` or `dataItem` of that value depending on the `mapValueTo` configuration option.
+
+### Mapping index Values
 
 The widget calls the `valueMapper` function when it receives a value which is not fetched from the remote server yet. The widget then passes the selected values in the `valueMapper` function. If the `mapValueTo` is not explicitly set to `dataItem`, the `valueMapper` implementation is expected to return the respective data item index. From this index the widget calculates the page number and in this way pre-fetches only that particular page by sending an additional Ajax request. If the value does not exist, the `valueMapper` is expected to return `null`, `[]`, or `-1` and the widget deselects the currently selected items.
 
@@ -143,7 +143,7 @@ The widget calls the `valueMapper` function when it receives a value which is no
     }
 ```
 
-### Recent Updates
+### Mapping dataItem Values
 
 The changes introduced with the Kendo UI R3 2016 release enable you to determine if the `valueMapper` must resolve a *value to an `index`* or a *value to a `dataItem`*. This is configured through the `mapValueTo` option that accepts two possible values&mdash;`"index"` or `"dataItem"`. By default, the `mapValueTo` is set to `"index"`, which does not affect the current behavior of the virtualization process.
 
