@@ -317,6 +317,6 @@
             type: "keypress"
         });
 
-        equal(maskedtextbox.calls("_mask"), 1);
+        equal(maskedtextbox.calls("_mask"), 2);
     });
 })();

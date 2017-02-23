@@ -304,4 +304,51 @@
 
         equal(input.val(), "123");
     });
+
+    asyncTest("MaskTextBox will not shift character if it is not correct", 1, function() {
+        var maskedtextbox = new MaskedTextBox(input, {
+            mask: "0ba",
+            rules: {
+                "b": function (char) {
+                    return (char === "0" || char === "1" || char === "2" ||
+                            char === "3" || char === "4" || char === "5");
+                },
+                "a": function (char) {
+                    return (char === "0" || char === "1" || char === "2");
+                }
+            },
+            value:"9__"
+        });
+
+        input.focus();
+        setTimeout(function() {
+            start();
+            caret(input[0], 0);
+            input.trigger({
+                type: "keypress",
+                which: 54
+                });
+
+            equal(input.val(), "6__");
+        });
+    });
+
+    asyncTest("Entering invalid symbol does not change the value", 1, function() {
+        var maskedtextbox = new MaskedTextBox(input, {
+            mask: "0-000",
+            value: "0-__3"
+        });
+
+        input.focus();
+        setTimeout(function() {
+            start();
+            caret(input[0], 2);
+            input.trigger({
+                type: "keypress",
+                which: 103
+                });
+
+            equal(input.val(), "0-__3");
+        });
+    });
 })();

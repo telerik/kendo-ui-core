@@ -311,19 +311,8 @@ var __meta__ = { // jshint ignore:line
             that._pasting = true;
 
             setTimeout(function() {
-                var value = element.value;
-                var pasted = value.substring(start, caret(element)[0]);
-
-                element.value = that._old = value.substring(0, start) + that._emptyMask.substring(start);
-
-                that._mask(start, start, pasted);
-
-                start = caret(element)[0];
-
-                that._mask(start, start, unmasked);
-
-                caret(element, start);
-
+                var pasted = element.value.substring(start, caret(element)[0]);
+                that._insertString(start, end, pasted, unmasked);
                 that._pasting = false;
             });
         },
@@ -351,6 +340,23 @@ var __meta__ = { // jshint ignore:line
 
                 that._formElement = form.on("reset", that._resetHandler);
             }
+        },
+
+        _insertString : function(start, end, insertString, unmasked, trimPrompt) {
+            var that = this;
+            var element = that.element[0];
+            var value = element.value;
+
+            element.value = that._old = value.substring(0, start) + that._emptyMask.substring(start);
+            that._mask(start, start, insertString);
+
+            if(trimPrompt && start !== caret(element)[0] && unmasked[0] === that.options.promptChar) {
+                unmasked = unmasked.substring(1);
+            }
+
+            start = caret(element)[0];
+            that._mask(start, start, unmasked);
+            caret(element, start);
         },
 
         _keydown: function(e) {
@@ -396,11 +402,11 @@ var __meta__ = { // jshint ignore:line
             }
 
             var character = String.fromCharCode(e.which);
-
             var selection = caret(this.element);
+            var unmasked = this._unmask(this.element.val().substring(selection[1]), selection[1]);
 
-            this._mask(selection[0], selection[1], character);
-
+            this._insertString(selection[0], selection[1], character, unmasked, true);
+            
             if (e.keyCode === keys.BACKSPACE || character) {
                 e.preventDefault();
             }
