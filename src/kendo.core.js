@@ -4137,7 +4137,12 @@ function pad(number, digits, end) {
             if (element.selectionStart !== undefined) {
                 if (isPosition) {
                     element.focus();
-                    element.setSelectionRange(start, end);
+                    if(support.mobileOS.wp) {// without the timeout the caret is at the end of the input
+                        setTimeout(function() { element.setSelectionRange(start, end); }, 0);
+                    }
+                    else {
+                        element.setSelectionRange(start, end);
+                    }
                 } else {
                     start = [element.selectionStart, element.selectionEnd];
                 }

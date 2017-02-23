@@ -276,4 +276,22 @@
 
         notEqual(input[0], kendo._activeElement());
     });
+
+    test("Add content in 'input' event; Windows Phone scenario", function() {
+        var masked = new MaskedTextBox(input, {
+            mask: "00.00",
+            promptChar: "_"
+        });
+
+        masked.value("1");
+        masked.element[0].value = "12_.__";
+
+        input[0].focus();
+        caret(input[0], 2, 2);
+        input.trigger("input");
+        input.trigger("propertychange");
+
+        equal(masked.value(), "12.__");
+    });
+
 })();

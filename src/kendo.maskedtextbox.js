@@ -275,13 +275,26 @@ var __meta__ = { // jshint ignore:line
             }
 
             if (value !== that._old && !that._pasting) {
-                start = caret(element)[0];
-                unmasked = that._unmask(value.substring(start), start);
+                var d = value.length - that._old.length;
+                if(d > 0)  { //typing on a windows phone (lack of keypress; should handle input in the "input" event)
+                    var selection = caret(element);
 
-                element.value = that._old = value.substring(0, start) + that._emptyMask.substring(start);
+                    var next = selection[0];
+                    start = next - d;
+                    var content = value.substr(start, d);
+                    element.value = value.substring(0, start) + value.substring(next);
 
-                that._mask(start, start, unmasked);
-                caret(element, start);
+                    this._mask(start, start, content);
+                }
+                else {
+                    start = caret(element)[0];
+                    unmasked = that._unmask(value.substring(start), start);
+
+                    element.value = that._old = value.substring(0, start) + that._emptyMask.substring(start);
+
+                    that._mask(start, start, unmasked);
+                    caret(element, start);
+                }
             }
         },
 
