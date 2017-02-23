@@ -1239,4 +1239,130 @@ test("load resolves promise upon success", function() {
    jasmine.clock().uninstall();
 });
 
+test("filter method returns correct items", function() {
+    var dataSource = new kendo.data.HierarchicalDataSource({
+        data: [
+            { text: "Furniture", expanded:true, items: [
+                { text: "Tables & Chairs", expanded:true, items: [
+                    { text: "F1" },
+                    { text: "S" , expanded:false, items: [
+                    { text: "Ff1" },
+                    { text: "Ss1" },
+                    { text: "fF2" }
+                ] },
+                    { text: "F2" }
+                ] },
+                { text: "Sofas" },
+                { text: "Occasional Furniture" }
+            ] },
+            { text: "Decor", expanded:true, items: [
+                { text: "Bed Linen" },
+                { text: "Curtains & Blinds" },
+                { text: "Carpets" }
+            ] }
+        ]
+    });
+     dataSource.read();
+     dataSource.filter({ field: 'text', operator: 'contains', value: "f" });
+
+     equal(dataSource.view().length,1);
+});
+
+test("filter method returns correct items with different textfields", function() {
+    var dataSource = new kendo.data.HierarchicalDataSource({
+        data:[
+                  { CategoryName: "Tea", items: [
+                    { ProductName: "Green Tea" },
+                    { ProductName: "Black Tea" }
+                  ] },
+                  { CategoryName: "Coffee" }
+        ]
+    });
+     dataSource.read();
+     dataSource.view()[0].load();
+     dataSource.filter({
+        logic: "or",
+        filters: [
+            { field: "CategoryName", operator: "contains", value: "ff" },
+            {
+                logic: "and",
+                filters: [
+                    { field: "ProductName", operator: "contains", value: "gr" }
+                ]
+            }
+        ]
+    });
+     dataSource.view()[0].load();
+     equal(dataSource.view().length,2);
+     equal(dataSource.view()[0].children.view().length,1);
+});
+
+test("filter method returns correct child items", function() {
+    var dataSource = new kendo.data.HierarchicalDataSource({
+        data: [
+            { text: "Furniture", expanded:true, items: [
+                { text: "Tables & Chairs", expanded:true, items: [
+                    { text: "F1" },
+                    { text: "S" , expanded:false, items: [
+                    { text: "Ff1" },
+                    { text: "Ss1" },
+                    { text: "fF2" }
+                ] },
+                    { text: "F2" }
+                ] },
+                { text: "Sofas" },
+                { text: "Occasional Furniture" }
+            ] },
+            { text: "Decor", expanded:true, items: [
+                { text: "Bed Linen" },
+                { text: "Curtains & Blinds" },
+                { text: "Carpets" }
+            ] }
+        ]
+    });
+     dataSource.read();
+
+     dataSource.view()[0].load();
+     dataSource.filter({ field: 'text', operator: 'contains', value: "fa" });
+     dataSource.view()[0].load();
+     equal(dataSource.view()[0].children.view().length,1);
+});
+
+test("filter method returns correct grand child items", function() {
+    var dataSource = new kendo.data.HierarchicalDataSource({
+        data: [
+            { text: "Furniture", expanded:true, items: [
+                { text: "Tables & Chairs", expanded:true, items: [
+                    { text: "F1" },
+                    { text: "S" , expanded:false, items: [
+                    { text: "Ff1" },
+                    { text: "Ss1" },
+                    { text: "fF2" }
+                ] },
+                    { text: "F2" }
+                ] },
+                { text: "Sofas" },
+                { text: "Occasional Furniture" }
+            ] },
+            { text: "Decor", expanded:true, items: [
+                { text: "Bed Linen" },
+                { text: "Curtains & Blinds" },
+                { text: "Carpets" }
+            ] }
+        ]
+    });
+     dataSource.read();
+
+     dataSource.view()[0].load();
+     dataSource.view()[0].children.view()[0].load();
+     dataSource.view()[0].children.view()[0].children.view()[1].load();
+     dataSource.filter({ field: 'text', operator: 'contains', value: "ff" });
+     dataSource.view()[0].load();
+     dataSource.view()[0].children.view()[0].load();
+     dataSource.view()[0].children.view()[0].children.view()[0].load();
+     equal(dataSource.view()[0].children.view().length,1);
+     equal(dataSource.view()[0].children.view()[0].children.view().length,1);
+     equal(dataSource.view()[0].children.view()[0].children.view()[0].children.view().length,2);
+});
+
 }());

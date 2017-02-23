@@ -390,6 +390,33 @@ test("filter without model definition and serverFiltering", function() {
     dataSource.filter({ field: "foo", operator: "eq", value: "bar" });
 });
 
+test("filter without model definition and serverFiltering HierarchicalDataSource", function() {
+    var transport = new RemoteTransport({
+        read: "foo",
+        parameterMap: function(options) {
+            equal(options.filter.filters[0].field, "foo");
+
+            return options;
+        }
+    });
+
+    var dataSource = new kendo.data.HierarchicalDataSource({
+        transport: transport,
+        serverFiltering: true,
+        schema: {
+            model: {
+                fields: { }
+            }
+        }
+    });
+
+    $.mockjax({
+        url: "foo",
+    });
+
+    dataSource.filter({ field: "foo", operator: "eq", value: "bar" });
+});
+
 test("filter original field name is used if projection is set", 2, function() {
     var transport = new RemoteTransport({
         read: "foo",

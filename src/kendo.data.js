@@ -1428,7 +1428,7 @@ var __meta__ = { // jshint ignore:line
             current,
             length,
             compiled,
-            predicate,
+            predicate, 
             data = this.data,
             fields,
             operators,
@@ -3601,8 +3601,8 @@ var __meta__ = { // jshint ignore:line
                 this._aggregateResult = this._calculateAggregates(this._data, options);
                 this.view(result.data);
                 this.trigger(REQUESTEND, { type: "read" });
-                this.trigger(CHANGE, { items: result.data });
-            }
+                    this.trigger(CHANGE, { items: result.data });
+                }
 
             return $.Deferred().resolve(isPrevented).promise();
         },
@@ -4474,6 +4474,10 @@ var __meta__ = { // jshint ignore:line
 
                 children.one(CHANGE, proxy(this._childrenLoaded, this));
 
+                if(this._matchFilter){
+                    options.filter = { field: '_matchFilter', operator: 'eq', value: true };
+                }
+
                 promise = children[method](options);
             } else {
                 this.loaded(true);
@@ -4568,6 +4572,74 @@ var __meta__ = { // jshint ignore:line
             }
 
             return DataSource.fn.insert.call(this, index, model);
+        },
+
+        filter: function(val) {
+            var that = this;
+
+            if (val === undefined) {
+                 return that._filter;
+            }
+
+            if(!this.options.serverFiltering){
+                this._markHierarchicalQuery(val);
+                val = { field: '_matchFilter', operator: 'equals', value: true };
+            }
+
+             that.trigger("reset");
+             that._query({ filter: val, page: 1 });
+        },
+
+        _markHierarchicalQuery: function(expressions){
+            var compiled;
+            var predicate; 
+            var fields;
+            var operators;
+            var filter;
+
+            expressions = normalizeFilter(expressions);
+
+            if (!expressions || expressions.filters.length === 0) {
+                return this;
+            }
+
+            compiled = Query.filterExpr(expressions);
+            fields = compiled.fields;
+            operators = compiled.operators;
+
+            predicate = filter = new Function("d, __f, __o", "return " + compiled.expression);
+
+            if (fields.length || operators.length) {
+                filter = function(d) {
+                    return predicate(d, fields, operators);
+                };
+            }
+
+            this._updateHierarchicalFilter(filter);
+        },
+
+         _updateHierarchicalFilter: function(filter){
+            var current;
+            var data = this._data;
+            var result = false;
+
+            for (var idx = 0; idx < data.length; idx++) {
+                 current = data[idx];
+
+                 if(current.hasChildren){
+                     current._matchFilter = current.children._updateHierarchicalFilter(filter);
+                    if(!current._matchFilter){
+                        current._matchFilter = filter(current);
+                    }
+                }else{
+                    current._matchFilter = filter(current);
+                }
+
+                if(current._matchFilter){
+                    result = true;
+                }
+            }
+            return result;
         },
 
         _find: function(method, value) {
