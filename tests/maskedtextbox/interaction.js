@@ -294,4 +294,14 @@
         equal(masked.value(), "12.__");
     });
 
+    test("MaskedTextBox value is not undefined when clearPromptChar is true and empty mask is used", 1, function() {
+        input.attr("value","123")
+        var maskedtextbox = new MaskedTextBox(input, {
+            clearPromptChar: true
+        });
+
+        input.focus();
+
+        equal(input.val(), "123");
+    });
 })();

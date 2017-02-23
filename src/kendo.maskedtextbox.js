@@ -159,6 +159,7 @@ var __meta__ = { // jshint ignore:line
             }
 
             if (!emptyMask) {
+                this._oldValue = value;
                 element.val(value);
                 return;
             }
