@@ -701,8 +701,9 @@ var __meta__ = { // jshint ignore:line
             }
 
             if (!isPopupVisible || !that.filterInput) {
-                e.preventDefault();
                 var current = that._focus();
+                
+                e.preventDefault();
 
                 if (key === keys.HOME) {
                     handled = true;
