@@ -112,6 +112,59 @@ The sample application Visual Studio solution contains the following items:
 * `Models`&mdash;Model classes.
 * `App_Data`&mdash;LocalDB sample database.
 
+## Upgrade
+
+You can upgrade the version of the Telerik UI for ASP.NET MVC wrappers and also switch from a trial to a developer license.
+
+### Upgrade to Newer Versions
+
+To update Telerik UI for ASP.NET MVC to a new version, either:
+* Use the [Upgrade Project Wizard]({% slug projectwizardupgrade_visualstudio_aspnetmvc %}), or
+* Manually replace the scripts and the style files.
+
+#### Automatic Upgrade
+
+To utilize the Upgrade Project Wizard, refer to the articles on:
+
+1. [Downloading new versions]({% slug latestversionretrieval_visualstudio_aspnetmvc %})
+1. [Upgrading the Project Wizard]({% slug projectwizardupgrade_visualstudio_aspnetmvc %})
+
+#### Manual Upgrade
+
+To manually upgrade to a newer Telerik UI for ASP.NET MVC version:
+
+1. Replace all [scripts, styles, and images](#distribution-contents) related to Telerik UI for ASP.NET MVC with the desired version of the framework. [Download](#download) the desired version from the **Download** section of your account.
+1. Change the reference to the new [Kendo.MVC dll]({% slug aspnetmvc5_aspnetmvc %}#add-kendomvcdll-reference). Verify that the dll refers to the correct ASP.NET MVC version.
+
+### Upgrade From Trial to Licensed Versions
+
+1. Before upgrading to a licensed version, delete (uninstall) the trial version from your machine. This eliminates the possibility for trial assemblies to end up in the project references or in production.
+1. [Install](#installation) the licensed Kendo UI version and follow the steps for updating the Telerik UI for ASP.NET MVC version.
+
+### Troubleshooting
+
+#### I Am Still Getting the Old Version
+
+Sometimes the .NET Framework caches the old Kendo.MVC dll. As a result, the upgrade may seem to have failed.
+
+**Solution**
+
+1. From the Windows **Task Manager**, terminate the IIS process and close Visual Studio.
+1. Clean up the Temporary ASP.NET files from `<sysdrive>:\Windows\Microsoft.NET\Framework[64] <vernum>\Temporary ASP.NET Files`.
+1. Delete your browser cache. For Internet Explorer, select **Tools** > **Internet Options** > **Delete Files**.
+1. Clean up the Windows WebSite Cache from `\Users<UserName>\AppData\Local\Microsoft\WebsiteCache`. The location of this cache may vary from one operating system to another.
+1. Clean up the Visual Studio Backup from `<sysdrive>:\Users\<UserName>\Documents\Visual Studio <vsVersion>\Backup Files`. The exact location depends on your Visual Studio settings and installation.
+
+#### The Icons Are Missing after the Upgrade
+
+As of the [Kendo UI R1 2017 release](http://docs.telerik.com/kendo-ui/backwards-compatibility/2017-backward-compatibility#kendo-ui-2017-r1), the Telerik UI for ASP.NET MVC uses [font icons](http://docs.telerik.com/kendo-ui/styles-and-layout/icons-web), which might lead to compatibility issues.
+
+**Solution**
+
+If you upgrade your project from a prior version to the R1 2017 version (2017.1.118) or later, you have to change the [classes of the custom CSS rules that you use accordingly](http://docs.telerik.com/kendo-ui/backwards-compatibility/2017-backward-compatibility#kendo-ui-2017-r1).
+
+If the icons are still missing after you change the classes, verify that the version is fully [updated](#upgrade-to-newer-versions).
+
 ## Next Steps
 
 After you run the sample application, read through the following articles, related to Telerik UI for ASP.NET MVC:
