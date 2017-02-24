@@ -30,6 +30,9 @@ import '@progress/kendo-ui-core';
 
 console.log(kendo);
 ```
+## Examples for JavaScript and TypeScript applications
+
+Please check the runnable examples demonstrating how to use Kendo UI with webpack in both JavaScript and TypeScript applications in the following [sample repository](https://github.com/telerik/kendo-ui-npm-example/tree/master/typescript-webpack).
 
 ## Use CDN or Packaged Kendo UI Scripts
 
