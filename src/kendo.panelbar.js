@@ -7,7 +7,7 @@ var __meta__ = { // jshint ignore:line
     name: "PanelBar",
     category: "web",
     description: "The PanelBar widget displays hierarchical data as a multi-level expandable panel bar.",
-    depends: [ "core", "data.odata" ]
+    depends: [ "core", "data", "data.odata" ]
 };
 
 (function($, undefined) {
