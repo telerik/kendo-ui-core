@@ -4528,6 +4528,11 @@ var __meta__ = { // jshint ignore:line
                 children: options
             });
 
+            if(options.filter){
+                this._hierarchicalFilter = options.filter;
+                options.filter = null;
+            }
+
             DataSource.fn.init.call(this, extend(true, {}, { schema: { modelBase: node, model: node } }, options));
 
             this._attachBubbleHandlers();
@@ -4539,6 +4544,17 @@ var __meta__ = { // jshint ignore:line
             that._data.bind(ERROR, function(e) {
                 that.trigger(ERROR, e);
             });
+        },
+
+        read: function(data) {
+            var that = this;
+            var result = DataSource.fn.read.call(that, data);
+
+            if(that._hierarchicalFilter){
+                that.filter(that._hierarchicalFilter);
+            }
+
+            return result;
         },
 
         remove: function(node){

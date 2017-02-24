@@ -1268,6 +1268,35 @@ test("filter method returns correct items", function() {
      equal(dataSource.view().length,1);
 });
 
+test("filter propery returns correct items", function() {
+    var dataSource = new kendo.data.HierarchicalDataSource({
+        filter:{ field: 'text', operator: 'contains', value: "f" },
+        data: [
+            { text: "Furniture", expanded:true, items: [
+                { text: "Tables & Chairs", expanded:true, items: [
+                    { text: "F1" },
+                    { text: "S" , expanded:false, items: [
+                    { text: "Ff1" },
+                    { text: "Ss1" },
+                    { text: "fF2" }
+                ] },
+                    { text: "F2" }
+                ] },
+                { text: "Sofas" },
+                { text: "Occasional Furniture" }
+            ] },
+            { text: "Decor", expanded:true, items: [
+                { text: "Bed Linen" },
+                { text: "Curtains & Blinds" },
+                { text: "Carpets" }
+            ] }
+        ]
+    });
+     dataSource.read();
+
+     equal(dataSource.view().length,1);
+});
+
 test("filter method returns correct items with different textfields", function() {
     var dataSource = new kendo.data.HierarchicalDataSource({
         data:[
