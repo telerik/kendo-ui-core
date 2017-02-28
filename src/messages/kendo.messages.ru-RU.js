@@ -76,13 +76,13 @@ $.extend(true, kendo.ui.FilterMenu.prototype.options.operators,{
 if (kendo.ui.ColumnMenu) {
 kendo.ui.ColumnMenu.prototype.options.messages =
 $.extend(true, kendo.ui.ColumnMenu.prototype.options.messages,{
-  "columns": "Колонны",
+  "columns": "Столбцы",
   "sortAscending": "Сортировка по возрастанию",
   "sortDescending": "Сортировка по убыванию",
   "settings": "Параметры столбцов",
-  "done": "Cделанный",
-  "lock": "Запирать",
-  "unlock": "Отпереть",
+  "done": "Готово",
+  "lock": "Заблокировать",
+  "unlock": "Разблокировать",
   "filter": "Фильтровать"
 });
 }
@@ -93,52 +93,52 @@ if (kendo.ui.RecurrenceEditor) {
 kendo.ui.RecurrenceEditor.prototype.options.messages =
 $.extend(true, kendo.ui.RecurrenceEditor.prototype.options.messages,{
   "daily": {
-    "interval": "days(s)",
-    "repeatEvery": "Repeat every:"
+    "interval": "дней",
+    "repeatEvery": "Повторять каждые:"
   },
   "end": {
-    "after": "After",
-    "occurrence": "occurrence(s)",
-    "label": "End:",
-    "never": "Never",
-    "on": "On",
-    "mobileLabel": "Ends"
+    "after": "После",
+    "occurrence": "входит",
+    "label": "Конец:",
+    "never": "Никогда",
+    "on": "В",
+    "mobileLabel": "Окончание"
   },
   "frequencies": {
-    "daily": "Daily",
-    "monthly": "Monthly",
-    "never": "Never",
-    "weekly": "Weekly",
-    "yearly": "Yearly"
+    "daily": "Ежедневно",
+    "monthly": "Ежемесячно",
+    "never": "Никогда",
+    "weekly": "Еженедельно",
+    "yearly": "Ежегодно"
   },
   "monthly": {
-    "day": "Day",
-    "interval": "month(s)",
-    "repeatEvery": "Repeat every:",
-    "repeatOn": "Repeat on:"
+    "day": "День",
+    "interval": "месяцы",
+    "repeatEvery": "Повторять каждый:",
+    "repeatOn": "Повторение:"
   },
   "offsetPositions": {
-    "first": "first",
-    "fourth": "fourth",
-    "last": "last",
-    "second": "second",
-    "third": "third"
+    "first": "первый",
+    "fourth": "четвертый",
+    "last": "последний",
+    "second": "второй",
+    "third": "третий"
   },
   "weekly": {
-    "repeatEvery": "Repeat every:",
-    "repeatOn": "Repeat on:",
-    "interval": "week(s)"
+    "repeatEvery": "Повторять каждую:",
+    "repeatOn": "Повторение:",
+    "interval": "неделя"
   },
   "yearly": {
-    "of": "of",
-    "repeatEvery": "Repeat every:",
-    "repeatOn": "Repeat on:",
-    "interval": "year(s)"
+    "of": "из",
+    "repeatEvery": "Повторять каждый:",
+    "repeatOn": "Повторение:",
+    "interval": "годы"
   },
   "weekdays": {
-    "day": "day",
-    "weekday": "weekday",
-    "weekend": "weekend day"
+    "day": "день",
+    "weekday": "будний",
+    "weekend": "выходной"
   }
 });
 }
@@ -154,8 +154,8 @@ $.extend(true, kendo.ui.Grid.prototype.options.messages,{
     "canceledit": "Отмена",
     "update": "Обновить",
     "edit": "Изменить",
-    "excel": "Export to Excel",
-    "pdf": "Export to PDF",
+    "excel": "Экспорт в Excel",
+    "pdf": "Экспорт в PDF",
     "select": "Выбрать",
     "cancel": "Отменить изменения",
     "save": "Сохранить изменения"
@@ -174,7 +174,7 @@ $.extend(true, kendo.ui.Grid.prototype.options.messages,{
 if (kendo.ui.Pager) {
 kendo.ui.Pager.prototype.options.messages =
 $.extend(true, kendo.ui.Pager.prototype.options.messages,{
-  "allPages": "All",
+  "allPages": "Все",
   "page": "Страница",
   "display": "Отображены записи {0} - {1} из {2}",
   "of": "из {0}",
@@ -235,7 +235,7 @@ $.extend(true, kendo.ui.FilterMultiCheck.prototype.options.messages,{
 if (kendo.ui.Groupable) {
 kendo.ui.Groupable.prototype.options.messages =
 $.extend(true, kendo.ui.Groupable.prototype.options.messages,{
-  "empty": "Переместите сюда заголовок колонки, чтобы сгрупировать записи из этой колонки"
+  "empty": "Переместите сюда заголовок столбца, чтобы сгрупировать записи по этому столбцу"
 });
 }
 
@@ -271,7 +271,7 @@ $.extend(true, kendo.ui.Editor.prototype.options.messages,{
   "dialogButtonSeparator": "или",
   "dialogCancel": "Отмена",
   "dialogInsert": "Вставить",
-  "imageAltText": "Alternate text",
+  "imageAltText": "Альтернативный текст",
   "imageWebAddress": "Веб адрес",
   "linkOpenInNewWindow": "Открыть в новом окне",
   "linkText": "Текст",
@@ -279,28 +279,28 @@ $.extend(true, kendo.ui.Editor.prototype.options.messages,{
   "linkWebAddress": "Веб адрес",
   "search": "Поиск",
   "createTable": "Вставить таблицу",
-  "addColumnLeft": "Add column on the left",
-  "addColumnRight": "Add column on the right",
-  "addRowAbove": "Add row above",
-  "addRowBelow": "Add row below",
-  "deleteColumn": "Delete column",
-  "deleteRow": "Delete row",
-  "backColor": "Background color",
-  "deleteFile": "Are you sure you want to delete \"{0}\"?",
-  "directoryNotFound": "A directory with this name was not found.",
-  "dropFilesHere": "drop files here to upload",
-  "emptyFolder": "Empty Folder",
-  "foreColor": "Color",
-  "invalidFileType": "The selected file \"{0}\" is not valid. Supported file types are {1}.",
-  "orderBy": "Arrange by:",
-  "orderByName": "Name",
-  "orderBySize": "Size",
-  "overwriteFile": "'A file with name \"{0}\" already exists in the current directory. Do you want to overwrite it?",
-  "uploadFile": "Upload",
-  "formatting": "Format",
-  "viewHtml": "View HTML",
-  "dialogUpdate": "Update",
-  "insertFile": "Insert file"
+  "addColumnLeft": "Добавить столбец слева",
+  "addColumnRight": "Добавить столбец справа",
+  "addRowAbove": "Добавить стороку выше",
+  "addRowBelow": "Добавить строку ниже",
+  "deleteColumn": "Удалить столбец",
+  "deleteRow": "Удалить строку",
+  "backColor": "Цвет фона",
+  "deleteFile": "Вы уверены, что хотите удалить \"{0}\"?",
+  "directoryNotFound": "Каталог с таким именем не найден.",
+  "dropFilesHere": "для загрузки перетащите файлы сюда",
+  "emptyFolder": "Пустая папка",
+  "foreColor": "Цвет",
+  "invalidFileType": "Выбранный файл \"{0}\" не верен. Поддерживаемые типы файлов {1}.",
+  "orderBy": "Упорядочить по:",
+  "orderByName": "Имя",
+  "orderBySize": "Размер",
+  "overwriteFile": "'Файл с именем \"{0}\" уже существует в этой папке. Вы хотите перезаписать его?",
+  "uploadFile": "Загрузить",
+  "formatting": "Формат",
+  "viewHtml": "Просмотр HTML",
+  "dialogUpdate": "Обновить",
+  "insertFile": "Вставить файл"
 });
 }
 
@@ -328,53 +328,53 @@ $.extend(true, kendo.ui.Upload.prototype.options.localization,{
 if (kendo.ui.Scheduler) {
 kendo.ui.Scheduler.prototype.options.messages =
 $.extend(true, kendo.ui.Scheduler.prototype.options.messages,{
-  "allDay": "all day",
+  "allDay": "весь день",
   "cancel": "Отмена",
   "editable": {
-    "confirmation": "Are you sure you want to delete this event?"
+    "confirmation": "Вы уверены, что хотите удалить это событие?"
   },
-  "date": "Date",
-  "destroy": "Delete",
+  "date": "Дата",
+  "destroy": "Удалить",
   "editor": {
-    "allDayEvent": "All day event",
-    "description": "Description",
-    "editorTitle": "Event",
-    "end": "End",
-    "endTimezone": "End timezone",
-    "repeat": "Repeat",
-    "separateTimezones": "Use separate start and end time zones",
-    "start": "Start",
-    "startTimezone": "Start timezone",
+    "allDayEvent": "Событие на весь день",
+    "description": "Описание",
+    "editorTitle": "Событие",
+    "end": "Окончание",
+    "endTimezone": "Часовой поис окончания",
+    "repeat": "Повторение",
+    "separateTimezones": "Для начала и окончания используйте свой часовой пояс",
+    "start": "Начало",
+    "startTimezone": "Часовой пояс начала",
     "timezone": " ",
-    "timezoneEditorButton": "Time zone",
-    "timezoneEditorTitle": "Timezones",
-    "title": "Title",
-    "noTimezone": "No timezone"
+    "timezoneEditorButton": "Часовой пояс",
+    "timezoneEditorTitle": "Часовые пояса",
+    "title": "Заголовок",
+    "noTimezone": "Без часового пояса"
   },
-  "event": "Event",
+  "event": "Событие",
   "recurrenceMessages": {
-    "deleteRecurring": "Do you want to delete only this event occurrence or the whole series?",
-    "deleteWindowOccurrence": "Delete current occurrence",
-    "deleteWindowSeries": "Delete the series",
-    "deleteWindowTitle": "Delete Recurring Item",
-    "editRecurring": "Do you want to edit only this event occurrence or the whole series?",
-    "editWindowOccurrence": "Edit current occurrence",
-    "editWindowSeries": "Edit the series",
-    "editWindowTitle": "Edit Recurring Item"
+    "deleteRecurring": "Вы хотите удалить только это событие или весь ряд повторяющихся событий?",
+    "deleteWindowOccurrence": "Удалить это событие",
+    "deleteWindowSeries": "Удалить весь ряд",
+    "deleteWindowTitle": "Удалить повторяющееся событие",
+    "editRecurring": "Вы хотите внести изменение только в это событие или изменить весь ряд?",
+    "editWindowOccurrence": "Изменить текущее событие",
+    "editWindowSeries": "Изменить весь ряд",
+    "editWindowTitle": "Изменить одно событие"
   },
-  "save": "Save",
-  "time": "Time",
-  "today": "Today",
+  "save": "Сохранить",
+  "time": "время",
+  "today": "Сегодня",
   "views": {
-    "agenda": "Agenda",
-    "day": "Day",
-    "month": "Month",
-    "week": "Week",
-    "workWeek": "Work Week"
+    "agenda": "Повестка",
+    "day": "День",
+    "month": "Месяц",
+    "week": "Неделя",
+    "workWeek": "Рабочая неделя"
   },
-  "deleteWindowTitle": "Delete event",
-  "showFullDay": "Show full day",
-  "showWorkDay": "Show business hours"
+  "deleteWindowTitle": "Удалить событие",
+  "showFullDay": "Показывать весь день",
+  "showWorkDay": "Показывать только рабочие часы"
 });
 }
 
