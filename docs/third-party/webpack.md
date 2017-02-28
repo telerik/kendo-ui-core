@@ -30,9 +30,6 @@ import '@progress/kendo-ui-core';
 
 console.log(kendo);
 ```
-## Examples for JavaScript and TypeScript applications
-
-Please check the runnable examples demonstrating how to use Kendo UI with webpack in both JavaScript and TypeScript applications in the following [sample repository](https://github.com/telerik/kendo-ui-npm-example/tree/master/typescript-webpack).
 
 ## Use CDN or Packaged Kendo UI Scripts
 
@@ -43,6 +40,10 @@ The Kendo UI packaged scripts are in an AMD-compatible format, which means that 
 This section is intended for holders of the commercial Kendo UI Complete license.
 
 The commercial Kendo UI distribution `zip` file, available for download for the active customer subscriptions has the packaged scripts available in the `js` directory.
+
+## Use in JavaScript and TypeScript Applications
+
+To see the runnable examples on how to use Kendo UI with Webpack in both JavaScript and TypeScript applications, refer to the following [sample repository](https://github.com/telerik/kendo-ui-npm-example/tree/master/typescript-webpack).
 
 ## Build AMD-Formatted Scripts
 
