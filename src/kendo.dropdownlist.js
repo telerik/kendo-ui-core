@@ -701,7 +701,7 @@ var __meta__ = { // jshint ignore:line
             }
 
             if (!isPopupVisible || !that.filterInput) {
-                var current = that._focus();
+                var current = that._focus();                
 
                 if (key === keys.HOME) {
                     handled = true;
@@ -722,6 +722,7 @@ var __meta__ = { // jshint ignore:line
                             that._blur();
                         }
                     });
+                    e.preventDefault();
                 }
             }
 
