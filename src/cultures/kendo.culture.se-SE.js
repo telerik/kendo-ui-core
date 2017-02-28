@@ -29,13 +29,13 @@
         calendars: {
             standard: {
                 days: {
-                    names: ["sotnabeaivi","mánnodat","disdat","gaskavahkku","duorastat","bearjadat","lávvardat"],
-                    namesAbbr: ["sotn","mán","dis","gask","duor","bear","láv"],
-                    namesShort: ["s","m","d","g","d","b","l"]
+                    names: ["Söndag", "Måndag", "Tisdag", "Onsdag", "Torsdag", "Fredag", "Lördag"],
+                    namesAbbr: ["sön", "mán", "tis", "ons", "tors", "fre", "lör"],
+                    namesShort: ["s", "m", "t", "o", "t", "f", "l"]
                 },
                 months: {
-                    names: ["ođđajagemánnu","guovvamánnu","njukčamánnu","cuoŋománnu","miessemánnu","geassemánnu","suoidnemánnu","borgemánnu","čakčamánnu","golggotmánnu","skábmamánnu","juovlamánnu"],
-                    namesAbbr: ["ođđj","guov","njuk","cuoŋ","mies","geas","suoi","borg","čakč","golg","skáb","juov"]
+                    names: ["Januari", "Februari", "Mars", "April", "Maj", "Juni", "Juli", "Augusti", "September", "Oktober", "November", "December"],
+                    namesAbbr: ["jan", "feb", "mars", "april", "maj", "juni", "juli", "aug", "sept", "okt", "nov", "dec"]
                 },
                 AM: [""],
                 PM: [""],
