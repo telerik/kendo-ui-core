@@ -4599,7 +4599,7 @@ var __meta__ = { // jshint ignore:line
 
             if(!this.options.serverFiltering){
                 this._markHierarchicalQuery(val);
-                val = { field: '_matchFilter', operator: 'equals', value: true };
+                val = { logic: "or", filters: [val, {field:'_matchFilter', operator: 'equals', value: true }]};
             }
 
              that.trigger("reset");
