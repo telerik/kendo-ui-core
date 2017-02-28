@@ -8004,6 +8004,57 @@ The widget instance which fired the event.
     grid.editRow($("#grid tr:eq(1)"));
     </script>
 
+### cellClose
+
+Fired when "incell" edit mode is used and the cell is going to be closed. The event is triggerd after saving or canceling the chages, but before the cell is closed.
+
+The event handler function context (available via the `this` keyword) will be set to the widget instance.
+
+#### Event Data
+
+##### e.container `jQuery`
+
+The jQuery object that represents the edit container element. More information is available in the [edit event arguments' description](#events-edit).
+
+##### e.model `kendo.data.Model`
+
+The data item to which the table row is bound.
+
+##### e.type `String`
+
+The type of the cell close action - can be either "save" or "cancel".
+
+##### e.sender `kendo.ui.Grid`
+
+The widget instance which fired the event.
+
+#### Example - subscribe to the "cancel" event during initialization
+
+    <div id="grid"></div>
+    <script>
+    $("#grid").kendoGrid({
+      columns: [
+        { field: "name" },
+        { field: "age" }
+      ],
+      dataSource: {
+        data: [
+          { id: 1, name: "Jane Doe", age: 30 },
+          { id: 2, name: "John Doe", age: 33 }
+        ],
+        schema: {
+          model: { id: "id" }
+        }
+      },
+      editable: "incell",
+      cellClose:  function(e) {
+        console.log(e.type);
+      }
+    });
+    var grid = $("#grid").data("kendoGrid");
+    grid.editCell($("#grid td:eq(1)"));
+    </script>
+
 ### change
 
 Fired when the user selects a table row or cell in the grid.
