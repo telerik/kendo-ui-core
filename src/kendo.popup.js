@@ -695,9 +695,12 @@ var __meta__ = { // jshint ignore:line
             this.element = undefined;
         },
 
-        _keepInTrap: function(e) {
+        shouldTrap: function () {
+            return true;
+        },
 
-            if (e.which !== 9) {
+        _keepInTrap: function(e) {
+            if (e.which !== 9 || !this.shouldTrap()) {
                 return;
             }
             var target = e.target;

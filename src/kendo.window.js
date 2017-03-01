@@ -209,17 +209,20 @@
                 that._marker = kendo.guid().substring(0, 8);
 
                 $(window).on("resize" + NS + that._marker, that._resizeHandler);
-
+                
                 if (options.visible) {
                     that.trigger(OPEN);
                     that.trigger(ACTIVATE);
                 }
 
                 kendo.notify(that);
-
+                
                 if(this.options.modal) {
                     this._tabKeyTrap = new TabKeyTrap(wrapper);
                     this._tabKeyTrap.trap();
+                    this._tabKeyTrap.shouldTrap = function () {
+                        return that.isFront;
+                    };
                 }
             },
 
@@ -728,6 +731,12 @@
                         }
 
                         overlay.show();
+
+                        $(window).on("focus", function() {
+                            if (that.isFront) {
+                                that.element.focus();
+                            }
+                        });
                     }
 
                     if (!wrapper.is(VISIBLE)) {
@@ -751,7 +760,7 @@
 
             _activate: function() {
                 var scrollable = this.options.scrollable !== false;
-
+                
                 if (this.options.autoFocus) {
                     this.element.focus();
                 }
@@ -858,7 +867,7 @@
                     !this._actionable(target) &&
                     (!element.find(active).length || !element.find(target).length);
             },
-
+            
             toFront: function (e) {
                 var that = this,
                     wrapper = that.wrapper,
@@ -866,7 +875,7 @@
                     zIndex = +wrapper.css(ZINDEX),
                     originalZIndex = zIndex,
                     target = (e && e.target) || null;
-
+                
                 $(KWINDOW).each(function(i, element) {
                     var windowObject = $(element),
                         zIndexNew = windowObject.css(ZINDEX),
@@ -875,6 +884,8 @@
                     if (!isNaN(zIndexNew)) {
                         zIndex = Math.max(+zIndexNew, zIndex);
                     }
+
+                    contentElement.data('kendoWindow').isFront = element == currentWindow;
 
                     // Add overlay to windows with iframes and lower z-index to prevent
                     // trapping of events when resizing / dragging
