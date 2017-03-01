@@ -12,8 +12,7 @@ See the [DataSource configuration](/api/framework/datasource#configuration) for 
 
 ### filter `Array|Object`
 
-The filters which are applied over the data items. It applies the filter to all loaded nodes and applies the filter to all loaded nodes and created views from the nodes that match the filter
- or that have ancestors that match the filter. By default, no filter is applied.
+The filters which are applied over the data items. It applies the filter to all loaded nodes and created views from the nodes that match the filter and the ones that have ancestors that match the filter. By default, no filter is applied.
 
 > The data source filters the data items client-side unless the [`serverFiltering`](/api/framework/datasource#configuration-serverFiltering) option is set to `true`.
 
@@ -320,7 +319,7 @@ The **filter**, **remove** and **getByUid** methods are overridden and work with
 
 ### filter
 
-Gets or sets the filter configuration. It applies the filter to all loaded nodes and created views from the nodes that match the filter or that have ancestors that match the filter.
+Gets or sets the filter configuration. It applies the filter to all loaded nodes and created views from the nodes that match the filter and the nodes whose ancestors match the filter.
 
 #### Parameters
 
