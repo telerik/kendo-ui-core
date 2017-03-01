@@ -329,7 +329,7 @@ The filter configuration. Accepts the same values as the [`filter`](#configurati
 
 #### Returns
 
-`Object` the current filter configuration. Returns `null` if no filter criteria are currently applied. Returns `undefined` if the DataSource instance has not performed filtering so far.
+`Object` the current filter configuration. Returns `undefined` if the DataSource instance has not performed filtering so far.
 
 #### Example - set the data source filter
 
