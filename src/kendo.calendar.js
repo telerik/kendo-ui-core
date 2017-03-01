@@ -18,6 +18,7 @@ var __meta__ = { // jshint ignore:line
         keys = kendo.keys,
         parse = kendo.parseDate,
         adjustDST = kendo.date.adjustDST,
+        getDate = kendo.date.getDate,
         weekInYear = kendo.date.weekInYear,
         extractFormat = kendo._extractFormat,
         template = kendo.template,
@@ -475,6 +476,8 @@ var __meta__ = { // jshint ignore:line
                     if (isDisabled(currentValue)) {
                         currentValue = that._nextNavigatable(currentValue, value);
                     }
+
+                    min = getDate(min);
                     if (isInRange(currentValue, min, max)) {
                         that._focus(restrictValue(currentValue, options.min, options.max));
                     }
