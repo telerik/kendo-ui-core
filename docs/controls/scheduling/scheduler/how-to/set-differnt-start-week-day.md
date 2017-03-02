@@ -13,9 +13,9 @@ The example below demonstrates how to set a different start weekday in a Kendo U
 
 ```html
     <div id="scheduler"></div>
-    
+
     <script src="http://kendo.cdn.telerik.com/2016.2.607/js/cultures/kendo.culture.bg-BG.min.js"></script>
-    
+
     <script>
       kendo.culture("bg-BG"); //week start day depends on the used kendo culture
     </script>
@@ -136,4 +136,4 @@ How-to examples on the Kendo UI Scheduler in AngularJS:
 * [How to Show Тooltip on hover]({% slug howto_show_tooltipon_hover_angularjs_scheduler %})
 * [How to Wrap Scheduler in Custom Directives]({% slug howto_wrap_schedulerin_custom_directives_angularjs_scheduler %})
 
-For more runnable examples on the Kendo UI Scheduler, browse its [**How To** documentation folder]({% slug howto_add_controlsto_custom_event_editor_scheduler %}).
+For more runnable examples on the Kendo UI Scheduler, browse its [**How To** documentation folder]({% slug howto_customize_editand_events_templates_angularjs_scheduler %}).
