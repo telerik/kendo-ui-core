@@ -203,4 +203,4 @@ How-to examples on the Kendo UI Scheduler in AngularJS:
 * [How to Set Initial Data Manually]({% slug howto_set_intial_data_manually_angularjs_scheduler %})
 * [How to Show Тooltip on hover]({% slug howto_show_tooltipon_hover_angularjs_scheduler %})
 
-For more runnable examples on the Kendo UI Scheduler, browse its [**How To** documentation folder]({% slug howto_add_controlsto_custom_event_editor_scheduler %}).
+For more runnable examples on the Kendo UI Scheduler, browse its [**How To** documentation folder]({% slug howto_customize_editand_events_templates_angularjs_scheduler %}).

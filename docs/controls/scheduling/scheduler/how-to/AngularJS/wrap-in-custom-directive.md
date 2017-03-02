@@ -75,4 +75,4 @@ Other articles and how-to examples on the Kendo UI Scheduler:
 * [How to Hide Edit Buttons]({% slug howto_hidethe_editbutons_scheduler %})
 * [How to Nest Editors inside Event Templates]({% slug howto_nest_editorsinside_event_templates_scheduler %})
 
-For more runnable examples on the Kendo UI Scheduler, browse its [**How To** documentation folder]({% slug howto_add_controlsto_custom_event_editor_scheduler %}).
+For more runnable examples on the Kendo UI Scheduler, browse its [**How To** documentation folder]({% slug howto_customize_editand_events_templates_angularjs_scheduler %}).
