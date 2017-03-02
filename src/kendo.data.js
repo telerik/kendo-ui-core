@@ -4547,11 +4547,10 @@ var __meta__ = { // jshint ignore:line
         },
 
         read: function(data) {
-            var that = this;
-            var result = DataSource.fn.read.call(that, data);
+            var result = DataSource.fn.read.call(this, data);
 
-            if(that._hierarchicalFilter){
-                that.filter(that._hierarchicalFilter);
+            if(this._hierarchicalFilter){
+                this.filter(this._hierarchicalFilter);
             }
 
             return result;
@@ -4591,10 +4590,8 @@ var __meta__ = { // jshint ignore:line
         },
 
         filter: function(val) {
-            var that = this;
-
             if (val === undefined) {
-                 return that._filter;
+                 return this._filter;
             }
 
             if(!this.options.serverFiltering){
@@ -4602,8 +4599,8 @@ var __meta__ = { // jshint ignore:line
                 val = { logic: "or", filters: [val, {field:'_matchFilter', operator: 'equals', value: true }]};
             }
 
-             that.trigger("reset");
-             that._query({ filter: val, page: 1 });
+            this.trigger("reset");
+            this._query({ filter: val, page: 1 });
         },
 
         _markHierarchicalQuery: function(expressions){
