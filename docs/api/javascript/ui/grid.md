@@ -8255,6 +8255,49 @@ The widget instance which fired the event.
     grid.bind("columnMenuInit", grid_columnMenuInit);
     </script>
 
+### columnMenuOpen
+
+Fired when the grid column menu is opened, after the animations are completed.
+
+The event handler function context (available via the `this` keyword) will be set to the widget instance.
+
+#### Event Data
+
+##### e.container `jQuery`
+
+The jQuery object representing column menu element.
+
+##### e.field `String`
+
+The field of the column for which the column menu is opened.
+
+##### e.sender `kendo.ui.Grid`
+
+The widget instance which fired the event.
+
+#### Example - subscribe to the "columnMenuOpen" event and open "columns" submenu
+
+    <div id="grid"></div>
+    <script>
+    $("#grid").kendoGrid({
+      columns: [
+        { field: "id" },
+        { field: "name" },
+        { field: "phone" }
+      ],
+      dataSource: [
+        { name: "Jane Doe", id: 1, phone: "88443558741" },
+        { name: "John Doe", id: 2, phone: "88443558751" }
+      ],
+      filterable: true,
+      columnMenu: true,
+      columnMenuOpen: function(e) {
+        var menu = e.container.children().data("kendoMenu");
+        menu.open(menu.element.find("li:first"));
+      },
+    });
+    </script>
+
 ### columnReorder
 
 Fired when the user changes the order of a column.
@@ -9366,6 +9409,47 @@ The widget instance which fired the event.
     });
     var grid = $("#grid").data("kendoGrid");
     grid.bind("filterMenuInit", grid_filterMenuInit);
+    </script>
+
+### filterMenuOpen
+
+Fired when the grid filter menu is opened, after the animations are completed.
+
+The event handler function context (available via the `this` keyword) will be set to the widget instance.
+
+#### Event Data
+
+##### e.container `jQuery`
+
+The jQuery object representing filter menu form element.
+
+##### e.field `String`
+
+The field of the column for which the filter menu is opened.
+
+##### e.sender `kendo.ui.Grid`
+
+The widget instance which fired the event.
+
+#### Example - subscribe to the "filterMenuOpen" event and focus second input
+
+    <div id="grid"></div>
+    <script>
+    $("#grid").kendoGrid({
+      columns: [
+        { field: "name" }
+      ],
+      dataSource: [
+        { name: "Jane Doe"},
+        { name: "John Doe"}
+      ],
+      filterable: true,
+      filterMenuOpen: function(e) {
+        if (e.field == "name") {
+          e.container.find(".k-textbox:last").focus();
+        }
+      },
+    });
     </script>
 
 ### remove
