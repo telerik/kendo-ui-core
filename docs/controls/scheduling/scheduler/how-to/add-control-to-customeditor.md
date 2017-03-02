@@ -4,6 +4,7 @@ page_title: Add Controls to Custom Editor | Kendo UI Scheduler
 description: "Learn how to add Kendo UI controls to a custom event editor in a Kendo UI Scheduler widget."
 previous_url: /kendo-mvc/web/scheduler/how-to/add-control-to-customeditor
 slug: howto_add_controlsto_custom_event_editor_scheduler
+position: 2
 ---
 
 # Add Controls to Custom Editor
@@ -150,4 +151,4 @@ How-to examples on the Kendo UI Scheduler in AngularJS:
 * [How to Create and Set ObservableArray Events]({% slug howto_createand_set_observablearray_events_angularjs_scheduler %})
 * [How to Wrap Scheduler in Custom Directives]({% slug howto_wrap_schedulerin_custom_directives_angularjs_scheduler %})
 
-For more runnable examples on the Kendo UI Scheduler, browse its [**How To** documentation folder]({% slug howto_add_controlsto_custom_event_editor_scheduler %}).
+For more runnable examples on the Kendo UI Scheduler, browse its **How To** documentation folder.
