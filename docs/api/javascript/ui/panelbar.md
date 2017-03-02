@@ -1615,7 +1615,7 @@ The expanding item of the PanelBar.
 
 ### select
 
-Triggered when an item of a PanelBar is selected.
+Triggered when an item of a PanelBar is selected by the user.
 
 #### Event Data
 
