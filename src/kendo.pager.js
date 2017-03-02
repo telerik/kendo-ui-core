@@ -164,7 +164,7 @@ var __meta__ = { // jshint ignore:line
             if (options.refresh) {
                 if (!that.element.find(".k-pager-refresh").length) {
                     that.element.append('<a href="#" class="k-pager-refresh k-link" title="' + options.messages.refresh +
-                        '"><span class="k-icon k-i-reload"></span></a>');
+                        '" aria-label="' + options.messages.refresh + '"><span class="k-icon k-i-reload"></span></a>');
                 }
 
                 that.element.on(CLICK + NS, ".k-pager-refresh", proxy(that._refreshClick, that));
@@ -314,7 +314,7 @@ var __meta__ = { // jshint ignore:line
                 that.element
                     .find(".k-pager-input")
                     .html(that.options.messages.page +
-                        '<input class="k-textbox">' +
+                        '<input class="k-textbox" aria-label="' + page + '">' +
                         kendo.format(options.messages.of, totalPages))
                     .find("input")
                     .val(page)
@@ -344,6 +344,7 @@ var __meta__ = { // jshint ignore:line
                 that.element
                     .find(".k-pager-sizes select")
                     .val(pageSize)
+                    .attr("aria-label", pageSize)
                     .filter("[" + kendo.attr("role") + "=dropdownlist]")
                     .kendoDropDownList("value", pageSize)
                     .kendoDropDownList("text", text); // handles custom values
