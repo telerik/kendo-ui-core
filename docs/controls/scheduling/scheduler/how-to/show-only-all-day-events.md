@@ -75,7 +75,7 @@ The example below demonstrates how to show only all-day events in a Kendo UI Sch
                     data: [
                         //sample data:
                         {
-							MeetingID: 1,
+                            MeetingID: 1,
                             Start: date,
                             End: date,
                             Title: "Team building",
@@ -83,7 +83,7 @@ The example below demonstrates how to show only all-day events in a Kendo UI Sch
                             RoomID: 1,
                             Attendees: [1, 2, 3]
                         }, {
-							MeetingID: 2,
+                            MeetingID: 2,
                             Start: addDays(date, 1),
                             End: addDays(date, 1),
                             Title: "Meeting with Alex",
@@ -91,7 +91,7 @@ The example below demonstrates how to show only all-day events in a Kendo UI Sch
                             RoomID: 2,
                             Attendees: [1]
                         }, {
-							MeetingID: 3,
+                            MeetingID: 3,
                             Start: addDays(date, 2),
                             End: addDays(date, 2),
                             Title: "Meeting with Charlie",
