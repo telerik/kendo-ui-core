@@ -651,7 +651,7 @@ var __meta__ = { // jshint ignore:line
             return that;
         },
 
-        _appendUrlItem: function(url) {
+ _appendUrlItem: function(url) {
             this._contentUrls.push(url);
         },
 
@@ -692,7 +692,7 @@ var __meta__ = { // jshint ignore:line
             return that;
         },
 
-        insertAfter: function (tab, referenceTab) {
+ insertAfter: function (tab, referenceTab) {
             if ($(tab).is($(referenceTab))) {
                 referenceTab = this.tabGroup.find(referenceTab).prev();
             } else {
@@ -721,7 +721,7 @@ var __meta__ = { // jshint ignore:line
             return that;
         },
 
-        remove: function (elements) {
+       remove: function (elements) {
             var that = this;
             var type = typeof elements;
             var contents;
@@ -752,7 +752,7 @@ var __meta__ = { // jshint ignore:line
             return that;
         },
 
-        _create: function (tab) {
+_create: function (tab) {
             var that = this,
             tabs,
             contents,
@@ -858,7 +858,7 @@ var __meta__ = { // jshint ignore:line
             }
         },
 
-        _elementId: function(element, idx) {
+ _elementId: function(element, idx) {
             var elementId = element.attr("id");
             var wrapperId = this.element.attr("id");
 
@@ -997,7 +997,7 @@ var __meta__ = { // jshint ignore:line
             $(e.currentTarget).toggleClass(HOVERSTATE, e.type == MOUSEENTER);
         },
 
-        _click: function (item) {
+ _click: function (item) {
             var that = this,
                 link = item.find("." + LINK),
                 href = link.attr(HREF),
@@ -1041,7 +1041,7 @@ var __meta__ = { // jshint ignore:line
             return prevent;
         },
 
-        _scrollable: function() {
+   _scrollable: function() {
             var that = this,
                 options = that.options,
                 wrapperOffsetWidth,
@@ -1349,6 +1349,18 @@ var __meta__ = { // jshint ignore:line
                     }
                 }
             }
+
+            // itemIndex = contentElements && itemIndex < 0 ? contentElements.length + itemIndex : itemIndex;
+
+            // var idTest = new RegExp("-" + (itemIndex + 1) + "$");
+
+            // if (contentElements) {
+            //     for (var i = 0, len = contentElements.length; i < len; i++) {
+            //         if (idTest.test(contentElements.eq(i).closest(".k-content")[0].id)) {
+            //             return contentElements[i];
+            //         }
+            //     }
+            // }
 
             return undefined;
         },
