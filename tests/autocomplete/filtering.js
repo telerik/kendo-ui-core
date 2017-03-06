@@ -285,6 +285,26 @@ asyncTest("remove input value does not clear filter if minLength and enforceMinL
     }, 0);
 });
 
+asyncTest("clicking on clear button does not clear filter if minLength and enforceMinLength", 0, function() {
+    var autocomplete = new AutoComplete(input, {
+        dataSource: ["foo", "bar"],
+        minLenght: 2,
+        enforceMinLength: true
+    });
+
+    input.val("ba").press("a".charCodeAt(0));
+
+    autocomplete.dataSource.bind("change", function() {
+        ok(false, "list should not rebind");
+    });
+
+    autocomplete._clear.click();
+
+    setTimeout(function() {
+        start();
+    }, 0);
+});
+
 test("select item after filtering", function() {
     var autocomplete = new AutoComplete(input, {
         dataTextField: "text",

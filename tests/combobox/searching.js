@@ -249,6 +249,22 @@ test("search with empty input and enforceMinLength: true does not rebind items",
     equal(combobox.ul.children().length, 1);
 });
 
+test("does not rebind items when enforceMinLength: true and _clear is clicked", function() {
+    create({
+        filter: "startswith",
+        minLength: 2,
+        enforceMinLength: true
+    });
+    combobox.text("fo");
+    combobox.search("fo");
+
+    equal(combobox.ul.children().length, 1);
+
+    combobox._clear.click();
+
+    equal(combobox.ul.children().length, 1);
+});
+
 test("search with filter opens drop down if any items", function() {
     create({
         filter: "startswith"

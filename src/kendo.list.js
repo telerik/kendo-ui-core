@@ -228,7 +228,7 @@ var __meta__ = { // jshint ignore:line
             this._clearText();
             this._accessor("");
             this.listView.value([]);
-            if(this._isFilterEnabled()) {
+            if(this._isFilterEnabled() && !this.options.enforceMinLength) {
                 this._filter({word: "", open: false});
             }
             this._change();

@@ -387,7 +387,14 @@ var __meta__ = { // jshint ignore:line
         },
 
         _clearClick: function() {
-            this.value(null);
+            var that = this;
+
+            this.tagList.children().each(function(index, tag) {
+                that._removeTag($(tag));
+            })
+            this.input.val("");
+
+            this._search();
             this.trigger("change");
         },
 
