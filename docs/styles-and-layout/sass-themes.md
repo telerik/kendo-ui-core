@@ -583,7 +583,7 @@ Outputs a module once, no matter how many times it is included.
 
 
 ##### Parameters
-- name : `String` - Name of exported module
+- name : `String` - Name of exported module.
 
 ## Contribution
 
