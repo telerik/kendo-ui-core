@@ -391,7 +391,7 @@ var __meta__ = { // jshint ignore:line
 
             this.tagList.children().each(function(index, tag) {
                 that._removeTag($(tag));
-            })
+            });
             this.input.val("");
 
             this._search();
