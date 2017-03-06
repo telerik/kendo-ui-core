@@ -1,13 +1,15 @@
 ---
-title: Define Node Template when TreeView is within PanelBar
-page_title: Define Node Template when TreeView is within PanelBar | Kendo UI TreeView
-description: "Learn how to define a Kendo UI TreeView node template, when the widget is placed within Kendo UI PanelBar in an AngularJS application."
+title: Define Node Template When TreeView Is within PanelBar
+page_title: Define Node Template When TreeView Is within PanelBar | Kendo UI TreeView
+description: "Learn how to define a Kendo UI TreeView node template when the widget is placed within a Kendo UI PanelBar in an AngularJS application."
 slug: howto_nodetemplatewhenplacedinpanelbar_angularjs_treeview
 ---
 
-# Define Node Template when TreeView is Placed in a PanelBar
+# Define Node Template When TreeView Is within PanelBar
 
-The Kendo UI framework offers Template support for both the TreeView and the PanelBar widgets in an AngularJS application. Therefore, a template defined using the k-template Kendo Angular directive cannot be mapped correctly to the TreeView. In such case, the template should be defined in a &lt;script type="text/x-kendo-template"$gth; element and it should be assigned to the TreeView programatically.
+Kendo UI offers template support for both the TreeView and the PanelBar in AngularJS applications.
+
+This means that a template you define through the `k-template` directive will not be mapped correctly to the TreeView. To work around this issue, define the template in a `<script type="text/x-kendo-template">` element and it will be assigned to the TreeView programmatically.
 
 ###### Example
 
@@ -15,7 +17,7 @@ The Kendo UI framework offers Template support for both the TreeView and the Pan
 
     <script id="treeview-template" type="text/x-kendo-template">
         <span>
-            {{dataItem.FullName}} 
+            {{dataItem.FullName}}
             <button class='k-button' ng-click='click(dataItem)'>Select</button>
         </span>
     </script>
@@ -68,7 +70,6 @@ The Kendo UI framework offers Template support for both the TreeView and the Pan
                 };
             });
     </script>
-  
 ```
 
 ## See Also
