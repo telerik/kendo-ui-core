@@ -546,7 +546,7 @@
         equal(container.children().text(), "foo", "ToggleButton has correct text");
     });
 
-    test("by default toggleButton does not have k-state-selected class", 1, function() {
+    test("by default toggleButton does not have k-state-active class", 1, function() {
         container.kendoToolBar({
             items: [
                 { type: "button", togglable: true, text: "foo" }
@@ -556,14 +556,16 @@
         ok(!container.find(".k-toggle-button.k-state-active").length);
     });
 
-    test("toggleButton with selected: true receives k-state-selected class", 1, function() {
+    test("toggleButton with selected: true receives k-state-active class", 2, function() {
         container.kendoToolBar({
             items: [
-                { type: "button", togglable: true, text: "foo", selected: true }
+                { type: "button", togglable: true, text: "foo", selected: true },
+                { type: "button", togglable: true, text: "bar", selected: true, overflow: "always" }
             ]
         });
-
+        
         ok(container.find(".k-toggle-button.k-state-active").length);
+        equal($(".k-overflow-button.k-state-active").length, 2);
     });
 
     test("by default toggleButton does not have group", 1, function() {
