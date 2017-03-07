@@ -1,13 +1,16 @@
 ---
-title: Filter Events on Server between Start and End of Current View
-page_title: Filter Events on Server between Start and End of Current View | Kendo UI Scheduler
-description: "Learn how to filter events between start and end of the current view on the server in the Kendo UI Scheduler."
+title: Filter Events on Server between Start and End of the Current View
+page_title: Filter Events on Server between Start and End of the Current View | Kendo UI Scheduler
+description: "Learn how to filter events between the start and the end of the current view on the server in the Kendo UI Scheduler."
+previous_url: /controls/scheduling/scheduler/how-to/server-filtering
 slug: howto_server_filtering
 ---
 
-# Filter Events on Server between Start and End of Current View
+# Filter Events on Server between Start and End of the Current View
 
-To see the example on how to filter events on the server between the start and end of the current view in a Kendo UI Scheduler, refer to [this project](https://github.com/telerik/kendo-examples-asp-net-mvc/tree/master/scheduler-server-filtering). It is available in the [GitHub repository for Kendo UI examples using ASP.NET MVC](https://github.com/telerik/kendo-examples-asp-net-mvc).
+You can filter events on the server between the start and the end of the current view in a Kendo UI Scheduler.
+
+To see the example, refer to [this project](https://github.com/telerik/kendo-examples-asp-net-mvc/tree/master/scheduler-server-filtering). It is available in the [GitHub repository for Kendo UI examples using ASP.NET MVC](https://github.com/telerik/kendo-examples-asp-net-mvc).
 
 ## See Also
 

@@ -1,14 +1,14 @@
 ---
 title: Customize Edit and Events Templates
 page_title: Customize Edit and Events Templates | Kendo UI Scheduler
-description: "Learn how to create and use custom templates for the events and edit window of the Kendo UI Scheduler widget."
-previous_url: /asp.net/mvc/controls/scheduling/scheduler/how-to/custom-edit-and-event-templates, /kendo-mvc/controls/scheduling/scheduler/how-to/custom-edit-and-event-templates
+description: "Learn how to create and use custom templates for the events and the Edit window of the Kendo UI Scheduler widget."
+previous_url: /asp.net/mvc/controls/scheduling/scheduler/how-to/custom-edit-and-event-templates, /kendo-mvc/controls/scheduling/scheduler/how-to/custom-edit-and-event-templates, /controls/scheduling/scheduler/how-to/custom-edit-and-event-templates
 slug: howto_customize_editand_event_templates_scheduler
 ---
 
 # Customize Edit and Events Templates
 
-The example below demonstrates how to create and use custom templates for the Kendo UI Scheduler events and edit window.
+The following example demonstrates how to create and use custom templates for the Scheduler events and the **Edit** window.
 
 ###### Example
 

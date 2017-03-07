@@ -1,18 +1,19 @@
 ---
-title: Customize the Content of No Events Days
-page_title: Customize the Content of No Events Days | Kendo UI Scheduler
-description: "Learn how to customize the content of days with no events in a Kendo UI Scheduler."
-slug: howto_customize_no_events_days_content_scheduler
+title: Get the UID of Events on Hover
+page_title: Get the UID of Events on Hover | Kendo UI Scheduler
+description: "Learn how to get the UID of events on hover in the Kendo UI Scheduler widget."
+previous_url: /controls/scheduling/scheduler/how-to/get-event-uid-on-hover
+slug: howto_get_the_uid_of_an_event_on_hover_scheduler
 ---
 
-# Customize the Content of No Events Days
+# Get the UID of Events on Hover
 
-The example below demonstrates how to customize the content of days with no events in a Kendo UI Scheduler.
+The example below demonstrates how to get the UID of a Kendo UI Scheduler event on hover.
 
 ###### Example
 
 ```html
-    <div id="example">
+   <div id="example">
     <div id="team-schedule">
         <div id="people">
             <input checked type="checkbox" id="alex" value="1">
@@ -28,9 +29,12 @@ $(function() {
         date: new Date("2013/6/13"),
         startTime: new Date("2013/6/13 07:00 AM"),
         height: 600,
-      dayTemplate: '#= getTemplate(date, resources) #',
         views: [
-            "month"
+            "day",
+            { type: "workWeek", selected: true },
+            "week",
+            "month",
+            "agenda"
         ],
         timezone: "Etc/UTC",
         dataSource: {
@@ -98,6 +102,17 @@ $(function() {
         ]
     });
 
+    $("#scheduler").on("mouseenter mouseleave", ".k-event", function(e) {
+      var target = $(e.currentTarget);
+      var uid = target.data("uid");
+
+      if (e.type === "mouseenter") {
+        alert("mouserenter, uid: " + uid);
+      } else {
+        alert("mouseleave, uid: " + uid);
+      }
+    });
+
     $("#people :checkbox").change(function(e) {
         var checked = $.map($("#people :checked"), function(checkbox) {
             return parseInt($(checkbox).val());
@@ -112,20 +127,6 @@ $(function() {
         });
     });
 });
-
-
-  function getTemplate(date, resources) {
-    var scheduler = $("#scheduler").data("kendoScheduler");
-    var start = kendo.date.getDate(date);
-    var end = kendo.date.getDate(date);
-    kendo.date.addDays(end,1);
-    var events = scheduler.dataSource.expand(start,end);
-    if (events.length === 0) {
-    	return "NO EVENTS";
-    } else {
-      return kendo.format('{0:dd}', start);
-    }
-  }
 </script>
 <style scoped>
 
@@ -167,6 +168,7 @@ $(function() {
     top: 81px;
 }
 </style>
+
 ```
 
 ## See Also
@@ -178,10 +180,10 @@ Other articles and how-to examples on the Kendo UI Scheduler:
 * [How to Add Events Programmatically]({% slug howto_add_events_programatically_scheduler %})
 * [How to Calculate Scheduler Height Dynamically]({% slug howto_calculate_scheduler_height_dunamically_scheduler %})
 * [How to Calculate Scheduler Height Dynamically on Mobile]({% slug howto_calculate_scheduler_height_dunamically_onmobile_scheduler %})
-* [How to Create Custom Views Inheriting Built-In Views]({% slug howto_create_custom_view_inheriting_builtinview_scheduler %})
-* [How to Create Custom `month` View with Event Count in **Show More** Button]({% slug howto_create_custom_monthview_eventcount_showmore_button_scheduler %})
-* [How to Nest Editors inside Event Templates]({% slug howto_nest_editorsinside_event_templates_scheduler %})
-* [How to Use Custom Event Template with Specific Background Color]({% slug howto_use_custom_event_templatewith_specific_background_color_scheduler %})
+* [How to Create Custom Restrictions]({% slug howto_create_custom_restrivtions_scheduler %})
+* [How to Customize Edit and Events Templates]({% slug howto_customize_editand_event_templates_scheduler %})
+* [How to Create External Editor Form]({% slug howto_create_external_editor_form_scheduler %})
+* [How to Edit Using ContextMenu]({% slug howto_edit_using_kendouicontextmenu_scheduler %})
 
 How-to examples on the Kendo UI Scheduler in AngularJS:
 

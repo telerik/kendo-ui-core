@@ -1,13 +1,14 @@
 ---
-title: Update Opposite Picker Value on model Change
-page_title: Update Opposite Picker Value on model Change | Kendo UI Scheduler
-description: "Learn how to update the opposite start/end picker value on model change in a Kendo UI Scheduler widget."
+title: Update Opposite Picker Value on Model Change
+page_title: Update Opposite Picker Value on Model Change | Kendo UI Scheduler
+description: "Learn how to update the opposite start or end picker value on model change in the Kendo UI Scheduler."
+previous_url: /controls/scheduling/scheduler/how-to/update-opposite-picker-value
 slug: howto_updateoppositepickervalue_onmodelchange_scheduler
 ---
 
-# Update Opposite Picker Value on model Change
+# Update Opposite Picker Value on Model Change
 
-The example below demonstrates how to update the opposite start/end picker value on model change in a Kendo UI Scheduler widget.
+The following example demonstrates how to update the opposite start/end picker value on model change in a Kendo UI Scheduler widget.
 
 ###### Example
 
@@ -26,7 +27,7 @@ The example below demonstrates how to update the opposite start/end picker value
         var endInputs = editContainer.find("[data-container-for=end]").find("input");
 
         /*
-			//Update model using last widgets values
+			// Update model by using the last values of the widget
 			if (e.field === "start" || e.field === "end") {
 				startInputs.add(endInputs).each(function() {
 					var element = $(this);
@@ -37,7 +38,7 @@ The example below demonstrates how to update the opposite start/end picker value
 			}
 		 */
 
-        //Move end date on start update
+        // Move the end date on start update
         if (e.field === "start") {
             var date = new Date(event.start);
             date.setMinutes(date.getMinutes() + 30);

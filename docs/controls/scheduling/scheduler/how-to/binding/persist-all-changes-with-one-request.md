@@ -2,12 +2,13 @@
 title: Persist All Changes with One Request
 page_title: Persist All Changes with One Request | Kendo UI Scheduler
 description: "Learn how to persist all changes in a Kendo UI Scheduler with a single request."
+previous_url: /controls/scheduling/scheduler/how-to/persist-all-changes-with-one-request
 slug: howto_persist_all_changes_with_a_single_request_scheduler
 ---
 
 # Persist All Changes with One Request
 
-The example below demonstrates how to persist all changes in a Kendo UI Scheduler with a single request.
+The following example demonstrates how to persist all changes with a single request in the Scheduler.
 
 ###### Example
 

@@ -2,12 +2,13 @@
 title: Select the First Event in Agenda View
 page_title: Select the First Event in Agenda View | Kendo UI Scheduler
 description: "Select the first event in the agenda view of a Kendo UI Scheduler widget."
+previous_url: /controls/scheduling/scheduler/how-to/select-the-first-event-in-agenda-view
 slug: howto_select_the_first_event_in_agenda_view_scheduler
 ---
 
 # Select the First Event in Agenda View
 
-The example below demonstrates how to select the first event in the `Agenda` view of a Kendo UI Scheduler widget.
+The following example demonstrates how to select the first event in the Agenda view of the Kendo UI Scheduler widget.
 
 ###### Example
 

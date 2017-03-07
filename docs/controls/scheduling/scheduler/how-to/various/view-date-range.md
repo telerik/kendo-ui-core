@@ -2,12 +2,13 @@
 title: Retrieve Current View Date Range
 page_title: Retrieve Current View Date Range | Kendo UI Scheduler
 description: "Learn how to retrieve the date range of the current Kendo UI Scheduler view."
+previous_url: /controls/scheduling/scheduler/how-to/view-date-range
 slug: howto_retrievecurrent_viewdaterange_scheduler
 ---
 
 # Retrieve Current View Date Range
 
-The example below demonstrates how to retrieve the date range of the current Kendo UI Scheduler view.
+The following example demonstrates how to retrieve the date range of the current Kendo UI Scheduler view.
 
 ###### Example
 
@@ -24,9 +25,9 @@ $(function() {
     function scheduler_view_range(e) {
         var view = this.view();
 
-        //view has:
-        //startDate method, which returns the start date of the view
-        //endDate method, which returns the end date of the view
+        // The view has:
+        // A startDate method which returns the start date of the view.
+        // An endDate method which returns the end date of the view.
 
         $(".console").append("<p>" + kendo.format("view:: start: {0:d}; end: {1:d};", view.startDate(), view.endDate()) + "</p>");
     }

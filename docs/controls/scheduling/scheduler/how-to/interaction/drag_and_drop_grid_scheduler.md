@@ -2,12 +2,13 @@
 title: Drag and Drop between Kendo UI Grid and Scheduler
 page_title: Drag and Drop between Kendo UI Grid and Scheduler | Kendo UI Scheduler
 description: "Learn how to drag and drop items between Kendo UI Grid and Kendo UI Scheduler widgets."
+previous_url: /controls/scheduling/scheduler/how-to/drag_and_drop_grid_scheduler
 slug: drag_and_drop_between_grid_and_scheduler
 ---
 
 # Drag and Drop between Kendo UI Grid and Scheduler
 
-The example below demonstrates how to implement the drag-and-drop functionality to move items between the Kendo UI Grid and Kendo UI Scheduler.
+The following example demonstrates how to implement the drag-and-drop functionality to move items between the Kendo UI Grid and the Kendo UI Scheduler.
 
 ###### Example
 

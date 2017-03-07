@@ -2,6 +2,7 @@
 title: Drag and Drop Events between Schedulers
 page_title: Drag and Drop Events between Schedulers | Kendo UI Scheduler
 description: "Learn how to implement the drag-and-drop functionality in a Kendo UI Scheduler widget."
+previous_url: /controls/scheduling/scheduler/how-to/drag-events-between-schedulers
 slug: howto_drag-events-between-schedulers_scheduler
 ---
 

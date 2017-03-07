@@ -1,14 +1,14 @@
 ---
-title: Get nextOccurrence
-page_title: Get nextOccurrence | Kendo UI Scheduler
-description: "Learn how to get a next occurrence of the Kendo UI SchedulerEvent in the Kendo UI Scheduler widget."
-previous_url: /controls/scheduling/scheduler/how-to/get-next-occurance
+title: Get Next Occurrence
+page_title: Get Next Occurrence | Kendo UI Scheduler
+description: "Learn how to get a next occurrence of the Kendo UI SchedulerEvent in the Kendo UI Scheduler."
+previous_url: /controls/scheduling/scheduler/how-to/get-next-occurance, /controls/scheduling/scheduler/how-to/get-next-occurrence
 slug: howto_getthe_next_occurance_scheduler
 ---
 
-# Get nextOccurrence
+# Get Next Occurrence
 
-The example below demonstrates how to get a `next` occurrence of the Kendo UI `SchedulerEvent` in a Kendo UI Scheduler widget.
+The following example demonstrates how to get `nextOccurrence` of the Kendo UI `SchedulerEvent` in the Scheduler.
 
 ###### Example
 
@@ -21,13 +21,13 @@ The example below demonstrates how to get a `next` occurrence of the Kendo UI `S
       recurrenceRule: "FREQ=WEEKLY"
     });
 
-    //add count for the occurrences
+    // Add the count for the occurrences
     event.recurrenceRule += ";COUNT=2";
 
-    //generate occurrences
+    // Generate the occurrences
     var nextOccurrence = event.expand(event.start, new Date(2999, 0, 1), "Etc/UTC")[1];
 
-    //log occurrence
+    // Log the occurrence
     console.log(nextOccurrence);
     </script>
 ```

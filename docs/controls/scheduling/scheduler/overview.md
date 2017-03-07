@@ -8,7 +8,9 @@ position: 1
 
 # Scheduler Overview
 
-The [Kendo UI Scheduler widget](http://demos.telerik.com/kendo-ui/scheduler/index) displays a set of events&mdash;appointments or tasks. It can display scheduled events in different views&mdash;a single day, a whole week, or month and as a list of tasks which need to be accomplished.
+The [Kendo UI Scheduler widget](http://demos.telerik.com/kendo-ui/scheduler/index) displays a set of events&mdash;appointments or tasks.
+
+It can display scheduled events in different views&mdash;a single day, a whole week, or month and as a list of tasks which need to be accomplished.
 
 ## Getting Started
 

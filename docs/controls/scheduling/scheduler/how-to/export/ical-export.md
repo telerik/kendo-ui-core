@@ -2,12 +2,13 @@
 title: Export to iCal
 page_title: Export to iCal | Kendo UI Scheduler
 description: "Learn how to extract Kendo UI Scheduler events to an .ical file."
+previous_url: /controls/scheduling/scheduler/how-to/ical-export
 slug: howto_exportto_ical_scheduler
 ---
 
 # Export to iCal
 
-The example below demonstrates how to extract kendo UI Scheduler events to an .ical file.
+The following example demonstrates how to extract Kendo UI Scheduler events to an `.ical` file.
 
 ###### Example
 

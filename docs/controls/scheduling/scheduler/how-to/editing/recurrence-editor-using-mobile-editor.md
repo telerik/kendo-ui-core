@@ -1,13 +1,14 @@
 ---
-title: Create Recurrence Editor Using Mobile Editor
-page_title: Create Recurrence Editor Using Mobile Editor | Kendo UI Scheduler
+title: Create Recurrence Editor by Using Mobile Editor
+page_title: Create Recurrence Editor by Using Mobile Editor | Kendo UI Scheduler
 description: "Learn how to create a recurrence editor by using a mobile editor approach in a Kendo UI Scheduler widget."
+previous_url: /controls/scheduling/scheduler/how-to/recurrence-editor-using-mobile-editor
 slug: howto_createrecurrenceeditor_byusingmobileeditor_scheduler
 ---
 
-# Create Recurrence Editor Using Mobile Editor
+# Create Recurrence Editor by Using Mobile Editor
 
-The example below demonstrates how create a recurrence editor using a mobile editor approach in a Kendo UI Scheduler widget.
+The following example demonstrates how to create a recurrence editor in the Scheduler by using a mobile-editor approach.
 
 ###### Example
 

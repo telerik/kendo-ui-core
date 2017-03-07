@@ -1,13 +1,14 @@
 ---
-title: Prevent Moving AllDay Events outside the AllDay Header
-page_title: Prevent Moving AllDay Events outside the AllDay Header | Kendo UI Scheduler
+title: Prevent Moving All-Day Events outside the All-Day Header
+page_title: Prevent Moving All-Day Events outside the All-Day Header | Kendo UI Scheduler
 description: "Learn how to prevent event movement if users try to drop it outside the AllDay header of a Kendo UI Scheduler widget."
+previous_url: /controls/scheduling/scheduler/how-to/prevent-allday-event-movement
 slug: howto_preventmovingalldayevents_fromalldayheader_scheduler
 ---
 
-# Prevent Moving AllDay Events outside the AllDay Header
+# Prevent Moving All-Day Events outside the All-Day Header
 
-The example below demonstrates how to prevent event movement if users try to drop it outside the AllDay header of a Kendo UI Scheduler widget.
+The following example demonstrates how to prevent the movement of events if users try to drop it outside the **All Day** header of the Scheduler.
 
 ###### Example
 

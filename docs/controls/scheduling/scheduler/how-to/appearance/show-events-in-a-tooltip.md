@@ -1,13 +1,14 @@
 ---
 title: Show Events in Kendo UI Tooltips
 page_title: Show Events in Kendo UI Tooltips | Kendo UI Scheduler
-description: "Learn how to show the  events of a Kendo UI Scheduler widget in a Kendo UI Tooltip."
+description: "Learn how to show the events of a Kendo UI Scheduler in a Kendo UI Tooltip."
+previous_url: /controls/scheduling/scheduler/how-to/show-events-in-a-tooltip
 slug: howto_show_events_in_a_kendo_ui_tooltip_scheduler
 ---
 
 # Show Events in Kendo UI Tooltips
 
-The example below demonstrates how to show the events of a Kendo UI Scheduler widget in a Kendo UI Tooltip.
+The following example demonstrates how to show the events of a Kendo UI Scheduler widget in a Kendo UI Tooltip.
 
 ###### Example
 

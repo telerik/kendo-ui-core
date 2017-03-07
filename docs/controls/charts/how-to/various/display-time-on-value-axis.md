@@ -2,6 +2,7 @@
 title: Display Time on Value Axis
 page_title: Display Time on Value Axis | Kendo UI Charts
 description: "Learn how to display time on the value axis of categorical Kendo UI Charts."
+previous_url: /controls/charts/how-to/display-time-on-value-axis
 slug: howto_displaytimeonvalueaxis_charts
 ---
 

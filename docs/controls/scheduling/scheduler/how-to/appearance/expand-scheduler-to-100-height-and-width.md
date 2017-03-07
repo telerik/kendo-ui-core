@@ -2,20 +2,21 @@
 title: Expand Scheduler to 100% Width and Height
 page_title: Expand Scheduler to 100% Width and Height | Kendo UI Scheduler
 description: "Learn how to expand a Kendo UI Scheduler widget to a width and height of 100%."
+previous_url: /controls/scheduling/scheduler/how-to/expand-scheduler-to-100-height-and-width
 slug: howto_expand_scheduler_to100percent_widthandheight_scheduler
 ---
 
 # Expand Scheduler to 100% Width and Height
 
-Kendo UI Scheduler automatically expands horizontally, and you do not need to explicitly set a 100% width style.
+The Scheduler automatically expands horizontally and you do not need to explicitly set a 100%-width style.
 
-As for the height of the Scheduler, note the following:
+When you handle the height of the Scheduler, note that:
 
-* Elements with a percentage height require you to explicitly set a height to their parent. This rule applies recursively until either an element with a pixel height, or the `<html>` element is reached.
+* Elements with a percentage height require you to explicitly set a height to their parent. This rule applies recursively until either an element with a pixel height or the `<html>` element is reached.
 * 100% high elements cannot have borders, paddings, margins, or visible siblings.
-* When the page content expands to the full browser window height and uses its own internal scrollbar, the default page scrollbar should be removed.
+* When the page content expands to the full browser window height and uses its own internal scrollbar, remove the default page scrollbar.
 
-The example below demonstrates how to expand the Scheduler to 100% height and width.
+The following example demonstrates how to expand the Scheduler to 100% height and width.
 
 ###### Example
 

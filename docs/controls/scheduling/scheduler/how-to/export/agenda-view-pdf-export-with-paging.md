@@ -1,13 +1,16 @@
 ---
 title: Export Agenda View with Paging in PDF
 page_title: Export Agenda View with Paging in PDF | Kendo UI Scheduler
-description: "Learn how to export the agenda view to a paged PDF."
+description: "Learn how to export the Agenda view of the Kendo UI Scheduler to a paged PDF."
+previous_url: /controls/scheduling/scheduler/how-to/agenda-view-pdf-export-with-paging
 slug: howto_implement_pdf_export_inagenda_view_scheduler
 ---
 
 # Export Agenda View with Paging in PDF
 
-The example below demonstrates how to export the Kendo UI Scheduler `agenda` view to a paged PDF using the [drawing API](http://docs.telerik.com/kendo-ui/framework/drawing/drawing-dom#configuration-Automatic).
+You can export the Kendo UI Scheduler Agenda view to a paged PDF by using the [drawing API](http://docs.telerik.com/kendo-ui/framework/drawing/drawing-dom#configuration-Automatic).
+
+The following example demonstrates how to achieve this.
 
 ###### Example
 
