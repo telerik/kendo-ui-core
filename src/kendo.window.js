@@ -221,7 +221,7 @@
                     this._tabKeyTrap = new TabKeyTrap(wrapper);
                     this._tabKeyTrap.trap();
                     this._tabKeyTrap.shouldTrap = function () {
-                        return that.isFront;
+                        return windowContent.data("isFront");
                     };
                 }
             },
@@ -733,7 +733,7 @@
                         overlay.show();
 
                         $(window).on("focus", function() {
-                            if (that.isFront) {
+                            if (contentElement.data("isFront")) {
                                 that.element.focus();
                             }
                         });
@@ -875,7 +875,7 @@
                     zIndex = +wrapper.css(ZINDEX),
                     originalZIndex = zIndex,
                     target = (e && e.target) || null;
-                
+
                 $(KWINDOW).each(function(i, element) {
                     var windowObject = $(element),
                         zIndexNew = windowObject.css(ZINDEX),
@@ -885,8 +885,7 @@
                         zIndex = Math.max(+zIndexNew, zIndex);
                     }
 
-                    contentElement.data('kendoWindow').isFront = element == currentWindow;
-
+                    contentElement.data("isFront", element == currentWindow);
                     // Add overlay to windows with iframes and lower z-index to prevent
                     // trapping of events when resizing / dragging
                     if (element != currentWindow && contentElement.find("> ." + KCONTENTFRAME).length > 0) {
