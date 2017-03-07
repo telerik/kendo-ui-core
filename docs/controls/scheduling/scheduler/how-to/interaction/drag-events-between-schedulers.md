@@ -1,13 +1,13 @@
 ---
-title: Drag and Drop events between Schedulers
-page_title: Drag and Drop events between Schedulers | Kendo UI Scheduler
-description: "Learn how to implement drag and drop functionality in a Kendo UI Scheduler widget."
+title: Drag and Drop Events between Schedulers
+page_title: Drag and Drop Events between Schedulers | Kendo UI Scheduler
+description: "Learn how to implement the drag-and-drop functionality in a Kendo UI Scheduler widget."
 slug: howto_drag-events-between-schedulers_scheduler
 ---
 
-# Add Controls to Custom Editor
+# Drag and Drop Events between Schedulers
 
-The example below demonstrates how to implement drag and drop functionality in a Kendo UI Scheduler widget.
+The following example demonstrates how to implement the drag-and-drop functionality in a Kendo UI Scheduler.
 
 ###### Example
 
@@ -53,11 +53,11 @@ The example below demonstrates how to implement drag and drop functionality in a
         width:700,
       dataSource: []
     });
-      
+
 
       var movingFlag = false;
       var moveEndFlag = false;
-      
+
       function moveStart(e) {
            var draggerdEvent = e.event;
            var senderScheduler = e.sender.element;
@@ -73,7 +73,7 @@ The example below demonstrates how to implement drag and drop functionality in a
                         if (($(e.target).hasClass("k-event") || $(e.target).hasClass("k-event-template")
                             || $(e.target).closest("#scheduler1").length > 0)
                             && $(e.target).closest("#scheduler2").length == 0) {
-                          	
+
                             clonedElement.hide();
                         } else {
                             moveEndFlag = true;
@@ -112,7 +112,7 @@ The example below demonstrates how to implement drag and drop functionality in a
                 dragZone.append(clonedElement);
             }
        }
-      
+
       function moveEnd(e) {
             if (moveEndFlag) {
                 e.preventDefault();
