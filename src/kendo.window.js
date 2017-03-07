@@ -220,6 +220,9 @@
                 if(this.options.modal) {
                     this._tabKeyTrap = new TabKeyTrap(wrapper);
                     this._tabKeyTrap.trap();
+                    this._tabKeyTrap.shouldTrap = function () {
+                        return windowContent.data("isFront");
+                    };
                 }
             },
 
@@ -728,6 +731,12 @@
                         }
 
                         overlay.show();
+
+                        $(window).on("focus", function() {
+                            if (contentElement.data("isFront")) {
+                                that.element.focus();
+                            }
+                        });
                     }
 
                     if (!wrapper.is(VISIBLE)) {
@@ -876,6 +885,7 @@
                         zIndex = Math.max(+zIndexNew, zIndex);
                     }
 
+                    contentElement.data("isFront", element == currentWindow);
                     // Add overlay to windows with iframes and lower z-index to prevent
                     // trapping of events when resizing / dragging
                     if (element != currentWindow && contentElement.find("> ." + KCONTENTFRAME).length > 0) {
