@@ -1,13 +1,14 @@
 ---
-title: Use Local observable Data Object
-page_title: Use Local observable Data Object | Kendo UI Scheduler
-description: "Learn how to bind the Kendo UI Scheduler widget to a local `observableObject` and change the properties during runtime."
+title: Use Local Observable Data Object
+page_title: Use Local Observable Data Object | Kendo UI Scheduler
+description: "Learn how to bind the Kendo UI Scheduler to a local observableObject and change the properties during runtime."
+previous_url: /controls/scheduling/scheduler/how-to/using-local-observable-data-object
 slug: howto_uselocalobservable_dataobject_scheduler
 ---
 
-# Use Local observable Data Object
+# Use Local Observable Data Object
 
-The example below demonstrates how to bind the Kendo UI Scheduler widget to a local `observableObject` and change the properties during runtime.
+The following example demonstrates how to bind the Scheduler to a local `observableObject` and change the properties during runtime.
 
 ###### Example
 

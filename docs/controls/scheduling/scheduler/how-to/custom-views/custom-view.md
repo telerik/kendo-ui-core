@@ -1,13 +1,14 @@
 ---
-title: Create Custom View Inheriting Built-In View
-page_title: Create Custom View Inheriting Built-In View | Kendo UI Scheduler
+title: Create Custom Views by Inheriting Built-In Views
+page_title: Create Custom Views by Inheriting Built-In Views | Kendo UI Scheduler
 description: "Learn how to inherit some of the built-in views and implement specific custom logic in a Kendo UI Scheduler widget."
+previous_url: /controls/scheduling/scheduler/how-to/custom-view
 slug: howto_create_custom_view_inheriting_builtinview_scheduler
 ---
 
-# Create Custom Views Inheriting Built-In Views
+# Create Custom Views by Inheriting Built-In Views
 
-The example below demonstrates how to inherit some of the built-in views and implement specific custom logic in the Kendo UI Scheduler widget.
+The following example demonstrates how to inherit some of the built-in views and implement specific custom logic in the Kendo UI Scheduler widget.
 
 ###### Example
 

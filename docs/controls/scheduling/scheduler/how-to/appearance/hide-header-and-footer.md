@@ -1,13 +1,14 @@
 ---
 title: Hide Header and Footer in Adaptive Rendering
 page_title: Hide Header and Footer in Adaptive Rendering | Kendo UI Scheduler
-description: "Learn how to hide the header and the footer of a Kendo UI Scheduler widget when it is in the adaptive rendering mode."
+description: "Learn how to hide the header and the footer of a Kendo UI Scheduler when it is in the adaptive rendering mode."
+previous_url: /controls/scheduling/scheduler/how-to/hide-header-and-footer
 slug: howto_hideheaderandfooter_inadaptiverebdering_scheduler
 ---
 
 # Hide Header and Footer in Adaptive Rendering
 
-The example below demonstrates how to hide header and footer when the Kendo UI Scheduler is used in the adaptive rendering mode.
+The following example demonstrates how to hide the header and the footer of the Scheduler when the widget is used in an adaptive rendering mode.
 
 ###### Example
 

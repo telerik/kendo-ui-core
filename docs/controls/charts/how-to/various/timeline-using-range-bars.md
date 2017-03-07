@@ -2,6 +2,7 @@
 title: Create Timeline Using Range Bars
 page_title: Create Timeline Using Range Bars | Kendo UI Charts
 description: "Learn how to display a daily timeline for two users in a Kendo UI Chart."
+previous_url: /controls/charts/how-to/timeline-using-range-bars
 slug: howto_createtimeline_usingrangebars_charts
 ---
 

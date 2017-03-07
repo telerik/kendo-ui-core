@@ -1,15 +1,16 @@
 ---
-title: Work with Scheduler Offline
-page_title: Work with Scheduler Offline | Kendo UI Scheduler
+title: Work with the Scheduler Offline
+page_title: Work with the Scheduler Offline | Kendo UI Scheduler
 description: "Learn how to set up the Kendo UI Scheduler widget to work offline."
+previous_url: /controls/scheduling/scheduler/how-to/offline-storage
 slug: howto_setupthewidget_toworkoffline_scheduler
 ---
 
-# Work with Scheduler Offline
+# Work with the Scheduler Offline
 
-The example below demonstrates how to set up the Kendo UI Scheduler widget to work offline.
+The following example demonstrates how to set up the Scheduler to work offline.
 
-For more information, refer to the [help topic about working offline](/framework/datasource/offline).
+For more information, refer to the article on [working offline]({% slug offlinesupport_kendoui_datasourcecomponent %}).
 
 ###### Example
 

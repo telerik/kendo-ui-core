@@ -1,18 +1,19 @@
 ---
-title: Get the UID of Events on Hover
-page_title: Get the UID of Events on Hover | Kendo UI Scheduler
-description: "Learn how to get the UID of events on hover in the Kendo UI Scheduler widget."
-slug: howto_get_the_uid_of_an_event_on_hover_scheduler
+title: Clone Events on Ctrl+Move
+page_title: Clone Events on Ctrl+Move | Kendo UI Scheduler
+description: "Learn how to clone events on Ctrl + move in the Kendo UI Scheduler widget."
+previous_url: /controls/scheduling/scheduler/how-to/clone-events-on-ctrl-and-click
+slug: howto_clone_eventson_ctrlplus_move_scheduler
 ---
 
-# Get the UID of Events on Hover
+# Clone Events on Ctrl+Move
 
-The example below demonstrates how to get the UID of a Kendo UI Scheduler event on hover.
+The following example demonstrates how to clone events in the Scheduler on `Ctrl`+`Move`.
 
 ###### Example
 
 ```html
-   <div id="example">
+<div id="example">
     <div id="team-schedule">
         <div id="people">
             <input checked type="checkbox" id="alex" value="1">
@@ -24,7 +25,8 @@ The example below demonstrates how to get the UID of a Kendo UI Scheduler event 
 </div>
 <script>
 $(function() {
-    $("#scheduler").kendoScheduler({
+    var ctrlKey = false;
+    var scheduler = $("#scheduler").kendoScheduler({
         date: new Date("2013/6/13"),
         startTime: new Date("2013/6/13 07:00 AM"),
         height: 600,
@@ -35,6 +37,20 @@ $(function() {
             "month",
             "agenda"
         ],
+        moveEnd: function(e) {
+          if (ctrlKey) {
+            e.preventDefault();
+
+            //http://docs.telerik.com/kendo-ui/api/framework/schedulerevent#methods-clone
+            var newEvent = e.event.clone({
+              start: e.start,
+              end: e.end
+            });
+
+            this.dataSource.add(newEvent);
+            this.dataSource.sync();
+          }
+        },
         timezone: "Etc/UTC",
         dataSource: {
             batch: true,
@@ -99,18 +115,15 @@ $(function() {
                 ]
             }
         ]
-    });
+    }).data("kendoScheduler");
 
-    $("#scheduler").on("mouseenter mouseleave", ".k-event", function(e) {
-      var target = $(e.currentTarget);
-      var uid = target.data("uid");
-
-      if (e.type === "mouseenter") {
-        alert("mouserenter, uid: " + uid);
-      } else {
-        alert("mouseleave, uid: " + uid);
-      }
-    });
+   $(document)
+     .on("keydown", function(e) {
+       ctrlKey = e.ctrlKey;
+     })
+     .on("keyup", function(e) {
+       ctrlKey = e.ctrlKey;
+     });
 
     $("#people :checkbox").change(function(e) {
         var checked = $.map($("#people :checked"), function(checkbox) {
@@ -128,7 +141,6 @@ $(function() {
 });
 </script>
 <style scoped>
-
 .k-nav-current > .k-link span + span {
     max-width: 200px;
     display: inline-block;
@@ -167,7 +179,6 @@ $(function() {
     top: 81px;
 }
 </style>
-
 ```
 
 ## See Also
@@ -175,18 +186,20 @@ $(function() {
 Other articles and how-to examples on the Kendo UI Scheduler:
 
 * [Scheduler JavaScript API Reference](/api/javascript/ui/scheduler)
-* [How to Add Controls to Custom Editor]({% slug howto_add_controlsto_custom_event_editor_scheduler %})
-* [How to Add Events Programmatically]({% slug howto_add_events_programatically_scheduler %})
 * [How to Calculate Scheduler Height Dynamically]({% slug howto_calculate_scheduler_height_dunamically_scheduler %})
 * [How to Calculate Scheduler Height Dynamically on Mobile]({% slug howto_calculate_scheduler_height_dunamically_onmobile_scheduler %})
-* [How to Create Custom Restrictions]({% slug howto_create_custom_restrivtions_scheduler %})
-* [How to Customize Edit and Events Templates]({% slug howto_customize_editand_event_templates_scheduler %})
+* [How to Create Custom Views Inheriting Built-In Views]({% slug howto_create_custom_view_inheriting_builtinview_scheduler %})
 * [How to Create External Editor Form]({% slug howto_create_external_editor_form_scheduler %})
 * [How to Edit Using ContextMenu]({% slug howto_edit_using_kendouicontextmenu_scheduler %})
+* [How to Get Reference to the Built-In Validator]({% slug howto_get_referencetothe_builtin_validator_scheduler %})
+* [How to Hide Edit Buttons]({% slug howto_hidethe_editbutons_scheduler %})
+* [How to Implement Custom Editing in `agenda` View]({% slug howto_implement_custom_editing_inagenda_view_scheduler %})
+* [How to Nest Editors inside Event Templates]({% slug howto_nest_editorsinside_event_templates_scheduler %})
+* [How to Use Custom Event Template with Specific Background Color]({% slug howto_use_custom_event_templatewith_specific_background_color_scheduler %})
 
 How-to examples on the Kendo UI Scheduler in AngularJS:
 
+* [How to Create and Set `ObservableArray` Events]({% slug howto_createand_set_observablearray_events_angularjs_scheduler %})
 * [How to Edit Using ContextMenu]({% slug howto_edit_using_contectmenu_angularjs_scheduler %})
-* [How to Wrap Scheduler in Custom Directives]({% slug howto_wrap_schedulerin_custom_directives_angularjs_scheduler %})
 
 For more runnable examples on the Kendo UI Scheduler, browse its [**How To** documentation folder]({% slug howto_customize_editand_events_templates_angularjs_scheduler %}).

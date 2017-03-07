@@ -2,12 +2,13 @@
 title: Calculate Scheduler Height Dynamically
 page_title: Calculate Scheduler Height Dynamically | Kendo UI Scheduler
 description: "Learn how to dynamically calculate the height of a Kendo UI Scheduler widget."
+previous_url: /controls/scheduling/scheduler/how-to/dynamic-calc-of-height
 slug: howto_calculate_scheduler_height_dunamically_scheduler
 ---
 
 # Calculate Scheduler Height Dynamically
 
-The example below demonstrates how to dynamically calculate the height of the Kendo UI Scheduler widget.
+The following example demonstrates how to dynamically calculate the height of the Kendo UI Scheduler widget.
 
 ###### Example
 

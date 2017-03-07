@@ -8,7 +8,7 @@ position: 1
 
 # Customize Edit and Events Templates
 
-The example below demonstrates how to create and use custom templates for the events and edit window of the Kendo UI Scheduler widget in AngularJS.
+The following example demonstrates how to create custom templates for the **Events** and **Edit** windows of the Scheduler in AngularJS.
 
 ###### Example
 

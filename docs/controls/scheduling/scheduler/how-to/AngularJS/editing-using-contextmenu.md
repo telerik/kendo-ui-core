@@ -1,13 +1,13 @@
 ---
-title: Edit Using ContextMenu
-page_title: Edit Using ContextMenu | Kendo UI Scheduler
-description: "Learn how to edit the kendo UI Scheduler widget event using Kendo UI ContextMenu."
+title: Edit by Using ContextMenu
+page_title: Edit by Using ContextMenu | Kendo UI Scheduler
+description: "Learn how to edit an event in the Kendo UI Scheduler by using the Kendo UI ContextMenu."
 slug: howto_edit_using_contectmenu_angularjs_scheduler
 ---
 
-# Edit Using ContextMenu
+# Edit by Using ContextMenu
 
-The example below demonstrates how to edit the Scheduler widget event using Kendo UI ContextMenu in AngularJS.
+The following example demonstrates how to edit an event in the Scheduler by using the Kendo UI ContextMenu in AngularJS.
 
 ###### Example
 

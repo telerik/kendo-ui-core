@@ -1,13 +1,14 @@
 ---
 title: Scroll to Specific Time Slot
 page_title: Scroll to Specific Time Slot | Kendo UI Scheduler
-description: "Learn how to scroll to a given time slot with JavaScript in a Kendo UI Scheduler."
+description: "Learn how to scroll to a given time slot by using JavaScript in a Kendo UI Scheduler."
+previous_url: /controls/scheduling/scheduler/how-to/scroll_to_given_time_slot
 slug: scroll_to_given_time_slot
 ---
 
 # Scroll to Specific Time Slot
 
-The example below demonstrates how to scroll  to a given time slot with JavaScript in a Kendo UI Scheduler.
+The following example demonstrates how to scroll to a given time slot by using JavaScript in a Kendo UI Scheduler.
 
 ###### Example
 

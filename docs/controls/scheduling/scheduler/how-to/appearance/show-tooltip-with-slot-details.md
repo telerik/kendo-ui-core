@@ -1,13 +1,14 @@
 ---
 title: Show Tooltip with Slot Details
 page_title: Show Tooltip with Slot Details | Kendo UI Scheduler
-description: "Learn how to use the Kendo UI Tooltip to show slot details in a Kendo UI Scheduler widget."
+description: "Learn how to use the Kendo UI Tooltip to show slot details in a Kendo UI Scheduler."
+previous_url: /controls/scheduling/scheduler/how-to/show-tooltip-with-slot-details
 slug: howto_showtooltipwith_additionalinformation_overslots_scheduler
 ---
 
 # Show Tooltip with Slot Details
 
-The example below demonstrates how to use the Kendo UI Tooltip to show slot details in a Kendo UI Scheduler widget.
+The following example demonstrates how to use the Kendo UI Tooltip to show slot details in a Kendo UI Scheduler.
 
 ###### Example
 

@@ -2,6 +2,7 @@
 title: Use HTML for Axes Labels
 page_title: Use HTML for Axes Labels | Kendo UI Charts
 description: "Learn how to use HTML for axes labels."
+previous_url: /controls/charts/how-to/html-in-axes-labels
 slug: howto_addhtmltoaxeslabels_charts
 ---
 

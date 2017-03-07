@@ -1,13 +1,14 @@
 ---
-title: Re-Style Row Border Width
-page_title: Re-Style Row Border Width | Kendo UI Scheduler
-description: "Learn how to re-style the row border width in a Kendo UI Scheduler widget."
+title: Restyle the Width of Row Borders
+page_title: Restyle the Width of Row Borders | Kendo UI Scheduler
+description: "Learn how to restyle the row border width in a Kendo UI Scheduler widget."
+previous_url: /controls/scheduling/scheduler/how-to/re-style-row-border-width
 slug: howto_restyle_row_border_width_scheduler
 ---
 
-# Re-Style Row Border Width
+# Restyle the Width of Row Borders
 
-The example below demonstrates how to re-style the row border width in a Kendo UI Scheduler widget.
+The following example demonstrates how to restyle the width of the row border in a Kendo UI Scheduler widget.
 
 ###### Example
 

@@ -1,13 +1,16 @@
 ---
 title: Modify Event Styling on databound
 page_title: Modify Event Styling on databound | Kendo UI Scheduler
-description: "Learn how to use databound events to modify the event styling in a Kendo UI Scheduler widget."
+description: "Learn how to use the databound event to modify the event styling in a Kendo UI Scheduler widget."
+previous_url: /controls/scheduling/scheduler/how-to/modify-event-styling-on-databound
 slug: howto_modifyeventstyling_ondatabound_scheduler
 ---
 
 # Modify Event Styling on databound
 
-The example below demonstrates how to use the `databound` event to modify the event styling in the Kendo UI Scheduler widget.
+Your project might require you to modify the styling of an event in the Scheduler.   
+
+The following example demonstrates how to achieve this by using the `databound` event.
 
 ###### Example
 

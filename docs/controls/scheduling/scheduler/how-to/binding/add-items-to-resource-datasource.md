@@ -2,12 +2,13 @@
 title: Insert New Items into Resource DataSource
 page_title: Insert New Items into Resource DataSource | Kendo UI Scheduler
 description: "Learn how to insert new items into a resource DataSource in a Kendo UI Scheduler widget."
+previous_url: /controls/scheduling/scheduler/how-to/add-items-to-resource-datasource
 slug: howto_insert_items_in_resource_datasource_scheduler
 ---
 
 # Insert New Items into Resource DataSource
 
-The example below demonstrates how to insert new items into a resource DataSource in a Kendo UI Scheduler widget.
+The following example demonstrates how to insert new items into a resource DataSource in the Scheduler.
 
 ###### Example
 

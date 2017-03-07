@@ -2,12 +2,13 @@
 title: Nest Editors inside Event Templates
 page_title: Nest Editors inside Event Templates | Kendo UI Scheduler
 description: "Learn how to nest editors inside event templates and update the underlying model in a Kendo UI Scheduler widget."
+previous_url: /controls/scheduling/scheduler/how-to/editors-inside-event-template
 slug: howto_nest_editorsinside_event_templates_scheduler
 ---
 
 # Nest Editors inside Event Templates
 
-The example below demonstrates how to nest editors inside event templates and update the underlying model in a Kendo UI Scheduler widget.
+The following example demonstrates how to nest editors inside the Scheduler event templates and update the underlying model.
 
 ###### Example
 

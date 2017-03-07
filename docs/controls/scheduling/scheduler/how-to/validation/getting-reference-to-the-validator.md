@@ -1,13 +1,14 @@
 ---
 title: Get Reference to the Built-In Validator
 page_title: Get Reference to the Built-In Validator | Kendo UI Scheduler
-description: "Learn how to get a reference to the built-in Kendo UI Validator using the edit event of the Kendo UI Scheduler widget."
+description: "Learn how to get a reference to the built-in Kendo UI Validator by using the edit event of the Kendo UI Scheduler."
+previous_url: /controls/scheduling/scheduler/how-to/getting-reference-to-the-validator
 slug: howto_get_referencetothe_builtin_validator_scheduler
 ---
 
 # Get Reference to the Built-In Validator
 
-The example below demonstrates how to get a reference to the built-in Kendo UI Validator using the `edit` event of the Kendo UI Scheduler widget.
+The following example demonstrates how to get a reference to the built-in Kendo UI Validator by using the `edit` event of the Scheduler.
 
 ###### Example
 

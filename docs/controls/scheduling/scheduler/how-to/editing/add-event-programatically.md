@@ -2,13 +2,13 @@
 title: Add Events Programmatically
 page_title: Add Events Programmatically | Kendo UI Scheduler
 description: "Learn how to programmatically add an event to the Kendo UI Scheduler widget."
-previous_url: /aspnetmvc/controls/scheduling/scheduler/how-to/add-event-programatically
+previous_url: /aspnetmvc/controls/scheduling/scheduler/how-to/add-event-programatically, /controls/scheduling/scheduler/how-to/add-event-programatically
 slug: howto_add_events_programatically_scheduler
 ---
 
 # Add Events Programmatically
 
-The example below demonstrates how to programmatically add an event to the Kendo UI Scheduler widget.
+The following example demonstrates how to programmatically add an event to the Kendo UI Scheduler widget.
 
 ###### Example
 

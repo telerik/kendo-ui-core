@@ -2,6 +2,7 @@
 title: Aggregate Pie Chart Data
 page_title: Aggregate Pie Chart Data | Kendo UI Charts
 description: "Learn how to aggregate data in Kendo UI Pie Charts."
+previous_url: /controls/charts/how-to/pie-chart-aggregates
 slug: howto_aggregatedata_piecharts
 ---
 

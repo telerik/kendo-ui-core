@@ -1,13 +1,14 @@
 ---
-title: Filter Events by Resource Using MultiSelect
-page_title: Filter Events by Resource Using MultiSelect | Kendo UI Scheduler
-description: "Learn how to filter events by resource in the Kendo UI Scheduler widget by using Kendo UI MultiSelect."
+title: Filter Events by Resource by Using Kendo UI MultiSelect
+page_title: Filter Events by Resource by Using Kendo UI MultiSelect | Kendo UI Scheduler
+description: "Learn how to filter events by the resource in the Kendo UI Scheduler widget by using Kendo UI MultiSelect."
+previous_url: /controls/scheduling/scheduler/how-to/filter-events-by-resource-using-multiselect
 slug: howto_filter_eventsby_resourceusing_multiselect_scheduler
 ---
 
-# Filter Events by Resource Using MultiSelect
+# Filter Events by Resource by Using Kendo UI MultiSelect
 
-The example below demonstrates how to filter events by resource using MultiSelect.
+The following example demonstrates how to filter Scheduler events by the resource by using the Kendo UI MultiSelect.
 
 ###### Example
 

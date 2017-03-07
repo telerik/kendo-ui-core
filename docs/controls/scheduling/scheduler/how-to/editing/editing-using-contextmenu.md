@@ -1,14 +1,14 @@
 ---
-title: Edit Using ContextMenu
-page_title: Edit Using ContextMenu | Kendo UI Scheduler
-description: "Learn how to edit the Kendo UI Scheduler widget by using Kendo UI ContextMenu."
-previous_url: /aspnet/web/scheduler/how-to/editing-using-contextmenu
+title: Edit by Using ContextMenu
+page_title: Edit by Using ContextMenu | Kendo UI Scheduler
+description: "Learn how to edit the Kendo UI Scheduler by using the Kendo UI ContextMenu widget."
+previous_url: /aspnet/web/scheduler/how-to/editing-using-contextmenu, /controls/scheduling/scheduler/how-to/editing-using-contextmenu
 slug: howto_edit_using_kendouicontextmenu_scheduler
 ---
 
-# Edit Using ContextMenu
+# Edit by Using ContextMenu
 
-The example below demonstrates how to edit the Kendo UI Scheduler widget by using Kendo UI ContextMenu.
+The following example demonstrates how to edit the Scheduler by using the Kendo UI ContextMenu widget.
 
 ###### Example
 

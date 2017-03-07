@@ -1,14 +1,14 @@
 ---
-title: Create External Editor Form
-page_title: Create External Editor Form | Kendo UI Scheduler
+title: Create External Editor Forms
+page_title: Create External Editor Forms | Kendo UI Scheduler
 description: "Learn how to create an external editor form in a Kendo UI Scheduler widget."
-previous_url: /asp-mvc/controls/scheduling/scheduler/how-to/external-editor-form
+previous_url: /asp-mvc/controls/scheduling/scheduler/how-to/external-editor-form, /controls/scheduling/scheduler/how-to/external-editor-form
 slug: howto_create_external_editor_form_scheduler
 ---
 
-# Create External Editor Form
+# Create External Editor Forms
 
-The example below demonstrates how create an external editor form in the Kendo UI Scheduler widget.
+The following example demonstrates how create an external editor form in the Scheduler.
 
 ###### Example
 

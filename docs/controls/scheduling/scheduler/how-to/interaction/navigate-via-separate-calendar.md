@@ -1,13 +1,14 @@
 ---
-title: Navigate via Separate Calendars
-page_title: Navigate via Separate Calendars | Kendo UI Scheduler
+title: Navigate Scheduler by Using Separate Calendar
+page_title: Navigate Scheduler by Using Separate Calendar | Kendo UI Scheduler
 description: "Navigate the Kendo UI Scheduler widget via a separate calendar."
+previous_url: /controls/scheduling/scheduler/how-to/navigate-via-separate-calendar
 slug: howto_navigate_the_scheduler_via_separate_calendar_scheduler
 ---
 
-# Navigate via Separate Calendars
+# Navigate Scheduler by Using Separate Calendar
 
-The example below demonstrates how to navigate the Kendo UI Scheduler widget via a separate calendar.
+The following example demonstrates how to navigate the Kendo UI Scheduler by using a separate calendar.
 
 ###### Example
 

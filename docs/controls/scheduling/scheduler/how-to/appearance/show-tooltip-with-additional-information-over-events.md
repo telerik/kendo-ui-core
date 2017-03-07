@@ -1,13 +1,14 @@
 ---
 title: Show Tooltip with Additional Information over Scheduler Events
 page_title: Show Tooltip with Additional Information over Scheduler Events | Kendo UI Scheduler
-description: "Learn how to use Kendo UI Tooltip to show additional information over Kendo UI Scheduler events."
+description: "Learn how to use the Kendo UI Tooltip to show additional information over Scheduler events."
+previous_url: /controls/scheduling/scheduler/how-to/show-tooltip-with-additional-information-over-events
 slug: howto_showtooltipwith_additionalinformation_overevents_scheduler
 ---
 
 # Show Tooltip with Additional Information over Scheduler Events
 
-The example below demonstrates how to use Kendo UI Tooltip to show additional information over Kendo UI Scheduler events.
+The following example demonstrates how to use the Kendo UI Tooltip to show additional information over Kendo UI Scheduler events.
 
 ###### Example
 

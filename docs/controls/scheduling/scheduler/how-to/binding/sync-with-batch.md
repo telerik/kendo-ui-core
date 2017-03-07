@@ -1,13 +1,14 @@
 ---
 title: Create Scheduler on the Client and Sync with Batch
 page_title: Create Scheduler on the Client and Sync with Batch | Kendo UI Scheduler
-description: "Learn how to create a Kendo UI Scheduler widget on the client and then sync the changes with the batch mode turned on."
+description: "Learn how to create a Kendo UI Scheduler on the client and then sync the changes with the batch mode turned on."
+previous_url: /controls/scheduling/scheduler/how-to/sync-with-batch
 slug: howto_create_a_scheduler_on_the_client_and_sync_with_batch_scheduler
 ---
 
 # Create Scheduler on the Client and Sync with Batch
 
-The example below demonstrates how to create a Kendo UI Scheduler widget on the client and then sync the changes with the batch mode turned on.
+The following example demonstrates how to create a Kendo UI Scheduler on the client and then sync the changes with the batch mode turned on.
 
 ###### Example
 

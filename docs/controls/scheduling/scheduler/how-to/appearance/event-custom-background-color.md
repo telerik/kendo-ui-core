@@ -2,12 +2,13 @@
 title: Use Custom Event Template with Specific Background Color
 page_title: Use Custom Event Template with Specific Background Color | Kendo UI Scheduler
 description: "Learn how to use a custom event template to render events with specific background color in a Kendo UI Scheduler widget."
+previous_url: /controls/scheduling/scheduler/how-to/event-custom-background-color
 slug: howto_use_custom_event_templatewith_specific_background_color_scheduler
 ---
 
 # Use Custom Event Template with Specific Background Color
 
-The example below demonstrates how to use the event template to render events with specific background color in a Kendo UI Scheduler widget.
+The following example demonstrates how to use the event template to render events with specific background color in the Scheduler.
 
 ###### Example
 

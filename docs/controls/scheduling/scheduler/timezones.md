@@ -40,7 +40,7 @@ The timezones option is not set by default and, therefore, the [event dates will
 
 > **Important**  
 > * When you use remote binding, Kendo UI Scheduler expects to receive UTC dates. Respectively, it will send them back to the server in UTC. The service in use is responsible for keeping the dates in UTC, without offsetting them against its local time.
-> * When you bind the Scheduler to a remote service, it is recommended that you keep the `timezone` option always set, for example, to `"Etc/UTC"`.
+> * When you bind the Scheduler to a remote service, keep the `timezone` option always set to, for example, `"Etc/UTC"`.
 > * When the `timezone` option of the Scheduler is not set, the current system timezone offset is used.
 > * The recommended `Date` format for sending and receiving Scheduler event dates is [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) with a **Z** zone designator (UTC date). The same format is used by the [`JSON.stringify`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/JSON/stringify) method, which converts JavaScript `Date` objects to JSON strings.
 

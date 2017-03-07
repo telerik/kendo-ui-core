@@ -1,13 +1,16 @@
 ---
-title: Modify Editor Template upon New Events
-page_title: Modify Editor Template upon New Events | Kendo UI Scheduler
-description: "Learn how to show or hide different parts of the editor template based on the event state in a Kendo UI Scheduler widget."
+title: Modify Editor Templates upon New Events
+page_title: Modify Editor Templates upon New Events | Kendo UI Scheduler
+description: "Learn how to show or hide different parts of the editor template based on the event state in the Kendo UI Scheduler."
+previous_url: /controls/scheduling/scheduler/how-to/modify-editor-when-event-is-new
 slug: howto_modifyeditortemplate_wheneventisnew_scheduler
 ---
 
-# Modify Editor Template upon New Events
+# Modify Editor Templates upon New Events
 
-The example below demonstrates how to show/hide different parts of the editor template based on the event state, namely, it hides the `Title` field if the event is not new and displays a message.
+The following example demonstrates how to show or hide different parts of the editor template based on the event state.
+
+As a result, if the event is not new, the template hides the **Title** field and displays a message.
 
 ###### Example
 

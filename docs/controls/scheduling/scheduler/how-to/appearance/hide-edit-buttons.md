@@ -1,13 +1,14 @@
 ---
 title: Hide Edit Buttons
 page_title: Hide Edit Buttons | Kendo UI Scheduler
-description: "Learn how to hide the edit buttons in a Kendo UI Scheduler widget."
+description: "Learn how to hide the Edit buttons of the Kendo UI Scheduler widget."
+previous_url: /controls/scheduling/scheduler/how-to/hide-edit-buttons
 slug: howto_hidethe_editbutons_scheduler
 ---
 
 # Hide Edit Buttons
 
-The example below demonstrates how to hide the edit buttons in a Kendo UI Scheduler widget.
+The following example demonstrates how to hide the **Edit** button of the Scheduler.
 
 ###### Example
 

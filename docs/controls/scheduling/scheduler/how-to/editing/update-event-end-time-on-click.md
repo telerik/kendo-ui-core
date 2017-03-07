@@ -2,12 +2,13 @@
 title: Update End Time of Events on Click
 page_title: Update End Time of Events on Click | Kendo UI Scheduler
 description: "Learn how to update the end time of an event on click in a Kendo UI Scheduler widget."
+previous_url: /controls/scheduling/scheduler/how-to/update-event-end-time-on-click
 slug: howto_update_event_end_time_on_click_scheduler
 ---
 
 # Update End Time of Events on Click
 
-The example below demonstrates how to update the end time of an event on click in a Kendo UI Scheduler widget.
+The following example demonstrates how to update the end time of an event on click in a Kendo UI Scheduler.
 
 ###### Example
 

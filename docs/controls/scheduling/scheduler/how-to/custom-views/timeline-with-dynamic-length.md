@@ -1,13 +1,14 @@
 ---
-title: Implement Custom timeline View with Dynamic Length
-page_title: Implement Custom timeline View with Dynamic Length | Kendo UI Scheduler
+title: Implement Custom Timeline View with Dynamic Length
+page_title: Implement Custom Timeline View with Dynamic Length | Kendo UI Scheduler
 description: "Learn how to implement a custom `timeline` view in a Kendo UI Scheduler widget, which allows to change its length dynamically."
+previous_url: /controls/scheduling/scheduler/how-to/timeline-with-dynamic-length
 slug: howto_implementcustomtimeline_withdynamiclength_scheduler
 ---
 
-# Implement Custom timeline View with Dynamic Length
+# Implement Custom Timeline View with Dynamic Length
 
-The example below demonstrates how to implement a custom `timeline` view in a Kendo UI Scheduler widget, which allows to change its length dynamically.
+The following example demonstrates how to implement a custom Timeline view in a Kendo UI Scheduler which allows to change its length dynamically.
 
 ###### Example
 

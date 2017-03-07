@@ -1,13 +1,14 @@
 ---
 title: Add Time to the End Date of Recurring Events
 page_title: Add Time to the End Date of Recurring Events | Kendo UI Scheduler
-description: "Add time to the edn date os a recurrent event in a Kendo UI Scheduler widget."
+description: "Add the time to the end date of a recurrent event in a Kendo UI Scheduler."
+previous_url: /controls/scheduling/scheduler/how-to/add-time-to-the-end-date-in-recurrence-editor
 slug: howto_add_time_to_the_end_date_of_a_recurring_event_scheduler
 ---
 
 # Add Time to the End Date of Recurring Events
 
-The example below demonstrates how to format the end date of a recurring event in a Kendo UI Scheduler widget.
+The following example demonstrates how to format the end date of a recurring event in a Kendo UI Scheduler.
 
 ###### Example
 

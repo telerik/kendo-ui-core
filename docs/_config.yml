@@ -314,8 +314,16 @@ navigation:
         title: "Customizing Behavior"
     "*other":
         title: "Other"
+    "*scrolling":
+        title: "Scrolling"
+    "*validation":
+        title: "Validation"
     "*selection":
         title: "Selection"
+    "*various":
+        title: "Various"
+    "*custom-views":
+        title: "Custom Views"
     "*angular":
         title: "AngularJS"
         position: 1
