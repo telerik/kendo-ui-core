@@ -1,18 +1,20 @@
 ---
-title: Grid with Excel like filter (filter menu)
-page_title: Use Grid Filtering with Excel like filter | Kendo UI Grid Widget
-description: "Learn how to use Excel like filter in a Kendo UI Grid."
+title: Implement an Excel-Like Filter Menu
+page_title: Implement an Excel-Like Filter Menu | Kendo UI Grid Widget
+description: "Learn how to implement an Excel-like filter menu in a Kendo UI Grid."
 slug: howto_gridfiltering_excellike_grid
 ---
 
-# Use Grid with Excel like filter
+# Implement an Excel-Like Filter Menu
 
-The example below demonstrates how to set the Grid with Excel like filter. The example uses the [columns.filterable.dataSource](http://docs.telerik.com/kendo-ui/api/javascript/ui/grid#configuration-columns.filterable.dataSource) property of the Grid to set one dataSource for the Grid and for the filter menus.
+The following example demonstrates how to set the Grid with Excel-like filter.
 
-To see how the example below functions, follow these steps:
+The example uses the [`columns.filterable.dataSource`](/api/javascript/ui/grid#configuration-columns.filterable.dataSource) property of the Grid to set a single Data Source for the Grid and for the filter menus.
 
-1. Filter the Product Name column.
-2. Open the Unit Price column and notice that the values are filtered based on the currently applied filter on the Product Name column.
+To achieve this behavior:
+
+1. Filter the **Product Name** column.
+2. Open the **Unit Price** column. Note that the values are filtered based on the currently applied filter on the **Product Name** column.
 
 ###### Example
 
