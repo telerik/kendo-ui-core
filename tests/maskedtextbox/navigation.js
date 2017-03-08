@@ -2,27 +2,16 @@
     var MaskedTextBox = kendo.ui.MaskedTextBox,
         caret = kendo.caret,
         input;
+    var BACKSPACE = kendo.keys.BACKSPACE;
+    var DELETE = kendo.keys.DELETE;
+    var caret = kendo.caret;
+    var LETTER_REGEX = /[a-z]{1,3}/;
+    var NUMBER_REGEX = /[0-9]{1,3}/;
 
     module("kendo.ui.MaskedTextBox navigation", {
         setup: function() {
-            input = $("<input />").appendTo(QUnit.fixture);
-
-            $.fn.pressKey = function(key, eventName, options) {
-                if (typeof key === "string") {
-                    key = key.charCodeAt(0);
-                }
-
-                if ($.isPlainObject(eventName)) {
-                    options = eventName;
-                    eventName = "keypress";
-                }
-
-                if (!eventName) {
-                    eventName = "keypress";
-                }
-
-                return this.trigger($.extend({ type: eventName, keyCode: key, which: key }, options) );
-            }
+            input = createInput();
+            setupPressKey();
         },
         teardown: function() {
             kendo.destroy(QUnit.fixture);
@@ -500,5 +489,315 @@
         input.pressKey("3");
 
         equal(maskedtextbox.calls("_mask"), 0);
+    });
+
+    module("kendo.ui.MaskedTextBox navigation in a single group with backspace", {
+        setup: function() {
+            input = createInput();
+            setupPressKey();
+        },
+        teardown: function() {
+            kendo.destroy(QUnit.fixture);
+        }
+    });
+
+    asyncTest("should delete char at the start of a group", 3, function() {
+        var maskedtextbox = new MaskedTextBox(input, {
+            mask: "xyz",
+            rules: {
+                "xyz": NUMBER_REGEX
+            }
+        });
+        input.focus();
+
+        setTimeout(function() {
+            start();
+            input.val("123");
+            caret(input[0], 1);
+
+            input.pressKey(BACKSPACE, "keydown");
+
+            equal(input.val(), "23_");
+            equal(caret(input[0])[0], 0);
+            equal(caret(input[0])[1], 0);
+        });
+    });
+
+    asyncTest("should delete char in the middle of a group", 3, function() {
+        var maskedtextbox = new MaskedTextBox(input, {
+            mask: "xyz",
+            rules: {
+                "xyz": NUMBER_REGEX
+            }
+        });
+        input.focus();
+
+        setTimeout(function() {
+            start();
+            input.val("123");
+            caret(input[0], 2);
+
+            input.pressKey(BACKSPACE, "keydown");
+
+            equal(input.val(), "13_");
+            equal(caret(input[0])[0], 1);
+            equal(caret(input[0])[1], 1);
+        });
+    });
+
+    asyncTest("should delete char at the end of a group", 3, function() {
+        var maskedtextbox = new MaskedTextBox(input, {
+            mask: "xyz",
+            rules: {
+                "xyz": NUMBER_REGEX
+            }
+        });
+        input.focus();
+
+        setTimeout(function() {
+            start();
+            input.val("123");
+            caret(input[0], 3);
+
+            input.pressKey(BACKSPACE, "keydown");
+
+            equal(input.val(), "12_");
+            equal(caret(input[0])[0], 2);
+            equal(caret(input[0])[1], 2);
+        });
+    });
+
+    module("kendo.ui.MaskedTextBox navigation in groups with backspace", {
+        setup: function() {
+            input = createInput();
+            setupPressKey();
+        },
+        teardown: function() {
+            kendo.destroy(QUnit.fixture);
+        }
+    });
+
+    asyncTest("should delete char at the start of a group", 3, function() {
+        var maskedtextbox = new MaskedTextBox(input, {
+            mask: "xyz123",
+            value: "abc123",
+            rules: {
+                "xyz": LETTER_REGEX,
+                "123": NUMBER_REGEX
+            }
+        });
+        input.focus();
+
+        setTimeout(function() {
+            start();
+            caret(input[0], 4);
+
+            input.pressKey(BACKSPACE, "keydown");
+
+            equal(input.val(), "abc23_");
+            equal(caret(input[0])[0], 3);
+            equal(caret(input[0])[1], 3);
+        });
+    });
+
+    asyncTest("should delete char in the start of a group", 3, function() {
+        var maskedtextbox = new MaskedTextBox(input, {
+            mask: "xyz123",
+            value: "abc123",
+            rules: {
+                "xyz": LETTER_REGEX,
+                "123": NUMBER_REGEX
+            }
+        });
+        input.focus();
+
+        setTimeout(function() {
+            start();
+            caret(input[0], 5);
+
+            input.pressKey(BACKSPACE, "keydown");
+
+            equal(input.val(), "abc13_");
+            equal(caret(input[0])[0], 4);
+            equal(caret(input[0])[1], 4);
+        });
+    });
+
+    asyncTest("should delete char at the end of a group", 3, function() {
+        var maskedtextbox = new MaskedTextBox(input, {
+            mask: "xyz123",
+            value: "abc123",
+            rules: {
+                "xyz": LETTER_REGEX,
+                "123": NUMBER_REGEX
+            }
+        });
+        input.focus();
+
+        setTimeout(function() {
+            start();
+            caret(input[0], 6);
+
+            input.pressKey(BACKSPACE, "keydown");
+
+            equal(input.val(), "abc12_");
+            equal(caret(input[0])[0], 5);
+            equal(caret(input[0])[1], 5);
+        });
+    });
+
+    module("kendo.ui.MaskedTextBox navigation in a single group with delete", {
+        setup: function() {
+            input = createInput();
+            setupPressKey();
+        },
+        teardown: function() {
+            kendo.destroy(QUnit.fixture);
+        }
+    });
+
+    asyncTest("should delete char at the start of a group", 3, function() {
+        var maskedtextbox = new MaskedTextBox(input, {
+            mask: "xyz",
+            rules: {
+                "xyz": NUMBER_REGEX
+            }
+        });
+        input.focus();
+
+        setTimeout(function() {
+            start();
+            input.val("123");
+            caret(input[0], 0);
+
+            input.pressKey(DELETE, "keydown");
+
+            equal(input.val(), "23_");
+            equal(caret(input[0])[0], 0);
+            equal(caret(input[0])[1], 0);
+        });
+    });
+
+    asyncTest("should delete char in the middle of a group", 3, function() {
+        var maskedtextbox = new MaskedTextBox(input, {
+            mask: "xyz",
+            rules: {
+                "xyz": NUMBER_REGEX
+            }
+        });
+        input.focus();
+
+        setTimeout(function() {
+            start();
+            input.val("123");
+            caret(input[0], 1);
+
+            input.pressKey(DELETE, "keydown");
+
+            equal(input.val(), "13_");
+            equal(caret(input[0])[0], 1);
+            equal(caret(input[0])[1], 1);
+        });
+    });
+
+    asyncTest("should delete char at the end of a group", 3, function() {
+        var maskedtextbox = new MaskedTextBox(input, {
+            mask: "xyz",
+            rules: {
+                "xyz": NUMBER_REGEX
+            }
+        });
+        input.focus();
+
+        setTimeout(function() {
+            start();
+            input.val("123");
+            caret(input[0], 2);
+
+            input.pressKey(DELETE, "keydown");
+
+            equal(input.val(), "12_");
+            equal(caret(input[0])[0], 2);
+            equal(caret(input[0])[1], 2);
+        });
+    });
+
+    module("kendo.ui.MaskedTextBox navigation in groups with delete", {
+        setup: function() {
+            input = createInput();
+            setupPressKey();
+        },
+        teardown: function() {
+            kendo.destroy(QUnit.fixture);
+        }
+    });
+
+    asyncTest("should delete char at the start of a group", 3, function() {
+        var maskedtextbox = new MaskedTextBox(input, {
+            mask: "xyz123",
+            value: "abc123",
+            rules: {
+                "xyz": LETTER_REGEX,
+                "123": NUMBER_REGEX
+            }
+        });
+        input.focus();
+
+        setTimeout(function() {
+            start();
+            caret(input[0], 3);
+
+            input.pressKey(DELETE, "keydown");
+
+            equal(input.val(), "abc23_");
+            equal(caret(input[0])[0], 3);
+            equal(caret(input[0])[1], 3);
+        });
+    });
+
+    asyncTest("should delete char in the start of a group", 3, function() {
+        var maskedtextbox = new MaskedTextBox(input, {
+            mask: "xyz123",
+            value: "abc123",
+            rules: {
+                "xyz": LETTER_REGEX,
+                "123": NUMBER_REGEX
+            }
+        });
+        input.focus();
+
+        setTimeout(function() {
+            start();
+            caret(input[0], 4);
+
+            input.pressKey(DELETE, "keydown");
+
+            equal(input.val(), "abc13_");
+            equal(caret(input[0])[0], 4);
+            equal(caret(input[0])[1], 4);
+        });
+    });
+
+    asyncTest("should delete char at the end of a group", 3, function() {
+        var maskedtextbox = new MaskedTextBox(input, {
+            mask: "xyz123",
+            value: "abc123",
+            rules: {
+                "xyz": LETTER_REGEX,
+                "123": NUMBER_REGEX
+            }
+        });
+        input.focus();
+
+        setTimeout(function() {
+            start();
+            caret(input[0], 5);
+
+            input.pressKey(DELETE, "keydown");
+
+            equal(input.val(), "abc12_");
+            equal(caret(input[0])[0], 5);
+            equal(caret(input[0])[1], 5);
+        });
     });
 })();

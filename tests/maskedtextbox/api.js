@@ -1,27 +1,13 @@
 (function() {
     var MaskedTextBox = kendo.ui.MaskedTextBox,
         input;
+    var LETTER_REGEX = /[a-z]{1,3}/;
+    var NUMBER_REGEX = /[0-9]{1,3}/;
 
     module("kendo.ui.MaskedTextBox api", {
         setup: function() {
-            input = $("<input />").appendTo(QUnit.fixture);
-
-            $.fn.pressKey = function(key, eventName, options) {
-                if (typeof key === "string") {
-                    key = key.charCodeAt(0);
-                }
-
-                if ($.isPlainObject(eventName)) {
-                    options = eventName;
-                    eventName = "keypress";
-                }
-
-                if (!eventName) {
-                    eventName = "keypress";
-                }
-
-                return this.trigger($.extend({ type: eventName, keyCode: key, which: key }, options) );
-            }
+            input = createInput();
+            setupPressKey();
         },
         teardown: function() {
             kendo.destroy(QUnit.fixture);
@@ -38,7 +24,7 @@
         equal(input.val(), "(99-__)");
     });
 
-    test("value method sets a value with static chars at the begining", function() {
+    test("value method sets a value with static chars at the beginning", function() {
         var maskedtextbox = new MaskedTextBox(input, {
             mask: "(00-00)"
         });
@@ -134,6 +120,108 @@
         equal(input.val(), "");
     });
 
+    test("value method sets partial value which is part of group rule", 2, function() {
+        var maskedtextbox = new MaskedTextBox(input, {
+            mask: "xyz",
+            rules: {
+                "xyz": LETTER_REGEX
+            }
+        });
+
+        maskedtextbox.value("x");
+
+        equal(maskedtextbox.value(), "x__")
+        equal(input.val(), "x__");
+    });
+
+    test("value method sets partial value at the start of a group", 2, function() {
+        var maskedtextbox = new MaskedTextBox(input, {
+            mask: "xyz",
+            value: "abc",
+            rules: {
+                "xyz": LETTER_REGEX
+            }
+        });
+
+        maskedtextbox.value("xbc");
+
+        equal(maskedtextbox.value(), "xbc")
+        equal(input.val(), "xbc");
+    });
+
+    test("value method sets partial value in the middle of a group", 2, function() {
+        var maskedtextbox = new MaskedTextBox(input, {
+            mask: "xyz",
+            value: "abc",
+            rules: {
+                "xyz": LETTER_REGEX
+            }
+        });
+
+        maskedtextbox.value("axc");
+
+        equal(maskedtextbox.value(), "axc");
+        equal(input.val(), "axc");
+    });
+
+    test("value method sets partial value at the end of a group", 2, function() {
+        var maskedtextbox = new MaskedTextBox(input, {
+            mask: "xyz",
+            value: "abc",
+            rules: {
+                "xyz": LETTER_REGEX
+            }
+        });
+
+        maskedtextbox.value("abx");
+
+        equal(maskedtextbox.value(), "abx")
+        equal(input.val(), "abx");
+    });
+
+    test("value method sets full value to a group", 2, function() {
+        var maskedtextbox = new MaskedTextBox(input, {
+            mask: "xyz",
+            rules: {
+                "xyz": LETTER_REGEX
+            }
+        });
+
+        maskedtextbox.value("abc");
+
+        equal(maskedtextbox.value(), "abc")
+        equal(input.val(), "abc");
+    });
+
+    test("value method sets value with chars and a group", 2, function() {
+        var maskedtextbox = new MaskedTextBox(input, {
+            mask: "0xyz9",
+            rules: {
+                "xyz": LETTER_REGEX
+            }
+        });
+
+        maskedtextbox.value("1abc2");
+
+        equal(maskedtextbox.value(), "1abc2")
+        equal(input.val(), "1abc2");
+    });
+
+    test("value method sets value with multiple groups", 2, function() {
+        var maskedtextbox = new MaskedTextBox(input, {
+            mask: "xyz123",
+            rules: {
+                "xyz": LETTER_REGEX,
+                "123": NUMBER_REGEX
+            }
+        });
+
+        maskedtextbox.value("abc1");
+
+        equal(maskedtextbox.value(), "abc1__")
+        equal(input.val(), "abc1__");
+    });
+
     test("raw method returns unmasked widget value", function() {
         var maskedtextbox = new MaskedTextBox(input, {
             mask: "(00-00)",
@@ -149,6 +237,54 @@
         });
 
         equal(maskedtextbox.raw(), "");
+    });
+
+    test("raw method returns partial unmasked group value at the beginning", function() {
+        var maskedtextbox = new MaskedTextBox(input, {
+            mask: "xyz",
+            value: "1__",
+            rules: {
+                "xyz": NUMBER_REGEX
+            }
+        });
+
+        equal(maskedtextbox.raw(), "1");
+    });
+
+    test("raw method returns partial unmasked group value in the middle", function() {
+        var maskedtextbox = new MaskedTextBox(input, {
+            mask: "xyz",
+            value: "_1_",
+            rules: {
+                "xyz": NUMBER_REGEX
+            }
+        });
+
+        equal(maskedtextbox.raw(), "1");
+    });
+
+    test("raw method returns partial unmasked group value at the end", function() {
+        var maskedtextbox = new MaskedTextBox(input, {
+            mask: "xyz",
+            value: "__1",
+            rules: {
+                "xyz": NUMBER_REGEX
+            }
+        });
+
+        equal(maskedtextbox.raw(), "1");
+    });
+
+    test("raw method returns unmasked group value", function() {
+        var maskedtextbox = new MaskedTextBox(input, {
+            mask: "xyz",
+            value: "123",
+            rules: {
+                "xyz": NUMBER_REGEX
+            }
+        });
+
+        equal(maskedtextbox.raw(), maskedtextbox.options.value);
     });
 
     test("enable method with false disables widget", function() {

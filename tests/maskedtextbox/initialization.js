@@ -1,27 +1,14 @@
 (function() {
     var MaskedTextBox = kendo.ui.MaskedTextBox,
         input;
+    var NUMBER_REGEX = /[0-9]{3}/;
+    var CUSTOM_REGEX = /[a-z]/;
 
     module("kendo.ui.MaskedTextBox initialization", {
         setup: function() {
-            input = $("<input />").appendTo(QUnit.fixture);
+            input = createInput();
 
-            $.fn.pressKey = function(key, eventName, options) {
-                if (typeof key === "string") {
-                    key = key.charCodeAt(0);
-                }
-
-                if ($.isPlainObject(eventName)) {
-                    options = eventName;
-                    eventName = "keypress";
-                }
-
-                if (!eventName) {
-                    eventName = "keypress";
-                }
-
-                return this.trigger($.extend({ type: eventName, keyCode: key, which: key }, options) );
-            }
+            setupPressKey();
         },
         teardown: function() {
             kendo.destroy(QUnit.fixture);
@@ -79,11 +66,19 @@
             mask: "0-0"
         });
 
-        var tokens = maskedtextbox.tokens;
-
-        equal(tokens[0], maskedtextbox.rules["0"]);
-        equal(tokens[1], "-");
-        equal(tokens[2], maskedtextbox.rules["0"]);
+        assertTokensEqual(maskedtextbox.tokens, [{
+                maskIndex: 0,
+                text: "0",
+                rule: maskedtextbox.rules["0"]
+            }, {
+                maskIndex: 1,
+                text: "-"
+            }, {
+                maskIndex: 2,
+                text: "0",
+                rule: maskedtextbox.rules["0"]
+            }
+        ]);
     });
 
     test("MaskedTextBox replace '.' token with current decimal separator", function() {
@@ -95,7 +90,7 @@
         });
 
         var tokens = maskedtextbox.tokens;
-        equal(tokens[1], numberFormat["."]);
+        equal(tokens[1].text, numberFormat["."]);
 
         kendo.culture("en-US");
     });
@@ -109,7 +104,7 @@
         });
 
         var tokens = maskedtextbox.tokens;
-        equal(tokens[1], numberFormat[","]);
+        equal(tokens[1].text, numberFormat[","]);
 
         kendo.culture("en-US");
     });
@@ -129,7 +124,7 @@
         expect(chars.length);
 
         for (var idx = 0, length = chars.length; idx < length; idx++) {
-            equal(tokens[tokenIdx + idx], chars[idx]);
+            equal(tokens[tokenIdx + idx].text, chars[idx]);
         }
 
         kendo.culture("en-US");
@@ -142,8 +137,172 @@
         });
 
         var tokens = maskedtextbox.tokens;
-        equal(tokens[0], "&");
+        equal(tokens[0].text, "&");
         equal(tokens.length, 1);
+    });
+
+    test("tokenizes mask with a single group", function() {
+        var maskedtextbox = new MaskedTextBox(input, {
+            mask: "xyz",
+            rules: {
+                "xyz": NUMBER_REGEX
+            }
+        });
+
+        assertTokensEqual(maskedtextbox.tokens, [{
+                maskIndex: 0,
+                text: "x",
+                group: {
+                    maskIndex: 0,
+                    text: "xyz",
+                    rule: NUMBER_REGEX
+                }
+            }, {
+                maskIndex: 1,
+                text: "y",
+                group: {
+                    maskIndex: 0,
+                    text: "xyz",
+                    rule: NUMBER_REGEX
+                }
+            }, {
+                maskIndex: 2,
+                text: "z",
+                group: {
+                    maskIndex: 0,
+                    text: "xyz",
+                    rule: NUMBER_REGEX
+                }
+            }
+        ]);
+    });
+
+    test("tokenizes mask with a group and a char at the beginning", function() {
+        var maskedtextbox = new MaskedTextBox(input, {
+            mask: "0xyz",
+            rules: {
+                "xyz": NUMBER_REGEX,
+                "0": CUSTOM_REGEX
+            }
+        });
+
+        assertTokensEqual(maskedtextbox.tokens, [{
+                maskIndex: 0,
+                text: "0",
+                rule: CUSTOM_REGEX
+            }, {
+                maskIndex: 1,
+                text: "x",
+                group: {
+                    maskIndex: 1,
+                    text: "xyz",
+                    rule: NUMBER_REGEX
+                }
+            }, {
+                maskIndex: 2,
+                text: "y",
+                group: {
+                    maskIndex: 1,
+                    text: "xyz",
+                    rule: NUMBER_REGEX
+                }
+            }, {
+                maskIndex: 3,
+                text: "z",
+                group: {
+                    maskIndex: 1,
+                    text: "xyz",
+                    rule: NUMBER_REGEX
+                }
+            }
+        ]);
+    });
+
+    test("tokenizes mask with a group and a char at the end", function() {
+        var maskedtextbox = new MaskedTextBox(input, {
+            mask: "xyz0",
+            rules: {
+                "xyz": NUMBER_REGEX,
+                "0": CUSTOM_REGEX
+            }
+        });
+
+        assertTokensEqual(maskedtextbox.tokens, [{
+                maskIndex: 0,
+                text: "x",
+                group: {
+                    maskIndex: 0,
+                    text: "xyz",
+                    rule: NUMBER_REGEX
+                }
+            }, {
+                maskIndex: 1,
+                text: "y",
+                group: {
+                    maskIndex: 0,
+                    text: "xyz",
+                    rule: NUMBER_REGEX
+                }
+            }, {
+                maskIndex: 2,
+                text: "z",
+                group: {
+                    maskIndex: 0,
+                    text: "xyz",
+                    rule: NUMBER_REGEX
+                }
+            }, {
+                maskIndex: 3,
+                text: "0",
+                rule: CUSTOM_REGEX
+            }
+        ]);
+    });
+
+    test("tokenizes mask with a group and chars around it", function() {
+        var maskedtextbox = new MaskedTextBox(input, {
+            mask: "0xyz1",
+            rules: {
+                "xyz": NUMBER_REGEX,
+                "0": CUSTOM_REGEX,
+                "1": CUSTOM_REGEX
+            }
+        });
+
+        assertTokensEqual(maskedtextbox.tokens, [{
+                maskIndex: 0,
+                text: "0",
+                rule: CUSTOM_REGEX
+            }, {
+                maskIndex: 1,
+                text: "x",
+                group: {
+                    maskIndex: 1,
+                    text: "xyz",
+                    rule: NUMBER_REGEX
+                }
+            }, {
+                maskIndex: 2,
+                text: "y",
+                group: {
+                    maskIndex: 1,
+                    text: "xyz",
+                    rule: NUMBER_REGEX
+                }
+            }, {
+                maskIndex: 3,
+                text: "z",
+                group: {
+                    maskIndex: 1,
+                    text: "xyz",
+                    rule: NUMBER_REGEX
+                }
+            }, {
+                maskIndex: 4,
+                text: "1",
+                rule: CUSTOM_REGEX
+            }
+        ]);
     });
 
     test("MaskedTextBox sets value on init", function() {
