@@ -467,7 +467,7 @@
                 if (e.target != e.currentTarget || that._closing) {
                     return;
                 }
-                
+
 
                 if (options.draggable && !e.ctrlKey && !isMaximized) {
                     offset = kendo.getOffset(wrapper);
@@ -1292,11 +1292,11 @@
                 wrapper = contentHtml = null;
             }
         });
-        
+
         templates = {
             wrapper: template("<div class='k-widget k-window' />"),
             action: template(
-                "<a role='button' href='\\#' class='k-window-action k-link' aria-label='#= name #'>" +
+                "<a role='button' href='\\#' class='k-button k-bare k-button-icon k-window-action' aria-label='#= name #'>" +
                 "<span class='k-icon k-i-#= name.toLowerCase() #'></span>" +
                 "</a>"
             ),
