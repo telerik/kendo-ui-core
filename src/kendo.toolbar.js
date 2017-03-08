@@ -342,6 +342,10 @@ var __meta__ = { // jshint ignore:line
                     this.hide();
                 }
 
+                if (options.togglable){
+                    this.toggle(options.selected);
+                }
+
                 this.element.data({
                     type: "button",
                     button: this
