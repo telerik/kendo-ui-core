@@ -5,7 +5,7 @@
         },
 
         teardown: function() {
-            QUnit.fixture.find("#scroller").kendoMobileScroller("destroy");
+           // QUnit.fixture.find("#scroller").kendoMobileScroller("destroy");
             QUnit.fixture.empty();
         }
     });
