@@ -270,7 +270,8 @@ Local grouping is convenient for small datasets. However, avoid it is working wi
 
         var wordsDataSource = new kendo.data.DataSource({
             data: words,
-            group: { field: 'length', dir: 'desc'}
+            group: { field: 'length', dir: 'desc'},
+	    schema: { data: 'items' }
         });
 ```
 
