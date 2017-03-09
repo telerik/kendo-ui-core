@@ -28,11 +28,11 @@
         ok(!QUnit.fixture.find('.km-horizontal-scrollbar').is(":visible"));
     });
 
-    // asyncTest("animatedScrollTo method calls its callback", 1, function() {
-    //     var scroller = QUnit.fixture.find("#scroller").kendoMobileScroller().data("kendoMobileScroller");
-    //     scroller.animatedScrollTo(0, -200, function() { 
-    //         start();
-    //         ok(true, "callback is called");
-    //     });
-    // });
+    skip("animatedScrollTo method calls its callback", 1, function() {
+        var scroller = QUnit.fixture.find("#scroller").kendoMobileScroller().data("kendoMobileScroller");
+        scroller.animatedScrollTo(0, -200, function() { 
+            start();
+            ok(true, "callback is called");
+        });
+    });
 })();
