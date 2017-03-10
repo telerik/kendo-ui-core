@@ -52,7 +52,11 @@ For additional information about the code used in the example, refer to:
                 '</div>';
 
             var editor = $(this).data("kendoEditor");
-
+            
+            // Store the editor range object
+            // Needed for IE
+            var storedRange = editor.getRange();
+            
             // create a modal Window from a new DOM element
             var popupWindow = $(popupHtml)
             .appendTo(document.body)
@@ -72,6 +76,7 @@ For additional information about the code used in the example, refer to:
             // insert the new content in the Editor when the Insert button is clicked
             popupWindow.element.find(".k-dialog-insert").click(function(){
                 var customHtml = popupWindow.element.find("textarea").val();
+                editor.selectRange(storedRange);
                 editor.exec("inserthtml", { value: customHtml });
             });
 
