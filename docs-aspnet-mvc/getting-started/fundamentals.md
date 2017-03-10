@@ -24,7 +24,7 @@ A server-side wrapper:
 
 > **Important**
 >
-> Since jQuery 3.0 document-ready handlers are called asynchronously [jQuery Breaking Change](http://demos.telerik.com/kendo-ui/). As a result any code placed outside a document-ready handler will be executed before the code within the handler, regardless of whether the document is ready at the point of execution. This change affects the usage of Telerik UI for ASP.NET MVC components, because the widgets for the MVC wrappers are initialized in a document-ready handler. This means since jQuery 3.0 getting the widget's reference and widget API calls must be done within a document-ready handler.
+> As of the jQuery 3.0 release, the [document-ready handlers are called asynchronously](http://demos.telerik.com/kendo-ui/). As a result, the code placed outside a document-ready handler is executed before the code within the handler, regardless of whether the document is ready at the point of execution or not. This change affects the usage of the Telerik UI for ASP.NET MVC components, because the widgets for the MVC wrappers are initialized in a document-ready handler. This means that after the jQuery 3.0 release you need to get the reference of a widget and its API calls within a document-ready handler.
 
 ## Configuration
 
