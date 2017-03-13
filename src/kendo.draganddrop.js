@@ -896,7 +896,7 @@ var __meta__ = { // jshint ignore:line
                 parent.scrollLeft += velocity.x;
             }
 
-            if (isRootNode && (xInBounds || yInBounds)) {
+            if (this.hint && isRootNode && (xInBounds || yInBounds)) {
                 if (yInBounds) {
                     compensation.top += velocity.y;
                 }
