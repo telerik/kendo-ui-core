@@ -67,7 +67,7 @@ The following mask rules are available and predefined:
 
 ### Groups
 
-A group is a section of the mask, which specifies a common rule for several mask elements (characters). This provides an easy way to check if the multiple characters that define the group are valid as a whole entity.
+A group is a section of the mask, which specifies a common rule for several mask elements (characters). This approach provides an easy way to check if the multiple characters that define the group are valid as a whole entity.
 
 ###### Example
 
@@ -87,7 +87,7 @@ A group is a section of the mask, which specifies a common rule for several mask
 
 > **Important**
 >
-> The length of a group is determined by the number of characters, which define it. In addition, the whole group value should match the group rule in order for the input to be valid. See the [Known Limitations](#known-limitations) section for more information.
+> The length of a group is determined by the number of characters which define it. In order for the input to be valid, make sure that the whole group value matches the group rule. For more information, refer to the section on [known limitations](#known-limitations).
 
 ### Literals
 
@@ -101,9 +101,9 @@ The following mask literals are globalized based on the current culture:
 >
 > Any of the aforementioned literals can be escaped using the `\` character.
 
-### Customize Mask Rules
+### Customization of Mask Rules
 
-The MaskedTextBox widget provides the option to define custom mask rules during initialization. To customize a mask rule, define it in the [`rules`](/api/web/maskedtextbox#configuration-rules) option. The widget supports rules defined as regular expression or a function.
+The MaskedTextBox provides the option to define custom mask rules during initialization. To customize a mask rule, define it in the [`rules`](/api/web/maskedtextbox#configuration-rules) option. The widget supports rules defined as regular expression or a function.
 
 ###### Example
 
@@ -125,7 +125,7 @@ The MaskedTextBox widget provides the option to define custom mask rules during 
 
 > **Important**
 >
-> Any of the predefined rules can be overridden through the [`rules`](/api/web/maskedtextbox#configuration-rules) option.
+> You can override any of the predefined rules by using the [`rules`](/api/web/maskedtextbox#configuration-rules) option.
 
 ## Known Limitations
 
@@ -141,12 +141,13 @@ Unfortunately, in those cases not much can be done, because there is no other re
 
 ### Groups
 
-The following limitations apply to mask groups:
-- Groups cannot be substrings of other groups (or individual rules), i.e. the group `"abc"` is not valid as the rule `"a"` is the default rule for alphanumeric or space characters. This applies to both built-in and custom rules.
-- Partial matching is not supported - as the JavaScript language doesn't support partial matching of Regular expressions, the whole group value (even if only partial input is present) should match the group rule in order to be valid. It is up to the developer to choose the group rule in such a way, so that it handles partial matching, if this is required.
-- Each group has a fixed length equal to the number of characters used for its definition and it cannot vary.
-- Deleting the content inside the `MaskedTextBox` can result in a situation, where the user can no longer type anything, as the group rule cannot be satisfied anymore (due to partial matching not being supported). In such cases, a default value can be set (so that the initial typing is possible) or the group rule can be modified, so that it handles partial input.
-- Using a function to define the group rule is inappropriate in most cases as matching the rule against a single character is usually not enough. The preferred way is to use a regular expression.
+When working with mask groups, note the following limitations:
+
+- Groups cannot be substrings of other groups or individual rules. For example, the `"abc"` group is not valid because the `"a"` rule is the default one for alphanumeric or space characters. This applies to both built-in and custom rules.
+- Partial matching is not supported. To be valid, the whole group value (even if only partial input is present) has to match the group rule because the JavaScript language does not support partial matching of regular expressions. You are responsible for choosing such a group rule so as it handles partial matching if required.
+- Each group has a fixed length that cannot vary. It equals the number of characters which are used for its definition.
+- If you delete the content inside the `MaskedTextBox`, you might provoke a situation in which the user can no longer type anything. The reason for this is that the group rule cannot be satisfied anymore due to the lack of support for partial matching. In such cases, either set a default value so that the initial typing is possible or modify the group rule so that it handles partial input.
+- In most cases, it is inappropriate to use a function to define the group rule because, normally, matching the rule against a single character is not enough. The preferred way is to use a regular expression.
 
 ## See Also
 
