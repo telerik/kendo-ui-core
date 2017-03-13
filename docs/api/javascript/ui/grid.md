@@ -6045,6 +6045,39 @@ Sets the title of the PDF file.
     });
     </script>
 
+### persistSelection `Boolean` *(default:false)*
+
+Sets a value indicating whether the selection will be persisted when sorting, paging, filtering and etc are performed.
+
+> **Note:** Selection persistence works only for row selection.
+
+#### Example - enables selection persistence
+    <div id="grid"></div>
+    <script>
+    $("#grid").kendoGrid({
+      columns: [
+        { field: "name" },
+        { field: "age" }
+      ],
+      dataSource: {
+        data: [
+          { id: 1, name: "Jane Doe", age: 30 },
+          { id: 2, name: "John Doe", age: 33},
+          { id: 3, name: "Jim Doe", age: 30 },
+          { id: 4, name: "Jack Doe", age: 33}
+        ],
+        schema: {
+          model: { id: "id" }
+        }
+      },
+      pageable: {
+        pageSize: 2
+      },
+      selectable: "multiple, row",
+      persistSelection: true
+    });
+    </script>
+
 ### reorderable `Boolean` *(default:false)*
 
 If set to `true` the user could reorder the columns by dragging their header cells. By default reordering is disabled.
@@ -7627,6 +7660,42 @@ A string, DOM element or jQuery object which represents the table row(s) or cell
     var grid = $("#grid").data("kendoGrid");
     grid.select("tr:eq(1), tr:eq(2)");
     </script>
+
+### selectedKeyNames
+
+Gets an array that holds the id field values of the selected rows.
+
+#### Returns
+
+`Array` of the id field values of the selected rows.
+
+#### Example - select the second table row and displays it's dataItem id value
+
+    <div id="grid"></div>
+    <script>
+    $("#grid").kendoGrid({
+      columns: [
+        { field: "name" },
+        { field: "age" }
+      ],
+      dataSource: {
+        data: [
+          { id: 1, name: "Jane Doe", age: 30 },
+          { id: 2, name: "John Doe", age: 33},
+          { id: 3, name: "Jim Doe", age: 30 },
+          { id: 4, name: "Jack Doe", age: 33}
+        ],
+        schema: {
+          model: { id: "id" }
+        }
+      },
+      selectable: "multiple, row",
+      persistSelection: true
+    });
+    var grid = $("#grid").data("kendoGrid");
+    grid.select("tr:eq(2)");
+    console.log(grid.selectedKeyNames()); // displays the id field value for the selected row 
+    </script>    
 
 #### Example - select a row by Model UID
 
