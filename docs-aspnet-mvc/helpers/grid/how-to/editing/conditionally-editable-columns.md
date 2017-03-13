@@ -13,7 +13,7 @@ By default, the current `dataItem` is passed to the JavaScript method as an argu
 
 To enable this functionality, follow the steps and refer to the examples below. They demonstrate how to make a column editable depending on a value in the Model.
 
-1. Add the `Enabled` property for a Grid column and specify the name of the JavaScript method.
+1. Add the `Editable` property for a Grid column and specify the name of the JavaScript method.
 
     ###### Example
 
