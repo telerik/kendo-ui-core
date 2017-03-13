@@ -265,7 +265,7 @@ var __meta__ = { // jshint ignore:line
                 filters: [],
                 logic: "and"
             };
-
+            
             if (isValidFilterExpr(filter)) {
                 newExpression.filters.push(filter);
             }
