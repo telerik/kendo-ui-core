@@ -757,4 +757,30 @@
         equal(filters.filters[1].logic, "or");
         equal(filters.filters[1].filters.length, 2);
     });
+
+    test("concat filters with the same logic operator", 2, function() {
+        var dropdownlist = new DropDownList(input, {
+            dataTextField: "text",
+            dataValueField: "value",
+            filter: "contains",
+            dataSource: {
+                data: [{ text: "start_foo_end", value: 1 }, { text: "boo", value: 2 }, { text: "start_too_end", value: 10 }],
+                filter: {
+                    logic: "or",
+                    filters: [
+                        { field: "value", operator: "eq", value: 1 },
+                        { field: "value", operator: "eq", value: 2 }
+                    ]
+                }
+            }
+        });
+
+        dropdownlist.search("to");
+        dropdownlist.search("too");
+
+        var filters = dropdownlist.dataSource.filter();
+
+        equal(filters.filters[1].filters.length, 2);
+        equal(!filters.filters[1].filters.filters, true);
+    });
 })();
