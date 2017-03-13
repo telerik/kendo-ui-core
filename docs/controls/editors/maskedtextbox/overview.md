@@ -65,6 +65,30 @@ The following mask rules are available and predefined:
 >
 > Any mask rule can be escaped using the `\` character. An escaped rule is turned into a literal.
 
+### Groups
+
+A group is a section of the mask, which specifies a common rule for several mask elements (characters). This provides an easy way to check if the multiple characters that define the group are valid as a whole entity.
+
+###### Example
+
+    <input id="maskedtextbox">
+
+    <script>
+      $(document).ready(function(){
+        $("#maskedtextbox").kendoMaskedTextBox({
+          mask: "xyz",
+          value: "abc",
+          rules: {
+            "xyz": /[a-z]{3}/
+          }
+        });
+      });
+    </script>
+
+> **Important**
+>
+> The length of a group is determined by the number of characters, which define it. In addition, the whole group value should match the group rule in order for the input to be valid. See the [Known Limitations](#known-limitations) section for more information.
+
 ### Literals
 
 The following mask literals are globalized based on the current culture:
@@ -114,6 +138,15 @@ The MaskedTextBox widget listens to input events, like `keydown` and `keypress`,
 > * Recent tests show that the MaskedTextBox works in the latest iOS OS.
 
 Unfortunately, in those cases not much can be done, because there is no other reliable way to detect typing in mobile browsers&mdash;the virtual keyboard does not rise any other specific events.
+
+### Groups
+
+The following limitations apply to mask groups:
+- Groups cannot be substrings of other groups (or individual rules), i.e. the group `"abc"` is not valid as the rule `"a"` is the default rule for alphanumeric or space characters. This applies to both built-in and custom rules.
+- Partial matching is not supported - as the JavaScript language doesn't support partial matching of Regular expressions, the whole group value (even if only partial input is present) should match the group rule in order to be valid. It is up to the developer to choose the group rule in such a way, so that it handles partial matching, if this is required.
+- Each group has a fixed length equal to the number of characters used for its definition and it cannot vary.
+- Deleting the content inside the `MaskedTextBox` can result in a situation, where the user can no longer type anything, as the group rule cannot be satisfied anymore (due to partial matching not being supported). In such cases, a default value can be set (so that the initial typing is possible) or the group rule can be modified, so that it handles partial input.
+- Using a function to define the group rule is inappropriate in most cases as matching the rule against a single character is usually not enough. The preferred way is to use a regular expression.
 
 ## See Also
 
