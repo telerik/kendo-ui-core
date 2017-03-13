@@ -263,13 +263,17 @@ var __meta__ = { // jshint ignore:line
                 filters: [],
                 logic: "and"
             };
-
+            
             if (isValidFilterExpr(filter)) {
                 newExpression.filters.push(filter);
             }
 
             if (isValidFilterExpr(expression)) {
-                newExpression.filters.push(expression);
+                if (newExpression.logic === expression.logic) {
+                    newExpression.filters = newExpression.filters.concat(expression.filters);
+                } else {
+                    newExpression.filters.push(expression);
+                }
             }
 
             if (that._cascading) {
