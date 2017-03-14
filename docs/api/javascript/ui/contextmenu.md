@@ -344,11 +344,11 @@ The DOM element to which the ContextMenu will be appended. The element needs to 
         });
     </script>
 
- ### copyAnchorStyles `Boolean`*(default: true)*
+### copyAnchorStyles `Boolean`*(default: true)*
 
-  Copies and uses the styles from the anchor.
+Copies and uses the styles from the anchor.
 
- #### Example
+#### Example
 
     <span class="k-icon k-i-filter" id="span-target"></span>
     <ul id="context-menu-span">
