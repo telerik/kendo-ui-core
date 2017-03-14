@@ -7,7 +7,7 @@
         },
         teardown: function() {
             QUnit.fixture.closest("body").find(".k-window-content").each(function(idx, element){
-                $(element).data("kendoWindow").destroy();
+                 kendo.widgetInstance($(element)).destroy();
             });
             QUnit.fixture.closest("body").find(".k-overlay").remove();
             $.mockjax.clear();
@@ -17,6 +17,10 @@
 
     function createWindow(options) {
         return $("<div />").appendTo(QUnit.fixture).kendoWindow(options).data("kendoWindow");
+    }
+
+    function createDialog(options) {
+        return $("<div />").appendTo(QUnit.fixture).kendoDialog(options).data("kendoDialog");
     }
 
     test("title gets title", function() {
@@ -140,6 +144,18 @@
 
     test("closing a modal window moves overlay before previous window", function() {
         var dialog = createWindow({
+                modal: true
+            }),
+            overlappingDialog = createWindow({
+                modal: true
+            });
+
+        overlappingDialog.close();
+        ok(dialog.wrapper.prev("div").is(".k-overlay"));
+    });
+
+    test("closing a modal window moves overlay before previous Kendo Dialog too", function() {
+        var dialog = createDialog({
                 modal: true
             }),
             overlappingDialog = createWindow({
