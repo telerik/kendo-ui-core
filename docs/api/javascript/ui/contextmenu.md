@@ -344,6 +344,38 @@ The DOM element to which the ContextMenu will be appended. The element needs to 
         });
     </script>
 
+ ### copyAnchorStyles `Boolean`*(default: true)*
+
+  Copies and uses the styles from the anchor.
+
+ #### Example
+
+    <span class="k-icon k-i-filter" id="span-target"></span>
+    <ul id="context-menu-span">
+      <li>Item 1
+        <ul>
+          <li>Sub Item 1</li>
+          <li>Sub Item 2</li>
+          <li>Sub Item 3</li>
+        </ul>
+      </li>
+      <li>Item 2
+        <ul>
+          <li>Sub Item 1</li>
+          <li>Sub Item 2</li>
+          <li>Sub Item 3</li>
+        </ul>
+      </li>
+    </ul>
+    <script>
+
+      $("#context-menu-span").kendoContextMenu({
+        target: "#span-target",
+        alignToAnchor: true,
+        copyAnchorStyles: false
+      });
+    </script>
+
 ### dataSource `Object|Array`
 
 The data source of the widget which is used to render its items. Can be a JSON object/Array that contains an item or an Array of items to be rendered.
