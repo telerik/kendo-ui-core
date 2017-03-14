@@ -514,4 +514,28 @@ test("keeps custom filter expresssion", 5, function() {
     equal(filters.filters[1].logic, "or");
     equal(filters.filters[1].filters.length, 2);
 });
+
+test("concat filters with the same logic operator", 2, function() {
+    var autocomplete = new AutoComplete(input, {
+        dataTextField: "text",
+        dataSource: {
+            data: [{ text: "foo", value: 1 }, { text: "bar", value: 2 }, { text: "too", value: 3 }],
+            filter: {
+                logic: "or",
+                filters: [
+                    { field: "value", operator: "eq", value: 1 },
+                    { field: "value", operator: "eq", value: 2 }
+                ]
+            }
+        }
+    });
+
+    autocomplete.search("to");
+    autocomplete.search("too");
+
+    var filters = autocomplete.dataSource.filter();
+
+    equal(filters.filters[1].filters.length, 2);
+    equal(!filters.filters[1].filters.filters, true);
+});
 }());
