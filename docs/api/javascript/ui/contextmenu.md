@@ -346,7 +346,7 @@ The DOM element to which the ContextMenu will be appended. The element needs to 
 
 ### copyAnchorStyles `Boolean`*(default: true)*
 
-Copies and uses the styles from the anchor.
+ Copies and uses the styles from the anchor.
 
 #### Example
 
