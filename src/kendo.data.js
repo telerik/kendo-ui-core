@@ -4478,6 +4478,10 @@ var __meta__ = { // jshint ignore:line
 
                 children.one(CHANGE, proxy(this._childrenLoaded, this));
 
+                if(this._matchFilter){
+                    options.filter = { field: '_matchFilter', operator: 'eq', value: true };
+                }
+
                 promise = children[method](options);
             } else {
                 this.loaded(true);
@@ -4528,6 +4532,11 @@ var __meta__ = { // jshint ignore:line
                 children: options
             });
 
+            if(options.filter){
+                this._hierarchicalFilter = options.filter;
+                options.filter = null;
+            }
+
             DataSource.fn.init.call(this, extend(true, {}, { schema: { modelBase: node, model: node } }, options));
 
             this._attachBubbleHandlers();
@@ -4539,6 +4548,16 @@ var __meta__ = { // jshint ignore:line
             that._data.bind(ERROR, function(e) {
                 that.trigger(ERROR, e);
             });
+        },
+
+        read: function(data) {
+            var result = DataSource.fn.read.call(this, data);
+
+            if(this._hierarchicalFilter){
+                this.filter(this._hierarchicalFilter);
+            }
+
+            return result;
         },
 
         remove: function(node){
@@ -4572,6 +4591,72 @@ var __meta__ = { // jshint ignore:line
             }
 
             return DataSource.fn.insert.call(this, index, model);
+        },
+
+        filter: function(val) {
+            if (val === undefined) {
+                 return this._filter;
+            }
+
+            if(!this.options.serverFiltering){
+                this._markHierarchicalQuery(val);
+                val = { logic: "or", filters: [val, {field:'_matchFilter', operator: 'equals', value: true }]};
+            }
+
+            this.trigger("reset");
+            this._query({ filter: val, page: 1 });
+        },
+
+        _markHierarchicalQuery: function(expressions){
+            var compiled;
+            var predicate; 
+            var fields;
+            var operators;
+            var filter;
+
+            expressions = normalizeFilter(expressions);
+
+            if (!expressions || expressions.filters.length === 0) {
+                return this;
+            }
+
+            compiled = Query.filterExpr(expressions);
+            fields = compiled.fields;
+            operators = compiled.operators;
+
+            predicate = filter = new Function("d, __f, __o", "return " + compiled.expression);
+
+            if (fields.length || operators.length) {
+                filter = function(d) {
+                    return predicate(d, fields, operators);
+                };
+            }
+
+            this._updateHierarchicalFilter(filter);
+        },
+
+         _updateHierarchicalFilter: function(filter){
+            var current;
+            var data = this._data;
+            var result = false;
+
+            for (var idx = 0; idx < data.length; idx++) {
+                 current = data[idx];
+
+                 if(current.hasChildren){
+                     current._matchFilter = current.children._updateHierarchicalFilter(filter);
+                    if(!current._matchFilter){
+                        current._matchFilter = filter(current);
+                    }
+                }else{
+                    current._matchFilter = filter(current);
+                }
+
+                if(current._matchFilter){
+                    result = true;
+                }
+            }
+            return result;
         },
 
         _find: function(method, value) {

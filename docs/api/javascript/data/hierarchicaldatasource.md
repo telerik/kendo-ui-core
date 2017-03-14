@@ -10,6 +10,99 @@ description: Learn more about the configuration of Kendo UI DataSource, methods 
 
 See the [DataSource configuration](/api/framework/datasource#configuration) for all inherited configuration.
 
+### filter `Array|Object`
+
+The filters which are applied over the data items. It applies the filter to all loaded nodes and creates views from the nodes that match the filter and their parent nodes up to the root of the hierarchy. Currently not loaded nodes are not filtered. By default, no filter is applied.
+
+> The data source filters the data items client-side unless the [`serverFiltering`](/api/framework/datasource#configuration-serverFiltering) option is set to `true`.
+
+#### Example - set a single filter
+
+    <script>
+        var dataSource = new kendo.data.HierarchicalDataSource({
+            filter:{ field: "name", operator: "startswith", value: "John" },
+            change: function(e) {
+                e.items[0].load();
+            },
+            data: [
+            { name: "Jane Doe", items: [
+                { name: "Jane Doe" },
+                { name: "John Doe" }
+            ] },
+            { name: "John Doe" }
+            ]
+        });
+
+        dataSource.fetch();
+        var view = dataSource.view();
+
+        console.log(view.length);// displays 2
+        console.log(view[0].name); // displays "Jane Doe"
+        console.log(view[0].children.view().length); // displays 1
+        console.log(view[0].children.view()[0].name); // displays "John Doe"
+    </script>
+
+#### Example - set filter as conjunction (and)
+
+    <script>
+        var dataSource = new kendo.data.HierarchicalDataSource({
+            filter:[{ field: "name", operator: "startswith", value: "John" },
+                { field: "name", operator: "contains", value: "Snow" }],
+            change: function(e) {
+                e.items[0].load();
+            },
+            data: [
+            { name: "Jane Doe", items: [
+                { name: "Jane Doe" },
+                { name: "John Snow" },
+                { name: "John Doe" }
+            ] },
+            { name: "John Snow" }
+            ]
+        });
+
+        dataSource.fetch();
+        var view = dataSource.view();
+
+        console.log(view.length);// displays 2
+        console.log(view[0].name); // displays "Jane Doe"
+        console.log(view[0].children.view().length); // displays 1
+        console.log(view[0].children.view()[0].name); // displays "John Snow"
+    </script>
+
+#### Example - set filter as disjunction (or)
+
+    <script>
+        var dataSource = new kendo.data.HierarchicalDataSource({
+              filter: {
+                logic: "or",
+                filters: [
+                  { field: "username", operator: "contains", value: "Snow" },
+                  { field: "name", operator: "contains", value: "John" }
+                ]
+              },
+            change: function(e) {
+                e.items[0].load();
+            },
+            data: [
+            { name: "Jane Doe", items: [
+                { username: "Jane Doe" },
+                { username: "John Snow" },
+                { username: "John Doe" }
+            ] },
+            { name: "John Snow" }
+            ]
+        });
+
+        dataSource.fetch();
+        var view = dataSource.view();
+
+        console.log(view.length);// displays 2
+        console.log(view[0].name); // displays "Jane Doe"
+        console.log(view[0].children.view().length); // displays 1
+        console.log(view[0].children.view()[0].username); // displays "John Snow"
+    </script>
+
 ### schema `Object`
 
 The schema configuration. See the [DataSource.schema configuration](/api/framework/datasource#configuration-schema) for all available options.
@@ -221,8 +314,71 @@ indicating which field holds the nested data.
 
 See the [DataSource methods](/api/framework/datasource#methods) for all inherited methods.
 
-The **remove** and **getByUid** methods are overridden and work with the hierarchical data
+The **filter**, **remove** and **getByUid** methods are overridden and work with the hierarchical data
 (they will act on all child datasources that have been read).
+
+### filter
+
+Gets or sets the filter configuration. It applies the filter to all loaded nodes and creates views from the nodes that match the filter and their parent nodes up to the root of the hierarchy. Currently not loaded nodes are not filtered.
+
+#### Parameters
+
+##### value `Object` *(optional)*
+
+The filter configuration. Accepts the same values as the [`filter`](#configuration-filter) option (**check there for more examples**).
+
+#### Returns
+
+`Object` the current filter configuration. Returns `undefined` if the DataSource instance has not performed filtering so far.
+
+#### Example - set the data source filter
+
+    <script>
+            var dataSource = new kendo.data.HierarchicalDataSource({
+                change: function(e) {
+                    e.items[0].load();
+                },
+                data: [
+                { name: "Jane Doe", items: [
+                    { name: "Jane Doe" },
+                    { name: "John Doe" }
+                ] },
+                { name: "John Doe" }
+                ]
+            });
+
+            dataSource.fetch();
+            dataSource.filter({ field: "name", operator: "startswith", value: "John" });
+            var view = dataSource.view();
+
+            console.log(view.length);// displays 2
+            console.log(view[0].name); // displays "Jane Doe"
+            console.log(view[0].children.view().length); // displays 1
+            console.log(view[0].children.view()[0].name); // displays "John Doe"
+    </script>
+
+#### Example - get the data source filter
+
+    <script>
+        var dataSource = new kendo.data.HierarchicalDataSource({
+            filter: { field: "name", operator: "startswith", value: "John" },
+            change: function(e) {
+                e.items[0].load();
+            },
+            data: [
+            { name: "Jane Doe", items: [
+                { name: "Jane Doe" },
+                { name: "John Doe" }
+            ] },
+            { name: "John Doe" }
+            ]
+        });
+         
+        dataSource.fetch();
+        var filter = dataSource.filter();
+
+        console.log(filter.filters[0]); //displays '{field: "name", operator: "startswith", value: "John"}'
+    </script>
 
 ## Events
 
