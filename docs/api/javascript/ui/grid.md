@@ -1331,6 +1331,7 @@ The fields which can be used in the template are:
 * min - the value of the "min" aggregate (if specified)
 * sum - the value of the "sum" aggregate (if specified)
 * aggregates - provides access to all available aggregates, e.g. `aggregates.fieldName1.sum` or `aggregates.fieldName2.average`
+* items - the data items for current group. Returns groups if the data items are grouped (in case there are child groups)
 
 #### Example - set the group header template
 
@@ -1353,6 +1354,32 @@ The fields which can be used in the template are:
     });
     </script>
 
+#### Example - use items field inside the group header template
+
+    <div id="grid"></div>
+    <script>
+    var filterAdmins = function(item) {
+      return item.role === "admin";
+    };
+    $("#grid").kendoGrid({
+      columns: [
+        { field: "name" },
+        { field: "age",
+          groupHeaderTemplate: "Admin count: #=items.filter(filterAdmins).length#"
+        },
+        {field: "role" }
+      ],
+      dataSource: {
+        data: [
+          { name: "Jane Doe", age: 30, role: "admin" },
+          { name: "John Doe", age: 30, role: "guest" },
+          { name: "Peter", age: 30, role: "admin" }
+        ],
+        group: { field: "age", aggregates: [ { field: "age", aggregate: "count" }] }
+      }
+    });
+    </script>
+
 ### columns.groupFooterTemplate `String|Function`
 
 The [template](/api/javascript/kendo#methods-template) which renders the group footer when the grid is grouped by the column field. By default the group footer is not displayed.
@@ -1365,7 +1392,7 @@ The fields which can be used in the template are:
 * min - the value of the "min" aggregate (if specified)
 * sum - the value of the "sum" aggregate (if specified)
 * data - provides access to all available aggregates, e.g. `data.fieldName1.sum` or `data.fieldName2.average`
-* group - provides information for the current group. An object with two fields - `field` and `value`.
+* group - provides information for the current group. An object with three fields - `field`, `value` and `items`. `items` field contains the data items for current group. Returns groups if the data items are grouped (in case there are child groups)
 
 > **Important**
 >
