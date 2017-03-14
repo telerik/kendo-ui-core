@@ -1123,4 +1123,30 @@ test("scrolls to the matched item on open", 2, function() {
     ok(combobox.ul.children().eq(49).hasClass("k-state-focused"), "item is not focused");
     ok(combobox.list.children(".k-list-scroller").scrollTop() > 200, "list is not scrolled");
 });
+
+test("concat filters with the same logic operator", function() {
+    combobox = new ComboBox(input, {
+        dataTextField: "text",
+        dataValueField: "value",
+        dataSource: {
+            data: [{ text: "foo", value: 1 }, { text: "bar", value: 2 }, { text: "too", value: 10 }],
+            filter: {
+                logic: "or",
+                filters: [
+                    { field: "value", operator: "eq", value: 1 },
+                    { field: "value", operator: "eq", value: 2 }
+                ]
+            }
+        },
+        filter: "contains"
+    });
+
+    combobox.search("to");
+    combobox.search("too");
+
+    var filters = combobox.dataSource.filter();
+
+    equal(filters.filters[1].filters.length, 2);
+    equal(!filters.filters[1].filters.filters, true);
+});
 })();
