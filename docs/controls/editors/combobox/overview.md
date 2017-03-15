@@ -261,7 +261,7 @@ It is possible to let the popup element automatically adjust its width according
 
 > **Important**
 >
-> Virtualized list doesn't support the auto-width functionality.
+> Virtualized lists do not support the auto-width functionality.
 
 ###### Example
 
