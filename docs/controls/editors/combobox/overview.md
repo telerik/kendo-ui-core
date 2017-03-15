@@ -265,6 +265,10 @@ To customize the width of a drop-down list and change its dimensions, use the jQ
 
 You can let the popup element automatically adjust its width according to the length of the item label it displays. When the `autoWidth` option is set to `true`, the popup shows the content on one line and does not wrap it up.
 
+> **Important**
+>
+> Virtualized list doesn't support the auto-width functionality.
+
 ###### Example
 
     <input id="combobox" style="width: 100px;" />
