@@ -585,7 +585,7 @@
                 var content = element.children(KWINDOWCONTENT);
                 var widget = kendo.widgetInstance(content);
 
-                if (widget instanceof Window) {
+                if (widget) {
                     return widget;
                 }
 
