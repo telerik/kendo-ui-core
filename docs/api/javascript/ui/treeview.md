@@ -191,22 +191,35 @@ If set to `true` the widget will auto-scroll the containing element when the mou
 
 #### Example - use autoScroll in a scrollable container
 
-    <div style="height: 200px; overflow: auto">
-        <div style="height:1500px">
-            <div id="treeview"></div>
-        </div>
+    <div style="height:100px; overflow: auto">
+      <div id="treeview"></div>
     </div>
-    <script>
-    var dataSource = new kendo.data.HierarchicalDataSource({
-      data: [ { text: "Jane Doe" }, { text: "John Doe" }]
-    });
 
-    $("#treeview").kendoTreeView({
-      autoScroll: true,
-      dataSource: dataSource
-    });
-    dataSource.read(); // "read()" will fire the "change" event of the dataSource and the widget will be bound
+    <script>
+      var dataSource = new kendo.data.HierarchicalDataSource({
+        data: [
+          { text: "Apple" }, 
+          { text: "Banana" },
+          { text: "Orange" },
+          { text: "Tomato" },
+          { text: "Melon" },
+          { text: "Ananas" },
+          { text: "Cucumber" }
+        ]
+      });
+
+      var treeView = $("#treeview").kendoTreeView({
+        autoScroll: true,
+        dragAndDrop: true,
+        dataSource: dataSource
+      });
     </script>
+
+    <style> 
+      .k-widget.k-treeview {
+        overflow: hidden;
+      }
+    </style>
 
 ### checkboxes `Boolean|Object`
 
@@ -737,7 +750,7 @@ A string, DOM element or jQuery object which represents the node. A string is tr
     console.log(dataItem.text); // displays "foo"
     </script>
 
-See also: [getting the node data in the select event handler](/web/treeview/overview#getting-the-node-data-in-the-select-event-handler)
+See also: [getting the node data in the select event handler](/web/treeview/overview#get-node-data-in-select-event-handler)
 
 ### destroy
 
@@ -844,7 +857,9 @@ The nodes that are to be expanded.
         { text: "foo", items: [
           { text: "bar" }
         ] },
-        { text: "baz" }
+        { text: "baz", items: [
+		  { text: "biz" }
+		] }
       ]
     });
 
@@ -1409,6 +1424,7 @@ The node whose the checkbox has been checked.
     <div id="treeview"></div>
     <script>
     $("#treeview").kendoTreeView({
+      checkboxes: true,
       dataSource: [
         { text: "foo", items: [
           { text: "bar" }
@@ -1428,6 +1444,7 @@ The node whose the checkbox has been checked.
       console.log("Checking", e.node);
     }
     $("#treeview").kendoTreeView({
+      checkboxes: true,
       dataSource: [
         { text: "foo", items: [
           { text: "bar" }
@@ -1524,6 +1541,14 @@ The node whose children have been changed. If the changes have occurred on the r
     });
     var treeview = $("#treeview").data("kendoTreeView");
     treeview.bind("dataBound", tree_dataBound);
+	
+	treeview.setDataSource(new kendo.data.HierarchicalDataSource({
+      data: [
+        { text: "bar", items: [
+          { text: "baz" }
+        ] }
+      ]
+    }));
     </script>
 
 #### Example - show an empty message when no items have been loaded from the server
@@ -1647,7 +1672,7 @@ Pre-defined status classes are:
       // if the current status is "insert-top/middle/bottom"
       if (e.statusClass.indexOf("insert") >= 0) {
         // deny the operation
-        e.setStatusClass("k-denied");
+        e.setStatusClass("k-i-cancel");
       }
     });
     </script>
