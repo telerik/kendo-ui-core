@@ -4,7 +4,7 @@ page_title: WAI-ARIA | Kendo UI Accessibility Support
 related: a11y-accessibility-overview, a11y-keyboard-support
 description: "Learn more about the WAI-ARIA Accessibility standards and their built-in support in Kendo UI components."
 slug: wai_aria_accessibility_support
-position: 3
+position: 4
 ---
 
 # WAI-ARIA

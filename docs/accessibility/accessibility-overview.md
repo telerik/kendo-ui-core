@@ -22,6 +22,7 @@ The documents in this section provide additional details and guidance for levera
 to learn more:
 
 - [Section 508 Support in Kendo UI](/accessibility/section-508)
+- [Section 508 and WCAG 2.0 Compliance Report with Kendo UI widgets](/accessibility/section-508/section-508-wcag)
 - [WAI-ARIA Support in Kendo UI](/accessibility/wai-aria-support-in-kendo)
 - [Keyboard Support in Kendo UI](/accessibility/keyboard-support)
 - [Supporting RTL Languages with Kendo UI](/accessibility/supporting-rtl-languages)

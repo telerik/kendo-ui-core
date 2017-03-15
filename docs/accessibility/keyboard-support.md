@@ -3,7 +3,7 @@ title: Keyboard Shortcuts
 page_title: Keyboard Shortcuts | Kendo UI Accessibility Support
 description: "Learn more about the keyboard Accessibility standards supported by Kendo UI controls."
 slug: keyboard_shortcuts_accessibility_support
-position: 4
+position: 5
 ---
 
 # Keyboard Shortcuts

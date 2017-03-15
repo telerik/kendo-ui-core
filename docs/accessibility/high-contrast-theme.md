@@ -4,7 +4,7 @@ page_title: High-Contrast Theme | Kendo UI Accessibility Support
 related: a11y-accessibility-overview
 description: "Accessibility support through setting Kendo UI high-contrast theme for HTML5 UI controls."
 slug: high_contrast_theme_accessibility_support
-position: 6
+position: 7
 ---
 
 # High-Contrast Theme
