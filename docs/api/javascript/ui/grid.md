@@ -9550,7 +9550,7 @@ The widget instance which fired the event.
 
 ### remove
 
-Fired when the user clicks the "destroy" command button.
+Fired when the user clicks the "destroy" command button and delete operation is confirmed in the confirmation window, if the cancel button in the window is clicked the event will not be fired.
 
 The event handler function context (available via the `this` keyword) will be set to the widget instance.
 
