@@ -16,8 +16,8 @@ The following table is based on the [Voluntary Product Accessibility Template (V
 
 **Table 1. Section 1194.22 Web Information and Application Standards**
 
-|CRITERIA |SUPPORTING FEATURES|REMARKS
-|:---     |:---               |:---
+| Criteria | Supporting features| Remarks
+|:---      |:---                |:---
 |[(a)](https://www.webaccessibility.com/best_practices.php?standard_id=1000704) A text equivalent for every non-text element shall be provided&mdash;for example, through `"alt"`, `"longdesc"`, or in the element content.|Supports|All images (`img` HTML elements) used by Kendo UI have their `alt` attribute set. If developers use images in Kendo UI templates, they have to set the `"alt"` or `"longdesc"` attribute in the template definition.
 |[(b)](https://www.webaccessibility.com/best_practices.php?standard_id=1000727) Equivalent alternatives for any multimedia presentation shall be synchronized with the presentation.|Supports|Kendo UI ships the [MediaPlayer widget]({% slug overview_kendoui_mediaplayer_widget %}).
 |[(c)](https://www.webaccessibility.com/best_practices.php?standard_id=1000730) Web pages shall be designed so that all information conveyed with color is also available without color&mdash;for example, from context or markup.|Supports|Kendo UI widgets make sure that apart from color information is conveyed by other means too.
@@ -48,7 +48,7 @@ table td:nth-child(2) {
 
 ## Special Considerations
 
-Several Kendo UI widgets feature complex rendering which affects their support for the accessibility standards provisioned by Section 508.
+Several Kendo UI widgets feature complex rendering which affects their accessibility standards support provisioned by Section 508.
 
 ### Label Element Support
 
@@ -75,11 +75,10 @@ Place the widget inside the `label` element which in turn focuses the first visi
 
 ## See Also
 
-Other articles on the accessibility support provided by Kendo UI:
-
-* [Overview of Web Accessibility Standards]({% slug overview_accessibility_support_kendoui %})
-* [Charts]({% slug charts_accessibility_support %})
-* [High-Contrast Theme]({% slug high_contrast_theme_accessibility_support %})
-* [Keyboard Shortcuts]({% slug keyboard_shortcuts_accessibility_support %})
-* [Right-to-Left Languages]({% slug right_toleft_languages_accessibility_support %})
-* [WAI-ARIA]({% slug wai_aria_accessibility_support %})
+* [Overview of Accessibility Features in Kendo UI]({% slug overview_accessibility_support_kendoui %})
+* [Section 508 and WCAG 2.0 Compliance of Kendo UI Widgets]({% slug section508_wcag20_accessibility_support %})
+* [WAI-ARIA Support in Kendo UI]({% slug wai_aria_accessibility_support %})
+* [Keyboard Support in Kendo UI]({% slug keyboard_shortcuts_accessibility_support %})
+* [Right-to-Left Language Support in Kendo UI]({% slug right_toleft_languages_accessibility_support %})
+* [Working with the Kendo UI High-Contrast Theme]({% slug high_contrast_theme_accessibility_support %})
+* [Five Tips for Accessible Charts with Kendo UI]({% slug charts_accessibility_support %})

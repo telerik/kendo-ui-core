@@ -37,11 +37,10 @@ The `role`, `aria-valuemin`,`aria-valuemax` and `aria-valuenow` properties are a
 
 ## See Also
 
-Other articles on the accessibility support provided by Kendo UI:
-
-* [Overview of Web Accessibility Standards]({% slug overview_accessibility_support_kendoui %})
-* [Charts]({% slug charts_accessibility_support %})
-* [High-Contrast Theme]({% slug high_contrast_theme_accessibility_support %})
-* [Keyboard Shortcuts]({% slug keyboard_shortcuts_accessibility_support %})
-* [Right-to-Left Languages]({% slug right_toleft_languages_accessibility_support %})
-* [Section 508]({% slug section508_accessibility_support %})
+* [Overview of Accessibility Features in Kendo UI]({% slug overview_accessibility_support_kendoui %})
+* [Section 508 Support in Kendo UI]({% slug section508_accessibility_support %})
+* [Section 508 and WCAG 2.0 Compliance of Kendo UI Widgets]({% slug section508_wcag20_accessibility_support %})
+* [Keyboard Support in Kendo UI]({% slug keyboard_shortcuts_accessibility_support %})
+* [Right-to-Left Language Support in Kendo UI]({% slug right_toleft_languages_accessibility_support %})
+* [Working with the Kendo UI High-Contrast Theme]({% slug high_contrast_theme_accessibility_support %})
+* [Five Tips for Accessible Charts with Kendo UI]({% slug charts_accessibility_support %})

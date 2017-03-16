@@ -6,18 +6,20 @@ slug: section508_wcag20_accessibility_support
 position: 3
 ---
 
-# Components Built According to W3C Web Content Accessibility Guidelines and Section 508
+# Section 508 and WCAG 2.0 Compliance
 
-The Kendo UI widgets follow the [W3C Web Content Accessibility Guidelines 2.0](https://www.w3.org/TR/WCAG/) which set the standards for applications providing accessible content. According to how many of the guidelines are followed in building the app, W3C defines three levels of accessibility conformance: “A”, “AA” and “AAA”.
+The Kendo UI widgets follow the [W3C Web Content Accessibility Guidelines 2.0](https://www.w3.org/TR/WCAG/).
 
-The Kendo UI components also conform to the technical standards set out in Section 508 of the Rehabilitation Act, the law that requires that all Federal Agencies make their electronic and information technology accessible to people with disabilities. Detailed information about the accessibility features Kendo UI delivers according to the Section 508 Web content standards can be found in [Section 508 article](/accessibility/section-508).
+They set the standards for applications for providing accessible content. Depending on the number of guidelines that is followed when building an application, W3C defines three levels of accessibility conformance&mdash;A, AA, and AAA levels.
 
-Applications built with components adhering to these guidelines will not only be accessible to people with disabilities, but also to users of all kinds of devices and interfaces: desktop browser, voice browser, mobile phone, automobile-based personal computer, etc.
+The Kendo UI components also conform to the technical standards set out in Section 508 of the Rehabilitation Act. They represent the law that requires all Federal Agencies to make their electronic and information technology accessible to people with disabilities. For detailed information on the accessibility features according to the Section 508 Web content standards Kendo UI delivers, refer to the article about [Section 508]({% slug section508_accessibility_support %}).
 
-**Table 1. 508 and WCAG 2.0 Compliance Report for Kendo UI widgets**
+Applications built with components that adhere to these guidelines will not only be accessible to people with disabilities, but also to users of all kinds of devices and interfaces such as desktop browser, voice browser, mobile phone, automobile-based personal computer, and so on.
 
-|Component name|508|WCAG 2.0|Demo
-|:---          |:---|:---  |:--- 
+**Table 1: 508 and WCAG 2.0 compliance report for Kendo UI widgets**
+
+|Component |508|WCAG 2.0|Demo
+|:---          |:---|:---  |:---
 |Grid          |Yes |AAA |[Browse](http://demos.telerik.com/kendo-ui/grid/index)
 |TreeList	   |Yes |AAA |[Browse](http://demos.telerik.com/kendo-ui/treelist/index)
 |PivotGrid	   |No |     |[Browse](http://demos.telerik.com/kendo-ui/pivotgrid/index)
@@ -58,7 +60,7 @@ Applications built with components adhering to these guidelines will not only be
 
 ## Special Considerations
 
-Several Kendo UI widgets feature complex rendering which affects their support for the accessibility standards provisioned by Section 508.
+Several Kendo UI widgets feature complex rendering which affects their accessibility standards support provisioned by Section 508.
 
 ### Label Element Support
 
@@ -85,11 +87,10 @@ Place the widget inside the `label` element which in turn focuses the first visi
 
 ## See Also
 
-Other articles on the accessibility support provided by Kendo UI:
-
-* [Overview of Web Accessibility Standards]({% slug overview_accessibility_support_kendoui %})
-* [Charts]({% slug charts_accessibility_support %})
-* [High-Contrast Theme]({% slug high_contrast_theme_accessibility_support %})
-* [Keyboard Shortcuts]({% slug keyboard_shortcuts_accessibility_support %})
-* [Right-to-Left Languages]({% slug right_toleft_languages_accessibility_support %})
-* [WAI-ARIA]({% slug wai_aria_accessibility_support %})
+* [Overview of Accessibility Features in Kendo UI]({% slug overview_accessibility_support_kendoui %})
+* [Section 508 Support in Kendo UI]({% slug section508_accessibility_support %})
+* [WAI-ARIA Support in Kendo UI]({% slug wai_aria_accessibility_support %})
+* [Keyboard Support in Kendo UI]({% slug keyboard_shortcuts_accessibility_support %})
+* [Right-to-Left Language Support in Kendo UI]({% slug right_toleft_languages_accessibility_support %})
+* [Working with the Kendo UI High-Contrast Theme]({% slug high_contrast_theme_accessibility_support %})
+* [Five Tips for Accessible Charts with Kendo UI]({% slug charts_accessibility_support %})
