@@ -52,7 +52,7 @@ The `minFileSize` property defines the minimum size in bytes allowed of a file t
 
 ## Browser Limitations
 
-Internet Explorer versions prior to version 9 provide no information on the file size. As a result, the Upload validation for the `minFileSize` and `maxFileSize` options will not work as expected.
+Internet Explorer versions prior to version 10 provide no information on the file size. As a result, the Upload validation for the `minFileSize` and `maxFileSize` options will not work as expected.
 
 ## See Also
 
