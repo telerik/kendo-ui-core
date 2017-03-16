@@ -132,7 +132,7 @@ If the `dataSource` option is an existing [kendo.data.DataSource](/api/javascrip
 
     <input id="autocomplete" />
     <script>
-    $("#autoComplete").kendoAutoComplete({
+    $("#autocomplete").kendoAutoComplete({
       dataSource: {
         data: ["One", "Two"]
       }
@@ -144,7 +144,7 @@ If the `dataSource` option is an existing [kendo.data.DataSource](/api/javascrip
     <input id="autocomplete" />
     <script>
     var data = ["One", "Two"];
-    $("#autoComplete").kendoAutoComplete({
+    $("#autocomplete").kendoAutoComplete({
       dataSource: data
     });
     </script>
@@ -236,7 +236,7 @@ If set to `true` the widget will not show all items when the text of the search 
         dataTextField: "ProductName",
         filter: "contains",
         minLength: 3,
-        enforceMinLength: false,
+        enforceMinLength: true,
         autoBind: false,
         dataSource: {
             type: "odata",
@@ -258,7 +258,10 @@ all data items which begin with the current widget value are displayed in the su
     <input id="autocomplete" />
     <script>
     $("#autocomplete").kendoAutoComplete({
-      filter: "contains"
+      filter: "contains",
+	  dataSource: {
+        data: ["One", "Two"]
+      }
     });
     </script>
 
@@ -339,7 +342,10 @@ The height of the suggestion popup in pixels. The default value is 200 pixels.
     <input id="autocomplete" />
     <script>
     $("#autocomplete").kendoAutoComplete({
-      height: 500
+      height: 100,
+	  dataSource: {
+        data: ["One", "Two", "Three", "Four", "Five", "Six", "Seven"]
+      }
     });
     </script>
 
@@ -352,7 +358,10 @@ If set to `true` the first suggestion will be automatically highlighted.
     <input id="autocomplete" />
     <script>
     $("#autocomplete").kendoAutoComplete({
-      highlightFirst: false
+      highlightFirst: true,
+	  dataSource: {
+        data: ["One", "Two"]
+      }
     });
     </script>
 
@@ -365,7 +374,10 @@ If set to `false` case-sensitive search will be performed to find suggestions. T
     <input id="autocomplete" />
     <script>
     $("#autocomplete").kendoAutoComplete({
-      ignoreCase: false
+      ignoreCase: false,
+	  dataSource: {
+        data: ["One", "Two"]
+      }
     });
     </script>
 
@@ -380,7 +392,11 @@ The minimum number of characters the user must type before a search is performed
     <input id="autocomplete" />
     <script>
     $("#autocomplete").kendoAutoComplete({
-      minLength: 3
+      minLength: 3,
+	  placeholder: "Type 'one'",
+	  dataSource: {
+        data: ["One", "Two"]
+      }
     });
     </script>
 
@@ -391,7 +407,7 @@ The noData template receives the widget itself as a part of the data argument. T
 
 > **Important** The popup will open when 'noDataTemplate' is defined
 
-#### Example - specify noDataTemplate as a string
+#### Example - specify headerTemplate as a string
 
     <input id="autocomplete" />
     <script>
@@ -461,7 +477,10 @@ The character used to separate multiple values. Empty by default.
     <input id="autocomplete" />
     <script>
     $("#autocomplete").kendoAutoComplete({
-      separator: ", "
+      separator: ", ",
+	  dataSource: {
+        data: ["One", "Two"]
+      }
     });
     </script>
 
@@ -470,7 +489,10 @@ The character used to separate multiple values. Empty by default.
     <input id="autocomplete" />
     <script>
     $("#autocomplete").kendoAutoComplete({
-      separator: [", ", "; "]
+      separator: [", ", "; "],
+	  dataSource: {
+        data: ["One", "Two"]
+      }
     });
     </script>
 
@@ -483,7 +505,10 @@ If set to `true` the widget will automatically use the first suggestion as its v
     <input id="autocomplete" />
     <script>
     $("#autocomplete").kendoAutoComplete({
-      suggest: true
+      suggest: true,
+	  dataSource: {
+        data: ["One", "Two"]
+      }
     });
     </script>
 
@@ -838,10 +863,10 @@ An object, which holds the options of the widget.
     $("#autocomplete").kendoAutoComplete();
 
     var autocomplete = $("#autocomplete").data("kendoAutoComplete");
-
     var element = autocomplete.element;
-
     var options = autocomplete.options;
+
+    console.log(options);
     </script>
 
 ### list `jQuery`
@@ -854,8 +879,9 @@ A jQuery object of the drop-down list element.
     $("#autocomplete").kendoAutoComplete();
 
     var autocomplete = $("#autocomplete").data("kendoAutoComplete");
-
     var list = autocomplete.list;
+
+    console.log(list);
     </script>
 
 ### ul `jQuery`
@@ -868,8 +894,9 @@ A jQuery object of the `ul` element, which holds the available options.
     $("#autocomplete").kendoAutoComplete();
 
     var autocomplete = $("#autocomplete").data("kendoAutoComplete");
-
     var ul = autocomplete.ul;
+
+    console.log(ul);
     </script>
 
 ## Methods
@@ -1053,7 +1080,9 @@ You can overcome this behavior trigerring the `change` event manually using [tri
 
     <input id="autocomplete" />
     <script>
-    $("#autocomplete").kendoAutoComplete();
+    $("#autocomplete").kendoAutoComplete({
+        dataSource: [ "John", "Jane" ]
+	});
     var autocomplete = $("#autocomplete").data("kendoAutoComplete");
     autocomplete.search("J");
     autocomplete.select(autocomplete.ul.children().eq(1)); // Selects the second suggestion which is "Jane"
@@ -1186,6 +1215,7 @@ The widget instance which fired the event.
     $("#autocomplete").kendoAutoComplete({
       change: function(e) {
         var value = this.value();
+        console.log(value);
         // Use the value of the widget
       }
     });
@@ -1307,6 +1337,7 @@ The filter descriptor that will be used to filter the data source.
       filtering: function(e) {
           //get filter descriptor
           var filter = e.filter;
+          console.log(filter);
 
           // handle the event
       }
@@ -1320,6 +1351,7 @@ The filter descriptor that will be used to filter the data source.
     function autocomplete_filtering(e) {
       //get filter descriptor
       var filter = e.filter;
+      console.log(filter);
 
       // handle the event
     }
@@ -1414,6 +1446,7 @@ The widget instance which fired the event.
       select: function(e) {
         var item = e.item;
         var text = item.text();
+        console.log(text);
         // Use the selected item or its text
       }
     });
