@@ -1492,8 +1492,12 @@ var __meta__ = { // jshint ignore:line
             var that = this,
                 animationSettings = that.options.animation,
                 animation = animationSettings.expand,
-                collapse = extend({}, animationSettings.collapse),
-                hasCollapseAnimation = collapse && "effects" in collapse;
+                hasCollapseAnimation = animationSettings.collapse && "effects" in animationSettings.collapse,
+                collapse = extend({}, animationSettings.expand, animationSettings.collapse);
+
+            if (!hasCollapseAnimation) {
+                collapse = extend(collapse, {reverse: true});
+            }
 
             if (element.is(VISIBLE) != visibility) {
                 that._animating = false;
@@ -1509,10 +1513,8 @@ var __meta__ = { // jshint ignore:line
                     .toggleClass("k-panelbar-collapse", !visibility)
                     .toggleClass("k-i-arrow-s", visibility)
                     .toggleClass("k-panelbar-expand", visibility);
-
             if (visibility) {
-                animation = extend( hasCollapseAnimation ? collapse
-                    : extend({ reverse: true }, animation), { hide: true });
+                animation = extend(collapse, { hide: true });
 
                 animation.complete = function() {
                     that._animationCallback();
