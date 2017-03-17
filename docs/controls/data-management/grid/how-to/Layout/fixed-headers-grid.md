@@ -1,5 +1,5 @@
 ---
-title: Grid Fixed Headers on scroll
+title: Fixed Headers on scroll
 page_title:  Grid Fixed Headers Layout | Kendo UI Grid
 description: "Learn how to create fixed headers in the Kendo UI Grid widget."
 slug: howto_create_fixed_headers_grid
@@ -23,6 +23,7 @@ The example shows how to use the window `scrollTop()` to toggle a "fixed-header"
 ###### Example
 
 ```html
+    <script src="http://demos.telerik.com/kendo-ui/content/shared/js/products.js"></script>
     <h1>&darr; SCROLL &darr;</h1>
     <div id="products"></div>
 
