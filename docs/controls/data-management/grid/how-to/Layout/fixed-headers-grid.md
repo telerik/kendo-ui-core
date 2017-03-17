@@ -20,10 +20,13 @@ The example shows how to use the window `scrollTop()` to toggle a "fixed-header"
     </style>
 ```
 
+> To see the demo in action, click `Open in Dojo`.
+
 ###### Example
 
 ```html
     <script src="http://demos.telerik.com/kendo-ui/content/shared/js/products.js"></script>
+    <link rel="stylesheet" href="http://kendo.cdn.telerik.com/2017.1.118/styles/kendo.flat.min.css"/>
     <h1>&darr; SCROLL &darr;</h1>
     <div id="products"></div>
 
