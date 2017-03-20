@@ -1,13 +1,17 @@
 ---
-title: Fixed Headers on scroll
-page_title:  Grid Fixed Headers Layout | Kendo UI Grid
+title: Create Fixed Headers on Scroll
+page_title:  Create Fixed Headers on Scroll | Kendo UI Grid
 description: "Learn how to create fixed headers in the Kendo UI Grid widget."
 slug: howto_create_fixed_headers_grid
 ---
 
-# Create Fixed Headers in the Kendo UI Grid widget
+# Create Fixed Headers on Scroll
 
-The example shows how to use the window `scrollTop()` to toggle a "fixed-header" class and achieve a window level fixed headers look and feel. The "fixed-header" class in the example has the following CSS rules:
+The following example demonstrates how to toggle a `fixed-header` class by using the window `scrollTop()`.
+
+This approach helps you achieve the look and feel of window-level fixed headers.
+
+The `fixed-header` class from the example applies the following CSS rules:
 
 ```
     <style>
@@ -20,7 +24,7 @@ The example shows how to use the window `scrollTop()` to toggle a "fixed-header"
     </style>
 ```
 
-> To see the demo in action, click `Open in Dojo`.
+> To see the demo in action, click **Open in Dojo**.
 
 ###### Example
 
