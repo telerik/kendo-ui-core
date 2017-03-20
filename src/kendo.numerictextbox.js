@@ -42,6 +42,7 @@ var __meta__ = { // jshint ignore:line
         ARIA_DISABLED = "aria-disabled",
         INTEGER_REGEXP = /^(-)?(\d*)$/,
         NULL = null,
+        EMPTY_NUMERIC = "Empty numeric",
         proxy = $.proxy,
         extend = $.extend;
 
@@ -55,8 +56,7 @@ var __meta__ = { // jshint ignore:line
 
              options = that.options;
              element = that.element
-                           .on("focusout" + ns, proxy(that._focusout, that))
-                           .attr("role", "spinbutton");
+                           .on("focusout" + ns, proxy(that._focusout, that));
 
              options.placeholder = options.placeholder || element.attr("placeholder");
 
@@ -100,8 +100,12 @@ var __meta__ = { // jshint ignore:line
                  });
              }
 
-             element.attr("aria-valuemin", options.min !== NULL ? options.min*options.factor : options.min)
-                    .attr("aria-valuemax", options.max !== NULL ? options.max*options.factor : options.max);
+             element.attr({
+                 "title": that._initialTitle || options.value || EMPTY_NUMERIC,
+                 "role": "spinbutton",
+                 "aria-valuemin": options.min !== NULL ? options.min*options.factor : options.min,
+                 "aria-valuemax": options.max !== NULL ? options.max*options.factor : options.max
+             });
 
              options.format = extractFormat(options.format);
 
@@ -715,7 +719,7 @@ var __meta__ = { // jshint ignore:line
                 input.val(this.options.placeholder);
             }
 
-            input.attr("title", this._initialTitle || input.val());
+            input.attr("title", this._initialTitle || input.val() || EMPTY_NUMERIC);
         },
 
         _wrapper: function() {

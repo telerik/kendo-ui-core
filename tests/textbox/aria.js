@@ -1,6 +1,7 @@
 (function() {
     var NumericTextBox = kendo.ui.NumericTextBox,
-        input;
+        input,
+        EMPTY_NUMERIC = "Empty numeric";
 
     module("kendo.ui.NumericTextBox ARIA", {
         setup: function() {
@@ -58,6 +59,27 @@
         equal(input.attr("aria-valuenow"), "10");
     });
 
+    test("NumericTextBox adds title when value is empty", function() {
+        var numeric = new NumericTextBox(input);
+
+        equal(input.attr("title"), EMPTY_NUMERIC);
+    });
+
+    test("NumericTextBox adds title when value is set", function() {
+        var numeric = new NumericTextBox(input, {
+            value: 10
+        });
+
+        equal(input.attr("title"), "10");
+    });
+
+    test("NumericTextBox adds title when title attr is set.", function() {
+        var testTitle = "test title";
+        var numeric = new NumericTextBox(input.attr("title", testTitle));
+
+        equal(input.attr("title"), testTitle);
+    });
+
     test("NumericTextBox adds role to the text element", function() {
         var numeric = new NumericTextBox(input);
 
@@ -106,5 +128,26 @@
         });
 
         equal(numeric._text.attr("aria-valuenow"), undefined);
+    });
+
+    test("NumericTextBox adds title when value is empty", function() {
+        var numeric = new NumericTextBox(input);
+
+        equal(numeric._text.attr("title"), EMPTY_NUMERIC);
+    });
+
+    test("NumericTextBox adds title when value is set", function() {
+        var numeric = new NumericTextBox(input, {
+            value: 10
+        });
+
+        equal(numeric._text.attr("title"), "10.00");
+    });
+
+    test("NumericTextBox adds title when title attr is set.", function() {
+        var testTitle = "test title";
+        var numeric = new NumericTextBox(input.attr("title", testTitle));
+
+        equal(numeric._text.attr("title"), testTitle);
     });
 })();
