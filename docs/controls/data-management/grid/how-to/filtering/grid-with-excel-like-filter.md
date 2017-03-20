@@ -7,11 +7,11 @@ slug: howto_gridfiltering_excellike_grid
 
 # Implement an Excel-Like Filter Menu
 
-The following example demonstrates how to set the Grid with Excel-like filter.
+The following example demonstrates how to set the Grid with Excel-like filter which has sorted and unique items.
 
-The example uses the [`columns.filterable.dataSource`](/api/javascript/ui/grid#configuration-columns.filterable.dataSource) property of the Grid to set a single Data Source for the Grid and for the filter menus.
+The example uses the [`columns.filterable.dataSource`](/api/javascript/ui/grid#configuration-columns.filterable.dataSource) property of the Grid to set a single Data Source for all filter menus.
 
-To achieve this behavior:
+To observe this behavior:
 
 1. Filter the **Product Name** column.
 2. Open the **Unit Price** column. Note that the values are filtered based on the currently applied filter on the **Product Name** column.
@@ -19,73 +19,86 @@ To achieve this behavior:
 ###### Example
 
 ```html
-<div id="example">
-      <style>
-        .k-multicheck-wrap {
-          overflow-x: hidden;
-        }
-      </style>
-      <div class="demo-section k-content wide">
-        <h4>Client Operations</h4>
-        <div id="client"></div>
-      </div>
+   <script src="http://demos.telerik.com/kendo-ui/content/shared/js/products.js"></script>
+    <div id="example">
+      <div id="grid"></div>
 
       <script>
         $(document).ready(function() {
-          var telerikWebServiceBase = "https://demos.telerik.com/kendo-ui/service/";
 
-          var dataSource = new kendo.data.DataSource({
-            transport: {
-              read:  {
-                url: telerikWebServiceBase + "/Products",
-                dataType: "jsonp"
-              },
-              update: {
-                url: telerikWebServiceBase + "/Products/Update",
-                dataType: "jsonp"
-              },
-              destroy: {
-                url: telerikWebServiceBase + "/Products/Destroy",
-                dataType: "jsonp"
-              },
-              create: {
-                url: telerikWebServiceBase + "/Products/Create",
-                dataType: "jsonp"
-              },
-              parameterMap: function(options, operation) {
-                if (operation !== "read" && options.models) {
-                  return {models: kendo.stringify(options.models)};
-                }
-              }
-            },
-            batch: true,
-            pageSize: 20,
-            schema: {
-              model: {
-                id: "ProductID",
-                fields: {
-                  ProductID: { editable: false, nullable: true },
-                  ProductName: { validation: { required: true } },
-                  UnitPrice: { type: "number", validation: { required: true, min: 1} },
-                  Discontinued: { type: "boolean" },
-                }
+          function removeDuplicates(items, field) {
+            var getter = kendo.getter(field, true),
+                result = [],
+                index = 0,
+                seen = {};
+
+            while (index < items.length) {
+              var item = items[index++],
+                  text = getter(item);
+
+              if(text !== undefined && text !== null && !seen.hasOwnProperty(text)){
+                result.push(item);
+                seen[text] = true;
               }
             }
+
+            return result;
+          }
+
+          var filterSource = new kendo.data.DataSource({
+            data: products
           });
 
-
-          $("#client").kendoGrid({
-            dataSource: dataSource,
-            filterable: true,
-            pageable: true,
+          $("#grid").kendoGrid({
+            dataSource: {
+              data: products,
+              schema: {
+                model: {
+                  fields: {
+                    ProductName: { type: "string"},
+                    UnitPrice: { type: "number" },
+                    UnitsInStock: { type: "number" },
+                    Discontinued: { type: "boolean" }
+                  }
+                }
+              },
+              pageSize: 20,
+              change: function(e) {
+                filterSource.data(e.items); 
+              },
+            },
             height: 550,
-            toolbar: ["create", "save", "cancel"],
+            scrollable: true,
+            sortable: true,
+            pageable: {
+              input: true,
+              numeric: false
+            },
+            filterable: true,
+            filterMenuInit: function (e){
+              var grid = e.sender;
+              e.container.data("kendoPopup").bind("open", function() {
+                filterSource.sort({field: e.field, dir: "asc"});
+                var uniqueDsResult = removeDuplicates(grid.dataSource.view(), e.field);
+                filterSource.data(uniqueDsResult);
+              })
+            },
             columns: [
-              { field: "ProductName", filterable: { dataSource: dataSource, multi: true, search: true, search: true } },
-              { field: "UnitPrice", title: "Unit Price", format: "{0:c}", width: 120, filterable: { dataSource: dataSource, multi: true } },
-              { field: "UnitsInStock", title: "Units In Stock", width: 120, filterable: { dataSource: dataSource, multi: true } },
-              { command: "destroy", title: "&nbsp;", width: 150}],
-            editable: true
+              {field: "ProductName", filterable: {
+                multi: true,
+                dataSource: filterSource
+              }
+              },
+              { field: "UnitPrice", title: "Unit Price", format: "{0:c}", width: "130px",filterable: {
+                multi: true,
+                dataSource: filterSource
+              } },
+              { field: "UnitsInStock", title: "Units In Stock", width: "130px",filterable: {
+                multi: true,
+                dataSource: filterSource
+              } },
+              { field: "Discontinued", width: "130px"}
+            ]
           });
         });
       </script>
