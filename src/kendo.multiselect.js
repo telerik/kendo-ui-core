@@ -125,6 +125,7 @@ var __meta__ = { // jshint ignore:line
             }
 
             kendo.notify(that);
+            that._toggleCloseVisibility();
         },
 
         options: {
@@ -687,6 +688,7 @@ var __meta__ = { // jshint ignore:line
                 // trigger the DOM change event so any subscriber gets notified
                 that.element.trigger(CHANGE);
             }
+            that._toggleCloseVisibility();
         },
 
         _click: function(e) {
@@ -1005,8 +1007,17 @@ var __meta__ = { // jshint ignore:line
                 if (that._prev !== value) {
                     that._prev = value;
                     that.search(value);
+                    that._toggleCloseVisibility();
                 }
             }, that.options.delay);
+        },
+
+        _toggleCloseVisibility: function() {
+            if (this.value().length || this.input.val()) {
+                this._showClear();
+            } else {
+                this._hideClear();
+            }
         },
 
         _allowOpening: function() {

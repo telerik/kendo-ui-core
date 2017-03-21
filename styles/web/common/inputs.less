@@ -79,8 +79,9 @@ span.k-dropdown,
     }
 }
 
-.k-autocomplete > .k-i-close.k-loading-hidden,
-.k-combobox > .k-dropdown-wrap > .k-i-close.k-loading-hidden {
+.k-autocomplete > .k-hidden,
+.k-combobox > .k-dropdown-wrap > .k-hidden,
+.k-multiselect .k-hidden {
     display: none;
 }
 
@@ -634,11 +635,6 @@ body .k-datetimepicker .k-select
     position: absolute;
     right: 3px;
     bottom: 4px;
-}
-
-.k-multiselect .k-loading-hidden
-{
-    visibility: hidden;
 }
 
 .k-multiselect-wrap .k-select

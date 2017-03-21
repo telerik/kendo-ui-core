@@ -142,6 +142,7 @@ var __meta__ = { // jshint ignore:line
             that._resetFocusItemHandler = $.proxy(that._resetFocusItem, that);
 
             kendo.notify(that);
+            that._toggleCloseVisibility();
         },
 
         options: {
@@ -311,6 +312,7 @@ var __meta__ = { // jshint ignore:line
 
                 that.one("close", $.proxy(that._unifySeparators, that));
             }
+            that._toggleCloseVisibility();
         },
 
         suggest: function (word) {
@@ -536,6 +538,7 @@ var __meta__ = { // jshint ignore:line
             }
 
             that.typing = false;
+            that._toggleCloseVisibility();
         },
 
         _accessor: function (value) {
@@ -740,6 +743,14 @@ var __meta__ = { // jshint ignore:line
 
         _toggleHover: function(e) {
             $(e.currentTarget).toggleClass(HOVER, e.type === "mouseenter");
+        },
+
+        _toggleCloseVisibility: function() {
+            if (this.value()) {
+                this._showClear();
+            } else {
+                this._hideClear();
+            }
         },
 
         _wrapper: function () {
