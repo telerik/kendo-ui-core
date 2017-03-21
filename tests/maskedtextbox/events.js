@@ -4,7 +4,7 @@
 
     module("kendo.ui.MaskedTextBox events", {
         setup: function() {
-            input = createInput();
+            input = $("<input />").appendTo(QUnit.fixture);
         },
         teardown: function() {
             kendo.destroy(QUnit.fixture);

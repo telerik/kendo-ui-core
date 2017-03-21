@@ -4,9 +4,25 @@
 
     module("kendo.ui.MaskedTextBox rules", {
         setup: function() {
-            input = createInput();
+            input = $("<input />").appendTo(QUnit.fixture);
             input.val("");
-            setupPressKey();
+
+            $.fn.pressKey = function(key, eventName, options) {
+                if (typeof key === "string") {
+                    key = key.charCodeAt(0);
+                }
+
+                if ($.isPlainObject(eventName)) {
+                    options = eventName;
+                    eventName = "keypress";
+                }
+
+                if (!eventName) {
+                    eventName = "keypress";
+                }
+
+                return this.trigger($.extend({ type: eventName, keyCode: key, which: key }, options) );
+            }
         },
         teardown: function() {
             kendo.destroy(QUnit.fixture);
