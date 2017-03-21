@@ -160,6 +160,7 @@
 @button-focused-border-color: darken(@accent, 11%);
 @button-focused-shadow: none;
 @button-focused-active-shadow: none;
+@input-validation-error: @error;
 
 /* Kendo skin */
 
@@ -2712,5 +2713,21 @@ html .km-pane-wrapper .km-widget,
                 }
             }
         }
+    }
+}
+
+.k-numeric-wrap .k-i-warning {
+    color: @input-validation-error;
+    position: absolute;
+    top: 0;
+    right: 1.9em;
+    width: 1.9em;
+}
+
+.k-numeric-wrap.k-state-invalid {
+    border-color: @input-validation-error;
+
+    input {
+        color: @input-validation-error;
     }
 }
