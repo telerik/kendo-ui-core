@@ -11,14 +11,9 @@ var __meta__ = { // jshint ignore:line
 };
 
 (function($, undefined) {
-    var global = window;
-    var abs = global.Math.abs;
-    var Array = global.Array;
-    var kendo = global.kendo;
+    var kendo = window.kendo;
     var caret = kendo.caret;
     var keys = kendo.keys;
-    var Class = kendo.Class;
-    var isFunction = kendo.isFunction;
     var ui = kendo.ui;
     var Widget = ui.Widget;
     var ns = ".kendoMaskedTextBox";
@@ -29,29 +24,6 @@ var __meta__ = { // jshint ignore:line
     var DISABLED = "disabled";
     var READONLY = "readonly";
     var CHANGE = "change";
-
-    function matchesRule(character, rule) {
-        if (rule && ((rule.test && rule.test(character)) || (isFunction(rule) && rule(character)))) {
-            return true;
-        } else {
-            return false;
-        }
-    }
-
-    function replaceCharAt(index, character, string) {
-        var chars = [];
-
-        if (isString(character) && isString(string) && index >= 0 && index < string.length) {
-            chars = string.split("");
-            chars[index] = character;
-        }
-
-        return chars.join("");
-    }
-
-    function isString(value) {
-        return (typeof value === "string");
-    }
 
     var MaskedTextBox = Widget.extend({
         init: function(element, options) {
@@ -435,7 +407,7 @@ var __meta__ = { // jshint ignore:line
             var unmasked = this._unmask(this.element.val().substring(selection[1]), selection[1]);
 
             this._insertString(selection[0], selection[1], character, unmasked, true);
-
+            
             if (e.keyCode === keys.BACKSPACE || character) {
                 e.preventDefault();
             }
@@ -444,14 +416,13 @@ var __meta__ = { // jshint ignore:line
         _find: function(idx, backward) {
             var value = this.element.val() || this._emptyMask;
             var step = 1;
-            var tokens = this.tokens;
 
             if (backward === true) {
                 step = -1;
             }
 
             while (idx > -1 || idx <= this._maskLength) {
-                if ((!tokens[idx] || tokens[idx].group) || value.charAt(idx) !== tokens[idx].text) {
+                if (value.charAt(idx) !== this.tokens[idx]) {
                     return idx;
                 }
 
@@ -512,75 +483,43 @@ var __meta__ = { // jshint ignore:line
         },
 
         _unmask: function(value, idx) {
-            var that = this;
-            var oldValue = that._oldValue;
-
             if (!value) {
                 return "";
             }
-
+            
             if(this._unmaskedValue === value) {
                 return this._unmaskedValue;
             }
+            value = (value + "").split("");
 
             var chr;
             var token;
-            var tokens = that.tokens;
-            var tokenRule;
-            var tokenGroup;
             var chrIdx = 0;
             var tokenIdx = idx || 0;
+
             var empty = this.options.promptChar;
+
             var valueLength = value.length;
-            var tokensLength = tokens.length;
+            var tokensLength = this.tokens.length;
+
             var result = "";
-            var charIndexInGroup;
-            var currentGroupValue;
-            var newGroupValue;
-            var currentValue;
 
             while (tokenIdx < tokensLength) {
                 chr = value[chrIdx];
-                token = tokens[tokenIdx];
-                tokenRule = token.rule;
-                tokenGroup = token.group;
+                token = this.tokens[tokenIdx];
 
-                if (!tokenGroup && ((!tokenRule && chr === token.text) || chr === empty)) {
+                if (chr === token || chr === empty) {
                     result += chr === empty ? empty : "";
 
                     chrIdx += 1;
                     tokenIdx += 1;
-                } else if (tokenRule) {
-                    if (matchesRule(chr, tokenRule)) {
+                } else if (typeof token !== "string") {
+                    if ((token.test && token.test(chr)) || ($.isFunction(token) && token(chr))) {
                         result += chr;
                         tokenIdx += 1;
                     }
 
                     chrIdx += 1;
-                } else if (tokenGroup) {
-                    currentValue = oldValue ? (oldValue.length > valueLength ? oldValue : value) : value;
-                    currentGroupValue = currentValue.substr(tokenGroup.maskIndex, tokenGroup.text.length);
-
-                    //partially unmask in the middle of a group
-                    if (that._emptyMask.length !== valueLength) {
-                        charIndexInGroup = abs(token.maskIndex - token.group.maskIndex);
-                        newGroupValue = replaceCharAt(charIndexInGroup, chr, currentGroupValue);
-
-                        if (matchesRule(newGroupValue, tokenGroup.rule)) {
-                            result += chr;
-                            tokenIdx += 1;
-                        }
-
-                        chrIdx += 1;
-                    } else {
-                        //unmask the whole group
-                        if (matchesRule(currentGroupValue, tokenGroup.rule)) {
-                            result += currentGroupValue;
-                            tokenIdx += currentGroupValue.length;
-                        }
-
-                        chrIdx += currentGroupValue.length;
-                    }
                 } else {
                     tokenIdx += 1;
                 }
@@ -594,14 +533,13 @@ var __meta__ = { // jshint ignore:line
         },
 
         _tokenize: function() {
-            var that = this;
             var tokens = [];
             var tokenIdx = 0;
 
             var mask = this.options.mask || "";
             var maskChars = mask.split("");
             var length = maskChars.length;
-            var idx;
+            var idx = 0;
             var chr;
             var rule;
 
@@ -609,32 +547,15 @@ var __meta__ = { // jshint ignore:line
             var promptChar = this.options.promptChar;
             var numberFormat = kendo.getCulture(this.options.culture).numberFormat;
             var rules = this._rules;
-            var groupTokens;
-            var group;
-            var groupLength;
 
-            for (idx = 0; idx < length; idx++) {
+            for (; idx < length; idx++) {
                 chr = maskChars[idx];
                 rule = rules[chr];
-                group = rule ? null : that._isPartOfMaskGroup(chr, idx);
 
                 if (rule) {
-                    tokens[tokenIdx] = new MaskToken({
-                        maskIndex: idx,
-                        text: chr,
-                        rule: rule
-                    });
+                    tokens[tokenIdx] = rule;
                     emptyMask += promptChar;
                     tokenIdx += 1;
-                } else if (group) {
-                    groupTokens = that._tokenizeMaskGroup(group);
-                    tokens = tokens.concat(groupTokens);
-
-                    groupLength = groupTokens.length;
-
-                    tokenIdx += groupLength;
-                    idx += groupLength - 1;
-                    emptyMask += Array(groupLength + 1).join(promptChar);
                 } else {
                     if (chr === "." || chr === ",") {
                         chr = numberFormat[chr];
@@ -648,10 +569,7 @@ var __meta__ = { // jshint ignore:line
                     chr = chr.split("");
 
                     for (var i = 0, l = chr.length; i < l; i++) {
-                        tokens[tokenIdx] = new MaskToken({
-                            maskIndex: idx,
-                            text: chr[i]
-                        });
+                        tokens[tokenIdx] = chr[i];
                         emptyMask += chr[i];
                         tokenIdx += 1;
                     }
@@ -662,73 +580,11 @@ var __meta__ = { // jshint ignore:line
 
             this._emptyMask = emptyMask;
             this._maskLength = emptyMask.length;
-        },
-
-        _isPartOfMaskGroup: function(maskChar, maskIndex) {
-            var that = this;
-            var rules = that._rules || [];
-            var key;
-            var mask = that.options.mask || "";
-
-            for (key in rules) {
-                if (isString(key) && mask.substr(maskIndex, key.length) === key) {
-                    return new MaskGroup({
-                        maskIndex: maskIndex,
-                        text: key,
-                        rule: rules[key]
-                    });
-                }
-            }
-
-            return false;
-        },
-
-        _tokenizeMaskGroup: function(maskGroup) {
-            var group = maskGroup || {};
-            var groupTokens = [];
-            var maskIndex = group.maskIndex || 0;
-            var text = group.text || "";
-            var textLength = text.length;
-            var i;
-
-            for (i = 0; i < textLength; i++) {
-                groupTokens.push(new MaskToken({
-                    maskIndex: maskIndex + i,
-                    text: text[i],
-                    group: group
-                }));
-            }
-
-            return groupTokens;
         }
     });
 
     ui.plugin(MaskedTextBox);
 
-    var MaskElement = Class.extend({
-       init: function(options) {
-            var that = this;
-
-            that.maskIndex = options.maskIndex || 0;
-            that.text = options.text || "";
-            that.rule = options.rule;
-        }
-    });
-
-    var MaskToken = MaskElement.extend({
-        init: function(options) {
-            var that = this;
-
-            MaskElement.fn.init.call(that, options);
-            that.group = options.group;
-        }
-    });
-
-    var MaskGroup = MaskElement.extend({
-        init: function(options) {
-            MaskElement.fn.init.call(this, options);
-        }
-    });
 })(window.kendo.jQuery);
 
 return window.kendo;

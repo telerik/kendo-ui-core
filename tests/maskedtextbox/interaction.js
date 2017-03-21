@@ -1,20 +1,57 @@
 (function() {
     var MaskedTextBox = kendo.ui.MaskedTextBox,
         input;
-    var inputElement;
-    var LETTER_REGEX = /[a-z]{1,3}/;
-    var NUMBER_REGEX = /[0-9]{1,3}/;
-    var caret = kendo.caret;
 
     module("kendo.ui.MaskedTextBox interaction", {
         setup: function() {
-            input = createInput();
-            inputElement = input[0];
+            input = $("<input />").appendTo(QUnit.fixture);
         },
         teardown: function() {
             kendo.destroy(QUnit.fixture);
         }
     });
+
+    function caret(element, start, end) {
+        var range;
+        var isPosition = start !== undefined;
+
+        if (end === undefined) {
+            end = start;
+        }
+
+        if (element.selectionStart !== undefined) {
+            if (isPosition) {
+                element.focus();
+                element.setSelectionRange(start, end);
+            } else {
+                start = [element.selectionStart, element.selectionEnd];
+            }
+        } else if (document.selection) {
+            if ($(element).is(":visible")) {
+                element.focus();
+            }
+            range = document.selection.createRange();
+            if (isPosition) {
+                range.collapse(true);
+                range.moveStart("character", start);
+                range.moveEnd("character", end - start);
+                range.select();
+            } else {
+                var rangeElement = element.createTextRange(),
+                    rangeDuplicated = rangeElement.duplicate(),
+                    selectionStart, selectionEnd;
+
+                    rangeElement.moveToBookmark(range.getBookmark());
+                    rangeDuplicated.setEndPoint('EndToStart', rangeElement);
+                    selectionStart = rangeDuplicated.text.length;
+                    selectionEnd = selectionStart + rangeElement.text.length;
+
+                start = [selectionStart, selectionEnd];
+            }
+        }
+
+        return start;
+    }
 
     asyncTest("MaskedTextBox shows empty mask on focus", 1, function() {
         var maskedtextbox = new MaskedTextBox(input, {
@@ -258,7 +295,7 @@
     });
 
     test("MaskedTextBox value is not undefined when clearPromptChar is true and empty mask is used", 1, function() {
-        input.attr("value", "123");
+        input.attr("value","123")
         var maskedtextbox = new MaskedTextBox(input, {
             clearPromptChar: true
         });
@@ -290,7 +327,7 @@
             input.trigger({
                 type: "keypress",
                 which: 54
-            });
+                });
 
             equal(input.val(), "6__");
         });
@@ -309,265 +346,9 @@
             input.trigger({
                 type: "keypress",
                 which: 103
-            });
+                });
 
             equal(input.val(), "0-__3");
-        });
-    });
-
-    module("kendo.ui.MaskedTextBox groups", {
-        setup: function() {
-            input = createInput();
-            setupPressKey();
-        },
-        teardown: function() {
-            kendo.destroy(QUnit.fixture);
-        }
-    });
-
-    asyncTest("typing at the start of a group should insert character", 3, function() {
-        var maskedtextbox = new MaskedTextBox(input, {
-            mask: "xyz",
-            value: "",
-            rules: {
-                "xyz": NUMBER_REGEX
-            }
-        });
-        input.focus();
-
-        setTimeout(function() {
-            start();
-
-            input.pressKey("1");
-
-            equal(input.val(), "1__");
-            equal(caret(input[0])[0], 1);
-            equal(caret(input[0])[1], 1);
-        });
-    });
-
-    asyncTest("typing in the middle of a group should insert characters", 3, function() {
-        var maskedtextbox = new MaskedTextBox(input, {
-            mask: "123",
-            rules: {
-                "123": NUMBER_REGEX
-            }
-        });
-        input.focus();
-
-        setTimeout(function() {
-            start();
-            input.val("___");
-            caret(input[0], 1);
-
-            input.pressKey("1");
-
-            equal(input.val(), "_1_");
-            equal(caret(input[0])[0], 2);
-            equal(caret(input[0])[1], 2);
-        });
-    });
-
-    asyncTest("typing at the end of a group should insert characters", 3, function() {
-        var maskedtextbox = new MaskedTextBox(input, {
-            mask: "123",
-            rules: {
-                "123": NUMBER_REGEX
-            }
-        });
-        input.focus();
-
-        setTimeout(function() {
-            start();
-            input.val("___");
-            caret(input[0], 2);
-
-            input.pressKey("1");
-
-            equal(input.val(), "__1");
-            equal(caret(input[0])[0], 3);
-            equal(caret(input[0])[1], 3);
-        });
-    });
-
-    module("kendo.ui.MaskedTextBox groups", {
-        setup: function() {
-            input = createInput();
-            setupPressKey();
-        },
-        teardown: function() {
-            kendo.destroy(QUnit.fixture);
-        }
-    });
-
-    asyncTest("typing at the start of a group should replace characters", 3, function() {
-        var maskedtextbox = new MaskedTextBox(input, {
-            mask: "xyz",
-            value: "123",
-            rules: {
-                "xyz": NUMBER_REGEX
-            }
-        });
-        input.focus();
-
-        setTimeout(function() {
-            start();
-            caret(input[0], 0);
-            input.pressKey("4");
-
-            equal(input.val(), "412");
-            equal(caret(input[0])[0], 1);
-            equal(caret(input[0])[1], 1);
-        });
-    });
-
-    asyncTest("typing in the middle of a group should insert characters", 3, function() {
-        var maskedtextbox = new MaskedTextBox(input, {
-            mask: "xyz",
-            value: "123",
-            rules: {
-                "xyz": NUMBER_REGEX
-            }
-        });
-        input.focus();
-
-        setTimeout(function() {
-            start();
-            caret(input[0], 1);
-
-            input.pressKey("4");
-
-            equal(input.val(), "142");
-            equal(caret(input[0])[0], 2);
-            equal(caret(input[0])[1], 2);
-        });
-    });
-
-    asyncTest("typing at the end of a group should insert characters", 3, function() {
-        var maskedtextbox = new MaskedTextBox(input, {
-            mask: "xyz",
-            value: "123",
-            rules: {
-                "xyz": NUMBER_REGEX
-            }
-        });
-        input.focus();
-
-        setTimeout(function() {
-            start();
-            caret(input[0], 2);
-
-            input.pressKey("4");
-
-            equal(input.val(), "124");
-            equal(caret(input[0])[0], 3);
-            equal(caret(input[0])[1], 3);
-        });
-    });
-
-    asyncTest("typing the multiple times should insert characters in the group", 3, function() {
-        var maskedtextbox = new MaskedTextBox(input, {
-            mask: "123",
-            rules: {
-                "123": NUMBER_REGEX
-            }
-        });
-        input.focus();
-
-        setTimeout(function() {
-            start();
-            input.val("___");
-            caret(input[0], 0);
-
-            input.pressKey("1");
-            input.pressKey("2");
-            input.pressKey("3");
-
-            equal(input.val(), "123");
-            equal(caret(input[0])[0], 3);
-            equal(caret(input[0])[1], 3);
-        });
-    });
-
-    module("kendo.ui.MaskedTextBox groups", {
-        setup: function() {
-            input = createInput();
-            setupPressKey();
-        },
-        teardown: function() {
-            kendo.destroy(QUnit.fixture);
-        }
-    });
-
-    asyncTest("typing at the start of a group around char rules should insert char", 3, function() {
-        var maskedtextbox = new MaskedTextBox(input, {
-            mask: "0xyz0",
-            value: "1a2b3",
-            rules: {
-                "xyz": /[a-z][0-9][a-z]/
-
-            }
-        });
-        input.focus();
-
-        setTimeout(function() {
-            start();
-            input.val("1a2b3");
-            caret(input[0], 1);
-
-            input.pressKey("x");
-
-            equal(input.val(), "1x2b3");
-            equal(caret(input[0])[0], 2);
-            equal(caret(input[0])[1], 2);
-        });
-    });
-
-    asyncTest("typing in the middle of a group around char rules should insert char", 3, function() {
-        var maskedtextbox = new MaskedTextBox(input, {
-            mask: "0xyz0",
-            value: "1a2b3",
-            rules: {
-                "xyz": /[a-z][0-9][a-z]/
-
-            }
-        });
-        input.focus();
-
-        setTimeout(function() {
-            start();
-            input.val("1a2b3");
-            caret(input[0], 2);
-
-            input.pressKey("7");
-
-            equal(input.val(), "1a7b3");
-            equal(caret(input[0])[0], 3);
-            equal(caret(input[0])[1], 3);
-        });
-    });
-
-    asyncTest("typing at the end of a group around char rules should insert char", 3, function() {
-        var maskedtextbox = new MaskedTextBox(input, {
-            mask: "0xyz0",
-            value: "1a2b3",
-            rules: {
-                "xyz": /[a-z][0-9][a-z]/
-
-            }
-        });
-        input.focus();
-
-        setTimeout(function() {
-            start();
-            input.val("1a2b3");
-            caret(input[0], 3);
-
-            input.pressKey("x");
-
-            equal(input.val(), "1a2x3");
-            equal(caret(input[0])[0], 4);
-            equal(caret(input[0])[1], 4);
         });
     });
 })();
