@@ -113,4 +113,27 @@ test("Calendar sets aria-activedescendant", function() {
     equal(instance._table.attr("aria-activedescendant"), instance._cell.attr("id"));
 });
 
+test("Calendar adds aria label to the left arrow", function() {
+    equal(instance._prevArrow.attr("aria-label"), "Previous");
+});
+
+test("Calendar adds aria label to the right arrow", function() {
+    equal(instance._nextArrow.attr("aria-label"), "Next");
+});
+
+test("Calendar with enabled week has empty th if message is not set", function() {
+    instance.setOptions({ weekNumber: true });
+    var firstTh = instance.element.find("th:first");
+
+    equal(firstTh.text().trim(), "");
+});
+
+test("Calendar with enabled week has not empty th if not message is set", function() {
+    var test = "test";
+    instance.setOptions({ weekNumber: true, messages: { weekColumnHeader: test } });
+    var firstTh = instance.element.find("th:first");
+
+    equal(firstTh.text().trim(), test);
+});
+
 })();
