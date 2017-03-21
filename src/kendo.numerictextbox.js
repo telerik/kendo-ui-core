@@ -326,18 +326,11 @@ var __meta__ = { // jshint ignore:line
         },
 
         _blur: function() {
-            var that = this,
-                factor = that.options.factor,
-                curreValue = that.element.val();
-
+            var that = this;
+            
             that._toggleText(true);
-            if(factor && factor !== 1){
-                curreValue = parseFloat(curreValue);
-                if(curreValue !== null) {
-                    curreValue = curreValue/factor;
-                }
-            }
-            that._change(curreValue);
+            
+            that._change(that.element.val());
         },
 
         _click: function(e) {
@@ -377,7 +370,15 @@ var __meta__ = { // jshint ignore:line
         },
 
         _change: function(value) {
-            var that = this;
+            var that = this,
+                factor = that.options.factor;
+
+            if(factor && factor !== 1){
+                value = parseFloat(value);
+                if(value !== null) {
+                    value = value/factor;
+                }
+            }
 
             that._update(value);
             value = that._value;
