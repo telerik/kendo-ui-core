@@ -27,7 +27,7 @@ To observe this behavior:
         $(document).ready(function() {
 
           function removeDuplicates(items, field) {
-            var getter = kendo.getter(field, true),
+            var getter = function(item){return item[field]},
                 result = [],
                 index = 0,
                 seen = {};
