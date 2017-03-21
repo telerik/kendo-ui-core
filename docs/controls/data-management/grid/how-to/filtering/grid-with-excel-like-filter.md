@@ -1,13 +1,13 @@
 ---
-title: Implement an Excel-Like Filter Menu
-page_title: Implement an Excel-Like Filter Menu | Kendo UI Grid Widget
+title: Implement Excel-Like Filter Menus
+page_title: Implement Excel-Like Filter Menus | Kendo UI Grid Widget
 description: "Learn how to implement an Excel-like filter menu in a Kendo UI Grid."
 slug: howto_gridfiltering_excellike_grid
 ---
 
-# Implement an Excel-Like Filter Menu
+# Implement Excel-Like Filter Menus
 
-The following example demonstrates how to set the Grid with Excel-like filter which has sorted and unique items.
+The following example demonstrates how to set the Grid with an Excel-like filter that has sorted and unique items.
 
 The example uses the [`columns.filterable.dataSource`](/api/javascript/ui/grid#configuration-columns.filterable.dataSource) property of the Grid to set a single Data Source for all filter menus.
 
@@ -64,7 +64,7 @@ To observe this behavior:
               },
               pageSize: 20,
               change: function(e) {
-                filterSource.data(e.items); 
+                filterSource.data(e.items);
               },
             },
             height: 550,
