@@ -13,6 +13,7 @@
 @disabled-text-color: darken(@base, 23%);
 @disabled-border-color: darken(@base, 6%);
 @inputs-border-radius: 3px;
+@input-validation-error: darken(@error, 25%);
 
 @theme-name: ~"nova";
 
@@ -2374,5 +2375,21 @@ html .km-pane-wrapper .km-widget,
                 }
             }
         }
+    }
+}
+
+.k-numeric-wrap .k-i-warning {
+    color: @input-validation-error;
+    position: absolute;
+    top: 0;
+    right: 2.2em;
+    width: 2.2em;
+}
+
+.k-numeric-wrap.k-state-invalid {
+    border-color: @input-validation-error;
+
+    input {
+        color: @input-validation-error;
     }
 }

@@ -181,6 +181,7 @@
 @secondary-hover-background-color: softlight(@accent, #b9b9b9);
 @secondary-header-color: rgba(256, 256, 256, 0.5);
 @secondary-header-background-color: darken(@accent, 10%);
+@input-validation-error: contrast(@error, @error, darken(@error, 30%), 0.5);
 
 /* Kendo skin */
 
@@ -4099,5 +4100,21 @@ div.k-scheduler-marquee:after {
                 }
             }
         }
+    }
+}
+
+.k-numeric-wrap .k-i-warning {
+    color: @input-validation-error;
+    position: absolute;
+    top: 0;
+    right: 2.2em;
+    width: 2.2em;
+}
+
+.k-numeric-wrap.k-state-invalid {
+    border-color: @input-validation-error;
+
+    input {
+        color: @input-validation-error;
     }
 }
