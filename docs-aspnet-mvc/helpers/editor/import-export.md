@@ -3,7 +3,7 @@ title: Import and Export Documents
 page_title: Import and Export Documents | Kendo UI Editor HtmlHelper
 description: "Import and export different types of documents with the Kendo UI Editor widget for ASP.NET MVC."
 slug: overview_importexportdpl_aspnetmvc
-position: 2
+position: 3
 ---
 
 # Import and Export Documents
