@@ -414,6 +414,7 @@ var __meta__ = { // jshint ignore:line
             clearTimeout(that._focusing);
             that._inputWrapper.removeClass(FOCUSED).removeClass(HOVER);
             that._blur();
+            that._removeInvalidState();
         },
 
         _format: function(format, culture) {
