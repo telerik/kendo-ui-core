@@ -149,6 +149,66 @@ asyncTest('leaving root item closes it and raises close event', 1, function() {
     }, 1);
 });
 
+asyncTest('leaving item root outside viewport left direction viewport closes it and raises close event', 1, function() {
+    var item = getRootItem(1).parent();
+
+    menu._mouseenter({ currentTarget: item[0], delegateTarget: menu.element[0] });
+
+    menu.bind("close", function() {
+        ok(true);
+        start();
+    })
+
+    setTimeout(function () {
+        menu._mouseleave({ currentTarget: item[0], target: item.find("span.k-link")[0], clientX: -1,});
+    }, 1);
+});
+
+asyncTest('leaving item root outside viewport top direction closes it and raises close event', 1, function() {
+    var item = getRootItem(1).parent();
+
+    menu._mouseenter({ currentTarget: item[0], delegateTarget: menu.element[0] });
+
+    menu.bind("close", function() {
+        ok(true);
+        start();
+    })
+
+    setTimeout(function () {
+        menu._mouseleave({ currentTarget: item[0], target: item.find("span.k-link")[0], clientY: -1});
+    }, 1);
+});
+
+asyncTest('leaving item root outside viewport bottom direction closes it and raises close event', 1, function() {
+    var item = getRootItem(1).parent();
+
+    menu._mouseenter({ currentTarget: item[0], delegateTarget: menu.element[0] });
+
+    menu.bind("close", function() {
+        ok(true);
+        start();
+    })
+
+    setTimeout(function () {
+        menu._mouseleave({ currentTarget: item[0], target: item.find("span.k-link")[0], clientY: $(window).height() + 2});
+    }, 1);
+});
+
+asyncTest('leaving item root outside viewport right direction closes it and raises close event', 1, function() {
+    var item = getRootItem(1).parent();
+
+    menu._mouseenter({ currentTarget: item[0], delegateTarget: menu.element[0] });
+
+    menu.bind("close", function() {
+        ok(true);
+        start();
+    })
+
+    setTimeout(function () {
+        menu._mouseleave({ currentTarget: item[0], target: item.find("span.k-link")[0], clientX: $(window).width() + 2});
+    }, 1);
+});
+
 test('clicking should raise select event', function() {
     var link = getRootItem(2);
 

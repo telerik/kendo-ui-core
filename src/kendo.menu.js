@@ -897,6 +897,14 @@ var __meta__ = { // jshint ignore:line
                 !contains(e.currentTarget, e.relatedTarget || e.target) && hasChildren &&
                 !contains(e.currentTarget, kendo._activeElement())) {
                     that.close(element);
+                    return;
+            }
+
+            // Detect if cursor goes outside the viewport of the browser
+            if( !e.toElement || e.clientX < 0 || e.clientY < 0 ||
+                e.clientY > $(window).height() ||
+                e.clientX > $(window).width()){
+                that.close(element);
             }
         },
 
