@@ -105,7 +105,7 @@
         kendo.destroy($('[kendo-window]'));
     });
 
-    ngTest2("controlling window visiblity through scope", 1, function(dom, controller, bootstrap) {
+    skip("controlling window visiblity through scope", 1, function(dom, controller, bootstrap) {
         controller(function($scope) {
             $scope.dialogOptions = {
                 visible: false,
