@@ -123,90 +123,101 @@ test('click method should set handled flag and select event is only fired once',
     ok(selected == 1);
 });
 
-asyncTest('hovering root item opens it and raises open event', function() {
+test('hovering root item opens it and raises open event', function() {
+    jasmine.clock().install();
     var item = getRootItem(1).parent();
 
     menu._mouseenter({ currentTarget: item[0], delegateTarget: menu.element[0] });
 
-    setTimeout(function () {
-        ok(isOpenRaised);
-        start();
-    }, 1);
+    jasmine.clock().tick();
+    ok(isOpenRaised);
+    jasmine.clock().uninstall();
 });
 
-asyncTest('leaving root item closes it and raises close event', 1, function() {
+test('leaving root item closes it and raises close event', 1, function() {
+    jasmine.clock().install();
     var item = getRootItem(1).parent();
 
     menu._mouseenter({ currentTarget: item[0], delegateTarget: menu.element[0] });
 
     menu.bind("close", function() {
         ok(true);
-        start();
     })
 
-    setTimeout(function () {
-        menu._mouseleave({ currentTarget: item[0] });
-    }, 1);
+    jasmine.clock().tick();
+    menu._mouseleave({ currentTarget: item[0] });
+
+    jasmine.clock().tick();
+    jasmine.clock().uninstall();
 });
 
-asyncTest('leaving item root outside viewport left direction viewport closes it and raises close event', 1, function() {
+test('leaving item root outside viewport left direction viewport closes it and raises close event', 1, function() {
+    jasmine.clock().install();
     var item = getRootItem(1).parent();
 
     menu._mouseenter({ currentTarget: item[0], delegateTarget: menu.element[0] });
 
     menu.bind("close", function() {
         ok(true);
-        start();
     })
 
-    setTimeout(function () {
-        menu._mouseleave({ currentTarget: item[0], target: item.find("span.k-link")[0], clientX: -1,});
-    }, 1);
+    jasmine.clock().tick();
+    menu._mouseleave({ currentTarget: item[0], target: item.find("span.k-link")[0], clientX: -1,});
+
+    jasmine.clock().tick();
+    jasmine.clock().uninstall();
+
 });
 
-asyncTest('leaving item root outside viewport top direction closes it and raises close event', 1, function() {
+test('leaving item root outside viewport top direction closes it and raises close event', 1, function() {
+    jasmine.clock().install();
     var item = getRootItem(1).parent();
 
     menu._mouseenter({ currentTarget: item[0], delegateTarget: menu.element[0] });
 
     menu.bind("close", function() {
         ok(true);
-        start();
     })
 
-    setTimeout(function () {
-        menu._mouseleave({ currentTarget: item[0], target: item.find("span.k-link")[0], clientY: -1});
-    }, 1);
+    jasmine.clock().tick();
+    menu._mouseleave({ currentTarget: item[0], target: item.find("span.k-link")[0], clientY: -1});
+
+    jasmine.clock().tick();
+    jasmine.clock().uninstall();
 });
 
-asyncTest('leaving item root outside viewport bottom direction closes it and raises close event', 1, function() {
+test('leaving item root outside viewport bottom direction closes it and raises close event', 1, function() {
+    jasmine.clock().install();
     var item = getRootItem(1).parent();
 
     menu._mouseenter({ currentTarget: item[0], delegateTarget: menu.element[0] });
 
     menu.bind("close", function() {
         ok(true);
-        start();
     })
 
-    setTimeout(function () {
-        menu._mouseleave({ currentTarget: item[0], target: item.find("span.k-link")[0], clientY: $(window).height() + 2});
-    }, 1);
+    jasmine.clock().tick();
+    menu._mouseleave({ currentTarget: item[0], target: item.find("span.k-link")[0], clientY: $(window).height() + 2});
+
+    jasmine.clock().tick();
+    jasmine.clock().uninstall();
 });
 
-asyncTest('leaving item root outside viewport right direction closes it and raises close event', 1, function() {
+test('leaving item root outside viewport right direction closes it and raises close event', 1, function() {
+    jasmine.clock().install();
     var item = getRootItem(1).parent();
 
     menu._mouseenter({ currentTarget: item[0], delegateTarget: menu.element[0] });
 
     menu.bind("close", function() {
         ok(true);
-        start();
     })
 
-    setTimeout(function () {
-        menu._mouseleave({ currentTarget: item[0], target: item.find("span.k-link")[0], clientX: $(window).width() + 2});
-    }, 1);
+    jasmine.clock().tick();
+    menu._mouseleave({ currentTarget: item[0], target: item.find("span.k-link")[0], clientX: $(window).width() + 2});
+
+    jasmine.clock().tick();
+    jasmine.clock().uninstall();
 });
 
 test('clicking should raise select event', function() {
