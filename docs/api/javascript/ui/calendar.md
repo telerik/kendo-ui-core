@@ -169,6 +169,38 @@ note that a check for an empty `date` is needed, as the widget can work with a n
         });
     </script>
 
+### messages `Object`
+
+Allows localization of the strings that are used in the widget.
+
+#### Example
+
+    <div id="calendar"></div>
+    <script>
+    $("#calendar").kendoCalendar({
+        "weekNumber": true,
+        "messages": {
+            "weekColumnHeader": "W"
+        }
+     })
+    </script>
+
+### messages.weekColumnHeader `String` *(default: "")*
+
+Allows customization of the week column header text. Set the value to make the widget compliant with web accessibility standards.
+
+#### Example
+
+    <div id="calendar"></div>
+    <script>
+    $("#calendar").kendoCalendar({
+        "weekNumber": true,
+        "messages": {
+            "weekColumnHeader": "W"
+        }
+     })
+    </script>
+
 ### min `Date`*(default: Date(1900, 0, 1))*
 
  Specifies the minimum date, which the calendar can show.
