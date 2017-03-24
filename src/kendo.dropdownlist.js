@@ -1029,7 +1029,7 @@ var __meta__ = { // jshint ignore:line
             if (index !== undefined) {
                 listView.focus(index);
             } else {
-                if (options.optionLabel && options.virtual.mapValueTo !== "dataItem") {
+                if (options.optionLabel && (!options.virtual || options.virtual.mapValueTo !== "dataItem")) {
                     this._focus(this.optionLabel);
                     this._select(this.optionLabel);
                 } else {
