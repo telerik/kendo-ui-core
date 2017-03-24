@@ -1015,13 +1015,14 @@ var __meta__ = { // jshint ignore:line
         },
 
         _focusItem: function() {
+            var options = this.options;
             var listView = this.listView;
             var focusedItem = listView.focus();
             var index = listView.select();
 
             index = index[index.length - 1];
 
-            if (index === undefined && this.options.highlightFirst && !focusedItem) {
+            if (index === undefined && options.highlightFirst && !focusedItem) {
                 index = 0;
             }
 
