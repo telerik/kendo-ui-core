@@ -102,7 +102,7 @@ The slider widget supports precision of up-to 10 digits after the decimals point
       });
     </script>
 
-### tooltip.template `String`
+### tooltip.template `String|Function`
 
 Template of the tooltip. The following variables are passed by the Slider and are ready to be used inside the template:
 
