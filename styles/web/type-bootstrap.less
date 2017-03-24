@@ -3455,3 +3455,12 @@ td.k-state-focused.k-state-selected,
     right: auto;
     left: 1.9em;
 }
+
+.k-maskedtextbox .k-state-invalid {
+    border-color: @input-validation-error;
+    color: @input-validation-error;
+
+    + .k-i-warning {
+        color: @input-validation-error;
+    }
+}
