@@ -34,9 +34,9 @@ The example below demonstrates how to add a custom **Delete** confirmation dialo
                 <dd>#:Discontinued#</dd>
             </dl>
             <div class="edit-buttons">
-                <a class="k-button k-edit-button" href="\\#">Edit<span class="k-icon k-edit"></span></a>
-                <a class="k-button k-delete-button" href="\\#">Built-in delete<span class="k-icon k-delete"></span></a>
-                <a class="k-button k-custom-delete-button" href="\\#" onClick="deleteItem(event)">Custom delete<span class="k-icon k-delete"></span></a>
+                <a class="k-button k-edit-button" href="\\#">Edit<span class="k-icon k-i-edit"></span></a>
+                <a class="k-button k-delete-button" href="\\#">Built-in delete<span class="k-icon k-i-close"></span></a>
+                <a class="k-button k-custom-delete-button" href="\\#" onClick="deleteItem(event)">Custom delete<span class="k-icon k-i-close"></span></a>
             </div>
         </div>
     </script>
@@ -69,8 +69,8 @@ The example below demonstrates how to add a custom **Delete** confirmation dialo
                 <dd><input type="checkbox" name="Discontinued" data-bind="checked:Discontinued"></dd>
             </dl>
             <div class="edit-buttons">
-                <a class="k-button k-update-button" href="\\#"><span class="k-icon k-update"></span></a>
-                <a class="k-button k-cancel-button" href="\\#"><span class="k-icon k-cancel"></span></a>
+                <a class="k-button k-update-button" href="\\#"><span class="k-icon k-i-check"></span></a>
+                <a class="k-button k-cancel-button" href="\\#"><span class="k-icon k-i-cancel"></span></a>
             </div>
         </div>
     </script>
