@@ -22,7 +22,9 @@ The filters which are applied over the data items. It applies the filter to all 
         var dataSource = new kendo.data.HierarchicalDataSource({
             filter:{ field: "name", operator: "startswith", value: "John" },
             change: function(e) {
-                e.items[0].load();
+                 for (var i = 0; i < e.items.length; i++) {
+                    e.items[i].load();
+                 }
             },
             data: [
             { name: "Jane Doe", items: [
@@ -49,7 +51,9 @@ The filters which are applied over the data items. It applies the filter to all 
             filter:[{ field: "name", operator: "startswith", value: "John" },
                 { field: "name", operator: "contains", value: "Snow" }],
             change: function(e) {
-                e.items[0].load();
+                 for (var i = 0; i < e.items.length; i++) {
+                    e.items[i].load();
+                 }
             },
             data: [
             { name: "Jane Doe", items: [
@@ -82,7 +86,9 @@ The filters which are applied over the data items. It applies the filter to all 
                 ]
               },
             change: function(e) {
-                e.items[0].load();
+                 for (var i = 0; i < e.items.length; i++) {
+                    e.items[i].load();
+                 }
             },
             data: [
             { name: "Jane Doe", items: [
@@ -336,7 +342,9 @@ The filter configuration. Accepts the same values as the [`filter`](#configurati
     <script>
             var dataSource = new kendo.data.HierarchicalDataSource({
                 change: function(e) {
-                    e.items[0].load();
+                 for (var i = 0; i < e.items.length; i++) {
+                    e.items[i].load();
+                 }
                 },
                 data: [
                 { name: "Jane Doe", items: [
@@ -363,7 +371,9 @@ The filter configuration. Accepts the same values as the [`filter`](#configurati
         var dataSource = new kendo.data.HierarchicalDataSource({
             filter: { field: "name", operator: "startswith", value: "John" },
             change: function(e) {
-                e.items[0].load();
+                 for (var i = 0; i < e.items.length; i++) {
+                    e.items[i].load();
+                 }
             },
             data: [
             { name: "Jane Doe", items: [
