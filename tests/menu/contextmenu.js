@@ -5,7 +5,8 @@
     }
 
     var menu;
-
+    console.warn("Module Skipped contextmenu");
+    return;
     module("menu api", {
         setup: function () {
             QUnit.fixture.append(

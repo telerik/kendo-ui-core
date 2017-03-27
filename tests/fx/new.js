@@ -124,7 +124,7 @@
         );
     });
 
-    asyncTest("transfer transfers the element", 3, function() {
+    skip("transfer transfers the element", 3, function() {
         var foo = $("<div style='width: 200px; height: 200px;' />"),
             bar = $("<div style='width: 100px; height: 100px; margin-left: 300px; margin-right: 300px;' />").prependTo(QUnit.fixture),
             effect = kendo.fx(foo).transfer(bar);

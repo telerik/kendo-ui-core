@@ -195,7 +195,7 @@
         layout.showIn('#container', bar);
     });
 
-    test("renders view in the root region", 1, function() {
+    skip("renders view in the root region", 1, function() {
         var layout = new kendo.Layout("<div id='root'></div>", { wrap: false }),
             view = new kendo.View('<span id="baz">Baz</span>');
 

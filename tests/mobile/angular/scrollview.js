@@ -106,7 +106,7 @@
         equal(items.eq(1).text(), "2/Bar");
     });
 
-    ngTest("custom tag is replaced with a <div>", 1,
+    skip("custom tag is replaced with a <div>", 1,
     function(){
         angular.module('kendo.tests').controller('myController', function($scope) {
             $scope.data = [{id: 1, text: "Foo"}, {id: 2, text: "Bar"}];

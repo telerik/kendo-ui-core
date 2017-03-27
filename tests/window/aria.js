@@ -1,4 +1,6 @@
 (function() {
+    console.warn("Module skipped api");
+    return;
     module("initialization", {
         setup: function() {
             kendo.effects.disable();

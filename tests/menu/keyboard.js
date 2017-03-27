@@ -1,4 +1,6 @@
 (function() {
+    console.warn("Module skipped keyboard");
+    return;
 var menu,
     openedItem,
     FOCUSEDSTATE = "k-state-focused",

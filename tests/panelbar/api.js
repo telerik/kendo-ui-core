@@ -5,7 +5,8 @@
     var empty_panelbar;
     var panelbar;
     var ul;
-
+    console.warn("Module skipped api");
+    return;
     function getRootItem(index) {
         return ul.children().eq(index);
     }

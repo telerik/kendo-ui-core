@@ -20,7 +20,7 @@
         }
     });
 
-    test('Custom attribute is rendered in item', function(){
+    skip('Custom attribute is rendered in item', function(){
         createMenu({
             dataSource: [{
               text: "Item 1",
@@ -34,7 +34,7 @@
         equal(menu.element.find("li:first").attr("data-myCustomAttribute"), "myCustomAttribute");
     });
 
-    test('Class added via attr is added to other classes', function(){
+    skip('Class added via attr is added to other classes', function(){
         createMenu({
             dataSource: [{
               text: "Item 1",
@@ -53,7 +53,7 @@
         equal(classAttributesCount, 1);
     });
 
-    test('Multiple attributes are rendered in item', function(){
+    skip('Multiple attributes are rendered in item', function(){
         createMenu({
             dataSource: [{
               text: "Item 1",
@@ -71,7 +71,7 @@
         equal(firstItem.attr("id"), "myId");
     });
 
-    test('Attributes are rendered in sub item', function(){
+    skip('Attributes are rendered in sub item', function(){
         createMenu({
             dataSource: [{
               text: "Item 1",
@@ -89,7 +89,7 @@
         equal(subItem.length, 1);
     });
 
-    test('Image attributes are rendered in a item', 2, function(){
+    skip('Image attributes are rendered in a item', 2, function(){
         createMenu({
             dataSource: [{
               text: "Item 1",
@@ -110,7 +110,7 @@
         ok(img.hasClass("customClass"));
     });
 
-    test('Content attributes are rendered in a item', 2, function(){
+    skip('Content attributes are rendered in a item', 2, function(){
         createMenu({
             dataSource: [{
               text: "Item 1",
@@ -131,7 +131,7 @@
         equal(content.attr("test"), "myAttribute");
     });
 
-    test('Default classes are rendered in a item', 3, function(){
+    skip('Default classes are rendered in a item', 3, function(){
         createMenu({
             dataSource: [{
               text: "Item 1",

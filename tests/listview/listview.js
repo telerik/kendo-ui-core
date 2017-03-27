@@ -337,20 +337,20 @@
         equal(listView.element.find("li").length, 2);
     });
 
-    test("pageable option initialize pager", function() {
+    skip("pageable option initialize pager", function() {
         var listView = setup({ pageable: { pagerId: "pager" } });
 
         ok($("#pager").data("kendoPager") instanceof kendo.ui.Pager);
     });
 
-    test("listview DataSource is applied on the pager", function() {
+    skip("listview DataSource is applied on the pager", function() {
         var listView = setup({ pageable: { pagerId: "pager" } }).data("kendoListView");
         var pager = $("#pager").data("kendoPager");
 
         ok(pager.dataSource === listView.dataSource);
     });
 
-    test("listview pageable settings are applied on the pager", function() {
+    skip("listview pageable settings are applied on the pager", function() {
         var listView = setup({
             pageable: {
                 pagerId: "pager",

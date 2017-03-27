@@ -71,7 +71,8 @@ var tabstripSetup = function() {
         ]
     });
 };
-
+    console.warn("Module skipped tabstrip ajax loading");
+    return;
 module('tabstrip ajax loading', {
     setup: function() {
         kendo.effects.disable();

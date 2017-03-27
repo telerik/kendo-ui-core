@@ -1,7 +1,8 @@
 (function() {
     var panelbar;
     var ul;
-
+    console.warn("Module skipped panelbar expand collapse");
+    return;
     module('panelbar expand collapse', {
         setup: function() {
             kendo.effects.disable();

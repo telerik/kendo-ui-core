@@ -1,6 +1,7 @@
 (function() {
 var isRaised;
-
+    console.warn("Module skipped open-on-click");
+    return;
 function getRootItem(index) {
     return $('#menu').find('> .k-item > .k-link')[index];
 }

@@ -4,7 +4,7 @@
         }
     });
 
-    ngTest("is initialized from kendo-data-pop-over directive", 1,
+    skip("is initialized from kendo-data-pop-over directive", 1,
     function() {
         QUnit.fixture.html("<div kendo-mobile-application id='app'>" +
             "<kendo-mobile-view id='home'>" +
@@ -21,7 +21,7 @@
         ok(element.getKendoMobilePopOver());
     });
 
-    ngTest("is opened from button with red='popover'", 1,
+    skip("is opened from button with red='popover'", 1,
     function() {
         QUnit.fixture.html("<div kendo-mobile-application id='app'>" +
             "<kendo-mobile-view id='home'>" +
@@ -62,7 +62,7 @@
         equal(popover.element.get(0).tagName, "DIV");
     });
 
-    ngTest("the inner View works with a ng-controller", 1,
+    skip("the inner View works with a ng-controller", 1,
     function() {
         angular.module('kendo.tests').controller('foo', function($scope) {
             $scope.foo = "Foo";
@@ -85,7 +85,7 @@
         equal(popover.pane.view().scrollerContent.text(), "Foo");
     });
 
-    ngTest("Executes the View controller each time PopOver is opened",
+    skip("Executes the View controller each time PopOver is opened",
     2,
     function() {
         var i = 0;

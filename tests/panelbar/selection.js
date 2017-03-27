@@ -1,7 +1,8 @@
 (function() {
     var panelbar;
     var ul;
-
+    console.warn("Module skipped panelbar selection");
+    return;
     module("panelbar selection", {
         setup: function() {
             kendo.effects.disable();
