@@ -144,7 +144,7 @@ Follow the steps in [this help article](http://blogs.msdn.com/b/phkelley/archive
 
 > **Important**
 > * The 1.9.5 Git build does not work with the Bower package.
-> * If you need to use the `@` symbol in the URL for accessing the Kendo UI Bower repository because of network restrictions or admin rules, for example, make sure you encode it as `https://firstname.lasname**%40**domain.com@bower.telerik.com/bower-kendo-ui.git`.
+> * If you need to use the `@` symbol in the URL for accessing the Kendo UI Bower repository because of network restrictions or admin rules, for example, make sure you encode it as `https://firstname.lasname%40domain.com@bower.telerik.com/bower-kendo-ui.git`.
 
 ### Restore Fails in ASP.NET Core MVC RC Projects in Visual Studio 2015
 
