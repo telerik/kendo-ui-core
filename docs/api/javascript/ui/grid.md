@@ -4903,6 +4903,35 @@ Defines the text of the "noRecords" option that is rendered when no records are 
     });
     </script>
 
+### messages.expandCollapseColumnHeader `String` *(default: "")*
+
+Allows customization of the text in column header for expand/collapse columns. Set the value to make the widget compliant with web accessibility standards.
+
+#### Example
+
+    <div id="grid"></div>
+    <script>
+    $("#grid").kendoGrid({
+      columns: [
+        { field: "name" },
+        { field: "age" }
+      ],
+      dataSource: {
+        data: [
+          { name: "Jane Doe", age: 30, city: "London" },
+          { name: "John Doe", age: 33, city: "Berlin" }
+        ]
+      },
+      detailInit: function (e) {
+        e.detailCell.text("City: " + e.data.city);
+      },
+      height: 200,
+      messages: {
+        expandCollapseColumnHeader: "E/C"
+      }
+    });
+    </script>
+
 ### mobile `Boolean|String` *(default: false)*
 
 If set to `true` and the grid is viewed on mobile browser it will use adaptive rendering.
