@@ -1015,20 +1015,21 @@ var __meta__ = { // jshint ignore:line
         },
 
         _focusItem: function() {
+            var options = this.options;
             var listView = this.listView;
             var focusedItem = listView.focus();
             var index = listView.select();
 
             index = index[index.length - 1];
 
-            if (index === undefined && this.options.highlightFirst && !focusedItem) {
+            if (index === undefined && options.highlightFirst && !focusedItem) {
                 index = 0;
             }
 
             if (index !== undefined) {
                 listView.focus(index);
             } else {
-                if (this.options.optionLabel) {
+                if (options.optionLabel && (!options.virtual || options.virtual.mapValueTo !== "dataItem")) {
                     this._focus(this.optionLabel);
                     this._select(this.optionLabel);
                 } else {

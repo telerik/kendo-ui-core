@@ -18,9 +18,11 @@ var __meta__ = { // jshint ignore:line
     var Widget = ui.Widget;
     var ns = ".kendoMaskedTextBox";
     var proxy = $.proxy;
+    var setTimeout = window.setTimeout;
 
     var INPUT_EVENT_NAME = (kendo.support.propertyChangeEvent ? "propertychange" : "input") + ns;
     var STATEDISABLED = "k-state-disabled";
+    var STATEINVALID = "k-state-invalid";
     var DISABLED = "disabled";
     var READONLY = "readonly";
     var CHANGE = "change";
@@ -37,7 +39,7 @@ var __meta__ = { // jshint ignore:line
             element = that.element;
             DOMElement = element[0];
 
-            that.wrapper = element;
+            that.wrapper = element.wrap("<span class='k-widget k-maskedtextbox'></span>");
             that._tokenize();
             that._form();
 
@@ -82,6 +84,10 @@ var __meta__ = { // jshint ignore:line
              }
 
              that.value(that.options.value || element.val());
+
+             that._validationIcon = $("<span class='k-icon k-i-warning'></span>")
+                .hide()
+                .insertAfter(element);
 
              kendo.notify(that);
         },
@@ -517,6 +523,8 @@ var __meta__ = { // jshint ignore:line
                     if ((token.test && token.test(chr)) || ($.isFunction(token) && token(chr))) {
                         result += chr;
                         tokenIdx += 1;
+                    } else {
+                        this._blinkInvalidState();
                     }
 
                     chrIdx += 1;
@@ -530,6 +538,25 @@ var __meta__ = { // jshint ignore:line
             }
             this._unmaskedValue = result;
             return result;
+        },
+
+        _blinkInvalidState: function () {
+            var that = this;
+
+            that.element.addClass(STATEINVALID);
+            if(that._validationIcon) {
+                 that._validationIcon.show();
+            }
+            clearTimeout(that._invalidStateTimeout);
+            that._invalidStateTimeout = setTimeout(proxy(that._removeInvalidState, that), 100);
+        },
+
+        _removeInvalidState: function () {
+            var that = this;
+
+            that.element.removeClass(STATEINVALID);
+            that._validationIcon.hide();
+            that._invalidStateTimeout = null;
         },
 
         _tokenize: function() {

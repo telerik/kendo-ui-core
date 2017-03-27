@@ -37,4 +37,15 @@
         ok(!textbox._inputWrapper.hasClass(STATE_INVALID));
         equal(textbox._validationIcon.css("display"), "none");
     });
+
+
+    test("hidden invalid decoration on focusout.", function () {
+        var textbox = input.kendoNumericTextBox().data("kendoNumericTextBox");
+        textbox.element
+            .trigger(keyPressA)
+            .focusout();
+
+        ok(!textbox._inputWrapper.hasClass(STATE_INVALID));
+        equal(textbox._validationIcon.css("display"), "none");
+    });
 })();

@@ -24,6 +24,10 @@ The instructions for obtaining and building the Kendo UI Core scripts are listed
 
 Once the scripts are available and present in your project directory, the SystemJS configuration demonstrated in the sections below will pick and bundle them in your project.
 
+> Important
+>
+> We suggest using SystemJS with version `0.19.*`. With `0.20.*`, SystemJS [dropped the wildcard support](https://github.com/systemjs/systemjs/issues/1575) and changed entirely the script loading mechanism.
+
 ```tab-index.html
     <!DOCTYPE html>
     <html>

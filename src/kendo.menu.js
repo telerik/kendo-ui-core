@@ -885,7 +885,8 @@ var __meta__ = { // jshint ignore:line
         _mouseleave: function (e) {
             var that = this,
                 element = $(e.currentTarget),
-                hasChildren = (element.children(".k-animation-container").length || element.children(groupSelector).length);
+                hasChildren = (element.children(".k-animation-container").length || element.children(groupSelector).length),
+                $window = $(window);
 
             if (element.parentsUntil(".k-animation-container", ".k-list-container,.k-calendar-container")[0]) {
                 e.stopImmediatePropagation();
@@ -897,6 +898,14 @@ var __meta__ = { // jshint ignore:line
                 !contains(e.currentTarget, e.relatedTarget || e.target) && hasChildren &&
                 !contains(e.currentTarget, kendo._activeElement())) {
                     that.close(element);
+                    return;
+            }
+
+            // Detect if cursor goes outside the viewport of the browser
+            if( !e.toElement || e.clientX < 0 || e.clientY < 0 ||
+                e.clientY > $window.height() ||
+                e.clientX > $window.width()){
+                that.close(element);
             }
         },
 

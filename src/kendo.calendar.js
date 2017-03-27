@@ -63,6 +63,7 @@ var __meta__ = { // jshint ignore:line
         NEXTARROW = "_nextArrow",
         ARIA_DISABLED = "aria-disabled",
         ARIA_SELECTED = "aria-selected",
+        ARIA_LABEL = "aria-label",
         proxy = $.proxy,
         extend = $.extend,
         DATE = Date,
@@ -172,6 +173,9 @@ var __meta__ = { // jshint ignore:line
                     effects: "zoomIn",
                     duration: 400
                 }
+            },
+            messages: {
+                weekColumnHeader: ""
             }
         },
 
@@ -336,7 +340,8 @@ var __meta__ = { // jshint ignore:line
                     format: options.format,
                     culture: culture,
                     disableDates: options.disableDates,
-                    isWeekColumnVisible: options.weekNumber
+                    isWeekColumnVisible: options.weekNumber,
+                    messages: options.messages
                 }, that[currentView.name])));
 
                 addClassToViewContainer(to, currentView.name);
@@ -639,7 +644,7 @@ var __meta__ = { // jshint ignore:line
 
             if (cell) {
                 cell.removeAttr(ARIA_SELECTED)
-                .removeAttr("aria-label")
+                .removeAttr(ARIA_LABEL)
                 .removeAttr(ID);
             }
 
@@ -743,9 +748,9 @@ var __meta__ = { // jshint ignore:line
 
             if (!element.find(".k-header")[0]) {
                 element.html('<div class="k-header">' +
-                    '<a href="#" role="button" class="k-link k-nav-prev"><span class="k-icon k-i-arrow-60-left"></span></a>' +
+                    '<a href="#" role="button" class="k-link k-nav-prev" ' + ARIA_LABEL + '="Previous"><span class="k-icon k-i-arrow-60-left"></span></a>' +
                     '<a href="#" role="button" aria-live="assertive" aria-atomic="true" class="k-link k-nav-fast"></a>' +
-                    '<a href="#" role="button" class="k-link k-nav-next"><span class="k-icon k-i-arrow-60-right"></span></a>' +
+                    '<a href="#" role="button" class="k-link k-nav-next" ' + ARIA_LABEL + '="Next"><span class="k-icon k-i-arrow-60-right"></span></a>' +
                 '</div>');
             }
 
@@ -950,7 +955,7 @@ var __meta__ = { // jshint ignore:line
                 today = new DATE(),
                 html = '<table tabindex="0" role="grid" class="k-content" cellspacing="0" data-start="' + toDateString(start) + '"><thead><tr role="row">';
                 if (isWeekColumnVisible) {
-                    html += '<th scope="col" class="k-alt"></th>';
+                    html += '<th scope="col" class="k-alt">' + options.messages.weekColumnHeader + '</th>';
                 }
 
                 for (; idx < 7; idx++) {
