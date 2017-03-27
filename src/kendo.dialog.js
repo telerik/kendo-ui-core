@@ -674,7 +674,8 @@
                     wrapper = that.wrapper,
                     options = that.options,
                     titlebar = wrapper.children(KDIALOGTITLEBAR),
-                    title = titlebar.children(KDIALOGTITLE);
+                    title = titlebar.children(KDIALOGTITLE),
+                    encodedHtml = kendo.htmlEncode(html);
 
                 if (!arguments.length) {
                     return title.html();
@@ -689,10 +690,10 @@
                         title = titlebar.children(KDIALOGTITLE);
                         wrapper.removeClass(KTITLELESS);
                     }
-                    title.html(html);
+                    title.html(encodedHtml);
                 }
 
-                that.options.title = html;
+                that.options.title = encodedHtml;
 
                 return that;
             },
@@ -836,7 +837,7 @@
                 name: "Alert",
                 modal: true,
                 actions: [{
-                    text: "#= messages.okText #"
+                    text: "#: messages.okText #"
                 }]
             }
         });
@@ -859,13 +860,13 @@
                 name: "Confirm",
                 modal: true,
                 actions: [{
-                    text: "#= messages.okText #",
+                    text: "#: messages.okText #",
                     primary: true,
                     action: function(e) {
                         e.sender.result.resolve();
                     }
                 }, {
-                    text: "#= messages.cancel #",
+                    text: "#: messages.cancel #",
                     action: function(e) {
                         e.sender.result.reject();
                     }
@@ -910,7 +911,7 @@
                 modal: true,
                 value: "",
                 actions: [{
-                    text: "#= messages.okText #",
+                    text: "#: messages.okText #",
                     primary: true,
                     action: function(e) {
                         var sender = e.sender,
@@ -919,7 +920,7 @@
                         sender.result.resolve(value);
                     }
                 }, {
-                    text: "#= messages.cancel #",
+                    text: "#: messages.cancel #",
                     action: function(e) {
                         var sender = e.sender,
                             value = sender.wrapper.find(KTEXTBOX).val();
@@ -946,12 +947,12 @@
             action: template("<button type='button' class='k-button# if (data.primary) { # k-primary# } role='button' #'></button>"),
             titlebar: template(
                 "<div class='k-window-titlebar k-dialog-titlebar k-header'>" +
-                    "<span class='k-window-title k-dialog-title'>#= title #</span>" +
+                    "<span class='k-window-title k-dialog-title'>#: title #</span>" +
                     "<div class='k-window-actions k-dialog-actions' />" +
                 "</div>"
             ),
-            close: template("<a role='button' href='\\#' class='k-button k-bare k-button-icon k-window-action k-dialog-action k-dialog-close' title='#= messages.close #' aria-label='#= messages.close #' tabindex='-1'><span class='k-icon k-i-close'></span></a>"),
-            actionbar: template("<div class='k-button-group k-dialog-buttongroup k-dialog-button-layout-#= buttonLayout #' role='toolbar' />"),
+            close: template("<a role='button' href='\\#' class='k-button k-bare k-button-icon k-window-action k-dialog-action k-dialog-close' title='#: messages.close #' aria-label='#: messages.close #' tabindex='-1'><span class='k-icon k-i-close'></span></a>"),
+            actionbar: template("<div class='k-button-group k-dialog-buttongroup k-dialog-button-layout-#: buttonLayout #' role='toolbar' />"),
             overlay: "<div class='k-overlay' />",
             alertWrapper: template("<div class='k-widget k-window k-dialog' role='alertdialog' />"),
             alert: "<div />",
