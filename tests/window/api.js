@@ -42,7 +42,7 @@
     });
 
     test("title method gets and sets the title consistently", 2, function () {
-        var title = "&lt;foo&gt;",
+        var title = "foo",
             window = createWindow({ title: title }),
             oldTitle = window.title(),
             newTitle,
@@ -55,16 +55,16 @@
         equal(window.title(), title);
     });
 
-    test("title method and title property set once encoded string as once encoded", 2, function () {
-        var encodedString = kendo.htmlEncode("<script>var foo1 = 1;<\/script>"),
-            window = createWindow({ title: encodedString }),
+    test("title method and title property encode the title", 2, function () {
+        var stringValue = "<script>var foo1 = 1;<\/script>",
+            window = createWindow({ title: stringValue }),
             titleElement = $(".k-window-title", window.wrapper);
 
-        equal(titleElement.html(), encodedString);
+        equal(titleElement.html(), kendo.htmlEncode(stringValue));
 
-        window.title(encodedString);
+        window.title(stringValue);
 
-        equal(titleElement.html(), encodedString);
+        equal(titleElement.html(), kendo.htmlEncode(stringValue));
     });
 
     test("open of modal window adds overlay if it does not exist", function () {
