@@ -637,7 +637,7 @@
                         that._actions();
                         titleBar = wrapper.children(KWINDOWTITLEBAR);
                     } else {
-                        title.html(text);
+                        title.html(kendo.htmlEncode(text));
                     }
 
                     titleBarHeight = parseInt(outerHeight(titleBar), 10);
@@ -1287,7 +1287,7 @@
             ),
             titlebar: template(
                 "<div class='k-window-titlebar k-header'>&nbsp;" +
-                "<span class='k-window-title'>#= title #</span>" +
+                "<span class='k-window-title'>#: title #</span>" +
                 "<div class='k-window-actions' />" +
                 "</div>"
             ),
