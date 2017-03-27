@@ -1,5 +1,5 @@
 (function() {
-    module("initialization", {
+    module("api", {
         setup: function() {
             //
         },
@@ -75,7 +75,7 @@
     });
 
     test("title method gets and sets the title consistently", 2, function () {
-        var title = "&lt;foo&gt;",
+        var title = "foo",
             dialog = createDialog({ title: title });
 
         equal(dialog.title(), title);
@@ -83,16 +83,16 @@
         equal(dialog.title(), title);
     });
 
-    test("title method and title property set once encoded string as once encoded", 2, function () {
-        var encodedString = kendo.htmlEncode("<script>var foo1 = 1;<\/script>"),
-            dialog = createDialog({ title: encodedString }),
+    test("title method and title property encode the title", 2, function () {
+        var stringValue = "<script>var foo1 = 1;<\/script>",
+            dialog = createDialog({ title: stringValue }),
             titleElement = $(KDIALOGTITLE, dialog.wrapper);
 
-        equal(titleElement.html(), encodedString);
+        equal(titleElement.html(), kendo.htmlEncode(stringValue));
 
-        dialog.title(encodedString);
+        dialog.title(stringValue);
 
-        equal(titleElement.html(), encodedString);
+        equal(titleElement.html(), kendo.htmlEncode(stringValue));
     });
 
     test("set title to false removes the titlebar element", function() {
