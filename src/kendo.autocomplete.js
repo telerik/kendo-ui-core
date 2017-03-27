@@ -434,6 +434,7 @@ var __meta__ = { // jshint ignore:line
             that._renderFooter();
             that._renderNoData();
             that._toggleNoData(!data.length);
+            that._toggleHeader(!!data.length);
 
             that._resizePopup();
 

@@ -27,7 +27,8 @@ var __meta__ = { // jshint ignore:line
         FOCUSED = "k-state-focused",
         HOVER = "k-state-hover",
         LOADING = "k-i-loading",
-        HIDDENCLASS = "k-hidden",
+        HIDDENCLASS = "k-loading-hidden",
+        GROUPHEADER = ".k-group-header",
         OPEN = "open",
         CLOSE = "close",
         CASCADE = "cascade",
@@ -333,6 +334,11 @@ var __meta__ = { // jshint ignore:line
 
         _toggleNoData: function(show) {
             $(this.noData).toggle(show);
+        },
+
+        _toggleHeader: function(show) {
+            var groupHeader = this.listView.content.prev(GROUPHEADER);
+            groupHeader.toggle(show);
         },
 
         _footer: function() {
@@ -742,7 +748,7 @@ var __meta__ = { // jshint ignore:line
 
         _calculateGroupPadding: function(height) {
             var li = this.ul.children(".k-first:first");
-            var groupHeader = this.listView.content.prev(".k-group-header");
+            var groupHeader = this.listView.content.prev(GROUPHEADER);
             var padding = 0;
 
             if (groupHeader[0] && groupHeader[0].style.display !== "none") {
