@@ -902,7 +902,8 @@ var __meta__ = { // jshint ignore:line
             }
 
             // Detect if cursor goes outside the viewport of the browser
-            if( !e.toElement || e.clientX < 0 || e.clientY < 0 ||
+            if( (e.toElement == null && e.relatedTarget == null) ||
+                e.clientX < 0 || e.clientY < 0 ||
                 e.clientY > $window.height() ||
                 e.clientX > $window.width()){
                 that.close(element);
