@@ -5,7 +5,6 @@
     }
 
     var menu;
-    var assertOk = function() { ok(true); };
 
     module("menu api", {
         setup: function () {
@@ -39,7 +38,7 @@
                     '           <li>Sub Item 3</li>' +
                     '       </ul>' +
                     '   </li>' +
-                    '</ul>'
+                    '</ul>' 
             );
             menu = new kendo.ui.ContextMenu("#menu", { animation: false, target: "#target" });
         },
@@ -141,30 +140,7 @@
         menu.open();
     });
 
-    test('Overflow context menu - calling open raises open event', function () {
-        menu.options.scrollable = true;
-        menu._initOverflow({scrollable: true, orientation:"vertical"});
-
-        menu.bind("open", function () {
-            ok(true);
-        });
-
-        menu.open();
-    });
-
     test('calling close raises close event if popup is visible', function () {
-        menu.bind("close", function () {
-            ok(true);
-        });
-
-        menu.open();
-        menu.close();
-    });
-
-    test('Overflow context menu - calling close raises close event if popup is visible', function () {
-        menu.options.scrollable = true;
-        menu._initOverflow({scrollable: true, orientation:"vertical"});
-
         menu.bind("close", function () {
             ok(true);
         });
@@ -177,16 +153,6 @@
         menu.open();
 
         ok(menu.popup.visible());
-    });
-
-    test('Overflow context menu - calling open shows the popup', 2, function () {
-        menu.options.scrollable = true;
-        menu._initOverflow({scrollable: true, orientation:"vertical"});
-
-        menu.open();
-
-        ok(menu.popup.visible());
-        ok(menu.popup.element.height() > 0);
     });
 
     test('calling open with position shows the popup at that position', function () {
@@ -288,35 +254,6 @@
         ok($('#context-menu').parent().is("#menu-container"));
         contextMenu.destroy();
         menuContainer.remove();
-    });
-
-    test('overflow context menu - setOptions reattach events', 4, function() {
-        mockFunc(kendo.ui.ContextMenu.fn, "_detachMenuEventsHandlers", assertOk);
-        mockFunc(kendo.ui.ContextMenu.fn, "_destroyOverflow", assertOk);
-        mockFunc(kendo.ui.ContextMenu.fn, "_initOverflow", assertOk);
-        mockFunc(kendo.ui.ContextMenu.fn, "_attachMenuEventsHandlers", assertOk);
-
-        menu.setOptions({scrollable: true, orientation:"vertical"});
-
-        removeMocksIn(kendo.ui.ContextMenu.fn);
-    });
-
-    test('overflow context menu - remove oveflow', 1, function() {
-        menu.setOptions({scrollable: true, orientation:"vertical"});
-        menu.setOptions({scrollable: false, orientation:"vertical"});
-
-        menu.open();
-
-        ok(menu.popup.visible());
-    });
-
-    test('overflow context menu - destroy oveflow', 2, function() {
-        menu.setOptions({scrollable: true, orientation:"vertical"});
-        mockFunc(kendo.ui.ContextMenu.fn, "_detachMenuEventsHandlers", assertOk);
-
-        menu.destroy();
-
-        ok(!menu._overflowWrapper());
     });
 
 })();
