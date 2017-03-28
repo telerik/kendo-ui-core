@@ -290,6 +290,49 @@ var __meta__ = { // jshint ignore:line
             }
         },
 
+        _location: function(isFixed) {
+            var that = this,
+                element = that.element,
+                options = that.options,
+                wrapper,
+                anchor = $(options.anchor),
+                mobile = element[0] && element.hasClass("km-widget");
+
+            if (options.copyAnchorStyles) {
+                if (mobile && styles[0] == "font-size") {
+                    styles.shift();
+                }
+                element.css(kendo.getComputedStyles(anchor[0], styles));
+            }
+
+            that.wrapper = wrapper = kendo.wrap(element, options.autosize)
+                                    .css({
+                                        overflow: HIDDEN,
+                                        display: "block",
+                                        position: ABSOLUTE
+                                    });
+
+            if (support.mobileOS.android) {
+                wrapper.css(TRANSFORM, "translatez(0)"); // Android is VERY slow otherwise. Should be tested in other droids as well since it may cause blur.
+            }
+
+            wrapper.css(POSITION);
+
+            if ($(options.appendTo)[0] == document.body) {
+                wrapper.css(TOP, "-10000px");
+            }
+
+            that._position(isFixed || {});
+
+            var offset = wrapper.offset();
+            return {
+                width: kendo._outerWidth(wrapper),
+                height: kendo._outerHeight(wrapper),
+                left: offset.left,
+                top: offset.top
+            };
+        },
+
         _openAnimation: function() {
             var animation = extend(true, {}, this.options.animation.open);
             animation.effects = kendo.parseEffects(animation.effects, this.flipped);
@@ -671,9 +714,9 @@ var __meta__ = { // jshint ignore:line
             };
         }
     });
-    
+
     ui.plugin(Popup);
-    
+
     var tabKeyTrapNS = "kendoTabKeyTrap";
     var focusableNodesSelector = "a[href], area[href], input:not([disabled]), select:not([disabled]), textarea:not([disabled]), button:not([disabled]), iframe, object, embed, [tabindex], *[contenteditable]";
     var TabKeyTrap = Class.extend({
@@ -710,7 +753,7 @@ var __meta__ = { // jshint ignore:line
             });
             var focusableItemsCount = focusableItems.length;
             var lastIndex = focusableItemsCount - 1;
-            var focusedItemIndex = focusableItems.index(target);                             
+            var focusedItemIndex = focusableItems.index(target);
 
             if (e.shiftKey) {
                 if (focusedItemIndex === 0) {
@@ -734,7 +777,7 @@ var __meta__ = { // jshint ignore:line
     ui.Popup.TabKeyTrap = TabKeyTrap;
 })(window.kendo.jQuery);
 
-    
+
 
 return window.kendo;
 
