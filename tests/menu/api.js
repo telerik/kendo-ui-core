@@ -2,7 +2,7 @@
 var isRaised, isOpenRaised, isCloseRaised, isSelectRaised, selected;
 
 function getRootItem(index) {
-   return $('#menu').find('> .k-item > .k-link').eq(index)
+   return $('#menu').find('> .k-item > .k-link').eq(index);
 }
 
  //handlers
@@ -134,7 +134,48 @@ test('hovering root item opens it and raises open event', function() {
     jasmine.clock().uninstall();
 });
 
-test('leaving root item closes it and raises close event', 1, function() {
+asyncTest('overflow menu - hovering root item opens it and raises open event', function() {
+    menu._initOverflow({scrollable: true, orientation: "horizontal"});
+    var item = getRootItem(1).parent();
+    isOpenRaised = false;
+    menu._mouseenter({ currentTarget: item[0], delegateTarget: menu.element[0] });
+
+    setTimeout(function () {
+        ok(isOpenRaised);
+        start();
+    }, 1);
+});
+
+asyncTest('overflow menu - hovering item moves its popup outside menu', function() {
+    menu.setOptions({ scrollable: true, orientation: "horizontal" });
+    var item = getRootItem(1).parent();
+    menu._mouseenter({ currentTarget: item[0], delegateTarget: menu.element[0] });
+
+    setTimeout(function () {
+        ok(item.data("groupparent"));
+        ok(menu._overflowWrapper().children("div.k-animation-container").children("ul").data("group") === item.data("groupparent"));
+        start();
+    }, 1);
+});
+
+
+asyncTest('overflow menu - leaving root item closes it and raises close event', 1, function() {
+    menu.setOptions({ scrollable: true, orientation: "horizontal" });
+    var item = getRootItem(1).parent();
+
+    menu._mouseenter({ currentTarget: item[0], delegateTarget: menu.element[0] });
+
+    menu.bind("close", function() {
+        ok(true);
+        start();
+    });
+
+    setTimeout(function () {
+        menu._mouseleave({ currentTarget: item[0] });
+    }, 1);
+});
+
+asyncTest('leaving root item closes it and raises close event', 1, function() {
     jasmine.clock().install();
     var item = getRootItem(1).parent();
 
@@ -142,7 +183,8 @@ test('leaving root item closes it and raises close event', 1, function() {
 
     menu.bind("close", function() {
         ok(true);
-    })
+        start();
+    });
 
     jasmine.clock().tick();
     menu._mouseleave({ currentTarget: item[0] });
@@ -220,6 +262,17 @@ test('leaving item root outside viewport right direction closes it and raises cl
     jasmine.clock().uninstall();
 });
 
+test('overflow menu - clicking should raise select event', function() {
+    menu.setOptions({ scrollable: true, orientation: "horizontal" });
+    var link = getRootItem(2);
+
+    isSelectRaised = false;
+
+    link.trigger(CLICK);
+
+    ok(isSelectRaised);
+});
+
 test('clicking should raise select event', function() {
     var link = getRootItem(2);
 
@@ -267,6 +320,18 @@ asyncTest('open should open item even if disabled', function() {
 
     setTimeout(function () {
         ok(item.find('.k-group').is(":visible"));
+        start();
+    }, 1);
+});
+
+asyncTest('overflow menu - open should open item', function() {
+    menu.setOptions({ scrollable: true, orientation: "horizontal" });
+    var item = getRootItem(6).parent();
+
+    menu.open(item);
+
+    setTimeout(function () {
+        ok(menu._overflowWrapper().find('.k-group[data-group]').is(":visible"));
         start();
     }, 1);
 });
@@ -363,6 +428,72 @@ test('setOptions resets the dataSource object', function() {
 
     ok(m.element.find("li").text() == "Changed");
     m.destroy();
+});
+
+test('overflow menu - setOptions reinitialize overflow wrapper', function() {
+    var m = new kendo.ui.Menu("<div />");
+
+    m.setOptions({ scrollable: true, orientation: "horizontal" });
+    ok(m._overflowWrapper().is(".horizontal"));
+
+    m.setOptions({ scrollable: true, orientation: "vertical" });
+    ok(m._overflowWrapper().is(".vertical"));
+
+    m.destroy();
+});
+
+test('overflow menu - setOptions reattach events', 2, function() {
+    var m = new kendo.ui.Menu("<div />");
+
+    mockFunc(kendo.ui.Menu.fn, "_detachMenuEventsHandlers", function() { ok(true); });
+    mockFunc(kendo.ui.Menu.fn, "_attachMenuEventsHandlers", function() { ok(true); });
+
+    m.setOptions({ scrollable: true, orientation: "horizontal" });
+
+    removeMocksIn(kendo.ui.Menu.fn);
+
+    m.destroy();
+});
+
+asyncTest('overflow menu - opened popups should be inserted after the menu', function() {
+    menu.setOptions({ scrollable: true, orientation: "horizontal" });
+    var item = getRootItem(6).parent();
+
+    menu.open(item);
+
+    setTimeout(function () {
+        equal(menu.element.siblings(".k-animation-container").length, 1);
+        start();
+    }, 1);
+});
+
+asyncTest('overflow menu - opened popups should contains scroll buttons', function() {
+    menu.setOptions({ scrollable: true, orientation: "horizontal" });
+    var item = getRootItem(6).parent();
+
+    menu.open(item);
+
+    setTimeout(function () {
+        equal(menu.element.siblings(".k-menu-scroll-button").length, 2);
+        start();
+    }, 1);
+});
+
+asyncTest('overflow menu - turning off scrollable should return back the opened UL groups to their parent LI', function() {
+    menu.setOptions({ scrollable: true, orientation: "horizontal" });
+    var item = getRootItem(6).parent();
+
+    menu.open(item);
+
+    setTimeout(function () {
+        menu.close(item);
+        setTimeout(function () {
+            menu.setOptions({ scrollable: false });
+            notOk(menu._overflowWrapper());
+            equal(menu.element.siblings(".k-animation-container,.k-menu-scroll-button").length, 0);
+            start();
+        }, 1);
+    }, 1);
 });
 
 test("Element with class k-icon doesn't get removed in an item", function () {
