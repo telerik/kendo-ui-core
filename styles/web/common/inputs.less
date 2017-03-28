@@ -1108,3 +1108,33 @@ span.k-numerictextbox
         transform: translateY(-50%);
     }
 }
+
+.k-dateinput {
+    position: relative;
+    display: inline-block;
+    border-width: 0;
+
+    &.k-widget {
+        background-color: transparent;
+    }
+
+    ::-ms-clear {
+        display: none;
+        width : 0;
+        height: 0;
+    }
+
+    .k-i-warning {
+        display: none;
+        position: absolute;
+        right: 0;
+        top: 50%;
+        transform: translateY(-50%);
+        overflow: visible;
+    }
+    &.k-state-invalid {
+        .k-i-warning {
+            display: inline-block;
+        }
+    }
+}

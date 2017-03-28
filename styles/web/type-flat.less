@@ -2745,3 +2745,21 @@ html .km-pane-wrapper .km-widget,
         color: @input-validation-error;
     }
 }
+
+.k-dateinput.k-state-invalid {
+    .k-textbox {
+        color: @input-validation-error;
+        border-color: @input-validation-error;
+    }
+
+    .k-i-warning {
+        margin-left: 0;
+        margin-right: 0.6em;
+        color: @input-validation-error;
+    }
+}
+
+.k-rtl .k-dateinput .k-i-warning {
+    margin-right: 0;
+    margin-left: 0.6em;
+}
