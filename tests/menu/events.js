@@ -176,10 +176,10 @@ test("item select is triggered when items are loaded via dataSource", function()
                                 text: "Item 3",
                                 select: raiseCount,
                             }
-                        ]               
+                        ]
                     }
-                ]               
-            }                      
+                ]
+            }
         ]
     });
     var dataBoundMenu = $("#dataBoundMenu").data("kendoMenu");
@@ -190,6 +190,7 @@ test("item select is triggered when items are loaded via dataSource", function()
     });
 
     equal(selectCount, 3);
+    dataBoundMenu.destroy();
     menuDiv.remove();
 });
 
@@ -205,7 +206,7 @@ test("item select is triggered when items are loaded via append", function() {
     ]);
 
     $('.k-item', menu.element).last().children(".k-link").trigger(CLICK);
-    
+
     equal(selectCount, 1);
 });
 
@@ -222,7 +223,7 @@ test("item select is triggered when items are loaded via insertAfter", function(
     );
 
     $('.k-item', menu.element).last().children(".k-link").trigger(CLICK);
-    
+
     equal(selectCount, 1);
 });
 
@@ -239,7 +240,7 @@ test("item select is triggered when items are loaded via insertBefore", function
     );
 
     $('.k-item', menu.element).first().children(".k-link").trigger(CLICK);
-    
+
     equal(selectCount, 1);
 });
 
