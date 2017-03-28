@@ -66,6 +66,85 @@ Files selected one after the other will be uploaded in separate requests.
         });
     </script>
 
+### async.chunkSize `Number`
+
+When the property is set the selected files will be uploaded chunk by chunk with the declared size. 
+Each request sends a seperate file blob and additional string metadata to the server. 
+This metadata is a stringified JSON and contains chunkIndex, contentType, totalFileSize, totalChunks, uploadUid properties that
+allow validating and combining the file on the server side. The response also returns a JSON object with uploaded and fileUid properties
+that notifies the client which should be the next chunk.
+
+#### Example
+
+    <input type="file" name="files" id="photos" />
+    <script>
+        $("#photos").kendoUpload({
+            async: {
+                saveUrl: "http://my-app.localhost/save",
+                removeUrl: "http://my-app.localhost/remove",
+                chunkSize: 2000
+            }
+        });
+    </script>
+
+### async.concurrent `Boolean` *(default: false)*
+
+By default the selected files are uploaded one after another. When set to 'true' all 
+the selected files start uploading simultaneously.
+(The property is available when the [`async.chunkSize`](#configuration-async.chunkSize) is set.)
+
+#### Example
+
+    <input type="file" name="files" id="photos" />
+    <script>
+        $("#photos").kendoUpload({
+            async: {
+                saveUrl: "http://my-app.localhost/save",
+                removeUrl: "http://my-app.localhost/remove",
+                chunkSize: 2000,
+                concurrent: true
+            }
+        });
+    </script>
+
+### async.maxRetries `Number`*(default: 1)*
+
+It sets the number of attempts that will be performed if an upload is failing.
+The property is only used when the [`async.retryAfter`](#configuration-async.retryAfter) property is also defined.
+
+#### Example
+
+    <input type="file" name="files" id="photos" />
+    <script>
+        $("#photos").kendoUpload({
+            async: {
+                saveUrl: "http://my-app.localhost/save",
+                removeUrl: "http://my-app.localhost/remove",
+                chunkSize: 2000,
+                retryAfter: 300,
+                maxRetries: 4
+            }
+        });
+    </script>
+
+### async.retryAfter `Number`
+
+If the property is set the failed upload request will be repeated after the delared amout of ticks.
+
+#### Example
+
+    <input type="file" name="files" id="photos" />
+    <script>
+        $("#photos").kendoUpload({
+            async: {
+                saveUrl: "http://my-app.localhost/save",
+                removeUrl: "http://my-app.localhost/remove",
+                chunkSize: 2000,
+                retryAfter: 300
+            }
+        });
+    </script>
+
 ### async.removeField `String`*(default: "fileNames")*
 
 The name of the form field submitted to the Remove URL.
@@ -1245,6 +1324,35 @@ This is either the original XHR used for the operation or a stub containing:
 *   statusText
 Verify that this is an actual XHR before accessing any other fields.
 
+### pause
+
+Triggered when files are cleared by clicking on the "Pause" button that is visible if chunksize is set.
+
+#### Wire-up an event handler that triggered when a user clears selected files
+
+    <input type="file" name="files" id="photos" />
+    <script>
+        $("#photos").kendoUpload({
+            async: {
+                saveUrl: "http://my-app.localhost/save",
+                removeUrl: "http://my-app.localhost/remove",
+				autoUpload: false
+            },
+            pause: onPause
+        });
+
+        function onPause(e) {
+			// Optionally pause the clear operation by calling preventDefault method
+            e.preventDefault();
+        };
+    </script>
+
+#### Event Data
+
+##### e `Object`
+
+A custom event object. The event can be cancelled just like when using a standard jQuery event object via `e.preventDefault();`
+
 ### progress
 
 Fires when upload progress data is available.
@@ -1292,6 +1400,29 @@ List of the files that are being uploaded. Each file has:
 ##### percentComplete `Number`
 
 Upload progress (0 - 100)
+
+### resume
+
+Triggered when files are resumed by clicking on the "Resume" button that is visible if chunksize is set and a file upload is paused.
+
+#### Wire-up an event handler that triggered when a user resumes selected file
+
+    <input type="file" name="files" id="photos" />
+    <script>
+        $("#photos").kendoUpload({
+            async: {
+                saveUrl: "http://my-app.localhost/save",
+                removeUrl: "http://my-app.localhost/remove",
+				autoUpload: false
+            },
+            resume: onResume
+        });
+
+        function onResume(e) {
+			// Optionally resume the clear operation by calling preventDefault method
+            e.preventDefault();
+        };
+    </script>
 
 ### remove
 
