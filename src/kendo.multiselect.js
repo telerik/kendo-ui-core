@@ -1013,7 +1013,7 @@ var __meta__ = { // jshint ignore:line
         },
 
         _toggleCloseVisibility: function() {
-            if (this.value().length || this.input.val()) {
+            if (this.value().length || (this.input.val() && this.input.val() !== this.options.placeholder)) {
                 this._showClear();
             } else {
                 this._hideClear();
