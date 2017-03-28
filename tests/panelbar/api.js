@@ -205,6 +205,13 @@
         equal(item.find('> .k-group').css("display"), "none");
     });
 
+    test('expand method should toggle only one icon', function() {
+        new PanelBar(empty_panelbar, { dataSource: [ { text: "Item 1", items: [{ text: "Child 1", items: [{text:"SubChild"}] }] } ] });
+        empty_panelbar.data("kendoPanelBar").expand(empty_panelbar.find("li:first"));
+
+        equal(empty_panelbar.find(".k-panelbar-collapse").length, 1);
+    });
+
     test('dataSource should create items with the text specified', function () {
         new PanelBar(empty_panelbar, { dataSource: [ { text: "Item 1" } ] });
 

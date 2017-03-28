@@ -1508,7 +1508,7 @@ var __meta__ = { // jshint ignore:line
                 .attr(ARIA_EXPANDED, !visibility)
                 .attr(ARIA_HIDDEN, visibility)
                 .toggleClass(ACTIVECLASS, !visibility)
-                .find("> .k-link > .k-panelbar-collapse, .k-panelbar-expand")
+                .find("> .k-link > .k-panelbar-collapse,> .k-link > .k-panelbar-expand")
                     .toggleClass("k-i-arrow-n", !visibility)
                     .toggleClass("k-panelbar-collapse", !visibility)
                     .toggleClass("k-i-arrow-s", visibility)
