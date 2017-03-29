@@ -129,7 +129,7 @@ The property is only used when the [`async.retryAfter`](#configuration-async.ret
 
 ### async.retryAfter `Number`
 
-If the property is set the failed upload request will be repeated after the delared amout of ticks.
+If the property is set the failed upload request will be repeated after the declared amount of ticks.
 
 #### Example
 
