@@ -832,6 +832,24 @@
         equal(dropdownlist.value(), "0");
     });
 
+    test("widget sets option label value if complex object and TAB key", function() {
+        var dropdownlist = new DropDownList(input, {
+            dataValueField: "value",
+            dataTextField: "text",
+            dataSource: [{
+                text: "text", value: "value"
+            }],
+            optionLabel: {
+                text: "Any",
+                value: 0
+            }
+        });
+
+        dropdownlist.wrapper.focus().press(keys.TAB);
+
+        equal(dropdownlist.value(), "0");
+    });
+
     test("Selects first item if it is focused but not selected", 2, function() {
         var dropdownlist = new DropDownList(input, {
             dataSource: data,
