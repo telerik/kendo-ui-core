@@ -69,7 +69,7 @@ Files selected one after the other will be uploaded in separate requests.
 ### async.chunkSize `Number`
 
 When the property is set the selected files will be uploaded chunk by chunk with the declared size. 
-Each request sends a seperate file blob and additional string metadata to the server. 
+Each request sends a separate file blob and additional string metadata to the server. 
 This metadata is a stringified JSON and contains chunkIndex, contentType, totalFileSize, totalChunks, uploadUid properties that
 allow validating and combining the file on the server side. The response also returns a JSON object with uploaded and fileUid properties
 that notifies the client which should be the next chunk.
