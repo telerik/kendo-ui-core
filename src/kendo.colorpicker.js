@@ -876,6 +876,7 @@ var __meta__ = { // jshint ignore:line
                     click: function(e) {
                         selector.options._clearedColor = true;
                         that.value(null);
+                        that.element.val(null);
                         that._updateUI(null);
                         selector._colorAsText.val("");
                         selector._hsvHandle.css({
@@ -883,6 +884,8 @@ var __meta__ = { // jshint ignore:line
                             left: "0px"
                         });
                         selector._selectedColor.css(BACKGROUNDCOLOR, WHITE);
+
+                        that.trigger("change", { value: that.value() });
                         e.preventDefault();
                     }
                 });
