@@ -68,11 +68,7 @@ Files selected one after the other will be uploaded in separate requests.
 
 ### async.chunkSize `Number`
 
-When the property is set the selected files will be uploaded chunk by chunk with the declared size. 
-Each request sends a separate file blob and additional string metadata to the server. 
-This metadata is a stringified JSON and contains chunkIndex, contentType, totalFileSize, totalChunks, uploadUid properties that
-allow validating and combining the file on the server side. The response also returns a JSON object with uploaded and fileUid properties
-that notifies the client which should be the next chunk.
+When the property is set, the selected files are uploaded with the declared size chunk by chunk. Each request sends a separate file blob and additional string metadata to the server. This metadata is in a stringified JSON format and contains the `chunkIndex`, `contentType`, `totalFileSize`, `totalChunks`, `uploadUid` properties. These properties enable the validation and combination of the file on the server side. The response also returns a JSON object with the `uploaded` and `fileUid` properties, which notifies the client what is the next chunk.
 
 #### Example
 
@@ -89,9 +85,9 @@ that notifies the client which should be the next chunk.
 
 ### async.concurrent `Boolean` *(default: false)*
 
-By default the selected files are uploaded one after another. When set to 'true' all 
-the selected files start uploading simultaneously.
-(The property is available when the [`async.chunkSize`](#configuration-async.chunkSize) is set.)
+By default, the selected files are uploaded one after another. When set to `true`, all selected files start uploading simultaneously.
+
+This property is available when the [`async.chunkSize`](#configuration-async.chunkSize) is set.
 
 #### Example
 
@@ -109,7 +105,8 @@ the selected files start uploading simultaneously.
 
 ### async.maxRetries `Number`*(default: 1)*
 
-It sets the number of attempts that will be performed if an upload is failing.
+Sets the number of attempts that are performed if an upload is fails.
+
 The property is only used when the [`async.retryAfter`](#configuration-async.retryAfter) property is also defined.
 
 #### Example
@@ -129,7 +126,7 @@ The property is only used when the [`async.retryAfter`](#configuration-async.ret
 
 ### async.retryAfter `Number`
 
-If the property is set the failed upload request will be repeated after the declared amount of ticks.
+If you set the property, the failed upload request is repeated after the declared amount of ticks.
 
 #### Example
 
@@ -1326,7 +1323,7 @@ Verify that this is an actual XHR before accessing any other fields.
 
 ### pause
 
-Triggered when files are cleared by clicking on the "Pause" button that is visible if chunksize is set.
+Triggered when the files are cleared by clicking the **Pause** button. The button is visible if `chunksize` is set.
 
 #### Wire-up an event handler that triggered when a user clears selected files
 
@@ -1351,18 +1348,14 @@ Triggered when files are cleared by clicking on the "Pause" button that is visib
 
 ##### e `Object`
 
-A custom event object. The event can be cancelled just like when using a standard jQuery event object via `e.preventDefault();`
+A custom event object. The event can be canceled in the same way as when using a standard jQuery event object through `e.preventDefault();`.
 
 ### progress
 
-Fires when upload progress data is available.
+Fires when the data about the progress of the upload is available.
 
-
-Note: The progress event fires only when the upload is in
-[async mode](/web/upload/modes#asynchronous-mode).
-
-Note: The progress event is not fired in IE.
-See [Supported Browsers](/web/upload/supported-browsers)
+> * The `progress` event fires only when the upload is in [async mode](/web/upload/modes#asynchronous-mode).
+> * The `progress` event is not fired in IE. For more information, refer to the article on [supported browsers](/web/upload/supported-browsers).
 
 #### Example
 
@@ -1388,24 +1381,25 @@ See [Supported Browsers](/web/upload/supported-browsers)
 
 ##### e.files `Array`
 
-List of the files that are being uploaded. Each file has:
+Lists the files that are being uploaded.
 
-
-*   name
-*   extension - the file extension
-        including the leading dot - ".jpg", ".png", etc.
-*   size - the file size in bytes (null if not available)
-*   uid - the unique identifier of the file or batch of files
+Each file has:
+* name
+* extension - the file extension including the leading dot - `.jpg`, `.png`, and so on.
+* size - the file size in bytes (null if not available)
+* uid - the unique identifier of the file or batch of files
 
 ##### percentComplete `Number`
 
-Upload progress (0 - 100)
+Defines the progress of the upload (0 - 100).
 
 ### resume
 
-Triggered when files are resumed by clicking on the "Resume" button that is visible if chunksize is set and a file upload is paused.
+Fires when the files are resumed through clicking the **Resume** button. The button is visible if `chunksize` is set and the file upload is paused.
 
-#### Wire-up an event handler that triggered when a user resumes selected file
+The following example demonstrates how to wire up an event handler that is triggered when a user resumes a selected file.
+
+#### Example
 
     <input type="file" name="files" id="photos" />
     <script>
@@ -1426,8 +1420,7 @@ Triggered when files are resumed by clicking on the "Resume" button that is visi
 
 ### remove
 
-Fires when an uploaded file is about to be removed.
-Cancelling the event will prevent the remove.
+Fires when an uploaded file is about to be removed. If the event is canceled, the remove operation is prevented.
 
 #### Example
 
@@ -1455,8 +1448,7 @@ Cancelling the event will prevent the remove.
 
 ##### e.files `Array`
 
-List of the files that were uploaded or removed . Each file has:
-
+Lists the files that were uploaded or removed. Each file has:
 
 *   name
 *   extension - the file extension
@@ -1466,8 +1458,7 @@ List of the files that were uploaded or removed . Each file has:
 
 ##### data `Object`
 
-Optional object that will be
-sent to the remove handler in the form of key/value pairs.
+Optional object that is sent to the remove handler in the form of key/value pairs.
 
 ### select
 

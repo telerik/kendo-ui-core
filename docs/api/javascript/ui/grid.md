@@ -504,7 +504,7 @@ The JavaScript function executed when the cell/row is about to be opened for edi
     $("#grid").kendoGrid({
       columns: [
         { field: "name" },
-        { 
+        {
           field: "salary",
 		      editable: function (dataItem) {
               return dataItem.name === "Jane";
@@ -4905,7 +4905,7 @@ Defines the text of the "noRecords" option that is rendered when no records are 
 
 ### messages.expandCollapseColumnHeader `String` *(default: "")*
 
-Allows customization of the text in column header for expand/collapse columns. Set the value to make the widget compliant with web accessibility standards.
+Allows the customization of the text in the column header for the expand or collapse columns. Sets the value to make the widget compliant with the web accessibility standards.
 
 #### Example
 
@@ -7750,7 +7750,7 @@ Gets an array that holds the id field values of the selected rows.
     });
     var grid = $("#grid").data("kendoGrid");
     grid.select("tr:eq(2)");
-    console.log(grid.selectedKeyNames()); // displays the id field value for the selected row 
+    console.log(grid.selectedKeyNames()); // displays the id field value for the selected row
     </script>    
 
 #### Example - select a row by Model UID
