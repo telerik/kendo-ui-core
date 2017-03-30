@@ -1,3 +1,4 @@
+/* globals createInput */
 (function() {
     var MaskedTextBox = kendo.ui.MaskedTextBox,
         input;

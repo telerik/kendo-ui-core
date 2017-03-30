@@ -1,57 +1,17 @@
+/* globals createInput, updateInputAt, updateInput, createMasked, stub, deleteContent */
 (function() {
     var MaskedTextBox = kendo.ui.MaskedTextBox,
+        caret = kendo.caret,
         input;
 
     module("kendo.ui.MaskedTextBox interaction", {
         setup: function() {
-            input = $("<input />").appendTo(QUnit.fixture);
+            input = createInput();
         },
         teardown: function() {
             kendo.destroy(QUnit.fixture);
         }
     });
-
-    function caret(element, start, end) {
-        var range;
-        var isPosition = start !== undefined;
-
-        if (end === undefined) {
-            end = start;
-        }
-
-        if (element.selectionStart !== undefined) {
-            if (isPosition) {
-                element.focus();
-                element.setSelectionRange(start, end);
-            } else {
-                start = [element.selectionStart, element.selectionEnd];
-            }
-        } else if (document.selection) {
-            if ($(element).is(":visible")) {
-                element.focus();
-            }
-            range = document.selection.createRange();
-            if (isPosition) {
-                range.collapse(true);
-                range.moveStart("character", start);
-                range.moveEnd("character", end - start);
-                range.select();
-            } else {
-                var rangeElement = element.createTextRange(),
-                    rangeDuplicated = rangeElement.duplicate(),
-                    selectionStart, selectionEnd;
-
-                    rangeElement.moveToBookmark(range.getBookmark());
-                    rangeDuplicated.setEndPoint('EndToStart', rangeElement);
-                    selectionStart = rangeDuplicated.text.length;
-                    selectionEnd = selectionStart + rangeElement.text.length;
-
-                start = [selectionStart, selectionEnd];
-            }
-        }
-
-        return start;
-    }
 
     asyncTest("MaskedTextBox shows empty mask on focus", 1, function() {
         var maskedtextbox = new MaskedTextBox(input, {
@@ -62,14 +22,12 @@
 
         setTimeout(function() {
             start();
-            equal(input.val(), "_-_");
+            equal(maskedtextbox.value(), "_-_");
         });
     });
 
     asyncTest("MaskedTextBox positions caret in the beginning", 2, function() {
-        var maskedtextbox = new MaskedTextBox(input, {
-            mask: "0-0"
-        });
+        createMasked(input, "0-0");
 
         input.focus();
 
@@ -123,7 +81,7 @@
         setTimeout(function() {
             start();
             input.blur();
-            equal(input.val(), "");
+            equal(maskedtextbox.value(), "");
         });
     });
 
@@ -277,7 +235,7 @@
         notEqual(input[0], kendo._activeElement());
     });
 
-    test("Add content in 'input' event; Windows Phone scenario", function() {
+    test("Add content in 'input' event when input is focused", function() {
         var masked = new MaskedTextBox(input, {
             mask: "00.00",
             promptChar: "_"
@@ -294,61 +252,103 @@
         equal(masked.value(), "12.__");
     });
 
+    test("Change value in `input` event when input element is focused", function() {
+        var masked = new MaskedTextBox(input, {
+            mask: "00.00"
+        });
+
+        stub(masked, { inputChange: masked.inputChange });
+
+        input[0].focus();
+        input.trigger("input");
+        input.trigger("propetychange");
+
+        equal(masked.calls("inputChange"), 1);
+    });
+
+    test("Prevent change in `input` event when input element is not focused", function() {
+        var masked = new MaskedTextBox(input, {
+            mask: "00.00"
+        });
+
+        stub(masked, { inputChange: masked.inputChange });
+
+        input.trigger("input");
+        input.trigger("propetychange");
+
+        equal(masked.calls("inputChange"), 0);
+    });
+
     test("MaskedTextBox value is not undefined when clearPromptChar is true and empty mask is used", 1, function() {
-        input.attr("value","123")
+        input.attr("value","123");
         var maskedtextbox = new MaskedTextBox(input, {
             clearPromptChar: true
         });
 
         input.focus();
 
-        equal(input.val(), "123");
+        equal(maskedtextbox.value(), "123");
     });
 
-    asyncTest("MaskTextBox will not shift character if it is not correct", 1, function() {
+    test("MaskTextBox will not shift character if it is not correct", 1, function() {
         var maskedtextbox = new MaskedTextBox(input, {
             mask: "0ba",
             rules: {
-                "b": function (char) {
-                    return (char === "0" || char === "1" || char === "2" ||
-                            char === "3" || char === "4" || char === "5");
+                "b": function (chr) {
+                    return (chr === "0" || chr === "1" || chr === "2" ||
+                            chr === "3" || chr === "4" || chr === "5");
                 },
-                "a": function (char) {
-                    return (char === "0" || char === "1" || char === "2");
+                "a": function (chr) {
+                    return (chr === "0" || chr === "1" || chr === "2");
                 }
             },
             value:"9__"
         });
 
-        input.focus();
-        setTimeout(function() {
-            start();
-            caret(input[0], 0);
-            input.trigger({
-                type: "keypress",
-                which: 54
-                });
+        updateInput(maskedtextbox, "6");
 
-            equal(input.val(), "6__");
-        });
+        equal(input.val(), "6__");
     });
 
-    asyncTest("Entering invalid symbol does not change the value", 1, function() {
-        var maskedtextbox = new MaskedTextBox(input, {
-            mask: "0-000",
-            value: "0-__3"
-        });
+    test("Entering invalid symbol does not change the value", 1, function() {
+        var masked = createMasked(input, "0-000");
+        masked.value("0-__3");
 
-        input.focus();
-        setTimeout(function() {
-            start();
-            caret(input[0], 2);
-            input.trigger({
-                type: "keypress",
-                which: 103
-                });
+        updateInputAt(masked, "g", 2);
 
-            equal(input.val(), "0-__3");
-        });
+        equal(input.val(), "0-__3");
     });
+
+    test("Drop does not change content when deleting", function() {
+        var masked = createMasked(input, "0-000");
+        masked.value("1");
+        stub(masked, { _mask: masked._mask });
+
+        masked.element.trigger("drop");
+        deleteContent(masked, 0);
+
+        equal(masked.calls("_mask"), 0);
+    });
+
+    test("Drop does not change content when deleting", function() {
+        var masked = createMasked(input, "0-000");
+        masked.value("1");
+
+        masked.element.trigger("drop");
+        updateInput(masked, "2");
+
+        equal(masked.value(), "2-1__");
+    });
+
+    test("Detach input event for $angular scenario", function() {
+        input.on("input", function() { ok(false); });
+        var masked = createMasked(input, "0-000");
+        masked.options.$angular = true;
+
+        masked.setOptions({ mask: "0-0" });
+        input.trigger("input");
+
+        ok(true);
+    });
+
 })();

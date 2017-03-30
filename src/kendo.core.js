@@ -3830,7 +3830,7 @@ function pad(number, digits, end) {
             return 1 + Math.floor(days / 7);
         }
 
-        function weekInYear(date, weekStartDay){   
+        function weekInYear(date, weekStartDay){
             var prevWeekDate = addDays(date, -7);
             var nextWeekDate = addDays(date, 7);
 
@@ -4137,7 +4137,8 @@ function pad(number, digits, end) {
             if (element.selectionStart !== undefined) {
                 if (isPosition) {
                     element.focus();
-                    if(support.mobileOS.wp) {// without the timeout the caret is at the end of the input
+                    var mobile = support.mobileOS;
+                    if(mobile.wp || mobile.android) {// without the timeout the caret is at the end of the input
                         setTimeout(function() { element.setSelectionRange(start, end); }, 0);
                     }
                     else {

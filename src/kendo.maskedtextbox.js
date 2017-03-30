@@ -11,22 +11,43 @@ var __meta__ = { // jshint ignore:line
 };
 
 (function($, undefined) {
-    var kendo = window.kendo;
+    var global = window;
+    var min = global.Math.min;
+    var kendo = global.kendo;
     var caret = kendo.caret;
     var keys = kendo.keys;
     var ui = kendo.ui;
     var Widget = ui.Widget;
-    var ns = ".kendoMaskedTextBox";
+    var NS = ".kendoMaskedTextBox";
     var proxy = $.proxy;
     var setTimeout = window.setTimeout;
 
-    var INPUT_EVENT_NAME = (kendo.support.propertyChangeEvent ? "propertychange" : "input") + ns;
     var STATEDISABLED = "k-state-disabled";
     var STATEINVALID = "k-state-invalid";
     var DISABLED = "disabled";
     var READONLY = "readonly";
     var CHANGE = "change";
+    var MOUSEUP = "mouseup";
+    var DROP = "drop";
+    var KEYDOWN = "keydown";
+    var PASTE = "paste";
+    var INPUT = "input";
 
+    function ns(name) { return name + NS; }
+
+    var INPUT_EVENT_NAME = ns(kendo.support.propertyChangeEvent ? "propertychange" : INPUT);
+
+    function stringDiffStart(str1, str2) {
+        var i = 0;
+        while (i < str2.length) {
+            if (str1[i] !== str2[i]) {
+                break;
+            }
+            i++;
+        }
+
+        return i;
+    }
     var MaskedTextBox = Widget.extend({
         init: function(element, options) {
             var that = this;
@@ -46,7 +67,7 @@ var __meta__ = { // jshint ignore:line
             that.element
                 .addClass("k-textbox")
                 .attr("autocomplete", "off")
-                .on("focus" + ns, function() {
+                .on("focus" + NS, function() {
                     var value = DOMElement.value;
 
                     if (!value) {
@@ -61,7 +82,7 @@ var __meta__ = { // jshint ignore:line
                         caret(element, 0, value ? that._maskLength : 0);
                     });
                 })
-                .on("focusout" + ns, function() {
+                .on("focusout" + NS, function() {
                     var value = element.val();
 
                     clearTimeout(that._timeoutId);
@@ -137,7 +158,7 @@ var __meta__ = { // jshint ignore:line
         destroy: function() {
             var that = this;
 
-            that.element.off(ns);
+            that.element.off(NS);
 
             if (that._formElement) {
                 that._formElement.off("reset", that._resetHandler);
@@ -222,20 +243,30 @@ var __meta__ = { // jshint ignore:line
             var that = this;
 
             if (that._maskLength) {
+                if(that.options.$angular) {//detach "input" event in angular scenario to keep the ng-model consistent and updated only when the change event of the textbox is raised.
+                    that.element.off(INPUT);
+                }
                 that.element
-                    .on("keydown" + ns, proxy(that._keydown, that))
-                    .on("keypress" + ns, proxy(that._keypress, that))
-                    .on("paste" + ns, proxy(that._paste, that))
-                    .on(INPUT_EVENT_NAME, proxy(that._propertyChange, that));
+                    .on(ns(KEYDOWN), proxy(that._keydown, that))
+                    .on(ns(DROP), proxy(that._drop, that))
+                    .on(ns(CHANGE), proxy(that._trackChange, that))
+                    .on(INPUT_EVENT_NAME, proxy(that._inputHandler, that));
+
+
+                if (kendo.support.browser.msie) {
+                    var version = kendo.support.browser.version;
+                    if (version > 8 && version < 11) {
+                        var events = [ns(MOUSEUP), ns(DROP), ns(KEYDOWN), ns(PASTE)].join(" ");
+                        that.element.on(events, proxy(that._legacyIEInputHandler, that));
+                    }
+                }
             }
         },
 
         _unbindInput: function() {
-            this.element
-                .off("keydown" + ns)
-                .off("keypress" + ns)
-                .off("paste" + ns)
-                .off(INPUT_EVENT_NAME);
+            var events = [INPUT_EVENT_NAME, ns(KEYDOWN), ns(MOUSEUP), ns(DROP), ns(PASTE)].join(" ");
+
+            this.element.off(events);
         },
 
         _editable: function(options) {
@@ -269,59 +300,100 @@ var __meta__ = { // jshint ignore:line
                 that.trigger(CHANGE);
                 that.element.trigger(CHANGE);
             }
+            else if (value === "" && that.__changing) {//ensure change is raised when empty value (mask is stripped from input content) for consistent ngjs model update
+                that.element.trigger(CHANGE);
+            }
         },
 
-        _propertyChange: function() {
+        inputChange: function(backward) {
             var that = this;
+            var old = that._old;
             var element = that.element[0];
             var value = element.value;
-            var unmasked;
-            var start;
+            var selection = caret(element);
+            var cursor = selection[1];
+            var lengthDiff = value.length - old.length;
+            var mobile = kendo.support.mobileOS;
 
-            if (kendo._activeElement() !== element) {
+            if (that.__dropping && lengthDiff < 0) {//dropping in same input on WebKit is raised once for the removal phase and once for the adding phase
                 return;
             }
 
-            if (value !== that._old && !that._pasting) {
-                var d = value.length - that._old.length;
-                if(d > 0)  { //typing on a windows phone (lack of keypress; should handle input in the "input" event)
-                    var selection = caret(element);
-
-                    var next = selection[0];
-                    start = next - d;
-                    var content = value.substr(start, d);
-                    element.value = value.substring(0, start) + value.substring(next);
-
-                    this._mask(start, start, content);
-                }
-                else {
-                    start = caret(element)[0];
-                    unmasked = that._unmask(value.substring(start), start);
-
-                    element.value = that._old = value.substring(0, start) + that._emptyMask.substring(start);
-
-                    that._mask(start, start, unmasked);
-                    caret(element, start);
-                }
+            if (lengthDiff === -1 && mobile.android && mobile.browser === "chrome") {
+                backward = true;
             }
+
+            var contentStart = min(cursor, stringDiffStart(value, old));
+            var content = value.substring(contentStart, cursor);
+
+            element.value = value.substring(0, contentStart) + that._emptyMask.substring(contentStart);
+
+            var caretPos = that._mask(contentStart, cursor, content);
+            var endContent = that._trimStartPromptChars(value.substring(cursor), min(lengthDiff, caretPos - contentStart));
+
+            var unmasked = that._unmask(endContent, old.length - endContent.length);
+            that._mask(caretPos, caretPos, unmasked);
+
+            if (backward) {
+                caretPos = that._findCaretPosBackwards(contentStart);
+            }
+
+            caret(element, caretPos);
+
+            //clean-up flags
+            that.__dropping = false;
         },
 
-        _paste: function(e) {
+        _trimStartPromptChars: function(content, count) {
+            var promptChar = this.options.promptChar;
+
+            while (count-- > 0 && content.indexOf(promptChar) === 0) {
+                content = content.substring(1);
+            }
+
+            return content;
+        },
+
+        _findCaretPosBackwards: function(pos) {
+            var caretStart = this._find(pos, true);
+            if (caretStart < pos) {
+                caretStart += 1;
+            }
+
+            return caretStart;
+        },
+
+        _inputHandler: function() {
+            if (kendo._activeElement() !== this.element[0]) {
+                return;
+            }
+
+            this.inputChange(this.__backward);
+        },
+
+        _legacyIEInputHandler: function(e) {
             var that = this;
-            var element = e.target;
-            var position = caret(element);
-            var start = position[0];
-            var end = position[1];
+            var input = that.element[0];
+            var value = input.value;
+            var type = e.type;
 
-            var unmasked = that._unmask(element.value.substring(end), end);
-
-            that._pasting = true;
+            that.__pasting = (type === "paste");
 
             setTimeout(function() {
-                var pasted = element.value.substring(start, caret(element)[0]);
-                that._insertString(start, end, pasted, unmasked);
-                that._pasting = false;
+                if(type === "mouseup" && that.__pasting) {
+                    return;
+                }
+                if (input.value !== value) {
+                    that.inputChange(that.__backward);
+                }
             });
+        },
+
+        _trackChange: function() {
+            var that = this;
+
+            that.__changing = true;
+            setTimeout(function() { that.__changing = false; });
         },
 
         _form: function() {
@@ -349,74 +421,18 @@ var __meta__ = { // jshint ignore:line
             }
         },
 
-        _insertString : function(start, end, insertString, unmasked, trimPrompt) {
-            var that = this;
-            var element = that.element[0];
-            var value = element.value;
-
-            element.value = that._old = value.substring(0, start) + that._emptyMask.substring(start);
-            that._mask(start, start, insertString);
-
-            if(trimPrompt && start !== caret(element)[0] && unmasked[0] === that.options.promptChar) {
-                unmasked = unmasked.substring(1);
-            }
-
-            start = caret(element)[0];
-            that._mask(start, start, unmasked);
-            caret(element, start);
-        },
-
         _keydown: function(e) {
             var key = e.keyCode;
-            var element = this.element[0];
-            var selection = caret(element);
-            var start = selection[0];
-            var end = selection[1];
-            var placeholder;
 
-            var backward = key === keys.BACKSPACE;
+            this.__backward = key === keys.BACKSPACE;
 
-            if (backward || key === keys.DELETE) {
-                if (start === end) {
-                    if (backward) {
-                        start -= 1;
-                    } else {
-                        end += 1;
-                    }
-
-                    placeholder = this._find(start, backward);
-                }
-
-                if (placeholder !== undefined && placeholder !== start) {
-                    if (backward) {
-                        placeholder += 1;
-                    }
-
-                    caret(element, placeholder);
-                } else if (start > -1) {
-                    this._mask(start, end, "", backward);
-                }
-
-                e.preventDefault();
-            } else if (key === keys.ENTER) {
+            if (key === keys.ENTER) {
                 this._change();
             }
         },
 
-        _keypress: function(e) {
-            if (e.which === 0 || e.metaKey || e.ctrlKey || e.keyCode === keys.ENTER) {
-                return;
-            }
-
-            var character = String.fromCharCode(e.which);
-            var selection = caret(this.element);
-            var unmasked = this._unmask(this.element.val().substring(selection[1]), selection[1]);
-
-            this._insertString(selection[0], selection[1], character, unmasked, true);
-            
-            if (e.keyCode === keys.BACKSPACE || character) {
-                e.preventDefault();
-            }
+        _drop: function() {
+            this.__dropping = true;
         },
 
         _find: function(idx, backward) {
@@ -486,14 +502,16 @@ var __meta__ = { // jshint ignore:line
 
                 caret(element, idx);
             }
+
+            return idx;
         },
 
         _unmask: function(value, idx) {
             if (!value) {
                 return "";
             }
-            
-            if(this._unmaskedValue === value) {
+
+            if (this._unmaskedValue === value) {
                 return this._unmaskedValue;
             }
             value = (value + "").split("");

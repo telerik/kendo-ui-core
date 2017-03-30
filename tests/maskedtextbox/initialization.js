@@ -1,27 +1,11 @@
+/* globals updateInput, createInput */
 (function() {
     var MaskedTextBox = kendo.ui.MaskedTextBox,
         input;
 
     module("kendo.ui.MaskedTextBox initialization", {
         setup: function() {
-            input = $("<input />").appendTo(QUnit.fixture);
-
-            $.fn.pressKey = function(key, eventName, options) {
-                if (typeof key === "string") {
-                    key = key.charCodeAt(0);
-                }
-
-                if ($.isPlainObject(eventName)) {
-                    options = eventName;
-                    eventName = "keypress";
-                }
-
-                if (!eventName) {
-                    eventName = "keypress";
-                }
-
-                return this.trigger($.extend({ type: eventName, keyCode: key, which: key }, options) );
-            }
+            input = createInput();
         },
         teardown: function() {
             kendo.destroy(QUnit.fixture);
@@ -80,9 +64,7 @@
             }
         });
 
-        input.focus();
-        kendo.caret(input[0], 0);
-        input.pressKey("+");
+        updateInput(maskedtextbox, "+");
 
         equal(input.val(), "+-_");
     });
