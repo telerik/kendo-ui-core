@@ -16,7 +16,8 @@
 
         return items;
     }
-
+    console.warn("Module skipped VirtualList AngularJS integration");
+    return;
     module("VirtualList AngularJS integration", {
         setup: function() {
             container = "<div id='container' kendo-virtual-list k-options='virtualOptions'></div>";

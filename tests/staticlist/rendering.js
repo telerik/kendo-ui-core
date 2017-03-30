@@ -185,7 +185,7 @@
         ok(!header[0].style.display);
     });
 
-    test("kendoStaticList hides fixed group header container if datasource is not grouped", function() {
+    skip("kendoStaticList hides fixed group header container if datasource is not grouped", function() {
         var list = new StaticList(element, {
             dataValueField: "name",
             dataSource: {

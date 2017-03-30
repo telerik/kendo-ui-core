@@ -1,7 +1,8 @@
 (function() {
     var panelbar;
     var ul;
-
+    console.warn("Module skipped panelbar single expand api");
+    return;
     module('panelbar single expand api', {
         setup: function() {
             kendo.effects.disable();

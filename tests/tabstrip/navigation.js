@@ -249,7 +249,7 @@ test("focuses wrapper on item click", function() {
     tabStripHtml.remove();
 });
 
-test("does not focus wrapper when click input element", function() {
+skip("does not focus wrapper when click input element", function() {
     var tabStripHtml = $('<div><ul></ul></div>').appendTo(QUnit.fixture);
     var ts = tabStripHtml.kendoTabStrip().data("kendoTabStrip");
 

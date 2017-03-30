@@ -90,7 +90,7 @@ test("binding visible to false hides the menu", function() {
     ok(menu.wrapper.css("display") == "none", "menu is not visible");
 });
 
-test("binding invisible to true hides the menu", function() {
+skip("binding invisible to true hides the menu", function() {
     dom = $('<div data-role="menu" data-bind="invisible: invisible"></div>');
 
     kendo.bind(dom, { invisible: true });
@@ -100,7 +100,7 @@ test("binding invisible to true hides the menu", function() {
     ok(menu.wrapper.css("display") == "none", "menu is invisible");
 });
 
-test("binding invisible to false shows the menu", function() {
+skip("binding invisible to false shows the menu", function() {
     dom = $('<div data-role="menu" data-bind="invisible: invisible"></div>');
 
     kendo.bind(dom, { invisible: false });

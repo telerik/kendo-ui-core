@@ -1,7 +1,8 @@
 (function () {
     var panelbar;
     var ul;
-
+    console.warn("Module skipped panelbar ajax loading");
+    return;
     module("panelbar ajax loading", {
         setup: function() {
             kendo.effects.disable();

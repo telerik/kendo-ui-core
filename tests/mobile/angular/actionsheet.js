@@ -7,7 +7,7 @@
     });
 
 
-    ngTest("opens when button is tapped", 1,
+    skip("opens when button is tapped", 1,
     function() {
         var markup = '<div kendo-mobile-application>' +
         '<kendo-mobile-view>' +
@@ -22,7 +22,7 @@
         equal(QUnit.fixture.find(".km-shim").css("display"), "block");
     });
 
-    ngTest("action resolves to scope member", 1,
+    skip("action resolves to scope member", 1,
     function() {
         angular.module("kendo.tests").controller("actionsheet2", function($scope) {
             $scope.scopeAction = function(e) {
@@ -43,7 +43,7 @@
         tap(QUnit.fixture.find("#item"));
     });
 
-    ngTest("context reaches handler", 1,
+    skip("context reaches handler", 1,
     function() {
         angular.module("kendo.tests").controller("actionsheet2", function($scope) {
             $scope.scopeAction = function(e) {

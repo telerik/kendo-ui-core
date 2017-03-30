@@ -500,7 +500,7 @@
         }
     });
 
-    test("appends window to given container", function() {
+    skip("appends window to given container", function() {
         var dialog = createWindow({
             appendTo: "form#myForm"
         });

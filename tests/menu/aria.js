@@ -104,7 +104,7 @@ test("aria-activedescendant is added to the wrapper when item is focused", funct
     ok(menu.find("li#" + menu.data("kendoMenu")._ariaId).length);
 });
 
-test("aria-activedescendant is added to the wrapper when item is focused", function() {
+skip("aria-activedescendant is added to the wrapper when item is focused", function() {
     menu = $("<ul id=\"foo\"><li id=\"bar\">foo</li></ul>")
         .appendTo(QUnit.fixture)
         .kendoMenu();

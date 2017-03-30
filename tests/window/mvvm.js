@@ -149,7 +149,7 @@
         equal(window.options.content.url, "echo");
     });
 
-    test("set appendTo through data attribute", function() {
+    skip("set appendTo through data attribute", function() {
         var dom = $('<div data-role="window" data-append-to="#bar" /><div id="bar" />').appendTo(QUnit.fixture);
 
         kendo.bind(dom, {});

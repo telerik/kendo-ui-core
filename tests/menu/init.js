@@ -1,5 +1,6 @@
 (function() {
-
+    console.warn("Module skipped init");
+    return;
 function getRootItem(index) {
    return $('#menu').find('> .k-item > .k-link').eq(index)
 }

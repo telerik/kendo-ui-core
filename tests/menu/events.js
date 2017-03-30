@@ -1,5 +1,6 @@
 (function() {
-
+    console.warn("Module skipped events");
+    return;
 function onSelect() {
     isRaised = true;
 }

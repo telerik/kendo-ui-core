@@ -16,7 +16,7 @@
         ok(element.getKendoMobileModalView());
     });
 
-    ngTest("accepts attribute options", 2,
+    skip("accepts attribute options", 2,
     function() {
         QUnit.fixture.html("<div kendo-mobile-application id='app'>" +
             "<kendo-mobile-view id='home'>Home</kendo-mobile-view>" +
@@ -29,7 +29,7 @@
         ok(modalview.options.height, 800);
     });
 
-    ngTest("can be opened from a button with k-rel='modalview'", 1,
+    skip("can be opened from a button with k-rel='modalview'", 1,
     function() {
         QUnit.fixture.html("<div kendo-mobile-application id='app'>" +
             "<kendo-mobile-view id='home'>" +
@@ -48,7 +48,7 @@
         ok(modalview.element.is(":visible"));
     });
 
-    ngTest("works with a ng-controller", 1,
+    skip("works with a ng-controller", 1,
     function() {
         angular.module('kendo.tests').controller('foo', function($scope) {
             $scope.foo = "Foo";
@@ -82,7 +82,7 @@
         modalview.trigger("open");
     });
 
-    ngTest("controller is invoked every time modal view is opened", 2,
+    skip("controller is invoked every time modal view is opened", 2,
     function() {
         angular.module('kendo.tests').controller('foo', function($scope) {
             ok(true, "Controller is invoked");
