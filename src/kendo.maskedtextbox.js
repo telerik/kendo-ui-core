@@ -39,7 +39,7 @@ var __meta__ = { // jshint ignore:line
             element = that.element;
             DOMElement = element[0];
 
-            that.wrapper = element.wrap("<span class='k-widget k-maskedtextbox'></span>");
+            that._wrapper();
             that._tokenize();
             that._form();
 
@@ -524,7 +524,9 @@ var __meta__ = { // jshint ignore:line
                         result += chr;
                         tokenIdx += 1;
                     } else {
-                        this._blinkInvalidState();
+                        if (valueLength === 1) {
+                            this._blinkInvalidState();
+                        }
                     }
 
                     chrIdx += 1;
@@ -538,6 +540,17 @@ var __meta__ = { // jshint ignore:line
             }
             this._unmaskedValue = result;
             return result;
+        },
+
+        _wrapper: function () {
+            var that = this;
+            var element = that.element;
+            var DOMElement = element[0];
+
+            var wrapper = element.wrap("<span class='k-widget k-maskedtextbox'></span>").parent();
+            wrapper[0].style.cssText = DOMElement.style.cssText;
+            DOMElement.style.width = "width: 100%;";
+            that.wrapper = wrapper.addClass(DOMElement.className);
         },
 
         _blinkInvalidState: function () {
