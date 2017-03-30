@@ -294,8 +294,6 @@ navigation:
         title: "Sorting"
     "*dimensions":
         title: "Managing Dimensions"
-    "*input":
-        title: "Managing Inputs"
     "*appearance":
         title: "Appearance"
     "*binding":
@@ -418,6 +416,8 @@ navigation:
         title: "Validator"
     "*autocomplete":
         title: "AutoComplete"
+    "*autocomplete/how-to/input":
+        title: "Managing Inputs"
     "*/button":
         title: "Button"
     "*/radiobutton":
@@ -432,6 +432,8 @@ navigation:
         title: "ColorPicker"
     "*combobox":
         title: "ComboBox"
+    "*dateinput":
+        title: "DateInput"
     "*datepicker":
         title: "DatePicker"
     "*datetimepicker":

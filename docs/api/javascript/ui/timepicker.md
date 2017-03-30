@@ -122,6 +122,19 @@ The duration of the open animation in milliseconds.
     });
     </script>
 
+### dateInput `Boolean`*(default: false)*
+
+ Specifies if the TimePicker will use DateInput for editing value
+
+#### Example
+
+    <input id="timepicker" />
+    <script>
+    $("#timepicker").TimePicker({
+        dateInput: true
+    });
+    </script>
+
 ### dates `Array`
 
  Specifies a list of dates, which are shown in the time drop-down list. If not set, the TimePicker will auto-generate the available times.

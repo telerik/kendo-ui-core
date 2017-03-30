@@ -50,6 +50,8 @@ navigation:
         title: "ColorPicker"
      "helpers/combobox":
         title: "ComboBox"
+     "helpers/dateinput":
+        title: "DateInput"
      "helpers/datepicker":
         title: "DatePicker"
      "helpers/datetimepicker":

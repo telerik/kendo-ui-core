@@ -135,6 +135,19 @@ The duration of the open animation in milliseconds.
     });
     </script>
 
+### dateInput `Boolean`*(default: false)*
+
+ Specifies if the DateTimePicker will use DateInput for editing value
+
+#### Example
+
+    <input id="datetimepicker" />
+    <script>
+    $("#datetimepicker").DateTimePicker({
+        dateInput: true
+    });
+    </script>
+
 ### dates `Array`
 
 Specifies a list of dates, which will be passed to the [month template](#configuration-month.content) of the DateView.

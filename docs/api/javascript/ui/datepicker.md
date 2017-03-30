@@ -135,6 +135,19 @@ The duration of the open animation in milliseconds.
     });
     </script>
 
+### dateInput `Boolean`*(default: false)*
+
+ Specifies if the DatePicker will use DateInput for editing value
+
+#### Example
+
+    <input id="datepicker" />
+    <script>
+    $("#datepicker").kendoDatePicker({
+        dateInput: true
+    });
+    </script>
+
 ### dates `Array`
 
 Specifies a list of dates, which will be passed to the [month template](#configuration-month.content).

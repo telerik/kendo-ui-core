@@ -955,4 +955,19 @@ $.extend(true, kendo.ui.progress.messages, {
 });
 }
 
+/* DateInput */
+if (kendo.ui.DateInput) {
+  kendo.ui.DateInput.prototype.options.messages =
+    $.extend(true, kendo.ui.DateInput.prototype.options.messages, {
+      "year": "година",
+      "month": "месец",
+      "day": "ден",
+      "weekday": "ден от седмицата",
+      "hour": "часа",
+      "minute": "минути",
+      "second": "секунди",
+      "dayperiod": "AM/PM"
+    });
+}
+
 })(window.kendo.jQuery);

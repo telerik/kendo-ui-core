@@ -1062,4 +1062,19 @@ $.extend(true, kendo.ui.Prompt.prototype.options.localization, {
 });
 }
 
+/* DateInput */
+if (kendo.ui.DateInput) {
+  kendo.ui.DateInput.prototype.options.messages =
+    $.extend(true, kendo.ui.DateInput.prototype.options.messages, {
+      "year": "year",
+      "month": "month",
+      "day": "day",
+      "weekday": "day of the week",
+      "hour": "hours",
+      "minute": "minutes",
+      "second": "seconds",
+      "dayperiod": "AM/PM"
+    });
+}
+
 })(window.kendo.jQuery);

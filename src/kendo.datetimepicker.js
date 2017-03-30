@@ -99,6 +99,10 @@ var __meta__ = { // jshint ignore:line
                 that.readonly(element.is("[readonly]"));
             }
 
+            if (options.dateInput) {
+                that._dateInput = new ui.DateInput(element, options);
+            }
+
             that._old = that._update(options.value || that.element.val());
             that._oldText = element.val();
 
@@ -487,8 +491,11 @@ var __meta__ = { // jshint ignore:line
                     timeView.bind();
                 }
             }
-
-            that.element.val(kendo.toString(date || value, options.format, options.culture));
+            if (that._dateInput) {
+                that._dateInput.value(date || value);
+            } else {
+                that.element.val(kendo.toString(date || value, options.format, options.culture));
+            }
             that._updateARIA(date);
 
             return date;
@@ -500,7 +507,7 @@ var __meta__ = { // jshint ignore:line
                 timeView = that.timeView,
                 value = that.element.val(),
                 isDateViewVisible = dateView.popup.visible();
-
+            var stopPropagation = that._dateInput && e.stopImmediatePropagation;
             if (e.altKey && e.keyCode === kendo.keys.DOWN) {
                 that.toggle(isDateViewVisible ? "time" : "date");
             } else if (isDateViewVisible) {
@@ -512,6 +519,10 @@ var __meta__ = { // jshint ignore:line
                 that._change(value);
             } else {
                 that._typing = true;
+                stopPropagation = false;
+            }
+            if (stopPropagation) {
+                e.stopImmediatePropagation();
             }
         },
 

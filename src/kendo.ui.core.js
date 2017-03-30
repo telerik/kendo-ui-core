@@ -25,6 +25,7 @@
         "./kendo.toolbar",
         "./kendo.list",
         "./kendo.calendar",
+        "./kendo.dateinput",
         "./kendo.datepicker",
         "./kendo.autocomplete",
         "./kendo.dropdownlist",
