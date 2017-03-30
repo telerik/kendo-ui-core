@@ -22,11 +22,11 @@ Applications built with components that adhere to these guidelines will not only
 |:---          |:---|:---  |:---
 |Grid          |Yes |AAA |[Browse](http://demos.telerik.com/kendo-ui/grid/index)
 |TreeList	   |Yes |AAA |[Browse](http://demos.telerik.com/kendo-ui/treelist/index)
-|PivotGrid	   | - | - |[Browse](http://demos.telerik.com/kendo-ui/pivotgrid/index)
+|PivotGrid	   |Yes | AAA |[Browse](http://demos.telerik.com/kendo-ui/pivotgrid/index)
 |ListView	   |Yes |AAA |[Browse](http://demos.telerik.com/kendo-ui/listview/index)
 |MediaPlayer   |Yes |AAA |[Browse](http://demos.telerik.com/kendo-ui/mediaplayer/index)
 |ScrollView	   |Yes |AAA |[Browse](http://demos.telerik.com/kendo-ui/scrollview/index)
-|Calendar	   | - | - |[Browse](http://demos.telerik.com/kendo-ui/calendar/index)
+|Calendar	   |Yes |AAA |[Browse](http://demos.telerik.com/kendo-ui/calendar/index)
 |DatePicker	   |Yes |AAA |[Browse](http://demos.telerik.com/kendo-ui/datepicker/index)
 |DateTimePicker|Yes |AAA |[Browse](http://demos.telerik.com/kendo-ui/datetimepicker/index)
 |TimePicker	   |Yes |AAA |[Browse](http://demos.telerik.com/kendo-ui/timepicker/index)
@@ -39,7 +39,7 @@ Applications built with components that adhere to these guidelines will not only
 |LinearGauge   |Yes |AAA |[Browse](http://demos.telerik.com/kendo-ui/linear-gauge/index)
 |RadialGauge   |Yes |AAA |[Browse](http://demos.telerik.com/kendo-ui/radial-gauge/index)
 |Charts        |Yes |AAA |[Browse](http://demos.telerik.com/kendo-ui/chart-api/index)
-|Map	       | - | - |[Browse](http://demos.telerik.com/kendo-ui/map/index)
+|Map	       |Yes | AAA|[Browse](http://demos.telerik.com/kendo-ui/map/index)
 
 ## Special Considerations
 
