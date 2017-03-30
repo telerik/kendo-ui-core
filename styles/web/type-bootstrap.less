@@ -3482,3 +3482,26 @@ td.k-state-focused.k-state-selected,
     margin-right: 0;
     margin-left: 0.7em;
 }
+
+.k-datepicker .k-picker-wrap {
+    &.k-state-invalid {
+        border-color: @input-validation-error;
+
+        .k-input {
+            color: @input-validation-error;
+        }
+    }
+
+    .k-i-warning {
+        color: @input-validation-error;
+        margin-left:0;
+        margin-right: 2.1em;
+    }
+}
+
+.k-rtl .k-datepicker .k-picker-wrap {
+    .k-i-warning {
+        margin-right: 0;
+        margin-left: 2.1em;
+    }
+}
