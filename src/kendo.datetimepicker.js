@@ -100,7 +100,13 @@ var __meta__ = { // jshint ignore:line
             }
 
             if (options.dateInput) {
-                that._dateInput = new ui.DateInput(element, options);
+                that._dateInput = new ui.DateInput(element, {
+                    culture: options.culture,
+                    format: options.format,
+                    min: options.min,
+                    max: options.max,
+                    value: options.value
+                });
             }
 
             that._old = that._update(options.value || that.element.val());
