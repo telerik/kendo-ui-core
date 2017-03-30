@@ -28,6 +28,31 @@
         }
     });
 
+    test("MaskedTextBox Should render wrapper", function() {
+        var maskedtextbox = new MaskedTextBox(input);
+        var wrapper = maskedtextbox.wrapper;
+        equal(wrapper.length, 1);
+        ok(wrapper.hasClass("k-maskedtextbox"));
+    });
+
+    test("MaskedTextBox Should apply input css to wrapper", function() {
+        var cssText = "color: red;";
+        input[0].style.cssText = cssText;
+        var maskedtextbox = new MaskedTextBox(input);
+        var wrapper = maskedtextbox.wrapper;
+
+        equal(wrapper[0].style.cssText, cssText);
+    });
+
+    test("MaskedTextBox Should apply input classes to wrapper", function() {
+        var className = "test-class";
+        input[0].className = className;
+        var maskedtextbox = new MaskedTextBox(input);
+        var wrapper = maskedtextbox.wrapper;
+
+        ok(wrapper.hasClass(className));
+    });
+
     test("MaskedTextBox attaches a maskedtextbox object to a target", function() {
         var maskedtextbox = new MaskedTextBox(input);
 

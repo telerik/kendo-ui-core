@@ -54,4 +54,14 @@
             equal(maskedtextbox._validationIcon.css("display"), "none");
         }, 120);
     });
+
+    test("on init control must be in valid state.", function () {
+        input.val("555 123 4567");
+        var maskedtextbox = new MaskedTextBox(input, {
+            mask: "(999) 000-0000"
+        });
+
+        ok(!maskedtextbox.element.hasClass(STATE_INVALID));
+        equal(maskedtextbox._validationIcon.css("display"), "none");
+    });
 })();
