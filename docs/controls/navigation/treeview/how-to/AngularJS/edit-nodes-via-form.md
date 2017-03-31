@@ -1,13 +1,15 @@
 ---
-title: Edit Nodes via Form
-page_title: Edit Nodes via Form | Kendo UI TreeView
-description: "Learn how to allow users to edit nodes via a standalone form using AngularJS with the Kendo UI TreeView widget."
+title: Edit Nodes by Using Form
+page_title: Edit Nodes by Using Form | Kendo UI TreeView
+description: "Learn how to allow users to edit nodes by using a standalone form with AngularJS in a Kendo UI TreeView."
 slug: howto_editnodesviaform_angularjs_treeview
 ---
 
-# Edit Nodes via Form
+# Edit Nodes by Using Form
 
-The example below demonstrates how to allow users to edit nodes via a standalone form using AngularJS with the Kendo UI TreeView widget.
+Your AngularJS project might require you to enable users to edit the nodes of the TreeView.
+
+The following example demonstrates how to achieve this behavior by using a standalone form.
 
 ###### Example
 
@@ -69,8 +71,6 @@ The example below demonstrates how to allow users to edit nodes via a standalone
 
 ## See Also
 
-Other articles on the Kendo UI TreeView:
-
 * [TreeView JavaScript API Reference](/api/javascript/ui/treeview)
 * [How to Check Nodes Programmatically]({% slug howto_checknodeprogramatically_treeview %})
 * [How to Edit Nodes via Form]({% slug howto_editnodesviaform_treeview %})
@@ -81,4 +81,4 @@ Other articles on the Kendo UI TreeView:
 * [How to Scroll to Selected Item]({% slug howto_scrolltoselecteditem_treeview %})
 * [How to Use FontAwesome Icons]({% slug howto_usefontawesomeicons_treeview %})
 
-For more runnable examples on the Kendo UI TreeView, browse its [**How To** documentation folder]({% slug howto_scrolltoitem_angularjs_treeview %}).
+For more runnable examples on the Kendo UI TreeView, browse its [**How To** documentation folder]({% slug howto_bindcheckedstatecustommodelfields_angulartreeview %}).

@@ -7,7 +7,9 @@ slug: howto_scrolltoitem_angularjs_treeview
 
 # Scroll to Item
 
-The example below demonstrates how to scroll to an item of a Kendo UI TreeView widget with a given `id` in AngularJS.
+You might need to list a great number of items in the TreeView of your AngularJS application.
+
+The following example demonstrates how to scroll to a particular item of the TreeView that has a given `id`.
 
 ###### Example
 
@@ -79,8 +81,6 @@ The example below demonstrates how to scroll to an item of a Kendo UI TreeView w
 
 ## See Also
 
-Other articles on the Kendo UI TreeView:
-
 * [TreeView JavaScript API Reference](/api/javascript/ui/treeview)
 * [How to Check Nodes Programmatically]({% slug howto_checknodeprogramatically_treeview %})
 * [How to Edit Nodes via Form]({% slug howto_editnodesviaform_treeview %})
@@ -91,4 +91,4 @@ Other articles on the Kendo UI TreeView:
 * [How to Scroll to Selected Item]({% slug howto_scrolltoselecteditem_treeview %})
 * [How to Use FontAwesome Icons]({% slug howto_usefontawesomeicons_treeview %})
 
-For more runnable examples on the Kendo UI TreeView, browse its [**How To** documentation folder]({% slug howto_editnodesviaform_angularjs_treeview %}).
+For more runnable examples on the Kendo UI TreeView, browse its [**How To** documentation folder]({% slug howto_bindcheckedstatecustommodelfields_angulartreeview %}).

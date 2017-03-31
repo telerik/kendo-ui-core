@@ -320,6 +320,8 @@ navigation:
         title: "Selection"
     "*various":
         title: "Various"
+    "*nodes":
+        title: "Handling Nodes"
     "*custom-views":
         title: "Custom Views"
     "*angular":

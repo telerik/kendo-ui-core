@@ -7,7 +7,7 @@ slug: howto_showlinesbetweennodes_treeview
 
 # Show Lines between Nodes
 
-The example below demonstrates how to show lines between Kendo UI TreeView nodes.
+The following example demonstrates how to show lines between the nodes of the TreeView.
 
 ###### Example
 
@@ -71,8 +71,6 @@ The example below demonstrates how to show lines between Kendo UI TreeView nodes
 
 ## See Also
 
-Other articles on the Kendo UI TreeView:
-
 * [TreeView JavaScript API Reference](/api/javascript/ui/treeview)
 * [How to Check Nodes Programmatically]({% slug howto_checknodeprogramatically_treeview %})
 * [How to Edit Nodes via Form]({% slug howto_editnodesviaform_treeview %})
@@ -83,4 +81,4 @@ Other articles on the Kendo UI TreeView:
 * [How to Scroll to Selected Item]({% slug howto_scrolltoselecteditem_treeview %})
 * [How to Use FontAwesome Icons]({% slug howto_usefontawesomeicons_treeview %})
 
-For more runnable examples on the Kendo UI TreeView, browse its [**How To** documentation folder]({% slug howto_editnodesviaform_angularjs_treeview %}).
+For more runnable examples on the Kendo UI TreeView, browse its [**How To** documentation folder]({% slug howto_bindcheckedstatecustommodelfields_angulartreeview %}).
