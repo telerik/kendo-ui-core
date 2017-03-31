@@ -538,7 +538,7 @@ var __meta__ = { // jshint ignore:line
                     chrIdx += 1;
                     tokenIdx += 1;
                 } else if (typeof token !== "string") {
-                    if ((token.test && token.test(chr)) || ($.isFunction(token) && token(chr))) {
+                    if ((token && token.test && token.test(chr)) || ($.isFunction(token) && token(chr))) {
                         result += chr;
                         tokenIdx += 1;
                     } else {
