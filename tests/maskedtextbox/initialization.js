@@ -177,7 +177,7 @@
             value: "9999"
         });
 
-        ok(input.hasClass("k-state-disabled"));
+        ok(maskedtextbox.wrapper.hasClass("k-state-disabled"));
     });
 
     test("MaskedTextBox gets value from input element", function() {
