@@ -2737,11 +2737,13 @@ html .km-pane-wrapper .km-widget,
     left: 1.9em;
 }
 
-.k-maskedtextbox .k-state-invalid {
-    border-color: @input-validation-error;
-    color: @input-validation-error;
+.k-maskedtextbox.k-state-invalid {
+    .k-textbox {
+        border-color: @input-validation-error;
+        color: @input-validation-error;
+    }
 
-    + .k-i-warning {
+    .k-i-warning {
         color: @input-validation-error;
     }
 }

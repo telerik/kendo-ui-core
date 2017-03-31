@@ -1088,7 +1088,7 @@ span.k-numerictextbox
     padding-left: (@grid-size + (@grid-size/4 + 2px));
 }
 
-.k-widget.k-maskedtextbox {
+.k-maskedtextbox {
     position: relative;
     display: inline-block;
     background-color: transparent;
@@ -1101,11 +1101,16 @@ span.k-numerictextbox
     }
 
     .k-i-warning {
+        display: none;
         position: absolute;
         width: 1.9em;
         right: 0;
         top: 50%;
         transform: translateY(-50%);
+    }
+
+    &.k-state-invalid .k-i-warning {
+        display: inline-block;
     }
 }
 
