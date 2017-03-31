@@ -632,14 +632,13 @@ var __meta__ = { // jshint ignore:line
                 }
             }
 
-            if (ignoreCase) {
+            if (ignoreCase && !that.listView.value().length) {
                 loweredText = loweredText.toLowerCase();
             }
 
             that._select(function(data) {
                 data = that._text(data);
-
-                if (ignoreCase) {
+                if (ignoreCase && !that.listView.value().length) {
                     data = (data + "").toLowerCase();
                 }
 
