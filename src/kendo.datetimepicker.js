@@ -792,7 +792,7 @@ var __meta__ = { // jshint ignore:line
         }
 
         if ($.inArray(timeFormat, options.parseFormats) === -1) {
-            options.parseFormats.splice(1, 0, timeFormat);
+            options.parseFormats.push(timeFormat);
         }
     }
 
