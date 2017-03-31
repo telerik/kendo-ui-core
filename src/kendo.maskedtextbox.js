@@ -567,7 +567,7 @@ var __meta__ = { // jshint ignore:line
 
             var wrapper = element.wrap("<span class='k-widget k-maskedtextbox'></span>").parent();
             wrapper[0].style.cssText = DOMElement.style.cssText;
-            DOMElement.style.width = "width: 100%;";
+            DOMElement.style.width = "100%";
             that.wrapper = wrapper.addClass(DOMElement.className);
         },
 
