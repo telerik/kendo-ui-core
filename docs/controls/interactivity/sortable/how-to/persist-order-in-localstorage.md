@@ -76,12 +76,10 @@ The example below demonstrates how to save the order of items in `localStorage` 
 
 ## See Also
 
-Other articles and how-to examples on the Kendo UI Sortable:
-
 * [Sortable JavaScript API Reference](/api/javascript/ui/sortable)
 * [How to Nest Sortables]({% slug howto_nestsortables_sortable %})
 * [How to Reorder Multiple Items]({% slug howto_reordermultipleitems_sortable %})
 * [How to Transfer Grid Rows]({% slug howto_transfergridrows_sortable %})
 * [How to Use Sortable in AngularJS with Grid in Batch Editing Mode]({% slug howto_usesortablewith_gridinbatcheditablemode_angular_sortable %})
 
-For more runnable examples on the Kendo UI Sortable, browse its [**How To** documentation folder]({% slug howto_usesortablewithgrid_inincellediting_sortable %}).
+For more runnable examples on the Kendo UI Sortable, browse its [**How To** documentation folder]({% slug howto_usesortablewith_gridinbatcheditablemode_angular_sortable %}).

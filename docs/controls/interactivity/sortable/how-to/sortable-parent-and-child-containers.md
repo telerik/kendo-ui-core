@@ -1,13 +1,13 @@
 ---
-title: Sortable parent and child containers
-page_title: Sortable parent and child containers | Kendo UI Sortable
-description: "Learn how to create nested sortable containers"
+title: Create Sortable Parent and Child Containers
+page_title: Create Sortable Parent and Child Containers | Kendo UI Sortable
+description: "Learn how to create nested sortable containers."
 slug: howto_sortableparentandchildcontainers_sortable
 ---
 
-# Sortable parent and child containers
+# Create Sortable Parent and Child Containers
 
-The example below demonstrates how to create nested sortable containers.
+The following example demonstrates how to create nested sortable containers.
 
 ###### Example
 
@@ -96,12 +96,10 @@ The example below demonstrates how to create nested sortable containers.
 
 ## See Also
 
-Other articles and how-to examples on the Kendo UI Sortable:
-
 * [Sortable JavaScript API Reference](/api/javascript/ui/sortable)
 * [How to Persist Order in localStorage]({% slug howto_persistoderinlocalstorage_sortable %})
 * [How to Reorder Multiple Items]({% slug howto_reordermultipleitems_sortable %})
 * [How to Transfer Grid Rows]({% slug howto_transfergridrows_sortable %})
 * [How to Use Sortable in AngularJS with Grid in Batch Editing Mode]({% slug howto_usesortablewith_gridinbatcheditablemode_angular_sortable %})
 
-For more runnable examples on the Kendo UI Sortable, browse its [**How To** documentation folder]({% slug howto_usesortablewithgrid_inincellediting_sortable %}).
+For more runnable examples on the Kendo UI Sortable, browse its [**How To** documentation folder]({% slug howto_usesortablewith_gridinbatcheditablemode_angular_sortable %}).
