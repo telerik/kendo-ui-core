@@ -3,21 +3,20 @@ title: Bind Checked State to Custom Model Fields
 page_title: Bind Checked State to Custom Model Fields | Kendo UI TreeView
 description: "Learn how to bind the checked state of a Kendo UI TreeView to a custom model field in AngularJS applications."
 slug: howto_bindcheckedstatecustommodelfields_angulartreeview
+position: 1
 ---
 
 # Bind Checked State to Custom Model Fields
 
-By design, the Kendo UI TreeView does not support custom checkbox binding. As a result, the AngularJS `$scope.treeData` (scope model field) is not updated.
+By design, the TreeView does not support custom checkbox binding.
 
-However, the TreeView updates its own data source instance. To update the AngularJS scope model field, programmatically assign the checked state of the TreeView data source to the scope model field. Alternatively, use the TreeView data source.
+While, as a result, the AngularJS scope model field (`$scope.treeData`) does not get updated, the TreeView updates its own Data Source instance. To programmatically update the AngularJS scope model field, assign the checked state of the TreeView Data Source to the scope model field. Alternatively, you can use the TreeView Data Source. The TreeView is then initialized as a Kendo UI component, loads its own Data Source, and the AngularJS bindings are applied consequently. Therefore, to update the `ng-model` within the template, assign `ng-model=dataItem.customField`.
 
 > **Important**
 >
-> Binding the checked state to an AngularJS `$scope` model field may not be suitable for large data sets because of possible performance issues due to the recursion.
+> For large data sets, it is not recommended to bind the checked state to an AngularJS `$scope` model field because performance recursion issues might occur.
 
-The TreeView is initialized as a Kendo UI component and loads its own data source. AngularJS bindings are applied consequently. Therefore, to update the `ng-model` within the template, assign `ng-model=dataItem.customField`.
-
-The example below demonstrates how to bind the checked state of a Kendo UI TreeView to a custom model field in AngularJS applications.
+The following example demonstrates how to bind the checked state of a Kendo UI TreeView to a custom model field in AngularJS applications.
 
 ###### Example
 
@@ -131,8 +130,6 @@ The example below demonstrates how to bind the checked state of a Kendo UI TreeV
 
 ## See Also
 
-Other articles on the Kendo UI TreeView:
-
 * [TreeView JavaScript API Reference](/api/javascript/ui/treeview)
 * [How to Check Nodes Programmatically]({% slug howto_checknodeprogramatically_treeview %})
 * [How to Edit Nodes via Form]({% slug howto_editnodesviaform_treeview %})
@@ -143,4 +140,4 @@ Other articles on the Kendo UI TreeView:
 * [How to Scroll to Selected Item]({% slug howto_scrolltoselecteditem_treeview %})
 * [How to Use FontAwesome Icons]({% slug howto_usefontawesomeicons_treeview %})
 
-For more runnable examples on the Kendo UI TreeView, browse its [**How To** documentation folder]({% slug howto_editnodesviaform_angularjs_treeview %}).
+For more runnable examples on the Kendo UI TreeView, browse its **How To** documentation folder.

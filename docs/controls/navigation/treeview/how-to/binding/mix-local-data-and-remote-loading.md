@@ -7,7 +7,9 @@ slug: howto_combinelocaldatawithremoteloading_treeview
 
 # Combine Local Data with Remote Loading
 
-The example below demonstrates how to partially preload Kendo UI TreeView items and request data that has not yet been loaded from a remote service.
+Your project might require you to partially preload TreeView items.
+
+The following example demonstrates how to achieve this behavior and request data from a remote service that has not yet been loaded.
 
 ###### Example
 
@@ -73,8 +75,6 @@ The example below demonstrates how to partially preload Kendo UI TreeView items 
 
 ## See Also
 
-Other articles on the Kendo UI TreeView:
-
 * [TreeView JavaScript API Reference](/api/javascript/ui/treeview)
 * [How to Check Nodes Programmatically]({% slug howto_checknodeprogramatically_treeview %})
 * [How to Edit Nodes via Form]({% slug howto_editnodesviaform_treeview %})
@@ -85,4 +85,4 @@ Other articles on the Kendo UI TreeView:
 * [How to Scroll to Selected Item]({% slug howto_scrolltoselecteditem_treeview %})
 * [How to Use FontAwesome Icons]({% slug howto_usefontawesomeicons_treeview %})
 
-For more runnable examples on the Kendo UI TreeView, browse its [**How To** documentation folder]({% slug howto_editnodesviaform_angularjs_treeview %}).
+For more runnable examples on the Kendo UI TreeView, browse its [**How To** documentation folder]({% slug howto_bindcheckedstatecustommodelfields_angulartreeview %}).

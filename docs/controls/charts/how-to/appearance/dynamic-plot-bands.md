@@ -60,8 +60,6 @@ The example below demonstrates how to achieve this behavior.
 
 ## See Also
 
-Other articles and how-to examples on the Kendo UI Charts:
-
 * [Chart JavaScript API Reference](/api/javascript/dataviz/ui/chart)
 * [Drawing API]({% slug overview_kendoui_drawingapi %})
 * [How to Aggregate Data in Pie Charts]({% slug howto_aggregatedata_piecharts %})

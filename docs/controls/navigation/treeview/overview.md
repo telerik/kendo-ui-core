@@ -8,24 +8,26 @@ position: 1
 
 # TreeView Overview
 
-The [Kendo UI TreeView widget](http://demos.telerik.com/kendo-ui/treeview/index) displays hierarchical data in a traditional tree structure. It supports user interaction through mouse or touch to perform re-ordering operations via drag-and-drop.
+The [Kendo UI TreeView widget](http://demos.telerik.com/kendo-ui/treeview/index) displays hierarchical data in a traditional tree structure.
+
+It supports user interaction through mouse or touch events to perform re-ordering operations by using the drag-and-drop functionality.
 
 ## Getting Started
 
 ### Initialize the TreeView
 
-Kendo UI TreeView can be created in two ways:
+To create a TreeView, you can either:
 
-1.  Through the definition of a hierarchical list by using static HTML. This approach is suitable for small hierarchies and for data that does not frequently change.
-2.  Through the usage of dynamic data binding either to a local, or a remote data source. This approach is suitable for larger data sets and for data that frequently changes.
+1. Define a hierarchical list by using static HTML. This approach is suitable for small hierarchies and for data that does not frequently change.
+2. Use dynamic data binding either to a local or a remote data source. This approach is suitable for larger data sets and for data that frequently changes.
 
 > **Important**
 >
-> As TreeView should be initialized after the DOM is fully loaded, make sure you create it within a `$(document).ready()` statement.
+> Make sure that you create the TreeView within a `$(document).ready()` statement because it has to be initialized after the DOM is fully loaded.
 
 #### Through Hierarchical HTML List
 
-The example below demonstrates how to initialize the TreeView through a hierarchical list in HTML.
+The following example demonstrates how to initialize the TreeView through a hierarchical list in HTML.
 
 ###### Example
 
@@ -47,7 +49,7 @@ The example below demonstrates how to initialize the TreeView through a hierarch
 
 #### Through Data Binding to Local Array
 
-The example below demonstrates how to create a TreeView and bind it to a local data source.
+The following example demonstrates how to create a TreeView and bind it to a local data source.
 
 ###### Example
 
@@ -72,7 +74,7 @@ The example below demonstrates how to create a TreeView and bind it to a local d
 
 #### Through Data Binding to Remote Service
 
-The example below demonstrates how to create a TreeView and bind it to a remote HierarchicalDataSource.
+The following example demonstrates how to create a TreeView and bind it to a remote HierarchicalDataSource.
 
 ###### Example
 
@@ -93,15 +95,15 @@ The example below demonstrates how to create a TreeView and bind it to a remote 
         }
     })
 
-For a complete reference on how to bind the TreeView to different service end-points, refer to the [`HierarchicalDataSource` API article](/api/framework/hierarchicaldatasource).
+For a complete reference on how to bind the TreeView to different service end-points, refer to the API article on [`HierarchicalDataSource`](/api/framework/hierarchicaldatasource).
 
 ## Configuration
 
-### Drag and Drop
+### Drag-and-Drop Functionality
 
 When the drag-and-drop feature is enabled, the nodes of a TreeView can be dragged and dropped between all levels. The functionality also features useful tooltips that help users indicate where the node is going to be dropped.
 
-The example below demonstrates how to enable the drag-and-drop functionality for TreeView nodes.
+The following example demonstrates how to enable the drag-and-drop functionality for TreeView nodes.
 
 ###### Example
 
@@ -148,15 +150,17 @@ When binding the TreeView through the `dataSource` configuration option, each it
         ]
     };
 
-The `text`, `imageUrl`, `spriteCssClass`, and `url` fields can be configured through the [`datatextfield`](/api/web/treeview#dataTextField), [`dataimageurlfield`](/api/web/treeview#dataImageUrlField), [`dataspritecssclassfield`](/api/web/treeview#dataSpriteCssClassField), and [`dataurlfield`](/api/web/treeview#dataUrlField) options respectively.
+You can configure `text`, `imageUrl`, `spriteCssClass`, and `url` fields through the [`datatextfield`](/api/web/treeview#dataTextField), [`dataimageurlfield`](/api/web/treeview#dataImageUrlField), [`dataspritecssclassfield`](/api/web/treeview#dataSpriteCssClassField), and [`dataurlfield`](/api/web/treeview#dataUrlField) options respectively.
 
-You can add arbitrary fields when binding through `dataSource`. These are stored in the `HierarchicalDataSource`, and can be easily accessed through the TreeView [`dataItem` method](/api/web/treeview#dataitem).
+To add arbitrary fields when binding, use the `dataSource` configuration. The fields are stored in the `HierarchicalDataSource` and can be easily accessed through the TreeView [`dataItem`](/api/web/treeview#dataitem) method.
 
 ## Common Scenarios
 
-### Get Node Data in select Event Handler
+### Get the Node Data
 
-The example below demonstrates how to get the node data in the `select` event handler.
+You can get the TreeView node data in the `select` event handler
+
+The following example demonstrates how to achieve this behavior.
 
 ###### Example
 
@@ -179,9 +183,9 @@ The example below demonstrates how to get the node data in the `select` event ha
 
 ### Reload Child Nodes When Nodes Expand
 
-Since `dataItem` is of the [`Node`](/api/framework/node) type, you are able to use its [loaded flag](/api/framework/node#methods-loaded) to force reloading of nodes from the server. The `Node.loaded` method sets the loaded flag of the node, indicating that it needs to be refreshed.
+Since `dataItem` is of the [`Node`](/api/framework/node) type, you are able to use its [`loaded` flag](/api/framework/node#methods-loaded) to force the reloading of nodes from the server. The `Node.loaded` method sets the `loaded` flag of the node and indicates that it needs to be refreshed.
 
-The example below demonstrates how to reload child nodes when nodes are expanded.
+The following example demonstrates how to reload child nodes when nodes are expanded.
 
 ###### Example
 
@@ -198,7 +202,7 @@ The example below demonstrates how to reload child nodes when nodes are expanded
 
 ### Gather Checked Nodes from TreeView
 
-The example below demonstrates how to gather the checked nodes from a Kendo UI TreeView. You are able to use the same approach for gathering expanded nodes.
+The following example demonstrates how to gather the checked nodes from a Kendo UI TreeView. You can also use this approach to gather expanded nodes.
 
 ###### Example
 
@@ -219,11 +223,11 @@ The example below demonstrates how to gather the checked nodes from a Kendo UI T
 
     gatherStates(treeview.dataSource.view());
 
-### Project TreeView State
+### Project the TreeView State
 
-The `HierarchicalDataSource` does not support data projection. Therefore, you might need to remap state fields via the [`schema.parse`](/api/framework/datasource#configuration-schema.parse) configuration option.
+The `HierarchicalDataSource` does not support data projection. Therefore, you might need to remap the state fields by using the [`schema.parse`](/api/framework/datasource#configuration-schema.parse) configuration option.
 
-The example below demonstrates how to project a TreeView state.
+The following example demonstrates how to project a TreeView state.
 
 ###### Example
 
@@ -265,9 +269,9 @@ The example below demonstrates how to project a TreeView state.
 
 ### Existing Instances
 
-Refer to an existing TreeView instance via the [`jQuery.data()`](http://api.jquery.com/jQuery.data/). Once a reference has been established, use the [TreeView API](/api/javascript/ui/treeview) to control its behavior.
+To refer to an existing TreeView instance, use the [`jQuery.data()`](http://api.jquery.com/jQuery.data/) method. Once you establish a reference, use the [TreeView API](/api/javascript/ui/treeview) to control its behavior.
 
-The example below demonstrates how to access an existing TreeView instance.
+The following example demonstrates how to access an existing TreeView instance.
 
 ###### Example
 

@@ -7,7 +7,9 @@ slug: howto_preventdragging_nodestodeeplevels_treeview
 
 # Prevent Dragging Nodes to Deep Levels
 
-The example below demonstrates how to handle the Kendo UI TreeView `drag` event to prevent nodes from being dragged to a deep level of the tree.
+Your project might require you to prevent the TreeView nodes from being dragged to a deeper level of the tree.
+
+The following example demonstrates how to handle the `drag` event to achieve this behavior.
 
 ###### Example
 
@@ -49,8 +51,6 @@ The example below demonstrates how to handle the Kendo UI TreeView `drag` event 
 
 ## See Also
 
-Other articles on the Kendo UI TreeView:
-
 * [TreeView JavaScript API Reference](/api/javascript/ui/treeview)
 * [How to Check Nodes Programmatically]({% slug howto_checknodeprogramatically_treeview %})
 * [How to Edit Nodes via Form]({% slug howto_editnodesviaform_treeview %})
@@ -61,4 +61,4 @@ Other articles on the Kendo UI TreeView:
 * [How to Scroll to Selected Item]({% slug howto_scrolltoselecteditem_treeview %})
 * [How to Use FontAwesome Icons]({% slug howto_usefontawesomeicons_treeview %})
 
-For more runnable examples on the Kendo UI TreeView, browse its [**How To** documentation folder]({% slug howto_editnodesviaform_angularjs_treeview %}).
+For more runnable examples on the Kendo UI TreeView, browse its [**How To** documentation folder]({% slug howto_bindcheckedstatecustommodelfields_angulartreeview %}).

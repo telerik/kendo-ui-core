@@ -7,7 +7,9 @@ slug: howto_togglenodeswithsingleclick_angularjs_treeview
 
 # Toggle Nodes with Single Click
 
-The example below demonstrates how to toggle nodes of a Kendo UI TreeView between expanded and collapsed states with a single click in AngularJS.
+You might need to toggle the TreeView nodes between their expanded and collapsed state all at once.
+
+The following example demonstrates how to achieve this behavior through a single click.
 
 ###### Example
 
@@ -46,8 +48,6 @@ The example below demonstrates how to toggle nodes of a Kendo UI TreeView betwee
 
 ## See Also
 
-Other articles on the Kendo UI TreeView:
-
 * [TreeView JavaScript API Reference](/api/javascript/ui/treeview)
 * [How to Check Nodes Programmatically]({% slug howto_checknodeprogramatically_treeview %})
 * [How to Edit Nodes via Form]({% slug howto_editnodesviaform_treeview %})
@@ -58,4 +58,4 @@ Other articles on the Kendo UI TreeView:
 * [How to Scroll to Selected Item]({% slug howto_scrolltoselecteditem_treeview %})
 * [How to Use FontAwesome Icons]({% slug howto_usefontawesomeicons_treeview %})
 
-For more runnable examples on the Kendo UI TreeView, browse its [**How To** documentation folder]({% slug howto_editnodesviaform_angularjs_treeview %}).
+For more runnable examples on the Kendo UI TreeView, browse its [**How To** documentation folder]({% slug howto_bindcheckedstatecustommodelfields_angulartreeview %}).
