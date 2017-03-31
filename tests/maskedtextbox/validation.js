@@ -17,7 +17,6 @@
          var maskedtextbox = new MaskedTextBox(input);
 
          ok(!maskedtextbox.wrapper.hasClass(STATE_INVALID));
-         equal(maskedtextbox._validationIcon.css("display"), "none");
     });
 
     test("the keypress event adds invalid decoration for invalid value.", function () {
@@ -27,8 +26,7 @@
 
         maskedtextbox.value("a");
 
-        ok(maskedtextbox.element.hasClass(STATE_INVALID));
-        notEqual(maskedtextbox._validationIcon.css("display"), "none");
+        ok(maskedtextbox.wrapper.hasClass(STATE_INVALID));
     });
 
     test("the keypress event does not add invalid decoration for valid value.", function () {
@@ -38,11 +36,10 @@
 
         maskedtextbox.value("1");
 
-        ok(!maskedtextbox.element.hasClass(STATE_INVALID));
-        equal(maskedtextbox._validationIcon.css("display"), "none");
+        ok(!maskedtextbox.wrapper.hasClass(STATE_INVALID));
     });
 
-    asyncTest("invalid decoration is removed after some time.", 2, function () {
+    asyncTest("invalid decoration is removed after some time.", 1, function () {
         var maskedtextbox = new MaskedTextBox(input, {
             mask: "0"
         });
@@ -50,8 +47,7 @@
         maskedtextbox.value("a");
         setTimeout(function () {
             start();
-            ok(!maskedtextbox.element.hasClass(STATE_INVALID));
-            equal(maskedtextbox._validationIcon.css("display"), "none");
+            ok(!maskedtextbox.wrapper.hasClass(STATE_INVALID));
         }, 120);
     });
 
@@ -61,7 +57,6 @@
             mask: "(999) 000-0000"
         });
 
-        ok(!maskedtextbox.element.hasClass(STATE_INVALID));
-        equal(maskedtextbox._validationIcon.css("display"), "none");
+        ok(!maskedtextbox.wrapper.hasClass(STATE_INVALID));
     });
 })();

@@ -1,7 +1,8 @@
 /* globals stub, updateInput, createInput */
 (function() {
     var MaskedTextBox = kendo.ui.MaskedTextBox,
-        input;
+        input,
+        STATE_DISABLED = "k-state-disabled";
 
     module("kendo.ui.MaskedTextBox api", {
         setup: function() {
@@ -143,7 +144,7 @@
         maskedtextbox.enable(false);
 
         ok(input.attr("disabled"));
-        ok(input.hasClass("k-state-disabled"));
+        ok(maskedtextbox.wrapper.hasClass(STATE_DISABLED));
     });
 
     test("enable method with true enables widget", function() {
@@ -155,7 +156,7 @@
         maskedtextbox.enable(true);
 
         ok(!input.attr("disabled"));
-        ok(!input.hasClass("k-state-disabled"));
+        ok(!maskedtextbox.wrapper.hasClass(STATE_DISABLED));
     });
 
     test("enable method removes readonly attribute", function() {
@@ -200,7 +201,7 @@
         maskedtextbox.readonly();
 
         ok(!input.attr("disabled"));
-        ok(!input.hasClass("k-state-disabled"));
+        ok(!maskedtextbox.wrapper.hasClass(STATE_DISABLED));
     });
 
     test("setOptions changes the mask", function() {

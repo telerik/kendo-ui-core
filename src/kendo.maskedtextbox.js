@@ -107,7 +107,6 @@ var __meta__ = { // jshint ignore:line
              that.value(that.options.value || element.val());
 
              that._validationIcon = $("<span class='k-icon k-i-warning'></span>")
-                .hide()
                 .insertAfter(element);
 
              kendo.notify(that);
@@ -272,6 +271,7 @@ var __meta__ = { // jshint ignore:line
         _editable: function(options) {
             var that = this;
             var element = that.element;
+            var wrapper = that.wrapper;
             var disable = options.disable;
             var readonly = options.readonly;
 
@@ -279,14 +279,16 @@ var __meta__ = { // jshint ignore:line
 
             if (!readonly && !disable) {
                 element.removeAttr(DISABLED)
-                       .removeAttr(READONLY)
-                       .removeClass(STATEDISABLED);
+                       .removeAttr(READONLY);
+
+                wrapper.removeClass(STATEDISABLED);
 
                 that._bindInput();
             } else {
                 element.attr(DISABLED, disable)
-                       .attr(READONLY, readonly)
-                       .toggleClass(STATEDISABLED, disable);
+                       .attr(READONLY, readonly);
+
+                wrapper.toggleClass(STATEDISABLED, disable);
             }
         },
 
@@ -574,10 +576,7 @@ var __meta__ = { // jshint ignore:line
         _blinkInvalidState: function () {
             var that = this;
 
-            that.element.addClass(STATEINVALID);
-            if(that._validationIcon) {
-                 that._validationIcon.show();
-            }
+            that.wrapper.addClass(STATEINVALID);
             clearTimeout(that._invalidStateTimeout);
             that._invalidStateTimeout = setTimeout(proxy(that._removeInvalidState, that), 100);
         },
@@ -585,8 +584,7 @@ var __meta__ = { // jshint ignore:line
         _removeInvalidState: function () {
             var that = this;
 
-            that.element.removeClass(STATEINVALID);
-            that._validationIcon.hide();
+            that.wrapper.removeClass(STATEINVALID);
             that._invalidStateTimeout = null;
         },
 
