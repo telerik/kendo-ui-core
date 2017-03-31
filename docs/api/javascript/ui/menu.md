@@ -297,10 +297,10 @@ Refer to the example below for a list of the supported properties.
            },
            {
              text: "Item 5",
-             select: function(e) {                        // Item select event handler, optional 
+             select: function(e) {                        // Item select event handler, optional
                 // e.sender - returns reference to the Kendo Menu widget
                 // e.target - returns the clicked element. Typically, the span.k-link element.
-                
+
                 // handle event
              }
            }]
@@ -449,6 +449,48 @@ its parent horizontally. You can also switch off the screen boundary detection c
     <script>
         $("#menu").kendoMenu({
             popupCollision: false
+        });
+    </script>
+
+### scrollable `Boolean|Object`
+
+If enabled, the Menu will display buttons that will scroll the menu items, when they cannot fit the Menu width or menu popups height. By default scrolling is disabled.
+
+#### Example - enable scrolling
+
+    <ul id="menu" style="width:150px;">
+        <li>Item 1</li>
+        <li>Item 2</li>
+        <li>Item 3</li>
+    </ul>
+
+    <script>
+        $("#menu").kendoMenu({
+            scrollable: true
+        });
+    </script>
+
+### scrollable.distance `Number` *(default: 50)*
+
+Sets the scroll amount (in pixels) that the menu scrolls when the scroll buttons are hovered.
+
+Each such distance is animated and then another animation starts with the same distance.
+
+If clicking a scroll button, the menu scrolls with 2x the distance.
+
+#### Example
+
+    <ul id="menu" style="width:150px;">
+        <li>Item 1</li>
+        <li>Item 2</li>
+        <li>Item 3</li>
+    </ul>
+
+    <script>
+        $("#menu").kendoMenu({
+            scrollable: {
+                distance: 20
+            }
         });
     </script>
 
