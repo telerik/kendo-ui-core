@@ -4,6 +4,7 @@ page_title: Implement Color-Coded Ranges in Bars | Kendo UI Charts
 description: "Learn how to implement color-coded ranges in bars when working with the Kendo UI Charts."
 previous_url: /controls/charts/how-to/color-coded-bars
 slug: howto_implementcolorcodedranges_inbars_charts
+position: 1
 ---
 
 # Implement Color-Coded Ranges in Bars
@@ -70,8 +71,6 @@ The example below demonstrates how to implement color-coded ranges (stripes) in 
 
 ## See Also
 
-Other articles and how-to examples on the Kendo UI Charts:
-
 * [Chart JavaScript API Reference](/api/javascript/dataviz/ui/chart)
 * [Drawing API]({% slug overview_kendoui_drawingapi %})
 * [How to Aggregate Data in Pie Charts]({% slug howto_aggregatedata_piecharts %})
@@ -84,4 +83,4 @@ Other articles and how-to examples on the Kendo UI Charts:
 * [How to Set Different Marker Types for Grouped Line Charts]({% slug howto_setdifrerentmarkers_forgroupedlinecharts_charts %})
 * [How to Use Linear Gradient As Background in Bars]({% slug howto_uselineargradient_inbars_charts %})
 
-For more runnable examples on Kendo UI Charts, browse the [**How To** documentation folder]({% slug howto_createdynamicplotbands_charts %}).
+For more runnable examples on Kendo UI Charts, browse the **How To** documentation folder.
