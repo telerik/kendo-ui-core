@@ -115,7 +115,6 @@ var __meta__ = { // jshint ignore:line
             }
 
             kendo.notify(that);
-            that._toggleCloseVisibility();
         },
 
         options: {
@@ -205,7 +204,6 @@ var __meta__ = { // jshint ignore:line
             }
 
             Select.fn._change.call(that);
-            that._toggleCloseVisibility();
         },
 
         _focusHandler: function() {
@@ -559,14 +557,6 @@ var __meta__ = { // jshint ignore:line
             this.listView.refresh();
         },
 
-        _toggleCloseVisibility: function() {
-            if (this.text()) {
-                this._showClear();
-            } else {
-                this._hideClear();
-            }
-        },
-
         suggest: function(word) {
             var that = this;
             var element = that.input[0];
@@ -642,14 +632,13 @@ var __meta__ = { // jshint ignore:line
                 }
             }
 
-            if (ignoreCase) {
+            if (ignoreCase && !that.listView.value().length) {
                 loweredText = loweredText.toLowerCase();
             }
 
             that._select(function(data) {
                 data = that._text(data);
-
-                if (ignoreCase) {
+                if (ignoreCase && !that.listView.value().length) {
                     data = (data + "").toLowerCase();
                 }
 
@@ -932,7 +921,6 @@ var __meta__ = { // jshint ignore:line
                     }
 
                     that.search(value);
-                    that._toggleCloseVisibility();
                 }
 
                 that._typingTimeout = null;
