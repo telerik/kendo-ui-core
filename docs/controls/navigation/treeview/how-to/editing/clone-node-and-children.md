@@ -7,17 +7,17 @@ slug: howto_clonenodeandchildren_treeview
 
 # Clone a TreeView Node and Its Children
 
-The example below demonstrates how to clone (copy) a Kendo UI TreeView node together with its children.
+The following example demonstrates how to clone (copy) a TreeView node together with its children.
 
-The notable steps to achieve this behavior are:
-* Use the [`select`](/api/javascript/ui/treeview#methods-select) method of the TreeView to obtain the selected node as a jQuery object. The second example below uses a context menu instead.
+To achieve this behavior:
+* Use the [`select`](/api/javascript/ui/treeview#methods-select) method of the TreeView to obtain the selected node as a jQuery object. The second example below uses a Context Menu instead.
 * Use the [`parent`](/api/javascript/ui/treeview#methods-parent) method to get the parent node of the selected node.
 * Use the [`dataItem`](/api/javascript/ui/treeview#methods-dataItem) method to obtain the data item (Kendo UI Model), which corresponds to the selected node.
 * Use the [`toJSON`](/api/javascript/data/model#methods-toJSON) method of the Model to strip proprietary information from the data item and its children, and convert them to a plain JavaScript object.
 * (Optional) Deselect and collapse the cloned node before appending it to the TreeView.
 * Use the [`append`](/api/javascript/ui/treeview#methods-append), [`insertAfter`](/api/javascript/ui/treeview#methods-insertAfter), or [`insertBefore`](/api/javascript/ui/treeview#methods-insertBefore) method of the TreeView to add the cloned node to the desired location in the item structure of the widget. In this example, nodes are cloned at the same level.
 
-The example below demonstrates how to copy the selected node.
+The following example demonstrates how to copy the selected node together with its children.
 
 ###### Example
 
@@ -78,9 +78,7 @@ The example below demonstrates how to copy the selected node.
     </script>
 ```
 
-Here is a variation of the above approach, which relies on a context menu click, instead of selection.
-
-The example below demonstrates how to copy the right-clicked node.
+The following example provides a variation of the previous approach and demonstrates how to copy the right-clicked node. It relies on a Context Menu click instead of a selection.
 
 ###### Example
 
@@ -150,8 +148,6 @@ The example below demonstrates how to copy the right-clicked node.
 
 ## See Also
 
-Other articles on the Kendo UI TreeView:
-
 * [TreeView JavaScript API Reference](/api/javascript/ui/treeview)
 * [How to Edit Nodes via Form]({% slug howto_editnodesviaform_treeview %})
 * [How to Filter Out Search Results]({% slug howto_filetroutserachresults_treeview %})
@@ -161,4 +157,4 @@ Other articles on the Kendo UI TreeView:
 * [How to Scroll to Selected Item]({% slug howto_scrolltoselecteditem_treeview %})
 * [How to Use FontAwesome Icons]({% slug howto_usefontawesomeicons_treeview %})
 
-For more runnable examples on the Kendo UI TreeView, browse its [**How To** documentation folder]({% slug howto_editnodesviaform_angularjs_treeview %}).
+For more runnable examples on the Kendo UI TreeView, browse its [**How To** documentation folder]({% slug howto_bindcheckedstatecustommodelfields_angulartreeview %}).

@@ -7,7 +7,9 @@ slug: howto_filetroutserachresults_treeview
 
 # Filter Out Search Results
 
-The example below demonstrates how to search for tree nodes that match a text string and show them along with their parent nodes in a Kendo UI TreeView widget.
+Your project might require you to enable the searching for TreeView nodes which match a text string.
+
+The following example demonstrates how to achieve this behavior and then show the nodes along with their parent items.
 
 ###### Example
 
@@ -74,8 +76,6 @@ The example below demonstrates how to search for tree nodes that match a text st
 
 ## See Also
 
-Other articles on the Kendo UI TreeView:
-
 * [TreeView JavaScript API Reference](/api/javascript/ui/treeview)
 * [How to Check Nodes Programmatically]({% slug howto_checknodeprogramatically_treeview %})
 * [How to Edit Nodes via Form]({% slug howto_editnodesviaform_treeview %})
@@ -85,4 +85,4 @@ Other articles on the Kendo UI TreeView:
 * [How to Scroll to Selected Item]({% slug howto_scrolltoselecteditem_treeview %})
 * [How to Use FontAwesome Icons]({% slug howto_usefontawesomeicons_treeview %})
 
-For more runnable examples on the Kendo UI TreeView, browse its [**How To** documentation folder]({% slug howto_editnodesviaform_angularjs_treeview %}).
+For more runnable examples on the Kendo UI TreeView, browse its [**How To** documentation folder]({% slug howto_bindcheckedstatecustommodelfields_angulartreeview %}).

@@ -1,17 +1,17 @@
 ---
 title: Use TreeView as Custom Editor in Grid
 page_title: Use TreeView as Custom Editor in Grid | Kendo UI TreeView
-description: "Learn how to use Kendo UI TreeView as an editor in the Kendo UI Grid widget."
+description: "Learn how to use the Kendo UI TreeView as an editor in the Kendo UI Grid widget."
 slug: howto_usetreeviewaseditorgrid
 ---
 
 # Use TreeView as Custom Editor in Grid
 
-To see the example on how to use the Kendo UI TreeView for batch editing in the Kendo UI Grid widget, refer to [this how-to article]({% slug howto_usethe_treeview_aseditor_grid %}).
+Your project might require you to use the TreeView for batch editing in the Kendo UI Grid.
+
+To see the example on how to achieve this behavior, refer to [this how-to article]({% slug howto_usethe_treeview_aseditor_grid %}).
 
 ## See Also
-
-Other articles on the Kendo UI TreeView:
 
 * [TreeView JavaScript API Reference](/api/javascript/ui/treeview)
 * [How to Check Nodes Programmatically]({% slug howto_checknodeprogramatically_treeview %})
@@ -23,4 +23,4 @@ Other articles on the Kendo UI TreeView:
 * [How to Scroll to Selected Item]({% slug howto_scrolltoselecteditem_treeview %})
 * [How to Use FontAwesome Icons]({% slug howto_usefontawesomeicons_treeview %})
 
-For more runnable examples on the Kendo UI TreeView, browse its [**How To** documentation folder]({% slug howto_editnodesviaform_angularjs_treeview %}).
+For more runnable examples on the Kendo UI TreeView, browse its [**How To** documentation folder]({% slug howto_bindcheckedstatecustommodelfields_angulartreeview %}).
