@@ -1,15 +1,16 @@
 ---
-title: Adjust Row Heights with ng-if Column Templates When Columns Are Locked
-page_title: Adjust Row Heights with ng-if Column Templates When Columns Are Locked | Kendo UI Grid
+title: Adjust Row Heights When Columns Are Locked
+page_title: Adjust Row Heights When Columns Are Locked | Kendo UI Grid
 description: "Learn how to adjust row heights for a Kendo UI Grid with locked columns and a column template that uses `ng-if` in AngularJS applications."
 slug: howto_adjust_row_heights_template_locked_columns_grid
+position: 1
 ---
 
-# Adjust Row Heights with ng-if Column Templates When Columns Are Locked
+# Adjust Row Heights When Columns Are Locked
 
 You might have to handle a scenario with locked columns where the content of the column template is initially hidden through the `ng-if` directive.
 
-In such cases, showing the content later might cause issues related to the proper calculation of the row heights for the locked and unlocked parts of the Grid. To avoid such possible behavior, when the scope value that controls the visibility of the template content is changed, conditionally call the [`resize()`](/api/javascript/kendo#methods-resize) and [`refresh()`](/api/javascript/ui/grid#methods-refresh) methods of the Grid in its [`dataBound`](/api/javascript/ui/grid#events-dataBound) event.
+In such cases, if you show the content later, you might cause issues related to the proper calculation of the row heights for the locked and unlocked parts of the Grid. To avoid such possible issues, conditionally call the [`resize()`](/api/javascript/kendo#methods-resize) and [`refresh()`](/api/javascript/ui/grid#methods-refresh) methods of the Grid in its [`dataBound`](/api/javascript/ui/grid#events-dataBound) event when the scope value that controls the visibility of the template content is changed.
 
 The following example demonstrates how to adjust the row heights in a Kendo UI Grid with locked columns and with a column template that uses the `ng-if` directive.
 
@@ -93,9 +94,7 @@ The following example demonstrates how to adjust the row heights in a Kendo UI G
 
 ## See Also
 
-Other articles on the Kendo UI Grid and how-to examples related to AngularJS:
-
-* [JavaScript API Reference](/api/javascript/ui/grid)
+* [JavaScript API Reference of the Grid](/api/javascript/ui/grid)
 * [How to Bind to Telerik Backend Services]({% slug howto_bindto_telerik_backend_services_grid %})
 * [How to Change Languages Dynamically]({% slug howto_dynamic_language_change %})
 * [How to Create Custom ToolBar Templates]({% slug howto_create_custom_toolbar_templates_grid %})
@@ -103,4 +102,4 @@ Other articles on the Kendo UI Grid and how-to examples related to AngularJS:
 * [How to Use Resize Columns from a Button]({% slug howto_resize_columnsfrom_abutton_grid %})
 * [How to Use AngularJS in Popup Editor Templates]({% slug howto_use_angularin_popup_editor_templates_grid %})
 
-For more runnable examples on the Kendo UI Grid, browse its [**How To** documentation folder]({% slug howto_dynamic_language_change %}).
+For more runnable examples on the Kendo UI Grid, browse its **How To** documentation folder.

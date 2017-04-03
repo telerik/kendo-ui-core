@@ -7,9 +7,9 @@ slug: howto_implement_stable_sortwithgroupingin_chrome_grid
 
 # Implement Stable Sorting in Chrome
 
-The implementation of the built-in sorting algorithm in Google Chrome [is not guaranteed to be stable](https://bugs.chromium.org/p/v8/issues/detail?id=90). A [non-stable sorting algorithm](https://en.wikipedia.org/wiki/Sorting_algorithm#Stability) might cause items with the same sorting order to change places.
+The implementation of the built-in sorting algorithm in Google Chrome [is not guaranteed to be stable](https://bugs.chromium.org/p/v8/issues/detail?id=90).
 
-When the Grid is grouped by a given field, you can use the [`sort`](/api/javascript/data/datasource#methods-sort) method in the [`group`](/api/javascript/ui/grid#events-group) event handler of the Grid to programmatically sort the items within each group in the preferred order.
+A [non-stable sorting algorithm](https://en.wikipedia.org/wiki/Sorting_algorithm#Stability) might cause items with the same sorting order to change places. When the Grid is grouped by a given field, you can use the [`sort`](/api/javascript/data/datasource#methods-sort) method in the [`group`](/api/javascript/ui/grid#events-group) event handler to programmatically sort the items within each group in the preferred order.
 
 The following example demonstrates how to apply a stable sort function by using a position field in the Grid.
 
@@ -65,9 +65,7 @@ The following example demonstrates how to apply a stable sort function by using 
 
 ## See Also
 
-Other articles on the Kendo UI Grid and how-to examples:
-
-* [JavaScript API Reference](/api/javascript/ui/grid)
+* [JavaScript API Reference of the Grid](/api/javascript/ui/grid)
 * [How to Add Cascading DropDownList Editors]({% slug howto_add_cascading_dropdown_list_editors_grid %})
 * [How to Copy Data from Excel]({% slug howto_copy_datafrom_excel_grid %})
 * [How to Drag and Drop Rows between Grids]({% slug howto_dragand_drop_rows_between_twogrids_grid %})
@@ -80,4 +78,4 @@ Other articles on the Kendo UI Grid and how-to examples:
 * [How to Show Tooltip for Column Records]({% slug howto_show_tooltipfor_column_records_grid %})
 * [How to Update Toolbar Content Using MVVM Binding]({% slug howto_update_toolbar_content_using_mvvmbinding_grid %})
 
-For more runnable examples on the Kendo UI Grid, browse its [**How To** documentation folder]({% slug howto_create_custom_editors_grid %}).
+For more runnable examples on the Kendo UI Grid, browse its [**How To** documentation folder]({% slug howto_adjust_row_heights_template_locked_columns_grid %}).

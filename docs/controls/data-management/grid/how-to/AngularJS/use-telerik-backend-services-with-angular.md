@@ -7,7 +7,7 @@ slug: howto_bindto_telerik_backend_services_grid
 
 # Bind to Telerik Backend Services
 
-The example below demonstrates how to bind the [Kendo UI Grid widget](http://www.telerik.com/kendo-ui/grid) to the Telerik Backend Services in an AngularJS application.
+The following example demonstrates how to bind the [Grid](http://www.telerik.com/kendo-ui/grid) to the Telerik Backend Services in an AngularJS application.
 
 ###### Example
 
@@ -79,9 +79,7 @@ The example below demonstrates how to bind the [Kendo UI Grid widget](http://www
 
 ## See Also
 
-Other articles on the Kendo UI Grid and how-to examples related to AngularJS:
-
-* [JavaScript API Reference](/api/javascript/ui/grid)
+* [JavaScript API Reference of the Grid](/api/javascript/ui/grid)
 * [How to Change Languages Dynamically]({% slug howto_dynamic_language_change %})
 * [How to Create Custom ToolBar Templates]({% slug howto_create_custom_toolbar_templates_grid %})
 * [How to Create Custom Editors]({% slug howto_create_custom_editors_grid %})
@@ -89,4 +87,4 @@ Other articles on the Kendo UI Grid and how-to examples related to AngularJS:
 * [How to Use Resize Columns from a Button]({% slug howto_resize_columnsfrom_abutton_grid %})
 * [How to Use AngularJS in Popup Editor Templates]({% slug howto_use_angularin_popup_editor_templates_grid %})
 
-For more runnable examples on the Kendo UI Grid, browse its [**How To** documentation folder]({% slug howto_create_custom_editors_grid %}).
+For more runnable examples on the Kendo UI Grid, browse its [**How To** documentation folder]({% slug howto_adjust_row_heights_template_locked_columns_grid %}).

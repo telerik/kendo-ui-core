@@ -8,7 +8,7 @@ slug: howto_update_toolbar_content_using_mvvmbinding_grid
 
 # Update Toolbar Content Using MVVM Binding
 
-The example below demonstrates how to create a [custom MVVM binding](/framework/mvvm/bindings/custom) to update the Toolbar content dynamically.
+The following example demonstrates how to create a [custom MVVM binding](/framework/mvvm/bindings/custom) to update the Toolbar content dynamically.
 
 ###### Example
 
@@ -85,9 +85,7 @@ The example below demonstrates how to create a [custom MVVM binding](/framework/
 
 ## See Also
 
-Other articles on the Kendo UI Grid and how-to examples:
-
-* [JavaScript API Reference](/api/javascript/ui/grid)
+* [JavaScript API Reference of the Grid](/api/javascript/ui/grid)
 * [How to Add Cascading DropDownList Editors]({% slug howto_add_cascading_dropdown_list_editors_grid %})
 * [How to Copy Data from Excel]({% slug howto_copy_datafrom_excel_grid %})
 * [How to Drag and Drop Rows between Grids]({% slug howto_dragand_drop_rows_between_twogrids_grid %})
@@ -100,4 +98,4 @@ Other articles on the Kendo UI Grid and how-to examples:
 * [How to Set Cell Color Based on ForeignKey Values]({% slug howto_set_cell_color_basedon_foreignkey_values_grid %})
 * [How to Show Tooltip for Column Records]({% slug howto_show_tooltipfor_column_records_grid %})
 
-For more runnable examples on the Kendo UI Grid, browse its [**How To** documentation folder]({% slug howto_create_custom_editors_grid %}).
+For more runnable examples on the Kendo UI Grid, browse its [**How To** documentation folder]({% slug howto_adjust_row_heights_template_locked_columns_grid %}).

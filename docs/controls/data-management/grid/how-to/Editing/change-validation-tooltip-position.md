@@ -7,13 +7,14 @@ slug: howto_change_validation_message_position_grid
 
 # Change the Validation Message Position
 
-By design, validation messages inside the Grid are tooltips that display over other adjacent content. The example below shows how to change this behavior and display the validation messages at a specific position in the popup edit form of the Grid.
+By design, validation messages inside the Grid are tooltips that are displayed over adjacent content.
+
+The following example demonstrates how to change this behavior and display the validation messages at a specific position in the popup edit form of the Grid.
 
 The approach relies on the following milestones:
-
 * Usage of a [popup edit form template](/api/javascript/ui/grid#configuration-editable.template).
 * The validation messages are put in [placeholders]({% slug overview_kendoui_validator_widget %}#customization-of-tooltip-position) that are wrapped in custom parents and positioned with the help of custom CSS styles.
-* The [popup edit form width may need to be increased]({% slug howto_increase_popup_edit_formand_textbox_grid %})
+* The [width of the popup edit form may need to be increased]({% slug howto_increase_popup_edit_formand_textbox_grid %}).
 
 ###### Example
 
@@ -124,9 +125,7 @@ $(function () {
 
 ## See Also
 
-Other articles on the Kendo UI Grid and how-to examples related to its editing functionality:
-
-* [JavaScript API Reference](/api/javascript/ui/grid)
+* [JavaScript API Reference of the Grid](/api/javascript/ui/grid)
 * [Increase Popup Edit Form and Textbox Width]({% slug howto_increase_popup_edit_formand_textbox_grid %})
 * [How to Add New Rows When Tabbing out of the Last One]({% slug howto_add_new_rows_when_tabbingoutof_thelast_one_grid %})
 * [How to Build Custom dataSource for Custom Editor]({% slug howto_build_custom_datasourcefor_custom_editor_grid %})
@@ -143,4 +142,4 @@ Other articles on the Kendo UI Grid and how-to examples related to its editing f
 * [How to Use Editors Based on Data Item Property]({% slug howto_use_editors_basedon_dataitem_property_grid %})
 * [How to Use TreeView as Custom Editor]({% slug howto_usethe_treeview_aseditor_grid %})
 
-For more runnable examples on the Kendo UI Grid, browse its [**How To** documentation folder]({% slug howto_create_custom_editors_grid %}).
+For more runnable examples on the Kendo UI Grid, browse its [**How To** documentation folder]({% slug howto_adjust_row_heights_template_locked_columns_grid %}).

@@ -8,16 +8,18 @@ slug: howto_filter_date_columns_grid
 
 # Filter by Date Only
 
-To achieve the behavior of filtering Grid columns by date only, ignoring the exact time, apply the following approaches:
+Your project might require you to filter the columns of the Grid only by date.
+
+To achieve this behavior and ignore the exact time when you filter the data:
 
 1. [Create a helper field, which will hold the date]({% slug howto_filter_date_columns_grid %}#create-helper-field).
 2. [Transform the filter before applying it]({% slug howto_filter_date_columns_grid %}#transform-the-filter).
 
 ## Create Helper Field
 
-The helper field is intended to hold only the date, so that the Grid data is later filtered by it while displaying the original datetime field.
+The helper field is intended to hold only the date, so that the Grid data is later filtered by it while displaying the original `datetime` field.
 
-To create the helper field, follow the steps below:
+To create the helper field:
 * Use the [`dataSource.schema.parse`](/api/javascript/data/datasource#configuration-schema.parse) configuration to create a new field that is intended to hold the date only.
 * Use the data-holding field in the [`columns`](/api/javascript/ui/grid#configuration-columns) definition, but provide a [`template`](/api/javascript/ui/grid#configuration-columns.template) that will visualize the initial datetime field.
 
@@ -84,7 +86,7 @@ To create the helper field, follow the steps below:
 
 Before applying it, you have to handle the `filterMenuInit` event to transform the filter.
 
-To achieve the filter change, follow the steps below:
+To achieve the filter change:
 
 * Handle the [`filterMenuInit` event](/api/javascript/ui/grid#events-filterMenuInit) and conditionally apply custom logic to modify the filter so that it looks for dates, selected from the DatePicker, between the start and the end of day.
 * Use the [`dataSource.filter()` method](/api/javascript/data/datasource#methods-filter) and pass the modified filter configuration to it.
@@ -145,9 +147,7 @@ To achieve the filter change, follow the steps below:
 
 ## See Also
 
-Other articles on the Kendo UI Grid and how-to examples:
-
-* [JavaScript API Reference](/api/javascript/ui/grid)
+* [JavaScript API Reference of the Grid](/api/javascript/ui/grid)
 * [How to Add Cascading DropDownList Editors]({% slug howto_add_cascading_dropdown_list_editors_grid %})
 * [How to Copy Data from Excel]({% slug howto_copy_datafrom_excel_grid %})
 * [How to Drag and Drop Rows between Grids]({% slug howto_dragand_drop_rows_between_twogrids_grid %})
@@ -160,4 +160,4 @@ Other articles on the Kendo UI Grid and how-to examples:
 * [How to Show Tooltip for Column Records]({% slug howto_show_tooltipfor_column_records_grid %})
 * [How to Update Toolbar Content Using MVVM Binding]({% slug howto_update_toolbar_content_using_mvvmbinding_grid %})
 
-For more runnable examples on the Kendo UI Grid, browse its [**How To** documentation folder]({% slug howto_create_custom_editors_grid %}).
+For more runnable examples on the Kendo UI Grid, browse its [**How To** documentation folder]({% slug howto_adjust_row_heights_template_locked_columns_grid %}).

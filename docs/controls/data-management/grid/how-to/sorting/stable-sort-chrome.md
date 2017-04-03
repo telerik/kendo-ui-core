@@ -8,9 +8,9 @@ slug: howto_implement_stable_sortin_chrome_grid
 
 # Implement Stable Sorting in Chrome
 
-The implementation of the built-in sorting algorithm in Google Chrome [is not guaranteed to be stable](https://bugs.chromium.org/p/v8/issues/detail?id=90). A [non-stable sorting algorithm](https://en.wikipedia.org/wiki/Sorting_algorithm#Stability) might cause items with the same sorting order to change places.
+The implementation of the built-in sorting algorithm in Google Chrome [is not guaranteed to be stable](https://bugs.chromium.org/p/v8/issues/detail?id=90).
 
-The example below demonstrates that when run in Chrome and items are sorted by **Address**, they change places. This is visible if you look at the **Name** column. The example represents a typical case where a non-stable sort causes side effects.
+A [non-stable sorting algorithm](https://en.wikipedia.org/wiki/Sorting_algorithm#Stability) might cause items with the same sorting order to change places. The following example demonstrates that when run in Chrome and items are sorted by **Address**, they change places. This is visible if you look at the **Name** column. The demo represents a typical case where a non-stable sorting causes side effects.
 
 ###### Example
 
@@ -96,9 +96,7 @@ The solution for this issue is to add a position field and use it to maintain st
 
 ## See Also
 
-Other articles on the Kendo UI Grid and how-to examples:
-
-* [JavaScript API Reference](/api/javascript/ui/grid)
+* [JavaScript API Reference of the Grid](/api/javascript/ui/grid)
 * [How to Add Cascading DropDownList Editors]({% slug howto_add_cascading_dropdown_list_editors_grid %})
 * [How to Copy Data from Excel]({% slug howto_copy_datafrom_excel_grid %})
 * [How to Drag and Drop Rows between Grids]({% slug howto_dragand_drop_rows_between_twogrids_grid %})
@@ -111,4 +109,4 @@ Other articles on the Kendo UI Grid and how-to examples:
 * [How to Show Tooltip for Column Records]({% slug howto_show_tooltipfor_column_records_grid %})
 * [How to Update Toolbar Content Using MVVM Binding]({% slug howto_update_toolbar_content_using_mvvmbinding_grid %})
 
-For more runnable examples on the Kendo UI Grid, browse its [**How To** documentation folder]({% slug howto_create_custom_editors_grid %}).
+For more runnable examples on the Kendo UI Grid, browse its [**How To** documentation folder]({% slug howto_adjust_row_heights_template_locked_columns_grid %}).

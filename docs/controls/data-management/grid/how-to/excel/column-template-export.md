@@ -8,9 +8,9 @@ slug: howto_use_column_template_grid
 
 # Use Column Template
 
-The example below demonstrates how to use the column template as the value of a corresponding cell in the Excel document while exporting Kendo UI Grid.
+The following example demonstrates how to use the column template as the value of a corresponding cell in the Excel document while exporting the Grid.
 
-For additional information about how Excel documents work, refer to the [introductory help topic on Excel](/framework/excel/introduction#create-excel-document).
+For more information on how Excel documents work, refer to the [introductory help topic on Excel](/framework/excel/introduction#create-excel-document).
 
 ###### Example
 
@@ -53,9 +53,7 @@ $("#grid").kendoGrid({
 
 ## See Also
 
-Other articles on the Kendo UI Grid and how-to examples related to its export to Excel:
-
-* [JavaScript API Reference](/api/javascript/ui/grid#configuration-excel)
+* [JavaScript API Reference of the Grid](/api/javascript/ui/grid#configuration-excel)
 * [How to Align Footer Cells]({% slug howto_alignfootercells_grid %})
 * [How to Configure Color for Alternating Rows]({% slug howto_configure_color_alternating_rows_grid %})
 * [How to Export Checked Columns Only]({% slug howto_export_checked_columns_only_grid %})
@@ -63,4 +61,4 @@ Other articles on the Kendo UI Grid and how-to examples related to its export to
 * [How to Export Multiple Grids]({% slug howto_export_excel_multiple_grids_grid %})
 * [How to Format Cell Values]({% slug howto_format_cell_values_grid %})
 
-For more runnable examples on the Kendo UI Grid, browse its [**How To** documentation folder]({% slug howto_create_custom_editors_grid %}).
+For more runnable examples on the Kendo UI Grid, browse its [**How To** documentation folder]({% slug howto_adjust_row_heights_template_locked_columns_grid %}).

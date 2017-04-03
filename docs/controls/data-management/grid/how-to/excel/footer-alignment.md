@@ -7,11 +7,11 @@ slug: howto_alignfootercells_grid
 
 # Align Footer Cells
 
-The example below demonstrates how to align the footer cells during excel export. Usually, HTML and CSS are used to do that, but this is not supported in Excel.
+The following example demonstrates how to align the footer cells during Excel export.
 
-The demo uses the [`hAlign`](/api/javascript/ooxml/workbook#configuration-sheets.rows.cells.hAlign) option of the cell to set the alignment.
+To achieve this behavior, you can usually use HTML and CSS. However, Excel does not supported these options. To set the alignment, the demo uses the [`hAlign`](/api/javascript/ooxml/workbook#configuration-sheets.rows.cells.hAlign) option of the cell.
 
-To understand how Excel documents work, check the [introductory article on Excel]({% slug introduction_excelexport_kendoui %}).
+For more information on how Excel documents work, refer to the [introductory article on Excel]({% slug introduction_excelexport_kendoui %}).
 
 ###### Example
 
@@ -90,9 +90,7 @@ To understand how Excel documents work, check the [introductory article on Excel
 
 ## See Also
 
-Other articles on the Kendo UI Grid and how-to examples related to its export to Excel:
-
-* [JavaScript API Reference](/api/javascript/ui/grid#configuration-excel)
+* [JavaScript API Reference of the Grid](/api/javascript/ui/grid#configuration-excel)
 * [How to Configure Color for Alternating Rows]({% slug howto_configure_color_alternating_rows_grid %})
 * [How to Export Detail Grids]({% slug howto_exportto_excel_masterand_detail_grid %})
 * [How to Export Checked Columns Only]({% slug howto_export_checked_columns_only_grid %})
@@ -100,4 +98,4 @@ Other articles on the Kendo UI Grid and how-to examples related to its export to
 * [How to Format Cell Values]({% slug howto_format_cell_values_grid %})
 * [How to Use Column Template]({% slug howto_use_column_template_grid %})
 
-For more runnable examples on the Kendo UI Grid, browse its [**How To** documentation folder]({% slug howto_create_custom_editors_grid %}).
+For more runnable examples on the Kendo UI Grid, browse its [**How To** documentation folder]({% slug howto_adjust_row_heights_template_locked_columns_grid %}).
