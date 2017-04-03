@@ -454,9 +454,11 @@ its parent horizontally. You can also switch off the screen boundary detection c
 
 ### scrollable `Boolean|Object`
 
-If enabled, the Menu will display buttons that will scroll the menu items, when they cannot fit the Menu width or menu popups height. By default scrolling is disabled.
+If enabled, the Menu displays buttons that scroll the items when they cannot fit the width or the popups' height of the Menu. By default, scrolling is disabled.
 
-#### Example - enable scrolling
+The following example demonstrates how to enable the scrolling functionality.
+
+#### Example
 
     <ul id="menu" style="width:150px;">
         <li>Item 1</li>
@@ -472,11 +474,7 @@ If enabled, the Menu will display buttons that will scroll the menu items, when 
 
 ### scrollable.distance `Number` *(default: 50)*
 
-Sets the scroll amount (in pixels) that the menu scrolls when the scroll buttons are hovered.
-
-Each such distance is animated and then another animation starts with the same distance.
-
-If clicking a scroll button, the menu scrolls with 2x the distance.
+Sets the scroll amount (in pixels) that the Menu scrolls when the scroll buttons are hovered. Each such distance is animated and then another animation starts with the same distance. If clicking a scroll button, the Menu scrolls with 2x the distance.
 
 #### Example
 
@@ -1201,4 +1199,3 @@ The selected item
             // handle event
         });
     </script>
-
