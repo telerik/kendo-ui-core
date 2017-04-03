@@ -7,7 +7,9 @@ slug: howto_use_crud_operationswith_apsnet_action_methods_bound_grid
 
 # Use CRUD Operations When Grid Is Bound to ASP.NET MVC Action Methods
 
-To see the example on the remote CRUD (Create, Read, Update, Destroy) data operations using a Kendo UI Grid bound to ASP.NET MVC action methods, refer to [this project](https://github.com/telerik/kendo-examples-asp-net-mvc/tree/master/grid-crud). It is available in the [GitHub repository for Kendo UI examples using ASP.NET MVC](https://github.com/telerik/kendo-examples-asp-net-mvc).
+Your project might require the remote CRUD (Create, Read, Update, Destroy) data operations to use a Kendo UI Grid bound to ASP.NET MVC action methods.
+
+To see the example on how to achieve this behavior, refer to [this project](https://github.com/telerik/kendo-examples-asp-net-mvc/tree/master/grid-crud). It is available in the [GitHub repository for Kendo UI examples that use ASP.NET MVC](https://github.com/telerik/kendo-examples-asp-net-mvc).
 
 > **Important**  
 >
@@ -15,9 +17,7 @@ To see the example on the remote CRUD (Create, Read, Update, Destroy) data opera
 
 ## See Also
 
-Other articles on the Kendo UI Grid and how-to examples related to its editing functionality:
-
-* [JavaScript API Reference](/api/javascript/ui/grid)
+* [JavaScript API Reference of the Grid](/api/javascript/ui/grid)
 * [How to Add New Rows When Tabbing out of the Last One]({% slug howto_add_new_rows_when_tabbingoutof_thelast_one_grid %})
 * [How to Build Custom dataSource for Custom Editor]({% slug howto_build_custom_datasourcefor_custom_editor_grid %})
 * [How to Customize the Delete Confirmation Dialog]({% slug howto_customize_delete_confirmation_dialog_grid %})
@@ -34,4 +34,4 @@ Other articles on the Kendo UI Grid and how-to examples related to its editing f
 * [How to Use Editors Based on Data Item Property]({% slug howto_use_editors_basedon_dataitem_property_grid %})
 * [How to Use TreeView as Custom Editor]({% slug howto_usethe_treeview_aseditor_grid %})
 
-For more runnable examples on the Kendo UI Grid, browse its [**How To** documentation folder]({% slug howto_create_custom_editors_grid %}).
+For more runnable examples on the Kendo UI Grid, browse its [**How To** documentation folder]({% slug howto_adjust_row_heights_template_locked_columns_grid %}).

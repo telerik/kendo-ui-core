@@ -8,9 +8,11 @@ slug: howto_transforminvaliddataitemkety_grid
 
 # Transform Invalid Data Item Keys into Valid Ones
 
-Sometimes the received remote data contains fields that are not valid JavaScript identifiers. To manipulate the received data and transform it so that it can be processed by the Kendo UI DataSource, use the `schema.parse()` method to replace the non-supported keys with supported ones.
+Sometimes the received remote data contains fields that are not valid JavaScript identifiers.
 
-The example below demonstrates how to use the `schema.parse()` method to transform invalid data item keys into valid ones.
+To manipulate the received data and transform it so that it can be processed by the DataSource, use the `schema.parse()` method to replace the non-supported keys with supported.
+
+The following example demonstrates how to use the `schema.parse()` method to transform invalid data item keys into valid ones.
 
 ###### Example
 
@@ -74,9 +76,7 @@ The example below demonstrates how to use the `schema.parse()` method to transfo
 
 ## See Also
 
-Other articles on the Kendo UI Grid and how-to examples:
-
-* [JavaScript API Reference](/api/javascript/ui/grid)
+* [JavaScript API Reference of the Grid](/api/javascript/ui/grid)
 * [How to Add Cascading DropDownList Editors]({% slug howto_add_cascading_dropdown_list_editors_grid %})
 * [How to Copy Data from Excel]({% slug howto_copy_datafrom_excel_grid %})
 * [How to Enable ForeignKey Column Sorting by Text]({% slug howto_enable_foreignkey_sotringby_text_grid %})
@@ -89,4 +89,4 @@ Other articles on the Kendo UI Grid and how-to examples:
 * [How to Show Tooltip for Column Records]({% slug howto_show_tooltipfor_column_records_grid %})
 * [How to Update Toolbar Content Using MVVM Binding]({% slug howto_update_toolbar_content_using_mvvmbinding_grid %})
 
-For more runnable examples on the Kendo UI Grid, browse its [**How To** documentation folder]({% slug howto_create_custom_editors_grid %}).
+For more runnable examples on the Kendo UI Grid, browse its [**How To** documentation folder]({% slug howto_adjust_row_heights_template_locked_columns_grid %}).

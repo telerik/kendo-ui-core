@@ -7,7 +7,7 @@ slug: howto_change_group_header_position_wthlocked_columns_grid
 
 # Change Group Header Position When Columns Are Locked
 
-The example below demonstrates how to change the group header position, when locked columns are used, in order to show them on the right table.
+The following example demonstrates how to change the group header position when locked columns are used to show them on the right table.
 
 ###### Example
 
@@ -84,8 +84,6 @@ The example below demonstrates how to change the group header position, when loc
 
 ## See Also
 
-Other articles on the Kendo UI Grid and how-to examples related to its layout:
-
 * [Kendo UI Grid JavaScript API Reference](/api/javascript/ui/grid)
 * [How to Adjust Row Height with Virtual Scrolling]({% slug howto_adjust_row_height_withvirtual_scrolling_grid %})
 * [How to Apply Minimum Width during Column Resize]({% slug howto_apply_min_width_during_column_resize_grid %})
@@ -95,4 +93,4 @@ Other articles on the Kendo UI Grid and how-to examples related to its layout:
 * [How to Resize Grid When Window Is Resized]({% slug howto_resize_whenthe_windowis_resized_grid %})
 * [How to Use FontAwesome Icons in Custom Command Buttons]({% slug howto_use_fontawesomeiconsin_custom_command_buttons_grid %})
 
-For more runnable examples on the Kendo UI Grid, browse its [**How To** documentation folder]({% slug howto_create_custom_editors_grid %}).
+For more runnable examples on the Kendo UI Grid, browse its [**How To** documentation folder]({% slug howto_adjust_row_heights_template_locked_columns_grid %}).
