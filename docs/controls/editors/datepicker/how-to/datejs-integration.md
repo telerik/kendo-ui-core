@@ -21,6 +21,7 @@ The example below demonstrates how to integrate the Kendo UI DatePicker with Dat
         </div>
         <p>Integration with the <a target="_blank" href="http://www.datejs.com/">DateJS</a> library</p>
     </div>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/datejs/1.0/date.min.js"></script>
     <script>
         $(document).ready(function() {
             // create DatePicker from input HTML element
