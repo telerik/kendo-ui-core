@@ -44,9 +44,9 @@ The Kendo UI adaptive mode requires scripts, which are normally part of the Kend
 
 ## Pane Configuration
 
-The mobile pane in which the adaptive Grid is placed does not automatically expand its height. To add an adaptive Grid to a Kendo UI mobile application, set the `stretch` configuration of the respective view to `true`, or explicitly define the height of the widget.
+The mobile pane in which the adaptive Grid is placed does not automatically expand its height. To add an adaptive Grid to a Kendo UI mobile application, set the `stretch` configuration of the respective view to `true` and apply an `auto` height to the Grid. Alternatively, define an explicit pixel Grid height and omit the pane `stretch` option.
 
-### Use the stretch Option
+### Use the stretch option
 
 ###### Example
 
@@ -67,7 +67,8 @@ The mobile pane in which the adaptive Grid is placed does not automatically expa
             ],
             filterable: true,
             columnMenu: true,
-            mobile: "phone"
+            mobile: "phone",
+            height: "auto"
         };
 
         function onInit() {
@@ -77,7 +78,7 @@ The mobile pane in which the adaptive Grid is placed does not automatically expa
         var app = new kendo.mobile.Application();
     </script>
 
-### Use the height Option    
+### Use the height option
 
 ###### Example
 
