@@ -7,7 +7,7 @@ slug: howto_hideeditfieldsondifferentlevels_treelist
 
 # Hide Edit Fields on Different Levels
 
-The example below demonstrates how to hide editors for different columns on different levels in the Kendo UI TreeList widget.
+The following example demonstrates how to hide editors for different columns on different levels in the TreeList.
 
 ###### Example
 
@@ -110,10 +110,8 @@ The example below demonstrates how to hide editors for different columns on diff
 
 ## See Also
 
-Other articles on the Kendo UI TreeList:
-
-* [JavaScript API Reference](/api/javascript/ui/treelist)
+* [JavaScript API Reference of the TreeList](/api/javascript/ui/treelist)
 * [How to Show Context Menu]({% slug howto_showcontextmenu_treelist %})
 * [How to Update Field in All Child Nodes]({% slug howto_updatefieldinallchildnodes_treelist %})
 
-For more runnable examples on the Kendo UI TreeList, browse the [**How To** documentation folder]({% slug howto_updatefieldinallchildnodes_angularjs_treelist %}).
+For more runnable examples on the Kendo UI TreeList, browse its [**How To** documentation folder]({% slug howto_updatefieldinallchildnodes_angularjs_treelist %}).
