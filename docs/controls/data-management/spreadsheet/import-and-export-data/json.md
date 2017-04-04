@@ -8,13 +8,15 @@ position: 1
 
 # Store Data as JSON
 
-The Spreadsheet component allows you to store and load data in a native JSON format. The format follows the same structure as the [widget configuration](/api/javascript/ui/spreadsheet#configuration). It is designed to be used both for direct storage and as an [intermediate format]({% slug serverside_processing_spreadsheet_widget %}).
+The Spreadsheet allows you to store and load data in a native JSON format.
+
+The format follows the same structure as the [widget configuration](/api/javascript/ui/spreadsheet#configuration). It is designed to be used both for direct storage and as an [intermediate format]({% slug serverside_processing_spreadsheet_widget %}).
 
 > **Important**  
 >
-> An official JSON schema will be published once the component goes out of Beta.
+> Once the Spreadsheet goes out of its Beta version, an official JSON schema will be published.
 
-Persisted information includes:
+The information that is persisted includes:
 
 * Cell formulas, values, formatting and styling.
 * Row height and column width.
@@ -23,11 +25,9 @@ Persisted information includes:
 
 ## Serialization API
 
-The Spreadsheet client-side API includes the [`fromJSON`](/api/javascript/ui/spreadsheet#methods-fromJSON) and [`toJSON`](/api/javascript/ui/spreadsheet#methods-toJSON) methods for loading and storing the widget state.
+The Spreadsheet client-side API includes the [`fromJSON`](/api/javascript/ui/spreadsheet#methods-fromJSON) and [`toJSON`](/api/javascript/ui/spreadsheet#methods-toJSON) methods for loading and storing its state. To load the Spreadsheet with data, pass an object matching the required schema to `fromJSON`. This resets the widget and clears all existing data.
 
-To load the spreadsheet with data, pass an object matching the required schema, to `fromJSON`. This will reset the widget and clear all existing data.
-
-The example below demonstrates how to load data by using `fromJSON`.
+The following example demonstrates how to load data by using `fromJSON`.
 
 ###### Example
 
@@ -54,9 +54,9 @@ The example below demonstrates how to load data by using `fromJSON`.
     </script>
 ```
 
-You can also choose to load data in a specific [sheet](/api/javascript/spreadsheet/sheet) only. This will not affect the data located in the other sheets, apart from the formulas that refer to it.
+You can also choose to load data only in a specific [sheet](/api/javascript/spreadsheet/sheet). This will not affect the data located in the other sheets, apart from the formulas that refer to it.
 
-The example below demonstrates how to load sheet data by using `fromJSON`.
+The following example demonstrates how to load sheet data by using `fromJSON`.
 
 ###### Example
 

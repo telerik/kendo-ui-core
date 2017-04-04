@@ -12,7 +12,7 @@ You might need to reset the expanding that has occurred and revert to your CMS.
 
 In order for the expand to properly work, set fully qualified names to the expanded tuples as shown in the following code snippet with the `[Calendar Year].&[2005]` configuration.
 
-The example below demonstrates how to expand multiple column dimensions by using the [`dataBound`](/api/javascript/ui/pivotgrid#events-dataBound) event of the PivotGrid.
+The following example demonstrates how to expand multiple column dimensions by using the [`dataBound`](/api/javascript/ui/pivotgrid#events-dataBound) event of the PivotGrid.
 
 ###### Example
 
@@ -68,12 +68,10 @@ The example below demonstrates how to expand multiple column dimensions by using
 
 ## See Also
 
-Other articles and how-to examples on the Kendo UI PivotGrid:
-
 * [PivotGrid JavaScript API Reference](/api/javascript/ui/pivotgrid)
 * [How to Change Data Source Dynamically]({% slug howto_change_datasource_dynamically_pivotgrid %})
 * [How to Drill Down Navigation Always Starting from Root Tuple]({% slug howto_drill_down_navigation_startingfrom_root_tuple_pivotgrid %})
-* [How to Filter by Using the "include" Operator]({% slug howto_use_include_operator_pivotgrid %})
+* [How to Filter by Using the include Operator]({% slug howto_use_include_operator_pivotgrid %})
 * [How to Integrate with Kendo UI Chart]({% slug howto_integratewith_kendoui_chart_pivotgrid %})
 * [How to Make the Include fields Window Modal]({% slug howto_make_include_fields_window_modal_pivotgrid %})
 * [How to Modify Measure Tag Captions]({% slug howto_modify_measure_tag_captions_pivotgrid %})
@@ -82,4 +80,4 @@ Other articles and how-to examples on the Kendo UI PivotGrid:
 * [How to Show Tooltip with Data Cell Information]({% slug howto_show_tooltip_withdata_cellinformation_pivotgrid %})
 * [How to Translate PivotConfigurator Field Items]({% slug howto_translate_pivotconfigurator_messages_pivotgrid %})
 
-For more runnable examples on the Kendo UI PivotGrid, browse its [**How To** documentation folder]({% slug howto_add_dimension_column_axis_pivotgrid %}).
+For more runnable examples on the Kendo UI PivotGrid, browse its [**How To** documentation folder]({% slug howto_change_pivotgrid_fields_names_pivotgrid %}).

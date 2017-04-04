@@ -7,7 +7,7 @@ slug: howto_get_flagged_cells_containing_invalid_values_spreadsheet_widget
 
 # Get Flagged Cells Containing Invalid Values
 
-The example below demonstrates how to get all flagged cells containing invalid values in a Kendo UI Spreadsheet widget.
+The following example demonstrates how to get all flagged cells in the Spreadsheet which contain invalid values.
 
 ###### Example
 
@@ -572,8 +572,6 @@ The example below demonstrates how to get all flagged cells containing invalid v
 ```
 
 ## See Also
-
-Other articles on the Kendo UI Spreadsheet:
 
 * [Spreadsheet JavaScript API Reference](/api/javascript/ui/spreadsheet)
 * [How to Bind Charts to Sheet Data]({% slug howto_bindcharttosheet_spreadsheet_widget %})

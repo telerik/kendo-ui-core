@@ -12,7 +12,7 @@ The PivotGrid allows you to render header captions as anchors.
 
 To render column and cell caption fields as anchors, use the [`columnHeaderTemplate`](/api/javascript/ui/pivotgrid#configuration-columnHeaderTemplate) or the [`dataCellTemplate`](/api/javascript/ui/pivotgrid#configuration-dataCellTemplate) options respectively.
 
-To render row header caption fields as anchors, use the [`rowHeaderTemplate`](/api/javascript/ui/pivotgrid#configuration-rowHeaderTemplate) option. The example below demonstrates how to achieve this behavior.
+To render row header caption fields as anchors, use the [`rowHeaderTemplate`](/api/javascript/ui/pivotgrid#configuration-rowHeaderTemplate) option. The following example demonstrates how to achieve this behavior.
 
 ###### Example
 
@@ -77,13 +77,11 @@ To render row header caption fields as anchors, use the [`rowHeaderTemplate`](/a
 
 ## See Also
 
-Other articles and how-to examples on the Kendo UI PivotGrid:
-
 * [PivotGrid JavaScript API Reference](/api/javascript/ui/pivotgrid)
 * [How to Change Data Source Dynamically]({% slug howto_change_datasource_dynamically_pivotgrid %})
 * [How to Drill Down Navigation Always Starting from Root Tuple]({% slug howto_drill_down_navigation_startingfrom_root_tuple_pivotgrid %})
 * [How to Expand Multiple Column Dimensions]({% slug howto_expand_multiple_column_dimensions_pivotgrid %})
-* [How to Filter by Using the "include" Operator]({% slug howto_use_include_operator_pivotgrid %})
+* [How to Filter by Using the include Operator]({% slug howto_use_include_operator_pivotgrid %})
 * [How to Integrate with Kendo UI Chart]({% slug howto_integratewith_kendoui_chart_pivotgrid %})
 * [How to Make the Include fields Window Modal]({% slug howto_make_include_fields_window_modal_pivotgrid %})
 * [How to Modify Measure Tag Captions]({% slug howto_modify_measure_tag_captions_pivotgrid %})
@@ -92,4 +90,4 @@ Other articles and how-to examples on the Kendo UI PivotGrid:
 * [How to Show Tooltip with Data Cell Information]({% slug howto_show_tooltip_withdata_cellinformation_pivotgrid %})
 * [How to Translate PivotConfigurator Field Items]({% slug howto_translate_pivotconfigurator_messages_pivotgrid %})
 
-For more runnable examples on the Kendo UI PivotGrid, browse its [**How To** documentation folder]({% slug howto_add_dimension_column_axis_pivotgrid %}).
+For more runnable examples on the Kendo UI PivotGrid, browse its [**How To** documentation folder]({% slug howto_change_pivotgrid_fields_names_pivotgrid %}).

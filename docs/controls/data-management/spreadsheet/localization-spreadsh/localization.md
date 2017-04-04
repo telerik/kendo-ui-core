@@ -8,16 +8,18 @@ position: 1
 
 # Localization
 
-Language localization of software is the process of its adaptation to a specific country, area, or culture that uses a different language from the ones in which the software is released into. In terms of Kendo UI Spreadsheet widget, you are able to localize its messages in two ways:
+Language localization of software is the process of its adaptation to a specific country, area, or culture that uses a different language from the ones in which the software is released into.
 
-1. By using an external localization file where all text messages are translated in the language you need for your project.
+In terms of the Spreadsheet widget, you can localize its messages either:
+
+1. By using an external localization file where all text messages are translated in the language you need for your project, or
 2. By using JavaScript to manipulate the translation of only certain text entities.  
 
-Messages represent the default written content of a widget that appears to end users, e.g., the **Copy**, **Cut**, and **Paste** Toolbar commands.
+The messages represent the default written content of a widget that appears to end users. For example, the **Copy**, **Cut**, and **Paste** Toolbar commands.
 
-## Via External File
+## Using External File
 
-You are able to change the messages displayed in Kendo UI widgets by adding a script file to the document as demonstrated in the example below.
+To change the messages that are displayed in Kendo UI widgets, add a script file to the document.
 
 ###### Example
 
@@ -41,13 +43,13 @@ You are able to change the messages displayed in Kendo UI widgets by adding a sc
 
 For detailed information on localization via an external source, see the [Localization Overview help article](/framework/localization/overview).
 
-## Via JavaScript
+## Using JavaScript
 
-You are also able to change widget messages by using JavaScript. Apply this approach if you want to manipulate the content of particular messages and not all of them.
+To manipulate the content of only a particular messages and not of all messages, change the messages of the widget by using JavaScript.
 
 ### Namespaces
 
-Each message has a corresponding namespace listed under a category, depending on its location or function representation within the widget. Below are all five namespace categories Kendo UI Spreadsheet uses. Click on each to see the full list of namespaces it holds.  
+Each message, depending on its location or function representation within the widget, has a corresponding namespace listed under a category. The following list provides all five namespace categories that the Spreadsheet uses. To see the full list of namespaces it holds, click on the respective entry.  
 
 - [kendo.spreadsheet.messages.borderPalette]({% slug localization_borderpalette_messages_spreadsheet_widget%})
 - [kendo.spreadsheet.messages.dialogs]({% slug localization_dialogs_messages_spreadsheet_widget%})
@@ -55,7 +57,7 @@ Each message has a corresponding namespace listed under a category, depending on
 - [kendo.spreadsheet.messages.toolbar]({% slug localization_toolbar_messages_spreadsheet_widget%})
 - [kendo.spreadsheet.messages.view]({% slug localization_view_messages_spreadsheet_widget%})
 
-When applying JavaScript to update particular content, indicate the message you want to change by using its namespace, as demonstrated in this example:
+When you apply JavaScript to update a particular message, indicate it by using its namespace.
 
 ```html
 

@@ -3,11 +3,12 @@ title: Display Selected Ranges in Tooltips
 page_title: Display Selected Ranges in Tooltips | Kendo UI Spreadsheet
 description: "Learn how to show a selected range from a Kendo UI Spreadsheet in a Kendo UI Tooltip when working in AngularJS applications."
 slug: howto_display_the_selected_range_in_a_tooltip_spreadsheet_widget
+position: 1
 ---
 
 # Display Selected Ranges in Tooltips
 
-When working in AngularJS applications, your project might require you to show a selected range from a Kendo UI Spreadsheet in a Kendo UI Tooltip.  
+Your AngularJS project might require you to show a selected range from a Kendo UI Spreadsheet in a Kendo UI Tooltip.  
 
 To achieve this behavior:
 
@@ -149,8 +150,6 @@ The following example demonstrates how to display a selected range from the Spre
 ```
 
 ## See Also
-
-Other articles on the Kendo UI Spreadsheet:
 
 * [Spreadsheet JavaScript API Reference](/api/javascript/ui/spreadsheet)
 * [How to Bind Charts to Sheet Data]({% slug howto_bindcharttosheet_spreadsheet_widget %})
