@@ -12,40 +12,39 @@ This article demonstrates the required steps to set up the OLAP Cube by using Mi
 
 ## Install SSAS
 
-For detailed information on how to install the [SQL Server Analysis Services](http://technet.microsoft.com/en-us/library/ms175609(v=sql.90).aspx), follow the [MSDN tutorial](http://msdn.microsoft.com/en-us/library/hh403424(v=sql.110).aspx).
+For detailed information on how to install the [SQL Server Analysis Services](http://technet.microsoft.com/en-us/library/ms175609(v=sql.90).aspx), refer to the [MSDN tutorial](http://msdn.microsoft.com/en-us/library/hh403424(v=sql.110).aspx).
 
 ## Define OLAP Cube
 
-For detailed information on how to create, define, and deploy the OLAP multidimensional cube, follow the [MSDN multidimensional modelling tutorial](http://msdn.microsoft.com/en-us/library/ms170208(v=sql.110).aspx).
+For detailed information on how to create, define, and deploy the OLAP multidimensional cube, refer to the [MSDN multidimensional modelling tutorial](http://msdn.microsoft.com/en-us/library/ms170208(v=sql.110).aspx).
 
 ## Configure HTTP Access
 
-HTTP access to SQL Server Analysis Services can be enabled by using a MSMDPUMP.ddl ISAPI extension.
+To enable the HTTP access to SQL Server Analysis Services, use an `MSMDPUMP.ddl` ISAPI extension.
 
-For detailed information on how to set up the MSMDPUMP.ddl extension, follow the [MSDN HTTP access tutorial](http://technet.microsoft.com/en-us/library/gg492140.aspx).
+For detailed information on how to set up the `MSMDPUMP.ddl` extension, refer to the [MSDN HTTP access tutorial](http://technet.microsoft.com/en-us/library/gg492140.aspx).
 
 For an online accessible OLAP service for test purposes, use `http://demos.telerik.com/olap/msmdpump.dll`. Note that the URL does not open directly in the browser.
 
 ## Enable Cross-Domain Access
 
 > **Important**
-> This step is not required if the cube is not intended to be requested from different domains.
+>
+> If the cube is not intended to be requested from different domains, skip this step.
 
-For detailed information on Cross-Origin Resource Sharing (CORS), follow [this link](https://developer.mozilla.org/en-US/docs/Web/HTTP/Access_control_CORS).
+For detailed information on Cross-Origin Resource Sharing (CORS), refer to [this link](https://developer.mozilla.org/en-US/docs/Web/HTTP/Access_control_CORS).
 
-If you want to allow cross-domain requests to the OLAP service, enable the CORS behavior of your server. The sections below demonstrate how to enable CORS of an [Internet Information Services (IIS)](http://www.iis.net/) server.
+To allow cross-domain requests to the OLAP service, enable the CORS behavior of your server. The following sections demonstrate how to enable CORS on an [Internet Information Services (IIS)](http://www.iis.net/) server. Cross-domain access requires you to configure the HTTP Response Headers and the `OPTIONS` method server response.
 
-Cross-domain access requires you to configure HTTP Response Headers and the `OPTIONS` method server response.
-
-### Configure HTTP Response Headers
+### Configuring HTTP Response Headers
 
 To configure HTTP Response Headers, specify:
 * The domains that will perform the data requests.
 * An [HTTP method](http://www.w3.org/Protocols/rfc2616/rfc2616-sec9.html) through which the data will be transferred.
-* HTTP Headers that can be used in the requests.
-* User credentials that are going to be required if an authenticated access is used.
+* The HTTP Headers that can be used in the requests.
+* The user credentials that are going to be required if an authenticated access is used.
 
-The example below demonstrates the list of HTTP Response Headers that show the settings required to enable the IIS CORS behavior.
+The following example demonstrates the list of the HTTP Response Headers that show the settings required to enable the IIS CORS behavior.
 
 ###### Example
 
@@ -105,11 +104,11 @@ The example below demonstrates the list of HTTP Response Headers that show the s
     </tbody>
 </table>
 
-### Configure `OPTIONS` Method Server Response
+### Configuring the OPTIONS Method Server Response
 
-To configure the `OPTIONS` method server response, specify the server response to the `OPTIONS` method requests. In IIS the `OPTIONS` method behavior should be configured via the `OPTIONSVerbHandler` mapping settings.
+To configure the `OPTIONS` method server response, specify the server response to the `OPTIONS` method requests. In IIS, configure the behavior of the `OPTIONS` method through the `OPTIONSVerbHandler` mapping settings.
 
-The example below demonstrates the list of settings that should be applied.
+The following example demonstrates the list of settings that you have to apply.
 
 ###### Example
 
@@ -130,12 +129,10 @@ The example below demonstrates the list of settings that should be applied.
     </tbody>
 </table>
 
-### Access Cube Securely
+### Accessing the Cube Securely
 
-There are two possible approaches to implement a secured access to the OLAP instance:
-
+To implement a secured access to the OLAP instance, use either of the following approaches:
 * Use a proxy service which communicates with the cube on a secured protocol. This proxy should support the XMLA protocol. In the Microsoft world, the solution is to use [ADOMD.NET](https://technet.microsoft.com/en-us/library/ms123483%28v=sql.110%29.aspx). For detailed information on this, refer to [this forum thread](http://www.telerik.com/forums/securing-access-to-msmdpump-dll).
-
 * Send the credentials with a request header, even though thus the **Username** and **Password** will be visible on the client side (browser). For details on how to pass credentials with request headers, refer to this [StackOverflow discussion](http://stackoverflow.com/questions/14579478/how-to-pass-credentials-for-a-webservice-using-jquery-ajax-call). You can define the required callbacks and settings directly in the [`transport.read`](http://docs.telerik.com/kendo-ui/api/javascript/data/datasource#configuration-transport.read) object, as they will be passed to the `$.ajax` method.
 
 ## See Also
@@ -148,4 +145,4 @@ Other article on the Kendo UI PivotGrid:
 * [Fundamentals]({% slug fundamentals_pivotgrid_widget %})
 * [Frequently Asked Questions]({% slug frequently_asked_questions_pivotgrid %})
 
-For how-to examples on the Kendo UI PivotGrid widget, browse its [**How To** documentation folder]({% slug howto_add_dimension_column_axis_pivotgrid %}).
+For how-to examples on the Kendo UI PivotGrid widget, browse its [**How To** documentation folder]({% slug howto_change_pivotgrid_fields_names_pivotgrid %}).

@@ -8,13 +8,15 @@ position: 6
 
 # Frequently Asked Questions
 
-This is a collection of the most frequently asked questions (FAQ) related to the Kendo UI PivotGrid widget and their answers.
+This article provides a collection of the most frequently asked questions (FAQs) and answers related to the Kendo UI PivotGrid.
 
 ## OLAP
 
-### Does Kendo UI PivotGrid work with OLAP cube, delivered by MS SSAS?
+### Does the PivotGrid work with the OLAP cube that is delivered by MS SSAS?
 
-Yes. The [Microsoft SQL Server Analysis Services (MS SSAS)](http://technet.microsoft.com/en-us/library/ms175609(v=sql.90).aspx) use the [XMLA](http://en.wikipedia.org/wiki/XML_for_Analysis) protocol, which is the main requirement for the PivotGrid to work.
+Yes, it does.
+
+The [Microsoft SQL Server Analysis Services (MS SSAS)](http://technet.microsoft.com/en-us/library/ms175609(v=sql.90).aspx) use the [XMLA](http://en.wikipedia.org/wiki/XML_for_Analysis) protocol, which is the main requirement for the PivotGrid to work.
 
 ### Does the PivotGrid work with different OLAP servers?
 
@@ -24,19 +26,19 @@ If the OLAP service implements the [XMLA](http://en.wikipedia.org/wiki/XML_for_A
        <Format>Multidimensional</Format>
     </PropertyList>
 
-The value of the `AxisFormat` should be `TupleFormat`:
+The value of the `AxisFormat` should be `TupleFormat`.
 
 	<PropertyList>
        <AxisFormat>TupleFormat</AxisFormat>
     </PropertyList>
 
-### How to connect to secured OLAP instance?
+### How can I connect to a secured OLAP instance?
 
-Check the [section related to accessing the cube securely]({% slug olap_cube_setup_pivotgrid_widget %}#access-the-cube-securely).
+For more information, refer to the [section on accessing the cube securely]({% slug olap_cube_setup_pivotgrid_widget %}#access-the-cube-securely).
 
-### I do not have OLAP cube. Can I still use the PivotGrid?
+### If I do not have an OLAP cube, can I still use the PivotGrid?
 
-Currently, Kendo UI `PivotDataSource` has limited support for [binding to flat data](http://demos.telerik.com/kendo-ui/pivotgrid/local-flat-data-binding). Note that in this scenario not all of the features that are available when the widget is bound to an OLAP cube are supported, such as sorting, hierarchies, etc.
+Currently, the Kendo UI `PivotDataSource` has limited support for [binding to flat data](http://demos.telerik.com/kendo-ui/pivotgrid/local-flat-data-binding). Note that in this scenario not all of the features that are available when the widget is bound to an OLAP cube (such as sorting, hierarchies, and other) are supported.
 
 ## See Also
 
@@ -48,4 +50,4 @@ Other article on the Kendo UI PivotGrid:
 * [Fundamentals]({% slug fundamentals_pivotgrid_widget %})
 * [OLAP Cube Setup]({% slug olap_cube_setup_pivotgrid_widget %})
 
-For how-to examples on the Kendo UI PivotGrid widget, browse its [**How To** documentation folder]({% slug howto_add_dimension_column_axis_pivotgrid %}).
+For how-to examples on the Kendo UI PivotGrid widget, browse its [**How To** documentation folder]({% slug howto_change_pivotgrid_fields_names_pivotgrid %}).

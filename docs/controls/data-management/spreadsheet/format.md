@@ -8,7 +8,7 @@ position: 2
 
 # Cell Formatting
 
-The Kendo UI Spreadsheet widget supports cell-formatting options such as formatting of strings, text, numbers, dates, and time.
+The Spreadsheet widget supports cell-formatting options such as formatting of strings, text, numbers, dates, and time.
 
 ## Formatting
 

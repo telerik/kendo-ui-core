@@ -8,7 +8,7 @@ position: 3
 
 # Custom Cell Editors
 
-Custom editors are helpers that make it easier for the user to enter a correct value.
+Custom editors are helpers that facilitate the user input of correct values.
 
 For example, a custom editor allows the user to enter a date in a cell by picking it from a calendar rather than typing it. This functionality is achieved by applying data validation with the `Date` criteria, and selecting the **Display button to show calendar** checkbox. Another built-in editor is for the `List` validation criterion&mdash;it displays a popup displaying the allowed values.
 

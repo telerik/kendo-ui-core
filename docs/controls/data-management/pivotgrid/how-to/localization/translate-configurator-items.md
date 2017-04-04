@@ -8,7 +8,7 @@ slug: howto_translate_pivotconfigurator_messages_pivotgrid
 
 # Translate PivotConfigurator Messages
 
-The example below demonstrates how to access PivotConfigurator TreeView widget and rename the **Measures** and **KPIs** messages.
+The following example demonstrates how to access PivotConfigurator TreeView widget and rename the **Measures** and **KPIs** messages.
 
 ###### Example
 
@@ -58,13 +58,11 @@ The example below demonstrates how to access PivotConfigurator TreeView widget a
 
 ## See Also
 
-Other articles and how-to examples on the Kendo UI PivotGrid:
-
 * [PivotGrid JavaScript API Reference](/api/javascript/ui/pivotgrid)
 * [How to Change Data Source Dynamically]({% slug howto_change_datasource_dynamically_pivotgrid %})
 * [How to Drill Down Navigation Always Starting from Root Tuple]({% slug howto_drill_down_navigation_startingfrom_root_tuple_pivotgrid %})
 * [How to Expand Multiple Column Dimensions]({% slug howto_expand_multiple_column_dimensions_pivotgrid %})
-* [How to Filter by Using the "include" Operator]({% slug howto_use_include_operator_pivotgrid %})
+* [How to Filter by Using the include Operator]({% slug howto_use_include_operator_pivotgrid %})
 * [How to Integrate with Kendo UI Chart]({% slug howto_integratewith_kendoui_chart_pivotgrid %})
 * [How to Make the Include fields Window Modal]({% slug howto_make_include_fields_window_modal_pivotgrid %})
 * [How to Modify Measure Tag Captions]({% slug howto_modify_measure_tag_captions_pivotgrid %})
@@ -72,4 +70,4 @@ Other articles and how-to examples on the Kendo UI PivotGrid:
 * [How to Reset Expand State]({% slug howto_reset_expand_state_pivotgrid %})
 * [How to Show Tooltip with Data Cell Information]({% slug howto_show_tooltip_withdata_cellinformation_pivotgrid %})
 
-For more runnable examples on the Kendo UI PivotGrid, browse its [**How To** documentation folder]({% slug howto_add_dimension_column_axis_pivotgrid %}).
+For more runnable examples on the Kendo UI PivotGrid, browse its [**How To** documentation folder]({% slug howto_change_pivotgrid_fields_names_pivotgrid %}).

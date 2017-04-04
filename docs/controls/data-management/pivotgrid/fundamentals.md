@@ -8,7 +8,7 @@ position: 4
 
 # OLAP Fundamentals
 
-Kendo UI PivotGrid resembles a [pivot-table](http://en.wikipedia.org/wiki/Pivot_table) widget, which uses Online Analytical Processing (OLAP) concepts for representing multidimensional data.
+The PivotGrid resembles a [pivot-table](http://en.wikipedia.org/wiki/Pivot_table) widget that uses Online Analytical Processing (OLAP) concepts for representing multidimensional data.
 
 ## Basic OLAP Concepts
 
@@ -16,21 +16,21 @@ Kendo UI PivotGrid resembles a [pivot-table](http://en.wikipedia.org/wiki/Pivot_
 
 OLAP is an acronym that stands for Online Analytical Processing. It allows access to data that is aggregated and organized in a multidimensional structure called a "cube". OLAP tools enable users to interactively perform analysis over multidimensional data.
 
-For detailed information on what OLAP is and the way it processes data, refer to the following articles:
+For detailed information on what OLAP is and the way it processes data, refer to:
 
 * [OLAP Definition, Wikipedia](http://en.wikipedia.org/wiki/Online_analytical_processing)
 * [Working with Online Analytical Processing, MSDN Knowledge Base](http://msdn.microsoft.com/en-US/library/ms175367(v=SQL.90).aspx)
 
 ### What Is an OLAP Cube?
 
-The OLAP Cube is a data-set organized in a multidimensional manner. Every cube has 0 or more dimensions. The cube allows the performance of different operations, which answer complex analytical queries.
+The OLAP Cube is a data-set organized in a multidimensional manner. Every cube has 0 (zero) or more dimensions. The cube allows the performance of different operations, which answer complex analytical queries.
 
-For detailed information on what an OLAP Cube is, refer to the following articles:
+The OLAP Cube introduces concepts like facts, measures, and dimensions. For more information on these, refer to the sections below.
+
+For detailed information on what an OLAP Cube is, refer to:
 
 * [OLAP Cube, Wikipedia](http://en.wikipedia.org/wiki/OLAP_cube)
 * [Understanding OLAP Cubes, MSDN Knowledge Base](http://msdn.microsoft.com/en-us/library/aa140038%28v=office.10%29.aspx#odc_da_whatrcubes_topic2)
-
-The OLAP Cube introduces concepts like facts, measures, and dimensions. For more information on these, refer to the sections below.
 
 ### What Is a Fact?
 
@@ -50,7 +50,7 @@ XMLA is an acronym that stands for [XML for Analysis](http://en.wikipedia.org/wi
 
 For detailed information on XMLA, refer to [this article](http://technet.microsoft.com/en-us/library/ms187178(v=sql.90).aspx).
 
-[Kendo UI `PivotDataSource`](/api/framework/pivotdatasource) has a built-in support for XMLA using a specific XMLA [`transport`](/api/framework/pivotdatasource#configuration-transport) and [`schema`](/api/framework/pivotdatasource#configuration-schema).
+The [`PivotDataSource`](/api/framework/pivotdatasource) configuration provides built-in support for XMLA by using specific XMLA [`transport`](/api/framework/pivotdatasource#configuration-transport) and [`schema`](/api/framework/pivotdatasource#configuration-schema) options.
 
 ## See Also
 
@@ -62,4 +62,4 @@ Other article on the Kendo UI PivotGrid:
 * [Exporting]({% slug exporting_functionality_pivotgridwidget %})
 * [Frequently Asked Questions]({% slug frequently_asked_questions_pivotgrid %})
 
-For how-to examples on the Kendo UI PivotGrid widget, browse its [**How To** documentation folder]({% slug howto_add_dimension_column_axis_pivotgrid %}).
+For how-to examples on the Kendo UI PivotGrid widget, browse its [**How To** documentation folder]({% slug howto_change_pivotgrid_fields_names_pivotgrid %}).

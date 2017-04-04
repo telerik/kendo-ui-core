@@ -8,7 +8,9 @@ position: 4
 
 # Custom Functions
 
-In formulas, you can create your own custom JavaScript functions ("primitives") by calling the `kendo.spreadsheet.defineFunction(name, func)`. The first argument (`string`) is the name for your function in formulas (case-insensitive), and the second one is a JavaScript function (the implementation).
+In formulas, you can create your own custom JavaScript functions (primitives) by calling the `kendo.spreadsheet.defineFunction(name, func)`.
+
+The first argument (string) is the name for your function in formulas (case-insensitive), and the second one is a JavaScript function (the implementation).
 
 ## Primitives
 

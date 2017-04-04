@@ -459,13 +459,13 @@ navigation:
     "*spreadsheet":
         title: "Spreadsheet"
     "*import-and-export-data":
-        title: "Import and Export Data"
+        title: "Import and Export of Data"
         position: 5
     "*localization-spreadsh":
         title: "Localization"
         position: 6
     "*end-user":
-        title: "For the End User"
+        title: "End-User Documentation"
         position: 7
     "*listview":
         title: "ListView"

@@ -7,11 +7,9 @@ slug: howto_regexp_based_validation
 
 # Create Custom RegExp-Based Validation
 
-The [validation types](/api/javascript/spreadsheet/range#methods-validation) of the Kendo UI Spreadsheet do not directly support RegExp-based rules.
+The [validation types](/api/javascript/spreadsheet/range#methods-validation) of the Spreadsheet do not directly support RegExp-based rules.
 
-To work around this issue, it is possible to use a `custom` validation type that allows you to pass any formula. The validation will pass when the formula returns a non-false value.
-
-Though the built-in functions do not include a RegExp-matching function, a custom function is easy to be created. For more information, refer to the article on [defining custom functions]({% slug custom_functions_spreadsheet_widget %}).
+To work around this issue, use a `custom` validation type that allows you to pass any formula. The validation will pass when the formula returns a non-false value. Though the built-in functions do not include a RegExp-matching function, a custom function is easy to create. For more information, refer to the article on [defining custom functions]({% slug custom_functions_spreadsheet_widget %}).
 
 ###### Example
 
@@ -69,7 +67,5 @@ Though the built-in functions do not include a RegExp-matching function, a custo
 
 ## See Also
 
-Other articles on the Kendo UI Spreadsheet:
-
 * [Spreadsheet JavaScript API Reference](/api/javascript/ui/spreadsheet)
-* [Defining custom functions](/controls/data-management/spreadsheet/custom-functions)
+* [Defining Custom Functions]({% slug custom_functions_spreadsheet_widget %})
