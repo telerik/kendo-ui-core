@@ -7,11 +7,11 @@ slug: howto_showtooltip_treelist
 
 # Show Extra Information in Tooltip
 
-Sometimes you might need to show additional information about an entry in a Kendo UI TreeList.
+Your project might require you to show additional information about an entry in the TreeList.
 
-A possible way to achieve this behavior is to use a Kendo UI Tooltip that displays the information when the user hovers with the mouse over the TreeList node.
+To achieve this behavior, use a Kendo UI Tooltip that displays the information when the user hovers with the mouse over the TreeList node.
 
-The example below demonstrates how to customize the information displayed in the Tooltip depending on the respective data item fields.
+The following example demonstrates how to customize the information displayed in the Tooltip depending on the respective data item fields.
 
 ###### Example
 
@@ -98,9 +98,7 @@ The example below demonstrates how to customize the information displayed in the
 
 ## See Also
 
-Other articles on the Kendo UI TreeList:
-
-* [JavaScript API Reference](/api/javascript/ui/treelist)
+* [JavaScript API Reference of the TreeList](/api/javascript/ui/treelist)
 * [How to Update Field in All Child Nodes]({% slug howto_updatefieldinallchildnodes_treelist %})
 
-For more runnable examples on the Kendo UI TreeList, browse the [**How To** documentation folder]({% slug howto_updatefieldinallchildnodes_angularjs_treelist %}).
+For more runnable examples on the Kendo UI TreeList, browse its [**How To** documentation folder]({% slug howto_updatefieldinallchildnodes_angularjs_treelist %}).

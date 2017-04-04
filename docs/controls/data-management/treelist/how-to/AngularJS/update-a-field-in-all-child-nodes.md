@@ -3,11 +3,12 @@ title: Update Field in All Child Nodes
 page_title: Update Field in All Child Nodes | Kendo UI TreeList
 description: "Learn how to update the checked state on all child nodes of a Kendo UI TreeList widget in AngularJS."
 slug: howto_updatefieldinallchildnodes_angularjs_treelist
+position: 1
 ---
 
 # Update Field in All Child Nodes
 
-The example below demonstrates how to update the checked state on all child nodes of a Kendo UI TreeList widget in AngularJS.
+The following example demonstrates how to update the checked state on all child nodes of the TreeList in AngularJS.
 
 ###### Example
 
@@ -87,12 +88,8 @@ The example below demonstrates how to update the checked state on all child node
 
 ## See Also
 
-Other articles on Kendo UI TreeList:
-
-Other articles on the Kendo UI TreeList:
-
-* [JavaScript API Reference](/api/javascript/ui/treelist)
+* [JavaScript API Reference of the TreeList](/api/javascript/ui/treelist)
 * [How to Show Context Menu]({% slug howto_showcontextmenu_treelist %})
 * [How to Update Field in All Child Nodes]({% slug howto_updatefieldinallchildnodes_treelist %})
 
-For more runnable examples on the Kendo UI TreeList, browse the [**How To** documentation folder]({% slug howto_hideeditfieldsondifferentlevels_treelist %}).
+For more runnable examples on the Kendo UI TreeList, browse its **How To** documentation folder.
