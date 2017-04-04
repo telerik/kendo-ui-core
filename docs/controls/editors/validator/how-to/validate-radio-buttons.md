@@ -8,7 +8,7 @@ slug: howto_validateradiowithonemessage_validator
 
 # Validate Radio Buttons with Only One Error Message
 
-The example below demonstrates how to validate a group of radio buttons in Kendo UI showing only one error message.
+The following example demonstrates how to validate a group of Kendo UI radio buttons and show only one error message.
 
 ###### Example
 
@@ -47,8 +47,6 @@ $(function(){
 ```
 
 ## See Also
-
-Other articles on the Kendo UI Validator:
 
 * [Validator JavaScript API Reference](/api/javascript/ui/validator)
 * [How to Show Tooltip on Mouse Over]({% slug howto_showtooltiponmouseover_validator %})

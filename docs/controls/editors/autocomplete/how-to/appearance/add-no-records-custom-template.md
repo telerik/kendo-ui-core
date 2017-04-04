@@ -8,7 +8,7 @@ slug: howto_add_customized_templates_autocomplete
 
 # Show No-Records-Found Messages
 
-The following example demonstrates how to add a customized template when the entered values do not match any of the suggestions in the Kendo UI AutoComplete.
+The following example demonstrates how to add a customized template when the entered values do not match any of the suggestions in the AutoComplete.
 
 ###### Example
 
@@ -145,11 +145,9 @@ The following example demonstrates how to add a customized template when the ent
 
 ## See Also
 
-Other articles on the Kendo UI AutoComplete:
-
 * [AutoComplete JavaScript API Reference](/api/javascript/ui/autocomplete)
 * [How to Dynamically Change DataSource Based on User Selections]({% slug howto_change_datasource_dynamically_autocomplete %})
 * [How to Highlight Matched Values]({% slug howto_highlight_matched_values_autocomplete %})
 * [How to Restrict Other Users]({% slug howto_restrict_user_input_autocomplete %})
 
-For more runnable examples on the Kendo UI AutoComplete, browse its [**How To** documentation folder]({% slug howto_use_custom_angularjs_templates_autocomplete %}).
+For more runnable examples on the Kendo UI AutoComplete, browse its [**How To** documentation folder]({% slug howto_bindobjectstongmodel_autocomplete %}).
