@@ -7,7 +7,7 @@ slug: howto_ctrlmousewheeltozoom_diagram
 
 # Zoom on Ctrl Keypress Only
 
-The example below demonstrates how to set up the Kendo UI Diagram to allow zooming in and out only when the `Ctrl` key is pressed.
+The following example demonstrates how to set up the Diagram to allow zooming in and out only when the `Ctrl` key is pressed.
 
 ###### Example
 
@@ -60,11 +60,9 @@ The example below demonstrates how to set up the Kendo UI Diagram to allow zoomi
 
 ## See Also
 
-Other articles on the Kendo UI Diagram:
-
 * [JavaScript API Reference](/api/javascript/dataviz/ui/diagram)
 * [How to Implement Local Data Editing]({% slug howto_editlocaladata_diagram %})
 * [How to Render External Content in Shapes]({% slug howto_renderexternalcontent_inshapes_diagram %})
 * [How to Wrap Text]({% slug howto_wraptext_diagram %})
 
-For more runnable examples on the Kendo UI Diagram, browse the [**How To** documentation folder]({% slug howto_changeshapevisualelements_dynamically_diagram %}).
+For more runnable examples on the Kendo UI Diagram, browse its [**How To** documentation folder]({% slug howto_adjustpathorigin_diagram %}).

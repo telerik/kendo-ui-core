@@ -7,7 +7,9 @@ slug: howto_editlocaladata_diagram
 
 # Implement Local Data Editing
 
-The example below demonstrates how to implement editing with local data by using custom functions for the dataSource transport operations. This functionality is needed because assigning non-default `id` value for the new items is required so that the item is accepted as existing by the dataSource and the new shapes are displayed by the diagram.
+The following example demonstrates how to implement the editing functionality with local data by using custom functions for the dataSource transport operations.
+
+You need this functionality because assigning a non-default `id` value for the new items is required in order for the item to be accepted as existing by the dataSource and the new shapes to be displayed by the Diagram.
 
 ###### Example
 
@@ -274,11 +276,9 @@ The example below demonstrates how to implement editing with local data by using
 
 ## See Also
 
-Other articles on the Kendo UI Diagram:
-
 * [JavaScript API Reference](/api/javascript/dataviz/ui/diagram)
 * [How to Drag and Drop on Shapes]({% slug howto_draganddrop_onshapes_diagram %})
 * [How to Show Shapes Tooltip]({% slug howto_shapestooltip_diagram %})
 * [How to Wrap Text]({% slug howto_wraptext_diagram %})
 
-For more runnable examples on the Kendo UI Diagram, browse the [**How To** documentation folder]({% slug howto_changeshapevisualelements_dynamically_diagram %}).
+For more runnable examples on the Kendo UI Diagram, browse its [**How To** documentation folder]({% slug howto_adjustpathorigin_diagram %}).

@@ -1,19 +1,18 @@
 ---
 title: Use Custom MVVM Binders for Shapes and Connections
 page_title: Use Custom MVVM Binders for Shapes and Connections | Kendo UI Diagram
-description: "Learn how to use custom MVVM binders for shapes and connections in Kendo UI Diagram, in MVVM scenario."
+description: "Learn how to use custom MVVM binders for shapes and connections in the Kendo UI Diagram in an MVVM scenario."
 slug: howto_custommvvmbidinders_diagram
 ---
 
 # Use Custom MVVM Binders for Shapes and Connections
 
-The example below demonstrates how to create [custom MVVM binders]({%slug custombinding_mvvm_kendoui%}) for the shapes and connections DataSources. 
+The following example demonstrates how to create [custom MVVM binders]({%slug custombinding_mvvm_kendoui%}) for the shapes and connections.
 
-The benefits of that are:
-
-* more control over the data bound;
-* using recursive logic over the data;
-* update shapes and connections data separately.
+By using this approach, you can:
+* Have more control over the bound data.
+* Use recursive logic over the data.
+* Update shapes and connections data separately.
 
 ###### Example
 
@@ -22,7 +21,7 @@ The benefits of that are:
     <div class="demo-section k-content">
         <div>
             Change name of:
-            <input data-role="dropdownlist" 
+            <input data-role="dropdownlist"
                    data-text-field="name"
                    data-value-field="id"
                    data-bind="source: shapesSource,
@@ -42,7 +41,7 @@ The benefits of that are:
           <input type="text" class="k-textbox" data-bind="value: getShapes" style="width:100%;"/>
         </div>
     </div>
-  
+
     <script>
         kendo.data.binders.widget.diagramShapes = kendo.data.Binder.extend({
           init: function(widget, bindings, options) {
@@ -73,7 +72,7 @@ The benefits of that are:
                                   {id:"two", name:"Two"},
                                   {id:"five", name:"Five"},
                               ],
-              
+
                 connectionsSource:[
                                     {from:"one", to:"two", label: "plus one"},
                                     {from:"one", to:"five", label: "plus three"}
@@ -103,11 +102,9 @@ The benefits of that are:
 
 ## See Also
 
-Other articles on the Kendo UI Diagram:
-
 * [JavaScript API Reference](/api/javascript/dataviz/ui/diagram)
 * [How to Implement Local Data Editing]({% slug howto_editlocaladata_diagram %})
 * [How to Render External Content in Shapes]({% slug howto_renderexternalcontent_inshapes_diagram %})
 * [How to Wrap Text]({% slug howto_wraptext_diagram %})
 
-For more runnable examples on the Kendo UI Diagram, browse the [**How To** documentation folder]({% slug howto_changeshapevisualelements_dynamically_diagram %}).
+For more runnable examples on the Kendo UI Diagram, browse its [**How To** documentation folder]({% slug howto_adjustpathorigin_diagram %}).
