@@ -7,7 +7,7 @@ slug: howto_set100percentheight_inmobileapps_map
 
 # Set 100% Height in Mobile Applications
 
-The example below demonstrates how to use the Kendo UI Map widget in Kendo UI Mobile View and set the height for the Map to 100%.
+The following example demonstrates how to use the Map widget in a Kendo UI Mobile View and set the height for the Map to 100%.
 
 ###### Example
 
@@ -37,8 +37,6 @@ The example below demonstrates how to use the Kendo UI Map widget in Kendo UI Mo
 ```
 
 ## See Also
-
-Other articles on the Kendo UI Map:
 
 * [Map JavaScript API Reference](/api/javascript/dataviz/ui/map)
 * [How to Customize Markers on Map]({% slug howto_customizemarkersonmap_map %})

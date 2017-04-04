@@ -7,7 +7,9 @@ slug: howto_zoomonarea_map
 
 # Zoom on Area
 
-The example below demonstrates how to center the map view on a specified area in a Kendo UI Map widget. The area is defined by a set of markers&mdash;any list of locations can do. Then build an [extent](/api/javascript/dataviz/map/extent) that encompasses all locations and [set it as a visible area](/api/javascript/dataviz/ui/map#methods-extent) on the map.
+The following example demonstrates how to center the map view on a specified area in the Map widget.
+
+To define the area, use a set of markers. You can use any list of locations. Then, you need to build an [`extent`](/api/javascript/dataviz/map/extent) that encompasses all locations and [set it on the map as a visible area](/api/javascript/dataviz/ui/map#methods-extent).
 
 ###### Example
 
@@ -61,8 +63,6 @@ The example below demonstrates how to center the map view on a specified area in
 ```
 
 ## See Also
-
-Other articles on the Kendo UI Map:
 
 * [Map JavaScript API Reference](/api/javascript/dataviz/ui/map)
 * [How to Customize Markers on Map]({% slug howto_customizemarkersonmap_map %})
