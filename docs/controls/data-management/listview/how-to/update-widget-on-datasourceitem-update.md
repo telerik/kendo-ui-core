@@ -7,9 +7,9 @@ slug: howto_updatelistviewondatasitemupdate_listview
 
 # Update ListView on DataSource Item Update
 
-The Kendo UI ListView does not update the content dynamically on model field update. To re-render the widget, trigger the `change` event of the dataSource manually after the model update.
+The ListView does not update the content dynamically on model field update.
 
-The example below demonstrates how to update the ListView on a dataSource item update.
+To re-render the widget, manually trigger the `change` event of the dataSource after the model update. The following example demonstrates how to achieve this behavior.
 
 ###### Example
 
@@ -245,10 +245,8 @@ The example below demonstrates how to update the ListView on a dataSource item u
 
 ## See Also
 
-Other articles and how-to examples on the Kendo UI ListView:
-
 * [ListView JavaScript API Reference](/api/javascript/ui/listview)
 * [How to Persist Row Selection during Data Operations]({% slug howto_persists_row_selection_listview %})
 * [How to Reorder Using Drag-and-Drop and Kendo UI Touch]({% slug howto_reorder_using_draganddrop_kendouitouch_listview %})
 
-For more runnable examples on Kendo UI ListView, browse the [**How To** documentation folder]({% slug add_custom_delete_confirmation_dialog %}).
+For more runnable examples on Kendo UI ListView, browse its [**How To** documentation folder]({% slug add_custom_delete_confirmation_dialog %}).
