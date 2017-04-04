@@ -9,9 +9,9 @@ position: 1
 
 # Validator Overview
 
-The [Kendo UI Validator widget](http://demos.telerik.com/kendo-ui/validator/index) offers an easy way to do client-side form validation. Built around the HTML5 form validation attributes, it supports variety of built-in validation rules and provides a convenient way for setting custom-rule handling. The Kendo UI Validator is a powerful framework component and essential for any application that collects user input.
+The [Kendo UI Validator widget](http://demos.telerik.com/kendo-ui/validator/index) offers an easy way to do client-side form validation.
 
-For a complete overview of its methods and configuration options, [review the Kendo UI Validator API Reference](/api/javascript/ui/validator).
+Built around the HTML5 form validation attributes, it supports a variety of built-in validation rules and provides a convenient way for setting custom-rule handling. The Kendo UI Validator is a powerful framework component and essential for any application that collects user input. For a complete overview of its methods and configuration options, [review the API calls of the Validator](/api/javascript/ui/validator).
 
 ## HTML5 Forms Validation
 
@@ -52,7 +52,7 @@ The Validator works with the standard HTML5 form validation attributes. It allow
 
 ### Create the Setup
 
-To use the Validator, start by defining an HTML form that includes one or more of these new attributes, as demonstrated in the example below.
+To use the Validator, define an HTML form that includes one or more of these new attributes.
 
 ###### Example
 
@@ -64,7 +64,7 @@ To use the Validator, start by defining an HTML form that includes one or more o
 
 ### Initialize the Validator
 
-A Kendo UI Validator needs to be added to the page. In a JavaScript block on the page, add the code from the example below.
+You need to add a Validator to the page. Add the code from the following example in a JavaScript block on the page.
 
 ###### Example
 
@@ -82,7 +82,7 @@ A Kendo UI Validator needs to be added to the page. In a JavaScript block on the
 
 With this simple configuration, the unchanged HTML5 form validation attributes now work in old and new browsers, and an application has complete control over the content and styling of validation error messages. When the **Save** button is clicked, if an input fails any of the constraints, the Kendo UI Validator displays the appropriate validation error message.
 
-For detailed information, refer to the [Kendo UI Validator live demo](http://demos.telerik.com/kendo-ui/validator/index).
+For detailed information, refer to the [live demo of the Validator](http://demos.telerik.com/kendo-ui/validator/index).
 
 ## Validation Rules
 
@@ -124,14 +124,12 @@ The `email` rule constrains the value to a valid email format.
 
      <input type="email" name="email" />
 
-The `date` rule constrains the value to a valid date format. Use [`kendo.parseDate`](/api/javascript/kendo#methods-parseDate) to validate the input.
+The `date` rule constrains the value to a valid date format. To validate the input, use [`kendo.parseDate`](/api/javascript/kendo#methods-parseDate).
 
 ###### Example
 
      <input type="date" name="date" />
-
-or
-
+     // or
      <input data-type="date" name="date" />
 
 ### Custom Rules for Validation
@@ -140,9 +138,7 @@ Besides the built-in validation rules, you can set custom rules with the Kendo U
 
 #### Important Notes
 
-Below are some important things to note about custom validation rules and messages:
-
-* Each custom rule will be run for each element in a form. If there are multiple inputs in the form and the validation should only apply to a specific input, the custom validation code should check the input before validating.
+* Each custom rule is run for each element in a form. If there are multiple inputs in the form and the validation should only apply to a specific input, the custom validation code should check the input before validating.
 
 ###### Example
 
@@ -167,13 +163,13 @@ Below are some important things to note about custom validation rules and messag
 
 ### Definition of Custom Error Messages
 
-The Kendo UI Validator provides default messages which map to the built-in validation rules. However, defining a custom message as well as overriding the built-in one is also possible.
+The Validator provides default messages which map to the built-in validation rules. However, defining a custom message as well as overriding the built-in one is also possible.
 
 > **Important**
 >
-> In order for the error messages to work properly, you are required to set a name attribute to the input element.
+> In order for the error messages to work properly, you are required to set a `name` attribute to the `input` element.
 
-The example below demonstrates how to define custom messages when the validation rules are not fulfilled.
+The following example demonstrates how to define custom messages when the validation rules are not fulfilled.
 
 ###### Example
 
@@ -223,7 +219,7 @@ Besides these build-in messages, a custom message can also be defined on a per-c
 
 These attributes will be checked before applying the message from the `messages` configuration option.
 
-The example below demonstrates how the set multiple `data-[rule]-msg` attributes allow a field to have different messages for each different validation rule.
+The following example demonstrates how the set multiple `data-[rule]-msg` attributes allow a field to have different messages for each different validation rule.
 
 ###### Example
 
@@ -236,7 +232,7 @@ The example below demonstrates how the set multiple `data-[rule]-msg` attributes
         $("#myform").kendoValidator();
     </script>
 
-The example below demonstrates how to use the `validationMessage` attribute to specify a custom validation message.
+The following example demonstrates how to use the `validationMessage` attribute to specify a custom validation message.
 
 ###### Example
 
@@ -249,7 +245,7 @@ The example below demonstrates how to use the `validationMessage` attribute to s
         $("#myform").kendoValidator();
     </script>
 
-Validation messages can also be defined for custom rules, as demonstrated in the example below.
+Validation messages can also be defined for custom rules.
 
 ###### Example
 
@@ -286,9 +282,9 @@ Validation messages can also be defined for custom rules, as demonstrated in the
 
 ### Customization of Tooltip Position
 
-Ideally, the Kendo UI Validator places its tooltips besides the validated input. However, if the input is later enhanced to a ComboBox, AutoComplete or other Kendo Widget, placing the tooltip beside the input may cover important information or break the widget rendering. In this case, you can specify exactly where you want the tooltip to be placed by adding a span with data-for attribute set to the validated input name and a class `.k-invalid-msg`.
+Ideally, the Kendo UI Validator places its tooltips besides the validated input. However, if the input is later enhanced to a ComboBox, AutoComplete, or other Kendo UI widget, placing the tooltip beside the input may cover important information or break the rendering of the widget. In this case, you can specify exactly where you want the tooltip to be placed by adding a `span` with the `data-for` attribute set to the validated input name and a `.k-invalid-msg` class.
 
-The example below demonstrates a specific Tooltip placement. The Tooltip will remain outside the AutoComplete widget after enhancement.
+The following example demonstrates a specific Tooltip placement. The Tooltip remains outside the AutoComplete widget after enhancement.
 
 ###### Example  
 
@@ -308,7 +304,7 @@ The example below demonstrates a specific Tooltip placement. The Tooltip will re
 
 > **Important**
 >
-> The validation Tooltip element is bound to the input `name` via the `data-for` attribute.
+> The validation Tooltip element is bound to the input `name` through the `data-for` attribute.
 
 ## See Also
 

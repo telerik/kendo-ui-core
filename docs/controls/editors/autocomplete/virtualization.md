@@ -8,7 +8,7 @@ position: 3
 
 # Virtualization
 
-For more information on how to use virtualization in a Kendo UI AutoComplete widget, refer to the article on the [ComboBox virtualization]({% slug virtualization_kendoui_combobox_widget %}).
+For more information on how to use virtualization in the AutoComplete widget, refer to the article on the [ComboBox virtualization]({% slug virtualization_kendoui_combobox_widget %}).
 
 The approaches described in it are applicable for the AutoComplete.
 
