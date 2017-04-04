@@ -707,6 +707,7 @@ var __meta__ = { // jshint ignore:line
                             }
                             typedDayPeriodPart = typedDayPeriodPart.substring(1, typedDayPeriodPart.length);
                         }
+                        return false;
                     }
                     break;
                 default: break;
