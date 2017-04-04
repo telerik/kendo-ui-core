@@ -7,11 +7,11 @@ slug: howto_wraptext_diagram
 
 # Wrap Text
 
-The example below demonstrates how to use the [`Layout element`](/api/javascript/dataviz/diagram/layout) to make long chunks of text fit in a shape.
+The following example demonstrates how to use the [`Layout`](/api/javascript/dataviz/diagram/layout) element to make long chunks of text fit in a shape.
 
 > **Important**
 >
-> The Layout element is available as of Kendo UI Q3 2015 (2015.3.x) release.
+> The `Layout` element is available as of the Kendo UI Q3 2015 (2015.3.x) release.
 
 ###### Example
 
@@ -77,11 +77,9 @@ The example below demonstrates how to use the [`Layout element`](/api/javascript
 
 ## See Also
 
-Other articles on the Kendo UI Diagram:
-
 * [JavaScript API Reference](/api/javascript/dataviz/ui/diagram)
 * [How to Implement Local Data Editing]({% slug howto_editlocaladata_diagram %})
 * [How to Show Shapes Tooltip]({% slug howto_shapestooltip_diagram %})
 * [How to Use Scrollbars]({% slug howto_usescrollbar_diagram %})
 
-For more runnable examples on the Kendo UI Diagram, browse the [**How To** documentation folder]({% slug howto_changeshapevisualelements_dynamically_diagram %}).
+For more runnable examples on the Kendo UI Diagram, browse its [**How To** documentation folder]({% slug howto_adjustpathorigin_diagram %}).

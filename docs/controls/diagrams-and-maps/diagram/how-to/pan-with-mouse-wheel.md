@@ -7,10 +7,9 @@ slug: howto_pan_with_mouse_wheel
 
 # Pan with Mouse Wheel
 
-The example below demonstrates how to pan the Kendo UI Diagram when scrolling with the mouse.
+The following example demonstrates how to pan the Kendo UI Diagram when scrolling with the mouse.
 
-To achieve this behavior, follow the main steps below:
-
+To achieve this behavior:
 1. Handle the [`zoomStart` event](/api/javascript/dataviz/ui/diagram#events-zoomStart) of the Kendo UI Diagram.
 2. Get the delta from the arguments, that is `e.meta.delta`.
 3. Pan the Diagram with the new coordinates by using the [`pan` method](/api/javascript/dataviz/ui/diagram#methods-pan).
@@ -49,11 +48,9 @@ $("#diagram").kendoDiagram({
 
 ## See Also
 
-Other articles on the Kendo UI Diagram:
-
 * [JavaScript API Reference](/api/javascript/dataviz/ui/diagram)
 * [How to Implement Local Data Editing]({% slug howto_editlocaladata_diagram %})
 * [How to Render External Content in Shapes]({% slug howto_renderexternalcontent_inshapes_diagram %})
 * [How to Wrap Text]({% slug howto_wraptext_diagram %})
 
-For more runnable examples on the Kendo UI Diagram, browse the [**How To** documentation folder]({% slug howto_changeshapevisualelements_dynamically_diagram %}).
+For more runnable examples on the Kendo UI Diagram, browse its [**How To** documentation folder]({% slug howto_adjustpathorigin_diagram %}).
