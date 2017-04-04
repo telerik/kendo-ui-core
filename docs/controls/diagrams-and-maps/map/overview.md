@@ -9,8 +9,8 @@ position: 1
 # Map Overview
 
 The [Kendo UI Map widget](http://demos.telerik.com/kendo-ui/map/index) displays geospatial information organized in layers and is supported for both desktop and mobile devices.
-The layers that the Map features are:
 
+The layers that the Map provides are:
 * Tile layers
 * Shape (vector) layers
 * Marker layers
@@ -21,7 +21,7 @@ For more detailed information on any new features, refer to [Kendo UI Roadmap](h
 
 ### Create the Map
 
-To create a Kendo UI Map, add an empty `div` in the HTML, provide it with an ID, and, optionally, set its desired width and height inline or via CSS, as demonstrated in the example below.
+To create a Kendo UI Map, add an empty `div` element in the HTML, provide it with an ID, and, optionally, set its desired width and height inline or via CSS.
 
 ###### Example
 
@@ -29,7 +29,7 @@ To create a Kendo UI Map, add an empty `div` in the HTML, provide it with an ID,
 
 ### Initialize the Map
 
-The map is rendered by selecting the `div` with a jQuery selector and by calling the `kendoMap()` function, as demonstrated below.
+To render the Map, select the `div` with a jQuery selector and call the `kendoMap()` function.
 
 ###### Example
 
@@ -39,7 +39,7 @@ The map is rendered by selecting the `div` with a jQuery selector and by calling
 
 ### Add Layers
 
-The example below demonstrates how to add a basic tile layer to the Map that is bound to OpenStreetMap.
+The following example demonstrates how to add a basic tile layer to the Map that is bound to OpenStreetMap.
 
 ###### Example
 
@@ -54,7 +54,7 @@ The example below demonstrates how to add a basic tile layer to the Map that is 
     });
     </script>
 
-**Figure 1. A basic map**
+**Figure 1: A basic map**
 
 ![Basic map](/controls/diagrams-and-maps/map/images/map-basic.png)
 

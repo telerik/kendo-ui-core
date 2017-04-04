@@ -14,7 +14,7 @@ The [Kendo UI Diagram widget](http://demos.telerik.com/kendo-ui/diagram/index) r
 
 ### Create the Diagram
 
-Create a Kendo UI Diagram widget by using a simple `div` and optionally set a height and width via CSS.
+To create a Diagram, use a `div` element and optionally set a height and width via CSS.
 
 ###### Example
 
@@ -22,7 +22,7 @@ Create a Kendo UI Diagram widget by using a simple `div` and optionally set a he
 
 ### Initialize the Diagram
 
-Initialize the Diagram with its default configuration as demonstrated in the example below.
+To initialize the Diagram with its default configuration, use the following example. It renders an empty diagramming surface and unless you look at the resulting HTML you will not see any visual changes.
 
 ###### Example
 
@@ -30,7 +30,7 @@ Initialize the Diagram with its default configuration as demonstrated in the exa
            $("#diagram").kendoDiagram();
        });
 
-This renders an empty diagramming surface and unless you look at the resulting HTML you will not see any visual changes. The actual diagramming API can be accessed by calling the `data()` method, as demonstrated below.
+The actual diagramming API can be accessed by calling the `data()` method.
 
 ###### Example
 
@@ -40,22 +40,22 @@ This renders an empty diagramming surface and unless you look at the resulting H
 
 ### Add Shapes
 
-To add a rectangular shape to the diagram, call the `addShape()` method (`diagram.addShape();`), which renders a rectangle in the upper-left corner of the diagram surface. To have a different initial position, call the `addShape()` method with an additional Point parameter, as demonstrated in the example below.
+To add a rectangular shape to the diagram, call the `addShape()` method (`diagram.addShape();`) which renders a rectangle in the upper-left corner of the diagram surface. To have a different initial position, call the `addShape()` method with an additional Point parameter.
 
 ###### Example
 
     var Point = kendo.dataviz.diagram.Point;
     diagram.addShape(new Point(100,220));
 
-Additional properties can be specified via the `options` parameter.
+Additional properties can be specified through the `options` parameter.
 
-The example below demonstrates how to set the background color of the shape.
+The following example demonstrates how to set the background color of the shape.
 
 ###### Example
 
     diagram.addShape(new Point(100,220), { background: "red" });
 
-For detailed information on the Diagram options, refer to the [Kendo UI Diagram API reference on shapes](/api/javascript/dataviz/diagram/shape).
+For detailed information on the Diagram options, refer to the [Diagram API reference on shapes](/api/javascript/dataviz/diagram/shape).
 
 The `addShape()` method also accepts a `shape` instance, so you can also add a new shape, as shown below.
 
@@ -79,7 +79,7 @@ Shapes can be connected using the `connect()` method.
 
 The result is similar to the one below.
 
-**Figure 1. Diagram connected shapes.**
+**Figure 1: Connected Diagram shapes**
 
 ![Two shapes connected.](/controls/diagrams-and-maps/diagram/diagram-connection.png)
 
@@ -87,7 +87,7 @@ The result is similar to the one below.
 
 The Diagram layout is the automatic organization of a diagram based on how its shapes are connected, which is the so-called incidence structure. The `layout()` method is the gateway to a variety of layout algorithms.
 
-The example below demonstrates the effect of the `layout` method by generating a random diagram and calling the method.
+The following example demonstrates the effect of the `layout` method by generating a random diagram and calling the method.
 
 ###### Example
 
@@ -96,21 +96,21 @@ The example below demonstrates the effect of the `layout` method by generating a
     // call the layout method
     diagram.layout();
 
-The default layout algorithm is the top-down tree layout. You are able to change this to another type and subtype by inserting it in the layout options, as demonstrated below.
+The default layout algorithm is the top-down tree layout. You can change this to another type and subtype by inserting it in the layout options.
 
 ###### Example
 
     diagram.layout({ type: "ForceDirected" });
 
-For detailed information on the layout types and options, refer to the [Kendo UI Diagram API reference on layout](/api/javascript/dataviz/diagram/layout).
+For detailed information on the layout types and options, refer to the [Diagram API reference on layout](/api/javascript/dataviz/diagram/layout).
 
 ## Configuration
 
 ### Data Binding
 
-This section requires that you are comfortable with the [general overview on the way data binding in Kendo UI works]({% slug overview_kendoui_datasourcecomponent %}), as Kendo UI dataSource is an essential concept that applies to the diagramming framework.
+This section requires that you are comfortable with the [general overview on the way data binding in Kendo UI works]({% slug overview_kendoui_datasourcecomponent %}), as the dataSource is an essential concept that applies to the diagramming framework.
 
-You are able to define and customize data binding in various ways. To create a hierarchical Diagram, the easiest way is to pass a dataSource as an option together with a Kendo UI template, as demonstrated in the example below.
+You can define and customize data binding in various ways. To create a hierarchical Diagram, the easiest way is to pass a dataSource as an option together with a Kendo UI template.
 
 ###### Example
 
@@ -139,9 +139,9 @@ This produces a tree diagram with default rectangular shapes. Alternatively, you
     diagram.options.template = "#= item.name #";
     diagram.setDataSource([{"name": ... }]);
 
-If you need more flexibility, you are fully able to control where and how data is displayed by defining the `visualTemplate` option rather than the `template` option. This entails the creation of a function, which returns a visual, usually a Group, element containing other visuals bound to your data.
+If you need more flexibility, you can control where and how to display data by defining the `visualTemplate` option. This entails the creation of a function which returns a visual, usually a Group, element that contains other visuals bound to your data.
 
-The example below demonstrates how to reproduce the same diagram with ellipses rather than with the previous rectangular shapes.
+The following example demonstrates how to reproduce the same diagram with ellipses rather than with the previous rectangular shapes. Note that the function, returning a visual, has a parameter that contains the data item to be displayed.
 
 ###### Example
 
@@ -187,8 +187,6 @@ The example below demonstrates how to reproduce the same diagram with ellipses r
       }
     }).data("kendoDiagram");
     diagram.layout();
-
-Note that the function, returning a visual, has a parameter containing the data item to be displayed.
 
 ## See Also
 

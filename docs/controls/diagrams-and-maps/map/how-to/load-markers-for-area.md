@@ -7,7 +7,7 @@ slug: howto_loadmarkers_map
 
 # Load Markers For Visible Area
 
-The example below demonstrates how to filter the data for a marker layer depending on the visible area of a Kendo UI Map.
+The following example demonstrates how to filter the data for a marker layer depending on the visible area of the Kendo UI Map.
 
 ###### Example
 
@@ -59,8 +59,6 @@ $(document).ready(createMap);
 ```
 
 ## See Also
-
-Other articles on the Kendo UI Map:
 
 * [Map JavaScript API Reference](/api/javascript/dataviz/ui/map)
 * [How to Disable Mousewheel Zoom]({% slug howto_disablemousezoom_map %})

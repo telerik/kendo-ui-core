@@ -7,7 +7,7 @@ slug: howto_linkmarkertolocation_map
 
 # Link Marker to Location
 
-The example below demonstrates how to draw a straight line between a marker and a location on a Kendo UI Map.
+The following example demonstrates how to draw a straight line between a marker and a location on a Kendo UI Map.
 
 ###### Example
 
@@ -75,8 +75,6 @@ The example below demonstrates how to draw a straight line between a marker and 
 ```
 
 ## See Also
-
-Other articles on the Kendo UI Map:
 
 * [Map JavaScript API Reference](/api/javascript/dataviz/ui/map)
 * [How to Customize Markers on Map]({% slug howto_customizemarkersonmap_map %})

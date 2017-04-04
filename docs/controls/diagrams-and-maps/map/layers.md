@@ -8,7 +8,7 @@ position: 2
 
 # Map Layers
 
-The information rendered by the [Kendo UI Map widget](http://demos.telerik.com/kendo-ui/map/index) is organized into layers.
+The information that the [Kendo UI Map widget](http://demos.telerik.com/kendo-ui/map/index) renders is organized into layers.
 
 They are stacked from bottom to top in the order of definition and are oblivious of each other. To keep their content in sync, the Map layers respond to [the Map events](/api/javascript/dataviz/ui/map#events).
 
@@ -19,11 +19,11 @@ They are stacked from bottom to top in the order of definition and are oblivious
 Tile layers are suitable for:
 
 * Displaying raster maps from popular online providers such as [OpenStreetMap](http://www.openstreetmap.org/), [OpenWeatherMap](http://openweathermap.org/), [ArcGIS](https://developers.arcgis.com/en/), [Here (Nokia) Maps](https://developer.here.com/rest-apis/documentation/enterprise-map-tile), and many more.
-* Ay other Map Tile service supporting the [WGS 84 projection standards](https://en.wikipedia.org/wiki/World_Geodetic_System).
+* Any other Map Tile service that supports the [WGS 84 projection standards](https://en.wikipedia.org/wiki/World_Geodetic_System).
 
-Dedicated support is available for [Microsoft Bing](http://msdn.microsoft.com/en-us/library/ff701713.aspx). Note that it requires you to [obtain an API key](http://msdn.microsoft.com/en-us/library/ff428642.aspx).
+[Microsoft Bing](http://msdn.microsoft.com/en-us/library/ff701713.aspx) provides dedicated support. Note that it requires you to [obtain an API key](http://msdn.microsoft.com/en-us/library/ff428642.aspx).
 
-The example below demonstrates how to display an OpenStreetMap tile layer.
+The following example demonstrates how to display an OpenStreetMap tile layer.
 
 ###### Example
 

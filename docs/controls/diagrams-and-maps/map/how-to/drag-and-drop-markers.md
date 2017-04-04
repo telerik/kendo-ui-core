@@ -7,7 +7,9 @@ slug: howto_draganddropmarkers_map
 
 # Drag and Drop Markers
 
-The example below demonstrates how to integrate the Kendo UI Draggable widget with the Kendo UI Map. Markers are allowed to be dragged and dropped within the visible extent of the Map. The location of the marker is updated on drop.
+The following example demonstrates how to integrate the Kendo UI Draggable widget with the Map.
+
+You can drag and drop the markers within the visible area of the Map. The location of the marker is updated on dropping.
 
 ###### Example
 
@@ -83,8 +85,6 @@ The example below demonstrates how to integrate the Kendo UI Draggable widget wi
 ```
 
 ## See Also
-
-Other articles on the Kendo UI Map:
 
 * [Map JavaScript API Reference](/api/javascript/dataviz/ui/map)
 * [How to Disable Mousewheel Zoom]({% slug howto_disablemousezoom_map %})
