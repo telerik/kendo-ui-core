@@ -12,6 +12,7 @@ The example below demonstrates how to use the Kendo UI MultiSelect widget with a
 ###### Example
 
 ```html
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" />
     <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
     <div id="game-container">
       GameList
