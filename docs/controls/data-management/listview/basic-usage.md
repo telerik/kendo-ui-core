@@ -8,15 +8,17 @@ position: 1
 
 # Walkthrough
 
-The purpose of Kendo UI ListView is to display a custom layout of data-bound items through templates. The ListView is ideally suited for scenarios where you wish to display a list of items in a consistent manner. Examples of its use can be seen in commonplace design structures applied on the Internet today, search engine results, tweets from Twitter, Facebook updates, inbox items in Gmail, card lists in Trello, and so on.
+The purpose of the ListView is to display a custom layout of data-bound items through templates.
+
+The ListView is ideally suited for scenarios where you wish to display a list of items in a consistent manner. You can see commonplace examples of its use in the design structures of the Internet, search engine results, tweets from Twitter, Facebook updates, inbox items in Gmail, card lists in Trello, and so on.
 
 ## Basic Usage
 
-The ListView is designed to put you back in control when it comes to displaying data. It does not provide a default rendering of data-bound items, but, instead, it relies entirely on templates to define how a list of items - including alternating items and items being edited - is displayed.
+The ListView enables you to control the display of data. It does not provide a default rendering of data-bound items. Instead, it relies on templates to define the way a list of items is displayed, including alternating items and items being edited.
 
 ### Target Elements
 
-To demonstrate how the ListView works, define a target HTML element such as a `<list>` or a `<div>`:
+To demonstrate how the ListView works, define a target HTML element such as a `<list>` or a `<div>`.
 
     <div id="listView"></div>
 
@@ -29,11 +31,12 @@ To demonstrate how the ListView works, define a target HTML element such as a `<
     </script>
 
 > **Important**  
-> The ListView item template must have only one root element. In the example above, this is `div.product`.
+>
+>  The ListView item template needs to have only one root element. In the previous example, this is the `div.product` element.
 
 ### Templates
 
-Then, initialize the ListView by referring the template, so that the result set by the service is displayed:
+To initialize the ListView, refer the template. It displays the result set by the service.
 
     var dataSource = new kendo.data.DataSource({
         transport: {
@@ -49,7 +52,7 @@ Then, initialize the ListView by referring the template, so that the result set 
         template: kendo.template($("#template").html())
     });
 
-This is the live example of the case displayed above:
+The following demo shows the case displayed in the previous example.
 
 ```html
 <div id="listView" style="max-height:400px;overflow:auto;"></div>
@@ -84,44 +87,46 @@ $("#listView").kendoListView({
 
 ### Paging
 
-In scenarios where the number of items, bound to a ListView, is larger than expected, a `pager` will control the items that are displayed. Using a Pager is relatively simple. First, create a target element for its rendering. It is typically placed in the vicinity of the ListView:
+When the number of items that are bound to a ListView is larger than expected, a `pager` will control the items that are displayed. To use a Pager:
 
-    <div id="listView"></div>
-    <div class="k-page-wrap">
-        <div id="pager"></div>
-    </div>
+1. Create a target element for its rendering. It is typically placed near the ListView.
 
-    <script type="text/x-kendo-tmpl" id="template">
-        <div class="product">
-            <img src="http://demos.telerik.com/kendo-ui/content/web/foods/#= ProductID #.jpg" alt="#: ProductName # image" />
-            <h3>#:ProductName#</h3>
-            <p>#:kendo.toString(UnitPrice, "c")#</p>
+        <div id="listView"></div>
+        <div class="k-page-wrap">
+            <div id="pager"></div>
         </div>
-    </script>
 
-Then, update the ListView configuration through its `pageable` property to state that the widget supports paging and to initialize the `pager`:
+        <script type="text/x-kendo-tmpl" id="template">
+            <div class="product">
+                <img src="http://demos.telerik.com/kendo-ui/content/web/foods/#= ProductID #.jpg" alt="#: ProductName # image" />
+                <h3>#:ProductName#</h3>
+                <p>#:kendo.toString(UnitPrice, "c")#</p>
+            </div>
+        </script>
 
-    var dataSource = new kendo.data.DataSource({
-        transport: {
-            read: {
-                url: "http://demos.telerik.com/kendo-ui/service/Products",
-                dataType: "jsonp"
-            }
-        },
-        pageSize: 4
-    });
+1. Update the ListView configuration through its `pageable` property to state that the widget supports paging and to initialize the `pager`.
 
-    $("pager").kendoPager({
-        dataSource: dataSource
-    });
+        var dataSource = new kendo.data.DataSource({
+            transport: {
+                read: {
+                    url: "http://demos.telerik.com/kendo-ui/service/Products",
+                    dataType: "jsonp"
+                }
+            },
+            pageSize: 4
+        });
 
-    $("#listView").kendoListView({
-        dataSource: dataSource,
-        pageable: true,
-        template: kendo.template($("#template").html())
-    });
+        $("pager").kendoPager({
+            dataSource: dataSource
+        });
 
-Below is the same live example with a `pager` applied to the ListView:
+        $("#listView").kendoListView({
+            dataSource: dataSource,
+            pageable: true,
+            template: kendo.template($("#template").html())
+        });
+
+The following demo represents the same example with a `pager` applied to the ListView.
 
 ```html
 <div id="listView" style="max-height:400px;overflow:auto;"></div>
@@ -158,11 +163,12 @@ $("#listView").kendoListView({
 </script>
 
 ```
+
 ### Alternate Items
 
-From a design perspective, it may be useful to visually differentiate each alternating item in a ListView. You may wish that every second item from the example above has a slightly darker background, i.e. banded rows. Defining the `altTemplate` property accomplishes this through the use of a template that you define.
+Your project might require you to visually differentiate each alternating item in a ListView. For example, you might need to render each second item from the previous example in a slightly darker background, that is, banded rows. To achieve this behavior through the use of a template that you set, define the `altTemplate` property.
 
-The example below demonstrates the way you can update your working project to include a template for alternating items:
+The following example demonstrates how you can update your working project to include a template for alternating items.
 
     <div id="listView"></div>
     <div class="k-page-wrap">
@@ -185,7 +191,7 @@ The example below demonstrates the way you can update your working project to in
         </div>
     </script>
 
-This is the live example with a template for alternating items:
+The following demo represents the live example by using a template for alternating items.
 
 ```html
 
@@ -240,9 +246,9 @@ $("#listView").kendoListView({
 
 ### Selection, Navigation, and Editing
 
-In addition to paging, the ListView provides item selection, navigation, and inline editing functionalities. The support of these operations is achieved through the initialization of its Boolean configuration options. In the case of inline editing, the ListView provides the `editTemplate` property, which defines a template for this mode. Once defined, the ListView can render out this editing template via the edit method. When invoked, the `editTemplate` for the ListView is applied against the target item. In most scenarios, you must implement this through an event model that is triggered when the user selects an item to modify.
+In addition to paging, the ListView provides item selection, navigation, and inline editing functionalities. The support of these operations is achieved through the initialization of its Boolean configuration options. In the case of inline editing, the ListView provides the `editTemplate` property, which defines a template for this mode. Once defined, the ListView can render out this editing template through the edit method. When invoked, the `editTemplate` for the ListView is applied against the target item. In most scenarios, you have to implement this through an event model that is triggered when the user selects an item to modify.
 
-The ListView encapsulates operations for adding, removing, selecting, and editing items. These methods enable you to modify the underpinning list of items through a series of user-initiated actions/events. As for inline editing, first define a template to be used when editing items:
+The ListView encapsulates operations for adding, removing, selecting, and editing items. These methods enable you to modify the underpinning list of items through a series of user-initiated actions or events. Regarding inline editing, you need to first define a template that will be used when you edit the items.
 
     <script type="text/x-kendo-tmpl" id="editTemplate">
         <div class="product-view k-widget">
@@ -281,18 +287,20 @@ The ListView encapsulates operations for adding, removing, selecting, and editin
         });
     });
 
-The template you define for the inline editing of items may include other Kendo UI widgets. Look at [the example for editing items on KendoUI.com](http://demos.telerik.com/kendo-ui/web/listview/editing.html) to see that the edit template defines a series of widgets for editing an item:
+The template you define for the inline editing of items may include other Kendo UI widgets. For more information on how to define a series of widgets for editing an item, refer to [the example on KendoUI.com](http://demos.telerik.com/kendo-ui/web/listview/editing.html).
+
+**Figure 1: ListView item editing**
 
 ![ListView Item Editing](/images/listview-item-editing.png)
 
-The new `add` record functionality of ListView items is triggered by a `click` event initiated by a user and is wired up via `.click()` in jQuery:
+The new `add` record functionality of ListView items is triggered by a `click` event that is initiated by a user and is wired up through `.click()` in jQuery.
 
     $(".k-add-button").click(function(e) {
         listView.add();
         e.preventDefault();
     });
 
-Item selection is another scenario supported by the ListView widget. By setting the selectable property to either `"single"` or `"multiple"`, you can allow users to select items:
+Item selection is another scenario supported by the ListView widget. By setting the selectable property to either `"single"` or `"multiple"`, you can allow users to select items.
 
     $("#listView").kendoListView({
         dataSource: dataSource,
@@ -300,7 +308,7 @@ Item selection is another scenario supported by the ListView widget. By setting 
         template: kendo.template($("#template").html())
     });
 
-You can detect when users pick up items through the `change` event, which is triggered upon their selecting one or more items via shift-select.
+You can also detect when users pick up items through the `change` event, which is triggered upon their selecting one or more items via shift-select.
 
     $("#listView").kendoListView({
         change: function(e) {
@@ -313,7 +321,7 @@ You can detect when users pick up items through the `change` event, which is tri
         }
     });
 
-This is the live example which demonstrates that the item selection functionality is enabled:
+The following demo shows how to enable the item selection functionality.
 
 ```html
 <div id="listView" style="max-height:400px;overflow:auto;"></div>
