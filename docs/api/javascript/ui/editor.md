@@ -1192,6 +1192,21 @@ The title of the tool that makes text italicized.
     });
     </script>
 
+### messages.overflowAnchor `String` *(default: "More tools")*
+
+The title of the tool that shows the overflow tools.
+
+#### Example
+
+    <textarea id="editor"></textarea>
+    <script>
+    $("#editor").kendoEditor({
+      messages: {
+        overflowAnchor: "More tools"
+      }
+    });
+    </script>
+
 ### messages.justifyCenter `String` *(default: "Center text")*
 
 The title of the tool that aligns text in the center.
