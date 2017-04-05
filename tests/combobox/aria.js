@@ -217,4 +217,36 @@ test("ComboBox removes aria-selected from unselected item", function() {
     ok(!combobox.ul.children("[aria-selected=true]")[0]);
 });
 
+test("widget takes aria-label attribute", 1, function() {
+    var combobox = new ComboBox(input.attr("aria-label", "labeltext"));
+
+    equal(combobox.input.attr("aria-label"), "labeltext");
+});
+
+test("widget takes aria-labelledby attribute", 1, function() {
+    var combobox = new ComboBox(input.attr("aria-labelledby", "labelID"));
+
+    equal(combobox.input.attr("aria-labelledby"), "labelID");
+});
+
+test("widget sets aria-labelledby attribute to label's  id", 2, function() {
+    var label = input.before("<label id='labelID' for='comboInput'>labeltext</label>").prev("label");
+    var combobox = new ComboBox(input.attr("id", "comboInput"));
+
+    ok(combobox.input.attr("aria-labelledby"));
+    equal(combobox.input.attr("aria-labelledby"), label.attr("id"));
+
+    label.remove();
+});
+
+test("widget sets aria-labelledby attribute to label's generated id", 2, function() {
+    var label = input.before("<label for='comboInput'>labeltext</label>").prev("label");
+    var combobox = new ComboBox(input.attr("id", "comboInput"));
+
+    ok(combobox.input.attr("aria-labelledby"));
+    equal(combobox.input.attr("aria-labelledby"), label.attr("id"));
+
+    label.remove();
+});
+
 })();

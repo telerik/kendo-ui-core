@@ -139,4 +139,36 @@
 
         ok(!optionLabel.attr("id"));
     });
+
+    test("widget takes aria-label attribute", 1, function() {
+        var dropdownlist = new DropDownList(input.attr("aria-label", "labeltext"));
+
+        equal(dropdownlist.wrapper.attr("aria-label"), "labeltext");
+    });
+
+    test("widget takes aria-labelledby attribute", 1, function() {
+        var dropdownlist = new DropDownList(input.attr("aria-labelledby", "labelID"));
+
+        equal(dropdownlist.wrapper.attr("aria-labelledby"), "labelID");
+    });
+
+    test("widget sets aria-labelledby attribute to label's id", 2, function() {
+        var label = input.before("<label id='labelID' for='ddInput'>labeltext</label>").prev("label");
+        var dropdownlist = new DropDownList(input.attr("id", "ddInput"));
+
+        ok(dropdownlist.wrapper.attr("aria-labelledby"));
+        equal(dropdownlist.wrapper.attr("aria-labelledby"), label.attr("id"));
+
+        label.remove();
+    });
+
+    test("widget sets aria-labelledby attribute to label's generated id", 2, function() {
+        var label = input.before("<label for='ddInput'>labeltext</label>").prev("label");
+        var dropdownlist = new DropDownList(input.attr("id", "ddInput"));
+
+        ok(dropdownlist.wrapper.attr("aria-labelledby"));
+        equal(dropdownlist.wrapper.attr("aria-labelledby"), label.attr("id"));
+
+        label.remove();
+    });
 })();

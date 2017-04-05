@@ -29,6 +29,7 @@ var __meta__ = { // jshint ignore:line
         LOADING = "k-i-loading",
         HIDDENCLASS = "k-hidden",
         GROUPHEADER = ".k-group-header",
+        LABELIDPART = "_label",
         OPEN = "open",
         CLOSE = "close",
         CASCADE = "cascade",
@@ -552,6 +553,38 @@ var __meta__ = { // jshint ignore:line
             element.attr("aria-owns", id);
 
             that.ul.attr("aria-live", !that._isFilterEnabled() ? "off" : "polite");
+
+            that._ariaLabel();
+        },
+
+        _ariaLabel: function(){
+            var that = this;
+            var focusedElm = that._focused;
+            var inputElm = that.element;
+            var inputId = inputElm.attr("id");
+            var labelElm = $("label[for='" + inputId  + "']");
+            var ariaLabel = inputElm.attr("aria-label");
+            var ariaLabelledBy = inputElm.attr("aria-labelledby");
+
+            if(focusedElm === inputElm){
+                return;
+            }
+
+            if(ariaLabel){
+                focusedElm.attr("aria-label", ariaLabel);
+            } else if (ariaLabelledBy){
+                focusedElm.attr("aria-labelledby", ariaLabelledBy);
+            } else if (labelElm.length){
+                var labelId = labelElm.attr("id") || that._generateLabelId(labelElm, inputId);
+                focusedElm.attr("aria-labelledby", labelId);
+            }
+        },
+
+        _generateLabelId: function(label, inputId){
+            var labelId = inputId + LABELIDPART;
+            label.attr("id", labelId);
+
+            return labelId;
         },
 
         _blur: function() {
