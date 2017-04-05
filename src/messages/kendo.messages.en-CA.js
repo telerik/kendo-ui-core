@@ -75,6 +75,7 @@ $.extend(true, kendo.ui.Editor.prototype.options.messages,{
   "style": "Styles",
   "emptyFolder": "Empty Folder",
   "uploadFile": "Upload",
+  "overflowAnchor": "More tools",
   "orderBy": "Arrange by:",
   "orderBySize": "Size",
   "orderByName": "Name",
