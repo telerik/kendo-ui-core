@@ -1418,12 +1418,12 @@ Defines the pannable options.
 
 ### pannable.key `String` *(default: "ctrl")*
 
-Defines the pannable key. The available values are:
+Defines what meta key to use while panning the diagram. Make sure this option and [selectable.key](#configuration-selectable.key) are different to avoid clashes. The available values are:
 
 * "none" - No activation key
 * "ctrl" - The activation key will be "ctrl"
-* "shift" - The activation key will be "ctrl"
-* "alt" - The activation key will be "ctrl"
+* "shift" - The activation key will be "shift"
+* "alt" - The activation key will be "alt"
 
 > This option is not applicable for mobile devices.
 
@@ -1801,12 +1801,14 @@ Defines the selectable options.
 
 ### selectable.key `String` *(default: "none")*
 
-Defines the selectable key. The available values are:
+Defines the meta key when doing a visual selection through drawing a rectangular area around shapes in the canvas. This option will not change the way a single shape is selected using click/tap.
+
+Make sure this option and [pannable.key](#configuration-pannable.key) are different to avoid clashes. The available values are:
 
 * "none" - No activation key
 * "ctrl" - The activation key will be "ctrl"
-* "shift" - The activation key will be "ctrl"
-* "alt" - The activation key will be "ctrl"
+* "shift" - The activation key will be "shift"
+* "alt" - The activation key will be "alt"
 
 > This option is not applicable for mobile devices.
 
