@@ -27,6 +27,7 @@ Applications built with components that adhere to these guidelines will not only
 |MediaPlayer   |Yes |AAA |[Browse](http://demos.telerik.com/kendo-ui/mediaplayer/index)
 |ScrollView	   |Yes |AAA |[Browse](http://demos.telerik.com/kendo-ui/scrollview/index)
 |Calendar	   |Yes |AAA |[Browse](http://demos.telerik.com/kendo-ui/calendar/index)
+|DateInput	   |Yes |AAA |[Browse](http://demos.telerik.com/kendo-ui/dateinput/index)
 |DatePicker	   |Yes |AAA |[Browse](http://demos.telerik.com/kendo-ui/datepicker/index)
 |DateTimePicker|Yes |AAA |[Browse](http://demos.telerik.com/kendo-ui/datetimepicker/index)
 |TimePicker	   |Yes |AAA |[Browse](http://demos.telerik.com/kendo-ui/timepicker/index)
