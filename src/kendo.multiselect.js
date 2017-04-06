@@ -390,13 +390,13 @@ var __meta__ = { // jshint ignore:line
         _clearClick: function() {
             var that = this;
 
-            this.tagList.children().each(function(index, tag) {
+            that.tagList.children().each(function(index, tag) {
                 that._removeTag($(tag));
             });
-            this.input.val("");
 
-            this._search();
-            this.trigger("change");
+            that.input.val(that.options.placeholder || "");
+            that._search();
+            that.trigger("change");
         },
 
         _editable: function(options) {
@@ -1003,7 +1003,7 @@ var __meta__ = { // jshint ignore:line
             var that = this;
 
             that._typingTimeout = setTimeout(function() {
-                var value = that.input.val();
+                var value = that._inputValue();
                 if (that._prev !== value) {
                     that._prev = value;
                     that.search(value);
