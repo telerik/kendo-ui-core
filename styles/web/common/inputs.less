@@ -22,7 +22,8 @@ span.k-dropdown,
 .k-dropdown,
 .k-selectbox,
 .k-textbox,
-.k-toolbar .k-split-button
+.k-toolbar .k-split-button,
+.k-listbox
 {
     position: relative;
     display: inline-block;
@@ -499,7 +500,8 @@ body .k-datetimepicker .k-select
 .k-fieldselector .k-list .k-item,
 .k-list-optionlabel,
 .k-popup > .k-group-header,
-.k-popup > .k-virtual-wrap > .k-group-header
+.k-popup > .k-virtual-wrap > .k-group-header,
+.k-listbox .k-item
 {
     padding: 1px 5px 1px 5px;
     line-height: 1.8em;
@@ -1157,6 +1159,97 @@ span.k-numerictextbox
 
         &.k-state-invalid .k-i-warning {
             display: inline-block;
+        }
+    }
+}
+
+.k-listbox {
+    box-sizing: border-box;
+    height: 200px;
+
+    &.k-widget {
+        background-color: transparent;
+    }
+
+    .k-list-scroller {
+        height: 100%;
+        overflow: auto;
+        border-width: 1px;
+        border-style: solid;
+        box-sizing: border-box;
+
+        ul li {
+            cursor: default;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            -khtml-user-select: none;
+            -webkit-user-select: none;
+            -webkit-touch-callout: none;
+        }
+    }
+
+    .k-listbox-toolbar {
+        box-sizing: border-box;
+    }
+
+    &.k-listbox-toolbar-top {
+        padding: 15px 0 1.42857143em;
+
+        .k-listbox-toolbar {
+            margin-top: -15px;
+            margin-bottom: 5px;
+
+            ul li {
+            display: inline-block;
+
+                &:not(:last-child) {
+                    margin-right: 1px;
+                }
+            }
+        }
+    }
+
+    &.k-listbox-toolbar-left {
+        .k-listbox-toolbar {
+            float: left;
+            margin-right: 5px;
+
+            ul li:not(:last-child) {
+                margin-bottom: 5px;
+            }
+        }
+
+    }
+
+    &.k-listbox-toolbar-right {
+        .k-listbox-toolbar {
+            float: right;
+            margin-left: 5px;
+
+            ul li:not(:last-child) {
+                margin-bottom: 5px;
+            }
+        }
+
+    }
+
+    &.k-listbox-toolbar-bottom {
+    padding: 15px 0 1.45em;
+
+        .k-list-scroller {
+            margin-top: -15px;
+        }
+
+        .k-listbox-toolbar {
+            margin-top: 5px;
+
+            ul li {
+            display: inline-block;
+
+                &:not(:last-child) {
+                    margin-right: 1px;
+                }
+            }
         }
     }
 }
