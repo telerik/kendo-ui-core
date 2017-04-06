@@ -69,6 +69,7 @@ Files selected one after the other will be uploaded in separate requests.
 ### async.chunkSize `Number`
 
 When the property is set, the selected files are uploaded with the declared size chunk by chunk. Each request sends a separate file blob and additional string metadata to the server. This metadata is in a stringified JSON format and contains the `chunkIndex`, `contentType`, `totalFileSize`, `totalChunks`, `uploadUid` properties. These properties enable the validation and combination of the file on the server side. The response also returns a JSON object with the `uploaded` and `fileUid` properties, which notifies the client what is the next chunk.
+This property is only in use when the [`async.batch`](#configuration-async.batch) is set false.
 
 #### Example
 
@@ -231,6 +232,50 @@ containing one or more fields with the same name as the original input name.
 
 Controls whether to send credentials (cookies, headers) for cross-site requests.
 This option will be ignored if the browser doesn't support File API.
+
+### directory `Boolean` *(default: false)*
+
+Enables selection of folders instead of files. When a directory is selected, its entire hierarchy of contents files is included in the set of selected items. It is only supported in browsers that support [webkitdirectory](https://developer.mozilla.org/en-US/docs/Web/API/HTMLInputElement/webkitdirectory).
+
+#### Example
+
+    <div>
+     	<input name="files" id="files" type="file" />
+     	<div class="dropZoneElement">Drag and drop file here</div>
+    </div>
+    <script>
+        $(document).ready(function() {
+            $("#files").kendoUpload({
+                async: {
+                    saveUrl: "http://my-app.localhost/save",
+                    removeUrl: "http://my-app.localhost/remove"
+                },
+                directory: true
+            });
+        });
+    </script
+
+### directoryDrop `Boolean` *(default: false)*
+
+Enables dropping folders over the upload and its drop zone. When a directory is dropped, its entire hierarchy of contents files is included in the set of selected items. It is only supported in browsers that support [DataTransferItem](https://developer.mozilla.org/en-US/docs/Web/API/DataTransferItem) and [webkitGetAsEntry](https://developer.mozilla.org/en-US/docs/Web/API/DataTransferItem/webkitGetAsEntry).
+
+#### Example
+
+    <div>
+    	<input name="files" id="files" type="file" />
+    	<div class="dropZoneElement">Drag and drop file here</div>
+    </div>
+    <script>
+        $(document).ready(function() {
+            $("#files").kendoUpload({
+                async: {
+                    saveUrl: "http://my-app.localhost/save",
+                    removeUrl: "http://my-app.localhost/remove"
+                },
+                directoryDrop: true
+            });
+        });
+    </script
 
 ### dropZone `String`
 
@@ -441,6 +486,26 @@ Sets the text for invalid file extension validation message.
             },
             localization: {
                 invalidFileExtension: "customInvalidFileExtension"
+            }
+        });
+    </script>
+
+### localization.invalidFiles `String`
+
+Sets the text for invalid files validation message when batch property is true and more than one file is not passing the validation.
+
+#### Example
+
+    <input type="file" name="files" id="photos" />
+    <script>
+        $("#photos").kendoUpload({
+            async: {
+                saveUrl: "http://my-app.localhost/save",
+                removeUrl: "http://my-app.localhost/remove"
+                batch:true
+            },
+            localization: {
+                invalidFiles: "customInvalidFiles"
             }
         });
     </script>
