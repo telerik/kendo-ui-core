@@ -78,7 +78,6 @@ var __meta__ = { // jshint ignore:line
             }
 
             that.check(checked);
-            that.element.attr("aria-label", options.name);
 
             that.options.enable = that.options.enable && !that.element.attr(DISABLED);
             that.enable(that.options.enable);
