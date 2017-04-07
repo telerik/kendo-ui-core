@@ -19,7 +19,7 @@ The FileBrowser-related code is identical to the ImageBrowser one except for:
 
 > **Important**
 >
-> If you are using the 2017 R1 version or later, use the `.k-insertFile` and `.k-insertImage` classes to get the button elements. 
+> If you are using the 2017 R1 version or later, use the `.k-insertFile` and `.k-insertImage` classes to get the button elements.
 
 To attach events with [`bind()`](/intro/installation/events-and-methods#bind-to-events-after-widget-initialization) or to perform other customizations that may not be otherwise supported, use the API calls of the [ListView](/api/javascript/ui/listview), [Upload](/api/javascript/ui/upload) and [DropDownList](/api/javascript/ui/dropdownlist) widget objects after they are available.
 
@@ -110,12 +110,10 @@ The following `transport` configurations are over-simplified and invalid.
 
 ## See Also
 
-Other articles on the Kendo UI Editor:
-
 * [Editor JavaScript API Reference](/api/javascript/ui/editor)
 * [How to Insert HTML Content via Custom Popup Tools]({% slug howto_insert_html_content_custom_popup_tool_editor %})
 * [How to Set Caret Position]({% slug howto_set_caret_position_editor %})
 * [How to Show Editor in Full Screen]({% slug howto_show_infull_screen_editor %})
 * [How to Use Inline Editor inside Windows]({% slug howto_use_inline_editor_inside_windows_editor %})
 
-For more runnable examples on the Kendo UI Editor, browse its [**How To** documentation folder]({% slug howto_add_max_length_validation_editor %}).
+For more runnable examples on the Kendo UI Editor, browse its [**How To** documentation folder]({% slug howto_handleblurandfocuseventsangular_editor %}).
