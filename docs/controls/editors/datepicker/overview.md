@@ -8,11 +8,15 @@ position: 1
 
 # DatePicker Overview
 
-The [Kendo UI DatePicker widget](http://demos.telerik.com/kendo-ui/datepicker/index) allows the user to select a date from a calendar or via a direct input. It also supports custom templates for its `month` view and configuration options for minimum and maximum dates, a start view and the depth of the navigation.
+The [Kendo UI DatePicker widget](http://demos.telerik.com/kendo-ui/datepicker/index) allows the user to select a date from a calendar or via a direct input.
+
+The DatePicker also supports custom templates for its `month` view, configuration options for minimum and maximum dates, a start view, and depth for navigation.
 
 ## Getting Started
 
 ### Initialize the DatePicker
+
+To initialize the DatePicker, use the following example.
 
     <input id="datePicker" />
 
@@ -28,7 +32,7 @@ The [Kendo UI DatePicker widget](http://demos.telerik.com/kendo-ui/datepicker/in
 
 ## Configuration
 
-The DatePicker provides configuration options that can be set during initialization. Among the properties you can control are:
+The DatePicker provides configuration options that can be set during initialization. The available properties are:
 
 * Selected date
 * Minimum and/or maximum date
@@ -38,7 +42,7 @@ The DatePicker provides configuration options that can be set during initializat
 
 ### Selected, Min, and Max Dates
 
-The example below demonstrates how to create a DatePicker with a selected date and a defined minimum and maximum dates.
+The following example demonstrates how to create a DatePicker with a selected date and a defined minimum and maximum dates.
 
 ###### Example
 
@@ -54,20 +58,20 @@ The example below demonstrates how to create a DatePicker with a selected date a
         });
     </script>
 
-Note that the DatePicker will set the value only if the entered date is valid and within the defined range.
+Note that the DatePicker sets the value only if the entered date is valid and within the defined range.
 
 ### Start View and Navigation Depth
 
 Define the first rendered view with the `start` option. Control the navigation depth with the `depth` option. The following views are predefined:
 
-*   `month` - shows the days of the month
-*   `year` - shows the months of the year
-*   `decade` - shows the years of the decade
-*   `century` - shows the decades of the century
+* `month`&mdash;Shows the days of the month.
+* `year`&mdash;Shows the months of the year.
+* `decade`&mdash;Shows the years of the decade.
+* `century`&mdash;Shows the decades of the century.
 
 ### Selectable Month DatePicker
 
-The example below demonstrates how to create a DatePicker that allows users to select a month.
+The following example demonstrates how to create a DatePicker that allows users to select a month.
 
 ###### Example
 
@@ -82,11 +86,15 @@ The example below demonstrates how to create a DatePicker that allows users to s
 
 ## Disable Dates
 
-Kendo UI DatePicker widget provides the functionality to disable certain days, such as weekends, national holidays, and others, which are not intended to be selected by the end user.
+The DatePicker provides the functionality to disable certain days, such as weekends, national holidays, and others, which are not intended to be selected by the end user.
+
+To disable a date, either:
+* Set and array of dates, or
+* Add a function to determine the return value as the date that is disabled.  
 
 ### Set an Array
 
-One way to disable a date is by setting an array. List the days that need to be disabled by using the first letters from their names in English.
+When you disable dates by setting an array, list the days that need to be disabled by using the first letters from their names in English.
 
 ###### Example
 
@@ -103,7 +111,7 @@ One way to disable a date is by setting an array. List the days that need to be 
 
 ### Add a Function
 
-The other way to disable dates is by adding a function and determine its return value as `true` for the date that is disabled.
+When you disable dates by adding a function, determine its return value as `true` for the date that is disabled.
 
 ###### Example
 
@@ -128,16 +136,16 @@ The other way to disable dates is by adding a function and determine its return 
 
 The widget is designed to keep the input value unchanged, even when the typed date is invalid. This is due the following facts:
 
-- The widget allows different date parse formats, which require unrestricted user input. Refer to the [`parseFormats`](/api/javascript/ui/datepicker#configuration-parseFormats) option for more details.
-- The widget does not update automatically the typed text, when it is invalid. This would lead to unexpected behavior if the widget changes the input value.
+- The widget allows different date parse formats, which require unrestricted user input. For more information, refer to the [`parseFormats`](/api/javascript/ui/datepicker#configuration-parseFormats) option.
+- The widget does not update automatically the typed text when it is invalid. Such a change in the input value that is made by the widget, leads to unexpected behavior.
 
-The best way to validate the DatePicker widget is to use a client-validation framework, such as the [Kendo UI Validator]({% slug overview_kendoui_validator_widget %}). Thus you are able to provide meaningful error message to end users pointing them to the right actions to resolve the issue. For more details, check the [online custom validation demos](http://demos.telerik.com/kendo-ui/validator/custom-validation).
+The best way to validate the DatePicker widget is to use a client-validation framework such as the [Kendo UI Validator]({% slug overview_kendoui_validator_widget %}). In this way, you can provide a meaningful error message to the end user that prompts the right actions for them to resolve the issue. For more details, refer to the [online custom validation demos](http://demos.telerik.com/kendo-ui/validator/custom-validation).
 
 ## Calendar Types
 
-The DatePicker widget works with JavaScript `Date` objects, that support only the [Gregorian](https://en.wikipedia.org/wiki/Gregorian_calendar) calendar. This means that the widget does not support other calendar types.
+The DatePicker works with the JavaScript `Date` objects that support only the [Gregorian](https://en.wikipedia.org/wiki/Gregorian_calendar) calendar. This means that the widget does not support other calendar types.
 
-If you would like to simulate a different calendar date, like Lunar, use the JavaScript `Date` object and create a date that is just in the past. The example below demonstrates how to do this.
+To simulate a different calendar type, such as Lunar, use the JavaScript `Date` object and create a date that is in the past. The following example demonstrates how to achieve this behavior.
 
 ###### Example
 
