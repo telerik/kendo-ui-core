@@ -170,10 +170,10 @@ Specifies if the connections can be removed.
 
 ### connectionDefaults.editable.tools `Array`
 
-Specifies the the toolbar tools. Supports all options supported for the [toolbar.items](/api/javascript/ui/toolbar#configuration-items). Predefined tools are:
+Specifies the toolbar tools. Supports all options supported for the [toolbar.items](/api/javascript/ui/toolbar#configuration-items). Predefined tools are:
 
-* "edit" - Selected item can be edit.
-* "delete" - Selected items can be deleted.
+* "edit" - The elected item can be edited
+* "delete" - The selected items can be deleted
 
 #### Example - using predefined tools
 
@@ -509,8 +509,8 @@ Defines the shape editable options.
 
 Specifies the the toolbar tools. Supports all options supported for the [toolbar.items](/api/javascript/ui/toolbar#configuration-items). Predefined tools are:
 
-* "edit" - Selected item can be edit.
-* "delete" - Selected items can be deleted.
+* "edit" - The selected item can be edited
+* "delete" - The selected items can be deleted
 
 ### connections.editable.tools.name `String`
 
@@ -1147,15 +1147,15 @@ Specifies the shape editor template. See the 'editable.connectionTemplate' for a
 
 Specifies the the toolbar tools. Supports all options supported for the [toolbar.items](/api/javascript/ui/toolbar#configuration-items). Predefined tools are:
 
-* "edit" - Selected item can be edit.
-* "createShape" - Adds an empty shape data item and a popup window will be displayed.
-* "createConnection" - Adds an empty connection data item and a popup window will be displayed.
+* "edit" - The selected item can be edited.
+* "createShape" - Adds an empty shape data item and a popup window is displayed.
+* "createConnection" - Adds an empty connection data item and a popup window is displayed.
 * "undo" - Undoes the previous action.
 * "redo" - Executes again the previously undone action.
-* "rotateClockwise" - Selected items can be rotated clockwise. Default value for rotation is 90 degree.
-* "rotateAnticlockwise" - Selected items can be rotated anticlockwise. Default value for rotation is 90 degree.
+* "rotateClockwise" - The selected items can be rotated clockwise. The default rotation value is 90 degree.
+* "rotateAnticlockwise" - The selected items can be rotated anticlockwise. The default rotation value is 90 degree.
 
-> If the toolbar or toolbar items are not visible, please make sure the Kendo stylesheets are included in the header.
+> If the toolbar or toolbar items are not visible, verify that the Kendo UI stylesheets are included in the header.
 
 #### Example - using predefined tools
 
@@ -1418,18 +1418,18 @@ Defines the pannable options.
 
 ### pannable.key `String` *(default: "ctrl")*
 
-Defines what meta key to use while panning the diagram. Make sure this option and [selectable.key](#configuration-selectable.key) are different to avoid clashes. The available values are:
+Defines the meta key that will be used while panning the Diagram. To avoid clashed, verify that the `pannable.key` and [`selectable.key`](#configuration-selectable.key) options are different. The available values are:
 
 * "none" - No activation key
-* "ctrl" - The activation key will be "ctrl"
-* "shift" - The activation key will be "shift"
-* "alt" - The activation key will be "alt"
+* "ctrl" - The activation key will be `Ctrl`
+* "shift" - The activation key will be `Shift`
+* "alt" - The activation key will be `Alt`
 
 > This option is not applicable for mobile devices.
 
 ### pdf `Object`
 
-Configures the export settings for the [saveAsPDF](#methods-saveAsPDF) method.
+Configures the export settings for the [`saveAsPDF`](#methods-saveAsPDF) method.
 
 ### pdf.author `String` *(default: null)*
 
@@ -1460,6 +1460,7 @@ The author of the PDF document.
 The creator of the PDF document.
 
 #### Example - set the creator
+
     <div id="diagram"></div>
     <script>
       $("#diagram").kendoDiagram({
@@ -1484,6 +1485,7 @@ The creator of the PDF document.
 The date when the PDF document is created. Defaults to `new Date()`.
 
 #### Example - set the date
+
     <div id="diagram"></div>
     <script>
       $("#diagram").kendoDiagram({
@@ -1529,7 +1531,7 @@ Specifies the file name of the exported PDF file.
 
 ### pdf.forceProxy `Boolean` *(default: false)*
 
-If set to true, the content will be forwarded to [proxyURL](#configuration-pdf.proxyURL) even if the browser supports saving files locally.
+If set to `true`, the content is forwarded to [`proxyURL`](#configuration-pdf.proxyURL) even if the browser supports the saving of files locally.
 
 #### Example - use proxy
     <div id="diagram"></div>
@@ -1578,7 +1580,7 @@ Specifies the keywords of the exported PDF file.
 
 ### pdf.landscape `Boolean` *(default: false)*
 
-Set to `true` to reverse the paper dimensions if needed such that width is the larger edge.
+If set to `true`, reverses the paper dimensions if needed to verify that the width corresponds to the longer side.
 
 #### Example - enable landscape mode
     <div id="diagram"></div>
@@ -1603,8 +1605,7 @@ Set to `true` to reverse the paper dimensions if needed such that width is the l
 
 ### pdf.margin `Object`
 
-Specifies the margins of the page (numbers or strings with units). Supported
-units are "mm", "cm", "in" and "pt" (default).
+Specifies the margins of the page (numbers or strings with units). The supported units are `mm`, `cm`, `in`, and `pt` (default).
 
 #### Example - set the margins
     <div id="diagram"></div>
@@ -1633,33 +1634,32 @@ units are "mm", "cm", "in" and "pt" (default).
 
 ### pdf.margin.bottom `Number|String` *(default: 0)*
 
-The bottom margin. Numbers are considered as "pt" units.
+The bottom margin. Numbers are assumed to be in `pt` units.
 
 ### pdf.margin.left `Number|String` *(default: 0)*
 
-The left margin. Numbers are considered as "pt" units.
+The left margin. Numbers are assumed to be in `pt` units.
 
 ### pdf.margin.right `Number|String` *(default: 0)*
 
-The right margin. Numbers are considered as "pt" units.
+The right margin. Numbers are assumed to be in `pt` units.
 
 ### pdf.margin.top `Number|String` *(default: 0)*
 
-The top margin. Numbers are considered as "pt" units.
+The top margin. Numbers are assumed to be in `pt` units.
 
 ### pdf.paperSize `String|Array` *(default: "auto")*
 
-Specifies the paper size of the PDF document.
-The default "auto" means paper size is determined by content.
+Specifies the paper size of the PDF document. The default setting is `auto` and determines the paper size by content.
 
-> The size of the content in pixels will match the size of the output in points (1 pixel = 1/72 inch).
+> The size of the content in pixels matches the size of the output in points (1 pixel = 1/72 inch).
 
-Supported values:
+The supported values are:
 
-* A predefined size: "A4", "A3" etc
+* A predefined size: `A4`, `A3`, and so on.
 * An array of two numbers specifying the width and height in points (1pt = 1/72in)
 * An array of two strings specifying the width and height in units.
-  Supported units are "mm", "cm", "in" and "pt".
+  The supported units are `mm`, `cm`, `in`, and `pt`.
 
 #### Example - set custom paper size
     <div id="diagram"></div>
@@ -1685,18 +1685,13 @@ Supported values:
 
 The URL of the server side proxy which will stream the file to the end user.
 
-A proxy will be used when the browser isn't capable of saving files locally.
-Such browsers are IE version 9 and lower and Safari.
+When the browser is not capable of saving files locally, a proxy will be used. Such browsers are Internet Explorer version 9 (and older) and Safari. You are responsible for implementing the server-side proxy. The proxy receives a `POST` request with the following parameters in the request body:
 
-The developer is responsible for implementing the server-side proxy.
+* `contentType` - The MIME type of the file
+* `base64` - The base-64 encoded file content
+* `fileName` - The file name, as requested by the caller.
 
-The proxy will receive a POST request with the following parameters in the request body:
-
-* contentType: The MIME type of the file
-* base64: The base-64 encoded file content
-* fileName: The file name, as requested by the caller.
-
-The proxy should return the decoded file with set "Content-Disposition" header.
+The proxy is expected to return the decoded file with a set `Content-Disposition` header.
 
 #### Example - set the server proxy URL
     <div id="diagram"></div>
@@ -1722,8 +1717,7 @@ The proxy should return the decoded file with set "Content-Disposition" header.
 
 A name or keyword indicating where to display the document returned from the proxy.
 
-If you want to display the document in a new window or iframe,
-the proxy should set the "Content-Disposition" header to `inline; filename="<fileName.pdf>"`.
+If you want to display the document in a new window or iframe, the proxy has to set the `Content-Disposition` header to `inline; filename="<fileName.pdf>"`.
 
 #### Example - open the generated document in a new window
     <div id="diagram"></div>
@@ -1801,14 +1795,12 @@ Defines the selectable options.
 
 ### selectable.key `String` *(default: "none")*
 
-Defines the meta key when doing a visual selection through drawing a rectangular area around shapes in the canvas. This option will not change the way a single shape is selected using click/tap.
-
-Make sure this option and [pannable.key](#configuration-pannable.key) are different to avoid clashes. The available values are:
+Defines the meta key when doing a visual selection through drawing a rectangular area around shapes in the canvas. This option does not change the way a single shape is selected when using click or tap. To avoid clashes, verify that the `selectable.key` and [`pannable.key`](#configuration-pannable.key) are different. The available values are:
 
 * "none" - No activation key
-* "ctrl" - The activation key will be "ctrl"
-* "shift" - The activation key will be "shift"
-* "alt" - The activation key will be "alt"
+* "ctrl" - The activation key will be `Ctrl`
+* "shift" - The activation key will be `Shift`
+* "alt" - The activation key will be `Alt`
 
 > This option is not applicable for mobile devices.
 
@@ -1862,7 +1854,7 @@ You can define your own custom connectors or use the predefined types.
     </script>
 
 
-The following defines a custom shape with connectors adapted to the shape's outline. Note in particular the various helpful methods (right(), left(), top()) to define positions relative to the shape.
+The following example demonstrates how to define a custom shape with connectors adapted to the shape's outline. To define positions that are relative to the shape, note in particular the various helpful methods such as `right()`, `left()`, and `top()`.
 
 #### Example - Custom shape with custom connectors
 
@@ -1901,7 +1893,7 @@ The connector name.
 
 ### shapeDefaults.connectors.position `Function`
 
-The function that positions the connector. The function is passed a shape and should return a `kendo.dataviz.diagram`.Point holding the connector position as result.
+The function that positions the connector. The function is passed a shape and should return `kendo.dataviz.diagram`. As a result, a point that holds the connector position appears.
 
 ### shapeDefaults.connectors.width `Number` *(default: 8)*
 
@@ -1973,7 +1965,7 @@ Defines the thickness or width of the shape connectors stroke.
 
 ### shapeDefaults.connectorDefaults `Object`
 
-Defines default options for the shape connectors.
+Defines the default options for the shape connectors.
 
 ### shapeDefaults.connectorDefaults.width `Number` *(default: 8)*
 
@@ -2009,7 +2001,7 @@ Defines the hover stroke color.
 
 ### shapeDefaults.connectorDefaults.hover.stroke.dashType `String`
 
-The hover stroke dash type.
+The dash type of the hover stroke.
 
 ### shapeDefaults.connectorDefaults.hover.stroke.width `Number` *(default: 1)*
 
@@ -2037,7 +2029,7 @@ Defines the stroke color.
 
 ### shapeDefaults.connectorDefaults.stroke.dashType `String`
 
-The stroke dash type.
+The dash type of the stroke.
 
 ### shapeDefaults.connectorDefaults.stroke.width `Number` *(default: 1)*
 
@@ -2073,15 +2065,15 @@ The font weight of the shape content text.
 
 ### shapeDefaults.content.template `String|Function`
 
-The [template](/api/javascript/kendo#methods-template) which renders the labels.
+The [`template`](/api/javascript/kendo#methods-template) which renders the labels.
 
 The fields which can be used in the template are:
 
-* dataItem - the data item, in case a field has been specified
+* dataItem - The data item if a field has been specified
 
 ### shapeDefaults.content.text `String`
 
-The text displayed in the shape.
+The text that is displayed in the shape.
 
 ### shapeDefaults.editable `Boolean|Object` *(default: true)*
 
@@ -2089,7 +2081,7 @@ Defines the shape editable options.
 
 ### shapeDefaults.editable.connect `Boolean` *(default: true)*
 
-Specifies whether the connectors should appear on hover.
+Specifies whether the connectors appear on hover.
 
 ### shapeDefaults.editable.drag `Boolean` *(default: true)*
 
@@ -2101,12 +2093,12 @@ Specifies if the shapes can be removed.
 
 ### shapeDefaults.editable.tools `Array`
 
-Specifies the toolbar tools. Supports all options supported for the [toolbar.items](/api/javascript/ui/toolbar#configuration-items). Predefined tools are:
+Specifies the toolbar tools. Provides all options that are supported for [`toolbar.items`](/api/javascript/ui/toolbar#configuration-items). The predefined tools are:
 
-* "edit" - Selected item can be edit.
-* "delete" - Selected items can be deleted.
-* "rotateClockwise" - Selected items can be rotated clockwise. Default value for rotation is 90 degree.
-* "rotateAnticlockwise" - Selected items can be rotated anticlockwise. Default value for rotation is 90 degree.
+* "edit" - The selected item can be edited.
+* "delete" - The selected items can be deleted.
+* "rotateClockwise" - The selected items can be rotated clockwise. The default rotation value is 90 degree.
+* "rotateAnticlockwise" - The selected items can be rotated anticlockwise. The default rotation value is 90 degree.
 
 #### Example - using predefined tools
 
@@ -2156,11 +2148,11 @@ Specifies the toolbar tools. Supports all options supported for the [toolbar.ite
 
 ### shapeDefaults.editable.tools.name `String`
 
-The name of the tool. The built-in tools are "edit", "delete", "rotateClockwise" and "rotateAnticlockwise".
+The name of the tool. The built-in tools are `edit`, `delete`, `rotateClockwise`, and `rotateAnticlockwise`.
 
 ### shapeDefaults.editable.tools.step `Number` *(default: 90)*
 
-The step of the rotateClockwise and rotateAnticlockwise tools.
+The step of the `rotateClockwise` and  `rotateAnticlockwise` tools.
 
 ### shapeDefaults.fill `String|Object`
 
@@ -2179,7 +2171,7 @@ Defines the fill opacity of the shape.
 Defines the gradient fill of the shape.
 
 ### shapeDefaults.fill.gradient.type `String` *(default: "linear")*
-The type of the gradient. Supported values are:
+The type of the gradient. The supported values are:
 
 * linear
 * radial
@@ -2187,8 +2179,8 @@ The type of the gradient. Supported values are:
 ### shapeDefaults.fill.gradient.center `Array`
 The center of the radial gradient.
 
-Coordinates are relative to the shape bounding box.
-For example [0, 0] is top left and [1, 1] is bottom right.
+The coordinates are relative to the shape-bounding box.
+For example, `[0, 0]` is top left and `[1, 1]` is bottom right.
 
 ### shapeDefaults.fill.gradient.radius `Number` *(default: 1)*
 The radius of the radial gradient relative to the shape bounding box.
@@ -2197,23 +2189,23 @@ The radius of the radial gradient relative to the shape bounding box.
 The start point of the linear gradient.
 
 Coordinates are relative to the shape bounding box.
-For example [0, 0] is top left and [1, 1] is bottom right.
+For example, `[0, 0]` is top left and `[1, 1]` is bottom right.
 
 ### shapeDefaults.fill.gradient.end `Array`
 The end point of the linear gradient.
 
 Coordinates are relative to the shape bounding box.
-For example [0, 0] is top left and [1, 1] is bottom right.
+For example, `[0, 0]` is top left and `[1, 1]` is bottom right.
 
 ### shapeDefaults.fill.gradient.stops `Array`
 The array of gradient color stops.
 
 ### shapeDefaults.fill.gradient.stops.offset `Number`
 The stop offset from the start of the element.
-Ranges from 0 (start of gradient) to 1 (end of gradient).
+Ranges from `0` (start of gradient) to `1` (end of gradient).
 
 ### shapeDefaults.fill.gradient.stops.color `String`
-The color in any of the following formats.
+The color in any of the following formats:
 
 | Format         | Description
 | ---            | --- | ---
@@ -2221,39 +2213,39 @@ The color in any of the following formats.
 | #ff0000        | Hex RGB value
 | rgb(255, 0, 0) | RGB value
 
-Specifying 'none', 'transparent' or '' (empty string) will clear the fill.
+Specifying `'none'`, `'transparent'`, or `''` (empty string) clears the fill.
 
 ### shapeDefaults.fill.gradient.stops.opacity `Number`
 The fill opacity.
-Ranges from 0 (completely transparent) to 1 (completely opaque).
+Ranges from `0` (completely transparent) to `1` (completely opaque).
 
 ### shapeDefaults.height `Number` *(default: 100)*
 
-Defines the height of the shape when added to the diagram.
+Defines the height of the shape when added to the Diagram.
 
 ### shapeDefaults.hover `Object`
 
-Defines the hover configuration.
+Defines the `hover` configuration.
 
 ### shapeDefaults.hover.fill `String|Object`
 
-Hover's fill options.
+Defines the `hover` fill options.
 
 ### shapeDefaults.hover.fill.color `String`
 
-Hover's fill color.
+Defines the `hover` fill color.
 
 ### shapeDefaults.hover.fill.opacity `Number` *(default: 1)*
 
-Hover's fill opacity.
+Defines the `hover` fill opacity.
 
 ### shapeDefaults.minHeight `Number` *(default: 20)*
 
-Defines the minimum height the shape should have, i.e. it cannot be resized to a value smaller than the given one.
+Defines the minimum height the shape should have, that is, it cannot be resized to a value smaller than the given one.
 
 ### shapeDefaults.minWidth `Number` *(default: 20)*
 
-Defines the minimum width the shape should have, i.e. it cannot be resized to a value smaller than the given one.
+Defines the minimum width the shape should have, that is, it cannot be resized to a value smaller than the given one.
 
 ### shapeDefaults.path `String`
 
@@ -2273,7 +2265,7 @@ Specifies if the shape can be selected.
 
 ### shapeDefaults.source `String`
 
-The source of the shape image. Applicable when the type is set to "image".
+The source of the shape image. Applicable when the type is set to `"image"`.
 
 ### shapeDefaults.stroke `Object`
 
@@ -2281,7 +2273,7 @@ Defines the stroke configuration.
 
 ### shapeDefaults.stroke.color `String` *(default: "Black")*
 
-Defines the color of the shape's stroke.
+Defines the color of the shape stroke.
 
 ### shapeDefaults.stroke.dashType `String`
 
@@ -2289,17 +2281,17 @@ The dash type of the shape.
 
 The following dash types are supported:
 
-* "dash" - a line consisting of dashes
-* "dashDot" - a line consisting of a repeating pattern of dash-dot
-* "dot" - a line consisting of dots
-* "longDash" - a line consisting of a repeating pattern of long-dash
-* "longDashDot" - a line consisting of a repeating pattern of long-dash-dot
-* "longDashDotDot" - a line consisting of a repeating pattern of long-dash-dot-dot
-* "solid" - a solid line
+* "dash" - A line that consists of dashes
+* "dashDot" - A line that consists of a repeating pattern of dash-dot
+* "dot" - A line that consists of dots
+* "longDash" - A line that consists of a repeating pattern of long-dash
+* "longDashDot" - A line that consists of a repeating pattern of long-dash-dot
+* "longDashDotDot" - A line that consists of a repeating pattern of long-dash-dot-dot
+* "solid" - A solid line
 
 ### shapeDefaults.stroke.width `Number` *(default: 1)*
 
-Defines the thickness or width of the shape's stroke.
+Defines the thickness or width of the shape stroke.
 
 ### shapeDefaults.type `String` *(default: "rectangle")*
 
@@ -2312,7 +2304,7 @@ Specifies the type of the Shape using any of the built-in shape type.
 
 ### shapeDefaults.visual `Function`
 
-A function returning a visual element to render for a given shape. The following primitives can be used to construct a composite visual:
+A function that returns a visual element to render for a given shape. The following primitives can be used to construct a composite visual:
 
 * [Circle](/api/javascript/dataviz/diagram/circle)
 * [Rectangle](/api/javascript/dataviz/diagram/rectangle)
@@ -2323,7 +2315,7 @@ A function returning a visual element to render for a given shape. The following
 * [Image](/api/javascript/dataviz/diagram/image)
 * [Layout](/api/javascript/dataviz/diagram/layout)
 
-> Note that the visual bounding box origin must be (0, 0). If you have a complex path which coordinates cannot be easily adjusted then you can position the element as demonstrated in [this](/controls/diagrams-and-maps/diagram/how-to/adjust-path-origin) example.
+> The origin of the visual bounding box has to be `(0, 0)`. If you have a complex path whose coordinates cannot be easily adjusted, then position the element as demonstrated in [this](/controls/diagrams-and-maps/diagram/how-to/adjust-path-origin) example.
 
 #### Example - how to use the visual
     <div id="diagram"></div>
@@ -2368,15 +2360,15 @@ A function returning a visual element to render for a given shape. The following
 
 ### shapeDefaults.width `Number` *(default: 100)*
 
-Defines the width of the shape when added to the diagram.
+Defines the width of the shape when added to the Diagram.
 
 ### shapeDefaults.x `Number` *(default: 0)*
 
-Defines the x-coordinate of the shape when added to the diagram.
+Defines the x-coordinate of the shape when added to the Diagram.
 
 ### shapeDefaults.y `Number` *(default: 0)*
 
-Defines the y-coordinate of the shape when added to the diagram.
+Defines the y-coordinate of the shape when added to the Diagram.
 
 ### shapes `Array`
 
@@ -2392,18 +2384,18 @@ The connector description.
 
 ### shapes.connectors.name `String`
 
-The connector name. Predefined names include:
+The connector name. The predefined names are:
 
-* "top" - top connector.
-* "right" - right connector.
-* "bottom" - bottom connector.
-* "bottomRight" - bottom right connector.
-* "left" - left connector.
-* "auto" - auto connector.
+* "top" - top connector
+* "right" - right connector
+* "bottom" - bottom connector
+* "bottomRight" - bottom right connector
+* "left" - left connector
+* "auto" - auto connector
 
 ### shapes.connectors.position `Function`
 
-The function that positions the connector. The function is passed a shape and should return a kendo.dataviz.diagram.Point holding the connector position as result.
+The function that positions the connector. The function is passed a shape and shhould return `kendo.dataviz.diagram`. As a result, a point that holds the connector position appears.
 
 ### shapes.connectors.width `Number` *(default: 8)*
 
@@ -2439,7 +2431,7 @@ Defines the hover stroke color.
 
 ### shapes.connectors.hover.stroke.dashType `String`
 
-The hover stroke dash type.
+The dash type of the hover stroke.
 
 ### shapes.connectors.hover.stroke.width `Number` *(default: 1)*
 
@@ -2511,7 +2503,7 @@ Defines the hover stroke color.
 
 ### shapes.connectorDefaults.hover.stroke.dashType `String`
 
-The hover stroke dash type.
+The dash type of the hover stroke.
 
 ### shapes.connectorDefaults.hover.stroke.width `Number` *(default: 1)*
 
@@ -2539,7 +2531,7 @@ Defines the stroke color.
 
 ### shapes.connectorDefaults.stroke.dashType `String`
 
-The stroke dash type.
+The dash type of the stroke.
 
 ### shapes.connectorDefaults.stroke.width `Number` *(default: 1)*
 
@@ -2579,7 +2571,7 @@ The [template](/api/javascript/kendo#methods-template) which renders the labels.
 
 The fields which can be used in the template are:
 
-* dataItem - the data item, in case a field has been specified
+* dataItem - The data item if a field is specified
 
 ### shapes.content.text `String`
 
@@ -2595,20 +2587,20 @@ Specifies whether the connectors should appear on hover.
 
 ### shapes.editable.tools `Array`
 
-Specifies the the toolbar tools. Supports all options supported for the [toolbar.items](/api/javascript/ui/toolbar#configuration-items). Predefined tools are:
+Specifies the toolbar tools. Provides all options supported for [`toolbar.items`](/api/javascript/ui/toolbar#configuration-items). The predefined tools are:
 
-* "edit" - Selected item can be edit.
-* "delete" - Selected items can be deleted.
-* "rotateClockwise" - Selected items can be rotated clockwise. Default value for rotation is 90 degree.
-* "rotateAnticlockwise" - Selected items can be rotated anticlockwise. Default value for rotation is 90 degree.
+* "edit" - The selected item can be edited.
+* "delete" - The selected items can be deleted.
+* "rotateClockwise" - The selected items can be rotated clockwise. The default rotation value is 90 degree.
+* "rotateAnticlockwise" - The selected items can be rotated anticlockwise. The default rotation value is 90 degree.
 
 ### shapes.editable.tools.name `String`
 
-The name of the tool. The built-in tools are "edit", "delete", "rotateClockwise" and "rotateAnticlockwise".
+The name of the tool. The built-in tools are `edit`, `delete`, `rotateClockwise`, and `rotateAnticlockwise`.
 
 ### shapes.editable.tools.step `Number` *(default: 90)*
 
-The step of the rotateClockwise and rotateAnticlockwise tools.
+The step of the `rotateClockwise` and `rotateAnticlockwise` tools.
 
 ### shapes.fill `String|Object`
 
@@ -2627,7 +2619,7 @@ Defines the fill opacity of the shape.
 Defines the gradient fill of the shape.
 
 ### shapes.fill.gradient.type `String` *(default: "linear")*
-The type of the gradient. Supported values are:
+The type of the gradient. The supported values are:
 
 * linear
 * radial
@@ -2636,7 +2628,7 @@ The type of the gradient. Supported values are:
 The center of the radial gradient.
 
 Coordinates are relative to the shape bounding box.
-For example [0, 0] is top left and [1, 1] is bottom right.
+For example, `[0, 0]` is top left and `[1, 1]` is bottom right.
 
 ### shapes.fill.gradient.radius `Number` *(default: 1)*
 The radius of the radial gradient relative to the shape bounding box.
@@ -2645,23 +2637,23 @@ The radius of the radial gradient relative to the shape bounding box.
 The start point of the linear gradient.
 
 Coordinates are relative to the shape bounding box.
-For example [0, 0] is top left and [1, 1] is bottom right.
+For example, `[0, 0]` is top left and `[1, 1]` is bottom right.
 
 ### shapes.fill.gradient.end `Array`
 The end point of the linear gradient.
 
 Coordinates are relative to the shape bounding box.
-For example [0, 0] is top left and [1, 1] is bottom right.
+For example, `[0, 0]` is top left and `[1, 1]` is bottom right.
 
 ### shapes.fill.gradient.stops `Array`
 The array of gradient color stops.
 
 ### shapes.fill.gradient.stops.offset `Number`
 The stop offset from the start of the element.
-Ranges from 0 (start of gradient) to 1 (end of gradient).
+Ranges from `0` (start of gradient) to `1` (end of gradient).
 
 ### shapes.fill.gradient.stops.color `String`
-The color in any of the following formats.
+The color in any of the following formats:
 
 | Format         | Description
 | ---            | --- | ---
@@ -2673,27 +2665,27 @@ Specifying 'none', 'transparent' or '' (empty string) will clear the fill.
 
 ### shapes.fill.gradient.stops.opacity `Number`
 The fill opacity.
-Ranges from 0 (completely transparent) to 1 (completely opaque).
+Ranges from `0` (completely transparent) to `1` (completely opaque).
 
 ### shapes.height `Number` *(default: 100)*
 
-Defines the height of the shape when added to the diagram.
+Defines the height of the shape when added to the Diagram.
 
 ### shapes.hover `Object`
 
-Defines the hover configuration.
+Defines the `hover` configuration.
 
 ### shapes.hover.fill `String|Object`
 
-Hover's fill options.
+Defines the `hover` fill options.
 
 ### shapes.hover.fill.color `String`
 
-Hover's fill color.
+Defines the `hover` fill color.
 
 ### shapes.hover.fill.opacity `Number` *(default: 1)*
 
-Hover's fill opacity.
+Defines the `hover` fill opacity.
 
 ### shapes.id `String`
 
@@ -2701,11 +2693,11 @@ The unique identifier for a Shape.
 
 ### shapes.minHeight `Number` *(default: 20)*
 
-Defines the minimum height the shape should have, i.e. it cannot be resized to a value smaller than the given one.
+Defines the minimum height the shape should have, that is, it cannot be resized to a value smaller than the given one.
 
 ### shapes.minWidth `Number` *(default: 20)*
 
-Defines the minimum width the shape should have, i.e. it cannot be resized to a value smaller than the given one.
+Defines the minimum width the shape should have, that is, it cannot be resized to a value smaller than the given one.
 
 ### shapes.path `String`
 
@@ -2721,7 +2713,7 @@ The rotation angle.
 
 ### shapes.source `String`
 
-The source of the shape image. Applicable when the type is set to "image".
+The source of the shape image. Applicable when the type is set to `"image"`.
 
 ### shapes.stroke `Object`
 
@@ -2729,7 +2721,7 @@ Defines the stroke configuration.
 
 ### shapes.stroke.color `String`
 
-Defines the color of the shape's stroke.
+Defines the color of the shape stroke.
 
 ### shapes.stroke.dashType `String`
 
@@ -2737,46 +2729,45 @@ The dash type of the shape.
 
 The following dash types are supported:
 
-* "dash" - a line consisting of dashes
-* "dashDot" - a line consisting of a repeating pattern of dash-dot
-* "dot" - a line consisting of dots
-* "longDash" - a line consisting of a repeating pattern of long-dash
-* "longDashDot" - a line consisting of a repeating pattern of long-dash-dot
-* "longDashDotDot" - a line consisting of a repeating pattern of long-dash-dot-dot
-* "solid" - a solid line
+* "dash" - A line that consists of dashes
+* "dashDot" - A line that consists of a repeating pattern of dash-dot
+* "dot" - A line that consists of dots
+* "longDash" - A line that consists of a repeating pattern of long-dash
+* "longDashDot" - A line that consists of a repeating pattern of long-dash-dot
+* "longDashDotDot" - A line that consists of a repeating pattern of long-dash-dot-dot
+* "solid" - A solid line
 
 ### shapes.stroke.width `Number` *(default: 1)*
 
-Defines the thickness or width of the shape's stroke.
+Defines the thickness or width of the shape stroke.
 
 ### shapes.type `String` *(default: "rectangle")*
 
 Specifies the type of the Shape using any of the built-in shape type.
 
-* "rectangle": this is the default option
-* "circle" : a circle/ellipse
-* "image": an image
+* "rectangle" - The default option
+* "circle" - A circle/ellipse
+* "image" - An image
 
 ### shapes.visual `Function`
 
-A function returning a visual element to render for this shape.
-See [visual](#configuration-shapeDefaults.visual).
+A function returning a visual element to render for this shape. For more information, refer to [`visual`](#configuration-shapeDefaults.visual).
 
 ### shapes.width `Number` *(default: 100)*
 
-Defines the width of the shape when added to the diagram.
+Defines the width of the shape when added to the Diagram.
 
 ### shapes.x `Number` *(default: 0)*
 
-Defines the x-coordinate of the shape when added to the diagram.
+Defines the x-coordinate of the shape when added to the Diagram.
 
 ### shapes.y `Number` *(default: 0)*
 
-Defines the y-coordinate of the shape when added to the diagram.
+Defines the y-coordinate of the shape when added to the Diagram.
 
 ### template `String|Function` *(default: "")*
 
-The [template](/api/javascript/kendo#methods-template) which renders the content of the shape when bound to a dataSource. The names you can use in the template correspond to the properties used in the dataSource. See the dataSource topic below for a concrete example.
+The [`template`](/api/javascript/kendo#methods-template) which renders the content of the shape when bound to a dataSource. The names you can use in the template correspond to the properties used in the dataSource. For an example, refer to the dataSource topic below.
 
 ### zoom `Number` *(default: 1)*
 
@@ -2798,7 +2789,7 @@ The zoom step when using the mouse-wheel to zoom in or out.
 
 ### connections `Array`
 
-An array holding the diagram connections.
+An array holding the Diagram connections.
 
 ### connectionsDataSource `kendo.data.DataSource`
 
