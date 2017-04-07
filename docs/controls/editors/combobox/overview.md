@@ -18,11 +18,11 @@ To restrict the user input, use the [Kendo UI DropDownList](http://demos.telerik
 
 ### Initialize the ComboBox
 
-You can initialize the Kendo UI ComboBox widget in any of the following ways:
+To initialize the ComboBox, use any of the following approaches:
 
-1. By using the `<option>` tag of an existing `<select>` element with defined data items.
-2. By binding the widget to a local data array and using the `<input>` element.
-3. By binding the widget to a remote data service and using the `<input>` element.
+1. Use the `<option>` tag of an existing `<select>` element with defined data items.
+2. Bind the widget to a local data array and use the `<input>` element.
+3. Bind the widget to a remote data service and use the `<input>` element.
 
 The ComboBox looks and operates consistently regardless of the initialization type you choose to apply.
 

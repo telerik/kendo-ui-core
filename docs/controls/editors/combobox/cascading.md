@@ -12,7 +12,7 @@ The [cascading ComboBox](http://demos.telerik.com/kendo-ui/combobox/cascadingcom
 
 ## Initialize the ComboBoxes
 
-Initialize a cascading ComboBox as demonstrated in the example below.
+To initialize a cascading ComboBox, use the following example.
 
 ###### Example
 
@@ -34,24 +34,24 @@ Initialize a cascading ComboBox as demonstrated in the example below.
          });
     </script>
 
-The child ComboBox cascades from the parent one if the [`cascadeFrom`](/api/javascript/ui/combobox#configuration) option is defined. The `cascadeFrom` option must point to the parent ID.
+The child ComboBox cascades from the parent one if the [`cascadeFrom`](/api/javascript/ui/combobox#configuration) option is defined. The `cascadeFrom` option has to point to the parent ID.
 
 > **Important**  
 >
-> The cascading functionality only works when you define the `cascadeFrom` property and initialize the parent ComboBox.
+> The cascading functionality works only when you define the `cascadeFrom` property and initialize the parent ComboBox.
 
 The child ComboBox takes the following actions during initialization:
 
 - Checks if the `cascadeFrom` property is set. If not, cascading is disabled.
 - Tries to find the parent ComboBox object. If the result is null, then the functionality is omitted.
 - Listens to any changes of the parent value.
-- If the parent does not have a value, the child is disabled. If the parent has a value, the child is enabled and filters its data accordingly. This is what the filter options look like:
+- If the parent does not have a value, the child is disabled. If the parent has a value, the child is enabled and filters its data accordingly. The filter options are similar to the ones demonstrated in the following example.
 
         field: "parentID",  //the dataValueField of the parent
         operator: "eq",
         value: "" //parent's value
 
-And here are the parameters of this request:
+The following example demonstrates the parameters of this request.
 
         filter[logic]: and
         filter[filters][0][field]: parentID
@@ -72,9 +72,9 @@ For more information on why a widget does not trigger a `change` event, refer to
 
 ## FAQ
 
-### How to preset the selected items when using cascading ComboBoxes with autoBind: true?
+### How can I preset the selected items when I use cascading ComboBoxes with autoBind: true?
 
-Set the value of the ComboBoxes&mdash;define it before initialization, as demonstrated in the example below.
+Set the value of the ComboBoxes&mdash;define it before initialization as demonstrated in the following example. You also can use the [`value`](/api/javascript/ui/combobox#configuration) option.
 
 ###### Example
 
@@ -89,11 +89,9 @@ Set the value of the ComboBoxes&mdash;define it before initialization, as demons
        });
     </script>
 
-You also can use the [`value`](/api/javascript/ui/combobox#configuration) option.
+### How can I preset the selected items when I use cascading ComboBoxes with load on demand?
 
-### How to preset the selected items when using cascading ComboBoxes with load on demand (autoBind: false)?
-
-Set the [`value`](/api/javascript/ui/combobox#configuration) and [`text`](/api/javascript/ui/combobox#configuration) options, as demonstrated in the example below.
+Set the [`value`](/api/javascript/ui/combobox#configuration) and [`text`](/api/javascript/ui/combobox#configuration) options.
 
 ###### Example
 
@@ -127,17 +125,17 @@ Set the [`value`](/api/javascript/ui/combobox#configuration) and [`text`](/api/j
        });
     </script>
 
-### Why the serverFiltering is disabled and the child ComboBox does not work?
+### Why server filtering is disabled and the child ComboBox does not work?
 
-When [`serverFiltering`](/api/framework/datasource#configuration) is disabled, the ComboBox does not make any additional requests to the server. Hence, it filters the initial data using the parent's `dataValueField` property. If no items are found, the child ComboBox is left empty.
+When [`serverFiltering`](/api/framework/datasource#configuration) is disabled, the ComboBox does not make any additional requests to the server. As a result, it filters the initial data by using the `dataValueField` property of the parent. If it does not find any items, the child ComboBox remains empty.
 
 To use a child ComboBox with disabled server filtering, provide all the necessary data on the client.
 
 ### What to do when I cannot get the request parameters on the server?
 
-Check the format of the request parameters as displayed at the end of the **Initialize Cascading ComboBoxes** section of this article. Modify your server code to get them correctly.
+Check the format of the request parameters as displayed in the [**Initialize Cascading ComboBoxes**](#initialize-cascading-comboboxes) section. To get them correctly, modify your server code.
 
-Another way to handle the issue is to pass the ID of the parent ComboBox manually, using the data callback of the DataSource's `Transport.Read` object, as demonstrated in the example below.
+Another way to handle the issue is to pass the ID of the parent ComboBox manually by using the data callback of the DataSource's `Transport.Read` object, as demonstrated in the following example.
 
 ###### Example
 
