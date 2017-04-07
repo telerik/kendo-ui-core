@@ -174,6 +174,21 @@ $(function() {
 </script>
 ```
 
+## DateInput Integration
+
+You can use [DateInput]({% slug overview_kendoui_dateinput_widget %}) as the input element in a DatePicker widget. To achieve this behavior, enable the `dateInput` property of DatePicker.
+
+###### Example
+
+    <input id="datepicker" />
+
+    <script>
+    $("#datepicker").kendoDatePicker({
+        dateInput: true
+    });
+    </script>
+
+
 ## See Also
 
 Other articles on the Kendo UI DatePicker:

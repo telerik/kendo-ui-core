@@ -59,7 +59,7 @@ The input in each section of the component is always valid for the relevant sect
 
 ## DatePicker Integration
 
-You cans seamlessly use the DateInput with a DatePicker widget. To achieve this behavior, enable the `dateInput` property of the DatePicker.
+You can seamlessly use DateInput with a DatePicker widget. To achieve this behavior, enable the `dateInput` property of DatePicker.
 
 ###### Example
 
