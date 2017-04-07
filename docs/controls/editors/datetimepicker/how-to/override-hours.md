@@ -7,7 +7,7 @@ slug: howto_override_hours_inpopup_datetimepicker
 
 # Override Hours in the Popup
 
-The example below demonstrates how to override hours in the popup.
+The following example demonstrates how to override hours in the popup of the DateTimePicker.
 
 ###### Example
 
@@ -36,8 +36,6 @@ The example below demonstrates how to override hours in the popup.
 ```
 
 ## See Also
-
-Other articles on the Kendo UI DateTimePicker:
 
 * [DateTimePicker JavaScript API Reference](/api/javascript/ui/datetimepicker)
 * [How to Prevent Invalid Values]({% slug howto_prevent_invalid_values_datetimepicker %})

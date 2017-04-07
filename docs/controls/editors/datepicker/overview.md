@@ -8,7 +8,7 @@ position: 1
 
 # DatePicker Overview
 
-The [Kendo UI DatePicker widget](http://demos.telerik.com/kendo-ui/datepicker/index) allows the user to select a date from a calendar or via a direct input.
+The [Kendo UI DatePicker widget](http://demos.telerik.com/kendo-ui/datepicker/index) allows the user to select a date from a calendar or through a direct input.
 
 The DatePicker also supports custom templates for its `month` view, configuration options for minimum and maximum dates, a start view, and depth for navigation.
 
@@ -86,7 +86,7 @@ The following example demonstrates how to create a DatePicker that allows users 
 
 ## Disable Dates
 
-The DatePicker provides the functionality to disable certain days, such as weekends, national holidays, and others, which are not intended to be selected by the end user.
+The DatePicker enables you to disable certain days, such as weekends, national holidays, and others, which are not intended to be selected by the end user.
 
 To disable a date, either:
 * Set and array of dates, or
