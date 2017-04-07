@@ -15,11 +15,10 @@ To achieve this behavior:
 1. After the widget is initialized, reset the list width of the widget to `auto`.
 2. In the `adjustDropDownWidth` function, add the scrollbar width to the list width.
 
-There are 2 possible scenarios:
+Either of the following scenarios occur:
 
-**Scenario 1** The DropDownList is already bound when it is opened. In this case, execute `adjustDropDownWidth` in the [`open`](/api/javascript/ui/dropdownlist#events-open) event.
-
-**Scenario 2** The DropDownList triggers a remote request after it is opened. In this case, execute `adjustDropDownWidth` in the [`dataBound`](/api/javascript/ui/dropdownlist#events-dataBound) event.
+1. The DropDownList is already bound when it is opened. In this case, execute `adjustDropDownWidth` in the [`open`](/api/javascript/ui/dropdownlist#events-open) event.
+1. The DropDownList triggers a remote request after it is opened. In this case, execute `adjustDropDownWidth` in the [`dataBound`](/api/javascript/ui/dropdownlist#events-dataBound) event.
 
 The following example demonstrates how to automatically adjust the width of a DropDownList depending on its list items.
 
@@ -114,8 +113,6 @@ The following example demonstrates how to automatically adjust the width of a Dr
 
 ## See Also
 
-Other articles on the Kendo UI DropDownList:
-
 * [DropDownList JavaScript API Reference](/api/javascript/ui/dropdownlist)
 * [How to Create DropDownLists with Long Items]({% slug howto_create_listswith_long_items_dropdownlist %})
 * [How to Detect Wrapper Focus Events]({% slug howto_detect_wrapper_focus_events_dropdownlist %})
@@ -126,4 +123,4 @@ Other articles on the Kendo UI DropDownList:
 * [How to Update MVVM Bound Models on Load]({% slug howto_update_mvvm_model_onload_dropdownlist %})
 * [How to Validate DropDownLists by Using Required Attributes]({% slug howto_validate_using_required_attributes_dropdownlist %})
 
-For more runnable examples on the Kendo UI DropDownList, browse its [**How To** documentation folder]({% slug howto_cascade_withngrepeat_distinct_values_dropdownlist %}).
+For more runnable examples on the Kendo UI DropDownList, browse its [**How To** documentation folder]({% slug howto_bindobjectstongmodel_dropdownlist %}).

@@ -10,8 +10,7 @@ position: 1
 
 The [Kendo UI DropDownList widget](http://demos.telerik.com/kendo-ui/dropdownlist/index) displays a list of values and allows for a single selection from the list.
 
-The user input is restricted within the predefined options.
-
+The user input is restricted within the predefined options. 
 To apply a keyboard input, use the [Kendo UI ComboBox]({% slug overview_kendoui_combobox_widget %}).
 
 ## Getting Started

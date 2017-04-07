@@ -31,8 +31,6 @@ The following example demonstrates how to detect the `focus` event of the Kendo 
 
 ## See Also
 
-Other articles on the Kendo UI DropDownList:
-
 * [DropDownList JavaScript API Reference](/api/javascript/ui/dropdownlist)
 * [How to Automatically Adjust the Width of a DropDownList]({% slug howto_automatically_adjust_width_dropdownlist %})
 * [How to Create DropDownLists with Long Items]({% slug howto_create_listswith_long_items_dropdownlist %})
@@ -43,4 +41,4 @@ Other articles on the Kendo UI DropDownList:
 * [How to Update MVVM Bound Models on Load]({% slug howto_update_mvvm_model_onload_dropdownlist %})
 * [How to Validate DropDownLists by Using Required Attributes]({% slug howto_validate_using_required_attributes_dropdownlist %})
 
-For more runnable examples on the Kendo UI DropDownList, browse its [**How To** documentation folder]({% slug howto_cascade_withngrepeat_distinct_values_dropdownlist %}).
+For more runnable examples on the Kendo UI DropDownList, browse its [**How To** documentation folder]({% slug howto_bindobjectstongmodel_dropdownlist %}).
