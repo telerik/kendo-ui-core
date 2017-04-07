@@ -40,7 +40,8 @@ Applications built with components that adhere to these guidelines will not only
 |LinearGauge   |Yes |AAA |[Browse](http://demos.telerik.com/kendo-ui/linear-gauge/index)
 |RadialGauge   |Yes |AAA |[Browse](http://demos.telerik.com/kendo-ui/radial-gauge/index)
 |Charts        |Yes |AAA |[Browse](http://demos.telerik.com/kendo-ui/chart-api/index)
-|Map	       |Yes | AAA|[Browse](http://demos.telerik.com/kendo-ui/map/index)
+|Map	         |Yes | AAA|[Browse](http://demos.telerik.com/kendo-ui/map/index)
+|Slider	       |Yes | AAA|[Browse](http://demos.telerik.com/kendo-ui/slider/index)
 
 ## Special Considerations
 
