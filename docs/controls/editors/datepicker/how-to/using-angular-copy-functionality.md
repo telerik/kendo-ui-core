@@ -7,7 +7,7 @@ slug: howto_use_angularjs_copy_functionality_datepicker
 
 # Use AngularJS Copy Functionality
 
-The example below demonstrates how to use the AngularJS copy functionality in a Kendo UI DatePicker.
+The following example demonstrates how to use the AngularJS copy functionality in a Kendo UI DatePicker.
 
 ###### Example
 
@@ -70,8 +70,6 @@ The example below demonstrates how to use the AngularJS copy functionality in a 
 
 ## See Also
 
-Other articles on the Kendo UI DatePicker:
-
 * [DatePicker JavaScript API Reference](/api/javascript/ui/datepicker)
 * [How to Set the First Weekday]({% slug howto_set_first_weekday_datepicker %})
 * [How to Create Date Masking]({% slug howto_create_date_masking_datepicker %})
@@ -82,4 +80,4 @@ Other articles on the Kendo UI DatePicker:
 * [How to Persist Entered Dates]({% slug howto_persist_entered_dates_datepicker %})
 * [How to Resize Calendar Based on Input Width]({% slug howto_use_resize_calendar_basedon_input_width_datepicker %})
 
-For more runnable examples on the Kendo UI DatePicker, browse its [**How To** documentation folder]({% slug howto_select_ranges_between_datepicker %}).
+For more runnable examples on the Kendo UI DatePicker, browse its [**How To** documentation folder]({% slug howto_localize_datepicker_using_angular_translate %}).
