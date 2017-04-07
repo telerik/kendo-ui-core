@@ -69,7 +69,8 @@ Files selected one after the other will be uploaded in separate requests.
 ### async.chunkSize `Number`
 
 When the property is set, the selected files are uploaded with the declared size chunk by chunk. Each request sends a separate file blob and additional string metadata to the server. This metadata is in a stringified JSON format and contains the `chunkIndex`, `contentType`, `totalFileSize`, `totalChunks`, `uploadUid` properties. These properties enable the validation and combination of the file on the server side. The response also returns a JSON object with the `uploaded` and `fileUid` properties, which notifies the client what is the next chunk.
-This property is only in use when the [`async.batch`](#configuration-async.batch) is set false.
+
+You can use this property only when [`async.batch`](#configuration-async.batch) is set to `false`.
 
 #### Example
 
@@ -235,7 +236,7 @@ This option will be ignored if the browser doesn't support File API.
 
 ### directory `Boolean` *(default: false)*
 
-Enables selection of folders instead of files. When a directory is selected, its entire hierarchy of contents files is included in the set of selected items. It is only supported in browsers that support [webkitdirectory](https://developer.mozilla.org/en-US/docs/Web/API/HTMLInputElement/webkitdirectory).
+Enables the selection of folders instead of files. When the user selects a directory, its entire content hierarchy of files is included in the set of selected items. The setting supported only in browsers that support [webkitdirectory](https://developer.mozilla.org/en-US/docs/Web/API/HTMLInputElement/webkitdirectory).
 
 #### Example
 
@@ -257,7 +258,7 @@ Enables selection of folders instead of files. When a directory is selected, its
 
 ### directoryDrop `Boolean` *(default: false)*
 
-Enables dropping folders over the upload and its drop zone. When a directory is dropped, its entire hierarchy of contents files is included in the set of selected items. It is only supported in browsers that support [DataTransferItem](https://developer.mozilla.org/en-US/docs/Web/API/DataTransferItem) and [webkitGetAsEntry](https://developer.mozilla.org/en-US/docs/Web/API/DataTransferItem/webkitGetAsEntry).
+Enables the dropping of folders over the Upload and its drop zone. When a directory is dropped, its entire content hierarchy of files is included in the set of selected items. This setting is supported only in browsers that support [DataTransferItem](https://developer.mozilla.org/en-US/docs/Web/API/DataTransferItem) and [webkitGetAsEntry](https://developer.mozilla.org/en-US/docs/Web/API/DataTransferItem/webkitGetAsEntry).
 
 #### Example
 
@@ -492,7 +493,7 @@ Sets the text for invalid file extension validation message.
 
 ### localization.invalidFiles `String`
 
-Sets the text for invalid files validation message when batch property is true and more than one file is not passing the validation.
+Sets the text for the validation messages of invalid files when the `batch` property is `true` and when two or more files are not passing the validation.
 
 #### Example
 
