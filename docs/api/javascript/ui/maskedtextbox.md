@@ -106,19 +106,34 @@ Defines an object of custom mask rules.
     });
     </script>
 
-#### Example - specify a custom rule as a function
+#### Example - specify a group rule
 
     <input id="maskedtextbox" />
     <script>
     $("#maskedtextbox").kendoMaskedTextBox({
-        mask: "^000^",
+        mask: "HH:MM TT", //match a time format in separate groups
+        value: "10:30 AM",
         rules: {
-            "^": function (char) {
-                return char === "^"; //allow ony "^" symbol
-            }
+            "HH": /0[0-9]|1[0-9]|2[0-3]/,
+            "MM": /[0-5][0-9]/,
+            "TT": /[AaPp][Mm]/
         }
     });
     </script>
+
+    #### Example - specify a custom rule as a function
+
+        <input id="maskedtextbox" />
+        <script>
+        $("#maskedtextbox").kendoMaskedTextBox({
+            mask: "^000^",
+            rules: {
+                "^": function (char) {
+                    return char === "^"; //allow ony "^" symbol
+                }
+            }
+        });
+        </script>
 
 ### unmaskOnPost `Boolean`*(default: false)*
 
@@ -345,4 +360,3 @@ The widget instance which fired the event.
         console.log(value); //value is the selected date in the maskedtextbox
     });
     </script>
-

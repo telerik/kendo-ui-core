@@ -65,6 +65,30 @@ The following mask rules are available and predefined:
 >
 > Any mask rule can be escaped using the `\` character. An escaped rule is turned into a literal.
 
+### Groups
+
+A group is a section of the mask, which specifies a common rule for several mask elements (characters). This approach provides an easy way to check if the multiple characters that define the group are valid as a whole entity.
+
+###### Example
+
+    <input id="maskedtextbox">
+
+    <script>
+      $(document).ready(function(){
+        $("#maskedtextbox").kendoMaskedTextBox({
+          mask: "xyz",
+          value: "abc",
+          rules: {
+            "xyz": /[a-z]{3}/
+          }
+        });
+      });
+    </script>
+
+> **Important**
+>
+> The length of a group is determined by the number of characters which define it. In order for the input to be valid, make sure that the whole group value matches the group rule. For more information, refer to the section on [known limitations](#known-limitations).
+
 ### Literals
 
 The following mask literals are globalized based on the current culture:
@@ -77,9 +101,9 @@ The following mask literals are globalized based on the current culture:
 >
 > Any of the aforementioned literals can be escaped using the `\` character.
 
-### Customize Mask Rules
+### Customization of Mask Rules
 
-The MaskedTextBox widget provides the option to define custom mask rules during initialization. To customize a mask rule, define it in the [`rules`](/api/web/maskedtextbox#configuration-rules) option. The widget supports rules defined as regular expression or a function.
+The MaskedTextBox provides the option to define custom mask rules during initialization. To customize a mask rule, define it in the [`rules`](/api/web/maskedtextbox#configuration-rules) option. The widget supports rules defined as regular expression or a function.
 
 ###### Example
 
@@ -101,7 +125,7 @@ The MaskedTextBox widget provides the option to define custom mask rules during 
 
 > **Important**
 >
-> Any of the predefined rules can be overridden through the [`rules`](/api/web/maskedtextbox#configuration-rules) option.
+> You can override any of the predefined rules by using the [`rules`](/api/web/maskedtextbox#configuration-rules) option.
 
 ## Known Limitations
 
@@ -114,6 +138,16 @@ The MaskedTextBox widget listens to input events, like `keydown` and `keypress`,
 > * Recent tests show that the MaskedTextBox works in the latest iOS OS.
 
 Unfortunately, in those cases not much can be done, because there is no other reliable way to detect typing in mobile browsers&mdash;the virtual keyboard does not rise any other specific events.
+
+### Groups
+
+When working with mask groups, note the following limitations:
+
+- Groups cannot be substrings of other groups or individual rules. For example, the `"abc"` group is not valid because the `"a"` rule is the default one for alphanumeric or space characters. This applies to both built-in and custom rules.
+- Partial matching is not supported. To be valid, the whole group value (even if only partial input is present) has to match the group rule because the JavaScript language does not support partial matching of regular expressions. You are responsible for choosing such a group rule so as it handles partial matching if required.
+- Each group has a fixed length that cannot vary. It equals the number of characters which are used for its definition.
+- If you delete the content inside the `MaskedTextBox`, you might provoke a situation in which the user can no longer type anything. The reason for this is that the group rule cannot be satisfied anymore due to the lack of support for partial matching. In such cases, either set a default value so that the initial typing is possible or modify the group rule so that it handles partial input.
+- In most cases, it is inappropriate to use a function to define the group rule because, normally, matching the rule against a single character is not enough. The preferred way is to use a regular expression.
 
 ## See Also
 
