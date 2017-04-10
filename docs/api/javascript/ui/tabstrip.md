@@ -1084,7 +1084,7 @@ The content element of the activated tab.
 
 #### Attach activate event handler via bind(); detach via unbind()
 
-    <div id="tabstrip">
+    <div id="tabStrip">
         <ul>
             <li>Tab 1</li>
             <li>Tab 2</li>

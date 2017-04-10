@@ -7,7 +7,9 @@ slug: howto_addvalidatormvvm_validator
 
 # Add the Validator to MVVM
 
-The example below demonstrates how to fully integrate the Kendo UI Validator in an MVVM scenario by using the [`change` event](/api/javascript/data/observableobject#events-change) of the Observable and the [`validate` method](/api/javascript/ui/validator#methods-validate) of the Validator.
+The following example demonstrates how to fully integrate the Validator in an MVVM scenario.
+
+To achieve this behavior, use the [`change`](/api/javascript/data/observableobject#events-change) event of the Observable and the [`validate`](/api/javascript/ui/validator#methods-validate) method of the Validator.
 
 ###### Example
 
@@ -112,12 +114,10 @@ The example below demonstrates how to fully integrate the Kendo UI Validator in 
 
 ## See Also
 
-Other articles on the Kendo UI Validator:
-
 * [Validator JavaScript API Reference](/api/javascript/ui/validator)
 * [How to Show Tooltip on Mouse Over]({% slug howto_showtooltiponmouseover_validator %})
 * [How to Use Use MutationObserver to Add Red Border and Hide Tooltip]({% slug howto_usemutationobserver_addborderandhidetooltip_validator %})
 * [How to Use Templates to Customize Tooltips]({% slug howto_usetemplatestocustomizetooltips_validator %})
 * [How to Validate Radio Buttons with Only One Error Message]({% slug howto_validateradiowithonemessage_validator %})
 
-For more runnable examples on the Kendo UI Validator widget, browse its [**How To** documentation folder]({% slug howto_remote_validation %}).
+For more runnable examples on the Kendo UI Validator widget, browse its [**How To** documentation folder]({% slug howto_addredborderandhidetooltip_validator %}).

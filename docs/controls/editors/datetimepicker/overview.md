@@ -8,11 +8,15 @@ position: 1
 
 # DateTimePicker Overview
 
-The [Kendo UI DateTimePicker widget](http://demos.telerik.com/kendo-ui/datetimepicker/index) allows the user to select a value from a calendar or a time drop-down list as well as direct input. It supports configurable options for minimum and maximum value, format, interval between predefined hours in the time view, custom templates for "month" view of the calendar, start view and the depth of the navigation.
+The [Kendo UI DateTimePicker widget](http://demos.telerik.com/kendo-ui/datetimepicker/index) allows the user to select a value from a calendar, a time drop-down list, or through direct input.
+
+The DateTimePicker supports configurable options for minimum and maximum value, format, interval between predefined hours in the time view, custom templates for the `month` view of the calendar, start view, and depth for navigation.
 
 ## Getting Started
 
 ### Initialize the DateTimePicker
+
+To initialize the DateTimePicker, use the following example.
 
     <input id="dateTimePicker">
 
@@ -28,7 +32,7 @@ The [Kendo UI DateTimePicker widget](http://demos.telerik.com/kendo-ui/datetimep
 
 ## Configuration
 
-The DateTimePicker provides many configuration options that can be set during initialization. Among the properties you can control are:
+The DateTimePicker provides many configuration options that can be set during initialization. The available properties are:
 
 * Selected date
 * Minimum and/or maximum date and time
@@ -39,7 +43,7 @@ The DateTimePicker provides many configuration options that can be set during in
 
 ### Selected, Min, and Max Datetime
 
-The example below demonstrates how to define selected, min, and max datetimes.
+The following example demonstrates how to define selected, min, and max datetimes.
 
 ###### Example
 
@@ -55,11 +59,11 @@ The example below demonstrates how to define selected, min, and max datetimes.
         });
     </script>
 
-The DateTimePicker will set the value only if the entered datetime is valid and within the defined range.
+The DateTimePicker sets the value only if the entered datetime is valid and within the defined range.
 
 ### Datetime Format
 
-The example below demonstrates how to define the datetime format.
+The following example demonstrates how to define the datetime format.
 
 ###### Example
 
@@ -71,7 +75,7 @@ The example below demonstrates how to define the datetime format.
         });
     </script>
 
-The DateTimePicker value is parsed when the user changes the content via typing. This means that if, for example, the format contains only a time portion, the date will be reset to today. To support such a DateTimePicker format, you should make the widget textbox read-only after the widget is initialized and not via the widget's `readonly()` method. Otherwise the **Date** and **Time** pop-ups will be disabled.
+The DateTimePicker value is parsed when the user changes the content through typing. For example, if the format contains only a time portion, the date is reset to today's date. To support such a DateTimePicker format, make the textbox of the widget read-only after the widget is initialized, and not through the widget's `readonly()` method. Otherwise the **Date** and **Time** pop-ups sre disabled.
 
     <input id="dateTimePicker">
 
@@ -83,7 +87,7 @@ The DateTimePicker value is parsed when the user changes the content via typing.
 
 ### Time Format
 
-The example below demonstrates how to define the time format.
+The following example demonstrates how to define the time format.
 
 ###### Example
 
@@ -97,16 +101,16 @@ The example below demonstrates how to define the time format.
 
 ### Start View and Navigation Depth
 
-Define the first rendered view with the `start` option. Control the navigation depth with the `depth` option. The following views are predefined:
+To define the first rendered view, use the `start` option. To control the navigation depth, use the `depth` option. The following views are predefined:
 
-*   `month` - shows the days of the month
-*   `year` - shows the months of the year
-*   `decade` - shows the years of the decade
-*   `century` - shows the decades of the century
+* `month`&mdash;Shows the days of the month.
+* `year`&mdash;Shows the months of the year.
+* `decade`&mdash;Shows the years of the decade.
+* `century`&mdash;Shows the decades of the century.
 
 ### Selectable Month DateTimePicker
 
-The example below demonstrates how to create a selectable month DateTimePicker.
+The following example demonstrates how to create a DateTimePicker with a selectable month.
 
 ###### Example
 
@@ -121,7 +125,7 @@ The example below demonstrates how to create a selectable month DateTimePicker.
 
 ### Intervals
 
-Define the interval (in minutes) between values in the time drop-down list as demonstrated in the example below.
+To define the interval (in minutes) between values in the time drop-down list, use the following example.
 
 ###### Example
 
@@ -135,11 +139,15 @@ Define the interval (in minutes) between values in the time drop-down list as de
 
 ## Disable Dates
 
-Kendo UI DateTimePicker widget provides the functionality to disable certain days, such as weekends, national holidays, and others, which are not intended to be selected by the end user.
+The DateTimePicker enables you to disable certain days, such as weekends, national holidays, and others, which are not intended to be selected by the end user.
+
+To disable a date, either:
+* Set and array of dates, or
+* Add a function to determine the return value as the date that is disabled.  
 
 ### Set an Array
 
-One way to disable a date is by setting an array. List the days that need to be disabled by using the first letters from their names in English.
+When you disable dates by setting an array, list the days that need to be disabled by using the first letters from their names in English.
 
 ###### Example
 
@@ -156,7 +164,7 @@ One way to disable a date is by setting an array. List the days that need to be 
 
 ### Add a Function
 
-The other way to disable dates is by adding a function and determine its return value as `true` for the date that is disabled.
+When you disable dates by adding a function, determine its return value as `true` for the date that is disabled.
 
 ###### Example
 
@@ -181,18 +189,16 @@ The other way to disable dates is by adding a function and determine its return 
 
 The widget is designed to keep the input value unchanged, even when the typed date is invalid. This is due the following facts:
 
-- The widget allows different date parse formats, which require unrestricted user input. Refer to the [`parseFormats`](/api/javascript/ui/datetimepicker#configuration-parseFormats) option for more details.
-- The widget does not update automatically the typed text, when it is invalid. This would lead to unexpected behavior if the widget changes the input value.
+- The widget allows different date parse formats, which require unrestricted user input. For more information, refer to the [`parseFormats`](/api/javascript/ui/datetimepicker#configuration-parseFormats) option.
+- The widget does not update automatically the typed text when it is invalid. Such a change in the input value that is made by the widget, leads to unexpected behavior.
 
-The best way to validate the DateTimePicker widget is to use a client-validation framework, such as the [Kendo UI Validator]({% slug overview_kendoui_validator_widget %}). Thus you are able to provide meaningful error message to end users pointing them to the right actions to resolve the issue. Check our online validation demos for more details:
-
-- [Custom validation](http://demos.telerik.com/kendo-ui/validator/custom-validation)
+The best way to validate the DateTimePicker widget is to use a client-validation framework such as the [Kendo UI Validator]({% slug overview_kendoui_validator_widget %}). In this way, you can provide a meaningful error message to the end user that prompts the right actions for them to resolve the issue. For more details, refer to the [online custom validation demos](http://demos.telerik.com/kendo-ui/validator/custom-validation).
 
 ## Calendar Types
 
-The DateTimePicker widget works with JavaScript `Date` objects, that support only the [Gregorian](https://en.wikipedia.org/wiki/Gregorian_calendar) calendar. This means that the widget does not support other calendar types.
+The DateTimePicker works with the JavaScript `Date` objects that support only the [Gregorian](https://en.wikipedia.org/wiki/Gregorian_calendar) calendar. This means that the widget does not support other calendar types.
 
-If you would like to simulate a different calendar date, like Lunar, use the JavaScript `Date` object and create a date that is just in the past.
+To simulate a different calendar type, such as Lunar, use the JavaScript `Date` object and create a date that is in the past. The following example demonstrates how to achieve this behavior.
 
 ## See Also
 

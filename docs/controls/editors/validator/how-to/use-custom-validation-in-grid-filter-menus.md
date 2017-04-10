@@ -7,11 +7,11 @@ slug: howto_use_custom_validation_in_grid_filter_menus_validator
 
 # Use Custom Validation in Grid Filter Menus
 
-To see the example on how to use custom validation in the **Filter** menu of a kendo UI Grid when the filtering functionality is applied, refer to [this how-to article]({% slug howto_gridfiltering_custom_validation_filter_menu_grid %}).
+Your project might require you to use custom validation in the **Filter** menu of the Grid when the filtering functionality is applied.
+
+To see the example, refer to [this how-to article]({% slug howto_gridfiltering_custom_validation_filter_menu_grid %}).
 
 ## See Also
-
-Other articles on the Kendo UI Validator:
 
 * [Validator JavaScript API Reference](/api/javascript/ui/validator)
 * [How to Show Tooltip on Mouse Over]({% slug howto_showtooltiponmouseover_validator %})

@@ -156,6 +156,16 @@ test("parses strings array option from data attribute", function() {
     deepEqual(testwidget.options.foo, ["red"]);
 });
 
+test("parses empty array from data attribute", function() {
+    dom = $('<div data-role="testwidget" data-foo="[]"/>');
+
+    kendo.init(dom);
+
+    var testwidget = dom.data("kendoTestWidget");
+
+    deepEqual(testwidget.options.foo, []);
+});
+
 test("parses object with array from data attribute", function() {
     dom = $('<div data-role="testwidget" data-foo="{data:[\'[red]\']}"/>');
 

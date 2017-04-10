@@ -120,11 +120,9 @@ The following example demonstrates how to use AngularJS templates inside the Ken
 
 ## See Also
 
-Other articles on the Kendo UI AutoComplete:
-
 * [AutoComplete JavaScript API Reference](/api/javascript/ui/autocomplete)
 * [How to Dynamically Change DataSource Based on User Selections]({% slug howto_change_datasource_dynamically_autocomplete %})
 * [How to Highlight Matched Values]({% slug howto_highlight_matched_values_autocomplete %})
 * [How to Restrict Other Users]({% slug howto_restrict_user_input_autocomplete %})
 
-For more runnable examples on the Kendo UI AutoComplete, browse its [**How To** documentation folder]({% slug howto_add_customized_templates_autocomplete %}).
+For more runnable examples on the Kendo UI AutoComplete, browse its [**How To** documentation folder]({% slug howto_bindobjectstongmodel_autocomplete %}).

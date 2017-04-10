@@ -4,7 +4,7 @@
         dateinput,
         div, input;
 
-    module("kendo.ui.DateInput Events", {
+    module("kendo.ui.DateInput API", {
         setup: function () {
             div = $("<div />").appendTo(QUnit.fixture);
             input = $("<input />").appendTo(QUnit.fixture);
@@ -65,7 +65,7 @@
         dateinput = input.kendoDateInput().data("kendoDateInput");
         dateinput.value(value);
         var result = dateinput.value();
-        equal(+result, 0);
+        equal(+result, +value);
     });
 
     test("value(value) is not set if outside max range", function () {
@@ -73,7 +73,7 @@
         dateinput = input.kendoDateInput().data("kendoDateInput");
         dateinput.value(value);
         var result = dateinput.value();
-        equal(+result, 0);
+        equal(+result, +value);
     });
 
     test("value(value) is set correctly in min/max range after changing min/max", function () {
@@ -97,7 +97,7 @@
         dateinput.max(max);
         dateinput.value(value);
         var result = dateinput.value();
-        equal(+result, 0);
+        equal(+result, +value);
     });
 
 })();

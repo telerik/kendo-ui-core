@@ -137,7 +137,7 @@ The duration of the open animation in milliseconds.
 
 ### dateInput `Boolean`*(default: false)*
 
- Specifies if the DatePicker will use DateInput for editing value
+ Specifies if the DatePicker will use [DateInput](/api/javascript/ui/dateinput) for editing value
 
 #### Example
 

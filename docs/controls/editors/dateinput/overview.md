@@ -8,12 +8,15 @@ position: 1
 
 # DateInput Overview
 
-The [Kendo UI DateInput widget](http://demos.telerik.com/kendo-ui/dateinput/index) allows users to enter date and time via direct input. It has separate sections for day, month, year, hours and minutes. DateInput also supports customizing the date and time formats.
+The [Kendo UI DateInput widget](http://demos.telerik.com/kendo-ui/dateinput/index) allows users to enter date and time through direct input.
 
+The DateInput provides separate sections for days, months, years, hours, and minutes. DateInput also supports customizing the date and time formats.
 
 ## Getting Started
 
 ### Initialize the DateInput
+
+To initialize the DateInput, use the following example.
 
     <input id="dateInput" />
 
@@ -23,18 +26,17 @@ The [Kendo UI DateInput widget](http://demos.telerik.com/kendo-ui/dateinput/inde
         });
     </script>
 
-
 ## Configuration
 
-The DateInput provides configuration options that can be set during initialization. Among the properties you can control are:
+The DateInput provides configuration options that can be set during initialization. The available properties are:
 
 * Selected date
 * Format definition
-* Enabled/ReadOnly state
+* Enabled and read-only state
 
 ### Selected date, Format
 
-The example below demonstrates how to create a non-editable DateInput with a selected date. The date will be displayed in predefined format.
+The following example demonstrates how to create a non-editable DateInput with a selected date. The date is displayed in a predefined format.
 
 ###### Example
 
@@ -53,15 +55,14 @@ The example below demonstrates how to create a non-editable DateInput with a sel
 
 ## Validation
 
-Input in each section of the component is always valid for the relevant section (e.g you cannot enter 23 in the month section). As a result the value in DateInput is always valid date.
-
+The input in each section of the component is always valid for the relevant section. For example, you cannot enter 23 in the month section. As a result, the value in DateInput is always a valid date.
 
 ## DatePicker Integration
 
-DateInput can be seamlessly used with a DatePicker widget. You just need to enable the `dateInput` property of DatePicker.
+You can seamlessly use DateInput with a DatePicker widget. To achieve this behavior, enable the `dateInput` property of DatePicker.
 
 ###### Example
- 
+
     <input id="datepicker" />
 
     <script>
@@ -72,10 +73,10 @@ DateInput can be seamlessly used with a DatePicker widget. You just need to enab
 
 ## Localization
 
-DateInput enables you to modify the text that is displayed in the placeholders based on your requirements.
+The DateInput enables you to modify the text that is displayed in the placeholders based on your requirements.
 
 ###### Example
- 
+
     <input id="dateinput" />
 
     <script>
@@ -86,10 +87,8 @@ DateInput enables you to modify the text that is displayed in the placeholders b
             year:"____",
             day:"__",
             }
-    }); 
+    });
     </script>
-
-
 
 ## See Also
 

@@ -8,7 +8,7 @@ position: 4
 
 # Server Filtering
 
-For more information on how to display only a subset of data in the Kendo UI AutoComplete widget, refer to the article on the [ComboBox server filtering]({% slug cascading_kendoui_combobox_widget %}).
+For more information on how to display only a subset of data in the AutoComplete widget, refer to the article on the [ComboBox server filtering]({% slug cascading_kendoui_combobox_widget %}).
 
 The approaches described in it are applicable for the AutoComplete.
 

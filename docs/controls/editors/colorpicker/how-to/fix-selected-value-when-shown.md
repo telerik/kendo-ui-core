@@ -9,9 +9,9 @@ slug: howto_fixselectedvalue_colorpicker
 
 When you hide the Kendo UI ColorPicker and change its value, the pallette renders an incorrect selection as a side-effect from these actions.
 
-The reason for this behavior is that the viewport of the hidden DOM element is zero. As a result, the position of the DOM element that represents the selected value is not able to calculate its accurate position.
+The reason for this behavior is that the viewport of the hidden DOM element is zero. As a result, the position of the DOM element that represents the selected value cannot calculate its accurate position.
 
-To handle such situations, call the `value` method of the Kendo UI FlatColorPicker widget again after showing it. This will reassign the color and position the selection to the selected color.
+To handle such situations, call the `value` method of the Kendo UI FlatColorPicker widget again after showing it. This reassigns the color and positions the selection to the selected color.
 
 ###### Example
 

@@ -55,12 +55,9 @@ The following example demonstrates how to create a Grid that supports pasting fr
             for (var i = 0; i < rows.length; i++) {
               var cells = rows[i].split('\t');
               data.push({
-                FirstName: cells[0],
-                SerialNo: cells[1],
-                Option: cells[2],
-                Quantity: cells[3]
+                Name: cells[0],
+                Age: cells[1]
               });
-
             };
             grid.dataSource.data(data);
           });

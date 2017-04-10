@@ -164,10 +164,6 @@ var __meta__ = { // jshint ignore:line
                 value = null;
             }
 
-            if (value && (this.min() && value < this.min() || this.max() && value > this.max())) {
-                return;
-            }
-
             this._dateTime = new customDateTime(value, this.options.format, this.options.culture, this.options.messages);
 
             this._updateElementValue();
