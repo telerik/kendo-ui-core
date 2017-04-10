@@ -176,7 +176,7 @@ $(function() {
 
 ## DateInput Integration
 
-You can use [DateInput]({% slug overview_kendoui_dateinput_widget %}) as the input element in a DatePicker widget. To achieve this behavior, enable the `dateInput` property of DatePicker.
+You can use the [DateInput]({% slug overview_kendoui_dateinput_widget %}) as the input element in a DatePicker widget. To achieve this behavior, enable the `dateInput` property of DatePicker.
 
 ###### Example
 
