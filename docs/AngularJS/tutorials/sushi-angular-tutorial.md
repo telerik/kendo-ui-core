@@ -212,7 +212,7 @@ To insert a ListView in the `index` view, add a `<kendo-mobile-list-view></kendo
 
 Now define a basic template to verify that the data is loaded and displayed correctly. Next, enhance the template with an image, button, and link to details view. If you run the application, now you should be able to see a list of products.
 
-**Figure 1. Application displaying a products view**
+**Figure 1: Application displaying a products view**
 
 ![products view](image-02.png)
 
@@ -258,7 +258,7 @@ The content inside the `<kendo-mobile-header>` tag will be used as a header for 
 
 Reload the application and see the new look. Have in mind that at present the **Our menu**, **Cart**, **Account** and **About** views do not exists yet, which is why clicking on any of the links results in a JavaScript error.
 
-**Figure 2. Index view with a layout**
+**Figure 2: Index view with a layout**
 
 ![index view with layout](image-03.png)
 
@@ -397,7 +397,7 @@ Last, tell the ListViews to use the new template. Add the `k-template="sushiCart
     <kendo-mobile-list-view id="menuList" class="item-list" k-template="templates.menuTemplate" k-data-source="sushiCart.productsDataSource">
     </kendo-mobile-list-view>
 
-**Figure 3. A grouped ListView**
+**Figure 3: A grouped ListView**
 
 ![grouped listview](image-04.png)
 
@@ -474,7 +474,7 @@ Implement the `setCurrentItem` method in the `sushiCart` service.
 
 Now if the user clicks on an item, the application navigates to a new View and displays the product details.
 
-**Figure 4. Product details view**
+**Figure 4: Product details view**
 
 ![product details](image-05.png)
 
@@ -529,7 +529,7 @@ Add `cartController` with a dependency to the `sushiCart` and `templates` servic
     }])
 
 
-**Figure 5. An empty cart**
+**Figure 5: An empty cart**
 
 ![empty cart](image-06.png)
 

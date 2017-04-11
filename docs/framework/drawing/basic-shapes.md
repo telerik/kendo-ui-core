@@ -12,7 +12,7 @@ position: 2
 
 Scenes are constructed from a set of built-in basic shapes. **Figure 1** below demonstrates a simple, static scene.
 
-**Figure 1. Basic scene**
+**Figure 1: Basic scene**
 
 ![Basic Scene](images/basic-scene.png)
 

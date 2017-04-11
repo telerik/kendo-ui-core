@@ -11,13 +11,13 @@ position: 1
 
 All [Kendo UI widgets](http://demos.telerik.com/kendo-ui/) arrive with a number of predefined themes.
 
-**Figure 1. Kendo UI themes for the Web**
+**Figure 1: Kendo UI themes for the Web**
 
 ![Kendo UI Web Themes](/styles-and-layout/web-themes.png)
 
 This is how the same themes are rendered in widgets that visualize data, such as Gauges, Charts, Barcodes, Diagrams, and Maps.
 
-**Figure 2. Kendo UI themes for widgets rendering data visualization**
+**Figure 2: Kendo UI themes for widgets rendering data visualization**
 
 ![Kendo UI DataViz Themes](/styles-and-layout/dataviz-themes.png)
 

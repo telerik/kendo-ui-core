@@ -161,7 +161,7 @@ Use a Windows port of Git and your stored credentials instead of the built-in cl
 1. Uncheck `$(DevEnvDir)\Extensions\Microsoft\Web Tools\External\git` and/or `$(VSINSTALLDIR)\Web\External\git`.
 1. Add a new entry `C:\Program Files\Git\bin` or your installation location.
 
-**Figure 1. Add a new entry**
+**Figure 1: Adding a new entry**
 
 ![Chart in IE](/images/vs2015-external-tools.png)
 

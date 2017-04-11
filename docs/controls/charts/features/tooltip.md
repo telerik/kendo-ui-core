@@ -11,7 +11,7 @@ position: 1
 
 The Kendo UI Charts can display details about the data point the mouse is currently hovering. The border of this tooltip matches the color of the series.
 
-**Figure 1. Tooltip in a Kendo UI Chart widget**
+**Figure 1: Tooltip in a Kendo UI Chart widget**
 
 ![](/controls/charts/chart-tooltip.png)
 

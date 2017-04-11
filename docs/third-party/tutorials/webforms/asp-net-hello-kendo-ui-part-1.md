@@ -24,7 +24,7 @@ This tutorial builds on the Hello Services module, so make sure you download [th
 
 In the [Hello Services project]({% slug part2_halloservices_aspnetwebforms_tutorials %}), delete the **Site.Master**, **About.aspx** and **Default.aspx** pages. Add a new Web Form to the project and call it `Default.aspx`.
 
-**Figure 1. Add a new Web Form to the project**
+**Figure 1: Adding a new Web Form to the project**
 
 ![add-new-webform](/images/webforms/add-new-webform.png)
 
@@ -61,7 +61,7 @@ Find more information on how to [host Kendo UI Professional in your project]({% 
 
 Note that you now have a `Content` folder that contains a `kendo` subfolder. You also have a `Scripts` folder which also has a `kendo` subfolder.
 
-**Figure 1. Solution Explorer**
+**Figure 2: Solution Explorer**
 
 ![solution-explorer-content](/images/webforms/solution-explorer-content.jpg)
 
@@ -129,7 +129,7 @@ Now turn this grid into a Kendo UI Grid using JavaScript. To do that, select the
 
 Now the Kendo UI Grid is created.
 
-**Figure 2. Kendo UI Grid**
+**Figure 3: A preview of the Grid**
 
 ![kendo-grid-preview](/images/webforms/kendo-grid-preview.png)
 
@@ -156,7 +156,7 @@ The example below demonstrates how to specify the Grid columns.
 
 Now the Grid displays the column headers correctly and does not display the unnecessary **Id** column.
 
-**Figure 3. Kendo UI Grid with unnecessary columns removed**
+**Figure 4: A Grid having its unnecessary columns removed**
 
 ![grid-preview-with-columns-and-sorting](/images/webforms/grid-preview-with-columns-and-sorting.png)
 
@@ -188,7 +188,7 @@ Configure the paging functionality in the grid by setting `pageable: true`. Set 
         });
     });
 
-**Figure 4. A grid set up for paging**
+**Figure 5: A Grid that is set up for paging**
 
 ![grid-preview-client-paging](/images/webforms/grid-preview-client-paging.png)
 
@@ -213,7 +213,7 @@ Push this paging to the server. To tell Kendo UI to do this, toggle the `serverP
         });
     });
 
-**Figure 4. A grid with paging pushed to the server**
+**Figure 6: A Grid with its paging pushed to the server**
 
 ![grid-preview-server-paging-only-1-page](/images/webforms/grid-preview-server-paging-only-1-page.png)
 
@@ -221,7 +221,7 @@ The grid now displays only 1 page. The reason for this is that it is expecting t
 
 An inspection of the request in the Developer Tools reveals that Kendo UI is now sending `take`, `skip`, and `pageSize` parameters back to the Web API service. Handle these parameters in the method on the server.
 
-**Figure 5. The `take`, `skip`, and `pageSize` parameters sent back to the Web API service**
+**Figure 7: The take, skip, and pageSize parameters sent back to the Web API service**
 
 ![grid-preview-server-paging-broken-dev-tools](/images/webforms/grid-preview-server-paging-broken-dev-tools.png)
 
@@ -258,7 +258,7 @@ The example below demonstrates how to create a Kendo UI Grid.
 <!--_-->
 The server is now handling the paging. Start the application and preview it in the browser.
 
-**Figure 6. Preview of the application in the browser**
+**Figure 8: A preview of the application in the browser**
 
 ![grid-preview-server-paging-only-1-page](/images/webforms/grid-preview-server-paging-only-1-page.png)
 
@@ -332,7 +332,7 @@ If you fire up the application now, the Grid is going to be empty. This is becau
 
 Now you can run the application and see that paging is working. If you open the Developer Tools, you can watch each request go to the server and watch the server return only the appropriate page of data. If you watch closely, depending on your server latency, you might see the Kendo UI spinner come up indicating a server action. You can add a `System.Threading.Thread.Sleep(1000);` to your `Get` method on the `EmployeesController` if you want to see what your application will look like while the UI is waiting for the server to respond. Kendo UI takes care of that too.
 
-**Figure 7. Preview of your application**
+**Figure 9: A preview of your application**
 
 ![grid-preview-paging-server-dev-tools](/images/webforms/grid-preview-paging-server-dev-tools.png)
 

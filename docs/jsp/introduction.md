@@ -30,7 +30,7 @@ The distribution files contain the following:
 * [Maven support for Eclipse (M2E)](http://www.eclipse.org/m2e/)
 * Configured server, tested with [Tomcat 7](http://tomcat.apache.org/tomcat-7.0-doc/)
 
-**Figure 1. Eclipse with Tomcat7 configured**
+**Figure 1: Eclipse with Tomcat7 configured**
 
 ![Eclipse with Tomcat7 configured](images/eclipse.png)
 
@@ -46,13 +46,13 @@ Find a sample a JSP Spring MVC application in the `\wrappers\jsp\spring-demos` f
 
 **Step 4** Choose **Maven** > **Existing Maven Projects**. Click **Next**. If you do not see that option, make sure your Eclipse has Maven support installed.
 
-**Figure 2. Eclipse with Tomcat7 configured**
+**Figure 2: Eclipse with Tomcat7 configured**
 
 ![Import Maven projects](images/existing_maven_project.png)
 
 **Step 5** Browse to the location where you extracted Telerik UI for JSP. Then pick "wrappers\jsp\spring-demos" for "Root Directory". Click "Finish".
 
-**Figure 3. Import of the Kendo UI JSP demos**
+**Figure 3: Import of the Kendo UI JSP demos**
 
 ![Import Kendo UI JSP demos](images/import_maven_project.png)
 
@@ -62,13 +62,13 @@ Find a sample a JSP Spring MVC application in the `\wrappers\jsp\spring-demos` f
 
 **Step 8** From the "Project Facets" menu select "Dynamic Web Module".
 
-**Figure 4. Project facets**
+**Figure 4: Project facets**
 
 ![Project facets](images/project_facets.png)
 
 **Step 9** Click the **Runtimes** tab. Pick a runtime&mdash;Tomcat7, for example.
 
-**Figure 5. Project facets&mdash;Tomcat 7**
+**Figure 5: Project facets&mdash;Tomcat 7**
 
 ![Project facets - Tomcat 7](images/project_facets_tomcat.png)
 

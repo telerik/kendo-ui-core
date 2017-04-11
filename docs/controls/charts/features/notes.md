@@ -11,7 +11,7 @@ position: 2
 
 Kendo UI Charts can display the metadata of a point or a specific part of the axis.
 
-**Figure 1. Notes displayed in a chart**
+**Figure 1: Notes displayed in a chart**
 
 ![](/controls/charts/chart-notes.png)
 

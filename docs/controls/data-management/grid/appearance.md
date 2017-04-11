@@ -252,7 +252,7 @@ It is advisable to set a height to the Grid only if its scrolling is enabled.
 
 When the height of the Grid is set, it calculates the appropriate height of its scrollable data area, so that the sum of the header rows, filter row, data, footer, and pager is equal to the expected height of the widget. That is why if the height of the Grid is changed through JavaScript after you create the widget,  you need to call the [`resize` method of the Grid]({% slug responsivewebdesign_integration_kendoui %}) afterwards. In this way the Grid recalculates the height of its data area.
 
-**Figure 1. Grid with a fixed height and its scrolling functionality enabled**
+**Figure 1: Grid with a fixed height and its scrolling functionality enabled**
 
 ![Grid With Fixed Height And Scrolling](/controls/data-management/grid/grid3_1.png)
 
