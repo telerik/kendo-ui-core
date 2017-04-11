@@ -61,7 +61,7 @@ If the series contain more than one value for a given period (base unit), they a
 
 Note that the dates match the source.
 
-**Figure 1. A chart with date category axis**
+**Figure 1: A chart with date category axis**
 
 ![Chart with date category axis](/controls/charts/chart-category-date-axis.png)
 
@@ -105,7 +105,7 @@ The example below demonstrates date series grouped by year.
 
 Notice the way the chart now displays the maximum value for each year.
 
-**Figure 2. A chart with a grouped date category axis.**
+**Figure 2: A chart with a grouped date category axis.**
 
 ![Chart with grouped date category axis](/controls/charts/chart-category-date-axis-grouped.png)
 

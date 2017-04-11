@@ -23,7 +23,7 @@ The main building blocks of a Kendo UI Chart are:
 
 For detailed information on [Chart titles and legends, refer to the article about them]({% slug titlelegend_features_charts %}).
 
-**Figure 1. Chart structure**
+**Figure 1: The structure of a Chart**
 
 ![Chart Structure](/controls/charts/chart-structure.png)
 

@@ -79,13 +79,13 @@ To verify that your implementation does not differ from the default AngularJS be
 
 Observe the page performance in the Chrome timeline by recording the sample from above.
 
-**Figure 1** Page performance in the Chrome timeline
+**Figure 1: Page performance in the Chrome timeline**
 
 <img src="leak-ng-repeat.png" width="600" />
 
 The DOM count increases as the routes toggle with each other, which seems to be a leak. Perform the same, but force the garbage collect during the recording.
 
-**Figure 1** Forcing garbage collection during recording
+**Figure 2: Forcing garbage collection during recording**
 
 <img src="leak-ng-repeat-gc.png" width="600" />
 
@@ -156,7 +156,7 @@ Replace the `repeat` directive above with a Kendo UI Grid.
 
 The example from above performs in the same way. Nodes are retained, but collecting the garbage drops the node count back to its original state.
 
-**Figure 3** Node count dropping back to original state
+**Figure 3: Node count dropping back to original state**
 
 <img src="leak-kendo-grid-gc.png" width="600" />
 

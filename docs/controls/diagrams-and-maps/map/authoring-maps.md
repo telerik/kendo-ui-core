@@ -10,7 +10,7 @@ position: 3
 
 This article illustrates the process of creating a map from scratch and by using freely available datasets. The goal of this tutorial is a map of the Australian states and mainland territories.
 
-**Figure 1. The expected outlook of a finished map**
+**Figure 1: The expected outlook of a finished map**
 
 ![Finished map](/controls/diagrams-and-maps/map/images/map-au.png)
 
@@ -30,7 +30,7 @@ A traditional [desktop geographic information system (GIS)](https://en.wikipedia
 
 Start by [importing the Esri Shapefile](http://www.qgis.org/en/docs/user_manual/working_with_vector/supported_data.html#esri-shapefiles) for the data set. With the help of the [Identify tool](http://www.qgis.org/en/docs/user_manual/introduction/general_tools.html#identify) you can quickly inspect the available metadata.
 
-**Figure 2. Identifying of the results**
+**Figure 2: Identifying of the results**
 
 ![Identify results](/controls/diagrams-and-maps/map/images/map-qgis-identify.png)
 

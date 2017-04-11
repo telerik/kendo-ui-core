@@ -45,7 +45,7 @@ The Kendo UI Chart widget is rendered by selecting the `div` with a jQuery selec
 
 This results in the chart below.
 
-**Figure 1. An empty chart**
+**Figure 1: An empty chart**
 
 ![Empty Chart](/controls/charts/chart-empty.png)</img>
 
@@ -84,7 +84,7 @@ Start by creating a series that displays inline data.
 
 This results in the chart below.
 
-**Figure 2. A chart without categories**
+**Figure 2: A chart without categories**
 
 ![Column Chart without categories](/controls/charts/chart-column-no-categories.png)</img>
 
@@ -107,7 +107,7 @@ Notice that the columns have no label across the category axis. Specify the labe
 
 This results in the chart below.
 
-**Figure 3. A chart with categories**
+**Figure 3: A chart with categories**
 
 ![Column Chart with categories](/controls/charts/chart-column-categories.png)</img>
 
@@ -222,7 +222,7 @@ The example below demonstrates how to define the `temperature` and `humidity` ax
 
 This results in the chart below.
 
-**Figure 4. A chart with multiple axes**
+**Figure 4: A chart with multiple axes**
 
 ![Chart with multiple axes](/controls/charts/chart-multiple-axes.png)
 
@@ -240,7 +240,7 @@ You are able to control the arrangement of the value axes by specifying the valu
 
 The first value axis crosses the category axis at the first category (leftmost). The second value axis crosses it at the last category.
 
-**Figure 5. A chart with customized axis-crossing values**
+**Figure 5: A chart with customized axis-crossing values**
 
 ![Bar chart with customized axis crossing values](/controls/charts/chart-axis-crossing-values.png)
 
@@ -312,7 +312,7 @@ You are also able to define more X and Y axes in addition to the primary axes, a
 
 The first series is associated with the default Y axis, as no axis name is specified. The `torque` series are plotted on the `torque` Y axis.
 
-**Figure 6. A Scatter chart with multiple axes**
+**Figure 6: A Scatter chart with multiple axes**
 
 ![Scatter chart with multiple axes](/controls/charts/chart-scatter-line-multiple-axes.png)
 
@@ -330,7 +330,7 @@ You are able to control the arrangement of the X and Y axes by specifying the va
 
 The primary Y axis crosses the X axis at 0 (leftmost). The second, `torque` Y axis crosses the X axis at the 2500 mark or at its right end, whichever comes first.
 
-**Figure 7. A Scatter chart with customized axis-crossing values**
+**Figure 7: A Scatter chart with customized axis-crossing values**
 
 ![Scatter line chart with customized axis crossing value](/controls/charts/chart-scatter-line-axis-crossing-value.png)
 
@@ -375,7 +375,7 @@ You can add a title to clearly indicate the role of the axis, as demonstrated be
         }]
     });
 
-**Figure 8. A chart with axis titles**
+**Figure 8: A chart with axis titles**
 
 ![Chart with axis titles](/controls/charts/chart-axis-titles.png)
 
@@ -403,7 +403,7 @@ Each axis can be configured to display bands with different colors for predefine
     }]
 
 
-**Figure 9. A chart with axis plot bands**
+**Figure 9: A chart with axis plot bands**
 
 ![Chart with axis plot bands](/controls/charts/chart-plot-bands.png)
 

@@ -13,7 +13,7 @@ Color ranges can be used to convey additional information&mdash;for example, val
 
 This behavior is usually achieved through stacked bar series. However, if you need to convey more flexibility, consider the following Chart.
 
-**Figure 1. Color ranges in a Kendo UI Chart**
+**Figure 1: Color ranges in a Kendo UI Chart**
 
 ![Color-coded ranges](/controls/charts/how-to/images/color-coded-bars.png)
 

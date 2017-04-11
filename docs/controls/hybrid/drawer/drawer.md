@@ -126,7 +126,7 @@ The example below demonstrates a button revealing a Drawer.
 
 ### Nested ListView
 
-**Figure 1. Nested ListView with different color schemes**
+**Figure 1: Nested ListView with different color schemes**
 
 ![Nested ListView with different color scheme](/controls/hybrid/drawer/ListView-in-Drawer.png)
 
@@ -134,7 +134,7 @@ The ListView has different styling when placed in a Drawer.
 
 ### Nested TabStrip
 
-**Figure 2. Nested vertical TabStrip**
+**Figure 2: Nested vertical TabStrip**
 
 ![Nested Vertical TabStrip](/controls/hybrid/drawer/TabStrip-in-Drawer.png)
 

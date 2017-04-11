@@ -13,7 +13,7 @@ This article elaborates on the basics of building applications with [the Hybrid 
 
 The Kendo UI hybrid framework is designed to help developers build mobile app experiences through using HTML and JavaScript that automatically adapt to the native look and feel of different mobile platforms. Developers using Kendo UI hybrid components can focus on the content and functions of their apps and let the Kendo UI framework handle differences between platforms such as iOS and Android.
 
-**Figure 1. Adaptive rendering of Kendo UI hybrid components**
+**Figure 1: Adaptive rendering of Kendo UI hybrid components**
 
 ![Illustration of Kendo UI mobile adaptive rendering](/images/mobile/km-adaptive-rending-illustration.png)
 
@@ -181,7 +181,7 @@ This single line of JavaScript automatically initializes your Kendo UI hybrid ap
 
 For a live example refer to [http://jsbin.com/egowef](http://jsbin.com/egowef "Live example of tutorial code running on jsBin"). Load your page in a browser and see the beginnings of your HTML mobile app. If everything works out properly, your basic Kendo UI hybrid application should look like the image below.
 
-**Figure 2. Basic and properly working Kendo UI hybrid application.**
+**Figure 2: Basic and properly working Kendo UI hybrid application.**
 
 ![Basic Kendo UI mobile app progress](/images/mobile/km-basic-app-1.png)
 

@@ -48,7 +48,7 @@ To bind the Grid to local data, set the `dataSource` option of the `kendoGrid` o
          dataSource: people
      });
 
-**Figure 1. Grid bound to a local data array**
+**Figure 1: Grid bound to a local data array**
 
 ![Kendo UI Grid bound to a local data array](/controls/data-management/grid/grid2_1.png)
 
@@ -86,7 +86,7 @@ To enable selection in the Grid, set the [`selectable`](/api/javascript/ui/grid#
             // other configuration
          });
 
-**Figure 2. Grid with enabled row selection**
+**Figure 2: Grid with enabled row selection**
 
 ![Grid with enabled row selection](/controls/data-management/grid/grid4_1.png)
 
@@ -196,11 +196,11 @@ To enable the grouping functionality of the Grid, set the `groupable` option to 
          // other configuration
     });
 
-**Figure 3. Grid with its grouping functionality enabled**
+**Figure 3: Grid with its grouping functionality enabled**
 
 ![Grid With Grouping Enabled](/controls/data-management/grid/grid5_1.png)
 
-**Figure 4. Grid with its data grouped by last name**
+**Figure 4: Grid with its data grouped by last name**
 
 ![Grid Grouped By Last Name](/controls/data-management/grid/grid6_1.png)
 
@@ -253,7 +253,7 @@ To configure the Grid so that grouping occurs before paging, you need to group t
 
 By default, sorting is disabled.
 
-**Figure 5. Grid with its sorting functionality enabled**
+**Figure 5: Grid with its sorting functionality enabled**
 
 ![Grid with Sorting Enabled](/controls/data-management/grid/grid7_1.png)
 
@@ -343,7 +343,7 @@ Specify this as a template for each row by passing it in to the `rowTemplate` op
 
 In the resulting Grid, the email address is an interactive hyperlink which opens a new email message when clicked.
 
-**Figure 6. Grid with a row template applied**
+**Figure 6: Grid with a row template applied**
 
 ![Grid with row template](/controls/data-management/grid/grid8_1.png)
 

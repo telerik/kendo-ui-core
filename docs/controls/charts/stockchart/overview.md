@@ -10,7 +10,7 @@ position: 1
 
 The [Kendo UI Stock Chart widget](http://demos.telerik.com/kendo-ui/financial/index) is a specialized control visualizing the price movement of any financial instrument over a certain period of time. It includes extensive touch support and a navigator pane for easy browsing of extended time periods. Generally, the Stock Chart extends the [Kendo UI Chart widget]({% slug overview_kendoui_charts_widget %}) and shares most of its features.
 
-**Figure 1. A sample Stock Chart**
+**Figure 1: A sample Stock Chart**
 
 ![Stock Chart](/controls/charts/stockchart/stock-chart.png)
 

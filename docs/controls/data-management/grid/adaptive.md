@@ -14,7 +14,7 @@ For instance, when you filter or edit data on a mobile device, Kendo UI slides i
 
 ## Getting Started
 
-### Enable Adaptive Rendering
+### Enabling Adaptive Rendering
 
 To enable the adaptive rendering feature, set the [`mobile`](/api/javascript/ui/grid#configuration-mobile) property to `true`, `phone`, or `tablet`.
 
@@ -46,7 +46,7 @@ The Kendo UI adaptive mode requires scripts, which are normally part of the Kend
 
 The mobile pane in which the adaptive Grid is placed does not automatically expand its height. To add an adaptive Grid to a Kendo UI mobile application, set the `stretch` configuration of the respective view to `true` and apply an `auto` height to the Grid. Alternatively, define an explicit pixel Grid height and omit the pane `stretch` option.
 
-### Use the stretch option
+### Using the stretch Option
 
 ###### Example
 
@@ -78,7 +78,7 @@ The mobile pane in which the adaptive Grid is placed does not automatically expa
         var app = new kendo.mobile.Application();
     </script>
 
-### Use the height option
+### Using the height Option
 
 ###### Example
 
@@ -110,19 +110,19 @@ The mobile pane in which the adaptive Grid is placed does not automatically expa
         var app = new kendo.mobile.Application();
     </script>
 
-### Resize Columns
+### Resizing Columns
 
 The column resizing feature on touch screen devices is triggered when the user holds a finger on the respective column header. When the resizing icon appears, the user is able to resize the column by dragging.
 
-**Figure 1. Grid with resizeable columns on a mobile device**
+**Figure 1: Grid with resizeable columns on a mobile device**
 
 ![](/controls/data-management/grid/adaptive-resizing-icon.png)
 
 ## Grid Specifics
 
-### Apply Height and Position Styles to Parent Grid Elements
+### Applying Styles to Parent Grid Elements
 
-This section applies to the following cases:
+When you apply the height and position styles to parent Grid elements, note that this section applies to the following cases:
 
 * When multiple adaptive Grids are used on the same page.
 * When the Grid is not the only content on the page.
@@ -166,7 +166,7 @@ The example below demonstrates how to add multiple adaptive Grids to the same pa
         $("#grid2").kendoGrid(gridConfig);
     </script>
 
-### Destroy the Adaptive Grid
+### Destroying Adaptive Grids
 
 When in adaptive mode, the Grid generates some auxiliary markup, which needs to be removed if the widget is to be [destroyed]({% slug destroywidgets_kendoui_gettingstarted %}) manually.
 
