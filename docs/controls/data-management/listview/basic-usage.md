@@ -1,4 +1,4 @@
----
+
 title: Walkthrough
 page_title: Walkthrough | Kendo UI ListView
 description: "Learn how to display a custom layout of data-bound items through templates and easily implement the Kendo UI Listview widget in your application."
@@ -369,7 +369,7 @@ $("#listView").kendoListView({
 
 ## See Also
 
-Other articles on Kendo UI ListView and how-to examples:
+Other articles and how-to examples on the Kendo UI ListView:
 
 * [JavaScript API Reference](/api/javascript/ui/listview)
 * [Overview]({% slug overview_kendoui_listview_widget %})

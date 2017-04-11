@@ -122,7 +122,7 @@ You cannot work around these issues, because no other reliable way to detect typ
 
 ## See Also
 
-Other articles on Kendo UI MaskedTextBox and how-to examples:
+Other articles and how-to examples on the Kendo UI MaskedTextBox:
 
 * [How to Customize Masks through MVVM Binding]({% slug howto_customize_masks_through_mvvmbinding_mvvm_maskedtextbox %})
 * [How to Show Custom Placeholder on Blur]({% slug howto_show_custom_placeholderon_blur_maskedtextbox %})

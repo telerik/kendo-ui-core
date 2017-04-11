@@ -16,7 +16,7 @@ QR signifies that these images can be quickly read by a cell phone. [QR codes](h
 
 ### Create the QRCode
 
-Create the Kendo UI QRCode widget from an existing `div` element, as demonstrated in the example below.
+To create the Kendo UI QRCode from an existing `div` element, use the following example.
 
 ###### Example
 
@@ -24,7 +24,7 @@ Create the Kendo UI QRCode widget from an existing `div` element, as demonstrate
 
 ### Initialize the QRCode
 
-Initialize the QRCode with its default configuration and simple value, as demonstrated in the example below.
+To initialize the QRCode with its default configuration and simple value, use the following example.
 
 ###### Example
 

@@ -25,10 +25,10 @@ To initialize the ComboBox, use any of the following approaches:
 The ComboBox looks and operates consistently regardless of the initialization type you choose to apply.
 
 > **Important**  
-> * As a ComboBox must be initialized after the DOM is fully loaded, make sure you create it within a `$(document).ready()` statement.
-> * The widget copies any styles and CSS classes from the input element to the wrapper element and visible input.
+> * Verify that you create the ComboBox within a `$(document).ready()` statement because the widget has to be initialized after the DOM fully loads.
+> * The widget copies any styles and CSS classes from the `input` element to the `wrapper` element and visible input.
 
-**Use the `<option>` tag of an existing `<select>` element**
+#### Use option Tags of Existing select Elements
 
 The example below demonstrates how to initialize the ComboBox from an existing `<select>` element with defined data items.
 
