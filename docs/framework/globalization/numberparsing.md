@@ -8,7 +8,7 @@ position: 6
 
 # Number Parsing
 
-Kendo UI exposes methods which convert the specified string to a [`Number`](https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Number) object using the culture's specific settings.
+Kendo UI exposes methods which convert the specified string to a [`Number`](https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Number) object by using the culture-specific settings.
 
 ## Settings
 
