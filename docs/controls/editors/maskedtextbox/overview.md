@@ -8,17 +8,22 @@ position: 1
 
 # MaskedTextBox Overview
 
-The [Kendo UI MaskedTextBox widget](http://demos.telerik.com/kendo-ui/maskedtextbox/index) allows controlled text input based on a specific format. This specific format can be defined using the [mask](/api/web/maskedtextbox#configuration-mask) option of the widget. Each mask can contain mask rules and mask literals. The mask literals will be automatically entered for the user and they cannot be removed. The widget also has predefined rules which specify:
+The [Kendo UI MaskedTextBox widget](http://demos.telerik.com/kendo-ui/maskedtextbox/index) enables a controlled text input that is based on a specific format.
 
-- Required/optional digit input.
-- Required/optional letter input.
-- Required/optional character input (allow any character).
+This specific format can be defined by using the [`mask`](/api/web/maskedtextbox#configuration-mask) option of the widget. Each mask can contain mask rules and mask literals. The mask literals are automatically entered for the user and cannot be removed.
 
-For a complete overview of the methods and configuration options MaskedTextBox applies, [review its API Reference](/api/web/maskedtextbox).
+The widget also has predefined rules which specify:
+- Required or optional digit input.
+- Required or optional letter input.
+- Required or optional character input (allows any character).
+
+For more information on its methods and configuration options, review the [API Reference of the MaskedTextBox](/api/web/maskedtextbox).
 
 ## Getting Started
 
 ### Initialize the MaskedTextBox
+
+To initialize the MaskedTextBox, use the following example.
 
     <input id="maskedtextbox" />
     <script>
@@ -29,57 +34,57 @@ For a complete overview of the methods and configuration options MaskedTextBox a
         });
     </script>
 
-When a MaskedTextBox is initialized, it will decorate the `<input>` element with a `k-textbox` CSS class.
+When a MaskedTextBox is initialized, it decorates the `<input>` element with a `k-textbox` CSS class.
 
 > **Important**
 >
-> The default mask is an empty string, which allows any input. If you need to restrict user input, define a mask value.
+> The default mask is an empty string which allows any input. To restrict user input, define a mask value.
 
 ## Configuration
 
-MaskedTextBox provides configuration options that can be easily set during initialization. Some of the properties that can be controlled are:
+The MaskedTextBox provides configuration options that can be set during initialization. The available properties are:
 
-*   Value of the widget
-*   Mask value
-*   Custom mask rules
-*   Prompt char
-*   Culture name
+* Value of the widget
+* Mask value
+* Custom mask rules
+* Prompt char
+* Culture name
 
-For a complete overview of the methods and configuration options MaskedTextBox applies, [review its API Reference](/api/web/maskedtextbox).
+For more information on its methods and configuration options, review the [API Reference of the MaskedTextBox](/api/web/maskedtextbox).
 
 ### Rules
 
 The following mask rules are available and predefined:
 
-- `0` - Digit. Accepts any digit between 0 and 9.
-- `9` - Digit or space. Accepts any digit between 0 and 9 or space.
-- `#` - Digit or space. Like **9** rule, but allows also the + (plus) and - (minus) signs.
-- `L` - Letter. Restricts input to letters a-z and A-Z. This rule is equivalent to [a-zA-Z] in regular expressions.
-- `?` - Letter or space. Restricts input to letters a-z and A-Z. This rule is equivalent to [a-zA-Z] in regular expressions.
-- `&` - Character. Accepts any character except space. The rule is equivalent to *\S* in regular expressions.
-- `C` - Character or space. Accepts any character. The rule is equivalent to *.* in regular expressions.
-- `A` - Alphanumeric. Accepts letters and digits only.
-- `a` - Alphanumeric or space. Accepts letters, digits and space only.
+- `0`&mdash;Digit. Accepts any digit between 0 and 9.
+- `9`&mdash;Digit or space. Accepts any digit between 0 and 9 or space.
+- `#`&mdash;Digit or space. Identical to **Rule 9**. In addition, allows the `+` (plus) and `-` (minus) signs.
+- `L`&mdash;Letter. Restricts the input to a-z and A-Z letters. This rule is equivalent to [a-zA-Z] in regular expressions.
+- `?`&mdash;Letter or space. Restricts the input to letters a-z and A-Z. This rule is equivalent to [a-zA-Z] in regular expressions.
+- `&`&mdash;Character. Accepts any character except a space. The rule is equivalent to `\S` in regular expressions.
+- `C`&mdash;Character or space. Accepts any character. The rule is equivalent to `.` in regular expressions.
+- `A`&mdash;Alphanumeric. Accepts letters and digits only.
+- `a`&mdash;Alphanumeric or space. Accepts only letters, digits, and space.
 
 > **Important**
 >
-> Any mask rule can be escaped using the `\` character. An escaped rule is turned into a literal.
+> You can escape any of the masks by using the `\` character. The escaped rules turn into literals.
 
 ### Literals
 
-The following mask literals are globalized based on the current culture:
+Based on the current culture, the following mask literals are globalized:
 
-- `.` - Decimal placeholder. The decimal separator will be set according to the current culture used by Kendo UI.
-- `,` - Thousands placeholder. The display character will be set according to current culture used by Kendo UI.
-- `$` - Currency symbol. The display character will be set according to current culture used by Kendo UI.
+- `.`&mdash;Decimal placeholder. The decimal separator is set according to the current culture used by Kendo UI.
+- `,`&mdash;Thousands placeholder. The display character is set according to the current culture used by Kendo UI.
+- `$`&mdash;Currency symbol. The display character is set according to the current culture used by Kendo UI.
 
 > **Important**
 >
-> Any of the aforementioned literals can be escaped using the `\` character.
+> You can escape any of the literals by using the `\` character.
 
 ### Customize Mask Rules
 
-The MaskedTextBox widget provides the option to define custom mask rules during initialization. To customize a mask rule, define it in the [`rules`](/api/web/maskedtextbox#configuration-rules) option. The widget supports rules defined as regular expression or a function.
+The MaskedTextBox enables you to define custom mask rules during initialization. To customize a mask rule, define it in the [`rules`](/api/web/maskedtextbox#configuration-rules) option. The widget supports rules defined as regular expression or a function.
 
 ###### Example
 
@@ -101,19 +106,19 @@ The MaskedTextBox widget provides the option to define custom mask rules during 
 
 > **Important**
 >
-> Any of the predefined rules can be overridden through the [`rules`](/api/web/maskedtextbox#configuration-rules) option.
+> You can escape any of the predefined rules by using the [`rules`](/api/web/maskedtextbox#configuration-rules) option.
 
 ## Known Limitations
 
 ### Mobile Editing
 
-The MaskedTextBox widget listens to input events, like `keydown` and `keypress`, to restrict the typed value.
+To restrict the typed value, the MaskedTextBox listens to input events such as `keydown` and `keypress`.
 
 > **Important**
-> * In some mobile browsers, mostly Android or Windows Mobile OS built-in browsers, those events are not triggered at all. This prevents the normal behavior of the MaskedTextBox, as they are fundamental for the typing restriction.
-> * Recent tests show that the MaskedTextBox works in the latest iOS OS.
+> * In some mobile browsers, mostly Android or the Windows Mobile OS built-in browsers, those events do not trigger at all. This prevents the normal behavior of the MaskedTextBox because they are fundamental for the typing restriction.
+> * Recent tests show that the MaskedTextBox works in the latest iOS OS version.
 
-Unfortunately, in those cases not much can be done, because there is no other reliable way to detect typing in mobile browsers&mdash;the virtual keyboard does not rise any other specific events.
+You cannot work around these issues, because no other reliable way to detect typing in mobile browsers exist&mdash;virtual keyboard does not raise any other specific events.
 
 ## See Also
 

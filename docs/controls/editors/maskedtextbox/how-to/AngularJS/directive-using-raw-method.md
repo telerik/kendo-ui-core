@@ -3,11 +3,12 @@ title: Use Custom Directive to Set Model Value
 page_title: Use Custom Directive to Set Model Value | Kendo UI MaskedTextBox
 description: "Learn how to use raw methods to set the model values of the Kendo UI MaskedTextBox widget in AngularJS."
 slug: howto_use_raw_methodtoset_modelvalue_angularjs_maskedtextbox
+position: 1
 ---
 
 # Use Custom Directive to Set Model Value
 
-The example below demonstrates how to implement [a custom AngularJS directive](https://docs.angularjs.org/guide/directive) to get MaskedTextBox unmasked value.
+The following example demonstrates how to implement [a custom AngularJS directive](https://docs.angularjs.org/guide/directive) to get the unmasked value of the MaskedTextBox.
 
 ###### Example
 
