@@ -105,11 +105,9 @@ This property is available when the [`async.chunkSize`](#configuration-async.chu
         });
     </script>
 
-### async.maxRetries `Number`*(default: 1)*
+### async.autoRetryAfter `Number`
 
-Sets the number of attempts that are performed if an upload is fails.
-
-The property is only used when the [`async.retryAfter`](#configuration-async.retryAfter) property is also defined.
+If you set the property, the failed upload request is repeated after the declared amount of miliseconds.
 
 #### Example
 
@@ -120,15 +118,16 @@ The property is only used when the [`async.retryAfter`](#configuration-async.ret
                 saveUrl: "http://my-app.localhost/save",
                 removeUrl: "http://my-app.localhost/remove",
                 chunkSize: 2000,
-                retryAfter: 300,
-                maxRetries: 4
+                autoRetryAfter: 300
             }
         });
     </script>
 
-### async.retryAfter `Number`
+### async.maxAutoRetries `Number`*(default: 1)*
 
-If you set the property, the failed upload request is repeated after the declared amount of ticks.
+Sets the maximum number of attempts that are performed if an upload fails.
+
+The property is only used when the [`async.autoRetryAfter`](#configuration-async.autoRetryAfter) property is also defined.
 
 #### Example
 
@@ -139,7 +138,8 @@ If you set the property, the failed upload request is repeated after the declare
                 saveUrl: "http://my-app.localhost/save",
                 removeUrl: "http://my-app.localhost/remove",
                 chunkSize: 2000,
-                retryAfter: 300
+                autoRetryAfter: 300,
+                maxAutoRetries: 4
             }
         });
     </script>
