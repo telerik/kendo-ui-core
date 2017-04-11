@@ -40,6 +40,8 @@ The DatePicker provides configuration options that can be set during initializat
 * Start view
 * Navigation depth (the last view to which the user can navigate)
 
+The first day of the week in the Calendar view depends on the applied [culture](/framework/globalization/definecultureinfo).
+
 ### Selected, Min, and Max Dates
 
 The following example demonstrates how to create a DatePicker with a selected date and a defined minimum and maximum dates.

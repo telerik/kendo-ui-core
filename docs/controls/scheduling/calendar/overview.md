@@ -35,6 +35,8 @@ The Calendar provides many configuration options that can be set during initiali
 *   Day template
 *   Footer template
 
+The first day of the week depends on the applied [culture](/framework/globalization/definecultureinfo).
+
 ### Selected, Min, and Max Dates
 
 The example below demonstrates how to create a Calendar with a selected date and a defined minimum and maximum dates.
