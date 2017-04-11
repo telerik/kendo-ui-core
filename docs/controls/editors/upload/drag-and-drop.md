@@ -8,27 +8,43 @@ position: 2
 
 # Drag and Drop
 
-Users can select files by dropping them over the Kendo UI Upload. As of the Kendo UI 2016 Q3 release custom drop zones can be initialized depending on a particular selector that provides the upload of a file through the drag-and-drop functionality.  
+Users can select files by dropping them over the Kendo UI Upload.
+
+As of the Kendo UI 2016 Q3 release, custom drop zones can be initialized depending on a particular selector that provides the upload of a file through the drag-and-drop functionality.  
 
 > **Important**
 >
-> The drag-and-drop functionality is only available in the [asynchronous mode]({% slug modes_upload_widget %}#asynchronous-mode) and requires a [supported browser]({% slug browsersupport_upload_widget %}).
+> The drag-and-drop functionality is available only in the [asynchronous mode]({% slug modes_upload_widget %}#asynchronous-mode) and requires a [supported browser]({% slug browsersupport_upload_widget %}).
 
-## Select and Upload Files
+## Selecting and Uploading Files
 
 ### File Upload
 
-To use the Kendo UI Upload as a drop zone, follow the steps below:
+To use the Kendo UI Upload as a drop zone:
 
-1. Drag a file over the browser window for the drop zone to appear. ![Drag files to make the drop zone appear](/controls/editors/upload/upload-dd1.png)
-2. When you pass the mouse over the drop zone, it gets highlighted. ![Pass the mouse to highlight the drop zone](/controls/editors/upload/upload-dd2.png)
-3. Release the file over the drop zone to add it to the upload queue. ![Release the file to the upload queue](/controls/editors/upload/upload-dd3.png)
+1. Drag a file over the browser window for the drop zone to appear.
 
-### Custom Drop Zone
+    **Table 1: Dragging files to make the drop zone appear**
 
-As of the Kendo UI 2016 Q3 release custom drop zones can be initialized depending on a particular selector that provides the upload of a file through the drag-and-drop functionality.
+    ![Drag files to make the drop zone appear](/controls/editors/upload/upload-dd1.png)
 
-To customize the appearance of the drop zone during the process of dragging and dropping, consider the following information:
+2. When you pass the mouse over the drop zone, it gets highlighted.
+
+    **Table 2: Passing the mouse to highlight the drop zone**
+
+    ![Pass the mouse to highlight the drop zone](/controls/editors/upload/upload-dd2.png)
+
+3. Release the file over the drop zone to add it to the upload queue.
+
+    **Table 3: Releasing the file to the upload queue**
+
+    ![Release the file to the upload queue](/controls/editors/upload/upload-dd3.png)
+
+### Custom Drop Zones
+
+As of the Kendo UI 2016 Q3 release, custom drop zones can be initialized depending on a particular selector that provides the upload of a file through the drag-and-drop functionality.
+
+To customize the appearance of the drop zone during the process of dragging and dropping, note the following:
 
 1. When the user drags the file over the browser window, the custom drop zone element receives the `"k-dropzone-active"` class.
 2. When the user drags the files over the drop zone itself, the element receives an additional `"k-dropzone-hovered"` class and the drop zone is highlighted. ![The file is dragged over the drop zone itself](/controls/editors/upload/upload-dd4.png)
@@ -38,7 +54,7 @@ To customize the appearance of the drop zone during the process of dragging and 
 
 By default, the drop zone is not visible.
 
-The example below demonstrates how to override the default drop zone&mdash;when the Kendo UI Upload itself is used as a drop zone&mdash;by applying CSS rules.
+The following example demonstrates how to override the default drop zone&mdash;when the Kendo UI Upload itself is used as a drop zone&mdash;by applying CSS rules.
 
 ###### Example
 
@@ -51,7 +67,7 @@ The example below demonstrates how to override the default drop zone&mdash;when 
     }
 
 <!--*-->
-The example below demonstrates how to customize the appearance of the drop zone during the process of dragging and dropping.
+The following example demonstrates how to customize the appearance of the drop zone during the process of dragging and dropping.
 
 ###### Example
 
@@ -76,5 +92,3 @@ Other articles on the Kendo UI Upload:
 * [Validation]({% slug validation_upload_widget %})
 * [Browser Support]({% slug browsersupport_upload_widget %})
 * [Troubleshooting]({% slug troubleshooting_upload_widget %})
-
-For how-to examples on the Kendo UI Upload widget, browse its [**How To** documentation folder]({% slug howto_remove_files_with_errors %}).

@@ -9,7 +9,7 @@ slug: howto_display_validation_messages_with_templates
 
 When the Upload is configured to use a template, the content of the template replaces some of the HTML elements of the widget that are rendered by default.   
 
-The following example demonstrates how to add a span element to the template. This allows a validation message to be conditionally displayed.
+The following example demonstrates how to add a `span` element to the template. This allows a validation message to be conditionally displayed.
 
 ###### Example
 
@@ -60,8 +60,8 @@ The following example demonstrates how to add a span element to the template. Th
 
 ## See Also
 
-* [Upload JavaScript API Reference](/api/javascript/ui/upload)
+* [JavaScript API Reference of the Upload](/api/javascript/ui/upload)
 * [Modes of Operation]({% slug modes_upload_widget %})
 * [Metadata]({% slug metadata_upload_widget %})
 
-For more runnable examples on the Kendo UI Upload widget, browse its [**How To** documentation folder]({% slug howto_remove_files_with_errors %}).
+For more runnable examples on the Kendo UI Upload widget, browse its [**How To** documentation folder]({% slug howto_add_image_preview %}).

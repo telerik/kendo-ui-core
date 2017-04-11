@@ -8,43 +8,45 @@ position: 4
 
 # Metadata
 
-Asynchronous uploading usually means that you lose the association between the files and the context they originate from. For example, in an application the save handler must associate the uploaded files with a particular message. The message and the file might even be processed on different servers in a load balancing or cloud computing scenario.
+Asynchronous uploading usually means that you lose the association between the files and the context they originate from.
+
+For example, in an application the save handler must associate the uploaded files with a particular message. The message and the file might be processed on different servers in a load-balancing or cloud-computing scenario.
 
 ## Send and Receive
 
 ### Send Metadata
 
-To send metadata over to the `save` handler, follow the steps below.
+To send metadata over to the `save` handler:
 
-**Step 1** Add an `input` field for the file description. Its value is going to be sent to the save handler.
+1. Add an `input` field for the file description. Its value is going to be sent to the save handler.
 
-###### Example
+    ###### Example
 
-        <input type="text" id="fileDescription" />
+            <input type="text" id="fileDescription" />
 
-**Step 2** Declare a handler for the `upload` event and attach a data object to the passed event.
+2. Declare a handler for the `upload` event and attach a data object to the passed event.
 
-###### Example
+    ###### Example
 
-        function onUpload(e) {
-            e.data = {
-                fileDescription: $("#fileDescription").val()
-            };
-        }
+            function onUpload(e) {
+                e.data = {
+                    fileDescription: $("#fileDescription").val()
+                };
+            }
 
-**Step 3** Attach the `upload` event handler.
+3. Attach the `upload` event handler.
 
-###### Example
+    ###### Example
 
-        $("#photos").kendoUpload({
-            async: {
-                saveUrl: "saveHandler.php",
-                removeUrl: "removeHandler.php"
-            },
-            upload: onUpload
-        });
+            $("#photos").kendoUpload({
+                async: {
+                    saveUrl: "saveHandler.php",
+                    removeUrl: "removeHandler.php"
+                },
+                upload: onUpload
+            });
 
-**Step 4** Process the file and the associated description.
+4. Process the file and the associated description.
 
 The description, and any other fields of the `e.data` object, are going to be serialized in the POST request.
 
@@ -56,38 +58,38 @@ The save handler can sometimes produce a result that needs to be routed back to 
 
 To receive metadata from the save handler, follow the steps below:
 
-**Step 1** Build the response.
+1. Build the response.
 
-###### Example
+    ###### Example
 
-        <?php
+            <?php
 
-            header('Content-Type: text/plain;');
+                header('Content-Type: text/plain;');
 
-            $data = array('foo' => 'bar', 'status' => 'ok');
+                $data = array('foo' => 'bar', 'status' => 'ok');
 
-            echo json_encode($data);
-        ?>
+                echo json_encode($data);
+            ?>
 
-**Step 2** Declare a handler for the [`success` event](/api/javascript/ui/upload#events-success) and process the response.
+2. Declare a handler for the [`success` event](/api/javascript/ui/upload#events-success) and process the response.
 
-###### Example
+    ###### Example
 
-        function onSuccess(e) {
-            alert("Status: " + e.response.status);
-        }
+            function onSuccess(e) {
+                alert("Status: " + e.response.status);
+            }
 
-**Step 3** Attach the event handler.
+3. Attach the event handler.
 
-###### Example
+    ###### Example
 
-        $("#photos").kendoUpload({
-            async: {
-                saveUrl: "saveHandler.php",
-                removeUrl: "removeHandler.php"
-            },
-            success: onSuccess
-        });
+            $("#photos").kendoUpload({
+                async: {
+                    saveUrl: "saveHandler.php",
+                    removeUrl: "removeHandler.php"
+                },
+                success: onSuccess
+            });
 
 > **Important**
 >
@@ -102,5 +104,3 @@ Other articles on the Kendo UI Upload:
 * [Modes of Operation]({% slug modes_upload_widget %})
 * [Browser Support]({% slug browsersupport_upload_widget %})
 * [Troubleshooting]({% slug troubleshooting_upload_widget %})
-
-For how-to examples on the Kendo UI Upload widget, browse its [**How To** documentation folder]({% slug howto_remove_files_with_errors %}).

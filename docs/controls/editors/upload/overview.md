@@ -16,7 +16,7 @@ The [Kendo UI Upload widget](http://demos.telerik.com/kendo-ui/upload/index) use
 
 Kendo UI Upload can be initiated from a simple HTML `form`, an `input` element of the `"file"` type, and a jQuery selector.
 
-The example below demonstrates how to create and initialize the Upload.
+The following example demonstrates how to create and initialize the Upload.
 
 ###### Example
 
@@ -78,7 +78,7 @@ The generated `uid` is added to the [`cancel`](/api/javascript/ui/upload#events-
 
 Refer to an existing Upload instance via the [`jQuery.data()`](http://api.jquery.com/jQuery.data/). Once a reference has been established, use the [Upload API](/api/javascript/ui/upload) to control its behavior.
 
-The example below demonstrates how to access an existing Upload instance.
+The following example demonstrates how to access an existing Upload instance.
 
 ###### Example
 

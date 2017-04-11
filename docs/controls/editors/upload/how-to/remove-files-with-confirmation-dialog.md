@@ -7,7 +7,7 @@ slug: howto_remove_files_with_confirmation
 
 # Remove Files with Confirmation Dialog
 
-The example below demonstrates how to display a custom confirmation dialog by utilizing the [`kendo.confirm()`](/api/javascript/kendo#methods-confirm) method.
+The following example demonstrates how to display a custom confirmation dialog by utilizing the [`kendo.confirm()`](/api/javascript/kendo#methods-confirm) method.
 
 ###### Example
 
@@ -41,8 +41,8 @@ The example below demonstrates how to display a custom confirmation dialog by ut
 
 ## See Also
 
-* [Upload JavaScript API Reference](/api/javascript/ui/upload)
+* [JavaScript API Reference of the Upload](/api/javascript/ui/upload)
 * [Modes of Operation]({% slug modes_upload_widget %})
 * [Metadata]({% slug metadata_upload_widget %})
 
-For more runnable examples on the Kendo UI Upload widget, browse its [**How To** documentation folder]({% slug howto_select_additional_metadata_upload %}).
+For more runnable examples on the Kendo UI Upload widget, browse its [**How To** documentation folder]({% slug howto_add_image_preview %}).
