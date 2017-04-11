@@ -7,7 +7,7 @@ slug: howto_use_custom_culture_script_numerictextbox
 
 # Use Custom Culture Script
 
-The example below demonstrates how to extend an existing culture script, create a custom script, and use it with the Kendo UI NumericTextBox widget.
+The following example demonstrates how to extend an existing culture script, create a custom script, and use it with the NumericTextBox.
 
 ###### Example
 
@@ -41,8 +41,6 @@ The example below demonstrates how to extend an existing culture script, create 
 ```
 
 ## See Also
-
-Other articles on the Kendo UI NumericTextBox:
 
 * [NumericTextBox JavaScript API Reference](/api/javascript/ui/numerictextbox)
 * [How to Change Text Color]({% slug howto_change_text_color_numerictextbox %})
