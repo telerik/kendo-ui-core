@@ -8,9 +8,9 @@ position: 6
 
 # Browser Support
 
-The Kendo UI widget uses progressive enhancement to enable certain features when browser support is detected.
+The Kendo UI Upload uses progressive enhancement to enable certain features when browser support is detected.
 
-The table below lists each Kendo UI feature as supported by the respective browser version.
+The following table lists each Kendo UI feature as supported by the respective browser version.
 
 | Feature                                           | IE  | Firefox  | Chrome | Safari      | Opera   |  Works without JavaScript
 | ---                                               | --- | ---      | ---    | ---         | ---     |  ---
@@ -30,5 +30,3 @@ Other articles on the Kendo UI Upload:
 * [Send and Receive Metadata]({% slug metadata_upload_widget %})
 * [Modes of Operation]({% slug modes_upload_widget %})
 * [Troubleshooting]({% slug troubleshooting_upload_widget %})
-
-For how-to examples on the Kendo UI Upload widget, browse its [**How To** documentation folder]({% slug howto_remove_files_with_errors %}).
