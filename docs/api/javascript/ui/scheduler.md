@@ -1288,6 +1288,30 @@ The text similar to "All events" displayed in timeline views when there is no ve
     });
     </script>
 
+### messages.next `String`
+
+The tooltip of the next navigation button.
+
+#### Example - set the "next" message
+
+    <div id="scheduler"></div>
+    <script>
+    $("#scheduler").kendoScheduler({
+      messages: {
+        next: "Next"
+      },
+      date: new Date("2013/6/6"),
+      dataSource: [
+        {
+          id: 1,
+          start: new Date("2013/6/6 08:00 AM"),
+          end: new Date("2013/6/6 09:00 AM"),
+          title: "Interview"
+        }
+      ]
+    });
+    </script>
+
 ### messages.pdf `String`
 
 The text displayed by the PDF export button.
@@ -1300,6 +1324,30 @@ The text displayed by the PDF export button.
       toolbar: ["pdf"],
       messages: {
         pdf: "PDF Export"
+      },
+      date: new Date("2013/6/6"),
+      dataSource: [
+        {
+          id: 1,
+          start: new Date("2013/6/6 08:00 AM"),
+          end: new Date("2013/6/6 09:00 AM"),
+          title: "Interview"
+        }
+      ]
+    });
+    </script>
+
+### messages.previous `String`
+
+The tooltip of the previous navigation button.
+
+#### Example - set the "previous" message
+
+    <div id="scheduler"></div>
+    <script>
+    $("#scheduler").kendoScheduler({
+      messages: {
+        previous: "Previous"
       },
       date: new Date("2013/6/6"),
       dataSource: [
@@ -4791,7 +4839,7 @@ Overrides the [date](#configuration-group.date) option of the scheduler.
         }
       ],
       group: {
-        resources: ["Rooms"]       
+        resources: ["Rooms"]
       },
       dataSource: [
         {
