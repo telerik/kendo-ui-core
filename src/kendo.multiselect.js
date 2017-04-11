@@ -394,9 +394,10 @@ var __meta__ = { // jshint ignore:line
                 that._removeTag($(tag));
             });
 
-            that.input.val(that.options.placeholder || "");
+            that.input.val("");
             that._search();
             that.trigger("change");
+            that.focus();
         },
 
         _editable: function(options) {
