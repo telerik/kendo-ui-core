@@ -200,8 +200,6 @@ Other articles on the Kendo UI DatePicker:
 * [Overview of the DatePicker PHP Class](/php/widgets/datepicker/overview)
 * [DatePicker JavaScript API Reference](/api/javascript/ui/datepicker)
 
-For how-to examples on the Kendo UI DatePicker widget, browse its [**How To** documentation folder]({% slug howto_select_ranges_between_datepicker %}).
-
 Articles on the Kendo UI Calendar:
 
 * [Overview of the Calendar Widget]({% slug overview_kendoui_calendar_widget %})

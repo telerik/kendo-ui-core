@@ -8,13 +8,15 @@ position: 1
 
 # RangeSlider Overview
 
-The [Kendo UI RangeSlider widget](http://demos.telerik.com/kendo-ui/slider/events) displays a range of values and allows you to select ranges of values. Unlike the HTML5 range input, the RangeSlider presents a consistent experience across browsers and provides a rich API and event model.
+The [Kendo UI RangeSlider widget](http://demos.telerik.com/kendo-ui/slider/events) displays a range of values and allows you to select ranges of values.
+
+Unlike the HTML5 range input, the RangeSlider enables the consistent experience across browsers and provides a rich API and event model.
 
 ## Getting Started
 
 ### Create the RangeSlider
 
-Create the RangeSlider by using two HTML `<input>` elements in a `<div>` one as demonstrated in the example below.
+To create the RangeSlider, use two HTML `<input>` elements in a `<div>` one.
 
 ###### Example
 
@@ -26,7 +28,7 @@ Create the RangeSlider by using two HTML `<input>` elements in a `<div>` one as 
 
 ### Initialize the RangeSlider
 
-Initialize the RangeSlider using a jQuery selector as demonstrated in the example below.
+To initialize the RangeSlider, use a jQuery selector.
 
 ###### Example
 
@@ -35,21 +37,21 @@ Initialize the RangeSlider using a jQuery selector as demonstrated in the exampl
     });
 
 > **Important**  
-> * As the RangeSlider should be initialized after the DOM is fully loaded, make sure you initialize it within a `$(document).ready()` statement.
-> * The RangeSlider requires two inputs to capture both ends of the value range. This benefits scenarios where JavaScript is disabled, in which case users will be presented with two inputs, still allowing them to input a valid range.
+> * Verify that you create the RangeSlider within a `$(document).ready()` statement because the widget has to be initialized after the DOM fully loads.
+> * The RangeSlider requires two `input` elements to capture both ends of the value range. This benefits scenarios where JavaScript is disabled. In such cases, users are presented with two inputs which still allow them to input a valid range.
 
 ## Customization
 
 ### Behaviors
 
-The aspects of the RangeSlider behavior can be customized by configuring its properties. These include:
+The RangeSlider provides configuration options for you to customize its behavior. The available settings are:
 
-*   Minimum and/or maximum values
-*   Horizontal or vertical orientation
-*   Small or large step
-*   Tooltip format/placement
+* Minimum and/or maximum values
+* Horizontal or vertical orientation
+* Small or large step
+* Tooltip format/placement
 
-The example below demonstrates how to customize the RangeSlider behaviors by configuring its properties.
+The following example demonstrates how to customize the RangeSlider behaviors by configuring its properties.
 
 ###### Example
 
@@ -65,9 +67,7 @@ The example below demonstrates how to customize the RangeSlider behaviors by con
 
 ### Existing Instances
 
-Make a reference to an existing RangeSlider instance via the [`jQuery.data()`](http://api.jquery.com/jQuery.data/). Once a reference has been established, you can use the API to control its behavior.
-
-The example below demonstrates how to access an existing RangeSlider instance.
+To reference to an existing RangeSlider instance, use the [`jQuery.data()`](http://api.jquery.com/jQuery.data/) method. Once a reference has been established, use the API to control its behavior.
 
 ###### Example
 
@@ -75,6 +75,6 @@ The example below demonstrates how to access an existing RangeSlider instance.
 
 ## See Also
 
-Other articles on Kendo UI RangeSlider:
+Other articles on the Kendo UI RangeSlider:
 
 * [RangeSlider JavaScript API Reference](/api/javascript/ui/rangeslider)

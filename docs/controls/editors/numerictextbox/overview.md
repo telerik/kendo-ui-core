@@ -110,7 +110,7 @@ You can restrict the value of the NumericTextBox to a specific range by using ei
 - Restrict the input value between a specific [`min`](/api/javascript/ui/numerictextbox#configuration-min) and [`max`](/api/javascript/ui/numerictextbox#configuration-max) range. The typed value gets modified to fit the range on `blur`.
 - Use a custom Kendo UI Validator rule to restrict the input value. The invalid value keeps unchanged and the user is notified for the incorrect input with a friendly error message.
 
-    For more details, refer to the article on [custom validation rules]({% slug overview_kendoui_validator_widget %}#custom-rules-for-validation) of the Validator.
+    For more details, refer to the article on the [custom validation rules]({% slug overview_kendoui_validator_widget %}#custom-rules-for-validation) of the Validator.
 
     To see the suggested implementation in action, navigate to the online demo on [range validation](http://demos.telerik.com/kendo-ui/numerictextbox/validation).
 
@@ -153,7 +153,7 @@ To render a numeric software keyboard, use either of the following workarounds:
 <!--*-->
 ## See Also
 
-Other articles and how-to examples on Kendo UI NumericTextBox:
+Other articles and how-to examples on the Kendo UI NumericTextBox:
 
 * [How to Add Title Attribute]({% slug howto_add_title_attribute_numerictextbox %})
 * [How to Change Text Color]({% slug howto_change_text_color_numerictextbox %})

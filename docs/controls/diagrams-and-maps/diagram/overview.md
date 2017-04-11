@@ -190,7 +190,7 @@ The following example demonstrates how to reproduce the same diagram with ellips
 
 ## See Also
 
-Other articles and how-to examples on Kendo UI Diagram:
+Other articles and how-to examples on the Kendo UI Diagram:
 
 * [Overview of the ASP.NET MVC HtmlHelper Extension for the Diagram Widget](/aspnet-mvc/helpers/diagram/overview)
 * [Overview of the Diagram JSP Tag]({% slug overview_diagram_uiforjsp %})

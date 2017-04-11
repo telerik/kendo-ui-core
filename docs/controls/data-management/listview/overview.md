@@ -92,7 +92,7 @@ To enable paging, instantiate a separate pager control and bind it to the same D
 
 ## See Also
 
-Other articles on Kendo UI ListView and how-to examples:
+Other articles and how-to examples on the Kendo UI ListView:
 
 * [Walkthrough]({% slug basic_usage_kendoui_listview_widget %})
 * [How to Reorder Using Drag-and-Drop and Kendo UI Touch]({% slug howto_reorder_using_draganddrop_kendouitouch_listview %})

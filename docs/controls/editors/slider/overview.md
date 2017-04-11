@@ -8,13 +8,15 @@ position: 1
 
 # Slider Overview
 
-The [Kendo UI Slider widget](http://demos.telerik.com/kendo-ui/slider) provides a rich input for selecting numeric values. Unlike the HTML5 range input, the Slider provides a consistent experience across browsers and delivers a rich API and event model.
+The [Kendo UI Slider widget](http://demos.telerik.com/kendo-ui/slider) provides a rich input for selecting numeric values.
+
+Unlike the HTML5 range input, the Slider enables the consistent experience across browsers and delivers rich API calls and event models.
 
 ## Getting Started
 
 ### Create the Slider
 
-Create the Slider by using an HTML `<input>` element as demonstrated in the example below.
+To create the Slider, use an HTML `<input>` element.
 
 ###### Example
 
@@ -22,7 +24,7 @@ Create the Slider by using an HTML `<input>` element as demonstrated in the exam
 
 ### Initialize the Slider
 
-Initialize the Slider using a jQuery selector as demonstrated in the example below.
+To initialize the Slider, use a jQuery selector.
 
 ###### Example
 
@@ -32,20 +34,20 @@ Initialize the Slider using a jQuery selector as demonstrated in the example bel
 
 > **Important**  
 >
-> As the Slider should be initialized after the DOM is fully loaded, make sure you initialize it within a `$(document).ready()` statement.
+> Verify that you create the Slider within a `$(document).ready()` statement because the widget has to be initialized after the DOM fully loads.
 
 ## Customization
 
 ### Behaviors
 
-The aspects of the Slider behavior can be customized by configuring its properties. These include:
+The Slider provides configuration options for you to customize its behavior. The available settings are:
 
-*   Minimum and/or maximum values
-*   Horizontal or vertical orientation
-*   Small or large step
-*   Tooltip format/placement
+* Minimum and/or maximum values
+* Horizontal or vertical orientation
+* Small or large step
+* Tooltip format/placement
 
-The example below demonstrates how to customize the Slider behaviors by configuring its properties.
+The following example demonstrates how to customize the Slider behaviors by configuring its properties.
 
 ###### Example
 
@@ -61,9 +63,7 @@ The example below demonstrates how to customize the Slider behaviors by configur
 
 ### Existing Instances
 
-Make a reference to an existing Slider instance via the [`jQuery.data()`](http://api.jquery.com/jQuery.data/). Once a reference has been established, you can use the API to control its behavior.
-
-The example below demonstrates how to access an existing Slider instance.
+To reference an existing Slider instance, use the [`jQuery.data()`](http://api.jquery.com/jQuery.data/) method. Once a reference has been established, use the API to control its behavior.
 
 ###### Example
 
@@ -71,9 +71,9 @@ The example below demonstrates how to access an existing Slider instance.
 
 ## Keyboard Navigation
 
-Kendo UI Slider draghandles are able to receive focus via tabbing. When focused in this way, the respective draghandle is displayed with its active style and the following keys and behaviors are supported:
+The user can focus the drag-handles of the Slider through tabbing. When focused in this way, the respective drag-handle renders with its active style and the following keys and supports the following keyboard shortcuts:
 
-| SHORTCUT						| DESCRIPTION				                         |
+| SHORTCUT						          | DESCRIPTION				                                 |
 |:---                           |:---                                                |
 | Left/Down `Arrow` key         | Increments the value by a `smallStep` amount       |
 | Right/Up `Arrow` key          | Decrements the value by a `smallStep` amount       |
@@ -84,11 +84,11 @@ Kendo UI Slider draghandles are able to receive focus via tabbing. When focused 
 
 > **Important**
 >
-> In right-to-left (RTL) mode the behavior of the left and right `Arrow` keys is reversed.
+> In the right-to-left (RTL) mode, the behavior of the left and right `Arrow` keys is reversed.
 
 ## See Also
 
-Other articles on Kendo UI Slider:
+Other articles on the Kendo UI Slider:
 
 * [Overview of the ASP.NET MVC HtmlHelper Extension for the Slider Widget](/aspnet-mvc/helpers/slider/overview)
 * [Overview of the Slider JSP Tag]({% slug overview_slider_uiforjsp %})

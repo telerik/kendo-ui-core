@@ -269,7 +269,7 @@ The following example demonstrates the `connectionsDataSource model` definition.
 
 ## See Also
 
-Other articles on Kendo UI Diagram:
+Other articles on the Kendo UI Diagram:
 
 * [Overview of the Diagram Widget]({% slug overview_kendoui_diagram_widget %})
 * [Diagram JavaScript API Reference](/api/javascript/dataviz/ui/diagram)
