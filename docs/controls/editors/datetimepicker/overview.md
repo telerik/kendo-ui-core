@@ -41,7 +41,7 @@ The DateTimePicker provides many configuration options that can be set during in
 * Navigation depth (i.e., define the last view to which the user can navigate)
 * Interval definition between predefined values in the time drop-down list
 
-The first day of the week in the Calendar view depends on the applied [culture](/framework/globalization/definecultureinfo).
+The first day of the week in the Calendar view depends on the applied [culture]({% slug culture_definition_kendoui_globalization %}).
 
 ### Selected, Min, and Max Datetime
 

@@ -35,7 +35,7 @@ The Calendar provides many configuration options that can be set during initiali
 *   Day template
 *   Footer template
 
-The first day of the week depends on the applied [culture](/framework/globalization/definecultureinfo).
+The first day of the week depends on the applied [culture]({% slug culture_definition_kendoui_globalization %}).
 
 ### Selected, Min, and Max Dates
 

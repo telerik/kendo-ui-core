@@ -40,7 +40,7 @@ The DatePicker provides configuration options that can be set during initializat
 * Start view
 * Navigation depth (the last view to which the user can navigate)
 
-The first day of the week in the Calendar view depends on the applied [culture](/framework/globalization/definecultureinfo).
+The first day of the week in the Calendar view depends on the applied [culture]({% slug culture_definition_kendoui_globalization %}).
 
 ### Selected, Min, and Max Dates
 
