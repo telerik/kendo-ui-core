@@ -8,7 +8,9 @@ position: 3
 
 # Date Formatting
 
-The purpose of date formatting is to convert the `Date` object to a human readable string by using the culture's specific settings. The [`kendo.format`](/api/javascript/kendo#format) and [`kendo.toString`](/api/javascript/kendo#tostring) methods support standard and custom date formats.
+The purpose of date formatting is to convert the `Date` object to a human readable string by using the culture-specific settings.
+
+The [`kendo.format`](/api/javascript/kendo#format) and [`kendo.toString`](/api/javascript/kendo#tostring) methods support standard and custom date formats.
 
 ## Types of Date Formats
 

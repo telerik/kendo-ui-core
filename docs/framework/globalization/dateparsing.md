@@ -8,7 +8,7 @@ position: 4
 
 # Date Parsing
 
-Kendo UI exposes methods which convert a specified string to a [`Date`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date) object, using the culture-specific settings.
+Kendo UI exposes methods which convert a specified string to a [`Date`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date) object by using the culture-specific settings.
 
 ## Settings
 
