@@ -30,7 +30,7 @@ The ComboBox looks and operates consistently regardless of the initialization ty
 
 #### Use option Tags of Existing select Elements
 
-The example below demonstrates how to initialize the ComboBox from an existing `<select>` element with defined data items.
+The following example demonstrates how to initialize the ComboBox from an existing `<select>` element with defined data items.
 
 ###### Example
 
@@ -52,7 +52,7 @@ Bind the ComboBox to local data arrays through the [DataSource component]({% slu
 
 Local arrays are appropriate for limited value options.
 
-The example below demonstrates how to initialize the ComboBox by binding it to local data arrays.
+The following example demonstrates how to initialize the ComboBox by binding it to local data arrays.
 
 ###### Example
 
@@ -77,7 +77,7 @@ Bind the ComboBox to remote data arrays through the [DataSource component]({% sl
 
 Remote data binding is appropriate for larger data sets, so that items are loaded on demand when displayed. The DataSource can be used to serve data from a variety of data services, such as [XML](http://en.wikipedia.org/wiki/XML), [JSON](http://en.wikipedia.org/wiki/JSON), and [JSONP](http://en.wikipedia.org/wiki/JSONP).
 
-The example below demonstrates how to initialize the ComboBox by binding it to a remote data service.
+The following example demonstrates how to initialize the ComboBox by binding it to a remote data service.
 
 ###### Example
 
@@ -108,7 +108,7 @@ The ComboBox uses [Kendo UI templates](/framework/templates/overview) to provide
 
 ### Item Templates
 
-The example below demonstrates how to define an item template.
+The following example demonstrates how to define an item template.
 
 ###### Example
 
@@ -139,7 +139,7 @@ The example below demonstrates how to define an item template.
 
 ### Header Templates
 
-The ComboBox allows you to render a pop-up header. The example below demonstrates how to define a header template.
+The ComboBox allows you to render a pop-up header. The following example demonstrates how to define a header template.
 
 ###### Example
 
@@ -172,7 +172,7 @@ The ComboBox allows you to render a pop-up header. The example below demonstrate
 
 The ComboBox allows you to render a pop-up footer. The footer is re-rendered on every DataSource change. The context of the template is the widget itself.
 
-The example below demonstrates how to define a footer template.
+The following example demonstrates how to define a footer template.
 
 ###### Example
 
@@ -205,7 +205,7 @@ The example below demonstrates how to define a footer template.
 
 The ComboBox widget displays `noDataTemplate` in the popup when the data source is empty.
 
-The example below demonstrates how to define a `noDataTemplate` template.
+The following example demonstrates how to define a `noDataTemplate` template.
 
 > **Important**
 >
