@@ -7,7 +7,7 @@ slug: howto_change_text_color_numerictextbox
 
 # Change Text Color
 
-The example below demonstrates how to change the color of Kendo UI NumericTextBox value.
+The following example demonstrates how to change the color of a NumericTextBox value.
 
 ###### Example
 
@@ -27,8 +27,6 @@ $(function() {
 ```
 
 ## See Also
-
-Other articles on the Kendo UI NumericTextBox:
 
 * [NumericTextBox JavaScript API Reference](/api/javascript/ui/numerictextbox)
 * [How to Persist Old Value]({% slug howto_persist_old_value_numerictextbox %})
