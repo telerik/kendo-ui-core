@@ -1,7 +1,7 @@
 ---
 title: Change DatePicker Value from Another DatePicker
 page_title: Change DatePicker Value from Another DatePicker | Kendo UI Grid
-description: "Learn how to change a DatePicker value from another DatePicker in the Grid"
+description: "Learn how to change a DatePicker value from another DatePicker in the Grid."
 slug: howto_change_datepicker_value_from_another_datepicker_grid
 ---
 
@@ -9,7 +9,7 @@ slug: howto_change_datepicker_value_from_another_datepicker_grid
 
 The following example demonstrates how to change a DatePicker value based on the modified value of another DatePicker by using the inline edit mode of the Grid.
 
-By selecting a date in the first DatePicker, the next date will be programmatically set in the second DatePicker.
+By selecting a date in the first DatePicker, the next date is programmatically set in the second DatePicker.
 
 ###### Example
 
