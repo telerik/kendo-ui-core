@@ -125,4 +125,4 @@ Other articles on the Kendo UI MaskedTextBox:
 * [How to Customize Masks through MVVM Binding]({% slug howto_customize_masks_through_mvvmbinding_mvvm_maskedtextbox %})
 * [How to Show Custom Placeholder on Blur]({% slug howto_show_custom_placeholderon_blur_maskedtextbox %})
 
-For more runnable examples on the Kendo UI MaskedTextBox, browse its [**How To** documentation folder]({% slug howto_use_custommvvm_bindingto_setmodel_value_maskedtextbox %}).
+For more runnable examples on the Kendo UI MaskedTextBox, browse its **How To** documentation folder.

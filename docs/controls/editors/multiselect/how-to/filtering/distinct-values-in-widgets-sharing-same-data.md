@@ -55,8 +55,6 @@ The following example demonstrates how to filter the values of 2 Kendo UI widget
 
 ## See Also
 
-Other articles on the Kendo UI MultiSelect:
-
 * [MultiSelect JavaScript API Reference](/api/javascript/ui/multiselect)
 * [How to Cascade from DropDownList]({% slug howto_cascade_froma_dropdownlist_multiselect %})
 * [How to Preselect Items Using MVVM Binding]({% slug howto_preselect_items_byusing_mvvm_binding_multiselect %})
@@ -65,4 +63,4 @@ Other articles on the Kendo UI MultiSelect:
 * [How to Use MultiSelect with Bootstrap Modal Window]({% slug howto_use_multiselect_with_bootstrap_modal_window_multiselect %})
 * [How to Wire Blur Event of the Filter Input]({% slug howto_wire_blur_event_ofthe_filtеr_input_multiselect %})
 
-For more runnable examples on the Kendo UI MultiSelect, browse its [**How To** documentation folder]({% slug howto_preselect_itemson_load_angular_multiselect %}).
+For more runnable examples on the Kendo UI MultiSelect, browse its [**How To** documentation folder]({% slug howto_bindobjectstongmodel_multiselect %}).
