@@ -30,6 +30,9 @@ navigation:
      "troubleshoot":
         title: "Troubleshooting"
         position: 9
+     "theme-builder":
+        title: "Theme Builder"
+        position: 9
 
 
 
