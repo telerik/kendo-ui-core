@@ -3,6 +3,7 @@ title: SASS-Based Themes
 page_title: SASS-Based Themes | Kendo UI Styles and Appearance
 description: "Learn how to apply CSS classes to the Kendo UI desktop widgets to change their appearance and further customize their style."
 slug: sassbasedthemes_kendoui
+previous_url: /themebuilder_overview_kendouistyling
 position: 2
 ---
 
@@ -588,6 +589,59 @@ Outputs a module once, no matter how many times it is included.
 ## Contribution
 
 To contribute to the development of the Kendo UI **Default v2** theme, check out the [telerik/kendo-theme-default](https://github.com/telerik/kendo-theme-default) GitHub repository it is stored in.
+
+## Theme Builder
+
+**Progress Sass Theme Builder** for Kendo UI is an Angular 2 Web application that provides you with the ability to create new or customize existing themes. It can be found at [http://themebuilder.telerik.com/kendo-ui](http://themebuilder.telerik.com/kendo-ui).
+
+Just with a few clicks you can create your own custom theme with the same look and feel for all widgets in the suite. The tool gives you complete control over the elements of the control’s skin along with automatic updates to its composite widgets. Once the skin is created and the new Theme looks as you expected in the Preview pane you can download it with one click and integrate it in your project.  
+
+
+![Theme Builder Overview](images/theme-builder-overview.png)
+
+### Create new Theme
+
+First, you need to select the **Start Theming** option. Then select one of the existing Skins to use as a base. The currently available built-in skins based on which you can create your own theme for Telerik UI widgets are **Default** and **Bootstrap**. 
+
+**Figure1**: Demonstrates the first steps for creating a new Theme.
+
+![Theme Builder Create and Download 1](images/theme-builder-create-and-download-1.png)
+
+### Customization
+
+Applying the desired colors is pretty straightforward. The **Theme Builder** provides Color pickers for customizing the appearance of the widgets and the changes can be observed on the fly. While you have the possibility to manually alter each element of the widgets, we provide you with the ability to use predefined swatches (see Figure3 #1).
+
+Some of the widgets have composite structures and include other child widgets to provide the rich functionality they offer, e.g. Grid, Scheduler. The **Sass Theme Builder** applies the selected changes automatically on such widgets, so you don't bother to customize them separately.
+
+**Figure3**: Demonstrates the functionalities available for customization.
+
+![Theme Builder Create and Download 3](images/theme-builder-create-and-download-3.png)
+
+**1. Swatches** column contains various predefined pallettes applied on all widgets on your page.
+
+**2. Theme Colors** column provides the applicable color customization options.
+
+**3. Preview of Widgets** keeps the main view of the widgets, providing you with the ability to add or remove them.
+
+**4. Download** button is used after completion to download the archive holding the generated style files. Once the button is clicked, you will be prompted with a dialog where you can name your theme.
+
+### Import
+The **Sass Theme Builder** tool enables you to upload your own theme that you have created previously. You need to select the *Import existing theme* option.
+Then, you should upload the **variables.scss**, which contains your current modifications of the customized theme. The selected widgets and style will automatically load and you can start to customize them, as described in the section above.
+
+![Themebuilder import existing theme](images/theme-builder-import-existing-theme.png)
+
+
+### Download and Apply in a Project
+
+Once you've completed the modifications and the new Theme is ready to be used in a project, you can download it as a compact archive using the Download button (#4 from the previous section).
+
+Add the new Theme folder in your application and include the CSS file (**all.css**) in the head tag of your HTML document.
+> **Important**  
+>
+> The exported css file contains all needed style, hence, you should avoid the reference to **kendo.common.min.css** and **kendo.rtl.min.css files**.
+ 
+
 
 ## See Also
 

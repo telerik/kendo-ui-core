@@ -5,6 +5,7 @@ description: "Learn how to modify the Kendo UI themes so that they match the loo
 previous_url: /themebuilder
 slug: themebuilder_overview_kendouistyling
 position: 4
+published: False
 ---
 
 # ThemeBuilder Overview
