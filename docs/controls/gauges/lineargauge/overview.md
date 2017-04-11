@@ -8,13 +8,15 @@ position: 1
 
 # Linear Gauge Overview
 
-The [Kendo UI Linear Gauge widget](http://demos.telerik.com/kendo-ui/linear-gauge/index) is used to let users quickly understand where a value lies in a certain range. All graphics are rendered on the client using [Scalable Vector Graphics (SVG)](https://en.wikipedia.org/wiki/Scalable_Vector_Graphics).
+The [Kendo UI Linear Gauge widget](http://demos.telerik.com/kendo-ui/linear-gauge/index) enables users to quickly understand in what certain range a value lies.
+
+All graphics render on the client by using the [Scalable Vector Graphics (SVG)](https://en.wikipedia.org/wiki/Scalable_Vector_Graphics) format.
 
 ## Getting Started
 
 ### Create the Linear Gauge
 
-Create the Kendo UI Linear Gauge widget by using a simple `div` and optionally set a height and width via CSS.
+To create the Linear Gauge, use a `div` element and optionally set a height and width by using CSS.
 
 ###### Example
 
@@ -22,7 +24,7 @@ Create the Kendo UI Linear Gauge widget by using a simple `div` and optionally s
 
 ### Initialize the Linear Gauge
 
-Initialize the Linear Gauge with its default configuration as demonstrated in the example below.
+To initialize the Linear Gauge with its default configuration, use the following example.
 
 ###### Example
 
@@ -35,7 +37,7 @@ Initialize the Linear Gauge with its default configuration as demonstrated in th
 
 ### Create Horizontal Linear Gauge with Value and Min Value
 
-The example below demonstrates how to create a horizontal Linear Gauge with a value of 20 and a minimum value of 10.
+The following example demonstrates how to create a horizontal Linear Gauge with a value of 20 and a minimum value of 10.
 
 ###### Example
 
@@ -49,11 +51,11 @@ The example below demonstrates how to create a horizontal Linear Gauge with a va
             }
         });
 
-For a detailed list with all configuration options of the Kendo UI Linear Gauge, refer to the [Linear Gauge JavaScript API](/api/javascript/dataviz/ui/lineargauge).
+For a detailed list with all configuration options of the Kendo UI Linear Gauge, refer to its [JavaScript API](/api/javascript/dataviz/ui/lineargauge).
 
 ## See Also
 
-Other articles on Kendo UI Linear Gauge:
+Other articles on the Kendo UI Linear Gauge:
 
 * [Overview of the ASP.NET MVC HtmlHelper Extension for the Linear Gauge Widget](/aspnet-mvc/helpers/lineargauge/overview)
 * [Overview of the Linear Gauge JSP Tag]({% slug overview_lineargauge_uiforjsp %})
