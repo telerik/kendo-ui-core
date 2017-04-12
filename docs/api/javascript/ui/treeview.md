@@ -198,7 +198,7 @@ If set to `true` the widget will auto-scroll the containing element when the mou
     <script>
       var dataSource = new kendo.data.HierarchicalDataSource({
         data: [
-          { text: "Apple" }, 
+          { text: "Apple" },
           { text: "Banana" },
           { text: "Orange" },
           { text: "Tomato" },
@@ -215,7 +215,7 @@ If set to `true` the widget will auto-scroll the containing element when the mou
       });
     </script>
 
-    <style> 
+    <style>
       .k-widget.k-treeview {
         overflow: hidden;
       }
@@ -1044,6 +1044,25 @@ The text that is being searched for.
     console.log(barElement);
     </script>
 
+### focus
+
+Sets the focus to the TreeView
+
+#### Example
+
+    <div id="treeview"></div>
+    <script>
+    $("#treeview").kendoTreeView({
+      dataSource: [
+        { text: "foo" },
+        { text: "bar" },
+      ]
+    });
+
+    var treeview = $("#treeview").data("kendoTreeView");
+    treeview.focus();
+    </script>
+
 ### insertAfter
 
 Inserts a node after a specified node.
@@ -1541,7 +1560,7 @@ The node whose children have been changed. If the changes have occurred on the r
     });
     var treeview = $("#treeview").data("kendoTreeView");
     treeview.bind("dataBound", tree_dataBound);
-	
+
 	treeview.setDataSource(new kendo.data.HierarchicalDataSource({
       data: [
         { text: "bar", items: [
@@ -1611,8 +1630,8 @@ Pre-defined status classes are:
         - Indicates an invalid operation. Using this class will automatically
           make the drop operation invalid, so there will be no need to call
           `setValid(false)` in the `drop` event.
-		  
-> Please note that from version 2016.3.914 the naming convention for pre-defined status classes is k-i-className. 
+
+> Please note that from version 2016.3.914 the naming convention for pre-defined status classes is k-i-className.
 
 > Note that status classes are returned without the `k-` prefix by `e.statusClass`, but this prefix is required when setting a predefined status class via `e.setStatusClass`. A prefix is not required if setting a custom status CSS class.
 
