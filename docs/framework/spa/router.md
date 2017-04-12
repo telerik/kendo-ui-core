@@ -179,7 +179,7 @@ The example below demonstrates how to intercept the navigation.
     <script>
     var router = new kendo.Router({
         change: function(e) {
-            console.log(url);
+            console.log(e.url);
             e.preventDefault();
         }
     });
