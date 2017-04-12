@@ -28,11 +28,12 @@ To create a new theme:
     ![Theme Builder Create and Download 1](images/theme-builder-create-and-download-1.png)
 
 1. Scroll down and select the controls you want to customize.
-1. (Optional) After the initial selection, add or remove elements for customization.
 
     **Figure 3: Selecting the widgets for customization**
 
     ![Theme Builder Create and Download 2](images/theme-builder-create-and-download-2.png)
+
+1. (Optional) After the initial selection, add or remove elements for customization.
 
 To deliver the full set of their functionalities, some Kendo UI controls, such as the Grid, have composite structures and include child components. In such cases, the Theme Builder automatically applies the theme modification to the child components and you do not need to customize each of them separately.
 
@@ -80,7 +81,7 @@ When you complete the modifications and the theme is ready to be used:
 
 > **Important**  
 >
-> You have to reference or bundle only the `all.css` file because the exported CSS file contains all styles you need.
+> Reference or bundle only the `all.css` file because the exported CSS file contains all styles you need.
 
 ## See Also
 
