@@ -2,8 +2,8 @@
 title: SASS-Based Themes
 page_title: SASS-Based Themes | Kendo UI Styles and Appearance
 description: "Learn how to apply CSS classes to the Kendo UI desktop widgets to change their appearance and further customize their style."
-slug: sassbasedthemes_kendoui
 previous_url: /themebuilder_overview_kendouistyling
+slug: sassbasedthemes_kendoui
 position: 2
 ---
 
@@ -44,7 +44,8 @@ To get a complete theme by using its pre-built CSS files, apply either of the fo
 
 The Kendo UI SASS-based themes are located on the Progress NPM registry:
 
-* **Default v2** theme&mdash;Available as @progress/kendo-theme-default.
+* **Kendo UI Default Theme**&mdash;Available as @progress/kendo-theme-default.
+* **Kendo UI Bootstrap Theme**&mdash;Available as @progress/kendo-theme-bootstrap.
 
 To access the Progress NPM registry, you need an active Telerik account with an active commercial license. For more information on how to access the NPM registry, refer to the [installation instructions for Kendo UI Professional]({% slug kendoui_npm_packages_kendoui_installation %}#kendo-ui-professional).
 
@@ -113,7 +114,7 @@ The following list describes the theme variables available for adjustment in the
 <tr>
 <td>$font-size</td>
 <td>
-    
+
     14px
 </td>
 <td>Base font size across all components.
@@ -122,7 +123,7 @@ The following list describes the theme variables available for adjustment in the
 <tr>
 <td>$font-family</td>
 <td>
-    
+
     inherit
 </td>
 <td>Font family across all components.
@@ -131,7 +132,7 @@ The following list describes the theme variables available for adjustment in the
 <tr>
 <td>$font-family-monospace</td>
 <td>
-    
+
     Consolas, "Ubuntu Mono", "Lucida Console", "Courier New", monospace
 </td>
 <td>Font family for monospaced text. Used for styling the code.
@@ -140,7 +141,7 @@ The following list describes the theme variables available for adjustment in the
 <tr>
 <td>$line-height</td>
 <td>
-    
+
     (20 / 14)
 </td>
 <td>Line height used along with $font-size.
@@ -149,7 +150,7 @@ The following list describes the theme variables available for adjustment in the
 <tr>
 <td>$border-radius</td>
 <td>
-    
+
     2px
 </td>
 <td>Border radius for all components.
@@ -196,7 +197,7 @@ Used to provide contrast between the background and foreground colors.
 <tr>
 <td>$base-border</td>
 <td>
-    
+
     rgba( black, .08 )
 </td>
 <td>The border color of the components' chrome area.
@@ -205,7 +206,7 @@ Used to provide contrast between the background and foreground colors.
 <tr>
 <td>$base-gradient</td>
 <td>
-    
+
     $base-bg, darken( $base-bg, 2% )
 </td>
 <td>The gradient background of the components' chrome area.
@@ -232,7 +233,7 @@ Used to provide contrast between the background and foreground colors.
 <tr>
 <td>$hovered-border</td>
 <td>
-    
+
     rgba( black, .15 )
 </td>
 <td>The border color of hovered items.
@@ -241,7 +242,7 @@ Used to provide contrast between the background and foreground colors.
 <tr>
 <td>$hovered-gradient</td>
 <td>
-    
+
     $hovered-bg, darken( $hovered-bg, 2% )
 </td>
 <td>The gradient background of hovered items.
@@ -250,7 +251,7 @@ Used to provide contrast between the background and foreground colors.
 <tr>
 <td>$selected-text</td>
 <td>
-    
+
     $accent-contrast
 </td>
 <td>The text color of selected items.
@@ -259,7 +260,7 @@ Used to provide contrast between the background and foreground colors.
 <tr>
 <td>$selected-bg</td>
 <td>
-    
+
     $accent
 </td>
 <td>The background of selected items.
@@ -268,7 +269,7 @@ Used to provide contrast between the background and foreground colors.
 <tr>
 <td>$selected-border</td>
 <td>
-    
+
     rgba( black, .1 )
 </td>
 <td>The border color of selected items.
@@ -277,7 +278,7 @@ Used to provide contrast between the background and foreground colors.
 <tr>
 <td>$selected-gradient</td>
 <td>
-    
+
     none
 </td>
 <td>The gradient background of selected items.
@@ -321,7 +322,6 @@ Used to provide contrast between the background and foreground colors.
 </tr>
 </table>
 
-
 #### Buttons
 
 <table class="theme-variables">
@@ -338,7 +338,7 @@ Used to provide contrast between the background and foreground colors.
 <tr>
 <td>$button-text</td>
 <td>
-    
+
     $base-text
 </td>
 <td>The text color of the buttons.
@@ -347,7 +347,7 @@ Used to provide contrast between the background and foreground colors.
 <tr>
 <td>$button-bg</td>
 <td>
-    
+
     $base-bg
 </td>
 <td>The background of the buttons.
@@ -356,7 +356,7 @@ Used to provide contrast between the background and foreground colors.
 <tr>
 <td>$button-border</td>
 <td>
-    
+
     $base-border
 </td>
 <td>The border color of the buttons.
@@ -365,7 +365,7 @@ Used to provide contrast between the background and foreground colors.
 <tr>
 <td>$button-gradient</td>
 <td>
-    
+
     $base-gradient
 </td>
 <td>The background gradient of the buttons.
@@ -374,7 +374,7 @@ Used to provide contrast between the background and foreground colors.
 <tr>
 <td>$button-hovered-text</td>
 <td>
-    
+
     $hovered-text
 </td>
 <td>The text color of hovered buttons.
@@ -383,7 +383,7 @@ Used to provide contrast between the background and foreground colors.
 <tr>
 <td>$button-hovered-bg</td>
 <td>
-    
+
     $hovered-bg
 </td>
 <td>The background of hovered buttons.
@@ -392,7 +392,7 @@ Used to provide contrast between the background and foreground colors.
 <tr>
 <td>$button-hovered-border</td>
 <td>
-    
+
     $hovered-border
 </td>
 <td>The border color of hovered buttons.
@@ -401,7 +401,7 @@ Used to provide contrast between the background and foreground colors.
 <tr>
 <td>$button-hovered-gradient</td>
 <td>
-    
+
     $hovered-gradient
 </td>
 <td>The background gradient of hovered buttons.
@@ -410,7 +410,7 @@ Used to provide contrast between the background and foreground colors.
 <tr>
 <td>$button-pressed-text</td>
 <td>
-    
+
     $selected-text
 </td>
 <td>The text color of pressed buttons.
@@ -419,7 +419,7 @@ Used to provide contrast between the background and foreground colors.
 <tr>
 <td>$button-pressed-bg</td>
 <td>
-    
+
     $selected-bg
 </td>
 <td>The background color of pressed buttons.
@@ -428,7 +428,7 @@ Used to provide contrast between the background and foreground colors.
 <tr>
 <td>$button-pressed-border</td>
 <td>
-    
+
     $selected-border
 </td>
 <td>The border color of pressed buttons.
@@ -437,7 +437,7 @@ Used to provide contrast between the background and foreground colors.
 <tr>
 <td>$button-pressed-gradient</td>
 <td>
-    
+
     none
 </td>
 <td>The background gradient of pressed buttons.
@@ -446,14 +446,13 @@ Used to provide contrast between the background and foreground colors.
 <tr>
 <td>$button-focused-shadow</td>
 <td>
-    
+
     0 3px 4px 0 rgba(0, 0, 0, .06)
 </td>
 <td>The shadow of focused buttons.
 </td>
 </tr>
 </table>
-
 
 #### Charts
 
@@ -483,7 +482,7 @@ Used to provide contrast between the background and foreground colors.
     <span class="color-preview" style="background-color: #ffd246"></span>
     #ffd246
 </td>
-<td>The clor of the second series.
+<td>The color of the second series.
 </td>
 </tr>
 <tr>
@@ -525,7 +524,7 @@ Used to provide contrast between the background and foreground colors.
 <tr>
 <td>$chart-major-lines</td>
 <td>
-    
+
     rgba(0, 0, 0, .08)
 </td>
 <td>The color of the Chart grid lines (major).
@@ -534,14 +533,13 @@ Used to provide contrast between the background and foreground colors.
 <tr>
 <td>$chart-minor-lines</td>
 <td>
-    
+
     rgba(0, 0, 0, .04)
 </td>
 <td>The color of the Chart grid lines (minor).
 </td>
 </tr>
 </table>
-
 
 #### Toolbar
 
@@ -559,7 +557,7 @@ Used to provide contrast between the background and foreground colors.
 <tr>
 <td>$toolbar-padding-x</td>
 <td>
-    
+
     $padding-x
 </td>
 <td>The horizontal padding of the container.
@@ -568,7 +566,7 @@ Used to provide contrast between the background and foreground colors.
 <tr>
 <td>$toolbar-padding-y</td>
 <td>
-    
+
     $padding-x
 </td>
 <td>The vertical padding of the container.
@@ -580,77 +578,92 @@ Used to provide contrast between the background and foreground colors.
 ### Mixins
 
 #### `exports`
+
 Outputs a module once, no matter how many times it is included.
 
-
 ##### Parameters
-- name : `String` - Name of exported module.
+- `name: String`&mdash;The name of the exported module.
 
-## Contribution
+### Contribution
 
-To contribute to the development of the Kendo UI **Default v2** theme, check out the [telerik/kendo-theme-default](https://github.com/telerik/kendo-theme-default) GitHub repository it is stored in.
+To contribute to the development of the Kendo UI Default Theme, refer to the [telerik/kendo-theme-default](https://github.com/telerik/kendo-theme-default) GitHub repository it is stored in.
 
-## Theme Builder
+## Sass Theme Builder
 
-**Progress Sass Theme Builder** for Kendo UI is an Angular 2 Web application that provides you with the ability to create new or customize existing themes. It can be found at [http://themebuilder.telerik.com/kendo-ui](http://themebuilder.telerik.com/kendo-ui).
+[**Progress Sass Theme Builder**](http://themebuilder.telerik.com/aspnet-mvc) for Kendo UI is an Angular web application that enables you to create new or customize existing themes.
 
-Just with a few clicks you can create your own custom theme with the same look and feel for all widgets in the suite. The tool gives you complete control over the elements of the control’s skin along with automatic updates to its composite widgets. Once the skin is created and the new Theme looks as you expected in the Preview pane you can download it with one click and integrate it in your project.  
+The tool renders the same look and feel as the look and feel of all other components in the suite. It also delivers full control over the skin elements of each component and automatically updates its composite units. After you create the skin and achieve the desired look of the theme, the Sass Theme Builder enables you to download and integrate it in your project.  
 
+**Figure 1: A preview of the Sass Theme Builder**
 
 ![Theme Builder Overview](images/theme-builder-overview.png)
 
-### Create new Theme
+### Creating New Themes
 
-First, you need to select the **Start Theming** option. Then select one of the existing Skins to use as a base. The currently available built-in skins based on which you can create your own theme for Telerik UI widgets are **Default** and **Bootstrap**. 
+To create a new theme:
 
-**Figure1**: Demonstrates the first steps for creating a new Theme.
+1. On the initial Sass Theme Builder pane, select the **Start Theming** option.
+1. Choose one of the existing skins to use as a base. The currently available built-in skins are **Default** and **Bootsrap**.
 
-![Theme Builder Create and Download 1](images/theme-builder-create-and-download-1.png)
+    **Figure 2: Selecting a base theme**
 
-### Customization
+    ![Theme Builder Create and Download 1](images/theme-builder-create-and-download-1.png)
 
-Applying the desired colors is pretty straightforward. The **Theme Builder** provides Color pickers for customizing the appearance of the widgets and the changes can be observed on the fly. While you have the possibility to manually alter each element of the widgets, we provide you with the ability to use predefined swatches (see Figure3 #1).
+### Customizing Existing Themes
 
-Some of the widgets have composite structures and include other child widgets to provide the rich functionality they offer, e.g. Grid, Scheduler. The **Sass Theme Builder** applies the selected changes automatically on such widgets, so you don't bother to customize them separately.
+The Sass Theme Builder supports the following options for customization:
 
-**Figure3**: Demonstrates the functionalities available for customization.
+* Color pickers which customize the appearance of the components.
+* The **Apply changes instantly** option which enables you to observe the changes on the fly.
+* Manual updates of each component element.
+* Utilization of predefined color swatches.
+
+#### Functionalities for Customization
+
+To customize an existing theme, use the following Sass Theme Builder functionalities:
+
+1. **Color Swatches**&mdash;Contains predefined color palettes that you can apply to all components in your application.
+1. **Default**&mdash;Provides the applicable color customization options.
+1. **Preview Components**&mdash;Keeps the main view of the components. It reflects the customization changes you make each time you add or remove theme elements.
+1. **Download**&mdash;Downloads the archive that holds the generated style files after the customization completes. When you click the button, a dialog appears and prompts you to name your theme.
+
+**Figure 3: Available options for customization**
 
 ![Theme Builder Create and Download 3](images/theme-builder-create-and-download-3.png)
 
-**1. Swatches** column contains various predefined pallettes applied on all widgets on your page.
+#### Importing the Themes
 
-**2. Theme Colors** column provides the applicable color customization options.
+To upload an existing theme you have previously created:
 
-**3. Preview of Widgets** keeps the main view of the widgets, providing you with the ability to add or remove them.
+1. On the initial Sass Theme Builder pane, select **Import Theme**.
+1. Upload the `variables.scss` file which contains your current modifications of the customized theme. As a result, the selected components and styling elements load.
+1. Start [customizing your theme](#customizing-existing-themes).
 
-**4. Download** button is used after completion to download the archive holding the generated style files. Once the button is clicked, you will be prompted with a dialog where you can name your theme.
-
-### Import
-The **Sass Theme Builder** tool enables you to upload your own theme that you have created previously. You need to select the *Import existing theme* option.
-Then, you should upload the **variables.scss**, which contains your current modifications of the customized theme. The selected widgets and style will automatically load and you can start to customize them, as described in the section above.
+**Figure 4: Importing themes for customization**
 
 ![Themebuilder import existing theme](images/theme-builder-import-existing-theme.png)
 
+### Adding the Themes to Your Project
 
-### Download and Apply in a Project
+When you complete the modifications and the theme is ready to be used:
 
-Once you've completed the modifications and the new Theme is ready to be used in a project, you can download it as a compact archive using the Download button (#4 from the previous section).
+1. Download the theme as a compact archive by clicking the **Download** button.
+1. Add the newly created `Theme` folder to your application.
+1. Include the `all.css` file in the `head` tag of your HTML document.
 
-Add the new Theme folder in your application and include the CSS file (**all.css**) in the head tag of your HTML document.
 > **Important**  
 >
-> The exported css file contains all needed style, hence, you should avoid the reference to **kendo.common.min.css** and **kendo.rtl.min.css files**.
- 
-
+> Avoid referencing the `kendo.common.min.css` and `kendo.rtl.min.css` files because the exported CSS file contains all styles you need.
 
 ## See Also
 
 Other articles on styling, appearance, and rendering of Kendo UI widgets:
 
+* [Less ThemeBuilder Overview]({% slug themesandappearnce_kendoui_desktopwidgets %}#less-theme-builder)
 * [Responsive Web Design]({% slug responsivewebdesign_integration_kendoui %})
 * [Web Font Icons]({% slug webfonticons_kendoui_desktopwidgets %})
 * [How to Change Themes on the Client]({% slug howto_changethemes_ontheclient_styleskendoui %})
-* [ThemeBuilder Overview]({% slug themebuilder_overview_kendouistyling %})
+* [Less ThemeBuilder Overview]({% slug themesandappearnce_kendoui_desktopwidgets %}#theme-builder)
 * [Rendering Modes for Data Visualization]({% slug renderingmodesfor_datavisualization_kendouistyling %})
 * [Troubleshooting]({% slug commonissues_troubleshooting_kendouistyling %})
 * [Themes and Appearance of the Kendo UI Hybrid Widgets](/controls/hybrid/styling)
