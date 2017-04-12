@@ -501,7 +501,8 @@ body .k-datetimepicker .k-select
 .k-list-optionlabel,
 .k-popup > .k-group-header,
 .k-popup > .k-virtual-wrap > .k-group-header,
-.k-listbox .k-item
+.k-listbox .k-item,
+.k-item.k-drag-clue
 {
     padding: 1px 5px 1px 5px;
     line-height: 1.8em;
@@ -1178,7 +1179,7 @@ span.k-numerictextbox
         border-style: solid;
         box-sizing: border-box;
 
-        ul li {
+        li {
             cursor: default;
             -moz-user-select: none;
             -ms-user-select: none;
@@ -1199,11 +1200,11 @@ span.k-numerictextbox
             margin-top: -15px;
             margin-bottom: 5px;
 
-            ul li {
+            li {
             display: inline-block;
 
-                &:not(:last-child) {
-                    margin-right: 1px;
+                + li {
+                    margin-left: 1px;
                 }
             }
         }
@@ -1214,8 +1215,8 @@ span.k-numerictextbox
             float: left;
             margin-right: 5px;
 
-            ul li:not(:last-child) {
-                margin-bottom: 5px;
+            li + li {
+                margin-top: 5px;
             }
         }
 
@@ -1226,7 +1227,7 @@ span.k-numerictextbox
             float: right;
             margin-left: 5px;
 
-            ul li:not(:last-child) {
+            li:not(:last-child) {
                 margin-bottom: 5px;
             }
         }
@@ -1243,13 +1244,17 @@ span.k-numerictextbox
         .k-listbox-toolbar {
             margin-top: 5px;
 
-            ul li {
+            li {
             display: inline-block;
 
-                &:not(:last-child) {
-                    margin-right: 1px;
+                + li {
+                    margin-left: 1px;
                 }
             }
         }
+    }
+
+    .k-ghost {
+        opacity: .5;
     }
 }

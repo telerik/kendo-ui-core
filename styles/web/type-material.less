@@ -840,7 +840,8 @@ html .km-pane-wrapper .k-header
 .k-draghandle.k-state-selected:hover,
 .k-scheduler .k-scheduler-toolbar .k-state-selected,
 .k-scheduler .k-today.k-state-selected,
-.k-marquee-color
+.k-marquee-color,
+.k-drag-clue.k-state-selected
 {
     color: @selected-text-color;
     background-color: @selected-background-color;
@@ -4175,6 +4176,11 @@ div.k-scheduler-marquee:after {
     .k-list-scroller {
         border-color: @widget-border-color;
         background-color: @widget-background-color;
+    }
+
+    .k-drop-hint {
+        height: 0;
+        border-top: 1px solid @accent;
     }
 }
 

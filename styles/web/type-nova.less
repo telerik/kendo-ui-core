@@ -2453,9 +2453,21 @@ html .km-pane-wrapper .km-widget,
 
 .k-listbox {
     .k-list-scroller {
+        margin: 0;
         border-color: @widget-border-color;
         background-color: @widget-background-color;
     }
+
+    .k-drop-hint {
+        height: 0;
+        border-top: 1px solid @accent;
+    }
+}
+
+.k-item.k-state-selected.k-drag-clue {
+    box-shadow: none;
+    background-color: #e0f7fa; //.k-state-selected has transparency
+    color: @normal-text-color;
 }
 
 .k-grid-header {
