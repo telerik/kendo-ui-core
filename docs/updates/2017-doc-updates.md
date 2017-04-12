@@ -8,6 +8,25 @@ position: 1
 
 # 2017 Documentation Updates
 
+## April
+
+### Existing
+
+1. The **Overview** article on the ThemeBuilder no longer exists. The content is split between the [LESS-Based Themes]({% slug themesandappearnce_kendoui_desktopwidgets %}#less-theme-builder) and [SASS-Based Themes]({% slug sassbasedthemes_kendoui %}#sass-theme-builder) articles respectively.
+
+1. The how-to articles of the following widgets are grouped according to the functionalities each widget provides:
+
+  * AutoComplete
+  * ComboBox
+  * Diagram
+  * DropDownList
+  * Editor
+  * Map
+  * MultiSelect
+  * PivotGrid
+  * Scheduler
+  * TreeView
+
 ## January
 
 ### Existing

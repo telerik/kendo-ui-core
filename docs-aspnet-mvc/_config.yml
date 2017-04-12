@@ -21,15 +21,18 @@ navigation:
      "migration":
         title: "Migration"
         position: 6
+     "styles-and-layout":
+        title: "Styles and Appearance"
+        position: 7
      "how-to":
         title: "How To"
-        position: 7
+        position: 8
      "tutorials":
         title: "Tutorials"
-        position: 8
+        position: 9
      "troubleshoot":
         title: "Troubleshooting"
-        position: 9
+        position: 10
 
 
 
