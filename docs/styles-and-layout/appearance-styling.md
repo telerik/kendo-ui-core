@@ -2,7 +2,7 @@
 title: LESS-Based Themes
 page_title: LESS-Based Themes | Kendo UI Styles and Appearance
 description: "Learn how to define CSS classes in the Kendo UI desktop widgets to change their appearance and customize their style further."
-previous_url: /web/appearance-styling, /web/appearance-rtl, /dataviz/appearance-styling
+previous_url: /web/appearance-styling, /web/appearance-rtl, /dataviz/appearance-styling, /themebuilder.html
 slug: themesandappearnce_kendoui_desktopwidgets
 position: 1
 ---
@@ -200,7 +200,7 @@ With the 2014 Q3 release Kendo UI provides customized presentation for checkboxe
 	<input type="radio" id="radiobutton" class="k-radio">
 	<label class="k-radio-label" for="radiobutton"></label>
 
-## Custom Themes Creation
+## Creating Custom Themes
 
 Kendo UI supports a number of `.less` files, which are only used when you want to modify the Kendo UI CSS source code and create a custom theme.
 
@@ -231,21 +231,63 @@ The Kendo UI `.less` files, including the styling of the Kendo UI hybrid widgets
 >
 > Kendo UI versions before 2015.2.805 inclusive had to be built with [Telerik `LESS` fork, located on GitHub](https://github.com/telerik/less.js). This is no longer a requirement.
 
-### Customization of Themes
+### Customizaion of Themes
 
 To create a custom theme with Kendo UI, choose either of the two possible ways:
 
-1. Use the [Kendo UI ThemeBuilder](http://demos.telerik.com/kendo-ui/themebuilder/). For detailed information on how to configure its options, refer to the [ThemeBuilder overview article]({% slug themebuilder_overview_kendouistyling %}).
+1. Use the [Kendo UI ThemeBuilder](http://demos.telerik.com/kendo-ui/themebuilder/). For detailed information on how to configure its options, refer to the [section on the Less Theme Builder](#theme-builder).
 2. Modify a `.less` file to achieve a theme of your liking. To do so, choose one of the available `kendo.*.less` files depending on what you want to achieve. Copy it to your project and rename it. Change the colors and run the [`LESS` command-line compiler](http://lesscss.org/#using-less-command-line-usage) on it.   
+
+## Less Theme Builder
+
+The [Kendo UI ThemeBuilder](http://demos.telerik.com/kendo-ui/themebuilder/web.html) enables you to modify Kendo UI themes to match the look and feel of your website or application.
+
+### Modifying Themes
+
+When you customize a theme, you can either:
+
+1. Use a newly created theme, or
+1. Use the LESS output.
+
+#### Use Newly Created Themes
+
+To use newly created themes:
+
+1. Adjust the theme with the ThemeBuilder.
+1. Click **Download theme**. As a result, the following files become available:
+
+    * `kendo.custom.css`&mdash;The custom theme for most widgets. You can use this theme instead of any `kendo.[theme].css` one.
+    * `kendo.custom.json`&mdash;The custom theme for widgets that use `SVG`/`Canvas` rendering (charting widgets). Use the contents of this file to [create a custom Chart theme]({% slug howto_customizechartthemes_charts %}). Set a custom theme name by using the [`theme`](/api/javascript/dataviz/ui/chart#configuration-theme)  configuration option.
+    * `kendo.custom.less`&mdash;The [LESS](http://lesscss.org/) that includes the custom theme. Use this file when you compile the theme dynamically.
+
+> **Important**
+> * Always register the [common CSS file]({% slug themesandappearnce_kendoui_desktopwidgets %}#common-css-files) on the page, even when using Theme Builder-generated custom themes.
+> * Use the common CSS file, which corresponds to the Kendo UI theme that is used as a base for your custom theme. For example, if you have created a custom theme from
+the built-in Material theme, then register `kendo.common-material.min.css`.
+> * When you deploy your themed application to an internal network, the images in the Theme Builder output are inferred from the page. If you are using the Theme Builder through the Kendo UI page, the images are located on the Kendo UI CDN and may be blocked if your customers are within an internal network without access to the CDN. In such cases, copy the image resources locally and change the references in the CSS or LESS output.
+
+#### Use LESS Output
+
+The LESS output of the Theme Builder depends on the LESS files that are distributed along with the Kendo UI source, so make sure the file reference points to the existing files.
+
+For the various ways to process the LESS output, refer to the [official LESS documentation](http://lesscss.org/#-client-side-usage).
+
+> **Important**
+> * As of the Kendo UI Q2 2015 release, Kendo UI introduces a new Theme Builder. It follows a notable CSS code overhaul, which made the themes more consistent and simpler to implement and to customize.
+> * The new Theme Builder does not provide an import functionality. Kendo UI dropped this feature because it cannot be implemented to be as good and flexible as desired. Although it may not seem like the best option, it is recommended to recreate the custom themes after upgrading the Kendo UI version. This ensures that the generated CSS code is clean and includes all styles required by the new widgets or features.
+
+### Version Compatibility
+
+The Theme Builder generates CSS, LESS, and JS code which is compatible with the current official Kendo UI version. If your project requires a custom theme for an older Kendo UI version, implement it through [manual coding or overrides]({% slug themesandappearnce_kendoui_desktopwidgets %}#customize-appearance).
 
 ## See Also
 
 Other articles on styling, appearance, and rendering of Kendo UI widgets:
 
+* [Sass ThemeBuilder Overview]({% slug sassbasedthemes_kendoui %}#sass-theme-builder)
 * [Responsive Web Design]({% slug responsivewebdesign_integration_kendoui %})
 * [Web Font Icons]({% slug webfonticons_kendoui_desktopwidgets %})
 * [How to Change Themes on the Client]({% slug howto_changethemes_ontheclient_styleskendoui %})
-* [ThemeBuilder Overview]({% slug themebuilder_overview_kendouistyling %})
 * [Rendering Modes for Data Visualization]({% slug renderingmodesfor_datavisualization_kendouistyling %})
 * [Troubleshooting]({% slug commonissues_troubleshooting_kendouistyling %})
 * [Themes and Appearance of the Kendo UI Hybrid Widgets](/controls/hybrid/styling)
