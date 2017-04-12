@@ -341,9 +341,9 @@ The following dash types are supported:
 * "longDashDotDot" - a line consisting of a repeating pattern of long-dash-dot-dot
 * "solid" - a solid line
 
-### axisDefaults.majorGridLines.visible `Boolean` *(default: false)*
+### axisDefaults.majorGridLines.visible `Boolean` *(default: true)*
 
-If set to `true` the chart will display the major grid lines. By default the major grid lines are visible.
+If set to `false` the chart will not display the major grid lines. By default the major grid lines are visible.
 
 ### axisDefaults.majorGridLines.width `Number` *(default: 1)*
 
@@ -2737,9 +2737,9 @@ The following dash types are supported:
     });
     </script>
 
-### categoryAxis.majorGridLines.visible `Boolean` *(default: false)*
+### categoryAxis.majorGridLines.visible `Boolean` *(default: true)*
 
-If set to `true` the chart will display the major grid lines. By default the major grid lines are visible.
+If set to `false` the chart will not display the major grid lines. By default the major grid lines are visible.
 
 #### Example - hide the category axis major grid lines
 
@@ -20196,9 +20196,9 @@ The default type is "line" except for "radarColumn" charts.
     });
     </script>
 
-### valueAxis.majorGridLines.visible `Boolean` *(default: false)*
+### valueAxis.majorGridLines.visible `Boolean` *(default: true)*
 
-If set to `true` the chart will display the major grid lines. By default the major grid lines are visible.
+If set to `false` the chart will not display the major grid lines. By default the major grid lines are visible.
 
 #### Example - hide the value axis major grid lines
 
@@ -24924,7 +24924,7 @@ The following dash types are supported:
 
 ### xAxis.majorGridLines.visible `Boolean` *(default: true)*
 
-If set to `true` the chart will display the x major grid lines. By default the x major grid lines are visible.
+If set to `false` the chart will not display the x major grid lines. By default the x major grid lines are visible.
 
 #### Example - hide the scatter chart x major grid lines
 
@@ -29667,9 +29667,9 @@ The following dash types are supported:
 
 ### yAxis.majorGridLines.visible `Boolean` *(default: true)*
 
-If set to `true` the chart will display the x major grid lines. By default the x major grid lines are visible.
+If set to `false` the chart will not display the y major grid lines. By default the y major grid lines are visible.
 
-#### Example - hide the scatter chart x major grid lines
+#### Example - hide the scatter chart y major grid lines
 
     <div id="chart"></div>
     <script>
