@@ -929,7 +929,7 @@ var __meta__ = { // jshint ignore:line
         views: [{
             name: MONTH,
             title: function(date, min, max, culture) {
-                return getCalendarInfo(culture).months.names[date.getMonth()] + " " + date.getFullYear();
+                return kendo.toString(date, "Y", culture);
             },
             content: function(options) {
                 var that = this,
