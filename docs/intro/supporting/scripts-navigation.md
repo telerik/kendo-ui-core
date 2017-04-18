@@ -22,6 +22,7 @@ Below are listed the script files for the Kendo UI Navigation widgets.&nbsp;&nbs
 | | kendo.menu.js | |
 | [PanelBar](http://demos.telerik.com/kendo-ui/panelbar/index) | jquery.js | |
 | | kendo.core.js | |
+| | kendo.data.js | |
 | | kendo.panelbar.js | |
 | [TabStrip](http://demos.telerik.com/kendo-ui/tabstrip/index) | jquery.js | |
 | | kendo.core.js | |
