@@ -75,6 +75,7 @@ The `toolbar` messages are used to [localize the Spreadsheet through JavaScript]
             "redo": "Redo",
             "undo": "Undo"
           },
+          "sort": "Sort",
           "sortAsc": "Sort ascending",
           "sortDesc": "Sort descending",
           "sortButtons": {

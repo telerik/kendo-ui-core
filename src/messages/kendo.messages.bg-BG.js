@@ -316,6 +316,7 @@ $.extend(true, kendo.spreadsheet.messages.toolbar,{
     "undo": "Стъпка назад"
   },
   "saveAs": "Запиши като...",
+  "sort": "Сортирай",
   "sortAsc": "Сортирай възходящо",
   "sortDesc": "Сортирай низходящо",
   "sortButtons": {
@@ -334,6 +335,7 @@ $.extend(true, kendo.spreadsheet.messages.toolbar,{
 if (kendo.spreadsheet && kendo.spreadsheet.messages.view) {
 kendo.spreadsheet.messages.view =
 $.extend(true, kendo.spreadsheet.messages.view,{
+  "nameBox": "Име на клетка",
   "errors": {
     "shiftingNonblankCells": "Не може да се вмъкнат клетки поради възможност от загуба на данни. Изберете друга локация за вмъкване на клетки или изтрийте данни от края на работния лист."
   },

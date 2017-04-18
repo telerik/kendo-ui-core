@@ -14,7 +14,7 @@ The `view` messages are used to [localize the Spreadsheet through JavaScript]({%
     if (kendo.spreadsheet && kendo.spreadsheet.messages.view) {
         kendo.spreadsheet.messages.view =
         $.extend(true, kendo.spreadsheet.messages.view,{
-          //"nameSpace": "Message"
+          "nameBox": "Name Box",
           "errors": {
             "shiftingNonblankCells": "Cannot insert cells due to data loss possibility. Select another insert location or delete the data from the end of your worksheet."
           },
