@@ -1,43 +1,43 @@
 ---
 title: Overview
-page_title: Overview | Telerik UI for PHP
-description: "Download and install Telerik UI for PHP, and run a sample application."
+page_title: Overview | Progress Telerik UI for PHP
+description: "Download and install Progress Telerik UI for PHP, and run a sample application."
 previous_url: /tutorials/PHP/build-apps-with-kendo-ui-and-php, /tutorials/PHP/build-apps-with-kendo-ui-and-php-2, /php/widgets/map/overview, /using-kendo-with/php/widgets/map/overview, /php/widgets/responsivepanel/overview, /using-kendo-with/php/widgets/responsivepanel/overview, /php/widgets/spreadsheet/overview, /using-kendo-with/php/widgets/spreadsheet/overview, /php/widgets/treemap/overview
 slug: overview_uiforphp
 position: 1
 ---
 
-# Telerik<sup>®</sup> UI for PHP by Progress
+# Progress<sup>®</sup>Telerik<sup>®</sup> UI for PHP
 
-[Telerik UI for PHP](http://www.telerik.com/php-ui) is a set of PHP classes which help you configure Kendo UI widgets by using server-side code in PHP web sites.
+[Progress Telerik UI for PHP](http://www.telerik.com/php-ui) is a set of PHP classes which help you configure Kendo UI widgets by using server-side code in PHP web sites.
 
 ## Getting Started
 
 ### Requirements
 
-* Telerik UI for PHP requires a PHP 5.3.3+ version.
+* Progress Telerik UI for PHP requires a PHP 5.3.3+ version.
 * The sample application uses [PDO](http://www.php.net/manual/en/intro.pdo.php) and [SQLite](http://www.php.net/manual/en/ref.pdo-sqlite.php). Both extensions should be enabled in the PHP configuration (php.ini).
 * The [`phpinfo`](http://php.net/manual/en/function.phpinfo.php) function can be used to verify that PDO and the SQLite extensions are successfully installed.
 
 ### Download and Install
 
-You can download Telerik UI for PHP from the [official download page](http://demos.telerik.com/php-ui/). The distribution `.zip` file contains the following directories:
+You can download Progress Telerik UI for PHP from the [official download page](http://demos.telerik.com/php-ui/). The distribution `.zip` file contains the following directories:
 
 * `/js`&mdash;These are the minified JavaScript files.
 * `/styles`&mdash;The minified CSS files and background images used by the themes.
 * `/src`&mdash;The JavaScript and CSS source files. Not available in the trial version.
-* `/wrappers/php/lib/Kendo/`&mdash;The PHP files required to use Telerik UI for PHP.
+* `/wrappers/php/lib/Kendo/`&mdash;The PHP files required to use Progress Telerik UI for PHP.
 * `/wrappers/php/`&mdash;The sample PHP web site.
 
 ## Sample Application Setup
 
 ### Prerequisites
 
-You can find a sample PHP web site in the `/wrappers/php/` directory of the Telerik UI for PHP distribution. To run the web site, copy this directory to your web root. Then navigate to `index.php`.
+You can find a sample PHP web site in the `/wrappers/php/` directory of the Progress Telerik UI for PHP distribution. To run the web site, copy this directory to your web root. Then navigate to `index.php`.
 
 ### Configuration
 
-To use Telerik UI for PHP in your PHP web site, follow the steps below:
+To use Progress Telerik UI for PHP in your PHP web site, follow the steps below:
 
 **Step 1** Copy `/wrappers/php/lib/Kendo` to your web site root, e.g. to your `lib` directory.
 
@@ -108,7 +108,7 @@ The example below demonstrates the complete source code.
 
 ## Next Steps
 
-Watch the video tutorials on getting started with Telerik UI for PHP in the [Kendo UI YouTube channel](http://www.youtube.com/kendouitv):
+Watch the video tutorials on getting started with Progress Telerik UI for PHP in the [Kendo UI YouTube channel](http://www.youtube.com/kendouitv):
 
 * [Get Started with the PHP Wrappers for Kendo UI: Part 1](http://www.youtube.com/watch?v=2Kpgp_nocEI)
 * [Get Started with the PHP Wrappers for Kendo UI: Part 2](https://www.youtube.com/watch?v=RQCLqA6Pu_E)
@@ -118,7 +118,7 @@ For more examples on how to use Kendo UI with PHP server-side wrappers, visit th
 
 ## See Also
 
-Other articles on Telerik UI for PHP:
+Other articles on Progress Telerik UI for PHP:
 
-* [Telerik UI for PHP API Reference Folder](/api/php/Kendo/UI/AutoComplete)
-* [Telerik UI for PHP Tags Folder]({% slug overview_autocomplete_uiforphp %})
+* [Progress Telerik UI for PHP API Reference Folder](/api/php/Kendo/UI/AutoComplete)
+* [Progress Telerik UI for PHP Tags Folder]({% slug overview_autocomplete_uiforphp %})
