@@ -612,7 +612,7 @@ var __meta__ = { // jshint ignore:line
                 if(draggableOptions && draggableOptions.placeholder){
                     that.placeholder = kendo.isFunction(draggableOptions.placeholder) ? $(draggableOptions.placeholder.call(that, draggedElement)) : $(draggableOptions.placeholder);
                 } else {
-                    that.placeholder = $(defaultPlaceholder.call(that, draggedElement))
+                    that.placeholder = $(defaultPlaceholder.call(that, draggedElement));
                 }
             }
 
