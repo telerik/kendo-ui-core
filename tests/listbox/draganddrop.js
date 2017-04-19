@@ -91,17 +91,16 @@
         ok(listA.items().length == 4, "Item is added to ListA");
     });
 
-    test("Item is correctly reordered in listbox using drag", 1, function() {
-        var draggedElement = listB.items().first();
+    test("Item is correctly reordered in listbox using drag", 1, function () {
+        var draggedElement = listB.items().last();
         var draggableOffset = kendo.getOffset(draggedElement);
-        var targetElement = listB.items().last(),
+        var targetElement = listB.items().first(),
             targetOffset = kendo.getOffset(targetElement);
-
         press(draggedElement, draggableOffset.left, draggableOffset.top);
-        move(draggedElement, targetOffset.left, targetOffset.top + 10);
-        release(draggedElement, targetOffset.left, targetOffset.top + 10);
-        
-        ok(listB.items().filter(":eq(2)").html() === "Tom");
+        move(draggedElement, targetOffset.left, targetOffset.top);
+        release(draggedElement, targetOffset.left, targetOffset.top);
+        //this should not depend on default line hight, since moving up to exact location
+        ok(listB.items().filter(":eq(0)").html() === "Donald");
     });
 
     test("Item is not dropped if dropSources is not set", 1, function() {
