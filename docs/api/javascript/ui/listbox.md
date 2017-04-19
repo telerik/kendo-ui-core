@@ -192,12 +192,12 @@ The field of the data item that provides the value of the widget.
 
 Indicates if the widget items can be draged and droped.
 
-> **Important:** When `draggable` is set to `true`, the `dropSources` option also should be set.
+> **Important:** Set the `dropSources` option if you want to drag to another ListBox widget. When `draggable` is set to true, the `selectable` option also should be set.
 
-### hint `Function | String | jQuery`
+### draggable.hint `Function | String | jQuery`
 
-Provides a way for customization of the sortable item hint. If a function is supplied, it receives one argument - the draggable element's jQuery object.
-If hint function is not provided the widget will clone dragged item and use it as a hint.
+Provides a way for customization of the draggable item hint. If a function is supplied, it receives one argument - the draggable element's jQuery object.
+If hint is not provided the widget will clone dragged item and use it as a hint.
 
 > **Important: The hint element is appended to the `<body>` tag.** The developer should have this in mind in order to avoid styling issues.
 
@@ -225,7 +225,7 @@ If hint function is not provided the widget will clone dragged item and use it a
 ### draggable.placeholder `Function | String | jQuery`
 
 Provides a way for customization of the ListBox item placeholder. If a function is supplied, it receives one argument - the draggable element's jQuery object.
-If placeholder function is not provided the widget will clone dragged item, remove its ID attribute, set its visibility to hidden and use it as a placeholder.
+If placeholder is not provided the widget will clone dragged item, remove its ID attribute, set its visibility to hidden and use it as a placeholder.
 
 > **Important:** The placeholder element is appended to the ListBox widget container.
 
@@ -255,8 +255,6 @@ If placeholder function is not provided the widget will clone dragged item, remo
 
 Array of id strings which determines the ListBox widgets that can drag and drop their items to the current ListBox widget. The `dropSources` option describes **one way** relationship, if the developer wants a two way connection then the `dropSources` option should be set on both widgets.
 
-> **Important** When `dropSources` is defined, the `draggable` option also should be set to `true`.
-
 #### Example - set up a one way connection from ListBoxA to ListBoxB
 
     <select id="listBoxA">
@@ -281,12 +279,15 @@ Array of id strings which determines the ListBox widgets that can drag and drop 
 ### navigatable `Boolean` *(default: false)*
 Indicates whether keyboard navigation is enabled/disabled.
 
+> **Important:** When navigatable is set to true, the selectable option also should be set.
+
 #### Example
 
     <select id="listBox"></select>
     <script>
     $("#listBox").kendoListBox({
         navigatable: true,
+        selectable: "single",
         dataSource: [
             { name: "Item 1", id: 1 },
             { name: "Item 2", id: 2 },
@@ -540,7 +541,7 @@ Defines the text of the "To Right" button located in the toolbar of the widget.
 
 ### selectable `String` *(default: "single")*
 
-Indicates whether selection is enabled/disabled. Possible values:
+Indicates whether selection is single or multiple. Possible values:
 
 #### *"single"*
 
@@ -549,7 +550,6 @@ Single item selection.
 #### *"multiple"*
 
 Multiple item selection.
-
 
 #### Example
 
@@ -634,7 +634,6 @@ The position relative to the ListBox element, at which the toolbar will be shown
 A collection of tools that are used to interact with the ListBox. The built-in tools are:
 
 - "moveUp" - moves up the selected ListBox item(s)
-- "moveDown" - moves down the selected ListBox item(s)
 - "moveDown" - moves down the selected ListBox item(s)
 - "remove" - removes the selected ListBox item(s)
 - "transferTo" - moves the selected item(s) from the current ListBox to the target defined in the [connectWith](/api/javascript/ui/listbox#configuration-connectWith) option
@@ -1131,17 +1130,17 @@ The data items which to be droped.
 
 ### dragend
 
-Fires when item dragging ends but before the item's position is changed in the DOM. This event is suitable for preventing the sort action.
+Fires when item dragging ends but before the item's position is changed in the DOM. This event is suitable for preventing the drag action.
 
 #### Event Data
 
 ##### e.action `String`
 
-Possible values are: "sort" - indicates that item's position was changed inside the same ListBox container; "remove" - indicates that the item was removed from current ListBox widget; "receive" - indicates that the item was received by a connected ListBox widget instance;
+Possible values are: "drag" - indicates that item's position was changed inside the same ListBox container; "remove" - indicates that the item was removed from current ListBox widget; "receive" - indicates that the item was received by a connected ListBox widget instance;
 
 ##### e.preventDefault `Function`
 
-If invoked prevents the sort action. The element will be reverted at its original position. The hint and placeholder will be destroyed.
+If invoked prevents the drag action. The element will be reverted at its original position. The hint and placeholder will be destroyed.
 
 ##### e.items `Array`
 
