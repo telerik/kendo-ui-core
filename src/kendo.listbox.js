@@ -219,6 +219,20 @@ var __meta__ = { // jshint ignore:line
             }
         },
 
+        _addItemAt: function(dataItem, index) {
+            var that = this;
+            var item = that.templates.itemTemplate({ item: dataItem, r: that.templates.itemContent });
+            that._unbindDataSource();
+            that._insertElementAt(item, index);
+            if (typeof dataItem === typeof "") {
+                that.dataSource._data.push(dataItem);
+            } else {
+                that.dataSource.add(dataItem);
+            }
+            that._bindDataSource();
+            that._syncElement();
+        },
+
         _insertElementAt: function(item, index) {
             var that = this;
             var list = that._getList();
@@ -481,18 +495,25 @@ var __meta__ = { // jshint ignore:line
         _findTarget: function(e) {
             var that = this;
             var element = that._findElementUnderCursor(e);
+            var elementNode = $(element);
             var list = that._getList()[0];
             var items;
             var node;
 
             if($.contains(list, element)) {
                 items = that.items();
+                element = elementNode.is("li") ? element: elementNode.closest("li")[0];
                 node = items.filter(element)[0] || items.has(element)[0];
-                return node && !$(node).hasClass(SELECTED_STATE_CLASS) ? { element: $(node) } : null;
+                if(node) {
+                    node = $(node);
+                    return !node.hasClass(DISABLED_STATE_CLASS) ? { element: node, listBox: that } : null;
+                } else {
+                    return null;
+                }
             } else if (list == element && !that.items().length) {
-                return { element: that.element, appendToBottom: true };
+                return { element: $(list), appendToBottom: true, listBox: that };
             } else {
-                return that._searchConnectedListBox(element);
+                return that._searchConnectedListBox(elementNode);
             }
         },
 
@@ -511,8 +532,6 @@ var __meta__ = { // jshint ignore:line
             var items;
             var node;
 
-            element = $(element);
-
             if(element.getKendoListBox()) {
                 connectedListBox = element.getKendoListBox();
             }
@@ -523,11 +542,13 @@ var __meta__ = { // jshint ignore:line
 
             if(connectedListBox && $.inArray(this.element[0].id, connectedListBox.options.dropSources) !== -1) {
                 items = connectedListBox.items();
+                element = element.is("li") ? element[0] : element.closest("li")[0];
                 node = items.filter(element)[0] || items.has(element)[0];
                 if(node) {
-                    return { element: $(node), listBox: connectedListBox };
+                    node = $(node);
+                    return !node.hasClass(DISABLED_STATE_CLASS) ? { element: node, listBox: connectedListBox } : null;
                 } else if(!items.length) {
-                    return { element: connectedListBox._getList(), appendToBottom: true };
+                    return { element: connectedListBox._getList(), listBox: connectedListBox,  appendToBottom: true };
                 } else {
                     return null;
                 }
@@ -545,8 +566,6 @@ var __meta__ = { // jshint ignore:line
             var targetCenter;
             var offsetDelta;
             var direction;
-            var sibling;
-            var getSibling;
 
             if(that.trigger(DRAG, eventData)) {
                 e.preventDefault();
@@ -562,7 +581,7 @@ var __meta__ = { // jshint ignore:line
                 };
 
                 if(target.appendToBottom) {
-                    that._movePlaceholder(target, null);
+                    that._movePlaceholder(target, null , draggedElement);
                     return;
                 }
 
@@ -573,16 +592,8 @@ var __meta__ = { // jshint ignore:line
                 }
 
                 if(direction) {
-                    getSibling = (direction === "prev") ? jQuery.fn.prev : jQuery.fn.next;
-
-                    sibling = getSibling.call(target.element);
-
-                    while(sibling.length && !sibling.is(":visible")) {
-                        sibling = getSibling.call(sibling);
-                    }
-
-                    if(sibling[0] != that.placeholder[0]) {
-                        that._movePlaceholder(target, direction);
+                    if(target.element[0] != that.placeholder[0]) {
+                        that._movePlaceholder(target, direction, draggedElement);
                     }
                 }
              }
@@ -591,15 +602,26 @@ var __meta__ = { // jshint ignore:line
              }
         },
 
-        _movePlaceholder: function(target, direction) {
-            var placeholder = this.placeholder;
+        _movePlaceholder: function(target, direction, draggedElement) {
+            var that = this;
+            var placeholder = that.placeholder;
+            var draggableOptions = target.listBox.options.draggable;
+
+            if(placeholder.parent().length) {
+                that.placeholder.remove();
+                if(draggableOptions && draggableOptions.placeholder){
+                    that.placeholder = kendo.isFunction(draggableOptions.placeholder) ? $(draggableOptions.placeholder.call(that, draggedElement)) : $(draggableOptions.placeholder);
+                } else {
+                    that.placeholder = $(defaultPlaceholder.call(that, draggedElement))
+                }
+            }
 
             if (!direction) {
-                target.element.append(placeholder);
+                target.element.append(that.placeholder);
             } else if (direction === "prev") {
-                target.element.before(placeholder);
+                target.element.before(that.placeholder);
             } else if (direction === "next") {
-                target.element.after(placeholder);
+                target.element.after(that.placeholder);
             }
         },
 
@@ -611,7 +633,7 @@ var __meta__ = { // jshint ignore:line
             var draggedIndex = items.index(that.draggedElement);
             var dataItem = that.dataItem(draggedItem);
             var eventData = { dataItems: [dataItem], items: $(draggedItem) };
-            var connectedListBox = that.placeholder.closest(".k-list-scroller.k-selectable").next().getKendoListBox();
+            var connectedListBox = that.placeholder.closest(".k-widget.k-listbox").find("select").getKendoListBox();
 
             if(that.trigger(DROP, extend({}, eventData, { draggableEvent: e }))) {
                 e.preventDefault();
@@ -629,7 +651,7 @@ var __meta__ = { // jshint ignore:line
                 }
 
                 if(!connectedListBox.trigger(ADD, eventData)) {
-                    connectedListBox.add([dataItem]);
+                    connectedListBox._addItemAt(dataItem, connectedListBox.items().index(that.placeholder));
                 }
             }
 

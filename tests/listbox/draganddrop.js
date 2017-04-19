@@ -77,7 +77,7 @@
         ok(listA._getList().children().length === 4, "Placeholder is moved to the ListA");
     });
 
-    test("Item can be dragged from one listbox to another", 2, function() {
+    test("Item can be dragged from one listbox to another", 3, function() {
         var draggedElement = listB.items().first();
         var draggableOffset = kendo.getOffset(draggedElement);
         var targetElement = listA.items().first(),
@@ -89,6 +89,7 @@
 
         ok(listB.items().length == 2, "Item is removed from ListB");
         ok(listA.items().length == 4, "Item is added to ListA");
+        ok(listA.items().first().html() === "Tom");
     });
 
     test("Item is correctly reordered in listbox using drag", 1, function () {
