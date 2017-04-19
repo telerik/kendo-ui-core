@@ -36,7 +36,7 @@
         teardown: function() {
             destroyListBox(listbox);
             kendo.destroy(QUnit.fixture);
-            $(document.body).find(QUnit.fixture).off().remove();
+            
         }
     });
 
@@ -219,16 +219,19 @@
 
     module("ListBox toolbar", {
         setup: function() {
-            $(document.body).append(QUnit.fixture);
-            listbox = createListBoxWithToolbar();
+            var element = $('<select id="list"></select>').appendTo(QUnit.fixture);
+            listbox = createListBoxWithToolbar({},element);
             item1 = listbox.items().eq(0);
             item2 = listbox.items().eq(1);
             item3 = listbox.items().eq(2);
             item4 = listbox.items().eq(3);
+            $(document.body).append(QUnit.fixture);
         },
         teardown: function() {
-            destroyListBox(listbox);
+            listbox.destroy();
+            item1 = item2 = item3 = item4 = null;
             kendo.destroy(QUnit.fixture);
+            
         }
     });
 
@@ -376,7 +379,7 @@
             destroyListBox(listbox1);
             destroyListBox(listbox2);
             kendo.destroy(QUnit.fixture);
-            $(document.body).find(QUnit.fixture).off().remove();
+            
         }
     });
 
@@ -465,7 +468,7 @@
             destroyListBox(listbox1);
             destroyListBox(listbox2);
             kendo.destroy(QUnit.fixture);
-            $(document.body).find(QUnit.fixture).off().remove();
+            
         }
     });
 
@@ -545,7 +548,7 @@
             destroyListBox(listbox1);
             destroyListBox(listbox2);
             kendo.destroy(QUnit.fixture);
-            $(document.body).find(QUnit.fixture).off().remove();
+            
         }
     });
 
@@ -618,7 +621,7 @@
             destroyListBox(listbox1);
             destroyListBox(listbox2);
             kendo.destroy(QUnit.fixture);
-            $(document.body).find(QUnit.fixture).off().remove();
+            
         }
     });
 
@@ -722,7 +725,7 @@
         teardown: function() {
             destroyListBox(listbox);
             kendo.destroy(QUnit.fixture);
-            $(document.body).find(QUnit.fixture).off().remove();
+            
         }
     });
 
@@ -827,7 +830,7 @@
             destroyListBox(listbox1);
             destroyListBox(listbox2);
             kendo.destroy(QUnit.fixture);
-            $(document.body).find(QUnit.fixture).off().remove();
+            
         }
     });
 
@@ -882,7 +885,7 @@
             destroyListBox(listbox1);
             destroyListBox(listbox2);
             kendo.destroy(QUnit.fixture);
-            $(document.body).find(QUnit.fixture).off().remove();
+            
         }
     });
 
@@ -923,7 +926,9 @@
     module("ListBox toolbar tools", {
         setup: function() {
             $(document.body).append(QUnit.fixture);
-
+            var element3 = $('<select id="listbox3"></select>').appendTo(QUnit.fixture);
+            var element2 = $('<select id="listbox2"></select>').appendTo(QUnit.fixture);
+            var element1 = $('<select id="listbox1"></select>').appendTo(QUnit.fixture);
             listbox3 = createListBoxWithToolbar({
                 dataSource: {
                     data: [{
@@ -935,7 +940,7 @@
                     }]
                 },
                 connectWith: "#listbox1"
-            }, "<select id='listbox3' />");
+            }, element3);
 
             listbox2 = createListBoxWithToolbar({
                 dataSource: {
@@ -947,11 +952,11 @@
                         text: "item6"
                     }]
                 }
-            }, "<select id='listbox2' />");
+            }, element2);
 
             listbox1 = createListBoxWithToolbar({
                 connectWith: "#listbox2"
-            }, "<select id='listbox1' />");
+            }, element1);
 
             item1 = listbox1.items().eq(0);
         },
@@ -960,7 +965,7 @@
             destroyListBox(listbox2);
             destroyListBox(listbox3);
             kendo.destroy(QUnit.fixture);
-            $(document.body).find(QUnit.fixture).off().remove();
+            
         }
     });
 
@@ -1006,7 +1011,7 @@
             destroyListBox(listbox1);
             destroyListBox(listbox2);
             kendo.destroy(QUnit.fixture);
-            $(document.body).find(QUnit.fixture).off().remove();
+            
         }
     });
 
@@ -1060,7 +1065,7 @@
             destroyListBox(listbox1);
             destroyListBox(listbox2);
             kendo.destroy(QUnit.fixture);
-            $(document.body).find(QUnit.fixture).off().remove();
+            
         }
     });
 

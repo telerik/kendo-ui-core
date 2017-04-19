@@ -27,7 +27,6 @@
               listA.destroy();
             }
             kendo.destroy(QUnit.fixture);
-            $(document.body).find(QUnit.fixture).off().remove();
         }
     });
 
