@@ -667,12 +667,13 @@ var __meta__ = { // jshint ignore:line
             var dataItem = that.dataItem(item);
             var dataItemAtIndex = dataSource.at(index);
             var itemAtIndex = that.items()[index];
+            var listItem = $(item);
 
             if (dataItem && itemAtIndex && dataItemAtIndex) {
                 that._unbindDataSource();
                 that._bindDataSource();
-                that._removeElement(item);
-                that._insertElementAt(item, index);
+                that._removeElement(listItem);
+                that._insertElementAt(listItem, index);
             }
         },
 
