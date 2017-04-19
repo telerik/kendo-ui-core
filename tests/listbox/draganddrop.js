@@ -9,23 +9,12 @@
         setup: function() {
             $(document.body).append(QUnit.fixture);
 
-            QUnit.fixture.append(
-                '<select id="listA"></select>'
-            );
-
-            QUnit.fixture.append(
-                '<select id="listB"></select>'
-            );
-
-            QUnit.fixture.append(
-                '<select id="listC"></select>'
-            );
-
-            QUnit.fixture.append(
-                '<select id="listD"></select>'
-            );
-
-            listA  = $("#listA").kendoListBox({
+            var elementA = $('<select id="listA"></select>').appendTo(QUnit.fixture);
+            var elementB = $('<select id="listB"></select>').appendTo(QUnit.fixture);
+            var elementC = $('<select id="listC"></select>').appendTo(QUnit.fixture);
+            var elementD = $('<select id="listD"></select>').appendTo(QUnit.fixture);
+            
+            listA  = elementA.kendoListBox({
                     dataSource: [ {name: "Tim", id:4 }, {name: "Johny", id:5 }, {name: "Dicky", id:6 }],
                     dataTextField: "name",
                     selectable: true,
@@ -34,7 +23,7 @@
             }).getKendoListBox();
 
 
-            listB = $("#listB").kendoListBox({
+            listB = elementB.kendoListBox({
                     dataSource: [ {name: "Tom", id:1 }, {name: "Jerry", id:2 }, {name: "Donald", id:3 }],
                     dataTextField: "name",
                     selectable: true,
@@ -42,14 +31,14 @@
                     draggable:true
             }).getKendoListBox();
 
-            listC = $("#listC").kendoListBox({
+            listC = elementC.kendoListBox({
                     dataSource: [ {name: "Tonny", id:7 }, {name: "Jack", id:8 }, {name: "Dino", id:9 }],
                     dataTextField: "name",
                     selectable: true,
                     draggable:true
             }).getKendoListBox();
 
-            listD = $("#listD").kendoListBox({
+            listD = elementD.kendoListBox({
                     dataTextField: "name",
                     dataSource: [],
                     dropSources: ["listA"]
@@ -112,8 +101,8 @@
         press(draggedElement, draggableOffset.left, draggableOffset.top);
         move(draggedElement, targetOffset.left, targetOffset.top + 10);
         release(draggedElement, targetOffset.left, targetOffset.top + 10);
-
-        ok(listB.items().filter(":eq(1)").html() === "Tom");
+        
+        ok(listB.items().filter(":eq(2)").html() === "Tom");
     });
 
     test("Item is not dropped if dropSources is not set", 1, function() {

@@ -6,16 +6,14 @@
 
     module("ListBox aria", {
         setup: function() {
-            QUnit.fixture.append(
-                '<select id="listA"></select>'
-            );
+            var element = $('<select id="listA"></select>').appendTo(QUnit.fixture);
 
             listA  = createListBoxWithToolbar({
                     dataSource: [ { name: "Tim", id:4 }, { name: "Johny", id:5 }, { name: "Dicky", id:6 }],
                     dataTextField: "name",
                     selectable: true,
                     navigatable: true
-            }, "#listA");
+            }, element);
 
             $(document.body).append(QUnit.fixture);
         },

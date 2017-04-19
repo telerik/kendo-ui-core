@@ -12,17 +12,14 @@
     module("ListBox - navigation", {
         setup: function() {
            
-            QUnit.fixture.append(
-                '<select id="listA"></select>'
-            );
+            var element = $('<select id="listA"></select>').appendTo(QUnit.fixture);
 
-            listA  = $("#listA").kendoListBox({ 
+            listA  = element.kendoListBox({ 
                     dataSource: [ "Item1", "Item2", "Item3", "Item4", "Item5", "Item6", "Item7", "Item8", "Item9", "Item10"],
                     selectable: "multiple",
                     navigatable: true,
                     reorderable: true
             }).getKendoListBox();
-
             $(document.body).append(QUnit.fixture);
         },
         teardown: function() {
