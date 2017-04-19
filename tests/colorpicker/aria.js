@@ -108,4 +108,27 @@
 
         ok(colorPicker.wrapper.attr("aria-label").indexOf("#f9d9ab") !== -1);
     });
+
+    module("flatcolorpicker", {
+        setup: function() {
+            element = $("<div>").kendoFlatColorPicker({
+                preview: true
+            });
+            colorPicker = element.data("kendoFlatColorPicker");
+        },
+        teardown: function() {
+            colorPicker.destroy();
+        }
+    });
+
+    test("renders aria-label to the slider", function() {
+        var ariaLabel = colorPicker.wrapper.find(".k-hue-slider input").attr("aria-label");
+        ok(ariaLabel === "hue saturation");
+    });
+
+    test("renders title to the preview input", function() {
+        var ariaLabel = colorPicker.wrapper.find(".k-color-value").attr("title");
+        ok(ariaLabel === "Color Hexadecimal Code");
+    });
+
 })();
