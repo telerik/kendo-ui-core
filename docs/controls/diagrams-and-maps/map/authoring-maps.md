@@ -24,11 +24,13 @@ The data used in this article is from the [Natural Earth project](http://www.nat
 
 For the purpose of this project, the [Admin 1 – States, provinces](http://www.naturalearthdata.com/downloads/50m-cultural-vectors) data set is going to be used. A scale of 1:50 000 000 provides good detail/size balance on a country level. The dataset is available for download in [Esri Shapefile format](http://www.naturalearthdata.com/http//www.naturalearthdata.com/download/50m/cultural/ne_50m_admin_1_states_provinces_lakes.zip).
 
+For more information, refer to the web site on [global administrative areas](http://www.gadm.org/country).
+
 ### Explore Data
 
 A traditional [desktop geographic information system (GIS)](https://en.wikipedia.org/wiki/Geographic_information_system) application can be invaluable for exploring new datasets. The open-source [QGIS](http://www.qgis.org/en/site/) project is an excellent choice in this regard.
 
-Start by [importing the Esri Shapefile](http://www.qgis.org/en/docs/user_manual/working_with_vector/supported_data.html#esri-shapefiles) for the data set. With the help of the [Identify tool](http://www.qgis.org/en/docs/user_manual/introduction/general_tools.html#identify) you can quickly inspect the available metadata.
+Start by [importing the Esri Shapefile](http://docs.qgis.org/testing/en/docs/user_manual/working_with_vector/supported_data.html#esri-shapefiles) for the data set. With the help of the [Identify tool](http://docs.qgis.org/testing/en/docs/user_manual/introduction/general_tools.html#identify) you can quickly inspect the available metadata.
 
 **Figure 2: Identifying of the results**
 
