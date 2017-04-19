@@ -188,13 +188,13 @@ The field of the data item that provides the value of the widget.
     });
     </script>
 
-### draggable `Boolean | Object` *(default: false)*
+### draggable `Boolean|Object` *(default: false)*
 
 Indicates if the widget items can be draged and droped.
 
 > **Important:** Set the `dropSources` option if you want to drag to another ListBox widget. When `draggable` is set to true, the `selectable` option also should be set.
 
-### draggable.hint `Function | String | jQuery`
+### draggable.hint `Function|String|jQuery`
 
 Provides a way for customization of the draggable item hint. If a function is supplied, it receives one argument - the draggable element's jQuery object.
 If hint is not provided the widget will clone dragged item and use it as a hint.
@@ -222,7 +222,7 @@ If hint is not provided the widget will clone dragged item and use it as a hint.
     });
     </script>
 
-### draggable.placeholder `Function | String | jQuery`
+### draggable.placeholder `Function|String|jQuery`
 
 Provides a way for customization of the ListBox item placeholder. If a function is supplied, it receives one argument - the draggable element's jQuery object.
 If placeholder is not provided the widget will clone dragged item, remove its ID attribute, set its visibility to hidden and use it as a placeholder.
@@ -897,7 +897,7 @@ Get/set the selected ListBox item(s).
 
 #### Parameters
 
-##### items `jQuery | Array`
+##### items `jQuery|Array`
 
 The item(s) to select.
 

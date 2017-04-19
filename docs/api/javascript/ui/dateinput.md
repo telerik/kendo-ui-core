@@ -223,7 +223,7 @@ Gets/Sets the max value of the DateInput.
 
 #### Parameters
 
-##### value `Date | String`
+##### value `Date|String`
 
 The max date to set.
 
@@ -261,7 +261,7 @@ Gets/Sets the min value of the DateInput.
 
 #### Parameters
 
-##### value `Date | String`
+##### value `Date|String`
 
 The min date to set.
 
@@ -325,7 +325,7 @@ Gets/Sets the value of the DateInput.
 
 #### Parameters
 
-##### value `Date | String`
+##### value `Date|String`
 
 The value to set.
 
