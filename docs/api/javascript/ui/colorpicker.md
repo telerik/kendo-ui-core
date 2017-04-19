@@ -148,6 +148,21 @@ Allows customization of the "Cancel" button text.
     })
     </script>
 
+### messages.previewInput `String` *(default: "Color Hexadecimal Code")*
+
+Allows customization of the "Color Hexadecimal Code" preview input title.
+
+#### Example
+
+    <input id="colorpicker" type="color" />
+    <script>
+    $("#colorpicker").kendoColorPicker({
+      messages: {
+        previewInput: "Edit Color"
+      }
+    })
+    </script>
+
 ### palette `String|Array` *(default: null)*
 
 When a non-null `palette` argument is supplied, the drop-down will be
