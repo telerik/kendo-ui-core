@@ -635,6 +635,23 @@ $.extend(true, kendo.ui.Grid.prototype.options.messages,{
 });
 }
 
+/* ListBox messaages */
+
+if (kendo.ui.ListBox) {
+kendo.ui.ListBox.prototype.options.messages =
+$.extend(true, kendo.ui.ListBox.prototype.options.messages,{
+  tools: {
+    remove: "Премахни",
+    moveUp: "Премести нагоре",
+    moveDown: "Премести надолу",
+    transferTo: "Надясно",
+    transferFrom: "Наляво",
+    transferAllTo: "Всички надясно",
+    transferAllFrom: "Всички наляво"
+  }
+});
+}
+
 /* TreeList messages */
 
 if (kendo.ui.TreeList) {

@@ -924,6 +924,23 @@ $.extend(true, kendo.ui.Slider.prototype.options,{
 });
 }
 
+/* ListBox messaages */
+
+if (kendo.ui.ListBox) {
+kendo.ui.ListBox.prototype.options.messages =
+$.extend(true, kendo.ui.ListBox.prototype.options.messages,{
+  tools: {
+    remove: "Delete",
+    moveUp: "Move Up",
+    moveDown: "Move Down",
+    transferTo: "To Right",
+    transferFrom: "To Left",
+    transferAllTo: "All to Right",
+    transferAllFrom: "All to Left"
+  }
+});
+}
+
 /* TreeList messages */
 
 if (kendo.ui.TreeList) {

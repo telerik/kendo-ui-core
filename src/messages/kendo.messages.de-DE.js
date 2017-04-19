@@ -404,6 +404,23 @@
       });
   }
 
+/* ListBox messaages */
+
+if (kendo.ui.ListBox) {
+kendo.ui.ListBox.prototype.options.messages =
+$.extend(true, kendo.ui.ListBox.prototype.options.messages,{
+  tools: {
+    remove: "Löschen",
+    moveUp: "Nach oben verschieben",
+    moveDown: "Nach unten verschieben",
+    transferTo: "Nach rechts",
+    transferFrom: "Nach links",
+    transferAllTo: "Alle nach rechts",
+    transferAllFrom: "Alle nach links"
+  }
+});
+}
+
   /* TreeList messages */
 
   if (kendo.ui.TreeList) {

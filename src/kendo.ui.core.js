@@ -33,6 +33,7 @@
         "./kendo.multiselect",
         "./kendo.colorpicker",
         "./kendo.listview",
+        "./kendo.listbox",
         "./kendo.numerictextbox",
         "./kendo.maskedtextbox",
         "./kendo.menu",
