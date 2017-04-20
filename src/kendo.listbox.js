@@ -856,7 +856,7 @@ var __meta__ = { // jshint ignore:line
                 wrapper = element.parent("div.k-listbox");
 
             if (!wrapper[0]) {
-                wrapper = element.wrap('<div class="k-widget k-listbox k-listbox-toolbar-top" deselectable="on" />').parent();
+                wrapper = element.wrap('<div class="k-widget k-listbox" deselectable="on" />').parent();
                 wrapper[0].style.cssText = element[0].style.cssText;
                 wrapper[0].title = element[0].title;
                 $('<div class="k-list-scroller" />').insertBefore(element);
@@ -998,17 +998,17 @@ var __meta__ = { // jshint ignore:line
             var that = this;
             var toolbarOptions = that.options.toolbar;
             var position = toolbarOptions.position || RIGHT;
-            var toolbarInsertion = position === BOTTOM ? "insertAfter" : "insertBefore";
-            var toolbarElement = $(that.templates.toolbar)[toolbarInsertion](that._innerWrapper);
+            var toolbarInsertion = position === BOTTOM ? "insertAfter" : "insertBefore";            
             var tools = toolbarOptions.tools || [];
             var messages = that.options.messages;
 
             that._destroyToolbar();
+            that.wrapper.removeClass(TOOLBAR_POSITION_CLASS_NAMES.join(SPACE));
 
             if (tools.length && tools.length > 0) {
+                var toolbarElement = $(that.templates.toolbar)[toolbarInsertion](that._innerWrapper);
                 that.toolbar = new ToolBar(toolbarElement, extend({}, toolbarOptions, { listBox: that, messages: messages }));
-                that.wrapper.removeClass(TOOLBAR_POSITION_CLASS_NAMES.join(SPACE))
-                            .addClass(TOOLBAR_CLASS + DASH + position);
+                that.wrapper.addClass(TOOLBAR_CLASS + DASH + position);
             }
         },
 
