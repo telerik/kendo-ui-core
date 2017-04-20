@@ -95,7 +95,7 @@ You can also bind the `DataSource` to remote data. The following example demonst
 The ListBox delivers the following features:
 
 * [Selection](#selection)
-* [Reordering of selected items](#reordering-of-selected-items)
+* [Reordering of selected items](#reordering-of-selections)
 * [Dragging and dropping of items](#dragging-and-dropping)
 * [Item templates](#item-templates)
 * [Localization](#localization)
