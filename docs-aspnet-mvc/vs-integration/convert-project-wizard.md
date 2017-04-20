@@ -1,20 +1,20 @@
 ---
 title: Convert Projects
 page_title: Convert Projects | UI for ASP.NET MVC Visual Studio Integration
-description: "Learn how to convert an existing ASP.NET MVC application to a Telerik UI for ASP.NET MVC application."
+description: "Learn how to convert an existing ASP.NET MVC application to a Progress&reg; Telerik&reg; UI for ASP.NET MVC application."
 slug: projectwizardcoversion_visualstudio_aspnetmvc
 position: 5
 ---
 
 # Convert Projects
 
-This article demonstrates how to convert an existing ASP.NET MVC application to a Telerik UI for ASP.NET MVC application.
+This article demonstrates how to convert an existing ASP.NET MVC application to a Progress&reg;  Telerik&reg; UI for ASP.NET MVC application.
 
 ## Getting Started
 
 ### The Basics
 
-The **Convert Project Wizard** converts an existing ASP.NET MVC 4 or 5 to a Telerik UI for ASP.NET MVC application.
+The **Convert Project Wizard** converts an existing ASP.NET MVC 4 or 5 to a Progress&reg; Telerik&reg; UI for ASP.NET MVC application.
 
 To start the **Convert Project Wizard**, click **Telerik** > **UI for ASP.NET MVC** > **Convert to Telerik Application**.
 
@@ -33,7 +33,7 @@ The distribution selection lets you choose the version of the Telerik UI for ASP
 
 ### Theme Selection
 
-The theme selection lets you choose the visual theme for your Telerik UI for ASP.NET MVC application.
+The theme selection lets you choose the visual theme for your Progress&reg; Telerik&reg; UI for ASP.NET MVC application.
 
 **Figure 2. Theme selection**
 
