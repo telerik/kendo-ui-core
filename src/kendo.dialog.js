@@ -46,7 +46,8 @@
             HUNDREDPERCENT = 100,
             messages = {
                 okText  : "OK",
-                cancel : "Cancel"
+                cancel : "Cancel",
+                promptInput: "Input"
             },
             ceil = Math.ceil,
             templates,
