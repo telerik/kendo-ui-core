@@ -1,7 +1,7 @@
 ---
 title: Change Grid Pager to Slider
 page_title: Change Grid Pager to Slider | Kendo UI Grid
-description: "Learn how to change the default Grid paging to slider"
+description: "Learn how to change the default Kendo UI Grid paging to a slider."
 slug: howto_change_grid_pager_to_slider
 ---
 
@@ -9,9 +9,13 @@ slug: howto_change_grid_pager_to_slider
 
 The following example demonstrates how to change the default pager of the Grid to a slider.
 
-On the first [dataBound](/api/javascript/ui/grid#events-dataBound) event, we remove the default pager buttons and create a Kendo Slider in their place. On the [change](/api/javascript/ui/slider#events-change) event of the slider, we are changing the page of the Grid DataSource.
+To achieve this behavior:
 
-> The Grid [page](/api/javascript/data/datasource#methods-page) method will not fire when you use this approach.
+1. Remove the default pager buttons on the first [`dataBound`](/api/javascript/ui/grid#events-dataBound) event.
+1. Create a Kendo UI Slider in their place.
+1. Change the page of the Grid DataSource on the [`change`](/api/javascript/ui/slider#events-change) event of the Slider.
+
+> When you apply this approach, the [`page`](/api/javascript/data/datasource#methods-page) method of the Grid does not fire.
 
 ###### Example
 
@@ -50,7 +54,7 @@ On the first [dataBound](/api/javascript/ui/grid#events-dataBound) event, we rem
     if(!sliderCreated){
       sliderCreated = true;
       var max = e.sender.dataSource.totalPages();
-      
+
 
       $(".k-grid-pager").find("a, ul").each(function(i) {
         $(this).remove()
@@ -62,10 +66,10 @@ On the first [dataBound](/api/javascript/ui/grid#events-dataBound) event, we rem
         tickPlacement: "none",
         change: onChange
       });
-    } 
+    }
   };
 </script>
-  
+
 <style>
   #grid .k-slider-horizontal{
     margin: 0.4em 0.4em 0 0.4em;
