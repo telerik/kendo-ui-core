@@ -15,13 +15,13 @@ This article demonstrates how to use Telerik UI for ASP.NET MVC in ASP.NET Core 
 
 ### Supported Environments
 
-Telerik UI for ASP.NET Core targets the stable release of the ASP.NET 5 framework. At the time of this writing this is 1.0 RTM.
+Telerik UI for ASP.NET Core targets the stable release of the ASP.NET Core framework. At the time of this writing this is 1.0 RTM.
 
 The target runtime is [CoreCLR](https://github.com/dotnet/coreclr). The full desktop CLR is also supported.
 
 ### Resources
 
-To get started, refer to the [ASP.NET 5 Documentation](http://docs.asp.net/en/latest/index.html).
+To get started, refer to the [ASP.NET Core Documentation](http://docs.asp.net/en/latest/index.html).
 
 The repositories below contain source code, instructions, and issue trackers for the ASP.NET project. These are immensely useful when you need to track down particular issues or behaviors.
 
@@ -49,7 +49,7 @@ To be able to run the sample application on Windows, make sure you provide for t
 
 To be able to run the sample application on Linux, make sure you provide for the requirements listed below.
 
-- For information on installing ASP.NET 5 on Linux, refer to [this article](http://docs.asp.net/en/latest/getting-started/installing-on-linux.html).
+- For information on installing ASP.NET Core on Linux, refer to [this article](http://docs.asp.net/en/latest/getting-started/installing-on-linux.html).
 - Install [SQLite3](http://mislav.net/rails/install-sqlite3/).
 - Download the matching release of the [Sample Application](https://github.com/telerik/ui-for-aspnet-mvc-6-demos/releases).
 - Navigate to the `Kendo.Mvc.Examples` folder using the Terminal.
