@@ -223,10 +223,11 @@ var __meta__ = { // jshint ignore:line
             var that = this;
             var item = that.templates.itemTemplate({ item: dataItem, r: that.templates.itemContent });
             that._unbindDataSource();
-            that._insertElementAt(item, index);
             if (typeof dataItem === typeof "") {
+                that._insertElementAt(item, index);
                 that.dataSource._data.push(dataItem);
             } else {
+                that._insertElementAt($(item).attr(kendoAttr(UNIQUE_ID), dataItem.uid), index);
                 that.dataSource.add(dataItem);
             }
             that._bindDataSource();
