@@ -44,7 +44,7 @@
             HIDE = "hide",
             WIDTH = "width",
             HUNDREDPERCENT = 100,
-            OK_CANCEL = {
+            messages = {
                 okText  : "OK",
                 cancel : "Cancel"
             },
@@ -822,7 +822,7 @@
             options: {
                 title: window.location.host,
                 closable: false,
-                messages: OK_CANCEL
+                messages: messages
             }
         });
 
@@ -892,7 +892,7 @@
 
             _createPrompt: function() {
                 var value = this.options.value,
-                    promptContainer = $(templates.promptInputContainer).insertAfter(this.element);
+                    promptContainer = $(templates.promptInputContainer(this.options)).insertAfter(this.element);
 
                 if (value) {
                     promptContainer.children(KTEXTBOX).val(value);
@@ -958,7 +958,7 @@
             alert: "<div />",
             confirm: "<div />",
             prompt: "<div />",
-            promptInputContainer: "<div class='k-prompt-container'><input type='text' class='k-textbox' /></div>"
+            promptInputContainer: template("<div class='k-prompt-container'><input type='text' class='k-textbox' title='#: messages.promptInput #' aria-label='#: messages.promptInput #' /></div>")
         };
 
         kendo.alert = kendoAlert;
