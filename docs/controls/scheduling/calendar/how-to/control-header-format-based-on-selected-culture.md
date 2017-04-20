@@ -7,7 +7,7 @@ slug: howto_control_header_format_calendar
 
 # Control the Header Format
 
-The example below demonstrates how to control the header format of Kendo UI Calendar widget based on a selected culture.
+The following example demonstrates how to control the header format of the Kendo UI Calendar based on a selected culture.
 
 ###### Example
 
@@ -56,6 +56,4 @@ The example below demonstrates how to control the header format of Kendo UI Cale
 
 ## See Also
 
-Other articles on the Kendo UI Calendar:
-
-* [Calendar JavaScript API Reference](/api/javascript/ui/calendar)
+* [JavaScript API Reference of the Calendar](/api/javascript/ui/calendar)

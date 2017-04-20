@@ -1,20 +1,24 @@
 ---
 title: Overview
 page_title: Overview | Kendo UI Calendar
-description: "Learn how to initialize the Kendo UI Calendar widget, configure its options and make use of custom templates."
+description: "Learn how to initialize the Kendo UI Calendar widget, configure its options, and make use of custom templates."
 slug: overview_kendoui_calendar_widget
 position: 1
 ---
 
 # Calendar Overview
 
-The [Kendo UI Calendar widget](http://demos.telerik.com/kendo-ui/calendar/index) renders a graphical calendar that supports navigation and selection. It also supports custom templates for its `month` view and configuration options for minimum and maximum dates, a start view and the depth of the navigation.
+The [Kendo UI Calendar widget](http://demos.telerik.com/kendo-ui/calendar/index) renders a graphical calendar that provides navigation and selection functionalities.
+
+It also supports custom templates for its `month` view and configuration options for minimum and maximum dates, a start view, and the depth of the navigation.
 
 ## Getting Started
 
 ### Initialize the Calendar
 
-Initialize the Calendar by using a jQuery selector:
+To initialize the Calendar, use a jQuery selector.
+
+###### Example
 
     <div id="calendar"></div>
 
@@ -26,20 +30,20 @@ Initialize the Calendar by using a jQuery selector:
 
 ## Configuration
 
-The Calendar provides many configuration options that can be set during initialization. Among the properties you can control are:
+The Calendar provides configuration options that can be set during initialization. The available properties are:
 
-*   Selected date
-*   Minimum and/or maximum date
-*   Start view
-*   Navigation depth (i.e., define the last view to which the user can navigate)
-*   Day template
-*   Footer template
+* Selected date
+* Minimum and/or maximum date
+* Start view
+* Navigation depth&mdash;that is, the option to define the last view to which the user can navigate.
+* Day template
+* Footer template
 
 The first day of the week depends on the applied [culture]({% slug culture_definition_kendoui_globalization %}).
 
-### Selected, Min, and Max Dates
+### Selected, Minimum, and Maximum Dates
 
-The example below demonstrates how to create a Calendar with a selected date and a defined minimum and maximum dates.
+The following example demonstrates how to create a Calendar with a selected date and a defined minimum and maximum dates.
 
 ###### Example
 
@@ -53,20 +57,22 @@ The example below demonstrates how to create a Calendar with a selected date and
         });
     </script>
 
-As a result, the Calendar does not navigate before the specified minimum date and also restricts the navigation to the maximum date you specified.
+As a result, the Calendar does not navigate to a date that is earlier than the specified minimum date and also restricts the navigation to the maximum date you specified.
 
 ### Start View and Navigation Depth
 
-Define the first rendered view with the `start` option. Control the navigation depth with the `depth` option. The following views are predefined:
+To define the first rendered view, use the `start` option. To control the navigation depth, set the `depth` option.
 
-*   `month` - shows the days of the month
-*   `year` - shows the months of the year
-*   `decade` - shows the years of the decade
-*   `century` - shows the decades of the century
+The following views are predefined:
 
-### Selectable Month Calendar
+* `month`&mdash;Shows the days of the month.
+* `year`&mdash;Shows the months of the year.
+* `decade`&mdash;Shows the years of the decade.
+* `century`&mdash;Shows the decades of the century.
 
-The example below demonstrates how to create a Calendar that allows users to select a month.
+### Create Selectable Month Calendars
+
+The following example demonstrates how to create a Calendar that allows users to select a month.
 
 ###### Example
 
@@ -81,11 +87,11 @@ The example below demonstrates how to create a Calendar that allows users to sel
 
 ## Day Templates
 
-Kendo UI Calendar allows rendered day customization for the `month` view.
+The Calendar enables you to customize the rendered day for the `month` view.
 
 ### Custom Templates
 
-The example below demonstrates how to create a Calendar by using a custom template.
+The following example demonstrates how to create a Calendar by using a custom template.
 
 ###### Example
 
@@ -108,13 +114,18 @@ The template wraps the `value` in a `<div>` HTML element. The structure of the d
         dateString: "2011/0/1" // formatted date using yyyy/MM/dd format and month is zero-based
     };
 
-## Disable Dates
+## Disabling Dates
 
-Kendo UI Calendar widget provides the functionality to disable certain days, such as weekends, national holidays, and others, which are not intended to be selected by the end user.
+The Calendar allows you to disable certain days which are not intended to be selected by the end user such as weekends, national holidays, and others.
+
+To disable a date, either:
+
+* Set an array, or
+* Add a function.
 
 ### Set an Array
 
-One way to disable a date is by setting an array. List the days that need to be disabled by using the first letters from their names in English.
+When you set an array, list the days that need to be disabled by using the first letters from their names in English.
 
 ###### Example
 
@@ -130,7 +141,7 @@ One way to disable a date is by setting an array. List the days that need to be 
 
 ### Add a Function
 
-The other way to disable dates is by adding a function and determine its return value as `true` for the date that is disabled.
+When you add a function, determine its return value as `true` for the date that is disabled.
 
 ###### Example
 
@@ -149,9 +160,10 @@ The other way to disable dates is by adding a function and determine its return 
 	});
     </script>
 ```
+
 ## See Also
 
-Other articles on Kendo UI Calendar:
+Other articles on the Kendo UI Calendar:
 
 * [How to Control the Header Format]({% slug howto_control_header_format_calendar %})
 * [Overview of the ASP.NET MVC HtmlHelper Extension for the Calendar Widget](/aspnet-mvc/helpers/calendar/overview)
@@ -159,7 +171,7 @@ Other articles on Kendo UI Calendar:
 * [Overview of the Calendar PHP Class](/php/widgets/calendar/overview)
 * [Calendar JavaScript API Reference](/api/javascript/ui/calendar)
 
-Articles on Kendo UI DatePicker:
+Articles on the Kendo UI DatePicker:
 
 * [Overview of the DatePicker Widget]({% slug overview_kendoui_datepicker_widget %})
 * [How to Set the First Weekday]({% slug howto_set_first_weekday_datepicker %})
@@ -168,7 +180,7 @@ Articles on Kendo UI DatePicker:
 * [How to Resize Calendar Based on Input Width]({% slug howto_use_resize_calendar_basedon_input_width_datepicker %})
 * [DatePicker JavaScript API Reference](/api/javascript/ui/datepicker)
 
-Articles on Kendo UI DateTimePicker:
+Articles on the Kendo UI DateTimePicker:
 
 * [Overview of the DateTimePicker Widget]({% slug overview_kendoui_datetimepicker_widget %})
 * [How to Prevent Invalid Values]({% slug howto_prevent_invalid_values_datetimepicker %})
@@ -177,7 +189,7 @@ Articles on Kendo UI DateTimePicker:
 * [How to Override Hours in the Popup]({% slug howto_override_hours_inpopup_datetimepicker %})
 * [DateTimePicker JavaScript API Reference](/api/javascript/ui/datetimepicker)
 
-Articles on Kendo UI TimePicker:
+Articles on the Kendo UI TimePicker:
 
 * [Overview of the TimePicker Widget]({% slug overview_kendoui_timepicker_widget %})
 * [TimePicker JavaScript API Reference](/api/javascript/ui/timepicker)
