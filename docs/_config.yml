@@ -469,6 +469,8 @@ navigation:
         position: 7
     "*listview":
         title: "ListView"
+    "*listbox":
+        title: "ListBox"
     "*maskedtextbox":
         title: "MaskedTextBox"
     "*menu":
