@@ -89,7 +89,7 @@ var __meta__ = { // jshint ignore:line
             return $(item).index();
         });
 
-        return indices.sort();
+        return indices;
     }
 
     function isUndefined(value) {
@@ -1221,16 +1221,16 @@ var __meta__ = { // jshint ignore:line
             var options = that.options;
             var items = that.getItems();
             var offset = options.offset;
-            var domIndices = getSortedDomIndices(items);
+            var indecesInDom = getSortedDomIndices(items);
             var movedItems = $.makeArray(items.sort(that.itemComparer));
             var moveAction = options.moveAction;
             var movedItem;
 
             if (!listBox.trigger(REORDER, { dataItems: listBox._dataItems(movedItems), items: $(movedItems), offset: offset })) {
-                while (movedItems.length > 0 && domIndices.length > 0) {
+                while (movedItems.length > 0 && indecesInDom.length > 0) {
                     movedItem = movedItems[moveAction]();
 
-                    listBox.reorder(movedItem, domIndices[moveAction]() + offset);
+                    listBox.reorder(movedItem, indecesInDom[moveAction]() + offset);
                 }
             }
         },
