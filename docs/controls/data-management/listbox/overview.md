@@ -8,13 +8,15 @@ position: 1
 
 # ListBox Overview
 
-The [Kendo UI ListBox widget](http://demos.telerik.com/kendo-ui/listbox/index) displays a list of data contained in a box and allows single or multiple selection, reordering, deleting items and features keyboard navigation as well as drag and drop. The Kendo UI ListBox can be connected with another listbox. The widget can be customized with the use of templates, toolbar positioning, placeholder and hint and command buttons messages localization.
+The [Kendo UI ListBox widget](http://demos.telerik.com/kendo-ui/listbox/index) displays a list of data that is contained in a box.
+
+It allows single or multiple selection, reordering of selected items, and deleting items and features keyboard navigation as well as the dragging and dropping of items. You can also connect the ListBox with another list-box and customize the widget with the use of templates, toolbar positioning, placeholder and hint, and localization of its command buttons messages.
 
 ## Getting Started
 
 ### Initialize the ListBox
 
-To create a Kendo UI ListBox, use a `select` element and supply the configuration settings in the initialization script. Alternatively, use the declarative approach which conforms to the convention of initializing Kendo UI widgets with [`data attributes`](/intro/widget-basics/data-attribute-initialization).
+To create a Kendo UI ListBox, use a `select` HTML element and supply the configuration settings in the initialization script. Alternatively, you can use the declarative approach which conforms to the convention of initializing Kendo UI widgets with [`data`](/intro/widget-basics/data-attribute-initialization) attributes.
 
 ###### Example
 
@@ -25,7 +27,7 @@ To create a Kendo UI ListBox, use a `select` element and supply the configuratio
         <option>Nancy Davolio</option>
     </select>
 
-Kendo UI ListBox will use the options from the HTML elements as its data source if a data source is not provided in its configuration settings. The Kendo UI ListBox can be configured for remote operations. More information is available at:
+If a data source is not provided in its configuration settings, the ListBox uses the options from the HTML elements as its data source. You can configure the widget for remote operations. For more information, refer to the articles on:
 
 * [DataSource]({% slug overview_kendoui_datasourcecomponent %})&mdash;The DataSource is one of the pivotal Kendo UI components. It is an abstraction for using local or remote data and a key concept in understanding how the Grid functions.
 * [Remote CRUD Operations]({% slug cruddataoperations_kendoui_datasourcecomponent %}#remote-transport-crud-operations)&mdash;The section elaborates on scenarios, in which data is retrieved from and submitted to a remote data service through HTTP requests made by the Kendo UI DataSource.
@@ -56,11 +58,11 @@ The following example demonstrates how to initialize the ListBox and bind it to 
     </script>
 ```
 
-When using complex data objects, use the `dataTextField` and `dataValueField` properties to notify the widget of your preferred binding behaviour.
+When you use complex data objects, use the `dataTextField` and `dataValueField` properties to notify the widget of your preferred binding behavior.
 
 ### Bind to Remote Data
 
-You can also bind the `DataSource` to remote data. The following example demonstrates how to binding the Kendo UI ListBox to a remote service.
+You can also bind the `DataSource` to remote data. The following example demonstrates how to bind the Kendo UI ListBox to a remote service.
 
 ###### Example
 
@@ -90,17 +92,29 @@ You can also bind the `DataSource` to remote data. The following example demonst
 
 ## Features
 
+The ListBox delivers the following features:
+
+* [Selection](#selection)
+* [Reordering of selected items](#reordering-of-selected-items)
+* [Dragging and dropping of items](#dragging-and-dropping)
+* [Item templates](#item-templates)
+* [Localization](#localization)
+
 ### Selection
 
-The Kendo UI ListBox has a default `single` selection. To configure multiple selection, add `selectable: "multiple"` to its settings. Multiple selected items will move together when selected, i.e. the selected items will be transfered to another Kendo UI ListBox together or reordered as a set among other items.
+The ListBox has a default `single` selection. To configure multiple selection, add `selectable: "multiple"` to its settings. When selected, multiple selected items move together, that is, the selected items are transferred to another Kendo UI ListBox together or reordered as a set among other items.
 
-### Reorder Selected Items
+### Reordering of Selections
 
-Selected items can be reordered with the toolbar `moveUp` and `moveDown` command buttons, drag and drop if the widget is `draggable` and with keyboard navigation <kbd>Ctrl</kbd> + <kbd>Shift</kbd> + <kbd>&darr;</kbd> or <kbd>Ctrl</kbd> + <kbd>Shift</kbd> + <kbd>&uarr;</kbd>
+Selected items can be reordered by using any of the following approaches:
+
+1. The `moveUp` and `moveDown` command buttons of the toolbar.
+1. The drag-and-drop functionality if the widget is `draggable`.
+1. The `Ctrl`+`Shift`+`&darr;` or `Ctrl`+`Shift`+`&uarr;` keyboard combination.
 
 > **Important**
 >
-> Currently multiple selected items cannot be dragged & dropped
+> Currently, the widget does not support the drag-and-drop feature for multiple selected items.
 
 ###### Example
 
@@ -126,9 +140,9 @@ Selected items can be reordered with the toolbar `moveUp` and `moveDown` command
     </script>
 ```
 
-### Drag and Drop
+### Dragging and Dropping
 
-The Kendo Ui ListBox drag and drop functionality can be enabled by setting its [`draggable`](/api/javascript/ui/listbox#configuration-draggable) propery to `true`. The drag and drop behaviour can be customized with a `draggable.placeholder` and a `draggable.hint`.
+To enable the drag-and-drop feature of the ListBox, set its [`draggable`](/api/javascript/ui/listbox#configuration-draggable) property to `true`. You can also customize the drag-and-drop behavior of the widget by using its `draggable.placeholder` and `draggable.hint` options.
 
 ##### Example
 
@@ -163,9 +177,9 @@ The Kendo Ui ListBox drag and drop functionality can be enabled by setting its [
     </script>
 ```
 
-### Templates
+### Item Templates
 
-The Kendo UI ListBox supports the use of [templates]({% slug overview_kendoui_templatescomponent %}) for its items passed as а function or string.
+The ListBox supports the use of [templates]({% slug overview_kendoui_templatescomponent %}) for its items that are passed as а function or string.
 
 ##### Example
 
@@ -193,7 +207,7 @@ The Kendo UI ListBox supports the use of [templates]({% slug overview_kendoui_te
 
 ### Localization
 
-The Kendo UI ListBox messages can be configured for each toolbar command button. The messages serve as tooltip text when a user hovers over the buttons.
+You can configure the ListBox messages for each toolbar command button. The messages serve as tooltip text when the user hovers over the buttons.
 
 ##### Example
 
@@ -233,7 +247,5 @@ The Kendo UI ListBox messages can be configured for each toolbar command button.
 
 ## See Also
 
-Other resources for the Kendo UI ListBox:
-
-* [JavaScript API Reference](/api/javascript/ui/listbox)
-* [Official Demos Site](http://demos.telerik.com/kendo-ui/listbox/index)
+* [JavaScript API Reference of the ListBox](/api/javascript/ui/listbox)
+* [ListBox Official Demo](http://demos.telerik.com/kendo-ui/listbox/index)
