@@ -1492,6 +1492,21 @@ The title of the tool that underlines text.
     });
     </script>
 
+### messages.units `String` *(default: "Units")*
+
+The label of the Units dropdowns in TableWizard dialog.
+
+#### Example
+
+    <textarea id="editor"></textarea>
+    <script>
+    $("#editor").kendoEditor({
+      messages: {
+        units: "Units"
+      }
+    });
+    </script>
+
 ### messages.unlink `String` *(default: "Remove hyperlink")*
 
 The title of the tool that removes hyperlinks.

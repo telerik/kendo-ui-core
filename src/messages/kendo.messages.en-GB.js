@@ -114,6 +114,7 @@ $.extend(true, kendo.ui.Editor.prototype.options.messages,{
   "summary": "Summary",
   "width": "Width",
   "height": "Height",
+  "units": "Units",
   "cellSpacing": "Cell Spacing",
   "cellPadding": "Cell Padding",
   "cellMargin": "Cell Margin",
