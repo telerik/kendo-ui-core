@@ -192,7 +192,9 @@ The field of the data item that provides the value of the widget.
 
 Indicates if the widget items can be draged and droped.
 
-> **Important:** Set the `dropSources` option if you want to drag to another ListBox widget. When `draggable` is set to true, the `selectable` option also should be set.
+> **Important:** Draggable option allows you to drag and drop items in single ListBox widget or across multiple widgets. If your case is the multiple widget scenario set the `dropSources` option on target ListBox widgets. Otherwise for the single ListBox scenario `dropSources` is not necessary.
+
+> **Important:** When `draggable` is set to true, the `selectable` option also should be set.
 
 ### draggable.hint `Function|String|jQuery`
 
@@ -254,6 +256,8 @@ If placeholder is not provided the widget will clone dragged item, remove its ID
 ### dropSources `Array`
 
 Array of id strings which determines the ListBox widgets that can drag and drop their items to the current ListBox widget. The `dropSources` option describes **one way** relationship, if the developer wants a two way connection then the `dropSources` option should be set on both widgets.
+
+> **Important:** Set the `draggable` option to all source ListBox widgets described in `dropSources`.
 
 #### Example - set up a one way connection from ListBoxA to ListBoxB
 
@@ -567,7 +571,7 @@ Multiple item selection.
     });
     </script>
 
-### template `Function`
+### template `String|Function`
 
 Specifies ListBox item template.
 
@@ -662,6 +666,30 @@ A collection of tools that are used to interact with the ListBox. The built-in t
     </script>
 
 ## Methods
+
+### clearSelection
+
+Clears ListBox selected items and triggers change event.
+
+#### Example
+
+    <div id ="listBox"></div>
+    <script>
+    $("#listBox").kendoListBox({
+         dataSource: {
+            data: [
+                { name: "New York" },
+                { name: "London" },
+                { name: "Paris" }
+            ]
+        },
+        template: "<div>#:name#</div>",
+        selectable: true
+    });
+    // get a reference to the list box widget
+    var listBox = $("#listBox").data("kendoListBox");
+    listBox.clearSelection();
+    </script>
 
 ### dataItem
 
@@ -847,7 +875,7 @@ Removes item(s) from the widget.
 
 #### Parameters
 
-##### element `jQuery|Element|String`
+##### element `jQuery|Element|String|Array`
 
 The item(s) that will be removed.
 
@@ -908,6 +936,30 @@ Sets the dataSource of an existing ListBox and rebinds it.
 #### Parameters
 
 ##### dataSource `kendo.data.DataSource`
+
+#### Example
+
+    <select id="listBox"></select>
+    <script>
+    $("#listBox").kendoListBox({
+        dataValueField: "id",
+        dataTextField: "name",
+        dataSource: {
+            data: [
+                { id: 1, name: "United States" },
+                { id: 2, name: "France" }
+            ]
+        }
+    });
+    var dataSource = new kendo.data.DataSource({
+        data: [
+            { id: 3, name: "Germany" },
+            { id: 4, name: "Sweden" }
+        ]
+    });
+    var listbox = $("#listBox").data("kendoListBox");
+    listbox.setDataSource(dataSource);
+    </script>
 
 #### Example
 
