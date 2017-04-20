@@ -1,25 +1,25 @@
 ---
 title: Upgrade API Analyzer tool
 page_title: Upgrade API Analyzer tool | UI for ASP.NET MVC Visual Studio Integration
-description: "Learn how to analyze a Telerik UI for ASP.NET MVC application."
+description: "Learn how to analyze a Progress&reg; Telerik&reg; UI for ASP.NET MVC application."
 slug: upgrade_api_analyzer_visualstudio_aspnetmvc
 position: 8
 ---
 
-# Telerik Upgrade API Analyzer 
+# Telerik Upgrade API Analyzer
 
 With every release of UI for ASP.NET MVC, we try to avoid introducing changes that affect the public API. However, sometimes such changes are needed for the product to evolve. We understand that this could cause issues when  you upgrade your app to the latest Telerik release. That is why we have the **Telerik Upgrade API Analyzer**; its purpose is to make your upgrade process easier by comparing both versions and determining the problematic areas.
 
 Aside from UI for ASP.NET MVC product, Telerik Upgrade API Analyzer could be used when upgrading your desktop application such as WPF or WinForms as well as your Silverlight application.
 
-**Telerik Upgrade API Analyzer** currently supports Telerik releases from  Q2 2013 SP1 (2013.2.918) until Q1 2017 (2017.1.118). Additional releases can be added upon request. 
+**Telerik Upgrade API Analyzer** currently supports Telerik releases from  Q2 2013 SP1 (2013.2.918) until Q1 2017 (2017.1.118). Additional releases can be added upon request.
 
 ## Why Do You Need This Tool?
-           
+
 In short, the __Telerik Upgrade API Analyzer__ tool will help you with the upgrade of the Telerik controls to a newer version. It thoroughly analyzes the code of your project and provides a list of the changes found between the currently used release and the release you’re planning to upgrade to. Such changes could include obsolete and removed methods and properties as well as modified methods and properties. Additionally, the tool points out the exact piece of code that is affected by a certain change and in cases that involve an obsolete method/property, the tool gives suggestions of how to modify that code.                      
 
 
->importantAt this stage of development, Telerik Upgrade API Analyzer checks only the **C#** code of your application. 
+>importantAt this stage of development, Telerik Upgrade API Analyzer checks only the **C#** code of your application.
 
 ## Where Do You Get Telerik Upgrade API Analyzer?
 
@@ -41,21 +41,21 @@ All you need to do is:
 
 2. Select the current version of Telerik assemblies you are using.
 
-3. Select the version you would like to upgrade to. 
+3. Select the version you would like to upgrade to.
 
 	The three comboboxes are populated on the fly depending on your choices, so you should select the desired values consecutively.
 
 4. Open the solution you’re planning to upgrade.  
 
 > **Important**
-> 
+>
 >You can also run the Telerik Upgrade API Analyzer from the [Upgrade Project Wizard]({%slug projectwizardupgrade_visualstudio_aspnetmvc%}), by clicking the *Compatibility* button (see **Figure 2**). In this case, the tool opens with *Technology*, *Your Version* and *Version to Upgrade* parameters pointed out in the wizard. When Upgrade API Analyzer is started directly through the *Compatibility* button without installing the tool first, the installation starts automatically. In case .NET Framework 4.5.2 is not present on your machine, the application prompts you to install it manually at the end of the installation.
 
 #### __Figure 2: Compatibility button in Upgrade Project Wizard__
 
 ![](images/upgrade-api-analyzer_5.png)
 
-The tool starts analyzing the code, as shown in __Figure 3__, and lists all the changes found between both versions, as demonstrated in __Figure 4__. 
+The tool starts analyzing the code, as shown in __Figure 3__, and lists all the changes found between both versions, as demonstrated in __Figure 4__.
 
 #### __Figure 3: The tool starts analyzing as soon as you open a solution__
 
@@ -64,8 +64,8 @@ The tool starts analyzing the code, as shown in __Figure 3__, and lists all the 
 #### __Figure 4: Upgrade API Analyzer lists the found differences__
 
 ![](images/upgrade-api-analyzer_2.png)
- 
-__Upgrade API Analyzer__ provides a detailed list of the found differences between both versions in a convenient way for reviewing.  The tool uses [RadGridView for WPF](http://docs.telerik.com/devtools/wpf/controls/radgridview/overview2.html) to present the results, so you can benefit from its features such as sorting, filtering and resizing columns. 
+
+__Upgrade API Analyzer__ provides a detailed list of the found differences between both versions in a convenient way for reviewing.  The tool uses [RadGridView for WPF](http://docs.telerik.com/devtools/wpf/controls/radgridview/overview2.html) to present the results, so you can benefit from its features such as sorting, filtering and resizing columns.
 
 For each of the changes, you can see the following information:
 
