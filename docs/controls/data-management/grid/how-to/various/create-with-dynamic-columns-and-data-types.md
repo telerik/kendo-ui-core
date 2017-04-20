@@ -20,7 +20,7 @@ The following example demonstrates how to create a Grid with column and data-fie
       var isDateField =[];
       $.ajax({
         url: "http://www.mocky.io/v2/5835e736110000020e0c003c",
-        dataType: "json",
+        dataType: "jsonp",
         success: function(result) {
           generateGrid(result);
         }
