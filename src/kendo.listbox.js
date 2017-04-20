@@ -311,11 +311,11 @@ var __meta__ = { // jshint ignore:line
             }
 
             if(key === keys.UP && that._target) {
-                current = that._target.prev(ENABLED_ITEM_SELECTOR);
+                current = that._target.prevAll(ENABLED_ITEM_SELECTOR).first();
             }
 
             if(key === keys.DOWN && that._target) {
-                current = that._target.next(ENABLED_ITEM_SELECTOR);
+                current = that._target.nextAll(ENABLED_ITEM_SELECTOR).first();
             }
 
             return current.length ? current : null;
@@ -366,9 +366,10 @@ var __meta__ = { // jshint ignore:line
                 }
                 if (e.shiftKey) {
                     if(e.ctrlKey) {
-                        index = that.items().index(current);
+                        index = that.items().index(key === keys.DOWN ? that._target.next() : that._target.prev());
                         if(!that.trigger(REORDER, { dataItem: that.dataItem(that._target), item: $(that._target) })) {
                             that.reorder(that._target, index);
+                            that._target.addClass(FOCUSED_CLASS);
                             return;
                         }
                     } else {

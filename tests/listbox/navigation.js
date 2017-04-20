@@ -116,7 +116,7 @@
         ok(listA.items().length === initialCount - 3, "Items are correctly deleted");
     });
 
-    test("Items are correctly reordered using keyboard", 2, function() {
+    test("Items are correctly reordered using keyboard", 4, function() {
         var firstItem = listA.dataItem(listA.items().first());
 
         listA.focus();
@@ -124,24 +124,11 @@
         listA._keyDown({ keyCode: keys.DOWN, shiftKey: true, ctrlKey:true, preventDefault: $.noop });
 
         ok(firstItem === listA.items().first().next().html());
-
+        ok(listA.items().first().next().hasClass("k-state-focused") === true);
         listA._keyDown({ keyCode: keys.UP, shiftKey: true, ctrlKey:true, preventDefault: $.noop });
 
         ok(firstItem === listA.items().first().html());
-    });
-
-    test("Items are correctly reordered using keyboard", 2, function() {
-        var firstItem = listA.dataItem(listA.items().first());
-
-        listA.focus();
-        listA._keyDown({ keyCode: keys.DOWN, preventDefault: $.noop });
-        listA._keyDown({ keyCode: keys.DOWN, shiftKey: true, ctrlKey:true, preventDefault: $.noop });
-
-        ok(firstItem === listA.items().first().next().html());
-
-        listA._keyDown({ keyCode: keys.UP, shiftKey: true, ctrlKey:true, preventDefault: $.noop });
-
-        ok(firstItem === listA.items().first().html());
+        ok(listA.items().first().hasClass("k-state-focused") === true);
     });
 
     test("TRANSFER_ALL_TO is correctly called", 1, function() {
@@ -178,5 +165,30 @@
 
         listA.focus();
         listA._keyDown({ keyCode: keys.LEFT, ctrlKey:true, preventDefault: $.noop });
+    });
+
+    test("Focused item jump over disabled items", 1, function() {
+        listA.enable(listA.items().eq(1), false);
+        listA.focus();
+        listA._keyDown({ keyCode: keys.DOWN, preventDefault: $.noop });
+        listA._keyDown({ keyCode: keys.DOWN, preventDefault: $.noop });
+
+        ok(listA.items().eq(2).hasClass("k-state-focused") === true);
+    });
+
+    test("Reorder works correctly with disabled items", 4, function() {
+        var firstItem = listA.dataItem(listA.items().first());
+
+        listA.enable(listA.items().eq(1), false);
+        listA.focus();
+        listA._keyDown({ keyCode: keys.DOWN, preventDefault: $.noop });
+        listA._keyDown({ keyCode: keys.DOWN, shiftKey: true, ctrlKey:true, preventDefault: $.noop });
+
+        ok(firstItem === listA.items().first().next().html());
+        ok(listA.items().first().hasClass("k-state-disabled") === true);
+        listA._keyDown({ keyCode: keys.UP, shiftKey: true, ctrlKey:true, preventDefault: $.noop });
+
+        ok(firstItem === listA.items().first().html());
+        ok(listA.items().eq(1).hasClass("k-state-disabled") === true);
     });
 })();
