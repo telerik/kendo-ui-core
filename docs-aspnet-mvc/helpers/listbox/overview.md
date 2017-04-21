@@ -8,20 +8,31 @@ position: 1
 
 # ListBox HtmlHelper Overview
 
-The ListBox HtmlHelper extension is a server-side wrapper for the [Kendo UI ListBox](http://demos.telerik.com/aspnet-mvc/listbox/index). It displays a list of data contained in a box and allows single or multiple selection, reordering, deleting items and features keyboard navigation as well as drag and drop. The Kendo UI ListBox can be connected with another listbox. The widget can be customized with the use of templates, toolbar positioning, placeholder and hint and command buttons messages to facilitate localization.
+The ListBox HtmlHelper extension is a server-side wrapper for the [Kendo UI ListBox](http://demos.telerik.com/aspnet-mvc/listbox/index).
+
+It displays a list of data that is contained in a box and allows single or multiple selection, reordering of selected items, and deleting items and features keyboard navigation as well as the dragging and dropping of items. You can also connect the ListBox with another list-box and customize the widget with the use of templates, toolbar positioning, placeholder and hint, and localization of its command buttons messages.
 
 ## Getting Started
 
-### Initialize the ListBox
+To start using the ListBox, you can use either:
 
-### Server Binding with Static Data
+* [Server-binding with static data](#server-binding-with-static-data), or
+* [Ajax binding](#ajax-binding).
+
+> **Important**
+>
+> When you use complex data objects, set the `DataTextField("TextField")` and `DataValueField("ValueField")` properties to notify the widget of your preferred binding behavior.
+
+### Server-Binding with Static Data
+
+The following example demonstrates how to bind the ListBox on the server when you use static data.
 
 ###### Example
 
 ```tab-Razor
    @(Html.Kendo().ListBox()
         .Name("optional")
-        .Toolbar(toolbar => 
+        .Toolbar(toolbar =>
         {
             toolbar.Position(Kendo.Mvc.UI.Fluent.ListBoxToolbarPosition.Right);
             toolbar.Tools(tools => tools
@@ -49,13 +60,9 @@ The ListBox HtmlHelper extension is a server-side wrapper for the [Kendo UI List
     }
 ```
 
-> **Important**
->
-> When using complex data objects, use the `DataTextField("TextField")` and `DataValueField("ValueField")` properties to notify the widget of your preferred binding behaviour.
-
 ### Ajax Binding
 
-You can bind the `DataSource` to remote data as shown in the example below.
+The following example demonstrates how to bind the `DataSource` component to remote data.
 
 ###### Example
 
@@ -76,23 +83,35 @@ You can bind the `DataSource` to remote data as shown in the example below.
 
 ## Features
 
+The ListBox delivers the following features:
+
+* [Selection](#selection)
+* [Reordering of selected items](#reordering-of-selections)
+* [Dragging and dropping of items](#dragging-and-dropping)
+* [Item templates](#item-templates)
+* [Localization](#localization)
+
 ### Selection
 
-The Kendo UI ListBox has a default `single` selection. To configure multiple selection, add `.Selectable(ListBoxSelectable.Multiple)` to its settings. Multiple selected items will move together when selected, i.e. the selected items will be transfered to another Kendo UI ListBox together or reordered as a set among other items.
+The ListBox has a default `single` selection. To configure multiple selection, add `selectable: "multiple"` to its settings. When selected, multiple selected items move together, that is, the selected items are transferred to another Kendo UI ListBox together or reordered as a set among other items.
 
-### Reorder Selected Items
+### Reordering of Selections
 
-Selected items can be reordered with the toolbar `MoveUp()` and `MoveDown()` command buttons, drag and drop if the widget is `Draggable()` and with keyboard navigation <kbd>Ctrl</kbd> + <kbd>Shift</kbd> + <kbd>&darr;</kbd> or <kbd>Ctrl</kbd> + <kbd>Shift</kbd> + <kbd>&uarr;</kbd>
+Selected items can be reordered by using any of the following approaches:
+
+1. The `moveUp` and `moveDown` command buttons of the toolbar.
+1. The drag-and-drop functionality if the widget is `draggable`.
+1. The `Ctrl`+`Shift`+`&darr;` or `Ctrl`+`Shift`+`&uarr;` keyboard combination.
 
 > **Important**
 >
-> Currently multiple selected items cannot be dragged & dropped
+> Currently, the widget does not support the drag-and-drop feature for multiple selected items.
 
-### Drag and Drop
+### Dragging and Dropping
 
-The Kendo Ui ListBox drag and drop functionality can be enabled by setting it as `Draggable()` and configuring its `.Draggable().DropSources("dropSourceId")`. The drag and drop behaviour can be customized with a draggable placeholder hint templates which accept the name of a JavaScript function.
+To enable the drag-and-drop feature of the ListBox, set it as `Draggable()` and configure its `.Draggable().DropSources("dropSourceId")` option. You can also customize the drag-and-drop behavior of the widget by using a draggable placeholder hint templates which accept the name of a JavaScript function.
 
-##### Example
+###### Example
 
 ```tab-Razor
 
@@ -121,11 +140,11 @@ The Kendo Ui ListBox drag and drop functionality can be enabled by setting it as
     </script>
 ```
 
-### Templates
+### Item Templates
 
-The Kendo UI ListBox supports the use of [templates]({% slug overview_kendoui_templatescomponent %}) for its items passed as function or string.
+The ListBox supports the use of [templates]({% slug overview_kendoui_templatescomponent %}) for its items that are passed as а function or string.
 
-##### Example
+###### Example
 
 ```tab-Razor
 
@@ -146,9 +165,9 @@ The Kendo UI ListBox supports the use of [templates]({% slug overview_kendoui_te
 
 ### Localization
 
-The Kendo UI ListBox `Messages()` can be configured for each toolbar command button. The messages serve as tooltip text when a user hovers over the buttons.
+You can configure the ListBox `Messages()` for each toolbar command button. The messages serve as tooltip text when the user hovers over the buttons.
 
-##### Example
+###### Example
 
 ```tab-Razor
 
@@ -178,7 +197,5 @@ The Kendo UI ListBox `Messages()` can be configured for each toolbar command but
 
 ## See Also
 
-Other resources for the Kendo UI ListBox:
-
-* [JavaScript API Reference](/api/javascript/ui/listbox)
-* [Official Demos Site](http://demos.telerik.com/aspnet-mvc/listbox/index)
+* [JavaScript API Reference of the ListBox](/api/javascript/ui/listbox)
+* [ListBox Official Demo](http://demos.telerik.com/aspnet-mvc/listbox/index)
