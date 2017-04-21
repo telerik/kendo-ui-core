@@ -30,9 +30,10 @@ The following example demonstrates how to add a font icon to a Kendo UI Button.
         <span class="k-icon k-i-copy"></span> Copy
     </a>
 ```
+
 ## What Are Icon Fonts
 
-Icon fonts are fonts which contain vector glyphs instead of letters and numbers. They can be easily styled with CSS by using all styling properties that can be applied to a regular text in a modern browser.
+Icon fonts are fonts which contain vector glyphs instead of letters and numbers. You can easily style them with CSS by using all styling properties that can be applied to a regular text in a modern browser.
 
 ## Why Use Icon Fonts
 
@@ -40,20 +41,20 @@ The utilization of icon fonts in a user interface (UI) naturally succeeds the so
 
 Font icons demonstrate significant benefits such as:
 
-Improved scalability while icon sprites are bitmap raster images and do not scale well, icon fonts use vector graphics, look perfect on retina displays, and make scaling as easy as setting the `font-size` configuration option.
-[Improved design capabilities](http://docs.telerik.com/kendo-ui/styles-and-layout/appearance-styling#getting-started)&mdash;You can easily apply CSS effects on the fly by setting the [text color](#toc-set-icon-color), shadow, or other options for different interaction states. For example, on `:hover`.
-Improved browser support&mdash;Font icons are browser-agnostic and are supported by all modern browsers.
-Reduced number of HTTP requests&mdash;To load an icon font, you need a maximum of a few HTTP requests.
-Reduced file size&mdash;Like some 500 vector icons in a 100kb file.
+* [Improved scalability](#sizes)&mdash;While icon sprites are bitmap raster images and do not scale well, icon fonts use vector graphics, look perfect on retina displays, and make scaling as easy as setting the `font-size` configuration option.
+* [Improved design capabilities](http://docs.telerik.com/kendo-ui/styles-and-layout/appearance-styling#getting-started)&mdash;You can easily apply CSS effects on the fly by setting the [text color](#colors), shadow, or other options for different interaction states. For example, on `:hover`.
+* Improved browser support&mdash;Font icons are browser-agnostic and are supported by all modern browsers.
+* Reduced number of HTTP requests&mdash;To load an icon font, you need a maximum of a few HTTP requests.
+* Reduced file size&mdash;A 100KB file contains approximately 500 vector icons.
 
 ## Basic Usage
 
-To make use of the Kendo UI font icons:
+To use the Kendo UI font icons:
 
- 1. [Load]({% slug themesandstyles_kendouiforangular %}) a Kendo UI theme into your project.
- 2. Assign a `k-icon` CSS class followed by a predefined class from the [list of font icons](#toc-list-of-font-icons) to an html tag. For example, `<span>` as demonstrated in the following example.
- 
- ```html
+ 1. [Load]({% slug themesandappearnce_kendoui_desktopwidgets %}) a Kendo UI theme into your project.
+ 2. Assign a `k-icon` CSS class followed by a predefined class from the [list of font icons](#list-of-font-icons) to an HTML tag. For example, the `<span>` element as demonstrated in the following example.
+
+```html
  <span class="k-icon k-i-calendar"></span>
 ```
 
@@ -70,11 +71,20 @@ Though the web icon font comes with a [set of predefined CSS classes](#toc-list-
     }
  </style>
  ```
+
+## Visual Adjustments
+
+Icon fonts support the following options for visual enhancement:
+
+* Application of [different sizes](#sizes).
+* Application of [icon colors](#colors).
+* [Flipping](#flipping) of icons.
+
 ### Sizes
 
 The Kendo UI font icons are designed on a 16px grid base. To achieve a pixel-perfect icon display, scale up by maintaining the 16-unit measure (32, 48, 64, and so on).
 
-You can easily scale icons by just setting the `font-size` configuration option.  
+You can scale icons by just setting the `font-size` configuration option.  
 
 ```html
 <span class="k-icon k-i-gear"></span>
@@ -111,6 +121,7 @@ To set the icon color, use the `color` CSS property.
     }
 </style>
 ```
+
 ### Flipping
 
 To better accommodate an icon in your application, flip it by using the `k-flip-h` and `k-flip-v` predefined CSS classes.
@@ -629,12 +640,12 @@ fonts in fonts/
     <li><span class="k-icon k-i-radiobutton-checked"></span> .k-i-radiobutton-checked</li>
 </ul>
 
-<script> 
-$(".k-icon").each(function() { 
-    function iconGlyph(el) { 
+<script>
+$(".k-icon").each(function() {
+    function iconGlyph(el) {
         return window.getComputedStyle(el,':before').content.charCodeAt(1).toString(16);
-     } 
-     $(this.parentNode).append("Unicode: " + iconGlyph(this) + "") 
+     }
+     $(this.parentNode).append("Unicode: " + iconGlyph(this) + "")
 });
 </script>
 
