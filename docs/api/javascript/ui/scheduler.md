@@ -2500,6 +2500,10 @@ The text similar to "last" displayed in the scheduler recurrence editor.
     });
     </script>
 
+### messages.recurrenceEditor.recurrenceEditorTitle `String`
+
+The text of the Recurence editor dropdown title.
+
 ### messages.recurrenceEditor.weekly `Object`
 
 The configuration of the scheduler recurrence editor weekly messages. Use this option to customize or localize the scheduler recurrence editor weekly messages.
