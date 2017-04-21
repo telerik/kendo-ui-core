@@ -26,6 +26,7 @@ The following table shows the Section 508 and WCAG 2.0 Compliance level of suppo
 |TreeList	   |Yes |AAA |[Browse](http://demos.telerik.com/kendo-ui/treelist/index)
 |PivotGrid	   |Yes | AAA |[Browse](http://demos.telerik.com/kendo-ui/pivotgrid/index)
 |ListView	   |Yes |AAA |[Browse](http://demos.telerik.com/kendo-ui/listview/index)
+|ListBox     |Yes |AAA |[Browse](http://demos.telerik.com/kendo-ui/listbox/index)
 |MediaPlayer   |Yes |AAA |[Browse](http://demos.telerik.com/kendo-ui/mediaplayer/index)
 |ScrollView	   |Yes |AAA |[Browse](http://demos.telerik.com/kendo-ui/scrollview/index)
 |Calendar	   |Yes |AAA |[Browse](http://demos.telerik.com/kendo-ui/calendar/index)

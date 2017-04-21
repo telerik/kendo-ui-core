@@ -1,7 +1,7 @@
 ---
 title: ListBox
-page_title: ListBox | UI for ASP.NET Core Tag Helpers
-description: "Learn the basics when working with the ListBox tag helper for ASP.NET Core (MVC 6 or ASP.NET Core MVC)."
+page_title: ListBox for ASP.NET Core | UI for ASP.NET Core HtmlHelper
+description: "Learn how to configure the ListBox HtmlHelper for ASP.NET Core (MVC 6 or ASP.NET Core MVC)."
 slug: htmlhelpers_listbox_aspnetcore
 ---
 
@@ -14,8 +14,6 @@ It displays a list of data that is contained in a box and allows single or multi
 For more information, refer to the article on the [ListBox HtmlHelper for ASP.NET MVC]({% slug overview_listboxhelper_aspnetmvc %}).
 
 ## Basic Usage
-
-The following example demonstrates how to define the ListBox by using the ListBox tag helper.
 
 ###### Example
 
@@ -103,6 +101,7 @@ The following example demonstrates the basic configuration for the ListBox tag h
 
 * [JavaScript API Reference of the ListBox](/api/javascript/ui/listbox)
 * [ListBox HtmlHelper for ASP.NET MVC]({% slug overview_listboxhelper_aspnetmvc %})
+* [ListBox Official Demos](http://demos.telerik.com/aspnet-core/listbox/index)
 * [Overview of Telerik UI for ASP.NET Core - RC1]({% slug overview_aspnetmvc6_aspnetmvc %})
 * [Get Started with Telerik UI for ASP.NET MVC in ASP.NET Core Projects]({% slug gettingstarted_aspnetmvc6_aspnetmvc %})
 * [Get Started with Telerik UI for ASP.NET MVC in ASP.NET Core Projects on Linux]({% slug gettingstartedlinux_aspnetmvc6_aspnetmvc %})

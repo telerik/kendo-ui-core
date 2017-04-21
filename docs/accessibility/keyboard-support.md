@@ -35,6 +35,7 @@ In addition to the `accesskey` attribute support, most Kendo UI widgets also off
 - [Editor](http://demos.telerik.com/kendo-ui/web/editor/navigation.html)
 - [Gantt](http://demos.telerik.com/kendo-ui/gantt/keyboard-navigation)
 - [Grid](http://demos.telerik.com/kendo-ui/web/grid/navigation.html)
+- [ListBox](http://demos.telerik.com/kendo-ui/listview/keyboard-navigation)
 - [ListView](http://demos.telerik.com/kendo-ui/web/listview/navigation.html)
 - [MediaPlayer](http://demos.telerik.com/kendo-ui/web/mediaplayer/navigation.html)
 - [Menu](http://demos.telerik.com/kendo-ui/web/menu/navigation.html)
