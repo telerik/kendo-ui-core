@@ -196,6 +196,40 @@ Indicates if the widget items can be draged and droped.
 
 > **Important:** When `draggable` is set to true, the `selectable` option also should be set.
 
+### draggable.enabled `Boolean` *(default: true)*
+
+Indicates whether dragging is enabled.
+
+#### Example - ListBox with disabled dragging
+
+    <select id="listBoxA">
+        <option>ItemA1</option>
+        <option>ItemA2</option>
+    </select>
+    <select id="listBoxB">
+        <option>ItemB1</option>
+        <option>ItemB2</option>
+    </select>
+
+    <script>
+        $("#listBoxA").kendoListBox({
+            draggable: true
+        });
+
+        $("#listBoxB").kendoListBox({
+            dropSources: [ "listBoxA" ],
+            draggable: {
+                enabled: false,
+                placeholder: function(element) {
+                    return element.clone().css({
+                        "opacity": 0.3,
+                        "border": "1px dashed #000000"
+                    });
+                }
+            }
+        });
+    </script>
+
 ### draggable.hint `Function|String|jQuery`
 
 Provides a way for customization of the draggable item hint. If a function is supplied, it receives one argument - the draggable element's jQuery object.

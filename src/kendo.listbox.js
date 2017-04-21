@@ -457,6 +457,11 @@ var __meta__ = { // jshint ignore:line
             var dataItem = that.dataItem(draggedElement);
             var eventData = { dataItems: dataItem, items: $(draggedElement), draggableEvent: e };
 
+            if(that.options.draggable.enabled === false) {
+                e.preventDefault();
+                return;
+            }
+
             if(!placeholder) {
                 placeholder = defaultPlaceholder;
             }
