@@ -890,6 +890,8 @@ The item to be reordered.
 
 The new position of the item in the list.
 
+#### Example
+
     <select id="listBox">
         <option>Orange</option>
         <option>Apple</option>
@@ -934,6 +936,16 @@ The item(s) that will be removed.
 
 Get/set the selected ListBox item(s).
 
+#### Parameters
+
+##### items `jQuery|Array`
+
+The item(s) to select.
+
+#### Returns
+
+`jQuery` the selected item(s) if called without arguments.
+
 #### Example
 
     <select id="listBox"></select>
@@ -952,16 +964,6 @@ Get/set the selected ListBox item(s).
     // selects first list box item
     listBox.select(listBox.items().first());
     </script>
-
-#### Returns
-
-`jQuery` the selected item(s) if called without arguments.
-
-#### Parameters
-
-##### items `jQuery|Array`
-
-The item(s) to select.
 
 ### setDataSource
 
@@ -1017,6 +1019,16 @@ Fires before an item is added to the ListBox.
 
 The event handler function context (available via the `this` keyword) will be set to the widget instance.
 
+#### Event Data
+
+##### e.items `Array`
+
+The item elements to be added.
+
+##### e.dataItems `Array`
+
+The data items to be added.
+
 #### Example
 
     <select id="listBoxA">
@@ -1042,16 +1054,6 @@ The event handler function context (available via the `this` keyword) will be se
             }
         });
     </script>
-
-#### Event Data
-
-##### e.items `Array`
-
-The item elements to be added.
-
-##### e.dataItems `Array`
-
-The data items to be added.
 
 ### change
 
@@ -1118,9 +1120,9 @@ Fires when ListBox item(s) drag starts.
 
 The original draggable's dragstart event data.
 
-##### e.item `jQuery`
+##### e.items `jQuery`
 
-The element that will be dragged.
+The elements that will be dragged.
 
 ##### e.preventDefault `Function`
 
@@ -1151,21 +1153,21 @@ Fires when ListBox's placeholder changes its position.
 
 #### Event Data
 
-##### e.item `jQuery`
+##### e.items `jQuery`
 
-The element that is dragged.
+The elements that are beeing dragged.
 
-##### e.target `jQuery`
+##### e.dataItems `Array`
 
-The target element under cursor against which placeholder is positioned.
-
-##### e.list `kendo.ui.ListBox`
-
-The ListBox widget instance which the item belongs to (useful in case there are connected ListBox widgets).
+The data items which are beeing dragged.
 
 ##### e.draggableEvent `Object`
 
 The original draggable's drag event data.
+
+##### e.preventDefault `Function`
+
+If invoked prevents the drag start action. The element will remain at its original position. The hint will not be initialized. Hint will be initialized.
 
 #### Example
 
@@ -1197,6 +1199,10 @@ The item elements to be droped.
 
 The data items which to be droped.
 
+##### e.preventDefault `Function`
+
+If invoked prevents the drop action. The element will remain at its original position. The hint and placeholder will be initialized.
+
 #### Example
 
     <select id="listBox">
@@ -1220,25 +1226,13 @@ Fires when item dragging ends but before the item's position is changed in the D
 
 #### Event Data
 
-##### e.action `String`
-
-Possible values are: "drag" - indicates that item's position was changed inside the same ListBox container; "remove" - indicates that the item was removed from current ListBox widget; "receive" - indicates that the item was received by a connected ListBox widget instance;
-
-##### e.preventDefault `Function`
-
-If invoked prevents the drag action. The element will be reverted at its original position. The hint and placeholder will be destroyed.
-
 ##### e.items `Array`
 
 The item elements to be dragged.
 
-##### e.oldIndex `Number`
+##### e.dataItems `Array`
 
-The original position of the item in the ListBox collection. In case the item is received from connected ListBox the value will be -1
-
-##### e.newIndex `Number`
-
-The position where item will be placed. In case the item is removed from connected ListBox the value will be -1
+The data items which to be dragged.
 
 ##### e.draggableEvent `Object`
 
@@ -1271,6 +1265,16 @@ The original draggable's drag event data.
 Fires before an item is removed from the ListBox.
 
 The event handler function context (available via the `this` keyword) will be set to the widget instance.
+
+#### Event Data
+
+##### e.items `Array`
+
+The item elements to be removed.
+
+##### e.dataItems `Array`
+
+The data items to be removed.
 
 #### Example
 
@@ -1336,19 +1340,23 @@ The event handler function context (available via the `this` keyword) will be se
     listBox.remove(listBox.items().first());
     </script>
 
+### reorder
+
+Fires when items in the widget are reordered.
+
 #### Event Data
 
 ##### e.items `Array`
 
-The item elements to be removed.
+The item elements to be reordered.
 
 ##### e.dataItems `Array`
 
-The data items to be removed.
+The data items to be reordered.
 
-### reorder
+##### e.offset `Number`
 
-Fires when items in the widget are reordered.
+The offset is -1 when moving up and 1 when moving down.
 
 #### Example
 
@@ -1368,17 +1376,3 @@ Fires when items in the widget are reordered.
             }
         });
     </script>
-
-#### Event Data
-
-##### e.items `Array`
-
-The item elements to be reordered.
-
-##### e.dataItems `Array`
-
-The data items to be reordered.
-
-#### e.offset `Number`
-
-The offset is -1 when moving up and 1 when moving down.
