@@ -538,13 +538,19 @@ var __meta__ = { // jshint ignore:line
             var connectedListBox;
             var items;
             var node;
+            var originalElement = element;
+            var closestContainer;
 
-            if(element.getKendoListBox()) {
-                connectedListBox = element.getKendoListBox();
+            if(element.hasClass("k-list-scroller k-selectable")) {
+                closestContainer = element;
+            } else {
+                closestContainer = element.closest(".k-list-scroller.k-selectable");
             }
 
-            if(!connectedListBox) {
-                connectedListBox = element.closest(".k-list-scroller.k-selectable").next().getKendoListBox();
+            if(closestContainer.length) {
+                connectedListBox = closestContainer.parent().find("[data-role='listbox']").getKendoListBox();
+            } else {
+                return null;
             }
 
             if(connectedListBox && $.inArray(this.element[0].id, connectedListBox.options.dropSources) !== -1) {
@@ -554,7 +560,9 @@ var __meta__ = { // jshint ignore:line
                 if(node) {
                     node = $(node);
                     return !node.hasClass(DISABLED_STATE_CLASS) ? { element: node, listBox: connectedListBox } : null;
-                } else if(!items.length) {
+                } else if(!items.length ||
+                            originalElement.hasClass("k-list-scroller k-selectable") ||
+                            originalElement.hasClass("k-reset k-list")) {
                     return { element: connectedListBox._getList(), listBox: connectedListBox,  appendToBottom: true };
                 } else {
                     return null;
@@ -640,10 +648,11 @@ var __meta__ = { // jshint ignore:line
             var draggedIndex = items.index(that.draggedElement);
             var dataItem = that.dataItem(draggedItem);
             var eventData = { dataItems: [dataItem], items: $(draggedItem) };
-            var connectedListBox = that.placeholder.closest(".k-widget.k-listbox").find("select").getKendoListBox();
+            var connectedListBox = that.placeholder.closest(".k-widget.k-listbox").find("[data-role='listbox']").getKendoListBox();
 
             if(that.trigger(DROP, extend({}, eventData, { draggableEvent: e }))) {
                 e.preventDefault();
+                this._clear();
                 return;
             }
 
