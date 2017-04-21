@@ -1,14 +1,17 @@
 ---
 title: ListBox
 page_title: ListBox | UI for ASP.NET Core Tag Helpers
-description: "Learn how to configure the ListBox html helper for ASP.NET Core (MVC 6 or ASP.NET Core MVC)."
+description: "Learn the basics when working with the ListBox tag helper for ASP.NET Core (MVC 6 or ASP.NET Core MVC)."
 slug: htmlhelpers_listbox_aspnetcore
 ---
 
-# ListBox HtmlHelper Overview
+# ListBox Tag Helper
 
-The ListBox HtmlHelper extension is a server-side wrapper for the [Kendo UI ListBox](http://demos.telerik.com/aspnet-core/listbox/index). It displays a list of data contained in a box and allows single or multiple selection, reordering, deleting items and features keyboard navigation as well as drag and drop. The Kendo UI ListBox can be connected with another listbox. The widget can be customized with the use of templates, toolbar positioning, placeholder and hint and command buttons messages localization.
-For a more detailed overview of the ListBox HtmlHelper check the ASP.NET MVC section of the documentation at [The ListBox HtmlHelper Overview]({% slug overview_listboxhelper_aspnetmvc %}).
+The ListBox tag helper is a server-side wrapper for the [Kendo UI ListBox](http://demos.telerik.com/aspnet-mvc/listbox/index).
+
+It displays a list of data that is contained in a box and allows single or multiple selection, reordering of selected items, and deleting items and features keyboard navigation as well as the dragging and dropping of items. You can also connect the ListBox with another list-box and customize the widget with the use of templates, toolbar positioning, placeholder and hint, and localization of its command buttons messages.
+
+For more information, refer to the article on the [ListBox HtmlHelper for ASP.NET MVC]({% slug overview_listboxhelper_aspnetmvc %}).
 
 ## Basic Usage
 
@@ -19,7 +22,7 @@ The following example demonstrates how to define the ListBox by using the ListBo
 ```tab-Razor
    @(Html.Kendo().ListBox()
         .Name("optional")
-        .Toolbar(toolbar => 
+        .Toolbar(toolbar =>
         {
             toolbar.Position(Kendo.Mvc.UI.Fluent.ListBoxToolbarPosition.Right);
             toolbar.Tools(tools => tools
@@ -47,7 +50,9 @@ The following example demonstrates how to define the ListBox by using the ListBo
     }
 ```
 
-### Configuration
+## Configuration
+
+The following example demonstrates the basic configuration for the ListBox tag helper.
 
 ###### Example
 
@@ -96,8 +101,8 @@ The following example demonstrates how to define the ListBox by using the ListBo
 
 ## See Also
 
-* [JavaScript API Reference](/api/javascript/ui/listbox)
-* [The ListBox HtmlHelper in details]({% slug overview_listboxhelper_aspnetmvc %})
+* [JavaScript API Reference of the ListBox](/api/javascript/ui/listbox)
+* [ListBox HtmlHelper for ASP.NET MVC]({% slug overview_listboxhelper_aspnetmvc %})
 * [Overview of Telerik UI for ASP.NET Core - RC1]({% slug overview_aspnetmvc6_aspnetmvc %})
 * [Get Started with Telerik UI for ASP.NET MVC in ASP.NET Core Projects]({% slug gettingstarted_aspnetmvc6_aspnetmvc %})
 * [Get Started with Telerik UI for ASP.NET MVC in ASP.NET Core Projects on Linux]({% slug gettingstartedlinux_aspnetmvc6_aspnetmvc %})
