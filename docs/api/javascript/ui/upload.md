@@ -229,6 +229,24 @@ containing one or more fields with the same name as the original input name.
         });
     </script>
 
+### async.useArrayBuffer `Boolean` *(default: false)*
+
+By default, the files are uploaded as filedata. When set to `true`, the files are read as file buffer by using [FileReader](https://developer.mozilla.org/en-US/docs/Web/API/FileReader) and
+ this buffer is send in the request body.
+
+#### Example
+
+    <input type="file" name="files" id="photos" />
+    <script>
+        $("#photos").kendoUpload({
+            async: {
+                saveUrl: "http://my-app.localhost/save",
+                removeUrl: "http://my-app.localhost/remove",
+                useArrayBuffer: true
+            }
+        });
+    </script>
+
 ### async.withCredentials `Boolean` *(default: true)*
 
 Controls whether to send credentials (cookies, headers) for cross-site requests.
