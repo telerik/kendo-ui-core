@@ -2,6 +2,7 @@
 title: Dialog
 page_title: Dialog | UI for ASP.NET Core Tag Helpers
 description: "Learn the basics when working with the Dialog tag helper for ASP.NET Core (MVC 6 or ASP.NET Core MVC)."
+previous_url: /aspnet-core/helpers/dialog
 slug: taghelpers_dialog_aspnetcore
 ---
 
@@ -38,7 +39,7 @@ The Dialog tag helper configuration options are passed as attributes of the tag.
         </kendo-dialog>
 ```
 
-> The Dialog tag helper does not support option to add Actions. In order to define Actions you can use the Razor syntax helper method:  [Dialog / Basic usage](http://demos.telerik.com/aspnet-core/dialog/index). 
+> The Dialog tag helper does not support option to add Actions. In order to define Actions you can use the Razor syntax helper method:  [Dialog / Basic usage](http://demos.telerik.com/aspnet-core/dialog/index).
 
 ## See Also
 

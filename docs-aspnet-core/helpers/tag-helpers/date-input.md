@@ -2,6 +2,7 @@
 title: DateInput
 page_title: DateInput | UI for ASP.NET Core Tag Helpers
 description: "Learn the basics when working with the DateInput tag helper for ASP.NET Core (MVC 6 or ASP.NET Core MVC)."
+previous_url: /aspnet-core/helpers/date-input
 slug: taghelpers_dateinput_aspnetcore
 ---
 

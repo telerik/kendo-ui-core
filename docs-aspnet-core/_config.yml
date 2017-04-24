@@ -18,6 +18,10 @@ navigation:
      "helpers":
         title: "Widgets"
         position: 3
+     "helpers/tag-helpers":
+        title: "Tag Helpers"
+     "helpers/html-helpers":
+        title: "Html Helpers"
      "how-to":
         title: "How To"
         position: 4
