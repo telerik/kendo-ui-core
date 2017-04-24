@@ -1,4 +1,3 @@
-
 ---
 title: Configure Projects
 page_title: Configure Projects | UI for ASP.NET MVC Visual Studio Integration

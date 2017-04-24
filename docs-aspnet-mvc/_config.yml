@@ -144,6 +144,8 @@ navigation:
         title: "LinearGauge"
      "helpers/listview":
         title: "ListView"
+     "helpers/listbox":
+        title: "ListBox"
      "helpers/map":
         title: "Map"
      "helpers/maskedtextbox":
