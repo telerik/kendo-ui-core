@@ -1540,6 +1540,10 @@ Lists the files that were uploaded or removed. Each file has:
 *   size - the file size in bytes (null if not available)
 *   uid - the unique identifier of the file or batch of files
 
+##### e.headers `Object`
+
+Additional headers that will be added to the remove request
+
 ##### data `Object`
 
 Optional object that is sent to the remove handler in the form of key/value pairs.
