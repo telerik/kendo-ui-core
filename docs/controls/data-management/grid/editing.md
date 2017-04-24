@@ -143,6 +143,8 @@ To avoid this behavior, consider any of the following options:
 
 ## Custom Editors
 
+### MultiSelect custom editor
+
 When a Kendo UI MultiSelect is used as a custom editor in the Grid and the value of the MultiSelect is changed, the `save` event of the Grid is not triggered.
 
 The reason for this is that the value of the MultiSelect is a reference type (`array`), which prevents the normal usage of the `model.set()` function for setting the value of the corresponding model property.
@@ -150,6 +152,21 @@ The reason for this is that the value of the MultiSelect is a reference type (`a
 To work around this behavior, define a custom data-binding mechanism. After applying this fix, the `save` event of the Grid is properly triggered each time a new selection is added to the value of the MultiSelect.
 
 To see the runnable example on this issue, refer to the article on [using the MultiSelect as a custom editor in the Grid]({% slug howto_usemultiselectascustomeditor_grid %}).
+
+### CheckBox editor
+
+When using editing for a Boolean column the Grid will render a standard input type CheckBox element by default.
+
+The custom CheckBox editor will allow unifying the look of the Grid editors by applying additional styles to the CheckBox based on the used CSS theme.
+
+The example below demonstrates how to use Kendo UI styled CheckBox editor for Boolean columns:
+
+function customBoolEditor(container, options) { 
+    $('<input class="k-checkbox" type="checkbox" name="Discontinued" data-type="boolean" data-bind="checked:Discontinued">').appendTo(container);
+    $('<label class="k-checkbox-label">&#8203;</label>').appendTo(container); 
+} 
+
+Also, a runnable example demonstrating this implementation can be found in our [demo](http://demos.telerik.com/kendo-ui/grid/editing)
 
 ## See Also
 
