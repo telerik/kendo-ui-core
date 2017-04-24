@@ -101,7 +101,7 @@ Selected items can be reordered by using any of the following approaches:
 
 1. The `moveUp` and `moveDown` command buttons of the toolbar.
 1. The drag-and-drop functionality if the widget is `draggable`.
-1. The `Ctrl`+`Shift`+`&darr;` or `Ctrl`+`Shift`+`&uarr;` keyboard combination.
+1. The `Ctrl`+`Shift`+ <kbd>&darr;</kbd> or `Ctrl`+`Shift`+ <kbd>&uarr;</kbd> keyboard combination.
 
 > **Important**
 >
@@ -142,7 +142,7 @@ To enable the drag-and-drop feature of the ListBox, set it as `Draggable()` and 
 
 ### Item Templates
 
-The ListBox supports the use of [templates]({% slug overview_kendoui_templatescomponent %}) for its items that are passed as а function or string.
+The ListBox supports the use of [templates](/kendo-ui/framework/templates/overview) for its items that are passed as а function or string.
 
 ###### Example
 
