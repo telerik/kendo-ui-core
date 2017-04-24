@@ -1,13 +1,13 @@
 ---
 title: ListBox
-page_title: ListBox | UI for ASP.NET Core Tag Helpers
-description: "Learn the basics when working with the ListBox tag helper for ASP.NET Core (MVC 6 or ASP.NET Core MVC)."
+page_title: ListBox | UI for ASP.NET Core HtmlHelpers
+description: "Learn the basics when working with the ListBox html helper for ASP.NET Core (MVC 6 or ASP.NET Core MVC)."
 slug: htmlhelpers_listbox_aspnetcore
 ---
 
-# ListBox Tag Helper
+# ListBox Html Helper
 
-The ListBox tag helper is a server-side wrapper for the [Kendo UI ListBox](http://demos.telerik.com/aspnet-mvc/listbox/index).
+The ListBox html helper is a server-side wrapper for the [Kendo UI ListBox](http://demos.telerik.com/aspnet-mvc/listbox/index).
 
 It displays a list of data that is contained in a box and allows single or multiple selection, reordering of selected items, and deleting items and features keyboard navigation as well as the dragging and dropping of items. You can also connect the ListBox with another list-box and customize the widget with the use of templates, toolbar positioning, placeholder and hint, and localization of its command buttons messages.
 
@@ -15,7 +15,7 @@ For more information, refer to the article on the [ListBox HtmlHelper for ASP.NE
 
 ## Basic Usage
 
-The following example demonstrates how to define the ListBox by using the ListBox tag helper.
+The following example demonstrates how to define the ListBox by using the ListBox html helper.
 
 ###### Example
 
@@ -52,7 +52,7 @@ The following example demonstrates how to define the ListBox by using the ListBo
 
 ## Configuration
 
-The following example demonstrates the basic configuration for the ListBox tag helper.
+The following example demonstrates the basic configuration for the ListBox html helper.
 
 ###### Example
 
