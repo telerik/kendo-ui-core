@@ -2,6 +2,7 @@
 title: TimePicker
 page_title: TimePicker | UI for ASP.NET Core Tag Helpers
 description: "Learn the basics when working with the TimePicker tag helper for ASP.NET Core (MVC 6 or ASP.NET Core MVC)."
+previous_url: /aspnet-core/helpers/time-picker
 slug: taghelpers_timepicker_aspnetcore
 ---
 

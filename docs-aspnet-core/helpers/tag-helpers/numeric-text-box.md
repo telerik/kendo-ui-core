@@ -2,6 +2,7 @@
 title: NumericTextBox
 page_title: NumericTextBox | UI for ASP.NET Core Tag Helpers
 description: "Learn the basics when working with the NumericTextBox tag helper for ASP.NET Core (MVC 6 or ASP.NET Core MVC)."
+previous_url: /aspnet-core/helpers/numeric-text-box
 slug: taghelpers_numerictextbox_aspnetcore
 ---
 

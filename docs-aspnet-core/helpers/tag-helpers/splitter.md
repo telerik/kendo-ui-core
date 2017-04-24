@@ -2,6 +2,7 @@
 title: Splitter
 page_title: Splitter | UI for ASP.NET Core Tag Helpers
 description: "Learn the basics when working with the Splitter tag helper for ASP.NET Core (MVC 6 or ASP.NET Core MVC)."
+previous_url: /aspnet-core/helpers/splitter
 slug: taghelpers_splitter_aspnetcore
 ---
 

@@ -2,6 +2,7 @@
 title: Upload
 page_title: Upload | UI for ASP.NET Core Tag Helpers
 description: "Learn the basics when working with the Upload tag helper for ASP.NET Core (MVC 6 or ASP.NET Core MVC)."
+previous_url: /aspnet-core/helpers/upload
 slug: taghelpers_upload_aspnetcore
 ---
 
