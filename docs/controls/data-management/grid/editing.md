@@ -143,7 +143,7 @@ To avoid this behavior, consider any of the following options:
 
 ## Custom Editors
 
-### MultiSelect custom editor
+### MultiSelect
 
 When a Kendo UI MultiSelect is used as a custom editor in the Grid and the value of the MultiSelect is changed, the `save` event of the Grid is not triggered.
 
@@ -153,7 +153,7 @@ To work around this behavior, define a custom data-binding mechanism. After appl
 
 To see the runnable example on this issue, refer to the article on [using the MultiSelect as a custom editor in the Grid]({% slug howto_usemultiselectascustomeditor_grid %}).
 
-### CheckBox editor
+### CheckBox
 
 When using editing for a Boolean column the Grid will render a standard input type CheckBox element by default.
 
