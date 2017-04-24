@@ -110,7 +110,7 @@ Selected items can be reordered by using any of the following approaches:
 
 1. The `moveUp` and `moveDown` command buttons of the toolbar.
 1. The drag-and-drop functionality if the widget is `draggable`.
-1. The `Ctrl`+`Shift`+`&darr;` or `Ctrl`+`Shift`+`&uarr;` keyboard combination.
+1. The `Ctrl`+`Shift`+ <kbd>&darr;</kbd> or `Ctrl`+`Shift`+ <kbd>&uarr;</kbd> keyboard combination.
 
 > **Important**
 >
