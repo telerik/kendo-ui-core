@@ -8,13 +8,15 @@ position: 1
 
 # FX Overview
 
-The [Kendo UI FX (Effects) instances](http://demos.telerik.com/kendo-ui/fx/expand) provide a rich, extensible, and performance-optimized toolset for element transitions. Each effect utilizes CSS transitions if possible, with a fallback to manual property value modification in older browsers. Animations can be played in reverse, which is very convenient for showing and hiding certain parts of the user interface (UI). Kendo FX utilizes the [jQuery Deferred utility](http://api.jquery.com/category/deferred-object/) for chaining and callbacks.
+The [Kendo UI FX (Effects) instances](http://demos.telerik.com/kendo-ui/fx/expand) provide a rich, extensible, and performance-optimized toolset for element transitions.
+
+Each effect utilizes CSS transitions if possible, with a fallback to manual property value modification in older browsers. To show and hide certain parts of the user interface (UI), you can also play animations in reverse. The Kendo UI FX utilizes the [jQuery Deferred utility](http://api.jquery.com/category/deferred-object/) for chaining and callbacks.
 
 ## Getting Started
 
 ### Initialize FX Instances
 
-Kendo UI Effect instances are created through the `kendo.fx` jQuery selector wrapper, as demonstrated in the example below. A single wrapper can be used to create multiple effects.
+To create the Effect instances, use the `kendo.fx` jQuery selector wrapper. To create multiple effects, you can also use a single wrapper.
 
 ###### Example
 
@@ -28,7 +30,7 @@ Kendo UI Effect instances are created through the `kendo.fx` jQuery selector wra
         fadeOutEffect.play();
     </script>
 
-The code above can also be compressed to a single line.
+You can compress the code from the previous example to a single line.
 
 ###### Example
 
@@ -40,11 +42,11 @@ The code above can also be compressed to a single line.
         kendo.fx($("#foo")).fadeOut().play();
     </script>
 
-## Configuration
+## FX Library
 
-### Apply Available Effects
+Whenever possible, effects are hardware-accelerated through CSS transitions which makes them ideal for desktop and mobile devices. Unlike the CPU intensive JavaScript animations, animations done with CSS provide better frame rates and battery life.
 
-The Kendo UI FX library supports the following effects:
+Kendo UI supports the following effects:
 
 - [FX Expand: API Reference](/api/javascript/effects/expand) and [Demo Example](http://demos.telerik.com/kendo-ui/fx/expand)
 - [FX Fade: API Reference](/api/javascript/effects/fade) and [Demo Example](http://demos.telerik.com/kendo-ui/fx/fade)
@@ -56,13 +58,23 @@ The Kendo UI FX library supports the following effects:
 - [FX Zoom: API Reference](/api/javascript/effects/zoom) and [Demo Example](http://demos.telerik.com/kendo-ui/fx/zoom)
 - [FX Replace: API Reference](/api/javascript/effects/replace) and [Demo Example](http://demos.telerik.com/kendo-ui/fx/replace)
 
-When possible, effects are hardware accelerated via CSS transitions, making them ideal for desktop and mobile devices. Unlike CPU intensive JavaScript animations, animations done with CSS can provide better frame-rates and battery life.
+## Configuration
+
+The Effects provide the following configuration options:
+
+* [Specifying the direction of effects](#specify-direction)
+* [Using composite effects](#use-composite-effects)
 
 ### Specify Direction
 
-Most of the effects support several directions as shown in each respective [Kendo UI Effect demo page](http://demos.telerik.com/kendo-ui/fx/expand). Direction can be specified either as the first parameter in the effect constructor method, or by calling the constructor with direction shortcut.
+Most of the effects support several directions as shown in each respective [Kendo UI Effect demo page](http://demos.telerik.com/kendo-ui/fx/expand).
 
-The example below demonstrates how to specify a direction for the desired effect. Note that the three lines produce identical effects.
+To determine the direction of the effects either:
+
+* Specify the direction as the first parameter in the effect constructor method, or
+* Call the constructor with a direction shortcut.
+
+The following example demonstrates how to specify a direction for the desired effect. All three lines produce identical effect.
 
 ###### Example
 
@@ -80,9 +92,7 @@ The example below demonstrates how to specify a direction for the desired effect
 
 ### Use Composite Effects
 
-Most of the effects can be combined, provided that they run on the same element, as demonstrated in the example below.
-
-For running effects on different elements, use [`jQuery.when`](http://api.jquery.com/jQuery.when/)).
+If the effects run on the same element, you can combine most of them.
 
 ###### Example
 
@@ -98,7 +108,7 @@ For running effects on different elements, use [`jQuery.when`](http://api.jquery
         // Calling reverse will zoom in and fade in.
     </script>
 
-The example below works with multiple elements.
+If the effects run on different elements, use the [`jQuery.when`](http://api.jquery.com/jQuery.when/)) configuration.
 
 ###### Example
 
@@ -122,8 +132,6 @@ The example below works with multiple elements.
     </script>
 
 ## See Also
-
-Other articles on Kendo UI FX instances:
 
 * [Common FX JavaScript API Reference](/api/javascript/effects/common)
 * [Replace Effects]({% slug replaceffect_fxeffects_widget %})
