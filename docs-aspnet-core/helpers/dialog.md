@@ -24,31 +24,21 @@ The Dialog tag helper configuration options are passed as attributes of the tag.
 ###### Example
 
 ```tab-cshtml
-
         @(Html.Kendo().Dialog()
             .Name("dialog")
             .Title("Software Update")
             .Content("Do you agree terms and conditions?")
-            .Width(400)
             .Modal(false)
-            .Actions(actions =>
-                {
-                    actions.Add().Text("NO");
-                    actions.Add().Text("YES").Primary(true);
-                })
             .Events(ev => ev.Close("dialog_close"))
         )
 ```
 ```tab-tagHelper
-
-        <kendo:dialog name="dialog" title="Software Update" closable="false" modal="false"
-                content="Do you agree terms and conditions?" close="dialog_close">
-                <kendo:dialog-actions>
-                        <kendo:dialog-action text="NO" />
-                        <kendo:dialog-action text="YES" primary="true" />
-                </kendo:dialog-actions>
-        </kendo:dialog>
+        <kendo-dialog name="dialog" title="Software Update" closable="false" modal="false"
+                content="Do you agree terms and conditions?" on-close="dialog_close">
+        </kendo-dialog>
 ```
+
+> The Dialog tag helper does not support option to add Actions. In order to define Actions you can use the Razor syntax helper method:  [Dialog / Basic usage](http://demos.telerik.com/aspnet-core/dialog/index). 
 
 ## See Also
 
