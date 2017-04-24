@@ -128,8 +128,7 @@ var __meta__ = { // jshint ignore:line
         },
         "boolean": function(container, options) {
             var attr = createAttributes(options);
-            $('<input class="k-checkbox" type="checkbox" />').attr(attr).appendTo(container);
-            $('<label class="k-checkbox-label">&#8203;</label>').appendTo(container);
+            $('<input type="checkbox" />').attr(attr).appendTo(container);
         },
         "values": function(container, options) {
             var attr = createAttributes(options);
