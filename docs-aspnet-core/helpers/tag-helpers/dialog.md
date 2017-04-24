@@ -39,7 +39,9 @@ The Dialog tag helper configuration options are passed as attributes of the tag.
         </kendo-dialog>
 ```
 
-> The Dialog tag helper does not support option to add Actions. In order to define Actions you can use the Razor syntax helper method:  [Dialog / Basic usage](http://demos.telerik.com/aspnet-core/dialog/index).
+> **Important**
+>
+> The Dialog tag helper does not provide options for adding actions. For more information on how to work around this limitation, refer to the demo on using the [Razor syntax helper method](http://demos.telerik.com/aspnet-core/dialog/index).
 
 ## See Also
 
