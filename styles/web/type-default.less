@@ -1286,6 +1286,16 @@ div.k-filebrowser-dropzone em
 .k-file-error
 {
     color: @upload-error-text-color;
+
+    .k-file-extension-wrapper,
+    .k-multiple-files-extension-wrapper {
+        color: @upload-error-text-color;
+        border-color: @upload-error-text-color;
+
+        &:before {
+            border-color: transparent transparent @upload-error-text-color @upload-error-text-color;
+        }
+    }
 }
 
 .k-file-error .k-progress,
@@ -1341,6 +1351,10 @@ div.k-filebrowser-dropzone em
 .k-upload .k-upload-selected {
     color: contrast(@base, @widget-text-color, @accent, .9);
     border-color: @widget-border-color;
+}
+
+.k-upload-action:focus:active:not(.k-state-disabled):not([disabled]) {
+    box-shadow: @button-focused-shadow;
 }
 
 /* ImageBrowser */
