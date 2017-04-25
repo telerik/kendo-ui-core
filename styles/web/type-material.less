@@ -2525,7 +2525,8 @@ background-color: @button-active-background;
 .k-button.k-state-disabled:hover,
 .k-state-disabled .k-button:active,
 .k-button.k-state-disabled:active,
-.k-button.k-state-disabled:active:hover
+.k-button.k-state-disabled:active:hover,
+.k-listbox .k-button.k-state-disabled
 {
     color: @disabled-text-color;
     border-color: @disabled-border-color;
@@ -4176,6 +4177,13 @@ div.k-scheduler-marquee:after {
     .k-list-scroller {
         border-color: @widget-border-color;
         background-color: @widget-background-color;
+    }
+
+    .k-button.k-state-disabled:hover
+    {
+        .k-icon {
+            opacity: .7;
+        }
     }
 
     .k-drop-hint {
