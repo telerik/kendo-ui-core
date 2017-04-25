@@ -3,7 +3,7 @@ title: Handling of Metadata
 page_title: Handling of Metadata | Kendo UI Upload HtmlHelper
 description: "Get started with the asynchronous uploading of metadata in Telerik UI for ASP.NET MVC helpers."
 slug: metadata_uploadhelper_aspnetmvc
-position: 3
+position: 4
 ---
 
 # Handling of Metadata
@@ -212,6 +212,7 @@ The same approach is applicable for the `remove` handler as well.
 
 * [Overview of the Upload HtmlHelper]({% slug overview_uploadhelper_aspnetmvc %})
 * [Upload HtmlHelper Modes of Operation]({% slug modesoperation_uploadhelper_aspnetmvc %})
+* [Chunk Upload]({% slug chunkupload_uploadhelper_aspnetmvc %})
 * [How to Upload Files from Grid Popup Editors in ASP.NET MVC Applications]({% slug howto_uploadfilesgridpopupeditor_uploadaspnetmvc %})
 * [How to Upload Files to Databases in ASP.NET MVC Applications]({% slug howto_uploadfilesdatabases_uploadaspnetmvc %})
 * [Overview of the Kendo UI Upload Widget](http://docs.telerik.com/kendo-ui/controls/editors/upload/overview)

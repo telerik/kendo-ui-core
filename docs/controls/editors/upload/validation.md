@@ -3,7 +3,7 @@ title: Validation
 page_title: Validation | Kendo UI Upload
 description: "Validate the selected files in the Kendo UI Upload widget."
 slug: validation_upload_widget
-position: 3
+position: 4
 ---
 
 # Validation
@@ -61,6 +61,7 @@ Other articles on the Kendo UI Upload:
 * [Overview of the Upload Widget]({% slug overview_kendoui_upload_widget %})
 * [Send and Receive Metadata]({% slug metadata_upload_widget %})
 * [Drag and Drop]({% slug dragandrop_upload_widget %})
+* [Chunk Upload]({% slug chunkupload_upload_widget %})
 * [Modes of Operation]({% slug modes_upload_widget %})
 * [Browser Support]({% slug browsersupport_upload_widget %})
 * [Troubleshooting]({% slug troubleshooting_upload_widget %})

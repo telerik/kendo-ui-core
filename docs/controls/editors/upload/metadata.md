@@ -3,7 +3,7 @@ title: Metadata
 page_title: Metadata | Kendo UI Upload
 description: "Send metadata to the save handler and receive metadata in the Kendo UI Upload widget."
 slug: metadata_upload_widget
-position: 4
+position: 5
 ---
 
 # Metadata
@@ -101,6 +101,7 @@ Other articles on the Kendo UI Upload:
 
 * [Overview of the Upload Widget]({% slug overview_kendoui_upload_widget %})
 * [Drag and Drop]({% slug dragandrop_upload_widget %})
+* [Chunk Upload]({% slug chunkupload_upload_widget %})
 * [Modes of Operation]({% slug modes_upload_widget %})
 * [Browser Support]({% slug browsersupport_upload_widget %})
 * [Troubleshooting]({% slug troubleshooting_upload_widget %})
