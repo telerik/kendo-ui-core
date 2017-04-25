@@ -33,7 +33,7 @@ If set to `false`, the widget will not bind to the data source during initializa
 A selector which determines whether the target ListBox should be used when items are transferred from and to the current ListBox. The `connectWith` option defines a _one-way_ relationship. If you want a two-way connection, then set the `connectWith` option on both widgets.
 
 > * It is not recommended to set the same `connectWith` option on two or more ListBoxes because the behavior of the `transferFrom` and `transferAllFrom` [tools](/api/javascript/ui/listbox#configuration-toolbar.tools) is not deterministic.
-> * Configuring a bi-directional relationship between two ListBoxes results in a duplicated behavior of their `transferTo` and `transferFrom` options, and `transferAllTo` and `transferAllFrom` tools. If your project does not require such behavior, remove some of the relationships from the [tools](/api/javascript/ui/listbox#configuration-toolbar.tools) option.
+> * Configuring a bi-directional relationship between two ListBoxes results in duplicated behavior of their `transferTo` and `transferFrom` options, and `transferAllTo` and `transferAllFrom` tools. If your project does not require such behavior, remove some of the relationships from the [tools](/api/javascript/ui/listbox#configuration-toolbar.tools) option.
 
 #### Example - set up a one-way connection from ListBoxA to ListBoxB
 
