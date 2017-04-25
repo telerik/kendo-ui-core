@@ -461,7 +461,8 @@ textarea.k-textbox:hover,
         background-color: @selected-background;
     }
 
-    .k-state-selected.k-state-hover {
+    .k-state-selected.k-state-hover,
+    .k-menu-scroll-button:hover {
         background-color: lighten(@info, 11%);
     }
 
@@ -2490,4 +2491,20 @@ html .km-pane-wrapper .km-widget,
         vertical-align: text-top;
         line-height: 1.5em;
     }
+}
+
+.k-menu-scroll-button {
+    border-width: 0;
+    box-shadow: none;
+    border-color: @widget-border-color;
+    background-color: @base;
+}
+
+.k-menu-scroll-wrapper.horizontal {
+    .k-scroll-left { border-right-width: 1px; }
+    .k-scroll-right { border-left-width: 1px; }
+}
+.k-menu-scroll-wrapper.vertical {
+    .k-scroll-up { border-bottom-width: 1px; }
+    .k-scroll-down { border-top-width: 1px; }
 }
