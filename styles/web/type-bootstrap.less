@@ -2624,7 +2624,8 @@ thead.k-grid-header th.k-header:last-child
     }
 
     .k-link.k-state-active,
-    .k-state-hover > .k-link {
+    .k-state-hover > .k-link,
+    .k-menu-scroll-button:hover {
         color: @hover-text-color;
         background-color: @hover-background-color;
         border-color: @hover-border-color;
@@ -3532,4 +3533,12 @@ td.k-state-focused.k-state-selected,
         font-size: .7em;
         vertical-align: bottom;
     }
+}
+
+.k-menu-scroll-button {
+    border-color: @widget-border-color;
+    color: @header-text-color;
+    .composite-background(@widget-gradient);
+    background-position: 50% 50%;
+    background-color: @header-background-color;
 }

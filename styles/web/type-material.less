@@ -4206,3 +4206,20 @@ div.k-scheduler-marquee:after {
         line-height: 1.5em;
     }
 }
+
+.k-menu-scroll-button {
+    border-width: 0;
+    box-shadow: none;
+    border-color: @widget-border-color;
+    color: @widget-text-color;
+    background-color: @widget-background-color;
+}
+
+.k-menu-scroll-wrapper.horizontal {
+    .k-scroll-left { border-right-width: 1px; }
+    .k-scroll-right { border-left-width: 1px; }
+}
+.k-menu-scroll-wrapper.vertical {
+    .k-scroll-up { border-bottom-width: 1px; }
+    .k-scroll-down { border-top-width: 1px; }
+}
