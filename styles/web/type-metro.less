@@ -1276,6 +1276,16 @@ div.k-filebrowser-dropzone em
 .k-file-error
 {
     color: @upload-error-text-color;
+
+    .k-file-extension-wrapper,
+    .k-multiple-files-extension-wrapper {
+        color: @upload-error-text-color;
+        border-color: @upload-error-text-color;
+
+        &:before {
+            border-color: transparent transparent @upload-error-text-color @upload-error-text-color;
+        }
+    }
 }
 
 .k-file-error .k-progress
