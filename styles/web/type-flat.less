@@ -695,7 +695,8 @@ html .km-pane-wrapper .k-header
 .k-state-disabled .k-button:hover,
 .k-button.k-state-disabled:hover,
 .k-state-disabled .k-button:active,
-.k-button.k-state-disabled:active
+.k-button.k-state-disabled:active,
+.k-listbox .k-button.k-state-disabled
 {
     color: @disabled-text-color;
     border-color: @disabled-border-color;
@@ -2793,6 +2794,12 @@ html .km-pane-wrapper .km-widget,
     .k-list-scroller {
         border-color: @widget-border-color;
         background-color: @widget-background-color;
+    }
+
+    .k-button.k-state-disabled{
+        .k-icon {
+            color: @disabled-text-color;
+        }
     }
 
     .k-drop-hint {
