@@ -428,13 +428,14 @@ var __meta__ = { // jshint ignore:line
             var options = that.options;
             var data = that.dataSource.flatView();
             var length = data.length;
+            var groupsLength = that.dataSource._group.length;
             var isActive = that.element[0] === activeElement();
             var action;
 
             that._renderFooter();
             that._renderNoData();
-            that._toggleNoData(!data.length);
-            that._toggleHeader(!!data.length);
+            that._toggleNoData(!length);
+            that._toggleHeader(!!groupsLength && !!length);
 
             that._resizePopup();
 
