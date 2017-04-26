@@ -666,7 +666,6 @@ The relative position of the ListBox element at which the toolbar will be displa
 A collection of tools that are used to interact with the ListBox.
 
 The built-in tools are:
-
 - `"moveUp"` - Moves up the selected ListBox items.
 - `"moveDown"` - Moves down the selected ListBox items.
 - `"remove"` - Removes the selected ListBox items.
