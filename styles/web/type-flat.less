@@ -922,7 +922,8 @@ td.k-state-focused.k-state-selected
 .k-mobile-list .k-item > .k-link:active,
 .k-mobile-list .k-item > .k-label:active,
 .k-mobile-list .k-edit-label.k-check:active,
-.k-mobile-list .k-recur-view .k-check:active
+.k-mobile-list .k-recur-view .k-check:active,
+.k-listbox .k-item:hover
 {
     color: @hover-text-color;
     background-color: @hover-background-color;
@@ -958,7 +959,8 @@ td.k-state-focused.k-state-selected
 .k-pager-wrap .k-link:hover,
 .k-other-month.k-state-hover .k-link,
 div.k-filebrowser-dropzone em,
-.k-draghandle:hover
+.k-draghandle:hover,
+.k-listbox .k-item:hover
 {
     .composite-background(@hover-gradient);
 }
@@ -1803,7 +1805,8 @@ div.k-filebrowser-dropzone em
 .k-list .k-state-selected,
 .k-fieldselector .k-list .k-item,
 .k-list-optionlabel,
-.k-dropzone
+.k-dropzone,
+.k-listbox .k-item
 {
     .guarded-border-radius(@list-border-radius);
 }
@@ -2792,8 +2795,13 @@ html .km-pane-wrapper .km-widget,
 
 .k-listbox {
     .k-list-scroller {
+        padding: 3px;
         border-color: @widget-border-color;
-        background-color: @widget-background-color;
+        background-color: @select-group-background-color;
+    }
+
+    .k-item {
+        color: @secondary-text-color;
     }
 
     .k-button.k-state-disabled{

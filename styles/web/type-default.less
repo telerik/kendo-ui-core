@@ -1008,7 +1008,8 @@ td.k-state-focused.k-state-selected
 .k-pager-wrap .k-link:hover,
 .k-other-month.k-state-hover .k-link,
 div.k-filebrowser-dropzone em,
-.k-draghandle:hover
+.k-draghandle:hover,
+.k-listbox .k-item:hover
 {
     .composite-background(@hover-gradient);
 }
@@ -1873,7 +1874,8 @@ div.k-filebrowser-dropzone em
 .k-list .k-state-selected,
 .k-fieldselector .k-list .k-item,
 .k-list-optionlabel,
-.k-dropzone
+.k-dropzone,
+.k-listbox .k-item
 {
     .guarded-border-radius(@list-border-radius);
 }
@@ -2741,8 +2743,15 @@ textarea.k-textbox,
 
 .k-listbox {
     .k-list-scroller {
+        padding: 2px;
         border-color: @widget-border-color;
-        background-color: @widget-background-color;
+        background-color: @select-group-background-color;
+    }
+
+    .k-item:hover {
+        color: @hover-text-color;
+        background-color: @hover-background-color;
+        border-color: transparent;
     }
 
     .k-drop-hint {
