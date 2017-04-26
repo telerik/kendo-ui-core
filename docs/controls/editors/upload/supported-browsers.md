@@ -3,7 +3,7 @@ title: Browser Support
 page_title: Browser Support | Kendo UI Upload
 description: "Learn about the browser versions that support the Kendo UI Upload features."
 slug: browsersupport_upload_widget
-position: 6
+position: 7
 ---
 
 # Browser Support
@@ -27,6 +27,7 @@ Other articles on the Kendo UI Upload:
 
 * [Overview of the Upload Widget]({% slug overview_kendoui_upload_widget %})
 * [Drag and Drop]({% slug dragandrop_upload_widget %})
+* [Chunk Upload]({% slug chunkupload_upload_widget %})
 * [Send and Receive Metadata]({% slug metadata_upload_widget %})
 * [Modes of Operation]({% slug modes_upload_widget %})
 * [Troubleshooting]({% slug troubleshooting_upload_widget %})

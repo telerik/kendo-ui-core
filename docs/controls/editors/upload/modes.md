@@ -3,14 +3,14 @@ title: Modes of Operation
 page_title: Modes of Operation | Kendo UI Upload
 description: "Use the different modes of operation supported by the Kendo UI Upload widget, initialize it from an existing file and how to use its asynchronous mode."
 slug: modes_upload_widget
-position: 5
+position: 6
 ---
 
 # Modes of Operation
 
 The Kendo UI Upload supports two modes of operation.
 
-The available modes are:   
+The available modes are:
 * [Synchronous](#synchronous-mode)
 * [Asynchronous](#asynchronous-mode)
 
@@ -115,6 +115,7 @@ Other articles on the Kendo UI Upload:
 
 * [Overview of the Upload Widget]({% slug overview_kendoui_upload_widget %})
 * [Drag and Drop]({% slug dragandrop_upload_widget %})
+* [Chunk Upload]({% slug chunkupload_upload_widget %})
 * [Send and Receive Metadata]({% slug metadata_upload_widget %})
 * [Browser Support]({% slug browsersupport_upload_widget %})
 * [Troubleshooting]({% slug troubleshooting_upload_widget %})

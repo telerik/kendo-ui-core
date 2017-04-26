@@ -262,6 +262,7 @@ The selected files are uploaded immediately by default. You can change this beha
 
 * [Overview of the Upload HtmlHelper]({% slug overview_uploadhelper_aspnetmvc %})
 * [Sending and Receiving Metadata with the Upload HtmlHelper]({% slug metadata_uploadhelper_aspnetmvc %})
+* [Chunk Upload]({% slug chunkupload_uploadhelper_aspnetmvc %})
 * [How to Upload Files from Grid Popup Editors in ASP.NET MVC Applications]({% slug howto_uploadfilesgridpopupeditor_uploadaspnetmvc %})
 * [How to Upload Files to Databases in ASP.NET MVC Applications]({% slug howto_uploadfilesdatabases_uploadaspnetmvc %})
 * [Overview of the Kendo UI Upload Widget](http://docs.telerik.com/kendo-ui/controls/editors/upload/overview)
