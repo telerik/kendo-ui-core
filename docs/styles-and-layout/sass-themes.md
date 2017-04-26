@@ -17,6 +17,10 @@ Currently, Kendo UI delivers a single SASS theme. This is the **Default v2** the
 
 Apart from being written in a different language, the SASS-based themes are slightly different from the LESS-based ones. This article outlines those differences and shows how you can use the SASS-based themes.
 
+> **Important**  
+>
+> The SASS themes are not supported in IE versions older than IE11.
+
 ## Differences
 
 In Kendo UI, the SASS-based themes demonstrate the following differences from the LESS-based ones:
