@@ -234,6 +234,8 @@ containing one or more fields with the same name as the original input name.
 By default, the files are uploaded as filedata. When set to `true`, the files are read as file buffer by using [FileReader](https://developer.mozilla.org/en-US/docs/Web/API/FileReader) and
  this buffer is send in the request body.
 
+ > **Important:** The **FileReader** consumes the browser's memory, hence, if a large file is uploaded it might consume all the available memory of the client. In such a case, the upload will fail.
+
 #### Example
 
     <input type="file" name="files" id="photos" />
@@ -1218,7 +1220,7 @@ Toggles the upload enabled state.
 Manually triggers the upload process.
 
 > * This method is only applicable when the `async.autoUpload` option is set to `false`.
-> * It is possible to trigger the manual upload of files by calling the `upload` method even if the Upload is disabled. In such scenarios, the Upload ignores its `enabled: false` configuration and the files are uploaded while the Upload remains inactive for the user to interact with it.  
+> * It is possible to trigger the manual upload of files by calling the `upload` method even if the Upload is disabled. In such scenarios, the Upload ignores its `enabled: false` configuration and the files are uploaded while the Upload remains inactive for the user to interact with it.
 
 #### Example
 
@@ -1239,7 +1241,7 @@ Manually triggers the upload process.
             autoUpload: false,
             saveUrl: "http://my-app.localhost/save",
             removeUrl: "http://my-app.localhost/remove"
-          }        
+          }
         });
 
         $("#uploadAll").on('click', function(e){
