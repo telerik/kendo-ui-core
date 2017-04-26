@@ -1070,6 +1070,78 @@ Retrieves the files that are currently selected.
 
 `Array` a collection of all currently selected files.
 
+### pause
+
+Pauses the upload of the file that is uploaded on chunks.
+
+#### Example
+
+    <input name="files" id="files" type="file" />
+    <button id="pause" class="k-button">Pause</button>
+    <script>
+      $(document).ready(function() {
+        $("#files").kendoUpload({
+           async: {
+            chunkSize:1100,
+            autoUpload: false,
+            saveUrl: "http://my-app.localhost/save",
+            removeUrl: "http://my-app.localhost/remove"
+          }
+        });
+
+        $("#pause").on('click', function(e){
+          e.preventDefault();
+
+          var upload = $("#files").data("kendoUpload");
+          var fileEntry = upload.wrapper.find(".k-file").first();
+
+          upload.pause(fileEntry);
+        })
+      });
+    </script>
+
+#### Parameters
+
+##### li `jQuery`
+
+A jQuery object which represents the the file to be paused.
+
+### resume
+
+Resumes the upload of a paused file that is uploaded on chunks.
+
+#### Example
+
+    <input name="files" id="files" type="file" />
+    <button id="resume" class="k-button">resume</button>
+    <script>
+      $(document).ready(function() {
+        $("#files").kendoUpload({
+           async: {
+            chunkSize:1100,
+            autoUpload: false,
+            saveUrl: "http://my-app.localhost/save",
+            removeUrl: "http://my-app.localhost/remove"
+          }
+        });
+
+        $("#pause").on('click', function(e){
+          e.preventDefault();
+
+          var upload = $("#files").data("kendoUpload");
+          var fileEntry = upload.wrapper.find(".k-file").first();
+
+          upload.resume(fileEntry);
+        })
+      });
+    </script>
+
+#### Parameters
+
+##### li `jQuery`
+
+A jQuery object which represents the the file to be resumed.
+
 ### removeAllFiles
 
 Removes all files by sending a standard `remove` request to the handler.
