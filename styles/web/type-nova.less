@@ -2460,6 +2460,25 @@ html .km-pane-wrapper .km-widget,
         background-color: @widget-background-color;
     }
 
+    .k-item {
+        padding: 1px 11px;
+        color: @link-text-color;
+
+        &:hover {
+            background-color: @hover-background;
+        }
+
+        &.k-state-selected {
+            color: @selected-text-color;
+            background-color: @selected-background;
+            border-color: multiply(@accent, #9a9a9a);
+
+            &:hover {
+                background-color: multiply(@accent, #cccccc);
+            }
+        }
+    }
+
     .k-button.k-state-disabled:active .k-icon {
         opacity: .2;
     }
@@ -2471,9 +2490,9 @@ html .km-pane-wrapper .km-widget,
 }
 
 .k-item.k-state-selected.k-drag-clue {
-    box-shadow: none;
-    background-color: #e0f7fa; //.k-state-selected has transparency
-    color: @normal-text-color;
+    color: @selected-text-color;
+    background-color: @selected-background;
+    border-color: multiply(@accent, #9a9a9a);
 }
 
 .k-grid-header {
