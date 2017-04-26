@@ -113,7 +113,9 @@ function getToolElementClassName(command) {
 }
 
 function clickButton(listbox, command, event) {
-    listbox.toolbar.element.find("a.k-button>." + getToolElementClassName(command)).trigger(event || $.Event({ type: "click" }));
+    listbox.toolbar.element
+        .find("a.k-button>." + getToolElementClassName(command))
+        .trigger(event || $.Event({ type: "click", preventDefault: $.noop }));
 }
 
 /* exported clickRemoveButton */

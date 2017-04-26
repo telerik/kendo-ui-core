@@ -29,6 +29,7 @@ var __meta__ = { // jshint ignore:line
     var DASH = "-";
     var DOT = ".";
     var SPACE = " ";
+    var HASH = "#";
 
     var KENDO_LISTBOX = "kendoListBox";
     var NS = DOT + KENDO_LISTBOX;
@@ -173,7 +174,7 @@ var __meta__ = { // jshint ignore:line
             draggable: null,
             dropSources: [],
             connectWith: "",
-            navigatable: false,
+            navigatable: true,
             toolbar: {
                 position: RIGHT,
                 tools: []
@@ -183,10 +184,10 @@ var __meta__ = { // jshint ignore:line
                     remove: "Delete",
                     moveUp: "Move Up",
                     moveDown: "Move Down",
-                    transferTo: "To Right",
-                    transferFrom: "To Left",
-                    transferAllTo: "All to Right",
-                    transferAllFrom: "All to Left"
+                    transferTo: "Transfer To",
+                    transferFrom: "Transfer From",
+                    transferAllTo: "Transfer All To",
+                    transferAllFrom: "Transfer All From"
                 }
             }
         },
@@ -248,9 +249,6 @@ var __meta__ = { // jshint ignore:line
             var options = that.options;
 
             if(options.navigatable) {
-                if(!that.options.selectable) {
-                    throw new Error("Keyboard navigation requires selection to be enabled");
-                }
                 that._getList().on(CLICK, ENABLED_ITEM_SELECTOR, proxy(that._click, that))
                             .on(KEYDOWN, proxy(that._keyDown, that))
                             .on(BLUR, proxy(that._blur, that));
@@ -321,7 +319,7 @@ var __meta__ = { // jshint ignore:line
             return current.length ? current : null;
         },
 
-        _scroll: function (item) {
+        _scrollIntoView: function(item) {
             if (!item) {
                 return;
             }
@@ -350,10 +348,12 @@ var __meta__ = { // jshint ignore:line
             var key = e.keyCode;
             var current = that._getNavigatableItem(key);
             var shouldPreventDefault;
-            var index;
 
+            if(that._target) {
+                that._target.removeClass(FOCUSED_CLASS);
+            }
             if(key == keys.DELETE) {
-                that.remove(that.select());
+                that._executeCommand(REMOVE);
                 if(that._target) {
                     that._target.removeClass(FOCUSED_CLASS);
                     that._getList().removeAttr("aria-activedescendant");
@@ -361,26 +361,24 @@ var __meta__ = { // jshint ignore:line
                 }
                 shouldPreventDefault = true;
             } else if(key === keys.DOWN || key === keys.UP) {
-                if(that._target) {
-                    that._target.removeClass(FOCUSED_CLASS);
-                }
-                if (e.shiftKey) {
-                    if(e.ctrlKey) {
-                        index = that.items().index(key === keys.DOWN ? that._target.next() : that._target.prev());
-                        if(!that.trigger(REORDER, { dataItem: that.dataItem(that._target), item: $(that._target) })) {
-                            that.reorder(that._target, index);
-                            that._target.addClass(FOCUSED_CLASS);
-                            return;
-                        }
-                    } else {
-                        that.select(that._target);
-                        that.select(current);
+                if (e.shiftKey && !e.ctrlKey) {
+                    that.select($({}).add(that._target).add(current));
+                } else if (e.shiftKey && e.ctrlKey) {
+                    that._executeCommand(key === keys.DOWN ? MOVE_DOWN : MOVE_UP);
+                    that._scrollIntoView(that._target);
+                    e.preventDefault();
+                    return;
+                } else if (!e.shiftKey && !e.ctrlKey) {
+                    if(that.options.selectable === "multiple"){
+                        that.clearSelection();
                     }
+                    that.select(current);
                 }
+
                 that._target = current;
                 if(that._target) {
                     that._target.addClass(FOCUSED_CLASS);
-                    that._scroll(that._target);
+                    that._scrollIntoView(that._target);
                     that._getList().attr("aria-activedescendant", that._target.attr("id"));
                 } else {
                     that._getList().removeAttr("aria-activedescendant");
@@ -394,8 +392,8 @@ var __meta__ = { // jshint ignore:line
                        that.select(that._target);
                    }
                 } else {
-                    that.clearSelection();
-                    that.select(that._target);
+                   that.clearSelection();
+                   that.select(that._target);
                 }
                 shouldPreventDefault = true;
             } else if(e.ctrlKey && key == keys.RIGHT) {
@@ -403,6 +401,7 @@ var __meta__ = { // jshint ignore:line
                    that._executeCommand(TRANSFER_ALL_TO);
                 } else {
                    that._executeCommand(TRANSFER_TO);
+                   that._target = that.select();
                 }
                 shouldPreventDefault = true;
             } else if(e.ctrlKey && key == keys.LEFT) {
@@ -502,11 +501,11 @@ var __meta__ = { // jshint ignore:line
             var that = this;
             var element = that._findElementUnderCursor(e);
             var elementNode = $(element);
-            var list = that._getList()[0];
+            var list = that._getList();
             var items;
             var node;
 
-            if($.contains(list, element)) {
+            if($.contains(list[0], element)) {
                 items = that.items();
                 element = elementNode.is("li") ? element: elementNode.closest("li")[0];
                 node = items.filter(element)[0] || items.has(element)[0];
@@ -516,7 +515,7 @@ var __meta__ = { // jshint ignore:line
                 } else {
                     return null;
                 }
-            } else if (list == element && !that.items().length) {
+            } else if (list[0] == element || list.parent()[0] == element) {
                 return { element: $(list), appendToBottom: true, listBox: that };
             } else {
                 return that._searchConnectedListBox(elementNode);
@@ -644,7 +643,7 @@ var __meta__ = { // jshint ignore:line
             var draggedItem = that.draggedElement;
             var items = that.items();
             var placeholderIndex = items.not(that.draggedElement).index(that.placeholder);
-            var draggedIndex = items.index(that.draggedElement);
+            var draggedIndex = items.not(that.placeholder).index(that.draggedElement);
             var dataItem = that.dataItem(draggedItem);
             var eventData = { dataItems: [dataItem], items: $(draggedItem) };
             var connectedListBox = that.placeholder.closest(".k-widget.k-listbox").find("[data-role='listbox']").getKendoListBox();
@@ -656,7 +655,7 @@ var __meta__ = { // jshint ignore:line
             }
 
             if(placeholderIndex >= 0) {
-                if(placeholderIndex !== draggedIndex && !that.trigger(REORDER, extend({}, eventData, { offset: placeholderIndex }))) {
+                if(placeholderIndex !== draggedIndex && !that.trigger(REORDER, extend({}, eventData, { offset: placeholderIndex - draggedIndex }))) {
                     draggedItem.removeClass(DRAGGEDCLASS);
                     that.reorder(draggedItem, placeholderIndex);
                 }
@@ -704,7 +703,7 @@ var __meta__ = { // jshint ignore:line
             that._bindDataSource();
             that._syncElement();
             that._updateToolbar();
-            that._updateConnectedToolbars();
+            that._updateAllToolbars();
         },
 
         _removeItem: function (item) {
@@ -801,6 +800,8 @@ var __meta__ = { // jshint ignore:line
             for (i = 0; i < itemsLength; i++) {
                 that._enableItem($(listItems[i]), enabled);
             }
+
+            that._updateAllToolbars();
         },
 
         _enableItem: function(item, enable) {
@@ -904,7 +905,7 @@ var __meta__ = { // jshint ignore:line
             }
 
             that.templates = {
-                itemTemplate: kendo.template("# var item = data.item, r = data.r; # <li class='k-item' role='option'>#=r(item)#</li>", { useWithBlock: false }),
+                itemTemplate: kendo.template("# var item = data.item, r = data.r; # <li class='k-item' role='option' aria-selected='false'>#=r(item)#</li>", { useWithBlock: false }),
                 itemContent: template,
                 toolbar: "<div class='" + TOOLBAR_CLASS + "'></div>"
             };
@@ -924,7 +925,7 @@ var __meta__ = { // jshint ignore:line
             that._createToolbar();
             that._syncElement();
             that._updateToolbar();
-            that._updateConnectedToolbars();
+            that._updateAllToolbars();
             that.trigger(DATABOUND);
         },
 
@@ -975,6 +976,10 @@ var __meta__ = { // jshint ignore:line
             var selectable = that.options.selectable;
             var selectableOptions = Selectable.parseOptions(selectable);
 
+            if (selectableOptions.multiple) {
+                that.element.attr("aria-multiselectable", "true");
+            }
+
             that.selectable = new Selectable(that._innerWrapper, {
                 aria: true,
                 multiple: selectableOptions.multiple,
@@ -987,7 +992,7 @@ var __meta__ = { // jshint ignore:line
             var that = this;
 
             that._updateToolbar();
-            that._updateConnectedToolbars();
+            that._updateAllToolbars();
             that.trigger(CHANGE);
         },
 
@@ -1042,7 +1047,7 @@ var __meta__ = { // jshint ignore:line
             if (command) {
                 command.execute();
                 that._updateToolbar();
-                that._updateConnectedToolbars();
+                that._updateAllToolbars();
             }
         },
 
@@ -1054,18 +1059,17 @@ var __meta__ = { // jshint ignore:line
             }
         },
 
-        _updateConnectedToolbars: function() {
+        _updateAllToolbars: function() {
             var listBoxElements = $("select[data-role='listbox']");
             var elementsLength = listBoxElements.length;
-            var connectedListBox;
-            var id = "#" + this.element.attr("id");
+            var listBox;
             var i;
 
             for (i = 0; i < elementsLength; i++) {
-                connectedListBox = $(listBoxElements[i]).data(KENDO_LISTBOX);
+                listBox = $(listBoxElements[i]).data(KENDO_LISTBOX);
 
-                if (connectedListBox && id === connectedListBox.options.connectWith) {
-                    connectedListBox._updateToolbar();
+                if (listBox) {
+                    listBox._updateToolbar();
                 }
             }
         }
@@ -1126,8 +1130,7 @@ var __meta__ = { // jshint ignore:line
         },
 
         execute: noop,
-        canExecute: noop,
-        updateSelection: noop
+        canExecute: noop
     });
 
     var RemoveItemsCommand = ListBoxCommand.extend({
@@ -1138,16 +1141,11 @@ var __meta__ = { // jshint ignore:line
 
             if (!listBox.trigger(REMOVE, { dataItems: listBox._dataItems(items), items: items })) {
                 listBox.remove(items);
-                that.updateSelection();
             }
         },
 
         canExecute: function() {
             return this.listBox.select().length > 0;
-        },
-
-        updateSelection: function() {
-            this.listBox.clearSelection();
         }
     });
     CommandFactory.current.register(REMOVE, RemoveItemsCommand);
@@ -1258,21 +1256,25 @@ var __meta__ = { // jshint ignore:line
 
         getUpdatedSelection: function(items) {
             var that = this;
+            var itemFilter = that.options.filter;
             var sourceListBox = that.getSourceListBox();
-            var nextItem = $(items).nextAll(that.options.filter)[0];
+            var lastEnabledItem = sourceListBox ? sourceListBox.items().filter(itemFilter).last() : null;
+            var containsLastItem = $(items).filter(lastEnabledItem).length > 0;
+            var itemToSelect = containsLastItem ? $(items).prevAll(itemFilter)[0] : $(items).nextAll(itemFilter)[0];
 
-            if (nextItem) {
-                return $(nextItem);
+            if ($(items).length === 1 && itemToSelect) {
+                return itemToSelect;
             } else {
-                return sourceListBox ? sourceListBox.items().not(items).filter(that.options.filter).first() : $();
+                return null;
             }
         },
 
-        updateSelection: function(items) {
+        updateSelection: function(item) {
             var sourceListBox = this.getSourceListBox();
 
-            if (sourceListBox) {
-                $(sourceListBox.select(items));
+            if (sourceListBox && item) {
+                $(sourceListBox.select($(item)));
+                sourceListBox._scrollIntoView(item);
             }
         },
 
@@ -1293,7 +1295,7 @@ var __meta__ = { // jshint ignore:line
 
         getDestinationListBox: function() {
             var sourceListBox = this.getSourceListBox();
-            return sourceListBox ? $(sourceListBox.options.connectWith).data(KENDO_LISTBOX) : null;
+            return sourceListBox && sourceListBox.options.connectWith ? $(HASH + sourceListBox.options.connectWith).data(KENDO_LISTBOX) : null;
         },
 
         getItems: function() {
@@ -1312,7 +1314,7 @@ var __meta__ = { // jshint ignore:line
 
         getSourceListBox: function() {
             var destinationListBox = this.getDestinationListBox();
-            return destinationListBox ? $(destinationListBox.options.connectWith).data(KENDO_LISTBOX) : null;
+            return (destinationListBox && destinationListBox.options.connectWith) ? $(HASH + destinationListBox.options.connectWith).data(KENDO_LISTBOX) : null;
         },
 
         getDestinationListBox: function() {
@@ -1330,13 +1332,16 @@ var __meta__ = { // jshint ignore:line
         canExecute: function() {
             var sourceListBox = this.getSourceListBox();
 
-            return (sourceListBox ? sourceListBox.items().length > 0 : false);
+            return (sourceListBox ? sourceListBox.items().filter(ENABLED_ITEM_SELECTOR).length > 0 : false);
         },
 
         getItems: function() {
             var sourceListBox = this.getSourceListBox();
             return sourceListBox ? sourceListBox.items() : $();
-        }
+        },
+
+        getUpdatedSelection: noop,
+        updateSelection: noop
     });
     CommandFactory.current.register(TRANSFER_ALL_TO, TransferAllItemsToCommand);
 
@@ -1344,13 +1349,16 @@ var __meta__ = { // jshint ignore:line
         canExecute: function() {
             var sourceListBox = this.getSourceListBox();
 
-            return (sourceListBox ? sourceListBox.items().length > 0 : false);
+            return (sourceListBox ? sourceListBox.items().filter(ENABLED_ITEM_SELECTOR).length > 0 : false);
         },
 
         getItems: function() {
             var sourceListBox = this.getSourceListBox();
             return sourceListBox ? sourceListBox.items() : $();
-        }
+        },
+
+        getUpdatedSelection: noop,
+        updateSelection: noop
     });
     CommandFactory.current.register(TRANSFER_ALL_FROM, TransferAllItemsFromCommand);
 
