@@ -1,6 +1,6 @@
 ---
 title: Welcome to Kendo UI!
-page_title: Introduction | Telerik Kendo UI by Progress
+page_title: Introduction | Progress Kendo UI 
 description: "Learn about the Kendo UI controls, their distributions, frameworks, tools, and utilities."
 previous_url: /index
 slug: welcometo_kendoui
@@ -9,7 +9,7 @@ position: 1
 
 # Welcome to Kendo UI!
 
-Kendo UI<sup>®</sup> by Progress is an HTML5 user interface framework for building interactive and high-performance websites and applications.
+Progress<sup>®</sup> Kendo UI is an HTML5 user interface framework for building interactive and high-performance websites and applications.
 
 ## Overview
 
@@ -42,7 +42,7 @@ In addition, you also receive a license for the [RadSpreadProcessing](http://www
 
 #### UI for ASP.NET MVC
 
-[Telerik<sup>®</sup> UI for ASP.NET MVC by Progress](http://docs.telerik.com/aspnet-mvc/introduction) is a Kendo UI product flavor which targets ASP.NET MVC developers. It includes all Kendo UI Professional components as well as HtmlHelper extension methods (a.k.a. server-side wrappers) which allow you to configure the Kendo UI widgets via C# code.
+[Progress<sup>®</sup> Telerik<sup>®</sup> UI for ASP.NET MVC](http://docs.telerik.com/aspnet-mvc/introduction) is a Kendo UI product flavor which targets ASP.NET MVC developers. It includes all Kendo UI Professional components as well as HtmlHelper extension methods (a.k.a. server-side wrappers) which allow you to configure the Kendo UI widgets via C# code.
 
 * [List of Kendo UI Components]({% slug bundle_supportfor_kendoui_components %})
 * [Browser Support]({% slug wbe_browserand_operating_system_support %})
@@ -53,7 +53,7 @@ In addition, you also receive a license for the [RadSpreadProcessing](http://www
 
 #### UI for ASP.NET Core
 
-[Telerik<sup>®</sup> UI for ASP.NET Core by Progress](http://docs.telerik.com/aspnet-core/introduction) supports the .NET Core runtime. It includes all Kendo UI Professional components as well as the Kendo UI Tag Helpers that help you configure the Kendo UI widgets using the new Tag Helpers feature in ASP.NET Core.
+[Progress<sup>®</sup> Telerik<sup>®</sup> UI for ASP.NET Core](http://docs.telerik.com/aspnet-core/introduction) supports the .NET Core runtime. It includes all Kendo UI Professional components as well as the Kendo UI Tag Helpers that help you configure the Kendo UI widgets using the new Tag Helpers feature in ASP.NET Core.
 
 * [List of Kendo UI Components]({% slug bundle_supportfor_kendoui_components %})
 * [Browser Support]({% slug wbe_browserand_operating_system_support %})
@@ -64,7 +64,7 @@ In addition, you also receive a license for the [RadSpreadProcessing](http://www
 
 #### UI for JSP
 
-[Telerik<sup>®</sup> UI for JSP by Progress](/jsp/introduction) is a Kendo UI product flavor which targets the Java web application developers. It includes JSP (Java Server Pages) tags for all Kendo UI Professional widgets.
+[Progress<sup>®</sup> Telerik<sup>®</sup> UI for JSP](/jsp/introduction) is a Kendo UI product flavor which targets the Java web application developers. It includes JSP (Java Server Pages) tags for all Kendo UI Professional widgets.
 
 * [List of Kendo UI Components]({% slug bundle_supportfor_kendoui_components %})
 * [Browser Support]({% slug wbe_browserand_operating_system_support %})
@@ -75,7 +75,7 @@ In addition, you also receive a license for the [RadSpreadProcessing](http://www
 
 #### UI for PHP
 
-[Telerik<sup>®</sup> UI for PHP by Progress](/php/introduction) is a Kendo UI product flavor which targets the PHP web application developers. It includes PHP classes for configuring all Kendo UI Professional widgets.
+[Progress<sup>®</sup> Telerik<sup>®</sup> UI for PHP](/php/introduction) is a Kendo UI product flavor which targets the PHP web application developers. It includes PHP classes for configuring all Kendo UI Professional widgets.
 
 * [List of Kendo UI Components]({% slug bundle_supportfor_kendoui_components %})
 * [Browser Support]({% slug wbe_browserand_operating_system_support %})
