@@ -4178,7 +4178,7 @@ div.k-scheduler-marquee:after {
 .k-listbox {
     .k-list-scroller {
         border-color: @widget-border-color;
-        background-color: @widget-background-color;;
+        background-color: @select-background-color;
     }
 
     .k-item:hover,
@@ -4199,6 +4199,12 @@ div.k-scheduler-marquee:after {
         height: 0;
         border-top: 1px solid @accent;
     }
+}
+
+.k-item.k-state-selected.k-drag-clue {
+    border-color: transparent;
+    background-color: @hover-background-color;
+    box-shadow: @focused-shadow;
 }
 
 .k-grid-header {
