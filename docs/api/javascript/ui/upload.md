@@ -258,6 +258,8 @@ This option will be ignored if the browser doesn't support File API.
 
 Enables the selection of folders instead of files. When the user selects a directory, its entire content hierarchy of files is included in the set of selected items. The setting supported only in browsers that support [webkitdirectory](https://developer.mozilla.org/en-US/docs/Web/API/HTMLInputElement/webkitdirectory).
 
+> **Important:** When the property is set only folders can be selected for upload - files are not selectable. In the browsers that don't support the feature the behavior fallbacks ot the default file selection.
+
 #### Example
 
     <div>
@@ -279,6 +281,8 @@ Enables the selection of folders instead of files. When the user selects a direc
 ### directoryDrop `Boolean` *(default: false)*
 
 Enables the dropping of folders over the Upload and its drop zone. When a directory is dropped, its entire content hierarchy of files is included in the set of selected items. This setting is supported only in browsers that support [DataTransferItem](https://developer.mozilla.org/en-US/docs/Web/API/DataTransferItem) and [webkitGetAsEntry](https://developer.mozilla.org/en-US/docs/Web/API/DataTransferItem/webkitGetAsEntry).
+
+> **Important:** When the property is set only folders can be dropped for upload - files are not uploaded. In the browsers that don't support the feature the behavior fallbacks ot the default file drop.
 
 #### Example
 
