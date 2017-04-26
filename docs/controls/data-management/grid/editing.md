@@ -159,12 +159,14 @@ When using editing for a Boolean column the Grid will render a standard input ty
 
 The custom CheckBox editor will allow unifying the look of the Grid editors by applying additional styles to the CheckBox based on the used CSS theme.
 
-The example below demonstrates how to use Kendo UI styled CheckBox editor for Boolean columns:
+The example below demonstrates how to use Kendo UI styled CheckBox editor for Boolean columns.
 
-function customBoolEditor(container, options) { 
-    $('<input class="k-checkbox" type="checkbox" name="Discontinued" data-type="boolean" data-bind="checked:Discontinued">').appendTo(container);
-    $('<label class="k-checkbox-label">&#8203;</label>').appendTo(container); 
-} 
+###### Example
+
+    function customBoolEditor(container, options) {
+        $('<input class="k-checkbox" type="checkbox" name="Discontinued" data-type="boolean" data-bind="checked:Discontinued">').appendTo(container);
+        $('<label class="k-checkbox-label">&#8203;</label>').appendTo(container);
+    }
 
 Also, a runnable example demonstrating this implementation can be found in our [demo](http://demos.telerik.com/kendo-ui/grid/editing)
 
