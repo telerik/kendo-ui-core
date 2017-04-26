@@ -258,6 +258,8 @@ This option will be ignored if the browser doesn't support File API.
 
 Enables the selection of folders instead of files. When the user selects a directory, its entire content hierarchy of files is included in the set of selected items. The setting supported only in browsers that support [webkitdirectory](https://developer.mozilla.org/en-US/docs/Web/API/HTMLInputElement/webkitdirectory).
 
+> **Important:** When the property is set only folders can be selected for upload - files are not selectable. In the browsers that don't support the feature the behavior fallbacks ot the default file selection.
+
 #### Example
 
     <div>
@@ -279,6 +281,8 @@ Enables the selection of folders instead of files. When the user selects a direc
 ### directoryDrop `Boolean` *(default: false)*
 
 Enables the dropping of folders over the Upload and its drop zone. When a directory is dropped, its entire content hierarchy of files is included in the set of selected items. This setting is supported only in browsers that support [DataTransferItem](https://developer.mozilla.org/en-US/docs/Web/API/DataTransferItem) and [webkitGetAsEntry](https://developer.mozilla.org/en-US/docs/Web/API/DataTransferItem/webkitGetAsEntry).
+
+> **Important:** When the property is set only folders can be dropped for upload - files are not uploaded. In the browsers that don't support the feature the behavior fallbacks ot the default file drop.
 
 #### Example
 
@@ -1069,6 +1073,78 @@ Retrieves the files that are currently selected.
 #### Returns
 
 `Array` a collection of all currently selected files.
+
+### pause
+
+Pauses the upload of the file that is uploaded on chunks.
+
+#### Example
+
+    <input name="files" id="files" type="file" />
+    <button id="pause" class="k-button">Pause</button>
+    <script>
+      $(document).ready(function() {
+        $("#files").kendoUpload({
+           async: {
+            chunkSize:1100,
+            autoUpload: false,
+            saveUrl: "http://my-app.localhost/save",
+            removeUrl: "http://my-app.localhost/remove"
+          }
+        });
+
+        $("#pause").on('click', function(e){
+          e.preventDefault();
+
+          var upload = $("#files").data("kendoUpload");
+          var fileEntry = upload.wrapper.find(".k-file").first();
+
+          upload.pause(fileEntry);
+        })
+      });
+    </script>
+
+#### Parameters
+
+##### li `jQuery`
+
+A jQuery object which represents the the file to be paused.
+
+### resume
+
+Resumes the upload of a paused file that is uploaded on chunks.
+
+#### Example
+
+    <input name="files" id="files" type="file" />
+    <button id="resume" class="k-button">resume</button>
+    <script>
+      $(document).ready(function() {
+        $("#files").kendoUpload({
+           async: {
+            chunkSize:1100,
+            autoUpload: false,
+            saveUrl: "http://my-app.localhost/save",
+            removeUrl: "http://my-app.localhost/remove"
+          }
+        });
+
+        $("#pause").on('click', function(e){
+          e.preventDefault();
+
+          var upload = $("#files").data("kendoUpload");
+          var fileEntry = upload.wrapper.find(".k-file").first();
+
+          upload.resume(fileEntry);
+        })
+      });
+    </script>
+
+#### Parameters
+
+##### li `jQuery`
+
+A jQuery object which represents the the file to be resumed.
 
 ### removeAllFiles
 
