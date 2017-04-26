@@ -73,10 +73,10 @@
         equal(toolsButtons.filter('[data-command="remove"]').attr(ariaLabelAttr), "Delete");
         equal(toolsButtons.filter('[data-command="moveUp"]').attr(ariaLabelAttr), "Move Up");
         equal(toolsButtons.filter('[data-command="moveDown"]').attr(ariaLabelAttr), "Move Down");
-        equal(toolsButtons.filter('[data-command="transferTo"]').attr(ariaLabelAttr), "To Right");
-        equal(toolsButtons.filter('[data-command="transferFrom"]').attr(ariaLabelAttr), "To Left");
-        equal(toolsButtons.filter('[data-command="transferAllTo"]').attr(ariaLabelAttr), "All to Right");
-        equal(toolsButtons.filter('[data-command="transferAllFrom"]').attr(ariaLabelAttr), "All to Left");
+        equal(toolsButtons.filter('[data-command="transferTo"]').attr(ariaLabelAttr), "Transfer To");
+        equal(toolsButtons.filter('[data-command="transferFrom"]').attr(ariaLabelAttr), "Transfer From");
+        equal(toolsButtons.filter('[data-command="transferAllTo"]').attr(ariaLabelAttr), "Transfer All To");
+        equal(toolsButtons.filter('[data-command="transferAllFrom"]').attr(ariaLabelAttr), "Transfer All From");
     });
 
 })();

@@ -30,7 +30,7 @@ If set to `false`, the widget will not bind to the data source during initializa
 
 ### connectWith `String` *(default: null)*
 
-A selector which determines whether the target ListBox should be used when items are transferred from and to the current ListBox. The `connectWith` option defines a _one-way_ relationship. If you want a two-way connection, then set the `connectWith` option on both widgets.
+ The id of the target ListBox to which items will be transferred to from the source ListBox and vice versa. In case the developer needs to transfer items from the target ListBox via its toolbar then its `connectWith` options should be also set.
 
 > * It is not recommended to set the same `connectWith` option on two or more ListBoxes because the behavior of the `transferFrom` and `transferAllFrom` [tools](/api/javascript/ui/listbox#configuration-toolbar.tools) is not deterministic.
 > * Configuring a bi-directional relationship between two ListBoxes results in duplicated behavior of their `transferTo` and `transferFrom` options, and `transferAllTo` and `transferAllFrom` tools. If your project does not require such behavior, remove some of the relationships from the [tools](/api/javascript/ui/listbox#configuration-toolbar.tools) option.
@@ -48,7 +48,7 @@ A selector which determines whether the target ListBox should be used when items
 
     <script>
         $("#listBoxA").kendoListBox({
-            connectWith: "#listBoxB",
+            connectWith: "listBoxB",
             toolbar: {
                 tools: [
                     "transferTo",
@@ -75,7 +75,7 @@ A selector which determines whether the target ListBox should be used when items
 
     <script>
         $("#listBoxA").kendoListBox({
-            connectWith: "#listBoxB",
+            connectWith: "listBoxB",
             toolbar: {
                 tools: [
                     "transferTo",
@@ -87,7 +87,7 @@ A selector which determines whether the target ListBox should be used when items
         });
 
         $("#listBoxB").kendoListBox({
-            connectWith: "#listBoxA",
+            connectWith: "listBoxA",
             toolbar: {
                 tools: [
                     "transferTo",
@@ -311,7 +311,7 @@ Array of `id` strings which determines the ListBoxes that can drag and drop thei
         });
     </script>
 
-### navigatable `Boolean` *(default: false)*
+### navigatable `Boolean` *(default: true)*
 
 Indicates whether the keyboard navigation is enabled or disabled.
 
@@ -349,7 +349,7 @@ Defines the localization texts for tools in the ListBox. Texts are used when you
 
     <script>
         $("#listBoxA").kendoListBox({
-            connectWith: "#listBoxB",
+            connectWith: "listBoxB",
             dataSource: [ "ItemA1", "ItemA2" ],
             toolbar: {
                 tools: [ "moveUp", "moveDown", "remove", "transferTo", "transferFrom", "transferAllTo", "transferAllFrom" ]
@@ -368,7 +368,7 @@ Defines the localization texts for tools in the ListBox. Texts are used when you
         });
 
         $("#listBoxB").kendoListBox({
-            connectWith: "#listBoxA",
+            connectWith: "listBoxA",
             dataSource: [ "ItemB1", "ItemB2" ]
         });
     </script>
@@ -384,7 +384,7 @@ Defines the text of the **Move Down** button that is located in the toolbar of t
 
     <script>
         $("#listBoxA").kendoListBox({
-            connectWith: "#listBoxB",
+            connectWith: "listBoxB",
             dataSource: [ "ItemA1", "ItemA2" ],
             toolbar: {
                 tools: [ "moveDown" ]
@@ -397,7 +397,7 @@ Defines the text of the **Move Down** button that is located in the toolbar of t
         });
 
         $("#listBoxB").kendoListBox({
-            connectWith: "#listBoxA",
+            connectWith: "listBoxA",
             dataSource: [ "ItemB1", "ItemB2" ]
         });
     </script>
@@ -413,7 +413,7 @@ Defines the text of the **Move Up** button that is located in the toolbar of the
 
     <script>
         $("#listBoxA").kendoListBox({
-            connectWith: "#listBoxB",
+            connectWith: "listBoxB",
             dataSource: [ "ItemA1", "ItemA2" ],
             toolbar: {
                 tools: [ "moveUp" ]
@@ -426,7 +426,7 @@ Defines the text of the **Move Up** button that is located in the toolbar of the
         });
 
         $("#listBoxB").kendoListBox({
-            connectWith: "#listBoxA",
+            connectWith: "listBoxA",
             dataSource: [ "ItemB1", "ItemB2" ]
         });
     </script>
@@ -442,7 +442,7 @@ Defines the text of the **Delete** button that is located in the toolbar of the 
 
     <script>
         $("#listBoxA").kendoListBox({
-            connectWith: "#listBoxB",
+            connectWith: "listBoxB",
             dataSource: [ "ItemA1", "ItemA2" ],
             toolbar: {
                 tools: [ "remove" ]
@@ -455,14 +455,14 @@ Defines the text of the **Delete** button that is located in the toolbar of the 
         });
 
         $("#listBoxB").kendoListBox({
-            connectWith: "#listBoxA",
+            connectWith: "listBoxA",
             dataSource: [ "ItemB1", "ItemB2" ]
         });
     </script>
 
 ### messages.tools.transferAllFrom `String`
 
-Defines the text of the **All to Left** button that is located in the toolbar of the ListBox.
+Defines the text of the **Transfer All From** button that is located in the toolbar of the ListBox.
 
 #### Example
 
@@ -471,7 +471,7 @@ Defines the text of the **All to Left** button that is located in the toolbar of
 
     <script>
         $("#listBoxA").kendoListBox({
-            connectWith: "#listBoxB",
+            connectWith: "listBoxB",
             dataSource: [ "ItemA1", "ItemA2" ],
             toolbar: {
                 tools: [ "transferAllFrom" ]
@@ -484,14 +484,14 @@ Defines the text of the **All to Left** button that is located in the toolbar of
         });
 
         $("#listBoxB").kendoListBox({
-            connectWith: "#listBoxA",
+            connectWith: "listBoxA",
             dataSource: [ "ItemB1", "ItemB2" ]
         });
     </script>
 
 ### messages.tools.transferAllTo `String`
 
-Defines the text of the **All to Right** button that is located in the toolbar of the ListBox.
+Defines the text of the **Transfer All To** button that is located in the toolbar of the ListBox.
 
 #### Example
 
@@ -500,7 +500,7 @@ Defines the text of the **All to Right** button that is located in the toolbar o
 
     <script>
         $("#listBoxA").kendoListBox({
-            connectWith: "#listBoxB",
+            connectWith: "listBoxB",
             dataSource: [ "ItemA1", "ItemA2" ],
             toolbar: {
                 tools: [ "transferAllTo" ]
@@ -513,14 +513,14 @@ Defines the text of the **All to Right** button that is located in the toolbar o
         });
 
         $("#listBoxB").kendoListBox({
-            connectWith: "#listBoxA",
+            connectWith: "listBoxA",
             dataSource: [ "ItemB1", "ItemB2" ]
         });
     </script>
 
 ### messages.tools.transferFrom `String`
 
-Defines the text of the **To Left** button that is located in the toolbar of the ListBox.
+Defines the text of the **Transfer From** button that is located in the toolbar of the ListBox.
 
 #### Example
 
@@ -528,7 +528,7 @@ Defines the text of the **To Left** button that is located in the toolbar of the
     <select id="listBoxB"></select>
     <script>
         $("#listBoxA").kendoListBox({
-            connectWith: "#listBoxB",
+            connectWith: "listBoxB",
             dataSource: [ "ItemA1", "ItemA2" ],
             toolbar: {
                 tools: [ "transferFrom" ]
@@ -541,14 +541,14 @@ Defines the text of the **To Left** button that is located in the toolbar of the
         });
 
         $("#listBoxB").kendoListBox({
-            connectWith: "#listBoxA",
+            connectWith: "listBoxA",
             dataSource: [ "ItemB1", "ItemB2" ]
         });
     </script>
 
 ### messages.tools.transferTo `String`
 
-Defines the text of the **To Right** button that is located in the toolbar of the ListBox.
+Defines the text of the **Transfer All To** button that is located in the toolbar of the ListBox.
 
 #### Example
 
@@ -557,7 +557,7 @@ Defines the text of the **To Right** button that is located in the toolbar of th
 
     <script>
         $("#listBoxA").kendoListBox({
-            connectWith: "#listBoxB",
+            connectWith: "listBoxB",
             dataSource: [ "ItemA1", "ItemA2" ],
             toolbar: {
                 tools: [ "transferTo" ]
@@ -570,22 +570,16 @@ Defines the text of the **To Right** button that is located in the toolbar of th
         });
 
         $("#listBoxB").kendoListBox({
-            connectWith: "#listBoxA",
+            connectWith: "listBoxA",
             dataSource: [ "ItemB1", "ItemB2" ]
         });
     </script>
 
 ### selectable `String` *(default: "single")*
 
-Indicates whether a single or multiple items are selected. The possible values are:
-
-#### *"single"*
-
-Indicates a single-item selection.
-
-#### *"multiple"*
-
-Indicates a multiple-item selection.
+Indicates whether selection is single or multiple. Possible values:
+- "single" - Single item selection.
+- "multiple" - Multiple item selection.
 
 #### Example
 
@@ -672,7 +666,6 @@ The relative position of the ListBox element at which the toolbar will be displa
 A collection of tools that are used to interact with the ListBox.
 
 The built-in tools are:
-
 - `"moveUp"` - Moves up the selected ListBox items.
 - `"moveDown"` - Moves down the selected ListBox items.
 - `"remove"` - Removes the selected ListBox items.
@@ -688,7 +681,7 @@ The built-in tools are:
 
     <script>
         $("#listBoxA").kendoListBox({
-            connectWith: "#listBoxB",
+            connectWith: "listBoxB",
             dataSource: [ "ItemA1", "ItemA2" ],
             toolbar: {
                 tools: [ "transferTo", "transferFrom", "transferAllTo", "transferAllFrom" ]
@@ -696,7 +689,7 @@ The built-in tools are:
         });
 
         $("#listBoxB").kendoListBox({
-            connectWith: "#listBoxA",
+            connectWith: "listBoxA",
             dataSource: [ "ItemB1", "ItemB2" ]
         });
     </script>
@@ -851,7 +844,7 @@ Obtains an array of the DOM elements which correspond to the data items from the
     <script>
     $("#listBox").kendoListBox({
         dataSource: [ "Orange", "Apple" ],
-        connectWith: "#listBoxB"
+        connectWith: "listBoxB"
     });
     // get a reference to the first list box widget
     var listBox = $("#listBox").data("kendoListBox");
@@ -1045,7 +1038,7 @@ The data items that are to be added.
 
     <script>
         $("#listBoxA").kendoListBox({
-            connectWith: "#listBoxB",
+            connectWith: "listBoxB",
             toolbar: {
                 tools: [ "transferTo" ]
             }
@@ -1360,7 +1353,7 @@ The data items that are to be reordered.
 
 ##### e.offset `Number`
 
-When moving up, the offset is `-1`. When moving down, the offset is `1`.
+The offset from the initial position of the item.
 
 #### Example
 

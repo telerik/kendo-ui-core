@@ -527,14 +527,14 @@ $.extend(true, kendo.ui.Prompt.prototype.options.localization, {
 if (kendo.ui.ListBox) {
 kendo.ui.ListBox.prototype.options.messages =
 $.extend(true, kendo.ui.ListBox.prototype.options.messages,{
-  tools: {
-    remove: "Supprimer",
-    moveUp: "Déplacer vers le haut",
-    moveDown: "Déplacer vers le bas",
-    transferTo: "À Droite",
-    transferFrom: "À Gauche",
-    transferAllTo: "Tout à Droite",
-    transferAllFrom: "Tout à Gauche"
+  "tools": {
+    "remove": "Supprimer",
+    "moveUp": "Déplacer vers le haut",
+    "moveDown": "Déplacer vers le bas",
+    "transferTo": "Transférer à",
+    "transferFrom": "Transférer de",
+    "transferAllTo": "Transférer tout à",
+    "transferAllFrom": "Transférer tout de"
   }
 });
 }
