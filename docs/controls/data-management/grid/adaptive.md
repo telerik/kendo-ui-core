@@ -129,7 +129,7 @@ When you apply the height and position styles to parent Grid elements, note that
 
 Each adaptive Grid is rendered inside a separate mobile pane. Because the position of the panes is absolute, the panes overlap. To avoid this behavior, wrap each Grid inside a `<div>` container that is relatively positioned and has a set height. The absolute position is required for the transition between main and edit views to work correctly.
 
-The example below demonstrates how to add multiple adaptive Grids to the same page.
+The following example demonstrates how to add multiple adaptive Grids to the same page.
 
 ###### Example
 

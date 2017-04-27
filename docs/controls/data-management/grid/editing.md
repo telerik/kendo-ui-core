@@ -16,7 +16,7 @@ To enable the editing support for the Grid, perform the steps described below.
 
 ### Configure the Data Source
 
-The example below demonstrates how to configure the dataSource for CRUD (Create, Read, Update, Destroy) data operations.
+The following example demonstrates how to configure the dataSource for CRUD (Create, Read, Update, Destroy) data operations.
 
 ###### Example
 
@@ -43,7 +43,7 @@ The example below demonstrates how to configure the dataSource for CRUD (Create,
 
 ### Define Fields through schema
 
-The example below demonstrates how to declare fields definitions through the DataSource [`schema.model `](/api/javascript/data/datasource#configuration-schema.model).
+The following example demonstrates how to declare fields definitions through the DataSource [`schema.model `](/api/javascript/data/datasource#configuration-schema.model).
 
 > **Important**  
 >
@@ -85,7 +85,7 @@ The example below demonstrates how to declare fields definitions through the Dat
 
 ### Set the editable Option
 
-The example below demonstrates the two alternatives to set the `editable` configuration option in the Grid.
+The following example demonstrates the two alternatives to set the `editable` configuration option in the Grid.
 
 ###### Example
 
@@ -159,7 +159,7 @@ When using editing for a Boolean column the Grid will render a standard input ty
 
 The custom CheckBox editor will allow unifying the look of the Grid editors by applying additional styles to the CheckBox based on the used CSS theme.
 
-The example below demonstrates how to use Kendo UI styled CheckBox editor for Boolean columns.
+The following example demonstrates how to use Kendo UI styled CheckBox editor for Boolean columns.
 
 ###### Example
 

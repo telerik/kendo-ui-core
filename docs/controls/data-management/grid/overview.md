@@ -144,7 +144,7 @@ As the above code snippets demonstrate, the client object of the Grid is attache
 
 Refer to an existing Grid instance through the [`jQuery.data()`](http://api.jquery.com/jQuery.data/). Once a reference has been established, use the [Grid API](/api/javascript/ui/grid) to control its behavior.
 
-The example below demonstrates how to access an existing Grid instance.
+The following example demonstrates how to access an existing Grid instance.
 
 ###### Example
 

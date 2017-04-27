@@ -12,7 +12,7 @@ Represents the Kendo UI Upload. Inherits from [Widget](/api/javascript/ui/widget
 
 ### async `Object`
 
-Configures the ability to upload a file(s) in an asynchronous manner. Please refer to the
+Configures the ability to upload a files in an asynchronous manner. Please refer to the
 [async mode help topic](/web/upload/modes#asynchronous-mode)
 for more details.
 
@@ -231,10 +231,9 @@ containing one or more fields with the same name as the original input name.
 
 ### async.useArrayBuffer `Boolean` *(default: false)*
 
-By default, the files are uploaded as filedata. When set to `true`, the files are read as file buffer by using [FileReader](https://developer.mozilla.org/en-US/docs/Web/API/FileReader) and
- this buffer is send in the request body.
+By default, the files are uploaded as filedata. When set to `true`, the files are read as file buffer by using [`FileReader`](https://developer.mozilla.org/en-US/docs/Web/API/FileReader) and this buffer is send in the request body.
 
- > **Important:** The **FileReader** consumes the browser's memory, hence, if a large file is uploaded it might consume all the available memory of the client. In such a case, the upload will fail.
+ > The `FileReader` consumes the memory of the browser. As a result, if the user uploads a large file, then all the available memory of the client might be consumed and the upload will fail.
 
 #### Example
 
@@ -258,7 +257,7 @@ This option will be ignored if the browser doesn't support File API.
 
 Enables the selection of folders instead of files. When the user selects a directory, its entire content hierarchy of files is included in the set of selected items. The setting supported only in browsers that support [webkitdirectory](https://developer.mozilla.org/en-US/docs/Web/API/HTMLInputElement/webkitdirectory).
 
-> **Important:** When the property is set only folders can be selected for upload - files are not selectable. In the browsers that don't support the feature the behavior fallbacks ot the default file selection.
+> When set, the property allows you to select only folders for upload. Files are not selectable. In the browsers that do not support the feature, the behavior falls back to the default file selection.
 
 #### Example
 
@@ -282,7 +281,7 @@ Enables the selection of folders instead of files. When the user selects a direc
 
 Enables the dropping of folders over the Upload and its drop zone. When a directory is dropped, its entire content hierarchy of files is included in the set of selected items. This setting is supported only in browsers that support [DataTransferItem](https://developer.mozilla.org/en-US/docs/Web/API/DataTransferItem) and [webkitGetAsEntry](https://developer.mozilla.org/en-US/docs/Web/API/DataTransferItem/webkitGetAsEntry).
 
-> **Important:** When the property is set only folders can be dropped for upload - files are not uploaded. In the browsers that don't support the feature the behavior fallbacks ot the default file drop.
+> When set, the property allows you to drop only folders for upload. Files cannot be uploaded. In the browsers that do not support the feature, the behavior falls back to the default file drop.
 
 #### Example
 
@@ -304,7 +303,7 @@ Enables the dropping of folders over the Upload and its drop zone. When a direct
 
 ### dropZone `String`
 
-Initializes a dropzone element(s) based on a given selector that provides drag and drop file upload.
+Initializes a dropzone elements based on a given selector that provides drag and drop file upload.
 
 #### Example
 
@@ -348,7 +347,7 @@ List of files to be initially rendered in the Upload widget files list.
 *   size
 *   extension
 
-> **Important:** This option could be used only when the Upload widget is in [async mode](/web/upload/modes#asynchronous-mode). The files will be rendered as successfully uploaded.
+> This option could be used only when the Upload widget is in [async mode](/web/upload/modes#asynchronous-mode). The files will be rendered as successfully uploaded.
 
 #### Example - passing an array of initial files
 
@@ -728,7 +727,7 @@ limit the total number of uploaded files in an asynchronous configuration.
 ### showFileList `Boolean`*(default: true)*
 
 Enables (**true**) or disables (**false**) the ability to display a file listing
-for uploading a file(s). Disabling a file listing may be useful you wish to customize the UI; use the
+for uploading a files. Disabling a file listing may be useful you wish to customize the UI; use the
 client-side events to build your own UI.
 
 #### Example
@@ -753,7 +752,7 @@ The [template](/api/javascript/kendo#methods-template) used to render the files 
 *   size - the file size in bytes / the total file size if batch upload is used (null if not available)
 *   files - array with information about all selected files - name, size and extension
 
-> **Important:** You should add the following markup to the template in order to render an action button for each file: `<button type='button' class='k-upload-action'></button>`.
+> You should add the following markup to the template in order to render an action button for each file: `<button type='button' class='k-upload-action'></button>`.
 >To use the default progress-bar, you should add the following markup at the beginning of the template `<span class='k-progress'></span>` and render the rest of the template relative to it. Please check [Upload Templates](http://demos.telerik.com/kendo-ui/web/upload/templates.html) for a live demo.
 
 #### Example - specify template as a function
@@ -970,7 +969,7 @@ Removes a file by ID (only visually from the UI) without issuing requests to the
 
 Prepares the **Upload** for safe removal from DOM. Detaches all event handlers and removes jQuery.data attributes to avoid memory leaks. Calls destroy method of any child Kendo widgets.
 
-> **Important:** This method does not remove the Upload element from DOM.
+> This method does not remove the Upload element from DOM.
 
 #### Example
 
@@ -1076,7 +1075,7 @@ Retrieves the files that are currently selected.
 
 ### pause
 
-Pauses the upload of the file that is uploaded on chunks.
+Pauses the upload of the file that is uploaded in chunks.
 
 #### Example
 
@@ -1108,11 +1107,11 @@ Pauses the upload of the file that is uploaded on chunks.
 
 ##### li `jQuery`
 
-A jQuery object which represents the the file to be paused.
+A jQuery object which represents the file to be paused.
 
 ### resume
 
-Resumes the upload of a paused file that is uploaded on chunks.
+Resumes the upload of a paused file that is uploaded in chunks.
 
 #### Example
 
@@ -1144,14 +1143,12 @@ Resumes the upload of a paused file that is uploaded on chunks.
 
 ##### li `jQuery`
 
-A jQuery object which represents the the file to be resumed.
+A jQuery object which represents the file to be resumed.
 
 ### removeAllFiles
 
 Removes all files by sending a standard `remove` request to the handler.
 
-> **Important**
->
 > Invoking the `removeAllFiles` method will not trigger the `remove` event.
 
 #### Example
@@ -1181,8 +1178,6 @@ Removes all files by sending a standard `remove` request to the handler.
 
 Removes all files for which the callback function returns `true` by sending a standard `remove` request to the handler.
 
-> **Important**
->
 > Invoking the `removeFile` method will not trigger the `remove` event.
 
 #### Example
@@ -1225,8 +1220,6 @@ Removes all files for which the callback function returns `true` by sending a st
 
 Removes a file by ID by sending a standard `remove` request to the handler.
 
-> **Important**
->
 > Invoking the `removeFileByUid` method will not trigger the `remove` event.
 
 #### Example
@@ -1628,10 +1621,10 @@ Optional object that is sent to the remove handler in the form of key/value pair
 
 ### select
 
-Triggered when a file(s) is selected. Note: Cancelling this event will prevent the selection from
+Triggered when a files is selected. Note: Cancelling this event will prevent the selection from
 occurring.
 
-#### Wire-up an event handler that triggered when a user selects a file(s)
+#### Wire-up an event handler that triggered when a user selects a files
 
     <input type="file" name="files" id="photos" />
     <script>
@@ -1662,17 +1655,16 @@ A custom event object. The event can be cancelled just like when using a standar
 
 An array of the selected files. Each item of the array is an object with the following properties:
 
-*   name - the name of a selected file, including its extension
-*   extension - the file extension of a selected file, including the leading dot (i.e. ".jpg")
-*   size - the size (in bytes) of a selected file (null, if unavailable)
-*   rawFile - an in-memory representation of a selected file
-*   uid - the unique identifier of the file or batch of files
+* name - the name of a selected file, including its extension
+* extension - the file extension of a selected file, including the leading dot (i.e. ".jpg")
+* size - the size (in bytes) of a selected file (null, if unavailable)
+* rawFile - an in-memory representation of a selected file
+* uid - the unique identifier of the file or batch of files
 
 ### success
 
 Fires when an upload / remove operation has been completed successfully.
 
-> **Important**
 > * The success event fires only when the upload is in [async mode](/web/upload/modes#asynchronous-mode).
 > * It is possible to cancel the event. As a result, the file will be displayed as unsuccessfully uploaded.
 

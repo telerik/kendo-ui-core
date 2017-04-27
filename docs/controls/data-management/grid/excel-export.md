@@ -20,7 +20,7 @@ To enable Excel export, include the corresponding toolbar command and configure 
 
 You need to include JSZip script on the page. For more information on the requirements to do this, refer to [Requirements]({% slug introduction_excelexport_kendoui %}#requirements).
 
-The example below demonstrates how to enable the Excel export functionality of a Kendo UI Grid.
+The following example demonstrates how to enable the Excel export functionality of a Kendo UI Grid.
 
 ###### Example
 
@@ -73,7 +73,7 @@ By default, the Grid exports only the current page of data. To export all pages,
 >
 > When the `allPages` option is set to `true` and `serverPaging` is enabled, the Grid will make a `"read"` request for all data. If the data items are too many, the browser may become unresponsive. In such cases, consider the implementation of [server-side export](#server-side-processing).
 
-The example below demonstrates how to export all the data from a Kendo UI Grid to Excel.
+The following example demonstrates how to export all the data from a Kendo UI Grid to Excel.
 
 ###### Example
 
@@ -177,7 +177,7 @@ Each Grid is exported in a separate Excel sheet. For more information on how to 
 
 It might be useful sometimes to send the generated file to a remote service. To achieve this, prevent the default file saving and post the `base64` encoded contents.
 
-The example below demonstrates how to post files to the server.
+The following example demonstrates how to post files to the server.
 
 ###### Example
 
