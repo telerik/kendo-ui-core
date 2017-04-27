@@ -57,16 +57,15 @@
         ok(listA.select().length === 3);
     });
 
-    test("Shift + up/down keys does not clear selection", 1, function() {
+    test("Shift + up/down keys clears previous selection", 1, function() {
         var selectedItemsLength;
         listA.select(listA.items());
-        selectedItemsLength = listA.select().length;
         listA.focus();
         listA._keyDown({ keyCode: keys.DOWN, shiftKey: true, preventDefault: $.noop });
         listA._keyDown({ keyCode: keys.DOWN, shiftKey: true, preventDefault: $.noop });
         listA._keyDown({ keyCode: keys.DOWN, shiftKey: true, preventDefault: $.noop });
 
-        ok(selectedItemsLength === listA.select().length);
+        ok(listA.select().length === 3);
     });
 
     test("Navigating after selecting with shift clears navigation and selects only current", 1, function() {
@@ -189,6 +188,31 @@
         calls = 0;
         listA._keyDown({ keyCode: keys.DOWN, shiftKey: true, preventDefault: $.noop });
         ok(calls === 1);
+    });
+
+    test("Moving backwards with shift and up/down arrow key deselects items", 1, function() {
+        listA.focus();
+        listA._keyDown({ keyCode: keys.DOWN, preventDefault: $.noop });
+        listA._keyDown({ keyCode: keys.DOWN, shiftKey: true, preventDefault: $.noop });
+        listA._keyDown({ keyCode: keys.DOWN, shiftKey: true, preventDefault: $.noop });
+        listA._keyDown({ keyCode: keys.DOWN, shiftKey: true, preventDefault: $.noop });
+        listA._keyDown({ keyCode: keys.UP, shiftKey: true, preventDefault: $.noop });
+        listA._keyDown({ keyCode: keys.UP, shiftKey: true, preventDefault: $.noop });
+        ok(listA.select().length === 2);
+    });
+
+    test("Navigating upwards when on first item does not change current active item", 1, function() {
+        listA.focus();
+        listA._keyDown({ keyCode: keys.DOWN, preventDefault: $.noop });
+        listA._keyDown({ keyCode: keys.UP, preventDefault: $.noop });
+        ok(listA._target[0] === listA.items().first()[0]);
+    });
+
+    test("Navigating downwards when on last item does not change current active item", 1, function() {
+        listA.focus();
+        listA._target = listA.items().last();
+        listA._keyDown({ keyCode: keys.DOWN, preventDefault: $.noop });
+        ok(listA._target[0] === listA.items().last()[0]);
     });
 
 })();
