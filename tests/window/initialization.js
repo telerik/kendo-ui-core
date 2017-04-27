@@ -420,7 +420,7 @@
 
     test("creating pinned window with a Pin command adds an Unpin button", function() {
         var dialog = createWindow({ pinned: true, actions: ["Pin"] });
-        equal(dialog.wrapper.find(".k-i-unpin").length, 1);
+        equal(dialog.wrapper.find(".k-i-pin").length, 1);
     });
 
     test("creating window with an int zero top position applies a top style", function() {

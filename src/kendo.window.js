@@ -152,10 +152,6 @@
 
                 that._position();
 
-                if (options.pinned) {
-                    that.pin(true);
-                }
-
                 if (content) {
                     that.refresh(content);
                 }
@@ -184,6 +180,10 @@
                 this._resizable();
 
                 this._draggable();
+
+                if (options.pinned) {
+                    that.pin();
+                }
 
                 id = element.attr("id");
                 if (id) {
@@ -365,12 +365,15 @@
             },
 
             _actions: function() {
-                var actions = this.options.actions;
+                var options = this.options;
+                var actions = options.actions;
+                var pinned = options.pinned;
                 var titlebar = this.wrapper.children(KWINDOWTITLEBAR);
                 var container = titlebar.find(".k-window-actions");
                 var windowSpecificCommands = [ "maximize", "minimize" ];
 
                 actions = $.map(actions, function(action) {
+                    action = !pinned && action.toLowerCase() === "pin" ? "unpin" : action;
                     return { name: (windowSpecificCommands.indexOf(action.toLowerCase()) > - 1) ? "window-" + action : action };
                 });
 
@@ -544,8 +547,8 @@
                     "k-i-window-minimize": "minimize",
                     "k-i-window-restore": "restore",
                     "k-i-refresh": "refresh",
-                    "k-i-pin": "pin",
-                    "k-i-unpin": "unpin"
+                    "k-i-pin": "unpin",
+                    "k-i-unpin": "pin"
                 }[iconClass];
             },
 
@@ -1058,18 +1061,19 @@
                 return this.options.isMinimized;
             },
 
-            pin: function(force) {
+            pin: function() {
                 var that = this,
                     win = $(window),
                     wrapper = that.wrapper,
                     top = parseInt(wrapper.css("top"), 10),
                     left = parseInt(wrapper.css("left"), 10);
 
-                if (force || !that.options.pinned && !that.options.isMaximized) {
+                if (!that.options.isMaximized) {
                     wrapper.css({position: "fixed", top: top - win.scrollTop(), left: left - win.scrollLeft()});
-                    wrapper.children(KWINDOWTITLEBAR).find(KPIN).addClass("k-i-unpin").removeClass("k-i-pin");
+                    wrapper.children(KWINDOWTITLEBAR).find(KUNPIN).addClass("k-i-pin").removeClass("k-i-unpin");
 
                     that.options.pinned = true;
+                    that.options.draggable = false;
                 }
             },
 
@@ -1080,11 +1084,12 @@
                     top = parseInt(wrapper.css("top"), 10),
                     left = parseInt(wrapper.css("left"), 10);
 
-                if (that.options.pinned && !that.options.isMaximized) {
+                if (!that.options.isMaximized) {
                     wrapper.css({position: "", top: top + win.scrollTop(), left: left + win.scrollLeft()});
-                    wrapper.children(KWINDOWTITLEBAR).find(KUNPIN).addClass("k-i-pin").removeClass("k-i-unpin");
+                    wrapper.children(KWINDOWTITLEBAR).find(KPIN).addClass("k-i-unpin").removeClass("k-i-pin");
 
                     that.options.pinned = false;
+                    that.options.draggable = true;
                 }
             },
 
@@ -1483,7 +1488,7 @@
                     actions = element.find(".k-window-actions"),
                     containerOffset = kendo.getOffset(wnd.appendTo);
 
-                this._preventDragging = wnd.trigger(DRAGSTART);
+                this._preventDragging = wnd.trigger(DRAGSTART) || !wnd.options.draggable;
                 if (this._preventDragging) {
                     return;
                 }

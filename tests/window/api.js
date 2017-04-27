@@ -546,13 +546,13 @@
             actions: ["Pin"]
         });
 
-        equal(dialog.wrapper.find(".k-i-pin").length, 1);
-        equal(dialog.wrapper.find(".k-i-unpin").length, 0);
+        equal(dialog.wrapper.find(".k-i-unpin").length, 1);
+        equal(dialog.wrapper.find(".k-i-pin").length, 0);
 
         dialog.pin();
 
-        equal(dialog.wrapper.find(".k-i-unpin").length, 1);
-        equal(dialog.wrapper.find(".k-i-pin").length, 0);
+        equal(dialog.wrapper.find(".k-i-pin").length, 1);
+        equal(dialog.wrapper.find(".k-i-unpin").length, 0);
     });
 
     test("pin() substracts the browser scroll position from the wrapper's top and left styles", function() {
@@ -604,13 +604,13 @@
             pinned: true
         });
 
-        equal(dialog.wrapper.find(".k-i-unpin").length, 1);
-        equal(dialog.wrapper.find(".k-i-pin").length, 0);
+        equal(dialog.wrapper.find(".k-i-pin").length, 1);
+        equal(dialog.wrapper.find(".k-i-unpin").length, 0);
 
         dialog.unpin();
 
-        equal(dialog.wrapper.find(".k-i-pin").length, 1);
-        equal(dialog.wrapper.find(".k-i-unpin").length, 0);
+        equal(dialog.wrapper.find(".k-i-unpin").length, 1);
+        equal(dialog.wrapper.find(".k-i-pin").length, 0);
     });
 
     test("unpin() adds the browser scroll position to the wrapper's top and left styles", function() {
@@ -777,7 +777,7 @@
         dialog.maximize();
         dialog.restore();
 
-        equal(dialog.wrapper.find(".k-i-pin:visible").length, 1);
+        equal(dialog.wrapper.find(".k-i-unpin:visible").length, 1);
     });
 
     test("restore() removes the k-window-maximized class", function() {
