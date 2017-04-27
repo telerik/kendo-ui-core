@@ -1219,7 +1219,7 @@ If invoked, prevents the `drop` action. The element will remain at its original 
 
 ### dragend
 
-Fires when the dragging of the item ends but before its position is changed in the DOM. This event is suitable for preventing the `drag` action.
+Fires when the dragging of the item ends but before its position is changed in the DOM.
 
 #### Event Data
 
