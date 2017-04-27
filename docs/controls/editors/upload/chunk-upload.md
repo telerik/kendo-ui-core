@@ -11,18 +11,14 @@ position: 3
 The chunk upload of files enables the user to send large files, which are uploaded asynchronously with multiple requests, to the server and to pause and resume the file upload for the time the application is open in the browser.
 
 > **Important**
->
-> The chunk upload functionality is available as of the Kendo UI 2017 R2 release.
+> * The chunk upload functionality is available as of the Kendo UI 2017 R2 release.
+> * The chunk upload functionality is available only in the [asynchronous mode]({%slug modes_upload_widget%}#asynchronous-mode) of the Upload.
 
 ## Getting Started
 
 To enable the chunk upload:
 
 1. Set up the [`async.chunkSize`](/api/javascript/ui/upload#configuration-async.chunkSize) option of the Upload.
-
-    > **Important**
-    >
-    > The chunk upload functionality is available only in the [asynchronous mode]({%slug modes_upload_widget%}#asynchronous-mode) of the Upload.
 
     ###### Example
 
@@ -85,12 +81,12 @@ The response has to include the meta data from the following example.
 
     {
         "uploaded": true | false,
-        /*  False will instruct Kendo Upload to send the next chunk of data.
-            True will indicate that the last chunk is processed and upload was successful
-            and eventually continue with the next file. */
+        /*  False instructs the Upload to send the next chunk of data.
+            True indicates that the last chunk is processed, the upload was successful
+            and the upload of the next file can continue. */
 
         "fileUid": Number
-        /* The guid of the chunk uploaded, so that Kendo Upload get the next chunk to sent. */
+        /* The UID of the uploaded chunk, so that the Upload can get the next chunk and send it. */
     }
 
 The following example demonstrates a valid server response.

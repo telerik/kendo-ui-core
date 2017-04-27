@@ -8,19 +8,15 @@ position: 3
 
 # Chunk Upload
 
-Uploading files in chunks enables the user to send large file to the server uploaded asyncronously with multiple requests. Plus, to pause and resume file uploading for the time the application is live in the browser.
+The chunk upload of files enables the user to send large files, which are uploaded asynchronously with multiple requests, to the server and to pause and resume the file upload for the time the application is open in the browser.
 
-The chunk upload funcionality is available as of **2017 R2**.
+> **Important**
+> * The chunk upload functionality is available as of the Kendo UI 2017 R2 release.
+> * The chunk upload functionality is available only in the [asynchronous mode](../../../kendo-ui/controls/editors/upload/modes.html#asynchronous-mode) of the Upload.
 
-## Benefits
+## Getting Started
 
-* Uploading large files;
-* Controlling various configuration options to fine-tune the way chunk uploading operates;
-* Pausing and resuming the file uploading.
-
-## Basics
-
-In order to enable chunk uploading you need to setup the `ChunkSize` helper method ([async.chunkSize option](../../../kendo-ui/api/javascript/ui/upload#configuration-async.chunkSize)) of the Upload widget.
+To enable the chunk upload, set up the `ChunkSize` helper method ([`async.chunkSize`](../../../kendo-ui/api/javascript/ui/upload#configuration-async.chunkSize) option) of the Upload.
 
 ###### Example
 
@@ -108,15 +104,13 @@ public ActionResult ChunkSave(IEnumerable<HttpPostedFileBase> files, string meta
 }
 ```
 
-> Important
->
-> Chunk upload is available only with the [asynchronous mode]({%slug modesoperation_uploadhelper_aspnetmvc%}#asynchronous-mode) of **Kendo Upload**.
+## Fine-Tuning
 
-You can also change or fine-tune the chunk uploading funciontlity by using these configration options:
+To modify or fine-tune the chunk upload, use any of the following configuration options:
 
-* `Concurrent` ([async.concurrent](../../../kendo-ui/api/javascript/ui/upload#configuration-async.concurrent))—controls whether the selected files will be uploaded simultaneously or one after another;
-* `AutoRetryAfter` ([async.autoRetryAfter](../../../kendo-ui/api/javascript/ui/upload#configuration-async.autoRetryAfter))—the time interval (in miliseconds) after which the Kendo Upload will try to retry a failed upload;
-* `MaxAutoRetries` ([async.maxAutoRetries](../../../kendo-ui/api/javascript/ui/upload#configuration-async.maxAutoRetries))—the amount of attempts the Kendo Upload will make to retry a failed upload. After that will report an upload fail.
+* `Concurrent` ([async.concurrent](../../../kendo-ui/api/javascript/ui/upload#configuration-async.concurrent))&mdash;Controls whether the selected files are uploaded simultaneously or one after the other.
+* `AutoRetryAfter` ([async.autoRetryAfter](../../../kendo-ui/api/javascript/ui/upload#configuration-async.autoRetryAfter))&mdash;The time interval in milliseconds after which the Upload attempts to retry a failed upload.
+* `MaxAutoRetries` ([async.maxAutoRetries](../../../kendo-ui/api/javascript/ui/upload#configuration-async.maxAutoRetries))&mdash;The number of attempts the Upload makes to retry a failed upload before reporting it.
 
 ###### Example
 
@@ -135,33 +129,37 @@ You can also change or fine-tune the chunk uploading funciontlity by using these
 )
 ```
 
-## Transfering Chunks
+## Transfer of Chunks
 
-With the chunk upload functionality the selected files are separeted into chunks/blobs of data. These chunks are automatically sent to the server (via AJAX request) to the destination set up in the `saveUrl` option. The chunks are sent in a specific order, hence, the server should send back a response with the meta data of the chunk uploaded so that **Kendo Upload** can proceed either with the next chunk (`"uploaded": false`) or the next file (`"uploaded": true`).
+The chunk upload functionality separates the selected files chunks or blobs of data. These chunks are automatically sent to the server to the destination that is set up in the `saveUrl` option over an AJAX request. Because the chunks are sent in a specific order, the server is expected to send back a response with the meta data of the chunk that is uploaded. This response indicates to the Upload that it can proceed either with the next chunk (`"uploaded": false`) or with the next file (`"uploaded": true`).
 
-The response should have the following meta data included:
+The response has to include the meta data from the following example.
+
+###### Example
 
     {
         "uploaded": true | false,
-        /*  False will instruct Kendo Upload to send the next chunk of data.
-            True will indicate that the last chunk is processed and upload was successful
-            and eventually continue with the next file. */
+        /*  False instructs the Upload to send the next chunk of data.
+            True indicates that the last chunk is processed, the upload was successful
+            and the upload of the next file can continue. */
 
         "fileUid": Number
-        /* The guid of the chunk uploaded, so that Kendo Upload get the next chunk to sent. */
+        /* The UID of the uploaded chunk, so that the Upload can get the next chunk and send it. */
     }
 
-And this is an example of a valid server response:
+The following example demonstrates a valid server response.
+
+###### Example
 
     {"uploaded":true,"fileUid":"b95ee9fa-85e8-482c-946d-a12ed6dbefed"}
 
 ## Server-side Implementation
 
-The server-side implementation entirely depends on application requirments and logic. The action method provided here and in the demo ([Upload / Chunk Upload](http://demos.telerik.com/aspnet-mvc/upload/chunkupload)) is an example you can follow for handling chunks and merging them into files.
+The server-side implementation entirely depends on the application requirements and logic. The approach that is demonstrated in this article and in the [chunk upload demo](http://demos.telerik.com/aspnet-mvc/upload/chunkupload) can serve you as an example on how to handle chunks and merge them into files.
 
-> Note
+> **Important**
 >
-> **Kendo Upload** as a client-side solution does not handle any sort of validation. File validation and any security requirments should be handled on the server by using application logic.
+> As a client-side solution, the Upload does not handle validation. File validation and security requirements should be handled on the server by using application logic.
 
 ## See Also
 
