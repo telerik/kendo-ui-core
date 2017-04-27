@@ -30,7 +30,7 @@ If set to `false`, the widget will not bind to the data source during initializa
 
 ### connectWith `String` *(default: null)*
 
- The id of the target ListBox to which items will be transferred to from the source ListBox and vice versa. In case the developer needs to transfer items from the target ListBox via its toolbar then its `connectWith` options should be also set.
+ The `id` of the target ListBox to which items from the source ListBox will be transferred and vice versa. If you have to transfer items from the target ListBox over its toolbar, then you also need to set its `connectWith` option.
 
 > * It is not recommended to set the same `connectWith` option on two or more ListBoxes because the behavior of the `transferFrom` and `transferAllFrom` [tools](/api/javascript/ui/listbox#configuration-toolbar.tools) is not deterministic.
 > * Configuring a bi-directional relationship between two ListBoxes results in duplicated behavior of their `transferTo` and `transferFrom` options, and `transferAllTo` and `transferAllFrom` tools. If your project does not require such behavior, remove some of the relationships from the [tools](/api/javascript/ui/listbox#configuration-toolbar.tools) option.
@@ -577,9 +577,10 @@ Defines the text of the **Transfer All To** button that is located in the toolba
 
 ### selectable `String` *(default: "single")*
 
-Indicates whether selection is single or multiple. Possible values:
-- "single" - Single item selection.
-- "multiple" - Multiple item selection.
+Indicates whether the selection is single or multiple. The possible values are:
+
+- `"single"` - A single-item selection.
+- `"multiple"` - A multiple-item selection.
 
 #### Example
 

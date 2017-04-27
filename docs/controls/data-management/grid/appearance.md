@@ -175,7 +175,7 @@ Virtual scrolling relies on a fake scrollbar. Its size is not determined by the 
 
 To ensure that all table rows have the same heights, use either of the options:
 * Disable text wrapping.  
-* Set an explicit row height that is large enough (as demonstrated in the example below).
+* Set an explicit row height that is large enough (as demonstrated in the following example).
 
 ###### Example
 
@@ -480,7 +480,7 @@ It is possible to get a table row in the Grid by the ID of the data item. To ach
 
 It is possible to manually add a table row with some user-friendly message when the dataSource does not return any data&mdash;for example, as a result of filtering.
 
-The example below demonstrates how to add a table row in the [`dataBound`](/api/javascript/ui/grid#events-dataBound) event handler of the Grid.
+The following example demonstrates how to add a table row in the [`dataBound`](/api/javascript/ui/grid#events-dataBound) event handler of the Grid.
 
 ###### Example
 

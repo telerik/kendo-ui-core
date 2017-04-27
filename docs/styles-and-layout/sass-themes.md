@@ -19,7 +19,7 @@ Apart from being written in a different language, the SASS-based themes are slig
 
 > **Important**  
 >
-> The SASS themes are not supported in IE versions older than IE11.
+> Internet Explorer 11 and earlier do not support SASS themes.
 
 ## Differences
 

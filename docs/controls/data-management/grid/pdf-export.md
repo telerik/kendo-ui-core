@@ -20,7 +20,7 @@ To enable PDF export, include the corresponding toolbar command and configure th
 
 It is highly recommended that you include the Pako Deflate library in the page to enable compression.
 
-The example below demonstrates how to enable the PDF export functionality of a Kendo UI Grid.
+The following example demonstrates how to enable the PDF export functionality of a Kendo UI Grid.
 
 ###### Example
 
@@ -69,7 +69,7 @@ By default, the Kendo UI Grid exports only the current page of data. To export a
 >
 > When the `allPages` option is set to `true` and `serverPaging` is enabled, the Grid will make a `"read"` request for all data. If the data items are too many, the browser may become unresponsive. Consider implementing server-side export for such cases.
 
-The example below demonstrates how to export all the pages of a Kendo UI Grid in PDF.
+The following example demonstrates how to export all the pages of a Kendo UI Grid in PDF.
 
 ###### Example
 
@@ -116,7 +116,7 @@ To make use of all the available space, the Grid will be enabled to:
 > * The exact maximum number of exportable rows will vary depending on the browser, system resources, template complexity, and other factors.
 > * It is advisable to verify your own worst-case scenarios in each browser you intend to support.
 
-The example below demonstrates how to export the Grid with a fixed paper size.
+The following example demonstrates how to export the Grid with a fixed paper size.
 
 ###### Example
 
@@ -160,7 +160,7 @@ The following page template variables are available:
 >
 > It is required to set the paper size when you use a page template. For more information, refer to the section on [page templates](#page-templates).
 
-The example below demonstrates how to export a Grid by using a page template.
+The following example demonstrates how to export a Grid by using a page template.
 
 ###### Example
 
@@ -277,7 +277,7 @@ In some cases it is useful to send the generated file to a remote service. Do th
 
 If the proxy returns `204 No Content`, no "Save As..." dialog will appear on the client.
 
-The example below demonstrates how to post files to the server.
+The following example demonstrates how to post files to the server.
 
 ###### Example
 
@@ -311,7 +311,7 @@ The default fonts in PDF files do not support Unicode. To support international 
 
 Kendo UI ships the [Deja Vu font family](http://dejavu-fonts.org/wiki/Main_Page) as part of its distributions. For more details on this, see the article on [custom fonts and PDF]({% slug drawingofhtmlelements_drawingapi %}#configuration-Custom).
 
-The example below demonstrates how to handle custom fonts.
+The following example demonstrates how to handle custom fonts.
 
 ###### Example
 

@@ -293,7 +293,7 @@ Keyboard navigation within the Grid is configured through the `navigatable` opti
 
 The navigation occurs at a cell level regardless of what the `selectable` mode is. To select the current row or cell, press the space bar.
 
-The example below demonstrates how to enable the key navigation in the Grid.
+The following example demonstrates how to enable the key navigation in the Grid.
 
 ###### Example
 
@@ -314,7 +314,7 @@ It is also possible to avoid the described procedure. The custom hyperlinks can 
 
 It is possible to format any cell within the Grid by using templates within a script tag or within the template option on the column object if the Grid is initialized from a `<div>` element.
 
-The example below demonstrates how to use a template to format the email address as a hyperlink by using a template declared in a script block.
+The following example demonstrates how to use a template to format the email address as a hyperlink by using a template declared in a script block.
 
 ###### Example
 

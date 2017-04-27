@@ -1,17 +1,19 @@
 ---
 title: Upload Files to OData Service
 page_title: Upload Files to OData Service | Kendo UI Upload
-description: "Learn how to upload fiels to OData service with the Kendo UI Upload widget."
+description: "Learn how to upload files to the OData service by using the Kendo UI Upload."
 slug: howto_upload_odata
 ---
 
 # Upload Files to OData Service
 
-**Kendo Upload**, by default, uploads files as filedata. In order for the **OData** service to consume a file, the body of the sent request should include the file buffer. You can enable the [useArrayBuffer option](/api/javascript/ui/upload#configuration-async.useArrayBuffer) so that **Kendo Upload** utilize the browser's [FileReader](https://developer.mozilla.org/en-US/docs/Web/API/FileReader) and send a request that satisfies the OData specification for [Media Entities](http://docs.oasis-open.org/odata/odata/v4.0/errata03/os/complete/part1-protocol/odata-v4.0-errata03-os-part1-protocol-complete.html#_Toc453752304).
+By default, the Upload uploads files as FileData.
 
-> Note
+In order for the OData service to consume a file, the body of the sent request has to include the file buffer. To allow the Upload to utilize the [`FileReader`](https://developer.mozilla.org/en-US/docs/Web/API/FileReader) of the browser and send a request that satisfies the OData specification for [Media Entities](http://docs.oasis-open.org/odata/odata/v4.0/errata03/os/complete/part1-protocol/odata-v4.0-errata03-os-part1-protocol-complete.html#_Toc453752304), set the [`useArrayBuffer`](/api/javascript/ui/upload#configuration-async.useArrayBuffer) option to `true`.
+
+> **Important**
 >
-> This option will enable you to use **Kendo Upload** in **SharePoint 2013** and utilize its native [REST service for the file upload mechanism](https://msdn.microsoft.com/en-us/library/office/dn292553.aspx).
+> The `useArrayBuffer` option enables you to use the Upload in SharePoint 2013 and utilize its native [REST service for the file upload mechanism](https://msdn.microsoft.com/en-us/library/office/dn292553.aspx).
 
 ###### Example
 
@@ -34,4 +36,4 @@ slug: howto_upload_odata
 * [Modes of Operation]({% slug modes_upload_widget %})
 * [Metadata]({% slug metadata_upload_widget %})
 
-For more runnable examples on the Kendo UI Upload widget, browse its **How To** documentation folder.
+For more runnable examples on the Kendo UI Upload widget, browse its [**How To** documentation folder]({% slug howto_add_image_preview %}).

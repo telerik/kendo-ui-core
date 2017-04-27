@@ -76,7 +76,7 @@ Kendo UI provides a powerful [data binding framework](http://demos.telerik.com/k
 
 The previous example renders a Grid without any data in it. To provide the widget with the data for each column, specify which element of the `data` tag in the server response has to be shown in each particular column.
 
-The example below demonstrates how to specify the `field` attribute in the column array in such a way that the Grid displays the actual data from the response.
+The following example demonstrates how to specify the `field` attribute in the column array in such a way that the Grid displays the actual data from the response.
 
 ###### Example
 
@@ -130,7 +130,7 @@ The example below demonstrates how to specify the `field` attribute in the colum
 
 The Grid renders the URL of an image in its **Image** column and the other columns show arrays of objects.
 
-The example below demonstrates how to indicate to the Grid the way you want the widget to display each of the columns by using an inline template for the image.
+The following example demonstrates how to indicate to the Grid the way you want the widget to display each of the columns by using an inline template for the image.
 
 ###### Example
 
@@ -184,7 +184,7 @@ The example below demonstrates how to indicate to the Grid the way you want the 
 
 The rest of the columns need additional specific templating because they are complex displays and not single fields. To configure the columns, move the template outside the Grid and set the template for the details to contain the name of the user who created the photo, the filter they used to create it, and the photo caption. To enumerate the comments and display them in a list, use JavaScript in the template in the last cell. All markup is now removed from the JavaScript.
 
-The example below demonstrates how to fully customize the Grid by applying additional styles to it.
+The following example demonstrates how to fully customize the Grid by applying additional styles to it.
 
 ###### Example
 
