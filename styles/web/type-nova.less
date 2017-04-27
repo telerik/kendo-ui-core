@@ -2464,7 +2464,7 @@ html .km-pane-wrapper .km-widget,
         padding: 1px 11px;
         color: @link-text-color;
 
-        &:hover {
+        &:hover:not(.k-state-disabled) {
             background-color: @hover-background;
         }
 
@@ -2476,6 +2476,10 @@ html .km-pane-wrapper .km-widget,
             &:hover {
                 background-color: multiply(@accent, #cccccc);
             }
+        }
+
+        &.k-state-disabled {
+            color: @disabled-text-color;
         }
     }
 

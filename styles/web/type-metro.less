@@ -981,7 +981,7 @@ td.k-state-focused.k-state-selected
 div.k-filebrowser-dropzone em,
 .k-draghandle:hover,
 .k-split-button:focus,
-.k-listbox .k-item:hover
+.k-listbox .k-item:hover:not(.k-state-disabled)
 {
     .composite-background(@hover-gradient);
 }
@@ -2727,7 +2727,7 @@ html .km-pane-wrapper .km-widget,
         background-color: @input-background-color;
     }
 
-    .k-item:hover {
+    .k-item:hover:not(.k-state-disabled) {
         color: @hover-text-color;
         background-color: @hover-background-color;
         border-color: transparent;
