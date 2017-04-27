@@ -352,6 +352,11 @@ var __meta__ = { // jshint ignore:line
             if(that._target) {
                 that._target.removeClass(FOCUSED_CLASS);
             }
+
+            if(!(e.shiftKey && !e.ctrlKey && (key === keys.DOWN || key === keys.UP))) {
+                that._shiftSelecting = false;
+            }
+
             if(key == keys.DELETE) {
                 that._executeCommand(REMOVE);
                 if(that._target) {
@@ -361,8 +366,23 @@ var __meta__ = { // jshint ignore:line
                 }
                 shouldPreventDefault = true;
             } else if(key === keys.DOWN || key === keys.UP) {
+                if(!current) {
+                    e.preventDefault();
+                    return;
+                }
                 if (e.shiftKey && !e.ctrlKey) {
-                    that.select($({}).add(that._target).add(current));
+                    if (!that._shiftSelecting) {
+                        that.clearSelection();
+                        that._shiftSelecting = true;
+                    }
+                    if (that._target && current.hasClass("k-state-selected")) {
+                        that._target.removeClass(SELECTED_STATE_CLASS);
+                        that.trigger(CHANGE);
+                    } else if(that.options.selectable == "single") {
+                       that.select(current);
+                    } else {
+                       that.select(current.add(that._target));
+                    }
                 } else if (e.shiftKey && e.ctrlKey) {
                     that._executeCommand(key === keys.DOWN ? MOVE_DOWN : MOVE_UP);
                     that._scrollIntoView(that._target);
@@ -388,6 +408,7 @@ var __meta__ = { // jshint ignore:line
                 if(e.ctrlKey && that._target) {
                    if(that._target.hasClass(SELECTED_STATE_CLASS)) {
                        that._target.removeClass(SELECTED_STATE_CLASS);
+                       that.trigger(CHANGE);
                    } else {
                        that.select(that._target);
                    }
@@ -401,8 +422,8 @@ var __meta__ = { // jshint ignore:line
                    that._executeCommand(TRANSFER_ALL_TO);
                 } else {
                    that._executeCommand(TRANSFER_TO);
-                   that._target = that.select();
                 }
+                that._target = that.select().length ? that.select(): null;
                 shouldPreventDefault = true;
             } else if(e.ctrlKey && key == keys.LEFT) {
                 if(e.shiftKey) {
