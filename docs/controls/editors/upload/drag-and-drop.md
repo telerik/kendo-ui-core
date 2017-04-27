@@ -89,6 +89,7 @@ Other articles on the Kendo UI Upload:
 * [Overview of the Upload Widget]({% slug overview_kendoui_upload_widget %})
 * [Send and Receive Metadata]({% slug metadata_upload_widget %})
 * [Modes of Operation]({% slug modes_upload_widget %})
+* [Chunk Upload]({% slug chunkupload_upload_widget %})
 * [Validation]({% slug validation_upload_widget %})
 * [Browser Support]({% slug browsersupport_upload_widget %})
 * [Troubleshooting]({% slug troubleshooting_upload_widget %})
