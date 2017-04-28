@@ -2462,7 +2462,7 @@ html .km-pane-wrapper .km-widget,
 
     .k-item {
         padding: 1px 11px;
-        color: @link-text-color;
+        color: @normal-text-color;
 
         &:hover:not(.k-state-disabled) {
             background-color: @hover-background;
@@ -2480,6 +2480,11 @@ html .km-pane-wrapper .km-widget,
 
         &.k-state-disabled {
             color: @disabled-text-color;
+        }
+
+        &.k-state-focused {
+            border-color: darken(@widget-border-color, 27%);
+            box-shadow: none;
         }
     }
 
