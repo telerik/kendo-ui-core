@@ -578,7 +578,6 @@ Defines the text of the **Transfer All To** button that is located in the toolba
 ### selectable `String` *(default: "single")*
 
 Indicates whether the selection is single or multiple. The possible values are:
-
 - `"single"` - A single-item selection.
 - `"multiple"` - A multiple-item selection.
 
