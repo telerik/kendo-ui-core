@@ -548,7 +548,7 @@ Defines the text of the **Transfer From** button that is located in the toolbar 
 
 ### messages.tools.transferTo `String`
 
-Defines the text of the **Transfer All To** button that is located in the toolbar of the ListBox.
+Defines the text of the **Transfer To** button that is located in the toolbar of the ListBox.
 
 #### Example
 
@@ -578,7 +578,6 @@ Defines the text of the **Transfer All To** button that is located in the toolba
 ### selectable `String` *(default: "single")*
 
 Indicates whether the selection is single or multiple. The possible values are:
-
 - `"single"` - A single-item selection.
 - `"multiple"` - A multiple-item selection.
 
