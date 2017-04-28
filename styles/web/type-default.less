@@ -178,32 +178,8 @@
 }
 
 /* main colors */
-.k-icon {
-    color: @normal-text-color;
-    &:hover {
-        color: @hover-text-color;
-    }
-}
-
-.k-button .k-icon {
-    color: @button-text-color;
-    &:hover {
-        color: @button-text-color;
-    }
-}
-
-.k-tool-icon.k-icon {
-    color: @button-text-color;
-}
-
-.k-tool.k-state-hover,
-.k-tool.k-state-hover .k-icon,
-.k-tool.k-state-selected .k-icon {
+.k-tool.k-state-hover {
     color: @selected-text-color;
-}
-
-.k-widget.k-notification .k-icon {
-    color: inherit;
 }
 
 .k-splitbar .k-resize-handle {
@@ -1140,6 +1116,9 @@ div.k-filebrowser-dropzone em
 .k-dropzone .k-upload-status
 {
     color: @disabled-text-color;
+}
+.k-file .k-upload-status {
+    color: @normal-text-color;
 }
 
 /* Progressbar */
