@@ -13,6 +13,7 @@
 @disabled-text-color: darken(@base, 23%);
 @disabled-border-color: darken(@base, 6%);
 @inputs-border-radius: 3px;
+@input-validation-error: darken(@error, 25%);
 
 @theme-name: ~"nova";
 
@@ -2234,6 +2235,26 @@ html .km-pane-wrapper .km-widget,
 
 @spreadsheet-page-orientation-border-color: lighten(@hover-text-color, 8%);
 
+.k-grid {
+    .k-edit-cell input.k-checkbox,
+    .k-grid-edit-row input.k-checkbox {
+        width: 16px;
+        height: 17px;
+    }
+}
+
+.k-window .k-popup-edit-form .k-edit-field {
+    input.k-checkbox {
+        width: 16px;
+        height: 17px;
+        margin-top: 1.1em;
+    }
+
+    label.k-checkbox-label {
+        margin-top: 0.8em;
+    }
+}
+
 /* Dialog */
 
 .k-dialog {
@@ -2360,4 +2381,25 @@ html .km-pane-wrapper .km-widget,
             }
         }
     }
+}
+
+.k-numeric-wrap .k-i-warning {
+    color: @input-validation-error;
+    position: absolute;
+    top: 0;
+    right: 2.2em;
+    width: 2.2em;
+}
+
+.k-numeric-wrap.k-state-invalid {
+    border-color: @input-validation-error;
+
+    input {
+        color: @input-validation-error;
+    }
+}
+
+.k-rtl .k-numeric-wrap.k-state-invalid .k-i-warning {
+    right: auto;
+    left: 2.2em;
 }
