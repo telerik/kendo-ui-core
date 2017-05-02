@@ -2,7 +2,8 @@
     define([ "./kendo.core", "./kendo.data.odata", "./kendo.data.xml" ], f);
 })(function(){
 
-var __meta__ = { // jshint ignore:line
+// jshint ignore:line
+var __meta__ = { 
     id: "data",
     name: "Data source",
     category: "framework",
@@ -26,7 +27,7 @@ var __meta__ = { // jshint ignore:line
     }]
 };
 
-/*jshint eqnull: true, loopfunc: true, evil: true */
+/* jshint eqnull: true, loopfunc: true, evil: true */
 (function($, undefined) {
     var extend = $.extend,
         proxy = $.proxy,
