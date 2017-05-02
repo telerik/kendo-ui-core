@@ -52,6 +52,14 @@ var __meta__ = { // jshint ignore:line
 
             kendo.notify(that);
         },
+        
+        destroy: function() {
+			var that = this;
+			
+			that.wrapper.off(NS);
+			
+			Widget.fn.destroy.call(that);
+		},
 
         destroy: function() {
             var that = this;
