@@ -569,7 +569,9 @@ var __meta__ = { // jshint ignore:line
             }
 
             if (isWindow && docEl.scrollHeight - docEl.clientHeight > 0) {
-                viewportWidth -= kendo.support.scrollbar();
+                 var sign = options.isRtl ? -1 : 1;
+
+                 viewportWidth -= sign * kendo.support.scrollbar();
             }
 
             siblingContainer = anchor.parents().filter(wrapper.siblings());
