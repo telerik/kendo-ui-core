@@ -79,6 +79,7 @@ var __meta__ = { // jshint ignore:line
 
             Observable.fn.init.call(that);
 
+            that._triggerChangeCallback = $.proxy(that._triggerChange, that);
             that.length = array.length;
 
             that.wrapAll(array, that);
@@ -137,18 +138,21 @@ var __meta__ = { // jshint ignore:line
 
                 object.parent = parent;
 
-                object.bind(CHANGE, function(e) {
-                    that.trigger(CHANGE, {
-                        field: e.field,
-                        node: e.node,
-                        index: e.index,
-                        items: e.items || [this],
-                        action: e.node ? (e.action || "itemloaded") : "itemchange"
-                    });
-                });
+                object.bind(CHANGE, that._triggerChangeCallback);
             }
 
             return object;
+        },
+        
+        _triggerChangeCallback: null,
+        _triggerChange: function (e) {
+            this.trigger(CHANGE, {
+                        field: e.field,
+                        node: e.node,
+                        index: e.index,
+                        items: e.items || [e.sender],
+                        action: e.node ? (e.action || "itemloaded") : "itemchange"
+                    });
         },
 
         push: function() {
@@ -175,8 +179,9 @@ var __meta__ = { // jshint ignore:line
 
         pop: function() {
             var length = this.length, result = pop.apply(this);
-
+            
             if (length) {
+                result.unbind(CHANGE, this._triggerChangeCallback);
                 this.trigger(CHANGE, {
                     action: "remove",
                     index: length - 1,
@@ -201,8 +206,8 @@ var __meta__ = { // jshint ignore:line
                 });
 
                 for (i = 0, len = result.length; i < len; i++) {
-                    if (result[i] && result[i].children) {
-                        result[i].unbind(CHANGE);
+                    if (result[i]) {
+                        result[i].unbind(CHANGE, this._triggerChangeCallback);
                     }
                 }
             }
@@ -221,6 +226,7 @@ var __meta__ = { // jshint ignore:line
             var length = this.length, result = shift.apply(this);
 
             if (length) {
+                result.unbind(CHANGE, this._triggerChangeCallback);
                 this.trigger(CHANGE, {
                     action: "remove",
                     index: 0,
