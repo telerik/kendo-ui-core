@@ -663,11 +663,7 @@ var __meta__ = { // jshint ignore:line
             siblings.each(function() {
                 var element = $(this);
 
-                if (element.hasClass("k-list-filter")) {
-                    offsetHeight += outerHeight(element.children());
-                } else {
-                    offsetHeight += outerHeight(element);
-                }
+                offsetHeight += outerHeight(element);
             });
 
             return offsetHeight;
