@@ -392,7 +392,7 @@
         equal(dialog.wrapper.height(), 100);
     });
 
-    test("height is constrained by maxHeight when content is larger", function() {
+    skip("height is constrained by maxHeight when content is larger", function() {
         var dialog = createHighWindow({ maxHeight: 100 }, null, 200);
         ok(dialog.element.height() <= 100);
     });
