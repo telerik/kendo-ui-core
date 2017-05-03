@@ -229,40 +229,6 @@ Indicates whether dragging is enabled.
         });
     </script>
 
-### draggable.enabled `Boolean` *(default: true)*
-
-Indicates whether dragging is enabled.
-
-#### Example - ListBox with disabled dragging
-
-    <select id="listBoxA">
-        <option>ItemA1</option>
-        <option>ItemA2</option>
-    </select>
-    <select id="listBoxB">
-        <option>ItemB1</option>
-        <option>ItemB2</option>
-    </select>
-
-    <script>
-        $("#listBoxA").kendoListBox({
-            draggable: true
-        });
-
-        $("#listBoxB").kendoListBox({
-            dropSources: [ "listBoxA" ],
-            draggable: {
-                enabled: false,
-                placeholder: function(element) {
-                    return element.clone().css({
-                        "opacity": 0.3,
-                        "border": "1px dashed #000000"
-                    });
-                }
-            }
-        });
-    </script>
-
 ### draggable.hint `Function|String|jQuery`
 
 Provides an option to customize the draggable item hint. If a function is supplied, it receives a single argument - the jQuery object of the `draggable` element. If a hint is not provided, the ListBox clones the dragged item and uses it as a hint.
