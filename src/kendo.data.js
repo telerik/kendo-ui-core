@@ -464,7 +464,7 @@ var __meta__ = { // jshint ignore:line
                 that[field] = member;
             }
 
-            that.uid = kendo.guid();
+            that.uid = (value && value.uid) || kendo.guid();
         },
 
         shouldSerialize: function(field) {
