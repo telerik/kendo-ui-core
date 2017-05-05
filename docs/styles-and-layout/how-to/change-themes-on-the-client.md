@@ -137,7 +137,7 @@ The core functionality of the following demo is replacing CSS stylesheets on the
 
 > Important
 >
-> When switching dynamically from/to [SASS themes]({slug sassbasedthemes_kendoui}) the page should be fully reloaded (`location.reload()`). 
+> When switching dynamically from/to [SASS themes]({%slug sassbasedthemes_kendoui%}) the page should be fully reloaded (`location.reload()`).
 >
 > This is due to differences with the common resources used and the incapability of browser to dynamically unload the unneeded ones.
 
