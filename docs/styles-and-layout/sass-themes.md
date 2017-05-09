@@ -19,7 +19,13 @@ Apart from being written in a different language, the SASS-based themes are slig
 
 > **Important**  
 >
-> Internet Explorer 11 and earlier do not support SASS themes.
+> Sass based themes utilize some CSS features that are not supported by Internet Explorer 10 and earlier:
+>
+> * flexbox layout (not supported in IE 10 and earlier)
+> * CSS gradients (not supported in IE 9 and earlier)
+> * Web Open Font Format (not supported in IE 8 and earlier)
+> * Border radius (not supported in IE 8 and earlier)
+> * Alpha transparency colors (not supported in IE 8 and earlier)
 
 ## Differences
 
