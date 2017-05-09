@@ -1,16 +1,19 @@
 ---
 title: Change Themes on the Client
-page_title: Change Themes on the Client | Kendo UI Desktop Widgets
-description: "Learn how to change themes on the client when styling the Kendo UI desktop widgets and controls for data visualization."
+page_title: Change Themes on the Client | Kendo UI Styles and Appearance
+description: "Learn how to change themes on the client when styling the Kendo UI widgets."
 slug: howto_changethemes_ontheclient_styleskendoui
-position: 1
 ---
 
 # Change Themes on the Client
 
-The example below demonstrates a possible way to switch Kendo UI themes on the client.
+The following example demonstrates a possible way for you to switch the Kendo UI themes on the client by replacing the CSS stylesheets.
 
-The core functionality of the following demo is replacing CSS stylesheets on the client, which is not something related to Kendo UI and does not require any Kendo UI APIs. From this point of view, the example is provided "as is", and may need customization and tweaking depending on the specific scenario, requirements, browser support, etc.
+Because this approach is not related to the functionalities of the Kendo UI suite, it does not require you to apply Kendo UI API calls. As a result, depending on the requirements of your project, you might have to customize and tweak the code.
+
+> **Important**
+>
+> To achieve a dynamic switching from or to [SASS themes]({% slug sassbasedthemes_kendoui %}), the page has to be fully reloaded (`location.reload()`). The reason for this behavior is that the common resources that are used are different and the browser is not capable of dynamically unloading the resources that are not necessary.
 
 ```html
 
@@ -135,12 +138,6 @@ The core functionality of the following demo is replacing CSS stylesheets on the
 
 ```
 
-> Important
->
-> When switching dynamically from/to [SASS themes]({%slug sassbasedthemes_kendoui%}) the page should be fully reloaded (`location.reload()`).
->
-> This is due to differences with the common resources used and the incapability of browser to dynamically unload the unneeded ones.
-
 ## See Also
 
 Other articles on styling, appearance, and rendering of Kendo UI widgets:
@@ -148,8 +145,8 @@ Other articles on styling, appearance, and rendering of Kendo UI widgets:
 * [Themes and Appearance of the Kendo UI Widgets]({% slug themesandappearnce_kendoui_desktopwidgets %})
 * [Responsive Web Design]({% slug responsivewebdesign_integration_kendoui %})
 * [Web Font Icons]({% slug webfonticons_kendoui_desktopwidgets %})
-* [Sass ThemeBuilder Overview]({% slug sassbasedthemes_kendoui %}#sass-theme-builder)
-* [Less ThemeBuilder Overview]({% slug themesandappearnce_kendoui_desktopwidgets %}#less-theme-builder)
+* [SASS ThemeBuilder Overview]({% slug sassbasedthemes_kendoui %}#sass-theme-builder)
+* [LESS ThemeBuilder Overview]({% slug themesandappearnce_kendoui_desktopwidgets %}#less-theme-builder)
 * [Rendering Modes for Data Visualization]({% slug renderingmodesfor_datavisualization_kendouistyling %})
 * [Troubleshooting]({% slug commonissues_troubleshooting_kendouistyling %})
 * [Themes and Appearance of the Kendo UI Hybrid Widgets](/controls/hybrid/styling)

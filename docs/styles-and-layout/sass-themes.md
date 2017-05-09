@@ -15,17 +15,7 @@ Currently, Kendo UI delivers a single SASS theme. This is the **Default v2** the
 
 ## Overview
 
-Apart from being written in a different language, the SASS-based themes are slightly different from the LESS-based ones. This article outlines those differences and shows how you can use the SASS-based themes.
-
-> **Important**  
->
-> Sass based themes utilize some CSS features that are not supported by Internet Explorer 10 and earlier:
->
-> * flexbox layout (not supported in IE 10 and earlier)
-> * CSS gradients (not supported in IE 9 and earlier)
-> * Web Open Font Format (not supported in IE 8 and earlier)
-> * Border radius (not supported in IE 8 and earlier)
-> * Alpha transparency colors (not supported in IE 8 and earlier)
+Apart from being written in a different language, the SASS-based themes are slightly different from the LESS-based ones. This article outlines those differences and demonstrates how to use the SASS-based themes.
 
 ## Differences
 
@@ -35,6 +25,16 @@ In Kendo UI, the SASS-based themes demonstrate the following differences from th
 - Based on the widget you work with, the SASS-based themes can build a part of the widget theme in a similar way the Download Builder trims unused scripts.
 - The SASS-based themes are available on NPM. Each theme is stored as an NPM package and can be easily upgraded.
 - Each SASS-based theme is compatible with the [Kendo UI components for Angular 2](http://www.telerik.com/kendo-angular-ui/). This enables you to port parts of your application to Angular 2 while maintaining their styling.
+
+## Browser Limitations
+
+The following CSS features, which are used by the SASS-based themes, provide limited browser support:
+
+* Flexbox layout&mdash;Not supported by Internet Explorer 10 and earlier.
+* CSS gradients&mdash;Not supported by Internet Explorer 9 and earlier.
+* Web Open Font Format&mdash;Not supported by Internet Explorer 8 and earlier.
+* Border radius&mdash;Not supported by Internet Explorer 8 and earlier.
+* Alpha transparency colors&mdash;Not supported by Internet Explorer 8 and earlier.
 
 ## Getting the Themes
 
@@ -598,13 +598,13 @@ Outputs a module once, no matter how many times it is included.
 
 To contribute to the development of the Kendo UI Default Theme, refer to the [telerik/kendo-theme-default](https://github.com/telerik/kendo-theme-default) GitHub repository it is stored in.
 
-## Sass Theme Builder
+## SASS Theme Builder
 
 [**Progress Sass Theme Builder**](http://themebuilder.telerik.com/aspnet-mvc) for Kendo UI is an Angular web application that enables you to create new or customize existing themes.
 
-The tool renders the same look and feel as the look and feel of all other components in the suite. It also delivers full control over the skin elements of each component and automatically updates its composite units. After you create the skin and achieve the desired look of the theme, the Sass Theme Builder enables you to download and integrate it in your project.  
+The tool renders the same look and feel as the look and feel of all other components in the suite. It also delivers full control over the skin elements of each component and automatically updates its composite units. After you create the skin and achieve the desired look of the theme, the SASS Theme Builder enables you to download and integrate it in your project.  
 
-**Figure 1: A preview of the Sass Theme Builder**
+**Figure 1: A preview of the SASS Theme Builder**
 
 ![Theme Builder Overview](images/theme-builder-overview.png)
 
@@ -612,7 +612,7 @@ The tool renders the same look and feel as the look and feel of all other compon
 
 To create a new theme:
 
-1. On the initial Sass Theme Builder pane, select the **Start Theming** option.
+1. On the initial SASS Theme Builder pane, select the **Start Theming** option.
 1. Choose one of the existing skins to use as a base. The currently available built-in skins are **Default** and **Bootsrap**.
 
     **Figure 2: Selecting a base theme**
@@ -621,7 +621,7 @@ To create a new theme:
 
 ### Customizing Existing Themes
 
-The Sass Theme Builder supports the following options for customization:
+The SASS Theme Builder supports the following options for customization:
 
 * Color pickers which customize the appearance of the components.
 * The **Apply changes instantly** option which enables you to observe the changes on the fly.
@@ -630,7 +630,7 @@ The Sass Theme Builder supports the following options for customization:
 
 #### Functionalities for Customization
 
-To customize an existing theme, use the following Sass Theme Builder functionalities:
+To customize an existing theme, use the following SASS Theme Builder functionalities:
 
 1. **Color Swatches**&mdash;Contains predefined color palettes that you can apply to all components in your application.
 1. **Default**&mdash;Provides the applicable color customization options.
@@ -645,7 +645,7 @@ To customize an existing theme, use the following Sass Theme Builder functionali
 
 To upload an existing theme you have previously created:
 
-1. On the initial Sass Theme Builder pane, select **Import Theme**.
+1. On the initial SASS Theme Builder pane, select **Import Theme**.
 1. Upload the `variables.scss` file which contains your current modifications of the customized theme. As a result, the selected components and styling elements load.
 1. Start [customizing your theme](#customizing-existing-themes).
 
