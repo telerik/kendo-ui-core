@@ -187,8 +187,8 @@ Below are listed the steps for you to follow when configuring the Kendo UI Multi
                           })
                           .Schema(schema =>
                           {
-                              schema.Data("Data") //define the [data](http://docs.telerik.com/kendo-ui/api/javascript/data/datasource#configuration-schema.data) option
-                                    .Total("Total"); //define the [total](http://docs.telerik.com/kendo-ui/api/javascript/data/datasource#configuration-schema.total) option
+                              schema.Data("Data") //define the [data](../../../kendo-ui/api/javascript/data/datasource#configuration-schema.data) option
+                                    .Total("Total"); //define the [total](../../../kendo-ui/api/javascript/data/datasource#configuration-schema.total) option
                           });
                 })
             %>
@@ -210,8 +210,8 @@ Below are listed the steps for you to follow when configuring the Kendo UI Multi
                           })
                           .Schema(schema =>
                           {
-                              schema.Data("Data") //define the [data](http://docs.telerik.com/kendo-ui/api/javascript/data/datasource#configuration-schema.data) option
-                                    .Total("Total"); //define the [total](http://docs.telerik.com/kendo-ui/api/javascript/data/datasource#configuration-schema.total) option
+                              schema.Data("Data") //define the [data](../../../kendo-ui/api/javascript/data/datasource#configuration-schema.data) option
+                                    .Total("Total"); //define the [total](../../../kendo-ui/api/javascript/data/datasource#configuration-schema.total) option
                           });
                 })
             )
@@ -458,7 +458,7 @@ The following example demonstrates how to subscribe to events by a template dele
 
 ### Existing Instances
 
-To reference an existing Kendo UI MultiSelect instance, use the [`jQuery.data()`](http://api.jquery.com/jQuery.data/) configuration option. Once a reference is established, use the [MultiSelect API](http://docs.telerik.com/kendo-ui/api/javascript/ui/multiselect#methods) to control its behavior.
+To reference an existing Kendo UI MultiSelect instance, use the [`jQuery.data()`](http://api.jquery.com/jQuery.data/) configuration option. Once a reference is established, use the [MultiSelect API](../../../kendo-ui/api/javascript/ui/multiselect#methods) to control its behavior.
 
 ###### Example
 
@@ -472,12 +472,12 @@ To reference an existing Kendo UI MultiSelect instance, use the [`jQuery.data()`
 
 ## See Also
 
-* [ASP.NET MVC API Reference: MultiSelectBuilder](/api/Kendo.Mvc.UI.Fluent/MultiSelectBuilder)
+* [ASP.NET MVC API Reference: MultiSelectBuilder](../../../kendo-ui/api/Kendo.Mvc.UI.Fluent/MultiSelectBuilder)
 * [Overview of Telerik UI for ASP.NET MVC]({% slug overview_aspnetmvc %})
 * [Fundamentals of Telerik UI for ASP.NET MVC]({% slug fundamentals_aspnetmvc %})
 * [Scaffolding in Telerik UI for ASP.NET MVC]({% slug scaffolding_aspnetmvc %})
-* [Overview of the Kendo UI MultiSelect Widget](http://docs.telerik.com/kendo-ui/controls/editors/multiselect/overview)
-* [Telerik UI for ASP.NET MVC API Reference Folder](/api/Kendo.Mvc/AggregateFunction)
+* [Overview of the Kendo UI MultiSelect Widget](../../../kendo-ui/controls/editors/multiselect/overview)
+* [Telerik UI for ASP.NET MVC API Reference Folder](../../../kendo-ui/api/Kendo.Mvc/AggregateFunction)
 * [Telerik UI for ASP.NET MVC HtmlHelpers Folder]({% slug overview_barcodehelper_aspnetmvc %})
 * [Tutorials on Telerik UI for ASP.NET MVC]({% slug overview_timeefficiencyapp_aspnetmvc6 %})
 * [Telerik UI for ASP.NET MVC Troubleshooting]({% slug troubleshooting_aspnetmvc %})

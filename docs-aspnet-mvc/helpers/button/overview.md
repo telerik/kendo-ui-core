@@ -220,7 +220,7 @@ The following example demonstrates how to use `.Enable()`.
             .Content("Disabled button") %>
 ```
 
-For more information on the [`enable` method of the Button](/kendo-ui/api/javascript/ui/button#methods-enable), refer to the [API of the Button control](/kendo-ui/api/javascript/ui/button).
+For more information on the [`enable` method of the Button](../../../kendo-ui/api/javascript/ui/button#methods-enable), refer to the [API of the Button control](../../../kendo-ui/api/javascript/ui/button).
 
 ## Reference
 

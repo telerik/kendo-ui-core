@@ -192,16 +192,16 @@ The following example demonstrates how to use templates.
   	});
   	</script>
 
-For more information on other Notification features and behavior, such as HTML output, RTL support, or Events, refer to the [introductory article on the Kendo UI Notification](http://docs.telerik.com/kendo-ui/controls/layout/notification/overview). The widget events and methods are described in the [Notification API section](/kendo-ui/api/javascript/ui/notification).
+For more information on other Notification features and behavior, such as HTML output, RTL support, or Events, refer to the [introductory article on the Kendo UI Notification](../../../kendo-ui/controls/layout/notification/overview). The widget events and methods are described in the [Notification API section](../../../kendo-ui/api/javascript/ui/notification).
 
 ## See Also
 
-* [ASP.NET MVC API Reference: NotificationBuilder](/api/Kendo.Mvc.UI.Fluent/NotificationBuilder)
+* [ASP.NET MVC API Reference: NotificationBuilder](../../../kendo-ui/api/Kendo.Mvc.UI.Fluent/NotificationBuilder)
 * [Overview of Telerik UI for ASP.NET MVC]({% slug overview_aspnetmvc %})
 * [Fundamentals of Telerik UI for ASP.NET MVC]({% slug fundamentals_aspnetmvc %})
 * [Scaffolding in Telerik UI for ASP.NET MVC]({% slug scaffolding_aspnetmvc %})
-* [Overview of the Kendo UI Notification Widget](http://docs.telerik.com/kendo-ui/controls/layout/notification/overview)
-* [Telerik UI for ASP.NET MVC API Reference Folder](/api/Kendo.Mvc/AggregateFunction)
+* [Overview of the Kendo UI Notification Widget](../../../kendo-ui/controls/layout/notification/overview)
+* [Telerik UI for ASP.NET MVC API Reference Folder](../../../kendo-ui/api/Kendo.Mvc/AggregateFunction)
 * [Telerik UI for ASP.NET MVC HtmlHelpers Folder]({% slug overview_barcodehelper_aspnetmvc %})
 * [Tutorials on Telerik UI for ASP.NET MVC]({% slug overview_timeefficiencyapp_aspnetmvc6 %})
 * [Telerik UI for ASP.NET MVC Troubleshooting]({% slug troubleshooting_aspnetmvc %})

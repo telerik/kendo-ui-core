@@ -103,4 +103,4 @@ View:
 ## See Also
 
 * [Overview of the Map HtmlHelper]({% slug overview_maphelper_aspnetmvc %})
-* [Map API Reference](/api/Kendo.Mvc.UI.Fluent/MapBuilder)
+* [Map API Reference](../../../kendo-ui/api/Kendo.Mvc.UI.Fluent/MapBuilder)

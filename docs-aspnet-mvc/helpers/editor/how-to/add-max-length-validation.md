@@ -58,6 +58,6 @@ The following example demonstrates how to define custom Kendo UI validators thro
 ## See Also
 
 * [Editor HtmlHelper Overview]({% slug overview_editorhelper_aspnetmvc %})
-* [EditorBuilder API Reference](/api/Kendo.Mvc.UI.Fluent/EditorBuilder)
+* [EditorBuilder API Reference](../../../kendo-ui/api/Kendo.Mvc.UI.Fluent/EditorBuilder)
 
 For more runnable examples on the Kendo UI Editor in ASP.NET MVC applications, browse its **How To** documentation folder.

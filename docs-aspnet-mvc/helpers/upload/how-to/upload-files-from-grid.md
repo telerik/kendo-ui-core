@@ -13,6 +13,6 @@ To see the example, refer to the project on how to [upload files from a Grid pop
 ## See Also
 
 * [Overview of the Upload HtmlHelper]({% slug overview_uploadhelper_aspnetmvc %})
-* [UploadBuilder API Reference](/api/Kendo.Mvc.UI.Fluent/UploadBuilder)
+* [UploadBuilder API Reference](../../../kendo-ui/api/Kendo.Mvc.UI.Fluent/UploadBuilder)
 
 For more runnable examples on the Kendo UI Scheduler in ASP.NET MVC applications, browse its **How To** documentation folder.

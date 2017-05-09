@@ -12,6 +12,6 @@ To see the example, refer to the project on how to [use a strongly-typed Kendo U
 ## See Also
 
 * [Overview of the MultiSelect HtmlHelper]({% slug overview_multiselecthelper_aspnetmvc %})
-* [MultiSelectBuilder API Reference](/api/Kendo.Mvc.UI.Fluent/MultiSelectBuilder)
+* [MultiSelectBuilder API Reference](../../../kendo-ui/api/Kendo.Mvc.UI.Fluent/MultiSelectBuilder)
 
 For more runnable examples on the Kendo UI MultiSelect in ASP.NET MVC applications, browse its [**How To** documentation folder](/helpers/multiselect/how-to/)

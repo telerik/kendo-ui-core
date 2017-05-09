@@ -193,8 +193,8 @@ You can reference a hybrid ActionSheet instance by using the code from the examp
 
 ## See Also
 
-* [ASP.NET MVC API Reference: ActionSheetBuilder](/api/Kendo.Mvc.UI.Fluent/MobileActionSheetBuilder)
-* [Overview of the Hybrid UI ActionSheet Widget](http://docs.telerik.com/kendo-ui/controls/hybrid/actionsheet/actionsheet)
+* [ASP.NET MVC API Reference: ActionSheetBuilder](../../../kendo-ui/api/Kendo.Mvc.UI.Fluent/MobileActionSheetBuilder)
+* [Overview of the Hybrid UI ActionSheet Widget](../../../kendo-ui/controls/hybrid/actionsheet/actionsheet)
 * [Overview of Telerik UI for ASP.NET MVC]({% slug overview_aspnetmvc %})
 * [Fundamentals of Telerik UI for ASP.NET MVC]({% slug fundamentals_aspnetmvc %})
 * [Scaffolding in Telerik UI for ASP.NET MVC]({% slug scaffolding_aspnetmvc %})

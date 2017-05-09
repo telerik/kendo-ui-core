@@ -323,12 +323,12 @@ To reference an existing Kendo UI Menu instance, use the [`jQuery.data()`](http:
 
 ## See Also
 
-* [ASP.NET MVC API Reference: MenuBuilder](/api/Kendo.Mvc.UI.Fluent/MenuBuilder)
-* [ASP.NET MVC API Reference: MenuItemBuilder](/api/Kendo.Mvc.UI.Fluent/MenuItemBuilder)
+* [ASP.NET MVC API Reference: MenuBuilder](../../../kendo-ui/api/Kendo.Mvc.UI.Fluent/MenuBuilder)
+* [ASP.NET MVC API Reference: MenuItemBuilder](../../../kendo-ui/api/Kendo.Mvc.UI.Fluent/MenuItemBuilder)
 * [Overview of Telerik UI for ASP.NET MVC]({% slug overview_aspnetmvc %})
 * [Fundamentals of Telerik UI for ASP.NET MVC]({% slug fundamentals_aspnetmvc %})
 * [Scaffolding in Telerik UI for ASP.NET MVC]({% slug scaffolding_aspnetmvc %})
-* [Overview of the Kendo UI Menu Widget](http://docs.telerik.com/kendo-ui/controls/navigation/menu/overview)
+* [Overview of the Kendo UI Menu Widget](../../../kendo-ui/controls/navigation/menu/overview)
 * [Telerik UI for ASP.NET MVC API Reference Folder](/api/Kendo.Mvc/AggregateFunction)
 * [Telerik UI for ASP.NET MVC HtmlHelpers Folder]({% slug overview_barcodehelper_aspnetmvc %})
 * [Tutorials on Telerik UI for ASP.NET MVC]({% slug overview_timeefficiencyapp_aspnetmvc6 %})

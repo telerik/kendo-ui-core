@@ -12,6 +12,6 @@ To see the example, refer to the project on how to [set up the Editor `ImageBrow
 ## See Also
 
 * [Editor HtmlHelper Overview]({% slug overview_editorhelper_aspnetmvc %})
-* [EditorBuilder API Reference](/api/Kendo.Mvc.UI.Fluent/EditorBuilder)
+* [EditorBuilder API Reference](../../../kendo-ui/api/Kendo.Mvc.UI.Fluent/EditorBuilder)
 
 For more runnable examples on the Kendo UI Editor in ASP.NET MVC applications, browse its [**How To** documentation folder](/helpers/editor/how-to/).

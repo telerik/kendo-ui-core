@@ -12,7 +12,7 @@ To see the example, refer to the project on how to [configure a Kendo UI Grid wi
 ## See Also
 
 * [Overview of the Grid HtmlHelper]({% slug overview_gridhelper_aspnetmvc %})
-* [GridBuilder API Reference](/api/Kendo.Mvc.UI.Fluent/GridBuilder)
-* [ComboBox Templates](http://docs.telerik.com/kendo-ui/controls/editors/combobox/overview#templates)
+* [GridBuilder API Reference](../../../kendo-ui/api/Kendo.Mvc.UI.Fluent/GridBuilder)
+* [ComboBox Templates](../../../kendo-ui/controls/editors/combobox/overview#templates)
 
 For more runnable examples on the Kendo UI Grid in ASP.NET MVC applications, browse its [**How To** documentation folder](/helpers/grid/how-to/Appearance/).

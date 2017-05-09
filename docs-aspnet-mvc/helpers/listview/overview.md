@@ -199,16 +199,16 @@ To reference an existing Kendo UI ListView instance,. use the [`jQuery.data()`](
 
 ## See Also
 
-* [ASP.NET MVC API Reference: ListViewBuilder](/api/Kendo.Mvc.UI.Fluent/ListViewBuilder)
+* [ASP.NET MVC API Reference: ListViewBuilder](../../../kendo-ui/api/Kendo.Mvc.UI.Fluent/ListViewBuilder)
 * [Overview of the ListView HtmlHelper]({% slug overview_listviewhelper_aspnetmvc %})
 * [Configuration of the ListView HtmlHelper]({% slug configuration_listviewhelper_aspnetmvc %})
 * [Ajax Binding of the ListView HtmlHelper]({% slug ajaxbinding_listviewhelper_aspnetmvc %})
 * [Editing of the ListView HtmlHelper]({% slug eiditing_listviewhelper_aspnetmvc %})
-* [Overview of the Kendo UI ListView Widget](http://docs.telerik.com/kendo-ui/controls/data-management/listview/overview)
+* [Overview of the Kendo UI ListView Widget](../../../kendo-ui/controls/data-management/listview/overview)
 * [Overview of Telerik UI for ASP.NET MVC]({% slug overview_aspnetmvc %})
 * [Fundamentals of Telerik UI for ASP.NET MVC]({% slug fundamentals_aspnetmvc %})
 * [Scaffolding in Telerik UI for ASP.NET MVC]({% slug scaffolding_aspnetmvc %})
-* [Telerik UI for ASP.NET MVC API Reference Folder](/api/Kendo.Mvc/AggregateFunction)
+* [Telerik UI for ASP.NET MVC API Reference Folder](../../../kendo-ui/api/Kendo.Mvc/AggregateFunction)
 * [Telerik UI for ASP.NET MVC HtmlHelpers Folder]({% slug overview_barcodehelper_aspnetmvc %})
 * [Tutorials on Telerik UI for ASP.NET MVC]({% slug overview_timeefficiencyapp_aspnetmvc6 %})
 * [Telerik UI for ASP.NET MVC Troubleshooting]({% slug troubleshooting_aspnetmvc %})
