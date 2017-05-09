@@ -1,12 +1,12 @@
 ---
-title: Create Kendo UI Professional Projects
-page_title: Create Kendo UI Professional Projects | UI for ASP.NET MVC Visual Studio Integration
+title: Creating Kendo UI Professional Projects
+page_title: Creating Kendo UI Professional Projects | UI for ASP.NET MVC Visual Studio Integration
 description: "Learn how to create a new Progress&reg; Kendo UI&reg; Professional application."
 slug: newprojectwizard_visualstudio_kendoui
 position: 3
 ---
 
-# Create Kendo UI Professional Projects
+# Creating Kendo UI Professional Projects
 
 This article demonstrates how to create a new Progress&reg; Kendo UI&reg; Professional application.
 

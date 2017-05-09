@@ -1,12 +1,12 @@
 ---
-title: Telerik Upgrade API Analyzer
-page_title: Telerik Upgrade API Analyzer | UI for ASP.NET MVC Visual Studio Integration
+title: Upgrading Project API
+page_title: Upgrading Project API | UI for ASP.NET MVC Visual Studio Integration
 description: "Learn how to analyze a Progress&reg; Telerik&reg; UI for ASP.NET MVC application."
 slug: upgrade_api_analyzer_visualstudio_aspnetmvc
 position: 8
 ---
 
-# Telerik Upgrade API Analyzer
+# Upgrading Project API
 
 Each new Kendo UI release might include changes that affect the public Kendo UI API.  
 
@@ -24,7 +24,7 @@ The tool also points out the exact piece of code that is affected by a certain c
 >
 > Currently, Telerik Upgrade API Analyzer checks only the C# code of the applications.
 
-## Installation
+## Getting Started
 
 Telerik Upgrade API Analyzer is a click-once application. To download the installation, refer to its [setup page](http://demos.telerik.com/UpgradeAPIAnalyzer/setup.exe).
 
@@ -32,7 +32,7 @@ Telerik Upgrade API Analyzer is a click-once application. To download the instal
 >
 > The tool relies on Microsoft .NET Framework 4.5.2. If not installed on your machine, the setup of the tool installs it automatically.
 
-## Getting Started
+### Running the Tool
 
 1. Run the Upgrade API Analyzer. As a result, the tool opens the following screen:
 
@@ -54,13 +54,15 @@ Alternatively, you can also run the Upgrade API Analyzer from the [Upgrade Proje
 
 ![](images/upgrade-api-analyzer_5.png)
 
-The tool starts analyzing the code.
+### Analyzing the Changes
+
+After the setup of the tool is ready, the Upgrade API Analyzer starts analyzing the code.
 
 **Figure 3: The tool starts analyzing as soon as you open a solution**
 
 ![](images/upgrade-api-analyzer_1.png)
 
-The Upgrade API Analyzer lists all the changes that are found between the two versions. To present the results from the comparison, the tool uses the [RadGridView for WPF](http://docs.telerik.com/devtools/wpf/controls/radgridview/overview2.html) which provides options for handling of the data such as sorting, filtering, and resizing columns.
+The tool lists all the changes that are found between the two versions. To present the results from the comparison, the it uses the [RadGridView for WPF](http://docs.telerik.com/devtools/wpf/controls/radgridview/overview2.html), which provides options for data handling such as sorting, filtering, and resizing columns.
 
 **Figure 4: The Upgrade API Analyzer lists the found differences**
 
@@ -68,31 +70,38 @@ The Upgrade API Analyzer lists all the changes that are found between the two ve
 
 For each change, the grid presents the following information:
 
-* **Difference**&mdash;Could be **Obsolete**, **Deleted**, or **Modified**. By default, the modified changes are not displayed because they indicate an internal change in the method or class which generally does not affect its function and does not require you to act. However, the modified changes show when you update the filter of the **Difference** column.
+* **Difference**&mdash;Teh possible values are **Obsolete**, **Deleted**, or **Modified**. By default, the modified changes are not displayed because they indicate an internal update in the method or class which generally does not affect its function and does not require you to act. However, the modified changes become available when you update the filter of the **Difference** column.
 
 		**Figure 5: Displaying all found changes including the modifications**
 
 		![](images/upgrade-api-analyzer_3.png)
 
-* **Kind**&mdash;Could be Type, Property, Method, and Field.
-* **Node**&mdash;The name of the Type/Property/Method/Field.
-* **Assembly**&mdash;The assembly where the change is found.
-* **Message**&mdash;Presents a kind of “What to do now?” message; gives additional information on what action should be taken regarding the concrete change in order to make the upgrade flawless.
+* **Kind**&mdash;The possible values are **Type**, **Property**, **Method**, and **Field**.
+* **Node**&mdash;The name of the **Type**, **Property**, **Method**, or **Field** value.
+* **Assembly**&mdash;The assembly in which the change is found.
+* **Message**&mdash;Renders a message that instructs you what to do next. The message provides additional information on the necessary action regarding the particular change to make the upgrade flawless.
 * **Project**&mdash;The project where the change resides.
 * **Source**&mdash;The file in the project where the change is found.
 * **Line**&mdash;The exact line in the source file.
 * **Character**&mdash;The character in the previously set line.
 
-		Additionally, **Upgrade API Analyzer** provides the option to save the gathered information for a later moment through the **Export button** in the upper right corner, as shown in **Figure 6**. The data will be arranged and exported to a HTML document. The exported information include the currently visible (filtered) data in the grid.
+Additionally, the Upgrade API Analyzer allows you to save the gathered information through the **Export** button that is located in the upper right corner. The data is arranged and exported to an HTML document. The exported information includes the currently visible (filtered) data in the grid.
 
-		**Figure 6: The Upgrade API Analyzer provides export to a HTML document**
+**Figure 6: The Upgrade API Analyzer allows an HTML export functionality**
 
-		![](images/upgrade-api-analyzer_4.png)
+![](images/upgrade-api-analyzer_4.png)
 
-## Further Information
+## Feedback and Updates
 
-**Upgrade API Analyzer** is a subject of current and future development and we’d appreciate any feedback you might have regarding the tool. Let us know what you’d expect the tool to do and whether you’ve experienced any issues with it. Your feedback will help us prioritize our plans for adding the most requested features.
+To provide your feedback on the Upgrade API Analyzer, either send your comments:
 
-Please send us your comments either through the Feedback link inside **API Analyzer** or directly at [UpgradeApiAnalyzer@telerik.com](mailto:UpgradeApiAnalyzer@telerik.com).
+* Through the **Feedback** link inside the Upgrade API Analyzer, or
+* Directly to [UpgradeApiAnalyzer@telerik.com](mailto:UpgradeApiAnalyzer@telerik.com).
 
-Additionally, please review the Frequently Asked Questions section in the [API Analyzer Helps Upgrading Telerik Projects](http://www.telerik.com/blogs/api-analyzer-helps-upgrading-telerik-projects) blog post.
+For more information on possible issues and their solutions, refer to the section on the frequently asked questions in the [API Analyzer Helps Upgrading Telerik Projects](http://www.telerik.com/blogs/api-analyzer-helps-upgrading-telerik-projects) blog post.
+
+## See Also
+
+* [Setup Page for Telerik Upgrade API Analyzer](http://demos.telerik.com/UpgradeAPIAnalyzer)
+* [Upgrade Project Wizard]({% slug projectwizardupgrade_visualstudio_aspnetmvc %})
+* [RadGridView for WPF](http://docs.telerik.com/devtools/wpf/controls/radgridview/overview2.html)

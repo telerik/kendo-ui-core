@@ -1,12 +1,12 @@
 ---
-title: Download New Versions
-page_title: Download New Versions | UI for ASP.NET MVC Visual Studio Integration
+title: Downloading New Versions
+page_title: Downloading New Versions | UI for ASP.NET MVC Visual Studio Integration
 description: "Learn how to keep your projects updated when using Progress&reg; Telerik&reg; UI for ASP.NET MVC."
 slug: latestversionretrieval_visualstudio_aspnetmvc
 position: 10
 ---
 
-# Download New Versions
+# Downloading New Versions
 
 With the Telerik UI for ASP.NET MVC Visual Studio Extensions you keep your projects in an up-to-date state. The Latest Version Acquirer tool automatically retrieves the latest Progress&reg; Telerik&reg; UI for ASP.NET MVC distribution available on the Telerik website.
 

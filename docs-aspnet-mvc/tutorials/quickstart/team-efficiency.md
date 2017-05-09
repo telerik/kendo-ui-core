@@ -474,7 +474,7 @@ In this chapter you will learn about the Kendo UI ListView control and client-si
 
 #### Overview
 
-The purpose of [Kendo UI ListView](http://docs.telerik.com/kendo-ui/controls/data-management/listview/overview) is to display a custom layout of data-bound items through templates. The ListView is ideally suited for scenarios where you wish to display a list of items in a consistent manner.
+The purpose of [Kendo UI ListView](../../../kendo-ui/controls/data-management/listview/overview) is to display a custom layout of data-bound items through templates. The ListView is ideally suited for scenarios where you wish to display a list of items in a consistent manner.
 
 The ListView is designed to put you back in control when it comes to displaying data. It does not provide a default rendering of data-bound items, but, instead, relies entirely on templates to define how a list of items&mdash;including alternating items and items being edited&mdash;is displayed.
 
@@ -588,7 +588,7 @@ The ListView is almost complete. However, the ListView still needs a template to
 
 ### Overview
 
-The [Kendo UI Templates](http://docs.telerik.com/kendo-ui/framework/templates/overview) provide a simple-to-use, high-performance JavaScript templating engine within the Kendo UI framework. Templates offer a way to create HTML chunks that can be automatically merged with JavaScript data. They are a substitute for traditional HTML string building in JavaScript.
+The [Kendo UI Templates](../../../kendo-ui/framework/templates/overview) provide a simple-to-use, high-performance JavaScript templating engine within the Kendo UI framework. Templates offer a way to create HTML chunks that can be automatically merged with JavaScript data. They are a substitute for traditional HTML string building in JavaScript.
 
 Kendo UI Templates use a simple templating syntax called hash templates. With this syntax, the `#` (hash) sign is used to mark areas in a template that should be replaced by data when the template is executed. The `#` character is also used to signify the beginning and end of custom JavaScript code inside the template.
 
@@ -844,15 +844,15 @@ The [Kendo UI DataSource component](http://demos.telerik.com/kendo-ui/datasource
 
 The Kendo UI DataSource has many abilities and responsibilities, among which to:
 
-- [Retrieve data from a remote endpoint](http://docs.telerik.com/kendo-ui/framework/datasource/cors).
-- Maintain the [structure and type of the data (schema)](http://docs.telerik.com/kendo-ui/framework/datasource/crud#schema).
+- [Retrieve data from a remote endpoint](../../../kendo-ui/framework/datasource/cors).
+- Maintain the [structure and type of the data (schema)](../../../kendo-ui/framework/datasource/crud#schema).
 - Process serialization formats to and from a remote endpoint.
-- [Synchronize updates, create, update, delete](http://docs.telerik.com/kendo-ui/framework/datasource/crud) to and from a remote endpoint.
-- [Maintain an in-memory cache of data, including changes](http://docs.telerik.com/kendo-ui/framework/datasource/offline) for updating to a remote endpoint.
-- Calculate and maintain [aggregates](http://docs.telerik.com/kendo-ui/api/javascript/data/datasource#methods-aggregate), [sorting order](http://docs.telerik.com/kendo-ui/api/javascript/data/datasource#methods-sort) and [paging](http://docs.telerik.com/kendo-ui/api/javascript/data/datasource#methods-page).
-- Provide a query mechanism via [filter expressions](http://docs.telerik.com/kendo-ui/api/javascript/data/datasource#methods-filter).
+- [Synchronize updates, create, update, delete](../../../kendo-ui/framework/datasource/crud) to and from a remote endpoint.
+- [Maintain an in-memory cache of data, including changes](../../../kendo-ui/framework/datasource/offline) for updating to a remote endpoint.
+- Calculate and maintain [aggregates](../../../kendo-ui/api/javascript/data/datasource#methods-aggregate), [sorting order](../../../kendo-ui/api/javascript/data/datasource#methods-sort) and [paging](../../../kendo-ui/api/javascript/data/datasource#methods-page).
+- Provide a query mechanism via [filter expressions](../../../kendo-ui/api/javascript/data/datasource#methods-filter).
 
-For detailed information on the capabilities of the [DataSource](http://docs.telerik.com/kendo-ui/framework/datasource/overview), refer to its [configuration API methods, and events](http://docs.telerik.com/kendo-ui/api/javascript/data/datasource), and [demos](http://demos.telerik.com/kendo-ui/datasource/index).
+For detailed information on the capabilities of the [DataSource](../../../kendo-ui/framework/datasource/overview), refer to its [configuration API methods, and events](../../../kendo-ui/api/javascript/data/datasource), and [demos](http://demos.telerik.com/kendo-ui/datasource/index).
 
 At this point the dashboard is showing all invoice data. Let's use the `EmployeeList` list view and `StatsFrom`/`StatsTo` date pickers to filter the invoice grid by invoking the grid's datasource.
 

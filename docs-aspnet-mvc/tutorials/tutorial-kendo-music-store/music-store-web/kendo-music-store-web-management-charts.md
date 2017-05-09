@@ -117,7 +117,7 @@ Each series is defined by an object that contains the properties listed below:
 * The `name` property is the display name that will be shown in the legend of the chart, if the legend is displayed.
 * The `field` property is the name of the property on the data that contains the values you want to render on the chart.
 * The `color` property is the color used representing the series on the chart and in the legend.
-* The `tooltip` property defines what will be displayed if the user hovers over a data point or column. The format string follows the parameters for the [`kendo.format`](http:///api/framework/kendo#format) function.
+* The `tooltip` property defines what will be displayed if the user hovers over a data point or column. The format string follows the parameters for the [`kendo.format`](../../../kendo-ui/api/framework/kendo#format) function.
 
 ### Define the Axis
 

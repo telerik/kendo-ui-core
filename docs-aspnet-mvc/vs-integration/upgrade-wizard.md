@@ -1,12 +1,12 @@
 ---
-title: Upgrade Projects
-page_title: Upgrade Projects | UI for ASP.NET MVC Visual Studio Integration
+title: Upgrading Projects
+page_title: Upgrading Projects | UI for ASP.NET MVC Visual Studio Integration
 description: "Learn how to upgrade a Progress&reg; Telerik&reg; UI for ASP.NET MVC application."
 slug: projectwizardupgrade_visualstudio_aspnetmvc
 position: 7
 ---
 
-# Upgrade Projects
+# Upgrading Projects
 
 This article demonstrates how to upgrade a Progress&reg; Telerik&reg; UI for ASP.NET MVC application.
 
@@ -14,9 +14,9 @@ This article demonstrates how to upgrade a Progress&reg; Telerik&reg; UI for ASP
 
 ### The Basics
 
-The **Upgrade Project Wizard** upgrades existing Progress&reg; Telerik&reg; UI for ASP.NET MVC applications.
+The Upgrade Project Wizard upgrades existing Progress&reg; Telerik&reg; UI for ASP.NET MVC applications.
 
-To open the **Upgrade Project Wizard**, click **Telerik** > **UI for ASP.NET MVC** > **Upgrade Wizard**.
+To open the wizard, click **Telerik** > **UI for ASP.NET MVC** > **Upgrade Wizard**.
 
 **Figure 1. Launch the Upgrade Wizard**
 
@@ -24,7 +24,7 @@ To open the **Upgrade Project Wizard**, click **Telerik** > **UI for ASP.NET MVC
 
 ### Files for Upgrade
 
-The **Information Page** of the **Upgrade Project Wizard** describes the files and assemblies that are going to be upgraded.
+The **Information Page** of the Upgrade Project Wizard describes the files and assemblies that are going to be upgraded.
 
 **Figure 2. Information page**
 

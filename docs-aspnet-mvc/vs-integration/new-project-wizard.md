@@ -1,12 +1,12 @@
 ---
-title: Create Projects
-page_title: Create Projects | UI for ASP.NET MVC Visual Studio Integration
+title: Creating Projects
+page_title: Creating Projects | UI for ASP.NET MVC Visual Studio Integration
 description: "Learn how to create a new Progress&reg; Telerik&reg; UI for ASP.NET MVC application."
 slug: newprojectwizards_visualstudio_aspnetmvc
 position: 2
 ---
 
-# Create Projects
+# Creating Projects
 
 This article demonstrates how to create a new Progress&reg; Telerik&reg; UI for ASP.NET MVC application.
 
