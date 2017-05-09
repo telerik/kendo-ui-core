@@ -13,6 +13,6 @@ To see the example, refer to the project on how to [bind the Kendo UI TreeView t
 ## See Also
 
 * [Overview of the TreeView HtmlHelper]({% slug overview_treeviewhelper_aspnetmvc %})
-* [TreeViewBuilder API Reference](/api/Kendo.Mvc.UI.Fluent/TreeViewBuilder)
+* [TreeViewBuilder API Reference](../../../kendo-ui/api/Kendo.Mvc.UI.Fluent/TreeViewBuilder)
 
 For more runnable examples on the Kendo UI Scheduler in ASP.NET MVC applications, browse its **How To** documentation folder.

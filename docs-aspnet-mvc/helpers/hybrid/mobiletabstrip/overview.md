@@ -181,8 +181,8 @@ You can reference a hybrid TabStrip instance by using the [jQuery.data()](http:/
 
 ## See Also
 
-* [ASP.NET MVC API Reference: TabStripBuilder](/api/Kendo.Mvc.UI.Fluent/MobileTabStripBuilder)
-* [Overview of the Hybrid UI TabStrip Widget](http://docs.telerik.com/kendo-ui/controls/hybrid/tabstrip/tabstrip)
+* [ASP.NET MVC API Reference: TabStripBuilder](../../../kendo-ui/api/Kendo.Mvc.UI.Fluent/MobileTabStripBuilder)
+* [Overview of the Hybrid UI TabStrip Widget](../../../kendo-ui/controls/hybrid/tabstrip/tabstrip)
 * [Overview of Telerik UI for ASP.NET MVC]({% slug overview_aspnetmvc %})
 * [Fundamentals of Telerik UI for ASP.NET MVC]({% slug fundamentals_aspnetmvc %})
 * [Scaffolding in Telerik UI for ASP.NET MVC]({% slug scaffolding_aspnetmvc %})

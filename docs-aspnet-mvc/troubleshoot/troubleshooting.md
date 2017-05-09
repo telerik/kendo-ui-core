@@ -11,7 +11,7 @@ position: 1
 
 This page provides solutions to common issues you may encounter while working with Telerik UI for ASP.NET MVC.
 
-Because Telerik UI for ASP.NET MVC is powered by Kendo UI, check the [general article on Kendo UI troubleshooting](http://docs.telerik.com/kendo-ui/troubleshoot/troubleshooting-common-issues) for more issues and their solutions.
+Because Telerik UI for ASP.NET MVC is powered by Kendo UI, check the [general article on Kendo UI troubleshooting](../../../kendo-ui/troubleshoot/troubleshooting-common-issues) for more issues and their solutions.
 
 ## JavaScript
 
@@ -23,7 +23,7 @@ This error is triggered in the following cases:
 * jQuery is included after the Telerik UI for ASP.NET MVC script files.
 * jQuery is included after a Kendo UI widget or an MVC wrapper declaration.
 
-For more symptoms on that, refer to the [article on JavaScript errors](http://docs.telerik.com/kendo-ui/troubleshoot/troubleshooting-js-errors).
+For more symptoms on that, refer to the [article on JavaScript errors](../../../kendo-ui/troubleshoot/troubleshooting-js-errors).
 
 **Solution**
 
@@ -31,13 +31,13 @@ Make sure that jQuery is included before the Telerik UI for ASP.NET MVC JavaScri
 
 ### Widgets Are Unavailable or Undefined
 
-If jQuery is included more than once in the page, all existing jQuery plugins (including Kendo UI) are wiped out. This symptom also occurs if the [required Kendo UI JavaScript files](http://docs.telerik.com/kendo-ui/intro/installation/prerequisites) are not included.
+If jQuery is included more than once in the page, all existing jQuery plugins (including Kendo UI) are wiped out. This symptom also occurs if the [required Kendo UI JavaScript files](../../../kendo-ui/intro/installation/prerequisites) are not included.
 
-For more symptoms, check the [article on troubleshooting](http://docs.telerik.com/kendo-ui/troubleshoot/troubleshooting-common-issues#kendo-ui-widgets-are-unavailable-or-undefined).
+For more symptoms, check the [article on troubleshooting](../../../kendo-ui/troubleshoot/troubleshooting-common-issues#kendo-ui-widgets-are-unavailable-or-undefined).
 
 **Solution**
 
-Make sure jQuery is not included more than once in your page. Remove any duplicate `script` references to jQuery. Include all [required Kendo UI JavaScript files](http://docs.telerik.com/kendo-ui/intro/installation/prerequisites).
+Make sure jQuery is not included more than once in your page. Remove any duplicate `script` references to jQuery. Include all [required Kendo UI JavaScript files](../../../kendo-ui/intro/installation/prerequisites).
 
 If the application is also using Telerik Extensions for ASP.NET MVC, tell the `ScriptRegistrar` not to include jQuery, as demonstrated in the example below.
 
@@ -267,7 +267,7 @@ This can happens if the wrapper is declared without `ToClientTemplate()`.
 
 For more information on this issue, refer to the [article on Kendo UI wrappers fundamentals]({% slug fundamentals_aspnetmvc %}#client-templates)
 
-On the other hand, note that [template script expressions](http://docs.telerik.com/kendo-ui/framework/templates/overview#handle-external-templates-and-expressions) that include brackets (function calls) or arithmetic operators cannot be included in the `Name()` method of Kendo UI MVC wrappers. For example, the following implementations will trigger **invalid template** JavaScript errors:
+On the other hand, note that [template script expressions](../../../kendo-ui/framework/templates/overview#handle-external-templates-and-expressions) that include brackets (function calls) or arithmetic operators cannot be included in the `Name()` method of Kendo UI MVC wrappers. For example, the following implementations will trigger **invalid template** JavaScript errors:
 
     Html.Kendo().Grid().Name("grid_#=myFunction()#")
     Html.Kendo().Grid().Name("grid_#=myVariable1+myVariable2 #")
@@ -360,7 +360,7 @@ Apply either of the two options below:
                 return Json(northwind.Categories.ToDataSourceResult(request).Data, **JsonRequestBehavior.AllowGet**);
             }
 
-More information on how to configure Kendo UI widgets for Ajax binding and return data to the client, refer to the overview article of each widget. 
+More information on how to configure Kendo UI widgets for Ajax binding and return data to the client, refer to the overview article of each widget.
 
 ### Widgets Display Zero Values
 
@@ -471,7 +471,7 @@ You have two alternative options to tackle this scenario:
 * Clear the `ModelState` in the controller's action method after the `POST`.
 * Set `Encode(false)` for the Editor and set an `[AllowHtml]` attribute to the model property, so that the Editor's value is submitted non-encoded.
 
-For additional tips on the Editor widget, refer to the [troubleshooting article on common Kendo UI Editor issues](http://docs.telerik.com/kendo-ui/controls/editors/editor/troubleshoot/troubleshooting).
+For additional tips on the Editor widget, refer to the [troubleshooting article on common Kendo UI Editor issues](../../../kendo-ui/controls/editors/editor/troubleshoot/troubleshooting).
 
 ## See Also
 
@@ -481,18 +481,18 @@ For additional tips on the Editor widget, refer to the [troubleshooting article 
 * [Excel Export with the Grid ASP.NET MVC HtmlHelper Extension]({% slug excelissues_gridhelper_aspnetmvc %})
 * [Common Issues in the Spreadsheet ASP.NET MVC HtmlHelper Extension]({% slug troubleshoot_spreadsheethelper_aspnetmvc %})
 * [Common Issues in the Upload ASP.NET MVC HtmlHelper Extension]({% slug troubleshoot_uploadhelper_aspnetmvc %})
-* [Common Issues in Kendo UI](http://docs.telerik.com/kendo-ui/troubleshoot/troubleshooting-common-issues)
-* [JavaScript Errors](http://docs.telerik.com/kendo-ui/troubleshoot/troubleshooting-js-errors)
-* [Performance Issues](http://docs.telerik.com/kendo-ui/troubleshoot/troubleshooting-memory-leaks)
-* [Content Security Policy](http://docs.telerik.com/kendo-ui/troubleshoot/content-security-policy)
-* [Common Issues in Kendo UI Excel Export](http://docs.telerik.com/kendo-ui/framework/excel/troubleshoot/common-issues)
-* [Common Issues in Kendo UI Charts](http://docs.telerik.com/kendo-ui/controls/charts/troubleshoot/common-issues)
-* [Performance Issues in Kendo UI Widgets for Data Visualization](http://docs.telerik.com/kendo-ui/troubleshoot/troubleshooting-memory-leaks)
-* [Common Issues in Kendo UI ComboBox](http://docs.telerik.com/kendo-ui/controls/editors/combobox/troubleshoot/troubleshooting)
-* [Common Issues in Kendo UI Diagram](http://docs.telerik.com/kendo-ui/controls/diagrams-and-maps/diagram/troubleshoot/common-issues)
-* [Common Issues in Kendo UI DropDownList](http://docs.telerik.com/kendo-ui/controls/editors/dropdownlist/troubleshoot/troubleshooting)
-* [Common Issues in Kendo UI Editor](http://docs.telerik.com/kendo-ui/controls/editors/editor/troubleshoot/troubleshooting)
-* [Common Issues in Kendo UI MultiSelect](http://docs.telerik.com/kendo-ui/controls/editors/multiselect/troubleshoot/troubleshooting)
-* [Common Issues in Kendo UI Scheduler](http://docs.telerik.com/kendo-ui/controls/scheduling/scheduler/troubleshoot/troubleshooting)
-* [Common Issues in Kendo UI Upload](http://docs.telerik.com/kendo-ui/controls/editors/upload/troubleshoot/troubleshooting)
-* [Common Issues Related to Styling, Appearance, and Rendering](http://docs.telerik.com/kendo-ui/styles-and-layout/troubleshoot/troubleshooting)
+* [Common Issues in Kendo UI](../../../kendo-ui/troubleshoot/troubleshooting-common-issues)
+* [JavaScript Errors](../../../kendo-ui/troubleshoot/troubleshooting-js-errors)
+* [Performance Issues](../../../kendo-ui/troubleshoot/troubleshooting-memory-leaks)
+* [Content Security Policy](../../../kendo-ui/troubleshoot/content-security-policy)
+* [Common Issues in Kendo UI Excel Export](../../../kendo-ui/framework/excel/troubleshoot/common-issues)
+* [Common Issues in Kendo UI Charts](../../../kendo-ui/controls/charts/troubleshoot/common-issues)
+* [Performance Issues in Kendo UI Widgets for Data Visualization](../../../kendo-ui/troubleshoot/troubleshooting-memory-leaks)
+* [Common Issues in Kendo UI ComboBox](../../../kendo-ui/controls/editors/combobox/troubleshoot/troubleshooting)
+* [Common Issues in Kendo UI Diagram](../../../kendo-ui/controls/diagrams-and-maps/diagram/troubleshoot/common-issues)
+* [Common Issues in Kendo UI DropDownList](../../../kendo-ui/controls/editors/dropdownlist/troubleshoot/troubleshooting)
+* [Common Issues in Kendo UI Editor](../../../kendo-ui/controls/editors/editor/troubleshoot/troubleshooting)
+* [Common Issues in Kendo UI MultiSelect](../../../kendo-ui/controls/editors/multiselect/troubleshoot/troubleshooting)
+* [Common Issues in Kendo UI Scheduler](../../../kendo-ui/controls/scheduling/scheduler/troubleshoot/troubleshooting)
+* [Common Issues in Kendo UI Upload](../../../kendo-ui/controls/editors/upload/troubleshoot/troubleshooting)
+* [Common Issues Related to Styling, Appearance, and Rendering](../../../kendo-ui/styles-and-layout/troubleshoot/troubleshooting)

@@ -156,12 +156,12 @@ To reference an existing Kendo UI Map instance, use the [`jQuery.data()`](http:/
 
 ## See Also
 
-* [ASP.NET MVC API Reference: MapBuilder](/api/Kendo.Mvc.UI.Fluent/MapBuilder)
+* [ASP.NET MVC API Reference: MapBuilder](../../../kendo-ui/api/Kendo.Mvc.UI.Fluent/MapBuilder)
 * [Overview of Telerik UI for ASP.NET MVC]({% slug overview_aspnetmvc %})
 * [Fundamentals of Telerik UI for ASP.NET MVC]({% slug fundamentals_aspnetmvc %})
 * [Scaffolding in Telerik UI for ASP.NET MVC]({% slug scaffolding_aspnetmvc %})
-* [Overview of the Kendo UI Map Widget](http://docs.telerik.com/kendo-ui/controls/diagrams-and-maps/map/overview)
-* [Telerik UI for ASP.NET MVC API Reference Folder](/api/Kendo.Mvc/AggregateFunction)
+* [Overview of the Kendo UI Map Widget](../../../kendo-ui/controls/diagrams-and-maps/map/overview)
+* [Telerik UI for ASP.NET MVC API Reference Folder](../../../kendo-ui/api/Kendo.Mvc/AggregateFunction)
 * [Telerik UI for ASP.NET MVC HtmlHelpers Folder]({% slug overview_autocompletehelper_aspnetmvc %})
 * [Tutorials on Telerik UI for ASP.NET MVC]({% slug overview_timeefficiencyapp_aspnetmvc6 %})
 * [Telerik UI for ASP.NET MVC Troubleshooting]({% slug troubleshooting_aspnetmvc %})

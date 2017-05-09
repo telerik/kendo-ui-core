@@ -31,7 +31,7 @@ The Kendo UI Grid API is exposed via the [`Kendo.Mvc.UI.Fluent.GridBuilder`](/ap
 
 ## Common DataSource Settings
 
-The [`DataSource`](/api/Kendo.Mvc.UI.Fluent/GridBuilder#methods-Columns(System.Action<Kendo.Mvc.UI.Fluent.GridColumnFactory<T>>)) method of Kendo UI Grid for ASP.NET MVC configures the [data source](../../../kendo-ui/api/javascript/ui/grid#configuration-dataSource).
+The [`DataSource`](../../../kendo-ui/api/Kendo.Mvc.UI.Fluent/GridBuilder#methods-Columns(System.Action<Kendo.Mvc.UI.Fluent.GridColumnFactory<T>>)) method of Kendo UI Grid for ASP.NET MVC configures the [data source](../../../kendo-ui/api/javascript/ui/grid#configuration-dataSource).
 
 ### Aggregates
 
@@ -395,7 +395,7 @@ Bound columns support the following settings:
 
 ### ClientTemplate
 
-A [Kendo UI template](http://docs.telerik.com/kendo-ui/framework/templates/overview) which specifies the way the column is displayed.
+A [Kendo UI template](../../../kendo-ui/framework/templates/overview) which specifies the way the column is displayed.
 
 > **Important**  
 >
@@ -489,7 +489,7 @@ The following example demonstrates how to specify the column format string.
             )
         )
 
-For more information on the supported formats, refer to the [article about globalization](http://docs.telerik.com/kendo-ui/framework/globalization/overview).
+For more information on the supported formats, refer to the [article about globalization](../../../kendo-ui/framework/globalization/overview).
 
 ### Groupable
 
@@ -646,7 +646,7 @@ Template columns have the following settings:
 
 ### ClientTemplate
 
-A [Kendo UI template](http://docs.telerik.com/kendo-ui/framework/templates/overview) which specifies the way the column is displayed.
+A [Kendo UI template](../../../kendo-ui/framework/templates/overview) which specifies the way the column is displayed.
 
 > **Important**  
 >
@@ -1206,15 +1206,15 @@ Other articles on the Kendo UI Grid for ASP.NET MVC:
 * [Editing of the Grid HtmlHelper]({% slug ajaxediting_grid_aspnetmvc %})
 * [Templating of the Grid HtmlHelper]({% slug clientdetailtemplate_grid_aspnetmvc %})
 * [Troubleshooting for the Grid HtmlHelper]({% slug troubleshoot_gridhelper_aspnetmvc %})
-* [API Reference of the Grid HtmlHelper](/api/Kendo.Mvc.UI.Fluent/GridBuilder)
-* [Overview of the Kendo UI Grid Widget](http://docs.telerik.com/kendo-ui/controls/data-management/grid/overview)
+* [API Reference of the Grid HtmlHelper](../../../kendo-ui/api/Kendo.Mvc.UI.Fluent/GridBuilder)
+* [Overview of the Kendo UI Grid Widget](../../../kendo-ui/controls/data-management/grid/overview)
 
 Articles on Telerik UI for ASP.NET MVC:
 
 * [Overview of Telerik UI for ASP.NET MVC]({% slug overview_aspnetmvc %})
 * [Fundamentals of Telerik UI for ASP.NET MVC]({% slug fundamentals_aspnetmvc %})
 * [Scaffolding in Telerik UI for ASP.NET MVC]({% slug scaffolding_aspnetmvc %})
-* [Telerik UI for ASP.NET MVC API Reference Folder](/api/Kendo.Mvc/AggregateFunction)
+* [Telerik UI for ASP.NET MVC API Reference Folder](../../../kendo-ui/api/Kendo.Mvc/AggregateFunction)
 * [Telerik UI for ASP.NET MVC HtmlHelpers Folder]({% slug overview_barcodehelper_aspnetmvc %})
 * [Tutorials on Telerik UI for ASP.NET MVC]({% slug overview_timeefficiencyapp_aspnetmvc6 %})
 * [Telerik UI for ASP.NET MVC Troubleshooting]({% slug troubleshooting_aspnetmvc %})

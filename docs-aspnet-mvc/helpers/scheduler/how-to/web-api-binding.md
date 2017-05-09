@@ -14,6 +14,6 @@ To see the example, refer to [this GitHub repository](https://github.com/telerik
 ## See Also
 
 * [Overview of the Scheduler HtmlHelper]({% slug overview_schedulerhelper_aspnetmvc %})
-* [SchedulerBuilder API Reference](/api/Kendo.Mvc.UI.Fluent/SchedulerBuilder)
+* [SchedulerBuilder API Reference](../../../kendo-ui/api/Kendo.Mvc.UI.Fluent/SchedulerBuilder)
 
 For more runnable examples on the Kendo UI Scheduler in ASP.NET MVC applications, browse its **How To** documentation folder.

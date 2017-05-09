@@ -12,8 +12,8 @@ To see the example, refer to the project on how to [add a new value to the Kendo
 ## See Also
 
 * [Overview of the Grid HtmlHelper]({% slug overview_gridhelper_aspnetmvc %})
-* [GridBuilder API Reference](/api/Kendo.Mvc.UI.Fluent/GridBuilder)
+* [GridBuilder API Reference](../../../kendo-ui/api/Kendo.Mvc.UI.Fluent/GridBuilder)
 * [Overview of the AutoComplete HtmlHelper]({% slug overview_autocompletehelper_aspnetmvc %})
-* [AutoCompleteBuilder API Reference](/api/Kendo.Mvc.UI.Fluent/AutoCompleteBuilder)
+* [AutoCompleteBuilder API Reference](../../../kendo-ui/api/Kendo.Mvc.UI.Fluent/AutoCompleteBuilder)
 
 For more runnable examples on the Kendo UI Grid in ASP.NET MVC applications, browse its [**How To** documentation folder](/helpers/grid/how-to/Appearance/).
