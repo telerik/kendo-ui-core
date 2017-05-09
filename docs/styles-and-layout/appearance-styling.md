@@ -229,7 +229,7 @@ The Kendo UI `.less` files, including the styling of the Kendo UI hybrid widgets
 
 > **Important**
 >
-> Kendo UI versions before 2015.2.805 inclusive had to be built with [Telerik `LESS` fork, located on GitHub](https://github.com/telerik/less.js). This is no longer a requirement.
+> Kendo UI versions earlier than and including 2015.2.805 had to be built with [Telerik `LESS` fork](https://github.com/telerik/less.js) located on GitHub. This is no longer a requirement.
 
 ### Customizaion of Themes
 
@@ -238,7 +238,7 @@ To create a custom theme with Kendo UI, choose either of the two possible ways:
 1. Use the [Kendo UI ThemeBuilder](http://demos.telerik.com/kendo-ui/themebuilder/). For detailed information on how to configure its options, refer to the [section on the Less Theme Builder](#theme-builder).
 2. Modify a `.less` file to achieve a theme of your liking. To do so, choose one of the available `kendo.*.less` files depending on what you want to achieve. Copy it to your project and rename it. Change the colors and run the [`LESS` command-line compiler](http://lesscss.org/#using-less-command-line-usage) on it.   
 
-## Less Theme Builder
+## LESS Theme Builder
 
 The [Kendo UI ThemeBuilder](http://demos.telerik.com/kendo-ui/themebuilder/web.html) enables you to modify Kendo UI themes to match the look and feel of your website or application.
 
