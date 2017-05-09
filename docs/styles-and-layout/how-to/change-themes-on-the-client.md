@@ -149,4 +149,4 @@ Other articles on styling, appearance, and rendering of Kendo UI widgets:
 * [LESS ThemeBuilder Overview]({% slug themesandappearnce_kendoui_desktopwidgets %}#less-theme-builder)
 * [Rendering Modes for Data Visualization]({% slug renderingmodesfor_datavisualization_kendouistyling %})
 * [Troubleshooting]({% slug commonissues_troubleshooting_kendouistyling %})
-* [Themes and Appearance of the Kendo UI Hybrid Widgets](/controls/hybrid/styling)
+* [Themes and Appearance of the Kendo UI Hybrid Widgets]({% slug forms_hybridkendoui %})
