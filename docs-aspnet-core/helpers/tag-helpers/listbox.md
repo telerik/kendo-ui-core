@@ -2,7 +2,7 @@
 title: ListBox
 page_title: ListBox | UI for ASP.NET Core Tag Helpers
 description: "Learn the basics when working with the ListBox tag helper for ASP.NET Core (MVC 6 or ASP.NET Core MVC)."
-slug: htmlhelpers_listbox_aspnetcore
+slug: taghelpers_listbox_aspnetcore
 ---
 
 # ListBox Tag Helper
