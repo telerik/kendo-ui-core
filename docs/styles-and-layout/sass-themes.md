@@ -1,34 +1,34 @@
 ---
-title: SASS-Based Themes
-page_title: SASS-Based Themes | Kendo UI Styles and Appearance
+title: Sass-Based Themes
+page_title: Sass-Based Themes | Kendo UI Styles and Appearance
 description: "Learn how to apply CSS classes to the Kendo UI desktop widgets to change their appearance and further customize their style."
 previous_url: /themebuilder_overview_kendouistyling
 slug: sassbasedthemes_kendoui
 position: 2
 ---
 
-# SASS-Based Themes
+# Sass-Based Themes
 
-As of the R1 2017 release, the Kendo UI distribution includes SASS-based themes.
+As of the R1 2017 release, the Kendo UI distribution includes Sass-based themes.
 
-Currently, Kendo UI delivers a single SASS theme. This is the **Default v2** theme which is a modern update of the Kendo UI Default theme. The work on revamping the Kendo UI Bootstrap theme has also started and the new theme is soon expected to be available.
+Currently, Kendo UI delivers a single Sass theme. This is the **Default v2** theme which is a modern update of the Kendo UI Default theme. The work on revamping the Kendo UI Bootstrap theme has also started and the new theme is soon expected to be available.
 
 ## Overview
 
-Apart from being written in a different language, the SASS-based themes are slightly different from the LESS-based ones. This article outlines those differences and demonstrates how to use the SASS-based themes.
+Apart from being written in a different language, the Sass-based themes are slightly different from the LESS-based ones. This article outlines those differences and demonstrates how to use the Sass-based themes.
 
 ## Differences
 
-In Kendo UI, the SASS-based themes demonstrate the following differences from the LESS-based ones:
+In Kendo UI, the Sass-based themes demonstrate the following differences from the LESS-based ones:
 
-- Each SASS-based theme is represented by a single CSS file that combines the layout and the themes of the components. As a result, you do not need to match a theme with its common file.
-- Based on the widget you work with, the SASS-based themes can build a part of the widget theme in a similar way the Download Builder trims unused scripts.
-- The SASS-based themes are available on NPM. Each theme is stored as an NPM package and can be easily upgraded.
-- Each SASS-based theme is compatible with the [Kendo UI components for Angular 2](http://www.telerik.com/kendo-angular-ui/). This enables you to port parts of your application to Angular 2 while maintaining their styling.
+- Each Sass-based theme is represented by a single CSS file that combines the layout and the themes of the components. As a result, you do not need to match a theme with its common file.
+- Based on the widget you work with, the Sass-based themes can build a part of the widget theme in a similar way the Download Builder trims unused scripts.
+- The Sass-based themes are available on NPM. Each theme is stored as an NPM package and can be easily upgraded.
+- Each Sass-based theme is compatible with the [Kendo UI components for Angular 2](http://www.telerik.com/kendo-angular-ui/). This enables you to port parts of your application to Angular 2 while maintaining their styling.
 
 ## Browser Limitations
 
-The following CSS features, which are used by the SASS-based themes, provide limited browser support:
+The following CSS features, which are used by the Sass-based themes, provide limited browser support:
 
 * Flexbox layout&mdash;Not supported by Internet Explorer 10 and earlier.
 * CSS gradients&mdash;Not supported by Internet Explorer 9 and earlier.
@@ -38,7 +38,7 @@ The following CSS features, which are used by the SASS-based themes, provide lim
 
 ## Getting the Themes
 
-To get the SASS-based Kendo UI themes, you can:
+To get the Sass-based Kendo UI themes, you can:
 
 * Use the pre-build CSS files.
 * Use the NPM packages.
@@ -52,7 +52,7 @@ To get a complete theme by using its pre-built CSS files, apply either of the fo
 
 ### Using NPM Packages
 
-The Kendo UI SASS-based themes are located on the Progress NPM registry:
+The Kendo UI Sass-based themes are located on the Progress NPM registry:
 
 * **Kendo UI Default Theme**&mdash;Available as @progress/kendo-theme-default.
 * **Kendo UI Bootstrap Theme**&mdash;Available as @progress/kendo-theme-bootstrap.
@@ -61,7 +61,7 @@ To access the Progress NPM registry, you need an active Telerik account with an 
 
 ## Customizing the Themes
 
-To customize a SASS-based theme, create a `.scss` file and consume the theme package in the following way:
+To customize a Sass-based theme, create a `.scss` file and consume the theme package in the following way:
 
 1. Obtain the theme source through the NPM package.
 
@@ -84,7 +84,7 @@ To customize a SASS-based theme, create a `.scss` file and consume the theme pac
 
         @import "node_modules/@progress/kendo-theme-default/scss/all";
 
-5. Build the `styles.scss` file through a SASS compiler. For example, use `node-sass`.
+5. Build the `styles.scss` file through a Sass compiler. For example, use `node-sass`.
 
         node-sass styles.scss styles.css
 
@@ -598,13 +598,13 @@ Outputs a module once, no matter how many times it is included.
 
 To contribute to the development of the Kendo UI Default Theme, refer to the [telerik/kendo-theme-default](https://github.com/telerik/kendo-theme-default) GitHub repository it is stored in.
 
-## SASS Theme Builder
+## Sass Theme Builder
 
 [**Progress Sass Theme Builder**](http://themebuilder.telerik.com/aspnet-mvc) for Kendo UI is an Angular web application that enables you to create new or customize existing themes.
 
-The tool renders the same look and feel as the look and feel of all other components in the suite. It also delivers full control over the skin elements of each component and automatically updates its composite units. After you create the skin and achieve the desired look of the theme, the SASS Theme Builder enables you to download and integrate it in your project.  
+The tool renders the same look and feel as the look and feel of all other components in the suite. It also delivers full control over the skin elements of each component and automatically updates its composite units. After you create the skin and achieve the desired look of the theme, the Sass Theme Builder enables you to download and integrate it in your project.  
 
-**Figure 1: A preview of the SASS Theme Builder**
+**Figure 1: A preview of the Sass Theme Builder**
 
 ![Theme Builder Overview](images/theme-builder-overview.png)
 
@@ -612,7 +612,7 @@ The tool renders the same look and feel as the look and feel of all other compon
 
 To create a new theme:
 
-1. On the initial SASS Theme Builder pane, select the **Start Theming** option.
+1. On the initial Sass Theme Builder pane, select the **Start Theming** option.
 1. Choose one of the existing skins to use as a base. The currently available built-in skins are **Default** and **Bootsrap**.
 
     **Figure 2: Selecting a base theme**
@@ -621,7 +621,7 @@ To create a new theme:
 
 ### Customizing Existing Themes
 
-The SASS Theme Builder supports the following options for customization:
+The Sass Theme Builder supports the following options for customization:
 
 * Color pickers which customize the appearance of the components.
 * The **Apply changes instantly** option which enables you to observe the changes on the fly.
@@ -630,7 +630,7 @@ The SASS Theme Builder supports the following options for customization:
 
 #### Functionalities for Customization
 
-To customize an existing theme, use the following SASS Theme Builder functionalities:
+To customize an existing theme, use the following Sass Theme Builder functionalities:
 
 1. **Color Swatches**&mdash;Contains predefined color palettes that you can apply to all components in your application.
 1. **Default**&mdash;Provides the applicable color customization options.
@@ -645,7 +645,7 @@ To customize an existing theme, use the following SASS Theme Builder functionali
 
 To upload an existing theme you have previously created:
 
-1. On the initial SASS Theme Builder pane, select **Import Theme**.
+1. On the initial Sass Theme Builder pane, select **Import Theme**.
 1. Upload the `variables.scss` file which contains your current modifications of the customized theme. As a result, the selected components and styling elements load.
 1. Start [customizing your theme](#customizing-existing-themes).
 

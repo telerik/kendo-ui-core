@@ -13,7 +13,7 @@ Because this approach is not related to the functionalities of the Kendo UI suit
 
 > **Important**
 >
-> To achieve a dynamic switching from or to [SASS themes]({% slug sassbasedthemes_kendoui %}), the page has to be fully reloaded (`location.reload()`). The reason for this behavior is that the common resources that are used are different and the browser is not capable of dynamically unloading the resources that are not necessary.
+> To achieve a dynamic switching from or to [Sass themes]({% slug sassbasedthemes_kendoui %}), the page has to be fully reloaded (`location.reload()`). The reason for this behavior is that the common resources that are used are different and the browser is not capable of dynamically unloading the resources that are not necessary.
 
 ```html
 
@@ -145,7 +145,7 @@ Other articles on styling, appearance, and rendering of Kendo UI widgets:
 * [Themes and Appearance of the Kendo UI Widgets]({% slug themesandappearnce_kendoui_desktopwidgets %})
 * [Responsive Web Design]({% slug responsivewebdesign_integration_kendoui %})
 * [Web Font Icons]({% slug webfonticons_kendoui_desktopwidgets %})
-* [SASS ThemeBuilder Overview]({% slug sassbasedthemes_kendoui %}#sass-theme-builder)
+* [Sass ThemeBuilder Overview]({% slug sassbasedthemes_kendoui %}#sass-theme-builder)
 * [LESS ThemeBuilder Overview]({% slug themesandappearnce_kendoui_desktopwidgets %}#less-theme-builder)
 * [Rendering Modes for Data Visualization]({% slug renderingmodesfor_datavisualization_kendouistyling %})
 * [Troubleshooting]({% slug commonissues_troubleshooting_kendouistyling %})
