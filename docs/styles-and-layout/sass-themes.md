@@ -15,11 +15,11 @@ Currently, Kendo UI delivers a single Sass theme. This is the **Default v2** the
 
 ## Overview
 
-Apart from being written in a different language, the Sass-based themes are slightly different from the LESS-based ones. This article outlines those differences and demonstrates how to use the Sass-based themes.
+Apart from being written in a different language, the Sass-based themes are slightly different from the Less-based ones. This article outlines those differences and demonstrates how to use the Sass-based themes.
 
 ## Differences
 
-In Kendo UI, the Sass-based themes demonstrate the following differences from the LESS-based ones:
+In Kendo UI, the Sass-based themes demonstrate the following differences from the Less-based ones:
 
 - Each Sass-based theme is represented by a single CSS file that combines the layout and the themes of the components. As a result, you do not need to match a theme with its common file.
 - Based on the widget you work with, the Sass-based themes can build a part of the widget theme in a similar way the Download Builder trims unused scripts.
@@ -673,7 +673,6 @@ Other articles on styling, appearance, and rendering of Kendo UI widgets:
 * [Responsive Web Design]({% slug responsivewebdesign_integration_kendoui %})
 * [Web Font Icons]({% slug webfonticons_kendoui_desktopwidgets %})
 * [How to Change Themes on the Client]({% slug howto_changethemes_ontheclient_styleskendoui %})
-* [LESS ThemeBuilder Overview]({% slug themesandappearnce_kendoui_desktopwidgets %}#theme-builder)
 * [Rendering Modes for Data Visualization]({% slug renderingmodesfor_datavisualization_kendouistyling %})
 * [Troubleshooting]({% slug commonissues_troubleshooting_kendouistyling %})
 * [Themes and Appearance of the Kendo UI Hybrid Widgets]({% slug forms_hybridkendoui %})
