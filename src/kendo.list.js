@@ -1032,8 +1032,12 @@ var __meta__ = { // jshint ignore:line
             that._showClear();
         },
 
-        _showBusy: function () {
+        _showBusy: function (e) {
             var that = this;
+
+            if(e.isDefaultPrevented()){
+                return;
+            }
 
             that._request = true;
 
