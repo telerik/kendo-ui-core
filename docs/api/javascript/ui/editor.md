@@ -2357,7 +2357,7 @@ Specifies the [color palette](/api/javascript/ui/colorpicker#configuration-palet
 
 Specifies the [colors columns](/api/javascript/ui/colorpicker#configuration-columns) for "foreColor" and "backColor" tools when list of colors are defined.
 
-#### Example - "websafe" palette
+#### Example - specified columns of the colors
 
     <textarea id="editor"></textarea>
     <script>
