@@ -11812,9 +11812,9 @@ The position of the labels.
 
 ### series.labels.rotation `String|Number`
 
-The rotation angle of the labels. By default, the labels are not rotated. 
+The rotation angle of the labels. By default, the labels are not rotated.
 
-#### Example 
+#### Example
 
      <div id="chart"></div>
         <script>
@@ -11822,8 +11822,8 @@ The rotation angle of the labels. By default, the labels are not rotated.
             seriesDefaults: {
               type: "column",
             },
-            series: [{ 
-                data: [1, 2, 3], 
+            series: [{
+                data: [1, 2, 3],
                 labels: {
                     visible: true,
                     rotation: 310
@@ -11831,7 +11831,7 @@ The rotation angle of the labels. By default, the labels are not rotated.
             }]
         });
       </script>
-      
+
 ### series.labels.template `String|Function`
 
 The [template](/api/javascript/kendo#methods-template) which renders the chart series label.
@@ -15833,7 +15833,7 @@ The top padding of the labels.
 
 ### seriesDefaults.labels.rotation `String|Number`
 
-The rotation angle of the labels. By default, the labels are not rotated. 
+The rotation angle of the labels. By default, the labels are not rotated.
 
      <div id="chart"></div>
         <script>
@@ -17592,7 +17592,7 @@ A function that can be used to create a custom visual for the notes. The availab
 ### theme `String`
 
 The chart theme. This can be either a built-in theme or "sass".
-When set to "sass" the chart will read the variables from the [SASS-based themes]({% slug sassbasedthemes_kendoui %}).
+When set to "sass" the chart will read the variables from the [Sass-based themes]({% slug sassbasedthemes_kendoui %}).
 
 The supported values are:
 

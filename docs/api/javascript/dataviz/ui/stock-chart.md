@@ -7107,7 +7107,7 @@ Template variables:
 ### theme `String`
 
 The chart theme. This can be either a built-in theme or "sass".
-When set to "sass" the chart will read the variables from the [SASS-based themes]({% slug sassbasedthemes_kendoui %}).
+When set to "sass" the chart will read the variables from the [Sass-based themes]({% slug sassbasedthemes_kendoui %}).
 
 The supported values are:
 
