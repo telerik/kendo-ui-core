@@ -2353,6 +2353,23 @@ Specifies the [color palette](/api/javascript/ui/colorpicker#configuration-palet
     });
     </script>
 
+### tools.columns `Number`
+
+Specifies the [colors columns](/api/javascript/ui/colorpicker#configuration-columns) for "foreColor" and "backColor" tools when list of colors are defined.
+
+#### Example - "websafe" palette
+
+    <textarea id="editor"></textarea>
+    <script>
+    $("#editor").kendoEditor({
+        tools: [{
+            name: "foreColor",
+            palette: ["#f0d0c9", "#e2a293", "#d4735e", "#65281a"],
+            columns: 2
+        }]
+    });
+    </script>
+
 ### tools.template `String`
 
 The kendo template that will be used for rendering the given tool.
