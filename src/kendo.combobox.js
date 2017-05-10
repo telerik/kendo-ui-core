@@ -538,7 +538,7 @@ var __meta__ = { // jshint ignore:line
 
                 this.listView.focus(-1);
             } else {
-                if (dataItem) {
+                if (dataItem || dataItem === 0) {
                     value = this._dataValue(dataItem);
                     text = this._text(dataItem);
                 }
