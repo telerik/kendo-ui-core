@@ -151,11 +151,36 @@ asyncTest("ComboBox adds aria-busy=true when loader is shown", 1, function() {
         filter: "startswith"
     });
 
-    combobox._showBusy();
+    var e = {
+        isDefaultPrevented: function(){
+            return false;
+        }
+    };
+
+    combobox._showBusy(e);
 
     setTimeout(function() {
         start();
         equal(combobox.input.attr("aria-busy"), "true");
+    }, 150);
+});
+
+asyncTest("ComboBox does not adds aria-busy=true when loader is prevented", 1, function() {
+    var combobox = new ComboBox(input, {
+        dataSource: ["item1", "item2"],
+        filter: "startswith"
+    });
+
+    var e = {
+        isDefaultPrevented: function(){
+            return true;
+        }
+    };
+    combobox._showBusy(e);
+
+    setTimeout(function() {
+        start();
+        equal(combobox.input.attr("aria-busy"), "false");
     }, 150);
 });
 
