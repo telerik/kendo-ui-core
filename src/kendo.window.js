@@ -373,7 +373,7 @@
                 var windowSpecificCommands = [ "maximize", "minimize" ];
 
                 actions = $.map(actions, function(action) {
-                    action = !pinned && action.toLowerCase() === "pin" ? "unpin" : action;
+                    action = pinned && action.toLowerCase() === "pin" ? "unpin" : action;
                     return { name: (windowSpecificCommands.indexOf(action.toLowerCase()) > - 1) ? "window-" + action : action };
                 });
 
@@ -547,8 +547,8 @@
                     "k-i-window-minimize": "minimize",
                     "k-i-window-restore": "restore",
                     "k-i-refresh": "refresh",
-                    "k-i-pin": "unpin",
-                    "k-i-unpin": "pin"
+                    "k-i-pin": "pin",
+                    "k-i-unpin": "unpin"
                 }[iconClass];
             },
 
@@ -1070,7 +1070,7 @@
 
                 if (!that.options.isMaximized) {
                     wrapper.css({position: "fixed", top: top - win.scrollTop(), left: left - win.scrollLeft()});
-                    wrapper.children(KWINDOWTITLEBAR).find(KUNPIN).addClass("k-i-pin").removeClass("k-i-unpin");
+                    wrapper.children(KWINDOWTITLEBAR).find(KPIN).addClass("k-i-unpin").removeClass("k-i-pin");
 
                     that.options.pinned = true;
                     that.options.draggable = false;
@@ -1086,7 +1086,7 @@
 
                 if (!that.options.isMaximized) {
                     wrapper.css({position: "", top: top + win.scrollTop(), left: left + win.scrollLeft()});
-                    wrapper.children(KWINDOWTITLEBAR).find(KPIN).addClass("k-i-unpin").removeClass("k-i-pin");
+                    wrapper.children(KWINDOWTITLEBAR).find(KUNPIN).addClass("k-i-pin").removeClass("k-i-unpin");
 
                     that.options.pinned = false;
                     that.options.draggable = true;
