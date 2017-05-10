@@ -663,7 +663,7 @@ var __meta__ = { // jshint ignore:line
             siblings.each(function() {
                 var element = $(this);
 
-                offsetHeight += outerHeight(element);
+                offsetHeight += outerHeight(element, true);
             });
 
             return offsetHeight;
