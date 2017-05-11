@@ -6105,7 +6105,11 @@ Sets the title of the PDF file.
 
 Sets a value indicating whether the selection will be persisted when sorting, paging, filtering and etc are performed.
 
-> **Note:** Selection persistence works only for row selection.
+> **Note:** Selection persistence works only for row selection. 
+>
+> In order for selection persistence to work correctly, you need to define an ID field in [`schema.model`](/api/javascript/data/datasource#configuration-schema.model).
+>
+> Selection persistence does not work for new items when the Grid DataSource is in offline mode. In offline mode, newly added items do not have IDs, which are required for selection persistence to work. 
 
 #### Example - enables selection persistence
     <div id="grid"></div>
