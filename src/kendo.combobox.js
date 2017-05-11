@@ -430,13 +430,16 @@ var __meta__ = { // jshint ignore:line
 
             var data = that.dataSource.flatView();
             var skip = that.listView.skip();
+            var length = data.length;
+            var groupsLength = that.dataSource._group.length;
             var isFirstPage = skip === undefined || skip === 0;
 
             that._presetValue = false;
 
             that._renderFooter();
             that._renderNoData();
-            that._toggleNoData(!data.length);
+            that._toggleNoData(!length);
+            that._toggleHeader(!!groupsLength && !!length);
 
             that._resizePopup();
 
