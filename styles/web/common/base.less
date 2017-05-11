@@ -902,3 +902,18 @@ input.k-checkbox + label {
     overflow: hidden;
     .disable-high-contrast();
 }
+
+// Header/Footer templates
+.k-list-container {
+
+    .k-footer {
+
+        // ensure right calculating of popup - expanding parent to children with margin
+        &:before,
+        &:after {
+            content: "";
+            display: block;
+            overflow: hidden;
+        }
+    }
+}
