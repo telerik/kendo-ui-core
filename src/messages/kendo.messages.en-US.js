@@ -1048,7 +1048,7 @@ $.extend(true, kendo.ui.Dialog.prototype.options.localization, {
 /* Calendar */
 if (kendo.ui.Calendar) {
 kendo.ui.Calendar.prototype.options.messages =
-$.extend(true, kendo.ui.Calendar.prototype.options, {
+$.extend(true, kendo.ui.Calendar.prototype.options.messages, {
   "weekColumnHeader": ""
 });
 }
