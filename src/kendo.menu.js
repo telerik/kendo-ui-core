@@ -993,7 +993,6 @@ var __meta__ = { // jshint ignore:line
 
             if (overflowWrapper) {
                 element.find(visiblePopups).each(closePopup);
-                overflowWrapper.find("." + FOCUSEDSTATE).removeClass(FOCUSEDSTATE);
             }
 
             element.each(function () {
@@ -1180,6 +1179,7 @@ var __meta__ = { // jshint ignore:line
         },
 
         _popupOpen: function(e) {
+            e.sender.element.children("." + FOCUSEDSTATE).removeClass(FOCUSEDSTATE);
             if (this.options.scrollable) {
                 this._setPopupHeight(e.sender);
             }
