@@ -10,7 +10,7 @@ slug: howto_add_add_icon_custom_tool
 
 When you create a custom tool, it depends on the further CSS stylization whether to render an image or an icon in its appearance.
 
-To add such visual elements, use the automatically generated class name taken from the tool and follow the `k-[ToolName]` pattern.
+To add such visual elements, use the automatically generated class name taken from the tool and follow the `k-i-[ToolName]` pattern.
 
 The following example demonstrates how to decorate your own custom tool with a background image or a FontAwesome icon.
 
@@ -21,20 +21,14 @@ The following example demonstrates how to decorate your own custom tool with a b
 <style>
   /* Using plain image for background */
 
-  .k-editor .k-myTool
+  .k-editor .k-i-my-tool
   {
-      background: 50% 50% no-repeat url(images/rss-icon-16x16px.png);
+      background: 50% 50% no-repeat url(http://demos.telerik.com/kendo-ui/content/web/16x16/Chart.png);
   }
 
   /* Using FontAwesome icon for background */
 
-  .k-editor .k-mySecondTool
-  {
-      background: none;
-      line-height:25px;
-  }
-
-  .k-editor .k-mySecondTool:before
+  .k-editor .k-my-second-tool:before
   {
       font-family: FontAwesome;
       content: "\f09e";
