@@ -752,7 +752,7 @@ The [template](/api/javascript/kendo#methods-template) used to render the files 
 *   size - the file size in bytes / the total file size if batch upload is used (null if not available)
 *   files - array with information about all selected files - name, size and extension
 
-> You should add the following markup to the template in order to render an action button for each file: `<button type='button' class='k-upload-action'></button>`.
+> You should add the following markup to the template in order to render an action button for each file: `<button type='button' class='k-upload-action'></button><button type='button' class='k-upload-action'></button>`.
 >To use the default progress-bar, you should add the following markup at the beginning of the template `<span class='k-progress'></span>` and render the rest of the template relative to it. Please check [Upload Templates](http://demos.telerik.com/kendo-ui/web/upload/templates.html) for a live demo.
 
 #### Example - specify template as a function
@@ -763,7 +763,10 @@ The [template](/api/javascript/kendo#methods-template) used to render the files 
             <p>Name: #=name#</p>
             <p>Size: #=size# bytes</p>
             <p>Extension: #=files[0].extension#</p>
-            <button type='button' class='k-upload-action' style='position: absolute; top: 0; right: 0;'></button>
+            <strong class='k-upload-status'>
+                <button type='button' class='k-upload-action'></button>
+                <button type='button' class='k-upload-action'></button>
+            </strong>
         </div>
     </script>
     <script>
@@ -779,7 +782,10 @@ The [template](/api/javascript/kendo#methods-template) used to render the files 
         $("#upload").kendoUpload({
         template: "<div><p>Name: #=name#</p>" +
                   "<p>Size: #=size# bytes</p><p>Extension: #=files[0].extension#</p>" +
-                  "<button type='button' class='k-upload-action' style='position: absolute; top: 0; right: 0;'></button>" +
+                  "<strong class='k-upload-status'>" +
+                  "<button type='button' class='k-upload-action'></button>" +
+                  "<button type='button' class='k-upload-action'></button>" +
+                  "</strong>" +
                   "</div>"
         });
     </script>
