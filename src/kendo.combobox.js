@@ -551,11 +551,33 @@ var __meta__ = { // jshint ignore:line
                 }
             }
 
-            this._prev = this.input[0].value = text;
+            this._setDomInputValue(text);
             this._accessor(value !== undefined ? value : text, idx);
 
             this._placeholder();
             this._triggerCascade();
+        },
+
+        _setDomInputValue: function(text){
+            var that = this;
+            var currentCaret = caret(this.input);
+            var caretStart;
+
+            if(currentCaret && currentCaret.length){
+                caretStart = currentCaret[0];
+            }
+
+            this._prev = this.input[0].value = text;
+
+            if(caretStart){
+                var mobile = support.mobileOS;
+                if(mobile.wp || mobile.android) {// without the timeout the caret is at the end of the input
+                    setTimeout(function() { that.input[0].setSelectionRange(caretStart, caretStart); }, 0);
+                }
+                else {
+                    this.input[0].setSelectionRange(caretStart, caretStart);
+                }
+            }
         },
 
         refresh: function() {
