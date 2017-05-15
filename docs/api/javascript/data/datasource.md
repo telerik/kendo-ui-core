@@ -2469,14 +2469,14 @@ If set to function, the data source will invoke it and use the result as the URL
       transport: {
         read: {
           url: function(options) {
-            return "http://demos.telerik.com/kendo-ui/service/products",
-          }
+            return "http://demos.telerik.com/kendo-ui/service/products";
+          },
           dataType: "jsonp" // "jsonp" is required for cross-domain requests; use "json" for same-domain requests
+          }
         }
-      }
-    });
+      });
     dataSource.fetch(function() {
-      console.log(dataSource.view().length); // displays "77"
+      console.log(dataSource.view().length); // displays "72"
     });
     </script>
 
