@@ -597,11 +597,23 @@ var __meta__ = { // jshint ignore:line
                 that.readonly(element.is("[readonly]"));
             }
             if (options.dateInput) {
+                var min = options.min;
+                var max = options.max;
+                var today = new DATE();
+                if (getMilliseconds(min) == getMilliseconds(max)) {
+                    min = new DATE(today.getFullYear(), today.getMonth(), today.getDate(), 0, 0, 0);
+                    max = new DATE(today.getFullYear(), today.getMonth(), today.getDate(), 24, 0, 0);
+                } else {
+                    min = new DATE(today.getFullYear(), today.getMonth(), today.getDate(),
+                        min.getHours(), min.getMinutes(), min.getSeconds(), min.getMilliseconds());
+                    max = new DATE(today.getFullYear(), today.getMonth(), today.getDate(),
+                        max.getHours(), max.getMinutes(), max.getSeconds(), max.getMilliseconds());
+                }
                 that._dateInput = new ui.DateInput(element, {
                     culture: options.culture,
                     format: options.format,
-                    min: options.min,
-                    max: options.max,
+                    min: min,
+                    max: max,
                     value: options.value
                 });
             }
