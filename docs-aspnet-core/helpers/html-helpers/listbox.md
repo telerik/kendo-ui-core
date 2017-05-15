@@ -11,7 +11,7 @@ The ListBox Html helper is a server-side wrapper for the [Kendo UI ListBox](http
 
 It displays a list of data that is contained in a box and allows single or multiple selection, reordering of selected items, and deleting items and features keyboard navigation as well as the dragging and dropping of items. You can also connect the ListBox with another list-box and customize the widget with the use of templates, toolbar positioning, placeholder and hint, and localization of its command buttons messages.
 
-For more information, refer to the article on the [ListBox HtmlHelper for ASP.NET MVC](/aspnet-mvc/helpers/listbox/overview).
+For more information, refer to the article on the [ListBox HtmlHelper for ASP.NET MVC](http://docs.telerik.com/aspnet-mvc/helpers/listbox/overview).
 
 ## Basic Usage
 
