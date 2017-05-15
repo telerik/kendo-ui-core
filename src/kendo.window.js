@@ -70,6 +70,7 @@
             PIN_UNPIN = KPIN + "," + KUNPIN,
             TITLEBAR_BUTTONS = ".k-window-titlebar .k-window-action",
             REFRESHICON = ".k-window-titlebar .k-i-refresh",
+            zero = /^0[a-z]*$/i,
             isLocalUrl = kendo.isLocalUrl;
 
         function defined(x) {
@@ -1338,6 +1339,31 @@
             that._draggable.userEvents.bind("release", proxy(that.removeOverlay, that));
         }
 
+        function getPosition(elem) {
+            var result = {top: elem.offsetTop, left: elem.offsetLeft},
+                parent = elem.offsetParent;
+
+            while (parent) {
+                result.top += parent.offsetTop;
+                result.left += parent.offsetLeft;
+
+                var parentOverflowX = $(parent).css("overflowX");
+                var parentOverflowY = $(parent).css("overflowY");
+
+                if (parentOverflowY === "auto" || parentOverflowY === "scroll") {
+                    result.top -= parent.scrollTop;
+                }
+
+                if (parentOverflowX === "auto" || parentOverflowX === "scroll") {
+                    result.left -= parent.scrollLeft;
+                }
+
+                parent = parent.offsetParent;
+            }
+
+            return result;
+		}
+
         WindowResizing.prototype = {
             addOverlay: function () {
                 this.owner.wrapper.append(templates.overlay);
@@ -1366,6 +1392,27 @@
                 };
 
                 that.containerOffset = kendo.getOffset(wnd.appendTo, "position");
+
+                var offsetParent = wrapper.offsetParent();
+
+                if (offsetParent.is("html")) {
+                    that.containerOffset.top = that.containerOffset.left = 0;
+                } else {
+                    var marginTop = offsetParent.css("margin-top");
+                    var marginLeft = offsetParent.css("margin-left");
+                    var hasMargin = !zero.test(marginTop) || !zero.test(marginLeft);
+                    if (hasMargin) {
+                        var wrapperPosition = getPosition(wrapper[0]);
+                        var relativeElMarginLeft = wrapperPosition.left - that.containerOffset.left - that.initialPosition.left;
+                        var relativeElMarginTop = wrapperPosition.top - that.containerOffset.top - that.initialPosition.top;
+
+                        that._relativeElMarginLeft = relativeElMarginLeft > 1 ? relativeElMarginLeft : 0;
+                        that._relativeElMarginTop = relativeElMarginTop > 1 ? relativeElMarginTop : 0;
+
+                        that.initialPosition.left += that._relativeElMarginLeft;
+                        that.initialPosition.top += that._relativeElMarginTop;
+                    }
+                }
 
                 wrapper
                     .children(KWINDOWRESIZEHANDLES).not(e.currentTarget).hide();
@@ -1398,7 +1445,7 @@
                     newWidth = constrain(windowRight - x, options.minWidth, options.maxWidth);
 
                     wrapper.css({
-                        left: windowRight - newWidth - containerOffset.left,
+                        left: windowRight - newWidth - containerOffset.left - (that._relativeElMarginLeft || 0),
                         width: newWidth
                     });
                 }
@@ -1416,7 +1463,7 @@
                     newHeight = constrain(windowBottom - newWindowTop, options.minHeight, options.maxHeight);
 
                     wrapper.css({
-                        top: windowBottom - newHeight - containerOffset.top,
+                        top: windowBottom - newHeight - containerOffset.top - (that._relativeElMarginTop || 0),
                         height: newHeight
                     });
                 }
