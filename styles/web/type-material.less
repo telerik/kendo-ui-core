@@ -4172,6 +4172,28 @@ div.k-scheduler-marquee:after {
     }
 }
 
+.k-datetimepicker .k-picker-wrap {
+    &.k-state-invalid {
+        border-color: @input-validation-error;
+
+        .k-input {
+            color: @input-validation-error;
+        }
+    }
+
+    .k-i-warning {
+        color: @input-validation-error;
+        margin-left:0;
+        margin-right: 5.6em;
+    }
+
+    .k-rtl & {
+        .k-icon.k-i-warning {
+            margin-right: 0;
+            margin-left: 5.6em;
+        }
+    }
+}
 
 .k-listbox {
     .k-list-scroller {
