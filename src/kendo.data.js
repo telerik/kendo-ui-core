@@ -4532,7 +4532,7 @@ var __meta__ = { // jshint ignore:line
                 children: options
             });
 
-            if(options.filter){
+            if(options.filter && !options.serverFiltering){
                 this._hierarchicalFilter = options.filter;
                 options.filter = null;
             }
