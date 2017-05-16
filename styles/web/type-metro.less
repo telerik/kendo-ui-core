@@ -2682,7 +2682,8 @@ html .km-pane-wrapper .km-widget,
     margin-left: 0.6em;
 }
 
-.k-datepicker .k-picker-wrap {
+.k-datepicker .k-picker-wrap,
+.k-timepicker .k-picker-wrap {
     &.k-state-invalid {
         border-color: @input-validation-error;
 
@@ -2696,14 +2697,14 @@ html .km-pane-wrapper .km-widget,
         margin-left:0;
         margin-right: 2.1em;
     }
-}
-
-.k-rtl .k-datepicker .k-picker-wrap {
-    .k-i-warning {
-        margin-right: 0;
-        margin-left: 2.1em;
+    .k-rtl & {
+        .k-i-warning {
+            margin-right: 0;
+            margin-left: 2.1em;
+        }
     }
 }
+
 
 .k-listbox {
     .k-list-scroller {
