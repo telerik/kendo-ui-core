@@ -219,7 +219,7 @@
     });
 
     test('dataSource should spawn arrows for items with group, content or contentUrl', function () {
-        new PanelBar(empty_panelbar, { dataSource: [ { text: "Item 1", content: "Test" }, { text: "Item 2", items: [] }, { text: "Item 3", contentUrl: "http://www.google.com" } ] });
+        new PanelBar(empty_panelbar, { dataSource: [ { text: "Item 1", content: "Test" }, { text: "Item 2", items: [{text:"SubChild"}] }, { text: "Item 3", contentUrl: "http://www.google.com" } ] });
 
         var icons = empty_panelbar.find(".k-item > .k-link > .k-icon");
 
