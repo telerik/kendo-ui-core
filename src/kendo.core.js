@@ -235,6 +235,10 @@ var __meta__ = { // jshint ignore:line
         curlyRegExp = /__CURLY__/g,
         escapedSharpRegExp = /\\#/g,
         sharpRegExp = /__SHARP__/g,
+        tripleCurlyBeginRegExp = /{{{/g,
+        tripleCurlyEndRegExp = /}}}/g,
+        doubleCurlyBeginRegExp = /{{/g,
+        doubleCurlyEndRegExp = /}}/g,
         zeros = ["", "0", "00", "000", "0000"];
 
     Template = {
@@ -268,6 +272,14 @@ var __meta__ = { // jshint ignore:line
             functionBody += useWithBlock ? "with(" + paramName + "){" : "";
 
             functionBody += "$kendoOutput=";
+
+            if (!window.angular) {
+                template = template
+                .replace(tripleCurlyBeginRegExp, "#:")
+                .replace(tripleCurlyEndRegExp, "#")
+                .replace(doubleCurlyBeginRegExp, "#=")
+                .replace(doubleCurlyEndRegExp, "#");
+            }
 
             parts = template
                 .replace(escapedCurlyRegExp, "__CURLY__")
