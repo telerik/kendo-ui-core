@@ -2780,6 +2780,28 @@ html .km-pane-wrapper .km-widget,
     }
 }
 
+.k-datetimepicker .k-picker-wrap {
+    &.k-state-invalid {
+        border-color: @input-validation-error;
+
+        .k-input {
+            color: @input-validation-error;
+        }
+    }
+
+    .k-i-warning {
+        color: @input-validation-error;
+        margin-left:0;
+        margin-right: 4.3em;
+    }
+
+    .k-rtl & {
+        .k-icon.k-i-warning {
+            margin-right: 0;
+            margin-left: 4.3em;
+        }
+    }
+}
 
 .k-listbox {
     .k-list-scroller {
