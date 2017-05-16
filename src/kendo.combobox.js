@@ -569,7 +569,7 @@ var __meta__ = { // jshint ignore:line
 
             this._prev = this.input[0].value = text;
 
-            if(caretStart){
+            if(caretStart && this.selectedIndex === -1){
                 var mobile = support.mobileOS;
                 if(mobile.wp || mobile.android) {// without the timeout the caret is at the end of the input
                     setTimeout(function() { that.input[0].setSelectionRange(caretStart, caretStart); }, 0);
