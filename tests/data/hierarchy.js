@@ -1304,6 +1304,35 @@ test("filter propery returns correct items", function() {
      equal(dataSource.view()[0].children.view()[0].children.view().length,1);
 });
 
+test("server filtering true _hierarchicalFilter propery undefined", function() {
+    var dataSource = new kendo.data.HierarchicalDataSource({
+        serverFiltering:true,
+        filter:{ field: 'text', operator: 'contains', value: "ss" },
+        data: [
+            { text: "Furniture", expanded:true, items: [
+                { text: "Tables & Chairs", expanded:true, items: [
+                    { text: "F1" },
+                    { text: "S" , expanded:false, items: [
+                    { text: "Ff1" },
+                    { text: "Ss1" },
+                    { text: "fF2" }
+                ] },
+                    { text: "F2" }
+                ] },
+                { text: "Sofas" },
+                { text: "Occasional Furniture" }
+            ] },
+            { text: "Decor", expanded:true, items: [
+                { text: "Bed Linen" },
+                { text: "Curtains & Blinds" },
+                { text: "Carpets" }
+            ] }
+        ]
+    });
+
+     equal(dataSource._hierarchicalFilter, undefined);
+});
+
 test("filter propery returns correct items conjunction", function() {
    var dataSource = new kendo.data.HierarchicalDataSource({
             filter:[{ field: "name", operator: "startswith", value: "John" },
