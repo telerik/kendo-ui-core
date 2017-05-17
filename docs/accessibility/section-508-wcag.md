@@ -75,13 +75,11 @@ The following table shows the Section 508 and WCAG 2.0 Compliance level of suppo
 
 Several Kendo UI widgets feature complex rendering which affects their accessibility standards support provisioned by Section 508.
 
-### Label Element Support
-
-Widgets, such as the ComboBox, MultiSelect, and NumericTextBox, hide their initial `input` or `select` element which breaks the [`label.for`](https://developer.mozilla.org/en/docs/Web/HTML/Element/label#attr-for) focus on click functionality. In general, the browser cannot focus hidden elements. This results in the inability of the `label` element to focus the corresponding widget.
+Widgets, such as the ComboBox, MultiSelect, and NumericTextBox, hide their initial `input` or `select` element which breaks the [`label.for`](https://developer.mozilla.org/en/docs/Web/HTML/Element/label#attr-for) focus functionality on click. In general, the browser cannot focus hidden elements. This results in the inability of the `label` element to focus the corresponding widget.
 
 **Solution**
 
-Place the widget inside the `label` element which in turn focuses the first visible element. Avoid using the `for` attribute because when it is applied to the `label` element, the respective widget does not focus. Instead, use the 'aria-labelledby' attribute on the input to point to its wrapping `label` element:
+Place the widget inside the `label` element which in turn focuses the first visible element. Avoid using the `for` attribute because when it is applied to the `label` element, the respective widget does not focus. Instead, use the `aria-labelledby` attribute on the input to point to its wrapping `label` element:
 
 ###### Example
 
