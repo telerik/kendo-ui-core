@@ -1,7 +1,7 @@
 ---
 title: ListView
 page_title: ListView | UI for ASP.NET Core HtmlHelpers
-description: "Learn the basics when working with the ListView html helper for ASP.NET Core (MVC 6 or ASP.NET Core MVC)."
+description: "Learn the basics when working with the ListView Html helper for ASP.NET Core (MVC 6 or ASP.NET Core MVC)."
 slug: htmlhelpers_listview_aspnetcore
 ---
 
@@ -9,7 +9,7 @@ slug: htmlhelpers_listview_aspnetcore
 
 The ListView Html helper is a server-side wrapper for the [Kendo UI ListView](http://demos.telerik.com/aspnet-mvc/listview/index).
 
-It enables you to display a custom layout of data-bound items. It does not provide a default rendering of data-bound items. Instead, it relies on templates to define the way a list of items is displayed, including alternating items and items being edited.
+It enables you to display a custom layout of data-bound items. It does not provide a default rendering of data-bound items. Instead, it relies on templates to define the way a list of items is displayed, including alternating items and items that are in the process of editing.
 
 For more information, refer to the article on the [ListView HtmlHelper for ASP.NET MVC](http://docs.telerik.com/aspnet-mvc/helpers/listview/overview).
 
@@ -91,8 +91,8 @@ The following example demonstrates the basic configuration for the ListView with
 
 ## See Also
 
-* [JavaScript API Reference of the ListView](/api/javascript/ui/listview)
-* [ListView HtmlHelper for ASP.NET MVC](/aspnet-mvc/helpers/listview/overview)
+* [JavaScript API Reference of the ListView](../../../kendo-ui/api/javascript/ui/listview)
+* [ListView HtmlHelper for ASP.NET MVC](http://docs.telerik.com/aspnet-mvc/helpers/listview/overview)
 * [ListView Official Demos](http://demos.telerik.com/aspnet-core/listview/index)
 * [Overview of Telerik UI for ASP.NET Core - RC1]({% slug overview_aspnetmvc6_aspnetmvc %})
 * [Get Started with Telerik UI for ASP.NET MVC in ASP.NET Core Projects]({% slug gettingstarted_aspnetmvc6_aspnetmvc %})
