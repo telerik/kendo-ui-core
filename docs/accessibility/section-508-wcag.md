@@ -75,6 +75,8 @@ The following table shows the Section 508 and WCAG 2.0 Compliance level of suppo
 
 Several Kendo UI widgets feature complex rendering which affects their accessibility standards support provisioned by Section 508.
 
+### Label Element Support
+
 Widgets, such as the ComboBox, MultiSelect, and NumericTextBox, hide their initial `input` or `select` element which breaks the [`label.for`](https://developer.mozilla.org/en/docs/Web/HTML/Element/label#attr-for) focus functionality on click. In general, the browser cannot focus hidden elements. This results in the inability of the `label` element to focus the corresponding widget.
 
 **Solution**
@@ -93,6 +95,50 @@ Place the widget inside the `label` element which in turn focuses the first visi
       $("#numerictextbox").kendoNumericTextBox();
     });
   </script>
+```
+### Messages support
+
+Widgets, such as Grid and Calendar, require additional configuration to be set in order to pass 508 validation successfully. Due to the fact that they render their content in tables each table header element should contain text. For this purposes the [messages.expandCollapseColumnHeader](/api/javascript/ui/grid#configuration-messages.expandCollapseColumnHeader) and [messages.weekColumnHeader](/api/javascript/ui/calendar#configuration-messages.weekColumnHeader) can be used as demonstrated in the examples below:
+
+###### Example - specify text for the expand/collapse column
+
+```
+	<div id="grid"></div>
+	<script>
+	$("#grid").kendoGrid({
+	  columns: [
+	    { field: "name" },
+	    { field: "age" }
+	  ],
+	  dataSource: {
+	    data: [
+	      { name: "Jane Doe", age: 30, city: "London" },
+	      { name: "John Doe", age: 33, city: "Berlin" }
+	    ]
+	  },
+	  detailInit: function (e) {
+	    e.detailCell.text("City: " + e.data.city);
+	  },
+	  height: 200,
+	  messages: {
+	    expandCollapseColumnHeader: "E/C"
+	  }
+	});
+	</script>
+```
+
+###### Example - specify text for the week column header
+
+```
+    <div id="calendar"></div>
+    <script>
+    $("#calendar").kendoCalendar({
+        "weekNumber": true,
+        "messages": {
+            "weekColumnHeader": "W"
+        }
+     })
+    </script>
 ```
 
 ## See Also
