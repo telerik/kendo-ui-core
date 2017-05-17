@@ -9,19 +9,19 @@ slug: howto_change_datepicker_value_from_another_datepicker_grid
 
 The following example demonstrates how to change a DatePicker value based on the modified value of another DatePicker by using the inline edit mode of the Grid.
 
-By selecting a date in the first DatePicker, the next date is programmatically set in the second DatePicker.
+When the user selects a date from the first DatePicker, the following date is programmatically set to the second DatePicker.
 
 ###### Example
 
 ```html
 
   <div id="grid"></div>
-  
+
   <script>
 
     $("#grid").kendoGrid({  
       dataSource: {
-        data: [ 
+        data: [
           { Date1: '2017-8-5', Date2: '2017-8-6' }
         ],
         schema: {
@@ -40,10 +40,10 @@ By selecting a date in the first DatePicker, the next date is programmatically s
         field: "Date2",
         title: "Date1 + 1 day",
         format: "{0: yyyy-MM-dd}",
-      },{ 
-        command: ["edit", "destroy"], 
-        title: "&nbsp;", 
-        width: "250px" 
+      },{
+        command: ["edit", "destroy"],
+        title: "&nbsp;",
+        width: "250px"
       }],  
       editable: "inline",
       edit: onEdit
