@@ -130,7 +130,7 @@ The duration of the open animation in milliseconds.
 
     <input id="timepicker" />
     <script>
-    $("#timepicker").TimePicker({
+    $("#timepicker").kendoTimePicker({
         dateInput: true
     });
     </script>
