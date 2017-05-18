@@ -9,11 +9,13 @@ position: 3
 
 # ng-* Directives in Widget Markup
 
-Before the Kendo UI Q2 2015 release, the widgets which were instantiated over existing markup partially supported `ng-repeat`, `ng-if`, `ng-bind`, and other DOM manipulation directives in the markup. Subsequent changes to the markup, caused by those directives, were not handled correctly though.
+Prior to the Kendo UI Q2 2015 release, the widgets which were instantiated over existing markup partially supported `ng-repeat`, `ng-if`, `ng-bind`, and other DOM manipulation directives in the markup.
+
+However, subsequent changes to the markup, caused by those directives, were not handled correctly.
 
 ## Overview
 
-The widgets which exhibited this behavior were the TabStrip, PanelBar, Menu, TreeView, and some of the hybrid mobile widgets. The support of that behavior was accidental and not intentional, because of the directives instantiating the widgets in a `$timeout` (`setTimeout`) wrap.
+The widgets which exhibited this behavior were the TabStrip, PanelBar, Menu, TreeView, and some of the hybrid mobile widgets. This behavior was accidental and was caused by the directives instantiating the widgets in a `$timeout` (`setTimeout`) wrap.
 
 The timeout initialization caused several other issues as well. The widget instances were not accessible in a reliable manner. The instantiation of each widget required several additional `$scope.digest` cycles to be executed. Performance was negatively affected and the widget initialization was visible to the end user in certain scenarios. The [change from June 17 2015](https://github.com/telerik/kendo-ui-core/commit/0a4912ea9c14b2924d9914a5108ae2c2f636e4ed) removed the timeout implementation, effectively breaking the accidental `ng-repeat` support in later releases.
 
@@ -23,7 +25,7 @@ The timeout initialization caused several other issues as well. The widget insta
 
 The recommended approach to achieve dynamic content generation for the listed widgets is through the `dataSource` configuration option.
 
-The example below demonstrates a Kendo UI TreeView widget with `DataSource` in AngularJS.
+The following example demonstrates a Kendo UI TreeView widget with `DataSource` in AngularJS.
 
 ###### Example
 
@@ -52,7 +54,7 @@ angular.module("app", ["kendo.directives"]).controller("MyCtrl", function($scope
 </script>
 ```
 
-The example below demonstrates a Kendo UI PanelBar widget with `DataSource` in AngularJS.
+The following example demonstrates a Kendo UI PanelBar widget with `DataSource` in AngularJS.
 
 ###### Example
 
@@ -101,7 +103,7 @@ The example below demonstrates a Kendo UI PanelBar widget with `DataSource` in A
   </script>
 ```
 
-The example below demonstrates a Kendo UI TabStrip widget with `DataSource` in AngularJS.
+The following example demonstrates a Kendo UI TabStrip widget with `DataSource` in AngularJS.
 
 ###### Example
 
@@ -131,7 +133,7 @@ The example below demonstrates a Kendo UI TabStrip widget with `DataSource` in A
   </script>
 ```
 
-The example below demonstrates a Kendo UI Menu widget with `DataSource` in AngularJS.
+The following example demonstrates a Kendo UI Menu widget with `DataSource` in AngularJS.
 
 ###### Example
 
@@ -175,13 +177,13 @@ The example below demonstrates a Kendo UI Menu widget with `DataSource` in Angul
 
 ### The k-ng-delay Option
 
-If generating content with `DataSource` is not desired, a possible workaround of the behavior might be implemented using the `k-ng-delay` configuration option.
+If you need to avoid the generation of content with `DataSource`, you can implement a possible workaround by using the `k-ng-delay` configuration option.
 
 > **Important**
 >
 > The approach is not recommended and results in side effects, such as FOUC (flash of unstyled content) and decreased performance.
 
-The example below demonstrates a Kendo UI TabStrip widget in AngularJS with delayed initialization.
+The following example demonstrates a Kendo UI TabStrip widget in AngularJS with delayed initialization.
 
 ###### Example
 
@@ -219,13 +221,13 @@ The example below demonstrates a Kendo UI TabStrip widget in AngularJS with dela
 
 ### The ng-if Directive
 
-The `ng-if` directive, which is applicable to most `ng-\*` directives, operates directly on the origin HTML that is bound to and not on the widget itself. When the Kendo UI widget has a more complex rendering, such as the NumericTextBox, then the directive shows or hides the original `INPUT` element and not the widget. This is expected due to the aforementioned specifics of the `ng-\*` directives.
+The `ng-if` directive, which is applicable to most `ng-\*` directives, operates directly on the origin HTML that is bound to and not on the widget itself. When the Kendo UI widget has a more complex rendering, such as the NumericTextBox, then the directive shows or hides the original `input` element and not the widget. This is expected due to the previously mentioned specifics of the `ng-\*` directives.
 
 > **Important**
 >
 > The general solution is to use a specific **k-ng-\** directive where available&mdash;for example, `k-ng-disabled`.
 
-The example below demonstrates how to use a wrapping HTML element to hide/show Kendo UI Widget.
+The following example demonstrates how to use a wrapping HTML element to hide/show Kendo UI Widget.
 
 ###### Example
 
@@ -249,8 +251,6 @@ The example below demonstrates how to use a wrapping HTML element to hide/show K
 ```
 
 ## See Also
-
-Other articles on AngularJS integration with Kendo UI:
 
 * [AngularJS Integration Overview]({% slug angularjs_integration_directives %})
 * [Global Events]({% slug global_events_angularjs_directives %})

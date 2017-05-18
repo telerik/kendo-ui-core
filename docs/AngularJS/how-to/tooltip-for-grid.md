@@ -7,9 +7,10 @@ slug: tooltip_for_grid_angularjs_directives
 
 # Create Tooltips for Grid Elements
 
-In AngularJS applications, it is possible for you to create and show Kendo UI Tooltips for the elements of a Kendo UI Grid.
+In AngularJS applications, you can create and show Kendo UI Tooltips for the elements of a Kendo UI Grid.
 
-To apply this behavior:   
+To achieve this behavior:   
+
 1. Define a Kendo UI Tooltip widget around the Grid declaration.   
 1. Together with the Grid settings, define the Tooltip settings in the `$scope`.   
 1. Prepare a jQuery selector that will match the elements you want and set it to the `filter` property of the Tooltip.   
@@ -77,8 +78,6 @@ To apply this behavior:
 	</script>
 
 ## See Also
-
-Other articles and how-to examples on AngularJS directives and Kendo UI:
 
 * [AngularJS Integration Overview]({% slug angularjs_integration_directives %})
 * [Global Events]({% slug global_events_angularjs_directives %})
