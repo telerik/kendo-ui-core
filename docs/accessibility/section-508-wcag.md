@@ -96,7 +96,7 @@ Place the widget inside the `label` element which in turn focuses the first visi
     });
   </script>
 ```
-### Messages support
+### Messages Support
 
 Widgets, such as Grid and Calendar, require additional configuration to be set in order to pass 508 validation successfully. Due to the fact that they render their content in tables each table header element should contain text. For this purposes the [messages.expandCollapseColumnHeader](/api/javascript/ui/grid#configuration-messages.expandCollapseColumnHeader) and [messages.weekColumnHeader](/api/javascript/ui/calendar#configuration-messages.weekColumnHeader) can be used as demonstrated in the examples below:
 
