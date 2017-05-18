@@ -7,9 +7,11 @@ slug: nest_widgets_angularjs_directives
 
 # Nest Widgets
 
-To nest Kendo UI widgets in AngularJS applications, make sure that the parent widget is initialized _before_ you initialize the nested one. In such cases, the [`k-ng-delay`](http://docs.telerik.com/kendo-ui/AngularJS/introduction#delay-widget-initialization) directive might come in handy.
+Your AngularJS project might require you to nest Kendo UI widgets.
 
-The example below demonstrates how to nest a Kendo UI Editor widget in a Kendo UI TabStrip one.
+To achieve this behavior, make sure that the parent widget is initialized before you initialize the nested component. In such cases, you can use the [`k-ng-delay`](http://docs.telerik.com/kendo-ui/AngularJS/introduction#delay-widget-initialization) directive.
+
+The following example demonstrates how to nest a Kendo UI Editor in a Kendo UI TabStrip.
 
 ###### Example
 
@@ -37,8 +39,6 @@ The example below demonstrates how to nest a Kendo UI Editor widget in a Kendo U
     </script>
 
 ## See Also
-
-Other articles and how-to examples on AngularJS directives and Kendo UI:
 
 * [AngularJS Integration Overview]({% slug angularjs_integration_directives %})
 * [Global Events]({% slug global_events_angularjs_directives %})
