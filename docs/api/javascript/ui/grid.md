@@ -7167,8 +7167,8 @@ A string, DOM element or jQuery object which represents the table row. A string 
       ]
     });
     var grid = $("#grid").data("kendoGrid");
-    var data = grid.dataItem("tr:eq(1)");
-    console.log(data.name); // displays "Jane Doe"
+    var dataItem = grid.dataItem("tbody tr:eq(0)");
+    console.log(dataItem.name); // displays "Jane Doe"
     </script>
 
 ### destroy
