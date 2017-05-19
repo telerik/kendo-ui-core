@@ -50,7 +50,9 @@ function deleteBackwards(masked, pos, length) {
     var l = length || 1;
     var input = masked.element[0];
     var value = input.value;
-    input.value = value.substring(0, pos - l) + value.substring(pos);
-    kendo.caret(input, pos - l);
+    input.value = value.substring(0, Math.max(pos - l, 0)) + value.substring(pos);
+    //chrome 58 fails when we try to set selectionStart to -1;
+    //make sure it is not smaller than 0
+    kendo.caret(input, Math.max(pos - l, 0)); 
     masked.inputChange(true);
 }
