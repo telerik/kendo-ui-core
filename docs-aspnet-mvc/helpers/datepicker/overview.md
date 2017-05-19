@@ -136,15 +136,15 @@ The following example demonstrates how to subscribe to events by a template dele
 
 ### Existing Instances
 
-To reference an existing Kendo UI DatePicker instance, use the [`jQuery.data()`](http://api.jquery.com/jQuery.data/) configuration option. Once a reference is established, use the [DatePicker API](../../../kendo-ui/api/javascript/ui/datepicker#methods) to control its behavior.
+To reference an existing Kendo UI DatePicker instance, use the [`jQuery.data()`](http://api.jquery.com/jQuery.data/) method and use the [DatePicker API](../../../kendo-ui/api/javascript/ui/datepicker#methods) to control its behavior.
 
 ###### Example
 
-        //Put this after your Kendo UIDatePicker for ASP.NET MVC declaration.
+        // Put this after your Kendo UIDatePicker for ASP.NET MVC declaration.
         <script>
         $(function() {
-        //Notice that the Name() of the DatePicker is used to get its client-side instance.
-        var datepicker = $("#datepicker").data("kendoDatePicker");
+            // Notice that the Name() of the DatePicker is used to get its client-side instance.
+            var datepicker = $("#datepicker").data("kendoDatePicker");
         });
         </script>
 

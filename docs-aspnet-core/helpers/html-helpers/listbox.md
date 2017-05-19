@@ -7,7 +7,7 @@ slug: htmlhelpers_listbox_aspnetcore
 
 # ListBox Html Helper
 
-The ListBox Html helper is a server-side wrapper for the [Kendo UI ListBox](http://demos.telerik.com/aspnet-mvc/listbox/index).
+The ListBox Html helper is a server-side wrapper for the [Kendo UI ListBox](https://demos.telerik.com/kendo-ui/listbox/index).
 
 It displays a list of data that is contained in a box and allows single or multiple selection, reordering of selected items, and deleting items and features keyboard navigation as well as the dragging and dropping of items. You can also connect the ListBox with another list-box and customize the widget with the use of templates, toolbar positioning, placeholder and hint, and localization of its command buttons messages.
 
@@ -101,8 +101,8 @@ The following example demonstrates the basic configuration for the ListBox Html 
 
 ## See Also
 
-* [JavaScript API Reference of the ListBox](/api/javascript/ui/listbox)
-* [ListBox HtmlHelper for ASP.NET MVC](/aspnet-mvc/helpers/listbox/overview)
+* [JavaScript API Reference of the ListBox](http://docs.telerik.com/kendo-ui/api/javascript/ui/listbox)
+* [ListBox HtmlHelper for ASP.NET MVC](http://docs.telerik.com/aspnet-mvc/helpers/listbox/overview)
 * [ListBox Official Demos](http://demos.telerik.com/aspnet-core/listbox/index)
 * [Overview of Telerik UI for ASP.NET Core - RC1]({% slug overview_aspnetmvc6_aspnetmvc %})
 * [Get Started with Telerik UI for ASP.NET MVC in ASP.NET Core Projects]({% slug gettingstarted_aspnetmvc6_aspnetmvc %})
