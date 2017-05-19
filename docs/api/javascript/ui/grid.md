@@ -8046,7 +8046,7 @@ The widget instance which fired the event.
       },
       editable: "popup",
       toolbar:["create"],
-      edit: function(e) {
+      beforeEdit: function(e) {
         if (!e.model.isNew()) {
           e.preventDefault();
         }
