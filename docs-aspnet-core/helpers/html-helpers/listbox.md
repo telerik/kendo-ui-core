@@ -101,8 +101,8 @@ The following example demonstrates the basic configuration for the ListBox Html 
 
 ## See Also
 
-* [JavaScript API Reference of the ListBox](/api/javascript/ui/listbox)
-* [ListBox HtmlHelper for ASP.NET MVC](/aspnet-mvc/helpers/listbox/overview)
+* [JavaScript API Reference of the ListBox](http://docs.telerik.com/kendo-ui/api/javascript/ui/listbox)
+* [ListBox HtmlHelper for ASP.NET MVC](http://docs.telerik.com/aspnet-mvc/helpers/listbox/overview)
 * [ListBox Official Demos](http://demos.telerik.com/aspnet-core/listbox/index)
 * [Overview of Telerik UI for ASP.NET Core - RC1]({% slug overview_aspnetmvc6_aspnetmvc %})
 * [Get Started with Telerik UI for ASP.NET MVC in ASP.NET Core Projects]({% slug gettingstarted_aspnetmvc6_aspnetmvc %})
