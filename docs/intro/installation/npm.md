@@ -16,7 +16,7 @@ For more information on possible setups, refer to the [sample repository on GitH
 
 ## Overview
 
-Kendo UI maintains 2 NPM packages:
+Kendo UI maintains two NPM packages:
 * [Kendo UI Core](#kendo-ui-core)
 * [Kendo UI Professional](#kendo-ui-professional)
 
@@ -77,9 +77,9 @@ The Kendo UI Professional NPM Package, named `@progress/kendo-ui` is available a
 >
 > The scripts in the NPM package are not usable in the browser. To work around this issue, use a bundler such as [WebPack]({% slug webpacksupport_integration_kendoui %}).
 
-### Legacy Package (Git Repo)
+### Legacy Package
 
-The legacy `kendo` package, accessible through **git+https://bower.telerik.com/npm-kendo-ui/npm-kendo.git**, will not be updated after May 2017. The repository itself will remain active.
+The legacy `kendo` package that is available as a GitHub repository and is accessible through `git+https://bower.telerik.com/npm-kendo-ui/npm-kendo.git` will not be updated after May 2017. The repository itself will remain active.
 
 ### Authenticating Build Agents
 
@@ -111,7 +111,7 @@ This section provides solutions for common issues you might encounter while inst
 
 ### The jQuery Module Is Not Found
 
-It is possible during the installation process to see the following error:
+During the installation process, you might see the following error:
 
 ```
 Error: Cannot find module 'jquery' from '/Users/bernhard/Documents/JavaScriptDevelopment/kendo-ui-npm-example/javascript-browserify'
