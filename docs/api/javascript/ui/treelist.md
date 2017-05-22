@@ -3381,7 +3381,17 @@ Clears the currently selected table rows or cells (depending on the current sele
 
 ### collapse
 
-This method collapse the row.
+This method collapses the row passed as a parameter.
+
+#### Parameters
+
+##### row `String|Element|jQuery`
+
+A string, DOM element or jQuery object which represents the table row. A string is treated as a jQuery selector.
+
+#### Returns
+
+`Promise`
 
 #### Example
 
