@@ -16,4 +16,4 @@ To see the example, refer to the project on how to [use the Kendo UI MultiSelect
 * [Overview of the MultiSelect HtmlHelper]({% slug overview_multiselecthelper_aspnetmvc %})
 * [MultiSelectBuilder API Reference](../../../kendo-ui/aspnet-mvc/api/Kendo.Mvc.UI.Fluent/MultiSelectBuilder)
 
-For more runnable examples on the Kendo UI Grid in ASP.NET MVC applications, browse its [**How To** documentation folder](/helpers/grid/how-to/Appearance/).
+For more runnable examples on the Kendo UI Grid in ASP.NET MVC applications, browse its [**How To** documentation folder]({% slug howto_applycustomrrowstylesmodeldata_gridaspnetmv %}).

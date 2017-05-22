@@ -22,4 +22,4 @@ To see the example, refer to the project on how to [export to Excel on the serve
 * [GridBuilder API Reference](../../../kendo-ui/api/Kendo.Mvc.UI.Fluent/GridBuilder)
 * [Telerik Document Processing (TDP) by Progress](http://docs.telerik.com/devtools/document-processing/introduction)
 
-For more runnable examples on the Kendo UI Grid in ASP.NET MVC applications, browse its [**How To** documentation folder](/helpers/grid/how-to/Appearance/).
+For more runnable examples on the Kendo UI Grid in ASP.NET MVC applications, browse its [**How To** documentation folder]({% slug howto_applycustomrrowstylesmodeldata_gridaspnetmv %}).

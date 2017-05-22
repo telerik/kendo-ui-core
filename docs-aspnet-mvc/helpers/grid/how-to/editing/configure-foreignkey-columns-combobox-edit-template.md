@@ -15,4 +15,4 @@ To see the example, refer to the project on how to [configure a Kendo UI Grid wi
 * [GridBuilder API Reference](../../../kendo-ui/api/Kendo.Mvc.UI.Fluent/GridBuilder)
 * [ComboBox Templates](../../../kendo-ui/controls/editors/combobox/overview#templates)
 
-For more runnable examples on the Kendo UI Grid in ASP.NET MVC applications, browse its [**How To** documentation folder](/helpers/grid/how-to/Appearance/).
+For more runnable examples on the Kendo UI Grid in ASP.NET MVC applications, browse its [**How To** documentation folder]({% slug howto_applycustomrrowstylesmodeldata_gridaspnetmv %}).
