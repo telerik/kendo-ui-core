@@ -6,7 +6,7 @@ previous_url: /aspnet-core/helpers/time-picker
 slug: taghelpers_timepicker_aspnetcore
 ---
 
-# TimePicker Tag Helper
+# TimePicker Tag Helper Overview
 
 The TimePicker tag helper helps you configure the Kendo UI TimePicker widget in ASP.NET Core applications.
 

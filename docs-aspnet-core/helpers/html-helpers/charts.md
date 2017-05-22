@@ -1,11 +1,11 @@
 ---
 title: Charts
 page_title: Charts | UI for ASP.NET Core HtmlHelpers
-description: "Learn the basics when working with the Charts Html helper for ASP.NET Core (MVC 6 or ASP.NET Core MVC)."
+description: "Learn the basics when working with the Charts HtmlHelper for ASP.NET Core (MVC 6 or ASP.NET Core MVC)."
 slug: htmlhelpers_charts_aspnetcore
 ---
 
-# Charts HtmlHelper
+# Charts HtmlHelper Overview
 
 The Charts HtmlHelper extension is a server-side wrapper for the [Kendo UI Charts](http://docs.telerik.com/kendo-ui/controls/charts/overview).
 
@@ -29,7 +29,7 @@ For more information on the HtmlHelper, refer to the article on the [Charts Html
 
 ## Basic Usage
 
-The following example demonstrates how to define a Bar Chart by using the Chart Html helper.
+The following example demonstrates how to define a Bar Chart by using the Chart HtmlHelper.
 
 ###### Example
 
@@ -55,7 +55,7 @@ The following example demonstrates how to define a Bar Chart by using the Chart 
 
 ## Configuration
 
-The following example demonstrates the basic configuration for the Line Chart Html helper.
+The following example demonstrates the basic configuration for the Line Chart HtmlHelper.
 
 ###### Example
 

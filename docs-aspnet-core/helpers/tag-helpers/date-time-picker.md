@@ -6,7 +6,7 @@ previous_url: /aspnet-core/helpers/date-time-picker
 slug: taghelpers_datetimepicker_aspnetcore
 ---
 
-# DateTimePicker Tag Helper
+# DateTimePicker Tag Helper Overview
 
 The DateTimePicker tag helper helps you configure the Kendo UI DateTimePicker widget in ASP.NET Core applications.
 

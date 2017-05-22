@@ -1,11 +1,11 @@
 ---
 title: Grid
 page_title: Grid | UI for ASP.NET Core HtmlHelpers
-description: "Learn the basics when working with the Grid Html helper for ASP.NET Core (MVC 6 or ASP.NET Core MVC)."
+description: "Learn the basics when working with the Grid HtmlHelper for ASP.NET Core (MVC 6 or ASP.NET Core MVC)."
 slug: htmlhelpers_grid_aspnetcore
 ---
 
-# Grid HtmlHelper
+# Grid HtmlHelper Overview
 
 The Grid HtmlHelper extension is a server-side wrapper for the [Kendo UI Grid](https://demos.telerik.com/kendo-ui/grid/index) widget.
 
@@ -15,7 +15,7 @@ For more information on the HtmlHelper, refer to the article on the [Grid HtmlHe
 
 ## Basic Usage
 
-The following example demonstrates how to define the Grid by using the Grid Html helper.
+The following example demonstrates how to define the Grid by using the Grid HtmlHelper.
 
 ###### Example
 
@@ -119,7 +119,7 @@ The following example demonstrates how to define the Grid by using the Grid Html
 
 ## Configuration
 
-The following example demonstrates the basic configuration of the Grid Html helper and how to get the Grid instance.
+The following example demonstrates the basic configuration of the Grid HtmlHelper and how to get the Grid instance.
 
 ###### Example
 

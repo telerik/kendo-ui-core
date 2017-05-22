@@ -6,7 +6,7 @@ previous_url: /aspnet-core/helpers/splitter
 slug: taghelpers_splitter_aspnetcore
 ---
 
-# Splitter Tag Helper
+# Splitter Tag Helper Overview
 
 The Splitter tag helper helps you configure the Kendo UI Splitter widget in ASP.NET Core applications.
 

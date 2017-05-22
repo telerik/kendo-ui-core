@@ -6,7 +6,7 @@ previous_url: /aspnet-core/helpers/dialog
 slug: taghelpers_dialog_aspnetcore
 ---
 
-# Dialog Tag Helper
+# Dialog Tag Helper Overview
 
 The Dialog tag helper helps you configure the Kendo UI Dialog widget in ASP.NET Core applications.
 

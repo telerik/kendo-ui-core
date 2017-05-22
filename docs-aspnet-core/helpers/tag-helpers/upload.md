@@ -6,7 +6,7 @@ previous_url: /aspnet-core/helpers/upload
 slug: taghelpers_upload_aspnetcore
 ---
 
-# Upload Tag Helper
+# Upload Tag Helper Overview
 
 The Upload tag helper helps you configure the Kendo UI Upload widget in ASP.NET Core applications.
 

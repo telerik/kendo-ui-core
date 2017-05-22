@@ -1,11 +1,11 @@
 ---
 title: Map
 page_title: Map | UI for ASP.NET Core HtmlHelpers
-description: "Learn the basics when working with the Map Html helper for ASP.NET Core (MVC 6 or ASP.NET Core MVC)."
+description: "Learn the basics when working with the Map HtmlHelper for ASP.NET Core (MVC 6 or ASP.NET Core MVC)."
 slug: htmlhelpers_map_aspnetcore
 ---
 
-# Map HtmlHelper
+# Map HtmlHelper Overview
 
 The Map HtmlHelper extension is a server-side wrapper for the [Kendo UI Map](http://demos.telerik.com/aspnet-mvc/map/index) widget.
 
