@@ -22,4 +22,4 @@ For more information, refer to the article on how to [create Excel documents](ht
 * [Overview of the Grid HtmlHelper]({% slug overview_gridhelper_aspnetmvc %})
 * [GridBuilder API Reference](../../../kendo-ui/api/Kendo.Mvc.UI.Fluent/GridBuilder)
 
-For more runnable examples on the Kendo UI Grid in ASP.NET MVC applications, browse its [**How To** documentation folder](/helpers/grid/how-to/Appearance/).
+For more runnable examples on the Kendo UI Grid in ASP.NET MVC applications, browse its [**How To** documentation folder]({% slug howto_applycustomrrowstylesmodeldata_gridaspnetmv %}).
