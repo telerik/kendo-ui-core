@@ -5,13 +5,13 @@ description: "Learn the basics when working with the ListView Html helper for AS
 slug: htmlhelpers_listview_aspnetcore
 ---
 
-# ListView Html Helper
+# ListView HtmlHelper
 
-The ListView Html helper is a server-side wrapper for the [Kendo UI ListView](http://demos.telerik.com/aspnet-mvc/listview/index).
+The ListView HtmlHelper extension is a server-side wrapper for the [Kendo UI ListView](http://demos.telerik.com/aspnet-mvc/listview/index).
 
 It enables you to display a custom layout of data-bound items. It does not provide a default rendering of data-bound items. Instead, it relies on templates to define the way a list of items is displayed, including alternating items and items that are in the process of editing.
 
-For more information, refer to the article on the [ListView HtmlHelper for ASP.NET MVC](http://docs.telerik.com/aspnet-mvc/helpers/listview/overview).
+For more information on the HtmlHelper, refer to the article on the [ListView HtmlHelper for ASP.NET MVC](http://docs.telerik.com/aspnet-mvc/helpers/listview/overview).
 
 ## Basic Usage
 

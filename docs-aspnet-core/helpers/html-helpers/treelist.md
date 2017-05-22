@@ -5,13 +5,13 @@ description: "Learn the basics when working with the TreeList Html helper for AS
 slug: htmlhelpers_treelist_aspnetcore
 ---
 
-# TreeList Html Helper
+# TreeList HtmlHelper
 
-The TreeList Html helper is a server-side wrapper for the [Kendo UI TreeList](http://demos.telerik.com/aspnet-mvc/treelist/index).
+The TreeList HtmlHelper extension is a server-side wrapper for the [Kendo UI TreeList](http://demos.telerik.com/aspnet-mvc/treelist/index).
 
 It enables the display of self-referencing tabular data and allows sorting, filtering, and data editing.
 
-For more information, refer to the article on the [TreeList HtmlHelper for ASP.NET MVC](http://docs.telerik.com/aspnet-mvc/helpers/treelist/overview).
+For more information on the HtmlHelper, refer to the article on the [TreeList HtmlHelper for ASP.NET MVC](http://docs.telerik.com/aspnet-mvc/helpers/treelist/overview).
 
 ## Basic Usage
 
@@ -28,7 +28,7 @@ The following example demonstrates how to define the TreeList by using the TreeL
             e => e.ReportsTo,
             e => e
         );
-        
+
         return Json(result, JsonRequestBehavior.AllowGet);
     }
 ```
@@ -71,7 +71,7 @@ The following example demonstrates the basic configuration for the TreeList with
 	        e => e.ReportsTo,
 	        e => e
 	    );
-	    
+
 	    return Json(result, JsonRequestBehavior.AllowGet);
 	}
 ```
