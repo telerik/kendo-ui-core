@@ -1599,6 +1599,28 @@ so the two should not be used at the same time.
     });
     </script>
 
+### columns.selectable `Boolean` *(default: false)*
+
+If set to `true` the grid will render a select column with checkboxes in each cell, thus enabling multi-row selection. The header checkbox allows users to select/deselect all the rows on the current page.
+
+> **Note:** The checkbox column selection functionality has two limitations:
+> * It is not integrated with the keyboard navigation
+> * It is not integrated with the currently existing select functionality of the grid which is enabled via the [selectable option](#configuration-selectable).
+> They are mutually exclusive and we recommend using only one of the approaches for enabling selection.
+
+#### Example - disable sorting
+
+    <div id="grid"></div>
+    <script>
+    $("#grid").kendoGrid({
+      columns: [
+        { selectable: true },
+        { field: "name" }
+      ],
+      dataSource: [ { name: "Jane Doe" }, { name: "John Doe" } ]
+    });
+    </script>
+
 ### columns.sortable `Boolean|Object` *(default: true)*
 
 If set to `true` the user can click the column header and sort the grid by the column [field](#configuration-columns.field) when sorting is enabled. If set to `false` sorting will
