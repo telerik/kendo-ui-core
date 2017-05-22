@@ -5,9 +5,9 @@ description: "Learn the basics when working with the Map Html helper for ASP.NET
 slug: htmlhelpers_map_aspnetcore
 ---
 
-# Map Html Helper
+# Map HtmlHelper
 
-The Map Html helper is a server-side wrapper for the [Kendo UI Map](http://demos.telerik.com/aspnet-mvc/map/index).
+The Map HtmlHelper extension is a server-side wrapper for the [Kendo UI Map](http://demos.telerik.com/aspnet-mvc/map/index) widget.
 
 The [Kendo UI Map widget](http://demos.telerik.com/aspnet-core/map/index) displays geospatial information organized in layers and is supported for both desktop and mobile devices.
 
@@ -16,13 +16,13 @@ The layers that the Map provides are:
 * Shape (vector) layers
 * Marker layers
 
-For more detailed information on any new features, refer to [Kendo UI Roadmap](http://www.telerik.com/support/whats-new/kendo-ui/roadmap).
+For more information on any new features, refer to the [Kendo UI Roadmap](http://www.telerik.com/support/whats-new/kendo-ui/roadmap).
 
-For more information, refer to the article on the [Map HtmlHelper for ASP.NET MVC](http://docs.telerik.com/aspnet-mvc/helpers/map/overview).
+For more information on the HtmlHelper, refer to the article on the [Map HtmlHelper for ASP.NET MVC](http://docs.telerik.com/aspnet-mvc/helpers/map/overview).
 
 ## Basic Usage
 
-The following example demonstrates how to define the Map by using the Map Html helper.
+The following example demonstrates how to define the Map by using the Map HtmlHelper.
 
 ###### Example
 
@@ -61,7 +61,7 @@ The following example demonstrates how to define the Map by using the Map Html h
 
 ## Configuration
 
-The following example demonstrates the basic API method zoom for the Map Html helper and retrieving the widget instance.
+The following example demonstrates how to use the basic `zoom` method of the Map HtmlHelper and retrieve the instance of the widget.
 
 ###### Example
 
@@ -96,8 +96,8 @@ The following example demonstrates the basic API method zoom for the Map Html he
 
 ## See Also
 
-* [JavaScript API Reference of the Map](/api/javascript/dataviz/ui/map)
-* [Map HtmlHelper for ASP.NET MVC](/aspnet-mvc/helpers/map/overview)
+* [JavaScript API Reference of the Map](../../../kendo-ui/api/javascript/dataviz/ui/map)
+* [Map HtmlHelper for ASP.NET MVC](http://docs.telerik.com/aspnet-mvc/helpers/map/overview)
 * [Map Official Demos](http://demos.telerik.com/aspnet-core/map/index)
 * [Overview of Telerik UI for ASP.NET Core - RC1]({% slug overview_aspnetmvc6_aspnetmvc %})
 * [Get Started with Telerik UI for ASP.NET MVC in ASP.NET Core Projects]({% slug gettingstarted_aspnetmvc6_aspnetmvc %})

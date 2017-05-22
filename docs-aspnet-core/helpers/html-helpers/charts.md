@@ -5,9 +5,9 @@ description: "Learn the basics when working with the Charts Html helper for ASP.
 slug: htmlhelpers_charts_aspnetcore
 ---
 
-# Charts Html Helper
+# Charts HtmlHelper
 
-The Charts Html helper is a server-side wrapper for the [Kendo UI Charts](http://docs.telerik.com/kendo-ui/controls/charts/overview).
+The Charts HtmlHelper extension is a server-side wrapper for the [Kendo UI Charts](http://docs.telerik.com/kendo-ui/controls/charts/overview).
 
 The [Kendo UI Charts](http://demos.telerik.com/aspnet-core/) use modern browser technologies to render high-quality data visualizations. All graphics are rendered on the client by using [Scalable Vector Graphics (SVG)](https://en.wikipedia.org/wiki/Scalable_Vector_Graphics) with a fallback to [Canvas](http://www.canvasgfx.com/).
 
@@ -25,7 +25,7 @@ Kendo UI Charts support the following series types:
 
 For additional information on new Kendo UI Chart types and features, refer to the [Kendo UI Roadmap](http://www.telerik.com/support/whats-new/kendo-ui-web/roadmap).
 
-For more information on the Html helper, refer to the article on the [Charts HtmlHelper for ASP.NET MVC](http://docs.telerik.com/aspnet-mvc/helpers/chart/overview).
+For more information on the HtmlHelper, refer to the article on the [Charts HtmlHelper for ASP.NET MVC](http://docs.telerik.com/aspnet-mvc/helpers/chart/overview).
 
 ## Basic Usage
 

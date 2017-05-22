@@ -5,13 +5,13 @@ description: "Learn the basics when working with the Grid Html helper for ASP.NE
 slug: htmlhelpers_grid_aspnetcore
 ---
 
-# Grid Html Helper
+# Grid HtmlHelper
 
 The Grid HtmlHelper extension is a server-side wrapper for the [Kendo UI Grid](https://demos.telerik.com/kendo-ui/grid/index) widget.
 
 It enables you to configure the Kendo UI Grid widget from server-side code and helps with data binding and editing. The [Grid](../../../kendo-ui/controls/data-management/grid/overview) is a powerful control for displaying data in a tabular format. It provides many options, such as paging, sorting, filtering, grouping, and editing, which determine the way data is presented and manipulated. The Grid can be bound to local or remote data by using the [Kendo UI DataSource](http://docs.telerik.com/kendo-ui/framework/datasource/overview) component.
 
-For more information, refer to the article on the [Grid HtmlHelper for ASP.NET MVC](http://docs.telerik.com/aspnet-mvc/helpers/grid/overview).
+For more information on the HtmlHelper, refer to the article on the [Grid HtmlHelper for ASP.NET MVC](http://docs.telerik.com/aspnet-mvc/helpers/grid/overview).
 
 ## Basic Usage
 
