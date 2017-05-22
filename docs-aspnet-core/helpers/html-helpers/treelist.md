@@ -1,11 +1,11 @@
 ---
 title: TreeList
 page_title: TreeList | UI for ASP.NET Core HtmlHelpers
-description: "Learn the basics when working with the TreeList Html helper for ASP.NET Core (MVC 6 or ASP.NET Core MVC)."
+description: "Learn the basics when working with the TreeList HtmlHelper for ASP.NET Core (MVC 6 or ASP.NET Core MVC)."
 slug: htmlhelpers_treelist_aspnetcore
 ---
 
-# TreeList HtmlHelper
+# TreeList HtmlHelper Overview
 
 The TreeList HtmlHelper extension is a server-side wrapper for the [Kendo UI TreeList](http://demos.telerik.com/aspnet-mvc/treelist/index).
 
@@ -15,7 +15,7 @@ For more information on the HtmlHelper, refer to the article on the [TreeList Ht
 
 ## Basic Usage
 
-The following example demonstrates how to define the TreeList by using the TreeList Html helper and bind it to remote data.
+The following example demonstrates how to define the TreeList by using the TreeList HtmlHelper and bind it to remote data.
 
 ###### Example
 

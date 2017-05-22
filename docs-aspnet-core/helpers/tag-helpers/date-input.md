@@ -6,7 +6,7 @@ previous_url: /aspnet-core/helpers/date-input
 slug: taghelpers_dateinput_aspnetcore
 ---
 
-# DateInput Tag Helper
+# DateInput Tag Helper Overview
 
 The DateInput tag helper helps you configure the Kendo UI DateInput widget in ASP.NET Core applications.
 

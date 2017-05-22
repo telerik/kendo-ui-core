@@ -6,7 +6,7 @@ previous_url: /aspnet-core/helpers/button
 slug: taghelpers_button_aspnetcore
 ---
 
-# Button Tag Helper
+# Button Tag Helper Overview
 
 The Button tag helper helps you configure the Kendo UI Button widget in ASP.NET Core applications.
 

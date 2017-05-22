@@ -1,11 +1,11 @@
 ---
 title: ListView
 page_title: ListView | UI for ASP.NET Core HtmlHelpers
-description: "Learn the basics when working with the ListView Html helper for ASP.NET Core (MVC 6 or ASP.NET Core MVC)."
+description: "Learn the basics when working with the ListView HtmlHelper for ASP.NET Core (MVC 6 or ASP.NET Core MVC)."
 slug: htmlhelpers_listview_aspnetcore
 ---
 
-# ListView HtmlHelper
+# ListView HtmlHelper Overview
 
 The ListView HtmlHelper extension is a server-side wrapper for the [Kendo UI ListView](http://demos.telerik.com/aspnet-mvc/listview/index).
 
@@ -15,7 +15,7 @@ For more information on the HtmlHelper, refer to the article on the [ListView Ht
 
 ## Basic Usage
 
-The following example demonstrates how to define the ListView by using the ListView Html helper.
+The following example demonstrates how to define the ListView by using the ListView HtmlHelper.
 
 ###### Example
 

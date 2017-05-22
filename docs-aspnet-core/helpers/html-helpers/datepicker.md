@@ -1,11 +1,11 @@
 ---
 title: DatePicker
 page_title: DatePicker | UI for ASP.NET Core HtmlHelpers
-description: "Learn the basics when working with the DatePicker Html helper for ASP.NET Core (MVC 6 or ASP.NET Core MVC)."
+description: "Learn the basics when working with the DatePicker HtmlHelper for ASP.NET Core (MVC 6 or ASP.NET Core MVC)."
 slug: htmlhelpers_datepicker_aspnetcore
 ---
 
-# DatePicker HtmlHelper
+# DatePicker HtmlHelper Overview
 
 The DatePicker HtmlHelper extension is a server-side wrapper for the [Kendo UI DatePicker](https://demos.telerik.com/kendo-ui/datepicker/index) widget.
 

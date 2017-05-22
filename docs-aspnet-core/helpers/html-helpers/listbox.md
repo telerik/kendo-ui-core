@@ -1,11 +1,11 @@
 ---
 title: ListBox
 page_title: ListBox | UI for ASP.NET Core HtmlHelpers
-description: "Learn the basics when working with the ListBox Html helper for ASP.NET Core (MVC 6 or ASP.NET Core MVC)."
+description: "Learn the basics when working with the ListBox HtmlHelper for ASP.NET Core (MVC 6 or ASP.NET Core MVC)."
 slug: htmlhelpers_listbox_aspnetcore
 ---
 
-# ListBox HtmlHelper
+# ListBox HtmlHelper Overview
 
 The ListBox HtmlHelper extension is a server-side wrapper for the [Kendo UI ListBox](https://demos.telerik.com/kendo-ui/listbox/index).
 
@@ -15,7 +15,7 @@ For more information on the HtmlHelper, refer to the article on the [ListBox Htm
 
 ## Basic Usage
 
-The following example demonstrates how to define the ListBox by using the ListBox Html helper.
+The following example demonstrates how to define the ListBox by using the ListBox HtmlHelper.
 
 ###### Example
 
@@ -52,7 +52,7 @@ The following example demonstrates how to define the ListBox by using the ListBo
 
 ## Configuration
 
-The following example demonstrates the basic configuration for the ListBox Html helper.
+The following example demonstrates the basic configuration for the ListBox HtmlHelper.
 
 ###### Example
 

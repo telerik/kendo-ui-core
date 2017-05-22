@@ -6,7 +6,7 @@ previous_url: /aspnet-core/helpers/numeric-text-box
 slug: taghelpers_numerictextbox_aspnetcore
 ---
 
-# NumericTextBox Tag Helper
+# NumericTextBox Tag Helper Overview
 
 The NumericTextBox tag helper helps you configure the Kendo UI NumericTextBox widget in ASP.NET Core applications.
 
