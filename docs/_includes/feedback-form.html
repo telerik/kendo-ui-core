@@ -1,0 +1,59 @@
+<div id="feedback-section">
+  {% javascript feedback %}
+  <span id="popupNotification"></span>
+  <div id="feedback-menu-container">
+    <div id="helpful-buttons-container">
+      <span class="side-title">Is this article helpful?</span>
+      <a class="button" id="yesButton">Yes</a> /
+      <a class="button" id="noButton">No</a>
+    </div>
+    <div id="feedback-submitted-container">
+      <span class="side-title">Thank you for your feedback!</span>
+    </div>
+  </div>
+  <div id="feedback-window-container">
+    <div id="feedback-form-window" style="background-color: white;">
+      <h1 class="feedback-extw__title">Give article feedback</h1>
+      <p>Tell us how we can improve the information</p>
+      <span id="feedback-form-popup-container"></span>
+      <form id="feedback-form">
+        <div id="feedback-checkbox-area">
+          <input id="hidden-sheet-id" type="hidden" value="{{site.ff-sheet-id}}">
+          <label>
+            <input type="checkbox" value="outdated-sample"
+                  data-bind="checked: outdatedSample"/>
+            Code samples are inaccurate/outdated.
+        </label>
+          <label>
+            <input type="checkbox" value="wrong-information"
+                  data-bind="checked: wrongInformation"/>
+            I expected to find other information. 
+        </label>
+          <label>
+            <input type="checkbox" value="insufficient-information"
+                  data-bind="checked: insufficientInformation"/>
+            I expected to find more information.
+        </label>
+          <label>
+            <input type="checkbox" value="text-errors" data-bind="checked: textErrors"/>
+            There are typos / broken links / broken page elements.
+        </label>
+          <label>
+            <input type="checkbox" value="inaccurate-content"
+                  data-bind="checked: inaccurateContent"/>
+            Content is inaccurate / outdated.
+        </label>
+          <textarea id="feedback-text-input" placeholder="Enter details or unlisted feedback" data-bind="value: textFeedback" class="feedback-extw__textarea textarea"></textarea>
+          <input id="feedback-email-input" type="email" placeholder="email (optional)" data-email-msg="Email format is not valid" data-bind="value: email" class="feedback-extw__input input"
+          />
+        </div>
+      </form>
+      <div class="feedback-extw__foot">
+        <button id="form-submit-button" class="feedback-extw__button button button--action">Send feedback</button>
+        <button id="form-close-button" class="feedback-extw__button button">Cancel</button>
+      </div>
+    </div>
+  </div>
+  <a id="close-button" class="button"><img src="{{site.baseurl}}/images/close-btn.svg" alt="close" /></a>
+</div>
+<div id="feedback-section-dummy">Dummy</div>

@@ -232,7 +232,6 @@ code, em {
 #page-article {
     background-color: #ffffff;
     line-height: 1.5;
-    padding: 30px 0 0;
     box-sizing: border-box;
     -moz-box-sizing: border-box;
     -webkit-box-sizing: border-box;
@@ -249,7 +248,7 @@ code, em {
 
 #page-article article {
     max-width: 930px;
-    margin: 0 1em 4em 6em;
+    margin: 30px 1em 4em 6em;
 }
 
 #page-article img {
@@ -601,7 +600,6 @@ blockquote th, blockquote td {
 /* Footer */
 footer
 {
-    width: 100%;
     box-sizing: border-box;
     padding: 0;
     border-top: 1px solid #ebecee;
@@ -722,7 +720,6 @@ footer p {
     display: inline-block;
     min-width: 24px;
     min-height: 24px;
-    background: url(../images/search-24.png) 0 0 no-repeat;
     display: none;
 }
 
@@ -879,12 +876,16 @@ footer p {
         display: inline-block;
         margin: 0;
         position: absolute;
-        top: 27px;
+        top: 26px;
         padding: 0;
         right: 1.833em;
         text-align: right;
         left: auto;
         cursor: pointer;
+    }
+
+    .show-search .k-icon {
+        font-size: 24px;
     }
 }
 
@@ -953,3 +954,285 @@ footer p {
     padding: 5px;
 }
 
+#feedback-section, #feedback-section-dummy {
+    height: 57px;
+}
+
+ #feedback-section-dummy {
+     display: none;
+ }
+
+#feedback-section {
+    background-color: #1976d2;
+    color: #FFFFFF;
+    font-family: Roboto, Helvetica, Arial, sans-serif;
+}
+
+#feedback-section.fixed {
+    position: fixed;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    opacity: .9;
+    z-index: 1015;
+}
+
+#close-button {
+    display: none;
+    right: 1.2em;
+    bottom: 12px;
+    position: absolute;
+    cursor: pointer;
+}
+
+#feedback-section.fixed #close-button {
+    display: block;
+}
+
+#close-button img { 
+    width: 24px;
+    height: 24px;
+}
+
+#feedback-section .side-title {
+    font-size: 26px;
+    margin-bottom: 0;
+    flex: 1;
+}
+
+footer, #feedback-menu-container {
+    max-width: 930px;
+    padding: 13px 4em 13px 0;
+}
+
+footer, #feedback-menu-container {
+    margin-left: 18%;
+    padding-left: 6em;
+}
+
+@media (max-width: 1200px) {
+    footer, #feedback-menu-container {
+        margin-left: 0;
+        padding-left: 2em;
+    } 
+
+    #feedback-section.fixed {
+        position: static;
+        bottom: 0;
+        right: 0;
+        left: 0;
+        opacity: 1;
+    }
+
+    #feedback-section-dummy {
+        display: none !important;
+    }
+}
+
+#helpful-buttons-container, #feedback-submitted-container {
+    font-size: 20px;
+    width: 100%;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+}
+
+#helpful-buttons-container .button {
+    text-transform: uppercase;
+    text-align: center;
+    color: #b4daff;
+    cursor: pointer;
+    transition-property: background-color, color;
+    transition-duration: 0.2s;
+    transition-timing-function: ease;
+}
+
+#yesButton {
+    margin-right: 10px;
+}
+
+#noButton {
+    margin-left: 10px;
+}
+
+#helpful-buttons-container .button:hover{
+    text-decoration: none;
+    color: #FFFFFF;
+}
+
+.k-widget.k-window.k-window-titleless {
+    padding: 29px;
+    width: 460px !important;
+    top: 50% !important;
+    left: 50% !important;
+    margin-left: -230px;
+    margin-top: -300px;
+    background-color: #FFFFFF;
+    border: none;
+    position: fixed;
+}
+
+#feedback-form-window input::-webkit-input-placeholder,
+#feedback-form-window textarea::-webkit-input-placeholder,
+#feedback-form-window input:-moz-placeholder,
+#feedback-form-window textarea:-moz-placeholder,
+#feedback-form-window input::-moz-placeholder,
+#feedback-form-window textarea::-moz-placeholder,
+#feedback-form-window input:-ms-input-placeholder,
+#feedback-form-window textarea:-ms-input-placeholder {
+    color: #d9d9d9;
+}
+
+#feedback-form-window .feedback-extw__title {
+    margin: 0;
+    font-size: 24px;
+}
+
+#feedback-form-window .feedback-extw__subtitle {
+    margin-top: 0;
+    margin-bottom: 0;
+    font-size: 1.5em;
+    font-weight: bold;
+    color: #000;
+    text-decoration: none;
+}
+
+#feedback-form-window p:nth-child(2) {
+    margin-top: 10px;
+    margin-bottom: 20px;
+    font-size: 1.12em;
+    font-weight: bold;
+    color: #000;
+    text-decoration: none;
+}
+
+#feedback-form label {
+    display: block;
+    margin: 5px 0 10px;
+}
+
+#feedback-extw__checkbox:after {
+    content: "";
+    display: block;
+    clear: both;
+}
+
+#feedback-form .checkbox__input {
+    float: left;
+}
+
+#feedback-form .checkbox__text {
+    line-height: 18px;
+    margin-left: 5px;
+}
+
+#feedback-form .feedback-extw__textarea,
+#feedback-form .feedback-extw__input {
+    padding: 10px;
+    border: 1px solid #d9d9d9;
+    width: 100%;
+    box-sizing: border-box;
+    font: inherit;
+    font-style: italic;
+}
+
+#feedback-form .feedback-extw__textarea {
+    margin-top: 21px;
+    height: 156px;
+    resize: none;
+}
+
+#feedback-form .feedback-extw__input {
+    margin: 12px 0 6px;
+}
+
+#feedback-form-window button {
+    margin-top: 30px;
+    line-height: 0.933em;
+    font-size: 15px;
+    font-weight: bold;
+    text-align: center;
+    border-radius: 2px;
+    padding: 0.667em 2.000em;
+    background-color: #015991;
+    color: #fff;
+    border-width: 0;
+    cursor: pointer;
+    background-clip: padding-box;
+    border: 1px solid #015991;
+    transition-property: background-color, color;
+    transition-duration: 0.2s;
+    transition-timing-function: ease;
+}
+
+#feedback-form-window button:hover {
+    background-color: #013a5e;
+}
+
+#form-submit-button {
+    margin-left: 5px;
+}
+
+button#form-close-button {
+    background-color: #fff;
+    color: #555;
+    border: 1px solid #ccc;
+}
+
+button#form-close-button:hover {
+    background-color: #ccc;
+}
+
+#feedback-form span.k-tooltip {
+    border: 0;
+    color: #ff0000;
+    font-style: italic;
+    font-size: 12px;
+}
+
+html {
+    padding-top: 0;
+}
+
+#page-inner-content {
+    padding-top: 79px;
+    box-sizing: border-box;
+}
+
+/*#page-inner-content {
+    height: 100%;
+    display: -webkit-box;
+	display: -ms-flexbox;
+	display: -webkit-flex;
+	display: flex;
+    flex-direction: column;
+}
+
+#page-article {
+    -webkit-flex: 1;
+    flex: 1;
+}*/
+
+#page-article {
+    margin-top: 0;
+    margin-bottom: 0;
+    padding-top: 30px;
+    padding-bottom: 4em;
+}
+
+#page-edit-link {
+    margin-top: 79px;
+}
+
+footer {
+    padding-top: 20px;
+    padding-bottom: 20px;
+}
+
+footer p {
+    margin: 0;
+}
+
+html, body {
+    height: 100%;
+}
