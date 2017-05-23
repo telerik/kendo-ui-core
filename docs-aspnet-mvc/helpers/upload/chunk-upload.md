@@ -12,11 +12,11 @@ The chunk upload of files enables the user to send large files, which are upload
 
 > **Important**
 > * The chunk upload functionality is available as of the Kendo UI 2017 R2 release.
-> * The chunk upload functionality is available only in the [asynchronous mode](../../../kendo-ui/controls/editors/upload/modes.html#asynchronous-mode) of the Upload.
+> * The chunk upload functionality is available only in the [asynchronous mode](http://docs.telerik.com/kendo-ui/controls/editors/upload/modes.html#asynchronous-mode) of the Upload.
 
 ## Getting Started
 
-To enable the chunk upload, set up the `ChunkSize` helper method ([`async.chunkSize`](../../../kendo-ui/api/javascript/ui/upload#configuration-async.chunkSize) option) of the Upload.
+To enable the chunk upload, set up the `ChunkSize` helper method ([`async.chunkSize`](http://docs.telerik.com/kendo-ui/api/javascript/ui/upload#configuration-async.chunkSize) option) of the Upload.
 
 ###### Example
 
@@ -108,9 +108,9 @@ public ActionResult ChunkSave(IEnumerable<HttpPostedFileBase> files, string meta
 
 To modify or fine-tune the chunk upload, use any of the following configuration options:
 
-* `Concurrent` ([async.concurrent](../../../kendo-ui/api/javascript/ui/upload#configuration-async.concurrent))&mdash;Controls whether the selected files are uploaded simultaneously or one after the other.
-* `AutoRetryAfter` ([async.autoRetryAfter](../../../kendo-ui/api/javascript/ui/upload#configuration-async.autoRetryAfter))&mdash;The time interval in milliseconds after which the Upload attempts to retry a failed upload.
-* `MaxAutoRetries` ([async.maxAutoRetries](../../../kendo-ui/api/javascript/ui/upload#configuration-async.maxAutoRetries))&mdash;The number of attempts the Upload makes to retry a failed upload before reporting it.
+* `Concurrent` ([async.concurrent](http://docs.telerik.com/kendo-ui/api/javascript/ui/upload#configuration-async.concurrent))&mdash;Controls whether the selected files are uploaded simultaneously or one after the other.
+* `AutoRetryAfter` ([async.autoRetryAfter](http://docs.telerik.com/kendo-ui/api/javascript/ui/upload#configuration-async.autoRetryAfter))&mdash;The time interval in milliseconds after which the Upload attempts to retry a failed upload.
+* `MaxAutoRetries` ([async.maxAutoRetries](http://docs.telerik.com/kendo-ui/api/javascript/ui/upload#configuration-async.maxAutoRetries))&mdash;The number of attempts the Upload makes to retry a failed upload before reporting it.
 
 ###### Example
 
@@ -167,11 +167,11 @@ The server-side implementation entirely depends on the application requirements 
 * [Upload HtmlHelper Modes of Operation]({% slug modesoperation_uploadhelper_aspnetmvc %})
 * [How to Upload Files from Grid Popup Editors in ASP.NET MVC Applications]({% slug howto_uploadfilesgridpopupeditor_uploadaspnetmvc %})
 * [How to Upload Files to Databases in ASP.NET MVC Applications]({% slug howto_uploadfilesdatabases_uploadaspnetmvc %})
-* [Overview of the Kendo UI Upload Widget](../../../kendo-ui/controls/editors/upload/overview)
+* [Overview of the Kendo UI Upload Widget](http://docs.telerik.com/kendo-ui/controls/editors/upload/overview)
 * [Overview of Telerik UI for ASP.NET MVC]({% slug overview_aspnetmvc %})
 * [Fundamentals of Telerik UI for ASP.NET MVC]({% slug fundamentals_aspnetmvc %})
 * [Scaffolding in Telerik UI for ASP.NET MVC]({% slug scaffolding_aspnetmvc %})
-* [Telerik UI for ASP.NET MVC API Reference Folder](../../../kendo-ui/api/Kendo.Mvc/AggregateFunction)
+* [Telerik UI for ASP.NET MVC API Reference Folder](http://docs.telerik.com/kendo-ui/api/Kendo.Mvc/AggregateFunction)
 * [Telerik UI for ASP.NET MVC HtmlHelpers Folder]({% slug overview_autocompletehelper_aspnetmvc %})
 * [Tutorials on Telerik UI for ASP.NET MVC]({% slug overview_timeefficiencyapp_aspnetmvc6 %})
 * [Telerik UI for ASP.NET MVC Troubleshooting]({% slug troubleshooting_aspnetmvc %})

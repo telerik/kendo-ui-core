@@ -169,7 +169,7 @@ Below are listed the steps for you to follow when configuring the receiving of m
                 return Json(new { status = "OK" }, "text/plain");
             }
 
-1. Declare a handler for the [`success` event](../../../kendo-ui/api/javascript/ui/upload#success) and process the response.
+1. Declare a handler for the [`success` event](http://docs.telerik.com/kendo-ui/api/javascript/ui/upload#success) and process the response.
 
     ###### Example
 
@@ -215,11 +215,11 @@ The same approach is applicable for the `remove` handler as well.
 * [Chunk Upload]({% slug chunkupload_uploadhelper_aspnetmvc %})
 * [How to Upload Files from Grid Popup Editors in ASP.NET MVC Applications]({% slug howto_uploadfilesgridpopupeditor_uploadaspnetmvc %})
 * [How to Upload Files to Databases in ASP.NET MVC Applications]({% slug howto_uploadfilesdatabases_uploadaspnetmvc %})
-* [Overview of the Kendo UI Upload Widget](../../../kendo-ui/controls/editors/upload/overview)
+* [Overview of the Kendo UI Upload Widget](http://docs.telerik.com/kendo-ui/controls/editors/upload/overview)
 * [Overview of Telerik UI for ASP.NET MVC]({% slug overview_aspnetmvc %})
 * [Fundamentals of Telerik UI for ASP.NET MVC]({% slug fundamentals_aspnetmvc %})
 * [Scaffolding in Telerik UI for ASP.NET MVC]({% slug scaffolding_aspnetmvc %})
-* [Telerik UI for ASP.NET MVC API Reference Folder](../../../kendo-ui/api/Kendo.Mvc/AggregateFunction)
+* [Telerik UI for ASP.NET MVC API Reference Folder](http://docs.telerik.com/kendo-ui/api/Kendo.Mvc/AggregateFunction)
 * [Telerik UI for ASP.NET MVC HtmlHelpers Folder]({% slug overview_autocompletehelper_aspnetmvc %})
 * [Tutorials on Telerik UI for ASP.NET MVC]({% slug overview_timeefficiencyapp_aspnetmvc6 %})
 * [Telerik UI for ASP.NET MVC Troubleshooting]({% slug troubleshooting_aspnetmvc %})

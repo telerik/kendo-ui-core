@@ -96,12 +96,12 @@ public ActionResult MyModel_Create(MyModel model)
 
 ## See Also
 
-* [ASP.NET MVC API Reference: WindowBuilder](../../../kendo-ui/api/aspnet-mvc/Kendo.Mvc.UI.Fluent/WindowBuilder)
+* [ASP.NET MVC API Reference: WindowBuilder](http://docs.telerik.com/kendo-ui/api/aspnet-mvc/Kendo.Mvc.UI.Fluent/WindowBuilder)
 * [Overview of Telerik UI for ASP.NET MVC]({% slug overview_aspnetmvc %})
 * [Fundamentals of Telerik UI for ASP.NET MVC]({% slug fundamentals_aspnetmvc %})
 * [Scaffolding in Telerik UI for ASP.NET MVC]({% slug scaffolding_aspnetmvc %})
-* [Overview of the Kendo UI Window Widget](../../../kendo-ui/controls/layout/window/overview)
-* [Telerik UI for ASP.NET MVC API Reference Folder](../../../kendo-ui/api/aspnet-mvc/Kendo.Mvc/AggregateFunction)
+* [Overview of the Kendo UI Window Widget](http://docs.telerik.com/kendo-ui/controls/layout/window/overview)
+* [Telerik UI for ASP.NET MVC API Reference Folder](http://docs.telerik.com/kendo-ui/api/aspnet-mvc/Kendo.Mvc/AggregateFunction)
 * [Telerik UI for ASP.NET MVC HtmlHelpers Folder]({% slug overview_autocompletehelper_aspnetmvc %})
 * [Tutorials on Telerik UI for ASP.NET MVC]({% slug overview_timeefficiencyapp_aspnetmvc6 %})
 * [Telerik UI for ASP.NET MVC Troubleshooting]({% slug troubleshooting_aspnetmvc %})

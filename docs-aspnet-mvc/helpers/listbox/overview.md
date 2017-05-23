@@ -197,5 +197,5 @@ You can configure the ListBox `Messages()` for each toolbar command button. The 
 
 ## See Also
 
-* [JavaScript API Reference of the ListBox](../../../kendo-ui/api/javascript/ui/listbox)
+* [JavaScript API Reference of the ListBox](http://docs.telerik.com/kendo-ui/api/javascript/ui/listbox)
 * [ListBox Official Demo](http://demos.telerik.com/aspnet-mvc/listbox/index)

@@ -12,4 +12,4 @@ To see the example, refer to the project on how to [use hierarchy binding with t
 ## See Also
 
 * [Overview of the PanelBar HtmlHelper]({% slug overview_panelbarhelper_aspnetmvc %})
-* [PanelBarBuilder API Reference](../../../kendo-ui/api/Kendo.Mvc.UI.Fluent/PanelBarBuilder)
+* [PanelBarBuilder API Reference](http://docs.telerik.com/kendo-ui/api/Kendo.Mvc.UI.Fluent/PanelBarBuilder)

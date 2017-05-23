@@ -267,7 +267,7 @@ To download the Visual Studio Project, refer to [this GitHub repository](https:/
 
 To pass additional parameters to the action, use the `Data` method. Provide the name of a JavaScript function which will return a JavaScript object with the additional data.
 
-The custom parameter names must not match reserved words, which are used by the Kendo UI DataSource for [sorting](../../../../kendo-ui/api/javascript/data/datasource#configuration-serverSorting), [filtering](../../../../kendo-ui/api/javascript/data/datasource#configuration-serverFiltering), [paging](../../../../kendo-ui/api/javascript/data/datasource#configuration-serverPaging), and [grouping](../../../../kendo-ui/api/javascript/data/datasource#configuration-serverGrouping).
+The custom parameter names must not match reserved words, which are used by the Kendo UI DataSource for [sorting](../http://docs.telerik.com/kendo-ui/api/javascript/data/datasource#configuration-serverSorting), [filtering](../http://docs.telerik.com/kendo-ui/api/javascript/data/datasource#configuration-serverFiltering), [paging](../http://docs.telerik.com/kendo-ui/api/javascript/data/datasource#configuration-serverPaging), and [grouping](../http://docs.telerik.com/kendo-ui/api/javascript/data/datasource#configuration-serverGrouping).
 
 The following example demonstrates how to add the additional parameters to the action method.
 
@@ -418,15 +418,15 @@ Other articles on the Kendo UI Grid for ASP.NET MVC:
 * [Editing of the Grid HtmlHelper]({% slug ajaxediting_grid_aspnetmvc %})
 * [Templating of the Grid HtmlHelper]({% slug clientdetailtemplate_grid_aspnetmvc %})
 * [Troubleshooting of the Grid HtmlHelper]({% slug troubleshoot_gridhelper_aspnetmvc %})
-* [API Reference of the Grid HtmlHelper](../../../kendo-ui/api/Kendo.Mvc.UI.Fluent/GridBuilder)
-* [Overview of the Kendo UI Grid Widget](../../../kendo-ui/controls/data-management/grid/overview)
+* [API Reference of the Grid HtmlHelper](http://docs.telerik.com/kendo-ui/api/Kendo.Mvc.UI.Fluent/GridBuilder)
+* [Overview of the Kendo UI Grid Widget](http://docs.telerik.com/kendo-ui/controls/data-management/grid/overview)
 
 Articles on Telerik UI for ASP.NET MVC:
 
 * [Overview of Telerik UI for ASP.NET MVC]({% slug overview_aspnetmvc %})
 * [Fundamentals of Telerik UI for ASP.NET MVC]({% slug fundamentals_aspnetmvc %})
 * [Scaffolding in Telerik UI for ASP.NET MVC]({% slug scaffolding_aspnetmvc %})
-* [Telerik UI for ASP.NET MVC API Reference Folder](../../../kendo-ui/api/Kendo.Mvc/AggregateFunction)
+* [Telerik UI for ASP.NET MVC API Reference Folder](http://docs.telerik.com/kendo-ui/api/Kendo.Mvc/AggregateFunction)
 * [Telerik UI for ASP.NET MVC HtmlHelpers Folder]({% slug overview_barcodehelper_aspnetmvc %})
 * [Tutorials on Telerik UI for ASP.NET MVC]({% slug overview_timeefficiencyapp_aspnetmvc6 %})
 * [Telerik UI for ASP.NET MVC Troubleshooting]({% slug troubleshooting_aspnetmvc %})

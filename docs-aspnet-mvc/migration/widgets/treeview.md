@@ -106,7 +106,7 @@ The value field is removed. Depending on your use case, apply either of the appr
 
 ### Conditional Load on Demand
 
-The conditional load on demand for some nodes can be achieved through using custom transport, as demonstrated in the article on [mixing local data and remote binding](../../../kendo-ui/controls/navigation/treeview/how-to/mix-local-data-and-remote-loading).
+The conditional load on demand for some nodes can be achieved through using custom transport, as demonstrated in the article on [mixing local data and remote binding](http://docs.telerik.com/kendo-ui/controls/navigation/treeview/how-to/mix-local-data-and-remote-loading).
 
 Define the local transport by using the server-side wrappers in the way shown below.
 
@@ -163,11 +163,11 @@ This functionality requires a custom checkbox template, as demonstrated in the e
         )
     )
 
-For more information on this issue, refer to the article on [how to hide checkboxes for root level](../../../kendo-ui/controls/navigation/treeview/how-to/hide-checkboxes-for-root-level).
+For more information on this issue, refer to the article on [how to hide checkboxes for root level](http://docs.telerik.com/kendo-ui/controls/navigation/treeview/how-to/hide-checkboxes-for-root-level).
 
 #### Node Lines Display
 
-The node-line functionality is not supported out of the box, but can be achieved through custom styling, as demonstrated in the article on [how to show lines between nodes](../../../kendo-ui/controls/navigation/treeview/how-to/show-node-lines).
+The node-line functionality is not supported out of the box, but can be achieved through custom styling, as demonstrated in the article on [how to show lines between nodes](http://docs.telerik.com/kendo-ui/controls/navigation/treeview/how-to/show-node-lines).
 
 ## Client-Side API
 

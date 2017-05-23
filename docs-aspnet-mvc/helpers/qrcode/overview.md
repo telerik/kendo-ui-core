@@ -71,7 +71,7 @@ Below are listed the steps for you to follow when configuring the Kendo UI QRCod
 
 ### Existing Instances
 
-To reference an existing Kendo UI QRCode instance, use the [`jQuery.data()`](http://api.jquery.com/jQuery.data/) configuration option. Once a reference is established, use the [QRCode API](../../../kendo-ui/api/javascript/dataviz/ui/qrcode#methods) to control its behavior.
+To reference an existing Kendo UI QRCode instance, use the [`jQuery.data()`](http://api.jquery.com/jQuery.data/) configuration option. Once a reference is established, use the [QRCode API](http://docs.telerik.com/kendo-ui/api/javascript/dataviz/ui/qrcode#methods) to control its behavior.
 
 ###### Example
 
@@ -85,12 +85,12 @@ To reference an existing Kendo UI QRCode instance, use the [`jQuery.data()`](htt
 
 ## See Also
 
-* [ASP.NET MVC API Reference: QRCodeBuilder](../../../kendo-ui/api/Kendo.Mvc.UI.Fluent/QRCodeBuilder)
+* [ASP.NET MVC API Reference: QRCodeBuilder](http://docs.telerik.com/kendo-ui/api/Kendo.Mvc.UI.Fluent/QRCodeBuilder)
 * [Overview of Telerik UI for ASP.NET MVC]({% slug overview_aspnetmvc %})
 * [Fundamentals of Telerik UI for ASP.NET MVC]({% slug fundamentals_aspnetmvc %})
 * [Scaffolding in Telerik UI for ASP.NET MVC]({% slug scaffolding_aspnetmvc %})
-* [Overview of the Kendo UI QRCode Widget](../../../kendo-ui/controls/barcodes/qrcode/overview)
-* [Telerik UI for ASP.NET MVC API Reference Folder](../../../kendo-ui/api/Kendo.Mvc/AggregateFunction)
+* [Overview of the Kendo UI QRCode Widget](http://docs.telerik.com/kendo-ui/controls/barcodes/qrcode/overview)
+* [Telerik UI for ASP.NET MVC API Reference Folder](http://docs.telerik.com/kendo-ui/api/Kendo.Mvc/AggregateFunction)
 * [Telerik UI for ASP.NET MVC HtmlHelpers Folder]({% slug overview_autocompletehelper_aspnetmvc %})
 * [Tutorials on Telerik UI for ASP.NET MVC]({% slug overview_timeefficiencyapp_aspnetmvc6 %})
 * [Telerik UI for ASP.NET MVC Troubleshooting]({% slug troubleshooting_aspnetmvc %})

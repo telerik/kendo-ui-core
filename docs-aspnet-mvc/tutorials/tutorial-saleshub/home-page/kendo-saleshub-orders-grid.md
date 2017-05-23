@@ -46,7 +46,7 @@ The following example declares what columns the Grid needs to have.
 
 Since a type to the `Grid()` call is specified, now it is possible for you to create `Bound` columns based on properties that exist on that type. A bound column essentially means that only values for the specified property will be displayed in that column. For example, the `columns.Bound(p => p.OrderNumber)` configuration creates a column that displays the `Order Number` for each `CustomerOrderViewModel` object that is bound to the Grid.
 
-You also need to format the values for some fields before they are displayed to the user by using the `Format` function. The `Format` function takes a string that contains the [formatting syntax of Kendo UI](../../../../kendo-ui/api/javascript/kendo#methods-format).
+You also need to format the values for some fields before they are displayed to the user by using the `Format` function. The `Format` function takes a string that contains the [formatting syntax of Kendo UI](../http://docs.telerik.com/kendo-ui/api/javascript/kendo#methods-format).
 
 The last column of the Grid works differently from the other columns. This is because it does not actually display information from a property on the `CustomerOrderViewModel`. The last column contains a link which redirects the user to a page where they can edit the order.
 

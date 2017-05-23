@@ -62,7 +62,7 @@ The following example demonstrates how to customize the column appearance of a s
 >
 > The `Template` method needs a [templated Razor delegate](http://haacked.com/archive/2011/02/27/templated-razor-delegates.aspx) when used in Razor views. The bound item is available through the `@item` parameter.
 
-If the Grid is [Ajax-bound]({% slug ajaxbinding_grid_aspnetmvc %}), use the `ClientTemplate` method. The value should be a string, which represents a valid [Kendo UI Template](../../../kendo-ui/framework/templates/overview).
+If the Grid is [Ajax-bound]({% slug ajaxbinding_grid_aspnetmvc %}), use the `ClientTemplate` method. The value should be a string, which represents a valid [Kendo UI Template](http://docs.telerik.com/kendo-ui/framework/templates/overview).
 
 The following example demonstrates how to customize the column appearance of an Ajax-bound Grid.
 
@@ -169,7 +169,7 @@ The following example demonstrates how to use a JavaScript function in the `Clie
 
 ### How to Use Kendo UI Widgets inside Grid Client Column Templates?
 
-The `script` tags are not automatically evaluated inside a Grid client column template, so the included widgets are not initialized. The scripts must be evaluated manually in the [Grid's `dataBound` event](../../../kendo-ui/api/javascript/ui/grid#events-dataBound).
+The `script` tags are not automatically evaluated inside a Grid client column template, so the included widgets are not initialized. The scripts must be evaluated manually in the [Grid's `dataBound` event](http://docs.telerik.com/kendo-ui/api/javascript/ui/grid#events-dataBound).
 
 The following example demonstrates how to add a Kendo UI Menu inside a Grid column template. Note that the Menu requires the Grid cells to allow overflowing, which is disabled by default.
 
@@ -216,7 +216,7 @@ The following example demonstrates how to add a Kendo UI Menu inside a Grid colu
 
 ### How to Change the Format of Bound Columns?
 
-Use the [`Format`](/api/Kendo.Mvc.UI.Fluent/GridBoundColumnBuilder#formatsystem.string) method. The value should be a valid [`number`](../../../kendo-ui/api/javascript/kendo#standard-number-formats) or [`date`](../../../kendo-ui/api/javascript/kendo#standard-date-formats) format.
+Use the [`Format`](/api/Kendo.Mvc.UI.Fluent/GridBoundColumnBuilder#formatsystem.string) method. The value should be a valid [`number`](http://docs.telerik.com/kendo-ui/api/javascript/kendo#standard-number-formats) or [`date`](http://docs.telerik.com/kendo-ui/api/javascript/kendo#standard-date-formats) format.
 
 The following example demonstrates how to specify the format of a bound column.
 
@@ -311,7 +311,7 @@ The following example demonstrates how to send additional data in an Ajax-bound 
 
 ### How to Reload Data in Ajax-Bound Grids?
 
-Use the [`read`](../../../kendo-ui/api/javascript/data/datasource#read) method of the DataSource.
+Use the [`read`](http://docs.telerik.com/kendo-ui/api/javascript/data/datasource#read) method of the DataSource.
 
 The following example demonstrates how to reload an Ajax-bound Grid.
 
@@ -384,7 +384,7 @@ The following example demonstrates how to avoid circular references.
 
 ### How to Handle Errors in Ajax Binding Mode?
 
-Use the [`error`](../../../kendo-ui/api/javascript/data/datasource#error) event of the DataSource. Apply the `Error` method from the fluent API to specify the name of the JavaScript function which will handle the event.
+Use the [`error`](http://docs.telerik.com/kendo-ui/api/javascript/data/datasource#error) event of the DataSource. Apply the `Error` method from the fluent API to specify the name of the JavaScript function which will handle the event.
 
 The following example demonstrates how to handle errors in the Ajax binding mode.
 
@@ -581,15 +581,15 @@ Other articles on the Kendo UI Grid for ASP.NET MVC:
 * [Editing of the Grid HtmlHelper]({% slug ajaxediting_grid_aspnetmvc %})
 * [Templating of the Grid HtmlHelper]({% slug clientdetailtemplate_grid_aspnetmvc %})
 * [Troubleshooting for the Grid HtmlHelper]({% slug troubleshoot_gridhelper_aspnetmvc %})
-* [API Reference of the Grid HtmlHelper](../../../kendo-ui/api/Kendo.Mvc.UI.Fluent/GridBuilder)
-* [Overview of the Kendo UI Grid Widget](../../../kendo-ui/controls/data-management/grid/overview)
+* [API Reference of the Grid HtmlHelper](http://docs.telerik.com/kendo-ui/api/Kendo.Mvc.UI.Fluent/GridBuilder)
+* [Overview of the Kendo UI Grid Widget](http://docs.telerik.com/kendo-ui/controls/data-management/grid/overview)
 
 Articles on Telerik UI for ASP.NET MVC:
 
 * [Overview of Telerik UI for ASP.NET MVC]({% slug overview_aspnetmvc %})
 * [Fundamentals of Telerik UI for ASP.NET MVC]({% slug fundamentals_aspnetmvc %})
 * [Scaffolding in Telerik UI for ASP.NET MVC]({% slug scaffolding_aspnetmvc %})
-* [Telerik UI for ASP.NET MVC API Reference Folder](../../../kendo-ui/api/Kendo.Mvc/AggregateFunction)
+* [Telerik UI for ASP.NET MVC API Reference Folder](http://docs.telerik.com/kendo-ui/api/Kendo.Mvc/AggregateFunction)
 * [Telerik UI for ASP.NET MVC HtmlHelpers Folder]({% slug overview_barcodehelper_aspnetmvc %})
 * [Tutorials on Telerik UI for ASP.NET MVC]({% slug overview_timeefficiencyapp_aspnetmvc6 %})
 * [Telerik UI for ASP.NET MVC Troubleshooting]({% slug troubleshooting_aspnetmvc %})

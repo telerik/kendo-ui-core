@@ -109,7 +109,7 @@ The Sortable can operate without a hint. To disable the hint, set it to an empty
 
 ## Event Handling
 
-You can subscribe to all Sortable [events](../../../kendo-ui/api/javascript/ui/sortable#events).
+You can subscribe to all Sortable [events](http://docs.telerik.com/kendo-ui/api/javascript/ui/sortable#events).
 
 ### By Handler Name
 
@@ -212,7 +212,7 @@ The following example demonstrates how to subscribe to events by a template dele
 
 ### Existing Instances
 
-To reference an existing Kendo UI Sortable instance, use the [`jQuery.data()`](http://api.jquery.com/jQuery.data/) configuration option. Once a reference is established, use the [Sortable API](../../../kendo-ui/api/javascript/ui/sortable#methods) to control its behavior.
+To reference an existing Kendo UI Sortable instance, use the [`jQuery.data()`](http://api.jquery.com/jQuery.data/) configuration option. Once a reference is established, use the [Sortable API](http://docs.telerik.com/kendo-ui/api/javascript/ui/sortable#methods) to control its behavior.
 
 ###### Example
 
@@ -226,12 +226,12 @@ To reference an existing Kendo UI Sortable instance, use the [`jQuery.data()`](h
 
 ## See Also
 
-* [ASP.NET MVC API Reference: SortableBuilder](../../../kendo-ui/api/Kendo.Mvc.UI.Fluent/SortableBuilder)
+* [ASP.NET MVC API Reference: SortableBuilder](http://docs.telerik.com/kendo-ui/api/Kendo.Mvc.UI.Fluent/SortableBuilder)
 * [Overview of Telerik UI for ASP.NET MVC]({% slug overview_aspnetmvc %})
 * [Fundamentals of Telerik UI for ASP.NET MVC]({% slug fundamentals_aspnetmvc %})
 * [Scaffolding in Telerik UI for ASP.NET MVC]({% slug scaffolding_aspnetmvc %})
-* [Overview of the Kendo UI Sortable Widget](../../../kendo-ui/controls/interactivity/sortable/overview)
-* [Telerik UI for ASP.NET MVC API Reference Folder](../../../kendo-ui/api/Kendo.Mvc/AggregateFunction)
+* [Overview of the Kendo UI Sortable Widget](http://docs.telerik.com/kendo-ui/controls/interactivity/sortable/overview)
+* [Telerik UI for ASP.NET MVC API Reference Folder](http://docs.telerik.com/kendo-ui/api/Kendo.Mvc/AggregateFunction)
 * [Telerik UI for ASP.NET MVC HtmlHelpers Folder]({% slug overview_autocompletehelper_aspnetmvc %})
 * [Tutorials on Telerik UI for ASP.NET MVC]({% slug overview_timeefficiencyapp_aspnetmvc6 %})
 * [Telerik UI for ASP.NET MVC Troubleshooting]({% slug troubleshooting_aspnetmvc %})

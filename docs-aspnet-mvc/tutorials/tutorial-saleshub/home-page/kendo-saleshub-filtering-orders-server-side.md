@@ -33,7 +33,7 @@ The following example is an excerpt from the declaration of the **Orders** Grid&
         .ServerOperation(true)
         .PageSize(20)
 
-The most important part of the DataSource configuration is the `ServerOperation(true)` function call. The passing of `true` to this function makes the resulting client-side Kendo UI DataSource include any [filters](../../../../kendo-ui/api/javascript/data/datasource#methods-filter) that are applied to it in the request, which it sends to the server. In passing along any filters that need to be applied, the DataSource will also pass up any paging information (if it has been configured for it) to the server in its request.
+The most important part of the DataSource configuration is the `ServerOperation(true)` function call. The passing of `true` to this function makes the resulting client-side Kendo UI DataSource include any [filters](../http://docs.telerik.com/kendo-ui/api/javascript/data/datasource#methods-filter) that are applied to it in the request, which it sends to the server. In passing along any filters that need to be applied, the DataSource will also pass up any paging information (if it has been configured for it) to the server in its request.
 
 For the full declaration for the **Orders** Grid, refer to **Views/Home/Index.cshtml**.
 

@@ -94,7 +94,7 @@ Below are listed the steps for you to follow when configuring the hybrid Kendo U
 
 ## Event Handling
 
-You can subscribe to all hybrid Switch [events](../../../../kendo-ui/api/javascript/mobile/ui/switch#events).
+You can subscribe to all hybrid Switch [events](../http://docs.telerik.com/kendo-ui/api/javascript/mobile/ui/switch#events).
 
 ### By Handler Name
 
@@ -133,7 +133,7 @@ The following example demonstrates how to subscribe to events by a handler name.
 
 ### Instances
 
-You can reference a hybrid Switch instance by using the [jQuery.data()](http://api.jquery.com/jQuery.data/) method and the value specified through the `Name()` method. Once a reference is established, use the [hybrid Switch API](../../../../kendo-ui/api/javascript/mobile/ui/switch#methods) to control its behavior.
+You can reference a hybrid Switch instance by using the [jQuery.data()](http://api.jquery.com/jQuery.data/) method and the value specified through the `Name()` method. Once a reference is established, use the [hybrid Switch API](../http://docs.telerik.com/kendo-ui/api/javascript/mobile/ui/switch#methods) to control its behavior.
 
 ###### Example
 
@@ -152,8 +152,8 @@ You can reference a hybrid Switch instance by using the [jQuery.data()](http://a
 
 ## See Also
 
-* [ASP.NET MVC API Reference: SwitchBuilder](../../../kendo-ui/api/Kendo.Mvc.UI.Fluent/MobileSwitchBuilder)
-* [Overview of the Hybrid UI Switch Widget](../../../kendo-ui/controls/hybrid/switch/switch)
+* [ASP.NET MVC API Reference: SwitchBuilder](http://docs.telerik.com/kendo-ui/api/Kendo.Mvc.UI.Fluent/MobileSwitchBuilder)
+* [Overview of the Hybrid UI Switch Widget](http://docs.telerik.com/kendo-ui/controls/hybrid/switch/switch)
 * [Overview of Telerik UI for ASP.NET MVC]({% slug overview_aspnetmvc %})
 * [Fundamentals of Telerik UI for ASP.NET MVC]({% slug fundamentals_aspnetmvc %})
 * [Scaffolding in Telerik UI for ASP.NET MVC]({% slug scaffolding_aspnetmvc %})

@@ -49,11 +49,11 @@ The following example demonstrates how to enable the Excel export functionality.
     )
 ```
 
-To initiate the Excel export through code, call the [`saveAsExcel`](../../../kendo-ui/api/javascript/ui/grid.html#methods-saveAsExcel) method.
+To initiate the Excel export through code, call the [`saveAsExcel`](http://docs.telerik.com/kendo-ui/api/javascript/ui/grid.html#methods-saveAsExcel) method.
 
 > **Important**
 >
-> Older browsers, such as Internet Explorer 9 and below and Safari, require the implementation of a [server proxy](../../../kendo-ui/framework/save-files/introduction).
+> Older browsers, such as Internet Explorer 9 and below and Safari, require the implementation of a [server proxy](http://docs.telerik.com/kendo-ui/framework/save-files/introduction).
 
 ### Output the Result
 
@@ -111,9 +111,9 @@ The following example demonstrates how to export all the data.
 
 ### Customize Excel Documents
 
-The [`excelExport`](../../../kendo-ui/api/javascript/ui/grid#events-excelExport) event allows the customization of the generated Excel document. The `workbook` event argument exposes the generated Excel workbook configuration.
+The [`excelExport`](http://docs.telerik.com/kendo-ui/api/javascript/ui/grid#events-excelExport) event allows the customization of the generated Excel document. The `workbook` event argument exposes the generated Excel workbook configuration.
 
-For more information on how the Excel documents work, refer to [this article](../../../kendo-ui/framework/excel/introduction).
+For more information on how the Excel documents work, refer to [this article](http://docs.telerik.com/kendo-ui/framework/excel/introduction).
 
 For more information on a possible approach to customize the generated Excel document, refer to [this runnable how-to example]({% slug howto_alternatingrows_aspnetmvcgrid %}).
 
@@ -125,7 +125,7 @@ For more information on how to use a column template that does not contain HTML,
 
 ### Define the Column Format
 
-The Kendo UI Grid does not use the `Format` option during Excel export because some Kendo UI formats are incompatible with Excel. To format the cell values, set the [`format`](../../../kendo-ui/api/javascript/ooxml/workbook.html#configuration-sheets.rows.cells.format) option of the cells.
+The Kendo UI Grid does not use the `Format` option during Excel export because some Kendo UI formats are incompatible with Excel. To format the cell values, set the [`format`](http://docs.telerik.com/kendo-ui/api/javascript/ooxml/workbook.html#configuration-sheets.rows.cells.format) option of the cells.
 
 The [page on creating a custom number format](https://support.office.com/en-us/article/Create-a-custom-number-format-78f2a361-936b-4c03-8772-09fab54be7f4) describes the formats supported by Excel.
 
@@ -158,9 +158,9 @@ For examples on how to export Excel files, refer to the [example on the integrat
 
 ## See Also
 
-* [Create Excel Documents with Kendo UI](../../../kendo-ui/framework/excel/introduction)
-* [Save Files with Kendo UI](../../../kendo-ui/framework/save-files/introduction)
-* [API Reference: kendo.ooxml.Workbook](../../../kendo-ui/api/javascript/ooxml/workbook)
+* [Create Excel Documents with Kendo UI](http://docs.telerik.com/kendo-ui/framework/excel/introduction)
+* [Save Files with Kendo UI](http://docs.telerik.com/kendo-ui/framework/save-files/introduction)
+* [API Reference: kendo.ooxml.Workbook](http://docs.telerik.com/kendo-ui/api/javascript/ooxml/workbook)
 
 Other articles on the Kendo UI Grid for ASP.NET MVC:
 
@@ -172,15 +172,15 @@ Other articles on the Kendo UI Grid for ASP.NET MVC:
 * [Editing of the Grid HtmlHelper]({% slug ajaxediting_grid_aspnetmvc %})
 * [Templating of the Grid HtmlHelper]({% slug clientdetailtemplate_grid_aspnetmvc %})
 * [Troubleshooting for the Grid HtmlHelper]({% slug troubleshoot_gridhelper_aspnetmvc %})
-* [API Reference of the Grid HtmlHelper](../../../kendo-ui/api/Kendo.Mvc.UI.Fluent/GridBuilder)
-* [Overview of the Kendo UI Grid Widget](../../../kendo-ui/controls/data-management/grid/overview)
+* [API Reference of the Grid HtmlHelper](http://docs.telerik.com/kendo-ui/api/Kendo.Mvc.UI.Fluent/GridBuilder)
+* [Overview of the Kendo UI Grid Widget](http://docs.telerik.com/kendo-ui/controls/data-management/grid/overview)
 
 Articles on Telerik UI for ASP.NET MVC:
 
 * [Overview of Telerik UI for ASP.NET MVC]({% slug overview_aspnetmvc %})
 * [Fundamentals of Telerik UI for ASP.NET MVC]({% slug fundamentals_aspnetmvc %})
 * [Scaffolding in Telerik UI for ASP.NET MVC]({% slug scaffolding_aspnetmvc %})
-* [Telerik UI for ASP.NET MVC API Reference Folder](../../../kendo-ui/api/Kendo.Mvc/AggregateFunction)
+* [Telerik UI for ASP.NET MVC API Reference Folder](http://docs.telerik.com/kendo-ui/api/Kendo.Mvc/AggregateFunction)
 * [Telerik UI for ASP.NET MVC HtmlHelpers Folder]({% slug overview_barcodehelper_aspnetmvc %})
 * [Tutorials on Telerik UI for ASP.NET MVC]({% slug overview_timeefficiencyapp_aspnetmvc6 %})
 * [Telerik UI for ASP.NET MVC Troubleshooting]({% slug troubleshooting_aspnetmvc %})

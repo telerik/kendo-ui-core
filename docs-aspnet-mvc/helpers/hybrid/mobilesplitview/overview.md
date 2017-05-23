@@ -115,7 +115,7 @@ Below are listed the steps for you to follow when configuring the hybrid Kendo U
 
 ## Event Handling
 
-You can subscribe to all hybrid SplitView [events](../../../../kendo-ui/api/javascript/mobile/ui/splitview#events).
+You can subscribe to all hybrid SplitView [events](../http://docs.telerik.com/kendo-ui/api/javascript/mobile/ui/splitview#events).
 
 ### By Handler Name
 
@@ -184,7 +184,7 @@ The following example demonstrates how to subscribe to events by a handler name.
 
 ### Instances
 
-You can reference a hybrid SplitView instance by using the [jQuery.data()](http://api.jquery.com/jQuery.data/) method and the value specified through the `Name()` method. Once a reference is established, use the [hybrid SplitView API](../../../../kendo-ui/api/javascript/mobile/ui/splitview#methods) to control its behavior.
+You can reference a hybrid SplitView instance by using the [jQuery.data()](http://api.jquery.com/jQuery.data/) method and the value specified through the `Name()` method. Once a reference is established, use the [hybrid SplitView API](../http://docs.telerik.com/kendo-ui/api/javascript/mobile/ui/splitview#methods) to control its behavior.
 
 ###### Example
 
@@ -211,8 +211,8 @@ You can reference a hybrid SplitView instance by using the [jQuery.data()](http:
 
 ## See Also
 
-* [ASP.NET MVC API Reference: SplitViewBuilder](../../../kendo-ui/api/Kendo.Mvc.UI.Fluent/MobileSplitViewBuilder)
-* [Overview of the Hybrid UI SplitView Widget](../../../kendo-ui/controls/hybrid/splitview/splitview)
+* [ASP.NET MVC API Reference: SplitViewBuilder](http://docs.telerik.com/kendo-ui/api/Kendo.Mvc.UI.Fluent/MobileSplitViewBuilder)
+* [Overview of the Hybrid UI SplitView Widget](http://docs.telerik.com/kendo-ui/controls/hybrid/splitview/splitview)
 * [Overview of Telerik UI for ASP.NET MVC]({% slug overview_aspnetmvc %})
 * [Fundamentals of Telerik UI for ASP.NET MVC]({% slug fundamentals_aspnetmvc %})
 * [Scaffolding in Telerik UI for ASP.NET MVC]({% slug scaffolding_aspnetmvc %})

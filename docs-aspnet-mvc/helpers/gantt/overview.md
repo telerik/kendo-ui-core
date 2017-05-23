@@ -8,7 +8,7 @@ position: 1
 
 # Gantt
 
-The Gantt HtmlHelper extension is a server-side wrapper for the [Kendo UI Gantt](../../../kendo-ui/api/web/gantt) widget. It allows you to configure the Kendo UI Gantt from server-side code, helps with data binding and editing.
+The Gantt HtmlHelper extension is a server-side wrapper for the [Kendo UI Gantt](http://docs.telerik.com/kendo-ui/api/web/gantt) widget. It allows you to configure the Kendo UI Gantt from server-side code, helps with data binding and editing.
 
 ## Configuration
 
@@ -148,13 +148,13 @@ Below are listed the steps for you to follow when binding the Kendo UI Gantt to 
 
 ## See Also
 
-* [ASP.NET MVC API Reference: GanttBuilder](../../../kendo-ui/api/Kendo.Mvc.UI.Fluent/GanttBuilder)
+* [ASP.NET MVC API Reference: GanttBuilder](http://docs.telerik.com/kendo-ui/api/Kendo.Mvc.UI.Fluent/GanttBuilder)
 * [Server Binding of the Gantt HtmlHelper]({% slug serverbinding_gantthelper_aspnetmvc %})
 * [Overview of Telerik UI for ASP.NET MVC]({% slug overview_aspnetmvc %})
 * [Fundamentals of Telerik UI for ASP.NET MVC]({% slug fundamentals_aspnetmvc %})
 * [Scaffolding in Telerik UI for ASP.NET MVC]({% slug scaffolding_aspnetmvc %})
-* [Overview of the Kendo UI Gantt Widget](../../../kendo-ui/controls/scheduling/gantt/overview)
-* [Telerik UI for ASP.NET MVC API Reference Folder](../../../kendo-ui/api/Kendo.Mvc/AggregateFunction)
+* [Overview of the Kendo UI Gantt Widget](http://docs.telerik.com/kendo-ui/controls/scheduling/gantt/overview)
+* [Telerik UI for ASP.NET MVC API Reference Folder](http://docs.telerik.com/kendo-ui/api/Kendo.Mvc/AggregateFunction)
 * [Telerik UI for ASP.NET MVC HtmlHelpers Folder]({% slug overview_autocompletehelper_aspnetmvc %})
 * [Tutorials on Telerik UI for ASP.NET MVC]({% slug overview_timeefficiencyapp_aspnetmvc6 %})
 * [Telerik UI for ASP.NET MVC Troubleshooting]({% slug troubleshooting_aspnetmvc %})

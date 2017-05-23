@@ -8,7 +8,7 @@ position: 1
 
 # ColorPalette HtmlHelper Overview
 
-The ColorPalette HtmlHelper extension is a server-side wrapper for the [Kendo UI ColorPalette](../../../kendo-ui/api/javascript/ui/colorpalette) widget.
+The ColorPalette HtmlHelper extension is a server-side wrapper for the [Kendo UI ColorPalette](http://docs.telerik.com/kendo-ui/api/javascript/ui/colorpalette) widget.
 
 ## Configuration
 
@@ -46,7 +46,7 @@ Below are listed the steps for you to follow when configuring the Kendo UI Color
 
 ## Event Handling
 
-You can subscribe to all ColorPalette [events](../../../kendo-ui/api/javascript/ui/colorpalette#events).
+You can subscribe to all ColorPalette [events](http://docs.telerik.com/kendo-ui/api/javascript/ui/colorpalette#events).
 
 ### By Handler Name
 
@@ -107,7 +107,7 @@ The following example demonstrates how to subscribe to events by a template dele
 
 ### Existing Instances
 
-To reference an existing Kendo UI ColorPalette instance, use the [`jQuery.data()`](http://api.jquery.com/jQuery.data/) configuration option. Once a reference is established, use the [ColorPalette API](../../../kendo-ui/api/javascript/ui/colorpalette#methods) to control its behavior.
+To reference an existing Kendo UI ColorPalette instance, use the [`jQuery.data()`](http://api.jquery.com/jQuery.data/) configuration option. Once a reference is established, use the [ColorPalette API](http://docs.telerik.com/kendo-ui/api/javascript/ui/colorpalette#methods) to control its behavior.
 
 ###### Example
 
@@ -121,12 +121,12 @@ To reference an existing Kendo UI ColorPalette instance, use the [`jQuery.data()
 
 ## See Also
 
-* [ASP.NET MVC API Reference: ColorPaletteBuilder](../../../kendo-ui/api/Kendo.Mvc.UI.Fluent/ColorPaletteBuilder)
+* [ASP.NET MVC API Reference: ColorPaletteBuilder](http://docs.telerik.com/kendo-ui/api/Kendo.Mvc.UI.Fluent/ColorPaletteBuilder)
 * [Overview of Telerik UI for ASP.NET MVC]({% slug overview_aspnetmvc %})
 * [Fundamentals of Telerik UI for ASP.NET MVC]({% slug fundamentals_aspnetmvc %})
 * [Scaffolding in Telerik UI for ASP.NET MVC]({% slug scaffolding_aspnetmvc %})
-* [Overview of the Kendo UI ColorPicker Widget](../../../kendo-ui/controls/editors/colorpicker/overview)
-* [Telerik UI for ASP.NET MVC API Reference Folder](../../../kendo-ui/api/Kendo.Mvc/AggregateFunction)
+* [Overview of the Kendo UI ColorPicker Widget](http://docs.telerik.com/kendo-ui/controls/editors/colorpicker/overview)
+* [Telerik UI for ASP.NET MVC API Reference Folder](http://docs.telerik.com/kendo-ui/api/Kendo.Mvc/AggregateFunction)
 * [Telerik UI for ASP.NET MVC HtmlHelpers Folder]({% slug overview_autocompletehelper_aspnetmvc %})
 * [Tutorials on Telerik UI for ASP.NET MVC]({% slug overview_timeefficiencyapp_aspnetmvc6 %})
 * [Telerik UI for ASP.NET MVC Troubleshooting]({% slug troubleshooting_aspnetmvc %})

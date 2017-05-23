@@ -120,7 +120,7 @@ Below are listed the steps for you to follow when configuring the hybrid Kendo U
 
 ## Event Handling
 
-You can subscribe to all hybrid ModalView [events](../../../../kendo-ui/api/javascript/mobile/ui/modalview#events).
+You can subscribe to all hybrid ModalView [events](../http://docs.telerik.com/kendo-ui/api/javascript/mobile/ui/modalview#events).
 
 ### By Handler Name
 
@@ -177,7 +177,7 @@ The following example demonstrates how to subscribe to events by a handler name.
 
 ### Instances
 
-You can reference a hybrid ModalView instance by using the code from the example below. Once a reference is established, use the [hybrid ModalView API](../../../../kendo-ui/api/javascript/mobile/ui/modalview#methods) to control its behavior.
+You can reference a hybrid ModalView instance by using the code from the example below. Once a reference is established, use the [hybrid ModalView API](../http://docs.telerik.com/kendo-ui/api/javascript/mobile/ui/modalview#methods) to control its behavior.
 
 ###### Example
 
@@ -199,8 +199,8 @@ You can reference a hybrid ModalView instance by using the code from the example
 
 ## See Also
 
-* [ASP.NET MVC API Reference: ModalViewBuilder](../../../kendo-ui/api/Kendo.Mvc.UI.Fluent/MobileModalViewBuilder)
-* [Overview of the Hybrid UI ModalView Widget](../../../kendo-ui/controls/hybrid/modalview/modalview)
+* [ASP.NET MVC API Reference: ModalViewBuilder](http://docs.telerik.com/kendo-ui/api/Kendo.Mvc.UI.Fluent/MobileModalViewBuilder)
+* [Overview of the Hybrid UI ModalView Widget](http://docs.telerik.com/kendo-ui/controls/hybrid/modalview/modalview)
 * [Overview of Telerik UI for ASP.NET MVC]({% slug overview_aspnetmvc %})
 * [Fundamentals of Telerik UI for ASP.NET MVC]({% slug fundamentals_aspnetmvc %})
 * [Scaffolding in Telerik UI for ASP.NET MVC]({% slug scaffolding_aspnetmvc %})

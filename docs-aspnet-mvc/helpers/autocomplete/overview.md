@@ -8,7 +8,7 @@ position: 1
 
 # AutoComplete HtmlHelper Overview
 
-The AutoComplete HtmlHelper extension is a server-side wrapper for the [Kendo UI AutoComplete](../../../kendo-ui/api/javascript/ui/autocomplete) widget.
+The AutoComplete HtmlHelper extension is a server-side wrapper for the [Kendo UI AutoComplete](http://docs.telerik.com/kendo-ui/api/javascript/ui/autocomplete) widget.
 
 ## Getting Started
 
@@ -298,11 +298,11 @@ For more information, refer to the [demo on grouping](http://demos.telerik.com/a
 
 > **Important**
 >
-> The data source sorts the grouped data either in ascending or descending order. To persist a specific group order, use the [server grouping feature](../../../kendo-ui/api/javascript/data/datasource#configuration-serverGrouping). To define the `serverGrouping` option, use the DataSource `ServerGrouping` method.
+> The data source sorts the grouped data either in ascending or descending order. To persist a specific group order, use the [server grouping feature](http://docs.telerik.com/kendo-ui/api/javascript/data/datasource#configuration-serverGrouping). To define the `serverGrouping` option, use the DataSource `ServerGrouping` method.
 
 ## Event Handling
 
-You can subscribe to all AutoComplete [events](../../../kendo-ui/api/javascript/ui/autocomplete#events).
+You can subscribe to all AutoComplete [events](http://docs.telerik.com/kendo-ui/api/javascript/ui/autocomplete#events).
 
 ### By Handler Name
 
@@ -381,7 +381,7 @@ The following example demonstrates how to subscribe to events by a template dele
 
 ### Existing Instances
 
-To reference an existing Kendo UI AutoComplete instance, use the [`jQuery.data()`](http://api.jquery.com/jQuery.data/) configuration option. Once a reference is established, use the [AutoComplete API](../../../kendo-ui/api/javascript/ui/autocomplete#methods) to control its behavior.
+To reference an existing Kendo UI AutoComplete instance, use the [`jQuery.data()`](http://api.jquery.com/jQuery.data/) configuration option. Once a reference is established, use the [AutoComplete API](http://docs.telerik.com/kendo-ui/api/javascript/ui/autocomplete#methods) to control its behavior.
 
 ###### Example
 
@@ -395,12 +395,12 @@ To reference an existing Kendo UI AutoComplete instance, use the [`jQuery.data()
 
 ## See Also
 
-* [ASP.NET MVC API Reference: AutoCompleteBuilder](../../../kendo-ui/api/Kendo.Mvc.UI.Fluent/AutoCompleteBuilder)
+* [ASP.NET MVC API Reference: AutoCompleteBuilder](http://docs.telerik.com/kendo-ui/api/Kendo.Mvc.UI.Fluent/AutoCompleteBuilder)
 * [Overview of Telerik UI for ASP.NET MVC]({% slug overview_aspnetmvc %})
 * [Fundamentals of Telerik UI for ASP.NET MVC]({% slug fundamentals_aspnetmvc %})
 * [Scaffolding in Telerik UI for ASP.NET MVC]({% slug scaffolding_aspnetmvc %})
-* [Overview of the Kendo UI AutoComplete Widget](../../../kendo-ui/controls/editors/autocomplete/overview)
-* [Telerik UI for ASP.NET MVC API Reference Folder](../../../kendo-ui/api/Kendo.Mvc/AggregateFunction)
+* [Overview of the Kendo UI AutoComplete Widget](http://docs.telerik.com/kendo-ui/controls/editors/autocomplete/overview)
+* [Telerik UI for ASP.NET MVC API Reference Folder](http://docs.telerik.com/kendo-ui/api/Kendo.Mvc/AggregateFunction)
 * [Telerik UI for ASP.NET MVC HtmlHelpers Folder]({% slug overview_barcodehelper_aspnetmvc %})
 * [Tutorials on Telerik UI for ASP.NET MVC]({% slug overview_timeefficiencyapp_aspnetmvc6 %})
 * [Telerik UI for ASP.NET MVC Troubleshooting]({% slug troubleshooting_aspnetmvc %})

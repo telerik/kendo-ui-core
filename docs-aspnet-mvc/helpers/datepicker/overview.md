@@ -50,7 +50,7 @@ Below are listed the steps for you to follow when configuring the Kendo UI DateP
 
 ## Event Handling
 
-You can subscribe to all DatePicker [events](../../../kendo-ui/api/javascript/ui/datepicker#events).
+You can subscribe to all DatePicker [events](http://docs.telerik.com/kendo-ui/api/javascript/ui/datepicker#events).
 
 ### By Handler Name
 
@@ -136,7 +136,7 @@ The following example demonstrates how to subscribe to events by a template dele
 
 ### Existing Instances
 
-To reference an existing Kendo UI DatePicker instance, use the [`jQuery.data()`](http://api.jquery.com/jQuery.data/) method and use the [DatePicker API](../../../kendo-ui/api/javascript/ui/datepicker#methods) to control its behavior.
+To reference an existing Kendo UI DatePicker instance, use the [`jQuery.data()`](http://api.jquery.com/jQuery.data/) method and use the [DatePicker API](http://docs.telerik.com/kendo-ui/api/javascript/ui/datepicker#methods) to control its behavior.
 
 ###### Example
 
@@ -150,13 +150,13 @@ To reference an existing Kendo UI DatePicker instance, use the [`jQuery.data()`]
 
 ## See Also
 
-* [ASP.NET MVC API Reference: DatePickerBuilder](../../../kendo-ui/api/Kendo.Mvc.UI.Fluent/DatePickerBuilder)
+* [ASP.NET MVC API Reference: DatePickerBuilder](http://docs.telerik.com/kendo-ui/api/Kendo.Mvc.UI.Fluent/DatePickerBuilder)
 * [How to Create Masked DatePickers in ASP.NET MVC Apps]({% slug howto_create_masked_datepickers_datepickaspnetmvc %})
 * [Overview of Telerik UI for ASP.NET MVC]({% slug overview_aspnetmvc %})
 * [Fundamentals of Telerik UI for ASP.NET MVC]({% slug fundamentals_aspnetmvc %})
 * [Scaffolding in Telerik UI for ASP.NET MVC]({% slug scaffolding_aspnetmvc %})
-* [Overview of the Kendo UI DatePicker Widget](../../../kendo-ui/controls/editors/datepicker/overview)
-* [Telerik UI for ASP.NET MVC API Reference Folder](../../../kendo-ui/api/Kendo.Mvc/AggregateFunction)
+* [Overview of the Kendo UI DatePicker Widget](http://docs.telerik.com/kendo-ui/controls/editors/datepicker/overview)
+* [Telerik UI for ASP.NET MVC API Reference Folder](http://docs.telerik.com/kendo-ui/api/Kendo.Mvc/AggregateFunction)
 * [Telerik UI for ASP.NET MVC HtmlHelpers Folder]({% slug overview_autocompletehelper_aspnetmvc %})
 * [Tutorials on Telerik UI for ASP.NET MVC]({% slug overview_timeefficiencyapp_aspnetmvc6 %})
 * [Telerik UI for ASP.NET MVC Troubleshooting]({% slug troubleshooting_aspnetmvc %})

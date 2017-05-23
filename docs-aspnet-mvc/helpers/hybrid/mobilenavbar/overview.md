@@ -105,7 +105,7 @@ Below are listed the steps for you to follow when configuring the hybrid Kendo U
 
 ### Instances
 
-You can reference a hybrid NavBar instance by using the code from the example below. Once a reference is established, use the [hybrid NavBar API](../../../../kendo-ui/api/javascript/mobile/ui/navbar#methods) to control its behavior.
+You can reference a hybrid NavBar instance by using the code from the example below. Once a reference is established, use the [hybrid NavBar API](../http://docs.telerik.com/kendo-ui/api/javascript/mobile/ui/navbar#methods) to control its behavior.
 
 ###### Example
 
@@ -134,8 +134,8 @@ You can reference a hybrid NavBar instance by using the code from the example be
 
 ## See Also
 
-* [ASP.NET MVC API Reference: NavBarBuilder](../../../kendo-ui/api/Kendo.Mvc.UI.Fluent/MobileNavBarBuilder)
-* [Overview of the Hybrid UI NavBar Widget](../../../kendo-ui/controls/hybrid/navbar/navbar)
+* [ASP.NET MVC API Reference: NavBarBuilder](http://docs.telerik.com/kendo-ui/api/Kendo.Mvc.UI.Fluent/MobileNavBarBuilder)
+* [Overview of the Hybrid UI NavBar Widget](http://docs.telerik.com/kendo-ui/controls/hybrid/navbar/navbar)
 * [Overview of Telerik UI for ASP.NET MVC]({% slug overview_aspnetmvc %})
 * [Fundamentals of Telerik UI for ASP.NET MVC]({% slug fundamentals_aspnetmvc %})
 * [Scaffolding in Telerik UI for ASP.NET MVC]({% slug scaffolding_aspnetmvc %})
