@@ -691,6 +691,29 @@
 
     });
 
+    test("autoWidth adds one pixel to avoid browser pixel rounding", function(assert) {
+        var multiselect = new MultiSelect(select, {
+            autoWidth: true,
+            animation:{
+                open: {
+                    duration:0
+                },
+                close: {
+                    duration:0
+                },
+            },
+            dataSource: {
+                data: ["Short item", "An item with really, really, really, really, really, really, really, really, really, long text","Short item"]
+            }
+        });
+
+        multiselect.open();
+        equal(multiselect.popup.element.parent(".k-animation-container").width(), multiselect.popup.element.outerWidth(true) + 1);
+        multiselect.close();
+        multiselect.open();
+        equal(multiselect.popup.element.parent(".k-animation-container").width(), multiselect.popup.element.outerWidth(true) + 1);
+    });
+
     asyncTest("update popup height when no items are found", 1, function() {
         popuplateSelect(30);
 
