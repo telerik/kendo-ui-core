@@ -581,10 +581,14 @@ var __meta__ = { // jshint ignore:line
 
             setTimeout(function() {
                 var result = that._parse(element.value);
-                var isValid = that._numericRegex(numberFormat).test(element.value);
 
-                if (result === NULL || that._adjust(result) !== result || !isValid) {
+                if (result === NULL) {
                     that._update(value);
+                } else {
+                    element.value = result.toString().replace(POINT, numberFormat[POINT]);
+                    if (that._adjust(result) !== result || !that._numericRegex(numberFormat).test(element.value)) {
+                        that._update(value);
+                    }
                 }
             });
         },
