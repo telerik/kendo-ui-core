@@ -8,15 +8,17 @@ position: 2
 
 # Global Events
 
-Kendo UI directives emit a `kendoWidgetCreated` event for each widget that is created, and a `kendoRendered` event after all widgets, defined in the page, were created.
+After each widget is created, the Kendo UI directives emit a `kendoWidgetCreated` event.
+
+After all widgets that are defined on the page are created, the Kendo UI directives emit a `kendoRendered` event.
 
 ## Types
 
-### Upon Widget Creation: kendoWidgetCreated
+### Upon Widget Creation
 
-Suppose you want to create a TreeView widget that automatically expands the checked items upon initialization. You cannot easily do it without the `kendoWidgetCreated` event, because the widget is not instantiated at the time your `controller` function runs, but after it was finalized. This is logical as the widget is built from data which is defined within the `controller`.
+Suppose you want to create a TreeView widget that automatically expands the checked items upon initialization. You cannot easily do it without the `kendoWidgetCreated` event because the widget is not instantiated at the time your `controller` function runs but only after it was finalized. This is logical as the widget is built from data which is defined within the `controller`.
 
-The example below demonstrates how to listen to the `kendoWidgetCreated` event.
+The following example demonstrates how to listen to the `kendoWidgetCreated` event.
 
 ###### Example
 
@@ -91,11 +93,11 @@ angular.module("app", ["kendo.directives"]).controller("MyCtrl", function($scope
 </script>
 ```
 
-### After Widget Creation: kendoRendered
+### After Widget Creation
 
-Because browsers render data asynchronously, the `kendoRendered` event is useful to manipulate the view of a page while the widgets, defined on this page, finish their rendering. For example, you can use `kendoRendered` to initially hide the view and then display it when the widgets are already initialized, or you can show a **Loading...** overlay, or whatever you decide fits to your project.
+Because browsers render data asynchronously, the `kendoRendered` event is useful to manipulate the view of a page while the widgets that are defined on this page finish their rendering. For example, you can use `kendoRendered` to initially hide the view and then display it when the widgets are already initialized, or you can show a **Loading...** overlay, or whatever you decide fits to your project.
 
-The example below demonstrates how to listen to the `kendoRendered` event.
+The following example demonstrates how to listen to the `kendoRendered` event.
 
 ###### Example
 

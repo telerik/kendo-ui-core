@@ -8,7 +8,9 @@ position: 4
 
 # Grid Settings and Usage
 
-[The Grid](http://www.telerik.com/kendo-ui/grid) is one of the most complex Kendo UI widgets. This article outlines some of its particularities regarding the AngularJS integration supported by Kendo UI.
+The [Grid](http://www.telerik.com/kendo-ui/grid) is one of the most complex Kendo UI widgets.
+
+This article outlines some of its particularities regarding the AngularJS integration supported by Kendo UI.
 
 ## Escaping Execution of Title Expression
 
@@ -16,7 +18,7 @@ position: 4
 >
 > AngularJS evaluates a template expression placed as [`column.title`](/api/javascript/ui/grid#configuration-columns.title) content. To avoid this behavior, set a [`ng-non-bindable`](https://docs.angularjs.org/api/ng/directive/ngNonBindable) attribute through the [`headerAttributes`](/api/javascript/ui/grid#configuration-columns.headerAttributes) so that AngularJS skips the expression evaluation.
 
-The example below demonstrates how to use the `headerAttributes` to prevent the execution of expressions inside the title content.
+The following example demonstrates how to use the `headerAttributes` to prevent the execution of expressions inside the title content.
 
 ###### Example
 
@@ -61,8 +63,6 @@ The example below demonstrates how to use the `headerAttributes` to prevent the 
 
 ## Attributes
 
-### k-on-change
-
 If you assign a `k-on-change` event handler, it is evaluated in a scope, which contains additional local variables:
 
 - `kendoEvent`&mdash;The `change` event as triggered by Kendo UI.
@@ -71,7 +71,7 @@ If you assign a `k-on-change` event handler, it is evaluated in a scope, which c
 
 > **Important**
 >
-> The `selected` object is a jQuery one which references DOM elements. As of AngularJS 1.2.24 release this is disallowed in template expressions "[for security reasons](https://docs.angularjs.org/error/$parse/isecdom)". Therefore, the following will not work with Angular 1.2.24:
+> The `selected` object is a jQuery object which references DOM elements. As of the AngularJS 1.2.24 release, this is not allowed to use in template expressions "[for security reasons](https://docs.angularjs.org/error/$parse/isecdom)". As a result, the following snippet will not work with Angular 1.2.24:
 >
 >     k-on-change="myChangeHandler(selected)"
 >
@@ -81,9 +81,9 @@ If you assign a `k-on-change` event handler, it is evaluated in a scope, which c
 >
 > Obviously, the handler function needs to take that into account.
 
-When the Grid is not in a multiple selection mode, the `data` above will not be an array, but a single data item, and that item is also accessible as `dataItem`. When the cell selection is allowed, an additional `columns` variable is present. This variable is an array containing the indexes of the columns where cells are selected. Choose the grid's selection mode and then select items from the grid and see what variables are available.
+When the Grid is not in a multiple selection mode, the `data` above will not be an array, but a single data item, and that item is also accessible as `dataItem`. When the cell selection is allowed, an additional `columns` variable is present. This variable is an array containing the indexes of the columns where cells are selected. To see what variables are available, choose the selection mode of the Grid and select items from it.
 
-The example below demonstrates how to handle the `change` event in AngularJS.
+The following example demonstrates how to handle the `change` event in AngularJS.
 
 ###### Example
 
@@ -134,9 +134,9 @@ The example below demonstrates how to handle the `change` event in AngularJS.
 
 ### Dynamic Columns
 
-When you need to, say, load a column definition from the server, you need to postpone the widget initialization until the data is available, because the Grid does not support the option to define columns once the widget is created. That is where the `k-ng-delay` attribute comes in handy. You can use `$timeout` to emulate networking as the data is asynchronously set in scope.
+If your project requires you to load a column definition from the server, you need to postpone the widget initialization until the data is available because the Grid does not support the definition of columns once the widget is created. To achieve this behavior, use the `k-ng-delay` attribute. To emulate networking as the data is asynchronously set in scope, use `$timeout`.
 
-The example below demonstrates how to dynamically set the Grid columns in AngularJS.
+The following example demonstrates how to dynamically set the Grid columns in AngularJS.
 
 ###### Example
 
@@ -166,9 +166,9 @@ angular.module("app", ["kendo.directives"]).controller("MyCtrl", function($scope
 
 ### Templates
 
-The Grid supports a lot of user-customizable templates. You can define the `rowTemplate` if you want to completely customize the way each row is displayed, or define individual cell templates by adding a `template` property to your column definitions. The difference from applying plain Kendo is that when the Grid is created with the AngularJS directive, the templates can contain live `\{\{angular\}\}` bits. The `rowTemplate`, `columns.template` and `columns.groupFooterTemplate` are compiled with AngularJS in a scope containing a `dataItem` variable, which points to the data model of the current item. The `dataItem` in a `groupFooterTemplate` is an object with fields and their corresponding aggregates.
+The Grid supports templates that can be customized by the user. To completely customize the way each row is displayed, define the `rowTemplate`. To define individual cell templates, add a `template` property to your column definitions. The difference from applying plain Kendo UI is that when the Grid is created with the AngularJS directive, the templates can contain live `\{\{angular\}\}` bits. The `rowTemplate`, `columns.template`, and `columns.groupFooterTemplate` are compiled with AngularJS in a scope that contains a `dataItem` variable, which points to the data model of the current item. The `dataItem` in a `groupFooterTemplate` is an object with fields and their corresponding aggregates.
 
-The example below demonstrates how to set the Grid row template (`rowTemplate`) in AngularJS via markup. It is also possible to define it in the Grid options object, as when not using Angular.
+The following example demonstrates how to set the Grid row template (`rowTemplate`) by using markup. You can also define it in the Grid `options` object in the same way as when you do not use AngularJS.
 
 ###### Example
 
@@ -209,10 +209,9 @@ angular.module("app", ["kendo.directives"]).controller("MyCtrl", function($scope
 </script>
 ```
 
-When you use aggregates, the `column` and `aggregate` information becomes available in the `footerTemplate` of the Grid through `{% raw %}{{ column }}{% endraw %}` and `{% raw %}{{ aggregate }}{% endraw %}` respectively.
-To access the aggregates of the columns in the `groupFooterTemplate` use the `dataItem` variable with the `dataItem.field.aggregate` syntax.
+When you use aggregates, the `column` and `aggregate` information becomes available in the `footerTemplate` of the Grid through `{% raw %}{{ column }}{% endraw %}` and `{% raw %}{{ aggregate }}{% endraw %}` respectively. To access the aggregates of the columns in the `groupFooterTemplate`, use the `dataItem` variable with the `dataItem.field.aggregate` syntax.
 
-The example below demonstrates how to use the `sum` aggregate in a `footerTemplate` and a `groupFooterTemplate` and apply an Angular currency pipe to it.
+The following example demonstrates how to use the `sum` aggregate in a `footerTemplate` and a `groupFooterTemplate`, and apply an Angular currency pipe to it.
 
 ###### Example
 
@@ -266,15 +265,13 @@ The example below demonstrates how to use the `sum` aggregate in a `footerTempla
 
 > **Important**
 >
-> When using `rowTemplate`, include the `data-uid="#: uid #"` attribute in the toplevel row element as described in the [Grid documentation]({% slug howto_use_dates_inside_row_template_grid %}). You must not use an AngularJS template like `data-uid="{% raw %}{{dataItem.uid}}{% endraw %}"` because it is compiled after the grid is displayed and the widget cannot discriminate between the different rows and the data items they belong to.
+> When using `rowTemplate`, include the `data-uid="#: uid #"` attribute in the top-level row element as described in the [Grid documentation]({% slug howto_use_dates_inside_row_template_grid %}). You must not use an AngularJS template, such as `data-uid="{% raw %}{{dataItem.uid}}{% endraw %}"`, because it is compiled after the Grid is displayed and the widget is not able to discriminate between the different rows and the data items they belong to.
 
 ## Server Requests
 
-### HTTP Service Binding the Grid
+To take full control on the logic that performs the request to the server, define the different transport operations as functions. Inside the function, you can use the `$http` or the `$.ajax` methods to perform what is needed. When done (inside the success callback), pass the result to the `success` function part of the events arguments object.
 
-To take full control on the logic that performs the request to the server, all you have to do is to define the different transport operations as functions. Inside the function you can use the `$http` or the `$.ajax` methods to perform what is needed. When done (inside the success callback), just pass the result to the `success` function part of the events arguments object.
-
-The example below demonstrates how to use `$http` to bind the Grid.
+The following example demonstrates how to use `$http` to bind the Grid.
 
 ###### Example
 

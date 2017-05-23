@@ -9,9 +9,9 @@ position: 6
 
 # Right-to-Left Languages
 
-Right-to-Left, or RTL, support is a phrase commonly-used to describe the ability of a library, website, or application to handle and respond to users, who communicate through a right-to-left language such as Arabic, Hebrew, Chinese or Japanese. Left-to-right is the default language input for most users of the web, but many websites and applications wish to also provide RTL support for their visitors.
+Right-to-left (RTL) support refers to the ability of a library, website, or application to handle and respond to users who communicate through a right-to-left language such as Arabic, Hebrew, Chinese or Japanese.
 
-Admittedly, RTL falls more into the internationalization space. However, we like to think of RTL as an accessibility feature as well. After all, RTL is about making user experiences more accessible for visitors working in right-to-left languages alike.
+The default language input for most users of the web is left-to-right. However, many websites and applications wish to also provide RTL support for their visitors. The RTL functionality falls more into the internationalization space but can be considered as an accessibility feature as well. After all, RTL is about making user experiences more accessible for visitors who use right-to-left languages.
 
 ## Styles
 
@@ -71,25 +71,23 @@ Then, add a click handler for the button and toggle RTL support by adding or rem
 
 With that handler in place, the user can now trigger RTL support on-demand.
 
-## `Accept-Language` Header
+## Automatic Implementation
 
-In some cases, you may want to trigger RTL support automatically, as opposed to on a user action. In these cases, you can inspect the `[Accept-Language](http://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.4)` HTTP header to determine if a user prefers an RTL language.
+Your project might require you to trigger the RTL support automatically and not upon user interaction. In such cases, you can inspect the [`Accept-Language`](http://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.4) HTTP header to determine if a user prefers an RTL language.
 
 The `Accept-Language` header is provided with every HTTP request, and is typically exposed as a property on a request object in server-side frameworks. If you are using ASP.NET, for instance, you can access the `Accept-Language` header by calling
 
 	userLangs = Request.Headers["Accept-Language"];
 
-For PHP use the `$_SERVER` object:
+For PHP, use the `$_SERVER` object:
 
 	userLangs = $_SERVER['HTTP_ACCEPT_LANGUAGE'];
 
-For Rails applications use the `request.env` object:
+For Rails applications, use the `request.env` object:
 
 	userLangs = request.env["HTTP_ACCEPT_LANGUAGE"]
 
 Note that the `Accept-Language` header may return a comma-separated list of languages, ordered by preference. In such cases, be prepared to split the returned value into an array or list and inspect the first element to determine if adding the `k-rtl` class to the returned markup is necessary.
-
-For additional information on Kendo UI RTL support, including its built-in behavior and layout considerations, see the [RTL Support](/web/appearance-rtl) help topic.
 
 ## See Also
 

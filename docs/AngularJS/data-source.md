@@ -8,15 +8,17 @@ position: 3
 
 # Directives with DataSource
 
-Most Kendo UI widgets work with a DataSource object. Kendo UI strives hard to keep simple cases simple, so you do not always have to create the DataSource object yourself.
+Most Kendo UI widgets work with a DataSource object.
+
+Kendo UI strives hard to keep simple cases simple so that you do not always have to create the DataSource object.
 
 ## Actions
 
-### Update the DataSource
+### Updating the DataSource
 
 Below is an example with static, local data. When you select an item in the Grid, two input fields become available and they are bound to that item's data. Editing the data in the input fields works as expected: the Grid updates.
 
-The example below demonstrates how to try to update the data source.
+The following example demonstrates how to try to update the data source.
 
 ###### Example
 
@@ -60,7 +62,7 @@ angular.module("app", ["kendo.directives"]).controller("MyCtrl", function($scope
 </script>
 ```
 
-### Update the DataSource Object
+### Updating the DataSource Object
 
 However, if you click the **UPDATE FROM CODE** button, nothing appears to happen. The reason why this is so is because the grid's data source is actually a different object from `$scope.gridData`. When the widget initializes, it creates a `DataSource` object as a copy of the original object. Changing the original object has no effect on the grid.
 

@@ -5,13 +5,13 @@ description: "Learn the basics when working with the ListBox tag helper for ASP.
 slug: taghelpers_listbox_aspnetcore
 ---
 
-# ListBox Tag Helper
+# ListBox Tag Helper Overview
 
 The ListBox tag helper is a server-side wrapper for the [Kendo UI ListBox](http://demos.telerik.com/aspnet-mvc/listbox/index).
 
 It displays a list of data that is contained in a box and allows single or multiple selection, reordering of selected items, and deleting items and features keyboard navigation as well as the dragging and dropping of items. You can also connect the ListBox with another list-box and customize the widget with the use of templates, toolbar positioning, placeholder and hint, and localization of its command buttons messages.
 
-For more information, refer to the article on the [ListBox HtmlHelper for ASP.NET MVC]({% slug overview_listboxhelper_aspnetmvc %}).
+For more information, refer to the article on the [ListBox HtmlHelper for ASP.NET MVC](http://docs.telerik.com/aspnet-mvc/helpers/listbox/overview).
 
 ## Basic Usage
 
@@ -101,8 +101,8 @@ The following example demonstrates the basic configuration for the ListBox tag h
 
 ## See Also
 
-* [JavaScript API Reference of the ListBox](/api/javascript/ui/listbox)
-* [ListBox HtmlHelper for ASP.NET MVC]({% slug overview_listboxhelper_aspnetmvc %})
+* [JavaScript API Reference of the ListBox](../../../kendo-ui/api/javascript/ui/listbox)
+* [ListBox HtmlHelper for ASP.NET MVC](http://docs.telerik.com/aspnet-mvc/helpers/listbox/overview)
 * [Overview of Telerik UI for ASP.NET Core - RC1]({% slug overview_aspnetmvc6_aspnetmvc %})
 * [Get Started with Telerik UI for ASP.NET MVC in ASP.NET Core Projects]({% slug gettingstarted_aspnetmvc6_aspnetmvc %})
 * [Get Started with Telerik UI for ASP.NET MVC in ASP.NET Core Projects on Linux]({% slug gettingstartedlinux_aspnetmvc6_aspnetmvc %})

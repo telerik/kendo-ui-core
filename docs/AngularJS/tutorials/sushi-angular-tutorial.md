@@ -1,17 +1,17 @@
 ---
-title: Build the Hybrid UI Sushi Application
-page_title: Build the Hybrid UI Sushi Application | Kendo UI Hybrid Components
+title: Building the Hybrid UI Sushi Application
+page_title: Building the Hybrid UI Sushi Application | Kendo UI Hybrid Components
 description: "Build the Sushi single-page application by using the Kendo UI hybrid components in AngularJS."
 previous_url: /controls/hybrid/angular/sushi-angular-tutorial, /controls/hybrid/support/angular/tutorials/sushi-angular-tutorial
 slug: buildappswithangular_tutorial_hybridkendoui
 position: 1
 ---
 
-# Build the Hybrid UI Sushi Application
+# Building the Hybrid UI Sushi Application
 
-As of the Kendo UI Q3 2014 release, Kendo UI includes AngularJS directives for some of its Hybrid UI components, such as the hybrid mobile Application and View, the SplitView, and the ModalView. In this context, the mobile views support AngularJS controllers, directives and two-way data binding expressions.
+As of the Kendo UI Q3 2014 release, the suite includes AngularJS directives for some of its Hybrid UI components such as the hybrid mobile Application and View, the SplitView, and the ModalView.
 
-This article introduces the AngularJS integration with the hybrid mobile widgets in Kendo UI and walks you through the construction of an AngularJS Kendo UI mobile web application.
+In this context, the mobile views support AngularJS controllers, directives and two-way data-binding expressions. This article introduces the AngularJS integration with the hybrid mobile widgets in Kendo UI and walks you through the construction of an AngularJS Kendo UI mobile web application.
 
 ## Description
 
@@ -30,7 +30,7 @@ For a live preview of the application that you are going to build, [click here](
 
 ## Getting Started
 
-### Make the Setup
+### Setting Up
 
 Create a new empty HTML file and include jQuery, AngularJS, and Kendo UI. In this article you are going to [load the prerequisites from CDN]({% slug kendoui_cdn_services_installation %}). Alternatively, you may [download and host Kendo UI in your project]({% slug getting_started_installation_kendoui %}).
 
@@ -59,7 +59,7 @@ Create a new empty HTML file and include jQuery, AngularJS, and Kendo UI. In thi
 >
 > In order for the AngularJS bindings to be activated, you must load `angular.js` before Kendo UI.
 
-### Initialize the Application
+### Initializing the Application
 
 To initialize the hybrid mobile application, add a `kendo-mobile-application` attribute to the `body` element together with the `ng-app` attribute. The `kendo-mobile-application` attribute represents an AngularJS directive which is used to flag the html element that Kendo UI should consider to be the root element of our mobile application. This gives developers the freedom to specify if the entire html page or only a portion of it should be treated as Kendo UI Mobile application container.
 
@@ -92,7 +92,7 @@ To initialize the hybrid mobile application, add a `kendo-mobile-application` at
     </body>
     </html>
 
-### Create the Home View
+### Creating the Home View
 
 The **Home** View will display a list of featured products and is also going to be the initial View of the application.
 
@@ -114,7 +114,7 @@ Run the application. The screen is expected to display the index View.
 
 For a live preview, click [here](http://dojo.telerik.com/@valchev/exeS).
 
-### Make the Application SEO-Friendly
+### Making the Application SEO-Friendly
 
 To [create a SEO (Search Engine Optimization)-friendly](http://googlewebmastercentral.blogspot.com/2009/10/proposal-for-making-ajax-crawlable.html) mobile application, all you need to do is turn on the [`hashBang`](/api/javascript/mobile/application#configuration-hashBang) configuration. The configuration can also be set directly [in the markup]({% slug angularjs_integration_directives %}#widget-options-in-html).
 
@@ -122,11 +122,11 @@ To [create a SEO (Search Engine Optimization)-friendly](http://googlewebmasterce
 
     <body kendo-mobile-application k-hash-bang="true" ng-app="sushiMobileApp">
 
-## Display List of Data
+## Displaying List of Data
 
 Now you have a very basic mobile application running,so it is time to add some data. You are going to create a controller for the index View, a [DataSource]({% slug overview_kendoui_datasourcecomponent %}) that will be responsible for loading the data, and a [hybrid mobile ListView](/mobile/listview/overview) widget that will be responsible for displaying it.
 
-### Add the View Controller
+### Adding the View Controller
 
 Create a new AngularJS controller and name it `indexController`.
 
@@ -145,7 +145,7 @@ Use the `ng-controller` directive to associate the `indexController` with the `i
         Index view
     </kendo-mobile-view>
 
-### Add Service and Application DataSource
+### Adding Service and Application DataSource
 
 You are now going to load the data from an external JSON file called `menu.json`. The data is to be used in multiple application Views which is why the DataSource instance should be shared across multiple controllers. To organize the code, create an [AngularJS service](https://docs.angularjs.org/guide/services) called `sushiCart` that holds the application DataSource and methods. The service is going to be injected later in the mobile View controllers.
 
@@ -200,7 +200,7 @@ Last, declare dependency for the `sushiCart` service in the `indexController` an
         }])
 
 <!--*-->
-### Create ListView and Bind It to DataSource
+### Creating and Binding ListView to DataSource
 
 To insert a ListView in the `index` view, add a `<kendo-mobile-list-view></kendo-mobile-list-view>` element and bind the `productsDataSource` through the `k-data-source` attribute. It is mandatory to also define a template that determines the way the data is displayed.
 
@@ -218,7 +218,7 @@ Now define a basic template to verify that the data is loaded and displayed corr
 
 For a live preview, click [here](http://dojo.telerik.com/@valchev/exeS/3).
 
-## Add the Layout
+## Adding the Layout
 
 Now, create the application [layout]({% slug layout_hybridkendoui %}). To define a Layout, add a `<kendo-mobile-layout>` tag to the page and set its `id` option.
 
@@ -264,7 +264,7 @@ Reload the application and see the new look. Have in mind that at present the **
 
 For a live preview, click [here](http://dojo.telerik.com/@valchev/exeS/4).
 
-## Create the Our Menu View
+## Creating the Our Menu View
 
 The **Our Menu** View is going to display a list of all products grouped by their first letter in an alphabetical order.
 
@@ -282,7 +282,7 @@ Add a new mobile View called **Our Menu** and add a new ListView with ID `menuLi
         $scope.sushiCart = sushiCart;
     }])
 
-## Use Event Handlers
+## Using Event Handlers
 
 Now you are going to configure the ListView located in the **Home** View to display only the featured products and the ListView located in **Our Menu** View to display a list of all products grouped by their first letter and ordered alphabetically. To do that, use the [DataSource API](/api/javascript/data/datasource#methods) and the [`beforeShow`](/api/javascript/mobile/ui/view#events-beforeShow) event of the mobile View.
 
@@ -329,7 +329,7 @@ The `filterFeatured` and `groupByCategory` event handlers should be declared in 
 
 For a live preview, click [here](http://dojo.telerik.com/@valchev/exeS/5).
 
-## Customize Templates
+## Customizing Templates
 
 Now you are going to customize the ListView item template&mdash;add the image of the product, information about the price, as well as a button that would allow the user to add the product to the cart. Since both ListViews share the same template, extract it in a separate `<script>` tag to avoid code duplication.
 
@@ -403,7 +403,7 @@ Last, tell the ListViews to use the new template. Add the `k-template="sushiCart
 
 For a live preview, click [here](http://dojo.telerik.com/@valchev/exeS/6).
 
-## Display Details for Each Record
+## Displaying Record Details
 
 Note that in the template an anchor element is added, which leads to a details View, but the link is not functional yet. Now, create and bind the details View. Add a new `<kendo-mobile-view>` tag with an ID `details`, create a `detailsController`, and hook up to the `show` event of the View.
 
@@ -480,7 +480,7 @@ Now if the user clicks on an item, the application navigates to a new View and d
 
 For a live preview, click [here](http://dojo.telerik.com/@valchev/exeS/7).
 
-## Create the Cart View
+## Creating the Cart View
 
 The **Cart** View is going to show the Sushi products, added to the cart, as well as the total price and a **Checkout** button.
 
@@ -535,11 +535,11 @@ Add `cartController` with a dependency to the `sushiCart` and `templates` servic
 
 For a live preview, click [here](http://dojo.telerik.com/@valchev/exeS/8).
 
-## Add Some Functionality
+## Adding Functionalities
 
 The `click` event handlers that are added to the template are not yet implemented. Since those methods are used by different views in this application, define the event handlers inside the `sushiCart` service.
 
-### Add to Cart
+### Adding to Cart
 
 The `addToCart` method is called when the buttons located in **Home** ListView, **Our Menu** ListView and **Details** ListView are clicked.
 
@@ -577,7 +577,7 @@ The `addToCart` method is called when the buttons located in **Home** ListView, 
         {{dataItem.price | currency}}
     </kendo-mobile-button>
 
-### Remove from Cart
+### Removing from Cart
 
 The `removeItem` method is called when the **Delete** button in the **Cart** ListView is pressed.
 
@@ -609,7 +609,7 @@ The `removeItem` method is called when the **Delete** button in the **Cart** Lis
         >&nbsp;&\\#x2716;&nbsp;
     </kendo-mobile-button>
 
-### Checkout
+### Checking Out
 
 Now add the **Chekout** button.
 
@@ -636,7 +636,7 @@ The `checkout` method is called when the **Checkout** button in the **Cart** Lis
 
     <kendo-mobile-button id="checkout" class="red-button" href="#!done" k-on-click="sushiCart.checkout()" ng-show="sushiCart.added.length">Checkout</kendo-mobile-button>
 
-### Calculate the Total Price
+### Calculating the Total Price
 
 The `showTotal` method is called when the user navigates to the **Cart** View. It calculates and returns the total price of all items added to the cart.
 
@@ -657,7 +657,7 @@ The total price is displayed in the **Cart** View.
 
     <h2 id="total">{{sushiCart.showTotal()}}</h2>
 
-### Toggle Visibility of Labels
+### Toggling Visibility of Labels
 
 ###### Example
 
@@ -673,7 +673,7 @@ The `showLabel` method is used to determine whether the ordered label is to be d
 
 For a live preview, click [here](http://dojo.telerik.com/@valchev/exeS/9).
 
-## Create the Account View
+## Creating the Account View
 
 The **Account** View is going to display some basic information for the user such as the name, email address, and notification preferences. Add a new View with ID `account` and set its title and layout options. Inside the View, create a ListView widget. Unlike other ListView widgets in the application, this one is not going to be bound to DataSource. Items are directly set in the HTML.
 
@@ -702,7 +702,7 @@ Note that it is possible to include other widgets in the ListView items&mdash;th
 
 For a live preview, click [here](http://dojo.telerik.com/@valchev/exeS/10).
 
-## Create the Done View
+## Creating the Done View
 
 The **Done** View is going to be shown after checkout and is to indicate that the operation was completed successfully.
 
@@ -725,7 +725,7 @@ The **Done** View is going to be shown after checkout and is to indicate that th
 
 For a live preview, click [here](http://dojo.telerik.com/@valchev/exeS/11).
 
-## Handle Remote Views
+## Handling Remote Views
 
 The hybrid mobile Kendo UI Application can load Views remotely by using AJAX. If the navigational widget `href` attribute value does not start with a hash (#), the application considers the View to be remote, and issues an AJAX request to the provided URL. For the sake of this example, the last View of this application is a remote one.
 

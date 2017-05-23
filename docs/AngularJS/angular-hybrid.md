@@ -9,11 +9,13 @@ position: 5
 
 # AngularJS for Hybrid UI
 
-As of the Kendo UI Q3 2014 release, Kendo UI includes AngularJS directives for some of its Hybrid UI components, such as the hybrid mobile Application and View, the SplitView, and the ModalView. In this context, the mobile views support AngularJS controllers, directives and two-way data binding expressions.
+As of the Kendo UI Q3 2014 release, the suite includes AngularJS directives for some of its Hybrid UI components such as the hybrid mobile Application and View, the SplitView, and the ModalView.
+
+In this context, the mobile views support AngularJS controllers, directives and two-way data binding expressions.
 
 ## Getting Started
 
-### Use the Hybrid UI Application Directive
+The following example demonstrates how to use the Hybrid UI Application directive. By default, the `kendo-mobile-application` directive is set to the `body` element with `ng-app`.
 
 ###### Example
 
@@ -36,13 +38,11 @@ As of the Kendo UI Q3 2014 release, Kendo UI includes AngularJS directives for s
         </script>
     </body>
 
-By default, the `kendo-mobile-application` directive should be set to the `body` element with the `ng-app` one.
-
 ## Routing
 
-The mobile application instantiates and maintains its own routing mechanism based on the [`router` component]({% slug router_kendoui_singlepageapplication %}), which automatically matches and instantiates views when navigating.
+The mobile application instantiates and maintains its own routing mechanism based on the [`router`]({% slug router_kendoui_singlepageapplication %}) component which automatically matches and instantiates views when navigating.
 
-Note that unlike the [`ng-route`, `ng-view`](https://docs.angularjs.org/api/ngRoute) and the [`ui-router`](https://github.com/angular-ui/ui-router) implementations, the mobile application does not unload the previous view when navigating to the new one. Also, AngularJS routing mechanisms are not supported.
+Note that unlike the [`ng-route`, `ng-view`](https://docs.angularjs.org/api/ngRoute), and the [`ui-router`](https://github.com/angular-ui/ui-router) implementations, the mobile application does not unload the previous view when navigating to the new one. Also, AngularJS routing mechanisms are not supported.
 
 ## Controllers
 
@@ -135,7 +135,7 @@ The widget is instantiated from the `kendo-mobile-layout` directive. The header 
 
 ## Widget Directives Attributes
 
-The hybrid mobile widgets may be configured via the `k-` prefixed attributes. More information about the attributes parsing is available in the [introductory article on AngularJS]({% slug angularjs_integration_directives %}).
+The hybrid mobile widgets may be configured via the `k-` prefixed attributes. For more information on the parsing of attributes, refer to the [introductory article on AngularJS]({% slug angularjs_integration_directives %}).
 
 ## See also
 

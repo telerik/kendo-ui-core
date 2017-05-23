@@ -8,13 +8,13 @@ position: 1
 
 # Accessibility Overview
 
-Web Accessibility, simply put, is the creation of sites and applications that can be fully experienced by the broadest number of users. That includes disabled users, who typically visit the sites we create with the help of assistive technologies such as screen readers.
+In terms of web components, accessibility means that the web sites and applications provide full control over their features by enabling users with disabilities to access them through assistive technologies such as screen readers.
 
 ## Importance
 
-For the most basic, text-driven web experiences, these technologies work well, and disabled users greatly benefit. However, the Web has exploded well beyond the realm of text-based experiences in the last decade, and assistive technologies have struggled to keep up.
+Assistive technologies work well for the most basic and text-driven web sites and applications. However, the Web is dynamically changing and is now well beyond the realm of text-based experiences. As a result, assistive technologies struggle to keep up.
 
-The good news is that there is something we, as web developers, can do to easily bridge the gap to those assistive technologies, which enables the accessibility tools to better aid disabled users as they interact with the sites we create. By providing things like full keyboard support, high-contrast visual elements, text-based equivalents of non-text elements and by adhering to standards like [WAI-ARIA](http://www.w3.org/WAI/PF/aria-practices/), [WCAG 2.0](http://www.w3.org/TR/WCAG20/), and [Section 508](http://www.section508.gov), we have the tools we need to create accessible and rich Internet applications.
+Web developers can do a lot to bridge this gap between the current challenges which web applications pose to disabled users and the capabilities which assistive technologies support. By providing features, such as full keyboard support, high-contrast visual elements, and text-based equivalents of non-text elements, and by adhering to standards like [WAI-ARIA](http://www.w3.org/WAI/PF/aria-practices/), [WCAG 2.0](http://www.w3.org/TR/WCAG20/), and [Section 508](http://www.section508.gov), developers deliver completely accessible and rich Internet applications.
 
 ## See Also
 

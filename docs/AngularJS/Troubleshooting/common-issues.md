@@ -14,11 +14,9 @@ This page provides solutions to common issues you might encounter while handling
 
 ### Widgets Are Not Initialized
 
-The Kendo UI controls are designed to evaluate all `tag` attributes&mdash;even HTML attributes&mdash;which match their specific options. Each widget has a specific list of options that is used.
+The Kendo UI controls are designed to evaluate all `tag` attributes&mdash;even HTML attributes&mdash;which match their specific options. Each widget has a specific list of options that is used. If a defined attribute cannot be found in the `$scope`, the widget puts its initialization on hold and the widget itself is not initialized.
 
-If a defined attribute cannot be found in the `$scope`, the widget puts its initialization on hold and the widget itself is not initialized.
-
-For example, a DatePicker with an empty `value` attribute will not initialize, as demonstrated below.
+For example, a DatePicker with an empty `value` attribute will not initialize.
 
 ###### Example
 
@@ -31,40 +29,38 @@ For example, a DatePicker with an empty `value` attribute will not initialize, a
     });
 ```
 
-In this example, the widget checks the `tag` element attributes and finds a `value` attribute, because it has a [`value` option](/api/javascript/ui/datepicker#configuration-value). The evaluation against the `$scope` returns `undefined` and the widget does not initialize.
+In the previous example, the widget checks the `tag` element attributes and finds a `value` attribute, because it has a [`value`](/api/javascript/ui/datepicker#configuration-value) option. The evaluation against the `$scope` returns `undefined` and the widget does not initialize.
 
 **Solution**
 
-The described behavior is part of the core initialization logic of the Kendo UI directives. To handle this issue, avoid rendering empty attributes that match the options of the widget.
+The described behavior is part of the core initialization logic of the Kendo UI directives. To handle this issue, avoid the rendering of empty attributes which match the options of the widget.
 
 > **Important**
 >
-> The issue is observable as of the Kendo UI Q2 2015 release, where widgets are initialized synchronously abiding the priority of the Angular JS directives.
+> The issue is observable as of the Kendo UI Q2 2015 release where widgets are initialized synchronously abiding by the priority of the Angular JS directives.
 
 ### AngularJS Templates Are Not Evaluated before Widget Initialization
 
-This is a commonly occurring scenario when you want to decorate the initial HTML element using AngularJS templates. As of the Kendo UI Q2 2015 release, however, widgets are initialized synchronously. This results in a template value that is not evaluated during the initialization of the widget. Such behavior is expected and has so far worked by chance.
+This is a commonly occurring scenario when you want to decorate the initial HTML element by using AngularJS templates. However, as of the Kendo UI Q2 2015 release widgets are initialized synchronously. This results in a template value that is not evaluated during the initialization of the widget. Such behavior is expected and has so far worked by chance.
 
 **Solution**
 
-To handle such unevaluated templates, use a custom AngularJS directive with higher priority. In this way, AngularJS will evaluate it before the Kendo UI directives and the HTML element will be decorated and rendered properly.
+To handle such unevaluated templates, use a custom AngularJS directive with higher priority. As a result, AngularJS evaluates it before the Kendo UI directives and the HTML element is properly decorated and rendered.
 
 Fore more details, refer to the [article on the priorities of AngularJS directives](https://docs.angularjs.org/api/ng/service/$compile).
 
 ### Widgets with ng-model Directives Reflect No Model Value
 
-As of the Angular 1.4.9 release, widgets initialized from the `select` element do not reflect changes to the model field. This is due to a change in the Angular implementation related to the `ngModel.$render` method. In the new Angular versions, this method is overridden in favor of a custom Angular implementation that supports adding custom `option` elements. This enhancement, however, breaks the Kendo UI `ngModel` support, because it also depends on the `ngModel.$render` method to reflect any changes which are made in the model.
-
-Basically, the Kendo UI [`ngModel.$render` method](https://github.com/telerik/kendo-ui-core/blob/master/src/kendo.angular.js#L388) is directly overridden by the new Angular function.
+As of the Angular 1.4.9 release, widgets that are initialized from the `select` element do not reflect changes to the model field. This is due to a change in the Angular implementation related to the `ngModel.$render` method. In the new Angular versions, this method is overridden in favor of a custom Angular implementation which supports the addition of custom `option` elements. However, this enhancement breaks the Kendo UI `ngModel` support, because it also depends on the `ngModel.$render` method to reflect the changes which are made in the model. Basically, the Kendo UI [`ngModel.$render`](https://github.com/telerik/kendo-ui-core/blob/master/src/kendo.angular.js#L388) method is directly overridden by the new Angular function.
 
 **Solution**
 
 The available workarounds are:
 
-1. Use the `k-ng-model` directive instead. Check the [corresponding documentation]({% slug angularjs_integration_directives %}#scope-bindings) for more details.
-2. Use the `k-ng-delay` attribute mapped to the `ng-model` model field. The aim is to postpone the `ngModel.$render` set on the Kendo UI side and as a result, it will win over the Angular `ngModel.$render` custom method.
+1. Use the `k-ng-model` directive instead. For more information, refer to the [corresponding documentation]({% slug angularjs_integration_directives %}#scope-bindings).
+2. Use the `k-ng-delay` attribute that is mapped to the `ng-model` model field. The aim is to postpone `ngModel.$render` that is set on Kendo UI side and, as a result, to enable it to take precedence over the Angular `ngModel.$render` custom method.
 
-The example below demonstrates how to use the `ng-model` directive.
+The following example demonstrates how to use the `ng-model` directive.
 
 ###### Example
 
@@ -113,9 +109,9 @@ The example below demonstrates how to use the `ng-model` directive.
 
 ### MultiSelect Throws Exception
 
-The Kendo UI MultiSelect widget sometimes throws an exception stating that it cannot `get length from undefined` (or similar). Check whether the field set to the `k-ng-model` directive is `undefined`, because this is one of the most frequent reasons for such behavior.
+The Kendo UI MultiSelect widget sometimes throws an exception which states that it `cannot get length from undefined` or similar. One of the most frequent reasons for this issue is that the field set to the `k-ng-model` directive is `undefined`.
 
-The example below demonstrates an incorrect definition of the `k-ng-model` field.
+The following example demonstrates an incorrect definition of the `k-ng-model` field.
 
 ###### Example
 
@@ -157,7 +153,7 @@ The example below demonstrates an incorrect definition of the `k-ng-model` field
 
 Define the `k-ng-model` field to an empty array.
 
-The example below demonstrates the correct definition of the `k-ng-model` field.
+The following example demonstrates the correct definition of the `k-ng-model` field.
 
 ###### Example
 
@@ -197,15 +193,13 @@ The example below demonstrates the correct definition of the `k-ng-model` field.
 
 ### Widget Loses Its Value
 
-When the `ng-model` and `k-ng-model` directives are applied together, it is possible for the widget to lose its value. The reason is that both directives update the element value simultaneously and this results in a conflict issue.
+When the `ng-model` and `k-ng-model` directives are applied together, it is possible for the widget to lose its value. The reason is that both directives update the element value simultaneously and this results in conflicting behavior.
 
 **Solution**
 
 Use only one of the two directives&mdash;either `k-ng-model` or `ng-model`.
 
 ## See Also
-
-Other articles on AngularJS integration with Kendo UI:
 
 * [AngularJS Integration Overview]({% slug angularjs_integration_directives %})
 * [Global Events]({% slug global_events_angularjs_directives %})

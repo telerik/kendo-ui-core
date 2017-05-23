@@ -820,7 +820,8 @@ var __meta__ = { // jshint ignore:line
                 open: proxy(that._openHandler, that),
                 close: proxy(that._closeHandler, that),
                 animation: that.options.animation,
-                isRtl: support.isRtl(that.wrapper)
+                isRtl: support.isRtl(that.wrapper),
+                autosize :that.options.autoWidth
             }));
         },
 

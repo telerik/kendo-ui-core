@@ -633,7 +633,8 @@ var __meta__ = { // jshint ignore:line
             value: null,
             interval: 30,
             height: 200,
-            animation: {}
+            animation: {},
+            dateInput: false
         },
 
         events: [

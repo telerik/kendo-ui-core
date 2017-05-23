@@ -6,7 +6,7 @@ previous_url: /aspnet-core/helpers/window
 slug: taghelpers_window_aspnetcore
 ---
 
-# Window Tag Helper
+# Window Tag Helper Overview
 
 The Window tag helper helps you configure the Kendo UI Window widget in ASP.NET Core applications.
 

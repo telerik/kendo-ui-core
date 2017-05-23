@@ -55,21 +55,24 @@ navigation:
     "controls/data-management/grid/how-to/integration":
         title: "Integration"
         position: 9
+    "controls/data-management/grid/how-to/Paging":
+        title: "Paging"
+        position: 10
     "controls/data-management/grid/how-to/Selection":
         title: "Selection"
-        position: 10
+        position: 11
     "controls/data-management/grid/how-to/sorting":
         title: "Sorting"
-        position: 11
+        position: 12
     "controls/data-management/grid/how-to/state":
         title: "State Management"
-        position: 12
+        position: 13
     "controls/data-management/grid/how-to/Templates":
         title: "Templates"
-        position: 13
+        position: 14
     "controls/data-management/grid/how-to/various":
         title: "Various"
-        position: 14
+        position: 15
     "controls/editors":
         title: "Editors"
         position: 2

@@ -2,6 +2,7 @@
 title: Change Grid Pager to Slider
 page_title: Change Grid Pager to Slider | Kendo UI Grid
 description: "Learn how to change the default Kendo UI Grid paging to a slider."
+previous_url: /controls/data-management/grid/how-to/Layout/change-grid-pager-to-slider
 slug: howto_change_grid_pager_to_slider
 ---
 
@@ -15,6 +16,8 @@ To achieve this behavior:
 1. Create a Kendo UI Slider in their place.
 1. Change the page of the Grid DataSource on the [`change`](/api/javascript/ui/slider#events-change) event of the Slider.
 
+> **Important**
+>
 > When you apply this approach, the [`page`](/api/javascript/data/datasource#methods-page) method of the Grid does not fire.
 
 ###### Example

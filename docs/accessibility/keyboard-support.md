@@ -8,7 +8,9 @@ position: 5
 
 # Keyboard Shortcuts
 
-Keyboard access is a very significant aspect of the interaction between disabled users and the Web. The more the functionalities of your project that users can handle through the keyboard, the wider the variety of assistive technologies that can be used by disabled users.
+Keyboard access is a fundamental aspect of the interaction between disabled users and the Web.
+
+The more the functionalities of your project that users can handle through the keyboard, the wider the variety of assistive technologies that can be used by disabled users.
 
 ## Overview
 

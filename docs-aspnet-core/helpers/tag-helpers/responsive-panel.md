@@ -6,7 +6,7 @@ previous_url: /aspnet-core/helpers/responsive-panel
 slug: taghelpers_responsivepanel_aspnetcore
 ---
 
-# ResponsivePanel Tag Helper
+# ResponsivePanel Tag Helper Overview
 
 The ResponsivePanel tag helper helps you configure the Kendo UI ResponsivePanel widget in ASP.NET Core applications.
 

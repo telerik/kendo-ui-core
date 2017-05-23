@@ -1057,6 +1057,29 @@ test("resize popup on search when autoWidth is enabled", function(assert) {
 
 });
 
+test("autoWidth adds one pixel to avoid browser pixel rounding", function(assert) {
+    var combobox = new ComboBox(input, {
+        autoWidth: true,
+        animation:{
+            open: {
+                duration:0
+            },
+            close: {
+                duration:0
+            },
+        },
+        dataSource: {
+            data: ["Short item", "An item with really, really, really, really, really, really, really, really, really, long text","Short item"]
+        }
+    });
+
+    combobox.open();
+    equal(combobox.popup.element.parent(".k-animation-container").width(), combobox.popup.element.outerWidth(true) + 1);
+    combobox.close();
+    combobox.open();
+    equal(combobox.popup.element.parent(".k-animation-container").width(), combobox.popup.element.outerWidth(true) + 1);
+});
+
 test("keep popup opened on empty search result if noDataTemplate", 2, function(assert) {
     var combobox = new ComboBox(input, {
         animation: false,

@@ -11,10 +11,13 @@ The following example demonstrates how to change the default data layout of the 
 
 To achieve this behavior:
 
-1. Disable the editing and change the background color of the cells in the main diagonal of the Grid.
+1. Disable editing.
+1. Change the background color of the cells in the main diagonal of the Grid.
 1. Remove the cells in the upper right triangular of the Grid.
 
-> This custom solution removes some of the table cells. Thus, it might not pass markup validation. 
+> **Important**
+>
+> This is a custom solution which removes some of the table cells. As a result, the approach might not pass markup validation.
 
 ###### Example
 
@@ -77,7 +80,7 @@ To achieve this behavior:
             var first = true;
             for (nCellsToRemove; nCellsToRemove > 0; nCellsToRemove--) {
               // Get the cell to remove and push it to the removable cells array.
-              var idx = cells - nCellsToRemove; 
+              var idx = cells - nCellsToRemove;
               var cell = $(row.children()[idx])[0];
 
               // Determine iteration and add classes accordingly.
