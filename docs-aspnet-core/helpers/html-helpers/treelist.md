@@ -122,7 +122,7 @@ The following example demonstrates the basic configuration for the TreeList with
 
 ## See Also
 
-* [JavaScript API Reference of the TreeList](../../../kendo-ui/api/javascript/ui/treelist)
+* [JavaScript API Reference of the TreeList](http://docs.telerik.com/kendo-ui/api/javascript/ui/treelist)
 * [TreeList HtmlHelper for ASP.NET MVC](http://docs.telerik.com/aspnet-mvc/helpers/treelist/overview)
 * [TreeList Official Demos](http://demos.telerik.com/aspnet-core/treelist/index)
 * [Overview of Telerik UI for ASP.NET Core - RC1]({% slug overview_aspnetmvc6_aspnetmvc %})

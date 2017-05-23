@@ -96,7 +96,7 @@ The following example demonstrates how to use the basic `zoom` method of the Map
 
 ## See Also
 
-* [JavaScript API Reference of the Map](../../../kendo-ui/api/javascript/dataviz/ui/map)
+* [JavaScript API Reference of the Map](http://docs.telerik.com/kendo-ui/api/javascript/dataviz/ui/map)
 * [Map HtmlHelper for ASP.NET MVC](http://docs.telerik.com/aspnet-mvc/helpers/map/overview)
 * [Map Official Demos](http://demos.telerik.com/aspnet-core/map/index)
 * [Overview of Telerik UI for ASP.NET Core - RC1]({% slug overview_aspnetmvc6_aspnetmvc %})
