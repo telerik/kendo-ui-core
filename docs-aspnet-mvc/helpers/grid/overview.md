@@ -112,7 +112,7 @@ Below are listed the steps for you to follow when configuring the Kendo UI Grid 
 
 ### Existing Instances
 
-To reference an existing Kendo UI Grid instance, use the [`jQuery.data()`](http://api.jquery.com/jQuery.data/) configuration option. Once a reference is established, use the [Grid API](../../../kendo-ui/api/javascript/ui/grid#methods) to control its behavior.
+To reference an existing Kendo UI Grid instance, use the [`jQuery.data()`](http://api.jquery.com/jQuery.data/) configuration option. Once a reference is established, use the [Grid API](http://docs.telerik.com/kendo-ui/api/javascript/ui/grid#methods) to control its behavior.
 
 ###### Example
 
@@ -134,7 +134,7 @@ To reference an existing Kendo UI Grid instance, use the [`jQuery.data()`](http:
 
 ## Event Handling
 
-You can subscribe to all Grid [events](../../../kendo-ui/api/javascript/ui/grid#events).
+You can subscribe to all Grid [events](http://docs.telerik.com/kendo-ui/api/javascript/ui/grid#events).
 
 ### By Handler Name
 
@@ -210,7 +210,7 @@ The following example demonstrates how to subscribe to events by a template dele
 
 Other articles on the Kendo UI Grid for ASP.NET MVC:
 
-* [ASP.NET MVC API Reference: GridBuilder](../../../kendo-ui/api/Kendo.Mvc.UI.Fluent/GridBuilder)
+* [ASP.NET MVC API Reference: GridBuilder](http://docs.telerik.com/kendo-ui/api/Kendo.Mvc.UI.Fluent/GridBuilder)
 * [Overview of the Grid HtmlHelper]({% slug overview_gridhelper_aspnetmvc %})
 * [Configuration of the Grid HtmlHelper]({% slug configuration_gridhelper_aspnetmvc %})
 * [Scaffolding]({% slug scaffoldinggrid_aspnetmvc %})
@@ -220,8 +220,8 @@ Other articles on the Kendo UI Grid for ASP.NET MVC:
 * [Editing of the Grid HtmlHelper]({% slug ajaxediting_grid_aspnetmvc %})
 * [Templating of the Grid HtmlHelper]({% slug clientdetailtemplate_grid_aspnetmvc %})
 * [Troubleshooting for the Grid HtmlHelper]({% slug troubleshoot_gridhelper_aspnetmvc %})
-* [API Reference of the Grid HtmlHelper](../../../kendo-ui/api/Kendo.Mvc.UI.Fluent/GridBuilder)
-* [Overview of the Kendo UI Grid Widget](../../../kendo-ui/controls/data-management/grid/overview)
+* [API Reference of the Grid HtmlHelper](http://docs.telerik.com/kendo-ui/api/Kendo.Mvc.UI.Fluent/GridBuilder)
+* [Overview of the Kendo UI Grid Widget](http://docs.telerik.com/kendo-ui/controls/data-management/grid/overview)
 
 Articles on Telerik UI for ASP.NET MVC:
 

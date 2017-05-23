@@ -12,6 +12,6 @@ To see the example, refer to the project on how to [use the Kendo UI ProgressBar
 ## See Also
 
 * [Overview of the ProgressBar HtmlHelper]({% slug overview_progressbarhelper_aspnetmvc %})
-* [ProgressBarBuilder API Reference](../../../kendo-ui/api/Kendo.Mvc.UI.Fluent/ProgressBarBuilder)
+* [ProgressBarBuilder API Reference](http://docs.telerik.com/kendo-ui/api/Kendo.Mvc.UI.Fluent/ProgressBarBuilder)
 * [Overview of the Grid HtmlHelper]({% slug overview_gridhelper_aspnetmvc %})
-* [GridBuilder API Reference](../../../kendo-ui/api/Kendo.Mvc.UI.Fluent/AutoCompleteBuilder)
+* [GridBuilder API Reference](http://docs.telerik.com/kendo-ui/api/Kendo.Mvc.UI.Fluent/AutoCompleteBuilder)

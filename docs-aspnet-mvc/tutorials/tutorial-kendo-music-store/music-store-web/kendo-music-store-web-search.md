@@ -134,7 +134,7 @@ In the `_Layout.cshtml` file, this template is included with the line, demonstra
 <!--_-->
 If you are not using ASP.NET MVC, you can write some additional code to load templates from external files.
 
-For more information on remote template loading, refer to the [article on external template loading](../../../kendo-ui/framework/templates/load-remote).
+For more information on remote template loading, refer to the [article on external template loading](http://docs.telerik.com/kendo-ui/framework/templates/load-remote).
 
 Now that the template is included in the body of the page, the application code is using a jQuery selector to fetch this `<script>` element by its `id` and get the contents. It then calls `kendo.template()` to process the template.
 
@@ -182,7 +182,7 @@ The following example demonstrates a quick breakdown of the code to do this.
 
 The `schema.data` and `schema.total` functions overcome a JSON formatting difference between Kendo UI and the WCF Data Services oData.
 
-For more information on each field set on the DataSource, refer to the [DataSource documentation](../../../kendo-ui/framework/datasource/overview).
+For more information on each field set on the DataSource, refer to the [DataSource documentation](http://docs.telerik.com/kendo-ui/framework/datasource/overview).
 
 ### Handle Search Results Selections
 

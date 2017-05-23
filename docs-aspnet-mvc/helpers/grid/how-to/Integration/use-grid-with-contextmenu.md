@@ -12,8 +12,8 @@ To see the example, refer to the project on how to [use the Kendo UI Grid with t
 ## See Also
 
 * [Overview of the Grid HtmlHelper]({% slug overview_gridhelper_aspnetmvc %})
-* [GridBuilder API Reference](../../../kendo-ui/api/Kendo.Mvc.UI.Fluent/GridBuilder)
-* [Overview of the ContextMenu HtmlHelper](../../../kendo-ui/api/Kendo.Mvc.UI.Fluent/ContextMenuBuilder)
-* [ContextMenuBuilder API Reference](../../../kendo-ui/aspnet-mvc/api/Kendo.Mvc.UI.Fluent/ContextMenuBuilder)
+* [GridBuilder API Reference](http://docs.telerik.com/kendo-ui/api/Kendo.Mvc.UI.Fluent/GridBuilder)
+* [Overview of the ContextMenu HtmlHelper](http://docs.telerik.com/kendo-ui/api/Kendo.Mvc.UI.Fluent/ContextMenuBuilder)
+* [ContextMenuBuilder API Reference](http://docs.telerik.com/kendo-ui/aspnet-mvc/api/Kendo.Mvc.UI.Fluent/ContextMenuBuilder)
 
 For more runnable examples on the Kendo UI Grid in ASP.NET MVC applications, browse its [**How To** documentation folder]({% slug howto_applycustomrrowstylesmodeldata_gridaspnetmv %}).

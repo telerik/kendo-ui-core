@@ -115,7 +115,7 @@ Below are listed the steps for you to follow when configuring the hybrid Kendo U
 
 ## Event Handling
 
-You can subscribe to all hybrid PopOver [events](../../../../kendo-ui/api/javascript/mobile/ui/popover#events).
+You can subscribe to all hybrid PopOver [events](../http://docs.telerik.com/kendo-ui/api/javascript/mobile/ui/popover#events).
 
 ### By Handler Name
 
@@ -169,7 +169,7 @@ The following example demonstrates how to subscribe to events by a handler name.
 
 ### Instances
 
-You can reference a hybrid PopOver instance by using the code from the example below. Once a reference is established, use the [hybrid PopOver API](../../../../kendo-ui/api/javascript/mobile/ui/popover#methods) to control its behavior.
+You can reference a hybrid PopOver instance by using the code from the example below. Once a reference is established, use the [hybrid PopOver API](../http://docs.telerik.com/kendo-ui/api/javascript/mobile/ui/popover#methods) to control its behavior.
 
 ###### Example
 
@@ -189,8 +189,8 @@ You can reference a hybrid PopOver instance by using the code from the example b
 
 ## See Also
 
-* [ASP.NET MVC API Reference: PopOverBuilder](../../../kendo-ui/api/Kendo.Mvc.UI.Fluent/MobilePopOverBuilder)
-* [Overview of the Hybrid UI PopOver Widget](../../../kendo-ui/controls/hybrid/popover/popover)
+* [ASP.NET MVC API Reference: PopOverBuilder](http://docs.telerik.com/kendo-ui/api/Kendo.Mvc.UI.Fluent/MobilePopOverBuilder)
+* [Overview of the Hybrid UI PopOver Widget](http://docs.telerik.com/kendo-ui/controls/hybrid/popover/popover)
 * [Overview of Telerik UI for ASP.NET MVC]({% slug overview_aspnetmvc %})
 * [Fundamentals of Telerik UI for ASP.NET MVC]({% slug fundamentals_aspnetmvc %})
 * [Scaffolding in Telerik UI for ASP.NET MVC]({% slug scaffolding_aspnetmvc %})

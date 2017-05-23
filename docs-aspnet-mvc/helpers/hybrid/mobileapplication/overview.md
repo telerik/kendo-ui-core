@@ -282,7 +282,7 @@ There are two ways of navigation:
 
 ### Instances
 
-You can reference a hybrid Application instance by using the code from the example below. Once a reference is established, use the [hybrid Application API](../../../../kendo-ui/api/javascript/mobile/application#methods) to control its behavior.
+You can reference a hybrid Application instance by using the code from the example below. Once a reference is established, use the [hybrid Application API](../http://docs.telerik.com/kendo-ui/api/javascript/mobile/application#methods) to control its behavior.
 
 ###### Example
 
@@ -298,12 +298,12 @@ You can reference a hybrid Application instance by using the code from the examp
 
 ## See Also
 
-* [ASP.NET MVC API Reference: ApplicationBuilder](../../../kendo-ui/api/Kendo.Mvc.UI.Fluent/MobileApplicationBuilder)
-* [Overview of the Hybrid UI Application Widget](../../../kendo-ui/controls/hybrid/application)
+* [ASP.NET MVC API Reference: ApplicationBuilder](http://docs.telerik.com/kendo-ui/api/Kendo.Mvc.UI.Fluent/MobileApplicationBuilder)
+* [Overview of the Hybrid UI Application Widget](http://docs.telerik.com/kendo-ui/controls/hybrid/application)
 * [Overview of Telerik UI for ASP.NET MVC]({% slug overview_aspnetmvc %})
 * [Fundamentals of Telerik UI for ASP.NET MVC]({% slug fundamentals_aspnetmvc %})
 * [Scaffolding in Telerik UI for ASP.NET MVC]({% slug scaffolding_aspnetmvc %})
-* [Telerik UI for ASP.NET MVC API Reference Folder](../../../kendo-ui/api/Kendo.Mvc/AggregateFunction)
+* [Telerik UI for ASP.NET MVC API Reference Folder](http://docs.telerik.com/kendo-ui/api/Kendo.Mvc/AggregateFunction)
 * [Telerik UI for ASP.NET MVC HtmlHelpers Folder]({% slug overview_barcodehelper_aspnetmvc %})
 * [Tutorials on Telerik UI for ASP.NET MVC]({% slug overview_timeefficiencyapp_aspnetmvc6 %})
 * [Telerik UI for ASP.NET MVC Troubleshooting]({% slug troubleshooting_aspnetmvc %})

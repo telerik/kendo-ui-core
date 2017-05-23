@@ -11,7 +11,7 @@ To see the example, refer to the project on how to [use Kendo UI with ASP.NET bu
 
 ## See Also
 
-* [UI for ASP.NET MVC API Reference](../../../kendo-ui/api/Kendo.Mvc/AggregateFunction)
+* [UI for ASP.NET MVC API Reference](http://docs.telerik.com/kendo-ui/api/Kendo.Mvc/AggregateFunction)
 * [Telerik UI for ASP.NET MVC Overview]({% slug overview_aspnetmvc %})
 * [Telerik UI for ASP.NET MVC Custom DataSource]({% slug customdatasource_aspnetmvc %})
 * [Validation with Telerik UI for ASP.NET MVC]({% slug validation_aspnetmvc %})

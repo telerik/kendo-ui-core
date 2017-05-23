@@ -27,7 +27,7 @@ Customize the Tooltip position by using either of the following approaches:
             @Html.Kendo().NumericTextBoxFor(model => model.UnitPrice)
             @Html.ValidationMessageFor(model => model.UnitPrice)
 
-* Use the approach demonstrated [in the introductory article on the Kendo UI Validator](../../../kendo-ui/controls/editors/validator/overview) to add a placeholder.
+* Use the approach demonstrated [in the introductory article on the Kendo UI Validator](http://docs.telerik.com/kendo-ui/controls/editors/validator/overview) to add a placeholder.
 
 ### Widgets Are Hidden after Postbacks When Using jQuery Validation
 
@@ -65,7 +65,7 @@ If the above solution is not feasible, because a custom date format is used, the
     <script>
         kendo.ui.validator.rules.mvcdate = function (input) {
             //use the custom date format here
-            //kendo.parseDate - ../../../kendo-ui/api/javascript/kendo#methods-parseDate
+            //kendo.parseDate - http://docs.telerik.com/kendo-ui/api/javascript/kendo#methods-parseDate
 
             return input.val() === "" || kendo.parseDate(input.val(), "dd/MM/yyyy") !== null;
         }
@@ -98,18 +98,18 @@ In order for the values to be recognized as valid when using a non-default cultu
 * [Excel Export with the Grid ASP.NET MVC HtmlHelper Extension]({% slug excelissues_gridhelper_aspnetmvc %})
 * [Common Issues in the Spreadsheet ASP.NET MVC HtmlHelper Extension]({% slug troubleshoot_spreadsheethelper_aspnetmvc %})
 * [Common Issues in the Upload ASP.NET MVC HtmlHelper Extension]({% slug troubleshoot_uploadhelper_aspnetmvc %})
-* [Common Issues in Kendo UI](../../../kendo-ui/troubleshoot/troubleshooting-common-issues)
-* [JavaScript Errors](../../../kendo-ui/troubleshoot/troubleshooting-js-errors)
-* [Performance Issues](../../../kendo-ui/troubleshoot/troubleshooting-memory-leaks)
-* [Content Security Policy](../../../kendo-ui/troubleshoot/content-security-policy)
-* [Common Issues in Kendo UI Excel Export](../../../kendo-ui/framework/excel/troubleshoot/common-issues)
-* [Common Issues in Kendo UI Charts](../../../kendo-ui/controls/charts/troubleshoot/common-issues)
-* [Performance Issues in Kendo UI Widgets for Data Visualization](../../../kendo-ui/troubleshoot/troubleshooting-memory-leaks)
-* [Common Issues in Kendo UI ComboBox](../../../kendo-ui/controls/editors/combobox/troubleshoot/troubleshooting)
-* [Common Issues in Kendo UI Diagram](../../../kendo-ui/controls/diagrams-and-maps/diagram/troubleshoot/common-issues)
-* [Common Issues in Kendo UI DropDownList](../../../kendo-ui/controls/editors/dropdownlist/troubleshoot/troubleshooting)
-* [Common Issues in Kendo UI Editor](../../../kendo-ui/controls/editors/editor/troubleshoot/troubleshooting)
-* [Common Issues in Kendo UI MultiSelect](../../../kendo-ui/controls/editors/multiselect/troubleshoot/troubleshooting)
-* [Common Issues in Kendo UI Scheduler](../../../kendo-ui/controls/scheduling/scheduler/troubleshoot/troubleshooting)
-* [Common Issues in Kendo UI Upload](../../../kendo-ui/controls/editors/upload/troubleshoot/troubleshooting)
-* [Common Issues Related to Styling, Appearance, and Rendering](../../../kendo-ui/styles-and-layout/troubleshoot/troubleshooting)
+* [Common Issues in Kendo UI](http://docs.telerik.com/kendo-ui/troubleshoot/troubleshooting-common-issues)
+* [JavaScript Errors](http://docs.telerik.com/kendo-ui/troubleshoot/troubleshooting-js-errors)
+* [Performance Issues](http://docs.telerik.com/kendo-ui/troubleshoot/troubleshooting-memory-leaks)
+* [Content Security Policy](http://docs.telerik.com/kendo-ui/troubleshoot/content-security-policy)
+* [Common Issues in Kendo UI Excel Export](http://docs.telerik.com/kendo-ui/framework/excel/troubleshoot/common-issues)
+* [Common Issues in Kendo UI Charts](http://docs.telerik.com/kendo-ui/controls/charts/troubleshoot/common-issues)
+* [Performance Issues in Kendo UI Widgets for Data Visualization](http://docs.telerik.com/kendo-ui/troubleshoot/troubleshooting-memory-leaks)
+* [Common Issues in Kendo UI ComboBox](http://docs.telerik.com/kendo-ui/controls/editors/combobox/troubleshoot/troubleshooting)
+* [Common Issues in Kendo UI Diagram](http://docs.telerik.com/kendo-ui/controls/diagrams-and-maps/diagram/troubleshoot/common-issues)
+* [Common Issues in Kendo UI DropDownList](http://docs.telerik.com/kendo-ui/controls/editors/dropdownlist/troubleshoot/troubleshooting)
+* [Common Issues in Kendo UI Editor](http://docs.telerik.com/kendo-ui/controls/editors/editor/troubleshoot/troubleshooting)
+* [Common Issues in Kendo UI MultiSelect](http://docs.telerik.com/kendo-ui/controls/editors/multiselect/troubleshoot/troubleshooting)
+* [Common Issues in Kendo UI Scheduler](http://docs.telerik.com/kendo-ui/controls/scheduling/scheduler/troubleshoot/troubleshooting)
+* [Common Issues in Kendo UI Upload](http://docs.telerik.com/kendo-ui/controls/editors/upload/troubleshoot/troubleshooting)
+* [Common Issues Related to Styling, Appearance, and Rendering](http://docs.telerik.com/kendo-ui/styles-and-layout/troubleshoot/troubleshooting)

@@ -206,7 +206,7 @@ Most of the properties defined for each column are optional. The ones used here 
 * The `template` property defines a custom template for the data displayed in the column. The examples use a custom template for the **Album Art** column to add an image tag and show the art.
 * The `editor` property defines a function to be used as a custom editor, displayed when the cell enters `edit` mode. This is discussed in details below.
 * The `filterable`, `sortable`, and `groupable` properties override the properties set on the grid. This can be used to mark individual columns as filterable, sortable, and groupable.
-* The `format` property defines a custom formatter to be used to display the cell data. This example uses `"{0:c}"` to format the **Price** column as currency. The format takes the same values as the [`kendo.format()`](../../../kendo-ui/api/framework/kendo#format) function.
+* The `format` property defines a custom formatter to be used to display the cell data. This example uses `"{0:c}"` to format the **Price** column as currency. The format takes the same values as the [`kendo.format()`](http://docs.telerik.com/kendo-ui/api/framework/kendo#format) function.
 * The `values` property sets a collection of key-value pair objects that are used as a foreign key to look up cell values. This is discussed in details below.
 
 ## Customization

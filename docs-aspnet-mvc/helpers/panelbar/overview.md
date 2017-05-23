@@ -8,7 +8,7 @@ position: 1
 
 # PanelBar HtmlHelper Overview
 
-The PanelBar HtmlHelper extension is a server-side wrapper for the [Kendo UI PanelBar](../../../kendo-ui/api/javascript/ui/panelbar) widget.
+The PanelBar HtmlHelper extension is a server-side wrapper for the [Kendo UI PanelBar](http://docs.telerik.com/kendo-ui/api/javascript/ui/panelbar) widget.
 
 ## Getting Started
 
@@ -207,7 +207,7 @@ To use a custom `AuthorizeAttribute`, refer to [this link](https://github.com/te
 
 ## Event Handling
 
-You can subscribe to all PanelBar [events](../../../kendo-ui/api/javascript/ui/menu#events).
+You can subscribe to all PanelBar [events](http://docs.telerik.com/kendo-ui/api/javascript/ui/menu#events).
 
 ### By Handler Name
 
@@ -283,7 +283,7 @@ The following example demonstrates how to subscribe to events by a template dele
 
 ### Existing Instances
 
-To reference an existing Kendo UI PanelBar instance, use the [`jQuery.data()`](http://api.jquery.com/jQuery.data/) configuration option. Once a reference is established, use the [PanelBar API](../../../kendo-ui/api/javascript/ui/panelbar#methods) to control its behavior.
+To reference an existing Kendo UI PanelBar instance, use the [`jQuery.data()`](http://api.jquery.com/jQuery.data/) configuration option. Once a reference is established, use the [PanelBar API](http://docs.telerik.com/kendo-ui/api/javascript/ui/panelbar#methods) to control its behavior.
 
 ###### Example
 
@@ -297,12 +297,12 @@ To reference an existing Kendo UI PanelBar instance, use the [`jQuery.data()`](h
 
 ## See Also
 
-* [ASP.NET MVC API Reference: PanelBarBuilder](../../../kendo-ui/api/Kendo.Mvc.UI.Fluent/PanelBarBuilder)
+* [ASP.NET MVC API Reference: PanelBarBuilder](http://docs.telerik.com/kendo-ui/api/Kendo.Mvc.UI.Fluent/PanelBarBuilder)
 * [Overview of Telerik UI for ASP.NET MVC]({% slug overview_aspnetmvc %})
 * [Fundamentals of Telerik UI for ASP.NET MVC]({% slug fundamentals_aspnetmvc %})
 * [Scaffolding in Telerik UI for ASP.NET MVC]({% slug scaffolding_aspnetmvc %})
-* [Overview of the Kendo UI PanelBar Widget](../../../kendo-ui/controls/navigation/panelbar/overview)
-* [Telerik UI for ASP.NET MVC API Reference Folder](../../../kendo-ui/api/Kendo.Mvc/AggregateFunction)
+* [Overview of the Kendo UI PanelBar Widget](http://docs.telerik.com/kendo-ui/controls/navigation/panelbar/overview)
+* [Telerik UI for ASP.NET MVC API Reference Folder](http://docs.telerik.com/kendo-ui/api/Kendo.Mvc/AggregateFunction)
 * [Telerik UI for ASP.NET MVC HtmlHelpers Folder]({% slug overview_barcodehelper_aspnetmvc %})
 * [Tutorials on Telerik UI for ASP.NET MVC]({% slug overview_timeefficiencyapp_aspnetmvc6 %})
 * [Telerik UI for ASP.NET MVC Troubleshooting]({% slug troubleshooting_aspnetmvc %})

@@ -163,7 +163,7 @@ Below are listed the steps for you to follow when configuring the Kendo UI TreeL
 
 ## Event Handling
 
-You can subscribe to all TreeList [events](../../../kendo-ui/api/javascript/ui/treelist#events).
+You can subscribe to all TreeList [events](http://docs.telerik.com/kendo-ui/api/javascript/ui/treelist#events).
 
 ### By Handler Name
 
@@ -284,7 +284,7 @@ The following example demonstrates how to subscribe to events by a template dele
 
 ### Existing Instances
 
-To reference an existing Kendo UI TreeList instance, use the [`jQuery.data()`](http://api.jquery.com/jQuery.data/) configuration option. Once a reference is established, use the [TreeList API](../../../kendo-ui/api/javascript/ui/treelist#methods) to control its behavior.
+To reference an existing Kendo UI TreeList instance, use the [`jQuery.data()`](http://api.jquery.com/jQuery.data/) configuration option. Once a reference is established, use the [TreeList API](http://docs.telerik.com/kendo-ui/api/javascript/ui/treelist#methods) to control its behavior.
 
 ###### Example
 
@@ -315,13 +315,13 @@ To reference an existing Kendo UI TreeList instance, use the [`jQuery.data()`](h
 
 ## See Also
 
-* [ASP.NET MVC API Reference: TreeListBuilder](../../../kendo-ui/api/Kendo.Mvc.UI.Fluent/TreeListBuilder)
+* [ASP.NET MVC API Reference: TreeListBuilder](http://docs.telerik.com/kendo-ui/api/Kendo.Mvc.UI.Fluent/TreeListBuilder)
 * [How to Export Multiple TreeLists to Excel]({% slug howto_exportmultipletoexcel_treelistaspnetmvc %})
-* [Overview of the Kendo UI TreeList Widget](../../../kendo-ui/controls/data-management/treelist/overview)
+* [Overview of the Kendo UI TreeList Widget](http://docs.telerik.com/kendo-ui/controls/data-management/treelist/overview)
 * [Overview of Telerik UI for ASP.NET MVC]({% slug overview_aspnetmvc %})
 * [Fundamentals of Telerik UI for ASP.NET MVC]({% slug fundamentals_aspnetmvc %})
 * [Scaffolding in Telerik UI for ASP.NET MVC]({% slug scaffolding_aspnetmvc %})
-* [Telerik UI for ASP.NET MVC API Reference Folder](../../../kendo-ui/api/Kendo.Mvc/AggregateFunction)
+* [Telerik UI for ASP.NET MVC API Reference Folder](http://docs.telerik.com/kendo-ui/api/Kendo.Mvc/AggregateFunction)
 * [Telerik UI for ASP.NET MVC HtmlHelpers Folder]({% slug overview_barcodehelper_aspnetmvc %})
 * [Tutorials on Telerik UI for ASP.NET MVC]({% slug overview_timeefficiencyapp_aspnetmvc6 %})
 * [Telerik UI for ASP.NET MVC Troubleshooting]({% slug troubleshooting_aspnetmvc %})

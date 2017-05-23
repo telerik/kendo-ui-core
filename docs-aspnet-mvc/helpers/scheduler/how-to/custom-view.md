@@ -12,6 +12,6 @@ To see the example, refer to the project on how to [implement a custom view for 
 ## See Also
 
 * [Overview of the Scheduler HtmlHelper]({% slug overview_schedulerhelper_aspnetmvc %})
-* [SchedulerBuilder API Reference](../../../kendo-ui/api/Kendo.Mvc.UI.Fluent/SchedulerBuilder)
+* [SchedulerBuilder API Reference](http://docs.telerik.com/kendo-ui/api/Kendo.Mvc.UI.Fluent/SchedulerBuilder)
 
 For more runnable examples on the Kendo UI Scheduler in ASP.NET MVC applications, browse its [**How To** documentation folder](/helpers/scheduler/how-to/).

@@ -91,7 +91,7 @@ Below are listed the steps for you to follow when configuring the Kendo UI Sched
 
 ## Event Handling
 
-You can subscribe to all Scheduler [events](../../../kendo-ui/api/javascript/ui/scheduler#events).
+You can subscribe to all Scheduler [events](http://docs.telerik.com/kendo-ui/api/javascript/ui/scheduler#events).
 
 ### By Handler Name
 
@@ -188,7 +188,7 @@ The following example demonstrates how to subscribe to events by a template dele
 
 ### Existing Instances
 
-To reference an existing Kendo UI Scheduler instance, use the [`jQuery.data()`](http://api.jquery.com/jQuery.data/) configuration option. Once a reference is established, use the [Scheduler API](../../../kendo-ui/api/javascript/ui/scheduler#methods) to control its behavior.
+To reference an existing Kendo UI Scheduler instance, use the [`jQuery.data()`](http://api.jquery.com/jQuery.data/) configuration option. Once a reference is established, use the [Scheduler API](http://docs.telerik.com/kendo-ui/api/javascript/ui/scheduler#methods) to control its behavior.
 
 ###### Example
 
@@ -202,17 +202,17 @@ To reference an existing Kendo UI Scheduler instance, use the [`jQuery.data()`](
 
 ## See Also
 
-* [ASP.NET MVC API Reference: SchedulerBuilder](../../../kendo-ui/api/Kendo.Mvc.UI.Fluent/SchedulerBuilder)
+* [ASP.NET MVC API Reference: SchedulerBuilder](http://docs.telerik.com/kendo-ui/api/Kendo.Mvc.UI.Fluent/SchedulerBuilder)
 * [Overview of the Scheduler HtmlHelper]({% slug overview_schedulerhelper_aspnetmvc %})
 * [Ajax Binding of the Scheduler HtmlHelper]({% slug ajaxbinding_schedulerhelper_aspnetmvc %})
 * [Scaffolding of the Scheduler HtmlHelper]({% slug scaffoldingscheduler_aspnetmvc %})
 * [Resources of the Scheduler HtmlHelper]({% slug scaffoldingscheduler_aspnetmvc %})
 * [Scheduler HtmlHelper How-To Examples]({% slug howto_bindtowebapicontroller_scheduleraspnetmvc %})
-* [Overview of the Kendo UI Scheduler Widget](../../../kendo-ui/controls/scheduling/scheduler/overview)
+* [Overview of the Kendo UI Scheduler Widget](http://docs.telerik.com/kendo-ui/controls/scheduling/scheduler/overview)
 * [Overview of Telerik UI for ASP.NET MVC]({% slug overview_aspnetmvc %})
 * [Fundamentals of Telerik UI for ASP.NET MVC]({% slug fundamentals_aspnetmvc %})
 * [Scaffolding in Telerik UI for ASP.NET MVC]({% slug scaffolding_aspnetmvc %})
-* [Telerik UI for ASP.NET MVC API Reference Folder](../../../kendo-ui/api/Kendo.Mvc/AggregateFunction)
+* [Telerik UI for ASP.NET MVC API Reference Folder](http://docs.telerik.com/kendo-ui/api/Kendo.Mvc/AggregateFunction)
 * [Telerik UI for ASP.NET MVC HtmlHelpers Folder]({% slug overview_barcodehelper_aspnetmvc %})
 * [Tutorials on Telerik UI for ASP.NET MVC]({% slug overview_timeefficiencyapp_aspnetmvc6 %})
 * [Telerik UI for ASP.NET MVC Troubleshooting]({% slug troubleshooting_aspnetmvc %})

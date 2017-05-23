@@ -60,7 +60,7 @@ Below are listed the steps for you to follow when configuring the Kendo UI Map.
 
 ## Event Handling
 
-You can subscribe to all Map [events](../../../kendo-ui/api/javascript/dataviz/ui/map#events).
+You can subscribe to all Map [events](http://docs.telerik.com/kendo-ui/api/javascript/dataviz/ui/map#events).
 
 ### By Handler Name
 
@@ -142,7 +142,7 @@ The following example demonstrates how to subscribe to events by a template dele
 
 ### Existing Instances
 
-To reference an existing Kendo UI Map instance, use the [`jQuery.data()`](http://api.jquery.com/jQuery.data/) configuration option. Once a reference is established, use the [Map API](../../../kendo-ui/api/javascript/dataviz/ui/map#methods) to control its behavior.
+To reference an existing Kendo UI Map instance, use the [`jQuery.data()`](http://api.jquery.com/jQuery.data/) configuration option. Once a reference is established, use the [Map API](http://docs.telerik.com/kendo-ui/api/javascript/dataviz/ui/map#methods) to control its behavior.
 
 ###### Example
 
@@ -156,12 +156,12 @@ To reference an existing Kendo UI Map instance, use the [`jQuery.data()`](http:/
 
 ## See Also
 
-* [ASP.NET MVC API Reference: MapBuilder](../../../kendo-ui/api/Kendo.Mvc.UI.Fluent/MapBuilder)
+* [ASP.NET MVC API Reference: MapBuilder](http://docs.telerik.com/kendo-ui/api/Kendo.Mvc.UI.Fluent/MapBuilder)
 * [Overview of Telerik UI for ASP.NET MVC]({% slug overview_aspnetmvc %})
 * [Fundamentals of Telerik UI for ASP.NET MVC]({% slug fundamentals_aspnetmvc %})
 * [Scaffolding in Telerik UI for ASP.NET MVC]({% slug scaffolding_aspnetmvc %})
-* [Overview of the Kendo UI Map Widget](../../../kendo-ui/controls/diagrams-and-maps/map/overview)
-* [Telerik UI for ASP.NET MVC API Reference Folder](../../../kendo-ui/api/Kendo.Mvc/AggregateFunction)
+* [Overview of the Kendo UI Map Widget](http://docs.telerik.com/kendo-ui/controls/diagrams-and-maps/map/overview)
+* [Telerik UI for ASP.NET MVC API Reference Folder](http://docs.telerik.com/kendo-ui/api/Kendo.Mvc/AggregateFunction)
 * [Telerik UI for ASP.NET MVC HtmlHelpers Folder]({% slug overview_autocompletehelper_aspnetmvc %})
 * [Tutorials on Telerik UI for ASP.NET MVC]({% slug overview_timeefficiencyapp_aspnetmvc6 %})
 * [Telerik UI for ASP.NET MVC Troubleshooting]({% slug troubleshooting_aspnetmvc %})

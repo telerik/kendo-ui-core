@@ -100,7 +100,7 @@ Below are listed the steps for you to follow when configuring the hybrid Kendo U
 
 ## Event Handling
 
-You can subscribe to all hybrid TabStrip [events](../../../../kendo-ui/api/javascript/mobile/ui/tabstrip#events).
+You can subscribe to all hybrid TabStrip [events](../http://docs.telerik.com/kendo-ui/api/javascript/mobile/ui/tabstrip#events).
 
 ### By Handler Name
 
@@ -158,7 +158,7 @@ The following example demonstrates how to subscribe to events by a handler name.
 
 ### Instances
 
-You can reference a hybrid TabStrip instance by using the [jQuery.data()](http://api.jquery.com/jQuery.data/) method and the value specified through the `Name()` method. Once a reference is established, use the [hybrid TabStrip API](../../../../kendo-ui/api/javascript/mobile/ui/tabstrip#methods) to control its behavior.
+You can reference a hybrid TabStrip instance by using the [jQuery.data()](http://api.jquery.com/jQuery.data/) method and the value specified through the `Name()` method. Once a reference is established, use the [hybrid TabStrip API](../http://docs.telerik.com/kendo-ui/api/javascript/mobile/ui/tabstrip#methods) to control its behavior.
 
 ###### Example
 
@@ -181,8 +181,8 @@ You can reference a hybrid TabStrip instance by using the [jQuery.data()](http:/
 
 ## See Also
 
-* [ASP.NET MVC API Reference: TabStripBuilder](../../../kendo-ui/api/Kendo.Mvc.UI.Fluent/MobileTabStripBuilder)
-* [Overview of the Hybrid UI TabStrip Widget](../../../kendo-ui/controls/hybrid/tabstrip/tabstrip)
+* [ASP.NET MVC API Reference: TabStripBuilder](http://docs.telerik.com/kendo-ui/api/Kendo.Mvc.UI.Fluent/MobileTabStripBuilder)
+* [Overview of the Hybrid UI TabStrip Widget](http://docs.telerik.com/kendo-ui/controls/hybrid/tabstrip/tabstrip)
 * [Overview of Telerik UI for ASP.NET MVC]({% slug overview_aspnetmvc %})
 * [Fundamentals of Telerik UI for ASP.NET MVC]({% slug fundamentals_aspnetmvc %})
 * [Scaffolding in Telerik UI for ASP.NET MVC]({% slug scaffolding_aspnetmvc %})
