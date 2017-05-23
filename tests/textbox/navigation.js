@@ -255,6 +255,66 @@
         }, 100);
     });
 
+    asyncTest("Accept pasted exponential value", 2, function() {
+        var textbox = new NumericTextBox(input);
+
+        stub(textbox, "_update");
+        input.val("3.3e-1");
+        input.trigger("paste", {
+            target: input[0]
+        });
+        setTimeout(function() {
+            start();
+            equal(textbox.calls("_update"), 0);
+            equal(input.val(), "0.33");
+        }, 100);
+    });
+
+    asyncTest("Accept pasted value with different decimal separator", 1, function() {
+        var textbox = new NumericTextBox(input);
+        kendo.culture("bg-BG");
+        stub(textbox, "_update");
+        input.val("3,321");
+        input.trigger("paste", {
+            target: input[0]
+        });
+        setTimeout(function() {
+            start();
+            equal(textbox.calls("_update"), 0);
+        }, 100);
+        kendo.culture("en-US");
+    });
+
+    asyncTest("Accept pasted value with currency symbol", 2, function() {
+        var textbox = new NumericTextBox(input);
+
+        stub(textbox, "_update");
+        input.val("$100");
+        input.trigger("paste", {
+            target: input[0]
+        });
+        setTimeout(function() {
+            start();
+            equal(textbox.calls("_update"), 0);
+            equal(input.val(), "100");
+        }, 100);
+    });
+
+    asyncTest("Accept pasted value with percent", 2, function() {
+        var textbox = new NumericTextBox(input);
+
+        stub(textbox, "_update");
+        input.val("100%");
+        input.trigger("paste", {
+            target: input[0]
+        });
+        setTimeout(function() {
+            start();
+            equal(textbox.calls("_update"), 0);
+            equal(input.val(), "1");
+        }, 100);
+    });
+
     asyncTest("Reject pasted value if not valid", 1, function() {
         var textbox = new NumericTextBox(input, {
             restrictDecimals: 2
