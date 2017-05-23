@@ -19,6 +19,7 @@ var __meta__ = { // jshint ignore:line
         getOffset = kendo.getOffset,
         outerWidth = kendo._outerWidth,
         outerHeight = kendo._outerHeight,
+        stableSort = kendo.support.stableSort,
         OPEN = "open",
         CLOSE = "close",
         DEACTIVATE = "deactivate",
@@ -749,10 +750,31 @@ var __meta__ = { // jshint ignore:line
                 return;
             }
             var target = e.target;
-            var elements = this.element.find(focusableNodesSelector).filter(':visible[tabindex!=-1]');
-            var focusableItems = elements.sort(function(prevEl,nextEl) {
-                return prevEl.tabIndex - nextEl.tabIndex;
+            var elements = this.element.find(focusableNodesSelector).filter(function(i, item){
+                return item.tabIndex >= 0 && $(item).is(':visible');
             });
+            var focusableItems;
+
+            if (stableSort) {
+                focusableItems = elements.sort(function(prevEl, nextEl) {
+                    return prevEl.tabIndex - nextEl.tabIndex;
+                });
+            } else {
+                var attrName = "__k_index";
+                elements.each(function(i, item){
+                    item.setAttribute(attrName, i);
+                });
+
+                focusableItems = elements.sort(function(prevEl, nextEl) {
+                    return prevEl.tabIndex === nextEl.tabIndex ?
+                        parseInt(prevEl.getAttribute(attrName), 10) - parseInt(nextEl.getAttribute(attrName), 10) :
+                        prevEl.tabIndex - nextEl.tabIndex;
+                });
+
+                elements.each(function(i, item){
+                    item.removeAttribute(attrName);
+                });
+            }
             var focusableItemsCount = focusableItems.length;
             var lastIndex = focusableItemsCount - 1;
             var focusedItemIndex = focusableItems.index(target);
