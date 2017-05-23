@@ -8,7 +8,7 @@ position: 6
 
 # Adaptive Rendering
 
-As of the [Kendo UI Q3 2013 release](http://www.telerik.com/blogs/new-in-kendo-ui-q3-2013), the Grid supports adaptive enhancements, such as changes in styling and behavior, to provide consistency to the client device experience.
+The Kendo UI Grid supports adaptive enhancements, such as changes in styling and behavior, to provide consistency to the client device experience.
 
 For instance, when you filter or edit data on a mobile device, Kendo UI slides in a new screen for the user, which is a departure from the rather desktop-like inline and popup behaviors. To see these features in action, refer to the [adaptive rendering demos](http://demos.telerik.com/kendo-ui/m/index#grid/adaptive).
 
