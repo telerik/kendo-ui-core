@@ -101,7 +101,7 @@ The following example demonstrates the basic configuration for the ListBox tag h
 
 ## See Also
 
-* [JavaScript API Reference of the ListBox](../../../kendo-ui/api/javascript/ui/listbox)
+* [JavaScript API Reference of the ListBox](http://docs.telerik.com/kendo-ui/api/javascript/ui/listbox)
 * [ListBox HtmlHelper for ASP.NET MVC](http://docs.telerik.com/aspnet-mvc/helpers/listbox/overview)
 * [Overview of Telerik UI for ASP.NET Core - RC1]({% slug overview_aspnetmvc6_aspnetmvc %})
 * [Get Started with Telerik UI for ASP.NET MVC in ASP.NET Core Projects]({% slug gettingstarted_aspnetmvc6_aspnetmvc %})

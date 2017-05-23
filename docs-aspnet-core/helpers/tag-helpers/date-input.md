@@ -40,7 +40,7 @@ The DateInput tag helper configuration options are passed as attributes of the t
 
 ## Event Handling
 
-You can subscribe to all DateInput [events](../../../kendo-ui/api/javascript/ui/dateinput#events).
+You can subscribe to all DateInput [events](http://docs.telerik.com/kendo-ui/api/javascript/ui/dateinput#events).
 
 ### By Handler Name
 
@@ -87,7 +87,7 @@ The following example demonstrates how to subscribe to events by a template dele
 
 ### Existing Instances
 
-To reference an existing Kendo UI DateInput instance, use the [`jQuery.data()`](http://api.jquery.com/jQuery.data/) configuration option. Once a reference is established, use the [DateInput API](../../../kendo-ui/api/javascript/ui/dateinput#methods) to control its behavior.
+To reference an existing Kendo UI DateInput instance, use the [`jQuery.data()`](http://api.jquery.com/jQuery.data/) configuration option. Once a reference is established, use the [DateInput API](http://docs.telerik.com/kendo-ui/api/javascript/ui/dateinput#methods) to control its behavior.
 
 ###### Example
 

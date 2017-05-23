@@ -79,7 +79,7 @@ The following example demonstrates how to access an existing DatePicker instance
 
 ## See Also
 
-* [Overview of the JavaScript Kendo UI DatePicker Widget](../../../kendo-ui/controls/editors/datepicker/overview)
+* [Overview of the JavaScript Kendo UI DatePicker Widget](http://docs.telerik.com/kendo-ui/controls/editors/datepicker/overview)
 * [Overview of Telerik UI for ASP.NET Core - RC1]({% slug overview_aspnetmvc6_aspnetmvc %})
 * [Get Started with Telerik UI for ASP.NET MVC in ASP.NET Core Projects]({% slug gettingstarted_aspnetmvc6_aspnetmvc %})
 * [Get Started with Telerik UI for ASP.NET MVC in ASP.NET Core Projects on Linux]({% slug gettingstartedlinux_aspnetmvc6_aspnetmvc %})

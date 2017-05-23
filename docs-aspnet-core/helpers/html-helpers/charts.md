@@ -97,7 +97,7 @@ The following example demonstrates the basic configuration for the Line Chart Ht
 
 ## See Also
 
-* [JavaScript API Reference of the Charts](../../../kendo-ui/api/javascript/dataviz/ui/chart)
+* [JavaScript API Reference of the Charts](http://docs.telerik.com/kendo-ui/api/javascript/dataviz/ui/chart)
 * [Charts HtmlHelper for ASP.NET MVC](http://docs.telerik.com/aspnet-mvc/helpers/chart/overview)
 * [Charts Official Demos](http://demos.telerik.com/)
 * [Overview of Telerik UI for ASP.NET Core - RC1]({% slug overview_aspnetmvc6_aspnetmvc %})
