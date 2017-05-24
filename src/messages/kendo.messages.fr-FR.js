@@ -187,6 +187,39 @@ $.extend(true, kendo.ui.Grid.prototype.options.messages,{
   "noRecords": "Aucun enregistrement disponible."
 });
 }
+  /* TreeList messages */
+
+if (kendo.ui.TreeList) {
+kendo.ui.TreeList.prototype.options.messages =
+$.extend(true, kendo.ui.TreeList.prototype.options.messages,{
+  "noRows": "Aucun enregistrement à afficher",
+  "loading": "Chargement...",
+  "requestFailed": "La requête a échoué.",
+  "retry": "Réessayer",
+  "commands": {
+      "edit": "Modifier",
+      "update": "Mettre à jour",
+      "canceledit": "Annuler",
+      "create": "Créer",
+      "createchild": "Créer un élément enfant",
+      "destroy": "Supprimer",
+      "excel": "Export Excel",
+      "pdf": "Export PDF"
+  }
+});
+}
+
+if (kendo.ui.TreeList) {
+kendo.ui.TreeList.prototype.options.columnMenu =
+$.extend(true, kendo.ui.TreeList.prototype.options.columnMenu, {
+    "messages": {
+        "columns": "Choisissez les colonnes",
+        "filter": "Appliquer les filtres",
+        "sortAscending": "Tri (croissant)",
+        "sortDescending": "Tri (décroissant)"
+    }
+});
+}
 
 /* Pager messages */
 
