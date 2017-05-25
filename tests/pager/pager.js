@@ -691,4 +691,12 @@
         ok(container.find("select").data("kendoDropDownList")
             .wrapper.css("display") !== "none");
     });
+
+    test("kendoPager list is hidden when a click outside is performed", function() {
+        var ul = setup();
+        ul.find(".k-current-page").click();
+        ok(pager.list.hasClass("k-state-expanded"));
+        $(document.body).trigger("mousedown");
+        ok(!pager.list.hasClass("k-state-expanded"));
+    });
 })();
