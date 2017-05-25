@@ -275,7 +275,7 @@ Server validation is often needed when performing editing. The section below dem
                 return Json(new[] { product }.ToDataSourceResult(request, ModelState));
             }
 
-1. Subscribe to the [`error`](../http://docs.telerik.com/kendo-ui/api/javascript/data/datasource#events-error) event of the data source. It is fired when model state errors or other unexpected problem occurs when making the Ajax request. In the event handler, display the errors and call the [`cancelChanges`](../http://docs.telerik.com/kendo-ui/api/javascript/ui/grid#methods-cancelChanges) method of the Grid.
+1. Subscribe to the [`error`](http://docs.telerik.com/kendo-ui/api/javascript/data/datasource#events-error) event of the data source. It is fired when model state errors or other unexpected problem occurs when making the Ajax request. In the event handler, display the errors and call the [`cancelChanges`](http://docs.telerik.com/kendo-ui/api/javascript/ui/grid#methods-cancelChanges) method of the Grid.
 
     ###### Example
 

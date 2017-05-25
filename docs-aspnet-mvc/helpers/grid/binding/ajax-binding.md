@@ -267,7 +267,7 @@ To download the Visual Studio Project, refer to [this GitHub repository](https:/
 
 To pass additional parameters to the action, use the `Data` method. Provide the name of a JavaScript function which will return a JavaScript object with the additional data.
 
-The custom parameter names must not match reserved words, which are used by the Kendo UI DataSource for [sorting](../http://docs.telerik.com/kendo-ui/api/javascript/data/datasource#configuration-serverSorting), [filtering](../http://docs.telerik.com/kendo-ui/api/javascript/data/datasource#configuration-serverFiltering), [paging](../http://docs.telerik.com/kendo-ui/api/javascript/data/datasource#configuration-serverPaging), and [grouping](../http://docs.telerik.com/kendo-ui/api/javascript/data/datasource#configuration-serverGrouping).
+The custom parameter names must not match reserved words, which are used by the Kendo UI DataSource for [sorting](http://docs.telerik.com/kendo-ui/api/javascript/data/datasource#configuration-serverSorting), [filtering](http://docs.telerik.com/kendo-ui/api/javascript/data/datasource#configuration-serverFiltering), [paging](http://docs.telerik.com/kendo-ui/api/javascript/data/datasource#configuration-serverPaging), and [grouping](http://docs.telerik.com/kendo-ui/api/javascript/data/datasource#configuration-serverGrouping).
 
 The following example demonstrates how to add the additional parameters to the action method.
 
