@@ -1,4 +1,4 @@
-﻿(function(){
+(function(){
 
 var RangeSlider = kendo.ui.RangeSlider;
 var div = {};
