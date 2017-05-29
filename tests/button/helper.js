@@ -1,4 +1,4 @@
-﻿var button,
+var button,
     buttonContainer;
 
 function getButton(contents) {

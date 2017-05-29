@@ -1,4 +1,4 @@
-﻿(function(){
+(function(){
 
 var Slider = kendo.ui.Slider;
 var input;
