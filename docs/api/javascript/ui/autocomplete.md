@@ -472,6 +472,8 @@ The character used to separate multiple values. Empty by default.
 
 > As of Q3 2016 the Autocomplete widget supports multiple separators listed in an array. All separators will be replaced with the first array item, which acts as a default separator.
 
+> Using the separator option will still bind the primitive stringe value of the input. In case you need to bind multiple data items, you can consider the [MultiSelect widget]({%slug overview_kendoui_multiselect_widget%}).
+
 #### Example - set separator to allow multiple values
 
     <input id="autocomplete" />
