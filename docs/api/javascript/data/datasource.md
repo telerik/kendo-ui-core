@@ -3419,7 +3419,7 @@ The grouping configuration. Accepts the same values as the [`group`](#configurat
 
 ### hasChanges `Boolean`
 
-Checks if the data items have changed.
+Checks if the data items have changed. **Requires an [ID field] to be configured in [`schema.model.id`](#configuration-schema.model)**, otherwise will always return `true`.
 
 #### Returns
 
