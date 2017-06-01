@@ -235,7 +235,7 @@ The following example demonstrates the basic configuration of the Gantt HtmlHelp
     )
 )
 
-<script>
+<script type="text/javascript">
 $(function() {
     //Notice that the Name() of the Gantt is used to get its client-side instance.
     var gantt = $("#gantt").data("kendoGantt");

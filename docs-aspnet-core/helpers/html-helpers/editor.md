@@ -117,7 +117,7 @@ The following example demonstrates the basic configuration of the Editor HtmlHel
     </text>)
 )
 
-    <script>
+    <script type="text/javascript">
     $(function() {
         //Notice that the Name() of the Editor is used to get its client-side instance.
         var editor = $("#editor").data("kendoEditor");

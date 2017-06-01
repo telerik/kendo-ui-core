@@ -165,7 +165,7 @@ The following example demonstrates the basic configuration of the Scheduler Html
         )
     )
 
-    <script>
+    <script type="text/javascript">
     $(function() {
         //Notice that the Name() of the Scheduler is used to get its client-side instance.
         var scheduler = $("#scheduler").data("kendoScheduler");

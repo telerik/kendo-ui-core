@@ -566,6 +566,7 @@ var __meta__ = { // jshint ignore:line
 
                 for (var i = 0; i < this._selectedDataItems.length; i++) {
                     this._selectedIndexes.push(undefined);
+                    this._getElementByDataItem(this._selectedDataItems[i]).addClass(SELECTED);
                 }
 
                 this._triggerChange(removed, added);
@@ -954,7 +955,7 @@ var __meta__ = { // jshint ignore:line
                 element, match;
 
             for (var i = 0; i < dataView.length; i++) {
-                match = dataView[i].item && isPrimitive(dataView[i].item) ? dataView[i].item === dataItem : valueGetter(dataView[i].item) === valueGetter(dataItem);
+                match = dataView[i].item && isPrimitive(dataView[i].item) ? dataView[i].item === dataItem : valueGetter(dataView[i].item).toString() === valueGetter(dataItem).toString();
                 if (match) {
                     element = dataView[i];
                     break;
