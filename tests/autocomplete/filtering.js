@@ -452,6 +452,29 @@ test("resize popup on search when autoWidth is enabled", function(assert) {
 
 });
 
+test("autoWidth adds one pixel to avoid browser pixel rounding", function(assert) {
+    var autocomplete = new AutoComplete(input, {
+        autoWidth: true,
+        animation:{
+            open: {
+                duration:0
+            },
+            close: {
+                duration:0
+            },
+        },
+        dataSource: {
+            data: ["Short item", "An item with really, really, really, really, really, really, really, really, really, long text","Short item"]
+        }
+    });
+
+    autocomplete.search("a");
+    equal(autocomplete.popup.element.parent(".k-animation-container").width(), autocomplete.popup.element.outerWidth(true) + 1);
+    autocomplete.close();
+    autocomplete.search("a");
+    equal(autocomplete.popup.element.parent(".k-animation-container").width(), autocomplete.popup.element.outerWidth(true) + 1);
+});
+
 asyncTest("update popup height when no items are found", 1, function() {
     var autocomplete = new AutoComplete(input, {
         dataSource: $.map(new Array(30), function(_, idx) { return "item" + idx.toString() })

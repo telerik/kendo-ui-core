@@ -1017,7 +1017,7 @@ Returns true if running in a Cordova/PhoneGap/Telerik AppBuilder application.
 
 ### support.browser `Object`
 Convenience replacement for the now deprecated jQuery.browser. It returns an object with the browser identifier initialized as a boolean property and a version.
-The identifiers are identical to jQuery ones, e.g. "webkit", "opera", "msie" and "mozilla". In addition WebKit browsers will return their name e.g. "safari" and "chrome".
+The identifiers are identical to jQuery ones, e.g. "webkit", "opera", "msie", "edge" and "mozilla". In addition WebKit browsers will return their name e.g. "safari" and "chrome".
 
     <script>
         console.log(kendo.stringify(kendo.support.browser));

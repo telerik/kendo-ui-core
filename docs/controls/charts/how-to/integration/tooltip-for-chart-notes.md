@@ -8,7 +8,7 @@ slug: howto_showtooltipfornotes_charts
 
 # Show Tooltip for Chart Notes
 
-You can attach a [Kendo UI Tootlip](/api/javascript/ui/tooltip) to Kendo UI Chart notes and display it when a [note is hovered](/api/javascript/dataviz/ui/chart#events-noteHover).
+You can attach a [Kendo UI Drawing Tootlip](https://demos.telerik.com/kendo-ui/drawing/tooltip) to Kendo UI Chart notes and display it when a note is hovered.
 
 The example below demonstrates how to achieve this behavior.
 
@@ -16,9 +16,7 @@ The example below demonstrates how to achieve this behavior.
 
 ```html
 
-	<div class="chartWrapper" content="tooltipContent" >
-      <div id="chart"></div>
-    </div>
+    <div id="chart"></div>
     <script>
        var grandSlam = [{
         "year": "2003",
@@ -85,7 +83,19 @@ The example below demonstrates how to achieve this behavior.
             label: {
               position: "outside"
             },
-            position: "bottom"
+            position: "bottom",
+            visual: function(e) {
+                // The original note visual
+                var visual = e.createVisual();
+
+                // Set the drawing tooltip options
+                // https://demos.telerik.com/kendo-ui/drawing/tooltip
+                visual.options.tooltip = {
+                    content: e.value
+                };
+
+                return visual;
+            }
           }
         },{
           field: "loss",
@@ -101,30 +111,9 @@ The example below demonstrates how to achieve this behavior.
           majorGridLines: {
             visible: false
           }
-        },
-        tooltip: {
-          visible: false,
-          template: "#= series.name #: #= value #"
-        },
-        noteHover: onNoteHover
+        }
       });
 
-      var tooltip = $(".chartWrapper").kendoTooltip({
-        position: "top",
-        showOn: "click",
-        content: tooltipContent
-      }).data("kendoTooltip");
-
-      var noteValue = "";
-
-      function tooltipContent(){
-        return noteValue;
-      }
-
-      function onNoteHover(e){
-        noteValue = e.value;
-        tooltip.show(e.element);
-      }
     </script>
 ```
 

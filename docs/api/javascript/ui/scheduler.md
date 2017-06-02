@@ -6037,7 +6037,7 @@ Get the time slot from given element.
 
 ### view
 
-Sets the current Scheduler view.
+Gets or sets the current Scheduler view.
 
 To get the current Scheduler view name, use the [`viewName` method](#methods-viewName).
 
@@ -6046,6 +6046,10 @@ To get the current Scheduler view name, use the [`viewName` method](#methods-vie
 ##### type `String` *(optional)*
 
 The view type to select.
+
+#### Returns
+
+`kendo.ui.SchedulerView` the current Scheduler view.
 
 #### Example - set the current view
 

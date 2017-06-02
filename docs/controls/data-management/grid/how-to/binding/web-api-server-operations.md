@@ -52,6 +52,11 @@ namespace grid_data_source_request_web_api.Controllers
     }
 }
 ```
+
+> **Important**
+>
+> As the dataSource type "webapi" is intended for [Telerik UI for ASP.NET MVC](/aspnet-mvc), the kendo.aspnetmvc.js has to be included.
+
 ```jQuery
 <div id="grid"></div>
 <script>
