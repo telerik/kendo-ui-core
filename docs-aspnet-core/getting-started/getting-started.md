@@ -13,33 +13,39 @@ This article demonstrates how to configure an ASP.NET Core project to use Progre
 
 ## Prerequisites
 
-1. Download [Visual Studio 2015](https://www.visualstudio.com/en-us/downloads/download-visual-studio-vs.aspx).
-2. Download [Visual Studio 2015 Update 3](https://www.visualstudio.com/en-us/news/releasenotes/vs2015-update3-vs).
-3. Download [NET Core 1.0.0 - VS 2015 Tooling Preview 2](https://www.microsoft.com/net/core#windows).
-4. (Optional) Download [.NET SDK Core for Windows](https://www.microsoft.com/net/core#windows).
+###Using VS2017
+1. Download [Visual Studio 2017](https://www.microsoft.com/net/core#windowsvs2017).
+2. Use VS Installer to [install the .NET Core workload (see Step 2)](https://www.microsoft.com/net/core#windowsvs2017)
+
+###Using VS2015   
+
+1. Download [Visual Studio 2015 with Update 3](https://blogs.msdn.microsoft.com/visualstudio/2016/06/27/visual-studio-2015-update-3-and-net-core-1-0-available-now/).
+3. Download [NET Core 1.1.0 - VS 2015 Tooling Preview 2](https://www.microsoft.com/net/download/core).
+4. (Optional) Download [.NET SDK Core for Windows](https://www.microsoft.com/net/download/core).
+
 
 ## Configuration
 
-To configure an ASP.NET Core project to use Progress Telerik UI for ASP.NET MVC:
+To configure an ASP.NET Core Web Application to use Progress Telerik UI for ASP.NET Core:
 
-1. Create an [ASP.NET MVC web site](#configuration-Create).
+1. Create an [ASP.NET Core Web Application](#configuration-Create).
 2. Add the [Kendo UI NuGet package](#configuration-Add).
 
-### Create ASP.NET Core Web Sites
+### Create ASP.NET Core Project
 
 > **Important**
 >
 > If you are configuring an existing project, skip this step.
 
-Below are listed the steps for you to follow when creating an ASP.NET Core web site.
+Below are listed the steps for you to follow when creating an ASP.NET Core Web Application.
 
 1. Select **File** > **New Project**.
 
 2. Choose **Templates** > **Visual C#** > **Web** > **ASP.NET Core Web Application (.NET Core)**.
 
-3. Set a name and location for the project.
+3. Set a name and location for the project and click **OK**.
 
-4. Select **ASP.NET Core Templates** > **Web Application** from the project templates.
+4. Select **Web Application** from the **ASP.NET Core Templates** section.
 
 5. Click **OK** to create the project.
 
@@ -55,16 +61,24 @@ Below are listed the steps for you to follow when creating an ASP.NET Core web s
 
   ![NuGet package manager](images/manage-nuget-packages.png)
 
-2. Choose the [Telerik package source](../../aspnet-mvc/getting-started/nuget-install#set-up-nuget-package-source) and search for `Telerik.UI.for.AspNet.Core`.
+2. Select the Telerik package source and search for `Telerik.UI.for.AspNet.Core`.
 
-3. Install the `Telerik.UI.for.AspNet.Core` package. This should add a line to you `project.json` similar to the one shown below.
+3. Install the `Telerik.UI.for.AspNet.Core` package. This should add a line to your `project.json` (for VS2015) or `csproj` (for VS2017) similar to the examples below.
 
-    ###### Example
+    ###### Example for VS2015
 
             "dependencies": {
                 ...
                 "Telerik.UI.for.AspNet.Core": "{{ site.mvcCoreVersion }}"
             }
+
+    ###### Example for VS2017
+
+           <PackageReference Include="Telerik.UI.for.AspNet.Core" Version="{{ site.mvcCoreVersion }}" />
+
+    > **Important**
+    >
+    > If you use VS2015, you need to manually change the version of the **Microsoft.AspNetCore.Routing** and **Microsoft.AspNetCore.Mvc** to **1.1.0** in the project.json, in order to match the ASP.NET Core version distributed with our product. 
 
 4. Open `Startup.cs` by using a text editor (IDE) and update it in the way demonstrated in the following examples.
 
@@ -99,6 +113,12 @@ Below are listed the steps for you to follow when creating an ASP.NET Core web s
 
 5. Import the `Kendo.Mvc.UI` namespace in `~/Views/_ViewImports.cshtml` through `@using Kendo.Mvc.UI`.
 
+    ###### Example
+
+            @using MyASPNETCoreProject
+            @addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+            @using Kendo.Mvc.UI
+
 6. Copy the Kendo UI client-side resources. You can use either of the following approaches:
 
     * Manual installation&mdash;To manually install the resources, copy the `js` and `styles` folders from the `telerik.ui.for.aspnetmvc` archive to `wwwroot\lib\kendo-ui`. The archive is located in **Downloads** > **UI for ASP.NET MVC** of your [www.telerik.com](http://www.telerik.com/) account.
@@ -125,17 +145,17 @@ Below are listed the steps for you to follow when creating an ASP.NET Core web s
             <environment names="Staging,Production">
                 ...
 
-                <link rel="stylesheet"
-                      href="https://kendo.cdn.telerik.com/{{ site.cdnVersion }}/styles/kendo.common-nova.min.css"
-                      asp-fallback-href="~/lib/kendo-ui/styles/kendo.common-nova.min.css"
-                      asp-fallback-test-class="k-common-test-class"
-                      asp-fallback-test-property="opacity" asp-fallback-test-value="0" />
+            <link rel="stylesheet"
+                    href="https://kendo.cdn.telerik.com/{{ site.cdnVersion }}/styles/kendo.common-nova.min.css"
+                    asp-fallback-href="~/lib/kendo-ui/styles/kendo.common-nova.min.css"
+                    asp-fallback-test-class="k-common-test-class"
+                    asp-fallback-test-property="opacity" asp-fallback-test-value="0" />
 
-                <link rel="stylesheet"
-                       href="https://kendo.cdn.telerik.com/{{ site.cdnVersion }}/styles/kendo.nova.min.css"
-                      asp-fallback-href="~/lib/kendo-ui/styles/kendo.nova.min.css"
-                      asp-fallback-test-class="k-theme-test-class"
-                      asp-fallback-test-property="opacity" asp-fallback-test-value="0" />
+            <link rel="stylesheet"
+                    href="https://kendo.cdn.telerik.com/{{ site.cdnVersion }}/styles/kendo.nova.min.css"
+                    asp-fallback-href="~/lib/kendo-ui/styles/kendo.nova.min.css"
+                    asp-fallback-test-class="k-theme-test-class"
+                    asp-fallback-test-property="opacity" asp-fallback-test-value="0" />
             </environment>
             </head>
             <body>

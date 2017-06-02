@@ -267,7 +267,7 @@
         equal(container.attr("title"), "");
     });
 
-    test("title attributes are temporary removed from element parents", function() {
+    test("title attributes are preserved for element parents", function() {
         container.attr("title", "foo");
         container.append($('<span title="bar"/>'));
 
@@ -275,7 +275,7 @@
 
         triggerEvent(container.find("span"), "mouseenter");
 
-        equal(container.attr("title"), "");
+        equal(container.attr("title"), "foo");
     });
 
     test("title attributes is restored on mouse leave", function() {

@@ -92,7 +92,9 @@ var __meta__ = { // jshint ignore:line
 
     function restoreTitle(element) {
         while(element.length) {
-            restoreTitleAttributeForElement(element);
+            if (restoreTitleAttributeForElement(element)) {
+                break;
+            }
             element = element.parent();
         }
     }
@@ -102,6 +104,7 @@ var __meta__ = { // jshint ignore:line
         if (title) {
             element.attr("title", title);
             element.removeData(kendo.ns + "title");
+            return true;
         }
     }
 
@@ -110,12 +113,15 @@ var __meta__ = { // jshint ignore:line
         if (title) {
             element.data(kendo.ns + "title", title);
             element.attr("title", "");
+            return true;
         }
     }
 
     function saveTitleAttributes(element) {
         while(element.length && !element.is("body")) {
-            saveTitleAttributeForElement(element);
+            if (saveTitleAttributeForElement(element)) {
+                break;
+            }
             element = element.parent();
         }
     }

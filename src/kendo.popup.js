@@ -746,7 +746,7 @@ var __meta__ = { // jshint ignore:line
         },
 
         _keepInTrap: function(e) {
-            if (e.which !== 9 || !this.shouldTrap()) {
+            if (e.which !== 9 || !this.shouldTrap() || e.isDefaultPrevented()) {
                 return;
             }
 
