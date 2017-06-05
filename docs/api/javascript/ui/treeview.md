@@ -1078,6 +1078,10 @@ A JSON-formatted string or selector that specifies the node to be inserted.
 
 The node that will precede the newly-appended node.
 
+#### Returns
+
+`jQuery` The inserted `<li>` element, wrapped in a jQuery object.
+
 #### Example
 
     <div id="treeview"></div>
@@ -1111,6 +1115,10 @@ A JSON-formatted string or selector that specifies the node to be inserted.
 ##### referenceNode `jQuery`
 
 The node that follows the inserted node.
+
+#### Returns
+
+`jQuery` The inserted `<li>` element, wrapped in a jQuery object.
 
 #### Example
 
