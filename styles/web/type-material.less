@@ -2598,6 +2598,12 @@ border-color: @drop-down-hover-border-color;
 .box-shadow(@focused-shadow);
 }
 
+.k-maskedtextbox.k-state-disabled > .k-textbox:hover,
+.k-dateinput.k-state-disabled > .k-textbox:hover {
+    border-color: @drop-down-border-color;
+    box-shadow: none;
+}
+
 .k-textbox:focus,
 .k-autocomplete.k-state-focused,
 .k-picker-wrap.k-state-focused,
