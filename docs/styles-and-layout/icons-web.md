@@ -645,7 +645,7 @@ $(".k-icon").each(function() {
     function iconGlyph(el) {
         return window.getComputedStyle(el,':before').content.charCodeAt(1).toString(16);
      }
-     $(this.parentNode).append("Unicode: " + iconGlyph(this) + "")
+     $(this.parentNode).append("<br />Unicode: " + iconGlyph(this) + "")
 });
 </script>
 

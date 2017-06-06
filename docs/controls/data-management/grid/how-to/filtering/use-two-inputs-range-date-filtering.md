@@ -1,21 +1,21 @@
 ---
-title: Use Grid Filtering with two Kendo DateTimePickers in row mode
-page_title: Use Grid Filtering with two Kendo DateTimePickers in row mode | Kendo UI Grid Widget
-description: "Learn how create range filtering for dates with two Kendo DateTimePickers in row mode."
+title: Use Grid Filtering with Kendo UI DateTimePickers in Row Modes
+page_title: Use Grid Filtering with Kendo UI DateTimePickers in Row Modes | Kendo UI Grid
+description: "Learn how to create range filtering for dates in the Grid by using two Kendo UI DateTimePickers in row filtering modes."
 previous_url: /controls/data-management/grid/how-to/use-two-inputs-range-date-filtering
 slug: howto_gridfiltering_rangedatefiltering_grid
 ---
 
-# Use Grid Filtering with Dynamic Default Values
+# Use Grid Filtering with Kendo UI DateTimePickers in Row Modes
 
-The following example demonstrates how to create range filter for dates with two Kendo DateTimePickers in row filtering mode.
+Your project might require you to create range filtering for dates in the Grid by using two Kendo UI DateTimePickers in row filtering modes.
 
-To see how the example below functions filter date column in a range. As a result, the grid filters the data in the given range.
+To see how the following example works, filter the date column in a range. As a result, the Grid filters the data in the given range.
 
 ###### Example
 
 ```html
-<script src="../content/shared/js/people.js"></script>
+<script src="http://demos.telerik.com/kendo-ui/content/shared/js/people.js"></script> 
 
 <div id="example">
     <div id="grid"></div>
@@ -80,7 +80,7 @@ To see how the example below functions filter date column in a range. As a resul
             filterCell.empty();
             filterCell.html(`
                             <span style="display:flex; justify-content:center;">
-                   		        <span>From:</span>	
+                   		        <span>From:</span>
 								<input  class='start-date'/>
                     			<span>To:</span>
 								<input  class='end-date'/>

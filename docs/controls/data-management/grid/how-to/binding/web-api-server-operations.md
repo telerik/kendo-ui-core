@@ -1,12 +1,12 @@
 ---
-title: Use WebAPI with Server-Side Operations
-page_title: Use WebAPI with Server-Side Operations | Kendo UI Grid
+title: Use Web API with Server-Side Operations
+page_title: Use Web API with Server-Side Operations | Kendo UI Grid
 description: "Learn how to implement the server-side data operations of paging, sorting, and filtering with WebAPI and Kendo UI Grid."
 previous_url: /controls/data-management/grid/how-to/web-api-server-operations
 slug: howto_use_webapi_withserverside_operations_grid
 ---
 
-# Use WebAPI with Server-Side Operations
+# Use Web API with Server-Side Operations
 
 Kendo UI does not provide any out-of-the-box capability for implementing server-side paging, sorting, and grouping.
 
@@ -55,7 +55,9 @@ namespace grid_data_source_request_web_api.Controllers
 
 > **Important**
 >
-> As the dataSource type "webapi" is intended for [Telerik UI for ASP.NET MVC](/aspnet-mvc), the kendo.aspnetmvc.js has to be included.
+> The `dataSource` type Web API is intended for [Telerik UI for ASP.NET MVC](/aspnet-mvc). As a result, you need to include `kendo.aspnetmvc.js`.
+
+###### Example
 
 ```jQuery
 <div id="grid"></div>

@@ -1,6 +1,6 @@
 ---
 title: Implement Excel-Like Filter Menus
-page_title: Implement Excel-Like Filter Menus | Kendo UI Grid Widget
+page_title: Implement Excel-Like Filter Menus | Kendo UI Grid
 description: "Learn how to implement an Excel-like filter menu in a Kendo UI Grid."
 slug: howto_gridfiltering_excellike_grid
 ---
