@@ -9,7 +9,7 @@ slug: htmlhelpers_scheduler_aspnetcore
 
 The Scheduler HtmlHelper extension is a server-side wrapper for the [Kendo UI Scheduler](http://demos.telerik.com/kendo-ui/scheduler/index) widget.
 
-It enables you to configure the Kendo UI Scheduler widget from server-side code. The [Scheduler](http://docs.telerik.com/kendo-ui/controls/scheduling/scheduler/overview) displays a set of events—appointments or tasks. It can display scheduled events in different views—a single day, a whole week, or month and as a list of tasks which need to be accomplished.
+It enables you to configure the Scheduler from server-side code. The [Scheduler](http://docs.telerik.com/kendo-ui/controls/scheduling/scheduler/overview) displays a set of events, appointments, or tasks. It support the display of scheduled events in different views&mdash;single days, whole weeks, or months, or as a list of tasks which need to be accomplished.
 
 For more information on the HtmlHelper, refer to the article on the [Scheduler HtmlHelper for ASP.NET MVC](http://docs.telerik.com/aspnet-mvc/helpers/scheduler/mvc-scheduler-overview).
 
@@ -52,52 +52,52 @@ The following example demonstrates how to define the Scheduler by using the Sche
     public class SchedulerController : Controller
     {
     	private SchedulerTaskService taskService;
-    
+
     	public SchedulerController()
     	{
     		this.taskService = new SchedulerTaskService();
     	}
-    
+
     	public ActionResult Index()
     	{
     		return View();
     	}
-    
+
     	public virtual JsonResult Read([DataSourceRequest] DataSourceRequest request)
     	{
     		return Json(taskService.GetAll().ToDataSourceResult(request));
     	}
-    
+
     	public virtual JsonResult Destroy([DataSourceRequest] DataSourceRequest request, TaskViewModel task)
     	{
     		if (ModelState.IsValid)
     		{
     			taskService.Delete(task, ModelState);
     		}
-    
+
     		return Json(new[] { task }.ToDataSourceResult(request, ModelState));
     	}
-    
+
     	public virtual JsonResult Create([DataSourceRequest] DataSourceRequest request, TaskViewModel task)
     	{
     		if (ModelState.IsValid)
     		{
     			taskService.Insert(task, ModelState);
     		}
-    
+
     		return Json(new[] { task }.ToDataSourceResult(request, ModelState));
     	}
-    
+
     	public virtual JsonResult Update([DataSourceRequest] DataSourceRequest request, TaskViewModel task)
     	{
     		if (ModelState.IsValid)
     		{
     			taskService.Update(task, ModelState);
     		}
-    
+
     		return Json(new[] { task }.ToDataSourceResult(request, ModelState));
     	}
-    
+
     	protected override void Dispose(bool disposing)
     	{
     		taskService.Dispose();
@@ -148,7 +148,7 @@ The following example demonstrates the basic configuration of the Scheduler Html
                         new { Text = "Meeting Room 101", Value = 1, Color = "#6eb3fa" },
                         new { Text = "Meeting Room 201", Value = 2, Color = "#f58a8a" }
                 });
-           
+
         })
         .DataSource(d => d
                 .Model(m =>

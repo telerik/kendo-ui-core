@@ -6374,6 +6374,30 @@ If set to `true` the user can get the grid in unsorted state by clicking the sor
     });
     </script>
 
+### sortable.showIndexes `Boolean` *(default: true)*
+
+If set to `true` the user will see sort sequence indicators for sorted columns.
+
+#### Example - do not allow unsorting
+
+    <div id="grid"></div>
+    <script>
+    $("#grid").kendoGrid({
+      columns: [
+        { field: "name" },
+        { field: "age" }
+      ],
+      dataSource: [
+        { name: "Jane Doe", age: 30 },
+        { name: "John Doe", age: 33 }
+      ],
+      sortable: {
+        showIndexes: true,
+        mode: "multiple"
+      }
+    });
+    </script>
+
 ### sortable.initialDirection `String` *(default: asc)*
 
 Determines the inital (from un-sorted to sorted state) sort direction. The supported values are `asc` and `desc`.

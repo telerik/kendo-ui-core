@@ -1,16 +1,16 @@
 ---
-title: Use Grid Filtering with Kendo RangeSlider
-page_title: Use Grid Filtering with two Kendo RangeSlider | Kendo UI Grid Widget
-description: "Learn how create range filtering with Kendo RangeSlider"
+title: Use Grid Filtering with Kendo UI RangeSliders
+page_title: Use Grid Filtering with Kendo UI RangeSliders | Kendo UI Grid
+description: "Learn how create range filtering in the Grid by using the Kendo UI RangeSlider."
 previous_url: /controls/data-management/grid/how-to/use-range-slider-in-filter-menu
 slug: howto_gridfiltering_rangefilteringwithslider_grid
 ---
 
-# Use Grid Filtering with Dynamic Default Values
+# Use Grid Filtering with Kendo UI RangeSliders
 
-The following example demonstrates how to create range filter with Kendo RangeSlider.
+Your project might require you to create range filtering in the Grid by using the Kendo UI RangeSlider.
 
-To see how the example below functions filter column with the Kendo RangeSlider widget. As a result, the grid filters the data in the given range.
+To see how the following example functions, filter the column by using the Kendo UI RangeSlider. As a result, the Grid filters the data in the given range.
 
 ###### Example
 

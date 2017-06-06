@@ -9,7 +9,11 @@ slug: htmlhelpers_gantt_aspnetcore
 
 The Gantt HtmlHelper extension is a server-side wrapper for the [Kendo UI Gantt](http://demos.telerik.com/kendo-ui/gantt/index) widget.
 
-It allows you to configure the Kendo UI Gantt from server-side code, helps with data binding and editing. The [Gantt](http://docs.telerik.com/kendo-ui/controls/scheduling/gantt/overview) displays a set of tasks and dependencies, which are used to visualize project planning data. The widget provides a TreeList section where the tasks can be edited, sorted and reordered in a grid-like fashion, as well as a Timeline section, where the tasks and dependencies are visualized under an adjustable time ruler, and can be resized, moved, edited and removed. It can also display the Timeline in three different views – day, week and month.
+It allows you to configure the Gantt from server-side code and helps with data binding and editing. The [Gantt](http://docs.telerik.com/kendo-ui/controls/scheduling/gantt/overview) displays a set of tasks and dependencies which are used to visualize project-planning data.
+
+The widget provides:
+* A TreeList section where the user can edit the tasks, then sort and reorder them in a grid-like fashion.
+* A Timeline section where the tasks and dependencies are visualized under an adjustable time ruler. The user can resize, move, edit and remove them. The Gantt also supports the display of the Timeline section in three different views&mdash;day, week, and month.
 
 For more information on the HtmlHelper, refer to the article on the [Gantt HtmlHelper for ASP.NET MVC](http://docs.telerik.com/aspnet-mvc/helpers/gantt/overview).
 
@@ -148,7 +152,7 @@ The following example demonstrates how to define the Gantt by using the Gantt Ht
 
 ## Configuration
 
-The following example demonstrates the basic configuration of the Gantt HtmlHelper and how to get the Scheduler instance.
+The following example demonstrates the basic configuration of the Gantt HtmlHelper and how to get the Gantt instance.
 
 ###### Example
 

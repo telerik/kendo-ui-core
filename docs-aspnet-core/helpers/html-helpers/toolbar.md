@@ -9,7 +9,7 @@ slug: htmlhelpers_toolbar_aspnetcore
 
 The ToolBar HtmlHelper extension is a server-side wrapper for the [Kendo UI ToolBar](http://demos.telerik.com/kendo-ui/toolbar/index) widget.
 
-It enables you to configure the Kendo UI ToolBar widget from server-side code. The [ToolBar](http://docs.telerik.com/kendo-ui/controls/navigation/toolbar/overview) widget is designed to hold different types of controls such as buttons, button groups, toggle buttons, split buttons, and other customized elements.
+It enables you to configure the ToolBar from server-side code. The [ToolBar](http://docs.telerik.com/kendo-ui/controls/navigation/toolbar/overview) is designed to hold different types of controls such as buttons, button groups, toggle buttons, split buttons, and other customized elements.
 
 For more information on the HtmlHelper, refer to the article on the [ToolBar HtmlHelper for ASP.NET MVC](http://docs.telerik.com/aspnet-mvc/helpers/toolbar/overview).
 
@@ -80,7 +80,7 @@ The following example demonstrates the basic configuration of the ToolBar HtmlHe
     .Events(e => e.Click("onClick").Toggle("onToggle").Open("onOpen").Close("onClose").OverflowOpen("onOverflowOpen").OverflowClose("onOverflowClose"))
 )
 
-<script type="text/javascript"> 
+<script type="text/javascript">
     $(function() {
 	    //Initialize a DropDownList in a ToolBar item's template.
 		$("#dropdown").kendoDropDownList({
@@ -95,7 +95,7 @@ The following example demonstrates the basic configuration of the ToolBar HtmlHe
                 { text: "Subtitle", value: 5 },
             ]
         });
-		
+
         //Notice that the Name() of the ToolBar is used to get its client-side instance.
         var toolbar = $("#ToolBar").data("kendoToolBar");
     });

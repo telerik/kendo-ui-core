@@ -13,16 +13,21 @@ This article demonstrates how to configure an ASP.NET Core project to use Progre
 
 ## Prerequisites
 
-###Using VS2017
-1. Download [Visual Studio 2017](https://www.microsoft.com/net/core#windowsvs2017).
-2. Use VS Installer to [install the .NET Core workload (see Step 2)](https://www.microsoft.com/net/core#windowsvs2017)
+The prerequisites you need depend on the Visual Studio (VS) version your project requires:
 
-###Using VS2015   
+* [VS 2017](#using-vs-2017)
+* [VS 2015](#using-vs-2015)
 
-1. Download [Visual Studio 2015 with Update 3](https://blogs.msdn.microsoft.com/visualstudio/2016/06/27/visual-studio-2015-update-3-and-net-core-1-0-available-now/).
+### Using VS 2017
+
+1. Download [VS 2017](https://www.microsoft.com/net/core#windowsvs2017).
+2. Use the VS Installer to [install the .NET Core workload](https://www.microsoft.com/net/core#windowsvs2017).
+
+### Using VS 2015   
+
+1. Download [VS 2015 with Update 3](https://blogs.msdn.microsoft.com/visualstudio/2016/06/27/visual-studio-2015-update-3-and-net-core-1-0-available-now/).
 3. Download [NET Core 1.1.0 - VS 2015 Tooling Preview 2](https://www.microsoft.com/net/download/core).
 4. (Optional) Download [.NET SDK Core for Windows](https://www.microsoft.com/net/download/core).
-
 
 ## Configuration
 
@@ -37,16 +42,12 @@ To configure an ASP.NET Core Web Application to use Progress Telerik UI for ASP.
 >
 > If you are configuring an existing project, skip this step.
 
-Below are listed the steps for you to follow when creating an ASP.NET Core Web Application.
+To create an ASP.NET Core Web Application:
 
 1. Select **File** > **New Project**.
-
 2. Choose **Templates** > **Visual C#** > **Web** > **ASP.NET Core Web Application (.NET Core)**.
-
 3. Set a name and location for the project and click **OK**.
-
 4. Select **Web Application** from the **ASP.NET Core Templates** section.
-
 5. Click **OK** to create the project.
 
 ### Add NuGet Packages
@@ -54,6 +55,8 @@ Below are listed the steps for you to follow when creating an ASP.NET Core Web A
 > **Important**
 >
 > Before you continue, set up the [Telerik NuGet Private Feed](../../aspnet-mvc/getting-started/nuget-install#set-up-nuget-package-source). Store the password in clear text because the .NET Core tooling does not support encryption.
+
+To add the NuGet packages:
 
 1. Open the NuGet Package Manager.
 
@@ -65,20 +68,23 @@ Below are listed the steps for you to follow when creating an ASP.NET Core Web A
 
 3. Install the `Telerik.UI.for.AspNet.Core` package. This should add a line to your `project.json` (for VS2015) or `csproj` (for VS2017) similar to the examples below.
 
-    ###### Example for VS2015
+    > **Important**
+    >
+    > If you use VS 2015 and to ensure the matching of the ASP.NET Core version which is distributed with the UI for ASP.NET Core, you need to manually change the `Microsoft.AspNetCore.Routing` and `Microsoft.AspNetCore.Mvc` versions to `1.1.0` in `project.json`.
+
+    ###### Example
+
+    ```tab-VS2015
 
             "dependencies": {
                 ...
                 "Telerik.UI.for.AspNet.Core": "{{ site.mvcCoreVersion }}"
             }
-
-    ###### Example for VS2017
+    ```
+    ```tab-VS2017
 
            <PackageReference Include="Telerik.UI.for.AspNet.Core" Version="{{ site.mvcCoreVersion }}" />
-
-    > **Important**
-    >
-    > If you use VS2015, you need to manually change the version of the **Microsoft.AspNetCore.Routing** and **Microsoft.AspNetCore.Mvc** to **1.1.0** in the project.json, in order to match the ASP.NET Core version distributed with our product. 
+    ```
 
 4. Open `Startup.cs` by using a text editor (IDE) and update it in the way demonstrated in the following examples.
 

@@ -1,24 +1,24 @@
 ---
 title: Use Grid Filtering with Dynamic Default Values
-page_title: Use Grid Filtering with Dynamic Default Values | Kendo UI Grid Widget
-description: "Learn how to use dynamic default field values in a Kendo UI Grid when filtering is applied."
+page_title: Use Grid Filtering with Dynamic Default Values | Kendo UI Grid
+description: "Learn how to use dynamic default field values in a Kendo UI Grid when you apply its filtering functionality."
 previous_url: /controls/data-management/grid/how-to/use-filtering-with-dynamic-default-values
 slug: howto_gridfiltering_dynamicdefaultvalues_grid
 ---
 
 # Use Grid Filtering with Dynamic Default Values
 
-The following example demonstrates how to use dynamic default field values in a Grid when filtering is applied.
+Your project might require you to apply a specific approach to the Grid when you use its filtering functionality.
 
-This approach comes in handy when you want the Grid to:
-* Display the filtered filed value as the default one when a new record is being added.
-* Show the new record added to the Grid.
+For example, you might need to:
+* Display the filtered filed value as default when a new record is added.
+* Show the latest record that is added to the Grid.
 
-To see how the example below functions:
-1. Filter the Grid by its **Category** column to be equal to a given value.
+The following example demonstrates how to use dynamic default field values in a Grid when you apply its filtering functionality. To see how it works:
+1. Filter the Grid by its **Category** column in a way it is equal to a given value.
 2. Click **Add new record**.
 
-As a result, the default category of the new record matches the current (filtered) one and a new row is added to the Grid.
+As a result, the default category of the new record matches the current (filtered) category and a new row is added to the Grid.
 
 ###### Example
 

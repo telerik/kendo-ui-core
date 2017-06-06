@@ -7,9 +7,9 @@ slug: howto_bindobjectstongmodel_autocomplete
 
 # Bind Objects to ngModel
 
-> Important
+> **Important**
 >
-> As of Q3 2016 **AutoComplete** can offer only one way binding of objects/data items. The value returned after selecting multiple items (using the [separator option](/api/javascript/ui/autocomplete#configuration-separator)) will be always the primitive string value. If you need selecting of multiple values and binding them with `ngModel` you can consider the [MultiSelect widget]({% slug howto_bindobjectstongmodel_multiselect %}).
+> As of the Kendo UI Q3 2016 release, the AutoComplete offers only one-way binding of objects or data items. When you use the [`separator`](/api/javascript/ui/autocomplete#configuration-separator) option, the value which is returned after the selection of multiple items will be always the primitive string value. To select multiple values and bind them with `ngModel`, consider using the [MultiSelect]({% slug howto_bindobjectstongmodel_multiselect %}).
 
 To see the example, refer to the article on [binding objects to `ngModel` instead of to primitive values]({% slug howto_bindobjectstongmodel_dropdownlist %}) in the DropDownList.
 

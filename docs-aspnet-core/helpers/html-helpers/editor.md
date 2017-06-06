@@ -9,7 +9,7 @@ slug: htmlhelpers_editor_aspnetcore
 
 The Editor HtmlHelper extension is a server-side wrapper for the [Kendo UI Editor](http://demos.telerik.com/kendo-ui/editor/index) widget.
 
-It enables you to configure the Kendo UI Editor widget from server-side code. The [Editor](http://docs.telerik.com/kendo-ui/controls/editors/editor/overview) allows you to create rich textual content through a What-You-See-Is-What-You-Get (WYSIWYG) interface. The generated widget value is an XHTML markup.
+It enables you to configure the Editor from server-side code. The [Editor](http://docs.telerik.com/kendo-ui/controls/editors/editor/overview) allows you to create rich textual content through a What-You-See-Is-What-You-Get (WYSIWYG) interface. The generated widget value is an XHTML markup.
 
 For more information on the HtmlHelper, refer to the article on the [Editor HtmlHelper for ASP.NET MVC](http://docs.telerik.com/aspnet-mvc/helpers/editor/overview).
 

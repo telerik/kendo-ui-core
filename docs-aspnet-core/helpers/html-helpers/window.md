@@ -9,7 +9,7 @@ slug: htmlhelpers_window_aspnetcore
 
 The Window HtmlHelper extension is a server-side wrapper for the [Kendo UI Window](http://demos.telerik.com/kendo-ui/window/index) widget.
 
-It enables you to configure the Kendo UI Window widget from server-side code. The [Window](http://docs.telerik.com/kendo-ui/controls/layout/window/overview) displays content in a modal or non-modal HTML window. By default, a Window can be moved, resized and closed. Its content can also be defined either as static HTML, or dynamically loaded via AJAX.
+It enables you to configure the Window from server-side code. The [Window](http://docs.telerik.com/kendo-ui/controls/layout/window/overview) displays content in a modal or non-modal HTML window. By default, the user can move, resize, and close a Window. Its content can also be defined either as static HTML or dynamically loaded through AJAX.
 
 For more information on the HtmlHelper, refer to the article on the [Window HtmlHelper for ASP.NET MVC](http://docs.telerik.com/aspnet-mvc/helpers/window/overview).
 
@@ -22,8 +22,8 @@ The following example demonstrates how to define the Window by using the Window 
 ```tab-Razor
  @(Html.Kendo().Window()
     .Name("window")
-    .Title("Window title") 
-    .Content(@<text> 
+    .Title("Window title")
+    .Content(@<text>
             Static content of the Window.
     </text>)
 )
@@ -69,7 +69,7 @@ The following example demonstrates the basic configuration of the Window HtmlHel
         )
 )
 
-<script type="text/javascript"> 
+<script type="text/javascript">
     $(function() {
         //Notice that the Name() of the Window is used to get its client-side instance.
         var dialog = $("#window").data("kendoWindow");
