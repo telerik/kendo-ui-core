@@ -185,13 +185,15 @@ Defines the animation duration.
 The text or a function which result will be shown within the Tooltip.
 By default the Tooltip will display the target element title attribute content.
 
+If you need to retrieve the `title` attribute of the target from inside the `content` function, then use `target.data("title")`, as shown below.
+
 > If the content passed to the Tooltip includes scripts, they will be executed. If this is not desired, make sure to strip any undesired content in advance.
 
 #### Example - extract the content from target element content
 
     <div id="container">
-        <span>Some content</span>
-        <span>Some more content</span>
+        <span title="foo">Some content</span>
+        <span title="bar">Some more content</span>
     </div>
 
     <script>
@@ -200,7 +202,7 @@ By default the Tooltip will display the target element title attribute content.
             filter: "span",
             content: function(e) {
               var target = e.target; // the element for which the tooltip is shown
-              return target.text(); // set the element text as content of the tooltip
+              return target.data("title") + " " + target.text(); // set the element text as content of the tooltip
             }
           });
         });
