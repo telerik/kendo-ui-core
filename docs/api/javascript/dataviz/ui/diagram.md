@@ -2769,6 +2769,23 @@ Defines the y-coordinate of the shape when added to the Diagram.
 
 The [`template`](/api/javascript/kendo#methods-template) which renders the content of the shape when bound to a dataSource. The names you can use in the template correspond to the properties used in the dataSource. For an example, refer to the dataSource topic below.
 
+### theme `String`
+
+The diagram theme. This can be either a built-in theme or "sass". When set to "sass" the diagram will read the variables from the [Sass-based themes]({% slug sassbasedthemes_kendoui %}).
+
+The supported values are:
+* "sass" - special value, see notes
+* "black"
+* "blueopal"
+* "bootstrap"
+* "default"
+* "highcontrast"
+* "metro"
+* "metroblack"
+* "moonlight"
+* "silver"
+* "uniform"
+
 ### zoom `Number` *(default: 1)*
 
 The zoom level in percentages.
