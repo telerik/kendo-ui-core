@@ -483,13 +483,31 @@ Adjusts the widget layout to match the size of the container.
     <div id="barcode" style="width: 300px; height: 150px;"></div>
     <script>
     $("#barcode").kendoBarcode({
-      value: "FOO",
-      width: 300
+      value: "FOO"
     });
 
     $("#barcode")
        .css("width", "600px")
        .data("kendoBarcode").resize();
+    </script>
+
+> **Important**
+>
+> If a fixed width is set using the [width](#configuration-width) option, the [resize](#methods-resize) method will not adjust the widget to match the size of the container. In this case, update both the container's width and the widget's width to the appropriate value.
+
+#### Example
+
+    <div id="barcode" style="width: 300px; height: 150px;"></div>
+    <script>
+    $("#barcode").kendoBarcode({
+      value: "FOO",
+      width: 300
+    });
+
+    $("#barcode").css("width", "600px");
+    var barcode = $("#barcode").data("kendoBarcode");
+    barcode.setOptions({ width: 600 });
+    barcode.resize();
     </script>
 
 #### Parameters
@@ -554,4 +572,3 @@ The value to set.
 #### Returns
 
 `String` The value of the barcode.
-
