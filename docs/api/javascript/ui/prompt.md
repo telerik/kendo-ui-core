@@ -55,6 +55,18 @@ The title of the Cancel button.
       }
     }).data("kendoPrompt").open();
     </script>
+### title `String` *(default: " ")*
+
+The title of the prompt
+
+#### Example
+
+    <div id="prompt"></div>
+    <script>
+    $("#prompt").kendoPrompt({
+       title: "My custom title",
+    }).data("kendoPrompt").open();
+    </script>
 
 ## Fields
 
@@ -75,7 +87,7 @@ The title of the Cancel button.
     messages:{
       okText: "OK"
     }
-  }).data("kendoPrompt").result.done(function(data){
+    }).data("kendoPrompt").result.done(function(data){
           console.log("User accepted with text: " + data);
       })
       .fail(function(data){
