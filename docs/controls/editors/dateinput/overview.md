@@ -71,6 +71,8 @@ You can seamlessly use DateInput with a DatePicker widget. To achieve this behav
     });
     </script>
 
+Integration with `DateTimePicker` and `TimePicker` is also provided.
+
 ## Localization
 
 The DateInput enables you to modify the text that is displayed in the placeholders based on your requirements.
