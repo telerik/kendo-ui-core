@@ -879,7 +879,7 @@ var __meta__ = { // jshint ignore:line
 
         _scale: function() {
             var that = this,
-                wrapper = that.wrapper,
+                wrapper = that.wrapper.find(".k-multiselect-wrap"),
                 wrapperWidth = wrapper.width(),
                 span = that._span.text(that.input.val()),
                 textWidth;
@@ -1206,6 +1206,7 @@ var __meta__ = { // jshint ignore:line
             });
             if (this.options.clearButton) {
                 this._clear.insertAfter(this.input);
+            	this.wrapper.addClass("k-multiselect-clearable");
             }
         },
 

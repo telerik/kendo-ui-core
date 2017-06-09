@@ -739,7 +739,8 @@ var __meta__ = { // jshint ignore:line
                 "tabIndex": -1
             });
             if (this.options.clearButton) {
-                this._clear.insertAfter(this.element);
+            	this._clear.insertAfter(this.element);
+            	this.wrapper.addClass("k-autocomplete-clearable");
             }
         },
 

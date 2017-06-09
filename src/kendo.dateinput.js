@@ -194,6 +194,7 @@ var __meta__ = { // jshint ignore:line
         _bindInput: function () {
             var that = this;
             that.element
+                .on("paste" + ns, proxy(that._paste, that))
                 .on("keydown" + ns, proxy(that._keydown, that))
                 .on(INPUT_EVENT_NAME, proxy(that._input, that))
                 .on("mouseup" + ns, proxy(that._mouseUp, that))
@@ -348,6 +349,10 @@ var __meta__ = { // jshint ignore:line
 
                 that._formElement = form.on("reset", that._resetHandler);
             }
+        },
+
+        _paste: function (e) {
+            e.preventDefault();
         },
 
         _keydown: function (e) {

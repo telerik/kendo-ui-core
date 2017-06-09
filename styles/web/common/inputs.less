@@ -399,16 +399,6 @@ span.k-datetimepicker .k-select+.k-select
     padding-bottom: 0.3em;
 }
 
-.k-combobox-clearable {
-    .k-input {
-        padding-right: 1.9em;
-        box-sizing: border-box;
-        overflow: hidden;
-        text-overflow: ellipsis;
-        height: (@input-height + .354em);
-    }
-}
-
 /* fix missing bottom border on browser zoom in Chrome */
 .k-webkit .k-combobox .k-dropdown-wrap:before,
 .k-webkit .k-picker-wrap:before,
@@ -653,6 +643,19 @@ body .k-datetimepicker .k-select
     bottom: 0;
     right: 0;
     padding: .03em .2em;
+}
+
+/* Inputs */
+.k-autocomplete-clearable,
+.k-multiselect-clearable,
+.k-combobox-clearable {
+    .k-input {
+        padding-right: 1.9em;
+        box-sizing: border-box;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        height: (@input-height + .354em);
+    }
 }
 
 /* Date/Time Pickers */

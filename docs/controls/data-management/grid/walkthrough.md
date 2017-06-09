@@ -77,7 +77,7 @@ For more information on binding the Grid to a remote data source, refer to the a
 
 ### Selection
 
-To enable selection in the Grid, set the [`selectable`](/api/javascript/ui/grid#configuration-selectable) option to `true`. This enables the default single-row selection option.
+To enable selection in the Grid set the [`selectable`](/api/javascript/ui/grid#configuration-selectable) option to `true`. This enables the default single-row selection option.
 
 ###### Example
 
@@ -95,6 +95,21 @@ It is also possible to set the `selectable` option to any of the following value
 * `cell`
 * `multiple row`
 * `multiple cell`
+
+Since R2 2017 SP1, the Grid widget provides another option for enabling multiple selection by rendering a checkbox column. This functionality is enabled through the [`columns.selectable`](/api/javascript/ui/grid#configuration-columns.selectable) property. Enabling the `selectable` property of a column will also render a checkbox in the header, which allows selecting/deselecting of all rows on the current page. 
+
+> **Important** 
+> The built-in checkbox selection is not integrated with the select functionality of the grid enabled via the Grid's [`selectable`](/api/javascript/ui/grid#configuration-selectable) option. They are mutually exclusive and we recommend using only one of the approaches for enabling selection.
+
+###### Example
+
+    $("#grid").kendoGrid({
+      columns: [
+        { selectable: true },
+        { field: "name" }
+      ],
+      dataSource: [ { name: "Jane Doe" }, { name: "John Doe" } ]
+    });
 
 #### The row Value
 
@@ -143,7 +158,7 @@ The `multiple cell` value enables the selection of multiple cells within the Gri
 When the multiple selection is enabled, it is possible to select multiple rows or cells by dragging the mouse cursor and select them in a similar way to a block of text.
 
 > **Important**  
-> * Selection is not persisted when the Grid is rebound, that is, when paging, filtering, sorting, editing, or virtual scrolling occurs. To achieve such behavior, [use this custom implementation]({% slug howto_persist_row_selection_paging_sorting_filtering_grid %}).
+> * Selection is not persisted when the Grid is rebound, that is, when paging, filtering, sorting, editing, or virtual scrolling occurs, unless the [`persistSelection`](/api/javascript/ui/grid#configuration-persistSelection) property is enabled (_`persistSelection` is applicable for **row** selection only_). A solution for persisting the selection without the `persistSelection` property is available in [this HowTo article]({% slug howto_persist_row_selection_paging_sorting_filtering_grid %}).
 > * Selection performance may decrease when the page size is too large, or if no paging is used, and the Grid is rendering hundreds or thousands of items. This behavior is most frequently seen in Internet Explorer. Grouping, hierarchy, and frozen columns also have a negative impact on the selection performance, because these features make the HTML output of the Grid more complex. Therefore, it is recommended to use paging and a reasonable page size.
 
 ### Paging
