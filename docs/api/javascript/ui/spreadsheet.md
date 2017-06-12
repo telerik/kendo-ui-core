@@ -1284,6 +1284,31 @@ Gets the cell contextMenu instance.
 
 `kendo.ui.ContextMenu` The menu instance.
 
+#### Example - dynamically adding a context menu item and associating a selection command
+```
+    <div id="spreadsheet"></div>
+
+    <script>      
+        $(function() {            
+            var spreadsheet = $("#spreadsheet").kendoSpreadsheet().data("kendoSpreadsheet"),
+                cellContextMenu = spreadsheet.cellContextMenu(); 
+              
+          	cellContextMenu.append([{ text: "Highlight", cssClass: "highlight" }]);    
+          	
+            cellContextMenu.bind("select", function(e) {
+               var command = $(e.item).text();
+              
+              if(command == "Highlight") {
+              	var sheet = spreadsheet.activeSheet(),
+                    selection = sheet.selection();   
+                
+                selection.background("green");
+              }
+           });
+        });
+    </script>
+```
+
 ### rowHeaderContextMenu
 Gets the row header contextMenu instance.
 

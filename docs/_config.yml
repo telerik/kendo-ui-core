@@ -594,6 +594,11 @@ defaults:
         path: "api/javascript"
     values:
         editableExample: "true"
+-
+    scope:
+        path: "knowledge-base"
+    values:
+        layout: "kb-page"
 
 type_links:
     "kendo.Class": "/api/javascript/class"

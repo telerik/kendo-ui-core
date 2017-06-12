@@ -8,7 +8,6 @@ position: 0
 tags: kendo ui map, location, coordinates, longitude, latitude
 teampulseid:
 ticketid: 1111871
-publish: false
 pitsid:
 ---
 
