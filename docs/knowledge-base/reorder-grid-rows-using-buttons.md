@@ -8,7 +8,6 @@ position: 0
 tags: grid, reordering, items
 teampulseid:
 ticketid: 1112024
-publish: false
 pitsid:
 
 ---

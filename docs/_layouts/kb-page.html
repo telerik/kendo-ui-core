@@ -1,0 +1,49 @@
+---
+layout: index
+---
+<div id="page-inner-content">
+    <div id="page-nav">
+        <div id="page-tree"></div>
+        <script>
+        $("#page-tree").kendoTreeView({
+            dataSource: {
+                transport: {
+                    read: {
+                        url: "{{site.baseurl}}/{{page.category}}.json",
+                        dataType: "json"
+                    }
+                },
+                schema: {
+                    model: {
+                        id: "path",
+                        children: "items",
+                        hasChildren: "items"
+                    }
+                }
+            },
+            messages: {
+                loading: " "
+            },
+            select: preventParentSelection,
+            template: navigationTemplate("{{site.baseurl}}/"),
+            dataBound: expandNavigation("{{page.url | remove_first: '/' }}")
+        });
+        </script>
+    </div>
+    
+    {% if page.editable %}<a id="page-edit-link" href="https://github.com/telerik/kendo-ui-core/edit/master/docs/{{ page.url | replace: '.html','' }}.md"><span class="k-font-icon k-i-pencil"></span> Edit this page</a>{% endif %}
+    {% if page.kind == "api" %}<div id="markdown-toc"></div>{% endif %}
+    
+    <div id="page-article">
+        
+        <article>
+            {% if page.title %}
+                <h1>{{ page.title }}</h1>
+            {% endif %}
+
+            {{ content }}
+        </article>
+    </div>
+    {% if site.ff-sheet-id %}{% include feedback-form.html %}{% endif %}
+    {% include footer.html %}
+</div>

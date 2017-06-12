@@ -8,7 +8,6 @@ position: 0
 tags: listview, paging, pager, mvc, kendo ui, two pagers
 teampulseid:
 ticketid: 1111995
-publish: false
 pitsid:
 ---
 
