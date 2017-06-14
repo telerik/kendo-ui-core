@@ -50,9 +50,9 @@ There are two ways to reference the IntelliSense:
 
 Other articles on Kendo UI integration with third-party tools and frameworks:
 
-* [Angular 2.0]({% slug angular2support_integration_kendoui %})
+* [SharePoint Add-Ins]({% slug sharepoint_tutorials %})
 * [Twitter Bootstrap]({% slug twitterbootstrapintegration_integration_kendoui %})
-* [Web Components]({% slug webcomponents_integration_kendoui %})
+* [Angular 2.0]({% slug angular2support_integration_kendoui %})
 * [RequireJS]({% slug requirejs_integration_kendoui %})
 * [TypeScript]({% slug typescript_integration_kendoui %})
 * [Telerik Data Access]({% slug bindtotelerikdataaccesstool_integration_kendoui %})

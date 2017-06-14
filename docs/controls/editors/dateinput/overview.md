@@ -57,9 +57,15 @@ The following example demonstrates how to create a non-editable DateInput with a
 
 The input in each section of the component is always valid for the relevant section. For example, you cannot enter 23 in the month section. As a result, the value in DateInput is always a valid date.
 
-## DatePicker Integration
+## Integration with Other Editor Widgets
 
-You can seamlessly use DateInput with a DatePicker widget. To achieve this behavior, enable the `dateInput` property of DatePicker.
+You can integrate the DateInput with:
+
+* DatePickers
+* DateTimePickers
+* TimePickers
+
+The following example demonstrates how to integrate the DateInput with the DatePicker by enabling the `dateInput` property of the DatePicker.
 
 ###### Example
 
@@ -70,8 +76,6 @@ You can seamlessly use DateInput with a DatePicker widget. To achieve this behav
         dateInput: true
     });
     </script>
-
-Integration with `DateTimePicker` and `TimePicker` is also provided.
 
 ## Localization
 

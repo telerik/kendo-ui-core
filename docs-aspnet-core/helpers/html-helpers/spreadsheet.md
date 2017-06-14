@@ -9,7 +9,7 @@ slug: htmlhelpers_spreadsheet_aspnetcore
 
 The Spreadsheet HtmlHelper extension is a server-side wrapper for the [Kendo UI Spreadsheet](https://demos.telerik.com/kendo-ui/spreadsheet/index) widget.
 
-It enables you to configure the Kendo UI Spreadsheet widget from server-side code. The [Spreadsheet](http://docs.telerik.com/kendo-ui/controls/data-management/spreadsheet/overview) enables you to edit and visualize tabular data by using cell formatting options, styles, and themes.
+It enables you to configure the Kendo UI Spreadsheet widget from server-side code. The [Spreadsheet](http://docs.telerik.com/kendo-ui/controls/data-management/spreadsheet/overview) allows you to edit and visualize tabular data by using cell formatting options, styles, and themes.
 
 For more information on the HtmlHelper, refer to the article on the [Spreadsheet HtmlHelper for ASP.NET MVC](http://docs.telerik.com/aspnet-mvc/helpers/spreadsheet/overview).
 
@@ -46,34 +46,34 @@ The following example demonstrates how to define the Spreadsheet by using the Sp
                         .TextAlign(SpreadsheetTextAlign.Center)
                         .Color("white");
                 });
-    
+
                 rows.Add().Height(25).Cells(cells =>
                 {
                     cells.Add()
                         .Value("ID")
                         .Background("rgb(212,223,50)")
                         .TextAlign(SpreadsheetTextAlign.Center);
-    
+
                     cells.Add()
                         .Value("Product")
                         .Background("rgb(212,223,50)")
                         .TextAlign(SpreadsheetTextAlign.Center);
-    
+
                     cells.Add()
                         .Value("Quantity")
                         .Background("rgb(212,223,50)")
                         .TextAlign(SpreadsheetTextAlign.Center);
-    
+
                     cells.Add()
                         .Value("Price")
                         .Background("rgb(212,223,50)")
                         .TextAlign(SpreadsheetTextAlign.Center);
-    
+
                     cells.Add()
                         .Value("Tax")
                         .Background("rgb(212,223,50)")
                         .TextAlign(SpreadsheetTextAlign.Center);
-    
+
                     cells.Add()
                         .Value("Amount")
                         .Background("rgb(212,223,50)")

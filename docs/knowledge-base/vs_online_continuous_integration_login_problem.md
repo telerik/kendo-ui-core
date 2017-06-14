@@ -1,8 +1,8 @@
 ---
 title: Visual Studio Online Continuous Integration Asking for Login
-description: The login dialog is randomly displayed during builds in VS Online builds
+description: A solution for The login dialog is randomly displayed during builds in VS Online builds
 type: troubleshooting
-page_title: VS Online Continuous Integration has authentication issue
+page_title: VS Online Continuous Integration has an authentication issue
 slug: vs_online_continuous_integration_login_problem
 position: 0
 tags: vs2017
@@ -11,6 +11,7 @@ pitsid:
 ---
 
 ## Environment
+
 <table>
  <tr>
   <td>Product</td>
@@ -41,24 +42,26 @@ pitsid:
   <td>C#</td>
  </tr>
 </table> 
- 
+
 ## Description
-We have stored passwords using clear text on developer systems, yet the login dialog is (randomly) displayed.Other nuget repositories that are secured work as expected. 
+
+We have stored passwords by using clear text on developer systems. Yet the login dialog is (randomly) displayed. Other NuGet repositories that are secured work as expected. 
 
 ## Solutions
+
 There is no built-in solution. Check the [suggested workarounds](#suggested-workarounds) instead.
 
 ## Suggested Workarounds
-In our experience, the following options have helped other clients who have reported issues with credentials in ASP.NET MVC & Core Projects.
-  
-1) Reset the Nuget.config file and use nuget restore
-  - Delete the NuGet.config file %AppData%\\NuGet\\  
-  - Go over the procedure of storing the Telerik credentials once again. Is my assumption regarding the NuGet package correct or is it the [Telerik.UI.for.AspNet.Core NuGet feed](http://docs.telerik.com/aspnet-mvc/getting-started/nuget-install#use-the-telerik-private-nuget-feed) which is needed?  
-  - use **nuget restore** instead of **dotnet restore** command  
-  
-This suggestion is related to a known issue in the official .NET Core CLI repository:  
-[https://github.com/dotnet/cli/issues/3174](https://github.com/dotnet/cli/issues/3174)  
-  
-2) [Create own NuGet package](https://docs.microsoft.com/en-us/nuget/create-packages/creating-a-package) 
 
-3) The issue has been with the Nuget Server and the problem disappeared on its own.
+The following options have helped other clients to overcome reported issues with credentials in ASP.NET MVC & Core Projects.
+
+1) Reset the `Nuget.config` file and use the `nuget restore` command.
+  - Delete the `NuGet.config` file `%AppData%\\NuGet\\`  
+  - Go through the procedure of storing the Telerik credentials once again and answer the questions "Is my assumption regarding the NuGet package correct or is it the [Telerik.UI.for.AspNet.Core NuGet feed](http://docs.telerik.com/aspnet-mvc/getting-started/nuget-install#use-the-telerik-private-nuget-feed) that is needed?  
+  - Use the `nuget restore` instead of `dotnet restore` command  
+
+  This workaround is related to the known [https://github.com/dotnet/cli/issues/3174](https://github.com/dotnet/cli/issues/3174) issue in the official .NET Core CLI repository.  
+
+2) [Create your own NuGet package](https://docs.microsoft.com/en-us/nuget/create-packages/creating-a-package).
+
+3) The issue was related to the Nuget Server and the problem was solved on its own.

@@ -9,7 +9,7 @@ slug: htmlhelpers_button_aspnetcore
 
 The Button HtmlHelper extension is a server-side wrapper for the [Kendo UI Button](http://demos.telerik.com/kendo-ui/button/index) widget.
 
-It enables you to configure the Kendo UI Button widget from server-side code. The [Button](http://docs.telerik.com/kendo-ui/controls/navigation/button/overview) provides a styled clickable UI functionality with arbitrary content. Apart from consistent Kendo UI styling, the Button provides keyboard operability for elements, which natively do not have it (e.g., span).
+It enables you to configure the Kendo UI Button widget from server-side code. The [Button](http://docs.telerik.com/kendo-ui/controls/navigation/button/overview) provides a styled clickable UI functionality with arbitrary content. Apart from consistent Kendo UI styling, the Button provides keyboard operability for elements, which natively do not have it&mdash;for example, `span`.
 
 For more information on the HtmlHelper, refer to the article on the [Button HtmlHelper for ASP.NET MVC](http://docs.telerik.com/aspnet-mvc/helpers/upload/overview).
 

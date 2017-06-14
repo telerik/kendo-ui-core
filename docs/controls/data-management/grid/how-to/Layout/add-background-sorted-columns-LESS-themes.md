@@ -1,88 +1,79 @@
 ---
-title: Add a Background to the Sorted Columns with LESS Themes
-page_title: Add a Background for the Sorted Columns with LESS Themes | Kendo UI Grid
-description: "Learn how to add background color to the sorted columns with LESS themes"
+title: Add Background Color to Sorted Columns by Using LESS Themes
+page_title: Add Background Color to Sorted Columns by Using LESS Themes | Kendo UI Grid
+description: "Learn how to add a background color to the sorted columns in a Kendo UI Grid by using the LESS themes."
 slug: howto_add_background_sorted_columns_LESS_themes_grid
 ---
 
-# Add a Background to the Sorted Columns with LESS Themes
+# Add Background Color to Sorted Columns by Using LESS Themes
 
-This article demonstrates how to add background to the sorted columns of the Grid with [LESS themes](/styles-and-layout/appearance-styling).
+Your project might require you to add a background color to the sorted columns of the Grid by using the [LESS themes]({% slug themesandappearnce_kendoui_desktopwidgets %}).
 
 To achieve this behavior:
 
-1. Change the default background color of the Alternate row to RGBA color format with a low opaque level.
-1. Add background color to the `.k-sorted` class by using RGBA color format.
+1. Change the default background of the alternate row to an RGBA color format with a low opaque level.
+1. Add the background color to the `.k-sorted` class by using the RGBA color format.
 
 > **Important**
->
-> The `.k-sorted` class is available since the Kendo UI 2017 R2 SP1 release.
+> * The `.k-sorted` class is available as of the Kendo UI 2017 R2 SP1 release.
+> * If you do not override the `k-alt` class, the background color of the `.k-sorted` class will not apply.
 
-## Examples
+## Scenarios
 
-### Dark themes
+The following examples demonstrate how to change the background color of selected rows in a Grid when working with:
 
-For dark themes, use lighter colors.
+* [Dark themes](#dark-themes)
+* [Light themes](#light-themes)
 
-##### Example
+### Dark Themes
 
-For the Kendo UI **Black** theme, the CSS code could look like this:
+When your project uses a dark theme, use light colors for the background of the selected rows.
 
-```CSS
-.k-grid .k-alt{
-    background-color: rgba(255, 255, 255, 0.04);
-}
-col.k-sorted, th.k-sorted {
-    background-color: rgba(255, 255, 255, 0.2);
-}
-``` 
+The following example demonstrates how to apply the suggested background colors to the selected Grid rows if your project uses the Black or Material Black theme.  
 
-##### Example
+###### Example
 
-For the Kendo UI **Material Black** theme, the CSS code could look like this:
+```tab-Black
+    .k-grid .k-alt {
+        background-color: rgba(255, 255, 255, 0.04);
+    }
+    col.k-sorted, th.k-sorted {
+        background-color: rgba(255, 255, 255, 0.2);
+    }
+```
+```tab-MaterialBlack
+    .k-grid .k-alt {
+        background-color: rgba(255, 255, 255, 0);
+    }
+    col.k-sorted, th.k-sorted {
+        background-color: rgba(255, 255, 255, 0.1);
+    }
+```
 
-```CSS
-.k-grid .k-alt{
-    background-color: rgba(255, 255, 255, 0);
-}
-col.k-sorted, th.k-sorted {
-    background-color: rgba(255, 255, 255, 0.1);
-}
-``` 
+### Light Themes
 
-### Light themes
+When your project uses a light theme, use dark colors for the background of the selected rows.
 
-For light themes, use darker colors.
+The following example demonstrates how to apply the suggested background colors to the selected Grid rows if your project uses the Default or Material theme.
 
-##### Example
+###### Example
 
-For the Kendo UI **Default** theme, the CSS code could look like this:
-
-```CSS
-.k-grid .k-alt{
-    background-color: rgba(0, 0, 0, 0.06);
-}
-col.k-sorted, th.k-sorted {
-    background-color: rgba(0, 0, 0, 0.1);
-}
-``` 
-
-##### Example
-
-For the Kendo UI **Material** theme, the CSS code could look like this:
-
-```CSS
-.k-grid .k-alt{
-    background-color: rgba(0, 0, 0, 0);
-}
-col.k-sorted, th.k-sorted {
-    background-color: rgba(0, 0, 0, 0.1);
-}
-``` 
-
-## Notes
-
-If you skip overriding the the `k-alt` class, the background color of the `.k-sorted` class will not apply.
+```tab-Default
+    .k-grid .k-alt {
+        background-color: rgba(0, 0, 0, 0.06);
+    }
+    col.k-sorted, th.k-sorted {
+        background-color: rgba(0, 0, 0, 0.1);
+    }
+```
+```tab-Material
+    .k-grid .k-alt {
+        background-color: rgba(0, 0, 0, 0);
+    }
+    col.k-sorted, th.k-sorted {
+        background-color: rgba(0, 0, 0, 0.1);
+    }
+```
 
 ## See Also
 
