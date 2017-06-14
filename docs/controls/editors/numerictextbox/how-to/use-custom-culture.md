@@ -18,7 +18,7 @@ The following example demonstrates how to extend an existing culture script, cre
     <input id="initial" value="10" min="1"/>
     <script>
         //extend en-GB
-        var customGB = $.extend({}, kendo.culture(), {
+        var customGB = $.extend(true, {}, kendo.culture(), {
             name: "custom-GB",
             numberFormat: {
               ",": " "
@@ -26,7 +26,7 @@ The following example demonstrates how to extend an existing culture script, cre
         });
 
         //add a reference to the custom culture script
-        kendo.cultures["custom-GB"] = customGB";
+        kendo.cultures["custom-GB"] = customGB;
     </script>
     <script>
         kendo.culture("en-GB");
