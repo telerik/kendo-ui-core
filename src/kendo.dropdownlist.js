@@ -599,6 +599,7 @@ var __meta__ = { // jshint ignore:line
             e.preventDefault();
             this.popup.unbind("activate", this._focusInputHandler);
             this._focused = this.wrapper;
+            this._prevent = false;
             this._toggle();
         },
 
@@ -701,7 +702,7 @@ var __meta__ = { // jshint ignore:line
             }
 
             if (!isPopupVisible || !that.filterInput) {
-                var current = that._focus();                
+                var current = that._focus();
 
                 if (key === keys.HOME) {
                     handled = true;
