@@ -2,6 +2,7 @@
 title: FilterMenu
 page_title: Configuration, methods and events of Kendo UI FilterMenu
 description: 'Configuration steps for the FilterMenu widget.'
+res_type: api
 ---
 
 # kendo.ui.FilterMenu

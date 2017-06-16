@@ -1,6 +1,7 @@
 ---
 title: Tooltip
 page_title: Configuration, methods and events of Kendo UI Tooltip
+res_type: api
 ---
 
 # kendo.ui.Tooltip

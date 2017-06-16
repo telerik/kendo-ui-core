@@ -2,6 +2,7 @@
 title: TabStrip
 page_title: Configuration, methods and events of Kendo UI Mobile TabStrip
 description: How to configure Mobile Tabstrip widget with a few clicks, change its behavior and use supported events.
+res_type: api
 ---
 
 # kendo.mobile.ui.TabStrip

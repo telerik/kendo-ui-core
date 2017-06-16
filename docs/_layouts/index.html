@@ -3,7 +3,8 @@
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width">
-        <title>{{ page.page_title || page.title }}</title>
+        {% if page.res_type %}<meta name="restype" content="{{ page.res_type }}">{% else %}<meta name="restype" content="documentation">{% endif %} 
+        <title>{% if page.page_title %}{{ page.page_title }}{% else %}{{ page.title }}{% endif %}</title>
         <link rel="shortcut icon" href="{{site.baseurl}}/favicon.ico"/>
         {% if page.description %}<meta name="description" content="{{page.description}}">{% endif %}
         <link href="//fonts.googleapis.com/css?family=Roboto:400,500,700,900" rel="stylesheet">

@@ -2,6 +2,7 @@
 title: DateTimePicker
 page_title: Configuration, methods and events of Kendo UI DateTimePicker
 description: Learn how to configure the UI DateTimePicker widget. Use methods to open, close, remove, enable, disable, set maximum or minimum values and more.
+res_type: api
 ---
 
 # kendo.ui.DateTimePicker

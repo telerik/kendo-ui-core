@@ -2,6 +2,7 @@
 title: LinearGauge
 page_title: Configuration, methods and events of Kendo UI DataViz LinearGauge
 description: Manipulate the configuration options of linear gauge, change the border of the gauge area and its color, learn how to use methods.
+res_type: api
 ---
 
 # kendo.dataviz.ui.LinearGauge

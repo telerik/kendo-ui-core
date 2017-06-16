@@ -2,6 +2,7 @@
 title: TreeView
 page_title: Configuration, methods and events of Kendo UI TreeView
 description: Documentation guide that helps the developer configure TreeView UI widget in a few quick steps, apply methods and trigger events.
+res_type: api
 ---
 
 # kendo.ui.TreeView

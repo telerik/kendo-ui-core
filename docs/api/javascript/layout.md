@@ -1,5 +1,6 @@
 ---
 title: Layout
+res_type: api
 ---
 
 # kendo.Layout

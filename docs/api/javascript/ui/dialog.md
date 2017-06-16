@@ -2,6 +2,7 @@
 title: Dialog
 page_title: Configuration, methods and events of Kendo UI Dialog
 description: How to initialize a Dialog UI widget and configure its behaviors, center a dialog, set its content and toggle the state of the UI widget.
+res_type: api
 ---
 
 # kendo.ui.Dialog

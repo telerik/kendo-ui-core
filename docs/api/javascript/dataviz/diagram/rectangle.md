@@ -1,5 +1,6 @@
 ---
 title: Rectangle
+res_type: api
 ---
 
 # kendo.dataviz.diagram.Rectangle

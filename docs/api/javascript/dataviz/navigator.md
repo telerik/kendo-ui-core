@@ -1,6 +1,7 @@
 ---
 title: Navigator
 page_title: API reference for Kendo UI Stock Chart Navigator
+res_type: api
 ---
 
 # kendo.dataviz.Navigator : kendo.Observable

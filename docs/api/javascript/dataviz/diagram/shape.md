@@ -1,5 +1,6 @@
 ---
 title: Shape
+res_type: api
 ---
 
 # kendo.dataviz.diagram.Shape

@@ -1,6 +1,7 @@
 ---
 title: pdf
 page_title: API reference for Kendo UI Drawing API (PDF) static functions
+res_type: api
 ---
 
 # kendo.pdf

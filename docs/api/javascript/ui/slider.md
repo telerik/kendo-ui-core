@@ -2,6 +2,7 @@
 title: Slider
 page_title: Configuration, methods and events of Kendo UI Slider
 description: Configuration of Slider UI control, different methods, and events, triggered when the slider value changes upon specific conditions.
+res_type: api
 ---
 
 # kendo.ui.Slider

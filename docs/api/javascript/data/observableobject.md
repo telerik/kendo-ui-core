@@ -2,6 +2,7 @@
 title: ObservableObject
 page_title: API Reference for ObservableObject, a building block of Kendo MVVM
 description: The documentation contains examples for the configuration of a new ObservableObject, methods and different types of events.
+res_type: api
 ---
 
 # kendo.data.ObservableObject

@@ -2,6 +2,7 @@
 title: ContextMenu
 page_title: Configuration, methods and events of Kendo UI ContextMenu
 description: How to configure all animations in ContextMenu UI widget, enable and disable, remove specified items and use code examples for all methods and events supported.
+res_type: api
 ---
 
 # kendo.ui.ContextMenu

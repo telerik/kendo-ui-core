@@ -2,6 +2,7 @@
 title: Application
 page_title: Configuration and methods for Mobile Application widget
 description: How to hide the browser address bar, set the platform which will force on the application, hide/show a loading animation and more in Kendo UI Mobile Application widget.
+res_type: api
 ---
 
 # kendo.mobile.Application

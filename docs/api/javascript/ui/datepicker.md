@@ -2,6 +2,7 @@
 title: DatePicker
 page_title: Configuration, methods and events of Kendo UI DatePicker
 description: Easy to follow steps guide how to quickly configure DatePicker UI widget, easily enable/disable it using methods and how to change events.
+res_type: api
 ---
 
 # kendo.ui.DatePicker

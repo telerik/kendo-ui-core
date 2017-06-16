@@ -2,6 +2,7 @@
 title: HierarchicalDataSource
 page_title: API Reference for Kendo UI Hierarchical DataSource
 description: Learn more about the configuration of Kendo UI DataSource, methods and events.
+res_type: api
 ---
 
 # kendo.data.HierarchicalDataSource

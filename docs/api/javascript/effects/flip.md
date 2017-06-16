@@ -1,5 +1,6 @@
 ---
 title: FX Flip
+res_type: api
 ---
 
 # Flip

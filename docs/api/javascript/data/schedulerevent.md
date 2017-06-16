@@ -2,6 +2,7 @@
 title: SchedulerEvent
 page_title: API Reference for Kendo Data SchedulerEvent
 description: Documentation how to get started with the SchedulerEvent.
+res_type: api
 ---
 
 # kendo.data.SchedulerEvent

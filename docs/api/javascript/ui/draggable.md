@@ -3,6 +3,7 @@ title: Draggable
 page_title: Draggable UI Widget | Kendo UI API Documentation
 description: Configuration steps and types of events which are triggered in Kendo UI Draggable.
 previous_url: /api/framework/draggable
+res_type: api
 ---
 
 # kendo.ui.Draggable

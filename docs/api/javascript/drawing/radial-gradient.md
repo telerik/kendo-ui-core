@@ -1,6 +1,7 @@
 ---
 title: RadialGradient
 page_title: API reference for Kendo UI Drawing API RadialGradient
+res_type: api
 ---
 
 # kendo.drawing.RadialGradient : kendo.drawing.Gradient

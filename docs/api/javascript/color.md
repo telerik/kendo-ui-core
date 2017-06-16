@@ -2,6 +2,7 @@
 title: Color
 page_title: API Reference for Kendo Color
 description: Documentation how to get started with the kendo.Color object. Find examples and guidelines for methods, fields and events of kendo.Color.
+res_type: api
 ---
 
 # kendo.Color

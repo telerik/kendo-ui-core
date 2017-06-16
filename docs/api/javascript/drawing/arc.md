@@ -1,6 +1,7 @@
 ---
 title: Arc
 page_title: API reference for Kendo UI Drawing API Arc
+res_type: api
 ---
 
 # kendo.drawing.Arc : kendo.drawing.Element

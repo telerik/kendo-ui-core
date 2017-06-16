@@ -2,6 +2,7 @@
 title: DateInput
 page_title: Configuration, methods and events of Kendo UI DateInput
 description: Easy to follow steps guide how to quickly configure DateInput UI widget, easily enable/disable it using methods and how to change events.
+res_type: api
 ---
 
 # kendo.ui.DateInput

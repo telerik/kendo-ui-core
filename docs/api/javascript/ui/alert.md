@@ -2,6 +2,7 @@
 title: Alert
 page_title: Configuration, methods and events of Kendo UI Alert
 description: How to initialize an Alert UI widget, configure its properties and open it.
+res_type: api
 ---
 
 # kendo.ui.Alert : kendo.ui.Dialog

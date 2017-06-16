@@ -1,6 +1,7 @@
 ---
 title: Image
 page_title: API reference for Kendo UI Drawing API Image
+res_type: api
 ---
 
 # kendo.drawing.Image : kendo.drawing.Element

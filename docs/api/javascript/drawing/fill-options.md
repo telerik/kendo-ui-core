@@ -1,6 +1,7 @@
 ---
 title: FillOptions
 page_title: API reference for methods and fields of the Fill options
+res_type: api
 ---
 
 # kendo.drawing.FillOptions

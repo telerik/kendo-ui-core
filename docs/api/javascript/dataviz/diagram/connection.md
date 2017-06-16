@@ -1,5 +1,6 @@
 ---
 title: Connection
+res_type: api
 ---
 
 # kendo.dataviz.diagram.Connection

@@ -2,6 +2,7 @@
 title: MediaPlayer
 page_title: Configuration, methods and events of Kendo UI MediaPlayer
 description: Code examples and tips how to configure MediaPlayer widget, use available methods and events.
+res_type: api
 ---
 
 # kendo.ui.MediaPlayer

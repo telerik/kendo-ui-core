@@ -2,6 +2,7 @@
 title: StockChart
 page_title: Configuration, methods and events of Kendo UI DataViz StockChart
 previous_url: /api/javascript/dataviz/stockchart, /api/dataviz/stockchart
+res_type: api
 ---
 
 # kendo.dataviz.ui.StockChart

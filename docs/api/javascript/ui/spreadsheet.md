@@ -2,6 +2,7 @@
 title: Spreadsheet
 page_title: Configuration, methods and events of Kendo UI Spreadsheet
 description: Code examples for Spreadsheet UI widget configuration. Learn how to use methods and which events to set once the Spreadsheet UI widget is initialized.
+res_type: api
 ---
 
 # kendo.ui.Spreadsheet

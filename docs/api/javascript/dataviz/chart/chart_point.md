@@ -1,6 +1,7 @@
 ---
 title: ChartPoint
 page_title: API reference for Kendo UI ChartPoint
+res_type: api
 ---
 
 # kendo.dataviz.ChartPoint

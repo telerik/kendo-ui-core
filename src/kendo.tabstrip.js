@@ -1142,7 +1142,7 @@ var __meta__ = { // jshint ignore:line
             var scrLeft = tabGroup.scrollLeft();
 
             tabGroup.finish().animate({ "scrollLeft": scrLeft + delta }, "fast", "linear", function () {
-                if (that._nowScrollingTabs) {
+                if (that._nowScrollingTabs && !jQuery.fx.off) {
                     that._scrollTabsByDelta(delta);
                 } else {
                     that._toggleScrollButtons();

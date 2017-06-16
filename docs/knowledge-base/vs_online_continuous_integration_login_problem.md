@@ -8,6 +8,7 @@ position: 0
 tags: vs2017
 ticketid: 1106905
 pitsid:
+res_type: kb
 ---
 
 ## Environment

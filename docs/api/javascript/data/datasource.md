@@ -2,6 +2,7 @@
 title: DataSource
 page_title: Configuration, methods and events of the Kendo DataSource component.
 description: Easy to follow steps for DataSource component configuration, examples of supported methods and executed events.
+res_type: api
 ---
 
 # kendo.data.DataSource

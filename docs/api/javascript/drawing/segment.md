@@ -1,6 +1,7 @@
 ---
 title: Segment
 page_title: API reference for Kendo UI Drawing API Segment
+res_type: api
 ---
 
 # kendo.drawing.Segment : kendo.Class

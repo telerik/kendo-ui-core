@@ -2,6 +2,7 @@
 title: Barcode
 page_title: Configuration, methods and events of Kendo UI DataViz Barcode
 description: Manipulate the configuration options of Barcode, configure the color of the bars/text and change the value.
+res_type: api
 ---
 
 # kendo.dataviz.ui.Barcode

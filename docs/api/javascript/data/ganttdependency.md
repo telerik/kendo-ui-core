@@ -2,6 +2,7 @@
 title: GanttDependency
 page_title: API Reference for Kendo Data GanttDependency
 description: Documentation how to get started with the GanttDependency.
+res_type: api
 ---
 
 # kendo.data.GanttDependency

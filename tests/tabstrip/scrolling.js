@@ -239,5 +239,19 @@ test('left scrolling button scrolls to the left by delta when clicked', 1, funct
     equal(tabstrip.tabGroup.scrollLeft(), initialScrollPosition - tabstrip.options.scrollable.distance);
 });
 
+test('scrolling succeeds when jQuert.fx is off', 1, function () {
+    createTabStrip();
+    jQuery.fx.off = true;
+
+    tabstrip.tabGroup.scrollLeft(999);
+    var initialScrollPosition = tabstrip.tabGroup.scrollLeft();
+    tabstrip.wrapper.children(".k-tabstrip-prev").trigger("touchstart").trigger("touchend");
+    tabstrip.tabGroup.finish();
+
+    equal(tabstrip.tabGroup.scrollLeft(), initialScrollPosition - tabstrip.options.scrollable.distance);
+
+    jQuery.fx.off = false;
+});
+
 
 })();

@@ -1,6 +1,7 @@
 ---
 title: Circle
 page_title: API reference for methods and fields of Kendo UI Geometry Circle
+res_type: api
 ---
 
 # kendo.geometry.Circle

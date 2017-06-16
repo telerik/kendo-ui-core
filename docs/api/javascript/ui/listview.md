@@ -2,6 +2,7 @@
 title: ListView
 page_title: Configuration, methods and events of Kendo UI ListView
 description: Step-by-step instructions and samples for Kendo UI ListView widget configuration, methods and event handling.
+res_type: api
 ---
 
 # kendo.ui.ListView

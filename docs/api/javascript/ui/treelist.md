@@ -2,6 +2,7 @@
 title: TreeList
 page_title: Configuration, methods and events of Kendo UI TreeList
 description: Code examples for TreeList UI widget configuration. Learn how to use methods and which events to set once the treelist UI widget is initialized and expanded.
+res_type: api
 ---
 
 # kendo.ui.TreeList

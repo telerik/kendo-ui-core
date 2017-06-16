@@ -1,6 +1,7 @@
 ---
 title: Size
 page_title: API reference for methods and fields of Kendo UI Geometry Size
+res_type: api
 ---
 
 # kendo.geometry.Size

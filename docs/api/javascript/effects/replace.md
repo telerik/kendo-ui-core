@@ -1,6 +1,7 @@
 ---
 title: FX Replace
 related: fx-replace
+res_type: api
 ---
 
 # Replace

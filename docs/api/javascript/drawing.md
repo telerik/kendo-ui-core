@@ -1,6 +1,7 @@
 ---
 title: drawing
 page_title: API reference for Kendo UI Drawing API static functions
+res_type: api
 ---
 
 # kendo.drawing

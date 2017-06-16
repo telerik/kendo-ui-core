@@ -3,6 +3,7 @@ title: kendo
 page_title: API Reference for methods and properties in Kendo UI Framework
 description: Examples and detailed explanation of Kendo UI methods and properties.
 previous_url: /api/introduction
+res_type: api
 ---
 
 # kendo

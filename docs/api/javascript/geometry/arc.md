@@ -1,6 +1,7 @@
 ---
 title: Arc
 page_title: API reference for methods and fields of Kendo UI Geometry Arc
+res_type: api
 ---
 
 # kendo.geometry.Arc

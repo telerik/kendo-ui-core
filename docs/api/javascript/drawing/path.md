@@ -1,6 +1,7 @@
 ---
 title: Path
 page_title: API reference for Kendo UI Drawing API Path
+res_type: api
 ---
 
 # kendo.drawing.Path : kendo.drawing.Element

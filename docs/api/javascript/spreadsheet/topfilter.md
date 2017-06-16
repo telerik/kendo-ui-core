@@ -1,6 +1,7 @@
 ---
 title: TopFilter
 page_title: Configuration, methods and events of Kendo UI Spreadsheet TopFilter Instance object
+res_type: api
 ---
 
 # kendo.spreadsheet.TopFilter
