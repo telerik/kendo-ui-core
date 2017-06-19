@@ -75,6 +75,14 @@ test('scrolling is enabled by default with distance configured', 2, function () 
     ok(!isNaN(tabstrip.options.scrollable.distance));
 });
 
+test('scrolling is enabled when scrollable is true with distance configured', 3, function () {
+    createTabStrip({scrollable:true});
+
+    ok(tabstrip.options.scrollable !== false);
+    ok(!isNaN(tabstrip.options.scrollable.distance));
+    ok(tabstrip.wrapper.hasClass("k-tabstrip-scrollable"));
+});
+
 test('scrolling CSS class is applied to TabStrip if tabPosition is top', 1, function () {
     createTabStrip({tabPosition:"top"});
 

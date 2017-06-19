@@ -23,6 +23,7 @@ GEM
     fastimage (1.9.0)
       addressable (~> 2.3.5)
     ffi (1.9.14)
+    ffi (1.9.14-x64-mingw32)
     github-markdown (0.6.9)
     hike (1.2.3)
     hitimes (1.2.4)
@@ -70,6 +71,8 @@ GEM
     multi_json (1.12.1)
     nokogiri (1.6.8.1)
       mini_portile2 (~> 2.1.0)
+    nokogiri (1.6.8.1-x64-mingw32)
+      mini_portile2 (~> 2.1.0)
     parslet (1.5.0)
       blankslate (~> 2.0)
     posix-spawn (0.3.12)
@@ -101,12 +104,13 @@ GEM
       parslet (~> 1.5.0)
     tzinfo (1.2.2)
       thread_safe (~> 0.1)
-    uglifier (3.0.3)
+    uglifier (3.0.4)
       execjs (>= 0.3.0, < 3)
     yajl-ruby (1.1.0)
 
 PLATFORMS
   ruby
+  x64-mingw32
 
 DEPENDENCIES
   github-markdown
@@ -114,4 +118,7 @@ DEPENDENCIES
   jekyll (= 2.0.3)
   jekyll-assets
   jekyll-sitemap (= 0.4.1)
-  uglifier
+  uglifier (= 3.0.4)
+
+BUNDLED WITH
+   1.14.6

@@ -51,6 +51,7 @@ var __meta__ = { // jshint ignore:line
         TABONTOP = "k-tab-on-top",
         NAVIGATABLEITEMS = ".k-item:not(." + DISABLEDSTATE + ")",
         HOVERABLEITEMS = ".k-tabstrip-items > " + NAVIGATABLEITEMS + ":not(." + ACTIVESTATE + ")",
+        DEFAULTDISTANCE = 200,
 
         templates = {
             content: template(
@@ -549,7 +550,7 @@ var __meta__ = { // jshint ignore:line
             navigatable: true,
             contentUrls: false,
             scrollable: {
-                distance: 200
+                distance: DEFAULTDISTANCE
             }
         },
 
@@ -1104,6 +1105,11 @@ var __meta__ = { // jshint ignore:line
 
         _scrollableAllowed: function() {
             var options = this.options;
+
+            if(options.scrollable && !options.scrollable.distance){
+                options.scrollable = {distance: DEFAULTDISTANCE};
+            }
+
             return options.scrollable && !isNaN(options.scrollable.distance) && (options.tabPosition == "top" || options.tabPosition == "bottom");
         },
 
@@ -1293,6 +1299,17 @@ var __meta__ = { // jshint ignore:line
                                 kendo.resize(contentHolder);
 
                                 that.scrollWrap.css("height", "").css("height");
+
+                                // Force IE and Edge rendering to fix visual glitches telerik/kendo-ui-core#2777.
+                                if (kendo.support.browser.msie || kendo.support.browser.edge) {
+                                    contentHolder.finish().animate({
+                                        opacity: 0.9
+                                    },"fast", "linear", function(){
+                                        contentHolder.finish().animate({
+                                            opacity: 1
+                                        },"fast", "linear");
+                                    });
+                                }
                             }
                         } ) );
                 },
