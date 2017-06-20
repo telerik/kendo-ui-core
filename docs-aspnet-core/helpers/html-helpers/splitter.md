@@ -9,8 +9,7 @@ slug: htmlhelpers_splitter_aspnetcore
 
 The Splitter HtmlHelper extension is a server-side wrapper for the [Kendo UI Splitter](http://demos.telerik.com/kendo-ui/splitter/index).
 
-
-It allows you to configure the Kendo UI Splitter from server-side code. The [Splitter](http://docs.telerik.com/kendo-ui/controls/layout/splitter/overview) provides a dynamic layout of resizeable and collapsible panes. It converts the children of an HTML element into an interactive layout, adding resize and collapse handles depending on its configuration. The vertical and horizontal orientation of a Kendo UI Splitter can be combined to build complex layouts.
+It allows you to configure the Kendo UI Splitter widget from server-side code. The [Splitter](http://docs.telerik.com/kendo-ui/controls/layout/splitter/overview) provides a dynamic layout of resizable and collapsible panes. It converts the children of an HTML element into an interactive layout by adding resize and collapse handles depending on its configuration. The vertical and horizontal orientation of a Kendo UI Splitter can be combined to build complex layouts.
 
 For more information on the HtmlHelper, refer to the article on the [Splitter HtmlHelper for ASP.NET MVC](http://docs.telerik.com/aspnet-mvc/helpers/splitter/overview).
 
@@ -21,13 +20,12 @@ The following example demonstrates how to define the Splitter by using the Split
 ###### Example
 
 ```tab-Razor
-  
     @(Html.Kendo().Splitter()
         .Name("splitter")
         .Orientation(SplitterOrientation.Vertical)
         .Panes(verticalPanes =>
         {
-            verticalPanes.Add() 
+            verticalPanes.Add()
                 .Content(
                     Html.Kendo().Splitter()
                         .Name("horizontal")
@@ -70,11 +68,8 @@ The following example demonstrates how to define the Splitter by using the Split
                 </div>);
         })
     )
-
 ```
-
 ```tab-Controller
-
     public class SplitterController : Controller
     {
         public IActionResult Index()
@@ -82,7 +77,6 @@ The following example demonstrates how to define the Splitter by using the Split
             return View();
         }
     }
-
 ```
 
 ## Configuration
@@ -136,7 +130,6 @@ The following example demonstrates the basic configuration of the Splitter HtmlH
             console.log(splitter);
         });
     </script>
-    
 ```
 
 ## See Also

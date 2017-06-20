@@ -9,7 +9,7 @@ slug: htmlhelpers_multiselect_aspnetcore
 
 The MultiSelect HtmlHelper extension is a server-side wrapper for the [Kendo UI MultiSelect](http://demos.telerik.com/kendo-ui/multiselect/index).
 
-It allows you to configure the Kendo UI MultiSelect widget from server-side code. The [MultiSelect](http://docs.telerik.com/kendo-ui/controls/editors/multiselect/overview) displays a list of options and allows multiple selections from this list. The widget represents a richer version of the ```<select>``` element and provides support for local and remote data binding, item and tag templates, and configurable options for controlling the list behavior.
+It allows you to configure the Kendo UI MultiSelect widget from server-side code. The [MultiSelect](http://docs.telerik.com/kendo-ui/controls/editors/multiselect/overview) displays a list of options and allows multiple selections from this list. The widget represents a richer version of the `<select>` element and provides support for local and remote data binding, item and tag templates, and configurable options for controlling the list behavior.
 
 For more information on the HtmlHelper, refer to the article on the [MultiSelect HtmlHelper for ASP.NET MVC](http://docs.telerik.com/aspnet-mvc/helpers/multiselect/overview).
 
@@ -20,7 +20,6 @@ The following example demonstrates how to define the MultiSelect by using the Mu
 ###### Example
 
 ```tab-Razor
-      
     @(Html.Kendo().MultiSelect()
         .Name("multiselect")
         .DataTextField("ProductName")
@@ -35,11 +34,8 @@ The following example demonstrates how to define the MultiSelect by using the Mu
             .ServerFiltering(true);
         })
     )
-
 ```
-
 ```tab-Controller
-   
     public class MultiSelectController : Controller
     {
         public IActionResult Index()
@@ -64,13 +60,12 @@ The following example demonstrates how to define the MultiSelect by using the Mu
             var result = Enumerable.Range(0, 50).Select(i => new ProductViewModel
             {
                 ProductID = "" + i,
-                ProductName = "Product " + i 
+                ProductName = "Product " + i
             });
 
             return result;
         }
     }
-    
 ```
 
 ## Configuration
@@ -78,7 +73,6 @@ The following example demonstrates how to define the MultiSelect by using the Mu
 The following example demonstrates the basic configuration of the MultiSelect HtmlHelper and how to get the MultiSelect instance.
 
 ```tab-Razor
-
    @(Html.Kendo().MultiSelect()
         .Name("multiselect")
         .DataTextField("ProductName")
@@ -114,7 +108,6 @@ The following example demonstrates the basic configuration of the MultiSelect Ht
             console.log(multiselect);
         });
     </script>
-    
 ```
 
 ## See Also

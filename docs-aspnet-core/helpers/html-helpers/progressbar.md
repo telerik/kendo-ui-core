@@ -20,7 +20,6 @@ The following example demonstrates how to define the ProgressBar by using the Pr
 ###### Example
 
 ```tab-Razor
-  
    @(Html.Kendo().ProgressBar()
         .Name("progressbar")
         .Type(ProgressBarType.Percent)
@@ -32,7 +31,6 @@ The following example demonstrates how to define the ProgressBar by using the Pr
             $("#progressbar").data("kendoProgressBar").value(50);
         });   
     </script>
-
 ```
 
 ## Configuration
@@ -40,7 +38,6 @@ The following example demonstrates how to define the ProgressBar by using the Pr
 The following example demonstrates the basic configuration of the ProgressBar HtmlHelper and how to get the ProgressBar instance.
 
 ```tab-Razor
-
     @(Html.Kendo().ProgressBar()
         .Name("progressBar")
         .Type(ProgressBarType.Chunk)
@@ -64,7 +61,6 @@ The following example demonstrates the basic configuration of the ProgressBar Ht
             console.log(progressbar);
         });
     </script>
-    
 ```
 
 ## See Also

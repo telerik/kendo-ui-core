@@ -20,7 +20,6 @@ The following example demonstrates how to define the DropDownList by using the D
 ###### Example
 
 ```tab-Razor
-  
     @(Html.Kendo().DropDownList()
         .Name("dropdownlist")
         .DataTextField("ProductName")
@@ -29,12 +28,10 @@ The following example demonstrates how to define the DropDownList by using the D
             source.Read(read =>
             {
                 read.Action("Products_Read", "DropDownList");
-            }); 
+            });
         })
     )
-
 ```
-
 ```tab-Controller
 
     public class DropDownListController : Controller
@@ -55,7 +52,6 @@ The following example demonstrates how to define the DropDownList by using the D
             return Json(result);
         }
     }    
-    
 ```
 
 ## Configuration
@@ -63,7 +59,6 @@ The following example demonstrates how to define the DropDownList by using the D
 The following example demonstrates the basic configuration of the DropDownList HtmlHelper and how to get the DropDownList instance.
 
 ```tab-Razor
-
     @(Html.Kendo().DropDownList()
         .Name("dropdownlist")
         .DataTextField("ProductName")
@@ -102,7 +97,6 @@ The following example demonstrates the basic configuration of the DropDownList H
             console.log(dropdownlist);
         });
     </script>
-    
 ```
 
 ## See Also

@@ -20,7 +20,7 @@ The following example demonstrates how to define the Notification by using the N
 ###### Example
 
 ```tab-Razor
-  
+
    @(Html.Kendo().Notification()
         .Name("notification")
     )
@@ -32,7 +32,6 @@ The following example demonstrates how to define the Notification by using the N
             popupNotification.show("Test popup message", "info");                        
         });
     </script>
-
 ```
 
 ## Configuration
@@ -40,7 +39,6 @@ The following example demonstrates how to define the Notification by using the N
 The following example demonstrates the basic configuration of the Notification HtmlHelper and how to get the Notification instance.
 
 ```tab-Razor    
-
     @(Html.Kendo().Notification()
         .Name("notification")
         .Stacking(NotificationStackingSettings.Down)
@@ -54,7 +52,7 @@ The following example demonstrates the basic configuration of the Notification H
         })
         .Button(true)
     )
-    
+
     <script type="text/javascript">
         $(function () {
             //Notice that the Name() of the Notification is used to get its client-side instance.
@@ -62,7 +60,6 @@ The following example demonstrates the basic configuration of the Notification H
             console.log(notification);
         });
     </script>
-    
 ```
 
 ## See Also

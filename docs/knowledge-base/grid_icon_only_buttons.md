@@ -1,15 +1,14 @@
 ---
-title: Use Grid Edit Buttons with Icons Only and No Text
-description: Example showing how to remove the text of Grid edit buttons and leave just the icons
+title: How to Use Grid Edit Buttons with Icons only and No Text
+description: An example for showing how to remove the text of the Grid edit buttons and leave just the icons
 type: how-to
-page_title: Use Kendo UI Grid Edit Buttons with Icons Only and No Text
+page_title: Use the edit buttons of the Kendo UI Grid with icons only and no text
 slug: grid_icon_only_buttons
 position: 0
 tags: grid, editing, buttons, kendo ui, icons
 teampulseid:
 ticketid: 663290
 pitsid:
-
 res_type: kb
 ---
 
@@ -28,46 +27,50 @@ res_type: kb
 
 ## Description
 
-Some developers may want to use Grid edit/delete/update/cancel/add buttons with icons only and no text, for example to save some space.
+You might want to use the **Edit**, **Delete**, **Update**, **Cancel**, or **Add** buttons of the Grid with icons only and without text. For example, if you have to save space.
 
 ## Solution
 
-The required approach is to set the commands' `text` to a space:
+1. Set the `text` of the `command` to a space:
 
-http://docs.telerik.com/kendo-ui/api/javascript/ui/grid#configuration-columns.command.text
+    http://docs.telerik.com/kendo-ui/api/javascript/ui/grid#configuration-columns.command.text
 
-    columns: [
-      { command: [
-        { name: "edit", text: { edit: " ", update: " ", cancel: " " } },
-        { name: "destroy", text: " " }
-      ] }
-    ]
+    ```
+        columns: [
+          { command: [
+            { name: "edit", text: { edit: " ", update: " ", cancel: " " } },
+            { name: "destroy", text: " " }
+          ] }
+        ]
+    ```
 
-http://docs.telerik.com/kendo-ui/api/javascript/ui/grid#configuration-toolbar.text
+    http://docs.telerik.com/kendo-ui/api/javascript/ui/grid#configuration-toolbar.text
 
-    toolbar: [{name: "create", text: " "}]
+    ```
+        toolbar: [{name: "create", text: " "}]
+    ```
 
-In addition, some default margins of the buttons' icons need to be reset to zero with CSS:
+1. In addition, reset some of the default margins of the buttons' icons to `0` (zero) by using CSS.
 
-    .k-grid .k-grid-toolbar .k-grid-add,
-    .k-grid tbody .k-grid-edit,
-    .k-grid tbody .k-grid-update,
-    .k-grid tbody .k-grid-cancel,
-    .k-grid tbody .k-grid-delete {
-      min-width: 0;
-    }
-     
-    .k-grid .k-grid-toolbar .k-grid-add .k-icon,
-    .k-grid tbody .k-grid-edit .k-icon,
-    .k-grid tbody .k-grid-update .k-icon,
-    .k-grid tbody .k-grid-cancel .k-icon,
-    .k-grid tbody .k-grid-delete .k-icon {
-      margin: 0;
-    }
+    ```
+      .k-grid .k-grid-toolbar .k-grid-add,
+      .k-grid tbody .k-grid-edit,
+      .k-grid tbody .k-grid-update,
+      .k-grid tbody .k-grid-cancel,
+      .k-grid tbody .k-grid-delete {
+        min-width: 0;
+      }
 
-Here is a complete example:
+      .k-grid .k-grid-toolbar .k-grid-add .k-icon,
+      .k-grid tbody .k-grid-edit .k-icon,
+      .k-grid tbody .k-grid-update .k-icon,
+      .k-grid tbody .k-grid-cancel .k-icon,
+      .k-grid tbody .k-grid-delete .k-icon {
+        margin: 0;
+      }
+    ```
 
-http://dojo.telerik.com/ojoViD
+For the complete example, refer to http://dojo.telerik.com/ojoViD.
 
 ```
 <!DOCTYPE html>
@@ -80,7 +83,7 @@ http://dojo.telerik.com/ojoViD
     <script src="https://kendo.cdn.telerik.com/2017.2.504/js/jquery.min.js"></script>
     <script src="https://kendo.cdn.telerik.com/2017.2.504/js/kendo.all.min.js"></script>
     <style>
-      
+
       .k-grid .k-grid-toolbar .k-grid-add,
       .k-grid tbody .k-grid-edit,
       .k-grid tbody .k-grid-update,
@@ -88,7 +91,7 @@ http://dojo.telerik.com/ojoViD
       .k-grid tbody .k-grid-delete {
         min-width: 0;
       }
-      
+
       .k-grid .k-grid-toolbar .k-grid-add .k-icon,
       .k-grid tbody .k-grid-edit .k-icon,
       .k-grid tbody .k-grid-update .k-icon,
@@ -96,7 +99,7 @@ http://dojo.telerik.com/ojoViD
       .k-grid tbody .k-grid-delete .k-icon {
         margin: 0;
       }
-      
+
     </style>
   </head>
   <body>
@@ -168,4 +171,4 @@ http://dojo.telerik.com/ojoViD
 
 ## Notes
 
-The selectors in the CSS rules should override styles in the Kendo UI theme.
+The selectors in the CSS rules override the styles of the Kendo UI theme.
