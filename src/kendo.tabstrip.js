@@ -340,6 +340,7 @@ var __meta__ = { // jshint ignore:line
                 key = e.keyCode,
                 current = that._current(),
                 rtl = that._isRtl,
+                isHorizontal = /top|bottom/.test(that.options.tabPosition),
                 action;
 
             if (e.target != e.currentTarget) {
@@ -347,9 +348,9 @@ var __meta__ = { // jshint ignore:line
             }
 
             if (key == keys.DOWN || key == keys.RIGHT) {
-                action = rtl ? PREV : "next";
+                action = rtl && isHorizontal ? PREV : "next";
             } else if (key == keys.UP || key == keys.LEFT) {
-                action = rtl ? "next" : PREV;
+                action = rtl && isHorizontal ? "next" : PREV;
             } else if (key == keys.ENTER || key == keys.SPACEBAR) {
                 that._click(current);
                 e.preventDefault();

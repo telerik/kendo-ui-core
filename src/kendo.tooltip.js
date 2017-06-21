@@ -392,7 +392,10 @@ var __meta__ = { // jshint ignore:line
                 offset.right = offset.left + kendo._outerWidth(element);
                 offset.bottom = offset.top + kendo._outerHeight(element);
 
-                if (pageX > offset.left && pageX < offset.right && pageY > offset.top && pageY < offset.bottom) {
+                if (pageX > parseInt(offset.left,10) &&
+                    pageX < parseInt(offset.right,10) &&
+                    pageY > parseInt(offset.top,10) &&
+                    pageY < parseInt(offset.bottom,10)) {
                     return;
                 }
 

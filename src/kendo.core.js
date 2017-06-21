@@ -3861,7 +3861,7 @@ function pad(number, digits, end) {
         }
 
         function getMilliseconds(date) {
-            return date.getTime() - getDate(date);
+            return toInvariantTime(date).getTime() - getDate(toInvariantTime(date));
         }
 
         function isInTimeRange(value, min, max) {
