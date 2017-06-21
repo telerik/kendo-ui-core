@@ -171,7 +171,7 @@ Similar to exporting, below are listed the steps for you to follow when enabling
             .Import()
         )
         .Import(import => import
-            .AllowedExtensions(new[] { "docx", "rtf", "html", "txt" })
+            .AllowedExtensions(new[] { "docx", "rtf", "pdf", "html", "txt" })
             .Proxy("Import","Editor")
         )
     )
@@ -183,7 +183,7 @@ Similar to exporting, below are listed the steps for you to follow when enabling
                 .Import()
             )
             .Import(import => import
-                .AllowedExtensions(new[] { "docx", "rtf", "html", "txt" })
+                .AllowedExtensions(new[] { "docx", "rtf", "pdf", "html", "txt" })
                 .Proxy("Import","Editor")
             )
     %>
@@ -218,6 +218,9 @@ Similar to exporting, below are listed the steps for you to follow when enabling
                     break;
                 case ".rtf":
                     htmlResult = EditorImport.ToRtfImportResult(file, settings);
+                    break;
+                case ".pdf":
+                    htmlResult = EditorImport.ToPdfImportResult(file, settings);
                     break;
                 default:
                     htmlResult = EditorImport.GetTextContent(file);

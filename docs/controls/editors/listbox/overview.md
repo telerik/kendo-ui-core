@@ -44,7 +44,7 @@ The following example demonstrates how to initialize the ListBox and bind it to 
     <!-- Initialize the ListBox -->
     <script>
         $(document).ready(function(){
-            $("#listBox").kendoListBox({
+            $("#listbox").kendoListBox({
                 dataSource: [
                     { name: "Jane Doe" },
                     { name: "John Doe" }
@@ -73,7 +73,7 @@ You can also bind the `DataSource` to remote data. The following example demonst
     <!-- Initialize the ListBox -->
     <script>
         $(document).ready(function(){
-            $("#listBox").kendoListBox({
+            $("#listbox").kendoListBox({
                 dataSource: {
                     type: "odata",
                     transport: {
@@ -120,9 +120,9 @@ Selected items can be reordered by using any of the following approaches:
 
 ```html
 
-    <select id="listBox"></select>
+    <select id="listbox"></select>
     <script>
-        $("#listBox").kendoListBox({
+        $("#listbox").kendoListBox({
             selectable: "multiple",
             dataSource: [
                 { name: "John", id: 1 },
@@ -148,9 +148,9 @@ To enable the drag-and-drop feature of the ListBox, set its [`draggable`](/api/j
 
 ```html
 
-    <select id="listBox"></select>
+    <select id="listbox"></select>
     <script>
-        $("#listBox").kendoListBox({
+        $("#listbox").kendoListBox({
             draggable: {
                 hint: function(element) {
                     return $("<span></span>")
@@ -189,9 +189,9 @@ The ListBox supports the use of [templates]({% slug overview_kendoui_templatesco
         <h5 style="color:#=data.color#">#=name#</h5>
     </script>
 
-    <select id="listBox"></select>
+    <select id="listbox"></select>
     <script>
-        $("#listBox").kendoListBox({
+        $("#listbox").kendoListBox({
             dataSource: {
                 data: [
                     { name: "Red", color: "red" },

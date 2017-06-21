@@ -101,9 +101,9 @@ For more runnable examples on all Aurelia-KendoUI controls the Bridge supports, 
 
 Articles on Kendo UI integration with third-party tools and frameworks:
 
-* [Angular 2.0]({% slug angular2support_integration_kendoui %})
+* [SharePoint Add-Ins]({% slug sharepoint_tutorials %})
 * [Twitter Bootstrap]({% slug twitterbootstrapintegration_integration_kendoui %})
-* [Web Components]({% slug webcomponents_integration_kendoui %})
+* [Angular 2.0]({% slug angular2support_integration_kendoui %})
 * [RequireJS]({% slug requirejs_integration_kendoui %})
 * [TypeScript]({% slug typescript_integration_kendoui %})
 * [Visual Studio IntelliSense]({% slug visualstudiointellisense_integration_kendoui %})

@@ -336,8 +336,7 @@ If the `dataSource` option is an existing [kendo.data.HierarchicalDataSource](/a
 
 #### Example - set dataSource as a JavaScript array
 
-   <ul id="panelbar"></ul>
-
+    <ul id="panelbar"></ul>
     <script>
       $("#panelbar").kendoPanelBar({
           dataSource: [
