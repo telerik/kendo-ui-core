@@ -384,21 +384,6 @@ var __meta__ = { // jshint ignore:line
 
         _mouseleave: function(e) {
             if (this.popup) {
-                var element = $(e.currentTarget),
-                    offset = element.offset(),
-                    pageX = e.pageX,
-                    pageY = e.pageY;
-
-                offset.right = offset.left + kendo._outerWidth(element);
-                offset.bottom = offset.top + kendo._outerHeight(element);
-
-                if (pageX > parseInt(offset.left,10) &&
-                    pageX < parseInt(offset.right,10) &&
-                    pageY > parseInt(offset.top,10) &&
-                    pageY < parseInt(offset.bottom,10)) {
-                    return;
-                }
-
                 this.popup.close();
             } else {
                 restoreTitle($(e.currentTarget));

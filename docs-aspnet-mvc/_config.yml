@@ -235,10 +235,10 @@ navigation:
 baseurl: /aspnet-mvc
 
 ## The Kendo UI version used
-cdnVersion: "2017.2.504"
+cdnVersion: "2017.2.621"
 
 ## The MVC Core version used
-mvcCoreVersion: "2017.2.504"
+mvcCoreVersion: "2017.2.621"
 
 ## Assign layout and category per different paths
 defaults:
