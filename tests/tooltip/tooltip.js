@@ -301,6 +301,128 @@
         equal(container.attr("title"), "foo");
     });
 
+    test("popup is shown when shownOn is set to focus", function() {
+        container.append("<input />");
+        var input  = container.find("input").attr("title", "foo");
+
+        var tooltip = new Tooltip(input, { showOn: "focus" });
+
+        triggerEvent(input, "focus");
+
+        ok(tooltip.popup.visible());
+    });
+
+    test("popup hides on blur when shownOn is set to focus", function() {
+        container.append("<input />");
+        var input  = container.find("input").attr("title", "foo");
+
+        var tooltip = new Tooltip(input, { showOn: "focus" });
+
+        triggerEvent(input, "focus");
+        triggerEvent(input, "blur");
+
+        ok(!tooltip.popup.visible());
+    });
+
+    test("popup stays open on mouseleave when shownOn is set to focus", 2, function() {
+        container.append("<input />");
+        var input  = container.find("input").attr("title", "foo");
+
+        var tooltip = new Tooltip(input, { showOn: "focus" });
+
+        triggerEvent(input, "focus");
+        triggerEvent(input, "mouseleave");
+
+        ok(tooltip.popup.visible());
+
+        triggerEvent(tooltip.popup.element, "mouseleave");
+
+        ok(tooltip.popup.visible());
+
+    });
+
+    test("popup hides on external click when shownOn is set to focus", function() {
+        container.append("<input />");
+        var input  = container.find("input").attr("title", "foo");
+
+        var tooltip = new Tooltip(input, { showOn: "focus" });
+
+        triggerEvent(input, "focus");
+        triggerEvent($("body"), "click");
+
+        ok(tooltip.popup.visible());
+    });
+
+    test("content is added to the tooltip when shownOn is set to focus", function() {
+        container.append("<input />");
+        var input  = container.find("input").attr("title", "foo");
+
+        var tooltip = new Tooltip(input, { showOn: "focus" });
+
+        triggerEvent(input, "focus");
+
+        equal(tooltip.content.text(), "foo");
+    });
+
+    test("title attribute is temporary removed when shownOn is set to focus", function() {
+        container.append("<input />");
+        var input  = container.find("input").attr("title", "foo");
+
+        var tooltip = new Tooltip(input, { showOn: "focus" });
+
+        triggerEvent(input, "focus");
+
+        equal(input.attr("title"), "");
+    });
+
+    test("title attribute of parent is preserved when shownOn is set to focus", function() {
+        container.append("<input />").attr("title", "bar");
+        var input  = container.find("input").attr("title", "foo");
+
+        var tooltip = new Tooltip(input, { showOn: "focus" });
+
+        triggerEvent(input, "focus");
+
+        equal(container.attr("title"), "bar");
+    });
+
+    test("title attributes are restored on blur when shownOn is set to focus", 2, function() {
+        container.append("<input />").attr("title", "bar");
+        var input  = container.find("input").attr("title", "foo");
+
+        var tooltip = new Tooltip(input, { showOn: "focus" });
+
+        triggerEvent(input, "focus");
+        triggerEvent(input, "blur");
+
+        equal(input.attr("title"), "foo");
+        equal(container.attr("title"), "bar");
+    });
+
+    test("title attributes are intact on mouseenter when shownOn is set to focus", 2, function() {
+        container.append("<input />").attr("title", "bar");
+        var input  = container.find("input").attr("title", "foo");
+
+        var tooltip = new Tooltip(input, { showOn: "focus" });
+
+        triggerEvent(input, "mouseenter");
+
+        equal(input.attr("title"), "foo");
+        equal(container.attr("title"), "bar");
+    });
+
+    test("title attributes are intact on mouseleave when shownOn is set to focus", 2, function() {
+        container.append("<input />").attr("title", "bar");
+        var input  = container.find("input").attr("title", "foo");
+
+        var tooltip = new Tooltip(input, { showOn: "focus" });
+
+        triggerEvent(input, "mouseleave");
+
+        equal(input.attr("title"), "foo");
+        equal(container.attr("title"), "bar");
+    });
+
     test("center position is set to the popup", function() {
         var tooltip = new Tooltip(container, {
             position: "center"
