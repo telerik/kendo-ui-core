@@ -182,7 +182,7 @@
 
                 this._draggable();
 
-                if (options.pinned) {
+                if (options.pinned && isVisible) {
                     that.pin();
                 }
 
@@ -759,6 +759,10 @@
                     $("html, body").css(OVERFLOW, HIDDEN);
                 }
 
+                if(options.pinned && !that._isPinned){
+                    that.pin();
+                }
+
                 return that;
             },
 
@@ -1073,6 +1077,7 @@
                     wrapper.css({position: "fixed", top: top - win.scrollTop(), left: left - win.scrollLeft()});
                     wrapper.children(KWINDOWTITLEBAR).find(KPIN).addClass("k-i-unpin").removeClass("k-i-pin");
 
+                    that._isPinned = true;
                     that.options.pinned = true;
                     that.options.draggable = false;
                 }
@@ -1089,6 +1094,7 @@
                     wrapper.css({position: "", top: top + win.scrollTop(), left: left + win.scrollLeft()});
                     wrapper.children(KWINDOWTITLEBAR).find(KUNPIN).addClass("k-i-pin").removeClass("k-i-unpin");
 
+                    that._isPinned = false;
                     that.options.pinned = false;
                     that.options.draggable = true;
                 }

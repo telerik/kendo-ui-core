@@ -423,6 +423,27 @@
         equal(dialog.wrapper.find(".k-i-unpin").length, 1);
     });
 
+    test("creating pinned window pins the window if initially visible", function() {
+        var dialog = createWindow({ pinned: true });
+        equal(dialog.wrapper.css("position"), "fixed");
+    });
+
+    test("creating pinned and visible:false window pins the window when shown", 2, function() {
+        var dialog = createWindow({
+            pinned: true,
+            visible: false,
+            position: {
+                top:0,
+                left:0
+            }
+        });
+
+        notEqual(dialog.wrapper.css("position"), "fixed");
+
+        dialog.open();
+        equal(dialog.wrapper.css("position"), "fixed");
+    });
+
     test("creating window with an int zero top position applies a top style", function() {
         var dialog = createWindow({
             position: {

@@ -659,7 +659,7 @@ var __meta__ = { // jshint ignore:line
             var menuWidth = that.element.outerWidth();
             var borders = that.element[0].offsetWidth - that.element[0].clientWidth;
 
-            if (menuWidth != wrapperWidth) {
+            if (menuWidth != wrapperWidth && wrapperWidth > 0) {
                 var width = initialCssWidth ? Math.min(initialWidth, wrapperWidth) : wrapperWidth;
                 that.element.width(width - borders);
                 that._scrollWrapper.width(width);
@@ -1567,7 +1567,7 @@ var __meta__ = { // jshint ignore:line
                 link[0].click();
             }
 
-            if ((!that._isRootItem(element) || !options.openOnClick) && !kendo.support.touch && !(allPointers && that._isRootItem(element.closest(allItemsSelector)))) {
+            if ((!that._isRootItem(element) || !options.openOnClick) && !kendo.support.touch && !(isPointerTouch(e) && that._isRootItem(element.closest(allItemsSelector)))) {
                 return;
             }
 
@@ -1604,6 +1604,8 @@ var __meta__ = { // jshint ignore:line
         },
 
         _triggerSelect: function (target, itemElement) {
+            target = target.is(".k-link") ? target : target.closest(".k-link");
+
             var selectHandler = target.data("selectHandler"),
                 itemSelectEventData;
 

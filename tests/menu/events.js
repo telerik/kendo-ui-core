@@ -244,4 +244,22 @@ test("item select is triggered when items are loaded via insertBefore", function
     equal(selectCount, 1);
 });
 
+test("item select is triggered when item content is clicked", function() {
+    var selectCount = 0;
+    menu.insertAfter(
+        [{
+            text: "<b>New Item</b>",
+            encoded: false,
+            select: function(){
+                selectCount++;
+            }
+        }],
+        "> li:last-child"
+    );
+
+    $('.k-item', menu.element).last().find("b").trigger(CLICK);
+
+    equal(selectCount, 1);
+});
+
 })();
