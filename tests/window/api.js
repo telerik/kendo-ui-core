@@ -110,7 +110,11 @@
         var div = $("<div style='width:5000px' />").appendTo(QUnit.fixture.width(5020)),
             scrollPosition = 1300;
 
+        // QUnit.fixture's document is initially with overflow:hidden
+        $(QUnit.fixture[0].ownerDocument).find("html, body").css("overflow", "");
         $(QUnit.fixture[0].ownerDocument).scrollLeft(scrollPosition);
+
+        equal($(QUnit.fixture[0].ownerDocument).scrollLeft(), scrollPosition);
 
         window.center();
 
@@ -1139,4 +1143,82 @@
         ok(!dialog.isMaximized());
     });
 
+    test("maximize() takes borders into account", function() {
+        var borderWidth = 10;
+
+        var dialog = createWindow({
+                visible: true,
+                animation: false
+            });
+
+        dialog.wrapper.css("border-width", borderWidth + "px")
+
+        dialog.maximize();
+
+        equal(dialog.wrapper.width() + borderWidth * 2, $(window).width());
+    });
+
+    test("maximize() sets body's and html's overflow to hidden", 2, function() {
+        var dialog = createWindow({
+                visible: true,
+                animation: false
+            });
+
+        // QUnit.fixture's document is initially with overflow:hidden
+        $(QUnit.fixture[0].ownerDocument).find("html, body").css("overflow", "");
+
+        dialog.maximize();
+
+        equal($("body").css("overflow"), "hidden");
+        equal($("html").css("overflow"), "hidden");
+    });
+
+    test("restore() restores body's and html's original overflow after maximize()", 2, function() {
+        var dialog = createWindow({
+                visible: true,
+                animation: false
+            });
+
+        // QUnit.fixture's document is initially with overflow:hidden
+        $(QUnit.fixture[0].ownerDocument).find("html, body").css("overflow", "scroll");
+
+        dialog.maximize();
+        dialog.restore();
+
+        equal($("body").css("overflow"), "scroll");
+        equal($("html").css("overflow"), "scroll");
+    });
+
+    test("closing maximized window restores body's and html's original overflow", 2, function() {
+        var dialog = createWindow({
+                visible: true,
+                animation: false
+            });
+
+        // QUnit.fixture's document is initially with overflow:hidden
+        $(QUnit.fixture[0].ownerDocument).find("html, body").css("overflow", "scroll");
+
+        dialog.maximize();
+        dialog.close();
+
+        equal($("body").css("overflow"), "scroll");
+        equal($("html").css("overflow"), "scroll");
+    });
+
+    test("opening maximized window sets body's and html's overflow to hidden", 2, function() {
+        var dialog = createWindow({
+                visible: true,
+                animation: false
+            });
+
+        // QUnit.fixture's document is initially with overflow:hidden
+        $(QUnit.fixture[0].ownerDocument).find("html, body").css("overflow", "scroll");
+
+        dialog.maximize();
+        dialog.close();
+        dialog.open();
+
+        equal($("body").css("overflow"), "hidden");
+        equal($("html").css("overflow"), "hidden");
+    });
 })();

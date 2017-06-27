@@ -519,6 +519,16 @@ var __meta__ = { // jshint ignore:line
             return this;
         },
 
+        _preselect: function(value, text) {
+            this._inputValue(text);
+            this._accessor(value);
+
+            this._old = this.oldText =  this._accessor();
+
+            this.listView.setValue(value);
+            this._placeholder();
+        },
+
         _change: function() {
             var that = this;
             var value = that._unifySeparators().value();

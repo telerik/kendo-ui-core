@@ -70,5 +70,12 @@ test('menu is inside scroll wrapper', function() {
     ok(menu.element.parent().is("div.k-popups-wrapper.horizontal"));
 });
 
+
+test('menu does not strip "k-i-arrow-chevron-right" icons', function() {
+    var m = new kendo.ui.Menu("<ul><li><span class='k-icon k-i-arrow-chevron-right'></span>Next</li><li>Refresh</li></ul>");
+
+    ok(m.element.find(".k-i-arrow-chevron-right")[0]);
+});
+
 })();
 

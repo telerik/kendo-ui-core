@@ -63,6 +63,7 @@
             DRAGEND = "dragend",
             ERROR = "error",
             OVERFLOW = "overflow",
+            DATADOCOVERFLOWRULE = "original-overflow-rule",
             ZINDEX = "zIndex",
             MINIMIZE_MAXIMIZE = ".k-window-actions .k-i-window-minimize,.k-window-actions .k-i-window-maximize",
             KPIN = ".k-i-pin",
@@ -756,7 +757,7 @@
                 if (options.isMaximized) {
                     that._documentScrollTop = doc.scrollTop();
                     that._documentScrollLeft = doc.scrollLeft();
-                    $("html, body").css(OVERFLOW, HIDDEN);
+                    that._stopDocumentScrolling();
                 }
 
                 if(options.pinned && !that._isPinned){
@@ -835,7 +836,7 @@
                 }
 
                 if (that.options.isMaximized) {
-                    $("html, body").css(OVERFLOW, "");
+                    that._enableDocumentScrolling();
                     if (that._documentScrollTop && that._documentScrollTop > 0) {
                         doc.scrollTop(that._documentScrollTop);
                     }
@@ -966,7 +967,8 @@
                 that.options.width = restoreOptions.width;
                 that.options.height = restoreOptions.height;
 
-                $("html, body").css(OVERFLOW, "");
+                that._enableDocumentScrolling();
+
                 if (this._documentScrollTop && this._documentScrollTop > 0) {
                     doc.scrollTop(this._documentScrollTop);
                 }
@@ -1031,7 +1033,8 @@
 
                     this._documentScrollTop = doc.scrollTop();
                     this._documentScrollLeft = doc.scrollLeft();
-                    $("html, body").css(OVERFLOW, HIDDEN);
+
+                    that._stopDocumentScrolling();
 
                     that.options.isMaximized = true;
 
@@ -1039,6 +1042,44 @@
                 });
 
                 return this;
+            },
+
+            _stopDocumentScrolling: function(){
+                var that = this;
+
+                var $body = $("body");
+                that._storeOverflowRule($body);
+                $body.css(OVERFLOW, HIDDEN);
+
+                var $html = $("html");
+                that._storeOverflowRule($html);
+                $html.css(OVERFLOW, HIDDEN);
+            },
+
+            _enableDocumentScrolling: function(){
+                var that = this;
+
+                that._restoreOverflowRule($(document.body));
+                that._restoreOverflowRule($("html"));
+            },
+
+            _storeOverflowRule: function($element){
+                var overflowRule = $element.get(0).style.overflow;
+
+                if(overflowRule){
+                    $element.data(DATADOCOVERFLOWRULE, overflowRule);
+                }
+            },
+
+            _restoreOverflowRule: function($element){
+                var overflowRule = $element.data(DATADOCOVERFLOWRULE);
+
+                if(overflowRule){
+                    $element.css(OVERFLOW, overflowRule);
+                    $element.removeData(DATADOCOVERFLOWRULE);
+                } else {
+                    $element.css(OVERFLOW, "");
+                }
             },
 
             isMaximized: function() {
@@ -1111,8 +1152,13 @@
                     return;
                 }
 
-                w = wnd.width() / zoomLevel;
-                h = wnd.height() / zoomLevel - parseInt(wrapper.css("padding-top"), 10);
+                var lrBorderWidth = parseInt(wrapper.css("border-left-width"), 10 ) +
+                                        parseInt(wrapper.css("border-right-width"), 10);
+                var tbBorderWidth = parseInt(wrapper.css("border-top-width"), 10 ) +
+                                        parseInt(wrapper.css("border-bottom-width"), 10);
+
+                w = wnd.width() / zoomLevel - lrBorderWidth;
+                h = wnd.height() / zoomLevel - parseInt(wrapper.css("padding-top"), 10) - tbBorderWidth;
 
                 wrapper.css({
                     width: w,

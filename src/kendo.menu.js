@@ -314,7 +314,7 @@ var __meta__ = { // jshint ignore:line
     function updateArrow (item) {
         item = $(item);
 
-        item.find("> .k-link > [class*=k-i-arrow]:not(.k-sprite)").remove();
+        item.find("> .k-link > .k-menu-expand-arrow[class*=k-i-arrow]:not(.k-sprite)").remove();
 
         item.filter(":has(.k-menu-group)")
             .children(".k-link:not(:has([class*=k-i-arrow]:not(.k-sprite)))")
@@ -322,7 +322,7 @@ var __meta__ = { // jshint ignore:line
                 var item = $(this),
                     arrowCssClass = getArrowCssClass(item);
 
-                item.append("<span class='k-icon " + arrowCssClass + "'/>");
+                item.append("<span class='k-icon" + arrowCssClass + " k-menu-expand-arrow'/>");
             });
     }
 
@@ -993,6 +993,10 @@ var __meta__ = { // jshint ignore:line
 
             if (overflowWrapper) {
                 element.find(visiblePopups).each(closePopup);
+            }
+
+            if (that.options.openOnClick) {
+                that.clicked = true;
             }
 
             element.each(function () {

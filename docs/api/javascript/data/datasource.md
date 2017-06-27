@@ -2581,9 +2581,9 @@ Specifies the name of the server-side method of the SignalR hub responsible for 
 
 ### transport.submit `Function`
 
-A function that will handle create, update and delete operations in a single batch.
+A function that will handle create, update and delete operations in a single batch when custom transport is used, i.e. the `transport.read` is defined as a function.
 
-Typically, you have the `transport.read` and `transport.submit` operations defined together. The `transport.create`, `transport.update` and `transport.delete` operations will not be executed in this case.
+The `transport.create`, `transport.update` and `transport.delete` operations will not be executed in this case.
 
 > This function will only be invoked when the DataSource is in [batch mode](#configuration-batch).
 
@@ -2597,44 +2597,64 @@ An object containing the created (`e.data.created`), updated (`e.data.updated`),
 
 A callback that should be called for each operation with two parameters - items and operation. See example below.
 
-##### e.fail `Function`
+##### e.error `Function`
 
 A callback that should be called in case of failure of any of the operations.
 
 ##### Example - declare transport submit function
 
-<script>
-    var dataSource = new kendo.data.DataSource({
-        batch: true,
-        transport: {
-          submit: function(e) {
-            // Check out the network tab on "Save Changes"
-            $.ajaxBatch({
-              url: "<your service URL>",
-              data: e.data
-            })
-            .done(function() {
-              e.success(e.data.created, "create");
-              e.success([], "update");
-              e.success([], "destroy");
-            })
-            .fail(function() {
-              e.error();
-            });
-          },
-          read: function(e) {
-            $.ajax({
-              url: "http://demos.telerik.com/kendo-ui/service/Northwind.svc/Customers",
-              dataType: "jsonp",
-              data: data,
-              jsonp: "$callback"
-            })
-            .done(e.success)
-            .fail(e.error);
-          }
-        }
-      });
-</script>
+      <script>
+          var dataSource = new kendo.data.DataSource({
+            transport: {
+              read:  function(options){
+                $.ajax({
+                  url: "http://demos.telerik.com/kendo-ui/service/products",
+                  dataType: "jsonp", 
+                  success: function(result) {
+                    options.success(result);
+                  },
+                  error: function(result) {
+                    options.error(result);
+                  }
+                });
+              },
+              submit: function(e) {
+                var data = e.data;
+                console.log(data);
+
+                // send batch update to desired URL, then notify success/error
+
+                e.success(data.updated,"update");
+                e.success(data.created,"create");
+                e.success(data.destroyed,"destroy");
+                e.error(null, "customerror", "custom error");
+              }
+            },
+            batch: true,
+            pageSize: 20,
+            schema: {
+              model: {
+                id: "ProductID",
+                fields: {
+                  ProductID: { editable: false, nullable: true },
+                  ProductName: { validation: { required: true } },
+                  UnitPrice: { type: "number", validation: { required: true, min: 1} },
+                  Discontinued: { type: "boolean" },
+                  UnitsInStock: { type: "number", validation: { min: 0, required: true } }
+                }
+              }
+            }
+          });
+        
+          dataSource.read().then(function(){
+            var productOne = dataSource.at(1),
+                productTwo = dataSource.at(2); 
+            productOne.set("UnitPrice",42);
+            productTwo.set("UnitPrice",42);
+            dataSource.sync();          
+          });			
+    
+      </script>
 
 ### transport.update `Object|String|Function`
 
