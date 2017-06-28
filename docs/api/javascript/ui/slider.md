@@ -2,6 +2,7 @@
 title: Slider
 page_title: Configuration, methods and events of Kendo UI Slider
 description: Configuration of Slider UI control, different methods, and events, triggered when the slider value changes upon specific conditions.
+res_type: api
 ---
 
 # kendo.ui.Slider
@@ -102,7 +103,7 @@ The slider widget supports precision of up-to 10 digits after the decimals point
       });
     </script>
 
-### tooltip.template `String`
+### tooltip.template `String|Function`
 
 Template of the tooltip. The following variables are passed by the Slider and are ready to be used inside the template:
 
@@ -146,11 +147,27 @@ Detaches event handlers and removes data entries in order to avoid memory leaks.
 
 #### Example
 
-	// deatach events
+    <input id="slider" style="width: 300px" />
+    <script>
+      $("#slider").kendoSlider({
+        precision: 4,
+        smallStep:0.0001,
+        largeStep:0.0001,
+        min:0,
+        max:0.0004,
+        value: 0.0002,
+        tooltip: {
+          format: "{0:#,#.####}"
+        }
+      });
+	  
+	  	// deatach events
 	$("#slider").data("kendoSlider").destroy();
 
 	// remove slider html from DOM
     $("#slider").closest(".k-slider").remove();
+	
+    </script>
 
 ### enable
 
@@ -158,6 +175,20 @@ Enable/Disable the **Slider** widget.
 
 #### Example
 
+    <input id="slider" style="width: 300px" />
+    <script>
+      $("#slider").kendoSlider({
+        precision: 4,
+        smallStep:0.0001,
+        largeStep:0.0001,
+        min:0,
+        max:0.0004,
+        value: 0.0002,
+        tooltip: {
+          format: "{0:#,#.####}"
+        }
+      });
+	  
     // get a reference to the slider widget
     var slider = $("#slider").data("kendoSlider");
 
@@ -166,12 +197,120 @@ Enable/Disable the **Slider** widget.
 
     // enables the slider
     slider.enable(true);
+	
+    </script>
 
 #### Parameters
 
 ##### enable `Boolean`
 
 The argument, which defines whether to enable/disable the **Slider**.
+
+### max
+
+Gets/Sets the max value of the **Slider**.
+
+#### Parameters
+
+##### value `Number | String`
+
+The max value to set.
+
+#### Returns
+
+`Number` The max value of the **Slider**.
+
+#### Example - get the max value of the **Slider**
+
+    <input id="slider" />
+    <script>
+    $("#slider").kendoSlider();
+
+    var slider = $("#slider").data("kendoSlider");
+
+    var max = slider.max();
+
+    console.log(max);
+    </script>
+
+#### Example - set the max value of the **Slider**
+
+    <input id="slider" />
+    <script>
+    $("#slider").kendoSlider();
+
+    var slider = $("#slider").data("kendoSlider");
+
+    slider.max(20);
+    </script>
+
+### min
+
+Gets/Sets the min value of the **Slider**.
+
+#### Parameters
+
+##### value `Number | String`
+
+The min value to set.
+
+#### Returns
+
+`Number` The min value of the **Slider**.
+
+#### Example - get the min value of the **Slider**
+
+    <input id="slider" />
+    <script>
+    $("#slider").kendoSlider();
+
+    var slider = $("#slider").data("kendoSlider");
+
+    var min = slider.min();
+
+    console.log(min);
+    </script>
+
+#### Example - set the min value of the **Slider**
+
+    <input id="slider" />
+    <script>
+    $("#slider").kendoSlider();
+
+    var slider = $("#slider").data("kendoSlider");
+
+    slider.min(-10);
+    </script>
+
+### setOptions
+
+Changes the initial **Slider** configuration.
+
+#### Parameters
+
+##### options `Object`
+
+The new configuration options. It can be used for changing "min", "max", "smallStep" and "largeStep" options of the **Slider**.
+
+#### Example
+
+    <input id="slider" />
+    <script>
+    $("#slider").kendoSlider({
+        min: -10,
+        max: 20,
+        smallStep: 2,
+    });
+
+    var slider = $("#slider").data("kendoSlider");
+
+    slider.setOptions({
+        min: -5,
+        max: 5,
+        smallStep: 1,
+        largeStep: 2
+    });
+    </script>
 
 ### value
 
@@ -180,8 +319,27 @@ a number representing the underlying value.
 
 #### Example
 
+    <input id="slider" style="width: 300px" />
+    <script>
+      $("#slider").kendoSlider({
+        precision: 4,
+        smallStep:0.0001,
+        largeStep:0.0001,
+        min:0,
+        max:0.0004,
+        value: 0.0002,
+        tooltip: {
+          format: "{0:#,#.####}"
+        }
+      });
+	  
     var slider = $("#slider").data("kendoSlider");
     var sliderValue = slider.value();
+	console.log(sliderValue);
+	
+    </script>
+
+    
 
 #### Parameters
 

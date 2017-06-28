@@ -707,17 +707,19 @@
         }));
 
         asyncDataSource.read().then(function() {
-            virtualList.select(virtualList.items().first());
-            equal(virtualList.selectedDataItems().length, 1);
-            scroll(container, 4 * CONTAINER_HEIGHT);
+            virtualList.select(virtualList.items().first()).done(function() {
+                equal(virtualList.selectedDataItems().length, 1);
+                scroll(container, 4 * CONTAINER_HEIGHT);
 
-            setTimeout(function() {
-                virtualList.select(virtualList.items().last());
-                scroll(container, 0);
+                setTimeout(function() {
+                    virtualList.select(virtualList.items().last()).done(function() {
+                        scroll(container, 0);
 
-                start();
-                equal(virtualList.selectedDataItems().length, 2);
-            }, 300);
+                        start();
+                        equal(virtualList.selectedDataItems().length, 2);
+                    });
+                }, 300);
+            });
         });
     });
 
@@ -807,10 +809,12 @@
         }));
 
         asyncDataSource.read().then(function() {
-            start();
-            virtualList.select(1);
-            virtualList.select(-1)
-            ok(!virtualList.focusIndex());
+            virtualList.select(1).done(function() {
+                virtualList.select(-1).done(function() {
+                    start();
+                    ok(!virtualList.focusIndex());
+                });
+            });
         });
     });
 
@@ -1005,7 +1009,7 @@
             value: [1]
         }));
 
-        asyncDataSource.read().then(function() {
+        virtualList.bind("listBound", function() {
             virtualList.bind("change", function() {
                 start(); //select new values
                 equal(this.selectedDataItems().length, 1);
@@ -1014,6 +1018,8 @@
             });
             virtualList.value([4]);
         });
+
+        asyncDataSource.read();
     });
 
     asyncTest("value method clears previous values and dataItems (multiple)", 4, function() {
@@ -1173,7 +1179,7 @@
             value: [1]
         }));
 
-        asyncDataSource.read().then(function() {
+        virtualList.bind("listBound", function() {
             virtualList.bind("change", function() {
                 start();
                 equal(this.value().length, 1);
@@ -1183,6 +1189,8 @@
             });
             virtualList.value([2]);
         });
+
+        asyncDataSource.read();
     });
 
     asyncTest("value method return resolved promise", 1, function() {
@@ -1694,7 +1702,7 @@
         });
     });
 
-    test("dataItemByIndex method returns a dataItem from first range", 3, function() {
+    asyncTest("dataItemByIndex method returns a dataItem from first range", 3, function() {
         var virtualList = new VirtualList(container, $.extend(virtualSettings, {
             dataSource: new kendo.data.DataSource({
                 transport: {
@@ -1717,16 +1725,19 @@
             value: 0
         }));
 
-        virtualList.dataSource.read().then(function() {
+        virtualList.bind("listBound", function() {
+            start();
             var dataItem = virtualList.dataItemByIndex(0);
 
             ok(dataItem);
             equal(dataItem.id, 0);
             equal(dataItem.value, 0);
         });
+
+        virtualList.dataSource.read();
     });
 
-    test("dataItemByIndex method returns a dataItem from a prefetched range", 3, function() {
+    asyncTest("dataItemByIndex method returns a dataItem from a prefetched range", 3, function() {
         var virtualList = new VirtualList(container, $.extend(virtualSettings, {
             dataSource: new kendo.data.DataSource({
                 transport: {
@@ -1749,16 +1760,19 @@
             value: 210
         }));
 
-        virtualList.dataSource.read().then(function() {
+        virtualList.one("listBound", function() {
+            start();
             var dataItem = virtualList.dataItemByIndex(210);
 
             ok(dataItem);
             equal(dataItem.id, 210);
             equal(dataItem.value, 210);
         });
+
+        virtualList.dataSource.read();
     });
 
-    test("dataItemByIndex method returns null if data is not loaded", 1, function() {
+    asyncTest("dataItemByIndex method returns null if data is not loaded", 1, function() {
         var virtualList = new VirtualList(container, $.extend(virtualSettings, {
             dataSource: new kendo.data.DataSource({
                 transport: {
@@ -1780,15 +1794,17 @@
             }
         }));
 
-        virtualList.dataSource.read().then(function() {
+        virtualList.one("listBound", function() {
+            start();
             var dataItem = virtualList.dataItemByIndex(210);
 
             equal(dataItem, null);
         });
 
+        virtualList.dataSource.read();
     });
 
-    test("getElementIndex method returns LI offset index", 1, function() {
+    asyncTest("getElementIndex method returns LI offset index", 1, function() {
         var virtualList = new VirtualList(container, $.extend(virtualSettings, {
             dataSource: new kendo.data.DataSource({
                 transport: {
@@ -1810,12 +1826,14 @@
             }
         }));
 
-        virtualList.dataSource.read().then(function() {
+        virtualList.bind("listBound", function() {
+            start();
             var li = virtualList.element.children().eq(3);
             var index = virtualList.getElementIndex(li);
             equal(index, 3);
         });
 
+        virtualList.dataSource.read();
     });
 
     asyncTest("select method unselects prefetched item", 2, function() {

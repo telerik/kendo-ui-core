@@ -7,7 +7,7 @@ slug: howto_add_new_rows_when_tabbingoutof_thelast_one_grid
 
 # Add New Rows When Tabbing Out of the Last One
 
-The example below demonstrates how to add a new row when the user navigates out of the last row in the Kendo UI Grid widget.
+The following example demonstrates how to add a new row when the user navigates out of the last row in the Grid.
 
 ###### Example
 
@@ -23,10 +23,10 @@ The example below demonstrates how to add a new row when the user navigates out 
       var dataSource = new kendo.data.DataSource({
         //data: data,
         transport: {
-          read: function(e) {                                
+          read: function(e) {
             e.success(data);
           },
-          update: function(e) {                                
+          update: function(e) {
             e.success();
           },
           create: function(e) {
@@ -49,16 +49,16 @@ The example below demonstrates how to add a new row when the user navigates out 
       });
 
       var grid= $("#grid").kendoGrid({
-        dataSource: dataSource,  
-        scrollable: false,   
+        dataSource: dataSource,
+        scrollable: false,
         navigatable: true,
         editable : {
           createAt : "bottom"
-        },      
+        },
         navigatable: true,
         toolbar:  ["save","cancel", "create"],
-        columns: ["Id", "Name", "Position", {field:"ContractDate",format:"{0:d}"}]            
-      }).data("kendoGrid");     
+        columns: ["Id", "Name", "Position", {field:"ContractDate",format:"{0:d}"}]
+      }).data("kendoGrid");
 
       grid.tbody.on('keydown',function(e){
         if($(e.target).closest('td').is(':last-child') && $(e.target).closest('tr').is(':last-child')){
@@ -71,9 +71,7 @@ The example below demonstrates how to add a new row when the user navigates out 
 
 ## See Also
 
-Other articles on the Kendo UI Grid and how-to examples related to its editing functionality:
-
-* [JavaScript API Reference](/api/javascript/ui/grid)
+* [JavaScript API Reference of the Grid](/api/javascript/ui/grid)
 * [How to Build Custom dataSource for Custom Editor]({% slug howto_build_custom_datasourcefor_custom_editor_grid %})
 * [How to Customize the Delete Confirmation Dialog]({% slug howto_customize_delete_confirmation_dialog_grid %})
 * [How to Delete Multiple Rows Selected with Checkboxes]({% slug howto_delete_rows_selectedwith_checkboxes_grid %})
@@ -89,4 +87,4 @@ Other articles on the Kendo UI Grid and how-to examples related to its editing f
 * [How to Use Editors Based on Data Item Property]({% slug howto_use_editors_basedon_dataitem_property_grid %})
 * [How to Use TreeView as Custom Editor]({% slug howto_usethe_treeview_aseditor_grid %})
 
-For more runnable examples on the Kendo UI Grid, browse its [**How To** documentation folder]({% slug howto_create_custom_editors_grid %}).
+For more runnable examples on the Kendo UI Grid, browse its [**How To** documentation folder]({% slug howto_adjust_row_heights_template_locked_columns_grid %}).

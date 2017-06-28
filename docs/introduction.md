@@ -1,6 +1,6 @@
 ---
 title: Welcome to Kendo UI!
-page_title: Introduction | Telerik Kendo UI by Progress
+page_title: Introduction | Progress Kendo UI 
 description: "Learn about the Kendo UI controls, their distributions, frameworks, tools, and utilities."
 previous_url: /index
 slug: welcometo_kendoui
@@ -9,9 +9,10 @@ position: 1
 
 # Welcome to Kendo UI!
 
+Progress<sup>®</sup> Kendo UI is an HTML5 user interface framework for building interactive and high-performance websites and applications.
+
 ## Overview
 
-Kendo UI<sup>®</sup> by Progress is an HTML5 user interface framework for building interactive and high-performance websites and applications.
 The framework comes with a library of 70+ UI widgets, an abundance of data-visualization gadgets, client-side data source, built-in MVVM (Model-View-ViewModel) library. Kendo UI provides AngularJS and Bootstrap integration.
 
 [Check Out Kendo UI Online Demos](http://demos.telerik.com/kendo-ui/)
@@ -20,52 +21,68 @@ Kendo UI is distributed as part of several product units that you can choose fro
 
 ### Kendo UI Professional
 
-Kendo UI Professional is one of the commercial versions of Kendo UI. It is a comprehensive framework providing 70+ Kendo UI widgets, and includes a simple and consistent programming interface, a rock-solid DataSource, out-of-the-box themes, an MVVM framework, and more. Kendo UI Professional includes widgets for enterprise-grade line-of-business applications and is suitable for creating professional websites that require expert and timely technical support.
+Kendo UI Professional is one of the commercial versions of Kendo UI. It is a comprehensive framework providing 70+ Kendo UI widgets, and includes a simple and consistent programming interface, a rock-solid Data Source, out-of-the-box themes, an MVVM framework, and more. Kendo UI Professional includes widgets for enterprise-grade line-of-business applications and is suitable for creating professional websites that require expert and timely technical support.
 
 * [List of Kendo UI Components]({% slug bundle_supportfor_kendoui_components %})
 * [Browser Support]({% slug wbe_browserand_operating_system_support %})
 * [Evaluate Kendo UI Professional](http://www.telerik.com/download/kendo-ui)
 * [Get a License](http://www.telerik.com/purchase/kendo-ui)
-* [Licensee Agreement](http://www.telerik.com/purchase/license-agreement/kendo-ui-professional)
+* [License Agreement](http://www.telerik.com/purchase/license-agreement/kendo-ui-professional)
 
 ### Kendo UI Complete
 
-Kendo UI Complete incorporates all the products in the Kendo UI family - Kendo UI Professional, [UI for ASP.NET MVC](/aspnet-mvc/introduction), [UI for JSP](/jsp/introduction) and [UI for PHP](http://docs.telerik.com/kendo-ui/php/introduction).
+Kendo UI Complete incorporates all the products in the Kendo UI family:
 
-In addition, you receive a license for the
-[RadSpreadProcessing](http://www.telerik.com/products/wpf/spreadsheet-processing.aspx)
-library for .NET.
+* Kendo UI Professional
+* [UI for ASP.NET MVC](/aspnet-mvc/introduction)
+* [UI for JSP](/jsp/introduction)
+* [UI for PHP](http://docs.telerik.com/kendo-ui/php/introduction).
+
+In addition, you also receive a license for the [RadSpreadProcessing](http://www.telerik.com/products/wpf/spreadsheet-processing.aspx) library for .NET.
 
 #### UI for ASP.NET MVC
 
-[Telerik<sup>®</sup> UI for ASP.NET MVC by Progress](/aspnet-mvc/introduction) is a Kendo UI product flavor which targets ASP.NET MVC developers. It includes all Kendo UI Professional components as well as
-HtmlHelper extension methods (a.k.a. server-side wrappers) which allow you to configure the Kendo UI widgets via C# code.
+[Progress<sup>®</sup> Telerik<sup>®</sup> UI for ASP.NET MVC](http://docs.telerik.com/aspnet-mvc/introduction) is a Kendo UI product flavor which targets ASP.NET MVC developers. It includes all Kendo UI Professional components as well as HtmlHelper extension methods (a.k.a. server-side wrappers) which allow you to configure the Kendo UI widgets via C# code.
 
 * [List of Kendo UI Components]({% slug bundle_supportfor_kendoui_components %})
 * [Browser Support]({% slug wbe_browserand_operating_system_support %})
-* [Evaluate UI for ASP.NET MVC](http://www.telerik.com/download/aspnet-mvc)
+* [Evaluate UI for ASP.NET MVC](https://www.telerik.com/download-trial-file/v2/ui-for-asp.net-mvc)
 * [Get a License](http://www.telerik.com/purchase/aspnet-mvc)
-* [Licensee Agreement](http://www.telerik.com/purchase/license-agreement/aspnet-mvc)
+* [License Agreement](http://www.telerik.com/purchase/license-agreement/aspnet-mvc)
+* [Documentation](http://docs.telerik.com/aspnet-mvc/introduction)
+
+#### UI for ASP.NET Core
+
+[Progress<sup>®</sup> Telerik<sup>®</sup> UI for ASP.NET Core](http://docs.telerik.com/aspnet-core/introduction) supports the .NET Core runtime. It includes all Kendo UI Professional components as well as the Kendo UI Tag Helpers that help you configure the Kendo UI widgets using the new Tag Helpers feature in ASP.NET Core.
+
+* [List of Kendo UI Components]({% slug bundle_supportfor_kendoui_components %})
+* [Browser Support]({% slug wbe_browserand_operating_system_support %})
+* [Evaluate UI for ASP.NET Core](https://www.telerik.com/download-trial-file/v2/ui-for-asp.net-mvc)
+* [Get a License](http://www.telerik.com/purchase/aspnet-mvc)
+* [License Agreement](http://www.telerik.com/purchase/license-agreement/aspnet-mvc)
+* [Documentation](http://docs.telerik.com/aspnet-core/introduction)
 
 #### UI for JSP
 
-[Telerik<sup>®</sup> UI for JSP by Progress](/jsp/introduction) is a Kendo UI product flavor which targets the Java web application developers. It includes JSP (Java Server Pages) tags for all Kendo UI Professional widgets.
+[Progress<sup>®</sup> Telerik<sup>®</sup> UI for JSP](/jsp/introduction) is a Kendo UI product flavor which targets the Java web application developers. It includes JSP (Java Server Pages) tags for all Kendo UI Professional widgets.
 
 * [List of Kendo UI Components]({% slug bundle_supportfor_kendoui_components %})
 * [Browser Support]({% slug wbe_browserand_operating_system_support %})
 * [Evaluate UI for JSP](http://www.telerik.com/download/jsp-ui)
 * [Get a License](http://www.telerik.com/purchase/jsp-ui)
-* [Licensee Agreement](http://www.telerik.com/purchase/license-agreement/jsp-ui)
+* [License Agreement](http://www.telerik.com/purchase/license-agreement/jsp-ui)
+* [Documentation](/jsp/introduction)
 
 #### UI for PHP
 
-[Telerik<sup>®</sup> UI for PHP by Progress](http://docs.telerik.com/kendo-ui/php/introduction) is a Kendo UI product flavor which targets the PHP web application developers. It includes PHP classes for configuring all Kendo UI Professional widgets.
+[Progress<sup>®</sup> Telerik<sup>®</sup> UI for PHP](/php/introduction) is a Kendo UI product flavor which targets the PHP web application developers. It includes PHP classes for configuring all Kendo UI Professional widgets.
 
 * [List of Kendo UI Components]({% slug bundle_supportfor_kendoui_components %})
 * [Browser Support]({% slug wbe_browserand_operating_system_support %})
 * [Evaluate UI for PHP](http://www.telerik.com/download/php-ui)
 * [Get a License](http://www.telerik.com/purchase/php-ui)
-* [Licensee Agreement](http://www.telerik.com/purchase/license-agreement/php-ui)
+* [License Agreement](http://www.telerik.com/purchase/license-agreement/php-ui)
+* [Documentation](/php/introduction)
 
 #### RadSpreadProcessing
 
@@ -73,7 +90,7 @@ HtmlHelper extension methods (a.k.a. server-side wrappers) which allow you to co
 
 It complements the Spreadsheet component and allows you to process the data on the server, but can be used on its own as well.
 
-* [Server-Side Processing with the UI for ASP.NET MVC Spreadsheet]({% slug spreadsheet_processing_spreadsheet_mvc %})
+* [Server-Side Processing with the UI for ASP.NET MVC Spreadsheet](http://docs.telerik.com/aspnet-mvc/helpers/spreadsheet/spreadsheet-processing)
 * [Server-Side Processing with the Kendo UI Spreadsheet]({% slug serverside_processing_spreadsheet_widget %})
 * [RadSpreadProcessing Overview](http://docs.telerik.com/devtools/wpf/controls/radspreadprocessing/overview)
 

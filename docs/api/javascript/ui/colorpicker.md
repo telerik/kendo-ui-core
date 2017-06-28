@@ -1,6 +1,7 @@
 ---
 title: ColorPicker
 page_title: Configuration, methods and events of Kendo UI ColorPicker
+res_type: api
 ---
 
 # kendo.ui.ColorPicker
@@ -27,6 +28,21 @@ Applicable only for the HSV selector, when a [`pallete`](#configuration-palette)
     $("#colorpicker").kendoColorPicker({
       buttons: false
     })
+    </script>
+
+### clearButton `Boolean` *(default: false)*
+
+Specifies whether the widget should display the 'Clear color' button.
+
+Applicable only for the HSV selector, when a [`pallete`](#configuration-palette) is not specified.
+
+#### Example
+
+    <input id="colorpicker" type="color" />
+    <script>
+    $("#colorpicker").kendoColorPicker({
+      clearButton: false
+    });
     </script>
 
 ### columns `Number`
@@ -129,6 +145,21 @@ Allows customization of the "Cancel" button text.
     $("#colorpicker").kendoColorPicker({
       messages: {
         cancel: "Discard"
+      }
+    })
+    </script>
+
+### messages.previewInput `String` *(default: "Color Hexadecimal Code")*
+
+Allows customization of the "Color Hexadecimal Code" preview input title.
+
+#### Example
+
+    <input id="colorpicker" type="color" />
+    <script>
+    $("#colorpicker").kendoColorPicker({
+      messages: {
+        previewInput: "Edit Color"
       }
     })
     </script>

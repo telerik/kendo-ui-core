@@ -237,7 +237,7 @@
         var notificationPopup = $(".k-notification.k-notification-bar");
 
         equal(notificationPopup.length, 1);
-        equal(notificationPopup.find(".k-i-bar").text(), "bar");
+        equal(notificationPopup.find(".k-i-bar").text(), "");
     });
 
     test("show method adds notification type CSS class to static element and text to note icon", 2, function() {
@@ -250,7 +250,7 @@
         var notificationElement = $(".k-notification.k-notification-bar");
 
         equal(notificationElement.length, 1);
-        equal(notificationElement.find(".k-i-bar").text(), "bar");
+        equal(notificationElement.find(".k-i-bar").text(), "");
     });
 
     test("show method adds data-role='alert' to popup notification", function() {

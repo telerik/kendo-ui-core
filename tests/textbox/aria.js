@@ -100,11 +100,11 @@
         equal(numeric._text.attr("aria-valuemin"), undefined);
     });
 
-    test("NumericTextBox adds aria-valuenow", function() {
+    test("NumericTextBox adds aria-valuenow when value is null", function() {
         var numeric = new NumericTextBox(input, {
-            value: 10
+            value: null
         });
 
-        equal(numeric._text.attr("aria-valuenow"), "10");
+        equal(numeric._text.attr("aria-valuenow"), undefined);
     });
 })();

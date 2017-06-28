@@ -1,6 +1,7 @@
 /* jshint browser:false, node:true, esnext: true */
 
 var gulp = require('gulp');
+var shell = require('gulp-shell');
 var path = require('path');
 var debug = require('gulp-debug'); // jshint ignore:line
 var logger = require('gulp-logger');
@@ -82,7 +83,13 @@ gulp.task("less",function() {
     var minCss = css.pipe(clone())
         .pipe(gulpIf(makeSourceMaps, sourcemaps.init()))
         .pipe(cssUtils.minify())
-        .pipe(gulpIf(makeSourceMaps, sourcemaps.write("./")));
+        .pipe(gulpIf(makeSourceMaps, sourcemaps.write("./", {
+            mapSources: function(sourcePath) {
+                return sourcePath
+                        .replace(/(styles|mobile|web)\//, "")
+                        .replace(/\.css$/, ".min.css");
+            }
+        })));
 
     return merge(css, minCss)
         .pipe(gulp.dest('dist/styles'));
@@ -218,6 +225,9 @@ gulp.task('cjs', function() {
         }))
         .pipe(gulp.dest('dist/cjs'));
 });
+gulp.task('mdspell', shell.task(
+['cd docs && mdspell "**/*.md" -n -a --report']
+));
 
 [ 'pro', 'core' ].forEach(function(flavor) {
     gulp.task('npm-' + flavor, [ 'cjs', 'styles' ] , function() {
@@ -242,3 +252,7 @@ gulp.task('cjs', function() {
         return merge(js, styles, pkg, license, readme);
     })
 })
+
+const taskListing = require('gulp-task-listing');
+gulp.task('tasks', taskListing.withFilters(/:/));
+

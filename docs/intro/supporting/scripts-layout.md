@@ -1,4 +1,5 @@
 ---
+comment: THIS FILE IS AUTO-GENERATED, MANUAL CHANGES ARE OVERWRITTEN. TO UPDATE THE CONTENT, UPDATE COMPONENT DEPENDENCIES AND RUN `rake js_dependencies`.
 title: Script Files for Layout
 page_title: Script Files for Layout | Kendo UI Getting Started
 description: "Listing of required script files for the Kendo UI Layout"
@@ -12,9 +13,15 @@ Below are listed the script files for the Kendo UI Layout widgets.&nbsp;&nbsp;
 
 | Widget | Script files | Comments |
 | :---   | :---         | :---     |
+| [Dialog](http://demos.telerik.com/kendo-ui/dialog/index) | jquery.js | |
+| | kendo.core.js | |
+| | kendo.popup.js | |
+| | kendo.fx.js | Animation feature (optional) |
+| | kendo.dialog.js | |
 | [Notification](http://demos.telerik.com/kendo-ui/notification/index) | jquery.js | |
 | | kendo.core.js | |
 | | kendo.popup.js | |
+| | kendo.fx.js | Animation feature (optional) |
 | | kendo.notification.js | |
 | [Responsive Panel](http://demos.telerik.com/kendo-ui/responsive-panel/index) | jquery.js | |
 | | kendo.core.js | |
@@ -28,11 +35,13 @@ Below are listed the script files for the Kendo UI Layout widgets.&nbsp;&nbsp;
 | [Tooltip](http://demos.telerik.com/kendo-ui/tooltip/index) | jquery.js | |
 | | kendo.core.js | |
 | | kendo.popup.js | |
+| | kendo.fx.js | Animation feature (optional) |
 | | kendo.tooltip.js | |
 | [Window](http://demos.telerik.com/kendo-ui/window/index) | jquery.js | |
 | | kendo.core.js | |
 | | kendo.userevents.js | |
 | | kendo.draganddrop.js | |
+| | kendo.fx.js | Animation feature (optional) |
 | | kendo.window.js | |
 
 ## See Also

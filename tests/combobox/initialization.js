@@ -96,7 +96,7 @@ test("include arrow after input.k-input", function(){
    ok(spanArrow.is("span"));
    ok(spanArrow.hasClass("k-select"));
    ok(arrow.is("span"));
-   ok(arrow.hasClass("k-icon k-i-arrow-s"));
+   ok(arrow.hasClass("k-icon k-i-arrow-60-down"));
    equal(arrow.html(), "");
 });
 
@@ -1249,6 +1249,22 @@ test("update noData template on dataBound", function() {
     combobox.dataSource.data(["Item1"]);
 
     equal(noData.text(), combobox.dataSource.total());
+});
+
+test("adds class to the wrapper if clearButton is enabled", function() {
+    var combobox = new ComboBox(input, {
+        clearButton: true
+    });
+
+    ok(combobox.wrapper.hasClass("k-combobox-clearable"));
+});
+
+test("does not add k-combobox-clearable class if clearButton is turned off", function() {
+    var combobox = new ComboBox(input, {
+        clearButton: false
+    });
+
+    ok(!combobox.wrapper.hasClass("k-combobox-clearable"));
 });
 
 })();

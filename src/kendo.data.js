@@ -69,9 +69,7 @@ var __meta__ = { // jshint ignore:line
         unshift = [].unshift,
         toString = {}.toString,
         stableSort = kendo.support.stableSort,
-        dateRegExp = /^\/Date\((.*?)\)\/$/,
-        newLineRegExp = /(\r+|\n+)/g,
-        quoteRegExp = /(?=['\\])/g;
+        dateRegExp = /^\/Date\((.*?)\)\/$/;
 
     var ObservableArray = Observable.extend({
         init: function(array, type) {
@@ -1015,24 +1013,35 @@ var __meta__ = { // jshint ignore:line
 
     var operators = (function(){
 
-        function quote(value) {
-            return value.replace(quoteRegExp, "\\").replace(newLineRegExp, "");
+        function quote(str) {
+            if (typeof str == "string") {
+                str = str.replace(/[\r\n]+/g, "");
+            }
+            return JSON.stringify(str);
+        }
+
+        function textOp(impl) {
+            return function(a, b, ignore) {
+                b += "";
+                if (ignore) {
+                    a = "(" + a + " || '').toLowerCase()";
+                    b = b.toLowerCase();
+                }
+                return impl(a, quote(b), ignore);
+            };
         }
 
         function operator(op, a, b, ignore) {
-            var date;
-
             if (b != null) {
                 if (typeof b === STRING) {
-                    b = quote(b);
-                    date = dateRegExp.exec(b);
+                    var date = dateRegExp.exec(b);
                     if (date) {
                         b = new Date(+date[1]);
                     } else if (ignore) {
-                        b = "'" + b.toLowerCase() + "'";
+                        b = quote(b.toLowerCase());
                         a = "((" + a + " || '')+'').toLowerCase()";
                     } else {
-                        b = "'" + b + "'";
+                        b = quote(b);
                     }
                 }
 
@@ -1046,17 +1055,42 @@ var __meta__ = { // jshint ignore:line
             return a + " " + op + " " + b;
         }
 
+        function getMatchRegexp(pattern) {
+            // take a pattern, as supported by Excel match filter, and
+            // convert it to the equivalent JS regular expression.
+            // Excel patterns support:
+            //
+            //   * - match any sequence of characters
+            //   ? - match a single character
+            //
+            // to match a literal * or ?, they must be prefixed by a tilde (~)
+            for (var rx = "/^", esc = false, i = 0; i < pattern.length; ++i) {
+                var ch = pattern.charAt(i);
+                if (esc) {
+                    rx += "\\" + ch;
+                } else if (ch == "~") {
+                    esc = true;
+                    continue;
+                } else if (ch == "*") {
+                    rx += ".*";
+                } else if (ch == "?") {
+                    rx += ".";
+                } else if (".+^$()[]{}|\\/\n\r\u2028\u2029\xA0".indexOf(ch) >= 0) {
+                    rx += "\\" + ch;
+                } else {
+                    rx += ch;
+                }
+                esc = false;
+            }
+            return rx + "$/";
+        }
+
         return {
             quote: function(value) {
                 if (value && value.getTime) {
                     return "new Date(" + value.getTime() + ")";
                 }
-
-                if (typeof value == "string") {
-                    return "'" + quote(value) + "'";
-                }
-
-                return "" + value;
+                return quote(value);
             },
             eq: function(a, b, ignore) {
                 return operator("==", a, b, ignore);
@@ -1076,90 +1110,34 @@ var __meta__ = { // jshint ignore:line
             lte: function(a, b, ignore) {
                 return operator("<=", a, b, ignore);
             },
-            startswith: function(a, b, ignore) {
-                if (ignore) {
-                    a = "(" + a + " || '').toLowerCase()";
-                    if (b) {
-                        b = b.toLowerCase();
-                    }
-                }
-
-                if (b) {
-                    b = quote(b);
-                }
-
-                return a + ".lastIndexOf('" + b + "', 0) == 0";
-            },
-            doesnotstartwith: function(a, b, ignore) {
-                if (ignore) {
-                    a = "(" + a + " || '').toLowerCase()";
-                    if (b) {
-                        b = b.toLowerCase();
-                    }
-                }
-
-                if (b) {
-                    b = quote(b);
-                }
-
-                return a + ".lastIndexOf('" + b + "', 0) == -1";
-            },
-            endswith: function(a, b, ignore) {
-                if (ignore) {
-                    a = "(" + a + " || '').toLowerCase()";
-                    if (b) {
-                        b = b.toLowerCase();
-                    }
-                }
-
-                if (b) {
-                    b = quote(b);
-                }
-
-                return a + ".indexOf('" + b + "', " + a + ".length - " + (b || "").length + ") >= 0";
-            },
-            doesnotendwith: function(a, b, ignore) {
-                if (ignore) {
-                    a = "(" + a + " || '').toLowerCase()";
-                    if (b) {
-                        b = b.toLowerCase();
-                    }
-                }
-
-                if (b) {
-                    b = quote(b);
-                }
-
-                return a + ".indexOf('" + b + "', " + a + ".length - " + (b || "").length + ") < 0";
-            },
-            contains: function(a, b, ignore) {
-                if (ignore) {
-                    a = "(" + a + " || '').toLowerCase()";
-                    if (b) {
-                        b = b.toLowerCase();
-                    }
-                }
-
-                if (b) {
-                    b = quote(b);
-                }
-
-                return a + ".indexOf('" + b + "') >= 0";
-            },
-            doesnotcontain: function(a, b, ignore) {
-                if (ignore) {
-                    a = "(" + a + " || '').toLowerCase()";
-                    if (b) {
-                        b = b.toLowerCase();
-                    }
-                }
-
-                if (b) {
-                    b = quote(b);
-                }
-
-                return a + ".indexOf('" + b + "') == -1";
-            },
+            startswith: textOp(function(a, b) {
+                return a + ".lastIndexOf(" + b + ", 0) == 0";
+            }),
+            doesnotstartwith: textOp(function(a, b) {
+                return a + ".lastIndexOf(" + b + ", 0) == -1";
+            }),
+            endswith: textOp(function(a, b) {
+                var n = b ? b.length - 2 : 0;
+                return a + ".indexOf(" + b + ", " + a + ".length - " + n + ") >= 0";
+            }),
+            doesnotendwith: textOp(function(a, b) {
+                var n = b ? b.length - 2 : 0;
+                return a + ".indexOf(" + b + ", " + a + ".length - " + n + ") < 0";
+            }),
+            contains: textOp(function(a, b) {
+                return a + ".indexOf(" + b + ") >= 0";
+            }),
+            doesnotcontain: textOp(function(a, b) {
+                return a + ".indexOf(" + b + ") == -1";
+            }),
+            matches: textOp(function(a, b){
+                b = b.substring(1, b.length - 1);
+                return getMatchRegexp(b) + ".test(" + a + ")";
+            }),
+            doesnotmatch: textOp(function(a, b){
+                b = b.substring(1, b.length - 1);
+                return "!" + getMatchRegexp(b) + ".test(" + a + ")";
+            }),
             isempty: function(a) {
                 return a + " === ''";
             },
@@ -1167,10 +1145,10 @@ var __meta__ = { // jshint ignore:line
                 return a + " !== ''";
             },
             isnull: function(a) {
-                return "(" + a + " === null || " + a + " === undefined)";
+                return "(" + a + " == null)";
             },
             isnotnull: function(a) {
-                return "(" + a + " !== null && " + a + " !== undefined)";
+                return "(" + a + " != null)";
             }
         };
     })();
@@ -2603,7 +2581,12 @@ var __meta__ = { // jshint ignore:line
             return model;
         },
 
-        pushCreate: function(items) {
+        pushInsert: function(index, items) {
+            if (!items) {
+                items = index;
+                index = 0;
+            }
+
             if (!isArray(items)) {
                 items = [items];
             }
@@ -2616,7 +2599,7 @@ var __meta__ = { // jshint ignore:line
                 for (var idx = 0; idx < items.length; idx ++) {
                     var item = items[idx];
 
-                    var result = this.add(item);
+                    var result = this.insert(index, item);
 
                     pushed.push(result);
 
@@ -2627,6 +2610,8 @@ var __meta__ = { // jshint ignore:line
                     }
 
                     this._pristineData.push(pristine);
+
+                    index++;
                 }
             } finally {
                 this.options.autoSync = autoSync;
@@ -2638,6 +2623,10 @@ var __meta__ = { // jshint ignore:line
                     items: pushed
                 });
             }
+        },
+
+        pushCreate: function(items) {
+            this.pushInsert(this._data.length, items);
         },
 
         pushUpdate: function(items) {
@@ -2810,7 +2799,9 @@ var __meta__ = { // jshint ignore:line
                     var idx, length;
 
                     for (idx = 0, length = arguments.length; idx < length; idx++){
-                        that._accept(arguments[idx]);
+                        if (arguments[idx]) {
+                            that._accept(arguments[idx]);
+                        }
                     }
 
                     that._storeData(true);
@@ -3013,6 +3004,8 @@ var __meta__ = { // jshint ignore:line
 
             that.trigger(REQUESTSTART, { type: "submit" });
 
+            that.trigger(PROGRESS);
+
             that.transport.submit(extend({
                 success: function(response, type) {
                     var promise = $.grep(promises, function(x) {
@@ -3080,6 +3073,8 @@ var __meta__ = { // jshint ignore:line
 
             return $.Deferred(function(deferred) {
                 that.trigger(REQUESTSTART, { type: type });
+
+                that.trigger(PROGRESS);
 
                 that.transport[type].call(that.transport, extend({
                     success: function(response) {
@@ -4378,7 +4373,13 @@ var __meta__ = { // jshint ignore:line
             }
 
             if (isFunction(hasChildren)) {
-                that.hasChildren = !!hasChildren.call(that, that);
+                var hasChildrenObject = hasChildren.call(that, that);
+
+                if(hasChildrenObject && hasChildrenObject.length === 0){
+                    that.hasChildren = false;
+                } else{
+                    that.hasChildren = !!hasChildrenObject;
+                }
             }
 
             that._childrenOptions = childrenOptions;
@@ -4483,6 +4484,10 @@ var __meta__ = { // jshint ignore:line
 
                 children.one(CHANGE, proxy(this._childrenLoaded, this));
 
+                if(this._matchFilter){
+                    options.filter = { field: '_matchFilter', operator: 'eq', value: true };
+                }
+
                 promise = children[method](options);
             } else {
                 this.loaded(true);
@@ -4533,6 +4538,11 @@ var __meta__ = { // jshint ignore:line
                 children: options
             });
 
+            if(options.filter && !options.serverFiltering){
+                this._hierarchicalFilter = options.filter;
+                options.filter = null;
+            }
+
             DataSource.fn.init.call(this, extend(true, {}, { schema: { modelBase: node, model: node } }, options));
 
             this._attachBubbleHandlers();
@@ -4544,6 +4554,16 @@ var __meta__ = { // jshint ignore:line
             that._data.bind(ERROR, function(e) {
                 that.trigger(ERROR, e);
             });
+        },
+
+        read: function(data) {
+            var result = DataSource.fn.read.call(this, data);
+
+            if(this._hierarchicalFilter){
+                this.filter(this._hierarchicalFilter);
+            }
+
+            return result;
         },
 
         remove: function(node){
@@ -4577,6 +4597,72 @@ var __meta__ = { // jshint ignore:line
             }
 
             return DataSource.fn.insert.call(this, index, model);
+        },
+
+        filter: function(val) {
+            if (val === undefined) {
+                 return this._filter;
+            }
+
+            if(!this.options.serverFiltering){
+                this._markHierarchicalQuery(val);
+                val = { logic: "or", filters: [val, {field:'_matchFilter', operator: 'equals', value: true }]};
+            }
+
+            this.trigger("reset");
+            this._query({ filter: val, page: 1 });
+        },
+
+        _markHierarchicalQuery: function(expressions){
+            var compiled;
+            var predicate; 
+            var fields;
+            var operators;
+            var filter;
+
+            expressions = normalizeFilter(expressions);
+
+            if (!expressions || expressions.filters.length === 0) {
+                return this;
+            }
+
+            compiled = Query.filterExpr(expressions);
+            fields = compiled.fields;
+            operators = compiled.operators;
+
+            predicate = filter = new Function("d, __f, __o", "return " + compiled.expression);
+
+            if (fields.length || operators.length) {
+                filter = function(d) {
+                    return predicate(d, fields, operators);
+                };
+            }
+
+            this._updateHierarchicalFilter(filter);
+        },
+
+         _updateHierarchicalFilter: function(filter){
+            var current;
+            var data = this._data;
+            var result = false;
+
+            for (var idx = 0; idx < data.length; idx++) {
+                 current = data[idx];
+
+                 if(current.hasChildren){
+                     current._matchFilter = current.children._updateHierarchicalFilter(filter);
+                    if(!current._matchFilter){
+                        current._matchFilter = filter(current);
+                    }
+                }else{
+                    current._matchFilter = filter(current);
+                }
+
+                if(current._matchFilter){
+                    result = true;
+                }
+            }
+            return result;
         },
 
         _find: function(method, value) {

@@ -1,5 +1,5 @@
 (function(f, define){
-    define([ "./kendo.core" ], f);
+    define([ "./kendo.data" ], f);
 })(function(){
 
 var __meta__ = { // jshint ignore:line
@@ -7,7 +7,7 @@ var __meta__ = { // jshint ignore:line
     name: "PanelBar",
     category: "web",
     description: "The PanelBar widget displays hierarchical data as a multi-level expandable panel bar.",
-    depends: [ "core" ]
+    depends: [ "core", "data", "data.odata" ]
 };
 
 (function($, undefined) {
@@ -15,9 +15,12 @@ var __meta__ = { // jshint ignore:line
         ui = kendo.ui,
         keys = kendo.keys,
         extend = $.extend,
+        proxy = $.proxy,
         each = $.each,
+        isArray = $.isArray,
         template = kendo.template,
         Widget = ui.Widget,
+        HierarchicalDataSource = kendo.data.HierarchicalDataSource,
         excludedNodesRegExp = /^(ul|a|div)$/i,
         NS = ".kendoPanelBar",
         IMG = "img",
@@ -31,17 +34,21 @@ var __meta__ = { // jshint ignore:line
         VISIBLEGROUP = GROUP + ":visible",
         IMAGE = "k-image",
         FIRST = "k-first",
+        CHANGE = "change",
         EXPAND = "expand",
         SELECT = "select",
         CONTENT = "k-content",
         ACTIVATE = "activate",
         COLLAPSE = "collapse",
+        DATABOUND = "dataBound",
         MOUSEENTER = "mouseenter",
         MOUSELEAVE = "mouseleave",
         CONTENTLOAD = "contentLoad",
+        UNDEFINED = "undefined",
         ACTIVECLASS = "k-state-active",
         GROUPS = "> .k-panel",
         CONTENTS = "> .k-content",
+        STRING = "string",
         FOCUSEDCLASS = "k-state-focused",
         DISABLEDCLASS = "k-state-disabled",
         SELECTEDCLASS = "k-state-selected",
@@ -59,137 +66,93 @@ var __meta__ = { // jshint ignore:line
         VISIBLE = ":visible",
         EMPTY = ":empty",
         SINGLE = "single",
+        bindings = {
+            text: "dataTextField",
+            url: "dataUrlField",
+            spriteCssClass: "dataSpriteCssClassField",
+            imageUrl: "dataImageUrlField"
+        },
+        itemIcon,
+        rendering = {
+        aria: function(item) {
+            var attr = "";
 
-        templates = {
-            content: template(
-                "<div role='region' class='k-content'#= contentAttributes(data) #>#= content(item) #</div>"
-            ),
-            group: template(
-                "<ul role='group' aria-hidden='true' class='#= groupCssClass(group) #'#= groupAttributes(group) #>" +
-                    "#= renderItems(data) #" +
-                "</ul>"
-            ),
-            itemWrapper: template(
-                "<#= tag(item) # class='#= textClass(item, group) #' #= contentUrl(item) ##= textAttributes(item) #>" +
-                    "#= image(item) ##= sprite(item) ##= text(item) #" +
-                    "#= arrow(data) #" +
-                "</#= tag(item) #>"
-            ),
-            item: template(
-                "<li role='menuitem' #=aria(item)#class='#= wrapperCssClass(group, item) #'>" +
-                    "#= itemWrapper(data) #" +
-                    "# if (item.items) { #" +
-                    "#= subGroup({ items: item.items, panelBar: panelBar, group: { expanded: item.expanded } }) #" +
-                    "# } else if (item.content || item.contentUrl) { #" +
-                    "#= renderContent(data) #" +
-                    "# } #" +
-                "</li>"
-            ),
-            image: template("<img class='k-image' alt='' src='#= imageUrl #' />"),
-            arrow: template("<span class='#= arrowClass(item) #'></span>"),
-            sprite: template("<span class='k-sprite #= spriteCssClass #'></span>"),
-            empty: template("")
+            if (item.items || item.content || item.contentUrl || item.expanded) {
+                attr += ARIA_EXPANDED + "='" + (item.expanded ? "true" : "false") + "' ";
+            }
+
+            if (item.enabled === false) {
+                attr += ARIA_DISABLED + "='true'";
+            }
+
+            return attr;
         },
 
-        rendering = {
-            aria: function(item) {
-                var attr = "";
+    wrapperCssClass: function (group, item) {
+        var result = "k-item",
+            index = item.index;
 
-                if (item.items || item.content || item.contentUrl) {
-                    attr += ARIA_EXPANDED + "='" + (item.expanded ? "true" : "false") + "' ";
-                }
+        if (item.enabled === false) {
+            result += " " + DISABLEDCLASS;
+        } else if (item.expanded === true) {
+            result += " " + ACTIVECLASS;
+        } else {
+            result += " k-state-default";
+        }
 
-                if (item.enabled === false) {
-                    attr += ARIA_DISABLED + "='true'";
-                }
+        if (index === 0) {
+            result += " k-first";
+        }
 
-                return attr;
-            },
+        if (index == group.length - 1) {
+            result += " k-last";
+        }
 
-            wrapperCssClass: function (group, item) {
-                var result = "k-item",
-                    index = item.index;
+        if (item.cssClass) {
+            result += " " + item.cssClass;
+        }
 
-                if (item.enabled === false) {
-                    result += " " + DISABLEDCLASS;
-                } else if (item.expanded === true) {
-                    result += " " + ACTIVECLASS;
-                } else {
-                    result += " k-state-default";
-                }
+        return result;
+    },
 
-                if (index === 0) {
-                    result += " k-first";
-                }
+    textClass: function(item, group) {
+        var result = LINK;
 
-                if (index == group.length-1) {
-                    result += " k-last";
-                }
+        if (group.firstLevel) {
+            result += " k-header";
+        }
 
-                if (item.cssClass) {
-                    result += " " + item.cssClass;
-                }
+        return result;
+    },
+    textAttributes: function(url) {
+        return url ? " href='" + url + "'" : "";
+    },
+    arrowClass: function(item) {
+        var result = "k-icon";
 
-                return result;
-            },
+        result += item.expanded ? " k-panelbar-collapse k-i-arrow-n" : " k-panelbar-expand k-i-arrow-s";
 
-            textClass: function(item, group) {
-                var result = LINK;
-
-                if (group.firstLevel) {
-                    result += " k-header";
-                }
-
-                return result;
-            },
-            textAttributes: function(item) {
-                return item.url ? " href='" + item.url + "'" : "";
-            },
-            arrowClass: function(item) {
-                var result = "k-icon";
-
-                result += item.expanded ? " k-i-arrow-n k-panelbar-collapse" : " k-i-arrow-s k-panelbar-expand";
-
-                return result;
-            },
-            text: function(item) {
-                return item.encoded === false ? item.text : kendo.htmlEncode(item.text);
-            },
-            tag: function(item) {
-                return item.url || item.contentUrl ? "a" : "span";
-            },
-            groupAttributes: function(group) {
-                return group.expanded !== true ? " style='display:none'" : "";
-            },
-            groupCssClass: function() {
-                return "k-group k-panel";
-            },
-            contentAttributes: function(content) {
-                return content.item.expanded !== true ? " style='display:none'" : "";
-            },
-            content: function(item) {
-                return item.content ? item.content : item.contentUrl ? "" : "&nbsp;";
-            },
-            contentUrl: function(item) {
-                return item.contentUrl ? 'href="' + item.contentUrl + '"' : "";
-            }
-        };
-
-    function updateArrow (items) {
-        items = $(items);
-
-        items.children(LINKSELECTOR).children(".k-icon").remove();
-
-        items
-            .filter(":has(.k-panel),:has(.k-content)")
-            .children(".k-link:not(:has([class*=k-i-arrow]))")
-            .each(function () {
-                var item = $(this),
-                    parent = item.parent();
-
-                item.append("<span class='k-icon " + (parent.hasClass(ACTIVECLASS) ? "k-i-arrow-n k-panelbar-collapse" : "k-i-arrow-s k-panelbar-expand") + "'/>");
-            });
+        return result;
+    },
+    text: function(item) {
+         return item.encoded === false ? item.text : kendo.htmlEncode(item.text);
+    },
+    groupAttributes: function(group) {
+        return group.expanded !== true ? " style='display:none'" : "";
+    },
+    groupCssClass: function() {
+        return "k-group k-panel";
+    },
+    contentAttributes: function(content) {
+        return content.item.expanded !== true ? " style='display:none'" : "";
+    },
+    content: function(item) {
+        return item.content ? item.content : item.contentUrl ? "" : "&nbsp;";
+    },
+    contentUrl: function(item) {
+        return item.contentUrl ? 'href="' + item.contentUrl + '"' : "";
     }
+};
 
     function updateFirstLast (items) {
         items = $(items);
@@ -200,10 +163,38 @@ var __meta__ = { // jshint ignore:line
         items.filter(":last-child").addClass(LAST);
     }
 
-    var PanelBar = Widget.extend({
+     function updateItemHtml(item) {
+        var wrapper = item,
+            group = item.children("ul"),
+            toggleButton = wrapper.children(".k-link").children(".k-icon");
+
+        if (item.hasClass("k-panelbar")) {
+            return;
+        }
+
+        if (!toggleButton.length && group.length) {
+            toggleButton = $("<span class='k-icon' />").appendTo(wrapper);
+        } else if (!group.length || !group.children().length) {
+            toggleButton.remove();
+            group.remove();
+        }
+     }
+
+    itemIcon = function(item) {
+        return item.children("span").children(".k-icon");
+    };
+
+    var PanelBar = kendo.ui.DataBoundWidget.extend({
         init: function(element, options) {
             var that = this,
-                content;
+                content,
+                hasDataSource;
+
+           if (isArray(options)) {
+                options = { dataSource: options };
+           }
+
+            hasDataSource = options && !!options.dataSource;
 
             Widget.fn.init.call(that, element, options);
 
@@ -216,7 +207,13 @@ var __meta__ = { // jshint ignore:line
 
             that._tabindex();
 
-            that._initData(options);
+            that._accessors();
+
+            that._dataSource();
+
+            that._templates();
+
+            that._initData(hasDataSource);
 
             that._updateClasses();
 
@@ -230,6 +227,7 @@ var __meta__ = { // jshint ignore:line
                 })
                 .on(MOUSEENTER  + NS + " " + MOUSELEAVE + NS, clickableItems, that._toggleHover)
                 .on("click" + NS, disabledItems, false)
+                .on("click" + NS, ".k-request-retry", proxy(that._retryRequest, that))
                 .on("keydown" + NS, $.proxy(that._keydown, that))
                 .on("focus" + NS, function() {
                     var item = that.select();
@@ -246,7 +244,7 @@ var __meta__ = { // jshint ignore:line
                 that.expand(content.parent(), false);
             }
 
-            if (options.dataSource) {
+            if (!options.dataSource) {
                 that._angularCompile();
             }
 
@@ -258,11 +256,14 @@ var __meta__ = { // jshint ignore:line
             COLLAPSE,
             SELECT,
             ACTIVATE,
+            CHANGE,
             ERROR,
+            DATABOUND,
             CONTENTLOAD
         ],
         options: {
             name: "PanelBar",
+            dataSource: {},
             animation: {
                 expand: {
                     effects: "expand:vertical",
@@ -272,7 +273,15 @@ var __meta__ = { // jshint ignore:line
                     duration: 200
                 }
             },
-            expandMode: "multiple"
+            messages: {
+                loading: "Loading...",
+                requestFailed: "Request failed.",
+                retry: "Retry"
+            },
+            autoBind: true,
+            loadOnDemand: true,
+            expandMode: "multiple",
+            dataTextField: null
         },
 
         _angularCompile: function() {
@@ -281,6 +290,18 @@ var __meta__ = { // jshint ignore:line
                 return {
                     elements: that.element.children("li"),
                     data: [{ dataItem: that.options.$angular}]
+                };
+            });
+        },
+
+        _angularCompileElements: function(html, items) {
+            var that = this;
+            that.angular("compile", function(){
+                return {
+                    elements: html,
+                    data: $.map(items, function(item) {
+                        return [{ dataItem: item }];
+                    })
                 };
             });
         },
@@ -303,13 +324,85 @@ var __meta__ = { // jshint ignore:line
             kendo.destroy(this.element);
         },
 
-        _initData: function(options) {
+        _initData: function(hasDataSource) {
             var that = this;
 
-            if (options.dataSource) {
+            if (hasDataSource) {
                 that.element.empty();
-                that.append(options.dataSource, that.element);
+                 if (that.options.autoBind) {
+                    that._progress(true);
+
+                    that.dataSource.fetch();
+                 }
             }
+        },
+
+        _templates: function() {
+            var that = this,
+                options = that.options,
+                fieldAccessor = proxy(that._fieldAccessor, that);
+
+              if (options.template && typeof options.template == STRING) {
+                    options.template = template(options.template);
+              } else if (!options.template) {
+                     options.template = template(
+                        "# var text = " + fieldAccessor("text") + "(data.item); #" +
+                        "# if (typeof data.item.encoded != 'undefined' && data.item.encoded === false) {#" +
+                            "#= text #" +
+                        "# } else { #" +
+                            "#: text #" +
+                        "# } #"
+                    );
+                }
+
+            that.templates = {
+                content: template(
+                    "<div role='region' class='k-content'#= contentAttributes(data) #>#= content(item) #</div>"
+                ),
+                group: template(
+                    "<ul role='group' aria-hidden='true' class='#= groupCssClass(group) #'#= groupAttributes(group) #>" +
+                        "#= renderItems(data) #" +
+                    "</ul>"
+                ),
+                itemWrapper: template(
+                     "# var url = " + fieldAccessor("url") + "(item); #" +
+                     "# var imageUrl = " + fieldAccessor("imageUrl") + "(item); #" +
+                     "# var spriteCssClass = " + fieldAccessor("spriteCssClass") + "(item); #" +
+                     "# var contentUrl = contentUrl(item); #" +
+                     "# var tag = url||contentUrl ? 'a' : 'span'; #" +
+
+                    "<#= tag # class='#= textClass(item, group) #' #= contentUrl ##= textAttributes(url) #>" +
+                        "# if (imageUrl) { #" +
+                              "<img class='k-image' alt='' src='#= imageUrl #' />" +
+                        "# } #" +
+
+                        "# if (spriteCssClass) { #" +
+                            "<span class='k-sprite #= spriteCssClass #'></span>" +
+                        "# } #" +
+                      "#= data.panelBar.options.template(data) #" +
+                      "#= arrow(data) #" +
+                    "</#= tag #>"
+                ),
+
+                item: template(
+                    "<li role='menuitem' #=aria(item)#class='#= wrapperCssClass(group, item) #'" +
+                         kendo.attr("uid") + "='#= item.uid #'>" +
+                        "#= itemWrapper(data) #" +
+                        "# if (item.items && item.items.length > 0) { #" +
+                        "#= subGroup({ items: item.items, panelBar: panelBar, group: { expanded: item.expanded } }) #" +
+                        "# } else if (item.content || item.contentUrl) { #" +
+                        "#= renderContent(data) #" +
+                        "# } #" +
+                    "</li>"
+                ),
+                loading: template("<div class='k-item'><span class='k-icon k-i-loading'></span> #: data.messages.loading #</div>"),
+                retry: template(
+                    "#: data.messages.requestFailed # " +
+                    "<button class='k-button k-request-retry'>#: data.messages.retry #</button>"
+                ),
+                arrow: template("<span class='#= arrowClass(item) #'></span>"),
+                empty: template("")
+            };
         },
 
         setOptions: function(options) {
@@ -320,7 +413,7 @@ var __meta__ = { // jshint ignore:line
             options.animation = extend(true, animation, options.animation);
 
             if ("dataSource" in options) {
-                this._initData(options);
+                this.setDataSource(options.dataSource);
             }
 
             Widget.fn.setOptions.call(this, options);
@@ -333,12 +426,12 @@ var __meta__ = { // jshint ignore:line
             element = this.element.find(element);
 
             if (that._animating && element.find("ul").is(":visible")) {
-                 that.one("complete", function() {
+                that.one("complete", function() {
                     setTimeout(function() {
                         that.expand(element);
                     });
-                 });
-                 return;
+                });
+                return;
             }
             that._animating = true;
 
@@ -346,7 +439,13 @@ var __meta__ = { // jshint ignore:line
 
             element.each(function (index, item) {
                 item = $(item);
-                var groups = item.find(GROUPS).add(item.find(CONTENTS));
+                var wrapper = element.children(".k-group,.k-content");
+
+                if (!wrapper.length) {
+                    wrapper =  that._addGroupElement(element);
+                }
+
+                 var groups = wrapper.add(item.find(CONTENTS));
 
                 if (!item.hasClass(DISABLEDCLASS) && groups.length > 0) {
 
@@ -363,7 +462,7 @@ var __meta__ = { // jshint ignore:line
                     }
 
                     if (!that._triggerEvent(EXPAND, item)) {
-                        that._toggleItem(item, false);
+                        that._toggleItem(item, false, false);
                     }
 
                     if (!useAnimation) {
@@ -409,7 +508,423 @@ var __meta__ = { // jshint ignore:line
             return that;
         },
 
-        _toggleDisabled: function (element, enable) {
+         updateArrow: function(items) {
+                var that = this;
+
+                items = $(items);
+                items.children(LINKSELECTOR).children(".k-panelbar-collapse, .k-panelbar-expand").remove();
+
+                items
+                    .filter(function() {
+                        var dataItem = that.dataItem(this);
+
+                        if (!dataItem) {
+                            return $(this).find(".k-panel").length > 0 ||
+                                $(this).find(".k-content").length > 0;
+                        }
+
+                        return dataItem.hasChildren || dataItem.content || dataItem.contentUrl;
+                    })
+                    .children(".k-link:not(:has([class*=k-i-arrow]))")
+                    .each(function () {
+                        var item = $(this),
+                            parent = item.parent();
+
+                        item.append("<span class='k-icon " + (parent.hasClass(ACTIVECLASS) ? " k-panelbar-collapse k-i-arrow-n" : " k-panelbar-expand k-i-arrow-s") + "'/>");
+                    });
+         },
+
+        _accessors: function() {
+            var that = this,
+                options = that.options,
+                i, field, textField,
+                element = that.element;
+
+            for (i in bindings) {
+                field = options[bindings[i]];
+                textField = element.attr(kendo.attr(i + "-field"));
+
+                if (!field && textField) {
+                    field = textField;
+                }
+
+                if (!field) {
+                    field = i;
+                }
+
+                if (!isArray(field)) {
+                    field = [field];
+                }
+
+                options[bindings[i]] = field;
+            }
+        },
+
+        _progress: function(item, showProgress) {
+            var element = this.element;
+            var loadingText = this.templates.loading({ messages: this.options.messages });
+
+            if (arguments.length == 1) {
+                showProgress = item;
+
+                if (showProgress) {
+                    element.html(loadingText);
+                } else {
+                    element.empty();
+                }
+            }
+            else {
+                itemIcon(item).toggleClass("k-i-loading", showProgress).removeClass("k-i-refresh");
+            }
+        },
+
+        _refreshRoot: function(items) {
+            var that = this;
+            var parent = that.element;
+            var  groupData = {
+                firstLevel: true,
+                expanded: true,
+                length: parent.children().length
+            };
+
+            this.element.empty();
+
+            var rootItemsHtml = $.map(items, function(value, idx) {
+                    if (typeof value === "string") {
+                        return $(value);
+                    } else {
+                        value.items = [];
+                        return $(that.renderItem({
+                            group: groupData,
+                            item: extend(value, { index: idx })
+                        }));
+                    }
+            });
+
+            this.element.append(rootItemsHtml);
+            this._angularCompileElements(rootItemsHtml, items);
+        },
+
+        _refreshChildren: function(item, parentNode) {
+            var i, children, child;
+
+            parentNode.children(".k-group").empty();
+            var items = item.children.data();
+            if (!items.length) {
+                updateItemHtml(parentNode);
+                children = parentNode.children(".k-group").children("li");
+                this._angularCompileElements(children, items);
+            } else {
+                this.append(item.children, parentNode);
+
+                if(this.options.loadOnDemand){
+                    this._toggleGroup(parentNode.children(".k-group"), false);
+                }
+                children = parentNode.children(".k-group").children("li");
+
+                for (i = 0; i < children.length; i++) {
+                    child = children.eq(i);
+                    this.trigger("itemChange", {
+                        item: child,
+                        data: this.dataItem(child),
+                        ns: ui
+                    });
+                }
+            }
+        },
+
+        findByUid: function(uid) {
+            var items = this.element.find(".k-item");
+            var uidAttr = kendo.attr("uid");
+            var result;
+
+            for (var i = 0; i < items.length; i++) {
+                if (items[i].getAttribute(uidAttr) == uid) {
+                    result = items[i];
+                    break;
+                }
+            }
+
+            return $(result);
+        },
+
+        refresh: function(e) {
+            var options = this.options;
+            var node = e.node;
+            var action = e.action;
+            var items = e.items;
+            var parentNode = this.wrapper;
+            var loadOnDemand = options.loadOnDemand;
+
+            if (e.field) {
+                if (!items[0] || !items[0].level) {
+                    return;
+                }
+
+                return this._updateItems(items, e.field);
+            }
+
+            if (node) {
+                parentNode = this.findByUid(node.uid);
+                this._progress(parentNode, false);
+            }
+            if (action == "add") {
+                this._appendItems(e.index, items, parentNode);
+            } else if (action == "remove") {
+                this.remove(this.findByUid(items[0].uid));
+            } else if (action == "itemchange") {
+                this._updateItems(items);
+            } else if (action == "itemloaded") {
+                this._refreshChildren(node, parentNode);
+            } else {
+                this._refreshRoot(items);
+            }
+
+            if (action != "remove") {
+                for (var k = 0; k < items.length; k++) {
+
+                    if (!loadOnDemand || items[k].expanded) {
+                        var tempItem = items[k];
+                        if (this._hasChildItems(tempItem)) {
+                                tempItem.load();
+                        }
+                    }
+                }
+            }
+
+            this.trigger(DATABOUND, { node: node ? parentNode : undefined });
+        },
+
+        _error: function(e) {
+            var node = e.node && this.findByUid(e.node.uid);
+            var retryHtml = this.templates.retry({ messages: this.options.messages });
+
+            if (node) {
+                this._progress(node, false);
+                this._expanded(node, false);
+                itemIcon(node).addClass("k-i-refresh");
+                e.node.loaded(false);
+            } else {
+                this._progress(false);
+                this.element.html(retryHtml);
+            }
+        },
+
+        _retryRequest: function(e) {
+            e.preventDefault();
+
+            this.dataSource.fetch();
+        },
+
+         items: function() {
+            return this.element.find(".k-item > span:first-child");
+        },
+
+        setDataSource: function(dataSource) {
+            var options = this.options;
+
+            options.dataSource = dataSource;
+
+            this._dataSource();
+
+            if (this.options.autoBind) {
+                this._progress(true);
+                this.dataSource.fetch();
+            }
+        },
+
+        _bindDataSource: function() {
+            this._refreshHandler = proxy(this.refresh, this);
+            this._errorHandler = proxy(this._error, this);
+
+            this.dataSource.bind(CHANGE, this._refreshHandler);
+            this.dataSource.bind(ERROR, this._errorHandler);
+        },
+
+        _unbindDataSource: function() {
+            var dataSource = this.dataSource;
+
+            if (dataSource) {
+                dataSource.unbind(CHANGE, this._refreshHandler);
+                dataSource.unbind(ERROR, this._errorHandler);
+            }
+        },
+
+        // generates accessor function for a given field name, honoring the data*Field arrays
+        _fieldAccessor: function(fieldName) {
+            var fieldBindings = this.options[bindings[fieldName]] || [],
+                count = fieldBindings.length,
+                result = "(function(item) {";
+
+            if (count === 0) {
+                result += "return item['" + fieldName + "'];";
+            } else {
+                result += "var levels = [" +
+                            $.map(fieldBindings, function(x) {
+                                return "function(d){ return " + kendo.expr(x) + "}";
+                            }).join(",") + "];";
+                result += "if(item.level){return levels[Math.min(item.level(), " + count + "-1)](item);}else";
+                result += "{return levels["+ count + "-1](item)}";
+            }
+
+            result += "})";
+
+            return result;
+        },
+
+        _dataSource: function() {
+            var that = this,
+                options = that.options,
+                dataSource = options.dataSource;
+
+            if (!dataSource) {
+                return;
+            }
+
+            dataSource = isArray(dataSource) ? { data: dataSource } : dataSource;
+
+            that._unbindDataSource();
+
+            if (!dataSource.fields) {
+                dataSource.fields = [
+                    { field: "text" },
+                    { field: "url" },
+                    { field: "spriteCssClass" },
+                    { field: "imageUrl" }
+                ];
+            }
+
+            that.dataSource = HierarchicalDataSource.create(dataSource);
+
+            that._bindDataSource();
+        },
+
+        _appendItems: function(index, items, parentNode) {
+            var that = this, children, wrapper;
+
+              if (parentNode.hasClass("k-panelbar")) {
+                  children = parentNode.children("li");
+                  wrapper = parentNode;
+              } else {
+                  wrapper = parentNode.children(".k-group");
+                  if (!wrapper.length) {
+                      wrapper =  that._addGroupElement(parentNode);
+                  }
+
+                  children = wrapper.children("li");
+              }
+
+             var  groupData = {
+                firstLevel: parentNode.hasClass("k-panelbar"),
+                expanded: true,
+                length: children.length
+             };
+
+             var itemsHtml = $.map(items, function(value, idx) {
+                    if (typeof value === "string") {
+                        return $(value);
+                    } else {
+                        return $(that.renderItem({
+                            group: groupData,
+                            item: extend(value, { index: idx })
+                        }));
+                    }
+            });
+
+              if (typeof index == UNDEFINED) {
+                   index = children.length;
+              }
+
+              for (var i = 0; i < itemsHtml.length; i++) {
+                  if (children.length === 0 || index === 0) {
+                      wrapper.append(itemsHtml[i]);
+                  } else {
+                       itemsHtml[i].insertAfter(children[index - 1]);
+                  }
+               }
+
+            that._angularCompileElements(itemsHtml, items);
+              if (that.dataItem(parentNode)) {
+                  that.dataItem(parentNode).hasChildren = true;
+                  that.updateArrow(parentNode);
+              }
+        },
+
+        _updateItems: function (items, field) {
+            var that = this;
+            var i, node, nodeWrapper, item;
+            var context = { panelBar: that.options, item: item, group: {} };
+            var render = field != "expanded";
+
+            if (field == "selected") {
+                if(items[0][field]){
+                    var currentNode = that.findByUid(items[0].uid);
+
+                    if (!currentNode.hasClass(DISABLEDCLASS)) {
+                        that.select(currentNode, true);
+                    }
+                }else{
+                    that.clearSelection();
+                }
+            } else {
+                var elements = $.map(items, function(item) {
+                    return that.findByUid(item.uid);
+                });
+
+                if (render) {
+                    that.angular("cleanup", function() { return { elements: elements }; });
+                }
+
+                for (i = 0; i < items.length; i++) {
+                    context.item = item = items[i];
+                    context.panelBar = that;
+                    nodeWrapper = elements[i];
+                    node = nodeWrapper.parent();
+                    if (render) {
+                        context.group = {
+                            firstLevel: node.hasClass("k-panelbar"),
+                            expanded: nodeWrapper.parent().hasClass(ACTIVECLASS),
+                            length: nodeWrapper.children().length
+                        };
+
+                        nodeWrapper.children(".k-link").remove();
+                        nodeWrapper.prepend(that.templates.itemWrapper(extend(context,
+                            {
+                                arrow: item.hasChildren || item.content || item.contentUrl ? that.templates.arrow : that.templates.empty
+                            },
+                            rendering)));
+                    }
+
+                    if (field == "expanded") {
+                        that._toggleItem(nodeWrapper, !item[field], item[field] ? "true": true);
+                    } else if (field == "enabled") {
+                        that.enable(nodeWrapper, item[field]);
+                         if (!item[field]) {
+                            if (item.selected) {
+                                item.set("selected", false);
+                            }
+                         }
+                    }
+
+                    if (nodeWrapper.length) {
+                        this.trigger("itemChange", { item: nodeWrapper, data: item, ns: ui });
+                    }
+                }
+
+                if (render) {
+                    that.angular("compile", function(){
+                        return {
+                            elements: elements,
+                            data: $.map(items, function(item) {
+                                return [{ dataItem: item }];
+                            })
+                        };
+                    });
+                }
+            }
+        },
+
+        _toggleDisabled: function(element, enable) {
             element = this.element.find(element);
             element
                 .toggleClass(defaultState, enable)
@@ -417,8 +932,15 @@ var __meta__ = { // jshint ignore:line
                 .attr(ARIA_DISABLED, !enable);
         },
 
-        select: function (element) {
-            var that = this;
+       dataItem: function(item) {
+            var uid = $(item).closest(ITEM).attr(kendo.attr("uid")),
+                dataSource = this.dataSource;
+
+            return dataSource && dataSource.getByUid(uid);
+       },
+
+       select: function (element, skipChange) {
+           var that = this;
 
             if (element === undefined) {
                 return that.element.find(selectableItems).parent();
@@ -438,9 +960,7 @@ var __meta__ = { // jshint ignore:line
                             return that;
                         }
 
-                        if (!that._triggerEvent(SELECT, item)) {
-                            that._updateSelected(link);
-                        }
+                        that._updateSelected(link, skipChange);
                     });
             }
 
@@ -473,7 +993,7 @@ var __meta__ = { // jshint ignore:line
                 updateFirstLast(this);
             });
 
-            updateArrow(referenceItem);
+            this.updateArrow(referenceItem);
             updateFirstLast(inserted.group.find(".k-first, .k-last"));
             inserted.group.height("auto");
 
@@ -528,7 +1048,7 @@ var __meta__ = { // jshint ignore:line
             if (parent.length) {
                 parent = parent.eq(0);
 
-                updateArrow(parent);
+                that.updateArrow(parent);
                 updateFirstLast(parent);
             }
 
@@ -691,31 +1211,34 @@ var __meta__ = { // jshint ignore:line
 
             groupData = {
                 firstLevel: parent.hasClass("k-panelbar"),
-                expanded: parent.parent().hasClass(ACTIVECLASS),
+                expanded: $(referenceItem).hasClass(ACTIVECLASS),
                 length: parent.children().length
             };
 
             if (isReferenceItem && !parent.length) {
-                parent = $(PanelBar.renderGroup({ group: groupData })).appendTo(referenceItem);
+                parent = $(that.renderGroup({ group: groupData, options: that.options })).appendTo(referenceItem);
             }
 
-            if (item instanceof kendo.Observable) {
-                item = item.toJSON();
-            }
+            if (plain || $.isArray(item) || item instanceof HierarchicalDataSource) { // is JSON or HierarchicalDataSource
+                if (item instanceof HierarchicalDataSource) {
+                   item = item.data();
+                }
 
-            if (plain || $.isArray(item)) { // is JSON
-                items = $.map(plain ? [ item ] : item, function (value, idx) {
-                            if (typeof value === "string") {
-                                return $(value);
-                            } else {
-                                return $(PanelBar.renderItem({
-                                    group: groupData,
-                                    item: extend(value, { index: idx })
-                                }));
-                            }
-                        });
-
+                items = $.map(plain ? [item] : item, function(value, idx) {
+                    if (typeof value === "string") {
+                        return $(value);
+                    } else {
+                        return $(that.renderItem({
+                            group: groupData,
+                            item: extend(value, { index: idx })
+                        }));
+                    }
+                });
                 if (isReferenceItem) {
+                    var dataItem = that.dataItem(referenceItem);
+                    if (dataItem) {
+                        dataItem.hasChildren = true;
+                    }
                     referenceItem.attr(ARIA_EXPANDED, false);
                 }
             } else {
@@ -727,6 +1250,11 @@ var __meta__ = { // jshint ignore:line
                 that._updateItemsClasses(items);
             }
 
+            if (!item.length){
+                item = [item];
+            }
+
+            that._angularCompileElements(items, item);
             return { items: items, group: parent };
         },
 
@@ -758,7 +1286,7 @@ var __meta__ = { // jshint ignore:line
             items = that.element.add(panels).children();
 
             that._updateItemsClasses(items);
-            updateArrow(items);
+            that.updateArrow(items);
             updateFirstLast(items);
         },
 
@@ -868,6 +1396,14 @@ var __meta__ = { // jshint ignore:line
 
             that._updateSelected(link);
 
+            var wrapper = item.children(".k-group,.k-content");
+            var dataItem = this.dataItem(item);
+
+            if (!wrapper.length && ((that.options.loadOnDemand && dataItem && dataItem.hasChildren) ||
+             this._hasChildItems(item) || item.content || item.contentUrl)) {
+                wrapper =  that._addGroupElement(item);
+            }
+
             contents = item.find(GROUPS).add(item.find(CONTENTS));
             href = link.attr(HREF);
             isAnchor = href && (href.charAt(href.length - 1) == "#" || href.indexOf("#" + that.element[0].id + "-") != -1);
@@ -901,30 +1437,54 @@ var __meta__ = { // jshint ignore:line
 
             return prevent;
         },
+        _hasChildItems: function (item) {
+            return (item.items && item.items.length > 0) || item.hasChildren;
+        },
 
-        _toggleItem: function (element, isVisible) {
+        _toggleItem: function (element, isVisible, expanded) {
             var that = this,
                 childGroup = element.find(GROUPS),
                 link = element.find(LINKSELECTOR),
                 url = link.attr(HREF),
-                prevent, content;
+                prevent, content,
+                dataItem = that.dataItem(element);
 
-            if (childGroup.length) {
-                this._toggleGroup(childGroup, isVisible);
-                prevent = true;
-            } else {
-                content = element.children("."  + CONTENT);
+            var loaded = dataItem && dataItem.loaded();
 
-                if (content.length) {
-                    prevent = true;
-
-                    if (!content.is(EMPTY) || url === undefined) {
-                        that._toggleGroup(content, isVisible);
-                    } else {
-                        that._ajaxRequest(element, content, isVisible);
-                    }
-                }
+            if (dataItem && !expanded) {
+                dataItem.set("expanded", !isVisible);
+                prevent = dataItem.hasChildren || !!dataItem.content || !!dataItem.contentUrl;
+                return prevent;
             }
+
+             if (dataItem && (!expanded || expanded === "true") &&  !loaded && !dataItem.content && !dataItem.contentUrl) {
+                 if (that.options.loadOnDemand) {
+                     this._progress(element, true);
+                 }
+
+                 element.children(".k-group,.k-content").remove();
+                 prevent = dataItem.hasChildren;
+
+                 dataItem.load();
+             } else {
+                   if (childGroup.length) {
+                        this._toggleGroup(childGroup, isVisible);
+                        prevent = true;
+                   } else {
+                        content = element.children("."  + CONTENT);
+
+                        if (content.length) {
+                            prevent = true;
+
+                            if (!content.is(EMPTY) || url === undefined) {
+                                that._toggleGroup(content, isVisible);
+                            } else {
+                                that._ajaxRequest(element, content, isVisible);
+                            }
+                        }
+                    }
+             }
+
             return prevent;
         },
 
@@ -932,37 +1492,38 @@ var __meta__ = { // jshint ignore:line
             var that = this,
                 animationSettings = that.options.animation,
                 animation = animationSettings.expand,
-                collapse = extend({}, animationSettings.collapse),
-                hasCollapseAnimation = collapse && "effects" in collapse;
+                hasCollapseAnimation = animationSettings.collapse && "effects" in animationSettings.collapse,
+                collapse = extend({}, animationSettings.expand, animationSettings.collapse);
+
+            if (!hasCollapseAnimation) {
+                collapse = extend(collapse, {reverse: true});
+            }
 
             if (element.is(VISIBLE) != visibility) {
                 that._animating = false;
                 return;
             }
 
-            element
-                .parent()
+            element.parent()
                 .attr(ARIA_EXPANDED, !visibility)
                 .attr(ARIA_HIDDEN, visibility)
                 .toggleClass(ACTIVECLASS, !visibility)
-                .find("> .k-link > .k-icon")
+                .find("> .k-link > .k-panelbar-collapse,> .k-link > .k-panelbar-expand")
                     .toggleClass("k-i-arrow-n", !visibility)
                     .toggleClass("k-panelbar-collapse", !visibility)
                     .toggleClass("k-i-arrow-s", visibility)
                     .toggleClass("k-panelbar-expand", visibility);
-
             if (visibility) {
-                animation = extend( hasCollapseAnimation ? collapse
-                    : extend({ reverse: true }, animation), { hide: true });
+                animation = extend(collapse, { hide: true });
 
                 animation.complete = function() {
                     that._animationCallback();
                 };
             } else {
                 animation = extend( { complete: function (element) {
-                    that._triggerEvent(ACTIVATE, element.closest(ITEM));
-                    that._animationCallback();
-                } }, animation );
+                        that._triggerEvent(ACTIVATE, element.closest(ITEM));
+                        that._animationCallback();
+                    } }, animation );
             }
 
             element
@@ -974,6 +1535,13 @@ var __meta__ = { // jshint ignore:line
             var that = this;
             that.trigger("complete");
             that._animating = false;
+        },
+
+        _addGroupElement: function(element) {
+            var group = $('<ul role="group" aria-hidden="true" class="k-group k-panel" style="display:none"></ul>');
+
+            element.append(group);
+            return group;
         },
 
         _collapseAllExpanded: function (item) {
@@ -997,6 +1565,18 @@ var __meta__ = { // jshint ignore:line
                                 that._toggleGroup(content, true);
                             }
                         });
+
+                 that.one("complete", function() {
+                    setTimeout(function() {
+                        children.each(function (index, child) {
+                            var dataItem = that.dataItem(child);
+
+                            if(dataItem){
+                                dataItem.set("expanded", false);
+                            }
+                        });
+                    });
+                });
             }
 
             return stopExpand;
@@ -1062,11 +1642,12 @@ var __meta__ = { // jshint ignore:line
             return that.trigger(eventName, { item: element[0] });
         },
 
-        _updateSelected: function(link) {
+        _updateSelected: function(link, skipChange) {
             var that = this,
                 element = that.element,
                 item = link.parent(ITEM),
-                selected = that._selected;
+                selected = that._selected,
+                dataItem = that.dataItem(item);
 
             if (selected) {
                 selected.removeAttr(ARIA_SELECTED);
@@ -1080,35 +1661,40 @@ var __meta__ = { // jshint ignore:line
             link.addClass(SELECTEDCLASS);
             link.parentsUntil(element, ITEM).filter(":has(.k-header)").addClass(HIGHLIGHTCLASS);
             that._current(item[0] ? item : null);
+            if(dataItem){
+                 dataItem.set("selected", true);
+            }
+
+            if(!skipChange){
+                that.trigger(CHANGE);
+            }
         },
 
         _animations: function(options) {
             if (options && ("animation" in options) && !options.animation) {
                 options.animation = { expand: { effects: {} }, collapse: { hide: true, effects: {} } };
             }
-        }
+        },
 
-    });
-
-    // client-side rendering
-    extend(PanelBar, {
         renderItem: function (options) {
-            options = extend({ panelBar: {}, group: {} }, options);
+            var that = this;
+                options = extend({ panelBar: that, group: {} }, options);
 
-            var empty = templates.empty,
+            var empty = that.templates.empty,
                 item = options.item;
 
-            return templates.item(extend(options, {
-                image: item.imageUrl ? templates.image : empty,
-                sprite: item.spriteCssClass ? templates.sprite : empty,
-                itemWrapper: templates.itemWrapper,
-                renderContent: PanelBar.renderContent,
-                arrow: item.items || item.content || item.contentUrl ? templates.arrow : empty,
-                subGroup: PanelBar.renderGroup
+            return that.templates.item(extend(options, {
+                itemWrapper: that.templates.itemWrapper,
+                renderContent: that.renderContent,
+                arrow: that._hasChildItems(item) || item.content || item.contentUrl ? that.templates.arrow : empty,
+                subGroup: !options.loadOnDemand || item.expanded ? that.renderGroup : empty
             }, rendering));
         },
 
-        renderGroup: function (options) {
+        renderGroup: function(options) {
+            var that = this;
+            var templates = that.templates || options.panelBar.templates;
+
             return templates.group(extend({
                 renderItems: function(options) {
                     var html = "",
@@ -1118,7 +1704,7 @@ var __meta__ = { // jshint ignore:line
                         group = extend({ length: len }, options.group);
 
                     for (; i < len; i++) {
-                        html += PanelBar.renderItem(extend(options, {
+                        html += options.panelBar.renderItem(extend(options, {
                             group: group,
                             item: extend({ index: i }, items[i])
                         }));
@@ -1129,12 +1715,12 @@ var __meta__ = { // jshint ignore:line
             }, options, rendering));
         },
 
-        renderContent: function (options) {
-            return templates.content(extend(options, rendering));
+        renderContent: function(options) {
+            return options.panelBar.templates.content(extend(options, rendering));
         }
     });
 
-    kendo.ui.plugin(PanelBar);
+kendo.ui.plugin(PanelBar);
 
 })(window.kendo.jQuery);
 

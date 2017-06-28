@@ -12,7 +12,7 @@ position: 2
 
 Scenes are constructed from a set of built-in basic shapes. **Figure 1** below demonstrates a simple, static scene.
 
-**Figure 1. Basic scene**
+**Figure 1: Basic scene**
 
 ![Basic Scene](images/basic-scene.png)
 
@@ -205,7 +205,7 @@ The [`Surface.create`](/api/javascript/drawing/surface#create) method, as demons
             surface.draw(group);
         </script>
 
-The default output is an SVG with fallback to Canvas or VML.
+The default output is an SVG with a fallback to Canvas.
 
 ## See Also
 

@@ -46,7 +46,7 @@
         },
 
         allDone: function(callback) {
-            $.when.apply(null, this.promises).done(callback);
+            $.when.apply($, this.promises).done(callback);
         }
     });
 
@@ -602,13 +602,15 @@
             async.resolve(2);
 
             async.allDone(function() {
-                start();
+                setTimeout(function() {
+                    start();
 
-                var li = virtualList.element.children()
-                                    .filter(function() { return $(this).offset().top >= 0; })
-                                    .first();
+                    var li = virtualList.element.children()
+                                        .filter(function() { return $(this).offset().top >= 0; })
+                                        .first();
 
-                equal(li.text().trim(), "Item 100");
+                    equal(li.text().trim(), "Item 100");
+                }, 100);
             });
         });
 
@@ -644,13 +646,15 @@
             async.resolve(3);
 
             async.allDone(function() {
-                start();
+                setTimeout(function() {
+                    start();
 
-                var li = virtualList.element.children()
-                                    .filter(function() { return $(this).offset().top >= 0; })
-                                    .first();
+                    var li = virtualList.element.children()
+                                        .filter(function() { return $(this).offset().top >= 0; })
+                                        .first();
 
-                equal(li.text().trim(), "Item 100");
+                    equal(li.text().trim(), "Item 100");
+                }, 100);
             });
         });
 
@@ -686,13 +690,15 @@
             async.resolve(1);
 
             async.allDone(function() {
-                start();
+                setTimeout(function() {
+                    start();
 
-                var li = virtualList.element.children()
-                                    .filter(function() { return $(this).offset().top >= 0; })
-                                    .first();
+                    var li = virtualList.element.children()
+                                        .filter(function() { return $(this).offset().top >= 0; })
+                                        .first();
 
-                equal(li.text().trim(), "Item 50");
+                    equal(li.text().trim(), "Item 50");
+                }, 100);
             });
         });
         async.resolve(0); //initial request
@@ -727,13 +733,15 @@
             async.resolve(3);
 
             async.allDone(function() {
-                start();
+                setTimeout(function() {
+                    start();
 
-                var li = virtualList.element.children()
-                                    .filter(function() { return $(this).offset().top >= 0; })
-                                    .first();
+                    var li = virtualList.element.children()
+                                        .filter(function() { return $(this).offset().top >= 0; })
+                                        .first();
 
-                equal(li.text().trim(), "Item 50");
+                    equal(li.text().trim(), "Item 50");
+                }, 100);
             });
         });
 
@@ -771,13 +779,15 @@
             async.resolve(2);
 
             async.allDone(function() {
-                start();
+                setTimeout(function() {
+                    start();
 
-                var li = virtualList.element.children()
-                                    .filter(function() { return $(this).offset().top >= 0; })
-                                    .first();
+                    var li = virtualList.element.children()
+                                        .filter(function() { return $(this).offset().top >= 0; })
+                                        .first();
 
-                equal(li.text().trim(), "Item 35");
+                    equal(li.text().trim(), "Item 35");
+                }, 100);
             });
         });
 
@@ -815,14 +825,16 @@
             async.resolve(2);
 
             async.allDone(function() {
-                start();
+                setTimeout(function() {
+                    start();
 
-                var li = virtualList.element.children()
-                                    .filter(function() { return $(this).offset().top >= 0; })
-                                    .first();
+                    var li = virtualList.element.children()
+                                        .filter(function() { return $(this).offset().top >= 0; })
+                                        .first();
 
-                equal(li.text().trim(), "Item 35");
-            }, 100);
+                    equal(li.text().trim(), "Item 35");
+                }, 100);
+            });
         });
 
         async.resolve(0); //initial request

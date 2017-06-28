@@ -1,6 +1,7 @@
 ---
 title: Element
 page_title: API reference for Kendo UI Drawing API Element
+res_type: api
 ---
 
 # kendo.drawing.Element : kendo.Class
@@ -9,7 +10,7 @@ An abstract base class representing common members of all drawing elements.
 ## Constructor Parameters
 
 ### options `Object`
-The configuration of this Group.
+The configuration of this element.
 
 ## Configuration
 
@@ -18,8 +19,6 @@ The clipping path for this element.
 
 The path instance will be monitored for changes.
 It can be replaced by calling the [clip](#methods-clip) method.
-
-> The VML surface (IE 8 and earlier) will clip to the path bounding rectangle.
 
 #### Example - setting clipping path on an element
     <div id="surface"></div>
@@ -42,7 +41,7 @@ It can be replaced by calling the [clip](#methods-clip) method.
 ### cursor `String`
 The element [CSS cursor](https://developer.mozilla.org/en-US/docs/Web/CSS/cursor).
 
-Applicable to SVG and VML outputs.
+Applicable to an SVG output.
 
 #### Example - set hand cursor on an element
     <div id="surface"></div>
@@ -87,8 +86,6 @@ Returns the bounding box of the element with transformations applied.
 
 ### clip
 Gets or sets the element clipping path.
-
-> The VML surface (IE 8 and earlier) will clip to the path bounding rectangle.
 
 #### Example - setting clipping path on an element
     <div id="surface"></div>
@@ -162,7 +159,7 @@ The point that should be checked.
 ### opacity
 Gets or sets the element opacity.
 
-#### Example - setting transformation on an element
+#### Example - setting opacity on an element
     <div id="surface"></div>
     <script>
         var draw = kendo.drawing;

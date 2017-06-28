@@ -42,7 +42,7 @@ var __meta__ = { // jshint ignore:line
         DESELECT = "deselect",
         ARIA_DISABLED = "aria-disabled",
         FOCUSEDCLASS = "k-state-focused",
-        HIDDENCLASS = "k-loading-hidden",
+        HIDDENCLASS = "k-hidden",
         HOVERCLASS = "k-state-hover",
         STATEDISABLED = "k-state-disabled",
         DISABLED = "disabled",
@@ -125,6 +125,7 @@ var __meta__ = { // jshint ignore:line
             }
 
             kendo.notify(that);
+            that._toggleCloseVisibility();
         },
 
         options: {
@@ -299,7 +300,7 @@ var __meta__ = { // jshint ignore:line
             var closeButton = target.hasClass("k-select") || target.hasClass("k-icon");
 
             if (closeButton) {
-                closeButton = !target.closest(".k-select").children(".k-i-arrow-s").length;
+                closeButton = !target.closest(".k-select").children(".k-i-arrow-60-down").length;
             }
 
             if (notInput && !(closeButton && kendo.support.mobileOS)) {
@@ -360,32 +361,43 @@ var __meta__ = { // jshint ignore:line
                 customIndex = that._optionsMap[value];
             }
 
-            if (customIndex !== undefined) {
+            var done = function() {
+                that.currentTag(null);
+                that._change();
+                that._close();
+            };
+
+            if (customIndex === undefined) {
+                listView.select(listView.select()[position]).done(done);
+            } else {
                 option = that.element[0].children[customIndex];
                 option.selected = false;
 
                 listView.removeAt(position);
                 tag.remove();
-            } else {
-                listView.select(listView.select()[position]);
+                done();
             }
-
-            that.currentTag(null);
-            that._change();
-            that._close();
         },
 
         _tagListClick: function(e) {
             var target = $(e.currentTarget);
 
-            if (!target.children(".k-i-arrow-s").length) {
+            if (!target.children(".k-i-arrow-60-down").length) {
                 this._removeTag(target.closest(LI));
             }
         },
 
         _clearClick: function() {
-            this.value(null);
-            this.trigger("change");
+            var that = this;
+
+            that.tagList.children().each(function(index, tag) {
+                that._removeTag($(tag));
+            });
+
+            that.input.val("");
+            that._search();
+            that.trigger("change");
+            that.focus();
         },
 
         _editable: function(options) {
@@ -677,16 +689,19 @@ var __meta__ = { // jshint ignore:line
                 // trigger the DOM change event so any subscriber gets notified
                 that.element.trigger(CHANGE);
             }
+            that._toggleCloseVisibility();
         },
 
         _click: function(e) {
+            var that = this;
             var item = e.item;
 
             e.preventDefault();
 
-            this._select(item);
-            this._change();
-            this._close();
+            that._select(item).done(function() {
+                that._change();
+                that._close();
+            });
         },
 
         _keydown: function(e) {
@@ -743,9 +758,10 @@ var __meta__ = { // jshint ignore:line
                     that.currentTag(tag[0] ? tag : null);
                 }
             } else if (key === keys.ENTER && visible) {
-                that._select(current);
-                that._change();
-                that._close();
+                that._select(current).done(function() {
+                    that._change();
+                    that._close();
+                });
                 e.preventDefault();
             } else if (key === keys.ESC) {
                 if (visible) {
@@ -863,7 +879,7 @@ var __meta__ = { // jshint ignore:line
 
         _scale: function() {
             var that = this,
-                wrapper = that.wrapper,
+                wrapper = that.wrapper.find(".k-multiselect-wrap"),
                 wrapperWidth = wrapper.width(),
                 span = that._span.text(that.input.val()),
                 textWidth;
@@ -988,12 +1004,21 @@ var __meta__ = { // jshint ignore:line
             var that = this;
 
             that._typingTimeout = setTimeout(function() {
-                var value = that.input.val();
+                var value = that._inputValue();
                 if (that._prev !== value) {
                     that._prev = value;
                     that.search(value);
+                    that._toggleCloseVisibility();
                 }
             }, that.options.delay);
+        },
+
+        _toggleCloseVisibility: function() {
+            if (this.value().length || (this.input.val() && this.input.val() !== this.options.placeholder)) {
+                this._showClear();
+            } else {
+                this._hideClear();
+            }
         },
 
         _allowOpening: function() {
@@ -1076,8 +1101,10 @@ var __meta__ = { // jshint ignore:line
         },
 
         _select: function(candidate) {
+            var resolved = $.Deferred().resolve();
+
             if (!candidate) {
-                return;
+                return resolved;
             }
 
             var that = this;
@@ -1090,22 +1117,22 @@ var __meta__ = { // jshint ignore:line
             }
 
             if (!that._allowSelection()) {
-                return;
+                return resolved;
             }
 
             if (that.trigger(isSelected ? DESELECT : SELECT, { dataItem: dataItem, item: candidate })) {
                 that._close();
-                return;
+                return resolved;
             }
 
-            listView.select(candidate);
+            return listView.select(candidate).done(function() {
+                that._placeholder();
 
-            that._placeholder();
-
-            if (that._state === FILTER) {
-                that._state = ACCEPT;
-                listView.skipUpdate(true);
-            }
+                if (that._state === FILTER) {
+                    that._state = ACCEPT;
+                    listView.skipUpdate(true);
+                }
+            });
         },
 
         _input: function() {
@@ -1163,7 +1190,7 @@ var __meta__ = { // jshint ignore:line
                         '</span><span unselectable="on" aria-label="' +
                         (isMultiple ? "delete" : "open") +
                         '" class="k-select"><span class="k-icon ' +
-                        (isMultiple ? "k-i-close" : "k-i-arrow-s") + '">' +
+                        (isMultiple ? "k-i-close" : "k-i-arrow-60-down") + '">' +
                         '</span></span></li>';
             };
         },
@@ -1173,12 +1200,13 @@ var __meta__ = { // jshint ignore:line
         },
 
         _clearButton: function() {
-            this._clear = $('<span deselectable="on" class="k-icon k-i-close" title="clear"></span>').attr({
+            this._clear = $('<span deselectable="on" class="k-icon k-clear-value k-i-close" title="clear"></span>').attr({
                 "role": "button",
                 "tabIndex": -1
             });
             if (this.options.clearButton) {
                 this._clear.insertAfter(this.input);
+            	this.wrapper.addClass("k-multiselect-clearable");
             }
         },
 

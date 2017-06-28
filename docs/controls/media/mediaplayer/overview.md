@@ -2,15 +2,18 @@
 title: Overview
 page_title: Overview | Kendo UI MediaPlayer
 description: "Learn how to initialize the Kendo UI MediaPlayer widget and apply its other options."
+previous_url: /web/mediaplayer/overview, /getting-started/web/mediaplayer/overview
 slug: overview_kendoui_mediaplayer_widget
 position: 1
 ---
 
 # MediaPlayer Overview
 
-The [Kendo UI MediaPlayer widget](http://demos.telerik.com/kendo-ui/mediaplayer/index) presents video files from static sources or streams online YouTube clips and enriches your website with dynamic content in a user-friendly interface. It provides a styled video UI functionality by using the HTML5 `<video>` element and brings powerful media capabilities to your applications without the necessity of installing additional plug-ins.
+The [Kendo UI MediaPlayer widget](http://demos.telerik.com/kendo-ui/mediaplayer/index) plays video files from static sources or streams online YouTube videos and enriches your website with dynamic content in a user-friendly interface. It provides a styled video UI functionality by using the HTML5 `<video>` element and brings powerful media capabilities to your applications without the necessity of installing additional plug-ins.
 
-The MediaPlayer also offers tight integration with the YouTube media provider. The MediaPlayer comes with the familiar and straightforward way to use Kendo UI widgets and delivers rich media web experience for websites, blogs, online TV channels, e-commerce pages, and others. In addition to the consistent and elegant built-in skins, this new addition to the bundle possesses the main feature of every Kendo UI widget&mdash;it is a useful and convenient tool designed for achieving fascinating results in a sharp time frame.  
+The MediaPlayer also offers tight integration with the YouTube media provider. The MediaPlayer comes with the familiar and straightforward way to use Kendo UI widgets and delivers rich media web experience for websites, blogs, online TV channels, e-commerce pages, and others. In addition to the consistent and elegant built-in skins, this new addition to the bundle possesses the main feature of every Kendo UI widget&mdash;it is a useful and convenient tool designed for achieving fascinating results in a sharp time frame.
+
+To respond to cutting-end design practices and trends, the MediaPlayer component provides a *responsive* layout. This means that its size adapts depending on the capabilities of the client (end user) device and browser. The component automatically resizes its area to display the video in the most suitable possible way within the provided dimensions. The responsive web design of the MediaPlayer is shipped out-of-the-box and intends to save you time and efforts when developing your responsive applications.
 
  **Figure 1: A template of the MediaPlayer**
 
@@ -27,6 +30,7 @@ The Kendo UI MediaPlayer widget:
 * Displays a timeline slider with a buffer indicator allowing you to navigate the video.
 * Displays a title bar.
 * Ships HD source support.
+* Responsive layout
 
 Before reading on, make sure you are familiar with the [fundamental Kendo UI widget concepts]({% slug initialize_widgets_using_jquery_plugins_installation %}).
 
@@ -53,11 +57,11 @@ Once the video files are ready, initialize the MediaPlayer by using the `div` el
 </script>
 ```
 
-To add multiple sources for the same video, configure the quality dependent [HD feature]({% slug overview_kendoui_mediaplayer_widget %}#configuration-adding).
+To add multiple sources for the same video, configure the quality-dependent [HD feature](#configuration-Add).
 
 > **Important**
 >
-> The example on initializing the MediaPlayer above uses the `autoPlay` property. Because of the [mobile considerations listed in this article](https://developers.google.com/youtube/iframe_api_reference#Mobile_considerations), Safari on iOS does not automatically play embedded media. This limitation prevents unsolicited downloads over cellular networks at the expense of the user. The user always has to initiate a playback. For more information on this behavior, refer to [the article on audio and video HTML](https://developer.apple.com/library/safari/documentation/AudioVideo/Conceptual/Using_HTML5_Audio_Video/AudioandVideoTagBasics/AudioandVideoTagBasics.html).
+> The example on initializing the MediaPlayer above uses the `autoPlay` property. Because of the [mobile considerations listed in this article](https://developers.google.com/youtube/iframe_api_reference#Mobile_considerations), browsers on iOS do not automatically play embedded media. This limitation prevents unsolicited downloads over cellular networks at the expense of the user. The user always has to initiate a playback. For more information on this behavior, refer to [the article on audio and video HTML](https://developer.apple.com/library/safari/documentation/AudioVideo/Conceptual/Using_HTML5_Audio_Video/AudioandVideoTagBasics/AudioandVideoTagBasics.html). There are other functionalities which may be limited due to iOS restrictions. For more information on this topic, refer to [this article](http://blog.millermedeiros.com/unsolved-html5-video-issues-on-ios/) and to other available resources on the Web.
 
 ## Configuration
 
@@ -86,11 +90,11 @@ When you add multiple sources for the video, an **HD** button is automatically d
 
 ### Change the Source Dynamically
 
-Players usually feature a different video based on user action. For a basic example and real-time implementation, refer to the [section on creating playlist]({% slug overview_kendoui_mediaplayer_widget %}#creating).
+Players usually feature a different video based on user action. For a basic example and real-time implementation, refer to the [section on creating playlists](#configuration-Create).
 
 ### Prevent Seeking Forward
 
-Application or business logic usually enforces the user to watch only the currently loaded content without the option to jump forward. The MediaPlayer provides the [`forwardSeek`](/api/javascript/ui/mediaplayer.md#forwardseek-boolean-default-true) configuration, which helps to achieve this requirement.
+Application or business logic usually enforces the user to watch only the currently loaded content without the option to jump forward. The MediaPlayer provides the [`forwardSeek`](/api/javascript/ui/mediaplayer#forwardseek-boolean-default-true) configuration, which helps to achieve this requirement.
 
 ### Access Existing Instances
 
@@ -136,7 +140,7 @@ function buttonClick() {
 }
 ```
 
-## Keyboard Support
+## Keyboard Navigation
 
 The MediaPlayer supports keyboard navigation. To enable it, use the [`navigatable`](/api/javascript/ui/mediaplayer#configuration-navigatable) property.
 
@@ -144,8 +148,8 @@ The following list provides the built-in keyboard commands of the MediaPlayer:
 
 *	`Enter`&mdash;Opens the video in the **FullScreen** mode.
 *	`Esc`&mdash;Exits the **FullScreen** mode.
-*	`Space`&mdash;Toggles **Play** / **Pause**.
-*	`M`&mdash;Toggles **Mute** / **Unmute**.
+*	`Space`&mdash;Toggles **Play** and **Pause**.
+*	`M`&mdash;Toggles **Mute** and **Unmute**.
 
 ## Localization
 

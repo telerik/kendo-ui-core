@@ -8,7 +8,9 @@ position: 1
 
 # Scheduler Overview
 
-The [Kendo UI Scheduler widget](http://demos.telerik.com/kendo-ui/scheduler/index) displays a set of events&mdash;appointments or tasks. It can display scheduled events in different views&mdash;a single day, a whole week, or month and as a list of tasks which need to be accomplished.
+The [Kendo UI Scheduler widget](http://demos.telerik.com/kendo-ui/scheduler/index) displays a set of events&mdash;appointments or tasks.
+
+It can display scheduled events in different views&mdash;a single day, a whole week, or month and as a list of tasks which need to be accomplished.
 
 ## Getting Started
 
@@ -278,7 +280,7 @@ The example below demonstrates how to trigger the same behavior in Firefox as it
     }
 
 <!--*-->
-`17px` is a hard-coded value, which should match the scrollbar width. It can be calculated and set with Javascript before printing if desired.
+`17px` is a hard-coded value, which should match the scrollbar width. It can be calculated and set with JavaScript before printing if desired.
 
 In addition, the Scheduler needs a fixed pixel width for itself or some of its ancestors. Otherwise, it may resize during printing, which will cause the displayed absolutely positioned events to become misaligned. If the widget is part of a fluid layout, a fixed width can be set only for the printing task and then removed, as demonstrated in the example below.
 

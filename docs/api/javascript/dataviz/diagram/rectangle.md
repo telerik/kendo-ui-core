@@ -1,5 +1,6 @@
 ---
 title: Rectangle
+res_type: api
 ---
 
 # kendo.dataviz.diagram.Rectangle
@@ -29,9 +30,6 @@ The type of the gradient. Supported values are:
 
 * linear
 * radial
-
-Note that support for radial gradients in VML (IE8 and below) is limited.
-Not all configurations are guaranteed to work.
 
 ### fill.gradient.center `Array`
 The center of the radial gradient.
@@ -114,7 +112,7 @@ The drawing element used to draw the rectangle.
 
 ### visible
 
-Gets or sets the visibilty of the current element.
+Gets or sets the visibility of the current element.
 
 #### Parameters
 

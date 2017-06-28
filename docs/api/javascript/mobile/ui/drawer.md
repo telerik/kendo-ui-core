@@ -2,6 +2,7 @@
 title: Drawer
 page_title: Configuration, methods and events of Kendo UI Mobile Drawer
 description: Set direction of the Kendo UI Mobile Drawer container, use methods to show and hide it.
+res_type: api
 ---
 
 # kendo.mobile.ui.Drawer
@@ -373,7 +374,7 @@ The widget instance which fired the event.
 
 ### visible `Boolean`
 
-Holds information about the current state of the Drawer. If it is currenlty opened then the visible field will be set to true.
+Holds information about the current state of the Drawer. If it is currently opened then the visible field will be set to true.
 
 #### Example - get the current Drawer state
 

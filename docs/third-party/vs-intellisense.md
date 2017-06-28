@@ -9,7 +9,7 @@ position: 6
 
 # Visual Studio IntelliSense
 
-Kendo UI provides Intelligent code completion for Visual Studio by using an additional `vsdoc` JavaScript file. The approach was initially described in Scott Guthrie's blog post [jQuery Intellisense in VS 2008](http://weblogs.asp.net/scottgu/archive/2008/11/21/jquery-intellisense-in-vs-2008.aspx). Kendo UI Visual Studio IntelliSense is integrated in Visual Studio 2008 SP1 or later versions and it also works with Visual Web Developer (free).
+Kendo UI provides Intelligent code completion for Visual Studio by using an additional `vsdoc` JavaScript file. The approach was initially described in Scott Guthrie's blog post [jQuery IntelliSense in VS 2008](http://weblogs.asp.net/scottgu/archive/2008/11/21/jquery-intellisense-in-vs-2008.aspx). Kendo UI Visual Studio IntelliSense is integrated in Visual Studio 2008 SP1 or later versions and it also works with Visual Web Developer (free).
 
 ## Installation
 
@@ -25,7 +25,7 @@ Each bundle package contains a `vsdoc` directory, which contains a `vsdoc.js` an
 
 ## Features
 
-### Widget Initialization Configuration Options
+### Options for Widget Initialization
 
 ![jquery plugin](/images/vsdoc/jquery-plugin.png)
 
@@ -50,9 +50,9 @@ There are two ways to reference the IntelliSense:
 
 Other articles on Kendo UI integration with third-party tools and frameworks:
 
-* [Angular 2.0]({% slug angular2support_integration_kendoui %})
+* [SharePoint Add-Ins]({% slug sharepoint_tutorials %})
 * [Twitter Bootstrap]({% slug twitterbootstrapintegration_integration_kendoui %})
-* [Web Components]({% slug webcomponents_integration_kendoui %})
+* [Angular 2.0]({% slug angular2support_integration_kendoui %})
 * [RequireJS]({% slug requirejs_integration_kendoui %})
 * [TypeScript]({% slug typescript_integration_kendoui %})
 * [Telerik Data Access]({% slug bindtotelerikdataaccesstool_integration_kendoui %})

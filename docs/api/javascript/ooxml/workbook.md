@@ -1,6 +1,7 @@
 ---
 title: Workbook
 page_title: Configuration and methods of kendo.ooxml.Workbook
+res_type: api
 ---
 
 # kendo.ooxml.Workbook
@@ -320,9 +321,9 @@ Many standard CSS formats are supported, but the canonical form is "#ccff00".
 The width of the border in pixels.
 
 The allowed values are:
-* `1` - Results in а "thin" border.
-* `2` - Results in а "medium" border.
-* `3` - Results in а "thick" border.
+* `1` - Results in a "thin" border.
+* `2` - Results in a "medium" border.
+* `3` - Results in a "thick" border.
 
 #### Example - add a bottom border to the cell
 
@@ -354,9 +355,9 @@ Many standard CSS formats are supported, but the canonical form is "#ccff00".
 The width of the border in pixels.
 
 The allowed values are:
-* `1` - Results in а "thin" border.
-* `2` - Results in а "medium" border.
-* `3` - Results in а "thick" border.
+* `1` - Results in a "thin" border.
+* `2` - Results in a "medium" border.
+* `3` - Results in a "thick" border.
 
 #### Example - add a left border to the cell
 
@@ -388,9 +389,9 @@ Many standard CSS formats are supported, but the canonical form is "#ccff00".
 The width of the border in pixels.
 
 The allowed values are:
-* `1` - Results in а "thin" border.
-* `2` - Results in а "medium" border.
-* `3` - Results in а "thick" border.
+* `1` - Results in a "thin" border.
+* `2` - Results in a "medium" border.
+* `3` - Results in a "thick" border.
 
 #### Example - add a top border to the cell
 
@@ -422,9 +423,9 @@ Many standard CSS formats are supported, but the canonical form is "#ccff00".
 The width of the border in pixels.
 
 The allowed values are:
-* `1` - Results in а "thin" border.
-* `2` - Results in а "medium" border.
-* `3` - Results in а "thick" border.
+* `1` - Results in a "thin" border.
+* `2` - Results in a "medium" border.
+* `3` - Results in a "thick" border.
 
 #### Example - add a right border to the cell
 

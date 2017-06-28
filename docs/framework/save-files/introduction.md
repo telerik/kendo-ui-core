@@ -14,25 +14,39 @@ Since its 2014 Q3 release, Kendo UI allows you to save files on the client machi
 
 ### Save Files
 
-To save a file on the client machine, call the `kendo.saveAs` method, and pass a valid [data URI](https://developer.mozilla.org/en-US/docs/Web/HTTP/data_URIs) and a file name.
+To save a file on the client machine, call the `kendo.saveAs` method, pass a file name and a valid [data URI](https://developer.mozilla.org/en-US/docs/Web/HTTP/data_URIs), or a [blob](https://developer.mozilla.org/en-US/docs/Web/API/Blob).
 
-The example below demonstrates how to save a text file on the client.
+The following example demonstrates how to save a text file on the client by using a data URI.
 
 ###### Example
 
 ```html
 <script>
-var dataURI = "data:text/plain;base64," + kendo.util.encodeBase64("Hello World!");
-kendo.saveAs({
-    dataURI: dataURI,
-    fileName: "test.txt"
-});
+	var dataURI = "data:text/plain;base64,SGVsbG8gV29ybGQh";
+	kendo.saveAs({
+	  dataURI: dataURI,
+	  fileName: "test.txt"
+	});
+</script>
+```
+
+The following example demonstrates how to save a text file on the client by using a blob.
+
+###### Example
+
+```html
+<script>
+	var blob = new Blob(["Hello, world!"], {type: "text/plain;charset=utf-8"});
+	kendo.saveAs({
+	  dataURI: blob,
+	  fileName: "test.txt"
+	});
 </script>
 ```
 
 ## Browser Support
 
-The `kendo.saveAs` will attempt to save the file using client-side API in browsers that support file creation (IE10+, Google Chrome and FireFox).
+The `kendo.saveAs` will attempt to save the file using client-side API in browsers that support file creation (IE10+, Google Chrome and Firefox).
 
 ### Set Server Proxy
 
@@ -42,12 +56,12 @@ If the browser does not implement an API for saving files, then `kendo.saveAs` c
 
 ```
 <script>
-var dataURI = "data:text/plain;base64," + kendo.util.encodeBase64("Hello World!");
-kendo.saveAs({
-    dataURI: dataURI,
-    fileName: "test.txt",
-    proxyURL: "/path/to/proxy"
-});
+	var dataURI = "data:text/plain;base64,SGVsbG8gV29ybGQh";
+	kendo.saveAs({
+	    dataURI: dataURI,
+	    fileName: "test.txt",
+	    proxyURL: "/path/to/proxy"
+	});
 </script>
 ```
 
@@ -64,13 +78,13 @@ You are also able to make `kendo.saveAs` always use the server proxy by setting 
 
 ```
 <script>
-var dataURI = "data:text/plain;base64," + kendo.util.encodeBase64("Hello World!");
-kendo.saveAs({
-    dataURI: dataURI,
-    fileName: "test.txt",
-    proxyURL: "/path/to/proxy",
-    forceProxy: true
-});
+	var dataURI = "data:text/plain;base64,SGVsbG8gV29ybGQh";
+	kendo.saveAs({
+	    dataURI: dataURI,
+	    fileName: "test.txt",
+	    proxyURL: "/path/to/proxy",
+	    forceProxy: true
+	});
 </script>
 ```
 
@@ -128,12 +142,12 @@ public partial class SaveFile : System.Web.UI.Page
 
 ```
 <script>
-var dataURI = "data:text/plain;base64," + kendo.util.encodeBase64("Hello World!");
-kendo.saveAs({
-    dataURI: dataURI,
-    fileName: "test.txt",
-    proxyURL: "<%= ResolveUrl("~/SaveFile.aspx") %>"
-});
+	var dataURI = "data:text/plain;base64,SGVsbG8gV29ybGQh";
+	kendo.saveAs({
+	    dataURI: dataURI,
+	    fileName: "test.txt",
+	    proxyURL: "<%= ResolveUrl("~/SaveFile.aspx") %>"
+	});
 </script>
 ```
 
@@ -198,12 +212,12 @@ public class HomeController
 
 ```
 <script>
-var dataURI = "data:text/plain;base64," + kendo.util.encodeBase64("Hello World!");
-kendo.saveAs({
-    dataURI: dataURI,
-    fileName: "test.txt",
-    proxyURL: "@Url.Action("Save", "Home")"
-});
+	var dataURI = "data:text/plain;base64,SGVsbG8gV29ybGQh";
+	kendo.saveAs({
+	    dataURI: dataURI,
+	    fileName: "test.txt",
+	    proxyURL: "@Url.Action("Save", "Home")"
+	});
 </script>
 ```
 

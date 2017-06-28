@@ -1,21 +1,19 @@
 ---
-title: Pre-select Items on Load
-page_title: Pre-select Items on Load | Kendo UI MultiSelect
+title: Preselect Items on Load
+page_title: Preselect Items on Load | Kendo UI MultiSelect
 description: "Learn how to pre-select items on load in the Kendo UI MultiSelect widget."
 slug: howto_preselect_itemson_load_angular_multiselect
 ---
 
-# Pre-select Items on Load
-
-The example below demonstrates how to pre-select items in the Kendo UI MultiSelect without loading the whole source in AngularJS.
+# Preselect Items on Load
 
 > **Important**
 >
-> The values should be objects. The approach will not work with primitive values. For more details on this issue, refer to the articles about:
+> The approach described in this article does not work with primitive values. This means that the values have to be of the complex type (objects). For more details on this issue, refer to:
 > * [The `k-value-primitive` attribute]({% slug angularjs_integration_directives %}#the-k-value-primitive-attribute)
 > * [MVVM value binding]({% slug valuebinding_mvvm_kendoui %}#data-bound-widgets-and-value-binding)
 
-To function correctly, run this example in the Dojo.
+The following example demonstrates how to preselect items in the Kendo UI MultiSelect without loading the whole source in AngularJS. To ensure the proper functioning of the example, run it in the Dojo.
 
 ###### Example
 
@@ -129,8 +127,6 @@ To function correctly, run this example in the Dojo.
 
 ## See Also
 
-Other articles on the Kendo UI MultiSelect:
-
 * [MultiSelect JavaScript API Reference](/api/javascript/ui/multiselect)
 * [How to Cascade from DropDownList]({% slug howto_cascade_froma_dropdownlist_multiselect %})
 * [How to Filter Values in Widgets Sharing the Same Data]({% slug howto_filter_valuesin_widgetswith_shared_data_multiselect %})
@@ -140,4 +136,4 @@ Other articles on the Kendo UI MultiSelect:
 * [How to Use MultiSelect with Bootstrap Modal Window]({% slug howto_use_multiselect_with_bootstrap_modal_window_multiselect %})
 * [How to Wire Blur Event of the Filter Input]({% slug howto_wire_blur_event_ofthe_filtеr_input_multiselect %})
 
-For more runnable examples on the Kendo UI MultiSelect, browse its [**How To** documentation folder]({% slug howto_bind_values_totemplate_multiselect %}).
+For more runnable examples on the Kendo UI MultiSelect, browse its [**How To** documentation folder]({% slug howto_bindobjectstongmodel_multiselect %}).

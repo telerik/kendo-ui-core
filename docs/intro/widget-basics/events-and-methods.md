@@ -11,11 +11,16 @@ position: 3
 
 In addition to the initialization configuration options, each Kendo UI widget instance features methods and events that may be used to query or modify its state during run time. In order to use them, you should obtain a reference to the widget instance first.
 
-## Get Widget Reference
+## Getting Widget References
 
-### jQuery Data Method
+To get a widget reference, you can:
+* Use the [jQuery `data` method](#jquery-data-method).
+* Use the [`getKendo<WidgetName>` method](#getkendo-method).
+* Use the [standard JavaScript method syntax](#javascript-method).
 
-To get a reference to a widget instance, use the [jQuery data](http://api.jquery.com/data/) method and pass the plug-in name as a string (the Kendo UI widgets are jQuery plug-ins).
+### The jQuery Data Method
+
+To get a reference to a widget instance, use the [jQuery `data`](http://api.jquery.com/data/) method and pass the plug-in name as a string (the Kendo UI widgets are jQuery plug-ins).
 
 ###### Example
 
@@ -35,7 +40,7 @@ To get a reference to a widget instance, use the [jQuery data](http://api.jquery
     </script>
 ```
 
-### getKendo* Method
+### The getKendo* Method
 
 To get a reference to a widget instance, you may also use the `getKendo<WidgetName>` method. Note that the jQuery convention of returning the selected DOM element(s) applies to widget initialization plug-in methods too. This means that the plug-in method, for example `kendoAutoComplete()`, does not return the widget instance, but the jQuery selector that the method was used on.
 
@@ -57,9 +62,9 @@ To get a reference to a widget instance, you may also use the `getKendo<WidgetNa
     </script>
 ```
 
-### JavaScript Method
+### The JavaScript Method Syntax
 
-Once the widget instance is available, you can call its methods using the standard JavaScript method syntax. The complete list and examples of the widget methods and method parameters is available in the [API reference](/api/javascript/kendo) section.
+After the widget instance is available, you can call its methods using the standard JavaScript method syntax. The complete list and examples of the widget methods and method parameters is available in the [API reference](/api/javascript/kendo) section.
 
 ###### Example
 
@@ -80,11 +85,11 @@ Once the widget instance is available, you can call its methods using the standa
 
 If the code, which should return a widget instance, returns `undefined`, this means that the widget has not been initialized yet. Such a problem may occur, for example, if a widget is being created in a `document.ready` handler, but the widget instance is being referenced from code that was executed earlier.
 
-## Widget Events
+## Handling Widget Events
 
 Depending on the its specific features, each widget exposes different events. For example, the `AutoComplete` widget triggers `change`, `close`, `dataBound`, etc. You may pass event handlers when you instantiate the widget or afterwards.
 
-### Event Binding During Initialization
+### Event Binding during Initialization
 
 Event handlers, which are attached during widget initialization, will be executed every time the event is fired. If you need the handler to be executed only once, then attach it after the widget initialization with the `one` method.
 
@@ -107,7 +112,7 @@ Event handlers, which are attached during widget initialization, will be execute
     </script>
 ```
 
-### Event Binding After Initialization
+### Event Binding after Initialization
 
 There are two methods, which all Kendo UI widgets have, namely `bind` and `one`. Both of them are used to attach event handlers to already existing widget instances. The only difference is that event handlers attached with `one` will be executed only once.
 
@@ -141,7 +146,7 @@ There are two methods, which all Kendo UI widgets have, namely `bind` and `one`.
     </script>
 ```
 
-### Event Handler Argument
+### Event Handler Arguments
 
 Each Kendo UI widget passes one argument to the event handler, which is the so called "event object". Usually, it has one or more fields containing information that is specific to the event. All event objects have a `sender` field, which provides a reference to the widget instance that triggered the event.
 
@@ -168,7 +173,7 @@ The full list and examples of the widget events and the fields available in the 
     </script>
 ```
 
-### Prevent Events
+### Preventing Events
 
 Certain widget events may be prevented by calling the `preventDefault` method of the event object. The effect of the event prevention is specific for each event and is documented in the [API reference](/api/javascript/kendo).
 
@@ -193,7 +198,7 @@ Certain widget events may be prevented by calling the `preventDefault` method of
     </script>
 ```
 
-### Unbind from Events
+### Unbinding from Events
 
 To unbind from a given event, you should keep a reference to the event handler function and invoke the `unbind` method with it. Note that calling the `unbind` method without any argument unbinds all event handlers from the event.
 
@@ -221,8 +226,6 @@ To unbind from a given event, you should keep a reference to the event handler f
 ```
 
 ## Known Limitations
-
-**Combine Methods and Events**
 
 Kendo UI does not fire an event when the corresponding method is invoked. For example, the `select` event of the Kendo UI PanelBar widget is not fired if you call the `select` method through the API.
 

@@ -7,7 +7,7 @@ slug: howto_set_intial_data_manually_angularjs_scheduler
 
 # Set Initial Data Manually
 
-The example below demonstrates how to manually set initial data in the Kendo UI Scheduler widget when using AngularJS.
+The following example demonstrates how to manually set initial data in the Kendo UI Scheduler when using AngularJS.
 
 ###### Example
 
@@ -162,4 +162,4 @@ Other articles and how-to examples on the Kendo UI Scheduler:
 * [How to Nest Editors inside Event Templates]({% slug howto_nest_editorsinside_event_templates_scheduler %})
 * [How to Use Custom Event Template with Specific Background Color]({% slug howto_use_custom_event_templatewith_specific_background_color_scheduler %})
 
-For more runnable examples on the Kendo UI Scheduler, browse its [**How To** documentation folder]({% slug howto_add_controlsto_custom_event_editor_scheduler %}).
+For more runnable examples on the Kendo UI Scheduler, browse its [**How To** documentation folder]({% slug howto_customize_editand_events_templates_angularjs_scheduler %}).

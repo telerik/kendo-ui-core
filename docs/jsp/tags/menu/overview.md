@@ -63,7 +63,7 @@ Below are listed the steps for you to follow when configuring the Kendo UI AutoC
 
 ## Event Handling
 
-### Subscribe to Events
+### Specify Function Names
 
 You can subscribe to all [events exposed by Kendo UI Menu](/api/javascript/ui/menu#events) by the handler name.
 
@@ -84,6 +84,21 @@ You can subscribe to all [events exposed by Kendo UI Menu](/api/javascript/ui/me
                 //Handle the close event
             }
         </script>
+
+
+### Attach to select Events of Single Menu Items
+
+The following example demonstrates how to subscribe to the `select` event of a single Menu item.
+
+###### Example
+
+        <kendo:menu name="menu">
+            <kendo:menu-items>
+                <kendo:menu-item text="item 1" select="alert('select');">
+                </kendo:menu-item>
+            </kendo:menu-items>
+        </kendo:menu>
+
 
 ## Reference
 

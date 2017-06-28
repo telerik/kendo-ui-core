@@ -31,14 +31,41 @@
         var wrapper = dialog.wrapper;
         var wrapperChildren = wrapper.children();
 
+        ok(wrapper.is(".k-widget.k-window.k-dialog"));
+        ok(wrapperChildren.eq(0).is(".k-window-titlebar.k-dialog-titlebar"));
+        ok(wrapperChildren.eq(0).children().eq(1).is(".k-window-actions.k-dialog-actions"));
+        ok(wrapperChildren.eq(0).children().eq(1).children().eq(0).is(".k-window-action.k-dialog-action.k-dialog-close"));
+        ok(wrapperChildren.eq(0).children().eq(1).children().eq(0).children().eq(0).is(".k-icon.k-i-close"));
+        ok(wrapperChildren.eq(1).is(".k-content.k-window-content.k-dialog-content"));
+        equal(wrapper.find(".k-button-group.k-dialog-buttongroup").length, 0);
+    });
+
+    test("adds close button to wrapper if titleless", function() {
+        var dialog = createDialog({
+            title: false
+        });
+        var wrapper = dialog.wrapper;
+        var wrapperChildren = wrapper.children();
+
         ok(wrapper.is(".k-widget.k-dialog.k-window"));
-        ok(wrapperChildren.eq(0).is(".k-dialog-action.k-link"));
+        ok(wrapperChildren.eq(0).is(".k-dialog-action.k-dialog-close"));
         ok(wrapperChildren.eq(0).children().eq(0).is(".k-icon.k-i-close"));
-        ok(wrapperChildren.eq(1).is(".k-window-titlebar"));
-        ok(wrapperChildren.eq(2).is(".k-content"));
+        ok(wrapperChildren.eq(1).is(".k-content"));
         equal(wrapper.find(".k-dialog-buttongroup").length, 0);
     });
 
+    test("close button messages updates aria-label and title", function() {
+        var testMessage = "test_close_button";
+        var dialog = createDialog({
+            messages:{
+                close: testMessage
+            }
+        });
+        var wrapper = dialog.wrapper;
+
+        equal(wrapper.find(".k-dialog-action.k-dialog-close").attr("aria-label"), testMessage);
+        equal(wrapper.find(".k-dialog-action.k-dialog-close").attr("title"), testMessage);
+    });
 
     test("hide close button", function() {
         var dialog = createDialog({
@@ -205,7 +232,7 @@
         }).getKendoDialog();
 
         equal(dialog.element.attr("tabindex"), 10);
-        equal(dialog.wrapper.find(".k-i-close").attr("tabindex"), 10);
+        equal(dialog.wrapper.find(".k-dialog-close").attr("tabindex"), 10);
         equal(dialog.wrapper.find(".k-button").attr("tabindex"), 10);
     });
 
@@ -296,10 +323,14 @@
     test("focuses visible modal dialog on init", function() {
         var dialogNode = $("<div class='dialog'></div>").appendTo(QUnit.fixture);
         mockFunc(kendo.ui.Dialog.fn, "_focus", function(node) {
-            console.log(node);
             equal(node, dialogNode[0]);
         });
         var dialog = createDialog({ modal: true, visible: true }, dialogNode);
+    });
+
+    test("invisible window should not track for resize", function() {
+        var dialog = createDialog({ visible: false });
+        ok(!dialog._trackResize);
     });
 
 })();

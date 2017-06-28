@@ -2,12 +2,13 @@
 title: Use Templates to Customize Tooltips
 page_title: Use Templates to Customize Tooltips | Kendo UI Validator
 description: "Learn how to use a template to customize a tooltip in the Kendo UI Validator."
+previous_url: /framework/validator/how-to/use-error-template
 slug: howto_usetemplatestocustomizetooltips_validator
 ---
 
 # Use Templates to Customize Tooltips
 
-The example below demonstrates how to use an [`errorTemplate`](/api/framework/validator#configuration-errorTemplate) to customize the tooltip in Kendo UI.
+The following example demonstrates how to use an [`errorTemplate`](/api/framework/validator#configuration-errorTemplate) to customize the tooltip in Kendo UI.
 
 ###### Example
 
@@ -121,8 +122,6 @@ The example below demonstrates how to use an [`errorTemplate`](/api/framework/va
 ```
 
 ## See Also
-
-Other articles on the Kendo UI Validator:
 
 * [Validator JavaScript API Reference](/api/javascript/ui/validator)
 * [How to Show Tooltip on Mouse Over]({% slug howto_showtooltiponmouseover_validator %})

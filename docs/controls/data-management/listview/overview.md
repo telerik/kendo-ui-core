@@ -8,17 +8,19 @@ position: 2
 
 # ListView Overview
 
-The [Kendo UI ListView widget](http://demos.telerik.com/kendo-ui/listview/index) is designed to give you the freedom to specify a custom type of layout for the items displayed in the control. It can be bound to local JSON data or to remote data using the Kendo UI DataSource component.
+The [Kendo UI ListView widget](http://demos.telerik.com/kendo-ui/listview/index) is enables you to specify a custom type of layout for the items that are displayed in the control.
+
+It can be bound to local JSON data or to remote data by using the Kendo UI DataSource component.
 
 ## Getting Started
 
 ### Initialize the ListView
 
-Kendo UI ListView can be created out of an existing HTML element: `<span>`, `<div>`, or `<ul>`.
+The ListView can be created out of an existing `<span>`, `<div>`, or `<ul>` HTML element.
 
       <ul id="listView"></ul>
 
-Then, initialize the widget in the way demonstrated below.
+To initialize the widget, use the code from the following example.
 
 ###### Example
 
@@ -43,7 +45,7 @@ Then, initialize the widget in the way demonstrated below.
 
 ### Selection, Navigation, and Editing
 
-The ListView supports selection, navigation, and editing functionalities which, by default, are disabled. You can configure any of these behaviors by using simple Boolean options, as shown in the example below.
+The ListView supports selection, navigation, and editing which, by default, are disabled. You can configure any of these functionalities by using Boolean options.
 
 ###### Example
 
@@ -59,7 +61,7 @@ The ListView supports selection, navigation, and editing functionalities which, 
 
 ### Paging
 
-To enable paging, instantiate a separate pager control and bind it to the same DataSource, as shown in the example below.
+To enable paging, instantiate a separate pager control and bind it to the same DataSource.
 
 ###### Example
 
@@ -90,7 +92,7 @@ To enable paging, instantiate a separate pager control and bind it to the same D
 
 ## See Also
 
-Other articles on Kendo UI ListView and how-to examples:
+Other articles and how-to examples on the Kendo UI ListView:
 
 * [Walkthrough]({% slug basic_usage_kendoui_listview_widget %})
 * [How to Reorder Using Drag-and-Drop and Kendo UI Touch]({% slug howto_reorder_using_draganddrop_kendouitouch_listview %})

@@ -249,6 +249,22 @@ test("search with empty input and enforceMinLength: true does not rebind items",
     equal(combobox.ul.children().length, 1);
 });
 
+test("does not rebind items when enforceMinLength: true and _clear is clicked", function() {
+    create({
+        filter: "startswith",
+        minLength: 2,
+        enforceMinLength: true
+    });
+    combobox.text("fo");
+    combobox.search("fo");
+
+    equal(combobox.ul.children().length, 1);
+
+    combobox._clear.click();
+
+    equal(combobox.ul.children().length, 1);
+});
+
 test("search with filter opens drop down if any items", function() {
     create({
         filter: "startswith"
@@ -363,6 +379,17 @@ test("allow custom value", 1, function() {
     combobox.input.val("ffff").blur();
 
     equal(combobox.value(), "ffff");
+});
+
+test("allow custom text when sync is disabled", 2, function() {
+    create({
+        syncValueAndText: false
+    });
+
+    combobox.input.val("ffff").blur();
+
+    equal(combobox.value(), "");
+    equal(combobox.text(), "ffff");
 });
 
 asyncTest("do not search if text does not changed", 1, function() {
@@ -902,6 +929,34 @@ test("text method should set custom value to already added custom option", 2, fu
     input.blur();
 });
 
+test("text method should set custom text to already added custom option keeping value empty", 4, function() {
+    var values = ["unknown", "unknown2"];
+    var select = $("<select></select>");
+
+    combobox = new ComboBox(select, {
+        dataTextField: "text",
+        dataValueField: "value",
+        dataSource: data,
+        filter: "contains",
+        delay: 0,
+        change: function() {
+            equal(this.text(), values.shift());
+            equal(this.value(), "");
+        },
+        syncValueAndText: false
+    });
+
+    var input = combobox.input;
+
+    input.focus().val("unknown");
+    combobox.search();
+    input.blur();
+
+    input.focus().val("unknown2");
+    combobox.search();
+    input.blur();
+});
+
 test("keep selected value when filtered from outside", 2, function() {
     var values = ["unknown", "unknown2"];
     var select = $("<select></select>");
@@ -1002,6 +1057,29 @@ test("resize popup on search when autoWidth is enabled", function(assert) {
 
 });
 
+test("autoWidth adds one pixel to avoid browser pixel rounding", function(assert) {
+    var combobox = new ComboBox(input, {
+        autoWidth: true,
+        animation:{
+            open: {
+                duration:0
+            },
+            close: {
+                duration:0
+            },
+        },
+        dataSource: {
+            data: ["Short item", "An item with really, really, really, really, really, really, really, really, really, long text","Short item"]
+        }
+    });
+
+    combobox.open();
+    equal(combobox.popup.element.parent(".k-animation-container").width(), combobox.popup.element.outerWidth(true) + 1);
+    combobox.close();
+    combobox.open();
+    equal(combobox.popup.element.parent(".k-animation-container").width(), combobox.popup.element.outerWidth(true) + 1);
+});
+
 test("keep popup opened on empty search result if noDataTemplate", 2, function(assert) {
     var combobox = new ComboBox(input, {
         animation: false,
@@ -1053,5 +1131,45 @@ asyncTest("update popup height when no items are found", 1, function() {
     });
 
     combobox.input.focus().val("test").keydown();
+});
+
+test("scrolls to the matched item on open", 2, function() {
+    var data = [];
+    for (var i = 0; i < 50; i++) { data.push(i); }
+
+    var combobox = new ComboBox(input, {
+        dataSource: data
+    });
+
+    combobox.search("49");
+
+    ok(combobox.ul.children().eq(49).hasClass("k-state-focused"), "item is not focused");
+    ok(combobox.list.children(".k-list-scroller").scrollTop() > 200, "list is not scrolled");
+});
+
+test("concat filters with the same logic operator", function() {
+    combobox = new ComboBox(input, {
+        dataTextField: "text",
+        dataValueField: "value",
+        dataSource: {
+            data: [{ text: "foo", value: 1 }, { text: "bar", value: 2 }, { text: "too", value: 10 }],
+            filter: {
+                logic: "or",
+                filters: [
+                    { field: "value", operator: "eq", value: 1 },
+                    { field: "value", operator: "eq", value: 2 }
+                ]
+            }
+        },
+        filter: "contains"
+    });
+
+    combobox.search("to");
+    combobox.search("too");
+
+    var filters = combobox.dataSource.filter();
+
+    equal(filters.filters[1].filters.length, 2);
+    equal(!filters.filters[1].filters.filters, true);
 });
 })();

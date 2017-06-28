@@ -2,6 +2,7 @@
 title: TreeList
 page_title: Configuration, methods and events of Kendo UI TreeList
 description: Code examples for TreeList UI widget configuration. Learn how to use methods and which events to set once the treelist UI widget is initialized and expanded.
+res_type: api
 ---
 
 # kendo.ui.TreeList
@@ -104,9 +105,11 @@ The configuration of the column command(s). If set the column would display a bu
 
 Custom commands are supported by specifying the [click](#configuration-columns.command.click) option.
 
+> Each custom command requires you to explicitly specify its [name](/api/javascript/ui/treelist.html#configuration-columns.command.name).
+>
 > A command column cannot be [expandable](#configuration-columns.expandable).
-> 
-> The built-in "edit", "createChild" and "destroy" commands work *only* if editing is enabled via the [editable](#configuration-editable) option. The "edit" command supports "inline" and "popup" editing modes.
+>
+> The built-in "edit", "createChild" and "destroy" commands work *only* if editing is enabled via the [editable](#configuration-editable) option, and the TreeList DataSource is configured for [CRUD operations](http://docs.telerik.com/kendo-ui/framework/datasource/crud). The "edit" command supports "inline" and "popup" editing modes.
 
 #### Example - set command as array of strings
 
@@ -174,6 +177,36 @@ The CSS class applied to the command button.
         });
     </script>
 
+### columns.command.imageClass `String`
+
+The CSS class applied to the icon span of the command button.
+
+#### Example - set the CSS class of the command icon
+
+    <div id="treeList"></div>
+    <script>
+        var dataSource = new kendo.data.TreeListDataSource({
+          data: [ { name: "Jane Doe" }, { name: "John Doe" }]
+        });
+        $("#treeList").kendoTreeList({
+          columns: [
+              { field: "name" },
+              { command: [
+                {
+                  name: "remove",
+                  text: "Remove",
+                  imageClass: "k-i-delete", // show delete icon
+                  click: function(e) {
+                      // button click handler
+                  }
+                }
+              ] }
+          ],
+          editable: true,
+          dataSource: dataSource
+        });
+    </script>
+
 ### columns.command.click `Function`
 
 The JavaScript function executed when the user clicks the command button. The function receives a [jQuery Event](http://api.jquery.com/category/events/event-object/) as an argument.
@@ -210,7 +243,7 @@ The function context (available via the `this` keyword) will be set to the treel
 
 ### columns.command.name `String`
 
-The name of the command. The built-in commands are "edit", "createChild" and "destroy". When set to a custom value, it is rendered as a `data-command` attribute.
+The name of the command. The built-in command names are "edit", "createChild" and "destroy". Check the [`columns.command`](#configuration-columns.command) section for additional important information. When set to a custom value, the `name` is rendered as a `data-command` attribute.
 
 #### Example - set the command name
 
@@ -804,7 +837,7 @@ If set to `true` the column will be visible in the grid column menu. By default 
 
 ### columns.locked `Boolean` *(default: false)*
 
-If set to `true` the column will be displayed as locked in the treelist. Also see [Frozen Columns](/web/grid/walkthrough#frozen-columns-locked-columns).
+If set to `true` the column will be displayed as locked (frozen) in the treelist. Also see the information about [Frozen Columns](/controls/data-management/grid/appearance#locked-columns) in the Grid Appearance article.
 
 #### Example - locked columns
 
@@ -3143,6 +3176,31 @@ The text displayed by the command button. If not set the [name](#configuration-t
         });
     </script>
 
+## Fields
+
+### columns `Array`
+
+The columns of the treelist initialized from the [columns](#configuration-columns) option. Every item from the `columns` array has the same fields as the corresponding [columns](#configuration-columns) option.
+
+#### Example - iterate the grid columns
+    <div id="treelist"></div>
+	<script>
+		$("#treelist").kendoTreeList({
+		  columns: [
+		    { field: "name" },
+		    { field: "age" }
+		  ],
+		  dataSource: [
+		    { name: "Jane Doe", age: 30 },
+		    { name: "John Doe", age: 33 }
+		  ]
+		});
+		var treelist = $("#treelist").data("kendoTreeList");
+		for (var i = 0; i < treelist.columns.length; i++) {
+		  console.log(treelist.columns[i].field); // displays "name" and then "age"
+		}
+	</script>
+
 ## Methods
 
 ### addRow
@@ -3324,7 +3382,17 @@ Clears the currently selected table rows or cells (depending on the current sele
 
 ### collapse
 
-This method collapse the row.
+This method collapses the row passed as a parameter.
+
+#### Parameters
+
+##### row `String|Element|jQuery`
+
+A string, DOM element or jQuery object which represents the table row. A string is treated as a jQuery selector.
+
+#### Returns
+
+`Promise`
 
 #### Example
 

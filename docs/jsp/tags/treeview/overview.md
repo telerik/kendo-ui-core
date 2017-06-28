@@ -29,13 +29,13 @@ Below are listed the steps for you to follow when configuring the Kendo UI TreeV
             return "web/treeview/local-data";
         }
 
-**Step3** Add the Kendo UI `taglib` mapping to the page.
+**Step 3** Add the Kendo UI `taglib` mapping to the page.
 
 ###### Example
 
         <%@taglib prefix="kendo" uri="http://www.kendoui.com/jsp/tags"%>
 
-**Step 4** Add a server-bound treeview.
+**Step 4** Add a server-bound TreeView.
 
 ###### Example
 

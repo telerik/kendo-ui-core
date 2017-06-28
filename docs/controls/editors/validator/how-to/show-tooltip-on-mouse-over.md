@@ -2,12 +2,13 @@
 title: Show Tooltip on Mouse Over
 page_title: Show Tooltip on Mouse Over | Kendo UI Validator
 description: "Learn how to show a toolbar on mouse over in the Kendo UI Validator."
+previous_url: /framework/validator/how-to/show-tooltip-on-mouse-over
 slug: howto_showtooltiponmouseover_validator
 ---
 
 # Show Tooltip on Mouse Over
 
-The example below demonstrates how to show the validation tooltip in Kendo UI only when moving the mouse cursor over the input that failed to validate.
+The following example demonstrates how to show the validation tooltip in Kendo UI only when you move the mouse cursor over the input that failed to validate.
 
 #### Example:
 
@@ -201,8 +202,6 @@ The example below demonstrates how to show the validation tooltip in Kendo UI on
 ```
 
 ## See Also
-
-Other articles on the Kendo UI Validator:
 
 * [Validator JavaScript API Reference](/api/javascript/ui/validator)
 * [How to Use Use MutationObserver to Add Red Border and Hide Tooltip]({% slug howto_usemutationobserver_addborderandhidetooltip_validator %})

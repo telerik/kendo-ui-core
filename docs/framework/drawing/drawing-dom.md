@@ -12,7 +12,7 @@ The [Kendo UI Drawing API](http://demos.telerik.com/kendo-ui/drawing/index) supp
 
 ## Getting Started
 
-Using the `drawing.drawDOM` function you can draw a DOM element into a [`drawing.Group`](/api/dataviz/drawing/group), which you are then able to render with one of the supported backends into SVG, PDF, HTML5 `<canvas>`, or VML format.
+Using the `drawing.drawDOM` function you can draw a DOM element into a [`drawing.Group`](/api/dataviz/drawing/group), which you are then able to render with one of the supported backends into SVG, PDF, or HTML5 `<canvas>` format.
 
 The DOM element must be appended to the document and fully rendered, meaning that you cannot draw an element which has the `display: none`, or the `visibility: hidden` options. Assume that you have the following HTML in the page:
 
@@ -43,7 +43,7 @@ The `drawing.drawDOM` takes a jQuery selector or object, or a plain DOM node, an
 
 ### Custom Fonts in PDF
 
-If you need PDF output, your document should declare the fonts that it uses using [CSS `font-face` declarations](https://developer.mozilla.org/en-US/docs/Web/CSS/@font-face) for optimal layout and Unicode support. Since Kendo UI 2014 Q3 SP1, the Kendo UI PDF generator is able to dig such declarations directly from the CSS and you do not need to manually call [`pdf.defineFont`](/framework/drawing/pdf-output.html#using-custom-fonts).
+If you need PDF output, your document should declare the fonts it applies by using the [CSS `font-face` declarations](https://developer.mozilla.org/en-US/docs/Web/CSS/@font-face) for optimal layout and Unicode support. As of the Kendo UI 2014 Q3 SP1, the Kendo UI PDF generator is able to dig such declarations directly from the CSS and you do not need to manually call the [`pdf.defineFont`](/api/javascript/pdf#methods-defineFont) method.
 
 The example below demonstrates a sample CSS declaration.
 
@@ -68,6 +68,8 @@ The example below demonstrates how to make all Kendo widgets use this font.
 > * The PDF generator supports only TrueType fonts with Unicode mappings.
 > * In order for automatic font discovery to work, your CSS must reside on the same domain as the web page.
 > * Kendo UI bundles the DejaVu font family and will fall back to it for a few names, such as Times New Roman, Arial, or Courier, or generics, such as serif, sans-serif, or monospace, if no alternate fonts are specified. This is so that Unicode works by default. However, the layout problem will remain&mdash;the PDF output will be slightly different from the browser unless the exact same fonts are used.
+
+It is possible to use fonts without the necessity to host them on the same domain. For more information on this alternative approach which also works when the page is loaded over the `file://` URLs, refer to the article on how to [pack fonts for PDF export]({% slug howto_packfontsforpdfexport_drawingapi %}).
 
 ### Images in PDF
 
@@ -321,7 +323,7 @@ If you need different horizontal or vertical scale factors, pass either an array
 
 ### Split Page Content
 
-To prevent elements from being split across pages, use the `keepTogether` option. It should be a CSS selector, passable to jQuery.  
+To prevent elements from being split across pages, use the `keepTogether` option. It should be a CSS selector, passable to jQuery.
 
 ###### Example
 
@@ -461,11 +463,7 @@ An exception to this are the `paperSize` and `margin` options that you pass to `
 
 ## Supported Browsers
 
-The HTML renderer has been tested in recent versions of Chrome, Firefox, Safari, Blink-based Opera, Internet Explorer 9 or later.
-
-> **Important**
->
-> Mobile browsers and Internet Explorer 8 or older are not supported.
+For more information on the provided [browser support]({% slug wbe_browserand_operating_system_support %}), refer to the section on [PDF export]({% slug wbe_browserand_operating_system_support %}#pdf-export).
 
 ## Known Limitations
 
@@ -473,7 +471,8 @@ The HTML renderer has been tested in recent versions of Chrome, Firefox, Safari,
 - Images hosted on different domains will not be rendered, unless permissive [Cross-Origin HTTP headers](https://developer.mozilla.org/en-US/docs/Web/HTML/CORS_enabled_image) are provided by the server. Similarly, fonts might not be possible to load cross-domain. Even with the proper CORS headers, Internet Explorer 9 will not be able to load images or fonts from another domain, and could raise an uncatchable security exception. If you need to support Internet Explorer 9, make sure to host images and fonts on the same domain as the application.
 - Images will not be exported in IE if their source is an SVG document. These are considered to be tainted.
 - Exporting might not work when loading the page from a local file (`file://` protocol) due to CORS restrictions.
-- The content of the `<iframe>` and `<svg>` elements is not rendered.
+- Exporting vertically aligned elements might not work well with automatic page-breaking.
+- The content of the `<iframe>` and `<svg>` elements is not processed. For example, it will not be exported by the Drawing API.
 - A `<canvas>` will be rendered as an image, but only if it is non-tainted, meaning if it does not display images from another domain.
 - CSS box-shadow, text-shadow, and radial gradients are omitted. Linear gradients are supported.
 - Using browser zoom other than 100% is not supported.

@@ -1,27 +1,12 @@
+/* globals stub, updateInput, createInput */
 (function() {
     var MaskedTextBox = kendo.ui.MaskedTextBox,
-        input;
+        input,
+        STATE_DISABLED = "k-state-disabled";
 
     module("kendo.ui.MaskedTextBox api", {
         setup: function() {
-            input = $("<input />").appendTo(QUnit.fixture);
-
-            $.fn.pressKey = function(key, eventName, options) {
-                if (typeof key === "string") {
-                    key = key.charCodeAt(0);
-                }
-
-                if ($.isPlainObject(eventName)) {
-                    options = eventName;
-                    eventName = "keypress";
-                }
-
-                if (!eventName) {
-                    eventName = "keypress";
-                }
-
-                return this.trigger($.extend({ type: eventName, keyCode: key, which: key }, options) );
-            }
+            input = createInput();
         },
         teardown: function() {
             kendo.destroy(QUnit.fixture);
@@ -159,7 +144,7 @@
         maskedtextbox.enable(false);
 
         ok(input.attr("disabled"));
-        ok(input.hasClass("k-state-disabled"));
+        ok(maskedtextbox.wrapper.hasClass(STATE_DISABLED));
     });
 
     test("enable method with true enables widget", function() {
@@ -171,7 +156,7 @@
         maskedtextbox.enable(true);
 
         ok(!input.attr("disabled"));
-        ok(!input.hasClass("k-state-disabled"));
+        ok(!maskedtextbox.wrapper.hasClass(STATE_DISABLED));
     });
 
     test("enable method removes readonly attribute", function() {
@@ -216,7 +201,7 @@
         maskedtextbox.readonly();
 
         ok(!input.attr("disabled"));
-        ok(!input.hasClass("k-state-disabled"));
+        ok(!maskedtextbox.wrapper.hasClass(STATE_DISABLED));
     });
 
     test("setOptions changes the mask", function() {
@@ -270,9 +255,7 @@
             }
         });
 
-        input.focus();
-        kendo.caret(input[0], 0);
-        input.pressKey("+");
+        updateInput(maskedtextbox, "+");
 
         equal(input.val(), "+-_");
     });
@@ -312,11 +295,31 @@
             _mask: maskedtextbox._mask
         });
 
+        input.focus();
         input.trigger({
-            keyCode: 60,
-            type: "keypress"
+            type: "input"
         });
 
-        equal(maskedtextbox.calls("_mask"), 1);
+        equal(maskedtextbox.calls("_mask"), 2);
+    });
+
+    test("value method does not strip the last character from the value", function() {
+        var maskedtextbox = new MaskedTextBox(input, {
+            mask: "\\1\\0A\\ 00\\ 00\\ 000\\ 00\\ L0\\ \\00",
+        });
+
+        maskedtextbox.value("100 14 36 085 17 W6 00");
+
+        equal(input.val(), "100 14 36 085 17 W6 00");
+    });
+
+    test("value method does not strip the last character from the value", function() {
+        var maskedtextbox = new MaskedTextBox(input, {
+            mask: "(9\\9\\9) \\000-0000",
+        });
+
+        maskedtextbox.value("(123) 456-7890");
+
+        equal(input.val(), "(199) 023-4567");
     });
 })();

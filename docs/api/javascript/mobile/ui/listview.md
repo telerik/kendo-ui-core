@@ -2,6 +2,7 @@
 title: ListView
 page_title: Configuration, methods and events of Kendo UI Mobile ListView
 description: How to display flat or grouped list of items with Kendo UI Mobile ListView widget and use events to handle button clicks and access dataItem.
+res_type: api
 ---
 
 # kendo.mobile.ui.ListView
@@ -387,7 +388,7 @@ Text that appears when ListView is refreshing (applies only if `pullToRefresh` i
 
 ### messages.releaseTemplate `String` *(default: "Release to refresh")*
 
-Text that appears when scroller is pulled beyound the threshold (applies only if `pullToRefresh` is set to `true`).
+Text that appears when scroller is pulled beyond the threshold (applies only if `pullToRefresh` is set to `true`).
 
 #### Example
 
@@ -598,7 +599,9 @@ The type of the control. Can be either `flat` (default) or group. Determined aut
 
 Indicates whether the filter input must be visible or not.
 
-> **Important:** When the filter is applied it will remove all previous filter expressions applied to the DataSource.
+> **Important**
+> * When the filter is applied, it removes all previous filter expressions that have been applied to the DataSource.
+> * The DataSource configuration is required for the filtering to work properly. If initialized from Markup, the MobileListView does not support filtering.
 
 #### Example - enabled filtering
 

@@ -14,8 +14,11 @@ var __meta__ = { // jshint ignore:line
     var kendo = window.kendo,
         ui = kendo.ui,
         Widget = ui.Widget,
+        Class = kendo.Class,
         support = kendo.support,
         getOffset = kendo.getOffset,
+        outerWidth = kendo._outerWidth,
+        outerHeight = kendo._outerHeight,
         OPEN = "open",
         CLOSE = "close",
         DEACTIVATE = "deactivate",
@@ -38,6 +41,7 @@ var __meta__ = { // jshint ignore:line
         ACTIVECHILDREN = ".k-picker-wrap, .k-dropdown-wrap, .k-link",
         MOUSEDOWN = "down",
         DOCUMENT_ELEMENT = $(document.documentElement),
+        proxy = $.proxy,
         WINDOW = $(window),
         SCROLL = "scroll",
         cssPrefix = support.transitions.css,
@@ -82,7 +86,8 @@ var __meta__ = { // jshint ignore:line
             }
 
             parentPopup = $(that.options.anchor).closest(".k-popup,.k-group").filter(":not([class^=km-])"); // When popup is in another popup, make it relative.
-            options.appendTo = $($(options.appendTo)[0] || parentPopup[0] || BODY);
+
+            options.appendTo = $($(options.appendTo)[0] || parentPopup[0] || document.body);
 
             that.element.hide()
                 .addClass("k-popup k-group k-reset")
@@ -91,6 +96,13 @@ var __meta__ = { // jshint ignore:line
                 .appendTo(options.appendTo)
                 .on("mouseenter" + NS, function() {
                     that._hovered = true;
+                })
+                .on("wheel" + NS, function(e) {
+                    var scrollArea = $(this).find(".k-list").parent();
+                    if ((scrollArea.scrollTop() === 0 && e.originalEvent.deltaY < 0) ||
+                        (scrollArea.scrollTop() === scrollArea.prop('scrollHeight') - scrollArea.prop('offsetHeight') && e.originalEvent.deltaY > 0)) {
+                            e.preventDefault();
+                    }
                 })
                 .on("mouseleave" + NS, function() {
                     that._hovered = false;
@@ -283,6 +295,49 @@ var __meta__ = { // jshint ignore:line
                        .kendoStop(true)
                        .kendoAnimate(animation);
             }
+        },
+
+        _location: function(isFixed) {
+            var that = this,
+                element = that.element,
+                options = that.options,
+                wrapper,
+                anchor = $(options.anchor),
+                mobile = element[0] && element.hasClass("km-widget");
+
+            if (options.copyAnchorStyles) {
+                if (mobile && styles[0] == "font-size") {
+                    styles.shift();
+                }
+                element.css(kendo.getComputedStyles(anchor[0], styles));
+            }
+
+            that.wrapper = wrapper = kendo.wrap(element, options.autosize)
+                                    .css({
+                                        overflow: HIDDEN,
+                                        display: "block",
+                                        position: ABSOLUTE
+                                    });
+
+            if (support.mobileOS.android) {
+                wrapper.css(TRANSFORM, "translatez(0)"); // Android is VERY slow otherwise. Should be tested in other droids as well since it may cause blur.
+            }
+
+            wrapper.css(POSITION);
+
+            if ($(options.appendTo)[0] == document.body) {
+                wrapper.css(TOP, "-10000px");
+            }
+
+            that._position(isFixed || {});
+
+            var offset = wrapper.offset();
+            return {
+                width: kendo._outerWidth(wrapper),
+                height: kendo._outerHeight(wrapper),
+                left: offset.left,
+                top: offset.top
+            };
         },
 
         _openAnimation: function() {
@@ -521,7 +576,9 @@ var __meta__ = { // jshint ignore:line
             }
 
             if (isWindow && docEl.scrollHeight - docEl.clientHeight > 0) {
-                viewportWidth -= kendo.support.scrollbar();
+                 var sign = options.isRtl ? -1 : 1;
+
+                 viewportWidth -= sign * kendo.support.scrollbar();
             }
 
             siblingContainer = anchor.parents().filter(wrapper.siblings());
@@ -573,27 +630,27 @@ var __meta__ = { // jshint ignore:line
                 adjustSize = options.adjustSize;
 
             if (collisions[0] === "fit") {
-                location.top += that._fit(offsets.top, wrapper.outerHeight() + adjustSize.height, viewportHeight / zoomLevel);
+                location.top += that._fit(offsets.top, outerHeight(wrapper) + adjustSize.height, viewportHeight / zoomLevel);
             }
 
             if (collisions[1] === "fit") {
-                location.left += that._fit(offsets.left, wrapper.outerWidth() + adjustSize.width, viewportWidth / zoomLevel);
+                location.left += that._fit(offsets.left, outerWidth(wrapper) + adjustSize.width, viewportWidth / zoomLevel);
             }
 
             var flipPos = extend({}, location);
-            var elementHeight = element.outerHeight();
-            var wrapperHeight =  wrapper.outerHeight();
+            var elementHeight = outerHeight(element);
+            var wrapperHeight =  outerHeight(wrapper);
 
             if (!wrapper.height() && elementHeight) {
                 wrapperHeight = wrapperHeight + elementHeight;
             }
 
             if (collisions[0] === "flip") {
-                location.top += that._flip(offsets.top, elementHeight, anchor.outerHeight(), viewportHeight / zoomLevel, origins[0], positions[0], wrapperHeight);
+                location.top += that._flip(offsets.top, elementHeight, outerHeight(anchor), viewportHeight / zoomLevel, origins[0], positions[0], wrapperHeight);
             }
 
             if (collisions[1] === "flip") {
-                location.left += that._flip(offsets.left, element.outerWidth(), anchor.outerWidth(), viewportWidth / zoomLevel, origins[1], positions[1], wrapper.outerWidth());
+                location.left += that._flip(offsets.left, outerWidth(element), outerWidth(anchor), viewportWidth / zoomLevel, origins[1], positions[1], outerWidth(wrapper));
             }
 
             element.css(POSITION, ABSOLUTE);
@@ -613,10 +670,10 @@ var __meta__ = { // jshint ignore:line
                 anchorOffset = getOffset(anchor),
                 appendTo = $(that.options.appendTo),
                 appendToOffset,
-                width = element.outerWidth(),
-                height = element.outerHeight(),
-                anchorWidth = anchor.outerWidth(),
-                anchorHeight = anchor.outerHeight(),
+                width = outerWidth(element),
+                height = outerHeight(element),
+                anchorWidth = outerWidth(anchor),
+                anchorHeight = outerHeight(anchor),
                 top = anchorOffset.top,
                 left = anchorOffset.left,
                 round = Math.round;
@@ -668,7 +725,94 @@ var __meta__ = { // jshint ignore:line
     });
 
     ui.plugin(Popup);
+
+    var stableSort = kendo.support.stableSort;
+    var tabKeyTrapNS = "kendoTabKeyTrap";
+    var focusableNodesSelector = "a[href], area[href], input:not([disabled]), select:not([disabled]), textarea:not([disabled]), button:not([disabled]), iframe, object, embed, [tabindex], *[contenteditable]";
+    var TabKeyTrap = Class.extend({
+        init: function(element) {
+            this.element = $(element);
+            this.element.autoApplyNS(tabKeyTrapNS);
+        },
+
+        trap: function() {
+            this.element.on("keydown", proxy(this._keepInTrap, this));
+        },
+
+        removeTrap: function() {
+            this.element.kendoDestroy(tabKeyTrapNS);
+        },
+
+        destroy: function() {
+            this.element.kendoDestroy(tabKeyTrapNS);
+            this.element = undefined;
+        },
+
+        shouldTrap: function () {
+            return true;
+        },
+
+        _keepInTrap: function(e) {
+            if (e.which !== 9 || !this.shouldTrap() || e.isDefaultPrevented()) {
+                return;
+            }
+
+            var elements = this._focusableElements();
+            var sortedElements = this._sortFocusableElements(elements);
+            var next = this._nextFocusable(e, sortedElements);
+
+            this._focus(next);
+
+            e.preventDefault();
+        },
+        _focusableElements: function(){
+            var elements = this.element.find(focusableNodesSelector).filter(function(i, item){
+                return item.tabIndex >= 0 && $(item).is(':visible');
+            });
+
+            return elements;
+        },
+        _sortFocusableElements: function(elements){
+            var sortedElements;
+
+            if (stableSort) {
+                sortedElements = elements.sort(function(prev, next) {
+                    return prev.tabIndex - next.tabIndex;
+                });
+            } else {
+                var attrName = "__k_index";
+                elements.each(function(i, item){
+                    item.setAttribute(attrName, i);
+                });
+
+                sortedElements = elements.sort(function(prev, next) {
+                    return prev.tabIndex === next.tabIndex ?
+                        parseInt(prev.getAttribute(attrName), 10) - parseInt(next.getAttribute(attrName), 10) :
+                        prev.tabIndex - next.tabIndex;
+                });
+
+                elements.removeAttr(attrName);
+            }
+
+            return sortedElements;
+        },
+        _nextFocusable: function(e, elements){
+            var count = elements.length;
+            var current = elements.index(e.target);
+
+            return elements.get((current + (e.shiftKey ? -1 : 1)) % count);
+        },
+        _focus: function(element){
+            element.focus();
+            if (element.nodeName == "INPUT" && element.setSelectionRange) {
+                element.setSelectionRange(0, element.value.length);
+            }
+        }
+    });
+    ui.Popup.TabKeyTrap = TabKeyTrap;
 })(window.kendo.jQuery);
+
+
 
 return window.kendo;
 

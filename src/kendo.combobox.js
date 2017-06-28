@@ -115,6 +115,7 @@ var __meta__ = { // jshint ignore:line
             }
 
             kendo.notify(that);
+            that._toggleCloseVisibility();
         },
 
         options: {
@@ -142,7 +143,8 @@ var __meta__ = { // jshint ignore:line
             template: null,
             groupTemplate: "#:data#",
             fixedGroupTemplate: "#:data#",
-            clearButton: true
+            clearButton: true,
+            syncValueAndText: true
         },
 
         events:[
@@ -178,6 +180,32 @@ var __meta__ = { // jshint ignore:line
             that._clear.off(CLICK + " " + MOUSEDOWN);
 
             Select.fn.destroy.call(that);
+        },
+
+        _change: function() {
+            var that = this;
+            var text = that.text();
+            var hasText = text && text !== that._oldText && text !== that.options.placeholder;
+            var index = that.selectedIndex;
+            var isCustom = index === -1;
+
+            if (!that.options.syncValueAndText && !that.value() && isCustom && hasText) {
+                that._old = "";
+                that._oldIndex = index;
+                that._oldText = text;
+
+                if (!that._typing) {
+                    // trigger the DOM change event so any subscriber gets notified
+                    that.element.trigger(CHANGE);
+                }
+
+                that.trigger(CHANGE);
+                that._typing = false;
+                return;
+            }
+
+            Select.fn._change.call(that);
+            that._toggleCloseVisibility();
         },
 
         _focusHandler: function() {
@@ -282,14 +310,25 @@ var __meta__ = { // jshint ignore:line
                 that._state = STATE_REBIND;
                 if (that.options.minLength !== 1) {
                     that.refresh();
-                    that.popup.open();
+                    that._openPopup();
                 } else {
                     that._filterSource();
                 }
             } else if (that._allowOpening()) {
-                that.popup.open();
+                that._openPopup();
                 that._focusItem();
             }
+        },
+
+        _scrollToFocusedItem: function() {
+            var listView = this.listView;
+
+            listView.scrollToIndex(listView.getElementIndex(listView.focus()));
+        },
+
+        _openPopup: function() {
+            this.popup.one("activate", proxy(this._scrollToFocusedItem, this));
+            this.popup.open();
         },
 
         _updateSelectionState: function() {
@@ -391,13 +430,16 @@ var __meta__ = { // jshint ignore:line
 
             var data = that.dataSource.flatView();
             var skip = that.listView.skip();
+            var length = data.length;
+            var groupsLength = that.dataSource._group.length;
             var isFirstPage = skip === undefined || skip === 0;
 
             that._presetValue = false;
 
             that._renderFooter();
             that._renderNoData();
-            that._toggleNoData(!data.length);
+            that._toggleNoData(!length);
+            that._toggleHeader(!!groupsLength && !!length);
 
             that._resizePopup();
 
@@ -464,18 +506,19 @@ var __meta__ = { // jshint ignore:line
         },
 
         _select: function(candidate, keepState) {
-            candidate = this._get(candidate);
+            var that = this;
+            candidate = that._get(candidate);
 
             if (candidate === -1) {
-                this.input[0].value = "";
-                this._accessor("");
+                that.input[0].value = "";
+                that._accessor("");
             }
 
-            this.listView.select(candidate);
-
-            if (!keepState && this._state === STATE_FILTER) {
-                this._state = STATE_ACCEPT;
-            }
+            return that.listView.select(candidate).done(function() {
+                if (!keepState && that._state === STATE_FILTER) {
+                    that._state = STATE_ACCEPT;
+                }
+            });
         },
 
         _selectValue: function(dataItem) {
@@ -491,10 +534,14 @@ var __meta__ = { // jshint ignore:line
             this.selectedIndex = idx;
 
             if (idx === -1 && !dataItem) {
-                value = text = this.input[0].value;
+                text = this.input[0].value;
+                if (this.options.syncValueAndText) {
+                    value = text;
+                }
+
                 this.listView.focus(-1);
             } else {
-                if (dataItem) {
+                if (dataItem || dataItem === 0) {
                     value = this._dataValue(dataItem);
                     text = this._text(dataItem);
                 }
@@ -504,15 +551,45 @@ var __meta__ = { // jshint ignore:line
                 }
             }
 
-            this._prev = this.input[0].value = text;
+            this._setDomInputValue(text);
             this._accessor(value !== undefined ? value : text, idx);
 
             this._placeholder();
             this._triggerCascade();
         },
 
+        _setDomInputValue: function(text){
+            var that = this;
+            var currentCaret = caret(this.input);
+            var caretStart;
+
+            if(currentCaret && currentCaret.length){
+                caretStart = currentCaret[0];
+            }
+
+            this._prev = this.input[0].value = text;
+
+            if(caretStart && this.selectedIndex === -1){
+                var mobile = support.mobileOS;
+                if(mobile.wp || mobile.android) {// without the timeout the caret is at the end of the input
+                    setTimeout(function() { that.input[0].setSelectionRange(caretStart, caretStart); }, 0);
+                }
+                else {
+                    this.input[0].setSelectionRange(caretStart, caretStart);
+                }
+            }
+        },
+
         refresh: function() {
             this.listView.refresh();
+        },
+
+        _toggleCloseVisibility: function() {
+            if (this.text()) {
+                this._showClear();
+            } else {
+                this._hideClear();
+            }
         },
 
         suggest: function(word) {
@@ -590,28 +667,30 @@ var __meta__ = { // jshint ignore:line
                 }
             }
 
-            if (ignoreCase) {
+            if (ignoreCase && !that.listView.value().length) {
                 loweredText = loweredText.toLowerCase();
             }
 
             that._select(function(data) {
                 data = that._text(data);
-
-                if (ignoreCase) {
+                if (ignoreCase && !that.listView.value().length) {
                     data = (data + "").toLowerCase();
                 }
 
                 return data === loweredText;
+            }).done(function() {
+                if (that.selectedIndex < 0) {
+                    input.value = text;
+
+                    if (that.options.syncValueAndText) {
+                        that._accessor(text);
+                    }
+
+                    that._triggerCascade();
+                }
+
+                that._prev = input.value;
             });
-
-            if (that.selectedIndex < 0) {
-                that._accessor(text);
-                input.value = text;
-
-                that._triggerCascade();
-            }
-
-            that._prev = input.value;
         },
 
         toggle: function(toggle) {
@@ -665,20 +744,22 @@ var __meta__ = { // jshint ignore:line
         },
 
         _click: function(e) {
+            var that = this;
             var item = e.item;
-            var dataItem = this.listView.dataItemByIndex(this.listView.getElementIndex(item));
+            var dataItem = that.listView.dataItemByIndex(that.listView.getElementIndex(item));
 
             e.preventDefault();
 
-            if (this.trigger("select", { dataItem: dataItem, item: item })) {
-                this.close();
+            if (that.trigger("select", { dataItem: dataItem, item: item })) {
+                that.close();
                 return;
             }
 
-            this._userTriggered = true;
+            that._userTriggered = true;
 
-            this._select(item);
-            this._blur();
+            that._select(item).done(function() {
+                that._blur();
+            });
         },
 
         _inputValue: function() {
@@ -753,7 +834,7 @@ var __meta__ = { // jshint ignore:line
             input = wrapper.find(SELECTOR);
 
             if (!input[0]) {
-                wrapper.append('<span tabindex="-1" unselectable="on" class="k-dropdown-wrap k-state-default"><input ' + name + 'class="k-input" type="text" autocomplete="off"/><span unselectable="on" class="k-select" aria-label="select"><span class="k-icon k-i-arrow-s"></span></span></span>')
+                wrapper.append('<span tabindex="-1" unselectable="on" class="k-dropdown-wrap k-state-default"><input ' + name + 'class="k-input" type="text" autocomplete="off"/><span unselectable="on" class="k-select" aria-label="select"><span class="k-icon k-i-arrow-60-down"></span></span></span>')
                     .append(that.element);
 
                 input = wrapper.find(SELECTOR);
@@ -794,6 +875,7 @@ var __meta__ = { // jshint ignore:line
                     "role": "button",
                     "tabIndex": -1
                 });
+            that._arrowIcon = that._arrow.find(".k-icon");
 
             if (element.id) {
                 that._arrow.attr("aria-controls", that.ul[0].id);
@@ -801,12 +883,13 @@ var __meta__ = { // jshint ignore:line
         },
 
         _clearButton: function() {
-            this._clear = $('<span unselectable="on" class="k-icon k-i-close" title="clear"></span>').attr({
+            this._clear = $('<span unselectable="on" class="k-icon k-clear-value k-i-close" title="clear"></span>').attr({
                 "role": "button",
                 "tabIndex": -1
             });
             if (this.options.clearButton) {
                 this._clear.insertAfter(this.input);
+                this.wrapper.addClass("k-combobox-clearable");
             }
         },
 
@@ -873,6 +956,7 @@ var __meta__ = { // jshint ignore:line
                     }
 
                     that.search(value);
+                    that._toggleCloseVisibility();
                 }
 
                 that._typingTimeout = null;

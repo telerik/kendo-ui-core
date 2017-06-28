@@ -47,7 +47,7 @@ The Line Chart orientation can be changed by using `verticalLine`.
     });
 
 
-**Figure 1. A sample Line Chart**
+**Figure 1: A sample Line Chart**
 
 ![Line Chart](/controls/charts/chart-types/chart-line.png)
 
@@ -63,7 +63,7 @@ The default line type is solid. However, dash styles are also available through 
       dashType: "dot"
   }]
 
-**Figure 2. Dash line types**
+**Figure 2: Dash line types**
 
 ![Dash Type](/controls/charts/chart-types/chart-dash-types.png)
 
@@ -75,11 +75,11 @@ Kendo UI Line Charts support the rendering of lines between the points with diff
 * Step&mdash;The style renders the connection between data points through vertical and horizontal lines. It is suitable for indicating that the value is constant between the changes.
 * Smooth&mdash;This style causes the Area Chart to display a fitted curve through data points. It is suitable when the data requires to be displayed with a curve, or when you wish to connect the points with smooth instead of straight lines.
 
-**Figure 3. A step Line Chart**
+**Figure 3: A step Line Chart**
 
 ![Step Line Chart](/controls/charts/chart-types/chart-step-line.png)
 
-**Figure 4. A smooth Line Chart**
+**Figure 4: A smooth Line Chart**
 
 ![Smooth Line Chart](/controls/charts/chart-types/chart-smooth-line.png)
 

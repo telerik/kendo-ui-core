@@ -2,7 +2,7 @@
 title: Reorder Rows in Grids
 page_title: Reorder Rows in Grids | Kendo UI Sortable
 description: "Learn how to use the Kendo UI Sortable widget with a Kendo UI Grid either in editable or non-editable modes."
-previous_url: /controls/interactivity/sortable/how-to/reorder-grid-rows, /controls/interactivity/sortable/how-to/batch-editable-grid
+previous_url: /controls/interactivity/sortable/how-to/reorder-grid-rows, /controls/interactivity/sortable/how-to/batch-editable-grid, /web/sortable/how-to/angularjs-reorder-grid-rows
 slug: howto_usesortablewithgrid_inincellediting_sortable
 ---
 
@@ -99,7 +99,7 @@ The main milestones of the approach are:
            .appendTo(container);
        };
 
-* If a Kendo UI widget is used as an editor, its `change` event should be manually triggered at the `edit` event of the Grid widget.
+* If a Kendo UI widget is used as an editor, its `change` event should be manually triggered in the `edit` event of the Grid widget.
 
 ###### Example
 
@@ -115,7 +115,11 @@ The main milestones of the approach are:
          var widget = input.data("kendoNumericTextBox");
          var model = e.model;
 
-         input.on("keyup", function() {
+         input.on("keyup", function(e) {
+           if(e.key === kendo.culture().numberFormat["."]) {
+             // for Kendo UI NumericTextBox only
+             return;
+           }
            widget.value(input.val());
            widget.trigger("change");
          });
@@ -176,7 +180,17 @@ The main milestones of the approach are:
            var widget = input.data("kendoNumericTextBox");
            var model = e.model;
 
-           input.on("keyup", function() {
+           if(widget) {
+                widget.bind("spin", function(e) {
+                  e.sender.trigger("change");
+                });
+              }
+
+           input.on("keyup", function(e) {
+             if(e.key === kendo.culture().numberFormat["."]) {
+                // for Kendo UI NumericTextBox only
+               return;
+             }
              widget.value(input.val());
              widget.trigger("change");
            });
@@ -217,7 +231,7 @@ The main milestones of the approach are:
                view[i].dirty = true;
              }
            } else {
-             for (var i = oldIndex 1; i >= newIndex; i--) {
+             for (var i = oldIndex - 1; i >= newIndex; i--) {
                view[i].Order++;
                view[i].dirty = true;
              }
@@ -257,12 +271,10 @@ The main milestones of the approach are:
 
 ## See Also
 
-Other articles and how-to examples on the Kendo UI Sortable:
-
 * [Sortable JavaScript API Reference](/api/javascript/ui/sortable)
 * [How to Nest Sortables]({% slug howto_nestsortables_sortable %})
 * [How to Persist Order in localStorage]({% slug howto_persistoderinlocalstorage_sortable %})
 * [How to Reorder Multiple Items]({% slug howto_reordermultipleitems_sortable %})
 * [How to Reorder Rows in Nested Grid]({% slug howto_reorderrowsinnestedgrid_sortable %})
 
-For more runnable examples on the Kendo UI Sortable, browse its [**How To** documentation folder]({% slug howto_usesortablewithgrid_inincellediting_sortable %}).
+For more runnable examples on the Kendo UI Sortable, browse its [**How To** documentation folder]({% slug howto_usesortablewith_gridinbatcheditablemode_angular_sortable %}).

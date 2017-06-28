@@ -181,8 +181,9 @@
                 start();
                 equal(virtualList.value()[0], 0);
             });
-            virtualList.value([0]);
-            asyncDataSource.filter({ field: "letter", operator: "eq", value: "b" });
+            virtualList.value([0]).done(function() {
+                asyncDataSource.filter({ field: "letter", operator: "eq", value: "b" });
+            });
         });
     });
 
@@ -389,14 +390,14 @@
 
     asyncTest("selects item that was previously selected after filter is cleared", 1, function() {
         virtualList.one("listBound", function() {
-            virtualList.select(0);
+            virtualList.select(0).done(function() {
+                virtualList.one("listBound", function() {
+                    start();
+                    ok(virtualList.items().eq(0).hasClass("k-state-selected"));
+                });
 
-            virtualList.one("listBound", function() {
-                start();
-                ok(virtualList.items().eq(0).hasClass("k-state-selected"));
+                localDataSource.filter([]);
             });
-
-            localDataSource.filter([]);
         });
 
         localDataSource.filter({field: "text", operator: "contains", value: "0"});
@@ -442,18 +443,18 @@
         });
 
         virtualList.one("listBound", function() {
-            virtualList.select(0);
+            virtualList.select(0).done(function() {
+                virtualList.bind("change", function(e) {
+                    start();
 
-            virtualList.bind("change", function(e) {
-                start();
+                    equal(virtualList.value().length, 0);
+                    equal(e.removed.length, 1);
+                    ok(e.removed[0].dataItem);
+                    equal(e.removed[0].position, 0);
+                });
 
-                equal(virtualList.value().length, 0);
-                equal(e.removed.length, 1);
-                ok(e.removed[0].dataItem);
-                equal(e.removed[0].position, 0);
+                virtualList.value([]);
             });
-
-            virtualList.value([]);
         });
 
         localDataSource.filter({field: "text", operator: "contains", value: "0"});

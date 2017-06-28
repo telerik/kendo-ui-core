@@ -2,6 +2,7 @@
 title: ListView
 page_title: Configuration, methods and events of Kendo UI ListView
 description: Step-by-step instructions and samples for Kendo UI ListView widget configuration, methods and event handling.
+res_type: api
 ---
 
 # kendo.ui.ListView
@@ -368,7 +369,9 @@ A string, DOM element or jQuery object which represents the listview item. A str
 
 ### dataItems
 
-Returns the array that is bound to the widget
+#### Returns
+
+`kendo.data.ObservableArray` Returns the observable array that is bound to the widget
 
 #### Example
 

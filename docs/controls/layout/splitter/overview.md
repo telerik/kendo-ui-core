@@ -8,7 +8,7 @@ position: 1
 
 # Splitter Overview
 
-The [Kendo UI Splitter widget](http://demos.telerik.com/kendo-ui/splitter/index) provides a dynamic layout of resizable and collapsible panes. It converts the children of an HTML element into an interactive layout, adding resize and collapse handles depending on its configuration. The vertical and horizontal orientation of a Kendo UI Splitter can be combined to build complex layouts.
+The [Kendo UI Splitter widget](http://demos.telerik.com/kendo-ui/splitter/index) provides a dynamic layout of resizeable and collapsible panes. It converts the children of an HTML element into an interactive layout, adding resize and collapse handles depending on its configuration. The vertical and horizontal orientation of a Kendo UI Splitter can be combined to build complex layouts.
 
 ## Getting Started
 
@@ -44,10 +44,10 @@ The example below demonstrates how to initialize the Splitter using a jQuery sel
 
 ### Defaults
 
-Kendo UI Splitter provides default configuration options that can be set during initialization. Some of the properties that can be overriden and controlled are:
+Kendo UI Splitter provides default configuration options that can be set during initialization. Some of the properties that can be overridden and controlled are:
 
 *   Maximum and minimum pane sizes
-*   Resizable and collapsible/expandable pane behaviors
+*   Resizeable and collapsible/expandable pane behaviors
 *   Horizontal and vertical orientation
 
 The properties of a pane must be specified during initialization and set for each individual pane in a Splitter.
@@ -96,7 +96,7 @@ The example below demonstrates how to load content for one pane asynchronously a
 
 ### Change Pane Settings after Initialization
 
-The pane settings (`collapsible` and `resizable`) of the Splitter can be changed via Javascript after the widget has been initialized. Note that the `resize()` method of the Splitter causes the pane sizes to be recalculated, and the split bars to be rendered with the current widget settings.
+The pane settings (`collapsible` and `resizable`) of the Splitter can be changed via JavaScript after the widget has been initialized. Note that the `resize()` method of the Splitter causes the pane sizes to be recalculated, and the split bars to be rendered with the current widget settings.
 
 ###### Example
 
@@ -150,7 +150,7 @@ To configure the height of the Splitter to 100% and make it resize automatically
 
 ### Resize Manually
 
-The Splitter `<div>` can be resized manually by applying a new width or height style through Javascript. Afterwards, execute the [`resize()`](/using-kendo-in-responsive-web-pages) method, so that the widget readjusts its layout and pane sizes.
+The Splitter `<div>` can be resized manually by applying a new width or height style through JavaScript. Afterwards, execute the [`resize()`](/using-kendo-in-responsive-web-pages) method, so that the widget readjusts its layout and pane sizes.
 
 ###### Example
 

@@ -2,6 +2,7 @@
 title: ToolBar
 page_title: Configuration, methods and events of Kendo UI ToolBar
 relatedDocs: gs-web-toolbar-overview
+res_type: api
 ---
 
 # kendo.ui.ToolBar
@@ -298,8 +299,8 @@ If set, the ToolBar will render an image with the specified URL in the button.
         {
           type: "buttonGroup",
           buttons: [
-            { text: "foo", imageUrl: "/sports/snowboarding.png" },
-            { text: "bar", imageUrl: "/sports/snowboarding.png" }
+            { text: "foo", imageUrl: baseUrl + "/sports/snowboarding.png" },
+            { text: "bar", imageUrl: baseUrl + "/sports/snowboarding.png" }
           ]
         }
       ]
@@ -1008,7 +1009,7 @@ Defines a CSS class (or multiple classes separated by spaces) which will be used
 
 Specifies what element will be added in the ToolBar wrapper. Items with template does not have a type.
 
-> If `overflowTemplate` is not defined for a template command, than the command will be threated as `overflow: "never"`.
+> If `overflowTemplate` is not defined for a template command, than the command will be treated as `overflow: "never"`.
 
 #### Example
 
@@ -1085,7 +1086,7 @@ Specifies the toggle event handler of the button. Applicable only for commands o
 
 Specifies the command type. Supported types are "button", "splitButton", "buttonGroup", "separator".
 
-> Specifying the type is **mandatory**. Only commands that have a `template` does not need `type`.
+> Specifying the type is **mandatory**. Only commands that have a `template` do not need a `type`.
 
 #### Example
 
@@ -1250,10 +1251,10 @@ The name of the group.
             items: [
                 {
                     type: "buttonGroup",
-                    items: [
+                    buttons: [
                         { type: "button", id: "btn1", text: "Button 1", togglable: true, group: "radio" },
-                        { type: "button", id: "btn1", text: "Button 1", togglable: true, group: "radio", selected: true },
-                        { type: "button", id: "btn1", text: "Button 1", togglable: true, group: "radio" }
+                        { type: "button", id: "btn2", text: "Button 2", togglable: true, group: "radio", selected: true },
+                        { type: "button", id: "btn3", text: "Button 3", togglable: true, group: "radio" }
                     ]
                 }
             ]

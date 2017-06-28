@@ -8,9 +8,9 @@ position: 9
 
 # PDF Export
 
-As of the [Kendo UI Q3 2014 (2014.3.1119) release](http://www.telerik.com/support/whats-new/kendo-ui/release-history/q3-2014) the Grid widget provides a built-in PDF export functionality.
+As of the [Kendo UI Q3 2014 (2014.3.1119) release](http://www.telerik.com/support/whats-new/kendo-ui/release-history/q3-2014), the Grid widget provides a built-in PDF export functionality.
 
-## Set Up
+## Setup
 
 To enable PDF export, include the corresponding toolbar command and configure the export settings.
 
@@ -20,7 +20,7 @@ To enable PDF export, include the corresponding toolbar command and configure th
 
 It is highly recommended that you include the Pako Deflate library in the page to enable compression.
 
-The example below demonstrates how to enable the PDF export functionality of a Kendo UI Grid.
+The following example demonstrates how to enable the PDF export functionality of a Kendo UI Grid.
 
 ###### Example
 
@@ -69,7 +69,7 @@ By default, the Kendo UI Grid exports only the current page of data. To export a
 >
 > When the `allPages` option is set to `true` and `serverPaging` is enabled, the Grid will make a `"read"` request for all data. If the data items are too many, the browser may become unresponsive. Consider implementing server-side export for such cases.
 
-The example below demonstrates how to export all the pages of a Kendo UI Grid in PDF.
+The following example demonstrates how to export all the pages of a Kendo UI Grid in PDF.
 
 ###### Example
 
@@ -116,7 +116,7 @@ To make use of all the available space, the Grid will be enabled to:
 > * The exact maximum number of exportable rows will vary depending on the browser, system resources, template complexity, and other factors.
 > * It is advisable to verify your own worst-case scenarios in each browser you intend to support.
 
-The example below demonstrates how to export the Grid with a fixed paper size.
+The following example demonstrates how to export the Grid with a fixed paper size.
 
 ###### Example
 
@@ -150,20 +150,20 @@ The example below demonstrates how to export the Grid with a fixed paper size.
 
 ### Page Template
 
-Starting from the 2016.2 release, the Grid allows you to specify a page template.
-The template can be used to position the content, add headers, footers and other elements.
-Styling is done using CSS. The template will be positioned in a container with the specified
-paper size during export.
+As of the Kendo UI 2016.2 release, the Grid allows you to specify a page template. It is possible to use the template to position the content, add headers, footers, and other elements. The styling of the exported document is done by using CSS. During the PDF export, the template is positioned in a container with the specified paper size.
 
-Available template variables include:
-* pageNumber
-* totalPages
+The following page template variables are available:
+* `pageNumber`
+* `totalPages`
 
 > **Important**
 >
-> Using a template requires setting paper size. See above.
+> It is required to set the paper size when you use a page template. For more information, refer to the section on [page templates](#page-templates).
 
-###### Example - Export With Page Template
+The following example demonstrates how to export a Grid by using a page template.
+
+###### Example
+
 ```html
     <style>
         body {
@@ -277,7 +277,7 @@ In some cases it is useful to send the generated file to a remote service. Do th
 
 If the proxy returns `204 No Content`, no "Save As..." dialog will appear on the client.
 
-The example below demonstrates how to post files to the server.
+The following example demonstrates how to post files to the server.
 
 ###### Example
 
@@ -311,7 +311,7 @@ The default fonts in PDF files do not support Unicode. To support international 
 
 Kendo UI ships the [Deja Vu font family](http://dejavu-fonts.org/wiki/Main_Page) as part of its distributions. For more details on this, see the article on [custom fonts and PDF]({% slug drawingofhtmlelements_drawingapi %}#configuration-Custom).
 
-The example below demonstrates how to handle custom fonts.
+The following example demonstrates how to handle custom fonts.
 
 ###### Example
 
@@ -371,13 +371,14 @@ The example below demonstrates how to handle custom fonts.
 All [known limitations]({% slug drawingofhtmlelements_drawingapi %}#known-limitations) of the HTML Drawing module apply. Most importantly:
 
 * Right-to-left text is not supported.
+* Exporting a hierarchical Grid is not supported.
+* PDF export is not supported when the Grid has a locked (frozen) column enabled. If the algorithm decides to move a node to the next page, all DOM nodes that follow it will be also moved, although there might be enough space for part of them on the current page.
 * Images hosted on different domains might not be rendered, unless permissive [Cross-Origin HTTP headers](https://developer.mozilla.org/en-US/docs/Web/HTML/CORS_enabled_image) are provided by the server. Similarly, fonts might not be possible to load cross-domain.
 
 Note that even with the proper CORS headers, IE9 will not be able to load images or fonts from another domain, and could raise an uncatchable security exception. If you need to support IE9, make sure you host images and fonts on the same domain as the application.
 
 * The maximum document size is limited to 5080x5080mm (200x200 inches) by the PDF 1.5 specification. Larger files might not open in all viewers.
 * Older browsers, such as Internet Explorer 9 and Safari, require the implementation of a server proxy. For more information on this, refer to [the `proxyUrl` configuration section](/api/javascript/ui/grid#configuration-pdf.proxyURL).
-* PDF export is not supported in Internet Explorer 8 and older.
 
 ## Further Reading
 
@@ -388,16 +389,13 @@ Note that even with the proper CORS headers, IE9 will not be able to load images
 
 ## See Also
 
-Other articles on the Kendo UI Grid:
-
 * [Grid JavaScript API Reference](/api/javascript/ui/grid)
 * [Walkthrough of the Grid]({% slug walkthrough_kendoui_grid_widget %})
-* [Editing Functionality]({% slug editing_kendoui_grid_widget %})
+* [Editing Functionality of the Grid]({% slug editing_kendoui_grid_widget %})
 * [Appearance of the Grid]({% slug appearance_kendoui_grid_widget %})
-* [Remote Data Binding]({% slug remote_data_binding_grid %})
-* [Localization of Messages]({% slug localization_kendoui_grid_widget %})
-* [Adaptive Rendering]({% slug adaptive_rendering_kendoui_grid_widget %})
-* [Export the Grid to Excel]({% slug exporting_excel_kendoui_grid_widget %})
-* [Print the Grid]({% slug exporting_pdf_kendoui_grid_widget %})
+* [Localization of Messages in the Grid]({% slug localization_kendoui_grid_widget %})
+* [Adaptive Rendering of the Grid]({% slug adaptive_rendering_kendoui_grid_widget %})
+* [Export of the Grid to Excel]({% slug exporting_excel_kendoui_grid_widget %})
+* [Printing of the Grid]({% slug exporting_pdf_kendoui_grid_widget %})
 
 For how-to examples on the Kendo UI Grid widget, browse its [**How To** documentation folder]({% slug howto_bindto_telerik_backend_services_grid %}).

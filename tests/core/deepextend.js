@@ -67,4 +67,11 @@ test("Does not mangle custom DataSource instances", function() {
     equal(dst.ds, ds);
 });
 
+test("Does not mangle RegExp", function() {
+    var exp = /foo/;
+    deepExtend(dst, { exp: exp });
+
+    ok(dst.exp instanceof RegExp);
+});
+
 }());

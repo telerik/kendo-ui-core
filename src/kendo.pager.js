@@ -24,7 +24,9 @@ var __meta__ = { // jshint ignore:line
         CLICK = "click",
         KEYDOWN = "keydown",
         DISABLED = "disabled",
-        iconTemplate = kendo.template('<a href="\\#" aria-label="#=text#" class="k-link k-pager-nav #= wrapClassName #"><span class="k-icon #= className #"></span></a>');
+        MOUSEDOWN = "down",
+        DOCUMENT_ELEMENT = $(document.documentElement),
+        iconTemplate = kendo.template('<a href="\\#" aria-label="#=text#" title="#=text#" class="k-link k-pager-nav #= wrapClassName #"><span class="k-icon #= className #"></span></a>');
 
     function button(template, idx, text, numeric, title) {
         return template( {
@@ -86,7 +88,7 @@ var __meta__ = { // jshint ignore:line
             that._refreshHandler = proxy(that.refresh, that);
 
             that.dataSource.bind(CHANGE, that._refreshHandler);
-
+            that.downEvent = kendo.applyEventMap(MOUSEDOWN, kendo.guid());
             if (options.previousNext) {
                 if (!that.element.find(FIRST).length) {
                     that.element.append(icon(FIRST, options.messages.first, "k-pager-first"));
@@ -164,7 +166,7 @@ var __meta__ = { // jshint ignore:line
             if (options.refresh) {
                 if (!that.element.find(".k-pager-refresh").length) {
                     that.element.append('<a href="#" class="k-pager-refresh k-link" title="' + options.messages.refresh +
-                        '"><span class="k-icon k-i-refresh">' + options.messages.refresh + "</span></a>");
+                        '" aria-label="' + options.messages.refresh + '"><span class="k-icon k-i-reload"></span></a>');
                 }
 
                 that.element.on(CLICK + NS, ".k-pager-refresh", proxy(that._refreshClick, that));
@@ -262,6 +264,7 @@ var __meta__ = { // jshint ignore:line
                 linkTemplate = that.linkTemplate,
                 buttonCount = options.buttonCount;
 
+            DOCUMENT_ELEMENT.unbind(that.downEvent, $.proxy(that._hideList, that));
             if (e && e.action == "itemchange") {
                 return;
             }
@@ -300,7 +303,7 @@ var __meta__ = { // jshint ignore:line
             if (options.info) {
                 if (total > 0) {
                     html = kendo.format(options.messages.display,
-                        (page - 1) * pageSize + 1, // first item in the page
+                        Math.min((page - 1) * pageSize + 1, total), // first item in the page
                         Math.min(page * pageSize, total), // last item in the page
                     total);
                 } else {
@@ -314,7 +317,7 @@ var __meta__ = { // jshint ignore:line
                 that.element
                     .find(".k-pager-input")
                     .html(that.options.messages.page +
-                        '<input class="k-textbox">' +
+                        '<input class="k-textbox" aria-label="' + page + '">' +
                         kendo.format(options.messages.of, totalPages))
                     .find("input")
                     .val(page)
@@ -344,6 +347,7 @@ var __meta__ = { // jshint ignore:line
                 that.element
                     .find(".k-pager-sizes select")
                     .val(pageSize)
+                    .attr("aria-label", pageSize)
                     .filter("[" + kendo.attr("role") + "=dropdownlist]")
                     .kendoDropDownList("value", pageSize)
                     .kendoDropDownList("text", text); // handles custom values
@@ -384,7 +388,24 @@ var __meta__ = { // jshint ignore:line
         },
 
         _toggleActive: function() {
-            this.list.toggleClass("k-state-expanded");
+            var that = this;
+
+            if (that.list.hasClass("k-state-expanded")) {
+                DOCUMENT_ELEMENT.unbind(that.downEvent, $.proxy(that._hideList, that));
+            } else {
+                DOCUMENT_ELEMENT.bind(that.downEvent, $.proxy(that._hideList, that));
+            }
+            that.list.toggleClass("k-state-expanded");
+        },
+
+        _hideList: function(e) {
+             var that = this,
+                target = kendo.eventTarget(e);
+
+            if (!$.contains(that.list[0], target)) {
+                DOCUMENT_ELEMENT.unbind(that.downEvent, $.proxy(that._hideList, that));
+                that.list.removeClass("k-state-expanded");
+            }
         },
 
         _click: function(e) {

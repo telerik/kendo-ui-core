@@ -316,6 +316,7 @@ $.extend(true, kendo.spreadsheet.messages.toolbar,{
     "undo": "Стъпка назад"
   },
   "saveAs": "Запиши като...",
+  "sort": "Сортирай",
   "sortAsc": "Сортирай възходящо",
   "sortDesc": "Сортирай низходящо",
   "sortButtons": {
@@ -334,6 +335,7 @@ $.extend(true, kendo.spreadsheet.messages.toolbar,{
 if (kendo.spreadsheet && kendo.spreadsheet.messages.view) {
 kendo.spreadsheet.messages.view =
 $.extend(true, kendo.spreadsheet.messages.view,{
+  "nameBox": "Име на клетка",
   "errors": {
     "shiftingNonblankCells": "Не може да се вмъкнат клетки поради възможност от загуба на данни. Изберете друга локация за вмъкване на клетки или изтрийте данни от края на работния лист."
   },
@@ -445,7 +447,9 @@ if (kendo.ui.FlatColorPicker) {
 kendo.ui.FlatColorPicker.prototype.options.messages =
 $.extend(true, kendo.ui.FlatColorPicker.prototype.options.messages,{
   "apply": "Приложи",
-  "cancel": "Откажи"
+  "cancel": "Откажи",
+  "noColor": "без цвят",
+  "clearColor": "Махни цвета"
 });
 }
 
@@ -455,7 +459,9 @@ if (kendo.ui.ColorPicker) {
 kendo.ui.ColorPicker.prototype.options.messages =
 $.extend(true, kendo.ui.ColorPicker.prototype.options.messages,{
   "apply": "Приложи",
-  "cancel": "Откажи"
+  "cancel": "Откажи",
+  "noColor": "без цвят",
+  "clearColor": "Махни цвета"
 });
 }
 
@@ -629,6 +635,23 @@ $.extend(true, kendo.ui.Grid.prototype.options.messages,{
 });
 }
 
+/* ListBox messaages */
+
+if (kendo.ui.ListBox) {
+kendo.ui.ListBox.prototype.options.messages =
+$.extend(true, kendo.ui.ListBox.prototype.options.messages,{
+  "tools": {
+    "remove": "Премахни",
+    "moveUp": "Премести нагоре",
+    "moveDown": "Премести надолу",
+    "transferTo": "Прехвърли към",
+    "transferFrom": "Прехвърли от",
+    "transferAllTo": "Премести вс. към",
+    "transferAllFrom": "Премести вс. от"
+  }
+});
+}
+
 /* TreeList messages */
 
 if (kendo.ui.TreeList) {
@@ -767,6 +790,7 @@ $.extend(true, kendo.ui.Editor.prototype.options.messages,{
   "dialogButtonSeparator": "or",
   "dialogCancel": "Cancel",
   "dialogInsert": "Insert",
+  "dialogOk": "Ok",
   "imageAltText": "Alternate text",
   "imageWebAddress": "Web address",
   "linkOpenInNewWindow": "Open link in new window",
@@ -786,7 +810,43 @@ $.extend(true, kendo.ui.Editor.prototype.options.messages,{
   "formatting": "Format",
   "viewHtml": "Виж HTML-а",
   "dialogUpdate": "Обнови",
-  "insertFile": "Вмъкни файл"
+  "insertFile": "Вмъкни файл",
+  "tableWizard": "Асистент за Таблици",
+  "tableTab": "Таблица",
+  "cellTab": "Клетка",
+  "accessibilityTab": "Достъпност",
+  "caption": "Надпис",
+  "summary": "Обобщение",
+  "width": "Ширина",
+  "height": "Височина",
+  "cellSpacing": "Разстояние между клетките",
+  "cellPadding": "Отстояние на клетките",
+  "cellMargin": "Разстояние от клетките",
+  "alignment": "Подравняване",
+  "background": "Фон",
+  "cssClass": "CSS клас",
+  "id": "ID",
+  "border": "Рамка",
+  "borderStyle": "Стил на рамката",
+  "collapseBorders": "Свиване на рамката",
+  "wrapText": "Събиране на текста",
+  "associateCellsWithHeaders": "Асоциирай клетките с заглавията на колоните",
+  "alignLeft": "Подравни ляво",
+  "alignCenter": "Подравни център",
+  "alignRight": "Подравни дясно",
+  "alignLeftTop": "Подравни ляво и горе",
+  "alignCenterTop": "Подравни център и горе",
+  "alignRightTop": "Подравни дясно и горе",
+  "alignLeftMiddle": "Подравни ляво и среда",
+  "alignCenterMiddle": "Подравни център и среда",
+  "alignRightMiddle": "Подравни дясно и среда",
+  "alignLeftBottom": "Подравни ляво и долу",
+  "alignCenterBottom": "Подравни център и горе",
+  "alignRightBottom": "Подравни дясно и долу",
+  "alignRemove": "RПремахни подравняване",
+  "columns": "Колони",
+  "rows": "Редове",
+  "selectAllCells": "Избери всички клетки"
 });
 }
 
@@ -796,7 +856,11 @@ if (kendo.ui.Upload) {
 kendo.ui.Upload.prototype.options.localization =
 $.extend(true, kendo.ui.Upload.prototype.options.localization,{
   "cancel": "Спри",
-  "dropFilesHere": "преместете с мишката файлове тук за да ги качите",
+  "clearSelectedFiles": "Изчисти файловете",
+  "dropFilesHere": "Преместете с мишката файлове тук за да ги качите",
+  "invalidMaxFileSize": "Размерът на файла е твърде голям.",
+  "invalidMinFileSize": "Размерът на файла е твърде малък.",
+  "invalidFileExtension": "Този тип файл не е разрешен.",
   "remove": "Премахни",
   "retry": "Опитай отново",
   "select": "Избери...",
@@ -804,8 +868,8 @@ $.extend(true, kendo.ui.Upload.prototype.options.localization,{
   "statusUploaded": "качен",
   "statusUploading": "качва се",
   "uploadSelectedFiles": "Качи файловете",
-  "headerStatusUploaded": "Done",
-  "headerStatusUploading": "Uploading..."
+  "headerStatusUploaded": "Готово",
+  "headerStatusUploading": "Качване..."
 });
 }
 
@@ -908,6 +972,21 @@ kendo.ui.progress.messages =
 $.extend(true, kendo.ui.progress.messages, {
     loading: "Зареждане..."
 });
+}
+
+/* DateInput */
+if (kendo.ui.DateInput) {
+  kendo.ui.DateInput.prototype.options.messages =
+    $.extend(true, kendo.ui.DateInput.prototype.options.messages, {
+      "year": "година",
+      "month": "месец",
+      "day": "ден",
+      "weekday": "ден от седмицата",
+      "hour": "часа",
+      "minute": "минути",
+      "second": "секунди",
+      "dayperiod": "AM/PM"
+    });
 }
 
 })(window.kendo.jQuery);

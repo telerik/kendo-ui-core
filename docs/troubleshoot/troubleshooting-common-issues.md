@@ -33,7 +33,7 @@ The following JavaScript errors will be thrown (depending on the browser):
 
 **Solution**
 
-Make sure that jQuery is included only before the Kendo UI JavaScript files and before any Javascript statements that depend on it.
+Make sure that jQuery is included only before the Kendo UI JavaScript files and before any JavaScript statements that depend on it.
 
 ## Widgets
 
@@ -45,12 +45,12 @@ Depending on the browser, the following JavaScript errors will be thrown:
 
 * TypeError: Object `#<Object>` has no method `kendoGrid` (in Google Chrome)
 * TypeError: `$("#Grid").kendoGrid` is not a function (in Firefox)
-* Object does not support property or method 'kendoGrid' (in Internet Explorer 9 and later)
+* Object does not support property or method `kendoGrid` (in Internet Explorer 9 and later)
 * Object does not support this property or method (in older versions of Internet Explorer)
 
 > **Important**
 >
-> All Kendo UI widgets are going to be affected by this issue, not just the Kendo UI Grid. Only the error message is different e.g. `kendoChart is not a function` or `Object has no method kendoEditor`.
+> Not just the Kendo UI Grid, but all Kendo UI widgets are affected by this issue with only the error message being different. For example, `kendoChart is not a function` or `Object has no method kendoEditor`.
 
 **Solution**
 
@@ -78,6 +78,26 @@ where more information can be found.
  ```
 
 **Option 2** Path jQuery. You can find more information about the possible path in the aforementioned jQuery bug report.
+
+### Unknown DataSource transport type json Warning Is Displayed
+
+The `Unknown DataSource transport type json` warning might be caused by either of the following reasons:
+
+* Invalid Kendo UI DataSource [`type`](/api/javascript/data/datasource#configuration-type) configuration is set. For example:
+
+    ```
+    dataSource: {
+        type: "json"
+    }
+    ```
+
+* A JavaScript file is missing when using a DataSource type that is not included in `kendo.all.min.js`. For example, `aspnetmvc-ajax`, `jsdo`, and others. Specifically, `json` is not a valid DataSource `type` and it does not require a separate JavaScript file.
+
+**Solution**
+
+Use a valid `type` value, or remove the `type` property, or add the corresponding missing file&mdash;for example, `kendo.aspnetmvc.min.js` when using the Kendo UI MVC wrappers.
+
+Note that the [dataSource `type`](/api/javascript/data/datasource#configuration-type) differs from the [`type` of the transport actions](/api/javascript/data/datasource#configuration-transport.read.type).
 
 ### Input Widgets Do Not Raise Change Event When API Is Used
 
@@ -115,15 +135,27 @@ There are two ways to avoid this problem:
 
 ### Widgets Do Not Work Correctly on Touch Devices
 
-Client libraries, which interfere with touch events, such as FastClick, are not compatible with Kendo UI and may break the widgets' behavior, e.g. cause a dropdown to close immediately after opening.
+Client libraries that interfere with touch events, such as FastClick, are not compatible with Kendo UI and may break the behavior of the widgets. For example, they may cause a drop-down list to close immediately after opening.
+
+**Solution**
 
 For more information on this issue, refer to [What Exactly Is... The 300ms Click Delay](http://www.telerik.com/blogs/what-exactly-is.....-the-300ms-click-delay).
 
 ### Widget Popup Is Offset Incorrectly in Internet Explorer
 
-When Kendo UI is used with jQuery `1.12.0` or `2.2.0`, some issues with the popup positioning could occur. The popup is offset incorrectly when the page is scrolled. The investigation showed that the issue is due to a bug in the aforementioned jQuery version. According to their bug tracker, it will be addressed in the next patch release of jQuery.
+When Kendo UI is used with jQuery `1.12.0` or `2.2.0`, some issues with the popup positioning might occur. The popup is offset incorrectly when the page is scrolled.
 
-Find more details at [https://github.com/telerik/kendo-ui-core/issues/1375](https://github.com/telerik/kendo-ui-core/issues/1375).
+**Solution**
+
+The reason for this issue is a bug in the aforementioned jQuery version. According to jQuery's bug tracker, it will be addressed in the next patch release of jQuery. For more details, refer to [https://github.com/telerik/kendo-ui-core/issues/1375](https://github.com/telerik/kendo-ui-core/issues/1375).
+
+### Incorrect Appearance or Errors Occur in Hidden Widgets
+
+If you display widgets that have been in an initially hidden container, call their [`resize()`](/api/javascript/ui/widget#methods-resize) method after you show them. Initializing widgets on elements with the `style="display: none;"` configuration might cause errors, such as inability to calculate dimensions and positions or even throw errors. The reason for this behavior is that such calculations are not available for elements that are not rendered by the browser.
+
+**Solution**
+
+Usually, delaying the widget initialization until after it is displayed resolves the issue and improves the page performance.
 
 ## CDN
 
@@ -141,7 +173,9 @@ For a solution, refer to [Serving Font Files]({% slug hybridiconfonts_hybridkend
 
 By default, IIS does not serve files with unknown extensions. The mime types can be specified either through the IIS management console (inetmgr) or in the site `Web.config`.
 
-The example below demonstrates how to configure the IIS Web.config. Note the mime is removed first to avoid clashes if it is already defined.
+**Solution**
+
+The example below demonstrates how to configure the IIS `Web.config`. Note the mime is removed first to avoid clashes if it is already defined.
 
 ###### Example
 
@@ -182,7 +216,7 @@ The example below demonstrates the solution of the test issue above.
 
 ###### Example
 
-    $("#dialog").kendoWinodow({
+    $("#dialog").kendoWindow({
         // load complete page...
         content: "/foo",
         // ... and show it in an iframe
@@ -195,6 +229,37 @@ The example below demonstrates the solution of the test issue above.
          // load partial page, without jQuery reference
         content: "/foo"
     });
+
+## Styles and Themes
+
+### Icons Disappear after Upgrade
+
+As of the R1 2017 release, Kendo UI widgets utilize font-icons instead of sprites. This approach outdates some CSS, which are now removed from the built-in styles.
+
+**Solution**
+
+To provide for the backward compatibility of any custom icons you add to your project, include the following styles in your application:
+
+```css
+/* Provides backward compatibility support for custom sprites */
+.k-sprite {
+    display: inline-block;
+    width: 16px;
+    height: 16px;
+    overflow: hidden;
+    background-repeat: no-repeat;
+    font-size: 0;
+    line-height: 0;
+    text-align: center;
+    -ms-high-contrast-adjust: none;
+}
+
+/* Removes sprite styles from font icons */
+.k-sprite.k-icon {
+    font-size: 16px;
+    line-height: 1;
+}
+```
 
 ## See Also
 
@@ -214,10 +279,10 @@ Other articles on troubleshooting:
 * [Common Issues in Kendo UI Scheduler]({% slug troubleshooting_scheduler_widget %})
 * [Common Issues in Kendo UI Upload]({% slug troubleshooting_upload_widget %})
 * [Common Issues Related to Styling, Appearance, and Rendering]({% slug commonissues_troubleshooting_kendouistyling %})
-* [Common Issues in Telerik UI for ASP.NET MVC]({% slug troubleshooting_aspnetmvc %})
-* [Validation Issues in Telerik UI for ASP.NET MVC]({% slug troubleshooting_validation_aspnetmvc %})
-* [Scaffolding Issues in Telerik UI for ASP.NET MVC]({% slug troubleshooting_scaffolding_aspnetmvc %})
-* [Common Issues in the Grid ASP.NET MVC HtmlHelper Extension]({% slug troubleshoot_gridhelper_aspnetmvc %})
-* [Excel Export with the Grid ASP.NET MVC HtmlHelper Extension]({% slug excelissues_gridhelper_aspnetmvc %})
-* [Common Issues in the Spreadsheet ASP.NET MVC HtmlHelper Extension]({% slug troubleshoot_spreadsheethelper_aspnetmvc %})
-* [Common Issues in the Upload ASP.NET MVC HtmlHelper Extension]({% slug troubleshoot_uploadhelper_aspnetmvc %})
+* [Common Issues in Telerik UI for ASP.NET MVC](http://docs.telerik.com/aspnet-mvc/troubleshoot/troubleshooting)
+* [Validation Issues in Telerik UI for ASP.NET MVC](http://docs.telerik.com/aspnet-mvc/troubleshoot/troubleshooting-validation)
+* [Scaffolding Issues in Telerik UI for ASP.NET MVC](http://docs.telerik.com/aspnet-mvc/troubleshoot/troubleshooting-scaffolding)
+* [Common Issues in the Grid ASP.NET MVC HtmlHelper Extension](http://docs.telerik.com/aspnet-mvc/helpers/grid/troubleshoot/troubleshooting)
+* [Excel Export with the Grid ASP.NET MVC HtmlHelper Extension](http://docs.telerik.com/aspnet-mvc/helpers/grid/troubleshoot/excel-export-issues)
+* [Common Issues in the Spreadsheet ASP.NET MVC HtmlHelper Extension](http://docs.telerik.com/aspnet-mvc/helpers/spreadsheet/troubleshoot/troubleshooting)
+* [Common Issues in the Upload ASP.NET MVC HtmlHelper Extension](http://docs.telerik.com/aspnet-mvc/helpers/upload/troubleshoot/troubleshooting)

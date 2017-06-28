@@ -212,4 +212,34 @@
         equal(draggedElement.next().text(), sortable.placeholder.text(), "Placeholder is appended after hidden element");
     });
 
+    test("Placeholder is appended to container when using upward motion", 1, function () {
+        QUnit.fixture.empty();
+        QUnit.fixture.append(
+            '<div id="listA" style="height: 80px;">' +
+            '<div style="height: 20px;">A1</div>' +
+            '<div style="height: 20px;">A2</div>' +
+            '<div style="height: 20px;">A3</div>' +
+            '</div>'
+        );
+
+        QUnit.fixture.append(
+            '<div id="listB" style="min-height: 25px;">' +
+            '<div style="height: 20px;">B1</div>' +
+            '</div>'
+        );
+
+        var sortableA = $("#listA").kendoSortable({
+        }).data("kendoSortable");
+        var sortableB = $("#listB").kendoSortable({
+            connectWith: "#listA"
+        }).data("kendoSortable");
+
+        draggedElement = $("#listB").children().eq(0);
+        draggableOffset = kendo.getOffset(draggedElement);
+        press(draggedElement, draggableOffset.left, draggableOffset.top);
+        move(draggedElement, draggableOffset.left, draggableOffset.top - 25);
+
+        equal(sortableA.element.children().last()[0], sortableB.placeholder[0], "Placeholder is moved correctly to sortableA");
+    });
+
 })();

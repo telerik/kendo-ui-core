@@ -2,6 +2,7 @@
 title: NumericTextBox
 page_title: Configuration, methods and events of Kendo UI NumericTextBox
 description: Code examples and tips how to configure NumericTextBox widget, use available methods and events.
+res_type: api
 ---
 
 # kendo.ui.NumericTextBox
@@ -58,6 +59,23 @@ Specifies the text of the tooltip on the down arrow.
     <script>
     $("#numerictextbox").kendoNumericTextBox({
         downArrowText: "Less"
+    });
+    </script>
+
+### factor `Number`*(default: "1")*
+
+Specifies the factor by which the value is multiplied. The obtained result is used as edit value. So, if `15` as string is entered in the **NumericTextBox** and the factor value is set to `100` the visual value will be `1500`. On blur the visual value will be divided by `100` thus scaling the widget value to the original proportion.
+
+#### Example
+
+    <input id="numerictextbox" />
+    <script>
+    $("#numerictextbox").kendoNumericTextBox({
+       format: "p0",
+       factor: 100,
+       min: 0,
+       max: 1,
+       step: 0.01
     });
     </script>
 

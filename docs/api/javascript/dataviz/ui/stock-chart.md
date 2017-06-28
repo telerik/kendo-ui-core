@@ -1,6 +1,8 @@
 ---
 title: StockChart
 page_title: Configuration, methods and events of Kendo UI DataViz StockChart
+previous_url: /api/javascript/dataviz/stockchart, /api/dataviz/stockchart
+res_type: api
 ---
 
 # kendo.dataviz.ui.StockChart
@@ -24,7 +26,7 @@ The data item field value must be either:
 
 The data navigator configuration options.
 
-### navigator.categoryAxis `Array|Object`
+### navigator.categoryAxis `Object`
 
 The category axis configuration options.
 
@@ -141,7 +143,7 @@ The opacity of the crosshair. By default the crosshair is opaque.
 
 ### navigator.categoryAxis.crosshair.tooltip `Object`
 
-The crosshar tooltip options.
+The crosshair tooltip options.
 
 > The crosshair tooltip is displayed when the [categoryAxis.crosshair.tooltip.visible](#configuration-categoryAxis.crosshair.tooltip.visible) option is set to `true`.
 
@@ -3151,7 +3153,7 @@ The dash type of the crosshair.
 
 ### categoryAxis.crosshair.tooltip `Object`
 
-The crosshar tooltip configuration options.
+The crosshair tooltip configuration options.
 
 ### categoryAxis.crosshair.tooltip.background `String`
 
@@ -5567,7 +5569,6 @@ If it is not supported by the browser, the Chart will switch to the first availa
 The supported values are:
 
 * "svg" - renders the widget as inline SVG document, if available
-* "vml" - renders the widget as VML, if available
 * "canvas" - renders the widget as a Canvas element, if available.
 
 ### Example - Render as Canvas, if supported
@@ -7106,7 +7107,22 @@ Template variables:
 
 ### theme `String`
 
-Sets Chart theme. Available themes: default, blueOpal, black.
+The chart theme. This can be either a built-in theme or "sass".
+When set to "sass" the chart will read the variables from the [Sass-based themes]({% slug sassbasedthemes_kendoui %}).
+
+The supported values are:
+
+* "sass" - special value, see notes
+* "black"
+* "blueopal"
+* "bootstrap"
+* "default"
+* "highcontrast"
+* "metro"
+* "metroblack"
+* "moonlight"
+* "silver"
+* "uniform"
 
 ### title `Object`, `String`
 
@@ -8038,7 +8054,7 @@ The dash type of the crosshair.
 
 ### valueAxis.crosshair.tooltip `Object`
 
-The crosshar tooltip configuration options.
+The crosshair tooltip configuration options.
 
 ### valueAxis.crosshair.tooltip.background `String`
 

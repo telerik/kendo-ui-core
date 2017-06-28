@@ -2,12 +2,13 @@
 title: Select All Text on Focus
 page_title: Select All Text on Focus | Kendo UI NumericTextBox
 description: "Learn how to select all the text when on focus in the Kendo UI NumericTextBox widget."
+previous_url: /aspmvc/web/numerictextbox/how-to/select-all-on-focus, /asp-mvc/web/numerictextbox/how-to/select-all-on-focus
 slug: howto_select_all_texton_focus_numerictextbox
 ---
 
 # Select All Text on Focus
 
-The example below demonstrates how to select the whole input value on focus in the Kendo UI NumericTextBox widget.
+The following example demonstrates how to select the whole NumericTextBox input value on `focus`.
 
 ###### Example
 
@@ -35,8 +36,6 @@ $(function () {
 ```
 
 ## See Also
-
-Other articles on the Kendo UI NumericTextBox:
 
 * [NumericTextBox JavaScript API Reference](/api/javascript/ui/numerictextbox)
 * [How to Change Text Color]({% slug howto_change_text_color_numerictextbox %})

@@ -233,7 +233,7 @@ Below are listed the steps for you to follow when configuring the Kendo UI AutoC
             ->dependencies($dependenciesDataSource);
         ?>
 
-**Step 5** Output the gantt by echo-ing the result of the [render](/api/php/Kendo/UI/Widget#render) method.
+**Step 5** Output the gantt by echoing the result of the [render](/api/php/Kendo/UI/Widget#render) method.
 
 ###### Example
 

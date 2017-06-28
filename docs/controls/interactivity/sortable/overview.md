@@ -180,7 +180,7 @@ The example below demonstrates how to change the cursor type to `"move"`.
     </script>
 ```
 
-The `cursor` option changes the cursor style only for the time while the item is dragged. If you want to changhe the cursor type on `hover`, use CSS.
+The `cursor` option changes the cursor style only for the time while the item is dragged. If you want to change the cursor type on `hover`, use CSS.
 
 The example below demonstrates how to grab the cursor on `hover`.
 
@@ -208,7 +208,7 @@ The example below demonstrates how to grab the cursor on `hover`.
 
 > **Important**  
 >
-> It is advisable not to use a custom cursor in Internet Explorer, as due to the browser's specifics in custom cursor icon rendering, this may cause performace issues.
+> It is advisable not to use a custom cursor in Internet Explorer, as due to the browser's specifics in custom cursor icon rendering, this may cause performance issues.
 
 ### Filter and Disable Items
 
@@ -372,6 +372,10 @@ A Sortable with radio buttons and a Hint cloned from the Sortable element will l
       });
     </script>
 ```
+
+## Known Limitations 
+
+Kendo UI does not support integration between the Kendo UI Sortable and the Kendo UI TreeList widgets. 
 
 ## Further Reading
 

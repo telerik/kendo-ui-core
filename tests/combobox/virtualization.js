@@ -123,17 +123,17 @@
 
         combobox.one("dataBound", function() {
             combobox.search("0");
-            combobox.select(0);
+            combobox.select(0).done(function() {
+                ok(combobox.listView.items().eq(0).hasClass("k-state-selected"));
 
-            ok(combobox.listView.items().eq(0).hasClass("k-state-selected"));
-
-            combobox.close();
-            combobox.open();
+                combobox.close();
+                combobox.open();
+            });
 
             setTimeout(function() {
                 start();
                 ok(combobox.listView.items().eq(0).hasClass("k-state-selected"));
-            }, 100);
+            }, 200);
         });
     });
 
@@ -146,7 +146,7 @@
             dataSource: {
                 transport: {
                     read: function(options) {
-                        if (options.data.filter) {
+                        if (options.data.filter && options.data.filter.filters[0]) {
                             setTimeout(function() {
                                 options.success({
                                     data: [
@@ -175,31 +175,34 @@
             },
             filter: "contains",
             virtual: {
-                valueMapper: function(o) { o.success(o.value); },
+                valueMapper: function(o) { var val = parseInt(o.value); o.success(isNaN(val) ? null : val); },
                 itemHeight: 40
             }
         });
 
         combobox.one("dataBound", function() {
             combobox.open();
-            combobox.select(1);
-            combobox.close();
+            combobox.select(1).done(function() {
+                combobox.close();
 
-            combobox.search("1");
-            combobox.one("dataBound", function() {
-                combobox.select(2); //select "Item 111"
+                combobox.one("dataBound", function() {
+                    combobox.bind("dataBound", function() {
+                        if (combobox.dataSource.page() > 1) { //wait until the binding is done
+                            start();
+                            equal(combobox.select(), 111);
+                            equal(combobox.dataItem().value, 111);
+                            ok($("[data-offset-index=111]").hasClass("k-state-focused"));
+                            ok($("[data-offset-index=111]").hasClass("k-state-selected"));
+                        }
+                    });
 
-                combobox.bind("dataBound", function() {
-                    if (combobox.dataSource.page() > 1) { //wait until the binding is done
-                        start();
-                        equal(combobox.select(), 111);
-                        equal(combobox.dataItem().value, 111);
-                        ok($("[data-offset-index=111]").hasClass("k-state-focused"));
-                        ok($("[data-offset-index=111]").hasClass("k-state-selected"));
-                    }
+                    //select "Item 111"
+                    combobox.select(2).done(function() {
+                        combobox._filterSource();
+                    });
                 });
 
-                combobox.dataSource.filter([]);
+                combobox.search("1");
             });
         });
     });
@@ -252,18 +255,19 @@
 
         combobox.one("dataBound", function() {
             combobox.open();
-            combobox.select(1);
-            combobox.close();
+            combobox.select(1).done(function() {
+                combobox.close();
 
-            combobox.one("dataBound", function() {
-                start();
-                equal(combobox.select(), 11);
-                equal(combobox.dataItem().value, 11);
-                ok($("[data-offset-index=11]").hasClass("k-state-focused"));
-                ok($("[data-offset-index=11]").hasClass("k-state-selected"));
+                combobox.one("dataBound", function() {
+                    start();
+                    equal(combobox.select(), 11);
+                    equal(combobox.dataItem().value, 11);
+                    ok($("[data-offset-index=11]").hasClass("k-state-focused"));
+                    ok($("[data-offset-index=11]").hasClass("k-state-selected"));
+                });
+
+                combobox.open();
             });
-
-            combobox.open();
         });
 
         combobox.search("1");
@@ -289,15 +293,16 @@
         });
 
         combobox.one("dataBound", function() {
-            combobox.select(0);
-            combobox.close();
+            combobox.select(0).done(function() {
+                combobox.close();
 
-            combobox.one("dataBound", function() {
-                start();
-                equal(combobox.value(), "11");
+                combobox.one("dataBound", function() {
+                    start();
+                    equal(combobox.value(), "11");
+                });
+
+                combobox.open();
             });
-
-            combobox.open();
         });
 
         //simulate MVVM value binding
@@ -416,7 +421,7 @@
             dataValueField: "value",
             dataSource: createAsyncDataSource(),
             virtual: {
-                valueMapper: function(o) { o.success(o.value); },
+                valueMapper: function(o) { o.success(isNaN(o.value) ? -1 : o.value); },
                 itemHeight: 20
             }
         });

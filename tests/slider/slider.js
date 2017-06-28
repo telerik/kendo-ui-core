@@ -1,4 +1,4 @@
-﻿(function(){
+(function(){
 
 var Slider = kendo.ui.Slider;
 var input;
@@ -347,6 +347,28 @@ test("slider should render large ticks with min value bigger then 0 correctly", 
     largeTicks.each(function(index) {
         equal($(this).find("span").text(), largetTickNumbers[index]);
     });
+});
+
+test("should add active state and remove it", function () {
+    var slider = newSlider({
+            min: 0,
+            max: 11,
+            largeStep: 1
+        });
+
+    slider.resize();
+
+    slider.wrapper.find(".k-button-increase").trigger("mousedown");
+    slider.wrapper.find(".k-button-decrease").trigger("mousedown");
+
+    ok(slider.wrapper.find(".k-button-increase").hasClass("k-state-active"));
+    ok(slider.wrapper.find(".k-button-decrease").hasClass("k-state-active"));
+
+    slider.wrapper.find(".k-button-increase").trigger("mouseup");
+    slider.wrapper.find(".k-button-decrease").trigger("mouseup");
+
+    ok(!slider.wrapper.find(".k-button-increase").hasClass("k-state-active"));
+    ok(!slider.wrapper.find(".k-button-decrease").hasClass("k-state-active"));
 });
 
 asyncTest("slider should restore its original value on form reset", function () {

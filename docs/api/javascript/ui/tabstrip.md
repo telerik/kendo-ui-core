@@ -2,6 +2,7 @@
 title: TabStrip
 page_title: Configuration, methods and events of Kendo UI TabStrip
 description: Easily disable all animations, set the parameters, used for the visual animation and the effects used in TabStrip UI widget.
+res_type: api
 ---
 
 # kendo.ui.TabStrip
@@ -244,6 +245,30 @@ Sets an array with the URLs from which the tabs content to be loaded from. If on
         });
     </script>
 
+As of the Kendo UI Q1 2017 release, this option can contain configuration objects that are passed to [`jQuery.ajax`](http://api.jquery.com/jquery.ajax/#jQuery-ajax-settings), used by the widget for remote requests. This means that you can set options supported by `jQuery.ajax` through configuration objects such as `cache`, `url`, `type`, and others.
+
+    <div id="tabstrip">
+        <ul>
+            <li>Tab 1</li>
+            <li>Ajax Tab</li>
+        </ul>
+        <div>Content 1</div>
+        <div></div>
+    </div>
+
+    <script>
+        $("#tabstrip").kendoTabStrip({
+            contentUrls: [
+                null,
+                {
+                    url: "http://demos.telerik.com/kendo-ui/content/web/tabstrip/ajax/ajaxContent1.html",
+                    cache: true
+                }
+            ]
+        });
+    </script>
+
+
 ### dataContentField `String`*(default: "")*
 
 Sets the field of the data item that provides the text content of the tab content element.
@@ -483,16 +508,20 @@ A [**fade animation**](#configuration-animation) is highly recommended with any 
 Specifies the selected tab. Should be corresponding to the dataTextField configuration and used when bound to a DataSource component.
 
 #### Example
+    <div id="tabstrip">
+    </div>
 
-    $("#tabstrip").kendoTabStrip({
-        value: "Tab1",
-        dataTextField: "Name",
-        dataContentField: "Content",
-        dataSource: [
-          { Name: "Tab1", Content: "Tab1: content" },
-          { Name: "Tab2", Content: "Tab2: content" }
-        ]
-    });
+    <script>
+        $("#tabstrip").kendoTabStrip({
+            value: "Tab1",
+            dataTextField: "Name",
+            dataContentField: "Content",
+            dataSource: [
+              { Name: "Tab1", Content: "Tab1: content" },
+              { Name: "Tab2", Content: "Tab2: content" }
+            ]
+        });
+    </script>
 
 > **Important:** This configuration options is available with releases after 2015.3.1002.
 
@@ -1056,7 +1085,7 @@ The content element of the activated tab.
 
 #### Attach activate event handler via bind(); detach via unbind()
 
-    <div id="tabstrip">
+    <div id="tabStrip">
         <ul>
             <li>Tab 1</li>
             <li>Tab 2</li>
@@ -1123,6 +1152,8 @@ The loaded content element that is retrieved via AJAX.
 ### error
 
 Triggered when an AJAX request results in an error.
+
+> This event won't fire if you use jQuery 3.x. More information is available [here](https://github.com/telerik/kendo-ui-core/issues/2304).
 
 #### Event Data
 

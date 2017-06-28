@@ -2,6 +2,7 @@
 title: Overview
 page_title: Overview | Kendo UI Dialog
 description: "Learn how to initialize the Kendo UI Dialog widget and configure its behaviors."
+previous_url: /web/dialog/overview, /getting-started/web/dialog/overview
 slug: overview_kendoui_dialog_widget
 position: 1
 ---

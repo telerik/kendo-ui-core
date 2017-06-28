@@ -1,6 +1,7 @@
 ---
 title: GradientStop
 page_title: API reference for Kendo UI Drawing API GradientStop
+res_type: api
 ---
 
 # kendo.drawing.GradientStop : kendo.Class

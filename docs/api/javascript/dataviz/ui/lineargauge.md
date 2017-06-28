@@ -2,6 +2,7 @@
 title: LinearGauge
 page_title: Configuration, methods and events of Kendo UI DataViz LinearGauge
 description: Manipulate the configuration options of linear gauge, change the border of the gauge area and its color, learn how to use methods.
+res_type: api
 ---
 
 # kendo.dataviz.ui.LinearGauge
@@ -291,7 +292,6 @@ If it is not supported by the browser, the Gauge will switch to the first availa
 The supported values are:
 
 * "svg" - renders the widget as inline SVG document, if available
-* "vml" - renders the widget as VML, if available
 * "canvas" - renders the widget as a Canvas element, if available.
 
 ### Example - Render as Canvas, if supported

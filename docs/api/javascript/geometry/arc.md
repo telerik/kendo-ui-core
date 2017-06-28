@@ -1,6 +1,7 @@
 ---
 title: Arc
 page_title: API reference for methods and fields of Kendo UI Geometry Arc
+res_type: api
 ---
 
 # kendo.geometry.Arc
@@ -84,11 +85,11 @@ Transformation matrix to apply.
 
 ### getAnticlockwise
 
-Gets the arc anticlokwise flag.
+Gets the arc anticlockwise flag.
 
 #### Returns
 
-`Boolean` The anticlokwise flag of the arc.
+`Boolean` The anticlockwise flag of the arc.
 
 
 ### getCenter
@@ -156,7 +157,7 @@ Negative values or values greater than 360 will be normalized.
 
 ### setAnticlockwise
 
-Sets the arc anticlokwise flag.
+Sets the arc anticlockwise flag.
 
 #### Parameters
 
@@ -239,9 +240,8 @@ Measured in clockwise direction with 0 pointing "right".
 
 ##### value `Number`
 
-The new arc atart angle.
+The new arc start angle.
 
 #### Returns
 
 `kendo.geometry.Arc` The current arc instance.
-

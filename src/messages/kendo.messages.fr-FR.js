@@ -173,8 +173,8 @@ $.extend(true, kendo.ui.Grid.prototype.options.messages,{
     "canceledit": "Annuler",
     "update": "Mettre à jour",
     "edit": "Éditer",
-    "excel": "Export to Excel",
-    "pdf": "Export to PDF",
+    "excel": "Export vers Excel",
+    "pdf": "Export en PDF",
     "select": "Sélectionner",
     "cancel": "Annuler les modifications",
     "save": "Enregistrer les modifications"
@@ -185,6 +185,39 @@ $.extend(true, kendo.ui.Grid.prototype.options.messages,{
     "confirmDelete": "Effacer"
   },
   "noRecords": "Aucun enregistrement disponible."
+});
+}
+  /* TreeList messages */
+
+if (kendo.ui.TreeList) {
+kendo.ui.TreeList.prototype.options.messages =
+$.extend(true, kendo.ui.TreeList.prototype.options.messages,{
+  "noRows": "Aucun enregistrement à afficher",
+  "loading": "Chargement...",
+  "requestFailed": "La requête a échoué.",
+  "retry": "Réessayer",
+  "commands": {
+      "edit": "Modifier",
+      "update": "Mettre à jour",
+      "canceledit": "Annuler",
+      "create": "Créer",
+      "createchild": "Créer un élément enfant",
+      "destroy": "Supprimer",
+      "excel": "Export Excel",
+      "pdf": "Export PDF"
+  }
+});
+}
+
+if (kendo.ui.TreeList) {
+kendo.ui.TreeList.prototype.options.columnMenu =
+$.extend(true, kendo.ui.TreeList.prototype.options.columnMenu, {
+    "messages": {
+        "columns": "Choisissez les colonnes",
+        "filter": "Appliquer les filtres",
+        "sortAscending": "Tri (croissant)",
+        "sortDescending": "Tri (décroissant)"
+    }
 });
 }
 
@@ -314,17 +347,54 @@ $.extend(true, kendo.ui.Editor.prototype.options.messages,{
   "linkWebAddress": "Adresse Web",
   "search": "Search",
   "createTable": "Insérer un tableau",
-  "addColumnLeft": "Add column on the left",
-  "addColumnRight": "Add column on the right",
-  "addRowAbove": "Add row above",
-  "addRowBelow": "Add row below",
+  "addColumnLeft": "Ajouter colonne à gauche",
+  "addColumnRight": "Ajouter colonne à droite",
+  "addRowAbove": "Ajouter ligne au-dessus",
+  "addRowBelow": "Ajouter ligne au-dessous",
   "deleteColumn": "Supprimer la colonne",
-  "deleteRow": "Supprimer ligne",
+  "deleteRow": "Supprimer la ligne",
   "dropFilesHere": "drop files here to upload",
   "formatting": "Format",
   "viewHtml": "View HTML",
   "dialogUpdate": "Update",
-  "insertFile": "Insert file"
+  "insertFile": "Insérer un Fichier",
+  "dialogOk": "OK",
+  "tableWizard": "Assistant de tableau",
+  "tableTab": "Table",
+  "cellTab": "Cellule",
+  "accessibilityTab": "Accessibilité",
+  "caption": "Sous-titre",
+  "summary": "Sommaire",
+  "width": "Largeur",
+  "height": "Hauteur",
+  "cellSpacing": "Espacement des cellules",
+  "cellPadding": "Rembourrage des cellules",
+  "cellMargin": "Marge des cellules",
+  "alignment": "Alignement",
+  "background": "Fond",
+  "cssClass": "CSS Classe",
+  "id": "Id",
+  "border": "Bordure",
+  "borderStyle": "Style de bordure",
+  "collapseBorders": "Rétracter bordures",
+  "wrapText": "Renvoi à la ligne",
+  "associateCellsWithHeaders": "Cellules associées aux entêtes",
+  "alignLeft": "Aligner à gauche",
+  "alignCenter": "Aligner le centre",
+  "alignRight": "Aligner à droite",
+  "alignLeftTop": "Aligner à gauche et haut",
+  "alignCenterTop": "Aligner le centre et haut",
+  "alignRightTop": "Aligner à droite et haut",
+  "alignLeftMiddle": "Aligner à gauche et milieu",
+  "alignCenterMiddle": "Aligner le centre et milieu",
+  "alignRightMiddle": "Aligner à droite et milieu",
+  "alignLeftBottom": "Aligner à gauche et bas",
+  "alignCenterBottom": "Aligner le centre et bas",
+  "alignRightBottom": "Aligner à droite et bas",
+  "alignRemove": "Retirer alignement",
+  "columns": "Colonnes",
+  "rows": "Lignes",
+  "selectAllCells": "Sélectionner toutes les cellules"
 });
 }
 
@@ -482,6 +552,23 @@ kendo.ui.Prompt.prototype.options.messages =
 $.extend(true, kendo.ui.Prompt.prototype.options.localization, {
   "okText": "OK",
   "cancel": "Annuler"
+});
+}
+
+/* ListBox messaages */
+
+if (kendo.ui.ListBox) {
+kendo.ui.ListBox.prototype.options.messages =
+$.extend(true, kendo.ui.ListBox.prototype.options.messages,{
+  "tools": {
+    "remove": "Supprimer",
+    "moveUp": "Déplacer vers le haut",
+    "moveDown": "Déplacer vers le bas",
+    "transferTo": "Transférer à",
+    "transferFrom": "Transférer de",
+    "transferAllTo": "Transférer tout à",
+    "transferAllFrom": "Transférer tout de"
+  }
 });
 }
 

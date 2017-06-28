@@ -5,7 +5,7 @@
         },
 
         teardown: function() {
-            QUnit.fixture.find("#scroller").kendoMobileScroller("destroy");
+           // QUnit.fixture.find("#scroller").kendoMobileScroller("destroy");
             QUnit.fixture.empty();
         }
     });
@@ -28,7 +28,7 @@
         ok(!QUnit.fixture.find('.km-horizontal-scrollbar').is(":visible"));
     });
 
-    asyncTest("animatedScrollTo method calls its callback", 1, function() {
+    skip("animatedScrollTo method calls its callback", 1, function() {
         var scroller = QUnit.fixture.find("#scroller").kendoMobileScroller().data("kendoMobileScroller");
         scroller.animatedScrollTo(0, -200, function() { 
             start();

@@ -6,6 +6,7 @@
 
 Kendo UI is everything you need to build sites and apps with HTML5 & JavaScript. Kendo UI Core is the free and open-source version of Kendo UI that provides access to the web's best UI widgets and key framework features, essential for developing great experiences for the web and mobile.
 
+
 ## Features of Kendo UI Core
 
 Kendo UI Core is a free and open-source subset of Kendo UI. The following table details the widgets and features available in Kendo UI Core, as well as the additional features available via a commercial Kendo UI license.
@@ -129,7 +130,7 @@ There are two ways to get the source code for Kendo UI Core. You can either down
 
 In order to build Kendo UI Core, you need to have **Node.js 4.x** and **git 2.x**.
 
-For Windows you have to download and install [Git for Windows](https://git-for-windows.github.io/) and [Node.js](http://nodejs.org/download/).
+For Windows you have to download and install [Git for Windows](https://git-for-windows.github.io/) and [Node.js](http://nodejs.org/download/) and [Visual C++ Build Tools](http://landinghub.visualstudio.com/visual-cpp-build-tools).
 
 Mac OS users should install [Homebrew](http://mxcl.github.com/homebrew/). Once Homebrew is installed, run `brew install git` to install git, and `brew install node` to install Node.js.
 

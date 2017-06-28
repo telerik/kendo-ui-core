@@ -21,10 +21,10 @@
     ngTest("autocomplete recognizes selected object items with k-ng-model", 1, function() {
         angular.module("kendo.tests").controller("mine", function($scope) {
             $scope.colors = [ { color: "red" }, { color: "green" }, { color: "blue" } ];
-            $scope.selectedColors = [ $scope.colors[0], $scope.colors[1] ];
+            $scope.selectedColors = [ "red", "green" ];
         });
 
-        QUnit.fixture.html('<div ng-controller=mine><input kendo-autocomplete k-ng-model=selectedColors k-data-source=colors k-data-text-field="\'color\'"></div>');
+        QUnit.fixture.html('<div ng-controller=mine><input kendo-autocomplete k-value-primitive=true k-ng-model=selectedColors k-data-source=colors k-data-text-field="\'color\'"></div>');
     },
 
     function() {
@@ -34,7 +34,7 @@
     ngTest("autocomplete accepts single selected object with k-ng-model if separator is not defined", 1, function() {
         angular.module("kendo.tests").controller("mine", function($scope) {
             $scope.colors = [ { color: "red" }, { color: "green" }, { color: "blue" } ];
-            $scope.selectedColors = $scope.colors[1];
+            $scope.selectedColors = "green";
         });
 
         QUnit.fixture.html('<div ng-controller=mine><input kendo-autocomplete k-ng-model=selectedColors k-data-source=colors k-data-text-field="\'color\'"></div>');
@@ -72,7 +72,7 @@
         autocomplete.dataSource.fetch();
         autocomplete.value('blue');
         autocomplete.trigger('change');
-        equal(JSON.stringify(scope.selectedColors), JSON.stringify([{ color: 'blue' }]));
+        equal(JSON.stringify(scope.selectedColors), JSON.stringify("blue"));
     });
 
     ngTest("autocomplete returns primitives to model with primitive", 1, function() {
@@ -90,7 +90,7 @@
         autocomplete.dataSource.fetch();
         autocomplete.value('blue');
         autocomplete.trigger("change");
-        equal(JSON.stringify(scope.selectedColors), JSON.stringify([ 'blue' ]));
+        equal(JSON.stringify(scope.selectedColors), JSON.stringify('blue'));
     });
 
     ngTest("autocomplete compiles header template", 1, function() {
@@ -178,7 +178,7 @@
         });
     }
 
-    ngTest("autocomplete sets selected data item to the model", 2, function() {
+    ngTest("autocomplete sets selected data item to the model", 1, function() {
         angular.module("kendo.tests").controller("mine", function($scope) {
             $scope.options = {
                 close: function(e) { e.preventDefault(); },
@@ -210,8 +210,7 @@
 
                 setTimeout(function() {
                     start();
-                    equal(scope.selectedColors.length, 1);
-                    equal(scope.selectedColors[0].text, "Item 40");
+                    equal(scope.selectedColors, "Item 40");
                 }, 100);
             });
 

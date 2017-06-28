@@ -9,20 +9,21 @@ slug: howto_keepviewandmodelinsync_angular_multiselect
 
 > **Important**
 >
-> It is not recommended to change the ids of the DataSource to achieve the desired custom item selection logic inside the Kendo UI MultiSelect.
+> Avoid changing the IDs of the Data Source to achieve the desired custom item selection logic inside the Kendo UI MultiSelect.
 
-To keep the view and model in sync, follow the steps below:
+To keep the view and model in sync:
 
-1. Attach an event listener to the `select` event using `k-on-select`. For more information on `select`, refer to [this article](/api/javascript/ui/multiselect#events-select).
-2. If `"Unknown"` is selected, then all other options are deselected by assigning the value of `"Unknown"` to the model.
+1. Attach an event listener to the [`select`](/api/javascript/ui/multiselect#events-select) event by using `k-on-select`.
+
+2. If `"Unknown"` is selected, all other options are deselected by assigning the value of `"Unknown"` to the model.
 
         $scope.selectedIds = [0];
 
-3. If any other option is selected, then find the `"Unknown"` option and remove it from the model. Finally, add the current selection.
+3. If any other option is selected, find the `"Unknown"` option and remove it from the model. Then, add the current selection.
 
-To implement a similar result, follow the same steps with a [`change` event handler](/api/javascript/ui/multiselect#events-change). If you use `change`, adding the current selection from **Step 3** above is not necessary.
+You can implement a similar result by following the same steps and using the [`change`](/api/javascript/ui/multiselect#events-change) event handler. In this case, it is not necessary to add the current selection from **Step 3**.
 
-The example below demonstrates how to keep the view and the model of a Kendo UI MultiSelect in AngularJS applications in sync.
+The following example demonstrates how to keep in sync the view and the model of a Kendo UI MultiSelect in AngularJS applications.
 
 ###### Example
 
@@ -80,8 +81,6 @@ The example below demonstrates how to keep the view and the model of a Kendo UI 
 
 ## See Also
 
-Other articles on the Kendo UI MultiSelect:
-
 * [MultiSelect JavaScript API Reference](/api/javascript/ui/multiselect)
 * [How to Cascade from DropDownList]({% slug howto_cascade_froma_dropdownlist_multiselect %})
 * [How to Filter Values in Widgets Sharing the Same Data]({% slug howto_filter_valuesin_widgetswith_shared_data_multiselect %})
@@ -91,4 +90,4 @@ Other articles on the Kendo UI MultiSelect:
 * [How to Use MultiSelect with Bootstrap Modal Window]({% slug howto_use_multiselect_with_bootstrap_modal_window_multiselect %})
 * [How to Wire Blur Event of the Filter Input]({% slug howto_wire_blur_event_ofthe_filtеr_input_multiselect %})
 
-For more runnable examples on the Kendo UI MultiSelect, browse its [**How To** documentation folder]({% slug howto_bind_values_totemplate_multiselect %}).
+For more runnable examples on the Kendo UI MultiSelect, browse its [**How To** documentation folder]({% slug howto_bindobjectstongmodel_multiselect %}).

@@ -242,6 +242,23 @@
         equal(pager.find(".k-pager-info").text(), "1 - 1 of 5 items");
     });
 
+    test("info start page does not exeed total when deleting records", function(){
+        var pager = setup({
+            data: [{ id: 1 }, { id: 2 }, { id: 3 }, { id: 4 }],
+            pageSize: 2
+        });
+
+        dataSource.read();
+        dataSource.page(2);
+
+        //delete the last two records
+        dataSource.remove(dataSource.at(2));
+        dataSource.remove(dataSource.at(2));
+
+        equal(pager.find(".k-pager-info").text(), "2 - 2 of 2 items");
+    });
+
+
     test("pager does not displays info if info is set to false", function(){
         var pager = setup({}, { info: false });
             dataSource.read();
@@ -630,7 +647,7 @@
     test("displays refresh button", function() {
         var pager = setup({}, { refresh: true });
 
-        equal(pager.find(".k-i-refresh").length, 1);
+        equal(pager.find(".k-i-reload").length, 1);
     });
 
     test("clicking the refresh button reads from the data source", function() {
@@ -643,7 +660,7 @@
             }
         });
 
-        pager.find(".k-i-refresh").click();
+        pager.find(".k-i-reload").click();
 
         equal(dataSource.calls("read"), 1);
     });
@@ -673,5 +690,13 @@
 
         ok(container.find("select").data("kendoDropDownList")
             .wrapper.css("display") !== "none");
+    });
+
+    test("kendoPager list is hidden when a click outside is performed", function() {
+        var ul = setup();
+        ul.find(".k-current-page").click();
+        ok(pager.list.hasClass("k-state-expanded"));
+        $(document.body).trigger("mousedown");
+        ok(!pager.list.hasClass("k-state-expanded"));
     });
 })();

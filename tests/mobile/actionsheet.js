@@ -8,10 +8,12 @@
 
     module("ActionSheet", {
         setup: function() {
+            jasmine.clock().install();
             root = $("<div></div>").appendTo($('#qunit-fixture'));
             kendo.mobile.ui.Shim.fn.options.duration = 0;
             root.html(markup);
             new kendo.mobile.Application(root);
+            jasmine.clock().tick();
             element = root.find("[data-role=actionsheet]");
             source = root.find("#source");
             actionSheet = element.data("kendoMobileActionSheet");
@@ -20,6 +22,7 @@
             kendo.mobile.application.destroy();
             kendo.destroy(root);
             root.empty();
+            jasmine.clock().uninstall();
         }
     });
 
@@ -28,10 +31,8 @@
     }
 
     function isClosed() {
-        setTimeout(function() {
-            start();
-            equal(root.find(".km-shim").css("display"), "none");
-        }, 50);
+        jasmine.clock().tick(50);
+        equal(root.find(".km-shim").css("display"), "none");
     }
 
     test("Is visible when open", function() {
@@ -39,16 +40,16 @@
         isOpen();
     });
 
-    asyncTest("Is hidden when closed", 1, function() {
+    test("Is hidden when closed", 1, function() {
         actionSheet.open();
         actionSheet.close();
         isClosed();
     });
 
-    asyncTest("Triggers close when shim is tapped", 1, function() {
+    test("Triggers close when shim is tapped", 1, function() {
         actionSheet.open();
         actionSheet.bind("close", function() {
-            start();
+            jasmine.clock().tick();
             ok(true);
         });
         tap(root.find(".km-shim"));
@@ -63,7 +64,7 @@
         tap(root.find("#foo"));
     });
 
-    asyncTest("Closes on click", 2, function() {
+    test("Closes on click", 2, function() {
         window.foo = function() {
             ok(true);
         };
@@ -95,7 +96,6 @@
         tap(root.find("#foo"));
     });
 
-
     test("Passes context in click handler", 1, function() {
         window.foo = function(e) {
             equal(e.context, 1);
@@ -105,7 +105,7 @@
         tap(root.find("#foo"));
     });
 
-    asyncTest("Cancel button closes the sheet", 1, function() {
+    test("Cancel button closes the sheet", 1, function() {
         var cancel = element.find("a:contains('Cancel')");
 
         actionSheet.open();
@@ -128,11 +128,11 @@
         tap(root.find("#foo"));
     });
 
-    asyncTest("raises close event when widget is closed by the cancel button", 1, function() {
+    test("raises close event when widget is closed by the cancel button", 1, function() {
         var cancel = element.find("a:contains('Cancel')");
 
         actionSheet.bind("close", function() {
-            start();
+            jasmine.clock().tick();
             ok(true, "Should raise the close event");
         });
 
@@ -140,11 +140,11 @@
         tap(cancel);
     });
 
-    asyncTest("raises close event when widget is closed on click", 1, function() {
+    test("raises close event when widget is closed on click", 1, function() {
         window.foo = function() { };
 
         actionSheet.bind("close", function() {
-            start();
+            jasmine.clock().tick();
             ok(true, "Should raise the close event");
         });
 
@@ -154,6 +154,7 @@
 
     module("integration", {
         setup: function() {
+            jasmine.clock().install();
             root = $("<div></div>").appendTo($('#qunit-fixture'));
             window.foo = kendo.observable({});
             kendo.mobile.ui.Shim.fn.options.duration = 0;
@@ -162,6 +163,7 @@
             kendo.mobile.application.destroy();
             kendo.destroy(root);
             window.foo = null;
+            jasmine.clock().uninstall();
         }
     });
 
@@ -170,6 +172,7 @@
 
         root.html(markup);
         new kendo.mobile.Application(root);
+        jasmine.clock().tick();
 
         ok(root.find("#foo").data("kendoMobileActionSheet"));
         ok(root.find("#bar").data("kendoMobileActionSheet"));
@@ -180,6 +183,7 @@
 
         root.html(markup);
         var app = new kendo.mobile.Application(root);
+        jasmine.clock().tick();
 
         app.view().destroy();
         equal(root.find("#foo").length, 0);

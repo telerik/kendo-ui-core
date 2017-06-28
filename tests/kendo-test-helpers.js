@@ -83,7 +83,7 @@ function arrayClose(a, b, tolerance) {
 function tzTest(tzAlias, testName, expected, callback ) {
     var TZ_NAMES = {
         "Brazil": ["BRST", "BRT", "South America Daylight Time", "South America Standard Time"],
-        "Sofia": ["EET", "EEST", "Eastern European Time", "Eastern European Summer Time"],
+        "Sofia": ["EET", "EEST", "Eastern European Time", "Eastern European Summer Time", "FLE"],
         "Moscow": ["MSK", "RTZ2", "Russia TZ 2 Standard Time"],
         "Pacific": ["PDT", "PST"]
     };
@@ -169,6 +169,7 @@ function mousewheel(element, delta) {
 
 // Silence logging for the tests
 kendo.suppressLog = true;
+$.mockjaxSettings.logging = false;
 
 (function() {
     var domContentsLength;
@@ -177,14 +178,14 @@ kendo.suppressLog = true;
         return $(document.body).children(":not(script,#editor-fixture)").length;
     }
 
-    $(function() {
-        QUnit.fixture = $("<div id='qunit-fixture' style='height: 100px'></div>").appendTo(document.body);
+    QUnit.testStart(function() {
+        QUnit.fixture = $("<div id='qunit-fixture'></div>").appendTo(document.body);
         QUnit.config.fixture = "";
         domContentsLength = getDomContentsLength();
     });
 
     QUnit.testDone(function() {
-        QUnit.fixture.empty().attr("class", "").attr("style", "").css("height", "100px");
+        QUnit.fixture.remove();
     });
 
     var browser = kendo.support.browser;
@@ -219,9 +220,9 @@ kendo.suppressLog = true;
                 console.error.apply(console, [ details.module, details.name, 'active widgets left'].concat(widgets.map(function(widget) {
                     var name = widget.options.name;
 
-                    if (widget.element[0].className) {
-                        name = name + "(" + widget.element[0].className + ")";
-                    }
+                    //if (widget.element[0].className) {
+                    //    name = name + "(" + widget.element[0].className + ")";
+                    //}
 
                     return name;
                 })));
@@ -251,7 +252,7 @@ QUnit.extend( QUnit, {
     }
 });
 
-QUnit.config.testTimeout = 2500;
+QUnit.config.testTimeout = 10000;
 QUnit.config.reorder = false;
 
 var close = QUnit.close,
@@ -308,7 +309,6 @@ function withAngularTests(moduleName, func) {
     });
 
     $.mockjaxSettings.responseTime = 0;
-    $.mockjaxSettings.logging = false;
 
     $.mockjax({
         url: "ajax-template.html",

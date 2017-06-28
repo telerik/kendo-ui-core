@@ -2,6 +2,7 @@
 title: TimePicker
 page_title: Configuration, methods and events of Kendo UI TimePicker
 description: What type of animations you can use in TimePicker UI widget, find supported methods and see which events are triggered once the value is changed.
+res_type: api
 ---
 
 # kendo.ui.TimePicker
@@ -119,6 +120,19 @@ The duration of the open animation in milliseconds.
     <script>
     $("#timepicker").kendoTimePicker({
         culture: "de-DE"
+    });
+    </script>
+
+### dateInput `Boolean`*(default: false)*
+
+ Specifies if the TimePicker will use DateInput for editing value
+
+#### Example
+
+    <input id="timepicker" />
+    <script>
+    $("#timepicker").kendoTimePicker({
+        dateInput: true
     });
     </script>
 
@@ -473,6 +487,19 @@ The time value to set for a TimePicker, expressed as a Date object or as a strin
 #### Returns
 
 `Date` The time value of a TimePicker.
+
+> * This method **does not trigger** [change](#events-change) event.
+This could affect [MVVM value binding](/framework/mvvm/bindings/value). The model bound to the widget will not be updated.
+You can overcome this behavior trigerring the `change` event manually using [trigger("change")](/api/javascript/observable#methods-trigger) method.
+
+    <input id="timepicker" />
+    <script>
+    $("#timepicker").kendoTimePicker();
+
+    var timepicker = $("#timepicker").data("kendoTimePicker");
+    timepicker.value(new Date(2016, 10, 1));
+    timepicker.trigger("change");
+    </script>
 
 #### Example - gets the value of the widget
 

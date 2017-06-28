@@ -414,4 +414,21 @@ $.extend(true, kendo.ui.Prompt.prototype.options.localization, {
 });
 }
 
+/* Validator messages */
+
+if (kendo.ui.Validator) {
+kendo.ui.Validator.prototype.options.messages =
+$.extend(true, kendo.ui.Validator.prototype.options.messages,{
+  "required": "{0} is verplicht",
+  "pattern": "{0} is niet correct",
+  "min": "{0} moet groter of gelijk zijn aan {1}",
+  "max": "{0} moet kleiner of gelijk zijn aan {1}",
+  "step": "{0} is niet correct",
+  "email": "{0} is geen correct email adres",
+  "url": "{0} is geen correcte URL",
+  "date": "{0} is geen correcte datum",
+  "dateCompare": "Eind datum moet groter of gelijk zijn aan begindatum"
+});
+}
+
 })(window.kendo.jQuery);

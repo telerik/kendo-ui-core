@@ -31,11 +31,11 @@ In iOS, the ActionSheet slides in from the bottom of the screen. In iOS6, it als
 
 ### ActionSheet Detection of Tablets
 
-If a tablet is detected, the ActionSheet widget is displayed in a PopOver. The sizing and the direction of the popover may be customized through the `popup` configuration option.
+If a tablet is detected, the ActionSheet widget is displayed in a PopOver. The sizing and the direction of the PopOver may be customized through the `popup` configuration option.
 
 ### Open the ActionSheet
 
-The widget can be opened when any mobile navigational widget, such as ListView link item, button, and tabstrip among others, is tapped. To do so, set `data-rel="actionsheet"` attribute and a `href` attribute equal to the ActionSheet's element `id`, prefixed with `#`, like an anchor.
+The widget can be opened when any mobile navigational widget, such as ListView link item, button, and TabStrip among others, is tapped. To do so, set `data-rel="actionsheet"` attribute and a `href` attribute equal to the ActionSheet's element `id`, prefixed with `#`, like an anchor.
 
 The example below demonstrates how to open the ActionSheet using the mobile Button.
 

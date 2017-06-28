@@ -22,7 +22,8 @@ span.k-dropdown,
 .k-dropdown,
 .k-selectbox,
 .k-textbox,
-.k-toolbar .k-split-button
+.k-toolbar .k-split-button,
+.k-listbox
 {
     position: relative;
     display: inline-block;
@@ -50,7 +51,7 @@ span.k-dropdown,
 .k-ie8 {
     .k-autocomplete > .k-i-close,
     .k-combobox > .k-dropdown-wrap > .k-i-close {
-        margin-top: -(@grid-size/2);
+        margin-top: (-(@grid-size/2));
     }
 }
 
@@ -60,12 +61,12 @@ span.k-dropdown,
 }
 
 .k-multiselect > .k-multiselect-wrap > .k-i-close {
-    top: @grid-size/2 - 2px;
+    top: (@grid-size/2 - 2px);
 }
 
 .k-autocomplete > .k-i-close,
 .k-multiselect > .k-multiselect-wrap > .k-i-close {
-    margin-right: @grid-size/4 + 2px;
+    margin-right: (@grid-size/4 + 2px);
 }
 
 .k-autocomplete,
@@ -74,14 +75,15 @@ span.k-dropdown,
     &.k-state-focused {
         > .k-i-close {
             display: inline-block;
-            outline: none;         
+            outline: none;
         }
     }
 }
 
-.k-autocomplete > .k-i-close.k-loading-hidden,
-.k-combobox > .k-dropdown-wrap > .k-i-close.k-loading-hidden {
-    display: none;
+.k-autocomplete > .k-hidden,
+.k-combobox > .k-dropdown-wrap > .k-hidden,
+.k-multiselect .k-hidden {
+    display: none !important;
 }
 
 .k-multiselect {
@@ -89,7 +91,7 @@ span.k-dropdown,
     &.k-state-focused {
         > .k-multiselect-wrap > .k-i-close {
             display: inline-block;
-            outline: none;         
+            outline: none;
         }
     }
 }
@@ -97,11 +99,11 @@ span.k-dropdown,
 .k-autocomplete,
 .k-combobox > .k-dropdown-wrap {
     &.k-state-border-down {
-       > .k-i-close {
+        > .k-i-close {
            margin-top: -1px;
         }
-    } 
-}            
+    }
+}
 
 .k-filter-menu .k-combobox,
 .k-filter-menu .k-datepicker,
@@ -180,10 +182,14 @@ span.k-dropdown,
 .k-calendar,
 .k-treeview,
 .k-pager-wrap,
-.k-grid-header .k-link,
+.k-grid-header .k-i-link-horizontal,
 .k-header-column-menu
 {
     -webkit-touch-callout: none;
+}
+
+.k-header-column-menu {
+    color: inhert;
 }
 
 .k-list-scroller
@@ -488,14 +494,17 @@ body .k-datetimepicker .k-select
 .k-fieldselector .k-list .k-item,
 .k-list-optionlabel,
 .k-popup > .k-group-header,
-.k-popup > .k-virtual-wrap > .k-group-header
+.k-popup > .k-virtual-wrap > .k-group-header,
+.k-listbox .k-item,
+.k-item.k-drag-clue
 {
     padding: 1px 5px 1px 5px;
     line-height: 1.8em;
     min-height: 1.8em;
 }
 
-.k-popup .k-list .k-item {
+.k-popup .k-list .k-item,
+.k-listbox .k-item {
     border-width: 1px;
     border-style: solid;
     border-color: transparent;
@@ -544,7 +553,8 @@ body .k-datetimepicker .k-select
 .k-overflow-container .k-state-selected,
 .k-fieldselector .k-list .k-item,
 .k-list-optionlabel.k-state-focused,
-.k-list-optionlabel.k-state-selected
+.k-list-optionlabel.k-state-selected,
+.k-listbox .k-item
 {
     padding: 0 4px;
     border-width: 1px;
@@ -589,6 +599,7 @@ body .k-datetimepicker .k-select
     border-color: #C5C5C5;
     background-color: #FFF;
     min-height: 2.04em;
+    padding-right: (@grid-size + (@grid-size/4 + 2px));
 }
 
 .k-multiselect-wrap .k-input
@@ -617,8 +628,6 @@ body .k-datetimepicker .k-select
     position: relative;
 }
 
-.k-autocomplete .k-loading,
-.k-multiselect .k-loading,
 .k-autocomplete .k-i-loading,
 .k-multiselect .k-i-loading
 {
@@ -627,18 +636,26 @@ body .k-datetimepicker .k-select
     bottom: 4px;
 }
 
-.k-multiselect .k-loading-hidden
-{
-    visibility: hidden;
-}
-
 .k-multiselect-wrap .k-select
 {
     position: absolute;
     top: 0;
     bottom: 0;
     right: 0;
-    padding: .1em .2em;
+    padding: .03em .2em;
+}
+
+/* Inputs */
+.k-autocomplete-clearable,
+.k-multiselect-clearable,
+.k-combobox-clearable {
+    .k-input {
+        padding-right: 1.9em;
+        box-sizing: border-box;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        height: (@input-height + .354em);
+    }
 }
 
 /* Date/Time Pickers */
@@ -651,6 +668,17 @@ body .k-datetimepicker .k-select
 .k-datetimepicker .k-select
 {
     width: 3.8em;
+
+    .k-link-date
+    {
+        margin-left: -.285em;
+    }
+
+    .k-link-time
+    {
+        margin-right: -.285em;
+        margin-left: .428em;
+    }
 }
 
 .k-datetimepicker .k-picker-wrap .k-icon
@@ -750,11 +778,23 @@ span.k-numerictextbox
     vertical-align: middle;
     border-width: 0;
     padding: 0;
+    overflow: hidden;
 }
 
-.k-numerictextbox .k-icon
-{
-    height: 11px;
+.k-numerictextbox {
+    .k-icon {
+        display: block;
+        margin: auto;
+        height: 100%;
+    }
+
+    .k-i-arrow-60-up {
+        top: 2px;
+    }
+
+    .k-i-arrow-60-down {
+        bottom: 2px;
+    }
 }
 
 .k-numeric-wrap .k-input::-webkit-inner-spin-button
@@ -772,18 +812,29 @@ span.k-numerictextbox
 
     .k-selected-color {
         vertical-align: top;
-        line-height: 0;
         display: inline-block;
         height: 2em;
         width: 2em;
+        .k-i-line {
+            font-size: 2em;
+            color: #FF525E;
+            display: inline-block;
+            -moz-transform: scaleX(-1);
+            -o-transform: scaleX(-1);
+            -webkit-transform: scaleX(-1);
+            transform: scaleX(-1);
+            filter: FlipH;
+            -ms-filter: "FlipH";
+        }
+        .k-i-line:before {
+            content: "\e510";
+        }
     }
     .k-tool-icon {
         position: relative;
         top: -2px;
         display: inline-block;
         padding: 3px 3px 2px;
-        font-size: 0;
-        line-height: 0;
         margin-right: 3px;
         margin-left: 2px;
         margin-bottom: 3px;
@@ -804,6 +855,9 @@ span.k-numerictextbox
     }
     .k-select {
         cursor: pointer;
+    }
+    .k-picker-wrap .k-icon {
+        overflow:visible;
     }
 }
 
@@ -858,7 +912,7 @@ span.k-numerictextbox
 {
     position: relative;
     display: inline-block;
-    width: 250px;
+    width: 265px;
     padding-bottom: 5px;
 
     div& {
@@ -873,11 +927,47 @@ span.k-numerictextbox
 
         input.k-color-value {
             font-family: Consolas,"Ubuntu Mono","Lucida Console","Courier New",monospace;
-            padding: .75em .3em .65em 1em;
+            padding: .75em .1em .65em .65em;
             border: 0;
             margin: 0;
-            width: 70%;
+            width: 82%;
         }
+        .k-color-input {
+            background-color: #fff;
+            display: inline-block;
+            width: 84%;
+            text-align: left;
+        }
+        .k-clear-color {
+            padding: .4em;
+            line-height: 0;
+            .k-i-reset-color:before {
+                color: #000;
+                opacity: 0.8;
+            }
+            .k-i-reset-color:hover,
+            .k-i-reset-color:active {
+                opacity: 1;
+            }
+        }
+    }
+
+    .k-clear-color-container .k-clear-color.k-state-focused:active {
+        color: inherit;
+    }
+    .k-clear-color-container .k-clear-color:active {
+        color: #000;
+        opacity: 1;
+    }
+    .k-selected-color .k-clear-color,
+    .k-clear-color-container .k-clear-color {
+        .k-i-reset-color {
+            background-image: none;
+        }
+    }
+
+    .k-clear-color-container {
+        text-align: left;
     }
 
     .k-hsv-rectangle {
@@ -1005,3 +1095,177 @@ span.k-numerictextbox
     }
 }
 
+.k-rtl .k-multiselect-wrap {
+    padding-right: 0;
+    padding-left: (@grid-size + (@grid-size/4 + 2px));
+}
+
+.k-maskedtextbox {
+    position: relative;
+    display: inline-block;
+    background-color: transparent;
+    border-width: 0;
+
+    ::-ms-clear {
+        display: none;
+        width : 0;
+        height: 0;
+    }
+
+    .k-i-warning {
+        display: none;
+        position: absolute;
+        width: 1.9em;
+        right: 0;
+        top: 50%;
+        transform: translateY(-50%);
+    }
+
+    &.k-state-invalid .k-i-warning {
+        display: inline-block;
+    }
+}
+
+.k-dateinput {
+    position: relative;
+    display: inline-block;
+    border-width: 0;
+
+    &.k-widget {
+        background-color: transparent;
+    }
+
+    ::-ms-clear {
+        display: none;
+        width : 0;
+        height: 0;
+    }
+
+    .k-i-warning {
+        display: none;
+        position: absolute;
+        right: 0;
+        top: 50%;
+        transform: translateY(-50%);
+        overflow: visible;
+    }
+    &.k-state-invalid {
+        .k-i-warning {
+            display: inline-block;
+        }
+    }
+}
+
+.k-datepicker,
+.k-timepicker,
+.k-datetimepicker {
+    .k-picker-wrap {
+        .k-i-warning {
+            display: none;
+            position: absolute;
+            right: 0;
+            top: 50%;
+            transform: translateY(-50%);
+            overflow: visible;
+        }
+
+        &.k-state-invalid .k-i-warning {
+            display: inline-block;
+        }
+    }
+}
+
+.k-listbox {
+    box-sizing: border-box;
+    height: 200px;
+
+    &.k-widget {
+        background-color: transparent;
+    }
+
+    .k-list-scroller {
+        height: 100%;
+        overflow: auto;
+        border-width: 1px;
+        border-style: solid;
+        box-sizing: border-box;
+
+        li {
+            cursor: default;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            -khtml-user-select: none;
+            -webkit-user-select: none;
+            -webkit-touch-callout: none;
+        }
+    }
+
+    .k-listbox-toolbar {
+        box-sizing: border-box;
+    }
+
+    &.k-listbox-toolbar-top {
+        padding: 15px 0 1.42857143em;
+
+        .k-listbox-toolbar {
+            margin-top: -15px;
+            margin-bottom: 5px;
+
+            li {
+            display: inline-block;
+
+                + li {
+                    margin-left: 5px;
+                }
+            }
+        }
+    }
+
+    &.k-listbox-toolbar-left {
+        .k-listbox-toolbar {
+            float: left;
+            margin-right: 5px;
+
+            li + li {
+                margin-top: 5px;
+            }
+        }
+
+    }
+
+    &.k-listbox-toolbar-right {
+        .k-listbox-toolbar {
+            float: right;
+            margin-left: 5px;
+
+            li:not(:last-child) {
+                margin-bottom: 5px;
+            }
+        }
+
+    }
+
+    &.k-listbox-toolbar-bottom {
+    padding: 15px 0 1.45em;
+
+        .k-list-scroller {
+            margin-top: -15px;
+        }
+
+        .k-listbox-toolbar {
+            margin-top: 5px;
+
+            li {
+            display: inline-block;
+
+                + li {
+                    margin-left: 5px;
+                }
+            }
+        }
+    }
+
+    .k-ghost {
+        opacity: .5;
+    }
+}

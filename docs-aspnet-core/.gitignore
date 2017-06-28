@@ -1,0 +1,4 @@
+.DS_Store
+Gemfile.lock
+_site
+api/aspnet-mvc

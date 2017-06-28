@@ -27,7 +27,11 @@ function stubTransport(method, data) {
 
 module("data source sync response", {
     setup: function() {
+        jasmine.clock().install();
         setup();
+    },
+    teardown: function() {
+        jasmine.clock().uninstall();
     }
 });
 
@@ -37,6 +41,8 @@ test("sync updates the fields of created model from array server response", func
     var model = new Model();
     dataSource.add(model);
     dataSource.sync();
+
+    jasmine.clock().tick();
 
     equal(model.id, 1);
     equal(model.get("foo"), "bar");
@@ -113,6 +119,8 @@ test("sync updates pristine data if server response is empty object", function()
     model.set("foo", "car");
     dataSource.sync();
 
+    jasmine.clock().tick();
+
     equal(dataSource._pristineData[0].foo, "car");
 });
 
@@ -144,6 +152,8 @@ test("sync updates pristine data for array property", function() {
     model.set("foo", [{bar:1}]);
     dataSource.sync();
 
+    jasmine.clock().tick();
+
     equal(dataSource.data()[0].foo.length, 1);
     equal(dataSource._pristineData[0].foo.length, 1);
 });
@@ -154,6 +164,8 @@ test("sync updates the fields of created model from single object server respons
     var model = new Model();
     dataSource.add(model);
     dataSource.sync();
+
+    jasmine.clock().tick();
 
     equal(model.id, 1);
     equal(model.get("foo"), "foo");
@@ -177,6 +189,8 @@ test("sync merges created model data with server response", function() {
     dataSource.add(model);
     dataSource.sync();
 
+    jasmine.clock().tick();
+
     equal(model.id, 1);
     equal(model.get("foo"), "foo");
 });
@@ -188,6 +202,8 @@ test("sync merges updated model data with server response", function() {
     model.set("foo", "bar");
     dataSource.sync();
 
+    jasmine.clock().tick();
+
     equal(model.id, 1);
     equal(model.get("foo"), "bar");
 });
@@ -197,6 +213,8 @@ test("sync updates created model when response is empty", function() {
 
     var model = dataSource.add({ foo: "foo" });
     dataSource.sync();
+
+    jasmine.clock().tick();
 
     equal(model.get("foo"), "foo");
     equal(model.dirty, false);
@@ -208,6 +226,8 @@ test("sync updates the state of updated model when response is empty", function(
     var model = dataSource.get(1);
     model.set("foo", "bar");
     dataSource.sync();
+
+    jasmine.clock().tick();
 
     equal(model.get("foo"), "bar");
     equal(model.dirty, false);
@@ -225,6 +245,8 @@ test("sync updates all created models with server response", function() {
     var model2 = new Model();
     dataSource.add(model2);
     dataSource.sync();
+
+    jasmine.clock().tick();
 
     equal(model1.id, 1);
     equal(model1.get("foo"), "foo");
@@ -263,6 +285,8 @@ test("sync updates all created models with server response when batch is true an
     dataSource.add(model2);
     dataSource.sync();
 
+    jasmine.clock().tick();
+
     equal(model1.id, 1);
     equal(model1.get("foo"), "bar");
     equal(model2.isNew(), false);
@@ -280,6 +304,8 @@ test("sync updates all created models with server response when batch is true", 
     var model2 = new Model();
     dataSource.add(model2);
     dataSource.sync();
+
+    jasmine.clock().tick();
 
     equal(model1.id, 1);
     equal(model1.get("foo"), "foo");
@@ -311,6 +337,8 @@ test("created models are no longer new after sync", function() {
     var model = new Model();
     dataSource.add(model);
     dataSource.sync();
+
+    jasmine.clock().tick();
 
     equal(model.isNew(), false);
 });
@@ -344,7 +372,11 @@ test("sync clears destroyed models", function() {
     dataSource.remove(model);
     dataSource.sync();
 
+    jasmine.clock().tick();
+
     dataSource.sync();
+
+    jasmine.clock().tick();
 
     equal(dataSource.transport.calls("destroy"), 1);
 });
@@ -364,6 +396,8 @@ test("sync uses the parse method of the reader", function() {
     var model = new Model();
     dataSource.add(model);
     dataSource.sync();
+
+    jasmine.clock().tick();
 
     equal(reader.calls("parse"), 1);
     equal(model.id, 1);
@@ -385,6 +419,8 @@ test("sync uses the data method of the reader", function() {
     dataSource.add(model);
     dataSource.sync();
 
+    jasmine.clock().tick();
+
     equal(reader.calls("parse"), 1);
     equal(model.id, 1);
 });
@@ -400,6 +436,8 @@ test("sync raises requestEnd event", 2, function() {
     });
 
     dataSource.sync();
+
+    jasmine.clock().tick();
 });
 
 
@@ -413,6 +451,8 @@ test("sync raises change event after delete", 1, function() {
     });
 
     dataSource.sync();
+
+    jasmine.clock().tick();
 });
 
 test("sync raises sync event after delete attached through the constructor", 1, function() {
@@ -427,6 +467,8 @@ test("sync raises sync event after delete attached through the constructor", 1, 
     dataSource.remove(dataSource.get(1));
 
     dataSource.sync();
+
+    jasmine.clock().tick();
 });
 
 test("sync raises sync event after delete", 1, function() {
@@ -439,6 +481,8 @@ test("sync raises sync event after delete", 1, function() {
     });
 
     dataSource.sync();
+
+    jasmine.clock().tick();
 });
 
 test("sync raises sync event after update attached through the constructor", 1, function() {
@@ -453,6 +497,8 @@ test("sync raises sync event after update attached through the constructor", 1, 
     dataSource.get(1).set("foo", "bar");
 
     dataSource.sync();
+
+    jasmine.clock().tick();
 });
 
 test("sync raises sync event after update", 1, function() {
@@ -466,6 +512,8 @@ test("sync raises sync event after update", 1, function() {
     });
 
     dataSource.sync();
+
+    jasmine.clock().tick();
 });
 
 test("sync raises sync event after create attached through the constructor", 1, function() {
@@ -480,6 +528,8 @@ test("sync raises sync event after create attached through the constructor", 1, 
     dataSource.add({});
 
     dataSource.sync();
+
+    jasmine.clock().tick();
 });
 
 test("sync raises sync event after create", 1, function() {
@@ -492,6 +542,8 @@ test("sync raises sync event after create", 1, function() {
     });
 
     dataSource.sync();
+
+    jasmine.clock().tick();
 });
 test("sync raises change event after create", 1, function() {
     stubTransport("create");
@@ -504,6 +556,8 @@ test("sync raises change event after create", 1, function() {
     });
 
     dataSource.sync();
+
+    jasmine.clock().tick();
 });
 
 test("sync raises change event after update", 1, function() {
@@ -516,6 +570,8 @@ test("sync raises change event after update", 1, function() {
     });
 
     dataSource.sync();
+
+    jasmine.clock().tick();
 });
 
 test("get returns new models after sync", function() {
@@ -523,6 +579,8 @@ test("get returns new models after sync", function() {
 
     dataSource.add({});
     dataSource.sync();
+
+    jasmine.clock().tick();
 
     equal(dataSource.get(3).get("id"), 3);
 });
@@ -532,6 +590,8 @@ test("cancelChanges does not remove the added models after sync", function() {
 
     dataSource.add({});
     dataSource.sync();
+
+    jasmine.clock().tick();
 
     dataSource.cancelChanges();
 
@@ -543,6 +603,8 @@ test("cancelChanges does not remove the added models after sync", function() {
 
     dataSource.add({});
     dataSource.sync();
+
+    jasmine.clock().tick();
 
     dataSource.cancelChanges();
 
@@ -566,6 +628,8 @@ test("cancelChanges does not revert the updated models after sync when Model has
 
     dataSource.sync();
 
+    jasmine.clock().tick();
+
     dataSource.cancelChanges();
 
     equal(dataSource.get(42).foo, "moo");
@@ -576,6 +640,8 @@ test("cancelChanges does not revert the deleted models after sync", function() {
 
     dataSource.remove(dataSource.get(2));
     dataSource.sync();
+
+    jasmine.clock().tick();
 
     dataSource.cancelChanges();
 
@@ -592,6 +658,8 @@ test("sync response data as array is converted if model types are set", function
     dataSource.add({});
     dataSource.sync();
 
+    jasmine.clock().tick();
+
     strictEqual(dataSource.get(3).get("foo"), 2);
 });
 
@@ -604,6 +672,8 @@ test("sync response data as object is converted if model types are set", functio
 
     dataSource.add({});
     dataSource.sync();
+
+    jasmine.clock().tick();
 
     strictEqual(dataSource.get(3).get("foo"), 2);
 });
@@ -680,6 +750,8 @@ test("error event is raised if custom errors are returned", 1, function() {
     });
 
     dataSource.sync();
+
+    jasmine.clock().tick();
 });
 
 test("sync updates the pristine data with server grouping", 4, function() {
@@ -704,6 +776,9 @@ test("sync updates the pristine data with server grouping", 4, function() {
     dataSource.get(0).set("foo", "moo");
 
     dataSource.sync();
+
+    jasmine.clock().tick();
+
     equal(dataSource._pristineData[0].items[0].foo, "moo");
     equal(dataSource._pristineData[0].items[1].foo, 2);
     equal(dataSource._pristineData[1].items[0].foo, 3);
@@ -732,6 +807,9 @@ test("sync update the pristine data with created items if server grouping", 6, f
     dataSource.add({});
 
     dataSource.sync();
+
+    jasmine.clock().tick();
+
     equal(dataSource.data().length, 3);
 
     equal(dataSource._pristineData[0].items[0].foo, 1);
@@ -850,6 +928,8 @@ test("sync submit promises are resloved on success", 1, function() {
     });
 
     dataSource.sync();
+
+    jasmine.clock().tick();
 });
 
 test("sync submit applies server changes to correct items", 5, function() {
@@ -880,6 +960,8 @@ test("sync submit applies server changes to correct items", 5, function() {
     dataSource.add({});
 
     dataSource.sync();
+
+    jasmine.clock().tick();
 
     ok(!dataSource.hasChanges());
 
@@ -917,6 +999,8 @@ test("sync submit changes are accepted with no server response", 5, function() {
     dataSource.add({});
 
     dataSource.sync();
+
+    jasmine.clock().tick();
 
     ok(!dataSource.hasChanges());
 

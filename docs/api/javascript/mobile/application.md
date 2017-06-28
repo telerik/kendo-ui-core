@@ -2,6 +2,7 @@
 title: Application
 page_title: Configuration and methods for Mobile Application widget
 description: How to hide the browser address bar, set the platform which will force on the application, hide/show a loading animation and more in Kendo UI Mobile Application widget.
+res_type: api
 ---
 
 # kendo.mobile.Application
@@ -134,7 +135,7 @@ You can also set platform variants with it (`"android-light"` or `"android-dark"
 
 If set to true, the application router instance will use the [history pushState API](https://developer.mozilla.org/en-US/docs/Web/Guide/API/DOM/Manipulating_the_browser_history#The_pushState().C2.A0method).
 
-> The history pushState API currently has [limited support accross current browsers](http://caniuse.com/#search=pushstate).
+> The history `pushState` API currently has [limited support across current browsers](http://caniuse.com/#search=pushstate).
 
 ### root `String` *(default: "/")*
 

@@ -21,7 +21,7 @@ No. They are incompatible. The reason for this is that Kendo UI web skins do not
 
 The Hybrid UI stylesheets need the `images` subfolder to load the icon font and the **Back** button mask. Copy them over with your stylesheets.
 
-### I have a button with an onclick event attached, but the event does not fire every time. Why?
+### I have a button with an onClick event attached, but the event does not fire every time. Why?
 
 Due to issues related to simultaneous handling of `mouse` and `touch` events on hybrid devices, the Hybrid UI has strict requirements for events. You can attach your handler to the Button's own `click` event.
 

@@ -2,6 +2,7 @@
 title: FilterMenu
 page_title: Configuration, methods and events of Kendo UI FilterMenu
 description: 'Configuration steps for the FilterMenu widget.'
+res_type: api
 ---
 
 # kendo.ui.FilterMenu
@@ -206,6 +207,18 @@ The text of the information message on the top of the filter menu.
         ],
         dataSource: dataSource
       });
+
+### messages.additionalValue `String` *(default: "Additional value")*
+
+The text of the additional filter value editor.
+
+### messages.additionalOperator `String` *(default: "Additional operator")*
+
+The text of the additional filter operator editor.
+
+### messages.logic `String` *(default: "Filters logic")*
+
+The text of the filter logic editor.
 
 ### messages.isFalse `String` *(default: "is false")*
 

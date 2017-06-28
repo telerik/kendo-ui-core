@@ -307,6 +307,9 @@
         widget.open();
         widget.ul.children(":first").click();
 
-        equal(scope.selectedModels.length, 1);
-    });
+        setTimeout(function() {
+            start();
+            equal(scope.selectedModels.length, 1);
+        }, 100);
+    }, true);
 })();

@@ -2,6 +2,7 @@
 title: Calendar
 page_title: Configuration, methods and events of Kendo UI Calendar
 description: Find out how to successfully configure calendar UI component, how to use methods to get the max value of the calendar and navigate easily.
+res_type: api
 ---
 
 # kendo.ui.Calendar
@@ -55,21 +56,10 @@ Represents the Kendo UI Calendar widget. Inherits from [Widget](/api/javascript/
 Specifies the navigation depth. The following
 settings are available for the **depth** value:
 
-#### *"month"*
-
-shows the days of the month
-
-#### *"year"*
-
-shows the months of the year
-
-#### *"decade"*
-
-shows the years of the decade
-
-#### *"century"*
-
-shows the decades from the century
+* `"month"` - Shows the days of the month.
+* `"year"` - Shows the months of the year.
+* `"decade"` - Shows the years of the decade.
+* `"century"` - Shows the decades from the century.
 
 > Note the option will not be applied if **start** option is *lower* than **depth**. Always set both and **start** and **depth** options.
 
@@ -180,6 +170,38 @@ note that a check for an empty `date` is needed, as the widget can work with a n
         });
     </script>
 
+### messages `Object`
+
+Allows localization of the strings that are used in the widget.
+
+#### Example
+
+    <div id="calendar"></div>
+    <script>
+    $("#calendar").kendoCalendar({
+        "weekNumber": true,
+        "messages": {
+            "weekColumnHeader": "W"
+        }
+     })
+    </script>
+
+### messages.weekColumnHeader `String` *(default: "")*
+
+Allows customization of the week column header text. Set the value to make the widget compliant with web accessibility standards.
+
+#### Example
+
+    <div id="calendar"></div>
+    <script>
+    $("#calendar").kendoCalendar({
+        "weekNumber": true,
+        "messages": {
+            "weekColumnHeader": "W"
+        }
+     })
+    </script>
+
 ### min `Date`*(default: Date(1900, 0, 1))*
 
  Specifies the minimum date, which the calendar can show.
@@ -205,17 +227,62 @@ note that a check for an empty `date` is needed, as the widget can work with a n
 
 #### Example - specify cell template as a string
 
+    <style>
+      .exhibition{
+        background-color: #9DD0E0;
+        color:black;
+      }
+      .party{
+        color: red;
+        background-color: #ccc;
+      }
+    </style>
+    <body>
+
     <div id="calendar"></div>
     <script id="cell-template" type="text/x-kendo-template">
-        <div class="#= data.value < 10 ? 'exhibition' : 'party' #"></div>
+        <div class="#= data.value < 10 ? 'exhibition' : 'party' #">
         #= data.value #
+      </div>
     </script>
     <script>
-        $("#calendar").kendoCalendar({
-            month: {
-               content: $("#cell-template").html()
-            }
-        });
+      $("#calendar").kendoCalendar({
+        month: {
+          content: $("#cell-template").html()
+        }
+      });
+    </script>
+
+### month.weekNumber `String`
+
+ The template to be used for rendering the cells in "week" column. By default, the widget renders the calculated week of the year. 
+ The properties available in the data object are:
+
+ * currentDate - returns the first date of the current week.
+ * weekNumber - calculated week number.
+
+ These properties can be used in the template to make additional calculations. 
+
+#### Example - specify week number template as a string
+
+    <style>
+      .italic{
+        font-style: italic;
+      }
+    </style>
+    <body>
+
+    <div id="calendar"></div>
+    <script id="week-template" type="text/x-kendo-template">
+       <a class="italic">#= data.weekNumber #</a>
+    </script>
+    <script>
+      $("#calendar").kendoCalendar({
+        weekNumber: true,
+        month: {
+          weekNumber: $("#week-template").html()
+        }
+      });
     </script>
 
 ### month.empty `String`
@@ -234,26 +301,28 @@ note that a check for an empty `date` is needed, as the widget can work with a n
         });
     </script>
 
+### weekNumber `Boolean` *(default: false)*
+
+If set to `true` a week of the year will be shown on the left side of the calendar. It is possible to define a template in order to customize what will be displayed.  
+
+#### Example - enable the week of the year option
+
+    <div id="calendar"></div>
+    <script>
+        $("#calendar").kendoCalendar({
+            weekNumber: true
+        });
+    </script>
+
 ### start `String`*(default: "month")*
 
 Specifies the start view.
 The following settings are available for the **start** value:
 
-#### *"month"*
-
-shows the days of the month
-
-#### *"year"*
-
-shows the months of the year
-
-#### *"decade"*
-
-shows the years of the decade
-
-#### *"century"*
-
-shows the decades from the century
+* `"month"` - Shows the days of the month.
+* `"year"` - Shows the months of the year.
+* `"decade"` - Shows the years of the decade.
+* `"century"` - Shows the decades from the century.
 
 #### Example - specify the initial view, which calendar renders
 

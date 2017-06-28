@@ -8,21 +8,29 @@ position: 3
 
 # NPM Packages
 
-[NPM](http://npmjs.com/) (Node Package Manager) is a popular JavaScript package manager for Node.js which eventually got repurposed for the browser context.
+The [Node Package Manager (NPM)](http://npmjs.com/) is a popular JavaScript package manager.
 
-The article assumes that you are familiar with the necessary steps to use browser-based libraries from NPM. Browserify, Webpack and SystemJS are few of the tools that address this. A [sample repository that showcases few possible setups is available in GitHub](https://github.com/telerik/kendo-ui-npm-example).
+The article assumes that you are familiar with the necessary steps to use browser-based libraries from NPM. Some of the tools that address this issue are Browserify, Webpack, and SystemJS.
 
-Kendo UI maintains two NPM packages&mdash;Kendo UI Core and Kendo UI Professional. Official releases, service packs, and internal builds are uploaded to both of them.
+For more information on possible setups, refer to the [sample repository on GitHub](https://github.com/telerik/kendo-ui-npm-example).
+
+## Overview
+
+Kendo UI maintains two NPM packages:
+* [Kendo UI Core](#kendo-ui-core)
+* [Kendo UI Professional](#kendo-ui-professional)
+
+Official releases, service packs, and internal builds are published for each package.
 
 > **Important**
-> * The Kendo UI Professional NPM package is available only for _commercial license holders_. Check out the [list of Kendo UI components and their bundle support]({% slug bundle_supportfor_kendoui_components %}).
-> * The package is not accessible for _trial user accounts_.
+> * The Kendo UI Professional NPM package is available only for commercial license holders. For more information, refer to the [list of Kendo UI components and their bundle support]({% slug bundle_supportfor_kendoui_components %}).
+> * The package is not accessible for trial user accounts.
 
-## Install NPM Packages
+## Kendo UI Core
 
-### Kendo UI Core
+The Kendo UI Core NPM Package is published as [`kendo-ui-core`](https://www.npmjs.com/package/kendo-ui-core) on [http://npmjs.com/](http://npmjs.com/).
 
-The Kendo UI Core Package is published as [`kendo-ui-core`](https://www.npmjs.com/package/kendo-ui-core) in [http://npmjs.com/](http://npmjs.com/).
+The package is accessible without credentials.
 
 ###### Example
 
@@ -30,123 +38,80 @@ The Kendo UI Core Package is published as [`kendo-ui-core`](https://www.npmjs.co
 npm install --save kendo-ui-core
 ```
 
-### Kendo UI Professional
+## Kendo UI Professional
+
+The Kendo UI Professional NPM Package, named `@progress/kendo-ui` is available at the Progress NPM registry.
+
+### Installation
+
+1. Access the Progress NPM registry. To do so, you need an *Telerik account with active commercial license*.
+
+    > * Check the [scoped packages section](https://docs.npmjs.com/misc/scope) in the NPM documentation for more information about npm scopes and how they work.
+    > * Note that the Progress NPM registry is designed to work as a scoped registry. This means that if you set it as a main registry by mistake, the access to the official registry (https://registry.npmjs.org/) will be blocked.
+
+2. Enable the Progress NPM registry on your machine by associating the `@progress` scope with the registry URL. Run the following command in your terminal:
+
+    <pre><code class="language-sh">npm login --registry={{site.registry_url}} --scope=@progress</code></pre>
+
+3. Enter the username (if the username is an email address, use everything before the `@`) and password you use to log in your Telerik account as NPM will ask you for your Telerik account credentials and an email. The login name will be ignored.
+
+4. Verify that the code works. If the command has passed successfully, you should be able to install the Kendo UI NPM packages. Verify this by querying the versions of the package:
+
+    ```sh
+    npm view @progress/kendo-ui versions
+    ```
+
+    The output should be something like this (json):
+
+    ```js
+    [ '2017.1.118' ]
+    ```
+
+    ###### Example
+
+    ```sh
+    npm install --save @progress/kendo-ui
+    ```
 
 > **Important**
 >
-> The Git repository as an NPM endpoint is a _temporary solution_. Kendo UI are working on a private NPM registry setup, which is expected to be available by the end of 2016.
+> The scripts in the NPM package are not usable in the browser. To work around this issue, use a bundler such as [WebPack]({% slug webpacksupport_integration_kendoui %}).
 
-The Kendo UI Professional NPM Package, named `kendo`, is hosted on a private Git repository. To access the package, you need an _active subscription_ for Kendo UI or DevCraft.
+### Legacy Package
 
-```sh
-npm install --save \
-'git+https://my.telerik.identity%40example.com:mypassword@bower.telerik.com/npm-kendo-ui.git'
+The legacy `kendo` package that is available as a GitHub repository and is accessible through `git+https://bower.telerik.com/npm-kendo-ui/npm-kendo.git` will not be updated after May 2017. The repository itself will remain active.
+
+### Authenticating Build Agents
+
+Your credentials can be used to authenticate build agents running on Travis CI, Visual Studio Team Services, and others.
+
+After logging in, the `~/.npmrc` (on Windows - `%HOMEDRIVE%%HOMEPATH%\.npmrc`) will be populated with an authentication token that can be copied to build agents.
+
+> The token will remain valid until you execute `npm logout --scope=@progress` or until your license expires.
+
+#### Travis CI
+
+You can add the following `.travis.yml` configuration to populate your `.npmrc` file:
+
+```yaml
+before_install:
+  - echo "@progress:registry=https://registry.npm.telerik.com/" > .npmrc
+  - echo "//registry.npm.telerik.com/:_authToken=\"$PROGRESS_REGISTRY_TOKEN\"" >> .npmrc
 ```
 
-> **Important**
->
-> The credentials in the URL must be encoded&mdash;for example, `@` becomes `%40`.
+Here `PROGRESS_REGISTRY_TOKEN` is an environment variable set in the [project configuration](https://docs.travis-ci.com/user/environment-variables/#Defining-Variables-in-Repository-Settings) or [as an encrypted variable](https://docs.travis-ci.com/user/environment-variables/#Defining-encrypted-variables-in-.travis.yml).
 
-Optionally, specify a version. The first available is _2016.2.607_ (2016 Q2 SP1).
+#### Visual Studio Team Services
 
-```sh
-npm install --save \
-'git+https://my.telerik.identity%40example.com:mypassword@bower.telerik.com/npm-kendo-ui.git#2016.2.607'
-```
-
-For more information on how to install an NPM package from Git, refer to the [npm install](https://docs.npmjs.com/cli/install) documentation.
-
-## Credentials
-
-### Storage Options
-
-**Option 1** To avoid embedding the credentials in the URL, cache them. The easiest way to do that is to store them as plain text in a [.netrc file](http://www.mavetju.org/unix/netrc.php).
-
-**Option 2** Store your credentials by using the Git credential helpers. For detailed information on how to do this, refer to Stack Overflow and [follow the discussion](http://stackoverflow.com/questions/5343068/is-there-a-way-to-skip-password-typing-when-using-https-github).
-
-### Store on Windows
-
-> **Important**
->
-> Caching your credentials is required if you use the Kendo UI NPM Package in an ASP.NET vNext project.
-
-**Step 1** Create a text file called `_netrc` in your home directory (e.g. `c:\users\jane\_netrc`).
-
-**Step 2** Declare a `HOME` environment variable.
-
-###### Example
-
-```
-C:\> SETX HOME %USERPROFILE%
-```
-
-**Step 3** Add the credentials using the format in the example above.
-
-Git might have problems resolving your home directory if it contains spaces in its path&mdash;for example, `c:\Documents and Settings\jane`). Therefore, update your `%HOME%` environment variable to point to a directory having no spaces in its name.
-
-### Store on Linux, OS X, and Unix-Like Systems
-
-**Step 1** Create a file called `.netrc` in your home directory (`~/.netrc`). Make sure you modify the file permissions to make it readable only to you.
-
-###### Example
-
-```sh
-touch ~/.netrc
-chmod 0600 ~/.netrc
-```
-
-**Step 2** Add your credentials to the `~/.netrc` file using the format from the example below.
-
-###### Example
-
-```
-machine bower.telerik.com
-    login my-telerik.identity@example.com
-    password mysecret
-```
+You can authenticate directly on the build machine or [store the `npmrc` file per-project](https://www.visualstudio.com/en-us/docs/package/npm/npmrc#project-vs-user-configuration).
 
 ## Troubleshooting
 
-### SSL Problem on Windows
+This section provides solutions for common issues you might encounter while installing the Kendo UI NPM packages.
 
-Bower on Windows has troubles installing the repository and shows the following error message:
+### The jQuery Module Is Not Found
 
-```
-fatal: unable to access 'https://bower.telerik.com/npm-kendo-ui.git/': SSL certificate problem: unable to get local issuer certificate
-```
-
-The cause of this issue is that the underlying Git installation is missing the certificate bundle.
-
-**Solution**
-
-To resolve the issue, follow the steps in this [help article](http://blogs.msdn.com/b/phkelley/archive/2014/01/20/adding-a-corporate-or-self-signed-certificate-authority-to-git-exe-s-store.aspx).
-
-> **Important**
-> * The 1.9.5 Git build does not work with the Bower package.
-> * When using the `@` symbol in the URL for accessing the Kendo UI Bower repository&mdash;because of network restrictions or admin rules, for example&mdash;make sure you encode it as `https://firstname.lasname%40domain.com@bower.telerik.com/npm-kendo-ui.git`.
-
-### Restore Fails in ASP.NET Core MVC RC Projects in Visual Studio 2015
-
-The Git client, bundled in Visual Studio, is unable to authenticate with the Kendo UI Bower repository and shows an error messages similar to `ECMDERR Failed to execute "git ls-remote --tags --heads https://bower.telerik.com/npm-kendo-ui.git", exit code of #-532462766`.
-
-**Solution**
-
-Use a Windows port of Git and your stored credentials instead of the built-in client.
-
-1. Set up [stored credentials](#store-credentials-windows).
-1. Install [Git for Windows](https://git-for-windows.github.io/).
-1. Right-click the **NPM** folder under **Dependencies**.
-1. Select **Configure external tools**.
-1. Uncheck `$(DevEnvDir)\Extensions\Microsoft\Web Tools\External\git`.
-1. Add a new entry `C:\Program Files\Git\bin`, or your installation location.
-
-**Figure 1. Add a new entry**
-
-![External Tools](/images/vs2015-external-tools.png)
-
-### Cannot Find 'jQuery' Module
-
-It is possible during the installation process to see the following error:
+During the installation process, you might see the following error:
 
 ```
 Error: Cannot find module 'jquery' from '/Users/bernhard/Documents/JavaScriptDevelopment/kendo-ui-npm-example/javascript-browserify'

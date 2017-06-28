@@ -13,7 +13,7 @@
                     "<kendo-mobile-scroll-view-page>Page 2</kendo-mobile-scroll-view-page>" +
                     "<kendo-mobile-scroll-view-page>Page 3</kendo-mobile-scroll-view-page>" +
                 "</div>" +
-            "</kendo-mobile-view>" + 
+            "</kendo-mobile-view>" +
         "</div>");
     },
     function() {
@@ -45,7 +45,7 @@
         QUnit.fixture.html("<div kendo-mobile-application id='app'>" +
             "<kendo-mobile-view id='home' ng-controller='myController'>" +
                 "<div kendo-mobile-scroll-view id='scrollview' k-options='scrollViewOptions'></div>" +
-            "</kendo-mobile-view>" + 
+            "</kendo-mobile-view>" +
         "</div>");
     },
     function() {
@@ -77,7 +77,7 @@
         QUnit.fixture.html("<div kendo-mobile-application id='app'>" +
             "<kendo-mobile-view id='home' ng-controller='myController'>" +
                 "<div kendo-mobile-scroll-view id='scrollview' k-enable-pager='false' k-options='scrollViewOptions'></div>" +
-            "</kendo-mobile-view>" + 
+            "</kendo-mobile-view>" +
         "</div>");
     },
     function() {
@@ -97,7 +97,7 @@
         QUnit.fixture.html("<div kendo-mobile-application id='app'>" +
             "<kendo-mobile-view id='home' ng-controller='myController'>" +
                 "<div kendo-mobile-scroll-view id='scrollview' k-options='scrollViewOptions'></div>" +
-            "</kendo-mobile-view>" + 
+            "</kendo-mobile-view>" +
         "</div>");
     },
     function() {
@@ -118,7 +118,7 @@
         QUnit.fixture.html("<div kendo-mobile-application id='app'>" +
             "<kendo-mobile-view id='home' ng-controller='myController'>" +
                 "<kendo-mobile-scroll-view id='scrollview' k-options='scrollViewOptions'></kendo-mobile-scroll-view>" +
-            "</kendo-mobile-view>" + 
+            "</kendo-mobile-view>" +
         "</div>");
     },
     function() {

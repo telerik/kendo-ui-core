@@ -2,6 +2,7 @@
 title: Popup
 page_title: Configuration, methods and events of Kendo UI Popup
 description: Easy to follow steps guide how to quickly configure Popup UI widget.
+res_type: api
 ---
 
 # kendo.ui.Popup
@@ -140,12 +141,12 @@ Specifies the element that will be used as an anchor. The widget will open next 
 
 ### appendTo `String|jQuery`*(default: document.body)*
 
-Which element the popup will be appended to.
+Which element the popup will be appended to. The element needs to be relatively positioned.
 
 #### Example - append to different element
 
     <input id="datepicker" />
-    <div id="container"></div>
+    <div id="container" style="position: relative"></div>
 
     <div id="popup">CONTENT</div>
 
@@ -178,7 +179,7 @@ Valid values are: `"fit"`, `"flip"`, `"flip fit"` and `"fit flip"`. "Fit" allows
 
 ### origin `String`*(default: "bottom left")*
 
-Specifies how to position the popup element based on achor point. The value is
+Specifies how to position the popup element based on anchor point. The value is
 space separated "y" plus "x" position.
 
 The available "y" positions are:

@@ -22,7 +22,7 @@ The rendering hardware acceleration that Android 4.0 has indeed performs much be
 
 For more information on this issue, check the [article on performance](P% slug performance_hybridkendoui %).
 
-### I have some inputs with type date and time. When I test on Jelly Bean, I can see date/time pickers in the browser, but they do not work in PhoneGap. Wh?
+### I have some inputs with type date and time. When I test on Jelly Bean, I can see date/time pickers in the browser, but they do not work in PhoneGap. Why?
 
 By default, the Hybrid UI framework does not have integrated date/time pickers as many platforms already support them, excluding iOS 4.x, all Android versions, and now Windows Phone 8. The default browser on Nexus 7 is Chrome, which supports native HTML5 date/time pickers. However, PhoneGap still uses the old WebKit found on previous Android devices that does not support native pickers. To work around this issue, use the input validation, or an external picker library.
 

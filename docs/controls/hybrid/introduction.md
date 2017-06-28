@@ -2,7 +2,7 @@
 title: Overview
 page_title: Overview | Kendo UI Hybrid Components
 description: "Build mobile applications using the Kendo UI hybrid components."
-previous_url: /tutorials/build-apps-with-kendo-ui-mobile
+previous_url: /tutorials/build-apps-with-kendo-ui-mobile, /getting-started/mobile/mvvm
 slug: overview_hybridkendoui
 position: 1
 ---
@@ -13,7 +13,7 @@ This article elaborates on the basics of building applications with [the Hybrid 
 
 The Kendo UI hybrid framework is designed to help developers build mobile app experiences through using HTML and JavaScript that automatically adapt to the native look and feel of different mobile platforms. Developers using Kendo UI hybrid components can focus on the content and functions of their apps and let the Kendo UI framework handle differences between platforms such as iOS and Android.
 
-**Figure 1. Adaptive rendering of Kendo UI hybrid components**
+**Figure 1: Adaptive rendering of Kendo UI hybrid components**
 
 ![Illustration of Kendo UI mobile adaptive rendering](/images/mobile/km-adaptive-rending-illustration.png)
 
@@ -126,7 +126,7 @@ Note that the example uses the `data-role` attribute in your HTML. This communic
 
 When the Application is initialized, this block of HTML is going to be initialized as a Kendo UI hybrid layout. The `data-id` attribute is further defined to give this layout a unique name that can be used by your views.
 
-Next, for completeness, a couple of Kendo UI hybrid widgets are introduced&mdash;Navbar and TabStrip. Note that they are also configured with the simple `data-role` attribute.
+Next, for completeness, a couple of Kendo UI hybrid widgets are introduced&mdash;NavBar and TabStrip. Note that they are also configured with the simple `data-role` attribute.
 
 ### Step 4: Create View
 
@@ -181,7 +181,7 @@ This single line of JavaScript automatically initializes your Kendo UI hybrid ap
 
 For a live example refer to [http://jsbin.com/egowef](http://jsbin.com/egowef "Live example of tutorial code running on jsBin"). Load your page in a browser and see the beginnings of your HTML mobile app. If everything works out properly, your basic Kendo UI hybrid application should look like the image below.
 
-**Figure 2. Basic and properly working Kendo UI hybrid application.**
+**Figure 2: Basic and properly working Kendo UI hybrid application.**
 
 ![Basic Kendo UI mobile app progress](/images/mobile/km-basic-app-1.png)
 
@@ -298,7 +298,7 @@ To do this in Chrome, follow the steps below:
 2. Click on the gear icon in the lower right corner.
 3. In the **Settings** window that opens, check the **Override User Agent** box.
 4. This reveals a dropdown of pre-defined browsers and devices. Select the device you want to imitate or define your own.
-5. To undo this effect, un-check the **Override** box.
+5. To undo this effect, uncheck the **Override** box.
 
 Of course, nothing replaces actual testing on mobile devices. In many cases, the Kendo UI mobile styles look better on devices than in desktop browsers. Make sure you test on an iPhone, Android, BlackBerry, or whatever devices you intend to support before deploying your application or when previewing application styles.
 

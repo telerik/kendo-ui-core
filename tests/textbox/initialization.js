@@ -37,8 +37,8 @@
         ok(downArrow.hasClass("k-link-decrease"));
         equal(downArrow.attr("aria-label"), textbox.options.downArrowText);
 
-        ok(upArrow.children(":first").hasClass("k-icon k-i-arrow-n"));
-        ok(downArrow.children(":first").hasClass("k-icon k-i-arrow-s"));
+        ok(upArrow.children(":first").hasClass("k-icon k-i-arrow-60-up"));
+        ok(downArrow.children(":first").hasClass("k-icon k-i-arrow-60-down"));
         equal(upArrow.children(":first").html(), "");
         equal(downArrow.children(":first").html(), "");
     });
@@ -243,18 +243,6 @@
         var title = input.attr("title");
 
         equal(numerictextbox.wrapper.find(".k-formatted-value").attr("title"), title);
-    });
-
-    test("NumericTextBox copies the input title to the visible input aria-title attr", function() {
-        var textbox = input.attr("title", "foo").kendoNumericTextBox().data("kendoNumericTextBox");
-
-        equal(textbox._text.attr("aria-title"), textbox._text.attr("title"));
-    });
-
-    test("NumericTextBox copies the formatted value to the visible input title attr", function() {
-        var textbox = new NumericTextBox(input, { value: 10 });
-
-        equal(textbox._text.attr("aria-title"), textbox._text.val());
     });
 
     test("NumericTextBox copies the formatted value to the visible input aria-title attr", function() {

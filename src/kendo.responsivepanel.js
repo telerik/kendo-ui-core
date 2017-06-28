@@ -66,6 +66,7 @@ var __meta__ = { // jshint ignore:line
                     "-ms-transform: translateX(0) translateZ(0);" +
                     "transform: translateX(0) translateZ(0);" +
                 "} " +
+                ".k-ie9 .#= guid #.k-rpanel-left { left: 0; } " +
                 ".#= guid #.k-rpanel-top { max-height: none; }" +
             "}",
         _registerBreakpoint: function() {

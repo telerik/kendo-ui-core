@@ -2,6 +2,7 @@
 title: AutoComplete
 page_title: Configuration, methods and events of Kendo UI AutoComplete
 description: How to configure and control methods in Autocomplete UI widget, which events to use to open, close, change, select.
+res_type: api
 ---
 
 # kendo.ui.AutoComplete
@@ -101,6 +102,24 @@ The effect(s) to use when playing the open animation. Multiple effects should be
 
 [Complete list of available animations](/api/javascript/effects/common)
 
+### autoWidth `Boolean`
+
+If set to `true`, the widget automatically adjusts the width of the popup element and does not wrap up the item label.
+
+> Note: Virtualized list doesn't support the auto-width functionality.
+
+#### Example - enable autoWidth
+
+    <input id="autocomplete" style="width: 100px;" />
+    <script>
+    $("#autocomplete").kendoAutoComplete({
+      autoWidth: true,
+      dataSource: {
+        data: ["Short item", "An item with really, really long text"]
+      }
+    });
+    </script>
+
 ### dataSource `Object|Array|kendo.data.DataSource`
 
 The data source of the widget which is used to display suggestions for the current value. Can be a JavaScript object which represents a valid data source configuration, a JavaScript array or an existing [kendo.data.DataSource](/api/javascript/data/datasource)
@@ -114,7 +133,7 @@ If the `dataSource` option is an existing [kendo.data.DataSource](/api/javascrip
 
     <input id="autocomplete" />
     <script>
-    $("#autoComplete").kendoAutoComplete({
+    $("#autocomplete").kendoAutoComplete({
       dataSource: {
         data: ["One", "Two"]
       }
@@ -126,7 +145,7 @@ If the `dataSource` option is an existing [kendo.data.DataSource](/api/javascrip
     <input id="autocomplete" />
     <script>
     var data = ["One", "Two"];
-    $("#autoComplete").kendoAutoComplete({
+    $("#autocomplete").kendoAutoComplete({
       dataSource: data
     });
     </script>
@@ -218,7 +237,7 @@ If set to `true` the widget will not show all items when the text of the search 
         dataTextField: "ProductName",
         filter: "contains",
         minLength: 3,
-        enforceMinLength: false,
+        enforceMinLength: true,
         autoBind: false,
         dataSource: {
             type: "odata",
@@ -240,7 +259,10 @@ all data items which begin with the current widget value are displayed in the su
     <input id="autocomplete" />
     <script>
     $("#autocomplete").kendoAutoComplete({
-      filter: "contains"
+      filter: "contains",
+	  dataSource: {
+        data: ["One", "Two"]
+      }
     });
     </script>
 
@@ -321,7 +343,10 @@ The height of the suggestion popup in pixels. The default value is 200 pixels.
     <input id="autocomplete" />
     <script>
     $("#autocomplete").kendoAutoComplete({
-      height: 500
+      height: 100,
+	  dataSource: {
+        data: ["One", "Two", "Three", "Four", "Five", "Six", "Seven"]
+      }
     });
     </script>
 
@@ -334,7 +359,10 @@ If set to `true` the first suggestion will be automatically highlighted.
     <input id="autocomplete" />
     <script>
     $("#autocomplete").kendoAutoComplete({
-      highlightFirst: false
+      highlightFirst: true,
+	  dataSource: {
+        data: ["One", "Two"]
+      }
     });
     </script>
 
@@ -347,7 +375,10 @@ If set to `false` case-sensitive search will be performed to find suggestions. T
     <input id="autocomplete" />
     <script>
     $("#autocomplete").kendoAutoComplete({
-      ignoreCase: false
+      ignoreCase: false,
+	  dataSource: {
+        data: ["One", "Two"]
+      }
     });
     </script>
 
@@ -362,11 +393,15 @@ The minimum number of characters the user must type before a search is performed
     <input id="autocomplete" />
     <script>
     $("#autocomplete").kendoAutoComplete({
-      minLength: 3
+      minLength: 3,
+	  placeholder: "Type 'one'",
+	  dataSource: {
+        data: ["One", "Two"]
+      }
     });
     </script>
 
-### noDataTemplate `String|Function` *(default: "No results found.")*
+### noDataTemplate `String|Function` *(default: "NO DATA FOUND.")*
 
 The [template](/api/javascript/kendo#methods-template) used to render the "no data" template, which will be displayed if no results are found or the underlying data source is empty.
 The noData template receives the widget itself as a part of the data argument. The template will be evaluated on every widget data bound.
@@ -438,12 +473,17 @@ The character used to separate multiple values. Empty by default.
 
 > As of Q3 2016 the Autocomplete widget supports multiple separators listed in an array. All separators will be replaced with the first array item, which acts as a default separator.
 
+> Using the separator option will still bind the primitive stringe value of the input. In case you need to bind multiple data items, you can consider the [MultiSelect widget]({%slug overview_kendoui_multiselect_widget%}).
+
 #### Example - set separator to allow multiple values
 
     <input id="autocomplete" />
     <script>
     $("#autocomplete").kendoAutoComplete({
-      separator: ", "
+      separator: ", ",
+	  dataSource: {
+        data: ["One", "Two"]
+      }
     });
     </script>
 
@@ -452,7 +492,10 @@ The character used to separate multiple values. Empty by default.
     <input id="autocomplete" />
     <script>
     $("#autocomplete").kendoAutoComplete({
-      separator: [", ", "; "]
+      separator: [", ", "; "],
+	  dataSource: {
+        data: ["One", "Two"]
+      }
     });
     </script>
 
@@ -465,7 +508,10 @@ If set to `true` the widget will automatically use the first suggestion as its v
     <input id="autocomplete" />
     <script>
     $("#autocomplete").kendoAutoComplete({
-      suggest: true
+      suggest: true,
+	  dataSource: {
+        data: ["One", "Two"]
+      }
     });
     </script>
 
@@ -727,12 +773,12 @@ For more information, refer to the [article on virtualization]({% slug virtualiz
 
 ### virtual.valueMapper `Function`*(default: null)*
 
-The `valueMapper` function is **mandatory** for the functionality of the virtualized widget.
-The widget calls the `valueMapper` function when the widget receives a value, that is not fetched from the remote server yet.
-The widget will pass the selected value(s) in the `valueMapper` function. In turn, the valueMapper implementation should return the **respective data item(s) index/indices**.
+> **Important**
+>
+> As of the Kendo UI R3 2016 release, the implementation of the `valueMapper` function is not necessary.
 
 #### Example - AutoComplete with a virtualized list
-
+	// the example is relevant to Kendo UI versions prior to 2016.3.914
     <input id="orders" style="width: 400px" />
     <script>
         $(document).ready(function() {
@@ -820,10 +866,10 @@ An object, which holds the options of the widget.
     $("#autocomplete").kendoAutoComplete();
 
     var autocomplete = $("#autocomplete").data("kendoAutoComplete");
-
     var element = autocomplete.element;
-
     var options = autocomplete.options;
+
+    console.log(options);
     </script>
 
 ### list `jQuery`
@@ -836,8 +882,9 @@ A jQuery object of the drop-down list element.
     $("#autocomplete").kendoAutoComplete();
 
     var autocomplete = $("#autocomplete").data("kendoAutoComplete");
-
     var list = autocomplete.list;
+
+    console.log(list);
     </script>
 
 ### ul `jQuery`
@@ -850,8 +897,9 @@ A jQuery object of the `ul` element, which holds the available options.
     $("#autocomplete").kendoAutoComplete();
 
     var autocomplete = $("#autocomplete").data("kendoAutoComplete");
-
     var ul = autocomplete.ul;
+
+    console.log(ul);
     </script>
 
 ## Methods
@@ -1035,7 +1083,9 @@ You can overcome this behavior trigerring the `change` event manually using [tri
 
     <input id="autocomplete" />
     <script>
-    $("#autocomplete").kendoAutoComplete();
+    $("#autocomplete").kendoAutoComplete({
+        dataSource: [ "John", "Jane" ]
+	});
     var autocomplete = $("#autocomplete").data("kendoAutoComplete");
     autocomplete.search("J");
     autocomplete.select(autocomplete.ul.children().eq(1)); // Selects the second suggestion which is "Jane"
@@ -1168,6 +1218,7 @@ The widget instance which fired the event.
     $("#autocomplete").kendoAutoComplete({
       change: function(e) {
         var value = this.value();
+        console.log(value);
         // Use the value of the widget
       }
     });
@@ -1289,6 +1340,7 @@ The filter descriptor that will be used to filter the data source.
       filtering: function(e) {
           //get filter descriptor
           var filter = e.filter;
+          console.log(filter);
 
           // handle the event
       }
@@ -1302,6 +1354,7 @@ The filter descriptor that will be used to filter the data source.
     function autocomplete_filtering(e) {
       //get filter descriptor
       var filter = e.filter;
+      console.log(filter);
 
       // handle the event
     }
@@ -1396,6 +1449,7 @@ The widget instance which fired the event.
       select: function(e) {
         var item = e.item;
         var text = item.text();
+        console.log(text);
         // Use the selected item or its text
       }
     });

@@ -1,6 +1,7 @@
 ---
 title: CustomFilter
 page_title: Configuration, methods and events of Kendo UI Spreadsheet CustomFilter Instance object
+res_type: api
 ---
 
 # kendo.spreadsheet.CustomFilter
@@ -50,7 +51,7 @@ In addition, `startswith`, `endswith`, `contains`, `doesnotstartwith` and `doesn
         sheet.range("A1:C4").values(values);
 
         var filter = new kendo.spreadsheet.CustomFilter({
-            operator: "or",
+            logic: "or",
             criteria: [
                 { operator: "starstwith", value: "Jo" },
                 { operator: "starstwith", value: "Ja" }

@@ -8,7 +8,7 @@ position: 7
 
 # Grid Localization
 
-Localization is the process of adapting software to meet the requirements of local markets and different languages. Kendo widgets allow you to change the text messages that are displayed to the end user.
+Localization is the process of adapting software to meet the requirements of local markets and different languages. The Kendo UI widgets allow you to change the text messages that are displayed to the end user.
 
 The Grid widget provides a way to localize the user interface by using configuration options.
 
@@ -142,6 +142,7 @@ Find more information in the [`groupable.messages`](/api/javascript/ui/grid#conf
             display: "{0} - {1} of {2} items", //{0} is the index of the first record on the page, {1} - index of the last record on the page, {2} is the total amount of records
             empty: "No items to display",
             page: "Page",
+	    allPages: "All",
             of: "of {0}", //{0} is total amount of pages
             itemsPerPage: "items per page",
             first: "Go to the first page",
@@ -156,16 +157,13 @@ Find more information in the [`messages`](/api/javascript/ui/pager#messages-obje
 
 ## See Also
 
-Other articles on the Kendo UI Grid:
-
 * [Grid JavaScript API Reference](/api/javascript/ui/grid)
 * [Walkthrough of the Grid]({% slug walkthrough_kendoui_grid_widget %})
-* [Editing Functionality]({% slug editing_kendoui_grid_widget %})
+* [Editing Functionality of the Grid]({% slug editing_kendoui_grid_widget %})
 * [Appearance of the Grid]({% slug appearance_kendoui_grid_widget %})
-* [Remote Data Binding]({% slug remote_data_binding_grid %})
-* [Adaptive Rendering]({% slug adaptive_rendering_kendoui_grid_widget %})
-* [Export the Grid to Excel]({% slug exporting_excel_kendoui_grid_widget %})
-* [Export the Grid in PDF]({% slug exporting_pdf_kendoui_grid_widget %})
-* [Print the Grid]({% slug exporting_pdf_kendoui_grid_widget %})
+* [Adaptive Rendering of the Grid]({% slug adaptive_rendering_kendoui_grid_widget %})
+* [Export of the Grid to Excel]({% slug exporting_excel_kendoui_grid_widget %})
+* [Export of the Grid in PDF]({% slug exporting_pdf_kendoui_grid_widget %})
+* [Printing of the Grid]({% slug exporting_pdf_kendoui_grid_widget %})
 
 For how-to examples on the Kendo UI Grid widget, browse its [**How To** documentation folder]({% slug howto_bindto_telerik_backend_services_grid %}).

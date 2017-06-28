@@ -1,5 +1,6 @@
 ---
 title: MobileWidget
+res_type: api
 ---
 
 # kendo.mobile.ui.Widget

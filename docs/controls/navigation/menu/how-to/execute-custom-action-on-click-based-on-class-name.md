@@ -97,8 +97,6 @@ The example below demonstrates how to execute a custom click action based on the
 
 ## See Also
 
-Other articles on the Kendo UI Menu:
-
 * [Menu JavaScript API Reference](/api/javascript/ui/menu)
 * [How to Create Split Button]({% slug howto_createa_split_button_menu %})
 * [How to Use FontAwesome Icons]({% slug howto_use_fontawesome_icons_menu %})

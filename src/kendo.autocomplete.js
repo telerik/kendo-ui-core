@@ -142,6 +142,7 @@ var __meta__ = { // jshint ignore:line
             that._resetFocusItemHandler = $.proxy(that._resetFocusItem, that);
 
             kendo.notify(that);
+            that._toggleCloseVisibility();
         },
 
         options: {
@@ -311,6 +312,7 @@ var __meta__ = { // jshint ignore:line
 
                 that.one("close", $.proxy(that._unifySeparators, that));
             }
+            that._toggleCloseVisibility();
         },
 
         suggest: function (word) {
@@ -388,22 +390,24 @@ var __meta__ = { // jshint ignore:line
 
         _click: function(e) {
             var item = e.item;
-            var element = this.element;
-            var dataItem = this.listView.dataItemByIndex(this.listView.getElementIndex(item));
+            var that = this;
+            var element = that.element;
+            var dataItem = that.listView.dataItemByIndex(that.listView.getElementIndex(item));
 
             e.preventDefault();
 
-            this._active = true;
+            that._active = true;
 
-            if (this.trigger("select", { dataItem: dataItem, item: item })) {
-                this.close();
+            if (that.trigger("select", { dataItem: dataItem, item: item })) {
+                that.close();
                 return;
             }
-            this._oldText = element.val();
-            this._select(item);
-            this._blur();
+            that._oldText = element.val();
+            that._select(item).done(function() {
+                that._blur();
 
-            caret(element, element.val().length);
+                caret(element, element.val().length);
+            });
         },
 
         _clearText: $.noop,
@@ -424,12 +428,14 @@ var __meta__ = { // jshint ignore:line
             var options = that.options;
             var data = that.dataSource.flatView();
             var length = data.length;
+            var groupsLength = that.dataSource._group.length;
             var isActive = that.element[0] === activeElement();
             var action;
 
             that._renderFooter();
             that._renderNoData();
-            that._toggleNoData(!data.length);
+            that._toggleNoData(!length);
+            that._toggleHeader(!!groupsLength && !!length);
 
             that._resizePopup();
 
@@ -513,6 +519,16 @@ var __meta__ = { // jshint ignore:line
             return this;
         },
 
+        _preselect: function(value, text) {
+            this._inputValue(text);
+            this._accessor(value);
+
+            this._old = this.oldText =  this._accessor();
+
+            this.listView.setValue(value);
+            this._placeholder();
+        },
+
         _change: function() {
             var that = this;
             var value = that._unifySeparators().value();
@@ -534,6 +550,7 @@ var __meta__ = { // jshint ignore:line
             }
 
             that.typing = false;
+            that._toggleCloseVisibility();
         },
 
         _accessor: function (value) {
@@ -715,9 +732,11 @@ var __meta__ = { // jshint ignore:line
         },
 
         _select: function(candidate) {
-            this._active = true;
-            this.listView.select(candidate);
-            this._active = false;
+            var that = this;
+            that._active = true;
+            return that.listView.select(candidate).done(function() {
+                that._active = false;
+            });
         },
 
         _loader: function() {
@@ -725,17 +744,26 @@ var __meta__ = { // jshint ignore:line
         },
 
         _clearButton: function() {
-            this._clear = $('<span unselectable="on" class="k-icon k-i-close" title="clear"></span>').attr({
+            this._clear = $('<span unselectable="on" class="k-icon k-clear-value k-i-close" title="clear"></span>').attr({
                 "role": "button",
                 "tabIndex": -1
             });
             if (this.options.clearButton) {
-                this._clear.insertAfter(this.element);
+            	this._clear.insertAfter(this.element);
+            	this.wrapper.addClass("k-autocomplete-clearable");
             }
         },
 
         _toggleHover: function(e) {
             $(e.currentTarget).toggleClass(HOVER, e.type === "mouseenter");
+        },
+
+        _toggleCloseVisibility: function() {
+            if (this.value()) {
+                this._showClear();
+            } else {
+                this._hideClear();
+            }
         },
 
         _wrapper: function () {

@@ -1,6 +1,7 @@
 ---
 title: Image
 page_title: API reference for Kendo UI Drawing API Image
+res_type: api
 ---
 
 # kendo.drawing.Image : kendo.drawing.Element
@@ -28,7 +29,7 @@ Draws a bitmap image with a given source URL into the specified [rectangle](../g
 The source URL of the image.
 
 ### rect `kendo.geometry.Rect`
-A rectange defining the position and size of the image.
+A rectangle defining the position and size of the image.
 
 ## Configuration
 

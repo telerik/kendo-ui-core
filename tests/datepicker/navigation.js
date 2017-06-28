@@ -782,4 +782,22 @@ test("click enter should raise change event if dateview is closed", function() {
     ok(datepicker.dateView.popup.visible());
 });
 
+test("navigate should focus min month in year view", function() {
+    var date = new Date(),
+        openEvent = { type: "keydown", keyCode: keys.DOWN, altKey: true, preventDefault: $.noop },
+        downEvent = { type: "keydown", keyCode: keys.DOWN, altKey: false, preventDefault: $.noop },
+        upEvent = { type: "keydown", keyCode: keys.UP, altKey: false, preventDefault: $.noop };
+
+    var datepicker = input.kendoDatePicker({
+         min: date,
+         start:"year"
+    }).data("kendoDatePicker");
+
+    input.trigger(openEvent);
+    input.trigger(downEvent);
+    input.trigger(upEvent);
+
+    equal(datepicker.dateView.calendar._table.find(".k-state-focused").text(), kendo.toString(date, "MMM"));
+});
+
 })();

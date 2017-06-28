@@ -24,7 +24,7 @@ var onLoadMenu;
 
 function Load() {
     isRaised = true;
-     onLoadMenu = getMenu();
+    onLoadMenu = getMenu();
 }
 
 
@@ -33,15 +33,15 @@ var menu,
 
 module("menu api", {
     setup: function () {
-        QUnit.fixture.append(
+        $("#qunit-fixture").append(
             '    <ul id="menu" class="k-widget k-reset k-header k-menu" style="visibility: hidden; top: -10000px">' +
             '        <li class="k-item k-state-default" style=""><span class="k-link">ASP.NET MVC<span' +
-            '                class="k-icon k-i-arrow-s"></span></span>' +
+            '                class="k-icon k-i-arrow-60-down"></span></span>' +
             '            <ul class="k-group">' +
             '                <li class="k-item k-state-default"><span class="k-link">Grid</span>' +
             '                </li>' +
             '                <li class="k-item k-state-default"><span class="k-link">Menu<span' +
-            '                class="k-icon k-i-arrow-e"></span></span>' +
+            '                class="k-icon k-i-arrow-60-right"></span></span>' +
             '                    <ul class="k-group">' +
             '                        <li class="k-item k-state-default"><span class="k-link">Grid</span>' +
             '                        </li>' +
@@ -55,7 +55,7 @@ module("menu api", {
             '                <li class="k-item k-state-default"><span class="k-link">TabStrip</span></li>' +
             '            </ul>' +
             '        </li><li class="k-item k-state-default"><span class="k-link">Silverlight<span' +
-            '                class="k-icon k-i-arrow-s"></span></span>' +
+            '                class="k-icon k-i-arrow-60-down"></span></span>' +
             '            <ul class="k-group">' +
             '                <li class="k-item k-state-default"><span class="k-link">GridView</span>' +
             '                </li>' +
@@ -67,7 +67,7 @@ module("menu api", {
             '                                                      class="k-link">... and 28 more!</a></li>' +
             '            </ul>' +
             '        </li><li class="k-item k-state-default"><span class="k-link">ASP.NET AJAX<span' +
-            '                class="k-icon k-i-arrow-s"></span></span>' +
+            '                class="k-icon k-i-arrow-60-down"></span></span>' +
             '            <ul class="k-group">' +
             '                <li class="k-item k-state-default"><span class="k-link">Grid</span></li>' +
             '                <li class="k-item k-state-default"><span class="k-link">Editor</span>' +
@@ -77,7 +77,7 @@ module("menu api", {
             '                                                      class="k-link">... and 28 more!</a></li>' +
             '            </ul>' +
             '        </li><li class="k-item k-state-default"><a href="#Menu-4" class="k-link">OpenAccess ORM<span' +
-            '                class="k-icon k-i-arrow-s"></span></a>' +
+            '                class="k-icon k-i-arrow-60-down"></span></a>' +
             '            <ul class="k-group">' +
             '                <li class="k-item">' +
             '                    <div id="Menu-4" class="k-content">' +
@@ -92,7 +92,7 @@ module("menu api", {
             '            </ul>' +
             '        </li><li class="k-item k-state-default"><span class="k-link">Reporting</span></li><li class="k-item k-state-default"><span class="k-link">Sitefinity ASP.NET CMS</span>' +
             '        </li><li style="border-right: 0;" class="k-item k-state-default"><span class="k-link">Other products<span' +
-            '                class="k-icon k-i-arrow-s"></span></span>' +
+            '                class="k-icon k-i-arrow-60-down"></span></span>' +
             '            <ul class="k-group">' +
             '                <li class="k-item k-state-default"><span class="k-link">Web Testing Tools</span>' +
             '                </li>' +
@@ -106,7 +106,7 @@ module("menu api", {
         menu = new kendo.ui.Menu("#menu", { animation: false, select: Select, open: Open, close: Close, hoverDelay: 0, popupCollision: "flip" });
     },
     teardown: function() {
-        kendo.destroy(QUnit.fixture);
+        kendo.destroy($("#qunit-fixture"));
     }
 });
 
@@ -123,30 +123,101 @@ test('click method should set handled flag and select event is only fired once',
     ok(selected == 1);
 });
 
-asyncTest('hovering root item opens it and raises open event', function() {
+test('hovering root item opens it and raises open event', function() {
+    jasmine.clock().install();
     var item = getRootItem(1).parent();
 
     menu._mouseenter({ currentTarget: item[0], delegateTarget: menu.element[0] });
 
-    setTimeout(function () {
-        ok(isOpenRaised);
-        start();
-    }, 1);
+    jasmine.clock().tick();
+    ok(isOpenRaised);
+    jasmine.clock().uninstall();
 });
 
-asyncTest('leaving root item closes it and raises close event', 1, function() {
+test('leaving root item closes it and raises close event', 1, function() {
+    jasmine.clock().install();
     var item = getRootItem(1).parent();
 
     menu._mouseenter({ currentTarget: item[0], delegateTarget: menu.element[0] });
 
     menu.bind("close", function() {
         ok(true);
-        start();
     })
 
-    setTimeout(function () {
-        menu._mouseleave({ currentTarget: item[0] });
-    }, 1);
+    jasmine.clock().tick();
+    menu._mouseleave({ currentTarget: item[0] });
+
+    jasmine.clock().tick();
+    jasmine.clock().uninstall();
+});
+
+test('leaving item root outside viewport left direction viewport closes it and raises close event', 1, function() {
+    jasmine.clock().install();
+    var item = getRootItem(1).parent();
+
+    menu._mouseenter({ currentTarget: item[0], delegateTarget: menu.element[0] });
+
+    menu.bind("close", function() {
+        ok(true);
+    })
+
+    jasmine.clock().tick();
+    menu._mouseleave({ currentTarget: item[0], target: item.find("span.k-link")[0], clientX: -1});
+
+    jasmine.clock().tick();
+    jasmine.clock().uninstall();
+
+});
+
+test('leaving item root outside viewport top direction closes it and raises close event', 1, function() {
+    jasmine.clock().install();
+    var item = getRootItem(1).parent();
+
+    menu._mouseenter({ currentTarget: item[0], delegateTarget: menu.element[0] });
+
+    menu.bind("close", function() {
+        ok(true);
+    })
+
+    jasmine.clock().tick();
+    menu._mouseleave({ currentTarget: item[0], target: item.find("span.k-link")[0], clientY: -1});
+
+    jasmine.clock().tick();
+    jasmine.clock().uninstall();
+});
+
+test('leaving item root outside viewport bottom direction closes it and raises close event', 1, function() {
+    jasmine.clock().install();
+    var item = getRootItem(1).parent();
+
+    menu._mouseenter({ currentTarget: item[0], delegateTarget: menu.element[0] });
+
+    menu.bind("close", function() {
+        ok(true);
+    })
+
+    jasmine.clock().tick();
+    menu._mouseleave({ currentTarget: item[0], target: item.find("span.k-link")[0], clientY: $(window).height() + 2});
+
+    jasmine.clock().tick();
+    jasmine.clock().uninstall();
+});
+
+test('leaving item root outside viewport right direction closes it and raises close event', 1, function() {
+    jasmine.clock().install();
+    var item = getRootItem(1).parent();
+
+    menu._mouseenter({ currentTarget: item[0], delegateTarget: menu.element[0] });
+
+    menu.bind("close", function() {
+        ok(true);
+    })
+
+    jasmine.clock().tick();
+    menu._mouseleave({ currentTarget: item[0], target: item.find("span.k-link")[0], clientX: $(window).width() + 2});
+
+    jasmine.clock().tick();
+    jasmine.clock().uninstall();
 });
 
 test('clicking should raise select event', function() {
@@ -368,6 +439,72 @@ test("Adding dynamic contentUrl element renders contents on root and inner level
         } finally {
             menu.destroy();
         }
+    });
+
+    test('overflow menu - setOptions reinitialize overflow wrapper', function() {
+        var m = new kendo.ui.Menu("<div />");
+
+        m.setOptions({ scrollable: true, orientation: "horizontal" });
+        ok(m._overflowWrapper().is(".horizontal"));
+
+        m.setOptions({ scrollable: true, orientation: "vertical" });
+        ok(m._overflowWrapper().is(".vertical"));
+
+        m.destroy();
+    });
+
+    test('overflow menu - setOptions reattach events', 2, function() {
+        var m = new kendo.ui.Menu("<div />");
+
+        mockFunc(kendo.ui.Menu.fn, "_detachMenuEventsHandlers", function() { ok(true); });
+        mockFunc(kendo.ui.Menu.fn, "_attachMenuEventsHandlers", function() { ok(true); });
+
+        m.setOptions({ scrollable: true, orientation: "horizontal" });
+
+        removeMocksIn(kendo.ui.Menu.fn);
+
+        m.destroy();
+    });
+
+    asyncTest('overflow menu - opened popups should be inserted after the menu', function() {
+        menu.setOptions({ scrollable: true, orientation: "horizontal" });
+        var item = getRootItem(6).parent();
+
+        menu.open(item);
+
+        setTimeout(function () {
+            equal(menu.element.siblings(".k-animation-container").length, 1);
+            start();
+        }, 1);
+    });
+
+    asyncTest('overflow menu - opened popups should contains scroll buttons', function() {
+        menu.setOptions({ scrollable: true, orientation: "horizontal" });
+        var item = getRootItem(6).parent();
+
+        menu.open(item);
+
+        setTimeout(function () {
+            equal(menu.element.siblings(".k-menu-scroll-button").length, 2);
+            start();
+        }, 1);
+    });
+
+    asyncTest('overflow menu - turning off scrollable should return back the opened UL groups to their parent LI', function() {
+        menu.setOptions({ scrollable: true, orientation: "horizontal" });
+        var item = getRootItem(6).parent();
+
+        menu.open(item);
+
+        setTimeout(function () {
+            menu.close(item);
+            setTimeout(function () {
+                menu.setOptions({ scrollable: false });
+                notOk(menu._overflowWrapper());
+                equal(menu.element.siblings(".k-animation-container,.k-menu-scroll-button").length, 0);
+                start();
+            }, 1);
+        }, 1);
     });
 
 })();

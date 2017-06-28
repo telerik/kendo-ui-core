@@ -2,6 +2,7 @@
 title: ProgressBar
 page_title: Configuration, fields, methods and events of Kendo UI ProgressBar
 description: How to configure and control Kendo UI ProgressBar widget
+res_type: api
 ---
 
 # kendo.ui.ProgressBar
@@ -148,8 +149,6 @@ Specifies if the progress status will be shown.
 ### type `String` *(default: "value")*
 
 Specifies the type of the **ProgressBar**. The supported types are **value**, **percent** and **chunk**.
-
-> **Important** The **chunk** progress type is not supported in Internet Explorer 7.
 
 #### Example - set the type of the ProgressBar
 

@@ -2,6 +2,7 @@
 title: ButtonGroup
 page_title: Configuration, methods and events of Kendo UI Mobile ButtonGroup
 description: Learn how to define the initially selected button, select a button and get the currently selected button.
+res_type: api
 ---
 
 # kendo.mobile.ui.ButtonGroup

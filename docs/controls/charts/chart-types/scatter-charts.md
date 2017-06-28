@@ -60,7 +60,7 @@ The example below demonstrates how to create a Scatter Line Chart.
     });
 
 
-**Figure 1. A sample Scatter Line Chart.**
+**Figure 1: A sample Scatter Line Chart.**
 
  ![Scatter Line Chart](/controls/charts/chart-types/chart-scatter-line.png)
 
@@ -79,7 +79,7 @@ The default line type is solid. However, dash styles are also available through 
       dashType: "dot"
   }]
 
-**Figure 2. Dash line types**
+**Figure 2: Dash line types**
 
 ![Dash Type](/controls/charts/chart-types/chart-dash-types.png)
 
@@ -87,7 +87,7 @@ The default line type is solid. However, dash styles are also available through 
 
 To remove the connecting lines, specify `"scatter"` instead of `"scatterLine"`, which results in the Scatter Chart below.
 
-**Figure 3. A Scatter Chart with removed connecting lines**
+**Figure 3: A Scatter Chart with removed connecting lines**
 
 ![Scatter Chart](/controls/charts/chart-types/chart-scatter.png)
 

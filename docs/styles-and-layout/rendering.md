@@ -4,7 +4,7 @@ page_title: Rendering Modes for Data Visualization | Kendo UI Styles and Appeara
 description: "Learn how to configure the rendering modes for data visualization in Kendo UI."
 previous_url: /dataviz/rendering
 slug: renderingmodesfor_datavisualization_kendouistyling
-position: 4
+position: 5
 ---
 
 # Rendering Modes for Data Visualization
@@ -12,12 +12,11 @@ position: 4
 The [Kendo UI Gauges, Charts, Barcodes, Diagrams, and Maps](http://demos.telerik.com/kendo-ui/) widgets support the following rendering targets:
 
 * SVG
-* VML
 * Canvas
 
 ## Mode Selection
 
-The rendering mode is automatically chosen based on availability. The order is SVG > VML > Canvas for all widgets rendering data visualization except for the Barcode and QRCode. These components do not require interactivity and default to Canvas rendering. You can set the preferred rendering mode in the [`renderAs`](/api/dataviz/chart#configuration-renderAs) option.
+The rendering mode is automatically chosen based on availability. The order is SVG > Canvas for all widgets rendering data visualization except for the Barcode and QRCode. These components do not require interactivity and default to Canvas rendering. You can set the preferred rendering mode in the [`renderAs`](/api/dataviz/chart#configuration-renderAs) option.
 
 The example below demonstrates how to configure the preferred rendering mode to Canvas by using the `renderAs` option.
 
@@ -39,7 +38,6 @@ The example below demonstrates how to configure the preferred rendering mode to 
 The rendering modules are available as separate files:
 
 * `kendo.dataviz.svg(.min).js`
-* `kendo.dataviz.vml(.min).js`
 * `kendo.dataviz.canvas(.min).js`
 
 You must include at least one, the rest are optional.
@@ -58,11 +56,6 @@ Some rendering modes impose limitations on the available features. Below is a sh
 
 * None
 
-### VML
-
-* Gradient overlays are not supported for Kendo UI Donut Charts.
-* Reduced performance, especially in Internet Explorer 8 version.
-
 ### Canvas
 
 * Dashed lines are not supported in the Internet Explorer.
@@ -75,6 +68,7 @@ Other articles on styling, appearance, and rendering of Kendo UI widgets:
 * [Responsive Web Design]({% slug responsivewebdesign_integration_kendoui %})
 * [Web Font Icons]({% slug webfonticons_kendoui_desktopwidgets %})
 * [How to Change Themes on the Client]({% slug howto_changethemes_ontheclient_styleskendoui %})
-* [ThemeBuilder Overview]({% slug themebuilder_overview_kendouistyling %})
+* [Sass ThemeBuilder Overview]({% slug sassbasedthemes_kendoui %}#sass-theme-builder)
+* [Less ThemeBuilder Overview]({% slug themesandappearnce_kendoui_desktopwidgets %}#less-theme-builder)
 * [Troubleshooting]({% slug commonissues_troubleshooting_kendouistyling %})
-* [Themes and Appearance of the Kendo UI Hybrid Widgets](/controls/hybrid/styling)
+* [Themes and Appearance of the Kendo UI Hybrid Widgets]({% slug forms_hybridkendoui %})

@@ -3,6 +3,7 @@ title: kendo
 page_title: API Reference for methods and properties in Kendo UI Framework
 description: Examples and detailed explanation of Kendo UI methods and properties.
 previous_url: /api/introduction
+res_type: api
 ---
 
 # kendo
@@ -187,12 +188,26 @@ The array that will be converted to an ObservableArray.
 ### confirm
 Opens a [Kendo UI Confirm](/api/javascript/ui/confirm) popup. Similar to the native [window.confirm()](https://developer.mozilla.org/en-US/docs/Web/API/Window/confirm) method.
 
-`kendo.confirm` method is designed by following the Promise pattern. That means that it returns you a jQuery Deferred object that resolves to:
+#### Example - Open a Kendo UI Confirm on the page
+
+    <script>
+        kendo.confirm("Confirm text");
+    </script>
+
+#### Parameters
+
+##### text `String`
+
+The text to be shown in the Confirm popup.
+
+#### Returns
+
+`Promise` a [jQuery promise instance](http://api.jquery.com/Types/#Promise), which can be used for callbacks, or passed to [jQuery.when](http://api.jquery.com/jQuery.when/). The jQuery Deferred object resolves to:
 
 * `done()` - when user has pressed the "OK" button;
 * `fail()` - when user has pressed the "Cancel" button.
 
-#### Example - Open a Kendo UI Confirm on the page
+#### Example
 
     <script>
         kendo.confirm("Confirm text")
@@ -203,12 +218,6 @@ Opens a [Kendo UI Confirm](/api/javascript/ui/confirm) popup. Similar to the nat
                 console.log("User rejected");
             });
     </script>
-
-#### Parameters
-
-##### text `String`
-
-The text to be shown in the Confirm popup.
 
 ### culture
 
@@ -419,21 +428,10 @@ If you pass `true` then this function will return `undefined` rather than throwi
 ### prompt
 Opens a [Kendo UI Prompt](/api/javascript/ui/prompt) popup. Similar to the native [window.prompt()](https://developer.mozilla.org/en-US/docs/Web/API/Window/prompt) method.
 
-`kendo.prompt` method is designed by following the Promise pattern. That means that it returns you a jQuery Deferred object that resolves to:
-
-* `done()` - when user has pressed the "OK" button and the `data` passed to the callback is the inputted text;
-* `fail()` - when user has pressed the "Cancel" button and the `data` passed to the callback is the inputted text.
-
 #### Example - Open a Kendo UI Prompt on the page
 
     <script>
-        kendo.prompt("Prompt text", "Default input text")
-            .done(function(data){
-                console.log("User accepted with text: " + data);
-            })
-            .fail(function(data){
-                console.log("User rejected with text: " + data);
-            });
+        kendo.prompt("Prompt text", "Default input text");
     </script>
 
 #### Parameters
@@ -447,6 +445,25 @@ The text to be shown in the Prompt popup.
 ##### defaultValue `String`
 
 The default value that will be shown in the popup's input.
+
+#### Returns
+
+`Promise` a [jQuery promise instance](http://api.jquery.com/Types/#Promise), which can be used for callbacks, or passed to [jQuery.when](http://api.jquery.com/jQuery.when/). The jQuery Deferred object resolves to:
+
+* `done()` - when user has pressed the "OK" button and the `data` passed to the callback is the inputted text;
+* `fail()` - when user has pressed the "Cancel" button and the `data` passed to the callback is the inputted text.
+
+#### Example
+
+    <script>
+        kendo.prompt("Prompt text", "Default input text")
+            .done(function(data){
+                console.log("User accepted with text: " + data);
+            })
+            .fail(function(data){
+                console.log("User rejected with text: " + data);
+            });
+    </script>
 
 ### proxyModelSetters
 
@@ -726,6 +743,10 @@ The function to be throttled.
 
 The amount of time that needs to pass before a subsequent function call is made.
 
+#### Returns
+
+`Function` the throttled function
+
 ### touchScroller
 
 Enables kinetic scrolling on touch devices
@@ -926,7 +947,7 @@ Returns true if the browser supports overflow-scrolling CSS property (currently 
 Returns the current device's Device to Pixel Ratio. Doesn't work in Windows Phone 8, where IE10 doesn't support it.
 
 ##### placeholder `Boolean`
-Retruns true if the browser supports input placeholders.
+Returns `true` if the browser supports input placeholders.
 
 ##### zoomLevel `Number` *(default: 1)*
 Returns the current zoom level on a mobile browser (returns 1 on desktop).
@@ -997,7 +1018,7 @@ Returns true if running in a Cordova/PhoneGap/Telerik AppBuilder application.
 
 ### support.browser `Object`
 Convenience replacement for the now deprecated jQuery.browser. It returns an object with the browser identifier initialized as a boolean property and a version.
-The identifiers are identical to jQuery ones, e.g. "webkit", "opera", "msie" and "mozilla". In addition WebKit browsers will return their name e.g. "safari" and "chrome".
+The identifiers are identical to jQuery ones, e.g. "webkit", "opera", "msie", "edge" and "mozilla". In addition WebKit browsers will return their name e.g. "safari" and "chrome".
 
     <script>
         console.log(kendo.stringify(kendo.support.browser));

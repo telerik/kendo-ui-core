@@ -31,8 +31,8 @@ JSZip is part of the Kendo UI distribution and is also available via the Kendo U
 ```
 
 > **Important**
->
-> If you do not include JSZip in the page, Kendo UI raises a runtime exception.
+> * If you do not include JSZip in the page, Kendo UI will raise a runtime exception.
+> * The Excel export feature supports JSZip 2.* versions. JSZip 3.* versions are not currently supported because of a breaking change in the JSZip library.
 
 ### Compatibility with Other Libraries
 
@@ -61,7 +61,9 @@ For detailed information on how to save files, refer to the [article about savin
 To create an Excel document (workbook), follow the steps:
 
 **Step 1** Instantiate a [`kendo.ooxml.Workbook`](/api/javascript/ooxml/workbook). The workbook has an array of sheets. Sheets have rows and rows have cells.
+
 **Step 2** Call the [`toDataURL`](/api/javascript/ooxml/workbook#methods-toDataURL) method of the workbook to get the output Excel file as a data URI.
+
 **Step 3** Call the [`kendo.saveAs`](/api/javascript/kendo#methods-saveAs) method to save the Excel file on the client machine.
 
 The example below demonstrates how to create an Excel workbook.

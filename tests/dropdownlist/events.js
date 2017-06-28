@@ -405,6 +405,42 @@
         equal(current.html(), "foo");
     });
 
+    test("shouldn't trigger select when value has not changed (TAB)", 0, function() {
+        var dropdownlist = new DropDownList(input, {
+            dataSource: [
+                { id: 1, name: "foo" },
+                { id: 2, name: "bar" }
+            ],
+            dataValueField: "id",
+            dataTextField: "name"
+        });
+
+        dropdownlist.bind("select", function() {
+            ok(false);
+        });
+
+        dropdownlist.wrapper.focus();
+        dropdownlist.wrapper.press(kendo.keys.TAB);
+    });
+
+    test("shouldn't trigger select when value has not changed (BLUR)", 0, function() {
+        var dropdownlist = new DropDownList(input, {
+            dataSource: [
+                { id: 1, name: "foo" },
+                { id: 2, name: "bar" }
+            ],
+            dataValueField: "id",
+            dataTextField: "name"
+        });
+
+        dropdownlist.bind("select", function() {
+            ok(false);
+        });
+
+        dropdownlist.wrapper.focus();
+        dropdownlist.wrapper.focusout();
+    });
+
     test("DropDownList triggers cascade on initial load", 1, function() {
         input.kendoDropDownList({
             dataSource: ["foo", "bar"],
@@ -983,5 +1019,32 @@
                         type: "keydown",
                         keyCode: kendo.keys.HOME
                     });
+    });
+
+    test("widget doesn't triggers select on blur when nothing has changed", 0, function() {
+        var dropdownlist = new DropDownList(input, {
+            index: 2,
+            dataSource: ["foo", "foo1", "foo2"],
+            select: function() {
+                ok(false);
+            }
+        });
+
+        dropdownlist.wrapper.focusin().focusout();
+    });
+
+    test("widget shouldn't trigger select on blur", 0, function() {
+        var dropdownlist = new DropDownList(input, {
+            dataSource: ["foo", "foo1", "foo2"],
+            highlightFirst: true,
+            select: function(e) {
+                ok(false);
+            }
+        });
+
+        dropdownlist.value("");
+        dropdownlist.wrapper.focusin();
+        dropdownlist.open();
+        dropdownlist.wrapper.focusout();
     });
 })();

@@ -26,7 +26,6 @@
         root = $("<div />").html(html).appendTo(QUnit.fixture);
         location.hash = '';
         app = new kendo.mobile.Application(root);
-        popOver = root.find("#foo").data("kendoMobilePopOver");
     }
 
     function hidden(selector) {
@@ -37,80 +36,113 @@
         ok(root.find(selector).is(":visible"));
     }
 
+    function getPopOver() {
+        return root.find("#foo").data("kendoMobilePopOver");
+    }
 
     module("popover", {
         teardown: function() {
             app.destroy();
+            popOver = null;
         }
     });
 
-    test("detaches itself to the app container", 1, function(){
-        setup(fixture);
-        equal(root.find("#foo").length, 1);
-        app.destroy();
+    asyncTest("detaches itself to the app container", 1, function(){
+        setup(fixture);    
+        $(function() {
+            start();
+            equal(root.find("#foo").length, 1);
+            app.destroy();
+        });
     });
 
-    test("is hidden initially", 1, function(){
-        setup(fixture);
-        hidden("#foo");
+    asyncTest("is hidden initially", 1, function(){
+        setup(fixture);        
+        $(function(){
+            start();
+            hidden("#foo");
+        });    
     });
 
-    test("is visible when open", 1, function(){
-        setup(fixture);
-        popOver.openFor(root.find("#fooAnchor"));
-        visible("#foo");
+    asyncTest("is visible when open", 1, function(){
+        setup(fixture);        
+        $(function(){
+            start();
+            popOver = getPopOver();            
+            popOver.openFor(root.find("#fooAnchor"));
+            visible("#foo");
+        });        
     });
 
-    test("destroy removes the overlay", 1, function(){
+    asyncTest("destroy removes the overlay", 1, function(){
         setup(fixture);
-        popOver.destroy();
-        ok(!popOver.popup.overlay.parent().length);
+        $(function(){
+            start();
+            popOver = getPopOver();
+            popOver.destroy();
+            ok(!popOver.popup.overlay.parent().length);
+        });    
+
     });
 
-    test("when in ModalView, its popup is used as parent", 1, function(){
+    asyncTest("when in ModalView, its popup is used as parent", 1, function(){
         setup(fixture2);
-        popOver.openFor(root.find("#fooAnchor2"));
+        $(function(){
+            start();
+            popOver = getPopOver();
+            popOver.openFor(root.find("#fooAnchor2"));
 
-        ok(popOver.popup.overlay.parent()[0] == $("#modalview").data("kendoMobileModalView").wrapper[0]);
-        app.destroy();
+            ok(popOver.popup.overlay.parent()[0] == $("#modalview").data("kendoMobileModalView").wrapper[0]);
+            app.destroy();
+        });
     });
 
     asyncTest("provides target in event handler", 1, function(){
         setup(fixture);
-        popOver.bind("open", function(e) {
+        $(function(){
+            popOver = getPopOver();
+            popOver.bind("open", function(e) {
+                start();
+                equal(e.target[0], $("#fooAnchor")[0]);
+            });
+            tap(root.find("#fooAnchor"));
+        });
+    });
+
+    asyncTest("is closed when close is called", 1, function(){
+        setup(fixture);
+        $(function(){
             start();
-            equal(e.target[0], $("#fooAnchor")[0]);
-        });
-        tap(root.find("#fooAnchor"));
-    });
+            kendo.effects.disable();
+            popOver = getPopOver();
+            popOver.openFor(root.find("#fooAnchor"));
 
-    test("is closed when close is called", 1, function(){
-        setup(fixture);
-        kendo.effects.disable();
-        popOver.openFor(root.find("#fooAnchor"));
+            popOver.bind("close", function() {
+                ok(false);
+            });
 
-        popOver.bind("close", function() {
-            ok(false);
-        });
-
-        popOver.close();
-        hidden("#foo");
-        kendo.effects.enable();
-    });
-
-    test("triggers close and closes when blurred", 2, function(){
-        setup(fixture);
-        kendo.effects.disable();
-
-        popOver.openFor(root.find("#fooAnchor"));
-
-        popOver.bind("close", function() {
-            ok(true);
+            popOver.close();
             hidden("#foo");
+            kendo.effects.enable();
         });
+    });
 
-        popOver.popup.popup._resize({});
+    asyncTest("triggers close and closes when blurred", 2, function(){
+        setup(fixture);
+        $(function(){
+            start();
+            kendo.effects.disable();
+            popOver = getPopOver();
+            popOver.openFor(root.find("#fooAnchor"));
 
-        kendo.effects.enable();
+            popOver.bind("close", function() {
+                ok(true);
+                hidden("#foo");
+            });
+
+            popOver.popup.popup._resize({});
+
+            kendo.effects.enable();
+        });
     });
 })();

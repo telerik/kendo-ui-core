@@ -9,13 +9,15 @@ position: 2
 
 # Data Attributes
 
-In addition to the [jQuery plug-in widget initialization]({% slug initialize_widgets_using_jquery_plugins_installation %}), each Kendo UI control may be initialized and configured via data attributes. The hybrid Application, the [Single-Page-Application (SPA) `view` component]({% slug viewclass_kendoui_singlepageapplication %}), and the [Model View View-Model (MVVM) `kendo.bind` method]({% slug overview_mvvmpattern_kendoui %}) use the declarative approach to automatically instantiate multiple widgets in an existing DOM element.
+In addition to the [jQuery plug-in widget initialization]({% slug initialize_widgets_using_jquery_plugins_installation %}), each Kendo UI control may be initialized and configured through the `data` attributes.
+
+The Kendo UI Hybrid Application, the [Single-Page-Application (SPA) `view` component]({% slug viewclass_kendoui_singlepageapplication %}), and the [Model View View-Model (MVVM) `kendo.bind` method]({% slug overview_mvvmpattern_kendoui %}) use the declarative approach to automatically instantiate multiple widgets in an existing DOM element.
 
 ## Overview
 
-Data attribute initialization is convenient when there are a lot of Kendo UI widgets in the page, since the widget configuration is declared within the target element.
+Initialization from `data` attributes is convenient when there are a lot of Kendo UI widgets on the page because the widget configuration is declared within the target element.
 
-The example below demonstrates how to initialize a Kendo UI widget by using data attributes.
+The following example demonstrates how to initialize a Kendo UI widget by using the `data` attributes.
 
 ###### Example
 
@@ -31,19 +33,21 @@ The `kendo.bind($("#container"))` statement finds all elements that have the `ro
 
 > **Important**
 >
-> The value of the `role` data attribute is the name of the widget in lower case&mdash;`"autocomplete"`, `"dropdownlist"`, etc.
+> The value of the `role` data attribute is the lower-case name of the widget&mdash;`"autocomplete"`, `"dropdownlist"`, and so on.
 
 ## Getting Started
 
+You can initialize widgets from `data` attributes in hybrid applications and within given elements, and then also configure the `data-*` options.
+
 ### Initialize in Hybrid Application
 
-By default, `kendo.bind` initializes only widgets from the `kendo.ui` namespace, excluding the hybrid widgets to avoid ambiguity. This behavior can be changed by passing additional namespaces as parameters. Note that the hybrid Kendo UI [Application](/controls/hybrid/application) initializes widgets from the `kendo.mobile.ui` namespace first. This means that an element with `data-role="listview"` is automatically initialized as a hybrid ListView widget in the hybrid Application context.
+By default, to avoid ambiguity, `kendo.bind` initializes only widgets from the `kendo.ui` namespace, excluding the hybrid widgets. This behavior can be changed by passing additional namespaces as parameters. Note that the [hybrid Kendo UI Application](/controls/hybrid/application) initializes widgets from the `kendo.mobile.ui` namespace first. This means that an element with `data-role="listview"` is automatically initialized as a hybrid ListView widget in the hybrid Application context.
 
 > **Important**
 >
 > The `data-role` attribute also accepts a full widget class name (with its namespace) as a value.
 
-The example below demonstrates how to instantiate a Kendo UI ListView in a hybrid Application by using the full class path of the widget.
+The following example demonstrates how to instantiate a Kendo UI ListView in a hybrid Application by using the full class path of the widget.
 
 ###### Example
 
@@ -55,9 +59,9 @@ The example below demonstrates how to instantiate a Kendo UI ListView in a hybri
     var app = new kendo.mobile.Application();
     </script>
 
-### Initialize in Given Element
+### Initialize in Given Elements
 
-The example below demonstrates how to instantiate Kendo UI widgets in a given element.
+The following example demonstrates how to instantiate Kendo UI widgets in a given element.
 
 ###### Example
 
@@ -71,17 +75,17 @@ The example below demonstrates how to instantiate Kendo UI widgets in a given el
 
 ### Set data-* Options
 
-Each widget configuration option can be set with a data attribute of the target element. Add the `"data-"` prefix to the name of the configuration option and specify the option value, e.g. `data-delay="100"`.
+Each configuration option can be set with the `data` attribute of the target element. Add the `"data-"` prefix to the name of the configuration option and specify the option value&mdash;for example, `data-delay="100"`.
 
 > **Important**
 >
 > The camelCase options are set through dash-separated attributes. For example, the [`ignoreCase`](/api/javascript/ui/autocomplete#configuration-ignoreCase) option of the AutoComplete is set through `data-ignore-case`.
 
-Options which start with `data` do not require an additional `"data"` in the attribute name. For example, the `dataTextField` option is set via the `data-text-field` attribute and `dataSource` is set via the `data-source` attribute.
+Options which start with `data` do not require an additional `"data"` in the attribute name. For example, the `dataTextField` option is set through the `data-text-field` attribute and `dataSource` is set through the `data-source` attribute.
 
-Complex configuration options are set as JavaScript object literals&mdash;`data-source="{data: [{name: 'John Doe'},{name: 'Jane Doe'}]}"`.
+Complex configuration options are set as JavaScript object literals&mdash;for example, `data-source="{data: [{name: 'John Doe'},{name: 'Jane Doe'}]}"`.
 
-The example below demonstrates how to configure Kendo UI widgets with data attributes.
+The following example demonstrates how to configure Kendo UI widgets with data attributes.
 
 ###### Example
 
@@ -102,7 +106,7 @@ You are able to subscribe to Kendo UI widget events with data attributes. The va
 
 ### Subscribe to Widget Events
 
-The example below demonstrates how to subscribe to a Kendo UI widget event via a data attribute.
+The following example demonstrates how to subscribe to a Kendo UI widget event through a `data` attribute.
 
 ###### Example
 
@@ -117,11 +121,11 @@ The example below demonstrates how to subscribe to a Kendo UI widget event via a
         kendo.bind($("#container"));
     </script>
 
-Event handlers can also be set to member functions. For example, an event data attribute can be set to `foo.bar`, which is resolved as the `bar` method of the `foo` object available in the global scope.
+You can also set event handlers to member functions. For example, an event `data` attribute can be set to `foo.bar`, which is resolved as the `bar` method of the `foo` object available in the global scope.
 
 ### Use Member Function as Event Handler
 
-The example below demonstrates how to use a member function as an event handler.
+The following example demonstrates how to use a member function as an event handler.
 
 ###### Example
 
@@ -139,11 +143,11 @@ The example below demonstrates how to use a member function as an event handler.
 
 ## DataSource
 
-The data source of data-bound Kendo UI widgets can also be set via a data attribute. The value can be a JavaScript object, array, or a variable available in the global scope.
+The Data Source of data-bound Kendo UI widgets can also be set through a data attribute. The value can be a JavaScript object, array, or a variable available in the global scope.
 
 ### Set DataSource to Objects
 
-The example below demonstrates how to set the data source of a Kendo UI widget to a JavaScript object.
+The following example demonstrates how to set the data source of a Kendo UI widget to a JavaScript object.
 
 ###### Example
 
@@ -156,7 +160,7 @@ The example below demonstrates how to set the data source of a Kendo UI widget t
 
 ### Set DataSource to Arrays
 
-The example below demonstrates how to set the data source of a Kendo UI widget to a JavaScript array.
+The following example demonstrates how to set the data source of a Kendo UI widget to a JavaScript array.
 
 ###### Example
 
@@ -169,7 +173,7 @@ The example below demonstrates how to set the data source of a Kendo UI widget t
 
 ### Set DataSource to Variables
 
-The example below demonstrates how to set the data source of a Kendo UI widget to a variable available in the global scope.
+The following example demonstrates how to set the data source of a Kendo UI widget to a variable available in the global scope.
 
 ###### Example
 
@@ -185,10 +189,10 @@ The example below demonstrates how to set the data source of a Kendo UI widget t
 
 ## Templates
 
-Template configuration can be set via data attributes as well. The attribute value will be resolved as the `id` attribute of a `script` element with the
+Template configuration can be set through data attributes as well. The attribute value is resolved as the `id` attribute of a `script` element with the
 template contents.
 
-The example below demonstrates how to set the template of a Kendo UI widget.
+The following example demonstrates how to set the template of a Kendo UI widget.
 
 ###### Example
 

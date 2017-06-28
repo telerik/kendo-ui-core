@@ -14,6 +14,8 @@ var __meta__ = { // jshint ignore:line
 (function($, undefined) {
     var kendo = window.kendo,
         ui = kendo.ui,
+        outerWidth = kendo._outerWidth,
+        outerHeight = kendo._outerHeight,
         Widget = ui.Widget,
         keys = kendo.keys,
         support = kendo.support,
@@ -25,7 +27,9 @@ var __meta__ = { // jshint ignore:line
         FOCUSED = "k-state-focused",
         HOVER = "k-state-hover",
         LOADING = "k-i-loading",
-        HIDDENCLASS = "k-loading-hidden",
+        HIDDENCLASS = "k-hidden",
+        GROUPHEADER = ".k-group-header",
+        LABELIDPART = "_label",
         OPEN = "open",
         CLOSE = "close",
         CASCADE = "cascade",
@@ -38,7 +42,8 @@ var __meta__ = { // jshint ignore:line
         proxy = $.proxy,
         isArray = $.isArray,
         browser = support.browser,
-        isIE8 = browser.msie && browser.version < 9,
+        isIE = browser.msie,
+        isIE8 = isIE && browser.version < 9,
         quotRegExp = /"/g,
         alternativeNames = {
             "ComboBox": "DropDownList",
@@ -222,10 +227,10 @@ var __meta__ = { // jshint ignore:line
         },
 
         _clearValue: function() {
-            this.listView.value([]);
             this._clearText();
             this._accessor("");
-            if(this._isFilterEnabled()) {
+            this.listView.value([]);
+            if(this._isFilterEnabled() && !this.options.enforceMinLength) {
                 this._filter({word: "", open: false});
             }
             this._change();
@@ -248,6 +253,7 @@ var __meta__ = { // jshint ignore:line
             var options = that.options;
             var dataSource = that.dataSource;
             var expression = extend({}, dataSource.filter() || {});
+            var resetPageSettings = filter || (expression.filters && expression.filters.length && !filter);
 
             var removed = removeFiltersForField(expression, options.dataTextField);
 
@@ -255,24 +261,37 @@ var __meta__ = { // jshint ignore:line
                 return;
             }
 
-            expression = {
-                filters: expression.filters || [],
+            var newExpression = {
+                filters: [],
                 logic: "and"
             };
 
-            if (filter) {
-                expression.filters.push(filter);
+            if (isValidFilterExpr(filter)) {
+                newExpression.filters.push(filter);
+            }
+
+            if (isValidFilterExpr(expression)) {
+                if (newExpression.logic === expression.logic) {
+                    newExpression.filters = newExpression.filters.concat(expression.filters);
+                } else {
+                    newExpression.filters.push(expression);
+                }
             }
 
             if (that._cascading) {
-                this.listView.setDSFilter(expression);
+                this.listView.setDSFilter(newExpression);
             }
 
-            if (!force) {
-                dataSource.filter(expression);
-            } else {
-                dataSource.read(dataSource._mergeState({ filter: expression }));
-            }
+            var dataSourceState = extend({}, {
+                page: resetPageSettings ? 1 : dataSource.page(),
+                pageSize: resetPageSettings ? dataSource.options.pageSize : dataSource.pageSize(),
+                sort: dataSource.sort(),
+                filter: dataSource.filter(),
+                group: dataSource.group(),
+                aggregate: dataSource.aggregate()
+            }, { filter: newExpression });
+
+            dataSource[force ? "read" : "query"](dataSource._mergeState(dataSourceState));
         },
 
         _angularElement: function(element, action) {
@@ -316,6 +335,11 @@ var __meta__ = { // jshint ignore:line
 
         _toggleNoData: function(show) {
             $(this.noData).toggle(show);
+        },
+
+        _toggleHeader: function(show) {
+            var groupHeader = this.listView.content.prev(GROUPHEADER);
+            groupHeader.toggle(show);
         },
 
         _footer: function() {
@@ -529,6 +553,38 @@ var __meta__ = { // jshint ignore:line
             element.attr("aria-owns", id);
 
             that.ul.attr("aria-live", !that._isFilterEnabled() ? "off" : "polite");
+
+            that._ariaLabel();
+        },
+
+        _ariaLabel: function(){
+            var that = this;
+            var focusedElm = that._focused;
+            var inputElm = that.element;
+            var inputId = inputElm.attr("id");
+            var labelElm = $("label[for='" + inputId  + "']");
+            var ariaLabel = inputElm.attr("aria-label");
+            var ariaLabelledBy = inputElm.attr("aria-labelledby");
+
+            if(focusedElm === inputElm){
+                return;
+            }
+
+            if(ariaLabel){
+                focusedElm.attr("aria-label", ariaLabel);
+            } else if (ariaLabelledBy){
+                focusedElm.attr("aria-labelledby", ariaLabelledBy);
+            } else if (labelElm.length){
+                var labelId = labelElm.attr("id") || that._generateLabelId(labelElm, inputId);
+                focusedElm.attr("aria-labelledby", labelId);
+            }
+        },
+
+        _generateLabelId: function(label, inputId){
+            var labelId = inputId + LABELIDPART;
+            label.attr("id", labelId);
+
+            return labelId;
         },
 
         _blur: function() {
@@ -607,11 +663,7 @@ var __meta__ = { // jshint ignore:line
             siblings.each(function() {
                 var element = $(this);
 
-                if (element.hasClass("k-list-filter")) {
-                    offsetHeight += element.children().outerHeight();
-                } else {
-                    offsetHeight += element.outerHeight();
-                }
+                offsetHeight += outerHeight(element, true);
             });
 
             return offsetHeight;
@@ -624,6 +676,7 @@ var __meta__ = { // jshint ignore:line
             var visible = that.popup.visible();
             var offsetTop;
             var popups;
+            var footerHeight;
 
             if (length || that.options.noDataTemplate) {
                 popups = list.add(list.parent(".k-animation-container")).show();
@@ -639,7 +692,8 @@ var __meta__ = { // jshint ignore:line
 
                 if (height !== "auto") {
                     offsetTop = that._offsetHeight();
-                    height = height - offsetTop - $(that.footer).outerHeight();
+                    footerHeight = outerHeight($(that.footer)) || 0;
+                    height = height - offsetTop - footerHeight;
                 }
 
                 that.listView.content.height(height);
@@ -663,14 +717,14 @@ var __meta__ = { // jshint ignore:line
             }
 
             computedStyle = window.getComputedStyle ? window.getComputedStyle(wrapper[0], null) : 0;
-            computedWidth = parseFloat(computedStyle  && computedStyle.width) || wrapper.outerWidth();
+            computedWidth = parseFloat(computedStyle  && computedStyle.width) || outerWidth(wrapper);
 
             if (computedStyle && browser.msie) { // getComputedStyle returns different box in IE.
                 computedWidth += parseFloat(computedStyle.paddingLeft) + parseFloat(computedStyle.paddingRight) + parseFloat(computedStyle.borderLeftWidth) + parseFloat(computedStyle.borderRightWidth);
             }
 
             if (list.css("box-sizing") !== "border-box") {
-                width = computedWidth - (list.outerWidth() - list.width());
+                width = computedWidth - (outerWidth(list) - list.width());
             } else {
                 width = computedWidth;
             }
@@ -707,25 +761,23 @@ var __meta__ = { // jshint ignore:line
 
         _focusItem: function() {
             var listView = this.listView;
-            var focusedItem = listView.focus();
-            var index = listView.select();
+            var noFocusedItem = !listView.focus();
+            var index = last(listView.select());
 
-            index = index[index.length - 1];
-
-            if (index === undefined && this.options.highlightFirst && !focusedItem) {
+            if (index === undefined && this.options.highlightFirst && noFocusedItem) {
                 index = 0;
             }
 
             if (index !== undefined) {
                 listView.focus(index);
-            } else {
+            } else if (noFocusedItem) {
                 listView.scrollToIndex(0);
             }
         },
 
         _calculateGroupPadding: function(height) {
             var li = this.ul.children(".k-first:first");
-            var groupHeader = this.listView.content.prev(".k-group-header");
+            var groupHeader = this.listView.content.prev(GROUPHEADER);
             var padding = 0;
 
             if (groupHeader[0] && groupHeader[0].style.display !== "none") {
@@ -768,7 +820,8 @@ var __meta__ = { // jshint ignore:line
                 open: proxy(that._openHandler, that),
                 close: proxy(that._closeHandler, that),
                 animation: that.options.animation,
-                isRtl: support.isRtl(that.wrapper)
+                isRtl: support.isRtl(that.wrapper),
+                autosize :that.options.autoWidth
             }));
         },
 
@@ -904,10 +957,10 @@ var __meta__ = { // jshint ignore:line
             if (candidate === undefined) {
                 return that.selectedIndex;
             } else {
-                that._select(candidate);
-
-                that._old = that._accessor();
-                that._oldIndex = that.selectedIndex;
+                return that._select(candidate).done(function() {
+                    that._old = that._accessor();
+                    that._oldIndex = that.selectedIndex;
+                });
             }
         },
 
@@ -974,14 +1027,18 @@ var __meta__ = { // jshint ignore:line
         _hideBusy: function () {
             var that = this;
             clearTimeout(that._busy);
-            that._arrow.removeClass(LOADING);
+            that._arrowIcon.removeClass(LOADING);
             that._focused.attr("aria-busy", false);
             that._busy = null;
             that._showClear();
         },
 
-        _showBusy: function () {
+        _showBusy: function (e) {
             var that = this;
+
+            if(e.isDefaultPrevented()){
+                return;
+            }
 
             that._request = true;
 
@@ -990,9 +1047,9 @@ var __meta__ = { // jshint ignore:line
             }
 
             that._busy = setTimeout(function () {
-                if (that._arrow) { //destroyed after request start
+                if (that._arrowIcon) { //destroyed after request start
                     that._focused.attr("aria-busy", true);
-                    that._arrow.addClass(LOADING);
+                    that._arrowIcon.addClass(LOADING);
                     that._hideClear();
                 }
             }, 100);
@@ -1107,11 +1164,11 @@ var __meta__ = { // jshint ignore:line
                         return;
                     }
 
-                    that._select(that._focus(), true);
-
-                    if (!that.popup.visible()) {
-                        that._blur();
-                    }
+                    that._select(that._focus(), true).done(function() {
+                        if (!that.popup.visible()) {
+                            that._blur();
+                        }
+                    });
                 }
 
                 e.preventDefault();
@@ -1132,8 +1189,13 @@ var __meta__ = { // jshint ignore:line
 
                 if (current) {
                     dataItem = listView.dataItemByIndex(listView.getElementIndex(current));
+                    var shouldTrigger = true;
 
-                    if (that.trigger(SELECT, { dataItem: dataItem, item: current })) {
+                    if(dataItem){
+                        shouldTrigger = that._value(dataItem) !==  List.unifyType(that.value(), typeof that._value(dataItem));
+                    }
+
+                    if (shouldTrigger && that.trigger(SELECT, { dataItem: dataItem, item: current })) {
                         return;
                     }
 
@@ -1292,11 +1354,12 @@ var __meta__ = { // jshint ignore:line
             if (cascade) {
                 parent = that._parentWidget();
 
-                that._cascadeHandlerProxy = proxy(that._cascadeHandler, that);
-
                 if (!parent) {
                     return;
                 }
+
+                that._cascadeHandlerProxy = proxy(that._cascadeHandler, that);
+                that._cascadeFilterRequests = [];
 
                 options.autoBind = false;
 
@@ -1327,13 +1390,14 @@ var __meta__ = { // jshint ignore:line
         _toggleCascadeOnFocus: function() {
             var that = this;
             var parent = that._parentWidget();
+            var focusout = isIE ? "blur" : "focusout";
 
             parent._focused.add(parent.filterInput).bind("focus", function() {
                 parent.unbind(CASCADE, that._cascadeHandlerProxy);
                 parent.first(CHANGE, that._cascadeHandlerProxy);
             });
 
-            parent._focused.add(parent.filterInput).bind("focusout", function() {
+            parent._focused.add(parent.filterInput).bind(focusout, function() {
                 parent.unbind(CHANGE, that._cascadeHandlerProxy);
                 parent.first(CASCADE, that._cascadeHandlerProxy);
             });
@@ -1356,7 +1420,9 @@ var __meta__ = { // jshint ignore:line
             var that = this;
             var value = that._accessor() || that._selectedValue;
 
-            that._selectedValue = null;
+            if (!that._cascadeFilterRequests.length) {
+                that._selectedValue = null;
+            }
 
             if (that._userTriggered) {
                 that._clearSelection(parent, true);
@@ -1391,12 +1457,25 @@ var __meta__ = { // jshint ignore:line
                 expressions = that.dataSource.filter() || {};
                 removeFiltersForField(expressions, valueField);
 
-                var handler = function() {
-                    that.unbind("dataBound", handler);
+                var handler = function () {
+                    var currentHandler = that._cascadeFilterRequests.shift();
+                    if (currentHandler) {
+                        that.unbind('dataBound', currentHandler);
+                    }
+
+                    currentHandler = that._cascadeFilterRequests[0];
+                    if (currentHandler) {
+                        that.first('dataBound', currentHandler);
+                    }
+
                     that._cascadeChange(parent);
                 };
 
-                that.first("dataBound", handler);
+                that._cascadeFilterRequests.push(handler);
+
+                if (that._cascadeFilterRequests.length === 1) {
+                    that.first('dataBound', handler);
+                }
 
                 that._cascading = true;
                 that._filterSource({
@@ -1425,6 +1504,10 @@ var __meta__ = { // jshint ignore:line
                         .on("click" + STATIC_LIST_NS, "li", proxy(this._click, this))
                         .on("mouseenter" + STATIC_LIST_NS, "li", function() { $(this).addClass(HOVER); })
                         .on("mouseleave" + STATIC_LIST_NS, "li", function() { $(this).removeClass(HOVER); });
+
+            if (this.options.selectable === "multiple") {
+                this.element.attr("aria-multiselectable", true);
+            }
 
             this.content = this.element.wrap("<div class='k-list-scroller' unselectable='on'></div>").parent();
             this.header = this.content.before('<div class="k-group-header" style="display:none"></div>').prev();
@@ -1622,7 +1705,7 @@ var __meta__ = { // jshint ignore:line
         },
 
         focusLast: function() {
-            this.focus(this.element[0].children[this.element[0].children.length - 1]);
+            this.focus(last(this.element[0].children));
         },
 
         focus: function(candidate) {
@@ -1634,14 +1717,12 @@ var __meta__ = { // jshint ignore:line
                 return that._current;
             }
 
-            candidate = that._get(candidate);
-            candidate = candidate[candidate.length - 1];
+            candidate = last(that._get(candidate));
             candidate = $(this.element[0].children[candidate]);
 
             if (that._current) {
                 that._current
                     .removeClass(FOCUSED)
-                    .removeAttr("aria-selected")
                     .removeAttr(ID);
 
                 that.trigger("deactivate");
@@ -1688,18 +1769,19 @@ var __meta__ = { // jshint ignore:line
                 indices = [];
             }
 
+            var deferred = $.Deferred().resolve();
             var filtered = that.isFiltered();
 
             if (filtered && !singleSelection && that._deselectFiltered(indices)) {
-                return;
+                return deferred;
             }
 
-            if (singleSelection && !filtered && $.inArray(indices[indices.length - 1], selectedIndices) !== -1) {
+            if (singleSelection && !filtered && $.inArray(last(indices), selectedIndices) !== -1) {
                 if (that._dataItems.length && that._view.length) {
                     that._dataItems = [that._view[selectedIndices[0]].item];
                 }
 
-                return;
+                return deferred;
             }
 
             result = that._deselect(indices);
@@ -1709,7 +1791,7 @@ var __meta__ = { // jshint ignore:line
 
             if (indices.length) {
                 if (singleSelection) {
-                    indices = [indices[indices.length - 1]];
+                    indices = [last(indices)];
                 }
 
                 added = that._select(indices);
@@ -1722,6 +1804,8 @@ var __meta__ = { // jshint ignore:line
                     removed: removed
                 });
             }
+
+            return deferred;
         },
 
         removeAt: function(position) {
@@ -1849,7 +1933,7 @@ var __meta__ = { // jshint ignore:line
 
             if (selectable === true || !indices.length) {
                 for (; i < selectedIndices.length; i++) {
-                    $(children[selectedIndices[i]]).removeClass("k-state-selected");
+                    $(children[selectedIndices[i]]).removeClass("k-state-selected").attr("aria-selected", false);
 
                     removed.push({
                         position: i,
@@ -1872,7 +1956,7 @@ var __meta__ = { // jshint ignore:line
                         selectedIndex = selectedIndices[j];
 
                         if (selectedIndex === index) {
-                            $(children[selectedIndex]).removeClass("k-state-selected");
+                            $(children[selectedIndex]).removeClass("k-state-selected").attr("aria-selected", false);
 
                             removed.push({
                                 position: j + removedIndices,
@@ -1935,7 +2019,7 @@ var __meta__ = { // jshint ignore:line
             var added = [];
             var idx = 0;
 
-            if (indices[indices.length - 1] !== -1) {
+            if (last(indices) !== -1) {
                 that.focus(indices);
             }
 
@@ -2115,7 +2199,7 @@ var __meta__ = { // jshint ignore:line
                 item += ' k-state-selected';
             }
 
-            item += '"' + (selected ? ' aria-selected="true"' : "") + ' data-offset-index="' + context.index + '">';
+            item += '" aria-selected="' + (selected ? "true" : "false") + '" data-offset-index="' + context.index + '">';
 
             item += this.templates.template(dataItem);
 
@@ -2255,6 +2339,10 @@ var __meta__ = { // jshint ignore:line
 
     ui.plugin(StaticList);
 
+    function last(list) {
+        return list[list.length - 1];
+    }
+
     function getSelectedOption(select) {
         var index = select.selectedIndex;
         return index > -1 ? select.options[index] : {};
@@ -2293,6 +2381,18 @@ var __meta__ = { // jshint ignore:line
             changed: changed,
             unchanged: unchanged
         };
+    }
+
+    function isValidFilterExpr(expression) {
+        if (!expression || $.isEmptyObject(expression)) {
+            return false;
+        }
+
+        if (expression.filters && !expression.filters.length) {
+            return false;
+        }
+
+        return true;
     }
 
     function removeFiltersForField(expression, field) {

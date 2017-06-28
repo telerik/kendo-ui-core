@@ -1,31 +1,40 @@
+/* globals updateInput, createInput */
 (function() {
     var MaskedTextBox = kendo.ui.MaskedTextBox,
         input;
 
     module("kendo.ui.MaskedTextBox initialization", {
         setup: function() {
-            input = $("<input />").appendTo(QUnit.fixture);
-
-            $.fn.pressKey = function(key, eventName, options) {
-                if (typeof key === "string") {
-                    key = key.charCodeAt(0);
-                }
-
-                if ($.isPlainObject(eventName)) {
-                    options = eventName;
-                    eventName = "keypress";
-                }
-
-                if (!eventName) {
-                    eventName = "keypress";
-                }
-
-                return this.trigger($.extend({ type: eventName, keyCode: key, which: key }, options) );
-            }
+            input = createInput();
         },
         teardown: function() {
             kendo.destroy(QUnit.fixture);
         }
+    });
+
+    test("MaskedTextBox Should render wrapper", function() {
+        var maskedtextbox = new MaskedTextBox(input);
+        var wrapper = maskedtextbox.wrapper;
+        equal(wrapper.length, 1);
+        ok(wrapper.hasClass("k-maskedtextbox"));
+    });
+
+    test("MaskedTextBox Should apply input css to wrapper", function() {
+        var cssText = "color: red;";
+        input[0].style.cssText = cssText;
+        var maskedtextbox = new MaskedTextBox(input);
+        var wrapper = maskedtextbox.wrapper;
+
+        equal(wrapper[0].style.cssText, cssText);
+    });
+
+    test("MaskedTextBox Should apply input classes to wrapper", function() {
+        var className = "test-class";
+        input[0].className = className;
+        var maskedtextbox = new MaskedTextBox(input);
+        var wrapper = maskedtextbox.wrapper;
+
+        ok(wrapper.hasClass(className));
     });
 
     test("MaskedTextBox attaches a maskedtextbox object to a target", function() {
@@ -55,9 +64,7 @@
             }
         });
 
-        input.focus();
-        kendo.caret(input[0], 0);
-        input.pressKey("+");
+        updateInput(maskedtextbox, "+");
 
         equal(input.val(), "+-_");
     });
@@ -170,7 +177,7 @@
             value: "9999"
         });
 
-        ok(input.hasClass("k-state-disabled"));
+        ok(maskedtextbox.wrapper.hasClass("k-state-disabled"));
     });
 
     test("MaskedTextBox gets value from input element", function() {

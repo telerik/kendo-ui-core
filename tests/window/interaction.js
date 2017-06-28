@@ -41,7 +41,7 @@
             actions: [ "refresh" ]
         });
 
-        dialog.wrapper.find(".k-i-refresh").trigger("dblclick");
+        dialog.wrapper.find(".k-i-reload").trigger("dblclick");
 
         ok(!dialog.options.isMaximized);
     });

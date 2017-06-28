@@ -2,6 +2,7 @@
 title: Node
 page_title: API Reference for Kendo Data Node
 description: Documentation how to get started with the kendo.data.Node, the extended type of kendo.data.Model. Find examples and guidelines for methods, fields and events of kendo.data.Node.
+res_type: api
 ---
 
 # kendo.data.Node

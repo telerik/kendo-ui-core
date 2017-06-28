@@ -77,7 +77,7 @@ This approach allows you to initialize multiple Button widgets at once, but with
 
 ### Enable or Disable Buttons
 
-The business logic of an application often requires a certain button to be temporarily disabled or enabled. Kendo UI Button can be configured to be initially disabled via its `enable` property or by initializing it from an element, which has a `disabled="disabled"` HTML attribute. The Button can also be disabled or enabled at any time with Javascript by using its `enable()` method with a Boolean argument.
+The business logic of an application often requires a certain button to be temporarily disabled or enabled. Kendo UI Button can be configured to be initially disabled via its `enable` property or by initializing it from an element, which has a `disabled="disabled"` HTML attribute. The Button can also be disabled or enabled at any time with JavaScript by using its `enable()` method with a Boolean argument.
 
 The example below demonstrates how to enable and disable the Button.
 
@@ -347,7 +347,7 @@ The example below demonstrates how to create a Floating Action Button.
 
 Other articles on Kendo UI Button:
 
-* [Overview of the ASP.NET MVC HtmlHelper Extension for the Button Widget]({% slug overview_buttonhelper_aspnetmvc %})
+* [Overview of the ASP.NET MVC HtmlHelper Extension for the Button Widget](http://docs.telerik.com/aspnet-mvc/helpers/button/overview)
 * [Overview of the Button JSP Tag]({% slug overview_button_uiforjsp %})
 * [Overview of the Button PHP Class]({% slug overview_button_uiforphp %})
 * [Button JavaScript API Reference](/api/javascript/ui/button)

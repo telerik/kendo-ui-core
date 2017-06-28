@@ -11,7 +11,7 @@ This article is contributed by Kjartan Valur.
 
 The `$kWindow` is a service which dynamically creates Kendo UI windows with a separate template and controller. The complete source code is available in the [kjartanvalur/angular-kendo-window](https://github.com/kjartanvalur/angular-kendo-window) GitHub repository.
 
-The example below demonstrates how to open a modal Kendo UI Window.
+The following example demonstrates how to open a modal Kendo UI Window.
 
 ###### Example
 
@@ -87,8 +87,6 @@ The example below demonstrates how to open a modal Kendo UI Window.
     <button type="button" ng-click="cancel()">Cancel</button>
 
 ## See Also
-
-Other articles and how-to examples on AngularJS directives and Kendo UI:
 
 * [AngularJS Integration Overview]({% slug angularjs_integration_directives %})
 * [Global Events]({% slug global_events_angularjs_directives %})

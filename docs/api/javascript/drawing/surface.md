@@ -1,6 +1,7 @@
 ---
 title: Surface
 page_title: API reference for Kendo UI Drawing API Surface
+res_type: api
 ---
 
 # kendo.drawing.Surface : kendo.Observable
@@ -8,7 +9,7 @@ An abstract class representing the top-level drawing surface.
 This class can't be instantiated directly.
 
 Specific implementations are created via the static `create` method.
-The implementations for SVG, Canvas and VML inherit from this base class.
+The implementations for SVG and Canvas inherit from this base class.
 
 ## Example - Creating a drawing surface
     <div id="container" style="position: relative; width: 600px; height: 400px;"></div>
@@ -63,7 +64,6 @@ The preferred type of surface to [create](#create).
 Supported types (case insensitive):
 - `svg`
 - `canvas`
-- `vml`
 
 This option will be ignored if not supported by the browser.
 See [Supported Browsers](/intro/supporting/browser-support).

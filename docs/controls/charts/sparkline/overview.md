@@ -12,7 +12,7 @@ The [Kendo UI Sparklines widget](http://demos.telerik.com/kendo-ui/sparklines/in
 
 Generally, the Sparklines are simple, word-sized graphics that can be embedded in chunks of text, tables, or headlines. The concept for such graphics was developed by [Edward Tufte](https://en.wikipedia.org/wiki/Edward_Tufte).
 
-The Kendo UI Sparklines widget is a version of the Kedno UI Chart widget, tailored for this specific application. While Sparklines are typically line charts, other types are supported as well:
+The Kendo UI Sparklines widget is a version of the Kendo UI Chart widget, tailored for this specific application. While Sparklines are typically line charts, other types are supported as well:
 
 *   Line (default)
 *   Bar (Data Bars)
@@ -200,7 +200,7 @@ If more than one category falls within a base unit, then its values are aggregat
 
 This code results in the following Sparklines. Note that values are displayed as are.
 
-**Figure 1. Sparklines with a date category axis**
+**Figure 1: Sparklines with a date category axis**
 
 ![Sparkline with date category axis](/controls/charts/sparkline/sparkline-category-date-axis.png)
 
@@ -221,7 +221,7 @@ The example below demonstrates the Sparklines with its base unit changed to `"ye
 
 Notice below how the Sparklines display the maximum value for each year.
 
-**Figure 2. Sparklines with a grouped date category axis**
+**Figure 2: Sparklines with a grouped date category axis**
 
 ![Sparkline with grouped date category axis](/controls/charts/sparkline/sparkline-category-date-axis-grouped.png)
 

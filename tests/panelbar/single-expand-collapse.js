@@ -9,10 +9,10 @@
             QUnit.fixture.append(
                 '<ul id="panelbar">' +
                 '    <li class="k-item k-state-default"><span class="k-link k-header">Mail<span' +
-                '            class="k-icon k-i-arrow-s k-panelbar-expand"></span></span>' +
+                '            class="k-icon k-i-arrow-60-down k-panelbar-expand"></span></span>' +
                 '        <ul>' +
                     '            <li class="k-item k-state-default"><span class="k-link">My Profile<span' +
-                    '                    class="k-icon k-i-arrow-n k-panelbar-collapse"></span></span>' +
+                    '                    class="k-icon k-i-arrow-60-up k-panelbar-collapse"></span></span>' +
                     '                <ul style="display: none;" class="k-group">' +
                     '                    <li class="k-item k-state-default"><a href="#"' +
                     '                                                          class="k-link">Server Binding</a></li>' +
@@ -29,7 +29,7 @@
                     '                </ul>' +
                     '            </li>' +
                     '            <li class="k-item k-state-default"><span class="k-link">My Profile<span' +
-                    '                    class="k-icon k-i-arrow-n k-panelbar-collapse"></span></span>' +
+                    '                    class="k-icon k-i-arrow-60-up k-panelbar-collapse"></span></span>' +
                     '                <ul style="display: none;" class="k-group">' +
                     '                    <li class="k-item k-state-default"><a href="#"' +
                     '                                                          class="k-link">Server Binding</a></li>' +
@@ -46,7 +46,7 @@
                     '                </ul>' +
                     '            </li>' +
                     '            <li class="k-item k-state-default"><span class="k-link">My Profile<span' +
-                    '                    class="k-icon k-i-arrow-n k-panelbar-collapse"></span></span>' +
+                    '                    class="k-icon k-i-arrow-60-up k-panelbar-collapse"></span></span>' +
                     '                <ul style="display: none;" class="k-group">' +
                     '                    <li class="k-item k-state-default"><a href="#"' +
                     '                                                          class="k-link">Server Binding</a></li>' +
@@ -73,7 +73,7 @@
                 '        </ul>' +
                 '    </li>' +
                 '    <li class="k-item k-state-disabled"><span class="k-link k-header">Contacts<span' +
-                '            class="k-icon k-i-arrow-s k-panelbar-expand"></span></span>' +
+                '            class="k-icon k-i-arrow-60-down k-panelbar-expand"></span></span>' +
                 '        <ul>' +
                 '            <li class="k-item k-state-default"><span class="k-link">Phone List</span>' +
                 '            </li>' +
@@ -82,7 +82,7 @@
                 '        </ul>' +
                 '    </li>' +
                 '    <li class="k-item k-state-default"><span class="k-link k-header">Tasks<span' +
-                '            class="k-icon k-i-arrow-s k-panelbar-expand"></span></span>' +
+                '            class="k-icon k-i-arrow-60-down k-panelbar-expand"></span></span>' +
                 '        <ul class="k-group" style="display: none;">' +
                 '            <li class="k-item k-state-default"><span class="k-link">My Tasks</span>' +
                 '            </li>' +
@@ -95,7 +95,7 @@
                 '        </ul>' +
                 '    </li>' +
                 '    <li class="k-item k-state-active"><span class="k-link k-header k-state-selected">Notes<span' +
-                '            class="k-icon k-i-arrow-n k-panelbar-collapse"></span></span>' +
+                '            class="k-icon k-i-arrow-60-up k-panelbar-collapse"></span></span>' +
                 '        <ul class="k-group" style="display: block;">' +
                 '            <li class="k-item k-state-default"><span class="k-link">My Notes</span>' +
                 '            </li>' +
@@ -108,10 +108,10 @@
                 '        </ul>' +
                 '    </li>' +
                 '    <li class="k-item k-state-default"><span class="k-link k-header">Folders List<span' +
-                '            class="k-icon k-i-arrow-s k-panelbar-expand"></span></span>' +
+                '            class="k-icon k-i-arrow-60-down k-panelbar-expand"></span></span>' +
                 '        <ul class="k-group" style="display: none;">' +
                     '            <li class="k-item k-state-default"><span class="k-link">My Profile<span' +
-                    '                    class="k-icon k-i-arrow-n k-panelbar-collapse"></span></span>' +
+                    '                    class="k-icon k-i-arrow-60-up k-panelbar-collapse"></span></span>' +
                     '                <ul style="display: none;" class="k-group">' +
                     '                    <li class="k-item k-state-default"><a href="#"' +
                     '                                                          class="k-link">Server Binding</a></li>' +
@@ -128,7 +128,7 @@
                     '                </ul>' +
                     '            </li>' +
                     '            <li class="k-item k-state-default"><span class="k-link">My Profile<span' +
-                    '                    class="k-icon k-i-arrow-n k-panelbar-collapse"></span></span>' +
+                    '                    class="k-icon k-i-arrow-60-up k-panelbar-collapse"></span></span>' +
                     '                <ul style="display: none;" class="k-group">' +
                     '                    <li class="k-item k-state-default"><a href="#"' +
                     '                                                          class="k-link">Server Binding</a></li>' +
@@ -145,7 +145,7 @@
                     '                </ul>' +
                     '            </li>' +
                 '            <li class="k-item k-state-default"><span class="k-link">My Profile<span' +
-                '                    class="k-icon k-i-arrow-n k-panelbar-collapse"></span></span>' +
+                '                    class="k-icon k-i-arrow-60-up k-panelbar-collapse"></span></span>' +
                 '                <ul style="display: none;" class="k-group">' +
                 '                    <li class="k-item k-state-default"><a href="#"' +
                 '                                                          class="k-link">Server Binding</a></li>' +

@@ -1,0 +1,3 @@
+User-agent: *
+Allow:
+Sitemap: http://docs.telerik.com/aspnet-mvc/sitemap.xml

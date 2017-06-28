@@ -1,13 +1,15 @@
 ---
 title: Show Тooltip on hover
 page_title: Show Тooltip on hover | Kendo UI Scheduler
-description: "Learn how to add a tooltip that opens upon a hover event to the Kendo UI Scheduler widget."
+description: "Learn how to add a tooltip to the Kendo UI Scheduler, which opens on hover."
 slug: howto_show_tooltipon_hover_angularjs_scheduler
 ---
 
 # Show Тooltip on hover
 
-The example below demonstrates how to add a tooltip that opens upon a `hover` event and shows additional metadata when using Kendo UI Scheduler in AngularJS.
+You can show additional data when the user hovers over the Scheduler.
+
+The following example demonstrates how to achieve this by using a tooltip which opens upon a `hover` event.
 
 ###### Example
 
@@ -139,4 +141,4 @@ Other articles and how-to examples on the Kendo UI Scheduler:
 * [How to Get Reference to the Built-In Validator]({% slug howto_get_referencetothe_builtin_validator_scheduler %})
 * [How to Use Custom Event Template with Specific Background Color]({% slug howto_use_custom_event_templatewith_specific_background_color_scheduler %})
 
-For more runnable examples on the Kendo UI Scheduler, browse its [**How To** documentation folder]({% slug howto_add_controlsto_custom_event_editor_scheduler %}).
+For more runnable examples on the Kendo UI Scheduler, browse its [**How To** documentation folder]({% slug howto_customize_editand_events_templates_angularjs_scheduler %}).

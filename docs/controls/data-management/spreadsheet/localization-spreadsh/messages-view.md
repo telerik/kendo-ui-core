@@ -7,12 +7,14 @@ slug: localization_view_messages_spreadsheet_widget
 
 # List of view Messages
 
-Below is the list of the messages and their namespaces under the `view` category. These are used to [localize the Kendo UI Spreadsheet widget via JavaScript]({% slug localization_ofmessages_spreadsheet_widget %}).
+The following list provides the messages and their namespaces under the `view` category.
+
+The `view` messages are used to [localize the Spreadsheet through JavaScript]({% slug localization_ofmessages_spreadsheet_widget %}).
 
     if (kendo.spreadsheet && kendo.spreadsheet.messages.view) {
         kendo.spreadsheet.messages.view =
         $.extend(true, kendo.spreadsheet.messages.view,{
-          //"nameSpace": "Message"
+          "nameBox": "Name Box",
           "errors": {
             "shiftingNonblankCells": "Cannot insert cells due to data loss possibility. Select another insert location or delete the data from the end of your worksheet."
           },

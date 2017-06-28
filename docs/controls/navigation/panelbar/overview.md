@@ -8,22 +8,27 @@ position: 1
 
 # PanelBar Overview
 
-The [Kendo UI PanelBar widget](http://demos.telerik.com/kendo-ui/panelbar/index) displays hierarchical data as a multi-level, expandable widget. Its structure may be defined in HTML or configured dynamically through its API. The content of the items can also be loaded via AJAX by specifying a content URL.
+The [Kendo UI PanelBar widget](http://demos.telerik.com/kendo-ui/panelbar/index) displays hierarchical data as a multi-level, expandable widget.
 
-## Getting Started
+Regarding its structure, you can apply either of the approaches:  
+* Define it in HTML.
+* Dynamically configure it through the API of the PanelBar.
 
-### Initialize the PanelBar
+The content of the items can also be loaded through AJAX by specifying a content URL.
 
-You can create a PanelBar in the following ways:
+## Initialization
 
-* Through HTML markup
-* Through JSON data object
+You can create a PanelBar in any of the following ways:
+
+* Use HTML markup.
+* Use a JSON data object.
+* Use a dynamic data binding either to a local or a remote data source. This approach has been available as of the R1 2017 release and is suitable for larger data sets and for data that frequently changes.
 
 > **Important**
 >
 > As PanelBar should be initialized after the DOM is fully loaded, make sure you create it within a `$(document).ready()` statement.
 
-#### Using HTML Markup
+### Using HTML Markup
 
 You can create a Kendo UI PanelBar by targeting the root element of an HTML list. The widget utilizes this list to define its structure and content.
 
@@ -46,9 +51,9 @@ You can create a Kendo UI PanelBar by targeting the root element of an HTML list
         });
     </script>
 
-#### Using JSON Data Object
+### Using JSON Data Objects
 
-The example below demonstrates how to initialize a PanelBar by using a JSON data object.
+The following example demonstrates how to initialize a PanelBar by using a JSON data object.
 
 ###### Example
 
@@ -77,10 +82,9 @@ The example below demonstrates how to initialize a PanelBar by using a JSON data
             expanded: true,                                 // Item is rendered expanded
             items: [{                                       // Sub-item collection
               text: "Sub Item 1"
-            },
-                    {
-                      text: "Sub Item 2"
-                    }]
+            }, {
+              text: "Sub Item 2"
+            }]
           },
           {
             text: "Item 5",
@@ -90,6 +94,68 @@ The example below demonstrates how to initialize a PanelBar by using a JSON data
         ]
       });
     </script>
+
+### Using Data Binding to Local Arrays
+
+This approach has been available as of the R1 2017 release.
+
+The following example demonstrates how to create a PanelBar and bind it to a local data source.
+
+###### Example
+
+    <div id="panelBar"></div>
+
+    <script>
+    $(document).ready(function() {
+        $("#panelBar").kendoPanelBar({
+            dataSource: [
+                {
+                    text: "Item 1",
+                    expanded: true,
+                    items: [
+                        { text: "Item 1.1" },
+                        { text: "Item 1.2" }
+                    ]
+                },
+                { text: "Item 2" }
+            ]
+        })
+    });
+    </script>
+
+### Using Data Binding to Remote Services
+
+This approach has been available as of the R1 2017 release.
+
+The following example demonstrates how to create a PanelBar and bind it to a remote HierarchicalDataSource.
+
+###### Example
+
+    <div id="panelBar"></div>
+
+    <script>
+    $(document).ready(function() {
+        $("#panelBar").kendoPanelBar({
+            dataTextField: "FullName",
+            dataSource: {
+                transport: {
+                    read: {
+                        url: "http://demos.telerik.com/kendo-ui/service/Employees",
+                        dataType: "jsonp"
+                    }
+                },
+                schema: {
+                    model: {
+                        id: "EmployeeId",
+                        hasChildren: "HasEmployees"
+                    }
+                }
+            }
+        })
+    });
+    </script>
+
+For a complete reference on how to bind the PanelBar to different service end-points, refer to the API documentation on [`HierarchicalDataSource`](/api/framework/hierarchicaldatasource).
 
 ## Configuration
 
@@ -117,7 +183,7 @@ PanelBar items may contain nested content, including markup, within a `<div>` el
 
 The PanelBar provides built-in support for asynchronously loading content from remote URLs. These URLs should return HTML content that can be loaded in the PanelBar item content area. Content `<div>` elements should be empty for AJAX loading to work.
 
-The example below demonstrates how to load a PanelBar item content asynchronously via AJAX.
+The following example demonstrates how to load a PanelBar item content asynchronously via AJAX.
 
 ###### Example
 
@@ -148,10 +214,9 @@ When the PanelBar loads remote content via AJAX, the server response is cached i
 
 ### PanelBar Animations
 
-By default, a PanelBar uses animations to expand and reveal sub-items when an item header is clicked. These animations can be modified in configuration via the open and close animation properties. A
-PanelBar can also be configured to only allow one panel be opened at a time.
+By default, a PanelBar uses animations to expand and reveal sub-items when an item header is clicked. These animations can be modified in configuration via the open and close animation properties. A PanelBar can also be configured to only allow one panel be opened at a time.
 
-The example below demonstrates how to change the PanelBar animation and `expandMode` behavior.
+The following example demonstrates how to change the PanelBar animation and `expandMode` behavior.
 
 ###### Example
 
@@ -175,7 +240,7 @@ To add items, provide the new item as a JSON object along with a reference item.
 
 For more information on configuring PanelBar items, see the [PanelBar API demos](http://demos.telerik.com/kendo-ui/panelbar/api).
 
-The example below demonstrates how to add a new root PanelBar item.
+The following example demonstrates how to add a new root PanelBar item.
 
 ###### Example
 
@@ -189,6 +254,51 @@ The example below demonstrates how to add a new root PanelBar item.
             panelBar.element.children("li:last")
         );
     </script>
+
+### dataItem Manipulations
+
+As of the R1 2017 release, the [PanelBar API](/api/javascript/ui/panelbar) has provided methods for you to dynamically manage the state of the items trough their `dataItems`.
+
+To disable, expand, or select a certain PanelBar item, get a reference to its `dataItem` and use the desirable method.
+
+The following example demonstrates how to use the `disable`, `expand`, and `select` methods.
+
+###### Example
+
+    <div id="panelBar"></div>
+    <button id="btn1" class="k-button">Update Data Item</button>   
+    <script>
+     $(document).ready(function() {
+            $("#panelBar").kendoPanelBar({
+                dataSource: [
+                    {
+                        text: "Item 1",
+                        expanded: false,
+                        items: [
+                            { text: "Item 1.1" },
+                            { text: "Item 1.2" }
+                        ]
+                    },
+                    { text: "Item 2" }
+                ]
+            })
+        $("#btn1").on('click', function(){
+            var panelBar = $("#panelBar").data("kendoPanelBar");  
+            var dataItem = panelBar.dataItem(".k-item:first"); // get reference to the first item
+            dataItem.set("expanded", true); //set the item as expanded
+            dataItem.set("enabled", false); //set the item as enabled
+            //dataItem.set("selected", true);  set the item as selected
+     })        
+    });
+    </script>
+
+### Retry of Data Binding
+
+As of the R1 2017 release, the PanelBar has provided an built-in functionality of attempting a retry. If the initial data binding fails and regardless of the reason for the failure, you are now prompted with a `Request failed.` message. To initiate a new data binding, use the **Retry** button.
+
+**Figure 1: The Retry button of the PanelBar prompting you to re-initiate the data binding**
+
+![PanelBar areas](/controls/navigation/panelbar/retry-request-failed.png)
 
 ## See Also
 

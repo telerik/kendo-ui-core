@@ -2,12 +2,13 @@
 title: Use Checkbox Column Templates and Edit
 page_title:  Use Checkbox Column Templates and Edit | Kendo UI Grid
 description: "Learn how to use checkbox column templates and perform editing in the Kendo UI Grid widget."
+previous_url: /kendo-uimvc/web/grid/how-to/Templates/grid-with-checkbox-column
 slug: howto_use_checkbox_column_templateand_edit_grid
 ---
 
 # Use Checkbox Column Templates and Edit
 
-The example below demonstrates how to use checkboxes in Kendo UI Grid column templates and perform editing.
+The following example demonstrates how to use checkboxes in the Grid column templates and perform editing.
 
 ###### Example
 
@@ -80,11 +81,9 @@ The example below demonstrates how to use checkboxes in Kendo UI Grid column tem
 
 ## See Also
 
-Other articles on the Kendo UI Grid and how-to examples related to the usage of templates:
-
-* [JavaScript API Reference](/api/javascript/ui/grid)
+* [JavaScript API Reference of the Grid](/api/javascript/ui/grid)
 * [How to Create Custom Editor in Detail Template]({% slug howto_create_custom_editorin_detail_template_grid %})
 * [How to Refresh Grid in Detail Template]({% slug howto_refresh_gridin_detail_template_grid %})
 * [How to Use Dates inside Row Template]({% slug howto_use_dates_inside_row_template_grid %})
 
-For more runnable examples on the Kendo UI Grid, browse its [**How To** documentation folder]({% slug howto_create_custom_editors_grid %}).
+For more runnable examples on the Kendo UI Grid, browse its [**How To** documentation folder]({% slug howto_adjust_row_heights_template_locked_columns_grid %}).

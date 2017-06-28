@@ -7,7 +7,13 @@ var __meta__ = { // jshint ignore:line
     name: "Tooltip",
     category: "web",
     description: "The Tooltip widget displays a popup hint for a given html element.",
-    depends: [ "core", "popup" ]
+    depends: [ "core", "popup" ],
+    features: [ {
+        id: "tooltip-fx",
+        name: "Animation",
+        description: "Support for animation",
+        depends: [ "fx" ]
+    } ]
 };
 
 (function($, undefined) {
@@ -28,7 +34,7 @@ var __meta__ = { // jshint ignore:line
         CONTENTLOAD = "contentLoad",
         REQUESTSTART = "requestStart",
         KCONTENTFRAME = "k-content-frame",
-        TEMPLATE = '<div role="tooltip" class="k-widget k-tooltip#if (!autoHide) {# k-tooltip-closable#}#">#if (!autoHide) {# <div class="k-tooltip-button"><a href="\\#" class="k-icon k-i-close">close</a></div> #}#' +
+        TEMPLATE = '<div role="tooltip" class="k-widget k-tooltip#if (!autoHide) {# k-tooltip-closable#}#">#if (!autoHide) {# <div class="k-tooltip-button"><a href="\\#" class="k-icon k-i-close" title="Close"></a></div> #}#' +
                 '<div class="k-tooltip-content"></div>' +
                 '#if (callout){ #<div class="k-callout k-callout-#=dir#"></div>#}#' +
             '</div>',
@@ -86,7 +92,9 @@ var __meta__ = { // jshint ignore:line
 
     function restoreTitle(element) {
         while(element.length) {
-            restoreTitleAttributeForElement(element);
+            if (restoreTitleAttributeForElement(element)) {
+                break;
+            }
             element = element.parent();
         }
     }
@@ -96,6 +104,7 @@ var __meta__ = { // jshint ignore:line
         if (title) {
             element.attr("title", title);
             element.removeData(kendo.ns + "title");
+            return true;
         }
     }
 
@@ -104,12 +113,15 @@ var __meta__ = { // jshint ignore:line
         if (title) {
             element.data(kendo.ns + "title", title);
             element.attr("title", "");
+            return true;
         }
     }
 
     function saveTitleAttributes(element) {
         while(element.length && !element.is("body")) {
-            saveTitleAttributeForElement(element);
+            if (saveTitleAttributeForElement(element)) {
+                break;
+            }
             element = element.parent();
         }
     }
@@ -127,12 +139,18 @@ var __meta__ = { // jshint ignore:line
 
             that._documentKeyDownHandler = proxy(that._documentKeyDown, that);
 
-            that.element
-                .on(that.options.showOn + NS, that.options.filter, proxy(that._showOn, that))
-                .on("mouseenter" + NS, that.options.filter, proxy(that._mouseenter, that));
+            that.element.on(that.options.showOn + NS, that.options.filter, proxy(that._showOn, that));
 
-            if (this.options.autoHide) {
+            if (!this._isShownOnFocus()) {
+                that.element.on("mouseenter" + NS, that.options.filter, proxy(that._mouseenter, that));
+            }
+
+            if (this.options.autoHide && !this._isShownOnFocus()) {
                 that.element.on("mouseleave" + NS, that.options.filter, proxy(that._mouseleave, that));
+            }
+
+            if (this.options.autoHide && this._isShownOnFocus()) {
+                that.element.on("blur" + NS, that.options.filter, proxy(that._blur, that));
             }
         },
 
@@ -153,7 +171,6 @@ var __meta__ = { // jshint ignore:line
                     duration: 0
                 },
                 close: {
-                    effects: "fade:out",
                     duration: 40,
                     hide: true
                 }
@@ -161,6 +178,10 @@ var __meta__ = { // jshint ignore:line
         },
 
         events: [ SHOW, HIDE, CONTENTLOAD, ERROR, REQUESTSTART ],
+
+        _isShownOnFocus: function(){
+            return this.options.showOn && this.options.showOn.match(/focus/);
+        },
 
         _mouseenter: function(e) {
             saveTitleAttributes($(e.currentTarget));
@@ -170,7 +191,10 @@ var __meta__ = { // jshint ignore:line
             var that = this;
 
             var currentTarget = $(e.currentTarget);
-            if (that.options.showOn && that.options.showOn.match(/click|focus/)) {
+            if (that.options.showOn && that.options.showOn.match(/click/)) {
+                that._show(currentTarget);
+            } else if (that._isShownOnFocus()) {
+                saveTitleAttributes(currentTarget);
                 that._show(currentTarget);
             } else {
                 clearTimeout(that.timeout);
@@ -358,7 +382,7 @@ var __meta__ = { // jshint ignore:line
             that.content = wrapper.find(".k-tooltip-content");
             that.arrow = wrapper.find(".k-callout");
 
-            if (options.autoHide) {
+            if (options.autoHide && !this._isShownOnFocus()) {
                 wrapper.on("mouseleave" + NS, proxy(that._mouseleave, that));
             } else {
                 wrapper.on("click" + NS, ".k-tooltip-button", proxy(that._closeButtonClick, that));
@@ -371,24 +395,20 @@ var __meta__ = { // jshint ignore:line
         },
 
         _mouseleave: function(e) {
+            this._closePopup(e.currentTarget);
+            clearTimeout(this.timeout);
+        },
+
+        _blur: function(e){
+            this._closePopup(e.currentTarget);
+        },
+
+        _closePopup: function(target){
             if (this.popup) {
-                var element = $(e.currentTarget),
-                    offset = element.offset(),
-                    pageX = e.pageX,
-                    pageY = e.pageY;
-
-                offset.right = offset.left + element.outerWidth();
-                offset.bottom = offset.top + element.outerHeight();
-
-                if (pageX > offset.left && pageX < offset.right && pageY > offset.top && pageY < offset.bottom) {
-                    return;
-                }
-
                 this.popup.close();
             } else {
-                restoreTitle($(e.currentTarget));
+                restoreTitle($(target));
             }
-            clearTimeout(this.timeout);
         },
 
         _positionCallout: function() {

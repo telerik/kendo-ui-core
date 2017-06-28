@@ -1,6 +1,7 @@
 ---
 title: MultiSelect
 page_title: Configuration, methods and events of Kendo UI MultiSelect
+res_type: api
 ---
 
 # kendo.ui.MultiSelect
@@ -137,6 +138,24 @@ Controls whether to close the widget suggestion list on item selection.
     <script>
     $("#multiselect").kendoMultiSelect({
         autoClose: false
+    });
+    </script>
+
+### autoWidth `Boolean`
+
+If set to `true`, the widget automatically adjusts the width of the popup element and does not wrap up the item label.
+
+> Note: Virtualized list doesn't support the auto-width functionality.
+
+#### Example - enable autoWidth
+
+    <input id="multiselect" style="width: 100px;" />
+    <script>
+    $("#multiselect").kendoMultiSelect({
+      autoWidth: true,
+      dataSource: {
+        data: ["Short item", "An item with really, really long text"]
+      }
     });
     </script>
 
@@ -316,7 +335,7 @@ If set to `true` the widget will not show all items when the text of the search 
 
 ### filter `String`*(default: "startswith")*
 
-The filtering method used to determine the suggestions for the current value. Filtration is turned of by default.
+The filtering method used to determine the suggestions for the current value. Filtration is turned of by default, and can be performed over `string` values only (either the widget's data has to be an array of strings, or over the field, configured in the [`dataTextField`](#configuration-dataTextField) option).
 The supported filter values are `startswith`, `endswith` and `contains`.
 
 #### Example - set the filter
@@ -452,7 +471,7 @@ If set to `false` case-sensitive search will be performed to find suggestions. T
     });
     </script>
 
-### minLength `Number`*(default: 0)*
+### minLength `Number`*(default: 1)*
 
 The minimum number of characters the user must type before a search is performed. Set to a higher value if the search could match a lot of items.
 A zero value means that a request will be made as soon as the user focuses the widget.
@@ -489,7 +508,7 @@ A zero value means that a request will be made as soon as the user focuses the w
     });
     </script>
 
-### noDataTemplate `String|Function` *(default: "No results found.")*
+### noDataTemplate `String|Function` *(default: "NO DATA FOUND.")*
 
 The [template](/api/javascript/kendo#methods-template) used to render the "no data" template, which will be displayed if no results are found or the underlying data source is empty.
 The noData template receives the widget itself as a part of the data argument. The template will be evaluated on every widget data bound.
@@ -587,7 +606,7 @@ Defines a jQuery selector that will be used to find a container element, where t
 
 ### popup.origin `String`
 
-Specifies how to position the popup element based on achor point. The value is
+Specifies how to position the popup element based on anchor point. The value is
 space separated "y" plus "x" position.
 
 The available "y" positions are:
@@ -716,7 +735,7 @@ The [template](/api/javascript/kendo#methods-template) used to render the items 
     });
     </script>
 
-### tagTemplate `String`
+### tagTemplate `String|Function`
 
 The [template](/api/javascript/kendo#methods-template) used to render the tags.
 
@@ -852,7 +871,7 @@ Specifies the [value binding](/framework/mvvm/bindings/value) behavior for the w
 
 #### Example - specify that the View-Model field should be updated with the selected item value
 
-    <select id="multiselect" multiple="multiple" data-bind="value: values, source: products"></select>
+    <select id="multiselect" multiple="multiple" data-bind="value: selectedProductId, source: products"></select>
 
     <script>
     $("#multiselect").kendoMultiSelect({
@@ -938,7 +957,7 @@ For detailed information, refer to the [article on virtualization]({% slug virtu
         }
     </script>
 
-#### Example - MultiSelect widget with а declarative virtualization config
+#### Example - MultiSelect widget with a declarative virtualization configuration
 
     <div class="demo-section k-header">
         <h4>Search for shipping name</h4>
@@ -1086,9 +1105,11 @@ For more information, refer to the [article on virtualization]({% slug virtualiz
 
 ### virtual.valueMapper `Function`*(default: null)*
 
-The `valueMapper` function is **mandatory** for the functionality of the virtualized widget.
 The widget calls the `valueMapper` function when the widget receives a value, that is not fetched from the remote server yet.
 The widget will pass the selected value(s) in the `valueMapper` function. In turn, the `valueMapper` implementation should return the **respective data item(s) index/indices**.
+> **Important**
+>
+> As of the Kendo UI R3 2016 release, the implementation of the `valueMapper` function is optional. It is required only if the widget contains an initial value or if the `value` method is used.
 
 #### Example - MultiSelect with a virtualized list
 
@@ -1189,7 +1210,7 @@ A jQuery object of the visible input element, where the user types.
     var multiselect = $("#multiselect").data("kendoMultiSelect");
 
     var input = multiselect.input;
-    <script>
+    </script>
 
 ### options `Object`
 An object, which holds the options of the widget.
@@ -1203,7 +1224,7 @@ An object, which holds the options of the widget.
     var multiselect = $("#multiselect").data("kendoMultiSelect");
 
     var options = multiselect.options;
-    <script>
+    </script>
 
 ### list `jQuery`
 A jQuery object of the drop-down list element.
@@ -1217,7 +1238,7 @@ A jQuery object of the drop-down list element.
     var multiselect = $("#multiselect").data("kendoMultiSelect");
 
     var list = multiselect.list;
-    <script>
+    </script>
 
 ### ul `jQuery`
 A jQuery object of the `ul` element, which holds the available options.
@@ -1231,7 +1252,7 @@ A jQuery object of the `ul` element, which holds the available options.
     var multiselect = $("#multiselect").data("kendoMultiSelect");
 
     var ul = multiselect.ul;
-    <script>
+    </script>
 
 ### tagList `jQuery`
 A jQuery object of the `ul` element, which holds the selected tags.
@@ -1245,7 +1266,7 @@ A jQuery object of the `ul` element, which holds the selected tags.
     var multiselect = $("#multiselect").data("kendoMultiSelect");
 
     var tagList = multiselect.tagList;
-    <script>
+    </script>
 
 ## Methods
 

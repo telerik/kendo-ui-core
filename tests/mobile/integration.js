@@ -1,10 +1,12 @@
 (function() {
     module("tabstrip with application", {
         setup: function() {
+            jasmine.clock().install();
             $("#qunit-fixture").css({ height: "100px", overflow: "hidden" });
         },
         teardown: function() {
             location.hash = '';
+            jasmine.clock().uninstall();
         }
     });
 
@@ -20,6 +22,8 @@
         var app = new kendo.mobile.Application($("#qunit-fixture").children().first(), {
             layout: "default"
         });
+
+        jasmine.clock().tick();
 
         var barLink = $("#qunit-fixture").find("a").eq(1);
         barLink.trigger($.Event("mousedown"));

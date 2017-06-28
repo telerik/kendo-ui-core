@@ -4,7 +4,7 @@ var lazypipe = require('lazypipe');
 var less = require('gulp-less');
 var autoprefix = require('less-plugin-autoprefix');
 var logger = require('gulp-logger');
-var minifyCSS = require('gulp-minify-css');
+var cleanCss = require('gulp-clean-css');
 var replace = require('gulp-replace');
 var rename = require('gulp-rename');
 var cache = require('gulp-cached');
@@ -30,12 +30,18 @@ var cleanCssOptions = {
 
 module.exports.fromLess = lazypipe()
     .pipe(logger, { after: 'LESS complete!', extname: '.css', showChange: true })
-    .pipe(less, { relativeUrls: true, plugins: [new autoprefix({ browsers: browsers }) ] })
+    .pipe(less, {
+      strictMath: 'on',
+      relativeUrls: true,
+      plugins: [
+        new autoprefix({ browsers: browsers })
+      ]
+    })
     .pipe(replace, /\.\.\/mobile\//g, ''); // temp hack for the discrepancy between source and generated "source"
 
 module.exports.minify = lazypipe()
     .pipe(logger, { after: 'Min CSS complete!', extname: '.min.css', showChange: true } )
-    .pipe(minifyCSS, cleanCssOptions)
+    .pipe(cleanCss, cleanCssOptions)
     .pipe(rename, { suffix: ".min" });
 
 module.exports.cacheLessDependencies = lazypipe()

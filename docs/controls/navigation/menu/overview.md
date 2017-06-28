@@ -55,6 +55,8 @@ The example below demonstrates how to initialize the Menu by using HTML markup.
 
 The example below demonstrates how to initialize the Menu by using a JSON data object
 
+By initializing the Menu using JSON, you can use assign a select handler for each item by assigning a function to the `select` property.
+
 ###### Example
 
     <ul id="menu"></ul>
@@ -77,16 +79,24 @@ The example below demonstrates how to initialize the Menu by using a JSON data o
              text: "Item 3",
              imageUrl: "http://www.telerik.com/test.jpg", // (Optional) Item image URL
              items: [{                                    // Sub-item collection
-               text: "Sub Item 1"
-             },
-                     {
-                       text: "Sub Item 2"
-                     }]
+                    text: "Sub Item 1"
+                },
+                {
+                    text: "Sub Item 2"
+                }]
            },
            {
              text: "Item 4",
              spriteCssClass: "imageClass3"                // (Optional) Item image sprite CSS class
-           }]
+           },
+           {
+             text: "Item 5",
+             select: function(e) {                        // Item select event handler, optional
+                // e.sender - returns reference to the Kendo Menu widget
+                // e.target - returns the clicked element. Typically, the span.k-link element.
+
+                // handle event
+             }]
         })
       });
     </script>
@@ -224,7 +234,7 @@ The Menu renders as a `<ul>` element and expands horizontally by default. If a h
        display: inline-block;
     }
 
-In left-to-right layouts, shrinking the horizontal Menu will make the border of the last root item touch the right border of the Menu. The last item border can be removed as shwon int he example below.
+In left-to-right layouts, shrinking the horizontal Menu will make the border of the last root item touch the right border of the Menu. The last item border can be removed as shown int he example below.
 
 ###### Example
 
@@ -252,8 +262,6 @@ Kendo UI Menu supports the following keyboard shortcuts and user actions:
 | (`Shift`+) `Tab`              | Blurs the Menu and moves the focus to the next (previous) focusable page element  |
 
 ## See Also
-
-Other articles and how-to examples on Kendo UI Menu:
 
 * [Context Menu]({% slug overview_kendoui_contextmenu_widget %})
 * [How to Create Split Button]({% slug howto_createa_split_button_menu %})

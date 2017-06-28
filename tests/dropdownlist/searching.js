@@ -707,4 +707,103 @@
         dropdownlist.open();
 
     });
+
+test("autoWidth adds one pixel to avoid browser pixel rounding", function(assert) {
+    var dropdownlist = new DropDownList(input, {
+        autoWidth: true,
+        animation:{
+            open: {
+                duration:0
+            },
+            close: {
+                duration:0
+            },
+        },
+        dataSource: {
+            data: ["Short item", "An item with really, really, really, really, really, really, really, really, really, long text","Short item"]
+        }
+    });
+
+    dropdownlist.open();
+    equal(dropdownlist.popup.element.parent(".k-animation-container").width(), dropdownlist.popup.element.outerWidth(true) + 1);
+    dropdownlist.close();
+    dropdownlist.open();
+    equal(dropdownlist.popup.element.parent(".k-animation-container").width(), dropdownlist.popup.element.outerWidth(true) + 1);
+});
+
+    test("removes filtering expression if field matches the dataTextField", 1, function() {
+        var dropdownlist = new DropDownList(input, {
+            filter: "startswith",
+            dataTextField: "text",
+            dataValueField: "value",
+            dataSource: {
+                data: [{ text: "foo", value: 1 }, { text: "bar", value: 2 }, { text: "too", value: 3 }],
+                filter: {
+                    logic: "or",
+                    filters: [
+                        { field: "text", operator: "eq", value: "bar" },
+                        { field: "text", operator: "eq", value: "foo" }
+                    ]
+                }
+            }
+        });
+
+        dropdownlist.search("to");
+
+        equal(dropdownlist.dataSource.filter().filters.length, 1);
+    });
+
+    test("keeps custom filter expresssion", 5, function() {
+        var dropdownlist = new DropDownList(input, {
+            filter: "startswith",
+            dataTextField: "text",
+            dataValueField: "value",
+            dataSource: {
+                data: [{ text: "foo", value: 1 }, { text: "bar", value: 2 }, { text: "too", value: 3 }],
+                filter: {
+                    logic: "or",
+                    filters: [
+                        { field: "value", operator: "eq", value: 1 },
+                        { field: "value", operator: "eq", value: 2 }
+                    ]
+                }
+            }
+        });
+
+        dropdownlist.search("to");
+
+        var filters = dropdownlist.dataSource.filter();
+
+        equal(filters.logic, "and");
+        equal(filters.filters.length, 2);
+        equal(filters.filters[0].field, "text");
+        equal(filters.filters[1].logic, "or");
+        equal(filters.filters[1].filters.length, 2);
+    });
+
+    test("concat filters with the same logic operator", 2, function() {
+        var dropdownlist = new DropDownList(input, {
+            dataTextField: "text",
+            dataValueField: "value",
+            filter: "contains",
+            dataSource: {
+                data: [{ text: "start_foo_end", value: 1 }, { text: "boo", value: 2 }, { text: "start_too_end", value: 10 }],
+                filter: {
+                    logic: "or",
+                    filters: [
+                        { field: "value", operator: "eq", value: 1 },
+                        { field: "value", operator: "eq", value: 2 }
+                    ]
+                }
+            }
+        });
+
+        dropdownlist.search("to");
+        dropdownlist.search("too");
+
+        var filters = dropdownlist.dataSource.filter();
+
+        equal(filters.filters[1].filters.length, 2);
+        equal(!filters.filters[1].filters.filters, true);
+    });
 })();

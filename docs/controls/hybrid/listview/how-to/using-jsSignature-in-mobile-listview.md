@@ -5,9 +5,9 @@ description: "Learn how to use jsSignature in the Hybrid UI ListView."
 slug: howto_usejssignature_hybridlistview
 ---
 
-# Use jsSignature
+# Use jSignature
 
-The example below demonstrates how to include a signing functionality by using jsSignature in a hybrid Kendo UI ListView.
+The example below demonstrates how to include a signing functionality by using jSignature in a hybrid Kendo UI ListView.
 
 ###### Example
 

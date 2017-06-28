@@ -38,13 +38,13 @@ The example below demonstrates a mobile View with a header and a footer.
 
 > **Important**
 >
-> Because of the OS UI design conventions, the header and the footer switch positions when an Android device is detected. Usually the footer hosts a mobile Tabstrip widget, which is located at the bottom of the screen on iOS, and at the top of the screen in Android applications.
+> Because of the OS UI design conventions, the header and the footer switch positions when an Android device is detected. Usually the footer hosts a mobile TabStrip widget, which is located at the bottom of the screen on iOS, and at the top of the screen in Android applications.
 
 ### Parameters
 
 Navigational widgets can pass additional URL parameters when navigating to Views. The parameters are accessible in the  view `show` event handlers.
 
-The example below demonstrates a button with additional URL parametres.
+The example below demonstrates a button with additional URL parameters.
 
 ###### Example
 

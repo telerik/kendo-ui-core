@@ -7,7 +7,7 @@ slug: howto_updatefieldinallchildnodes_treelist
 
 # Update Field in All Child Nodes
 
-The example below demonstrates how to update all child nodes recursively, propagating the state of a row in a Kendo UI TreeList widget.
+The following example demonstrates how to update all child nodes recursively and propagate the row state in the TreeList.
 
 ###### Example
 
@@ -81,9 +81,7 @@ The example below demonstrates how to update all child nodes recursively, propag
 
 ## See Also
 
-Other articles on the Kendo UI TreeList:
-
-* [JavaScript API Reference](/api/javascript/ui/treelist)
+* [JavaScript API Reference of the TreeList](/api/javascript/ui/treelist)
 * [How to Show Context Menu]({% slug howto_showcontextmenu_treelist %})
 
-For more runnable examples on the Kendo UI TreeList, browse the [**How To** documentation folder]({% slug howto_updatefieldinallchildnodes_angularjs_treelist %}).
+For more runnable examples on the Kendo UI TreeList, browse its [**How To** documentation folder]({% slug howto_updatefieldinallchildnodes_angularjs_treelist %}).

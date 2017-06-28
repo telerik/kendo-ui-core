@@ -3,15 +3,18 @@
         app;
 
     function setup(html) {
+        jasmine.clock().install();
         root = $("<div />").appendTo($('#qunit-fixture'));
         root.append(html).wrapInner("<div />");
         location.hash = '';
         app = new kendo.mobile.Application(root.children().first());
+        jasmine.clock().tick();
     }
 
     function teardown() {
         kendo.history.stop();
         app.destroy();
+        jasmine.clock().uninstall();
     }
 
     function hidden(selector) {
@@ -62,8 +65,10 @@
 
     module('mobile SplitView panes', {
         setup: function() {
+            jasmine.clock().install();
             root.html('<div data-role="splitview" id="foo"><div data-role="pane" id="foo-pane"><div data-role="view" /></div></div>');
             app = new kendo.mobile.Application(root);
+            jasmine.clock().tick();
         },
 
         teardown: teardown

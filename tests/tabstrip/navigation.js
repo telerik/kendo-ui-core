@@ -149,6 +149,134 @@ test("selects last if current is first", function() {
 
 });
 
+test("in rtl and horizontal layout selects next on DOWN", function() {
+    div.addClass("k-rtl").kendoTabStrip({animation: false});
+    addItems(3);
+
+    var tabstrip = div.data("kendoTabStrip");
+    tabstrip.select(0);
+    div.focus();
+
+    div.trigger({
+        type: "keydown",
+        keyCode: keys.DOWN
+    });
+
+    equal(div.find(".k-state-active").index(), 2);
+});
+
+test("in rtl and horizontal layout selects next on RIGHT", function() {
+    div.addClass("k-rtl").kendoTabStrip({animation: false});
+    addItems(3);
+
+    var tabstrip = div.data("kendoTabStrip");
+    tabstrip.select(0);
+    div.focus();
+
+    div.trigger({
+        type: "keydown",
+        keyCode: keys.RIGHT
+    });
+
+    equal(div.find(".k-state-active").index(), 2);
+});
+
+test("in rtl and horizontal layout selects prev on LEFT", function() {
+    div.addClass("k-rtl").kendoTabStrip({animation: false});
+    addItems(3);
+
+    var tabstrip = div.data("kendoTabStrip");
+    tabstrip.select(0);
+    div.focus();
+
+    div.trigger({
+        type: "keydown",
+        keyCode: keys.LEFT
+    });
+
+    equal(div.find(".k-state-active").index(), 1);
+});
+
+test("in rtl and horizontal layout selects prev on UP", function() {
+    div.addClass("k-rtl").kendoTabStrip({animation: false});
+    addItems(3);
+
+    var tabstrip = div.data("kendoTabStrip");
+    tabstrip.select(0);
+    div.focus();
+
+    div.trigger({
+        type: "keydown",
+        keyCode: keys.UP
+    });
+
+    equal(div.find(".k-state-active").index(), 1);
+});
+
+test("in rtl and vertical layout selects prev on UP", function() {
+    div.addClass("k-rtl").kendoTabStrip({tabPosition: "left", animation: false});
+    addItems(3);
+
+    var tabstrip = div.data("kendoTabStrip");
+    tabstrip.select(0);
+    div.focus();
+
+    div.trigger({
+        type: "keydown",
+        keyCode: keys.UP
+    });
+
+    equal(div.find(".k-state-active").index(), 2);
+});
+
+test("in rtl and vertical layout selects prev on LEFT", function() {
+    div.addClass("k-rtl").kendoTabStrip({tabPosition: "left", animation: false});
+    addItems(3);
+
+    var tabstrip = div.data("kendoTabStrip");
+    tabstrip.select(0);
+    div.focus();
+
+    div.trigger({
+        type: "keydown",
+        keyCode: keys.LEFT
+    });
+
+    equal(div.find(".k-state-active").index(), 2);
+});
+
+test("in rtl and vertical layout selects next on DOWN", function() {
+    div.addClass("k-rtl").kendoTabStrip({tabPosition: "left", animation: false});
+    addItems(3);
+
+    var tabstrip = div.data("kendoTabStrip");
+    tabstrip.select(0);
+    div.focus();
+
+    div.trigger({
+        type: "keydown",
+        keyCode: keys.DOWN
+    });
+
+    equal(div.find(".k-state-active").index(), 1);
+});
+
+test("in rtl and vertical layout selects next on RIGHT", function() {
+    div.addClass("k-rtl").kendoTabStrip({tabPosition: "left", animation: false});
+    addItems(3);
+
+    var tabstrip = div.data("kendoTabStrip");
+    tabstrip.select(0);
+    div.focus();
+
+    div.trigger({
+        type: "keydown",
+        keyCode: keys.RIGHT
+    });
+
+    equal(div.find(".k-state-active").index(), 1);
+});
+
 test("misses prev item if disabled", function() {
     div.kendoTabStrip();
     addItems(3);

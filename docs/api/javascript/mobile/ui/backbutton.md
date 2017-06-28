@@ -2,6 +2,7 @@
 title: BackButton
 page_title: Configuration, methods and events of Kendo UI Mobile BackButton
 description: Examples how to initialize Kendo UI mobile BackButton based on role data attribute and using jQuery plugin syntax.
+res_type: api
 ---
 
 # kendo.mobile.ui.BackButton

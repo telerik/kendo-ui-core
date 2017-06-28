@@ -285,6 +285,26 @@ asyncTest("remove input value does not clear filter if minLength and enforceMinL
     }, 0);
 });
 
+asyncTest("clicking on clear button does not clear filter if minLength and enforceMinLength", 0, function() {
+    var autocomplete = new AutoComplete(input, {
+        dataSource: ["foo", "bar"],
+        minLenght: 2,
+        enforceMinLength: true
+    });
+
+    input.val("ba").press("a".charCodeAt(0));
+
+    autocomplete.dataSource.bind("change", function() {
+        ok(false, "list should not rebind");
+    });
+
+    autocomplete._clear.click();
+
+    setTimeout(function() {
+        start();
+    }, 0);
+});
+
 test("select item after filtering", function() {
     var autocomplete = new AutoComplete(input, {
         dataTextField: "text",
@@ -432,6 +452,29 @@ test("resize popup on search when autoWidth is enabled", function(assert) {
 
 });
 
+test("autoWidth adds one pixel to avoid browser pixel rounding", function(assert) {
+    var autocomplete = new AutoComplete(input, {
+        autoWidth: true,
+        animation:{
+            open: {
+                duration:0
+            },
+            close: {
+                duration:0
+            },
+        },
+        dataSource: {
+            data: ["Short item", "An item with really, really, really, really, really, really, really, really, really, long text","Short item"]
+        }
+    });
+
+    autocomplete.search("a");
+    equal(autocomplete.popup.element.parent(".k-animation-container").width(), autocomplete.popup.element.outerWidth(true) + 1);
+    autocomplete.close();
+    autocomplete.search("a");
+    equal(autocomplete.popup.element.parent(".k-animation-container").width(), autocomplete.popup.element.outerWidth(true) + 1);
+});
+
 asyncTest("update popup height when no items are found", 1, function() {
     var autocomplete = new AutoComplete(input, {
         dataSource: $.map(new Array(30), function(_, idx) { return "item" + idx.toString() })
@@ -447,5 +490,75 @@ asyncTest("update popup height when no items are found", 1, function() {
     });
 
     autocomplete.element.focus().val("test").keydown();
+});
+
+test("removes filtering expression if field matches the dataTextField", 1, function() {
+    var autocomplete = new AutoComplete(input, {
+        dataTextField: "text",
+        dataSource: {
+            data: [{ text: "foo", value: 1 }, { text: "bar", value: 2 }, { text: "too", value: 3 }],
+            filter: {
+                logic: "or",
+                filters: [
+                    { field: "text", operator: "eq", value: "bar" },
+                    { field: "text", operator: "eq", value: "foo" }
+                ]
+            }
+        }
+    });
+
+    autocomplete.search("to");
+
+    equal(autocomplete.dataSource.filter().filters.length, 1);
+});
+
+test("keeps custom filter expresssion", 5, function() {
+    var autocomplete = new AutoComplete(input, {
+        dataTextField: "text",
+        dataSource: {
+            data: [{ text: "foo", value: 1 }, { text: "bar", value: 2 }, { text: "too", value: 3 }],
+            filter: {
+                logic: "or",
+                filters: [
+                    { field: "value", operator: "eq", value: 1 },
+                    { field: "value", operator: "eq", value: 2 }
+                ]
+            }
+        }
+    });
+
+    autocomplete.search("to");
+
+    var filters = autocomplete.dataSource.filter();
+
+    equal(filters.logic, "and");
+    equal(filters.filters.length, 2);
+    equal(filters.filters[0].field, "text");
+    equal(filters.filters[1].logic, "or");
+    equal(filters.filters[1].filters.length, 2);
+});
+
+test("concat filters with the same logic operator", 2, function() {
+    var autocomplete = new AutoComplete(input, {
+        dataTextField: "text",
+        dataSource: {
+            data: [{ text: "foo", value: 1 }, { text: "bar", value: 2 }, { text: "too", value: 3 }],
+            filter: {
+                logic: "or",
+                filters: [
+                    { field: "value", operator: "eq", value: 1 },
+                    { field: "value", operator: "eq", value: 2 }
+                ]
+            }
+        }
+    });
+
+    autocomplete.search("to");
+    autocomplete.search("too");
+
+    var filters = autocomplete.dataSource.filter();
+
+    equal(filters.filters[1].filters.length, 2);
+    equal(!filters.filters[1].filters.filters, true);
 });
 }());

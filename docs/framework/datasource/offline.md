@@ -14,7 +14,7 @@ Offline support allows data-bound Kendo UI widgets to function without active se
 >
 > Offline storage support has been available ever since the Kendo UI 2014 Q2 SP1 when it was introduced for the first time.
 
-**Figure 1. Offline storage mechanism**
+**Figure 1: Offline storage mechanism**
 
 ![Offline Storage](/framework/datasource/OfflineStorage.gif)
 
@@ -182,7 +182,7 @@ For more information on browser online mode, refer to [this MDN article](https:/
 
 ### Use online and offline Events
 
-The `online` and `offline` events behave differently among the browsers. Firefox and Internet Explorer fire those events when the user switches between offline and online mode. However, the `online` and `offline` events work as expected in mobile devices and Phonegap applications.
+The `online` and `offline` events behave differently among the browsers. Firefox and Internet Explorer fire those events when the user switches between offline and online mode. However, the `online` and `offline` events work as expected in mobile devices and PhoneGap applications.
 
 The example below demonstrates how to detect the offline mode via the `online` and `offline` events.
 

@@ -1,6 +1,7 @@
 ---
 title: Tooltip
 page_title: Configuration, methods and events of Kendo UI Tooltip
+res_type: api
 ---
 
 # kendo.ui.Tooltip
@@ -185,13 +186,15 @@ Defines the animation duration.
 The text or a function which result will be shown within the Tooltip.
 By default the Tooltip will display the target element title attribute content.
 
+If you need to retrieve the `title` attribute of the target from inside the `content` function, then use `target.data("title")`, as shown below.
+
 > If the content passed to the Tooltip includes scripts, they will be executed. If this is not desired, make sure to strip any undesired content in advance.
 
 #### Example - extract the content from target element content
 
     <div id="container">
-        <span>Some content</span>
-        <span>Some more content</span>
+        <span title="foo">Some content</span>
+        <span title="bar">Some more content</span>
     </div>
 
     <script>
@@ -200,7 +203,7 @@ By default the Tooltip will display the target element title attribute content.
             filter: "span",
             content: function(e) {
               var target = e.target; // the element for which the tooltip is shown
-              return target.text(); // set the element text as content of the tooltip
+              return target.data("title") + " " + target.text(); // set the element text as content of the tooltip
             }
           });
         });
@@ -376,7 +379,29 @@ The event on which the Tooltip will be shown. Predefined values are "mouseenter"
         });
       });
     </script>
+    
+#### Example - set multiple events on which the Tooltip will be shown
 
+    <span id="target" title="Tooltip content">
+      Click Me
+    </span>
+
+    <script>
+      $(document).ready(function() {
+        $("#target").kendoTooltip({
+          showOn: "click mouseenter"
+        });
+      });
+    </script>
+
+## Fields
+
+### popup `kendo.ui.Popup`
+
+Holds the Kendo UI [`Popup`](/api/javascript/ui/popup) instance, which manages the showing and hiding of the tooltips at the appropriate position.
+
+The `popup` field can be used to apply custom CSS classes and styles, or any other attributes to the Popup's [`element` or `wrapper`](/intro/widget-basics/wrapper-element).
+    
 ## Methods
 
 ### show

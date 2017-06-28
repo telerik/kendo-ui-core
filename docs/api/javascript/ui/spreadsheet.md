@@ -2,6 +2,7 @@
 title: Spreadsheet
 page_title: Configuration, methods and events of Kendo UI Spreadsheet
 description: Code examples for Spreadsheet UI widget configuration. Learn how to use methods and which events to set once the Spreadsheet UI widget is initialized.
+res_type: api
 ---
 
 # kendo.ui.Spreadsheet
@@ -19,6 +20,33 @@ The default column width in pixels.
 
 ### columns `Number` *(default: 50)*
 The number of columns in the document.
+
+### defaultCellStyle `Object`
+The default cell styles to be applyied to sheet cells.
+
+### defaultCellStyle.background `String`
+The background [CSS color](https://developer.mozilla.org/en-US/docs/Web/CSS/color_value) of the cell.
+
+### defaultCellStyle.color `String`
+The text [CSS color](https://developer.mozilla.org/en-US/docs/Web/CSS/color_value) of the cell.
+
+### defaultCellStyle.fontFamily `String`
+The font family for the cell.
+
+### defaultCellStyle.fontSize `String`
+The font size of the cell in pixels.
+
+### defaultCellStyle.Italic `Boolean`
+Sets the cell font to italic, if set to true.
+
+### defaultCellStyle.bold `Boolean`
+Sets the cell font to bold, if set to true.
+
+### defaultCellStyle.underline `Boolean`
+Sets the cell font to underline, if set to true.
+
+### defaultCellStyle.wrap `Boolean`
+Sets the cell wrap, if set to true.
 
 ### headerHeight `Number` *(default: 20)*
 The height of the header row in pixels.
@@ -492,7 +520,7 @@ Supported values:
 
 The URL of the server side proxy which will stream the file to the end user.
 
-A proxy will be used when the browser isn't capable of saving files locally e.g. Internet Explorer 9 and Safari. PDF export is not supported in Internet Explorer 8 and below.
+A proxy will be used when the browser is not capable of saving files locally, for example, Internet Explorer 9 and Safari.
 
 The developer is responsible for implementing the server-side proxy.
 
@@ -934,14 +962,107 @@ Defines the data type of the cell value.
 ### sheets.rows.cells.validation.from `String`
 Defines a *formula* or *value* used for the comparison process. Used as *only* if comparer type does not require second argument.
 
+### sheets.rows.cells.validation.showButton `Boolean` *(default: false)*
+A boolean value indicating if a button for selecting list items (dataType set to `list`) should be displayed.
+
 ### sheets.rows.cells.validation.to `String`
-Defines a *formula* or *value* used for the comparison process. Will be used if comparer type requies second argument.
+Defines a *formula* or *value* used for the comparison process. Will be used if comparer type requires second argument.
 
 ### sheets.rows.cells.validation.allowNulls `Boolean`
 Specifies whether to allow nulls.
 
 ### sheets.rows.cells.validation.messageTemplate `String`
 Defines the *hint* message that will be displayed if value is invalid.
+
+The template is giving an access to the following variables: from{0}, to{1}, fromFormula{2}, toFormula{3}, dataType{4}, type{5} and comparerType{6}.
+
+#### Example - use validation template variables
+```
+<div id="example">
+      <div id="spreadsheet" style="width: 100%;"></div>
+      <script>
+        $(function() {
+          $("#spreadsheet").kendoSpreadsheet({
+            columns: 26,
+            rows: 30,
+            sheetsbar: false,
+            excel: {
+              // Required to enable Excel Export in some browsers
+              proxyURL: "//demos.telerik.com/kendo-ui/service/export"
+            },
+            sheets: [
+              {
+                name: "Validation Template",
+
+                rows: [
+                  {
+                    height: 25,
+                    cells: [
+                      {
+                        value: "15",
+                        validation: {
+                          dataType: "number",
+                          from: "B1",
+                          to:"C1",
+                          allowNulls: true,
+                          comparerType:"between" ,
+                          type: "reject",
+                          titleTemplate: "Number validation error",
+                          messageTemplate: "The number have to be between {0} and {1}"
+                        }
+
+                      },
+                      {
+                        value: "10",
+
+                      },
+                      {
+                        value: "20",
+
+                      },
+
+                    ]
+                  },
+                ],
+                columns: [
+                  {
+                    width: 100
+                  },
+                  {
+                    width: 215
+                  },
+                  {
+                    width: 115
+                  },
+                  {
+                    width: 115
+                  },
+                  {
+                    width: 115
+                  }
+                ]
+              },
+              {
+                name: "ListValues",
+                rows: [ //A1:B1
+                  {
+                    cells: [
+                      {
+                        value: true
+                      },
+                      {
+                        value: false
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          });
+        });
+      </script>
+    </div>
+```
 
 ### sheets.rows.cells.validation.titleTemplate `String`
 Defines the *hint* title that will be displayed if value is invalid.
@@ -950,10 +1071,9 @@ Defines the *hint* title that will be displayed if value is invalid.
 The vertical align setting for the cell content.
 
 Available options are:
-* left
+* top
 * center
-* right
-* justify
+* bottom
 
 ### sheets.rows.cells.wrap `Boolean`
 Will wrap the cell content if set to `true`.
@@ -963,6 +1083,9 @@ The row height in pixels. Defaults to [rowHeight](#configuration-rowHeight).
 
 ### sheets.rows.index `Number`
 The absolute row index. Required to ensure correct positioning.
+
+### sheets.rows.type `String`
+The table row element role, in the context of the Grid table structure.
 
 ### sheets.selection `String`
 The selected range in the sheet, e.g. "A1:B10".
@@ -1007,7 +1130,7 @@ The available tools are:
 * **fontSize**, **fontFamily**
 * **alignment**
 * **textWrap**
-* [**formatDecreaseDecimal**, **formatIncreateDecimal**]
+* [**formatDecreaseDecimal**, **formatIncreaseDecimal**]
 * **format**
 * **merge**
 * **freeze**
@@ -1155,6 +1278,52 @@ The sheet to set as active.
     </script>
 ```
 
+### cellContextMenu
+Gets the cell contextMenu instance.
+
+#### Returns
+
+`kendo.ui.ContextMenu` The menu instance.
+
+#### Example - dynamically adding a context menu item and associating a selection command
+```
+    <div id="spreadsheet"></div>
+
+    <script>      
+        $(function() {            
+            var spreadsheet = $("#spreadsheet").kendoSpreadsheet().data("kendoSpreadsheet"),
+                cellContextMenu = spreadsheet.cellContextMenu(); 
+              
+          	cellContextMenu.append([{ text: "Highlight", cssClass: "highlight" }]);    
+          	
+            cellContextMenu.bind("select", function(e) {
+               var command = $(e.item).text();
+              
+              if(command == "Highlight") {
+              	var sheet = spreadsheet.activeSheet(),
+                    selection = sheet.selection();   
+                
+                selection.background("green");
+              }
+           });
+        });
+    </script>
+```
+
+### rowHeaderContextMenu
+Gets the row header contextMenu instance.
+
+#### Returns
+
+`kendo.ui.ContextMenu` The menu instance.
+
+### colHeaderContextMenu
+Gets the column header contextMenu instance.
+
+#### Returns
+
+`kendo.ui.ContextMenu` The menu instance.
+
 ### sheets
 Returns an array with the sheets in the workbook.
 
@@ -1165,7 +1334,7 @@ Returns an array with the sheets in the workbook.
 ### fromFile
 Clears the spreadsheets and populates it with data from the specified Excel (.xlsx) file.
 
-> Requires Internet Explorer 10 or a recent version of other browsers.
+> Requires Internet Explorer 10 or a recent version of other browsers. The JSZip library is a [`prerequisite`](/intro/installation/prerequisites#jszip-library) for the import from file functionality.
 
 #### Parameters
 
@@ -1442,7 +1611,348 @@ The object to load data from.  This should be **the deserialized object**, not t
         });
     </script>
 
+### defineName
+
+Define a custom name to be available and used in formulas. If the function is not able to parse the name of the value, it will throw an error.
+
+#### Parameters
+
+##### name `String`
+
+A new name to be defined. The names are case-insensitive.
+
+It is possible to provide a name that already exists. In such cases, the value is silently updated.
+
+To make the name available only in one sheet, qualify it in the way demonstrated in the next example.
+
+##### value `String`
+
+The value has to be a valid formula in the form of a string, that is, without a leading `=` sign.
+
+Generally, a name points to a reference. For maximum compatibility, it is recommended for you to use references here that are fully qualified (include the name of the sheet they refer to) and absolute (prefix both row and column with the `$` sign).
+
+##### hidden `Boolean` *(default: false)*
+
+To hide this name from the custom names dropdown in the toolbar, pass `true`. Even if `hidden` is set to `false`, only reference names will be displayed in the dropdown.
+
+#### Example - define a few names
+
+```
+    <div id="spreadsheet"></div>
+    <script>
+        $("#spreadsheet").kendoSpreadsheet();
+        var spreadsheet = $("#spreadsheet").data("kendoSpreadsheet");
+
+        // cell reference
+        spreadsheet.defineName("MyCell", "Sheet1!$A$1");
+
+        // range reference
+        spreadsheet.defineName("MyRange", "Sheet1!$A$1:$C$3");
+
+        // qualified name
+        spreadsheet.defineName("Sheet1!Foo", "Sheet1!$B$2");
+
+        // relative reference (incompatible with other programs).
+        // relative refs in A1 notation are ambiguous, unless we know
+        // the cell where they are used, so we use the RC notation here:
+        spreadsheet.defineName("CellsAbove", "R1C[0]:R[-1]C[0]");
+
+        // arbitrary formula
+        spreadsheet.defineName("GoldenRatio", "(1+SQRT(5))/2");
+    </script>
+```
+
+After that, it is possible to use any of those names in formulas. For example, a formula like `=SUM(CellsAbove)` will return the sum of the cells above it, no matter where it sits. Relative references, such as the `CellsAbove` example, are not compatible with other spreadsheets, such as Excel, LibreOffice, or Google Sheets.
+
+The "qualified" `Sheet1!Foo` name is visible without qualification only in formulas in **Sheet1** and, for example, you can type `=Foo * Foo`.  If you need the name in formulas from other sheets, you have to refer to it as `=Sheet1!Foo`.
+
+### undefineName
+
+Delete a name.
+
+#### Parameters
+
+##### name `String` - the name to remove
+
+To delete a fully qualified name, prefix the name of the sheet - for example, `spreadsheet.undefineName("Sheet1!Foo")`.
+
 ## Events
+
+### insertSheet
+
+Triggered when sheet is inserted. Introduced in 2017 Q1.
+
+#### Event Data
+
+##### e.sender `kendo.ui.Spreadsheet`
+
+The widget instance which fired the event.
+
+##### e.preventDefault `Function`
+
+If invoked the spreadsheet will not insert the sheet.
+
+### removeSheet
+
+Triggered when sheet will be removed. Introduced in 2017 Q1.
+
+#### Event Data
+
+##### e.sender `kendo.ui.Spreadsheet`
+
+The widget instance which fired the event.
+
+##### e.sheet `kendo.spreadsheet.Sheet`
+
+The sheet instance which will be removed.
+
+##### e.preventDefault `Function`
+
+If invoked the spreadsheet will not remove the sheet.
+
+### renameSheet
+
+Triggered when sheet will be renamed. Introduced in 2017 Q1.
+
+#### Event Data
+
+##### e.sender `kendo.ui.Spreadsheet`
+
+The widget instance which fired the event.
+
+##### e.sheet `kendo.spreadsheet.Sheet`
+
+The sheet instance which will be renamed.
+
+##### e.newSheetName `String`
+
+The new sheet name.
+
+##### e.preventDefault `Function`
+
+If invoked the spreadsheet will not rename the sheet.
+
+### selectSheet
+
+Triggered when sheet will be activated. Introduced in 2017 Q1.
+
+#### Event Data
+
+##### e.sender `kendo.ui.Spreadsheet`
+
+The widget instance which fired the event.
+
+##### e.sheet `kendo.spreadsheet.Sheet`
+
+The sheet instance which will be activated.
+
+##### e.preventDefault `Function`
+
+If invoked the spreadsheet will not activate the sheet.
+
+### unhideColumn
+
+Triggered when column will be shown. Introduced in 2017 Q1.
+
+#### Event Data
+
+##### e.sender `kendo.ui.Spreadsheet`
+
+The widget instance which fired the event.
+
+##### e.sheet `kendo.spreadsheet.Sheet`
+
+The sheet instance which will be affected.
+
+##### e.index `Number`
+
+The index of the column.
+
+##### e.preventDefault `Function`
+
+If invoked the spreadsheet will execute the change.
+
+### unhideRow
+
+Triggered when row will be shown. Introduced in 2017 Q1.
+
+#### Event Data
+
+##### e.sender `kendo.ui.Spreadsheet`
+
+The widget instance which fired the event.
+
+##### e.sheet `kendo.spreadsheet.Sheet`
+
+The sheet instance which will be affected.
+
+##### e.index `Number`
+
+The index of the row.
+
+##### e.preventDefault `Function`
+
+If invoked the spreadsheet will execute the change.
+
+### hideColumn
+
+Triggered when column will be hidden. Introduced in 2017 Q1.
+
+#### Event Data
+
+##### e.sender `kendo.ui.Spreadsheet`
+
+The widget instance which fired the event.
+
+##### e.sheet `kendo.spreadsheet.Sheet`
+
+The sheet instance which will be affected.
+
+##### e.index `Number`
+
+The index of the column.
+
+##### e.preventDefault `Function`
+
+If invoked the spreadsheet will execute the change.
+
+### hideRow
+
+Triggered when row will be hidden. Introduced in 2017 Q1.
+
+#### Event Data
+
+##### e.sender `kendo.ui.Spreadsheet`
+
+The widget instance which fired the event.
+
+##### e.sheet `kendo.spreadsheet.Sheet`
+
+The sheet instance which will be affected.
+
+##### e.index `Number`
+
+The index of the row.
+
+##### e.preventDefault `Function`
+
+If invoked the spreadsheet will execute the change.
+
+### deleteColumn
+
+Triggered when column will be deleted. Introduced in 2017 Q1.
+
+#### Event Data
+
+##### e.sender `kendo.ui.Spreadsheet`
+
+The widget instance which fired the event.
+
+##### e.sheet `kendo.spreadsheet.Sheet`
+
+The sheet instance which will be affected.
+
+##### e.index `Number`
+
+The index of the column.
+
+##### e.preventDefault `Function`
+
+If invoked the spreadsheet will execute the change.
+
+### deleteRow
+
+Triggered when row will be deleted. Introduced in 2017 Q1.
+
+#### Event Data
+
+##### e.sender `kendo.ui.Spreadsheet`
+
+The widget instance which fired the event.
+
+##### e.sheet `kendo.spreadsheet.Sheet`
+
+The sheet instance which will be affected.
+
+##### e.index `Number`
+
+The index of the row.
+
+##### e.preventDefault `Function`
+
+If invoked the spreadsheet will execute the change.
+
+### insertColumn
+
+Triggered when column will be inserted. Introduced in 2017 Q1.
+
+#### Event Data
+
+##### e.sender `kendo.ui.Spreadsheet`
+
+The widget instance which fired the event.
+
+##### e.sheet `kendo.spreadsheet.Sheet`
+
+The sheet instance which will be affected.
+
+##### e.index `Number`
+
+The index of the column.
+
+##### e.preventDefault `Function`
+
+If invoked the spreadsheet will execute the change.
+
+### insertRow
+
+Triggered when row will be inserted. Introduced in 2017 Q1.
+
+#### Event Data
+
+##### e.sender `kendo.ui.Spreadsheet`
+
+The widget instance which fired the event.
+
+##### e.sheet `kendo.spreadsheet.Sheet`
+
+The sheet instance which will be affected.
+
+##### e.index `Number`
+
+The index of the row.
+
+##### e.preventDefault `Function`
+
+If invoked the spreadsheet will execute the change.
+
+### select
+
+Triggered when spreadsheet selection is changed. Introduced in 2017 Q1.
+
+#### Event Data
+
+##### e.sender `kendo.ui.Spreadsheet`
+
+The widget instance which fired the event.
+
+##### e.range `kendo.spreadsheet.Range`
+
+The [Range](/api/javascript/spreadsheet/range) that is selected.
+
+### changeFormat
+
+Triggered when range format is changed from the UI. Introduced in 2017 Q1.
+
+#### Event Data
+
+##### e.sender `kendo.ui.Spreadsheet`
+
+The widget instance which fired the event.
+
+##### e.range `kendo.spreadsheet.Range`
+
+The [Range](/api/javascript/spreadsheet/range) which format is changed.
 
 ### change
 

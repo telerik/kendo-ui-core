@@ -352,16 +352,16 @@ var __meta__ = { // jshint ignore:line
                     .toggleClass("k-splitbar-static-" + orientation,
                         !draggable && !prevCollapsible && !nextCollapsible)
                     .html(
-                        catIconIf("k-collapse-prev k-i-sarrow-n", prevCollapsible && !prevCollapsed && !nextCollapsed && orientation == VERTICAL) +
-                        catIconIf("k-collapse-prev k-i-sarrow-w", prevCollapsible && !prevCollapsed && !nextCollapsed && orientation == HORIZONTAL) +
-                        catIconIf("k-expand-prev k-i-sarrow-n", prevCollapsible && prevCollapsed && !nextCollapsed && orientation == VERTICAL) +
-                        catIconIf("k-expand-prev k-i-sarrow-w", prevCollapsible && prevCollapsed && !nextCollapsed && orientation == HORIZONTAL) +
+                        catIconIf("k-collapse-prev k-i-arrow-60-up", prevCollapsible && !prevCollapsed && !nextCollapsed && orientation == VERTICAL) +
+                        catIconIf("k-collapse-prev k-i-arrow-60-left", prevCollapsible && !prevCollapsed && !nextCollapsed && orientation == HORIZONTAL) +
+                        catIconIf("k-expand-prev k-i-arrow-60-down", prevCollapsible && prevCollapsed && !nextCollapsed && orientation == VERTICAL) +
+                        catIconIf("k-expand-prev k-i-arrow-60-right", prevCollapsible && prevCollapsed && !nextCollapsed && orientation == HORIZONTAL) +
                         catIconIf("k-resize-handle k-i-hbar", draggable && orientation == VERTICAL) +
                         catIconIf("k-resize-handle k-i-vbar", draggable && orientation == HORIZONTAL) +
-                        catIconIf("k-collapse-next k-i-sarrow-s", nextCollapsible && !nextCollapsed && !prevCollapsed && orientation == VERTICAL) +
-                        catIconIf("k-collapse-next k-i-sarrow-e", nextCollapsible && !nextCollapsed && !prevCollapsed && orientation == HORIZONTAL) +
-                        catIconIf("k-expand-next k-i-sarrow-s", nextCollapsible && nextCollapsed && !prevCollapsed && orientation == VERTICAL) +
-                        catIconIf("k-expand-next k-i-sarrow-e", nextCollapsible && nextCollapsed && !prevCollapsed && orientation == HORIZONTAL)
+                        catIconIf("k-collapse-next k-i-arrow-60-down", nextCollapsible && !nextCollapsed && !prevCollapsed && orientation == VERTICAL) +
+                        catIconIf("k-collapse-next k-i-arrow-60-right", nextCollapsible && !nextCollapsed && !prevCollapsed && orientation == HORIZONTAL) +
+                        catIconIf("k-expand-next k-i-arrow-60-up", nextCollapsible && nextCollapsed && !prevCollapsed && orientation == VERTICAL) +
+                        catIconIf("k-expand-next k-i-arrow-60-left", nextCollapsible && nextCollapsed && !prevCollapsed && orientation == HORIZONTAL)
                     );
 
             if (!draggable && !prevCollapsible && !nextCollapsible) {

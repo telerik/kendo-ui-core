@@ -1,6 +1,7 @@
 ---
 title: Group
 page_title: API reference for Kendo UI Drawing API Group
+res_type: api
 ---
 
 # kendo.drawing.Group : kendo.drawing.Element

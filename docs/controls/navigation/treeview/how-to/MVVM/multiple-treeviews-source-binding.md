@@ -7,7 +7,7 @@ slug: howto_rendermultipleusing_htmlsourcebinding_mvvm_treeview
 
 # Render Multiple TreeViews Using HTML Source Binding
 
-The example below demonstrates how to render multiple Kendo UI TreeView widgets using HTML source binding.
+The following example demonstrates how to render multiple TreeViews by using HTML source binding.
 
 ###### Example
 
@@ -79,10 +79,8 @@ The example below demonstrates how to render multiple Kendo UI TreeView widgets 
 
 ## See Also
 
-Other articles on the Kendo UI TreeView:
-
 * [TreeView JavaScript API Reference](/api/javascript/ui/treeview)
-* [How to Check Nodes Programatically]({% slug howto_checknodeprogramatically_treeview %})
+* [How to Check Nodes Programmatically]({% slug howto_checknodeprogramatically_treeview %})
 * [How to Edit Nodes via Form]({% slug howto_editnodesviaform_treeview %})
 * [How to Filter Out Search Results]({% slug howto_filetroutserachresults_treeview %})
 * [How to Hide Checkboxes for Root Level]({% slug howto_hidecheckboxesforrootlevel_treeview %})
@@ -90,4 +88,4 @@ Other articles on the Kendo UI TreeView:
 * [How to Scroll to Selected Item]({% slug howto_scrolltoselecteditem_treeview %})
 * [How to Use FontAwesome Icons]({% slug howto_usefontawesomeicons_treeview %})
 
-For more runnable examples on the Kendo UI TreeView, browse its [**How To** documentation folder]({% slug howto_editnodesviaform_angularjs_treeview %}).
+For more runnable examples on the Kendo UI TreeView, browse its [**How To** documentation folder]({% slug howto_bindcheckedstatecustommodelfields_angulartreeview %}).

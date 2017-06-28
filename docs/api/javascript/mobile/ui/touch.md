@@ -1,5 +1,6 @@
 ---
 title: Touch
+res_type: api
 ---
 
 # kendo.ui.Touch
@@ -410,7 +411,7 @@ The touch event instance
 
 The jQuery event which triggered the touch event.
 
-#### e.direction `String`
+##### e.direction `String`
 
 The swipe event direction. Can be either `left` or `right`.
 

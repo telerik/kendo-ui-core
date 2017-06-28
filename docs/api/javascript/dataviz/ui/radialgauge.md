@@ -2,6 +2,7 @@
 title: RadialGauge
 page_title: Configuration, methods and events of Kendo UI DataViz RadialGauge
 description: Learn the configuration options for Radial Gauge widget, set the color and size of the border, use methods properly.
+res_type: api
 ---
 
 # kendo.dataviz.ui.RadialGauge
@@ -162,7 +163,6 @@ If it is not supported by the browser, the Gauge will switch to the first availa
 The supported values are:
 
 * "svg" - renders the widget as inline SVG document, if available
-* "vml" - renders the widget as VML, if available
 * "canvas" - renders the widget as a Canvas element, if available.
 
 #### Example - Render as Canvas, if supported
@@ -188,7 +188,7 @@ Configures the scale.
 ### scale.endAngle `Number`*(default: 210)*
 
  The end angle of the gauge.
-The gauge is rendered clockwise(0 degrees are the 180 degrees in the polar coordinat system)
+The gauge is rendered clockwise(0 degrees are the 180 degrees in the polar coordinate system)
 
 ### scale.labels `Object`
 
@@ -461,7 +461,7 @@ Reverses the scale direction - values are increase anticlockwise.
 ### scale.startAngle `Number`*(default: -30)*
 
  The start angle of the gauge.
-The gauge is rendered clockwise(0 degrees are the 180 degrees in the polar coordinat system)
+The gauge is rendered clockwise(0 degrees are the 180 degrees in the polar coordinate system)
 
 ### transitions `Boolean`*(default: true)*
 
@@ -475,7 +475,7 @@ Allows setting or getting multiple Gauge values at once.
 
 #### Parameters
 
-##### values `Array`
+##### values `Array` *(optional)*
 An array of values to be set.
 
 #### Returns

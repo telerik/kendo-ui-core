@@ -40,6 +40,8 @@ TESTS.beforeTestFiles.push(jquery);
 TESTS.beforeTestFiles.push('tests/jquery.mockjax.js');
 TESTS.beforeTestFiles.push('src/angular.js');
 TESTS.beforeTestFiles.push('tests/angular-route.js');
+TESTS.beforeTestFiles.push('tests/jasmine.js');
+TESTS.beforeTestFiles.push('tests/jasmine-boot.js');
 
 var defaultOptions = {
     reportSlowerThan: 500,

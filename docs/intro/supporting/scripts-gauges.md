@@ -1,4 +1,5 @@
 ---
+comment: THIS FILE IS AUTO-GENERATED, MANUAL CHANGES ARE OVERWRITTEN. TO UPDATE THE CONTENT, UPDATE COMPONENT DEPENDENCIES AND RUN `rake js_dependencies`.
 title: Script Files for Gauges
 page_title: Script Files for Gauges | Kendo UI Getting Started
 description: "Listing of required script files for the Kendo UI Gauges"
@@ -15,6 +16,7 @@ Below are listed the script files for the Kendo UI Gauges widgets.&nbsp;&nbsp;
 | [Gauge](http://demos.telerik.com/kendo-ui/linear-gauge/index) | jquery.js | |
 | | kendo.core.js | |
 | | kendo.color.js | |
+| | kendo.popup.js | |
 | | kendo.drawing.js | |
 | | kendo.dataviz.core.js | |
 | | kendo.dataviz.themes.js | |

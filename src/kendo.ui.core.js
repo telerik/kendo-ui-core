@@ -25,6 +25,7 @@
         "./kendo.toolbar",
         "./kendo.list",
         "./kendo.calendar",
+        "./kendo.dateinput",
         "./kendo.datepicker",
         "./kendo.autocomplete",
         "./kendo.dropdownlist",
@@ -32,6 +33,7 @@
         "./kendo.multiselect",
         "./kendo.colorpicker",
         "./kendo.listview",
+        "./kendo.listbox",
         "./kendo.numerictextbox",
         "./kendo.maskedtextbox",
         "./kendo.menu",
@@ -66,9 +68,7 @@
         "./kendo.mobile.scrollview",
         "./kendo.mobile.switch",
         "./kendo.mobile.tabstrip",
-        "./kendo.angular",
-        "./kendo.webcomponents",
-        "./kendo.angular2"
+        "./kendo.angular"
     ], f);
 })(function(){
     "bundle all";

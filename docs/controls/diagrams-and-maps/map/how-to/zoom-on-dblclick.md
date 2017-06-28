@@ -7,9 +7,9 @@ slug: howto_zoomondblclick_map
 
 # Zoom on Double Click
 
-The example below demonstrates how to zoom the map upon a double click.
+The following example demonstrates how to zoom the Map upon a double click.
 
-Event coordinates are mapped to the location through using the [`eventToLocation`](/api/javascript/dataviz/ui/map#methods-eventToLocation) method.
+The event coordinates are mapped to the location by using the [`eventToLocation`](/api/javascript/dataviz/ui/map#methods-eventToLocation) method.
 
 ###### Example
 
@@ -41,8 +41,6 @@ Event coordinates are mapped to the location through using the [`eventToLocation
 ```
 
 ## See Also
-
-Other articles on the Kendo UI Map:
 
 * [Map JavaScript API Reference](/api/javascript/dataviz/ui/map)
 * [How to Disable Mousewheel Zoom]({% slug howto_disablemousezoom_map %})

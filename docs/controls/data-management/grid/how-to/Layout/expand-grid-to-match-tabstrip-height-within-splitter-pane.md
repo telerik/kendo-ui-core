@@ -7,7 +7,9 @@ slug: howto_expandtomatchtabstripinsplitter_grid
 
 # Expand Grids to Match the Height of TabStrip Containers within Splitter Panes
 
-To expand a Kendo UI Grid in height so it matches the height if its Kendo UI TabStrip container within a Kendo UI Splitter pane, take the following steps:
+Your project might require you to expand the height of the Grid to match the height of its TabStrip container within a Splitter pane.
+
+To achieve this behavior:
 * Make sure that the layout of the Splitter corresponds to the requirements of your project. If the Splitter has to expand to 100% in height, [resize it]({% slug overview_kendoui_splitter_widget %}##set-a-100-height-and-auto-resize).
 * Expand the height of the TabStrip containers by using the approach in the [how-to example]({% slug howto_expandto100percentheightautoresize_tabstrip %}), which relies on the `window.resize` event. In this case, however, the [`resize` event has to be of the closest Splitter instance](http://docs.telerik.com/kendo-ui/api/javascript/ui/splitter#events-resize).
 * Assuming that its `<div>` is 100% high and automatically expands vertically, call the `resize()` method of the Grid.   
@@ -16,9 +18,9 @@ For more information on how to set the Grid to 100% height and auto-resize it, r
 
 > **Important**
 >
-> Note that the `resize` method of the Splitter will measure the height of the Grid's `<div>` and will not adjust the height of the scrollable data area because after the Splitter fires its `resize` event, you have to adjust the layout of the TabStrip. Only after that can you call the `resize` method of the Grid.
+> The `resize` method of the Splitter measures the height of the Grid's `<div>` element. It does not adjust the height of the scrollable data area because after the Splitter fires its `resize` event, you have to adjust the layout of the TabStrip. Only after that can you call the `resize` method of the Grid.
 
-The example below demonstrates how to expand Kendo UI Grids that are located in Kendo UI TabStrip containers within a Kendo UI Splitter pane.
+The following example demonstrates how to expand a Grid that is located in a TabStrip container within a Splitter pane.
 
 ###### Example
 
@@ -153,8 +155,6 @@ The example below demonstrates how to expand Kendo UI Grids that are located in 
 
 ## See Also
 
-Other articles on the Kendo UI Grid and how-to examples related to its layout:
-
 * [Kendo UI Grid JavaScript API Reference](/api/javascript/ui/grid)
 * [How to Adjust Row Height with Virtual Scrolling]({% slug howto_adjust_row_height_withvirtual_scrolling_grid %})
 * [How to Apply Minimum Width during Column Resize]({% slug howto_apply_min_width_during_column_resize_grid %})
@@ -164,4 +164,4 @@ Other articles on the Kendo UI Grid and how-to examples related to its layout:
 * [How to Hide the Vertical Scrollbar When Not Needed]({% slug howto_hide_vertical_scrollbar_grid %})
 * [How to Use FontAwesome Icons in Custom Command Buttons]({% slug howto_use_fontawesomeiconsin_custom_command_buttons_grid %})
 
-For more runnable examples on the Kendo UI Grid, browse its [**How To** documentation folder]({% slug howto_create_custom_editors_grid %}).
+For more runnable examples on the Kendo UI Grid, browse its [**How To** documentation folder]({% slug howto_adjust_row_heights_template_locked_columns_grid %}).

@@ -14,7 +14,7 @@ The [Hybrid UI Scroller widget](http://demos.telerik.com/kendo-ui/m/index#scroll
 
 Each mobile View initializes a scroller for its content element. In addition to that, a scroller is initialized for every element with a `role` data-attribute set to `scroller`. Alternatively, a scroller can be initialized using jQuery plugin syntax in the containing mobile View `init` event handler.
 
-### Intialize from Markup
+### Initialize from Markup
 
 For the scroller to work, its element should have fixed dimensions&mdash;width and/or height&mdash;set.
 

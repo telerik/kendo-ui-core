@@ -1,4 +1,5 @@
 ---
+comment: THIS FILE IS AUTO-GENERATED, MANUAL CHANGES ARE OVERWRITTEN. TO UPDATE THE CONTENT, UPDATE COMPONENT DEPENDENCIES AND RUN `rake js_dependencies`.
 title: Script Files for Tools, Frameworks and Utilities
 page_title: Script Files for Tools, Frameworks and Utilities | Kendo UI Getting Started
 description: "Listing of required script files for the Kendo UI Tools, Frameworks and Utilities"
@@ -15,15 +16,12 @@ Below are listed the script files for the Kendo UI shared components providing b
 | [AngularJS Directives](http://docs.telerik.com/kendo-ui/AngularJS/introduction) | jquery.js | |
 | | kendo.core.js | |
 | | kendo.angular.js | |
-| [Angular 2](http://demos.telerik.com/kendo-ui/integration/angular2) | jquery.js | |
-| | kendo.core.js | |
-| | kendo.angular2.js | |
 | [Core](https://github.com/telerik/kendo-ui-core) | jquery.js | |
 | | kendo.core.js | |
 | [Drawing API](http://demos.telerik.com/kendo-ui/drawing/index) | jquery.js | |
 | | kendo.core.js | |
 | | kendo.color.js | |
-| | kendo.popup.js | tooltip feature |
+| | kendo.popup.js | |
 | | kendo.drawing.js | |
 | [Router](http://demos.telerik.com/kendo-ui/spa/index) | jquery.js | |
 | | kendo.core.js | |

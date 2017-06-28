@@ -170,4 +170,36 @@
         ok(multiselect.currentTag().attr("id"));
         equal(multiselect.input.attr("aria-activedescendant"), multiselect.currentTag().attr("id"));
     });
+
+    test("widget takes aria-label attribute", 1, function() {
+        var multiselect = new MultiSelect(input.attr("aria-label", "labeltext"));
+
+        equal(multiselect.input.attr("aria-label"), "labeltext");
+    });
+
+    test("widget takes aria-labelledby attribute", 1, function() {
+        var multiselect = new MultiSelect(input.attr("aria-labelledby", "labelID"));
+
+        equal(multiselect.input.attr("aria-labelledby"), "labelID");
+    });
+
+    test("widget sets aria-labelledby attribute to label's id", 2, function() {
+        var label = input.before("<label id='labelID' for='msInput'>labeltext</label>").prev("label");
+        var multiselect = new MultiSelect(input.attr("id", "msInput"));
+
+        ok(multiselect.input.attr("aria-labelledby"));
+        equal(multiselect.input.attr("aria-labelledby"), label.attr("id"));
+
+        label.remove();
+    });
+
+    test("widget sets aria-labelledby attribute to label's generated id", 2, function() {
+        var label = input.before("<label for='msInput'>labeltext</label>").prev("label");
+        var multiselect = new MultiSelect(input.attr("id", "msInput"));
+
+        ok(multiselect.input.attr("aria-labelledby"));
+        equal(multiselect.input.attr("aria-labelledby"), label.attr("id"));
+
+        label.remove();
+    });
 })();

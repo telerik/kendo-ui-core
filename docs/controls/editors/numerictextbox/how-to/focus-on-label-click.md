@@ -7,7 +7,7 @@ slug: howto_focus_widgeton_label_click_numerictextbox
 
 # Focus Widget on Label Click
 
-The example below demonstrates how to focus the Kendo UI NumericTextBox widget when the `label` element is clicked.
+The following example demonstrates how to focus the NumericTextBox when the `label` element is clicked.
 
 ###### Example
 
@@ -38,8 +38,6 @@ The example below demonstrates how to focus the Kendo UI NumericTextBox widget w
 ```
 
 ## See Also
-
-Other articles on the Kendo UI NumericTextBox:
 
 * [NumericTextBox JavaScript API Reference](/api/javascript/ui/numerictextbox)
 * [How to Change Text Color]({% slug howto_change_text_color_numerictextbox %})

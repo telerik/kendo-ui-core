@@ -8,33 +8,25 @@ position: 1
 
 # User Guide
 
-## Audience
+This guide is intended for the end user of the Spreadsheet.
 
-This guide is intended for the end user of the Kendo UI Spreadsheet widget. It aims at providing information about the widget's functionalities for data entry/management, and support to end users while working with it.
-
-## Table of Contents
-
-To the left of this page is the collapsible Table of Contents. You can easily navigate through it by clicking on the title of a section you want to read.
-
-## Organization
-
-The instructions in this guide are organized in sections, based on the actions you might wish to execute on each spreadsheet component (sheets, rows, columns).
+The document provides information about the functionalities of the widget for data entry and management.
 
 ## Conventions
 
 This guide uses the following conventions:
 
-| ITEM										| CONVENTION						|
+| Item										| Convention					|
 | :---										| :---								|
-| Buttons, menus, tabs, dialog titles		| **boldface** font 				|
-| Keyboard buttons, names of functions		| `screen` font						|
+| Buttons, menus, tabs, dialog titles		    | **boldface** font 				|
+| Keyboard buttons, names of functions	    | `screen` font						  |
 | Selection sequences of buttons or options	| **Data** > **Data Validation**	|
 
 ## Overview
 
-Kendo UI Spreadsheet is used for implementation of related data and its visualization in a tabular format (rows and columns). This kind of data structuring provides for an easier management and analysis. The widget renders the feeling of a [Microsoft Excel table](https://support.office.com/en-ca/article/Overview-of-Excel-tables-7ab0bb7d-3a9e-4b56-a3c9-6c94334e492c) by offering many cell-formatting options, styles, and themes, while utilizing simpler and easy-to-master user interface.
+The Kendo UI Spreadsheet is used for the implementation of related data and its visualization in a tabular format (rows and columns). This kind of data structuring provides for an easier management and analysis. The widget renders the touch and feel of a [Microsoft Excel table](https://support.office.com/en-ca/article/Overview-of-Excel-tables-7ab0bb7d-3a9e-4b56-a3c9-6c94334e492c) by offering many cell-formatting options, styles, and themes while utilizing simpler and easy-to-master user interface.
 
-##### Main Elements of the Kendo UI Spreadsheet Widget
+**Figure 1: Main Elements of the Spreadsheet**
 
 <center>![Spreadsheet UI components](../images/spreadsheet-components.png)</center>
 
@@ -44,7 +36,7 @@ Kendo UI Spreadsheet is used for implementation of related data and its visualiz
 
 When you open the Spreadsheet, the widget automatically generates a worksheet and applies to it a collection of default settings.
 
-| WHAT YOU WANT			| HOW TO GET THERE	|
+| What you want	| How to get there	|
 | :---					| :---				|
 | Select 				| Click **Select All** [ <span class="k-font-icon k-i-resize-se"></span> ]  located to the left of column header **A** and above row header **1** on the active sheet |
 | Create				| Click **+** on the Sheet Tab Bar to create a new sheet				|
@@ -54,7 +46,7 @@ When you open the Spreadsheet, the widget automatically generates a worksheet an
 
 ### Cells
 
-| WHAT YOU WANT			| HOW TO GET THERE		|
+| What you want			| How to get there		|
 | :---					| :---					|
 | Select/activate       | Click a cell		    |
 | Select a range of cells | <ol><li>Click a cell</li> <li>Extend the selection by holding down the mouse while marking the selection you want</li></ol> |
@@ -72,7 +64,7 @@ When you open the Spreadsheet, the widget automatically generates a worksheet an
 
 ### Rows
 
-| WHAT YOU WANT			| HOW TO GET THERE		|
+| What you want			| How to get there		|
 | :---					| :---					|
 | Select/activate		| Click the row header against of the row you want to select |
 | Insert				| <ol><li>Select a row by clicking on the respective row header</li> <li>Click the **Insert** tab from the **Menu**</li> <li>Click **Add Row Below** [ <span class="k-font-icon k-i-add-row-below"></span> ] or **Add Row Above** [ <span class="k-font-icon k-i-add-row-above"></span> ] on the **Toolbar**</li></ol> |
@@ -86,7 +78,7 @@ When you open the Spreadsheet, the widget automatically generates a worksheet an
 
 ### Columns
 
-| WHAT YOU WANT			| HOW TO GET THERE		|
+| What you want			| How to get there		|
 | :---					| :---					|
 | Select/activate 		| Click the column header against the column you want to select |
 | Insert				| <ol><li>Select a column by clicking on the respective column header</li> <li>Click the **Insert** tab from the **Menu**</li> <li>On the **Toolbar** click **Add Column Left** [ <span class="k-font-icon k-i-add-column-left"></span> ] or **Add Column Right** [ <span class="k-font-icon k-i-add-column-right"></span> ]</li></ol> |
@@ -99,7 +91,7 @@ When you open the Spreadsheet, the widget automatically generates a worksheet an
 
 ### Fonts
 
-| WHAT YOU WANT			| HOW TO GET THERE		|
+| What you want			| How to get there		|
 | :---					| :---					|
 | Choose fonts			| <ol><li>Select the cells to which you want to apply the font</li> <li>On the **Toolbar** click **Font** [ <span class="k-font-icon k-i-font-family"></span> ]</li> <li>Choose a font type from the drop-down list</li></ol> |
 | Edit font sizes 	| <ol><li>Select the cells to which you want to apply the font size</li> <li>On the **Toolbar** click **Font Size** [ <span class="k-font-icon k-i-font-size"></span> ]</li> <li>Choose the font size from the predetermined values in drop-down list</li></ol> |
@@ -107,24 +99,24 @@ When you open the Spreadsheet, the widget automatically generates a worksheet an
 
 ### Filters
 
-| WHAT YOU WANT				| HOW TO GET THERE		|
+| What you want				| How to get there		|
 | :---						| :---					|
 | Sort fields   		    | <ol><li>Click **Data** on the **Tab Bar**</li> <li>Select a column</li> <li>Click **Sort** [ <span class="k-font-icon k-i-sort-desc"></span> ] on the **Toolbar** and choose any of the two options from the drop-down list:</li> <ul><ul><li>**Sort range A to Z** sorts the content within the selected columns in ascending order</li> <li>**Sort range Z to A** sorts the content within the selected columns in descending alphabetical order</li></ul></ul></ol> |
 | Unsort fields             | <ul><li>Click **Undo** [ <span class="k-font-icon k-i-undo"></span> ] on the **Menu** to reverse the sorting you made.</li></ul> <ul>Оr</ul> <ul><li>Add a new column. Check which is the last active field of the columns whose data you want to sort. Then add a subsequent number (1, 2, 3, etc.) to each field of the recently added column ending with the field in the same row as the last field of the columns whose content you want to sort. In this way you can revert the sorting of the target columns by applying the sorting option in ascending order to the recently added helper column.</li></ul> |
-| Filter information        | <ol><li>Click **Data** on the **Tab Bar**</li> <li>Select the columns to which you want to apply the filtering criteria</li> <li>Click **Filter** [ <span class="k-font-icon k-i-filter"></span> ] on the **Toolbar**</li> <li>Choose from the drop-down list of options:</li> <ul><ul><li>**Sort range A to Z** sorts the data within the columns in ascending alphabetical order</li> <li>**Sort range Z to A** sorts the data within the columns in descending alphabetical order</li> <li>**Filter by condition** filters the data within the column by applying any of the conditions from the drop-down list of options. Each of them can be applied to text fields, dates, or numbers:</li> <ul><ul><li><u>Text fields:</u> Choose any of the options referring to texts from the **Filter by condition** drop-down list. Fill in the field below to set the filter condition. Click **Apply**. For example, choose **Text starts with**, set the condition to **E**, and click **Apply**. The result shows all rows containing text fields that start with an **E**. You can alphabetically sort the filtered infromation by clicking **Sort range A to Z** or **Sort range Z to A**.</li> <li><u>Dates:</u> Choose any of the options referring to dates from the **Filter by condition** drop-down list. Fill in the field below to set the filter condition. Click **Apply**. For example, choose **Date is**, set the condition to **6/30/2014**, and click **Apply**. The result is a list of only rows containing fields that display the date 6/30/2014. Note that the date format may differ depending on the order of date components. Make sure you check the current format before applying this filter.</li> <li><u>Numbers:</u> Choose any of the options referring to numbers from the **Filter by condition** drop-down list. Fill in the field below to set the filter condition. Click **Apply**. For example, choose **Is equal to**, set the condition to **10230**, and click **Apply**. The result is a list of only rows containing fields that display the number 10230.</li></ul></ul></ul></ul> <ul><ul>To retrieve all applied filters and sorting conditions, from **Filter by condition** choose **None** > **Apply**.</ul></ul> <ul><ul><li>**Filter by value** provides more options for filtering numbers.</li> <ul><li>Select the checkbox against **All** to clear all conditions and view all rows within the active sheet</li> <li>Uncheck **All** to clear all checkboxes, and choose the values according to which you want to filter the data in the selected columns.</li></ul></ul></ul> |
+| Filter information        | <ol><li>Click **Data** on the **Tab Bar**</li> <li>Select the columns to which you want to apply the filtering criteria</li> <li>Click **Filter** [ <span class="k-font-icon k-i-filter"></span> ] on the **Toolbar**</li> <li>Choose from the drop-down list of options:</li> <ul><ul><li>**Sort range A to Z** sorts the data within the columns in ascending alphabetical order</li> <li>**Sort range Z to A** sorts the data within the columns in descending alphabetical order</li> <li>**Filter by condition** filters the data within the column by applying any of the conditions from the drop-down list of options. Each of them can be applied to text fields, dates, or numbers:</li> <ul><ul><li><u>Text fields:</u> Choose any of the options referring to texts from the **Filter by condition** drop-down list. Fill in the field below to set the filter condition. Click **Apply**. For example, choose **Text starts with**, set the condition to **E**, and click **Apply**. The result shows all rows containing text fields that start with an **E**. You can alphabetically sort the filtered information by clicking **Sort range A to Z** or **Sort range Z to A**.</li> <li><u>Dates:</u> Choose any of the options referring to dates from the **Filter by condition** drop-down list. Fill in the field below to set the filter condition. Click **Apply**. For example, choose **Date is**, set the condition to **6/30/2014**, and click **Apply**. The result is a list of only rows containing fields that display the date 6/30/2014. Note that the date format may differ depending on the order of date components. Make sure you check the current format before applying this filter.</li> <li><u>Numbers:</u> Choose any of the options referring to numbers from the **Filter by condition** drop-down list. Fill in the field below to set the filter condition. Click **Apply**. For example, choose **Is equal to**, set the condition to **10230**, and click **Apply**. The result is a list of only rows containing fields that display the number 10230.</li></ul></ul></ul></ul> <ul><ul>To retrieve all applied filters and sorting conditions, from **Filter by condition** choose **None** > **Apply**.</ul></ul> <ul><ul><li>**Filter by value** provides more options for filtering numbers.</li> <ul><li>Select the checkbox against **All** to clear all conditions and view all rows within the active sheet</li> <li>Uncheck **All** to clear all checkboxes, and choose the values according to which you want to filter the data in the selected columns.</li></ul></ul></ul> |
 
 ### File Import and Export
 
 You are able to export the content of your Spreadsheet to Portable Document Format (PDF) or Excel format (.xlsx) files, as well as import Excel Workbook content to the Spreadsheet.
 
-| WHAT YOU WANT				| HOW TO GET THERE		|
+| What you want				| How to get there		|
 | :---						| :---					|
 | Import files				| <ol><li>Click **Open** [ <span class="k-font-icon k-i-folder-open"></span> ] on the **Toolbar**.</li> <li>From the dialog box select the Excel Workbook you want to import by clicking on it.</li> <li>Click **Open** to load its content.</li></ol> |
 | Export files 				| <ol><li> Click **Export** [ <span class="k-font-icon k-i-xls"></span> ].</li></ol>  <ul>Export to Excel <ul>2. In the **File name** field fill in a name for the file that is going to be exported. <p>3. From the **Save as type** drop-down list choose **Excel Workbook (.xlsx)**.</p> <p>4. Click **Save** to locally download the exported Excel file and follow your browser instructions to proceed further on.</p></ul></ul> <ul>Export in PDF <ul>2. In the **File name** field fill in a name for the file that is going to be exported. <p>3. From the drop-down list against **Save as type** choose **Portable Document Format (.pdf)**.</p> <p>4. From the **Export** drop-down list choose which part of the content you want to export&mdash;the entire workbook, active sheet, or a partial content selection.</p> <p>5. From the **Paper size** drop-down list pick the size in which you want the exported file to be displayed.</p> <p>6. From the **Margins** drop-down list select what the margins of the resulting pages&mdash;normal, narrow, or wide.</p> <p>7. Indicate whether you want to display the content of the resulting file in a horizontal or vertical orientation by clicking on the respective icon.</p> <p>8. By checking **Guidelines** against **Print**, your exported PDF document is going to display its content in a table format with gridlines. If you want to disable the gridlines, uncheck the button. By default, **Guidelines** is checked for you to provide for the better visualization of the content.</p> <p>9. Checking the **Fit to page** option against **Scale** is going to automatically make the content from your spreadsheets fit within the boundaries of the exported PDF document. By default, **Fit to page** is checked for you to provide for the better visualization of the content.</p> <p>10. By checking the **Horizontally** option against **Center**, the content of the exported PDF file is going to be centered according to the horizontal margins of each exported sheet. By checking the **Vertically** option against **Center**, the content of the exported PDF file is going to be centered according to the vertical margins of each exported sheet. By default, both options are checked for you to provide for the better visualization of the content.</p> <p>11. Click **Save** to locally download the exported PDF file and follow your browser instructions to proceed further on.</p></ul></ul> |
 
 ### Other
 
-| WHAT YOU WANT				| HOW TO GET THERE		|
+| What you want				| How to get there		|
 | :---						| :---					|
 | Auto fill                 | <ol><li>Insert textual, numeric, or textual and numeric characters of one and the same pattern in at least two subsequent column cells. For example, 1, 2.</li> <li>Select these cells.</li> <li>To copy the data series automatically, drag the fill handle across, down, or up the cells you want to fill.</li></ol> <p>Note that the **Auto Fill** command does not copy the format of the cells with the initial data series and does not apply it to the target ones.</p> <p>If you select just one cell and drag the fill handle to auto-complete adjacent cells, the command copies, but does not change in the existing pattern, the content from the initial cell to each of the target ones.</p>
 | Freeze panes				| <ol><li>Select the row or column which you want to freeze</li> <li>From the **Toolbar** click **Freeze Panes**</li> <li>Choose the option from the drop-down list</li></ol> |
@@ -138,29 +130,31 @@ You are able to export the content of your Spreadsheet to Portable Document Form
 | Edit formulas and functions 	| <ol><li>Double-click a cell to display the formula/function in the **Formula Bar**</li> <li>Change the formula/function and press `Enter`</li></ol> |
 | Validate data				| Data validation allows you to predetermine the format and constrain the value of the content of a single cell or cells within a range, column, or row: <ol><li>Select a cell or a range of cells</li> <li>In the **Menu** click **Data** > **Data Validation** to open the **Data Validation** window</li> <li>Choose the criterion from the drop-down list of options.</li> <li>A new window with criteria-specific options appears. Use the prompts and drop-down options to set the rules for modifying the content.</li></ol> |
 | Choose data from predefined values | <p>The Spreadsheet supports the implementation of custom editors. They facilitate your input of data in a cell by providing you with predefined date and list values that are already placed in the necessary format.</p> <p>For example, if you are asked to fill in a date in a cell, clicking the icon of the custom editor of that cell provides you with a calendar. Choose the desired date without bothering about the syntax you are supposed to use to fill it in.</p> <ol><li>Select a cell.</li> <li>An icon appears right next to it. Click on it to see the options that are predefined for you to choose from. |
+| Define names for cells and ranges of cells | <p>It is possible to define a custom name for a cell or a range of cells in the Spreadsheet. As a result, instead of typing the range in formulas later on, you can directly refer to the range by its name.</p> <ol><li>Select a cell or a range of cells by using the mouse. For example, select the `A1:C3` range.</li> <li>Click on the **Name Box** of the Spreadsheet.</li> <li>Type in the name of the range that is currently selected. For example, name the range **MyRange**.</li> <li>Press `Enter`.</li> <li>Go to a cell outside the range and type in the **Formula Bar** a formula which refers to the range by its name. For example, `=SUM(MyRange)+2`.</li></ol> |
+| Delete names of cells and ranges of cells | <ol><li>Select the name of the cell or the range of cells from the **Name Box**.</li> <li>Click **X**.</li></ol> |
 
 <br>
 
 > **Important**
-> * Whenever **Cancel** is displayed as a command, click it if you want to close an active drop-down list or menu, or exit an open window, and return to the worksheet.
-> * Whenever **Apply** is displayed as a command, click it if you want an option you selected to be applied.
+> * To close an active drop-down list or menu or exit an open window and then return to the worksheet, click **Cancel** whenever displayed as a command.
+> * To apply an options you have already selected, click **Apply** whenever displayed as a command.
 
 ## Formulas and Functions
 
-The Spreadsheet widget supports many of the Excel formulas and functions as seen in the [List of Formulas and Functions](/web/spreadsheet/end-user/list-of-formulas).
+The Spreadsheet supports many of the Excel formulas and functions as seen in the [List of Formulas and Functions]({% slug list_offormulas_andfunctions_spreadsheet_widget %}).
 
 ## Keyboard Navigation
 
-The Spreadsheet widget supports many of the Excel keyboard shortcuts as shown in the [List of Keyboard Shortcuts](/web/spreadsheet/end-user/list-of-shortcuts).
+The Spreadsheet supports many of the Excel keyboard shortcuts as seen in the [List of Keyboard Shortcuts]({% slug list_ofkeyboard_shortcuts_spreadsheet_widget %}).
 
 ## Known Limitations
 
-- Because of specific requirements, browsers may not support the **Paste** command when initiated from the context menu or the **Toolbar**. If you try to apply the command in either of these ways, a popup message is displayed informing you about the limitation. Use the keyboard navigation to achieve the result.
-- Formulas which are very deeply nested might produce a stack overflow error. For example, `=sin(cos(sin(cos(...))))` or `=A1+A2+A3+...+A200`&mdash;even though the latter does not seem nested&mdash;is internally treated like `=((((...(A1+A2)+A3)+A4)+...+)+A200)`).
+- Because of specific requirements, browsers might not support the **Paste** command when it is initiated from the context menu or from the **Toolbar**. If you try to apply the command in either of these ways, a popup message is displayed informing you about the limitation. Use the keyboard navigation to achieve the desired result.
+- Formulas that are very deeply nested, such as `=sin(cos(sin(cos(...))))` or `=A1+A2+A3+...+A200`, might produce a stack overflow error. Even though the latter does not seem nested, it is internally treated as `=((((...(A1+A2)+A3)+A4)+...+)+A200)`).
 
 **Solution**
 
-Use `SUM` for cases like the second formula demonstrated above. When not possible, avoid nesting more than 100 levels deep. Note that the maximum depth depends on the browser, but 100 is considered to be a safe limit.
+Use `SUM` when your case is similar to the second example of the nested formulas above. If to use `SUM` is not possible, avoid nesting values more than 100 levels deep. Note that the maximum depth depends on the browser, but one hundred is considered to be a safe limit.
 
 ## See Also
 

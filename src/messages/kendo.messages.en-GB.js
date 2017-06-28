@@ -5,7 +5,9 @@ if (kendo.ui.FlatColorPicker) {
 kendo.ui.FlatColorPicker.prototype.options.messages =
 $.extend(true, kendo.ui.FlatColorPicker.prototype.options.messages,{
   "apply": "Apply",
-  "cancel": "Cancel"
+  "cancel": "Cancel",
+  "noColor": "no colour",
+  "clearColor": "Clear colour"
 });
 }
 
@@ -15,7 +17,9 @@ if (kendo.ui.ColorPicker) {
 kendo.ui.ColorPicker.prototype.options.messages =
 $.extend(true, kendo.ui.ColorPicker.prototype.options.messages,{
   "apply": "Apply",
-  "cancel": "Cancel"
+  "cancel": "Cancel",
+  "noColor": "no colour",
+  "clearColor": "Clear colour"
 });
 }
 
@@ -71,6 +75,7 @@ $.extend(true, kendo.ui.Editor.prototype.options.messages,{
   "style": "Styles",
   "emptyFolder": "Empty Folder",
   "uploadFile": "Upload",
+  "overflowAnchor": "More tools",
   "orderBy": "Arrange by:",
   "orderBySize": "Size",
   "orderByName": "Name",
@@ -92,13 +97,52 @@ $.extend(true, kendo.ui.Editor.prototype.options.messages,{
   "dialogInsert": "Insert",
   "dialogButtonSeparator": "or",
   "dialogCancel": "Cancel",
+  "cleanFormatting": "Clean formatting",
   "createTable": "Create table",
   "addColumnLeft": "Add column on the left",
   "addColumnRight": "Add column on the right",
   "addRowAbove": "Add row above",
   "addRowBelow": "Add row below",
   "deleteRow": "Delete row",
-  "deleteColumn": "Delete column"
+  "deleteColumn": "Delete column",
+  "dialogOk": "Ok",
+  "tableWizard": "Table Wizard",
+  "tableTab": "Table",
+  "cellTab": "Cell",
+  "accessibilityTab": "Accessibility",
+  "caption": "Caption",
+  "summary": "Summary",
+  "width": "Width",
+  "height": "Height",
+  "units": "Units",
+  "cellSpacing": "Cell Spacing",
+  "cellPadding": "Cell Padding",
+  "cellMargin": "Cell Margin",
+  "alignment": "Alignment",
+  "background": "Background",
+  "cssClass": "CSS Class",
+  "id": "ID",
+  "border": "Border",
+  "borderStyle": "Border Style",
+  "collapseBorders": "Collapse borders",
+  "wrapText": "Wrap text",
+  "associateCellsWithHeaders": "Associate cells with headers",
+  "alignLeft": "Align Left",
+  "alignCenter": "Align Center",
+  "alignRight": "Align Right",
+  "alignLeftTop": "Align Left Top",
+  "alignCenterTop": "Align Center Top",
+  "alignRightTop": "Align Right Top",
+  "alignLeftMiddle": "Align Left Middle",
+  "alignCenterMiddle": "Align Center Middle",
+  "alignRightMiddle": "Align Right Middle",
+  "alignLeftBottom": "Align Left Bottom",
+  "alignCenterBottom": "Align Center Bottom",
+  "alignRightBottom": "Align Right Bottom",
+  "alignRemove": "Remove Alignment",
+  "columns": "Columns",
+  "rows": "Rows",
+  "selectAllCells": "Select All Cells"
 });
 }
 
@@ -814,6 +858,7 @@ $.extend(true, kendo.spreadsheet.messages.toolbar,{
     "undo": "Undo"
   },
   "saveAs": "Save As...",
+  "sort": "Sort",
   "sortAsc": "Sort ascending",
   "sortDesc": "Sort descending",
   "sortButtons": {
@@ -832,6 +877,7 @@ $.extend(true, kendo.spreadsheet.messages.toolbar,{
 if (kendo.spreadsheet && kendo.spreadsheet.messages.view) {
 kendo.spreadsheet.messages.view =
 $.extend(true, kendo.spreadsheet.messages.view,{
+  "nameBox": "Name Box",
   "errors": {
     "shiftingNonblankCells": "Cannot insert cells due to data loss possibility. Select another insert location or delete the data from the end of your worksheet.",
     "filterRangeContainingMerges": "Cannot create a filter within a range containing merges",

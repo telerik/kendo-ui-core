@@ -2,14 +2,17 @@
 title: Customize Checkbox Templates
 page_title: Customize Checkbox Templates | Kendo UI TreeView
 description: "Learn how to customize the checkbox template of a Kendo UI TreeView in AngularJS applications."
+previous_url: /controls/navigation/treeview/how-to/AngularJS/use-checkbox-template-show-nested-items-under-elements
 slug: howto_customizecheckboxtemplate_angulartreeview
 ---
 
 # Customize Checkbox Templates
 
-To add checkbox templates to a Kendo UI TreeView in AngularJS applications, choose either of the following approaches:
+Your project might require you to add checkbox templates to a Kendo UI TreeView in AngularJS applications.
 
-* Add the template to the `k-options` if the `k-options` are already declared in `$scope`:
+To achieve this behavior, apply either of the following approaches:
+
+* If the `k-options` are already declared in `$scope`, add the template to the `k-options`:
 
     ```
       $scope.options = {
@@ -19,7 +22,7 @@ To add checkbox templates to a Kendo UI TreeView in AngularJS applications, choo
       }
     ```
 
-* Add the template declaratively as part of the HTML element and assign a scope variable to access it:
+* Declaratively add the template part of the HTML element and assign a `scope` variable to access it:
 
     ```
       <div kendo-tree-view="tree"
@@ -30,13 +33,13 @@ To add checkbox templates to a Kendo UI TreeView in AngularJS applications, choo
       </script>
     ```
 
-When using the Kendo UI checkboxes, make sure the [`input` element is immediately followed by a `label` element]({% slug themesandappearnce_kendoui_desktopwidgets %}#customize-checkboxes-and-radio-buttons). Otherwise, without a `label`, the `k-checkbox` class will apply a `display : none` style.
+When you use the Kendo UI checkboxes, make sure that the [`input` element is immediately followed by a `label` element]({% slug themesandappearnce_kendoui_desktopwidgets %}#customize-checkboxes-and-radio-buttons). Without the `label` element, the `k-checkbox` class applies a `display : none` style.
 
-The example below demonstrates how to:
+The following example demonstrates how to:
 
-1. Add checkbox templates to a Kendo UI TreeView in AngularJS applications.
+1. Add checkbox templates to a TreeView in AngularJS applications.
 2. Add the [Bootstrap feel to the checkboxes]({% slug themesandappearnce_kendoui_desktopwidgets %}#common-css-files).
-3. Show nested items under elements of a Kendo UI TreeView.
+3. Show nested items under the TreeView elements.
 
 ###### Example
 
@@ -125,10 +128,8 @@ The example below demonstrates how to:
 
 ## See Also
 
-Other articles on the Kendo UI TreeView:
-
 * [TreeView JavaScript API Reference](/api/javascript/ui/treeview)
-* [How to Check Nodes Programatically]({% slug howto_checknodeprogramatically_treeview %})
+* [How to Check Nodes Programmatically]({% slug howto_checknodeprogramatically_treeview %})
 * [How to Edit Nodes via Form]({% slug howto_editnodesviaform_treeview %})
 * [How to Filter Out Search Results]({% slug howto_filetroutserachresults_treeview %})
 * [How to Hide Checkboxes for Root Level]({% slug howto_hidecheckboxesforrootlevel_treeview %})
@@ -137,4 +138,4 @@ Other articles on the Kendo UI TreeView:
 * [How to Scroll to Selected Item]({% slug howto_scrolltoselecteditem_treeview %})
 * [How to Use FontAwesome Icons]({% slug howto_usefontawesomeicons_treeview %})
 
-For more runnable examples on the Kendo UI TreeView, browse its [**How To** documentation folder]({% slug howto_editnodesviaform_angularjs_treeview %}).
+For more runnable examples on the Kendo UI TreeView, browse its [**How To** documentation folder]({% slug howto_bindcheckedstatecustommodelfields_angulartreeview %}).

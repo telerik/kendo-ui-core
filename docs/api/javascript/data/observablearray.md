@@ -2,6 +2,7 @@
 title: ObservableArray
 page_title: API Reference for ObservableArray wrap in Kendo MVVM and Kendo DataSource
 description: How to create a new ObservableArray, explanations how to use kendo.observable methods, fields and events.
+res_type: api
 ---
 
 # kendo.data.ObservableArray
@@ -124,7 +125,7 @@ Gets the parent of the array if such parent exists.
     console.log(array.parent()); // outputs "undefined"
     var observable = kendo.observable({ numbers: [1, 2] });
     var numbers = observable.get("numbers");
-    console.log(numbersperson.parent() === observable); // outputs "true"
+    console.log(numbers.parent() === observable); // outputs "true"
     </script>
 
 ### pop

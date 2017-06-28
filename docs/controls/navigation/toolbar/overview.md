@@ -17,7 +17,7 @@ The ToolBar consists of three main areas: ToolBar wrapper, overflow anchor, and 
 
 ## Getting Started
 
-### Intialize the ToolBar
+### Initialize the ToolBar
 
 The example below demonstrates how to initialize the ToolBar and apply its basic functionalities.
 
@@ -433,7 +433,7 @@ The example below demonstrates how to implement a Kendo UI DropDown widget in th
 
 By design, the ToolBar detects changes in the viewport width and hides the overflowing controls in the command overflow popup. This feature may be disabled by setting `resizable` option to `false`. You are able to control the way a given command behaves on resizing with its `overflow` property.
 
-> **Imporatant**
+> **Important**
 > * Commands with `overflow: "never"` should be declared first, followed by those with `overflow: "auto"`. Commands with `overflow: "always"` should be declared last.
 > * Setting the min-width of the ToolBar's element is mandatory if you want to prevent the widget from resizing below a given width.
 
@@ -461,6 +461,8 @@ The widget provides a mobile specific stylization when placed within the header 
 
 For more information on the mobile rendering feature, refer to the [demo page on the ToolBar acting as ActionBar](http://demos.telerik.com/kendo-ui/m/index#navbar/index).
 
+The mobile view of the Toolbar exposes an additional option for aligning tools to the left or to the right side of the widget. This behavior is achieved by using the `items.align` configuration. For more information, refer to the article on [using the mobile view of the ToolBar]({% slug howto_usemobileview_toolbar %}).
+
 ## ToolBar API
 
 ### Event Handling
@@ -474,7 +476,7 @@ The ToolBar widget exposes the following events:
 * `overflowOpen` - fires when the command overflow popup of the ToolBar opens.
 * `overflowClose` - fires when the command overflow popup of the ToolBar closes.
 
-You are also able to attach `click` and `toggle` event handlers to the buttons through the config options.
+You are also able to attach `click` and `toggle` event handlers to the buttons through the configuration options.
 
 For more information on the configuration options Kendo UI ToolBar supports, refer to the [ToolBar API](/api/javascript/ui/toolbar).
 
@@ -517,7 +519,7 @@ The example below demonstrates how to use ToolBar events.
 
 Other articles on Kendo UI ToolBar:
 
-* [Overview of the ASP.NET MVC HtmlHelper Extension for the ToolBar Widget]({% slug overview_toolbarhelper_aspnetmvc %})
+* [Overview of the ASP.NET MVC HtmlHelper Extension for the ToolBar Widget](http://docs.telerik.com/aspnet-mvc/helpers/toolbar/overview)
 * [Overview of the ToolBar JSP Tag]({% slug overview_toolbar_uiforjsp %})
 * [Overview of the ToolBar PHP Class]({% slug overview_toolbar_uiforphp %})
 * [How to Close ToolBar Popup Manually]({% slug howto_closetoolbarpopupmanually_toolbar %})

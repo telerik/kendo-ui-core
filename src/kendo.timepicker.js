@@ -396,20 +396,21 @@ var __meta__ = { // jshint ignore:line
             var list = this.list,
                 width = list[0].style.width,
                 wrapper = this.options.anchor,
-                computedStyle, computedWidth;
+                computedStyle, computedWidth,
+                outerWidth = kendo._outerWidth;
 
             if (!list.data("width") && width) {
                 return;
             }
 
             computedStyle = window.getComputedStyle ? window.getComputedStyle(wrapper[0], null) : 0;
-            computedWidth = computedStyle ? parseFloat(computedStyle.width) : wrapper.outerWidth();
+            computedWidth = computedStyle ? parseFloat(computedStyle.width) : outerWidth(wrapper);
 
             if (computedStyle && (browser.mozilla || browser.msie)) { // getComputedStyle returns different box in FF and IE.
                 computedWidth += parseFloat(computedStyle.paddingLeft) + parseFloat(computedStyle.paddingRight) + parseFloat(computedStyle.borderLeftWidth) + parseFloat(computedStyle.borderRightWidth);
             }
 
-            width = computedWidth - (list.outerWidth() - list.width());
+            width = computedWidth - (outerWidth(list) - list.width());
 
             list.css({
                 fontFamily: wrapper.css("font-family"),
@@ -595,7 +596,27 @@ var __meta__ = { // jshint ignore:line
             } else {
                 that.readonly(element.is("[readonly]"));
             }
-
+            if (options.dateInput) {
+                var min = options.min;
+                var max = options.max;
+                var today = new DATE();
+                if (getMilliseconds(min) == getMilliseconds(max)) {
+                    min = new DATE(today.getFullYear(), today.getMonth(), today.getDate(), 0, 0, 0);
+                    max = new DATE(today.getFullYear(), today.getMonth(), today.getDate(), 24, 0, 0);
+                } else {
+                    min = new DATE(today.getFullYear(), today.getMonth(), today.getDate(),
+                        min.getHours(), min.getMinutes(), min.getSeconds(), min.getMilliseconds());
+                    max = new DATE(today.getFullYear(), today.getMonth(), today.getDate(),
+                        max.getHours(), max.getMinutes(), max.getSeconds(), max.getMilliseconds());
+                }
+                that._dateInput = new ui.DateInput(element, {
+                    culture: options.culture,
+                    format: options.format,
+                    min: min,
+                    max: max,
+                    value: options.value
+                });
+            }
             that._old = that._update(options.value || that.element.val());
             that._oldText = element.val();
 
@@ -612,7 +633,8 @@ var __meta__ = { // jshint ignore:line
             value: null,
             interval: 30,
             height: 200,
-            animation: {}
+            animation: {},
+            dateInput: false
         },
 
         events: [
@@ -808,6 +830,9 @@ var __meta__ = { // jshint ignore:line
 
             if (timeView.popup.visible() || e.altKey) {
                 timeView.move(e);
+                if (that._dateInput && e.stopImmediatePropagation) {
+                    e.stopImmediatePropagation();
+                }
             } else if (key === keys.ENTER && value !== that._oldText) {
                 that._change(value);
             } else {
@@ -851,7 +876,11 @@ var __meta__ = { // jshint ignore:line
             }
 
             that._value = date;
-            that.element.val(kendo.toString(date || value, options.format, options.culture));
+            if (that._dateInput) {
+                that._dateInput.value(date || value);
+            } else {
+                that.element.val(kendo.toString(date || value, options.format, options.culture));
+            }
             timeView.value(date);
 
             return date;

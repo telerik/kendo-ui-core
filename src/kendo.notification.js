@@ -7,7 +7,13 @@ var __meta__ = { // jshint ignore:line
     name: "Notification",
     category: "web",
     description: "The Notification widget displays user alerts.",
-    depends: [ "core", "popup" ]
+    depends: [ "core", "popup" ],
+    features: [ {
+        id: "notification-fx",
+        name: "Animation",
+        description: "Support for animation",
+        depends: [ "fx" ]
+    } ]
 };
 
 (function($, undefined) {
@@ -34,9 +40,9 @@ var __meta__ = { // jshint ignore:line
         NS = ".kendoNotification",
         WRAPPER = '<div class="k-widget k-notification"></div>',
         TEMPLATE = '<div class="k-notification-wrap">' +
-                '<span class="k-icon k-i-#=typeIcon#">#=typeIcon#</span>' +
+                '<span class="k-icon k-i-#=typeIcon#" title="#=typeIcon#"></span>' +
                 '#=content#' +
-                '<span class="k-icon k-i-close">Hide</span>' +
+                '<span class="k-icon k-i-close" title="Hide"></span>' +
             '</div>',
         SAFE_TEMPLATE = TEMPLATE.replace("#=content#", "#:content#");
 
@@ -173,15 +179,6 @@ var __meta__ = { // jshint ignore:line
                 });
             }
 
-            if (popup.options.anchor !== document.body && popup.options.origin.indexOf(RIGHT) > 0) {
-                popup.bind("open", function () {
-                    var shadows = kendo.getShadows(popup.element);
-                    setTimeout(function () {
-                        popup.wrapper.css("left", parseFloat(popup.wrapper.css("left")) + shadows.left + shadows.right);
-                    });
-                });
-            }
-
             if (options.hideOnClick) {
                 popup.bind("activate", function() {
                     if (attachDelay) {
@@ -247,7 +244,7 @@ var __meta__ = { // jshint ignore:line
                 popup.open(x, y);
             }
 
-            popup.wrapper.addClass(that._guid).css(extend({margin:0}, that._popupPaddings));
+            popup.wrapper.addClass(that._guid).css(extend({margin:0,zIndex:10050}, that._popupPaddings));
 
             if (options.position.pinned) {
                 popup.wrapper.css("position", "fixed");

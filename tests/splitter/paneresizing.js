@@ -433,7 +433,7 @@
 
         splitter.object.size(".k-pane:first", 60);
 
-        splitter.dom.find(".k-collapse-prev").trigger("click");
+        splitter.dom.find(".k-i-arrow-60-left").trigger("click");
 
         equal(panes.eq(0).width(), 0)
     });

@@ -2,6 +2,7 @@
 title: Button
 page_title: Configuration, methods and events of Kendo UI Mobile Button
 description: Find which events to use in Mobile Button Widget.
+res_type: api
 ---
 
 # kendo.mobile.ui.Button
@@ -184,7 +185,7 @@ Whether to enable or disable the widget.
 
     <script>
         var app = new kendo.mobile.Application();
-        function change() {
+        function onChange() {
             $("#foo").data("kendoMobileButton").enable(this.check());
         }
         function onClick() {

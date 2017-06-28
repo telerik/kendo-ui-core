@@ -2,6 +2,7 @@
 title: ComboBox
 page_title: Configuration, methods and events of Kendo UI ComboBox
 description: Learn to configure Kendo UI ComboBox widget, use the documentation guide to operate different types of methods and get familiar with all events, used in ComboBox UI widget.
+res_type: api
 ---
 
 # kendo.ui.ComboBox
@@ -105,6 +106,24 @@ Controls whether to bind the widget to the data source on initialization.
     <script>
     $("#combobox").kendoComboBox({
         autoBind: false
+    });
+    </script>
+
+### autoWidth `Boolean`
+
+If set to `true`, the widget automatically adjusts the width of the popup element and does not wrap up the item label.
+
+> Note: Virtualized list doesn't support the auto-width functionality.
+
+#### Example - enable autoWidth
+
+    <input id="combobox" style="width: 100px;" />
+    <script>
+    $("#combobox").kendoComboBox({
+      autoWidth: true,
+      dataSource: {
+        data: ["Short item", "An item with really, really long text"]
+      }
     });
     </script>
 
@@ -265,11 +284,11 @@ The field of the data item that provides the value of the widget.
 
     <input id="combobox" />
     <script>
-    $("#comboBox").kendoComboBox({
-        dataSource: [{
+    $("#combobox").kendoComboBox({
+        dataSource: [
             { Name: "Parent1", Id: 1 },
             { Name: "Parent2", Id: 2 }
-        }]
+        ],
         dataTextField: "Name",
         dataValueField: "Id"
     });
@@ -331,7 +350,7 @@ If set to `true` the widget will not show all items when the text of the search 
 
 ### filter `String`*(default: "none")*
 
-The filtering method used to determine the suggestions for the current value. Filtration is turned off by default.
+The filtering method used to determine the suggestions for the current value. Filtration is turned off by default, and can be performed over `string` values only (either the widget's data has to be an array of strings, or over the field, configured in the [`dataTextField`](#configuration-dataTextField) option).
 The supported filter values are `startswith`, `endswith` and `contains`.
 
 #### Example - set the filter
@@ -485,7 +504,7 @@ The minimum number of characters the user must type before a search is performed
     });
     </script>
 
-### noDataTemplate `String|Function` *(default: "No results found.")*
+### noDataTemplate `String|Function` *(default: "NO DATA FOUND.")*
 
 The [template](/api/javascript/kendo#methods-template) used to render the "no data" template, which will be displayed if no results are found or the underlying data source is empty.
 The noData template receives the widget itself as a part of the data argument. The template will be evaluated on every widget data bound.
@@ -497,10 +516,7 @@ The noData template receives the widget itself as a part of the data argument. T
     <input id="combobox" />
     <script>
     $("#combobox").kendoComboBox({
-      dataSource: [
-        { id: 1, name: "Apples" },
-        { id: 2, name: "Oranges" }
-      ],
+      dataSource: [],
       dataTextField: "name",
       dataValueField: "id",
       noDataTemplate: 'No Data!'
@@ -541,7 +557,7 @@ refer to [Popup](/api/javascript/ui/popup) documentation.
         <input id="combobox" />
     </div>
     <script>
-    $("#combobox").kendoCombobox({
+    $("#combobox").kendoComboBox({
       dataSource: [
         { id: 1, name: "Apples" },
         { id: 2, name: "Oranges" }
@@ -564,7 +580,7 @@ Defines a jQuery selector that will be used to find a container element, where t
         <input id="combobox" />
     </div>
     <script>
-    $("#combobox").kendoCombobox({
+    $("#combobox").kendoComboBox({
       dataSource: [
         { id: 1, name: "Apples" },
         { id: 2, name: "Oranges" }
@@ -579,7 +595,7 @@ Defines a jQuery selector that will be used to find a container element, where t
 
 ### popup.origin `String`
 
-Specifies how to position the popup element based on achor point. The value is
+Specifies how to position the popup element based on anchor point. The value is
 space separated "y" plus "x" position.
 
 The available "y" positions are:
@@ -598,7 +614,7 @@ The available "x" positions are:
         <input id="combobox" />
     </div>
     <script>
-    $("#combobox").kendoCombobox({
+    $("#combobox").kendoComboBox({
       dataSource: [
         { id: 1, name: "Apples" },
         { id: 2, name: "Oranges" }
@@ -632,7 +648,7 @@ The available "x" positions are:
         <input id="combobox" />
     </div>
     <script>
-    $("#combobox").kendoCombobox({
+    $("#combobox").kendoComboBox({
       dataSource: [
         { id: 1, name: "Apples" },
         { id: 2, name: "Oranges" }
@@ -655,6 +671,20 @@ If set to `true` the widget will automatically use the first suggestion as its v
     <script>
     $("#combobox").kendoComboBox({
       suggest: true
+    });
+    </script>
+
+### syncValueAndText `Boolean`*(default: true)*
+
+When set to `true` the widget will automatically set selected value to the typed custom text. Set the option to `false` to
+clear the selected value but keep the custom text.
+
+#### Example - disable automatic sync between value and text
+
+    <input id="combobox" />
+    <script>
+    $("#combobox").kendoComboBox({
+      syncValueAndText: true
     });
     </script>
 
@@ -794,9 +824,12 @@ For more information, refer to the [article on virtualization]({% slug virtualiz
 
 ### virtual.valueMapper `Function`*(default: null)*
 
-The `valueMapper` function is **mandatory** for the functionality of the virtualized widget.
 The widget calls the `valueMapper` function when the widget receives a value, that is not fetched from the remote server yet.
 The widget will pass the selected value(s) in the `valueMapper` function. In turn, the valueMapper implementation should return the **respective data item(s) index/indices**.
+
+> **Important**
+>
+> As of the Kendo UI R3 2016 release, the implementation of the `valueMapper` function is optional. It is required only if the widget contains an initial value or if the `value` method is used.
 
 #### Example - ComboBox widget with a virtualized list
 
@@ -1218,6 +1251,8 @@ The filter value.
 
 Gets or sets the selected item. Selects the item provided as an argument and updates the value and text of the widget.
 
+> **Important:** If the widget is not bound (e.g. `autoBind` is set to `false`), the `select` method will **not** pre-fetch the data before continuing with the selection and value setting (unlike the [value](#methods-value) method), and no item will be selected.
+
 > **Important:** When **virtualization** is enabled, the method **does not support** selection with a *function predicate*. The predicate function looks only
 in the current datasource view, which represents only the active range/page. Hence it will not work properly.
 
@@ -1301,7 +1336,7 @@ A number representing the index of the item or function predicate which returns 
     var combobox = $("#combobox").data("kendoComboBox");
 
     combobox.select(function(dataItem) {
-        return dataItem.text === "Apples";
+        return dataItem.name === "Apples";
     });
     </script>
 

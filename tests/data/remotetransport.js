@@ -11,7 +11,7 @@ module("RemoteTransport", {
     }
 });
 
-asyncTest("read calls $.ajax", 1, function() {
+skip("read calls $.ajax", 1, function() {
     var transport = new RemoteTransport({
             read: {
                 url: "foo"

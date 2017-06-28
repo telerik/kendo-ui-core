@@ -2,6 +2,7 @@
 title: DropDownList
 page_title: Configuration, methods and events of Kendo UI DropDownList
 description: "Learn how to control your DropDown UI widget's behavior to suit your needs: open, close, enable, disable the widget. Events data and code examples available."
+res_type: api
 ---
 
 # kendo.ui.DropDownList
@@ -112,6 +113,24 @@ Controls whether to bind the widget to the data source on initialization.
     <script>
     $("#dropdownlist").kendoDropDownList({
         autoBind: false
+    });
+    </script>
+
+### autoWidth `Boolean`
+
+If set to `true`, the widget automatically adjusts the width of the popup element and does not wrap up the item label.
+
+> Note: Virtualized list doesn't support the auto-width functionality.
+
+#### Example - enable autoWidth
+
+    <input id="dropdownlist" style="width: 100px;" />
+    <script>
+    $("#dropdownlist").kendoDropDownList({
+      autoWidth: true,
+      dataSource: {
+        data: ["Short item", "An item with really, really long text"]
+      }
     });
     </script>
 
@@ -324,7 +343,7 @@ If set to `true` the widget will not show all items when the text of the search 
 
 ### filter `String`*(default: "none")*
 
-The filtering method used to determine the suggestions for the current value. Filtration is turned off by default.
+The filtering method used to determine the suggestions for the current value. Filtration is turned off by default, and can be performed over `string` values only (either the widget's data has to be an array of strings, or over the field, configured in the [`dataTextField`](#configuration-dataTextField) option).
 The supported filter values are `startswith`, `endswith` and `contains`.
 
 #### Example - set the filter
@@ -417,7 +436,17 @@ The height of the suggestion popup in pixels. The default value is 200 pixels.
     <input id="dropdownlist" />
     <script>
     $("#dropdownlist").kendoDropDownList({
-      height: 500
+      dataTextField: "ProductName",
+      dataValueField: "ProductID",
+	  height: 500,
+      dataSource: {
+        transport: {
+          read: {
+            dataType: "jsonp",
+            url: "//demos.telerik.com/kendo-ui/service/Products",
+          }
+        }
+      }
     });
     </script>
 
@@ -468,7 +497,7 @@ The minimum number of characters the user must type before a filter is performed
     });
     </script>
 
-### noDataTemplate `String|Function` *(default: "No results found.")*
+### noDataTemplate `String|Function` *(default: "NO DATA FOUND.")*
 
 The [template](/api/javascript/kendo#methods-template) used to render the "no data" template, which will be displayed if no results are found or the underlying data source is empty.
 The noData template receives the widget itself as a part of the data argument. The template will be evaluated on every widget data bound.
@@ -480,10 +509,7 @@ The noData template receives the widget itself as a part of the data argument. T
     <input id="dropdownlist" />
     <script>
     $("#dropdownlist").kendoDropDownList({
-      dataSource: [
-        { id: 1, name: "Apples" },
-        { id: 2, name: "Oranges" }
-      ],
+      dataSource: [],
       dataTextField: "name",
       dataValueField: "id",
       noDataTemplate: 'No Data!'
@@ -540,7 +566,7 @@ Defines a jQuery selector that will be used to find a container element, where t
 
 ### popup.origin `String`
 
-Specifies how to position the popup element based on achor point. The value is
+Specifies how to position the popup element based on anchor point. The value is
 space separated "y" plus "x" position.
 
 The available "y" positions are:
@@ -830,9 +856,11 @@ For more information, refer to the [article on virtualization]({% slug virtualiz
 
 ### virtual.valueMapper `Function`*(default: null)*
 
-The `valueMapper` function is **mandatory** for the functionality of the virtualized widget.
 The widget calls the `valueMapper` function when the widget receives a value, that is not fetched from the remote server yet.
 The widget will pass the selected value(s) in the `valueMapper` function. In turn, the valueMapper implementation should return the **respective data item(s) index/indices**.
+> **Important**
+>
+> As of the Kendo UI R3 2016 release, the implementation of the `valueMapper` function is optional. It is required only if the widget contains an initial value or if the `value` method is used.
 
 #### Example - DropDownList widget with a virtualized list
 
@@ -1297,6 +1325,7 @@ The search value.
 
 Gets or sets the selected item. Selects the item provided as an argument and updates the value and text of the widget.
 
+> * If the widget is not bound (e.g. `autoBind` is set to `false`), the `select` method will **not** pre-fetch the data before continuing with the selection and value setting (unlike the [value](#methods-value) method), and no item will be selected.
 > * The numeric argument indicates the item index in the dropdown, not in the dataSource. If an [`optionLabel`](#configuration-optionLabel) is used, the dropdown item index can be obtained by incrementing the respective dataSource item index by 1.
 > * When **virtualization** is enabled, the method **does not support** selection with a *function predicate*. The predicate function looks only
 in the current datasource view, which represents only the active range/page. Hence it will not work properly.
@@ -1755,7 +1784,7 @@ The widget instance which fired the event.
 Fired when an item from the popup is selected by the user either with mouse/tap or with keyboard navigation.
 
 > * The event is not fired when an item is selected programmatically.
-> * Since version Q1 2015 (2015.1.318), the [option label has been moved outside the item list DOM collection](/backward-compatibility#kendo-ui-2015-q1). As a result, `jQuery.index()` can no longer be used to reliably detect if the option label is the selected dropdown item. A more appropriate approach would be to check if the selected dataItem value is an empty string, and/or check if the selected dateItem's text is equal to the `optionLabel` string.
+> * Since version Q1 2015 (2015.1.318), the [option label has been moved outside the item list DOM collection]({% slug breakingchanges2015_kendoui %}#kendo-ui-2015-q1). As a result, `jQuery.index()` can no longer be used to reliably detect if the option label is the selected dropdown item. A more appropriate approach would be to check if the selected dataItem value is an empty string, and/or check if the selected dateItem's text is equal to the `optionLabel` string.
 >   *  `e.sender.dataItem(e.item)[e.sender.options.dataValueField] == ""`
 >   *  `e.sender.dataItem(e.item)[e.sender.options.dataTextField] == e.sender.options.optionLabel`
 

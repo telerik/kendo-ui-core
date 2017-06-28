@@ -1,6 +1,7 @@
 ---
 title: ValueFilter
 page_title: Configuration, methods and events of Kendo UI Spreadsheet ValueFilter Instance object
+res_type: api
 ---
 
 # kendo.spreadsheet.ValueFilter

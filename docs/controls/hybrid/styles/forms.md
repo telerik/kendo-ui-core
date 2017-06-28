@@ -2,7 +2,7 @@
 title: Forms
 page_title: Forms | Kendo UI Hybrid Components
 description: "Use Kendo UI hybrid forms in mobile application development"
-previous_url: /controls/hybrid/forms/forms
+previous_url: /controls/hybrid/forms/forms, /controls/hybrid/forms, /mobile/forms
 slug: forms_hybridkendoui
 position: 1
 ---
@@ -16,15 +16,15 @@ The Kendo UI Hybrid framework provides automatic platform-dependent styling of `
 
 > **Important**
 >
-> To make use of native-like forms layout and to properly align widgets without additional styling, it is advisable to build and organize your mobile forms using [Kendo UI ListView for mobile](/controls/hybrid/listview/overview).
+> To make use of native-like forms layout and to properly align widgets without additional styling, it is advisable to build and organize your mobile forms using [Kendo UI ListView for mobile]({% slug overview_hybridlistview %}).
 
-The `input` elements with a picker use the native one from the current platform if it is supported. HTML5 `form` elements are fully functional only on the following platforms: iOS 5.x+, Android 4.x+, BlackBerry 6.x+, BlackBerry Playbook 1.x+. The styling still works on older platforms, but the functionality is limited to text input only. The `select` elements are also automatically styled for each platform and use the native select dialog or popup.
+The `input` elements with a picker use the native one from the current platform if it is supported. HTML5 `form` elements are fully functional only on the following platforms: iOS 5.x+, Android 4.x+, BlackBerry 6.x+, BlackBerry PlayBook 1.x+. The styling still works on older platforms, but the functionality is limited to text input only. The `select` elements are also automatically styled for each platform and use the native select dialog or popup.
 
 ## Known Limitations and Workarounds
 
 > **Important**
 > * To avoid many Android and Windows Phone 8 form issues, use native scroller in all Views that require text entry, as shown in the example below.
-> * Native scrolling is only enabled on platforms that support it, such as iOS5 or later, Android 3 or later, Windowd Phone 8. BlackBerry devices do support it, but the native scroller is flaky.
+> * Native scrolling is only enabled on platforms that support it, such as iOS5 or later, Android 3 or later, Window Phone 8. BlackBerry devices do support it, but the native scroller is flaky.
 
 The example below demonstrates how to use the native scroller in all Views that require a text entry.
 
@@ -124,7 +124,7 @@ To activate this feature, set the `km-required` class to the `label`. This class
 
 ### Inline Fields
 
-**Figure 1. Inline fields in the Nova theme**
+**Figure 1: Inline fields in the Nova theme**
 
 ![Inline fields](/controls/hybrid/styles/inline.png)
 
@@ -146,7 +146,7 @@ There could be more than one input in a row. This outcome requires explicit widt
 
 ### Button as Legend
 
-**Figure 2. Nova theme showing a button as a legend**
+**Figure 2: Nova theme showing a button as a legend**
 
 ![Button as Legend](/controls/hybrid/styles/button-as-legend.png)
 
@@ -161,7 +161,7 @@ Legend tags can have buttons inside. To achieve this outcome set the `km-legend-
 
 ### Fieldset and Legend
 
-**Figure 3. Nova theme showing a fieldset with a legend**
+**Figure 3: Nova theme showing a fieldset with a legend**
 
 ![Fieldset + Legend](/controls/hybrid/styles/fieldset-legend.png)
 
@@ -176,7 +176,7 @@ Legend can also be used as a first level Label.
 
 ### Label Icons
 
-**Figure 4. Nova theme showing label icons**
+**Figure 4: Nova theme showing label icons**
 
 ![Label icons](/controls/hybrid/styles/label-icons.png)
 
@@ -190,7 +190,7 @@ Labels can only be icons. To get this outcome set the `km-icon-label` and `.km- 
 
 ### Labels above fields
 
-**Figure 5. Nova theme showing labels above fields**
+**Figure 5: Nova theme showing labels above fields**
 
 ![Labels above fields](/controls/hybrid/styles/labels-above.png)
 
@@ -204,7 +204,7 @@ Labels can be positioned above the fields. To achieve this outcome set the `km-l
 
 ### Standalone Checkboxes and Radio Buttons
 
-**Figure 6. Nova theme showing standalone checkboxes and radio buttons**
+**Figure 6: Nova theme showing standalone checkboxes and radio buttons**
 
 ![Standalone Checkboxes and RadioButtons](/controls/hybrid/styles/standalone-checksandradios.png)
 

@@ -4,7 +4,7 @@ page_title: Responsive Web Design | Kendo UI Styles and Appearance
 description: "Learn how to implement responsive web design in Kendo UI widgets."
 previous_url: /using-kendo-in-responsive-web-pages
 slug: responsivewebdesign_integration_kendoui
-position: 2
+position: 3
 ---
 
 # Responsive Web Design
@@ -150,7 +150,8 @@ Other articles on styling, appearance, and rendering of Kendo UI widgets:
 * [Themes and Appearance of the Kendo UI Widgets]({% slug themesandappearnce_kendoui_desktopwidgets %})
 * [Web Font Icons]({% slug webfonticons_kendoui_desktopwidgets %})
 * [How to Change Themes on the Client]({% slug howto_changethemes_ontheclient_styleskendoui %})
-* [ThemeBuilder Overview]({% slug themebuilder_overview_kendouistyling %})
+* [Sass ThemeBuilder Overview]({% slug sassbasedthemes_kendoui %}#sass-theme-builder)
+* [Less ThemeBuilder Overview]({% slug themesandappearnce_kendoui_desktopwidgets %}#less-theme-builder)
 * [Rendering Modes for Data Visualization]({% slug renderingmodesfor_datavisualization_kendouistyling %})
 * [Troubleshooting]({% slug commonissues_troubleshooting_kendouistyling %})
 * [Themes and Appearance of the Kendo UI Hybrid Widgets](/controls/hybrid/styling)

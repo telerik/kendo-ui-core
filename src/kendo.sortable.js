@@ -13,6 +13,8 @@ var __meta__ = { // jshint ignore:line
 (function($, undefined) {
     var kendo = window.kendo,
         Widget = kendo.ui.Widget,
+        outerWidth = kendo._outerWidth,
+        outerHeight = kendo._outerHeight,
 
         START = "start",
         BEFORE_MOVE = "beforeMove",
@@ -185,15 +187,15 @@ var __meta__ = { // jshint ignore:line
                 }
 
                 if(this._isFloating(target.element)) { //horizontal
-                    if(axisDelta.x < 0 && (moveOnDragEnter || offsetDelta.left < 0)) {
+                    if((axisDelta.x < 0 && moveOnDragEnter) || (!moveOnDragEnter && offsetDelta.left < 0)) {
                         direction = "prev";
-                    } else if(axisDelta.x > 0 && (moveOnDragEnter || offsetDelta.left > 0)) {
+                    } else if((axisDelta.x > 0 && moveOnDragEnter) || (!moveOnDragEnter &&  offsetDelta.left > 0)) {
                         direction = "next";
                     }
                 } else { //vertical
-                    if(axisDelta.y < 0 && (moveOnDragEnter || offsetDelta.top < 0)) {
+                    if((axisDelta.y < 0  && moveOnDragEnter) || (!moveOnDragEnter &&  offsetDelta.top < 0)) {
                         direction = "prev";
-                    } else if(axisDelta.y > 0 && (moveOnDragEnter || offsetDelta.top > 0)) {
+                    } else if((axisDelta.y > 0  && moveOnDragEnter) || (!moveOnDragEnter &&  offsetDelta.top > 0)) {
                         direction = "next";
                     }
                 }
@@ -361,8 +363,8 @@ var __meta__ = { // jshint ignore:line
                 delta;
 
             lastItemOffset = kendo.getOffset(lastItem);
-            lastItemOffset.top += lastItem.outerHeight();
-            lastItemOffset.left += lastItem.outerWidth();
+            lastItemOffset.top += outerHeight(lastItem);
+            lastItemOffset.left += outerWidth(lastItem);
 
             if(this._isFloating(lastItem)) { //horizontal
                 delta = lastItemOffset.left - cursorOffset.left;
@@ -443,8 +445,8 @@ var __meta__ = { // jshint ignore:line
         _getElementCenter: function(element) {
             var center = element.length ? kendo.getOffset(element) : null;
             if(center) {
-                center.top += element.outerHeight() / 2;
-                center.left += element.outerWidth() / 2;
+                center.top += outerHeight(element) / 2;
+                center.left += outerWidth(element) / 2;
             }
 
             return center;

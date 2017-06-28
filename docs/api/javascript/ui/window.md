@@ -2,6 +2,7 @@
 title: Window
 page_title: Configuration, methods and events of Kendo UI Window
 description: How to initialize a Window UI widget and configure its behaviors, center a window, set its content and toggle the state of the UI widget.
+res_type: api
 ---
 
 # kendo.ui.Window
@@ -546,6 +547,42 @@ Destroys the window and its modal overlay, if necessary. Removes the widget HTML
     var dialog = $("#dialog").data("kendoWindow");
     dialog.destroy();
     </script>
+
+### isMaximized
+
+Indicates whether the window is maximized.
+
+#### Returns
+
+`Boolean`
+
+#### Example - check if window is maximized
+
+    <div id="dialog"></div>
+    <script>
+    $("#dialog").kendoWindow();
+    var dialog = $("#dialog").data("kendoWindow");
+    dialog.maximize();
+    var maximized = dialog.isMaximized();
+    </script>    
+
+### isMinimized
+
+Indicates whether the window is minimized.
+
+#### Returns
+
+`Boolean`
+
+#### Example - check if window is minimized
+
+    <div id="dialog"></div>
+    <script>
+    $("#dialog").kendoWindow();
+    var dialog = $("#dialog").data("kendoWindow");
+    dialog.minimize();
+    var minimized = dialog.isMinimized();
+    </script>   
 
 ### maximize
 

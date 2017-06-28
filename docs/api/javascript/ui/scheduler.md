@@ -2,6 +2,7 @@
 title: Scheduler
 page_title: Configuration, methods and events of Kendo UI Scheduler
 description: How to configure and control methods in Scheduler UI widget, which events to use to open, close, change, select.
+res_type: api
 ---
 
 # kendo.ui.Scheduler
@@ -782,6 +783,100 @@ Sets the command which will be displayed in the scheduler footer. Currently only
 
 The configuration of the scheduler resource(s) grouping.
 
+### group.date `Boolean` *(default: false)*
+
+If set to `true` and the [group.resources](#configuration-group.resources) has some resources set the view is grouped by date.
+
+#### Example - define group by date
+    <div id="scheduler"></div>
+    <script>
+    $("#scheduler").kendoScheduler({
+      date: new Date("2013/6/6"),
+      group: {
+        resources: ["Rooms"],
+        date: true
+      },
+      dataSource: [
+        {
+          id: 1,
+          start: new Date("2013/6/6 08:00 AM"),
+          end: new Date("2013/6/6 09:00 AM"),
+          title: "Interview",
+          roomId: 1 // the event is held in "Small meeting room" whose value is 1
+        },
+        {
+          id: 2,
+          start: new Date("2013/6/6 08:00 AM"),
+          end: new Date("2013/6/6 09:00 AM"),
+          title: "Meeting",
+          roomId: 2 // the event is held in "Big meeting room" whose value is 2
+        }
+      ],
+      resources: [
+        {
+          field: "roomId",
+          name: "Rooms",
+          dataColorField: "key",
+          dataSource: [
+            { text: "Small meeting room", value: 1, key: "#aabbcc" },
+            { text: "Big meeting room", value: 2, key: "green" }
+          ]
+        }
+      ]
+    });
+    </script>
+
+### groupHeaderTemplate `String|Function`
+
+The [template](/api/javascript/kendo#methods-template) used to render the group headers of scheduler day, week, workWeek and timeline views.
+
+The fields which can be used in the template are:
+
+* text `String` - the group text
+* color `String` - the group color
+* value - the group value
+* field `String` - the field of the scheduler event which contains the resource id
+* title `String` - the 'title' option of the resource
+* name  `String` - the 'name' option of the resource
+
+#### Example - set the group header template
+
+    <script id="groupHeaderTemplate" type="text/x-kendo-template">
+      <strong style="color: #=color#">#=text#</strong>
+    </script>
+    <div id="scheduler"></div>
+    <script>
+    $("#scheduler").kendoScheduler({
+      date: new Date("2013/6/6"),
+      groupHeaderTemplate: $("#groupHeaderTemplate").html(),
+      dataSource: [
+        {
+          id: 1,
+          start: new Date("2013/6/6 08:00 AM"),
+          end: new Date("2013/6/6 09:00 AM"),
+          isAllDay: true,
+          title: "Interview",
+          attendees: [1,2]
+        }
+      ],
+      group: {
+        resources: ["Attendees"],
+        orientation: "horizontal"
+      },
+      resources: [
+        {
+          field: "attendees",
+          name: "Attendees",
+          dataSource: [
+           { value: 1, text: "Alex" },
+           { value: 2, text: "Bob" }
+          ],
+          multiple: true
+        }
+      ]
+    });
+    </script>
+
 ### group.resources `Array`
 
 An array of resource names by which the scheduler events will be grouped.
@@ -1194,6 +1289,30 @@ The text similar to "All events" displayed in timeline views when there is no ve
     });
     </script>
 
+### messages.next `String`
+
+The tooltip of the next navigation button.
+
+#### Example - set the "next" message
+
+    <div id="scheduler"></div>
+    <script>
+    $("#scheduler").kendoScheduler({
+      messages: {
+        next: "Next"
+      },
+      date: new Date("2013/6/6"),
+      dataSource: [
+        {
+          id: 1,
+          start: new Date("2013/6/6 08:00 AM"),
+          end: new Date("2013/6/6 09:00 AM"),
+          title: "Interview"
+        }
+      ]
+    });
+    </script>
+
 ### messages.pdf `String`
 
 The text displayed by the PDF export button.
@@ -1206,6 +1325,30 @@ The text displayed by the PDF export button.
       toolbar: ["pdf"],
       messages: {
         pdf: "PDF Export"
+      },
+      date: new Date("2013/6/6"),
+      dataSource: [
+        {
+          id: 1,
+          start: new Date("2013/6/6 08:00 AM"),
+          end: new Date("2013/6/6 09:00 AM"),
+          title: "Interview"
+        }
+      ]
+    });
+    </script>
+
+### messages.previous `String`
+
+The tooltip of the previous navigation button.
+
+#### Example - set the "previous" message
+
+    <div id="scheduler"></div>
+    <script>
+    $("#scheduler").kendoScheduler({
+      messages: {
+        previous: "Previous"
       },
       date: new Date("2013/6/6"),
       dataSource: [
@@ -2358,6 +2501,10 @@ The text similar to "last" displayed in the scheduler recurrence editor.
     });
     </script>
 
+### messages.recurrenceEditor.recurrenceEditorTitle `String`
+
+The text of the Recurence editor dropdown title.
+
 ### messages.recurrenceEditor.weekly `Object`
 
 The configuration of the scheduler recurrence editor weekly messages. Use this option to customize or localize the scheduler recurrence editor weekly messages.
@@ -2996,7 +3143,7 @@ Constraints the minimum date which can be selected via the scheduler navigation.
 
 The number of time slots to display per major tick.
 
-> Note that the minorTickCount value should set to number heigher than 0.
+> Note that the minorTickCount value should set to number greater than 0.
 
 #### Example - set the number of time slots
 
@@ -3905,7 +4052,7 @@ The start time of the week and day views. The scheduler will display events star
     $("#scheduler").kendoScheduler({
       date: new Date("2013/6/6"),
       startTime: new Date("2013/6/6 08:00"),
-      endTime: new Date("2013/6/6 18:00")
+      endTime: new Date("2013/6/6 18:00"),
       views: ["day", "week"],
       dataSource: [
         {
@@ -4677,6 +4824,58 @@ The fields which can be used in the template are:
 
 The configuration of the view resource(s) grouping.
 
+### views.group.date `Boolean` *(default: false)*
+
+If set to `true` and the [group.resources](#configuration-group.resources) has some resources set the view is grouped by date.
+
+Overrides the [date](#configuration-group.date) option of the scheduler.
+
+#### Example - define group by date
+    <div id="scheduler"></div>
+    <script>
+    $("#scheduler").kendoScheduler({
+      date: new Date("2013/6/6"),
+       views: [
+        {
+            type: "month",
+            group: {
+                date: true
+            }
+        }
+      ],
+      group: {
+        resources: ["Rooms"]
+      },
+      dataSource: [
+        {
+          id: 1,
+          start: new Date("2013/6/6 08:00 AM"),
+          end: new Date("2013/6/6 09:00 AM"),
+          title: "Interview",
+          roomId: 1 // the event is held in "Small meeting room" whose value is 1
+        },
+        {
+          id: 2,
+          start: new Date("2013/6/6 08:00 AM"),
+          end: new Date("2013/6/6 09:00 AM"),
+          title: "Meeting",
+          roomId: 2 // the event is held in "Big meeting room" whose value is 2
+        }
+      ],
+      resources: [
+        {
+          field: "roomId",
+          name: "Rooms",
+          dataColorField: "key",
+          dataSource: [
+            { text: "Small meeting room", value: 1, key: "#aabbcc" },
+            { text: "Big meeting room", value: 2, key: "green" }
+          ]
+        }
+      ]
+    });
+    </script>
+
 ### views.group.orientation `String` *(default: "horizontal")*
 
 The orientation of the group headers. Supported values are *horizontal* or *vertical*. Note that the agenda view is always in vertical orientation.
@@ -4722,59 +4921,6 @@ The orientation of the group headers. Supported values are *horizontal* or *vert
             { text: "Small meeting room", value: 1, key: "#aabbcc" },
             { text: "Big meeting room", value: 2, key: "green" }
           ]
-        }
-      ]
-    });
-    </script>
-
-
-### groupHeaderTemplate `String|Function`
-
-The [template](/api/javascript/kendo#methods-template) used to render the group headers of scheduler day, week, workWeek and timeline views.
-
-The fields which can be used in the template are:
-
-* text `String` - the group text
-* color `String` - the group color
-* value - the group value
-* field `String` - the field of the scheduler event which contains the resource id
-* title `String` - the 'title' option of the resource
-* name  `String` - the 'name' option of the resource
-
-
-#### Example - set the group header template
-
-    <script id="groupHeaderTemplate" type="text/x-kendo-template">
-      <strong style="color: #=color#">#=text#</strong>
-    </script>
-    <div id="scheduler"></div>
-    <script>
-    $("#scheduler").kendoScheduler({
-      date: new Date("2013/6/6"),
-      groupHeaderTemplate: $("#groupHeaderTemplate").html(),
-      dataSource: [
-        {
-          id: 1,
-          start: new Date("2013/6/6 08:00 AM"),
-          end: new Date("2013/6/6 09:00 AM"),
-          isAllDay: true,
-          title: "Interview",
-          attendees: [1,2]
-        }
-      ],
-      group: {
-        resources: ["Attendees"],
-        orientation: "horizontal"
-      },
-      resources: [
-        {
-          field: "attendees",
-          name: "Attendees",
-          dataSource: [
-           { value: 1, text: "Alex" },
-           { value: 2, text: "Bob" }
-          ],
-          multiple: true
         }
       ]
     });
@@ -4961,6 +5107,10 @@ Contains two placeholders - "{0}" and "{1}" which represent the start and end da
       ]
     });
     </script>
+
+### views.selectedShortDateFormat `String`
+
+The format used to display the selected date when viewport is narrow, and the date is displayed in short ("d") format by default. Uses [kendo.format](/api/javascript/kendo#methods-format).
 
 ### views.showWorkHours `Boolean` *(default: false)*
 
@@ -5663,7 +5813,7 @@ Get the relevant resources for a given slot.
 
 `Object` The relevant resources.
 
-#### Exampe - get the relevant resources
+#### Example - get the relevant resources
     <div id="scheduler"></div>
     <script>
     $("#scheduler").kendoScheduler({
@@ -5888,7 +6038,9 @@ Get the time slot from given element.
 
 ### view
 
-Gets or sets the current scheduler view.
+Gets or sets the current Scheduler view.
+
+To get the current Scheduler view name, use the [`viewName` method](#methods-viewName).
 
 #### Parameters
 
@@ -5898,7 +6050,7 @@ The view type to select.
 
 #### Returns
 
-`kendo.ui.SchedulerView` the current scheduler view.
+`kendo.ui.SchedulerView` the current Scheduler view.
 
 #### Example - set the current view
 

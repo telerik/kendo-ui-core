@@ -21,6 +21,7 @@ For more information, refer to the [Transformation API article](/api/javascript/
       <div id="chart"></div>
       Copyright: ACME Inc.
     </div>
+
     <script>
       $("#chart").kendoChart({
         title: {
@@ -78,7 +79,6 @@ For more information, refer to the [Transformation API article](/api/javascript/
         });
       });
     </script>
-</script>
 ```
 
 ## See Also

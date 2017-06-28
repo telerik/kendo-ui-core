@@ -61,7 +61,7 @@ The example below demonstrates how to inherit from an existing Kendo UI widget.
             constructor(element: Element, options?: MyDatePickerOptions) {
                 super(element, options);
             }
-            // (Otional) Override a widget method
+            // (Optional) Override a widget method
             open() {
                 // Log to the console (optional)
                 console.log("open");
@@ -134,9 +134,9 @@ The following example shows how to use Kendo UI MVVM in TypeScript.
 
 Other articles on Kendo UI integration with third-party tools and frameworks:
 
-* [Angular 2.0]({% slug angular2support_integration_kendoui %})
+* [SharePoint Add-Ins]({% slug sharepoint_tutorials %})
 * [Twitter Bootstrap]({% slug twitterbootstrapintegration_integration_kendoui %})
-* [Web Components]({% slug webcomponents_integration_kendoui %})
+* [Angular 2.0]({% slug angular2support_integration_kendoui %})
 * [RequireJS]({% slug requirejs_integration_kendoui %})
 * [Visual Studio IntelliSense]({% slug visualstudiointellisense_integration_kendoui %})
 * [Telerik Data Access]({% slug bindtotelerikdataaccesstool_integration_kendoui %})

@@ -18,7 +18,7 @@ To vertically scroll the TabStrip content containers with the help of the keyboa
         $("#tabstrip").kendoTabStrip();
         $("#tabstrip").removeAttr("tabindex");
 
-**Step 2.** Scroll the container using Javascript, as the example below demonstrates.
+**Step 2.** Scroll the container using JavaScript, as the example below demonstrates.
 
 ###### Example
 

@@ -11,7 +11,7 @@
         }
     });
 
-    var KICONCLOSE = ".k-i-close";
+    var KICONCLOSE = ".k-dialog-close";
 
     function createDialog(options, element) {
         element = element || $("<div class='dialog'>dialog content</div>").appendTo(QUnit.fixture);

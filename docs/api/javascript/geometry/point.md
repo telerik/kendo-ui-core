@@ -1,6 +1,7 @@
 ---
 title: Point
 page_title: API reference for methods and fields of Kendo UI Geometry Point
+res_type: api
 ---
 
 # kendo.geometry.Point
@@ -79,20 +80,20 @@ Returns a new Point with the maximum x and y coordinates of all Point arguments.
 
 ### minPoint
 
-Returns a Point with the smallest representable coordinates.
+Returns the Point with minimum x and y coordinates.
 
 #### Returns
 
-`kendo.geometry.Point` A new Point instance with minimum coordinates.
+`kendo.geometry.Point` The Point with minimum x and y coordinates.
 
 
 ### maxPoint
 
-Returns a Point with the largest representable coordinates.
+Returns the Point with maximum x and y coordinates.
 
 #### Returns
 
-`kendo.geometry.Point` A new Point instance with maximum coordinates.
+`kendo.geometry.Point` The Point with maximum x and y coordinates.
 
 
 ## Methods

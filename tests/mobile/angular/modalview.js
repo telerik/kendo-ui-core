@@ -7,7 +7,7 @@
     ngTest("is instantiated from a kendo-mobile-modal-view directive", 1,
     function() {
         QUnit.fixture.html("<div kendo-mobile-application id='app'>" +
-            "<kendo-mobile-view id='home'>Home</kendo-mobile-view>" + 
+            "<kendo-mobile-view id='home'>Home</kendo-mobile-view>" +
             "<kendo-mobile-modal-view id='modal'></kendo-mobile-modal-view>" +
         "</div>");
     },
@@ -19,7 +19,7 @@
     ngTest("accepts attribute options", 2,
     function() {
         QUnit.fixture.html("<div kendo-mobile-application id='app'>" +
-            "<kendo-mobile-view id='home'>Home</kendo-mobile-view>" + 
+            "<kendo-mobile-view id='home'>Home</kendo-mobile-view>" +
             "<kendo-mobile-modal-view id='modal' k-width='300' k-height='800'></kendo-mobile-modal-view>" +
         "</div>");
     },
@@ -34,7 +34,7 @@
         QUnit.fixture.html("<div kendo-mobile-application id='app'>" +
             "<kendo-mobile-view id='home'>" +
                 "<a id='myButton' kendo-mobile-button href='#modal' k-rel=\"'modalview'\">Open Modal</a>" +
-            "</kendo-mobile-view>" + 
+            "</kendo-mobile-view>" +
             "<kendo-mobile-modal-view id='modal' k-width='300' k-height='800'></kendo-mobile-modal-view>" +
         "</div>");
     },
@@ -55,7 +55,7 @@
         });
         QUnit.fixture.html("<div kendo-mobile-application id='app'>" +
             "<kendo-mobile-view id='home'>" +
-            "</kendo-mobile-view>" + 
+            "</kendo-mobile-view>" +
             "<kendo-mobile-modal-view id='modal' ng-controller='foo'>{{foo}}</kendo-mobile-modal-view>" +
         "</div>");
     },
@@ -73,7 +73,7 @@
         });
         QUnit.fixture.html("<div kendo-mobile-application id='app'>" +
             "<kendo-mobile-view id='home'>" +
-            "</kendo-mobile-view>" + 
+            "</kendo-mobile-view>" +
             "<kendo-mobile-modal-view id='modal' ng-controller='foo' k-on-open='onOpen(kendoEvent)'></kendo-mobile-modal-view>" +
         "</div>");
     },
@@ -90,7 +90,7 @@
         QUnit.fixture.html("<div kendo-mobile-application id='app'>" +
             "<kendo-mobile-view id='home'>" +
                 "<a id='myButton' kendo-mobile-button href='#modal' k-rel=\"'modalview'\">Open Modal</a>" +
-            "</kendo-mobile-view>" + 
+            "</kendo-mobile-view>" +
             "<kendo-mobile-modal-view id='modal' ng-controller='foo'></kendo-mobile-modal-view>" +
         "</div>");
     },
@@ -111,7 +111,7 @@
     function() {
         QUnit.fixture.html("<div kendo-mobile-application id='app'>" +
             "<kendo-mobile-view id='home'>" +
-            "</kendo-mobile-view>" + 
+            "</kendo-mobile-view>" +
             "<kendo-mobile-modal-view id='modal'>" +
                 "<a id='myButton' kendo-mobile-button>Button</a>" +
             "</kendo-mobile-modal-view>" +

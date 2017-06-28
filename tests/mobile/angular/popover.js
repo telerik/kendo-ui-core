@@ -13,7 +13,7 @@
                         "Popover home" +
                     "</kendo-mobile-view>" +
                 "</div>" +
-            "</kendo-mobile-view>" + 
+            "</kendo-mobile-view>" +
         "</div>");
     },
     function() {
@@ -31,7 +31,7 @@
                         "Popover home" +
                     "</kendo-mobile-view>" +
                 "</div>" +
-            "</kendo-mobile-view>" + 
+            "</kendo-mobile-view>" +
         "</div>");
     },
     function() {
@@ -54,7 +54,7 @@
                         "Popover home" +
                     "</kendo-mobile-view>" +
                 "</div>" +
-            "</kendo-mobile-view>" + 
+            "</kendo-mobile-view>" +
         "</div>");
     },
     function() {
@@ -75,7 +75,7 @@
                         "{{ foo }}" +
                     "</kendo-mobile-view>" +
                 "</div>" +
-            "</kendo-mobile-view>" + 
+            "</kendo-mobile-view>" +
         "</div>");
     },
     function() {
@@ -101,7 +101,7 @@
                         "{{ foo }}" +
                     "</kendo-mobile-view>" +
                 "</div>" +
-            "</kendo-mobile-view>" + 
+            "</kendo-mobile-view>" +
         "</div>");
     },
     function() {

@@ -2,6 +2,7 @@
 title: DateTimePicker
 page_title: Configuration, methods and events of Kendo UI DateTimePicker
 description: Learn how to configure the UI DateTimePicker widget. Use methods to open, close, remove, enable, disable, set maximum or minimum values and more.
+res_type: api
 ---
 
 # kendo.ui.DateTimePicker
@@ -135,6 +136,19 @@ The duration of the open animation in milliseconds.
     });
     </script>
 
+### dateInput `Boolean`*(default: false)*
+
+ Specifies if the DateTimePicker will use DateInput for editing value
+
+#### Example
+
+    <input id="datetimepicker" />
+    <script>
+    $("#datetimepicker").DateTimePicker({
+        dateInput: true
+    });
+    </script>
+
 ### dates `Array`
 
 Specifies a list of dates, which will be passed to the [month template](#configuration-month.content) of the DateView.
@@ -184,10 +198,10 @@ All dates, which match the date portion of the selected date will be used to re-
 Specifies the navigation depth of the calendar. The following
 settings are available for the **depth** value:
 
-- *"month"* shows the days of the month
-- *"year"* shows the months of the year
-- *"decade"* shows the years of the decade
-- *"century"* shows the decades from the century
+* `"month"` - Shows the days of the month.
+* `"year"` - Shows the months of the year.
+* `"decade"` - Shows the years of the decade.
+* `"century"` - Shows the decades from the century.
 
 > Note the option will not be applied if **start** option is *lower* than **depth**. Always set both and **start** and **depth** options.
 
@@ -347,6 +361,38 @@ note that a check for an empty `date` is needed, as the widget can work with a n
     });
     </script>
 
+### month.weekNumber `String`
+
+ The template to be used for rendering the cells in "week" column. By default, the widget renders the calculated week of the year. 
+ The properties available in the data object are:
+
+ * currentDate - returns the first date of the current week.
+ * weekNumber - calculated week number.
+
+ These properties can be used in the template to make additional calculations.  
+
+#### Example - specify week number template as a string
+
+    <style>
+      .italic{
+        font-style: italic;
+      }
+    </style>
+    <body>
+
+    <input id="datetimepicker1" />
+    <script id="week-template" type="text/x-kendo-template">
+       <a class="italic">#= data.weekNumber #</a>
+    </script>
+    <script>
+      $("#datetimepicker1").kendoDateTimePicker({
+        weekNumber: true,
+        month: {
+          weekNumber: $("#week-template").html()
+        }
+      });
+    </script>
+
 ### month.empty `String`
 
 The template used for rendering cells in the calendar "month" view, which are outside the min/max range.
@@ -373,6 +419,19 @@ The template used for rendering cells in the calendar "month" view, which are ou
     });
     </script>
 
+### weekNumber `Boolean` *(default: false)*
+
+If set to `true` a week of the year will be shown on the left side of the calendar. It is possible to define a template in order to customize what will be displayed.  
+
+#### Example - enable the week of the year option
+
+    <input id="datetimepicker1" />
+    <script>
+        $("#datetimepicker1").kendoDateTimePicker({
+            weekNumber: true
+        });
+    </script>
+
 ### parseFormats `Array`
 
  Specifies the formats, which are used to parse the value set with value() method or by direct input. If not set the value of the `options.format` and `options.timeFormat` will be used.
@@ -395,22 +454,10 @@ The template used for rendering cells in the calendar "month" view, which are ou
  Specifies the start view of the calendar.
  The following settings are available for the **start** value:
 
-#### *"month"*
-
-shows the days of the month
-
-#### *"year"*
-
-shows the months of the year
-
-#### *"decade"*
-
-shows the years of the decade
-
-#### *"century"*
-
-shows the decades from the century
-
+ * `"month"` - Shows the days of the month.
+ * `"year"` - Shows the months of the year.
+ * `"decade"` - Shows the years of the decade.
+ * `"century"` - Shows the decades from the century.
 
 #### Example - specify the initial view, which calendar renders
 
@@ -780,6 +827,19 @@ The time value to set for a DateTimePicker, expressed as a Date object or as a s
 #### Returns
 
 `Date` The time value of a DateTimePicker.
+
+> * This method **does not trigger** [change](#events-change) event.
+This could affect [MVVM value binding](/framework/mvvm/bindings/value). The model bound to the widget will not be updated.
+You can overcome this behavior trigerring the `change` event manually using [trigger("change")](/api/javascript/observable#methods-trigger) method.
+
+    <input id="datetimepicker" />
+    <script>
+    $("#datetimepicker").kendoDateTimePicker();
+
+    var datepicker = $("#datetimepicker").data("kendoDateTimePicker");
+    datepicker.value(new Date(2016, 10, 1));
+    datepicker.trigger("change");
+    </script>
 
 #### Example - gets the value of the widget
 

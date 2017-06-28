@@ -1,6 +1,6 @@
 /* Dialog */
 
-.k-dialog 
+.k-dialog
 {
     min-width: 90px;
     min-height: 3em;
@@ -8,13 +8,13 @@
     max-height: 100%;
 }
 
-.k-dialog.k-window 
+.k-window.k-dialog
 {
     position: fixed;
     padding-top: 0;
 }
 
-.k-dialog .k-window-titlebar
+.k-dialog .k-dialog-titlebar
 {
     position: static;
     margin: 0;
@@ -22,7 +22,7 @@
     width: auto;
 }
 
-.k-dialog .k-window-titlebar .k-dialog-title
+.k-dialog .k-dialog-titlebar .k-dialog-title
 {
     margin: 0;
     padding: 0;
@@ -53,18 +53,24 @@
     padding: 0;
 }
 
-.k-dialog a.k-dialog-action.k-link
+.k-dialog a.k-dialog-action.k-dialog-close
 {
     position: absolute;
-    top: 1em;
-    right: 1em;
+    top: .35em;
+    right: 0;
     cursor: pointer;
     z-index: 10000;
 }
 
-.k-dialog.k-alert .k-window-titlebar,
-.k-dialog.k-confirm .k-window-titlebar,
-.k-dialog.k-prompt .k-window-titlebar
+.k-dialog.k-dialog-titleless a.k-dialog-action.k-dialog-close
+{
+    right: .5em;
+    top: 1em;
+}
+
+.k-dialog.k-alert .k-dialog-titlebar,
+.k-dialog.k-confirm .k-dialog-titlebar,
+.k-dialog.k-prompt .k-dialog-titlebar
 {
     background: none;
     border-bottom: none;
@@ -90,4 +96,8 @@
 .k-dialog .k-prompt-container .k-textbox
 {
     width: 100%;
+}
+
+.k-dialog .k-button {
+    box-sizing: border-box;
 }

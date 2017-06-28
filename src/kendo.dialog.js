@@ -1,4 +1,4 @@
-﻿(function(f, define) {
+(function(f, define) {
     define(["./kendo.core", "./kendo.popup"], f);
 })(function() {
 
@@ -12,8 +12,8 @@
 
     (function($, undefined) {
         var kendo = window.kendo,
-            Class = kendo.Class,
             Widget = kendo.ui.Widget,
+            TabKeyTrap = kendo.ui.Popup.TabKeyTrap,
             proxy = $.proxy,
             template = kendo.template,
             keys = kendo.keys,
@@ -21,12 +21,12 @@
             NS = "kendoWindow",
             KDIALOG = ".k-dialog",
             KWINDOW = ".k-window",
-            KICONCLOSE = ".k-i-close",
-            KCONTENTCLASS = "k-content",
+            KICONCLOSE = ".k-dialog-close",
+            KCONTENTCLASS = "k-content k-window-content k-dialog-content",
             KCONTENT = ".k-content",
             KTITLELESS = "k-dialog-titleless",
             KDIALOGTITLE = ".k-dialog-title",
-            KDIALOGTITLEBAR = ".k-window-titlebar",
+            KDIALOGTITLEBAR = KDIALOGTITLE + "bar",
             KBUTTONGROUP = ".k-dialog-buttongroup",
             KBUTTON = ".k-button",
             KALERT = "k-alert",
@@ -44,9 +44,10 @@
             HIDE = "hide",
             WIDTH = "width",
             HUNDREDPERCENT = 100,
-            OK_CANCEL = {
+            messages = {
                 okText  : "OK",
-                cancel : "Cancel"
+                cancel : "Cancel",
+                promptInput: "Input"
             },
             ceil = Math.ceil,
             templates,
@@ -75,6 +76,8 @@
             _init: function(element, options) {
                 var that = this,
                     wrapper;
+
+                that._centerCallback = proxy(that._center, that);
 
                 that.appendTo = $(BODY);
                 if (!defined(options.visible) || options.visible === null) {
@@ -263,7 +266,8 @@
                 });
             },
 
-            _closeClick: function() {
+            _closeClick: function(e) {
+                e.preventDefault();
                 this.close();
             },
 
@@ -289,6 +293,7 @@
                     options = that.options,
                     isRtl = kendo.support.isRtl(content),
                     titlebar = $(templates.titlebar(options)),
+                    titlebarActions = titlebar.find(".k-window-actions"),
                     titleId = (content.id || kendo.guid()) + "_title",
                     wrapper = $(that.wrapperTemplate(options));
 
@@ -298,7 +303,12 @@
                 that.appendTo.append(wrapper);
 
                 if (options.closable !== false) {
-                    wrapper.append(templates.close(options));
+                    if (options.title !== false) {
+                        titlebarActions.append(templates.close(options));
+                    }
+                    else {
+                        wrapper.append(templates.close(options));
+                    }
                 }
 
                 if (options.title !== false) {
@@ -494,7 +504,7 @@
                     zIndex = +wrapper.css(ZINDEX),
                     originalZIndex = zIndex;
 
-                that._center();
+                that.center();
 
                 $(KWINDOW).each(function(i, element) {
                     var windowObject = $(element),
@@ -517,6 +527,7 @@
 
             close: function() {
                 this._close(true);
+                this._stopCenterOnResize();
                 return this;
             },
 
@@ -547,6 +558,11 @@
                 return that;
             },
 
+            center: function() {
+                this._center();
+                this._centerOnResize();
+            },
+
             _center: function() {
                 var that = this,
                     wrapper = that.wrapper,
@@ -562,6 +578,20 @@
                 });
 
                 return that;
+            },
+
+            _centerOnResize: function() {
+                if (this._trackResize) {
+                    return;
+                }
+
+                kendo.onResize(this._centerCallback);
+                this._trackResize = true;
+            },
+
+            _stopCenterOnResize: function() {
+                kendo.unbindResize(this._centerCallback);
+                this._trackResize = false;
             },
 
             _removeOverlay: function() {
@@ -599,7 +629,7 @@
                     var object = that._object(dom);
                     var options = object && object.options;
 
-                    return options && options.modal && options.visible && dom.is(VISIBLE);
+                    return options && options.modal && that.options.appendTo == options.appendTo && options.visible && dom.is(VISIBLE);
                 }).sort(function(a, b) {
                     return +$(a).css("zIndex") - +$(b).css("zIndex");
                 });
@@ -623,6 +653,9 @@
             destroy: function() {
                 var that = this;
                 that._destroy();
+
+                Widget.fn.destroy.call(that);
+
                 that.wrapper.remove();
                 that.wrapper = that.element = $();
             },
@@ -634,7 +667,7 @@
                 that.wrapper.off(ns);
                 that.element.off(ns);
                 that.wrapper.find(KICONCLOSE + "," + KBUTTONGROUP + " > " + KBUTTON).off(ns);
-                Widget.fn.destroy.call(that);
+                that._stopCenterOnResize();
             },
 
             title: function(html) {
@@ -642,7 +675,8 @@
                     wrapper = that.wrapper,
                     options = that.options,
                     titlebar = wrapper.children(KDIALOGTITLEBAR),
-                    title = titlebar.children(KDIALOGTITLE);
+                    title = titlebar.children(KDIALOGTITLE),
+                    encodedHtml = kendo.htmlEncode(html);
 
                 if (!arguments.length) {
                     return title.html();
@@ -657,10 +691,10 @@
                         title = titlebar.children(KDIALOGTITLE);
                         wrapper.removeClass(KTITLELESS);
                     }
-                    title.html(html);
+                    title.html(encodedHtml);
                 }
 
-                that.options.title = html;
+                that.options.title = encodedHtml;
 
                 return that;
             },
@@ -730,6 +764,7 @@
                 maxHeight: Infinity,
                 content: null,
                 visible: null,
+                appendTo: BODY,
                 closable: true
             }
         });
@@ -788,7 +823,7 @@
             options: {
                 title: window.location.host,
                 closable: false,
-                messages: OK_CANCEL
+                messages: messages
             }
         });
 
@@ -803,7 +838,7 @@
                 name: "Alert",
                 modal: true,
                 actions: [{
-                    text: "#= messages.okText #"
+                    text: "#: messages.okText #"
                 }]
             }
         });
@@ -826,13 +861,13 @@
                 name: "Confirm",
                 modal: true,
                 actions: [{
-                    text: "#= messages.okText #",
+                    text: "#: messages.okText #",
                     primary: true,
                     action: function(e) {
                         e.sender.result.resolve();
                     }
                 }, {
-                    text: "#= messages.cancel #",
+                    text: "#: messages.cancel #",
                     action: function(e) {
                         e.sender.result.reject();
                     }
@@ -858,7 +893,7 @@
 
             _createPrompt: function() {
                 var value = this.options.value,
-                    promptContainer = $(templates.promptInputContainer).insertAfter(this.element);
+                    promptContainer = $(templates.promptInputContainer(this.options)).insertAfter(this.element);
 
                 if (value) {
                     promptContainer.children(KTEXTBOX).val(value);
@@ -877,7 +912,7 @@
                 modal: true,
                 value: "",
                 actions: [{
-                    text: "#= messages.okText #",
+                    text: "#: messages.okText #",
                     primary: true,
                     action: function(e) {
                         var sender = e.sender,
@@ -886,7 +921,7 @@
                         sender.result.resolve(value);
                     }
                 }, {
-                    text: "#= messages.cancel #",
+                    text: "#: messages.cancel #",
                     action: function(e) {
                         var sender = e.sender,
                             value = sender.wrapper.find(KTEXTBOX).val();
@@ -909,70 +944,23 @@
         };
 
         templates = {
-            wrapper: template("<div class='k-widget k-dialog k-window' role='dialog' />"),
-            action: template("<li class='k-button# if (data.primary) { # k-primary# } #' role='button'></li>"),
+            wrapper: template("<div class='k-widget k-window k-dialog' role='dialog' />"),
+            action: template("<button type='button' class='k-button# if (data.primary) { # k-primary# } role='button' #'></button>"),
             titlebar: template(
-                "<div class='k-window-titlebar k-header'>" +
-                    "<span class='k-dialog-title'>#= title #</span>" +
+                "<div class='k-window-titlebar k-dialog-titlebar k-header'>" +
+                    "<span class='k-window-title k-dialog-title'>#: title #</span>" +
+                    "<div class='k-window-actions k-dialog-actions' />" +
                 "</div>"
             ),
-            close: template("<a role='button' href='\\#' class='k-dialog-action k-link' aria-label='Close' tabindex='-1'><span class='k-icon k-i-close'>#= messages.close #</span></a>"),
-            actionbar: template("<ul class='k-dialog-buttongroup k-dialog-button-layout-#= buttonLayout #' role='toolbar' />"),
-            //actionbar: "<ul class='k-dialog-buttongroup k-dialog-button-layout-normal' role='toolbar' />",
+            close: template("<a role='button' href='\\#' class='k-button k-bare k-button-icon k-window-action k-dialog-action k-dialog-close' title='#: messages.close #' aria-label='#: messages.close #' tabindex='-1'><span class='k-icon k-i-close'></span></a>"),
+            actionbar: template("<div class='k-button-group k-dialog-buttongroup k-dialog-button-layout-#: buttonLayout #' role='toolbar' />"),
             overlay: "<div class='k-overlay' />",
-            alertWrapper: template("<div class='k-widget k-dialog k-window' role='alertdialog' />"),
+            alertWrapper: template("<div class='k-widget k-window k-dialog' role='alertdialog' />"),
             alert: "<div />",
             confirm: "<div />",
             prompt: "<div />",
-            promptInputContainer: "<div class='k-prompt-container'><input type='text' class='k-textbox' /></div>"
+            promptInputContainer: template("<div class='k-prompt-container'><input type='text' class='k-textbox' title='#: messages.promptInput #' aria-label='#: messages.promptInput #' /></div>")
         };
-
-        var tabKeyTrapNS = "kendoTabKeyTrap";
-        var focusableNodesSelector = "a[href], area[href], input:not([disabled]), select:not([disabled]), textarea:not([disabled]), button:not([disabled]), iframe, object, embed, [tabindex], *[contenteditable]";
-        var TabKeyTrap = Class.extend({
-            init: function(element) {
-                this.element = $(element);
-                this.element.autoApplyNS(tabKeyTrapNS);
-            },
-
-            trap: function() {
-                this.element.on("keydown", proxy(this._keepInTrap, this));
-            },
-
-            removeTrap: function() {
-                this.element.kendoDestroy(tabKeyTrapNS);
-            },
-
-            destroy: function() {
-                this.element.kendoDestroy(tabKeyTrapNS);
-                this.element = undefined;
-            },
-
-            _keepInTrap: function(e) {
-                if (e.which !== 9) {
-                    return;
-                }
-
-                var target = e.target;
-                var focusableItems = this.element.find(focusableNodesSelector).filter(':visible[tabindex!=-1]');
-                var focusableItemsCount = focusableItems.length;
-                var lastIndex = focusableItemsCount - 1;
-                var focusedItemIndex = focusableItems.index(target);
-
-                if (e.shiftKey) {
-                    if (focusedItemIndex === 0) {
-                        focusableItems.get(lastIndex).focus();
-                        e.preventDefault();
-                    }
-                }
-                else {
-                    if (focusedItemIndex === lastIndex) {
-                        focusableItems.get(0).focus();
-                        e.preventDefault();
-                    }
-                }
-            }
-        });
 
         kendo.alert = kendoAlert;
         kendo.confirm = kendoConfirm;

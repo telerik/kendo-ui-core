@@ -1,4 +1,5 @@
 ---
+comment: THIS FILE IS AUTO-GENERATED, MANUAL CHANGES ARE OVERWRITTEN. TO UPDATE THE CONTENT, UPDATE COMPONENT DEPENDENCIES AND RUN `rake js_dependencies`.
 title: Script Files for Hybrid UI
 page_title: Script Files for Hybrid UI | Kendo UI Getting Started
 description: "Listing of required script files for the Kendo UI Hybrid UI"

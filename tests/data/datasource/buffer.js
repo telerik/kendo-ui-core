@@ -54,9 +54,15 @@ asyncTest("returns correct offset of dataSource item", 2, function() {
 });
 
 test("returns correct dataSource item", 1, function() {
+    jasmine.clock().install();
+
     ds.fetch(function() {
         equal(buffer.at(2), 2);
     });
+
+     jasmine.clock().tick();
+
+     jasmine.clock().uninstall();
 });
 
 asyncTest("returns correct offset of dataSource item", 3, function() {

@@ -1,5 +1,6 @@
 ---
 title: Circle
+res_type: api
 ---
 
 # kendo.dataviz.diagram.Circle
@@ -29,9 +30,6 @@ The type of the gradient. Supported values are:
 
 * linear
 * radial
-
-Note that support for radial gradients in VML (IE8 and below) is limited.
-Not all configurations are guaranteed to work.
 
 ### fill.gradient.center `Array`
 The center of the radial gradient.

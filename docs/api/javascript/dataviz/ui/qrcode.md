@@ -2,6 +2,7 @@
 title: QRCode
 page_title: Configuration, methods and events of Kendo UI DataViz QRCode
 description: Learn the configuration options for QRCode widget, set its options, use methods properly.
+res_type: api
 ---
 
 # kendo.dataviz.ui.QRCode
@@ -152,7 +153,6 @@ The supported values are:
 
 * "canvas" - renders the widget as a Canvas element, if available.
 * "svg" - renders the widget as inline SVG document, if available
-* "vml" - renders the widget as VML, if available
 
 ### size `Number|String`
 

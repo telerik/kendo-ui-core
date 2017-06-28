@@ -68,9 +68,9 @@ For detailed information, refer to [this article]({% slug dateparsing_kendoui_gl
 
 ## Support
 
-### (Deprecated) jQuery Globalize.js 0.1
+### (Deprecated) jQuery GlobalizeJS 0.1
 
-If you load globalize.js, the default globalization features in Kendo UI are overridden. Some features might not work. For example, custom number formats are unsupported in this case.
+If you load GlobalizeJS, the default globalization features in Kendo UI are overridden. Some features might not work. For example, custom number formats are unsupported in this case.
 
 > **Important**
 >
@@ -81,6 +81,7 @@ If you load globalize.js, the default globalization features in Kendo UI are ove
 Here is a list of Kendo UI widgets which depend on the current culture:
 
 - [Calendar](http://demos.telerik.com/kendo-ui/calendar/index)
+- [DateInput]({% slug overview_kendoui_dateinput_widget %})
 - [DatePicker](http://demos.telerik.com/kendo-ui/datepicker/index)
 - [TimePicker](http://demos.telerik.com/kendo-ui/timepicker/index)
 - [DateTimePicker](http://demos.telerik.com/kendo-ui/datetimepicker/index)

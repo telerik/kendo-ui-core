@@ -1,4 +1,5 @@
 ---
+comment: THIS FILE IS AUTO-GENERATED, MANUAL CHANGES ARE OVERWRITTEN. TO UPDATE THE CONTENT, UPDATE COMPONENT DEPENDENCIES AND RUN `rake js_dependencies`.
 title: Script Files for Server-Side Wrappers
 page_title: Script Files for Server-Side Wrappers | Kendo UI Getting Started
 description: "Listing of required script files for the Kendo UI Server-Side Wrappers"

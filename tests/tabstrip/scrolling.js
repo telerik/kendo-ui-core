@@ -1,6 +1,7 @@
 (function() {
 
 var tabstrip;
+var mobileOs = false;
 
 function createTabStrip(options) {
     tabstrip = new kendo.ui.TabStrip("#tabstrip", $.extend({
@@ -14,8 +15,7 @@ function createNonScrollableTabStrip(options) {
     }, options));
 }
 
-module('tabstrip scrolling', {
-    setup: function() {
+function setupDom() {
         kendo.effects.disable();
 
         QUnit.fixture.append(
@@ -55,6 +55,11 @@ module('tabstrip scrolling', {
             '    <div>content 2</div>' +
             '</div>'
         );
+}
+
+module('tabstrip scrolling', {
+    setup: function() {
+        setupDom();
     },
 
     teardown: function () {
@@ -68,6 +73,14 @@ test('scrolling is enabled by default with distance configured', 2, function () 
 
     ok(tabstrip.options.scrollable !== false);
     ok(!isNaN(tabstrip.options.scrollable.distance));
+});
+
+test('scrolling is enabled when scrollable is true with distance configured', 3, function () {
+    createTabStrip({scrollable:true});
+
+    ok(tabstrip.options.scrollable !== false);
+    ok(!isNaN(tabstrip.options.scrollable.distance));
+    ok(tabstrip.wrapper.hasClass("k-tabstrip-scrollable"));
 });
 
 test('scrolling CSS class is applied to TabStrip if tabPosition is top', 1, function () {
@@ -109,7 +122,7 @@ test('scrolling CSS class is not applied to TabStrip if not needed and tabPositi
 test('scrolling buttons are rendered if tabs do not fit', 3, function () {
     createTabStrip();
 
-    var buttons = tabstrip.wrapper.children(".k-button.k-button-icon.k-button-bare");
+    var buttons = tabstrip.wrapper.children(".k-button.k-button-icon.k-bare");
 
     equal(buttons.length, 2);
     ok(buttons.eq(0).is(".k-tabstrip-prev"));
@@ -119,7 +132,7 @@ test('scrolling buttons are rendered if tabs do not fit', 3, function () {
 test('scrolling buttons are not rendered if tabs fit', 1, function () {
     createNonScrollableTabStrip();
 
-    var buttons = tabstrip.wrapper.children(".k-button.k-button-icon.k-button-bare");
+    var buttons = tabstrip.wrapper.children(".k-button.k-button-icon.k-bare");
 
     equal(buttons.length, 0);
 });
@@ -130,7 +143,7 @@ test('right scrolling button scrolls to the right by delta when clicked', 1, fun
     tabstrip.tabGroup.scrollLeft(0);
     tabstrip.wrapper.children(".k-tabstrip-next").trigger("mousedown").trigger("mouseup");
     tabstrip.tabGroup.finish();
-    
+
     equal(tabstrip.tabGroup.scrollLeft(), tabstrip.options.scrollable.distance);
 });
 
@@ -198,5 +211,55 @@ test('right scrolling button appears if browser window width is reduced', 2, fun
 
     ok(buttonNext.is(":visible"));
 });
+
+module('tabstrip mobile scrolling', {
+    setup: function() {
+        setupDom();
+        mobileOs = kendo.support.mobileOS;
+        kendo.support.mobileOS = true;
+    },
+
+    teardown: function () {
+        kendo.effects.enable();
+        tabstrip.destroy();
+        kendo.support.mobileOS = mobileOs;
+    }
+});
+
+test('right scrolling button scrolls to the right by delta when clicked', 1, function () {
+    createTabStrip();
+
+    tabstrip.tabGroup.scrollLeft(0);
+    tabstrip.wrapper.children(".k-tabstrip-next").trigger("touchstart").trigger("touchend");
+    tabstrip.tabGroup.finish();
+
+    equal(tabstrip.tabGroup.scrollLeft(), tabstrip.options.scrollable.distance);
+});
+
+test('left scrolling button scrolls to the left by delta when clicked', 1, function () {
+    createTabStrip();
+
+    tabstrip.tabGroup.scrollLeft(999);
+    var initialScrollPosition = tabstrip.tabGroup.scrollLeft();
+    tabstrip.wrapper.children(".k-tabstrip-prev").trigger("touchstart").trigger("touchend");
+    tabstrip.tabGroup.finish();
+
+    equal(tabstrip.tabGroup.scrollLeft(), initialScrollPosition - tabstrip.options.scrollable.distance);
+});
+
+test('scrolling succeeds when jQuert.fx is off', 1, function () {
+    createTabStrip();
+    jQuery.fx.off = true;
+
+    tabstrip.tabGroup.scrollLeft(999);
+    var initialScrollPosition = tabstrip.tabGroup.scrollLeft();
+    tabstrip.wrapper.children(".k-tabstrip-prev").trigger("touchstart").trigger("touchend");
+    tabstrip.tabGroup.finish();
+
+    equal(tabstrip.tabGroup.scrollLeft(), initialScrollPosition - tabstrip.options.scrollable.distance);
+
+    jQuery.fx.off = false;
+});
+
 
 })();

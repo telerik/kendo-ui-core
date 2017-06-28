@@ -229,4 +229,21 @@
         });
     });
 
+    asyncTest("deselects previously selected item that is not part of the current page", 3, function() {
+        var virtualList = new VirtualList(container, $.extend(virtualSettings, {
+            value: 99
+        }));
+
+        asyncDataSource.read().done(function() {
+            virtualList.bind("change", function() {
+                start();
+                equal(this.selectedDataItems().length, 1);
+                equal(this.select().length, 1);
+                equal(this.items().filter(".k-state-selected").length, 1, "Only one item is visibly selected");
+            });
+
+            virtualList.select(1);
+        });
+    });
+
 })();

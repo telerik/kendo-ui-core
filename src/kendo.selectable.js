@@ -22,7 +22,7 @@ var __meta__ = { // jshint ignore:line
         CHANGE = "change",
         NS = ".kendoSelectable",
         UNSELECTING = "k-state-unselecting",
-        INPUTSELECTOR = "input,a,textarea,.k-multiselect-wrap,select,button,.k-button>span,.k-button>img,span.k-icon.k-i-expand,span.k-icon.k-i-collapse",
+        INPUTSELECTOR = "input,a,textarea,.k-multiselect-wrap,select,button,.k-button>span,.k-button>img,span.k-icon.k-i-arrow-60-down,span.k-icon.k-i-arrow-60-up",
         msie = kendo.support.browser.msie,
         supportEventDelegation = false;
 
@@ -406,8 +406,8 @@ var __meta__ = { // jshint ignore:line
             right = position.left + position.width,
             bottom = position.top + position.height;
 
-        elementPosition.right = elementPosition.left + element.outerWidth();
-        elementPosition.bottom = elementPosition.top + element.outerHeight();
+        elementPosition.right = elementPosition.left + kendo._outerWidth(element);
+        elementPosition.bottom = elementPosition.top + kendo._outerHeight(element);
 
         return !(elementPosition.left > right||
             elementPosition.right < position.left ||

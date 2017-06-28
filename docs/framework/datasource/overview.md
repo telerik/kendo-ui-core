@@ -9,7 +9,7 @@ position: 1
 
 # DataSource Overview
 
-The [Kendo UI DataSource component](http://demos.telerik.com/kendo-ui/datasource/index) plays a central role in practically all web applications built with Kendo UI. It is an abstraction for using local data&mdash;arrays of JavaScript objects&mdash;or remote data&mdash;web services returning JSON, JSONP, [OData](http://www.odata.org/) or XML.
+The [Kendo UI DataSource component](http://demos.telerik.com/kendo-ui/datasource/index) plays a central role in practically all web applications built with Kendo UI. It is an abstraction for using local data&mdash;arrays of JavaScript objects&mdash;or remote data&mdash;web services returning JSON, JSONP, [oData](http://www.odata.org/) or XML.
 
 The Kendo UI DataSource has many abilities and responsibilities, among which to:
 
@@ -31,7 +31,7 @@ This article provides simple examples, which show how to create Kendo UI DataSou
 
 ### To Local Data
 
-In this scenario an array of Javascript objects is assigned to the `data` configuration property of the DataSource instance, as demonstrated in the example below.
+In this scenario an array of JavaScript objects is assigned to the `data` configuration property of the DataSource instance, as demonstrated in the example below.
 
 ###### Example
 

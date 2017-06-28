@@ -8,7 +8,7 @@ position: 1
 
 # TreeMap Overview
 
-The [Kendo UI TreeMap widget](http://demos.telerik.com/kendo-ui/treemap/index) displays hierarchical data in a traditional tree structure. It also support different rendering types such us Squarified, Vertical and Horizontal(slise and dice algorithm).
+The [Kendo UI TreeMap widget](http://demos.telerik.com/kendo-ui/treemap/index) displays hierarchical data in a traditional tree structure. It also support different rendering types such us Squarified, Vertical and Horizontal(slice and dice algorithm).
 
 ## Getting Started
 

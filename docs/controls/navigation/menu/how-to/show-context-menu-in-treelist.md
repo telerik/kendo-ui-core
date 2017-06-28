@@ -11,8 +11,6 @@ To see the example on how to a Kendo UI ContextMenu for the Kendo UI TreeList ro
 
 ## See Also
 
-Other articles on the Kendo UI Menu:
-
 * [Menu JavaScript API Reference](/api/javascript/ui/menu)
 * [Overview of the ContextMenu]({% slug overview_kendoui_contextmenu_widget %})
 * [How to Execute Custom Click Actions Based on Class Name]({% slug howto_execute_custom_click_actions_basedon_classnames_menu %})

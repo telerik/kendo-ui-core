@@ -1,6 +1,7 @@
 ---
 title: Sheet
 page_title: Configuration, methods and events of Kendo UI Spreadsheet Sheet Instance object
+res_type: api
 ---
 
 # kendo.spreadsheet.Sheet
@@ -627,7 +628,7 @@ Gets or sets a flag indicating if the grid lines should be visible.
 
 #### Parameters
 
-##### showGridLiens `Boolean` *optional*
+##### showGridLines `Boolean` *optional*
 
 If passed, the method will toggle the display of the grid lines according to the value.
 

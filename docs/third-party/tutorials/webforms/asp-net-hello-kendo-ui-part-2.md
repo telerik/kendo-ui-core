@@ -85,7 +85,7 @@ To start, open the `Default.aspx` file. Specify `editable: true` in the Grid, as
 
     editable: true
 
-**Figure 1. An editable Grid**
+**Figure 1: An editable Grid**
 
 ![grid_is_editable](/images/webforms/grid_is_editable.png)
 
@@ -152,7 +152,7 @@ In the above declaration, the `FirstName` field is additionally marked as being 
 
 Run the application now and notice that when you put the grid into edit mode you get a Kendo UI [DatePicker](http://demos.telerik.com/kendo-ui/web/datepicker) for the **BirthDate** column. You cannot edit the **FirstName** column either. If you try and null out the **LastName** field, the Grid displays a popup message telling you that the **LastName** is required.
 
-**Figure 2. An editable Grid with model**
+**Figure 2: An editable Grid with a model**
 
 ![grid_is_editable_with_model](/images/webforms/grid_is_editable_with_model.png)
 
@@ -258,7 +258,7 @@ Test this method out by going to the Grid and editing an item. If you do not mak
 
 You are expected to see an error in the Network requests. If you click into the error, it tells you that it was unable to convert the BirthDate to a valid DateTime. If you examine the parameters of the request, you see that some strange date format has been sent back by the server.
 
-**Figure 3. Strange date format appearing in the Grid**
+**Figure 3: A strange date format appearing in the Grid**
 
 ![grid_bad_datetime](/images/webforms/grid_bad_datetime.png)
 
@@ -401,7 +401,7 @@ This demonstration is made for the sake of showing how to do things differently 
 
 In the above scenario, the error is thrown out to the screen. If you try to delete certain people from the **Employees** table, i.e. Nancy Davalio, you get an error back from the server.
 
-**Figure 4. A sample server error**
+**Figure 4: A sample server error**
 
 ![sample_error](/images/webforms/sample_error.png)
 
@@ -413,7 +413,7 @@ Pick a notification strategy and a standard error platform. It is better to just
 
 If you did not throw the error, the user is not aware that the `delete` failed because the row has disappeared from the grid. This is not what you want. However, the DataSource needs to know how to handle this situation. It is currently storing the object as dirty and is going to try and sync it again when it gets the chance. In this situation, it is best to rollback the change by calling `cancelChanges` on the DataSource. This can also be called directly on the Grid.
 
-The example below demonstartes how to cancel changes on a failed request.
+The example below demonstrates how to cancel changes on a failed request.
 
 ###### Example
 

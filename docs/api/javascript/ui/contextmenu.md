@@ -2,6 +2,7 @@
 title: ContextMenu
 page_title: Configuration, methods and events of Kendo UI ContextMenu
 description: How to configure all animations in ContextMenu UI widget, enable and disable, remove specified items and use code examples for all methods and events supported.
+res_type: api
 ---
 
 # kendo.ui.ContextMenu
@@ -285,6 +286,35 @@ Defines the open animation duration in milliseconds.
          });
     </script>
 
+### appendTo `String|jQuery`*(default: document.body)*
+
+The DOM element to which the ContextMenu will be appended. The element needs to be relatively positioned.
+
+#### Example
+
+    <div id="container">Container</div>
+    <ul id="context-menu">
+        <li>Item 1
+            <ul>
+                <li>Sub Item 1</li>
+                <li>Sub Item 2</li>
+                <li>Sub Item 3</li>
+            </ul>
+        </li>
+        <li>Item 2
+            <ul>
+                <li>Sub Item 1</li>
+                <li>Sub Item 2</li>
+                <li>Sub Item 3</li>
+            </ul>
+        </li>
+    </ul>
+    <script>
+        $("#context-menu").kendoContextMenu({
+            appendTo: "#container"
+        });
+    </script>
+
 ### closeOnClick `Boolean`*(default: true)*
 
  Specifies that sub menus should close after item selection (provided they won't navigate).
@@ -313,6 +343,38 @@ Defines the open animation duration in milliseconds.
             target: "#target",
             closeOnClick: false
         });
+    </script>
+
+### copyAnchorStyles `Boolean`*(default: true)*
+
+ Copies and uses the styles from the anchor.
+
+#### Example
+
+    <span class="k-icon k-i-filter" id="span-target"></span>
+    <ul id="context-menu-span">
+      <li>Item 1
+        <ul>
+          <li>Sub Item 1</li>
+          <li>Sub Item 2</li>
+          <li>Sub Item 3</li>
+        </ul>
+      </li>
+      <li>Item 2
+        <ul>
+          <li>Sub Item 1</li>
+          <li>Sub Item 2</li>
+          <li>Sub Item 3</li>
+        </ul>
+      </li>
+    </ul>
+    <script>
+
+      $("#context-menu-span").kendoContextMenu({
+        target: "#span-target",
+        alignToAnchor: true,
+        copyAnchorStyles: false
+      });
     </script>
 
 ### dataSource `Object|Array`
@@ -695,9 +757,9 @@ If called without arguments, will close the ContextMenu. If passed an item, it w
 `kendo.ui.ContextMenu` Returns the ContextMenu object to support chaining.
 
 ### destroy
-Prepares the **ContextMenu** for safe removal from DOM. Detaches all event handlers and removes jQuery.data attributes to avoid memory leaks. Calls destroy method of any child Kendo widgets.
+Safely removes the **ContextMenu** from the DOM. Detaches all event handlers and removes jQuery.data attributes to avoid memory leaks. Calls destroy method of any child Kendo widgets.
 
-> **Important:** This method does not remove the ContextMenu element from DOM.
+If a new ContextMenu widget should be created afterwards, use a new `<ul>` for that, as the old one no longer exists.
 
 #### Example
 

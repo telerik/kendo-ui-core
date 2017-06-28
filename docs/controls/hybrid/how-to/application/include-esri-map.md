@@ -29,7 +29,7 @@ The example below demonstrates how to include an Esri(ArcGIS) map when working w
         <div data-role="tabstrip">
           <a data-icon="home">Home</a>
           <a data-icon="info">Info</a>
-        </div>        
+        </div>
       </footer>
     </div>
     <script>
@@ -46,7 +46,7 @@ The example below demonstrates how to include an Esri(ArcGIS) map when working w
             zoom: 7,
             sliderStyle: "small"
           });
-        });   
+        });
       }
     </script>
 ```

@@ -1,5 +1,6 @@
 ---
 title: Polyline
+res_type: api
 ---
 
 # kendo.dataviz.diagram.Polyline
@@ -16,7 +17,7 @@ The end cap configuration or type name.
 
     <div id="diagram"></div>
     <script>
-      $("#diagram").kendoDiagram({ 
+      $("#diagram").kendoDiagram({
         shapes: [{
           visual: function() {
             var group = new kendo.dataviz.diagram.Group();
@@ -30,7 +31,7 @@ The end cap configuration or type name.
             return group;
           }
         }]
-      });       
+      });
     </script>
 
 ### endCap.fill `String|Object`
@@ -93,9 +94,6 @@ The type of the gradient. Supported values are:
 * linear
 * radial
 
-Note that support for radial gradients in VML (IE8 and below) is limited.
-Not all configurations are guaranteed to work.
-
 ### fill.gradient.center `Array`
 The center of the radial gradient.
 
@@ -147,7 +145,7 @@ The start cap configuration or type name.
 
     <div id="diagram"></div>
     <script>
-      $("#diagram").kendoDiagram({ 
+      $("#diagram").kendoDiagram({
         shapes: [{
           x: 10,
           y: 10,
@@ -163,7 +161,7 @@ The start cap configuration or type name.
             return group;
           }
         }]
-      });       
+      });
     </script>
 
 ### startCap.fill `String|Object`
@@ -240,7 +238,7 @@ The new points.
 
 ### visible
 
-Gets or sets the visibilty of the current element.
+Gets or sets the visibility of the current element.
 
 #### Parameters
 

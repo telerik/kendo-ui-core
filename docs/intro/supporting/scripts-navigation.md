@@ -1,4 +1,5 @@
 ---
+comment: THIS FILE IS AUTO-GENERATED, MANUAL CHANGES ARE OVERWRITTEN. TO UPDATE THE CONTENT, UPDATE COMPONENT DEPENDENCIES AND RUN `rake js_dependencies`.
 title: Script Files for Navigation
 page_title: Script Files for Navigation | Kendo UI Getting Started
 description: "Listing of required script files for the Kendo UI Navigation"
@@ -21,6 +22,7 @@ Below are listed the script files for the Kendo UI Navigation widgets.&nbsp;&nbs
 | | kendo.menu.js | |
 | [PanelBar](http://demos.telerik.com/kendo-ui/panelbar/index) | jquery.js | |
 | | kendo.core.js | |
+| | kendo.data.js | |
 | | kendo.panelbar.js | |
 | [TabStrip](http://demos.telerik.com/kendo-ui/tabstrip/index) | jquery.js | |
 | | kendo.core.js | |
@@ -32,9 +34,9 @@ Below are listed the script files for the Kendo UI Navigation widgets.&nbsp;&nbs
 | [TreeView](http://demos.telerik.com/kendo-ui/treeview/index) | jquery.js | |
 | | kendo.core.js | |
 | | kendo.data.js | |
-| | kendo.userevents.js | Drag & Drop feature |
-| | kendo.draganddrop.js | Drag & Drop feature |
-| | kendo.treeview.draganddrop.js | Drag & Drop feature |
+| | kendo.userevents.js | Drag & Drop feature (optional) |
+| | kendo.draganddrop.js | Drag & Drop feature (optional) |
+| | kendo.treeview.draganddrop.js | Drag & Drop feature (optional) |
 | | kendo.treeview.js | |
 
 ## See Also

@@ -2,6 +2,7 @@
 title: Chart
 page_title: Configuration, methods and events of Kendo UI DataViz Chart
 description: Learn how to configure Kendo UI Javascript chart widget in a few easy steps, use and change methods and events.
+res_type: api
 ---
 
 # kendo.dataviz.ui.Chart
@@ -93,7 +94,7 @@ The opacity of the crosshair. By default the crosshair is opaque.
 
 ### axisDefaults.crosshair.tooltip `Object`
 
-The crosshar tooltip options.
+The crosshair tooltip options.
 
 > The crosshair tooltip is displayed when the [axisDefaults.crosshair.tooltip.visible](#configuration-axisDefaults.crosshair.tooltip.visible) option is set to `true`.
 
@@ -341,9 +342,9 @@ The following dash types are supported:
 * "longDashDotDot" - a line consisting of a repeating pattern of long-dash-dot-dot
 * "solid" - a solid line
 
-### axisDefaults.majorGridLines.visible `Boolean` *(default: false)*
+### axisDefaults.majorGridLines.visible `Boolean` *(default: true)*
 
-If set to `true` the chart will display the major grid lines. By default the major grid lines are visible.
+If set to `false` the chart will not display the major grid lines. By default the major grid lines are visible.
 
 ### axisDefaults.majorGridLines.width `Number` *(default: 1)*
 
@@ -946,7 +947,7 @@ The opacity of the crosshair. By default the crosshair is opaque.
 
 ### categoryAxis.crosshair.tooltip `Object`
 
-The crosshar tooltip options.
+The crosshair tooltip options.
 
 > The crosshair tooltip is displayed when the [categoryAxis.crosshair.tooltip.visible](#configuration-categoryAxis.crosshair.tooltip.visible) option is set to `true`.
 
@@ -2737,9 +2738,9 @@ The following dash types are supported:
     });
     </script>
 
-### categoryAxis.majorGridLines.visible `Boolean` *(default: false)*
+### categoryAxis.majorGridLines.visible `Boolean` *(default: true)*
 
-If set to `true` the chart will display the major grid lines. By default the major grid lines are visible.
+If set to `false` the chart will not display the major grid lines. By default the major grid lines are visible.
 
 #### Example - hide the category axis major grid lines
 
@@ -3408,7 +3409,7 @@ The unique axis name. Used to associate a series with a category axis using the 
     <script>
     $("#chart").kendoChart({
       categoryAxis: [
-        { name: "month", categories: [ "Jan", "Feb" ] },
+        { name: "month", categories: [ "Jan", "Feb", "Mar" ] },
         { name: "year", categories: [ 2012 ] }
       ],
       series: [
@@ -9398,10 +9399,9 @@ If it is not supported by the browser, the Chart will switch to the first availa
 The supported values are:
 
 * "svg" - renders the widget as inline SVG document, if available
-* "vml" - renders the widget as VML, if available
 * "canvas" - renders the widget as a Canvas element, if available.
 
-### Example - Render as Canvas, if supported
+#### Example - Render as Canvas, if supported
 
     <div id="chart"></div>
     <script>
@@ -9613,6 +9613,27 @@ The width of the border in pixels.
         },
         data: [1, 2]
       }]
+    });
+    </script>
+
+### series.categoryAxis `String`
+
+The name of the category axis to use for the series.
+
+The first axis will be used if no `categoryAxis` is specified.
+
+#### Example - set the category axis name
+
+    <div id="chart"></div>
+    <script>
+    $("#chart").kendoChart({
+      categoryAxis: [
+        { name: "month", categories: [ "Jan", "Feb", "Mar" ] },
+        { name: "year", categories: [ 2012 ] }
+      ],
+      series: [
+        { categoryAxis: "month", data: [1, 2, 3] }
+      ]
     });
     </script>
 
@@ -11763,16 +11784,16 @@ The top padding of the labels.
 
 The position of the labels.
 
-* "above" - the label is positioned at the top of the marker. ** Applicable for series that render points, incl. bubble. **
-* "below" - the label is positioned at the bottom of the marker. ** Applicable for series that render points, incl. bubble. **
-* "center" - the label is positioned at the point center. ** Applicable for bar, column, donut, pie, funnel, radarColumn and waterfall series. **
-* "insideBase" - the label is positioned inside, near the base of the bar. ** Applicable for bar, column and waterfall series. **
-* "insideEnd" - the label is positioned inside, near the end of the point. ** Applicable for bar, column, donut, pie, radarColumn and waterfall series. **
-* "left" - the label is positioned to the left of the marker. ** Applicable for series that render points, incl. bubble. **
-* "outsideEnd" - the label is positioned outside, near the end of the point. ** Applicable for bar, column, donut, pie, radarColumn and waterfall series. Not applicable for stacked series.
-* "right" - the label is positioned to the right of the marker. ** Applicable for series that render points, incl. bubble. **
-* "top" - the label is positioned at the top of the segment. ** Applicable for funnel series **
-* "bottom" - the label is positioned at the bottom of the segment. ** Applicable for funnel series **
+* "above" - the label is positioned at the top of the marker. **Applicable for series that render points, incl. bubble.**
+* "below" - the label is positioned at the bottom of the marker. **Applicable for series that render points, incl. bubble.**
+* "center" - the label is positioned at the point center. **Applicable for bar, column, donut, pie, funnel, radarColumn and waterfall series.**
+* "insideBase" - the label is positioned inside, near the base of the bar. **Applicable for bar, column and waterfall series.**
+* "insideEnd" - the label is positioned inside, near the end of the point. **Applicable for bar, column, donut, pie, radarColumn and waterfall series.**
+* "left" - the label is positioned to the left of the marker. **Applicable for series that render points, incl. bubble.**
+* "outsideEnd" - the label is positioned outside, near the end of the point. **Applicable for bar, column, donut, pie, radarColumn and waterfall series. Not applicable for stacked series.**
+* "right" - the label is positioned to the right of the marker. **Applicable for series that render points, incl. bubble.**
+* "top" - the label is positioned at the top of the segment. **Applicable for funnel series.**
+* "bottom" - the label is positioned at the bottom of the segment. **Applicable for funnel series.**
 
 
 #### Example - set the chart series label position
@@ -11789,6 +11810,28 @@ The position of the labels.
       }]
     });
     </script>
+
+### series.labels.rotation `String|Number`
+
+The rotation angle of the labels. By default, the labels are not rotated.
+
+#### Example
+
+     <div id="chart"></div>
+        <script>
+        $("#chart").kendoChart({
+            seriesDefaults: {
+              type: "column",
+            },
+            series: [{
+                data: [1, 2, 3],
+                labels: {
+                    visible: true,
+                    rotation: 310
+                }
+            }]
+        });
+      </script>
 
 ### series.labels.template `String|Function`
 
@@ -12203,6 +12246,8 @@ The supported values are:
 
 > The `step` value is supported only when [series.type](#configuration-series.type) is set to "area".
 
+> For *line series*, use [series.style](#configuration-series.style).
+
 #### Example - set the chart line width
 
     <div id="chart"></div>
@@ -12390,6 +12435,24 @@ The background color of the series markers.
         markers: {
           visible: true,
           background: "green"
+        },
+        data: [1, 2, 3]
+      }]
+    });
+    </script>
+
+#### Example - set the chart series markers background via function
+
+    <div id="chart"></div>
+    <script>
+    $("#chart").kendoChart({
+      series: [{
+        type: "line",
+        markers: {
+          visible: true,
+          background: function (e) {
+            return e.series.color; // will match the series color
+          }
         },
         data: [1, 2, 3]
       }]
@@ -13405,7 +13468,7 @@ See the related [gap](#configuration-series.gap) setting.
 A boolean value indicating if the series should be stacked.
 A string value is interpreted as [series.stack.group](#configuration-series.stack.group).
 
-> The `stack` options is supported when [series.type](#configuration-series.type) is set to "bar", "column", "line", "area", "verticalLine", "verticalArea", "radarLine", "radarArea" and "radarColumn".
+> The `stack` options is supported when [series.type](#configuration-series.type) is set to "bar", "column", "line", "area", "verticalLine", "verticalArea", "radarLine", "radarArea" or "radarColumn". All series in the stack must be of the same type.
 
 > Stack settings of the first series are inherited as a default value by the rest of the series, in case they are not overridden.
 
@@ -15769,6 +15832,26 @@ The top padding of the labels.
     });
     </script>
 
+### seriesDefaults.labels.rotation `String|Number`
+
+The rotation angle of the labels. By default, the labels are not rotated.
+
+     <div id="chart"></div>
+        <script>
+        $("#chart").kendoChart({
+            seriesDefaults: {
+              type: "column",
+              labels: {
+                visible: true,
+                rotation: 310
+              }
+            },
+            series: [
+               { data: [1, 2, 3] }
+             ]
+        });
+      </script>
+
 ### seriesDefaults.labels.template `String|Function`
 
 The [template](/api/javascript/kendo#methods-template) which renders the chart series label.
@@ -17509,10 +17592,12 @@ A function that can be used to create a custom visual for the notes. The availab
 
 ### theme `String`
 
-The chart theme.
+The chart theme. This can be either a built-in theme or "sass".
+When set to "sass" the chart will read the variables from the [Sass-based themes]({% slug sassbasedthemes_kendoui %}).
 
 The supported values are:
 
+* "sass" - special value, see notes
 * "black"
 * "blueopal"
 * "bootstrap"
@@ -18607,7 +18692,7 @@ The opacity of the crosshair. By default the crosshair is opaque.
 
 ### valueAxis.crosshair.tooltip `Object`
 
-The crosshar tooltip options.
+The crosshair tooltip options.
 
 > The crosshair tooltip is displayed when the [valueAxis.crosshair.tooltip.visible](#configuration-valueAxis.crosshair.tooltip.visible) option is set to `true`.
 
@@ -19721,7 +19806,7 @@ The number of labels to skip. By default no labels are skipped.
 Label rendering step.
 Every n-th label is rendered where n is the step
 
-#### Example - render each 2nd label
+#### Example - render each 2<sup>nd</sup> label
 
     <div id="chart"></div>
     <script>
@@ -20112,9 +20197,9 @@ The default type is "line" except for "radarColumn" charts.
     });
     </script>
 
-### valueAxis.majorGridLines.visible `Boolean` *(default: false)*
+### valueAxis.majorGridLines.visible `Boolean` *(default: true)*
 
-If set to `true` the chart will display the major grid lines. By default the major grid lines are visible.
+If set to `false` the chart will not display the major grid lines. By default the major grid lines are visible.
 
 #### Example - hide the value axis major grid lines
 
@@ -20804,7 +20889,7 @@ The skip of the value axis minor ticks.
 
 ### valueAxis.minorUnit `Number`
 
-The interval between minor divisions. It defaults to 1/5th of the [valueAxis.majorUnit](#configuration-valueAxis.majorUnit).
+The interval between minor divisions. It defaults to 1/5 of the [valueAxis.majorUnit](#configuration-valueAxis.majorUnit).
 If the [valueAxis.type](#configuration-valueAxis.type) is set to `"log"`, the minorUnit value represents the number of divisions between two major units and defaults to the major unit minus one.
 
 #### Example - set the value axis minor unit
@@ -22466,9 +22551,9 @@ The background color of the label. Accepts a valid CSS color string, including h
         data: [1, 2, 3]
       }],
       valueAxis: {
-        notesdata {
-          data: [{
-            value: 1,
+        notes: {
+           data: [{
+            value: 1.1,
             label: {
               background: "red"
             }
@@ -23120,7 +23205,7 @@ The opacity of the crosshair. By default the crosshair is opaque.
 
 ### xAxis.crosshair.tooltip `Object`
 
-The crosshar tooltip options.
+The crosshair tooltip options.
 
 > The crosshair tooltip is displayed when the [xAxis.crosshair.tooltip.visible](#configuration-xAxis.crosshair.tooltip.visible) option is set to `true`.
 
@@ -24840,9 +24925,9 @@ The following dash types are supported:
 
 ### xAxis.majorGridLines.visible `Boolean` *(default: true)*
 
-If set to `true` the chart will display the x major grid liness. By default the x major grid liness are visible.
+If set to `false` the chart will not display the x major grid lines. By default the x major grid lines are visible.
 
-#### Example - hide the scatter chart x major grid liness
+#### Example - hide the scatter chart x major grid lines
 
     <div id="chart"></div>
     <script>
@@ -25562,7 +25647,7 @@ The minimum value of the axis.
 
 ### xAxis.minorUnit `Number`
 
-The interval between minor divisions. It defaults to 1/5th of the [xAxis.majorUnit](#configuration-xAxis.majorUnit).
+The interval between minor divisions. It defaults to 1/5 of the [xAxis.majorUnit](#configuration-xAxis.majorUnit).
 If the [xAxis.type](#configuration-xAxis.type) is set to `"log"`, the minorUnit value represents the number of divisions between two major units and defaults to the major unit minus one.
 
 #### Example - set the logarithmic x axis minor unit
@@ -27908,7 +27993,7 @@ The opacity of the crosshair. By default the crosshair is opaque.
 
 ### yAxis.crosshair.tooltip `Object`
 
-The crosshar tooltip options.
+The crosshair tooltip options.
 
 > The crosshair tooltip is displayed when the [yAxis.crosshair.tooltip.visible](#configuration-yAxis.crosshair.tooltip.visible) option is set to `true`.
 
@@ -29583,9 +29668,9 @@ The following dash types are supported:
 
 ### yAxis.majorGridLines.visible `Boolean` *(default: true)*
 
-If set to `true` the chart will display the x major grid liness. By default the x major grid liness are visible.
+If set to `false` the chart will not display the y major grid lines. By default the y major grid lines are visible.
 
-#### Example - hide the scatter chart x major grid liness
+#### Example - hide the scatter chart y major grid lines
 
     <div id="chart"></div>
     <script>
@@ -30305,7 +30390,7 @@ The minimum value of the axis.
 
 ### yAxis.minorUnit `Number`
 
-The interval between minor divisions. It defaults to 1/5th of the [yAxis.majorUnit](#configuration-yAxis.majorUnit).
+The interval between minor divisions. It defaults to 1/5 of the [yAxis.majorUnit](#configuration-yAxis.majorUnit).
 If the [yAxis.type](#configuration-yAxis.type) is set to `"log"`, the minorUnit value represents the number of divisions between two major units and defaults to the major unit minus one.
 
 #### Example - set the logarithmic y axis minor unit
@@ -32646,7 +32731,7 @@ The drawing surface of the Chart. See [Drawing API](http://docs.telerik.com/kend
                 type: "column", data: [1, 2]
             }],
             render: function(e) {
-                e.surface.bind("mouseenter", onShapeMouseEnter);
+                e.sender.surface.bind("mouseenter", onShapeMouseEnter);
             }
         });
 
@@ -33154,6 +33239,8 @@ The data source to which the widget should be bound.
 ### setOptions
 
 Sets the widget options. Changes are cumulative.
+
+> The `setOptions` method recreates and rebinds the Chart instance. Calling `setOptions` in a Chart event handler is not recommended and can cause an endless loop or a JavaScript error.
 
 #### Parameters
 

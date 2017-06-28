@@ -399,6 +399,22 @@ test("text should set custom value", function() {
     equal(combobox.text(), "custom");
 });
 
+test("text should set custom text and keep value empty", function() {
+    var combobox = new ComboBox(input, {
+        dataTextField: "text",
+        dataValueField: "value",
+        dataSource: [{text: "foo", value: 1}, {text:2, value:2}],
+        syncValueAndText: false
+    });
+
+    combobox.select(1);
+    combobox.text("custom");
+
+    ok(!combobox.ul.children().hasClass(SELECTED));
+    equal(combobox.value(), "");
+    equal(combobox.text(), "custom");
+});
+
 test("text method selects item depending on ignoreCase option", function() {
     var combobox = new ComboBox(input, {
         dataSource: ["foo", "Foo"],
@@ -423,19 +439,20 @@ test("text method does not throw expection if set to null", function() {
     equal(combobox.text(), "");
 });
 
-test("text method does not throw expection if current selected item's value is null", function() {
+asyncTest("text method does not throw expection if current selected item's value is null", 2, function() {
     var combobox = new ComboBox(input, {
         dataTextField: "text",
         dataValueField: "value",
         dataSource: [{text: "foo", value: null}]
     });
 
-    combobox.select(0);
+    combobox.select(0).done(function() {
+        start();
+        combobox.text("foo");
 
-    combobox.text("foo");
-
-    equal(combobox.value(), "");
-    equal(combobox.text(), "foo");
+        equal(combobox.value(), "");
+        equal(combobox.text(), "foo");
+    });
 });
 
 test("text should not change selection if selected item is equal to input.value", 2, function() {
@@ -1017,6 +1034,23 @@ test("reset value when _clear is clicked", 1, function() {
             { id: 3, name: "name3" }
         ],
         value: "2"
+    });
+
+    combobox._clear.click();
+    equal(combobox.value(), "");
+});
+
+test("reset value when _clear is clicked (equal value and text)", 1, function() {
+    select = $("<select></select>");
+    var combobox = new ComboBox(select, {
+        filter: "contains",
+        dataValueField: "id",
+        dataTextField: "name",
+        dataSource: [
+            { id: "name1", name: "name1" },
+            { id: "name2", name: "name2" }
+        ],
+        value: "name2"
     });
 
     combobox._clear.click();

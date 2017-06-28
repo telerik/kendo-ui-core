@@ -66,8 +66,6 @@ The example below demonstrates how to create a Split button using Kendo UI Menu.
 
 ## See Also
 
-Other articles on the Kendo UI Menu:
-
 * [Menu JavaScript API Reference](/api/javascript/ui/menu)
 * [How to Execute Custom Click Actions Based on Class Name]({% slug howto_execute_custom_click_actions_basedon_classnames_menu %})
 * [How to Use FontAwesome Icons]({% slug howto_use_fontawesome_icons_menu %})

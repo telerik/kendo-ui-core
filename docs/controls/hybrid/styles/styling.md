@@ -249,7 +249,7 @@ The case is described in further details in [this article](/controls/hybrid/supp
 
 ### Change iOS7 Tint Color
 
-On 10th September 2013 Kendo UI released an iOS7 theme for mobile devices as an internal build which is also included in the Q2 service pack.
+On 10<sup>th</sup> September 2013 Kendo UI released an iOS7 theme for mobile devices as an internal build which is also included in the Q2 service pack.
 
 In iOS7 every application can have the ability to set a tint color which is used for highlighting specific interactive elements throughout the whole application. The tint color can be also set per single view. The Kendo UI iOS7 theme for mobile is created to be similarly easy to change the application tint color with the simple CSS rule shown below.
 

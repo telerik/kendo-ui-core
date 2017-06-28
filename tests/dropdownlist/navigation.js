@@ -596,6 +596,7 @@
 
     test("DropDownList calls focusout of wrapper on TAB", function() {
         var dropdownlist = input.kendoDropDownList({
+            animation: false,
             dataTextField: "text",
             dataValueField: "value",
             dataSource: [
@@ -605,10 +606,11 @@
             filter: "startswith"
         }).data("kendoDropDownList");
 
+
         dropdownlist.wrapper.focus();
         dropdownlist.open();
 
-        dropdownlist.wrapper.focusout(function() {
+        dropdownlist.wrapper.focusout(function(e) {
             ok(true);
         });
 
@@ -826,6 +828,24 @@
                 value: 0
             }
         });
+
+        equal(dropdownlist.value(), "0");
+    });
+
+    test("widget sets option label value if complex object and TAB key", function() {
+        var dropdownlist = new DropDownList(input, {
+            dataValueField: "value",
+            dataTextField: "text",
+            dataSource: [{
+                text: "text", value: "value"
+            }],
+            optionLabel: {
+                text: "Any",
+                value: 0
+            }
+        });
+
+        dropdownlist.wrapper.focus().press(keys.TAB);
 
         equal(dropdownlist.value(), "0");
     });

@@ -190,7 +190,7 @@ Below are listed the steps for you to follow when binding the Kendo UI AutoCompl
             ->dependencies($dependenciesDataSource);
         ?>
 
-**Step 7** Output the gantt by echo-ing the result of the [render](/api/php/Kendo/UI/Widget#render) method.
+**Step 7** Output the gantt by echoing the result of the [render](/api/php/Kendo/UI/Widget#render) method.
 
 ###### Example
 

@@ -1,4 +1,4 @@
-﻿(function( window, undefined ) {
+(function( window, undefined ) {
     kendo.cultures["tr-TR"] = {
         name: "tr-TR",
         numberFormat: {

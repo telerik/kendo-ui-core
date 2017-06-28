@@ -6,7 +6,7 @@ slug: overview_listview_uiforjsp
 position: 1
 ---
 
-# LsitView JSP Tag Overview
+# ListView JSP Tag Overview
 
 The ListView JSP tag is a server-side wrapper for the [Kendo UI ListView](/api/javascript/ui/listview) widget.
 

@@ -1,0 +1,56 @@
+<!doctype html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width">
+        <title>{{ page.page_title || page.title }}</title>
+        <link rel="shortcut icon" href="{{site.baseurl}}/favicon.ico"/>
+        {% if page.description %}<meta name="description" content="{{page.description}}">{% endif %}
+        <link href="//fonts.googleapis.com/css?family=Roboto:400,500,700,900" rel="stylesheet">
+        <link href='https://fonts.googleapis.com/css?family=Roboto+Mono:400,500,700' rel='stylesheet' type='text/css'>
+        <link href="http://kendo.cdn.telerik.com/{{ site.cdnVersion }}/styles/kendo.common.min.css" rel="stylesheet" />
+        {% stylesheet styles %}
+        {% stylesheet icon-font %}
+        {% stylesheet theme %}
+        <script src="http://code.jquery.com/jquery-1.10.2.js"></script>
+        <script src="http://kendo.cdn.telerik.com/{{ site.cdnVersion }}/js/kendo.web.min.js"></script>
+        <link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/codemirror/5.6.0/codemirror.min.css">
+        <script src="http://cdnjs.cloudflare.com/ajax/libs/codemirror/5.6.0/codemirror.min.js"></script>
+        <script src="http://cdnjs.cloudflare.com/ajax/libs/codemirror/5.6.0/mode/javascript/javascript.min.js"></script>
+        <script src="http://cdnjs.cloudflare.com/ajax/libs/codemirror/5.6.0/mode/css/css.min.js"></script>
+        <script src="http://cdnjs.cloudflare.com/ajax/libs/codemirror/5.6.0/mode/xml/xml.min.js"></script>
+        <script src="http://cdnjs.cloudflare.com/ajax/libs/codemirror/5.6.0/mode/htmlmixed/htmlmixed.min.js"></script>
+        {% javascript prettify %}
+        {% javascript app %}
+        {% if page.editableExample == "true" %}
+        {% javascript dojo %}
+        {% endif %}
+
+        <!--[if lt IE 9]>
+        <script>
+        document.createElement('header');
+        document.createElement('nav');
+        document.createElement('section');
+        document.createElement('article');
+        document.createElement('aside');
+        document.createElement('footer');
+        document.createElement('hgroup');
+        </script>
+        <![endif]-->
+    </head>
+    <body>
+        <!-- Google Tag Manager -->
+        <noscript>
+            <iframe src="//www.googletagmanager.com/ns.html?id={{site.google_tag_manager}}" height="0" width="0" style="display: none; visibility: hidden"></iframe>
+        </noscript>
+        <script>(function(w, d, s, l, i) { w[l] = w[l] || []; w[l].push({ 'gtm.start': new Date().getTime(), event: 'gtm.js' }); var f = d.getElementsByTagName(s)[0], j = d.createElement(s), dl = l != 'dataLayer' ? '&l=' + l : ''; j.async = true; j.src = '//www.googletagmanager.com/gtm.js?id=' + i + dl; f.parentNode.insertBefore(j, f); })(window, document, 'script', 'dataLayer', '{{site.google_tag_manager}}');</script>
+        <!-- End Google Tag Manager -->
+        <header id="page-header">
+            <span class="toggle-nav"><span></span></span>
+            {% include header.html %}
+        </header>
+
+        {{ content }}
+    </body>
+</html>
+
