@@ -266,7 +266,7 @@
                 }
 
                 if (width) {
-                    if (width.toString().indexOf("%") > 0) {
+                    if (isNaN(width) && width.toString().indexOf("px") < 0) {
                         wrapper.width(width);
                     } else {
                         wrapper.width(constrain(width, options.minWidth, options.maxWidth));
@@ -277,7 +277,7 @@
                 }
 
                 if (height) {
-                    if (height.toString().indexOf("%") > 0) {
+                    if (isNaN(height) && height.toString().indexOf("px") < 0) {
                         wrapper.height(height);
                     } else {
                         wrapper.height(constrain(height, options.minHeight, options.maxHeight));
@@ -383,6 +383,11 @@
             },
 
             setOptions: function(options) {
+                // make a deep extend over options.position telerik/kendo-ui-core#844
+                var cachedOptions = JSON.parse(JSON.stringify(options));
+                extend(options.position, this.options.position);
+                extend(options.position, cachedOptions.position);
+
                 Widget.fn.setOptions.call(this, options);
                 var scrollable = this.options.scrollable !== false;
 

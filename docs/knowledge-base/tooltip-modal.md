@@ -1,18 +1,18 @@
 ---
-title: Simulate Modal Behaviour of Kendo UI Tooltip
-description: How to force the Kendo Tooltip to display a modal overlay over the page
+title: Simulate Modal Behavior of the Tooltip
+description: How to make the Kendo UI Tooltip display a modal overlay over the page.
 type: how to
-page_title: Make the Kendo Tooltip Modal
-slug: simulate-modal-behaviour-of-kendo-ui-tooltip
+page_title: Simulate Modal Behavior of the Tooltip
+slug: simulate_modal_behaviour_of_kendo_tooltip
 position: 0
 tags: kendo, tooltip, modal
 teampulseid:
 ticketid: 1112824
 pitsid:
-
 ---
 
 ## Environment
+
 <table>
  <tr>
   <td>Product</td>
@@ -20,14 +20,13 @@ pitsid:
  </tr>
 </table>
 
+## Description
 
-## Description 
-The following article shows how to mimic modality of a Kendo Tooltip.
+Your project might require you to mimic modality in a Kendo UI Tooltip.
 
-## Solution
-This could be achieved by simply placing a semi-transparent &lth;div&gth; element as overlay of the entire HTML page. Note, that the Tooltip should be the only element to remain above (after) the overlay.
+## Possible Solution
 
-###### Example
+To simulate modality in a Kendo UI Tooltip, place a semi-transparent &lth;div&gth; element as an overlay over the entire HTML page. Make sure that the Tooltip is the only element to remain above the overlay.
 
 ````html
 	<span id="target" title="Tooltip content">
@@ -59,7 +58,7 @@ This could be achieved by simply placing a semi-transparent &lth;div&gth; elemen
 		padding: 0;
 		margin: 0;
 	  }
-	  
+
 	  .overlay {
 		background-color: rgba(0,0,0,0.3);
 		position: absolute;
@@ -70,4 +69,4 @@ This could be achieved by simply placing a semi-transparent &lth;div&gth; elemen
 
 ## See Also
 
-* [Tooltip JavaScript API Reference](http://docs.telerik.com/kendo-ui/api/javascript/ui/tooltip)
+* [Kendo UI Tooltip JavaScript API Reference](http://docs.telerik.com/kendo-ui/api/javascript/ui/tooltip)

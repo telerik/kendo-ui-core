@@ -1505,6 +1505,10 @@ var __meta__ = { // jshint ignore:line
                         .on("mouseenter" + STATIC_LIST_NS, "li", function() { $(this).addClass(HOVER); })
                         .on("mouseleave" + STATIC_LIST_NS, "li", function() { $(this).removeClass(HOVER); });
 
+            if (this.options.selectable === "multiple") {
+                this.element.attr("aria-multiselectable", true);
+            }
+
             this.content = this.element.wrap("<div class='k-list-scroller' unselectable='on'></div>").parent();
             this.header = this.content.before('<div class="k-group-header" style="display:none"></div>').prev();
 
@@ -1719,7 +1723,6 @@ var __meta__ = { // jshint ignore:line
             if (that._current) {
                 that._current
                     .removeClass(FOCUSED)
-                    .removeAttr("aria-selected")
                     .removeAttr(ID);
 
                 that.trigger("deactivate");
@@ -1930,7 +1933,7 @@ var __meta__ = { // jshint ignore:line
 
             if (selectable === true || !indices.length) {
                 for (; i < selectedIndices.length; i++) {
-                    $(children[selectedIndices[i]]).removeClass("k-state-selected");
+                    $(children[selectedIndices[i]]).removeClass("k-state-selected").attr("aria-selected", false);
 
                     removed.push({
                         position: i,
@@ -1953,7 +1956,7 @@ var __meta__ = { // jshint ignore:line
                         selectedIndex = selectedIndices[j];
 
                         if (selectedIndex === index) {
-                            $(children[selectedIndex]).removeClass("k-state-selected");
+                            $(children[selectedIndex]).removeClass("k-state-selected").attr("aria-selected", false);
 
                             removed.push({
                                 position: j + removedIndices,
@@ -2196,7 +2199,7 @@ var __meta__ = { // jshint ignore:line
                 item += ' k-state-selected';
             }
 
-            item += '"' + (selected ? ' aria-selected="true"' : "") + ' data-offset-index="' + context.index + '">';
+            item += '" aria-selected="' + (selected ? "true" : "false") + '" data-offset-index="' + context.index + '">';
 
             item += this.templates.template(dataItem);
 

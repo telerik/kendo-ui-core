@@ -1,14 +1,16 @@
 ---
-title: Render element for zero bars
-page_title: Render element for zero bars | Kendo UI Charts
-description: "Learn how to render an element for bars with zero value with the Kendo UI Charts."
+title: Render Element for Zero Bars
+page_title: Render Element for Zero Bars | Kendo UI Charts
+description: "Learn how to render an element for the bars with a zero value with the Kendo UI Charts."
 previous_url: /controls/charts/how-to/render-zero-bars
 slug: howto_renderzerobars_charts
 ---
 
-# Render element for zero bars
+# Render Element for Zero Bars
 
-By default bars with zero value are not rendered because they have zero size. The example below demonstrates how to use the [`series.visual`](/api/javascript/dataviz/ui/chart#configuration-series.visual) function to render an element for zero bars.
+By default, bars with a zero value are not rendered because they have a zero size.
+
+The following example demonstrates how to use the [`series.visual`](/api/javascript/dataviz/ui/chart#configuration-series.visual) function to render an element for zero bars.
 
 ###### Example
 

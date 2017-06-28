@@ -1,8 +1,8 @@
 ---
-title: Reversed Coordinates for Bubble Type Layer with GeoJson in Map
+title: Reversed Coordinates for Bubble Type Layer with GeoJson Are Displayed in Map
 description: A solution for displaying a bubble-type layer with reversed coordinates in a Kendo UI Map
 type: troubleshooting
-page_title: Show data for a bubble-type layer that is received as [Longitude, Latitude]
+page_title: Reversed Coordinates for Bubble Type Layer with GeoJson Are Displayed in Map
 slug: map_reverse_location_coordinates
 position: 0
 tags: kendo ui map, location, coordinates, longitude, latitude
@@ -27,17 +27,13 @@ res_type: kb
 
 ## Description
 
-I need to draw a bubble from a GeoJSON response on a Kendo UI Map.
+My project requires me to draw a bubble from a GeoJSON response on a Kendo UI Map. I receive the data in a `\[Longitude, Latitude\]` format, but when I bind it to the Kendo UI Map, it is handled as `\[latitude, longitude\]`.
 
-I am receiving the data in a _\[Longitude, Latitude\]_ format, but when the data is bound to the Kendo UI Map, it is handled as _\[latitude, longitude\]_.
+## Possible Solution
 
-## Solution
+While the Kendo UI Map does not provide a built-in solution, you can still work around this behavior.
 
-There is no built-in solution. Check the [suggested workarounds](#suggested-workarounds) instead.
-
-## Suggested Workarounds
-
-The Map excludes the location field in the _[Latitude, Longitude]_ format. If you are receiving the data in a reversed order, you should modify the array prior to the binding. You can use `schema.parse` to modify the array:
+The Map excludes the location field in the `[Latitude, Longitude]` format. If you receive the data in a reversed order, modify the array prior to the binding and use `schema.parse` to modify the array.
 
 ```html
 <!DOCTYPE html>

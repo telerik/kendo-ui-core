@@ -735,7 +735,7 @@ The [template](/api/javascript/kendo#methods-template) used to render the items 
     });
     </script>
 
-### tagTemplate `String`
+### tagTemplate `String|Function`
 
 The [template](/api/javascript/kendo#methods-template) used to render the tags.
 
