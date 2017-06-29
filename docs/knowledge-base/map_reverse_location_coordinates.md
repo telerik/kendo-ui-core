@@ -33,7 +33,7 @@ My project requires me to draw a bubble from a GeoJSON response on a Kendo UI Ma
 
 While the Kendo UI Map does not provide a built-in solution, you can still work around this behavior.
 
-The Map excludes the location field in the `[Latitude, Longitude]` format. If you receive the data in a reversed order, modify the array prior to the binding and use `schema.parse` to modify the array.
+The Map accepts a `[Latitude, Longitude]` format for its locations field. If you receive the data in a reversed order, modify the array prior to the binding and use `schema.parse` to modify the array.
 
 ```html
 <!DOCTYPE html>

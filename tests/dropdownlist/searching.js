@@ -806,4 +806,22 @@ test("autoWidth adds one pixel to avoid browser pixel rounding", function(assert
         equal(filters.filters[1].filters.length, 2);
         equal(!filters.filters[1].filters.filters, true);
     });
+
+    test("update dataSource when minLength is set", 1, function() {
+        var dropdownlist = new DropDownList(input, {
+            dataTextField: "text",
+            dataValueField: "value",
+            serverFiltering: true,
+            minLenght: 3,
+            dataSource: {
+                data: [{ text: "foo", value: 1 }, { text: "bar", value: 2 }, { text: "baz", value: 3 }]
+            }
+        });
+
+        dropdownlist.search("b");
+        dropdownlist.select(1);
+        dropdownlist.open();
+        equal(dropdownlist.ul.children().length, 3);
+
+    });
 })();

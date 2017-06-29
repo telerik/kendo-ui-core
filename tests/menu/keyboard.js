@@ -123,22 +123,6 @@ test('Mouse events reset the keyboard navigation active item', function() {
     ok(secondItem.hasClass(FOCUSEDSTATE));
 });
 
-test('Disabled root item does not open subgroup', function() {
-    menu.wrapper.focus().press(keys.RIGHT).press(keys.RIGHT).press(keys.DOWN);
-
-    var thirdItem = menu.wrapper.children(".k-item").eq(2);
-
-    ok(thirdItem.hasClass(FOCUSEDSTATE));
-});
-
-test('Disabled subitem does not open sub-subgroup', function() {
-    menu.wrapper.focus().press(keys.DOWN).press(keys.DOWN).press(keys.RIGHT);
-
-    var secondSubItem = menu.wrapper.children(".k-item").first().find(".k-item").eq(1);
-
-    ok(secondSubItem.hasClass(FOCUSEDSTATE));
-});
-
 test('Hitting Enter key navigates an item hyperlink', function() {
     var fired = false;
     menu.wrapper.find("#fooLink").click(function(e){

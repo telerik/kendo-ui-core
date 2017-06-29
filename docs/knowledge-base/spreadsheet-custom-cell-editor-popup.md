@@ -24,13 +24,13 @@ pitsid:
 
 Your project might require you to:
 
-* Use the custom editor of the Spreadsheet with a Kendo UI Popup.
-* Show the editor next to the selected cell of the Spreadsheet.
-* Make the Popup editor disappear when the user clicks outside its boundaries.
+1. Use the custom editor of the Spreadsheet with a Kendo UI Popup.
+1. Show the editor next to the selected cell of the Spreadsheet.
+1. Make the Popup editor disappear when the user clicks outside its boundaries.
 
 ## Possible Solution
 
-The following example demonstrates how to implement the scenario.
+The following example demonstrates how to implement this scenario.
 
 ```html
     <!DOCTYPE html>

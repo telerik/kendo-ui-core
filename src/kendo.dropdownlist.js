@@ -223,6 +223,7 @@ var __meta__ = { // jshint ignore:line
 
                 if (that.filterInput && that.options.minLength !== 1) {
                     that.refresh();
+                    that._dataSource();
                     that.popup.one("activate", that._focusInputHandler);
                     that.popup.open();
                     that._resizeFilterInput();

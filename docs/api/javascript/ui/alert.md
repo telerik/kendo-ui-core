@@ -5,7 +5,7 @@ description: How to initialize an Alert UI widget, configure its properties and 
 res_type: api
 ---
 
-# kendo.ui.Alert : kendo.ui.Dialog
+# kendo.ui.Alert
 
 Represents the Kendo UI Alert.
 

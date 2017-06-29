@@ -28,7 +28,7 @@ The following example demonstrates how to decorate your own custom tool with a b
 
   /* Using FontAwesome icon for background */
 
-  .k-editor .k-my-second-tool:before
+  .k-editor .k-i-my-second-tool:before
   {
       font-family: FontAwesome;
       content: "\f09e";
@@ -45,12 +45,14 @@ The following example demonstrates how to decorate your own custom tool with a b
         tools: [ "bold", "italic", "underline",
                 {
                     name: "myTool",
+                    tooltip: "My tool",
                     exec: function(e) {
                         // my code
                     }
                 },
                 {
                     name: "mySecondTool",
+                    tooltip: "My second tool",
                     exec: function(e) {
                         // my code
                     }

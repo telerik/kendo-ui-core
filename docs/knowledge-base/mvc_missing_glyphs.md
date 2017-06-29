@@ -26,7 +26,7 @@ The Kendo UI CDN loads the required glyph files automatically after including th
 
 ## Possible Solution
 
-To resolve this issue, either:
+To make the Web Font Icons visible, either:
 
 * Include the missing files in the `fonts/glyphs` folder. These files are located in the [Kendo UI `.zip` file](https://www.telerik.com/account/product-download?product=KENDOUICOMPLETE), or
 * Disable the CDN support by using the [Project Configuration Wizard](http://docs.telerik.com/aspnet-mvc/vs-integration/configure-project-wizard).

@@ -26,7 +26,7 @@ Your project might require the Kendo UI Editor to let you automatically start ty
 
 ## Possible Solution
 
-To achieve this behavior, handle the `select` event of the widget and execute the `insertUnorderedList` command.
+To allow typing in an unordered list in the Editor, handle the `select` event of the widget and execute the `insertUnorderedList` command.
 
 ````html
 	<textarea id="editor"></textarea>

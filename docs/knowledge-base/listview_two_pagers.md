@@ -39,9 +39,11 @@ res_type: kb
 
 ## Description
 
-Your project might require you to add a pager both to the top and the bottom of a Kendo UI ListView. However, the ListView for ASP.NET MVC does not support placing pagers both at its top and bottom by default.
+Your project might require you to add a pager both to the top and the bottom of a Kendo UI ListView.
 
 ## Possible Solution
+
+By default, the ListView for ASP.NET MVC does not support placing pagers both at its top and bottom. The following examples demonstrate how to work around this issue.
 
 ### ListView Widget
 
@@ -106,7 +108,7 @@ The following example demonstrates how to customize the default behavior of the 
 
 ### ListView Wrapper
 
-To add a pager to a ListView MVC wrapper, apply the same principle only in regard to the page at the top. The main idea is to initialize another pager (_with jQuery initialization within document ready_) and pass the `dataSource` of the ListBox:  
+To add a pager to an MVC ListView wrapper, apply the same configuration approach in regard to the page at the top. The aim is to initialize another pager through a jQuery initialization within `document ready` and pass the `dataSource` of the ListBox.  
 
 The following example demonstrates how to customize the default behavior of the ListView and implement a pager at the top and bottom of the wrapper.
 

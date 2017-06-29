@@ -27,9 +27,11 @@ res_type: kb
 
 ## Description
 
-Your project might require you to implement reordering of Grid rows by adding buttons to each row to move items up and down.
+Your project might require you to implement a reordering functionality for Grid rows by adding buttons to each row to move items up and down.
 
 ## Possible Solution
+
+To add buttons which enable the reordering of the Grid rows:
 
 1. Specify a column template to add the buttons to each Grid row.
 

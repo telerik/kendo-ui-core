@@ -70,8 +70,8 @@ var __meta__ = { // jshint ignore:line
         itemSelector = ".k-item:not(.k-state-disabled)",
         linkSelector = ".k-item:not(.k-state-disabled) > .k-link",
         exclusionSelector = ":not(.k-item.k-separator)",
-        nextSelector = exclusionSelector + ":eq(0)",
-        lastSelector = exclusionSelector + ":last",
+        nextSelector = itemSelector + exclusionSelector + ":eq(0)",
+        lastSelector = itemSelector + exclusionSelector + ":last",
         templateSelector = "div:not(.k-animation-container,.k-list-container)",
         scrollButtonSelector = ".k-menu-scroll-button",
         touchPointerTypes = { "2": 1, "touch": 1 },
@@ -1783,10 +1783,6 @@ var __meta__ = { // jshint ignore:line
                 nextItem,
                 parentItem,
                 overflowWrapper;
-
-            if (item.hasClass(DISABLEDSTATE)) {
-                return;
-            }
 
             if (!belongsToVertical) {
                 nextItem = item.nextAll(nextSelector);

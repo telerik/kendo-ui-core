@@ -31,6 +31,8 @@ You might want to use the **Edit**, **Delete**, **Update**, **Cancel**, or **Add
 
 ## Possible Solution
 
+To remove the text from the user-interaction buttons of the Grid and make them display only icons:
+
 1. Set the `text` of the `command` to a space:
 
     http://docs.telerik.com/kendo-ui/api/javascript/ui/grid#configuration-columns.command.text
