@@ -95,11 +95,9 @@ You can also select multiple rows by using the checkboxes and apply custom styli
             //define template column with checkbox and attach click event handler
             {
               title: 'Select All',
-              headerTemplate: `<input type="checkbox" id="header-chb" class="k-checkbox">
-<label class="k-checkbox-label" for="header-chb"></label>`,
+              headerTemplate: "<input type='checkbox' id='header-chb' class='k-checkbox header-checkbox'><label class='k-checkbox-label' for='header-chb'></label>",
               template: function(dataItem){
-                return `<input type="checkbox" id="${dataItem.ProductID}" class="k-checkbox">
-<label class="k-checkbox-label" for="${dataItem.ProductID}"></label>`
+                return "<input type='checkbox' id='${dataItem.ProductID}' class='k-checkbox row-checkbox'><label class='k-checkbox-label' for='${dataItem.ProductID}'></label>"
               },
               width: 80
             },
@@ -126,20 +124,20 @@ You can also select multiple rows by using the checkboxes and apply custom styli
 
         //bind click event to the checkbox
         grid.table.on("click", ".k-checkbox" , selectRow);
-        $('#header-chb').change(function(ev){
+        
+        $('#header-chb').change(function(ev) {
           var checked = ev.target.checked;
-          $('.k-checkbox').each(function(idx, item){
+          $('.row-checkbox').each(function(idx, item){
             if(checked){
-              if(!($(item).closest('tr').is('.k-state-selected'))){
+              if(!($(item).closest('tr').is('.k-state-selected'))) {
                 $(item).click();
               }
             } else {
-              if($(item).closest('tr').is('.k-state-selected')){
+              if($(item).closest('tr').is('.k-state-selected')) {
                 $(item).click();
               }
             }
           });
-
         });
 
         $("#showSelection").bind("click", function () {
