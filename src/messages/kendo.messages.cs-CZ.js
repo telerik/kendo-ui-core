@@ -232,7 +232,7 @@ $.extend(true, kendo.ui.FilterMenu.prototype.options.messages,{
   "info": "Zobrazit položky s hodnotou, která:",
   "isTrue": "je pravda",
   "isFalse": "není pravda",
-  "filter": "Filtrovat",  "or": "Nebo",
+  "filter": "Filtrovat",  
   "clear": "Zrušit",
   "and": "A zároveň",
   "or": "Nebo",
