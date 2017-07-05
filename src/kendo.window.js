@@ -470,6 +470,8 @@
                     offset, handled,
                     distance = 10,
                     isMaximized = that.options.isMaximized,
+                    scrollLeft = that.options.pinned ? $(window).scrollLeft() : 0,
+                    scrollTop = that.options.pinned ? $(window).scrollTop() : 0,
                     newWidth, newHeight, w, h;
                 if (keyCode == keys.ESC && that._closable()) {
                     that._close(false);
@@ -483,13 +485,13 @@
                     offset = kendo.getOffset(wrapper);
 
                     if (keyCode == keys.UP) {
-                        handled = wrapper.css("top", offset.top - distance);
+                        handled = wrapper.css("top", offset.top - distance - scrollTop);
                     } else if (keyCode == keys.DOWN) {
-                        handled = wrapper.css("top", offset.top + distance);
+                        handled = wrapper.css("top", offset.top + distance - scrollTop);
                     } else if (keyCode == keys.LEFT) {
-                        handled = wrapper.css("left", offset.left - distance);
+                        handled = wrapper.css("left", offset.left - distance - scrollLeft);
                     } else if (keyCode == keys.RIGHT) {
-                        handled = wrapper.css("left", offset.left + distance);
+                        handled = wrapper.css("left", offset.left + distance - scrollLeft);
                     }
                 }
 
