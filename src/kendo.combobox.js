@@ -1010,6 +1010,7 @@ var __meta__ = { // jshint ignore:line
 
             this._initialIndex = null;
             this._presetValue = true;
+            this._toggleCloseVisibility();
         }
     });
 

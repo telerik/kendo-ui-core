@@ -163,11 +163,6 @@ To add the NuGet packages:
                     asp-fallback-test-class="k-theme-test-class"
                     asp-fallback-test-property="opacity" asp-fallback-test-value="0" />
             </environment>
-            </head>
-            <body>
-
-            ...
-
             <environment names="Development">
                 ...
 
@@ -190,7 +185,7 @@ To add the NuGet packages:
             </environment>
 
             @RenderSection("scripts", required: false)
-            </body>
+            </head>
 
     <!--*-->
 8. Use a Kendo UI widget by adding the snippet from the following example to `~/Views/Home/Index.cshtml`.
@@ -201,13 +196,7 @@ To add the NuGet packages:
 
                 @(Html.Kendo().DatePicker()
                         .Name("datepicker")
-                        .Deferred()
                 )
-
-                @* All initialization scripts are rendered to the bottom of the page, see _Layout.cshtml *@
-                @section scripts {
-                    @Html.Kendo().DeferredScripts()
-                }
 
                 <!--_-->
     Now that all is done, you can see the sample page.

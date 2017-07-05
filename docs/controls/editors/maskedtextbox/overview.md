@@ -60,7 +60,7 @@ The following mask rules are available and predefined:
 - `9`&mdash;Digit or space. Accepts any digit between 0 and 9 or space.
 - `#`&mdash;Digit or space. Identical to **Rule 9**. In addition, allows the `+` (plus) and `-` (minus) signs.
 - `L`&mdash;Letter. Restricts the input to a-z and A-Z letters. This rule is equivalent to [a-zA-Z] in regular expressions.
-- `?`&mdash;Letter or space. Restricts the input to letters a-z and A-Z. This rule is equivalent to [a-zA-Z] in regular expressions.
+- `?`&mdash;Letter or space. Restricts the input to letters a-z and A-Z. This rule is equivalent to [a-zA-Z]|\s in regular expressions.
 - `&`&mdash;Character. Accepts any character except a space. The rule is equivalent to `\S` in regular expressions.
 - `C`&mdash;Character or space. Accepts any character. The rule is equivalent to `.` in regular expressions.
 - `A`&mdash;Alphanumeric. Accepts letters and digits only.
