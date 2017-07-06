@@ -10,13 +10,14 @@ position: 3
 
 The [Node Package Manager (NPM)](http://npmjs.com/) is a popular JavaScript package manager.
 
-The article assumes that you are familiar with the necessary steps to use browser-based libraries from NPM. Some of the tools that address this issue are Browserify, Webpack, and SystemJS.
+This article assumes that you are familiar with the necessary steps to use browser-based libraries from NPM. Some of the tools that address this issue are Browserify, Webpack, and SystemJS.
 
 For more information on possible setups, refer to the [sample repository on GitHub](https://github.com/telerik/kendo-ui-npm-example).
 
 ## Overview
 
 Kendo UI maintains two NPM packages:
+
 * [Kendo UI Core](#kendo-ui-core)
 * [Kendo UI Professional](#kendo-ui-professional)
 
@@ -28,29 +29,21 @@ Official releases, service packs, and internal builds are published for each pac
 
 ## Kendo UI Core
 
-The Kendo UI Core NPM Package is published as [`kendo-ui-core`](https://www.npmjs.com/package/kendo-ui-core) on [http://npmjs.com/](http://npmjs.com/).
+The Kendo UI Core NPM Package is published as [`kendo-ui-core`](https://www.npmjs.com/package/kendo-ui-core) on [http://npmjs.com/](http://npmjs.com/) and is accessible without credentials.
 
-The package is accessible without credentials.
-
-###### Example
-
-```sh
-npm install --save kendo-ui-core
-```
+To install the Kendo UI Core NPM package, run `npm install --save kendo-ui-core`.
 
 ## Kendo UI Professional
 
-The Kendo UI Professional NPM Package, named `@progress/kendo-ui` is available at the NPM registry.
+The Kendo UI Professional NPM Package (@progress/kendo-ui) is available at the NPM registry.
 
-> The Progress registry has been retired in favor of npmjs.com. Please remove the two lines containing 'registry.npm.telerik.com' from your .npmrc file to start using the default registry.
+> **Important**
+>
+> The Progress NPM registry was retired in favor of [npmjs.com](https://www.npmjs.com/). To start using the default registry, remove the two lines which contain `registry.npm.telerik.com` from your `.npmrc` file.
 
 ### Installation
 
-###### Example
-
-```sh
-npm install --save @progress/kendo-ui
-```
+To install the Kendo UI Professional NPM package, run `npm install --save @progress/kendo-ui`.
 
 > **Important**
 >
@@ -58,7 +51,7 @@ npm install --save @progress/kendo-ui
 
 ### Legacy Package
 
-The legacy `kendo` package that is available as a GitHub repository and is accessible through `git+https://bower.telerik.com/npm-kendo-ui/npm-kendo.git` will not be updated after May 2017. The repository itself will remain active.
+The `kendo` legacy package that is available as a GitHub repository and is accessible through `git+https://bower.telerik.com/npm-kendo-ui/npm-kendo.git` will not be updated after May 2017. The repository itself will remain active.
 
 ## Troubleshooting
 

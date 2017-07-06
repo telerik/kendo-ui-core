@@ -770,6 +770,10 @@ var __meta__ = { // jshint ignore:line
                 return item.tabIndex >= 0 && $(item).is(':visible');
             });
 
+            if (this.element.is("[tabindex]")) {
+                elements.push(this.element[0]);
+            }
+
             return elements;
         },
         _sortFocusableElements: function(elements){

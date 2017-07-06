@@ -172,7 +172,10 @@
                 wrapper
                     .on("mouseenter" + NS, TITLEBAR_BUTTONS, proxy(that._buttonEnter, that))
                     .on("mouseleave" + NS, TITLEBAR_BUTTONS, proxy(that._buttonLeave, that))
-                    .on("click" + NS, "> " + TITLEBAR_BUTTONS, proxy(that._windowActionHandler, that));
+                    .on("click" + NS, "> " + TITLEBAR_BUTTONS, proxy(that._windowActionHandler, that))
+                    .on("keydown" + NS, proxy(that._keydown, that))
+                    .on("focus" + NS, proxy(that._focus, that))
+                    .on("blur" + NS, proxy(that._blur, that));
 
                 windowContent
                     .on("keydown" + NS, proxy(that._keydown, that))
@@ -470,6 +473,7 @@
                     offset, handled,
                     distance = 10,
                     isMaximized = that.options.isMaximized,
+                    isMinimized = that.options.isMinimized,
                     newWidth, newHeight, w, h;
                 if (keyCode == keys.ESC && that._closable()) {
                     that._close(false);
@@ -493,7 +497,7 @@
                     }
                 }
 
-                if (options.resizable && e.ctrlKey && !isMaximized) {
+                if (options.resizable && e.ctrlKey && !isMaximized && !isMinimized) {
                     if (keyCode == keys.UP) {
                         handled = true;
                         newHeight = wrapper.height() - distance;
@@ -913,7 +917,11 @@
                 that.element.find("> .k-overlay").remove();
 
                 if (that._shouldFocus(target)) {
-                    that.element.focus();
+                    if (that.isMinimized()) {
+                        that.wrapper.focus();
+                    } else {
+                        that.element.focus();
+                    }
 
                     var scrollTop = $(window).scrollTop(),
                         windowTop = parseInt(wrapper.position().top, 10);
@@ -982,6 +990,9 @@
                 }
 
                 options.isMaximized = options.isMinimized = false;
+
+                this.wrapper.removeAttr("tabindex");
+                this.wrapper.removeAttr("aria-labelled-by");
 
                 that.resize();
 
@@ -1104,6 +1115,10 @@
 
                     that.options.isMinimized = true;
                 });
+
+                this.wrapper.attr("tabindex", 0);
+                this.wrapper.attr("aria-labelled-by", this.element.attr("aria-labelled-by"));
+                this.wrapper.focus();
 
                 return this;
             },

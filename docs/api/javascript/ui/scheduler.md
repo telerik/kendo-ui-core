@@ -154,7 +154,7 @@ If set to `false` the "current time" marker would be displayed using the schedul
     <script>
     $("#scheduler").kendoScheduler({
       date: new Date(),
-      timezone: "Europe/London", // Use the London timezone
+      timezone: "Etc/UTC",
       currentTimeMarker: {
         useLocalTimezone: false
       },
@@ -4082,7 +4082,7 @@ The complete list of the supported timezones is available in the [List of IANA t
     <script>
     $("#scheduler").kendoScheduler({
         date: new Date("2013/6/13"),
-        timezone: "Europe/London", // Use the London timezone
+        timezone: "Etc/UTC",
         dataSource: {
             batch: true,
             transport: {

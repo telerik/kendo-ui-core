@@ -50,7 +50,7 @@ The following example demonstrates how to initialize the MultiSelect by using th
 
 #### Bind to Local Data Arrays
 
-To initialize the MultiSelect by binding the widget to a local data array and utilizing the `<input>` or the `<select>` element, use the [Data Source component]({% slug overview_kendoui_datasourcecomponent %}). It is an abstraction for local and remote data. Local arrays are appropriate for limited value options.
+To initialize the MultiSelect by binding the widget to a local data array and utilizing the `<select>` element, use the [Data Source component]({% slug overview_kendoui_datasourcecomponent %}). It is an abstraction for local and remote data. Local arrays are appropriate for limited value options.
 
 The following example demonstrates how to initialize the MultiSelect by using this approach.
 
@@ -73,7 +73,7 @@ The following example demonstrates how to initialize the MultiSelect by using th
 
 #### Bind to Remote Data Services
 
-To initialize the MultiSelect by binding the widget to remote data arrays and utilizing the `<input>` or the `<select>` element, use the [Data Source component]({% slug overview_kendoui_datasourcecomponent %}). It is an abstraction for local and remote data. Remote data binding is appropriate for larger data sets, so that items are loaded on demand when displayed. You can use the DataSource for serving data from a variety of data services such as [XML](http://en.wikipedia.org/wiki/XML), [JSON](http://en.wikipedia.org/wiki/JSON), and [JSONP](http://en.wikipedia.org/wiki/JSONP).
+To initialize the MultiSelect by binding the widget to remote data arrays and utilizing the `<select>` element, use the [Data Source component]({% slug overview_kendoui_datasourcecomponent %}). It is an abstraction for local and remote data. Remote data binding is appropriate for larger data sets, so that items are loaded on demand when displayed. You can use the DataSource for serving data from a variety of data services such as [XML](http://en.wikipedia.org/wiki/XML), [JSON](http://en.wikipedia.org/wiki/JSON), and [JSONP](http://en.wikipedia.org/wiki/JSONP).
 
 The following example demonstrates how to initialize the MultiSelect by using this approach.
 
@@ -106,7 +106,7 @@ For more information on the capabilities and syntax of the templates, refer to t
 
 ### Item Templates
 
-The item template manages the way the list items of a MultiSelect are rendered.  
+The item template manages the way the list items of a MultiSelect are rendered.
 
 The following example demonstrates how to define an item template.
 
@@ -296,7 +296,7 @@ You can let the popup element automatically adjust its width according to the le
 
 ###### Example
 
-    <input id="multiselect" style="width: 100px;" />
+    <select id="multiselect" style="width: 100px;"></select>
     <script>
     $("#multiselect").kendoMultiSelect({
       autoWidth: true,

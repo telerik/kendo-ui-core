@@ -2027,7 +2027,7 @@ If set to function, the data source will invoke it and use the result as the URL
         },
         destroy: {
           url: function (options) {
-            return "http://demos.telerik.com/kendo-ui/service/products/destroy",
+            return "http://demos.telerik.com/kendo-ui/service/products/destroy"
           },
           dataType: "jsonp" // "jsonp" is required for cross-domain requests; use "json" for same-domain requests
         },
@@ -2280,15 +2280,18 @@ If the value of `transport.read` is a string, the data source uses this string a
 
 #### Example - send additional parameters to the remote service
 
-    <input value="html5" id="search" />
+    <input value="2" id="search" />
     <script>
     var dataSource = new kendo.data.DataSource({
       transport: {
         read: {
-          url: "http://demos.telerik.com/kendo-ui/service/twitter/search",
+          url: "http://demos.telerik.com/kendo-ui/service/products/read",
           dataType: "jsonp", // "jsonp" is required for cross-domain requests; use "json" for same-domain requests
-          data: {
-            q: $("#search").val() // send the value of the #search input to the remote service
+          data: function() {
+              return {
+                  skip: 0,
+                  take: $("#search").val() // send the value of the #search input to the remote service
+              };
           }
         }
       }
@@ -2371,10 +2374,11 @@ Refer to the [`jQuery.ajax`](http://api.jquery.com/jQuery.ajax) documentation fo
     var dataSource = new kendo.data.DataSource({
       transport: {
         read: {
-          url: "http://demos.telerik.com/kendo-ui/service/twitter/search",
+          url: "http://demos.telerik.com/kendo-ui/service/products/read",
           dataType: "jsonp", // "jsonp" is required for cross-domain requests; use "json" for same-domain requests
-          data: {
-            q: "html5" // send "html5" as the "q" parameter
+          data:  {
+              skip: 0,
+              take: 2 
           }
         }
       }
@@ -2388,12 +2392,13 @@ Refer to the [`jQuery.ajax`](http://api.jquery.com/jQuery.ajax) documentation fo
     var dataSource = new kendo.data.DataSource({
       transport: {
         read: {
-          url: "http://demos.telerik.com/kendo-ui/service/twitter/search",
+          url: "http://demos.telerik.com/kendo-ui/service/products/read",
           dataType: "jsonp", // "jsonp" is required for cross-domain requests; use "json" for same-domain requests
           data: function() {
-            return {
-              q: "html5" // send "html5" as the "q" parameter
-            };
+              return {
+                  skip: 0,
+                  take: 2 
+              };
           }
         }
       }
