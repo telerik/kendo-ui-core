@@ -94,6 +94,7 @@ var __meta__ = { // jshint ignore:line
                 .toggleClass("k-rtl", !!options.isRtl)
                 .css({ position : ABSOLUTE })
                 .appendTo(options.appendTo)
+                .attr("aria-hidden", true)
                 .on("mouseenter" + NS, function() {
                     that._hovered = true;
                 })
@@ -272,7 +273,8 @@ var __meta__ = { // jshint ignore:line
                                             overflow: HIDDEN,
                                             display: "block",
                                             position: ABSOLUTE
-                                        });
+                                        })
+                                        .attr("aria-hidden", false);
 
                 if (support.mobileOS.android) {
                     wrapper.css(TRANSFORM, "translatez(0)"); // Android is VERY slow otherwise. Should be tested in other droids as well since it may cause blur.
@@ -293,7 +295,8 @@ var __meta__ = { // jshint ignore:line
 
                 element.data(EFFECTS, animation.effects)
                        .kendoStop(true)
-                       .kendoAnimate(animation);
+                       .kendoAnimate(animation)
+                       .attr("aria-hidden", false);
             }
         },
 
@@ -434,8 +437,12 @@ var __meta__ = { // jshint ignore:line
                     that._closing = true;
                 }
 
-                that.element.kendoStop(true);
-                wrap.css({ overflow: HIDDEN }); // stop callback will remove hidden overflow
+                that.element
+                        .kendoStop(true)
+                        .attr("aria-hidden", true);
+                wrap
+                    .css({ overflow: HIDDEN }) // stop callback will remove hidden overflow
+                    .attr("aria-hidden", true);
                 that.element.kendoAnimate(animation);
 
                 if (skipEffects) {

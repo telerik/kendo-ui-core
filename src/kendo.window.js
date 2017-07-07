@@ -475,15 +475,49 @@
                     isMaximized = that.options.isMaximized,
                     isMinimized = that.options.isMinimized,
                     newWidth, newHeight, w, h;
+
                 if (keyCode == keys.ESC && that._closable()) {
                     that._close(false);
                 }
+
                 if (e.target != e.currentTarget || that._closing) {
                     return;
                 }
 
+                 // Refresh
+                if (e.altKey && keyCode == 82) {// Alt + R
+                    that.refresh();
+                }
 
-                if (options.draggable && !e.ctrlKey && !isMaximized) {
+                // Pin/Unpin
+                if (e.altKey && keyCode == 80) {// Alt + P
+                    if(that.options.pinned){
+                        that.unpin();
+                    } else {
+                        that.pin();
+                    }
+                }
+
+                // Maximize/Restore/Miminimize
+                if(e.altKey && keyCode == keys.UP){
+                    if (isMinimized) {
+                        that.restore();
+                        that.element.focus();
+                    } else if (!isMaximized) {
+                        that.maximize();
+                        that.element.focus();
+                    }
+                } else if (e.altKey && keyCode == keys.DOWN){
+                    if (!isMinimized && !isMaximized) {
+                        that.minimize();
+                        that.wrapper.focus();
+                    } else if (isMaximized) {
+                        that.restore();
+                        that.element.focus();
+                    }
+                }
+
+                if (options.draggable && !e.ctrlKey && !e.altKey && !isMaximized) {
                     offset = kendo.getOffset(wrapper);
 
                     if (keyCode == keys.UP) {
@@ -977,6 +1011,12 @@
                     .find(MINIMIZE_MAXIMIZE).parent().show().end().end()
                     .find(PIN_UNPIN).parent().show();
 
+                if (options.isMaximized) {
+                    that.wrapper.find(".k-i-window-maximize").parent().focus();
+                } else if (options.isMinimized) {
+                    that.wrapper.find(".k-i-window-minimize").parent().focus();
+                }
+
                 that.options.width = restoreOptions.width;
                 that.options.height = restoreOptions.height;
 
@@ -1024,6 +1064,8 @@
                 that.wrapper.children(KWINDOWTITLEBAR).find(PIN_UNPIN).parent().toggle(actionId !== "maximize");
 
                 that.trigger(actionId);
+
+                wrapper.find(".k-i-window-restore").parent().focus();
 
                 return that;
             },
@@ -1118,7 +1160,6 @@
 
                 this.wrapper.attr("tabindex", 0);
                 this.wrapper.attr("aria-labelled-by", this.element.attr("aria-labelled-by"));
-                this.wrapper.focus();
 
                 return this;
             },

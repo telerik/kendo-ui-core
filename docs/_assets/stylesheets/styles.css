@@ -1,18 +1,8 @@
-body, html,
-#page-tabs,
-#page-tabs li,
-#markdown-toc ul {
+html, body {
     margin: 0;
-    list-style: none;
     padding: 0;
-}
-
-body, html {
     min-height: 100%;
-}
-
-html {
-    padding-top: 79px;
+    height: 100%;
 }
 
 body {
@@ -45,13 +35,72 @@ code, em {
   font-family: "Roboto Mono", "Ubuntu Mono", "Consolas", "Monaco", monospace;
 }
 
+
+
+.TK-Hat {
+    padding-left: 15px;
+    padding-right: 15px;
+    border-bottom: 1px solid #eff0f1;
+    color: #4d4f52;
+    background: #ffffff;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 42042;
+}
+.TK-Hat::after {
+    content: "";
+    clear: both;
+    display: block;
+}
+.TK-Hat *,
+.TK-Hat:after,
+.TK-Hat:before {
+    box-sizing: border-box;
+}
+.TK-Hat-Brand {
+    float: left;
+    width: 150px;
+    margin: 0;
+}
+.TK-PRGS-Logo {
+    display: block;
+    outline: none!important;
+    text-decoration: none!important;
+    transition: color .1s linear, background .1s linear, opacity .1s linear;
+}
+.TK-PRGS-Logo:focus,
+.TK-PRGS-Logo:hover {
+    opacity: .75;
+}
+.TK-PRGS-Logo svg {
+    position: relative;
+    display: inline-block;
+    vertical-align: middle;
+}
+@media only screen and (max-width: 1100px) and (min-width: 880px) {
+    .TK-Hat-Brand {
+        width: 120px;
+        min-width: 120px;
+    }
+}
+@media only screen and (max-width: 880px) {
+    .TK-Hat-Brand {
+        width: 100px;
+        min-width: 100px;
+    }
+}
+
 /* Header */
 
 #page-header {
-    position: fixed;
-    top: 0;
+    padding: 20px 15px;
     width: 100%;
+    box-sizing: border-box;
     font-size: 12px;
+    position: fixed;
+    top: 41px;
     z-index: 100;
 }
 
@@ -74,15 +123,11 @@ code, em {
 }
 
 #page-edit-link {
-    transition: width .2s linear .3s;
-    position: absolute;
-    z-index: 10;
-    right: 36px;
-    top: 70px;
+    margin: 80px 0 0 0;
+    padding: 9px 10px 10px 0;
     width: 26px;
     height: 17px;
-    margin: 0;
-    padding: 9px 10px 10px 0;
+    transition: width .2s linear .3s;
     text-decoration: none;
     text-align: center;
     border-radius: 0;
@@ -92,6 +137,10 @@ code, em {
     overflow: hidden;
     border: 1px solid #e8ebef;
     border-radius: 20px;
+    position: absolute;
+    z-index: 10;
+    right: 36px;
+    top: 113px;
 }
 
 #page-edit-link span {
@@ -106,18 +155,19 @@ code, em {
 
 #logo-bar {
     float: left;
-    margin-top: 1.617em;
-    margin-bottom: 1.717em;
-    margin-left: 1.833em;
+}
+#logo-bar a {
+    display: inline-block;
 }
 
 .logo {
-    width: 262px;
+    height: 30px;
+    display: inline-block;
+    vertical-align: top;
 }
 
 .nav-buttons {
     float: right;
-    margin-top: .92em;
 }
 
 #page-header a.btn {
@@ -128,7 +178,7 @@ code, em {
 
 #page-nav {
     position: fixed;
-    top: 79px;
+    top: 113px;
     bottom: 0;
     left: 0;
     width: 18%;
@@ -156,7 +206,7 @@ code, em {
     border-bottom: 1px solid #ebecee;
     position: fixed;
     background-color: #fff;
-    top: 79px;
+    top: 113px;
     z-index: 5;
     right: 0;
     font-size: 12px;
@@ -164,6 +214,12 @@ code, em {
     box-sizing: border-box;
     -moz-box-sizing: border-box;
     -webkit-box-sizing: border-box;
+}
+
+#markdown-toc ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
 }
 
 #markdown-toc > ul > li {
@@ -217,8 +273,9 @@ code, em {
 /* Article pages */
 
 #page-inner-content {
-    position: relative;
     margin: 0;
+    padding-top: 113px;
+    position: relative;
 }
 
 #page-inner-content:after {
@@ -230,16 +287,14 @@ code, em {
 }
 
 #page-article {
-    background-color: #ffffff;
-    line-height: 1.5;
-    box-sizing: border-box;
-    -moz-box-sizing: border-box;
-    -webkit-box-sizing: border-box;
-    -webkit-overflow-scrolling: touch;
-    font-family: Roboto, Helvetica, Arial, sans-serif;
-    padding-left: 18%;
-    padding-right: 2em;
+    margin: 0;
+    padding: 30px 2em 4em 18%;
     max-width: 100em;
+    box-sizing: border-box;
+    background-color: #ffffff;
+    font-family: Roboto, Helvetica, Arial, sans-serif;
+    line-height: 1.5;
+    -webkit-overflow-scrolling: touch;
 }
 
 #markdown-toc {
@@ -616,7 +671,7 @@ footer p {
 #page-search {
     margin: 0;
     position: absolute;
-    top: 23px;
+    top: 20px;
     background-color: transparent;
     padding: 0;
     right: 514px;
@@ -696,8 +751,8 @@ footer p {
     background: transparent;
     display: none;
     position: relative;
-    margin-left: 1.833em;
     cursor: pointer;
+    vertical-align: top;
 }
 
 #page-nav.nav-visibility {
@@ -804,7 +859,6 @@ footer p {
 
     .nav-buttons,
     #page-nav,
-    #page-tabs,
     #page-top #page-search {
         display: none;
     }
@@ -987,7 +1041,7 @@ footer p {
     display: block;
 }
 
-#close-button img { 
+#close-button img {
     width: 24px;
     height: 24px;
 }
@@ -1013,7 +1067,7 @@ footer, #feedback-menu-container {
     footer, #feedback-menu-container {
         margin-left: 0;
         padding-left: 2em;
-    } 
+    }
 
     #feedback-section.fixed {
         position: static;
@@ -1072,7 +1126,7 @@ footer, #feedback-menu-container {
     box-sizing: border-box;
 }
 
-@media (max-width: 460px) { 
+@media (max-width: 460px) {
     .k-widget.k-window.k-window-titleless {
         padding: 0;
         margin: 0;
@@ -1080,7 +1134,7 @@ footer, #feedback-menu-container {
         height: 100% !important;
         top: 0 !important;
         left: 0 !important;
-    }    
+    }
 
     #feedback-form-window button {
         margin-top: 15px !important;
@@ -1205,26 +1259,6 @@ button#form-close-button:hover {
     font-size: 12px;
 }
 
-html {
-    padding-top: 0;
-}
-
-#page-inner-content {
-    padding-top: 79px;
-    box-sizing: border-box;
-}
-
-#page-article {
-    margin-top: 0;
-    margin-bottom: 0;
-    padding-top: 30px;
-    padding-bottom: 4em;
-}
-
-#page-edit-link {
-    margin-top: 79px;
-}
-
 footer {
     padding-top: 20px;
     padding-bottom: 20px;
@@ -1232,8 +1266,4 @@ footer {
 
 footer p {
     margin: 0;
-}
-
-html, body {
-    height: 100%;
 }

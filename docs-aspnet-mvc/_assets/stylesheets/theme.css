@@ -22,30 +22,6 @@
     height: 47px;
 }
 
-#page-tabs {
-    list-style: none;
-    background-color: #f5f7f8;
-    padding-left: 20px;
-}
-
-#page-tabs li {
-    display: inline-block;
-    padding: 0 20px 3px;
-    line-height: 58px;
-}
-
-#page-tabs .active {
-    padding-bottom: 0;
-    border-bottom: 3px solid #00b312;
-}
-
-#page-tabs a {
-    display: inline-block;
-    color: #2d3e50;
-    text-decoration: none;
-    font-size: 14px;
-}
-
 
 /* Main Naivation */
 
@@ -81,11 +57,6 @@
     margin: -7px -10px -7px -40px;
 }
 
-.capitalizeChildTitles span.k-in
-{
-	text-transform: capitalize;
-}
-
 #page-nav .k-state-selected,
 #page-nav .k-state-selected a,
 #page-nav .k-state-selected a:hover {
@@ -99,18 +70,22 @@
 #page-nav .article {
     position: absolute;
     margin: 0;
-    padding: 0; 
+    padding: 0;
     left: 20px;
     top: 5px;
 }
+#page-nav .k-icon:before {
+    content: "";
+    display: none;
+}
 
-#page-nav .k-plus { background: url(../images/plus.png); }
-#page-nav .k-minus { background: url(../images/minus.png); }
+#page-nav .k-plus, #page-nav .k-i-expand { background: url(../images/plus.png); }
+#page-nav .k-minus, #page-nav .k-i-collapse { background: url(../images/minus.png); }
 #page-nav .article { top: 6px; background: url(../images/file.png); }
 #page-nav .k-state-selected .article { background: url(../images/file-white.png); }
 
-#page-nav .k-group .k-group .k-plus { background: url(../images/folder-close.png); }
-#page-nav .k-group .k-group .k-minus { background: url(../images/folder-open.png); }
+#page-nav .k-group .k-group .k-plus, #page-nav .k-group .k-group .k-i-expand { background: url(../images/folder-close.png); }
+#page-nav .k-group .k-group .k-minus, #page-nav .k-group .k-group .k-i-collapse { background: url(../images/folder-open.png); }
 
 /* Nav Level 1 */
 
@@ -285,23 +260,23 @@
 #page-nav .k-group .k-group .k-group .k-group .k-group .current-topic .k-group .k-in a { padding-left: 92px; }
 
 .btn {
+    margin: 0 4px;
+    padding: 5px 30px;
+    border: 1px solid #505156;
     color: #fff;
     background-color: #2a2d33;
-    border: 1px solid #505156;
     background-clip: padding-box;
+    font-size: 15px;
+    font-weight: bold;
+    text-align: center;
+    line-height: 1.33334;
     position: relative;
     display: inline-block;
-    padding: 0.667em 2.000em;
-    line-height: 0.933em;
     transition-property: background-color, color;
     transition-duration: 0.2s;
     transition-timing-function: ease;
     border-radius: 2px;
     -webkit-appearance: none;
-    font-size: 15px;
-    font-weight: bold;
-    text-align: center;
-    margin: 0.7em 0;
     cursor: pointer;
 }
 
@@ -313,7 +288,6 @@
 .btn-primary {
     background-color: #ee5315;
     border-color: #ee5315;
-    margin-right: 1.200em;
 }
 
 .btn-primary:hover {

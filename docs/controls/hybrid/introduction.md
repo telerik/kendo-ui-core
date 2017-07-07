@@ -110,7 +110,7 @@ The layout is the template of your application. The whole content from views, wh
 			<!--View content will render here-->
 			<footer data-role="footer">
 				<div data-role="tabstrip">
-					<a href="#home">Home</a>
+					<a data-icon="home" href="#home">Home</a>
 				</div>
 			</footer>
 		</section>
@@ -124,13 +124,13 @@ Note that the example uses the `data-role` attribute in your HTML. This communic
 
 `<section data-role="layout" data-id="default">`
 
-When the Application is initialized, this block of HTML is going to be initialized as a Kendo UI hybrid layout. The `data-id` attribute is further defined to give this layout a unique name that can be used by your views.
+When the Application is initialized, this block of HTML is going to be initialized as a [Kendo UI Hybrid Layout]({% slug layout_hybridkendoui %}). The `data-id` attribute is further defined to give this layout a unique name that can be used by your views.
 
-Next, for completeness, a couple of Kendo UI hybrid widgets are introduced&mdash;NavBar and TabStrip. Note that they are also configured with the simple `data-role` attribute.
+Next, for completeness, a couple of Kendo UI hybrid widgets are introduced&mdash;[NavBar]({% slug overview_hybridnavbar %}) and [TabStip]({% slug overview_hybridtabstrip %}). Note that they are also configured with the simple `data-role` attribute.
 
 ### Step 4: Create View
 
-Now that the application layout is defined, you need to define at least one view to be displayed when the application loads. Most apps have many views. However, start with the simple configuration from the example below.
+Now that the application layout is defined, you need to define at least one view to be displayed when the application loads. Most apps have multiple views. However, start with the simple configuration from the example below.
 
 ###### Example
 
@@ -153,7 +153,7 @@ Now that the application layout is defined, you need to define at least one view
 			<!--View content will render here-->
 			<footer data-role="footer">
 				<div data-role="tabstrip">
-					<a href="#home">Home</a>
+					<a data-icon="home" href="#home">Home</a>
 				</div>
 			</footer>
 		</section>
@@ -163,13 +163,13 @@ Now that the application layout is defined, you need to define at least one view
 	</body>
 	</html>
 
-The example uses the `data-role` attribute to define your view, and the `data-layout` attribute to tell your view which layout template to use. You are able to put anything inside of a view, including other Kendo UI widgets.
+This example uses the `data-role` attribute to define your view, and the `data-layout` attribute to tell your view which layout template to use. You can add simple HTML or other Kendo UI widgets to the view.
 
 Instead of `<a href="#home">Home</a>`, you can also use `<a href="#/">Home</a>`. By definition, the `#/` URL points to the first view, which is defined in the HTML file or the so-called root view. If you try to run the application now, you see a bunch of HTML, but nothing looks right yet. You need to take one more step to initialize the application.
 
 ### Step 5: Initialize the Hybrid App
 
-To make this HTML start looking and feeling like a mobile app, add the line of script from the example below after your jQuery and Kendo UI script links, but before the closing `body` tag.
+To make this HTML start looking like a mobile app, add the following line of script after your jQuery and Kendo UI script links, but before the closing `body` tag.
 
 ###### Example
 
@@ -177,17 +177,37 @@ To make this HTML start looking and feeling like a mobile app, add the line of s
 		var app = new kendo.mobile.Application();
 	</script>
 
-This single line of JavaScript automatically initializes your Kendo UI hybrid application together with all widgets with the `data-role` attributes.
+This automatically initializes your Kendo UI hybrid application together with all widgets with `data-role` attributes.
 
-For a live example refer to [http://jsbin.com/egowef](http://jsbin.com/egowef "Live example of tutorial code running on jsBin"). Load your page in a browser and see the beginnings of your HTML mobile app. If everything works out properly, your basic Kendo UI hybrid application should look like the image below.
+Following is a full example of the above implementation:
 
-**Figure 2: Basic and properly working Kendo UI hybrid application.**
+###### Example
 
-![Basic Kendo UI mobile app progress](/images/mobile/km-basic-app-1.png)
+```html
+    <div id="home" data-role="view" data-layout="default">
+      Hello Mobile World!
+    </div>
+
+    <section data-role="layout" data-id="default">
+      <header data-role="header">
+        <div data-role="navbar">My App</div>
+      </header>
+      <!--View content will render here-->
+      <footer data-role="footer">
+        <div data-role="tabstrip">
+          <a data-icon="home" href="#home">Home</a>
+        </div>
+      </footer>
+    </section>
+
+    <script>
+      var app = new kendo.mobile.Application(document.body);
+    </script>
+```
 
 > **Important**
 >
-> If you have trouble seeing the application, make sure all of your script and CSS resources are loading without error by using the browser developer tools. Some browsers, such as Chrome, block the loading of external resources if you load your page using the `file://` protocol. Instead, test your pages using local web server (`localhost`) or a browser that does not restrict local resources such as Safari.
+> If you have trouble seeing the application when working locally, make sure all of your script and CSS resources are loading without error by using the browser developer tools. Some browsers, such as Chrome, block the loading of external resources if you load your page using the `file://` protocol. Instead, test your pages using local web server (`localhost`) or a browser that does not restrict local resources, such as Firefox.
 
 ## Native Look and Feel
 

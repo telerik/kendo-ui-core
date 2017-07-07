@@ -3,7 +3,7 @@
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width">
-        {% if page.res_type %}<meta name="restype" content="{{ page.res_type }}">{% else %}<meta name="restype" content="documentation">{% endif %} 
+        {% if page.res_type %}<meta name="restype" content="{{ page.res_type }}">{% else %}<meta name="restype" content="documentation">{% endif %}
         <title>{% if page.page_title %}{{ page.page_title }}{% else %}{{ page.title }}{% endif %}</title>
         <link rel="shortcut icon" href="{{site.baseurl}}/favicon.ico"/>
         {% if page.description %}<meta name="description" content="{{page.description}}">{% endif %}
@@ -46,10 +46,7 @@
         </noscript>
         <script>(function(w, d, s, l, i) { w[l] = w[l] || []; w[l].push({ 'gtm.start': new Date().getTime(), event: 'gtm.js' }); var f = d.getElementsByTagName(s)[0], j = d.createElement(s), dl = l != 'dataLayer' ? '&l=' + l : ''; j.async = true; j.src = '//www.googletagmanager.com/gtm.js?id=' + i + dl; f.parentNode.insertBefore(j, f); })(window, document, 'script', 'dataLayer', '{{site.google_tag_manager}}');</script>
         <!-- End Google Tag Manager -->
-        <header id="page-header">
-            <span class="toggle-nav"><span></span></span>
-            {% include header.html %}
-        </header>
+        {% include header.html %}
 
         {{ content }}
     </body>

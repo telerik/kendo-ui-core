@@ -21,7 +21,7 @@ The following example demonstrates how to persist the expanded rows in a Grid af
         $(document).ready(function() {
           $("#refresh").click(function() {
                 var grid = $("#grid").data("kendoGrid");
-                var expanded = $.map(grid.tbody.children(":has(> .k-hierarchy-cell .k-minus)"), function (row) {
+                var expanded = $.map(grid.tbody.children(":has(> .k-hierarchy-cell .k-i-collapse)"), function (row) {
                     return $(row).data("uid");
                 });
 
