@@ -1,7 +1,7 @@
 ---
 title: NuGet Packages
-page_title: NuGet Packages | Telerik UI for ASP.NET MVC
-description: "Download and install Telerik UI for ASP.NET MVC from our NuGet feed."
+page_title: NuGet Packages | Progress Telerik UI for ASP.NET MVC
+description: "Download and install Progress Telerik UI for ASP.NET MVC from our NuGet feed."
 slug: aspnetmvc_nuget
 previous_url: /nuget-install
 position: 3
@@ -73,11 +73,11 @@ The [Kendo UI Packages](../../kendo-ui/intro/installation/nuget-install) are lis
 
 ## See Also
 
-* [Telerik UI for ASP.NET MVC Fundamentals]({% slug fundamentals_aspnetmvc %})
-* [Scaffolding with Telerik UI for ASP.NET MVC]({% slug scaffolding_aspnetmvc %})
-* [Use Telerik UI for ASP.NET MVC in MVC 3 Applications]({% slug aspnetmvc3_aspnetmvc %})
-* [Use Telerik UI for ASP.NET MVC in MVC 4 Applications]({% slug aspnetmvc4_aspnetmvc %})
-* [Use Telerik UI for ASP.NET MVC in MVC 5 Applications]({% slug aspnetmvc5_aspnetmvc %})
-* [Use Telerik UI for ASP.NET MVC in Core MVC Applications](../../aspnet-core/introduction)
-* [Use Telerik UI for ASP.NET MVC Visual Studio Extensions]({% slug overview_visualstudio_aspnetmvc %})
-* [Telerik UI for ASP.NET MVC Troubleshooting]({% slug troubleshooting_aspnetmvc %})
+* [Progress Telerik UI for ASP.NET MVC Fundamentals]({% slug fundamentals_aspnetmvc %})
+* [Scaffolding with Progress Telerik UI for ASP.NET MVC]({% slug scaffolding_aspnetmvc %})
+* [Use Progress Telerik UI for ASP.NET MVC in MVC 3 Applications]({% slug aspnetmvc3_aspnetmvc %})
+* [Use Progress Telerik UI for ASP.NET MVC in MVC 4 Applications]({% slug aspnetmvc4_aspnetmvc %})
+* [Use Progress Telerik UI for ASP.NET MVC in MVC 5 Applications]({% slug aspnetmvc5_aspnetmvc %})
+* [Use Progress Telerik UI for ASP.NET MVC in Core MVC Applications](../../aspnet-core/introduction)
+* [Use Progress Telerik UI for ASP.NET MVC Visual Studio Extensions]({% slug overview_visualstudio_aspnetmvc %})
+* [Progress Telerik UI for ASP.NET MVC Troubleshooting]({% slug troubleshooting_aspnetmvc %})

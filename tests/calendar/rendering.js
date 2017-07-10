@@ -196,7 +196,6 @@ test("month view renders week number column when enabled", function() {
     var today = new Date(),
         days = kendo.culture().calendar.days,
         cells;
-        
 
     div.html(calendar.views[0].content({
         date: today,
@@ -205,12 +204,11 @@ test("month view renders week number column when enabled", function() {
         content: template.content,
         min: new Date(2000, 10, 10),
         max: new Date(2020, 10, 10),
-        disableDates: $.noop
+        disableDates: $.noop,
+        messages: { weekColumnHeader: "" }
     }));
 
     cells = div.find("tbody").find("td");
-
-    
 
     equal(div.find("thead").find("th").length, 8);
     ok(cells.eq(0).hasClass("k-alt"));

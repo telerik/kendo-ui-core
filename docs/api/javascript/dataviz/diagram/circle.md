@@ -1,5 +1,6 @@
 ---
 title: Circle
+res_type: api
 ---
 
 # kendo.dataviz.diagram.Circle

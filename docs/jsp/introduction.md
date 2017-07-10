@@ -1,14 +1,14 @@
 ---
 title: Overview
-page_title: Overview | Telerik UI for JSP
-description: "Download and install Telerik UI for JSP, and run a sample application."
+page_title: Overview | Progress Telerik UI for JSP
+description: "Download and install Progress Telerik UI for JSP, and run a sample application."
 slug: overview_uiforjsp
 position: 1
 ---
 
-# Telerik<sup>®</sup> UI for JSP by Progress
+# Progress<sup>®</sup>Telerik<sup>®</sup> UI for JSP
 
-This article demonstrates how to download and install Telerik UI for JSP and run a sample application.
+This article demonstrates how to download and install Progress Telerik UI for JSP and run a sample application.
 
 ## Getting Started
 
@@ -18,7 +18,7 @@ The distribution files contain the following:
 
 * `\js`&mdash;These are the Kendo UI minified JavaScript files.
 * `\styles`&mdash;The Kendo UI minified CSS files and background images used by the themes.
-* `\wrappers\jsp\kendo-taglib`&mdash;The Telerik UI for JSP jar files.
+* `\wrappers\jsp\kendo-taglib`&mdash;The Progress Telerik UI for JSP jar files.
 * `\wrappers\jsp\spring-demos`&mdash;A sample JSP Spring MVC application.
 
 ## Sample Application Setup
@@ -30,7 +30,7 @@ The distribution files contain the following:
 * [Maven support for Eclipse (M2E)](http://www.eclipse.org/m2e/)
 * Configured server, tested with [Tomcat 7](http://tomcat.apache.org/tomcat-7.0-doc/)
 
-**Figure 1. Eclipse with Tomcat7 configured**
+**Figure 1: Eclipse with Tomcat7 configured**
 
 ![Eclipse with Tomcat7 configured](images/eclipse.png)
 
@@ -38,7 +38,7 @@ Find a sample a JSP Spring MVC application in the `\wrappers\jsp\spring-demos` f
 
 ### Run the Application
 
-**Step 1** Extract the Telerik UI for JSP package.
+**Step 1** Extract the Progress Telerik UI for JSP package.
 
 **Step 2** Start Eclipse.
 
@@ -46,13 +46,13 @@ Find a sample a JSP Spring MVC application in the `\wrappers\jsp\spring-demos` f
 
 **Step 4** Choose **Maven** > **Existing Maven Projects**. Click **Next**. If you do not see that option, make sure your Eclipse has Maven support installed.
 
-**Figure 2. Eclipse with Tomcat7 configured**
+**Figure 2: Eclipse with Tomcat7 configured**
 
 ![Import Maven projects](images/existing_maven_project.png)
 
-**Step 5** Browse to the location where you extracted Telerik UI for JSP. Then pick "wrappers\jsp\spring-demos" for "Root Directory". Click "Finish".
+**Step 5** Browse to the location where you extracted Progress Telerik UI for JSP. Then pick "wrappers\jsp\spring-demos" for "Root Directory". Click "Finish".
 
-**Figure 3. Import of the Kendo UI JSP demos**
+**Figure 3: Import of the Kendo UI JSP demos**
 
 ![Import Kendo UI JSP demos](images/import_maven_project.png)
 
@@ -62,13 +62,13 @@ Find a sample a JSP Spring MVC application in the `\wrappers\jsp\spring-demos` f
 
 **Step 8** From the "Project Facets" menu select "Dynamic Web Module".
 
-**Figure 4. Project facets**
+**Figure 4: Project facets**
 
 ![Project facets](images/project_facets.png)
 
 **Step 9** Click the **Runtimes** tab. Pick a runtime&mdash;Tomcat7, for example.
 
-**Figure 5. Project facets&mdash;Tomcat 7**
+**Figure 5: Project facets&mdash;Tomcat 7**
 
 ![Project facets - Tomcat 7](images/project_facets_tomcat.png)
 
@@ -145,18 +145,18 @@ You are also able to include the JavaScript and CSS files from CDN. Do not forge
 
 ## Next Steps
 
-To gain more practice on Telerik UI for JSP, watch the video tutorials on the [Kendo UI YouTube Channel](http://www.youtube.com/kendouitv):
+To gain more practice on Progress Telerik UI for JSP, watch the video tutorials on the [Kendo UI YouTube Channel](http://www.youtube.com/kendouitv):
 
-1. [Get Started with Telerik UI for JSP: Episode 1](https://www.youtube.com/watch?v=3VH75XVhLCI)
-1. [Get Started with Telerik UI for JSP: Episode 2](https://www.youtube.com/watch?v=LyGHeRMmq5I)
-1. [Get Started with Telerik UI for JSP: Episode 3](https://www.youtube.com/watch?v=sCwqj_ZRGI8)
-1. [Get Started with Telerik UI for JSP: Episode 4](https://www.youtube.com/watch?v=fcbw4YR4P2I)
+1. [Get Started with Progress Telerik UI for JSP: Episode 1](https://www.youtube.com/watch?v=3VH75XVhLCI)
+1. [Get Started with Progress Telerik UI for JSP: Episode 2](https://www.youtube.com/watch?v=LyGHeRMmq5I)
+1. [Get Started with Progress Telerik UI for JSP: Episode 3](https://www.youtube.com/watch?v=sCwqj_ZRGI8)
+1. [Get Started with Progress Telerik UI for JSP: Episode 4](https://www.youtube.com/watch?v=fcbw4YR4P2I)
 
 For more examples on how to use Kendo UI with JSP wrappers, visit the [GitHub repository with the collected Kendo UI examples on using JSP](https://github.com/telerik/kendo-examples-java).
 
 ## See Also
 
-Other articles on Telerik UI for JSP:
+Other articles on Progress Telerik UI for JSP:
 
-* [Telerik UI for JSP API Reference Folder](/api/jsp/autocomplete/animation)
-* [Telerik UI for JSP Tags Folder]({% slug overview_autocomplete_uiforjsp %})
+* [Progress Telerik UI for JSP API Reference Folder](/api/jsp/autocomplete/animation)
+* [Progress Telerik UI for JSP Tags Folder]({% slug overview_autocomplete_uiforjsp %})

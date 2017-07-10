@@ -55,7 +55,7 @@
         var multiselect = new MultiSelect(select, { delay: 0 }),
             wrapperWidth = 200;
 
-        multiselect.wrapper.width(wrapperWidth);
+        multiselect.wrapper.find(".k-multiselect-wrap").width(wrapperWidth);
         multiselect.input.val("222222222222222222222222222222222222222222222").press("2");
 
         setTimeout(function() {

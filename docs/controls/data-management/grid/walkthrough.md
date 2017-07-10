@@ -48,7 +48,7 @@ To bind the Grid to local data, set the `dataSource` option of the `kendoGrid` o
          dataSource: people
      });
 
-**Figure 1. Grid bound to a local data array**
+**Figure 1: Grid bound to a local data array**
 
 ![Kendo UI Grid bound to a local data array](/controls/data-management/grid/grid2_1.png)
 
@@ -77,7 +77,7 @@ For more information on binding the Grid to a remote data source, refer to the a
 
 ### Selection
 
-To enable selection in the Grid, set the [`selectable`](/api/javascript/ui/grid#configuration-selectable) option to `true`. This enables the default single-row selection option.
+To enable selection in the Grid set the [`selectable`](/api/javascript/ui/grid#configuration-selectable) option to `true`. This enables the default single-row selection option.
 
 ###### Example
 
@@ -86,7 +86,7 @@ To enable selection in the Grid, set the [`selectable`](/api/javascript/ui/grid#
             // other configuration
          });
 
-**Figure 2. Grid with enabled row selection**
+**Figure 2: Grid with enabled row selection**
 
 ![Grid with enabled row selection](/controls/data-management/grid/grid4_1.png)
 
@@ -95,6 +95,21 @@ It is also possible to set the `selectable` option to any of the following value
 * `cell`
 * `multiple row`
 * `multiple cell`
+
+Since R2 2017 SP1, the Grid widget provides another option for enabling multiple selection by rendering a checkbox column. This functionality is enabled through the [`columns.selectable`](/api/javascript/ui/grid#configuration-columns.selectable) property. Enabling the `selectable` property of a column will also render a checkbox in the header, which allows selecting/deselecting of all rows on the current page.
+
+> **Important**
+> The built-in checkbox selection is not integrated with the select functionality of the grid enabled via the Grid's [`selectable`](/api/javascript/ui/grid#configuration-selectable) option. They are mutually exclusive and we recommend using only one of the approaches for enabling selection.
+
+###### Example
+
+    $("#grid").kendoGrid({
+      columns: [
+        { selectable: true },
+        { field: "name" }
+      ],
+      dataSource: [ { name: "Jane Doe" }, { name: "John Doe" } ]
+    });
 
 #### The row Value
 
@@ -143,7 +158,7 @@ The `multiple cell` value enables the selection of multiple cells within the Gri
 When the multiple selection is enabled, it is possible to select multiple rows or cells by dragging the mouse cursor and select them in a similar way to a block of text.
 
 > **Important**  
-> * Selection is not persisted when the Grid is rebound, that is, when paging, filtering, sorting, editing, or virtual scrolling occurs. To achieve such behavior, [use this custom implementation]({% slug howto_persist_row_selection_paging_sorting_filtering_grid %}).
+> * In a Grid that is rebound (paging, filtering, sorting, editing, or virtual scrolling occur), the selection persists only if you enable the [`persistSelection`](/api/javascript/ui/grid#configuration-persistSelection) property. The `persistSelection` is applicable only for row selection. To persist the row selection and avoid the usage of the `persistSelection` property, refer to the example on [how to persist row selection during data operations]({% slug howto_persist_row_selection_paging_sorting_filtering_grid %}).    
 > * Selection performance may decrease when the page size is too large, or if no paging is used, and the Grid is rendering hundreds or thousands of items. This behavior is most frequently seen in Internet Explorer. Grouping, hierarchy, and frozen columns also have a negative impact on the selection performance, because these features make the HTML output of the Grid more complex. Therefore, it is recommended to use paging and a reasonable page size.
 
 ### Paging
@@ -196,11 +211,11 @@ To enable the grouping functionality of the Grid, set the `groupable` option to 
          // other configuration
     });
 
-**Figure 3. Grid with its grouping functionality enabled**
+**Figure 3: Grid with its grouping functionality enabled**
 
 ![Grid With Grouping Enabled](/controls/data-management/grid/grid5_1.png)
 
-**Figure 4. Grid with its data grouped by last name**
+**Figure 4: Grid with its data grouped by last name**
 
 ![Grid Grouped By Last Name](/controls/data-management/grid/grid6_1.png)
 
@@ -253,7 +268,7 @@ To configure the Grid so that grouping occurs before paging, you need to group t
 
 By default, sorting is disabled.
 
-**Figure 5. Grid with its sorting functionality enabled**
+**Figure 5: Grid with its sorting functionality enabled**
 
 ![Grid with Sorting Enabled](/controls/data-management/grid/grid7_1.png)
 
@@ -293,7 +308,7 @@ Keyboard navigation within the Grid is configured through the `navigatable` opti
 
 The navigation occurs at a cell level regardless of what the `selectable` mode is. To select the current row or cell, press the space bar.
 
-The example below demonstrates how to enable the key navigation in the Grid.
+The following example demonstrates how to enable the key navigation in the Grid.
 
 ###### Example
 
@@ -314,7 +329,7 @@ It is also possible to avoid the described procedure. The custom hyperlinks can 
 
 It is possible to format any cell within the Grid by using templates within a script tag or within the template option on the column object if the Grid is initialized from a `<div>` element.
 
-The example below demonstrates how to use a template to format the email address as a hyperlink by using a template declared in a script block.
+The following example demonstrates how to use a template to format the email address as a hyperlink by using a template declared in a script block.
 
 ###### Example
 
@@ -343,7 +358,7 @@ Specify this as a template for each row by passing it in to the `rowTemplate` op
 
 In the resulting Grid, the email address is an interactive hyperlink which opens a new email message when clicked.
 
-**Figure 6. Grid with a row template applied**
+**Figure 6: Grid with a row template applied**
 
 ![Grid with row template](/controls/data-management/grid/grid8_1.png)
 

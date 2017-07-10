@@ -23,7 +23,7 @@ The basic conceptual options of a Kendo UI Funnel Chart are:
 * `dynamicSlope`&mdash;When disabled, the `neckRatio` option is taken into account. When enabled, the `neckRatio` is neglected and each segment creates its form based on the ratio between the current value and the next value.
 * `neckRatio`&mdash;It specifies the ratio between the top and the bottom bases of the whole funnel series. For example, if set to `ten`, the top base will be ten times smaller than the bottom base, as demonstrated below.
 
-**Figure 1. A Funnel Chart with its `neckRatio` set to 10**
+**Figure 1: A Funnel Chart with its `neckRatio` set to 10**
 
 ![Funnel Chart](/controls/charts/chart-types/funnel-neckratio.png)
 
@@ -61,7 +61,7 @@ The example below demonstrates the way the widths of the bases for each segment 
         });
     </script>
 
-**Figure 2. A sample Funnel Chart**
+**Figure 2: A sample Funnel Chart**
 
 ![Funnel Chart](/controls/charts/chart-types/funnel-dynamicslope.png)
 

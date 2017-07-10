@@ -7,17 +7,19 @@ slug: howto_persist_focused_grid_cell_grid
 
 # Persist Focused Grid Cells After Rebind
 
-The following example demonstrates how to persist a focused Grid cell after rebind. The example implies the usage of in-cell editing, the built-in keyboard navigation, and the [`autoSync:true`](/api/javascript/data/datasource#configuration-autoSync) configuration for the Kendo UI Grid [DataSource instance](/api/javascript/data/datasource).
+The following example demonstrates how to persist a focused Grid cell after rebinding.
+
+The demo implies the usage of in-cell editing, built-in keyboard navigation, and the [`autoSync:true`](/api/javascript/data/datasource#configuration-autoSync) configuration for the Grid [DataSource instance](/api/javascript/data/datasource).
 
 The functionality relies on the following milestones:
 
 * The [`navigatable`](/api/javascript/ui/grid#configuration-navigatable) option is set to `true`.
-* The [`editable`](/api/javascript/ui/grid#configuration-editable) option is set to `true`, or the [`editable.mode`](/api/javascript/ui/grid#configuration-editable.mode) option is set to `"incell"`.
+* The [`editable`](/api/javascript/ui/grid#configuration-editable) option is set to `true` or the [`editable.mode`](/api/javascript/ui/grid#configuration-editable.mode) option is set to `"incell"`.
 * The [`dataBinding`](/api/javascript/ui/grid#events-dataBinding) event handler of the Grid is used to obtain the [`current`](/api/javascript/ui/grid#methods-current) Grid cell and its corresponding row and cell indexes.
 * The saved row and cell indexes are applied through the [`current()`](/api/javascript/ui/grid#methods-current) method in the [`dataBound`](/api/javascript/ui/grid#events-dataBound) event handler.
 * The [`table`](/api/javascript/ui/grid#fields-table) option of the Grid can be focused explicitly if the user has clicked on the **Save Changes** button&mdash;this requires you to set a flag in the [`saveChanges`](/api/javascript/ui/grid#events-saveChanges) event handler.
 
-Generally, it is uncommon to enable the [`autoSync`](/api/javascript/data/datasource#configuration-autoSync) option for the in-cell editing, as this will greatly increase the amount of update-related remote requests. Nevertheless, it is possible that you use such an approach if required.
+Generally, it is uncommon to enable the [`autoSync`](/api/javascript/data/datasource#configuration-autoSync) option for the in-cell editing because it greatly increases the amount of update-related remote requests. Nevertheless, it is possible for you to use such an approach if required.
 
 ###### Example
 
@@ -115,9 +117,7 @@ Generally, it is uncommon to enable the [`autoSync`](/api/javascript/data/dataso
 
 ## See Also
 
-Other articles on the Kendo UI Grid and how-to examples related to its editing functionality:
-
-* [JavaScript API Reference](/api/javascript/ui/grid)
+* [JavaScript API Reference of the Grid](/api/javascript/ui/grid)
 * [How to Add New Rows When Tabbing out of the Last One]({% slug howto_add_new_rows_when_tabbingoutof_thelast_one_grid %})
 * [How to Build Custom dataSource for Custom Editor]({% slug howto_build_custom_datasourcefor_custom_editor_grid %})
 * [How to Customize the Delete Confirmation Dialog]({% slug howto_customize_delete_confirmation_dialog_grid %})
@@ -134,4 +134,4 @@ Other articles on the Kendo UI Grid and how-to examples related to its editing f
 * [How to Use Editors Based on Data Item Property]({% slug howto_use_editors_basedon_dataitem_property_grid %})
 * [How to Use TreeView as Custom Editor]({% slug howto_usethe_treeview_aseditor_grid %})
 
-For more runnable examples on the Kendo UI Grid, browse its [**How To** documentation folder]({% slug howto_create_custom_editors_grid %}).
+For more runnable examples on the Kendo UI Grid, browse its [**How To** documentation folder]({% slug howto_adjust_row_heights_template_locked_columns_grid %}).

@@ -2,6 +2,7 @@
 title: GanttDependencyDataSource
 page_title: API Reference for Kendo UI GanttDependencyDataSource
 description: Learn more about the configuration of Kendo UI GanttDependencyDataSource, methods and events.
+res_type: api
 ---
 
 # kendo.data.GanttDependencyDataSource

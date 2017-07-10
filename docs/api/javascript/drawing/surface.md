@@ -1,6 +1,7 @@
 ---
 title: Surface
 page_title: API reference for Kendo UI Drawing API Surface
+res_type: api
 ---
 
 # kendo.drawing.Surface : kendo.Observable

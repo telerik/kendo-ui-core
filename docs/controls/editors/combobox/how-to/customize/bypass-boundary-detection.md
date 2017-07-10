@@ -134,8 +134,6 @@ The following example demonstrates how to auto-size the popup height in a Kendo 
 
 ## See Also
 
-Other articles on the Kendo UI ComboBox:
-
 * [ComboBox JavaScript API Reference](/api/javascript/ui/combobox)
 * [How to Bypass Boundary Detection]({% slug howto_bypass_boudary_detection_combobox %})
 * [How to Configure Deferred Value Binding]({% slug howto_configure_deffered_value_binding_combobox %})
@@ -147,4 +145,4 @@ Other articles on the Kendo UI ComboBox:
 * [How to Select Items on Tab]({% slug howto_select_items_ontab_combobox %})
 * [How to Underline Matched Search]({% slug howto_underline_matched_search_combobox %})
 
-For more runnable examples on the Kendo UI ComboBox, check its [how-to articles]({% slug howto_define_virtual_option_combobox %}).
+For more runnable examples on the Kendo UI ComboBox, check its [how-to articles]({% slug howto_bindobjectstongmodel_combobox %}).

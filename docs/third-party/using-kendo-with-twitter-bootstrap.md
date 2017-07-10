@@ -27,7 +27,7 @@ The following example demonstrates the necessary links to these stylesheets. Mak
 
 While these files ensure that Kendo UI looks a lot like Bootstrap, it is not mandatory to use them. The default Kendo UI `common.css` and any other theme are going to style the widgets differently, but they will continue to function properly.
 
-Note that the `kendo.bootstrap.min.css` theme styles Kendo UI to match the default Bootstrap look and feel. Other Bootstrap themes should (or can) be used with any other Kendo UI theme, or with a custom Kendo UI theme, such as themes created with the [Kendo UI ThemeBuilder](/themebuilder).
+Note that the `kendo.bootstrap.min.css` theme styles Kendo UI to match the default Bootstrap look and feel. Other Bootstrap themes should (or can) be used with any other Kendo UI theme, or with a custom Kendo UI theme, such as themes created with the [Kendo UI ThemeBuilder](http://demos.telerik.com/kendo-ui/themebuilder).
 
 ## How-To Examples
 
@@ -158,8 +158,8 @@ To resolve this issue, follow some of the possible solutions below.
 
 Other articles on Kendo UI integration with third-party tools and frameworks:
 
+* [SharePoint Add-Ins]({% slug sharepoint_tutorials %})
 * [Angular 2.0]({% slug angular2support_integration_kendoui %})
-* [Web Components]({% slug webcomponents_integration_kendoui %})
 * [RequireJS]({% slug requirejs_integration_kendoui %})
 * [TypeScript]({% slug typescript_integration_kendoui %})
 * [Visual Studio IntelliSense]({% slug visualstudiointellisense_integration_kendoui %})

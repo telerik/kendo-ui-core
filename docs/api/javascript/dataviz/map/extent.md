@@ -1,6 +1,7 @@
 ---
 title: Extent
 page_title: API reference for Kendo UI Map Location
+res_type: api
 ---
 
 # kendo.dataviz.map.Extent : kendo.Class

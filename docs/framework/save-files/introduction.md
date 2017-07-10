@@ -14,9 +14,9 @@ Since its 2014 Q3 release, Kendo UI allows you to save files on the client machi
 
 ### Save Files
 
-To save a file on the client machine, call the `kendo.saveAs` method, and pass a valid [data URI](https://developer.mozilla.org/en-US/docs/Web/HTTP/data_URIs) and a file name.
+To save a file on the client machine, call the `kendo.saveAs` method, pass a file name and a valid [data URI](https://developer.mozilla.org/en-US/docs/Web/HTTP/data_URIs), or a [blob](https://developer.mozilla.org/en-US/docs/Web/API/Blob).
 
-The example below demonstrates how to save a text file on the client.
+The following example demonstrates how to save a text file on the client by using a data URI.
 
 ###### Example
 
@@ -25,6 +25,20 @@ The example below demonstrates how to save a text file on the client.
 	var dataURI = "data:text/plain;base64,SGVsbG8gV29ybGQh";
 	kendo.saveAs({
 	  dataURI: dataURI,
+	  fileName: "test.txt"
+	});
+</script>
+```
+
+The following example demonstrates how to save a text file on the client by using a blob.
+
+###### Example
+
+```html
+<script>
+	var blob = new Blob(["Hello, world!"], {type: "text/plain;charset=utf-8"});
+	kendo.saveAs({
+	  dataURI: blob,
 	  fileName: "test.txt"
 	});
 </script>

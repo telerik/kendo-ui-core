@@ -4373,7 +4373,13 @@ var __meta__ = { // jshint ignore:line
             }
 
             if (isFunction(hasChildren)) {
-                that.hasChildren = !!hasChildren.call(that, that);
+                var hasChildrenObject = hasChildren.call(that, that);
+
+                if(hasChildrenObject && hasChildrenObject.length === 0){
+                    that.hasChildren = false;
+                } else{
+                    that.hasChildren = !!hasChildrenObject;
+                }
             }
 
             that._childrenOptions = childrenOptions;
@@ -4532,7 +4538,7 @@ var __meta__ = { // jshint ignore:line
                 children: options
             });
 
-            if(options.filter){
+            if(options.filter && !options.serverFiltering){
                 this._hierarchicalFilter = options.filter;
                 options.filter = null;
             }

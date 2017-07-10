@@ -8,7 +8,7 @@ slug: howto_copy_datafrom_excel_grid
 
 # Copy Data from Excel
 
-The example below demonstrates how to create a Kendo UI Grid that supports pasting from Excel.
+The following example demonstrates how to create a Grid that supports pasting from Excel.
 
 ###### Example
 
@@ -55,12 +55,9 @@ The example below demonstrates how to create a Kendo UI Grid that supports pasti
             for (var i = 0; i < rows.length; i++) {
               var cells = rows[i].split('\t');
               data.push({
-                FirstName: cells[0],
-                SerialNo: cells[1],
-                Option: cells[2],
-                Quantity: cells[3]
+                Name: cells[0],
+                Age: cells[1]
               });
-              
             };
             grid.dataSource.data(data);
           });
@@ -78,9 +75,7 @@ The example below demonstrates how to create a Kendo UI Grid that supports pasti
 
 ## See Also
 
-Other articles on the Kendo UI Grid and how-to examples:
-
-* [JavaScript API Reference](/api/javascript/ui/grid)
+* [JavaScript API Reference of the Grid](/api/javascript/ui/grid)
 * [How to Add Cascading DropDownList Editors]({% slug howto_add_cascading_dropdown_list_editors_grid %})
 * [How to Drag and Drop Rows between Grids]({% slug howto_dragand_drop_rows_between_twogrids_grid %})
 * [How to Enable ForeignKey Column Sorting by Text]({% slug howto_enable_foreignkey_sotringby_text_grid %})
@@ -93,4 +88,4 @@ Other articles on the Kendo UI Grid and how-to examples:
 * [How to Show Tooltip for Column Records]({% slug howto_show_tooltipfor_column_records_grid %})
 * [How to Update Toolbar Content Using MVVM Binding]({% slug howto_update_toolbar_content_using_mvvmbinding_grid %})
 
-For more runnable examples on the Kendo UI Grid, browse its [**How To** documentation folder]({% slug howto_create_custom_editors_grid %}).
+For more runnable examples on the Kendo UI Grid, browse its [**How To** documentation folder]({% slug howto_adjust_row_heights_template_locked_columns_grid %}).

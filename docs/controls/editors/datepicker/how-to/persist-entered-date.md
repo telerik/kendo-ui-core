@@ -7,7 +7,9 @@ slug: howto_persist_entered_dates_datepicker
 
 # Persist Entered Dates
 
-The example below demonstrates how to persist the date that is already entered in the Kendo UI DatePicker when users navigate to another page and then come back. This functionality is supported by default in modern browsers, but not in Internet Explorer 9 and older.
+The following example demonstrates how to persist the date that is already entered in the DatePicker when the user navigates to another page and then comes back.
+
+While supported by default in modern browsers, this functionality is not provided by Internet Explorer 9 and earlier.
 
 ###### Example
 
@@ -57,8 +59,6 @@ The example below demonstrates how to persist the date that is already entered i
 
 ## See Also
 
-Other articles on the Kendo UI DatePicker:
-
 * [DatePicker JavaScript API Reference](/api/javascript/ui/datepicker)
 * [How to Create Date Masking]({% slug howto_create_date_masking_datepicker %})
 * [How to Globally Modify Default Options]({% slug howto_globally_modify_default_options_datepicker %})
@@ -68,4 +68,4 @@ Other articles on the Kendo UI DatePicker:
 * [How to Resize Calendar Based on Input Width]({% slug howto_use_resize_calendar_basedon_input_width_datepicker %})
 * [How to Set the First Weekday]({% slug howto_set_first_weekday_datepicker %})
 
-For more runnable examples on the Kendo UI DatePicker, browse its [**How To** documentation folder]({% slug howto_select_ranges_between_datepicker %}).
+For more runnable examples on the Kendo UI DatePicker, browse its [**How To** documentation folder]({% slug howto_localize_datepicker_using_angular_translate %}).

@@ -2,6 +2,7 @@
 title: Menu
 page_title: Configuration, methods and events of Kendo UI Menu
 description: How to configure all animations in Menu UI widget, enable and disable, remove specified items and use code examples for all methods and events supported.
+res_type: api
 ---
 
 # kendo.ui.Menu
@@ -297,10 +298,10 @@ Refer to the example below for a list of the supported properties.
            },
            {
              text: "Item 5",
-             select: function(e) {                        // Item select event handler, optional 
+             select: function(e) {                        // Item select event handler, optional
                 // e.sender - returns reference to the Kendo Menu widget
                 // e.target - returns the clicked element. Typically, the span.k-link element.
-                
+
                 // handle event
              }
            }]
@@ -449,6 +450,46 @@ its parent horizontally. You can also switch off the screen boundary detection c
     <script>
         $("#menu").kendoMenu({
             popupCollision: false
+        });
+    </script>
+
+### scrollable `Boolean|Object`
+
+If enabled, the Menu displays buttons that scroll the items when they cannot fit the width or the popups' height of the Menu. By default, scrolling is disabled.
+
+The following example demonstrates how to enable the scrolling functionality.
+
+#### Example
+
+    <ul id="menu" style="width:150px;">
+        <li>Item 1</li>
+        <li>Item 2</li>
+        <li>Item 3</li>
+    </ul>
+
+    <script>
+        $("#menu").kendoMenu({
+            scrollable: true
+        });
+    </script>
+
+### scrollable.distance `Number` *(default: 50)*
+
+Sets the scroll amount (in pixels) that the Menu scrolls when the scroll buttons are hovered. Each such distance is animated and then another animation starts with the same distance. If clicking a scroll button, the Menu scrolls with 2x the distance.
+
+#### Example
+
+    <ul id="menu" style="width:150px;">
+        <li>Item 1</li>
+        <li>Item 2</li>
+        <li>Item 3</li>
+    </ul>
+
+    <script>
+        $("#menu").kendoMenu({
+            scrollable: {
+                distance: 20
+            }
         });
     </script>
 
@@ -1159,4 +1200,3 @@ The selected item
             // handle event
         });
     </script>
-

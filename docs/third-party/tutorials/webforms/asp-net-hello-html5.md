@@ -58,7 +58,7 @@ There are available workarounds and solutions different scenarios you might come
 
 Open Visual Studio. Create a blank ASP.NET Web Application called **hello-html5**. Right-click the project, select **Add New Item**. In the **Add New Item** dialogue, select **Web Form**. Name it **Default.aspx**. Click **Add**.
 
-**Figure 1. New Web Form**
+**Figure 1: A new Web Form**
 
 ![New Web Form](/images/webforms/hello-html5-new-web-form.png)
 
@@ -82,7 +82,7 @@ The new HTML5 DOCTYPE is not case sensitive.
 
 The figures below demonstrate how to remove excess attributes.
 
-**Figure 2. Remove the unnecessary `xmlns` attribute**
+**Figure 2: Removing the unnecessary xmlns attribute**
 
 ![xmlns](/images/webforms/hello-html5-xmlns.png)
 
@@ -94,25 +94,25 @@ Some of HTML5 involves simplifying the web development experience and removing a
 
 Inside the `form` tag, add some new HTML5 semantic tags to the page to demonstrate a hypothetical page structure. Delete the empty `div` that is there by default. Add the `<header`>, `<footer>`, `<section>`, and `<article>` tags.
 
-**Figure 3. Addition of semantic tags**
+**Figure 3: Adding of the semantic tags**
 
 ![Semantic Tags](/images/webforms/hello-html5-semantic-tags.png)
 
 Note that Visual Studio IntelliSense recognizes these as valid tags. Ensure that the schema validation selection is set to `HTML5`.
 
-**Figure 4. HTML5 Schema Validation**
+**Figure 4: The validation of the HTML5 Schema**
 
 ![HTML5 Schema Validation](/images/webforms/hello-html5-html5-schema-validation.png)
 
 If **HTML5** is not available in the select box, ensure that you are running at least Visual Studio 2008 SP 1. If you cannot run at least Visual Studio 2008 SP1, you can get support for HTML5 schema validation in Visual Studio by downloading these packages:
 
-**Figure 5. HTML5 schema validation support prior to Visual Studio 2008 SP 1**
+**Figure 5: The HTML5 schema validation support prior to Visual Studio 2008 SP 1**
 
 [HTML5 Schema Validation Support Prior To 2008 SP 1.](http://blogs.msdn.com/b/webdevtools/archive/2009/11/18/html-5-intellisense-and-validation-schema-for-visual-studio-2008-and-visual-web-developer.aspx)
 
 Add some filler text to the article section. You can use a Lorem Ipsum generator, such as [this one](http://dalekipsum.com/) to do this for you.
 
-**Figure 6. Add some text**
+**Figure 6: Adding a text**
 
 ![Lorem Ipsum](/images/webforms/hello-html5-lorem-ipsum.png)
 
@@ -120,13 +120,13 @@ Add some filler text to the article section. You can use a Lorem Ipsum generator
 
 Press `F5` to run the application. Notice that there is nothing special about the layout of the content. `<header>`, `<section>`, `<footer>`, and `<article>` are all block level elements, so they are displayed vertically stacked on the page with a default margin between them.
 
-**Figure 7. Output of the added text**
+**Figure 7: Output of the added text**
 
 ![F5 No Style](/images/webforms/hello-html5-f5-no-style.png)
 
 Press `F12` to open the IE Developer Tools. Change the rendering mode from IE 9 to IE 7. Observe that there is virtually no change in the display.
 
-**Figure 8. Browser Mode IE 7**
+**Figure 8: Internet Explorer 7 browser mode**
 
 ![Browser Mode IE 7 No Style](/images/webforms/hello-html5-browser-mode-ie-7-no-style.png)
 
@@ -134,7 +134,7 @@ Press `F12` to open the IE Developer Tools. Change the rendering mode from IE 9 
 
 Return to Visual Studio and add a stylesheet to the application by right-clicking the project. Select **Add New Item** > **Style Sheet** and name it `style.css`. Link the stylesheet in the page by dragging it from the **Project Explorer** and dropping it just under the empty title tag.
 
-**Figure 9. Link stylesheet**
+**Figure 9: Linking the stylesheet**
 
 ![Link Stylesheet](/images/webforms/hello-html5-link-stylesheet.png)
 
@@ -158,7 +158,7 @@ While older browsers, such as IE 6, 7, or 8, render semantic tags in pages, they
 
 Return to Visual Studio and stop the application if necessary. Right-click the project. Select **Add Library Package Reference** > **Online** and search for Modernizr.
 
-**Figure 10. Modernizr**
+**Figure 10: Modernizr**
 
 ![Modernizr](/images/webforms/hello-html5-modernizr.png)
 

@@ -7,13 +7,13 @@ slug: howto_sync_all_updated_items_with_single_request
 
 # Sync Grid Changes with a Single Request
 
-To see the example on how to send all updated, deleted, or new records to the server with a single request in a Kendo UI Grid, refer to [this project](https://github.com/telerik/kendo-examples-asp-net-mvc/tree/master/grid-data-serializer-class-for-serializng-data-and-send-all-update-new-deleted-records). It is available in the [GitHub repository for Kendo UI examples using ASP.NET MVC](https://github.com/telerik/kendo-examples-asp-net-mvc).
+Your project might require you to send all updated, deleted, or new Grid records to the server with a single request.
+
+To see the example, refer to [this project](https://github.com/telerik/kendo-examples-asp-net-mvc/tree/master/grid-data-serializer-class-for-serializng-data-and-send-all-update-new-deleted-records). It is available in the [GitHub repository for Kendo UI examples that use ASP.NET MVC](https://github.com/telerik/kendo-examples-asp-net-mvc).
 
 ## See Also
 
-Other articles on the Kendo UI Grid and how-to examples related to its editing functionality:
-
-* [JavaScript API Reference](/api/javascript/ui/grid)
+* [JavaScript API Reference of the Grid](/api/javascript/ui/grid)
 * [How to Add New Rows When Tabbing out of the Last One]({% slug howto_add_new_rows_when_tabbingoutof_thelast_one_grid %})
 * [How to Build Custom dataSource for Custom Editor]({% slug howto_build_custom_datasourcefor_custom_editor_grid %})
 * [How to Customize the Delete Confirmation Dialog]({% slug howto_customize_delete_confirmation_dialog_grid %})
@@ -30,4 +30,4 @@ Other articles on the Kendo UI Grid and how-to examples related to its editing f
 * [How to Use Editors Based on Data Item Property]({% slug howto_use_editors_basedon_dataitem_property_grid %})
 * [How to Use TreeView as Custom Editor]({% slug howto_usethe_treeview_aseditor_grid %})
 
-For more runnable examples on the Kendo UI Grid, browse its [**How To** documentation folder]({% slug howto_create_custom_editors_grid %}).
+For more runnable examples on the Kendo UI Grid, browse its [**How To** documentation folder]({% slug howto_adjust_row_heights_template_locked_columns_grid %}).

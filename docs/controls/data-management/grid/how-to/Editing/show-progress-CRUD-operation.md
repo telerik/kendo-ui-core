@@ -8,15 +8,13 @@ slug: howto_show_progress_CRUD_operation
 
 # Show Progress for Grid CRUD Operations
 
-To see the example on how to show the current progress of each CRUD operation for a Kendo UI Grid, refer to [this project](https://github.com/telerik/kendo-examples-asp-net-mvc/tree/master/grid-progressbar-crud-operations). It is available in the [GitHub repository for Kendo UI examples using ASP.NET MVC](https://github.com/telerik/kendo-examples-asp-net-mvc).
+Your project might require you to show the current progress of each CRUD operation for a Kendo UI Grid.
 
-For an additional example on this scenario, refer to [this project](https://github.com/telerik/ui-for-aspnet-mvc-examples/tree/master/grid/GridProgressBarForCRUDOperations) too.
+To see the example, refer to [this project](https://github.com/telerik/kendo-examples-asp-net-mvc/tree/master/grid-progressbar-crud-operations). It is available in the [GitHub repository for Kendo UI examples that use ASP.NET MVC](https://github.com/telerik/kendo-examples-asp-net-mvc). For an additional example on this scenario, refer to [this project](https://github.com/telerik/ui-for-aspnet-mvc-examples/tree/master/grid/GridProgressBarForCRUDOperations).
 
 ## See Also
 
-Other articles on the Kendo UI Grid and how-to examples:
-
-* [JavaScript API Reference](/api/javascript/ui/grid)
+* [JavaScript API Reference of the Grid](/api/javascript/ui/grid)
 * [How to Add Cascading DropDownList Editors]({% slug howto_add_cascading_dropdown_list_editors_grid %})
 * [How to Copy Data from Excel]({% slug howto_copy_datafrom_excel_grid %})
 * [How to Drag and Drop Rows between Grids]({% slug howto_dragand_drop_rows_between_twogrids_grid %})
@@ -30,4 +28,4 @@ Other articles on the Kendo UI Grid and how-to examples:
 * [How to Show Tooltip for Column Records]({% slug howto_show_tooltipfor_column_records_grid %})
 * [How to Update Toolbar Content Using MVVM Binding]({% slug howto_update_toolbar_content_using_mvvmbinding_grid %})
 
-For more runnable examples on the Kendo UI Grid, browse its [**How To** documentation folder]({% slug howto_create_custom_editors_grid %}).
+For more runnable examples on the Kendo UI Grid, browse its [**How To** documentation folder]({% slug howto_adjust_row_heights_template_locked_columns_grid %}).

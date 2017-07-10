@@ -130,9 +130,9 @@ test("initializes a parseFormats option from data attribute with array value", f
     var datetimepicker = dom.data("kendoDateTimePicker");
 
     equal(datetimepicker.options.parseFormats[0], "MM yyyy");
-    equal(datetimepicker.options.parseFormats[1], datetimepicker.options.timeFormat);
-    equal(datetimepicker.options.parseFormats[2], "MM/dd/yyyy");
-    equal(datetimepicker.options.parseFormats[3], "dd/MM/yyyy");
+    equal(datetimepicker.options.parseFormats[3], datetimepicker.options.timeFormat);
+    equal(datetimepicker.options.parseFormats[1], "MM/dd/yyyy");
+    equal(datetimepicker.options.parseFormats[2], "dd/MM/yyyy");
 });
 
 test("initializes value from view model", function() {

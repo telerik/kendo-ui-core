@@ -1,6 +1,7 @@
 ---
 title: ui
 description: Documentation on helper methods for writing new widgets and show progress with a loading message.
+res_type: api
 ---
 
 # kendo.ui

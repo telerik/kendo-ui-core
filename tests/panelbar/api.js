@@ -205,6 +205,13 @@
         equal(item.find('> .k-group').css("display"), "none");
     });
 
+    test('expand method should toggle only one icon', function() {
+        new PanelBar(empty_panelbar, { dataSource: [ { text: "Item 1", items: [{ text: "Child 1", items: [{text:"SubChild"}] }] } ] });
+        empty_panelbar.data("kendoPanelBar").expand(empty_panelbar.find("li:first"));
+
+        equal(empty_panelbar.find(".k-panelbar-collapse").length, 1);
+    });
+
     test('dataSource should create items with the text specified', function () {
         new PanelBar(empty_panelbar, { dataSource: [ { text: "Item 1" } ] });
 
@@ -212,7 +219,7 @@
     });
 
     test('dataSource should spawn arrows for items with group, content or contentUrl', function () {
-        new PanelBar(empty_panelbar, { dataSource: [ { text: "Item 1", content: "Test" }, { text: "Item 2", items: [] }, { text: "Item 3", contentUrl: "http://www.google.com" } ] });
+        new PanelBar(empty_panelbar, { dataSource: [ { text: "Item 1", content: "Test" }, { text: "Item 2", items: [{text:"SubChild"}] }, { text: "Item 3", contentUrl: "http://www.google.com" } ] });
 
         var icons = empty_panelbar.find(".k-item > .k-link > .k-icon");
 

@@ -516,6 +516,12 @@ html .k-error-colored
     cursor: default;
 }
 
+
+/* ListBox Drag Clue */
+.k-item.k-drag-clue {
+    font-size: inherit;
+}
+
 .k-drag-status
 {
     margin-top: -3px;
@@ -633,7 +639,8 @@ html .k-error-colored
 .k-widget *:before,
 .k-animation-container *:after,
 .k-block .k-header,
-.k-list-container
+.k-list-container,
+.k-dialog .k-window-content
 {
     .box-sizing(content-box);
 }
@@ -641,14 +648,14 @@ html .k-error-colored
 .k-button,
 .k-textbox,
 .k-autocomplete,
-div.k-window-content,
 .k-tabstrip > .k-content > .km-scroll-container,
 .k-block,
 .k-edit-cell .k-widget,
 .k-grid-edit-row .k-widget,
 .k-grid-edit-row .text-box,
 .km-actionsheet > li,
-.km-shim
+.km-shim,
+div.k-window-content
 {
     .box-sizing(border-box);
 }
@@ -832,6 +839,18 @@ input.k-checkbox + label {
     -ms-scroll-snap-type: proximity;
 }
 
+// Horizontal rule
+.k-hr {
+    margin: .5em auto;
+    padding: 0;
+    height: 0;
+    border-width: 1px 0 0;
+    border-style: solid;
+    display: block;
+    float: none;
+    clear: both;
+}
+
 /* Font Icons */
 .k-icon,
 .k-font-icon,
@@ -839,6 +858,7 @@ input.k-checkbox + label {
 .k-font-icon.k-tool-icon {
     .use-font-icon();
     overflow: visible;
+    color: inherit;
 }
 .k-icon:before,
 .k-font-icon:before {
@@ -894,4 +914,19 @@ input.k-checkbox + label {
     display: inline-block;
     overflow: hidden;
     .disable-high-contrast();
+}
+
+// Header/Footer templates
+.k-list-container {
+
+    .k-footer {
+
+        // ensure right calculating of popup - expanding parent to children with margin
+        &:before,
+        &:after {
+            content: "";
+            display: block;
+            overflow: hidden;
+        }
+    }
 }

@@ -360,7 +360,7 @@ Apply either of the two options below:
                 return Json(northwind.Categories.ToDataSourceResult(request).Data, **JsonRequestBehavior.AllowGet**);
             }
 
-More information on how to configure Kendo UI widgets for Ajax binding and return data to the client, refer to the overview article of each widget. 
+More information on how to configure Kendo UI widgets for Ajax binding and return data to the client, refer to the overview article of each widget.
 
 ### Widgets Display Zero Values
 

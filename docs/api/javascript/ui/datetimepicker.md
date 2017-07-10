@@ -2,6 +2,7 @@
 title: DateTimePicker
 page_title: Configuration, methods and events of Kendo UI DateTimePicker
 description: Learn how to configure the UI DateTimePicker widget. Use methods to open, close, remove, enable, disable, set maximum or minimum values and more.
+res_type: api
 ---
 
 # kendo.ui.DateTimePicker
@@ -132,6 +133,19 @@ The duration of the open animation in milliseconds.
     <script>
     $("#datetimepicker").kendoDateTimePicker({
         culture: "de-DE"
+    });
+    </script>
+
+### dateInput `Boolean`*(default: false)*
+
+ Specifies if the DateTimePicker will use DateInput for editing value
+
+#### Example
+
+    <input id="datetimepicker" />
+    <script>
+    $("#datetimepicker").DateTimePicker({
+        dateInput: true
     });
     </script>
 

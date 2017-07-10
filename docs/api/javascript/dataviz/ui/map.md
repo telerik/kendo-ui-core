@@ -2,6 +2,7 @@
 title: Map
 page_title: Configuration, methods and events of Kendo UI DataViz Map
 description: Learn how to configure Kendo UI Javascript chart widget in a few easy steps, use and change methods and events.
+res_type: api
 ---
 
 # kendo.dataviz.ui.Map

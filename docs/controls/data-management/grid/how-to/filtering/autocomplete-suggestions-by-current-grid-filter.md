@@ -8,12 +8,14 @@ slug: howto_autocomplete_suggestions_by_current_grid_filter
 
 # Show AutoComplete Suggestions for Current Grid Filter
 
-Generally, the AutoComplete filter of the Kendo UI Grid is bound to the whole data source of the Grid widget. However, it is possible to show the AutoComplete results only for the current filter of the Grid by following the steps below:
+The AutoComplete filter of the Grid is bound to the whole data source of the Grid widget.
+
+However, it is possible to show the AutoComplete results only for the current filter of the Grid. To achieve this  by following the steps below:
 
 1. Handle the [`dataBound` event of the Grid](/api/javascript/ui/grid#events-dataBound).
 2. Get the [data source filter of the Grid](/api/javascript/data/datasource.html#methods-filter) in the dataBound handler and set it as a filter to the AutoComplete data source.
 
-The example below demonstrates how to filter the Kendo UI Grid through the AutoComplete by considering the current filter of the Grid widget.
+The following example demonstrates how to use the AutoComplete for filtering and consider the current filter of the Grid.
 
 ###### Example
 
@@ -102,9 +104,7 @@ The example below demonstrates how to filter the Kendo UI Grid through the AutoC
 
 ## See Also
 
-Other articles on the Kendo UI Grid and how-to examples:
-
-* [JavaScript API Reference](/api/javascript/ui/grid)
+* [JavaScript API Reference of the Grid](/api/javascript/ui/grid)
 * [How to Add Cascading DropDownList Editors]({% slug howto_add_cascading_dropdown_list_editors_grid %})
 * [How to Copy Data from Excel]({% slug howto_copy_datafrom_excel_grid %})
 * [How to Drag and Drop Rows between Grids]({% slug howto_dragand_drop_rows_between_twogrids_grid %})
@@ -118,4 +118,4 @@ Other articles on the Kendo UI Grid and how-to examples:
 * [How to Show Tooltip for Column Records]({% slug howto_show_tooltipfor_column_records_grid %})
 * [How to Update Toolbar Content Using MVVM Binding]({% slug howto_update_toolbar_content_using_mvvmbinding_grid %})
 
-For more runnable examples on the Kendo UI Grid, browse its [**How To** documentation folder]({% slug howto_create_custom_editors_grid %}).
+For more runnable examples on the Kendo UI Grid, browse its [**How To** documentation folder]({% slug howto_adjust_row_heights_template_locked_columns_grid %}).

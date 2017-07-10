@@ -1,5 +1,6 @@
 ---
 title: FX Tile
+res_type: api
 ---
 
 # Tile

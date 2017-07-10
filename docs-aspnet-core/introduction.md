@@ -1,34 +1,34 @@
 ---
 title: Overview
-page_title: Overview | Telerik UI for ASP.NET Core
-description: "Download and install Telerik UI for ASP.NET Core (aka MVC 6 or ASP.NET Core MVC), and run the sample application."
+page_title: Overview | Progress Telerik UI for ASP.NET Core
+description: "Download and install Progress Telerik UI for ASP.NET Core (aka MVC 6 or ASP.NET Core MVC), and run the sample application."
 previous_url: /aspnetmvc-apps/mvc-6/introduction, /mvc-6/introduction
 slug: overview_aspnetmvc6_aspnetmvc
 position: 1
 ---
 
-# Overview of Telerik UI for ASP.NET Core
+# Overview of Progress Telerik UI for ASP.NET Core
 
-This article demonstrates how to use Telerik UI for ASP.NET MVC in ASP.NET Core applications.
+This article demonstrates how to use Progress Telerik UI for ASP.NET MVC in ASP.NET Core applications.
 
 ## The Basics
 
 ### Supported Environments
 
-Telerik UI for ASP.NET Core targets the stable release of the ASP.NET 5 framework. At the time of this writing this is 1.0 RTM.
+Progress Telerik UI for ASP.NET Core targets the stable release of the ASP.NET Core framework. At the time of this writing this is 1.0 RTM.
 
 The target runtime is [CoreCLR](https://github.com/dotnet/coreclr). The full desktop CLR is also supported.
 
 ### Resources
 
-To get started, refer to the [ASP.NET 5 Documentation](http://docs.asp.net/en/latest/index.html).
+To get started, refer to the [ASP.NET Core Documentation](http://docs.asp.net/en/latest/index.html).
 
 The repositories below contain source code, instructions, and issue trackers for the ASP.NET project. These are immensely useful when you need to track down particular issues or behaviors.
 
 - [ASP.NET Home](https://github.com/aspnet/home) on GitHub.
 - [ASP.NET MVC](https://github.com/aspnet/Mvc) main repository.
 - [ASP.NET MVC Announcements](https://github.com/aspnet/announcements/) for important changes.
-- [Telerik UI for ASP.NET Core Demos and Sample Applications](http://demos.telerik.com/aspnet-core).
+- [Progress Telerik UI for ASP.NET Core Demos and Sample Applications](http://demos.telerik.com/aspnet-core).
 
 ## The Sample Application
 
@@ -49,7 +49,7 @@ To be able to run the sample application on Windows, make sure you provide for t
 
 To be able to run the sample application on Linux, make sure you provide for the requirements listed below.
 
-- For information on installing ASP.NET 5 on Linux, refer to [this article](http://docs.asp.net/en/latest/getting-started/installing-on-linux.html).
+- For information on installing ASP.NET Core on Linux, refer to [this article](http://docs.asp.net/en/latest/getting-started/installing-on-linux.html).
 - Install [SQLite3](http://mislav.net/rails/install-sqlite3/).
 - Download the matching release of the [Sample Application](https://github.com/telerik/ui-for-aspnet-mvc-6-demos/releases).
 - Navigate to the `Kendo.Mvc.Examples` folder using the Terminal.
@@ -68,7 +68,7 @@ To be able to run the sample application on Docker Engine (multi-platform), make
 
 ## See Also
 
-* [Get Started with Telerik UI for ASP.NET MVC in ASP.NET Core Projects]({% slug gettingstarted_aspnetmvc6_aspnetmvc %})
-* [Get Started with Telerik UI for ASP.NET MVC in ASP.NET Core Projects on Linux]({% slug gettingstartedlinux_aspnetmvc6_aspnetmvc %})
-* [Known Issues with Telerik UI for ASP.NET Core]({% slug knownissues_aspnetmvc6_aspnetmvc %})
+* [Get Started with Progress Telerik UI for ASP.NET MVC in ASP.NET Core Projects]({% slug gettingstarted_aspnetmvc6_aspnetmvc %})
+* [Get Started with Progress Telerik UI for ASP.NET MVC in ASP.NET Core Projects on Linux]({% slug gettingstartedlinux_aspnetmvc6_aspnetmvc %})
+* [Known Issues with Progress Telerik UI for ASP.NET Core]({% slug knownissues_aspnetmvc6_aspnetmvc %})
 * [Tag Helpers for ASP.NET Core]({% slug taghelpers_aspnetmvc6_aspnetmvc %})

@@ -27,4 +27,15 @@
 
       equal(staticlist.focus().attr("aria-selected"), "true");
   });
+
+  test("StaticList renders aria-selected false", function() {
+      var staticlist = new StaticList(element, {
+          dataSource: ["Item", "Item2"],
+          template: "#:data#"
+      });
+
+      staticlist.dataSource.read();
+
+      equal(element.find("li[aria-selected=false]").length, 2);
+  });
 })();

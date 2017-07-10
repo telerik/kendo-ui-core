@@ -1,20 +1,30 @@
 ---
-title: Replace Effects
-page_title: Replace Effects | Kendo UI FX
-description: "Learn how to create complex animated transitions between two elements with a common container by using the Kendo UI Replace Effect."
+title: Animated Transitions
+page_title: Animated Transitions | Kendo UI FX
+description: "Learn how to create complex animated transitions between two elements with a common container by using the Kendo UI `replace` effect."
 slug: replaceffect_fxeffects_widget
 position: 2
 ---
 
-# Replace Effects
+# Animated Transitions
 
-The [Kendo UI Replace effect](http://demos.telerik.com/kendo-ui/fx/replace), which was first introduced in the Kendo UI 2014 Q1 release, provides the means to create complex animated transitions between two elements with a common container.
+The [Kendo UI `replace` effect](http://demos.telerik.com/kendo-ui/fx/replace), which was first introduced in the Kendo UI 2014 Q1 release, provides the means to create complex animated transitions between two elements within a common container.
 
 > **Important**
 >
-> Unlike the other available effects, the Kendo UI Replace effect relies on CSS classes to define the transition states of the two elements. The effect works only in [browsers which support transitions](http://caniuse.com/css-transitions).
+> Unlike the other available effects, the Kendo UI `replace` effect relies on CSS classes to define the transition states of the two elements. The effect works only in [browsers which support transitions](http://caniuse.com/css-transitions).
 
-The example below demonstrates how to apply the Kendo UI Replace effect.
+## Getting Started
+
+The `replace` configuration works in the following way:
+
+* The effect assigns several CSS classes to a common container based on the effect configuration. For example, if the effect is configured as `kendo.fx("#step1").replace("#step2", "swap").direction("up")`, the assigned classes are `k-fx` (always assigned), `k-fx-swap` (the transition class), and `k-fx-up`. If the effect is to be played in reverse, assign an additional `k-fx-reverse` class.
+* The effect element receives the `k-fx-next` CSS class.
+* The element which is going to be hidden receives the `k-fx-current` CSS class.
+* The container gets the `k-fx-start` CSS class, which is then replaced by `k-fx-end`.
+* In `kendo.common.css` and `kendo.mobile.all.css`, the `.k-fx .k-fx-current` and `.k-fx .k-fx-next` CSS selectors have their transition CSS property set to `all 350ms ease-out`. As a result, both elements transition their state from the one defined in the `.k-fx-swap.k.fx-start` to the one defined in `.k-fx-swap.k-fx-end`.
+
+The following example demonstrates how to apply the Kendo UI `replace` effect.
 
 ###### Example
 
@@ -65,21 +75,16 @@ The example below demonstrates how to apply the Kendo UI Replace effect.
 
 <!--*-->
 
-This is how the Kendo UI Replace effect works:
-
-* The effect assigns several CSS classes to a common container based on the effect configuration. For instance, if the effect is configured as `kendo.fx("#step1").relace("#step2", "swap").direction("up")`, the assigned classes are `k-fx` (always assigned), `k-fx-swap` (the transition class), and `k-fx-up`. If the effect is to be played in reverse, assign an additional `k-fx-reverse` class.
-* The effect element receives the `k-fx-next` CSS class.
-* The element which is going to be hidden receives the `k-fx-current` CSS class.
-* The container gets the `k-fx-start` CSS class, which is then replaced by `k-fx-end`.
-* In `kendo.common.css` and `kendo.mobile.all.css` the `.k-fx .k-fx-current` and `.k-fx .k-fx-next` CSS selectors have their transition CSS property set to `all 350ms ease-out`.
-
-As a result, both elements transition their state from the one defined in the `.k-fx-swap.k.fx-start` to the one defined in `.k-fx-swap.k-fx-end`.
-
 ## Configuration
+
+The `replace` effect provides the following options for additional configuration:
+
+* [Customizing the duration of transition](#customize-duration-of-transition)
+* [Animating nested elements](#animate-nested-elements)
 
 ### Customize Duration of Transition
 
-The transition duration is configured through the CSS selectors demonstrated in the example below, which are present in `kendo.common.css`.
+The transition duration is configured through the CSS selectors which are present in `kendo.common.css`.
 
 ###### Example
 
@@ -92,9 +97,9 @@ The transition duration is configured through the CSS selectors demonstrated in 
         transition:all 350ms ease-out;
     }
 
-You are able to override the default duration for the entire document using a [higher specificity selector](https://developer.mozilla.org/en-US/docs/Web/CSS/Specificity), or by including the same selector after Kendo UI stylesheet references.
+You can override the default duration for the entire document by using a [higher specificity selector](https://developer.mozilla.org/en-US/docs/Web/CSS/Specificity) or by including the same selector after Kendo UI stylesheet references.
 
-The example below demonstrates how to apply a faster Replace effect transition.
+The following example demonstrates how to apply a faster `replace` effect transition.
 
 ###### Example
 
@@ -120,13 +125,13 @@ The example below demonstrates how to apply a faster Replace effect transition.
 
 > **Important**
 >
-> You may use this technique to customize the Kendo UI Mobile view transitions.
+> You can use this technique to customize the Kendo UI Mobile view transitions.
 
 ### Animate Nested Elements
 
-In addition to the two elements themselves, the contents of the elements may perform additional transitions, too. This approach is used to implement the complex iOS transition in Kendo UI Mobile. Note that the cross-browser definitions are omitted from the source.
+In addition to the two elements themselves, the contents of the elements can also perform additional transitions. This approach is used to implement the complex iOS transition in the Kendo UI hybrid widgets. The cross-browser definitions are omitted from the source.
 
-The example below demonstrates the multi-element transition definition&mdash;the Kendo UI Mobile iOS transition.
+The following example demonstrates the Kendo UI multi-element iOS transition.
 
 ###### Example  
 

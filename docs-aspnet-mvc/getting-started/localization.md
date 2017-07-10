@@ -1,7 +1,7 @@
 ---
 title: Localization
-page_title: Localization | Telerik UI for ASP.NET MVC
-description: "Localize the content of a Telerik UI for ASP.NET MVC application."
+page_title: Localization | Progress Telerik UI for ASP.NET MVC
+description: "Localize the content of a Progress Telerik UI for ASP.NET MVC application."
 slug: localization_aspnetmvc
 previous_url: /localization
 position: 8
@@ -13,7 +13,7 @@ position: 8
 
 ## Defaults
 
-If the `CurrentUICulture` is set&mdash;from code or `web.config`&mdash;Telerik UI for ASP.NET MVC will use localized user interface messages.
+If the `CurrentUICulture` is set&mdash;from code or `web.config`&mdash;Progress Telerik UI for ASP.NET MVC will use localized user interface messages.
 
 Telerik UI for ASP.NET MVC comes with localized messages for the cultures listed in the table below.
 
@@ -100,7 +100,7 @@ To add a localization for a new language, a custom version of `Kendo.Mvc.dll` mu
 
 Below are listed the steps for you to follow when you want to add new localizations.
 
-1. Open the `\src\Kendo.Mvc\Kendo.Mvc.csproj` Visual Studio project. The `\src` directory is available only with the commercial version of Telerik UI for ASP.NET MVC.
+1. Open the `\src\Kendo.Mvc\Kendo.Mvc.csproj` Visual Studio project. The `\src` directory is available only with the commercial version of Progress Telerik UI for ASP.NET MVC.
 
 1. Locate the `Resources` directory in the solution explorer. It contains the resource files for the supported cultures.
 
@@ -124,10 +124,10 @@ Below are listed the steps for you to follow when you want to add new localizati
 
 ## See Also
 
-* [Telerik UI for ASP.NET MVC Overview]({% slug overview_aspnetmvc %})
-* [Telerik UI for ASP.NET MVC Custom DataSource]({% slug customdatasource_aspnetmvc %})
-* [Tutorials on Telerik UI for ASP.NET MVC]({% slug overview_timeefficiencyapp_aspnetmvc6 %})
-* [Telerik UI for ASP.NET MVC Fundamentals]({% slug fundamentals_aspnetmvc %})
-* [Telerik UI for ASP.NET MVC NuGet Packages]({% slug aspnetmvc_nuget %})
-* [Scaffolding with Telerik UI for ASP.NET MVC]({% slug scaffolding_aspnetmvc %})
-* [Telerik UI for ASP.NET MVC Troubleshooting]({% slug troubleshooting_aspnetmvc %})
+* [Progress Telerik UI for ASP.NET MVC Overview]({% slug overview_aspnetmvc %})
+* [Progress Telerik UI for ASP.NET MVC Custom DataSource]({% slug customdatasource_aspnetmvc %})
+* [Tutorials on Progress Telerik UI for ASP.NET MVC]({% slug overview_timeefficiencyapp_aspnetmvc6 %})
+* [Progress Telerik UI for ASP.NET MVC Fundamentals]({% slug fundamentals_aspnetmvc %})
+* [Progress Telerik UI for ASP.NET MVC NuGet Packages]({% slug aspnetmvc_nuget %})
+* [Scaffolding with Progress Telerik UI for ASP.NET MVC]({% slug scaffolding_aspnetmvc %})
+* [Progress Telerik UI for ASP.NET MVC Troubleshooting]({% slug troubleshooting_aspnetmvc %})

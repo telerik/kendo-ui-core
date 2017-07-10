@@ -1,6 +1,6 @@
 ---
 title: Scaffolding
-page_title: Scaffolding | Telerik UI for ASP.NET MVC
+page_title: Scaffolding | Progress Telerik UI for ASP.NET MVC
 description: "Learn how to use the Kendo UI Scaffolder extension."
 slug: scaffolding_aspnetmvc
 previous_url: /scaffolding
@@ -9,7 +9,7 @@ position: 4
 
 # Scaffolding
 
-As of the Kendo UI Q1 2015 release, Telerik UI for ASP.NET MVC contains the Kendo UI Scaffolder extension.
+As of the Kendo UI Q1 2015 release, Progress Telerik UI for ASP.NET MVC contains the Kendo UI Scaffolder extension.
 
 It allows you to generate MVC-wrapper widget declarations together with the related Controller action methods. Currently, the Kendo UI Grid, Scheduler, and Chart widgets can be scaffolded. More widgets will be added in future releases.
 
@@ -24,7 +24,7 @@ It allows you to generate MVC-wrapper widget declarations together with the rela
 
 ### Installation
 
-The extension will be automatically installed by the **Telerik UI for ASP.NET MVC** installer.
+The extension will be automatically installed by the **Progress Telerik UI for ASP.NET MVC** installer.
 
 You could also manually install it by navigating to the **wrappers\aspnetmvc\Scaffolding** folder of the distribution package and opening the included **vsix** file. It will automatically detect compatible Visual Studio versions.
 
@@ -64,13 +64,13 @@ For a list of issues and solutions to common problems you may encounter while wo
 
 ## See Also
 
-* [Telerik UI for ASP.NET MVC Overview]({% slug overview_aspnetmvc %})
-* [Telerik UI for ASP.NET MVC Fundamentals]({% slug fundamentals_aspnetmvc %})
-* [Telerik UI for ASP.NET MVC NuGet Packages]({% slug aspnetmvc_nuget %})
-* [Scaffolding with Telerik UI for ASP.NET MVC]({% slug scaffolding_aspnetmvc %})
-* [Use Telerik UI for ASP.NET MVC in MVC 3 Applications]({% slug aspnetmvc3_aspnetmvc %})
-* [Use Telerik UI for ASP.NET MVC in MVC 4 Applications]({% slug aspnetmvc4_aspnetmvc %})
-* [Use Telerik UI for ASP.NET MVC in MVC 5 Applications]({% slug aspnetmvc5_aspnetmvc %})
-* [Use Telerik UI for ASP.NET Core](http://docs.telerik.com/aspnet-core/introduction)
-* [Use Telerik UI for ASP.NET MVC Visual Studio Extensions]({% slug overview_visualstudio_aspnetmvc %})
-* [Telerik UI for ASP.NET MVC Troubleshooting]({% slug troubleshooting_aspnetmvc %})
+* [Progress Telerik UI for ASP.NET MVC Overview]({% slug overview_aspnetmvc %})
+* [Progress Telerik UI for ASP.NET MVC Fundamentals]({% slug fundamentals_aspnetmvc %})
+* [Progress Telerik UI for ASP.NET MVC NuGet Packages]({% slug aspnetmvc_nuget %})
+* [Scaffolding with Progress Telerik UI for ASP.NET MVC]({% slug scaffolding_aspnetmvc %})
+* [Use Progress Telerik UI for ASP.NET MVC in MVC 3 Applications]({% slug aspnetmvc3_aspnetmvc %})
+* [Use Progress Telerik UI for ASP.NET MVC in MVC 4 Applications]({% slug aspnetmvc4_aspnetmvc %})
+* [Use Progress Telerik UI for ASP.NET MVC in MVC 5 Applications]({% slug aspnetmvc5_aspnetmvc %})
+* [Use Progress Telerik UI for ASP.NET Core](http://docs.telerik.com/aspnet-core/introduction)
+* [Use Progress Telerik UI for ASP.NET MVC Visual Studio Extensions]({% slug overview_visualstudio_aspnetmvc %})
+* [Progress Telerik UI for ASP.NET MVC Troubleshooting]({% slug troubleshooting_aspnetmvc %})

@@ -1,6 +1,7 @@
 ---
 title: Rect
 page_title: API reference for methods and fields of Kendo UI Geometry Rectangle
+res_type: api
 ---
 
 # kendo.geometry.Rect

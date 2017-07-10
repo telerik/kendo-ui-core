@@ -7,7 +7,7 @@ slug: howto_updatemapshapesbyid_map
 
 # Update Map Shapes by ID
 
-The example below demonstrates how to update Kendo UI Map shapes by a specified ID.
+The following example demonstrates how to update the Map shapes by a specified ID.
 
 ###### Example
 
@@ -69,8 +69,6 @@ The example below demonstrates how to update Kendo UI Map shapes by a specified 
 ```
 
 ## See Also
-
-Other articles on the Kendo UI Map:
 
 * [Map JavaScript API Reference](/api/javascript/dataviz/ui/map)
 * [How to Customize Markers on Map]({% slug howto_customizemarkersonmap_map %})

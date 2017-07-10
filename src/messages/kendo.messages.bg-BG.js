@@ -316,6 +316,7 @@ $.extend(true, kendo.spreadsheet.messages.toolbar,{
     "undo": "Стъпка назад"
   },
   "saveAs": "Запиши като...",
+  "sort": "Сортирай",
   "sortAsc": "Сортирай възходящо",
   "sortDesc": "Сортирай низходящо",
   "sortButtons": {
@@ -334,6 +335,7 @@ $.extend(true, kendo.spreadsheet.messages.toolbar,{
 if (kendo.spreadsheet && kendo.spreadsheet.messages.view) {
 kendo.spreadsheet.messages.view =
 $.extend(true, kendo.spreadsheet.messages.view,{
+  "nameBox": "Име на клетка",
   "errors": {
     "shiftingNonblankCells": "Не може да се вмъкнат клетки поради възможност от загуба на данни. Изберете друга локация за вмъкване на клетки или изтрийте данни от края на работния лист."
   },
@@ -630,6 +632,23 @@ $.extend(true, kendo.ui.Grid.prototype.options.messages,{
     "confirmDelete": "Изтрий"
   },
   "noRecords": "Няма налични записи."
+});
+}
+
+/* ListBox messaages */
+
+if (kendo.ui.ListBox) {
+kendo.ui.ListBox.prototype.options.messages =
+$.extend(true, kendo.ui.ListBox.prototype.options.messages,{
+  "tools": {
+    "remove": "Премахни",
+    "moveUp": "Премести нагоре",
+    "moveDown": "Премести надолу",
+    "transferTo": "Прехвърли към",
+    "transferFrom": "Прехвърли от",
+    "transferAllTo": "Премести вс. към",
+    "transferAllFrom": "Премести вс. от"
+  }
 });
 }
 
@@ -953,6 +972,21 @@ kendo.ui.progress.messages =
 $.extend(true, kendo.ui.progress.messages, {
     loading: "Зареждане..."
 });
+}
+
+/* DateInput */
+if (kendo.ui.DateInput) {
+  kendo.ui.DateInput.prototype.options.messages =
+    $.extend(true, kendo.ui.DateInput.prototype.options.messages, {
+      "year": "година",
+      "month": "месец",
+      "day": "ден",
+      "weekday": "ден от седмицата",
+      "hour": "часа",
+      "minute": "минути",
+      "second": "секунди",
+      "dayperiod": "AM/PM"
+    });
 }
 
 })(window.kendo.jQuery);

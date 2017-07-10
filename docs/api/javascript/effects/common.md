@@ -1,5 +1,6 @@
 ---
 title: FX Common API
+res_type: api
 ---
 
 # Common Effects API

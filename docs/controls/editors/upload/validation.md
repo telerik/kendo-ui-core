@@ -3,14 +3,14 @@ title: Validation
 page_title: Validation | Kendo UI Upload
 description: "Validate the selected files in the Kendo UI Upload widget."
 slug: validation_upload_widget
-position: 3
+position: 4
 ---
 
 # Validation
 
 As of the Kendo UI 2016 Q3 release the Upload supports file validation&mdash;selected files can be validated against their extensions and size.
 
-The example below demonstrates a sample configuration for validation.
+The following example demonstrates a sample configuration for validation.
 
 ###### Example
 
@@ -52,15 +52,16 @@ The `minFileSize` property defines the minimum size in bytes allowed of a file t
 
 ## Browser Limitations
 
-Internet Explorer versions prior to version 9 provide no information on the file size. As a result, the Upload validation for the `minFileSize` and `maxFileSize` options will not work as expected.
+Internet Explorer versions prior to version 10 provide no information on the file size. As a result, the Upload validation for the `minFileSize` and `maxFileSize` options will not work as expected.
 
 ## See Also
 
-Other articles on Kendo UI Upload:
+Other articles on the Kendo UI Upload:
 
 * [Overview of the Upload Widget]({% slug overview_kendoui_upload_widget %})
 * [Send and Receive Metadata]({% slug metadata_upload_widget %})
 * [Drag and Drop]({% slug dragandrop_upload_widget %})
+* [Chunk Upload]({% slug chunkupload_upload_widget %})
 * [Modes of Operation]({% slug modes_upload_widget %})
 * [Browser Support]({% slug browsersupport_upload_widget %})
 * [Troubleshooting]({% slug troubleshooting_upload_widget %})

@@ -8,33 +8,25 @@ position: 1
 
 # User Guide
 
-## Audience
+This guide is intended for the end user of the Spreadsheet.
 
-This guide is intended for the end user of the Kendo UI Spreadsheet widget. It aims at providing information about the widget's functionalities for data entry/management, and support to end users while working with it.
-
-## Table of Contents
-
-To the left of this page is the collapsible Table of Contents. You can easily navigate through it by clicking on the title of a section you want to read.
-
-## Organization
-
-The instructions in this guide are organized in sections, based on the actions you might wish to execute on each spreadsheet component (sheets, rows, columns).
+The document provides information about the functionalities of the widget for data entry and management.
 
 ## Conventions
 
 This guide uses the following conventions:
 
-| ITEM										| CONVENTION						|
+| Item										| Convention					|
 | :---										| :---								|
-| Buttons, menus, tabs, dialog titles		| **boldface** font 				|
-| Keyboard buttons, names of functions		| `screen` font						|
+| Buttons, menus, tabs, dialog titles		    | **boldface** font 				|
+| Keyboard buttons, names of functions	    | `screen` font						  |
 | Selection sequences of buttons or options	| **Data** > **Data Validation**	|
 
 ## Overview
 
-Kendo UI Spreadsheet is used for implementation of related data and its visualization in a tabular format (rows and columns). This kind of data structuring provides for an easier management and analysis. The widget renders the feeling of a [Microsoft Excel table](https://support.office.com/en-ca/article/Overview-of-Excel-tables-7ab0bb7d-3a9e-4b56-a3c9-6c94334e492c) by offering many cell-formatting options, styles, and themes, while utilizing simpler and easy-to-master user interface.
+The Kendo UI Spreadsheet is used for the implementation of related data and its visualization in a tabular format (rows and columns). This kind of data structuring provides for an easier management and analysis. The widget renders the touch and feel of a [Microsoft Excel table](https://support.office.com/en-ca/article/Overview-of-Excel-tables-7ab0bb7d-3a9e-4b56-a3c9-6c94334e492c) by offering many cell-formatting options, styles, and themes while utilizing simpler and easy-to-master user interface.
 
-##### Main Elements of the Kendo UI Spreadsheet Widget
+**Figure 1: Main Elements of the Spreadsheet**
 
 <center>![Spreadsheet UI components](../images/spreadsheet-components.png)</center>
 
@@ -44,7 +36,7 @@ Kendo UI Spreadsheet is used for implementation of related data and its visualiz
 
 When you open the Spreadsheet, the widget automatically generates a worksheet and applies to it a collection of default settings.
 
-| WHAT YOU WANT			| HOW TO GET THERE	|
+| What you want	| How to get there	|
 | :---					| :---				|
 | Select 				| Click **Select All** [ <span class="k-font-icon k-i-resize-se"></span> ]  located to the left of column header **A** and above row header **1** on the active sheet |
 | Create				| Click **+** on the Sheet Tab Bar to create a new sheet				|
@@ -54,7 +46,7 @@ When you open the Spreadsheet, the widget automatically generates a worksheet an
 
 ### Cells
 
-| WHAT YOU WANT			| HOW TO GET THERE		|
+| What you want			| How to get there		|
 | :---					| :---					|
 | Select/activate       | Click a cell		    |
 | Select a range of cells | <ol><li>Click a cell</li> <li>Extend the selection by holding down the mouse while marking the selection you want</li></ol> |
@@ -72,7 +64,7 @@ When you open the Spreadsheet, the widget automatically generates a worksheet an
 
 ### Rows
 
-| WHAT YOU WANT			| HOW TO GET THERE		|
+| What you want			| How to get there		|
 | :---					| :---					|
 | Select/activate		| Click the row header against of the row you want to select |
 | Insert				| <ol><li>Select a row by clicking on the respective row header</li> <li>Click the **Insert** tab from the **Menu**</li> <li>Click **Add Row Below** [ <span class="k-font-icon k-i-add-row-below"></span> ] or **Add Row Above** [ <span class="k-font-icon k-i-add-row-above"></span> ] on the **Toolbar**</li></ol> |
@@ -86,7 +78,7 @@ When you open the Spreadsheet, the widget automatically generates a worksheet an
 
 ### Columns
 
-| WHAT YOU WANT			| HOW TO GET THERE		|
+| What you want			| How to get there		|
 | :---					| :---					|
 | Select/activate 		| Click the column header against the column you want to select |
 | Insert				| <ol><li>Select a column by clicking on the respective column header</li> <li>Click the **Insert** tab from the **Menu**</li> <li>On the **Toolbar** click **Add Column Left** [ <span class="k-font-icon k-i-add-column-left"></span> ] or **Add Column Right** [ <span class="k-font-icon k-i-add-column-right"></span> ]</li></ol> |
@@ -99,7 +91,7 @@ When you open the Spreadsheet, the widget automatically generates a worksheet an
 
 ### Fonts
 
-| WHAT YOU WANT			| HOW TO GET THERE		|
+| What you want			| How to get there		|
 | :---					| :---					|
 | Choose fonts			| <ol><li>Select the cells to which you want to apply the font</li> <li>On the **Toolbar** click **Font** [ <span class="k-font-icon k-i-font-family"></span> ]</li> <li>Choose a font type from the drop-down list</li></ol> |
 | Edit font sizes 	| <ol><li>Select the cells to which you want to apply the font size</li> <li>On the **Toolbar** click **Font Size** [ <span class="k-font-icon k-i-font-size"></span> ]</li> <li>Choose the font size from the predetermined values in drop-down list</li></ol> |
@@ -107,7 +99,7 @@ When you open the Spreadsheet, the widget automatically generates a worksheet an
 
 ### Filters
 
-| WHAT YOU WANT				| HOW TO GET THERE		|
+| What you want				| How to get there		|
 | :---						| :---					|
 | Sort fields   		    | <ol><li>Click **Data** on the **Tab Bar**</li> <li>Select a column</li> <li>Click **Sort** [ <span class="k-font-icon k-i-sort-desc"></span> ] on the **Toolbar** and choose any of the two options from the drop-down list:</li> <ul><ul><li>**Sort range A to Z** sorts the content within the selected columns in ascending order</li> <li>**Sort range Z to A** sorts the content within the selected columns in descending alphabetical order</li></ul></ul></ol> |
 | Unsort fields             | <ul><li>Click **Undo** [ <span class="k-font-icon k-i-undo"></span> ] on the **Menu** to reverse the sorting you made.</li></ul> <ul>Оr</ul> <ul><li>Add a new column. Check which is the last active field of the columns whose data you want to sort. Then add a subsequent number (1, 2, 3, etc.) to each field of the recently added column ending with the field in the same row as the last field of the columns whose content you want to sort. In this way you can revert the sorting of the target columns by applying the sorting option in ascending order to the recently added helper column.</li></ul> |
@@ -117,14 +109,14 @@ When you open the Spreadsheet, the widget automatically generates a worksheet an
 
 You are able to export the content of your Spreadsheet to Portable Document Format (PDF) or Excel format (.xlsx) files, as well as import Excel Workbook content to the Spreadsheet.
 
-| WHAT YOU WANT				| HOW TO GET THERE		|
+| What you want				| How to get there		|
 | :---						| :---					|
 | Import files				| <ol><li>Click **Open** [ <span class="k-font-icon k-i-folder-open"></span> ] on the **Toolbar**.</li> <li>From the dialog box select the Excel Workbook you want to import by clicking on it.</li> <li>Click **Open** to load its content.</li></ol> |
 | Export files 				| <ol><li> Click **Export** [ <span class="k-font-icon k-i-xls"></span> ].</li></ol>  <ul>Export to Excel <ul>2. In the **File name** field fill in a name for the file that is going to be exported. <p>3. From the **Save as type** drop-down list choose **Excel Workbook (.xlsx)**.</p> <p>4. Click **Save** to locally download the exported Excel file and follow your browser instructions to proceed further on.</p></ul></ul> <ul>Export in PDF <ul>2. In the **File name** field fill in a name for the file that is going to be exported. <p>3. From the drop-down list against **Save as type** choose **Portable Document Format (.pdf)**.</p> <p>4. From the **Export** drop-down list choose which part of the content you want to export&mdash;the entire workbook, active sheet, or a partial content selection.</p> <p>5. From the **Paper size** drop-down list pick the size in which you want the exported file to be displayed.</p> <p>6. From the **Margins** drop-down list select what the margins of the resulting pages&mdash;normal, narrow, or wide.</p> <p>7. Indicate whether you want to display the content of the resulting file in a horizontal or vertical orientation by clicking on the respective icon.</p> <p>8. By checking **Guidelines** against **Print**, your exported PDF document is going to display its content in a table format with gridlines. If you want to disable the gridlines, uncheck the button. By default, **Guidelines** is checked for you to provide for the better visualization of the content.</p> <p>9. Checking the **Fit to page** option against **Scale** is going to automatically make the content from your spreadsheets fit within the boundaries of the exported PDF document. By default, **Fit to page** is checked for you to provide for the better visualization of the content.</p> <p>10. By checking the **Horizontally** option against **Center**, the content of the exported PDF file is going to be centered according to the horizontal margins of each exported sheet. By checking the **Vertically** option against **Center**, the content of the exported PDF file is going to be centered according to the vertical margins of each exported sheet. By default, both options are checked for you to provide for the better visualization of the content.</p> <p>11. Click **Save** to locally download the exported PDF file and follow your browser instructions to proceed further on.</p></ul></ul> |
 
 ### Other
 
-| WHAT YOU WANT				| HOW TO GET THERE		|
+| What you want				| How to get there		|
 | :---						| :---					|
 | Auto fill                 | <ol><li>Insert textual, numeric, or textual and numeric characters of one and the same pattern in at least two subsequent column cells. For example, 1, 2.</li> <li>Select these cells.</li> <li>To copy the data series automatically, drag the fill handle across, down, or up the cells you want to fill.</li></ol> <p>Note that the **Auto Fill** command does not copy the format of the cells with the initial data series and does not apply it to the target ones.</p> <p>If you select just one cell and drag the fill handle to auto-complete adjacent cells, the command copies, but does not change in the existing pattern, the content from the initial cell to each of the target ones.</p>
 | Freeze panes				| <ol><li>Select the row or column which you want to freeze</li> <li>From the **Toolbar** click **Freeze Panes**</li> <li>Choose the option from the drop-down list</li></ol> |

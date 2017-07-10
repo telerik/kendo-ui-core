@@ -8,27 +8,29 @@ position: 2
 
 # PivotConfigurator Overview
 
-The Kendo UI PivotConfigurator widget represents an OLAP cube structure and can be used to configure the column and row dimensions along with the measures fields of the [Kendo UI PivotGrid widget](http://demos.telerik.com/kendo-ui/pivotgrid/index). It is a supplementary widget, which is strongly related to the Kendo UI `PivotDataSource` component.
+The Kendo UI PivotConfigurator represents an OLAP cube structure and can be used to configure the column and row dimensions along with the measures fields of the [PivotGrid](http://demos.telerik.com/kendo-ui/pivotgrid/index).
+
+It is a supplementary widget, which is strongly related to the Kendo UI `PivotDataSource` component.
 
 ## Getting Started
 
 ### Initialize the PivotConfigurator
 
-The sections below demonstrate how to initialize the [Kendo UI PivotConfigurator](/api/web/pivotconfigurator) and link it to a Kendo UI PivotGrid widget.
+The following sections demonstrate how to initialize the [PivotConfigurator](/api/web/pivotconfigurator) and link it to the PivotGrid.
 
-Create the PivotConfigurator by defining an HTML `<div>` element.
+To create the PivotConfigurator, define a `<div>` HTML element.
 
 ###### Example
 
-        <!-- Define	 the HTML div that will hold the PivotConfigurator -->
+        <!-- Define the HTML div that will hold the PivotConfigurator -->
         <div id="pivotconfigurator">
         </div>
 
-        <!-- Define	 the HTML div that will hold the PivotGrid -->
+        <!-- Define the HTML div that will hold the PivotGrid -->
         <div id="pivotgrid">
         </div>
 
-The example below demonstrates how to further configure the Kendo UI PivotConfigurator widget.
+The following example demonstrates how to further configure the PivotConfigurator.
 
 ###### Example
 
@@ -61,7 +63,9 @@ The example below demonstrates how to further configure the Kendo UI PivotConfig
         });
         </script>
 
-The code above results in the following widgets:
+The code from the previous example results in the following widget.
+
+**Figure 1: The PivotConfigurator**
 
 ![Kendo UI PivotConfigurator](/images/pivotconfigurator.png)
 
@@ -69,9 +73,9 @@ The code above results in the following widgets:
 
 ### Existing Instances
 
-You can reference an existing PivotConfigurator instance via [`jQuery.data()`](http://api.jquery.com/jQuery.data/). Once a reference has been established, use the [PivotConfigurator API](/api/web/pivotconfigurator) to control its behavior.
+To reference an existing PivotConfigurator instance, use the [`jQuery.data()`](http://api.jquery.com/jQuery.data/) method. Once a reference has been established, use the [PivotConfigurator API](/api/web/pivotconfigurator) to control its behavior.
 
-The example below demonstrates how to access an existing PivotConfigurator instance.
+The following example demonstrates how to access an existing PivotConfigurator instance.
 
 ###### Example
 
@@ -87,4 +91,4 @@ Other articles on the Kendo UI PivotGrid:
 * [OLAP Cube Setup]({% slug olap_cube_setup_pivotgrid_widget %})
 * [Frequently Asked Questions]({% slug frequently_asked_questions_pivotgrid %})
 
-For how-to examples on the Kendo UI PivotGrid widget, browse its [**How To** documentation folder]({% slug howto_add_dimension_column_axis_pivotgrid %}).
+For how-to examples on the Kendo UI PivotGrid widget, browse its [**How To** documentation folder]({% slug howto_change_pivotgrid_fields_names_pivotgrid %}).

@@ -1,6 +1,7 @@
 ---
 title: Layout
 page_title: API reference for Kendo UI Drawing API Layout
+res_type: api
 ---
 
 # kendo.drawing.Layout : kendo.drawing.Group

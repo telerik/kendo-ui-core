@@ -2,6 +2,7 @@
 title: PanelBar
 page_title: Configuration, methods and events of Kendo UI PanelBar
 description: Configure the PanelBar UI widget, use methods and explore the events which are triggered upon certain behaviors.
+res_type: api
 ---
 
 # kendo.ui.PanelBar
@@ -336,8 +337,7 @@ If the `dataSource` option is an existing [kendo.data.HierarchicalDataSource](/a
 
 #### Example - set dataSource as a JavaScript array
 
-   <ul id="panelbar"></ul>
-
+    <ul id="panelbar"></ul>
     <script>
       $("#panelbar").kendoPanelBar({
           dataSource: [

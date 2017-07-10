@@ -7,9 +7,9 @@ slug: howto_serialize_form_data_upload
 
 # Serialize Form Data during Async Upload
 
-It can be desirable to include a collection of form fields as [Metadata]({% slug metadata_upload_widget %}) during asynchronous uploads.
+Your project might require you to include a collection of form fields as [metadata]({% slug metadata_upload_widget %}) during asynchronous uploads.
 
-The output from the commonly used [`jQuery.serializeArray`](http://api.jquery.com/serializeArray/) helper is not usable directly in the [`upload` event](/api/javascript/ui/upload#events-upload) and needs to be processed as illustrated in the example below.
+The output from the commonly used [`jQuery.serializeArray`](http://api.jquery.com/serializeArray/) helper is not directly usable in the [`upload`](/api/javascript/ui/upload#events-upload) event and needs to be processed. The following example demonstrates how to achieve this.
 
 ###### Example
 
@@ -64,8 +64,8 @@ Content-Type: text/plain
 
 ## See Also
 
-* [Upload JavaScript API Reference](/api/javascript/ui/upload)
+* [JavaScript API Reference of the Upload](/api/javascript/ui/upload)
 * [Modes of Operation]({% slug modes_upload_widget %})
 * [Metadata]({% slug metadata_upload_widget %})
 
-For more runnable examples on the Kendo UI Upload widget, browse its [**How To** documentation folder]({% slug howto_remove_files_with_errors %}).
+For more runnable examples on the Kendo UI Upload widget, browse its [**How To** documentation folder]({% slug howto_add_image_preview %}).

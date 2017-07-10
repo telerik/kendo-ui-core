@@ -7,16 +7,22 @@
         },
         teardown: function() {
             QUnit.fixture.closest("body").find(".k-window-content").each(function(idx, element){
-                $(element).data("kendoWindow").destroy();
+                 kendo.widgetInstance($(element)).destroy();
             });
             QUnit.fixture.closest("body").find(".k-overlay").remove();
             $.mockjax.clear();
             kendo.effects.enable();
+            // Destroy all possible .k-animation-container elements left by previous test suites.
+            kendo.destroy($("body"));
         }
     });
 
     function createWindow(options) {
         return $("<div />").appendTo(QUnit.fixture).kendoWindow(options).data("kendoWindow");
+    }
+
+    function createDialog(options) {
+        return $("<div />").appendTo(QUnit.fixture).kendoDialog(options).data("kendoDialog");
     }
 
     test("title gets title", function() {
@@ -38,7 +44,7 @@
     });
 
     test("title method gets and sets the title consistently", 2, function () {
-        var title = "&lt;foo&gt;",
+        var title = "foo",
             window = createWindow({ title: title }),
             oldTitle = window.title(),
             newTitle,
@@ -51,16 +57,16 @@
         equal(window.title(), title);
     });
 
-    test("title method and title property set once encoded string as once encoded", 2, function () {
-        var encodedString = kendo.htmlEncode("<script>var foo1 = 1;<\/script>"),
-            window = createWindow({ title: encodedString }),
+    test("title method and title property encode the title", 2, function () {
+        var stringValue = "<script>var foo1 = 1;<\/script>",
+            window = createWindow({ title: stringValue }),
             titleElement = $(".k-window-title", window.wrapper);
 
-        equal(titleElement.html(), encodedString);
+        equal(titleElement.html(), kendo.htmlEncode(stringValue));
 
-        window.title(encodedString);
+        window.title(stringValue);
 
-        equal(titleElement.html(), encodedString);
+        equal(titleElement.html(), kendo.htmlEncode(stringValue));
     });
 
     test("open of modal window adds overlay if it does not exist", function () {
@@ -106,7 +112,11 @@
         var div = $("<div style='width:5000px' />").appendTo(QUnit.fixture.width(5020)),
             scrollPosition = 1300;
 
+        // QUnit.fixture's document is initially with overflow:hidden
+        $(QUnit.fixture[0].ownerDocument).find("html, body").css("overflow", "");
         $(QUnit.fixture[0].ownerDocument).scrollLeft(scrollPosition);
+
+        equal($(QUnit.fixture[0].ownerDocument).scrollLeft(), scrollPosition);
 
         window.center();
 
@@ -140,6 +150,18 @@
 
     test("closing a modal window moves overlay before previous window", function() {
         var dialog = createWindow({
+                modal: true
+            }),
+            overlappingDialog = createWindow({
+                modal: true
+            });
+
+        overlappingDialog.close();
+        ok(dialog.wrapper.prev("div").is(".k-overlay"));
+    });
+
+    test("closing a modal window moves overlay before previous Kendo Dialog too", function() {
+        var dialog = createDialog({
                 modal: true
             }),
             overlappingDialog = createWindow({
@@ -1014,6 +1036,40 @@
         ok(true);
     });
 
+    test("setOptions should make deep extend of options.position", function() {
+        var dialog = createWindow({
+            visible: false,
+            position:{
+                top: 100,
+                left: 200
+            }
+        });
+
+        dialog.setOptions({
+            position:{
+                top:200
+            }
+        });
+
+        deepEqual(dialog.options.position, { top: 200, left: 200 }, "position.top should be changed, but position.left stays the same");
+
+        dialog.setOptions({
+            position:{
+                left:300
+            }
+        });
+
+        deepEqual(dialog.options.position, { top: 200, left: 300 }, "position.top stays the same, but position.left is changed");
+
+        dialog.setOptions({
+            position:{
+                left:"50%"
+            }
+        });
+
+        deepEqual(dialog.options.position, { top: 200, left: "50%" }, "string values should work too");
+    });
+
     asyncTest("overlay is not hidden when showing second modal window after closing first", function () {
         var dialog = createWindow({
             animation: { close: { duration: 500 } },
@@ -1123,4 +1179,82 @@
         ok(!dialog.isMaximized());
     });
 
+    test("maximize() takes borders into account", function() {
+        var borderWidth = 10;
+
+        var dialog = createWindow({
+                visible: true,
+                animation: false
+            });
+
+        dialog.wrapper.css("border-width", borderWidth + "px")
+
+        dialog.maximize();
+
+        equal(dialog.wrapper.width() + borderWidth * 2, $(window).width());
+    });
+
+    test("maximize() sets body's and html's overflow to hidden", 2, function() {
+        var dialog = createWindow({
+                visible: true,
+                animation: false
+            });
+
+        // QUnit.fixture's document is initially with overflow:hidden
+        $(QUnit.fixture[0].ownerDocument).find("html, body").css("overflow", "");
+
+        dialog.maximize();
+
+        equal($("body").css("overflow"), "hidden");
+        equal($("html").css("overflow"), "hidden");
+    });
+
+    test("restore() restores body's and html's original overflow after maximize()", 2, function() {
+        var dialog = createWindow({
+                visible: true,
+                animation: false
+            });
+
+        // QUnit.fixture's document is initially with overflow:hidden
+        $(QUnit.fixture[0].ownerDocument).find("html, body").css("overflow", "scroll");
+
+        dialog.maximize();
+        dialog.restore();
+
+        equal($("body").css("overflow"), "scroll");
+        equal($("html").css("overflow"), "scroll");
+    });
+
+    test("closing maximized window restores body's and html's original overflow", 2, function() {
+        var dialog = createWindow({
+                visible: true,
+                animation: false
+            });
+
+        // QUnit.fixture's document is initially with overflow:hidden
+        $(QUnit.fixture[0].ownerDocument).find("html, body").css("overflow", "scroll");
+
+        dialog.maximize();
+        dialog.close();
+
+        equal($("body").css("overflow"), "scroll");
+        equal($("html").css("overflow"), "scroll");
+    });
+
+    test("opening maximized window sets body's and html's overflow to hidden", 2, function() {
+        var dialog = createWindow({
+                visible: true,
+                animation: false
+            });
+
+        // QUnit.fixture's document is initially with overflow:hidden
+        $(QUnit.fixture[0].ownerDocument).find("html, body").css("overflow", "scroll");
+
+        dialog.maximize();
+        dialog.close();
+        dialog.open();
+
+        equal($("body").css("overflow"), "hidden");
+        equal($("html").css("overflow"), "hidden");
+    });
 })();

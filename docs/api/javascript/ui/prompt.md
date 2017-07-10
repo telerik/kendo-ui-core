@@ -2,9 +2,10 @@
 title: Prompt
 page_title: Configuration, methods and events of Kendo UI Prompt
 description: How to initialize an Prompt UI widget, configure its properties and open it.
+res_type: api
 ---
 
-# kendo.ui.Prompt : kendo.ui.Dialog
+# kendo.ui.Prompt
 
 Represents the Kendo UI Prompt.
 

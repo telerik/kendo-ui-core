@@ -18,7 +18,7 @@ You build a scene by creating drawing elements such as curves, images, and text.
 
 A drawing surface is used to render scenes on and off screen. Surfaces encapsulate specific browser technologies such as SVG or Canvas.
 
-**Figure 1. Drawing API components**
+**Figure 1: Drawing API components**
 
 ![Drawing API Components](images/components.png)
 

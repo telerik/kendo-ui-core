@@ -24,6 +24,8 @@ var __meta__ = { // jshint ignore:line
         CLICK = "click",
         KEYDOWN = "keydown",
         DISABLED = "disabled",
+        MOUSEDOWN = "down",
+        DOCUMENT_ELEMENT = $(document.documentElement),
         iconTemplate = kendo.template('<a href="\\#" aria-label="#=text#" title="#=text#" class="k-link k-pager-nav #= wrapClassName #"><span class="k-icon #= className #"></span></a>');
 
     function button(template, idx, text, numeric, title) {
@@ -86,7 +88,7 @@ var __meta__ = { // jshint ignore:line
             that._refreshHandler = proxy(that.refresh, that);
 
             that.dataSource.bind(CHANGE, that._refreshHandler);
-
+            that.downEvent = kendo.applyEventMap(MOUSEDOWN, kendo.guid());
             if (options.previousNext) {
                 if (!that.element.find(FIRST).length) {
                     that.element.append(icon(FIRST, options.messages.first, "k-pager-first"));
@@ -262,6 +264,7 @@ var __meta__ = { // jshint ignore:line
                 linkTemplate = that.linkTemplate,
                 buttonCount = options.buttonCount;
 
+            DOCUMENT_ELEMENT.unbind(that.downEvent, $.proxy(that._hideList, that));
             if (e && e.action == "itemchange") {
                 return;
             }
@@ -385,7 +388,24 @@ var __meta__ = { // jshint ignore:line
         },
 
         _toggleActive: function() {
-            this.list.toggleClass("k-state-expanded");
+            var that = this;
+
+            if (that.list.hasClass("k-state-expanded")) {
+                DOCUMENT_ELEMENT.unbind(that.downEvent, $.proxy(that._hideList, that));
+            } else {
+                DOCUMENT_ELEMENT.bind(that.downEvent, $.proxy(that._hideList, that));
+            }
+            that.list.toggleClass("k-state-expanded");
+        },
+
+        _hideList: function(e) {
+             var that = this,
+                target = kendo.eventTarget(e);
+
+            if (!$.contains(that.list[0], target)) {
+                DOCUMENT_ELEMENT.unbind(that.downEvent, $.proxy(that._hideList, that));
+                that.list.removeClass("k-state-expanded");
+            }
         },
 
         _click: function(e) {

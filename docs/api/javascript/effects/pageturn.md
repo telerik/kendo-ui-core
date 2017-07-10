@@ -1,5 +1,6 @@
 ---
 title: FX PageTurn
+res_type: api
 ---
 
 # PageTurn

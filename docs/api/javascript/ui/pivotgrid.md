@@ -2,6 +2,7 @@
 title: PivotGrid
 page_title: Configuration, methods and events of Kendo UI PivotGrid
 description: Code examples for PivotGrid UI widget configuration, learn how to use methods and which events to set once the grid UI widget detail is initialized and expanded.
+res_type: api
 ---
 
 # kendo.ui.PivotGrid

@@ -7,9 +7,9 @@ slug: howto_nodetemplatewhenplacedinpanelbar_angularjs_treeview
 
 # Define Node Template When TreeView Is within PanelBar
 
-Kendo UI offers template support for both the TreeView and the PanelBar in AngularJS applications.
+Kendo UI offers template support in AngularJS applications for both its TreeView and the PanelBar widgets.
 
-This means that a template you define through the `k-template` directive will not be mapped correctly to the TreeView. To work around this issue, define the template in a `<script type="text/x-kendo-template">` element and it will be assigned to the TreeView programmatically.
+If you define a template through the `k-template` directive, it will not be mapped correctly to the TreeView. To work around this issue, define the template in a `<script type="text/x-kendo-template">` element. As a result, it will be programmatically assigned to the TreeView.
 
 ###### Example
 
@@ -74,8 +74,6 @@ This means that a template you define through the `k-template` directive will no
 
 ## See Also
 
-Other articles on the Kendo UI TreeView:
-
 * [TreeView JavaScript API Reference](/api/javascript/ui/treeview)
 * [How to Customize Checkbox Templates]({% slug howto_customizecheckboxtemplate_angulartreeview %})
 * [How to Render Multiple TreeViews Using HTML Source Binding]({% slug howto_rendermultipleusing_htmlsourcebinding_mvvm_treeview %})
@@ -84,4 +82,4 @@ Other articles on the Kendo UI TreeView:
 * [How to Hide Checkboxes for Root Level]({% slug howto_hidecheckboxesforrootlevel_treeview %})
 * [How to Persist Expanded State]({% slug howto_persistexpandedstate_treeview %})
 
-For more runnable examples on the Kendo UI TreeView, browse its [**How To** documentation folder]({% slug howto_editnodesviaform_angularjs_treeview %}).
+For more runnable examples on the Kendo UI TreeView, browse its [**How To** documentation folder]({% slug howto_bindcheckedstatecustommodelfields_angulartreeview %}).

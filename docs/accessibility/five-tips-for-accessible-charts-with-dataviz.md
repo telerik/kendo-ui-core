@@ -3,30 +3,33 @@ title: Charts
 page_title: Charts | Kendo UI Accessibility Support
 description: "Learn more tips and tricks how to make Kendo UI Charts accessible."
 slug: charts_accessibility_support
-position: 7
+position: 8
 ---
 
 # Charts
 
-This article provides five practical tips (with code samples and illustrative videos) for making Kendo UI charts and graphs more accessible. These are things you can quickly and easily do in your applications to make them easier to access by disabled users through assistive technologies which interact with your content.
+This article provides practical tips, code samples, and illustrative videos for making Kendo UI charts and graphs more accessible so that disabled users can seamlessly interact with the content.
 
 ## Accessibility Case
 
-In the realm of Accessibility, the most oft-mentioned guidelines and regulations are WAI_ARIA, Section 508 and the W3C Web Content Accessibility Guidelines (WCAG) 2.0. Section 508 makes up the law that governs the creation of accessible software for government entities in the United States, while WCAG (along with WAI-ARIA) contains a comprehensive set of guidelines for creating accessible websites and applications.
+The basic accessibility standards are:
 
-Both Section 508 and the WCAG 2.0 guidelines have something to say that, we believe, applies to Kendo UI data visualisation components. Below is the first rule in Section 508:
+* WAI_ARIA
+* Section 508
+* W3C Web Content Accessibility Guidelines (WCAG) 2.0
 
-"(a) A text equivalent for every non-text element shall be provided (e.g., via `alt`, `longdesc`, or in-element content)."
+Section 508 specifies the law which governs the creation of accessible software for government entities in the United States. WCAG and WAI-ARIA contain a comprehensive set of guidelines for creating accessible web sites and applications.
 
-and WCAG Guideline 1.1:
+The fundamental requirement that refers to and is fulfilled by the Kendo UI data visualization components is:
 
-"Guideline 1.1 Text Alternatives: Provide text alternatives for any non-text content so that it can be changed into other forms people need, such as large print, braille, speech, symbols or simpler language."
+* (Section 508) "(a) A text equivalent for every non-text element shall be provided (e.g., via `alt`, `longdesc`, or in-element content)."
+* (WCAG 2.0) "Guideline 1.1 Text Alternatives: Provide text alternatives for any non-text content so that it can be changed into other forms people need, such as large print, braille, speech, symbols or simpler language."
 
-Providing text equivalents to non-text content is a key tenant of accessibility. Content like images, animations, video, and audio are great, but these are impossible for screen readers and other assistive technologies to parse. And if they cannot be parsed by these technologies, they cannot be enjoyed by disabled users. Thus, Section 508 and WCAG both require that all non-decorative non-text content be made accessible to assistive technologies.
+Providing text equivalents for non-text content is a key tenant of accessibility. Visual content, such as images, animations, video, and audio, is a valuable asset for each web application and web site. However, these visual elements are impossible to parse by screen readers and other assistive technologies and cannot be enjoyed by disabled users. That is why, both Section 508 and WCAG require that all non-decorative and non-text content has to be made accessible to assistive technologies.
 
 ## Data Visualization
 
-Kendo UI charts and graphs definitely fit the bill of "non-text content". By definition, Kendo UI allows you to create visual charts and graphs that enhance textual or tabular data. These cannot possibly be accessible, out-of-the-box, right?
+The Kendo UI charts and graphs definitely fit the bill of "non-text content". By definition, Kendo UI allows you to create visual charts and graphs that enhance textual or tabular data. These cannot possibly be accessible, out-of-the-box, right?
 
 Actually, they can be. And with a little bit of work as you add charts and graphs to your applications, they can be made even more accessible.
 
@@ -258,11 +261,10 @@ SVG (the technology used to power Kendo UI charts) is pretty accessible out of t
 
 ## See Also
 
-Other articles on the accessibility support provided by Kendo UI:
-
-* [Overview of Web Accessibility Standards]({% slug overview_accessibility_support_kendoui %})
-* [High-Contrast Theme]({% slug high_contrast_theme_accessibility_support %})
-* [Keyboard Shortcuts]({% slug keyboard_shortcuts_accessibility_support %})
-* [Right-to-Left Languages]({% slug right_toleft_languages_accessibility_support %})
-* [Section 508]({% slug section508_accessibility_support %})
-* [WAI-ARIA]({% slug wai_aria_accessibility_support %})
+* [Overview of Accessibility Features in Kendo UI]({% slug overview_accessibility_support_kendoui %})
+* [Section 508 Support in Kendo UI]({% slug section508_accessibility_support %})
+* [Section 508 and WCAG 2.0 Compliance of Kendo UI Widgets]({% slug section508_wcag20_accessibility_support %})
+* [WAI-ARIA Support in Kendo UI]({% slug wai_aria_accessibility_support %})
+* [Keyboard Support in Kendo UI]({% slug keyboard_shortcuts_accessibility_support %})
+* [Right-to-Left Language Support in Kendo UI]({% slug right_toleft_languages_accessibility_support %})
+* [Working with the Kendo UI High-Contrast Theme]({% slug high_contrast_theme_accessibility_support %})

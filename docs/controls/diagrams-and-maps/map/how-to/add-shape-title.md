@@ -7,9 +7,9 @@ slug: howto_addhspaetitles_map
 
 # Add Shape Titles
 
-The example below demonstrates how to add a title text for shapes loaded from GeoJSON in a Kendo UI Map widget&mdash;in particular, how to add a [`Text`](/api/javascript/drawing/text) element positioned over the shape center.
+The following example demonstrates how to add a title text for shapes in the Map widget that are loaded from GeoJSON.
 
-Shape layers are rendered using the [Drawing API](/framework/drawing/overview). The [`shapeCreated`](/api/javascript/dataviz/ui/map#events-shapeCreated) event can be used to render additional elements.
+In particular, it shows how to add a [`Text`](/api/javascript/drawing/text) element positioned over the shape center. Shape layers are rendered by using the [Drawing API]({% slug overview_kendoui_drawingapi %}). To render additional elements, use the [`shapeCreated`](/api/javascript/dataviz/ui/map#events-shapeCreated) event.
 
 ###### Example
 
@@ -83,12 +83,10 @@ Shape layers are rendered using the [Drawing API](/framework/drawing/overview). 
 
 ## See Also
 
-Other articles on the Kendo UI Map:
-
 * [Map JavaScript API Reference](/api/javascript/dataviz/ui/map)
 * [How to Disable Mousewheel Zoom]({% slug howto_disablemousezoom_map %})
 * [How to Highlight Map Shapes by ID]({% slug howto_highlightmapshapesbyid_map %})
 * [How to Set 100% Height in Mobile Applications]({% slug howto_set100percentheight_inmobileapps_map %})
 * [How to Zoom on Double Click]({% slug howto_zoomondblclick_map %})
 
-For more runnable examples on the Kendo UI Map, browse the [**How To** documentation folder]({% slug howto_customizemarkersonmap_map %}).
+For more runnable examples on the Kendo UI Map, browse the **How To** documentation folder.

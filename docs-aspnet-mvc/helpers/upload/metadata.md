@@ -3,7 +3,7 @@ title: Handling of Metadata
 page_title: Handling of Metadata | Kendo UI Upload HtmlHelper
 description: "Get started with the asynchronous uploading of metadata in Telerik UI for ASP.NET MVC helpers."
 slug: metadata_uploadhelper_aspnetmvc
-position: 3
+position: 4
 ---
 
 # Handling of Metadata
@@ -169,7 +169,7 @@ Below are listed the steps for you to follow when configuring the receiving of m
                 return Json(new { status = "OK" }, "text/plain");
             }
 
-1. Declare a handler for the [`success` event](../../../kendo-ui/api/javascript/ui/upload#success) and process the response.
+1. Declare a handler for the [`success` event](http://docs.telerik.com/kendo-ui/api/javascript/ui/upload#success) and process the response.
 
     ###### Example
 
@@ -212,13 +212,14 @@ The same approach is applicable for the `remove` handler as well.
 
 * [Overview of the Upload HtmlHelper]({% slug overview_uploadhelper_aspnetmvc %})
 * [Upload HtmlHelper Modes of Operation]({% slug modesoperation_uploadhelper_aspnetmvc %})
+* [Chunk Upload]({% slug chunkupload_uploadhelper_aspnetmvc %})
 * [How to Upload Files from Grid Popup Editors in ASP.NET MVC Applications]({% slug howto_uploadfilesgridpopupeditor_uploadaspnetmvc %})
 * [How to Upload Files to Databases in ASP.NET MVC Applications]({% slug howto_uploadfilesdatabases_uploadaspnetmvc %})
 * [Overview of the Kendo UI Upload Widget](http://docs.telerik.com/kendo-ui/controls/editors/upload/overview)
 * [Overview of Telerik UI for ASP.NET MVC]({% slug overview_aspnetmvc %})
 * [Fundamentals of Telerik UI for ASP.NET MVC]({% slug fundamentals_aspnetmvc %})
 * [Scaffolding in Telerik UI for ASP.NET MVC]({% slug scaffolding_aspnetmvc %})
-* [Telerik UI for ASP.NET MVC API Reference Folder](/api/Kendo.Mvc/AggregateFunction)
+* [Telerik UI for ASP.NET MVC API Reference Folder](http://docs.telerik.com/kendo-ui/api/Kendo.Mvc/AggregateFunction)
 * [Telerik UI for ASP.NET MVC HtmlHelpers Folder]({% slug overview_autocompletehelper_aspnetmvc %})
 * [Tutorials on Telerik UI for ASP.NET MVC]({% slug overview_timeefficiencyapp_aspnetmvc6 %})
 * [Telerik UI for ASP.NET MVC Troubleshooting]({% slug troubleshooting_aspnetmvc %})

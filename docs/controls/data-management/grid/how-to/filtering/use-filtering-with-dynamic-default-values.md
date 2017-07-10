@@ -1,25 +1,24 @@
 ---
 title: Use Grid Filtering with Dynamic Default Values
-page_title: Use Grid Filtering with Dynamic Default Values | Kendo UI Grid Widget
-description: "Learn how to use dynamic default field values in a Kendo UI Grid when filtering is applied."
+page_title: Use Grid Filtering with Dynamic Default Values | Kendo UI Grid
+description: "Learn how to use dynamic default field values in a Kendo UI Grid when you apply its filtering functionality."
 previous_url: /controls/data-management/grid/how-to/use-filtering-with-dynamic-default-values
 slug: howto_gridfiltering_dynamicdefaultvalues_grid
 ---
 
 # Use Grid Filtering with Dynamic Default Values
 
-The example below demonstrates how to use dynamic default field values in a Kendo UI Grid when filtering is applied.
+Your project might require you to apply a specific approach to the Grid when you use its filtering functionality.
 
-This approach comes in handy when you want the Grid to:
-* Display the filtered filed value as the default one when a new record is being added.
-* Show the new record added to the Grid.
+For example, you might need to:
+* Display the filtered filed value as default when a new record is added.
+* Show the latest record that is added to the Grid.
 
-To see how the example below functions, follow these steps:
-
-1. Filter the Grid by its **Category** column to be equal to a given value.
+The following example demonstrates how to use dynamic default field values in a Grid when you apply its filtering functionality. To see how it works:
+1. Filter the Grid by its **Category** column in a way it is equal to a given value.
 2. Click **Add new record**.
 
-As a result, the default category of the new record matches the current (filtered) one and a new row is added to the Grid.
+As a result, the default category of the new record matches the current (filtered) category and a new row is added to the Grid.
 
 ###### Example
 
@@ -109,9 +108,7 @@ As a result, the default category of the new record matches the current (filtere
 
 ## See Also
 
-Other articles on the Kendo UI Grid and how-to examples:
-
-* [JavaScript API Reference](/api/javascript/ui/grid)
+* [JavaScript API Reference of the Grid](/api/javascript/ui/grid)
 * [How to Add Cascading DropDownList Editors]({% slug howto_add_cascading_dropdown_list_editors_grid %})
 * [How to Copy Data from Excel]({% slug howto_copy_datafrom_excel_grid %})
 * [How to Drag and Drop Rows between Grids]({% slug howto_dragand_drop_rows_between_twogrids_grid %})
@@ -125,4 +122,4 @@ Other articles on the Kendo UI Grid and how-to examples:
 * [How to Show Tooltip for Column Records]({% slug howto_show_tooltipfor_column_records_grid %})
 * [How to Update Toolbar Content Using MVVM Binding]({% slug howto_update_toolbar_content_using_mvvmbinding_grid %})
 
-For more runnable examples on the Kendo UI Grid, browse its [**How To** documentation folder]({% slug howto_create_custom_editors_grid %}).
+For more runnable examples on the Kendo UI Grid, browse its [**How To** documentation folder]({% slug howto_adjust_row_heights_template_locked_columns_grid %}).

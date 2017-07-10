@@ -125,7 +125,7 @@ The example below demonstrates how to use the `view-title` data attribute to aut
 
 ### Color Schemes
 
-**Figure 1. Different color schemes of the NavBar**
+**Figure 1: Different color schemes of the NavBar**
 
 ![NavBar different color schemes](/controls/hybrid/navbar/NavBar.png)
 

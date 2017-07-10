@@ -7,7 +7,9 @@ slug: localization_filter_menu_messages_spreadsheet_widget
 
 # List of filterMenu Messages
 
-Below is the list of the messages and their namespaces under the `filterMenu` category. These are used to [localize the Kendo UI Spreadsheet widget via JavaScript]({% slug localization_ofmessages_spreadsheet_widget %}).
+The following list provides the messages and their namespaces under the `filterMenu` category.
+
+The `filterMenu` messages are used to [localize the Spreadsheet through JavaScript]({% slug localization_ofmessages_spreadsheet_widget %}).
 
     if (kendo.spreadsheet && kendo.spreadsheet.messages.filterMenu) {
         kendo.spreadsheet.messages.filterMenu =

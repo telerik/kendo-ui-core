@@ -1,4 +1,4 @@
-﻿(function( window, undefined ) {
+(function( window, undefined ) {
     kendo.cultures["gl-ES"] = {
         name: "gl-ES",
         numberFormat: {

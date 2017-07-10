@@ -1,6 +1,7 @@
 ---
 title: Path
 page_title: API reference for Kendo UI Drawing API Path
+res_type: api
 ---
 
 # kendo.drawing.Path : kendo.drawing.Element
@@ -101,7 +102,7 @@ The path encoded in [SVG Path Data format](http://www.w3.org/TR/SVG/paths.html#P
 The [configuration](#configuration) options for the path.
 
 #### Returns
-`kendo.drawing.Path` A path matching the supplied SVG data.
+`kendo.drawing.MultiPath` A path matching the supplied SVG data.
 
 ## Configuration
 

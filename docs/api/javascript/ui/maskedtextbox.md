@@ -2,6 +2,7 @@
 title: MaskedTextBox
 page_title: Configuration, methods and events of Kendo UI MaskedTextBox
 description: Code examples and tips how to configure MaskedTextBox widget, use available methods and events.
+res_type: api
 ---
 
 # kendo.ui.MaskedTextBox
@@ -61,9 +62,9 @@ Specifies the input mask. The following mask rules are supported:
 - **C** - Character or space. Accepts any character. The rule is equivalent to *.* in regular expressions.
 - **A** - Alphanumeric. Accepts letters and digits only.
 - **a** - Alphanumeric or space. Accepts letters, digits and space only.
-- **.** - Decimal placeholder. The decimal separator will be get from the current culture used by Kendo.
-- **,** - Thousands placeholder. The display character will be get from the current culture used by Kendo.
-- **$** - Currency symbol. The display character will be get from the current culture used by Kendo.
+- **.** - Decimal placeholder. The decimal separator will be gotten from the current culture used by Kendo.
+- **,** - Thousands placeholder. The display character will be gotten from the current culture used by Kendo.
+- **$** - Currency symbol. The display character will be gotten from the current culture used by Kendo.
 
 #### Example - specify a phone number mask
 

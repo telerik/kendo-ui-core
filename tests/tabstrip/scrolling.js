@@ -75,6 +75,14 @@ test('scrolling is enabled by default with distance configured', 2, function () 
     ok(!isNaN(tabstrip.options.scrollable.distance));
 });
 
+test('scrolling is enabled when scrollable is true with distance configured', 3, function () {
+    createTabStrip({scrollable:true});
+
+    ok(tabstrip.options.scrollable !== false);
+    ok(!isNaN(tabstrip.options.scrollable.distance));
+    ok(tabstrip.wrapper.hasClass("k-tabstrip-scrollable"));
+});
+
 test('scrolling CSS class is applied to TabStrip if tabPosition is top', 1, function () {
     createTabStrip({tabPosition:"top"});
 
@@ -237,6 +245,20 @@ test('left scrolling button scrolls to the left by delta when clicked', 1, funct
     tabstrip.tabGroup.finish();
 
     equal(tabstrip.tabGroup.scrollLeft(), initialScrollPosition - tabstrip.options.scrollable.distance);
+});
+
+test('scrolling succeeds when jQuert.fx is off', 1, function () {
+    createTabStrip();
+    jQuery.fx.off = true;
+
+    tabstrip.tabGroup.scrollLeft(999);
+    var initialScrollPosition = tabstrip.tabGroup.scrollLeft();
+    tabstrip.wrapper.children(".k-tabstrip-prev").trigger("touchstart").trigger("touchend");
+    tabstrip.tabGroup.finish();
+
+    equal(tabstrip.tabGroup.scrollLeft(), initialScrollPosition - tabstrip.options.scrollable.distance);
+
+    jQuery.fx.off = false;
 });
 
 

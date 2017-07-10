@@ -719,4 +719,23 @@ test("setOptions removes noData template", function() {
     equal(autocomplete.noData, null);
 });
 
+test("hide group header when no data loaded", function() {
+    var autocomplete = new AutoComplete(input, {
+        dataValueField: "name",
+        dataTextField: "name",
+        dataSource: {
+            data: [
+                { name: "item1", value: "1" },
+                { name: "item2", value: "2" },
+                { name: "item3", value: "3" }
+            ],
+            group: "name"
+        },
+        template: '#:data.name#'
+    });
+
+    autocomplete.search("test");
+    var groupHeader = autocomplete.list.find(".k-group-header");
+    equal(groupHeader.css("display"), "none");
+});
 }());

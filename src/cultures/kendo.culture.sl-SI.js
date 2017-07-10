@@ -1,4 +1,4 @@
-﻿(function( window, undefined ) {
+(function( window, undefined ) {
     kendo.cultures["sl-SI"] = {
         name: "sl-SI",
         numberFormat: {

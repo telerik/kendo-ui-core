@@ -1,22 +1,22 @@
 ---
-title: Upgrade Projects
-page_title: Upgrade Projects | UI for ASP.NET MVC Visual Studio Integration
-description: "Learn how to upgrade a Telerik UI for ASP.NET MVC application."
+title: Upgrading Projects
+page_title: Upgrading Projects | UI for ASP.NET MVC Visual Studio Integration
+description: "Learn how to upgrade a Progress&reg; Telerik&reg; UI for ASP.NET MVC application."
 slug: projectwizardupgrade_visualstudio_aspnetmvc
 position: 7
 ---
 
-# Upgrade Projects
+# Upgrading Projects
 
-This article demonstrates how to upgrade a Telerik UI for ASP.NET MVC application.
+This article demonstrates how to upgrade a Progress&reg; Telerik&reg; UI for ASP.NET MVC application.
 
 ## Getting Started
 
 ### The Basics
 
-The **Upgrade Project Wizard** upgrades existing Telerik UI for ASP.NET MVC applications.
+The Upgrade Project Wizard upgrades existing Progress&reg; Telerik&reg; UI for ASP.NET MVC applications.
 
-To open the **Upgrade Project Wizard**, click **Telerik** > **UI for ASP.NET MVC** > **Upgrade Wizard**.
+To open the wizard, click **Telerik** > **UI for ASP.NET MVC** > **Upgrade Wizard**.
 
 **Figure 1. Launch the Upgrade Wizard**
 
@@ -24,7 +24,7 @@ To open the **Upgrade Project Wizard**, click **Telerik** > **UI for ASP.NET MVC
 
 ### Files for Upgrade
 
-The **Information Page** of the **Upgrade Project Wizard** describes the files and assemblies that are going to be upgraded.
+The **Information Page** of the Upgrade Project Wizard describes the files and assemblies that are going to be upgraded.
 
 **Figure 2. Information page**
 
@@ -34,7 +34,7 @@ The **Information Page** of the **Upgrade Project Wizard** describes the files a
 
 On the next page, the Wizard lists all projects from the solution that use Telerik UI for ASP.NET MVC. This enables you to choose the projects that will be updated and the version to which they will be upgraded.
 
-It is recommended to upgrade all projects to the selected version.
+It is recommended to upgrade all projects to the selected version. The Compatibility button will invoke the [Upgrade API Analyzer tool](http://docs.telerik.com/aspnet-mvc/vs-integration/upgrade-api-analyzer):
 
 > **Important**
 >

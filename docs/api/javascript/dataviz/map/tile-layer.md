@@ -1,6 +1,7 @@
 ---
 title: TileLayer
 page_title: API reference for Kendo UI Map Layer
+res_type: api
 ---
 
 # kendo.dataviz.map.TileLayer : kendo.dataviz.map.Layer

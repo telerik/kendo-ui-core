@@ -7,7 +7,9 @@ slug: localization_toolbar_messages_spreadsheet_widget
 
 # List of toolbar Messages
 
-Below is the list of the messages and their namespaces under the `toolbar` category. These are used to [localize the Kendo UI Spreadsheet widget via JavaScript]({% slug localization_ofmessages_spreadsheet_widget %}).
+The following list provides the messages and their namespaces under the `toolbar` category.
+
+The `toolbar` messages are used to [localize the Spreadsheet through JavaScript]({% slug localization_ofmessages_spreadsheet_widget %}).
 
     if (kendo.spreadsheet && kendo.spreadsheet.messages.toolbar) {
         kendo.spreadsheet.messages.toolbar =
@@ -73,6 +75,7 @@ Below is the list of the messages and their namespaces under the `toolbar` categ
             "redo": "Redo",
             "undo": "Undo"
           },
+          "sort": "Sort",
           "sortAsc": "Sort ascending",
           "sortDesc": "Sort descending",
           "sortButtons": {

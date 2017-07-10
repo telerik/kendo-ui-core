@@ -1648,7 +1648,7 @@ function pad(number, digits, end) {
 
             percentage = percentWidth || percentHeight;
 
-            if (!percentWidth && (!autosize || (autosize && width))) { width = outerWidth(element); }
+            if (!percentWidth && (!autosize || (autosize && width))) { width = autosize ? outerWidth(element) + 1 : outerWidth(element); }
             if (!percentHeight && (!autosize || (autosize && height))) { height = outerHeight(element); }
 
             element.wrap(
@@ -1680,7 +1680,7 @@ function pad(number, digits, end) {
 
             if (!percentage) {
                 wrapper.css({
-                    width: outerWidth(element),
+                    width: autosize ? outerWidth(element) + 1 : outerWidth(element),
                     height: outerHeight(element),
                     boxSizing: "content-box",
                     mozBoxSizing: "content-box",
@@ -2256,7 +2256,8 @@ function pad(number, digits, end) {
         // IE10 touch zoom is living in a separate viewport
         if (support.browser.msie && (support.pointers || support.msPointers) && !positioned) {
             var sign = support.isRtl(element) ? 1 : -1;
-            result.top -= (window.pageYOffset + (sign * document.documentElement.scrollTop));
+
+            result.top -= (window.pageYOffset - (document.documentElement.scrollTop));
             result.left -= (window.pageXOffset + (sign * document.documentElement.scrollLeft));
         }
 
@@ -2834,7 +2835,7 @@ function pad(number, digits, end) {
 
     var templateRegExp = /template$/i,
         jsonRegExp = /^\s*(?:\{(?:.|\r\n|\n)*\}|\[(?:.|\r\n|\n)*\])\s*$/,
-        jsonFormatRegExp = /^\{(\d+)(:[^\}]+)?\}|^\[[A-Za-z_]*\]$/,
+        jsonFormatRegExp = /^\{(\d+)(:[^\}]+)?\}|^\[[A-Za-z_]+\]$/,
         dashRegExp = /([A-Z])/g;
 
     function parseOption(element, option) {
@@ -3830,7 +3831,7 @@ function pad(number, digits, end) {
             return 1 + Math.floor(days / 7);
         }
 
-        function weekInYear(date, weekStartDay){   
+        function weekInYear(date, weekStartDay){
             var prevWeekDate = addDays(date, -7);
             var nextWeekDate = addDays(date, 7);
 
@@ -3860,7 +3861,7 @@ function pad(number, digits, end) {
         }
 
         function getMilliseconds(date) {
-            return date.getTime() - getDate(date);
+            return toInvariantTime(date).getTime() - getDate(toInvariantTime(date));
         }
 
         function isInTimeRange(value, min, max) {
@@ -4137,7 +4138,8 @@ function pad(number, digits, end) {
             if (element.selectionStart !== undefined) {
                 if (isPosition) {
                     element.focus();
-                    if(support.mobileOS.wp) {// without the timeout the caret is at the end of the input
+                    var mobile = support.mobileOS;
+                    if(mobile.wp || mobile.android) {// without the timeout the caret is at the end of the input
                         setTimeout(function() { element.setSelectionRange(start, end); }, 0);
                     }
                     else {

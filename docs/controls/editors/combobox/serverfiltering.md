@@ -8,25 +8,21 @@ position: 4
 
 # Server Filtering
 
-The [Kendo UI AutoComplete](http://demos.telerik.com/kendo-ui/autocomplete/index), the [ComboBox](http://demos.telerik.com/kendo-ui/combobox/index), the [DropDownList](http://demos.telerik.com/kendo-ui/dropdownlist/index) and the [MultiSelect](http://demos.telerik.com/kendo-ui/multiselect/index) widgets support server filtering, which is useful for displaying only a data subset.
+The [Kendo UI AutoComplete](http://demos.telerik.com/kendo-ui/autocomplete/index), the [ComboBox](http://demos.telerik.com/kendo-ui/combobox/index), the [DropDownList](http://demos.telerik.com/kendo-ui/dropdownlist/index) and the [MultiSelect](http://demos.telerik.com/kendo-ui/multiselect/index) widgets support server filtering.
 
-Basically, the widget displays just the data returned from the server. Server filtering can be used to display a reduced portion of the whole dataset, which is convenient to apply when end users cannot or do not want to see the whole dataset in the popup element.
+You can use server filtering for displaying only a subset of data. Basically, the widget displays just the data returned from the server. You can use server filtering to display a subset of data, a reduced portion of the whole dataset. This functionality is convenient for you to apply when the end user cannot or does not want to see the whole dataset in the popup element.
 
 ## Configuration
 
-Server-filtering is based on the filtering capability of the DataSource component. That being said, you need to be familiar with the filtering configuration of the component. For more information, refer to the [DataSource `serverFiltering`](/api/javascript/data/datasource#configuration-serverFiltering) option.
+Server-filtering is based on the filtering capability of the DataSource component. You also need to be familiar with the filtering configuration of the component. For more information, refer to the DataSource [`serverFiltering`](/api/javascript/data/datasource#configuration-serverFiltering) option. Once you configure the DataSource to perform server filtering, you only need to additionally define the [`filter`](/api/javascript/ui/combobox#configuration-filter) property of the widget.
 
-Once you configure the DataSource to perform server filtering, the only widget option that needs to be defined additionally is the [`filter`](/api/javascript/ui/combobox#configuration-filter) one.
-
-For a detailed reference how to configure the server filtering functionality, refer to the [ComboBox server filtering demo](http://demos.telerik.com/kendo-ui/combobox/serverfiltering).
+For detailed information on how to configure the server filtering functionality, refer to the [ComboBox server filtering demo](http://demos.telerik.com/kendo-ui/combobox/serverfiltering).
 
 ## Advantages
 
-The server-filtering feature can be used to display only a subset of a dataset. This is quite useful when the dataset is large and contains thousands or more records. In such situations, define a minimum filter length by using the [`minLength`](/api/javascript/ui/combobox#configuration-minLength) option. For instance, if you set this option to `3`, the widget will not start filtering the dataset until at least 3 characters are entered.
+You can use the server-filtering feature to display only a subset of data. This is quite useful when the dataset is large and contains thousands or more records. In such situations, define a minimum filter length by using the [`minLength`](/api/javascript/ui/combobox#configuration-minLength) option. For instance, if you set this option to `3`, the widget will not start filtering the dataset until at least 3 characters are entered.
 
-Another benefit that server filtering brings about is the option to bind the widget to only one data item&mdash;the selected one. In this way, you avoid the need to retrieve the whole dataset when you want to display the selected value or text. This approach boosts the loading time of the widget.
-
-To apply the approach, send the selected value to the server and return only the matching data item. Use the  [`data`](/api/javascript/data/datasource#configuration-transport.read.data) callback of the DataSource.
+Another benefit you gain from server filtering is the option to bind the widget to only one data item&mdash;the selected one. In this way, you avoid the need to retrieve the whole dataset when you want to display the selected value or text. This approach boosts the loading time of the widget. To apply this approach, send the selected value to the server and return only the matching data item. Use the  [`data`](/api/javascript/data/datasource#configuration-transport.read.data) callback of the DataSource.
 
 ###### Example
 
@@ -41,7 +37,7 @@ To apply the approach, send the selected value to the server and return only the
 
 ## Known Limitations
 
-The server filtering feature (as its name indicates) only filters the source. To page (and filter) the data set, use the [Virtualization]({% slug virtualization_kendoui_combobox_widget %}) feature of the widget.
+The server filtering feature (as its name indicates) filters only the source. To page and filter the data set, use the [Virtualization]({% slug virtualization_kendoui_combobox_widget %}) feature of the ComboBox.
 
 ## See Also
 

@@ -162,7 +162,7 @@
 @button-focused-border-color: contrast(@base, lighten(@base, 1%), darken(@base, 14%), 0.5);
 @button-focused-shadow: inset 0 0 3px 1px @hover-border-color;
 @button-focused-active-shadow: inset 0 0 3px 1px darken(@selected-border-color, 10%);
-
+@input-validation-error: @error;
 /* Kendo skin */
 
 @theme-name: ~"default";
@@ -178,32 +178,8 @@
 }
 
 /* main colors */
-.k-icon {
-    color: @normal-text-color;
-    &:hover {
-        color: @hover-text-color;
-    }
-}
-
-.k-button .k-icon {
-    color: @button-text-color;
-    &:hover {
-        color: @button-text-color;
-    }
-}
-
-.k-tool-icon.k-icon {
-    color: @button-text-color;
-}
-
-.k-tool.k-state-hover,
-.k-tool.k-state-hover .k-icon,
-.k-tool.k-state-selected .k-icon {
+.k-tool.k-state-hover {
     color: @selected-text-color;
-}
-
-.k-widget.k-notification .k-icon {
-    color: inherit;
 }
 
 .k-splitbar .k-resize-handle {
@@ -460,6 +436,10 @@ html .km-pane-wrapper .k-header
     background-color: fade(@header-background-color, 85%);
 }
 
+.k-hr {
+    border-color: @widget-border-color;
+}
+
 /* icons */
 //Hover state
 .k-icon:hover,
@@ -700,7 +680,8 @@ html .km-pane-wrapper .k-header
 .k-state-disabled .k-button:hover,
 .k-button.k-state-disabled:hover,
 .k-state-disabled .k-button:active,
-.k-button.k-state-disabled:active
+.k-button.k-state-disabled:active,
+.k-listbox .k-button.k-state-disabled
 {
     color: @disabled-text-color;
     border-color: @disabled-border-color;
@@ -745,7 +726,8 @@ html .km-pane-wrapper .k-header
         color: @active-text-color;
     }
 
-    .k-state-hover > .k-link {
+    .k-state-hover > .k-link,
+    .k-menu-scroll-button:hover {
         color: @hover-text-color;
         background-color: @hover-background-color;
         border-color: @hover-border-color;
@@ -1006,7 +988,8 @@ td.k-state-focused.k-state-selected
 .k-pager-wrap .k-link:hover,
 .k-other-month.k-state-hover .k-link,
 div.k-filebrowser-dropzone em,
-.k-draghandle:hover
+.k-draghandle:hover,
+.k-listbox .k-item:hover:not(.k-state-disabled)
 {
     .composite-background(@hover-gradient);
 }
@@ -1137,6 +1120,9 @@ div.k-filebrowser-dropzone em
 .k-dropzone .k-upload-status
 {
     color: @disabled-text-color;
+}
+.k-file .k-upload-status {
+    color: @normal-text-color;
 }
 
 /* Progressbar */
@@ -1286,6 +1272,16 @@ div.k-filebrowser-dropzone em
 .k-file-error
 {
     color: @upload-error-text-color;
+
+    .k-file-extension-wrapper,
+    .k-multiple-files-extension-wrapper {
+        color: @upload-error-text-color;
+        border-color: @upload-error-text-color;
+
+        &:before {
+            border-color: transparent transparent @upload-error-text-color @upload-error-text-color;
+        }
+    }
 }
 
 .k-file-error .k-progress,
@@ -1341,6 +1337,10 @@ div.k-filebrowser-dropzone em
 .k-upload .k-upload-selected {
     color: contrast(@base, @widget-text-color, @accent, .9);
     border-color: @widget-border-color;
+}
+
+.k-upload-action:focus:active:not(.k-state-disabled):not([disabled]) {
+    box-shadow: @button-focused-shadow;
 }
 
 /* ImageBrowser */
@@ -1857,7 +1857,8 @@ div.k-filebrowser-dropzone em
 .k-list .k-state-selected,
 .k-fieldselector .k-list .k-item,
 .k-list-optionlabel,
-.k-dropzone
+.k-dropzone,
+.k-listbox .k-item
 {
     .guarded-border-radius(@list-border-radius);
 }
@@ -2054,7 +2055,9 @@ html .km-pane-wrapper .km-widget,
 
 input.k-textbox,
 textarea.k-textbox,
-.k-multiselect.k-header
+.k-multiselect.k-header,
+.k-maskedtextbox.k-state-disabled > .k-textbox:hover,
+.k-dateinput.k-state-disabled > .k-textbox:hover
 {
     border-color: @drop-down-border-color;
 }
@@ -2647,5 +2650,130 @@ textarea.k-textbox,
                 }
             }
         }
+    }
+}
+
+.k-numeric-wrap .k-i-warning {
+    color: @input-validation-error;
+    position: absolute;
+    top: 0;
+    right: 1.9em;
+    width: 1.9em;
+}
+
+.k-numeric-wrap.k-state-invalid {
+    border-color: @input-validation-error;
+
+    input {
+        color: @input-validation-error;
+    }
+}
+
+.k-rtl .k-numeric-wrap.k-state-invalid .k-i-warning {
+    right: auto;
+    left: 1.9em;
+}
+
+.k-maskedtextbox.k-state-invalid {
+    .k-textbox {
+        border-color: @input-validation-error;
+        color: @input-validation-error;
+    }
+
+    .k-i-warning {
+        color: @input-validation-error;
+    }
+}
+
+.k-dateinput.k-state-invalid {
+    .k-textbox {
+        color: @input-validation-error;
+        border-color: @input-validation-error;
+    }
+
+    .k-i-warning {
+        margin-left: 0;
+        margin-right: 0.6em;
+        color: @input-validation-error;
+    }
+}
+
+.k-rtl .k-dateinput .k-i-warning {
+    margin-right: 0;
+    margin-left: 0.6em;
+}
+
+.k-datepicker .k-picker-wrap,
+.k-timepicker .k-picker-wrap {
+    &.k-state-invalid {
+        border-color: @input-validation-error;
+
+        .k-input {
+            color: @input-validation-error;
+        }
+    }
+
+    .k-i-warning {
+        color: @input-validation-error;
+        margin-left:0;
+        margin-right: 2.1em;
+    }
+
+    .k-rtl & {
+        .k-i-warning {
+            margin-right: 0;
+            margin-left: 2.1em;
+        }
+    }
+}
+
+.k-datetimepicker .k-picker-wrap {
+    &.k-state-invalid {
+        border-color: @input-validation-error;
+
+        .k-input {
+            color: @input-validation-error;
+        }
+    }
+
+    .k-i-warning {
+        color: @input-validation-error;
+        margin-left:0;
+        margin-right: 4.3em;
+    }
+
+    .k-rtl & {
+        .k-icon.k-i-warning {
+            margin-right: 0;
+            margin-left: 4.3em;
+        }
+    }
+}
+
+.k-listbox {
+    .k-list-scroller {
+        padding: 2px;
+        border-color: @widget-border-color;
+        background-color: @input-background-color;
+    }
+
+    .k-item:hover:not(.k-state-disabled) {
+        color: @hover-text-color;
+        background-color: @hover-background-color;
+        border-color: transparent;
+    }
+
+    .k-drop-hint {
+        height: 0;
+        border-top: 1px solid @accent;
+    }
+}
+
+
+.k-grid-header {
+    .k-i-sort-asc-sm,
+    .k-i-sort-desc-sm,
+    .k-sort-order {
+        color: inherit;
     }
 }

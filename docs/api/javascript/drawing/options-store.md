@@ -1,6 +1,7 @@
 ---
 title: OptionsStore
 page_title: API reference for Kendo UI Drawing API Options Store
+res_type: api
 ---
 
 # kendo.drawing.OptionsStore : kendo.Class

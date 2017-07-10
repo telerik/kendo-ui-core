@@ -1,7 +1,7 @@
 ---
 title: Custom DataSource
-page_title: Custom DataSource | Telerik UI for ASP.NET MVC
-description: "Use the CustomDataSource builder available for the Telerik UI for ASP.NET MVC HtmlHelpers."
+page_title: Custom DataSource | Progress Telerik UI for ASP.NET MVC
+description: "Use the CustomDataSource builder available for the Progress Telerik UI for ASP.NET MVC HtmlHelpers."
 slug: customdatasource_aspnetmvc
 previous_url: /custom-datasource
 position: 5
@@ -9,7 +9,7 @@ position: 5
 
 # Custom DataSource
 
-This article provides information on how to use the CustomDataSource builder available for the Telerik UI for ASP.NET MVC HtmlHelpers that support DataSource.
+This article provides information on how to use the CustomDataSource builder available for the Progress Telerik UI for ASP.NET MVC HtmlHelpers that support DataSource.
 
 ## Getting Started
 
@@ -183,7 +183,7 @@ The following example demonstrates how to set the default value of the `Employee
 
 The following example demonstrates how to bind the Grid to the Kendo UI online demo service that serves `jsonp` data.
 
-To see the full demo, refer to the [introductory article on Telerik UI for ASP.NET MVC]({% slug overview_aspnetmvc %}#sample-application).
+To see the full demo, refer to the [introductory article on Progress Telerik UI for ASP.NET MVC]({% slug overview_aspnetmvc %}#sample-application).
 
 ###### Example
 
@@ -244,7 +244,7 @@ To see the full demo, refer to the [introductory article on Telerik UI for ASP.N
 
 The following example demonstrates how to bind the Grid to the oData service.
 
-To see the full demo, refer to the [introductory article on Telerik UI for ASP.NET MVC]({% slug overview_aspnetmvc %}#sample-application).
+To see the full demo, refer to the [introductory article on Progress Telerik UI for ASP.NET MVC]({% slug overview_aspnetmvc %}#sample-application).
 
 ###### Example
 
@@ -319,11 +319,11 @@ To see the full demo, refer to this [Grid how-to example]({% slug howto_useodata
 
 ## See Also
 
-* [Telerik UI for ASP.NET MVC Overview]({% slug overview_aspnetmvc %})
-* [Validation with Telerik UI for ASP.NET MVC]({% slug validation_aspnetmvc %})
-* [Globalization with Telerik UI for ASP.NET MVC]({% slug globalization_aspnetmvc %})
+* [Progress Telerik UI for ASP.NET MVC Overview]({% slug overview_aspnetmvc %})
+* [Validation with Progress Telerik UI for ASP.NET MVC]({% slug validation_aspnetmvc %})
+* [Globalization with Progress Telerik UI for ASP.NET MVC]({% slug globalization_aspnetmvc %})
 * [ASP.NET Core](http://docs.telerik.com/aspnet-core/introduction)
-* [Tutorials on Telerik UI for ASP.NET MVC]({% slug overview_timeefficiencyapp_aspnetmvc6 %})
-* [Telerik UI for ASP.NET MVC Fundamentals]({% slug fundamentals_aspnetmvc %})
-* [Scaffolding with Telerik UI for ASP.NET MVC]({% slug scaffolding_aspnetmvc %})
-* [Telerik UI for ASP.NET MVC Troubleshooting]({% slug troubleshooting_aspnetmvc %})
+* [Tutorials on Progress Telerik UI for ASP.NET MVC]({% slug overview_timeefficiencyapp_aspnetmvc6 %})
+* [Progress Telerik UI for ASP.NET MVC Fundamentals]({% slug fundamentals_aspnetmvc %})
+* [Scaffolding with Progress Telerik UI for ASP.NET MVC]({% slug scaffolding_aspnetmvc %})
+* [Progress Telerik UI for ASP.NET MVC Troubleshooting]({% slug troubleshooting_aspnetmvc %})

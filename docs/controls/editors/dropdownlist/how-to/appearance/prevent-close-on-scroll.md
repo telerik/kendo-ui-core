@@ -8,9 +8,9 @@ slug: howto_prevent_popup_closure_onscroll_dropdownlist
 
 # Prevent Popup Closure on Scroll
 
-Normally, when the popup item list is open and the user scrolls it to the end, the browser starts scrolling the page, which closes the drop-down list itself.
+Normally, when the popup item list is open and the user scrolls it to the end, the browser starts scrolling the page which closes the drop-down list itself.
 
-The DropDownList widget enables you to prevent this behavior and to make the popup remain open in such cases. The following example demonstrates how to achieve this behavior.
+The DropDownList enables you to prevent this behavior and to make the popup remain open in such cases. The following example demonstrates how to achieve this behavior.
 
 > **Important**  
 >
@@ -92,8 +92,6 @@ The DropDownList widget enables you to prevent this behavior and to make the pop
 
 ## See Also
 
-Other articles on the Kendo UI DropDownList:
-
 * [DropDownList JavaScript API Reference](/api/javascript/ui/dropdownlist)
 * [How to Automatically Adjust the Width of a DropDownList]({% slug howto_automatically_adjust_width_dropdownlist %})
 * [How to Create DropDownLists with Long Items]({% slug howto_create_listswith_long_items_dropdownlist %})
@@ -104,4 +102,4 @@ Other articles on the Kendo UI DropDownList:
 * [How to Update MVVM Bound Models on Load]({% slug howto_update_mvvm_model_onload_dropdownlist %})
 * [How to Validate DropDownLists by Using Required Attributes]({% slug howto_validate_using_required_attributes_dropdownlist %})
 
-For more runnable examples on the Kendo UI DropDownList, browse its [**How To** documentation folder]({% slug howto_cascade_withngrepeat_distinct_values_dropdownlist %}).
+For more runnable examples on the Kendo UI DropDownList, browse its [**How To** documentation folder]({% slug howto_bindobjectstongmodel_dropdownlist %}).

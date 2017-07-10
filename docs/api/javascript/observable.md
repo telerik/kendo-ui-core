@@ -1,5 +1,6 @@
 ---
 title: Observable
+res_type: api
 ---
 
 

@@ -50,7 +50,5 @@ The example below demonstrates how to apply border styles to the Kendo UI TreeMa
 
 ## See Also
 
-Other articles and how-to examples on Kendo UI TreeMap:
-
 * [TreeMap JavaScript API Reference](/api/javascript/dataviz/ui/treemap)
 * [How to Set Header Items Color]({% slug howto_setheaderitemscolor_treemap %})

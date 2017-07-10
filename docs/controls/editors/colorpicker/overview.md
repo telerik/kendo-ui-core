@@ -8,13 +8,15 @@ position: 1
 
 # ColorPicker Overview
 
-The [Kendo UI ColorPicker widget](http://demos.telerik.com/kendo-ui/colorpicker/index) is a drop-down widget for selecting colors. It is designed to replace the HTML5 `<input type="color">` tag, which is not widely supported in browsers.
+The [Kendo UI ColorPicker widget](http://demos.telerik.com/kendo-ui/colorpicker/index) is a drop-down widget for selecting colors.
+
+It is designed to replace the HTML5 `<input type="color">` tag which is not widely supported in browsers.
 
 ## Getting Started
 
 ### Initialize the ColorPicker
 
-Initialize the ColorPicker by using a jQuery ID selector:
+To initialize the ColorPicker, use a jQuery ID selector.
 
     <input type="color" id="myColorField" />
 
@@ -28,13 +30,15 @@ The original `input` element is kept in the DOM. The `value` attribute element g
 
 ## Configuration
 
-The default pop-up contains an HSV (hue, saturation, value) selector and looks like this:
+The default pop-up contains an HSV (Hue, Saturation, Value) selector (see **Figure 1**).
+
+**Figure 1: HSV picker**
 
 ![HSV picker](/controls/editors/colorpicker/hsv-dropdown.png)
 
 ### Simple Color Picker
 
-Create a simple color picker in the following way:
+To create a simple color picker, use the following example.
 
     <input type="color" id="myColorField" />
 
@@ -44,13 +48,15 @@ Create a simple color picker in the following way:
         });
     </script>
 
-This renders a basic ColorPicker that contains 20 colors:
+The example renders a basic ColorPicker that contains 20 colors.
+
+**Figure 2: Simple color picker with a basic pallette**
 
 ![Simple picker with basic palette](/controls/editors/colorpicker/simple-basic.png)
 
 ### Web-Safe Color Palette
 
-Create the Web-safe color palette in the following way:
+To create the Web-safe color palette, use the following example.
 
     <input type="color" id="myColorField" />
 
@@ -60,13 +66,15 @@ Create the Web-safe color palette in the following way:
         });
     </script>
 
-This renders the 216-color "web-safe" palette that looks like this:
+The example renders the 216-color "web-safe" palette (see **Figure 3**).
+
+**Figure 3: Simple color picker with a web-safe pallette**
 
 ![Simple picker with web-safe palette](/controls/editors/colorpicker/simple-web.png)
 
 ### Custom Colors
 
-Get the simple color picker to display a custom list of colors by passing them in the `palette` argument.
+To make the simple color picker display a custom list of colors, pass them in the `palette` argument.
 
 ###### Example
 
@@ -80,22 +88,22 @@ Get the simple color picker to display a custom list of colors by passing them i
         });
     </script>
 
-This shows only white, black and red. Use any color in either short (3 digits) or long (6 digits) hex notation. The `#` sign can be omitted.
+The example shows only white, black, and red. You can use any color in either short (3 digits) or long (6 digits) hex notation and omit the `#` sign.
 
 ### More Options
 
-For more options please see the [API page](/api/javascript/color).
+For more options, refer to the [API documentation](/api/javascript/color).
 
 ## See Also
 
-Other articles on Kendo UI ColorPicker:
+Other articles on the Kendo UI ColorPicker:
 
 * [Overview of the ASP.NET MVC HtmlHelper Extension for the ColorPicker Widget](http://docs.telerik.com/aspnet-mvc/helpers/colorpicker/overview)
 * [Overview of the ColorPicker JSP Tag]({% slug overview_colorpicker_uiforjsp %})
 * [Overview of the ColorPicker PHP Class](/php/widgets/colorpicker/overview)
 * [ColorPicker JavaScript API Reference](/api/javascript/ui/colorpicker)
 
-Articles on Kendo UI ColorPalette:
+Articles on the Kendo UI ColorPalette:
 
 * [Overview of the ASP.NET MVC HtmlHelper Extension for the ColorPalette Widget](http://docs.telerik.com/aspnet-mvc/helpers/colorpalette/overview)
 * [Overview of the ColorPalette JSP Tag]({% slug overview_colorpalette_uiforjsp %})

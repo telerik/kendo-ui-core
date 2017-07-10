@@ -1,14 +1,14 @@
 ---
 title: Use Draggable Elements with Multiselection Enabled
 page_title: Use Draggable Elements with Multiselection Enabled | Kendo UI Grid
-description: "Learn how to use draggable components in a Kendo UI Grid widget with enabled multiselection."
+description: "Learn how to use draggable components in a Kendo UI Grid widget with enabled multi-selection."
 previous_url: /controls/data-management/grid/how-to/draggable-elements-in-grid-with-multiple-selection
 slug: howto_use_draggable_elements_multiselection_enabled_grid
 ---
 
 # Use Draggable Elements with Multiselection Enabled
 
-The example below demonstrates how to use draggable components in a Kendo UI Grid when the multi-selection is enabled.
+The following example demonstrates how to use draggable components in a Grid when the multi-selection is enabled.
 
 ###### Example
 
@@ -72,9 +72,7 @@ The example below demonstrates how to use draggable components in a Kendo UI Gri
 
 ## See Also
 
-Other articles on the Kendo UI Grid and how-to examples:
-
-* [JavaScript API Reference](/api/javascript/ui/grid)
+* [JavaScript API Reference of the Grid](/api/javascript/ui/grid)
 * [How to Add Cascading DropDownList Editors]({% slug howto_add_cascading_dropdown_list_editors_grid %})
 * [How to Copy Data from Excel]({% slug howto_copy_datafrom_excel_grid %})
 * [How to Drag and Drop Rows between Grids]({% slug howto_dragand_drop_rows_between_twogrids_grid %})
@@ -88,4 +86,4 @@ Other articles on the Kendo UI Grid and how-to examples:
 * [How to Show Tooltip for Column Records]({% slug howto_show_tooltipfor_column_records_grid %})
 * [How to Update Toolbar Content Using MVVM Binding]({% slug howto_update_toolbar_content_using_mvvmbinding_grid %})
 
-For more runnable examples on the Kendo UI Grid, browse its [**How To** documentation folder]({% slug howto_create_custom_editors_grid %}).
+For more runnable examples on the Kendo UI Grid, browse its [**How To** documentation folder]({% slug howto_adjust_row_heights_template_locked_columns_grid %}).

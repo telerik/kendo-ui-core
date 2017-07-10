@@ -175,7 +175,7 @@ Virtual scrolling relies on a fake scrollbar. Its size is not determined by the 
 
 To ensure that all table rows have the same heights, use either of the options:
 * Disable text wrapping.  
-* Set an explicit row height that is large enough (as demonstrated in the example below).
+* Set an explicit row height that is large enough (as demonstrated in the following example).
 
 ###### Example
 
@@ -252,7 +252,7 @@ It is advisable to set a height to the Grid only if its scrolling is enabled.
 
 When the height of the Grid is set, it calculates the appropriate height of its scrollable data area, so that the sum of the header rows, filter row, data, footer, and pager is equal to the expected height of the widget. That is why if the height of the Grid is changed through JavaScript after you create the widget,  you need to call the [`resize` method of the Grid]({% slug responsivewebdesign_integration_kendoui %}) afterwards. In this way the Grid recalculates the height of its data area.
 
-**Figure 1. Grid with a fixed height and its scrolling functionality enabled**
+**Figure 1: Grid with a fixed height and its scrolling functionality enabled**
 
 ![Grid With Fixed Height And Scrolling](/controls/data-management/grid/grid3_1.png)
 
@@ -480,7 +480,7 @@ It is possible to get a table row in the Grid by the ID of the data item. To ach
 
 It is possible to manually add a table row with some user-friendly message when the dataSource does not return any data&mdash;for example, as a result of filtering.
 
-The example below demonstrates how to add a table row in the [`dataBound`](/api/javascript/ui/grid#events-dataBound) event handler of the Grid.
+The following example demonstrates how to add a table row in the [`dataBound`](/api/javascript/ui/grid#events-dataBound) event handler of the Grid.
 
 ###### Example
 

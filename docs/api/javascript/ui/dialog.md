@@ -2,6 +2,7 @@
 title: Dialog
 page_title: Configuration, methods and events of Kendo UI Dialog
 description: How to initialize a Dialog UI widget and configure its behaviors, center a dialog, set its content and toggle the state of the UI widget.
+res_type: api
 ---
 
 # kendo.ui.Dialog
@@ -71,7 +72,7 @@ The callback function to be called after pressing the action button.
 
 ### actions.primary `Boolean`
 
-A boolean property indicating whether the action button will be decorated as primary button or not. 
+A boolean property indicating whether the action button will be decorated as primary button or not.
 
 #### Example
 
@@ -322,6 +323,21 @@ The title of the close button.
     $("#dialog").kendoDialog({
       messages:{
         close: "Close Me!"
+      }
+    });
+    </script>
+
+### messages.promptInput `String` *(default: "Input")*
+
+The title of the prompt input.
+
+#### Example
+
+    <div id="dialog"></div>
+    <script>
+    $("#dialog").kendoDialog({
+      messages:{
+        promptInput: "Input!"
       }
     });
     </script>

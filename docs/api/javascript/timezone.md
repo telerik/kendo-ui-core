@@ -1,6 +1,7 @@
 ---
 title: timezone
 page_title: API reference for Kendo UI Timezone
+res_type: api
 ---
 
 # kendo.timezone

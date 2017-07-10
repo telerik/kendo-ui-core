@@ -8,7 +8,7 @@ slug: howto_restrict_user_input_autocomplete
 
 # Restrict User Input
 
-The following example demonstrates how to restrict user input in a Kendo UI AutoComplete widget.
+The following example demonstrates how to restrict the user input in the AutoComplete widget.
 
 #### Example:
 
@@ -134,10 +134,8 @@ The following example demonstrates how to restrict user input in a Kendo UI Auto
 
 ## See Also
 
-Other articles on the Kendo UI AutoComplete:
-
 * [AutoComplete JavaScript API Reference](/api/javascript/ui/autocomplete)
 * [How to Dynamically Change DataSource Based on User Selections]({% slug howto_change_datasource_dynamically_autocomplete %})
 * [How to Highlight Matched Values]({% slug howto_highlight_matched_values_autocomplete %})
 
-For more runnable examples on the Kendo UI AutoComplete, browse its [**How To** documentation folder]({% slug howto_use_custom_angularjs_templates_autocomplete %}).
+For more runnable examples on the Kendo UI AutoComplete, browse its [**How To** documentation folder]({% slug howto_bindobjectstongmodel_autocomplete %}).

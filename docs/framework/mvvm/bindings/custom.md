@@ -186,6 +186,62 @@ The following example demonstrates how to bind the max value of a Kendo UI Numer
     });
 ```
 
+#### Custom Widget Binding In TypeScript
+
+The example demonstrates how to use custom widget binding in TypeScript. It shows how to bind the max value of a Kendo UI NumericTextBox widget. As a result, the widget is updated when the View-Model changes.
+
+
+###### Example
+
+<input data-role="numerictextbox" id="numeric" data-bind="value: value, max: max" />​
+
+/// <reference path="jquery.d.ts" />
+/// <reference path="kendo.all.d.ts" />
+
+module kendo.data.binders.widget {
+
+    export class max extends kendo.data.Binder {
+        init(widget, bindings, options) {
+            //call the base constructor
+            kendo.data.Binder.fn.init.call(this, widget.element[0], bindings, options);
+        }
+
+        refresh() {
+            var that = this,
+            value = that.bindings["max"].get(); //get the value from the View-Model
+            that.element.max(value);
+        }
+    }
+}
+
+class NumericOptions extends kendo.data.ObservableObject {
+    value = 5;
+    max = 10;
+
+    constructor() {
+        super();
+
+        super.init(this);
+    }
+}
+
+class ViewModel extends kendo.data.ObservableObject {
+    person = new NumericOptions();
+
+    constructor() {
+        super();
+
+        super.init(this);
+    }
+}
+
+$(function () {
+    var viewModel = new NumericOptions();
+
+    kendo.bind(document.body, viewModel);
+
+});
+
 #### Breakdown of Code Elements
 
 * `init`&mdash;This is the binding constructor. If this function is overridden, the base `Binder` constructor should be called explicitly.

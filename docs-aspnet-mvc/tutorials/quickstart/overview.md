@@ -1,7 +1,7 @@
 ---
 title: Overview
 page_title: Overview | Team Efficiency Dashboard Tutorial
-description: "Start building the Team Efficiency Dashboard application by using Telerik UI for ASP.NET MVC."
+description: "Start building the Team Efficiency Dashboard application by using Progress Telerik UI for ASP.NET MVC."
 slug: overview_timeefficiencyapp_aspnetmvc6
 previous_url: /tutorials/tutorial-aspnetmvc-quick-start/chapter0
 position: 1
@@ -9,7 +9,7 @@ position: 1
 
 # Overview
 
-The tutorial on how to build the Team Efficiency Dashboard application by using Telerik UI for ASP.NET MVC is contributed by Developer Advocate Ed Charbeneau.
+The tutorial on how to build the Team Efficiency Dashboard application by using Progress Telerik UI for ASP.NET MVC is contributed by Developer Advocate Ed Charbeneau.
 
 ## Introduction
 
@@ -39,7 +39,7 @@ However, the UI for ASP.NET MVC wrappers provide additional capabilities for use
 ### Important Resources
 
 - [Documentation - UI for ASP.NET MVC]({% slug overview_aspnetmvc %})
-- [API References - UI for ASP.NET MVC](/api/Kendo.Mvc/AggregateFunction)
+- [API References - UI for ASP.NET MVC](http://docs.telerik.com/kendo-ui/api/Kendo.Mvc/AggregateFunction)
 - [Support](http://www.telerik.com/account/support-tickets/my-support-tickets.aspx)
 
 ## Next Steps

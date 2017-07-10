@@ -1,6 +1,7 @@
 ---
 title: Range
 page_title: Configuration, methods and events of Kendo UI Spreadsheet Range Instance object
+res_type: api
 ---
 
 # kendo.spreadsheet.Range
@@ -1124,7 +1125,7 @@ Un-merges any merged cells which are included in the range.
 
 ### values
 
-Sets the values of the range cells. The argument should be an array of arrays which match the dimensions of the range.
+Gets or sets the values of the range cells. The argument should be an array of arrays which match the dimensions of the range.
 
 > This method clears the formulas on every cell.
 
@@ -1133,6 +1134,10 @@ Sets the values of the range cells. The argument should be an array of arrays wh
 ##### values `Array`
 
 The cell values.
+
+#### Returns
+
+`Array` the cell values.
 
 #### Example
 

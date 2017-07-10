@@ -1,6 +1,7 @@
 ---
 title: PDFOptions
 page_title: API reference for methods and fields of the PDF generation options
+res_type: api
 ---
 
 # kendo.drawing.PDFOptions

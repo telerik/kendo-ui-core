@@ -16,7 +16,7 @@ To enable the editing support for the Grid, perform the steps described below.
 
 ### Configure the Data Source
 
-The example below demonstrates how to configure the dataSource for CRUD (Create, Read, Update, Destroy) data operations.
+The following example demonstrates how to configure the dataSource for CRUD (Create, Read, Update, Destroy) data operations.
 
 ###### Example
 
@@ -43,7 +43,7 @@ The example below demonstrates how to configure the dataSource for CRUD (Create,
 
 ### Define Fields through schema
 
-The example below demonstrates how to declare fields definitions through the DataSource [`schema.model `](/api/javascript/data/datasource#configuration-schema.model).
+The following example demonstrates how to declare fields definitions through the DataSource [`schema.model `](/api/javascript/data/datasource#configuration-schema.model).
 
 > **Important**  
 >
@@ -85,7 +85,7 @@ The example below demonstrates how to declare fields definitions through the Dat
 
 ### Set the editable Option
 
-The example below demonstrates the two alternatives to set the `editable` configuration option in the Grid.
+The following example demonstrates the two alternatives to set the `editable` configuration option in the Grid.
 
 ###### Example
 
@@ -143,6 +143,8 @@ To avoid this behavior, consider any of the following options:
 
 ## Custom Editors
 
+### MultiSelect
+
 When a Kendo UI MultiSelect is used as a custom editor in the Grid and the value of the MultiSelect is changed, the `save` event of the Grid is not triggered.
 
 The reason for this is that the value of the MultiSelect is a reference type (`array`), which prevents the normal usage of the `model.set()` function for setting the value of the corresponding model property.
@@ -150,6 +152,23 @@ The reason for this is that the value of the MultiSelect is a reference type (`a
 To work around this behavior, define a custom data-binding mechanism. After applying this fix, the `save` event of the Grid is properly triggered each time a new selection is added to the value of the MultiSelect.
 
 To see the runnable example on this issue, refer to the article on [using the MultiSelect as a custom editor in the Grid]({% slug howto_usemultiselectascustomeditor_grid %}).
+
+### CheckBox
+
+When using editing for a Boolean column the Grid will render a standard input type CheckBox element by default.
+
+The custom CheckBox editor will allow unifying the look of the Grid editors by applying additional styles to the CheckBox based on the used CSS theme.
+
+The following example demonstrates how to use Kendo UI styled CheckBox editor for Boolean columns.
+
+###### Example
+
+    function customBoolEditor(container, options) {
+        $('<input class="k-checkbox" type="checkbox" name="Discontinued" data-type="boolean" data-bind="checked:Discontinued">').appendTo(container);
+        $('<label class="k-checkbox-label">&#8203;</label>').appendTo(container);
+    }
+
+Also, a runnable example demonstrating this implementation can be found in our [demo](http://demos.telerik.com/kendo-ui/grid/editing)
 
 ## See Also
 

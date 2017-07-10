@@ -7,7 +7,7 @@ slug: howto_select_ranges_between_datepicker
 
 # Select Ranges between DatePickers
 
-The example below demonstrates how to implement a range selection between two Kendo UI DatePicker in an AngularJS environment.
+The following example demonstrates how to implement a range selection between two Kendo UI DatePickers in AngularJS projects.
 
 ###### Example
 
@@ -71,8 +71,6 @@ The example below demonstrates how to implement a range selection between two Ke
 ```
 
 ## See Also
-
-Other articles on the Kendo UI DatePicker:
 
 * [DatePicker JavaScript API Reference](/api/javascript/ui/datepicker)
 * [How to Set the First Weekday]({% slug howto_set_first_weekday_datepicker %})

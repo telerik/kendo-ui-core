@@ -1,5 +1,6 @@
 ---
 title: Polyline
+res_type: api
 ---
 
 # kendo.dataviz.diagram.Polyline

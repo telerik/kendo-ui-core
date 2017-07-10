@@ -7,7 +7,7 @@ slug: howto_zoomtopoint_diagram
 
 # Zoom to Predefined Points
 
-The example below demonstrates how to zoom the Diagram to a predefined point.
+The following example demonstrates how to zoom the Diagram to a predefined point.
 
 ###### Example
 

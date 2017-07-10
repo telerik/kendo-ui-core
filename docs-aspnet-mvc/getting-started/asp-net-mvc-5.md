@@ -1,7 +1,7 @@
 ---
 title: Creating Applications
-page_title: Creating Applications | Telerik UI for ASP.NET MVC
-description: "Use Telerik UI for ASP.NET MVC in ASP.NET MVC 5 applications."
+page_title: Creating Applications | Progress Telerik UI for ASP.NET MVC
+description: "Use Progress Telerik UI for ASP.NET MVC in ASP.NET MVC 5 applications."
 previous_url: /aspnetmvc-apps/asp-net-mvc-5, /asp-net-mvc-5
 slug: aspnetmvc5_aspnetmvc
 position: 14
@@ -9,13 +9,13 @@ position: 14
 
 # Creating Applications
 
-This article demonstrates how to use Telerik UI for ASP.NET MVC in ASP.NET MVC 5 applications.
+This article demonstrates how to use Progress Telerik UI for ASP.NET MVC in ASP.NET MVC 5 applications.
 
 It uses Visual Studio 2013 but the examples are applicable to all Visual Studio versions that support ASP.NET MVC 5. The examples create a new ASP.NET MVC 5 application but the steps to use Telerik UI for ASP.NET MVC in existing ASP.NET MVC 5 applications are the same.
 
 > **Important**
 >
-> The Telerik UI for ASP.NET MVC [Visual Studio extensions]({% slug overview_visualstudio_aspnetmvc %}) automate the whole procedure. This is the main topic of the current article.
+> The Progress Telerik UI for ASP.NET MVC [Visual Studio extensions]({% slug overview_visualstudio_aspnetmvc %}) automate the whole procedure. This is the main topic of the current article.
 
 ## Create New ASP.NET MVC 5 Applications
 
@@ -37,13 +37,13 @@ Below are listed the steps for you to follow when creating a new ASP.NET MVC 5 a
 
     ![New ASP.NET MVC 5 Application](/images/mvc5-new-app.png)
 
-## Add Telerik UI for ASP.NET MVC
+## Add Progress Telerik UI for ASP.NET MVC
 
-To use Telerik UI for ASP.NET MVC, include the required JavaScript and CSS files, reference the `Kendo.Mvc.dll` assembly and update the `web.config` file of the application.
+To use Progress Telerik UI for ASP.NET MVC, include the required JavaScript and CSS files, reference the `Kendo.Mvc.dll` assembly and update the `web.config` file of the application.
 
 ### Include JavaScript and CSS Files
 
-Telerik UI for ASP.NET MVC requires certain JavaScript and CSS files to be included in the page.
+Progress Telerik UI for ASP.NET MVC requires certain JavaScript and CSS files to be included in the page.
 
 There are two options:
 * Either include a local copy of those files
@@ -67,9 +67,9 @@ Below are listed the steps for you to follow when copying the required JavaScrip
 
     After the needed JavaScript and CSS files are added to the application, you can include them.
 
-1. Open `App_Start/BundleConfig.cs` to add bundles for Telerik UI for ASP.NET MVC.
+1. Open `App_Start/BundleConfig.cs` to add bundles for Progress Telerik UI for ASP.NET MVC.
 
-1. Add a script bundle for Telerik UI for ASP.NET MVC.
+1. Add a script bundle for Progress Telerik UI for ASP.NET MVC.
 
     ###### Example
 
@@ -78,11 +78,11 @@ Below are listed the steps for you to follow when copying the required JavaScrip
                         // "~/Scripts/kendo/kendo.timezones.min.js", // uncomment if using the Scheduler
                         "~/Scripts/kendo/kendo.aspnetmvc.min.js"));
 
-1. Add a style bundle for Telerik UI for ASP.NET MVC.
+1. Add a style bundle for Progress Telerik UI for ASP.NET MVC.
 
     > **Important**
     >
-    > Make sure you are familiar with the article on the Telerik UI for ASP.NET MVC [fundamentals and CSS bundling]({% slug fundamentals_aspnetmvc %}#css-bundling).
+    > Make sure you are familiar with the article on the Progress Telerik UI for ASP.NET MVC [fundamentals and CSS bundling]({% slug fundamentals_aspnetmvc %}#css-bundling).
 
     ###### Example
 
@@ -98,7 +98,7 @@ Below are listed the steps for you to follow when copying the required JavaScrip
 
 1. Open the layout of the application. By default, it is `Views/Shared/_Layout.cshtml`, or `Site.master` if using ASPX.
 
-1. Render the Telerik UI for ASP.NET MVC style bundle.
+1. Render the Progress Telerik UI for ASP.NET MVC style bundle.
 
     ###### Example
 
@@ -113,7 +113,7 @@ Below are listed the steps for you to follow when copying the required JavaScrip
 
 1. Move the jQuery bundle to the `head` tag of the page. It is at the end of the page by default.
 
-1. Render the Telerik UI for ASP.NET MVC script bundle after jQuery.
+1. Render the Progress Telerik UI for ASP.NET MVC script bundle after jQuery.
 
     ###### Example
 
@@ -130,7 +130,7 @@ Below are listed the steps for you to follow when copying the required JavaScrip
 
 #### Use CDN Services
 
-Below are listed the steps for you to follow when including the Telerik UI for ASP.NET MVC JavaScript and CSS files from CDN.
+Below are listed the steps for you to follow when including the Progress Telerik UI for ASP.NET MVC JavaScript and CSS files from CDN.
 
 > **Important**
 >
@@ -166,9 +166,9 @@ The next step is to add a reference to `Kendo.Mvc.dll` which is the assembly con
 
 1. Right-click the **References** node in Solution Explorer. Click **Add Reference**.
 
-1. Select the **Browse** tab of the **Add Reference** dialog. Navigate to the install location of Telerik UI for ASP.NET MVC.
+1. Select the **Browse** tab of the **Add Reference** dialog. Navigate to the install location of Progress Telerik UI for ASP.NET MVC.
 
-1. Navigate to `wrappers/aspnetmvc/Binaries/MVC5`. This directory contains the ASP.NET MVC 5 version of Telerik UI for ASP.NET MVC.
+1. Navigate to `wrappers/aspnetmvc/Binaries/MVC5`. This directory contains the ASP.NET MVC 5 version of Progress Telerik UI for ASP.NET MVC.
 
 1. Select `Kendo.Mvc.dll`. Click **OK**.
 
@@ -228,25 +228,25 @@ Below are listed the steps for you to follow when using a Kendo UI widget throug
 
 ## Next Steps
 
-* [Telerik UI for ASP.NET MVC Fundamentals]({% slug fundamentals_aspnetmvc %})
-* [Use the Telerik UI for ASP.NET MVC Visual Studio Extensions]({% slug overview_visualstudio_aspnetmvc %})
-* [Telerik UI for ASP.NET MVC Troubleshooting]({% slug troubleshooting_aspnetmvc %})
+* [Progress Telerik UI for ASP.NET MVC Fundamentals]({% slug fundamentals_aspnetmvc %})
+* [Use the Progress Telerik UI for ASP.NET MVC Visual Studio Extensions]({% slug overview_visualstudio_aspnetmvc %})
+* [Progress Telerik UI for ASP.NET MVC Troubleshooting]({% slug troubleshooting_aspnetmvc %})
 
 ## See Also
 
-* [Telerik UI for ASP.NET MVC Overview]({% slug overview_aspnetmvc %})
-* [Telerik UI for ASP.NET MVC Custom DataSource]({% slug customdatasource_aspnetmvc %})
-* [Validation with Telerik UI for ASP.NET MVC]({% slug validation_aspnetmvc %})
-* [Globalization with Telerik UI for ASP.NET MVC]({% slug globalization_aspnetmvc %})
-* [Localization with Telerik UI for ASP.NET MVC]({% slug localization_aspnetmvc %})
+* [Progress Telerik UI for ASP.NET MVC Overview]({% slug overview_aspnetmvc %})
+* [Progress Telerik UI for ASP.NET MVC Custom DataSource]({% slug customdatasource_aspnetmvc %})
+* [Validation with Progress Telerik UI for ASP.NET MVC]({% slug validation_aspnetmvc %})
+* [Globalization with Progress Telerik UI for ASP.NET MVC]({% slug globalization_aspnetmvc %})
+* [Localization with Progress Telerik UI for ASP.NET MVC]({% slug localization_aspnetmvc %})
 * [Visual Basic Syntax]({% slug visualbasic_aspnetmvc %})
-* [Telerik UI for ASP.NET MVC Wrappers vs Kendo UI Widgets]({% slug wrappersvswidgets_aspnetmvc %})
-* [Telerik UI for ASP.NET MVC Visual Studio Integration]({% slug overview_visualstudio_aspnetmvc %})
-* [Migration from Telerik Extensions]({% slug overview_migrationextensions_aspnetmvc %})
-* [Telerik UI for ASP.NET MVC HtmlHelpers]({% slug overview_autocompletehelper_aspnetmvc %})
+* [Progress Telerik UI for ASP.NET MVC Wrappers vs Kendo UI Widgets]({% slug wrappersvswidgets_aspnetmvc %})
+* [Progress Telerik UI for ASP.NET MVC Visual Studio Integration]({% slug overview_visualstudio_aspnetmvc %})
+* [Migration from Progress Telerik Extensions]({% slug overview_migrationextensions_aspnetmvc %})
+* [Progress Telerik UI for ASP.NET MVC HtmlHelpers]({% slug overview_autocompletehelper_aspnetmvc %})
 * [ASP.NET Core](http://docs.telerik.com/aspnet-core/introduction)
-* [Tutorials on Telerik UI for ASP.NET MVC]({% slug overview_timeefficiencyapp_aspnetmvc6 %})
-* [Telerik UI for ASP.NET MVC Fundamentals]({% slug fundamentals_aspnetmvc %})
-* [Telerik UI for ASP.NET MVC NuGet Packages]({% slug aspnetmvc_nuget %})
-* [Scaffolding with Telerik UI for ASP.NET MVC]({% slug scaffolding_aspnetmvc %})
-* [Telerik UI for ASP.NET MVC Troubleshooting]({% slug troubleshooting_aspnetmvc %})
+* [Tutorials on Progress Telerik UI for ASP.NET MVC]({% slug overview_timeefficiencyapp_aspnetmvc6 %})
+* [Progress Telerik UI for ASP.NET MVC Fundamentals]({% slug fundamentals_aspnetmvc %})
+* [Progress Telerik UI for ASP.NET MVC NuGet Packages]({% slug aspnetmvc_nuget %})
+* [Scaffolding with Progress Telerik UI for ASP.NET MVC]({% slug scaffolding_aspnetmvc %})
+* [Progress Telerik UI for ASP.NET MVC Troubleshooting]({% slug troubleshooting_aspnetmvc %})

@@ -2,6 +2,7 @@
 title: Upload
 page_title: Configuration, methods and events of Kendo UI Upload
 description: How to configure the ability to upload files in an asynchronous manner in Upload UI widget.
+res_type: api
 ---
 
 # kendo.ui.Upload
@@ -12,7 +13,7 @@ Represents the Kendo UI Upload. Inherits from [Widget](/api/javascript/ui/widget
 
 ### async `Object`
 
-Configures the ability to upload a file(s) in an asynchronous manner. Please refer to the
+Configures the ability to upload a files in an asynchronous manner. Please refer to the
 [async mode help topic](/web/upload/modes#asynchronous-mode)
 for more details.
 
@@ -62,6 +63,84 @@ Files selected one after the other will be uploaded in separate requests.
                 saveUrl: "http://my-app.localhost/save",
                 removeUrl: "http://my-app.localhost/remove",
                 batch: true
+            }
+        });
+    </script>
+
+### async.chunkSize `Number`
+
+When the property is set, the selected files are uploaded with the declared size chunk by chunk. Each request sends a separate file blob and additional string metadata to the server. This metadata is in a stringified JSON format and contains the `chunkIndex`, `contentType`, `totalFileSize`, `totalChunks`, `uploadUid` properties. These properties enable the validation and combination of the file on the server side. The response also returns a JSON object with the `uploaded` and `fileUid` properties, which notifies the client what is the next chunk.
+
+You can use this property only when [`async.batch`](#configuration-async.batch) is set to `false`.
+
+#### Example
+
+    <input type="file" name="files" id="photos" />
+    <script>
+        $("#photos").kendoUpload({
+            async: {
+                saveUrl: "http://my-app.localhost/save",
+                removeUrl: "http://my-app.localhost/remove",
+                chunkSize: 2000
+            }
+        });
+    </script>
+
+### async.concurrent `Boolean` *(default: false)*
+
+By default, the selected files are uploaded one after another. When set to `true`, all selected files start uploading simultaneously.
+
+This property is available when the [`async.chunkSize`](#configuration-async.chunkSize) is set.
+
+#### Example
+
+    <input type="file" name="files" id="photos" />
+    <script>
+        $("#photos").kendoUpload({
+            async: {
+                saveUrl: "http://my-app.localhost/save",
+                removeUrl: "http://my-app.localhost/remove",
+                chunkSize: 2000,
+                concurrent: true
+            }
+        });
+    </script>
+
+### async.autoRetryAfter `Number`
+
+If you set the property, the failed upload request is repeated after the declared amount of miliseconds.
+
+#### Example
+
+    <input type="file" name="files" id="photos" />
+    <script>
+        $("#photos").kendoUpload({
+            async: {
+                saveUrl: "http://my-app.localhost/save",
+                removeUrl: "http://my-app.localhost/remove",
+                chunkSize: 2000,
+                autoRetryAfter: 300
+            }
+        });
+    </script>
+
+### async.maxAutoRetries `Number`*(default: 1)*
+
+Sets the maximum number of attempts that are performed if an upload fails.
+
+The property is only used when the [`async.autoRetryAfter`](#configuration-async.autoRetryAfter) property is also defined.
+
+#### Example
+
+    <input type="file" name="files" id="photos" />
+    <script>
+        $("#photos").kendoUpload({
+            async: {
+                saveUrl: "http://my-app.localhost/save",
+                removeUrl: "http://my-app.localhost/remove",
+                chunkSize: 2000,
+                autoRetryAfter: 300,
+                maxAutoRetries: 4
             }
         });
     </script>
@@ -151,14 +230,81 @@ containing one or more fields with the same name as the original input name.
         });
     </script>
 
+### async.useArrayBuffer `Boolean` *(default: false)*
+
+By default, the files are uploaded as filedata. When set to `true`, the files are read as file buffer by using [`FileReader`](https://developer.mozilla.org/en-US/docs/Web/API/FileReader) and this buffer is send in the request body.
+
+ > The `FileReader` consumes the memory of the browser. As a result, if the user uploads a large file, then all the available memory of the client might be consumed and the upload will fail.
+
+#### Example
+
+    <input type="file" name="files" id="photos" />
+    <script>
+        $("#photos").kendoUpload({
+            async: {
+                saveUrl: "http://my-app.localhost/save",
+                removeUrl: "http://my-app.localhost/remove",
+                useArrayBuffer: true
+            }
+        });
+    </script>
+
 ### async.withCredentials `Boolean` *(default: true)*
 
 Controls whether to send credentials (cookies, headers) for cross-site requests.
 This option will be ignored if the browser doesn't support File API.
 
+### directory `Boolean` *(default: false)*
+
+Enables the selection of folders instead of files. When the user selects a directory, its entire content hierarchy of files is included in the set of selected items. The setting supported only in browsers that support [webkitdirectory](https://developer.mozilla.org/en-US/docs/Web/API/HTMLInputElement/webkitdirectory).
+
+> When set, the property allows you to select only folders for upload. Files are not selectable. In the browsers that do not support the feature, the behavior falls back to the default file selection.
+
+#### Example
+
+    <div>
+     	<input name="files" id="files" type="file" />
+     	<div class="dropZoneElement">Drag and drop file here</div>
+    </div>
+    <script>
+        $(document).ready(function() {
+            $("#files").kendoUpload({
+                async: {
+                    saveUrl: "http://my-app.localhost/save",
+                    removeUrl: "http://my-app.localhost/remove"
+                },
+                directory: true
+            });
+        });
+    </script
+
+### directoryDrop `Boolean` *(default: false)*
+
+Enables the dropping of folders over the Upload and its drop zone. When a directory is dropped, its entire content hierarchy of files is included in the set of selected items. This setting is supported only in browsers that support [DataTransferItem](https://developer.mozilla.org/en-US/docs/Web/API/DataTransferItem) and [webkitGetAsEntry](https://developer.mozilla.org/en-US/docs/Web/API/DataTransferItem/webkitGetAsEntry).
+
+> When set, the property allows you to drop only folders for upload. Files cannot be uploaded. In the browsers that do not support the feature, the behavior falls back to the default file drop.
+
+#### Example
+
+    <div>
+    	<input name="files" id="files" type="file" />
+    	<div class="dropZoneElement">Drag and drop file here</div>
+    </div>
+    <script>
+        $(document).ready(function() {
+            $("#files").kendoUpload({
+                async: {
+                    saveUrl: "http://my-app.localhost/save",
+                    removeUrl: "http://my-app.localhost/remove"
+                },
+                directoryDrop: true
+            });
+        });
+    </script
+
 ### dropZone `String`
 
-Initializes a dropzone element(s) based on a given selector that provides drag and drop file upload.
+Initializes a dropzone elements based on a given selector that provides drag and drop file upload.
 
 #### Example
 
@@ -202,7 +348,7 @@ List of files to be initially rendered in the Upload widget files list.
 *   size
 *   extension
 
-> **Important:** This option could be used only when the Upload widget is in [async mode](/web/upload/modes#asynchronous-mode). The files will be rendered as successfully uploaded.
+> This option could be used only when the Upload widget is in [async mode](/web/upload/modes#asynchronous-mode). The files will be rendered as successfully uploaded.
 
 #### Example - passing an array of initial files
 
@@ -365,6 +511,26 @@ Sets the text for invalid file extension validation message.
             },
             localization: {
                 invalidFileExtension: "customInvalidFileExtension"
+            }
+        });
+    </script>
+
+### localization.invalidFiles `String`
+
+Sets the text for the validation messages of invalid files when the `batch` property is `true` and when two or more files are not passing the validation.
+
+#### Example
+
+    <input type="file" name="files" id="photos" />
+    <script>
+        $("#photos").kendoUpload({
+            async: {
+                saveUrl: "http://my-app.localhost/save",
+                removeUrl: "http://my-app.localhost/remove"
+                batch:true
+            },
+            localization: {
+                invalidFiles: "customInvalidFiles"
             }
         });
     </script>
@@ -562,7 +728,7 @@ limit the total number of uploaded files in an asynchronous configuration.
 ### showFileList `Boolean`*(default: true)*
 
 Enables (**true**) or disables (**false**) the ability to display a file listing
-for uploading a file(s). Disabling a file listing may be useful you wish to customize the UI; use the
+for uploading a files. Disabling a file listing may be useful you wish to customize the UI; use the
 client-side events to build your own UI.
 
 #### Example
@@ -587,7 +753,7 @@ The [template](/api/javascript/kendo#methods-template) used to render the files 
 *   size - the file size in bytes / the total file size if batch upload is used (null if not available)
 *   files - array with information about all selected files - name, size and extension
 
-> **Important:** You should add the following markup to the template in order to render an action button for each file: `<button type='button' class='k-upload-action'></button>`.
+> You should add the following markup to the template in order to render an action button for each file: `<button type='button' class='k-upload-action'></button><button type='button' class='k-upload-action'></button>`.
 >To use the default progress-bar, you should add the following markup at the beginning of the template `<span class='k-progress'></span>` and render the rest of the template relative to it. Please check [Upload Templates](http://demos.telerik.com/kendo-ui/web/upload/templates.html) for a live demo.
 
 #### Example - specify template as a function
@@ -598,7 +764,10 @@ The [template](/api/javascript/kendo#methods-template) used to render the files 
             <p>Name: #=name#</p>
             <p>Size: #=size# bytes</p>
             <p>Extension: #=files[0].extension#</p>
-            <button type='button' class='k-upload-action' style='position: absolute; top: 0; right: 0;'></button>
+            <strong class='k-upload-status'>
+                <button type='button' class='k-upload-action'></button>
+                <button type='button' class='k-upload-action'></button>
+            </strong>
         </div>
     </script>
     <script>
@@ -614,7 +783,10 @@ The [template](/api/javascript/kendo#methods-template) used to render the files 
         $("#upload").kendoUpload({
         template: "<div><p>Name: #=name#</p>" +
                   "<p>Size: #=size# bytes</p><p>Extension: #=files[0].extension#</p>" +
-                  "<button type='button' class='k-upload-action' style='position: absolute; top: 0; right: 0;'></button>" +
+                  "<strong class='k-upload-status'>" +
+                  "<button type='button' class='k-upload-action'></button>" +
+                  "<button type='button' class='k-upload-action'></button>" +
+                  "</strong>" +
                   "</div>"
         });
     </script>
@@ -804,7 +976,7 @@ Removes a file by ID (only visually from the UI) without issuing requests to the
 
 Prepares the **Upload** for safe removal from DOM. Detaches all event handlers and removes jQuery.data attributes to avoid memory leaks. Calls destroy method of any child Kendo widgets.
 
-> **Important:** This method does not remove the Upload element from DOM.
+> This method does not remove the Upload element from DOM.
 
 #### Example
 
@@ -908,12 +1080,82 @@ Retrieves the files that are currently selected.
 
 `Array` a collection of all currently selected files.
 
+### pause
+
+Pauses the upload of the file that is uploaded in chunks.
+
+#### Example
+
+    <input name="files" id="files" type="file" />
+    <button id="pause" class="k-button">Pause</button>
+    <script>
+      $(document).ready(function() {
+        $("#files").kendoUpload({
+           async: {
+            chunkSize:1100,
+            autoUpload: false,
+            saveUrl: "http://my-app.localhost/save",
+            removeUrl: "http://my-app.localhost/remove"
+          }
+        });
+
+        $("#pause").on('click', function(e){
+          e.preventDefault();
+
+          var upload = $("#files").data("kendoUpload");
+          var fileEntry = upload.wrapper.find(".k-file").first();
+
+          upload.pause(fileEntry);
+        })
+      });
+    </script>
+
+#### Parameters
+
+##### li `jQuery`
+
+A jQuery object which represents the file to be paused.
+
+### resume
+
+Resumes the upload of a paused file that is uploaded in chunks.
+
+#### Example
+
+    <input name="files" id="files" type="file" />
+    <button id="resume" class="k-button">resume</button>
+    <script>
+      $(document).ready(function() {
+        $("#files").kendoUpload({
+           async: {
+            chunkSize:1100,
+            autoUpload: false,
+            saveUrl: "http://my-app.localhost/save",
+            removeUrl: "http://my-app.localhost/remove"
+          }
+        });
+
+        $("#pause").on('click', function(e){
+          e.preventDefault();
+
+          var upload = $("#files").data("kendoUpload");
+          var fileEntry = upload.wrapper.find(".k-file").first();
+
+          upload.resume(fileEntry);
+        })
+      });
+    </script>
+
+#### Parameters
+
+##### li `jQuery`
+
+A jQuery object which represents the file to be resumed.
+
 ### removeAllFiles
 
 Removes all files by sending a standard `remove` request to the handler.
 
-> **Important**
->
 > Invoking the `removeAllFiles` method will not trigger the `remove` event.
 
 #### Example
@@ -943,8 +1185,6 @@ Removes all files by sending a standard `remove` request to the handler.
 
 Removes all files for which the callback function returns `true` by sending a standard `remove` request to the handler.
 
-> **Important**
->
 > Invoking the `removeFile` method will not trigger the `remove` event.
 
 #### Example
@@ -987,8 +1227,6 @@ Removes all files for which the callback function returns `true` by sending a st
 
 Removes a file by ID by sending a standard `remove` request to the handler.
 
-> **Important**
->
 > Invoking the `removeFileByUid` method will not trigger the `remove` event.
 
 #### Example
@@ -1058,7 +1296,7 @@ Toggles the upload enabled state.
 Manually triggers the upload process.
 
 > * This method is only applicable when the `async.autoUpload` option is set to `false`.
-> * It is possible to trigger the manual upload of files by calling the `upload` method even if the Upload is disabled. In such scenarios, the Upload ignores its `enabled: false` configuration and the files are uploaded while the Upload remains inactive for the user to interact with it.  
+> * It is possible to trigger the manual upload of files by calling the `upload` method even if the Upload is disabled. In such scenarios, the Upload ignores its `enabled: false` configuration and the files are uploaded while the Upload remains inactive for the user to interact with it.
 
 #### Example
 
@@ -1079,7 +1317,7 @@ Manually triggers the upload process.
             autoUpload: false,
             saveUrl: "http://my-app.localhost/save",
             removeUrl: "http://my-app.localhost/remove"
-          }        
+          }
         });
 
         $("#uploadAll").on('click', function(e){
@@ -1245,16 +1483,41 @@ This is either the original XHR used for the operation or a stub containing:
 *   statusText
 Verify that this is an actual XHR before accessing any other fields.
 
+### pause
+
+Triggered when the files are cleared by clicking the **Pause** button. The button is visible if `chunksize` is set.
+
+#### Wire-up an event handler that triggered when a user clears selected files
+
+    <input type="file" name="files" id="photos" />
+    <script>
+        $("#photos").kendoUpload({
+            async: {
+                saveUrl: "http://my-app.localhost/save",
+                removeUrl: "http://my-app.localhost/remove",
+				autoUpload: false
+            },
+            pause: onPause
+        });
+
+        function onPause(e) {
+			// Optionally pause the clear operation by calling preventDefault method
+            e.preventDefault();
+        };
+    </script>
+
+#### Event Data
+
+##### e `Object`
+
+A custom event object. The event can be canceled in the same way as when using a standard jQuery event object through `e.preventDefault();`.
+
 ### progress
 
-Fires when upload progress data is available.
+Fires when the data about the progress of the upload is available.
 
-
-Note: The progress event fires only when the upload is in
-[async mode](/web/upload/modes#asynchronous-mode).
-
-Note: The progress event is not fired in IE.
-See [Supported Browsers](/web/upload/supported-browsers)
+> * The `progress` event fires only when the upload is in [async mode](/web/upload/modes#asynchronous-mode).
+> * The `progress` event is not fired in IE. For more information, refer to the article on [supported browsers](/web/upload/supported-browsers).
 
 #### Example
 
@@ -1280,23 +1543,46 @@ See [Supported Browsers](/web/upload/supported-browsers)
 
 ##### e.files `Array`
 
-List of the files that are being uploaded. Each file has:
+Lists the files that are being uploaded.
 
-
-*   name
-*   extension - the file extension
-        including the leading dot - ".jpg", ".png", etc.
-*   size - the file size in bytes (null if not available)
-*   uid - the unique identifier of the file or batch of files
+Each file has:
+* name
+* extension - the file extension including the leading dot - `.jpg`, `.png`, and so on.
+* size - the file size in bytes (null if not available)
+* uid - the unique identifier of the file or batch of files
 
 ##### percentComplete `Number`
 
-Upload progress (0 - 100)
+Defines the progress of the upload (0 - 100).
+
+### resume
+
+Fires when the files are resumed through clicking the **Resume** button. The button is visible if `chunksize` is set and the file upload is paused.
+
+The following example demonstrates how to wire up an event handler that is triggered when a user resumes a selected file.
+
+#### Example
+
+    <input type="file" name="files" id="photos" />
+    <script>
+        $("#photos").kendoUpload({
+            async: {
+                saveUrl: "http://my-app.localhost/save",
+                removeUrl: "http://my-app.localhost/remove",
+				autoUpload: false
+            },
+            resume: onResume
+        });
+
+        function onResume(e) {
+			// Optionally resume the clear operation by calling preventDefault method
+            e.preventDefault();
+        };
+    </script>
 
 ### remove
 
-Fires when an uploaded file is about to be removed.
-Cancelling the event will prevent the remove.
+Fires when an uploaded file is about to be removed. If the event is canceled, the remove operation is prevented.
 
 #### Example
 
@@ -1324,8 +1610,7 @@ Cancelling the event will prevent the remove.
 
 ##### e.files `Array`
 
-List of the files that were uploaded or removed . Each file has:
-
+Lists the files that were uploaded or removed. Each file has:
 
 *   name
 *   extension - the file extension
@@ -1333,17 +1618,20 @@ List of the files that were uploaded or removed . Each file has:
 *   size - the file size in bytes (null if not available)
 *   uid - the unique identifier of the file or batch of files
 
+##### e.headers `Object`
+
+Additional headers that will be added to the remove request
+
 ##### data `Object`
 
-Optional object that will be
-sent to the remove handler in the form of key/value pairs.
+Optional object that is sent to the remove handler in the form of key/value pairs.
 
 ### select
 
-Triggered when a file(s) is selected. Note: Cancelling this event will prevent the selection from
+Triggered when a files is selected. Note: Cancelling this event will prevent the selection from
 occurring.
 
-#### Wire-up an event handler that triggered when a user selects a file(s)
+#### Wire-up an event handler that triggered when a user selects a files
 
     <input type="file" name="files" id="photos" />
     <script>
@@ -1374,17 +1662,16 @@ A custom event object. The event can be cancelled just like when using a standar
 
 An array of the selected files. Each item of the array is an object with the following properties:
 
-*   name - the name of a selected file, including its extension
-*   extension - the file extension of a selected file, including the leading dot (i.e. ".jpg")
-*   size - the size (in bytes) of a selected file (null, if unavailable)
-*   rawFile - an in-memory representation of a selected file
-*   uid - the unique identifier of the file or batch of files
+* name - the name of a selected file, including its extension
+* extension - the file extension of a selected file, including the leading dot (i.e. ".jpg")
+* size - the size (in bytes) of a selected file (null, if unavailable)
+* rawFile - an in-memory representation of a selected file
+* uid - the unique identifier of the file or batch of files
 
 ### success
 
 Fires when an upload / remove operation has been completed successfully.
 
-> **Important**
 > * The success event fires only when the upload is in [async mode](/web/upload/modes#asynchronous-mode).
 > * It is possible to cancel the event. As a result, the file will be displayed as unsuccessfully uploaded.
 

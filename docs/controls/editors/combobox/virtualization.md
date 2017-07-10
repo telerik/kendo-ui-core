@@ -8,17 +8,17 @@ position: 3
 
 # Virtualization
 
-The [Kendo UI AutoComplete](http://demos.telerik.com/kendo-ui/autocomplete/index), the [ComboBox](http://demos.telerik.com/kendo-ui/combobox/index), the [DropDownList](http://demos.telerik.com/kendo-ui/dropdownlist/index) and the [MultiSelect](http://demos.telerik.com/kendo-ui/multiselect/index) widgets support UI and data virtualization, which is useful for displaying large data sets.
+The [Kendo UI AutoComplete](http://demos.telerik.com/kendo-ui/autocomplete/index), the [ComboBox](http://demos.telerik.com/kendo-ui/combobox/index), the [DropDownList](http://demos.telerik.com/kendo-ui/dropdownlist/index) and the [MultiSelect](http://demos.telerik.com/kendo-ui/multiselect/index) widgets support UI and data virtualization.
 
-The UI virtualization technique uses a fixed amount of list items in the pop-up list of the widget regardless of the data set size. When the list is scrolled, the widget reuses the existing items to display the relevant data instead of creating new ones.
+Virtualization is useful for displaying large data sets. The UI virtualization technique uses a fixed amount of list items in the pop-up list of the widget regardless of the dataset size. When the list is scrolled, the widget reuses the existing items to display the relevant data instead of creating new ones.
 
 ## Data and UI Virtualization
 
-To be able to retrieve and display only a subset of the whole data set, the virtualization feature combines data and User Interface (UI) virtualization.
+To retrieve and display only a subset of the whole dataset, the virtualization feature combines data and User Interface (UI) virtualization.
 
 ### Data
 
-In the context of the widget, data virtualization is accomplished by using the `DataSource` paging functionality and remote data retrieval. In this way, the widget retrieves only a specified data page instead of requesting the whole data set at once. You must configure the `DataSource` paging correctly to ensure the proper functioning of the widgets. For more information, see the [server paging](/api/javascript/data/datasource#configuration-serverPaging) configuration.
+In the context of the widget, data virtualization is accomplished by using the `DataSource` paging functionality and remote data retrieval. In this way, the widget retrieves only a specified data page instead of requesting the whole dataset at once. To ensure the proper functioning of the widgets, you need to configure the `DataSource` paging correctly. For more information, see the [server paging](/api/javascript/data/datasource#configuration-serverPaging) configuration.
 
 ### UI
 
@@ -26,7 +26,7 @@ The widget uses a specific strategy of reusing a list of DOM elements for displa
 
 ### Data and UI Combined
 
-To ensure the correct work of the widget, the DataSource `pageSize` value is calculated automatically based on the (([`height`](/api/javascript/ui/combobox#configuration-height) / [`itemHeight`](#itemheight)) * 4) formula. The calculation is done by the widget itself and the defined `pageSize` value is overridden if it does not match the calculated one.
+To ensure the correct work of the widget, the DataSource `pageSize` value is calculated automatically based on the (([`height`](/api/javascript/ui/combobox#configuration-height) / [`itemHeight`](#itemheight)) * 4) formula. The ComboBox iteself does the calculation and the defined `pageSize` value is overridden if it does not match the calculated one.
 
 > **Important**  
 >
@@ -105,7 +105,7 @@ The virtualized list container must have a `height` option set in pixels. If you
 
 ### Set Page Size
 
-The virtualized widget calculates the `pageSize` value automatically based on the (([`height`](/api/javascript/ui/combobox#configuration-height) / [`itemHeight`](#itemheight)) * 4) formula and overrides the custom `pageSize` value. This is done to ensure the proper work of the virtualized list.
+To ensure the proper work of the virtualized list, the widget calculates the `pageSize` value automatically based on the (([`height`](/api/javascript/ui/combobox#configuration-height) / [`itemHeight`](#itemheight)) * 4) formula and overrides the custom `pageSize` value.
 
 Consider the following scenario about a widget:
 - The `height` is `520px`
@@ -171,9 +171,7 @@ If you implement the `mapValueTo: "dataItem"` configuration, the `valueMapper` i
 
 The `mapValueTo: "index"` configuration is set by default. The `valueMapper` is called when you want to select a data item that is not present in the data source.
 
-The exemplary case below demonstrates the process.
-
-The widget is configured as follows:
+To see the process in action, use the sample case with the following widget configuration:
 - The `pageSize` is set to `50`.
 - The selected value is `foo`.
 
@@ -188,13 +186,15 @@ On initial load, the widget checks whether the selected value is present in the 
 7. The `service 2` returns the corresponding 25th page.
 8. The `dataSource` changes the page to `25` and displays the items showing the selected item too.
 
+**Figure 1: The virtualization process**
+
 ![Virtualization process](/controls/editors/combobox/mapValueTo-index.png)
 
 **Function result**
 
 The `valueMapper` is expected to return a row index or a list of indices when a multiple selection is available. That being said, the service is expected to return either an index (number) or a list of indices. If the value does not exist, the `valueMapper` returns `null`, `[]`, or `-1`, and the widget deselects the currently selected items.
 
-For an example, look into the result of [the test service](https://demos.telerik.com/kendo-ui/combobox/virtualization) used in the online demos.
+For an example, look into the result of [the test service](https://demos.telerik.com/kendo-ui/combobox/virtualization) that is used in the online demos.
 
 ###### Example
 
@@ -211,7 +211,7 @@ $.ajax({
 })
 ```
 
-The Ajax method calls URLs like so:
+The Ajax method calls URLs similar to:
 
     http://demos.telerik.com/kendo-ui/service/Orders/ValueMapper?values[0]=10661
 
@@ -221,15 +221,13 @@ The result is:
 
 **Function implementation**
 
-As mentioned in the previous section, the service maps the selected value to a particular row index. The implementation of this functionality is completely under your control. However, the most simplified implementation includes the iteration of all items counting the index of the rows. A more optimized solution still is to use a dedicated SQL method that handles this action internally. You can do this by using the [`ROW_NUMBER()`](https://msdn.microsoft.com/en-us/library/ms186734.aspx) function.
+The service maps the selected value to a particular row index. The implementation of this functionality is completely under your control. However, the most simplified implementation includes the iteration of all items counting the index of the rows. A more optimized solution still is to use a dedicated SQL method that handles this action internally. You can do this by using the [`ROW_NUMBER()`](https://msdn.microsoft.com/en-us/library/ms186734.aspx) function.
 
 #### Map Values to dataItem
 
 The `mapValueTo: "dataItem"` configuration is available as of the Kendo UI R3 2016. The `valueMapper` is called when you want to select a data item that is not present in the data source.
 
-The exemplary case below demonstrates the process.
-
-The widget is configured as follows:
+To see the process in action, use the sample case with the following widget configuration:
 - The `pageSize` is set to `50`.
 - The selected value is `foo`.
 

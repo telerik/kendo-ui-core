@@ -31,6 +31,108 @@ The following example demonstrates how to add a font icon to a Kendo UI Button.
     </a>
 ```
 
+## What Are Icon Fonts
+
+Icon fonts are fonts which contain vector glyphs instead of letters and numbers. You can easily style them with CSS by using all styling properties that can be applied to a regular text in a modern browser.
+
+## Why Use Icon Fonts
+
+The utilization of icon fonts in a user interface (UI) naturally succeeds the somehow outdated [icon sprite technique](https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_Images/Implementing_image_sprites_in_CSS).
+
+Font icons demonstrate significant benefits such as:
+
+* [Improved scalability](#sizes)&mdash;While icon sprites are bitmap raster images and do not scale well, icon fonts use vector graphics, look perfect on retina displays, and make scaling as easy as setting the `font-size` configuration option.
+* [Improved design capabilities](http://docs.telerik.com/kendo-ui/styles-and-layout/appearance-styling#getting-started)&mdash;You can easily apply CSS effects on the fly by setting the [text color](#colors), shadow, or other options for different interaction states. For example, on `:hover`.
+* Improved browser support&mdash;Font icons are browser-agnostic and are supported by all modern browsers.
+* Reduced number of HTTP requests&mdash;To load an icon font, you need a maximum of a few HTTP requests.
+* Reduced file size&mdash;A 100KB file contains approximately 500 vector icons.
+
+## Basic Usage
+
+To use the Kendo UI font icons:
+
+ 1. [Load]({% slug themesandappearnce_kendoui_desktopwidgets %}) a Kendo UI theme into your project.
+ 2. Assign a `k-icon` CSS class followed by a predefined class from the [list of font icons](#list-of-font-icons) to an HTML tag. For example, the `<span>` element as demonstrated in the following example.
+
+```html
+ <span class="k-icon k-i-calendar"></span>
+```
+
+## Rendering with Unicode Numbers
+
+Though the web icon font comes with a [set of predefined CSS classes](#toc-list-of-font-icons), you might need to use the icons with a custom CSS class name. To achieve this, set a `:before` pseudo content value for the relevant icon.
+
+```html
+<span class="k-icon my-custom-icon-class"></span>
+
+<style>
+    .my-custom-icon-class:before {
+        content: "\e13a"; /* Adds a glyph using the Unicode character number */
+    }
+ </style>
+ ```
+
+## Visual Adjustments
+
+Icon fonts support the following options for visual enhancement:
+
+* Application of [different sizes](#sizes).
+* Application of [icon colors](#colors).
+* [Flipping](#flipping) of icons.
+
+### Sizes
+
+The Kendo UI font icons are designed on a 16px grid base. To achieve a pixel-perfect icon display, scale up by maintaining the 16-unit measure (32, 48, 64, and so on).
+
+You can scale icons by just setting the `font-size` configuration option.  
+
+```html
+<span class="k-icon k-i-gear"></span>
+<span class="k-icon k-i-gear k-icon-32"></span>
+<span class="k-icon k-i-gear k-icon-48"></span>
+<span class="k-icon k-i-gear k-icon-64"></span>
+
+<style>
+    .k-icon-32 {
+        font-size: 32px; /* Sets icon size to 32px */
+    }
+
+    .k-icon-48 {
+        font-size: 48px; /* Sets icon size to 48px */
+    }
+
+    .k-icon-64 {
+        font-size: 64px; /* Sets icon size to 64px */
+    }
+ </style>
+ ```
+
+### Colors
+
+To set the icon color, use the `color` CSS property.
+
+```html
+<span class="k-icon k-i-gear" style="color: blue;"></span>
+<span class="k-icon k-i-gear colored-icon"></span>
+
+<style>
+    .colored-icon {
+        color: green;
+    }
+</style>
+```
+
+### Flipping
+
+To better accommodate an icon in your application, flip it by using the `k-flip-h` and `k-flip-v` predefined CSS classes.
+
+```html
+<span class="k-icon k-i-pencil"></span>
+<span class="k-icon k-i-pencil k-flip-h"></span>
+<span class="k-icon k-i-pencil k-flip-v"></span>
+<span class="k-icon k-i-pencil k-flip-h k-flip-v"></span>
+```
+
 ## List of Font Icons
 
 The font icons are sorted in groups, depending on the function they help you to illustrate.
@@ -538,6 +640,15 @@ fonts in fonts/
     <li><span class="k-icon k-i-radiobutton-checked"></span> .k-i-radiobutton-checked</li>
 </ul>
 
+<script>
+$(".k-icon").each(function() {
+    function iconGlyph(el) {
+        return window.getComputedStyle(el,':before').content.charCodeAt(1).toString(16);
+     }
+     $(this.parentNode).append("<br />Unicode: " + iconGlyph(this) + "")
+});
+</script>
+
 ## See Also
 
 Other articles on styling, appearance, and rendering of Kendo UI widgets:
@@ -545,7 +656,8 @@ Other articles on styling, appearance, and rendering of Kendo UI widgets:
 * [Themes and Appearance of the Kendo UI Widgets]({% slug themesandappearnce_kendoui_desktopwidgets %})
 * [Responsive Web Design]({% slug responsivewebdesign_integration_kendoui %})
 * [How to Change Themes on the Client]({% slug howto_changethemes_ontheclient_styleskendoui %})
-* [ThemeBuilder Overview]({% slug themebuilder_overview_kendouistyling %})
+* [Sass ThemeBuilder Overview]({% slug sassbasedthemes_kendoui %}#sass-theme-builder)
+* [Less ThemeBuilder Overview]({% slug themesandappearnce_kendoui_desktopwidgets %}#less-theme-builder)
 * [Rendering Modes for Data Visualization]({% slug renderingmodesfor_datavisualization_kendouistyling %})
 * [Troubleshooting]({% slug commonissues_troubleshooting_kendouistyling %})
-* [Themes and Appearance of the Kendo UI Hybrid Widgets](/controls/hybrid/styling)
+* [Themes and Appearance of the Kendo UI Hybrid Widgets]({% slug forms_hybridkendoui %})

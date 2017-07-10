@@ -51,6 +51,7 @@ var __meta__ = { // jshint ignore:line
         TABONTOP = "k-tab-on-top",
         NAVIGATABLEITEMS = ".k-item:not(." + DISABLEDSTATE + ")",
         HOVERABLEITEMS = ".k-tabstrip-items > " + NAVIGATABLEITEMS + ":not(." + ACTIVESTATE + ")",
+        DEFAULTDISTANCE = 200,
 
         templates = {
             content: template(
@@ -339,6 +340,7 @@ var __meta__ = { // jshint ignore:line
                 key = e.keyCode,
                 current = that._current(),
                 rtl = that._isRtl,
+                isHorizontal = /top|bottom/.test(that.options.tabPosition),
                 action;
 
             if (e.target != e.currentTarget) {
@@ -346,9 +348,9 @@ var __meta__ = { // jshint ignore:line
             }
 
             if (key == keys.DOWN || key == keys.RIGHT) {
-                action = rtl ? PREV : "next";
+                action = rtl && isHorizontal ? PREV : "next";
             } else if (key == keys.UP || key == keys.LEFT) {
-                action = rtl ? "next" : PREV;
+                action = rtl && isHorizontal ? "next" : PREV;
             } else if (key == keys.ENTER || key == keys.SPACEBAR) {
                 that._click(current);
                 e.preventDefault();
@@ -549,7 +551,7 @@ var __meta__ = { // jshint ignore:line
             navigatable: true,
             contentUrls: false,
             scrollable: {
-                distance: 200
+                distance: DEFAULTDISTANCE
             }
         },
 
@@ -1104,6 +1106,11 @@ var __meta__ = { // jshint ignore:line
 
         _scrollableAllowed: function() {
             var options = this.options;
+
+            if(options.scrollable && !options.scrollable.distance){
+                options.scrollable = {distance: DEFAULTDISTANCE};
+            }
+
             return options.scrollable && !isNaN(options.scrollable.distance) && (options.tabPosition == "top" || options.tabPosition == "bottom");
         },
 
@@ -1142,7 +1149,7 @@ var __meta__ = { // jshint ignore:line
             var scrLeft = tabGroup.scrollLeft();
 
             tabGroup.finish().animate({ "scrollLeft": scrLeft + delta }, "fast", "linear", function () {
-                if (that._nowScrollingTabs) {
+                if (that._nowScrollingTabs && !jQuery.fx.off) {
                     that._scrollTabsByDelta(delta);
                 } else {
                     that._toggleScrollButtons();
@@ -1293,6 +1300,17 @@ var __meta__ = { // jshint ignore:line
                                 kendo.resize(contentHolder);
 
                                 that.scrollWrap.css("height", "").css("height");
+
+                                // Force IE and Edge rendering to fix visual glitches telerik/kendo-ui-core#2777.
+                                if (kendo.support.browser.msie || kendo.support.browser.edge) {
+                                    contentHolder.finish().animate({
+                                        opacity: 0.9
+                                    },"fast", "linear", function(){
+                                        contentHolder.finish().animate({
+                                            opacity: 1
+                                        },"fast", "linear");
+                                    });
+                                }
                             }
                         } ) );
                 },

@@ -2,6 +2,7 @@
 title: Grid
 page_title: Configuration, methods and events of Kendo UI Grid
 description: Code examples for Grid UI widget configuration. Learn how to use methods and which events to set once the grid UI widget detail is initialized and expanded.
+res_type: api
 ---
 
 # kendo.ui.Grid
@@ -504,7 +505,7 @@ The JavaScript function executed when the cell/row is about to be opened for edi
     $("#grid").kendoGrid({
       columns: [
         { field: "name" },
-        { 
+        {
           field: "salary",
 		      editable: function (dataItem) {
               return dataItem.name === "Jane";
@@ -1596,6 +1597,28 @@ so the two should not be used at the same time.
           { id: 1, name: "Jane Doe", age: 31, city: "Boston" },
           { id: 2, name: "John Doe", age: 55, city: "New York" }
       ]
+    });
+    </script>
+
+### columns.selectable `Boolean` *(default: false)*
+
+If set to `true` the grid will render a select column with checkboxes in each cell, thus enabling multi-row selection. The header checkbox allows users to select/deselect all the rows on the current page.
+
+> **Note:** The checkbox column selection functionality has two limitations:
+> * It is not integrated with the keyboard navigation
+> * It is not integrated with the currently existing select functionality of the grid which is enabled via the [selectable option](#configuration-selectable).
+> They are mutually exclusive and we recommend using only one of the approaches for enabling selection.
+
+#### Example - disable sorting
+
+    <div id="grid"></div>
+    <script>
+    $("#grid").kendoGrid({
+      columns: [
+        { selectable: true },
+        { field: "name" }
+      ],
+      dataSource: [ { name: "Jane Doe" }, { name: "John Doe" } ]
     });
     </script>
 
@@ -4903,6 +4926,35 @@ Defines the text of the "noRecords" option that is rendered when no records are 
     });
     </script>
 
+### messages.expandCollapseColumnHeader `String` *(default: "")*
+
+Allows the customization of the text in the column header for the expand or collapse columns. Sets the value to make the widget compliant with the web accessibility standards.
+
+#### Example
+
+    <div id="grid"></div>
+    <script>
+    $("#grid").kendoGrid({
+      columns: [
+        { field: "name" },
+        { field: "age" }
+      ],
+      dataSource: {
+        data: [
+          { name: "Jane Doe", age: 30, city: "London" },
+          { name: "John Doe", age: 33, city: "Berlin" }
+        ]
+      },
+      detailInit: function (e) {
+        e.detailCell.text("City: " + e.data.city);
+      },
+      height: 200,
+      messages: {
+        expandCollapseColumnHeader: "E/C"
+      }
+    });
+    </script>
+
 ### mobile `Boolean|String` *(default: false)*
 
 If set to `true` and the grid is viewed on mobile browser it will use adaptive rendering.
@@ -6076,7 +6128,11 @@ Sets the title of the PDF file.
 
 Sets a value indicating whether the selection will be persisted when sorting, paging, filtering and etc are performed.
 
-> **Note:** Selection persistence works only for row selection.
+> **Note:** Selection persistence works only for row selection. 
+>
+> In order for selection persistence to work correctly, you need to define an ID field in [`schema.model`](/api/javascript/data/datasource#configuration-schema.model).
+>
+> Selection persistence does not work for new items when the Grid DataSource is in offline mode. In offline mode, newly added items do not have IDs, which are required for selection persistence to work. 
 
 #### Example - enables selection persistence
     <div id="grid"></div>
@@ -6315,6 +6371,30 @@ If set to `true` the user can get the grid in unsorted state by clicking the sor
       ],
       sortable: {
         allowUnsort: false
+      }
+    });
+    </script>
+
+### sortable.showIndexes `Boolean` *(default: true)*
+
+If set to `true` the user will see sort sequence indicators for sorted columns.
+
+#### Example - do not allow unsorting
+
+    <div id="grid"></div>
+    <script>
+    $("#grid").kendoGrid({
+      columns: [
+        { field: "name" },
+        { field: "age" }
+      ],
+      dataSource: [
+        { name: "Jane Doe", age: 30 },
+        { name: "John Doe", age: 33 }
+      ],
+      sortable: {
+        showIndexes: true,
+        mode: "multiple"
       }
     });
     </script>
@@ -7134,8 +7214,8 @@ A string, DOM element or jQuery object which represents the table row. A string 
       ]
     });
     var grid = $("#grid").data("kendoGrid");
-    var data = grid.dataItem("tr:eq(1)");
-    console.log(data.name); // displays "Jane Doe"
+    var dataItem = grid.dataItem("tbody tr:eq(0)");
+    console.log(dataItem.name); // displays "Jane Doe"
     </script>
 
 ### destroy
@@ -7721,7 +7801,7 @@ Gets an array that holds the id field values of the selected rows.
     });
     var grid = $("#grid").data("kendoGrid");
     grid.select("tr:eq(2)");
-    console.log(grid.selectedKeyNames()); // displays the id field value for the selected row 
+    console.log(grid.selectedKeyNames()); // displays the id field value for the selected row
     </script>    
 
 #### Example - select a row by Model UID
@@ -8013,7 +8093,7 @@ The widget instance which fired the event.
       },
       editable: "popup",
       toolbar:["create"],
-      edit: function(e) {
+      beforeEdit: function(e) {
         if (!e.model.isNew()) {
           e.preventDefault();
         }
@@ -9550,7 +9630,7 @@ The widget instance which fired the event.
 
 ### remove
 
-Fired when the user clicks the "destroy" command button.
+Fired when the user clicks the "destroy" command button and delete operation is confirmed in the confirmation window, if the cancel button in the window is clicked the event will not be fired.
 
 The event handler function context (available via the `this` keyword) will be set to the widget instance.
 

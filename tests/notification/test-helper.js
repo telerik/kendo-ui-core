@@ -1,4 +1,4 @@
-﻿var notification;
+var notification;
 
 /* exported createNotification */
 function createNotification(options) {

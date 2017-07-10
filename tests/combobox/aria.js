@@ -151,11 +151,36 @@ asyncTest("ComboBox adds aria-busy=true when loader is shown", 1, function() {
         filter: "startswith"
     });
 
-    combobox._showBusy();
+    var e = {
+        isDefaultPrevented: function(){
+            return false;
+        }
+    };
+
+    combobox._showBusy(e);
 
     setTimeout(function() {
         start();
         equal(combobox.input.attr("aria-busy"), "true");
+    }, 150);
+});
+
+asyncTest("ComboBox does not adds aria-busy=true when loader is prevented", 1, function() {
+    var combobox = new ComboBox(input, {
+        dataSource: ["item1", "item2"],
+        filter: "startswith"
+    });
+
+    var e = {
+        isDefaultPrevented: function(){
+            return true;
+        }
+    };
+    combobox._showBusy(e);
+
+    setTimeout(function() {
+        start();
+        equal(combobox.input.attr("aria-busy"), "false");
     }, 150);
 });
 
@@ -215,6 +240,38 @@ test("ComboBox removes aria-selected from unselected item", function() {
     combobox.value("");
 
     ok(!combobox.ul.children("[aria-selected=true]")[0]);
+});
+
+test("widget takes aria-label attribute", 1, function() {
+    var combobox = new ComboBox(input.attr("aria-label", "labeltext"));
+
+    equal(combobox.input.attr("aria-label"), "labeltext");
+});
+
+test("widget takes aria-labelledby attribute", 1, function() {
+    var combobox = new ComboBox(input.attr("aria-labelledby", "labelID"));
+
+    equal(combobox.input.attr("aria-labelledby"), "labelID");
+});
+
+test("widget sets aria-labelledby attribute to label's  id", 2, function() {
+    var label = input.before("<label id='labelID' for='comboInput'>labeltext</label>").prev("label");
+    var combobox = new ComboBox(input.attr("id", "comboInput"));
+
+    ok(combobox.input.attr("aria-labelledby"));
+    equal(combobox.input.attr("aria-labelledby"), label.attr("id"));
+
+    label.remove();
+});
+
+test("widget sets aria-labelledby attribute to label's generated id", 2, function() {
+    var label = input.before("<label for='comboInput'>labeltext</label>").prev("label");
+    var combobox = new ComboBox(input.attr("id", "comboInput"));
+
+    ok(combobox.input.attr("aria-labelledby"));
+    equal(combobox.input.attr("aria-labelledby"), label.attr("id"));
+
+    label.remove();
 });
 
 })();

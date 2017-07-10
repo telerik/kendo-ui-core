@@ -19,13 +19,25 @@
         return dialogObject;
     }
 
-    test("clicking on window brings it in front of other windows", function() {
+    test("clicking on window brings it in front of other windows and adds k-state-focused", 2, function() {
         var firstWindow = createWindow(),
             secondWindow = createWindow();
 
         firstWindow.element.trigger("mousedown");
 
         equal(+firstWindow.wrapper.css("zIndex"), +secondWindow.wrapper.css("zIndex") + 2);
+        ok(firstWindow.wrapper.is(".k-state-focused"));
+    });
+
+    test("clicking on minimized window brings it in front of other windows and adds k-state-focused", 2, function() {
+        var firstWindow = createWindow(),
+            secondWindow = createWindow();
+
+        firstWindow.minimize();
+        firstWindow.wrapper.trigger("mousedown");
+
+        equal(+firstWindow.wrapper.css("zIndex"), +secondWindow.wrapper.css("zIndex") + 2);
+        ok(firstWindow.wrapper.is(".k-state-focused"));
     });
 
     asyncTest("loading of iframe triggers load event", 1, function() {
@@ -197,6 +209,21 @@
         dialog.element.press(keys.ESC);
     });
 
+    test("escape key on minimized Window triggers close event", 2, function() {
+        var triggers = 0;
+
+        var dialog = createWindow({
+            close: function(e) {
+                ok(true);
+                ok(e.userTriggered);
+            }
+        });
+
+        dialog.minimize();
+
+        dialog.wrapper.press(keys.ESC);
+    });
+
     test("hitting escape in closing window does not trigger new close", function() {
         var calls = 0;
 
@@ -255,6 +282,55 @@
 
         equal(dialogObject.wrapper.offset().left, offset.left + 10);
     });
+
+    test("up arrow moves minimized window up", function() {
+        var dialogObject = createWindow({});
+        dialogObject.minimize()
+        var dialog = dialogObject.wrapper;
+
+        var offset = dialogObject.wrapper.offset();
+
+        dialog.press(keys.UP);
+
+        QUnit.close(dialogObject.wrapper.offset().top, offset.top - 10, 1);
+    });
+
+    test("down arrow moves minimized window down", function() {
+        var dialogObject = createWindow({});
+        dialogObject.minimize()
+        var dialog = dialogObject.wrapper;
+
+        var offset = dialogObject.wrapper.offset();
+
+        dialog.press(keys.DOWN);
+
+        QUnit.close(dialogObject.wrapper.offset().top, offset.top + 10, 1);
+    });
+
+    test("left arrow moves minimized window left", function() {
+        var dialogObject = createWindow({});
+        dialogObject.minimize()
+        var dialog = dialogObject.wrapper;
+
+        var offset = dialogObject.wrapper.offset();
+
+        dialog.press(keys.LEFT);
+
+        equal(dialogObject.wrapper.offset().left, offset.left - 10);
+    });
+
+    test("right arrow moves minimized window right", function() {
+        var dialogObject = createWindow({});
+        dialogObject.minimize()
+        var dialog = dialogObject.wrapper;
+
+        var offset = dialogObject.wrapper.offset();
+
+        dialog.press(keys.RIGHT);
+
+        equal(dialogObject.wrapper.offset().left, offset.left + 10);
+    });
+
 
     test("ctrl+down arrow expands window", function() {
         var dialogObject = createWindow({ height: 200 });

@@ -2,6 +2,7 @@
 title: TreeList
 page_title: Configuration, methods and events of Kendo UI TreeList
 description: Code examples for TreeList UI widget configuration. Learn how to use methods and which events to set once the treelist UI widget is initialized and expanded.
+res_type: api
 ---
 
 # kendo.ui.TreeList
@@ -3381,7 +3382,17 @@ Clears the currently selected table rows or cells (depending on the current sele
 
 ### collapse
 
-This method collapse the row.
+This method collapses the row passed as a parameter.
+
+#### Parameters
+
+##### row `String|Element|jQuery`
+
+A string, DOM element or jQuery object which represents the table row. A string is treated as a jQuery selector.
+
+#### Returns
+
+`Promise`
 
 #### Example
 

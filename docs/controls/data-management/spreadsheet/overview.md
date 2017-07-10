@@ -8,7 +8,7 @@ position: 1
 
 # Spreadsheet Overview
 
-The [Kendo UI Spreadsheet widget](http://demos.telerik.com/kendo-ui/spreadsheet/index) allows editing and visualization of tabular data with a variety of cell formatting options, styles, and themes.
+The [Kendo UI Spreadsheet widget](http://demos.telerik.com/kendo-ui/spreadsheet/index) enables you to edit and visualize tabular data by using cell formatting options, styles, and themes.
 
 Out of the box, the Spreadsheet supports:
 
@@ -28,7 +28,7 @@ Each of these features is exposed as a user interface (UI) to the end user and a
 
 > **Important**  
 >
-> The Spreadsheet widget supports Internet Explorer 9 or later versions.
+> The Spreadsheet supports Internet Explorer 9 or later versions.
 
 ## Getting Started
 

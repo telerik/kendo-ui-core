@@ -2,6 +2,7 @@
 title: Scroller
 page_title: Configuration, methods and events of Kendo UI Mobile Scroller
 description: How to configure a mobile scroller in Kendo UI HTML5 mobile framework, use methods to scroll the container to a specified location and control behavior with events.
+res_type: api
 ---
 
 # kendo.mobile.ui.Scroller
@@ -39,17 +40,13 @@ Has effect only when the `pullToRefresh` option is set to `true`.
 #### Example
     <div data-role="view">
         foo
-        <div data-role="scroller" style="width: 200px; height: 200px" data-pull-to-refresh="true" data-messages='{ "pullTemplate": "Go" }'>
+        <div data-role="scroller" style="width: 200px; height: 200px" data-pull-to-refresh="true" data-messages='{ "pullTemplate": "Go!" }'>
             <div style="height: 500px">
                 Content
             </div>
         </div>
         bar
     </div>
-
-    <script id="go" type="text/x-kendo-template">
-        Go!
-    </script>
 
     <script>
     new kendo.mobile.Application();
@@ -63,17 +60,13 @@ Has effect only when the `pullToRefresh` option is set to `true`.
 #### Example
     <div data-role="view">
         foo
-        <div data-role="scroller" style="width: 200px; height: 200px" data-pull-to-refresh="true" data-messages='{ "refreshTemplate": "progress" }'>
+        <div data-role="scroller" style="width: 200px; height: 200px" data-pull-to-refresh="true" data-messages='{ "refreshTemplate": "In progress..." }'>
             <div style="height: 500px">
                 Content
             </div>
         </div>
         bar
     </div>
-
-    <script id="progress" type="text/x-kendo-template">
-        In progress...
-    </script>
 
     <script>
     new kendo.mobile.Application();
@@ -87,17 +80,13 @@ Has effect only when the `pullToRefresh` option is set to `true`.
 #### Example
     <div data-role="view">
         foo
-        <div data-role="scroller" style="width: 200px; height: 200px" data-pull-to-refresh="true" data-messages='{ "releaseTemplate": "release" }'>
+        <div data-role="scroller" style="width: 200px; height: 200px" data-pull-to-refresh="true" data-messages='{ "releaseTemplate": "Let it go now..." }'>
             <div style="height: 500px">
                 Content
             </div>
         </div>
         bar
     </div>
-
-    <script id="progress" type="text/x-kendo-template">
-        Let it go now...
-    </script>
 
     <script>
     new kendo.mobile.Application();

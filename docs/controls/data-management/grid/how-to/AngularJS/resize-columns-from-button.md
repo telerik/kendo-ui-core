@@ -7,7 +7,7 @@ slug: howto_resize_columnsfrom_abutton_grid
 
 # Resize Columns from a Button
 
-The example below demonstrates how to resize the columns of a Kendo UI Grid widget by using a custom button and AngularJS handlers.
+The following example demonstrates how to resize the columns of the Grid by using a custom button and AngularJS handlers.
 
 ###### Example
 
@@ -76,9 +76,7 @@ The example below demonstrates how to resize the columns of a Kendo UI Grid widg
 
 ## See Also
 
-Other articles on the Kendo UI Grid and how-to examples related to AngularJS:
-
-* [JavaScript API Reference](/api/javascript/ui/grid)
+* [JavaScript API Reference of the Grid](/api/javascript/ui/grid)
 * [How to Bind to Telerik Backend Services]({% slug howto_bindto_telerik_backend_services_grid %})
 * [How to Change Languages Dynamically]({% slug howto_dynamic_language_change %})
 * [How to Create Custom ToolBar Templates]({% slug howto_create_custom_toolbar_templates_grid %})
@@ -86,4 +84,4 @@ Other articles on the Kendo UI Grid and how-to examples related to AngularJS:
 * [How to Create Custom Edit Buttons]({% slug howto_create_custom_edit_buttons_grid %})
 * [How to Use AngularJS in Popup Editor Templates]({% slug howto_use_angularin_popup_editor_templates_grid %})
 
-For more runnable examples on the Kendo UI Grid, browse its [**How To** documentation folder]({% slug howto_create_custom_editors_grid %}).
+For more runnable examples on the Kendo UI Grid, browse its [**How To** documentation folder]({% slug howto_adjust_row_heights_template_locked_columns_grid %}).

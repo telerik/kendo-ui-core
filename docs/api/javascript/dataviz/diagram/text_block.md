@@ -1,6 +1,7 @@
 ---
 title: TextBlock
 previous_url: /api/javascript/dataviz/diagram/text-block, /api/javascript/dataviz/diagram/text-block
+res_type: api
 ---
 
 # kendo.dataviz.diagram.TextBlock

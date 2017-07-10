@@ -14,7 +14,7 @@ Offline support allows data-bound Kendo UI widgets to function without active se
 >
 > Offline storage support has been available ever since the Kendo UI 2014 Q2 SP1 when it was introduced for the first time.
 
-**Figure 1. Offline storage mechanism**
+**Figure 1: Offline storage mechanism**
 
 ![Offline Storage](/framework/datasource/OfflineStorage.gif)
 

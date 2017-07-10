@@ -7,7 +7,7 @@ slug: howto_displayshapetooltip_map
 
 # Display Shape Tooltips
 
-The example below demonstrates how to display a tooltip for individual shapes in a Kendo UI Map widget.
+The following example demonstrates how to display a tooltip for individual shapes in a Kendo UI Map.
 
 ###### Example
 
@@ -161,8 +161,6 @@ The example below demonstrates how to display a tooltip for individual shapes in
 ```
 
 ## See Also
-
-Other articles on the Kendo UI Map:
 
 * [Map JavaScript API Reference](/api/javascript/dataviz/ui/map)
 * [How to Customize Markers on Map]({% slug howto_customizemarkersonmap_map %})

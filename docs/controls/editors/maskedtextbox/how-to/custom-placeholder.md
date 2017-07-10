@@ -7,7 +7,7 @@ slug: howto_show_custom_placeholderon_blur_maskedtextbox
 
 # Show Custom Placeholder on Blur
 
-The example below demonstrates how to show a custom placeholder text on blur when the MaskedTextBox widget has no value.
+The following example demonstrates how to show a custom placeholder text on `blur` when the MaskedTextBox has no value.
 
 ###### Example
 
@@ -96,8 +96,6 @@ The example below demonstrates how to show a custom placeholder text on blur whe
 ```
 
 ## See Also
-
-Other articles on the Kendo UI MaskedTextBox:
 
 * [MaskedTextBox JavaScript API Reference](/api/javascript/ui/maskedtextbox)
 * [How to Use Custom Directive to Set Model Value]({% slug howto_use_raw_methodtoset_modelvalue_angularjs_maskedtextbox %})

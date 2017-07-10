@@ -8,7 +8,9 @@ position: 2
 
 # List of Formulas and Functions
 
-| FORMULAS AND FUNCTIONS	  | DESCRIPTION				                                    
+The following table provides a list of the formulas and functions the Spreadsheet supports. 
+
+| Formulas and functions	  | Description				                                    
 | :--- 						          | :---						                                    
 | ABS                       | Returns the absolute (nonnegative) value of a number                      
 | ACOS                      | Returns the principal value of the arccosine of a number. The angle is returned in radians.

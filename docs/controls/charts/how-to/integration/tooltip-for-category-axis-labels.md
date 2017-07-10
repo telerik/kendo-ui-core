@@ -16,7 +16,6 @@ The example below demonstrates how to achieve this behavior. Note that the toolt
 
 ```html
 <div id="chart"></div>
-<div class="customTooltip">CustomTooltip</div>
 <script>
   $("#chart").kendoChart({
     series: [{
@@ -32,66 +31,25 @@ The example below demonstrates how to achieve this behavior. Note that the toolt
       categories: ["Cat 1", "Cat 2", "Cat 3"],
       labels: {
         visual: function (e) {
-          // The actual label
+          // The original label visual
           var labelVisual = e.createVisual();
-          var bbox = labelVisual.bbox();
 
-          // An invisible rectangle to serve as a hot zone
-          var sink = kendo.drawing.Path.fromRect(bbox, {
-            stroke: null,
-            fill: {
-              color: "#fff",
-              opacity: 0
-            }
-          });
+          // Set the drawing tooltip options
+          // https://demos.telerik.com/kendo-ui/drawing/tooltip
+          labelVisual.options.tooltip = {
+            content: e.text
+          };
 
-          // Maintain reference for event handlers
-          sink.tooltipText = e.text;
-
-          var visual = new kendo.drawing.Group();
-          visual.append(labelVisual, sink);
-          return visual;
+          return labelVisual;
         }
       }
-    },
-
-    render: function(e) {
-      var tooltip = $(".customTooltip");
-      e.sender.surface.bind("mouseenter", function(e) {
-        if (e.element.tooltipText) {
-          var pos = e.element.bbox().getOrigin();
-          tooltip.html(e.element.tooltipText)
-                 .css({ left: pos.x, top: pos.y + 30 })
-                 .show();
-        }
-      });
-      e.sender.surface.bind("mouseleave", function(e) {
-        if (e.element.tooltipText) {
-          tooltip.hide();
-        }
-      });
     }
   });
 </script>
-<style>
-  .customTooltip {
-    position:absolute;
-    display: none;
-    color: #fff;
-    font-size: 20px Arial, sans-serif;
-    line-height: 20px;
-    text-align: center;
-    vertical-align: middle;
-    background: green;
-    width: 200px;
-    height: 20px;
-  }
-</style>
+
 ```
 
 ## See Also
-
-Other articles and how-to examples on the Kendo UI Charts:
 
 * [Chart JavaScript API Reference](/api/javascript/dataviz/ui/chart)
 * [Drawing API]({% slug overview_kendoui_drawingapi %})
@@ -105,4 +63,4 @@ Other articles and how-to examples on the Kendo UI Charts:
 * [How to Set Different Marker Types for Grouped Line Charts]({% slug howto_setdifrerentmarkers_forgroupedlinecharts_charts %})
 * [How to Use Linear Gradient As Background in Bars]({% slug howto_uselineargradient_inbars_charts %})
 
-For more runnable examples on Kendo UI Charts, browse the [**How To** documentation folder]({% slug howto_createdynamicplotbands_charts %}).
+For more runnable examples on Kendo UI Charts, browse the [**How To** documentation folder]({% slug howto_implementcolorcodedranges_inbars_charts %}).

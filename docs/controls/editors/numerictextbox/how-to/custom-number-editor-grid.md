@@ -7,11 +7,11 @@ slug: howto_createcustomnumbereditorgrid_numerictextbox
 
 # Create Custom Number Editor in Grid Using NumericTextBox
 
-To see the example on how to create a Kendo UI Grid widget with a custom number editor using the Kendo UI NumericTextBox, refer to [this how-to article]({% slug howto_create_custom_number_editor_numerictextbox_grid %}).
+Your project might require you to create a Kendo UI Grid with a custom number editor by using the NumericTextBox.
+
+To see the example on how to achieve this behavior, refer to the [how-to article]({% slug howto_create_custom_number_editor_numerictextbox_grid %}).
 
 ## See Also
-
-Other articles on the Kendo UI NumericTextBox:
 
 * [NumericTextBox JavaScript API Reference](/api/javascript/ui/numerictextbox)
 * [How to Change Text Color]({% slug howto_change_text_color_numerictextbox %})

@@ -1,5 +1,6 @@
 ---
 title: Widget
+res_type: api
 ---
 
 # kendo.ui.Widget

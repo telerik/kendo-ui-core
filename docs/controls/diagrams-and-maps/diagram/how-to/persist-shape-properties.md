@@ -11,7 +11,7 @@ In real-live applications, you can easily store the position and other propertie
 
 By using the same approach, you can persist the data source of the connections, the additional shape properties that are used in the custom visual, and others.
 
-The example below demonstrates how to use the session storage of the browser to persist the `Shape` properties of the Diagram, so that when the user reloads the page, the position and other properties of the widget are stored.
+The following example demonstrates how to use the session storage of the browser to persist the `Shape` properties of the Diagram, so that when the user reloads the page, the position and the other properties of the widget are stored.
 
 ###### Example
 
@@ -149,11 +149,9 @@ The example below demonstrates how to use the session storage of the browser to 
 
 ## See Also
 
-Other articles on the Kendo UI Diagram:
-
 * [JavaScript API Reference](/api/javascript/dataviz/ui/diagram)
 * [How to Implement Local Data Editing]({% slug howto_editlocaladata_diagram %})
 * [How to Render External Content in Shapes]({% slug howto_renderexternalcontent_inshapes_diagram %})
 * [How to Wrap Text]({% slug howto_wraptext_diagram %})
 
-For more runnable examples on the Kendo UI Diagram, browse the [**How To** documentation folder]({% slug howto_changeshapevisualelements_dynamically_diagram %}).
+For more runnable examples on the Kendo UI Diagram, browse its [**How To** documentation folder]({% slug howto_adjustpathorigin_diagram %}).

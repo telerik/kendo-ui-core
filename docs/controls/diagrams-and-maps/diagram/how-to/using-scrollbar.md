@@ -7,7 +7,7 @@ slug: howto_usescrollbar_diagram
 
 # Use Scrollbars
 
-The example below demonstrates how to use a scrollbar as a Kendo UI Diagram element.
+The following example demonstrates how to use a scrollbar as a Diagram element.
 
 ###### Example
 
@@ -64,11 +64,9 @@ The example below demonstrates how to use a scrollbar as a Kendo UI Diagram elem
 
 ## See Also
 
-Other articles on the Kendo UI Diagram:
-
 * [JavaScript API Reference](/api/javascript/dataviz/ui/diagram)
 * [How to Implement Local Data Editing]({% slug howto_editlocaladata_diagram %})
 * [How to Render External Content in Shapes]({% slug howto_renderexternalcontent_inshapes_diagram %})
 * [How to Wrap Text]({% slug howto_wraptext_diagram %})
 
-For more runnable examples on the Kendo UI Diagram, browse the [**How To** documentation folder]({% slug howto_changeshapevisualelements_dynamically_diagram %}).
+For more runnable examples on the Kendo UI Diagram, browse its [**How To** documentation folder]({% slug howto_adjustpathorigin_diagram %}).

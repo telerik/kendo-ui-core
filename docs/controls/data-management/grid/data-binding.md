@@ -47,7 +47,7 @@ Kendo UI provides a powerful [data binding framework](http://demos.telerik.com/k
                 dataSource: {   
                     transport: {   
                         read: {
-                           url: "https://api.instagram.com/v1/media/popular?client_id=4e0171f9fcfc4015bb6300ed91fbf719&count=25",
+                           url: "https://api.instagram.com/v1/media/popular?client_id=CLIENT_ID&count=25",
                             dataType: "jsonp"
                         }
                     },
@@ -68,7 +68,7 @@ Kendo UI provides a powerful [data binding framework](http://demos.telerik.com/k
 
 * The `dataSource` creates a new Kendo UI data source and assigns it as the data source for the Grid.
 * The `transport` defines the way you will communicate with the remote data source.
-* The `url` points the location of the data you want to bind the widget to.
+* The `url` points the location of the data you want to bind the widget to. Note that you have to provide valid Instagram client_id in order to run the example above.
 * The `dataType` indicates the format of the response in which the data source is expected to be&mdash;JSONP in the example. JSONP is a way of returning JSON from a cross-browser request without getting blocked. It is also a way to get malicious code injected into the page. It basically wraps the JSON response in a callback to intentionally mislead the browser. It is not recommended to do so unless you fully trust your data.
 * The `schema` indicates to the Grid what the schema of the response is. It functions as the JSON element to repeat on&mdash;Kendo UI looks for this element to represent each row in the Grid. The server returns an array of `data` elements so the repeating item is `"data"`.
 
@@ -76,7 +76,7 @@ Kendo UI provides a powerful [data binding framework](http://demos.telerik.com/k
 
 The previous example renders a Grid without any data in it. To provide the widget with the data for each column, specify which element of the `data` tag in the server response has to be shown in each particular column.
 
-The example below demonstrates how to specify the `field` attribute in the column array in such a way that the Grid displays the actual data from the response.
+The following example demonstrates how to specify the `field` attribute in the column array in such a way that the Grid displays the actual data from the response.
 
 ###### Example
 
@@ -130,7 +130,7 @@ The example below demonstrates how to specify the `field` attribute in the colum
 
 The Grid renders the URL of an image in its **Image** column and the other columns show arrays of objects.
 
-The example below demonstrates how to indicate to the Grid the way you want the widget to display each of the columns by using an inline template for the image.
+The following example demonstrates how to indicate to the Grid the way you want the widget to display each of the columns by using an inline template for the image.
 
 ###### Example
 
@@ -184,7 +184,7 @@ The example below demonstrates how to indicate to the Grid the way you want the 
 
 The rest of the columns need additional specific templating because they are complex displays and not single fields. To configure the columns, move the template outside the Grid and set the template for the details to contain the name of the user who created the photo, the filter they used to create it, and the photo caption. To enumerate the comments and display them in a list, use JavaScript in the template in the last cell. All markup is now removed from the JavaScript.
 
-The example below demonstrates how to fully customize the Grid by applying additional styles to it.
+The following example demonstrates how to fully customize the Grid by applying additional styles to it.
 
 ###### Example
 

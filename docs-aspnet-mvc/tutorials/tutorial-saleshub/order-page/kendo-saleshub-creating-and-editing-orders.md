@@ -184,8 +184,8 @@ the extensions that the grid will be bound against `OrderDetailViewModel`'s.
 Here we set up each column for the Grid. Calling `Filterable(false)` allows you to selectively choose when a column cannot be filtered by the user.
 
 Calling `ClientFooterTemplate` allows you to specify a footer which is displayed for the specified column. In our case these footer templates
-make use of the [DataSource aggregates](../../../../kendo-ui/api/javascript/data/datasource#configuration-aggregate) that we set up, later on, in our DataSource. As the
-client footer templates are bound client-side we use [Kendo's template syntax](../../../../kendo-ui/api/javascript/kendo#methods-template) to tell it which aggregate
+make use of the [DataSource aggregates](../http://docs.telerik.com/kendo-ui/api/javascript/data/datasource#configuration-aggregate) that we set up, later on, in our DataSource. As the
+client footer templates are bound client-side we use [Kendo's template syntax](../http://docs.telerik.com/kendo-ui/api/javascript/kendo#methods-template) to tell it which aggregate
 to display the result of (in our case we only bind against a `sum` aggregate).
 
 The last column is a command column and we use the Grid's built-in `Edit` and `Destroy` commands.
@@ -291,7 +291,7 @@ grid is being bound against. After you `Add` an aggregate for a property you can
         ).Deferred())
 
 Setting up the Order notes grid is somewhat similar to how we set up the order details grid. Since we're display a DateTime to the user, we specify
-a ClientTemplate for the `PostedDate` column which makes use of Kendo UI's [date formatting](../../../../kendo-ui/framework/globalization/dateformatting)
+a ClientTemplate for the `PostedDate` column which makes use of Kendo UI's [date formatting](../http://docs.telerik.com/kendo-ui/framework/globalization/dateformatting)
 capabilities. Another difference is that we only support viewing and creating order notes, so we only provide `Read` and `Create` URLs for the
 DataSource.
 

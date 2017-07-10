@@ -2,6 +2,7 @@
 title: Editor
 page_title: Configuration, methods and events of Kendo UI Editor
 description: Help guide for proper configuration of Editor UI widget, and how to use methods and events.
+res_type: api
 ---
 
 # kendo.ui.Editor
@@ -1192,6 +1193,21 @@ The title of the tool that makes text italicized.
     });
     </script>
 
+### messages.overflowAnchor `String` *(default: "More tools")*
+
+The title of the tool that shows the overflow tools.
+
+#### Example
+
+    <textarea id="editor"></textarea>
+    <script>
+    $("#editor").kendoEditor({
+      messages: {
+        overflowAnchor: "More tools"
+      }
+    });
+    </script>
+
 ### messages.justifyCenter `String` *(default: "Center text")*
 
 The title of the tool that aligns text in the center.
@@ -1473,6 +1489,21 @@ The title of the tool that underlines text.
     $("#editor").kendoEditor({
       messages: {
         underline: "Underline"
+      }
+    });
+    </script>
+
+### messages.units `String` *(default: "Units")*
+
+The label of the Units dropdowns in TableWizard dialog.
+
+#### Example
+
+    <textarea id="editor"></textarea>
+    <script>
+    $("#editor").kendoEditor({
+      messages: {
+        units: "Units"
       }
     });
     </script>
@@ -2319,6 +2350,23 @@ Specifies the [color palette](/api/javascript/ui/colorpicker#configuration-palet
         tools: [{
             name: "backColor",
             palette: ["#f0d0c9", "#e2a293", "#d4735e", "#65281a"]
+        }]
+    });
+    </script>
+
+### tools.columns `Number`
+
+Specifies the [colors columns](/api/javascript/ui/colorpicker#configuration-columns) for "foreColor" and "backColor" tools when list of colors are defined.
+
+#### Example - specified columns of the colors
+
+    <textarea id="editor"></textarea>
+    <script>
+    $("#editor").kendoEditor({
+        tools: [{
+            name: "foreColor",
+            palette: ["#f0d0c9", "#e2a293", "#d4735e", "#65281a"],
+            columns: 2
         }]
     });
     </script>

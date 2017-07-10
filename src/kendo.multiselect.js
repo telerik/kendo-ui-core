@@ -42,7 +42,7 @@ var __meta__ = { // jshint ignore:line
         DESELECT = "deselect",
         ARIA_DISABLED = "aria-disabled",
         FOCUSEDCLASS = "k-state-focused",
-        HIDDENCLASS = "k-loading-hidden",
+        HIDDENCLASS = "k-hidden",
         HOVERCLASS = "k-state-hover",
         STATEDISABLED = "k-state-disabled",
         DISABLED = "disabled",
@@ -125,6 +125,7 @@ var __meta__ = { // jshint ignore:line
             }
 
             kendo.notify(that);
+            that._toggleCloseVisibility();
         },
 
         options: {
@@ -389,13 +390,14 @@ var __meta__ = { // jshint ignore:line
         _clearClick: function() {
             var that = this;
 
-            this.tagList.children().each(function(index, tag) {
+            that.tagList.children().each(function(index, tag) {
                 that._removeTag($(tag));
             });
-            this.input.val("");
 
-            this._search();
-            this.trigger("change");
+            that.input.val("");
+            that._search();
+            that.trigger("change");
+            that.focus();
         },
 
         _editable: function(options) {
@@ -687,6 +689,7 @@ var __meta__ = { // jshint ignore:line
                 // trigger the DOM change event so any subscriber gets notified
                 that.element.trigger(CHANGE);
             }
+            that._toggleCloseVisibility();
         },
 
         _click: function(e) {
@@ -876,7 +879,7 @@ var __meta__ = { // jshint ignore:line
 
         _scale: function() {
             var that = this,
-                wrapper = that.wrapper,
+                wrapper = that.wrapper.find(".k-multiselect-wrap"),
                 wrapperWidth = wrapper.width(),
                 span = that._span.text(that.input.val()),
                 textWidth;
@@ -1001,12 +1004,21 @@ var __meta__ = { // jshint ignore:line
             var that = this;
 
             that._typingTimeout = setTimeout(function() {
-                var value = that.input.val();
+                var value = that._inputValue();
                 if (that._prev !== value) {
                     that._prev = value;
                     that.search(value);
+                    that._toggleCloseVisibility();
                 }
             }, that.options.delay);
+        },
+
+        _toggleCloseVisibility: function() {
+            if (this.value().length || (this.input.val() && this.input.val() !== this.options.placeholder)) {
+                this._showClear();
+            } else {
+                this._hideClear();
+            }
         },
 
         _allowOpening: function() {
@@ -1194,6 +1206,7 @@ var __meta__ = { // jshint ignore:line
             });
             if (this.options.clearButton) {
                 this._clear.insertAfter(this.input);
+            	this.wrapper.addClass("k-multiselect-clearable");
             }
         },
 

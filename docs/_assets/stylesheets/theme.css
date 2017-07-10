@@ -22,30 +22,6 @@
     height: 47px;
 }
 
-#page-tabs {
-    list-style: none;
-    background-color: #f5f7f8;
-    padding-left: 20px;
-}
-
-#page-tabs li {
-    display: inline-block;
-    padding: 0 20px 3px;
-    line-height: 58px;
-}
-
-#page-tabs .active {
-    padding-bottom: 0;
-    border-bottom: 3px solid #00b312;
-}
-
-#page-tabs a {
-    display: inline-block;
-    color: #2d3e50;
-    text-decoration: none;
-    font-size: 14px;
-}
-
 
 /* Main Naivation */
 
@@ -284,23 +260,23 @@
 #page-nav .k-group .k-group .k-group .k-group .k-group .current-topic .k-group .k-in a { padding-left: 92px; }
 
 .btn {
+    margin: 0 4px;
+    padding: 5px 30px;
+    border: 1px solid #505156;
     color: #fff;
     background-color: #2a2d33;
-    border: 1px solid #505156;
     background-clip: padding-box;
+    font-size: 15px;
+    font-weight: bold;
+    text-align: center;
+    line-height: 1.33334;
     position: relative;
     display: inline-block;
-    padding: 0.667em 2.000em;
-    line-height: 0.933em;
     transition-property: background-color, color;
     transition-duration: 0.2s;
     transition-timing-function: ease;
     border-radius: 2px;
     -webkit-appearance: none;
-    font-size: 15px;
-    font-weight: bold;
-    text-align: center;
-    margin: 0.7em 0;
     cursor: pointer;
 }
 
@@ -312,7 +288,6 @@
 .btn-primary {
     background-color: #ee5315;
     border-color: #ee5315;
-    margin-right: 1.200em;
 }
 
 .btn-primary:hover {

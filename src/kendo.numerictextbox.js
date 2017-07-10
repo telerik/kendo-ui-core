@@ -35,8 +35,10 @@ var __meta__ = { // jshint ignore:line
         HOVER = "k-state-hover",
         FOCUS = "focus",
         POINT = ".",
+        CLASS_ICON = "k-icon",
         SELECTED = "k-state-selected",
         STATEDISABLED = "k-state-disabled",
+        STATE_INVALID = "k-state-invalid",
         ARIA_DISABLED = "aria-disabled",
         INTEGER_REGEXP = /^(-)?(\d*)$/,
         NULL = null,
@@ -79,6 +81,7 @@ var __meta__ = { // jshint ignore:line
              that._reset();
              that._wrapper();
              that._arrows();
+             that._validation();
              that._input();
 
              if (!kendo.support.mobileOS) {
@@ -150,7 +153,11 @@ var __meta__ = { // jshint ignore:line
 
             that._upArrowEventHandler.unbind("press");
             that._downArrowEventHandler.unbind("press");
-            element.off("keydown" + ns).off("keypress" + ns).off("paste" + ns);
+            element
+                .off("keydown" + ns)
+                .off("keypress" + ns)
+                .off("keyup" + ns)
+                .off("paste" + ns);
 
             if (!readonly && !disable) {
                 wrapper
@@ -177,6 +184,7 @@ var __meta__ = { // jshint ignore:line
                 that.element
                     .on("keydown" + ns, proxy(that._keydown, that))
                     .on("keypress" + ns, proxy(that._keypress, that))
+                    .on("keyup" + ns, proxy(that._keyup, that))
                     .on("paste" + ns, proxy(that._paste, that));
 
             } else {
@@ -288,7 +296,7 @@ var __meta__ = { // jshint ignore:line
             spinners = options.spinners,
             element = that.element;
 
-            arrows = element.siblings(".k-icon");
+            arrows = element.siblings("." + CLASS_ICON);
 
             if (!arrows[0]) {
                 arrows = $(buttonHtml("increase", options.upArrowText) + buttonHtml("decrease", options.downArrowText))
@@ -308,19 +316,21 @@ var __meta__ = { // jshint ignore:line
             that._downArrowEventHandler = new kendo.UserEvents(that._downArrow, { release: _release });
         },
 
-        _blur: function() {
-            var that = this,
-                factor = that.options.factor,
-                curreValue = that.element.val();
+        _validation: function () {
+            var that = this;
+            var element = that.element;
 
+            that._validationIcon = $("<span class='" + CLASS_ICON + " k-i-warning'></span>")
+                .hide()
+                .insertAfter(element);
+        },
+
+        _blur: function() {
+            var that = this;
+            
             that._toggleText(true);
-            if(factor && factor !== 1){
-                curreValue = parseFloat(curreValue);
-                if(curreValue !== null) {
-                    curreValue = curreValue/factor;
-                }
-            }
-            that._change(curreValue);
+            
+            that._change(that.element.val());
         },
 
         _click: function(e) {
@@ -360,7 +370,15 @@ var __meta__ = { // jshint ignore:line
         },
 
         _change: function(value) {
-            var that = this;
+            var that = this,
+                factor = that.options.factor;
+
+            if(factor && factor !== 1){
+                value = parseFloat(value);
+                if(value !== null) {
+                    value = value/factor;
+                }
+            }
 
             that._update(value);
             value = that._value;
@@ -396,6 +414,7 @@ var __meta__ = { // jshint ignore:line
             clearTimeout(that._focusing);
             that._inputWrapper.removeClass(FOCUSED).removeClass(HOVER);
             that._blur();
+            that._removeInvalidState();
         },
 
         _format: function(format, culture) {
@@ -501,10 +520,27 @@ var __meta__ = { // jshint ignore:line
 
                 e.preventDefault();
             } else if ((min !== null && min >= 0 && value.charAt(0) === "-") || !isValid) {
+                that._addInvalidState();
                 e.preventDefault();
             }
 
             that._key = 0;
+        },
+
+        _keyup: function () {
+            this._removeInvalidState();
+        },
+
+        _addInvalidState: function () {
+            var that = this;
+            that._inputWrapper.addClass(STATE_INVALID);
+            that._validationIcon.show();
+        },
+
+        _removeInvalidState: function () {
+            var that = this;
+            that._inputWrapper.removeClass(STATE_INVALID);
+            that._validationIcon.hide();
         },
 
         _numericRegex: function(numberFormat) {
@@ -545,10 +581,14 @@ var __meta__ = { // jshint ignore:line
 
             setTimeout(function() {
                 var result = that._parse(element.value);
-                var isValid = that._numericRegex(numberFormat).test(element.value);
 
-                if (result === NULL || that._adjust(result) !== result || !isValid) {
+                if (result === NULL) {
                     that._update(value);
+                } else {
+                    element.value = result.toString().replace(POINT, numberFormat[POINT]);
+                    if (that._adjust(result) !== result || !that._numericRegex(numberFormat).test(element.value)) {
+                        that._update(value);
+                    }
                 }
             });
         },
@@ -731,7 +771,7 @@ var __meta__ = { // jshint ignore:line
 
         return (
             '<span unselectable="on" class="k-link k-link-' + direction + '" aria-label="' + text + '" title="' + text + '">' +
-                '<span unselectable="on" class="k-icon ' + className + '"></span>' +
+                '<span unselectable="on" class="' + CLASS_ICON + ' ' + className + '"></span>' +
             '</span>'
         );
     }

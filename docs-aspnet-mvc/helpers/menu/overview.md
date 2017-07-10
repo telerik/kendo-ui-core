@@ -215,7 +215,7 @@ When the Menu items are removed because of lacking permissions, a parent item ma
 
 ## Event Handling
 
-You can subscribe to all Menu [events](../../../kendo-ui/api/javascript/ui/menu#events).
+You can subscribe to all Menu [events](http://docs.telerik.com/kendo-ui/api/javascript/ui/menu#events).
 
 ### By Handler Names
 
@@ -309,7 +309,7 @@ The following example demonstrates how to subscribe to the `select` event of a s
 
 ### Existing Instances
 
-To reference an existing Kendo UI Menu instance, use the [`jQuery.data()`](http://api.jquery.com/jQuery.data/) configuration option. After you establish a reference, use the [Menu API](../../../kendo-ui/api/javascript/ui/menu#methods) to control the behavior of the widget.
+To reference an existing Kendo UI Menu instance, use the [`jQuery.data()`](http://api.jquery.com/jQuery.data/) configuration option. After you establish a reference, use the [Menu API](http://docs.telerik.com/kendo-ui/api/javascript/ui/menu#methods) to control the behavior of the widget.
 
 ###### Example
 
@@ -323,8 +323,8 @@ To reference an existing Kendo UI Menu instance, use the [`jQuery.data()`](http:
 
 ## See Also
 
-* [ASP.NET MVC API Reference: MenuBuilder](/api/Kendo.Mvc.UI.Fluent/MenuBuilder)
-* [ASP.NET MVC API Reference: MenuItemBuilder](/api/Kendo.Mvc.UI.Fluent/MenuItemBuilder)
+* [ASP.NET MVC API Reference: MenuBuilder](http://docs.telerik.com/kendo-ui/api/Kendo.Mvc.UI.Fluent/MenuBuilder)
+* [ASP.NET MVC API Reference: MenuItemBuilder](http://docs.telerik.com/kendo-ui/api/Kendo.Mvc.UI.Fluent/MenuItemBuilder)
 * [Overview of Telerik UI for ASP.NET MVC]({% slug overview_aspnetmvc %})
 * [Fundamentals of Telerik UI for ASP.NET MVC]({% slug fundamentals_aspnetmvc %})
 * [Scaffolding in Telerik UI for ASP.NET MVC]({% slug scaffolding_aspnetmvc %})

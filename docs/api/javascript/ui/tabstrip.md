@@ -2,6 +2,7 @@
 title: TabStrip
 page_title: Configuration, methods and events of Kendo UI TabStrip
 description: Easily disable all animations, set the parameters, used for the visual animation and the effects used in TabStrip UI widget.
+res_type: api
 ---
 
 # kendo.ui.TabStrip
@@ -1084,7 +1085,7 @@ The content element of the activated tab.
 
 #### Attach activate event handler via bind(); detach via unbind()
 
-    <div id="tabstrip">
+    <div id="tabStrip">
         <ul>
             <li>Tab 1</li>
             <li>Tab 2</li>

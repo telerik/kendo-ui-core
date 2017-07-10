@@ -1,5 +1,6 @@
 ---
 title: Point
+res_type: api
 ---
 
 # kendo.dataviz.diagram.Point

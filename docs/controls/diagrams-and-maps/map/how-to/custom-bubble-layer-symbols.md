@@ -7,9 +7,11 @@ slug: howto_rendercustomsymbols_forbubblelayers_map
 
 # Render Custom Symbols for Bubble Layers
 
-The Bubble Layer allows you to define the way symbols are rendered. This works by defining a [`symbol` function](http://docs.telerik.com/KENDO-UI/api/javascript/dataviz/ui/map#configuration-layers.symbol) that uses the [Drawing API](/framework/drawing/overview) to define the shape. The symbol is typically a [Group](http://docs.telerik.com/kendo-ui/api/javascript/drawing/group) of shapes.
+The Bubble Layer allows you to define the way symbols are rendered.
 
-The example below demonstrates how to render 200-kilometer lines in West-East direction as a symbol. Notice that the lines get longer the farther you go North, which is due to that fact that the [Mercator Projection](https://en.wikipedia.org/wiki/Mercator_projection) is used.
+This approach works by defining a [`symbol`](/api/javascript/dataviz/ui/map#configuration-layers.symbol) function that uses the [Drawing API]({% slug overview_kendoui_drawingapi %}) to define the shape. The symbol is typically a [Group](/api/javascript/drawing/group) of shapes.
+
+The following example demonstrates how to render 200-kilometer lines in West-East direction as a symbol. Note that the lines get longer the farther you go North, which is due to that fact that the example uses the [Mercator Projection](https://en.wikipedia.org/wiki/Mercator_projection).
 
 ###### Example
 
@@ -87,8 +89,6 @@ The example below demonstrates how to render 200-kilometer lines in West-East di
 
 ## See Also
 
-Other articles on the Kendo UI Map:
-
 * [Map JavaScript API Reference](/api/javascript/dataviz/ui/map)
 * [How to Add Shape Titles]({% slug howto_addhspaetitles_map %})
 * [How to Drag and Drop Markers]({% slug howto_draganddropmarkers_map %})
@@ -96,4 +96,4 @@ Other articles on the Kendo UI Map:
 * [How to Update Map Shapes by ID]({% slug howto_updatemapshapesbyid_map %})
 * [How to Zoom on Area]({% slug howto_zoomonarea_map %})
 
-For more runnable examples on the Kendo UI Map, browse the [**How To** documentation folder]({% slug howto_customizemarkersonmap_map %}).
+For more runnable examples on the Kendo UI Map, browse the [**How To** documentation folder]({% slug howto_addhspaetitles_map %}).

@@ -708,6 +708,29 @@
 
     });
 
+test("autoWidth adds one pixel to avoid browser pixel rounding", function(assert) {
+    var dropdownlist = new DropDownList(input, {
+        autoWidth: true,
+        animation:{
+            open: {
+                duration:0
+            },
+            close: {
+                duration:0
+            },
+        },
+        dataSource: {
+            data: ["Short item", "An item with really, really, really, really, really, really, really, really, really, long text","Short item"]
+        }
+    });
+
+    dropdownlist.open();
+    equal(dropdownlist.popup.element.parent(".k-animation-container").width(), dropdownlist.popup.element.outerWidth(true) + 1);
+    dropdownlist.close();
+    dropdownlist.open();
+    equal(dropdownlist.popup.element.parent(".k-animation-container").width(), dropdownlist.popup.element.outerWidth(true) + 1);
+});
+
     test("removes filtering expression if field matches the dataTextField", 1, function() {
         var dropdownlist = new DropDownList(input, {
             filter: "startswith",
@@ -782,5 +805,23 @@
 
         equal(filters.filters[1].filters.length, 2);
         equal(!filters.filters[1].filters.filters, true);
+    });
+
+    test("update dataSource when minLength is set", 1, function() {
+        var dropdownlist = new DropDownList(input, {
+            dataTextField: "text",
+            dataValueField: "value",
+            serverFiltering: true,
+            minLenght: 3,
+            dataSource: {
+                data: [{ text: "foo", value: 1 }, { text: "bar", value: 2 }, { text: "baz", value: 3 }]
+            }
+        });
+
+        dropdownlist.search("b");
+        dropdownlist.select(1);
+        dropdownlist.open();
+        equal(dropdownlist.ul.children().length, 3);
+
     });
 })();

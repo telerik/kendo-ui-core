@@ -1,6 +1,7 @@
 ---
 title: Gradient
 page_title: API reference for Kendo UI Drawing API Gradient
+res_type: api
 ---
 
 # kendo.drawing.Gradient : kendo.Class

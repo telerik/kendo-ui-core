@@ -7,11 +7,11 @@ slug: howto_remote_validation
 
 # Implement Remote Form Validation
 
-To see the example on how to implement remote validation by using the Kendo UI Validator, refer to [this project](https://github.com/telerik/kendo-examples-asp-net-mvc/tree/master/validator-remotevalidation). It is available in the [GitHub repository for Kendo UI examples using ASP.NET MVC](https://github.com/telerik/kendo-examples-asp-net-mvc).
+Your project might require you to implement remote validation by using the Validator.
+
+To see the example, refer to [this project](https://github.com/telerik/kendo-examples-asp-net-mvc/tree/master/validator-remotevalidation). It is available in the [GitHub repository for Kendo UI examples that use ASP.NET MVC](https://github.com/telerik/kendo-examples-asp-net-mvc).
 
 ## See Also
-
-Other articles on the Kendo UI Validator:
 
 * [Validator JavaScript API Reference](/api/javascript/ui/validator)
 * [How to Show Tooltip on Mouse Over]({% slug howto_showtooltiponmouseover_validator %})

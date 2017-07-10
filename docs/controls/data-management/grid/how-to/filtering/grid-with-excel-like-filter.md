@@ -1,91 +1,103 @@
 ---
-title: Implement an Excel-Like Filter Menu
-page_title: Implement an Excel-Like Filter Menu | Kendo UI Grid Widget
+title: Implement Excel-Like Filter Menus
+page_title: Implement Excel-Like Filter Menus | Kendo UI Grid
 description: "Learn how to implement an Excel-like filter menu in a Kendo UI Grid."
 slug: howto_gridfiltering_excellike_grid
 ---
 
-# Implement an Excel-Like Filter Menu
+# Implement Excel-Like Filter Menus
 
-The following example demonstrates how to set the Grid with Excel-like filter.
+The following example demonstrates how to set the Grid with an Excel-like filter that has sorted and unique items.
 
-The example uses the [`columns.filterable.dataSource`](/api/javascript/ui/grid#configuration-columns.filterable.dataSource) property of the Grid to set a single Data Source for the Grid and for the filter menus.
+To set a single Data Source for all filter menus, the example uses the [`columns.filterable.dataSource`](/api/javascript/ui/grid#configuration-columns.filterable.dataSource) property of the Grid.
 
-To achieve this behavior:
-
+To observe this behavior:
 1. Filter the **Product Name** column.
 2. Open the **Unit Price** column. Note that the values are filtered based on the currently applied filter on the **Product Name** column.
 
 ###### Example
 
 ```html
-<div id="example">
-      <style>
-        .k-multicheck-wrap {
-          overflow-x: hidden;
-        }
-      </style>
-      <div class="demo-section k-content wide">
-        <h4>Client Operations</h4>
-        <div id="client"></div>
-      </div>
+   <script src="http://demos.telerik.com/kendo-ui/content/shared/js/products.js"></script>
+    <div id="example">
+      <div id="grid"></div>
 
       <script>
         $(document).ready(function() {
-          var telerikWebServiceBase = "https://demos.telerik.com/kendo-ui/service/";
 
-          var dataSource = new kendo.data.DataSource({
-            transport: {
-              read:  {
-                url: telerikWebServiceBase + "/Products",
-                dataType: "jsonp"
-              },
-              update: {
-                url: telerikWebServiceBase + "/Products/Update",
-                dataType: "jsonp"
-              },
-              destroy: {
-                url: telerikWebServiceBase + "/Products/Destroy",
-                dataType: "jsonp"
-              },
-              create: {
-                url: telerikWebServiceBase + "/Products/Create",
-                dataType: "jsonp"
-              },
-              parameterMap: function(options, operation) {
-                if (operation !== "read" && options.models) {
-                  return {models: kendo.stringify(options.models)};
-                }
-              }
-            },
-            batch: true,
-            pageSize: 20,
-            schema: {
-              model: {
-                id: "ProductID",
-                fields: {
-                  ProductID: { editable: false, nullable: true },
-                  ProductName: { validation: { required: true } },
-                  UnitPrice: { type: "number", validation: { required: true, min: 1} },
-                  Discontinued: { type: "boolean" },
-                }
+          function removeDuplicates(items, field) {
+            var getter = function(item){return item[field]},
+                result = [],
+                index = 0,
+                seen = {};
+
+            while (index < items.length) {
+              var item = items[index++],
+                  text = getter(item);
+
+              if(text !== undefined && text !== null && !seen.hasOwnProperty(text)){
+                result.push(item);
+                seen[text] = true;
               }
             }
+
+            return result;
+          }
+
+          var filterSource = new kendo.data.DataSource({
+            data: products
           });
 
-
-          $("#client").kendoGrid({
-            dataSource: dataSource,
-            filterable: true,
-            pageable: true,
+          $("#grid").kendoGrid({
+            dataSource: {
+              data: products,
+              schema: {
+                model: {
+                  fields: {
+                    ProductName: { type: "string"},
+                    UnitPrice: { type: "number" },
+                    UnitsInStock: { type: "number" },
+                    Discontinued: { type: "boolean" }
+                  }
+                }
+              },
+              pageSize: 20,
+              change: function(e) {
+                filterSource.data(e.items);
+              },
+            },
             height: 550,
-            toolbar: ["create", "save", "cancel"],
+            scrollable: true,
+            sortable: true,
+            pageable: {
+              input: true,
+              numeric: false
+            },
+            filterable: true,
+            filterMenuInit: function (e){
+              var grid = e.sender;
+              e.container.data("kendoPopup").bind("open", function() {
+                filterSource.sort({field: e.field, dir: "asc"});
+                var uniqueDsResult = removeDuplicates(grid.dataSource.view(), e.field);
+                filterSource.data(uniqueDsResult);
+              })
+            },
             columns: [
-              { field: "ProductName", filterable: { dataSource: dataSource, multi: true, search: true, search: true } },
-              { field: "UnitPrice", title: "Unit Price", format: "{0:c}", width: 120, filterable: { dataSource: dataSource, multi: true } },
-              { field: "UnitsInStock", title: "Units In Stock", width: 120, filterable: { dataSource: dataSource, multi: true } },
-              { command: "destroy", title: "&nbsp;", width: 150}],
-            editable: true
+              {field: "ProductName", filterable: {
+                multi: true,
+                dataSource: filterSource
+              }
+              },
+              { field: "UnitPrice", title: "Unit Price", format: "{0:c}", width: "130px",filterable: {
+                multi: true,
+                dataSource: filterSource
+              } },
+              { field: "UnitsInStock", title: "Units In Stock", width: "130px",filterable: {
+                multi: true,
+                dataSource: filterSource
+              } },
+              { field: "Discontinued", width: "130px"}
+            ]
           });
         });
       </script>
@@ -94,9 +106,7 @@ To achieve this behavior:
 
 ## See Also
 
-Other articles on the Kendo UI Grid and how-to examples:
-
-* [JavaScript API Reference](/api/javascript/ui/grid)
+* [JavaScript API Reference of the Grid](/api/javascript/ui/grid)
 * [How to Add Cascading DropDownList Editors]({% slug howto_add_cascading_dropdown_list_editors_grid %})
 * [How to Copy Data from Excel]({% slug howto_copy_datafrom_excel_grid %})
 * [How to Drag and Drop Rows between Grids]({% slug howto_dragand_drop_rows_between_twogrids_grid %})
@@ -110,4 +120,4 @@ Other articles on the Kendo UI Grid and how-to examples:
 * [How to Show Tooltip for Column Records]({% slug howto_show_tooltipfor_column_records_grid %})
 * [How to Update Toolbar Content Using MVVM Binding]({% slug howto_update_toolbar_content_using_mvvmbinding_grid %})
 
-For more runnable examples on the Kendo UI Grid, browse its [**How To** documentation folder]({% slug howto_create_custom_editors_grid %}).
+For more runnable examples on the Kendo UI Grid, browse its [**How To** documentation folder]({% slug howto_adjust_row_heights_template_locked_columns_grid %}).

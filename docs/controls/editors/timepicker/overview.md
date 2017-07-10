@@ -8,13 +8,15 @@ position: 1
 
 # TimePicker Overview
 
-The [Kendo UI TimePicker widget](http://demos.telerik.com/kendo-ui/timepicker/index) lets users select time values from a predefined list or enter new ones. It supports configurable options for the format, minimum/maximum time, and interval between the predefined values in the list.
+The [Kendo UI TimePicker widget](http://demos.telerik.com/kendo-ui/timepicker/index) enables users to select time values from a predefined list or enter new ones.
+
+It supports configurable options for the format, minimum and maximum time, and interval between the predefined values in the list.
 
 ## Getting Started
 
 ### Initialize the TimePicker
 
-The DatePicker can be initialized via an `id` selector as demonstrated in the example below.
+To initialize the DatePicker, use an `id` selector.
 
 ###### Example
 
@@ -32,16 +34,16 @@ The DatePicker can be initialized via an `id` selector as demonstrated in the ex
 
 ## Configuration
 
-Kendo UI DatePicker provides default configuration options that can be set during initialization. Some of the properties that can be overridden and controlled are:
+The DatePicker provides default configuration options that can be set during initialization. The available settings are:
 
-*   Selected time
-*   Minimum and/or maximum time
-*   Time format
-*   Define interval between predefined values in the list
+* Selected time
+* Minimum and/or maximum time
+* Time format
+* Define interval between predefined values in the list
 
-### Selected, Min, and Max Time
+### Selected, Minimum, and Maximum Time
 
-The example below demonstrates how to define selected, min, and max times.
+The following example demonstrates how to define the selected, minimum, and maximum times.
 
 ###### Example
 
@@ -55,11 +57,11 @@ The example below demonstrates how to define selected, min, and max times.
         });
     </script>
 
-The TimePicker will set the value only if the entered time is valid and within the defined range.
+The TimePicker sets the value only if the entered time is valid and within the defined range.
 
 ### Time Format
 
-The example below demonstrates how to define the time format.
+The following example demonstrates how to define the time format.
 
 ###### Example
 
@@ -73,7 +75,7 @@ The example below demonstrates how to define the time format.
 
 ### Interval between List Values
 
-The example below demonstrates how to define the interval in minutes between values in the list.
+The following example demonstrates how to define the interval in minutes between values in the list.
 
 ###### Example
 
@@ -87,25 +89,23 @@ The example below demonstrates how to define the interval in minutes between val
 
 ## Validation
 
-The widget is designed to keep the input value unchanged, even when the typed date is invalid. This is due the following facts:
+The widget keeps the input value unchanged, even when the typed date is invalid. This behavior results because of the following reasons:
 
-- The widget allows different date parse formats, which require unrestricted user input. Refer to the [`parseFormats`](/api/javascript/ui/timepicker#configuration-parseFormats) option for more details.
-- The widget does not update automatically the typed text, when it is invalid. This would lead to unexpected behavior if the widget changes the input value.
+- The widget allows different date parse formats which require unrestricted user input. For more information, refer to the [`parseFormats`](/api/javascript/ui/timepicker#configuration-parseFormats) option.
+- The widget does not automatically update the typed text when it is invalid. If the widget changes the input value, this leads to unexpected behavior.
 
-The best way to validate the TimePicker widget is to use a client-validation framework, such as the [Kendo UI Validator]({% slug overview_kendoui_validator_widget %}). Thus you are able to provide meaningful error message to end users pointing them to the right actions to resolve the issue. Check our online validation demos for more details:
-
-- [Custom validation](http://demos.telerik.com/kendo-ui/validator/custom-validation)
+The best way to validate the TimePicker is to use a client-validation framework such as the [Kendo UI Validator]({% slug overview_kendoui_validator_widget %}). It enables you to provide end users with meaningful error message and point them to the right actions to resolve an issue. For more information, refer to the [online validation demos](http://demos.telerik.com/kendo-ui/validator/custom-validation).
 
 ## See Also
 
-Other articles on Kendo UI TimePicker:
+Other articles on the Kendo UI TimePicker:
 
 * [Overview of the ASP.NET MVC HtmlHelper Extension for the TimePicker Widget](/aspnet-mvc/helpers/timepicker/overview)
 * [Overview of the TimePicker JSP Tag]({% slug overview_timepicker_uiforjsp %})
 * [Overview of the TimePicker PHP Class](/php/widgets/timepicker/overview)
 * [TimePicker JavaScript API Reference](/api/javascript/ui/timepicker)
 
-Articles on Kendo UI DatePicker:
+Articles on the Kendo UI DatePicker:
 
 * [Overview of the DatePicker Widget]({% slug overview_kendoui_datepicker_widget %})
 * [How to Set the First Weekday]({% slug howto_set_first_weekday_datepicker %})
@@ -114,7 +114,7 @@ Articles on Kendo UI DatePicker:
 * [How to Resize Calendar Based on Input Width]({% slug howto_use_resize_calendar_basedon_input_width_datepicker %})
 * [DatePicker JavaScript API Reference](/api/javascript/ui/datepicker)
 
-Articles on Kendo UI DateTimePicker:
+Articles on the Kendo UI DateTimePicker:
 
 * [Overview of the DateTimePicker Widget]({% slug overview_kendoui_datetimepicker_widget %})
 * [How to Prevent Invalid Values]({% slug howto_prevent_invalid_values_datetimepicker %})
@@ -123,7 +123,7 @@ Articles on Kendo UI DateTimePicker:
 * [How to Override Hours in the Popup]({% slug howto_override_hours_inpopup_datetimepicker %})
 * [DateTimePicker JavaScript API Reference](/api/javascript/ui/datetimepicker)
 
-Articles on Kendo UI Calendar:
+Articles on the Kendo UI Calendar:
 
 * [Overview of the Calendar Widget]({% slug overview_kendoui_calendar_widget %})
 * [How to Control the Header Format]({% slug howto_control_header_format_calendar %})

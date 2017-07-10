@@ -1,12 +1,12 @@
 ---
-title: Import and Export Documents
-page_title: Import and Export Documents | Kendo UI Editor HtmlHelper
+title: Documentation Import and Export
+page_title: Documentation Import and Export | Kendo UI Editor HtmlHelper
 description: "Import and export different types of documents with the Kendo UI Editor widget for ASP.NET MVC."
 slug: overview_importexportdpl_aspnetmvc
-position: 2
+position: 3
 ---
 
-# Import and Export Documents
+# Documentation Import and Export
 
 This article provides basic information on the import and export functionality of the Kendo UI Editor widget for ASP.NET MVC.
 
@@ -171,7 +171,7 @@ Similar to exporting, below are listed the steps for you to follow when enabling
             .Import()
         )
         .Import(import => import
-            .AllowedExtensions(new[] { "docx", "rtf", "pdf", "html", "txt" })
+            .AllowedExtensions(new[] { "docx", "rtf", "html", "txt" })
             .Proxy("Import","Editor")
         )
     )
@@ -183,7 +183,7 @@ Similar to exporting, below are listed the steps for you to follow when enabling
                 .Import()
             )
             .Import(import => import
-                .AllowedExtensions(new[] { "docx", "rtf", "pdf", "html", "txt" })
+                .AllowedExtensions(new[] { "docx", "rtf", "html", "txt" })
                 .Proxy("Import","Editor")
             )
     %>
@@ -218,9 +218,6 @@ Similar to exporting, below are listed the steps for you to follow when enabling
                     break;
                 case ".rtf":
                     htmlResult = EditorImport.ToRtfImportResult(file, settings);
-                    break;
-                case ".pdf":
-                    htmlResult = EditorImport.ToPdfImportResult(file, settings);
                     break;
                 default:
                     htmlResult = EditorImport.GetTextContent(file);
@@ -296,12 +293,12 @@ For more information on each setting supported by `EditorImportSettings`, refer 
 
 ## See Also
 
-* [ASP.NET MVC API Reference: EditorBuilder](/api/Kendo.Mvc.UI.Fluent/EditorBuilder)
+* [ASP.NET MVC API Reference: EditorBuilder](http://docs.telerik.com/kendo-ui/api/Kendo.Mvc.UI.Fluent/EditorBuilder)
 * [Overview of Telerik UI for ASP.NET MVC]({% slug overview_aspnetmvc %})
 * [Fundamentals of Telerik UI for ASP.NET MVC]({% slug fundamentals_aspnetmvc %})
 * [Scaffolding in Telerik UI for ASP.NET MVC]({% slug scaffolding_aspnetmvc %})
 * [Overview of the Kendo UI Editor Widget](http://docs.telerik.com/kendo-ui/controls/editors/editor/overview)
-* [Telerik UI for ASP.NET MVC API Reference Folder](/api/Kendo.Mvc/AggregateFunction)
+* [Telerik UI for ASP.NET MVC API Reference Folder](http://docs.telerik.com/kendo-ui/api/Kendo.Mvc/AggregateFunction)
 * [Telerik UI for ASP.NET MVC HtmlHelpers Folder]({% slug overview_barcodehelper_aspnetmvc %})
 * [Tutorials on Telerik UI for ASP.NET MVC]({% slug overview_timeefficiencyapp_aspnetmvc6 %})
 * [Telerik UI for ASP.NET MVC Troubleshooting]({% slug troubleshooting_aspnetmvc %})

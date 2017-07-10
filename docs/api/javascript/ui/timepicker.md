@@ -2,6 +2,7 @@
 title: TimePicker
 page_title: Configuration, methods and events of Kendo UI TimePicker
 description: What type of animations you can use in TimePicker UI widget, find supported methods and see which events are triggered once the value is changed.
+res_type: api
 ---
 
 # kendo.ui.TimePicker
@@ -119,6 +120,19 @@ The duration of the open animation in milliseconds.
     <script>
     $("#timepicker").kendoTimePicker({
         culture: "de-DE"
+    });
+    </script>
+
+### dateInput `Boolean`*(default: false)*
+
+ Specifies if the TimePicker will use DateInput for editing value
+
+#### Example
+
+    <input id="timepicker" />
+    <script>
+    $("#timepicker").kendoTimePicker({
+        dateInput: true
     });
     </script>
 

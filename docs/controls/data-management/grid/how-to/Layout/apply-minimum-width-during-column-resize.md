@@ -7,9 +7,11 @@ slug: howto_apply_min_width_during_column_resize_grid
 
 # Apply Minimum Width during Column Resize
 
-When the user starts resizing, a `start` event is fired and some references are saved. Then they are used in the `resize` event, which is fired continuously during resizing. The new column width is periodically checked and if it decreases below the set minimum width, the minimum column width is enforced back. Since the Grid table(s) also receive a width style during resizing, it is overridden as well, when needed. A similar logic can be used to enforce a maximum width.
+When the user starts resizing, a `start` event fires and some references are saved.
 
-The example below demonstrates how to use the internal Grid column resizing API to enforce a minimum column width during column resize.
+Then these references are used in the `resize` event, which is fired continuously during resizing. The new column width is periodically checked and if it decreases below the set minimum width, the minimum column width is enforced back. Since the Grid table(s) also receive a width style during resizing, it is overridden as well when needed. To enforce a maximum width, you can use a similar logic.
+
+The following example demonstrates how to use the API for internal Grid column resizing to enforce a minimum column width during column resize.
 
 ###### Example
 
@@ -56,8 +58,6 @@ The example below demonstrates how to use the internal Grid column resizing API 
 
 ## See Also
 
-Other articles on the Kendo UI Grid and how-to examples related to its layout:
-
 * [Kendo UI Grid JavaScript API Reference](/api/javascript/ui/grid)
 * [How to Adjust Row Height with Virtual Scrolling]({% slug howto_adjust_row_height_withvirtual_scrolling_grid %})
 * [How to Change Group Header Position with Locked Columns]({% slug howto_change_group_header_position_wthlocked_columns_grid %})
@@ -67,4 +67,4 @@ Other articles on the Kendo UI Grid and how-to examples related to its layout:
 * [How to Resize Grid When Window Is Resized]({% slug howto_resize_whenthe_windowis_resized_grid %})
 * [How to Use FontAwesome Icons in Custom Command Buttons]({% slug howto_use_fontawesomeiconsin_custom_command_buttons_grid %})
 
-For more runnable examples on the Kendo UI Grid, browse its [**How To** documentation folder]({% slug howto_create_custom_editors_grid %}).
+For more runnable examples on the Kendo UI Grid, browse its [**How To** documentation folder]({% slug howto_adjust_row_heights_template_locked_columns_grid %}).

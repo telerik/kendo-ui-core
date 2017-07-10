@@ -173,8 +173,8 @@ test("DateTimePicker adds format to the parseFormats array", function() {
     }).data("kendoDateTimePicker");
 
     equal(datetimepicker.options.parseFormats[0], datetimepicker.options.format);
-    equal(datetimepicker.options.parseFormats[1], datetimepicker.options.timeFormat);
-    equal(datetimepicker.options.parseFormats[2], "MM/dd/yy");
+    equal(datetimepicker.options.parseFormats[2], datetimepicker.options.timeFormat);
+    equal(datetimepicker.options.parseFormats[1], "MM/dd/yy");
 });
 
 test("DateTimePicker does not modify parseFormats if format exists in the array", function() {

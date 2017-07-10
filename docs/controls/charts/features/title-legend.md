@@ -23,7 +23,7 @@ The main building blocks of a Kendo UI Chart are:
 
 For detailed information on Chart themes and transitions, refer to the article about the [appearance of Kendo UI Charts]({% slug appearance_charts_widget %}).
 
-**Figure 1. Chart structure**
+**Figure 1: Chart structure**
 
 ![Chart Structure](/controls/charts/chart-structure.png)
 
@@ -46,7 +46,7 @@ The legend position is also controllable. The supported `position` values are:
 
 Custom positioning is configured through the `offsetX` and `offsetY` options.
 
-**Figure 2. Custom legend position**
+**Figure 2: Custom legend position**
 
 ![Custom legend position](/controls/charts/chart-legend-custom-position.png)
 

@@ -2,6 +2,7 @@
 title: Calendar
 page_title: Configuration, methods and events of Kendo UI Calendar
 description: Find out how to successfully configure calendar UI component, how to use methods to get the max value of the calendar and navigate easily.
+res_type: api
 ---
 
 # kendo.ui.Calendar
@@ -167,6 +168,38 @@ note that a check for an empty `date` is needed, as the widget can work with a n
         $("#calendar").kendoCalendar({
             max: new Date(2013, 0, 1) // set the max date to Jan 1st, 2013
         });
+    </script>
+
+### messages `Object`
+
+Allows localization of the strings that are used in the widget.
+
+#### Example
+
+    <div id="calendar"></div>
+    <script>
+    $("#calendar").kendoCalendar({
+        "weekNumber": true,
+        "messages": {
+            "weekColumnHeader": "W"
+        }
+     })
+    </script>
+
+### messages.weekColumnHeader `String` *(default: "")*
+
+Allows customization of the week column header text. Set the value to make the widget compliant with web accessibility standards.
+
+#### Example
+
+    <div id="calendar"></div>
+    <script>
+    $("#calendar").kendoCalendar({
+        "weekNumber": true,
+        "messages": {
+            "weekColumnHeader": "W"
+        }
+     })
     </script>
 
 ### min `Date`*(default: Date(1900, 0, 1))*

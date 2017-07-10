@@ -223,6 +223,7 @@ var __meta__ = { // jshint ignore:line
 
                 if (that.filterInput && that.options.minLength !== 1) {
                     that.refresh();
+                    that._dataSource();
                     that.popup.one("activate", that._focusInputHandler);
                     that.popup.open();
                     that._resizeFilterInput();
@@ -599,6 +600,7 @@ var __meta__ = { // jshint ignore:line
             e.preventDefault();
             this.popup.unbind("activate", this._focusInputHandler);
             this._focused = this.wrapper;
+            this._prevent = false;
             this._toggle();
         },
 
@@ -701,7 +703,7 @@ var __meta__ = { // jshint ignore:line
             }
 
             if (!isPopupVisible || !that.filterInput) {
-                var current = that._focus();                
+                var current = that._focus();
 
                 if (key === keys.HOME) {
                     handled = true;
@@ -1015,20 +1017,21 @@ var __meta__ = { // jshint ignore:line
         },
 
         _focusItem: function() {
+            var options = this.options;
             var listView = this.listView;
             var focusedItem = listView.focus();
             var index = listView.select();
 
             index = index[index.length - 1];
 
-            if (index === undefined && this.options.highlightFirst && !focusedItem) {
+            if (index === undefined && options.highlightFirst && !focusedItem) {
                 index = 0;
             }
 
             if (index !== undefined) {
                 listView.focus(index);
             } else {
-                if (this.options.optionLabel) {
+                if (options.optionLabel && (!options.virtual || options.virtual.mapValueTo !== "dataItem")) {
                     this._focus(this.optionLabel);
                     this._select(this.optionLabel);
                 } else {
@@ -1102,7 +1105,7 @@ var __meta__ = { // jshint ignore:line
 
             this._resetOptionLabel(" k-state-selected");
 
-            if (dataItem) {
+            if (dataItem || dataItem === 0) {
                 text = dataItem;
                 value = that._dataValue(dataItem);
                 if (optionLabel) {

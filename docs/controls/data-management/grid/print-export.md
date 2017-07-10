@@ -25,7 +25,7 @@ The following example demonstrates how to retrieve the HTML of the Grid, inject 
 
 * If the Grid is scrollable, some rows or columns may not be visible on the printed paper. So, the Grid height and scrollability are disabled on the print-friendly page.
 * Depending on the column width, some of the cell content may be clipped and not fully visible. This issue is resolved by forcing an automatic `table-layout` to the Grid table, which disables the ellipsis (`...`).
-* If scrolling is enabled (which is set by default except for the MVC wrapper of the Grid), the Grid renders a [separate table for the header area]({% slug appearance_kendoui_grid_widget %}#scrolling). Because the browser is not able to understand the relationship between the two Grid tables, it will not repeat the header row on top of every printed page. The example below shows how to address this issue by cloning the header table row into the data table.
+* If scrolling is enabled (which is set by default except for the MVC wrapper of the Grid), the Grid renders a [separate table for the header area]({% slug appearance_kendoui_grid_widget %}#scrolling). Because the browser is not able to understand the relationship between the two Grid tables, it will not repeat the header row on top of every printed page. The following example shows how to address this issue by cloning the header table row into the data table.
 * On a side note, when printing a Grid with locked (frozen) columns, it is possible for the resulting columns or rows to get misaligned, or for the overall layout to get broken. In such cases, it is advisable to use a separate print-friendly Grid instance with no frozen columns.
 
 ###### Example

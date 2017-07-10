@@ -7,7 +7,7 @@ slug: howto_persist_old_value_numerictextbox
 
 # Persist Old Value
 
-The example below demonstrates how to persist the old value of a Kendo UI NumericTextBox widget.
+The following example demonstrates how to persist the old value of the NumericTextBox.
 
 ###### Example
 
@@ -44,8 +44,6 @@ The example below demonstrates how to persist the old value of a Kendo UI Numeri
 ```
 
 ## See Also
-
-Other articles on the Kendo UI NumericTextBox:
 
 * [NumericTextBox JavaScript API Reference](/api/javascript/ui/numerictextbox)
 * [How to Change Text Color]({% slug howto_change_text_color_numerictextbox %})

@@ -2,6 +2,7 @@
 title: Slider
 page_title: Configuration, methods and events of Kendo UI Slider
 description: Configuration of Slider UI control, different methods, and events, triggered when the slider value changes upon specific conditions.
+res_type: api
 ---
 
 # kendo.ui.Slider
@@ -102,7 +103,7 @@ The slider widget supports precision of up-to 10 digits after the decimals point
       });
     </script>
 
-### tooltip.template `String`
+### tooltip.template `String|Function`
 
 Template of the tooltip. The following variables are passed by the Slider and are ready to be used inside the template:
 

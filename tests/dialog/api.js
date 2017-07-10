@@ -1,11 +1,11 @@
 (function() {
-    module("initialization", {
+    module("api", {
         setup: function() {
             //
         },
         teardown: function() {
-            QUnit.fixture.closest("body").find(".dialog").each(function(idx, element) {
-                $(element).data("kendoDialog").destroy();
+            QUnit.fixture.closest("body").find(".k-window-content").each(function(idx, element) {
+                kendo.widgetInstance($(element)).destroy();
             });
             QUnit.fixture.closest("body").find(".k-overlay").remove();
         }
@@ -18,6 +18,10 @@
     function createDialog(options, element) {
         element = element || $("<div class='dialog'>dialog content</div>").appendTo(QUnit.fixture);
         return element.kendoDialog(options).data("kendoDialog");
+    }
+
+    function createWindow(options) {
+        return $("<div />").appendTo(QUnit.fixture).kendoWindow(options).data("kendoWindow");
     }
 
     test("title gets title", function() {
@@ -71,7 +75,7 @@
     });
 
     test("title method gets and sets the title consistently", 2, function () {
-        var title = "&lt;foo&gt;",
+        var title = "foo",
             dialog = createDialog({ title: title });
 
         equal(dialog.title(), title);
@@ -79,16 +83,16 @@
         equal(dialog.title(), title);
     });
 
-    test("title method and title property set once encoded string as once encoded", 2, function () {
-        var encodedString = kendo.htmlEncode("<script>var foo1 = 1;<\/script>"),
-            dialog = createDialog({ title: encodedString }),
+    test("title method and title property encode the title", 2, function () {
+        var stringValue = "<script>var foo1 = 1;<\/script>",
+            dialog = createDialog({ title: stringValue }),
             titleElement = $(KDIALOGTITLE, dialog.wrapper);
 
-        equal(titleElement.html(), encodedString);
+        equal(titleElement.html(), kendo.htmlEncode(stringValue));
 
-        dialog.title(encodedString);
+        dialog.title(stringValue);
 
-        equal(titleElement.html(), encodedString);
+        equal(titleElement.html(), kendo.htmlEncode(stringValue));
     });
 
     test("set title to false removes the titlebar element", function() {
@@ -162,6 +166,16 @@
 
     test("closing dialog moves overlay before previous modal dialog", function() {
         var dialog1 = createDialog();
+        var dialog2 = createDialog();
+
+        dialog2.close();
+
+        equal($(".k-overlay").length, 1);
+        ok(dialog1.wrapper.prev("div").is(".k-overlay"));
+    });
+
+    test("closing dialog moves overlay before previous modal dialog", function() {
+        var dialog1 = createWindow({modal: true});
         var dialog2 = createDialog();
 
         dialog2.close();

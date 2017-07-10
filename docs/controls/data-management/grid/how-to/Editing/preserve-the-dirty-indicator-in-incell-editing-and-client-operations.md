@@ -7,7 +7,9 @@ slug: howto_preserve_dirty_indicator_incell_editing_client_operations_grid
 
 # Preserve Dirty Indicator in Incell Editing and Client Operations
 
-The following example demonstrates how to preserve the dirty indicator in incell editing and client operations, as well as when new rows are added, in the Kendo UI Grid widget.
+Your project might require you to preserve the dirty indicator in in-cell editing and client operations.
+
+The following example demonstrates how to achieve this behavior also in case new rows are added to the Grid.
 
 ###### Example
 
@@ -92,9 +94,7 @@ The following example demonstrates how to preserve the dirty indicator in incell
 
 ## See Also
 
-Other articles on the Kendo UI Grid and how-to examples related to its editing functionality:
-
-* [JavaScript API Reference](/api/javascript/ui/grid)
+* [JavaScript API Reference of the Grid](/api/javascript/ui/grid)
 * [How to Add New Rows When Tabbing out of the Last One]({% slug howto_add_new_rows_when_tabbingoutof_thelast_one_grid %})
 * [How to Build Custom dataSource for Custom Editor]({% slug howto_build_custom_datasourcefor_custom_editor_grid %})
 * [How to Customize the Delete Confirmation Dialog]({% slug howto_customize_delete_confirmation_dialog_grid %})
@@ -110,4 +110,4 @@ Other articles on the Kendo UI Grid and how-to examples related to its editing f
 * [How to Use Editors Based on Data Item Property]({% slug howto_use_editors_basedon_dataitem_property_grid %})
 * [How to Use TreeView as Custom Editor]({% slug howto_usethe_treeview_aseditor_grid %})
 
-For more runnable examples on the Kendo UI Grid, browse its [**How To** documentation folder]({% slug howto_create_custom_editors_grid %}).
+For more runnable examples on the Kendo UI Grid, browse its [**How To** documentation folder]({% slug howto_adjust_row_heights_template_locked_columns_grid %}).

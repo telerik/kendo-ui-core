@@ -2,6 +2,7 @@
 title: Chart
 page_title: Configuration, methods and events of Kendo UI DataViz Chart
 description: Learn how to configure Kendo UI Javascript chart widget in a few easy steps, use and change methods and events.
+res_type: api
 ---
 
 # kendo.dataviz.ui.Chart
@@ -341,9 +342,9 @@ The following dash types are supported:
 * "longDashDotDot" - a line consisting of a repeating pattern of long-dash-dot-dot
 * "solid" - a solid line
 
-### axisDefaults.majorGridLines.visible `Boolean` *(default: false)*
+### axisDefaults.majorGridLines.visible `Boolean` *(default: true)*
 
-If set to `true` the chart will display the major grid lines. By default the major grid lines are visible.
+If set to `false` the chart will not display the major grid lines. By default the major grid lines are visible.
 
 ### axisDefaults.majorGridLines.width `Number` *(default: 1)*
 
@@ -2737,9 +2738,9 @@ The following dash types are supported:
     });
     </script>
 
-### categoryAxis.majorGridLines.visible `Boolean` *(default: false)*
+### categoryAxis.majorGridLines.visible `Boolean` *(default: true)*
 
-If set to `true` the chart will display the major grid lines. By default the major grid lines are visible.
+If set to `false` the chart will not display the major grid lines. By default the major grid lines are visible.
 
 #### Example - hide the category axis major grid lines
 
@@ -11812,9 +11813,9 @@ The position of the labels.
 
 ### series.labels.rotation `String|Number`
 
-The rotation angle of the labels. By default, the labels are not rotated. 
+The rotation angle of the labels. By default, the labels are not rotated.
 
-#### Example 
+#### Example
 
      <div id="chart"></div>
         <script>
@@ -11822,8 +11823,8 @@ The rotation angle of the labels. By default, the labels are not rotated.
             seriesDefaults: {
               type: "column",
             },
-            series: [{ 
-                data: [1, 2, 3], 
+            series: [{
+                data: [1, 2, 3],
                 labels: {
                     visible: true,
                     rotation: 310
@@ -11831,7 +11832,7 @@ The rotation angle of the labels. By default, the labels are not rotated.
             }]
         });
       </script>
-      
+
 ### series.labels.template `String|Function`
 
 The [template](/api/javascript/kendo#methods-template) which renders the chart series label.
@@ -15833,7 +15834,7 @@ The top padding of the labels.
 
 ### seriesDefaults.labels.rotation `String|Number`
 
-The rotation angle of the labels. By default, the labels are not rotated. 
+The rotation angle of the labels. By default, the labels are not rotated.
 
      <div id="chart"></div>
         <script>
@@ -17592,7 +17593,7 @@ A function that can be used to create a custom visual for the notes. The availab
 ### theme `String`
 
 The chart theme. This can be either a built-in theme or "sass".
-When set to "sass" the chart will read the variables from the [SASS-based themes]({% slug sassbasedthemes_kendoui %}).
+When set to "sass" the chart will read the variables from the [Sass-based themes]({% slug sassbasedthemes_kendoui %}).
 
 The supported values are:
 
@@ -20196,9 +20197,9 @@ The default type is "line" except for "radarColumn" charts.
     });
     </script>
 
-### valueAxis.majorGridLines.visible `Boolean` *(default: false)*
+### valueAxis.majorGridLines.visible `Boolean` *(default: true)*
 
-If set to `true` the chart will display the major grid lines. By default the major grid lines are visible.
+If set to `false` the chart will not display the major grid lines. By default the major grid lines are visible.
 
 #### Example - hide the value axis major grid lines
 
@@ -24924,7 +24925,7 @@ The following dash types are supported:
 
 ### xAxis.majorGridLines.visible `Boolean` *(default: true)*
 
-If set to `true` the chart will display the x major grid lines. By default the x major grid lines are visible.
+If set to `false` the chart will not display the x major grid lines. By default the x major grid lines are visible.
 
 #### Example - hide the scatter chart x major grid lines
 
@@ -29667,9 +29668,9 @@ The following dash types are supported:
 
 ### yAxis.majorGridLines.visible `Boolean` *(default: true)*
 
-If set to `true` the chart will display the x major grid lines. By default the x major grid lines are visible.
+If set to `false` the chart will not display the y major grid lines. By default the y major grid lines are visible.
 
-#### Example - hide the scatter chart x major grid lines
+#### Example - hide the scatter chart y major grid lines
 
     <div id="chart"></div>
     <script>

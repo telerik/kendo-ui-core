@@ -2,6 +2,7 @@
 title: DatePicker
 page_title: Configuration, methods and events of Kendo UI DatePicker
 description: Easy to follow steps guide how to quickly configure DatePicker UI widget, easily enable/disable it using methods and how to change events.
+res_type: api
 ---
 
 # kendo.ui.DatePicker
@@ -132,6 +133,19 @@ The duration of the open animation in milliseconds.
     <script>
     $("#datepicker").kendoDatePicker({
         culture: "de-DE"
+    });
+    </script>
+
+### dateInput `Boolean`*(default: false)*
+
+ Specifies if the DatePicker will use [DateInput](/api/javascript/ui/dateinput) for editing value
+
+#### Example
+
+    <input id="datepicker" />
+    <script>
+    $("#datepicker").kendoDatePicker({
+        dateInput: true
     });
     </script>
 

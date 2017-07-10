@@ -56,7 +56,8 @@ var __meta__ = { // jshint ignore:line
             BINDING = kendo.attr("bind"),
             rule,
             attr = {
-                name: options.field
+                name: options.field,
+                title: options.title
             };
 
         for (ruleName in validation) {

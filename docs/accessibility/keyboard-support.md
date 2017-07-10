@@ -3,12 +3,14 @@ title: Keyboard Shortcuts
 page_title: Keyboard Shortcuts | Kendo UI Accessibility Support
 description: "Learn more about the keyboard Accessibility standards supported by Kendo UI controls."
 slug: keyboard_shortcuts_accessibility_support
-position: 4
+position: 5
 ---
 
 # Keyboard Shortcuts
 
-Keyboard access is a very significant aspect of the interaction between disabled users and the Web. The more the functionalities of your project that users can handle through the keyboard, the wider the variety of assistive technologies that can be used by disabled users.
+Keyboard access is a fundamental aspect of the interaction between disabled users and the Web.
+
+The more the functionalities of your project that users can handle through the keyboard, the wider the variety of assistive technologies that can be used by disabled users.
 
 ## Overview
 
@@ -35,6 +37,7 @@ In addition to the `accesskey` attribute support, most Kendo UI widgets also off
 - [Editor](http://demos.telerik.com/kendo-ui/web/editor/navigation.html)
 - [Gantt](http://demos.telerik.com/kendo-ui/gantt/keyboard-navigation)
 - [Grid](http://demos.telerik.com/kendo-ui/web/grid/navigation.html)
+- [ListBox](http://demos.telerik.com/kendo-ui/listview/keyboard-navigation)
 - [ListView](http://demos.telerik.com/kendo-ui/web/listview/navigation.html)
 - [MediaPlayer](http://demos.telerik.com/kendo-ui/web/mediaplayer/navigation.html)
 - [Menu](http://demos.telerik.com/kendo-ui/web/menu/navigation.html)
@@ -58,11 +61,10 @@ Kendo UI opts for the second approach. It uses an `aria-activedescendant` attrib
 
 ## See Also
 
-Other articles on the accessibility support provided by Kendo UI:
-
-* [Overview of Web Accessibility Standards]({% slug overview_accessibility_support_kendoui %})
-* [Charts]({% slug charts_accessibility_support %})
-* [High-Contrast Theme]({% slug high_contrast_theme_accessibility_support %})
-* [Right-to-Left Languages]({% slug right_toleft_languages_accessibility_support %})
-* [Section 508]({% slug section508_accessibility_support %})
-* [WAI-ARIA]({% slug wai_aria_accessibility_support %})
+* [Overview of Accessibility Features in Kendo UI]({% slug overview_accessibility_support_kendoui %})
+* [Section 508 Support in Kendo UI]({% slug section508_accessibility_support %})
+* [Section 508 and WCAG 2.0 Compliance of Kendo UI Widgets]({% slug section508_wcag20_accessibility_support %})
+* [WAI-ARIA Support in Kendo UI]({% slug wai_aria_accessibility_support %})
+* [Right-to-Left Language Support in Kendo UI]({% slug right_toleft_languages_accessibility_support %})
+* [Working with the Kendo UI High-Contrast Theme]({% slug high_contrast_theme_accessibility_support %})
+* [Five Tips for Accessible Charts with Kendo UI]({% slug charts_accessibility_support %})

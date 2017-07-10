@@ -8,7 +8,9 @@ position: 2
 
 # Culture Definition
 
-The information on each culture is placed in a separate JavaScript file and shares the `kendo.culture.<language code>[-<country/region code>].js` naming convention. You are able to include as many culture files as you want. Every file that is included extends the `kendo.cultures` mapping. Note that the included culture file does not automatically become the current culture used by Kendo UI.
+The information on each culture is placed in a separate JavaScript file and shares the `kendo.culture.<language code>[-<country/region code>].js` naming convention.
+
+You can include as many culture files as you want. Every file that is included extends the `kendo.cultures` mapping. Note that the included culture file does not automatically become the current culture used by Kendo UI.
 
 ## Customization
 
@@ -16,7 +18,7 @@ The information on each culture is placed in a separate JavaScript file and shar
 
 The default English culture is defined directly in `kendo.core.js` and by the name of `"en-US"`.
 
-The example below lists the default culture information.
+The following example lists the default culture information.
 
 ###### Example
 
@@ -114,7 +116,7 @@ The example below lists the default culture information.
 
 ### Extend Culture Information
 
-If you examine the source code of the script for each culture, you will notice that each script just adds the culture info object to the the `kendo.cultures` mappings. You can easily define your own culture file and extend the current `kendo.cultures` mapping. The only requirement is to follow the structure of the default culture information listed above.
+In the source code of the script for each culture, each script just adds the culture info object to the `kendo.cultures` mappings. To define your own culture file and extend the current `kendo.cultures` mapping, follow the structure of the default culture information previously listed.
 
 ## See Also
 

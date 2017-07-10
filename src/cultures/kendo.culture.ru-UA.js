@@ -1,4 +1,4 @@
-﻿/*
+/*
 * Kendo UI Web v2012.1.322 (http://kendoui.com)
 * Copyright 2012 Telerik AD. All rights reserved.
 *

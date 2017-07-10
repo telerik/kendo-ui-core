@@ -81,6 +81,7 @@ If you load GlobalizeJS, the default globalization features in Kendo UI are over
 Here is a list of Kendo UI widgets which depend on the current culture:
 
 - [Calendar](http://demos.telerik.com/kendo-ui/calendar/index)
+- [DateInput]({% slug overview_kendoui_dateinput_widget %})
 - [DatePicker](http://demos.telerik.com/kendo-ui/datepicker/index)
 - [TimePicker](http://demos.telerik.com/kendo-ui/timepicker/index)
 - [DateTimePicker](http://demos.telerik.com/kendo-ui/datetimepicker/index)
