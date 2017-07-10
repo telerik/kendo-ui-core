@@ -1,14 +1,12 @@
 ---
-title: Alternate the Background Color of Child Grid Headers
-description: How to change the background and alternate color on every second child Grid in Kendo UI.
+title: Swap Alternate and Background Colors on Every Second Child Grid
+description: An example on how to change the background and the alternate color for child grids in the Kendo UI Grid.
 type: how-to
-page_title: Alternate the Background Color of Child Grid Headers
-slug: swap_alt_bacground_child_grids
-position: 0
+page_title: Change the Alt and Background Colors in Hierarchy Grids | Kendo UI Grid
+slug: swap-alt-background-child-grids
 tags: kendo ui, mvc, grid, hierarchy, child grids, alt color
-teampulseid:
 ticketid: 1114254
-pitsid:
+res_type: kb
 ---
 
 ## Environment
@@ -16,25 +14,25 @@ pitsid:
 <table>
  <tr>
   <td>Product</td>
-  <td>Grid for Progress® Kendo UI®</td>
+  <td>Grid for Progress Kendo UI</td>
  </tr>
  <tr>
-   <td>Progress® Kendo UI® version</td>
+   <td>Progress Kendo UI version</td>
    <td>Tested up to version 2017.2 504</td>
   </tr>
 </table>
 
 ## Description
 
-By default, the headers of the child grids in a multi-level, hierarchy Kendo UI Grid are hidden. When you expand a row, all child grids display the same color in a sequence.
+I have a multi-level, hierarchy Grid. The headers of the child grids are hidden. When I expand a row, all grids display the same color in a sequence. Can I swap the background color on every second child grid?
 
-## Possible Solution
+## Solution
 
-To swap the background color of every second child Grid header:
+To implement this scenario:
 
-1. In the `dataBound` event of the master Kendo UI Grid, get the background and the alternate color of the widget and save them in global variables.
+1. In the `dataBound` event of the master Grid, get the background and the alternate color of the widget and save them in global variables.
 
-1. In the dataBound event handler of every child grid, conditionally swap the background and the alternate colors.
+1. In the `dataBound` event handler of every child grid, conditionally swap the background and the alternate colors.
 
 ```html
 <div id="grid"></div>

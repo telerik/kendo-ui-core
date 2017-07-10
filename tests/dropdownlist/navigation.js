@@ -961,4 +961,13 @@
             }
         });
     });
+
+    test("Space key opens the popup", 1, function() {
+        var dropdownlist = new DropDownList(input, {
+            dataSource: data
+        });
+
+        dropdownlist.wrapper.focus().press(keys.SPACEBAR);
+        ok(dropdownlist.popup.visible());
+    });
 })();

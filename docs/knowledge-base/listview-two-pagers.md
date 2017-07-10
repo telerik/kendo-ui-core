@@ -1,14 +1,11 @@
 ---
-title: Place Pagers at Top and Bottom of ListView
-description: How to display pagers at the top and bottom of a Kendo UI ListView.
+title: Place Pagers at Top and Bottom of the ListView
+description: An example on how to display pagers at the top and bottom of a Kendo UI ListView.
 type: how-to
-page_title: Place Pagers at Top and Bottom of ListView
-slug: listview_two_pagers
-position: 0
+page_title: Use Two Pagers for the ListView | Telerik UI for ASP.NET MVC
+slug: listview-two-pagers
 tags: listview, paging, pager, mvc, kendo ui, two pagers
-teampulseid:
 ticketid: 1111995
-pitsid:
 res_type: kb
 ---
 
@@ -17,10 +14,10 @@ res_type: kb
 <table>
  <tr>
   <td>Product</td>
-  <td>Progress® Kendo UI® ListView for ASP.NET MVC (version 2017.2 504)</td>
+  <td>Progress Kendo UI ListView for ASP.NET MVC (version 2017.2 504)</td>
  </tr>
  <tr>
-  <td>Progress® Kendo UI® version</td>
+  <td>Progress Kendo UI version</td>
   <td>2017.2 504</td>
  </tr>
  <tr>
@@ -39,15 +36,19 @@ res_type: kb
 
 ## Description
 
-Your project might require you to add a pager both to the top and the bottom of a Kendo UI ListView.
+I have a ListView with a pager that works as expected. The pager is at the bottom of the ListView but I want to have it both at the top and bottom of the widget.
 
-## Possible Solution
+## Suggested Workarounds
 
-By default, the ListView for ASP.NET MVC does not support placing pagers both at its top and bottom. The following examples demonstrate how to work around this issue.
+The Kendo UI ListView for ASP.NET MVC does not provide a built-in solution for achieving this behavior.
+
+However, you can still work around this issue by applying custom logic to the:
+* [ListView widget](#listview-widget)
+* [ListView wrapper](#listview-wrapper)
 
 ### ListView Widget
 
-The following example demonstrates how to customize the default behavior of the ListView and implement a pager at the top and bottom of the widget.
+The following example demonstrates how to customize the default behavior of the ListView widget and implement a pager at its top and bottom.
 
 ```html
 <!DOCTYPE html>
@@ -110,7 +111,7 @@ The following example demonstrates how to customize the default behavior of the 
 
 To add a pager to an MVC ListView wrapper, apply the same configuration approach in regard to the page at the top. The aim is to initialize another pager through a jQuery initialization within `document ready` and pass the `dataSource` of the ListBox.  
 
-The following example demonstrates how to customize the default behavior of the ListView and implement a pager at the top and bottom of the wrapper.
+The following example demonstrates how to customize the default behavior of the ListView wrapper and implement a pager at its top and bottom.
 
 ```html
 <div id="pager1" class="k-pager-wrap"></div>

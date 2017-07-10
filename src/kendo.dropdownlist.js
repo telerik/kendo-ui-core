@@ -696,6 +696,10 @@ var __meta__ = { // jshint ignore:line
                 return;
             }
 
+            if (key === keys.SPACEBAR) {
+                that.toggle(!isPopupVisible);
+            }
+
             handled = that._move(e);
 
             if (handled) {

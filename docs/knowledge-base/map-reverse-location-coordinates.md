@@ -1,14 +1,11 @@
 ---
-title: Reversed Coordinates for Bubble Type Layer with GeoJson Are Displayed in Map
-description: A solution for displaying a bubble-type layer with reversed coordinates in a Kendo UI Map
+title: Cannot Display GeoJSON Coordinates in Proper Order for Bubble Type Layer in Map
+description: The received GeoJSON data is handled in a reversed longitude-latitude order when displaying a bubble-type layer in a Kendo UI Map.
 type: troubleshooting
-page_title: Reversed Coordinates for Bubble Type Layer with GeoJson Are Displayed in Map
-slug: map_reverse_location_coordinates
-position: 0
+page_title: Problem with GeoJSON Coordinates for Bubble-Type Map Layer Received in Reversed Order | Kendo UI Map
+slug: map-reverse-location-coordinates
 tags: kendo ui map, location, coordinates, longitude, latitude
-teampulseid:
 ticketid: 1111871
-pitsid:
 res_type: kb
 ---
 
@@ -17,23 +14,25 @@ res_type: kb
 <table>
  <tr>
   <td>Product</td>
-  <td>Map for Progress® Kendo UI®</td>
+  <td>Map for Progress Kendo UI</td>
  </tr>
   <tr>
-  <td>Progress® Kendo UI® version</td>
+  <td>Progress Kendo UI version</td>
   <td>Tested up to version 2017.2 504</td>
  </tr>
 </table>
 
 ## Description
 
-My project requires me to draw a bubble from a GeoJSON response on a Kendo UI Map. I receive the data in a `\[Longitude, Latitude\]` format, but when I bind it to the Kendo UI Map, it is handled as `\[latitude, longitude\]`.
+I want to draw a bubble layer on a Kendo UI Map from the GeoJSON response. Although I receive the data in `\[Longitude, Latitude\]` format, when the data is bound to the Map, the Map handles it in a reversed `\[latitude, longitude\]` order.
 
-## Possible Solution
+## Suggested Workarounds
 
-While the Kendo UI Map does not provide a built-in solution, you can still work around this behavior.
+The Kendo UI Map does not provide a built-in solution for achieving this behavior.
 
-The Map accepts a `[Latitude, Longitude]` format for its locations field. If you receive the data in a reversed order, modify the array prior to the binding and use `schema.parse` to modify the array.
+However, you can still work around this issue by applying custom logic.
+
+The Map accepts a `[Latitude, Longitude]` format for its locations field. When you receive the data in a reversed order, modify the array prior to the binding and use `schema.parse` to update the array.
 
 ```html
 <!DOCTYPE html>
@@ -88,7 +87,7 @@ The Map accepts a `[Latitude, Longitude]` format for its locations field. If you
                   schema: {
                     parse: function(response) {
                       for (var i = 0; i < response.length; i++) {
-                        var loc =  response[i].Location; //Location is the locationField with the coordinates
+                        var loc =  response[i].Location; // Location is the locationField with the coordinates
                         response[i].Location = [loc[1], loc[0]];
                       }
                       return response;

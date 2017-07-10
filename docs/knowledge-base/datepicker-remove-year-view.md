@@ -1,38 +1,38 @@
 ---
-title: How To Hide Year Selection from DatePicker
-description: How to disable the the year view of the Kendo DatePicker DateTimePicker.
+title: Hide Year Selection from DatePicker and DateTimePicker
+description: An example on how to disable the year view of the Kendo UI DatePicker and DateTimePicker widgets.
 type: how-to
-page_title: DatePicker Remove Year View
-slug: datepicker-remove-year-view 
-position: 0
+page_title: Remove the Year View | Kendo UI DatePicker
+slug: datepicker-remove-year-view
 tags: kendo ui, datepicker, datetimepicker, year view
-teampulseid:
 ticketid: 1115942, 1116792
-pitsid:
+res_type: kb
 ---
 
 ## Environment
+
 <table>
  <tr>
   <td>Product</td>
-  <td>Date/Time Pickers for Progress® Kendo UI®</td>
+  <td>Date/Time Pickers for Progress Kendo UI</td>
  </tr>
  <tr>
-  <td>Progress® Kendo UI® version</td>
+  <td>Progress Kendo UI version</td>
   <td>Tested up to version 2017.2 504</td>
  </tr>
 </table>
-
  
 ## Description
 
-I would like the user to be able to use the datepicker but without the displaying of the year. Is there a way to select just a day from a month and hide the year selection option, and the year from the selected text in the control?
+I want to disable the display of the year in the DatePicker. Can I enable my users to select only a day from a month while I hide from them the option to select the year?
 
-## Possible Solution
+## Solution
 
-Use Date/Time Pickers and Calendar events and configurations to achieve this behavior.
+The Calendar, DatePicker, and DateTimePicker provide configuration options for hiding the year view.
 
-#### DatePicker Example
+### DatePicker
+
+The following example demonstrates how to hide the year view in a Kendo UI DatePicker.
 
 ```html
 <input id="datepicker" />
@@ -90,7 +90,9 @@ Use Date/Time Pickers and Calendar events and configurations to achieve this beh
 </script>
 ```
 
-#### DateTimePicker MVVM Example
+### DateTimePicker
+
+The following example demonstrates how to hide the year view in a Kendo UI DateTimPicker in MVVM.
 
 ```html
 <div id="example">

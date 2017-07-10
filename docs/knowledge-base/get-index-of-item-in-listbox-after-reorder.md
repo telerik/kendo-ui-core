@@ -1,22 +1,20 @@
 ---
-title: Get Index Of Data In ListBox After Reorder
-description: How to get the index of an ListBox item after reorder
+title: Get Data Index in the ListBox after Reorder
+description: An example on how to get the index of a ListBox item after reorder.
 type: how-to
-page_title: Get Index Of Item In ListBox After Reorder
-slug:get-index-of-item-in-listbox-after-reorder
-position: 0
-tags:listbox, datasource
-teampulseid:
+page_title: Get the Index of an Item after Reorder | Kendo UI ListBox
+slug: get-index-of-item-in-listbox-after-reorder
+tags: listbox, datasource
 ticketid: 1112980
-pitsid:
-
+res_type: kb
 ---
 
 ## Environment
+
 <table>
  <tr>
   <td>Product</td>
-  <td>ListBox for Progress® Kendo UI®</td>
+  <td>ListBox for Progress Kendo UI</td>
  </tr>
  <tr>
   <td>Operating System</td>
@@ -34,33 +32,17 @@ pitsid:
 
  
 ## Description
-We are unable to easily retrieve the index of each data item after we reorder the list. 
 
-## Solution
-
-Currently, the ListBox does not provide a built-in method to retrieve the indexed of a specific dataItem.  
-  
-The dataSource is providing the indexOf method, but the dataItems are not reordered in the dataSource automatically after a reorder in the ListBox.  
-  
-The desired result can be achieved via custom logic on the reorder event of the ListBox. It will require manually removing the item from one position and then inserting in on the new one:  
-  
-[http://dojo.telerik.com/Edeco/4](http://dojo.telerik.com/Edeco/4)  
-  
-[http://docs.telerik.com/kendo-ui/api/javascript/data/datasource\#methods-insert](http://docs.telerik.com/kendo-ui/api/javascript/data/datasource#methods-insert)  
-  
-[http://docs.telerik.com/kendo-ui/api/javascript/data/datasource\#methods-indexOf](http://docs.telerik.com/kendo-ui/api/javascript/data/datasource#methods-indexOf)  
-  
-When the indexes of the dataSource items are matching the order in the ListBox, the indexOf method will return the correct index when needed.  
-  
-Please have in mind that the example is using the jQuery version, but as the logic is using client-side methods, the implementation for the AngularJS version is similar.  
-  
+Can I easily retrieve the index of each data item after reordering the ListBox? 
 
 ## Suggested Workarounds
 
-## Steps to Reproduce
+The ListBox does not provide a built-in solution for achieving this behavior.
 
-## Error Message
+However, you can still work around this issue by applying custom logic on the `reorder` event of the ListBox.
 
-## Cause\Possible Cause(s)
+The Kendo UI dataSource features the `indexOf` method but the data items are not automatically reordered in the dataSource after the reordering takes place. To retrieve the index of a specific ListBox data item, manually remove the item from its current and insert it in its desired position. When the indexes of the dataSource items match the order in the ListBox, then the `indexOf` method returns the correct index.
 
-## Notes
+For more information on the API settings, refer to the documentation on the [`insert`](http://docs.telerik.com/kendo-ui/api/javascript/data/datasource#methods-insert) and [`indexOf`](http://docs.telerik.com/kendo-ui/api/javascript/data/datasource#methods-indexOf) methods.  
+
+For a working demo, refer to [this example](http://dojo.telerik.com/Edeco/4). Although the demo uses the jQuery version, the logic applies client-side methods and the implementation for the AngularJS version is similar.

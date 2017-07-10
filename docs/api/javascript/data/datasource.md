@@ -656,6 +656,10 @@ The data item field to group by.
     });
     </script>
 
+### inPlaceSort `Boolean` *(default: false)*
+
+If set to `true` the original `Array` used as [`data`](#configuration-data) will be sorted when sorting operation is performed. This setting supported only with local data, bound to a JavaScript array via the [`data`](#configuration-data) option. 
+
 ### offlineStorage `String|Object`
 
 The offline storage key or custom offline storage implementation.

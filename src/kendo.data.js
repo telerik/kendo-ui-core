@@ -1385,7 +1385,7 @@ var __meta__ = { // jshint ignore:line
         select: function (selector) {
             return new Query(map(this.data, selector));
         },
-        order: function(selector, dir) {
+        order: function(selector, dir, inPlace) {
             var sort = { dir: dir };
 
             if (selector) {
@@ -1396,15 +1396,18 @@ var __meta__ = { // jshint ignore:line
                 }
             }
 
+            if (inPlace) {
+                return new Query(this.data.sort(Comparer.create(sort)));
+            }
             return new Query(this.data.slice(0).sort(Comparer.create(sort)));
         },
-        orderBy: function(selector) {
-            return this.order(selector, "asc");
+        orderBy: function(selector, inPlace) {
+            return this.order(selector, "asc", inPlace);
         },
-        orderByDescending: function(selector) {
-            return this.order(selector, "desc");
+        orderByDescending: function(selector, inPlace) {
+            return this.order(selector, "desc", inPlace);
         },
-        sort: function(field, dir, comparer) {
+        sort: function(field, dir, comparer, inPlace) {
             var idx,
             length,
             descriptors = normalizeSort(field, dir),
@@ -1417,7 +1420,7 @@ var __meta__ = { // jshint ignore:line
                     comparers.push(comparer.create(descriptors[idx]));
                 }
 
-                return this.orderBy({ compare: comparer.combine(comparers) });
+                return this.orderBy({ compare: comparer.combine(comparers) }, inPlace);
             }
 
             return this;
@@ -1666,7 +1669,7 @@ var __meta__ = { // jshint ignore:line
         return result;
     }
 
-    Query.process = function(data, options) {
+    Query.process = function(data, options, inPlace) {
         options = options || {};
 
         var query = new Query(data),
@@ -1689,7 +1692,12 @@ var __meta__ = { // jshint ignore:line
         }
 
         if (sort) {
-            query = query.sort(sort);
+            if (inPlace) {
+                query = query.sort(sort, undefined, undefined, inPlace);
+            }
+            else {
+                query = query.sort(sort);
+            }
 
             if (group) {
                 data = query.toArray();
@@ -2377,7 +2385,8 @@ var __meta__ = { // jshint ignore:line
             serverFiltering: false,
             serverGrouping: false,
             serverAggregates: false,
-            batch: false
+            batch: false,
+            inPlaceSort: false
         },
 
         clone: function() {
@@ -3536,7 +3545,12 @@ var __meta__ = { // jshint ignore:line
         },
 
         _queryProcess: function(data, options) {
-            return Query.process(data, options);
+            if (this.options.inPlaceSort) {
+                return Query.process(data, options, this.options.inPlaceSort);
+            }
+            else {
+                return Query.process(data, options);
+            }
         },
 
         _mergeState: function(options) {
@@ -3937,8 +3951,12 @@ var __meta__ = { // jshint ignore:line
                             rangeEnd = range.end;
 
                             if (!remote) {
-                                var sort = normalizeGroup(that.group() || []).concat(normalizeSort(that.sort() || []));
-                                processed = that._queryProcess(range.data, { sort: sort, filter: that.filter() });
+                                if (options.inPlaceSort) {
+                                    processed = that._queryProcess(range.data, { filter: that.filter() });
+                                } else {
+                                    var sort = normalizeGroup(that.group() || []).concat(normalizeSort(that.sort() || []));
+                                    processed = that._queryProcess(range.data, { sort: sort, filter: that.filter() });
+                                }
                                 flatData = rangeData = processed.data;
 
                                 if (processed.total !== undefined) {

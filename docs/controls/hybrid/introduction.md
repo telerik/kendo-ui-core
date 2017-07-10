@@ -17,13 +17,13 @@ The Kendo UI hybrid framework is designed to help developers build mobile app ex
 
 ![Illustration of Kendo UI mobile adaptive rendering](/images/mobile/km-adaptive-rending-illustration.png)
 
-Where some mobile HTML frameworks focus on providing a one-size-fits-all experience, the Kendo UI hybrid framework focuses on delivering perfectly tailored experiences for different mobile platforms. Built and packaged correctly, the goal of such an application is to be virtually indistinguishable to end-users from a native SDK app.
+While some mobile HTML frameworks focus on providing a one-size-fits-all experience, the Kendo UI hybrid framework focuses on delivering perfectly tailored experiences for different mobile platforms. Built and packaged correctly, the goal of such an application is to be virtually indistinguishable to end-users from a native SDK app.
 
 The advantage of building apps with HTML, JavaScript, and Kendo UI is that you are able to maintain a single code base to target all major app platforms. Your team can focus on becoming masters of HTML, JavaScript, and CSS, rather than being average practitioners of Objective-C, Java, .NET, UIKit, and the myriad of other developer skills needed for cross-platform mobile app development.
 
-## Building Blocks of Hybrid Apps
+## Building Blocks of Hybrid Applications
 
-The Kendo UI hybrid apps are built entirely with HTML, JavaScript, and CSS. Those are the only skills you will need to build a Kendo UI mobile app that looks and feels native across mobile platforms. If you plan to work with data, make sure you are familiar with [JSON](http://en.wikipedia.org/wiki/JSON).
+The Kendo UI hybrid applications are built entirely with HTML, JavaScript, and CSS. Those are the only skills you will need to build a Kendo UI mobile app that looks and feels native across mobile platforms. If you plan to work with data, make sure you are familiar with [JSON](http://en.wikipedia.org/wiki/JSON).
 
 Applications do not need to be cross-compiled into a native [software-development kit (SDK)](https://en.wikipedia.org/wiki/Software_development_kit) language. Your HTML and JavaScript code is ultimately intended to run on mobile devices, even if you eventually use tools like [Cordova](http://incubator.apache.org/cordova/) to package your application for an app store.
 
@@ -37,9 +37,14 @@ Layouts and Views are defined through HTML. The Application is simply JavaScript
 
 ## Getting Started
 
-The sections below demonstrate how to create the basic structure of a Kendo UI hybrid application by using the building blocks.
+To create the basic structure of a Kendo UI hybrid application by using its building blocks:
+* [Create an HTML page](#create-an-html-page)
+* [Add references to Kendo UI](#add-references-to-kendo-ui)
+* [Define the layout of the application](#define-the-application-layout)
+* [Define the view](#define-the-view)
+* [Initialize the hybrid application](#initialize-the-hybrid-application)
 
-### Step 1: Create HTML Page
+### Create an HTML Page
 
 Kendo UI hybrid apps can be created by using simple HTML pages. First, try creating a page called `index.html` using the code from the example below.
 
@@ -61,7 +66,7 @@ Kendo UI hybrid apps can be created by using simple HTML pages. First, try creat
 >
 > The Kendo UI hybrid Application automatically adds mobile meta tags for you at runtime.
 
-### Step 2: Add References to Kendo UI
+### Add References to Kendo UI
 
 Just as with other parts of the Kendo UI framework, adding Kendo UI to your application is a process of copying the provided JavaScript and CSS assets into your project and then configuring the CSS and JavaScript links. When set up, your app page should look similar to the one demonstrated in the example below.
 
@@ -89,7 +94,7 @@ This example uses the minified versions of Kendo UI scripts and styles that incl
 
 Find out more about installing Kendo UI in your project [this article]({% slug getting_started_installation_kendoui %}) section.
 
-### Step 3: Define the Application Layout
+### Define the Application Layout
 
 The layout is the template of your application. The whole content from views, which you are to create later, are going to be rendered inside of the layout, or layouts&mdash;you can define as many layouts as you need. A layout can contain anything, but generally it is where your app title bar and navigation are going to live. Add a layout to your app with the basic elements demonstrated in the example below.
 
@@ -128,7 +133,7 @@ When the Application is initialized, this block of HTML is going to be initializ
 
 Next, for completeness, a couple of Kendo UI hybrid widgets are introduced&mdash;[NavBar]({% slug overview_hybridnavbar %}) and [TabStip]({% slug overview_hybridtabstrip %}). Note that they are also configured with the simple `data-role` attribute.
 
-### Step 4: Create View
+### Create the View
 
 Now that the application layout is defined, you need to define at least one view to be displayed when the application loads. Most apps have multiple views. However, start with the simple configuration from the example below.
 
@@ -167,7 +172,7 @@ This example uses the `data-role` attribute to define your view, and the `data-l
 
 Instead of `<a href="#home">Home</a>`, you can also use `<a href="#/">Home</a>`. By definition, the `#/` URL points to the first view, which is defined in the HTML file or the so-called root view. If you try to run the application now, you see a bunch of HTML, but nothing looks right yet. You need to take one more step to initialize the application.
 
-### Step 5: Initialize the Hybrid App
+### Initialize the Hybrid Application
 
 To make this HTML start looking like a mobile app, add the following line of script after your jQuery and Kendo UI script links, but before the closing `body` tag.
 
@@ -179,7 +184,7 @@ To make this HTML start looking like a mobile app, add the following line of scr
 
 This automatically initializes your Kendo UI hybrid application together with all widgets with `data-role` attributes.
 
-Following is a full example of the above implementation:
+The following example demonstrates the full implementation of the described approach.
 
 ###### Example
 

@@ -1,38 +1,38 @@
 ---
-title: How To Show and Hide Detail Rows Based on Master Row Value
-description: How to disable the detail row based on the checkbox in the master row. Persist expanded rows after Grid refresh.
+title: Show and Hide Detail Rows Based on Master Row Value
+description: An example on how to disable the detail Grid row based on the checkbox in the master row and how to persist expanded rows after the Grid is refreshed.
 type: how-to
-page_title: Disable Detail Rows With Checkboxes
-slug: disable-detail-rows-with-checkboxes 
-position: 0
+page_title: Disable Detail Rows With Checkboxes | Kendo UI Grid
+slug: disable-detail-rows-with-checkboxes
 tags: kendo ui, grid, detail template
-teampulseid:
 ticketid: 1110784
-pitsid:
+res_type: kb
 ---
 
 ## Environment
+
 <table>
  <tr>
   <td>Product</td>
-  <td>Grid for Progress® Kendo UI®</td>
+  <td>Grid for Progress Kendo UI</td>
  </tr>
  <tr>
-  <td>Progress® Kendo UI® version</td>
+  <td>Progress Kendo UI version</td>
   <td>Tested up to version 2017.2 504</td>
  </tr>
 </table>
-
  
 ## Description
 
-How to show and hide details rows based on the checkbox in the master row. When I change a value all details rows collapse. 
+When I change a value, all detail Grid rows collapse. Can I show and hide detail rows based on the checkbox in the master row of a Kendo UI Grid?
 
-## Possible Solution
+## Solution
 
-Add or remove the master row UID from a global array on every detail row expand/collapse. In the handler function of the `dataBound` event:
+To implement this scenario, remove the UID of the master row from the global array on each expand or collapse of the detail row.
 
-1. Based on the checkbox value, disable the expanding button.
+In the handler function of the `dataBound` event:
+
+1. Disable the expanding button based on the checkbox value.
 1. Expand all master rows from the global array.
 
 ```html

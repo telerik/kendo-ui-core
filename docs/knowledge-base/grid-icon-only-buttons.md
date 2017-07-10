@@ -1,14 +1,11 @@
 ---
-title: Use Grid Edit Buttons with Icons Only and No Text
-description: How to remove the text of the Grid Edit buttons and leave only the icons in a Kendo UI Grid.
+title: Use Grid Edit Buttons with Icons only and No Text
+description: An example on how to remove the text from the Edit buttons of a Kendo UI Grid and leave only the icons.
 type: how-to
-page_title: Use Grid Edit Buttons with Icons Only and No Text
-slug: grid_icon_only_buttons
-position: 0
+page_title: Use the Grid Edit Buttons only with Icons and without Text | Kendo UI Grid
+slug: grid-icon-only-buttons
 tags: grid, editing, buttons, kendo ui, icons
-teampulseid:
 ticketid: 663290
-pitsid:
 res_type: kb
 ---
 
@@ -17,21 +14,21 @@ res_type: kb
 <table>
  <tr>
   <td>Product</td>
-  <td>Grid for Progress® Kendo UI®</td>
+  <td>Grid for Progress Kendo UI</td>
  </tr>
  <tr>
-  <td>Progress® Kendo UI® version</td>
+  <td>Progress Kendo UI version</td>
   <td>2017.2.504</td>
  </tr>
 </table>
 
 ## Description
 
-You might want to use the **Edit**, **Delete**, **Update**, **Cancel**, or **Add** buttons of the Grid with icons only and without text. For example, in the cases when you need to save space.
+The Grid allows you to use the **Edit**, **Delete**, **Update**, **Cancel**, and **Add** buttons only with icons and without displaying any text in them. This approach is useful when you need to save space.
 
-## Possible Solution
+## Solution
 
-To remove the text from the user-interaction buttons of the Grid and make them display only icons:
+To remove the text from the user-interaction buttons and have them display only icons:
 
 1. Set the `text` of the `command` to a space:
 

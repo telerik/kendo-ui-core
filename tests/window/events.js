@@ -416,6 +416,87 @@
         equal(dialogObject.wrapper.height(), 105);
     });
 
+    test("alt+p toggles pin", 2, function() {
+        var dialogObject = createWindow({
+            height: 100,
+            maxHeight: 105
+        });
+        var dialog = dialogObject.element;
+
+        dialog.press(80, { altKey: true });
+
+        ok(dialogObject.options.pinned);
+
+        dialog.press(80, { altKey: true });
+
+        ok(!dialogObject.options.pinned);
+    });
+
+    test("alt+up maximizes the window", function() {
+        var dialogObject = createWindow({
+            height: 100,
+            maxHeight: 105
+        });
+        var dialog = dialogObject.element;
+
+        dialog.press(keys.UP, { altKey: true });
+
+        ok(dialogObject.isMaximized());
+    });
+
+    test("alt+down restores a maximized window", function() {
+        var dialogObject = createWindow({
+            height: 100,
+            maxHeight: 105
+        });
+        var dialog = dialogObject.element;
+        dialogObject.maximize();
+        dialog.press(keys.DOWN, { altKey: true });
+
+        ok(!dialogObject.isMaximized());
+    });
+
+    test("alt+down minimizes window", function() {
+        var dialogObject = createWindow({
+            height: 100,
+            maxHeight: 105
+        });
+        var dialog = dialogObject.element;
+
+        dialog.press(keys.DOWN, { altKey: true });
+
+        ok(dialogObject.isMinimized());
+    });
+
+    test("alt+up restores a minimized window", function() {
+        var dialogObject = createWindow({
+            height: 100,
+            maxHeight: 105
+        });
+        var dialog = dialogObject.element;
+        dialogObject.minimize();
+        dialog.press(keys.UP, { altKey: true });
+
+        ok(!dialogObject.isMinimized());
+    });
+
+    asyncTest("alt+r triggers refresh event", 1, function() {
+        var timeout = setTimeout(start, 2000);
+
+        var dialogObject = createWindow({
+            content: "/base/tests/window/blank.html",
+            iframe: true,
+        });
+
+        dialogObject.one("refresh", function(){
+            clearTimeout(timeout);
+            start();
+            ok(true);
+        });
+
+        dialogObject.element.press(82, { altKey: true });
+    });
+
     test("resizing window with the keyboard updates widget options", 2, function() {
         var initialSize = 200,
             dialog = createWindow({ width: initialSize, height: initialSize });
