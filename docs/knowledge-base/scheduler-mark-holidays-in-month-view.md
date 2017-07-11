@@ -1,35 +1,32 @@
 ---
-title: Mark holidays in month view
-description: Apply different styling on national holidays
+title: Mark Holidays in Month View
+description: An example on how to apply different styling on national-holiday time-slots in the Kendo UI Scheduler.
 type: how-to
-page_title: Custom styling on holiday time-slots
+page_title: Apply Custom Styling to Holiday Time-Slots | Kendo UI Scheduler
 slug: scheduler-mark-holidays-in-month-view
-position: 0
 tags: kendo, scheduler, month-view, holidays, slots
-teampulseid:
 ticketid: 1116454
-pitsid:
-
+res_type: kb
 ---
 
 ## Environment
+
 <table>
  <tr>
   <td>Product</td>
-  <td>Scheduler for Progress® Kendo UI®</td>
+  <td>Scheduler for Progress Kendo UI</td>
  </tr>
 </table>
 
-
 ## Description
-How to apply custom styling to a holiday (no weekend day) in the Scheduler month view?
+
+How can I apply custom styling to a holiday time-slot in the Scheduler month view?
 
 ## Solution
-You could achieve the desired by implementing a [dataBound](http://docs.telerik.com/kendo-ui/api/javascript/ui/scheduler#events-dataBound) event handler. In that handler, you could iterate over all the sloths available on the screen and alter the styling for the required dates:  
 
-###### Example
+Implement a [`dataBound`](http://docs.telerik.com/kendo-ui/api/javascript/ui/scheduler#events-dataBound) event handler. In the handler, iterate over all the sloths that are available on the screen and alter the styling for the required dates, use the following approach:  
 
-````html
+```html
 	<div id="scheduler"></div>
 	<script>
 		function onDataBound(e) {
@@ -45,7 +42,7 @@ You could achieve the desired by implementing a [dataBound](http://docs.telerik.
 				}
 			}
 		}
-	  
+
 		$("#scheduler").kendoScheduler({
 			date: new Date("2013/6/6"),
 			views: [ "month" ],
@@ -63,6 +60,4 @@ You could achieve the desired by implementing a [dataBound](http://docs.telerik.
 			}]
 		});
   </script>
-````
-
-## Notes
+```

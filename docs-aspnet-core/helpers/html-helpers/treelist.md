@@ -7,7 +7,7 @@ slug: htmlhelpers_treelist_aspnetcore
 
 # TreeList HtmlHelper Overview
 
-The TreeList HtmlHelper extension is a server-side wrapper for the [Kendo UI TreeList](http://demos.telerik.com/aspnet-mvc/treelist/index).
+The TreeList HtmlHelper extension is a server-side wrapper for the [Kendo UI TreeList](http://demos.telerik.com/aspnet-mvc/treelist/index) widget.
 
 It enables the display of self-referencing tabular data and allows sorting, filtering, and data editing.
 

@@ -6,6 +6,7 @@ page_title: Get the DataItems of the Selected Rows | Kendo UI Grid
 slug: checkbox-selection-dataitems-selected-rows
 tags: checkbox selection, grid, kendo ui
 ticketid: 1116716
+res_type: kb
 ---
 
 ## Environment

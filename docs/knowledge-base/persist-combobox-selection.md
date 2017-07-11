@@ -1,22 +1,20 @@
 ---
-title: How to persist the selection of ComboBox
-description: Persisting the selected item in ComboBox component
+title: Persist the Selection in the ComboBox
+description: An example on how to persist the selected item in a Kendo UI ComboBox.
 type: how-to
-page_title: How to persist ComboBox selection
-slug: how-to-persist-combobox-selection
-position: 0
-tags: persisting,selected,item,combobox
-teampulseid:
+page_title: Persist the ComboBox Selection | Kendo UI ComboBox
+slug: persist-combobox-selection
+tags: persisting, selected, item, combobox
 ticketid: 1116339
-pitsid:
-
+res_type: kb
 ---
 
 ## Environment
+
 <table>
  <tr>
   <td>Product</td>
-  <td>ComboBox for Progress® Kendo UI®</td>
+  <td>ComboBox for Progress Kendo UI</td>
  </tr>
  <tr>
   <td>Operating System</td>
@@ -28,18 +26,15 @@ pitsid:
  </tr>
 </table>
 
-
 ## Description
 
-In web pages we had the Persistence Manager control to preserve the user options and state of the page across postbacks. We are using kendo ComboBoxes for criteria and kendo grid. We need to persist the selected item in the ComboBox.
+In web pages I have the Persistence Manager control to preserve the user options and the state of the page through postbacks. I use the Kendo UI ComboBox for entering the criteria and the Kendo UI Grid. How can I persist the selected item in the ComboBox?
 
 ## Solution
 
-To persist the selected item in the ComboBox component you can use the [select() method](http://docs.telerik.com/kendo-ui/api/javascript/ui/combobox#methods-select) to retrieve the selected item and keep it in localStorage. When necessary you can set it as selected again with select(). 
+Retrieve the selected item and keep it in `localStorage` by using the [`select()`](http://docs.telerik.com/kendo-ui/api/javascript/ui/combobox#methods-select) method. When necessary, set an item as selected again by using `select()`.
 
-###### Example
-
-````html
+```html
   <div  >
       <a href="#" class="k-button" id="save">Save State</a>
       <a href="#" class="k-button" id="load">Load State</a>
@@ -84,9 +79,8 @@ To persist the selected item in the ComboBox component you can use the [select()
 
 
     </script>
-````
+```
 
 ## See Also
 
-* [Persist Grid state](http://demos.telerik.com/kendo-ui/grid/persist-state)
-
+* [Demo on Persisting the Grid State](http://demos.telerik.com/kendo-ui/grid/persist-state)

@@ -213,15 +213,13 @@ body .k-split-button-arrow
     }
 
     // Icon
-    .k-icon,
-    .k-font-icon {
+    .k-icon {
         overflow: visible;
     }
 
     &:focus,
     .k-state-focused {
-        .k-icon,
-        .k-font-icon {
+        .k-icon {
             text-shadow: 0 0 3px currentColor;
         }
     }
@@ -277,99 +275,6 @@ body .k-split-button-arrow
 
 @grid-size: 16px;
 
-// outputs background-position
-.sprite-position(@row, @column) when (ispixel(@column)) {
-    background-position: @row @column;
-}
-
-// outputs background-position in a grid
-.sprite-position(@row, @column, @size: @grid-size) when not (ispixel(@column)) {
-    background-position: (-@row * @size) (-@column * @size);
-}
-
-// outputs background-position and hover state background position
-.sprite-hoverable(@row, @column, @size: @grid-size) when (ispixel(@column)) {
-    .sprite-position(@row, @column);
-
-    .k-link:not(.k-state-disabled):hover > &,
-    .k-state-hover > &,
-    .k-state-hover > * > &,
-    .k-button:not(.k-state-disabled):hover &,
-    .k-textbox:hover &,
-    .k-button:active & {
-        .sprite-position((@row - @size), @column);
-    }
-}
-
-// outputs background-position and hover state background position
-.sprite-hoverable-rtl(@row, @column, @size: @grid-size) when (ispixel(@column)) {
-
-    .k-rtl & {
-        .sprite-position(@row, @column);
-    }
-
-    .k-rtl .k-link:not(.k-state-disabled):hover > &,
-    .k-rtl .k-state-hover > &,
-    .k-rtl .k-state-hover > * > &,
-    .k-rtl .k-button:not(.k-state-disabled):hover &,
-    .k-rtl .k-textbox:hover &,
-    .k-rtl .k-button:active & {
-        .sprite-position(@row - @size, @column);
-
-        & when (@icon-positioning = "material") {
-            .sprite-position(@row, @column);
-        }
-    }
-}
-
-// outputs background-position and hover state background position, aligned in a grid
-.sprite-hoverable(@row, @column, @size: @grid-size) when not (ispixel(@column)) and not (@icon-positioning = "material") {
-    .sprite-position(@row, @column, @size);
-
-    .k-link:not(.k-state-disabled):hover > &,
-    .k-state-hover > &,
-    .k-state-hover > * > &,
-    .k-button:not(.k-state-disabled):hover &,
-    .k-textbox:hover &,
-    .k-button:active & {
-        .sprite-position((@row + 1), @column, @size);
-    }
-}
-
-// sprite positioning for material theme
-.sprite-hoverable(@row, @column, @size: @grid-size) when not (ispixel(@column)) and (@icon-positioning = "material") {
-    .sprite-position(@row, @column, @size);
-
-    .k-link:not(.k-state-disabled):hover > &,
-    .k-state-hover > &,
-    .k-state-hover > * > &,
-    .k-button:not(.k-state-disabled):hover &,
-    .k-textbox:hover &,
-    .k-button:active & {
-        .sprite-position(@row, @column, @size);
-    }
-}
-
-// outputs background-position and hover state background position, aligned in a grid
-.sprite-hoverable-rtl(@row, @column, @size: @grid-size) when not (ispixel(@column)) {
-    .k-rtl & {
-        .sprite-position(@row, @column, @size);
-    }
-
-    .k-rtl .k-link:not(.k-state-disabled):hover > &,
-    .k-rtl .k-state-hover > &,
-    .k-rtl .k-state-hover > * > &,
-    .k-rtl .k-button:not(.k-state-disabled):hover &,
-    .k-rtl .k-textbox:hover &,
-    .k-rtl .k-button:active & {
-        .sprite-position((@row + 1), @column, @size);
-
-        & when (@icon-positioning = "material") {
-            .sprite-position(@row, @column);
-        }
-    }
-}
-
 .k-icon.k-i-none
 {
     background-image: none !important; /* should never be a background on these */
@@ -381,11 +286,6 @@ body .k-split-button-arrow
 .k-ie8 .k-tool-icon
 {
     vertical-align: middle;
-}
-
-.k-file > .k-icon
-{
-    background-position:-115px -91px;
 }
 
 .k-image
@@ -544,8 +444,8 @@ html .k-error-colored
     height: 4px;
 }
 
-.k-reorder-cue .k-i-arrow-60-down { top: -4px; background-position: -4px -166px; }
-.k-reorder-cue .k-i-arrow-60-up { bottom: -4px; background-position: -4px -134px; }
+.k-reorder-cue .k-i-arrow-60-down { top: -4px; }
+.k-reorder-cue .k-i-arrow-60-up { bottom: -4px; }
 
 /* virtual scrollbar */
 
@@ -853,22 +753,11 @@ input.k-checkbox + label {
 
 /* Font Icons */
 .k-icon,
-.k-font-icon,
-.k-font-icon.k-icon,
-.k-font-icon.k-tool-icon {
+.k-tool-icon {
     .use-font-icon();
-    overflow: visible;
     color: inherit;
 }
-.k-icon:before,
-.k-font-icon:before {
-    width: 1em;
-    height: 1em;
-    display: inline-block;
-}
 
-.k-icon,
-.k-tool-icon,
 .k-i-drag-and-drop,
 .k-column-menu .k-sprite,
 .k-grid-mobile .k-resize-handle-inner:before,
@@ -879,22 +768,23 @@ input.k-checkbox + label {
     .use-font-icon();
 }
 .k-icon:before {
-    width: initial;
-    height: initial;
+    margin: auto;
+    width: 1em;
+    height: 1em;
+    line-height: 1;
+    display: inline-block;
     position: absolute;
     top: 0;
     bottom: 0;
     left: 0;
     right: 0;
-    margin: auto;
-    height: 1em;
-    line-height: 1;
 }
 
 .k-button.k-button-icon .k-icon,
 .k-grid-filter .k-icon,
 .k-header .k-icon {
     text-indent: -99999px;
+    overflow: hidden;
 
     &:before {
         text-indent: 0;

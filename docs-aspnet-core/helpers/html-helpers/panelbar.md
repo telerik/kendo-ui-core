@@ -7,7 +7,7 @@ slug: htmlhelpers_panelbar_aspnetcore
 
 # PanelBar HtmlHelper Overview
 
-The PanelBar HtmlHelper extension is a server-side wrapper for the [Kendo UI PanelBar](http://demos.telerik.com/kendo-ui/panelbar/index).
+The PanelBar HtmlHelper extension is a server-side wrapper for the [Kendo UI PanelBar](http://demos.telerik.com/kendo-ui/panelbar/index) widget.
 
 It allows you to configure the Kendo UI PanelBar widget from server-side code. The [PanelBar](http://docs.telerik.com/kendo-ui/controls/navigation/panelbar/overview) displays hierarchical data as a multi-level, expandable widget.
 

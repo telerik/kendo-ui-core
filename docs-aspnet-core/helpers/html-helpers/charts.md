@@ -7,7 +7,7 @@ slug: htmlhelpers_charts_aspnetcore
 
 # Charts HtmlHelper Overview
 
-The Charts HtmlHelper extension is a server-side wrapper for the [Kendo UI Charts](http://docs.telerik.com/kendo-ui/controls/charts/overview).
+The Charts HtmlHelper extension is a server-side wrapper for the [Kendo UI Charts](http://demos.telerik.com/kendo-ui/area-charts/index) widget.
 
 The [Kendo UI Charts](http://demos.telerik.com/aspnet-core/) use modern browser technologies to render high-quality data visualizations. All graphics are rendered on the client by using [Scalable Vector Graphics (SVG)](https://en.wikipedia.org/wiki/Scalable_Vector_Graphics) with a fallback to [Canvas](http://www.canvasgfx.com/).
 
@@ -59,8 +59,7 @@ The following example demonstrates the basic configuration for the Line Chart Ht
 
 ###### Example
 
-```tab-Razor
-
+```
     @(Html.Kendo().Chart()
         .Name("chart")
         .Title("Gross domestic product growth \n /GDP annual %/")

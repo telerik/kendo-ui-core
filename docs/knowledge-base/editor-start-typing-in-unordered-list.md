@@ -20,7 +20,7 @@ res_type: kb
 
 ## Description
 
-By setting the Editor value to start as a bullet list, the widget allows you to:
+How can I achieve the following behavior?
 
 1. Have the first bullet in a list to appear automatically.
 1. Type the data you need.
@@ -28,7 +28,7 @@ By setting the Editor value to start as a bullet list, the widget allows you to:
 
 ## Solution
 
-To achieve this behavior, handle the `select` event of the widget and execute the `insertUnorderedList` command.
+Handle the `select` event of the widget and execute the `insertUnorderedList` command.
 
 ````html
 	<textarea id="editor"></textarea>

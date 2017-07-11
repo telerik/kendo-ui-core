@@ -24,7 +24,7 @@ res_type: kb
  
 ## Description
 
-I want to disable the display of the year in the DatePicker. Can I enable my users to select only a day from a month while I hide from them the option to select the year?
+Can I disable the display of the year in the DatePicker? How can I enable my users to select only a day from a month while I hide from them the option to select the year?
 
 ## Solution
 

@@ -19,7 +19,7 @@ The following example demonstrates how to define the Button by using the Button 
 
 ###### Example
 
-```tab-Razor
+```
 @(Html.Kendo().Button()
     .Name("textButton")
     .HtmlAttributes( new {type = "button"} )
@@ -34,8 +34,7 @@ The following example demonstrates the basic configuration of the Button HtmlHel
 
 ###### Example
 
-```tab-Razor
-
+```
 @(Html.Kendo().Button()
     .Name("textButton")
     .Tag("span")

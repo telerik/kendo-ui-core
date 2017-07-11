@@ -24,11 +24,11 @@ res_type: kb
  
 ## Description
 
-When I change a value, all detail Grid rows collapse. Can I show and hide detail rows based on the checkbox in the master row of a Kendo UI Grid?
+When I change a value, all detail Grid rows collapse. How can I show and hide detail rows based on the checkbox in the master row of a Kendo UI Grid?
 
 ## Solution
 
-To implement this scenario, remove the UID of the master row from the global array on each expand or collapse of the detail row.
+Remove the UID of the master row from the global array on each expand or collapse of the detail row.
 
 In the handler function of the `dataBound` event:
 

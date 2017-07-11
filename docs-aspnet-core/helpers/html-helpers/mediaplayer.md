@@ -1,7 +1,7 @@
 ---
 title: MediaPlayer
 page_title: MediaPlayer | UI for ASP.NET Core HtmlHelpers
-description: "Get started with the MediaPlayer HtmlHelper for ASP.NET Core (MVC 6 or ASP.NET Core MVC)."
+description: "Learn the basics when working with the MediaPlayer for ASP.NET Core (MVC 6 or ASP.NET Core MVC)."
 slug: htmlhelpers_mediaplayer_aspnetcore
 ---
 
@@ -11,11 +11,11 @@ The MediaPlayer HtmlHelper extension is a server-side wrapper for the [Kendo UI 
 
 It plays video files from static sources or streams online YouTube videos and enriches your website with dynamic content in a user-friendly interface. It provides a styled video UI functionality by using the HTML5 `<video>` element and brings powerful media capabilities to your applications without the necessity of installing additional plug-ins.
 
-To respond to cutting-end design practices and trends, the MediaPlayer component provides a *responsive* layout. This means that its size adapts depending on the capabilities of the client (end user) device and browser. The component automatically resizes its area to display the video in the most suitable possible way within the provided dimensions. The responsive web design of the MediaPlayer is shipped out-of-the-box and intends to save you time and efforts when developing your responsive applications.
+To respond to cutting-end design practices and trends, the MediaPlayer component provides a responsive layout. This means that its size adapts depending on the capabilities of the client (end user) device and browser. The component automatically resizes its area to display the video in the most suitable possible way within the provided dimensions. The responsive web design of the MediaPlayer is shipped out-of-the-box and intends to save you time and efforts when developing your responsive applications.
 
 For more information on the HtmlHelper, refer to the article on the [MediaPlayer HtmlHelper for ASP.NET MVC](http://docs.telerik.com/aspnet-mvc/helpers/mediaplayer/overview).
 
-**Key Features**
+## Key Features
 
 The Kendo UI MediaPlayer widget:
 
@@ -37,7 +37,7 @@ Once the video files are ready, initialize the MediaPlayer HtmlHelper. It will r
 
 ###### Example
 
-```tab-Razor
+```
 @(Html.Kendo().MediaPlayer()
     .Name("mediaplayer")
     .AutoPlay(true)
@@ -61,7 +61,7 @@ The following example demonstrates how to access an existing MediaPlayer instanc
 
 ###### Example
 
-```tab-Razor
+```
 @(Html.Kendo().MediaPlayer()
     .Name("mediaplayer")
     .AutoPlay(true)
@@ -82,7 +82,7 @@ The following example demonstrates how to access an existing MediaPlayer instanc
 
 ## Event Handling
 
-You can subscribe to all [MediaPlayer events](http://docs.telerik.com/kendo-ui/api/javascript/ui/mediaplayer#events). 
+You can subscribe to all [MediaPlayer events](http://docs.telerik.com/kendo-ui/api/javascript/ui/mediaplayer#events).
 
 ### By Handler Name
 
@@ -90,7 +90,7 @@ The examples below demonstrates how to subscribe to events using a handler name.
 
 ###### Example
 
-```tab-Razor
+```
 @(Html.Kendo().MediaPlayer()
     .Name("mediaplayer")
     .AutoPlay(true)
@@ -121,7 +121,7 @@ The following example demonstrates how to subscribe to events using a template d
 
 ###### Example
 
-```tab-Razor
+```
 @(Html.Kendo().MediaPlayer()
     .Name("mediaplayer")
     .AutoPlay(true)

@@ -902,7 +902,11 @@ var __meta__ = { // jshint ignore:line
             clearTimeout(that._typingTimeout);
             that._typingTimeout = null;
 
-            if (key != keys.TAB && !that._move(e)) {
+            if (key === keys.HOME) {
+                that._firstItem();
+            } else if (key === keys.END) {
+                that._lastItem();
+            } else if (key != keys.TAB && !that._move(e)) {
                that._search();
             }
         },

@@ -24,11 +24,11 @@ res_type: kb
 
 ## Description
 
-You can easily distinguish between the child grids of a master Kendo UI Grid by setting different colors to the headers of each child grid.
+How can I distinguish between the child grids of a master Kendo UI Grid by setting different colors to the headers of each child grid?
 
 ## Solution
 
-To apply different colors to the child grid headers, conditionally change the background color of the header cells in the `dataBound` event handler of every child grid.
+Conditionally change the background color of the header cells in the `dataBound` event handler of every child grid.
 
 ```html
 <div id="grid"></div>

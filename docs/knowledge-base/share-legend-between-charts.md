@@ -1,36 +1,37 @@
 ---
 title: Share Legend Between Charts
-description: How to create a shared legend to show and hide series in two or more charts
+description: An example on how to create a shared legend to show and hide series in two or more Kendo UI Charts.
 type: how-to
-page_title: How to Create a Common Legend for Two Progress® Kendo UI® Charts
-slug: share_legend_between_charts
-position: 0
+page_title: Create Common Legend for Two or More Charts | Kendo UI Chart
+slug: share-legend-between-charts
 tags: chart, legend, series, kendo-ui
-teampulseid:
 ticketid: 1114263
-pitsid:
-
+res_type: kb
 ---
 
 ## Environment
+
 <table>
  <tr>
   <td>Product</td>
-  <td>Chart for Progress® Kendo UI®</td>
+  <td>Chart for Progress Kendo UI</td>
  </tr>
  <tr>
-  <td>Progress® Kendo UI® version</td>
+  <td>Progress Kendo UI version</td>
   <td>2017.2.621</td>
  </tr>
 </table>
 
-
 ## Description
-I need a way to "share" a legend between two charts. Is there a way that if I click on the legend of one chart, it will hide/show the series of both charts?
+
+Can I click on the legend of one Kendo UI Chart and have the series of the other Charts hide or show?
 
 ## Solution
 
-To achieve this, you can handle the [legendItemClick](http://docs.telerik.com/kendo-ui/api/javascript/dataviz/ui/chart#events-legendItemClick) event of the first Chart and manually toggle the series visibility in the other Charts. The following snippet demonstrates such an approach:  
+Handle the [`legendItemClick`](http://docs.telerik.com/kendo-ui/api/javascript/dataviz/ui/chart#events-legendItemClick) event of the first Chart and manually toggle the series visibility in the other Charts.
+
+The following example demonstrates the full implementation of the approach.  
+
 ```html
 <!DOCTYPE html>
 <html>
@@ -121,4 +122,5 @@ To achieve this, you can handle the [legendItemClick](http://docs.telerik.com/ke
 ```
 
 ## Notes
-If the series order may differ between Charts, you can also [access series by their name](http://docs.telerik.com/kendo-ui/api/javascript/dataviz/ui/chart#methods-findSeriesByName).  
+
+If the order of the series is different across the Charts, you can also [access the series by their names](http://docs.telerik.com/kendo-ui/api/javascript/dataviz/ui/chart#methods-findSeriesByName).  

@@ -4,6 +4,7 @@ var ComboBox = kendo.ui.ComboBox;
 var data = [{text: "Foo", value: 1}, {text:"Bar", value:2}];
 var CLICK = kendo.support.touch ? "touchend" : "click";
 var SELECTED = "k-state-selected";
+var FOCUSED = "k-state-focused";
 var keys = kendo.keys;
 var combobox;
 var input;
@@ -601,6 +602,34 @@ test("ComboBox prevents default on PAGEDOWN", 1, function() {
             ok(true);
         }
     });
+});
+
+test("ComboBox focuses first item on Home key", 1, function() {
+    var combobox = new ComboBox(input, {
+        animation: false,
+        dataSource: getData(100)
+    });
+
+    combobox.open();
+    combobox.input.trigger({
+        type: "keydown",
+        keyCode: keys.HOME
+    });
+    ok(combobox.ul.children().first().hasClass(FOCUSED));
+});
+
+test("ComboBox focuses last item on End key", 1, function() {
+    var combobox = new ComboBox(input, {
+        animation: false,
+        dataSource: getData(100)
+    });
+
+    combobox.open();
+    combobox.input.trigger({
+        type: "keydown",
+        keyCode: keys.END
+    });
+    ok(combobox.ul.children().last().hasClass(FOCUSED));
 });
 
 test("ComboBox select focused listview item on blur", 1, function() {

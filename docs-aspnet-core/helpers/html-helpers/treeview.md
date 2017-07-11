@@ -7,7 +7,7 @@ slug: htmlhelpers_treeview_aspnetcore
 
 # TreeView HtmlHelper Overview
 
-The TreeView HtmlHelper extension is a server-side wrapper for the [Kendo UI TreeView](http://demos.telerik.com/kendo-ui/treeview/index).
+The TreeView HtmlHelper extension is a server-side wrapper for the [Kendo UI TreeView](http://demos.telerik.com/kendo-ui/treeview/index) widget.
 
 It allows you to configure the Kendo UI TreeView widget from server-side code. The [TreeView](http://docs.telerik.com/kendo-ui/controls/navigation/treeview/overview) displays hierarchical data in a traditional tree structure. It supports user interaction through mouse or touch events to perform re-ordering operations by using the drag-and-drop functionality.
 
@@ -75,7 +75,7 @@ The following example demonstrates the basic configuration of the TreeView HtmlH
 
 ###### Example
 
-```tab-Razor
+```
     @(Html.Kendo().TreeView()
         .Name("treeview")
         .Checkboxes(true)

@@ -24,11 +24,9 @@ res_type: kb
 
 ## Description
 
-The Grid allows you to use the **Edit**, **Delete**, **Update**, **Cancel**, and **Add** buttons only with icons and without displaying any text in them. This approach is useful when you need to save space.
+How can I use the **Edit**, **Delete**, **Update**, **Cancel**, and **Add** buttons only with icons and without displaying any text in them?
 
 ## Solution
-
-To remove the text from the user-interaction buttons and have them display only icons:
 
 1. Set the `text` of the `command` to a space:
 

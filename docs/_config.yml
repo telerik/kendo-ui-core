@@ -277,8 +277,10 @@ navigation:
         title: "Breaking Changes"
         position: 13
     "updates":
-        title: "Updates and  Contribution"
+        title: "Updates and Contribution"
         position: 14
+    "knowledge_base":
+        title: "Knowledge Base"
     "copyright":
         title: "Copyright"
         position: 15
@@ -624,6 +626,7 @@ ff-sheet-id: 14zzclhdh7dMLpg0iq4-2hweCdEiuxxqP3tHdr42-_Cs
 # The google services configuration
 google_tag_manager: GTM-6X92
 google_custom_search: '001595215763381649090:eblhnfskwrk'
+google_custom_kb_search: '001595215763381649090:pzijaa9lgpi'
 
 # Assets pipeline configuration
 assets:

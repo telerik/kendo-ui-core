@@ -1,40 +1,38 @@
 ---
-title: MaskedTextBox does not allow input
-description:  MaskedTextBox doesn't allow input when maxlength attribute is set on the input
+title: MaskedTextBox Does Not Allow Input
+description: The MaskedTextBox widget does not allow any input when the maxlength attribute is set on the input.
 type: troubleshooting
-page_title: MaskedTextBox prevents input when maxlength attribute is same length as the mask
-slug: MaskedTextBox-does-not-allow-input-with-maxlength-attribute
-position: 0
-tags: MaskedTextBox,input,prevents,kendo,maxlength,attribute,length,update,bug
-teampulseid:
+page_title: Input Is Prevented When maxlength Is the Same Length as the Mask | Kendo UI MaskedTextBox
+slug: maskedtextbox-does-not-allow-input-with-maxlength-attribute
+tags: maskedtextbox, input, prevents, kendo, maxlength, attribute, length, update, bug
 ticketid: 1116721
-pitsid:
-
+res_type: kb
 ---
 
 ## Environment
+
 <table>
  <tr>
   <td>Product</td>
-  <td>MaskedTextBox for Progress® Kendo UI®</td>
+  <td>MaskedTextBox for Progress Kendo UI</td>
  </tr>
  <tr>
   <td>Kendo Version</td>
   <td>From 2017.2.504</td>
  </tr>
 </table>
-
  
 ## Description
 
-I've encountered a problem with MaskedTextBox where I cannot enter text if the maxlength attribute on the input element is set to the same size as the mask. This worked in prior versions (2017.1.223 and earlier). You can see the behavior [here](http://dojo.telerik.com/@bubblemaster/eXEsi).  
+How can I enter a chunk of text if the `maxlength` attribute on the input element of the MaskedTextBox is set to the same length as the mask? [This approach](http://dojo.telerik.com/@bubblemaster/eXEsi) worked in version 2017.1.223 and earlier.
 
 ## Solution
 
-Remove minlength attribute. The mask restricts the length of the input value.This behaviour is expected since [R2 2017](http://www.telerik.com/support/whats-new/kendo-ui/release-history/kendo-ui-r2-2017) when we changed the MaskedTextBox implementation to work with the input event instead of keypress.
+Remove the `minlength` attribute.
 
-This brings many benefits to users such as:
+As of the [Kendo UI R2 2017](http://www.telerik.com/support/whats-new/kendo-ui/release-history/kendo-ui-r2-2017) release, the mask restricts the length of the input value. The implementation of the MaskedTextBox is now able to work with the `input` event instead of `keypress`.
 
-- the ability to use the widget on all browsers, including mobile windows and android
-- the ability to write special characters which require several keypresses
-- paste  
+This updates that are implemented with the release improve customer experience because users can:
+* Use the widget on all browsers, including mobile windows and Android.
+* Write special characters, which otherwise required several keypresses.
+* Paste content.  

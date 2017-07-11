@@ -7,7 +7,7 @@ slug: htmlhelpers_toolbar_aspnetcore
 
 # ToolBar HtmlHelper Overview
 
-The ToolBar HtmlHelper extension is a server-side wrapper for the [Kendo UI ToolBar](http://demos.telerik.com/kendo-ui/toolbar/index).
+The ToolBar HtmlHelper extension is a server-side wrapper for the [Kendo UI ToolBar](http://demos.telerik.com/kendo-ui/toolbar/index) widget.
 
 It enables you to configure the Kendo UI ToolBar widget from server-side code. The [ToolBar](http://docs.telerik.com/kendo-ui/controls/navigation/toolbar/overview) is designed to hold different types of controls such as buttons, button groups, toggle buttons, split buttons, and other customized elements.
 
@@ -50,7 +50,7 @@ The following example demonstrates the basic configuration of the ToolBar HtmlHe
 
 ###### Example
 
-```tab-Razor
+```
     @(Html.Kendo().ToolBar()
         .Name("ToolBar")
         .Items(items => {

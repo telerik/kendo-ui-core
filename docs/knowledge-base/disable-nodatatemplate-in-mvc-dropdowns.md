@@ -24,7 +24,7 @@ The `.NoDataTemplate` method of the MVC wrappers for the dropdown widgets&mdash;
 
 ## Solution
 
-To disable `noDataTemplate`, set the `noDataTemplate` option of the wrapped widget to `false` after the wrapped widget is initialized.
+Disable `noDataTemplate` by setting the `noDataTemplate` option of the wrapped widget to `false` after the wrapped widget is initialized.
 
 ```html
 <script>

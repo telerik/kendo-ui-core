@@ -2,6 +2,7 @@
 
 var AutoComplete = kendo.ui.AutoComplete;
 var CLICK = kendo.support.touch ? "touchend" : "click";
+var FOCUSED = ".k-state-focused";
 var keys = kendo.keys;
 var input;
 
@@ -37,7 +38,7 @@ test("pressing down focuses the first item in the popup", function() {
     autocomplete.search();
 
     input.press(keys.DOWN);
-    ok(autocomplete.ul.children().first().is(".k-state-focused"));
+    ok(autocomplete.ul.children().first().is(FOCUSED));
 });
 
 test("pressing up focuses the last item in the popup", function() {
@@ -49,7 +50,35 @@ test("pressing up focuses the last item in the popup", function() {
     autocomplete.search();
 
     input.press(keys.UP);
-    ok(autocomplete.ul.children().last().is(".k-state-focused"));
+    ok(autocomplete.ul.children().last().is(FOCUSED));
+});
+
+test("pressing END focuses the last item in the popup", 1, function() {
+    var autocomplete = new AutoComplete(input, {
+        animation: false,
+        dataSource: getData(100)
+    });
+
+    autocomplete.search("item");
+    autocomplete.element.focus().trigger({
+        type: "keydown",
+        keyCode: keys.END
+    });
+    ok(autocomplete.ul.children().last().is(FOCUSED));
+});
+
+test("pressing HOME focuses the first item in the popup", 1, function() {
+    var autocomplete = new AutoComplete(input, {
+        animation: false,
+        dataSource: getData(100)
+    });
+
+    autocomplete.search("item");
+    autocomplete.element.focus().trigger({
+        type: "keydown",
+        keyCode: keys.HOME
+    });
+    ok(autocomplete.ul.children().first().is(FOCUSED));
 });
 
 test("pressing up clears the focused state from the previous item", function() {
@@ -62,7 +91,7 @@ test("pressing up clears the focused state from the previous item", function() {
 
     autocomplete.current(autocomplete.ul.children().last());
     input.press(keys.UP);
-    ok(!autocomplete.ul.children().last().is(".k-state-focused"));
+    ok(!autocomplete.ul.children().last().is(FOCUSED));
 });
 
 test("pressing down clears the focused state from the previous item", function() {
@@ -75,7 +104,7 @@ test("pressing down clears the focused state from the previous item", function()
 
     autocomplete.current(autocomplete.ul.children().first());
     input.press(keys.DOWN);
-    ok(!autocomplete.ul.children().first().is(".k-state-focused"));
+    ok(!autocomplete.ul.children().first().is(FOCUSED));
 });
 
 test("clicking an item applies selected style", 1, function() {
@@ -242,6 +271,16 @@ test("moving twice down when there the current item is first makes the last item
     input.press(keys.DOWN);
     input.press(keys.DOWN);
     equal(autocomplete.current()[0], autocomplete.ul.children().first()[0]);
+});
+
+test("down opens the dropdown", function() {
+    var autocomplete = new AutoComplete(input, {
+        dataSource: ["baz", "bar"]
+    });
+
+    input.focus().val("b");
+    input.press(keys.DOWN);
+    ok(autocomplete.ul.is(":visible"));
 });
 
 test("esc closes the dropdown", function() {

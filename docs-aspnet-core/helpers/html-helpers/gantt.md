@@ -156,8 +156,7 @@ The following example demonstrates the basic configuration of the Gantt HtmlHelp
 
 ###### Example
 
-```tab-Razor
-
+```
 @(Html.Kendo().Gantt<TaskViewModel, DependencyViewModel>()
     .Name("gantt")
     .Columns(columns =>

@@ -17,13 +17,13 @@ The following example demonstrates the basic configuration for the NumericTextBo
 
 ###### Example
 
-```tab-Razor
-      @(Html.Kendo().NumericTextBox()
-            .Name("numerictextbox") //The name of the NumericTextBox is mandatory. It specifies the "id" attribute of the widget.
-            .Min(-100) //Set the min value of the NumericTextBox.
-            .Max(100) //Set the min value of the NumericTextBox.
-            .Value(10) //Set the value of the NumericTextBox.
-      )
+```
+    @(Html.Kendo().NumericTextBox()
+          .Name("numerictextbox") //The name of the NumericTextBox is mandatory. It specifies the "id" attribute of the widget.
+          .Min(-100) //Set the min value of the NumericTextBox.
+          .Max(100) //Set the min value of the NumericTextBox.
+          .Value(10) //Set the value of the NumericTextBox.
+    )
 ```
 
 ## Event Handling
@@ -34,24 +34,23 @@ The following example demonstrates how to subscribe to events by a handler name.
 
 ###### Example
 
-```tab-Razor
+```
+    @(Html.Kendo().NumericTextBox()
+          .Name("numerictextbox")
+          .Events(e => e
+                .Change("numerictextbox_change")
+                .Spin("numerictextbox_spin")
+          )
+    )
+    <script>
+    function numerictextbox_spin() {
+        //Handle the spin event.
+    }
 
-      @(Html.Kendo().NumericTextBox()
-            .Name("numerictextbox")
-            .Events(e => e
-                  .Change("numerictextbox_change")
-                  .Spin("numerictextbox_spin")
-            )
-      )
-      <script>
-      function numerictextbox_spin() {
-          //Handle the spin event.
-      }
-
-      function numerictextbox_change() {
-          //Handle the change event.
-      }
-      </script>
+    function numerictextbox_change() {
+        //Handle the change event.
+    }
+    </script>
 ```
 
 ## Reference

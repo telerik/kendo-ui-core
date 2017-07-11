@@ -37,9 +37,7 @@ Can I easily retrieve the index of each data item after reordering the ListBox?Â
 
 ## Suggested Workarounds
 
-The ListBox does not provide a built-in solution for achieving this behavior.
-
-However, you can still work around this issue by applying custom logic on the `reorder` event of the ListBox.
+The ListBox does not provide a built-in solution for achieving this behavior. However, you can still work around this issue by applying custom logic on the `reorder` event of the ListBox.
 
 The Kendo UI dataSource features the `indexOf` method but the data items are not automatically reordered in the dataSource after the reordering takes place. To retrieve the index of a specific ListBox data item, manually remove the item from its current and insert it in its desired position. When the indexes of the dataSource items match the order in the ListBox, then the `indexOf` method returns the correct index.
 

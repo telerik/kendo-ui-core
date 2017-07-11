@@ -6,6 +6,7 @@ page_title: Limit the Selection to a Single Row | Kendo UI Grid
 slug: checkbox-selection-select-single-row
 tags: checkbox selection, grid, kendo ui
 ticketid: 1116716
+res_type: kb
 ---
 
 ## Environment
@@ -26,8 +27,6 @@ ticketid: 1116716
 I want to remove the master checkbox of the built-in checkbox column in the Kendo UI Grid. How can I limit the selection to one selected Grid row only?
 
 ## Solution
-
-To limit the selection to a single row:
 
 1. Remove the master checkbox by adding an empty [header template](http://docs.telerik.com/kendo-ui/api/javascript/ui/grid#configuration-columns.headerTemplate) to the column.
 1. Subscribe for the [`click`](https://api.jquery.com/click/) event of the checkboxes by using a jQuery selector.

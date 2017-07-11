@@ -17,13 +17,13 @@ The following example demonstrates the basic configuration for the DatePicker.
 
 ###### Example
 
-```tab-Razor
-        @(Html.Kendo().DatePicker()
-            .Name("datepicker") // The name of the DatePicker is mandatory. It specifies the "id" attribute of the widget.
-            .Min(new DateTime(1900, 1, 1)) // Sets the min date of the DatePicker.
-            .Max(new DateTime(2099, 12, 31)) // Sets the min date of the DatePicker.
-            .Value(DateTime.Today) // Sets the value of the DatePicker.
-        )
+```
+    @(Html.Kendo().DatePicker()
+        .Name("datepicker") // The name of the DatePicker is mandatory. It specifies the "id" attribute of the widget.
+        .Min(new DateTime(1900, 1, 1)) // Sets the min date of the DatePicker.
+        .Max(new DateTime(2099, 12, 31)) // Sets the min date of the DatePicker.
+        .Value(DateTime.Today) // Sets the value of the DatePicker.
+    )
 ```
 
 ## Event Handling
@@ -34,29 +34,28 @@ The following example demonstrates how to subscribe to events by a handler name.
 
 ###### Example
 
-```tab-Razor
+```
+    @(Html.Kendo().DatePicker()
+      .Name("datepicker")
+      .Events(e => e
+            .Open("datepicker_open")
+            .Close("datepicker_close")
+            .Change("datepicker_change")
+      )
+    )
+    <script>
+    function datepicker_open() {
+        //Handle the open event
+    }
 
-        @(Html.Kendo().DatePicker()
-          .Name("datepicker")
-          .Events(e => e
-                .Open("datepicker_open")
-                .Close("datepicker_close")
-                .Change("datepicker_change")
-          )
-        )
-        <script>
-        function datepicker_open() {
-            //Handle the open event
-        }
+    function datepicker_close() {
+        //Handle the close event
+    }
 
-        function datepicker_close() {
-            //Handle the close event
-        }
-
-        function datepicker_change() {
-            //Handle the change event
-        }
-        </script>
+    function datepicker_change() {
+        //Handle the change event
+    }
+    </script>
 ```
 
 ## Reference

@@ -1,24 +1,22 @@
 ---
 title: Use MobileSwitch as Editor in Grid for ASP.NET MVC
-description: Approach for using MobileSwitch as an Editor in Grid for ASP.NET MVC  
+description: An example on how to use the MobileSwitch as an editor in the Grid for ASP.NET MVC.  
 type: how-to
-page_title: Using MobileSwitch as Custom Editor in Grid
+page_title: Use MobileSwitch as Custom Editor in Grid | UI for ASP.NET MVC
 slug: grid-mobileswitch-as-editor
-position: 0
-tags: mobileswitch, switch, grid, custom editor 
-teampulseid:
+tags: mobileswitch, switch, grid, custom editor
 ticketid: 1114947
-pitsid:
-
+res_type: kb
 ---
 
 ## Environment
+
 <table>
  <tr>
   <td>Product</td>
-  <td>Progress® Kendo UI® Grid for ASP.NET MVC</td>
+  <td>Progress Kendo UI Grid for ASP.NET MVC</td>
  </tr> <tr>
-  <td>Progress® Kendo UI® versoin</td>  <td>2017.2 504</td>
+  <td>Progress Kendo UI versoin</td>  <td>2017.2 504</td>
  </tr>
  <tr>
   <td>Preferred Language</td>
@@ -34,44 +32,38 @@ pitsid:
  </tr>
 </table>
 
-
 ## Description
 
-I have a grid and I want to display __MobileSwitch__ when the Grid is in edit mode. 
+Howe can I display a MobileSwitch when the Grid is in an edit mode?
 
-## Solution
+## Suggested Workarounds
 
-There is no built-in solution. Check the [suggested workarounds](#suggested-workarounds) instead.
+The Kendo UI Grid does not provide a built-in solution for achieving this behavior. However, you can still work around this issue.
 
-## Suggested Workarounds  
+By default, the MobileView does not support the usage of a MobileSwitch but you can use it as an editor within the Grid by applying the following approach:
 
-Alhtough that using __MobileSwitch__ is not supported out of a Mobile View, you can follow the steps below to use it as an editor within the Grid:
+1. Create a new partial view for the MobileSwitch editor in the `Views/Shared/EditorTemplates` folder. For the example, name it `MobileSwitchTemplate.cshtml`.  
 
-1) Create a new partial view for the __MobileSwitch__ editor in the __Views/Shared/EditorTemplates__ folder with the following content (_for the example, lets name it **MobileSwitchTemplate.cshtml**_):  
+    ```
+    @model bool
 
-```
-@model bool 
+    <input type="checkbox" data-bind="value: @Html.ViewData["FieldName"].ToString()" class="mySwitch"/>
+    ```
 
-<input type="checkbox" data-bind="value: @Html.ViewData["FieldName"].ToString()" class="mySwitch"/>
-````
-  
-2) Now, for the column where you want to use that editor you could specify the template and pass the field name in the ViewData:  
+1. Specify the template and pass the field name in `ViewData` for the column you want to use that editor. Copy the following code:
 
-Copy Code
+    ```
+    columns.Bound(p => p.Discontinued).Width(120).EditorTemplateName("MobileSwitchTemplate").EditorViewData(new { FieldName = "Discontinued" });
+    ```
 
-````
-columns.Bound(p => p.Discontinued).Width(120).EditorTemplateName("MobileSwitchTemplate").EditorViewData(new { FieldName = "Discontinued" });
-````
-  
-3) Finally, within the Edit event of the Grid you could initialize the MobileSwitch:  
+1. Initialize the MobileSwitch within the `edit` event of the Grid.
 
-````
-.Events(ev=>ev.Edit("onEdit"))
- 
-... 
-<script type="text/javascript">
-    function onEdit(e) {
-        $(".mySwitch").kendoMobileSwitch();
-    }    
-````    
+    ```
+    .Events(ev=>ev.Edit("onEdit"))
 
+    ...
+    <script type="text/javascript">
+        function onEdit(e) {
+            $(".mySwitch").kendoMobileSwitch();
+        }    
+    ```    

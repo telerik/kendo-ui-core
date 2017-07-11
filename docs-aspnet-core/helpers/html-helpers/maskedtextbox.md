@@ -17,7 +17,7 @@ The following example demonstrates the basic configuration for the MaskedTextBox
 
 ###### Example
 
-```tab-Razor
+```
 	@(Html.Kendo().MaskedTextBox()
 		.Name("maskedtextbox") //The name of the MaskedTextBox is mandatory. It specifies the "id" attribute of the widget.
 		.Mask("(000) 000-0000") //Set the mask value of the MaskedTextBox.
@@ -27,46 +27,44 @@ The following example demonstrates the basic configuration for the MaskedTextBox
 
 ### Define Mask Values
 
+> **Important**
+>
+> If no mask is defined, the widget allows any input.
+
 The MaskedTextBox has [a list of predefined mask rules](http://docs.telerik.com/kendo-ui/controls/editors/maskedtextbox/overview#configuration-Rules), which can be used to compose the mask of a widget.
 
 The following example demonstrates how to set a `zip code` mask
 
 ###### Example
 
-```tab-Razor
-
-        @(Html.Kendo().MaskedTextBox()
-              .Name("maskedtextbox")
-              .Mask("00000-9999") //Set the zip code.
-        )
 ```
-
-> **Important**
->
-> If no mask is defined, the widget allows any input.
+    @(Html.Kendo().MaskedTextBox()
+          .Name("maskedtextbox")
+          .Mask("00000-9999") //Set the zip code.
+    )
+```
 
 ### Define Custom Mask Rules
 
 The MaskedTextBox enables you to define custom mask rules if none of the predefined ones is suitable. To add a custom rule, use the `Rules` method.
 
+> **Important**
+>
+> The widget supports [JavaScript Regular Expressions](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Regular_Expressions) defined as a string or a JavaScript function.
+
 The following example demonstrates how to define a custom rule for the `-` (minus) and `+` (plus) symbols.
 
 ###### Example
 
-```tab-Razor
-
-      @(Html.Kendo().MaskedTextBox()
-            .Name("maskedtextbox")
-            .Rules(rules => {
-                rules.Add('~', "/[+-]/");
-            })
-            .Mask("~0000") //Set a mask with a custom rule.
-      )
 ```
-
-> **Important**
->
-> Widgets supports [JavaScript Regular Expressions](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Regular_Expressions) defined as a string or a JavaScript function.
+  @(Html.Kendo().MaskedTextBox()
+        .Name("maskedtextbox")
+        .Rules(rules => {
+            rules.Add('~', "/[+-]/");
+        })
+        .Mask("~0000") //Set a mask with a custom rule.
+   )
+```
 
 ## Event Handling
 
@@ -76,19 +74,18 @@ The following example demonstrates how to subscribe to events by a handler name.
 
 ###### Example
 
-```tab-Razor
-
-      @(Html.Kendo().MaskedTextBox()
-            .Name("maskedtextbox")
-            .Events(e => e
-                .Change("maskedtextbox_change")
-            )
-      )
-      <script>
-      function maskedtextbox_change() {
-          //Handle the change event.
-      }
-      </script>
+```
+  @(Html.Kendo().MaskedTextBox()
+        .Name("maskedtextbox")
+        .Events(e => e
+            .Change("maskedtextbox_change")
+        )
+  )
+  <script>
+  function maskedtextbox_change() {
+      //Handle the change event.
+  }
+  </script>
 ```
 
 ## Reference

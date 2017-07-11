@@ -7,7 +7,7 @@ slug: htmlhelpers_combobox_aspnetcore
 
 # ComboBox HtmlHelper Overview
 
-The ComboBox HtmlHelper extension is a server-side wrapper for the [Kendo UI ComboBox](http://demos.telerik.com/kendo-ui/combobox/index).
+The ComboBox HtmlHelper extension is a server-side wrapper for the [Kendo UI ComboBox](http://demos.telerik.com/kendo-ui/combobox/index) widget.
 
 It enables you to configure the Kendo UI ComboBox widget from server-side code. The [ComboBox](http://docs.telerik.com/kendo-ui/controls/editors/combobox/overview) enables the user to enter custom values through the keyboard. It represents a richer version of the `<select>` element and provides support for local and remote data binding, item templates, and configurable options for controlling the list behavior.
 
@@ -74,7 +74,7 @@ The following example demonstrates how to define the ComboBox by using the Combo
 
 The following example demonstrates the basic configuration of the ComboBox HtmlHelper and how to get the ComboBox instance.
 
-```tab-Razor
+```
     @(Html.Kendo().ComboBox()
         .Name("combobox")
         .Placeholder("Select product")

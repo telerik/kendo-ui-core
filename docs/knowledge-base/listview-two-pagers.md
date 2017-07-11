@@ -36,7 +36,7 @@ res_type: kb
 
 ## Description
 
-I have a ListView with a pager that works as expected. The pager is at the bottom of the ListView but I want to have it both at the top and bottom of the widget.
+I have a ListView with a pager at the bottom that works as expected. How can I have a pager both at the top and bottom of the widget?
 
 ## Suggested Workarounds
 

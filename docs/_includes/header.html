@@ -8,24 +8,24 @@
         </a>
     </figure>
 </aside>
-
 <header id="page-header">
-    <span class="toggle-nav"><span></span></span>
+    <div class="toggle-nav"><span class="k-icon k-i-menu"></span></div>
+
+    {% if page.slug != 'knowledge_base' %}
+    {% include search.html %}
+    {% endif %}
 
     <div id="logo-bar">
         <a href="{{site.baseurl}}/introduction">
-            <img alt="Kendo UI logo" class="logo" src="{{site.baseurl}}/images/{{page.product}}.svg">
+            <img alt="Kendo UI logo" class="logo" src="{{site.baseurl}}/images/{{page.product}}.png">
         </a>
     </div>
 
-    <div id="page-search">
-        {% include search.html %}
-    </div>
-
+    {% if page.slug != 'knowledge_base' %}
     <span class="show-search">
         <span class="k-icon k-i-search"></span>
     </span>
-
+    {% endif %}
     <div class="nav-buttons">
         <a href="http://demos.telerik.com/{{page.product}}/" class="btn demos-btn">Demos</a>
         <a href="http://www.telerik.com/{{page.product}}" class="btn about-btn">About</a>

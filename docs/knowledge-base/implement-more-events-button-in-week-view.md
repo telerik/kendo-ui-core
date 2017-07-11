@@ -1,30 +1,32 @@
 ---
-title: Implement a More-Events Button for the Scheduler's Week View 
-description: How to implement a more-events button in the Scheduler's week view similar to the one available in month view.
+title: Implement a More Events Button in Week View of Scheduler
+description: An example on how to implement a More Events button in the week view of the Scheduler which is similar to the one that is available in its month view.
 type: how-to
-page_title: Show more events button in Scheduler's week view
+page_title: Show More Events Button in Week View | Kendo UI Scheduler
 slug: implement-more-events-button-in-week-view
-position: 
-tags: implement,show,more,events,button,scheduler,month,week,view
+tags: implement, show, more, events, button, scheduler, month, week, view
 ticketid: 1117416
+res_type: kb
 ---
 
 ## Environment
+
 <table>
  <tr>
   <td>Product</td>
-  <td>Scheduler for Progress® Kendo UI®</td>
+  <td>Scheduler for Progress Kendo UI</td>
  </tr>
 </table>
 
 ## Description
-In the Scheduler's `month` view when a day slot contains multiple events, due to the limited size of the slot only some of the events are visible and a `more-events` button is displayed at the bottom of the slot. On click it navigates to `day` view, which allows you to see all the events on that particular day. This functionality is not available out-of-the-box for the `week` view.
 
-## Solution
-No verified solution available. Check the [suggested workarounds](#suggested-workarounds) instead.
+When a day slot contains multiple events in the month view of the Scheduler, only some of the events are visible due to the limited size of the slot. However, the bottom of the slot displays a **More Events** button which, when clicked, navigates you to the day view to see all the events on that particular day. How can I implement this functionality in the week view of the Scheduler too?
 
 ## Suggested Workarounds
-You can create a custom view, which will simulate `week` view's layout and implement a `more-events` button similar to that in `month` view, which will link to `day` view.
+
+The Kendo UI Scheduler does not provide a built-in solution for achieving this behavior. However, you can still work around this issue by using custom logic.
+
+To simulate the layout of the week view, implement a **More Events** button similar to that in the month view, and link it to the day view, create a custom view by using the following approach:
 
 ```html
 <div id="scheduler"></div>

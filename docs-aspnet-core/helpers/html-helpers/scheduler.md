@@ -112,8 +112,7 @@ The following example demonstrates the basic configuration of the Scheduler Html
 
 ###### Example
 
-```tab-Razor
-
+```
     @(Html.Kendo().Scheduler<Kendo.Mvc.Examples.Models.Scheduler.MeetingViewModel>()
         .Name("scheduler")
         .CurrentTimeMarker(true)

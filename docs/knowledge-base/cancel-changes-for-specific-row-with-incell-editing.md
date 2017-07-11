@@ -30,10 +30,9 @@ res_type: kb
  </tr>
 </table>
 
- 
 ## Description
 
-I am using a Grid with a remote Datasource with the `batch:true` setup. The Grid is in the incell editing mode. The toolbar of the Grid has the `create`, `save,` and `cancel` commands. The problem is that the `cancel` command discards all made changes.
+I use a Grid with a remote Datasource with the `batch:true` setup. The Grid is in the incell editing mode. The toolbar of the Grid has the `create`, `save,` and `cancel` commands. The problem is that the `cancel` command discards all made changes.
 
 In other words, I need my Grid to have both of the following commands:  
 1. The `cancel` command of the row which discards only the changes of the corresponding row, and   
@@ -43,9 +42,7 @@ How can I provide a `cancel` command per row and at the same time keep the above
 
 ## Suggested Workarounds
 
-The Kendo UI Grid does not provide a built-in solution for achieving this behavior.
-
-However, you can still work around this issue by applying custom logic:
+The Kendo UI Grid does not provide a built-in solution for achieving this behavior. However, you can still work around this issue by applying custom logic.
 
 1. Add a custom button.
 1. On the button click, get the item by `Uid`.

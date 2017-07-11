@@ -24,7 +24,7 @@ Can I simulate modal behavior on the Tooltip?
 
 ## Solution
 
-To implement this scenario, place a semi-transparent &lth;div&gth; element as an overlay over the entire HTML page. Make sure that the Tooltip is the only element to remain above the overlay.
+Place a semi-transparent &lth;div&gth; element as an overlay over the entire HTML page. Make sure that the Tooltip is the only element to remain above the overlay.
 
 ````html
 	<span id="target" title="Tooltip content">

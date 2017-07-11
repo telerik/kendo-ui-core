@@ -28,9 +28,7 @@ I want to draw a bubble layer on a Kendo UI Map from the GeoJSON response. Altho
 
 ## Suggested Workarounds
 
-The Kendo UI Map does not provide a built-in solution for achieving this behavior.
-
-However, you can still work around this issue by applying custom logic.
+The Kendo UI Map does not provide a built-in solution for achieving this behavior. However, you can still work around this issue by applying custom logic.
 
 The Map accepts a `[Latitude, Longitude]` format for its locations field. When you receive the data in a reversed order, modify the array prior to the binding and use `schema.parse` to update the array.
 

@@ -1,32 +1,34 @@
 ---
-title: Multi-select filter not sorting
-description: how to sort multicheck filter data source
+title: Sort MultiCheck Filter
+description: An example on how to sort the dataSource of the MultiCheck filter in Kendo UI Grid for ASP.NET for MVC.
 type: how-to
 page_title: How to Sort MultiCheck Filter DataSource in UI for ASP.NET for MVC Grid
-slug:sort-multi-check-filter-mvc-grid
+slug: sort-multi-check-filter-mvc-grid
 position: 0
-tags:grid,ASP.NET MVC,filter, multi, multi-filter, multi-checkbox, checkbox, not sorted
+tags: grid,ASP.NET MVC,filter, multi, multi-filter, multi-checkbox, checkbox, not sorted
 teampulseid:
 ticketid: 1116585
-pitsid:
-
+res_type: kb
 ---
 
 ## Environment
+
 <table>
  <tr>
   <td>Product</td>
-  <td>Progress® Kendo UI® Grid for ASP.NET MVC</td>
+  <td>Progress Kendo UI Grid for ASP.NET MVC</td>
  </tr>
 </table>
 
- 
 ## Description
-I need to sort the values in a multiple select filter for MVC Grid. 
+
+How can I sort the values in a multiple select filter in a Grid for ASP.NET MVC. 
 
 ## Solution  
-The built-in behaviour uses the Kendo UI Grid data source as is if one is not provided. There is an option to provide a separate [custom data source](http://docs.telerik.com/aspnet-mvc/getting-started/custom-datasource#initial-setup) which can be sorted in the desired sort order. The custom multi-check filter for Grid for UI for ASP.NET MVC should resemble the below configuration:  
-  
+
+If otherwise not provided, the built-in behavior uses the data source of the Grid as is.
+
+To provide a separate, [custom data source](http://docs.telerik.com/aspnet-mvc/getting-started/custom-datasource#initial-setup) which can be sorted in the desired sort order, use the following approach:  
 
 ```
 columns.Bound(p => p.Details).Filterable(ftb =>
@@ -45,6 +47,6 @@ columns.Bound(p => p.Details).Filterable(ftb =>
 });
 ```
 
-## Suggested Workarounds
+## See Also
 
-[Sort on FilterMenuInit()/FilterMenuOpen()](http://docs.telerik.com/kendo-ui/controls/data-management/grid/how-to/filtering/sort-multi-checkbox-filter)  
+* [How to Sort on FilterMenuInit() or FilterMenuOpen() in Grid](http://docs.telerik.com/kendo-ui/controls/data-management/grid/how-to/filtering/sort-multi-checkbox-filter)  

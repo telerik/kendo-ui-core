@@ -1,14 +1,11 @@
 ---
-title: Page size "All" in Grid for Asp.NET Core
-description: How to set page size "All" in a Telerik UI Grid for Asp.NET Core.
+title: Set an All Page Size in Grid for ASP.NET Core
+description: An example on how to set an All page size in a Kendo UI Grid in ASP.NET Core projects.
 type: how-to
-page_title: Set page size "All" in a Telerik UI Grid for Asp.NET Core.
+page_title: Set an All Page Size in Grid | UI for ASP.NET Core
 slug: grid-page-size-all-in-asp-core
-position: 0
 tags: grid, pagesize, asp, core, all
-teampulseid:
 ticketid: 1115286
-pitsid:
 res_type: kb
 ---
 
@@ -20,24 +17,24 @@ res_type: kb
   <td>Telerik Grid for ASP.NET Core</td>
  </tr>
  <tr>
-  <td>Progress® Kendo UI® version</td>
+  <td>Progress Kendo UI version</td>
   <td>2017.2.621</td>
  </tr>
 </table>
 
 ## Description
 
-You might want to use page size "All" in the Telerik UI Grid for Asp.Net Core.
+How can I use an **All** page size in the Kendo UI Grid in ASP.NET Core projects?
 
-## Possible Solution
+## Solution
 
-After the document is "ready" you add the option for "All" page size dynamically through the dataSource of the Kendo DropdownList widget for selecting page size.
+After the document is ready, dynamically add the option for the **All** page size through the dataSource of the DropdownList to allow for selecting the page size.
 
- ```       
+```       
         $(function () {
 
             var grid = $('#grid').data('kendoGrid');
-            
+
             var pageSizeDropDownList = grid.wrapper.children(".k-grid-pager").find("select").data("kendoDropDownList");
             console.log(pageSizeDropDownList)
             pageSizeDropDownList.dataSource.add({text:"All", value:'all'})
@@ -45,6 +42,6 @@ After the document is "ready" you add the option for "All" page size dynamically
         })
  ```
 
- ## Notes
+## Notes
 
-This approach allows you to customize the text inside the drop down.
+This approach allows you to customize the text inside the drop-down list.

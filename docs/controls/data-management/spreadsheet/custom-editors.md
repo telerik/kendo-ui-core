@@ -12,7 +12,7 @@ Custom editors are helpers that facilitate the user input of correct values.
 
 For example, a custom editor allows the user to enter a date in a cell by picking it from a calendar rather than typing it. This functionality is achieved by applying data validation with the `Date` criteria, and selecting the **Display button to show calendar** checkbox. Another built-in editor is for the `List` validation criterion&mdash;it displays a popup displaying the allowed values.
 
-## Definition  
+## Definition
 
 To define custom editors, use `kendo.spreadsheet.registerEditor(name, editor)`. The `name` is an ID of your choice, which you will later use to select this particular editor on a `Range`. The `editor` can be an object or a function. As an object, it should currently have an `edit` method, and an `icon` property, as explained below.
 
@@ -46,7 +46,7 @@ The following example demonstrates how to set up a color-picking custom editor.
                 context = options;
                 open();
             },
-            icon: "k-font-icon k-i-background"
+            icon: "k-icon k-i-background"
         };
 
         // This function actually creates the UI if not already there, and

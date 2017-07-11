@@ -1,14 +1,11 @@
 ---
-title: Insert rows when exporting Kendo Grid to excel
-description: How to intercept the exporting to excel and add rows to the workbook
+title: Insert Rows When Exporting the Grid to Excel
+description: An example on how to intercept the export of the Kendo UI Grid to excel and add rows to the workbook.
 type: how-to
-page_title: Insert rows when exporting Kendo Grid to excel.
+page_title: Intercept Excel Export and Add Rows | Kendo UI Grid
 slug: insert-rows-when-exporting-grid-to-excel
-position: 0
 tags: grid, excel, export, add, rows
-teampulseid:
 ticketid: 1116551
-pitsid:
 res_type: kb
 ---
 
@@ -17,23 +14,23 @@ res_type: kb
 <table>
  <tr>
   <td>Product</td>
-  <td>Grid for Progress® Kendo UI®</td>
+  <td>Grid for Progress Kendo UI</td>
  </tr>
  <tr>
-  <td>Progress® Kendo UI® version</td>
+  <td>Progress Kendo UI version</td>
   <td>2017.2.621</td>
  </tr>
 </table>
 
 ## Description
 
-You might want to intercept the exporting of the Kendo Grid to excel in order to add some data to the exported file.
+How can I intercept the Excel export of the Kendo UI Grid and add data to the exported file?
 
-## Possible Solution
+## Solution
 
-When the [excelExport](http://docs.telerik.com/kendo-ui/api/javascript/ui/grid#events-excelExport) event is fired, in the property e.workbook you can access the Excel workbook configuration object and therefore add rows to its sheets.
+When the [`excelExport`](http://docs.telerik.com/kendo-ui/api/javascript/ui/grid#events-excelExport) event is fired, access the configuration object of the Excel workbook and add rows to its sheets in the `e.workbook` property.
 
- ```       
+```       
        function excelExport(e) {
         console.log(e.workbook.sheets[0].rows)
         e.workbook.sheets[0].rows.unshift(
@@ -50,4 +47,3 @@ When the [excelExport](http://docs.telerik.com/kendo-ui/api/javascript/ui/grid#e
             } )
     }
  ```
-

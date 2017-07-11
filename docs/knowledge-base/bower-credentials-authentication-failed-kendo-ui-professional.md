@@ -32,7 +32,7 @@ res_type: kb
 
 ## Description
 
-I am using Git Credential Manager. After it prompts for my username and password, Bower authentication fails and I am not able to install Kendo UI Professional.  
+I use Git Credential Manager. After it prompts for my username and password, Bower authentication fails and I am not able to install Kendo UI Professional.  
 
 ## Error Message
 

@@ -7,7 +7,7 @@ slug: htmlhelpers_dropdownlist_aspnetcore
 
 # DropDownList HtmlHelper Overview
 
-The DropDownList HtmlHelper extension is a server-side wrapper for the [Kendo UI DropDownList](http://demos.telerik.com/kendo-ui/dropdownlist/index).
+The DropDownList HtmlHelper extension is a server-side wrapper for the [Kendo UI DropDownList](http://demos.telerik.com/kendo-ui/dropdownlist/index) widget.
 
 It allows you to configure the Kendo UI DropDownList widget from server-side code. The [DropDownList](http://docs.telerik.com/kendo-ui/controls/editors/dropdownlist/overview) displays a list of values and allows for a single selection from the list. The user input is restricted within the predefined options.
 
@@ -58,7 +58,7 @@ The following example demonstrates how to define the DropDownList by using the D
 
 The following example demonstrates the basic configuration of the DropDownList HtmlHelper and how to get the DropDownList instance.
 
-```tab-Razor
+```
     @(Html.Kendo().DropDownList()
         .Name("dropdownlist")
         .DataTextField("ProductName")

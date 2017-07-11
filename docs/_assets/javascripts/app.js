@@ -129,15 +129,20 @@ function navigationTemplate(root) {
             url = url.replace(".html", "");
         }
 
+        var icon = item.isNew === true ? '<span class="new-navigation-item">NEW</span>' : '';
         if (url.indexOf("#") < 0) {
             while (item = item.parentNode()) {
                 url = item.path + "/" + url;
             }
-            return '<a href="' + root + url + '">' + text + "</a>";
+            return formatNavigationTemplate(icon, root + url, text);
         } else {
-            return '<a href="' + url + '">' + text + "</a>";
+            return formatNavigationTemplate(icon, root, text);
         }
     };
+}
+
+function formatNavigationTemplate(icon, url, text){
+    return '<div class="navigation-item-content">' + icon + '<a href="' + url + '">' + text + "</a></div>" ;
 }
 
 function preventParentSelection(e) {

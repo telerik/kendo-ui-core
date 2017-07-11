@@ -65,7 +65,7 @@ The following example demonstrates how to use the basic `zoom` method of the Map
 
 ###### Example
 
-```tab-Razor
+```
     <input id="zoomLevel"/>
     <button id="zoom" class="k-button">zoom()</button>
 

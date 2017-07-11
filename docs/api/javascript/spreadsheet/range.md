@@ -333,7 +333,7 @@ The name of the custom cell editor, registered as [described in this help articl
                 context = options;
                 open();
             },
-            icon: "k-font-icon k-i-background"
+            icon: "k-icon k-i-background"
         };
 
         // This function actually creates the UI if not already there, and

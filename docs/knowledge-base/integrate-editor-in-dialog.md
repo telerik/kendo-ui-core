@@ -7,6 +7,7 @@ slug: integrate-editor-in-dialog
 position: 
 tags: integrate,editor,dialog
 ticketid: 1118201
+res_type: kb
 ---
 
 ## Environment

@@ -24,11 +24,9 @@ res_type: kb
 
 ## Description
 
-I want to enable my users to reorder the Grid rows by adding buttons to each row to move items up and down.
+How can I enable my users to reorder the Grid rows by adding buttons to each row to move items up and down?
 
 ## Solution
-
-To add buttons which enable the reordering of the Grid rows:
 
 1. Specify a column template to add the buttons to each Grid row.
 

@@ -99,8 +99,7 @@ The following example demonstrates the basic configuration of the Spreadsheet Ht
 
 ###### Example
 
-```tab-Razor
-
+```
 @(Html.Kendo().Spreadsheet()
     .Name("spreadsheet")
     .Rows(10)

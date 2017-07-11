@@ -17,8 +17,7 @@ The following example demonstrates the basic configuration for the Diagram.
 
 ###### Example
 
-```tab-Razor
-
+```
     @(Html.Kendo().Diagram()
         .Name("diagram")
         .DataSource(dataSource => dataSource
@@ -29,7 +28,6 @@ The following example demonstrates the basic configuration for the Diagram.
         )
         .Layout(l => l.Type(DiagramLayoutType.Layered))
     )
-
 ```
 
 ## Event Handling
@@ -40,8 +38,7 @@ The following example demonstrates how to subscribe to events by a handler name.
 
 ###### Example
 
-```tab-Razor
-
+```
     @(Html.Kendo().Diagram()
           .Name("diagram")
           .DataSource(dataSource => dataSource

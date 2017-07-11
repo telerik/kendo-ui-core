@@ -240,8 +240,8 @@ $(document).ready(function () {
     function updateNavigationOffset() {
         var footer = $("#feedback-section").height() + $("footer").height() + 40
         var windowHeight = $(window).height();
-        $("#page-article").css("min-height", windowHeight - 80 - footer)
-        var top = $("#page-inner-content").height() + 77 - footer;
+        $("#page-article").css("min-height", windowHeight - 121 - footer)
+        var top = $("#page-inner-content").height() + 119 - footer;
         var scroll = $(window).scrollTop() + windowHeight;
         var bottom = 0;
         if (!window.matchMedia('(max-width: 1200px)').matches) {

@@ -28,8 +28,6 @@ I have a multi-level, hierarchy Grid. The headers of the child grids are hidden.
 
 ## Solution
 
-To implement this scenario:
-
 1. In the `dataBound` event of the master Grid, get the background and the alternate color of the widget and save them in global variables.
 
 1. In the `dataBound` event handler of every child grid, conditionally swap the background and the alternate colors.

@@ -1,22 +1,20 @@
 ---
-title: Kendo Draggable and Kendo Dropable not working in ListView and Grid.
-description: implement drag-to-select and gragable in listview with multiple selection
+title: Implement Draggable and Droppable Functionality in ListView and Grid
+description: An example on how to implement the drag-to-select and draggable functionalities with multiple selection in the Kendo UI ListView.
 type: how-to
-page_title:
-slug: listview-multipleselection-drag-to-select-draggable
-position: 0
-tags: grid, listview, multipleselection, drag-to-select, draggable
-teampulseid:
+page_title: Implement Drag-and-Drop with Multiple Selection in ListView and Grid | Kendo UI
+slug: listview-multiselection-drag-to-select-draggable
+tags: grid, listview, multipleselection, drag to select, draggable
 ticketid: 1116847
-pitsid:
-
+res_type: kb
 ---
 
 ## Environment
+
 <table>
  <tr>
   <td>Product</td>
-  <td>Drag and Drop for Progress® Kendo UI®</td>
+  <td>Drag and Drop for Progress Kendo UI</td>
  </tr>
  <tr>
   <td>Operating System</td>
@@ -34,25 +32,24 @@ pitsid:
 
 
 ## Description
-Drag-to-select and dragable functionalities are not working in Kendo ListView or Kendo Grid with multiple selection enabled.
+
+How can I implement the drag-to-select and draggable functionalities in a Kendo UI ListView or Grid when multiple selection is enabled?
 
 ## Solution
 
-Prevent the start and move events of the selectable elements in the dataBound even of the used widget (ListView or Grid):
+Prevent the `start` and `move` events of the selectable elements in the `dataBound` even of the ListView or Grid you use.
 
-````html
+``html
  dataBound: function() {
               this.selectable.userEvents._events.start = null
               this.selectable.userEvents._events.move = null
               ............
  }
-````
+```
 
-## Example
+The following example demonstrates the full implementation of the approach.
 
 ````html
-
-
 <div style="padding-bottom: 20px">
 <label>List View Drop Area</label>
 <div id="list-view-drop" style="height: 400px; width: 400px;border: 1px solid black"></div>

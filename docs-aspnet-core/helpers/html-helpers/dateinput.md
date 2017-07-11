@@ -17,8 +17,7 @@ The following example demonstrates the basic configuration for the DateInput.
 
 ###### Example
 
-```tab-Razor
-
+```
     @(Html.Kendo().DateInput()
         .Name("dateinput") //The name of the DateInput is mandatory. It specifies the "id" attribute of the widget.
         .Value(DateTime.Today) //Set the value of the DateInput.
@@ -33,8 +32,7 @@ The following example demonstrates how to subscribe to events by a handler name.
 
 ###### Example
 
-```tab-Razor
-
+```
     @(Html.Kendo().DateInput()
         .Name("dateinput")
         .Events(e => e

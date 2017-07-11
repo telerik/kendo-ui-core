@@ -1,18 +1,16 @@
 ---
 title: Cannot Get Any Data to Load in Grid
-description: Grid in ASP.NET Core is not showing data
+description: The Grid does load any records in an ASP.NET Core project.
 type: troubleshooting
-page_title: Grid for ASP.NET Core is not showing any records 
+page_title: Grid in ASP.NET Core Does Not Show Any Records | UI for ASP.NET Core`
 slug: grid-is-not-showing-data
-position: 0
-tags: grid,data,core,asp.net,not,showing,binding,loading
-teampulseid:
+tags: grid, data, core, aspnet, not showing, binding, loading
 ticketid: 1112718
-pitsid:
-
+res_type: kb
 ---
 
 ## Environment
+
 <table>
  <tr>
   <td>Product</td>
@@ -35,14 +33,17 @@ pitsid:
 
 ## Description
 
-I can't seem to get any data to load in any of our grids. The data is sent from the Controller to the client.
+When the Grid data is sent from the Controller to the client and I cannot get any records to load in any of the grids in my ASP.NET Core project. What is the cause and how can I handle this issues?
+
+## Cause
+
+By default, the data in .NET Core is serialized in camelCase, while the property names in the Model are usually in PascalCase. As a result, in this scenario the DataSource of the Grid does not recognize the fields in the data that is returned by the server.
 
 ## Solution
 
-You should edit the **ConfigureServices** method in **Startup.cs** as shown below.  
+Edit the `ConfigureServices` method in the `Startup.cs`.  
 
-###### Example
-
+```
     public void ConfigureServices(IServiceCollection services)
     {
         ...
@@ -55,12 +56,8 @@ You should edit the **ConfigureServices** method in **Startup.cs** as shown belo
         // Add Kendo UI services to the services container
         services.AddKendo();
     }
-
-## Cause
-
-By default data in .NET Core is serialized in camelCase. However, the property names in the Model are usually in PascalCase. In this scenario the Grid DataSource will not recognize the fields in the data returned from the server.
+```
 
 ## See Also
 
-[Getting Started with Progress Telerik UI for ASP.NET Core](http://docs.telerik.com/aspnet-core/getting-started/getting-started)
-
+[Getting Started with Telerik UI for ASP.NET Core](http://docs.telerik.com/aspnet-core/getting-started/getting-started)
