@@ -5,7 +5,9 @@ if (kendo.ui.FlatColorPicker) {
 kendo.ui.FlatColorPicker.prototype.options.messages =
 $.extend(true, kendo.ui.FlatColorPicker.prototype.options.messages,{
   "apply": "Potvrdit",
-  "cancel": "Zrušit"
+  "cancel": "Zrušit",
+  "noColor": "bez barvy",
+  "clearColor": "Smazat barvu"
 });
 }
 
@@ -15,7 +17,9 @@ if (kendo.ui.ColorPicker) {
 kendo.ui.ColorPicker.prototype.options.messages =
 $.extend(true, kendo.ui.ColorPicker.prototype.options.messages,{
   "apply": "Potvrdit",
-  "cancel": "Zrušit"
+  "cancel": "Zrušit",
+  "noColor": "bez barvy",
+  "clearColor": "Smazat barvu"
 });
 }
 
@@ -68,9 +72,10 @@ $.extend(true, kendo.ui.Editor.prototype.options.messages,{
   "formatting": "Formátování",
   "foreColor": "Barva",
   "backColor": "Barva pozadí",
-  "styles": "Styly",
+  "style": "Styly",
   "emptyFolder": "Prázný adresář",
   "uploadFile": "Nahrát",
+  "overflowAnchor": "Další nástroje",
   "orderBy": "Seřadit dle:",
   "orderBySize": "Velikosti",
   "orderByName": "Jména",
@@ -92,13 +97,52 @@ $.extend(true, kendo.ui.Editor.prototype.options.messages,{
   "dialogInsert": "Vložit",
   "dialogButtonSeparator": "nebo",
   "dialogCancel": "Zrušit",
+  "cleanFormatting": "Vymazat formátování",
   "createTable": "Vložit tabulku",
   "addColumnLeft": "Přidat sloupec vlevo",
   "addColumnRight": "Přidat sloupec vpravo",
   "addRowAbove": "Přidat řádek nad",
   "addRowBelow": "Přidat řádek pod",
   "deleteRow": "Smazat řádek",
-  "deleteColumn": "Smazat soupec"
+  "deleteColumn": "Smazat soupec",
+  "dialogOk": "Ok",
+  "tableWizard": "Průvodce tabulkou",
+  "tableTab": "Tabulka",
+  "cellTab": "Buňka",
+  "accessibilityTab": "Usnadnění",
+  "caption": "Titulek",
+  "summary": "Souhrn",
+  "width": "Šířka",
+  "height": "Výška",
+  "units": "Jednotky",
+  "cellSpacing": "Mezery mezi buňkami",
+  "cellPadding": "Odsazení obsahu buněk",
+  "cellMargin": "Okraje buňky",
+  "alignment": "Zarovnání",
+  "background": "Pozadí",
+  "cssClass": "CSS třída",
+  "id": "ID",
+  "border": "Ohraničení",
+  "borderStyle": "Styl ohraničení",
+  "collapseBorders": "Sbalit ohraničení",
+  "wrapText": "Zalamovat text",
+  "associateCellsWithHeaders": "Přidružit bunky k záhlaví",
+  "alignLeft": "Zarovnat doleva",
+  "alignCenter": "Zarovnat na střed",
+  "alignRight": "Zarovnat doprava",
+  "alignLeftTop": "Zarovnat doleva nahoru",
+  "alignCenterTop": "Zarovnat nahoru na střed",
+  "alignRightTop": "Zarovnat nahoru doprava",
+  "alignLeftMiddle": "Zarovnat doleva na střed",
+  "alignCenterMiddle": "Zarovnat na střed",
+  "alignRightMiddle": "Zarovnat doprava na střed",
+  "alignLeftBottom": "Zarovnat doleva dolů",
+  "alignCenterBottom": "Zarovnat dolů na střed",
+  "alignRightBottom": "Zarovnat dolů doprava",
+  "alignRemove": "Odstranit zarovnání",
+  "columns": "Sloupce",
+  "rows": "Řádky",
+  "selectAllCells": "Vybrat všechny buňky"
 });
 }
 
@@ -134,7 +178,7 @@ $.extend(true, kendo.ui.FilterCell.prototype.options.messages,{
 });
 }
 
-/* Filter cell operators */
+/* FilterCell operators */
 
 if (kendo.ui.FilterCell) {
 kendo.ui.FilterCell.prototype.options.operators =
@@ -151,23 +195,23 @@ $.extend(true, kendo.ui.FilterCell.prototype.options.operators,{
     "isempty": "Je prázdná",
     "isnotempty": "Není prázdná"
   },
-  "date": {
+  "number": {
     "eq": "Je rovno",
     "neq": "Je různá od",
-    "gt": "Začíná po",
-    "gte": "Začíná od",
-    "lt": "Končí po",
-    "lte": "Končí do",
+    "gte": "Je větší nebo rovno",
+    "gt": "Je větší než",
+    "lte": "Je menší nebo rovno",
+    "lt": "Je menší než",
     "isnull": "Je null",
     "isnotnull": "Není null"
   },
-  "number": {
+  "date": {
     "eq": "Je rovno",
-    "gt": "Je větší než",
-    "gte": "Je větší nebo rovno",
-    "lt": "Je menší než",
-    "lte": "Je menší nebo rovno",
     "neq": "Je různá od",
+    "gte": "Začíná od",
+    "gt": "Začíná po",
+    "lte": "Končí do",
+    "lt": "Končí po",
     "isnull": "Je null",
     "isnotnull": "Není null"
   },
@@ -185,52 +229,62 @@ $.extend(true, kendo.ui.FilterCell.prototype.options.operators,{
 if (kendo.ui.FilterMenu) {
 kendo.ui.FilterMenu.prototype.options.messages =
 $.extend(true, kendo.ui.FilterMenu.prototype.options.messages,{
-  "and": "A zároveň",
-  "clear": "Zrušit",
-  "filter": "Filtrovat",
   "info": "Zobrazit položky s hodnotou, která:",
-  "isFalse": "není pravda",
   "isTrue": "je pravda",
+  "isFalse": "není pravda",
+  "filter": "Filtrovat",  
+  "clear": "Zrušit",
+  "and": "A zároveň",
   "or": "Nebo",
   "selectValue": "-Vyberte hodnotu-",
-  "cancel": "Zrušit",
   "operator": "Operátor",
-  "value": "Hodnota"
+  "value": "Hodnota",
+  "cancel": "Zrušit"
 });
 }
 
-/* Filter menu operator messages */
+/* FilterMenu operator messages */
 
 if (kendo.ui.FilterMenu) {
 kendo.ui.FilterMenu.prototype.options.operators =
 $.extend(true, kendo.ui.FilterMenu.prototype.options.operators,{
-  "date": {
-    "eq": "Je rovno",
-    "gt": "Začíná po",
-    "gte": "Začíná od",
-    "lt": "Končí po",
-    "lte": "Končí do",
-    "neq": "Je různá od"
-  },
-  "number": {
-    "eq": "Je rovno",
-    "gt": "Je větší než",
-    "gte": "Je větší nebo rovno",
-    "lt": "Je menší než",
-    "lte": "Je menší nebo rovno",
-    "neq": "Je různá od"
-  },
   "string": {
+    "eq": "Je shodná s",
+    "neq": "Je různá od",
+    "startswith": "Začíná na",
     "contains": "Obsahuje",
     "doesnotcontain": "Neobsahuje",
     "endswith": "Končí na",
-    "eq": "Je shodná s",
+    "isnull": "Je null",
+    "isnotnull": "Není null",
+    "isempty": "Je prázdná",
+    "isnotempty": "Není prázdná"
+  },
+  "number": {
+    "eq": "Je rovno",
     "neq": "Je různá od",
-    "startswith": "Začíná na"
+    "gte": "Je větší nebo rovno",
+    "gt": "Je větší než",
+    "lte": "Je menší nebo rovno",
+    "lt": "Je menší než",
+    "isnull": "Je null",
+    "isnotnull": "Není null"
+  },
+  "date": {
+    "eq": "Je rovno",
+    "neq": "Je různá od",
+    "gte": "Začíná od",
+    "gt": "Začíná po",
+    "lte": "Končí do",
+    "lt": "Končí po",
+    "isnull": "Je null",
+    "isnotnull": "Není null"
   },
   "enums": {
     "eq": "Je rovno",
-    "neq": "Je různá od"
+    "neq": "Je různá od",
+    "isnull": "Je null",
+    "isnotnull": "Není null"
   }
 });
 }
@@ -305,11 +359,34 @@ $.extend(true, kendo.ui.Grid.prototype.options.messages,{
     "update": "Uložit"
   },
   "editable": {
-    "confirmation": "Opravdu chcete smazat tento záznam?",
     "cancelDelete": "Zrušit",
+    "confirmation": "Opravdu chcete smazat tento záznam?",
     "confirmDelete": "Smazat"
   },
-  "noRecords": "Žádný záznam nenalezen."
+  "noRecords": "Žádný záznam nenalezen.",
+  "expandCollapseColumnHeader": ""
+});
+}
+
+/* TreeList messages */
+
+if (kendo.ui.TreeList) {
+kendo.ui.TreeList.prototype.options.messages =
+$.extend(true, kendo.ui.TreeList.prototype.options.messages,{
+    "noRows": "Žádné záznamy k zobrazení",
+    "loading": "Načítám...",
+    "requestFailed": "Požadavek selhal.",
+    "retry": "Zkusit znovu",
+    "commands": {
+        "edit": "Upravit",
+        "update": "Aktualizovat",
+        "canceledit": "Zrušit",
+        "create": "Přidat nový záznam",
+        "createchild": "Přidat nový záznam",
+        "destroy": "Smazat",
+        "excel": "Excel export",
+        "pdf": "PDF export"
+    }
 });
 }
 
@@ -332,6 +409,20 @@ $.extend(true, kendo.ui.NumericTextBox.prototype.options,{
 });
 }
 
+/* MediaPlayer messages */
+
+if (kendo.ui.MediaPlayer) {
+kendo.ui.MediaPlayer.prototype.options.messages =
+$.extend(true, kendo.ui.MediaPlayer.prototype.options.messages,{
+  "pause": "Pauza",
+  "play": "Přehrát",
+  "mute": "Ztlumit",
+  "unmute": "Zrušit ztlumení",
+  "quality": "Kvalita",
+  "fullscreen": "Na celou obrazovku"
+});
+}
+
 /* Pager messages */
 
 if (kendo.ui.Pager) {
@@ -340,13 +431,13 @@ $.extend(true, kendo.ui.Pager.prototype.options.messages,{
   "allPages": "All",
   "display": "{0} - {1} z {2} celkem",
   "empty": "Žádný záznam nenalezen",
-  "first": "Na první stránku",
-  "itemsPerPage": "záznamů na stránku",
-  "last": "Na poslední stránku",
-  "next": "Na další stránku",
-  "of": "z {0}",
   "page": "Strana",
+  "of": "z {0}",
+  "itemsPerPage": "záznamů na stránku",
+  "first": "Na první stránku",
   "previous": "Na předchozí stránku",
+  "next": "Na další stránku",
+  "last": "Na poslední stránku",
   "refresh": "Obnovit",
   "morePages": "Další stránky"
 });
@@ -393,10 +484,11 @@ if (kendo.ui.RecurrenceEditor) {
 kendo.ui.RecurrenceEditor.prototype.options.messages =
 $.extend(true, kendo.ui.RecurrenceEditor.prototype.options.messages,{
   "frequencies": {
-    "daily": "Denně",
-    "monthly": "Měsíčně",
     "never": "Nikdy",
+    "hourly": "Každou hodinu",
+    "daily": "Denně",
     "weekly": "Týdně",
+    "monthly": "Měsíčně",
     "yearly": "Ročně"
   },
   "hourly": {
@@ -404,40 +496,40 @@ $.extend(true, kendo.ui.RecurrenceEditor.prototype.options.messages,{
     "interval": " hodin"
   },
   "daily": {
-    "interval": "dní",
-    "repeatEvery": "Opakovat každý:"
+    "repeatEvery": "Opakovat každý:",
+    "interval": "dní"
   },
   "weekly": {
-    "repeatEvery": "Opakovat každý:",
-    "repeatOn": "Opakovat v:",
-    "interval": "týden(ny)"
-  },
-  "monthly": {
-    "day": "Den",
-    "interval": "měsíc(e)",
+    "interval": "týden(ny)",
     "repeatEvery": "Opakovat každý:",
     "repeatOn": "Opakovat v:"
   },
-  "yearly": {
-    "of": "",
+  "monthly": {
     "repeatEvery": "Opakovat každý:",
     "repeatOn": "Opakovat v:",
-    "interval": "rok(y)"
+    "interval": "měsíc(e)",
+    "day": "Den"
+  },
+  "yearly": {
+    "repeatEvery": "Opakovat každý:",
+    "repeatOn": "Opakovat v:",
+    "interval": "rok(y)",
+    "of": " z "
   },
   "end": {
+    "label": "Konec:",
+    "mobileLabel": "Končí",
+    "never": "Nikdy",
     "after": "Konec po",
     "occurrence": "opakování",
-    "label": "Konec:",
-    "never": "Nikdy",
-    "on": "Dne",
-    "mobileLabel": "Končí"
+    "on": "Dne"
   },
   "offsetPositions": {
     "first": "první",
-    "fourth": "čtvrtý",
-    "last": "poslední",
     "second": "druhý",
-    "third": "třetí"
+    "third": "třetí",
+    "fourth": "čtvrtý",
+    "last": "poslední"
   },
 
   "weekdays": {
@@ -454,16 +546,16 @@ if (kendo.ui.Scheduler) {
 kendo.ui.Scheduler.prototype.options.messages =
 $.extend(true, kendo.ui.Scheduler.prototype.options.messages,{
   "allDay": "celý den",
-  "cancel": "Zrušit",
-  "save": "Uložit",
-  "time": "Čas",
-  "today": "Dnes",
   "date": "Datum",
-  "destroy": "Smazat",
   "event": "Událost",
-  "deleteWindowTitle": "Smazat událost",
+  "time": "Čas",
   "showFullDay": "Zobrazit celý den",
   "showWorkDay": "Zobrazit pracovní dobu",
+  "today": "Dnes",
+  "save": "Uložit",
+  "cancel": "Zrušit",
+  "destroy": "Smazat",
+  "deleteWindowTitle": "Smazat událost",
   "ariaSlotLabel": "Zvoleno od {0:t} do {1:t}",
   "ariaEventLabel": "{0} dne {1:D} v {2:t}",
   "editable": {
@@ -473,16 +565,16 @@ $.extend(true, kendo.ui.Scheduler.prototype.options.messages,{
     "day": "Den",
     "week": "Týden",
     "workWeek": "Pracovní týden",
-    "month": "Měsíc",
-    "agenda": "Agenda"
+    "agenda": "Agenda",
+    "month": "Měsíc"
   },
   "recurrenceMessages": {
+    "deleteWindowTitle": "Smazat opakovanou událost",
     "deleteWindowOccurrence": "Smazat vybranou událost",
     "deleteWindowSeries": "Smazat vše",
-    "deleteWindowTitle": "Smazat opakovanou událost",
+    "editWindowTitle": "Upravit opakující se událost",
     "editWindowOccurrence": "Upravit jen vybranou událost",
     "editWindowSeries": "Upravit vše",
-    "editWindowTitle": "Upravit opakující se událost",
     "deleteRecurring": "Chcete smazat jen vybranou událost, nebo i všechna opakování?",
     "editRecurring": "Chcete upravit jen vybranou událost, nebo i všechna opakování?"
   },
@@ -506,6 +598,324 @@ $.extend(true, kendo.ui.Scheduler.prototype.options.messages,{
 });
 }
 
+/* Spreadsheet messages */
+
+if (kendo.spreadsheet && kendo.spreadsheet.messages.borderPalette) {
+kendo.spreadsheet.messages.borderPalette =
+$.extend(true, kendo.spreadsheet.messages.borderPalette,{
+  "allBorders": "Všechno ohraničení",
+  "insideBorders": "Vnitřní ohraničení",
+  "insideHorizontalBorders": "Vnitřní vodorovné ohraničení",
+  "insideVerticalBorders": "Vnitřní svislé ohraničení",
+  "outsideBorders": "Vnější ohraničení",
+  "leftBorder": "Levé ohraničení",
+  "topBorder": "Horní ohraničení",
+  "rightBorder": "Pravé ohraničení",
+  "bottomBorder": "Dolní ohraničení",
+  "noBorders": "Bez ohraničení",
+  "reset": "Obnovit barvu",
+  "customColor": "Vlastní barva...",
+  "apply": "Potvrdit",
+  "cancel": "Zrušit"
+});
+}
+
+if (kendo.spreadsheet && kendo.spreadsheet.messages.dialogs) {
+kendo.spreadsheet.messages.dialogs =
+$.extend(true, kendo.spreadsheet.messages.dialogs,{
+  "apply": "Potvrdit",
+  "save": "Uložit",
+  "cancel": "Zrušit",
+  "remove": "Odstranit",
+  "retry": "Opakovat",
+  "revert": "Původní",
+  "okText": "OK",
+  "formatCellsDialog": {
+    "title": "Formát",
+    "categories": {
+      "number": "Číslo",
+      "currency": "Měna",
+      "date": "Datum"
+      }
+  },
+  "fontFamilyDialog": {
+    "title": "Písmo"
+  },
+  "fontSizeDialog": {
+    "title": "Velikost písma"
+  },
+  "bordersDialog": {
+    "title": "Ohraničení"
+  },
+  "alignmentDialog": {
+    "title": "Zarovnání",
+    "buttons": {
+     "justtifyLeft": "Zarovnat doleva",
+     "justifyCenter": "Zarovnat na střed",
+     "justifyRight": "Zarovnat doprava",
+     "justifyFull": "Do bloku",
+     "alignTop": "Zarovnat nahoru",
+     "alignMiddle": "Zarovnat doprostřed",
+     "alignBottom": "Zarovnat dolů"
+    }
+  },
+  "mergeDialog": {
+    "title": "Sloučit buňky",
+    "buttons": {
+      "mergeCells": "Sloučit vše",
+      "mergeHorizontally": "Sloučit vodorovně",
+      "mergeVertically": "Sloučit svisle",
+      "unmerge": "Oddělit"
+    }
+  },
+  "freezeDialog": {
+    "title": "Ukotvit příčky",
+    "buttons": {
+      "freezePanes": "Ukotvit příčky",
+      "freezeRows": "Ukotvit řádky",
+      "freezeColumns": "Ukotvit sloupce",
+      "unfreeze": "Uvolnit příčky"
+    }
+  },
+  "confirmationDialog": {
+    "text": "Opravdu chcete odstranit tento list?",
+    "title": "Odstranit list"
+  },
+  "validationDialog": {
+    "title": "Validace dat",
+    "hintMessage": "Prosím vložte platnou {0} hodnotu {1}.",
+    "hintTitle": "Validace {0}",
+    "criteria": {
+      "any": "Jakákoliv hodnota",
+      "number": "Číslo",
+      "text": "Text",
+      "date": "Datum",
+      "custom": "Vlastní podmínka",
+      "list": "List"
+    },
+    "comparers": {
+      "greaterThan": "větší než",
+      "lessThan": "menší než",
+      "between": "mezi",
+      "notBetween": "není mezi",
+      "equalTo": "je shodná s",
+      "notEqualTo": "není shodná s",
+      "greaterThanOrEqualTo": "větší než nebo rovno",
+      "lessThanOrEqualTo": "menší než nebo rovno"
+    },
+    "comparerMessages": {
+      "greaterThan": "větší než {0}",
+      "lessThan": "menší než {0}",
+      "between": "mezi {0} a {1}",
+      "notBetween": "není mezi {0} a {1}",
+      "equalTo": "rovno {0}",
+      "notEqualTo": "není rovno {0}",
+      "greaterThanOrEqualTo": "vetší než nebo rovno {0}",
+      "lessThanOrEqualTo": "menší než nebo rovno {0}",
+      "custom": "vyhovuje podmínce: {0}"
+    },
+    "labels": {
+      "criteria": "Podmínky",
+      "comparer": "Typ porovnání",
+      "min": "Min",
+      "max": "Max",
+      "value": "Hodnota",
+      "start": "Začátek",
+      "end": "Konec",
+      "onInvalidData": "Neplatná data",
+      "rejectInput": "Zamítnout vstup",
+      "showWarning": "Zobrazit varování",
+      "showHint": "Zobrazit nápovědu",
+      "hintTitle": "Titulek nápovědy",
+      "hintMessage": "Zpráva nápovědy",
+      "ignoreBlank": "Ignorovat prázdné hodnoty"
+    },
+    "placeholders": {
+      "typeTitle": "Vložte titulek",
+      "typeMessage": "Vložte zprávu"
+    }
+  },
+  "saveAsDialog": {
+    "title": "Uložit jako...",
+    "labels": {
+      "fileName": "Jméno souboru",
+      "saveAsType": "Uložit jako typ"
+    }
+  },
+  "exportAsDialog": {
+    "title": "Export...",
+    "labels": {
+      "fileName": "Jméno souboru",
+      "saveAsType": "Uložit jako typ",
+      "exportArea": "Export",
+      "paperSize": "Velikost papíru",
+      "margins": "Okraje",
+      "orientation": "Orientace",
+      "print": "Tisk",
+      "guidelines": "Vodítka",
+      "center": "Na střed",
+      "horizontally": "Vodorovně",
+      "vertically": "Svisle"
+    }
+  },
+  "modifyMergedDialog": {
+    "errorMessage": "Nelze změnit část sloučené buňky."
+  },
+  "useKeyboardDialog": {
+    "title": "Kopírování a vkládání",
+    "errorMessage": "Tyto akce nelze vyvolat z menu. Prosím, použijte klávesovou zkratku:",
+    "labels": {
+      "forCopy": "pro zkopírování",
+      "forCut": "pro vyjmutí",
+      "forPaste": "pro vložení"
+    }
+  },
+  "unsupportedSelectionDialog": {
+    "errorMessage": "Tuto akci nelze použít na vícenásobný výběr."
+  }
+});
+}
+
+if (kendo.spreadsheet && kendo.spreadsheet.messages.filterMenu) {
+kendo.spreadsheet.messages.filterMenu =
+$.extend(true, kendo.spreadsheet.messages.filterMenu,{
+  "sortAscending": "Seřadit rozsah od A k Z",
+  "sortDescending": "Seřadit rozsah od Z k A",
+  "filterByValue": "Filtrovat dle hodnoty",
+  "filterByCondition": "Filtrovat dle podmínky",
+  "apply": "Použít",
+  "search": "Hledat",
+  "addToCurrent": "Přidat k současnému výběru",
+  "clear": "Smazat",
+  "blanks": "(Prázdné)",
+  "operatorNone": "Není",
+  "and": "AND",
+  "or": "OR",
+  "operators": {
+    "string": {
+      "contains": "Text obsahuje",
+      "doesnotcontain": "Text neobsahuje",
+      "startswith": "Text začíná na",
+      "endswith": "Text končí na"
+    },
+    "date": {
+      "eq":  "Datum je",
+      "neq": "Datum není",
+      "lt":  "Datum je před",
+      "gt":  "Datum je po"
+    },
+    "number": {
+      "eq": "Je rovno",
+      "neq": "Není rovno",
+      "gte": "Je větší než nebo rovno",
+      "gt": "Je větší než",
+      "lte": "Je menší než nebo rovno",
+      "lt": "Je menší než"
+    }
+  }
+});
+}
+
+if (kendo.spreadsheet && kendo.spreadsheet.messages.toolbar) {
+kendo.spreadsheet.messages.toolbar =
+$.extend(true, kendo.spreadsheet.messages.toolbar,{
+  "addColumnLeft": "Vložit sloupec vlevo",
+  "addColumnRight": "Vložit sloupec vpravo",
+  "addRowAbove": "Vložit řádek nad",
+  "addRowBelow": "Vložit řádek pod",
+  "alignment": "Zarovnání",
+  "alignmentButtons": {
+    "justtifyLeft": "Zarovnat doleva",
+    "justifyCenter": "Zarovnat na střed",
+    "justifyRight": "Zarovnat doprava",
+    "justifyFull": "Zarovnat do bloku",
+    "alignTop": "Zarovnat nahoru",
+    "alignMiddle": "Zarovnat doprostřed",
+    "alignBottom": "Zarovnat dolů"
+  },
+  "backgroundColor": "Pozadí",
+  "bold": "Tučně",
+  "borders": "Ohraničení",
+  "colorPicker": {
+    "reset": "Obnovit barvu",
+    "customColor": "Vlastní barva..."
+  },
+  "copy": "Kopírovat",
+  "cut": "Vyjmout",
+  "deleteColumn": "Smazat sloupec",
+  "deleteRow": "Smazat řádek",
+  "excelImport": "Načíst z Excelu...",
+  "filter": "Filtrovat",
+  "fontFamily": "Písmo",
+  "fontSize": "Velikost písma",
+  "format": "Vlastní formát...",
+  "formatTypes": {
+    "automatic": "Automaticky",
+    "number": "Číslo",
+    "percent": "procenta",
+    "financial": "Účetnický",
+    "currency": "Měna",
+    "date": "Datum",
+    "time": "Čas",
+    "dateTime": "Datum a čas",
+    "duration": "Doba trvání",
+    "moreFormats": "Další formáty..."
+  },
+  "formatDecreaseDecimal": "Odebrat desetinné místo",
+  "formatIncreaseDecimal": "Přidat desetinné místo",
+  "freeze": "Ukotvit příčky",
+  "freezeButtons": {
+    "freezePanes": "Ukotvit příčky",
+    "freezeRows": "Ukotvit řádky",
+    "freezeColumns": "Ukotvit sloupce",
+    "unfreeze": "Uvolnit příčky"
+  },
+  "italic": "Italic",
+  "merge": "Sloučit buňky",
+  "mergeButtons": {
+    "mergeCells": "Sloučit vše",
+    "mergeHorizontally": "Sloučit vodorovně",
+    "mergeVertically": "Sloučit svisle",
+    "unmerge": "Oddělit"
+  },
+  "open": "Otevřít...",
+  "paste": "Vložit",
+  "quickAccess": {
+    "redo": "Znovu",
+    "undo": "Zpět"
+  },
+  "saveAs": "Uložit jako...",
+  "sortAsc": "Seřadit vzestupně",
+  "sortDesc": "Seřadit sestupně",
+  "sortButtons": {
+    "sortSheetAsc": "Seřadit list od A k Z",
+    "sortSheetDesc": "Seřadit list od Z k A",
+    "sortRangeAsc": "Seřadit rozsah od A k Z",
+    "sortRangeDesc": "Seřadit rozsah od Z k A"
+  },
+  "textColor": "Barva textu",
+  "textWrap": "Zalomit text",
+  "underline": "Podtržení",
+  "validation": "Validace dat..."
+});
+}
+
+if (kendo.spreadsheet && kendo.spreadsheet.messages.view) {
+kendo.spreadsheet.messages.view =
+$.extend(true, kendo.spreadsheet.messages.view,{
+  "errors": {
+    "shiftingNonblankCells": "Nelze vložit buňky z důvodu možné ztráty dat. Zvolte jiné místo pro vložení nebo odstraňte data z konce listu.",
+    "filterRangeContainingMerges": "Nelze vytvořit filtr v rozsahu sloučených buněk",
+    "validationError": "Vložená hodnota nevyhovuje validačním pravidlům nastaveným pro tuto buňku."
+  },
+  "tabs": {
+    "home": "Home",
+    "insert": "Insert",
+    "data": "Data"
+  }
+});
+}
+
 /* Slider messages */
 
 if (kendo.ui.Slider) {
@@ -513,6 +923,23 @@ kendo.ui.Slider.prototype.options =
 $.extend(true, kendo.ui.Slider.prototype.options,{
   "increaseButtonTitle": "Zvýšit",
   "decreaseButtonTitle": "Snížit"
+});
+}
+
+/* ListBox messaages */
+
+if (kendo.ui.ListBox) {
+kendo.ui.ListBox.prototype.options.messages =
+$.extend(true, kendo.ui.ListBox.prototype.options.messages,{
+  "tools": {
+    "remove": "Smazat",
+    "moveUp": "Posunout nahoru",
+    "moveDown": "Posunout dolů",
+    "transferTo": "Přesunout do",
+    "transferFrom": "Přesunout z",
+    "transferAllTo": "Přesunout vše do",
+    "transferAllFrom": "Přesunout vše z"
+  }
 });
 }
 
@@ -538,6 +965,18 @@ $.extend(true, kendo.ui.TreeList.prototype.options.messages,{
 });
 }
 
+if (kendo.ui.TreeList) {
+kendo.ui.TreeList.prototype.options.columnMenu =
+$.extend(true, kendo.ui.TreeList.prototype.options.columnMenu, {
+    "messages": {
+        "columns": "Zvolit sloupce",
+        "filter": "Použít filtr",
+        "sortAscending": "Setřídit (vzest.)",
+        "sortDescending": "Setřídit (sest.)"
+    }
+});
+}
+
 /* TreeView messages */
 
 if (kendo.ui.TreeView) {
@@ -558,6 +997,7 @@ $.extend(true, kendo.ui.Upload.prototype.options.localization,{
   "cancel": "Zrušit",
   "retry": "Zkusit znova",
   "remove": "Smazat",
+  "clearSelectedFiles": "Smazat",
   "uploadSelectedFiles": "Nahrát soubory",
   "dropFilesHere": "Pro nahrání přetáhněte soubory sem",
   "statusUploading": "nahrávám",
@@ -565,7 +1005,10 @@ $.extend(true, kendo.ui.Upload.prototype.options.localization,{
   "statusWarning": "varování",
   "statusFailed": "chyba",
   "headerStatusUploading": "Nahrávám...",
-  "headerStatusUploaded": "Hotovo"
+  "headerStatusUploaded": "Hotovo",
+  "invalidMaxFileSize": "Soubor je příliš velký.",
+  "invalidMinFileSize": "Soubor je příliš malý.",
+  "invalidFileExtension": "tento typ souboru není povolen."
 });
 }
 
@@ -586,12 +1029,28 @@ $.extend(true, kendo.ui.Validator.prototype.options.messages,{
 });
 }
 
+/* kendo.ui.progress method */
+if (kendo.ui.progress) {
+kendo.ui.progress.messages =
+$.extend(true, kendo.ui.progress.messages, {
+    loading: "Načítá se..."
+});
+}
+
 /* Dialog */
 
 if (kendo.ui.Dialog) {
 kendo.ui.Dialog.prototype.options.messages =
 $.extend(true, kendo.ui.Dialog.prototype.options.localization,{
   "close": "Zavřít"
+});
+}
+
+/* Calendar */
+if (kendo.ui.Calendar) {
+kendo.ui.Calendar.prototype.options.messages =
+$.extend(true, kendo.ui.Calendar.prototype.options.messages, {
+  "weekColumnHeader": ""
 });
 }
 
@@ -621,6 +1080,21 @@ $.extend(true, kendo.ui.Prompt.prototype.options.localization,{
   "okText": "OK",
   "cancel": "Zrušit"
 });
+}
+
+/* DateInput */
+if (kendo.ui.DateInput) {
+  kendo.ui.DateInput.prototype.options.messages =
+    $.extend(true, kendo.ui.DateInput.prototype.options.messages, {
+      "year": "rok",
+      "month": "měsíc",
+      "day": "den",
+      "weekday": "den v týdnu",
+      "hour": "hodiny",
+      "minute": "minuty",
+      "second": "sekundy",
+      "dayperiod": "dop./odp."
+    });
 }
 
 })(window.kendo.jQuery);
