@@ -88,7 +88,7 @@ To add the NuGet packages:
 
 4. Open `Startup.cs` by using a text editor (IDE) and update it in the way demonstrated in the following examples.
 
-    Locate the `ConfigureServices` method and add a call to `services.AddKendo` at the end.
+    Locate the `ConfigureServices` method and add the calls shown in the code snippet below:
 
     ###### Example
 

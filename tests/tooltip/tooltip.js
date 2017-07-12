@@ -612,4 +612,20 @@
         }, 10);
     });
 
+
+    test("popup is resized based on content", 2, function() {
+        container.append('<span id="first" title="foo"/><span id="second" title="some very long text"/>');
+
+        var tooltip = new Tooltip(container, {
+            filter: "span"
+        });
+
+        tooltip.show(container.find("#first"));
+
+        equal(tooltip.popup.element.width(), 21);
+
+        tooltip.show(container.find("#second"));
+
+        equal(tooltip.popup.element.width(), 127);
+    });
 })();
