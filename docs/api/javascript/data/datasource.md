@@ -2698,7 +2698,7 @@ If the value of `transport.update` is a string, the data source uses this string
     dataSource.fetch(function() {
       var product = dataSource.at(0);
       product.set("UnitPrice", 20);
-      dataSource.sync(); makes request to http://demos.telerik.com/kendo-ui/service/products/update
+      dataSource.sync(); //makes request to http://demos.telerik.com/kendo-ui/service/products/update
     });
     </script>
 
@@ -2900,7 +2900,7 @@ If set to function, the data source will invoke it and use the result as the URL
         },
         update: {
           url: function(options) {
-            return "http://demos.telerik.com/kendo-ui/service/products/update",
+            return "http://demos.telerik.com/kendo-ui/service/products/update"
           },
           dataType: "jsonp" // "jsonp" is required for cross-domain requests; use "json" for same-domain requests
         }

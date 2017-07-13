@@ -108,6 +108,7 @@ var __meta__ = { // jshint ignore:line
                 .on("focusout" + ns, function () {
                     that._change();
                     that._placeholder();
+                    that.close();
                     wrapper.removeClass(FOCUSED);
                 })
                 .attr({
@@ -619,6 +620,8 @@ var __meta__ = { // jshint ignore:line
             } else if (key === keys.ESC) {
                 if (visible) {
                     e.preventDefault();
+                } else {
+                    that._clearValue();
                 }
                 that.close();
             } else if (that.popup.visible() && (key === keys.PAGEDOWN || key === keys.PAGEUP)) {

@@ -431,7 +431,7 @@ var __meta__ = { // jshint ignore:line
             var data = that.dataSource.flatView();
             var skip = that.listView.skip();
             var length = data.length;
-            var groupsLength = that.dataSource._group.length;
+            var groupsLength = that.dataSource._group ? that.dataSource._group.length : 0;
             var isFirstPage = skip === undefined || skip === 0;
 
             that._presetValue = false;
@@ -908,6 +908,8 @@ var __meta__ = { // jshint ignore:line
                 that._lastItem();
             } else if (key != keys.TAB && !that._move(e)) {
                that._search();
+            } else if (key === keys.ESC && !that.popup.visible()) {
+                that._clearValue();
             }
         },
 

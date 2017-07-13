@@ -714,7 +714,7 @@ var __meta__ = { // jshint ignore:line
             var isRtl = kendo.support.isRtl(that.wrapper);
             var visible = that.popup.visible();
 
-            if (key === keys.DOWN) {
+             if (key === keys.DOWN) {
                 e.preventDefault();
 
                 if (!visible) {
@@ -742,8 +742,8 @@ var __meta__ = { // jshint ignore:line
 
                     if (!listView.focus()) {
                         that.close();
+                        }
                     }
-                }
                 e.preventDefault();
             } else if ((key === keys.LEFT && !isRtl) || (key === keys.RIGHT && isRtl)) {
                 if (!hasValue) {
@@ -767,7 +767,9 @@ var __meta__ = { // jshint ignore:line
                 if (visible) {
                     e.preventDefault();
                 } else {
-                    that.currentTag(null);
+                    that.tagList.children().each(function(index, tag) {
+                        that._removeTag($(tag));
+                    });
                 }
 
                 that.close();
