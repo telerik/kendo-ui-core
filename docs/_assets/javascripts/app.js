@@ -136,7 +136,7 @@ function navigationTemplate(root) {
             }
             return formatNavigationTemplate(icon, root + url, text);
         } else {
-            return formatNavigationTemplate(icon, root, text);
+            return formatNavigationTemplate(icon, url, text);
         }
     };
 }

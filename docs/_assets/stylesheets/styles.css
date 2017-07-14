@@ -1197,12 +1197,11 @@ footer,
 }
 
 #feedback-form .feedback-extw__textarea {
-    margin-top: 21px;
-    height: 156px;
     resize: none;
 }
 
-#feedback-form .feedback-extw__input {
+#feedback-form .feedback-extw__input,
+#feedback-form .feedback-extw__textarea {
     margin: 12px 0 6px;
 }
 

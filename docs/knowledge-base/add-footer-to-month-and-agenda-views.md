@@ -1,14 +1,13 @@
 ---
-title: Add Footer to Month and Agenda Views of Scheduler
-description: An example on how to add a footer to month and agenda views of the Scheduler
+title: Add Footer to Month and Agenda Views in Scheduler
+description: An example on how to add a footer to the month and agenda views of the Kendo UI Scheduler.
 type: how-to
 page_title: Add Footer to Month and Agenda Views | Kendo UI Scheduler
 slug: add-footer-to-month-and-agenda-views
-position: 
 tags: add, footer, month, agenda, views, scheduler
 ticketid: 1116003
 ---
-                    
+
 ## Environment
 
 <table>
@@ -20,11 +19,13 @@ ticketid: 1116003
 
 ## Description
 
-There is no footer in month and agenda views of the Scheduler. How can I add one?
+How can I add a footer in the month and agenda views of the Scheduler?
 
 ## Suggested Workarounds
 
-By design a footer is not displayed in month and agenda views. As a workaround, you can add a footer with jQuery in the dataBound event handler of the Scheduler using the following approach:
+The Kendo UI Scheduler does not provide a built-in solution for achieving this behavior. However, you can still work around the issue.
+
+Add a footer by using jQuery in the `dataBound` event handler of the Scheduler. The following example demonstrates how to apply this approach.
 
 ```html
 <div id="scheduler"></div>

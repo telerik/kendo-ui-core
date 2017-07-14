@@ -25,7 +25,7 @@ var __meta__ = { // jshint ignore:line
     var kendo = window.kendo,
         ui = kendo.ui,
         List = ui.List,
-        keys = kendo.keys,
+        keys = $.extend({ A: 65 }, kendo.keys),
         activeElement = kendo._activeElement,
         ObservableArray = kendo.data.ObservableArray,
         proxy = $.proxy,
@@ -699,6 +699,7 @@ var __meta__ = { // jshint ignore:line
             e.preventDefault();
 
             that._select(item).done(function() {
+                that._activeItem = item;
                 that._change();
                 that._close();
             });
@@ -709,7 +710,6 @@ var __meta__ = { // jshint ignore:line
             var key = e.keyCode;
             var tag = that._currentTag;
             var listView = that.listView;
-            var current = listView.focus();
             var hasValue = that.input.val();
             var isRtl = kendo.support.isRtl(that.wrapper);
             var visible = that.popup.visible();
@@ -720,30 +720,40 @@ var __meta__ = { // jshint ignore:line
                 if (!visible) {
                     that.open();
 
-                    if (!current) {
+                    if (!listView.focus()) {
                         listView.focusFirst();
                     }
                     return;
                 }
 
-                if (current) {
+                if (listView.focus()) {
                     listView.focusNext();
                     if (!listView.focus()) {
                         listView.focusLast();
+                    } else {
+                        if (e.shiftKey) {
+                            that._select(listView.focus()).done(function() {
+                                that._change();
+                            });
+                        }
                     }
                 } else {
                     listView.focusFirst();
                 }
+
             } else if (key === keys.UP) {
                 if (visible) {
-                    if (current) {
-                        listView.focusPrev();
-                    }
-
-                    if (!listView.focus()) {
-                        that.close();
+                    listView.focusPrev();
+                    if (listView.focus()) {
+                        if (e.shiftKey) {
+                            that._select(listView.focus()).done(function() {
+                                that._change();
+                            });
                         }
+                    } else {
+                        that.close();
                     }
+                }
                 e.preventDefault();
             } else if ((key === keys.LEFT && !isRtl) || (key === keys.RIGHT && isRtl)) {
                 if (!hasValue) {
@@ -757,11 +767,31 @@ var __meta__ = { // jshint ignore:line
                     tag = tag.next();
                     that.currentTag(tag[0] ? tag : null);
                 }
+            } else if (e.ctrlKey && key === keys.A  && visible) {
+                if (listView._selectedIndices.length === listView.items().length) {
+                    return listView.select(listView._selectedIndices);
+                } else {
+                    that._selectRange(0, listView.items().length - 1);
+                }
             } else if (key === keys.ENTER && visible) {
-                that._select(current).done(function() {
+                that._select(listView.focus()).done(function() {
                     that._change();
                     that._close();
                 });
+                e.preventDefault();
+            } else if (key === keys.SPACEBAR && e.ctrlKey && visible) {
+                that._select(listView.focus()).done(function() {
+                    that._activeItem = listView.focus();
+                    that._change();
+                });
+            } else if (key === keys.SPACEBAR && e.shiftKey && visible) {
+                var activeIndex = that._activeItem ? listView.getElementIndex(that._activeItem[0]) : listView._selectedIndices[0];
+                var currentIndex = listView.getElementIndex(listView.focus()[0]);
+                that._selectRange(
+                    activeIndex,
+                    currentIndex
+                    );
+
                 e.preventDefault();
             } else if (key === keys.ESC) {
                 if (visible) {
@@ -775,6 +805,9 @@ var __meta__ = { // jshint ignore:line
                 that.close();
             } else if (key === keys.HOME) {
                 if (visible) {
+                    if (e.ctrlKey && e.shiftKey) {
+                        that._selectRange(listView.getElementIndex(listView.focus()[0]), 0);
+                    }
                     listView.focusFirst();
                 } else if (!hasValue) {
                     tag = that.tagList[0].firstChild;
@@ -785,6 +818,12 @@ var __meta__ = { // jshint ignore:line
                 }
             } else if (key === keys.END) {
                 if (visible) {
+                    if (e.ctrlKey && e.shiftKey) {
+                        that._selectRange(
+                            listView.getElementIndex(listView.focus()[0]),
+                            listView.element.children().length - 1
+                        );
+                    }
                     listView.focusLast();
                 } else if (!hasValue) {
                     tag = that.tagList[0].lastChild;
@@ -1135,6 +1174,31 @@ var __meta__ = { // jshint ignore:line
                     listView.skipUpdate(true);
                 }
             });
+        },
+
+        _selectRange: function(startIndex, endIndex) {
+            var that = this;
+            var listView = that.listView;
+            var indices = listView._selectedIndices.slice();
+            var toggle = function (index) {
+                if (listView._selectedIndices.indexOf(index) == -1) {
+                    indices.push(index);
+                } else {
+                    indices.splice(indices.indexOf(index), 1);
+                }
+            };
+
+            if (startIndex < endIndex) {
+                for (var i = startIndex; i <= endIndex; i++) {
+                    toggle(i);
+                }
+            } else {
+                for (var j = startIndex; j >= endIndex; j--) {
+                    toggle(j);
+                }
+            }
+
+            return listView.select(indices);
         },
 
         _input: function() {

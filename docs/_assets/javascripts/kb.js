@@ -9,8 +9,7 @@ $(document).ready(function () {
 function searchInternal() {
     search();
 
-    $("#page-search .gsc-input-box .gsc-input").val("");
-    $("#page-search table.gsc-above-wrapper-area-container > tbody > tr > td.gsc-result-info-container").append("<h2 id='latest-articles'>Last Updated Articles</h2>");
+    $("#page-search table.gsc-above-wrapper-area-container > tbody > tr > td.gsc-result-info-container").append("<h2 id='latest-articles'>Latest Articles</h2>");
 }
 
 function onSearchInternal() {

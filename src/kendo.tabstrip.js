@@ -1266,17 +1266,6 @@ var __meta__ = { // jshint ignore:line
 
           var isAjaxContent = (item.children("." + LINK).data(CONTENTURL) || that._contentUrls[itemIndex] || false) && contentHolder.is(EMPTY),
                 showContentElement = function () {
-                    that.tabGroup.find("." + TABONTOP).removeClass(TABONTOP);
-                    item.addClass(TABONTOP) // change these directly to bring the tab on top.
-                        .css("z-index");
-
-                    if (kendo.size(animation.effects)) {
-                        oldTab.kendoAddClass(DEFAULTSTATE, { duration: animation.duration });
-                        item.kendoAddClass(ACTIVESTATE, { duration: animation.duration });
-                    } else {
-                        oldTab.addClass(DEFAULTSTATE);
-                        item.addClass(ACTIVESTATE);
-                    }
                     oldTab.removeAttr("aria-selected");
                     item.attr("aria-selected", true);
 
@@ -1335,6 +1324,18 @@ var __meta__ = { // jshint ignore:line
 
             visibleContents
                     .removeClass(ACTIVESTATE);
+
+            that.tabGroup.find("." + TABONTOP).removeClass(TABONTOP);
+                    item.addClass(TABONTOP) // change these directly to bring the tab on top.
+                        .css("z-index");
+
+            if (kendo.size(animation.effects)) {
+                oldTab.kendoAddClass(DEFAULTSTATE, { duration: animation.duration });
+                item.kendoAddClass(ACTIVESTATE, { duration: animation.duration });
+            } else {
+                oldTab.addClass(DEFAULTSTATE);
+                item.addClass(ACTIVESTATE);
+            }
 
             visibleContents.attr("aria-hidden", true);
             visibleContents.attr("aria-expanded", false);

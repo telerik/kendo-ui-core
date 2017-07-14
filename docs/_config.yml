@@ -279,7 +279,7 @@ navigation:
     "updates":
         title: "Updates and Contribution"
         position: 14
-    "knowledge_base":
+    "knowledge-base":
         title: "Knowledge Base"
     "copyright":
         title: "Copyright"
@@ -598,7 +598,7 @@ defaults:
         editableExample: "true"
 -
     scope:
-        path: "knowledge-base"
+        path: "knowledge-base/"
     values:
         layout: "kb-page"
 

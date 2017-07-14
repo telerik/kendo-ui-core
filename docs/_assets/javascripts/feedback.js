@@ -2,12 +2,16 @@ $(document).ready(function () {
     var cookieVariablesNames = ['feedbackSubmitted', 'path', 'uuid'];
     var defaultFormValues = {
         email: "",
-        textFeedback: "",
         inaccurateContent: false,
-        wrongInformation: false,
-        insufficientInformation: false,
+        inaccurateOutdatedContentText: "",
+        otherMoreInformation: false,
+        otherMoreInformationText: "",
         textErrors: false,
+        typosLinksElementsText: "",
         outdatedSample: false,
+        inaccurateOutdatedCodeSamplesText: "",
+        otherFeedback: false,
+        textFeedback: ""
     };
     var formIsProcessing = false;
     //Util functions
@@ -82,7 +86,7 @@ $(document).ready(function () {
     //Init the form popup window
     var win = $("#feedback-form-window").kendoWindow({
         actions: ["Close"],
-        draggable: false,
+        draggable: true,
         modal: true,
         pinned: false,
         visible: false,
@@ -124,7 +128,7 @@ $(document).ready(function () {
 
     }).data("kendoValidator");
 
-    var emailValidator = $("#feedback-email-input").kendoValidator({
+    var emailValidator = $("#feedback-section").kendoValidator({
         validateOnBlur: false,
         messages: {
             email: "Invalid email address."
@@ -140,7 +144,8 @@ $(document).ready(function () {
         }
     }).data("kendoValidator");
 
-
+    // text validation is disabled for the new design of the form. In order to enable it
+    // it must be reworked!!! 
     var textAreaValidator = $("#feedback-text-input").kendoValidator({
         validateOnBlur: false,
         messages: {
@@ -190,18 +195,21 @@ $(document).ready(function () {
         //	formIsProcessing = false;
         //	return;
         //}
-        var textAreaIsValidate = textAreaValidator.validate();
+
+        // text validation is disabled for the new design of the form. In order to enable it
+        // it must be reworked!!! 
+        //var textAreaIsValidate = textAreaValidator.validate();
         var emptyFormValidate = emptyFormValidator.validate();
         var emailValid = emailValidator.validate();
 
-        if (textAreaIsValidate && emptyFormValidate && emailValid) {
+        if (emptyFormValidate && emailValid) {
             win.close();
             setCookieByName("submittingFeedback")
             formModel.yesNoFeedback = getCookieByName("yesNoFeedback") || "Not submitted";
             formModel.uuid = getCookieByName("uuid");
             formModel.path = currentPath;
             formModel.sheetId = $("#hidden-sheet-id").val();
-            $.post("http://api.everlive.com/v1/lzrla9wpuk636rdd/functions/saveFeedback", formModel.toJSON(), function () {
+            $.post("https://api.everlive.com/v1/lzrla9wpuk636rdd/functions/saveFeedback", formModel.toJSON(), function () {
                 formIsProcessing = false;
             });
         } else {
