@@ -622,10 +622,10 @@
 
         tooltip.show(container.find("#first"));
 
-        equal(tooltip.popup.element.width(), 21);
+        equal(Math.round(tooltip.popup.element.width()), 21);
 
         tooltip.show(container.find("#second"));
 
-        equal(tooltip.popup.element.width(), 127);
+        equal(Math.round(tooltip.popup.element.width()), 127);
     });
 })();
