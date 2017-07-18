@@ -28,8 +28,9 @@ The example below demonstrates how to use FontAwesome icons with the Kendo UI Gr
               pageSize: 20,
               data: createRandomData(50)
             },
-			sortable: true,
+            sortable: true,
             columnMenu: true,
+            filterable: true,
             pageable: true,
             height: 430,
             columns: [
@@ -39,16 +40,11 @@ The example below demonstrates how to use FontAwesome icons with the Kendo UI Gr
               { command: {
                 text: " View Details",
                 click: showDetails,
-                className: "fa fa-map-marker"
+                iconClass: "fa fa-map-marker"
               },
                title: " ",
                width: "140px"
-              }],
-              dataBound: function (e) {
-                e.sender.tbody.find(".k-button.fa").each(function(idx, element){
-                  $(element).removeClass("fa fa-map-marker").find("span").addClass("fa fa-map-marker");
-                });
-              }
+              }]
           }).data("kendoGrid");
 
           wnd = $("#details")
@@ -100,34 +96,34 @@ The example below demonstrates how to use FontAwesome icons with the Kendo UI Gr
         display: inline-block;
         padding-top: 0.5em;
         color: #2e2e2e;
-        width: 20px;
+        width: 16px;
         height: 20px;
       }
 
-      .k-grid-pager .k-pager-numbers .k-current-page .k-pager-nav:after {
-        margin-top: -1em;
-      }
-
-      .k-column-menu .k-i-arrow-e:before {
+      .k-column-menu .k-i-arrow-60-right:before {
         content: "\f061";
       }
-      .k-header-column-menu .k-i-arrowhead-s:before{
+       .k-header-column-menu .k-i-more-vertical:before{
         content: "\f063";
       }
 
-      .k-column-menu .k-filter:before {
+      .k-column-menu .k-i-filter:before {
         content: "\f0b0";
       }
 
+      .k-column-menu .k-i-arrow-60-down:before {
+        content: "\f063";
+      }  
+        
       .k-column-menu .k-i-columns:before {
         content: "\f0db";
       }
 
-      .k-column-menu .k-i-sort-asc:before {
+      .k-column-menu .k-i-sort-asc-sm:before {
         content: "\f0dd";
       }
 
-      .k-column-menu .k-i-sort-desc:before {
+      .k-column-menu .k-i-sort-desc-sm:before {
         content: "\f0de";
       }
 

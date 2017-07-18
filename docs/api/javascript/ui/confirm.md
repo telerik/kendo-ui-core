@@ -5,7 +5,7 @@ description: How to initialize an Confirm UI widget, configure its properties an
 res_type: api
 ---
 
-# kendo.ui.Confirm
+# kendo.ui.Confirm : kendo.ui.Dialog
 
 Represents the Kendo UI Confirm.
 

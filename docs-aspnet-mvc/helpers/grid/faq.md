@@ -240,16 +240,9 @@ The following example demonstrates how to add Kendo UI icons to custom command b
         .Name("grid")
         .Columns(columns =>
         {
-            columns.Command(command => { command.Custom("myCommand").Text("My Text"); });
+            columns.Command(command => { command.Custom("myCommand").Text("My Text").IconClass("k-icon k-i-custom"); });
         })
-        .Events(ev => ev.DataBound("addIcons"))
     )
-```
-```tab-JavaScript
-
-    function addIcons(e) {
-        e.sender.tbody.find(".k-grid-myCommand > span").addClass("k-icon k-i-custom");
-    }
 ```
 
 ## Data Binding

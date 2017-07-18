@@ -5,7 +5,7 @@ description: How to initialize an Prompt UI widget, configure its properties and
 res_type: api
 ---
 
-# kendo.ui.Prompt
+# kendo.ui.Prompt : kendo.ui.Dialog
 
 Represents the Kendo UI Prompt.
 

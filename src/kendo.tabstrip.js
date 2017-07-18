@@ -28,6 +28,7 @@ var __meta__ = { // jshint ignore:line
         IMG = "img",
         HREF = "href",
         PREV = "prev",
+        NEXT = "next",
         SHOW = "show",
         LINK = "k-link",
         LAST = "k-last",
@@ -347,10 +348,14 @@ var __meta__ = { // jshint ignore:line
                 return;
             }
 
-            if (key == keys.DOWN || key == keys.RIGHT) {
-                action = rtl && isHorizontal ? PREV : "next";
-            } else if (key == keys.UP || key == keys.LEFT) {
-                action = rtl && isHorizontal ? "next" : PREV;
+            if (key === keys.DOWN && !isHorizontal) {
+                action = NEXT;
+            } else if (key === keys.UP && !isHorizontal) {
+                action = PREV;
+            } else if (key === keys.RIGHT && isHorizontal) {
+                action = rtl ? PREV : NEXT;
+            } else if (key === keys.LEFT && isHorizontal) {
+                action = rtl ? NEXT : PREV;
             } else if (key == keys.ENTER || key == keys.SPACEBAR) {
                 that._click(current);
                 e.preventDefault();

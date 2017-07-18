@@ -1167,7 +1167,9 @@ var __meta__ = { // jshint ignore:line
         },
 
         _popupOpen: function(e) {
-            e.sender.element.children("." + FOCUSEDSTATE).removeClass(FOCUSEDSTATE);
+            if (!this._keyTriggered) {
+                e.sender.element.children("." + FOCUSEDSTATE).removeClass(FOCUSEDSTATE);
+            }
             if (this.options.scrollable) {
                 this._setPopupHeight(e.sender);
             }
@@ -1362,6 +1364,8 @@ var __meta__ = { // jshint ignore:line
             if (e.delegateTarget != element.parents(menuSelector)[0] && e.delegateTarget != element.parents(".k-menu-scroll-wrapper,.k-popups-wrapper")[0]) {
                 return;
             }
+
+            that._keyTriggered = false;
 
             if ((!that.options.openOnClick || that.clicked) && !touch &&
                 !(pointerTouch && that._isRootItem(element.closest(allItemsSelector)))) {
@@ -1673,6 +1677,7 @@ var __meta__ = { // jshint ignore:line
 
             belongsToVertical = that._itemBelongsToVertival(hoverItem);
             hasChildren = that._itemHasChildren(hoverItem);
+            that._keyTriggered = true;
 
             if (key == keys.RIGHT) {
                 target = that[isRtl ? "_itemLeft" : "_itemRight"](hoverItem, belongsToVertical, hasChildren);
@@ -1682,13 +1687,22 @@ var __meta__ = { // jshint ignore:line
                 target = that._itemDown(hoverItem, belongsToVertical, hasChildren);
             } else if (key == keys.UP) {
                 target = that._itemUp(hoverItem, belongsToVertical, hasChildren);
+            } else if (key == keys.HOME) {
+                that._moveHover(hoverItem, hoverItem.parent().children().first());
+            } else if (key == keys.END) {
+                that._moveHover(hoverItem, hoverItem.parent().children().last());
             } else if (key == keys.ESC) {
                 target = that._itemEsc(hoverItem, belongsToVertical);
             } else if (key == keys.ENTER || key == keys.SPACEBAR) {
                 target = hoverItem.children(".k-link");
                 if (target.length > 0) {
                     that._click({ target: target[0], preventDefault: function () {}, enterKey: true });
-                    that._moveHover(hoverItem, that._findRootParent(hoverItem));
+                    if (hasChildren) {
+                        that.open(hoverItem);
+                        that._moveHover(hoverItem, that._childPopupElement(hoverItem).children().first());
+                    } else {
+                        that._moveHover(hoverItem, that._findRootParent(hoverItem));
+                    }
                 }
             } else if (key == keys.TAB) {
                 target = that._findRootParent(hoverItem);

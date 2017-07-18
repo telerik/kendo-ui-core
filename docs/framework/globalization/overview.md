@@ -10,6 +10,10 @@ position: 1
 
 Globalization is the process of designing and developing an application that works in multiple cultures. The culture defines specific information for the number formats, week and month names, date and time formats, etc.
 
+> **Important**
+>
+> The Kendo UI culture scripts are generated from the Windows 10 and .NET 4.7 server-side culture definitions and match them by design. To customize the culture in your application, please refer to the [Culture Definition]({% slug culture_definition_kendoui_globalization %}#customization) article.
+
 ## Getting Started
 
 [Kendo UI provides a way to internationalize the current page using a culture script](http://demos.telerik.com/kendo-ui/globalization/index). Kendo UI exposes culture (`cultureName`) method which allows you to select the culture script corresponding to the `<language code>-<country/region code>`.

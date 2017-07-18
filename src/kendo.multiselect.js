@@ -42,6 +42,7 @@ var __meta__ = { // jshint ignore:line
         DESELECT = "deselect",
         ARIA_DISABLED = "aria-disabled",
         FOCUSEDCLASS = "k-state-focused",
+        SELECTEDCLASS = "k-state-selected",
         HIDDENCLASS = "k-hidden",
         HOVERCLASS = "k-state-hover",
         STATEDISABLED = "k-state-disabled",
@@ -459,6 +460,7 @@ var __meta__ = { // jshint ignore:line
         },
 
         close: function() {
+            this._activeItem = null;
             this.popup.close();
         },
 
@@ -705,6 +707,10 @@ var __meta__ = { // jshint ignore:line
             });
         },
 
+        _getActiveItem: function() {
+            return this._activeItem || $(this.listView.items()[this.listView._selectedIndices.length - 1]) || this.listView.focus();
+        },
+
         _keydown: function(e) {
             var that = this;
             var key = e.keyCode;
@@ -713,6 +719,8 @@ var __meta__ = { // jshint ignore:line
             var hasValue = that.input.val();
             var isRtl = kendo.support.isRtl(that.wrapper);
             var visible = that.popup.visible();
+            var dir = 0;
+            var activeItemIdx;
 
              if (key === keys.DOWN) {
                 e.preventDefault();
@@ -727,14 +735,18 @@ var __meta__ = { // jshint ignore:line
                 }
 
                 if (listView.focus()) {
+                    if (!that._activeItem && e.shiftKey) {
+                        that._activeItem = listView.focus();
+                        dir = -1;
+                    }
+                    activeItemIdx = listView.getElementIndex(that._getActiveItem()[0]);
+
                     listView.focusNext();
                     if (!listView.focus()) {
                         listView.focusLast();
                     } else {
                         if (e.shiftKey) {
-                            that._select(listView.focus()).done(function() {
-                                that._change();
-                            });
+                            that._selectRange(activeItemIdx, listView.getElementIndex(listView.focus()[0]) + dir);
                         }
                     }
                 } else {
@@ -743,15 +755,18 @@ var __meta__ = { // jshint ignore:line
 
             } else if (key === keys.UP) {
                 if (visible) {
+                    if (!that._activeItem && e.shiftKey) {
+                        that._activeItem = listView.focus();
+                        dir = 1;
+                    }
+                    activeItemIdx = listView.getElementIndex(that._getActiveItem()[0]);
                     listView.focusPrev();
-                    if (listView.focus()) {
-                        if (e.shiftKey) {
-                            that._select(listView.focus()).done(function() {
-                                that._change();
-                            });
-                        }
-                    } else {
+                    if (!listView.focus()) {
                         that.close();
+                    } else {
+                        if (e.shiftKey) {
+                            that._selectRange(activeItemIdx, listView.getElementIndex(listView.focus()[0]) + dir);
+                        }
                     }
                 }
                 e.preventDefault();
@@ -769,6 +784,7 @@ var __meta__ = { // jshint ignore:line
                 }
             } else if (e.ctrlKey && key === keys.A  && visible) {
                 if (listView._selectedIndices.length === listView.items().length) {
+                    that._activeItem = null;
                     return listView.select(listView._selectedIndices);
                 } else {
                     that._selectRange(0, listView.items().length - 1);
@@ -780,12 +796,17 @@ var __meta__ = { // jshint ignore:line
                 });
                 e.preventDefault();
             } else if (key === keys.SPACEBAR && e.ctrlKey && visible) {
-                that._select(listView.focus()).done(function() {
+                if (that._activeItem && listView.focus()[0] === that._activeItem[0]) {
+                    that._activeItem = null;
+                }
+                if (!$(listView.focus()[0]).hasClass(SELECTEDCLASS)) {
                     that._activeItem = listView.focus();
+                }
+                that._select(listView.focus()).done(function() {
                     that._change();
                 });
             } else if (key === keys.SPACEBAR && e.shiftKey && visible) {
-                var activeIndex = that._activeItem ? listView.getElementIndex(that._activeItem[0]) : listView._selectedIndices[0];
+                var activeIndex = listView.getElementIndex(that._getActiveItem()[0]);
                 var currentIndex = listView.getElementIndex(listView.focus()[0]);
                 that._selectRange(
                     activeIndex,

@@ -614,7 +614,10 @@
 
 
     test("popup is resized based on content", 2, function() {
-        container.append('<span id="first" title="foo"/><span id="second" title="some very long text"/>');
+        var firstText = "foo";
+        var secondText = "some very long text";
+
+        container.append('<span id="first" title="' + firstText + '"/><span id="second" title="' + secondText + '"/>');
 
         var tooltip = new Tooltip(container, {
             filter: "span"
@@ -622,10 +625,20 @@
 
         tooltip.show(container.find("#first"));
 
-        equal(Math.round(tooltip.popup.element.width()), 21);
+        var tempSpan = $("<span>" + firstText + "</span>").appendTo(QUnit.fixture);
+        var actual = Math.round(tooltip.popup.element.width());
+        var expected = Math.round(tempSpan.width());
+
+        equal(actual, expected);
 
         tooltip.show(container.find("#second"));
 
-        equal(Math.round(tooltip.popup.element.width()), 127);
+        tempSpan.text(secondText)
+        actual = Math.round(tooltip.popup.element.width());
+        expected = Math.round(tempSpan.width());
+
+        equal(actual, expected);
+
+        tempSpan.remove();
     });
 })();

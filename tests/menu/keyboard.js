@@ -108,6 +108,20 @@ test('Left arrow moves focus from first to last item', function() {
     ok(menu.wrapper.children(".k-item").last().hasClass(FOCUSEDSTATE));
 });
 
+
+test('Home moves focus to first item', function() {
+    menu.wrapper.focus().press(keys.RIGHT);
+    menu.wrapper.focus().press(keys.HOME);
+
+    ok(menu.wrapper.children(".k-item").first().hasClass(FOCUSEDSTATE));
+});
+
+test('End moves focus from to last item', function() {
+    menu.wrapper.focus().press(keys.LEFT);
+
+    ok(menu.wrapper.children(".k-item").last().hasClass(FOCUSEDSTATE));
+});
+
 test('Mouse events reset the keyboard navigation active item', function() {
     menu.wrapper.focus().press(keys.RIGHT);
 
