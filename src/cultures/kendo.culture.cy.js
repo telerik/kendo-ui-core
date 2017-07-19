@@ -30,23 +30,23 @@
             standard: {
                 days: {
                     names: ["Dydd Sul","Dydd Llun","Dydd Mawrth","Dydd Mercher","Dydd Iau","Dydd Gwener","Dydd Sadwrn"],
-                    namesAbbr: ["Sul","Llun","Maw","Mer","Iau","Gwe","Sad"],
+                    namesAbbr: ["Sul","Llun","Maw","Mer","Iau","Gwen","Sad"],
                     namesShort: ["Su","Ll","Ma","Me","Ia","Gw","Sa"]
                 },
                 months: {
                     names: ["Ionawr","Chwefror","Mawrth","Ebrill","Mai","Mehefin","Gorffennaf","Awst","Medi","Hydref","Tachwedd","Rhagfyr"],
-                    namesAbbr: ["Ion","Chwef","Maw","Ebr","Mai","Meh","Gorff","Awst","Medi","Hyd","Tach","Rhag"]
+                    namesAbbr: ["Ion","Chw","Maw","Ebr","Mai","Meh","Gor","Awst","Medi","Hyd","Tach","Rhag"]
                 },
-                AM: ["am","am","AM"],
-                PM: ["pm","pm","PM"],
+                AM: ["AM","am","AM"],
+                PM: ["PM","pm","PM"],
                 patterns: {
-                    d: "dd/MM/yy",
-                    D: "d MMMM yyyy",
-                    F: "d MMMM yyyy HH:mm:ss",
-                    g: "dd/MM/yy HH:mm",
-                    G: "dd/MM/yy HH:mm:ss",
-                    m: "d MMMM",
-                    M: "d MMMM",
+                    d: "dd/MM/yyyy",
+                    D: "dddd, d MMMM yyyy",
+                    F: "dddd, d MMMM yyyy HH:mm:ss",
+                    g: "dd/MM/yyyy HH:mm",
+                    G: "dd/MM/yyyy HH:mm:ss",
+                    m: "MMMM d",
+                    M: "MMMM d",
                     s: "yyyy'-'MM'-'dd'T'HH':'mm':'ss",
                     t: "HH:mm",
                     T: "HH:mm:ss",

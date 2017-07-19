@@ -679,7 +679,7 @@ var __meta__ = { // jshint ignore:line
 
             var that = this,
                 inserted = that._create(tab),
-                referenceContent = that.element.find("#" + referenceTab.attr("aria-controls"));
+                referenceContent = that.element.find("[id='" + referenceTab.attr("aria-controls") + "']");
 
             each(inserted.tabs, function (idx) {
                 var contents = inserted.contents[idx];
@@ -708,7 +708,7 @@ var __meta__ = { // jshint ignore:line
 
             var that = this,
                 inserted = that._create(tab),
-                referenceContent = that.element.find("#" + referenceTab.attr("aria-controls"));
+                referenceContent = that.element.find("[id='" + referenceTab.attr("aria-controls") + "']");
 
             each(inserted.tabs, function (idx) {
                 var contents = inserted.contents[idx];
@@ -797,7 +797,7 @@ var __meta__ = { // jshint ignore:line
                 contents = $();
                 tabs.each(function () {
                     if (/k-tabstrip-items/.test(this.parentNode.className)) {
-                        var element = that.element.find("#" + this.getAttribute("aria-controls"));
+                        var element = that.element.find("[id='" + this.getAttribute("aria-controls") + "']");
                         content = element;
                     } else {
                         content = $("<div class='" + CONTENT + "'/>");

@@ -1405,7 +1405,7 @@ var __meta__ = { // jshint ignore:line
             }
 
             // Detect if cursor goes outside the viewport of the browser
-            if( (!e.toElement && !e.relatedTarget) ||
+            if( (kendo.support.browser.msie && !e.toElement && !e.relatedTarget) ||
                 e.clientX < 0 || e.clientY < 0 ||
                 e.clientY > $window.height() ||
                 e.clientX > $window.width()){
@@ -1689,8 +1689,10 @@ var __meta__ = { // jshint ignore:line
                 target = that._itemUp(hoverItem, belongsToVertical, hasChildren);
             } else if (key == keys.HOME) {
                 that._moveHover(hoverItem, hoverItem.parent().children().first());
+                e.preventDefault();
             } else if (key == keys.END) {
                 that._moveHover(hoverItem, hoverItem.parent().children().last());
+                e.preventDefault();
             } else if (key == keys.ESC) {
                 target = that._itemEsc(hoverItem, belongsToVertical);
             } else if (key == keys.ENTER || key == keys.SPACEBAR) {

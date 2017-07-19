@@ -226,8 +226,6 @@ The following example demonstrates how to specify the format of a bound column.
 
 ### How to Add Kendo UI Icons to Custom Command Buttons?
 
-The custom command buttons have the required `span` element, which is normally used to display an icon. However, this element has no CSS classes. Add them in the `dataBound` handler.
-
 A list of the available Kendo UI icons and their CSS classes is available in the [demo on styling and icons](http://demos.telerik.com/kendo-ui/styling/icons).
 
 The following example demonstrates how to add Kendo UI icons to custom command buttons.

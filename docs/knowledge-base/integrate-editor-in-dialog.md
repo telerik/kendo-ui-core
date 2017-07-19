@@ -1,16 +1,16 @@
 ---
-title: Integrate Editor and Dialog
-description: An example on how to integrate Kendo UI Editor and Dialog widgets.
+title: Integrate Editor into Dialog
+description: An example on how to integrate the Kendo UI Editor into the Kendo UI Dialog widget.
 type: how-to
-page_title: Integrate Editor and Dialog widgets
+page_title: Integrate Editor into Dialog Widget | Kendo UI Editor
 slug: integrate-editor-in-dialog
-position: 
-tags: integrate,editor,dialog
+tags: integrate, editor, dialog
 ticketid: 1118201
 res_type: kb
 ---
 
 ## Environment
+
 <table>
  <tr>
   <td>Product</td>
@@ -24,10 +24,12 @@ res_type: kb
 </table>
 
 ## Description
-How to display the Kendo UI Editor in a Dialog?
+
+How can I display the Kendo UI Editor in a Kendo UI Dialog?
 
 ## Solution
-The following example shows how the Editor can be initialized in a Dialog and the Editor's value displayed in an external div element. 
+
+Initialize the Kendo UI Editor in the Dialog by displaying the value of the Editor in an external `div` element.
 
 ```html
 <div id="editorDialog">
@@ -44,7 +46,7 @@ Content:
 <script>
 var editor = $("#editor").kendoEditor()
     .data("kendoEditor");
-  
+
     var dialog = $("#editorDialog").kendoDialog({
         width: "500px",
         title: "Editor",
@@ -57,11 +59,11 @@ var editor = $("#editor").kendoEditor()
             editor.refresh();
         }
     }).data("kendoDialog");
-    
+
     $("#openBtn").click(function(){
         dialog.open();
     });
-    
+
     function updateText(){
         $("#content").html(editor.value());
     }

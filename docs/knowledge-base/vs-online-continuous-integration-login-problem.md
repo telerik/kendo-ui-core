@@ -2,7 +2,7 @@
 title: Visual Studio Online Continuous Integration Randomly Asks for Login
 description: The Login dialog is randomly displayed during VS Online builds.
 type: troubleshooting
-page_title: VS Online Continuous Integration has an Authentication Issue | Telerik UI for ASP.NET Core
+page_title: VS Online Continuous Integration has an Authentication Issue | UI for ASP.NET Core
 slug: vs-online-continuous-integration-login-problem
 tags: vs2017
 ticketid: 1106905

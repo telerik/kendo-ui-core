@@ -5,6 +5,7 @@ type: how-to
 page_title: Access and Sort the Detail Grid Programmatically | Kendo UI Grid
 slug: sort-the-detail-grid-programmatically
 ticketid: 1116825
+res_type: kb
 ---
 
 ## Environment

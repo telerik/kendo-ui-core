@@ -6,6 +6,7 @@ page_title: Export Grid to Excel only after Confirmation | Telerik UI for JSP
 slug: export-the-grid-to-excel-only-after-confirmation
 tags: grid, excel, export
 ticketid: 1117057
+res_type: kb
 ---
 
 ## Environment

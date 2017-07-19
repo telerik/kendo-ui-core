@@ -2,26 +2,26 @@
     kendo.cultures["ps"] = {
         name: "ps",
         numberFormat: {
-            pattern: ["n-"],
+            pattern: ["-n"],
             decimals: 2,
-            ",": ",",
-            ".": ".",
+            ",": ".",
+            ".": ",",
             groupSize: [3],
             percent: {
-                pattern: ["%n-","%n"],
+                pattern: ["-n%","n%"],
                 decimals: 2,
-                ",": ",",
-                ".": ".",
+                ",": ".",
+                ".": ",",
                 groupSize: [3],
                 symbol: "%"
             },
             currency: {
                 name: "",
                 abbr: "",
-                pattern: ["$n-","$n"],
-                decimals: 2,
-                ",": ",",
-                ".": ".",
+                pattern: ["-n $","n $"],
+                decimals: 0,
+                ",": ".",
+                ".": ",",
                 groupSize: [3],
                 symbol: "؋"
             }
@@ -34,22 +34,22 @@
                     namesShort: ["ی","د","س","چ","پ","ج","ش"]
                 },
                 months: {
-                    names: ["محرم","صفر","ربيع الأوّل","ربيع الثاني","جمادى الأول","جمادى الثانى","رجب","شعبان","رمضان","شوّال","ذو القعدة","ذو الحجّة"],
-                    namesAbbr: ["محرم","صفر","ربيع الأوّل","ربيع الثاني","جمادى الأول","جمادى الثانى","رجب","شعبان","رمضان","شوّال","ذو القعدة","ذو الحجّة"]
+                    names: ["وری","غويی","غبرګولی","چنګاښ","زمری","وږی","تله","لړم","ليندۍ","مرغومی","سلواغه","كب"],
+                    namesAbbr: ["وری","غويی","غبرګولی","چنګاښ","زمری","وږی","تله","لړم","ليندۍ","مرغومی","سلواغه","كب"]
                 },
-                AM: ["غ.م","غ.م","غ.م"],
-                PM: ["غ.و","غ.و","غ.و"],
+                AM: ["AM","am","AM"],
+                PM: ["PM","pm","PM"],
                 patterns: {
                     d: "yyyy/M/d",
-                    D: "yyyy, dd, MMMM, dddd",
-                    F: "yyyy, dd, MMMM, dddd h:mm:ss tt",
-                    g: "yyyy/M/d h:mm tt",
-                    G: "yyyy/M/d h:mm:ss tt",
+                    D: "d MMMM yyyy",
+                    F: "d MMMM yyyy H:mm:ss",
+                    g: "yyyy/M/d H:mm",
+                    G: "yyyy/M/d H:mm:ss",
                     m: "d MMMM",
                     M: "d MMMM",
                     s: "yyyy'-'MM'-'dd'T'HH':'mm':'ss",
-                    t: "h:mm tt",
-                    T: "h:mm:ss tt",
+                    t: "H:mm",
+                    T: "H:mm:ss",
                     u: "yyyy'-'MM'-'dd HH':'mm':'ss'Z'",
                     y: "MMMM yyyy",
                     Y: "MMMM yyyy"

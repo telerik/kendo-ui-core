@@ -4,24 +4,24 @@
         numberFormat: {
             pattern: ["-n"],
             decimals: 2,
-            ",": ".",
-            ".": ",",
+            ",": "'",
+            ".": ".",
             groupSize: [3],
             percent: {
                 pattern: ["-n%","n%"],
                 decimals: 2,
-                ",": ".",
-                ".": ",",
+                ",": "'",
+                ".": ".",
                 groupSize: [3],
                 symbol: "%"
             },
             currency: {
                 name: "Swiss Franc",
                 abbr: "CHF",
-                pattern: ["$-n","$ n"],
+                pattern: ["-$ n","$ n"],
                 decimals: 2,
-                ",": ".",
-                ".": ",",
+                ",": "'",
+                ".": ".",
                 groupSize: [3],
                 symbol: "CHF"
             }
@@ -30,15 +30,15 @@
             standard: {
                 days: {
                     names: ["Sonntag","Montag","Dienstag","Mittwoch","Donnerstag","Freitag","Samstag"],
-                    namesAbbr: ["So","Mo","Di","Mi","Do","Fr","Sa"],
-                    namesShort: ["So","Mo","Di","Mi","Do","Fr","Sa"]
+                    namesAbbr: ["So.","Mo.","Di.","Mi.","Do.","Fr.","Sa."],
+                    namesShort: ["So.","Mo.","Di.","Mi.","Do.","Fr.","Sa."]
                 },
                 months: {
                     names: ["Januar","Februar","März","April","Mai","Juni","Juli","August","September","Oktober","November","Dezember"],
-                    namesAbbr: ["Jan","Feb","Mrz","Apr","Mai","Jun","Jul","Aug","Sep","Okt","Nov","Dez"]
+                    namesAbbr: ["Jan","Feb","Mär","Apr","Mai","Jun","Jul","Aug","Sep","Okt","Nov","Dez"]
                 },
-                AM: [""],
-                PM: [""],
+                AM: ["vorm.","vorm.","VORM."],
+                PM: ["nachm.","nachm.","NACHM."],
                 patterns: {
                     d: "dd.MM.yyyy",
                     D: "dddd, d. MMMM yyyy",

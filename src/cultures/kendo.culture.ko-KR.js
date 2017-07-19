@@ -8,7 +8,7 @@
             ".": ".",
             groupSize: [3],
             percent: {
-                pattern: ["-n %","n %"],
+                pattern: ["-n%","n%"],
                 decimals: 2,
                 ",": ",",
                 ".": ".",
@@ -16,7 +16,7 @@
                 symbol: "%"
             },
             currency: {
-                name: "Korean Won",
+                name: "South Korean Won",
                 abbr: "KRW",
                 pattern: ["-$n","$n"],
                 decimals: 0,
@@ -45,8 +45,8 @@
                     F: "yyyy'년' M'월' d'일' dddd tt h:mm:ss",
                     g: "yyyy-MM-dd tt h:mm",
                     G: "yyyy-MM-dd tt h:mm:ss",
-                    m: "M'월' d'일'",
-                    M: "M'월' d'일'",
+                    m: "M월 d일",
+                    M: "M월 d일",
                     s: "yyyy'-'MM'-'dd'T'HH':'mm':'ss",
                     t: "tt h:mm",
                     T: "tt h:mm:ss",

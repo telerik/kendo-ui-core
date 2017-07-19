@@ -2,7 +2,7 @@
 title: Implement Draggable and Droppable Functionality in ListView and Grid
 description: An example on how to implement the drag-to-select and draggable functionalities with multiple selection in the Kendo UI ListView.
 type: how-to
-page_title: Implement Drag-and-Drop with Multiple Selection in ListView and Grid | Kendo UI
+page_title: Implement Drag-and-Drop with Multiple Selection in ListView and Grid | Kendo UI Professional
 slug: listview-multiselection-drag-to-select-draggable
 tags: grid, listview, multipleselection, drag to select, draggable
 ticketid: 1116847

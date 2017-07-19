@@ -598,7 +598,7 @@ defaults:
         editableExample: "true"
 -
     scope:
-        path: "knowledge-base/"
+        path: "knowledge-base"
     values:
         layout: "kb-page"
 

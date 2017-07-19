@@ -2,7 +2,7 @@
     kendo.cultures["ar"] = {
         name: "ar",
         numberFormat: {
-            pattern: ["n-"],
+            pattern: ["-n"],
             decimals: 2,
             ",": ",",
             ".": ".",
@@ -18,7 +18,7 @@
             currency: {
                 name: "",
                 abbr: "",
-                pattern: ["$n-","$ n"],
+                pattern: ["-n $","n $"],
                 decimals: 2,
                 ",": ",",
                 ".": ".",

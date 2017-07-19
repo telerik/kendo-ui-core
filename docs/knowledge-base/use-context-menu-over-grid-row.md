@@ -5,6 +5,7 @@ type: how-to
 page_title: Use ContextMenu over Grid Row | Kendo UI Grid
 slug: use-context-menu-over-grid-row
 ticketid: 1114321
+res_type: kb
 ---
 
 ## Environment

@@ -18,7 +18,7 @@
             currency: {
                 name: "Danish Krone",
                 abbr: "DKK",
-                pattern: ["$ -n","$ n"],
+                pattern: ["-n $","n $"],
                 decimals: 2,
                 ",": ".",
                 ".": ",",
@@ -30,7 +30,7 @@
             standard: {
                 days: {
                     names: ["søndag","mandag","tirsdag","onsdag","torsdag","fredag","lørdag"],
-                    namesAbbr: ["søn","man","tir","ons","tor","fre","lør"],
+                    namesAbbr: ["sø","ma","ti","on","to","fr","lø"],
                     namesShort: ["sø","ma","ti","on","to","fr","lø"]
                 },
                 months: {

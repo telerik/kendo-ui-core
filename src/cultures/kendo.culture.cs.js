@@ -35,16 +35,16 @@
                 },
                 months: {
                     names: ["leden","únor","březen","duben","květen","červen","červenec","srpen","září","říjen","listopad","prosinec"],
-                    namesAbbr: ["I","II","III","IV","V","VI","VII","VIII","IX","X","XI","XII"]
+                    namesAbbr: ["led","úno","bře","dub","kvě","čvn","čvc","srp","zář","říj","lis","pro"]
                 },
                 AM: ["dop.","dop.","DOP."],
                 PM: ["odp.","odp.","ODP."],
                 patterns: {
-                    d: "d. M. yyyy",
-                    D: "d. MMMM yyyy",
-                    F: "d. MMMM yyyy H:mm:ss",
-                    g: "d. M. yyyy H:mm",
-                    G: "d. M. yyyy H:mm:ss",
+                    d: "dd.MM.yyyy",
+                    D: "dddd d. MMMM yyyy",
+                    F: "dddd d. MMMM yyyy H:mm:ss",
+                    g: "dd.MM.yyyy H:mm",
+                    G: "dd.MM.yyyy H:mm:ss",
                     m: "d. MMMM",
                     M: "d. MMMM",
                     s: "yyyy'-'MM'-'dd'T'HH':'mm':'ss",
@@ -54,7 +54,7 @@
                     y: "MMMM yyyy",
                     Y: "MMMM yyyy"
                 },
-                "/": ". ",
+                "/": ".",
                 ":": ":",
                 firstDay: 1
             }

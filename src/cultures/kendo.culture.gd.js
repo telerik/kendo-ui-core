@@ -8,7 +8,7 @@
             ".": ".",
             groupSize: [3],
             percent: {
-                pattern: ["-n %","n %"],
+                pattern: ["-n%","n%"],
                 decimals: 2,
                 ",": ",",
                 ".": ".",
@@ -31,22 +31,22 @@
                 days: {
                     names: ["DiDòmhnaich","DiLuain","DiMàirt","DiCiadain","DiarDaoin","DihAoine","DiSathairne"],
                     namesAbbr: ["DiD","DiL","DiM","DiC","Dia","Dih","DiS"],
-                    namesShort: ["Dò","Lu","Mà","Ci","Da","Ao","Sa"]
+                    namesShort: ["Dò","Lu","Mà","Ci","Da","hA","Sa"]
                 },
                 months: {
                     names: ["Am Faoilleach","An Gearran","Am Màrt","An Giblean","An Cèitean","An t-Ògmhios","An t-Iuchar","An Lùnastal","An t-Sultain","An Dàmhair","An t-Samhain","An Dùbhlachd"],
-                    namesAbbr: ["Faoi","Gear","Màrt","Gibl","Cèit","Ògmh","Iuch","Lùn","Sult","Dàmh","Samh","Dùbh"]
+                    namesAbbr: ["Faoi","Gearr","Màrt","Gibl","Cèit","Ògmh","Iuch","Lùna","Sult","Dàmh","Samh","Dùbh"]
                 },
                 AM: ["m","m","M"],
                 PM: ["f","f","F"],
                 patterns: {
                     d: "dd/MM/yyyy",
-                    D: "dd MMMM yyyy",
-                    F: "dd MMMM yyyy HH:mm:ss",
+                    D: "dddd, d'mh' MMMM yyyy",
+                    F: "dddd, d'mh' MMMM yyyy HH:mm:ss",
                     g: "dd/MM/yyyy HH:mm",
                     G: "dd/MM/yyyy HH:mm:ss",
-                    m: "d MMMM",
-                    M: "d MMMM",
+                    m: "d'mh' MMMM",
+                    M: "d'mh' MMMM",
                     s: "yyyy'-'MM'-'dd'T'HH':'mm':'ss",
                     t: "HH:mm",
                     T: "HH:mm:ss",

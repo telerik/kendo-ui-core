@@ -3,13 +3,13 @@
         name: "ne-IN",
         numberFormat: {
             pattern: ["-n"],
-            decimals: 0,
+            decimals: 2,
             ",": ",",
             ".": ".",
             groupSize: [3],
             percent: {
-                pattern: ["-n%","%n"],
-                decimals: 0,
+                pattern: ["-n%","n%"],
+                decimals: 2,
                 ",": ",",
                 ".": ".",
                 groupSize: [3],
@@ -18,7 +18,7 @@
             currency: {
                 name: "Indian Rupee",
                 abbr: "INR",
-                pattern: ["-$n","$n"],
+                pattern: ["-$ n","$ n"],
                 decimals: 2,
                 ",": ",",
                 ".": ".",
@@ -29,27 +29,27 @@
         calendars: {
             standard: {
                 days: {
-                    names: ["आइतवार","सोमवार","मङ्गलवार","बुधवार","बिहीवार","शुक्रवार","शनिवार"],
+                    names: ["आइतबार","सोमबार","मङ्गलबार","बुधबार","बिहिबार","शुक्रबार","शनिबार"],
                     namesAbbr: ["आइत","सोम","मङ्गल","बुध","बिही","शुक्र","शनि"],
                     namesShort: ["आइत","सोम","मङ्गल","बुध","बिही","शुक्र","शनि"]
                 },
                 months: {
-                    names: ["जनवरी","फरवरी","मार्च","अप्रेल","मई","जुन","जुलाई","अगस्त","सेप्टेम्बर","अक्टोबर","नोभेम्बर","दिसम्बर"],
-                    namesAbbr: ["जन","फेब","मार्च","अप्रि","मे","जुन","जुला","अग","सेप्ट","अक्टो","नोभे","डिसे"]
+                    names: ["जनवरी","फेब्रुअरी","मार्च","अप्रिल","मे","जुन","जुलाई","अगस्ट","सेप्टेम्बर","अक्टोबर","नोभेम्बर","डिसेम्बर"],
+                    namesAbbr: ["जनवरी","फेब्रुअरी","मार्च","अप्रिल","मे","जुन","जुलाई","अगस्ट","सेप्टेम्बर","अक्टोबर","नोभेम्बर","डिसेम्बर"]
                 },
-                AM: ["पूर्वाह्न","पूर्वाह्न","पूर्वाह्न"],
-                PM: ["अपराह्न","अपराह्न","अपराह्न"],
+                AM: ["AM","am","AM"],
+                PM: ["PM","pm","PM"],
                 patterns: {
                     d: "yyyy-MM-dd",
                     D: "yyyy MMMM d, dddd",
-                    F: "yyyy MMMM d, dddd HH:mm:ss",
-                    g: "yyyy-MM-dd HH:mm",
-                    G: "yyyy-MM-dd HH:mm:ss",
+                    F: "yyyy MMMM d, dddd h:mm:ss tt",
+                    g: "yyyy-MM-dd h:mm tt",
+                    G: "yyyy-MM-dd h:mm:ss tt",
                     m: "MMMM d",
                     M: "MMMM d",
                     s: "yyyy'-'MM'-'dd'T'HH':'mm':'ss",
-                    t: "HH:mm",
-                    T: "HH:mm:ss",
+                    t: "h:mm tt",
+                    T: "h:mm:ss tt",
                     u: "yyyy'-'MM'-'dd HH':'mm':'ss'Z'",
                     y: "yyyy MMMM",
                     Y: "yyyy MMMM"

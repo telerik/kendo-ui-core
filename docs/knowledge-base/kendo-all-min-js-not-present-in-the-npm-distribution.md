@@ -2,7 +2,7 @@
 title: Cannot Find kendo.all.min.js in the Kendo UI NPM Packages
 description: The kendo.all.min.js file is missing when using the Kendo UI NPM packages.
 type: troubleshooting
-page_title: The kendo.all.min.js File Is Missing in the NPM Distribution | Kendo UI
+page_title: The kendo.all.min.js File Is Missing in the NPM Distribution | Kendo UI Professional
 slug: kendo-all-min-js-not-present-in-the-npm-distribution
 tags: npm, webpack
 ticketid: 1110344

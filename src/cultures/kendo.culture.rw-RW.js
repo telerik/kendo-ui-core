@@ -4,13 +4,13 @@
         numberFormat: {
             pattern: ["-n"],
             decimals: 2,
-            ",": " ",
+            ",": ".",
             ".": ",",
             groupSize: [3],
             percent: {
-                pattern: ["-n %","n %"],
+                pattern: ["-n%","n%"],
                 decimals: 2,
-                ",": " ",
+                ",": ".",
                 ".": ",",
                 groupSize: [3],
                 symbol: "%"
@@ -18,45 +18,45 @@
             currency: {
                 name: "Rwandan Franc",
                 abbr: "RWF",
-                pattern: ["-n $","n $"],
-                decimals: 2,
-                ",": " ",
+                pattern: ["-$ n","$ n"],
+                decimals: 0,
+                ",": ".",
                 ".": ",",
                 groupSize: [3],
-                symbol: "RWF"
+                symbol: "RF"
             }
         },
         calendars: {
             standard: {
                 days: {
-                    names: ["Ku cyumweru","Ku wa mbere","Ku wa kabiri","Ku wa gatatu","Ku wa kane","Ku wa gatanu","Ku wa gatandatu"],
-                    namesAbbr: ["cyu.","mbe.","kab.","gat.","kan.","gat.","gat."],
-                    namesShort: ["cy","mb","ka","ga","ka","ga","ga"]
+                    names: ["Ku cyumweru","Kuwa mbere","Kuwa kabiri","Kuwa gatatu","Kuwa kane","Kuwa gatanu","Kuwa gatandatu"],
+                    namesAbbr: ["cyu.","mbe.","kab.","gtu.","kan.","gnu.","gnd."],
+                    namesShort: ["cyu.","mbe.","kab.","gtu.","kan.","gnu.","gnd."]
                 },
                 months: {
-                    names: ["Mutarama","Gashyantare","Werurwe","Mata","Gicurasi","Kamena","Nyakanga","Kanama","Nzeli","Ukwakira","Ugushyingo","Ukuboza"],
-                    namesAbbr: ["Mut","Gas","Wer","Mat","Gic","Kam","Nyak","Kan","Nze","Ukwak","Ugus","Ukub"]
+                    names: ["Mutarama","Gashyantare","Werurwe","Mata","Gicuransi","Kamena","Nyakanga","Kanama","Nzeli","Ukwakira","Ugushyingo","Ukuboza"],
+                    namesAbbr: ["mut.","gas.","wer.","mat.","gic.","kam.","nya.","kan.","nze.","ukw.","ugu.","uku."]
                 },
-                AM: ["z.m","z.m","Z.M"],
-                PM: ["z.n","z.n","Z.N"],
+                AM: ["AM","am","AM"],
+                PM: ["PM","pm","PM"],
                 patterns: {
-                    d: "d/MM/yyyy",
-                    D: "d ' ' MMMM ' ' yyyy",
-                    F: "d ' ' MMMM ' ' yyyy H:mm:ss",
-                    g: "d/MM/yyyy H:mm",
-                    G: "d/MM/yyyy H:mm:ss",
-                    m: "MMMM dd",
-                    M: "MMMM dd",
+                    d: "yyyy/MM/dd",
+                    D: "dddd, yyyy MMMM dd",
+                    F: "dddd, yyyy MMMM dd HH:mm:ss",
+                    g: "yyyy/MM/dd HH:mm",
+                    G: "yyyy/MM/dd HH:mm:ss",
+                    m: "MMMM d",
+                    M: "MMMM d",
                     s: "yyyy'-'MM'-'dd'T'HH':'mm':'ss",
-                    t: "H:mm",
-                    T: "H:mm:ss",
+                    t: "HH:mm",
+                    T: "HH:mm:ss",
                     u: "yyyy'-'MM'-'dd HH':'mm':'ss'Z'",
-                    y: "MMMM yyyy",
-                    Y: "MMMM yyyy"
+                    y: "yyyy MMMM",
+                    Y: "yyyy MMMM"
                 },
                 "/": "/",
                 ":": ":",
-                firstDay: 0
+                firstDay: 1
             }
         }
     }

@@ -6,6 +6,7 @@ page_title: Reordering Does Not Update the Indexes in Its dataSource | Kendo UI 
 slug: list-box-reordering-not-working
 tags: listbox, reorder
 ticketid: 1112413
+res_type: kb
 ---
 
 ## Environment

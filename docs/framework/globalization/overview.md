@@ -12,7 +12,7 @@ Globalization is the process of designing and developing an application that wor
 
 > **Important**
 >
-> The Kendo UI culture scripts are generated from the Windows 10 and .NET 4.7 server-side culture definitions and match them by design. To customize the culture in your application, please refer to the [Culture Definition]({% slug culture_definition_kendoui_globalization %}#customization) article.
+> The Kendo UI culture scripts are generated from the Windows 10 and .NET 4.7 server-side culture definitions and match them by design. To customize the culture in your application, refer to the article on [culture definition]({% slug culture_definition_kendoui_globalization %}#customization).
 
 ## Getting Started
 

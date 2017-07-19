@@ -1,5 +1,5 @@
 ---
-title: Use MobileSwitch as Editor in Grid for ASP.NET MVC
+title: Use MobileSwitch as Editor in Grid for MVC
 description: An example on how to use the MobileSwitch as an editor in the Grid for ASP.NET MVC.  
 type: how-to
 page_title: Use MobileSwitch as Custom Editor in Grid | UI for ASP.NET MVC
@@ -16,7 +16,8 @@ res_type: kb
   <td>Product</td>
   <td>Progress Kendo UI Grid for ASP.NET MVC</td>
  </tr> <tr>
-  <td>Progress Kendo UI versoin</td>  <td>2017.2 504</td>
+  <td>Progress Kendo UI versoin</td>  
+  <td>2017.2 504</td>
  </tr>
  <tr>
   <td>Preferred Language</td>

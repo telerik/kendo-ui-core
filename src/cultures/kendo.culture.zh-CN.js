@@ -16,7 +16,7 @@
                 symbol: "%"
             },
             currency: {
-                name: "PRC Yuan Renminbi",
+                name: "Chinese Yuan",
                 abbr: "CNY",
                 pattern: ["$-n","$n"],
                 decimals: 2,
@@ -45,8 +45,8 @@
                     F: "yyyy'年'M'月'd'日' H:mm:ss",
                     g: "yyyy/M/d H:mm",
                     G: "yyyy/M/d H:mm:ss",
-                    m: "M'月'd'日'",
-                    M: "M'月'd'日'",
+                    m: "M月d日",
+                    M: "M月d日",
                     s: "yyyy'-'MM'-'dd'T'HH':'mm':'ss",
                     t: "H:mm",
                     T: "H:mm:ss",

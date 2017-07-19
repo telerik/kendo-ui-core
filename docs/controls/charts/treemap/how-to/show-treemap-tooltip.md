@@ -20,7 +20,7 @@ The example below demonstrates how to use the Kendo UI Tooltip for the Kendo UI 
         dataSource: {
           transport: {
             read: {
-              url: "http://demos.telerik.com/kendo-ui/content/dataviz/js/population-usa.json",
+              url: "http://runner.telerik.io/fullscreen/ilerI.json",
               dataType: "json"
             }
           },

@@ -3,14 +3,14 @@
         name: "fr-MA",
         numberFormat: {
             pattern: ["-n"],
-            decimals: 0,
-            ",": " ",
+            decimals: 2,
+            ",": ".",
             ".": ",",
             groupSize: [3],
             percent: {
-                pattern: ["-n%","%n"],
-                decimals: 0,
-                ",": " ",
+                pattern: ["-n %","n %"],
+                decimals: 2,
+                ",": ".",
                 ".": ",",
                 groupSize: [3],
                 symbol: "%"
@@ -18,9 +18,9 @@
             currency: {
                 name: "Moroccan Dirham",
                 abbr: "MAD",
-                pattern: ["(n$)","n$"],
+                pattern: ["-n $","n $"],
                 decimals: 2,
-                ",": " ",
+                ",": ".",
                 ".": ",",
                 groupSize: [3],
                 symbol: "DH"
@@ -35,7 +35,7 @@
                 },
                 months: {
                     names: ["janvier","février","mars","avril","mai","juin","juillet","août","septembre","octobre","novembre","décembre"],
-                    namesAbbr: ["janv.","févr.","mars","avr.","mai","juin","juil.","août","sept.","oct.","nov.","déc."]
+                    namesAbbr: ["jan.","fév.","mar.","avr.","mai","jui.","juil.","août","sept.","oct.","nov.","déc."]
                 },
                 AM: ["AM","am","AM"],
                 PM: ["PM","pm","PM"],

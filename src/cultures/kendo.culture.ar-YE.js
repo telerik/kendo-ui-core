@@ -2,13 +2,13 @@
     kendo.cultures["ar-YE"] = {
         name: "ar-YE",
         numberFormat: {
-            pattern: ["n-"],
+            pattern: ["-n"],
             decimals: 2,
             ",": ",",
             ".": ".",
             groupSize: [3],
             percent: {
-                pattern: ["-n %","n %"],
+                pattern: ["-n%","n%"],
                 decimals: 2,
                 ",": ",",
                 ".": ".",
@@ -18,12 +18,12 @@
             currency: {
                 name: "Yemeni Rial",
                 abbr: "YER",
-                pattern: ["$n-","$ n"],
+                pattern: ["-n $","n $"],
                 decimals: 2,
                 ",": ",",
                 ".": ".",
                 groupSize: [3],
-                symbol: "ر.ي.‏‏"
+                symbol: "ر.ي.‏"
             }
         },
         calendars: {

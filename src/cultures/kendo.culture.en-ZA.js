@@ -16,9 +16,9 @@
                 symbol: "%"
             },
             currency: {
-                name: "Rand",
+                name: "South African Rand",
                 abbr: "ZAR",
-                pattern: ["$-n","$ n"],
+                pattern: ["-$n","$n"],
                 decimals: 2,
                 ",": " ",
                 ".": ",",
@@ -40,23 +40,23 @@
                 AM: ["AM","am","AM"],
                 PM: ["PM","pm","PM"],
                 patterns: {
-                    d: "yyyy-MM-dd",
-                    D: "dd MMMM yyyy",
-                    F: "dd MMMM yyyy hh:mm:ss tt",
-                    g: "yyyy-MM-dd hh:mm tt",
-                    G: "yyyy-MM-dd hh:mm:ss tt",
-                    m: "MMMM d",
-                    M: "MMMM d",
+                    d: "yyyy/MM/dd",
+                    D: "dddd, dd MMMM yyyy",
+                    F: "dddd, dd MMMM yyyy h:mm:ss tt",
+                    g: "yyyy/MM/dd h:mm tt",
+                    G: "yyyy/MM/dd h:mm:ss tt",
+                    m: "d MMMM",
+                    M: "d MMMM",
                     s: "yyyy'-'MM'-'dd'T'HH':'mm':'ss",
-                    t: "hh:mm tt",
-                    T: "hh:mm:ss tt",
+                    t: "h:mm tt",
+                    T: "h:mm:ss tt",
                     u: "yyyy'-'MM'-'dd HH':'mm':'ss'Z'",
                     y: "MMMM yyyy",
                     Y: "MMMM yyyy"
                 },
-                "/": "-",
+                "/": "/",
                 ":": ":",
-                firstDay: 1
+                firstDay: 0
             }
         }
     }

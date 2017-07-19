@@ -2,13 +2,13 @@
     kendo.cultures["ar-QA"] = {
         name: "ar-QA",
         numberFormat: {
-            pattern: ["n-"],
+            pattern: ["-n"],
             decimals: 2,
             ",": ",",
             ".": ".",
             groupSize: [3],
             percent: {
-                pattern: ["-n %","n %"],
+                pattern: ["-n%","n%"],
                 decimals: 2,
                 ",": ",",
                 ".": ".",
@@ -18,12 +18,12 @@
             currency: {
                 name: "Qatari Rial",
                 abbr: "QAR",
-                pattern: ["$n-","$ n"],
+                pattern: ["-n $","n $"],
                 decimals: 2,
                 ",": ",",
                 ".": ".",
                 groupSize: [3],
-                symbol: "ر.ق.‏‏"
+                symbol: "ر.ق.‏"
             }
         },
         calendars: {

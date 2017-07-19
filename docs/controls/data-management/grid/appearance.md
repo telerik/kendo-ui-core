@@ -546,7 +546,7 @@ For more information on how to initialize the Grid inside other Kendo UI widgets
 
 As of the Kendo UI Q1 2016 release, row hover state styles are added to all Kendo UI themes. Hover is a useful UI state providing visual affordance especially across long table rows and in the editing mode of the Grid. However, in some scenarios, the `hover` state might be misleading and is not recommended.
 
-To remove the hover styling, use wither of the ways:
+To remove the hover styling, use either of the ways:
 * Open the Kendo UI theme CSS file (for example, `kendo.default.min.css`) and remove the CSS rule shown in the following example.
 
   ###### Example

@@ -4,25 +4,25 @@
         numberFormat: {
             pattern: ["-n"],
             decimals: 2,
-            ",": ",",
-            ".": ".",
-            groupSize: [3,0],
+            ",": ".",
+            ".": ",",
+            groupSize: [3],
             percent: {
-                pattern: ["-n %","n %"],
+                pattern: ["-n%","n%"],
                 decimals: 2,
-                ",": ",",
-                ".": ".",
-                groupSize: [3,0],
+                ",": ".",
+                ".": ",",
+                groupSize: [3],
                 symbol: "%"
             },
             currency: {
-                name: "Kip",
+                name: "Laotian Kip",
                 abbr: "LAK",
-                pattern: ["-n $","n $"],
-                decimals: 2,
-                ",": ",",
-                ".": ".",
-                groupSize: [3,0],
+                pattern: ["$-n","$n"],
+                decimals: 0,
+                ",": ".",
+                ".": ",",
+                groupSize: [3],
                 symbol: "₭"
             }
         },
@@ -30,33 +30,33 @@
             standard: {
                 days: {
                     names: ["ວັນອາທິດ","ວັນຈັນ","ວັນອັງຄານ","ວັນພຸດ","ວັນພະຫັດ","ວັນສຸກ","ວັນເສົາ"],
-                    namesAbbr: ["ອາທິດ","ຈັນ","ອັງຄານ","ພຸດ","ພະຫັດ","ສຸກ","ເສົາ"],
-                    namesShort: ["ທ","ຈ","ອ","ພ","ພຫ","ສ","ເສ"]
+                    namesAbbr: ["ວັນອາທິດ","ວັນຈັນ","ວັນອັງຄານ","ວັນພຸດ","ວັນພະຫັດ","ວັນສຸກ","ວັນເສົາ"],
+                    namesShort: ["ອາ.","ຈ.","ອ.","ພ.","ພຫ.","ສຸ.","ສ."]
                 },
                 months: {
                     names: ["ມັງກອນ","ກຸມພາ","ມີນາ","ເມສາ","ພຶດສະພາ","ມິຖຸນາ","ກໍລະກົດ","ສິງຫາ","ກັນຍາ","ຕຸລາ","ພະຈິກ","ທັນວາ"],
-                    namesAbbr: ["ມ.ກ","ກ.ພ","ມິ.ນ","ມ.ສ","ພ.ພ","ມິ.ຖ","ກ.ລ","ສ.ຫ","ກ.ຍ","ຕ.ລ","ພ.ຈ","ທ.ວ"]
+                    namesAbbr: ["ມ.ກ.","ກ.ພ.","ມ.ນ.","ມ.ສ.","ພ.ພ.","ມິ.ຖ.","ກ.ລ.","ສ.ຫ.","ກ.ຍ.","ຕ.ລ.","ພ.ຈ.","ທ.ວ."]
                 },
-                AM: ["ເຊົ້າ","ເຊົ້າ","ເຊົ້າ"],
-                PM: ["ແລງ","ແລງ","ແລງ"],
+                AM: ["ກ່ອນທ່ຽງ","ກ່ອນທ່ຽງ","ກ່ອນທ່ຽງ"],
+                PM: ["ຫຼັງທ່ຽງ","ຫຼັງທ່ຽງ","ຫຼັງທ່ຽງ"],
                 patterns: {
-                    d: "dd/MM/yyyy",
-                    D: "dd MMMM yyyy",
-                    F: "dd MMMM yyyy HH:mm:ss",
-                    g: "dd/MM/yyyy HH:mm",
-                    G: "dd/MM/yyyy HH:mm:ss",
-                    m: "d MMMM",
-                    M: "d MMMM",
+                    d: "d/M/yyyy",
+                    D: "dddd ທີ d MMMM gg yyyy",
+                    F: "dddd ທີ d MMMM gg yyyy H:mm:ss",
+                    g: "d/M/yyyy H:mm",
+                    G: "d/M/yyyy H:mm:ss",
+                    m: "MMMM d",
+                    M: "MMMM d",
                     s: "yyyy'-'MM'-'dd'T'HH':'mm':'ss",
-                    t: "HH:mm",
-                    T: "HH:mm:ss",
+                    t: "H:mm",
+                    T: "H:mm:ss",
                     u: "yyyy'-'MM'-'dd HH':'mm':'ss'Z'",
-                    y: "MMMM yyyy",
-                    Y: "MMMM yyyy"
+                    y: "yyyy MMMM",
+                    Y: "yyyy MMMM"
                 },
                 "/": "/",
                 ":": ":",
-                firstDay: 1
+                firstDay: 0
             }
         }
     }

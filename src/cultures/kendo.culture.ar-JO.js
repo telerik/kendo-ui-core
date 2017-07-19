@@ -2,13 +2,13 @@
     kendo.cultures["ar-JO"] = {
         name: "ar-JO",
         numberFormat: {
-            pattern: ["n-"],
+            pattern: ["-n"],
             decimals: 3,
             ",": ",",
             ".": ".",
             groupSize: [3],
             percent: {
-                pattern: ["-n %","n %"],
+                pattern: ["-n%","n%"],
                 decimals: 3,
                 ",": ",",
                 ".": ".",
@@ -18,7 +18,7 @@
             currency: {
                 name: "Jordanian Dinar",
                 abbr: "JOD",
-                pattern: ["$n-","$ n"],
+                pattern: ["-n $","n $"],
                 decimals: 3,
                 ",": ",",
                 ".": ".",

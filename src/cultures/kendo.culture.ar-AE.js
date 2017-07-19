@@ -2,13 +2,13 @@
     kendo.cultures["ar-AE"] = {
         name: "ar-AE",
         numberFormat: {
-            pattern: ["n-"],
+            pattern: ["-n"],
             decimals: 2,
             ",": ",",
             ".": ".",
             groupSize: [3],
             percent: {
-                pattern: ["-n %","n %"],
+                pattern: ["-n%","n%"],
                 decimals: 2,
                 ",": ",",
                 ".": ".",
@@ -16,9 +16,9 @@
                 symbol: "%"
             },
             currency: {
-                name: "UAE Dirham",
+                name: "United Arab Emirates Dirham",
                 abbr: "AED",
-                pattern: ["$n-","$ n"],
+                pattern: ["-n $","n $"],
                 decimals: 2,
                 ",": ",",
                 ".": ".",

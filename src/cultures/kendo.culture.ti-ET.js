@@ -2,7 +2,7 @@
     kendo.cultures["ti-ET"] = {
         name: "ti-ET",
         numberFormat: {
-            pattern: ["(n)"],
+            pattern: ["-n"],
             decimals: 2,
             ",": ",",
             ".": ".",
@@ -18,33 +18,33 @@
             currency: {
                 name: "Ethiopian Birr",
                 abbr: "ETB",
-                pattern: ["-n$","n$"],
+                pattern: ["-$n","$n"],
                 decimals: 2,
                 ",": ",",
                 ".": ".",
                 groupSize: [3],
-                symbol: "ብር"
+                symbol: "Br"
             }
         },
         calendars: {
             standard: {
                 days: {
-                    names: ["ሰንበት","ሰኑይ","ሰሉስ","ሮቡዕ","ሓሙስ","ዓርቢ","ቀዳም"],
-                    namesAbbr: ["ሰንበት","ሰኑይ","ሰሉስ","ሮቡዕ","ሓሙስ","ዓርቢ","ቀዳም"],
-                    namesShort: ["ሰን","ሰኑ","ሰሉ","ሮቡ","ሓሙ","ዓር","ቀዳ"]
+                    names: ["ሰንበት","ሰኑይ","ሠሉስ","ረቡዕ","ኃሙስ","ዓርቢ","ቀዳም"],
+                    namesAbbr: ["ሰንበት","ሰኑይ","ሠሉስ","ረቡዕ","ኃሙስ","ዓርቢ","ቀዳም"],
+                    namesShort: ["ሰንበት","ሰኑይ","ሠሉስ","ረቡዕ","ኃሙስ","ዓርቢ","ቀዳም"]
                 },
                 months: {
-                    names: ["ጥሪ","ለካቲት","መጋቢት","ሚያዝያ","ግንቦት","ሰነ","ሓምለ","ነሓሰ","መስከረም","ጥቅምቲ","ሕዳር","ታሕሳስ"],
-                    namesAbbr: ["ጥሪ","ለካቲት","መጋቢት","ሚያዝያ","ግንቦት","ሰነ","ሓምለ","ነሓሰ","መስከረም","ጥቅምቲ","ሕዳር","ታሕሳስ"]
+                    names: ["ጃንዩወሪ","ፌብሩወሪ","ማርች","ኤፕረል","ሜይ","ጁን","ጁላይ","ኦገስት","ሴፕቴምበር","ኦክተውበር","ኖቬምበር","ዲሴምበር"],
+                    namesAbbr: ["ጃንዩ","ፌብሩ","ማርች","ኤፕረ","ሜይ","ጁን","ጁላይ","ኦገስ","ሴፕቴ","ኦክተ","ኖቬም","ዲሴም"]
                 },
-                AM: ["ንጉሆ","ንጉሆ","ንጉሆ"],
-                PM: ["ድሕሪ ቐትሪ","ድሕሪ ቐትሪ","ድሕሪ ቐትሪ"],
+                AM: ["AM","am","AM"],
+                PM: ["PM","pm","PM"],
                 patterns: {
-                    d: "d/M/yyyy",
-                    D: "dddd '፣' MMMM d 'መዓልቲ' yyyy",
-                    F: "dddd '፣' MMMM d 'መዓልቲ' yyyy h:mm:ss tt",
-                    g: "d/M/yyyy h:mm tt",
-                    G: "d/M/yyyy h:mm:ss tt",
+                    d: "dd/MM/yyyy",
+                    D: "dddd፣ dd MMMM መዓልቲ yyyy gg",
+                    F: "dddd፣ dd MMMM መዓልቲ yyyy gg h:mm:ss tt",
+                    g: "dd/MM/yyyy h:mm tt",
+                    G: "dd/MM/yyyy h:mm:ss tt",
                     m: "MMMM d",
                     M: "MMMM d",
                     s: "yyyy'-'MM'-'dd'T'HH':'mm':'ss",
@@ -56,7 +56,7 @@
                 },
                 "/": "/",
                 ":": ":",
-                firstDay: 1
+                firstDay: 0
             }
         }
     }

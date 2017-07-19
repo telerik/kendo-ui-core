@@ -2,13 +2,13 @@
     kendo.cultures["ar-EG"] = {
         name: "ar-EG",
         numberFormat: {
-            pattern: ["n-"],
+            pattern: ["-n"],
             decimals: 3,
             ",": ",",
             ".": ".",
             groupSize: [3],
             percent: {
-                pattern: ["-n %","n %"],
+                pattern: ["-n%","n%"],
                 decimals: 3,
                 ",": ",",
                 ".": ".",
@@ -18,7 +18,7 @@
             currency: {
                 name: "Egyptian Pound",
                 abbr: "EGP",
-                pattern: ["$n-","$ n"],
+                pattern: ["-n $","n $"],
                 decimals: 2,
                 ",": ",",
                 ".": ".",

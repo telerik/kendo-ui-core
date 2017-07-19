@@ -1106,12 +1106,11 @@ footer,
 }
 
 .k-widget.k-window.k-window-titleless {
-    padding: 29px;
     width: 460px !important;
     top: 50% !important;
     left: 50% !important;
     margin-left: -230px;
-    margin-top: -300px;
+    margin-top: -250px;
     background-color: #FFFFFF;
     border: none;
     position: fixed;
@@ -1130,6 +1129,25 @@ footer,
     #feedback-form-window button {
         margin-top: 15px !important;
     }
+}
+
+#feedback-form-window {
+    max-height: 700px !important;
+    padding: 30px 15px 30px 30px;
+    display: -webkit-flex;
+    display: flex;
+    -webkit-flex-direction: column;
+    flex-direction: column;
+}
+
+#feedback-form-window>* {
+    padding-right: 15px;
+}
+
+#feedback-form {
+    -webkit-flex: 1;
+    flex: 1;
+    overflow: auto;
 }
 
 #feedback-form-window input::-webkit-input-placeholder,

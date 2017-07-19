@@ -18,7 +18,7 @@
             currency: {
                 name: "Euro",
                 abbr: "EUR",
-                pattern: ["-$ n","$ n"],
+                pattern: ["-n $","n $"],
                 decimals: 2,
                 ",": ".",
                 ".": ",",

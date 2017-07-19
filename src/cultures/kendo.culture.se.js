@@ -8,7 +8,7 @@
             ".": ",",
             groupSize: [3],
             percent: {
-                pattern: ["-%n","%n"],
+                pattern: ["-n %","n %"],
                 decimals: 2,
                 ",": " ",
                 ".": ",",
@@ -18,7 +18,7 @@
             currency: {
                 name: "",
                 abbr: "",
-                pattern: ["$ -n","$ n"],
+                pattern: ["-n $","n $"],
                 decimals: 2,
                 ",": " ",
                 ".": ",",
@@ -29,32 +29,32 @@
         calendars: {
             standard: {
                 days: {
-                    names: ["sotnabeaivi","vuossárga","maŋŋebárga","gaskavahkku","duorastat","bearjadat","lávvardat"],
+                    names: ["sotnabeaivi","vuossárga","maŋŋebárga","gaskavahkku","duorasdat","bearjadat","lávvardat"],
                     namesAbbr: ["sotn","vuos","maŋ","gask","duor","bear","láv"],
-                    namesShort: ["s","v","m","g","d","b","l"]
+                    namesShort: ["sotn","vuos","maŋ","gask","duor","bear","láv"]
                 },
                 months: {
                     names: ["ođđajagemánnu","guovvamánnu","njukčamánnu","cuoŋománnu","miessemánnu","geassemánnu","suoidnemánnu","borgemánnu","čakčamánnu","golggotmánnu","skábmamánnu","juovlamánnu"],
-                    namesAbbr: ["ođđj","guov","njuk","cuoŋ","mies","geas","suoi","borg","čakč","golg","skáb","juov"]
+                    namesAbbr: ["ođđj","guov","njuk","cuo","mies","geas","suoi","borg","čakč","golg","skáb","juov"]
                 },
-                AM: [""],
-                PM: [""],
+                AM: ["i.b.","i.b.","I.B."],
+                PM: ["e.b.","e.b.","E.B."],
                 patterns: {
-                    d: "dd.MM.yyyy",
-                    D: "dddd, MMMM d'. b. 'yyyy",
-                    F: "dddd, MMMM d'. b. 'yyyy HH:mm:ss",
-                    g: "dd.MM.yyyy HH:mm",
-                    G: "dd.MM.yyyy HH:mm:ss",
-                    m: "MMMM d'. b.'",
-                    M: "MMMM d'. b.'",
+                    d: "yyyy-MM-dd",
+                    D: "yyyy MMMM d, dddd",
+                    F: "yyyy MMMM d, dddd HH:mm:ss",
+                    g: "yyyy-MM-dd HH:mm",
+                    G: "yyyy-MM-dd HH:mm:ss",
+                    m: "MMMM d",
+                    M: "MMMM d",
                     s: "yyyy'-'MM'-'dd'T'HH':'mm':'ss",
                     t: "HH:mm",
                     T: "HH:mm:ss",
                     u: "yyyy'-'MM'-'dd HH':'mm':'ss'Z'",
-                    y: "MMMM yyyy",
-                    Y: "MMMM yyyy"
+                    y: "yyyy MMMM",
+                    Y: "yyyy MMMM"
                 },
-                "/": ".",
+                "/": "-",
                 ":": ":",
                 firstDay: 1
             }
