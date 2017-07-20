@@ -770,7 +770,7 @@ The configuration used to parse the remote service response.
       },
       schema: {
         data: function(response) {
-          return response.results; // twitter's response is { "results": [ /* results */ ] }
+          return response.statuses; // twitter's response is { "statuses": [ /* results */ ] }
         }
       }
     });
@@ -806,7 +806,7 @@ For example, if the data source is configured like this:
     var dataSource = new kendo.data.DataSource({
       transport: {
         /* transport configuration */
-      }
+      },
       serverAggregates: true,
       aggregate: [
         { field: "unitPrice", aggregate: "max" },
@@ -916,6 +916,8 @@ The field from the server response which contains the data items. Can be set to 
 
 The field from the server response which contains server-side errors. Can be set to a function which is called to return the errors for response. If there are any errors, the [`error`](#events-error) event will be fired.
 
+> If this option is set and the server response contains that field then the `error` event will be fired. The `errors` field of the event argument will contain the errors returned by the server.
+
 #### Example - specify the error field as a string
 
     <script>
@@ -924,14 +926,14 @@ The field from the server response which contains server-side errors. Can be set
         read: {
           url: "http://demos.telerik.com/kendo-ui/service/twitter/search",
           dataType: "jsonp", // "jsonp" is required for cross-domain requests; use "json" for same-domain requests
-          data: { q: "#" }
+          data: { q: "aaaaa" }
         }
       },
       schema: {
-        errors: "error" // twitter's response is { "error": "Invalid query" }
+        errors: "error"
       },
       error: function(e) {
-        console.log(e.errors); // displays "Invalid query"
+        console.log(e.errors);
       }
     });
     dataSource.fetch();
@@ -945,16 +947,16 @@ The field from the server response which contains server-side errors. Can be set
         read: {
           url: "http://demos.telerik.com/kendo-ui/service/twitter/search",
           dataType: "jsonp", // "jsonp" is required for cross-domain requests; use "json" for same-domain requests
-          data: { q: "#" }
+          data: { q: "aaaaa" }
         }
       },
       schema: {
         errors: function(response) {
-          return response.error; // twitter's response is { "error": "Invalid query" }
+          return response.error;
         }
       },
       error: function(e) {
-        console.log(e.errors); // displays "Invalid query"
+        console.log(e.errors);
       }
     });
     dataSource.fetch();
@@ -1073,7 +1075,7 @@ If set to an existing [`kendo.data.Model`](/api/javascript/data/model) instance,
 #### Example - set the model as an existing `kendo.data.Model` instance
 
     <script>
-    var Product = kendo.model.define({
+    var Product = kendo.data.Model.define({
       id: "ProductID",
       fields: {
         ProductID: {

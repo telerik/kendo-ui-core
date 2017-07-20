@@ -5124,7 +5124,7 @@ If set to true the view will be initially shown in business hours mode. By defau
     <script>
     $("#scheduler").kendoScheduler({
       date: new Date("2013/6/6"),
-      views: [ { type: "day", showWorkHours: true }, "week"]
+      views: [ { type: "day", showWorkHours: true }, "week"],
       dataSource: [
         {
           id: 1,

@@ -495,6 +495,29 @@ The function context (available via the `this` keyword) will be set to the grid 
     });
     </script>
 
+### columns.command.iconClass `String`
+
+The class for the [web font icon](http://docs.telerik.com/kendo-ui/styles-and-layout/icons-web) of the button.
+
+> Grid commands are rendered as anchors (`<a>`) with a `span` inside. The icon for the button depends on the **iconClass** which is rendered as a class for the inner span.
+> Default commands have a predefined **iconClass** value.
+
+#### Example - provide an iconClass for the grid command column
+    <div id="grid"></div>
+    <script>
+    $("#grid").kendoGrid({
+      columns: [
+        { field: "name" },
+        { command: [{
+            name: "copy",
+            iconClass: "k-icon k-i-copy"
+            }]
+       }
+      ],
+      dataSource: [ { name: "Jane Doe" } ]
+    });
+    </script>
+
 ### columns.editable `Function`
 
 The JavaScript function executed when the cell/row is about to be opened for edit. The result returned will determine whether an editor for the column will be created.
@@ -6524,6 +6547,39 @@ The "pdf" command exports the grid data in PDF format.
         data: [
           { id: 1, name: "Jane Doe", age: 30 },
           { id: 2, name: "John Doe", age: 33},
+        ],
+        schema: {
+          model: { id: "id" }
+        }
+      },
+      editable: true
+    });
+    </script>
+
+### toolbar.iconClass `String`
+
+The class for the [web font icon](http://docs.telerik.com/kendo-ui/styles-and-layout/icons-web) of the button that will be rendered in the toolbar.
+
+> Grid commands are rendered as anchors (`<a>`) with a `span` inside. The icon for the button depends on the **iconClass** which is rendered as a class for the inner span.
+> Built-in commands have a predefined **iconClass** value.
+
+#### Example - provide an iconClass for a toolbar command
+    <div id="grid"></div>
+    <script>
+    $("#grid").kendoGrid({
+      toolbar: [
+        { name: "copy", iconClass: "k-icon k-i-copy" },
+        { name: "save" },
+        { name: "custom" }
+      ],
+      columns: [
+        { field: "name" },
+        { field: "age" }
+      ],
+      dataSource: {
+        data: [
+          { id: 1, name: "Jane Doe", age: 30 },
+          { id: 2, name: "John Doe", age: 33 }
         ],
         schema: {
           model: { id: "id" }
