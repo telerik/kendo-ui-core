@@ -20,24 +20,43 @@
     }
 
     test("clicking on window brings it in front of other windows and adds k-state-focused", 2, function() {
+        jasmine.clock().install();
         var firstWindow = createWindow(),
             secondWindow = createWindow();
 
         firstWindow.element.trigger("mousedown");
-
+        jasmine.clock().tick();
         equal(+firstWindow.wrapper.css("zIndex"), +secondWindow.wrapper.css("zIndex") + 2);
         ok(firstWindow.wrapper.is(".k-state-focused"));
+        jasmine.clock().uninstall();
     });
 
     test("clicking on minimized window brings it in front of other windows and adds k-state-focused", 2, function() {
+        jasmine.clock().install();
         var firstWindow = createWindow(),
             secondWindow = createWindow();
 
         firstWindow.minimize();
         firstWindow.wrapper.trigger("mousedown");
-
+        jasmine.clock().tick();
         equal(+firstWindow.wrapper.css("zIndex"), +secondWindow.wrapper.css("zIndex") + 2);
         ok(firstWindow.wrapper.is(".k-state-focused"));
+        jasmine.clock().uninstall();
+    });
+
+    test("clicking on inactive iframe window adds k-state-focused", 1, function() {
+        jasmine.clock().install();
+        var firstWindow = createWindow({
+                content: "/base/tests/window/blank.html",
+                iframe: true}),
+            secondWindow = createWindow({
+                content: "/base/tests/window/blank.html",
+                iframe: true});
+
+        firstWindow.element.find(".k-overlay").trigger("mousedown");
+        jasmine.clock().tick();
+        ok(firstWindow.wrapper.is(".k-state-focused"));
+        jasmine.clock().uninstall();
     });
 
     asyncTest("loading of iframe triggers load event", 1, function() {

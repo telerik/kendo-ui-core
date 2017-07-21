@@ -95,6 +95,7 @@
                     isVisible = false,
                     content,
                     windowContent,
+                    windowFrame,
                     suppressActions = options && options.actions && !options.actions.length,
                     id;
 
@@ -181,6 +182,18 @@
                     .on("keydown" + NS, proxy(that._keydown, that))
                     .on("focus" + NS, proxy(that._focus, that))
                     .on("blur" + NS, proxy(that._blur, that));
+
+                windowFrame  = windowContent.find("." + KCONTENTFRAME)[0];
+
+                if(windowFrame){
+                    $(windowFrame.contentWindow)
+                        .on("blur" + NS, function(){
+                            that._blur();
+                        })
+                        .on("focus" + NS, function(){
+                            that._focus();
+                        });
+                }
 
                 this._resizable();
 
@@ -952,9 +965,13 @@
 
                 if (that._shouldFocus(target)) {
                     if (that.isMinimized()) {
-                        that.wrapper.focus();
+                        setTimeout(function(){
+                            that.wrapper.focus();
+                        });
                     } else {
-                        that.element.focus();
+                        setTimeout(function(){
+                            that.element.focus();
+                        });
                     }
 
                     var scrollTop = $(window).scrollTop(),
