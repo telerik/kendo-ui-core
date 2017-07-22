@@ -2112,13 +2112,13 @@ var __meta__ = { // jshint ignore:line
             itemIndex;
 
         for (idx = 0, length = data.length; idx < length; idx++) {
-            var group = data.at(idx);
+            var group = data[idx];
             if (group.hasSubgroups) {
                 result = result.concat(flattenGroups(group.items));
             } else {
                 items = group.items;
                 for (itemIndex = 0; itemIndex < items.length; itemIndex++) {
-                    result.push(items.at(itemIndex));
+                    result.push(items[itemIndex]);
                 }
             }
         }
