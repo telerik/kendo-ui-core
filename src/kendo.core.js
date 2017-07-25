@@ -3845,7 +3845,11 @@ function pad(number, digits, end) {
             return 1 + Math.floor(days / 7);
         }
 
-        function weekInYear(date, weekStartDay){
+        function weekInYear(date, weekStartDay) {
+            if(weekStartDay === undefined) {
+                weekStartDay = kendo.culture().calendar.firstDay;
+            }
+
             var prevWeekDate = addDays(date, -7);
             var nextWeekDate = addDays(date, 7);
 

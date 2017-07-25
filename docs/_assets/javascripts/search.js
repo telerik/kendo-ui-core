@@ -25,8 +25,7 @@ var viewModel = kendo.observable({
 
         if ((this.kb && this.docs && this.api) || (!this.kb && !this.docs && !this.api)) {
             label = "Search all";
-        }
-        else {
+        } else {
             if (this.docs) {
                 label += "DOCS";
                 this.filterValues.push('documentation');
@@ -49,6 +48,8 @@ var viewModel = kendo.observable({
     }
 });
 
+var searchTerms = "";
+
 function search_loaded() {
     $("#page-search table.gsc-search-box > tbody > tr")
         .append($("<td id='refine-search-container'><div id='refine-search-button' class='unselectable'><span id='refine-search-label' data-bind='text: label'></span><span class='k-icon k-i-arrow-chevron-down'></span></div></td>"));
@@ -59,7 +60,7 @@ function search_loaded() {
         position: "top right",
     }).data("kendoPopup");
 
-    $("#page-search").on("click", "#refine-search-button", function () {
+    $("#page-search #refine-search-button").on("click", function () {
         popup.toggle();
     });
 
@@ -78,22 +79,20 @@ function search_loaded() {
     searchInternal();
 }
 
-function searchInternal() {
-}
+function searchInternal() {}
 
-function onSearchInternal() {
-}
+function onSearchInternal() {}
 
 function search() {
     var element = google.search.cse.element.getElement(GCSE_ELEMENT_NAME);
     if (element) {
-        var q = element.getInputQuery();
+        searchTerms = $(".gsc-input-box .gsc-input").val();
         var filterExpression = viewModel.getFilter();
-        sendInfo(filterExpression, q);
+        trackSearchQuery(filterExpression, searchTerms);
         filterExpression = filterExpression !== '' ? PAGE_FILTER + filterExpression : '';
-        element.execute(q + filterExpression);
+        element.execute(searchTerms + filterExpression);
 
-        $(".gsc-input-box .gsc-input").val("")
+        $(".gsc-input-box .gsc-input").val(searchTerms);
     }
 
     onSearchInternal();
@@ -105,27 +104,47 @@ function closePopup() {
 }
 
 function attachToEvents() {
-    $('.gsc-input').keydown(function (e) {
+    var oldInput = $('.gsc-input input[type="text"]');
+    var newInput = oldInput.clone();
+    oldInput.replaceWith(newInput);
+    newInput.keydown(function (e) {
         if (e.keyCode == 13) { // Enter
-            e.preventDefault();
-
             closePopup();
             search();
+
+            return false;
         }
     })
 
-    $('.gsc-search-button').click(function (e) {
+    var oldSearchButton = $('.gsc-search-button input[type="image"].gsc-search-button.gsc-search-button-v2');
+    var newSearchButton = oldSearchButton.clone();
+    oldSearchButton.replaceWith(newSearchButton);
+    newSearchButton.click(function (e) {
         closePopup();
         search();
+
+        return false;
     });
+
+    $("#page-search").on("click", "a.gs-title", function (e) {
+        trackSearchResult($(e.target).data("ctorig"));
+    })
 }
 
-function sendInfo(filter, query) {
+function trackSearchQuery(filter, query) {
+    trackItem("docs-search-terms", filter, query);
+}
+
+function trackSearchResult(link) {
+    trackItem("docs-search-results", searchTerms, link);
+}
+
+function trackItem(category, action, label) {
     dataLayer.push({
         'event': 'virtualEvent',
-        'eventCategory': 'docs-search-terms',
-        'eventAction': filter,
-        'eventLabel': query,
+        'eventCategory': category,
+        'eventAction': action,
+        'eventLabel': label,
     });
 }
 

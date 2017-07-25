@@ -7,7 +7,9 @@
 @link-text-color: #00acc1;
 @widget-shadow: 0 4px 10px 4px rgba(0, 0, 0, 0.2);
 @popups-shadow: 0 0px 6px 1px rgba(0, 0, 0, 0.2);
+@tabs-normal-bg: #081421;
 @tabs-normal-gradient: "#303553 0%, #072138 100%";
+@tabs-hover-bg: #081421;
 @tabs-hover-gradient: "#202333 0%, #081421 100%";
 @secondary-widget-background-color: darken(@widget-background-color, 2%);
 @disabled-text-color: darken(@base, 23%);
@@ -822,6 +824,7 @@ input.k-textbox:active {
 
 .k-tabstrip-items {
     .composite-background(@tabs-normal-gradient);
+    background-color: @tabs-normal-bg;
 }
 
 .k-tabstrip-items {
@@ -834,6 +837,7 @@ input.k-textbox:active {
     .k-item.k-state-selected {
         border-top-color: @normal-text-color;
         .composite-background(@tabs-hover-gradient);
+        background-color: @tabs-hover-bg;
     }
 }
 
