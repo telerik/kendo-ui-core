@@ -23,7 +23,7 @@ The following example demonstrates how to retrieve the date range of the current
 <script>
 $(function() {
     function scheduler_view_range(e) {
-        var view = this.view();
+        var view = e.sender.view();
 
         // The view has:
         // A startDate method which returns the start date of the view.
@@ -44,8 +44,14 @@ $(function() {
             "agenda",
             "timeline"
         ],
-        navigate: scheduler_view_range,
-        dataBound: scheduler_view_range,
+        navigate: function(e) {
+          $(".console").append("<p><strong>Navigated from:</strong></p>");
+          scheduler_view_range(e);
+        },
+        dataBound: function(e) {
+          $(".console").append("<p><strong>Navigated to:</strong></p>");
+          scheduler_view_range(e);
+        },
         dataSource: {
             batch: true,
             transport: {

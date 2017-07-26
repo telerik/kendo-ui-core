@@ -24,7 +24,8 @@ var __meta__ = { // jshint ignore:line
         ACTIVE_STATE = "state-active",
         DISABLED_STATE = "state-disabled",
         DISABLED = "disabled",
-        TRANSFORMSTYLE = support.transitions.css + "transform",
+        RESOLVEDPREFIX = support.transitions.css === undefined ? "" : support.transitions.css,
+        TRANSFORMSTYLE = RESOLVEDPREFIX + "transform",
         proxy = $.proxy;
 
     function className(name) {

@@ -1,11 +1,13 @@
-@sprite-image: url('@{image-folder}/sprite.png');
+// Widget
 @widget-background-color: @background;
+@widget-text-color: @normal-text-color;
 @widget-border-color: darken(@background, 12%);
-
+@widget-gradient: none;
+@widget-shadow: 0 4px 10px 4px rgba(0, 0, 0, 0.2);
+@sprite-image: url('@{image-folder}/sprite.png');
 @inversed-text-color: contrast(@accent);
 @accent-hover-background: multiply(@accent, #e4e4e4);
 @link-text-color: #00acc1;
-@widget-shadow: 0 4px 10px 4px rgba(0, 0, 0, 0.2);
 @popups-shadow: 0 0px 6px 1px rgba(0, 0, 0, 0.2);
 @tabs-normal-bg: #081421;
 @tabs-normal-gradient: "#303553 0%, #072138 100%";
