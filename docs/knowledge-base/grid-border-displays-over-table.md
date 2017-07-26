@@ -17,7 +17,7 @@ res_type: kb
  </tr>
  <tr>
   <td>Progress Kendo UI version</td>
-  <td>all4</td>
+  <td>all</td>
  </tr>
 </table>
 
