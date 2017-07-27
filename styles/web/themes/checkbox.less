@@ -45,7 +45,7 @@
 }
 
 .k-checkbox:checked:active + .k-checkbox-label:before,
-.k-checkbox:checked + .k-checkbox-label:before {
+.k-checkbox:checked + .k-checkbox-label:active:before {
     box-shadow: @checkbox-active-box-shadow;
     border-color: @checkbox-active-border-color;
 }
@@ -68,7 +68,8 @@
     border-radius: @checkbox-border-radius;
 }
 
-.k-checkbox:focus + .k-checkbox-label:before {
+.k-checkbox:focus + .k-checkbox-label:before,
+.k-checkbox:focus + .k-checkbox-label:hover:before {
     border-color: @checkbox-active-border-color;
     box-shadow: @checkbox-active-box-shadow;
 }

@@ -2287,8 +2287,8 @@ html .km-pane-wrapper .km-widget,
 @checkbox-hover-border-color: lighten(@normal-text-color, 23%);
 @checkbox-checked-border-color: @accent;
 @checkbox-checked-background-color: @accent;
-@checkbox-checked-color: saturate(@background, 29%);
-@checkbox-active-border-color: lighten(@normal-text-color, 23%);
+@checkbox-checked-color: contrast(@checkbox-checked-background-color, saturate(@background, 29%), );
+@checkbox-active-border-color: lighten(@accent, 23%);
 @checkbox-active-box-shadow: none;
 @checkbox-disabled-background-color: contrast(@background, lighten(@background, 20%), darken(@background, 4%), 0.5);
 @checkbox-disabled-color: @disabled-text-color;
@@ -2296,28 +2296,48 @@ html .km-pane-wrapper .km-widget,
 @checkbox-indeterminate-background-color: @accent;
 @checkbox-indeterminate-border-color: @accent;
 
+.k-checkbox-label:before {
+    background: transparent;
+}
+
 .k-checkbox + .k-checkbox-label:after {
     content: "";
     position: absolute;
     top: 1px;
     left: 1px;
     border-radius: 50%;
-    width: 1em;
-    height: 1em;
+    width: 16px;
+    height: 16px;
+    box-shadow: 0 0 0 0px transparent;
+    transition: box-shadow 0.3s;
+}
+
+.k-checkbox:focus + .k-checkbox-label:before {
+    border-color: @checkbox-border-color;
+}
+.k-checkbox:checked + .k-checkbox-label:before,
+.k-checkbox:checked:hover + .k-checkbox-label:before,
+.k-checkbox:checked + .k-checkbox-label:hover:before {
+    border-color: @checkbox-checked-border-color
 }
 
 .k-checkbox:focus + .k-checkbox-label:after {
-    box-shadow: 0 0 0 12px fadeout(@hover-background, 70%);
+    box-shadow: 0 0 0 12px fadeout(@checkbox-border-color, 80%);
+    background: fadeout(@checkbox-border-color, 80%);
 }
 
 .k-checkbox:active + .k-checkbox-label:after,
 .k-checkbox + .k-checkbox-label:active:after {
-    box-shadow: 0 0 0 12px fadeout(@hover-background, 70%);
+    box-shadow: 0 0 0 12px fadeout(@checkbox-active-border-color, 60%);
+    background: fadeout(@checkbox-active-border-color, 60%);
 }
 
+.k-checkbox:checked:focus + .k-checkbox-label:after,
+.k-checkbox:checked + .k-checkbox-label:focus:after,
 .k-checkbox:checked:active + .k-checkbox-label:after,
 .k-checkbox:checked + .k-checkbox-label:active:after {
-    box-shadow: 0 0 0 12px fadeout(@accent, 70%);
+    box-shadow: 0 0 0 12px fadeout(@checkbox-active-border-color, 60%);
+    background: fadeout(@checkbox-active-border-color, 60%);
 }
 
 .k-checkbox:disabled + .k-checkbox-label:active:after {
