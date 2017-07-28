@@ -18,12 +18,12 @@
             currency: {
                 name: "US Dollar",
                 abbr: "USD",
-                pattern: ["($n)","$n"],
+                pattern: ["-$n","$n"],
                 decimals: 2,
                 ",": ",",
                 ".": ".",
                 groupSize: [3],
-                symbol: "$"
+                symbol: "US$"
             }
         },
         calendars: {
@@ -40,19 +40,19 @@
                 AM: ["AM","am","AM"],
                 PM: ["PM","pm","PM"],
                 patterns: {
-                    d: "dd/MM/yyyy",
-                    D: "dddd, d MMMM yyyy",
-                    F: "dddd, d MMMM yyyy h:mm:ss tt",
-                    g: "dd/MM/yyyy h:mm tt",
-                    G: "dd/MM/yyyy h:mm:ss tt",
+                    d: "d/M/yyyy",
+                    D: "dddd, dd MMMM yyyy",
+                    F: "dddd, dd MMMM yyyy h:mm:ss tt",
+                    g: "d/M/yyyy h:mm tt",
+                    G: "d/M/yyyy h:mm:ss tt",
                     m: "d MMMM",
                     M: "d MMMM",
                     s: "yyyy'-'MM'-'dd'T'HH':'mm':'ss",
                     t: "h:mm tt",
                     T: "h:mm:ss tt",
                     u: "yyyy'-'MM'-'dd HH':'mm':'ss'Z'",
-                    y: "MMMM/yyyy",
-                    Y: "MMMM/yyyy"
+                    y: "MMMM yyyy",
+                    Y: "MMMM yyyy"
                 },
                 "/": "/",
                 ":": ":",

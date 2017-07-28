@@ -16,9 +16,9 @@
                 symbol: "%"
             },
             currency: {
-                name: "Real",
+                name: "Brazilian Real",
                 abbr: "BRL",
-                pattern: ["-$ n","$ n"],
+                pattern: ["-$n","$n"],
                 decimals: 2,
                 ",": ".",
                 ".": ",",
@@ -45,8 +45,8 @@
                     F: "dddd, d' de 'MMMM' de 'yyyy HH:mm:ss",
                     g: "dd/MM/yyyy HH:mm",
                     G: "dd/MM/yyyy HH:mm:ss",
-                    m: "d' de 'MMMM",
-                    M: "d' de 'MMMM",
+                    m: "d 'de' MMMM",
+                    M: "d 'de' MMMM",
                     s: "yyyy'-'MM'-'dd'T'HH':'mm':'ss",
                     t: "HH:mm",
                     T: "HH:mm:ss",

@@ -8,7 +8,7 @@
             ".": ".",
             groupSize: [3],
             percent: {
-                pattern: ["-n %","n %"],
+                pattern: ["-n%","n%"],
                 decimals: 2,
                 ",": ",",
                 ".": ".",
@@ -16,14 +16,14 @@
                 symbol: "%"
             },
             currency: {
-                name: "Trinidad Dollar",
+                name: "Trinidad and Tobago Dollar",
                 abbr: "TTD",
-                pattern: ["($n)","$n"],
+                pattern: ["-$n","$n"],
                 decimals: 2,
                 ",": ",",
                 ".": ".",
-                groupSize: [3,0],
-                symbol: "TT$"
+                groupSize: [3],
+                symbol: "$"
             }
         },
         calendars: {
@@ -41,15 +41,15 @@
                 PM: ["PM","pm","PM"],
                 patterns: {
                     d: "dd/MM/yyyy",
-                    D: "dddd, dd MMMM yyyy",
-                    F: "dddd, dd MMMM yyyy hh:mm:ss tt",
-                    g: "dd/MM/yyyy hh:mm tt",
-                    G: "dd/MM/yyyy hh:mm:ss tt",
+                    D: "dddd, d MMMM yyyy",
+                    F: "dddd, d MMMM yyyy h:mm:ss tt",
+                    g: "dd/MM/yyyy h:mm tt",
+                    G: "dd/MM/yyyy h:mm:ss tt",
                     m: "d MMMM",
                     M: "d MMMM",
                     s: "yyyy'-'MM'-'dd'T'HH':'mm':'ss",
-                    t: "hh:mm tt",
-                    T: "hh:mm:ss tt",
+                    t: "h:mm tt",
+                    T: "h:mm:ss tt",
                     u: "yyyy'-'MM'-'dd HH':'mm':'ss'Z'",
                     y: "MMMM yyyy",
                     Y: "MMMM yyyy"

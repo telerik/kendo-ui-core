@@ -7,7 +7,7 @@ slug: htmlhelpers_multiselect_aspnetcore
 
 # MultiSelect HtmlHelper Overview
 
-The MultiSelect HtmlHelper extension is a server-side wrapper for the [Kendo UI MultiSelect](http://demos.telerik.com/kendo-ui/multiselect/index).
+The MultiSelect HtmlHelper extension is a server-side wrapper for the [Kendo UI MultiSelect](http://demos.telerik.com/kendo-ui/multiselect/index) widget.
 
 It allows you to configure the Kendo UI MultiSelect widget from server-side code. The [MultiSelect](http://docs.telerik.com/kendo-ui/controls/editors/multiselect/overview) displays a list of options and allows multiple selections from this list. The widget represents a richer version of the `<select>` element and provides support for local and remote data binding, item and tag templates, and configurable options for controlling the list behavior.
 
@@ -72,7 +72,7 @@ The following example demonstrates how to define the MultiSelect by using the Mu
 
 The following example demonstrates the basic configuration of the MultiSelect HtmlHelper and how to get the MultiSelect instance.
 
-```tab-Razor
+```
    @(Html.Kendo().MultiSelect()
         .Name("multiselect")
         .DataTextField("ProductName")

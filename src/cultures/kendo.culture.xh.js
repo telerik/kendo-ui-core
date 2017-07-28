@@ -4,13 +4,13 @@
         numberFormat: {
             pattern: ["-n"],
             decimals: 2,
-            ",": ",",
+            ",": " ",
             ".": ".",
             groupSize: [3],
             percent: {
-                pattern: ["-%n","%n"],
+                pattern: ["-n%","n%"],
                 decimals: 2,
-                ",": ",",
+                ",": " ",
                 ".": ".",
                 groupSize: [3],
                 symbol: "%"
@@ -18,9 +18,9 @@
             currency: {
                 name: "",
                 abbr: "",
-                pattern: ["$-n","$ n"],
+                pattern: ["-$n","$n"],
                 decimals: 2,
-                ",": ",",
+                ",": " ",
                 ".": ".",
                 groupSize: [3],
                 symbol: "R"
@@ -29,32 +29,32 @@
         calendars: {
             standard: {
                 days: {
-                    names: ["iCawa","uMvulo","uLwesibini","uLwesithathu","uLwesine","uLwesihlanu","uMgqibelo"],
-                    namesAbbr: ["iCa.","uMv.","uLwesib.","uLwesith.","uLwesin.","uLwesihl.","uMgq."],
-                    namesShort: ["Ca","Mv","Lb","Lt","Ln","Lh","Mg"]
+                    names: ["Cawe","Mvulo","Lwesibini","Lwesithathu","Lwesine","Lwesihlanu","Mgqibelo"],
+                    namesAbbr: ["Caw","Mvu","Bin","Tha","Sin","Hla","Mgq"],
+                    namesShort: ["Caw","Mvu","Bin","Tha","Sin","Hla","Mgq"]
                 },
                 months: {
-                    names: ["uJanuwari","uFebuwari","uMatshi","uAprili","uMeyi","uJuni","uJulayi","uAgasti","uSeptemba","uOktobha","uNovemba","uDisemba"],
-                    namesAbbr: ["uJan.","uFeb.","uMat.","uEpr.","uMey.","uJun.","uJul.","uAg.","uSep.","uOkt.","uNov.","uDis."]
+                    names: ["Janyuwari","Februwari","Matshi","Epreli","Meyi","Juni","Julayi","Agasti","Septemba","Okthoba","Novemba","Disemba"],
+                    namesAbbr: ["Jan","Feb","Mat","Epr","Mey","Jun","Jul","Aga","Sep","Okt","Nov","Dis"]
                 },
-                AM: ["Ekuseni","ekuseni","EKUSENI"],
-                PM: ["Emva Kwemini","emva kwemini","EMVA KWEMINI"],
+                AM: ["AM","am","AM"],
+                PM: ["PM","pm","PM"],
                 patterns: {
-                    d: "yyyy/MM/dd",
-                    D: "dd MMMM yyyy",
-                    F: "dd MMMM yyyy hh:mm:ss tt",
-                    g: "yyyy/MM/dd hh:mm tt",
-                    G: "yyyy/MM/dd hh:mm:ss tt",
-                    m: "d MMMM",
-                    M: "d MMMM",
+                    d: "yyyy-MM-dd",
+                    D: "yyyy MMMM d, dddd",
+                    F: "yyyy MMMM d, dddd HH:mm:ss",
+                    g: "yyyy-MM-dd HH:mm",
+                    G: "yyyy-MM-dd HH:mm:ss",
+                    m: "MMMM d",
+                    M: "MMMM d",
                     s: "yyyy'-'MM'-'dd'T'HH':'mm':'ss",
-                    t: "hh:mm tt",
-                    T: "hh:mm:ss tt",
+                    t: "HH:mm",
+                    T: "HH:mm:ss",
                     u: "yyyy'-'MM'-'dd HH':'mm':'ss'Z'",
-                    y: "MMMM yyyy",
-                    Y: "MMMM yyyy"
+                    y: "yyyy MMMM",
+                    Y: "yyyy MMMM"
                 },
-                "/": "/",
+                "/": "-",
                 ":": ":",
                 firstDay: 0
             }

@@ -8,31 +8,204 @@ slug: howto_customize_rowsand_cells_basedon_dataitem_values_grid
 
 # Customize Rows and Cells Based on Data Item Values
 
-The example below demonstrates how to customize the cells and rows of the Grid based on the values of the data items. The demo applies custom CSS classes, but its approach is still suitable even if you apply inline styles or other HTML attributes.
+The examples below demonstrate how to customize the cells and rows of the Grid based on the values of the data items. The demo applies custom CSS classes, but its approach is still suitable even if you apply inline styles or other HTML attributes.
 
-The three options to achieve the customization are:
+Three different options to achieve the customization are listed in the following sections.
 
-1. Use a row template. This approach is suitable if you do not intend to apply hierarchy, grouping, editing, and frozen columns to the Grid.
-2. Use a databound handler and iterate the table rows. This approach is suitable if you intend to customize all rows of the Grid.
-3. Use a databound handler and iterate the data items. This approach is suitable if you intend to customize only part of the Grid rows.
+## Use a row template
+
+This approach is suitable if you do not intend to apply hierarchy, grouping, editing, and frozen columns to the Grid, because these features are not supported when row templates are used. With this approach, you directly add template expressions in the `rowTemplate` and `altRowTemplate` definitions to determine which custom CSS classes should be applied to a given row/cell.
 
 ###### Example
 
 ```html
     <style>
+      .k-grid {
+        width: 500px;
+      }
 
-    html {
-        font: 14px sans-serif;
-    }
+      .discontinued {
+        font-weight: bold;
+        color: #f00;
+      }
+      .critical {
+        background-color: #fdd;
+      }
 
-    h1 {
-        font-size: 1.2em;
-    }
+      .warning {
+        background-color: #fda;
+      }
 
-    h2 {
-        font-size: 1em;
-    }
+      .ok {
+        background-color: #ced;
+      }
 
+    </style>
+
+
+    <div id="grid-rowtemplate"></div>
+    <script>
+      // sample datasource
+      var products = [
+        { ID: 1, ProductName: "Foo", UnitsInStock: 9, Discontinued: false },
+        { ID: 2, ProductName: "Bar", UnitsInStock: 16, Discontinued: false },
+        { ID: 3, ProductName: "Baz", UnitsInStock: 3, Discontinued: true }
+      ];
+
+
+      var rowTemplateString = '<tr class="#: Discontinued ? "discontinued" : "" #" data-uid="#: uid #">' +
+          '<td>#: ProductName #</td>' +
+          '<td class="#: getUnitsInStockClass(UnitsInStock) #">#: UnitsInStock #</td>' +
+          '<td>#: Discontinued #</td>' +
+          '</tr>';
+
+      var altRowTemplateString = rowTemplateString.replace('tr class="', 'tr class="k-alt ');
+
+      function getUnitsInStockClass(units) {
+        if (units < 5) {
+          return "critical";
+        } else if (units < 10) {
+          return "warning";
+        } else {
+          return "ok";
+        }
+      }
+
+      $(document).ready(function () {
+        $("#grid-rowtemplate").kendoGrid({
+          dataSource: {
+            data: products,
+            schema: {
+              model: {
+                id: "ID",
+                fields: {
+                  ID: { type: "number" },
+                  ProductName: { },
+                  UnitsInStock: { type: "number" },
+                  Discontinued: { type: "boolean" }
+                }
+              }
+            }
+          },
+          sortable: true,
+          columns: [
+            { field: "ProductName", title: "Product Name" },
+            { field: "UnitsInStock", title:"Units In Stock", width: "120px" },
+            { field: "Discontinued", width: "120px" }
+          ],
+          rowTemplate: rowTemplateString,
+          altRowTemplate: altRowTemplateString
+        });
+      });
+    </script>
+
+```
+
+
+## Use a dataBound handler and iterate the table rows
+
+This approach is suitable if you intend to customize all rows of the Grid. It loops through all Grid rows and determines what custom class names should be applied to them, based on the values that they contain.
+
+###### Example
+
+```html
+    <style>
+      .k-grid {
+        width: 500px;
+      }
+
+      .discontinued {
+        font-weight: bold;
+        color: #f00;
+      }
+      .critical {
+        background-color: #fdd;
+      }
+
+      .warning {
+        background-color: #fda;
+      }
+
+      .ok {
+        background-color: #ced;
+      }
+
+    </style>
+
+    <div id="grid-databound-dataitems"></div>
+    <script>
+      // sample datasource
+      var products = [
+        { ID: 1, ProductName: "Foo", UnitsInStock: 9, Discontinued: false },
+        { ID: 2, ProductName: "Bar", UnitsInStock: 16, Discontinued: false },
+        { ID: 3, ProductName: "Baz", UnitsInStock: 3, Discontinued: true }
+      ];
+
+      function getUnitsInStockClass(units) {
+        if (units < 5) {
+          return "critical";
+        } else if (units < 10) {
+          return "warning";
+        } else {
+          return "ok";
+        }
+      }
+
+      $(document).ready(function () {
+        $("#grid-databound-dataitems").kendoGrid({
+          dataSource: {
+            data: products,
+            schema: {
+              model: {
+                id: "ID",
+                fields: {
+                  ID: { type: "number" },
+                  ProductName: { },
+                  UnitsInStock: { type: "number" },
+                  Discontinued: { type: "boolean" }
+                }
+              }
+            }
+          },
+          sortable: true,
+          columns: [
+            { field: "ProductName", title: "Product Name" },
+            { field: "UnitsInStock", title:"Units In Stock", width: "120px" },
+            { field: "Discontinued", width: "120px" }
+          ],
+          dataBound: function(e) {
+            // get the index of the UnitsInStock cell
+            var columns = e.sender.columns;
+            var columnIndex = this.wrapper.find(".k-grid-header [data-field=" + "UnitsInStock" + "]").index();
+
+            // iterate the data items and apply row styles where necessary
+            var dataItems = e.sender.dataSource.view();
+            for (var j = 0; j < dataItems.length; j++) {
+              var units = dataItems[j].get("UnitsInStock");
+              var discontinued = dataItems[j].get("Discontinued");
+
+              var row = e.sender.tbody.find("[data-uid='" + dataItems[j].uid + "']");
+              if (discontinued) {
+                row.addClass("discontinued");
+              }
+
+              var cell = row.children().eq(columnIndex);
+              cell.addClass(getUnitsInStockClass(units));
+            }
+          }
+        });
+      });
+    </script>
+
+```
+
+## Use a dataBound handler and iterate the data items
+This approach is suitable if you intend to customize only part of the Grid rows. It loops through all Grid data items and accesses only the rows that match certain conditions.
+
+###### Example
+
+```html
+    <style>
     .k-grid {
         width: 500px;
     }
@@ -41,145 +214,67 @@ The three options to achieve the customization are:
         font-weight: bold;
         color: #f00;
     }
-    .critical {
-        background-color: #fdd;
-    }
-
-    .warning {
-        background-color: #fda;
-    }
-
-    .ok {
-        background-color: #ced;
-    }
-
     </style>
-
-    <h1>Style Grid rows and cells, based on data item values</h1>
-
-    <h2>Use a row template</h2>
-
-    <p>This approach is the best if hierarchy, grouping, editing and frozen columns are not used.</p>
-
-    <div id="grid-rowtemplate"></div>
-
-    <h2>Use a databound handler and iterate the table rows</h2>
-
-    <p>This approach is better if all rows will be customized.</p>
-
-    <div id="grid-databound-rows"></div>
-
-    <h2>Use a databound handler and iterate the data items</h2>
-
-    <p>This approach is better if only some rows will be customized.</p>
-
-    <div id="grid-databound-dataitems"></div>
+     <div id="grid-databound-dataitems"></div>
 
     <script>
-        // sample datasource
-        var products = [
-            { ID: 1, ProductName: "Foo", UnitsInStock: 9, Discontinued: false },
-            { ID: 2, ProductName: "Bar", UnitsInStock: 16, Discontinued: false },
-            { ID: 3, ProductName: "Baz", UnitsInStock: 3, Discontinued: true }
-        ];
+      // sample datasource
+      var products = [
+        { ID: 1, ProductName: "Foo", UnitsInStock: 9, Discontinued: false },
+        { ID: 2, ProductName: "Bar", UnitsInStock: 16, Discontinued: false },
+        { ID: 3, ProductName: "Baz", UnitsInStock: 3, Discontinued: true }
+      ];
 
-        // configuration settings, which are shared by all Grids
-        var commonSettings = {
-            dataSource: {
-                data: products,
-                schema: {
-                    model: {
-                        id: "ID",
-                        fields: {
-                            ID: { type: "number" },
-                            ProductName: { },
-                            UnitsInStock: { type: "number" },
-                            Discontinued: { type: "boolean" }
-                        }
-                    }
-                }
-            },
-            sortable: true,
-            columns: [
-                { field: "ProductName", title: "Product Name" },
-                { field: "UnitsInStock", title:"Units In Stock", width: "120px" },
-                { field: "Discontinued", width: "120px" }
-            ]
-        };
-
-        var rowTemplateString = '<tr class="#: Discontinued ? "discontinued" : "" #" data-uid="#: uid #">' +
-            '<td>#: ProductName #</td>' +
-            '<td class="#: getUnitsInStockClass(UnitsInStock) #">#: UnitsInStock #</td>' +
-            '<td>#: Discontinued #</td>' +
-        '</tr>';
-
-        var altRowTemplateString = rowTemplateString.replace('tr class="', 'tr class="k-alt ');
-
-        function getUnitsInStockClass(units) {
-            if (units < 5) {
-                return "critical";
-            } else if (units < 10) {
-                return "warning";
-            } else {
-                return "ok";
-            }
+      function getUnitsInStockClass(units) {
+        if (units < 5) {
+          return "critical";
+        } else if (units < 10) {
+          return "warning";
+        } else {
+          return "ok";
         }
+      }
 
-        $(document).ready(function () {
-            $("#grid-rowtemplate").kendoGrid($.extend({
-                rowTemplate: rowTemplateString,
-                altRowTemplate: altRowTemplateString
-            }, commonSettings));
-
-            $("#grid-databound-rows").kendoGrid($.extend({
-                dataBound: function(e) {
-                    // get the index of the UnitsInStock cell
-                    var columns = e.sender.columns;
-                    var columnIndex = this.wrapper.find(".k-grid-header [data-field=" + "UnitsInStock" + "]").index();
-
-                    // iterate the table rows and apply custom row and cell styling
-                    var rows = e.sender.tbody.children();
-                    for (var j = 0; j < rows.length; j++) {
-                        var row = $(rows[j]);
-                        var dataItem = e.sender.dataItem(row);
-
-                        var units = dataItem.get("UnitsInStock");
-                        var discontinued = dataItem.get("Discontinued");
-
-                        if (discontinued) {
-                            row.addClass("discontinued");
-                        }
-
-                        var cell = row.children().eq(columnIndex);
-                        cell.addClass(getUnitsInStockClass(units));
-                    }
+      $(document).ready(function () {
+        $("#grid-databound-dataitems").kendoGrid({
+          dataSource: {
+            data: products,
+            schema: {
+              model: {
+                id: "ID",
+                fields: {
+                  ID: { type: "number" },
+                  ProductName: { },
+                  UnitsInStock: { type: "number" },
+                  Discontinued: { type: "boolean" }
                 }
-            }, commonSettings));
+              }
+            }
+          },
+          sortable: true,
+          columns: [
+            { field: "ProductName", title: "Product Name" },
+            { field: "UnitsInStock", title:"Units In Stock", width: "120px" },
+            { field: "Discontinued", width: "120px" }
+          ],
+          dataBound: function(e) {
+            // get the index of the UnitsInStock cell
+            var columns = e.sender.columns;
+            var columnIndex = this.wrapper.find(".k-grid-header [data-field=" + "UnitsInStock" + "]").index();
 
-            $("#grid-databound-dataitems").kendoGrid($.extend({
-                dataBound: function(e) {
-                    // get the index of the UnitsInStock cell
-                    var columns = e.sender.columns;
-                    var columnIndex = this.wrapper.find(".k-grid-header [data-field=" + "UnitsInStock" + "]").index();
+            // iterate the data items and apply row styles where necessary
+            var dataItems = e.sender.dataSource.view();
+            for (var j = 0; j < dataItems.length; j++) {
+              var discontinued = dataItems[j].get("Discontinued");
 
-                    // iterate the data items and apply row styles where necessary
-                    var dataItems = e.sender.dataSource.view();
-                    for (var j = 0; j < dataItems.length; j++) {
-                        var units = dataItems[j].get("UnitsInStock");
-                        var discontinued = dataItems[j].get("Discontinued");
-
-                        var row = e.sender.tbody.find("[data-uid='" + dataItems[j].uid + "']");
-                        if (discontinued) {
-                            row.addClass("discontinued");
-                        }
-
-                        var cell = row.children().eq(columnIndex);
-                        cell.addClass(getUnitsInStockClass(units));
-                    }
-                }
-            }, commonSettings));
-
+              var row = e.sender.tbody.find("[data-uid='" + dataItems[j].uid + "']");
+              if (discontinued) {
+                row.addClass("discontinued");
+              }
+            }
+          }
         });
+      });
     </script>
 
 ```

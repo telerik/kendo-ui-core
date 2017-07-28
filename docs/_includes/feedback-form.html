@@ -14,38 +14,47 @@
   <div id="feedback-window-container">
     <div id="feedback-form-window" style="background-color: white;">
       <h1 class="feedback-extw__title">Give article feedback</h1>
-      <p>Tell us how we can improve the information</p>
+      <p>Tell us how we can improve this article</p>
       <span id="feedback-form-popup-container"></span>
       <form id="feedback-form">
         <div id="feedback-checkbox-area">
           <input id="hidden-sheet-id" type="hidden" value="{{site.ff-sheet-id}}">
           <label>
-            <input type="checkbox" value="outdated-sample"
-                  data-bind="checked: outdatedSample"/>
-            Code samples are inaccurate/outdated.
-        </label>
+            <input type="checkbox" data-bind="checked: outdatedSample"/>
+            Code samples are inaccurate / outdated.
+          </label>
+          <textarea placeholder="Please, specify more details ..." class="feedback-extw__textarea"
+            data-bind="visible: outdatedSample, value: inaccurateOutdatedCodeSamplesText">
+          </textarea>
           <label>
-            <input type="checkbox" value="wrong-information"
-                  data-bind="checked: wrongInformation"/>
-            I expected to find other information. 
-        </label>
+            <input type="checkbox" data-bind="checked: otherMoreInformation"/>
+            I expected to find other / more information. 
+          </label>
+          <textarea class="feedback-extw__textarea" placeholder="Please, specify what information can be added ..."
+            data-bind="visible: otherMoreInformation, value: otherMoreInformationText" >
+          </textarea>
           <label>
-            <input type="checkbox" value="insufficient-information"
-                  data-bind="checked: insufficientInformation"/>
-            I expected to find more information.
-        </label>
-          <label>
-            <input type="checkbox" value="text-errors" data-bind="checked: textErrors"/>
+            <input type="checkbox" data-bind="checked: textErrors"/>
             There are typos / broken links / broken page elements.
-        </label>
+          </label>
+          <textarea class="feedback-extw__textarea" placeholder="Please, specify what needs to be fixed ..."
+            data-bind="visible: textErrors, value: typosLinksElementsText">
+          </textarea>
           <label>
-            <input type="checkbox" value="inaccurate-content"
-                  data-bind="checked: inaccurateContent"/>
+            <input type="checkbox" data-bind="checked: inaccurateContent"/>
             Content is inaccurate / outdated.
-        </label>
-          <textarea id="feedback-text-input" placeholder="Enter details or unlisted feedback" data-bind="value: textFeedback" class="feedback-extw__textarea textarea"></textarea>
-          <input id="feedback-email-input" type="email" placeholder="email (optional)" data-email-msg="Email format is not valid" data-bind="value: email" class="feedback-extw__input input"
-          />
+          </label>
+          <textarea class="feedback-extw__textarea" placeholder="Please, specify which conent ..."
+            data-bind="visible: inaccurateContent, value: inaccurateOutdatedContentText"></textarea>
+          <label>
+            <input type="checkbox" data-bind="checked: otherFeedback"/>
+            Other
+          </label>
+          <textarea placeholder="Please, enter more details or not listed feedback ..." class="feedback-extw__textarea"
+            data-bind="visible: otherFeedback, value: textFeedback">
+          </textarea>
+          <input type="email" placeholder="email (optional)" data-email-msg="Email format is not valid" class="feedback-extw__input input"
+            data-bind="value: email"/>
         </div>
       </form>
       <div class="feedback-extw__foot">

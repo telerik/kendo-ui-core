@@ -123,8 +123,7 @@ The following example demonstrates the basic configuration of the Grid HtmlHelpe
 
 ###### Example
 
-```tab-Razor
-
+```
     @(Html.Kendo().Grid<Kendo.Mvc.Examples.Models.Customer>()
 		.Name("grid")
 		.Columns(columns =>

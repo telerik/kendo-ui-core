@@ -347,6 +347,21 @@ test("group separators with '0' length are applied correctly", function() {
     equal(toString(33111110, "n", "custom"), "33111,110.00");
 });
 
+test("group separators with '0' length are applied correctly when integer is a multiple of group", function() {
+    kendo.cultures["custom"] = {
+        calendars: { standard: {}},
+        numberFormat: {
+            decimals: 2,
+            pattern: ["-n"],
+            ",": ",",
+            ".": ".",
+            groupSize: [3,0]
+        }
+    };
+
+    equal(toString(331, "n", "custom"), "331.00");
+});
+
 test("'0' group separator does not group integer", function() {
     kendo.cultures["custom"] = {
         calendars: { standard: {}},

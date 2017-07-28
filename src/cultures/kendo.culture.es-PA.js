@@ -8,7 +8,7 @@
             ".": ".",
             groupSize: [3],
             percent: {
-                pattern: ["-n%","n%"],
+                pattern: ["-n %","n %"],
                 decimals: 2,
                 ",": ",",
                 ".": ".",
@@ -18,7 +18,7 @@
             currency: {
                 name: "Panamanian Balboa",
                 abbr: "PAB",
-                pattern: ["($ n)","$ n"],
+                pattern: ["-$n","$n"],
                 decimals: 2,
                 ",": ",",
                 ".": ".",
@@ -31,28 +31,28 @@
                 days: {
                     names: ["domingo","lunes","martes","miércoles","jueves","viernes","sábado"],
                     namesAbbr: ["dom.","lun.","mar.","mié.","jue.","vie.","sáb."],
-                    namesShort: ["do.","lu.","ma.","mi.","ju.","vi.","sá."]
+                    namesShort: ["DO","LU","MA","MI","JU","VI","SA"]
                 },
                 months: {
                     names: ["enero","febrero","marzo","abril","mayo","junio","julio","agosto","septiembre","octubre","noviembre","diciembre"],
                     namesAbbr: ["ene.","feb.","mar.","abr.","may.","jun.","jul.","ago.","sep.","oct.","nov.","dic."]
                 },
-                AM: ["a. m.","a. m.","A. M."],
-                PM: ["p. m.","p. m.","P. M."],
+                AM: ["a.m.","a.m.","A.M."],
+                PM: ["p.m.","p.m.","P.M."],
                 patterns: {
-                    d: "d/M/yy",
-                    D: "dddd, dd' de 'MMMM' de 'yyyy",
-                    F: "dddd, dd' de 'MMMM' de 'yyyy h:mm:ss tt",
-                    g: "d/M/yy h:mm tt",
-                    G: "d/M/yy h:mm:ss tt",
-                    m: "d' de 'MMMM",
-                    M: "d' de 'MMMM",
+                    d: "MM/dd/yyyy",
+                    D: "dddd, d 'de' MMMM 'de' yyyy",
+                    F: "dddd, d 'de' MMMM 'de' yyyy h:mm:ss tt",
+                    g: "MM/dd/yyyy h:mm tt",
+                    G: "MM/dd/yyyy h:mm:ss tt",
+                    m: "d 'de' MMMM",
+                    M: "d 'de' MMMM",
                     s: "yyyy'-'MM'-'dd'T'HH':'mm':'ss",
                     t: "h:mm tt",
                     T: "h:mm:ss tt",
                     u: "yyyy'-'MM'-'dd HH':'mm':'ss'Z'",
-                    y: "MMMM' de 'yyyy",
-                    Y: "MMMM' de 'yyyy"
+                    y: "MMMM 'de' yyyy",
+                    Y: "MMMM 'de' yyyy"
                 },
                 "/": "/",
                 ":": ":",

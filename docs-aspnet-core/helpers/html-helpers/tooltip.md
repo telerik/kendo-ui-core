@@ -7,7 +7,7 @@ slug: htmlhelpers_tooltip_aspnetcore
 
 # Tooltip HtmlHelper Overview
 
-The Tooltip HtmlHelper extension is a server-side wrapper for the [Kendo UI Tooltip](http://demos.telerik.com/kendo-ui/tooltip/index).
+The Tooltip HtmlHelper extension is a server-side wrapper for the [Kendo UI Tooltip](http://demos.telerik.com/kendo-ui/tooltip/index) widget.
 
 It allows you to configure the Kendo UI Tooltip widget from server-side code. The [Tooltip](http://docs.telerik.com/kendo-ui/controls/layout/tooltip/overview) displays a popup hint for a given html element. Its content can be defined either as static text, or loaded dynamically via AJAX.
 
@@ -19,8 +19,7 @@ The following example demonstrates how to define the Tooltip by using the Toolti
 
 ###### Example
 
-```tab-Razor
-  
+```
    <span id="tooltip" class="k-button wider">Hover me!</span>
 
     @(Html.Kendo().Tooltip()
@@ -28,15 +27,13 @@ The following example demonstrates how to define the Tooltip by using the Toolti
         .Position(TooltipPosition.Top)
         .Content("Hello!")
     )
-
 ```
 
 ## Configuration
 
 The following example demonstrates the basic configuration of the Tooltip HtmlHelper and how to get the Tooltip instance.
 
-```tab-Razor    
-
+```
     <span id="tooltip" class="k-button wider">
       <а href="#">Hover me</a>
     </span>
@@ -58,7 +55,7 @@ The following example demonstrates the basic configuration of the Tooltip HtmlHe
             console.log(tooltip);
         });
     </script>
-    
+
 ```
 
 ## See Also

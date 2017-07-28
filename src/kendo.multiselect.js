@@ -25,7 +25,7 @@ var __meta__ = { // jshint ignore:line
     var kendo = window.kendo,
         ui = kendo.ui,
         List = ui.List,
-        keys = kendo.keys,
+        keys = $.extend({ A: 65 }, kendo.keys),
         activeElement = kendo._activeElement,
         ObservableArray = kendo.data.ObservableArray,
         proxy = $.proxy,
@@ -42,6 +42,7 @@ var __meta__ = { // jshint ignore:line
         DESELECT = "deselect",
         ARIA_DISABLED = "aria-disabled",
         FOCUSEDCLASS = "k-state-focused",
+        SELECTEDCLASS = "k-state-selected",
         HIDDENCLASS = "k-hidden",
         HOVERCLASS = "k-state-hover",
         STATEDISABLED = "k-state-disabled",
@@ -459,6 +460,7 @@ var __meta__ = { // jshint ignore:line
         },
 
         close: function() {
+            this._activeItem = null;
             this.popup.close();
         },
 
@@ -699,9 +701,14 @@ var __meta__ = { // jshint ignore:line
             e.preventDefault();
 
             that._select(item).done(function() {
+                that._activeItem = item;
                 that._change();
                 that._close();
             });
+        },
+
+        _getActiveItem: function() {
+            return this._activeItem || $(this.listView.items()[this.listView._selectedIndices.length - 1]) || this.listView.focus();
         },
 
         _keydown: function(e) {
@@ -709,39 +716,57 @@ var __meta__ = { // jshint ignore:line
             var key = e.keyCode;
             var tag = that._currentTag;
             var listView = that.listView;
-            var current = listView.focus();
             var hasValue = that.input.val();
             var isRtl = kendo.support.isRtl(that.wrapper);
             var visible = that.popup.visible();
+            var dir = 0;
+            var activeItemIdx;
 
-            if (key === keys.DOWN) {
+             if (key === keys.DOWN) {
                 e.preventDefault();
 
                 if (!visible) {
                     that.open();
 
-                    if (!current) {
+                    if (!listView.focus()) {
                         listView.focusFirst();
                     }
                     return;
                 }
 
-                if (current) {
+                if (listView.focus()) {
+                    if (!that._activeItem && e.shiftKey) {
+                        that._activeItem = listView.focus();
+                        dir = -1;
+                    }
+                    activeItemIdx = listView.getElementIndex(that._getActiveItem()[0]);
+
                     listView.focusNext();
                     if (!listView.focus()) {
                         listView.focusLast();
+                    } else {
+                        if (e.shiftKey) {
+                            that._selectRange(activeItemIdx, listView.getElementIndex(listView.focus()[0]) + dir);
+                        }
                     }
                 } else {
                     listView.focusFirst();
                 }
+
             } else if (key === keys.UP) {
                 if (visible) {
-                    if (current) {
-                        listView.focusPrev();
+                    if (!that._activeItem && e.shiftKey) {
+                        that._activeItem = listView.focus();
+                        dir = 1;
                     }
-
+                    activeItemIdx = listView.getElementIndex(that._getActiveItem()[0]);
+                    listView.focusPrev();
                     if (!listView.focus()) {
                         that.close();
+                    } else {
+                        if (e.shiftKey) {
+                            that._selectRange(activeItemIdx, listView.getElementIndex(listView.focus()[0]) + dir);
+                        }
                     }
                 }
                 e.preventDefault();
@@ -757,22 +782,53 @@ var __meta__ = { // jshint ignore:line
                     tag = tag.next();
                     that.currentTag(tag[0] ? tag : null);
                 }
+            } else if (e.ctrlKey && key === keys.A  && visible) {
+                if (listView._selectedIndices.length === listView.items().length) {
+                    that._activeItem = null;
+                    return listView.select(listView._selectedIndices);
+                } else {
+                    that._selectRange(0, listView.items().length - 1);
+                }
             } else if (key === keys.ENTER && visible) {
-                that._select(current).done(function() {
+                that._select(listView.focus()).done(function() {
                     that._change();
                     that._close();
                 });
+                e.preventDefault();
+            } else if (key === keys.SPACEBAR && e.ctrlKey && visible) {
+                if (that._activeItem && listView.focus()[0] === that._activeItem[0]) {
+                    that._activeItem = null;
+                }
+                if (!$(listView.focus()[0]).hasClass(SELECTEDCLASS)) {
+                    that._activeItem = listView.focus();
+                }
+                that._select(listView.focus()).done(function() {
+                    that._change();
+                });
+            } else if (key === keys.SPACEBAR && e.shiftKey && visible) {
+                var activeIndex = listView.getElementIndex(that._getActiveItem()[0]);
+                var currentIndex = listView.getElementIndex(listView.focus()[0]);
+                that._selectRange(
+                    activeIndex,
+                    currentIndex
+                    );
+
                 e.preventDefault();
             } else if (key === keys.ESC) {
                 if (visible) {
                     e.preventDefault();
                 } else {
-                    that.currentTag(null);
+                    that.tagList.children().each(function(index, tag) {
+                        that._removeTag($(tag));
+                    });
                 }
 
                 that.close();
             } else if (key === keys.HOME) {
                 if (visible) {
+                    if (e.ctrlKey && e.shiftKey) {
+                        that._selectRange(listView.getElementIndex(listView.focus()[0]), 0);
+                    }
                     listView.focusFirst();
                 } else if (!hasValue) {
                     tag = that.tagList[0].firstChild;
@@ -783,6 +839,12 @@ var __meta__ = { // jshint ignore:line
                 }
             } else if (key === keys.END) {
                 if (visible) {
+                    if (e.ctrlKey && e.shiftKey) {
+                        that._selectRange(
+                            listView.getElementIndex(listView.focus()[0]),
+                            listView.element.children().length - 1
+                        );
+                    }
                     listView.focusLast();
                 } else if (!hasValue) {
                     tag = that.tagList[0].lastChild;
@@ -1133,6 +1195,31 @@ var __meta__ = { // jshint ignore:line
                     listView.skipUpdate(true);
                 }
             });
+        },
+
+        _selectRange: function(startIndex, endIndex) {
+            var that = this;
+            var listView = that.listView;
+            var indices = listView._selectedIndices.slice();
+            var toggle = function (index) {
+                if (listView._selectedIndices.indexOf(index) == -1) {
+                    indices.push(index);
+                } else {
+                    indices.splice(indices.indexOf(index), 1);
+                }
+            };
+
+            if (startIndex < endIndex) {
+                for (var i = startIndex; i <= endIndex; i++) {
+                    toggle(i);
+                }
+            } else {
+                for (var j = startIndex; j >= endIndex; j--) {
+                    toggle(j);
+                }
+            }
+
+            return listView.select(indices);
         },
 
         _input: function() {

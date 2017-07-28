@@ -8,7 +8,7 @@
             ".": ",",
             groupSize: [3],
             percent: {
-                pattern: ["-n%","n%"],
+                pattern: ["-n %","n %"],
                 decimals: 2,
                 ",": " ",
                 ".": ",",
@@ -18,9 +18,9 @@
             currency: {
                 name: "Euro",
                 abbr: "EUR",
-                pattern: ["-n $","n $"],
+                pattern: ["-$ n","$ n"],
                 decimals: 2,
-                ",": ".",
+                ",": " ",
                 ".": ",",
                 groupSize: [3],
                 symbol: "€"
@@ -30,19 +30,19 @@
             standard: {
                 days: {
                     names: ["Sonntag","Montag","Dienstag","Mittwoch","Donnerstag","Freitag","Samstag"],
-                    namesAbbr: ["So","Mo","Di","Mi","Do","Fr","Sa"],
-                    namesShort: ["So","Mo","Di","Mi","Do","Fr","Sa"]
+                    namesAbbr: ["So.","Mo.","Di.","Mi.","Do.","Fr.","Sa."],
+                    namesShort: ["So.","Mo.","Di.","Mi.","Do.","Fr.","Sa."]
                 },
                 months: {
                     names: ["Jänner","Februar","März","April","Mai","Juni","Juli","August","September","Oktober","November","Dezember"],
                     namesAbbr: ["Jän","Feb","Mär","Apr","Mai","Jun","Jul","Aug","Sep","Okt","Nov","Dez"]
                 },
-                AM: [""],
-                PM: [""],
+                AM: ["vorm.","vorm.","VORM."],
+                PM: ["nachm.","nachm.","NACHM."],
                 patterns: {
                     d: "dd.MM.yyyy",
-                    D: "dddd, dd. MMMM yyyy",
-                    F: "dddd, dd. MMMM yyyy HH:mm:ss",
+                    D: "dddd, d. MMMM yyyy",
+                    F: "dddd, d. MMMM yyyy HH:mm:ss",
                     g: "dd.MM.yyyy HH:mm",
                     G: "dd.MM.yyyy HH:mm:ss",
                     m: "d. MMMM",

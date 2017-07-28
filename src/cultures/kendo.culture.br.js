@@ -29,32 +29,32 @@
         calendars: {
             standard: {
                 days: {
-                    names: ["Sul","Lun","Meurzh","Merc\u0027her","Yaou","Gwener","Sadorn"],
+                    names: ["Sul","Lun","Meurzh","Mercʼher","Yaou","Gwener","Sadorn"],
                     namesAbbr: ["Sul","Lun","Meu.","Mer.","Yaou","Gwe.","Sad."],
-                    namesShort: ["Su","L","Mz","Mc","Y","G","Sa"]
+                    namesShort: ["Sul","Lun","Meu.","Mer.","Yaou","Gwe.","Sad."]
                 },
                 months: {
-                    names: ["Genver","C\u0027hwevrer","Meurzh","Ebrel","Mae","Mezheven","Gouere","Eost","Gwengolo","Here","Du","Kerzu"],
-                    namesAbbr: ["Gen.","C\u0027hwe.","Meur.","Ebr.","Mae","Mezh.","Goue.","Eost","Gwen.","Here","Du","Kzu"]
+                    names: ["Genver","Cʼhwevrer","Meurzh","Ebrel","Mae","Mezheven","Gouere","Eost","Gwengolo","Here","Du","Kerzu"],
+                    namesAbbr: ["Gen.","Cʼhwe.","Meur.","Ebr.","Mae","Mezh.","Goue.","Eost","Gwen.","Here","Du","Ker."]
                 },
-                AM: [""],
-                PM: [""],
+                AM: ["A.M.","a.m.","A.M."],
+                PM: ["G.M.","g.m.","G.M."],
                 patterns: {
-                    d: "dd/MM/yyyy",
-                    D: "dddd d MMMM yyyy",
-                    F: "dddd d MMMM yyyy HH:mm:ss",
-                    g: "dd/MM/yyyy HH:mm",
-                    G: "dd/MM/yyyy HH:mm:ss",
-                    m: "d MMMM",
-                    M: "d MMMM",
+                    d: "yyyy-MM-dd",
+                    D: "yyyy MMMM d, dddd",
+                    F: "yyyy MMMM d, dddd HH:mm:ss",
+                    g: "yyyy-MM-dd HH:mm",
+                    G: "yyyy-MM-dd HH:mm:ss",
+                    m: "MMMM d",
+                    M: "MMMM d",
                     s: "yyyy'-'MM'-'dd'T'HH':'mm':'ss",
                     t: "HH:mm",
                     T: "HH:mm:ss",
                     u: "yyyy'-'MM'-'dd HH':'mm':'ss'Z'",
-                    y: "MMMM yyyy",
-                    Y: "MMMM yyyy"
+                    y: "yyyy MMMM",
+                    Y: "yyyy MMMM"
                 },
-                "/": "/",
+                "/": "-",
                 ":": ":",
                 firstDay: 1
             }

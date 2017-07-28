@@ -112,15 +112,11 @@ function getRootItem(index) {
     return $('#tabstrip').find('.k-item').eq(index)
 }
 
-asyncTest('clicking should make clicked item active', 1, function() {
+test('clicking should make clicked item active even before AJAX request', 1, function() {
     var item = getRootItem(2);
 
-    tabstrip.bind("activate", function() {
-        ok(item.hasClass('k-state-active'));
-        start();
-    });
-
     item.find('> .k-link').trigger('click');
+    ok(item.hasClass('k-state-active'));
 });
 
 asyncTest('clicking should make all items except clicked unactive', function() {

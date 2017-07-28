@@ -3116,7 +3116,7 @@ The [template](/api/javascript/kendo#methods-template) which renders the command
 #### Example - set the template as a function
     <div id="gantt"></div>
     <script id="template" type="text/x-kendo-template">
-    <a class="k-button" href="\#" onclick="return toolbar_click()">Command</a>
+    <a class="k-button" href="" onclick="return toolbar_click()">Command</a>
     </script>
     <script>
     function toolbar_click() {
@@ -3150,7 +3150,7 @@ The [template](/api/javascript/kendo#methods-template) which renders the command
     $("#gantt").kendoGantt({
       toolbar: [
         {
-          template: '<a class="k-button" href="\\#" onclick="return toolbar_click()">Command</a>'
+          template: '<a class="k-button" href="" onclick="return toolbar_click()">Command</a>'
         }
       ],
       dataSource: [

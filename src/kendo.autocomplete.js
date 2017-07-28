@@ -108,6 +108,7 @@ var __meta__ = { // jshint ignore:line
                 .on("focusout" + ns, function () {
                     that._change();
                     that._placeholder();
+                    that.close();
                     wrapper.removeClass(FOCUSED);
                 })
                 .attr({
@@ -587,6 +588,8 @@ var __meta__ = { // jshint ignore:line
             if (key === keys.DOWN) {
                 if (visible) {
                     this._move(current ? "focusNext" : "focusFirst");
+                } else if (that.value()) {
+                    that.popup.open();
                 }
                 e.preventDefault();
             } else if (key === keys.UP) {
@@ -594,6 +597,10 @@ var __meta__ = { // jshint ignore:line
                     this._move(current ? "focusPrev" : "focusLast");
                 }
                 e.preventDefault();
+            } else if (key === keys.HOME) {
+                this._move("focusFirst");
+            } else if (key === keys.END) {
+                this._move("focusLast");
             } else if (key === keys.ENTER || key === keys.TAB) {
 
                 if (key === keys.ENTER && visible) {
@@ -613,6 +620,8 @@ var __meta__ = { // jshint ignore:line
             } else if (key === keys.ESC) {
                 if (visible) {
                     e.preventDefault();
+                } else {
+                    that._clearValue();
                 }
                 that.close();
             } else if (that.popup.visible() && (key === keys.PAGEDOWN || key === keys.PAGEUP)) {

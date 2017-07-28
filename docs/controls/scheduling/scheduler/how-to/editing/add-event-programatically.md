@@ -13,7 +13,12 @@ The following example demonstrates how to programmatically add an event to the K
 ###### Example
 
 ```html
-    <div id="scheduler"></div>
+    <div id="example" class="k-content">
+      <button id="create" class="k-button">Create Task</button>
+
+      <div id="scheduler"></div>
+    </div>
+
     <script>
       $(function() {
         $("#scheduler").kendoScheduler({
@@ -95,8 +100,8 @@ The following example demonstrates how to programmatically add an event to the K
 
         $("#create").click(function() {
           $("#scheduler").data("kendoScheduler").addEvent({
-            start: new Date(),
-            end: new Date()
+            start: new Date("2013/6/13"),
+            end: new Date("2013/6/13")
           });
         });
       });

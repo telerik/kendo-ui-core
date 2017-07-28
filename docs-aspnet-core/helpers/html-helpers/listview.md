@@ -7,7 +7,7 @@ slug: htmlhelpers_listview_aspnetcore
 
 # ListView HtmlHelper Overview
 
-The ListView HtmlHelper extension is a server-side wrapper for the [Kendo UI ListView](http://demos.telerik.com/aspnet-mvc/listview/index).
+The ListView HtmlHelper extension is a server-side wrapper for the [Kendo UI ListView](http://demos.telerik.com/aspnet-mvc/listview/index) widget.
 
 It enables you to display a custom layout of data-bound items. It does not provide a default rendering of data-bound items. Instead, it relies on templates to define the way a list of items is displayed, including alternating items and items that are in the process of editing.
 

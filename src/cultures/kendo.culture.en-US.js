@@ -41,8 +41,8 @@
                 PM: ["PM","pm","PM"],
                 patterns: {
                     d: "M/d/yyyy",
-                    D: "dddd, MMMM dd, yyyy",
-                    F: "dddd, MMMM dd, yyyy h:mm:ss tt",
+                    D: "dddd, MMMM d, yyyy",
+                    F: "dddd, MMMM d, yyyy h:mm:ss tt",
                     g: "M/d/yyyy h:mm tt",
                     G: "M/d/yyyy h:mm:ss tt",
                     m: "MMMM d",
@@ -51,8 +51,8 @@
                     t: "h:mm tt",
                     T: "h:mm:ss tt",
                     u: "yyyy'-'MM'-'dd HH':'mm':'ss'Z'",
-                    y: "MMMM, yyyy",
-                    Y: "MMMM, yyyy"
+                    y: "MMMM yyyy",
+                    Y: "MMMM yyyy"
                 },
                 "/": "/",
                 ":": ":",

@@ -1019,7 +1019,9 @@ function pad(number, digits, end) {
                 groupSize = newGroupSize !== undefined ? newGroupSize : groupSize;
 
                 if (groupSize === 0) {
-                    parts.push(integer.substring(0, idx));
+                    if (idx > 0) {
+                        parts.push(integer.substring(0, idx));
+                    }
                     break;
                 }
             }
@@ -1673,7 +1675,10 @@ function pad(number, digits, end) {
                 wrapperStyle = wrapper[0].style;
 
             if (wrapper.is(":hidden")) {
-                wrapper.show();
+                wrapper.css({
+                    display: "",
+                    position: ""
+                });
             }
 
             percentage = percentRegExp.test(wrapperStyle.width) || percentRegExp.test(wrapperStyle.height);
@@ -3721,6 +3726,9 @@ function pad(number, digits, end) {
         }
 
         function convert(date, fromOffset, toOffset) {
+            var tempToOffset = toOffset;
+            var diff;
+
             if (typeof fromOffset == STRING) {
                 fromOffset = this.offset(date, fromOffset);
             }
@@ -3735,7 +3743,13 @@ function pad(number, digits, end) {
 
             var toLocalOffset = date.getTimezoneOffset();
 
-            return new Date(date.getTime() + (toLocalOffset - fromLocalOffset) * 60000);
+            if (typeof tempToOffset == STRING) {
+                tempToOffset = this.offset(date, tempToOffset);
+            }
+
+            diff = (toLocalOffset - fromLocalOffset) + (toOffset - tempToOffset);
+
+            return new Date(date.getTime() + diff * 60000);
         }
 
         function apply(date, timezone) {
@@ -3831,7 +3845,11 @@ function pad(number, digits, end) {
             return 1 + Math.floor(days / 7);
         }
 
-        function weekInYear(date, weekStartDay){
+        function weekInYear(date, weekStartDay) {
+            if(weekStartDay === undefined) {
+                weekStartDay = kendo.culture().calendar.firstDay;
+            }
+
             var prevWeekDate = addDays(date, -7);
             var nextWeekDate = addDays(date, 7);
 

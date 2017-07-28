@@ -8,7 +8,7 @@
             ".": ",",
             groupSize: [3],
             percent: {
-                pattern: ["-n %","n %"],
+                pattern: ["-n%","n%"],
                 decimals: 2,
                 ",": ".",
                 ".": ",",
@@ -30,7 +30,7 @@
             standard: {
                 days: {
                     names: ["Chủ Nhật","Thứ Hai","Thứ Ba","Thứ Tư","Thứ Năm","Thứ Sáu","Thứ Bảy"],
-                    namesAbbr: ["CN","T2","T3","Tư","Năm","Sáu","Bảy"],
+                    namesAbbr: ["CN","T2","T3","T4","T5","T6","T7"],
                     namesShort: ["C","H","B","T","N","S","B"]
                 },
                 months: {

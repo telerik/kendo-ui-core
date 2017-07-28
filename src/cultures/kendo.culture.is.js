@@ -23,7 +23,7 @@
                 ",": ".",
                 ".": ",",
                 groupSize: [3],
-                symbol: "kr."
+                symbol: "ISK"
             }
         },
         calendars: {
@@ -31,18 +31,18 @@
                 days: {
                     names: ["sunnudagur","mánudagur","þriðjudagur","miðvikudagur","fimmtudagur","föstudagur","laugardagur"],
                     namesAbbr: ["sun.","mán.","þri.","mið.","fim.","fös.","lau."],
-                    namesShort: ["su","má","þr","mi","fi","fö","la"]
+                    namesShort: ["su.","má.","þr.","mi.","fi.","fö.","la."]
                 },
                 months: {
                     names: ["janúar","febrúar","mars","apríl","maí","júní","júlí","ágúst","september","október","nóvember","desember"],
                     namesAbbr: ["jan.","feb.","mar.","apr.","maí","jún.","júl.","ágú.","sep.","okt.","nóv.","des."]
                 },
-                AM: [""],
-                PM: [""],
+                AM: ["f.h.","f.h.","F.H."],
+                PM: ["e.h.","e.h.","E.H."],
                 patterns: {
                     d: "d.M.yyyy",
-                    D: "d. MMMM yyyy",
-                    F: "d. MMMM yyyy HH:mm:ss",
+                    D: "dddd, d. MMMM yyyy",
+                    F: "dddd, d. MMMM yyyy HH:mm:ss",
                     g: "d.M.yyyy HH:mm",
                     G: "d.M.yyyy HH:mm:ss",
                     m: "d. MMMM",

@@ -656,6 +656,10 @@ The data item field to group by.
     });
     </script>
 
+### inPlaceSort `Boolean` *(default: false)*
+
+If set to `true` the original `Array` used as [`data`](#configuration-data) will be sorted when sorting operation is performed. This setting supported only with local data, bound to a JavaScript array via the [`data`](#configuration-data) option. 
+
 ### offlineStorage `String|Object`
 
 The offline storage key or custom offline storage implementation.
@@ -766,7 +770,7 @@ The configuration used to parse the remote service response.
       },
       schema: {
         data: function(response) {
-          return response.results; // twitter's response is { "results": [ /* results */ ] }
+          return response.statuses; // twitter's response is { "statuses": [ /* results */ ] }
         }
       }
     });
@@ -802,7 +806,7 @@ For example, if the data source is configured like this:
     var dataSource = new kendo.data.DataSource({
       transport: {
         /* transport configuration */
-      }
+      },
       serverAggregates: true,
       aggregate: [
         { field: "unitPrice", aggregate: "max" },
@@ -912,6 +916,8 @@ The field from the server response which contains the data items. Can be set to 
 
 The field from the server response which contains server-side errors. Can be set to a function which is called to return the errors for response. If there are any errors, the [`error`](#events-error) event will be fired.
 
+> If this option is set and the server response contains that field then the `error` event will be fired. The `errors` field of the event argument will contain the errors returned by the server.
+
 #### Example - specify the error field as a string
 
     <script>
@@ -920,14 +926,14 @@ The field from the server response which contains server-side errors. Can be set
         read: {
           url: "http://demos.telerik.com/kendo-ui/service/twitter/search",
           dataType: "jsonp", // "jsonp" is required for cross-domain requests; use "json" for same-domain requests
-          data: { q: "#" }
+          data: { q: "aaaaa" }
         }
       },
       schema: {
-        errors: "error" // twitter's response is { "error": "Invalid query" }
+        errors: "error"
       },
       error: function(e) {
-        console.log(e.errors); // displays "Invalid query"
+        console.log(e.errors);
       }
     });
     dataSource.fetch();
@@ -941,16 +947,16 @@ The field from the server response which contains server-side errors. Can be set
         read: {
           url: "http://demos.telerik.com/kendo-ui/service/twitter/search",
           dataType: "jsonp", // "jsonp" is required for cross-domain requests; use "json" for same-domain requests
-          data: { q: "#" }
+          data: { q: "aaaaa" }
         }
       },
       schema: {
         errors: function(response) {
-          return response.error; // twitter's response is { "error": "Invalid query" }
+          return response.error;
         }
       },
       error: function(e) {
-        console.log(e.errors); // displays "Invalid query"
+        console.log(e.errors);
       }
     });
     dataSource.fetch();
@@ -1069,7 +1075,7 @@ If set to an existing [`kendo.data.Model`](/api/javascript/data/model) instance,
 #### Example - set the model as an existing `kendo.data.Model` instance
 
     <script>
-    var Product = kendo.model.define({
+    var Product = kendo.data.Model.define({
       id: "ProductID",
       fields: {
         ProductID: {
@@ -2027,7 +2033,7 @@ If set to function, the data source will invoke it and use the result as the URL
         },
         destroy: {
           url: function (options) {
-            return "http://demos.telerik.com/kendo-ui/service/products/destroy",
+            return "http://demos.telerik.com/kendo-ui/service/products/destroy"
           },
           dataType: "jsonp" // "jsonp" is required for cross-domain requests; use "json" for same-domain requests
         },
@@ -2280,15 +2286,18 @@ If the value of `transport.read` is a string, the data source uses this string a
 
 #### Example - send additional parameters to the remote service
 
-    <input value="html5" id="search" />
+    <input value="2" id="search" />
     <script>
     var dataSource = new kendo.data.DataSource({
       transport: {
         read: {
-          url: "http://demos.telerik.com/kendo-ui/service/twitter/search",
+          url: "http://demos.telerik.com/kendo-ui/service/products/read",
           dataType: "jsonp", // "jsonp" is required for cross-domain requests; use "json" for same-domain requests
-          data: {
-            q: $("#search").val() // send the value of the #search input to the remote service
+          data: function() {
+              return {
+                  skip: 0,
+                  take: $("#search").val() // send the value of the #search input to the remote service
+              };
           }
         }
       }
@@ -2371,10 +2380,11 @@ Refer to the [`jQuery.ajax`](http://api.jquery.com/jQuery.ajax) documentation fo
     var dataSource = new kendo.data.DataSource({
       transport: {
         read: {
-          url: "http://demos.telerik.com/kendo-ui/service/twitter/search",
+          url: "http://demos.telerik.com/kendo-ui/service/products/read",
           dataType: "jsonp", // "jsonp" is required for cross-domain requests; use "json" for same-domain requests
-          data: {
-            q: "html5" // send "html5" as the "q" parameter
+          data:  {
+              skip: 0,
+              take: 2 
           }
         }
       }
@@ -2388,12 +2398,13 @@ Refer to the [`jQuery.ajax`](http://api.jquery.com/jQuery.ajax) documentation fo
     var dataSource = new kendo.data.DataSource({
       transport: {
         read: {
-          url: "http://demos.telerik.com/kendo-ui/service/twitter/search",
+          url: "http://demos.telerik.com/kendo-ui/service/products/read",
           dataType: "jsonp", // "jsonp" is required for cross-domain requests; use "json" for same-domain requests
           data: function() {
-            return {
-              q: "html5" // send "html5" as the "q" parameter
-            };
+              return {
+                  skip: 0,
+                  take: 2 
+              };
           }
         }
       }
@@ -2689,7 +2700,7 @@ If the value of `transport.update` is a string, the data source uses this string
     dataSource.fetch(function() {
       var product = dataSource.at(0);
       product.set("UnitPrice", 20);
-      dataSource.sync(); makes request to http://demos.telerik.com/kendo-ui/service/products/update
+      dataSource.sync(); //makes request to http://demos.telerik.com/kendo-ui/service/products/update
     });
     </script>
 
@@ -2891,7 +2902,7 @@ If set to function, the data source will invoke it and use the result as the URL
         },
         update: {
           url: function(options) {
-            return "http://demos.telerik.com/kendo-ui/service/products/update",
+            return "http://demos.telerik.com/kendo-ui/service/products/update"
           },
           dataType: "jsonp" // "jsonp" is required for cross-domain requests; use "json" for same-domain requests
         }

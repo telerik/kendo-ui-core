@@ -23,7 +23,7 @@
                 ",": " ",
                 ".": ",",
                 groupSize: [3],
-                symbol: "ман."
+                symbol: "₼"
             }
         },
         calendars: {
@@ -45,8 +45,8 @@
                     F: "d MMMM yyyy HH:mm:ss",
                     g: "dd.MM.yyyy H:mm",
                     G: "dd.MM.yyyy HH:mm:ss",
-                    m: "d MMMM",
-                    M: "d MMMM",
+                    m: "MMMM d",
+                    M: "MMMM d",
                     s: "yyyy'-'MM'-'dd'T'HH':'mm':'ss",
                     t: "H:mm",
                     T: "HH:mm:ss",

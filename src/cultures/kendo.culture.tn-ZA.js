@@ -4,13 +4,13 @@
         numberFormat: {
             pattern: ["-n"],
             decimals: 2,
-            ",": ",",
+            ",": " ",
             ".": ".",
             groupSize: [3],
             percent: {
-                pattern: ["-%n","%n"],
+                pattern: ["-n%","n%"],
                 decimals: 2,
-                ",": ",",
+                ",": " ",
                 ".": ".",
                 groupSize: [3],
                 symbol: "%"
@@ -18,9 +18,9 @@
             currency: {
                 name: "South African Rand",
                 abbr: "ZAR",
-                pattern: ["$-n","$ n"],
+                pattern: ["-$n","$n"],
                 decimals: 2,
-                ",": ",",
+                ",": " ",
                 ".": ".",
                 groupSize: [3],
                 symbol: "R"
@@ -29,34 +29,34 @@
         calendars: {
             standard: {
                 days: {
-                    names: ["Sontaga","Mosupologo","Labobedi","Laboraro","Labone","Labotlhano","Matlhatso"],
-                    namesAbbr: ["Sont.","Mos.","Lab.","Labr.","Labn.","Labt.","Matlh."],
-                    namesShort: ["So","Ms","Lb","Lr","Ln","Lt","Ma"]
+                    names: ["Tshipi","Mosopulogo","Labobedi","Laboraro","Labone","Labotlhano","Matlhatso"],
+                    namesAbbr: ["Tsh","Mos","Bed","Rar","Ne","Tla","Mat"],
+                    namesShort: ["Tsh","Mos","Bed","Rar","Ne","Tla","Mat"]
                 },
                 months: {
-                    names: ["Ferikgong","Tlhakole","Mopitlwe","Moranang","Motsheganong","Seetebosigo","Phukwi","Phatwe","Lwetse","Diphalane","Ngwanatsele","Sedimothole"],
-                    namesAbbr: ["Fer.","Tlh.","Mop.","Mor.","Motsh.","Seet.","Phk.","Pht.","Lwetse.","Diph.","Ngwn.","Sed."]
+                    names: ["Ferikgong","Tlhakole","Mopitlo","Moranang","Motsheganang","Seetebosigo","Phukwi","Phatwe","Lwetse","Diphalane","Ngwanatsele","Sedimonthole"],
+                    namesAbbr: ["Fer","Tlh","Mop","Mor","Mot","See","Phu","Pha","Lwe","Dip","Ngw","Sed"]
                 },
-                AM: ["Mo Mosong","mo mosong","MO MOSONG"],
-                PM: ["Mo Maitseboeng","mo maitseboeng","MO MAITSEBOENG"],
+                AM: ["AM","am","AM"],
+                PM: ["PM","pm","PM"],
                 patterns: {
-                    d: "dd/MM/yy",
-                    D: "dd MMMM yyyy",
-                    F: "dd MMMM yyyy hh:mm:ss tt",
-                    g: "dd/MM/yy hh:mm tt",
-                    G: "dd/MM/yy hh:mm:ss tt",
-                    m: "d MMMM",
-                    M: "d MMMM",
+                    d: "yyyy-MM-dd",
+                    D: "yyyy MMMM d, dddd",
+                    F: "yyyy MMMM d, dddd HH:mm:ss",
+                    g: "yyyy-MM-dd HH:mm",
+                    G: "yyyy-MM-dd HH:mm:ss",
+                    m: "MMMM d",
+                    M: "MMMM d",
                     s: "yyyy'-'MM'-'dd'T'HH':'mm':'ss",
-                    t: "hh:mm tt",
-                    T: "hh:mm:ss tt",
+                    t: "HH:mm",
+                    T: "HH:mm:ss",
                     u: "yyyy'-'MM'-'dd HH':'mm':'ss'Z'",
-                    y: "MMMM yyyy",
-                    Y: "MMMM yyyy"
+                    y: "yyyy MMMM",
+                    Y: "yyyy MMMM"
                 },
-                "/": "/",
+                "/": "-",
                 ":": ":",
-                firstDay: 1
+                firstDay: 0
             }
         }
     }

@@ -59,8 +59,7 @@ The following example demonstrates the basic configuration of the Editor HtmlHel
 
 ###### Example
 
-```tab-Razor
-
+```
 @(Html.Kendo().Editor()
     .Name("editor")
     .HtmlAttributes(new { style = "width: 100%;height:440px" })

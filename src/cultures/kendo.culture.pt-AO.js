@@ -3,14 +3,14 @@
         name: "pt-AO",
         numberFormat: {
             pattern: ["-n"],
-            decimals: 0,
-            ",": ".",
+            decimals: 2,
+            ",": " ",
             ".": ",",
             groupSize: [3],
             percent: {
-                pattern: ["-n%","%n"],
-                decimals: 0,
-                ",": ".",
+                pattern: ["-n%","n%"],
+                decimals: 2,
+                ",": " ",
                 ".": ",",
                 groupSize: [3],
                 symbol: "%"
@@ -18,9 +18,9 @@
             currency: {
                 name: "Angolan Kwanza",
                 abbr: "AOA",
-                pattern: ["($n)","$n"],
+                pattern: ["-n $","n $"],
                 decimals: 2,
-                ",": ".",
+                ",": " ",
                 ".": ",",
                 groupSize: [3],
                 symbol: "Kz"
@@ -30,23 +30,23 @@
             standard: {
                 days: {
                     names: ["domingo","segunda-feira","terça-feira","quarta-feira","quinta-feira","sexta-feira","sábado"],
-                    namesAbbr: ["dom","seg","ter","qua","qui","sex","sáb"],
+                    namesAbbr: ["domingo","segunda","terça","quarta","quinta","sexta","sábado"],
                     namesShort: ["dom","seg","ter","qua","qui","sex","sáb"]
                 },
                 months: {
                     names: ["janeiro","fevereiro","março","abril","maio","junho","julho","agosto","setembro","outubro","novembro","dezembro"],
                     namesAbbr: ["jan","fev","mar","abr","mai","jun","jul","ago","set","out","nov","dez"]
                 },
-                AM: ["AM","am","AM"],
-                PM: ["PM","pm","PM"],
+                AM: ["a.m.","a.m.","A.M."],
+                PM: ["p.m.","p.m.","P.M."],
                 patterns: {
-                    d: "dd/MM/yy",
+                    d: "dd/MM/yyyy",
                     D: "dddd, d 'de' MMMM 'de' yyyy",
                     F: "dddd, d 'de' MMMM 'de' yyyy HH:mm:ss",
-                    g: "dd/MM/yy HH:mm",
-                    G: "dd/MM/yy HH:mm:ss",
-                    m: "dd/MMMM",
-                    M: "dd/MMMM",
+                    g: "dd/MM/yyyy HH:mm",
+                    G: "dd/MM/yyyy HH:mm:ss",
+                    m: "d 'de' MMMM",
+                    M: "d 'de' MMMM",
                     s: "yyyy'-'MM'-'dd'T'HH':'mm':'ss",
                     t: "HH:mm",
                     T: "HH:mm:ss",

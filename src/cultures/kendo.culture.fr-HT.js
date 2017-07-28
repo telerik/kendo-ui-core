@@ -3,13 +3,13 @@
         name: "fr-HT",
         numberFormat: {
             pattern: ["-n"],
-            decimals: 0,
+            decimals: 2,
             ",": " ",
             ".": ",",
             groupSize: [3],
             percent: {
-                pattern: ["-n%","%n"],
-                decimals: 0,
+                pattern: ["-n %","n %"],
+                decimals: 2,
                 ",": " ",
                 ".": ",",
                 groupSize: [3],
@@ -18,7 +18,7 @@
             currency: {
                 name: "Haitian Gourde",
                 abbr: "HTG",
-                pattern: ["(n$)","n$"],
+                pattern: ["-n $","n $"],
                 decimals: 2,
                 ",": " ",
                 ".": ",",

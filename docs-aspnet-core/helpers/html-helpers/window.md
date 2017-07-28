@@ -44,8 +44,7 @@ The following example demonstrates the basic configuration of the Window HtmlHel
 
 ###### Example
 
-```tab-Razor
-
+```
 @(Html.Kendo().Window()
         .Name("window")
         .Width(630)

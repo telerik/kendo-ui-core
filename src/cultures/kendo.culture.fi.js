@@ -37,25 +37,25 @@
                     names: ["tammikuu","helmikuu","maaliskuu","huhtikuu","toukokuu","kesäkuu","heinäkuu","elokuu","syyskuu","lokakuu","marraskuu","joulukuu"],
                     namesAbbr: ["tammi","helmi","maalis","huhti","touko","kesä","heinä","elo","syys","loka","marras","joulu"]
                 },
-                AM: [""],
-                PM: [""],
+                AM: ["ap.","ap.","AP."],
+                PM: ["ip.","ip.","IP."],
                 patterns: {
                     d: "d.M.yyyy",
-                    D: "d. MMMM yyyy",
-                    F: "d. MMMM yyyy H:mm:ss",
-                    g: "d.M.yyyy H:mm",
-                    G: "d.M.yyyy H:mm:ss",
-                    m: "d'.' MMMM",
-                    M: "d'.' MMMM",
+                    D: "dddd d. MMMM yyyy",
+                    F: "dddd d. MMMM yyyy H.mm.ss",
+                    g: "d.M.yyyy H.mm",
+                    G: "d.M.yyyy H.mm.ss",
+                    m: "d. MMMM",
+                    M: "d. MMMM",
                     s: "yyyy'-'MM'-'dd'T'HH':'mm':'ss",
-                    t: "H:mm",
-                    T: "H:mm:ss",
+                    t: "H.mm",
+                    T: "H.mm.ss",
                     u: "yyyy'-'MM'-'dd HH':'mm':'ss'Z'",
                     y: "MMMM yyyy",
                     Y: "MMMM yyyy"
                 },
                 "/": ".",
-                ":": ":",
+                ":": ".",
                 firstDay: 1
             }
         }

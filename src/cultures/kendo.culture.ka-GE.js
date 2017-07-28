@@ -16,43 +16,43 @@
                 symbol: "%"
             },
             currency: {
-                name: "Lari",
+                name: "Georgian Lari",
                 abbr: "GEL",
                 pattern: ["-n $","n $"],
                 decimals: 2,
                 ",": " ",
                 ".": ",",
                 groupSize: [3],
-                symbol: "ლ."
+                symbol: "₾"
             }
         },
         calendars: {
             standard: {
                 days: {
                     names: ["კვირა","ორშაბათი","სამშაბათი","ოთხშაბათი","ხუთშაბათი","პარასკევი","შაბათი"],
-                    namesAbbr: ["კვ.","ორშ.","სამშ.","ოთხშ.","ხუთშ.","პარ.","შაბ."],
+                    namesAbbr: ["კვი","ორშ","სამ","ოთხ","ხუთ","პარ","შაბ"],
                     namesShort: ["კვ","ორ","სმ","ოთ","ხთ","პრ","შბ"]
                 },
                 months: {
                     names: ["იანვარი","თებერვალი","მარტი","აპრილი","მაისი","ივნისი","ივლისი","აგვისტო","სექტემბერი","ოქტომბერი","ნოემბერი","დეკემბერი"],
-                    namesAbbr: ["იან","თებ","მარ","აპრ","მაის","ივნ","ივლ","აგვ","სექ","ოქტ","ნოემ","დეკ"]
+                    namesAbbr: ["იან","თებ","მარ","აპრ","მაი","ივნ","ივლ","აგვ","სექ","ოქტ","ნოე","დეკ"]
                 },
-                AM: [""],
-                PM: [""],
+                AM: ["AM","am","AM"],
+                PM: ["PM","pm","PM"],
                 patterns: {
                     d: "dd.MM.yyyy",
-                    D: "dddd, d MMMM, yyyy 'წელი'",
-                    F: "dddd, d MMMM, yyyy 'წელი' H:mm:ss",
-                    g: "dd.MM.yyyy H:mm",
-                    G: "dd.MM.yyyy H:mm:ss",
+                    D: "dddd, dd MMMM, yyyy",
+                    F: "dddd, dd MMMM, yyyy HH:mm:ss",
+                    g: "dd.MM.yyyy HH:mm",
+                    G: "dd.MM.yyyy HH:mm:ss",
                     m: "d MMMM",
                     M: "d MMMM",
                     s: "yyyy'-'MM'-'dd'T'HH':'mm':'ss",
-                    t: "H:mm",
-                    T: "H:mm:ss",
+                    t: "HH:mm",
+                    T: "HH:mm:ss",
                     u: "yyyy'-'MM'-'dd HH':'mm':'ss'Z'",
-                    y: "MMMM yyyy",
-                    Y: "MMMM yyyy"
+                    y: "MMMM, yyyy",
+                    Y: "MMMM, yyyy"
                 },
                 "/": ".",
                 ":": ":",

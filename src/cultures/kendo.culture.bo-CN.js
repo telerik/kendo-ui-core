@@ -6,17 +6,17 @@
             decimals: 2,
             ",": ",",
             ".": ".",
-            groupSize: [3,0],
+            groupSize: [3],
             percent: {
                 pattern: ["-n%","n%"],
                 decimals: 2,
                 ",": ",",
                 ".": ".",
-                groupSize: [3,0],
+                groupSize: [3],
                 symbol: "%"
             },
             currency: {
-                name: "PRC Renminbi",
+                name: "Chinese Yuan",
                 abbr: "CNY",
                 pattern: ["$-n","$n"],
                 decimals: 2,

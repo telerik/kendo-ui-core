@@ -1,13 +1,17 @@
-@sprite-image: url('@{image-folder}/sprite.png');
+// Widget
 @widget-background-color: @background;
+@widget-text-color: @normal-text-color;
 @widget-border-color: darken(@background, 12%);
-
+@widget-gradient: none;
+@widget-shadow: 0 4px 10px 4px rgba(0, 0, 0, 0.2);
+@sprite-image: url('@{image-folder}/sprite.png');
 @inversed-text-color: contrast(@accent);
 @accent-hover-background: multiply(@accent, #e4e4e4);
 @link-text-color: #00acc1;
-@widget-shadow: 0 4px 10px 4px rgba(0, 0, 0, 0.2);
 @popups-shadow: 0 0px 6px 1px rgba(0, 0, 0, 0.2);
+@tabs-normal-bg: #081421;
 @tabs-normal-gradient: "#303553 0%, #072138 100%";
+@tabs-hover-bg: #081421;
 @tabs-hover-gradient: "#202333 0%, #081421 100%";
 @secondary-widget-background-color: darken(@widget-background-color, 2%);
 @disabled-text-color: darken(@base, 23%);
@@ -21,45 +25,6 @@
 @import "themes/type.less";
 
 /* Main colors */
-div.k-header .k-icon,
-.k-group-indicator .k-icon,
-.k-button .k-icon,
-.k-group-indicator .k-icon,
-.k-primary.k-button .k-icon,
-.k-dropdown-wrap.k-state-hovered .k-select .k-icon,
-.k-dropdown-wrap.k-state-active .k-select .k-icon,
-a.k-state-active.k-button-icon .k-icon,
-.k-header .k-button-group .k-state-selected .k-icon,
-.k-tabstrip-wrapper .k-spreadsheet-quick-access-toolbar .k-icon {
-    color: @selected-text-color;
-    &:hover {
-        color: @selected-text-color;
-    }
-}
-
-.k-icon,
-.k-header .k-button .k-icon,
-.k-header .k-button-group .k-icon,
-.k-widget .k-icon,
-.k-dialog-titlebar.k-header .k-icon,
-.k-editor-dropdown .k-icon,
-.k-tool-icon.k-icon,
-.k-widget.k-header .k-icon,
-.k-button .k-icon,
-.k-button-icontext .k-icon,
-.k-button-icon .k-icon,
-.k-header.k-tabstrip .k-icon,
-.k-select .k-link .k-icon {
-    color: @normal-text-color;
-    &:hover {
-        color: @normal-text-color;
-    }
-}
-
-.k-widget.k-notification .k-icon {
-    color: inherit;
-}
-
 .k-splitbar .k-resize-handle {
     background-color: @normal-text-color;
 }
@@ -277,6 +242,10 @@ textarea.k-textbox:hover,
 
 .k-toolbar .k-split-button .k-split-button-arrow {
     border-radius: 0 @inputs-border-radius @inputs-border-radius 0;
+}
+
+.k-hr {
+    border-color: @widget-border-color;
 }
 
 .k-rtl .k-dropdown-wrap .k-input,
@@ -857,6 +826,7 @@ input.k-textbox:active {
 
 .k-tabstrip-items {
     .composite-background(@tabs-normal-gradient);
+    background-color: @tabs-normal-bg;
 }
 
 .k-tabstrip-items {
@@ -869,6 +839,7 @@ input.k-textbox:active {
     .k-item.k-state-selected {
         border-top-color: @normal-text-color;
         .composite-background(@tabs-hover-gradient);
+        background-color: @tabs-hover-bg;
     }
 }
 
@@ -1558,7 +1529,7 @@ input.k-textbox:active {
 @checkbox-border-color: darken(@widget-background-color, 12%);
 @checkbox-border-radius: @inputs-border-radius;
 @checkbox-background-color: @widget-background-color;
-@checkbox-hover-border-color: darken(@base, 24%);
+@checkbox-hover-border-color: @checkbox-border-color;
 @checkbox-hover-box-shadow: none;
 @checkbox-checked-border-color: darken(@widget-background-color, 12%);
 @checkbox-checked-background-color: @widget-background-color;

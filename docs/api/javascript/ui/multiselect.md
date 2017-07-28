@@ -149,7 +149,7 @@ If set to `true`, the widget automatically adjusts the width of the popup elemen
 
 #### Example - enable autoWidth
 
-    <input id="multiselect" style="width: 100px;" />
+    <select id="multiselect" style="width: 100px;"></select>
     <script>
     $("#multiselect").kendoMultiSelect({
       autoWidth: true,
@@ -308,7 +308,7 @@ If set to `true` the widget will not show all items when the text of the search 
 
 #### Example - enforce minLength
 
-    <input id="multiselect" />
+    <select id="multiselect"></select>
     <script>
     $("#multiselect").kendoMultiSelect({
         placeholder: "Select products...",
@@ -588,7 +588,7 @@ Defines a jQuery selector that will be used to find a container element, where t
 #### Example - append the popup to a specific element
 
     <div id="container">
-        <input id="multiselect" />
+        <select id="multiselect"></select>
     </div>
     <script>
     $("#multiselect").kendoMultiSelect({
@@ -622,7 +622,7 @@ The available "x" positions are:
 #### Example - append the popup to a specific element
 
     <div id="container">
-        <input id="multiselect" />
+        <select id="multiselect"></select>
     </div>
     <script>
     $("#multiselect").kendoMultiSelect({
@@ -656,7 +656,7 @@ The available "x" positions are:
 #### Example - append the popup to a specific element
 
     <div id="container">
-        <input id="multiselect" />
+        <select id="multiselect"></select>
     </div>
     <script>
     $("#multiselect").kendoMultiSelect({

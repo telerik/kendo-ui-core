@@ -7,7 +7,7 @@ slug: htmlhelpers_progressbar_aspnetcore
 
 # ProgressBar HtmlHelper Overview
 
-The ProgressBar HtmlHelper extension is a server-side wrapper for the [Kendo UI ProgressBar](http://demos.telerik.com/kendo-ui/progressbar/index).
+The ProgressBar HtmlHelper extension is a server-side wrapper for the [Kendo UI ProgressBar](http://demos.telerik.com/kendo-ui/progressbar/index) widget.
 
 It allows you to configure the Kendo UI ProgressBar widget from server-side code. The [ProgressBar](http://docs.telerik.com/kendo-ui/controls/interactivity/progressbar/overview) offers rich functionalities for displaying and tracking the progress of a task. It supports multiple types, horizontal and vertical orientation, and also different directions.
 
@@ -19,8 +19,8 @@ The following example demonstrates how to define the ProgressBar by using the Pr
 
 ###### Example
 
-```tab-Razor
-   @(Html.Kendo().ProgressBar()
+```
+    @(Html.Kendo().ProgressBar()
         .Name("progressbar")
         .Type(ProgressBarType.Percent)
         .Animation(a => a.Duration(600))
@@ -37,7 +37,7 @@ The following example demonstrates how to define the ProgressBar by using the Pr
 
 The following example demonstrates the basic configuration of the ProgressBar HtmlHelper and how to get the ProgressBar instance.
 
-```tab-Razor
+```
     @(Html.Kendo().ProgressBar()
         .Name("progressBar")
         .Type(ProgressBarType.Chunk)

@@ -3,48 +3,48 @@
         name: "ti-ER",
         numberFormat: {
             pattern: ["-n"],
-            decimals: 1,
+            decimals: 2,
             ",": ",",
             ".": ".",
-            groupSize: [3,0],
+            groupSize: [3],
             percent: {
                 pattern: ["-n%","n%"],
-                decimals: 1,
+                decimals: 2,
                 ",": ",",
                 ".": ".",
-                groupSize: [3,0],
+                groupSize: [3],
                 symbol: "%"
             },
             currency: {
                 name: "Eritrean Nakfa",
                 abbr: "ERN",
-                pattern: ["-$n","n$"],
+                pattern: ["-$n","$n"],
                 decimals: 2,
                 ",": ",",
                 ".": ".",
                 groupSize: [3],
-                symbol: "ERN"
+                symbol: "Nfk"
             }
         },
         calendars: {
             standard: {
                 days: {
-                    names: ["ሰንበት","ሰኑይ","ሰሉስ","ሮቡዕ","ሓሙስ","ዓርቢ","ቀዳም"],
-                    namesAbbr: ["ሰንበት","ሰኑይ","ሰሉስ","ሮቡዕ","ሓሙስ","ዓርቢ","ቀዳም"],
-                    namesShort: ["ሰን","ሰኑ","ሰሉ","ሮቡ","ሓሙ","ዓር","ቀዳ"]
+                    names: ["ሰንበት","ሰኑይ","ሰሉስ","ረቡዕ","ሓሙስ","ዓርቢ","ቀዳም"],
+                    namesAbbr: ["ሰንበት","ሰኑይ","ሰሉስ","ረቡዕ","ሓሙስ","ዓርቢ","ቀዳም"],
+                    namesShort: ["ሰንበት","ሰኑይ","ሰሉስ","ረቡዕ","ሓሙስ","ዓርቢ","ቀዳም"]
                 },
                 months: {
                     names: ["ጥሪ","ለካቲት","መጋቢት","ሚያዝያ","ግንቦት","ሰነ","ሓምለ","ነሓሰ","መስከረም","ጥቅምቲ","ሕዳር","ታሕሳስ"],
-                    namesAbbr: ["ጥሪ","የካቲት","መጋቢት","ሚያዝያ","ግንቦት","ሰነ","ሓምለ","ነሓሰ","መስከረም","ጥቅምቲ","ሕዳር","ታሕሳስ"]
+                    namesAbbr: ["ጥሪ","ለካቲ","መጋቢ","ሚያዝ","ግንቦ","ሰነ","ሓምለ","ነሓሰ","መስከ","ጥቅም","ሕዳር","ታሕሳ"]
                 },
-                AM: ["ንጉሆ","ንጉሆ","ንጉሆ"],
-                PM: ["ድሕሪ ቐትሪ","ድሕሪ ቐትሪ","ድሕሪ ቐትሪ"],
+                AM: ["AM","am","AM"],
+                PM: ["PM","pm","PM"],
                 patterns: {
-                    d: "d/M/yyyy",
-                    D: "dddd '፣' MMMM d 'መዓልቲ' yyyy",
-                    F: "dddd '፣' MMMM d 'መዓልቲ' yyyy h:mm:ss tt",
-                    g: "d/M/yyyy h:mm tt",
-                    G: "d/M/yyyy h:mm:ss tt",
+                    d: "dd/MM/yyyy",
+                    D: "dddd፡ dd MMMM መዓልቲ yyyy gg",
+                    F: "dddd፡ dd MMMM መዓልቲ yyyy gg h:mm:ss tt",
+                    g: "dd/MM/yyyy h:mm tt",
+                    G: "dd/MM/yyyy h:mm:ss tt",
                     m: "MMMM d",
                     M: "MMMM d",
                     s: "yyyy'-'MM'-'dd'T'HH':'mm':'ss",

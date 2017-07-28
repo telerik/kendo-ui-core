@@ -8,7 +8,7 @@
             ".": ".",
             groupSize: [3],
             percent: {
-                pattern: ["-n %","n %"],
+                pattern: ["-n%","n%"],
                 decimals: 2,
                 ",": ",",
                 ".": ".",
@@ -37,8 +37,8 @@
                     names: ["January","February","March","April","May","June","July","August","September","October","November","December"],
                     namesAbbr: ["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"]
                 },
-                AM: ["a.m.","a.m.","A.M."],
-                PM: ["p.m.","p.m.","P.M."],
+                AM: ["AM","am","AM"],
+                PM: ["PM","pm","PM"],
                 patterns: {
                     d: "d/MM/yyyy",
                     D: "dddd, d MMMM yyyy",
@@ -56,7 +56,7 @@
                 },
                 "/": "/",
                 ":": ":",
-                firstDay: 1
+                firstDay: 0
             }
         }
     }

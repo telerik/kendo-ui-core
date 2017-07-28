@@ -30,21 +30,21 @@
             standard: {
                 days: {
                     names: ["niedziela","poniedziałek","wtorek","środa","czwartek","piątek","sobota"],
-                    namesAbbr: ["N","Pn","Wt","Śr","Cz","Pt","So"],
-                    namesShort: ["N","Pn","Wt","Śr","Cz","Pt","So"]
+                    namesAbbr: ["niedz.","pon.","wt.","śr.","czw.","pt.","sob."],
+                    namesShort: ["niedz.","pon.","wt.","śr.","czw.","pt.","sob."]
                 },
                 months: {
                     names: ["styczeń","luty","marzec","kwiecień","maj","czerwiec","lipiec","sierpień","wrzesień","październik","listopad","grudzień"],
                     namesAbbr: ["sty","lut","mar","kwi","maj","cze","lip","sie","wrz","paź","lis","gru"]
                 },
-                AM: [""],
-                PM: [""],
+                AM: ["AM","am","AM"],
+                PM: ["PM","pm","PM"],
                 patterns: {
-                    d: "yyyy-MM-dd",
-                    D: "d MMMM yyyy",
-                    F: "d MMMM yyyy HH:mm:ss",
-                    g: "yyyy-MM-dd HH:mm",
-                    G: "yyyy-MM-dd HH:mm:ss",
+                    d: "dd.MM.yyyy",
+                    D: "dddd, d MMMM yyyy",
+                    F: "dddd, d MMMM yyyy HH:mm:ss",
+                    g: "dd.MM.yyyy HH:mm",
+                    G: "dd.MM.yyyy HH:mm:ss",
                     m: "d MMMM",
                     M: "d MMMM",
                     s: "yyyy'-'MM'-'dd'T'HH':'mm':'ss",
@@ -54,7 +54,7 @@
                     y: "MMMM yyyy",
                     Y: "MMMM yyyy"
                 },
-                "/": "-",
+                "/": ".",
                 ":": ":",
                 firstDay: 1
             }

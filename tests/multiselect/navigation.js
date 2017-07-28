@@ -157,6 +157,40 @@
         equal(multiselect.tagList.children().length, 1);
     });
 
+    test("MultiSelect selects all on CTRL+A", function() {
+        var multiselect = new MultiSelect(select);
+
+        multiselect.open();
+
+        multiselect.input.trigger({
+            type: "keydown",
+            keyCode: 65,
+            ctrlKey: true
+        });
+
+        equal(multiselect.tagList.children().length, 5);
+    });
+
+    test("MultiSelect selects item on CTRL+SPACEBAR", 2, function() {
+        var multiselect = new MultiSelect(select);
+
+        multiselect.open();
+
+        multiselect.input.trigger({
+            type: "keydown",
+            keyCode: keys.DOWN
+        });
+
+        multiselect.input.trigger({
+            type: "keydown",
+            keyCode: keys.SPACEBAR,
+            ctrlKey: true
+        });
+
+        equal(multiselect.tagList.children().length, 1);
+        equal(multiselect.tagList.children().eq(0).text().indexOf("Option1"), 0);
+    });
+
     test("MultiSelect closes on ENTER", function() {
         var multiselect = new MultiSelect(select);
 

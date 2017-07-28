@@ -17,13 +17,13 @@ The Kendo UI hybrid framework is designed to help developers build mobile app ex
 
 ![Illustration of Kendo UI mobile adaptive rendering](/images/mobile/km-adaptive-rending-illustration.png)
 
-Where some mobile HTML frameworks focus on providing a one-size-fits-all experience, the Kendo UI hybrid framework focuses on delivering perfectly tailored experiences for different mobile platforms. Built and packaged correctly, the goal of such an application is to be virtually indistinguishable to end-users from a native SDK app.
+While some mobile HTML frameworks focus on providing a one-size-fits-all experience, the Kendo UI hybrid framework focuses on delivering perfectly tailored experiences for different mobile platforms. Built and packaged correctly, the goal of such an application is to be virtually indistinguishable to end-users from a native SDK app.
 
 The advantage of building apps with HTML, JavaScript, and Kendo UI is that you are able to maintain a single code base to target all major app platforms. Your team can focus on becoming masters of HTML, JavaScript, and CSS, rather than being average practitioners of Objective-C, Java, .NET, UIKit, and the myriad of other developer skills needed for cross-platform mobile app development.
 
-## Building Blocks of Hybrid Apps
+## Building Blocks of Hybrid Applications
 
-The Kendo UI hybrid apps are built entirely with HTML, JavaScript, and CSS. Those are the only skills you will need to build a Kendo UI mobile app that looks and feels native across mobile platforms. If you plan to work with data, make sure you are familiar with [JSON](http://en.wikipedia.org/wiki/JSON).
+The Kendo UI hybrid applications are built entirely with HTML, JavaScript, and CSS. Those are the only skills you will need to build a Kendo UI mobile app that looks and feels native across mobile platforms. If you plan to work with data, make sure you are familiar with [JSON](http://en.wikipedia.org/wiki/JSON).
 
 Applications do not need to be cross-compiled into a native [software-development kit (SDK)](https://en.wikipedia.org/wiki/Software_development_kit) language. Your HTML and JavaScript code is ultimately intended to run on mobile devices, even if you eventually use tools like [Cordova](http://incubator.apache.org/cordova/) to package your application for an app store.
 
@@ -37,9 +37,14 @@ Layouts and Views are defined through HTML. The Application is simply JavaScript
 
 ## Getting Started
 
-The sections below demonstrate how to create the basic structure of a Kendo UI hybrid application by using the building blocks.
+To create the basic structure of a Kendo UI hybrid application by using its building blocks:
+* [Create an HTML page](#create-an-html-page)
+* [Add references to Kendo UI](#add-references-to-kendo-ui)
+* [Define the layout of the application](#define-the-application-layout)
+* [Define the view](#define-the-view)
+* [Initialize the hybrid application](#initialize-the-hybrid-application)
 
-### Step 1: Create HTML Page
+### Create an HTML Page
 
 Kendo UI hybrid apps can be created by using simple HTML pages. First, try creating a page called `index.html` using the code from the example below.
 
@@ -61,7 +66,7 @@ Kendo UI hybrid apps can be created by using simple HTML pages. First, try creat
 >
 > The Kendo UI hybrid Application automatically adds mobile meta tags for you at runtime.
 
-### Step 2: Add References to Kendo UI
+### Add References to Kendo UI
 
 Just as with other parts of the Kendo UI framework, adding Kendo UI to your application is a process of copying the provided JavaScript and CSS assets into your project and then configuring the CSS and JavaScript links. When set up, your app page should look similar to the one demonstrated in the example below.
 
@@ -89,7 +94,7 @@ This example uses the minified versions of Kendo UI scripts and styles that incl
 
 Find out more about installing Kendo UI in your project [this article]({% slug getting_started_installation_kendoui %}) section.
 
-### Step 3: Define the Application Layout
+### Define the Application Layout
 
 The layout is the template of your application. The whole content from views, which you are to create later, are going to be rendered inside of the layout, or layouts&mdash;you can define as many layouts as you need. A layout can contain anything, but generally it is where your app title bar and navigation are going to live. Add a layout to your app with the basic elements demonstrated in the example below.
 
@@ -110,7 +115,7 @@ The layout is the template of your application. The whole content from views, wh
 			<!--View content will render here-->
 			<footer data-role="footer">
 				<div data-role="tabstrip">
-					<a href="#home">Home</a>
+					<a data-icon="home" href="#home">Home</a>
 				</div>
 			</footer>
 		</section>
@@ -124,13 +129,13 @@ Note that the example uses the `data-role` attribute in your HTML. This communic
 
 `<section data-role="layout" data-id="default">`
 
-When the Application is initialized, this block of HTML is going to be initialized as a Kendo UI hybrid layout. The `data-id` attribute is further defined to give this layout a unique name that can be used by your views.
+When the Application is initialized, this block of HTML is going to be initialized as a [Kendo UI Hybrid Layout]({% slug layout_hybridkendoui %}). The `data-id` attribute is further defined to give this layout a unique name that can be used by your views.
 
-Next, for completeness, a couple of Kendo UI hybrid widgets are introduced&mdash;NavBar and TabStrip. Note that they are also configured with the simple `data-role` attribute.
+Next, for completeness, a couple of Kendo UI hybrid widgets are introduced&mdash;[NavBar]({% slug overview_hybridnavbar %}) and [TabStip]({% slug overview_hybridtabstrip %}). Note that they are also configured with the simple `data-role` attribute.
 
-### Step 4: Create View
+### Create the View
 
-Now that the application layout is defined, you need to define at least one view to be displayed when the application loads. Most apps have many views. However, start with the simple configuration from the example below.
+Now that the application layout is defined, you need to define at least one view to be displayed when the application loads. Most apps have multiple views. However, start with the simple configuration from the example below.
 
 ###### Example
 
@@ -153,7 +158,7 @@ Now that the application layout is defined, you need to define at least one view
 			<!--View content will render here-->
 			<footer data-role="footer">
 				<div data-role="tabstrip">
-					<a href="#home">Home</a>
+					<a data-icon="home" href="#home">Home</a>
 				</div>
 			</footer>
 		</section>
@@ -163,13 +168,13 @@ Now that the application layout is defined, you need to define at least one view
 	</body>
 	</html>
 
-The example uses the `data-role` attribute to define your view, and the `data-layout` attribute to tell your view which layout template to use. You are able to put anything inside of a view, including other Kendo UI widgets.
+This example uses the `data-role` attribute to define your view, and the `data-layout` attribute to tell your view which layout template to use. You can add simple HTML or other Kendo UI widgets to the view.
 
 Instead of `<a href="#home">Home</a>`, you can also use `<a href="#/">Home</a>`. By definition, the `#/` URL points to the first view, which is defined in the HTML file or the so-called root view. If you try to run the application now, you see a bunch of HTML, but nothing looks right yet. You need to take one more step to initialize the application.
 
-### Step 5: Initialize the Hybrid App
+### Initialize the Hybrid Application
 
-To make this HTML start looking and feeling like a mobile app, add the line of script from the example below after your jQuery and Kendo UI script links, but before the closing `body` tag.
+To make this HTML start looking like a mobile app, add the following line of script after your jQuery and Kendo UI script links, but before the closing `body` tag.
 
 ###### Example
 
@@ -177,17 +182,37 @@ To make this HTML start looking and feeling like a mobile app, add the line of s
 		var app = new kendo.mobile.Application();
 	</script>
 
-This single line of JavaScript automatically initializes your Kendo UI hybrid application together with all widgets with the `data-role` attributes.
+This automatically initializes your Kendo UI hybrid application together with all widgets with `data-role` attributes.
 
-For a live example refer to [http://jsbin.com/egowef](http://jsbin.com/egowef "Live example of tutorial code running on jsBin"). Load your page in a browser and see the beginnings of your HTML mobile app. If everything works out properly, your basic Kendo UI hybrid application should look like the image below.
+The following example demonstrates the full implementation of the described approach.
 
-**Figure 2: Basic and properly working Kendo UI hybrid application.**
+###### Example
 
-![Basic Kendo UI mobile app progress](/images/mobile/km-basic-app-1.png)
+```html
+    <div id="home" data-role="view" data-layout="default">
+      Hello Mobile World!
+    </div>
+
+    <section data-role="layout" data-id="default">
+      <header data-role="header">
+        <div data-role="navbar">My App</div>
+      </header>
+      <!--View content will render here-->
+      <footer data-role="footer">
+        <div data-role="tabstrip">
+          <a data-icon="home" href="#home">Home</a>
+        </div>
+      </footer>
+    </section>
+
+    <script>
+      var app = new kendo.mobile.Application(document.body);
+    </script>
+```
 
 > **Important**
 >
-> If you have trouble seeing the application, make sure all of your script and CSS resources are loading without error by using the browser developer tools. Some browsers, such as Chrome, block the loading of external resources if you load your page using the `file://` protocol. Instead, test your pages using local web server (`localhost`) or a browser that does not restrict local resources such as Safari.
+> If you have trouble seeing the application when working locally, make sure all of your script and CSS resources are loading without error by using the browser developer tools. Some browsers, such as Chrome, block the loading of external resources if you load your page using the `file://` protocol. Instead, test your pages using local web server (`localhost`) or a browser that does not restrict local resources, such as Firefox.
 
 ## Native Look and Feel
 

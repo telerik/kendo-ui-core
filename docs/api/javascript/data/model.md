@@ -146,7 +146,7 @@ Specifies the type of the field. The available options are `"string"`, `"number"
 
 ##### options.fields.fieldName.from `String`
 
-Specifies the field of the original record whose value is used to populate the Model field.
+Specifies the field of the original record whose value is used to populate the Model field. When CRUD operations (specifically adding new items) are enabled, the original field name should be defined with a `defaultValue` as well, because during updates and creates the Kendo UI DataSource will try to construct a data item object, which matches the original (server-side) data item structure. For more information and an example, please refer to [How to Use Nested Model Properties]({% slug howto_use_nested_model_properties_grid %}).
 
 ##### options.fields.fieldName.validation `Object`
 

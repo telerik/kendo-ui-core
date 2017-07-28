@@ -4,13 +4,13 @@
         numberFormat: {
             pattern: ["-n"],
             decimals: 2,
-            ",": ",",
+            ",": " ",
             ".": ".",
             groupSize: [3],
             percent: {
-                pattern: ["-%n","%n"],
+                pattern: ["-n%","n%"],
                 decimals: 2,
-                ",": ",",
+                ",": " ",
                 ".": ".",
                 groupSize: [3],
                 symbol: "%"
@@ -18,9 +18,9 @@
             currency: {
                 name: "South African Rand",
                 abbr: "ZAR",
-                pattern: ["$-n","$ n"],
+                pattern: ["-$n","$n"],
                 decimals: 2,
-                ",": ",",
+                ",": " ",
                 ".": ".",
                 groupSize: [3],
                 symbol: "R"
@@ -29,34 +29,34 @@
         calendars: {
             standard: {
                 days: {
-                    names: ["Lamorena","Mošupologo","Labobedi","Laboraro","Labone","Labohlano","Mokibelo"],
-                    namesAbbr: ["Lam","Moš","Lbb","Lbr","Lbn","Lbh","Mok"],
-                    namesShort: ["La","Mo","Lb","Lr","Ln","Lh","Mk"]
+                    names: ["Sontaga","Mosupalogo","Labobedi","Laboraro","Labone","Labohlano","Mokibelo"],
+                    namesAbbr: ["Son","Mos","Bed","Rar","Ne","Hla","Mok"],
+                    namesShort: ["Son","Mos","Bed","Rar","Ne","Hla","Mok"]
                 },
                 months: {
-                    names: ["Janaware","Feberware","Matšhe","Aprele","Mei","June","Julae","Agostose","Setemere","Oktoboro","Nofemere","Disemere"],
-                    namesAbbr: ["Jan","Feb","Matš","Apr","Mei","June","Julae","Agost","Set","Oky","Nof","Dis"]
+                    names: ["Janaware","Feberware","Matšhe","Aporele","Mei","June","Julae","Agostose","Setemere","Oktobore","Nofemere","Disemere"],
+                    namesAbbr: ["Jan","Feb","Mat","Apo","Mei","Jun","Jul","Ago","Set","Okt","Nof","Dis"]
                 },
-                AM: ["MS","ms","MS"],
-                PM: ["TP","tp","TP"],
+                AM: ["AM","am","AM"],
+                PM: ["PM","pm","PM"],
                 patterns: {
-                    d: "dd/MM/yy",
-                    D: "dd MMMM yyyy",
-                    F: "dd MMMM yyyy hh:mm:ss tt",
-                    g: "dd/MM/yy hh:mm tt",
-                    G: "dd/MM/yy hh:mm:ss tt",
+                    d: "yyyy-MM-dd",
+                    D: "yyyy MMMM d, dddd",
+                    F: "yyyy MMMM d, dddd HH:mm:ss",
+                    g: "yyyy-MM-dd HH:mm",
+                    G: "yyyy-MM-dd HH:mm:ss",
                     m: "MMMM d",
                     M: "MMMM d",
                     s: "yyyy'-'MM'-'dd'T'HH':'mm':'ss",
-                    t: "hh:mm tt",
-                    T: "hh:mm:ss tt",
+                    t: "HH:mm",
+                    T: "HH:mm:ss",
                     u: "yyyy'-'MM'-'dd HH':'mm':'ss'Z'",
-                    y: "MMMM yyyy",
-                    Y: "MMMM yyyy"
+                    y: "yyyy MMMM",
+                    Y: "yyyy MMMM"
                 },
-                "/": "/",
+                "/": "-",
                 ":": ":",
-                firstDay: 1
+                firstDay: 0
             }
         }
     }

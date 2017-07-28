@@ -6,23 +6,23 @@
             decimals: 2,
             ",": ",",
             ".": ".",
-            groupSize: [3,2,0],
+            groupSize: [3,2],
             percent: {
                 pattern: ["-n%","n%"],
                 decimals: 2,
                 ",": ",",
                 ".": ".",
-                groupSize: [3,2,0],
+                groupSize: [3,2],
                 symbol: "%"
             },
             currency: {
-                name: "Rupee",
+                name: "Indian Rupee",
                 abbr: "INR",
                 pattern: ["$ -n","$ n"],
                 decimals: 2,
                 ",": ",",
                 ".": ".",
-                groupSize: [3,2,0],
+                groupSize: [3,2],
                 symbol: "₹"
             }
         },

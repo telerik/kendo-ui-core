@@ -7,7 +7,7 @@ slug: htmlhelpers_splitter_aspnetcore
 
 # Splitter HtmlHelper Overview
 
-The Splitter HtmlHelper extension is a server-side wrapper for the [Kendo UI Splitter](http://demos.telerik.com/kendo-ui/splitter/index).
+The Splitter HtmlHelper extension is a server-side wrapper for the [Kendo UI Splitter](http://demos.telerik.com/kendo-ui/splitter/index) widget.
 
 It allows you to configure the Kendo UI Splitter widget from server-side code. The [Splitter](http://docs.telerik.com/kendo-ui/controls/layout/splitter/overview) provides a dynamic layout of resizable and collapsible panes. It converts the children of an HTML element into an interactive layout by adding resize and collapse handles depending on its configuration. The vertical and horizontal orientation of a Kendo UI Splitter can be combined to build complex layouts.
 
@@ -83,8 +83,7 @@ The following example demonstrates how to define the Splitter by using the Split
 
 The following example demonstrates the basic configuration of the Splitter HtmlHelper and how to get the Splitter instance.
 
-```tab-Razor
-
+```
     @(Html.Kendo().Splitter()
         .Name("splitter")
         .HtmlAttributes(new { style = "height: 400px;" })

@@ -482,7 +482,6 @@ For more information on the provided [browser support]({% slug wbe_browserand_op
 - Shadow DOM is not rendered.
 - SVG referenced with the `<img>` tag will not render in Internet Explorer, because [IE taints the canvas](http://stackoverflow.com/questions/31484379/ie-canvas-datauri-security-error).
 - Rendering of the `<select>` elements is imperfect. Some minor issues can be noticed, like wrong padding or missing the drop down arrow. It is recommended to use a Kendo UI DropDown or ListView widget instead of a plain `<select>`.
-- When the generated document is opened with Acrobat Reader and you try to use the `Save As` option from the file menu, the following error is thrown: `The document could not be saved. There was a problem reading(23)`. The solution is to open the Acrobat Reader options (**Edit** > **Preferences**) and to uncheck `Save As optimizes for Fast Web View` in the **Documents** section, which is enabled by default. After this, **Save As** works without errors.
 
 ## See Also
 

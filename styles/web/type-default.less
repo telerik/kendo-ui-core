@@ -1,14 +1,15 @@
+// Widget
+@widget-background-color: @background;
+@widget-text-color: @normal-text-color;
+@widget-border-color: contrast(@base, lighten(@base, 1%), darken(@base, 8%), 0.5);
+@widget-gradient: @normal-gradient;
+@widget-shadow: none;
 @tooltip-texture: url('textures/highlight.png');
 @sprite-image: url('@{image-folder}/sprite.png');
 @sprite-image-2x: url('@{image-folder}/sprite_2x.png');
 @sprite-kpi-image: url('@{image-folder}/sprite_kpi.png');
 @sprite-kpi-image-2x: url('@{image-folder}/sprite_kpi_2x.png');
-@widget-text-color: @normal-text-color;
 @inverse-text-color: contrast(@normal-text-color);
-@widget-gradient: @normal-gradient;
-@widget-background-color: @background;
-@widget-border-color: contrast(@base, lighten(@base, 1%), darken(@base, 8%), 0.5);
-@widget-shadow: none;
 @select-background-color: @base;
 @select-border-color: contrast(@base, lighten(@base, 1%), darken(@base, 20%), 0.5);
 @select-hover-background-color: saturate(@hover-background, 1%);
@@ -434,6 +435,10 @@ html .km-pane-wrapper .k-header
 .k-mediaplayer-toolbar
 {
     background-color: fade(@header-background-color, 85%);
+}
+
+.k-hr {
+    border-color: @widget-border-color;
 }
 
 /* icons */
@@ -1119,6 +1124,13 @@ div.k-filebrowser-dropzone em
 }
 .k-file .k-upload-status {
     color: @normal-text-color;
+}
+
+.k-decade,
+.k-century {
+    .k-other-month.k-state-hover .k-link {
+        background: none;
+    }
 }
 
 /* Progressbar */

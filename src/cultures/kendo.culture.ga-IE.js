@@ -29,20 +29,20 @@
         calendars: {
             standard: {
                 days: {
-                    names: ["Domhnach","Luan","Máirt","Céadaoin","Déardaoin","Aoine","Satharn"],
-                    namesAbbr: ["Domh","Luan","Máirt","Céad","Déar","Aoi","Sath"],
-                    namesShort: ["Do","Lu","Má","Cé","De","Ao","Sa"]
+                    names: ["Dé Domhnaigh","Dé Luain","Dé Máirt","Dé Céadaoin","Déardaoin","Dé hAoine","Dé Sathairn"],
+                    namesAbbr: ["Domh","Luan","Máirt","Céad","Déar","Aoine","Sath"],
+                    namesShort: ["Do","Lu","Má","Cé","Dé","Ao","Sa"]
                 },
                 months: {
                     names: ["Eanáir","Feabhra","Márta","Aibreán","Bealtaine","Meitheamh","Iúil","Lúnasa","Meán Fómhair","Deireadh Fómhair","Samhain","Nollaig"],
-                    namesAbbr: ["Ean","Feabh","Már","Aib","Bealt","Meith","Iúil","Lún","M.Fómh","D.Fómh","Samh","Noll"]
+                    namesAbbr: ["Ean","Feabh","Márta","Aib","Beal","Meith","Iúil","Lún","MFómh","DFómh","Samh","Noll"]
                 },
-                AM: ["r.n.","r.n.","R.N."],
-                PM: ["i.n.","i.n.","I.N."],
+                AM: ["a.m.","a.m.","A.M."],
+                PM: ["p.m.","p.m.","P.M."],
                 patterns: {
                     d: "dd/MM/yyyy",
-                    D: "d MMMM yyyy",
-                    F: "d MMMM yyyy HH:mm:ss",
+                    D: "dddd d MMMM yyyy",
+                    F: "dddd d MMMM yyyy HH:mm:ss",
                     g: "dd/MM/yyyy HH:mm",
                     G: "dd/MM/yyyy HH:mm:ss",
                     m: "d MMMM",
@@ -56,7 +56,7 @@
                 },
                 "/": "/",
                 ":": ":",
-                firstDay: 1
+                firstDay: 0
             }
         }
     }

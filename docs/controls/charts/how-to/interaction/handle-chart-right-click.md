@@ -36,7 +36,6 @@ The example below demonstrates how to handle the right click in Kendo UI Charts.
 
         $("#chart").on("contextmenu", function(e) {
           e.preventDefault();        
-          $("#chart").getKendoChart()._click(e);
           	alert("Right clicked!");
         });
     </script>

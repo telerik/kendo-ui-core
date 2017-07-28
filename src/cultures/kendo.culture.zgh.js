@@ -4,13 +4,13 @@
         numberFormat: {
             pattern: ["-n"],
             decimals: 2,
-            ",": " ",
+            ",": " ",
             ".": ",",
             groupSize: [3],
             percent: {
                 pattern: ["-n %","n %"],
                 decimals: 2,
-                ",": " ",
+                ",": " ",
                 ".": ",",
                 groupSize: [3],
                 symbol: "%"
@@ -18,45 +18,45 @@
             currency: {
                 name: "",
                 abbr: "",
-                pattern: ["-n $","n $"],
+                pattern: ["-n$","n$"],
                 decimals: 2,
-                ",": " ",
+                ",": " ",
                 ".": ",",
                 groupSize: [3],
-                symbol: "ⴷⵔⵎ"
+                symbol: "MAD"
             }
         },
         calendars: {
             standard: {
                 days: {
                     names: ["ⴰⵙⴰⵎⴰⵙ","ⴰⵢⵏⴰⵙ","ⴰⵙⵉⵏⴰⵙ","ⴰⴽⵕⴰⵙ","ⴰⴽⵡⴰⵙ","ⴰⵙⵉⵎⵡⴰⵙ","ⴰⵙⵉⴹⵢⴰⵙ"],
-                    namesAbbr: ["ⵙⵎⵙ","ⵢⵏⵙ","ⵙⵏⵙ","ⴽⵕⵙ","ⴽⵡⵙ","ⵙⵎⵡ","ⵙⴹⵙ"],
-                    namesShort: ["ⵙⵎ","ⵢⵏ","ⵙⵏ","ⴽⵕ","ⴽⵡ","ⵙⵡ","ⵚⴹ"]
+                    namesAbbr: ["ⴰⵙⴰ","ⴰⵢⵏ","ⴰⵙⵉ","ⴰⴽⵕ","ⴰⴽⵡ","ⴰⵙⵉⵎ","ⴰⵙⵉⴹ"],
+                    namesShort: ["ⴰⵙⴰ","ⴰⵢⵏ","ⴰⵙⵉ","ⴰⴽⵕ","ⴰⴽⵡ","ⴰⵙⵉⵎ","ⴰⵙⵉⴹ"]
                 },
                 months: {
-                    names: ["ⵉⵏⵏⴰⵢⵔ","ⴱⵕⴰⵢⵕ","ⵎⴰⵕⵚ","ⵉⴱⵔⵉⵔ","ⵎⴰⵢⵢⵓ","ⵢⵓⵏⵢⵓ","ⵢⵓⵍⵢⵓⵣ","ⵖⵓⵛⵜ","ⵛⵓⵜⴰⵏⴱⵉⵔ","ⴽⵜⵓⴱⵕ","ⵏⵓⵡⴰⵏⴱⵉⵔ","ⴷⵓⵊⴰⵏⴱⵉⵔ"],
-                    namesAbbr: ["ⵏⵢⵔ","ⴱⵕⵢ","ⵎⵕⵚ","ⴱⵔⵔ","ⵎⵢⵢ","ⵢⵏⵢ","ⵢⵍⵢ","ⵖⵛⵜ","ⵛⵜⵏ","ⴽⵜⴱ","ⵏⵡⴱ","ⴷⵊⵏ"]
+                    names: ["ⵉⵏⵏⴰⵢⵔ","ⴱⵕⴰⵢⵕ","ⵎⴰⵕⵚ","ⵉⴱⵔⵉⵔ","ⵎⴰⵢⵢⵓ","ⵢⵓⵏⵢⵓ","ⵢⵓⵍⵢⵓⵣ","ⵖⵓⵛⵜ","ⵛⵓⵜⴰⵏⴱⵉⵔ","ⴽⵜⵓⴱⵔ","ⵏⵓⵡⴰⵏⴱⵉⵔ","ⴷⵓⵊⴰⵏⴱⵉⵔ"],
+                    namesAbbr: ["ⵉⵏⵏ","ⴱⵕⴰ","ⵎⴰⵕ","ⵉⴱⵔ","ⵎⴰⵢ","ⵢⵓⵏ","ⵢⵓⵍ","ⵖⵓⵛ","ⵛⵓⵜ","ⴽⵜⵓ","ⵏⵓⵡ","ⴷⵓⵊ"]
                 },
-                AM: [""],
-                PM: [""],
+                AM: ["AM","am","AM"],
+                PM: ["PM","pm","PM"],
                 patterns: {
-                    d: "dd-MM-yyyy",
-                    D: "dddd, dd MMMM, yyyy",
-                    F: "dddd, dd MMMM, yyyy HH.mm.ss",
-                    g: "dd-MM-yyyy HH.mm",
-                    G: "dd-MM-yyyy HH.mm.ss",
-                    m: "dd MMMM",
-                    M: "dd MMMM",
+                    d: "d/M/yyyy",
+                    D: "dddd d MMMM yyyy",
+                    F: "dddd d MMMM yyyy HH:mm:ss",
+                    g: "d/M/yyyy HH:mm",
+                    G: "d/M/yyyy HH:mm:ss",
+                    m: "MMMM d",
+                    M: "MMMM d",
                     s: "yyyy'-'MM'-'dd'T'HH':'mm':'ss",
-                    t: "HH.mm",
-                    T: "HH.mm.ss",
+                    t: "HH:mm",
+                    T: "HH:mm:ss",
                     u: "yyyy'-'MM'-'dd HH':'mm':'ss'Z'",
-                    y: "MMMM, yyyy",
-                    Y: "MMMM, yyyy"
+                    y: "yyyy MMMM",
+                    Y: "yyyy MMMM"
                 },
-                "/": "-",
-                ":": ".",
-                firstDay: 1
+                "/": "/",
+                ":": ":",
+                firstDay: 6
             }
         }
     }

@@ -19,13 +19,44 @@
         return dialogObject;
     }
 
-    test("clicking on window brings it in front of other windows", function() {
+    test("clicking on window brings it in front of other windows and adds k-state-focused", 2, function() {
+        jasmine.clock().install();
         var firstWindow = createWindow(),
             secondWindow = createWindow();
 
         firstWindow.element.trigger("mousedown");
-
+        jasmine.clock().tick();
         equal(+firstWindow.wrapper.css("zIndex"), +secondWindow.wrapper.css("zIndex") + 2);
+        ok(firstWindow.wrapper.is(".k-state-focused"));
+        jasmine.clock().uninstall();
+    });
+
+    test("clicking on minimized window brings it in front of other windows and adds k-state-focused", 2, function() {
+        jasmine.clock().install();
+        var firstWindow = createWindow(),
+            secondWindow = createWindow();
+
+        firstWindow.minimize();
+        firstWindow.wrapper.trigger("mousedown");
+        jasmine.clock().tick();
+        equal(+firstWindow.wrapper.css("zIndex"), +secondWindow.wrapper.css("zIndex") + 2);
+        ok(firstWindow.wrapper.is(".k-state-focused"));
+        jasmine.clock().uninstall();
+    });
+
+    test("clicking on inactive iframe window adds k-state-focused", 1, function() {
+        jasmine.clock().install();
+        var firstWindow = createWindow({
+                content: "/base/tests/window/blank.html",
+                iframe: true}),
+            secondWindow = createWindow({
+                content: "/base/tests/window/blank.html",
+                iframe: true});
+
+        firstWindow.element.find(".k-overlay").trigger("mousedown");
+        jasmine.clock().tick();
+        ok(firstWindow.wrapper.is(".k-state-focused"));
+        jasmine.clock().uninstall();
     });
 
     asyncTest("loading of iframe triggers load event", 1, function() {
@@ -197,6 +228,21 @@
         dialog.element.press(keys.ESC);
     });
 
+    test("escape key on minimized Window triggers close event", 2, function() {
+        var triggers = 0;
+
+        var dialog = createWindow({
+            close: function(e) {
+                ok(true);
+                ok(e.userTriggered);
+            }
+        });
+
+        dialog.minimize();
+
+        dialog.wrapper.press(keys.ESC);
+    });
+
     test("hitting escape in closing window does not trigger new close", function() {
         var calls = 0;
 
@@ -255,6 +301,55 @@
 
         equal(dialogObject.wrapper.offset().left, offset.left + 10);
     });
+
+    test("up arrow moves minimized window up", function() {
+        var dialogObject = createWindow({});
+        dialogObject.minimize()
+        var dialog = dialogObject.wrapper;
+
+        var offset = dialogObject.wrapper.offset();
+
+        dialog.press(keys.UP);
+
+        QUnit.close(dialogObject.wrapper.offset().top, offset.top - 10, 1);
+    });
+
+    test("down arrow moves minimized window down", function() {
+        var dialogObject = createWindow({});
+        dialogObject.minimize()
+        var dialog = dialogObject.wrapper;
+
+        var offset = dialogObject.wrapper.offset();
+
+        dialog.press(keys.DOWN);
+
+        QUnit.close(dialogObject.wrapper.offset().top, offset.top + 10, 1);
+    });
+
+    test("left arrow moves minimized window left", function() {
+        var dialogObject = createWindow({});
+        dialogObject.minimize()
+        var dialog = dialogObject.wrapper;
+
+        var offset = dialogObject.wrapper.offset();
+
+        dialog.press(keys.LEFT);
+
+        equal(dialogObject.wrapper.offset().left, offset.left - 10);
+    });
+
+    test("right arrow moves minimized window right", function() {
+        var dialogObject = createWindow({});
+        dialogObject.minimize()
+        var dialog = dialogObject.wrapper;
+
+        var offset = dialogObject.wrapper.offset();
+
+        dialog.press(keys.RIGHT);
+
+        equal(dialogObject.wrapper.offset().left, offset.left + 10);
+    });
+
 
     test("ctrl+down arrow expands window", function() {
         var dialogObject = createWindow({ height: 200 });
@@ -338,6 +433,87 @@
         dialog.press(keys.DOWN, { ctrlKey: true });
 
         equal(dialogObject.wrapper.height(), 105);
+    });
+
+    test("alt+p toggles pin", 2, function() {
+        var dialogObject = createWindow({
+            height: 100,
+            maxHeight: 105
+        });
+        var dialog = dialogObject.element;
+
+        dialog.press(80, { altKey: true });
+
+        ok(dialogObject.options.pinned);
+
+        dialog.press(80, { altKey: true });
+
+        ok(!dialogObject.options.pinned);
+    });
+
+    test("alt+up maximizes the window", function() {
+        var dialogObject = createWindow({
+            height: 100,
+            maxHeight: 105
+        });
+        var dialog = dialogObject.element;
+
+        dialog.press(keys.UP, { altKey: true });
+
+        ok(dialogObject.isMaximized());
+    });
+
+    test("alt+down restores a maximized window", function() {
+        var dialogObject = createWindow({
+            height: 100,
+            maxHeight: 105
+        });
+        var dialog = dialogObject.element;
+        dialogObject.maximize();
+        dialog.press(keys.DOWN, { altKey: true });
+
+        ok(!dialogObject.isMaximized());
+    });
+
+    test("alt+down minimizes window", function() {
+        var dialogObject = createWindow({
+            height: 100,
+            maxHeight: 105
+        });
+        var dialog = dialogObject.element;
+
+        dialog.press(keys.DOWN, { altKey: true });
+
+        ok(dialogObject.isMinimized());
+    });
+
+    test("alt+up restores a minimized window", function() {
+        var dialogObject = createWindow({
+            height: 100,
+            maxHeight: 105
+        });
+        var dialog = dialogObject.element;
+        dialogObject.minimize();
+        dialog.press(keys.UP, { altKey: true });
+
+        ok(!dialogObject.isMinimized());
+    });
+
+    asyncTest("alt+r triggers refresh event", 1, function() {
+        var timeout = setTimeout(start, 2000);
+
+        var dialogObject = createWindow({
+            content: "/base/tests/window/blank.html",
+            iframe: true,
+        });
+
+        dialogObject.one("refresh", function(){
+            clearTimeout(timeout);
+            start();
+            ok(true);
+        });
+
+        dialogObject.element.press(82, { altKey: true });
     });
 
     test("resizing window with the keyboard updates widget options", 2, function() {

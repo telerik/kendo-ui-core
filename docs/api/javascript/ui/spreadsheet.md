@@ -1174,7 +1174,7 @@ Those tools which are part of a tool group are defined as array. For example `["
                     {
                         type: "button",
                         text: "Custom",
-                        spriteCssClass: "k-icon k-font-icon k-i-cog",
+                        spriteCssClass: "k-icon k-i-cog",
                         click: function() {
                             window.alert("custom tool");
                         }
@@ -1289,20 +1289,20 @@ Gets the cell contextMenu instance.
 ```
     <div id="spreadsheet"></div>
 
-    <script>      
-        $(function() {            
+    <script>
+        $(function() {
             var spreadsheet = $("#spreadsheet").kendoSpreadsheet().data("kendoSpreadsheet"),
-                cellContextMenu = spreadsheet.cellContextMenu(); 
-              
-          	cellContextMenu.append([{ text: "Highlight", cssClass: "highlight" }]);    
-          	
+                cellContextMenu = spreadsheet.cellContextMenu();
+
+          	cellContextMenu.append([{ text: "Highlight", cssClass: "highlight" }]);
+
             cellContextMenu.bind("select", function(e) {
                var command = $(e.item).text();
-              
+
               if(command == "Highlight") {
               	var sheet = spreadsheet.activeSheet(),
-                    selection = sheet.selection();   
-                
+                    selection = sheet.selection();
+
                 selection.background("green");
               }
            });

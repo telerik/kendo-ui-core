@@ -16,7 +16,7 @@
                 symbol: "%"
             },
             currency: {
-                name: "Convertible Mark",
+                name: "Bosnia-Herzegovina Convertible Mark",
                 abbr: "BAM",
                 pattern: ["-n $","n $"],
                 decimals: 2,

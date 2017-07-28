@@ -95,6 +95,7 @@
                     isVisible = false,
                     content,
                     windowContent,
+                    windowFrame,
                     suppressActions = options && options.actions && !options.actions.length,
                     id;
 
@@ -172,12 +173,27 @@
                 wrapper
                     .on("mouseenter" + NS, TITLEBAR_BUTTONS, proxy(that._buttonEnter, that))
                     .on("mouseleave" + NS, TITLEBAR_BUTTONS, proxy(that._buttonLeave, that))
-                    .on("click" + NS, "> " + TITLEBAR_BUTTONS, proxy(that._windowActionHandler, that));
+                    .on("click" + NS, "> " + TITLEBAR_BUTTONS, proxy(that._windowActionHandler, that))
+                    .on("keydown" + NS, proxy(that._keydown, that))
+                    .on("focus" + NS, proxy(that._focus, that))
+                    .on("blur" + NS, proxy(that._blur, that));
 
                 windowContent
                     .on("keydown" + NS, proxy(that._keydown, that))
                     .on("focus" + NS, proxy(that._focus, that))
                     .on("blur" + NS, proxy(that._blur, that));
+
+                windowFrame  = windowContent.find("." + KCONTENTFRAME)[0];
+
+                if(windowFrame){
+                    $(windowFrame.contentWindow)
+                        .on("blur" + NS, function(){
+                            that._blur();
+                        })
+                        .on("focus" + NS, function(){
+                            that._focus();
+                        });
+                }
 
                 this._resizable();
 
@@ -470,16 +486,51 @@
                     offset, handled,
                     distance = 10,
                     isMaximized = that.options.isMaximized,
+                    isMinimized = that.options.isMinimized,
                     newWidth, newHeight, w, h;
+
                 if (keyCode == keys.ESC && that._closable()) {
                     that._close(false);
                 }
+
                 if (e.target != e.currentTarget || that._closing) {
                     return;
                 }
 
+                 // Refresh
+                if (e.altKey && keyCode == 82) {// Alt + R
+                    that.refresh();
+                }
 
-                if (options.draggable && !e.ctrlKey && !isMaximized) {
+                // Pin/Unpin
+                if (e.altKey && keyCode == 80) {// Alt + P
+                    if(that.options.pinned){
+                        that.unpin();
+                    } else {
+                        that.pin();
+                    }
+                }
+
+                // Maximize/Restore/Miminimize
+                if(e.altKey && keyCode == keys.UP){
+                    if (isMinimized) {
+                        that.restore();
+                        that.element.focus();
+                    } else if (!isMaximized) {
+                        that.maximize();
+                        that.element.focus();
+                    }
+                } else if (e.altKey && keyCode == keys.DOWN){
+                    if (!isMinimized && !isMaximized) {
+                        that.minimize();
+                        that.wrapper.focus();
+                    } else if (isMaximized) {
+                        that.restore();
+                        that.element.focus();
+                    }
+                }
+
+                if (options.draggable && !e.ctrlKey && !e.altKey && !isMaximized) {
                     offset = kendo.getOffset(wrapper);
 
                     if (keyCode == keys.UP) {
@@ -493,7 +544,7 @@
                     }
                 }
 
-                if (options.resizable && e.ctrlKey && !isMaximized) {
+                if (options.resizable && e.ctrlKey && !isMaximized && !isMinimized) {
                     if (keyCode == keys.UP) {
                         handled = true;
                         newHeight = wrapper.height() - distance;
@@ -913,7 +964,15 @@
                 that.element.find("> .k-overlay").remove();
 
                 if (that._shouldFocus(target)) {
-                    that.element.focus();
+                    if (that.isMinimized()) {
+                        setTimeout(function(){
+                            that.wrapper.focus();
+                        });
+                    } else {
+                        setTimeout(function(){
+                            that.element.focus();
+                        });
+                    }
 
                     var scrollTop = $(window).scrollTop(),
                         windowTop = parseInt(wrapper.position().top, 10);
@@ -969,6 +1028,12 @@
                     .find(MINIMIZE_MAXIMIZE).parent().show().end().end()
                     .find(PIN_UNPIN).parent().show();
 
+                if (options.isMaximized) {
+                    that.wrapper.find(".k-i-window-maximize").parent().focus();
+                } else if (options.isMinimized) {
+                    that.wrapper.find(".k-i-window-minimize").parent().focus();
+                }
+
                 that.options.width = restoreOptions.width;
                 that.options.height = restoreOptions.height;
 
@@ -982,6 +1047,9 @@
                 }
 
                 options.isMaximized = options.isMinimized = false;
+
+                this.wrapper.removeAttr("tabindex");
+                this.wrapper.removeAttr("aria-labelled-by");
 
                 that.resize();
 
@@ -1013,6 +1081,8 @@
                 that.wrapper.children(KWINDOWTITLEBAR).find(PIN_UNPIN).parent().toggle(actionId !== "maximize");
 
                 that.trigger(actionId);
+
+                wrapper.find(".k-i-window-restore").parent().focus();
 
                 return that;
             },
@@ -1104,6 +1174,9 @@
 
                     that.options.isMinimized = true;
                 });
+
+                this.wrapper.attr("tabindex", 0);
+                this.wrapper.attr("aria-labelled-by", this.element.attr("aria-labelled-by"));
 
                 return this;
             },

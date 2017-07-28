@@ -16,7 +16,7 @@
                 symbol: "%"
             },
             currency: {
-                name: "Somoni",
+                name: "Tajikistani Somoni",
                 abbr: "TJS",
                 pattern: ["-n $","n $"],
                 decimals: 2,

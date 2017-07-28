@@ -71,11 +71,11 @@ The following example demonstrates how to set a `zip code` mask
 
 > **Important**
 >
-> If no mask is defined, the widget allows for any input.
+> If no mask is defined, the widget allows any input.
 
 ### Define Custom Mask Rules
 
-The MaskedTextBox enables you to define custom mask rules if none of the predefined ones is sufficient. To add a custom rule, use the `Rules` method.
+The MaskedTextBox enables you to define custom mask rules if none of the predefined ones is suitable. To add a custom rule, use the `Rules` method.
 
 The following example demonstrates how to define a custom rule for the `-` (minus) and `+` (plus) symbols.
 

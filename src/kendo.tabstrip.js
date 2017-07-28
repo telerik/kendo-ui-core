@@ -28,6 +28,7 @@ var __meta__ = { // jshint ignore:line
         IMG = "img",
         HREF = "href",
         PREV = "prev",
+        NEXT = "next",
         SHOW = "show",
         LINK = "k-link",
         LAST = "k-last",
@@ -347,10 +348,14 @@ var __meta__ = { // jshint ignore:line
                 return;
             }
 
-            if (key == keys.DOWN || key == keys.RIGHT) {
-                action = rtl && isHorizontal ? PREV : "next";
-            } else if (key == keys.UP || key == keys.LEFT) {
-                action = rtl && isHorizontal ? "next" : PREV;
+            if (key === keys.DOWN && !isHorizontal) {
+                action = NEXT;
+            } else if (key === keys.UP && !isHorizontal) {
+                action = PREV;
+            } else if (key === keys.RIGHT && isHorizontal) {
+                action = rtl ? PREV : NEXT;
+            } else if (key === keys.LEFT && isHorizontal) {
+                action = rtl ? NEXT : PREV;
             } else if (key == keys.ENTER || key == keys.SPACEBAR) {
                 that._click(current);
                 e.preventDefault();
@@ -674,7 +679,7 @@ var __meta__ = { // jshint ignore:line
 
             var that = this,
                 inserted = that._create(tab),
-                referenceContent = that.element.find("#" + referenceTab.attr("aria-controls"));
+                referenceContent = that.element.find("[id='" + referenceTab.attr("aria-controls") + "']");
 
             each(inserted.tabs, function (idx) {
                 var contents = inserted.contents[idx];
@@ -703,7 +708,7 @@ var __meta__ = { // jshint ignore:line
 
             var that = this,
                 inserted = that._create(tab),
-                referenceContent = that.element.find("#" + referenceTab.attr("aria-controls"));
+                referenceContent = that.element.find("[id='" + referenceTab.attr("aria-controls") + "']");
 
             each(inserted.tabs, function (idx) {
                 var contents = inserted.contents[idx];
@@ -792,7 +797,7 @@ var __meta__ = { // jshint ignore:line
                 contents = $();
                 tabs.each(function () {
                     if (/k-tabstrip-items/.test(this.parentNode.className)) {
-                        var element = that.element.find("#" + this.getAttribute("aria-controls"));
+                        var element = that.element.find("[id='" + this.getAttribute("aria-controls") + "']");
                         content = element;
                     } else {
                         content = $("<div class='" + CONTENT + "'/>");
@@ -1266,17 +1271,6 @@ var __meta__ = { // jshint ignore:line
 
           var isAjaxContent = (item.children("." + LINK).data(CONTENTURL) || that._contentUrls[itemIndex] || false) && contentHolder.is(EMPTY),
                 showContentElement = function () {
-                    that.tabGroup.find("." + TABONTOP).removeClass(TABONTOP);
-                    item.addClass(TABONTOP) // change these directly to bring the tab on top.
-                        .css("z-index");
-
-                    if (kendo.size(animation.effects)) {
-                        oldTab.kendoAddClass(DEFAULTSTATE, { duration: animation.duration });
-                        item.kendoAddClass(ACTIVESTATE, { duration: animation.duration });
-                    } else {
-                        oldTab.addClass(DEFAULTSTATE);
-                        item.addClass(ACTIVESTATE);
-                    }
                     oldTab.removeAttr("aria-selected");
                     item.attr("aria-selected", true);
 
@@ -1335,6 +1329,18 @@ var __meta__ = { // jshint ignore:line
 
             visibleContents
                     .removeClass(ACTIVESTATE);
+
+            that.tabGroup.find("." + TABONTOP).removeClass(TABONTOP);
+                    item.addClass(TABONTOP) // change these directly to bring the tab on top.
+                        .css("z-index");
+
+            if (kendo.size(animation.effects)) {
+                oldTab.kendoAddClass(DEFAULTSTATE, { duration: animation.duration });
+                item.kendoAddClass(ACTIVESTATE, { duration: animation.duration });
+            } else {
+                oldTab.addClass(DEFAULTSTATE);
+                item.addClass(ACTIVESTATE);
+            }
 
             visibleContents.attr("aria-hidden", true);
             visibleContents.attr("aria-expanded", false);

@@ -8,7 +8,7 @@
             ".": ".",
             groupSize: [3],
             percent: {
-                pattern: ["-n %","n %"],
+                pattern: ["-n%","n%"],
                 decimals: 2,
                 ",": ",",
                 ".": ".",
@@ -18,7 +18,7 @@
             currency: {
                 name: "Nigerian Naira",
                 abbr: "NGN",
-                pattern: ["$-n","$ n"],
+                pattern: ["-$ n","$ n"],
                 decimals: 2,
                 ",": ",",
                 ".": ".",
@@ -29,34 +29,34 @@
         calendars: {
             standard: {
                 days: {
-                    names: ["Lahadi","Litinin","Talata","Laraba","Alhamis","Juma\u0027a","Asabar"],
-                    namesAbbr: ["Lah","Lit","Tal","Lar","Alh","Jum","Asa"],
-                    namesShort: ["L","L","T","L","A","J","A"]
+                    names: ["Lahadi","Litinin","Talata","Laraba","Alhamis","Jummaʼa","Asabar"],
+                    namesAbbr: ["Lh","Li","Ta","Lr","Al","Ju","As"],
+                    namesShort: ["Lh","Li","Ta","Lr","Al","Ju","As"]
                 },
                 months: {
-                    names: ["Janairu","Fabrairu","Maris","Afrilu","Mayu","Yuni","Yuli","Agusta","Satumba","Oktoba","Nuwamba","Disamba"],
-                    namesAbbr: ["Jan","Fab","Mar","Afr","May","Yun","Yul","Agu","Sat","Okt","Nuw","Dis"]
+                    names: ["Janairu","Faburairu","Maris","Afirilu","Mayu","Yuni","Yuli","Agusta","Satumba","Oktoba","Nuwamba","Disamba"],
+                    namesAbbr: ["Jan","Fab","Mar","Afi","May","Yun","Yul","Agu","Sat","Okt","Nuw","Dis"]
                 },
-                AM: ["Safe","safe","SAFE"],
-                PM: ["Yamma","yamma","YAMMA"],
+                AM: ["AM","am","AM"],
+                PM: ["PM","pm","PM"],
                 patterns: {
                     d: "d/M/yyyy",
-                    D: "dddd, MMMM dd, yyyy",
-                    F: "dddd, MMMM dd, yyyy h:mm:ss tt",
+                    D: "dddd, d MMMM, yyyy",
+                    F: "dddd, d MMMM, yyyy h:mm:ss tt",
                     g: "d/M/yyyy h:mm tt",
                     G: "d/M/yyyy h:mm:ss tt",
-                    m: "d MMMM",
-                    M: "d MMMM",
+                    m: "MMMM d",
+                    M: "MMMM d",
                     s: "yyyy'-'MM'-'dd'T'HH':'mm':'ss",
                     t: "h:mm tt",
                     T: "h:mm:ss tt",
                     u: "yyyy'-'MM'-'dd HH':'mm':'ss'Z'",
-                    y: "MMMM, yyyy",
-                    Y: "MMMM, yyyy"
+                    y: "MMMM yyyy",
+                    Y: "MMMM yyyy"
                 },
                 "/": "/",
                 ":": ":",
-                firstDay: 0
+                firstDay: 1
             }
         }
     }

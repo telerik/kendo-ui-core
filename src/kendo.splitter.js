@@ -207,6 +207,12 @@ var __meta__ = { // jshint ignore:line
                     resizing.move((decrease ? -1 : 1) * that._resizeStep, target);
                 }
                 e.preventDefault();
+            } else if (key === keys.HOME) {
+                resizing.move(-resizing._maxPosition, target);
+                e.preventDefault();
+            } else if (key === keys.END) {
+                resizing.move(resizing._maxPosition, target);
+                e.preventDefault();
             } else if (key === keys.ENTER && resizing) {
                 resizing.end();
                 e.preventDefault();

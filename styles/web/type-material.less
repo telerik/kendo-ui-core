@@ -1,14 +1,15 @@
+// Widget
+@widget-background-color: @background;
+@widget-text-color: @normal-text-color;
+@widget-border-color: contrast(@background, lighten(@background, 9%), darken(@background, 10%), 0.5);
+@widget-gradient: none;
+@widget-shadow: none;
 @sprite-image: url('@{image-folder}/sprite.png');
 @sprite-image-2x: url('@{image-folder}/sprite_2x.png');
 @sprite-kpi-image: url('@{image-folder}/sprite_kpi.png');
 @sprite-kpi-image-2x: url('@{image-folder}/sprite_kpi_2x.png');
 @tooltip-texture: none;
-@widget-text-color: @normal-text-color;
 @inverse-text-color: saturate(@background, 29%);
-@widget-gradient: none;
-@widget-background-color: @background;
-@widget-border-color: contrast(@background, lighten(@background, 9%), darken(@background, 10%), 0.5);
-@widget-shadow: none;
 @input-background-color: @background;
 @input-text-color: @normal-text-color;
 @link-text-color: #428bca;
@@ -32,6 +33,7 @@
 @focused-border-color: #67afe9;
 @focused-shadow: 0 2px 6px rgba(0,0,0,.2), 0 2px 3px rgba(0,0,0,.05);
 @focused-item-shadow: inset 0 0 0 1px contrast(@background, darken(@base, 50%), lighten(@base, 30%), 0.5);
+@focused-menu-item-shadow: inset 0 0 0 1px contrast(@background, darken(@background, 30%), lighten(@background, 23%), 0.5);
 @focused-active-item-shadow: none;
 @active-text-color: @normal-text-color;
 @active-gradient: none;
@@ -462,6 +464,10 @@ html .km-pane-wrapper .k-header
     background-color: @header-background-color;
 }
 
+.k-hr {
+    border-color: @widget-border-color;
+}
+
 /* icons */
 .k-icon:hover,
 .k-state-hover .k-icon,
@@ -883,6 +889,11 @@ td.k-state-focused,
 .k-upload-files .k-button:focus:not(.k-state-disabled):not([disabled])
 {
     .box-shadow(@focused-item-shadow);
+}
+
+.k-menu .k-item.k-state-default.k-state-focused
+{
+    .box-shadow(@focused-menu-item-shadow);
 }
 
 .k-state-focused.k-state-selected,
@@ -2276,8 +2287,8 @@ html .km-pane-wrapper .km-widget,
 @checkbox-hover-border-color: lighten(@normal-text-color, 23%);
 @checkbox-checked-border-color: @accent;
 @checkbox-checked-background-color: @accent;
-@checkbox-checked-color: saturate(@background, 29%);
-@checkbox-active-border-color: lighten(@normal-text-color, 23%);
+@checkbox-checked-color: contrast(@checkbox-checked-background-color, saturate(@background, 29%), );
+@checkbox-active-border-color: lighten(@accent, 23%);
 @checkbox-active-box-shadow: none;
 @checkbox-disabled-background-color: contrast(@background, lighten(@background, 20%), darken(@background, 4%), 0.5);
 @checkbox-disabled-color: @disabled-text-color;
@@ -2285,28 +2296,48 @@ html .km-pane-wrapper .km-widget,
 @checkbox-indeterminate-background-color: @accent;
 @checkbox-indeterminate-border-color: @accent;
 
+.k-checkbox-label:before {
+    background: transparent;
+}
+
 .k-checkbox + .k-checkbox-label:after {
     content: "";
     position: absolute;
     top: 1px;
     left: 1px;
     border-radius: 50%;
-    width: 1em;
-    height: 1em;
+    width: 16px;
+    height: 16px;
+    box-shadow: 0 0 0 0px transparent;
+    transition: box-shadow 0.3s;
+}
+
+.k-checkbox:focus + .k-checkbox-label:before {
+    border-color: @checkbox-border-color;
+}
+.k-checkbox:checked + .k-checkbox-label:before,
+.k-checkbox:checked:hover + .k-checkbox-label:before,
+.k-checkbox:checked + .k-checkbox-label:hover:before {
+    border-color: @checkbox-checked-border-color
 }
 
 .k-checkbox:focus + .k-checkbox-label:after {
-    box-shadow: 0 0 0 12px fadeout(@hover-background, 70%);
+    box-shadow: 0 0 0 12px fadeout(@checkbox-border-color, 80%);
+    background: fadeout(@checkbox-border-color, 80%);
 }
 
 .k-checkbox:active + .k-checkbox-label:after,
 .k-checkbox + .k-checkbox-label:active:after {
-    box-shadow: 0 0 0 12px fadeout(@hover-background, 70%);
+    box-shadow: 0 0 0 12px fadeout(@checkbox-active-border-color, 60%);
+    background: fadeout(@checkbox-active-border-color, 60%);
 }
 
+.k-checkbox:checked:focus + .k-checkbox-label:after,
+.k-checkbox:checked + .k-checkbox-label:focus:after,
 .k-checkbox:checked:active + .k-checkbox-label:after,
 .k-checkbox:checked + .k-checkbox-label:active:after {
-    box-shadow: 0 0 0 12px fadeout(@accent, 70%);
+    box-shadow: 0 0 0 12px fadeout(@checkbox-active-border-color, 60%);
+    background: fadeout(@checkbox-active-border-color, 60%);
 }
 
 .k-checkbox:disabled + .k-checkbox-label:active:after {

@@ -177,7 +177,7 @@
                     equal(this.selectedDataItems().length, 1);
                     equal(this.selectedDataItems()[0].value, 15);
                     equal(this.select().length, 1);
-                    equal(this.select()[0], undefined);
+                    equal(this.select()[0], 15);
                 });
 
                 virtualList.scrollToIndex(25);

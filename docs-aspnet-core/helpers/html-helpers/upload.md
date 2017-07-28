@@ -53,12 +53,12 @@ public class UploadController : Controller
 			foreach (var file in files)
 			{
 				var fileContent = ContentDispositionHeaderValue.Parse(file.ContentDisposition);
-					
+
 				// Some browsers send file names with full path.
 				// We are only interested in the file name.
 				var fileName = Path.GetFileName(fileContent.FileName.Trim('"'));
 				var physicalPath = Path.Combine(HostingEnvironment.WebRootPath, "App_Data", fileName);
-					
+
 				// The files are not actually saved in this demo
 				//file.SaveAs(physicalPath);
 			}
@@ -71,7 +71,7 @@ public class UploadController : Controller
 	public ActionResult Remove(string[] fileNames)
 	{
 		// The parameter of the Remove action must be called "fileNames"
-			
+
 		if (fileNames != null)
 		{
 			foreach (var fullName in fileNames)
@@ -101,8 +101,7 @@ The following example demonstrates the basic configuration of the Upload HtmlHel
 
 ###### Example
 
-```tab-Razor
-
+```
 @(Html.Kendo().Upload()
     .Name("files")
     .Async(a => a

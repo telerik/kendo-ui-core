@@ -4,55 +4,55 @@
         numberFormat: {
             pattern: ["-n"],
             decimals: 2,
-            ",": " ",
+            ",": ".",
             ".": ",",
             groupSize: [3],
             percent: {
                 pattern: ["-n%","n%"],
                 decimals: 2,
-                ",": " ",
+                ",": ".",
                 ".": ",",
                 groupSize: [3],
                 symbol: "%"
             },
             currency: {
-                name: "Azerbaijanian Manat",
+                name: "Azerbaijani Manat",
                 abbr: "AZN",
-                pattern: ["-n $","n $"],
+                pattern: ["-$ n","$ n"],
                 decimals: 2,
-                ",": " ",
+                ",": ".",
                 ".": ",",
                 groupSize: [3],
-                symbol: "man."
+                symbol: "₼"
             }
         },
         calendars: {
             standard: {
                 days: {
-                    names: ["bazar","Bazar ertəsi","çərşənbə axşamı","çərşənbə","Cümə axşamı","Cümə","şənbə"],
-                    namesAbbr: ["B","Be","Ça","Ç","Ca","C","Ş"],
-                    namesShort: ["B","Be","Ça","Ç","Ca","C","Ş"]
+                    names: ["bazar","bazar ertəsi","çərşənbə axşamı","çərşənbə","cümə axşamı","cümə","şənbə"],
+                    namesAbbr: ["B.","B.E.","Ç.A.","Ç.","C.A.","C.","Ş."],
+                    namesShort: ["B.","B.E.","Ç.A.","Ç.","C.A.","C.","Ş."]
                 },
                 months: {
-                    names: ["yanvar","fevral","mart","aprel","may","iyun","iyul","avgust","sentyabr","oktyabr","noyabr","dekabr"],
-                    namesAbbr: ["Yan","Fev","Mar","Apr","May","İyun","İyul","Avg","Sen","Okt","Noy","Dek"]
+                    names: ["Yanvar","Fevral","Mart","Aprel","May","İyun","İyul","Avqust","Sentyabr","Oktyabr","Noyabr","Dekabr"],
+                    namesAbbr: ["yan","fev","mar","apr","may","iyn","iyl","avq","sen","okt","noy","dek"]
                 },
-                AM: [""],
-                PM: [""],
+                AM: ["AM","am","AM"],
+                PM: ["PM","pm","PM"],
                 patterns: {
                     d: "dd.MM.yyyy",
-                    D: "dd MMMM yyyy'-cü il'",
-                    F: "dd MMMM yyyy'-cü il' HH:mm:ss",
+                    D: "d MMMM yyyy, dddd",
+                    F: "d MMMM yyyy, dddd HH:mm:ss",
                     g: "dd.MM.yyyy HH:mm",
                     G: "dd.MM.yyyy HH:mm:ss",
-                    m: "d MMMM",
-                    M: "d MMMM",
+                    m: "MMMM d",
+                    M: "MMMM d",
                     s: "yyyy'-'MM'-'dd'T'HH':'mm':'ss",
                     t: "HH:mm",
                     T: "HH:mm:ss",
                     u: "yyyy'-'MM'-'dd HH':'mm':'ss'Z'",
-                    y: "MMMM yyyy",
-                    Y: "MMMM yyyy"
+                    y: "yyyy MMMM",
+                    Y: "yyyy MMMM"
                 },
                 "/": ".",
                 ":": ":",

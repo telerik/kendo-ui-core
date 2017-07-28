@@ -108,6 +108,20 @@ test('Left arrow moves focus from first to last item', function() {
     ok(menu.wrapper.children(".k-item").last().hasClass(FOCUSEDSTATE));
 });
 
+
+test('Home moves focus to first item', function() {
+    menu.wrapper.focus().press(keys.RIGHT);
+    menu.wrapper.focus().press(keys.HOME);
+
+    ok(menu.wrapper.children(".k-item").first().hasClass(FOCUSEDSTATE));
+});
+
+test('End moves focus from to last item', function() {
+    menu.wrapper.focus().press(keys.LEFT);
+
+    ok(menu.wrapper.children(".k-item").last().hasClass(FOCUSEDSTATE));
+});
+
 test('Mouse events reset the keyboard navigation active item', function() {
     menu.wrapper.focus().press(keys.RIGHT);
 
@@ -121,22 +135,6 @@ test('Mouse events reset the keyboard navigation active item', function() {
     menu.wrapper.press(keys.RIGHT);
 
     ok(secondItem.hasClass(FOCUSEDSTATE));
-});
-
-test('Disabled root item does not open subgroup', function() {
-    menu.wrapper.focus().press(keys.RIGHT).press(keys.RIGHT).press(keys.DOWN);
-
-    var thirdItem = menu.wrapper.children(".k-item").eq(2);
-
-    ok(thirdItem.hasClass(FOCUSEDSTATE));
-});
-
-test('Disabled subitem does not open sub-subgroup', function() {
-    menu.wrapper.focus().press(keys.DOWN).press(keys.DOWN).press(keys.RIGHT);
-
-    var secondSubItem = menu.wrapper.children(".k-item").first().find(".k-item").eq(1);
-
-    ok(secondSubItem.hasClass(FOCUSEDSTATE));
 });
 
 test('Hitting Enter key navigates an item hyperlink', function() {

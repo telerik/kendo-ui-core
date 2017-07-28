@@ -612,4 +612,33 @@
         }, 10);
     });
 
+
+    test("popup is resized based on content", 2, function() {
+        var firstText = "foo";
+        var secondText = "some very long text";
+
+        container.append('<span id="first" title="' + firstText + '"/><span id="second" title="' + secondText + '"/>');
+
+        var tooltip = new Tooltip(container, {
+            filter: "span"
+        });
+
+        tooltip.show(container.find("#first"));
+
+        var tempSpan = $("<span>" + firstText + "</span>").appendTo(QUnit.fixture);
+        var actual = Math.round(tooltip.popup.element.width());
+        var expected = Math.round(tempSpan.width());
+
+        equal(actual, expected);
+
+        tooltip.show(container.find("#second"));
+
+        tempSpan.text(secondText)
+        actual = Math.round(tooltip.popup.element.width());
+        expected = Math.round(tempSpan.width());
+
+        equal(actual, expected);
+
+        tempSpan.remove();
+    });
 })();

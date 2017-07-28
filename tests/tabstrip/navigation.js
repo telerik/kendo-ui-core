@@ -65,7 +65,7 @@ test("clears focused item on blur", function() {
 });
 
 test("selects next item on key DOWN", function() {
-    div.kendoTabStrip();
+    div.kendoTabStrip({tabPosition: "left"});
     addItems(2);
 
     div.focus();
@@ -80,7 +80,7 @@ test("selects next item on key DOWN", function() {
 });
 
 test("misses next item if disabled", function() {
-    div.kendoTabStrip();
+    div.kendoTabStrip({tabPosition: "left"});
     addItems(3);
 
     var tabstrip = div.data("kendoTabStrip");
@@ -116,7 +116,7 @@ test("selects first if last is selected", function() {
 });
 
 test("selects prev item on key UP", function() {
-    div.kendoTabStrip();
+    div.kendoTabStrip({tabPosition: "left"});
     addItems(2);
 
     var tabstrip = div.data("kendoTabStrip");
@@ -149,7 +149,7 @@ test("selects last if current is first", function() {
 
 });
 
-test("in rtl and horizontal layout selects next on DOWN", function() {
+test("in rtl and horizontal layout does not change selection on DOWN", function() {
     div.addClass("k-rtl").kendoTabStrip({animation: false});
     addItems(3);
 
@@ -162,7 +162,7 @@ test("in rtl and horizontal layout selects next on DOWN", function() {
         keyCode: keys.DOWN
     });
 
-    equal(div.find(".k-state-active").index(), 2);
+    equal(div.find(".k-state-active").index(), 0);
 });
 
 test("in rtl and horizontal layout selects next on RIGHT", function() {
@@ -197,7 +197,7 @@ test("in rtl and horizontal layout selects prev on LEFT", function() {
     equal(div.find(".k-state-active").index(), 1);
 });
 
-test("in rtl and horizontal layout selects prev on UP", function() {
+test("in rtl and horizontal layout does not change selection on UP", function() {
     div.addClass("k-rtl").kendoTabStrip({animation: false});
     addItems(3);
 
@@ -210,7 +210,7 @@ test("in rtl and horizontal layout selects prev on UP", function() {
         keyCode: keys.UP
     });
 
-    equal(div.find(".k-state-active").index(), 1);
+    equal(div.find(".k-state-active").index(), 0);
 });
 
 test("in rtl and vertical layout selects prev on UP", function() {
@@ -229,7 +229,7 @@ test("in rtl and vertical layout selects prev on UP", function() {
     equal(div.find(".k-state-active").index(), 2);
 });
 
-test("in rtl and vertical layout selects prev on LEFT", function() {
+test("in rtl and vertical layout does not change selection on LEFT", function() {
     div.addClass("k-rtl").kendoTabStrip({tabPosition: "left", animation: false});
     addItems(3);
 
@@ -242,7 +242,7 @@ test("in rtl and vertical layout selects prev on LEFT", function() {
         keyCode: keys.LEFT
     });
 
-    equal(div.find(".k-state-active").index(), 2);
+    equal(div.find(".k-state-active").index(), 0);
 });
 
 test("in rtl and vertical layout selects next on DOWN", function() {
@@ -261,7 +261,7 @@ test("in rtl and vertical layout selects next on DOWN", function() {
     equal(div.find(".k-state-active").index(), 1);
 });
 
-test("in rtl and vertical layout selects next on RIGHT", function() {
+test("in rtl and vertical layout does not change selection on RIGHT", function() {
     div.addClass("k-rtl").kendoTabStrip({tabPosition: "left", animation: false});
     addItems(3);
 
@@ -274,11 +274,11 @@ test("in rtl and vertical layout selects next on RIGHT", function() {
         keyCode: keys.RIGHT
     });
 
-    equal(div.find(".k-state-active").index(), 1);
+    equal(div.find(".k-state-active").index(), 0);
 });
 
 test("misses prev item if disabled", function() {
-    div.kendoTabStrip();
+    div.kendoTabStrip({tabPosition: "left"});
     addItems(3);
 
     div.focus();

@@ -16,7 +16,7 @@
                 symbol: "%"
             },
             currency: {
-                name: "som",
+                name: "Kyrgystani Som",
                 abbr: "KGS",
                 pattern: ["-n $","n $"],
                 decimals: 2,
@@ -34,19 +34,19 @@
                     namesShort: ["Жш","Дш","Шш","Шр","Бш","Жм","Иш"]
                 },
                 months: {
-                    names: ["январь","февраль","март","апрель","май","июнь","июль","август","сентябрь","октябрь","ноябрь","декабрь"],
+                    names: ["Январь","Февраль","Март","Апрель","Май","Июнь","Июль","Август","Сентябрь","Октябрь","Ноябрь","Декабрь"],
                     namesAbbr: ["янв","фев","мар","апр","май","июн","июл","авг","сен","окт","ноя","дек"]
                 },
                 AM: [""],
                 PM: [""],
                 patterns: {
                     d: "d-MMM yy",
-                    D: "dd'-'MMMM yyyy'-ж.'",
-                    F: "dd'-'MMMM yyyy'-ж.' HH:mm:ss",
+                    D: "dd-MMMM yyyy'-ж.'",
+                    F: "dd-MMMM yyyy'-ж.' HH:mm:ss",
                     g: "d-MMM yy HH:mm",
                     G: "d-MMM yy HH:mm:ss",
-                    m: "d'-'MMMM",
-                    M: "d'-'MMMM",
+                    m: "MMMM d",
+                    M: "MMMM d",
                     s: "yyyy'-'MM'-'dd'T'HH':'mm':'ss",
                     t: "HH:mm",
                     T: "HH:mm:ss",

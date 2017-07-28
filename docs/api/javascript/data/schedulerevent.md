@@ -376,7 +376,7 @@ The timezone of the `start` date.
         id: 1,
         title: "Lunch",
         start: new Date("2013/4/4 12:00"),
-        startTimezone: "Europe/Sofia"
+        startTimezone: "Europe/Sofia",
         end: new Date("2013/4/4 13:00")
     });
     console.log(event.startTimezone); // outputs "Europe/Sofia"

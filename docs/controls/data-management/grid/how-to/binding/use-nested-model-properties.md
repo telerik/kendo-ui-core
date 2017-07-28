@@ -12,6 +12,19 @@ The following example demonstrates how to use nested model properties.
 
 The CRUD operations are not fully configured.
 
+> When using `from` together with CRUD operations and adding of new rows, the original field (or sequence of nested fields) that is used inside `from` needs to be defined in `schema.model.fields` as well. This is necessary, because during updates and creates, the Kendo UI DataSource will try to construct a data item object, which matches the original (server-side) data item structure. For new data items, this structure does not exist and needs to be defined explicitly. For example:
+
+```
+    myClientField1: { from: "myServerField1.foo" },
+    myServerField1: { defaultValue: {} },
+
+    myClientField2: { from: "myServerField2[0].bar" },
+    myServerField2: { defaultValue: [{}] },
+
+    myClientField3: { from: "myServerField3.myServerField4.baz" },
+    myServerField3: { defaultValue: { myServerField4: {} } },
+```
+
 ###### Example
 
 ```html
@@ -49,6 +62,8 @@ The CRUD operations are not fully configured.
                 lname: {
                   from: "person.lname"
                 },
+                // a default value is needed for person to be defined to support additions
+                person: { defaultValue: {} },
                 bdate: {
                   type: "date",
                   from: "person.bdate"
@@ -61,6 +76,7 @@ The CRUD operations are not fully configured.
         editable: {
           mode: "inline"
         },
+        toolbar: ["create"],
         columns: [{
           field: "id",
           title: "ID"

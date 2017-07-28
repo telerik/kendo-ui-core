@@ -7,7 +7,7 @@ slug: htmlhelpers_notification_aspnetcore
 
 # Notification HtmlHelper Overview
 
-The Notification HtmlHelper extension is a server-side wrapper for the [Kendo UI Notification](http://demos.telerik.com/kendo-ui/notification/index).
+The Notification HtmlHelper extension is a server-side wrapper for the [Kendo UI Notification](http://demos.telerik.com/kendo-ui/notification/index) widget.
 
 It allows you to configure the Kendo UI Notification widget from server-side code. The [Notification](http://docs.telerik.com/kendo-ui/controls/layout/notification/overview) provides a styled UI widget with arbitrary content, which can provide information to the user on various occasions.
 
@@ -19,8 +19,7 @@ The following example demonstrates how to define the Notification by using the N
 
 ###### Example
 
-```tab-Razor
-
+```
    @(Html.Kendo().Notification()
         .Name("notification")
     )
@@ -38,7 +37,7 @@ The following example demonstrates how to define the Notification by using the N
 
 The following example demonstrates the basic configuration of the Notification HtmlHelper and how to get the Notification instance.
 
-```tab-Razor    
+```    
     @(Html.Kendo().Notification()
         .Name("notification")
         .Stacking(NotificationStackingSettings.Down)

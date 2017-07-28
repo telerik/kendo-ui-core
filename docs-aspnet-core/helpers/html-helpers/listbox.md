@@ -7,7 +7,7 @@ slug: htmlhelpers_listbox_aspnetcore
 
 # ListBox HtmlHelper Overview
 
-The ListBox HtmlHelper extension is a server-side wrapper for the [Kendo UI ListBox](https://demos.telerik.com/kendo-ui/listbox/index).
+The ListBox HtmlHelper extension is a server-side wrapper for the [Kendo UI ListBox](https://demos.telerik.com/kendo-ui/listbox/index) widget.
 
 It displays a list of data that is contained in a box and allows single or multiple selection, reordering of selected items, and deleting items and features keyboard navigation as well as the dragging and dropping of items. You can also connect the ListBox with another list-box and customize the widget with the use of templates, toolbar positioning, placeholder and hint, and localization of its command buttons messages.
 
@@ -56,8 +56,7 @@ The following example demonstrates the basic configuration for the ListBox HtmlH
 
 ###### Example
 
-```tab-Razor
-
+```
     @(Html.Kendo().ListBox()
         .Name("optional")
         .Toolbar(toolbar =>

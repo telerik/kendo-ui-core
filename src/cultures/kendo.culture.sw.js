@@ -8,7 +8,7 @@
             ".": ".",
             groupSize: [3],
             percent: {
-                pattern: ["-n %","n %"],
+                pattern: ["-n%","n%"],
                 decimals: 2,
                 ",": ",",
                 ".": ".",
@@ -18,41 +18,41 @@
             currency: {
                 name: "",
                 abbr: "",
-                pattern: ["($n)","$n"],
+                pattern: ["-$n","$n"],
                 decimals: 2,
                 ",": ",",
                 ".": ".",
                 groupSize: [3],
-                symbol: "KSh"
+                symbol: "Ksh"
             }
         },
         calendars: {
             standard: {
                 days: {
                     names: ["Jumapili","Jumatatu","Jumanne","Jumatano","Alhamisi","Ijumaa","Jumamosi"],
-                    namesAbbr: ["Jumap.","Jumat.","Juman.","Jumat.","Alh.","Iju.","Jumam."],
-                    namesShort: ["P","T","N","T","A","I","M"]
+                    namesAbbr: ["Jumapili","Jumatatu","Jumanne","Jumatano","Alhamisi","Ijumaa","Jumamosi"],
+                    namesShort: ["Jumapili","Jumatatu","Jumanne","Jumatano","Alhamisi","Ijumaa","Jumamosi"]
                 },
                 months: {
                     names: ["Januari","Februari","Machi","Aprili","Mei","Juni","Julai","Agosti","Septemba","Oktoba","Novemba","Desemba"],
-                    namesAbbr: ["Jan","Feb","Mac","Apr","Mei","Jun","Jul","Ago","Sep","Okt","Nov","Dec"]
+                    namesAbbr: ["Jan","Feb","Mac","Apr","Mei","Jun","Jul","Ago","Sep","Okt","Nov","Des"]
                 },
                 AM: ["AM","am","AM"],
                 PM: ["PM","pm","PM"],
                 patterns: {
-                    d: "M/d/yyyy",
-                    D: "dddd, MMMM dd, yyyy",
-                    F: "dddd, MMMM dd, yyyy h:mm:ss tt",
-                    g: "M/d/yyyy h:mm tt",
-                    G: "M/d/yyyy h:mm:ss tt",
-                    m: "MMMM dd",
-                    M: "MMMM dd",
+                    d: "dd/MM/yyyy",
+                    D: "dddd, d MMMM yyyy",
+                    F: "dddd, d MMMM yyyy HH:mm:ss",
+                    g: "dd/MM/yyyy HH:mm",
+                    G: "dd/MM/yyyy HH:mm:ss",
+                    m: "d MMMM",
+                    M: "d MMMM",
                     s: "yyyy'-'MM'-'dd'T'HH':'mm':'ss",
-                    t: "h:mm tt",
-                    T: "h:mm:ss tt",
+                    t: "HH:mm",
+                    T: "HH:mm:ss",
                     u: "yyyy'-'MM'-'dd HH':'mm':'ss'Z'",
-                    y: "MMMM, yyyy",
-                    Y: "MMMM, yyyy"
+                    y: "MMMM yyyy",
+                    Y: "MMMM yyyy"
                 },
                 "/": "/",
                 ":": ":",

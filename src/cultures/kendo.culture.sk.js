@@ -23,7 +23,7 @@
                 ",": " ",
                 ".": ",",
                 groupSize: [3],
-                symbol: "EUR"
+                symbol: "€"
             }
         },
         calendars: {
@@ -35,14 +35,14 @@
                 },
                 months: {
                     names: ["január","február","marec","apríl","máj","jún","júl","august","september","október","november","december"],
-                    namesAbbr: ["1","2","3","4","5","6","7","8","9","10","11","12"]
+                    namesAbbr: ["jan","feb","mar","apr","máj","jún","júl","aug","sep","okt","nov","dec"]
                 },
-                AM: ["dop.","dop.","DOP."],
-                PM: ["odp.","odp.","ODP."],
+                AM: ["AM","am","AM"],
+                PM: ["PM","pm","PM"],
                 patterns: {
                     d: "d.M.yyyy",
-                    D: "d. MMMM yyyy",
-                    F: "d. MMMM yyyy H:mm:ss",
+                    D: "dddd, d. MMMM yyyy",
+                    F: "dddd, d. MMMM yyyy H:mm:ss",
                     g: "d.M.yyyy H:mm",
                     G: "d.M.yyyy H:mm:ss",
                     m: "d. MMMM",

@@ -1,17 +1,18 @@
+// Widget
+@widget-background-color: @background;
+@widget-text-color: @normal-text-color;
+@widget-border-color: lighten(@background, 26%);
+@widget-gradient: none;
+@widget-shadow: none;
 @sprite-image: url('@{image-folder}/sprite.png');
 @sprite-image-2x: url('@{image-folder}/sprite_2x.png');
 @sprite-kpi-image: url('@{image-folder}/sprite_kpi.png');
 @sprite-kpi-image-2x: url('@{image-folder}/sprite_kpi_2x.png');
 @tooltip-texture: url('textures/highlight.png');
-@widget-gradient: none;
-@widget-shadow: none;
 @hover-shadow: none;
 @selected-shadow: none;
 @active-gradient: none;
 @active-shadow: none;
-@widget-background-color: @background;
-@widget-border-color: lighten(@background, 26%);
-@widget-text-color: @normal-text-color;
 @inverse-text-color: darken(@accent, 27%);
 @header-background-color: @base;
 @header-text-color: @normal-text-color;
@@ -427,6 +428,10 @@ html .km-pane-wrapper .k-header
 
 .k-mediaplayer-toolbar {
     background: fade(@header-background-color, 85%);
+}
+
+.k-hr {
+    border-color: @widget-border-color;
 }
 
 /* icons */
@@ -2275,7 +2280,7 @@ html .km-pane-wrapper .km-widget,
 @checkbox-border-radius: 3px;
 @checkbox-background-color: darken(@base, 7%);
 @checkbox-hover-border-color: @normal-text-color;
-@checkbox-hover-box-shadow: 0 0 1px 0 #fff;
+@checkbox-hover-box-shadow: 0 0 0 1px #fff;
 @checkbox-checked-border-color: @normal-text-color;
 @checkbox-checked-color: @normal-text-color;
 @checkbox-active-border-color: @normal-text-color;

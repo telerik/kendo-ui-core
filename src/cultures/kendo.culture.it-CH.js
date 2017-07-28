@@ -23,7 +23,7 @@
                 ",": "'",
                 ".": ".",
                 groupSize: [3],
-                symbol: "fr."
+                symbol: "CHF"
             }
         },
         calendars: {
@@ -31,18 +31,18 @@
                 days: {
                     names: ["domenica","lunedì","martedì","mercoledì","giovedì","venerdì","sabato"],
                     namesAbbr: ["dom","lun","mar","mer","gio","ven","sab"],
-                    namesShort: ["do","lu","ma","me","gi","ve","sa"]
+                    namesShort: ["dom","lun","mar","mer","gio","ven","sab"]
                 },
                 months: {
                     names: ["gennaio","febbraio","marzo","aprile","maggio","giugno","luglio","agosto","settembre","ottobre","novembre","dicembre"],
                     namesAbbr: ["gen","feb","mar","apr","mag","giu","lug","ago","set","ott","nov","dic"]
                 },
-                AM: [""],
-                PM: [""],
+                AM: ["AM","am","AM"],
+                PM: ["PM","pm","PM"],
                 patterns: {
                     d: "dd.MM.yyyy",
-                    D: "dddd, d. MMMM yyyy",
-                    F: "dddd, d. MMMM yyyy HH:mm:ss",
+                    D: "dddd, d MMMM yyyy",
+                    F: "dddd, d MMMM yyyy HH:mm:ss",
                     g: "dd.MM.yyyy HH:mm",
                     G: "dd.MM.yyyy HH:mm:ss",
                     m: "d MMMM",
