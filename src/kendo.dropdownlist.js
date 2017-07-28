@@ -231,6 +231,7 @@ var __meta__ = { // jshint ignore:line
                     that._filterSource();
                 }
             } else if (that._allowOpening()) {
+                that._open = true;
                 that.popup.one("activate", that._focusInputHandler);
                 that.popup.open();
                 that._resizeFilterInput();
@@ -892,7 +893,7 @@ var __meta__ = { // jshint ignore:line
                 return;
             }
 
-            if (filterInput && compareElement[0] === active) {
+            if (filterInput && (compareElement[0] === active || this._open)) {
                 this._prevent = true;
                 this._focused = element.focus();
             }

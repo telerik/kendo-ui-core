@@ -6,6 +6,7 @@ page_title: Bind a DropDownList Editor in the Kendo UI Grid ASP.NET.Core
 slug: dropdownlist_custom_editor_aspnetcore_grid
 position: 0
 tags: aspnet, core, kendo, grid, editor, dropdownlist,custom,editing, inline,incell, howto, bind, model
+res_type: kb
 ---
 
 ## Environment

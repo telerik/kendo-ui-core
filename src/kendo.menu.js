@@ -67,7 +67,7 @@ var __meta__ = { // jshint ignore:line
         popupSelector = groupSelector + "," + animationContainerSelector,
         allItemsSelector = ":not(.k-list) > .k-item",
         disabledSelector = ".k-item.k-state-disabled",
-        itemSelector = ".k-item:not(.k-state-disabled)",
+        itemSelector = ".k-item",
         linkSelector = ".k-item:not(.k-state-disabled) > .k-link",
         exclusionSelector = ":not(.k-item.k-separator)",
         nextSelector = itemSelector + exclusionSelector + ":eq(0)",
@@ -1699,7 +1699,7 @@ var __meta__ = { // jshint ignore:line
                 target = hoverItem.children(".k-link");
                 if (target.length > 0) {
                     that._click({ target: target[0], preventDefault: function () {}, enterKey: true });
-                    if (hasChildren) {
+                    if (hasChildren && !hoverItem.hasClass(DISABLEDSTATE)) {
                         that.open(hoverItem);
                         that._moveHover(hoverItem, that._childPopupElement(hoverItem).children().first());
                     } else {
@@ -1789,7 +1789,7 @@ var __meta__ = { // jshint ignore:line
                 if (!nextItem.length) {
                     nextItem = item.prevAll(lastSelector);
                 }
-            } else if (hasChildren) {
+            } else if (hasChildren && !item.hasClass(DISABLEDSTATE)) {
                 that.open(item);
                 nextItem = that._childPopupElement(item).children().first();
             } else if (that.options.orientation == "horizontal") {
