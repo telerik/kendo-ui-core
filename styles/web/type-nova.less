@@ -18,10 +18,24 @@
 @disabled-border-color: darken(@base, 6%);
 @inputs-border-radius: 3px;
 @input-validation-error: darken(@error, 25%);
+@notification-info-background-color: @info;
+@notification-info-text-color: darken(@info, 38%);
+@notification-info-border-color: @info;
+@notification-success-background-color: @success;
+@notification-success-text-color: darken(@success, 27%);
+@notification-success-border-color: @success;
+@notification-warning-background-color: @warning;
+@notification-warning-text-color: darken(@warning, 27%);
+@notification-warning-border-color: @warning;
+@notification-error-background-color: @error;
+@notification-error-text-color: darken(@error, 25%);
+@notification-error-border-color: @error;
+@notification-gradient: false;
 
 @theme-name: ~"nova";
 
 @import "common/mixins.less";
+@import "mixins/all.less";
 @import "themes/type.less";
 
 /* Main colors */
@@ -714,30 +728,8 @@ input.k-textbox:active {
     }
 }
 
-/* Notification */
-.k-widget.k-notification.k-notification-info {
-    color: darken(@info, 38%);
-    background-color: @info;
-    border-color: @info;
-}
-
-.k-widget.k-notification.k-notification-success {
-    color: darken(@success, 27%);
-    background-color: @success;
-    border-color: @success;
-}
-
-.k-widget.k-notification.k-notification-warning {
-    color: darken(@warning, 27%);
-    background-color: @warning;
-    border-color: @warning;
-}
-
-.k-widget.k-notification.k-notification-error {
-    color: darken(@error, 25%);
-    background-color: @error;
-    border-color: @error;
-}
+// Notification
+@import "themes/notification.less";
 
 /* Tooltip */
 .k-widget.k-tooltip,

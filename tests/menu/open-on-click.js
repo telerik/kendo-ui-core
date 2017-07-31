@@ -183,7 +183,7 @@ test('leaving opened item does not close it', function() {
     ok(!opened);
 });
 
-test('leaving opened and hovering a sibling closes it and opens the sibling', function() {
+test('leaving opened and hovering a sibling closes it and does not open the sibling', function() {
     var opened = false;
     menu.clicked = true;
     menu.open = function() { opened = true; };
@@ -191,7 +191,7 @@ test('leaving opened and hovering a sibling closes it and opens the sibling', fu
     var element = $("li:first", menu.element)[0];
     menu._mouseenter({ currentTarget: element, delegateTarget: menu.element[0], indexOf: function() { }, type:'mouseenter' }, element.nextSibling);
 
-    ok(opened);
+    ok(!opened);
 });
 
 test('clicking the document closes the open item', function() {

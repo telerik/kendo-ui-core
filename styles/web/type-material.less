@@ -4,10 +4,43 @@
 @widget-border-color: contrast(@background, lighten(@background, 9%), darken(@background, 10%), 0.5);
 @widget-gradient: none;
 @widget-shadow: none;
+// Button
+@button-text-color: @normal-text-color;
+@button-background-color: contrast(@background, lighten(@background, 17%), darken(@background, 2%), 0.5);
+@button-border-color: contrast(@background, lighten(@background, 17%), darken(@background, 2%), 0.5);
+@button-hover-text-color: @normal-text-color;
+@button-hover-background-color: contrast(@background, lighten(@background, 23%), darken(@background, 8%), 0.5);
+@button-hover-border-color: contrast(@background, lighten(@background, 23%), darken(@background, 8%), 0.5);
+@button-active-background: contrast(@background, lighten(@background, 23%), darken(@background, 14%), 0.5);
+@button-active-border-color: contrast(@background, lighten(@background, 23%), darken(@background, 14%), 0.5);
+@button-focused-border-color: contrast(@background, lighten(@background, 17%), darken(@background, 14%), 0.5);
+@button-focused-shadow: 0 6px 17px 0 #c4c4c4;
+@button-focused-active-shadow: 0 6px 17px 0 fadeout(@hover-background, 70%);
+// Primary button
+@primary-button-text-color: #ffffff;
+@primary-button-background-color: @accent;
+@primary-button-border-color: @accent;
+@primary-gradient: none;
+@primary-shadow: none;
+@primary-hover-text-color: #ffffff;
+@primary-hover-background-color: #5c6bc0;
+@primary-hover-border-color: #5c6bc0;
+@primary-hover-gradient: none;
+@primary-hover-shadow: none;
+@primary-focused-color: #ffffff;
+@primary-focused-border-color: #eff8ff;
+@primary-focused-gradient: none;
+@primary-focused-active-item-shadow: 0 0 8px 0 #cfe6f8;
+@primary-active-text-color: #ffffff;
+@primary-active-background-color: #283593;
+@primary-active-gradient: none;
+@primary-active-border-color: #283593;
+@primary-active-shadow: 0 6px 17px 0 rgba(0, 0, 0, 0.3);
+@primary-disabled-text-color: #a8a8a8;
+@primary-disabled-background-color: #eaeaea;
+@primary-disabled-border-color: #eaeaea;
+@primary-disabled-gradient: none;
 @sprite-image: url('@{image-folder}/sprite.png');
-@sprite-image-2x: url('@{image-folder}/sprite_2x.png');
-@sprite-kpi-image: url('@{image-folder}/sprite_kpi.png');
-@sprite-kpi-image-2x: url('@{image-folder}/sprite_kpi_2x.png');
 @tooltip-texture: none;
 @inverse-text-color: saturate(@background, 29%);
 @input-background-color: @background;
@@ -15,8 +48,6 @@
 @link-text-color: #428bca;
 @header-text-color: #ffffff;
 @header-background-color: @accent;
-@button-text-color: @normal-text-color;
-@button-background-color: contrast(@background, lighten(@background, 17%), darken(@background, 2%), 0.5);
 @group-background-color: @accent;
 @group-border-color: rgba(0, 0, 0, 0.2);
 @content-background-color: @background;
@@ -56,6 +87,7 @@
 @notification-error-background-color: @error;
 @notification-error-text-color: contrast(@error, lighten(@error, 70%), darken(@error, 30%), 0.5);
 @notification-error-border-color: @error;
+@notification-gradient: false;
 @tooltip-text-color: #ffffff;
 @tooltip-background-color: rgba(100,100,100,.9);
 @tooltip-border-color: rgba(100,100,100,.9);
@@ -93,9 +125,8 @@
 @loading-panel-color: #ffffff;
 @shadow-color: rgba(0, 0, 0, .2);
 @shadow-inset-color: #cccccc;
-@main-border-radius: 2px;
-@list-border-radius: (@main-border-radius - 1);
-@inner-border-radius: (@main-border-radius - 1);
+@list-border-radius: (@border-radius - 1);
+@inner-border-radius: (@border-radius - 1);
 @slider-border-radius: 13px;
 @default-icon-opacity: .7;
 @calendar-border-radius: 50%;
@@ -108,7 +139,6 @@
 @calendar-header-hover-background: @hover-background;
 @calendar-footer-active-background: @background;
 @calendar-group-background-color: @accent;
-@button-border-color: contrast(@background, lighten(@background, 17%), darken(@background, 2%), 0.5);
 @menu-border-color: contrast(@background, lighten(@background, 9%), darken(@background, 10%), 0.5);
 @tabstrip-items-border: transparent;
 @tabstrip-active-background: @background;
@@ -135,11 +165,6 @@
 @treeview-hover-text-color: #428bca;
 @tabstrip-tabs-hover-color: #428bca;
 @pager-hover-color: #428bca;
-@multiselect-buttons-border-color: #357ebd;
-@multiselect-buttons-color: #ffffff;
-@multiselect-buttons-background: #428bca;
-@multiselect-buttons-hover-background: #3276b1;
-@multiselect-buttons-hover-border-color: #295f8e;
 @slider-selection-background-color: @accent;
 @form-widgets-border-color: desaturate(@hover-background, 1%);
 @pager-text-color: #a5a5a5;
@@ -148,37 +173,6 @@
 @form-widgets-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
 @menu-active-background: #e7e7e7;
 @concave-shadow: inset 0 3px 8px rgba(0, 0, 0, 0.125);
-@primary-button-text-color: #ffffff;
-@primary-button-background-color: @accent;
-@primary-button-border-color: @accent;
-@primary-gradient: none;
-@primary-shadow: none;
-@primary-hover-text-color: #ffffff;
-@primary-hover-background-color: #5c6bc0;
-@primary-hover-border-color: #5c6bc0;
-@primary-hover-gradient: none;
-@primary-hover-shadow: none;
-@primary-focused-color: #ffffff;
-@primary-focused-border-color: #eff8ff;
-@primary-focused-gradient: none;
-@primary-focused-active-item-shadow: 0 0 8px 0 #cfe6f8;
-@primary-active-text-color: #ffffff;
-@primary-active-background-color: #283593;
-@primary-active-gradient: none;
-@primary-active-border-color: #283593;
-@primary-active-shadow: 0 6px 17px 0 rgba(0, 0, 0, 0.3);
-@primary-disabled-text-color: #a8a8a8;
-@primary-disabled-background-color: #eaeaea;
-@primary-disabled-border-color: #eaeaea;
-@primary-disabled-gradient: none;
-@button-hover-text-color: @normal-text-color;
-@button-hover-background-color: contrast(@background, lighten(@background, 23%), darken(@background, 8%), 0.5);
-@button-hover-border-color: contrast(@background, lighten(@background, 23%), darken(@background, 8%), 0.5);
-@button-active-background: contrast(@background, lighten(@background, 23%), darken(@background, 14%), 0.5);
-@button-active-border-color: contrast(@background, lighten(@background, 23%), darken(@background, 14%), 0.5);
-@button-focused-border-color: contrast(@background, lighten(@background, 17%), darken(@background, 14%), 0.5);
-@button-focused-shadow: 0 6px 17px 0 #c4c4c4;
-@button-focused-active-shadow: 0 6px 17px 0 fadeout(@hover-background, 70%);
 @secondary-background-color: contrast(@background, lighten(@background, 14%), darken(@background, 2%), 0.5);
 @secondary-hover-background-color: softlight(@accent, #b9b9b9);
 @secondary-header-color: rgba(256, 256, 256, 0.5);
@@ -190,6 +184,7 @@
 @theme-name: ~"material";
 
 @import "common/mixins.less";
+@import "mixins/all.less";
 @import "themes/type.less";
 
 .k-in,
@@ -903,15 +898,6 @@ td.k-state-focused.k-state-selected
     .box-shadow(@focused-active-item-shadow);
 }
 
-.k-ie8 .k-panelbar span.k-state-focused,
-.k-ie8 .k-menu li.k-state-focused,
-.k-ie8 .k-listview>.k-state-focused,
-.k-ie8 .k-grid-header th.k-state-focused,
-.k-ie8 td.k-state-focused,
-.k-ie8 .k-tool.k-state-hover,
-.k-ie8 .k-button:focus,
-.k-ie8 .k-button.k-state-focused,
-
 .k-list>.k-state-selected.k-state-focused,
 .k-list-optionlabel.k-state-selected.k-state-focused
 {
@@ -949,11 +935,6 @@ td.k-state-focused.k-state-selected
 {
     color: @hover-text-color;
     background-color: @hover-background-color;
-    border-color: @hover-border-color;
-}
-
-.k-ie8 .k-window-titlebar .k-state-hover
-{
     border-color: @hover-border-color;
 }
 
@@ -1078,11 +1059,6 @@ div.k-filebrowser-dropzone em
 .k-state-disabled
 {
     opacity:.7;
-}
-
-.k-ie8 .k-state-disabled
-{
-    filter:alpha(opacity=70);
 }
 
 .k-tile-empty.k-state-selected,
@@ -1455,35 +1431,8 @@ div.k-filebrowser-dropzone em
     .selection(@accent);
 }
 
-/* Notification */
-
-.k-widget.k-notification.k-notification-info
-{
-    background-color: @notification-info-background-color;
-    color: @notification-info-text-color;
-    border-color: @notification-info-border-color;
-}
-
-.k-widget.k-notification.k-notification-success
-{
-    background-color: @notification-success-background-color;
-    color: @notification-success-text-color;
-    border-color: @notification-success-border-color;
-}
-
-.k-widget.k-notification.k-notification-warning
-{
-    background-color: @notification-warning-background-color;
-    color: @notification-warning-text-color;
-    border-color: @notification-warning-border-color;
-}
-
-.k-widget.k-notification.k-notification-error
-{
-    background-color: @notification-error-background-color;
-    color: @notification-error-text-color;
-    border-color: @notification-error-border-color;
-}
+// Notification
+@import "themes/notification.less";
 
 /* Gantt */
 
@@ -1618,7 +1567,7 @@ div.k-filebrowser-dropzone em
 .k-slider-selection,
 .k-upload
 {
-    border-radius: @main-border-radius;
+    border-radius: @border-radius;
 }
 
 .k-tool {
@@ -1628,26 +1577,26 @@ div.k-filebrowser-dropzone em
 
 .k-toolbar .k-split-button .k-button
 {
-    border-radius: @main-border-radius 0 0 @main-border-radius;
+    border-radius: @border-radius 0 0 @border-radius;
 }
 
 .k-rtl .k-tool.k-group-start,
 .k-rtl .k-toolbar .k-split-button .k-button,
 .k-rtl .k-toolbar .k-button-group .k-group-start
 {
-    border-radius: 0 @main-border-radius @main-border-radius 0;
+    border-radius: 0 @border-radius @border-radius 0;
 }
 
 .k-toolbar .k-split-button .k-split-button-arrow
 {
-    border-radius: 0 @main-border-radius @main-border-radius 0;
+    border-radius: 0 @border-radius @border-radius 0;
 }
 
 .k-rtl .k-tool.k-group-end,
 .k-rtl .k-toolbar .k-button-group .k-group-end,
 .k-rtl .k-toolbar .k-split-button .k-split-button-arrow
 {
-    border-radius: @main-border-radius 0 0 @main-border-radius;
+    border-radius: @border-radius 0 0 @border-radius;
 }
 
 .k-calendar-container.k-state-border-up,
@@ -1660,7 +1609,7 @@ div.k-filebrowser-dropzone em
 .k-window-content,
 .k-filter-menu
 {
-    border-radius: 0 0 @main-border-radius @main-border-radius;
+    border-radius: 0 0 @border-radius @border-radius;
 }
 
 .k-autocomplete.k-state-border-up .k-input,
@@ -1669,12 +1618,12 @@ div.k-filebrowser-dropzone em
 .k-picker-wrap.k-state-border-up .k-selected-color,
 .k-numeric-wrap.k-state-border-up .k-input
 {
-    border-radius: 0 0 0 @main-border-radius;
+    border-radius: 0 0 0 @border-radius;
 }
 
 .k-multiselect.k-state-border-up .k-multiselect-wrap
 {
-    border-radius: 0 0 @main-border-radius @main-border-radius;
+    border-radius: 0 0 @border-radius @border-radius;
 }
 
 .k-window-titlebar,
@@ -1690,27 +1639,27 @@ div.k-filebrowser-dropzone em
 .k-picker-wrap.k-state-border-down,
 .k-numeric-wrap.k-state-border-down
 {
-    border-radius: @main-border-radius @main-border-radius 0 0;
+    border-radius: @border-radius @border-radius 0 0;
 }
 
 .k-split-button.k-state-border-down > .k-button
 {
-    border-radius: @main-border-radius 0 0 0;
+    border-radius: @border-radius 0 0 0;
 }
 
 .k-split-button.k-state-border-up > .k-button
 {
-    border-radius: 0 0 0 @main-border-radius;
+    border-radius: 0 0 0 @border-radius;
 }
 
 .k-split-button.k-state-border-down > .k-split-button-arrow
 {
-    border-radius: 0 @main-border-radius 0 0;
+    border-radius: 0 @border-radius 0 0;
 }
 
 .k-split-button.k-state-border-up > .k-split-button-arrow
 {
-    border-radius: 0 0 @main-border-radius 0;
+    border-radius: 0 0 @border-radius 0;
 }
 
 .k-dropdown-wrap .k-input,
@@ -1749,7 +1698,7 @@ div.k-filebrowser-dropzone em
 
 .k-autocomplete.k-state-border-down .k-input
 {
-    border-radius: @main-border-radius @main-border-radius 0 0;
+    border-radius: @border-radius @border-radius 0 0;
 }
 
 .k-dropdown-wrap.k-state-border-down .k-input,
@@ -1757,7 +1706,7 @@ div.k-filebrowser-dropzone em
 .k-picker-wrap.k-state-border-down .k-selected-color,
 .k-numeric-wrap.k-state-border-down .k-input
 {
-    border-radius: @main-border-radius 0 0 0;
+    border-radius: @border-radius 0 0 0;
 }
 
 .k-numeric-wrap .k-link.k-state-selected
@@ -1776,7 +1725,7 @@ div.k-filebrowser-dropzone em
 .k-datetimepicker .k-select+.k-select,
 .k-list-container.k-state-border-right
 {
-    border-radius: 0 @main-border-radius @main-border-radius 0;
+    border-radius: 0 @border-radius @border-radius 0;
 }
 
 .k-rtl .k-dropdown-wrap .k-select,
@@ -1785,12 +1734,12 @@ div.k-filebrowser-dropzone em
 .k-rtl .k-datetimepicker .k-select+.k-select,
 .k-rtl .k-list-container.k-state-border-right
 {
-    border-radius: @main-border-radius 0 0 @main-border-radius;
+    border-radius: @border-radius 0 0 @border-radius;
 }
 
 .k-numeric-wrap.k-expand-padding .k-input
 {
-    .guarded-border-radius(@main-border-radius);
+    .guarded-border-radius(@border-radius);
 }
 
 .k-textbox > input,
@@ -1828,7 +1777,7 @@ div.k-filebrowser-dropzone em
 .k-scheduler-toolbar > ul.k-scheduler-views li:first-child + li,
 .k-scheduler-toolbar > ul.k-scheduler-views li:first-child + li .k-link
 {
-    border-radius: @main-border-radius 0 0 @main-border-radius;
+    border-radius: @border-radius 0 0 @border-radius;
 }
 
 .k-rtl .k-scheduler-toolbar > ul li:first-child,
@@ -1838,14 +1787,14 @@ div.k-filebrowser-dropzone em
 .km-view.k-popup-edit-form .k-scheduler-toolbar > ul li:last-child,
 .km-view.k-popup-edit-form .k-scheduler-toolbar > ul li:last-child .k-link
 {
-    border-radius: 0 @main-border-radius @main-border-radius 0;
+    border-radius: 0 @border-radius @border-radius 0;
 }
 
 .k-scheduler-phone .k-scheduler-toolbar > ul li.k-nav-today,
 .k-scheduler-phone .k-scheduler-toolbar > ul li.k-nav-today .k-link,
 .k-edit-field > .k-scheduler-navigation
 {
-    border-radius: @main-border-radius;
+    border-radius: @border-radius;
 }
 
 .k-scheduler-toolbar .k-nav-next,
@@ -1853,8 +1802,8 @@ div.k-filebrowser-dropzone em
 .k-scheduler-toolbar .k-nav-next .k-link,
 .k-scheduler-toolbar ul + ul li:last-child .k-link
 {
-    border-top-right-radius: @main-border-radius;
-    border-bottom-right-radius: @main-border-radius;
+    border-top-right-radius: @border-radius;
+    border-bottom-right-radius: @border-radius;
 }
 
 .k-rtl .k-scheduler-toolbar .k-nav-next,
@@ -1862,13 +1811,13 @@ div.k-filebrowser-dropzone em
 .k-rtl .k-scheduler-toolbar .k-nav-next .k-link,
 .k-rtl .k-scheduler-toolbar ul + ul li:last-child .k-link
 {
-    border-radius: @main-border-radius 0 0 @main-border-radius;
+    border-radius: @border-radius 0 0 @border-radius;
 }
 
 .k-scheduler div.k-scheduler-footer ul li,
 .k-scheduler div.k-scheduler-footer .k-link
 {
-    border-radius: @main-border-radius;
+    border-radius: @border-radius;
 }
 
 .k-more-events,
@@ -3592,7 +3541,7 @@ div.k-scheduler-marquee:after {
             background-position: 50% 50%;
             background-color: transparent;
             border-color: transparent;
-            border-radius: @main-border-radius;
+            border-radius: @border-radius;
             text-align: right;
         }
 
@@ -3644,7 +3593,7 @@ div.k-scheduler-marquee:after {
             border-color: transparent; /*@secondary-border-color*/
             background-image: none;
             background-color: @header-background-color;
-            border-radius: @main-border-radius;
+            border-radius: @border-radius;
             .box-shadow(0 2px 2px 0 @shadow-color);
         }
 
@@ -3717,7 +3666,7 @@ div.k-scheduler-marquee:after {
             width: 3.8em;
             line-height: 2.564em;
             padding: 0 .429em 0 0.8em;
-            border-radius: @main-border-radius;
+            border-radius: @border-radius;
             .composite-background(@widget-gradient);
             background-position: 50% 50%;
             background-color: @drop-down-background;
@@ -3727,7 +3676,7 @@ div.k-scheduler-marquee:after {
         }
 
         .k-pager-numbers .k-current-page:hover .k-link {
-            border-radius: @main-border-radius;
+            border-radius: @border-radius;
             background-color: @widget-background-color;
             border: 1px solid @form-widgets-border-color;
             border-top: 0;
@@ -3778,7 +3727,7 @@ div.k-scheduler-marquee:after {
             border-style: solid;
             border-color: @form-widgets-border-color; /*@secondary-border-color*/
             background-color: @widget-background-color;
-            border-radius: @main-border-radius @main-border-radius 0 0;
+            border-radius: @border-radius @border-radius 0 0;
             .box-shadow(0 2px 2px 0 @shadow-color);
         }
 
@@ -3788,7 +3737,7 @@ div.k-scheduler-marquee:after {
         }
 
         .k-pager-numbers.k-state-expanded .k-current-page .k-link {
-            border-radius: 0 0 @main-border-radius @main-border-radius;
+            border-radius: 0 0 @border-radius @border-radius;
             background-color: @widget-background-color;
             border: 1px solid @form-widgets-border-color;
             border-top: 0;

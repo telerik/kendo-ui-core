@@ -280,14 +280,6 @@ body .k-split-button-arrow
     background-image: none !important; /* should never be a background on these */
 }
 
-/* In IE7 vertical align: middle can't be overridden */
-.k-ie8 .k-icon,
-.k-ie8 .k-sprite,
-.k-ie8 .k-tool-icon
-{
-    vertical-align: middle;
-}
-
 .k-image
 {
     border: 0;
@@ -682,24 +674,6 @@ input.k-checkbox,
 
 .k-radio:disabled + .k-radio-label {
    cursor: auto;
-}
-
-// Remove Checkboxes / Radio buttons styling for IE 8
-.k-ie8 input.k-checkbox,
-.k-ie8 .k-radio {
-    display: inline-block;
-    width: auto;
-}
-
-.k-ie8 .k-checkbox-label,
-.k-ie8 .k-radio-label {
-    padding-left: 0;
-}
-
-.k-ie8 .k-checkbox-label:before,
-.k-ie8 .k-radio-label:before,
-.k-ie8 .k-radio-label:after {
-    display: none;
 }
 
 /* RTL for checkboxes and radio buttons */

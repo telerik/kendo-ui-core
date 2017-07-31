@@ -2,7 +2,7 @@
 title: How to Page Break by Group PDF Export Grid
 description: grid pdf export new page for each group
 type: how-to
-page_title:How To PDF Export Kendo UI Grid new page for each group 
+page_title: How To PDF Export Kendo UI Grid new page for each group 
 slug: how-to-page-break-by-group-grid-pdf-export
 position: 0
 tags: kendo,grid,pdf,export,group,page,break

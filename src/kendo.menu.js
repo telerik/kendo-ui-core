@@ -68,6 +68,7 @@ var __meta__ = { // jshint ignore:line
         allItemsSelector = ":not(.k-list) > .k-item",
         disabledSelector = ".k-item.k-state-disabled",
         itemSelector = ".k-item",
+        availableItemsSelector = ".k-item:not(.k-state-disabled)",
         linkSelector = ".k-item:not(.k-state-disabled) > .k-link",
         exclusionSelector = ":not(.k-item.k-separator)",
         nextSelector = itemSelector + exclusionSelector + ":eq(0)",
@@ -572,8 +573,8 @@ var __meta__ = { // jshint ignore:line
                    .on(CLICK + NS, disabledSelector, false)
                    .on(CLICK + NS, itemSelector, proxy(that._click , that))
                    .on(POINTERDOWN + " " + MOUSEDOWN + NS, ".k-content", proxy(that._preventClose, that))
-                   .on(MOUSEENTER + NS, itemSelector, proxy(that._mouseenter, that))
-                   .on(MOUSELEAVE + NS, itemSelector, proxy(that._mouseleave, that))
+                   .on(MOUSEENTER + NS, availableItemsSelector, proxy(that._mouseenter, that))
+                   .on(MOUSELEAVE + NS, availableItemsSelector, proxy(that._mouseleave, that))
                    .on(MOUSEENTER + NS + " " + MOUSELEAVE + NS + " " +
                        MOUSEDOWN + NS + " " + CLICK + NS, linkSelector, proxy(that._toggleHover, that));
 
@@ -1367,17 +1368,18 @@ var __meta__ = { // jshint ignore:line
 
             that._keyTriggered = false;
 
+            if (that.options.openOnClick && that.clicked || touch) {
+                element.siblings().each(proxy(function (_, sibling) {
+                    that.close(sibling, true);
+                    that.clicked = false;
+                }, that));
+            }
+
             if ((!that.options.openOnClick || that.clicked) && !touch &&
                 !(pointerTouch && that._isRootItem(element.closest(allItemsSelector)))) {
                 if (!contains(e.currentTarget, e.relatedTarget) && hasChildren) {
                     that.open(element);
                 }
-            }
-
-            if (that.options.openOnClick && that.clicked || touch) {
-                element.siblings().each(proxy(function (_, sibling) {
-                    that.close(sibling, true);
-                }, that));
             }
         },
 

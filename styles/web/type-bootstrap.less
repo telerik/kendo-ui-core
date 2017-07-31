@@ -4,10 +4,43 @@
 @widget-border-color: darken(@base, 12%);
 @widget-gradient: none;
 @widget-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.2), 0 1px 2px rgba(0, 0, 0, 0.05);
+// Button
+@button-text-color: @normal-text-color;
+@button-background-color: @background;
+@button-border-color: darken(@base, 12%);
+@button-hover-text-color: @normal-text-color;
+@button-hover-background-color: @base;
+@button-hover-border-color: darken(@base, 24%);
+@button-active-background: @base;
+@button-active-border-color: @accent;
+@button-focused-border-color: lighten(@accent, 13%);
+@button-focused-shadow: 0 0 7px 0 lighten(@accent, 13%);
+@button-focused-active-shadow: inset 0 0 5px 3px darken(@base, 9%);
+// Primary button
+@primary-button-text-color: @background;
+@primary-button-background-color: @accent;
+@primary-button-border-color: darken(@accent, 5%);
+@primary-gradient: none;
+@primary-shadow: none;
+@primary-hover-text-color: @background;
+@primary-hover-background-color: darken(@accent, 8%);
+@primary-hover-border-color: darken(@accent, 17%);
+@primary-hover-gradient: none;
+@primary-hover-shadow: none;
+@primary-focused-color: @background;
+@primary-focused-border-color: lighten(@info, 2%);
+@primary-focused-gradient: none;
+@primary-focused-active-item-shadow: 0 0 8px 0 darken(@info, 6%);
+@primary-active-text-color: @background;
+@primary-active-background-color: darken(@accent, 8%);
+@primary-active-gradient: none;
+@primary-active-border-color: darken(@accent, 17%);
+@primary-active-shadow: inset 0 0 8px 0 lighten(@accent, 13%);
+@primary-disabled-text-color: @background;
+@primary-disabled-background-color: lighten(@accent, 16%);
+@primary-disabled-border-color: lighten(@accent, 14%);
+@primary-disabled-gradient: none;
 @sprite-image: url('@{image-folder}/sprite.png');
-@sprite-image-2x: url('@{image-folder}/sprite_2x.png');
-@sprite-kpi-image: url('@{image-folder}/sprite_kpi.png');
-@sprite-kpi-image-2x: url('@{image-folder}/sprite_kpi_2x.png');
 @theme-type: "Bootstrap";
 @tooltip-texture: none;
 @inverse-text-color: @background;
@@ -16,8 +49,6 @@
 @link-text-color: @accent;
 @header-text-color: @normal-text-color;
 @header-background-color: lighten(@base, 4%);
-@button-text-color: @normal-text-color;
-@button-background-color: @background;
 @group-background-color: lighten(@base, 4%);
 @group-border-color: rgba(0, 0, 0, 0.2);
 @content-background-color: @background;
@@ -56,6 +87,7 @@
 @notification-error-background-color: @error;
 @notification-error-text-color: darken(@error, 50%);
 @notification-error-border-color: darken(@error, 10%);
+@notification-gradient: false;
 @tooltip-text-color: @background;
 @tooltip-background-color: contrast(@base);
 @tooltip-border-color: contrast(@base);
@@ -93,9 +125,8 @@
 @loading-panel-color: @background;
 @shadow-color: rgba(0, 0, 0, .2);
 @shadow-inset-color: darken(@base, 12%);
-@main-border-radius: @border-radius;
-@list-border-radius: (@main-border-radius - 1);
-@inner-border-radius: (@main-border-radius - 1);
+@list-border-radius: (@border-radius - 1);
+@inner-border-radius: (@border-radius - 1);
 @slider-border-radius: 13px;
 @default-icon-opacity: 1;
 @calendar-border-radius: @border-radius;
@@ -108,7 +139,6 @@
 @calendar-header-hover-background: @base;
 @calendar-footer-active-background: @background;
 @calendar-group-background-color: lighten(@base, 4%);
-@button-border-color: darken(@base, 12%);
 @menu-border-color: darken(@base, 12%);
 @tabstrip-items-border: transparent;
 @tabstrip-active-background: @background;
@@ -148,37 +178,6 @@
 @form-widgets-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
 @menu-active-background: darken(@base, 1%);
 @concave-shadow: inset 0 3px 8px rgba(0, 0, 0, 0.125);
-@primary-button-text-color: @background;
-@primary-button-background-color: @accent;
-@primary-button-border-color: darken(@accent, 5%);
-@primary-gradient: none;
-@primary-shadow: none;
-@primary-hover-text-color: @background;
-@primary-hover-background-color: darken(@accent, 8%);
-@primary-hover-border-color: darken(@accent, 17%);
-@primary-hover-gradient: none;
-@primary-hover-shadow: none;
-@primary-focused-color: @background;
-@primary-focused-border-color: lighten(@info, 2%);
-@primary-focused-gradient: none;
-@primary-focused-active-item-shadow: 0 0 8px 0 darken(@info, 6%);
-@primary-active-text-color: @background;
-@primary-active-background-color: darken(@accent, 8%);
-@primary-active-gradient: none;
-@primary-active-border-color: darken(@accent, 17%);
-@primary-active-shadow: inset 0 0 8px 0 lighten(@accent, 13%);
-@primary-disabled-text-color: @background;
-@primary-disabled-background-color: lighten(@accent, 16%);
-@primary-disabled-border-color: lighten(@accent, 14%);
-@primary-disabled-gradient: none;
-@button-hover-text-color: @normal-text-color;
-@button-hover-background-color: @base;
-@button-hover-border-color: darken(@base, 24%);
-@button-active-background: @base;
-@button-active-border-color: @accent;
-@button-focused-border-color: lighten(@accent, 13%);
-@button-focused-shadow: 0 0 7px 0 lighten(@accent, 13%);
-@button-focused-active-shadow: inset 0 0 5px 3px darken(@base, 9%);
 @input-validation-error: darken(@error, 50%);
 
 /* Kendo skin */
@@ -186,6 +185,7 @@
 @theme-name: ~"bootstrap";
 
 @import "common/mixins.less";
+@import "mixins/all.less";
 @import "themes/type.less";
 
 .k-in,
@@ -881,7 +881,7 @@ td.k-state-focused,
 }
 
 .k-popup .k-list .k-state-focused {
-    border-radius: @main-border-radius;
+    border-radius: @border-radius;
     box-shadow: inset 0 0 2px 0 @accent, @focused-item-shadow;
 }
 
@@ -891,18 +891,6 @@ td.k-state-focused,
 td.k-state-focused.k-state-selected
 {
     .box-shadow(@focused-active-item-shadow);
-}
-
-.k-ie8 .k-panelbar span.k-state-focused,
-.k-ie8 .k-menu li.k-state-focused,
-.k-ie8 .k-listview>.k-state-focused,
-.k-ie8 .k-grid-header th.k-state-focused,
-.k-ie8 td.k-state-focused,
-.k-ie8 .k-tool.k-state-hover,
-.k-ie8 .k-button:focus,
-.k-ie8 .k-button.k-state-focused
-{
-    background-color: @hover-background-color;
 }
 
 .k-list>.k-state-selected.k-state-focused,
@@ -943,11 +931,6 @@ td.k-state-focused.k-state-selected
 {
     color: @hover-text-color;
     background-color: @hover-background-color;
-    border-color: @hover-border-color;
-}
-
-.k-ie8 .k-window-titlebar .k-state-hover
-{
     border-color: @hover-border-color;
 }
 
@@ -1079,11 +1062,6 @@ div.k-filebrowser-dropzone em
     .k-popup-edit-form {
         opacity: .9;
     }
-}
-
-.k-ie8 .k-state-disabled
-{
-    filter: alpha(opacity=70);
 }
 
 .k-tile-empty.k-state-selected,
@@ -1448,35 +1426,8 @@ div.k-filebrowser-dropzone em
     .selection(@selected-border-color);
 }
 
-/* Notification */
-
-.k-widget.k-notification.k-notification-info
-{
-    background-color: @notification-info-background-color;
-    color: @notification-info-text-color;
-    border-color: @notification-info-border-color;
-}
-
-.k-widget.k-notification.k-notification-success
-{
-    background-color: @notification-success-background-color;
-    color: @notification-success-text-color;
-    border-color: @notification-success-border-color;
-}
-
-.k-widget.k-notification.k-notification-warning
-{
-    background-color: @notification-warning-background-color;
-    color: @notification-warning-text-color;
-    border-color: @notification-warning-border-color;
-}
-
-.k-widget.k-notification.k-notification-error
-{
-    background-color: @notification-error-background-color;
-    color: @notification-error-text-color;
-    border-color: @notification-error-border-color;
-}
+// Notification
+@import "themes/notification.less";
 
 /* Gantt */
 
@@ -1606,7 +1557,7 @@ div.k-filebrowser-dropzone em
 .k-upload,
 .k-split-button
 {
-    border-radius: @main-border-radius;
+    border-radius: @border-radius;
 }
 
 .k-tool {
@@ -1618,32 +1569,32 @@ div.k-filebrowser-dropzone em
 .k-toolbar .k-split-button .k-button,
 .k-toolbar .k-button-group .k-group-start
 {
-    border-radius: @main-border-radius 0 0 @main-border-radius;
+    border-radius: @border-radius 0 0 @border-radius;
 }
 
 .k-rtl .k-tool.k-group-start,
 .k-rtl .k-toolbar .k-split-button .k-button,
 .k-rtl .k-toolbar .k-button-group .k-group-start
 {
-    border-radius: 0 @main-border-radius @main-border-radius 0;
+    border-radius: 0 @border-radius @border-radius 0;
 }
 
 .k-toolbar .k-button-group > .k-group-end {
-    border-radius: @main-border-radius;
+    border-radius: @border-radius;
 }
 
 .k-tool.k-group-end,
 .k-toolbar .k-button-group .k-button + .k-group-end,
 .k-toolbar .k-split-button .k-split-button-arrow
 {
-    border-radius: 0 @main-border-radius @main-border-radius 0;
+    border-radius: 0 @border-radius @border-radius 0;
 }
 
 .k-rtl .k-tool.k-group-end,
 .k-rtl .k-toolbar .k-button-group .k-group-end,
 .k-rtl .k-toolbar .k-split-button .k-split-button-arrow
 {
-    border-radius: @main-border-radius 0 0 @main-border-radius;
+    border-radius: @border-radius 0 0 @border-radius;
 }
 
 .k-toolbar:not(.k-spreadsheet-toolbar) .k-button-group {
@@ -1662,7 +1613,7 @@ div.k-filebrowser-dropzone em
 
 .k-group-start.k-group-end.k-tool
 {
-    border-radius: @main-border-radius;
+    border-radius: @border-radius;
 }
 
 .k-calendar-container.k-state-border-up,
@@ -1675,7 +1626,7 @@ div.k-filebrowser-dropzone em
 .k-window-content,
 .k-filter-menu
 {
-    border-radius: 0 0 @main-border-radius @main-border-radius;
+    border-radius: 0 0 @border-radius @border-radius;
 }
 
 .k-autocomplete.k-state-border-up .k-input,
@@ -1684,12 +1635,12 @@ div.k-filebrowser-dropzone em
 .k-picker-wrap.k-state-border-up .k-selected-color,
 .k-numeric-wrap.k-state-border-up .k-input
 {
-    border-radius: 0 0 0 @main-border-radius;
+    border-radius: 0 0 0 @border-radius;
 }
 
 .k-multiselect.k-state-border-up .k-multiselect-wrap
 {
-    border-radius: 0 0 @main-border-radius @main-border-radius;
+    border-radius: 0 0 @border-radius @border-radius;
 }
 
 .k-window-titlebar,
@@ -1705,27 +1656,27 @@ div.k-filebrowser-dropzone em
 .k-picker-wrap.k-state-border-down,
 .k-numeric-wrap.k-state-border-down
 {
-    border-radius: @main-border-radius @main-border-radius 0 0;
+    border-radius: @border-radius @border-radius 0 0;
 }
 
 .k-split-button.k-state-border-down > .k-button
 {
-    border-radius: @main-border-radius 0 0 0;
+    border-radius: @border-radius 0 0 0;
 }
 
 .k-split-button.k-state-border-up > .k-button
 {
-    border-radius: 0 0 0 @main-border-radius;
+    border-radius: 0 0 0 @border-radius;
 }
 
 .k-split-button.k-state-border-down > .k-split-button-arrow
 {
-    border-radius: 0 @main-border-radius 0 0;
+    border-radius: 0 @border-radius 0 0;
 }
 
 .k-split-button.k-state-border-up > .k-split-button-arrow
 {
-    border-radius: 0 0 @main-border-radius 0;
+    border-radius: 0 0 @border-radius 0;
 }
 
 .k-dropdown-wrap .k-input,
@@ -1764,7 +1715,7 @@ div.k-filebrowser-dropzone em
 
 .k-autocomplete.k-state-border-down .k-input
 {
-    border-radius: @main-border-radius @main-border-radius 0 0;
+    border-radius: @border-radius @border-radius 0 0;
 }
 
 .k-dropdown-wrap.k-state-border-down .k-input,
@@ -1772,7 +1723,7 @@ div.k-filebrowser-dropzone em
 .k-picker-wrap.k-state-border-down .k-selected-color,
 .k-numeric-wrap.k-state-border-down .k-input
 {
-    border-radius: @main-border-radius 0 0 0;
+    border-radius: @border-radius 0 0 0;
 }
 
 .k-numeric-wrap .k-link.k-state-selected
@@ -1791,7 +1742,7 @@ div.k-filebrowser-dropzone em
 .k-datetimepicker .k-select+.k-select,
 .k-list-container.k-state-border-right
 {
-    border-radius: 0 @main-border-radius @main-border-radius 0;
+    border-radius: 0 @border-radius @border-radius 0;
 }
 
 .k-rtl .k-dropdown-wrap .k-select,
@@ -1800,12 +1751,12 @@ div.k-filebrowser-dropzone em
 .k-rtl .k-datetimepicker .k-select+.k-select,
 .k-rtl .k-list-container.k-state-border-right
 {
-    border-radius: @main-border-radius 0 0 @main-border-radius;
+    border-radius: @border-radius 0 0 @border-radius;
 }
 
 .k-numeric-wrap.k-expand-padding .k-input
 {
-    .guarded-border-radius(@main-border-radius);
+    .guarded-border-radius(@border-radius);
 }
 
 .k-textbox > input,
@@ -1845,7 +1796,7 @@ div.k-filebrowser-dropzone em
 .k-gantt-toolbar > ul.k-gantt-views li:first-child + li,
 .k-gantt-toolbar > ul.k-gantt-views li:first-child + li .k-link
 {
-    border-radius: @main-border-radius 0 0 @main-border-radius;
+    border-radius: @border-radius 0 0 @border-radius;
 }
 
 .k-rtl .k-scheduler-toolbar > ul li:first-child,
@@ -1859,14 +1810,14 @@ div.k-filebrowser-dropzone em
 .km-view.k-popup-edit-form .k-gantt-toolbar > ul li:last-child,
 .km-view.k-popup-edit-form .k-gantt-toolbar > ul li:last-child .k-link
 {
-    border-radius: 0 @main-border-radius @main-border-radius 0;
+    border-radius: 0 @border-radius @border-radius 0;
 }
 
 .k-scheduler-phone .k-scheduler-toolbar > ul li.k-nav-today,
 .k-scheduler-phone .k-scheduler-toolbar > ul li.k-nav-today .k-link,
 .k-edit-field > .k-scheduler-navigation
 {
-    border-radius: @main-border-radius;
+    border-radius: @border-radius;
 }
 
 .k-scheduler-toolbar .k-nav-next,
@@ -1876,8 +1827,8 @@ div.k-filebrowser-dropzone em
 .k-gantt-toolbar ul.k-gantt-views li:last-child,
 .k-gantt-toolbar ul.k-gantt-views li:last-child .k-link
 {
-    border-top-right-radius: @main-border-radius;
-    border-bottom-right-radius: @main-border-radius;
+    border-top-right-radius: @border-radius;
+    border-bottom-right-radius: @border-radius;
 }
 
 .k-rtl .k-scheduler-toolbar .k-nav-next,
@@ -1887,13 +1838,13 @@ div.k-filebrowser-dropzone em
 .k-rtl .k-gantt-toolbar ul.k-gantt-views li:last-child,
 .k-rtl .k-gantt-toolbar ul.k-gantt-views li:last-child .k-link
 {
-    border-radius: @main-border-radius 0 0 @main-border-radius;
+    border-radius: @border-radius 0 0 @border-radius;
 }
 
 .k-scheduler div.k-scheduler-footer ul li,
 .k-scheduler div.k-scheduler-footer .k-link
 {
-    border-radius: @main-border-radius;
+    border-radius: @border-radius;
 }
 
 .k-more-events,
@@ -2010,7 +1961,7 @@ html .km-pane-wrapper .km-widget,
 }
 
 .km-pane-wrapper .k-pager-nav.k-pager-first {
-    border-radius: @main-border-radius 0 0 @main-border-radius;
+    border-radius: @border-radius 0 0 @border-radius;
 }
 
 /* /Column Menu */
@@ -2382,7 +2333,7 @@ html .km-pane-wrapper .km-widget,
 
         .k-scheduler-toolbar > ul.k-scheduler-views > li.k-current-view
         {
-            border-radius: @main-border-radius;
+            border-radius: @border-radius;
         }
 
         .k-scheduler-toolbar > ul.k-scheduler-views.k-state-expanded > li {
@@ -2445,7 +2396,7 @@ html .km-pane-wrapper .km-widget,
             border-style: solid;
             border-color: @secondary-border-color;
             background-color: @header-background-color;
-            border-radius: @main-border-radius @main-border-radius 0 0;
+            border-radius: @border-radius @border-radius 0 0;
             .box-shadow(0 2px 2px 0 @shadow-color);
         }
 
@@ -2453,7 +2404,7 @@ html .km-pane-wrapper .km-widget,
         {
             border-width: 1px;
             background-image: none;
-            border-radius: @main-border-radius;
+            border-radius: @border-radius;
         }
 
         .k-pager-numbers .k-state-selected,
@@ -2475,7 +2426,7 @@ html .km-pane-wrapper .km-widget,
 .k-menu,
 .k-editor
 {
-    border-radius: @main-border-radius;
+    border-radius: @border-radius;
 }
 
 .k-grid > .k-grouping-header,
@@ -2870,24 +2821,24 @@ td.k-state-focused.k-state-selected,
 
 .k-pager-wrap .k-pager-nav.k-pager-last
 {
-    border-radius: 0 @main-border-radius @main-border-radius 0;
+    border-radius: 0 @border-radius @border-radius 0;
     border-right-color: @secondary-border-color;
 }
 
 .k-rtl .k-pager-wrap .k-pager-nav.k-pager-last
 {
-    border-radius: @main-border-radius 0 0 @main-border-radius;
+    border-radius: @border-radius 0 0 @border-radius;
     border-right-width: 0;
 }
 
 .k-pager-nav.k-pager-first
 {
-    border-radius: @main-border-radius 0 0 @main-border-radius;
+    border-radius: @border-radius 0 0 @border-radius;
 }
 
 .k-rtl .k-pager-nav.k-pager-first
 {
-    border-radius: 0 @main-border-radius @main-border-radius 0;
+    border-radius: 0 @border-radius @border-radius 0;
     border-right-width: 1px;
     border-right-style: solid;
     border-right-color: @secondary-border-color;
@@ -3154,7 +3105,7 @@ td.k-state-focused.k-state-selected,
         {
             width: 3.2em;
             padding: 0 .429em 0 .714em;
-            border-radius: @main-border-radius;
+            border-radius: @border-radius;
             border-right: 1px solid @secondary-border-color;
             color: @widget-text-color;
             background-color: @widget-background-color;
@@ -3166,24 +3117,24 @@ td.k-state-focused.k-state-selected,
 
         .k-pager-nav.k-pager-first + .k-link {
             border-right: 1px solid @secondary-border-color;
-            border-radius: 0 @main-border-radius @main-border-radius 0;
+            border-radius: 0 @border-radius @border-radius 0;
         }
 
         .k-pager-nav.k-pager-first,
         .k-rtl .k-pager-nav.k-pager-first + .k-link {
             border-right: 0;
-            border-radius: @main-border-radius 0 0 @main-border-radius;
+            border-radius: @border-radius 0 0 @border-radius;
         }
 
         .k-pager-numbers + .k-link {
             margin-left: 5.6em;
-            border-radius: @main-border-radius 0 0 @main-border-radius;
+            border-radius: @border-radius 0 0 @border-radius;
         }
 
         .k-rtl .k-pager-numbers + .k-link {
             margin-right: 5.6em;
             margin-left: 0;
-            border-radius: 0 @main-border-radius @main-border-radius 0;
+            border-radius: 0 @border-radius @border-radius 0;
             border-right-width: 1px;
             border-right-style: solid;
             border-right-color: @widget-border-color;
@@ -3213,7 +3164,7 @@ td.k-state-focused.k-state-selected,
 
         .k-pager-numbers.k-state-expanded .k-current-page .k-link
         {
-            border-radius: 0 0 @main-border-radius @main-border-radius;
+            border-radius: 0 0 @border-radius @border-radius;
         }
 
         .k-pager-numbers.k-state-expanded li
@@ -3556,7 +3507,7 @@ td.k-state-focused.k-state-selected,
         }
 
         &.k-state-focused {
-            border-radius: @main-border-radius;
+            border-radius: @border-radius;
             box-shadow: inset 0 0 2px 0 @accent, @focused-item-shadow;
         }
     }

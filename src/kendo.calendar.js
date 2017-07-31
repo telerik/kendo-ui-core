@@ -317,9 +317,15 @@ var __meta__ = { // jshint ignore:line
 
             disabled = compare(value, min) < 1;
             that[PREVARROW].toggleClass(DISABLED, disabled).attr(ARIA_DISABLED, disabled);
+            if (that[PREVARROW].hasClass(DISABLED)) {
+                that[PREVARROW].removeClass(HOVER);
+            }
 
             disabled = compare(value, max) > -1;
             that[NEXTARROW].toggleClass(DISABLED, disabled).attr(ARIA_DISABLED, disabled);
+            if (that[NEXTARROW].hasClass(DISABLED)) {
+                that[NEXTARROW].removeClass(HOVER);
+            }
 
             if (from && old && old.data("animating")) {
                 old.kendoStop(true, true);

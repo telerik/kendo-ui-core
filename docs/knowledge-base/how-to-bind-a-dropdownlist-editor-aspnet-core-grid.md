@@ -1,5 +1,5 @@
 ---
-title: How to Add a DropDownList for Inline Editing of an ASP.NET Core Grid?
+title: How to Add a DropDownList for Inline Editing of an ASP.NET Core Grid
 description: Add a DropDownList Editor for Kendo UI Grid ASP.NET Core
 type: troubleshooting
 page_title: Bind a DropDownList Editor in the Kendo UI Grid ASP.NET.Core
@@ -31,7 +31,7 @@ I can't get the dropdown to preselect the current row's dropdown id. How can I 
 Use a `.DropDownListFor(m => m)` definition as below: 
 
 ```
-@model BethelMarriage.Models.AdminViewModels.StateProvinceRegionViewModel
+@model Project.Models.StateProvinceRegionViewModel
 
 @(Html.Kendo().DropDownListFor(m => m)
     .DataValueField("Id") 
@@ -45,4 +45,4 @@ Use a `.DropDownListFor(m => m)` definition as below: 
 ## Steps to Reproduce
 
 This is a logged issue. The Core wrappers duplicate the property name when `DropDownList()` and `Name()` declaration is used.
-More information is available at: https://github.com/telerik/kendo-ui-core/issues/3447 
+More information is available at: [https://github.com/telerik/kendo-ui-core/issues/3447](https://github.com/telerik/kendo-ui-core/issues/3447)

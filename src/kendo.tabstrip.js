@@ -296,7 +296,8 @@ var __meta__ = { // jshint ignore:line
             }
 
             if (item.hasClass(DISABLEDSTATE)) {
-                item = this._item(item, action);
+                item.addClass(FOCUSEDSTATE);
+                this._focused = item;
             }
 
             return item;

@@ -97,13 +97,14 @@ var __meta__ = { // jshint ignore:line
 
         _keydown: function(e) {
             var that = this;
-            if (!that._isNativeButton()) {
-                if (e.keyCode == keys.ENTER || e.keyCode == keys.SPACEBAR) {
+            if (e.keyCode == keys.ENTER || e.keyCode == keys.SPACEBAR) {
+                if (that.options.enable) {
+                    that.element.addClass(SELECTEDSTATE);
+                }
+
+                if (!that._isNativeButton()) {
                     if (e.keyCode == keys.SPACEBAR) {
                         e.preventDefault();
-                        if (that.options.enable) {
-                            that.element.addClass(SELECTEDSTATE);
-                        }
                     }
                     that._click(e);
                 }
