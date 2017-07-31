@@ -18,7 +18,6 @@ var __meta__ = { // jshint ignore:line
         keys = kendo.keys,
         parse = kendo.parseDate,
         adjustDST = kendo.date.adjustDST,
-        getDate = kendo.date.getDate,
         weekInYear = kendo.date.weekInYear,
         extractFormat = kendo._extractFormat,
         template = kendo.template,
@@ -392,7 +391,7 @@ var __meta__ = { // jshint ignore:line
             }
 
             if (value === null) {
-                that._current = new Date(that._current.getFullYear(), that._current.getMonth(), that._current.getDate());
+                that._current = createDate(that._current.getFullYear(), that._current.getMonth(), that._current.getDate());
             }
 
             value = parse(value, options.format, options.culture);
@@ -470,6 +469,7 @@ var __meta__ = { // jshint ignore:line
                     method = key == keys.HOME ? "first" : "last";
                     temp = view[method](currentValue);
                     currentValue = new DATE(temp.getFullYear(), temp.getMonth(), temp.getDate(), currentValue.getHours(), currentValue.getMinutes(), currentValue.getSeconds(), currentValue.getMilliseconds());
+                    currentValue.setFullYear(temp.getFullYear());
                     prevent = true;
                 } else if (key == keys.PAGEUP) {
                     prevent = true;
@@ -488,7 +488,8 @@ var __meta__ = { // jshint ignore:line
                         currentValue = that._nextNavigatable(currentValue, value);
                     }
 
-                    min = getDate(min);
+                    min = createDate(min.getFullYear(), min.getMonth(), min.getDate());
+
                     if (isInRange(currentValue, min, max)) {
                         that._focus(restrictValue(currentValue, options.min, options.max));
                     }
@@ -877,7 +878,7 @@ var __meta__ = { // jshint ignore:line
         _toDateObject: function(link) {
             var value = $(link).attr(kendo.attr(VALUE)).split("/");
             //Safari cannot create correctly date from "1/1/2090"
-            value = new DATE(value[0], value[1], value[2]);
+            value = createDate(value[0], value[1], value[2]);
 
             return value;
         },
@@ -892,7 +893,7 @@ var __meta__ = { // jshint ignore:line
                 empty = month.empty;
 
             that.month = {
-                content: template('<td#=data.cssClass# role="gridcell"><a tabindex="-1" class="k-link#=data.linkClass#" href="#=data.url#" ' + kendo.attr("value") + '="#=data.dateString#" title="#=data.title#">' + (content || "#=data.value#") + '</a></td>', { useWithBlock: !!content }),
+                content: template('<td#=data.cssClass# role="gridcell"><a tabindex="-1" class="k-link#=data.linkClass#" href="#=data.url#" ' + kendo.attr(VALUE) + '="#=data.dateString#" title="#=data.title#">' + (content || "#=data.value#") + '</a></td>', { useWithBlock: !!content }),
                 empty: template('<td role="gridcell">' + (empty || "&nbsp;") + "</td>", { useWithBlock: !!empty }),
                 weekNumber: template('<td class="k-alt">' + (weekNumber || "#= data.weekNumber #") + "</td>", { useWithBlock: !!weekNumber })
             };
@@ -905,7 +906,7 @@ var __meta__ = { // jshint ignore:line
 
     var calendar = {
         firstDayOfMonth: function (date) {
-            return new DATE(
+            return createDate(
                 date.getFullYear(),
                 date.getMonth(),
                 1
@@ -916,7 +917,8 @@ var __meta__ = { // jshint ignore:line
             calendarInfo = calendarInfo || kendo.culture().calendar;
 
             var firstDay = calendarInfo.firstDay,
-            firstVisibleDay = new DATE(date.getFullYear(), date.getMonth(), 0, date.getHours(), date.getMinutes(), date.getSeconds(), date.getMilliseconds());
+            firstVisibleDay = new DATE(date.getFullYear(), date.getMonth(), 1, date.getHours(), date.getMinutes(), date.getSeconds(), date.getMilliseconds());
+            firstVisibleDay.setFullYear(date.getFullYear());
 
             while (firstVisibleDay.getDay() != firstDay) {
                 calendar.setTime(firstVisibleDay, -1 * MS_PER_DAY);
@@ -958,7 +960,7 @@ var __meta__ = { // jshint ignore:line
                 firstDayOfMonth = that.first(date),
                 lastDayOfMonth = that.last(date),
                 toDateString = that.toDateString,
-                today = new DATE(),
+                today = getToday(),
                 html = '<table tabindex="0" role="grid" class="k-content" cellspacing="0" data-start="' + toDateString(start) + '"><thead><tr role="row">';
                 if (isWeekColumnVisible) {
                     html += '<th scope="col" class="k-alt">' + options.messages.weekColumnHeader + '</th>';
@@ -968,7 +970,6 @@ var __meta__ = { // jshint ignore:line
                     html += '<th scope="col" title="' + names[idx] + '">' + shortNames[idx] + '</th>';
                 }
 
-                today = new DATE(today.getFullYear(), today.getMonth(), today.getDate());
                 adjustDST(today, 0);
                 today = +today;
 
@@ -979,8 +980,8 @@ var __meta__ = { // jshint ignore:line
                     start: start,
                     isWeekColumnVisible: isWeekColumnVisible,
                     weekNumber: options.weekNumber,
-                    min: new DATE(min.getFullYear(), min.getMonth(), min.getDate()),
-                    max: new DATE(max.getFullYear(), max.getMonth(), max.getDate()),
+                    min: createDate(min.getFullYear(), min.getMonth(), min.getDate()),
+                    max: createDate(max.getFullYear(), max.getMonth(), max.getDate()),
                     content: options.content,
                     empty: options.empty,
                     setter: that.setDate,
@@ -1036,7 +1037,7 @@ var __meta__ = { // jshint ignore:line
                 return calendar.firstDayOfMonth(date);
             },
             last: function(date) {
-                var last = new DATE(date.getFullYear(), date.getMonth() + 1, 0),
+                var last = createDate(date.getFullYear(), date.getMonth() + 1, 0),
                 first = calendar.firstDayOfMonth(date),
                 timeOffset = Math.abs(last.getTimezoneOffset() - first.getTimezoneOffset());
 
@@ -1088,9 +1089,9 @@ var __meta__ = { // jshint ignore:line
                 max = options.max;
 
                 return view({
-                    min: new DATE(min.getFullYear(), min.getMonth(), 1),
-                    max: new DATE(max.getFullYear(), max.getMonth(), 1),
-                    start: new DATE(options.date.getFullYear(), 0, 1),
+                    min: createDate(min.getFullYear(), min.getMonth(), 1),
+                    max: createDate(max.getFullYear(), max.getMonth(), 1),
+                    start: createDate(options.date.getFullYear(), 0, 1),
                     setter: this.setDate,
                     build: function(date) {
                         return {
@@ -1103,10 +1104,10 @@ var __meta__ = { // jshint ignore:line
                 });
             },
             first: function(date) {
-                return new DATE(date.getFullYear(), 0, date.getDate());
+                return createDate(date.getFullYear(), 0, date.getDate());
             },
             last: function(date) {
-                return new DATE(date.getFullYear(), 11, date.getDate());
+                return createDate(date.getFullYear(), 11, date.getDate());
             },
             compare: function(date1, date2){
                 return compare(date1, date2);
@@ -1153,9 +1154,9 @@ var __meta__ = { // jshint ignore:line
                 toDateString = this.toDateString;
 
                 return view({
-                    start: new DATE(year - year % 10 - 1, 0, 1),
-                    min: new DATE(options.min.getFullYear(), 0, 1),
-                    max: new DATE(options.max.getFullYear(), 0, 1),
+                    start: createDate(year - year % 10 - 1, 0, 1),
+                    min: createDate(options.min.getFullYear(), 0, 1),
+                    max: createDate(options.max.getFullYear(), 0, 1),
                     setter: this.setDate,
                     build: function(date, idx) {
                         return {
@@ -1169,11 +1170,11 @@ var __meta__ = { // jshint ignore:line
             },
             first: function(date) {
                 var year = date.getFullYear();
-                return new DATE(year - year % 10, date.getMonth(), date.getDate());
+                return createDate(year - year % 10, date.getMonth(), date.getDate());
             },
             last: function(date) {
                 var year = date.getFullYear();
-                return new DATE(year - year % 10 + 9, date.getMonth(), date.getDate());
+                return createDate(year - year % 10 + 9, date.getMonth(), date.getDate());
             },
             compare: function(date1, date2) {
                 return compare(date1, date2, 10);
@@ -1206,9 +1207,9 @@ var __meta__ = { // jshint ignore:line
                 }
 
                 return view({
-                    start: new DATE(year - year % 100 - 10, 0, 1),
-                    min: new DATE(minYear, 0, 1),
-                    max: new DATE(maxYear, 0, 1),
+                    start: createDate(year - year % 100 - 10, 0, 1),
+                    min: createDate(minYear, 0, 1),
+                    max: createDate(maxYear, 0, 1),
                     setter: this.setDate,
                     build: function(date, idx) {
                         var start = date.getFullYear(),
@@ -1233,11 +1234,11 @@ var __meta__ = { // jshint ignore:line
             },
             first: function(date) {
                 var year = date.getFullYear();
-                return new DATE(year - year % 100, date.getMonth(), date.getDate());
+                return createDate(year - year % 100, date.getMonth(), date.getDate());
             },
             last: function(date) {
                 var year = date.getFullYear();
-                return new DATE(year - year % 100 + 99, date.getMonth(), date.getDate());
+                return createDate(year - year % 100 + 99, date.getMonth(), date.getDate());
             },
             compare: function(date1, date2) {
                 return compare(date1, date2, 100);
@@ -1300,7 +1301,7 @@ var __meta__ = { // jshint ignore:line
                 }
             }
 
-            start = new DATE(start.getFullYear(), start.getMonth(), start.getDate(), 0, 0, 0);
+            start = createDate(start.getFullYear(), start.getMonth(), start.getDate());
             adjustDST(start, 0);
 
             data = build(start, idx, options.disableDates);
@@ -1376,6 +1377,14 @@ var __meta__ = { // jshint ignore:line
 
     function prevent (e) {
         e.preventDefault();
+    }
+
+    // creates date with full year
+    function createDate(year, month, date) {
+        var leapYear = 1904;
+        var dateObject = new DATE(leapYear, month, date);
+        dateObject.setFullYear(year);
+        return dateObject;
     }
 
     function getCalendarInfo(culture) {
