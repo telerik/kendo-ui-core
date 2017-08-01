@@ -673,13 +673,6 @@
             "typeMessage": "Escribir mensaje"
           }
         },
-        "saveAsDialog": {
-          "title": "Guardar como...",
-          "labels": {
-            "fileName": "Nombre de archivo",
-            "saveAsType": "Guardar como tipo"
-          }
-        },
         "exportAsDialog": {
           "title": "Exportar...",
           "labels": {

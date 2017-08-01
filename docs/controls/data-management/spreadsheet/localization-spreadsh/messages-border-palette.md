@@ -30,6 +30,7 @@ The `borderPalette` messages are used to [localize the Spreadsheet through JavaS
 
 ## See Also
 
+* [List of `colorpicker` Messages]({% slug localization_colorpicker_messages_spreadsheet_widget %})
 * [List of `dialogs` Messages]({% slug localization_dialogs_messages_spreadsheet_widget %})
 * [List of `filterMenu` Messages]({% slug localization_filter_menu_messages_spreadsheet_widget %})
 * [List of `toolbar` Messages]({% slug localization_toolbar_messages_spreadsheet_widget%})

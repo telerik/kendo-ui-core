@@ -649,13 +649,6 @@ $.extend(true, kendo.spreadsheet.messages.dialogs,{
       "typeMessage": "Digite a mensagem"
     }
   },
-  "saveAsDialog": {
-    "title": "Guardar Como...",
-    "labels": {
-      "fileName": "Nome do ficheiro",
-      "saveAsType": "Guardar como tipo"
-    }
-  },
   "exportAsDialog": {
     "title": "Exportar...",
     "labels": {

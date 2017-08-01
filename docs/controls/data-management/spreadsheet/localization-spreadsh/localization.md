@@ -13,7 +13,7 @@ Language localization of software is the process of its adaptation to a specific
 In terms of the Spreadsheet widget, you can localize its messages either:
 
 1. By using an external localization file where all text messages are translated in the language you need for your project, or
-2. By using JavaScript to manipulate the translation of only certain text entities.  
+2. By using JavaScript to manipulate the translation of only certain text entities.
 
 The messages represent the default written content of a widget that appears to end users. For example, the **Copy**, **Cut**, and **Paste** Toolbar commands.
 
@@ -49,8 +49,9 @@ To manipulate the content of only a particular messages and not of all messages,
 
 ### Namespaces
 
-Each message, depending on its location or function representation within the widget, has a corresponding namespace listed under a category. The following list provides all five namespace categories that the Spreadsheet uses. To see the full list of namespaces it holds, click on the respective entry.  
+Each message, depending on its location or function representation within the widget, has a corresponding namespace listed under a category. The following list provides all five namespace categories that the Spreadsheet uses. To see the full list of namespaces it holds, click on the respective entry.
 
+- [kendo.spreadsheet.messages.colorPicker]({% slug localization_colorpicker_messages_spreadsheet_widget %})
 - [kendo.spreadsheet.messages.borderPalette]({% slug localization_borderpalette_messages_spreadsheet_widget%})
 - [kendo.spreadsheet.messages.dialogs]({% slug localization_dialogs_messages_spreadsheet_widget%})
 - [kendo.spreadsheet.messages.filterMenu]({% slug localization_filter_menu_messages_spreadsheet_widget%})
@@ -94,6 +95,7 @@ When you apply JavaScript to update a particular message, indicate it by using i
 
 Other articles on Kendo UI Spreadsheet and localization:
 
+* [List of `colorpicker` Messages]({% slug localization_colorpicker_messages_spreadsheet_widget %})
 * [List of `borderpalette` Messages]({% slug localization_borderpalette_messages_spreadsheet_widget %})
 * [List of `dialogs` Messages]({% slug localization_dialogs_messages_spreadsheet_widget %})
 * [List of `filterMenu` Messages]({% slug localization_filter_menu_messages_spreadsheet_widget %})

@@ -731,13 +731,6 @@ $.extend(true, kendo.spreadsheet.messages.dialogs,{
       "typeMessage": "Típus üzenet"
     }
   },
-  "saveAsDialog": {
-    "title": "Mentés másként...",
-    "labels": {
-      "fileName": "Fájlnév",
-      "saveAsType": "Fájl típusa"
-    }
-  },
   "exportAsDialog": {
     "title": "Exportálás...",
     "labels": {

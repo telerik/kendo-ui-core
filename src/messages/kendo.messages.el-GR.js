@@ -731,13 +731,6 @@
             "typeMessage": "Τυπος μηνύματος"
           }
         },
-        "saveAsDialog": {
-          "title": "Αποθήκευση ως...",
-          "labels": {
-            "fileName": "Όνομα Αρχείου",
-            "saveAsType": "Αποθήκευση ως τύπος"
-          }
-        },
         "exportAsDialog": {
           "title": "Εξαγωγή...",
           "labels": {

@@ -1473,6 +1473,42 @@ test("filter method returns correct child items", function() {
      equal(dataSource.view()[0].children.view().length,1);
 });
 
+test("clear filter method returns correct child items", function() {
+    var dataSource = new kendo.data.HierarchicalDataSource({
+        data: [
+            { text: "Furniture", expanded:true, items: [
+                { text: "Tables & Chairs", expanded:true, items: [
+                    { text: "F1" },
+                    { text: "S" , expanded:false, items: [
+                    { text: "Ff1" },
+                    { text: "Ss1" },
+                    { text: "fF2" }
+                ] },
+                    { text: "F2" }
+                ] },
+                { text: "Sofas" },
+                { text: "Occasional Furniture" }
+            ] },
+            { text: "Decor", expanded:true, items: [
+                { text: "Bed Linen" },
+                { text: "Curtains & Blinds" },
+                { text: "Carpets" }
+            ] }
+        ]
+    });
+     dataSource.read();
+
+     dataSource.view()[0].load();
+     dataSource.filter({ field: 'text', operator: 'contains', value: "fa" });
+     dataSource.view()[0].load();
+     equal(dataSource.view()[0].children.view().length, 1);
+
+    dataSource.filter({});
+
+    dataSource.view()[0].load();
+    equal(dataSource.view()[0].children.view().length, 3);
+});
+
 test("filter method returns correct grand child items", function() {
     var dataSource = new kendo.data.HierarchicalDataSource({
         data: [

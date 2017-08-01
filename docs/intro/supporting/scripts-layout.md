@@ -41,6 +41,7 @@ Below are listed the script files for the Kendo UI Layout widgets.&nbsp;&nbsp;
 | | kendo.core.js | |
 | | kendo.userevents.js | |
 | | kendo.draganddrop.js | |
+| | kendo.popup.js | |
 | | kendo.fx.js | Animation feature (optional) |
 | | kendo.window.js | |
 

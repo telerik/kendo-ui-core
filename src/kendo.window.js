@@ -71,6 +71,7 @@
             PIN_UNPIN = KPIN + "," + KUNPIN,
             TITLEBAR_BUTTONS = ".k-window-titlebar .k-window-action",
             REFRESHICON = ".k-window-titlebar .k-i-refresh",
+            WINDOWEVENTSHANDLED = "WindowEventsHandled",
             zero = /^0[a-z]*$/i,
             isLocalUrl = kendo.isLocalUrl;
 
@@ -96,6 +97,7 @@
                     content,
                     windowContent,
                     windowFrame,
+                    globalWindow,
                     suppressActions = options && options.actions && !options.actions.length,
                     id;
 
@@ -104,6 +106,7 @@
                 position = options.position;
                 element = that.element;
                 content = options.content;
+                globalWindow = $(window);
 
                 if (suppressActions) {
                     options.actions = [];
@@ -183,16 +186,25 @@
                     .on("focus" + NS, proxy(that._focus, that))
                     .on("blur" + NS, proxy(that._blur, that));
 
-                windowFrame  = windowContent.find("." + KCONTENTFRAME)[0];
+                windowFrame = windowContent.find("." + KCONTENTFRAME)[0];
 
-                if(windowFrame){
-                    $(windowFrame.contentWindow)
-                        .on("blur" + NS, function(){
-                            that._blur();
-                        })
-                        .on("focus" + NS, function(){
-                            that._focus();
+                if(windowFrame && !globalWindow.data(WINDOWEVENTSHANDLED)){
+
+                    globalWindow.on("blur" + NS, function(){
+                        var element = $(document.activeElement).parent(KWINDOWCONTENT);
+                        if (element.length) {
+                            var windowInstance = kendo.widgetInstance(element);
+                            windowInstance._focus();
+                        }
+                    });
+
+                    globalWindow.on("focus" + NS, function(){
+                        $(KWINDOWCONTENT).each(function(i, element){
+                            kendo.widgetInstance($(element))._blur();
                         });
+                    });
+
+                    globalWindow.data(WINDOWEVENTSHANDLED, true);
                 }
 
                 this._resizable();
@@ -965,13 +977,13 @@
 
                 if (that._shouldFocus(target)) {
                     if (that.isMinimized()) {
-                        setTimeout(function(){
-                            that.wrapper.focus();
-                        });
-                    } else {
+                        that.wrapper.focus();
+                    } else if ($(target).is(KOVERLAY)) {
                         setTimeout(function(){
                             that.element.focus();
                         });
+                    } else {
+                        that.element.focus();
                     }
 
                     var scrollTop = $(window).scrollTop(),

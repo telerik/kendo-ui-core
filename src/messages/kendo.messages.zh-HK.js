@@ -628,13 +628,6 @@ if (kendo.spreadsheet && kendo.spreadsheet.messages.dialogs) {
                     "typeMessage": "種類訊息"
                 }
             },
-            "saveAsDialog": {
-                "title": "另存...",
-                "labels": {
-                    "fileName": "檔案名稱",
-                    "saveAsType": "另存種類"
-                }
-            },
             "exportAsDialog": {
                 "title": "滙出...",
                 "labels": {

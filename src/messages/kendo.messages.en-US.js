@@ -734,13 +734,6 @@ $.extend(true, kendo.spreadsheet.messages.dialogs,{
       "typeMessage": "Type message"
     }
   },
-  "saveAsDialog": {
-    "title": "Save As...",
-    "labels": {
-      "fileName": "File name",
-      "saveAsType": "Save as type"
-    }
-  },
   "exportAsDialog": {
     "title": "Export...",
     "labels": {
@@ -812,6 +805,16 @@ $.extend(true, kendo.spreadsheet.messages.filterMenu,{
       "lt": "Is less than"
     }
   }
+});
+}
+
+if (kendo.spreadsheet && kendo.spreadsheet.messages.colorPicker) {
+kendo.spreadsheet.messages.colorPicker =
+$.extend(true, kendo.spreadsheet.messages.colorPicker,{
+  "reset": "Reset color",
+  "customColor": "Custom color...",
+  "apply": "Apply",
+  "cancel": "Cancel"
 });
 }
 

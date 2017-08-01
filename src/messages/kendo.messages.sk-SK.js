@@ -647,13 +647,6 @@ $.extend(true, kendo.spreadsheet.messages.dialogs, {
             "typeMessage": "Správa typu"
         }
     },
-    "saveAsDialog": {
-        "title": "Uložiť Ako...",
-        "labels": {
-            "fileName": "Meno súboru",
-            "saveAsType": "Uložiť ako typ"
-        }
-    },
     "exportAsDialog": {
         "title": "Exportovať...",
         "labels": {

@@ -36,7 +36,7 @@ The `toolbar` messages are used to [localize the Spreadsheet through JavaScript]
           "cut": "Cut",
           "deleteColumn": "Delete column",
           "deleteRow": "Delete row",
-          "excelExport": "Export to Excel...",
+          "exportAs": "Export",
           "filter": "Filter",
           "fontFamily": "Font",
           "fontSize": "Font size",
@@ -76,11 +76,7 @@ The `toolbar` messages are used to [localize the Spreadsheet through JavaScript]
             "undo": "Undo"
           },
           "sort": "Sort",
-          "sortAsc": "Sort ascending",
-          "sortDesc": "Sort descending",
           "sortButtons": {
-            "sortSheetAsc": "Sort sheet A to Z",
-            "sortSheetDesc": "Sort sheet Z to A",
             "sortRangeAsc": "Sort range A to Z",
             "sortRangeDesc": "Sort range Z to A"
           },
@@ -93,6 +89,7 @@ The `toolbar` messages are used to [localize the Spreadsheet through JavaScript]
 
 ## See Also
 
+* [List of `colorpicker` Messages]({% slug localization_colorpicker_messages_spreadsheet_widget %})
 * [List of `borderpalette` Messages]({% slug localization_borderpalette_messages_spreadsheet_widget %})
 * [List of `dialogs` Messages]({% slug localization_dialogs_messages_spreadsheet_widget %})
 * [List of `filterMenu` Messages]({% slug localization_filter_menu_messages_spreadsheet_widget %})

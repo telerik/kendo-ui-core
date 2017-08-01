@@ -341,4 +341,74 @@ test("Widget value is correctly after initialized with disabled value", function
     ok(cal.element.find('tr').eq(2).children().first().hasClass("k-state-selected"));
 });
 
+test("Year 0 should initialize year 1900", function () {
+    var cal = new Calendar(div, {
+        value: new Date(0, 1, 1)
+    });
+
+    equal(1900, cal.value().getFullYear());
+});
+
+test("Full year 0 should initialize year 1900", function () {
+    var year = 1;
+    var date = new Date(2016, 1, 1);
+    date.setFullYear(year);
+
+    var cal = new Calendar(div, { value: date, min: date });
+
+    equal(year, cal.value().getFullYear());
+});
+
+test("Year 99 should initialize year 1999", function () {
+    var cal = new Calendar(div, {
+        value: new Date(99, 1, 1)
+    });
+
+    equal(1999, cal.value().getFullYear());
+});
+
+test("Full year 99 should initialize year 1900", function () {
+    var year = 99;
+    var date = new Date(2016, 1, 1);
+    date.setFullYear(year);
+
+    var cal = new Calendar(div, { value: date, min: date });
+
+    equal(year, cal.value().getFullYear());
+});
+
+test("Century view support dates less then 200 year", function () {
+    var minDate = new Date(Date.UTC(1000, 0, 1));
+    minDate.setUTCFullYear(100); // set year to 100
+
+    var cal = new Calendar(div, {
+        min: minDate,
+        value: new Date(200, 0, 1),
+        start: "century"
+    });
+
+    // navigate to previous century
+    var header = cal.element.find(".k-header");
+    var prevButton = cal.element.find(".k-header .k-nav-prev");
+    prevButton.click();
+
+    // first decade should be 100 - 1009
+    var firstDecade = cal.element.find(".k-content .k-link:first");
+    equal(firstDecade.html(), "100 - 109");
+});
+
+
+test("Century view supports min value equal to 0001-01-01", function () {
+    var minDate = new Date(Date.UTC(1000, 0, 1));
+    minDate.setUTCFullYear(1); // set year to 0001
+
+    var cal = new Calendar(div, {
+        min: minDate,
+        value: new Date(1900, 0, 1),
+        start: "century"
+    });
+
+    equal(cal.min(), minDate);
+});
+
 }());

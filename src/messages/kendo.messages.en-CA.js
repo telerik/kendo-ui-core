@@ -693,13 +693,6 @@ $.extend(true, kendo.spreadsheet.messages.dialogs,{
       "typeMessage": "Type message"
     }
   },
-  "saveAsDialog": {
-    "title": "Save As...",
-    "labels": {
-      "fileName": "File name",
-      "saveAsType": "Save as type"
-    }
-  },
   "exportAsDialog": {
     "title": "Export...",
     "labels": {

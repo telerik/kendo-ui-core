@@ -119,15 +119,12 @@ The `dialogs` messages are used to [localize the Spreadsheet through JavaScript]
               "typeMessage": "Type message"
             }
           },
-          "saveAsDialog": {
+          "exportAsDialog": {
             "title": "Save As...",
             "labels": {
               "fileName": "File name",
               "saveAsType": "Save as type"
             }
-          },
-          "excelExportDialog": {
-            "title": "Export to Excel..."
           },
           "modifyMergedDialog": {
             "errorMessage": "Cannot change part of a merged cell."
@@ -149,6 +146,7 @@ The `dialogs` messages are used to [localize the Spreadsheet through JavaScript]
 
 ## See Also
 
+* [List of `colorpicker` Messages]({% slug localization_colorpicker_messages_spreadsheet_widget %})
 * [List of `borderpalette` Messages]({% slug localization_borderpalette_messages_spreadsheet_widget %})
 * [List of `filterMenu` Messages]({% slug localization_filter_menu_messages_spreadsheet_widget %})
 * [List of `toolbar` Messages]({% slug localization_toolbar_messages_spreadsheet_widget%})
