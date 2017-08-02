@@ -1,18 +1,16 @@
 ---
 title: Use Nested Model Properties
 page_title: Use Nested Model Properties | Kendo UI Grid
-description: "Learn how to use use nested model properties in the Kendo UI Grid widget."
+description: "Learn how to use nested model properties in the Kendo UI Grid widget."
 previous_url: /controls/data-management/grid/how-to/use-nested-model-properties
 slug: howto_use_nested_model_properties_grid
 ---
 
 # Use Nested Model Properties
 
-The following example demonstrates how to use nested model properties.
+When you use `from` together with CRUD operations and add new rows, you also have to define in `schema.model.fields` the original field or the sequence of nested fields which are used inside `from`.
 
-The CRUD operations are not fully configured.
-
-> When using `from` together with CRUD operations and adding of new rows, the original field (or sequence of nested fields) that is used inside `from` needs to be defined in `schema.model.fields` as well. This is necessary, because during updates and creates, the Kendo UI DataSource will try to construct a data item object, which matches the original (server-side) data item structure. For new data items, this structure does not exist and needs to be defined explicitly. For example:
+The reason is that during updates and creates, the Kendo UI DataSource tries to construct a data item object which matches the original (server-side) data-item structure. For new data items, such a structure does not exist and needs to be defined explicitly, as demonstrated in the following example.
 
 ```
     myClientField1: { from: "myServerField1.foo" },
@@ -24,6 +22,8 @@ The CRUD operations are not fully configured.
     myClientField3: { from: "myServerField3.myServerField4.baz" },
     myServerField3: { defaultValue: { myServerField4: {} } },
 ```
+
+The following example demonstrates how to use nested model properties. The CRUD operations are not fully configured.
 
 ###### Example
 
@@ -62,7 +62,7 @@ The CRUD operations are not fully configured.
                 lname: {
                   from: "person.lname"
                 },
-                // a default value is needed for person to be defined to support additions
+                // A default value is needed for person to be defined to support additions
                 person: { defaultValue: {} },
                 bdate: {
                   type: "date",

@@ -89,6 +89,21 @@ The following example demonstrates the conditions in the `ClientTemplate`.
         "# } #"
     );
 
+### How to Apply Conditional Logic in Column Templates for Server Bound Grids?
+
+The following example demonstrates the syntax when using a column templet in a server bound Grid.
+
+###### Example
+
+    columns.Bound(p => p.ProductName).Template( @<text>
+        @if(@item.ProductName != null){
+             @item.ProductName
+        } else {
+            "No data"
+        }
+        </text>
+    );
+
 ### How to Display Checkboxes in Ajax-Bound Grids?
 
 The `checked` attribute specifies whether a checkbox is displayed as checked or not checked. Use a condition to set that attribute.

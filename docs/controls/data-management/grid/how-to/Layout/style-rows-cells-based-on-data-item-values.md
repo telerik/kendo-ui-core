@@ -8,13 +8,18 @@ slug: howto_customize_rowsand_cells_basedon_dataitem_values_grid
 
 # Customize Rows and Cells Based on Data Item Values
 
-The examples below demonstrate how to customize the cells and rows of the Grid based on the values of the data items. The demo applies custom CSS classes, but its approach is still suitable even if you apply inline styles or other HTML attributes.
+Your project might require the customization of the cells and rows of the Grid based on the values of the data items.
 
-Three different options to achieve the customization are listed in the following sections.
+Although the demos apply custom CSS classes, you can still use the demonstrated approaches even if you apply inline styles or other HTML attributes.
 
-## Use a row template
+To customize the rows and cells based on the values of the data items, utilize any of the following approaches:
+* [Use a row template](#use-a-row-template)
+* [Iterate the table rows](#iterate-the-table-rows)
+* [Iterate the data items](#iterate-the-data-items)
 
-This approach is suitable if you do not intend to apply hierarchy, grouping, editing, and frozen columns to the Grid, because these features are not supported when row templates are used. With this approach, you directly add template expressions in the `rowTemplate` and `altRowTemplate` definitions to determine which custom CSS classes should be applied to a given row/cell.
+## Use a Row Template
+
+The usage of a row template is suitable only if you do not intend to use hierarchy, grouping, editing, and frozen columns&mdash;the Grid does not support the simultaneous application of these features and row templates. The approach directly adds template expressions to the `rowTemplate` and `altRowTemplate` definitions and determines which custom CSS classes will be applied to a given row or cell.
 
 ###### Example
 
@@ -98,13 +103,11 @@ This approach is suitable if you do not intend to apply hierarchy, grouping, edi
         });
       });
     </script>
-
 ```
 
+## Iterate the Table Rows
 
-## Use a dataBound handler and iterate the table rows
-
-This approach is suitable if you intend to customize all rows of the Grid. It loops through all Grid rows and determines what custom class names should be applied to them, based on the values that they contain.
+The usage of the `dataBound` handler and the iteration of the table rows is suitable only if you intend to customize all Grid rows. The approach loops through all Grid rows and, based on the values they contain, determines which custom-class names will be applied to them.
 
 ###### Example
 
@@ -196,11 +199,11 @@ This approach is suitable if you intend to customize all rows of the Grid. It lo
         });
       });
     </script>
-
 ```
 
-## Use a dataBound handler and iterate the data items
-This approach is suitable if you intend to customize only part of the Grid rows. It loops through all Grid data items and accesses only the rows that match certain conditions.
+## Iterate the Data Items
+
+The usage of the `dataBound` handler and the iteration of the data items is suitable only if you intend to customize part of the Grid rows. The approach loops through all data items of the Grid and accesses just the rows which match certain conditions.
 
 ###### Example
 

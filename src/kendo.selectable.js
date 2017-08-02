@@ -54,6 +54,8 @@ var __meta__ = { // jshint ignore:line
 
             multiple = that.options.multiple;
 
+            INPUTSELECTOR = that.options.inputSelectors;
+
             if (this.options.aria && multiple) {
                 that.element.attr("aria-multiselectable", true);
             }
@@ -79,6 +81,7 @@ var __meta__ = { // jshint ignore:line
         options: {
             name: "Selectable",
             filter: ">*",
+            inputSelectors: INPUTSELECTOR,
             multiple: false,
             relatedTarget: $.noop
         },
@@ -126,13 +129,13 @@ var __meta__ = { // jshint ignore:line
             target = target.add(that.relatedTarget(target));
 
             if (shiftKey) {
-                that.selectRange(that._firstSelectee(), target);
+                that.selectRange(that._firstSelectee(), target, e);
             } else {
                 if (selected && ctrlKey) {
                     that._unselect(target);
-                    that._notify(CHANGE);
+                    that._notify(CHANGE, e);
                 } else {
-                    that.value(target);
+                    that.value(target, e);
                 }
 
                 that._lastActive = that._downTarget = target;
@@ -205,7 +208,7 @@ var __meta__ = { // jshint ignore:line
             e.preventDefault();
         },
 
-        _end: function() {
+        _end: function(e) {
             var that = this;
 
             that._marquee.remove();
@@ -218,7 +221,7 @@ var __meta__ = { // jshint ignore:line
             var target = that.element.find(that.options.filter + "." + ACTIVE);
             target = target.add(that.relatedTarget(target));
 
-            that.value(target);
+            that.value(target, e);
             that._lastActive = that._downTarget;
             that._items = null;
         },
@@ -253,7 +256,7 @@ var __meta__ = { // jshint ignore:line
             }
         },
 
-        value: function(val) {
+        value: function(val, e) {
             var that = this,
                 selectElement = proxy(that._selectElement, that);
 
@@ -262,7 +265,7 @@ var __meta__ = { // jshint ignore:line
                     selectElement(this);
                 });
 
-                that._notify(CHANGE);
+                that._notify(CHANGE, e);
                 return;
             }
 
@@ -339,7 +342,7 @@ var __meta__ = { // jshint ignore:line
             this._unselect(items);
         },
 
-        selectRange: function(start, end) {
+        selectRange: function(start, end, e) {
             var that = this,
                 idx,
                 tmp,
@@ -372,7 +375,7 @@ var __meta__ = { // jshint ignore:line
                 that._selectElement(items[idx]);
             }
 
-            that._notify(CHANGE);
+            that._notify(CHANGE, e);
         },
 
         destroy: function() {
