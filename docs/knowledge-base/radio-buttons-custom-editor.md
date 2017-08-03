@@ -1,5 +1,5 @@
 ---
-title: Radio Buttons as Grid Custom Editor
+title: Use Radio Buttons as Custom Grid Editor
 description: An example on how to use radio buttons as a custom editor in the Kendo UI Grid.
 type: how-to
 page_title: Use Radio Buttons as Custom Editor | Kendo UI Grid
@@ -10,10 +10,11 @@ res_type: kb
 ---
 
 ## Environment
+
 <table>
  <tr>
   <td>Product</td>
-  <td>Grid for Progress® Kendo UI®</td>
+  <td>Grid for Progress Kendo UI</td>
  </tr>
  <tr>
   <td>Progress Kendo UI version</td>
@@ -21,17 +22,16 @@ res_type: kb
  </tr>
 </table>
 
-
 ## Description
 
-How can I use radio buttons as a custom editor in the Kendo UI Grid? 
+How can I use radio buttons as a custom editor in the Kendo UI Grid?
 
 ## Solution
 
 To create an editor with radio buttons:
 
-1. Configure a [columns.editable function](http://docs.telerik.com/kendo-ui/api/javascript/ui/grid#configuration-columns.editable) that will always return `false`.
-1. Configure a [columns.template function](http://docs.telerik.com/kendo-ui/api/javascript/ui/grid#configuration-columns.template).
+1. Configure a [`columns.editable`](http://docs.telerik.com/kendo-ui/api/javascript/ui/grid#configuration-columns.editable) function that will always return `false`.
+1. Configure a [`columns.template`](http://docs.telerik.com/kendo-ui/api/javascript/ui/grid#configuration-columns.template)  function.
     1. Get the current value based on the [`dataItem`](http://docs.telerik.com/kendo-ui/api/javascript/ui/grid#methods-dataItem).
     1. Add a radio button for every value in an array.
     1. Based on the current value, select the relevant radio button.
@@ -186,4 +186,4 @@ To create an editor with radio buttons:
 
 ## See Also
 
-[Grid Editing Custom Editor Demo](http://demos.telerik.com/kendo-ui/grid/editing-custom)
+* [Demo on Custom Editing in the Grid](http://demos.telerik.com/kendo-ui/grid/editing-custom)

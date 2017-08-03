@@ -1,14 +1,12 @@
 ---
-title: Kendo ComboBox Virtualization with MVVM
-description: An example on how to implement virtualization for ComboBox
+title: Virtualize ComboBox with MVVM
+description: An example on how to implement virtualization for the Kendo UI ComboBox in MVVM projects.
 type: how-to
 page_title: Implement Virtualization for MVVM ComboBox | Kendo UI ComboBox
-slug: how-to-virtualize-mvvm-combobox
-position: 0
+previous_url: \knowledge-base\how-to-virtualize-mvvm-combobox
+slug: virtualize-mvvm-combobox
 tags: kendoui, kendo, kendo, kendoui, combobox, mvvm, virtualization
-teampulseid:
 ticketid: 1121707
-pitsid:
 res_type: kb
 ---
 
@@ -17,7 +15,7 @@ res_type: kb
 <table>
  <tr>
   <td>Product</td>
-  <td>MVVM for Progress® Kendo UI®</td>
+  <td>MVVM for Progress Kendo UI</td>
  </tr>
  <tr>
   <td>Operating System</td>
@@ -29,16 +27,15 @@ res_type: kb
  </tr>
 </table>
 
-
 ## Description
 
-How can I implement virtualization for my ComboBox in MVVM binding scenario?
+How can I implement virtualization for the ComboBox in an MVVM-binding scenario?
 
 ## Solution
 
-You should specify the itemHeight and the valueMapper in the **data-virtual** attribute of the combobox:
+Specify the `itemHeight` and the `valueMapper` in the `data-virtual` attribute of the ComboBox.
 
-``` html 
+``` html
 
 <div id="example">
         <h4>Search for shipping name</h4>
@@ -103,9 +100,8 @@ function convertValues(value) {
         return data;
 }
 </script>
-
 ```
 
 ## See Also
 
-Combobox Virtualization: [http://docs.telerik.com/kendo-ui/controls/editors/combobox/virtualization#data-and-ui-virtualization](ttp://docs.telerik.com/kendo-ui/controls/editors/combobox/virtualization#data-and-ui-virtualization)
+* [Virtualization of the ComboBox](http://docs.telerik.com/kendo-ui/controls/editors/combobox/virtualization#data-and-ui-virtualization)

@@ -12,6 +12,7 @@
 @button-hover-background-color: @hover-background;
 @button-hover-border-color: @hover-background;
 @button-active-background: @accent;
+@button-active-text-color: @selected-text-color;
 @button-active-border-color: @accent;
 @button-focused-border-color: contrast(@base, lighten(@base, 14%), darken(@base, 14%), 0.5);
 @button-focused-shadow: inset 0 0 0 1px @hover-border-color;
@@ -170,6 +171,7 @@
 @import "common/mixins.less";
 @import "mixins/all.less";
 @import "themes/type.less";
+@import "themes/button.less";
 
 .k-in,
 .k-item,
@@ -272,7 +274,6 @@ td.k-group-cell,
 }
 
 .k-content,
-.k-editable-area,
 .k-panelbar > li.k-item,
 .k-panel > li.k-item,
 .k-tiles
@@ -393,7 +394,6 @@ textarea.k-textbox:hover,
 .k-grouping-header,
 .k-pager-wrap,
 .k-textbox,
-.k-button,
 .k-progressbar,
 .k-draghandle,
 .k-autocomplete,
@@ -418,7 +418,6 @@ textarea.k-textbox:hover,
 .k-toolbar,
 .k-grouping-header,
 .k-pager-wrap,
-.k-button,
 .k-draghandle,
 .k-treemap-tile,
 html .km-pane-wrapper .k-header
@@ -483,13 +482,6 @@ html .km-pane-wrapper .k-header
 
 .k-loading-image { background-image: url('@{image-folder}/loading-image.gif'); }
 .k-loading-color { background-color: @loading-panel-color; }
-
-.k-button
-{
-    color: @button-text-color;
-    border-color: @button-border-color;
-    background-color: @button-background-color;
-}
 
 .k-draghandle
 {
@@ -637,67 +629,8 @@ html .km-pane-wrapper .k-header
     background-color: @active-background-color;
 }
 
-.k-button:focus,
-.k-button.k-state-focused
-{
-    border-color: @button-focused-border-color;
-}
-
-.k-button:hover,
-.k-button.k-state-hover
-{
-    color: @button-hover-text-color;
-    border-color: @button-hover-border-color;
-    background-color: @button-hover-background-color;
-}
-
-.k-button.k-state-focused {
-    color: @button-hover-text-color;
-}
-
 .k-tabstrip-scrollable .k-button.k-bare:hover {
     background: @button-hover-background-color !important;
-}
-
-.k-button:active,
-.k-button.k-state-active
-{
-    color: @selected-text-color;
-    background-color: @button-active-background;
-    border-color: @button-active-border-color;
-}
-
-.k-button:active:hover,
-.k-button.k-state-active:hover
-{
-    color: @primary-hover-text-color;
-    border-color: @primary-hover-border-color;
-    background-color: @primary-hover-background-color;
-}
-
-.k-button[disabled],
-.k-button.k-state-disabled,
-.k-state-disabled .k-button,
-.k-state-disabled .k-button:hover,
-.k-button.k-state-disabled:hover,
-.k-state-disabled .k-button:active,
-.k-button.k-state-disabled:active,
-.k-listbox .k-button.k-state-disabled
-{
-    color: @disabled-text-color;
-    border-color: @disabled-border-color;
-    background-color: @disabled-background-color;
-    .composite-background(@disabled-gradient);
-}
-
-.k-button:focus:not(.k-state-disabled):not([disabled])
-{
-    .box-shadow(@button-focused-shadow);
-}
-
-.k-button:focus:active:not(.k-state-disabled):not([disabled])
-{
-    .box-shadow(@button-focused-active-shadow);
 }
 
 .k-menu .k-state-hover>.k-state-active
@@ -884,8 +817,7 @@ html .km-pane-wrapper .k-header
 .k-list>.k-state-focused,
 .k-listview>.k-state-focused,
 .k-grid-header th.k-state-focused,
-td.k-state-focused,
-.k-button.k-state-focused
+td.k-state-focused
 {
     .box-shadow(@focused-item-shadow);
 }
@@ -944,10 +876,6 @@ td.k-state-focused.k-state-selected
     border-color: @hover-border-color;
 }
 
-.k-button:hover,
-.k-button.k-state-hover,
-.k-button:focus,
-.k-button.k-state-focused,
 .k-textbox:hover,
 .k-state-hover,
 .k-state-hover:hover,
@@ -974,22 +902,17 @@ div.k-filebrowser-dropzone em,
 .k-state-active,
 .k-state-active:hover,
 .k-state-active>.k-link,
-.k-button:active,
 .k-panelbar>.k-item>.k-state-focused
 {
     .composite-background(@active-gradient);
 }
 
 .k-state-selected,
-.k-button:active,
-.k-button.k-state-active,
 .k-draghandle.k-state-selected:hover
 {
     .composite-background(@selected-gradient);
 }
 
-.k-button:active,
-.k-button.k-state-active,
 .k-draghandle.k-state-selected:hover
 {
     background-position: 50% 50%;
@@ -1067,7 +990,6 @@ div.k-filebrowser-dropzone em
 
 .k-state-disabled,
 .k-state-disabled .k-link,
-.k-state-disabled .k-button,
 .k-other-month,
 .k-other-month .k-link,
 .k-dropzone em,
@@ -1355,8 +1277,7 @@ div.k-filebrowser-dropzone em
 }
 
 /* Shadows */
-.k-widget,
-.k-button
+.k-widget
 {
     .box-shadow(@widget-shadow);
 }
@@ -1544,7 +1465,6 @@ div.k-filebrowser-dropzone em
 
 /* Border radius */
 .k-block,
-.k-button,
 .k-textbox,
 .k-drag-clue,
 .k-touch-scrollbar,
@@ -2264,7 +2184,6 @@ html .km-pane-wrapper .km-widget,
     background-color: transparent;
 }
 
-.k-button:focus,
 .k-split-button:focus {
     outline:none;
 }

@@ -1,22 +1,29 @@
 ---
-title: Date formats
-page_title: Date formats | Kendo UI Grid
-description: "This acritle describes most commons scenarios for using dates in the Grid on the client and on the server"
+title: Date Formats
+page_title: Date Formats | Kendo UI Grid
+description: "The most common scenarios for using dates in the Kendo UI Grid on the client and on the server."
+previous_url: /controls/data-management/grid/date-formats-on-the-client-and-on-the-server
 slug: dateformats_kendoui_grid_widget
-position: 9
+position: 8
 ---
 
-# Date Formats on the Client and on the Server
+# Date Formats
 
-When using the Grid to display values, there are different scenarios which have to be covered to ensure that the dates are shown in the Grid and saved in the database in the expected format.
+When the Grid displays values, you need to ensure that the dates are rendered properly and saved in the database in the expected format.
 
-1. [Show the dates depending on the client timezone.](#show-the-dates-depending-on-the-client-timezone)
-1. [Use UTC on Both Client and Server.](#use-utc-on-both-client-and-server)
-1. [Allow the User to Customize the Timezone](#allow-the-user-to-customize-the-timezone)
+## Scenarios
 
-### Show the Dates Depending on the Client Timezone
+The most common scenarios which cover the rendering of dates by the Grid are:
 
-This is the default behaviour of the Grid. The date objects are created on the client once they are received from the server. The default JavaScript date object will automatically add the time offset based on the current time. For example, the following code will create different time with offset depenting on the current timezone. This was chosen for default behaviour as it is the date objects default behaviour and mostly the users expects to see the date in its current timezone.
+1. [Showing the dates depending on the client timezone](#showing-dates-depending-on-the-client-timezone)
+1. [Using UTC on both client and server](#using-utc-on-both-client-and-server)
+1. [Allowing the user to customize the timezone](#allowing-the-user-to-customize-the-timezone)
+
+### Showing Dates Depending on the Client Timezone
+
+This scenario represents the default behavior of the Grid. The `date` objects are created on the client immediately after they are received from the server. Based on the current time, the default JavaScript `date` object automatically adds the time offset. This approach was chosen as default behavior because the `date` objects demonstrate the same default behavior and most users expect to see the date in its current timezone.
+
+The following example demonstrates how to create different time with an offset depending on the current timezone.
 
 ```html
   <p></p>
@@ -32,11 +39,11 @@ This is the default behaviour of the Grid. The date objects are created on the c
     </script>
 ```
 
-### Use UTC on Both Client and Server
+### Using UTC on Both Client and Server
 
-This will cover the scenario when the desired result is to have date shown in UTC timezone regardless of the user timezoe. Please refer to the following article demonstrating how to [set the UTC timezone on both Client and Server](http://docs.telerik.com/aspnet-mvc/helpers/grid/how-to/editing/utc-time-on-both-server-and-client)
+The application of this scenario intends to display the date in a UTC timezone regardless of the user timezone. For a complete implementation of this behavior, refer to the article on [setting the UTC timezone on both client and server](http://docs.telerik.com/aspnet-mvc/helpers/grid/how-to/editing/utc-time-on-both-server-and-client).
 
-### Allow the User to Customize the Timezone
+### Allowing the User to Customize the Timezone
 
 The following example demonstrates how to allow the user to manually select the desired timezone.
 
@@ -51,8 +58,8 @@ The following example demonstrates how to allow the user to manually select the 
         currentoffsetMiliseconds = (new Date()).getTimezoneOffset() * 60000;
         offsetMiliseconds = 0;
 
-        //Modify the current offset if the server is not in UTC
-        //currentoffsetMiliseconds = ((new Date()).getTimezoneOffset() - 120) * 60000;
+        // Modify the current offset if the server is not in UTC
+        // currentoffsetMiliseconds = ((new Date()).getTimezoneOffset() - 120) * 60000;
 
         $(document).ready(function() {
 
@@ -179,15 +186,15 @@ The following example demonstrates how to allow the user to manually select the 
           }
         }
 
-        function offsetDateFields(obj) { 
+        function offsetDateFields(obj) {
           var tizeZoneValue = $("#timeZone").data('kendoDropDownList').value();
           for (var name in obj) {
             var prop = obj[name];
-            // The following replace method is needed because the date are received from the server in the following format "/Date(1500469281437)/"
+            // The following replace method is needed because the dates are received from the server in the following format "/Date(1500469281437)/"
             if (typeof (prop) === "string" && prop.indexOf("/Date(") == 0) {
               obj[name] = prop.replace(/\d+/, function (n) {     
 
-                //colculate the offset based on the user selection in the DropDownList
+                // Calculate the offset based on the user selection in the DropDownList
                 offsetMiliseconds = (3600000 * tizeZoneValue);
 
                 // Remove the current timezone offset and add the offset choose by the user in the DropDownList

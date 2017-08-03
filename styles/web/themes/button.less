@@ -1,0 +1,103 @@
+// Default button
+.k-button {
+    .border-radius();
+    border-color: @button-border-color;
+    color: @button-text-color;
+    background-color: @button-background-color;
+    .composite-background(@widget-gradient);
+    background-position: 50% 50%;
+
+    // Hover state
+    &:hover,
+    &.k-state-hover {
+        color: @button-hover-text-color;
+        border-color: @button-hover-border-color;
+        background-color: @button-hover-background-color;
+        .composite-background(@hover-gradient);
+    }
+
+    // Pressed state
+    &:active,
+    &.k-state-active {
+        color: @button-active-text-color;
+        background-color: @button-active-background;
+        border-color: @button-active-border-color;
+        .composite-background(@selected-gradient);
+
+        &:hover {
+            color: @primary-hover-text-color;
+            border-color: @primary-hover-border-color;
+            background-color: @primary-hover-background-color;
+        }
+    }
+
+    // Focused state
+    .k-button:focus:not(.k-state-disabled):not([disabled]),
+    .k-button.k-state-focused:not(.k-state-disabled):not([disabled]) {
+        border-color: @button-focused-border-color;
+        .box-shadow(@button-focused-shadow);
+    }
+
+    // Disabled state
+    &[disabled],
+    &[disabled]:hover,
+    .k-state-disabled &,
+    .k-state-disabled &:hover,
+    .k-state-disabled &:active,
+    &.k-state-disabled,
+    &.k-state-disabled:hover,
+    &.k-state-disabled:active {
+        color: @disabled-text-color;
+        border-color: @disabled-border-color;
+        background-color: @disabled-background-color;
+        .composite-background(@disabled-gradient);
+        .box-shadow(none);
+    }
+
+}
+
+
+
+
+// Button group
+.k-button-group {
+
+    // Focused state
+    .k-button:focus,
+    .k-button.k-state-focused,
+    > input[type="radio"]:focus + .k-button,
+    > input[type="checkbox"]:focus + .k-button {
+    }
+
+    // Selected state
+    .k-button:active,
+    .k-button.k-state-active,
+    > input[type="radio"]:checked + .k-button,
+    > input[type="checkbox"]:checked + .k-button {
+    }
+
+    // Selected hover state
+    .k-button:active:hover,
+    .k-button.k-state-active:hover
+    > input[type="radio"]:hover + .k-button,
+    > input[type="checkbox"]:hover + .k-button {
+    }
+
+    .k-button {
+        .border-radius( 0 );
+    }
+
+    .k-group-start,
+    .k-button:first-child {
+        .border-left-radius();
+    }
+    .k-group-end,
+    .k-button:last-child {
+        .border-right-radius();
+    }
+    .k-group-start.k-group-end,
+    .k-button:first-child:last-child {
+        .border-radius();
+    }
+
+}

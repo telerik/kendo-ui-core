@@ -13,7 +13,6 @@
 /* main gradient */
 
 .k-block,
-.k-button,
 .k-header,
 .k-grid-header,
 .k-toolbar,
@@ -54,9 +53,7 @@
 .k-input[type="text"],
 .k-input[type="number"],
 .k-textbox,
-.k-picker-wrap .k-input,
-.k-button
-{
+.k-picker-wrap .k-input {
     font-size: 100%;
     font-family: inherit;
     border-style: solid;
@@ -96,48 +93,6 @@
 
 /* button */
 
-.k-button
-{
-    display: inline-block;
-    margin: 0;
-    padding: @button-padding;
-    font-family: inherit;
-    line-height: 1.72em;
-    text-align: center;
-    cursor: pointer;
-    text-decoration: none;
-}
-
-.k-button[disabled],
-.k-button.k-state-disabled,
-.k-state-disabled .k-button,
-.k-state-disabled .k-button:hover,
-.k-button.k-state-disabled:hover,
-.k-state-disabled .k-button:active,
-.k-button.k-state-disabled:active
-{
-    cursor: default;
-}
-
-a.k-button
-{
-    .prohibit-selection;
-    text-decoration: none;
-}
-
-/* Override the important default line-height in Firefox 4+ */
-.k-ff input.k-button {
-    padding-bottom: 0.37em;
-    padding-top: 0.37em;
-}
-
-button.k-button::-moz-focus-inner,
-input.k-button::-moz-focus-inner
-{
-    padding: 0;
-    border: 0;
-}
-
 a.k-button-expand
 {
     display: block;
@@ -158,72 +113,9 @@ body .k-split-button-arrow
     padding-right: .4em;
 }
 
-.k-button-icontext
-{
-    overflow: visible; /*IE9*/
-}
-
 .k-toolbar .k-button-icontext
 {
     padding-right: .8em;
-}
-
-.k-button-icontext .k-icon,
-.k-button-icontext .k-image,
-.k-button-icontext .k-sprite
-{
-    margin-right: 3px;
-    margin-right: .3rem;
-    margin-left: -3px;
-    margin-left: -.3rem;
-}
-
-.k-button.k-button-icontext .k-icon,
-.k-button.k-button-icontext .k-image
-{
-    vertical-align: text-top;
-}
-
-// Bare button
-.k-button.k-bare {
-    border-color: transparent !important;
-    color: inherit;
-    background: none !important;
-    box-shadow: none !important;
-    opacity: .7;
-
-    &:hover,
-    &.k-state-hover,
-    &:active,
-    &.k-state-active,
-    &.k-state-active:hover {
-        color: inherit;
-    }
-
-    &:focus,
-    .k-state-focused {
-        opacity: .8;
-    }
-
-    &:hover,
-    &.k-state-hover,
-    &:active,
-    &.k-state-active {
-        opacity: 1;
-    }
-
-    // Icon
-    .k-icon {
-        overflow: visible;
-    }
-
-    &:focus,
-    .k-state-focused {
-        .k-icon {
-            text-shadow: 0 0 3px currentColor;
-        }
-    }
-
 }
 
 /* link */
@@ -245,7 +137,6 @@ body .k-split-button-arrow
 .k-state-disabled,
 .k-state-disabled .k-link,
 .k-state-disabled .k-icon,
-.k-state-disabled .k-button,
 .k-state-disabled .k-draghandle,
 .k-state-disabled .k-upload-button input
 {
@@ -537,7 +428,6 @@ html .k-error-colored
     .box-sizing(content-box);
 }
 
-.k-button,
 .k-textbox,
 .k-autocomplete,
 .k-tabstrip > .k-content > .km-scroll-container,
@@ -561,11 +451,6 @@ div.k-window-content
 .form-control.k-widget
 {
     padding: 0;
-}
-
-a.k-button:hover
-{
-    text-decoration: none;
 }
 
 /* override iOS styles in mobile Kendo */
