@@ -4,19 +4,16 @@ description: How To Export Only the Text of the HTML content in the Grid Cell
 type: howto
 page_title: Export Only the Text From the Grid Cell Which Contains HTML
 slug: export-only-the-text-from-the-grid-cell-which-contains-html
-position: 0
 tags: grid, excel, export, encoded
-teampulseid:
 ticketid: 1123086
-pitsid:
-
 ---
 
 ## Environment
+
 <table>
  <tr>
   <td>Product</td>
-  <td>Grid for Progress® Kendo UI®</td>
+  <td>Grid for Progress Kendo UI</td>
  </tr>
  <tr>
   <td>Operating System</td>
@@ -32,12 +29,14 @@ pitsid:
  </tr>
 </table>
 
- 
 ## Description
-If we design the grid header, footer or group header template with html tag, the whole html content is displayed in the excel file. Please advice how to solve this, need to show only the data.
+
+When I style the header, footer, or group header template of the Grid by using HTML tags, the Excel files renders the whole HTML content.
+
+How can I avoid the display of HTML content in the output Excel file and show just the data?
 
 ## Solution  
-  
-The desired result can be achieved on the [excelExport](http://docs.telerik.com/kendo-ui/api/javascript/ui/grid#events-excelExport) event, by setting only the text value to the cells using jQuery.
-  
-A runnable example can be found [here](http://dojo.telerik.com/EtESI).
+
+Configure the [`excelExport`](http://docs.telerik.com/kendo-ui/api/javascript/ui/grid#events-excelExport) event by setting only the text value to the cells with jQuery.
+
+For the full implementation of the solution, refer to [this Dojo](http://dojo.telerik.com/EtESI).

@@ -1,7 +1,7 @@
 ---
 title: Simulate Modal Behavior of the Tooltip
 description: An example on how to make the Kendo UI Tooltip display a modal overlay over the page.
-type: how to
+type: how-to
 page_title: Make the Tooltip Modal | Kendo UI Tooltip
 slug: tooltip-modal
 tags: kendo, tooltip, modal

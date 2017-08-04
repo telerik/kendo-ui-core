@@ -1465,19 +1465,21 @@ Function which can be used for custom comparing of the DataSource items.
 
 #### Example - use a custom compare function to compare items in the DataSource
 
-<div id="grid"></div>
+    <div id="grid"></div>
     <script>
       var numbers = {
         "one"  : 1,
         "two"  : 2,
-        "three": 3
+        "three": 3,
+        "four" : 4,
       };
 
       var dataSource = new kendo.data.DataSource({
         data: [
           { id: 1, item: "two" },
           { id: 2, item: "one" },
-          { id: 3, item: "three" }
+          { id: 3, item: "three" },
+          { id: 4, item: "four" }
         ],
         sort: { field: "item", dir: "asc", compare: function(a, b) {          
           return numbers[a.item] - numbers[b.item];

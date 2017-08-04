@@ -3,7 +3,7 @@ title: Virtualize ComboBox with MVVM
 description: An example on how to implement virtualization for the Kendo UI ComboBox in MVVM projects.
 type: how-to
 page_title: Implement Virtualization for MVVM ComboBox | Kendo UI ComboBox
-previous_url: \knowledge-base\how-to-virtualize-mvvm-combobox
+previous_url: /knowledge-base/how-to-virtualize-mvvm-combobox
 slug: virtualize-mvvm-combobox
 tags: kendoui, kendo, kendo, kendoui, combobox, mvvm, virtualization
 ticketid: 1121707

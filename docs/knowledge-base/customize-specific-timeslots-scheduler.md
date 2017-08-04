@@ -1,22 +1,20 @@
 ---
-title: Disable Timeslots for Specific Days and Style Them
+title: Disable and Style Timeslots for Specific Days
 description: An example on how to customize specific days and style them
-type: HowTo
-page_title: Customize Specific Days and Style Them  Kendo UI Scheduler
+type: how-to
+page_title: Customize and Style Specific Days | Kendo UI Scheduler
 slug: customize-specific-timeslots-scheduler
-position: 0
 tags: kendoui, kendo, scheduler, customize, style, disable
-teampulseid:
 ticketid: 1119501
-pitsid:
 res_type: kb
 ---
 
 ## Environment
+
 <table>
  <tr>
   <td>Product</td>
-  <td>Scheduler for Progress® Kendo UI®</td>
+  <td>Scheduler for Progress Kendo UI</td>
  </tr>
  <tr>
   <td>Operating System</td>
@@ -28,16 +26,16 @@ res_type: kb
  </tr>
 </table>
 
-
 ## Description
 
- How can I disable timeslots for specific day and style them?
+How can I disable timeslots for a specific day and style them?
 
 ## Solution
 
-Use the slotTemplate, in order to style the slots for a specific day in a preferable manner. Also, handle the **add** event of the Scheduler, in order to check the date of the event which is about to be added. If it is about to be added for the day that all events are restricted - cancel the propagation and raise a descriptive alert.
+1. To style the slots for a specific day, use the `slotTemplate` configuration.
+1. To check the date of the event which is about to be added, handle the `add` event of the Scheduler. If the event you want to add is for the day during which all events will be restricted, cancel the propagation and raise a descriptive alert.
 
-```html 
+```html
 
  <div id="scheduler"></div>
     <style>
@@ -48,10 +46,10 @@ Use the slotTemplate, in order to style the slots for a specific day in a prefer
       }
     </style>
     <script>
-     
+
       function getColorBasedOnHour(date) {
         var myDate = new Date("Thu Jun 13 2013 08:30:00 GMT+0300");      
-     
+
   			if(date.getDay() == myDate.getDay())
        	 return "#A9A9A9"
       }
@@ -60,7 +58,7 @@ Use the slotTemplate, in order to style the slots for a specific day in a prefer
         $("#scheduler").kendoScheduler({
           date: new Date("2013/6/13"),
           add: function(e) {
-            	
+
               var myDate = new Date("Thu Jun 13 2013 08:30:00 GMT+0300");   
          			if(e.event.start.getDay() == myDate.getDay())
               {
@@ -146,7 +144,7 @@ Use the slotTemplate, in order to style the slots for a specific day in a prefer
 ```
 
 ## Notes
-Example of further modification of the slots appearances: http://docs.telerik.com/kendo-ui/controls/scheduling/scheduler/how-to/appearance/set-slot-background-color-using-slot-templates
 
-The functionality used in this example is not applicable for MonthView, because slotTemplate is not supported:
-http://docs.telerik.com/kendo-ui/api/javascript/ui/scheduler#configuration-views.slotTemplate
+For more information on modifying the appearance of slots, refer to [this example](http://docs.telerik.com/kendo-ui/controls/scheduling/scheduler/how-to/appearance/set-slot-background-color-using-slot-templates).
+
+The functionality that the example demonstrates is not applicable to `MonthView` because [`slotTemplate` is not supported](http://docs.telerik.com/kendo-ui/api/javascript/ui/scheduler#configuration-views.slotTemplate).

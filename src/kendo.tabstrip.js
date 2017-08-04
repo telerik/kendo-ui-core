@@ -51,6 +51,7 @@ var __meta__ = { // jshint ignore:line
         HOVERSTATE = "k-state-hover",
         TABONTOP = "k-tab-on-top",
         NAVIGATABLEITEMS = ".k-item:not(." + DISABLEDSTATE + ")",
+        KEYBOARDNAVIGATABLEITEMS = ".k-item",
         HOVERABLEITEMS = ".k-tabstrip-items > " + NAVIGATABLEITEMS + ":not(." + ACTIVESTATE + ")",
         DEFAULTDISTANCE = 200,
 
@@ -292,11 +293,13 @@ var __meta__ = { // jshint ignore:line
             item = item[action]();
 
             if (!item[0]) {
-                item = this._endItem(endItem);
+                item = this.tabGroup.children(KEYBOARDNAVIGATABLEITEMS)[endItem]();
             }
 
             if (item.hasClass(DISABLEDSTATE)) {
                 item.addClass(FOCUSEDSTATE);
+            }
+            if (item.hasClass(DISABLEDSTATE) || item.hasClass(ACTIVESTATE)) {
                 this._focused = item;
             }
 
@@ -1012,13 +1015,19 @@ var __meta__ = { // jshint ignore:line
                 collapse = that.options.collapsible,
                 index = item.index(),
                 contentHolder = that.contentHolder(index),
-                prevent, isAnchor;
+                prevent, isAnchor,
+                neighbours = item.parent().children(),
+                oldFocusedTab = neighbours.filter("." + FOCUSEDSTATE);
 
             if (item.closest(".k-widget")[0] != that.wrapper[0]) {
                 return;
             }
 
             if (item.is("." + DISABLEDSTATE + (!collapse ? ",." + ACTIVESTATE : ""))) {
+                oldFocusedTab.removeClass(FOCUSEDSTATE);
+                if (item.is("." + DISABLEDSTATE)) {
+                    item.addClass(FOCUSEDSTATE);
+                }
                 return true;
             }
 
