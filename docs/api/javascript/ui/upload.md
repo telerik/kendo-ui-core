@@ -1,7 +1,7 @@
 ---
 title: Upload
 page_title: Configuration, methods and events of Kendo UI Upload
-description: How to configure the ability to upload files in an asynchronous manner in Upload UI widget.
+description: How to configure the ability to upload files in an asynchronous manner using the Upload UI widget.
 res_type: api
 ---
 
@@ -13,7 +13,7 @@ Represents the Kendo UI Upload. Inherits from [Widget](/api/javascript/ui/widget
 
 ### async `Object`
 
-Configures the ability to upload a files in an asynchronous manner. Please refer to the
+Configures the ability to upload one or more files in an asynchronous manner. Please refer to the
 [async mode help topic](/web/upload/modes#asynchronous-mode)
 for more details.
 
@@ -69,7 +69,7 @@ Files selected one after the other will be uploaded in separate requests.
 
 ### async.chunkSize `Number`
 
-When the property is set, the selected files are uploaded with the declared size chunk by chunk. Each request sends a separate file blob and additional string metadata to the server. This metadata is in a stringified JSON format and contains the `chunkIndex`, `contentType`, `totalFileSize`, `totalChunks`, `uploadUid` properties. These properties enable the validation and combination of the file on the server side. The response also returns a JSON object with the `uploaded` and `fileUid` properties, which notifies the client what is the next chunk.
+When this property is set, the selected files are uploaded with the declared size chunk by chunk. Each request sends a separate file blob and additional string metadata to the server. This metadata is in a stringified JSON format and contains the `chunkIndex`, `contentType`, `totalFileSize`, `totalChunks`, `uploadUid` properties. These properties enable the validation and combination of the file on the server side. The response also returns a JSON object with the `uploaded` and `fileUid` properties, which notifies the client what is the next chunk.
 
 You can use this property only when [`async.batch`](#configuration-async.batch) is set to `false`.
 
@@ -108,7 +108,7 @@ This property is available when the [`async.chunkSize`](#configuration-async.chu
 
 ### async.autoRetryAfter `Number`
 
-If you set the property, the failed upload request is repeated after the declared amount of miliseconds.
+If you set this property, the failed upload request is repeated after the declared amount of miliseconds.
 
 #### Example
 
@@ -256,9 +256,9 @@ This option will be ignored if the browser doesn't support File API.
 
 ### directory `Boolean` *(default: false)*
 
-Enables the selection of folders instead of files. When the user selects a directory, its entire content hierarchy of files is included in the set of selected items. The setting supported only in browsers that support [webkitdirectory](https://developer.mozilla.org/en-US/docs/Web/API/HTMLInputElement/webkitdirectory).
+Enables the selection of folders instead of files. When the user selects a directory, its entire content hierarchy of files is included in the set of selected items. This setting is only supported in browsers that support [webkitdirectory](https://developer.mozilla.org/en-US/docs/Web/API/HTMLInputElement/webkitdirectory).
 
-> When set, the property allows you to select only folders for upload. Files are not selectable. In the browsers that do not support the feature, the behavior falls back to the default file selection.
+> When set, the property allows you to select only folders for upload. Files are not selectable. For browsers that do not support the feature, the behavior falls back to the default file selection.
 
 #### Example
 
@@ -280,9 +280,9 @@ Enables the selection of folders instead of files. When the user selects a direc
 
 ### directoryDrop `Boolean` *(default: false)*
 
-Enables the dropping of folders over the Upload and its drop zone. When a directory is dropped, its entire content hierarchy of files is included in the set of selected items. This setting is supported only in browsers that support [DataTransferItem](https://developer.mozilla.org/en-US/docs/Web/API/DataTransferItem) and [webkitGetAsEntry](https://developer.mozilla.org/en-US/docs/Web/API/DataTransferItem/webkitGetAsEntry).
+Enables the dropping of folders over the Upload and its drop zone. When a directory is dropped, its entire content hierarchy of files is included in the set of selected items. This setting is only supported in browsers that support [DataTransferItem](https://developer.mozilla.org/en-US/docs/Web/API/DataTransferItem) and [webkitGetAsEntry](https://developer.mozilla.org/en-US/docs/Web/API/DataTransferItem/webkitGetAsEntry).
 
-> When set, the property allows you to drop only folders for upload. Files cannot be uploaded. In the browsers that do not support the feature, the behavior falls back to the default file drop.
+> When set, the property allows you to drop only folders for upload. Files cannot be uploaded. For browsers that do not support the feature, the behavior falls back to the default file drop.
 
 #### Example
 
@@ -304,7 +304,7 @@ Enables the dropping of folders over the Upload and its drop zone. When a direct
 
 ### dropZone `String`
 
-Initializes a dropzone elements based on a given selector that provides drag and drop file upload.
+Initializes elements as a dropzone based on a given selector that will allow drag and drop file upload.
 
 #### Example
 
@@ -348,7 +348,7 @@ List of files to be initially rendered in the Upload widget files list.
 *   size
 *   extension
 
-> This option could be used only when the Upload widget is in [async mode](/web/upload/modes#asynchronous-mode). The files will be rendered as successfully uploaded.
+> This option may only be used when the Upload widget is in [async mode](/web/upload/modes#asynchronous-mode). The files will be rendered as having been successfully uploaded.
 
 #### Example - passing an array of initial files
 
@@ -498,7 +498,7 @@ Sets the header status message for files that are being uploaded.
 
 ### localization.invalidFileExtension `String`
 
-Sets the text for invalid file extension validation message.
+Sets the validation message text for invalid file extension(s).
 
 #### Example
 
@@ -517,7 +517,7 @@ Sets the text for invalid file extension validation message.
 
 ### localization.invalidFiles `String`
 
-Sets the text for the validation messages of invalid files when the `batch` property is `true` and when two or more files are not passing the validation.
+Sets the text for the validation messages for invalid files when the `batch` property is `true` and when two or more files do not pass validation.
 
 #### Example
 
@@ -537,7 +537,7 @@ Sets the text for the validation messages of invalid files when the `batch` prop
 
 ### localization.invalidMaxFileSize `String`
 
-Sets the text for an invalid `maxFileSize` validation message.
+Sets the validation message text for an invalid `maxFileSize`.
 
 #### Example
 
@@ -556,7 +556,7 @@ Sets the text for an invalid `maxFileSize` validation message.
 
 ### localization.invalidMinFileSize `String`
 
-Sets the text for an invalid `minFileSize` validation message.
+Sets the validation message text for an invalid `minFileSize`.
 
 #### Example
 
@@ -575,7 +575,7 @@ Sets the text for an invalid `minFileSize` validation message.
 
 ### localization.remove `String`
 
-Sets the text of the remove button text.
+Sets the text of the remove button.
 
 #### Example
 
@@ -594,7 +594,7 @@ Sets the text of the remove button text.
 
 ### localization.retry `String`
 
-Sets the text of the retry button text.
+Sets the text of the retry button.
 
 #### Example
 
@@ -613,7 +613,7 @@ Sets the text of the retry button text.
 
 ### localization.select `String`
 
-Sets the "Select..." button text.
+Sets the text of the "Select..." button.
 
 #### Example
 
@@ -728,7 +728,7 @@ limit the total number of uploaded files in an asynchronous configuration.
 ### showFileList `Boolean`*(default: true)*
 
 Enables (**true**) or disables (**false**) the ability to display a file listing
-for uploading a files. Disabling a file listing may be useful you wish to customize the UI; use the
+for uploading files. Disabling the file listing may be useful if you wish to customize the UI. You may use the
 client-side events to build your own UI.
 
 #### Example
@@ -974,7 +974,7 @@ Removes a file by ID (only visually from the UI) without issuing requests to the
 
 ### destroy
 
-Prepares the **Upload** for safe removal from DOM. Detaches all event handlers and removes jQuery.data attributes to avoid memory leaks. Calls destroy method of any child Kendo widgets.
+Prepares the **Upload** for safe removal from the DOM. Detaches all event handlers and removes jQuery.data attributes to avoid memory leaks. Calls the destroy method of any child Kendo widgets.
 
 > This method does not remove the Upload element from DOM.
 
@@ -1033,7 +1033,7 @@ Enables the upload.
 
 ##### enable `Boolean` *(optional)*
 
-The argument, which defines whether to enable/disable the upload.
+The argument which defines whether to enable or disable the upload.
 
 ### focus
 
@@ -1082,7 +1082,7 @@ Retrieves the files that are currently selected.
 
 ### pause
 
-Pauses the upload of the file that is uploaded in chunks.
+Pauses the upload of the file that is being uploaded in chunks.
 
 #### Example
 
@@ -1118,7 +1118,7 @@ A jQuery object which represents the file to be paused.
 
 ### resume
 
-Resumes the upload of a paused file that is uploaded in chunks.
+Resumes the upload of a paused file that is being uploaded in chunks.
 
 #### Example
 
@@ -1333,7 +1333,7 @@ Manually triggers the upload process.
 
 ### cancel
 
-Fires when the upload has been cancelled while in progress.
+Fires when the upload has been canceled while in progress.
 
 > The `cancel` event fires only when the Upload is in [async mode](/web/upload/modes#asynchronous-mode).
 
@@ -1361,7 +1361,7 @@ Fires when the upload has been cancelled while in progress.
 
 ##### e.files `Array`
 
-List of the files that were uploaded or removed . Each file has:
+List of the files that were uploaded or removed. Each file has:
 
 
 *   name
@@ -1372,7 +1372,7 @@ List of the files that were uploaded or removed . Each file has:
 
 ### clear
 
-Triggered when files are cleared by clicking on the "Clear" button. Note: Cancelling this event will prevent the clearing the selected files.
+Triggered when files are cleared by clicking on the "Clear" button. Note: Cancelling this event will prevent clearing of the selected files.
 
 #### Wire-up an event handler that triggered when a user clears selected files
 
@@ -1397,7 +1397,7 @@ Triggered when files are cleared by clicking on the "Clear" button. Note: Cancel
 
 ##### e `Object`
 
-A custom event object. The event can be cancelled just like when using a standard jQuery event object via `e.preventDefault();`
+A custom event object. The event can be canceled similar to a standard jQuery event object by using `e.preventDefault();`
 
 ### complete
 
@@ -1427,7 +1427,7 @@ Note: The complete event fires only when the upload is in
 
 ### error
 
-Fires when an upload / remove operation has failed.
+Fires when an upload or remove operation has failed.
 
 
 
@@ -1460,7 +1460,7 @@ Note: The error event fires only when the upload is in
 
 ##### e.files `Array`
 
-List of the files that were uploaded or removed . Each file has:
+List of the files that were uploaded or removed. Each file has:
 
 
 *   name
@@ -1510,7 +1510,7 @@ Triggered when the files are cleared by clicking the **Pause** button. The butto
 
 ##### e `Object`
 
-A custom event object. The event can be canceled in the same way as when using a standard jQuery event object through `e.preventDefault();`.
+A custom event object. The event can be canceled similar to a standard jQuery event object by using `e.preventDefault();`.
 
 ### progress
 
@@ -1656,7 +1656,7 @@ occurring.
 
 ##### e `Object`
 
-A custom event object. The event can be cancelled just like when using a standard jQuery event object via `e.preventDefault();`
+A custom event object. The event can be canceled similar to a standard jQuery event object by using `e.preventDefault();`
 
 ##### e.files `Array`
 
@@ -1670,7 +1670,7 @@ An array of the selected files. Each item of the array is an object with the fol
 
 ### success
 
-Fires when an upload / remove operation has been completed successfully.
+Fires when an upload or remove operation has completed successfully.
 
 > * The success event fires only when the upload is in [async mode](/web/upload/modes#asynchronous-mode).
 > * It is possible to cancel the event. As a result, the file will be displayed as unsuccessfully uploaded.
@@ -1729,7 +1729,7 @@ Verify that this is an actual XHR before accessing any other fields.
 ### upload
 
 Fires when one or more files are about to be uploaded.
-Canceling the event will prevent the upload.
+Cancelling the event will prevent the upload.
 
 > The upload event fires only when the upload is in
 [async mode](/web/upload/modes#asynchronous-mode).
