@@ -367,7 +367,7 @@ its sub menus to the left.
         });
     </script>
 
-### openOnClick `Boolean`*(default: false)*
+### openOnClick `Boolean|Object`*(default: false)*
 
  Specifies that the root sub menus will be opened on item click.
 
@@ -392,6 +392,66 @@ its sub menus to the left.
     <script>
         $("#menu").kendoMenu({
             openOnClick: true
+        });
+    </script>
+
+### openOnClick.rootMenuItems `Boolean`*(default: false)*
+
+ Specifies that the root menus will be opened only on item click.
+
+#### Example
+
+    <ul id="menu">
+        <li>Item 1
+            <ul>
+                <li>Sub Item 1</li>
+                <li>Sub Item 2</li>
+                <li>Sub Item 3</li>
+            </ul>
+        </li>
+        <li>Item 2
+            <ul>
+                <li>Sub Item 1</li>
+                <li>Sub Item 2</li>
+                <li>Sub Item 3</li>
+            </ul>
+        </li>
+    </ul>
+    <script>
+        $("#menu").kendoMenu({
+            openOnClick: {
+                rootMenuItems: true
+            }
+        });
+    </script>
+
+### openOnClick.subMenuItems `Boolean`*(default: false)*
+
+ Specifies that the sub menus will be opened only on item click.
+
+#### Example
+
+    <ul id="menu">
+        <li>Item 1
+            <ul>
+                <li>Sub Item 1</li>
+                <li>Sub Item 2</li>
+                <li>Sub Item 3</li>
+            </ul>
+        </li>
+        <li>Item 2
+            <ul>
+                <li>Sub Item 1</li>
+                <li>Sub Item 2</li>
+                <li>Sub Item 3</li>
+            </ul>
+        </li>
+    </ul>
+    <script>
+        $("#menu").kendoMenu({
+            openOnClick: {
+                subMenuItems: true
+            }
         });
     </script>
 

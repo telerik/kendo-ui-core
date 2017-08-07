@@ -1,8 +1,8 @@
 ---
-title: Excel Export With Header, Footer or Group Header Template Results In HTML Content
-description: How To Export Only the Text of the HTML content in the Grid Cell
-type: howto
-page_title: Export Only the Text From the Grid Cell Which Contains HTML
+title: Export Only the Text out of the HTML Content from Header, Footer, or Group Header Templates
+description: An example on how to export only the text out of the HTML content in a Grid cell to Excel.
+type: how-to
+page_title: Export Only Text From Grid Cells which Contain HTML | Kendo UI Grid
 slug: export-only-the-text-from-the-grid-cell-which-contains-html
 tags: grid, excel, export, encoded
 ticketid: 1123086

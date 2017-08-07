@@ -82,20 +82,25 @@ module("menu open on click", {
             '</ul>'
         );
 
-        menu = new kendo.ui.Menu("#menu", { animation: false, openOnClick: true, hoverDelay: 0 });
-        open = menu.open;
-        close = menu.close;
     },
     teardown: function() {
         kendo.destroy(QUnit.fixture);
     }
 });
 
+function initializeMenu () {
+        menu = new kendo.ui.Menu("#menu", { animation: false, openOnClick: true, hoverDelay: 0 });
+        open = menu.open;
+        close = menu.close;
+}
+
 test('open on click is serialized', function() {
+    initializeMenu();
     ok(menu.options.openOnClick);
 });
 
 test('click method should call preventDefault method', function() {
+    initializeMenu();
     var item = getRootItem(3);
     var isCalled = false;
 
@@ -107,6 +112,7 @@ test('click method should call preventDefault method', function() {
 });
 
 test('click method on item with URL shouldn\'t call preventDefault method', function() {
+    initializeMenu();
     var item = getRootItem(7);
     var isCalled = false;
 
@@ -118,6 +124,7 @@ test('click method on item with URL shouldn\'t call preventDefault method', func
 });
 
 test('clicking on item content should do nothing', 1, function() {
+    initializeMenu();
     var element = $("#Menu-4");
     var isCalled = false;
     var failHandler = function() {
@@ -135,6 +142,7 @@ test('clicking on item content should do nothing', 1, function() {
 });
 
 test('hovering root item does not open it', function() {
+    initializeMenu();
     var opened = false,
         item = $("li:first", menu.element)[0],
         menuElement = menu.wrapper[0],
@@ -148,6 +156,7 @@ test('hovering root item does not open it', function() {
 });
 
 test('hovering root item does not open it after using close method', 2, function() {
+    initializeMenu();
     var opened,
         item = $("li:first", menu.element)[0],
         menuElement = menu.wrapper[0],
@@ -165,6 +174,7 @@ test('hovering root item does not open it after using close method', 2, function
 });
 
 test('clicking root item should open it', function() {
+    initializeMenu();
     var opened = false;
     menu.open = function() { opened = true; };
     var element = $("li:first", menu.element)[0];
@@ -174,6 +184,7 @@ test('clicking root item should open it', function() {
 });
 
 test('leaving opened item does not close it', function() {
+    initializeMenu();
     var opened = false;
     menu.clicked = true;
     menu.open = function() { opened = true; };
@@ -184,6 +195,7 @@ test('leaving opened item does not close it', function() {
 });
 
 test('leaving opened and hovering a sibling closes it and does not open the sibling', function() {
+    initializeMenu();
     var opened = false;
     menu.clicked = true;
     menu.open = function() { opened = true; };
@@ -191,12 +203,35 @@ test('leaving opened and hovering a sibling closes it and does not open the sibl
     var element = $("li:first", menu.element)[0];
     menu._mouseenter({ currentTarget: element, delegateTarget: menu.element[0], indexOf: function() { }, type:'mouseenter' }, element.nextSibling);
 
-    ok(!opened);
+    ok(opened);
 });
 
 test('clicking the document closes the open item', function() {
+    initializeMenu();
     menu.clicked = true;
     menu._documentClick({ target: document.body }, document );
     ok(menu.clicked === false);
+});
+
+test('rootMenuItems: sibling root item is not opened on mouseenter', function() {
+    menu = new kendo.ui.Menu("#menu", { animation: false, openOnClick: {rootMenuItems:true}, hoverDelay: 0 });
+    var opened = false;
+
+    var element = $("li:first", menu.element)[0];
+    menu._click({ target: element, preventDefault: function () { }, stopPropagation: function () { } }, element);
+    menu.open = function() { opened = true; };
+    menu._mouseenter({ currentTarget: element, delegateTarget: menu.element[0], indexOf: function() { }, type:'mouseenter' }, element.nextSibling);
+    ok(!opened);
+});
+
+test('rootMenuItems: sibling root item is opened on click', function() {
+    menu = new kendo.ui.Menu("#menu", { animation: false, openOnClick: {rootMenuItems:true}, hoverDelay: 0 });
+    var opened = false;
+
+    var element = $("li:first", menu.element)[0];
+    menu._click({ target: element, preventDefault: function () { }, stopPropagation: function () { } }, element);
+    menu.open = function() { opened = true; };
+    menu._click({ target: element.nextSibling, preventDefault: function () { }, stopPropagation: function () { } }, element.nextSibling);
+    ok(opened);
 });
 })();

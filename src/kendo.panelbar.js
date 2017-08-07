@@ -1238,8 +1238,10 @@ var __meta__ = { // jshint ignore:line
                     var dataItem = that.dataItem(referenceItem);
                     if (dataItem) {
                         dataItem.hasChildren = true;
+                        referenceItem.attr(ARIA_EXPANDED, dataItem.expanded);
+                    }else{
+                        referenceItem.attr(ARIA_EXPANDED, false);
                     }
-                    referenceItem.attr(ARIA_EXPANDED, false);
                 }
             } else {
                 if (typeof item == "string" && item.charAt(0) != "<") {
@@ -1268,7 +1270,7 @@ var __meta__ = { // jshint ignore:line
 
         _updateClasses: function() {
             var that = this,
-                panels, items;
+                panels, items, expanded, panelsParent, dataItem;
 
             panels = that.element
                          .find("li > ul")
@@ -1276,8 +1278,12 @@ var __meta__ = { // jshint ignore:line
                          .addClass("k-group k-panel")
                          .attr("role", "group");
 
+            panelsParent = panels.parent();
+            dataItem = that.dataItem(panelsParent);
+            expanded = (dataItem && dataItem.expanded) || false;
+
             panels.parent()
-                  .attr(ARIA_EXPANDED, false)
+                  .attr(ARIA_EXPANDED, expanded)
                   .not("." + ACTIVECLASS)
                   .children("ul")
                   .attr(ARIA_HIDDEN, true)

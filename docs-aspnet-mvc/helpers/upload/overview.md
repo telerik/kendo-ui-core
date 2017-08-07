@@ -164,7 +164,7 @@ To reference an existing Kendo UI Upload instance, use the [`jQuery.data()`](htt
 
 ## See Also
 
-* [ASP.NET MVC API Reference: UploadBuilder](http://docs.telerik.com/kendo-ui/api/Kendo.Mvc.UI.Fluent/UploadBuilder)
+* [ASP.NET MVC API Reference: UploadBuilder](http://docs.telerik.com/aspnet-mvc/api/Kendo.Mvc.UI.Fluent/UploadBuilder)
 * [Upload HtmlHelper Modes of Operation]({% slug modesoperation_uploadhelper_aspnetmvc %})
 * [Chunk Upload]({% slug chunkupload_uploadhelper_aspnetmvc %})
 * [Sending and Receiving Metadata with the Upload HtmlHelper]({% slug metadata_uploadhelper_aspnetmvc %})

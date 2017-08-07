@@ -575,6 +575,7 @@ var __meta__ = { // jshint ignore:line
                    .on(POINTERDOWN + " " + MOUSEDOWN + NS, ".k-content", proxy(that._preventClose, that))
                    .on(MOUSEENTER + NS, availableItemsSelector, proxy(that._mouseenter, that))
                    .on(MOUSELEAVE + NS, availableItemsSelector, proxy(that._mouseleave, that))
+                   .on(MOUSEDOWN + NS, availableItemsSelector, proxy(that._mousedown, that))
                    .on(MOUSEENTER + NS + " " + MOUSELEAVE + NS + " " +
                        MOUSEDOWN + NS + " " + CLICK + NS, linkSelector, proxy(that._toggleHover, that));
 
@@ -1368,18 +1369,35 @@ var __meta__ = { // jshint ignore:line
 
             that._keyTriggered = false;
 
-            if (that.options.openOnClick && that.clicked || touch) {
-                element.siblings().each(proxy(function (_, sibling) {
-                    that.close(sibling, true);
-                    that.clicked = false;
-                }, that));
+            if ((that.options.openOnClick.rootMenuItems && that._isRootItem(element.closest(allItemsSelector))) ||
+                (that.options.openOnClick.subMenuItems && !that._isRootItem(element.closest(allItemsSelector)))) {
+                return;
             }
 
-            if ((!that.options.openOnClick || that.clicked) && !touch &&
+            if ((that.options.openOnClick === false ||
+                (that.options.openOnClick.rootMenuItems === false && that._isRootItem(element.closest(allItemsSelector))) ||
+                (that.options.openOnClick.subMenuItems === false && !that._isRootItem(element.closest(allItemsSelector))) || that.clicked) && !touch &&
                 !(pointerTouch && that._isRootItem(element.closest(allItemsSelector)))) {
                 if (!contains(e.currentTarget, e.relatedTarget) && hasChildren) {
                     that.open(element);
                 }
+            }
+
+            if (that.options.openOnClick === true && that.clicked || touch) {
+                element.siblings().each(proxy(function (_, sibling) {
+                    that.close(sibling, true);
+                }, that));
+            }
+        },
+
+        _mousedown: function (e) {
+            var that = this;
+            var element = $(e.currentTarget);
+            // needs to close subMenuItems
+            if (that.options.openOnClick.subMenuItems && !that._isRootItem(element) || touch) {
+                element.siblings().each(proxy(function (_, sibling) {
+                    that.close(sibling, true);
+                }, that));
             }
         },
 
@@ -1399,7 +1417,8 @@ var __meta__ = { // jshint ignore:line
                 return;
             }
 
-            if (!that.options.openOnClick && !touch && !isPointerTouch(e) &&
+            if ((that.options.openOnClick === false || (that.options.openOnClick.rootMenuItems === false && that._isRootItem(element)) ||
+                (that.options.openOnClick.subMenuItems === false && !that._isRootItem(element))) && !touch && !isPointerTouch(e) &&
                 !contains(e.currentTarget, e.relatedTarget || e.target) && hasChildren &&
                 !contains(e.currentTarget, kendo._activeElement())) {
                     that.close(element);
@@ -1561,7 +1580,7 @@ var __meta__ = { // jshint ignore:line
                 link[0].click();
             }
 
-            if ((!that._isRootItem(element) || !options.openOnClick) && !kendo.support.touch && !(isPointerTouch(e) && that._isRootItem(element.closest(allItemsSelector)))) {
+            if (((!that._isRootItem(element) || options.openOnClick === false) && !options.openOnClick.subMenuItems) && !kendo.support.touch && !(isPointerTouch(e) && that._isRootItem(element.closest(allItemsSelector)))) {
                 return;
             }
 

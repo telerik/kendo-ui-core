@@ -354,7 +354,7 @@ input.k-textbox,
 textarea.k-textbox,
 input.k-textbox:hover,
 textarea.k-textbox:hover,
-.k-textbox > input
+.k-textbox > input,
 {
     background: none;
 }
@@ -847,7 +847,6 @@ td.k-state-focused.k-state-selected
     .box-shadow(@focused-active-item-shadow);
 }
 
-.k-list>.k-state-selected.k-state-focused,
 .k-list-optionlabel.k-state-selected.k-state-focused
 {
     .box-shadow(none);
@@ -1892,6 +1891,7 @@ html .km-pane-wrapper .km-widget,
 .k-multiselect.k-header
 {
     border-color: @drop-down-border-color;
+    background: @drop-down-background;
 }
 
 .k-multiselect.k-header.k-state-hover
