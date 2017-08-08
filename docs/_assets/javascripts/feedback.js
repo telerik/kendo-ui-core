@@ -108,6 +108,15 @@ $(document).ready(function () {
         }
         return isModelDefault;
     };
+
+    var isFormModelSatisfied = function (key, formValue) {
+        var value = formModel[key];
+        if (value) {
+            return formValue && formValue.length > 0;
+        } else {
+            return true;
+        }
+    }
     //Bind model to form
     kendo.bind($("div#feedback-form-window"), formModel);
     //Attach to form submit to adjust variables and send request
@@ -115,14 +124,11 @@ $(document).ready(function () {
         validateOnBlur: false,
         messages: {
             // defines a message for the custom validation rule
-            emptyForm: "You need to provide some feedback before submitting the form.",
+            emptyForm: "You need to provide some feedback before submitting the form."
         },
         rules: {
             emptyForm: function (input) {
-                if (isFormModelEmpty()) {
-                    return false
-                }
-                return true;
+                return !isFormModelEmpty();
             }
         }
 
@@ -146,42 +152,45 @@ $(document).ready(function () {
 
     // text validation is disabled for the new design of the form. In order to enable it
     // it must be reworked!!! 
-    var textAreaValidator = $("#feedback-text-input").kendoValidator({
-        validateOnBlur: false,
-        messages: {
-            // defines a message for the custom validation rule
-            htmlValidation: "HTML tags are not allowed in this field.",
-            messageLength: "The message length must not exceed 2500 characters.",
-            whiteSpaces: "Using only white spaces is not allowed in this field."
-        },
-        rules: {
-            htmlValidation: function (input) {
-                if (input.is("[id=feedback-text-input]")) {
+    var textAreaValidator = function (selector, formModelKey) {
+        return $(selector).kendoValidator({
+            validateOnBlur: false,
+            messages: {
+                emptyValidation: "Please provide some additional information.",
+                htmlValidation: "HTML tags are not allowed in this field.",
+                messageLength: "The message length must not exceed 2500 characters.",
+                whiteSpaces: "Using only white spaces is not allowed in this field."
+            },
+            rules: {
+                emptyValidation: function (input) {
+                    var text = input.val();
+                    return isFormModelSatisfied(formModelKey, text);
+                },
+                htmlValidation: function (input) {
                     var string = input.val();
                     var matches = string.match(/(<([^>]+)>)/ig);
                     if (matches != null) {
                         return false;
                     }
-                }
-                return true;
-            },
-            messageLength: function (input) {
-                if (input.is("[id=feedback-text-input]")) {
+                    return true;
+                },
+                messageLength: function (input) {
                     var string = input.val();
                     if (string.length > 2500) {
                         return false;
                     }
+                    return true;
+                },
+                whiteSpaces: function (input) {
+                    var string = input.val();
+                    if (string.length > 0) {
+                        return $.trim(string) !== "";
+                    }
+                    return true;
                 }
-                return true;
-            },
-            whiteSpaces: function (input) {
-                if (input.is("[id=feedback-text-input]") && input.val().length > 0) {
-                    return $.trim(input.val()) !== "";
-                }
-                return true;
             }
-        }
-    }).data("kendoValidator");
+        }).data("kendoValidator");
+    }
 
     feedbackForm.submit(function (e) {
         e.preventDefault();
@@ -196,13 +205,13 @@ $(document).ready(function () {
         //	return;
         //}
 
-        // text validation is disabled for the new design of the form. In order to enable it
-        // it must be reworked!!! 
-        //var textAreaIsValidate = textAreaValidator.validate();
-        var emptyFormValidate = emptyFormValidator.validate();
-        var emailValid = emailValidator.validate();
-
-        if (emptyFormValidate && emailValid) {
+        if (textAreaValidator("#feedback-code-sample-text-input", "outdatedSample").validate() && 
+            textAreaValidator("#feedback-more-information-text-input", "otherMoreInformation").validate() &&
+            textAreaValidator("#feedback-text-errors-text-input", "textErrors").validate() &&
+            textAreaValidator("#feedback-inaccurate-content-text-input", "inaccurateContent").validate() &&
+            textAreaValidator("#feedback-other-text-input", "otherFeedback").validate() &&
+            emptyFormValidator.validate() && 
+            emailValidator.validate()) {
             win.close();
             setCookieByName("submittingFeedback")
             formModel.yesNoFeedback = getCookieByName("yesNoFeedback") || "Not submitted";

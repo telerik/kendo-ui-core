@@ -23,34 +23,34 @@
             <input type="checkbox" data-bind="checked: outdatedSample"/>
             Code samples are inaccurate / outdated.
           </label>
-          <textarea placeholder="Please, specify more details ..." class="feedback-extw__textarea"
+          <textarea id="feedback-code-sample-text-input" placeholder="Please, specify more details ..." class="feedback-extw__textarea"
             data-bind="visible: outdatedSample, value: inaccurateOutdatedCodeSamplesText">
           </textarea>
           <label>
             <input type="checkbox" data-bind="checked: otherMoreInformation"/>
             I expected to find other / more information. 
           </label>
-          <textarea class="feedback-extw__textarea" placeholder="Please, specify what information can be added ..."
+          <textarea id="feedback-more-information-text-input" class="feedback-extw__textarea" placeholder="Please, specify what information can be added ..."
             data-bind="visible: otherMoreInformation, value: otherMoreInformationText" >
           </textarea>
           <label>
             <input type="checkbox" data-bind="checked: textErrors"/>
             There are typos / broken links / broken page elements.
           </label>
-          <textarea class="feedback-extw__textarea" placeholder="Please, specify what needs to be fixed ..."
+          <textarea id="feedback-text-errors-text-input" class="feedback-extw__textarea" placeholder="Please, specify what needs to be fixed ..."
             data-bind="visible: textErrors, value: typosLinksElementsText">
           </textarea>
           <label>
             <input type="checkbox" data-bind="checked: inaccurateContent"/>
             Content is inaccurate / outdated.
           </label>
-          <textarea class="feedback-extw__textarea" placeholder="Please, specify which conent ..."
+          <textarea id="feedback-inaccurate-content-text-input" class="feedback-extw__textarea" placeholder="Please, specify which conent ..."
             data-bind="visible: inaccurateContent, value: inaccurateOutdatedContentText"></textarea>
           <label>
             <input type="checkbox" data-bind="checked: otherFeedback"/>
             Other
           </label>
-          <textarea placeholder="Please, enter more details or not listed feedback ..." class="feedback-extw__textarea"
+          <textarea id="feedback-other-text-input" placeholder="Please, enter more details or not listed feedback ..." class="feedback-extw__textarea"
             data-bind="visible: otherFeedback, value: textFeedback">
           </textarea>
           <input type="email" placeholder="email (optional)" data-email-msg="Email format is not valid" class="feedback-extw__input input"
