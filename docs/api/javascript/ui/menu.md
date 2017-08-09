@@ -435,14 +435,26 @@ its sub menus to the left.
         <li>Item 1
             <ul>
                 <li>Sub Item 1</li>
-                <li>Sub Item 2</li>
+                <li>Sub Item 2
+                    <ul>
+                        <li>Sub Item 2.1</li>
+                        <li>Sub Item 2.2</li>
+                        <li>Sub Item 2.3</li>
+                    </ul>
+                </li>
                 <li>Sub Item 3</li>
             </ul>
         </li>
         <li>Item 2
             <ul>
                 <li>Sub Item 1</li>
-                <li>Sub Item 2</li>
+                <li>Sub Item 2
+                    <ul>
+                        <li>Sub Item 2.1</li>
+                        <li>Sub Item 2.2</li>
+                        <li>Sub Item 2.3</li>
+                    </ul>
+                </li>
                 <li>Sub Item 3</li>
             </ul>
         </li>

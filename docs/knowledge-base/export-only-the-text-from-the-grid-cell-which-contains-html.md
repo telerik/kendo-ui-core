@@ -6,6 +6,7 @@ page_title: Export Only Text From Grid Cells which Contain HTML | Kendo UI Grid
 slug: export-only-the-text-from-the-grid-cell-which-contains-html
 tags: grid, excel, export, encoded
 ticketid: 1123086
+res_type: kb
 ---
 
 ## Environment

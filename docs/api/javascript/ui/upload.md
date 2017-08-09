@@ -740,7 +740,7 @@ Sets a [template](/api/javascript/kendo#methods-template) for rendering the file
 The `template` data `Array` consists of:
 
 * name - The name of the file. If in batch upload mode, represents a string combination of all file names separated with comma.
-* size - The file size in bytes. If in batch upload mode, represents the total file size. If not available, the value is `"null"`.
+* size - The file size in bytes. If in batch upload mode, represents the total file size. If not available, the value is `null`.
 * files - An array which contains information about all selected files (name, size, and extension).
 
 > * To render an action button for each file, add the following markup to the template: `<button type='button' class='k-upload-action'></button><button type='button' class='k-upload-action'></button>`.
@@ -1360,8 +1360,8 @@ A list of the files that were uploaded or removed.
 Each file has:
 
 * name
-* extension - The file extension including the leading dot. For example, `".jpg"`, `".png"`, and so on.
-* size - The file size in bytes. If not available, the value is `"null"`.
+* extension - The file extension including the leading dot. For example, `.jpg`, `.png`, and so on.
+* size - The file size in bytes. If not available, the value is `null`.
 * uid - The unique identifier of the file or batch of files.
 
 ### clear
@@ -1455,8 +1455,8 @@ Lists the files that were uploaded or removed.
 Each file has:
 
 * name
-* extension - The file extension including the leading dot. For example, `".jpg"`, `".png"`, an so on.
-* size - The file size in bytes. If not available, the value is `"null"`.
+* extension - The file extension including the leading dot. For example, `.jpg`, `.png`, an so on.
+* size - The file size in bytes. If not available, the value is `null`.
 * uid - The unique identifier of the file or batch of files.
 
 ##### e.operation `String`
@@ -1537,8 +1537,8 @@ Lists the files that are in the process of upload.
 
 Each file has:
 * name
-* extension - The file extension including the leading dot. For example, `".jpg"`, `".png"`, and so on.
-* size - The file size in bytes. If not available, the value is `"null"`.
+* extension - The file extension including the leading dot. For example, `.jpg`, `.png`, and so on.
+* size - The file size in bytes. If not available, the value is `null`.
 * uid - The unique identifier of the file or batch of files.
 
 ##### percentComplete `Number`
@@ -1603,8 +1603,8 @@ Lists the files that were uploaded or removed.
 Each file has:
 
 * name
-* extension - The file extension including the leading dot. For example, `".jpg"`, `".png"`, and so on.
-* size - The file size in bytes. If not available, the value is `"null"`.
+* extension - The file extension including the leading dot. For example, `.jpg`, `.png`, and so on.
+* size - The file size in bytes. If not available, the value is `null`.
 * uid - The unique identifier of the file or batch of files.
 
 ##### e.headers `Object`
@@ -1655,8 +1655,8 @@ An array of the selected files.
 Each item of the array is an object with the following properties:
 
 * name - The name of a selected file, including its extension.
-* extension - The file extension of a selected file, including the leading dot. For example, `".jpg"`, `".png"`, and so on.
-* size - The size of a selected file in bytes. If not available, the value is `"null"`.
+* extension - The file extension of a selected file, including the leading dot. For example, `.jpg`, `.png`, and so on.
+* size - The size of a selected file in bytes. If not available, the value is `null`.
 * rawFile - An in-memory representation of a selected file.
 * uid - The unique identifier of the file or batch of files.
 
@@ -1698,8 +1698,8 @@ A list of the files that are uploaded or removed.
 Each file has:
 
 * name
-* extension - The file extension including the leading dot. For example, `".jpg"`, `".png"`, and so on.
-* size - The file size in bytes. If not available, the value is `"null"`.
+* extension - The file extension including the leading dot. For example, `.jpg`, `.png`, and so on.
+* size - The file size in bytes. If not available, the value is `null`.
 * uid - The unique identifier of the file or batch of files.
 
 ##### e.operation `String`
@@ -1736,8 +1736,8 @@ A list of the files that will be uploaded.
 The file fields are:
 
 * name
-* extension - The file extension including the leading dot. For example, `".jpg"`, `".png"`, and so on.
-* size - The file size in bytes. If not available, the value is `"null"`.
+* extension - The file extension including the leading dot. For example, `.jpg`, `.png`, and so on.
+* size - The file size in bytes. If not available, the value is `null`.
 * uid - The unique identifier of the file or batch of files.
 
 ##### data `Object`

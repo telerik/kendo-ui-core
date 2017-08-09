@@ -6,6 +6,7 @@ page_title: Change the Options of a Widget Dynamically | Kendo UI Grid
 slug: how-to-change-a-widget-options-dynamically
 tags: grid, setoptions, dynamically, options
 
+res_type: kb
 ---
 
 ## Environment

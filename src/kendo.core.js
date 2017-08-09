@@ -1170,7 +1170,7 @@ function pad(number, digits, end) {
         return newLocalInfo;
     }
 
-    function parseExact(value, format, culture) {
+    function parseExact(value, format, culture, strict) {
         if (!value) {
             return null;
         }
@@ -1427,6 +1427,12 @@ function pad(number, digits, end) {
             }
         }
 
+        // if more characters follow, assume wrong format
+        // https://github.com/telerik/kendo-ui-core/issues/3476
+        if (strict && !/^\s*$/.test(value.substr(valueIdx))) {
+            return null;
+        }
+
         hasTime = hours !== null || minutes !== null || seconds || null;
 
         if (year === null && month === null && day === null && hasTime) {
@@ -1499,7 +1505,7 @@ function pad(number, digits, end) {
         return formats;
     }
 
-    kendo.parseDate = function(value, formats, culture) {
+    function internalParseDate(value, formats, culture, strict) {
         if (objectToString.call(value) === "[object Date]") {
             return value;
         }
@@ -1537,13 +1543,21 @@ function pad(number, digits, end) {
         length = formats.length;
 
         for (; idx < length; idx++) {
-            date = parseExact(value, formats[idx], culture);
+            date = parseExact(value, formats[idx], culture, strict);
             if (date) {
                 return date;
             }
         }
 
         return date;
+    }
+
+    kendo.parseDate = function(value, formats, culture) {
+        return internalParseDate(value, formats, culture, false);
+    };
+
+    kendo.parseExactDate = function(value, formats, culture) {
+        return internalParseDate(value, formats, culture, true);
     };
 
     kendo.parseInt = function(value, culture) {

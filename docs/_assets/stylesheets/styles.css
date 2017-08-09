@@ -1146,7 +1146,7 @@ footer,
 
 #feedback-form {
     -webkit-flex: 1;
-    flex: 1;
+    -moz-flex: 1;
     overflow: auto;
 }
 

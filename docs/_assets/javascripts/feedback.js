@@ -13,6 +13,11 @@ $(document).ready(function () {
         otherFeedback: false,
         textFeedback: ""
     };
+
+    $("#feedback-checkbox-area").click(function (e) {
+        $("span.k-tooltip-validation").remove();
+    });
+
     var formIsProcessing = false;
     //Util functions
     var generateUUID = function () {
@@ -81,7 +86,6 @@ $(document).ready(function () {
         }
     };
 
-
     //FORM
     //Init the form popup window
     var win = $("#feedback-form-window").kendoWindow({
@@ -100,6 +104,9 @@ $(document).ready(function () {
     var isFormModelEmpty = function () {
         var isModelDefault = true;
         for (var key in defaultFormValues) {
+            if (key === 'email') {
+                continue;
+            }
             var isValueEqual = formModel[key] === defaultFormValues[key];
             if (!isValueEqual) {
                 isModelDefault = false;
@@ -134,7 +141,7 @@ $(document).ready(function () {
 
     }).data("kendoValidator");
 
-    var emailValidator = $("#feedback-section").kendoValidator({
+    var emailValidator = $("#feedback-email-input").kendoValidator({
         validateOnBlur: false,
         messages: {
             email: "Invalid email address."
@@ -159,7 +166,8 @@ $(document).ready(function () {
                 emptyValidation: "Please provide some additional information.",
                 htmlValidation: "HTML tags are not allowed in this field.",
                 messageLength: "The message length must not exceed 2500 characters.",
-                whiteSpaces: "Using only white spaces is not allowed in this field."
+                whiteSpaces: "Using only white spaces is not allowed in this field.",
+                feedbackValidation: "Please select a category and provide some additional information."
             },
             rules: {
                 emptyValidation: function (input) {
@@ -167,24 +175,31 @@ $(document).ready(function () {
                     return isFormModelSatisfied(formModelKey, text);
                 },
                 htmlValidation: function (input) {
-                    var string = input.val();
-                    var matches = string.match(/(<([^>]+)>)/ig);
+                    var text = input.val();
+                    var matches = text.match(/(<([^>]+)>)/ig);
                     if (matches != null) {
                         return false;
                     }
                     return true;
                 },
                 messageLength: function (input) {
-                    var string = input.val();
-                    if (string.length > 2500) {
+                    var text = input.val();
+                    if (text.length > 2500) {
                         return false;
                     }
                     return true;
                 },
                 whiteSpaces: function (input) {
-                    var string = input.val();
-                    if (string.length > 0) {
-                        return $.trim(string) !== "";
+                    var text = input.val();
+                    if (text.length > 0) {
+                        return $.trim(text) !== "";
+                    }
+                    return true;
+                },
+                feedbackValidation: function (input) {
+                    var text = input.val();
+                    if (text.length > 0) {
+                        return formModel[formModelKey];
                     }
                     return true;
                 }
@@ -205,12 +220,12 @@ $(document).ready(function () {
         //	return;
         //}
 
-        if (textAreaValidator("#feedback-code-sample-text-input", "outdatedSample").validate() && 
+        if (textAreaValidator("#feedback-code-sample-text-input", "outdatedSample").validate() &&
             textAreaValidator("#feedback-more-information-text-input", "otherMoreInformation").validate() &&
             textAreaValidator("#feedback-text-errors-text-input", "textErrors").validate() &&
             textAreaValidator("#feedback-inaccurate-content-text-input", "inaccurateContent").validate() &&
             textAreaValidator("#feedback-other-text-input", "otherFeedback").validate() &&
-            emptyFormValidator.validate() && 
+            emptyFormValidator.validate() &&
             emailValidator.validate()) {
             win.close();
             setCookieByName("submittingFeedback")
