@@ -1418,6 +1418,7 @@ var __meta__ = { // jshint ignore:line
                             prevFocusable.focus();
                         }
                     }
+                    this._preventNextFocus = false;
                 }
 
                 if (e.altKey && keyCode === keys.DOWN) {
@@ -1444,6 +1445,72 @@ var __meta__ = { // jshint ignore:line
 
                     return;
                 }
+
+                if (keyCode === keys.HOME) {
+                    if (this.overflowAnchor) {
+                        items.eq(1).focus();
+                    } else {
+                        items.first().focus();
+                    }
+                    e.preventDefault();
+                } else if (keyCode === keys.END) {
+                    if (this.overflowAnchor && $(this.overflowAnchor).css("visibility") != "hidden") {
+                        this.overflowAnchor.focus();
+                    } else {
+                        items.last().focus();
+                    }
+                    e.preventDefault();
+                } else if (keyCode === keys.RIGHT && !this._preventNextFocus && this._getNextElement(e.target, 1)) {
+                    this._getNextElement(e.target, 1).focus();
+                    e.preventDefault();
+                } else if (keyCode === keys.LEFT && !this._preventNextFocus && this._getNextElement(e.target, -1)) {
+                    this._getNextElement(e.target, -1).focus();
+                    e.preventDefault();
+                }
+            },
+
+            _getNextElement: function (item, direction) {
+                var items = this.element.children(":not(.k-separator):visible");
+                var itemIndex = items.index(item) === -1 ? items.index(item.parentElement) : items.index(item);
+                var startIndex = this.overflowAnchor ? 1 : 0;
+                var directionNumber = direction;
+                var searchIndex = direction === 1 ? items.length - 1 : startIndex;
+                var index = direction === 1 ? startIndex : items.length - 1;
+                var focusableItem = items[itemIndex + direction];
+                this._preventNextFocus = false;
+
+                if ($(item).closest("." + BUTTON_GROUP).length && !$(item).is(direction === 1 ? ":last-child" : ":first-child")) {
+                    return $(item)
+                        .closest("." + BUTTON_GROUP)
+                        .children()[$(item)
+                        .closest("." + BUTTON_GROUP)
+                        .children()
+                        .index(item) + direction];
+                }
+
+                if (this.overflowAnchor && item === this.overflowAnchor[0] && direction === -1) {
+                    focusableItem = items[items.length - 1];
+                }
+
+                if (itemIndex === searchIndex) {
+                    focusableItem = !this.overflowAnchor ||
+                        (this.overflowAnchor &&
+                        $(this.overflowAnchor).css("visibility") === "hidden") ? items[index] : this.overflowAnchor;
+                }
+
+                while (!$(focusableItem).is(":kendoFocusable")) {
+                    focusableItem = $(focusableItem).children(direction === 1 ? ":first-child" : ":last-child" + ":kendoFocusable");
+                    if (!focusableItem.length) {
+                        directionNumber = directionNumber + direction;
+                        focusableItem = items[itemIndex + directionNumber];
+                        if (!focusableItem) {
+                            return this.overflowAnchor;
+                        }
+                    }
+                    this._preventNextFocus = $(focusableItem).closest("." + BUTTON_GROUP).length ? false : true;
+                }
+
+                return focusableItem;
             },
 
             _getPrevFocusable: function(element) {

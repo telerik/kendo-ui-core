@@ -182,7 +182,7 @@
         addItems(2, last);
 
         panelbar.expand(last);
-        equal(last.attr("aria-hidden"), "false");
+        equal(last.children("ul").attr("aria-hidden"), "false");
     });
 
     test("PanelBar updates aria-hidden state on collapse", function() {
@@ -194,7 +194,7 @@
         panelbar.expand(last);
         panelbar.collapse(last);
 
-        equal(last.attr("aria-hidden"), "true");
+        equal(last.children("ul").attr("aria-hidden"), "true");
     });
 
     test("PanelBar adds aria-hidden to the group when it is added with API", function() {

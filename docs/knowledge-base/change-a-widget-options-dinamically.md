@@ -1,15 +1,16 @@
 ---
-title: How to change the options dynamically 
-description: An example on how to change a widget options dynamically.
+title: Change Options of Widgets Dynamically
+description: An example on how to change the options of the Kendo UI Grid dynamically.
 type: how-to
-page_title: Change the Options of a Widget Dynamically | Kendo UI Grid
-slug: how-to-change-a-widget-options-dynamically
+page_title: Change the Options of a Widget Programmatically | Kendo UI Professional
+slug: change-a-widget-options-dynamically
+previous_url: /knowledge-base/how-to-change-a-widget-options-dinamically
 tags: grid, setoptions, dynamically, options
-
 res_type: kb
 ---
 
 ## Environment
+
 <table>
  <tr>
   <td>Product</td>
@@ -37,17 +38,18 @@ res_type: kb
  </tr>
 </table>
 
-
 ## Description
 
-The article demonstrates how to programatically change the widget options dynamically.
+How can I change the options of a Kendo UI widget programmatically?
 
 ## Solution
 
-When the widget options have to be changed programatically at runtime, we recommend using the setOptions method for the used widget. This is the only supported way to change the options which is recommended to ensure that different unexpected issue will occur.
-The following example demonstrates how to dynamically change the Grid columns based on a selection of the MultiSelect widget. The demonstrated approach can be used for changing all of the options of the Grid and the other Kendo UI widgets as well.
+Set the `setOptions` method for the widget that you use.
 
-Please check the following [Dojo](http://dojo.telerik.com/IvIcU) for reference.
+The following example demonstrates how to dynamically change the Grid columns based on a selection of the MultiSelect widget. You can use the same approach to adjust all options of both the Grid and the other Kendo UI widgets.
+
+For the complete implementation, refer to [this Dojo example](http://dojo.telerik.com/IvIcU).
+
 ```
    <div id="example">
    <p>Select Grid columns: </p>

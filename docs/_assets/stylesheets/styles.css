@@ -1132,7 +1132,7 @@ footer,
 }
 
 #feedback-form-window {
-    max-height: 700px !important;
+    max-height: 580px !important;
     padding: 30px 15px 30px 30px;
     display: -webkit-flex;
     display: flex;
@@ -1148,6 +1148,12 @@ footer,
     -webkit-flex: 1;
     -moz-flex: 1;
     overflow: auto;
+}
+
+#feedback-form span.required-field:after {
+    content: "* required";
+    font-size: 11px;
+    float: right;
 }
 
 #feedback-form-window input::-webkit-input-placeholder,
@@ -1184,9 +1190,19 @@ footer,
     text-decoration: none;
 }
 
-#feedback-form label {
+#feedback-form textarea {
+    margin: 12px 0 0px !important;
+    margin-top: 2px !important;
+}
+
+#feedback-checkbox-area label {
     display: block;
-    margin: 5px 0 10px;
+    margin: 5px 0 0;
+    padding: 5px 0 0;
+}
+
+#feedback-checkbox-area #feedback-email-input{
+    margin-top: 20px !important;
 }
 
 #feedback-extw__checkbox:after {
@@ -1265,6 +1281,7 @@ button#form-close-button:hover {
     color: #ff0000;
     font-style: italic;
     font-size: 12px;
+    padding: 0 0 6px !important;
 }
 
 html {

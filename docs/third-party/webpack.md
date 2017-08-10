@@ -43,7 +43,7 @@ The commercial Kendo UI distribution `zip` file, available for download for the 
 
 ## Use in JavaScript and TypeScript Applications
 
-To see the runnable examples on how to use Kendo UI with Webpack in both JavaScript and TypeScript applications, refer to the following [sample repository](https://github.com/telerik/kendo-ui-npm-example/tree/master/typescript-webpack).
+To see the runnable examples on how to use Kendo UI with Webpack in both JavaScript and TypeScript applications, refer to the following [sample repository](https://github.com/telerik/kendo-ui-npm-example).
 
 ## Build AMD-Formatted Scripts
 

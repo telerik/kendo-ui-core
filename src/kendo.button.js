@@ -23,7 +23,7 @@ var __meta__ = { // jshint ignore:line
         DISABLED = "disabled",
         DISABLEDSTATE = "k-state-disabled",
         FOCUSEDSTATE = "k-state-focused",
-        SELECTEDSTATE = "k-state-selected";
+        SELECTEDSTATE = "k-state-active";
 
     var Button = Widget.extend({
         init: function(element, options) {

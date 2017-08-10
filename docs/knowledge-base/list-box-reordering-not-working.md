@@ -2,7 +2,7 @@
 title: ListBox Reordering Is Not Working
 description: The indexes of the items in the dataSource of the Kendo UI ListBox are not reordered.
 type: troubleshooting
-page_title: Reordering Does Not Update the Indexes in Its dataSource | Kendo UI ListBox
+page_title: Reordering Does Not Update the Indexes in dataSource | Kendo UI ListBox
 slug: list-box-reordering-not-working
 tags: listbox, reorder
 ticketid: 1112413

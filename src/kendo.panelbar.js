@@ -140,6 +140,9 @@ var __meta__ = { // jshint ignore:line
     groupAttributes: function(group) {
         return group.expanded !== true ? " style='display:none'" : "";
     },
+    ariaHidden: function(group){
+        return group.expanded !== true;
+    },
     groupCssClass: function() {
         return "k-group k-panel";
     },
@@ -360,7 +363,7 @@ var __meta__ = { // jshint ignore:line
                     "<div role='region' class='k-content'#= contentAttributes(data) #>#= content(item) #</div>"
                 ),
                 group: template(
-                    "<ul role='group' aria-hidden='true' class='#= groupCssClass(group) #'#= groupAttributes(group) #>" +
+                    "<ul role='group' aria-hidden='#= ariaHidden(group) #' class='#= groupCssClass(group) #'#= groupAttributes(group) #>" +
                         "#= renderItems(data) #" +
                     "</ul>"
                 ),
@@ -1238,7 +1241,11 @@ var __meta__ = { // jshint ignore:line
                     var dataItem = that.dataItem(referenceItem);
                     if (dataItem) {
                         dataItem.hasChildren = true;
-                        referenceItem.attr(ARIA_EXPANDED, dataItem.expanded);
+                        referenceItem
+                            .attr(ARIA_EXPANDED, dataItem.expanded)
+                            .not("." + ACTIVECLASS)
+                            .children("ul")
+                            .attr(ARIA_HIDDEN, !dataItem.expanded);
                     }else{
                         referenceItem.attr(ARIA_EXPANDED, false);
                     }
@@ -1286,7 +1293,7 @@ var __meta__ = { // jshint ignore:line
                   .attr(ARIA_EXPANDED, expanded)
                   .not("." + ACTIVECLASS)
                   .children("ul")
-                  .attr(ARIA_HIDDEN, true)
+                  .attr(ARIA_HIDDEN, !expanded)
                   .hide();
 
             items = that.element.add(panels).children();
@@ -1510,9 +1517,10 @@ var __meta__ = { // jshint ignore:line
                 return;
             }
 
+            element.attr(ARIA_HIDDEN, !!visibility);
+
             element.parent()
                 .attr(ARIA_EXPANDED, !visibility)
-                .attr(ARIA_HIDDEN, visibility)
                 .toggleClass(ACTIVECLASS, !visibility)
                 .find("> .k-link > .k-panelbar-collapse,> .k-link > .k-panelbar-expand")
                     .toggleClass("k-i-arrow-n", !visibility)
