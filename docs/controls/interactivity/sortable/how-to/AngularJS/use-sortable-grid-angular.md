@@ -18,7 +18,7 @@ The example below demonstrates how to reorder the rows of a Kendo UI Grid in a n
 ###### Example
 
 ```html
-  <script src="http://demos.telerik.com/kendo-ui/content/shared/js/products.js"></script>
+  <script src="https://demos.telerik.com/kendo-ui/content/shared/js/products.js"></script>
 
   <div id="example" ng-app="KendoDemos">
     <div ng-controller="MyCtrl">
@@ -84,7 +84,7 @@ The example below demonstrates how to reorder the rows of a Kendo UI Grid in an 
 ###### Example
 
 ```html
-    <script src="http://demos.telerik.com/kendo-ui/content/shared/js/products.js"></script>
+    <script src="https://demos.telerik.com/kendo-ui/content/shared/js/products.js"></script>
     <div id="example" ng-app="KendoDemos">
       <div ng-controller="MyCtrl">
         <kendo-sortable options="sortableOptions">

@@ -99,7 +99,7 @@ The following example demonstrates how to retrieve the HTML of the Grid, inject 
 			dataSource: {
 				type: 'odata',
 				transport: {
-					read: "http://demos.telerik.com/kendo-ui/service/Northwind.svc/Products"
+					read: "https://demos.telerik.com/kendo-ui/service/Northwind.svc/Products"
 				},
 				pageSize: 20,
 				serverPaging: true,

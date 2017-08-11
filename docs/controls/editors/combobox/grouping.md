@@ -33,7 +33,7 @@ To enable the grouping functionality in a ComboBox, use the remote transport and
             dataSource: {
                 type: "odata",
                 transport: {
-                    read: "http://demos.telerik.com/kendo-ui/service/Northwind.svc/Customers"
+                    read: "https://demos.telerik.com/kendo-ui/service/Northwind.svc/Customers"
                 },
                 group: { field: "Country" } //group the data by 'Country' field
             }
@@ -78,7 +78,7 @@ The following example demonstrates how to define a custom group template.
             dataSource: {
                 type: "odata",
                 transport: {
-                    read: "http://demos.telerik.com/kendo-ui/service/Northwind.svc/Customers"
+                    read: "https://demos.telerik.com/kendo-ui/service/Northwind.svc/Customers"
                 },
                 group: { field: "Country" } //group the data by 'Country' field
             }
@@ -111,7 +111,7 @@ The following example demonstrates how to define a custom fixed group template.
             dataSource: {
                 type: "odata",
                 transport: {
-                    read: "http://demos.telerik.com/kendo-ui/service/Northwind.svc/Customers"
+                    read: "https://demos.telerik.com/kendo-ui/service/Northwind.svc/Customers"
                 },
                 group: { field: "Country" } //group the data by 'Country' field
             }

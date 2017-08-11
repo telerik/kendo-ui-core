@@ -56,7 +56,7 @@ The example below demonstrates how to edit data in a Kendo UI Window by using MV
       </ul>
     </div>
     <script>
-      var crudServiceBaseUrl = "http://demos.kendoui.com/service";
+      var crudServiceBaseUrl = "https://demos.telerik.com/kendo-ui/service";
       var validator;
       var viewModel = kendo.observable({
         //create a dataSource

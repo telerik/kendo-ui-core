@@ -26,7 +26,7 @@ The Sushi application is a Single Page Application (SPA) built with AngularJS an
 
 The full source code of the application is available on GitHub at [https://github.com/telerik/kendo-mobile-sushi](https://github.com/telerik/kendo-mobile-sushi)
 
-For a live preview of the application that you are going to build, [click here](http://demos.telerik.com/kendo-ui/mobile-apps/sushi).
+For a live preview of the application that you are going to build, [click here](https://demos.telerik.com/kendo-ui/mobile-apps/sushi).
 
 ## Getting Started
 
@@ -44,7 +44,7 @@ Create a new empty HTML file and include jQuery, AngularJS, and Kendo UI. In thi
 
         <link rel="stylesheet" href="http://kendo.cdn.telerik.com/2014.3.1029/styles/kendo.mobile.all.min.css">
         <!-- the application CSS file -->
-        <link rel="http://demos.telerik.com/kendo-ui/content/mobile/apps/sushi/css/style.css">
+        <link rel="https://demos.telerik.com/kendo-ui/content/mobile/apps/sushi/css/style.css">
 
         <script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
         <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.3.0/angular.js"></script>
@@ -77,7 +77,7 @@ To initialize the hybrid mobile application, add a `kendo-mobile-application` at
 
         <link rel="stylesheet" href="http://kendo.cdn.telerik.com/2014.3.1029/styles/kendo.mobile.all.min.css">
         <!-- the application CSS file -->
-        <link rel="http://demos.telerik.com/kendo-ui/content/mobile/apps/sushi/css/style.css">
+        <link rel="https://demos.telerik.com/kendo-ui/content/mobile/apps/sushi/css/style.css">
 
         <script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
         <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.3.0/angular.js"></script>

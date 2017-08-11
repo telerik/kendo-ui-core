@@ -85,19 +85,19 @@ The following example demonstrates how to update the opposite start/end picker v
                 batch: true,
                 transport: {
                     read: {
-                        url: "http://demos.telerik.com/kendo-ui/service/tasks",
+                        url: "https://demos.telerik.com/kendo-ui/service/tasks",
                         dataType: "jsonp"
                     },
                     update: {
-                        url: "http://demos.telerik.com/kendo-ui/service/tasks/update",
+                        url: "https://demos.telerik.com/kendo-ui/service/tasks/update",
                         dataType: "jsonp"
                     },
                     create: {
-                        url: "http://demos.telerik.com/kendo-ui/service/tasks/create",
+                        url: "https://demos.telerik.com/kendo-ui/service/tasks/create",
                         dataType: "jsonp"
                     },
                     destroy: {
-                        url: "http://demos.telerik.com/kendo-ui/service/tasks/destroy",
+                        url: "https://demos.telerik.com/kendo-ui/service/tasks/destroy",
                         dataType: "jsonp"
                     },
                     parameterMap: function(options, operation) {

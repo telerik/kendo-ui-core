@@ -162,7 +162,7 @@ The following example demonstrates how to set templates through the AngularJS di
       <div kendo-list-view k-data-source="source">
         <!-- the template (including the div tag itself) here will be assigned as a string to the `template` configuration option of the listview widget -->
         <div class="product" k-template>
-            <img ng-src="http://demos.telerik.com/kendo-ui/content/web/foods/{% raw %}{{dataItem.ProductID}}{% endraw %}.jpg" alt="{% raw %}{{dataItem.ProductName}}{% endraw %} image" />
+            <img ng-src="https://demos.telerik.com/kendo-ui/content/web/foods/{% raw %}{{dataItem.ProductID}}{% endraw %}.jpg" alt="{% raw %}{{dataItem.ProductName}}{% endraw %} image" />
             <h3>{% raw %}{{ dataItem.ProductName }}{% endraw %}</h3>
             <p>{% raw %}{{ dataItem.UnitPrice | currency:"USD$":0 }}{% endraw %}</p>
         </div>
@@ -173,7 +173,7 @@ The following example demonstrates how to set templates through the AngularJS di
        $scope.source = new kendo.data.DataSource({
          transport: {
            read: {
-             url: "http://demos.telerik.com/kendo-ui/service/products",
+             url: "https://demos.telerik.com/kendo-ui/service/products",
              dataType: "jsonp"
            }
          },
@@ -277,7 +277,7 @@ The following example demonstrates that the MultiSelect displays `Chai` as selec
           dataSource: {
             transport: {
               read: {
-                url: "http://demos.telerik.com/kendo-ui/service/products",
+                url: "https://demos.telerik.com/kendo-ui/service/products",
                 dataType: "jsonp"
               }
             }
@@ -309,7 +309,7 @@ In this scenario, when `k-value-primitive` is set to `true`, you can pass an arr
           dataSource: {
             transport: {
               read: {
-                url: "http://demos.telerik.com/kendo-ui/service/products",
+                url: "https://demos.telerik.com/kendo-ui/service/products",
                 dataType: "jsonp"
               }
             }
@@ -415,7 +415,7 @@ The following example demonstrates how to use some of these local variables.
           dataSource: {
             type: "odata",
             transport: {
-              read: "http://demos.telerik.com/kendo-ui/service/Northwind.svc/Employees"
+              read: "https://demos.telerik.com/kendo-ui/service/Northwind.svc/Employees"
             },
             pageSize: 5,
             serverPaging: true,
@@ -502,7 +502,7 @@ The following example demonstrates how to change the disabled state of the DropD
             transport: {
               read: {
                 dataType: "jsonp",
-                url: "http://demos.telerik.com/kendo-ui/service/Customers",
+                url: "https://demos.telerik.com/kendo-ui/service/Customers",
               }
             }
           },
@@ -536,7 +536,7 @@ The following example demonstrates how to change the read-only state of the Drop
             transport: {
               read: {
                 dataType: "jsonp",
-                url: "http://demos.telerik.com/kendo-ui/service/Customers",
+                url: "https://demos.telerik.com/kendo-ui/service/Customers",
               }
             }
           },
@@ -587,7 +587,7 @@ You can load the widget data with a `$http` call and initialize the widget when 
 </div>
 <script>
   angular.module("app", [ "kendo.directives" ]).controller("MyCtrl", function($scope, $http) {
-    $http({method: "GET", url: "http://demos.telerik.com/kendo-ui/service/Northwind.svc/Products"})
+    $http({method: "GET", url: "https://demos.telerik.com/kendo-ui/service/Northwind.svc/Products"})
       .success(function(result){
         $scope.customOptions.dataSource = new kendo.data.DataSource({
           data: result.d

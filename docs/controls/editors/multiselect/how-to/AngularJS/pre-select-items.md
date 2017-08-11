@@ -65,7 +65,7 @@ The following example demonstrates how to preselect items in the Kendo UI MultiS
       serverFiltering: true,
       serverSorting: true,
       transport: {
-        read: "http://demos.telerik.com/kendo-ui/service/Northwind.svc/Products"
+        read: "https://demos.telerik.com/kendo-ui/service/Northwind.svc/Products"
       }
     };
 
@@ -85,7 +85,7 @@ The following example demonstrates how to preselect items in the Kendo UI MultiS
       serverFiltering: true,
       serverSorting: true,
       transport: {
-        read: "http://demos.telerik.com/kendo-ui/service/Northwind.svc/Products"
+        read: "https://demos.telerik.com/kendo-ui/service/Northwind.svc/Products"
       }
     };
 
@@ -115,7 +115,7 @@ The following example demonstrates how to preselect items in the Kendo UI MultiS
       };
 
       $scope.filter = filter;
-      $http.get('http://demos.telerik.com/kendo-ui/service/Northwind.svc/Products?$filter='+filter).success(success);
+      $http.get('https://demos.telerik.com/kendo-ui/service/Northwind.svc/Products?$filter='+filter).success(success);
     }
 
     setTimeout(function() {

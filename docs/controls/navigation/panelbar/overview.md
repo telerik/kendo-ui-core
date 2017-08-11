@@ -140,7 +140,7 @@ The following example demonstrates how to create a PanelBar and bind it to a rem
             dataSource: {
                 transport: {
                     read: {
-                        url: "http://demos.telerik.com/kendo-ui/service/Employees",
+                        url: "https://demos.telerik.com/kendo-ui/service/Employees",
                         dataType: "jsonp"
                     }
                 },

@@ -57,7 +57,7 @@ The following example demonstrates how to disable a cascading child Kendo UI Com
             type: "odata",
             serverFiltering: true,
             transport: {
-              read: "http://demos.telerik.com/kendo-ui/service/Northwind.svc/Categories"
+              read: "https://demos.telerik.com/kendo-ui/service/Northwind.svc/Categories"
             }
           }
         }).data("kendoComboBox");
@@ -72,7 +72,7 @@ The following example demonstrates how to disable a cascading child Kendo UI Com
             type: "odata",
             serverFiltering: true,
             transport: {
-              read: "http://demos.telerik.com/kendo-ui/service/Northwind.svc/Products"
+              read: "https://demos.telerik.com/kendo-ui/service/Northwind.svc/Products"
             }
           },
           dataBound: function() {

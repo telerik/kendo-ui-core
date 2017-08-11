@@ -91,7 +91,7 @@ The following example demonstrates how to use dates inside a Grid row template.
               type: "odata",
               transport: {
                 read: {
-                  url: "http://demos.telerik.com/kendo-ui/service/Northwind.svc/Employees",
+                  url: "https://demos.telerik.com/kendo-ui/service/Northwind.svc/Employees",
                 }
               }
             },

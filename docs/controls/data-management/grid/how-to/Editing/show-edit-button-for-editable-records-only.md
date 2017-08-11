@@ -17,7 +17,7 @@ The following example demonstrates how to show the **Edit** buttons in the Grid 
 
       <script>
         $(document).ready(function () {
-          var crudServiceBaseUrl = "http://demos.telerik.com/kendo-ui/service",
+          var crudServiceBaseUrl = "https://demos.telerik.com/kendo-ui/service",
               dataSource = new kendo.data.DataSource({
                 transport: {
                  read:  {

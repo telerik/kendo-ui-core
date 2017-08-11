@@ -25,7 +25,7 @@ The following example demonstrates how to initialize a Grid by using data attrib
       var dataSource = new kendo.data.DataSource({
         type: "odata",
         transport: {
-          read: "http://demos.kendoui.com/service/Northwind.svc/Employees"
+          read: "https://demos.telerik.com/kendo-ui/service/Northwind.svc/Employees"
         },
         pageSize: 6,
         serverPaging: true,
@@ -39,7 +39,7 @@ The following example demonstrates how to initialize a Grid by using data attrib
             dataSource: {
               type: "odata",
               transport: {
-                read: "http://demos.kendoui.com/service/Northwind.svc/Orders"
+                read: "https://demos.telerik.com/kendo-ui/service/Northwind.svc/Orders"
               },
               serverPaging: true,
               serverSorting: true,

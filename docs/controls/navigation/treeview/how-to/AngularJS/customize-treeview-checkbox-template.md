@@ -90,8 +90,8 @@ The following example demonstrates how to:
                 {
                   "isLegend": true,
                   "images": [
-                    "http://demos.telerik.com/kendo-ui/content/web/foods/2.jpg",
-                    "http://demos.telerik.com/kendo-ui/content/web/foods/1.jpg"
+                    "https://demos.telerik.com/kendo-ui/content/web/foods/2.jpg",
+                    "https://demos.telerik.com/kendo-ui/content/web/foods/1.jpg"
                   ]
                 }]
             },
@@ -101,8 +101,8 @@ The following example demonstrates how to:
                 {
                   "isLegend": true,
                   "images": [
-                    "http://demos.telerik.com/kendo-ui/content/web/foods/35.jpg",
-                    "http://demos.telerik.com/kendo-ui/content/web/foods/75.jpg"
+                    "https://demos.telerik.com/kendo-ui/content/web/foods/35.jpg",
+                    "https://demos.telerik.com/kendo-ui/content/web/foods/75.jpg"
                   ]
                 }
               ]

@@ -236,7 +236,7 @@ If the `dataSource` option is an existing [kendo.data.DataSource](/api/javascrip
     var dataSource = new kendo.data.DataSource({
       transport: {
         read: {
-          url: "http://demos.telerik.com/kendo-ui/service/products",
+          url: "https://demos.telerik.com/kendo-ui/service/products",
           dataType: "jsonp"
         }
       }
@@ -371,7 +371,7 @@ The [template](/api/javascript/kendo#methods-template) used to render the fixed 
                 dataSource: {
                     type: "odata",
                     transport: {
-                        read: "http://demos.telerik.com/kendo-ui/service/Northwind.svc/Customers"
+                        read: "https://demos.telerik.com/kendo-ui/service/Northwind.svc/Customers"
                     },
                     group: { field: "Country" }
                 }
@@ -419,7 +419,7 @@ The [template](/api/javascript/kendo#methods-template) used to render the groups
                 dataSource: {
                     type: "odata",
                     transport: {
-                        read: "http://demos.telerik.com/kendo-ui/service/Northwind.svc/Customers"
+                        read: "https://demos.telerik.com/kendo-ui/service/Northwind.svc/Customers"
                     },
                     group: { field: "Country" }
                 }
@@ -876,7 +876,7 @@ The widget will pass the selected value(s) in the `valueMapper` function. In tur
                     itemHeight: 26,
                     valueMapper: function(options) {
                         $.ajax({
-                            url: "http://demos.telerik.com/kendo-ui/service/Orders/ValueMapper",
+                            url: "https://demos.telerik.com/kendo-ui/service/Orders/ValueMapper",
                             type: "GET",
                             dataType: "jsonp",
                             data: convertValues(options.value),
@@ -895,7 +895,7 @@ The widget will pass the selected value(s) in the `valueMapper` function. In tur
                 dataSource: {
                     type: "odata",
                     transport: {
-                        read: "http://demos.telerik.com/kendo-ui/service/Northwind.svc/Orders"
+                        read: "https://demos.telerik.com/kendo-ui/service/Northwind.svc/Orders"
                     },
                     schema: {
                         model: {
@@ -950,7 +950,7 @@ The widget will pass the selected value(s) in the `valueMapper` function. In tur
               source: new kendo.data.DataSource({
                 type: "odata",
                 transport: {
-                  read: "http://demos.telerik.com/kendo-ui/service/Northwind.svc/Orders"
+                  read: "https://demos.telerik.com/kendo-ui/service/Northwind.svc/Orders"
                 },
                 schema: {
                   model: {
@@ -974,7 +974,7 @@ The widget will pass the selected value(s) in the `valueMapper` function. In tur
 
         function orderValueMapper(options) {
             $.ajax({
-              url: "http://demos.telerik.com/kendo-ui/service/Orders/ValueMapper",
+              url: "https://demos.telerik.com/kendo-ui/service/Orders/ValueMapper",
               type: "GET",
               dataType: "jsonp",
               data: convertValues(options.value),

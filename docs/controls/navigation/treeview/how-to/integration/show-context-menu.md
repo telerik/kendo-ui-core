@@ -26,8 +26,8 @@ The following example demonstrates how to show a ContextMenu with tree-item acti
 
 
     <ul id="menu">
-        <li><img src="http://demos.telerik.com/kendo-ui/content/web/toolbar/forward.png" />Send via e-mail</li>
-        <li><img src="http://demos.telerik.com/kendo-ui/content/web/treeview/close.png" />Delete</li>
+        <li><img src="https://demos.telerik.com/kendo-ui/content/web/toolbar/forward.png" />Send via e-mail</li>
+        <li><img src="https://demos.telerik.com/kendo-ui/content/web/treeview/close.png" />Delete</li>
     </ul>
 
     <script>
@@ -61,7 +61,7 @@ The following example demonstrates how to show a ContextMenu with tree-item acti
       }
 
       #treeview .k-sprite {
-        background-image: url("http://demos.telerik.com/kendo-ui/content/web/treeview/coloricons-sprite.png");
+        background-image: url("https://demos.telerik.com/kendo-ui/content/web/treeview/coloricons-sprite.png");
       }
       .folder { background-position: 0 -16px; }
       .html { background-position: 0 -48px; }

@@ -38,7 +38,7 @@ The following example demonstrates how to enable the PDF export functionality of
             dataSource: {
                 type: "odata",
                 transport: {
-                    read: "http://demos.telerik.com/kendo-ui/service/Northwind.svc/Products"
+                    read: "https://demos.telerik.com/kendo-ui/service/Northwind.svc/Products"
                 },
                 pageSize: 7
             },
@@ -84,7 +84,7 @@ The following example demonstrates how to export all the pages of a Kendo UI Gri
             dataSource: {
                 type: "odata",
                 transport: {
-                    read: "http://demos.telerik.com/kendo-ui/service/Northwind.svc/Products"
+                    read: "https://demos.telerik.com/kendo-ui/service/Northwind.svc/Products"
                 },
                 pageSize: 7
             },
@@ -134,7 +134,7 @@ The following example demonstrates how to export the Grid with a fixed paper siz
             dataSource: {
                 type: "odata",
                 transport: {
-                    read: "http://demos.telerik.com/kendo-ui/service/Northwind.svc/Products"
+                    read: "https://demos.telerik.com/kendo-ui/service/Northwind.svc/Products"
                 },
                 pageSize: 7
             },
@@ -225,7 +225,7 @@ The following example demonstrates how to export a Grid by using a page template
             dataSource: {
                 type: "odata",
                 transport: {
-                    read: "http://demos.telerik.com/kendo-ui/service/Northwind.svc/Products"
+                    read: "https://demos.telerik.com/kendo-ui/service/Northwind.svc/Products"
                 },
                 pageSize: 7
             },
@@ -256,7 +256,7 @@ Internet Explorer 9 and Safari do not support the option for saving a file and r
             dataSource: {
                 type: "odata",
                 transport: {
-                    read: "http://demos.telerik.com/kendo-ui/service/Northwind.svc/Products"
+                    read: "https://demos.telerik.com/kendo-ui/service/Northwind.svc/Products"
                 },
                 pageSize: 7
             },
@@ -292,7 +292,7 @@ The following example demonstrates how to post files to the server.
             dataSource: {
                 type: "odata",
                 transport: {
-                    read: "http://demos.telerik.com/kendo-ui/service/Northwind.svc/Products"
+                    read: "https://demos.telerik.com/kendo-ui/service/Northwind.svc/Products"
                 },
                 pageSize: 7
             },
@@ -352,7 +352,7 @@ The following example demonstrates how to handle custom fonts.
             dataSource: {
                 type: "odata",
                 transport: {
-                    read: "http://demos.telerik.com/kendo-ui/service/Northwind.svc/Products"
+                    read: "https://demos.telerik.com/kendo-ui/service/Northwind.svc/Products"
                 },
                 pageSize: 7
             },

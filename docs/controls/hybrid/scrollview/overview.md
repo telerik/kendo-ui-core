@@ -88,7 +88,7 @@ The example below demonstrates how to initialize a Hybrid UI ScrollView bound to
             type: "odata",
             transport: {
                 read: {
-                    url: "http://demos.telerik.com/kendo-ui/service/Northwind.svc/Products"
+                    url: "https://demos.telerik.com/kendo-ui/service/Northwind.svc/Products"
                 }
             },
             serverPaging: true,
@@ -96,7 +96,7 @@ The example below demonstrates how to initialize a Hybrid UI ScrollView bound to
         });
 
         function setBackground(id) {
-            return "url(http://demos.telerik.com/kendo-ui/content/web/foods/" + id +".jpg)";
+            return "url(https://demos.telerik.com/kendo-ui/content/web/foods/" + id +".jpg)";
         }
     </script>
 
@@ -124,7 +124,7 @@ The example below demonstrates how to initialize a Hybrid UI ScrollView bound to
                     type: "odata",
                     transport: {
                         read: {
-                            url: "http://demos.telerik.com/kendo-ui/service/Northwind.svc/Products"
+                            url: "https://demos.telerik.com/kendo-ui/service/Northwind.svc/Products"
                         }
                     },
                     serverPaging: true,
@@ -137,7 +137,7 @@ The example below demonstrates how to initialize a Hybrid UI ScrollView bound to
         }
 
         function setBackground(id) {
-            return "url(http://demos.telerik.com/kendo-ui/content/web/foods/" + id +".jpg)";
+            return "url(https://demos.telerik.com/kendo-ui/content/web/foods/" + id +".jpg)";
         }
     </script>
 
@@ -197,7 +197,7 @@ The example below demonstrates a multiple-item template.
                     type: "odata",
                     transport: {
                         read: {
-                            url: "http://demos.telerik.com/kendo-ui/service/Northwind.svc/Products"
+                            url: "https://demos.telerik.com/kendo-ui/service/Northwind.svc/Products"
                         }
                     },
                     serverPaging: true,
@@ -211,7 +211,7 @@ The example below demonstrates a multiple-item template.
         }
 
         function setBackground(id) {
-            return "url(http://demos.telerik.com/kendo-ui/content/web/foods/" + id +".jpg)";
+            return "url(https://demos.telerik.com/kendo-ui/content/web/foods/" + id +".jpg)";
         }
     </script>
 

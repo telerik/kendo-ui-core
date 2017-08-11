@@ -28,7 +28,7 @@ The following example demonstrates how to render an input editor in a column tem
       }
 
       $(document).ready(function () {
-        var crudServiceBaseUrl = "http://demos.kendoui.com/service",
+        var crudServiceBaseUrl = "https://demos.telerik.com/kendo-ui/service",
             dataSource = new kendo.data.DataSource({
               transport: {
                 read:  {

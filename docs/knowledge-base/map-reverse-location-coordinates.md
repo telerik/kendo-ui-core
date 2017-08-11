@@ -36,7 +36,7 @@ The Map accepts a `[Latitude, Longitude]` format for its locations field. When y
 <!DOCTYPE html>
 <html>
 <head>
-    <base href="http://demos.telerik.com/kendo-ui/map/bubble-layer">
+    <base href="https://demos.telerik.com/kendo-ui/map/bubble-layer">
     <style>html { font-size: 14px; font-family: Arial, Helvetica, sans-serif; }</style>
     <title></title>
     <link rel="stylesheet" href="https://kendo.cdn.telerik.com/2017.2.504/styles/kendo.common-material.min.css" />

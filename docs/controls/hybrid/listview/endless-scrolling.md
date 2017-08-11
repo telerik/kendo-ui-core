@@ -157,7 +157,7 @@ This is the live example of the representation above:
       type: "odata",
       transport: {
         read: {
-          url: "http://demos.telerik.com/kendo-ui/service/Northwind.svc/Products"
+          url: "https://demos.telerik.com/kendo-ui/service/Northwind.svc/Products"
         }
       },
       schema: {
@@ -197,7 +197,7 @@ This is the live example of the representation above:
     type: "odata",
     transport: {
       read: {
-        url: "http://demos.kendoui.com/service/Northwind.svc/Products"
+        url: "https://demos.telerik.com/kendo-ui/service/Northwind.svc/Products"
       }
     },
     schema: {

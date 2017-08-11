@@ -195,7 +195,7 @@ $(function () {
                     type: "odata",
                     serverFiltering: true,
                     transport: {
-                        read: "http://demos.telerik.com/kendo-ui/service/Northwind.svc/Categories"
+                        read: "https://demos.telerik.com/kendo-ui/service/Northwind.svc/Categories"
                     }
                 }
             }).data("kendoDropDownList");
@@ -210,7 +210,7 @@ $(function () {
                     type: "odata",
                     serverFiltering: true,
                     transport: {
-                        read: "http://demos.telerik.com/kendo-ui/service/Northwind.svc/Products"
+                        read: "https://demos.telerik.com/kendo-ui/service/Northwind.svc/Products"
                     }
                 }
             }).data("kendoDropDownList");
@@ -225,7 +225,7 @@ $(function () {
                     type: "odata",
                     serverFiltering: true,
                     transport: {
-                        read: "http://demos.telerik.com/kendo-ui/service/Northwind.svc/Order_Details?$expand=Order"
+                        read: "https://demos.telerik.com/kendo-ui/service/Northwind.svc/Order_Details?$expand=Order"
                     }
                 }
             }).data("kendoDropDownList");
@@ -332,7 +332,7 @@ $(function () {
                     type: "odata",
                     serverFiltering: true,
                     transport: {
-                        read: "http://demos.telerik.com/kendo-ui/service/Northwind.svc/Categories"
+                        read: "https://demos.telerik.com/kendo-ui/service/Northwind.svc/Categories"
                     }
                 }
             }).data("kendoDropDownList");
@@ -347,7 +347,7 @@ $(function () {
                     type: "odata",
                     serverFiltering: true,
                     transport: {
-                        read: "http://demos.telerik.com/kendo-ui/service/Northwind.svc/Products"
+                        read: "https://demos.telerik.com/kendo-ui/service/Northwind.svc/Products"
                     }
                 }
             }).data("kendoDropDownList");
@@ -362,7 +362,7 @@ $(function () {
                     type: "odata",
                     serverFiltering: true,
                     transport: {
-                        read: "http://demos.telerik.com/kendo-ui/service/Northwind.svc/Order_Details?$expand=Order"
+                        read: "https://demos.telerik.com/kendo-ui/service/Northwind.svc/Order_Details?$expand=Order"
                     }
                 }
             }).data("kendoDropDownList");

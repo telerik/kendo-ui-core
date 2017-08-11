@@ -32,7 +32,7 @@ The following example demonstrates how to clear the filter of the Kendo UI Combo
             serverFiltering: true,
             transport: {
               read: {
-                url: "http://demos.telerik.com/kendo-ui/service/Northwind.svc/Products",
+                url: "https://demos.telerik.com/kendo-ui/service/Northwind.svc/Products",
               }
             }
           },

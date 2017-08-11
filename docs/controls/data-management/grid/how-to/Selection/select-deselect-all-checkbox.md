@@ -19,7 +19,7 @@ You can also select multiple rows by using the checkboxes and apply custom styli
     <script>
       $(document).ready(function () {
         //DataSource definition
-        var crudServiceBaseUrl = "http://demos.kendoui.com/service",
+        var crudServiceBaseUrl = "https://demos.telerik.com/kendo-ui/service",
             dataSource = new kendo.data.DataSource({
               transport: {
                 read: {

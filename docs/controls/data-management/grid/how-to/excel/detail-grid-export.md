@@ -23,7 +23,7 @@ To get the workbook of the detail Grids, the demos use the [`excelExport`](/api/
   var dataSource = new kendo.data.DataSource({
     type: "odata",
     transport: {
-      read: "http://demos.telerik.com/kendo-ui/service/Northwind.svc/Orders"
+      read: "https://demos.telerik.com/kendo-ui/service/Northwind.svc/Orders"
     }
   });
 
@@ -34,7 +34,7 @@ To get the workbook of the detail Grids, the demos use the [`excelExport`](/api/
     dataSource: {
       type: "odata",
       transport: {
-        read: "http://demos.telerik.com/kendo-ui/service/Northwind.svc/Employees"
+        read: "https://demos.telerik.com/kendo-ui/service/Northwind.svc/Employees"
       },
       pageSize: 6,
       serverPaging: true
@@ -175,7 +175,7 @@ To get the workbook of the detail Grids, the demos use the [`excelExport`](/api/
       dataSource: {
         type: "odata",
         transport: {
-          read: "http://demos.telerik.com/kendo-ui/service/Northwind.svc/Orders"
+          read: "https://demos.telerik.com/kendo-ui/service/Northwind.svc/Orders"
         },
         serverPaging: true,
         serverSorting: true,
@@ -219,7 +219,7 @@ To get the workbook of the detail Grids, the demos use the [`excelExport`](/api/
     dataSource: {
       type: "odata",
       transport: {
-        read: "http://demos.telerik.com/kendo-ui/service/Northwind.svc/Employees"
+        read: "https://demos.telerik.com/kendo-ui/service/Northwind.svc/Employees"
       },
       pageSize: 6,
       serverPaging: true
@@ -309,7 +309,7 @@ To get the workbook of the detail Grids, the demos use the [`excelExport`](/api/
       dataSource: {
         type: "odata",
         transport: {
-          read: "http://demos.telerik.com/kendo-ui/service/Northwind.svc/Orders"
+          read: "https://demos.telerik.com/kendo-ui/service/Northwind.svc/Orders"
         },
         serverPaging: true,
         serverSorting: true,

@@ -56,7 +56,7 @@ The example below demonstrates how to resize the Kendo UI Grid together with the
         dataSource: {
           type: "odata",
           transport: {
-            read: "http://demos.telerik.com/kendo-ui/service/Northwind.svc/Orders"
+            read: "https://demos.telerik.com/kendo-ui/service/Northwind.svc/Orders"
           },
           schema: {
             model: {
@@ -127,7 +127,7 @@ The example below demonstrates how to resize the Kendo UI Grid in a Kendo UI Win
         dataSource: {
           type: "odata",
           transport: {
-            read: "http://demos.telerik.com/kendo-ui/service/Northwind.svc/Orders"
+            read: "https://demos.telerik.com/kendo-ui/service/Northwind.svc/Orders"
           },
           schema: {
             model: {
@@ -201,7 +201,7 @@ The example below demonstrates how to resize the Kendo UI Grid in a Kendo UI Spl
         dataSource: {
           type: "odata",
           transport: {
-            read: "http://demos.telerik.com/kendo-ui/service/Northwind.svc/Orders"
+            read: "https://demos.telerik.com/kendo-ui/service/Northwind.svc/Orders"
           },
           schema: {
             model: {

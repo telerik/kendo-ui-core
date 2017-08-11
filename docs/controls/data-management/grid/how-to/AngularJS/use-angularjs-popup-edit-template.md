@@ -29,7 +29,7 @@ The `dataItem` is made dirty through `ng-change` for HTML elements and `k-on-cha
     </div>
 
     <script>
-      var crudServiceBaseUrl = "http://demos.telerik.com/kendo-ui/service";
+      var crudServiceBaseUrl = "https://demos.telerik.com/kendo-ui/service";
       angular.module("KendoDemos", [ "kendo.directives" ])
       .directive("myDirective", function() {
         return {

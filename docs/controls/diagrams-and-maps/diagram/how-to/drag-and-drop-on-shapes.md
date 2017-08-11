@@ -170,7 +170,7 @@ The following example demonstrates how to enable the dropping only of new shapes
         display: inline-block;
         width: 60px;
         height: 60px;
-        background-image: url("http://demos.telerik.com/kendo-ui/content/integration/diagram/images/diagram-toolbox.png");
+        background-image: url("https://demos.telerik.com/kendo-ui/content/integration/diagram/images/diagram-toolbox.png");
         background-size: auto 100%;
       }
 

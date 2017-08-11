@@ -2282,7 +2282,7 @@ If the `dataSource` option is an existing [kendo.data.DataSource](/api/javascrip
     var dataSource = new kendo.data.DataSource({
       transport: {
         read: {
-          url: "http://demos.telerik.com/kendo-ui/service/products",
+          url: "https://demos.telerik.com/kendo-ui/service/products",
           dataType: "jsonp"
         }
       },
@@ -2741,7 +2741,7 @@ If set to `true` the grid will export all pages of data. By default the grid exp
         dataSource: {
             transport: {
                 read: {
-                    url: "http://demos.telerik.com/kendo-ui/service/products",
+                    url: "https://demos.telerik.com/kendo-ui/service/products",
                     dataType: "jsonp"
                 }
             },
@@ -2767,7 +2767,7 @@ Specifies the file name of the exported Excel file.
         dataSource: {
             transport: {
                 read: {
-                    url: "http://demos.telerik.com/kendo-ui/service/products",
+                    url: "https://demos.telerik.com/kendo-ui/service/products",
                     dataType: "jsonp"
                 }
             },
@@ -2793,7 +2793,7 @@ Enables or disables column filtering in the Excel file. Not to be mistaken with 
         dataSource: {
             transport: {
                 read: {
-                    url: "http://demos.telerik.com/kendo-ui/service/products",
+                    url: "https://demos.telerik.com/kendo-ui/service/products",
                     dataType: "jsonp"
                 }
             },
@@ -2835,7 +2835,7 @@ The proxy should return the decoded file with the "Content-Disposition" header s
         dataSource: {
             transport: {
                 read: {
-                    url: "http://demos.telerik.com/kendo-ui/service/products",
+                    url: "https://demos.telerik.com/kendo-ui/service/products",
                     dataType: "jsonp"
                 }
             },
@@ -5745,7 +5745,7 @@ The author of the PDF document.
         dataSource: {
             transport: {
                 read: {
-                    url: "http://demos.telerik.com/kendo-ui/service/products",
+                    url: "https://demos.telerik.com/kendo-ui/service/products",
                     dataType: "jsonp"
                 }
             },
@@ -5775,7 +5775,7 @@ It's also possible to pass a CSS selector as argument. All matching links will b
         dataSource: {
             transport: {
                 read: {
-                    url: "http://demos.telerik.com/kendo-ui/service/products",
+                    url: "https://demos.telerik.com/kendo-ui/service/products",
                     dataType: "jsonp"
                 }
             },
@@ -5805,7 +5805,7 @@ The creator of the PDF document.
         dataSource: {
             transport: {
                 read: {
-                    url: "http://demos.telerik.com/kendo-ui/service/products",
+                    url: "https://demos.telerik.com/kendo-ui/service/products",
                     dataType: "jsonp"
                 }
             },
@@ -5831,7 +5831,7 @@ The date when the PDF document is created. Defaults to `new Date()`.
         dataSource: {
             transport: {
                 read: {
-                    url: "http://demos.telerik.com/kendo-ui/service/products",
+                    url: "https://demos.telerik.com/kendo-ui/service/products",
                     dataType: "jsonp"
                 }
             },
@@ -5857,7 +5857,7 @@ Specifies the file name of the exported PDF file.
         dataSource: {
             transport: {
                 read: {
-                    url: "http://demos.telerik.com/kendo-ui/service/products",
+                    url: "https://demos.telerik.com/kendo-ui/service/products",
                     dataType: "jsonp"
                 }
             },
@@ -5886,7 +5886,7 @@ Specifies the keywords of the exported PDF file.
         dataSource: {
             transport: {
                 read: {
-                    url: "http://demos.telerik.com/kendo-ui/service/products",
+                    url: "https://demos.telerik.com/kendo-ui/service/products",
                     dataType: "jsonp"
                 }
             },
@@ -5912,7 +5912,7 @@ Set to `true` to reverse the paper dimensions if needed such that width is the l
         dataSource: {
             transport: {
                 read: {
-                    url: "http://demos.telerik.com/kendo-ui/service/products",
+                    url: "https://demos.telerik.com/kendo-ui/service/products",
                     dataType: "jsonp"
                 }
             },
@@ -5944,7 +5944,7 @@ units are "mm", "cm", "in" and "pt" (default).
         dataSource: {
             transport: {
                 read: {
-                    url: "http://demos.telerik.com/kendo-ui/service/products",
+                    url: "https://demos.telerik.com/kendo-ui/service/products",
                     dataType: "jsonp"
                 }
             },
@@ -5996,7 +5996,7 @@ Supported values:
         dataSource: {
             transport: {
                 read: {
-                    url: "http://demos.telerik.com/kendo-ui/service/products",
+                    url: "https://demos.telerik.com/kendo-ui/service/products",
                     dataType: "jsonp"
                 }
             },
@@ -6056,7 +6056,7 @@ The proxy should return the decoded file with the "Content-Disposition" header s
         dataSource: {
             transport: {
                 read: {
-                    url: "http://demos.telerik.com/kendo-ui/service/products",
+                    url: "https://demos.telerik.com/kendo-ui/service/products",
                     dataType: "jsonp"
                 }
             },
@@ -6087,7 +6087,7 @@ the proxy should set the "Content-Disposition" header to `inline; filename="<fil
         dataSource: {
             transport: {
                 read: {
-                    url: "http://demos.telerik.com/kendo-ui/service/products",
+                    url: "https://demos.telerik.com/kendo-ui/service/products",
                     dataType: "jsonp"
                 }
             },
@@ -6112,7 +6112,7 @@ Sets the subject of the PDF file.
         dataSource: {
             transport: {
                 read: {
-                    url: "http://demos.telerik.com/kendo-ui/service/products",
+                    url: "https://demos.telerik.com/kendo-ui/service/products",
                     dataType: "jsonp"
                 }
             },
@@ -6137,7 +6137,7 @@ Sets the title of the PDF file.
         dataSource: {
             transport: {
                 read: {
-                    url: "http://demos.telerik.com/kendo-ui/service/products",
+                    url: "https://demos.telerik.com/kendo-ui/service/products",
                     dataType: "jsonp"
                 }
             },

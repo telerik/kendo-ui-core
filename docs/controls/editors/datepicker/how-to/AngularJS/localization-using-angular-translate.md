@@ -95,7 +95,7 @@ The following example demonstrates how to localize a DatePicker in an AngularJS 
           dataSource: {
             type: "odata",
             transport: {
-              read: "http://demos.telerik.com/kendo-ui/service/Northwind.svc/Employees"
+              read: "https://demos.telerik.com/kendo-ui/service/Northwind.svc/Employees"
             },
             pageSize: 5,
             serverPaging: true,

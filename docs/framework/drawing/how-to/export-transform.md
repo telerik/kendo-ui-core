@@ -74,7 +74,7 @@ For more information, refer to the [Transformation API article](/api/javascript/
           kendo.saveAs({
             dataURI: data,
             fileName: "Map.png",
-            proxyURL: "http://demos.telerik.com/kendo-ui/service/export"
+            proxyURL: "https://demos.telerik.com/kendo-ui/service/export"
           });
         });
       });

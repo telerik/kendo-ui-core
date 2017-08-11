@@ -63,7 +63,7 @@ This approach is also applicable for the Kendo UI ComboBox.
             type: "odata",
             serverFiltering: true,
             transport: {
-              read: "http://demos.telerik.com/kendo-ui/service/Northwind.svc/Categories"
+              read: "https://demos.telerik.com/kendo-ui/service/Northwind.svc/Categories"
             }
           },
           dataBound: function() {
@@ -82,7 +82,7 @@ This approach is also applicable for the Kendo UI ComboBox.
             type: "odata",
             serverFiltering: true,
             transport: {
-              read: "http://demos.telerik.com/kendo-ui/service/Northwind.svc/Products"
+              read: "https://demos.telerik.com/kendo-ui/service/Northwind.svc/Products"
             }
           },
           dataBound: function() {
@@ -101,7 +101,7 @@ This approach is also applicable for the Kendo UI ComboBox.
             type: "odata",
             serverFiltering: true,
             transport: {
-              read: "http://demos.telerik.com/kendo-ui/service/Northwind.svc/Order_Details?$expand=Order"
+              read: "https://demos.telerik.com/kendo-ui/service/Northwind.svc/Order_Details?$expand=Order"
             }
           },
           dataBound: function() {

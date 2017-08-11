@@ -21,7 +21,7 @@ The following example demonstrates how to persist row selection during data oper
       var dataSource = new kendo.data.DataSource({
         type: "odata",
         transport: {
-          read: "http://demos.kendoui.com/service/Northwind.svc/Orders"
+          read: "https://demos.telerik.com/kendo-ui/service/Northwind.svc/Orders"
         },
         schema: {
           model: {

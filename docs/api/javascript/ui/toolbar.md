@@ -293,7 +293,7 @@ If set, the ToolBar will render an image with the specified URL in the button.
     <div id="toolbar"></div>
 
     <script>
-    var baseUrl = "http://demos.telerik.com/kendo-ui/content/shared/icons";
+    var baseUrl = "https://demos.telerik.com/kendo-ui/content/shared/icons";
     $("#toolbar").kendoToolBar({
       items: [
         {
@@ -613,7 +613,7 @@ If set, the ToolBar will render an image with the specified URL in the button.
     <div id="toolbar"></div>
 
     <script>
-        var baseUrl = "http://demos.telerik.com/kendo-ui/content/shared/icons";
+        var baseUrl = "https://demos.telerik.com/kendo-ui/content/shared/icons";
         $("#toolbar").kendoToolBar({
           items: [
               { type: "button", text: "foo", imageUrl: "/sports/snowboarding.png" },
@@ -781,7 +781,7 @@ If set, the ToolBar will render an image with the specified URL in the menu butt
     <div id="toolbar"></div>
 
     <script>
-        var baseUrl = "http://demos.telerik.com/kendo-ui/content/shared/icons";
+        var baseUrl = "https://demos.telerik.com/kendo-ui/content/shared/icons";
         $("#toolbar").kendoToolBar({
             items: [
             {

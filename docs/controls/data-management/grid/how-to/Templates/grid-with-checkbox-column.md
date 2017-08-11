@@ -15,7 +15,7 @@ The following example demonstrates how to use checkboxes in the Grid column temp
 ```html
    <div id="grid"></div>
     <script>
-      var crudServiceBaseUrl = "http://demos.kendoui.com/service",
+      var crudServiceBaseUrl = "https://demos.telerik.com/kendo-ui/service",
           dataSource = new kendo.data.DataSource({
             transport: {
               read:  {

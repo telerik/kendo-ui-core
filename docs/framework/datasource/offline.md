@@ -36,7 +36,7 @@ The example below demonstrates how to set the offline storage key.
         offlineStorage: "products-offline",
         transport: {
             read: {
-                url: "http://demos.telerik.com/kendo-ui/service/products",
+                url: "https://demos.telerik.com/kendo-ui/service/products",
                 dataType: "jsonp"
             }
         },
@@ -67,11 +67,11 @@ The example below demonstrates how to go in offline mode.
         offlineStorage: "products-offline",
         transport: {
             read: {
-                url: "http://demos.telerik.com/kendo-ui/service/products",
+                url: "https://demos.telerik.com/kendo-ui/service/products",
                 type: "jsonp"
             },
             update: {
-                url: "http://demos.telerik.com/kendo-ui/service/products/update",
+                url: "https://demos.telerik.com/kendo-ui/service/products/update",
                 dataType: "jsonp"
             },
             parameterMap: function(options, operation) {
@@ -112,11 +112,11 @@ The example below demonstrates how to get the offline state.
         offlineStorage: "products-offline",
         transport: {
             read: {
-                url: "http://demos.telerik.com/kendo-ui/service/products",
+                url: "https://demos.telerik.com/kendo-ui/service/products",
                 type: "jsonp"
             },
             update: {
-                url: "http://demos.telerik.com/kendo-ui/service/products/update",
+                url: "https://demos.telerik.com/kendo-ui/service/products/update",
                 dataType: "jsonp"
             },
             parameterMap: function(options, operation) {
@@ -168,7 +168,7 @@ To use custom offline storage set the `offlineStorage` option to a JavaScript ob
         },
         transport: {
             read: {
-                url: "http://demos.telerik.com/kendo-ui/service/products",
+                url: "https://demos.telerik.com/kendo-ui/service/products",
                 type: "jsonp"
             }
         }
@@ -192,7 +192,7 @@ The example below demonstrates how to detect the offline mode via the `online` a
         offlineStorage: "products-offline",
         transport: {
             read: {
-                url: "http://demos.telerik.com/kendo-ui/service/products",
+                url: "https://demos.telerik.com/kendo-ui/service/products",
                 type: "jsonp"
             }
         }
@@ -217,7 +217,7 @@ The example below demonstrates how to detect the offline mode via Ajax polling.
         offlineStorage: "products-offline",
         transport: {
             read: {
-                url: "http://demos.telerik.com/kendo-ui/service/products",
+                url: "https://demos.telerik.com/kendo-ui/service/products",
                 type: "jsonp"
             }
         }

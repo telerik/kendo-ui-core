@@ -31,7 +31,7 @@ The example below demonstrates how to colorize each task based on a condition in
       }
 
       $(document).ready(function() {
-        var serviceRoot = "http://demos.telerik.com/kendo-ui/service";
+        var serviceRoot = "https://demos.telerik.com/kendo-ui/service";
         var tasksDataSource = new kendo.data.GanttDataSource({
           batch: false,
           transport: {

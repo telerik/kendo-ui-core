@@ -38,7 +38,7 @@ The following example demonstrates how to resize the columns of the Grid by usin
           dataSource: {
             type: "odata",
             transport: {
-              read: "http://demos.telerik.com/kendo-ui/service/Northwind.svc/Employees"
+              read: "https://demos.telerik.com/kendo-ui/service/Northwind.svc/Employees"
             },
             pageSize: 5,
             serverPaging: true,

@@ -32,7 +32,7 @@ To set the background color of the alternating rows, the demo uses the [`backgro
         dataSource: {
           type: "odata",
           transport: {
-              read: "http://demos.telerik.com/kendo-ui/service/Northwind.svc/Products"
+              read: "https://demos.telerik.com/kendo-ui/service/Northwind.svc/Products"
           },
           pageSize: 7
         },

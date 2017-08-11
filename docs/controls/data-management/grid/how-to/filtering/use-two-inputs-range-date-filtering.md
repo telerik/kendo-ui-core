@@ -15,7 +15,7 @@ To see how the following example works, filter the date column in a range. As a 
 ###### Example
 
 ```html
-<script src="http://demos.telerik.com/kendo-ui/content/shared/js/people.js"></script> 
+<script src="https://demos.telerik.com/kendo-ui/content/shared/js/people.js"></script> 
 
 <div id="example">
     <div id="grid"></div>

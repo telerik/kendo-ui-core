@@ -20,7 +20,7 @@ For earlier versions, refer to the following example. It demonstrates how to sel
 <script>
     $(document).ready(function () {
         //DataSource definition
-        var crudServiceBaseUrl = "http://demos.kendoui.com/service",
+        var crudServiceBaseUrl = "https://demos.telerik.com/kendo-ui/service",
         dataSource = new kendo.data.DataSource({
             transport: {
                 read: {

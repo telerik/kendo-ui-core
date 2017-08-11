@@ -26,7 +26,7 @@ The following example demonstrates how to cascade the Kendo UI MultiSelect from 
           serverFiltering: true,
           transport: {
             read: {
-              url: "http://demos.kendoui.com/service/Northwind.svc/Products",
+              url: "https://demos.telerik.com/kendo-ui/service/Northwind.svc/Products",
             }
           }
         });
@@ -47,7 +47,7 @@ The following example demonstrates how to cascade the Kendo UI MultiSelect from 
             serverFiltering: true,
             transport: {
               read: {
-                url: "http://demos.kendoui.com/service/Northwind.svc/Suppliers"
+                url: "https://demos.telerik.com/kendo-ui/service/Northwind.svc/Suppliers"
               }
             }
           },

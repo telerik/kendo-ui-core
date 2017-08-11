@@ -16,7 +16,7 @@ The following example demonstrates how to achieve this behavior also in case new
 ```html
     <div id="grid"></div>
     <script>
-        var crudServiceBaseUrl = "http://demos.kendoui.com/service",
+        var crudServiceBaseUrl = "https://demos.telerik.com/kendo-ui/service",
         dataSource = new kendo.data.DataSource({
             transport: {
                 read:  {

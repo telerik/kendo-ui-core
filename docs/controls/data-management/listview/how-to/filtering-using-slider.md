@@ -29,7 +29,7 @@ The following example demonstrates how to achieve this behavior and display the 
 
     <script type="text/x-kendo-tmpl" id="template">
     <div class="product">
-      <img src="http://demos.kendoui.com/content/web/foods/${ProductID}.jpg" alt="${ProductName} image" />
+      <img src="https://demos.telerik.com/kendo-ui/content/web/foods/${ProductID}.jpg" alt="${ProductName} image" />
         <h3>${ProductName}, $${UnitPrice}</h3>
           <p>${kendo.toString(UnitPrice, "c")}</p>
       </div>
@@ -86,7 +86,7 @@ The following example demonstrates how to achieve this behavior and display the 
       var dataSource = new kendo.data.DataSource({
         transport: {
           read: {
-            url: "http://demos.kendoui.com/service/Products",
+            url: "https://demos.telerik.com/kendo-ui/service/Products",
             dataType: "jsonp"
           }
         }

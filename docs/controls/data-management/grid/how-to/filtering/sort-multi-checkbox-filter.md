@@ -17,7 +17,7 @@ The following example demonstrates how to sort the Kendo UI multiple checkbox fi
 	<div id="client"></div>
       <script>
         $(document).ready(function() {
-          var telerikWebServiceBase = "http://demos.telerik.com/kendo-ui/service/";
+          var telerikWebServiceBase = "https://demos.telerik.com/kendo-ui/service/";
           $("#client").kendoGrid({
             dataSource: {
               transport: {

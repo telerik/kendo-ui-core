@@ -106,7 +106,7 @@ The example below demonstrates a Stock Chart in the master and navigator data-bi
             serverFiltering: true,
             transport: {
                 read: {
-                    url: "http://demos.telerik.com/kendo-ui/service/StockData",
+                    url: "https://demos.telerik.com/kendo-ui/service/StockData",
                     dataType: "jsonp"
                 },
                 parameterMap: function(data) {
@@ -130,7 +130,7 @@ The example below demonstrates a Stock Chart in the master and navigator data-bi
             dataSource: {
                 transport: {
                     read: {
-                        url: "http://demos.telerik.com/kendo-ui/service/StockData",
+                        url: "https://demos.telerik.com/kendo-ui/service/StockData",
                         dataType: "jsonp"
                     }
                 },

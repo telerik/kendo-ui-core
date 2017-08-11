@@ -22,7 +22,7 @@ The following example demonstrates how to show a context menu for the TreeList r
 
   <script>
     $(document).ready(function () {
-      var crudServiceBaseUrl = "http://demos.telerik.com/kendo-ui/service";
+      var crudServiceBaseUrl = "https://demos.telerik.com/kendo-ui/service";
 
       var dataSource = new kendo.data.TreeListDataSource({
         transport: {

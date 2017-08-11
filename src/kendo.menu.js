@@ -1417,8 +1417,8 @@ var __meta__ = { // jshint ignore:line
                 return;
             }
 
-            if ((that.options.openOnClick === false || (that.options.openOnClick.rootMenuItems === false && that._isRootItem(element)) ||
-                (that.options.openOnClick.subMenuItems === false && !that._isRootItem(element))) && !touch && !isPointerTouch(e) &&
+            if ((that.options.openOnClick === false || (!that.options.openOnClick.rootMenuItems && that._isRootItem(element)) ||
+                (!that.options.openOnClick.subMenuItems && !that._isRootItem(element))) && !touch && !isPointerTouch(e) &&
                 !contains(e.currentTarget, e.relatedTarget || e.target) && hasChildren &&
                 !contains(e.currentTarget, kendo._activeElement())) {
                     that.close(element);

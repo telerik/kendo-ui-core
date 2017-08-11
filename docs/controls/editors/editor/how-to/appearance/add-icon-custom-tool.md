@@ -23,7 +23,7 @@ The following example demonstrates how to decorate your own custom tool with a b
 
   .k-editor .k-i-my-tool
   {
-      background: 50% 50% no-repeat url(http://demos.telerik.com/kendo-ui/content/web/16x16/Chart.png);
+      background: 50% 50% no-repeat url(https://demos.telerik.com/kendo-ui/content/web/16x16/Chart.png);
   }
 
   /* Using FontAwesome icon for background */

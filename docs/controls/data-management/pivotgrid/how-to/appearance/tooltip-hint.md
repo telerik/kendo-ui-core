@@ -13,7 +13,7 @@ The following example demonstrates how to display a tooltip hint when users hove
 ###### Example
 
 ```html
-<script src="http://demos.telerik.com/kendo-ui/content/shared/js/products.js"></script>
+<script src="https://demos.telerik.com/kendo-ui/content/shared/js/products.js"></script>
 <div id="example">
 
 <div id="pivotgrid"></div>

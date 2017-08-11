@@ -21,7 +21,7 @@ The example below demonstrates how to use the `activate` event when initializing
       <div id="wnd">
         <div id="grid"></div>
       </div>
-      <script src="http://demos.telerik.com/kendo-ui/content/shared/js/products.js"></script>
+      <script src="https://demos.telerik.com/kendo-ui/content/shared/js/products.js"></script>
       <script>
   	    var wnd = $("#wnd").kendoWindow({
           height: 400,

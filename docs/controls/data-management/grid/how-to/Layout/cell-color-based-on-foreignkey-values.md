@@ -22,7 +22,7 @@ The following example demonstrates how to set the color of a text cell based on 
     	color:green;
     }
     </style>
-    <script src="http://demos.telerik.com/kendo-ui/content/shared/js/products.js" type="text/javascript"></script>
+    <script src="https://demos.telerik.com/kendo-ui/content/shared/js/products.js" type="text/javascript"></script>
     <div id="example">
       <div id="grid"></div>
 

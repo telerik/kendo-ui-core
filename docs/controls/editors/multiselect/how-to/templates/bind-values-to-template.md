@@ -74,7 +74,7 @@ The following example demonstrates how to bind the Kendo UI MultiSelect value to
         products: new kendo.data.DataSource({
           transport: {
             read: {
-              url: "http://demos.telerik.com/kendo-ui/service/products",
+              url: "https://demos.telerik.com/kendo-ui/service/products",
               dataType: "jsonp"
             }
           }

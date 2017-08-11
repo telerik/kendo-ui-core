@@ -20,7 +20,7 @@ The following example demonstrates how to edit records in a child Grid.
         type: "odata",
         transport: {
           read: {
-            url: "http://demos.kendoui.com/service/Northwind.svc/Employees",
+            url: "https://demos.telerik.com/kendo-ui/service/Northwind.svc/Employees",
             data: { $expand: "Orders" }
           }
         },

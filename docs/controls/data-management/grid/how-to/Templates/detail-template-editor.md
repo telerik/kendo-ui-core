@@ -42,7 +42,7 @@ The following example demonstrates how to create a custom editor in a Grid detai
         dataSource: {
           type: "odata",
           transport: {
-            read: "http://demos.kendoui.com/service/Northwind.svc/Employees"
+            read: "https://demos.telerik.com/kendo-ui/service/Northwind.svc/Employees"
           },
           pageSize: 5,
           serverPaging: true,
@@ -105,7 +105,7 @@ The following example demonstrates how to create a custom editor in a Grid detai
           dataSource: {
             type: "odata",
             transport: {
-              read: "http://demos.kendoui.com/service/Northwind.svc/Orders"
+              read: "https://demos.telerik.com/kendo-ui/service/Northwind.svc/Orders"
             },
             serverPaging: true,
             serverSorting: true,

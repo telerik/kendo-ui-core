@@ -25,7 +25,7 @@ To achieve this behavior, use a third-party library. To submit the actual reques
         function queueCreated(requests, items) {
           for (var i = 0; i < items.length; i++) {
             requests.push({
-              url: "http://demos.telerik.com/kendo-ui/service/Northwind.svc/Customers",
+              url: "https://demos.telerik.com/kendo-ui/service/Northwind.svc/Customers",
               type: "POST",
               data: items[i]
             });
@@ -38,7 +38,7 @@ To achieve this behavior, use a third-party library. To submit the actual reques
         function queueUpdated(requests, items) {
           for (var i = 0; i < items.length; i++) {
             requests.push({
-              url: "http://demos.telerik.com/kendo-ui/service/Northwind.svc/Customers/" +
+              url: "https://demos.telerik.com/kendo-ui/service/Northwind.svc/Customers/" +
               items[i].CustomerID,
               type: "PUT",
               data: items[i]
@@ -49,7 +49,7 @@ To achieve this behavior, use a third-party library. To submit the actual reques
         function queueDestroyed(requests, items) {
           for (var i = 0; i < items.length; i++) {
             requests.push({
-              url: "http://demos.telerik.com/kendo-ui/service/Northwind.svc/Customers/" +
+              url: "https://demos.telerik.com/kendo-ui/service/Northwind.svc/Customers/" +
               items[i].CustomerID,
               type: "DELETE"
             });
@@ -73,7 +73,7 @@ To achieve this behavior, use a third-party library. To submit the actual reques
                 // Check out the network tab on "Save Changes"
                 $.ajaxBatch({
                   // Not that this service doesn't actually support batching
-                  url: "http://demos.telerik.com/kendo-ui/service/Northwind.svc/Batch",
+                  url: "https://demos.telerik.com/kendo-ui/service/Northwind.svc/Batch",
                   data: requests
                 })
                   .done(function() {
@@ -88,7 +88,7 @@ To achieve this behavior, use a third-party library. To submit the actual reques
               read: function(e) {
                 var data = kendo.data.transports.odata.parameterMap(e.data, "read");
                 $.ajax({
-                  url: "http://demos.telerik.com/kendo-ui/service/Northwind.svc/Customers",
+                  url: "https://demos.telerik.com/kendo-ui/service/Northwind.svc/Customers",
                   dataType: "jsonp",
                   data: data,
                   jsonp: "$callback"

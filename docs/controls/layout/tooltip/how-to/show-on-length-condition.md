@@ -22,7 +22,7 @@ The example below demonstrates how to show a Kendo UI Tooltip only if the text o
       }
 
     </style>
-    <script src="http://demos.kendoui.com/content/shared/js/products.js"></script>
+    <script src="https://demos.telerik.com/kendo-ui/content/shared/js/products.js"></script>
     <script>
       $(document).ready(function () {
         var dataSource = new kendo.data.DataSource({

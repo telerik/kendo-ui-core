@@ -44,7 +44,7 @@ The following example demonstrates how to achieve this behavior, create editors 
     </ul>
 </div>
 <script>
-    var crudServiceBaseUrl = "http://demos.kendoui.com/service";
+    var crudServiceBaseUrl = "https://demos.telerik.com/kendo-ui/service";
     var validator;
     var viewModel = kendo.observable({
         dataSource: new kendo.data.DataSource({

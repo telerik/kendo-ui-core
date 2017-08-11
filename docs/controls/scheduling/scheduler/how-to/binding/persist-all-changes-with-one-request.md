@@ -30,7 +30,7 @@ The following example demonstrates how to persist all changes with a single requ
           batch: true,
           transport: {
             read: {
-              url: "http://demos.kendoui.com/service/meetings",
+              url: "https://demos.telerik.com/kendo-ui/service/meetings",
               dataType: "jsonp"
             }
           }
@@ -59,7 +59,7 @@ The following example demonstrates how to persist all changes with a single requ
         }
 
         $.ajax({
-          url: "http://demos.kendoui.com/service/meetings/update",
+          url: "https://demos.telerik.com/kendo-ui/service/meetings/update",
           data: dataForSync,
           success: function (e) {
           	destroyed = [];

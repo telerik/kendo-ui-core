@@ -92,7 +92,7 @@ The example below demonstrates how to embed fonts in exported PDF.
      $("#chart").kendoChart({
         pdf: {
             fileName: "Kendo UI Chart Export.pdf",
-            proxyURL: "http://demos.telerik.com/kendo-ui/service/export"
+            proxyURL: "https://demos.telerik.com/kendo-ui/service/export"
         },
         title: {
             text: "Gross domestic product growth \n /GDP annual %/",

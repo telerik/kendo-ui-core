@@ -94,7 +94,7 @@ The following example demonstrates how to initialize the ComboBox by using this 
                 transport: {
                     read: {
                         dataType: "jsonp",
-                        url: "http://demos.telerik.com/kendo-ui/service/Products"
+                        url: "https://demos.telerik.com/kendo-ui/service/Products"
                     }
                 }
             }
@@ -133,7 +133,7 @@ The following example demonstrates how to define an item template.
                     transport: {
                         read: {
                             dataType: "jsonp",
-                            url: "http://demos.telerik.com/kendo-ui/service/Customers"
+                            url: "https://demos.telerik.com/kendo-ui/service/Customers"
                         }
                     }
                 }
@@ -166,7 +166,7 @@ The ComboBox allows you to render a pop-up header. The following example demonst
                     transport: {
                         read: {
                             dataType: "jsonp",
-                            url: "http://demos.telerik.com/kendo-ui/service/Customers"
+                            url: "https://demos.telerik.com/kendo-ui/service/Customers"
                         }
                     }
                 }
@@ -199,7 +199,7 @@ The following example demonstrates how to define a footer template.
                     transport: {
                         read: {
                             dataType: "jsonp",
-                            url: "http://demos.telerik.com/kendo-ui/service/Customers"
+                            url: "https://demos.telerik.com/kendo-ui/service/Customers"
                         }
                     }
                 }
@@ -236,7 +236,7 @@ The following example demonstrates how to define a `noDataTemplate` template.
                     transport: {
                         read: {
                             dataType: "jsonp",
-                            url: "http://demos.telerik.com/kendo-ui/service/Customers"
+                            url: "https://demos.telerik.com/kendo-ui/service/Customers"
                         }
                     }
                 }

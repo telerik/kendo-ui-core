@@ -38,7 +38,7 @@ The following example demonstrates how to persist the expanded rows in a Grid af
                 dataSource: {
                     type: "odata",
                     transport: {
-                        read: "http://demos.telerik.com/kendo-ui/service/Northwind.svc/Employees"
+                        read: "https://demos.telerik.com/kendo-ui/service/Northwind.svc/Employees"
                     },
                     pageSize: 6,
                     serverPaging: true,
@@ -79,7 +79,7 @@ The following example demonstrates how to persist the expanded rows in a Grid af
                 dataSource: {
                     type: "odata",
                     transport: {
-                        read: "http://demos.telerik.com/kendo-ui/service/Northwind.svc/Orders"
+                        read: "https://demos.telerik.com/kendo-ui/service/Northwind.svc/Orders"
                     },
                     serverPaging: true,
                     serverSorting: true,

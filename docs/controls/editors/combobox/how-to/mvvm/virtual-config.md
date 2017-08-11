@@ -33,7 +33,7 @@ The following example demonstrates how to define the [`virtual`](/api/javascript
                   source: new kendo.data.DataSource({
                     type: "odata",
                     transport: {
-                      read: "http://demos.telerik.com/kendo-ui/service/Northwind.svc/Orders"
+                      read: "https://demos.telerik.com/kendo-ui/service/Northwind.svc/Orders"
                     },
                     schema: {
                       model: {
@@ -58,7 +58,7 @@ The following example demonstrates how to define the [`virtual`](/api/javascript
 
             function orderValueMapper(options) {
                 $.ajax({
-                  url: "http://demos.telerik.com/kendo-ui/service/Orders/ValueMapper",
+                  url: "https://demos.telerik.com/kendo-ui/service/Orders/ValueMapper",
                   type: "GET",
                   dataType: "jsonp",
                   data: convertValues(options.value),

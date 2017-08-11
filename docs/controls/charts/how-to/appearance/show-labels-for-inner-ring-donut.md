@@ -15,7 +15,7 @@ The example below demonstrates how to configure such behavior.
 ###### Example
 
 ```html
-    <base href="http://demos.telerik.com/kendo-ui/donut-charts/index">
+    <base href="https://demos.telerik.com/kendo-ui/donut-charts/index">
 
     <div id="example">
       <div class="demo-section k-content wide">

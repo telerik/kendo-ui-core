@@ -43,7 +43,7 @@ For more information on how Excel documents work, refer to the [introductory art
       dataSource: {
         type: "odata",
         transport: {
-          read: "http://demos.telerik.com/kendo-ui/service/Northwind.svc/Products"
+          read: "https://demos.telerik.com/kendo-ui/service/Northwind.svc/Products"
         },
         schema:{
           model: {

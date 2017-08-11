@@ -147,7 +147,7 @@ This means to change the rectangle fill and stroke options on `hover`.
         }));
 
         g.append(new dataviz.diagram.Image({
-          source: "http://demos.telerik.com/kendo-ui/content/dataviz/diagram/people/" + dataItem.image,
+          source: "https://demos.telerik.com/kendo-ui/content/dataviz/diagram/people/" + dataItem.image,
           x: 3,
           y: 3,
           width: 68,

@@ -52,7 +52,7 @@ To enable the virtualization in a ComboBox, follow the example below. It demonst
                     itemHeight: 26,
                     valueMapper: function(options) {
                         $.ajax({
-                            url: "http://demos.telerik.com/kendo-ui/service/Orders/ValueMapper",
+                            url: "https://demos.telerik.com/kendo-ui/service/Orders/ValueMapper",
                             type: "GET",
                             dataType: "jsonp",
                             data: convertValues(options.value),
@@ -66,7 +66,7 @@ To enable the virtualization in a ComboBox, follow the example below. It demonst
                 dataSource: {
                     type: "odata",
                     transport: {
-                        read: "http://demos.telerik.com/kendo-ui/service/Northwind.svc/Orders"
+                        read: "https://demos.telerik.com/kendo-ui/service/Northwind.svc/Orders"
                     },
                     pageSize: 80,
                     serverPaging: true,
@@ -133,7 +133,7 @@ The widget calls the `valueMapper` function when it receives a value which is no
 ```javascript
     valueMapper: function(options) {
         $.ajax({
-            url: "http://demos.telerik.com/kendo-ui/service/Orders/ValueMapper",
+            url: "https://demos.telerik.com/kendo-ui/service/Orders/ValueMapper",
             type: "GET",
             data: options.value, //send value to the server
             success: function (data) {
@@ -155,7 +155,7 @@ If you implement the `mapValueTo: "dataItem"` configuration, the `valueMapper` i
     mapValueTo: "dataItem",
     valueMapper: function(options) {
         $.ajax({
-            url: "http://demos.telerik.com/kendo-ui/service/Orders/ValueMapper",
+            url: "https://demos.telerik.com/kendo-ui/service/Orders/ValueMapper",
             type: "GET",
             data: options.value, //send value to the server
             success: function (dataItems) {
@@ -200,7 +200,7 @@ For an example, look into the result of [the test service](https://demos.telerik
 
 ```javascript
 $.ajax({
-    url: "http://demos.telerik.com/kendo-ui/service/Orders/ValueMapper",
+    url: "https://demos.telerik.com/kendo-ui/service/Orders/ValueMapper",
     type: "GET",
     dataType: "jsonp",
     data: { "values[0]": "10661" }

@@ -13,7 +13,7 @@ The example below demonstrates how to use FontAwesome icons with the Kendo UI Gr
 
 ```html
     <link href="http://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
-    <script src="http://demos.kendoui.com/content/shared/js/people.js"></script>
+    <script src="https://demos.telerik.com/kendo-ui/content/shared/js/people.js"></script>
 
     <div id="example" class="k-content">
         <div id="grid"></div>

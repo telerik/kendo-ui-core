@@ -23,7 +23,7 @@ The following example demonstrates how to create a custom **Edit** button in the
              .controller("MyCtrl", MyCtrl);
 
       function MyCtrl($scope) {
-        $scope.crudServiceBaseUrl = "http://demos.telerik.com/kendo-ui/service";
+        $scope.crudServiceBaseUrl = "https://demos.telerik.com/kendo-ui/service";
         $scope.dataSource = new kendo.data.DataSource({
           transport: {
             read:  {

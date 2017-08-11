@@ -12,7 +12,7 @@ The following example demonstrates how to create a custom editor in the [Grid](h
 ###### Example
 
 ```html
-  <script src="http://demos.telerik.com/kendo-ui/content/shared/js/products.js"></script>
+  <script src="https://demos.telerik.com/kendo-ui/content/shared/js/products.js"></script>
   <div id="example" ng-app="KendoDemos">
     <div ng-controller="MyCtrl">
       <kendo-grid options="mainGridOptions"></kendo-grid>
@@ -42,7 +42,7 @@ The following example demonstrates how to create a custom editor in the [Grid](h
       $scope.ddlDataSource = new kendo.data.DataSource({
         type: "odata",
         transport: {
-          read: "http://demos.telerik.com/kendo-ui/service/Northwind.svc/Categories"
+          read: "https://demos.telerik.com/kendo-ui/service/Northwind.svc/Categories"
         }
       });
 

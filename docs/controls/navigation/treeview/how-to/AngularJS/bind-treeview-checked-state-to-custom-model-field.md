@@ -21,8 +21,8 @@ The following example demonstrates how to bind the checked state of a Kendo UI T
 ###### Example
 
 ```html
-  <link rel="stylesheet" href="http://demos.telerik.com/kendo-ui/content/shared/styles/examples-offline.css">
-  <script src="http://demos.telerik.com/kendo-ui/content/shared/js/console.js"></script>
+  <link rel="stylesheet" href="https://demos.telerik.com/kendo-ui/content/shared/styles/examples-offline.css">
+  <script src="https://demos.telerik.com/kendo-ui/content/shared/js/console.js"></script>
 
   <div id="example" ng-app="KendoDemos">
       <div class="demo-section k-content" ng-controller="MyCtrl">

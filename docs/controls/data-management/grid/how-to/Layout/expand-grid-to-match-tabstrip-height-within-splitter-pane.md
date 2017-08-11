@@ -103,7 +103,7 @@ The following example demonstrates how to expand a Grid that is located in a Tab
           dataSource: {
              type: "odata",
              transport: {
-               read: "http://demos.telerik.com/kendo-ui/service/Northwind.svc/Orders"
+               read: "https://demos.telerik.com/kendo-ui/service/Northwind.svc/Orders"
            },
              schema: {
                model: {

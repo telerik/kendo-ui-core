@@ -18,7 +18,7 @@ For brevity, the following demo does not include the configuration for the Data 
 ###### Example
 
 ```html
-<script src="http://demos.telerik.com/kendo-ui/content/shared/js/products.js"></script>
+<script src="https://demos.telerik.com/kendo-ui/content/shared/js/products.js"></script>
 <div id="example">
     <div id="grid"></div>
 
@@ -83,7 +83,7 @@ For brevity, the following demo does not include the configuration for the Data 
                     dataSource: {
                         type: "odata",
                         transport: {
-                            read: "http://demos.telerik.com/kendo-ui/service/Northwind.svc/Categories"
+                            read: "https://demos.telerik.com/kendo-ui/service/Northwind.svc/Categories"
                         }
                     }
                 });

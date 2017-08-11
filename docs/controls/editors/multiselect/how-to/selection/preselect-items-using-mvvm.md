@@ -41,7 +41,7 @@ The following example demonstrates how to preselect items by using MVVM binding 
               serverFiltering: true,
               transport: {
                 read: {
-                  url: "http://demos.telerik.com/kendo-ui/service/Northwind.svc/Products",
+                  url: "https://demos.telerik.com/kendo-ui/service/Northwind.svc/Products",
                 }
               }
             });

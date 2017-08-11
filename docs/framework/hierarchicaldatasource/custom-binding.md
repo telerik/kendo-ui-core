@@ -29,7 +29,7 @@ The example below demonstrates how to bind the HierarchicalDataSource component 
           // [additional processing here]
 
           $.ajax({
-            url: "http://demos.telerik.com/kendo-ui/service/employees",
+            url: "https://demos.telerik.com/kendo-ui/service/employees",
             dataType: "jsonp", // "jsonp" is required for cross-domain requests; use "json" for same-domain requests
             data: { EmployeeId: id },
             success: function(result) {

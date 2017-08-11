@@ -37,7 +37,7 @@ The following example demonstrates how to enable the Excel export functionality 
             dataSource: {
                 type: "odata",
                 transport: {
-                    read: "http://demos.telerik.com/kendo-ui/service/Northwind.svc/Products"
+                    read: "https://demos.telerik.com/kendo-ui/service/Northwind.svc/Products"
                 },
                 pageSize: 7
             },
@@ -90,7 +90,7 @@ The following example demonstrates how to export all the data from a Kendo UI Gr
             dataSource: {
                 type: "odata",
                 transport: {
-                    read: "http://demos.telerik.com/kendo-ui/service/Northwind.svc/Products"
+                    read: "https://demos.telerik.com/kendo-ui/service/Northwind.svc/Products"
                 },
                 pageSize: 7
             },
@@ -135,7 +135,7 @@ The [`excelExport`](/api/javascript/ui/grid#events-excelExport) event allows rev
         dataSource: {
           type: "odata",
           transport: {
-            read: "http://demos.telerik.com/kendo-ui/service/Northwind.svc/Products"
+            read: "https://demos.telerik.com/kendo-ui/service/Northwind.svc/Products"
           },
           pageSize: 7
         },
@@ -190,7 +190,7 @@ The following example demonstrates how to post files to the server.
             dataSource: {
                 type: "odata",
                 transport: {
-                    read: "http://demos.telerik.com/kendo-ui/service/Northwind.svc/Products"
+                    read: "https://demos.telerik.com/kendo-ui/service/Northwind.svc/Products"
                 },
                 pageSize: 7
             },
@@ -267,7 +267,7 @@ Internet Explorer 9 and Safari do not support the option for saving a file and r
             dataSource: {
                 type: "odata",
                 transport: {
-                    read: "http://demos.telerik.com/kendo-ui/service/Northwind.svc/Products"
+                    read: "https://demos.telerik.com/kendo-ui/service/Northwind.svc/Products"
                 },
                 pageSize: 7
             },

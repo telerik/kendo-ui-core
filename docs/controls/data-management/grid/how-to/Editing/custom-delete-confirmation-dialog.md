@@ -28,7 +28,7 @@ To achieve this behavior, use the Kendo UI templates, the Window, and the `remov
 <script>
     $(document).ready(function () {
         var windowTemplate = kendo.template($("#windowTemplate").html());
-        var crudServiceBaseUrl = "http://demos.kendoui.com/service",
+        var crudServiceBaseUrl = "https://demos.telerik.com/kendo-ui/service",
         dataSource = new kendo.data.DataSource({
             transport: {
                 read:  {

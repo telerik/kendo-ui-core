@@ -28,19 +28,19 @@ The model configuration of the GanttDataSource. See [`GanttTask`](/api/framework
     var dataSource = new kendo.data.GanttDataSource({
       transport: {
         read: {
-          url: "http://demos.telerik.com/kendo-ui/service/GanttTasks",
+          url: "https://demos.telerik.com/kendo-ui/service/GanttTasks",
           dataType: "jsonp"
         },
         update: {
-          url: "http://demos.telerik.com/kendo-ui/service/GanttTasks/Update",
+          url: "https://demos.telerik.com/kendo-ui/service/GanttTasks/Update",
           dataType: "jsonp"
         },
         destroy: {
-          url: "http://demos.telerik.com/kendo-ui/service/GanttTasks/Destroy",
+          url: "https://demos.telerik.com/kendo-ui/service/GanttTasks/Destroy",
           dataType: "jsonp"
         },
         create: {
-          url: "http://demos.telerik.com/kendo-ui/service/GanttTasks/Create",
+          url: "https://demos.telerik.com/kendo-ui/service/GanttTasks/Create",
           dataType: "jsonp"
         }
       },

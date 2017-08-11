@@ -14,7 +14,7 @@ The example below demonstrates how to move a row from one Kendo UI Grid to anoth
 ```html
 <div id="grid1" style="width: 400px; float:left"></div>
 <div id="grid2" style="width: 400px; float:left"></div>
-<script src="http://demos.telerik.com/kendo-ui/content/shared/js/products.js"></script>
+<script src="https://demos.telerik.com/kendo-ui/content/shared/js/products.js"></script>
 <script>
   $("#grid1").kendoGrid({
     dataSource: {

@@ -61,7 +61,7 @@ The following example demonstrates how to dynamically set the DataSource in a Ke
             type: "odata",
             serverFiltering: true,
             transport: {
-              read: "http://demos.telerik.com/kendo-ui/service/Northwind.svc/Categories"
+              read: "https://demos.telerik.com/kendo-ui/service/Northwind.svc/Categories"
             }
           }
         }).data("kendoDropDownList");
@@ -84,7 +84,7 @@ The following example demonstrates how to dynamically set the DataSource in a Ke
             type: "odata",
             serverFiltering: true,
             transport: {
-              read: "http://demos.telerik.com/kendo-ui/service/Northwind.svc/Order_Details?$expand=Order"
+              read: "https://demos.telerik.com/kendo-ui/service/Northwind.svc/Order_Details?$expand=Order"
             }
           }
         }).data("kendoDropDownList");
@@ -94,7 +94,7 @@ The following example demonstrates how to dynamically set the DataSource in a Ke
             type: "odata",
             serverFiltering: true,
             transport: {
-              read: "http://demos.telerik.com/kendo-ui/service/Northwind.svc/Products"
+              read: "https://demos.telerik.com/kendo-ui/service/Northwind.svc/Products"
             }
           });
         });

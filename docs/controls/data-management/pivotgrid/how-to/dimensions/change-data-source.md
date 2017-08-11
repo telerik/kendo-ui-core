@@ -13,7 +13,7 @@ The following example demonstrates how to dynamically change the data source of 
 ###### Example
 
 ```html
-<script src="http://demos.telerik.com/kendo-ui/content/shared/js/products.js"></script>
+<script src="https://demos.telerik.com/kendo-ui/content/shared/js/products.js"></script>
 
 <div id="example">
     <button id="change">Change DS</button>

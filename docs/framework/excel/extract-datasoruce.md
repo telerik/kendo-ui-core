@@ -33,7 +33,7 @@ The example below demonstrates how to create an Excel workbook based on the requ
       var ds = new kendo.data.DataSource({
         type: "odata",
         transport: {
-          read: "http://demos.telerik.com/kendo-ui/service/Northwind.svc/Orders"
+          read: "https://demos.telerik.com/kendo-ui/service/Northwind.svc/Orders"
         },
         schema: {
           model: {

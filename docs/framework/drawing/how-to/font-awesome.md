@@ -48,13 +48,13 @@ The example below demonstrates how to embed custom fonts while working with the 
         toolbar: ["pdf"],
         pdf: {
           fileName: "Kendo UI Grid Export.pdf",
-          proxyURL: "http://demos.telerik.com/kendo-ui/service/export"
+          proxyURL: "https://demos.telerik.com/kendo-ui/service/export"
         },
         dataSource: {
           type: "odata",
           transport: {
             read: {
-              url: "http://demos.telerik.com/kendo-ui/service/Northwind.svc/Employees",
+              url: "https://demos.telerik.com/kendo-ui/service/Northwind.svc/Employees",
             }
           }
         },

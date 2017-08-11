@@ -265,7 +265,7 @@ When multi-page output is requested via `forcePageBreak` or `paperSize`, you can
                 type: "odata",
                 transport: {
                     read: {
-                        url: "http://demos.telerik.com/kendo-ui/service/Northwind.svc/Products",
+                        url: "https://demos.telerik.com/kendo-ui/service/Northwind.svc/Products",
                     }
                 }
             },

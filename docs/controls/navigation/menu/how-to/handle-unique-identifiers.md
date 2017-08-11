@@ -28,7 +28,7 @@ The following examples demonstrate how to handle a custom command attribute to a
 <ul id="menu"></ul>
 
 <script>
-  var imgUrl = "http://demos.telerik.com/kendo-ui/content/shared/icons/sports/swimming.png";
+  var imgUrl = "https://demos.telerik.com/kendo-ui/content/shared/icons/sports/swimming.png";
   $(document).ready(function() {
     $("#menu").kendoMenu({
       dataSource:
@@ -81,7 +81,7 @@ The following examples demonstrate how to handle a custom command attribute to a
 </ul>
 
 <script>
-  var imgUrl = "http://demos.telerik.com/kendo-ui/content/shared/icons/sports/swimming.png";
+  var imgUrl = "https://demos.telerik.com/kendo-ui/content/shared/icons/sports/swimming.png";
   $(document).ready(function() {
     $("#menu").kendoMenu({
         select: function (ev){

@@ -54,7 +54,7 @@ The auto layout requires you to disable the scrolling functionality of the Grid.
         dataSource: {
           type: "odata",
           transport: {
-            read: "http://demos.kendoui.com/service/Northwind.svc/Orders"
+            read: "https://demos.telerik.com/kendo-ui/service/Northwind.svc/Orders"
           },
           schema: {
             model: {

@@ -18,7 +18,7 @@ The example below demonstrates how to reorder the rows of a Kendo UI Grid in a n
 
 ```html
     <div id="grid" style="width: 800px; margin: 0 auto;"></div>
-    <script src="http://demos.telerik.com/kendo-ui/content/shared/js/products.js"></script>
+    <script src="https://demos.telerik.com/kendo-ui/content/shared/js/products.js"></script>
     <script>
       var grid = $("#grid").kendoGrid({
         dataSource: {
@@ -132,7 +132,7 @@ The main milestones of the approach are:
 ###### Example
 
 ```html
-<script src="http://demos.telerik.com/kendo-ui/content/shared/js/products.js"></script>
+<script src="https://demos.telerik.com/kendo-ui/content/shared/js/products.js"></script>
 
  <div id="example">
    <div id="grid"></div>

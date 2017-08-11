@@ -33,7 +33,7 @@ The example below demonstrates how to create Kendo UI Stock Charts by using Angu
     $scope.dataSource = {
       transport: {
         read: {
-          url: "http://demos.telerik.com/kendo-ui/content/dataviz/js/boeing-stock.json",
+          url: "https://demos.telerik.com/kendo-ui/content/dataviz/js/boeing-stock.json",
           dataType: "json"
         }
       }

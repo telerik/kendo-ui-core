@@ -23,7 +23,7 @@ data source is fired. By default the widget will bind to the data source specifi
     var dataSource = new kendo.data.DataSource({
       transport: {
         read: {
-          url: "http://demos.telerik.com/kendo-ui/service/stockdata",
+          url: "https://demos.telerik.com/kendo-ui/service/stockdata",
           dataType: "jsonp"
         }
       }
@@ -6049,7 +6049,7 @@ If the `dataSource` option is an existing [kendo.data.DataSource](/api/javascrip
     var dataSource = new kendo.data.DataSource({
       transport: {
         read: {
-          url: "http://demos.telerik.com/kendo-ui/service/stockdata",
+          url: "https://demos.telerik.com/kendo-ui/service/stockdata",
           dataType: "jsonp"
         }
       }
@@ -14197,7 +14197,7 @@ Sets the visible property of a chart series
         var dataSource = new kendo.data.DataSource({
         transport: {
             read: {
-              url: "http://demos.telerik.com/kendo-ui/service/stockdata",
+              url: "https://demos.telerik.com/kendo-ui/service/stockdata",
               dataType: "jsonp"
             }
           }

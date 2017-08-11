@@ -91,7 +91,7 @@ The following example demonstrates how to use the `ng-model` directive.
             serverFiltering: true,
             transport: {
                 read: {
-                    url: "http://demos.telerik.com/kendo-ui/service/Northwind.svc/Products",
+                    url: "https://demos.telerik.com/kendo-ui/service/Northwind.svc/Products",
                 }
             }
         };

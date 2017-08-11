@@ -28,7 +28,7 @@ Basically, the approach is to set the input width to 100%.
                 type: "odata",
                 serverFiltering: true,
                 transport: {
-                    read: "http://demos.telerik.com/kendo-ui/service/Northwind.svc/Categories"
+                    read: "https://demos.telerik.com/kendo-ui/service/Northwind.svc/Categories"
                 }
             }
         });

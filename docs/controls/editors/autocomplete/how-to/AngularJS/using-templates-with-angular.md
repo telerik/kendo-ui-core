@@ -95,7 +95,7 @@ The following example demonstrates how to use AngularJS templates inside the Ken
           transport: {
             read: {
               dataType: "jsonp",
-              url: "http://demos.telerik.com/kendo-ui/service/Customers",
+              url: "https://demos.telerik.com/kendo-ui/service/Customers",
             }
           }
         };
@@ -110,7 +110,7 @@ The following example demonstrates how to use AngularJS templates inside the Ken
           '</div>',
 
           // using {{angular}} templates:
-          template: '<span class="k-state-default"><img src=\"http://demos.telerik.com/kendo-ui/content/web/Customers/{{dataItem.CustomerID}}.jpg\" alt=\"{{dataItem.CustomerID}}\" /></span>' +
+          template: '<span class="k-state-default"><img src=\"https://demos.telerik.com/kendo-ui/content/web/Customers/{{dataItem.CustomerID}}.jpg\" alt=\"{{dataItem.CustomerID}}\" /></span>' +
           '<span class="k-state-default"><h3>{{dataItem.ContactName}}</h3><p>{{dataItem.CompanyName}}</p></span>',
         };
       });

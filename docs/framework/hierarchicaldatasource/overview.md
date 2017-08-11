@@ -90,7 +90,7 @@ The example below demonstrates how to create a `HierarchicalDataSource` componen
     var homogeneous = new kendo.data.HierarchicalDataSource({
         transport: {
             read: {
-                url: "http://demos.telerik.com/kendo-ui/service/Employees",
+                url: "https://demos.telerik.com/kendo-ui/service/Employees",
                 dataType: "json"
             }
         },
@@ -106,7 +106,7 @@ The snippet above targets the HierarchicalDataSource to a single service end-poi
 
 ###### Example
 
-    GET http://demos.telerik.com/kendo-ui/service/Employees
+    GET https://demos.telerik.com/kendo-ui/service/Employees
 
     => [ { "EmployeeId": 2, "Name": "Andrew", "HasEmployees": true } ]
 
@@ -122,7 +122,7 @@ This hits the service end-point and supplies the id of the data item.
 
 ###### Example
 
-    GET http://demos.telerik.com/kendo-ui/service/Employees?EmployeeId=2
+    GET https://demos.telerik.com/kendo-ui/service/Employees?EmployeeId=2
 
     => [
           { "EmployeeId": 3, "Name": "Bob", "HasEmployees": false },
@@ -164,7 +164,7 @@ The example below demonstrates how to create the HierarchicalDataSource componen
     var Products = {
             transport: {
                 read: {
-                    url: "http://demos.telerik.com/kendo-ui/service/Products",
+                    url: "https://demos.telerik.com/kendo-ui/service/Products",
                     dataType: "json"
                 }
             },
@@ -181,7 +181,7 @@ The example below demonstrates how to create the HierarchicalDataSource componen
     var Categories = new kendo.data.HierarchicalDataSource({
         transport: {
             read: {
-                url: "http://demos.telerik.com/kendo-ui/service/Categories",
+                url: "https://demos.telerik.com/kendo-ui/service/Categories",
                 dataType: "json"
             }
         },
@@ -221,7 +221,7 @@ The example below demonstrates how to share the HierarchicalDataSource component
       type: "odata",
       transport: {
         read: {
-          url: "http://demos.telerik.com/kendo-ui/service/Northwind.svc/Categories"
+          url: "https://demos.telerik.com/kendo-ui/service/Northwind.svc/Categories"
         }
       },
       schema: {
@@ -232,7 +232,7 @@ The example below demonstrates how to share the HierarchicalDataSource component
             type: "odata",
             transport: {
               read: {
-                url: "http://demos.telerik.com/kendo-ui/service/Northwind.svc/Products"
+                url: "https://demos.telerik.com/kendo-ui/service/Northwind.svc/Products"
               }
             },
             schema: {

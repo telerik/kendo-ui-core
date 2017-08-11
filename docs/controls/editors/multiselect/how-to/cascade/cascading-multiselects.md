@@ -22,7 +22,7 @@ The following example demonstrates how to cascade multiple Kendo UI MultiSelect 
           serverFiltering: true,
           transport: {
             read: {
-              url: "http://demos.kendoui.com/service/Northwind.svc/Products",
+              url: "https://demos.telerik.com/kendo-ui/service/Northwind.svc/Products",
             },
             parameterMap: function(data) {
               return kendo.data.transports.odata.parameterMap.call(this, data);
@@ -46,7 +46,7 @@ The following example demonstrates how to cascade multiple Kendo UI MultiSelect 
             serverFiltering: true,
             transport: {
               read: {
-                url: "http://demos.kendoui.com/service/Northwind.svc/Suppliers"
+                url: "https://demos.telerik.com/kendo-ui/service/Northwind.svc/Suppliers"
               }
             }
           },

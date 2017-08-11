@@ -42,7 +42,7 @@ The example below demonstrates code snippets for Grid components.
         <ak-grid k-data-source.bind="datasource" k-pageable.bind="pageable" k-sortable.bind="true">
           <ak-col k-title="Contact Name" k-field="ContactName">
             <ak-template>
-              <div class='customer-photo' style="background-image: url(http://demos.telerik.com/kendo-ui/content/web/Customers/${CustomerID}.jpg);"></div>
+              <div class='customer-photo' style="background-image: url(https://demos.telerik.com/kendo-ui/content/web/Customers/${CustomerID}.jpg);"></div>
               <div class='customer-name'>${ContactName}</div>
             </ak-template>
           </ak-col>

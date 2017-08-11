@@ -255,7 +255,7 @@ Refer to the example below for a list of the supported properties.
 
     <ul id="menu"></ul>
     <script>
-      var imgUrl = "http://demos.telerik.com/kendo-ui/content/shared/icons/sports/swimming.png";
+      var imgUrl = "https://demos.telerik.com/kendo-ui/content/shared/icons/sports/swimming.png";
       $(document).ready(function() {
         $("#menu").kendoMenu({
           dataSource:

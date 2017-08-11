@@ -48,7 +48,7 @@ The model that must be loaded.
       var dataSource = new kendo.data.TreeListDataSource({
         transport: {
           read: {
-            url: "http://demos.telerik.com/kendo-ui/service/EmployeeDirectory",
+            url: "https://demos.telerik.com/kendo-ui/service/EmployeeDirectory",
             dataType: "jsonp"
           }
         },

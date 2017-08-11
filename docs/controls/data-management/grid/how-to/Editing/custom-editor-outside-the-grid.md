@@ -34,7 +34,7 @@ The following example demonstrates how to use a custom editor, which uses the cu
 
       <script>
         $(document).ready(function () {
-          var crudServiceBaseUrl = "http://demos.telerik.com/kendo-ui/service",
+          var crudServiceBaseUrl = "https://demos.telerik.com/kendo-ui/service",
               dataSource = new kendo.data.DataSource({
                 transport: {
                   read:  {

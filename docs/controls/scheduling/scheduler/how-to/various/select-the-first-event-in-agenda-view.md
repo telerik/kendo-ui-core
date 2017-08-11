@@ -31,19 +31,19 @@ The following example demonstrates how to select the first event in the Agenda v
                     batch: true,
                     transport: {
                         read: {
-                            url: "http://demos.telerik.com/kendo-ui/service/meetings",
+                            url: "https://demos.telerik.com/kendo-ui/service/meetings",
                             dataType: "jsonp"
                         },
                         update: {
-                            url: "http://demos.telerik.com/kendo-ui/service/meetings/update",
+                            url: "https://demos.telerik.com/kendo-ui/service/meetings/update",
                             dataType: "jsonp"
                         },
                         create: {
-                            url: "http://demos.telerik.com/kendo-ui/service/meetings/create",
+                            url: "https://demos.telerik.com/kendo-ui/service/meetings/create",
                             dataType: "jsonp"
                         },
                         destroy: {
-                            url: "http://demos.telerik.com/kendo-ui/service/meetings/destroy",
+                            url: "https://demos.telerik.com/kendo-ui/service/meetings/destroy",
                             dataType: "jsonp"
                         },
                         parameterMap: function (options, operation) {

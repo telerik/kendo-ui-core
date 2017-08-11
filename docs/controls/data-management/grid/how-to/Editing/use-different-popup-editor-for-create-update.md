@@ -12,7 +12,7 @@ The following example demonstrates how to use different popup editors in a Grid 
 ###### Example
 
 ```html
-    <script src="http://demos.kendoui.com/content/shared/js/products.js"></script>
+    <script src="https://demos.telerik.com/kendo-ui/content/shared/js/products.js"></script>
     <div id="grid"></div>
     <script>
       $(document).ready(function(){
@@ -51,7 +51,7 @@ The following example demonstrates how to use different popup editors in a Grid 
                 type: "odata",
                 serverFiltering: true,
                 transport: {
-                  read: "http://demos.kendoui.com/service/Northwind.svc/Categories"
+                  read: "https://demos.telerik.com/kendo-ui/service/Northwind.svc/Categories"
                 }
               }
             });
@@ -68,7 +68,7 @@ The following example demonstrates how to use different popup editors in a Grid 
                 type: "odata",
                 serverFiltering: true,
                 transport: {
-                  read: "http://demos.kendoui.com/service/Northwind.svc/Products"
+                  read: "https://demos.telerik.com/kendo-ui/service/Northwind.svc/Products"
                 }
               }
             });

@@ -37,7 +37,7 @@ These include tokens used by ASP.NET, Ruby on Rails and others.
     var dataSource = new kendo.data.DataSource({
       transport: {
         read: {
-          url: "http://demos.telerik.com/kendo-ui/service/twitter/search",
+          url: "https://demos.telerik.com/kendo-ui/service/twitter/search",
           dataType: "jsonp",
           data: function() {
             return kendo.antiForgeryTokens();

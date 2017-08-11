@@ -12,7 +12,7 @@ The following example demonstrates how to create a custom data source based on t
 ###### Example
 
 ```html
-    <script src="http://demos.telerik.com/kendo-ui/content/shared/js/products.js"></script>
+    <script src="https://demos.telerik.com/kendo-ui/content/shared/js/products.js"></script>
     <div id="example">
         <div id="grid"></div>
       <script>
@@ -61,7 +61,7 @@ The following example demonstrates how to create a custom data source based on t
           return new kendo.data.DataSource({
             type: "odata",
             transport: {
-              read: "http://demos.telerik.com/kendo-ui/service/Northwind.svc/Categories"
+              read: "https://demos.telerik.com/kendo-ui/service/Northwind.svc/Categories"
             },
             change: function() {
               alert(id);

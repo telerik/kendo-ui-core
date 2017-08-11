@@ -36,7 +36,7 @@ To achieve this behavior:
             dataSource: {
                 type: "odata",
                 transport: {
-                    read: "http://demos.kendoui.com/service/Northwind.svc/Orders"
+                    read: "https://demos.telerik.com/kendo-ui/service/Northwind.svc/Orders"
                 },
                 schema: {
                     model: {

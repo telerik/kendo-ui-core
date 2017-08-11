@@ -39,7 +39,7 @@ To create an editor with radio buttons:
 1. In the `click` event handler, [`set`](http://docs.telerik.com/kendo-ui/api/javascript/data/model#methods-set) the new value of the `dataItem`.
 
 ```html
-<script src="http://demos.telerik.com/kendo-ui/content/shared/js/products.js" type="text/javascript"></script>
+<script src="https://demos.telerik.com/kendo-ui/content/shared/js/products.js" type="text/javascript"></script>
 <div id="example">
     <div id="grid"></div>
 
@@ -186,4 +186,4 @@ To create an editor with radio buttons:
 
 ## See Also
 
-* [Demo on Custom Editing in the Grid](http://demos.telerik.com/kendo-ui/grid/editing-custom)
+* [Demo on Custom Editing in the Grid](https://demos.telerik.com/kendo-ui/grid/editing-custom)

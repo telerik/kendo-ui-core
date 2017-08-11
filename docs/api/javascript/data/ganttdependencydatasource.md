@@ -27,15 +27,15 @@ The model configuration of the `GanttDependencyDataSource`. See [`GanttDependenc
     var dataSource = new kendo.data.GanttDependencyDataSource({
       transport: {
         read: {
-          url: "http://demos.telerik.com/kendo-ui/service/GanttDependencies",
+          url: "https://demos.telerik.com/kendo-ui/service/GanttDependencies",
           dataType: "jsonp"
         },
         destroy: {
-          url: "http://demos.telerik.com/kendo-ui/service/GanttDependencies/Destroy",
+          url: "https://demos.telerik.com/kendo-ui/service/GanttDependencies/Destroy",
           dataType: "jsonp"
         },
         create: {
-          url: "http://demos.telerik.com/kendo-ui/service/GanttDependencies/Create",
+          url: "https://demos.telerik.com/kendo-ui/service/GanttDependencies/Create",
           dataType: "jsonp"
         }
       },

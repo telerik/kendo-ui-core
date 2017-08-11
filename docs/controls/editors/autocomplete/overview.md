@@ -95,7 +95,7 @@ To bind the widget to a remote data service by using oData through the Data Sour
             dataSource: new kendo.data.DataSource({
                 type: "odata", // specifies data protocol
                 transport: {
-                    read: "http://demos.telerik.com/kendo-ui/service/Northwind.svc/Customers"
+                    read: "https://demos.telerik.com/kendo-ui/service/Northwind.svc/Customers"
                 }
             })
         });
@@ -225,7 +225,7 @@ The following example demonstrates how to define an item template.
                     transport: {
                         read: {
                             dataType: "jsonp",
-                            url: "http://demos.telerik.com/kendo-ui/service/Customers"
+                            url: "https://demos.telerik.com/kendo-ui/service/Customers"
                         }
                     }
                 }
@@ -257,7 +257,7 @@ The following example demonstrates how to define a header template.
                     transport: {
                         read: {
                             dataType: "jsonp",
-                            url: "http://demos.telerik.com/kendo-ui/service/Customers"
+                            url: "https://demos.telerik.com/kendo-ui/service/Customers"
                         }
                     }
                 }
@@ -289,7 +289,7 @@ The following example demonstrates how to define a footer template.
                     transport: {
                         read: {
                             dataType: "jsonp",
-                            url: "http://demos.telerik.com/kendo-ui/service/Customers"
+                            url: "https://demos.telerik.com/kendo-ui/service/Customers"
                         }
                     }
                 }
@@ -325,7 +325,7 @@ The following example demonstrates how to define a `noDataTemplate` template.
                     transport: {
                         read: {
                             dataType: "jsonp",
-                            url: "http://demos.telerik.com/kendo-ui/service/Customers"
+                            url: "https://demos.telerik.com/kendo-ui/service/Customers"
                         }
                     }
                 }

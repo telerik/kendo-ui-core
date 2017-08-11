@@ -13,7 +13,7 @@ The example below demonstrates how to reorder Grid rows using the Kendo UI Sorta
 
 ```html
     <div id="grid" style="width: 800px; margin: 0 auto;"></div>
-    <script src="http://demos.telerik.com/kendo-ui/content/shared/js/products.js"></script>
+    <script src="https://demos.telerik.com/kendo-ui/content/shared/js/products.js"></script>
     <script>
       var RESTRICTED_ROWS_NUMBER = 3;
 

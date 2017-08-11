@@ -81,7 +81,7 @@ The following example demonstrates how to configure a deferred value binding in 
           serverFiltering: true,
           transport: {
               read: {
-                  url: "http://demos.telerik.com/kendo-ui/service/Northwind.svc/Products",
+                  url: "https://demos.telerik.com/kendo-ui/service/Northwind.svc/Products",
               }
           }
         });

@@ -28,7 +28,7 @@ The example below demonstrates how to use the `activate` event when initializing
         <div>Content 2</div>
       </div>
 
-      <script src="http://demos.telerik.com/kendo-ui/content/shared/js/products.js"></script>
+      <script src="https://demos.telerik.com/kendo-ui/content/shared/js/products.js"></script>
       <script>
         var tabstrip = $("#tabstrip").kendoTabStrip().data("kendoTabStrip");
 

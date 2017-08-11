@@ -68,7 +68,7 @@ Internet Explorer 10 or older versions and Safari do not support the option of f
             dataSource: {
                 type: "odata",
                 transport: {
-                    read: "http://demos.telerik.com/kendo-ui/service/Northwind.svc/Products"
+                    read: "https://demos.telerik.com/kendo-ui/service/Northwind.svc/Products"
                 },
                 pageSize: 7
             },

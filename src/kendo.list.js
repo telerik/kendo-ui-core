@@ -1365,7 +1365,7 @@ var __meta__ = { // jshint ignore:line
 
                 parent.bind("set", function() { //will cascade
                     that.one("set", function(e) { //get your value
-                        that._selectedValue = e.value;
+                        that._selectedValue = e.value || that._accessor();
                     });
                 });
 

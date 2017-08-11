@@ -54,7 +54,7 @@ The following example demonstrates how to customize the default behavior of the 
 <!DOCTYPE html>
 <html>
 <head>
-    <base href="http://demos.telerik.com/kendo-ui/listview/index">
+    <base href="https://demos.telerik.com/kendo-ui/listview/index">
     <style>html { font-size: 14px; font-family: Arial, Helvetica, sans-serif; }</style>
     <title></title>
     <link rel="stylesheet" href="https://kendo.cdn.telerik.com/2017.2.504/styles/kendo.common-material.min.css" />

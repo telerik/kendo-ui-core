@@ -76,19 +76,19 @@ The example below demonstrates how to bind the widget to a remote service.
           batch: true, // Enable batch updates
           transport: {
             read: {
-              url: "http://demos.telerik.com/kendo-ui/service/gantttasks",
+              url: "https://demos.telerik.com/kendo-ui/service/gantttasks",
               dataType: "jsonp"
             },
             update: {
-              url: "http://demos.telerik.com/kendo-ui/service/gantttasks/update",
+              url: "https://demos.telerik.com/kendo-ui/service/gantttasks/update",
               dataType: "jsonp"
             },
             create: {
-              url: "http://demos.telerik.com/kendo-ui/service/gantttasks/create",
+              url: "https://demos.telerik.com/kendo-ui/service/gantttasks/create",
               dataType: "jsonp"
             },
             destroy: {
-              url: "http://demos.telerik.com/kendo-ui/service/gantttasks/destroy",
+              url: "https://demos.telerik.com/kendo-ui/service/gantttasks/destroy",
               dataType: "jsonp"
             },
             parameterMap: function(options, operation) {
@@ -121,19 +121,19 @@ The example below demonstrates how to bind the widget to a remote service.
         dependencies: {
           transport: {
             read: {
-              url: "http://demos.telerik.com/kendo-ui/service/ganttdependencies",
+              url: "https://demos.telerik.com/kendo-ui/service/ganttdependencies",
               dataType: "jsonp"
             },
             update: {
-              url: "http://demos.telerik.com/kendo-ui/service/ganttdependencies/Update",
+              url: "https://demos.telerik.com/kendo-ui/service/ganttdependencies/Update",
               dataType: "jsonp"
             },
             destroy: {
-              url: "http://demos.telerik.com/kendo-ui/service/ganttdependencies/Destroy",
+              url: "https://demos.telerik.com/kendo-ui/service/ganttdependencies/Destroy",
               dataType: "jsonp"
             },
             create: {
-              url: "http://demos.telerik.com/kendo-ui/service/ganttdependencies/Create",
+              url: "https://demos.telerik.com/kendo-ui/service/ganttdependencies/Create",
               dataType: "jsonp"
             },
             parameterMap: function(options, operation) {

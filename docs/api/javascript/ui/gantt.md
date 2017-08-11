@@ -662,7 +662,7 @@ If the `dataSource` option is an existing [kendo.data.GanttDataSource](/api/java
       dataSource: {
         transport: {
           read: {
-            url: "http://demos.telerik.com/kendo-ui/service/gantttasks",
+            url: "https://demos.telerik.com/kendo-ui/service/gantttasks",
             dataType: "jsonp"
           }
         },
@@ -729,7 +729,7 @@ If the `dataSource` option is an existing [kendo.data.GanttDataSource](/api/java
     var dataSource = new kendo.data.GanttDataSource({
       transport: {
         read: {
-          url: "http://demos.telerik.com/kendo-ui/service/gantttasks",
+          url: "https://demos.telerik.com/kendo-ui/service/gantttasks",
           dataType: "jsonp"
         }
       },
@@ -804,7 +804,7 @@ If the `dependencies` option is an existing [kendo.data.GanttDependencyDataSourc
       dataSource: {
         transport: {
           read: {
-            url: "http://demos.telerik.com/kendo-ui/service/gantttasks",
+            url: "https://demos.telerik.com/kendo-ui/service/gantttasks",
             dataType: "jsonp"
           }
         },
@@ -828,7 +828,7 @@ If the `dependencies` option is an existing [kendo.data.GanttDependencyDataSourc
       dependencies: {
         transport: {
           read: {
-            url: "http://demos.telerik.com/kendo-ui/service/ganttdependencies",
+            url: "https://demos.telerik.com/kendo-ui/service/ganttdependencies",
             dataType: "jsonp"
           }
         },
@@ -889,7 +889,7 @@ If the `dependencies` option is an existing [kendo.data.GanttDependencyDataSourc
     var dataSource = new kendo.data.GanttDataSource({
       transport: {
         read: {
-          url: "http://demos.telerik.com/kendo-ui/service/gantttasks",
+          url: "https://demos.telerik.com/kendo-ui/service/gantttasks",
           dataType: "jsonp"
         }
       },
@@ -913,7 +913,7 @@ If the `dependencies` option is an existing [kendo.data.GanttDependencyDataSourc
     var dependencyDataSource = new kendo.data.GanttDependencyDataSource({
       transport: {
         read: {
-          url: "http://demos.telerik.com/kendo-ui/service/ganttdependencies",
+          url: "https://demos.telerik.com/kendo-ui/service/ganttdependencies",
           dataType: "jsonp"
         }
       },

@@ -81,12 +81,12 @@ The following example demonstrates a Kendo UI PanelBar widget with `DataSource` 
         {
           text: "Item 3",
           // content URL to load within an item
-          contentUrl: "http://demos.telerik.com/kendo-ui/content/web/panelbar/ajax/ajaxContent1.html"
+          contentUrl: "https://demos.telerik.com/kendo-ui/content/web/panelbar/ajax/ajaxContent1.html"
         },
         {
           text: "Item 4",
           // item image URL, optional
-          imageUrl: "http://demos.telerik.com/kendo-ui/content/shared/icons/sports/baseball.png",
+          imageUrl: "https://demos.telerik.com/kendo-ui/content/shared/icons/sports/baseball.png",
           expanded: true,                                 // item is rendered expanded
           items: [{                                       // Sub item collection.
             text: "Sub Item 1"

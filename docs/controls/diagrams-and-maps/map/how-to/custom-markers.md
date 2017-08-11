@@ -40,7 +40,7 @@ The following example demonstrates how to use custom markers on a Kendo UI Map.
     </script>
  	<style>
       .k-map .k-i-marker-custom-marker {
-        background-image: url('http://demos.telerik.com/kendo-ui/content/shared/images/we-are-here.png');
+        background-image: url('https://demos.telerik.com/kendo-ui/content/shared/images/we-are-here.png');
         background-size: 50px;
         width: 50px;
         height: 50px;

@@ -62,7 +62,7 @@ The DropDownList enables you to prevent this behavior and to make the popup rema
                     transport: {
                         read: {
                             dataType: "jsonp",
-                            url: "http://demos.telerik.com/kendo-ui/service/Products",
+                            url: "https://demos.telerik.com/kendo-ui/service/Products",
                         }
                     }
                 },

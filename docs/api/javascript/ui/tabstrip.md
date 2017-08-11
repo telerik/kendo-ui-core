@@ -240,7 +240,7 @@ Sets an array with the URLs from which the tabs content to be loaded from. If on
         $("#tabstrip").kendoTabStrip({
             contentUrls: [
                 null,
-                "http://demos.telerik.com/kendo-ui/content/web/tabstrip/ajax/ajaxContent1.html"
+                "https://demos.telerik.com/kendo-ui/content/web/tabstrip/ajax/ajaxContent1.html"
             ]
         });
     </script>
@@ -261,7 +261,7 @@ As of the Kendo UI Q1 2017 release, this option can contain configuration object
             contentUrls: [
                 null,
                 {
-                    url: "http://demos.telerik.com/kendo-ui/content/web/tabstrip/ajax/ajaxContent1.html",
+                    url: "https://demos.telerik.com/kendo-ui/content/web/tabstrip/ajax/ajaxContent1.html",
                     cache: true
                 }
             ]
@@ -301,8 +301,8 @@ Sets the field of the data item that provides the URL for the Ajax loaded tab co
             dataTextField: "Name",
             dataContentUrlField: "ContentUrl",
             dataSource: [
-              { Name: "Tab1", ContentUrl: "http://demos.telerik.com/kendo-ui/content/web/tabstrip/ajax/ajaxContent1.html" },
-              { Name: "Tab2", ContentUrl: "http://demos.telerik.com/kendo-ui/content/web/tabstrip/ajax/ajaxContent2.html" }
+              { Name: "Tab1", ContentUrl: "https://demos.telerik.com/kendo-ui/content/web/tabstrip/ajax/ajaxContent1.html" },
+              { Name: "Tab2", ContentUrl: "https://demos.telerik.com/kendo-ui/content/web/tabstrip/ajax/ajaxContent2.html" }
             ]
         });
     </script>
@@ -320,8 +320,8 @@ Sets the field of the data item that provides the image URL of the tab.
             dataTextField: "Name",
             dataImageUrlField: "ImageUrl",
             dataSource: [
-              { Name: "Tab1", ImageUrl: "http://demos.telerik.com/kendo-ui/content/web/tabstrip/ajax/ajaxContent1.html" },
-              { Name: "Tab2", ImageUrl: "http://demos.telerik.com/kendo-ui/content/web/tabstrip/ajax/ajaxContent2.html" }
+              { Name: "Tab1", ImageUrl: "https://demos.telerik.com/kendo-ui/content/web/tabstrip/ajax/ajaxContent1.html" },
+              { Name: "Tab2", ImageUrl: "https://demos.telerik.com/kendo-ui/content/web/tabstrip/ajax/ajaxContent2.html" }
             ]
         });
     </script>
@@ -581,11 +581,11 @@ Appends a tab to the collection of tabs in a **TabStrip**.
             },
             {
                 text: "Item 3",
-                contentUrl: "http://demos.telerik.com/kendo-ui/content/web/tabstrip/ajax/ajaxContent1.html"
+                contentUrl: "https://demos.telerik.com/kendo-ui/content/web/tabstrip/ajax/ajaxContent1.html"
             },
             {
                 text: "Item 4",
-                imageUrl: "http://demos.telerik.com/kendo-ui/content/shared/icons/sports/baseball.png",
+                imageUrl: "https://demos.telerik.com/kendo-ui/content/shared/icons/sports/baseball.png",
             },
             {
                 text: "Item 5",
@@ -812,11 +812,11 @@ Inserts a newly-created tab after a specified tab.
             },
             {
                 text: "Item 3",
-                contentUrl: "http://demos.telerik.com/kendo-ui/content/web/tabstrip/ajax/ajaxContent1.html"
+                contentUrl: "https://demos.telerik.com/kendo-ui/content/web/tabstrip/ajax/ajaxContent1.html"
             },
             {
                 text: "Item 4",
-                imageUrl: "http://demos.telerik.com/kendo-ui/content/shared/icons/sports/baseball.png",
+                imageUrl: "https://demos.telerik.com/kendo-ui/content/shared/icons/sports/baseball.png",
             },
             {
                 text: "Item 5",
@@ -867,11 +867,11 @@ Inserts a newly-created tab before a specified tab.
             },
             {
                 text: "Item 3",
-                contentUrl: "http://demos.telerik.com/kendo-ui/content/web/tabstrip/ajax/ajaxContent1.html"
+                contentUrl: "https://demos.telerik.com/kendo-ui/content/web/tabstrip/ajax/ajaxContent1.html"
             },
             {
                 text: "Item 4",
-                imageUrl: "http://demos.telerik.com/kendo-ui/content/shared/icons/sports/baseball.png",
+                imageUrl: "https://demos.telerik.com/kendo-ui/content/shared/icons/sports/baseball.png",
             },
             {
                 text: "Item 5",

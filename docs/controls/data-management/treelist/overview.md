@@ -73,7 +73,7 @@ The following example demonstrates how to enable the remote binding for the Tree
     <script>
 
         $(document).ready(function(){
-            var serviceRoot = "http://demos.telerik.com/kendo-ui/service";
+            var serviceRoot = "https://demos.telerik.com/kendo-ui/service";
 
             // Create the TreeListDataSource
             var dataSource = new kendo.data.TreeListDataSource({

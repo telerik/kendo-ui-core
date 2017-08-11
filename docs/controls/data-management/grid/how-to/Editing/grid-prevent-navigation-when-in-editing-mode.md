@@ -21,7 +21,7 @@ If the Grid is in edit mode and you do not make any changes, the page navigation
 
       <script>
         $(document).ready(function () {
-          var crudServiceBaseUrl = "http://demos.telerik.com/kendo-ui/service",
+          var crudServiceBaseUrl = "https://demos.telerik.com/kendo-ui/service",
               dataSource = new kendo.data.DataSource({
                 transport: {
                   read:  {
@@ -112,7 +112,7 @@ If the Grid is in edit mode, paging and sorting are prevented.
 
       <script>
         $(document).ready(function () {
-          var crudServiceBaseUrl = "http://demos.telerik.com/kendo-ui/service",
+          var crudServiceBaseUrl = "https://demos.telerik.com/kendo-ui/service",
               dataSource = new kendo.data.DataSource({
                 transport: {
                   read:  {

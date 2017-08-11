@@ -216,7 +216,7 @@ The following example demonstrates how to use the `sum` aggregate in a `footerTe
 ###### Example
 
 ```html
-<script src="http://demos.telerik.com/kendo-ui/content/shared/js/products.js"></script>
+<script src="https://demos.telerik.com/kendo-ui/content/shared/js/products.js"></script>
 
   <div id="example" ng-app="KendoDemos">
     <div ng-controller="MyCtrl">      
@@ -288,7 +288,7 @@ The following example demonstrates how to use `$http` to bind the Grid.
             pageSize: 5,
             transport: {
               read: function (e) {
-                $http.jsonp('http://demos.telerik.com/kendo-ui/service/Products?callback=JSON_CALLBACK')
+                $http.jsonp('https://demos.telerik.com/kendo-ui/service/Products?callback=JSON_CALLBACK')
                   .then(function success(response) {
                   e.success(response.data)
                 }, function error(response) {

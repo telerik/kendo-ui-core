@@ -195,13 +195,13 @@ The example below demonstrates how to grab the cursor on `hover`.
 
     <script>
         $("#sortable").kendoSortable({
-            cursor: "url('http://demos.telerik.com/kendo-ui//content/web/sortable/grabbing.cur'), default"
+            cursor: "url('https://demos.telerik.com/kendo-ui//content/web/sortable/grabbing.cur'), default"
         });
     </script>
 
     <style>
         #sortable li {
-            cursor: url('http://demos.telerik.com/kendo-ui//content/web/sortable/grabbing.cur'), default;
+            cursor: url('https://demos.telerik.com/kendo-ui//content/web/sortable/grabbing.cur'), default;
         }
     </style>
 ```

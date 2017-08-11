@@ -47,7 +47,7 @@ How can I enable my users to reorder the Grid rows by adding buttons to each row
     <script src="http://code.jquery.com/jquery-1.12.4.min.js"></script>
     <script src="http://kendo.cdn.telerik.com/2017.2.504/js/kendo.all.min.js"></script>
 
-    <script src="http://demos.telerik.com/kendo-ui/content/shared/js/products.js"></script>
+    <script src="https://demos.telerik.com/kendo-ui/content/shared/js/products.js"></script>
 
   </head>
   <body>

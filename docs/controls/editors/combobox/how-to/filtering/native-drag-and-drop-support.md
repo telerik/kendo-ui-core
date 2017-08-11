@@ -38,7 +38,7 @@ To see how the example works:
             serverFiltering: true,
             transport: {
               read: {
-                url: "http://demos.telerik.com/kendo-ui/service/Northwind.svc/Products",
+                url: "https://demos.telerik.com/kendo-ui/service/Northwind.svc/Products",
               }
             }
           }

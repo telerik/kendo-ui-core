@@ -27,7 +27,7 @@ The following example demonstrates how to move the group label on top of the gro
           dataSource: {
             type: "odata",
             transport: {
-              read: "http://demos.telerik.com/kendo-ui/service/Northwind.svc/Customers"
+              read: "https://demos.telerik.com/kendo-ui/service/Northwind.svc/Customers"
             },
             group: { field: "Country" }
           }

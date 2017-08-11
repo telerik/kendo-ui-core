@@ -27,7 +27,7 @@ $("#grid").kendoGrid({
   dataSource: {
     transport: {
       read: {
-        url: "http://demos.telerik.com/kendo-ui/service/products",
+        url: "https://demos.telerik.com/kendo-ui/service/products",
         dataType: "jsonp"
       }
     },

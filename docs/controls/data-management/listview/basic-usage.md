@@ -24,7 +24,7 @@ To demonstrate how the ListView works, define a target HTML element such as a `<
 
     <script type="text/x-kendo-tmpl" id="template">
         <div class="product">
-            <img src="http://demos.telerik.com/kendo-ui/content/web/foods/#= ProductID #.jpg" alt="#: ProductName # image" />
+            <img src="https://demos.telerik.com/kendo-ui/content/web/foods/#= ProductID #.jpg" alt="#: ProductName # image" />
             <h3>#:ProductName#</h3>
             <p>#:kendo.toString(UnitPrice, "c")#</p>
         </div>
@@ -41,7 +41,7 @@ To initialize the ListView, refer the template. It displays the result set by th
     var dataSource = new kendo.data.DataSource({
         transport: {
             read: {
-                url: "http://demos.telerik.com/kendo-ui/service/Products",
+                url: "https://demos.telerik.com/kendo-ui/service/Products",
                 dataType: "jsonp"
             }
         }
@@ -59,7 +59,7 @@ The following demo shows the case displayed in the previous example.
 
 <script type="text/x-kendo-tmpl" id="template">
     <div class="product">
-        <img src="http://demos.kendoui.com/content/web/foods/#= ProductID #.jpg" alt="#: ProductName # image" />
+        <img src="https://demos.telerik.com/kendo-ui/content/web/foods/#= ProductID #.jpg" alt="#: ProductName # image" />
         <h3>#:ProductName#</h3>
         <p>#:kendo.toString(UnitPrice, "c")#</p>
     </div>
@@ -70,7 +70,7 @@ The following demo shows the case displayed in the previous example.
 var dataSource = new kendo.data.DataSource({
     transport: {
         read: {
-            url: "http://demos.kendoui.com/service/Products",
+            url: "https://demos.telerik.com/kendo-ui/service/Products",
             dataType: "jsonp"
         }
     }
@@ -98,7 +98,7 @@ When the number of items that are bound to a ListView is larger than expected, a
 
         <script type="text/x-kendo-tmpl" id="template">
             <div class="product">
-                <img src="http://demos.telerik.com/kendo-ui/content/web/foods/#= ProductID #.jpg" alt="#: ProductName # image" />
+                <img src="https://demos.telerik.com/kendo-ui/content/web/foods/#= ProductID #.jpg" alt="#: ProductName # image" />
                 <h3>#:ProductName#</h3>
                 <p>#:kendo.toString(UnitPrice, "c")#</p>
             </div>
@@ -109,7 +109,7 @@ When the number of items that are bound to a ListView is larger than expected, a
         var dataSource = new kendo.data.DataSource({
             transport: {
                 read: {
-                    url: "http://demos.telerik.com/kendo-ui/service/Products",
+                    url: "https://demos.telerik.com/kendo-ui/service/Products",
                     dataType: "jsonp"
                 }
             },
@@ -135,7 +135,7 @@ The following demo represents the same example with a `pager` applied to the Lis
 
 <script type="text/x-kendo-tmpl" id="template">
     <div class="product">
-        <img src="http://demos.kendoui.com/content/web/foods/#= ProductID #.jpg" alt="#: ProductName # image" />
+        <img src="https://demos.telerik.com/kendo-ui/content/web/foods/#= ProductID #.jpg" alt="#: ProductName # image" />
         <h3>#:ProductName#</h3>
         <p>#:kendo.toString(UnitPrice, "c")#</p>
     </div>
@@ -145,7 +145,7 @@ The following demo represents the same example with a `pager` applied to the Lis
 var dataSource = new kendo.data.DataSource({
     transport: {
         read: {
-            url: "http://demos.kendoui.com/service/Products",
+            url: "https://demos.telerik.com/kendo-ui/service/Products",
             dataType: "jsonp"
         }
     }
@@ -177,7 +177,7 @@ The following example demonstrates how you can update your working project to in
 
     <script type="text/x-kendo-tmpl" id="template">
         <div class="product">
-            <img src="http://demos.telerik.com/kendo-ui/content/web/foods/#= ProductID #.jpg" alt="#: ProductName # image" />
+            <img src="https://demos.telerik.com/kendo-ui/content/web/foods/#= ProductID #.jpg" alt="#: ProductName # image" />
             <h3>#:ProductName#</h3>
             <p>#:kendo.toString(UnitPrice, "c")#</p>
         </div>
@@ -185,7 +185,7 @@ The following example demonstrates how you can update your working project to in
 
     <script type="text/x-kendo-tmpl" id="altTemplate">
         <div class="product alt">
-            <img src="http://demos.telerik.com/kendo-ui/content/web/foods/#= ProductID #.jpg" alt="#: ProductName # image" />
+            <img src="https://demos.telerik.com/kendo-ui/content/web/foods/#= ProductID #.jpg" alt="#: ProductName # image" />
             <h3>#:ProductName#</h3>
             <p>#:kendo.toString(UnitPrice, "c")#</p>
         </div>
@@ -202,7 +202,7 @@ The following demo represents the live example by using a template for alternati
 
 <script type="text/x-kendo-tmpl" id="template">
     <div class="product">
-        <img src="http://demos.kendoui.com/content/web/foods/#= ProductID #.jpg" alt="#: ProductName # image" />
+        <img src="https://demos.telerik.com/kendo-ui/content/web/foods/#= ProductID #.jpg" alt="#: ProductName # image" />
         <h3>#:ProductName#</h3>
         <p>#:kendo.toString(UnitPrice, "c")#</p>
     </div>
@@ -210,7 +210,7 @@ The following demo represents the live example by using a template for alternati
 
     <script type="text/x-kendo-tmpl" id="altTemplate">
         <div class="product alt">
-            <img src="http://demos.kendoui.com/content/web/foods/#= ProductID #.jpg" alt="#: ProductName # image" />
+            <img src="https://demos.telerik.com/kendo-ui/content/web/foods/#= ProductID #.jpg" alt="#: ProductName # image" />
             <h3>#:ProductName#</h3>
             <p>#:kendo.toString(UnitPrice, "c")#</p>
         </div>
@@ -220,7 +220,7 @@ The following demo represents the live example by using a template for alternati
 var dataSource = new kendo.data.DataSource({
     transport: {
         read: {
-            url: "http://demos.kendoui.com/service/Products",
+            url: "https://demos.telerik.com/kendo-ui/service/Products",
             dataType: "jsonp"
         }
     },
@@ -331,7 +331,7 @@ The following demo shows how to enable the item selection functionality.
 
 <script type="text/x-kendo-tmpl" id="template">
     <div class="product">
-        <img src="http://demos.kendoui.com/content/web/foods/#= ProductID #.jpg" alt="#: ProductName # image" />
+        <img src="https://demos.telerik.com/kendo-ui/content/web/foods/#= ProductID #.jpg" alt="#: ProductName # image" />
         <h3>#:ProductName#</h3>
         <p>#:kendo.toString(UnitPrice, "c")#</p>
     </div>
@@ -342,7 +342,7 @@ The following demo shows how to enable the item selection functionality.
 var dataSource = new kendo.data.DataSource({
     transport: {
         read: {
-            url: "http://demos.kendoui.com/service/Products",
+            url: "https://demos.telerik.com/kendo-ui/service/Products",
             dataType: "jsonp"
         }
     },
