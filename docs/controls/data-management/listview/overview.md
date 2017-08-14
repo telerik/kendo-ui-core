@@ -8,7 +8,7 @@ position: 2
 
 # ListView Overview
 
-The [Kendo UI ListView widget](http://demos.telerik.com/kendo-ui/listview/index) is enables you to specify a custom type of layout for the items that are displayed in the control.
+The [Kendo UI ListView widget](http://demos.telerik.com/kendo-ui/listview/index) enables you to specify a custom type of layout for the items that are displayed in the control.
 
 It can be bound to local JSON data or to remote data by using the Kendo UI DataSource component.
 
