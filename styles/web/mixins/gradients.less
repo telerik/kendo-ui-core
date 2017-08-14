@@ -1,0 +1,11 @@
+.linear-gradient( @gradient ) when not ( @gradient = false ) {
+    background-image: linear-gradient( @gradient );
+}
+.linear-gradient( @gradient ) when ( @gradient = none ) {
+    background-image: none;
+}
+
+
+.striped-gradient( @color: rgba(255,255,255,.15), @angle: 45deg) {
+    background-image: linear-gradient( @angle, @color 25%, transparent 25%, transparent 50%, @color 50%, @color 75%, transparent 75%, transparent);
+}

@@ -1,0 +1,197 @@
+// Button
+.k-button {
+    margin: 0;
+    padding: @button-padding;
+    box-sizing: border-box;
+    border-width: 1px;
+    border-style: solid;
+    background-repeat: repeat-x;
+    background-position: 0 center;
+    font: inherit;
+    line-height: 1.72em;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    vertical-align: middle;
+    user-select: none;
+    cursor: pointer;
+    outline: none;
+    -webkit-appearance: none;
+
+    &::-moz-focus-inner {
+        padding: 0;
+        border: 0;
+        outline: 0;
+    }
+
+    &:hover,
+    &:focus {
+        text-decoration: none;
+        outline: 0;
+    }
+
+    .k-icon,
+    .k-image,
+    .k-sprite {
+        color: inherit;
+        align-self: center;
+    }
+
+
+    // Button variants
+    &-icontext {
+        overflow: visible; // IE9
+
+        .k-icon,
+        .k-image,
+        .k-sprite {
+            margin-right: 3px;
+            margin-right: .3rem;
+            margin-left: -3px;
+            margin-left: -.3rem;
+            vertical-align: text-top;
+        }
+    }
+
+    // Disabled state
+    &[disabled],
+    &[disabled]:hover,
+    .k-state-disabled &,
+    .k-state-disabled &:hover,
+    .k-state-disabled &:active,
+    &.k-state-disabled,
+    &.k-state-disabled:hover,
+    &.k-state-disabled:active {
+        cursor: default;
+    outline: 0;
+    }
+
+}
+
+a.k-button-expand
+{
+    display: block;
+}
+
+button.k-button-expand,
+input[type="submit"].k-button-expand,
+input[type="button"].k-button-expand,
+input[type="reset"].k-button-expand
+{
+    width: 100%;
+}
+
+body .k-button-icon,
+body .k-split-button-arrow
+{
+    padding-left: .4em;
+    padding-right: .4em;
+}
+
+.k-toolbar .k-button-icontext
+{
+    padding-right: .8em;
+}
+
+
+
+
+// Bare button
+.k-button.k-bare {
+    border-color: transparent !important;
+    color: inherit;
+    background: none !important;
+    box-shadow: none !important;
+    opacity: .7;
+
+    &:hover,
+    &.k-state-hover,
+    &:active,
+    &.k-state-active,
+    &.k-state-active:hover {
+        color: inherit;
+    }
+
+    &:focus,
+    .k-state-focused {
+        opacity: .8;
+    }
+
+    &:hover,
+    &.k-state-hover,
+    &:active,
+    &.k-state-active {
+        opacity: 1;
+    }
+
+    // Icon
+    .k-icon {
+        overflow: visible;
+    }
+
+    &:focus,
+    .k-state-focused {
+        .k-icon {
+            text-shadow: 0 0 3px currentColor;
+        }
+    }
+
+}
+
+
+
+
+// Button group
+.k-button-group {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    white-space: nowrap;
+    display: inline-block;
+    display: inline-flex;
+    flex-direction: row;
+    vertical-align: middle;
+    position: relative;
+
+    .k-button {
+        // .border-radius( 0 );
+        position: relative;
+    }
+    .k-button ~ .k-button {
+        margin-left: -1px;
+    }
+
+    .k-button:hover,
+    .k-button.k-state-hover,
+    .k-button.k-state-active {
+        z-index: 2;
+    }
+
+    .k-group-start,
+    .k-button:first-child {
+        // .border-left-radius();
+    }
+    .k-group-end,
+    .k-button:last-child {
+        // .border-right-radius();
+    }
+    .k-group-start.k-group-end,
+    .k-button:first-child:last-child {
+        // .border-radius();
+    }
+
+    > input[type="radio"],
+    > input[type="checkbox"],
+    label input[type="radio"],
+    label input[type="checkbox"] {
+        margin: 0;
+        padding: 0;
+        clip: rect(0, 0, 0, 0);
+        position: absolute;
+        pointer-events: none;
+    }
+
+}
