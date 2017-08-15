@@ -541,7 +541,9 @@ navigation:
     "api/php":
         title: "PHP"
         position: 4
-
+    "sitemap":
+        title: "Sitemap gsa"
+        
 ## The application virtual path
 baseurl: /kendo-ui
 

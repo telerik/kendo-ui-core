@@ -8,12 +8,15 @@
 @button-text-color: @normal-text-color;
 @button-background-color: saturate(@base, 1%);
 @button-border-color: contrast(@base, lighten(@base, 1%), darken(@base, 14%), 0.5);
+@button-shadow: false;
 @button-hover-text-color: @hover-text-color;
 @button-hover-background-color: @hover-background;
 @button-hover-border-color: contrast(@base, lighten(@base, 1%), darken(@base, 20%), 0.5);
+@button-hover-shadow: false;
 @button-active-background: @accent;
 @button-active-text-color: @selected-text-color;
 @button-active-border-color: contrast(@selected-background, lighten(@accent, 1%), darken(@accent, 13%), 0.5);
+@button-active-shadow: false;
 @button-focused-border-color: contrast(@base, lighten(@base, 1%), darken(@base, 14%), 0.5);
 @button-focused-shadow: inset 0 0 3px 1px @hover-border-color;
 @button-focused-active-shadow: inset 0 0 3px 1px darken(@selected-border-color, 10%);

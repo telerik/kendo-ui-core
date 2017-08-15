@@ -8,14 +8,17 @@
 @button-text-color: lighten(@hover-text-color, 8%);
 @button-background-color: @normal-background;
 @button-border-color: lighten(@hover-text-color, 8%);
+@button-shadow: false;
 @button-hover-text-color: @button-text-color;
 @button-hover-background-color: @hover-background;
 @button-hover-border-color: @button-border-color;
+@button-hover-shadow: false;
 @button-active-background: @selected-background;
 @button-active-text-color: @inversed-text-color;
 @button-active-border-color: @selected-background;
+@button-active-shadow: inset 0 0 0 1px darken(@widget-border-color, 35%);
 @button-focused-border-color: @accent;
-@button-focused-shadow: none;
+@button-focused-shadow: inset 0 0 0 1px darken(@widget-border-color, 35%);
 @button-focused-active-shadow: none;
 // Primary button
 @primary-button-text-color: @inversed-text-color;
@@ -345,6 +348,11 @@ textarea.k-textbox:hover,
 
 .k-loading-image { background-image: url('@{image-folder}/loading-image.gif'); }
 .k-loading-color { background-color: @background; }
+
+// Button
+.k-button {
+    border-radius: @inputs-border-radius;
+}
 
 /* Primary Button */
 .k-primary,

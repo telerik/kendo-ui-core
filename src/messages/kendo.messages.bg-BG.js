@@ -180,7 +180,7 @@ $.extend(true, kendo.spreadsheet.messages.dialogs,{
       "showWarning": "Покажи предупреждение",
       "showHint": "Покажи входно съобщение",
       "hintTitle": "Заглавие",
-      "hintMessage": "СъобщениеHint message"
+      "hintMessage": "Съобщение"
     },
     "placeholders": {
       "typeTitle": "Напишете заглавие",

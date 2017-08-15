@@ -6,6 +6,7 @@
     background-color: @button-background-color;
     .composite-background(@widget-gradient);
     background-position: 50% 50%;
+    .box-shadow(@button-shadow);
 
     // Hover state
     &:hover,
@@ -14,6 +15,14 @@
         border-color: @button-hover-border-color;
         background-color: @button-hover-background-color;
         .composite-background(@hover-gradient);
+        .box-shadow(@button-hover-shadow);
+    }
+
+    // Focused state
+    &:focus,
+    &.k-state-focused {
+        border-color: @button-focused-border-color;
+        .box-shadow(@button-focused-shadow);
     }
 
     // Pressed state
@@ -23,6 +32,7 @@
         background-color: @button-active-background;
         border-color: @button-active-border-color;
         .composite-background(@selected-gradient);
+        .box-shadow(@button-active-shadow);
 
         &:hover {
             color: @primary-hover-text-color;
@@ -31,11 +41,9 @@
         }
     }
 
-    // Focused state
-    .k-button:focus:not(.k-state-disabled):not([disabled]),
-    .k-button.k-state-focused:not(.k-state-disabled):not([disabled]) {
-        border-color: @button-focused-border-color;
-        .box-shadow(@button-focused-shadow);
+    // Focus active
+    &:focus:active:not(.k-state-disabled):not([disabled]) {
+        .box-shadow(@button-focused-active-shadow);
     }
 
     // Disabled state

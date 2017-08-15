@@ -8,34 +8,39 @@
 @button-text-color: @normal-text-color;
 @button-background-color: contrast(@background, lighten(@background, 17%), darken(@background, 2%), 0.5);
 @button-border-color: contrast(@background, lighten(@background, 17%), darken(@background, 2%), 0.5);
+@button-shadow: 0 2px 6px rgba(0,0,0,.2), 0 2px 3px rgba(0,0,0,.05);
 @button-hover-text-color: @normal-text-color;
 @button-hover-background-color: contrast(@background, lighten(@background, 23%), darken(@background, 8%), 0.5);
 @button-hover-border-color: contrast(@background, lighten(@background, 23%), darken(@background, 8%), 0.5);
-@button-active-text-color: @selected-text-color;
+@button-hover-shadow: @button-shadow;
+@button-active-text-color: contrast(@button-active-background);
 @button-active-background: contrast(@background, lighten(@background, 23%), darken(@background, 14%), 0.5);
 @button-active-border-color: contrast(@background, lighten(@background, 23%), darken(@background, 14%), 0.5);
+@button-active-shadow: 0 6px 17px 0 rgba(0, 0, 0, 0.3);
 @button-focused-border-color: contrast(@background, lighten(@background, 17%), darken(@background, 14%), 0.5);
-@button-focused-shadow: 0 6px 17px 0 #c4c4c4;
-@button-focused-active-shadow: 0 6px 17px 0 fadeout(@hover-background, 70%);
+@button-focused-shadow: @button-shadow;
+@button-focused-active-shadow: @button-active-shadow;
 // Primary button
-@primary-button-text-color: #ffffff;
+@primary-button-text-color: contrast(@primary-button-background-color);
 @primary-button-background-color: @accent;
 @primary-button-border-color: @accent;
 @primary-gradient: none;
-@primary-shadow: none;
+@primary-shadow: false;
 @primary-hover-text-color: #ffffff;
 @primary-hover-background-color: #5c6bc0;
 @primary-hover-border-color: #5c6bc0;
 @primary-hover-gradient: none;
-@primary-hover-shadow: none;
+@primary-hover-shadow: false;
 @primary-focused-color: #ffffff;
+@primary-focused-border-color: #eff8ff;
 @primary-focused-gradient: none;
+@primary-focused-shadow: false;
 @primary-focused-active-item-shadow: 0 0 8px 0 #cfe6f8;
 @primary-active-text-color: #ffffff;
 @primary-active-background-color: #283593;
 @primary-active-gradient: none;
 @primary-active-border-color: #283593;
-@primary-active-shadow: 0 6px 17px 0 rgba(0, 0, 0, 0.3);
+@primary-active-shadow: false;
 @primary-disabled-text-color: #a8a8a8;
 @primary-disabled-background-color: #eaeaea;
 @primary-disabled-border-color: #eaeaea;
@@ -2055,6 +2060,19 @@ html .km-pane-wrapper .km-widget,
     border-color: @secondary-border-color;
 }
 
+// Material button
+.k-button:focus,
+.k-button.k-state-focused {
+    border-color: @button-focused-border-color;
+    background-color: @button-focused-border-color;
+}
+.k-button:active:hover,
+.k-button.k-state-active:hover {
+    color: @button-active-text-color;
+    background-color: @button-active-background;
+    border-color: @button-active-border-color;
+}
+
 // Fix for responsive design
 .k-pager-numbers .k-link,
 .k-treeview .k-in
@@ -2098,9 +2116,9 @@ html .km-pane-wrapper .km-widget,
 }
 .k-editor .k-tool:focus
 {
-   outline: 0;
-   border-color: @button-focused-border-color;
-   .box-shadow(@button-focused-shadow);
+    outline: 0;
+    border-color: @button-focused-border-color;
+    .box-shadow(@button-focused-shadow);
 }
 
 
@@ -2111,7 +2129,7 @@ html .km-pane-wrapper .km-widget,
 @checkbox-hover-border-color: lighten(@normal-text-color, 23%);
 @checkbox-checked-border-color: @accent;
 @checkbox-checked-background-color: @accent;
-@checkbox-checked-color: contrast(@checkbox-checked-background-color, saturate(@background, 29%), );
+@checkbox-checked-color: contrast(@checkbox-checked-background-color, saturate(@background, 29%) );
 @checkbox-active-border-color: lighten(@accent, 23%);
 @checkbox-active-box-shadow: none;
 @checkbox-disabled-background-color: contrast(@background, lighten(@background, 20%), darken(@background, 4%), 0.5);
@@ -2286,39 +2304,25 @@ div.k-splitbar.k-state-focused .k-icon,
 }
 
 .k-primary:hover,
-.k-primary.k-state-hover
+.k-primary.k-state-hover,
+.k-primary:active:hover,
+.k-primary.k-state-active:hover
 {
     color: @primary-hover-text-color;
     border-color: @primary-hover-border-color;
     .composite-background(@primary-hover-gradient);
     background-color: @primary-hover-background-color;
-    .box-shadow(@primary-hover-shadow);
 }
 
 .k-primary:focus,
-.k-primary.k-state-focused
-{
-    color: @primary-focused-color;
-    .composite-background(@primary-focused-gradient);
-    .box-shadow(@primary-focused-active-item-shadow);
-}
-
-.k-primary:focus:active:not(.k-state-disabled):not([disabled]),
-.k-primary:focus:not(.k-state-disabled):not([disabled])
-{
-    .box-shadow(@primary-focused-active-item-shadow);
-}
-
+.k-primary.k-state-focused,
 .k-primary:active,
-.k-primary:active:hover,
-.k-primary.k-state-active,
-.k-primary.k-state-active:hover
+.k-primary.k-state-active
 {
     color: @primary-active-text-color;
     border-color: @primary-active-border-color;
     .composite-background(@primary-active-gradient);
     background-color: @primary-active-background-color;
-    .box-shadow(@primary-active-shadow);
 }
 
 .k-primary.k-state-disabled,

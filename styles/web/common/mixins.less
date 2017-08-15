@@ -86,7 +86,7 @@
     border-radius: @value;
 }
 
-.box-shadow(...) {
+.box-shadow(@shadow; @rest...) when not (@shadow = false) {
     box-shadow: @arguments;
 }
 

@@ -8,12 +8,15 @@
 @button-background-color: @base;
 @button-text-color: @normal-text-color;
 @button-border-color: contrast(@base, lighten(@base, 14%), darken(@base, 14%), 0.5);
+@button-shadow: false;
 @button-hover-text-color: #ffffff;
 @button-hover-background-color: @hover-background;
 @button-hover-border-color: @hover-background;
+@button-hover-shadow: false;
 @button-active-background: @accent;
 @button-active-text-color: @selected-text-color;
 @button-active-border-color: @accent;
+@button-active-shadow: false;
 @button-focused-border-color: contrast(@base, lighten(@base, 14%), darken(@base, 14%), 0.5);
 @button-focused-shadow: inset 0 0 0 1px @hover-border-color;
 @button-focused-active-shadow: inset 0 0 3px 1px darken(@selected-border-color, 15%);
@@ -2101,6 +2104,13 @@ html .km-pane-wrapper .km-widget,
 .k-gantt-toolbar .k-state-default
 {
     border-color: @secondary-border-color;
+}
+
+// Button
+.k-button:focus,
+.k-button.k-state-focused {
+    .composite-background(@hover-gradient);
+    color: @button-hover-text-color;
 }
 
 //Primary buttons

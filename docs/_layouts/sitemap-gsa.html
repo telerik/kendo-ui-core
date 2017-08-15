@@ -1,0 +1,14 @@
+<!doctype html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width">
+        <meta name="robots" content="noindex, follow">
+    </head>
+    <body>
+      {% capture site_url %}{% if site.url %}{{ site.url }}{% else %}{{ site.github.url }}{% endif %}{% endcapture %}
+      {% for post in site.html_pages %}
+        <a href="{{ site_url }}{{ post.url | replace:'.html','' }}">{{ site_url }}{{ post.url | replace:'.html','' }}</a>
+      {% endfor %}
+    </body>
+</html>
