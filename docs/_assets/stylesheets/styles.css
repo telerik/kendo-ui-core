@@ -50,7 +50,7 @@ em {
     top: 0;
     left: 0;
     right: 0;
-    z-index: 42042;
+    z-index: 9999;
 }
 
 .TK-Hat::after {
