@@ -168,7 +168,7 @@ To reference an existing Kendo UI ToolBar instance, use the [`jQuery.data()`](ht
 
 ## See Also
 
-* [ASP.NET MVC API Reference: ToolBarBuilder](http://docs.telerik.com/kendo-ui/api/Kendo.Mvc.UI.Fluent/ToolBarBuilder)
+* [ASP.NET MVC API Reference: ToolBarBuilder](http://docs.telerik.com/aspnet-mvc/api/Kendo.Mvc.UI.Fluent/ToolBarBuilder)
 * [Overview of Telerik UI for ASP.NET MVC]({% slug overview_aspnetmvc %})
 * [Fundamentals of Telerik UI for ASP.NET MVC]({% slug fundamentals_aspnetmvc %})
 * [Scaffolding in Telerik UI for ASP.NET MVC]({% slug scaffolding_aspnetmvc %})

@@ -76,7 +76,7 @@ The title of the Cancel button.
     messages:{
       okText: "OK"
     }
-  }).data("kendoPrompt").result.done(function(data){
+    }).data("kendoPrompt").result.done(function(data){
           console.log("User accepted with text: " + data);
       })
       .fail(function(data){

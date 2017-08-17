@@ -196,7 +196,7 @@ For more information on other Notification features and behavior, such as HTML o
 
 ## See Also
 
-* [ASP.NET MVC API Reference: NotificationBuilder](http://docs.telerik.com/kendo-ui/api/Kendo.Mvc.UI.Fluent/NotificationBuilder)
+* [ASP.NET MVC API Reference: NotificationBuilder](http://docs.telerik.com/aspnet-mvc/api/Kendo.Mvc.UI.Fluent/NotificationBuilder)
 * [Overview of Telerik UI for ASP.NET MVC]({% slug overview_aspnetmvc %})
 * [Fundamentals of Telerik UI for ASP.NET MVC]({% slug fundamentals_aspnetmvc %})
 * [Scaffolding in Telerik UI for ASP.NET MVC]({% slug scaffolding_aspnetmvc %})

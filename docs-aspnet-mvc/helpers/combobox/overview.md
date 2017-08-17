@@ -434,7 +434,7 @@ To reference an existing Kendo UI ComboBox instance, use the [`jQuery.data()`](h
 
 ## See Also
 
-* [ASP.NET MVC API Reference: ComboBoxBuilder](http://docs.telerik.com/kendo-ui/api/Kendo.Mvc.UI.Fluent/ComboBoxBuilder)
+* [ASP.NET MVC API Reference: ComboBoxBuilder](http://docs.telerik.com/aspnet-mvc/api/Kendo.Mvc.UI.Fluent/ComboBoxBuilder)
 * [Overview of Telerik UI for ASP.NET MVC]({% slug overview_aspnetmvc %})
 * [Fundamentals of Telerik UI for ASP.NET MVC]({% slug fundamentals_aspnetmvc %})
 * [Scaffolding in Telerik UI for ASP.NET MVC]({% slug scaffolding_aspnetmvc %})

@@ -242,7 +242,7 @@ To reference an existing Kendo UI Spreadsheet instance, use the [`jQuery.data()`
 
 ## See Also
 
-* [ASP.NET MVC API Reference: SpreadsheetBuilder](http://docs.telerik.com/kendo-ui/api/Kendo.Mvc.UI.Fluent/SpreadsheetBuilder)
+* [ASP.NET MVC API Reference: SpreadsheetBuilder](http://docs.telerik.com/aspnet-mvc/api/Kendo.Mvc.UI.Fluent/SpreadsheetBuilder)
 * [Processing of the Kendo UI Spreadsheet for ASP.NET MVC]({% slug spreadsheet_processing_spreadsheet_mvc %})
 * [Overview of the Kendo UI Spreadsheet Widget](http://docs.telerik.com/kendo-ui/controls/data-management/spreadsheet/overview)
 * [Overview of Telerik UI for ASP.NET MVC]({% slug overview_aspnetmvc %})

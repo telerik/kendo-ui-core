@@ -180,7 +180,7 @@ For an example of such a custom controller, refer to the article on how to [stor
 
 ## See Also
 
-* [ASP.NET MVC API Reference: EditorBuilder](http://docs.telerik.com/kendo-ui/api/Kendo.Mvc.UI.Fluent/EditorBuilder)
+* [ASP.NET MVC API Reference: EditorBuilder](http://docs.telerik.com/aspnet-mvc/api/Kendo.Mvc.UI.Fluent/EditorBuilder)
 * [Overview of Telerik UI for ASP.NET MVC]({% slug overview_aspnetmvc %})
 * [Fundamentals of Telerik UI for ASP.NET MVC]({% slug fundamentals_aspnetmvc %})
 * [Scaffolding in Telerik UI for ASP.NET MVC]({% slug scaffolding_aspnetmvc %})

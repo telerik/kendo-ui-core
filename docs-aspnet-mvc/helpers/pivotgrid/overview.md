@@ -101,7 +101,7 @@ Below are listed the steps for you to follow when configuring the Kendo UI Pivot
 
 ## See Also
 
-* [ASP.NET MVC API Reference: PivotGridBuilder](http://docs.telerik.com/kendo-ui/api/Kendo.Mvc.UI.Fluent/PivotGridBuilder)
+* [ASP.NET MVC API Reference: PivotGridBuilder](http://docs.telerik.com/aspnet-mvc/api/Kendo.Mvc.UI.Fluent/PivotGridBuilder)
 * [Overview of Telerik UI for ASP.NET MVC]({% slug overview_aspnetmvc %})
 * [Fundamentals of Telerik UI for ASP.NET MVC]({% slug fundamentals_aspnetmvc %})
 * [Scaffolding in Telerik UI for ASP.NET MVC]({% slug scaffolding_aspnetmvc %})

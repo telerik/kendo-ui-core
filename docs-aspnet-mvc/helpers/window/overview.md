@@ -241,7 +241,7 @@ To reference an existing Kendo UI Window instance, use the [`jQuery.data()`](htt
 
 ## See Also
 
-* [ASP.NET MVC API Reference: WindowBuilder](http://docs.telerik.com/kendo-ui/api/Kendo.Mvc.UI.Fluent/WindowBuilder)
+* [ASP.NET MVC API Reference: WindowBuilder](http://docs.telerik.com/aspnet-mvc/api/Kendo.Mvc.UI.Fluent/WindowBuilder)
 * [Overview of Telerik UI for ASP.NET MVC]({% slug overview_aspnetmvc %})
 * [Fundamentals of Telerik UI for ASP.NET MVC]({% slug fundamentals_aspnetmvc %})
 * [Scaffolding in Telerik UI for ASP.NET MVC]({% slug scaffolding_aspnetmvc %})

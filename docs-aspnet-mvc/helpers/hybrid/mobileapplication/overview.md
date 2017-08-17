@@ -298,7 +298,7 @@ You can reference a hybrid Application instance by using the code from the examp
 
 ## See Also
 
-* [ASP.NET MVC API Reference: ApplicationBuilder](http://docs.telerik.com/kendo-ui/api/Kendo.Mvc.UI.Fluent/MobileApplicationBuilder)
+* [ASP.NET MVC API Reference: ApplicationBuilder](http://docs.telerik.com/aspnet-mvc/api/Kendo.Mvc.UI.Fluent/MobileApplicationBuilder)
 * [Overview of the Hybrid UI Application Widget](http://docs.telerik.com/kendo-ui/controls/hybrid/application)
 * [Overview of Telerik UI for ASP.NET MVC]({% slug overview_aspnetmvc %})
 * [Fundamentals of Telerik UI for ASP.NET MVC]({% slug fundamentals_aspnetmvc %})

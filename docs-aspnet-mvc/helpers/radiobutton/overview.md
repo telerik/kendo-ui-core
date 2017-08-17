@@ -146,7 +146,7 @@ Below are listed the steps for you to follow when binding a Kendo UI RadioButton
 
 ## See Also
 
-* [ASP.NET MVC API Reference: RadioButtonBuilder](http://docs.telerik.com/kendo-ui/api/Kendo.Mvc.UI.Fluent/RadioButtonBuilder)
+* [ASP.NET MVC API Reference: RadioButtonBuilder](http://docs.telerik.com/aspnet-mvc/api/Kendo.Mvc.UI.Fluent/RadioButtonBuilder)
 * [Overview of Telerik UI for ASP.NET MVC]({% slug overview_aspnetmvc %})
 * [Fundamentals of Telerik UI for ASP.NET MVC]({% slug fundamentals_aspnetmvc %})
 * [Scaffolding in Telerik UI for ASP.NET MVC]({% slug scaffolding_aspnetmvc %})

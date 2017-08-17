@@ -152,7 +152,7 @@ You can reference a hybrid Switch instance by using the [jQuery.data()](http://a
 
 ## See Also
 
-* [ASP.NET MVC API Reference: SwitchBuilder](http://docs.telerik.com/kendo-ui/api/Kendo.Mvc.UI.Fluent/MobileSwitchBuilder)
+* [ASP.NET MVC API Reference: SwitchBuilder](http://docs.telerik.com/aspnet-mvc/api/Kendo.Mvc.UI.Fluent/MobileSwitchBuilder)
 * [Overview of the Hybrid UI Switch Widget](http://docs.telerik.com/kendo-ui/controls/hybrid/switch/switch)
 * [Overview of Telerik UI for ASP.NET MVC]({% slug overview_aspnetmvc %})
 * [Fundamentals of Telerik UI for ASP.NET MVC]({% slug fundamentals_aspnetmvc %})

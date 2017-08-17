@@ -31,7 +31,7 @@ The Kendo UI Grid API is exposed via the [`Kendo.Mvc.UI.Fluent.GridBuilder`](/ap
 
 ## Common DataSource Settings
 
-The [`DataSource`](http://docs.telerik.com/kendo-ui/api/Kendo.Mvc.UI.Fluent/GridBuilder#methods-Columns(System.Action<Kendo.Mvc.UI.Fluent.GridColumnFactory<T>>)) method of Kendo UI Grid for ASP.NET MVC configures the [data source](http://docs.telerik.com/kendo-ui/api/javascript/ui/grid#configuration-dataSource).
+The [`DataSource`](http://docs.telerik.com/aspnet-mvc/api/Kendo.Mvc.UI.Fluent/GridBuilder#methods-Columns(System.Action<Kendo.Mvc.UI.Fluent.GridColumnFactory<T>>)) method of Kendo UI Grid for ASP.NET MVC configures the [data source](http://docs.telerik.com/kendo-ui/api/javascript/ui/grid#configuration-dataSource).
 
 ### Aggregates
 
@@ -1206,7 +1206,7 @@ Other articles on the Kendo UI Grid for ASP.NET MVC:
 * [Editing of the Grid HtmlHelper]({% slug ajaxediting_grid_aspnetmvc %})
 * [Templating of the Grid HtmlHelper]({% slug clientdetailtemplate_grid_aspnetmvc %})
 * [Troubleshooting for the Grid HtmlHelper]({% slug troubleshoot_gridhelper_aspnetmvc %})
-* [API Reference of the Grid HtmlHelper](http://docs.telerik.com/kendo-ui/api/Kendo.Mvc.UI.Fluent/GridBuilder)
+* [API Reference of the Grid HtmlHelper](http://docs.telerik.com/aspnet-mvc/api/Kendo.Mvc.UI.Fluent/GridBuilder)
 * [Overview of the Kendo UI Grid Widget](http://docs.telerik.com/kendo-ui/controls/data-management/grid/overview)
 
 Articles on Telerik UI for ASP.NET MVC:

@@ -195,7 +195,7 @@ To reference an existing Kendo UI Tooltip instance, use the [`jQuery.data()`](ht
 
 ## See Also
 
-* [ASP.NET MVC API Reference: TooltipBuilder](http://docs.telerik.com/kendo-ui/api/Kendo.Mvc.UI.Fluent/TooltipBuilder)
+* [ASP.NET MVC API Reference: TooltipBuilder](http://docs.telerik.com/aspnet-mvc/api/Kendo.Mvc.UI.Fluent/TooltipBuilder)
 * [Overview of Telerik UI for ASP.NET MVC]({% slug overview_aspnetmvc %})
 * [Fundamentals of Telerik UI for ASP.NET MVC]({% slug fundamentals_aspnetmvc %})
 * [Scaffolding in Telerik UI for ASP.NET MVC]({% slug scaffolding_aspnetmvc %})

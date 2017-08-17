@@ -278,7 +278,7 @@ To reference an existing Kendo UI TabStrip instance, use the [`jQuery.data()`](h
 
 ## See Also
 
-* [ASP.NET MVC API Reference: TabStripBuilder](http://docs.telerik.com/kendo-ui/api/Kendo.Mvc.UI.Fluent/TabStripBuilder)
+* [ASP.NET MVC API Reference: TabStripBuilder](http://docs.telerik.com/aspnet-mvc/api/Kendo.Mvc.UI.Fluent/TabStripBuilder)
 * [Overview of Telerik UI for ASP.NET MVC]({% slug overview_aspnetmvc %})
 * [Fundamentals of Telerik UI for ASP.NET MVC]({% slug fundamentals_aspnetmvc %})
 * [Scaffolding in Telerik UI for ASP.NET MVC]({% slug scaffolding_aspnetmvc %})

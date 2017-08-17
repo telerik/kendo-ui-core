@@ -194,7 +194,7 @@ To reference an existing Kendo UI StockChart instance, use the [`jQuery.data()`]
 
 ## See Also
 
-* [ASP.NET MVC API Reference: StockChartBuilder](http://docs.telerik.com/kendo-ui/api/Kendo.Mvc.UI.Fluent/StockChartBuilder)
+* [ASP.NET MVC API Reference: StockChartBuilder](http://docs.telerik.com/aspnet-mvc/api/Kendo.Mvc.UI.Fluent/StockChartBuilder)
 * [Ajax Binding of the Kendo UI StockChart for ASP.NET MVC]({% slug ajaxbinding_stockcharthelper_aspnetmvc %})
 * [Overview of the Kendo UI StockChart Widget](http://docs.telerik.com/kendo-ui/controls/charts/stockchart/overview)
 * [Scaffolding of the Kendo UI Chart for ASP.NET MVC]({% slug scaffoldingchart_aspnetmvc %})

@@ -130,7 +130,7 @@ To refer to an existing Kendo UI Dialog instance, use the [`jQuery.data()`](http
 
 ## See Also
 
-* [ASP.NET MVC API Reference: DialogBuilder](http://docs.telerik.com/kendo-ui/api/Kendo.Mvc.UI.Fluent/DialogBuilder)
+* [ASP.NET MVC API Reference: DialogBuilder](http://docs.telerik.com/aspnet-mvc/api/Kendo.Mvc.UI.Fluent/DialogBuilder)
 * [Overview of Telerik UI for ASP.NET MVC]({% slug overview_aspnetmvc %})
 * [Fundamentals of Telerik UI for ASP.NET MVC]({% slug fundamentals_aspnetmvc %})
 * [Scaffolding in Telerik UI for ASP.NET MVC]({% slug scaffolding_aspnetmvc %})

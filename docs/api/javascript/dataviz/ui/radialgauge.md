@@ -79,12 +79,17 @@ The margin of the gauge area.
 
 #### Example
 
-    // sets the top, right, bottom and left margin to 3px.
-    margin: 3
-
-    // sets the top and left margin to 1px
-    // margin right and bottom are with 5px (by default)
-    margin: { top: 1, left: 1 }
+    <div id="gauge"></div>
+    <script>
+     $("#gauge").kendoRadialGauge({
+         pointer: [{
+            value: 20
+            gaugeArea:{ 
+                margin:50 
+         }
+      }]
+     });
+</script>
 
 ### gaugeArea.margin.top `Number`
 
@@ -114,24 +119,24 @@ The pointer configuration options. It accepts an `Array` of pointers, each with 
 #### Example - specify single pointer
     <div id="gauge"></div>
     <script>
-	  $("#gauge").kendoRadialGauge({
-        pointer: {
-          value: 40
-        }
-      });
-    <script>
+    $("#gauge").kendoRadialGauge({
+        pointer: [{
+        value: 20
+        }]
+    });
+    </script>
 
 #### Example - specify multiple pointers
 	<div id="gauge"></div>
     <script>
-	  $("#gauge").kendoRadialGauge({
+    $("#gauge").kendoRadialGauge({
         pointer: [{
-          value: 20
+        value: 20
         }, {
-          value: 40
+        value: 40
         }]
-      });
-    <script>
+    });
+    </script>
 
 ### pointer.cap `Object`
 
@@ -263,15 +268,23 @@ The format of the labels.
 
 #### Example
 
-    $("#radial-gauge").kendoRadialGauge({
+    <div id="gauge"></div>
+    <script>
+    $("#gauge").kendoRadialGauge({
+        renderAs: "canvas",
+        pointer: {
+        value: 50
+        },
         scale: {
-           labels: {
-               // set the format to currency
-               format: "C"
-           }
+        min: 0,
+        max: 100, 
+        labels: {
+            // set the format to currency
+            format: "C"
+        }
         }
     });
-
+    </script>
 ### scale.labels.margin `Number|Object`*(default: 0)*
 
  The margin of the labels.
@@ -335,15 +348,23 @@ Template variables:
 
 #### Example
 
-    // chart initialization
-    $("#radial-gauge").kendoRadialGauge({
-         scale: {
-             labels: {
-                 // labels template
-                 template: "#= value #%"
-             }
-         }
+    <div id="gauge"></div>
+    <script>
+    $("#gauge").kendoRadialGauge({
+        renderAs: "canvas",
+        pointer: {
+        value: 50
+        },
+        scale: {
+        min: 0,
+        max: 100, 
+        labels: {
+            // set the format to currency
+            template: "#= value #%"
+        }
+        }
     });
+    </script>
 
 ### scale.labels.visible `Boolean`*(default: true)*
 
@@ -415,16 +436,24 @@ The ranges of the scale.
 
 #### Example
 
-    $("#radial-gauge").kendoRadialGauge({
+    <div id="gauge"></div>
+    <script>
+    $("#gauge").kendoRadialGauge({
+        renderAs: "canvas",
+        pointer: {
+        value: 50
+        },
         scale: {
-            ranges: [{
-                from: 10,
-                to: 20,
-                color: "green"
-            }]
+        min: 0,
+        max: 100, 
+        ranges: [{
+            from: 10,
+            to: 20,
+            color: "green"
+        }]
         }
-     });
-
+    });
+    </script>
 ### scale.ranges.from `Number`
 
 The start position of the range in scale units.
@@ -484,32 +513,35 @@ An array of values to be set.
 #### Example - setting multiple values
     <div id="gauge"></div>
     <script>
-	  $("#gauge").kendoRadialGauge({
+    $("#gauge").kendoRadialGauge({
         pointer: [{
-          value: 20
+        value: 20
         }, {
-          value: 40
+        value: 40
         }]
-      });
+    });
 
-      var gauge = $("#gauge").data("kendoRadialGauge");
-      gauge.allValues([60, 10]);
-    <script>
+    setTimeout(function(){
+        var gauge = $("#gauge").data("kendoRadialGauge");
+        gauge.allValues([60, 10]);
+    },1000)
+
+    </script>
 
 #### Example - retrieving all values
     <div id="gauge"></div>
     <script>
-	  $("#gauge").kendoRadialGauge({
+    $("#gauge").kendoRadialGauge({
         pointer: [{
-          value: 20
+        value: 20
         }, {
-          value: 40
+        value: 40
         }]
-      });
+    });
 
-      var gauge = $("#gauge").data("kendoRadialGauge");
-      var allValues = gauge.allValues();
-    <script>
+    var gauge = $("#gauge").data("kendoRadialGauge");
+    var allValues = gauge.allValues();
+    </script>
 
 ### destroy
 
@@ -519,8 +551,22 @@ Detaches event handlers and removes data entries in order to avoid memory leaks.
 
 #### Example
 
-    kendo.destroy($("#radial-gauge"));
-    $("#radial-gauge").remove();
+    <div id="gauge"></div>
+    <script>
+    $("#gauge").kendoRadialGauge({
+        pointer: {
+        value: 50
+        },
+        scale: {
+        min: 0,
+        max: 100
+        }
+    });
+    setTimeout(function(){
+        kendo.destroy($("#gauge"));
+        $("#gauge").remove();
+    },1000)     
+    </script>
 
 ### exportImage
 Exports the Gauge as an image.
@@ -547,14 +593,14 @@ The height of the exported image. Defaults to the Gauge height.
     <div id="gauge"></div>
     <script>
         $("#gauge").kendoRadialGauge({
-	        pointer: {
-	            value: 50
-	        },
-	        scale: {
-	            min: 0,
-	            max: 100
-	        }
-	    });
+            pointer: {
+                value: 50
+            },
+            scale: {
+                min: 0,
+                max: 100
+            }
+        });
 
         var gauge = $("#gauge").data("kendoRadialGauge");
         gauge.exportImage().done(function(data) {
@@ -585,14 +631,14 @@ Parameters for the exported PDF file.
     <div id="gauge"></div>
     <script>
         $("#gauge").kendoRadialGauge({
-	        pointer: {
-	            value: 50
-	        },
-	        scale: {
-	            min: 0,
-	            max: 100
-	        }
-	    });
+            pointer: {
+                value: 50
+            },
+            scale: {
+                min: 0,
+                max: 100
+            }
+        });
 
         var gauge = $("#gauge").data("kendoRadialGauge");
         gauge.exportPDF({ paperSize: "A5", landscape: true }).done(function(data) {
@@ -602,7 +648,6 @@ Parameters for the exported PDF file.
             });
         });
     </script>
-
 
 ### exportSVG
 Exports the Gauge as an SVG document.
@@ -626,14 +671,14 @@ Resolves the promise with the raw SVG document without the Data URI prefix.
     <div id="gauge"></div>
     <script>
         $("#gauge").kendoRadialGauge({
-	        pointer: {
-	            value: 50
-	        },
-	        scale: {
-	            min: 0,
-	            max: 100
-	        }
-	    });
+            pointer: {
+                value: 50
+            },
+            scale: {
+                min: 0,
+                max: 100
+            }
+        });
 
         var gauge = $("#gauge").data("kendoRadialGauge");
         gauge.exportSVG().done(function(data) {
@@ -649,16 +694,28 @@ Resolves the promise with the raw SVG document without the Data URI prefix.
 Redraws the gauge.
 
 #### Example
-
-    var gauge = $("#radial-gauge").data("kendoRadialGauge");
-    gauge.redraw();
+    <div id="gauge"></div>
+    <script>
+    $("#gauge").kendoRadialGauge({
+        pointer: {
+        value: 50
+        },
+        scale: {
+        min: 0,
+        max: 100
+        }
+    });
+    setTimeout(function(){
+        var gauge = $("#gauge").data("kendoRadialGauge");
+        gauge.redraw();
+    },1000)     
+    </script>
 
 ### resize
 
 Adjusts the widget layout to match the size of the container.
 
 #### Example
-
     <div id="gauge" style="width: 100px; height: 100px;"></div>
     <script>
         $("#gauge").kendoRadialGauge({
@@ -672,8 +729,8 @@ Adjusts the widget layout to match the size of the container.
         });
 
         $("#gauge")
-           .css({ width: "200px", height: "200px" })
-           .data("kendoRadialGauge").resize();
+        .css({ width: "200px", height: "200px" })
+        .data("kendoRadialGauge").resize();
     </script>
 
 #### Parameters
@@ -736,28 +793,28 @@ Returns a PNG image of the gauge encoded as a [Data URL](https://developer.mozil
     });
 
     $("#export").on("click", function() {
-      var gauge = $("#gauge").data("kendoRadialGauge");
-      var imageDataURL = chart.imageDataURL();
+    var gauge = $("#gauge").data("kendoRadialGauge");
+    var imageDataURL = gauge.imageDataURL();
 
-      if (navigator.msSaveBlob) {
+    if (navigator.msSaveBlob) {
         var blob = toBlob(imageDataURL, "image/png");
         navigator.msSaveBlob(blob, this.getAttribute("download"));
-      } else {
+    } else {
         this.href = imageDataURL;
-      }
+    }
     });
 
     // See: http://goo.gl/qlg5dd
     function toBlob(base64, type) {
-      var rawData = base64.substring(base64.indexOf("base64,") + 7);
-      var data = atob(rawData);
-      var arr = new Uint8Array(data.length);
+    var rawData = base64.substring(base64.indexOf("base64,") + 7);
+    var data = atob(rawData);
+    var arr = new Uint8Array(data.length);
 
-      for (var i = 0; i < data.length; ++i) {
+    for (var i = 0; i < data.length; ++i) {
         arr[i] = data.charCodeAt(i);
-      }
+    }
 
-      return new Blob([ arr.buffer ], { type: type });
+    return new Blob([ arr.buffer ], { type: type });
     }
     </script>
 
@@ -767,4 +824,18 @@ Change the value of the gauge.
 
 #### Example
 
-    $("#radial-gauge").data("kendoRadialGauge").value(20);
+    <div id="gauge"></div>
+    <script>
+    $("#gauge").kendoRadialGauge({
+        pointer: {
+        value: 50
+        },
+        scale: {
+        min: 0,
+        max: 100
+        }
+    });
+    setTimeout(function(){
+        $("#gauge").data("kendoRadialGauge").value(20);
+    },1000)     
+    </script>

@@ -166,7 +166,7 @@ To reference an existing Kendo UI ColorPicker instance, use the [`jQuery.data()`
 
 ## See Also
 
-* [ASP.NET MVC API Reference: ColorPickerBuilder](http://docs.telerik.com/kendo-ui/api/Kendo.Mvc.UI.Fluent/ColorPickerBuilder)
+* [ASP.NET MVC API Reference: ColorPickerBuilder](http://docs.telerik.com/aspnet-mvc/api/Kendo.Mvc.UI.Fluent/ColorPickerBuilder)
 * [Overview of Telerik UI for ASP.NET MVC]({% slug overview_aspnetmvc %})
 * [Fundamentals of Telerik UI for ASP.NET MVC]({% slug fundamentals_aspnetmvc %})
 * [Scaffolding in Telerik UI for ASP.NET MVC]({% slug scaffolding_aspnetmvc %})

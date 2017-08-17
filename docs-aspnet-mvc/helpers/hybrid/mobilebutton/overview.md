@@ -154,7 +154,7 @@ You can reference a hybrid Button instance by using the code from the example be
 
 ## See Also
 
-* [ASP.NET MVC API Reference: Hybrid UI ButtonBuilder](http://docs.telerik.com/kendo-ui/api/Kendo.Mvc.UI.Fluent/MobileButtonBuilder)
+* [ASP.NET MVC API Reference: Hybrid UI ButtonBuilder](http://docs.telerik.com/aspnet-mvc/api/Kendo.Mvc.UI.Fluent/MobileButtonBuilder)
 * [Overview of the Hybrid UI Button Widget](http://docs.telerik.com/kendo-ui/controls/hybrid/button/button)
 * [Overview of Telerik UI for ASP.NET MVC]({% slug overview_aspnetmvc %})
 * [Fundamentals of Telerik UI for ASP.NET MVC]({% slug fundamentals_aspnetmvc %})

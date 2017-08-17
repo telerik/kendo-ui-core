@@ -189,7 +189,7 @@ You can reference a hybrid PopOver instance by using the code from the example b
 
 ## See Also
 
-* [ASP.NET MVC API Reference: PopOverBuilder](http://docs.telerik.com/kendo-ui/api/Kendo.Mvc.UI.Fluent/MobilePopOverBuilder)
+* [ASP.NET MVC API Reference: PopOverBuilder](http://docs.telerik.com/aspnet-mvc/api/Kendo.Mvc.UI.Fluent/MobilePopOverBuilder)
 * [Overview of the Hybrid UI PopOver Widget](http://docs.telerik.com/kendo-ui/controls/hybrid/popover/popover)
 * [Overview of Telerik UI for ASP.NET MVC]({% slug overview_aspnetmvc %})
 * [Fundamentals of Telerik UI for ASP.NET MVC]({% slug fundamentals_aspnetmvc %})

@@ -121,7 +121,7 @@ To reference an existing Kendo UI DateInput instance, use the [`jQuery.data()`](
 
 ## See Also
 
-* [ASP.NET MVC API Reference: DateInputBuilder](http://docs.telerik.com/kendo-ui/api/Kendo.Mvc.UI.Fluent/DateInputBuilder)
+* [ASP.NET MVC API Reference: DateInputBuilder](http://docs.telerik.com/aspnet-mvc/api/Kendo.Mvc.UI.Fluent/DateInputBuilder)
 * [Overview of Telerik UI for ASP.NET MVC]({% slug overview_aspnetmvc %})
 * [Fundamentals of Telerik UI for ASP.NET MVC]({% slug fundamentals_aspnetmvc %})
 * [Scaffolding in Telerik UI for ASP.NET MVC]({% slug scaffolding_aspnetmvc %})

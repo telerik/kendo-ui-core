@@ -148,7 +148,7 @@ Below are listed the steps for you to follow when binding the Kendo UI Gantt to 
 
 ## See Also
 
-* [ASP.NET MVC API Reference: GanttBuilder](http://docs.telerik.com/kendo-ui/api/Kendo.Mvc.UI.Fluent/GanttBuilder)
+* [ASP.NET MVC API Reference: GanttBuilder](http://docs.telerik.com/aspnet-mvc/api/Kendo.Mvc.UI.Fluent/GanttBuilder)
 * [Server Binding of the Gantt HtmlHelper]({% slug serverbinding_gantthelper_aspnetmvc %})
 * [Overview of Telerik UI for ASP.NET MVC]({% slug overview_aspnetmvc %})
 * [Fundamentals of Telerik UI for ASP.NET MVC]({% slug fundamentals_aspnetmvc %})

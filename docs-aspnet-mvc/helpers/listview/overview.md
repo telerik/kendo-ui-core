@@ -199,7 +199,7 @@ To reference an existing Kendo UI ListView instance,. use the [`jQuery.data()`](
 
 ## See Also
 
-* [ASP.NET MVC API Reference: ListViewBuilder](http://docs.telerik.com/kendo-ui/api/Kendo.Mvc.UI.Fluent/ListViewBuilder)
+* [ASP.NET MVC API Reference: ListViewBuilder](http://docs.telerik.com/aspnet-mvc/api/Kendo.Mvc.UI.Fluent/ListViewBuilder)
 * [Overview of the ListView HtmlHelper]({% slug overview_listviewhelper_aspnetmvc %})
 * [Configuration of the ListView HtmlHelper]({% slug configuration_listviewhelper_aspnetmvc %})
 * [Ajax Binding of the ListView HtmlHelper]({% slug ajaxbinding_listviewhelper_aspnetmvc %})

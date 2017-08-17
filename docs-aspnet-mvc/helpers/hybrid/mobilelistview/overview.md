@@ -286,7 +286,7 @@ The following example demonstrates how to subscribe to events by a handler name.
 
 ## See Also
 
-* [ASP.NET MVC API Reference: Hybrid UI ListViewBuilder](http://docs.telerik.com/kendo-ui/api/Kendo.Mvc.UI.Fluent/MobileListViewBuilder)
+* [ASP.NET MVC API Reference: Hybrid UI ListViewBuilder](http://docs.telerik.com/aspnet-mvc/api/Kendo.Mvc.UI.Fluent/MobileListViewBuilder)
 * [Overview of the Hybrid UI ListView Widget](http://docs.telerik.com/kendo-ui/controls/hybrid/listview/overview)
 * [Overview of Telerik UI for ASP.NET MVC]({% slug overview_aspnetmvc %})
 * [Fundamentals of Telerik UI for ASP.NET MVC]({% slug fundamentals_aspnetmvc %})

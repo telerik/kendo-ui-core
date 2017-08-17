@@ -16,6 +16,6 @@ To see the example, refer to the Visual Studio project on [multiple TreeList Exc
 ## See Also
 
 * [Overview of the TreeList HtmlHelper]({% slug overview_treelisthelper_aspnetmvc %})
-* [TreeListBuilder API Reference](http://docs.telerik.com/kendo-ui/api/Kendo.Mvc.UI.Fluent/TreeListBuilder)
+* [TreeListBuilder API Reference](http://docs.telerik.com/aspnet-mvc/api/Kendo.Mvc.UI.Fluent/TreeListBuilder)
 * [Overview of the Kendo UI TreeList Widget](http://docs.telerik.com/kendo-ui/controls/data-management/treelist/overview)
 * [Overview of Telerik UI for ASP.NET MVC]({% slug overview_aspnetmvc %})
