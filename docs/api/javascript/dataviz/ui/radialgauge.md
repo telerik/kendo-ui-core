@@ -285,9 +285,10 @@ The format of the labels.
         }
     });
     </script>
+
 ### scale.labels.margin `Number|Object`*(default: 0)*
 
- The margin of the labels.
+The margin of the labels.
 
 ### scale.labels.margin.top `Number`
 
@@ -454,6 +455,7 @@ The ranges of the scale.
         }
     });
     </script>
+
 ### scale.ranges.from `Number`
 
 The start position of the range in scale units.
