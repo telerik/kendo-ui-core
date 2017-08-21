@@ -64,12 +64,8 @@
     float: right;
 }
 
-.k-toolbar > *,
-.k-toolbar .k-button
-{
+.k-toolbar > * {
     display: inline-block;
-    vertical-align: middle;
-    line-height: 1.72em;
 }
 
 .k-toolbar .k-separator
@@ -107,6 +103,10 @@
     margin: 0 .2em;
     line-height: 1.72em;
     vertical-align: middle;
+}
+
+.k-toolbar .k-split-button-arrow {
+    min-height: calc(1.72em + 2*@button-padding-y + 2px);
 }
 
 .k-toolbar .k-split-button

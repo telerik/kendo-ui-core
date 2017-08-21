@@ -2147,6 +2147,7 @@ html .km-pane-wrapper .km-widget,
             color: @active-header-text;
             border-radius: 0;
             line-height: 2.6em;
+            height: calc(3.1em + 2px); // IE centering icon fix
             width: 3em;
 
             &:hover {
@@ -2253,15 +2254,6 @@ html .km-pane-wrapper .km-widget,
         &:before {
             content: normal;
         }
-    }
-    a.k-dialog-action.k-dialog-close {
-        padding: 1em;
-        right: 0;
-        top: 0;
-    }
-    &.k-dialog-titleless a.k-dialog-action.k-dialog-close {
-        right: 0.5em;
-        top: 0.5em;
     }
     &.k-alert .k-window-titlebar,
     &.k-confirm .k-window-titlebar,
