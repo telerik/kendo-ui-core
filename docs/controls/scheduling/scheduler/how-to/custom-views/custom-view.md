@@ -57,9 +57,9 @@ The following example demonstrates how to inherit some of the built-in views and
           "day",
               { type: "week", selected: true },
               // "custom week",
-              { type: ThreeDayView, title: "Three day view" },
+              { type: "ThreeDayView", title: "Three day view" },
               // "custom agenda",
-              { type: CustomAgenda, title: "Custom Agenda" }
+              { type: "CustomAgenda", title: "Custom Agenda" }
           ],
           timezone: "Etc/UTC",
           dataSource: {
