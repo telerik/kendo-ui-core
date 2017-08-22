@@ -41,11 +41,10 @@ To get the `dataItem` for the last selected row:
     <script>
         function onClick(e) {
             var grid = $("#grid").data("kendoGrid");
-            var row = e.target.closest("tr");
+            var row = $(e.target).closest("tr");
             var dataItem = grid.dataItem(row);
-			var className = row.className;
 
-			if(className.indexOf("k-state-selected") != -1){
+			if(row.hasClass("k-state-selected")){
 				console.log("Deselecting");
 			}else{
 				console.log("Selecting");

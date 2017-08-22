@@ -40,10 +40,9 @@ I want to remove the master checkbox of the built-in checkbox column in the Kend
     <script>
         function onClick(e) {
             var grid = $("#grid").data("kendoGrid");
-            var row = e.target.closest("tr");
-            var classes = row.className;
+            var row = $(e.target).closest("tr");
 
-            if (classes.indexOf("k-state-selected") != -1) {
+            if(row.hasClass("k-state-selected")){
                 setTimeout(function(e) {
                     var grid = $("#grid").data("kendoGrid");
                     grid.clearSelection();

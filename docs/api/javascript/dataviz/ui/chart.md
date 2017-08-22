@@ -1518,7 +1518,7 @@ The data item field which contains the category name. Requires the [dataSource](
 
 If set to `true` the chart will position categories and series points on major ticks. This removes the empty space before and after the series.
 
-The default value is `false` except for "area" and "verticalArea".
+The default value is `false` except for "area", "verticalArea", "rangeArea" and "verticalRangeArea".
 
 > This option is ignored if the [series.type](#configuration-series.type) option is set to "bar", "column", "boxPlot", "ohlc", "candlestick" or "waterfall".
 
@@ -9920,10 +9920,11 @@ Can be set to :
 
 * Array of objects. Each point is bound to the field specified via the [series.field](#configuration-series.field) option.
 * Array of numbers. Supported when the [series.type](#configuration-series.type) option is set to "area", "bar", "column", "donut", "pie", "line" or "waterfall".
-* Array of arrays of numbers. Supported when the [series.type](#configuration-series.type) option is set to "bubble", "scatter", "scatterLine", "ohlc" or polar series.
+* Array of arrays of numbers. Supported when the [series.type](#configuration-series.type) option is set to "bubble", "scatter", "scatterLine", "ohlc", "rangeBar", "rangeArea" or polar series.
     * Bubble series need arrays of three values - X value, Y value and Size value e.g. `[1, 1, 10]`
     * Scatter and scatter line series need arrays of two values - X value and Y value
     * OHLC and candlestick series need arrays of four values - open, high, low and close
+    * RangeBar and RangeArea series need arrays of two values - the from and to value.
 
 #### Example - set the chart series data as array of objects
 
@@ -11246,6 +11247,8 @@ The available argument fields are:
 * percentage - the point value represented as a percentage value. Available only for donut, pie and 100% stacked charts.
 * runningTotal - the sum of point values since the last "runningTotal" [summary point](#configuration-series.summaryField). Available for waterfall series.
 * total - the sum of all previous series values. Available for waterfall series.
+* from - the "from" point highlight visual options. Available for "rangeArea" and "verticalRangeArea" series.
+* to - the "to" point highlight visual options. Available for "rangeArea" and "verticalRangeArea" series.
 
 #### Example - use custom highlight visual
 
@@ -11794,6 +11797,7 @@ The position of the labels.
 * "right" - the label is positioned to the right of the marker. **Applicable for series that render points, incl. bubble.**
 * "top" - the label is positioned at the top of the segment. **Applicable for funnel series.**
 * "bottom" - the label is positioned at the bottom of the segment. **Applicable for funnel series.**
+* "auto" - the from and to labels area positioned at the top/bottom(rangeArea series) or left/right(verticalRangeArea series) so that they are outside the filled area. **Applicable for rangeArea and verticalRangeArea series.**
 
 
 #### Example - set the chart series label position
@@ -12011,6 +12015,10 @@ The position of the **from** labels.
 * "insideBase" - the label is positioned inside, near the base of the bar.
 * "insideEnd" - the label is positioned inside, near the end of the point.
 * "outsideEnd" - the label is positioned outside, near the end of the point.
+* "above" - the label is positioned at the top of the marker. Applicable for "rangeArea" and "verticalRangeArea" series.
+* "below" - the label is positioned at the bottom of the marker. Applicable for "rangeArea" and "verticalRangeArea" series.
+* "left" - the label is positioned to the left of the marker. Applicable for "rangeArea" and "verticalRangeArea" series.
+* "right" - the label is positioned to the right of the marker. Applicable for "rangeArea" and "verticalRangeArea" series.
 
 ### series.labels.from.template `String|Function`
 
@@ -12018,13 +12026,10 @@ The [template](/api/javascript/kendo#methods-template) which renders the chart s
 
 The fields which can be used in the template are:
 
-* category - the category name. Available for area, bar, column, bubble, donut, line, pie and waterfall series.
+* category - the category name.
 * dataItem - the original data item used to construct the point. Will be null if binding to array.
-* percentage - the point value represented as a percentage value. Available only for donut, pie and 100% stacked charts.
 * series - the data series
-* value - the point value. Can be a number or object containing each bound field.
-* runningTotal - the sum of point values since the last "runningTotal" [summary point](#configuration-series.summaryField). Available for waterfall series.
-* total - the sum of all previous series values. Available for waterfall series.
+* value - the point value. An object containing from and to values.
 
 > The text can be split into multiple lines by using line feed characters ("\n").
 
@@ -12128,6 +12133,10 @@ The position of the **to** labels.
 * "insideBase" - the label is positioned inside, near the base of the bar.
 * "insideEnd" - the label is positioned inside, near the end of the point.
 * "outsideEnd" - the label is positioned outside, near the end of the point.
+* "above" - the label is positioned at the top of the marker. Applicable for "rangeArea" and "verticalRangeArea" series.
+* "below" - the label is positioned at the bottom of the marker. Applicable for "rangeArea" and "verticalRangeArea" series.
+* "left" - the label is positioned to the left of the marker. Applicable for "rangeArea" and "verticalRangeArea" series.
+* "right" - the label is positioned to the right of the marker. Applicable for "rangeArea" and "verticalRangeArea" series.
 
 ### series.labels.to.template `String|Function`
 
@@ -12135,13 +12144,10 @@ The [template](/api/javascript/kendo#methods-template) which renders the chart s
 
 The fields which can be used in the template are:
 
-* category - the category name. Available for area, bar, column, bubble, donut, line, pie and waterfall series.
+* category - the category name.
 * dataItem - the original data item used to construct the point. Will be null if binding to array.
-* percentage - the point value represented as a percentage value. Available only for donut, pie and 100% stacked charts.
 * series - the data series
-* value - the point value. Can be a number or object containing each bound field.
-* runningTotal - the sum of point values since the last "runningTotal" [summary point](#configuration-series.summaryField). Available for waterfall series.
-* total - the sum of all previous series values. Available for waterfall series.
+* value - the point value. An object containing from and to values.
 
 > The text can be split into multiple lines by using line feed characters ("\n").
 
@@ -12242,9 +12248,9 @@ The supported values are:
 
 > The default value is "normal".
 
-> The `style` option is supported when [series.type](#configuration-series.type) is set to "area", "polarArea" or "radarArea".
+> The `style` option is supported when [series.type](#configuration-series.type) is set to "area", "rangeArea", "polarArea" or "radarArea".
 
-> The `step` value is supported only when [series.type](#configuration-series.type) is set to "area".
+> The `step` value is supported only when [series.type](#configuration-series.type) is set to "area" or "rangeArea".
 
 > For *line series*, use [series.style](#configuration-series.style).
 
@@ -12402,7 +12408,7 @@ The top margin of the labels.
 The chart series marker configuration.
 
 > The chart displays the series labels when the [series.markers.visible](#configuration-series.markers.visible) option is set to `true`.
-> The `markers` option is supported when [series.type](#configuration-series.type) is set to "area", "line", "scatter", "scatterLine", "radarLine", "radarArea", "polarLine", "polarScatter" or "polarArea".
+> The `markers` option is supported when [series.type](#configuration-series.type) is set to "area", "rangeArea", "line", "scatter", "scatterLine", "radarLine", "radarArea", "polarLine", "polarScatter" or "polarArea".
 
 #### Example - set the chart series markers
 
@@ -12527,6 +12533,80 @@ The width of the border in pixels. By default the border width is set to zero wh
     });
     </script>
 
+### series.markers.from `Object`
+
+The chart series marker configuration for the "from" point. Supported for "rangeArea" and "verticalRangeArea" series.
+
+#### Example - set the chart series markers "from" options
+
+    <div id="chart"></div>
+    <script>
+      $("#chart").kendoChart({
+        series: [{
+          type: "rangeArea",
+          markers: {
+            from: {
+              visible: true,
+              background: "green",
+              size: 30
+            }
+          },
+          data: [[1, 2], [3, 5], [1, 4]]
+        }]
+      });
+    </script>
+
+### series.markers.from.background `String|Function`
+
+The background color of the markers.
+
+### series.markers.from.border `Object|Function`
+
+The border of the markers.
+
+### series.markers.from.border.color `String|Function` *(default: "black")*
+
+The color of the border. Accepts a valid CSS color string, including hex and rgb.
+
+### series.markers.from.border.width `Number|Function` *(default: 0)*
+
+The width of the border in pixels. By default the border width is set to zero which means that the border will not appear.
+
+### series.markers.from.size `Number|Function` *(default: 6)*
+
+The marker size in pixels.
+
+### series.markers.from.type `String|Function` *(default: "circle")*
+
+The markers shape.
+
+The supported values are:
+* "circle" - the marker shape is circle.
+* "square" - the marker shape is square.
+* "triangle" - the marker shape is triangle.
+* "cross" - the marker shape is cross.
+
+### series.markers.from.visible `Boolean|Function` *(default: false)*
+
+If set to `true` the chart will display the series markers. By default chart series markers are displayed.
+
+### series.markers.from.visual `Function`
+
+A function that can be used to create a custom visual for the markers. The available argument fields are:
+
+* rect - the `kendo.geometry.Rect` that defines where the visual should be rendered.
+* options - the marker options.
+* createVisual - a function that can be used to get the default visual.
+* category - the category of the marker point.
+* dataItem - the dataItem of the marker point.
+* value - the value of the marker point.
+* sender - the chart instance.
+* series - the series of the marker point.
+
+### series.markers.from.rotation `Number|Function`
+
+The rotation angle of the markers.
+
 ### series.markers.size `Number|Function` *(default: 6)*
 
 The marker size in pixels.
@@ -12546,6 +12626,80 @@ The marker size in pixels.
       }]
     });
     </script>
+
+### series.markers.to `Object`
+
+The chart series marker configuration for the "to" point. Supported for "rangeArea" and "verticalRangeArea" series.
+
+#### Example - set the chart series markers "to" options
+
+    <div id="chart"></div>
+    <script>
+      $("#chart").kendoChart({
+        series: [{
+          type: "rangeArea",
+          markers: {
+            to: {
+              visible: true,
+              background: "green",
+              size: 30
+            }
+          },
+          data: [[1, 2], [3, 5], [1, 4]]
+        }]
+      });
+    </script>
+
+### series.markers.to.background `String|Function`
+
+The background color of the markers.
+
+### series.markers.to.border `Object|Function`
+
+The border of the markers.
+
+### series.markers.to.border.color `String|Function` *(default: "black")*
+
+The color of the border. Accepts a valid CSS color string, including hex and rgb.
+
+### series.markers.to.border.width `Number|Function` *(default: 0)*
+
+The width of the border in pixels. By default the border width is set to zero which means that the border will not appear.
+
+### series.markers.to.size `Number|Function` *(default: 6)*
+
+The marker size in pixels.
+
+### series.markers.to.type `String|Function` *(default: "circle")*
+
+The markers shape.
+
+The supported values are:
+* "circle" - the marker shape is circle.
+* "square" - the marker shape is square.
+* "triangle" - the marker shape is triangle.
+* "cross" - the marker shape is cross.
+
+### series.markers.to.visible `Boolean|Function` *(default: false)*
+
+If set to `true` the chart will display the series markers. By default chart series markers are displayed.
+
+### series.markers.to.visual `Function`
+
+A function that can be used to create a custom visual for the markers. The available argument fields are:
+
+* rect - the `kendo.geometry.Rect` that defines where the visual should be rendered.
+* options - the marker options.
+* createVisual - a function that can be used to get the default visual.
+* category - the category of the marker point.
+* dataItem - the dataItem of the marker point.
+* value - the value of the marker point.
+* sender - the chart instance.
+* series - the series of the marker point.
+
+### series.markers.to.rotation `Number|Function`
+
+The rotation angle of the markers.
 
 ### series.markers.type `String|Function` *(default: "circle")*
 
@@ -13134,7 +13288,7 @@ The behavior for handling missing values. The supported values are:
 
 > The default value is "interpolate", except for "area" and stacked series which default to "zero".
 
-> The `missingValues` option is supported when [series.type](#configuration-series.type) is set to "area", "line", "scatterLine", "radarLine", "radarArea", "polarLine" or "polarArea".
+> The `missingValues` option is supported when [series.type](#configuration-series.type) is set to "area", "rangeArea", "line", "scatterLine", "radarLine", "radarArea", "polarLine" or "polarArea".
 
 #### Example - set the missing values behavior
     <div id="chart"></div>
@@ -13958,6 +14112,9 @@ Format placeholders:
     *   {2} - low value
     *   {3} - close value
     *   {4} - category name
+* RangeArea, rangeBar, rangeColumn
+    *   {0} - from value
+    *   {1} - to value
 
 #### Example - set the chart series tooltip format
 
@@ -14165,6 +14322,7 @@ The supported values are:
 * radarArea
 * radarColumn
 * radarLine
+* rangeArea
 * rangeBar
 * rangeColumn
 * scatter
@@ -14173,6 +14331,7 @@ The supported values are:
 * verticalBoxPlot
 * verticalBullet
 * verticalLine
+* verticalRangeArea
 * waterfall
 
 #### Example - set the chart series type
@@ -16263,6 +16422,26 @@ The pie chart series options. Accepts all values supported by the [series](#conf
     });
     </script>
 
+### seriesDefaults.rangeArea `Object`
+
+The range area chart series options. Accepts all values supported by the [series](#configuration-series) option.
+
+#### Example - set the area chart default options
+    <div id="chart"></div>
+    <script>
+      $("#chart").kendoChart({
+        seriesDefaults: {
+          rangeArea: {
+            color: "red",
+            opacity: 0.1
+          }
+        },
+        series: [
+          { type: "rangeArea", data: [[1, 2], [2, 3]] }
+        ]
+      });
+    </script>
+
 ### seriesDefaults.scatter `Object`
 
 The scatter chart series options. Accepts all values supported by the [series](#configuration-series) option.
@@ -16394,12 +16573,16 @@ The supported values are:
 * radarArea
 * radarColumn
 * radarLine
+* rangeArea
+* rangeBar
+* rangeColumn
 * scatter
 * scatterLine
 * waterfall
 * verticalArea
 * verticalBullet
 * verticalLine
+* verticalRangeArea
 
 ### seriesDefaults.tooltip `Object`
 
@@ -16577,6 +16760,9 @@ Format placeholders:
     *   {2} - low value
     *   {3} - close value
     *   {4} - category name
+* RangeArea, rangeBar, rangeColumn
+    *   {0} - from value
+    *   {1} - to value
 
 #### Example - set the chart series tooltip format
 
@@ -16806,6 +16992,25 @@ The verticalLine chart series options. Accepts all values supported by the [seri
     });
     </script>
 
+### seriesDefaults.verticalRangeArea `Object`
+
+The verticalRangeArea chart series options. Accepts all values supported by the [series](#configuration-series) option.
+
+#### Example - set the verticalArea chart default options
+    <div id="chart"></div>
+    <script>
+      $("#chart").kendoChart({
+        seriesDefaults: {
+          verticalRangeArea: {
+            color: "red",
+            opacity: 0.1
+          }
+        },
+        series: [
+          { type: "verticalRangeArea", data: [[1, 2], [2, 3]] }
+        ]
+      });
+    </script>
 
 ### seriesDefaults.visual `Function`
 
@@ -18243,6 +18448,9 @@ Format placeholders:
     *   {2} - low value
     *   {3} - close value
     *   {4} - category name
+* RangeArea, rangeBar, rangeColumn
+    *   {0} - from value
+    *   {1} - to value
 
 #### Example - set the chart series tooltip format
 

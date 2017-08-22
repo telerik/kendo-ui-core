@@ -1,0 +1,98 @@
+---
+title: Group columns which are bound to object
+description: An example on how to group columns when they are bound to objects
+type: how-to
+page_title: Group columns which are bound to object | Kendo UI Grid
+slug: group-columns-which-are-bound-to-object
+tags: grid, group, custom
+ticketid: 1116551
+res_type: kb
+---
+
+## Environment
+
+<table>
+ <tr>
+  <td>Product</td>
+  <td>Grid for Progress Kendo UI</td>
+ </tr>
+ <tr>
+  <td>Progress Kendo UI version</td>
+  <td>2017.2.621</td>
+ </tr>
+</table>
+
+## Description
+
+How can I group columns which are bound to objects?
+
+## Solution
+
+When the [`group`](http://docs.telerik.com/kendo-ui/api/javascript/ui/grid#events-group) event is fired, check if there is a group by the column which is bound to an object. If there is such group use the [`group`](http://docs.telerik.com/kendo-ui/api/javascript/data/datasource#methods-group) method of the dataSource to add a group by one of the properties of the object.
+
+```       
+    <div id="grid"></div>
+    <script>
+      $("#grid").kendoGrid({
+        columns: [
+          "id",
+          { field: "person", template:"#=person.name#, #=person.age#" }
+        ],
+        dataBound(e){
+
+          setTimeout(function(){
+            $('.k-group-indicator a.k-link').each(function(_,x){
+							x= $(x);	
+              if(x.text().includes(".")){
+                x.text(x.text().split(".")[0]);
+              }
+            })
+            
+             $('.k-grouping-row p').each(function(_,x){
+							x= $(x);	
+              if(x.text().includes(".")){
+                var splitted = x.text().split(":");
+                x.text(splitted[0].split(".")[0] +":"+ splitted[splitted.length-1]);
+              }
+            })
+          })
+
+        },
+        dataSource: {
+          data: [
+            { id: 1, person:{ name: "Jane Doe", age: 30 }},
+            { id: 2, person:{ name: "John Doe", age: 33 }},
+            { id: 3, person:{ name: "John Doe", age: 23 }}
+
+          ],
+          schema: {
+            model: { id: "id" }
+          }
+        },
+        groupable: true,
+        group: function(e) {
+          if (e.groups.length) {
+            var isNestedGrouped;
+
+            e.groups.map(function(x){
+              if(x.field == "person"){
+                isNestedGrouped = true;
+              }
+            })
+
+            if(isNestedGrouped){
+              e.preventDefault()
+              var newGroups = [];
+              this.dataSource.group().forEach(function(x){
+                if(x.field != "person"){
+                  newGroups.push(x)
+                }
+              })
+              newGroups.push({field:"person.name"})
+              this.dataSource.group(newGroups)
+            }
+          }
+        }
+      });
+    </script>
+ ```
