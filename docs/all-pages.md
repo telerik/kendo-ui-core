@@ -1,4 +1,4 @@
 ---
 publish: false
-layout: sitemap-gsa
+layout: all-pages-gsa
 ---
