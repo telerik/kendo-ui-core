@@ -3075,11 +3075,12 @@ function pad(number, digits, end) {
         Widget: Widget,
         DataBoundWidget: DataBoundWidget,
         roles: {},
-        progress: function(container, toggle) {
+        progress: function(container, toggle, opacity) {
             var mask = container.find(".k-loading-mask"),
                 support = kendo.support,
                 browser = support.browser,
-                isRtl, leftRight, webkitCorrection, containerScrollLeft;
+                isRtl, leftRight, webkitCorrection, containerScrollLeft,
+                cssClass = opacity ? 'k-loading-mask k-opaque' : 'k-loading-mask';
 
             if (toggle) {
                 if (!mask.length) {
@@ -3088,7 +3089,7 @@ function pad(number, digits, end) {
                     containerScrollLeft = container.scrollLeft();
                     webkitCorrection = browser.webkit ? (!isRtl ? 0 : container[0].scrollWidth - container.width() - 2 * containerScrollLeft) : 0;
 
-                    mask = $("<div class='k-loading-mask'><span class='k-loading-text'>" + kendo.ui.progress.messages.loading + "</span><div class='k-loading-image'/><div class='k-loading-color'/></div>")
+                    mask = $(kendo.format("<div class='{0}'><span class='k-loading-text'>{1}</span><div class='k-loading-image'/><div class='k-loading-color'/></div>", cssClass, kendo.ui.progress.messages.loading))
                         .width("100%").height("100%")
                         .css("top", container.scrollTop())
                         .css(leftRight, Math.abs(containerScrollLeft) + webkitCorrection)
