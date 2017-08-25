@@ -16,7 +16,7 @@
 @button-active-text-color: @button-text-color;
 @button-active-background: @base;
 @button-active-border-color: @hover-border-color;
-@button-active-shadow: false;
+@button-active-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.125);
 @button-focused-border-color: lighten(@accent, 13%);
 @button-focused-shadow: 0 0 7px 0 lighten(@accent, 13%);
 @button-focused-active-shadow: @focused-shadow;
@@ -34,12 +34,11 @@
 @primary-focused-color: @background;
 @primary-focused-border-color: lighten(@info, 2%);
 @primary-focused-gradient: none;
-@primary-focused-active-item-shadow: 0 0 8px 0 darken(@info, 6%);
+@primary-focused-item-shadow: 0 0 8px 0 darken(@info, 6%);
 @primary-active-text-color: @background;
 @primary-active-background-color: darken(@accent, 8%);
 @primary-active-gradient: none;
 @primary-active-border-color: darken(@accent, 17%);
-@primary-active-shadow: inset 0 0 8px 0 lighten(@accent, 13%);
 @primary-disabled-text-color: @background;
 @primary-disabled-background-color: lighten(@accent, 16%);
 @primary-disabled-border-color: lighten(@accent, 14%);
@@ -274,8 +273,7 @@
 .k-calendar th,
 .k-calendar .k-alt,
 .k-dropzone-hovered,
-.k-widget.k-popup
-{
+.k-popup {
     background-color: @group-background-color;
 }
 
@@ -646,9 +644,7 @@ html .km-pane-wrapper .k-header
 /* states */
 .k-state-active,
 .k-state-active:hover,
-.k-active-filter,
-.k-tabstrip .k-state-active
-{
+.k-active-filter {
     background-color: @active-background-color;
     border-color: @active-border-color;
     color: @active-text-color;
@@ -2136,11 +2132,11 @@ html .km-pane-wrapper .km-widget,
 }
 
 // Button
-.k-button:active:hover,
-.k-button.k-state-active:hover {
-    color: @button-active-text-color;
-    background-color: @button-active-background;
-    border-color: @button-active-border-color;
+.k-button:active {
+    .box-shadow(@button-active-shadow);
+}
+.k-button:focus:active:not(.k-state-disabled):not([disabled]) {
+    box-shadow: @button-focused-shadow, @button-active-shadow;
 }
 
 //Primary buttons
@@ -2161,7 +2157,16 @@ html .km-pane-wrapper .km-widget,
     color: @primary-focused-color;
     border-color: @primary-focused-border-color;
     .composite-background(@primary-focused-gradient);
-    .box-shadow(@primary-focused-active-item-shadow);
+    .box-shadow(@primary-focused-item-shadow);
+}
+
+.k-primary:focus:not(.k-state-disabled):not([disabled])
+{
+    .box-shadow(@primary-focused-item-shadow);
+}
+
+.k-primary:focus:active:not(.k-state-disabled):not([disabled]) {
+    box-shadow: @primary-focused-item-shadow, @button-active-shadow;
 }
 
 .k-primary:hover
@@ -2170,13 +2175,6 @@ html .km-pane-wrapper .km-widget,
     border-color: @primary-hover-border-color;
     .composite-background(@primary-hover-gradient);
     background-color: @primary-hover-background-color;
-    .box-shadow(@primary-hover-shadow);
-}
-
-.k-primary:focus:active:not(.k-state-disabled):not([disabled]),
-.k-primary:focus:not(.k-state-disabled):not([disabled])
-{
-    .box-shadow(@primary-focused-active-item-shadow);
 }
 
 .k-primary:active,
@@ -2186,7 +2184,6 @@ html .km-pane-wrapper .km-widget,
     border-color: @primary-active-border-color;
     .composite-background(@primary-active-gradient);
     background-color: @primary-active-background-color;
-    .box-shadow(@primary-active-shadow);
 }
 
 .k-primary.k-state-disabled,
@@ -2880,15 +2877,6 @@ td.k-state-focused.k-state-selected,
 {
     border-right-width: 1px;
     border-right-style: solid;
-}
-
-.k-primary:active
-{
-    color: @primary-active-text-color;
-    border-color: @primary-active-border-color;
-    .composite-background(@primary-active-gradient);
-    background-color: @primary-active-background-color;
-    .box-shadow(@primary-active-shadow);
 }
 
 .k-editor-toolbar .k-tool

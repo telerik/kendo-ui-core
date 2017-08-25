@@ -9,7 +9,7 @@ position: 5
 
 # JavaScript Prerequisites
 
-Kendo UI is a jQuery-based library that also supports AngularJS integration.  
+Progress<sup>®</sup> Kendo UI<sup>®</sup> is a jQuery-based library that also supports AngularJS integration.  
 
 ## jQuery
 
@@ -94,7 +94,7 @@ The server-side wrappers for the Kendo UI widgets are self-initialized. This mea
 
 Other articles on getting started with Kendo UI:
 
-* [Get Started with Kendo UI]({% slug getting_started_installation_kendoui %})
+* [Get Started with Progress<sup>®</sup> Kendo UI<sup>®</sup>]({% slug getting_started_installation_kendoui %})
 * [Kendo UI CDN Services]({% slug kendoui_cdn_services_installation %})
 * [Include Only What You Need]({% slug include_only_what_you_need_kendoui_installation %})
 * [Initialize Widgets Using jQuery Plug-Ins]({% slug initialize_widgets_using_jquery_plugins_installation %})

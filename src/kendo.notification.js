@@ -38,7 +38,7 @@ var __meta__ = { // jshint ignore:line
         RIGHT = "right",
         UP = "up",
         NS = ".kendoNotification",
-        WRAPPER = '<div class="k-widget k-notification"></div>',
+        WRAPPER = '<div class="k-widget k-popup k-notification"></div>',
         TEMPLATE = '<div class="k-notification-wrap">' +
                 '<span class="k-icon k-i-#=typeIcon#" title="#=typeIcon#"></span>' +
                 '#=content#' +
@@ -230,6 +230,8 @@ var __meta__ = { // jshint ignore:line
 
             that._attachPopupEvents(options, popup);
 
+            wrapper.removeClass("k-group k-reset");
+
             if (openPopup[0]) {
                 popup.open();
             } else {
@@ -312,6 +314,7 @@ var __meta__ = { // jshint ignore:line
                 insertionMethod = options.stacking == UP || options.stacking == LEFT ? "prependTo" : "appendTo";
 
             wrapper
+                .removeClass("k-popup")
                 .addClass(that._guid)
                 [insertionMethod](options.appendTo)
                 .hide()

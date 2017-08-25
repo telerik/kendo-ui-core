@@ -1,5 +1,5 @@
 ---
-title: Getting Started with Kendo UI
+title: Getting Started with Progress<sup>®</sup> Kendo UI<sup>®</sup>
 page_title: Getting Started with Kendo UI | Kendo UI Getting Started
 description: "Host Kendo UI in your project, download the Bower packages, or install it by using the CDN services."
 previous_url: /install/onsite, /getting-started, /intro/getting-started, /using-kendo-with, /getting-started/using-kendo-with, /bootstrapper
@@ -7,16 +7,16 @@ slug: getting_started_installation_kendoui
 position: 1
 ---
 
-# Getting Started with Kendo UI
+# Getting Started with Progress<sup>®</sup> Kendo UI<sup>®</sup>
 
 Depending on your preferences and the requirements of your project, you can:
 
 * Download [Kendo UI for a Trial Period](http://www.telerik.com/download/kendo-ui).
-* Get your [Commercial License for Telerik Kendo UI® Professional](http://www.telerik.com/purchase/kendo-ui).
-* Get your [Commercial License for Telerik UI for ASP.NET MVC](http://www.telerik.com/purchase/aspnet-mvc).
-* Get your [Commercial License for Telerik UI for JSP](http://www.telerik.com/purchase/jsp-ui).
-* Get your [Commercial License for Telerik UI for PHP](http://www.telerik.com/purchase/php-ui).
-* Use the [GitHub Open-Source License for Telerik Kendo UI® Core](https://github.com/telerik/kendo-ui-core).
+* Get your [Commercial License for Kendo UI Professional](http://www.telerik.com/purchase/kendo-ui).
+* Get your [Commercial License for Progress<sup>®</sup> Telerik<sup>®</sup> UI for ASP.NET MVC](http://www.telerik.com/purchase/aspnet-mvc).
+* Get your [Commercial License for Progress<sup>®</sup> Telerik<sup>®</sup> UI for ASP.NET JSP](http://www.telerik.com/purchase/jsp-ui).
+* Get your [Commercial License for Progress<sup>®</sup> Telerik<sup>®</sup> UI for ASP.NET PHP](http://www.telerik.com/purchase/php-ui).
+* Use the [GitHub Open-Source License for Kendo UI Core](https://github.com/telerik/kendo-ui-core).
 
 ## Hosting Kendo UI in Your Project
 

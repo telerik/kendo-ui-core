@@ -12,13 +12,13 @@ position: 4
 
 ## Overview
 
-Telerik maintains a number of NuGet packages related to Kendo UI. All official releases, service packs, and internal builds are available for registered users only.
+NuGet package manager offers a number of Progress<sup>®</sup> Kendo UI<sup>®</sup> packages. All official releases, service packs, and internal builds are available for registered users only.
 
 ## Telerik Private NuGet Feed
 
 ### Installation
 
-To install Telerik NuGet packages, refer to the article on [getting started with the Telerik UI for ASP.NET MVC](http://docs.telerik.com/aspnet-mvc/getting-started/nuget-install).
+To install Kendo UI NuGet packages, refer to the article on [getting started with the Progress<sup>®</sup> Telerik<sup>®</sup> UI for ASP.NET MVC](http://docs.telerik.com/aspnet-mvc/getting-started/nuget-install).
 
 ### Local Content Distribution
 
@@ -35,13 +35,13 @@ The NuGet Feed provides the following packages related to the UI for ASP.NET MVC
 
     > **Important**
     >
-    > The packages for [Telerik UI for ASP.NET MVC](http://docs.telerik.com/aspnet-mvc/getting-started/nuget-install) are listed in a separate section.
+    > The packages for [Telerik<sup>®</sup> UI for ASP.NET MVC](http://docs.telerik.com/aspnet-mvc/getting-started/nuget-install) are listed in a separate section.
 
 ## See Also
 
 Other articles on getting started with Kendo UI:
 
-* [Get Started with Kendo UI]({% slug getting_started_installation_kendoui %})
+* [Get Started with Progress<sup>®</sup> Kendo UI<sup>®</sup>]({% slug getting_started_installation_kendoui %})
 * [Kendo UI CDN Services]({% slug kendoui_cdn_services_installation %})
 * [Include Only What You Need]({% slug include_only_what_you_need_kendoui_installation %})
 * [JavaScript Prerequisites]({% slug javascript_prerequisites_kendoui_installation %})

@@ -151,6 +151,9 @@
 <glyph unicode="&#xe144;" glyph-name="connector" data-tags="connector" d="M832 736c0-53.020-42.98-96-96-96-41.796 0-77.334 26.718-90.516 64h-133.484v-576h-197.484c-13.182-37.282-48.72-64-90.516-64-53.020 0-96 42.98-96 96s42.98 96 96 96c41.796 0 77.334-26.718 90.516-64h133.484v576h197.484c13.182 37.282 48.72 64 90.516 64 53.020 0 96-42.98 96-96z" />
 <glyph unicode="&#xe145;" glyph-name="plus-sm" data-tags="plus, sm" d="M704 512v-128h-128v-128h-128v128h-128v128h128v128h128v-128h128z" />
 <glyph unicode="&#xe146;" glyph-name="minus-sm" data-tags="minus, sm" d="M704 512v-128h-384v128h384z" />
+<glyph unicode="&#xe147;" glyph-name="kpi-status-deny" data-tags="kpi, status, deny" d="M960 448l-448-448-448 448 448 448 448-448z" />
+<glyph unicode="&#xe148;" glyph-name="kpi-status-hold" data-tags="kpi, status, hold" d="M512 832l-448-768h896" />
+<glyph unicode="&#xe149;" glyph-name="kpi-status-open" data-tags="kpi, status, open" d="M960 448c0-247.4-200.6-448-448-448s-448 200.6-448 448c0 247.4 200.6 448 448 448s448-200.6 448-448z" />
 <glyph unicode="&#xe200;" glyph-name="play" data-tags="play" d="M0-64v1024l1024-512-1024-512z" />
 <glyph unicode="&#xe201;" glyph-name="pause" data-tags="pause" d="M640 960h320v-1024h-320v1024zM64-64h320v1024h-320v-1024z" />
 <glyph unicode="&#xe202;" glyph-name="stop" data-tags="stop" d="M1024-64h-1024v1024h1024v-1024z" />
@@ -714,6 +717,12 @@
 <glyph unicode="layout-1-by-4" glyph-name="layout-1-by-4" data-tags="layout, 1, by, 4" d="M64 960h384v-960h-384v960zM512 960v-192h384v192h-384zM512 512h384v192h-384v-192zM512 256h384v192h-384v-192zM512 0h384v192h-384v-192z" />
 <glyph unicode="layout" glyph-name="layout" data-tags="layout" d="M384 128h512v-128h-512v128zM384 192h512v128h-512v-128zM64 0h256v704h-256v-704zM384 576h512v128h-512v-128zM384 384h512v128h-512v-128zM64 960v-192h832v192h-832z" />
 <glyph unicode="launch" glyph-name="launch" data-tags="launch" d="M192 768v-640h192v64h-128v512h512v-128h64v192h-640zM832 448v-320h-320l114.8 114.8-242.8 242.6 90.6 90.6 242.8-242.8 1 1 113.6 113.8z" />
+<glyph unicode="kpi-trend-increase" glyph-name="arrow-60-up" data-tags="arrow, 60, up" d="M512 640l256-384h-512l256 384z" />
+<glyph unicode="kpi-trend-equal" glyph-name="minus" data-tags="minus" d="M192 512v-128h640v128h-640z" />
+<glyph unicode="kpi-trend-decrease" glyph-name="arrow-60-right" data-tags="arrow, 60, right" d="M704 448l-384-256v512l384-256z" />
+<glyph unicode="kpi-status-open" glyph-name="kpi-status-open" data-tags="kpi, status, open" d="M960 448c0-247.4-200.6-448-448-448s-448 200.6-448 448c0 247.4 200.6 448 448 448s448-200.6 448-448z" />
+<glyph unicode="kpi-status-hold" glyph-name="kpi-status-hold" data-tags="kpi, status, hold" d="M512 832l-448-768h896" />
+<glyph unicode="kpi-status-deny" glyph-name="kpi-status-deny" data-tags="kpi, status, deny" d="M960 448l-448-448-448 448 448 448 448-448z" />
 <glyph unicode="kpi" glyph-name="arrows-kpi" data-tags="arrows, kpi" d="M256 384h512l-256-384-256 384zM512 896l-256-384h512.002l-256.002 384z" />
 <glyph unicode="js" glyph-name="js" data-tags="js" d="M956.8 768c-14.8 73-79.4 128-156.8 128h-384c-77.4 0-142-55-156.8-128-2.2-10.4-3.2-21-3.2-32v-544h-192v-32c0-11 1-21.6 3.2-32 14.8-73 79.4-128 156.8-128h384c77.4 0 142 55 156.8 128 2.2 10.4 3.2 21 3.2 32v544h192v32c0 11-1 21.6-3.2 32zM707.2 768c-2.2-10.4-3.2-21-3.2-32v-576c0-11.2-2-22-5.6-32-13.2-37.2-48.8-64-90.4-64-41.8 0-77.4 26.8-90.4 64-3.6 10-5.6 20.8-5.6 32v32h-192v544c0 11.2 2 22 5.6 32 13.2 37.2 48.8 64 90.4 64h320c-14-18.6-24-40.4-28.8-64zM640 576h-256v64h256v-64zM640 448h-256v64h256v-64zM640 320h-256v64h256v-64z" />
 <glyph unicode="italic" glyph-name="italic" data-tags="italic" d="M754.4 704l13.6 64h-370.4l-13.6-64h118.4l-108.8-512h-124l-13.6-64h370.4l13.6 64h-118.4l108.8 512h124z" />
@@ -960,6 +969,7 @@
 <glyph unicode="arrows-no-change" glyph-name="arrows-no-change" data-tags="arrows, no, change" d="M512 640l-256-384-256 384h512zM704 640l-256-384h512.002l-256.002 384z" />
 <glyph unicode="arrows-kpi" glyph-name="arrows-kpi" data-tags="arrows, kpi" d="M256 384h512l-256-384-256 384zM512 896l-256-384h512.002l-256.002 384z" />
 <glyph unicode="arrows-dimensions" glyph-name="arrows-dimensions" data-tags="arrows, dimensions" d="M704 0v128h-448v-128h-64v128h-128v64h128v448h-128l160 256 160-256h-128v-448h448v128l256-160-256-160z" />
+<glyph unicode="arrow-w" glyph-name="arrow-60-left" data-tags="arrow, 60, left" d="M320 448l384 256v-512l-384 256z" />
 <glyph unicode="arrow-up" glyph-name="arrow-up" data-tags="arrow, up" d="M768 384h-192v-256h-128l-0.002 256h-191.998l255.998 384 256.002-384z" />
 <glyph unicode="arrow-seek-up" glyph-name="arrow-double-60-up" data-tags="arrow, double, 60, up" d="M256 64l256 384 256-384h-512zM512 832l-256-384h512l-256 384z" />
 <glyph unicode="arrow-seek-right" glyph-name="arrow-double-60-right" data-tags="arrow, double, 60, right" d="M128 704l384-256-384-256v512zM896 448l-384 256v-512l384 256z" />
@@ -976,7 +986,6 @@
 <glyph unicode="arrow-end-left" glyph-name="arrow-end-left" data-tags="arrow, end, left" d="M704 192l-384 256 384 256v-512zM256 704v-512h64v512h-64z" />
 <glyph unicode="arrow-end-down" glyph-name="arrow-end-down" data-tags="arrow, end, down" d="M768 704l-256-384-256 384h512zM256 256h512v64h-512v-64z" />
 <glyph unicode="arrow-e" glyph-name="arrow-60-right" data-tags="arrow, 60, right" d="M704 448l-384-256v512l384-256z" />
-<glyph unicode="arrow-e" glyph-name="arrow-60-left" data-tags="arrow, 60, left" d="M320 448l384 256v-512l-384 256z" />
 <glyph unicode="arrow-drill" glyph-name="arrow-drill" data-tags="arrow, drill" d="M576 576v-128h128l-160-256-160 256h128v128h-256v64h576v-64h-256z" />
 <glyph unicode="arrow-down" glyph-name="arrow-down" data-tags="arrow, down" d="M256 512h192v256h128l0.002-256h191.998l-255.998-384-256.002 384z" />
 <glyph unicode="arrow-double-60-up" glyph-name="arrow-double-60-up" data-tags="arrow, double, 60, up" d="M256 64l256 384 256-384h-512zM512 832l-256-384h512l-256 384z" />

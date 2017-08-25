@@ -9,7 +9,7 @@ position: 2
 
 # CDN Services
 
-The Kendo UI CDN is hosted on the [Amazon CloudFront](https://aws.amazon.com/cloudfront/).
+The Progress<sup>®</sup> Kendo UI<sup>®</sup> CDN is hosted on the [Amazon CloudFront](https://aws.amazon.com/cloudfront/).
 
 ## Accessing the CDN
 
@@ -31,7 +31,7 @@ For example, the `{{ site.cdnVersion }}` version can be loaded from:
 >
 > Only the Kendo UI official releases and service packs are uploaded to the CDN. Internal builds are not published to the CDN.
 
-As of the Kendo UI Q1 2014 SP1 release, the minified Kendo UI Core scripts have been available. To load them, use the `http://kendo.cdn.telerik.com/{{ site.cdnVersion }}/js/kendo.ui.core.min.js` URL.
+As of the Kendo UI Q1 2014 SP1 release, the minified Kendo UI scripts have been available. To load them, use the `http://kendo.cdn.telerik.com/{{ site.cdnVersion }}/js/kendo.ui.core.min.js` URL.
 
 > **Important**
 >
@@ -113,7 +113,7 @@ For internal builds, use private CDN services. It is recommended to implement a 
 
 Other articles on getting started with Kendo UI:
 
-* [Get Started with Kendo UI]({% slug getting_started_installation_kendoui %})
+* [Get Started with Progress<sup>®</sup> Kendo UI<sup>®</sup>]({% slug getting_started_installation_kendoui %})
 * [Include Only What You Need]({% slug include_only_what_you_need_kendoui_installation %})
 * [JavaScript Prerequisites]({% slug javascript_prerequisites_kendoui_installation %})
 * [Initialize Widgets Using jQuery Plug-Ins]({% slug initialize_widgets_using_jquery_plugins_installation %})

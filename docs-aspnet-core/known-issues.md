@@ -62,6 +62,7 @@ Server-side rendering is not supported. The Toolbar template, Column Header temp
 | `ChartPolarLineStyle`     | `ChartSeriesLineStyle`  |
 | `ChartRadarAreaStyle`     | `ChartSeriesLineStyle`  |
 | `ChartRadarLineStyle`     | `ChartSeriesLineStyle`  |
+| `ChartRangeAreaLabelsPosition`     | `ChartSeriesLabelsPosition`  |
 | `ChartScatterLineMissingValues` | `ChartSeriesMissingValues`|
 | `ChartScatterLineStyle`   | `ChartSeriesStyle`      |
 
