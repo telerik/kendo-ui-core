@@ -534,4 +534,33 @@
         equal(div.find("select").data("kendoDropDownList").value(), "foo");
         equal(div.find("select").data("kendoDropDownList").text(), "bar");
     });
+
+    module("kendo.ui.Editable", {
+        setup: function() {
+            div = $("<div />").appendTo(QUnit.fixture);
+        },
+        teardown: function() {
+            kendo.destroy(QUnit.fixture);
+        }
+    });
+
+    test("editor field is not focused when skipFocus is true", function() {
+         var editable = div.kendoEditable({
+            fields: "foo",
+            model: defaultModel,
+            skipFocus: true
+        });
+
+        equal(kendo._activeElement(), document.body);
+    });
+
+    test("editor field is focused when skipFocus is false", function() {
+        var editable = div.kendoEditable({
+            fields: "foo",
+            model: defaultModel,
+            skipFocus: false
+        });
+
+        equal(kendo._activeElement(), div.find("input")[0]);
+    });
 })();

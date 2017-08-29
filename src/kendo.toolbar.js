@@ -527,6 +527,10 @@ var __meta__ = { // jshint ignore:line
                         findFocusableSibling(li, "prev").focus();
                     } else if (e.keyCode === keys.SPACEBAR || e.keyCode === keys.ENTER) {
                         that.toolbar.userEvents.trigger("tap", { target: $(e.target) });
+                    } else if (e.keyCode === keys.HOME) {
+                        li.parent().find(":kendoFocusable").first().focus();
+                    } else if (e.keyCode === keys.END) {
+                        li.parent().find(":kendoFocusable").last().focus();
                     }
                 });
             },
@@ -1245,6 +1249,11 @@ var __meta__ = { // jshint ignore:line
                         findFocusableSibling(element, "prev").focus();
                     } else if (e.keyCode === keys.SPACEBAR || e.keyCode === keys.ENTER) {
                         that.userEvents.trigger("tap", { target: $(e.target) });
+                        that.overflowAnchor.focus();
+                    } else if (e.keyCode === keys.HOME) {
+                        li.parent().find(":kendoFocusable").first().focus();
+                    } else if (e.keyCode === keys.END) {
+                        li.parent().find(":kendoFocusable").last().focus();
                     }
                 });
 
@@ -1366,7 +1375,8 @@ var __meta__ = { // jshint ignore:line
             _keydown: function(e) {
                 var target = $(e.target),
                     keyCode = e.keyCode,
-                    items = this.element.children(":not(.k-separator):visible");
+                    items = this.element.children(":not(.k-separator):visible"),
+                    direction = this._isRtl ? -1 : 1;
 
                 if (keyCode === keys.TAB) {
                     var element = target.parentsUntil(this.element).last(),
@@ -1447,6 +1457,10 @@ var __meta__ = { // jshint ignore:line
                 }
 
                 if (keyCode === keys.HOME) {
+                    if (target.is(".k-dropdown")) {
+                        return;
+                    }
+
                     if (this.overflowAnchor) {
                         items.eq(1).focus();
                     } else {
@@ -1454,17 +1468,20 @@ var __meta__ = { // jshint ignore:line
                     }
                     e.preventDefault();
                 } else if (keyCode === keys.END) {
+                    if (target.is(".k-dropdown")) {
+                        return;
+                    }
                     if (this.overflowAnchor && $(this.overflowAnchor).css("visibility") != "hidden") {
                         this.overflowAnchor.focus();
                     } else {
                         items.last().focus();
                     }
                     e.preventDefault();
-                } else if (keyCode === keys.RIGHT && !this._preventNextFocus && this._getNextElement(e.target, 1)) {
-                    this._getNextElement(e.target, 1).focus();
+                } else if (keyCode === keys.RIGHT && !this._preventNextFocus && this._getNextElement(e.target, 1 * direction)) {
+                    this._getNextElement(e.target, 1 * direction).focus();
                     e.preventDefault();
-                } else if (keyCode === keys.LEFT && !this._preventNextFocus && this._getNextElement(e.target, -1)) {
-                    this._getNextElement(e.target, -1).focus();
+                } else if (keyCode === keys.LEFT && !this._preventNextFocus && this._getNextElement(e.target, -1 * direction)) {
+                    this._getNextElement(e.target, -1 * direction).focus();
                     e.preventDefault();
                 }
             },

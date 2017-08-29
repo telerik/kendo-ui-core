@@ -1,6 +1,5 @@
 (function(){
 
-
 var data = [];
 var DataSource = kendo.data.DataSource;
 var timeout;
@@ -10,7 +9,7 @@ module("data source ranges", {
         timeout = window.setTimeout;
         window.setTimeout = function(callback) {
             callback();
-        }
+        };
     },
     teardown: function() {
         window.setTimeout = timeout;
@@ -29,10 +28,10 @@ function setup(source) {
     return dataSource;
 }
 
-function remoteDataSource(callback) {
+function remoteDataSource(callback, options) {
     callback = callback || $.noop;
-    var total = 10000,
-        dataSource = new kendo.data.DataSource({
+    var total = (options || {}).total || 10000,
+        dataSource = new kendo.data.DataSource($.extend(true, {}, {
             serverPaging: true,
             transport: {
                 read: function(options) {
@@ -54,10 +53,23 @@ function remoteDataSource(callback) {
                 }
             },
             pageSize: 16
-        });
+        }, options || {}));
 
     dataSource._total = total;
     return dataSource;
+}
+
+function equalRanges(actualRanges, expectedRanges) {
+    equal(actualRanges.length, expectedRanges.length);
+
+    for (var i = 0; i < actualRanges.length; i++) {
+        equalRange(actualRanges[i], expectedRanges[i]);
+    }
+}
+
+function equalRange(actualRange, expectedRange) {
+    equal(actualRange.start, expectedRange.start);
+    equal(actualRange.end, expectedRange.end);
 }
 
 test("prefetch projects request parameters", 2, function() {
@@ -169,8 +181,7 @@ test("prefetch raises requestStart", 1, function() {
 });
 
 test("prefetch cancelling requestStart does not block subsequent requests", 1, function() {
-    var dataSource = remoteDataSource(),
-        counter = 0;
+    var dataSource = remoteDataSource();
 
     dataSource.one("requestStart", function(e) {
         e.preventDefault();
@@ -354,8 +365,7 @@ test("range fetches range accross multiple overlapping not prefeched ranges tran
 });
 
 test("inRange returns false if not the entire range is available", function() {
-     var called = 0,
-        dataSource = remoteDataSource();
+    var dataSource = remoteDataSource();
 
     dataSource.prefetch(0, 5);
     dataSource.prefetch(10, 5);
@@ -696,7 +706,7 @@ test("range existing range is requested while remote is fetched - remote request
                     var skip = options.data.skip;
                     var take = options.data.take;
 
-                    if (skip != 0) {
+                    if (skip !== 0) {
                         dataSource.range(0, 10);
                     }
 
@@ -990,7 +1000,7 @@ test("range with server grouping second page with two groups", function() {
     equal(view.length, 2);
 });
 
-test("range with server grouping ranges are not modfied", function() {
+test("range with server grouping ranges are not modified", function() {
     var totalCount = 47,
         dataSource = new DataSource({
             pageSize: 20,
@@ -999,18 +1009,17 @@ test("range with server grouping ranges are not modfied", function() {
             serverGrouping: true,
             transport: {
                 read: function(options) {
-                    var skip = options.data.skip;
-                    var take = options.data.take;
                     var data = [];
+                    var i;
 
                     var group = { items: [], field: "foo", value: 1 };
-                    for (var i = 0; i < 10; i++) {
+                    for (i = 0; i < 10; i++) {
                         group.items.push({ foo: i });
                     }
                     data.push(group);
 
                     group = { items: [], field: "foo", value: 2 };
-                    for (var i = 0; i < 10; i++) {
+                    for (i = 0; i < 10; i++) {
                         group.items.push({ foo: i });
                     }
                     data.push(group);
@@ -1035,7 +1044,6 @@ function groupedData(options) {
 
     for (var i = options.skip, len = options.skip + options.take; i < len; i++) {
         var key = Math.floor(i / 30) * 30;
-        var group;
 
         if (!groupsDict[key]) {
             groupsDict[key] = {
@@ -1043,7 +1051,7 @@ function groupedData(options) {
                 items: [],
                 hasSubgroups: false,
                 value: key + " - " + (key + 30)
-            }
+            };
 
             groups.push(groupsDict[key]);
         }
@@ -1354,7 +1362,7 @@ test("range returns requested size when one group is in multiple ranges", functi
     });
 
     dataSource.read();
-    dataSource.range(1, 2)
+    dataSource.range(1, 2);
     var data = dataSource.view();
 
     equal(data.length, 1);
@@ -1526,6 +1534,116 @@ test("ranges are updated when model is removed after range is called - with loca
     equal(dataSource.data().length, 46);
 });
 
+test("ranges are updated when model is removed from the first range after range is called with remote binding", function() {
+    var dataSource = remoteDataSource($.noop, { pageSize: 10 });
+    dataSource.read();
+
+    dataSource.range(20, 10);
+    dataSource.range(40, 10);
+    dataSource.range(60, 10);
+
+    dataSource.range(0, 10);
+
+    dataSource.remove(dataSource.at(0));
+
+    equalRanges(dataSource._ranges, [
+        { start: 0, end: 9 },
+        { start: 19, end: 29 },
+        { start: 39, end: 49 },
+        { start: 59, end: 69 }
+    ]);
+    equal(dataSource._ranges[0].data.length, 9);
+    equal(dataSource._ranges[1].data.length, 10);
+    equal(dataSource._ranges[2].data.length, 10);
+    equal(dataSource._ranges[3].data.length, 10);
+});
+
+test("ranges are updated when model is removed from a middle range after range is called with remote binding", function() {
+    var dataSource = remoteDataSource($.noop, { pageSize: 10 });
+    dataSource.read();
+
+    dataSource.range(20, 10);
+    dataSource.range(40, 10);
+    dataSource.range(60, 10);
+
+    dataSource.range(20, 10);
+
+    dataSource.remove(dataSource.at(0));
+
+    equalRanges(dataSource._ranges, [
+        { start: 0, end: 10 },
+        { start: 20, end: 29 },
+        { start: 39, end: 49 },
+        { start: 59, end: 69 }
+    ]);
+    equal(dataSource._ranges[0].data.length, 10);
+    equal(dataSource._ranges[1].data.length, 9);
+    equal(dataSource._ranges[2].data.length, 10);
+    equal(dataSource._ranges[3].data.length, 10);
+});
+
+test("ranges are updated when model is removed from the last range after range is called with remote binding", function() {
+    var dataSource = remoteDataSource($.noop, { pageSize: 10 });
+    dataSource.read();
+
+    dataSource.range(20, 10);
+    dataSource.range(40, 10);
+    dataSource.range(60, 10);
+
+    dataSource.remove(dataSource.at(0));
+
+    equalRanges(dataSource._ranges, [
+        { start: 0, end: 10 },
+        { start: 20, end: 30},
+        { start: 40, end: 50 },
+        { start: 60, end: 69 }
+    ]);
+    equal(dataSource._ranges[0].data.length, 10);
+    equal(dataSource._ranges[1].data.length, 10);
+    equal(dataSource._ranges[2].data.length, 10);
+    equal(dataSource._ranges[3].data.length, 9);
+});
+
+test("model is removed after canceling changes on added model on last page", function() {
+    var total = 100;
+    var dataSource = new DataSource({
+        pageSize: 20,
+        data: generator(total)
+    });
+    dataSource.options.useRanges = true;
+    dataSource.read();
+    dataSource.page(dataSource.totalPages());
+
+    var addedModel = dataSource.add(total, {});
+    dataSource.cancelChanges(addedModel);
+
+    var removedModel = dataSource.at(total - 1);
+    dataSource.remove(removedModel);
+
+    equal(dataSource.getByUid(removedModel.uid), undefined);
+});
+
+test("currentRangeStart is updated when model is removed after canceling changes on added model on last page", function() {
+    var total = 100;
+    var pageSize = 20;
+    var dataSource = new DataSource({
+        pageSize: pageSize,
+        data: generator(total)
+    });
+    dataSource.options.useRanges = true;
+    dataSource.read();
+    dataSource.page(dataSource.totalPages());
+
+    var addedModel = dataSource.add(total, {});
+    dataSource.cancelChanges(addedModel);
+
+    var removedModel = dataSource.at(total - 1);
+    dataSource.remove(removedModel);
+
+    equal(dataSource.currentRangeStart(), total - pageSize);
+    equal(dataSource.currentRangeStart(), dataSource.skip());
+});
+
 test("grand total aggregates are calculated with local data", function() {
     var dataSource = new DataSource( {
         pageSize: 10,
@@ -1579,6 +1697,144 @@ test("range is reverted when calling cancel changes", function() {
     model = dataSource.get(10);
 
     equal(model.get("ShipAddress"), "Ship Address 10");
+});
+
+test("cancelChanges() resets ranges to the first page with remote binding", function() {
+    var dataSource = remoteDataSource();
+    dataSource.read();
+
+    dataSource.range(10, 20);
+    dataSource.range(20, 30);
+    dataSource.cancelChanges();
+
+    equalRanges(dataSource._ranges, [{ start: 0, end: 16 }]);
+    equal(dataSource._ranges[0].data.length, 16);
+});
+
+test("cancelChanges() after adding a new item updates ranges with local binding", function() {
+    var total = 100;
+    var dataSource = new DataSource({
+        pageSize: 10,
+        data: generator(total)
+    });
+    dataSource.read();
+
+    var item = dataSource.insert(0, dataSource.get(0));
+    dataSource.cancelChanges(item);
+
+    equalRanges(dataSource._ranges, [{ start: 0, end: total }]);
+    equal(dataSource._ranges[0].data.length, total);
+    equal(dataSource.data().length, total);
+});
+
+test("cancelChanges() after adding a new item with schema.model updates ranges with local binding", function() {
+    var total = 100;
+    var dataSource = new DataSource({
+        pageSize: 10,
+        data: generator(total),
+        schema: {
+            model: {
+                foo: { type: "number" }
+            }
+        }
+    });
+    dataSource.read();
+
+    var item = dataSource.insert(0, dataSource.get(0));
+    dataSource.cancelChanges(item);
+
+    equalRanges(dataSource._ranges, [{ start: 0, end: total }]);
+    equal(dataSource._ranges[0].data.length, total);
+});
+
+test("cancelChanges() after adding a new item with schema.model partially updates ranges with local binding", function() {
+    var total = 100;
+    var dataSource = new DataSource({
+        pageSize: 10,
+        data: generator(total),
+        schema: {
+            model: {
+                foo: { type: "number" }
+            }
+        }
+    });
+    dataSource.read();
+
+    var item = dataSource.insert(30, dataSource.get(0));
+    dataSource.cancelChanges(item);
+
+    equalRanges(dataSource._ranges, [{ start: 0, end: total }]);
+    equal(dataSource._ranges[0].data.length, total);
+    equal(dataSource.data().length, total);
+});
+
+test("cancelChanges() after adding a new item updates ranges with remote binding", function() {
+    var dataSource = remoteDataSource($.noop, { pageSize: 10 });
+    dataSource.read();
+    dataSource.range(20, 10);
+    dataSource.range(30, 10);
+
+    var item = dataSource.insert(0, dataSource.get(30));
+    dataSource.cancelChanges(item);
+
+    equalRanges(dataSource._ranges, [{ start: 0, end: 10 }]);
+    equal(dataSource._ranges[0].data.length, 10);
+});
+
+test("cancelChanges() after adding a new item with schema.model updates ranges with remote binding", function() {
+    var dataSource = remoteDataSource($.noop, {
+        pageSize: 10,
+        schema: {
+            model: {
+                id: "OrderID",
+                OrderID: { type: "number" }
+            }
+        }
+    });
+    dataSource.read();
+    dataSource.range(10, 10);
+    dataSource.range(30, 10);
+
+    var item = dataSource.insert(0, dataSource.get(0));
+    dataSource.cancelChanges(item);
+
+    equalRanges(dataSource._ranges, [
+        { start: 0, end: 10 },
+        { start: 10, end: 20 },
+        { start: 30, end: 40 }
+    ]);
+    equal(dataSource._ranges[0].data.length, 10);
+    equal(dataSource._ranges[1].data.length, 10);
+    equal(dataSource._ranges[2].data.length, 10);
+});
+
+test("cancelChanges() after adding a new item with schema.model partially updates ranges with remote binding", function() {
+    var dataSource = remoteDataSource($.noop, {
+        pageSize: 10,
+        schema: {
+            model: {
+                id: "OrderID",
+                OrderID: { type: "number" }
+            }
+        }
+    });
+    dataSource.read();
+    dataSource.range(10, 10);
+    dataSource.range(30, 10);
+    dataSource.range(50, 10);
+
+    var item = dataSource.insert(30, dataSource.get(50));
+    dataSource.cancelChanges(item);
+
+    equalRanges(dataSource._ranges, [
+        { start: 0, end: 10 },
+        { start: 10, end: 20 },
+        { start: 30, end: 40 },
+        { start: 50, end: 60 }
+    ]);
+    equal(dataSource._ranges[0].data.length, 10);
+    equal(dataSource._ranges[1].data.length, 10);
+    equal(dataSource._ranges[2].data.length, 10);
 });
 
 test("models within the range have correct parent - local paging", function() {
@@ -1651,25 +1907,246 @@ test("models within the range have correct parent - server paging", function() {
     deepEqual(dataSource.view()[0].parent(), dataSource.data());
 });
 
-/*test("ranges are updated when model is added after range is called - with local binding", function() {
+test("the first range is updated when model is added at index 0 with local binding", function() {
+    var total = 47;
+    var dataSource = new DataSource({
+        pageSize: 20,
+        data: generator(total)
+    });
+    dataSource.read();
+
+    dataSource.insert(0, { value: 1 });
+
+    equalRanges(dataSource._ranges, [{ start: 0, end: 48 }]);
+    equal(dataSource._ranges[0].data[0].value, 1);
+    equal(dataSource._ranges[0].data.length, 48);
+    equal(dataSource.data().length, 48);
+});
+
+test("the first range is updated when model is added at index 0 after range is called with local binding", function() {
+    var total = 47;
+    var dataSource = new DataSource({
+        pageSize: 20,
+        data: generator(total)
+    });
+    dataSource.read();
+    dataSource.range(0, 10);
+    dataSource.range(10, 20);
+    dataSource.range(20, 30);
+
+    dataSource.insert(0, { value: 1 });
+
+    equalRanges(dataSource._ranges, [{ start: 0, end: 48 }]);
+    equal(dataSource._ranges[0].data[0].value, 1);
+    equal(dataSource._ranges[0].data.length, 48);
+    equal(dataSource.data().length, 48);
+});
+
+test("ranges are updated when model is added at the end with local binding", function() {
+    var total = 47;
+    var pageSize = 10;
+    var dataSource = new DataSource({
+        pageSize: pageSize,
+        data: generator(total)
+    });
+    dataSource.read();
+    dataSource.range(0, pageSize);
+    dataSource.range(total - pageSize, pageSize);
+
+    dataSource.insert(dataSource.total(), { value: 1 });
+
+    equalRanges(dataSource._ranges, [{ start: 0, end: 48 }]);
+    equal(dataSource._ranges[0].data[47].value, 1);
+    equal(dataSource._ranges[0].data.length, 48);
+    equal(dataSource.data().length, 48);
+});
+
+test("ranges are updated when model is added at index 0 with remote binding", function() {
     var totalCount = 47,
         dataSource = new DataSource({
             pageSize: 20,
-            data: generator(totalCount)
-       });
+            serverPaging: true,
+            transport: {
+                read: function(options) {
+                    var take = options.data.take,
+                    skip = options.data.skip;
 
+                    var data = [];
+
+                    for (var i = skip; i < Math.min(skip + take, totalCount) ; i++) {
+                        data.push({ OrderID: i, ContactName: "Contact " + i, ShipAddress: "Ship Address " + i });
+                    }
+                    options.success({ data: data, total: totalCount });
+                }
+            },
+            schema: {
+                data: "data",
+                total: "total"
+            }
+        });
     dataSource.read();
-    dataSource.range(10, 20);
 
-    dataSource.add({});
+    dataSource.insert(0, {});
 
     var range = dataSource._ranges[0];
 
     equal(range.start, 0);
-    equal(range.end, 46);
-    equal(range.data.length, 46);
-    equal(dataSource.data().length, 46);
-});*/
+    equal(range.end, 21);
+    equal(range.data.length, 21);
+    equal(dataSource.data().length, 21);
+});
+
+test("ranges are updated when model is added at index 0 after range is called with remote binding", function() {
+    var dataSource = remoteDataSource($.noop, { pageSize: 10 });
+    dataSource.read();
+    dataSource.range(0, 10);
+    dataSource.range(10, 10);
+    dataSource.range(30, 10);
+
+    dataSource.insert(0, { value: 1 });
+
+    equalRanges(dataSource._ranges, [
+        { start: 0, end: 11 },
+        { start: 11, end: 21 },
+        { start: 31, end: 41 }
+    ]);
+    equal(dataSource._ranges[0].data[0].value, 1);
+    equal(dataSource._ranges[0].data.length, 11);
+    equal(dataSource.data().length, 11);
+});
+
+test("ranges are updated when model is added at the end after range is called with remote binding", function() {
+    var total = 831;
+    var pageSize = 10;
+    var dataSource = remoteDataSource($.noop, { pageSize: pageSize, total: total });
+    dataSource.read();
+    dataSource.range(0, pageSize);
+    dataSource.range(total - pageSize, pageSize);
+
+    dataSource.insert(dataSource.total(), { value: 1});
+
+    equalRanges(dataSource._ranges, [
+        { start: 0, end: 10 },
+        { start: 820, end: 830 },
+        { start: 830, end: 832 }
+    ]);
+    equal(dataSource._ranges[2].data[1].value, 1);
+    equal(dataSource._ranges[2].data.length, 2);
+    equal(dataSource.data().length, 11);
+});
+
+test("ranges are updated when model is added at index 0 with server grouping", function() {
+    var total = 100;
+    var index = 0;
+    var dataSource = remoteDataSource($.noop, {
+        pageSize: 10,
+        serverPaging: true,
+        group: "group1",
+        serverGrouping: true,
+        transport: {
+            read: function(options) {
+                var skip = options.data.skip;
+                var take = options.data.take;
+                index++;
+
+                var group1 = { items: [], field: "FirstName", value: "value" + index };
+
+                for (var i = skip; i < Math.min(skip + take, total) ; i++) {
+                    group1.items.push({ Id: skip + (i-skip), FirstName: "value" + i });
+                }
+
+                options.success({ groups: [group1], total: total });
+            }
+        },
+        schema: {
+            data: "data",
+            groups: "groups",
+            total: "total",
+            model: {
+                id: "Id",
+                fields: {
+                    Id: { type: "number", editable: false },
+                    FirstName: { type: "string" }
+                }
+            }
+        }
+    });
+
+    dataSource.read();
+    dataSource.range(20, 10);
+
+    dataSource.insert(0, {});
+
+    equalRanges(dataSource._ranges, [
+        { start: 0, end: 11 },
+        { start: 21, end: 31 }
+    ]);
+    equal(dataSource._ranges[0].data.length, 2);
+    equal(dataSource._ranges[0].data[0].items.length, 1);
+    equal(dataSource._ranges[0].data[1].items.length, 10);
+    equal(dataSource._ranges[1].data.length, 1);
+    equal(dataSource._ranges[1].data[0].items.length, 10);
+    equal(dataSource.data().length, 2);
+});
+
+test("ranges are updated when model is added at the end with server grouping", function() {
+    var total = 100;
+    var index = 0;
+    var pageSize = 10;
+    var dataSource = remoteDataSource($.noop, {
+        pageSize: pageSize,
+        serverPaging: true,
+        group: "group1",
+        serverGrouping: true,
+        transport: {
+            read: function(options) {
+                var skip = options.data.skip;
+                var take = options.data.take;
+                index++;
+
+                var group1 = { items: [], field: "FirstName", value: "value" + index };
+
+                for (var i = skip; i < Math.min(skip + take, total) ; i++) {
+                    group1.items.push({ Id: skip + (i-skip), FirstName: "value" + i });
+                }
+
+                options.success({ groups: [group1], total: total });
+            }
+        },
+        schema: {
+            data: "data",
+            groups: "groups",
+            total: "total",
+            model: {
+                id: "Id",
+                fields: {
+                    Id: { type: "number", editable: false },
+                    FirstName: { type: "string" }
+                }
+            }
+        }
+    });
+
+    dataSource.read();
+    dataSource.range(20, 10);
+    dataSource.range(total - pageSize, pageSize);
+
+    dataSource.insert(total, {});
+
+    equalRanges(dataSource._ranges, [
+        { start: 0, end: 10 },
+        { start: 20, end: 30 },
+        { start: 90, end: 101 }
+    ]);
+    equal(dataSource._ranges[0].data.length, 1);
+    equal(dataSource._ranges[0].data[0].items.length, 10);
+    equal(dataSource._ranges[1].data.length, 1);
+    equal(dataSource._ranges[1].data[0].items.length, 10);
+    equal(dataSource._ranges[2].data.length, 2);
+    equal(dataSource._ranges[2].data[0].items.length, 10);
+    equal(dataSource._ranges[2].data[1].items.length, 1);
+    equal(dataSource.data().length, 2);
+});
 
 test("error event is raised if error occurs during fetching", 1, function() {
     var dataSource = new DataSource({
@@ -1707,6 +2184,75 @@ test("currentRangeStart returns start of the last requested page", function() {
     dataSource.page(1);
 
     equal(dataSource.currentRangeStart(), 0);
+});
+
+test("range calls a callback", function() {
+    var called = false;
+    var dataSource = new DataSource({
+        data: generator(20)
+    });
+    dataSource.read();
+
+    dataSource.range(10, 20, function() {
+        called = true;
+    });
+
+    ok(called);
+});
+
+test("getByUid() does not call data.at() when ranges are used", function() {
+    var dataSource = remoteDataSource();
+    dataSource.options.useRanges = true;
+    dataSource.read();
+    var atStub = stub(dataSource._data, "at");
+
+    dataSource.getByUid("123");
+
+    equal(atStub.calls("at"), 0);
+});
+
+test("get() does not call data.at() when ranges are used", function() {
+    var dataSource = remoteDataSource();
+    dataSource.options.useRanges = true;
+    dataSource.read();
+    var atStub = stub(dataSource._data, "at");
+
+    dataSource.get(0);
+
+    equal(atStub.calls("at"), 0);
+});
+
+test("updated() does not call data.at() when ranges are used", function() {
+    var dataSource = remoteDataSource();
+    dataSource.options.useRanges = true;
+    dataSource.read();
+    var atStub = stub(dataSource._data, "at");
+
+    dataSource.updated();
+
+    equal(atStub.calls("at"), 0);
+});
+
+test("created() does not call data.at() when ranges are used", function() {
+    var dataSource = remoteDataSource();
+    dataSource.options.useRanges = true;
+    dataSource.read();
+    var atStub = stub(dataSource._data, "at");
+
+    dataSource.created();
+
+    equal(atStub.calls("at"), 0);
+});
+
+test("hasChanges() does not call data.at() when ranges are used", function() {
+    var dataSource = remoteDataSource();
+    dataSource.options.useRanges = true;
+    dataSource.read();
+    var atStub = stub(dataSource._data, "at");
+
+    dataSource.hasChanges();
+
+    equal(atStub.calls("at"), 0);
 });
 
 }());

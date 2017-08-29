@@ -176,7 +176,8 @@ var __meta__ = { // jshint ignore:line
             name: "Editable",
             editors: editors,
             clearContainer: true,
-            errorTemplate: ERRORTEMPLATE
+            errorTemplate: ERRORTEMPLATE,
+            skipFocus: false
         },
 
         editor: function(field, modelField) {
@@ -328,9 +329,11 @@ var __meta__ = { // jshint ignore:line
                 errorTemplate: that.options.errorTemplate || undefined,
                 rules: rules });
 
-            var focusable = container.find(":kendoFocusable").eq(0).focus();
-            if (oldIE) {
-                focusable.focus();
+            if (!that.options.skipFocus) {
+                var focusable = container.find(":kendoFocusable").eq(0).focus();
+                if (oldIE) {
+                    focusable.focus();
+                }
             }
         }
    });

@@ -6338,6 +6338,12 @@ If set to `true` the grid will always display a single page of data. Scrolling w
 
 > Check [Virtualization of local data](http://demos.telerik.com/kendo-ui/grid/virtualization-local-data) and [Virtualization of remote data](http://demos.telerik.com/kendo-ui/grid/virtualization-remote-data) for live demos.
 
+### scrollable.endless `Boolean` *(default: false)*
+
+If set to `true` the grid will always display a single page of data. Scrolling to the end will load more items untill all items are displayed.
+
+> Check [Endless scrolling of local data](http://demos.telerik.com/kendo-ui/grid/endless-scrolling-local) and [Endless scrolling of remote data](http://demos.telerik.com/kendo-ui/grid/endless-scrolling-remote) for live demos.
+
 ### selectable `Boolean|String` *(default: false)*
 
 If set to `true` the user would be able to select grid rows. By default selection is disabled.

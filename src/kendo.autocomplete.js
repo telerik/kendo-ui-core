@@ -1,5 +1,5 @@
 (function(f, define){
-    define([ "./kendo.list", "./kendo.mobile.scroller" ], f);
+    define([ "./kendo.list", "./kendo.mobile.scroller", "./kendo.virtuallist" ], f);
 })(function(){
 
 var __meta__ = { // jshint ignore:line
