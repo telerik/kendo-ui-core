@@ -687,3 +687,29 @@ input.k-checkbox + label {
         }
     }
 }
+
+// Reorder cue
+.k-reorder-cue {
+    position: absolute;
+
+    &::before,
+    &::after {
+        content: "";
+        width: 0;
+        height: 0;
+        border: 3px solid transparent;
+        position: absolute;
+        transform: translateX(-50%);
+    }
+
+    &::before {
+        border-bottom-width: 0;
+        border-top-color: currentColor;
+        top: -4px;
+    }
+    &::after {
+        border-top-width: 0;
+        border-bottom-color: currentColor;
+        bottom: -4px;
+    }
+}

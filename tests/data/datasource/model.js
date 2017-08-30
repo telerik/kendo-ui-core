@@ -43,7 +43,7 @@ test("add appends the specified values", function() {
     equal(dataSource.data()[2].foo, "bar");
 });
 
-test("add returns the new model istance", function() {
+test("add returns the new model instance", function() {
     var model = dataSource.add( { foo: "bar" } );
 
     ok(model instanceof kendo.data.Model);
@@ -143,7 +143,7 @@ test("cancelChanges restores updated complex model to its original state", funct
     ok(dataSource.get(1).foo instanceof kendo.data.ObservableObject);
 });
 
-test("cancelChanges restores updated model to its original state only for povided model", function() {
+test("cancelChanges restores updated model to its original state only for provided model", function() {
     var model1 = dataSource.get(1),
         model2 = dataSource.get(2);
 
@@ -368,7 +368,6 @@ test("item is of correct type after cancelChanges and server grouping", function
     ok(dataSource.view()[0].items[0].items[0] instanceof MyModel);
 });
 
-
 test("adding items to array field sets the dirty flag to true", function() {
     var model = new kendo.data.Model({
         foo: []
@@ -377,6 +376,16 @@ test("adding items to array field sets the dirty flag to true", function() {
     model.foo.push("foo");
 
     equal(model.dirty, true);
+});
+
+test("adding items to array field updates dirtyFields", function() {
+    var model = new kendo.data.Model({
+        foo: []
+    });
+
+    model.foo.push("foo");
+
+    ok(model.dirtyFields["foo"]);
 });
 
 test("removing items from array field sets the dirty flag to true", function() {
@@ -389,6 +398,16 @@ test("removing items from array field sets the dirty flag to true", function() {
     equal(model.dirty, true);
 });
 
+test("removing items from array field updates dirtyFields", function() {
+    var model = new kendo.data.Model({
+        foo: ["foo"]
+    });
+
+    model.foo.pop();
+
+    ok(model.dirtyFields["foo"]);
+});
+
 test("accept does not wrap field with underscore", function() {
     var model = new kendo.data.Model({
         _foo: {},
@@ -399,6 +418,26 @@ test("accept does not wrap field with underscore", function() {
 
     ok(!(model._foo instanceof kendo.data.ObservableObject));
     equal(model._foo.foo, "foo1");
+});
+
+test("accept resets dirty flag", function() {
+    var model = new kendo.data.Model({
+        foo: "bar"
+    });
+
+    model.accept({ foo: "bar2" });
+
+    ok(!model.dirty);
+});
+
+test("accept resets dirtyFields", function() {
+    var model = new kendo.data.Model({
+        foo: "bar"
+    });
+
+    model.accept({ foo: "bar2" });
+
+    deepEqual(model.dirtyFields, {});
 });
 
 test("insert wraps the record in a group when servergrouping is enabled", function() {

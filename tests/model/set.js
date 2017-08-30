@@ -36,12 +36,28 @@ test("model is dirty after set", function() {
     ok(m.dirty);
 });
 
+test("dirtyFields are updated after set", function() {
+    var model = new Model();
+
+    model.set("foo", "foo");
+
+    ok(model.dirtyFields["foo"]);
+});
+
 test("model is dirty during change event", 1, function() {
     var m = new Model();
     m.bind("change", function() {
         ok(m.dirty);
     });
     m.set("foo", "foo");
+});
+
+test("dirtyFields are updated during change event", 1, function() {
+    var model = new Model();
+    model.bind("change", function() {
+        ok(model.dirtyFields["foo"]);;
+    });
+    model.set("foo", "foo");
 });
 
 test("model is dirty during set event", 1, function() {
@@ -51,6 +67,16 @@ test("model is dirty during set event", 1, function() {
         ok(m.dirty);
     });
     m.set("foo", "foo");
+});
+
+test("dirtyFields are updated during set event", 1, function() {
+    var model = new Model();
+
+    model.bind("set", function() {
+        ok(model.dirtyFields["foo"]);
+    });
+
+    model.set("foo", "foo");;
 });
 
 test("model is dirty after set event", 1, function() {
@@ -72,6 +98,17 @@ test("model is not dirty if set event is prevented", 1, function() {
     ok(!m.dirty);
 });
 
+test("dirtyFields are not updated if set event is prevented", 1, function() {
+    var model = new Model();
+
+    model.bind("set", function(e) {
+        e.preventDefault();
+    });
+    model.set("foo", "foo");
+
+    ok(!model.dirtyFields["foo"]);
+});
+
 test("model is dirty if is already dirty and set event is prevented", 1, function() {
     var m = new Model();
 
@@ -84,6 +121,19 @@ test("model is dirty if is already dirty and set event is prevented", 1, functio
     ok(m.dirty);
 });
 
+test("dirtyField is dirty if is already dirty and set event is prevented", 1, function() {
+    var model = new Model();
+    model.dirty = true;
+    model.dirtyFields["foo"] = true;
+    model.bind("set", function(e) {
+        e.preventDefault();
+    });
+
+    model.set("foo", "foo");
+
+    ok(model.dirtyFields["foo"]);
+});
+
 test("model is not dirty if the same string value is set", function() {
     var m = new Model({
         foo: "foo"
@@ -91,6 +141,16 @@ test("model is not dirty if the same string value is set", function() {
 
     m.set("foo", "foo");
     ok(!m.dirty);
+});
+
+test("dirtyField is not dirty if the same string value is set", function() {
+    var model = new Model({
+        foo: "foo"
+    });
+
+    model.set("foo", "foo");
+
+    ok(!model.dirtyFields["foo"]);
 });
 
 test("model is not dirty if the same numeric value is set", function() {
@@ -102,6 +162,16 @@ test("model is not dirty if the same numeric value is set", function() {
     ok(!m.dirty);
 });
 
+test("dirtyField is not dirty if the same numeric value is set", function() {
+    var model = new Model({
+        foo: 1
+    });
+
+    model.set("foo", 1);
+
+    ok(!model.dirtyFields["foo"]);
+});
+
 test("model is not dirty if the same date value is set", function() {
     var m = new Model({
         foo: new Date(2011, 1, 1)
@@ -109,6 +179,16 @@ test("model is not dirty if the same date value is set", function() {
 
     m.set("foo", new Date(2011, 1, 1));
     ok(!m.dirty);
+});
+
+test("dirtyField is not dirty if the same date value is set", function() {
+    var model = new Model({
+        foo: new Date(2011, 1, 1)
+    });
+
+    model.set("foo", new Date(2011, 1, 1));
+
+    ok(!model.dirtyFields["foo"]);
 });
 
 test("model is not dirty if the same object value is set", function() {
@@ -123,7 +203,19 @@ test("model is not dirty if the same object value is set", function() {
     ok(!m.dirty);
 });
 
-test("change is raised if the model is modifed after set", function() {
+test("dirtyField is not dirty if the same object value is set", function() {
+    var model = new Model({
+        foo: {
+            bar: "bar"
+        }
+    });
+
+    model.set("foo", { bar: "bar" });
+
+    ok(!model.dirtyFields["foo"]);
+});
+
+test("change is raised if the model is modified after set", function() {
     var changeWasCalled = false, m = new Model().bind("change", function() {
         changeWasCalled = true;
     });
@@ -342,6 +434,20 @@ test("setting value of field marked as editable=false is ignored", function() {
     ok(!m.dirty);
 });
 
+test("setting value of field marked as editable=false does not update dirtyFields", function() {
+    var MyModel = kendo.data.Model.define({
+        fields: {
+            bar: { field: "bar", editable: false }
+        }
+    });
+    var model = new MyModel({ bar: "foo" });
+
+    model.set("bar", "baz");
+
+    equal(model.get("bar"), "foo");
+    ok(!model.dirtyFields["bar"]);
+});
+
 test("editable returns false for field marked as editable=false", function() {
     var MyModel = kendo.data.Model.define({
         fields: {
@@ -368,6 +474,19 @@ test("changes returns false if value is same as default value", function() {
     m.set("bar", "bar");
 
     ok(!m.dirty);
+});
+
+test("dirtyField is not dirty if the default values is set", function() {
+    var MyModel = kendo.data.Model.define({
+        fields: {
+            bar: { field: "bar", defaultValue: "bar" }
+        }
+    });
+    var model = new MyModel({});
+
+    model.set("bar", "bar");
+
+    ok(!model.dirtyFields["bar"]);
 });
 
 test("setting a field raises set event", 2, function() {

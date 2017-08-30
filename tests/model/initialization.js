@@ -9,6 +9,18 @@ test("define returns a new model which is subclass of Model", function() {
     ok(new MyModel instanceof Model);
 });
 
+test("model is not dirty by default", function() {
+    var model = new Model();
+
+    ok(!model.dirty);
+});
+
+test("model has no dirtyFeilds by default", function() {
+    var model = new Model();
+
+    deepEqual(model.dirtyFields, {});
+});
+
 test("define assigns data", function() {
     var MyModel = Model.define(),
         model = new MyModel({ foo: "bar"});
@@ -366,6 +378,20 @@ test("toJSON skips the id if id field is not default", function() {
         model = new MyModel({ foo: 1 });
 
    equal(typeof model.toJSON().id, "undefined");
+});
+
+test("toJSON skips dirty field", function() {
+    var MyModel = Model.define({ id: "foo" });
+    var model = new MyModel({ foo: 1 });
+
+   equal(typeof model.toJSON().dirty, "undefined");
+});
+
+test("toJSON skips dirtyFields field", function() {
+    var MyModel = Model.define({ id: "foo" });
+    var model = new MyModel({ foo: 1 });
+
+   equal(typeof model.toJSON().dirtyFields, "undefined");
 });
 
 test("defaultValue support functions", function() {

@@ -2,7 +2,6 @@
 title: Open column visibility menu on right on column header
 page_title: Open column visibility menu on right on column header | Kendo UI Grid Widget
 description: "Learn how to customize the Kendo Grid by adding custom menu that opens on right click of the column header"
-previous_url: /controls/data-management/grid/how-to/update-aggregates-on-change
 slug: open-column-visibility-menu-on-right-click-on-header
 ---
 

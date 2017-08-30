@@ -700,6 +700,7 @@ var __meta__ = { // jshint ignore:line
             ObservableObject.fn.init.call(that, data);
 
             that.dirty = false;
+            that.dirtyFields = {};
 
             if (that.idField) {
                 that.id = that.get(that.idField);
@@ -711,7 +712,9 @@ var __meta__ = { // jshint ignore:line
         },
 
         shouldSerialize: function(field) {
-            return ObservableObject.fn.shouldSerialize.call(this, field) && field !== "uid" && !(this.idField !== "id" && field === "id") && field !== "dirty" && field !== "_accessors";
+            return ObservableObject.fn.shouldSerialize.call(this, field) &&
+                field !== "uid" && !(this.idField !== "id" && field === "id") &&
+                field !== "dirty" &&  field !== "dirtyFields" && field !== "_accessors";
         },
 
         _parse: function(field, value) {
@@ -739,6 +742,7 @@ var __meta__ = { // jshint ignore:line
 
             if (action == "add" || action == "remove") {
                 this.dirty = true;
+                this.dirtyFields[e.field] = true;
             }
         },
 
@@ -756,9 +760,14 @@ var __meta__ = { // jshint ignore:line
 
                 if (!equal(value, that.get(field))) {
                     that.dirty = true;
+                    that.dirtyFields[field] = true;
 
                     if (ObservableObject.fn.set.call(that, field, value, initiator) && !dirty) {
                         that.dirty = dirty;
+
+                        if (!that.dirty) {
+                            that.dirtyFields[field] = false;
+                        }
                     }
                 }
             }
@@ -784,6 +793,7 @@ var __meta__ = { // jshint ignore:line
             }
 
             that.dirty = false;
+            that.dirtyFields = {};
         },
 
         isNew: function() {
