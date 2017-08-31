@@ -1516,7 +1516,7 @@ var __meta__ = { // jshint ignore:line
                 }
 
                 while (!$(focusableItem).is(":kendoFocusable")) {
-                    focusableItem = $(focusableItem).children(direction === 1 ? ":first-child" : ":last-child" + ":kendoFocusable");
+                    focusableItem = $(focusableItem).children(":not(label)");
                     if (!focusableItem.length) {
                         directionNumber = directionNumber + direction;
                         focusableItem = items[itemIndex + directionNumber];

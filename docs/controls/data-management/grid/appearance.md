@@ -223,7 +223,7 @@ When virtual scrolling is not supported or recommended, revert to standard pagin
 
 ### Endless Scrolling
 
-The endless scroll mode enables the request of new items when the scrollbar of the Grid reaches its end. The number of requested items will be equal to the current number of items and the page size. When the data is returned, the Grid will render only the new items and append them to the old ones.
+The endless scroll mode enables the request of new items when the scrollbar of the Grid reaches its end. When the data is returned, the Grid will render only the new items and append them to the old ones.
 
 ###### Example
 

@@ -11,6 +11,10 @@ Your project might require you to preserve the dirty indicator in in-cell editin
 
 The following example demonstrates how to achieve this behavior also in case new rows are added to the Grid.
 
+> **Important**
+>  
+> Preserving the dirty indicator is provided as a built-in functionality as of R3 2017.
+
 ###### Example
 
 ```html

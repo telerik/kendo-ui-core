@@ -278,6 +278,10 @@ var __meta__ = { // jshint ignore:line
             return this.tabGroup.children(NAVIGATABLEITEMS)[action]();
         },
 
+        _getItem: function(action) {
+            return this.tabGroup.children(KEYBOARDNAVIGATABLEITEMS)[action]();
+        },
+
         _item: function(item, action) {
             var endItem;
             if (action === PREV) {
@@ -364,11 +368,11 @@ var __meta__ = { // jshint ignore:line
                 that._click(current);
                 e.preventDefault();
             } else if (key == keys.HOME) {
-                that._click(that._endItem("first"));
+                that._click(that._getItem("first"));
                 e.preventDefault();
                 return;
             } else if (key == keys.END) {
-                that._click(that._endItem("last"));
+                that._click(that._getItem("last"));
                 e.preventDefault();
                 return;
             }
@@ -1027,6 +1031,10 @@ var __meta__ = { // jshint ignore:line
                 oldFocusedTab.removeClass(FOCUSEDSTATE);
                 if (item.is("." + DISABLEDSTATE)) {
                     item.addClass(FOCUSEDSTATE);
+                    that._focused = item;
+                }
+                if (that._scrollableModeActive) {
+                    that._scrollTabsToItem(item);
                 }
                 return true;
             }
