@@ -862,6 +862,10 @@ Deprecated in versions 2015.3 and newer. Use [name](#configuration-sheets.name) 
 
 Creates an Excel file that represents the current workbook and returns it as a data URL.
 
+> **Important**
+>
+> The `toDataURL` method supports only JSZip 2.* versions. If you need to use JSZip 3.*, call the [`toDataURLAsync`](#methods-toDataURLAsync) method instead.
+
 #### Returns
 
 `String` the Excel file as data URL.
@@ -878,9 +882,39 @@ Creates an Excel file that represents the current workbook and returns it as a d
           }
       ]
     });
-    var dataURL = workbook.toDataURL()
+    var dataURL = workbook.toDataURL();
     kendo.saveAs({
       dataURI: dataURL,
       fileName: "Test.xlsx"
     });
+    </script>
+
+### toDataURLAsync
+
+Creates an Excel file that represents the current workbook and returns a `Promise` reolved with the data URL.
+
+#### Returns
+
+`Promise` A promise that will be resolved with the the Excel file as data URL.
+
+#### Example
+
+    <script>
+    var workbook = new kendo.ooxml.Workbook({
+      sheets: [
+          {
+              rows: [
+                  { cells: [ { value: "foo" } ] }
+              ]
+          }
+      ]
+    });
+
+    workbook.toDataURLAsync().then(function(dataURL) {
+        kendo.saveAs({
+          dataURI: dataURL,
+          fileName: "Test.xlsx"
+        });
+    });
+
     </script>

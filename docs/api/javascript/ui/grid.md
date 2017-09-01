@@ -9434,6 +9434,134 @@ The widget instance which fired the event.
       });
     </script>
 
+### groupCollapse
+
+Fired when the user collapses a group row.
+
+The event handler function context (available via the `this` keyword) will be set to the widget instance.
+
+#### Event Data
+
+##### e.element `jQuery`
+
+The jQuery object which represents the group row.
+
+##### e.group `Object`
+
+The group object associated with group row.
+
+##### e.preventDefault `Function`
+
+If invoked prevents collapsing of the group.
+
+##### e.sender `kendo.ui.Grid`
+
+The widget instance which fired the event.
+
+#### Example - subscribe to the "groupCollapse" event during initialization
+    <div id="grid"></div>
+    <script>
+    $("#grid").kendoGrid({
+      columns: [
+        { field: "name" },
+        { field: "age" }
+      ],
+	  groupable: true,
+      dataSource: [
+        { name: "Jane Doe", age: 30 },
+        { name: "John Doe", age: 33 }
+      ],
+      groupCollapse: function(e) {
+        console.log(e.element, e.group);
+      }
+    });
+    </script>
+
+#### Example - subscribe to the "groupCollapse" event after initialization
+    <div id="grid"></div>
+    <script>
+    function grid_groupCollapse(e) {
+      console.log(e.element, e.group);
+    }
+    $("#grid").kendoGrid({
+      columns: [
+        { field: "name" },
+        { field: "age" }
+      ],
+      groupable: true,
+      dataSource: [
+        { name: "Jane Doe", age: 30 },
+        { name: "John Doe", age: 33 }
+      ]
+    });
+    var grid = $("#grid").data("kendoGrid");
+    grid.bind("groupCollapse", grid_groupCollapse);
+    </script>
+
+### groupExpand
+
+Fired when the user expands a group row.
+
+The event handler function context (available via the `this` keyword) will be set to the widget instance.
+
+#### Event Data
+
+##### e.element `jQuery`
+
+The jQuery object which represents the group row.
+
+##### e.group `Object`
+
+The group object associated with group row.
+
+##### e.preventDefault `Function`
+
+If invoked prevents expanding of the group.
+
+##### e.sender `kendo.ui.Grid`
+
+The widget instance which fired the event.
+
+#### Example - subscribe to the "groupExpand" event during initialization
+    <div id="grid"></div>
+    <script>
+    $("#grid").kendoGrid({
+      columns: [
+        { field: "name" },
+        { field: "age" }
+      ],
+	  groupable: true,
+      dataSource: [
+        { name: "Jane Doe", age: 30 },
+        { name: "John Doe", age: 33 }
+      ],
+      groupExpand: function(e) {
+        console.log(e.element, e.group);
+      }
+    });
+    </script>
+
+#### Example - subscribe to the "groupExpand" event after initialization
+    <div id="grid"></div>
+    <script>
+    function grid_groupExpand(e) {
+      console.log(e.element, e.group);
+    }
+    $("#grid").kendoGrid({
+      columns: [
+        { field: "name" },
+        { field: "age" }
+      ],
+      groupable: true,
+      dataSource: [
+        { name: "Jane Doe", age: 30 },
+        { name: "John Doe", age: 33 }
+      ]
+    });
+    var grid = $("#grid").data("kendoGrid");
+    grid.bind("groupExpand", grid_groupExpand);
+    </script>
+
 ### page
 
 Fired when the user is about change the current page index of DataSource via the pager UI.

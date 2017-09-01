@@ -1477,10 +1477,10 @@ var __meta__ = { // jshint ignore:line
                         items.last().focus();
                     }
                     e.preventDefault();
-                } else if (keyCode === keys.RIGHT && !this._preventNextFocus && this._getNextElement(e.target, 1 * direction)) {
+                } else if (keyCode === keys.RIGHT && !this._preventNextFocus && !target.is("input, select, .k-dropdown") && this._getNextElement(e.target, 1 * direction)) {
                     this._getNextElement(e.target, 1 * direction).focus();
                     e.preventDefault();
-                } else if (keyCode === keys.LEFT && !this._preventNextFocus && this._getNextElement(e.target, -1 * direction)) {
+                } else if (keyCode === keys.LEFT && !this._preventNextFocus && !target.is("input, select, .k-dropdown") && this._getNextElement(e.target, -1 * direction)) {
                     this._getNextElement(e.target, -1 * direction).focus();
                     e.preventDefault();
                 }
@@ -1516,7 +1516,7 @@ var __meta__ = { // jshint ignore:line
                 }
 
                 while (!$(focusableItem).is(":kendoFocusable")) {
-                    focusableItem = $(focusableItem).children(":not(label)");
+                    focusableItem = direction === 1 ? $(focusableItem).children(":not(label)").first() : $(focusableItem).children(":not(label)").last();
                     if (!focusableItem.length) {
                         directionNumber = directionNumber + direction;
                         focusableItem = items[itemIndex + directionNumber];

@@ -1248,12 +1248,8 @@ The original `drag` event data of `draggable`.
     $("#listBox").kendoListBox({
         draggable: true,
         dragend: function(e) {
-            console.log("from " + e.oldIndex + " to " + e.newIndex);
-
-            //prevent first item to be placed at the end of the list
-            if(e.newIndex == 2 && e.oldIndex == 0) {
-                e.preventDefault();
-            }
+            console.log(e.items);
+            console.log(e.dataItems);
         }
     });
     </script>

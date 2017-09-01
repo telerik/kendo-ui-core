@@ -51,7 +51,7 @@ Below are listed the steps for you to follow when configuring the Kendo UI Slide
 
 ### Subscribe to Events
 
-You can subscribe to all [events exposed by Kendo UI ProgressBar](/api/javascript/ui/slider#events) by the handler name.
+You can subscribe to all [events exposed by Kendo UI Slider](/api/javascript/ui/slider#events) by the handler name.
 
 ###### Example
 
