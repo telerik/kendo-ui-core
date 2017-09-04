@@ -315,7 +315,7 @@ var __meta__ = { // jshint ignore:line
     function updateArrow (item) {
         item = $(item);
 
-        item.find("> .k-link > .k-menu-expand-arrow[class*=k-i-arrow]:not(.k-sprite)").remove();
+        item.find("> .k-link > [class*=k-i-arrow]:not(.k-sprite)").remove();
 
         item.filter(":has(.k-menu-group)")
             .children(".k-link:not(:has([class*=k-i-arrow]:not(.k-sprite)))")
@@ -469,7 +469,7 @@ var __meta__ = { // jshint ignore:line
     }
 
     function isPointerTouch(e){
-        return allPointers && e.originalEvent.pointerType in touchPointerTypes;
+        return allPointers && e.originalEvent && e.originalEvent.pointerType in touchPointerTypes;
     }
 
     function isTouch(e){
@@ -490,9 +490,9 @@ var __meta__ = { // jshint ignore:line
             element = that.wrapper = that.element;
             options = that.options;
 
-            that._initData(options);
-
             that._updateClasses();
+
+            that._initData(options);
 
             that._animations(options);
 
