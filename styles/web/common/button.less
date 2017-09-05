@@ -11,7 +11,6 @@
     line-height: 1.72em;
     text-align: center;
     text-decoration: none;
-    display: inline-block;
     display: inline-flex;
     align-items: center;
     justify-content: center;
@@ -70,6 +69,10 @@
 
 }
 
+.k-ie9 .k-button {
+    display: inline-block;
+}
+
 a.k-button-expand
 {
     display: block;
@@ -91,7 +94,7 @@ body .k-split-button-arrow
 }
 
 .k-button-icon {
-    height: calc(1.72em + (2*@button-padding-y)); // IE fix for centering icon for bigger font-size
+    height: calc(1.72em + (2*@button-padding-y)); // proper vertical alignment for elastic behavior
 }
 
 .k-toolbar .k-button-icontext
@@ -158,6 +161,7 @@ body .k-split-button-arrow
     flex-direction: row;
     vertical-align: middle;
     position: relative;
+    overflow: hidden;
 
     .k-button {
         // .border-radius( 0 );

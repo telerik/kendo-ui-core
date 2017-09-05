@@ -315,7 +315,7 @@ var __meta__ = { // jshint ignore:line
     function updateArrow (item) {
         item = $(item);
 
-        item.find("> .k-link > [class*=k-i-arrow]:not(.k-sprite)").remove();
+        item.find("> .k-link > [class*=k-i-arrow-60]:not(.k-sprite)").remove();
 
         item.filter(":has(.k-menu-group)")
             .children(".k-link:not(:has([class*=k-i-arrow]:not(.k-sprite)))")

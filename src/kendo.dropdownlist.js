@@ -233,6 +233,9 @@ var __meta__ = { // jshint ignore:line
             } else if (that._allowOpening()) {
                 that._open = true;
                 that.popup.one("activate", that._focusInputHandler);
+                // In some cases when the popup is opened resize is triggered which will cause it to close
+                // Setting the below flag will prevent this from happening
+                that.popup._hovered = true;
                 that.popup.open();
                 that._resizeFilterInput();
                 that._focusItem();
