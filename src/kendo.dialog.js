@@ -349,7 +349,7 @@
                     actionKeyHandler = proxy(that._actionKeyHandler, that),
                     actions = that.options.actions,
                     length = actions.length,
-                    buttonSize = HUNDREDPERCENT / length,
+                    buttonSize = Math.round(HUNDREDPERCENT / length),
                     action,
                     text;
 
@@ -364,6 +364,9 @@
                         .on("click", actionClick)
                         .on("keydown", actionKeyHandler);
                     if(o.buttonLayout === "stretched") {
+                        if(i == length - 1){
+                             buttonSize = HUNDREDPERCENT - i*buttonSize;
+                        }
                         btn.css(WIDTH, buttonSize + "%");
                     }
                 }

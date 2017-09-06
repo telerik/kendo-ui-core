@@ -1,16 +1,16 @@
 ---
-title: Kendo UI Professional Filtering Kendo Grid Date with Persisting the State
-description: The date filters are not correctly persisted after kendo.stringify
+title: Filtering Is Not Properly Persisted after Saving and Loading the State of the Grid
+description: "The date filters of the Grid are not correctly persisted after kendo.stringify is applied."
 type: troubleshooting
-page_title: The Grid Filters Are Not Correctly Persisted After Saving and Loading the Grid State
-slug: the-grid-filters-are-not-correctly-persisted-after-saving-and-loading-the-grid-stateposition
+page_title: Grid Filters Are Not Correctly Persisted After Saving and Loading the Grid State
+slug: grid-filters-are-not-correctly-persisted-after-saving-and-loading-the-grid-stateposition
 tags: grid, filter, persist
 ticketid: 1126061
 res_type: kb
-
 ---
 
 ## Environment
+
 <table>
  <tr>
   <td>Product</td>
@@ -30,20 +30,17 @@ res_type: kb
  </tr>
 </table>
 
-
 ## Description
 
-The Grid filters are not correctly persisted after saving and loading the Grid state, which is causing inccorect data to be shown in the Grid.
+The filters of the Grid are not correctly persisted after its state is saved and loaded. How can I properly persist the filtering and avoid the rendering of incorrect data in the Grid?
 
 ## Cause
 
-The issue occurs beucase the JSON.stringify() method used internally by the kendo.stringify() method is using the Date.prototype.toISOString function which represents time in unmodified UTC.
+The `JSON.stringify()` method that is internally used by the `kendo.stringify()` method utilizes the `Date.prototype.toISOString` function which represents time in unmodified UTC format.
 
 ## Solution
 
-The issue can be resolved by programmatically applying the time offset before the filter is set again.
-
-A runnable example can be found [here](http://dojo.telerik.com/EgAQUR/4)
+Programmatically apply the time offset before the filter is set again. For a runnable example, refer to [this Dojo](http://dojo.telerik.com/EgAQUR/4).
 
 ```
  <body>
@@ -117,10 +114,10 @@ A runnable example can be found [here](http://dojo.telerik.com/EgAQUR/4)
               if(saved && parsedOptions.dataSource.filter != undefined){
                 for (let i = 0; i<parsedOptions.dataSource.filter.filters.length; i++ ){
                   if(parsedOptions.dataSource.filter.filters[i].field = "Start"){
-                    //Taking the current offset
+                    // Take the current offset
                     var currentoffset = (new Date()).getTimezoneOffset()
                     var newTime = new Date(parsedOptions.dataSource.filter.filters[i].value)
-                    //Setting the offset to the date
+                    // Set the offset to the date
                     newTime.setHours(newTime.getHours() + currentoffset/60);
                     parsedOptions.dataSource.filter.filters[i].value = newTime
                   }
@@ -137,4 +134,3 @@ A runnable example can be found [here](http://dojo.telerik.com/EgAQUR/4)
     </div>
 
 ```
-

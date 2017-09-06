@@ -3403,6 +3403,10 @@ The skip of the category axis minor ticks.
 
 The unique axis name. Used to associate a series with a category axis using the [series.categoryAxis](#configuration-series.categoryAxis) option.
 
+> **Important**
+>
+> Using multiple category axes requires setting an explicit name for each of them.
+
 #### Example - set the category axis name
 
     <div id="chart"></div>
@@ -34312,9 +34316,11 @@ The Y axis value or array of values for multi-axis charts.
 
 Fired when the chart is ready to render on screen.
 
-Can be used, for example, to remove loading indicators. Changes to options will be ignored.
+Can be used, for example, to remove loading indicators.
 
 The event handler function context (available via the `this` keyword) will be set to the widget instance.
+
+> Calling [setOptions](#methods-setOptions) in the event handler is not recommended and can cause an endless loop or a JavaScript error.
 
 #### Event Data
 

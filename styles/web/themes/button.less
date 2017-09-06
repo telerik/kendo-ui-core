@@ -4,8 +4,8 @@
     border-color: @button-border-color;
     color: @button-text-color;
     background-color: @button-background-color;
-    .composite-background(@widget-gradient);
     background-position: 50% 50%;
+    .composite-background(@button-gradient);
     .box-shadow(@button-shadow);
 
     // Hover state
@@ -14,7 +14,7 @@
         color: @button-hover-text-color;
         border-color: @button-hover-border-color;
         background-color: @button-hover-background-color;
-        .composite-background(@hover-gradient);
+        .composite-background(@button-hover-gradient);
         .box-shadow(@button-hover-shadow);
     }
 
@@ -31,7 +31,7 @@
         color: @button-active-text-color;
         background-color: @button-active-background;
         border-color: @button-active-border-color;
-        .composite-background(@selected-gradient);
+        .composite-background(@button-active-gradient);
         .box-shadow(@button-active-shadow);
     }
     &.k-state-active {
@@ -50,16 +50,91 @@
     // Disabled state
     &[disabled],
     &[disabled]:hover,
+    &[disabled]:focus,
+    &[disabled]:active,
+    &[disabled]:hover:active,
     .k-state-disabled &,
     .k-state-disabled &:hover,
+    .k-state-disabled &:focus,
     .k-state-disabled &:active,
+    .k-state-disabled &:active:active,
     &.k-state-disabled,
     &.k-state-disabled:hover,
-    &.k-state-disabled:active {
+    &.k-state-disabled:focus,
+    &.k-state-disabled:active,
+    &.k-state-disabled:hover:active {
         color: @disabled-text-color;
         border-color: @disabled-border-color;
         background-color: @disabled-background-color;
         .composite-background(@disabled-gradient);
+        .box-shadow(none);
+    }
+
+}
+
+
+
+
+//Primary buttons
+.k-primary {
+    color: @primary-text-color;
+    border-color: @primary-border-color;
+    background-color: @primary-background-color;
+    .composite-background(@primary-gradient);
+    .box-shadow(@primary-shadow);
+
+    // Hover state
+    &:hover,
+    &.k-state-hover {
+        color: @primary-hover-text-color;
+        border-color: @primary-hover-border-color;
+        background-color: @primary-hover-background-color;
+        .composite-background(@primary-hover-gradient);
+        .box-shadow(@primary-hover-shadow);
+    }
+
+    // Focused state
+    &:focus,
+    &.k-state-focused {
+        border-color: @primary-focused-border-color;
+        .box-shadow(@primary-focused-shadow);
+    }
+
+    // Pressed
+    &:active,
+    &.k-state-active {
+        color: @primary-active-text-color;
+        border-color: @primary-active-border-color;
+        background-color: @primary-active-background-color;
+        .composite-background(@primary-active-gradient);
+        .box-shadow(@primary-active-shadow);
+    }
+
+    // Focus active
+    &:focus:active:not(.k-state-disabled):not([disabled]) {
+        .box-shadow(@primary-focused-active-shadow);
+    }
+
+    // Disabled
+    &[disabled],
+    &[disabled]:hover,
+    &[disabled]:focus,
+    &[disabled]:active,
+    &[disabled]:hover:active,
+    .k-state-disabled &,
+    .k-state-disabled &:hover,
+    .k-state-disabled &:focus,
+    .k-state-disabled &:active,
+    .k-state-disabled &:hover:active,
+    &.k-state-disabled,
+    &.k-state-disabled:hover,
+    &.k-state-disabled:focus,
+    &.k-state-disabled:active,
+    &.k-state-disabled:hover:active {
+        color: @primary-disabled-text-color;
+        border-color: @primary-disabled-border-color;
+        background-color: @primary-disabled-background-color;
+        .composite-background(@primary-disabled-gradient);
         .box-shadow(none);
     }
 

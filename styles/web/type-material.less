@@ -2,49 +2,51 @@
 @widget-background-color: @background;
 @widget-text-color: @normal-text-color;
 @widget-border-color: contrast(@background, lighten(@background, 9%), darken(@background, 10%), 0.5);
-@widget-gradient: none;
-@widget-shadow: none;
+@widget-gradient: false;
+@widget-shadow: false;
 // Button
 @button-text-color: @normal-text-color;
 @button-background-color: contrast(@background, lighten(@background, 17%), darken(@background, 2%), 0.5);
 @button-border-color: contrast(@background, lighten(@background, 17%), darken(@background, 2%), 0.5);
+@button-gradient: false;
 @button-shadow: 0 2px 6px rgba(0,0,0,.2), 0 2px 3px rgba(0,0,0,.05);
 @button-hover-text-color: @normal-text-color;
 @button-hover-background-color: contrast(@background, lighten(@background, 23%), darken(@background, 8%), 0.5);
 @button-hover-border-color: contrast(@background, lighten(@background, 23%), darken(@background, 8%), 0.5);
+@button-hover-gradient: false;
 @button-hover-shadow: @button-shadow;
 @button-active-text-color: contrast(@button-active-background);
 @button-active-background: contrast(@background, lighten(@background, 23%), darken(@background, 14%), 0.5);
 @button-active-border-color: contrast(@background, lighten(@background, 23%), darken(@background, 14%), 0.5);
+@button-active-gradient: false;
 @button-active-shadow: 0 6px 17px 0 rgba(0, 0, 0, 0.3);
 @button-focused-border-color: contrast(@background, lighten(@background, 17%), darken(@background, 14%), 0.5);
 @button-focused-shadow: @button-shadow;
 @button-focused-active-shadow: @button-active-shadow;
 // Primary button
-@primary-button-text-color: contrast(@primary-button-background-color);
-@primary-button-background-color: @accent;
-@primary-button-border-color: @accent;
-@primary-gradient: none;
+@primary-text-color: contrast(@primary-background-color);
+@primary-background-color: @accent;
+@primary-border-color: @accent;
+@primary-gradient: false;
 @primary-shadow: false;
 @primary-hover-text-color: #ffffff;
 @primary-hover-background-color: #5c6bc0;
 @primary-hover-border-color: #5c6bc0;
-@primary-hover-gradient: none;
+@primary-hover-gradient: false;
 @primary-hover-shadow: false;
-@primary-focused-color: #ffffff;
-@primary-focused-border-color: #eff8ff;
-@primary-focused-gradient: none;
-@primary-focused-shadow: false;
-@primary-focused-active-item-shadow: 0 0 8px 0 #cfe6f8;
 @primary-active-text-color: #ffffff;
 @primary-active-background-color: #283593;
-@primary-active-gradient: none;
 @primary-active-border-color: #283593;
+@primary-active-gradient: false;
 @primary-active-shadow: false;
-@primary-disabled-text-color: #a8a8a8;
-@primary-disabled-background-color: #eaeaea;
-@primary-disabled-border-color: #eaeaea;
-@primary-disabled-gradient: none;
+@primary-focused-border-color: #eff8ff;
+@primary-focused-gradient: false;
+@primary-focused-shadow: @button-focused-shadow;
+@primary-focused-active-shadow: @button-focused-active-shadow;
+@primary-disabled-text-color: @disabled-text-color;
+@primary-disabled-background-color: @disabled-background-color;
+@primary-disabled-border-color: @disabled-border-color;
+@primary-disabled-gradient: false;
 @sprite-image: url('@{image-folder}/sprite.png');
 @tooltip-texture: none;
 @inverse-text-color: saturate(@background, 29%);
@@ -2294,11 +2296,11 @@ div.k-splitbar.k-state-focused .k-icon,
 .k-primary,
 .k-overflow-container .k-primary
 {
-    color: @primary-button-text-color;
-    border-color: @primary-button-border-color;
+    color: @primary-text-color;
+    border-color: @primary-border-color;
     .composite-background(@primary-gradient);
     background-position: 50% 50%;
-    background-color: @primary-button-background-color;
+    background-color: @primary-background-color;
     .box-shadow(@primary-shadow);
 }
 
@@ -2530,7 +2532,7 @@ border-color: @form-widgets-border-color;
 
 /* Calendar */
 .k-calendar .k-header .k-link {
-color: @primary-button-text-color;
+color: @primary-text-color;
 }
 
 .k-calendar .k-footer {
@@ -2651,10 +2653,6 @@ border-color: @panelbar-items-border;
         &:focus {
             background-color: transparent;
             border-color: contrast(@background, darken(@base, 30%), lighten(@base, 30%), 0.5);
-        }
-
-        &:hover {
-            background-color: @hover-background-color;
         }
 
         &.k-state-active {
@@ -2975,8 +2973,8 @@ border-color: @panelbar-items-border;
 }
 
 .k-splitbar.k-state-focused {
-background-color: @primary-button-background-color;
-border-color: @primary-button-border-color;
+background-color: @primary-background-color;
+border-color: @primary-border-color;
 .box-shadow(none);
 }
 
@@ -3083,27 +3081,14 @@ table.k-editor {
     border-color: @alt-background-color;
 }
 
-.k-editor-toolbar .k-tool.k-state-hover,
-.k-editor-toolbar .k-dropdown-wrap.k-state-hover,
-.k-toolbar .k-tool.k-state-hover,
-.k-toolbar .k-dropdown-wrap.k-state-hover
-{
-    color: @hover-text-color;
-    border-color: @hover-border-color;
-    .box-shadow(none);
-}
-
-.k-editor-toolbar .k-tool.k-state-selected,
-.k-toolbar .k-button-group .k-button.k-state-active {
-    .box-shadow(none);
-    background-color: @button-active-background;
-    border-color: @button-active-background;
-}
-
-.k-editor-toolbar .k-tool.k-state-hover,
-.k-toolbar .k-button-group .k-button:hover {
-    background-color: @hover-background-color;
-    border-color: @hover-background-color;
+.k-editor-toolbar,
+.k-toolbar {
+    .k-tool.k-state-hover,
+    .k-dropdown-wrap.k-state-hover,
+    .k-tool.k-state-selected,
+    .k-button-group .k-button.k-state-active {
+        .box-shadow(none);
+    }
 }
 
 /* Progressbar */
@@ -3118,8 +3103,8 @@ table.k-editor {
 }
 
 .k-progressbar .k-state-selected {
-    background-color: @primary-button-background-color;
-    border-color: @primary-button-border-color;
+    background-color: @primary-background-color;
+    border-color: @primary-border-color;
 }
 
 .k-widget.k-tooltip-validation {
@@ -3152,8 +3137,8 @@ table.k-editor {
 
 .k-slider-selection
 {
-    background-color: @primary-button-background-color;
-    border-color: @primary-button-border-color;
+    background-color: @primary-background-color;
+    border-color: @primary-border-color;
 }
 
 .k-slider .k-button,

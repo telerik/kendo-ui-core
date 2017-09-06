@@ -13,7 +13,7 @@ The following example demonstrates how to achieve this behavior also in case new
 
 > **Important**
 >  
-> Preserving the dirty indicator is provided as a built-in functionality as of R3 2017.
+> The Kendo UI R3 2017 release provides the preservation of the dirty indicator as a built-in functionality.
 
 ###### Example
 

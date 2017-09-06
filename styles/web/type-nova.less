@@ -2,48 +2,50 @@
 @widget-background-color: @background;
 @widget-text-color: @normal-text-color;
 @widget-border-color: darken(@background, 12%);
-@widget-gradient: none;
+@widget-gradient: false;
 @widget-shadow: 0 4px 10px 4px rgba(0, 0, 0, 0.2);
 // Button
 @button-text-color: lighten(@hover-text-color, 8%);
 @button-background-color: @normal-background;
 @button-border-color: lighten(@hover-text-color, 8%);
+@button-gradient: false;
 @button-shadow: false;
 @button-hover-text-color: @button-text-color;
 @button-hover-background-color: @hover-background;
 @button-hover-border-color: @button-border-color;
+@button-hover-gradient: false;
 @button-hover-shadow: false;
 @button-active-background: @selected-background;
 @button-active-text-color: @inversed-text-color;
 @button-active-border-color: @selected-background;
-@button-active-shadow: inset 0 0 0 1px darken(@widget-border-color, 35%);
+@button-active-gradient: false;
+@button-active-shadow: false;
 @button-focused-border-color: @accent;
-@button-focused-shadow: inset 0 0 0 1px darken(@widget-border-color, 35%);
-@button-focused-active-shadow: none;
+@button-focused-shadow: false;
+@button-focused-active-shadow: false;
 // Primary button
-@primary-button-text-color: @inversed-text-color;
-@primary-button-background-color: @accent;
-@primary-button-border-color: @accent;
-@primary-gradient: none;
-@primary-shadow: none;
-@primary-hover-text-color: @primary-button-text-color;
+@primary-text-color: @inversed-text-color;
+@primary-background-color: @accent;
+@primary-border-color: @accent;
+@primary-gradient: false;
+@primary-shadow: false;
+@primary-hover-text-color: @primary-text-color;
 @primary-hover-background-color: @accent-hover-background;
 @primary-hover-border-color: @accent-hover-background;
-@primary-hover-gradient: none;
-@primary-hover-shadow: none;
-@primary-focused-color: @primary-button-text-color;
-@primary-focused-border-color: @accent-hover-background;
-@primary-focused-gradient: none;
-@primary-focused-active-item-shadow: 0 0 8px 0 darken(@info, 6%);
-@primary-active-text-color: @primary-button-text-color;
+@primary-hover-gradient: false;
+@primary-hover-shadow: false;
+@primary-active-text-color: @primary-text-color;
 @primary-active-background-color: @accent-hover-background;
-@primary-active-gradient: none;
 @primary-active-border-color: @accent-hover-background;
-@primary-active-shadow: inset 0 0 8px 0 lighten(@accent, 13%);
+@primary-active-gradient: false;
+@primary-active-shadow: false;
+@primary-focused-border-color: @accent-hover-background;
+@primary-focused-shadow: false;
+@primary-focused-active-shadow: false;
 @primary-disabled-text-color: @selected-text-color;
 @primary-disabled-background-color: lighten(@accent, 18%);
 @primary-disabled-border-color: lighten(@accent, 18%);
-@primary-disabled-gradient: none;
+@primary-disabled-gradient: false;
 @sprite-image: url('@{image-folder}/sprite.png');
 @inversed-text-color: contrast(@accent);
 @accent-hover-background: multiply(@accent, #e4e4e4);
@@ -311,9 +313,7 @@ textarea.k-textbox:hover,
 /* Default icons opacity */
 .k-button .k-image,
 .k-panelbar > .k-state-active > .k-header > .k-icon,
-.k-panelbar > .k-state-active > .k-header .k-state-default .k-icon,
-.k-tabstrip-scrollable .k-button:active .k-icon,
-.k-tabstrip .k-button .k-icon
+.k-panelbar > .k-state-active > .k-header .k-state-default .k-icon
  {
     opacity: .4;
 }
@@ -352,39 +352,6 @@ textarea.k-textbox:hover,
 // Button
 .k-button {
     border-radius: @inputs-border-radius;
-}
-
-/* Primary Button */
-.k-primary,
-.k-overflow-container .k-primary {
-    color: @inversed-text-color;
-    border-color: @accent;
-    background-color: @accent;
-}
-
-.k-primary:focus,
-.k-primary.k-state-focused {
-    border-color: @accent-hover-background;
-}
-
-.k-primary:hover,
-.k-primary:active,
-.k-primary.k-state-active {
-    color: @inversed-text-color;
-    background-color: @accent-hover-background;
-    border-color: @accent-hover-background;
-}
-
-.k-primary.k-state-disabled,
-.k-state-disabled .k-primary,
-.k-primary.k-state-disabled:hover,
-.k-state-disabled .k-primary:hover,
-.k-primary.k-state-disabled:hover,
-.k-state-disabled .k-primary:active,
-.k-primary.k-state-disabled:active {
-    color: @selected-text-color;
-    border-color: lighten(@accent, 18%);
-    background-color: lighten(@accent, 18%);
 }
 
 /* Bare Button */
@@ -2194,7 +2161,6 @@ html .km-pane-wrapper .km-widget,
 }
 
 .k-spreadsheet-toolbar {
-    background: darken(@base, 4%);
 
     > .k-button {
         border-color: transparent;

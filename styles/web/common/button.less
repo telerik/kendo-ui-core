@@ -15,10 +15,16 @@
     align-items: center;
     justify-content: center;
     vertical-align: middle;
+    overflow: hidden;
     user-select: none;
     cursor: pointer;
     outline: none;
     -webkit-appearance: none;
+
+    // No flexbox
+    .k-no-flexbox & {
+        display: inline-block;
+    }
 
     &::-moz-focus-inner {
         padding: 0;
@@ -55,16 +61,11 @@
     }
 
     // Disabled state
-    &[disabled],
-    &[disabled]:hover,
-    .k-state-disabled &,
-    .k-state-disabled &:hover,
-    .k-state-disabled &:active,
-    &.k-state-disabled,
-    &.k-state-disabled:hover,
-    &.k-state-disabled:active {
+    &[disabled]
+    .k-state-disabled &
+    &.k-state-disabled {
         cursor: default;
-    outline: 0;
+        outline: 0;
     }
 
 }
@@ -86,15 +87,11 @@ input[type="reset"].k-button-expand
     width: 100%;
 }
 
-body .k-button-icon,
-body .k-split-button-arrow
-{
-    padding-left: .4em;
-    padding-right: .4em;
-}
-
-.k-button-icon {
-    height: calc(1.72em + (2*@button-padding-y)); // proper vertical alignment for elastic behavior
+.k-button-icon,
+.k-split-button-arrow {
+    height: calc(1.72em + (2*@button-padding-y) + 2px); // proper vertical alignment for elastic behavior
+    width: calc(1.72em + (2*@button-padding-y) + 2px);
+    padding: @button-padding-y calc(@button-padding-x/2);
 }
 
 .k-toolbar .k-button-icontext
@@ -161,14 +158,10 @@ body .k-split-button-arrow
     flex-direction: row;
     vertical-align: middle;
     position: relative;
-    overflow: hidden;
 
     .k-button {
         // .border-radius( 0 );
         position: relative;
-    }
-    .k-button ~ .k-button {
-        margin-left: -1px;
     }
 
     .k-button:hover,
