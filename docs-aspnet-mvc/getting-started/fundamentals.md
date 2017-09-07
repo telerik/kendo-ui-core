@@ -9,7 +9,7 @@ position: 2
 
 # Fundamentals
 
-Progress Telerik UI for ASP.NET MVC is a set of server-side wrappers.
+Telerik UI for ASP.NET MVC is a set of server-side wrappers.
 
 ## Overview of Server-Side Wrappers
 
@@ -304,12 +304,12 @@ The above explanation and requirements are applicable to all stylesheets that us
 
 ## See Also
 
-* [Progress Telerik UI for ASP.NET MVC Overview]({% slug overview_aspnetmvc %})
-* [Progress Telerik UI for ASP.NET MVC NuGet Packages]({% slug aspnetmvc_nuget %})
-* [Scaffolding with Progress Telerik UI for ASP.NET MVC]({% slug scaffolding_aspnetmvc %})
-* [Use Progress Telerik UI for ASP.NET MVC in MVC 3 Applications]({% slug aspnetmvc3_aspnetmvc %})
-* [Use Progress Telerik UI for ASP.NET MVC in MVC 4 Applications]({% slug aspnetmvc4_aspnetmvc %})
-* [Use Progress Telerik UI for ASP.NET MVC in MVC 5 Applications]({% slug aspnetmvc5_aspnetmvc %})
-* [Use Progress Telerik UI for ASP.NET Core](http://docs.telerik.com/aspnet-core/introduction)
-* [Use Progress Telerik UI for ASP.NET MVC Visual Studio Extensions]({% slug overview_visualstudio_aspnetmvc %})
-* [Progress Telerik UI for ASP.NET MVC Troubleshooting]({% slug troubleshooting_aspnetmvc %})
+* [Telerik UI for ASP.NET MVC Overview]({% slug overview_aspnetmvc %})
+* [Telerik UI for ASP.NET MVC NuGet Packages]({% slug aspnetmvc_nuget %})
+* [Scaffolding with Telerik UI for ASP.NET MVC]({% slug scaffolding_aspnetmvc %})
+* [Use Telerik UI for ASP.NET MVC in MVC 3 Applications]({% slug aspnetmvc3_aspnetmvc %})
+* [Use Telerik UI for ASP.NET MVC in MVC 4 Applications]({% slug aspnetmvc4_aspnetmvc %})
+* [Use Telerik UI for ASP.NET MVC in MVC 5 Applications]({% slug aspnetmvc5_aspnetmvc %})
+* [Use Telerik UI for ASP.NET Core](http://docs.telerik.com/aspnet-core/introduction)
+* [Use Telerik UI for ASP.NET MVC Visual Studio Extensions]({% slug overview_visualstudio_aspnetmvc %})
+* [Telerik UI for ASP.NET MVC Troubleshooting]({% slug troubleshooting_aspnetmvc %})

@@ -9,7 +9,7 @@ position: 4
 
 # Only What You Need
 
-Depending on the requirements of your project, you might need to skip some of the Progress<sup>®</sup> Kendo UI<sup>®</sup> utilities and install only what you need.  
+Depending on the requirements of your project, you might need to skip some of the Kendo UI utilities and install only what you need.  
 
 ## Combined Scripts
 
@@ -92,7 +92,7 @@ List the components you want to be included in the custom build and separate the
 
 Other articles on getting started with Kendo UI:
 
-* [Get Started with Progress<sup>®</sup> Kendo UI<sup>®</sup>]({% slug getting_started_installation_kendoui %})
+* [Get Started with Kendo UI]({% slug getting_started_installation_kendoui %})
 * [Kendo UI CDN Services]({% slug kendoui_cdn_services_installation %})
 * [JavaScript Prerequisites]({% slug javascript_prerequisites_kendoui_installation %})
 * [Initialize Widgets Using jQuery Plug-Ins]({% slug initialize_widgets_using_jquery_plugins_installation %})

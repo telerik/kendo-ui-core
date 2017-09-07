@@ -1,6 +1,6 @@
 ---
 title: DateInput
-page_title: DateInput | UI for ASP.NET Core HtmlHelpers
+page_title: DateInput | Telerik UI for ASP.NET Core HtmlHelpers
 description: "Learn the basics when working with the DateInput HtmlHelper for ASP.NET Core (MVC 6 or ASP.NET Core MVC)."
 slug: htmlhelpers_dateinput_aspnetcore
 ---
@@ -67,7 +67,7 @@ The following example demonstrates how to access an existing DateInput instance.
 ## See Also
 
 * [Overview of the JavaScript Kendo UI DateInput Widget](http://docs.telerik.com/kendo-ui/controls/editors/dateinput/overview)
-* [Overview of Telerik UI for ASP.NET Core - RC1]({% slug overview_aspnetmvc6_aspnetmvc %})
-* [Get Started with Telerik UI for ASP.NET MVC in ASP.NET Core Projects]({% slug gettingstarted_aspnetmvc6_aspnetmvc %})
-* [Get Started with Telerik UI for ASP.NET MVC in ASP.NET Core Projects on Linux]({% slug gettingstartedlinux_aspnetmvc6_aspnetmvc %})
+* [Overview of Telerik UI for ASP.NET Core]({% slug overview_aspnetmvc6_aspnetmvc %})
+* [Get Started with Telerik UI for ASP.NET Core in ASP.NET Core Projects]({% slug gettingstarted_aspnetmvc6_aspnetmvc %})
+* [Get Started with Telerik UI for ASP.NET Core in ASP.NET Core Projects on Linux]({% slug gettingstartedlinux_aspnetmvc6_aspnetmvc %})
 * [Known Issues with Telerik UI for ASP.NET Core]({% slug knownissues_aspnetmvc6_aspnetmvc %})

@@ -17,7 +17,7 @@ In this chapter you are going to start with the basics, including starting a new
 
 #### Overview
 
-UI for ASP.NET MVC can easily be added to an existing ASP.NET MVC project using VisualStudio in just a few clicks. Start by creating a new ASP.NET MVC project. You will use this project throughout the rest of this tutorial to build your application.
+Telerik UI for ASP.NET MVC can easily be added to an existing ASP.NET MVC project using VisualStudio in just a few clicks. Start by creating a new ASP.NET MVC project. You will use this project throughout the rest of this tutorial to build your application.
 
 #### Exercise: Create a New MVC Project
 
@@ -258,7 +258,7 @@ A copy of the Northwind database is included in the Kendo UI Quick Start Boilerp
 
 With the database upgraded, use the scaffolding wizard to create an interactive grid view.
 
-### UI for MVC Scaffolding Wizard
+### Telerik UI for MVC Scaffolding Wizard
 
 #### Overview
 
@@ -274,11 +274,11 @@ The scaffolding wizard will aid you in creating the view by providing point-and-
 
     ![](images/chapter3/scaffold-2.jpg)
 
-1. Notice that the Scaffolder is capable of creating Grid, Chart, and Scheduler views for both C# and JavaScript. For this guide you'll be using the UI for MVC Grid scaffolding option. Choose **UI for MVC Grid** and click **Add** to continue.
+1. Notice that the Scaffolder is capable of creating Grid, Chart, and Scheduler views for both C# and JavaScript. For this guide you'll be using the Telerik UI for MVC Grid scaffolding option. Choose **Telerik UI for MVC Grid** and click **Add** to continue.
 
     ![](images/chapter3/scaffold-3.jpg)
 
-1. From the **UI for MVC Grid** scaffolding dialog, the Grid's model options, Grid options and events are defined. The Model Options control the following settings:
+1. From the **Telerik UI for MVC Grid** scaffolding dialog, the Grid's model options, Grid options and events are defined. The Model Options control the following settings:
 
     - **Controller Name**&mdash;The name of the controller created by the Scaffolder.
     - **View Name**&mdash;The name of the created view, which will display the scaffolded grid.
@@ -334,7 +334,7 @@ The scaffolding wizard will aid you in creating the view by providing point-and-
 
     ![](images/chapter3/invoices-grid.jpg)
 
-Now that the UI for MVC Scaffolder has generated a starting point for working with the Grid, you can modify the scaffolded code to meet your needs. In the next chapter we'll do just that.
+Now that the Telerik UI for MVC Scaffolder has generated a starting point for working with the Grid, you can modify the scaffolded code to meet your needs. In the next chapter we'll do just that.
 
 ## Kendo UI Grid
 
@@ -388,7 +388,7 @@ As you may have noticed in the scaffolding wizard, the Grid is a versatile compo
 
 #### Exercise: Modify the Grid's Name Property
 
-1. Change the Grid's `Name` from `"grid"` to `"EmployeeSales"`. This is an important step since the `Name` property of all UI for MVC wrappers set the `id` attribute of the rendered Kendo UI widget.
+1. Change the Grid's `Name` from `"grid"` to `"EmployeeSales"`. This is an important step since the `Name` property of all Telerik UI for MVC wrappers set the `id` attribute of the rendered Kendo UI widget.
 
 1. Find the `.Name` method and change the value from `"grid"` to `"EmployeeSales"`.
 
@@ -910,7 +910,7 @@ At this point the dashboard is showing all invoice data. Let's use the `Employee
                     .Data("getEmployeeFilter"))
         )
 
-1. Add the property `AutoBind` to the end of the property chain and set the value to `false`. Setting `AutoBind` to `false` tells the UI for MVC that the datasource's `Read` action is invoked manually on the client.
+1. Add the property `AutoBind` to the end of the property chain and set the value to `false`. Setting `AutoBind` to `false` tells the Telerik UI for MVC that the datasource's `Read` action is invoked manually on the client.
 
     The resulting code should be like the one shown in the example below.
 

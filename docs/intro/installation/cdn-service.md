@@ -9,7 +9,7 @@ position: 2
 
 # CDN Services
 
-The Progress<sup>®</sup> Kendo UI<sup>®</sup> CDN is hosted on the [Amazon CloudFront](https://aws.amazon.com/cloudfront/).
+The Kendo UI CDN is hosted on the [Amazon CloudFront](https://aws.amazon.com/cloudfront/).
 
 ## Accessing the CDN
 
@@ -113,7 +113,7 @@ For internal builds, use private CDN services. It is recommended to implement a 
 
 Other articles on getting started with Kendo UI:
 
-* [Get Started with Progress<sup>®</sup> Kendo UI<sup>®</sup>]({% slug getting_started_installation_kendoui %})
+* [Get Started with Kendo UI]({% slug getting_started_installation_kendoui %})
 * [Include Only What You Need]({% slug include_only_what_you_need_kendoui_installation %})
 * [JavaScript Prerequisites]({% slug javascript_prerequisites_kendoui_installation %})
 * [Initialize Widgets Using jQuery Plug-Ins]({% slug initialize_widgets_using_jquery_plugins_installation %})

@@ -16,7 +16,7 @@ For more information on possible setups, refer to the [sample repository on GitH
 
 ## Overview
 
-Progress<sup>®</sup> Kendo UI<sup>®</sup> maintains two NPM packages:
+Kendo UI maintains two NPM packages:
 
 * [Kendo UI Core](#kendo-ui-core)
 * [Kendo UI Professional](#kendo-ui-professional)
@@ -75,7 +75,7 @@ Use an NPM ^3.0.0 version.
 
 Other articles on getting started with Kendo UI:
 
-* [Get Started with Progress<sup>®</sup> Kendo UI<sup>®</sup>]({% slug getting_started_installation_kendoui %})
+* [Get Started with Kendo UI]({% slug getting_started_installation_kendoui %})
 * [Kendo UI CDN Services]({% slug kendoui_cdn_services_installation %})
 * [Kendo UI Bower Packages]({% slug kendoui_bower_packages_kendoui_installation %})
 * [NuGet Packages]({% slug kendoui_nuget_packages %})

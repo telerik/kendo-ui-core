@@ -10,10 +10,10 @@ position: 2
 
 ## November
 
-The UI for ASP.NET MVC documentation is now split into UI for ASP.NET MVC and UI for ASP.NET Core. The domains diverged from the existing Kendo UI documentation and are hosted on the following individual websites:
+The Telerik UI for ASP.NET MVC documentation is now split into Telerik UI for ASP.NET MVC and Telerik UI for ASP.NET Core. The domains diverged from the existing Kendo UI documentation and are hosted on the following individual websites:
 
-* [UI for ASP.NET MVC](http://docs.telerik.com/aspnet-mvc/introduction)
-* [UI for ASP.NET Core](http://docs.telerik.com/aspnet-core/introduction)
+* [Telerik UI for ASP.NET MVC](http://docs.telerik.com/aspnet-mvc/introduction)
+* [Telerik UI for ASP.NET Core](http://docs.telerik.com/aspnet-core/introduction)
 
 ## August
 
@@ -192,9 +192,9 @@ The **Copyright** notice is now added.
 
 The following articles have been added:
 
-* A new troubleshooting article on Scaffolding when using the Kendo UI Scaffolder Visual Studio Extension is now available. For more information, go to [**UI for ASP.NET MVC** > **Troubleshooting** > **Scaffolding**](http://docs.telerik.com/aspnet-mvc/troubleshoot/troubleshooting-scaffolding).
+* A new troubleshooting article on Scaffolding when using the Kendo UI Scaffolder Visual Studio Extension is now available. For more information, go to [**Telerik UI for ASP.NET MVC** > **Troubleshooting** > **Scaffolding**](http://docs.telerik.com/aspnet-mvc/troubleshoot/troubleshooting-scaffolding).
 * A new troubleshooting article on Validation is now available. For more information, go to [**UI for ASP.NET MVC** > **Troubleshooting** > **Validation**](http://docs.telerik.com/aspnet-mvc/troubleshoot/troubleshooting-validation).
-* The **Globalization and Localization** article on Telerik UI for ASP.NET MVC is now split to list the two topics separately for a better navigation. The current location of them both is [**UI for ASP.NET MVC** > **Globalization**](http://docs.telerik.com/aspnet-mvc/getting-started/globalization) and [**UI for ASP.NET MVC** > **Localization**](http://docs.telerik.com/aspnet-mvc/getting-started/localization) respectively.
+* The **Globalization and Localization** article on Telerik UI for ASP.NET MVC is now split to list the two topics separately for a better navigation. The current location of them both is [**UI for ASP.NET MVC** > **Globalization**](http://docs.telerik.com/aspnet-mvc/getting-started/globalization) and [**Telerik UI for ASP.NET MVC** > **Localization**](http://docs.telerik.com/aspnet-mvc/getting-started/localization) respectively.
 
 ### Existing
 

@@ -1,7 +1,7 @@
 ---
 title: Upgrading Project API
-page_title: Upgrading Project API | UI for ASP.NET MVC Visual Studio Integration
-description: "Learn how to analyze a Progress&reg; Telerik&reg; UI for ASP.NET MVC application."
+page_title: Upgrading Project API | Telerik UI for ASP.NET MVC Visual Studio Integration
+description: "Learn how to analyze a Telerik UI for ASP.NET MVC application."
 slug: upgrade_api_analyzer_visualstudio_aspnetmvc
 position: 8
 ---

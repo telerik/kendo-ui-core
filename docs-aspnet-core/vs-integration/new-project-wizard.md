@@ -26,7 +26,7 @@ To start the **Create New Project Wizard**, follow either of the approaches belo
 **Approach 2**
 
 1. Click **File** > **New** > **Project**.
-2. Navigate to the Telerik ASP.NET Core MVC project templates under **Telerik** > **Web**.
+2. Navigate to the Telerik ASP.NET Core project templates under **Telerik** > **Web**.
 
 For convenience, the same project templates are located under the **Visual C#** > **Web** and **Visual C#** > **.NET Core** nodes.
 

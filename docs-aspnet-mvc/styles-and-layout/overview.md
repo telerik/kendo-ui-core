@@ -1,6 +1,6 @@
 ---
 title: Sass Theme Builder
-page_title: Sass Theme Builder | UI for ASP.NET MVC Styles and Appearance
+page_title: Sass Theme Builder | Telerik UI for ASP.NET MVC Styles and Appearance
 description: "Use the Sass Theme Builder to customize Kendo UI themes in Telerik UI for ASP.NET MVC applications."
 slug: themebuilder_overview
 position: 1

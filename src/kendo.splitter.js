@@ -84,7 +84,10 @@ var __meta__ = { // jshint ignore:line
 
             that.wrapper = that.element;
 
-            isHorizontal = that.options.orientation.toLowerCase() != VERTICAL;
+            if(that.options.orientation){
+                isHorizontal = that.options.orientation.toLowerCase() != VERTICAL;
+            }
+
             that.orientation = isHorizontal ? HORIZONTAL : VERTICAL;
             that._dimension = isHorizontal ? "width" : "height";
             that._keys = {

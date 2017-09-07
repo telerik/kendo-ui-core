@@ -1,6 +1,6 @@
 ---
 title: ListView
-page_title: ListView | UI for ASP.NET Core HtmlHelpers
+page_title: ListView | Telerik UI for ASP.NET Core HtmlHelpers
 description: "Learn the basics when working with the ListView HtmlHelper for ASP.NET Core (MVC 6 or ASP.NET Core MVC)."
 slug: htmlhelpers_listview_aspnetcore
 ---
@@ -94,7 +94,7 @@ The following example demonstrates the basic configuration for the ListView with
 * [JavaScript API Reference of the ListView](http://docs.telerik.com/kendo-ui/api/javascript/ui/listview)
 * [ListView HtmlHelper for ASP.NET MVC](http://docs.telerik.com/aspnet-mvc/helpers/listview/overview)
 * [ListView Official Demos](http://demos.telerik.com/aspnet-core/listview/index)
-* [Overview of Telerik UI for ASP.NET Core - RC1]({% slug overview_aspnetmvc6_aspnetmvc %})
-* [Get Started with Telerik UI for ASP.NET MVC in ASP.NET Core Projects]({% slug gettingstarted_aspnetmvc6_aspnetmvc %})
-* [Get Started with Telerik UI for ASP.NET MVC in ASP.NET Core Projects on Linux]({% slug gettingstartedlinux_aspnetmvc6_aspnetmvc %})
+* [Overview of Telerik UI for ASP.NET Core]({% slug overview_aspnetmvc6_aspnetmvc %})
+* [Get Started with Telerik UI for ASP.NET Core in ASP.NET Core Projects]({% slug gettingstarted_aspnetmvc6_aspnetmvc %})
+* [Get Started with Telerik UI for ASP.NET Core in ASP.NET Core Projects on Linux]({% slug gettingstartedlinux_aspnetmvc6_aspnetmvc %})
 * [Known Issues with Telerik UI for ASP.NET Core]({% slug knownissues_aspnetmvc6_aspnetmvc %})

@@ -1,6 +1,6 @@
 ---
 title: Tooltip
-page_title: Tooltip | UI for ASP.NET Core HtmlHelpers
+page_title: Tooltip | Telerik UI for ASP.NET Core HtmlHelpers
 description: "Learn the basics when working with the Tooltip HtmlHelper for ASP.NET Core (MVC 6 or ASP.NET Core MVC)."
 slug: htmlhelpers_tooltip_aspnetcore
 ---
@@ -63,7 +63,7 @@ The following example demonstrates the basic configuration of the Tooltip HtmlHe
 * [JavaScript API Reference of the Tooltip](http://docs.telerik.com/kendo-ui/api/javascript/ui/tooltip)
 * [Tooltip HtmlHelper for ASP.NET MVC](http://docs.telerik.com/aspnet-mvc/helpers/tooltip/overview)
 * [Tooltip Official Demos](http://demos.telerik.com/aspnet-core/tooltip/index)
-* [Overview of Telerik UI for ASP.NET Core - RC1]({% slug overview_aspnetmvc6_aspnetmvc %})
-* [Get Started with Telerik UI for ASP.NET MVC in ASP.NET Core Projects]({% slug gettingstarted_aspnetmvc6_aspnetmvc %})
-* [Get Started with Telerik UI for ASP.NET MVC in ASP.NET Core Projects on Linux]({% slug gettingstartedlinux_aspnetmvc6_aspnetmvc %})
+* [Overview of Telerik UI for ASP.NET Core]({% slug overview_aspnetmvc6_aspnetmvc %})
+* [Get Started with Telerik UI for ASP.NET Core in ASP.NET Core Projects]({% slug gettingstarted_aspnetmvc6_aspnetmvc %})
+* [Get Started with Telerik UI for ASP.NET Core in ASP.NET Core Projects on Linux]({% slug gettingstartedlinux_aspnetmvc6_aspnetmvc %})
 * [Known Issues with Telerik UI for ASP.NET Core]({% slug knownissues_aspnetmvc6_aspnetmvc %})

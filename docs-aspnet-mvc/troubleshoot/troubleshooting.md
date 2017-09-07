@@ -1,6 +1,6 @@
 ---
 title: Common Issues
-page_title: Common Issues | UI for ASP.NET MVC Troubleshooting
+page_title: Common Issues | Telerik UI for ASP.NET MVC Troubleshooting
 description: "Learn about the solutions of common issues that may occur while working with Telerik UI for ASP.NET MVC."
 previous_url: /kendo-ui/aspnet-mvc/troubleshooting, /aspnet-mvc/troubleshooting
 slug: troubleshooting_aspnetmvc

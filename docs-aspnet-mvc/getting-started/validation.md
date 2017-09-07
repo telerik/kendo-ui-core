@@ -9,7 +9,7 @@ position: 6
 
 # Validation
 
-This article describes how to use client-side validation with Progress Telerik UI for ASP.NET MVC. It also provides hints on how to use the Kendo UI Validator and the MVC default jQuery validation.
+This article describes how to use client-side validation with Telerik UI for ASP.NET MVC. It also provides hints on how to use the Kendo UI Validator and the MVC default jQuery validation.
 
 ## Common Scenarios
 
@@ -321,9 +321,9 @@ For a list of issues and solutions to common problems you may encounter while im
 
 ## See Also
 
-* [Progress Telerik UI for ASP.NET MVC Overview]({% slug overview_aspnetmvc %})
-* [Migration from Progress Telerik Extensions]({% slug overview_migrationextensions_aspnetmvc %})
-* [Progress Telerik UI for ASP.NET MVC HtmlHelpers]({% slug overview_autocompletehelper_aspnetmvc %})
+* [Telerik UI for ASP.NET MVC Overview]({% slug overview_aspnetmvc %})
+* [Migration from Telerik Extensions]({% slug overview_migrationextensions_aspnetmvc %})
+* [Telerik UI for ASP.NET MVC HtmlHelpers]({% slug overview_autocompletehelper_aspnetmvc %})
 * [ASP.NET Core](http://docs.telerik.com/aspnet-core/introduction)
-* [Scaffolding with Progress Telerik UI for ASP.NET MVC]({% slug scaffolding_aspnetmvc %})
-* [Progress Telerik UI for ASP.NET MVC Troubleshooting]({% slug troubleshooting_aspnetmvc %})
+* [Scaffolding with Telerik UI for ASP.NET MVC]({% slug scaffolding_aspnetmvc %})
+* [Telerik UI for ASP.NET MVC Troubleshooting]({% slug troubleshooting_aspnetmvc %})

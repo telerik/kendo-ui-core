@@ -1,6 +1,6 @@
 ---
 title: Scaffolding
-page_title: Scaffolding | UI for ASP.NET MVC Troubleshooting
+page_title: Scaffolding | Telerik UI for ASP.NET MVC Troubleshooting
 description: "Learn about the solutions of issues that may occur while using the Kendo UI Scaffolder Visual Studio Extension."
 slug: troubleshooting_scaffolding_aspnetmvc
 position: 2

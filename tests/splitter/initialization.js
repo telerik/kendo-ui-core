@@ -21,6 +21,12 @@
         ok(splitter.dom.hasClass("k-splitter"));
     });
 
+    test("constructor interprets null orientation as horizontal", function() {
+        splitter = create({ orientation: null }, 1);
+
+        ok(splitter.dom.hasClass("k-splitter"));
+    });
+
     test("init adds classes to child elements", function() {
         splitter = create({}, 1);
 

@@ -260,10 +260,10 @@ navigation:
         title: "Tutorials"
         position: 8
     "jsp":
-        title: "UI for JSP"
+        title: "Progress<sup>®</sup> Telerik<sup>®</sup> UI for JSP"
         position: 9
     "php":
-        title: "UI for PHP"
+        title: "Progress<sup>®</sup> Telerik<sup>®</sup> UI for PHP"
         position: 10
     "php/widgets":
         title: "Classes"
@@ -543,7 +543,7 @@ navigation:
         position: 4
     "all-pages":
         title: "All Pages GSA"
-        
+
 ## The application virtual path
 baseurl: /kendo-ui
 

@@ -15,9 +15,9 @@ However, before choosing one product over another, you need to consider existing
 
 ## List of Pros and Cons
 
-### Progress Telerik UI for ASP.NET MVC Wrappers
+### Telerik UI for ASP.NET MVC Wrappers
 
-The UI for ASP.NET MVC helpers (Kendo UI MVC wrappers) provide the following benefits:
+The Telerik UI for ASP.NET MVC helpers (Kendo UI MVC wrappers) provide the following benefits:
 
 * They enable you to create widgets with no HTML and JavaScript coding. JavaScript knowledge is still required if you want to apply client-side methods and events.
 * They provide for [server-side data binding]({% slug serverbinding_grid_aspnetmvc %}) and in some cases, server-side rendering.
@@ -41,17 +41,17 @@ The vanilla HTML/JavaScript Kendo UI widgets (Kendo UI Professional) provide the
 
 ## Conclusion
 
-You can use UI for ASP.NET MVC helpers and vanilla Kendo UI widgets at the same time on the same page, if a specific scenario requires that.
+You can use Telerik UI for ASP.NET MVC helpers and vanilla Kendo UI widgets at the same time on the same page, if a specific scenario requires that.
 
 ## See Also
 
-* [Progress Telerik UI for ASP.NET MVC Overview]({% slug overview_aspnetmvc %})
-* [Progress Telerik UI for ASP.NET MVC Custom DataSource]({% slug customdatasource_aspnetmvc %})
-* [Validation with Progress Telerik UI for ASP.NET MVC]({% slug validation_aspnetmvc %})
-* [Globalization with Progress Telerik UI for ASP.NET MVC]({% slug globalization_aspnetmvc %})
-* [Localization with Progress Telerik UI for ASP.NET MVC]({% slug localization_aspnetmvc %})
-* [Tutorials on Progress Telerik UI for ASP.NET MVC]({% slug overview_timeefficiencyapp_aspnetmvc6 %})
-* [Progress Telerik UI for ASP.NET MVC Fundamentals]({% slug fundamentals_aspnetmvc %})
-* [Progress Telerik UI for ASP.NET MVC NuGet Packages]({% slug aspnetmvc_nuget %})
-* [Scaffolding with Progress Telerik UI for ASP.NET MVC]({% slug scaffolding_aspnetmvc %})
-* [Progress Telerik UI for ASP.NET MVC Troubleshooting]({% slug troubleshooting_aspnetmvc %})
+* [Telerik UI for ASP.NET MVC Overview]({% slug overview_aspnetmvc %})
+* [Telerik UI for ASP.NET MVC Custom DataSource]({% slug customdatasource_aspnetmvc %})
+* [Validation with Telerik UI for ASP.NET MVC]({% slug validation_aspnetmvc %})
+* [Globalization with Telerik UI for ASP.NET MVC]({% slug globalization_aspnetmvc %})
+* [Localization with Telerik UI for ASP.NET MVC]({% slug localization_aspnetmvc %})
+* [Tutorials on Telerik UI for ASP.NET MVC]({% slug overview_timeefficiencyapp_aspnetmvc6 %})
+* [Telerik UI for ASP.NET MVC Fundamentals]({% slug fundamentals_aspnetmvc %})
+* [Telerik UI for ASP.NET MVC NuGet Packages]({% slug aspnetmvc_nuget %})
+* [Scaffolding with Telerik UI for ASP.NET MVC]({% slug scaffolding_aspnetmvc %})
+* [Telerik UI for ASP.NET MVC Troubleshooting]({% slug troubleshooting_aspnetmvc %})

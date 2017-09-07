@@ -9,7 +9,7 @@ position: 6
 
 # jQuery Plug-Ins Widget Initialization
 
-All Progress<sup>®</sup> Kendo UI<sup>®</sup> widgets are registered as [jQuery plug-ins](http://learn.jquery.com/plugins/) which allows them to be instantiated on a jQuery object instance.
+All Kendo UI widgets are registered as [jQuery plug-ins](http://learn.jquery.com/plugins/) which allows them to be instantiated on a jQuery object instance.
 
 ## Overview
 
@@ -182,7 +182,7 @@ The following example demonstrates how to set the [`height`](/api/javascript/ui/
 
 Other articles on getting started with Kendo UI:
 
-* [Get Started with Progress<sup>®</sup> Kendo UI<sup>®</sup>]({% slug getting_started_installation_kendoui %})
+* [Get Started with Kendo UI]({% slug getting_started_installation_kendoui %})
 * [Kendo UI CDN Services]({% slug kendoui_cdn_services_installation %})
 * [Include Only What You Need]({% slug include_only_what_you_need_kendoui_installation %})
 * [JavaScript Prerequisites]({% slug javascript_prerequisites_kendoui_installation %})

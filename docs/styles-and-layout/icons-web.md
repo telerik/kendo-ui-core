@@ -84,7 +84,7 @@ Icon fonts support the following options for visual enhancement:
 
 The Kendo UI font icons are designed on a 16px grid base. To achieve a pixel-perfect icon display, scale up by maintaining the 16-unit measure (32, 48, 64, and so on).
 
-You can scale icons by just setting the `font-size` configuration option.  
+You can scale icons by just setting the `font-size` configuration option.
 
 ```html
 <span class="k-icon k-i-gear"></span>
@@ -641,12 +641,12 @@ fonts in fonts/
 </ul>
 
 <script>
-$(".k-icon").each(function() {
-    function iconGlyph(el) {
-        return window.getComputedStyle(el,':before').content.charCodeAt(1).toString(16);
-     }
-     $(this.parentNode).append("<br />Unicode: " + iconGlyph(this) + "")
-});
+    $(".WebComponentsIcons .k-icon").each(function() {
+        function iconGlyph(el) {
+            return window.getComputedStyle(el,':before').content.charCodeAt(1).toString(16);
+        }
+        $(this.parentNode).append("<br />Unicode: " + iconGlyph(this) + "")
+    });
 </script>
 
 ## See Also

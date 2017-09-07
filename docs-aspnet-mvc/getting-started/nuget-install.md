@@ -71,13 +71,26 @@ The NuGet Feed provides the following packages related to UI for ASP.NET MVC:
 
 The [Kendo UI Packages](../../kendo-ui/intro/installation/nuget-install) are listed in a separate section.
 
+## Troubleshooting
+
+### Getting Error [Telerik Nuget] The V2 feed at '...' returned an unexpected status code '401 Logon failed.' After Changing Telerik Password
+
+After changing your Telerik password, you need to reset your credentials in the `NuGet.config` file. To do this, run the following command:
+
+###### Example
+
+```
+NuGet Sources Update -Name "telerik.com " -Source "https://nuget.telerik.com/nuget" ^
+      -UserName "your login email" -Password "your new password"
+``` 
+
 ## See Also
 
-* [Progress Telerik UI for ASP.NET MVC Fundamentals]({% slug fundamentals_aspnetmvc %})
-* [Scaffolding with Progress Telerik UI for ASP.NET MVC]({% slug scaffolding_aspnetmvc %})
-* [Use Progress Telerik UI for ASP.NET MVC in MVC 3 Applications]({% slug aspnetmvc3_aspnetmvc %})
-* [Use Progress Telerik UI for ASP.NET MVC in MVC 4 Applications]({% slug aspnetmvc4_aspnetmvc %})
-* [Use Progress Telerik UI for ASP.NET MVC in MVC 5 Applications]({% slug aspnetmvc5_aspnetmvc %})
-* [Use Progress Telerik UI for ASP.NET MVC in Core MVC Applications](../../aspnet-core/introduction)
-* [Use Progress Telerik UI for ASP.NET MVC Visual Studio Extensions]({% slug overview_visualstudio_aspnetmvc %})
-* [Progress Telerik UI for ASP.NET MVC Troubleshooting]({% slug troubleshooting_aspnetmvc %})
+* [Telerik UI for ASP.NET MVC Fundamentals]({% slug fundamentals_aspnetmvc %})
+* [Scaffolding with Telerik UI for ASP.NET MVC]({% slug scaffolding_aspnetmvc %})
+* [Use Telerik UI for ASP.NET MVC in MVC 3 Applications]({% slug aspnetmvc3_aspnetmvc %})
+* [Use Telerik UI for ASP.NET MVC in MVC 4 Applications]({% slug aspnetmvc4_aspnetmvc %})
+* [Use Telerik UI for ASP.NET MVC in MVC 5 Applications]({% slug aspnetmvc5_aspnetmvc %})
+* [Use Telerik UI for ASP.NET MVC in Core MVC Applications](../../aspnet-core/introduction)
+* [Use Telerik UI for ASP.NET MVC Visual Studio Extensions]({% slug overview_visualstudio_aspnetmvc %})
+* [Telerik UI for ASP.NET MVC Troubleshooting]({% slug troubleshooting_aspnetmvc %})

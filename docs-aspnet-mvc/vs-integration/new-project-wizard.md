@@ -1,20 +1,20 @@
 ---
 title: Creating Projects
-page_title: Creating Projects | UI for ASP.NET MVC Visual Studio Integration
-description: "Learn how to create a new Progress&reg; Telerik&reg; UI for ASP.NET MVC application."
+page_title: Creating Projects | Telerik UI for ASP.NET MVC Visual Studio Integration
+description: "Learn how to create a new Telerik UI for ASP.NET MVC application."
 slug: newprojectwizards_visualstudio_aspnetmvc
 position: 2
 ---
 
 # Creating Projects
 
-This article demonstrates how to create a new Progress&reg; Telerik&reg; UI for ASP.NET MVC application.
+This article demonstrates how to create a new Telerik UI for ASP.NET MVC application.
 
 ## Getting Started
 
 ### The Basics
 
-New Progress&reg; Telerik&reg; UI for ASP.NET MVC applications are created by using the **Create New Project Wizard**.
+New Telerik UI for ASP.NET MVC applications are created by using the **Create New Project Wizard**.
 
 To start the **Create New Project Wizard**, follow either of the approaches below.
 

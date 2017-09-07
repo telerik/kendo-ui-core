@@ -1,6 +1,6 @@
 ---
 title: PanelBar
-page_title: PanelBar | UI for ASP.NET Core HtmlHelpers
+page_title: PanelBar | Telerik UI for ASP.NET Core HtmlHelpers
 description: "Learn the basics when working with the PanelBar HtmlHelper for ASP.NET Core (MVC 6 or ASP.NET Core MVC)."
 slug: htmlhelpers_panelbar_aspnetcore
 ---
@@ -113,7 +113,7 @@ The following example demonstrates the basic configuration of the PanelBar HtmlH
 * [JavaScript API Reference of the PanelBar](http://docs.telerik.com/kendo-ui/api/javascript/ui/panelbar)
 * [PanelBar HtmlHelper for ASP.NET MVC](http://docs.telerik.com/aspnet-mvc/helpers/panelbar/overview)
 * [PanelBar Official Demos](http://demos.telerik.com/aspnet-core/panelbar/index)
-* [Overview of Telerik UI for ASP.NET Core - RC1]({% slug overview_aspnetmvc6_aspnetmvc %})
-* [Get Started with Telerik UI for ASP.NET MVC in ASP.NET Core Projects]({% slug gettingstarted_aspnetmvc6_aspnetmvc %})
-* [Get Started with Telerik UI for ASP.NET MVC in ASP.NET Core Projects on Linux]({% slug gettingstartedlinux_aspnetmvc6_aspnetmvc %})
+* [Overview of Telerik UI for ASP.NET Core]({% slug overview_aspnetmvc6_aspnetmvc %})
+* [Get Started with Telerik UI for ASP.NET Core in ASP.NET Core Projects]({% slug gettingstarted_aspnetmvc6_aspnetmvc %})
+* [Get Started with Telerik UI for ASP.NET Core in ASP.NET Core Projects on Linux]({% slug gettingstartedlinux_aspnetmvc6_aspnetmvc %})
 * [Known Issues with Telerik UI for ASP.NET Core]({% slug knownissues_aspnetmvc6_aspnetmvc %})

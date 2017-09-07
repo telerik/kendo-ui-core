@@ -6,7 +6,7 @@ slug: overview_uiforjsp
 position: 1
 ---
 
-# Progress<sup>®</sup>Telerik<sup>®</sup> UI for JSP
+# Progress<sup>®</sup> Telerik<sup>®</sup> UI for JSP
 
 This article demonstrates how to download and install Progress Telerik UI for JSP and run a sample application.
 
@@ -147,10 +147,10 @@ You are also able to include the JavaScript and CSS files from CDN. Do not forge
 
 To gain more practice on Progress Telerik UI for JSP, watch the video tutorials on the [Kendo UI YouTube Channel](http://www.youtube.com/kendouitv):
 
-1. [Get Started with Progress Telerik UI for JSP: Episode 1](https://www.youtube.com/watch?v=3VH75XVhLCI)
-1. [Get Started with Progress Telerik UI for JSP: Episode 2](https://www.youtube.com/watch?v=LyGHeRMmq5I)
-1. [Get Started with Progress Telerik UI for JSP: Episode 3](https://www.youtube.com/watch?v=sCwqj_ZRGI8)
-1. [Get Started with Progress Telerik UI for JSP: Episode 4](https://www.youtube.com/watch?v=fcbw4YR4P2I)
+1. [Get Started with Telerik UI for JSP: Episode 1](https://www.youtube.com/watch?v=3VH75XVhLCI)
+1. [Get Started with Telerik UI for JSP: Episode 2](https://www.youtube.com/watch?v=LyGHeRMmq5I)
+1. [Get Started with Telerik UI for JSP: Episode 3](https://www.youtube.com/watch?v=sCwqj_ZRGI8)
+1. [Get Started with Telerik UI for JSP: Episode 4](https://www.youtube.com/watch?v=fcbw4YR4P2I)
 
 For more examples on how to use Kendo UI with JSP wrappers, visit the [GitHub repository with the collected Kendo UI examples on using JSP](https://github.com/telerik/kendo-examples-java).
 
@@ -158,5 +158,5 @@ For more examples on how to use Kendo UI with JSP wrappers, visit the [GitHub re
 
 Other articles on Progress Telerik UI for JSP:
 
-* [Progress Telerik UI for JSP API Reference Folder](/api/jsp/autocomplete/animation)
-* [Progress Telerik UI for JSP Tags Folder]({% slug overview_autocomplete_uiforjsp %})
+* [Telerik UI for JSP API Reference Folder](/api/jsp/autocomplete/animation)
+* [Telerik UI for JSP Tags Folder]({% slug overview_autocomplete_uiforjsp %})

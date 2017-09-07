@@ -1,6 +1,6 @@
 ---
 title: Sortable
-page_title: Sortable | UI for ASP.NET Core HtmlHelpers
+page_title: Sortable | Telerik UI for ASP.NET Core HtmlHelpers
 description: "Learn the basics when working with the Kendo UI Sortable widget for ASP.NET Core (MVC 6 or ASP.NET Core MVC)."
 slug: htmlhelpers_sortable_aspnetcore
 ---
@@ -211,8 +211,8 @@ To reference an existing Kendo UI Sortable instance, use the [`jQuery.data()`](h
 ## See Also
 
 * [ASP.NET MVC API Reference: SortableBuilder](http://docs.telerik.com/aspnet-mvc/api/Kendo.Mvc.UI.Fluent/SortableBuilder)
-* [Overview of Telerik UI for ASP.NET Core	]({% slug overview_aspnetmvc6_aspnetmvc %})
+* [Overview of Telerik UI for ASP.NET Core]({% slug overview_aspnetmvc6_aspnetmvc %})
 * [Overview of the Kendo UI Sortable Widget](http://docs.telerik.com/kendo-ui/controls/interactivity/sortable/overview)
-* [Get Started with Telerik UI for ASP.NET MVC in ASP.NET Core Projects]({% slug gettingstarted_aspnetmvc6_aspnetmvc %})
-* [Get Started with Telerik UI for ASP.NET MVC in ASP.NET Core Projects on Linux]({% slug gettingstartedlinux_aspnetmvc6_aspnetmvc %})
+* [Get Started with Telerik UI for ASP.NET Core in ASP.NET Core Projects]({% slug gettingstarted_aspnetmvc6_aspnetmvc %})
+* [Get Started with Telerik UI for ASP.NET Core in ASP.NET Core Projects on Linux]({% slug gettingstartedlinux_aspnetmvc6_aspnetmvc %})
 * [Known Issues with Telerik UI for ASP.NET Core]({% slug knownissues_aspnetmvc6_aspnetmvc %})

@@ -1,6 +1,6 @@
 ---
 title: Gantt
-page_title: Gantt | UI for ASP.NET Core HtmlHelpers
+page_title: Gantt | Telerik UI for ASP.NET Core HtmlHelpers
 description: "Learn the basics when working with the Gantt HtmlHelper for ASP.NET Core (MVC 6 or ASP.NET Core MVC)."
 slug: htmlhelpers_gantt_aspnetcore
 ---
@@ -251,7 +251,7 @@ $(function() {
 * [JavaScript API Reference of the Gantt](http://docs.telerik.com/kendo-ui/api/javascript/ui/gantt)
 * [Gantt HtmlHelper for ASP.NET MVC](http://docs.telerik.com/aspnet-mvc/helpers/gantt/overview)
 * [Gantt Official Demos](http://demos.telerik.com/aspnet-core/gantt/index)
-* [Overview of Telerik UI for ASP.NET Core - RC1]({% slug overview_aspnetmvc6_aspnetmvc %})
-* [Get Started with Telerik UI for ASP.NET MVC in ASP.NET Core Projects]({% slug gettingstarted_aspnetmvc6_aspnetmvc %})
-* [Get Started with Telerik UI for ASP.NET MVC in ASP.NET Core Projects on Linux]({% slug gettingstartedlinux_aspnetmvc6_aspnetmvc %})
+* [Overview of Telerik UI for ASP.NET Core]({% slug overview_aspnetmvc6_aspnetmvc %})
+* [Get Started with Telerik UI for ASP.NET Core in ASP.NET Core Projects]({% slug gettingstarted_aspnetmvc6_aspnetmvc %})
+* [Get Started with Telerik UI for ASP.NET Core in ASP.NET Core Projects on Linux]({% slug gettingstartedlinux_aspnetmvc6_aspnetmvc %})
 * [Known Issues with Telerik UI for ASP.NET Core]({% slug knownissues_aspnetmvc6_aspnetmvc %})

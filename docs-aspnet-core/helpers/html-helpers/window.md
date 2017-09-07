@@ -1,6 +1,6 @@
 ---
 title: Window
-page_title: Window | UI for ASP.NET Core HtmlHelpers
+page_title: Window | Telerik UI for ASP.NET Core HtmlHelpers
 description: "Learn the basics when working with the Window HtmlHelper for ASP.NET Core (MVC 6 or ASP.NET Core MVC)."
 slug: htmlhelpers_window_aspnetcore
 ---
@@ -81,7 +81,7 @@ The following example demonstrates the basic configuration of the Window HtmlHel
 * [JavaScript API Reference of the Window](http://docs.telerik.com/kendo-ui/api/javascript/ui/window)
 * [Window HtmlHelper for ASP.NET MVC](http://docs.telerik.com/aspnet-mvc/helpers/window/overview)
 * [Window Official Demos](http://demos.telerik.com/aspnet-mvc/window/index)
-* [Overview of Telerik UI for ASP.NET Core - RC1]({% slug overview_aspnetmvc6_aspnetmvc %})
-* [Get Started with Telerik UI for ASP.NET MVC in ASP.NET Core Projects]({% slug gettingstarted_aspnetmvc6_aspnetmvc %})
-* [Get Started with Telerik UI for ASP.NET MVC in ASP.NET Core Projects on Linux]({% slug gettingstartedlinux_aspnetmvc6_aspnetmvc %})
+* [Overview of Telerik UI for ASP.NET Core]({% slug overview_aspnetmvc6_aspnetmvc %})
+* [Get Started with Telerik UI for ASP.NET Core in ASP.NET Core Projects]({% slug gettingstarted_aspnetmvc6_aspnetmvc %})
+* [Get Started with Telerik UI for ASP.NET Core in ASP.NET Core Projects on Linux]({% slug gettingstartedlinux_aspnetmvc6_aspnetmvc %})
 * [Known Issues with Telerik UI for ASP.NET Core]({% slug knownissues_aspnetmvc6_aspnetmvc %})

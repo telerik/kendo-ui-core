@@ -9,7 +9,7 @@ position: 7
 
 # Markup Widget Initialization
 
-In addition to the [jQuery plugin syntax]({% slug initialize_widgets_using_jquery_plugins_installation %}), the Progress<sup>®</sup> Kendo UI<sup>®</sup> widgets might be instantiated based on custom HTML attributes.
+In addition to the [jQuery plugin syntax]({% slug initialize_widgets_using_jquery_plugins_installation %}), the Kendo UI widgets might be instantiated based on custom HTML attributes.
 
 ## Overview
 
@@ -142,7 +142,7 @@ The following example refers to the AngularJS directive in the Kendo UI AutoComp
 
 Other articles on getting started with Kendo UI:
 
-* [Get Started with Progress<sup>®</sup> Kendo UI<sup>®</sup>]({% slug getting_started_installation_kendoui %})
+* [Get Started with Kendo UI]({% slug getting_started_installation_kendoui %})
 * [Kendo UI CDN Services]({% slug kendoui_cdn_services_installation %})
 * [Include Only What You Need]({% slug include_only_what_you_need_kendoui_installation %})
 * [JavaScript Prerequisites]({% slug javascript_prerequisites_kendoui_installation %})

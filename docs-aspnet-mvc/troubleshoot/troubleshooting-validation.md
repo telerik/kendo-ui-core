@@ -1,6 +1,6 @@
 ---
 title: Validation
-page_title: Validation | UI for ASP.NET MVC Troubleshooting
+page_title: Validation | Telerik UI for ASP.NET MVC Troubleshooting
 description: "Learn about the solutions of issues that may occur while using the Kendo UI Validator or jQuery client-side validation."
 slug: troubleshooting_validation_aspnetmvc
 position: 3

@@ -1,6 +1,6 @@
 ---
 title: Use Kendo UI with RequireJS
-page_title: Use Kendo UI with RequireJS | UI for ASP.NET MVC
+page_title: Use Kendo UI with RequireJS | Telerik UI for ASP.NET MVC
 description: "Use Kendo UI with RequireJS in ASP.NET MVC applications."
 slug: howto_usekendowithrequirejs_aspnetmvc
 ---
@@ -12,7 +12,7 @@ To see the example, refer to the project on how to [use Kendo UI with RequireJS]
 ## See Also
 
 * [RequireJS Integration in Kendo UI](http://docs.telerik.com/kendo-ui/third-party/using-kendo-with-requirejs)
-* [UI for ASP.NET MVC API Reference](http://docs.telerik.com/kendo-ui/api/Kendo.Mvc/AggregateFunction)
+* [Telerik UI for ASP.NET MVC API Reference](http://docs.telerik.com/kendo-ui/api/Kendo.Mvc/AggregateFunction)
 * [Telerik UI for ASP.NET MVC Overview]({% slug overview_aspnetmvc %})
 * [Telerik UI for ASP.NET MVC Custom DataSource]({% slug customdatasource_aspnetmvc %})
 * [Validation with Telerik UI for ASP.NET MVC]({% slug validation_aspnetmvc %})

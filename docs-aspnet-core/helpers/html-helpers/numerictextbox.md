@@ -1,6 +1,6 @@
 ---
 title: NumericTextBox
-page_title: NumericTextBox | UI for ASP.NET Core HtmlHelpers
+page_title: NumericTextBox | Telerik UI for ASP.NET Core HtmlHelpers
 description: "Learn the basics when working with the NumericTextBox for ASP.NET Core (MVC 6 or ASP.NET Core MVC)."
 slug: htmlhelpers_numerictextbox_aspnetcore
 ---
@@ -75,7 +75,7 @@ The following example demonstrates how to access an existing NumericTextBox inst
 ## See Also
 
 * [Overview of the Kendo UI NumericTextBox Widget](http://docs.telerik.com/kendo-ui/controls/editors/numerictextbox/overview)
-* [Overview of Telerik UI for ASP.NET Core - RC1]({% slug overview_aspnetmvc6_aspnetmvc %})
-* [Get Started with Telerik UI for ASP.NET MVC in ASP.NET Core Projects]({% slug gettingstarted_aspnetmvc6_aspnetmvc %})
-* [Get Started with Telerik UI for ASP.NET MVC in ASP.NET Core Projects on Linux]({% slug gettingstartedlinux_aspnetmvc6_aspnetmvc %})
+* [Overview of Telerik UI for ASP.NET Core]({% slug overview_aspnetmvc6_aspnetmvc %})
+* [Get Started with Telerik UI for ASP.NET Core in ASP.NET Core Projects]({% slug gettingstarted_aspnetmvc6_aspnetmvc %})
+* [Get Started with Telerik UI for ASP.NET Core in ASP.NET Core Projects on Linux]({% slug gettingstartedlinux_aspnetmvc6_aspnetmvc %})
 * [Known Issues with Telerik UI for ASP.NET Core]({% slug knownissues_aspnetmvc6_aspnetmvc %})

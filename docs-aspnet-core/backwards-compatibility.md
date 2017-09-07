@@ -10,7 +10,7 @@ position: 250
 
 [Telerik UI for ASP.NET Core](http://www.telerik.com/aspnet-core-ui) is a set of server-side wrappers that allows using the [Kendo UI widgets](../kendo-ui/introduction) from the server code.
 
-That is why, all important changes in the Kendo UI suite also apply to the client-side code and behavior of the UI for ASP.NET Core wrappers. For the list of all breaking changes, refer to the articles on the [Kendo UI breaking changes](../kendo-ui/backwards-compatibility/2017-backward-compatibility).
+That is why, all important changes in the Kendo UI suite also apply to the client-side code and behavior of the Telerik UI for ASP.NET Core wrappers. For the list of all breaking changes, refer to the articles on the [Kendo UI breaking changes](../kendo-ui/backwards-compatibility/2017-backward-compatibility).
 
 ## See Also
 

@@ -13,7 +13,7 @@ position: 3
 
 ## Overview
 
-Progress<sup>®</sup> Kendo UI<sup>®</sup> maintains 2 Bower packages:
+Kendo UI maintains 2 Bower packages:
 * Kendo UI Core.
 * Kendo UI Professional.
 
@@ -169,7 +169,7 @@ Use a Windows port of Git and your stored credentials instead of the built-in cl
 
 Other articles on getting started with Kendo UI:
 
-* [Get Started with Progress<sup>®</sup> Kendo UI<sup>®</sup>]({% slug getting_started_installation_kendoui %})
+* [Get Started with Kendo UI]({% slug getting_started_installation_kendoui %})
 * [Kendo UI CDN Services]({% slug kendoui_cdn_services_installation %})
 * [Kendo UI NPM Packages]({% slug kendoui_npm_packages_kendoui_installation %})
 * [NuGet Packages]({% slug kendoui_nuget_packages %})

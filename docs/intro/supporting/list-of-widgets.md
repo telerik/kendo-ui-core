@@ -1,5 +1,5 @@
 ---
-title: Bundle Support for Kendo UI Components
+title: Bundle Support for Progress<sup>®</sup> Kendo UI<sup>®</sup> Components
 page_title: Bundle Support for Kendo UI Components | Kendo UI Getting Started
 description: "Check out the controls supported by Kendo UI Core, Kendo UI Professional, and Kendo UI Complete."
 previous_url: /intro/list-of-widgets
@@ -7,7 +7,7 @@ slug: bundle_supportfor_kendoui_components
 position: 2
 ---
 
-# Bundle Support for Kendo UI Components
+# Bundle Support for Progress<sup>®</sup> Kendo UI<sup>®</sup> Components
 
 The following table lists all Kendo UI components with regard to their support by the different Kendo UI bundles.
 

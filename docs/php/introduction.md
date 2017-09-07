@@ -7,7 +7,7 @@ slug: overview_uiforphp
 position: 1
 ---
 
-# Progress<sup>®</sup>Telerik<sup>®</sup> UI for PHP
+# Progress<sup>®</sup> Telerik<sup>®</sup> UI for PHP
 
 [Progress Telerik UI for PHP](http://www.telerik.com/php-ui) is a set of PHP classes which help you configure Kendo UI widgets by using server-side code in PHP web sites.
 
@@ -52,7 +52,7 @@ To use Progress Telerik UI for PHP in your PHP web site, follow the steps below:
         <script src="js/jquery.min.js"></script>
         <script src="js/kendo.web.min.js"></script>
 
-> **Important**  
+> **Important**
 >
 > If you want to use Kendo UI widgets for the web, including the ones that render data visualization, at the same time, you should include `kendo.all.min.js` instead of `kendo.web.min.js` and `kendo.dataviz.min.js`. You can also create a custom JavaScript file by using the [Custom Download Builder](https://www.telerik.com/login/v2/telerik?ReturnUrl=https://www.telerik.com/download/custom-download).
 
@@ -118,7 +118,7 @@ For more examples on how to use Kendo UI with PHP server-side wrappers, visit th
 
 ## See Also
 
-Other articles on Progress Telerik UI for PHP:
+Other articles on Telerik UI for PHP:
 
-* [Progress Telerik UI for PHP API Reference Folder](/api/php/Kendo/UI/AutoComplete)
-* [Progress Telerik UI for PHP Tags Folder]({% slug overview_autocomplete_uiforphp %})
+* [Telerik UI for PHP API Reference Folder](/api/php/Kendo/UI/AutoComplete)
+* [Telerik UI for PHP Tags Folder]({% slug overview_autocomplete_uiforphp %})

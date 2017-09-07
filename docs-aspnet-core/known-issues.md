@@ -1,7 +1,7 @@
 ---
 title: Known Issues
 page_title: Known Issues | Telerik UI for ASP.NET Core
-description: "Read about known issues when using Telerik UI for ASP.NET MVC in ASP.NET 5 and ASP.NET Core (aka MVC 6 or ASP.NET Core MVC)."
+description: "Read about known issues when using Telerik UI for ASP.NET Core (aka MVC 6 or ASP.NET Core MVC)."
 previous_url: /aspnetmvc-apps/mvc-6/known-issues, /mvc-6/known-issues
 slug: knownissues_aspnetmvc6_aspnetmvc
 position: 6
@@ -9,7 +9,7 @@ position: 6
 
 # Known Issues
 
-This articles summarizes all known issues related to Telerik UI for ASP.NET MVC, version 6.
+This articles summarizes all known issues related to Telerik UI for ASP.NET Core.
 
 ## ASP.NET Core Framework
 
@@ -76,7 +76,7 @@ The `TagMode` enum is now by `MultiSelectTagMode`.
 
 ## See Also
 
-* [Overview of Telerik UI for ASP.NET Core - RC1]({% slug overview_aspnetmvc6_aspnetmvc %})
-* [Get Started with Telerik UI for ASP.NET MVC in ASP.NET Core Projects]({% slug gettingstarted_aspnetmvc6_aspnetmvc %})
-* [Get Started with Telerik UI for ASP.NET MVC in ASP.NET Core Projects on Linux]({% slug gettingstartedlinux_aspnetmvc6_aspnetmvc %})
+* [Overview of Telerik UI for ASP.NET Core]({% slug overview_aspnetmvc6_aspnetmvc %})
+* [Get Started with Telerik UI for ASP.NET Core in ASP.NET Core Projects]({% slug gettingstarted_aspnetmvc6_aspnetmvc %})
+* [Get Started with Telerik UI for ASP.NET Core in ASP.NET Core Projects on Linux]({% slug gettingstartedlinux_aspnetmvc6_aspnetmvc %})
 * [Tag Helpers for ASP.NET Core]({% slug taghelpers_aspnetmvc6_aspnetmvc %})

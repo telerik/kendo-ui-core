@@ -1,6 +1,6 @@
 ---
 title: MediaPlayer
-page_title: MediaPlayer | UI for ASP.NET Core HtmlHelpers
+page_title: MediaPlayer | Telerik UI for ASP.NET Core HtmlHelpers
 description: "Learn the basics when working with the MediaPlayer for ASP.NET Core (MVC 6 or ASP.NET Core MVC)."
 slug: htmlhelpers_mediaplayer_aspnetcore
 ---
@@ -151,7 +151,7 @@ The following example demonstrates how to subscribe to events using a template d
 * [MediaPlayer Official Demos](http://demos.telerik.com/aspnet-core/mediaplayer/index)
 * [Overview of the Kendo UI MediaPlayer Widget](http://docs.telerik.com/kendo-ui/controls/media/mediaplayer/overview)
 * [MediaPlayer JavaScript API Reference](http://docs.telerik.com/kendo-ui/api/javascript/ui/mediaplayer)
-* [Overview of Telerik UI for ASP.NET Core - RC1]({% slug overview_aspnetmvc6_aspnetmvc %})
-* [Get Started with Telerik UI for ASP.NET MVC in ASP.NET Core Projects]({% slug gettingstarted_aspnetmvc6_aspnetmvc %})
-* [Get Started with Telerik UI for ASP.NET MVC in ASP.NET Core Projects on Linux]({% slug gettingstartedlinux_aspnetmvc6_aspnetmvc %})
+* [Overview of Telerik UI for ASP.NET Core]({% slug overview_aspnetmvc6_aspnetmvc %})
+* [Get Started with Telerik UI for ASP.NET Core in ASP.NET Core Projects]({% slug gettingstarted_aspnetmvc6_aspnetmvc %})
+* [Get Started with Telerik UI for ASP.NET Core in ASP.NET Core Projects on Linux]({% slug gettingstartedlinux_aspnetmvc6_aspnetmvc %})
 * [Known Issues with Telerik UI for ASP.NET Core]({% slug knownissues_aspnetmvc6_aspnetmvc %})

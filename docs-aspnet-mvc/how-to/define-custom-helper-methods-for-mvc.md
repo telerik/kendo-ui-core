@@ -1,6 +1,6 @@
 ---
 title: Define Custom Kendo UI Helper Methods for ASP.NET MVC
-page_title: Define Custom Kendo UI Helper Methods for ASP.NET MVC | UI for ASP.NET MVC
+page_title: Define Custom Kendo UI Helper Methods for ASP.NET MVC | Telerik UI for ASP.NET MVC
 description: "Define custom Kendo UI helper methods for ASP.NET MVC."
 slug: howto_definecustomhelpermethodsformvc_aspnetmvc
 ---
@@ -11,7 +11,7 @@ To see the example, refer to the project on how to [define custom Kendo UI helpe
 
 ## See Also
 
-* [UI for ASP.NET MVC API Reference](http://docs.telerik.com/kendo-ui/api/Kendo.Mvc/AggregateFunction)
+* [Telerik UI for ASP.NET MVC API Reference](http://docs.telerik.com/kendo-ui/api/Kendo.Mvc/AggregateFunction)
 * [Telerik UI for ASP.NET MVC Overview]({% slug overview_aspnetmvc %})
 * [Telerik UI for ASP.NET MVC Custom DataSource]({% slug customdatasource_aspnetmvc %})
 * [Validation with Telerik UI for ASP.NET MVC]({% slug validation_aspnetmvc %})

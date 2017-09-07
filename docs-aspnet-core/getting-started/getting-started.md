@@ -1,15 +1,15 @@
 ---
 title: Getting Started with Progress Telerik UI for ASP.NET Core
-page_title: Getting Started with Progress Telerik UI for ASP.NET Core | Telerik UI for ASP.NET Core
+page_title: Getting Started with Progress<sup>®</sup> Telerik<sup>®</sup> UI for ASP.NET Core | Telerik UI for ASP.NET Core
 description: "Learn the basics when working with Progress Telerik UI for ASP.NET Core (aka MVC 6 or ASP.NET Core MVC)."
 previous_url: /aspnetmvc-apps/mvc-6/getting-started, /mvc-6/getting-started
 slug: gettingstarted_aspnetmvc6_aspnetmvc
 position: 1
 ---
 
-# Getting Started with Progress Telerik UI for ASP.NET Core
+# Getting Started with Progress<sup>®</sup> Telerik<sup>®</sup> UI for ASP.NET Core
 
-This article demonstrates how to configure an ASP.NET Core project to use Progress Telerik UI for ASP.NET Core.
+This article demonstrates how to configure an ASP.NET Core project to use Telerik UI for ASP.NET Core.
 
 ## Prerequisites
 
@@ -31,7 +31,7 @@ The prerequisites you need depend on the Visual Studio (VS) version your project
 
 ## Configuration
 
-To configure an ASP.NET Core Web Application to use Progress Telerik UI for ASP.NET Core:
+To configure an ASP.NET Core Web Application to use Telerik UI for ASP.NET Core:
 
 1. Create an [ASP.NET Core Web Application](#configuration-Create).
 2. Add the [Kendo UI NuGet package](#configuration-Add).
@@ -70,7 +70,7 @@ To add the NuGet packages:
 
     > **Important**
     >
-    > If you use VS 2015 and to ensure the matching of the ASP.NET Core version which is distributed with the UI for ASP.NET Core, you need to manually change the `Microsoft.AspNetCore.Routing` and `Microsoft.AspNetCore.Mvc` versions to `1.1.0` in `project.json`.
+    > If you use VS 2015 and to ensure the matching of the ASP.NET Core version which is distributed with the Telerik UI for ASP.NET Core, you need to manually change the `Microsoft.AspNetCore.Routing` and `Microsoft.AspNetCore.Mvc` versions to `1.1.0` in `project.json`.
 
     ###### Example
 
@@ -127,7 +127,7 @@ To add the NuGet packages:
 
 6. Copy the Kendo UI client-side resources. You can use either of the following approaches:
 
-    * Manual installation&mdash;To manually install the resources, copy the `js` and `styles` folders from the `telerik.ui.for.aspnetmvc` archive to `wwwroot\lib\kendo-ui`. The archive is located in **Downloads** > **UI for ASP.NET MVC** of your [www.telerik.com](http://www.telerik.com/) account.
+    * Manual installation&mdash;To manually install the resources, copy the `js` and `styles` folders from the `telerik.ui.for.aspnetmvc` archive to `wwwroot\lib\kendo-ui`. The archive is located in **Downloads** > **Telerik UI for ASP.NET Core** of your [www.telerik.com](http://www.telerik.com/) account.
 
         **Figure 2. Kendo UI resources**
 
@@ -207,7 +207,7 @@ To add the NuGet packages:
 
 ## See Also
 
-* [Overview of Progress Telerik UI for ASP.NET Core]({% slug overview_aspnetmvc6_aspnetmvc %})
-* [Get Started with Progress Telerik UI for ASP.NET MVC in ASP.NET Core Projects on Linux]({% slug gettingstartedlinux_aspnetmvc6_aspnetmvc %})
-* [Known Issues with Progress Telerik UI for ASP.NET Core]({% slug knownissues_aspnetmvc6_aspnetmvc %})
+* [Overview of Telerik UI for ASP.NET Core]({% slug overview_aspnetmvc6_aspnetmvc %})
+* [Get Started with Telerik UI for ASP.NET Core in ASP.NET Core Projects on Linux]({% slug gettingstartedlinux_aspnetmvc6_aspnetmvc %})
+* [Known Issues with Telerik UI for ASP.NET Core]({% slug knownissues_aspnetmvc6_aspnetmvc %})
 * [Tag Helpers for ASP.NET Core]({% slug taghelpers_aspnetmvc6_aspnetmvc %})

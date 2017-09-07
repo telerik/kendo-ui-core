@@ -1,6 +1,6 @@
 ---
 title: Refer Kendo UI from CDN with Local Script Fallback
-page_title: Refer Kendo UI from CDN with Local Script Fallback | UI for ASP.NET MVC
+page_title: Refer Kendo UI from CDN with Local Script Fallback | Telerik UI for ASP.NET MVC
 description: "Refer Kendo UI from CDN with a local script fallback in ASP.NET MVC applications."
 slug: howto_refercdnlocalscriptfallback_aspnetmvc
 ---
@@ -12,7 +12,7 @@ To see the example, refer to the article on how to [refer to Kendo UI from CDN w
 ## See Also
 
 * [Kendo UI CDN Services](http://docs.telerik.com/kendo-ui/intro/installation/cdn-service)
-* [UI for ASP.NET MVC API Reference](http://docs.telerik.com/kendo-ui/api/Kendo.Mvc/AggregateFunction)
+* [Telerik UI for ASP.NET MVC API Reference](http://docs.telerik.com/kendo-ui/api/Kendo.Mvc/AggregateFunction)
 * [Telerik UI for ASP.NET MVC Overview]({% slug overview_aspnetmvc %})
 * [Telerik UI for ASP.NET MVC Custom DataSource]({% slug customdatasource_aspnetmvc %})
 * [Validation with Telerik UI for ASP.NET MVC]({% slug validation_aspnetmvc %})

@@ -1,20 +1,20 @@
 ---
 title: Creating Kendo UI Professional Projects
-page_title: Creating Kendo UI Professional Projects | UI for ASP.NET MVC Visual Studio Integration
-description: "Learn how to create a new Progress&reg; Kendo UI&reg; Professional application."
+page_title: Creating Kendo UI Professional Projects | Telerik UI for ASP.NET MVC Visual Studio Integration
+description: "Learn how to create a new Kendo UI Professional application."
 slug: newprojectwizard_visualstudio_kendoui
 position: 3
 ---
 
 # Creating Kendo UI Professional Projects
 
-This article demonstrates how to create a new Progress&reg; Kendo UI&reg; Professional application.
+This article demonstrates how to create a new Kendo UI Professional application.
 
 ## Getting Started
 
 ### The Basics
 
-New Progress&copy; Telerik&copy; Kendo UI Professional applications are created by using the **Create New Project Wizard**.
+New Kendo UI Professional applications are created by using the **Create New Project Wizard**.
 
 To start the **Create New Project Wizard**, follow either of the approaches below.
 

@@ -11,7 +11,7 @@ To see the example, refer to the project on how to [update AJAX forms with the v
 
 ## See Also
 
-* [ASP.NET MVC API Reference: WindowBuilder](http://docs.telerik.com/kendo-ui/api/aspnet-mvc/Kendo.Mvc.UI.Fluent/WindowBuilder)
+* [Telerik UI for ASP.NET MVC API Reference: WindowBuilder](http://docs.telerik.com/kendo-ui/api/aspnet-mvc/Kendo.Mvc.UI.Fluent/WindowBuilder)
 * [Overview of Telerik UI for ASP.NET MVC]({% slug overview_aspnetmvc %})
 * [Fundamentals of Telerik UI for ASP.NET MVC]({% slug fundamentals_aspnetmvc %})
 * [Scaffolding in Telerik UI for ASP.NET MVC]({% slug scaffolding_aspnetmvc %})
