@@ -815,9 +815,16 @@ var __meta__ = { // jshint ignore:line
         },
         _focus: function(element){
             element.focus();
-            if (element.nodeName == "INPUT" && element.setSelectionRange) {
+            if (element.nodeName == "INPUT" && element.setSelectionRange && this._haveSelectionRange(element)) {
                 element.setSelectionRange(0, element.value.length);
             }
+        },
+        _haveSelectionRange: function(element){
+            var elementType = element.type.toLowerCase();
+
+            return elementType === "text" || elementType === "search" ||
+            elementType === "url" || elementType === "tel" ||
+            elementType === "password";
         }
     });
     ui.Popup.TabKeyTrap = TabKeyTrap;

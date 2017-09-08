@@ -156,6 +156,7 @@
     .k-button.k-state-focused,
     > input[type="radio"]:focus + .k-button,
     > input[type="checkbox"]:focus + .k-button {
+        .box-shadow(@button-focused-shadow);
     }
 
     // Selected state
@@ -175,13 +176,8 @@
         }
     }
 
-    // Selected hover state
-    .k-button:active:hover,
-    .k-button.k-state-active:hover
-    > input[type="radio"]:hover + .k-button,
-    > input[type="checkbox"]:hover + .k-button {
-    }
 
+    // Border-radius
     .k-button {
         .border-radius( 0 );
     }

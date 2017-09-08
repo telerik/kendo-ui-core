@@ -1421,7 +1421,7 @@ var __meta__ = { // jshint ignore:line
                 (!that.options.openOnClick.subMenuItems && !that._isRootItem(element))) && !touch && !isPointerTouch(e) &&
                 !contains(e.currentTarget, e.relatedTarget || e.target) && hasChildren &&
                 !contains(e.currentTarget, kendo._activeElement())) {
-                    that.close(element);
+                    that.close(element, true);
                     return;
             }
 

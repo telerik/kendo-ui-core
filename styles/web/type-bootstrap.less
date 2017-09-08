@@ -779,6 +779,7 @@ html .km-pane-wrapper .k-header
 .k-state-selected,
 .k-state-selected:link,
 .k-state-selected:visited,
+.k-tool.k-state-selected,
 .k-list>.k-state-selected,
 .k-list>.k-state-highlight,
 .k-panel > .k-state-selected,
@@ -1537,16 +1538,9 @@ div.k-filebrowser-dropzone em
 }
 
 .k-toolbar:not(.k-spreadsheet-toolbar) .k-button-group {
-    .k-button {
-        border-left-color: transparent;
-    }
-
-    .k-group-start {
-        border-left-color: @button-border-color;
-    }
 
     .k-button:focus {
-        border-left-color: @button-focused-border-color;
+        border-color: @button-focused-border-color;
     }
 }
 

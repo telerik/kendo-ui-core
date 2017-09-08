@@ -164,10 +164,17 @@ input[type="reset"].k-button-expand
         position: relative;
     }
 
-    .k-button:hover,
-    .k-button.k-state-hover,
+    .k-button:active,
     .k-button.k-state-active {
         z-index: 2;
+    }
+    .k-button:hover,
+    .k-button.k-state-hover {
+        z-index: 3;
+    }
+    .k-button:focus,
+    .k-button.k-state-focused {
+        z-index: 4;
     }
 
     .k-group-start,
