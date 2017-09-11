@@ -12,7 +12,7 @@ position: 4
 
 ## Overview
 
-NuGet package manager offers a number of Kendo UI packages. All official releases, service packs, and internal builds are available for registered users only.
+NuGet package manager offers a number of Kendo UI packages. All official releases and service packs are available for registered users only.
 
 ## Telerik Private NuGet Feed
 

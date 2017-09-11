@@ -1415,7 +1415,7 @@ var __meta__ = { // jshint ignore:line
             this.templates = {
                 tool: kendoTemplate(
                     "<li>" +
-                        "<a href='\\\\#' class='k-button k-button-icon k-tool' data-command='#= command #' title='#= text #' aria-label='#= text #' role='button'>" +
+                        "<a href='\\\\#' class='k-button k-button-icon' data-command='#= command #' title='#= text #' aria-label='#= text #' role='button'>" +
                             "<span class='k-icon #= iconClass #'></span>" +
                         "</a>" +
                     "</li>")
