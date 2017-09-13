@@ -2356,6 +2356,29 @@ Defines the text of "Retry" message assigned to the button that tries to load ro
     });
     </script>
 
+### navigatable `Boolean` *(default: false)*
+
+If set to `true` the use could navigate the widget using the keyboard navigation. By default keyboard navigation is disabled.
+
+#### Example - enable keyboard navigation
+
+    <div id="treeList"></div>
+    <script>
+    $("#treeList").kendoTreeList({
+      columns: [
+        { field: "name" },
+        { field: "age" }
+      ],
+      dataSource: [
+        { id: 1, parentId: null, name: "Jane Doe", age: 22 },
+        { id: 2, parentId: 1, name: "John Doe", age: 24 }
+      ],
+      navigatable: true
+    });
+    </script>
+
+> Check [Keyboard navigation](http://demos.telerik.com/kendo-ui/treelist/keyboard-navigation) for a live demo.
+
 ### pdf `Object`
 
 Configures the Kendo UI TreeList PDF export settings.
