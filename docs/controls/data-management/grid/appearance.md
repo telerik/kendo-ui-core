@@ -223,7 +223,15 @@ When virtual scrolling is not supported or recommended, revert to standard pagin
 
 ### Endless Scrolling
 
-The endless scroll mode enables the request of new items when the scrollbar of the Grid reaches its end. When the data is returned, the Grid will render only the new items and append them to the old ones.
+The endless scroll mode is suitable for displaying large number of items. At the same time advanced features like editing, grouping, filtering, sorting, hierarchy are supported. 
+
+To enable Endless Scrolling set the [scrollable.endless](/api/javascript/ui/grid#configuration-scrollable.endless) property to `true`.
+
+Infinite scrolling works with local and remote data. 
+
+* Binding to Local Data - all items are serialized to the client. As the user scrolls new items are displayed.
+* Binding to Remote Data - items only for one page are serialized. When the user scrolls to the end of the list an Ajax request is made to get the items for the next page. When data is returned, the Grid will render only the new items and append them to the old ones.
+
 
 ###### Example
 
@@ -234,25 +242,31 @@ The endless scroll mode enables the request of new items when the scrollbar of t
         // other configuration
     });
 
-### Limitations for Endless Scrolling
 
-If grouping is applied and the Grid is scrolled to the bottom, the number of the requested items will be equal to the number of items and the page size.
+#### Using with Editing
 
-When the Grid is used in its endless scroll mode together with grouping, the following behavior occurs:
+Editing will work in a similar way as with regular paging. The difference with Endless Scrolling is that when an item is opened for editing, it will not be closed after another page is requested.
 
+#### Using with Grouping
+
+Grouping is supported out-of-the-box with Endless Scrolling. When the two features are used together there is specific behavior that will be observed: 
+
+* If grouping is applied and the Grid is scrolled to the bottom, the number of the requested items will be equal to the number of items and the page size.
 * If the last group is collapsed, the items from that group will be requested.
 * If a group spans multiple pages, multiple requests will be made.
 * When a particular subset of items is returned, the items will be rendered and hidden because the group is collapsed. Items will continue to be requested until a new group is reached or until no more items to request are present.
 
-If you use remote binding, enable `serverGrouping` for the Grid so that grouping is applied to all items.
+In case remote binding is used for Grid it is recommended to enable `serverGrouping`. This way grouping will be applied to all items.
 
-If you enable regular paging, the editing functionality behaves in a similar way. The difference as compared to the endless scrolling is that when an item is opened for editing, it will not be closed after another page is requested.
+#### Using with Hierarchy
 
 If the Grid displays hierarchical data and an item gets expanded, it will not be collapsed when the items are scrolled and a new page is requested.
+
 
 > **Important**
 >
 > Operations, such as filtering, sorting, and grouping, reset the scroll position.
+
 
 ## Height
 
