@@ -970,4 +970,21 @@
         dropdownlist.wrapper.focus().press(keys.SPACEBAR);
         ok(dropdownlist.popup.visible());
     });
+
+    test("Space key does not close popup when filtering", 1, function() {
+        var dropdownlist = new DropDownList(input, {
+            filter: "startswith",
+            dataSource: [
+                { text: "Black", value: "1" },
+                { text: "Orange", value: "2" },
+                { text: "Grey", value: "3" }
+            ],
+            dataTextField: "text",
+            dataValueField: "value"
+        });
+
+        dropdownlist.open();
+        dropdownlist.filterInput.focus().press(keys.SPACEBAR);
+        ok(dropdownlist.popup.visible());
+    });
 })();

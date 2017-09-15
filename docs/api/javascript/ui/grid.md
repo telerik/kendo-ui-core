@@ -928,13 +928,14 @@ Specifies the default operator that will be used for the cell filtering.
               columns: [
                 {
                     field: "name",
+                    type: "string",
                     filterable: {
                         cell: {
                             operator: "neq"
                         }
                     }
                 },
-                { field: "age" } ],
+                { field: "age", type: "number" } ],
             filterable: { mode: "row" },
             dataSource: [ { name: "Jane", age: 30 }, { name: "John", age: 33 }] });
     </script>

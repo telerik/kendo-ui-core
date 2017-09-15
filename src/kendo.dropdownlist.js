@@ -700,7 +700,7 @@ var __meta__ = { // jshint ignore:line
                 return;
             }
 
-            if (key === keys.SPACEBAR) {
+            if (key === keys.SPACEBAR && !isInputActive) {
                 that.toggle(!isPopupVisible);
             }
 
