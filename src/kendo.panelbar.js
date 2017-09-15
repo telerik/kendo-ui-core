@@ -1460,17 +1460,18 @@ var __meta__ = { // jshint ignore:line
                 link = element.find(LINKSELECTOR),
                 url = link.attr(HREF),
                 prevent, content,
-                dataItem = that.dataItem(element);
+                dataItem = that.dataItem(element),
+                notVisible = !isVisible;
 
             var loaded = dataItem && dataItem.loaded();
 
-            if (dataItem && !expanded) {
-                dataItem.set("expanded", !isVisible);
+            if (dataItem && !expanded && dataItem.expanded !== notVisible) {
+                dataItem.set("expanded", notVisible);
                 prevent = dataItem.hasChildren || !!dataItem.content || !!dataItem.contentUrl;
                 return prevent;
             }
 
-             if (dataItem && (!expanded || expanded === "true") &&  !loaded && !dataItem.content && !dataItem.contentUrl) {
+            if (dataItem && (!expanded || expanded === "true") &&  !loaded && !dataItem.content && !dataItem.contentUrl) {
                  if (that.options.loadOnDemand) {
                      this._progress(element, true);
                  }
