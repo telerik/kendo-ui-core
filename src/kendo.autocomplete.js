@@ -630,6 +630,9 @@ var __meta__ = { // jshint ignore:line
                 var direction = key === keys.PAGEDOWN ? 1 : -1;
                 listView.scrollWith(direction * listView.screenHeight());
             } else {
+                // In some cases when the popup is opened resize is triggered which will cause it to close
+                // Setting the below flag will prevent this from happening
+                that.popup._hovered = true;
                 that._search();
             }
         },

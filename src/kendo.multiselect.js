@@ -479,6 +479,9 @@ var __meta__ = { // jshint ignore:line
 
                 that._filterSource();
             } else if (that._allowOpening()) {
+                // In some cases when the popup is opened resize is triggered which will cause it to close
+                // Setting the below flag will prevent this from happening
+                that.popup._hovered = true;
                 that.popup.open();
                 that._focusItem();
             }
@@ -785,10 +788,8 @@ var __meta__ = { // jshint ignore:line
             } else if (e.ctrlKey && key === keys.A  && visible) {
                 if (listView._selectedIndices.length === listView.items().length) {
                     that._activeItem = null;
-                    return listView.select(listView._selectedIndices);
-                } else {
-                    that._selectRange(0, listView.items().length - 1);
                 }
+                that._selectRange(0, listView.items().length - 1);
             } else if (key === keys.ENTER && visible) {
                 that._select(listView.focus()).done(function() {
                     that._change();
@@ -1219,7 +1220,15 @@ var __meta__ = { // jshint ignore:line
                 }
             }
 
-            return listView.select(indices);
+            return listView.select(indices).done(function() {
+                indices.forEach(function(index) {
+                    var dataItem  = listView.dataItemByIndex(index);
+                    var candidate = listView.element.children()[index];
+                    var isSelected = $(candidate).hasClass("k-state-selected");
+                    that.trigger(isSelected ? SELECT : DESELECT, {dataItem: dataItem, item: candidate});
+                });
+                that._change();
+            });
         },
 
         _input: function() {

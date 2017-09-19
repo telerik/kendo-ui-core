@@ -315,6 +315,9 @@ var __meta__ = { // jshint ignore:line
                     that._filterSource();
                 }
             } else if (that._allowOpening()) {
+                // In some cases when the popup is opened resize is triggered which will cause it to close
+                // Setting the below flag will prevent this from happening
+                that.popup._hovered = true;
                 that._openPopup();
                 that._focusItem();
             }

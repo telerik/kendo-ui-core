@@ -207,6 +207,7 @@ var __meta__ = { // jshint ignore:line
 
         open: function() {
             var that = this;
+            var isFiltered = that.dataSource.filter() ? that.dataSource.filter().filters.length > 0 : false;
 
             if (that.popup.visible()) {
                 return;
@@ -221,9 +222,8 @@ var __meta__ = { // jshint ignore:line
                     that._prev = "";
                 }
 
-                if (that.filterInput && that.options.minLength !== 1) {
+                if (that.filterInput && that.options.minLength !== 1 && !isFiltered) {
                     that.refresh();
-                    that._dataSource();
                     that.popup.one("activate", that._focusInputHandler);
                     that.popup.open();
                     that._resizeFilterInput();
@@ -470,7 +470,7 @@ var __meta__ = { // jshint ignore:line
                 return $.isPlainObject(optionLabel) ? new ObservableObject(optionLabel) : that._assignInstance(that._optionLabelText(), "");
             }
 
-            return null;
+            return undefined;
         },
 
         _buildOptions: function(data) {
@@ -702,6 +702,7 @@ var __meta__ = { // jshint ignore:line
 
             if (key === keys.SPACEBAR && !isInputActive) {
                 that.toggle(!isPopupVisible);
+                e.preventDefault();
             }
 
             handled = that._move(e);

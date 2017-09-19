@@ -78,5 +78,45 @@ test('menu does not strip "k-i-arrow-chevron-right" icons', function() {
     m.destroy();
 });
 
+test('menu renders aria-haspopup on items with submenu', function() {
+    var dom = '<ul id="menu">' +
+    '   <li>' +
+    '       Item 1' +
+    '       <ul>' +
+    '           <li>Sub Item 1</li>' +
+    '       </ul>' +
+    '   </li>' +
+    '   <li>' +
+    '       Item 2' +
+    '       <ul>' +
+    '           <li>Sub Item 1'+
+    '               <ul>' +
+    '                   <li>Sub Item 1</li>' +
+    '               </ul>' +
+    '           </li>' +
+    '       </ul>' +
+    '   </li>' +
+    '   <li>' +
+    '       Item 3' +
+    '       <ul>' +
+    '           <li>' +
+    '               <div>' +
+    '                   <ul>' +
+    '                       <li>Item 1</li>' +
+    '                       <li>Item 2</li>' +
+    '                   </ul>' +
+    '               </div>' +
+    '           </li>' +
+    '       </ul>' +
+    '   </li>' +
+    '</ul>';
+
+
+    var m = new kendo.ui.Menu(dom);
+
+    equal(m.element.find("[aria-haspopup]").length, 4)
+    m.destroy();
+});
+
 })();
 
