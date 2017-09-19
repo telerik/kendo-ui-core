@@ -88,7 +88,7 @@ The example below demonstrates how to make the TabStrip widget 100% high and res
           text: "Item N",
           content: "Appended Item Content"
         });
-        expandContentDivs(tabStripElement.children(".k-content").last());
+        resizeAll();
       });
     </script>
 ```

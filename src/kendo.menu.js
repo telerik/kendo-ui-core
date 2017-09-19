@@ -1338,6 +1338,8 @@ var __meta__ = { // jshint ignore:line
                    .addClass("k-group k-menu-group")
                    .attr("role", "menu")
                    .attr("aria-hidden", element.is(":visible"))
+                   .parent("li")
+                   .attr("aria-haspopup", "true")
                    .end()
                    .find("li > div")
                    .addClass("k-content")
@@ -1810,6 +1812,7 @@ var __meta__ = { // jshint ignore:line
                 if (!nextItem.length) {
                     nextItem = item.prevAll(lastSelector);
                 }
+                that.close(item);
             } else if (hasChildren && !item.hasClass(DISABLEDSTATE)) {
                 that.open(item);
                 nextItem = that._childPopupElement(item).children().first();
@@ -1844,6 +1847,7 @@ var __meta__ = { // jshint ignore:line
                 if (!nextItem.length) {
                     nextItem = item.nextAll(lastSelector);
                 }
+                that.close(item);
             } else {
                 nextItem = item.parent().closest(".k-item");
                 overflowWrapper = that._overflowWrapper();

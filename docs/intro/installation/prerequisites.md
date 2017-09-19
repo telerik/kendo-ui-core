@@ -27,6 +27,7 @@ The following table provides a list of the jQuery versions that are compatible w
 
 | Major Releases												                                         | jQuery Version    | Comments  |
 | :---															                                             | :---			         | :---	     |
+| [Kendo UI 2017.3.913 (R3 2017)](http://www.telerik.com/support/whats-new/kendo-ui/release-history/kendo-ui-r3-2017)	|1.12.3| Also compatible with 1.10.x, 2.2.x and 3.1.1|
 | [Kendo UI 2017.2.504 (R2 2017)](http://www.telerik.com/support/whats-new/kendo-ui/release-history/kendo-ui-r2-2017)	|1.12.3| Also compatible with 1.10.x, 2.2.x and 3.1.1|
 | [Kendo UI 2017.1.118 (R1 2017)](http://www.telerik.com/support/whats-new/kendo-ui/release-history/kendo-ui-r1-2017)	|1.12.3| Also compatible with 1.10.x, 2.2.x and 3.1.1|
 | [Kendo UI 2016.3.1118 (R3 2016 SP2)](http://www.telerik.com/support/whats-new/kendo-ui/release-history/kendo-ui-r3-2016-sp2)	|1.12.3| Also compatible with 1.10.x, 2.2.x and 3.1.1|
@@ -63,6 +64,7 @@ As of the Kendo UI 2014 Q2 release, the Kendo UI widgets support [AngularJS](htt
 
 | Major Releases												           | AngularJS Version     | Comments  |
 | :---															               | :---			       	     | :---	     |
+| [Kendo UI 2017.3.913 (R3 2017)](http://www.telerik.com/support/whats-new/kendo-ui/release-history/kendo-ui-r3-2017) |1.4\*, 1.5\*, 1.6\* |- |
 | [Kendo UI 2017.2.504 (R2 2017)](http://www.telerik.com/support/whats-new/kendo-ui/release-history/kendo-ui-r2-2017) |1.4\*, 1.5\*, 1.6\* |- |
 | [Kendo UI 2017.1.118 (R1 2017)](http://www.telerik.com/support/whats-new/kendo-ui/release-history/kendo-ui-r1-2017) |1.4\*, 1.5\*, 1.6\* |- |
 | [Kendo UI 2016.3.914 (R3 2016)](http://www.telerik.com/support/whats-new/kendo-ui/release-history/kendo-ui-r3-2016) |1.4\*, 1.5\*|Kendo UI provides [limited `ngModel` support]({% slug common_issues_support_angularjs %}#widgets-with-ng-model-directives-reflect-no-model-value) for AngularJS 1.5\*. |

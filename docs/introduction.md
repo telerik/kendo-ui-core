@@ -19,27 +19,33 @@ The framework comes with a library of 70+ UI widgets, an abundance of data-visua
 
 Kendo UI is distributed as part of several product units that you can choose from depending on your project requirements.
 
-### Kendo UI Professional
+### Kendo UI
 
-Kendo UI Professional is one of the commercial versions of Kendo UI. It is a comprehensive framework providing 70+ Kendo UI widgets, and includes a simple and consistent programming interface, a rock-solid Data Source, out-of-the-box themes, an MVVM framework, and more. Kendo UI Professional includes widgets for enterprise-grade line-of-business applications and is suitable for creating professional websites that require expert and timely technical support.
+Kendo UI is a comprehensive framework providing 70+ Kendo UI widgets, and includes a simple and consistent programming interface, a rock-solid Data Source, out-of-the-box themes, an MVVM framework, and more. Kendo UI includes widgets for enterprise-grade line-of-business applications and is suitable for creating professional websites that require expert and timely technical support.
 
 * [List of Kendo UI Components]({% slug bundle_supportfor_kendoui_components %})
 * [Browser Support]({% slug wbe_browserand_operating_system_support %})
 * [Evaluate Kendo UI Professional](http://www.telerik.com/download/kendo-ui)
 * [Get a License](http://www.telerik.com/purchase/kendo-ui)
-* [License Agreement](http://www.telerik.com/purchase/license-agreement/kendo-ui-professional)
+* [License Agreement](http://www.telerik.com/purchase/license-agreement/kendo-ui)
 
-### Kendo UI Complete
+#### Kendo UI Wrappers for React
 
-Kendo UI Complete incorporates all the products in the Kendo UI family:
+[Kendo UI Wrappers for React](http://docs.telerik.com/kendo-ui-wrappers-react/introduction) provide an easy way to use and configure Kendo UI Widgets in your React application.
 
-* Kendo UI Professional
-* [Progress<sup>®</sup> Telerik<sup>®</sup> UI for ASP.NET MVC](http://docs.telerik.com/aspnet-mvc/introduction)
-* [Progress<sup>®</sup> Telerik<sup>®</sup> UI for ASP.NET Core](http://docs.telerik.com/aspnet-core/introduction)
-* [Progress<sup>®</sup> Telerik<sup>®</sup> UI for JSP](/jsp/introduction)
-* [Progress<sup>®</sup> Telerik<sup>®</sup> UI for PHP](http://docs.telerik.com/kendo-ui/php/introduction).
+* [Browser Support]({% slug wbe_browserand_operating_system_support %})
+* [Get a License](http://www.telerik.com/purchase/kendo-ui)
+* [License Agreement](http://www.telerik.com/purchase/license-agreement/kendo-ui)
+* [Documentation](http://docs.telerik.com/kendo-ui-wrappers-react/introduction)
 
-In addition, you also receive a license for the [RadSpreadProcessing](http://www.telerik.com/products/wpf/spreadsheet-processing.aspx) library for .NET.
+#### Kendo UI Wrappers for Vue
+
+[Kendo UI Wrappers for Vue](http://docs.telerik.com/kendo-ui-wrappers-vue/introduction) provide an easy and native (for Vue.js) way to use and configure Kendo UI widgets in your Vue.js application
+
+* [Browser Support]({% slug wbe_browserand_operating_system_support %})
+* [Get a License](http://www.telerik.com/purchase/kendo-ui)
+* [License Agreement](http://www.telerik.com/purchase/license-agreement/kendo-ui)
+* [Documentation](http://docs.telerik.com/kendo-ui-wrappers-vue/introduction)
 
 #### Progress<sup>®</sup> Telerik<sup>®</sup> UI for ASP.NET MVC
 

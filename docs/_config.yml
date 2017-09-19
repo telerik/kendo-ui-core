@@ -269,21 +269,21 @@ navigation:
         title: "Classes"
     "troubleshoot":
         title: "Troubleshooting"
-        position: 11
+        position: 20
     "accessibility":
         title: "Accessibility"
-        position: 12
+        position: 30
     "backwards-compatibility":
         title: "Breaking Changes"
-        position: 13
+        position: 40
     "updates":
         title: "Updates and Contribution"
-        position: 14
+        position: 50
     "knowledge-base":
         title: "Knowledge Base"
     "copyright":
         title: "Copyright"
-        position: 15
+        position: 60
     "*how-to":
         title: "How To"
         position: 200
