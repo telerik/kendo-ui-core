@@ -147,4 +147,12 @@
 
         equal(listbox.select().length, 0);
     });
+
+    test("destroying the selectable and then the listbox does not throw error", function() {
+        listbox.selectable.destroy();
+
+        listbox.destroy();
+
+        ok(true);
+    });
 })();

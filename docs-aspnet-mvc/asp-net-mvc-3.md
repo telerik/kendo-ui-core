@@ -51,7 +51,7 @@ There are two options:
 
 Below are listed the steps for you to follow when copying the required JavaScript and CSS files in the Visual Studio Solution of the application.
 
-**Step 1** Navigate to the install location of Telerik UI for ASP.NET MVC. By default, it is in `C:\Program Files (x86)\Telerik\`.
+**Step 1** 1. Navigate to the install location of Telerik UI for ASP.NET MVC. By default, it is in `C:\Program Files (x86)\Progress\`. For versions prior to R3 2017, the default install location is in `C:\Program Files (x86)\Telerik\`.
 
 **Step 2** Copy the `js` directory from the install location and paste it in the `Scripts` folder of the application.
 

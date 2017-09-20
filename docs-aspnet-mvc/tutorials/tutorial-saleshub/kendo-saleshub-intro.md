@@ -49,7 +49,8 @@ Once you download and install the extensions, copy `\wrappers\aspnetmvc\Binaries
 
 > **Important**
 >
-> The standard installation directory for the extensions is `C:\Program Files (x86)\Telerik\UI for ASP.NET MVC <version>`.
+> The standard installation directory for the extensions is `C:\Program Files (x86)\Progress\UI for ASP.NET MVC <version>`.
+> For versions prior to R3 2017, the default installation directory is `C:\Program Files (x86)\Telerik\UI for ASP.NET MVC <version>`.
 
 ### Build and Run the Application
 

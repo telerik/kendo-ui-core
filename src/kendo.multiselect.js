@@ -190,6 +190,7 @@ var __meta__ = { // jshint ignore:line
             this._accessors();
             this._aria(this.tagList.attr(ID));
             this._tagTemplate();
+            this._placeholder();
         },
 
         currentTag: function(candidate) {
@@ -1179,7 +1180,7 @@ var __meta__ = { // jshint ignore:line
                 that._state = "";
             }
 
-            if (!that._allowSelection()) {
+            if (!that._allowSelection() && !isSelected) {
                 return resolved;
             }
 

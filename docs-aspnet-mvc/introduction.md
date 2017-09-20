@@ -56,7 +56,9 @@ Run Telerik UI for ASP.NET MVC installer. The automatic setup will guide you thr
 
 ### Location
 
-The setup installs Telerik UI for ASP.NET MVC in `C:\Program Files (x86)\Telerik\UI for ASP.NET MVC<version>`.
+The setup installs Telerik UI for ASP.NET MVC in `C:\Program Files (x86)\Progress\UI for ASP.NET MVC<version>`.
+
+For versions prior to R3 2017, the default installation folder for Telerik UI for ASP.NET MVC is `C:\Program Files (x86)\Telerik\UI for ASP.NET MVC<version>`.
 
 ### Distribution Contents
 

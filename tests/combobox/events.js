@@ -645,6 +645,36 @@ test("ComboBox trigger cascade when selected index is changed", 2, function() {
     combobox.ul.children(":first").click();
 });
 
+test("ComboBox does not trigger cascade when selected index is changed due to filtering", 3, function() {
+    combobox = input.kendoComboBox({
+        dataSource: [
+            { text: "foo", value: "1" },
+            { text: "bar", value: "2" }
+        ],
+        dataTextField: "text",
+        dataValueField: "value",
+        filter: "contains",
+        suggest: true
+    }).data("kendoComboBox");
+
+    var timesCascadeCalled = 0;
+
+    combobox.bind("cascade", function() {
+        timesCascadeCalled++
+        equal(combobox.value(), "2");
+        equal(combobox.text(), "bar");
+    });
+
+    combobox.input.focus().val("2");
+    combobox.search("bar");
+    combobox.ul.children(":first").click();
+    combobox.dataSource.filter({});
+
+
+
+    equal(timesCascadeCalled, 1);
+});
+
 test("ComboBox triggers cascade only once when setting value externally", 1, function() {
     combobox = input.kendoComboBox({
         dataSource: {

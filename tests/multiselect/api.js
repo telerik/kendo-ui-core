@@ -535,6 +535,21 @@ asyncTest("value method selects item that exists only in unfiltered source (asyn
         equal(multiselect.listView.options.template, "#:data.anotherName#");
     });
 
+    test("setOptions updates placeholder", function() {
+        var multiselect = new MultiSelect(select, {
+            dataSource: [{ name: "item1", anotherName: "anotherItem1" }],
+            dataTextField: "name",
+            dataValueField: "name",
+            placeholder: "Select..."
+        });
+
+        multiselect.setOptions({
+            placeholder: "Name"
+        });
+
+        equal(multiselect.input.val(), "Name");
+    });
+
     test("accept value after source is updated", function() {
         var multiselect = new MultiSelect(select, {
             autoBind: false

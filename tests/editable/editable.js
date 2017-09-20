@@ -502,6 +502,15 @@
         ok(!div.find("input").data("bind"));
     });
 
+    test("does not bind select element of listbox widget", function() {
+        var editable = div.append($('<div><select name="baz" data-role="listbox"/></div>')).kendoEditable({
+            model: defaultModel,
+            clearContainer: false
+        });
+
+        ok(!div.find("select").data("bind"));
+    });
+
     test("does not bind input element with skip attribute", function() {
         var editable = div.append($('<div><input name="baz" data-skip="skip"/></div>')).kendoEditable({
             model: defaultModel,
