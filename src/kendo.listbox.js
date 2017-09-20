@@ -1020,7 +1020,7 @@ var __meta__ = { // jshint ignore:line
         _destroySelectable: function() {
             var that = this;
 
-            if (that.selectable) {
+            if (that.selectable && that.selectable.element) {
                 that.selectable.destroy();
                 that.selectable = null;
             }

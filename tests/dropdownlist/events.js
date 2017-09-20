@@ -477,6 +477,19 @@
         input.data("kendoDropDownList").value("foo");
     });
 
+
+    test("DropDownList triggers cascade when item is selected via keyboard", 2, function() {
+        var dropdownlist = new DropDownList(input, {
+            dataSource: ["foo", "bar"],
+            cascade: function() {
+                ok(true);
+            }
+        });
+        dropdownlist.open();
+        dropdownlist.wrapper.press(kendo.keys.DOWN);
+        dropdownlist.wrapper.press(kendo.keys.UP);
+    });
+
     asyncTest("DropDownList trigger change on search if popup is closed", 2, function() {
         var cascade;
 

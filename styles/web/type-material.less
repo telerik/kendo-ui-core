@@ -185,6 +185,7 @@
 @secondary-header-color: rgba(256, 256, 256, 0.5);
 @secondary-header-background-color: darken(@accent, 10%);
 @input-validation-error: contrast(@error, @error, darken(@error, 30%), 0.5);
+@grid-sort-icon-color: @selected-text-color;
 
 /* Kendo skin */
 
@@ -3923,7 +3924,7 @@ div.k-scheduler-marquee:after {
     .k-i-sort-asc-sm,
     .k-i-sort-desc-sm,
     .k-sort-order {
-        color: inherit;
+        color: @grid-sort-icon-color;
         opacity: 1;
         margin-bottom: -1px;
     }

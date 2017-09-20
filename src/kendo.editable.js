@@ -33,7 +33,7 @@ var __meta__ = { // jshint ignore:line
     }
 
     function convertToValueBinding(container) {
-        container.find(":input:not(:button, [" + kendo.attr("role") + "=upload], [" + kendo.attr("skip") + "], [type=file]), select").each(function() {
+        container.find(":input:not(:button, [" + kendo.attr("role") + "=listbox], [" + kendo.attr("role") + "=upload], [" + kendo.attr("skip") + "], [type=file])").each(function() {
             var bindAttr = kendo.attr("bind"),
                 binding = this.getAttribute(bindAttr) || "",
                 bindingName = this.type === "checkbox" ||  this.type === "radio" ? "checked:" : "value:",

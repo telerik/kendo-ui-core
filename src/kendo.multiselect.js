@@ -190,6 +190,7 @@ var __meta__ = { // jshint ignore:line
             this._accessors();
             this._aria(this.tagList.attr(ID));
             this._tagTemplate();
+            this._placeholder();
         },
 
         currentTag: function(candidate) {
