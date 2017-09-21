@@ -1137,7 +1137,7 @@ If invoked, prevents the `dragstart` action. The element will remain at its orig
     $("#listBox").kendoListBox({
          draggable: true,
          dragstart: function(e) {
-             if (e.item.text() === "Orange") {
+             if (e.dataItems.text === "Orange") {
                  e.preventDefault();
              }
          }
@@ -1293,7 +1293,6 @@ The data items that are to be removed.
         },
         remove: function(e) {
             //handle event
-            e.preventDefault();
         }
     });
     // get a reference to the list box

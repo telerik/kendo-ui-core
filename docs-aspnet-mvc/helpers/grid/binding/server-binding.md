@@ -229,6 +229,8 @@ The following client-side events are supported in the server binding mode:
 - `ExcelExport`
 - `FilterMenuInit`
 - `PdfExport`
+- `GroupExpand` - the group object associated with group row will be empty in server binding sceanrio
+- `GroupCollapse` - the group object associated with group row will be empty in server binding sceanrio
 
 > **Important**
 >
