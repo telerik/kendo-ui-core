@@ -934,6 +934,7 @@ var __meta__ = { // jshint ignore:line
 
             if (that.listView.bound()) {
                 that._initialIndex = null;
+                that.listView._current = null;
             }
 
             that.listView.setDataSource(that.dataSource);
