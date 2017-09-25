@@ -678,7 +678,7 @@ var __meta__ = { // jshint ignore:line
                 appendTo = $(that.options.appendTo),
                 appendToOffset,
                 width = outerWidth(element),
-                height = outerHeight(element),
+                height = outerHeight(element) || outerHeight(element.children().first()),
                 anchorWidth = outerWidth(anchor),
                 anchorHeight = outerHeight(anchor),
                 top = anchorOffset.top,
