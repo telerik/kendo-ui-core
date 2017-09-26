@@ -157,6 +157,10 @@ var __meta__ = { // jshint ignore:line
             itemTemplate = templates.placeholderTemplate;
         }
 
+         if (data.index === 0 && this.header && data.group) {
+             this.header.html(templates.fixedGroupTemplate(data.group));
+         }
+
         this.angular("cleanup", function() {
             return { elements: [ element ]};
         });
@@ -283,7 +287,7 @@ var __meta__ = { // jshint ignore:line
             template: "#:data#",
             placeholderTemplate: "loading...",
             groupTemplate: "#:data#",
-            fixedGroupTemplate: "fixed header template",
+            fixedGroupTemplate: "#:data#",
             mapValueTo: "index",
             valueMapper: null
         },
