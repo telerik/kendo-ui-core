@@ -1716,14 +1716,16 @@ var __meta__ = { // jshint ignore:line
             calendar.views[0].setDate(startDate, endDate);
             calendar.views[0].setDate(endDate, new Date(temp));
         }
-        return Math.floor((+endDate - +startDate) / kendo.date.MS_PER_DAY);
+        var fromDateUTC = Date.UTC(startDate.getFullYear(), startDate.getMonth(), startDate.getDate());
+        var endDateUTC = Date.UTC(endDate.getFullYear(), endDate.getMonth(), endDate.getDate());
+
+        return Math.ceil((+endDateUTC - +fromDateUTC) / kendo.date.MS_PER_DAY);
     }
 
     function addDaysToArray(array, numberOfDays, fromDate, disableDates) {
         for(var i = 0; i <= numberOfDays; i++) {
-            var nextDayUTC = Date.UTC(fromDate.getFullYear(), fromDate.getMonth(), fromDate.getDate());
-            var nextDay = new Date(nextDayUTC + i * kendo.date.MS_PER_DAY);
-            nextDay.setHours(0, 0, 0, 0);
+            var nextDay = new Date(fromDate.getTime());
+            nextDay = new Date(nextDay.setDate(nextDay.getDate() + i));
             if(!disableDates(nextDay)) {
                 array.push(nextDay);
             }         

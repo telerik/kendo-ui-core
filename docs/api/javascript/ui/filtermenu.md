@@ -208,6 +208,10 @@ The text of the information message on the top of the filter menu.
         dataSource: dataSource
       });
 
+### messages.title `String` *(default: "Show items with value that: ")*
+
+The text rendered for the title attribute of the filter menu form.
+
 ### messages.additionalValue `String` *(default: "Additional value")*
 
 The text of the additional filter value editor.

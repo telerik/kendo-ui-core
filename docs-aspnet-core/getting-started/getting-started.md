@@ -74,16 +74,16 @@ To add the NuGet packages:
 
     ###### Example
 
+    ```tab-VS2017
+
+           <PackageReference Include="Telerik.UI.for.AspNet.Core" Version="{{ site.mvcCoreVersion }}" />
+    ```
     ```tab-VS2015
 
             "dependencies": {
                 ...
                 "Telerik.UI.for.AspNet.Core": "{{ site.mvcCoreVersion }}"
             }
-    ```
-    ```tab-VS2017
-
-           <PackageReference Include="Telerik.UI.for.AspNet.Core" Version="{{ site.mvcCoreVersion }}" />
     ```
 
 4. Open `Startup.cs` by using a text editor (IDE) and update it in the way demonstrated in the following examples.
@@ -137,9 +137,11 @@ To add the NuGet packages:
 
 7. Register the Kendo UI styles and scripts in `~/Views/Shared/_Layout.cshtml`.
 
+    Note, that in the default .NET Core template the jQuery scripts will be included at the end of the `<body>` element. In order to load properly the Telerik UI for ASP.NET HTML helpers, you will need to move the jQuery scripts to the `<head>`. The Kendo UI client-side scripts should be loaded after jQuery.
+
     ###### Example
 
-            <head>
+        <head>
             ...
 
             <environment names="Development">
@@ -163,8 +165,11 @@ To add the NuGet packages:
                     asp-fallback-test-class="k-theme-test-class"
                     asp-fallback-test-property="opacity" asp-fallback-test-value="0" />
             </environment>
+
             <environment names="Development">
                 ...
+
+                <script src="~/lib/jquery/dist/jquery.js"></script>
 
                 @* Place Kendo UI scripts after jQuery *@
                 <script src="~/lib/kendo-ui/js/kendo.all.min.js"></script>
@@ -172,6 +177,13 @@ To add the NuGet packages:
             </environment>
             <environment names="Staging,Production">
                 ...
+
+                <script src="https://ajax.aspnetcdn.com/ajax/jquery/jquery-2.2.0.min.js"
+                        asp-fallback-src="~/lib/jquery/dist/jquery.min.js"
+                        asp-fallback-test="window.jQuery"
+                        crossorigin="anonymous"
+                        integrity="sha384-K+ctZQ+LL8q6tP7I94W+qzQsfRV2a+AfHIi9k8z8l9ggpc8X+Ytst4yBo/hH+8Fk">
+                </script>
 
                 @*  Place Kendo UI scripts after jQuery *@
                 <script src="https://kendo.cdn.telerik.com/{{ site.cdnVersion }}/js/kendo.all.min.js"
@@ -184,8 +196,8 @@ To add the NuGet packages:
                 </script>
             </environment>
 
-            @RenderSection("scripts", required: false)
-            </head>
+            ...
+        </head>
 
     <!--*-->
 8. Use a Kendo UI widget by adding the snippet from the following example to `~/Views/Home/Index.cshtml`.

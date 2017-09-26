@@ -1,10 +1,9 @@
 ---
-title: Editing Complex Objects in Kendo UI Grid is Broken in R3 2017 (2017.3.913 Version)
-description: Kendo UI Grid thrown an error while editing a column bound to a nested property 
+title: Editing Complex Objects in Grid Is Broken in 2017.3.913
+description: The Kendo UI Grid throws an error while editing a column which is bound to a nested property in the R3 2017 (2017.3.913 version) release.
 type: troubleshooting
-page_title: Editing complex object with Batch (InCell) edit mode throws an error with R3 2017 release
-slug: grid-batch-r3-2017
-ticketid:
+page_title: Editing Complex Objects with Batch Edit Mode Throws an Error in the R3 2017 Release | Kendo UI Grid
+slug: grid-batch-r3-2017-complex-objects
 res_type: kb
 ---
 
@@ -13,7 +12,7 @@ res_type: kb
 <table>
  <tr>
   <td>Product</td>
-  <td>Grid for Progress® Kendo UI®</td>
+  <td>Grid for Progress Kendo UI</td>
  </tr>
  <tr>
   <td>Progress Kendo UI version</td>
@@ -23,18 +22,15 @@ res_type: kb
 
 ## Description
 
-After upgrading to R3 2017 (version 2017.3.913), editing complex objects and their nested properties in Batch (InCell) edit mode throws an error 
+After I upgraded Kendo UI to the R3 2017 (2017.3.913 version) release, I am not able to edit complex objects and their nested properties in Batch (InCell) edit mode.
 
-## Error Message
+How can I edit complex objects in the Grid and avoid the `Uncaught TypeError: Cannot read property 'nestedFieldName' of undefined` error in the R3 2017 release?
 
-`Uncaught TypeError: Cannot read property 'nestedFieldName' of undefined`
-
-
-## Workaround
+## Suggested Workaround
 
 Override the following private methods:
 
-````
+```
 kendo.ui.Grid.fn._dirtyIndicatorTemplate = function(field, paramName) {
     if (field && paramName) {
         return "#= " + paramName + " && " + paramName + ".dirty && " +
@@ -52,7 +48,6 @@ kendo.ui.Grid.fn._dirtyIndicatorTemplate = function(field, paramName) {
 
     return "";
 }
-````
+```
 
-An example with the above override could be found at the following link:
-[http://dojo.telerik.com/aFEjIN](http://dojo.telerik.com/aFEjIN)
+For the complete implementation, refer to [this Dojo example](http://dojo.telerik.com/aFEjIN).
