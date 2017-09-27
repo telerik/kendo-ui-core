@@ -3019,6 +3019,10 @@ The text of the information message on the top of the filter menu.
     });
     </script>
 
+### filterable.messages.title `String` *(default: "Show items with value that: ")*
+
+The text rendered for the title attribute of the filter menu form.
+
 ### filterable.messages.isFalse `String` *(default: "is false")*
 
 The text of the radio button for `false` values. Displayed when filtering `Boolean` fields.

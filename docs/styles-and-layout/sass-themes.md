@@ -600,9 +600,9 @@ To contribute to the development of the Kendo UI Default Theme, refer to the [te
 
 ## Sass Theme Builder
 
-[**Progress Sass Theme Builder**](http://themebuilder.telerik.com/aspnet-mvc) for Kendo UI is an Angular web application that enables you to create new or customize existing themes.
+[**Progress Sass Theme Builder**](http://themebuilder.telerik.com/kendo-ui) for Kendo UI is an Angular web application that enables you to create new or customize existing themes.
 
-The tool renders the same look and feel as the look and feel of all other components in the suite. It also delivers full control over the skin elements of each component and automatically updates its composite units. After you create the skin and achieve the desired look of the theme, the Sass Theme Builder enables you to download and integrate it in your project.  
+The tool renders the same look and feel as the look and feel of all other components in the suite. It also delivers full control over the skin elements of each component and automatically updates its composite units. After you create the skin and achieve the desired look of the theme, the Sass Theme Builder enables you to download and integrate it in your project.
 
 **Figure 1: A preview of the Sass Theme Builder**
 
@@ -661,7 +661,7 @@ When you complete the modifications and the theme is ready to be used:
 1. Add the newly created `Theme` folder to your application.
 1. Include the `all.css` file in the `head` tag of your HTML document.
 
-> **Important**  
+> **Important**
 >
 > Avoid referencing the `kendo.common.min.css` and `kendo.rtl.min.css` files because the exported CSS file contains all styles you need.
 
