@@ -383,6 +383,7 @@ var __meta__ = { // jshint ignore:line
             animation: {},
             month: {},
             dates: [],
+            disableDates: null,
             ARIATemplate: 'Current focused date is #=kendo.toString(data.current, "D")#',
             dateInput: false,
             weekNumber: false

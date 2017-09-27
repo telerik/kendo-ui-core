@@ -36,6 +36,16 @@ test("initializes a options from data attributes", function() {
     equal(datepicker.dateView.options.start, "year");
 });
 
+test("initializes a disabledDates from data attributes", function() {
+    dom = $('<input data-role="datepicker" data-disable-dates="[\'sa\', \'su\']" />');
+
+    kendo.bind(dom);
+
+    var datepicker = dom.data("kendoDatePicker");
+
+    ok(datepicker.options.disableDates != $.noop);
+});
+
 test("Preserve options after widget init", function() {
     dom = $('<input data-role="datepicker" />');
     dom.appendTo(QUnit.fixture);

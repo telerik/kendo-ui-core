@@ -502,6 +502,17 @@
         ok(!div.find("input").data("bind"));
     });
 
+    test("skip binding for first input in combobox", function() {
+        var editable = div.append($('<div><input name="baz" data-role="combobox"/></div>')).kendoEditable({
+            model: defaultModel,
+            clearContainer: false
+        });
+        var inputs = div.find("input").filter("[data-bind]");
+        equal(inputs.length, 1);
+        equal(inputs.attr("data-role"), "combobox");
+        equal(inputs.is(":visible"), false);
+    });
+
     test("does not bind select element of listbox widget", function() {
         var editable = div.append($('<div><select name="baz" data-role="listbox"/></div>')).kendoEditable({
             model: defaultModel,

@@ -123,6 +123,7 @@ var __meta__ = { // jshint ignore:line
             culture: "",
             parseFormats: [],
             dates: [],
+            disableDates: null,
             min: new DATE(MIN),
             max: new DATE(MAX),
             interval: 30,
