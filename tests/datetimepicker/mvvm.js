@@ -34,6 +34,16 @@ test("initializes a options from data attributes", function() {
     equal(datetimepicker.dateView.options.start, "year");
 });
 
+test("initializes a disabledDates from data attributes", function() {
+    dom = $('<input data-role="datetimepicker" data-disable-dates="[\'sa\', \'su\']" />');
+
+    kendo.bind(dom);
+
+    var datetimepicker = dom.data("kendoDateTimePicker");
+
+    ok(datetimepicker.options.disableDates != $.noop);
+});
+
 test("initializes min and max options from data attributes", function() {
     dom = $('<input data-role="datetimepicker" data-min="2000-10-10T10:00" data-max="2010-10-10T20:00" />');
     dom.appendTo(QUnit.fixture);

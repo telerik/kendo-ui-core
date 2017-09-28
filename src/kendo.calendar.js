@@ -174,6 +174,7 @@ var __meta__ = { // jshint ignore:line
             min: new DATE(1900, 0, 1),
             max: new DATE(2099, 11, 31),
             dates: [],
+            disableDates: null,
             url: "",
             culture: "",
             footer : "",

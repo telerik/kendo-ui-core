@@ -37,6 +37,16 @@ test("initializes a options from data attributes", function() {
     equal(calendar.options.start, "year");
 });
 
+test("initializes a disabledDates from data attributes", function() {
+    dom = $('<div data-role="calendar" data-disable-dates="[\'sa\', \'su\']" ></div>');
+
+    kendo.bind(dom);
+
+    var calendar = dom.data("kendoCalendar");
+
+    ok(calendar.options.disableDates != $.noop);
+});
+
 test("initializes value from view model", function() {
     dom = $('<div data-role="calendar" data-bind="value:value" />');
     var value = new Date();
