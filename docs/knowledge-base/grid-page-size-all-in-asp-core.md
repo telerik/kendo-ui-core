@@ -40,7 +40,7 @@ After the document is ready, dynamically add the option for the **All** page siz
             pageSizeDropDownList.dataSource.add({text:"All", value:'all'})
             pageSizeDropDownList.dataSource.sync()      
         })
- ```
+```
 
 ## Notes
 

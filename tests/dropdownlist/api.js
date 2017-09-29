@@ -1167,6 +1167,21 @@
         equal(dropdownlist.value(), "");
     });
 
+    test("first item is highlighted after setting source with setDataSource", 1, function() {
+        dropdownlist = new DropDownList(input, {
+            dataSource: ["item1.1", "item1.2"],
+            highlightFirst: true
+        });
+
+        dropdownlist.setDataSource(
+            ["item1", "item2"]
+        );
+
+        dropdownlist.open();
+
+        ok(dropdownlist.ul.children().first().hasClass("k-state-focused"));
+    });
+
     test("Open popup when option label is defined", 1, function() {
         var dropdownlist = new DropDownList(input, {
             dataSource: [],

@@ -331,7 +331,7 @@ Specifies if the toggle button is initially selected. Applicable only for the ch
 
 ### items.buttons.showIcon `String` *(default: "both")*
 
-Specifies where the icon of the button will be displayed. Applicable only for the children of a ButtonGroup.
+Applicable only for the buttons of a ButtonGroup. Specifies where the icon of the button will be displayed. Whether it should be displayed always (*both*), only when the button is visible on the ToolBar (*toolbar*), or only when the button is overflowed (*overflow*).
 
 #### Example
 
@@ -339,40 +339,42 @@ Specifies where the icon of the button will be displayed. Applicable only for th
 
     <script>
         $("#toolbar").kendoToolBar({
-            items: [
-            {
-                type: "buttonGroup",
-                buttons: [
-                { text: "foo", icon: "clock", showIcon: "toolbar" },
-                { text: "bar", icon: "note", showIcon: "toolbar" },
-                { text: "baz", icon: "refresh", showIcon: "toolbar" }
-                ]
-            }
-            ]
-        });
+			items: [{
+				type: "button",
+				text: "This button has a very long text so the ButtonGroup would be collapsed on larger screen"
+			},{
+				type: "buttonGroup",
+				buttons: [
+					{ text: "foo", icon: "clock", showIcon: "overflow" },
+					{ text: "bar", icon: "error", showIcon: "both" },
+					{ text: "baz", icon: "refresh", showIcon: "toolbar" }
+				]
+			}]
+		});
     </script>
 
 ### items.buttons.showText `String` *(default: "both")*
 
-Specifies where the text of the menu button will be displayed. Applicable only for the buttons of a ButtonGroup.
+Applicable only for the buttons of a ButtonGroup. Specifies where the text of the button will be displayed. Whether it should be displayed always (*both*), only when the button is visible on the ToolBar (*toolbar*), or only when the button is overflowed (*overflow*).
 
 #### Example
 
     <div id="toolbar"></div>
 
     <script>
-        $("#toolbar").kendoToolBar({
-            items: [
-            {
-                type: "buttonGroup",
-                buttons: [
-                { text: "foo", icon: "clock", showText: "overflow" },
-                { text: "bar", icon: "note", showText: "overflow" },
-                { text: "baz", icon: "refresh",showText: "overflow" }
-                ]
-            }
-            ]
-        });
+		$("#toolbar").kendoToolBar({
+			items: [{
+				type: "button",
+				text: "This button has a very long text so the ButtonGroup would be collapsed on larger screen"
+			},{
+				type: "buttonGroup",
+				buttons: [
+					{ text: "foo", icon: "clock", showText: "overflow" },
+					{ text: "bar", icon: "error", showText: "both" },
+					{ text: "baz", icon: "refresh", showText: "toolbar" }
+				]
+			}]
+		});
     </script>
 
 ### items.buttons.spriteCssClass `String`
@@ -384,18 +386,19 @@ Defines a CSS class (or multiple classes separated by spaces) which will be used
     <div id="toolbar"></div>
 
     <script>
-    $("#toolbar").kendoToolBar({
-      items: [
-        {
-          type: "buttonGroup",
-          buttons: [
-            { text: "foo", spriteCssClass: "foo, bar" },
-            { text: "bar", spriteCssClass: "bar" },
-            { text: "baz", spriteCssClass: "baz" }
-          ]
-        }
-      ]
-    });
+		$("#toolbar").kendoToolBar({
+		  items: [
+			{
+			  type: "buttonGroup",
+			  buttons: [
+				{ text: "foo", spriteCssClass: "foo, bar" },
+				{ text: "bar", spriteCssClass: "bar" },
+				{ text: "baz", spriteCssClass: "baz" }
+			  ]
+			}
+		  ]
+		});
+	</script>
 
 ### items.buttons.toggle `Function`
 

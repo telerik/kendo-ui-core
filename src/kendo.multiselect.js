@@ -483,6 +483,7 @@ var __meta__ = { // jshint ignore:line
                 that.listView.skipUpdate(true);
 
                 that._filterSource();
+                that._focusItem();
             } else if (that._allowOpening()) {
                 // In some cases when the popup is opened resize is triggered which will cause it to close
                 // Setting the below flag will prevent this from happening
@@ -1184,7 +1185,7 @@ var __meta__ = { // jshint ignore:line
                 that._state = "";
             }
 
-            if (!that._allowSelection()) {
+            if (!that._allowSelection() && !isSelected) {
                 return resolved;
             }
 
