@@ -562,7 +562,7 @@ var __meta__ = { // jshint ignore:line
             var focusedElm = that._focused;
             var inputElm = that.element;
             var inputId = inputElm.attr("id");
-            var labelElm = $("label[for='" + inputId  + "']");
+            var labelElm = $("label[for=\"" + inputId  + "\"]");
             var ariaLabel = inputElm.attr("aria-label");
             var ariaLabelledBy = inputElm.attr("aria-labelledby");
 

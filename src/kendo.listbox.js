@@ -100,6 +100,7 @@ var __meta__ = { // jshint ignore:line
     function defaultHint(element) {
         return element.clone()
             .removeClass(DRAGGEDCLASS)
+            .removeClass(FOCUSED_CLASS)
             .addClass(kendo.format("{0} {1} {2}", SELECTED_STATE_CLASS, RESET, DRAG_CLUE_CLASS))
             .width(element.width());
     }
