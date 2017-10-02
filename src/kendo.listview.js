@@ -45,35 +45,6 @@ var __meta__ = { // jshint ignore:line
         progress = kendo.ui.progress,
         DataSource = kendo.data.DataSource;
 
-    function focusElement(element) {
-        var scrollTopPositions = [];
-        var parents = scrollableParents(element);
-
-        parents.each(function(index, parent) {
-            scrollTopPositions[index] = $(parent).scrollTop();
-        });
-
-        try {
-            //The setActive method does not cause the document to scroll to the active object in the current page
-            element[0].setActive();
-        } catch (e) {
-            element[0].focus();
-        }
-
-        parents.each(function(index, parent) {
-            $(parent).scrollTop(scrollTopPositions[index]);
-        });
-    }
-
-    function scrollableParents(element) {
-        return $(element).parentsUntil("body")
-                .filter(function(index, element) {
-                    var computedStyle = kendo.getComputedStyles(element, ["overflow"]);
-                    return computedStyle.overflow !== "visible";
-                })
-                .add(window);
-    }
-
     var ListView = kendo.ui.DataBoundWidget.extend( {
         init: function(element, options) {
             var that = this;
@@ -424,7 +395,7 @@ var __meta__ = { // jshint ignore:line
                 clickCallback = function(e) {
                     that.current($(e.currentTarget));
                     if(!$(e.target).is(":button,a,:input,a>.k-icon,textarea")) {
-                        focusElement(element);
+                        kendo.focusElement(element);
                     }
                 };
 

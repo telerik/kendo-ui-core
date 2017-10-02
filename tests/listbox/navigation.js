@@ -10,6 +10,8 @@
         TRANSFER_ALL_FROM = "transferAllFrom",
         MOVE_UP = "moveUp",
         MOVE_DOWN = "moveDown";
+    var wrapper;
+    var listbox;
 
     module("ListBox - navigation", {
         setup: function() {
@@ -215,4 +217,49 @@
         ok(listA._target[0] === listA.items().last()[0]);
     });
 
+    module("listbox item focusing", {
+        setup: function() {
+            wrapper = $("<div id='wrapper' style='height: 100px; overflow-y: scroll;'>" +
+                "<select id='listBox' style='height: 300px;'></select>" +
+            "</div>").appendTo(QUnit.fixture);
+
+            listbox  = QUnit.fixture.find("#listBox").kendoListBox({
+                dataSource: [ "Item1", "Item2", "Item3", "Item4", "Item5", "Item6", "Item7", "Item8", "Item9", "Item10"],
+                navigatable: true
+            }).getKendoListBox();
+
+            $(document.body).append(QUnit.fixture);
+        },
+        teardown: function() {
+            if (listbox) {
+                listbox.destroy();
+            }
+            kendo.destroy(QUnit.fixture);
+        }
+    });
+
+    test("selecting an item focuses it", function() {
+        listbox.wrapper.find(".k-list").find(".k-item").first().click();
+
+        equal(kendo._activeElement(), listbox.wrapper.find(".k-list")[0]);
+    });
+
+    test("selecting an item does not scroll the listbox", function() {
+        listbox.wrapper.scrollTop(listbox.wrapper[0].scrollHeight);
+        var initialScrollTop = listbox.wrapper.scrollTop();
+
+        listbox.wrapper.find(".k-list").find(".k-item").last().click();
+
+        equal(initialScrollTop, wrapper.scrollTop());
+    });
+
+    test("selecting an item does not scroll the wrapper", function() {
+        wrapper.scrollTop(wrapper[0].scrollHeight);
+        listbox.wrapper.scrollTop(listbox.wrapper[0].scrollHeight);
+        var initialScrollTop = wrapper.scrollTop();
+
+        listbox.wrapper.find(".k-list").find(".k-item").last().click();
+
+        equal(initialScrollTop, wrapper.scrollTop());
+    });
 })();

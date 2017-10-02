@@ -441,7 +441,7 @@ var __meta__ = { // jshint ignore:line
         },
 
         focus: function() {
-            this._getList().focus();
+            kendo.focusElement(this._getList());
         },
 
         _createDraggable: function() {
@@ -695,6 +695,9 @@ var __meta__ = { // jshint ignore:line
             that._draggable.dropped = true;
 
             that.trigger(DRAGEND, extend({}, eventData, { draggableEvent: e }));
+
+            that._updateToolbar();
+            that._updateAllToolbars();
         },
 
         reorder: function(item, index) {

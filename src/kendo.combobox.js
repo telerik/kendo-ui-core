@@ -160,9 +160,11 @@ var __meta__ = { // jshint ignore:line
         ],
 
         setOptions: function(options) {
+            var listOptions = this._listOptions(options);
+
             Select.fn.setOptions.call(this, options);
 
-            this.listView.setOptions(options);
+            this.listView.setOptions(listOptions);
 
             this._accessors();
             this._aria();

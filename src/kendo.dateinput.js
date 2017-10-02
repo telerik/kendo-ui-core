@@ -228,10 +228,15 @@ var __meta__ = { // jshint ignore:line
 
                 that._bindInput();
             } else {
-                wrapper.addClass(STATEDISABLED)
+                if (disable) {
+                    wrapper.addClass(STATEDISABLED)
                     .removeClass(STATEDEFAULT);
-                element.attr(DISABLED, disable)
-                    .attr(READONLY, readonly);
+                    element.attr(DISABLED, disable);
+                    element.removeAttr(READONLY);
+                }
+                if (readonly) {
+                    element.attr(READONLY, readonly);
+                }
             }
         },
 

@@ -28,6 +28,21 @@
         return listbox.wrapper.find("[data-command='" + toolName + "']");
     }
 
+    function toolIsDisabled(listbox, tool) {
+        return getToolElement(listbox, tool).hasClass(DISABLED_STATE_CLASS);
+    }
+
+    function toolIsEnabled(listbox, tool) {
+        return !toolIsDisabled(listbox, tool);
+    }
+
+    function triggerDragEnd(listbox) {
+        listbox.draggedElement = $();
+        listbox.placeholder = $();
+        listbox._draggable = { destroy: $.noop };
+        listbox._dragend({ preventDefault: $.noop });
+    }
+
     module("ListBox toolbar", {
         setup: function() {
             listbox = createListBoxWithToolbar();
@@ -1481,4 +1496,190 @@
 
         equal(getToolElement(listbox3, TRANSFER_ALL_FROM).hasClass(DISABLED_STATE_CLASS), false);
     });
+
+    module("ListBox toolbar tool state after drag and drop", {
+        setup: function() {
+            $(document.body).append(QUnit.fixture);
+
+            listbox1 = createListBoxWithToolbar({
+                connectWith: "listbox2",
+            }, "<select id='listbox1' />");
+
+            listbox2 = createListBox({
+                dataSource: {
+                    data: [{
+                        id: 5,
+                        text: "item5"
+                    }, {
+                        id: 6,
+                        text: "item6"
+                    }]
+                },
+                connectWith: "listbox1"
+            }, "<select id='listbox2' />");
+
+            item1 = listbox1.items().eq(0);
+            item2 = listbox1.items().eq(1);
+            $(document.body).append(QUnit.fixture);
+        },
+        teardown: function() {
+            destroyListBox(listbox1);
+            destroyListBox(listbox2);
+            kendo.destroy(QUnit.fixture);
+        }
+    });
+
+    test("moveUp tool should be enabled after dragEnd with selection", function() {
+        stub(listbox1, {
+            select: function() {
+                return item2;
+            }
+        });
+
+        triggerDragEnd(listbox2);
+
+        ok(toolIsEnabled(listbox1, MOVE_UP));
+    });
+
+    test("moveUp tool should be disabled after dragEnd without selection", function() {
+        stub(listbox1, {
+            select: function() {
+                return $();
+            }
+        });
+
+        triggerDragEnd(listbox2);
+
+        ok(toolIsDisabled(listbox1, MOVE_UP));
+    });
+
+    test("moveDown tool should be enabled after dragEnd with selection", function() {
+        stub(listbox1, {
+            select: function() {
+                return item2;
+            }
+        });
+
+        triggerDragEnd(listbox2);
+
+        ok(toolIsEnabled(listbox1, MOVE_DOWN));
+    });
+
+    test("moveDown tool should be disabled after dragEnd without selection", function() {
+        stub(listbox1, {
+            select: function() {
+                return $();
+            }
+        });
+
+        triggerDragEnd(listbox2);
+
+        ok(toolIsDisabled(listbox1, MOVE_DOWN));
+    });
+
+    test("remove tool should be enabled after dragEnd with selection", function() {
+        stub(listbox1, {
+            select: function() {
+                return item2;
+            }
+        });
+
+        triggerDragEnd(listbox2);
+
+        ok(toolIsEnabled(listbox1, REMOVE));
+    });
+
+    test("remove tool should be disabled after dragEnd without selection", function() {
+        stub(listbox1, {
+            select: function() {
+                return $();
+            }
+        });
+
+        triggerDragEnd(listbox2);
+
+        ok(toolIsDisabled(listbox1, REMOVE));
+    });
+
+    module("ListBox toolbar tool state after drag and drop", {
+        setup: function() {
+            $(document.body).append(QUnit.fixture);
+
+            listbox1 = createListBoxWithToolbar({
+                connectWith: "listbox2",
+            }, "<select id='listbox1' />");
+
+            listbox2 = createListBox({
+                dataSource: {
+                    data: [{
+                        id: 5,
+                        text: "item5"
+                    }, {
+                        id: 6,
+                        text: "item6"
+                    }]
+                },
+                connectWith: "listbox1"
+            }, "<select id='listbox2' />");
+
+            item1 = listbox2.items().eq(0);
+            item2 = listbox2.items().eq(1);
+            $(document.body).append(QUnit.fixture);
+        },
+        teardown: function() {
+            destroyListBox(listbox1);
+            destroyListBox(listbox2);
+            kendo.destroy(QUnit.fixture);
+        }
+    });
+
+    test("transferFrom tool should be enabled after dragEnd with selection", function() {
+        stub(listbox2, {
+            select: function() {
+                return item1;
+            }
+        });
+
+        triggerDragEnd(listbox2);
+
+        ok(toolIsEnabled(listbox1, TRANSFER_FROM));
+    });
+
+    test("transferFrom tool should be disabled after dragEnd without selection", function() {
+        stub(listbox2, {
+            select: function() {
+                return $();
+            }
+        });
+
+        triggerDragEnd(listbox2);
+
+        ok(toolIsDisabled(listbox1, TRANSFER_FROM));
+    });
+
+    test("transferTo tool should be enabled after dragEnd with selection", function() {
+        stub(listbox1, {
+            select: function() {
+                return item1;
+            }
+        });
+
+        triggerDragEnd(listbox2);
+
+        ok(toolIsEnabled(listbox1, TRANSFER_TO));
+    });
+
+
+    test("transferTo tool should be disabled after dragEnd without selection", function() {
+        stub(listbox1, {
+            select: function() {
+                return $();
+            }
+        });
+
+        triggerDragEnd(listbox2);
+
+        ok(toolIsDisabled(listbox1, TRANSFER_TO));
+    });
+
 })();

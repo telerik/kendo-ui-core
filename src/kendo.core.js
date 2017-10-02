@@ -4282,6 +4282,31 @@ function pad(number, digits, end) {
         });
     };
 
+    kendo.focusElement = function(element) {
+        var scrollTopPositions = [];
+        var scrollableParents = element.parentsUntil("body")
+                .filter(function(index, element) {
+                    var computedStyle = kendo.getComputedStyles(element, ["overflow"]);
+                    return computedStyle.overflow !== "visible";
+                })
+                .add(window);
+
+        scrollableParents.each(function(index, parent) {
+            scrollTopPositions[index] = $(parent).scrollTop();
+        });
+
+        try {
+            //The setActive method does not cause the document to scroll to the active object in the current page
+            element[0].setActive();
+        } catch (e) {
+            element[0].focus();
+        }
+
+        scrollableParents.each(function(index, parent) {
+            $(parent).scrollTop(scrollTopPositions[index]);
+        });
+    };
+
     // kendo.saveAs -----------------------------------------------
     (function() {
         function postToProxy(dataURI, fileName, proxyURL, proxyTarget) {

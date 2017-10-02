@@ -272,7 +272,7 @@ var dojoApi = (function($) {
                 snippet = dojoApi.wrapInHtml(snippet);
             }
             snippet = dojoApi.fixLineEndings(snippet);
-            var form = $('<form method="post" target="_blank" action="' + dojoApi.configuration.url + '" />').appendTo(document.body);
+            var form = $('<form method="post" style="display: none;" target="_blank" action="' + dojoApi.configuration.url + '" />').appendTo(document.body);
             $("<input name='snippet'>").val(window.btoa(encodeURIComponent(snippet))).appendTo(form);
 
             form.submit();
