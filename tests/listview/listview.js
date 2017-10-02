@@ -2,7 +2,7 @@
     var DataSource = kendo.data.DataSource,
         ul,
         dataSource;
-
+    var wrapper;
 
     function setup(options) {
         options = $.extend({
@@ -11,6 +11,18 @@
             dataSource: dataSource = new DataSource({ data: [1,2,3,4,5] })
         }, options);
         return ul.kendoListView(options);
+    }
+    
+    function createListView(element, userOptions) {
+        var options = $.extend({
+            navigatable: true,
+            template: "<div>#= value #</div>",
+            dataSource: dataSource = new DataSource({
+                data: [{ value: 1 }, { value: 2 }, { value: 3 }, { value: 4 }, { value: 5 }, { value: 6 }]
+            })
+        }, userOptions);
+
+        return new kendo.ui.ListView(element, options);
     }
 
     module("listview initialization", {
@@ -420,5 +432,49 @@ test("correct item is updated when model itemchange changes the sorting order", 
 
         equal(listView.dataItem(items.eq(0)).foo, 1);
         equal(listView.dataItem(items.eq(1)).foo, 2);
+    });
+        
+    module("listview navigation", {
+        setup: function() {
+            wrapper = $("<div id='wrapper' style='height: 100px; overflow-y: scroll;'>" +
+                "<div id='listView' />" +
+            "</div>").appendTo(QUnit.fixture);
+            element = QUnit.fixture.find("#listView");
+        },
+        teardown: function() {
+            kendo.destroy(QUnit.fixture);
+            element.remove();
+        }
+    });
+
+    test("selecting an item focuses it", function() {
+        var listView = createListView(element, { selectable: "multiple" });
+        element.children().css("height", 100);
+        wrapper.scrollTop(wrapper[0].scrollHeight);
+
+        element.children().last().mousedown();
+
+        equal(kendo._activeElement(), element[0]);
+    });
+
+    test("selecting an item sets it as current", function() {
+        var listView = createListView(element, { selectable: "multiple" });
+        element.children().css("height", 100);
+        wrapper.scrollTop(wrapper[0].scrollHeight);
+
+        element.children().last().mousedown();
+
+        equal(listView.current()[0], element.children().last()[0]);
+    });
+
+    test("selecting an item does not scroll parent element", function() {
+        var listView = createListView(element, { selectable: "multiple" });
+        element.children().css("height", 100);
+        wrapper.scrollTop(wrapper[0].scrollHeight);;
+        var initialScrollTop = wrapper.scrollTop();
+
+        element.children().last().mousedown();
+
+        equal(initialScrollTop, wrapper.scrollTop());
     });
 })();

@@ -395,7 +395,7 @@ var __meta__ = { // jshint ignore:line
                 clickCallback = function(e) {
                     that.current($(e.currentTarget));
                     if(!$(e.target).is(":button,a,:input,a>.k-icon,textarea")) {
-                        element.focus();
+                        kendo.focusElement(element);
                     }
                 };
 

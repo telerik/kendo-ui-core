@@ -1252,7 +1252,7 @@
         validator.validate();
     });
 
-    test("external overrides default rules", 1, function() {
+     test("external overrides default rules", 1, function() {
         kendo.ui.validator.rules = { required: function() { ok(true); } };
 
         container.append("<input type='text' name='test[]' />");
@@ -1271,14 +1271,18 @@
         validator.validate();
     });
 
-    test("register external messages", 1, function() {
+    test("register external messages", 3, function() {
+        var called = false;
         kendo.ui.validator.rules = { foo: function() { return false; } };
-        kendo.ui.validator.messages = { foo: function() { ok(true) } };
-
+        kendo.ui.validator.messages = { foo: function() { called =true; return "test"; } };
         container.append("<input type='text' name='test[]' />");
 
         var validator = setup(container, {});
         validator.validate();
+        var messages = validator.errors();
+        ok(called);
+        equal(messages.length, 1);
+        equal(messages[0], "test");
     });
 
     test("external overrides default messages", 1, function() {
@@ -1292,14 +1296,45 @@
         validator.validate();
     });
 
-    test("custom overrides external messages", 1, function() {
+    test("custom overrides external messages", 3, function() {
+        var called = false;
         kendo.ui.validator.rules = { foo: function() { return false; } };
-        kendo.ui.validator.messages = { foo: function() { ok(false) } };
+        kendo.ui.validator.messages = { foo: function() { return "test"; } };
 
         container.append("<input type='text' name='test[]' />");
 
-        var validator = setup(container, { messages: { foo: function() { ok(true) } } });
+        var validator = setup(container, { messages: { foo: function() { called =true; return "test2"; } } });
         validator.validate();
+        var messages = validator.errors();
+        ok(called);
+        equal(messages.length, 1);
+        equal(messages[0], "test2");
+    });
+
+    test("custom function overrides title messages", 3, function() {
+        var called = false;
+        kendo.ui.validator.rules = { foo: function() { return false; } };
+
+        container.append("<input type='text' title='validation title' name='test[]' />");
+
+        var validator = setup(container, { messages: { foo: function() { called =true; return "test2"; } } });
+        validator.validate();
+        var messages = validator.errors();
+        ok(called);
+        equal(messages.length, 1);
+        equal(messages[0], "test2");
+    });
+
+    test("custom overrides title messages", 2, function() {
+        kendo.ui.validator.rules = { foo: function() { return false; } };
+
+        container.append("<input type='text' title='validation title' name='test[]' />");
+
+        var validator = setup(container, { messages: { foo: "test2" } });
+        validator.validate();
+        var messages = validator.errors();
+        equal(messages.length, 1);
+        equal(messages[0], "test2");
     });
 
     test("locate custom message locator", 2, function() {

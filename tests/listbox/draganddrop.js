@@ -143,4 +143,11 @@
         release(draggedElement, targetOffset.left, targetOffset.top + 100);
         ok(listA.items().find(".k-ghost").length === 0);
     });
+
+     test("Drag and drop hint should not have .k-state-focused class when dragged element is focused", 1, function(){
+        var mockedElement = $('<li class="k-item k-state-focused k-state-selected"/>');
+        var hint = listA._draggable.options.hint(mockedElement)
+
+        ok(!hint.hasClass("k-state-focused"));                
+    });
 })();

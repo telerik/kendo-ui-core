@@ -416,11 +416,16 @@ var __meta__ = { // jshint ignore:line
         _extractMessage: function(input, ruleKey) {
             var that = this,
                 customMessage = that.options.messages[ruleKey],
-                fieldName = input.attr(NAME);
+                fieldName = input.attr(NAME),
+                nonDefaultMessage;
+
+            if (!kendo.ui.Validator.prototype.options.messages[ruleKey]) {
+                 nonDefaultMessage = kendo.isFunction(customMessage) ? customMessage(input) : customMessage;
+            }
 
             customMessage = kendo.isFunction(customMessage) ? customMessage(input) : customMessage;
 
-            return kendo.format(input.attr(kendo.attr(ruleKey + "-msg")) || input.attr("validationMessage") || input.attr("title") || customMessage || "",
+            return kendo.format(input.attr(kendo.attr(ruleKey + "-msg")) || input.attr("validationMessage") || nonDefaultMessage || input.attr("title") || customMessage || "",
                 fieldName,
                 input.attr(ruleKey) || input.attr(kendo.attr(ruleKey)));
         },
