@@ -103,7 +103,7 @@
 
         panelbar.bind("contentLoad", function() {
             start();
-            ok($(arguments[0].item).find(".k-icon").hasClass("k-i-arrow-n"));
+            ok($(arguments[0].item).find(".k-icon").hasClass("k-i-arrow-60-up"));
             panelbar.unbind("contentLoad");
         });
 
@@ -115,7 +115,7 @@
 
         item.trigger("click");
 
-        ok(item.find(".k-icon").hasClass("k-i-arrow-s"));
+        ok(item.find(".k-icon").hasClass("k-i-arrow-60-down"));
     });
 
     asyncTest("clicking should make item active", 1, function() {
