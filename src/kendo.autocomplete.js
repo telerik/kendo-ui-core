@@ -589,7 +589,15 @@ var __meta__ = { // jshint ignore:line
                 if (visible) {
                     this._move(current ? "focusNext" : "focusFirst");
                 } else if (that.value()) {
-                    that.popup.open();
+                    that._filterSource({
+                        value: that.ignoreCase ? that.value().toLowerCase() : that.value(),
+                        operator: that.options.filter,
+                        field: that.options.dataTextField,
+                        ignoreCase: that.ignoreCase
+                    }).done(function () {
+                        that._resetFocusItem();
+                        that.popup.open();
+                    });
                 }
                 e.preventDefault();
             } else if (key === keys.UP) {
@@ -746,6 +754,7 @@ var __meta__ = { // jshint ignore:line
         _select: function(candidate) {
             var that = this;
             that._active = true;
+
             return that.listView.select(candidate).done(function() {
                 that._active = false;
             });

@@ -341,6 +341,7 @@ var __meta__ = { // jshint ignore:line
                 that.listView.skipUpdate(true);
             }
 
+            that._filterSource();
             that.element.blur();
         },
 
@@ -466,7 +467,21 @@ var __meta__ = { // jshint ignore:line
 
         close: function() {
             this._activeItem = null;
+        //     var isFiltered = this.dataSource.filter() ? this.dataSource.filter().filters.length > 0 : false;
+        //     var that = this;
+        //     if(isFiltered){
+        //      //   debugger
+        //        // this.listView.skipUpdate(true);
+        //    //    this.dataSource.filter(this.options.filter);
+        //       //  setTimeout(function(){
+        //             that._filterSource();
+        //         //    },10);
+            
+               
+        //     }
+
             this.popup.close();
+            
         },
 
         open: function() {

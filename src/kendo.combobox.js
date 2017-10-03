@@ -302,6 +302,7 @@ var __meta__ = { // jshint ignore:line
         open: function() {
             var that = this;
             var state = that._state;
+            var isFiltered = that.dataSource.filter() ? that.dataSource.filter().filters.length > 0 : false;
 
             if (that.popup.visible()) {
                 return;
@@ -310,7 +311,7 @@ var __meta__ = { // jshint ignore:line
             if ((!that.listView.bound() && state !== STATE_FILTER) || state === STATE_ACCEPT) {
                 that._open = true;
                 that._state = STATE_REBIND;
-                if (that.options.minLength !== 1) {
+                if (that.options.minLength !== 1 && !isFiltered) {
                     that.refresh();
                     that._openPopup();
                 } else {

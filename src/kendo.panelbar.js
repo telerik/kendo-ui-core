@@ -130,7 +130,7 @@ var __meta__ = { // jshint ignore:line
     arrowClass: function(item) {
         var result = "k-icon";
 
-        result += item.expanded ? " k-panelbar-collapse k-i-arrow-n" : " k-panelbar-expand k-i-arrow-s";
+        result += item.expanded ? " k-panelbar-collapse k-i-arrow-60-up" : " k-panelbar-expand k-i-arrow-60-down";
 
         return result;
     },
@@ -533,7 +533,7 @@ var __meta__ = { // jshint ignore:line
                         var item = $(this),
                             parent = item.parent();
 
-                        item.append("<span class='k-icon " + (parent.hasClass(ACTIVECLASS) ? " k-panelbar-collapse k-i-arrow-n" : " k-panelbar-expand k-i-arrow-s") + "'/>");
+                        item.append("<span class='k-icon " + (parent.hasClass(ACTIVECLASS) ? " k-panelbar-collapse k-i-arrow-60-up" : " k-panelbar-expand k-i-arrow-60-down") + "'/>");
                     });
          },
 
@@ -1524,9 +1524,9 @@ var __meta__ = { // jshint ignore:line
                 .attr(ARIA_EXPANDED, !visibility)
                 .toggleClass(ACTIVECLASS, !visibility)
                 .find("> .k-link > .k-panelbar-collapse,> .k-link > .k-panelbar-expand")
-                    .toggleClass("k-i-arrow-n", !visibility)
+                    .toggleClass("k-i-arrow-60-up", !visibility)
                     .toggleClass("k-panelbar-collapse", !visibility)
-                    .toggleClass("k-i-arrow-s", visibility)
+                    .toggleClass("k-i-arrow-60-down", visibility)
                     .toggleClass("k-panelbar-expand", visibility);
             if (visibility) {
                 animation = extend(collapse, { hide: true });

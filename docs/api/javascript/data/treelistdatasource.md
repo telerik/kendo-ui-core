@@ -22,6 +22,9 @@ The schema configuration of the TreeListDataSource.
 
 ### schema.model `Object`
 
+> The `Id` and `ParentId` fields of the model have to be of type `number` or `numeric string` that can be parsed to number. 
+    
+
 The model configuration of the TreeListDataSource. See [kendo.data.TreeListModel](/api/javascript/data/treelistmodel) for more info.
 
 ## Methods

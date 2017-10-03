@@ -2,33 +2,20 @@
 title: Convert the Kendo UI Grid to property grid
 description: An example on how to convert the Kendo UI Grid to property grid
 type: how-to
-page_title: convert the Kendo UI Grid to property grid | Kendo UI Grid
+page_title: Convert the Kendo UI Grid to property grid | Kendo UI Grid
 slug: property-grid
 tags: grid, property-grid
 ticketid: 
 res_type: kb
 ---
 
-## Environment
-
-<table>
- <tr>
-  <td>Product</td>
-  <td>Grid for Progress Kendo UI</td>
- </tr>
- <tr>
-  <td>Progress Kendo UI version</td>
-  <td>2017.3.913</td>
- </tr>
-</table>
-
 ## Description
 
-How can I intercept convert the Kendo UI Grid to property grid?
+How can I convert the Kendo UI Grid to property grid? A common scenario is to convert ordinary grids to property grids for users with narrow screens. This can be easily achieved by modifying the shape of the data.
 
 ## Solution
 
-```       
+```html       
         <style>
             tbody td:first-child{
             background-color:#d5d5d5;
@@ -39,7 +26,7 @@ How can I intercept convert the Kendo UI Grid to property grid?
             }
 
         </style>
-       <script src="http://demos.telerik.com/kendo-ui/content/shared/js/people.js"></script>
+       <script src="https://demos.telerik.com/kendo-ui/content/shared/js/people.js"></script>
 
         <div id="example">
             <div id="grid"></div>

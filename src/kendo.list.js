@@ -291,7 +291,7 @@ var __meta__ = { // jshint ignore:line
                 aggregate: dataSource.aggregate()
             }, { filter: newExpression });
 
-            dataSource[force ? "read" : "query"](dataSource._mergeState(dataSourceState));
+            return dataSource[force ? "read" : "query"](dataSource._mergeState(dataSourceState));
         },
 
         _angularElement: function(element, action) {
