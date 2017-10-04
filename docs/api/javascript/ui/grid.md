@@ -724,7 +724,16 @@ Can be set to a JavaScript object which represents the filter cell configuration
       filterable: {
           mode: "row"
       },
-      dataSource: [ { name: "Jane", age: 30 }, { name: "John", age: 33 }]
+      dataSource: {
+      	data: [ { name: "Jane", age: 30 }, { name: "John", age: 33 }],
+        schema:{
+        	model:{
+            	fields: {
+                	age: { type: "number" }
+                }
+            }
+        }
+      }
     });
     </script>
 
@@ -764,7 +773,16 @@ If the `dataSource` option is an existing [`kendo.data.DataSource`](/api/javascr
       filterable: {
           mode: "row"
       },
-      dataSource: [ { name: "Jane", age: 30 }, { name: "John", age: 33 }]
+      dataSource: {
+      	data: [ { name: "Jane", age: 30 }, { name: "John", age: 33 }],
+        schema:{
+        	model:{
+            	fields: {
+                	age: { type: "number" }
+                }
+            }
+        }
+      }
     });
     </script>
 
@@ -777,23 +795,34 @@ Specifies the name of the field which will provide the text representation for t
     <div id="grid"></div>
     <script>
           $("#grid").kendoGrid({
-              columns: [
-                {
-                    field: "name",
-                    filterable: {
-                        cell: {
-                            dataSource: new kendo.data.DataSource({ data: [
-                                { someField: "Jane" },
-                                { someField: "Jake" },
-                                { someField: "John" }
-                            ] }),
-                            dataTextField: "someField"
-                        }
-                    }
-                },
-                { field: "age" } ],
+            columns: [
+              {
+                  field: "name",
+                  filterable: {
+                      cell: {
+                          dataSource: new kendo.data.DataSource({ data: [
+                              { someField: "Jane" },
+                              { someField: "Jake" },
+                              { someField: "John" }
+                          ] }),
+                          dataTextField: "someField"
+                      }
+                  }
+              },
+              { field: "age" } 
+            ],
             filterable: { mode: "row" },
-            dataSource: [ { name: "Jane", age: 30 }, { name: "John", age: 33 }] });
+            dataSource: {
+            	data: [ { name: "Jane", age: 30 }, { name: "John", age: 33 }],
+              schema:{
+              	model:{
+                  	fields: {
+                      	age: { type: "number" }
+                      }
+                  }
+              }
+            }
+         });
     </script>
 
 ### columns.filterable.cell.delay `Number` *(default: 200)*
@@ -816,7 +845,17 @@ Specifies the delay of the AutoComplete widget which will provide the suggest fu
                 },
                 { field: "age" } ],
             filterable: { mode: "row" },
-            dataSource: [ { name: "Jane", age: 30 }, { name: "John", age: 33 }] });
+            dataSource: {
+            	data: [ { name: "Jane", age: 30 }, { name: "John", age: 33 }],
+              schema:{
+              	model:{
+                  	fields: {
+                      	age: { type: "number" }
+                      }
+                  }
+              }
+            }
+          });
     </script>
 
 ### columns.filterable.cell.inputWidth `Number`
@@ -839,7 +878,17 @@ Specifies the width of the input before it is initialized or turned into a widge
                 },
                 { field: "age" } ],
             filterable: { mode: "row" },
-            dataSource: [ { name: "Jane", age: 30 }, { name: "John", age: 33 }] });
+            dataSource: {
+            	data: [ { name: "Jane", age: 30 }, { name: "John", age: 33 }],
+              schema:{
+              	model:{
+                  	fields: {
+                      	age: { type: "number" }
+                      }
+                  }
+              }
+            }
+          });
     </script>
 
 ### columns.filterable.cell.suggestionOperator `String` *(default: "startswith")*
@@ -864,7 +913,17 @@ Specifies the AutoComplete `filter` option. The possible values are the same as 
                 },
                 { field: "age" } ],
             filterable: { mode: "row" },
-            dataSource: [ { name: "Jane", age: 30 }, { name: "John", age: 33 }] });
+            dataSource: {
+            	data: [ { name: "Jane", age: 30 }, { name: "John", age: 33 }],
+              schema:{
+              	model:{
+                  	fields: {
+                      	age: { type: "number" }
+                      }
+                  }
+              }
+            } 
+          });
     </script>
 
 ### columns.filterable.cell.minLength `Number` *(default: 1)*
@@ -887,7 +946,17 @@ Specifies the minLength option of the AutoComplete widget when column is of type
                 },
                 { field: "age" } ],
             filterable: { mode: "row" },
-            dataSource: [ { name: "Jane", age: 30 }, { name: "John", age: 33 }] });
+            dataSource: {
+            	data: [ { name: "Jane", age: 30 }, { name: "John", age: 33 }],
+              schema:{
+              	model:{
+                  	fields: {
+                      	age: { type: "number" }
+                      }
+                  }
+              }
+            }
+            });
     </script>
 
 
@@ -911,7 +980,17 @@ When set to false the Grid will not render the cell filtering widget for that sp
                 },
                 { field: "age" } ],
             filterable: { mode: "row" },
-            dataSource: [ { name: "Jane", age: 30 }, { name: "John", age: 33 }] });
+            dataSource: {
+            	data: [ { name: "Jane", age: 30 }, { name: "John", age: 33 }],
+              schema:{
+              	model:{
+                  	fields: {
+                      	age: { type: "number" }
+                      }
+                  }
+              }
+            }
+          });
     </script>
 
 ### columns.filterable.cell.operator `String` *(default: "eq")*
@@ -937,7 +1016,17 @@ Specifies the default operator that will be used for the cell filtering.
                 },
                 { field: "age", type: "number" } ],
             filterable: { mode: "row" },
-            dataSource: [ { name: "Jane", age: 30 }, { name: "John", age: 33 }] });
+            dataSource: {
+            	data: [ { name: "Jane", age: 30 }, { name: "John", age: 33 }],
+              schema:{
+              	model:{
+                  	fields: {
+                      	age: { type: "number" }
+                      }
+                  }
+              }
+            }
+         });
     </script>
 
 ### columns.filterable.cell.showOperators `Boolean` *(default: true)*
@@ -961,7 +1050,17 @@ Specifies whether to show or hide the DropDownList with the operators.
                 },
                 { field: "age" } ],
             filterable: { mode: "row" },
-            dataSource: [ { name: "Jane", age: 30 }, { name: "John", age: 33 }] });
+            dataSource: {
+            	data: [ { name: "Jane", age: 30 }, { name: "John", age: 33 }],
+              schema:{
+              	model:{
+                  	fields: {
+                      	age: { type: "number" }
+                      }
+                  }
+              }
+            }
+          });
     </script>
 
 ### columns.filterable.cell.template `Function`
@@ -1007,9 +1106,37 @@ populated at the time the template function is called, if the Grid uses remote b
             dataSource: [ { color: "#ff0000", size: 30 }, { color: "#000000", size: 33 }] });
     </script>
 
+
+
+### columns.filterable.extra `Boolean` *(default: true)*
+
+If set to `true` the filter menu of the column allows the user to input a second criterion.
+
+#### Example - disable the second filter criterion for the name field.
+    <div id="grid"></div>
+    <script>
+      $("#grid").kendoGrid({
+        columns: [
+          { field: "name" , filterable : { extra: false }},
+          { field: "age" }
+        ],
+        filterable: true,
+        dataSource: {
+         data: [ { name: "Jane", age: 30 }, { name: "John", age: 33 }],
+          schema:{
+          	model:{
+              	fields: {
+                  	age: { type: "number" }
+                  }
+              }
+          }
+        }
+      });
+    </script>
+
 ### columns.filterable.multi `Boolean` *(default: false)*
 
-Use this options to enable the MultiCheck filtering support for that column.
+Use this option to enable the MultiCheck filtering support for that column.
 
 > If you have enabled the columns.multi option and your Grid uses serverPaging (or ServerOperations(true) when using the MVC wrappers) you will need to provide columns.filterable.dataSource. Otherwise, a negative impact on the performance could be observed.
 
@@ -1060,9 +1187,9 @@ Controls whether to show or not the checkAll checkbox before the other checkboxe
         field: "country",
         filterable: {
         multi:true,
-        checkAll: false
+          checkAll: false
         }
-      } ],
+      }],
     filterable: true,
       dataSource: [ { country: "BG" }, { country: "USA" } ]
     });
@@ -2705,10 +2832,19 @@ For more information, please refer to the [Window configuration API](/api/javasc
     <script>
 
     function myOpenEventHandler(e) {
-        // ...
+        console.log(e);
     }
 
     $("#grid").kendoGrid({
+      columns: [
+        { field: "name" },
+        { field: "age" },
+        { command: "edit" }
+      ],
+      dataSource: [
+          { id: 1, name: "Jane Doe", age: 30 },
+          { id: 2, name: "John Doe", age: 33 }
+      ],
       editable: {
         mode: "popup",
         window: {
@@ -8458,6 +8594,66 @@ The widget instance which fired the event.
     grid.bind("columnHide", grid_columnHide);
     </script>
 
+### columnLock
+
+Fired when the user lock a column.
+
+The event handler function context (available via the `this` keyword) will be set to the widget instance.
+
+#### Event Data
+
+##### e.column `Object`
+
+A JavaScript object which represents the [column](#configuration-columns) configuration.
+
+##### e.sender `kendo.ui.Grid`
+
+The widget instance which fired the event.
+
+#### Example - subscribe to the "columnLock" event during initialization
+
+    <div id="grid"></div>
+    <script>
+    $("#grid").kendoGrid({
+      columns: [
+        { field: "id", width: 100, locked: true },
+        { field: "name", width: 100 },
+        { field: "age", width: 50 }
+      ],
+      dataSource: [
+        { name: "Jane Doe", age: 30, id: 1 },
+        { name: "John Doe", age: 33, id: 2 }
+      ],
+      columnMenu: true,
+      columnLock: function(e) {
+        console.log(e.column.field); // displays the field of the just locked column
+      }
+    });
+    </script>
+
+#### Example - subscribe to the "columnLock" event after initialization
+
+    <div id="grid"></div>
+    <script>
+    function grid_columnLock(e) {
+      console.log(e.column.field); // displays the field of the just locked column
+    }
+    $("#grid").kendoGrid({
+      columns: [
+        { field: "id", width: 100, locked: true },
+        { field: "name", width: 100 },
+        { field: "age", width: 50 }
+      ],
+      dataSource: [
+        { name: "Jane Doe", age: 30, id: 1 },
+        { name: "John Doe", age: 33, id: 2 }
+      ],
+      columnMenu: true
+    });
+    var grid = $("#grid").data("kendoGrid");
+    grid.bind("columnLock", grid_columnLock);
+    </script>
+
 ### columnMenuInit
 
 Fired when the column menu is initialized.
@@ -8762,6 +8958,66 @@ The widget instance which fired the event.
     });
     var grid = $("#grid").data("kendoGrid");
     grid.bind("columnShow", grid_columnShow);
+    </script>
+
+### columnUnlock
+
+Fired when the user unlock a column.
+
+The event handler function context (available via the `this` keyword) will be set to the widget instance.
+
+#### Event Data
+
+##### e.column `Object`
+
+A JavaScript object which represents the [column](#configuration-columns) configuration.
+
+##### e.sender `kendo.ui.Grid`
+
+The widget instance which fired the event.
+
+#### Example - subscribe to the "columnUnlock" event during initialization
+
+    <div id="grid"></div>
+    <script>
+    $("#grid").kendoGrid({
+      columns: [
+        { field: "id", width: 100, locked: true },
+        { field: "name", width: 100 },
+        { field: "age", width: 50 }
+      ],
+      dataSource: [
+        { name: "Jane Doe", age: 30, id: 1 },
+        { name: "John Doe", age: 33, id: 2 }
+      ],
+      columnMenu: true,
+      columnUnlock: function(e) {
+        console.log(e.column.field); // displays the field of the just unlocked column
+      }
+    });
+    </script>
+
+#### Example - subscribe to the "columnUnlock" event after initialization
+
+    <div id="grid"></div>
+    <script>
+    function grid_columnUnlock(e) {
+      console.log(e.column.field); // displays the field of the just unlocked column
+    }
+    $("#grid").kendoGrid({
+      columns: [
+        { field: "id", width: 100, locked: true },
+        { field: "name", width: 100 },
+        { field: "age", width: 50 }
+      ],
+      dataSource: [
+        { name: "Jane Doe", age: 30, id: 1 },
+        { name: "John Doe", age: 33, id: 2 }
+      ],
+      columnMenu: true
+    });
+    var grid = $("#grid").data("kendoGrid");
+    grid.bind("columnUnlock", grid_columnUnlock);
     </script>
 
 ### dataBinding
@@ -9360,6 +9616,126 @@ The widget instance which fired the event.
       });
     </script>
 
+### filterMenuInit
+
+Fired when the grid filter menu is initialized, when it is opened for the first time.
+
+The event handler function context (available via the `this` keyword) will be set to the widget instance.
+
+#### Event Data
+
+##### e.container `jQuery`
+
+The jQuery object representing filter menu form element.
+
+##### e.field `String`
+
+The field of the column for which the filter menu is initialized.
+
+##### e.sender `kendo.ui.Grid`
+
+The widget instance which fired the event.
+
+#### Example - subscribe to the "filterMenuInit" event during initialization and change the default operators
+
+    <div id="grid"></div>
+    <script>
+    $("#grid").kendoGrid({
+      columns: [
+        { field: "name" }
+      ],
+      dataSource: [
+        { name: "Jane Doe"},
+        { name: "John Doe"}
+      ],
+      filterable: true,
+      filterMenuInit: function(e) {
+        if (e.field == "name") {
+          var firstValueDropDown = e.container.find("select:eq(0)").data("kendoDropDownList");
+          firstValueDropDown.value("contains");
+          firstValueDropDown.trigger("change");
+
+          var logicDropDown = e.container.find("select:eq(1)").data("kendoDropDownList");
+          logicDropDown.value("or");
+          logicDropDown.trigger("change");
+
+          var secondValueDropDown = e.container.find("select:eq(2)").data("kendoDropDownList");
+          secondValueDropDown.value("contains");
+          secondValueDropDown.trigger("change");
+        }
+      }
+    });
+    </script>
+
+#### Example - subscribe to the "filterMenuInit" event after initialization
+
+    <div id="grid"></div>
+    <script>
+    function grid_filterMenuInit(e) {
+      if (e.field == "name") {
+        var firstValueDropDown = e.container.find("select:eq(0)").data("kendoDropDownList");
+        firstValueDropDown.value("contains");
+        var logicDropDown = e.container.find("select:eq(1)").data("kendoDropDownList");
+        logicDropDown.value("or");
+        var secondValueDropDown = e.container.find("select:eq(2)").data("kendoDropDownList");
+        secondValueDropDown.value("contains");
+      }
+    }
+    $("#grid").kendoGrid({
+      columns: [
+        { field: "name" }
+      ],
+      dataSource: [
+        { name: "Jane Doe"},
+        { name: "John Doe"}
+      ],
+      filterable: true
+    });
+    var grid = $("#grid").data("kendoGrid");
+    grid.bind("filterMenuInit", grid_filterMenuInit);
+    </script>
+
+### filterMenuOpen
+
+Fired when the grid filter menu is opened, after the animations are completed.
+
+The event handler function context (available via the `this` keyword) will be set to the widget instance.
+
+#### Event Data
+
+##### e.container `jQuery`
+
+The jQuery object representing filter menu form element.
+
+##### e.field `String`
+
+The field of the column for which the filter menu is opened.
+
+##### e.sender `kendo.ui.Grid`
+
+The widget instance which fired the event.
+
+#### Example - subscribe to the "filterMenuOpen" event and focus second input
+
+    <div id="grid"></div>
+    <script>
+    $("#grid").kendoGrid({
+      columns: [
+        { field: "name" }
+      ],
+      dataSource: [
+        { name: "Jane Doe"},
+        { name: "John Doe"}
+      ],
+      filterable: true,
+      filterMenuOpen: function(e) {
+        if (e.field == "name") {
+          e.container.find(".k-textbox:last").focus();
+        }
+      },
+    });
+    </script>
+
 ### group
 
 Fired when the user is about to group the DataSource or modify the group descriptors state via the Grid group panel.
@@ -9567,6 +9943,69 @@ The widget instance which fired the event.
     grid.bind("groupExpand", grid_groupExpand);
     </script>
 
+### navigate
+
+> Important: This event is available with the Q3 2015 SP1 release.
+
+Fired when [navigatable](#configuration-navigatable) is enabled and the user change current item with either
+mouse or keyboard interaction.
+
+The event handler function context (available via the `this` keyword) will be set to the widget instance.
+
+#### Event Data
+
+##### e.element `jQuery`
+
+A jQuery object of the new hightlighted cell.
+
+##### e.sender `kendo.ui.Grid`
+
+The widget instance which fired the event.
+
+#### Example - subscribe to the "navigate" event during initialization
+
+    <div id="grid"></div>
+    <script>
+    $("#grid").kendoGrid({
+      columns: [
+        { field: "id", width: 100, locked: true },
+        { field: "name", width: 100 },
+        { field: "age", width: 50 }
+      ],
+      dataSource: [
+        { name: "Jane Doe", age: 30, id: 1 },
+        { name: "John Doe", age: 33, id: 2 }
+      ],
+      navigatable: true,
+      navigate: function(e) {
+        console.log(e.element); // displays the newly highlighted cell
+      }
+    });
+    </script>
+
+#### Example - subscribe to the "navigate" event after initialization
+
+    <div id="grid"></div>
+    <script>
+    function grid_navigate(e) {
+        console.log(e.element); // displays the newly highlighted cell
+    }
+    $("#grid").kendoGrid({
+      columns: [
+        { field: "id", width: 100, locked: true },
+        { field: "name", width: 100 },
+        { field: "age", width: 50 }
+      ],
+      dataSource: [
+        { name: "Jane Doe", age: 30, id: 1 },
+        { name: "John Doe", age: 33, id: 2 }
+      ],
+      navigatable: true
+    });
+    var grid = $("#grid").data("kendoGrid");
+    grid.bind("navigate", grid_navigate);
+    </script>
+
 ### page
 
 Fired when the user is about change the current page index of DataSource via the pager UI.
@@ -9736,126 +10175,6 @@ This allows you to change paper size, orientation and apply transformations on e
     });
     var grid = $("#grid").data("kendoGrid");
     grid.saveAsPDF();
-    </script>
-
-### filterMenuInit
-
-Fired when the grid filter menu is initialized, when it is opened for the first time.
-
-The event handler function context (available via the `this` keyword) will be set to the widget instance.
-
-#### Event Data
-
-##### e.container `jQuery`
-
-The jQuery object representing filter menu form element.
-
-##### e.field `String`
-
-The field of the column for which the filter menu is initialized.
-
-##### e.sender `kendo.ui.Grid`
-
-The widget instance which fired the event.
-
-#### Example - subscribe to the "filterMenuInit" event during initialization and change the default operators
-
-    <div id="grid"></div>
-    <script>
-    $("#grid").kendoGrid({
-      columns: [
-        { field: "name" }
-      ],
-      dataSource: [
-        { name: "Jane Doe"},
-        { name: "John Doe"}
-      ],
-      filterable: true,
-      filterMenuInit: function(e) {
-        if (e.field == "name") {
-          var firstValueDropDown = e.container.find("select:eq(0)").data("kendoDropDownList");
-          firstValueDropDown.value("contains");
-          firstValueDropDown.trigger("change");
-
-          var logicDropDown = e.container.find("select:eq(1)").data("kendoDropDownList");
-          logicDropDown.value("or");
-          logicDropDown.trigger("change");
-
-          var secondValueDropDown = e.container.find("select:eq(2)").data("kendoDropDownList");
-          secondValueDropDown.value("contains");
-          secondValueDropDown.trigger("change");
-        }
-      }
-    });
-    </script>
-
-#### Example - subscribe to the "filterMenuInit" event after initialization
-
-    <div id="grid"></div>
-    <script>
-    function grid_filterMenuInit(e) {
-      if (e.field == "name") {
-        var firstValueDropDown = e.container.find("select:eq(0)").data("kendoDropDownList");
-        firstValueDropDown.value("contains");
-        var logicDropDown = e.container.find("select:eq(1)").data("kendoDropDownList");
-        logicDropDown.value("or");
-        var secondValueDropDown = e.container.find("select:eq(2)").data("kendoDropDownList");
-        secondValueDropDown.value("contains");
-      }
-    }
-    $("#grid").kendoGrid({
-      columns: [
-        { field: "name" }
-      ],
-      dataSource: [
-        { name: "Jane Doe"},
-        { name: "John Doe"}
-      ],
-      filterable: true
-    });
-    var grid = $("#grid").data("kendoGrid");
-    grid.bind("filterMenuInit", grid_filterMenuInit);
-    </script>
-
-### filterMenuOpen
-
-Fired when the grid filter menu is opened, after the animations are completed.
-
-The event handler function context (available via the `this` keyword) will be set to the widget instance.
-
-#### Event Data
-
-##### e.container `jQuery`
-
-The jQuery object representing filter menu form element.
-
-##### e.field `String`
-
-The field of the column for which the filter menu is opened.
-
-##### e.sender `kendo.ui.Grid`
-
-The widget instance which fired the event.
-
-#### Example - subscribe to the "filterMenuOpen" event and focus second input
-
-    <div id="grid"></div>
-    <script>
-    $("#grid").kendoGrid({
-      columns: [
-        { field: "name" }
-      ],
-      dataSource: [
-        { name: "Jane Doe"},
-        { name: "John Doe"}
-      ],
-      filterable: true,
-      filterMenuOpen: function(e) {
-        if (e.field == "name") {
-          e.container.find(".k-textbox:last").focus();
-        }
-      },
-    });
     </script>
 
 ### remove
@@ -10176,187 +10495,4 @@ The widget instance which fired the event.
         console.log(e.sort.field);
         console.log(e.sort.dir);
       });
-    </script>
-
-### columnLock
-
-Fired when the user lock a column.
-
-The event handler function context (available via the `this` keyword) will be set to the widget instance.
-
-#### Event Data
-
-##### e.column `Object`
-
-A JavaScript object which represents the [column](#configuration-columns) configuration.
-
-##### e.sender `kendo.ui.Grid`
-
-The widget instance which fired the event.
-
-#### Example - subscribe to the "columnLock" event during initialization
-
-    <div id="grid"></div>
-    <script>
-    $("#grid").kendoGrid({
-      columns: [
-        { field: "id", width: 100, locked: true },
-        { field: "name", width: 100 },
-        { field: "age", width: 50 }
-      ],
-      dataSource: [
-        { name: "Jane Doe", age: 30, id: 1 },
-        { name: "John Doe", age: 33, id: 2 }
-      ],
-      columnMenu: true,
-      columnLock: function(e) {
-        console.log(e.column.field); // displays the field of the just locked column
-      }
-    });
-    </script>
-
-#### Example - subscribe to the "columnLock" event after initialization
-
-    <div id="grid"></div>
-    <script>
-    function grid_columnLock(e) {
-      console.log(e.column.field); // displays the field of the just locked column
-    }
-    $("#grid").kendoGrid({
-      columns: [
-        { field: "id", width: 100, locked: true },
-        { field: "name", width: 100 },
-        { field: "age", width: 50 }
-      ],
-      dataSource: [
-        { name: "Jane Doe", age: 30, id: 1 },
-        { name: "John Doe", age: 33, id: 2 }
-      ],
-      columnMenu: true
-    });
-    var grid = $("#grid").data("kendoGrid");
-    grid.bind("columnLock", grid_columnLock);
-    </script>
-
-### columnUnlock
-
-Fired when the user unlock a column.
-
-The event handler function context (available via the `this` keyword) will be set to the widget instance.
-
-#### Event Data
-
-##### e.column `Object`
-
-A JavaScript object which represents the [column](#configuration-columns) configuration.
-
-##### e.sender `kendo.ui.Grid`
-
-The widget instance which fired the event.
-
-#### Example - subscribe to the "columnUnlock" event during initialization
-
-    <div id="grid"></div>
-    <script>
-    $("#grid").kendoGrid({
-      columns: [
-        { field: "id", width: 100, locked: true },
-        { field: "name", width: 100 },
-        { field: "age", width: 50 }
-      ],
-      dataSource: [
-        { name: "Jane Doe", age: 30, id: 1 },
-        { name: "John Doe", age: 33, id: 2 }
-      ],
-      columnMenu: true,
-      columnUnlock: function(e) {
-        console.log(e.column.field); // displays the field of the just unlocked column
-      }
-    });
-    </script>
-
-#### Example - subscribe to the "columnUnlock" event after initialization
-
-    <div id="grid"></div>
-    <script>
-    function grid_columnUnlock(e) {
-      console.log(e.column.field); // displays the field of the just unlocked column
-    }
-    $("#grid").kendoGrid({
-      columns: [
-        { field: "id", width: 100, locked: true },
-        { field: "name", width: 100 },
-        { field: "age", width: 50 }
-      ],
-      dataSource: [
-        { name: "Jane Doe", age: 30, id: 1 },
-        { name: "John Doe", age: 33, id: 2 }
-      ],
-      columnMenu: true
-    });
-    var grid = $("#grid").data("kendoGrid");
-    grid.bind("columnUnlock", grid_columnUnlock);
-    </script>
-
-### navigate
-
-> Important: This event is available with the Q3 2015 SP1 release.
-
-Fired when [navigatable](#configuration-navigatable) is enabled and the user change current item with either
-mouse or keyboard interaction.
-
-The event handler function context (available via the `this` keyword) will be set to the widget instance.
-
-#### Event Data
-
-##### e.element `jQuery`
-
-A jQuery object of the new hightlighted cell.
-
-##### e.sender `kendo.ui.Grid`
-
-The widget instance which fired the event.
-
-#### Example - subscribe to the "navigate" event during initialization
-
-    <div id="grid"></div>
-    <script>
-    $("#grid").kendoGrid({
-      columns: [
-        { field: "id", width: 100, locked: true },
-        { field: "name", width: 100 },
-        { field: "age", width: 50 }
-      ],
-      dataSource: [
-        { name: "Jane Doe", age: 30, id: 1 },
-        { name: "John Doe", age: 33, id: 2 }
-      ],
-      navigatable: true,
-      navigate: function(e) {
-        console.log(e.element); // displays the newly highlighted cell
-      }
-    });
-    </script>
-
-#### Example - subscribe to the "navigate" event after initialization
-
-    <div id="grid"></div>
-    <script>
-    function grid_navigate(e) {
-        console.log(e.element); // displays the newly highlighted cell
-    }
-    $("#grid").kendoGrid({
-      columns: [
-        { field: "id", width: 100, locked: true },
-        { field: "name", width: 100 },
-        { field: "age", width: 50 }
-      ],
-      dataSource: [
-        { name: "Jane Doe", age: 30, id: 1 },
-        { name: "John Doe", age: 33, id: 2 }
-      ],
-      navigatable: true
-    });
-    var grid = $("#grid").data("kendoGrid");
-    grid.bind("navigate", grid_navigate);
     </script>

@@ -209,6 +209,7 @@ var __meta__ = { // jshint ignore:line
             this.listView.setOptions(listOptions);
             this._accessors();
             this._aria();
+            this._clearButton();
         },
 
         _listOptions: function(options) {
@@ -765,13 +766,11 @@ var __meta__ = { // jshint ignore:line
         },
 
         _clearButton: function() {
-            this._clear = $('<span unselectable="on" class="k-icon k-clear-value k-i-close" title="clear"></span>').attr({
-                "role": "button",
-                "tabIndex": -1
-            });
+            List.fn._clearButton.call(this);
+
             if (this.options.clearButton) {
-            	this._clear.insertAfter(this.element);
-            	this.wrapper.addClass("k-autocomplete-clearable");
+                this._clear.insertAfter(this.element);
+                this.wrapper.addClass("k-autocomplete-clearable");
             }
         },
 

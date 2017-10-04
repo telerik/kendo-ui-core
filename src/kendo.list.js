@@ -447,6 +447,19 @@ var __meta__ = { // jshint ignore:line
 
         },
 
+        _clearButton: function() {
+            if(!this._clear){
+                this._clear = $('<span unselectable="on" class="k-icon k-clear-value k-i-close" title="clear"></span>').attr({
+                    "role": "button",
+                    "tabIndex": -1
+                });
+            }
+
+            if (!this.options.clearButton) {
+                this._clear.remove();
+            }
+        },
+
         search: function(word) {
             var options = this.options;
 

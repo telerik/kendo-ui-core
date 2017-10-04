@@ -17889,7 +17889,7 @@ The background color of the title. Accepts a valid CSS color string, including h
 
 ### title.border `Object`
 
-The border of the series.
+The border of the title.
 
 #### Example - set the chart title border
 
