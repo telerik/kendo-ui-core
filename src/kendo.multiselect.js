@@ -191,6 +191,7 @@ var __meta__ = { // jshint ignore:line
             this._aria(this.tagList.attr(ID));
             this._tagTemplate();
             this._placeholder();
+            this._clearButton();
         },
 
         currentTag: function(candidate) {
@@ -1219,26 +1220,40 @@ var __meta__ = { // jshint ignore:line
             });
         },
 
-        _selectRange: function(startIndex, endIndex) {
+        _selectRange: function (startIndex, endIndex) {
             var that = this;
-            var listView = that.listView;
+            var listView = this.listView;
+            var maxSelectedItems = this.options.maxSelectedItems;
             var indices = listView._selectedIndices.slice();
-            var toggle = function (index) {
+            var indicesToSelect = [];
+            var i;
+
+            if (startIndex < endIndex) {
+                for (i = startIndex; i <= endIndex; i++) {
+                    indicesToSelect.push(i);
+                }
+            } else {
+                for (i = startIndex; i >= endIndex; i--) {
+                    indicesToSelect.push(i);
+                }
+            }
+
+            if (maxSelectedItems !== null && indicesToSelect.length > maxSelectedItems) {
+                indicesToSelect = indicesToSelect.slice(0, maxSelectedItems);
+            }
+
+            for (i = 0; i < indicesToSelect.length; i++) {
+                var index = indicesToSelect[i];
+
                 if (listView._selectedIndices.indexOf(index) == -1) {
                     indices.push(index);
                 } else {
                     indices.splice(indices.indexOf(index), 1);
                 }
-            };
+            }
 
-            if (startIndex < endIndex) {
-                for (var i = startIndex; i <= endIndex; i++) {
-                    toggle(i);
-                }
-            } else {
-                for (var j = startIndex; j >= endIndex; j--) {
-                    toggle(j);
-                }
+            if (!indices.length) {
+                return;
             }
 
             return listView.select(indices).done(function() {
@@ -1246,6 +1261,7 @@ var __meta__ = { // jshint ignore:line
                     var dataItem  = listView.dataItemByIndex(index);
                     var candidate = listView.element.children()[index];
                     var isSelected = $(candidate).hasClass("k-state-selected");
+
                     that.trigger(isSelected ? SELECT : DESELECT, {dataItem: dataItem, item: candidate});
                 });
                 that._change();
@@ -1317,13 +1333,11 @@ var __meta__ = { // jshint ignore:line
         },
 
         _clearButton: function() {
-            this._clear = $('<span deselectable="on" class="k-icon k-clear-value k-i-close" title="clear"></span>').attr({
-                "role": "button",
-                "tabIndex": -1
-            });
+            List.fn._clearButton.call(this);
+
             if (this.options.clearButton) {
                 this._clear.insertAfter(this.input);
-            	this.wrapper.addClass("k-multiselect-clearable");
+                this.wrapper.addClass("k-multiselect-clearable");
             }
         },
 

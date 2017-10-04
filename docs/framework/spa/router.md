@@ -224,19 +224,29 @@ The example below demonstrates how to detect `Back` button press in a route.
 
 ```html
     <script>
-    var router = new kendo.Router();
+      var router = new kendo.Router();
 
-    router.route("/foo", function(params) {
-        console.log(params._back);
-    });
-
-    $(function() {
+      router.route("/foo", function(params) {
+        if(params._back){
+          console.log("Navigating back to '/foo'");
+        }
+        else {
+          console.log("Forward navigation to '/foo'");
+        }
+      });
+      router.route("/bar", function(params) {
+        console.log("Forward navigation to '/bar'");
+      });
+      $(function() {
         router.start();
-        router.navigate("/foo?q=2");
+        router.navigate("/foo");
+        router.navigate("/bar");
         history.back();
-    });
+      });
     </script>
 ```
+
+> If you want to globally detect back navigation in the Router, use its [back event](/api/javascript/router#events-back).
 
 ## See Also
 
