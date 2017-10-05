@@ -341,8 +341,10 @@ var __meta__ = { // jshint ignore:line
             }
 
             if (support.pointers || support.msPointers) {
+                //touch-action:none will not work for IE10
                 if (support.browser.version < 11) {
-                    element.css("-ms-touch-action", "pinch-zoom double-tap-zoom");
+                    var defaultAction = "pinch-zoom double-tap-zoom";
+                    element.css("-ms-touch-action", options.touchAction && options.touchAction != "none" ? defaultAction + " " + options.touchAction : defaultAction);
                 } else {
                     element.css("touch-action", options.touchAction || "none");
                 }

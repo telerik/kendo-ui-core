@@ -1,14 +1,15 @@
 ---
-title: How to persist sortable panels
-description: Persist order of sortable panels
+title: Persist Sortable Panels
+description: An example on how to persist the order of panels in the Kendo UI Sortable widget.
 type: how-to
-page_title: Persist sortable panels
+page_title: Persist the Same Rendering of Panels | Kendo UI Sortable
 slug: persist-sortable-panels
 tags: sortable, panels, persist, order, state
 res_type: kb
 ---
 
 ## Environment
+
 <table>
  <tr>
   <td>Product</td>
@@ -16,19 +17,13 @@ res_type: kb
  </tr>
 </table>
 
-
 ## Description
 
-I have sortable panels and would like to persist their order. When the user returns to the page the panels should be arranged the same way.
+How can I persist the order of the panels in the Sortable, so that when the user returns to the page, the panels are arranged in the same way?
 
 ## Solution
-  
-To persist the state of the sortable panels you should keep the DOM for the panels in web storage. 
 
-A live example is available in [this dojo](http://dojo.telerik.com/ixono/7.
-
-The relevant code is below:
-
+Keep the DOM for the panels in the web storage.
 
 ````html
 <button id="reset">Reset</button>
@@ -86,7 +81,7 @@ The relevant code is below:
           <p>content</p>
         </div>
       </div>
-    </div> 
+    </div>
 
     <div class="responsive-message"></div>
 
@@ -149,3 +144,4 @@ The relevant code is below:
     </script>
 ````
 
+For the complete implementation of this approach, refer to [this runnable example](http://dojo.telerik.com/ixono/7).

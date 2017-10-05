@@ -14,7 +14,7 @@ res_type: kb
 <table>
  <tr>
   <td>Product</td>
-  <td>Date/Time Pickers for Progress Kendo UI</td>
+  <td>Progress Kendo UI DatePicker</td>
  </tr>
  <tr>
   <td>Progress Kendo UI version</td>

@@ -1,20 +1,20 @@
 ---
-title: Chart Stops Responding After Multiple Pan and Zoom Gestures on Mobile Devices
-description: On mobile browsers, the Chart will eventually freeze and stop responding to touch gestures after multiple zooms and/or pans.
+title: Chart Stops Responding on Mobile Devices after Multiple Pan and Zoom Gestures
+description: On mobile browsers, the Chart eventually freezes and stops responding to touch gestures after multiple zooms and pans.
 type: troubleshooting
-page_title: SVG-Rendered Chart Stops Responding After Multiple Pan and Zoom Gestures
-slug: chart-stops-responding-on-mobile-devices
+page_title: SVG-Rendered Chart Stops Responding on Mobile after Multiple Pan and Zoom Gestures
+slug: chart-cannot-pan-and-zoom-continuously-on-mobile
 tags: chart, mobile, svg-rendering
 ticketid: 1129220
 res_type: kb
-
 ---
 
 ## Environment
+
 <table>
  <tr>
   <td>Product</td>
-  <td>Chart for Progress® Kendo UI®</td>
+  <td>Progress Kendo UI Chart</td>
  </tr>
  <tr>
   <td>Operating System</td>
@@ -22,18 +22,17 @@ res_type: kb
  </tr>
 </table>
 
-
 ## Description
-After continuously panning and zooming a Chart, using default SVG rendering on mobile devices, it stops responding to pan and zoom gestures.
+
+After continuously panning and zooming a Chart, which uses the default SVG rendering on mobile devices, it stops responding to pan and zoom gestures.
 
 ## Cause
-The issue comes from the fact that the Chart re-renders its SVG elements on pan and zoom actions, thus breaking the touch event sequence. 
 
-## Solution
-There are no known solutions for a Chart using SVG rendering.
+The Chart re-renders its SVG elements when the pan and zoom actions are executed which breaks the `touch` event sequence.
 
 ## Suggested Workarounds
-Use [canvas rendering](/api/javascript/dataviz/ui/chart#configuration-renderAs). When using a canvas, the Chart element is not re-rendered on refresh.
+
+Kendo UI does not provide a built-in solution for avoiding this behavior. However, you can still work around the issue by using [canvas rendering](/api/javascript/dataviz/ui/chart#configuration-renderAs) which does not re-render the Chart element on refreshing the page.
 
 ```html
     <div id="chart"></div>

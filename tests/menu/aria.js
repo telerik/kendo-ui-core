@@ -41,6 +41,54 @@ test("has-popup attribute is added if node has childs", function() {
     equal(menu.find("[aria-haspopup=true] span:first").text(), "foo");
 });
 
+test("has-popup attribute is added when using append method", function() {
+    menu = $("<ul><li id='firstItem'>item 1</li></ul>")
+        .appendTo(QUnit.fixture)
+        .kendoMenu();
+
+    menu.data("kendoMenu").append({text: 'item'}, $("#firstItem"));
+    ok($("#firstItem").is("[aria-haspopup]"));
+})
+
+test("has-popup attribute is not removed when using remove method and there is still group", function() {
+    menu = $("<ul><li id='firstItem'>item<ul><li>item 1</li><li id='item2'>item 2</li></ul></li></ul>")
+        .appendTo(QUnit.fixture)
+        .kendoMenu();
+
+    menu.data("kendoMenu").remove($("#item2"));
+    ok($("#firstItem").is("[aria-haspopup]"));
+})
+
+test("has-popup attribute is removed when using remove method and there no group", function() {
+    menu = $("<ul><li id='firstItem'>item<ul><li id='item1'>item 1</li></ul></li></ul>")
+        .appendTo(QUnit.fixture)
+        .kendoMenu();
+
+    menu.data("kendoMenu").remove($("#item1"));
+    ok($("#firstItem").not("[aria-haspopup]"));
+})
+
+test("has-popup attribute is only for the item with no groups when using remove method", function() {
+    menu = $("<ul>" +
+                "<li id='firstItem'>item" +
+                    "<ul>" +
+                        "<li id='item1'>item 1" +
+                            "<ul>" +
+                                "<li id='subitem1'>item 1</li>" +
+                            "</ul>" +
+                        "</li>" +
+                    "</ul>" +
+                "</li>" +
+            "</ul>")
+        .appendTo(QUnit.fixture)
+        .kendoMenu();
+
+    menu.data("kendoMenu").remove($("#subitem1"));
+
+    ok($("#item1").not("[aria-haspopup]"));
+    ok($("#firstItem").is("[aria-haspopup]"));
+})
+
 test("menu role is added to the group container", function() {
     setup({ dataSource: [ {text: "foo", items: [{ text: "bar" }] } ] });
 

@@ -1,14 +1,15 @@
 ---
-title: How to Implement Calculated Column with Batch Editing in Kendo UI Grid
-description: Calculated column in Grid with enabled Batch(InCell) editing
+title: Implement Calculated Columns with Batch Editing in Grids
+description: An example on implementing a calculated column in a Kendo UI Grid with enabled Batch (InCell) editing.
 type: how-to
-page_title: Calculated column from multiple fields in Grid with Batch edit mode
+page_title: Implement Calculated Columns from Multiple Fields in a Grid with the Batch Edit Mode Enabled
 slug: grid-calculated-column-with-batch-editing
 tags: grid, batch, incell, calculated
 res_type: kb
 ---
 
 ## Environment
+
 <table>
  <tr>
   <td>Product</td>
@@ -16,16 +17,23 @@ res_type: kb
  </tr>
 </table>
 
-
 ## Description
 
-I have a Grid with Batch (InCell) edit mode and I want to display calculated value in a template column, using the values from other fields of the row.
+How can I display a calculated value in a template column of a Grid in the batch (InCell) edit mode by using values from other fields of the row.
 
 ## Solution
-  
-If the calculated field will not be a part of the model and the calculated value will be only visible in the Grid for the end user, you could create a template column where you could wrap the initially calculated value in an element with some class name for example (so that we can easily get reference to it later). As for changing the calculated value dynamically, we can handle the **edit** event of the Grid, calculate the new value from the updated model, get reference to the wrapping element holding the calculated value and finally, update the HTML its content. Here is an example demonstrating the implementation: 
 
-````html
+If the calculated field will not be part of the model and if only the calculated value will be visible in the Grid for the end user:
+1. Create a template column.  
+1. In the template column, wrap the initially calculated value in an element with, for example, a class name, so that you can refer to it later.
+
+To change the calculated value dynamically:
+1. Handle the `edit` event of the Grid.
+1. Calculate the new value from the updated model.
+1. Get a reference to the wrapping element which holds the calculated value.
+1. Update the HTML content.
+
+```html
 <div id="example">
     <div id="grid"></div>
 
@@ -97,16 +105,16 @@ If the calculated field will not be a part of the model and the calculated value
             	});
             </script>
         </div>
-````
+```
 
-For more complex calculations, the template in the column could call a function:
-````
+For more complex calculations, set the template in the column to call a function.
+
+```
    {template: "<span class='totalSpan'>#= calculateValue(data) #</span>"
    ...
-   
+
    function calculateValue(dataItem){
        var total = dataItem.UnitsInStock * dataItem.UnitPrice;
        return total;
    }
-````
-
+```

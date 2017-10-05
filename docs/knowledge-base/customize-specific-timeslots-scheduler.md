@@ -14,7 +14,7 @@ res_type: kb
 <table>
  <tr>
   <td>Product</td>
-  <td>Scheduler for Progress Kendo UI</td>
+  <td>Progress Kendo UI Scheduler</td>
  </tr>
  <tr>
   <td>Operating System</td>

@@ -1,8 +1,8 @@
 ---
-title: How to Change Multi-Checkbox Filtering to use Contains Instead of EqualTo
-description: Changing the multi-checkbox filtering to use Contains
+title: Set Multi-Checkbox Filtering to Use contains instead of equalTo
+description: An example on how to change the multi-checkbox filtering of the Kendo UI Grid to use contains instead of equalTo.
 type: how-to
-page_title: Using different dataSource for the multi-checkbox filter and filter with Contains
+page_title: Set a Different dataSource for the Multi-Checkbox and contains Filter | Kendo UI Grid
 slug: grid-how-to-change-multi-checkbox-filter-to-contains
 tags: grid, filter, multi-checkbox, contains
 ticketid: 1132412
@@ -10,6 +10,7 @@ res_type: kb
 ---
 
 ## Environment
+
 <table>
  <tr>
   <td>Product</td>
@@ -17,35 +18,32 @@ res_type: kb
  </tr>
 </table>
 
-
 ## Description
 
-I have a Grid with a column that contains commas delimited values.
+A Grid column contains comma-delimited values (`AAA,BBB,CCC`) and uses checkboxes to perform filtering.
 
-For example:
-````
-AAA,BBB,CCC
-````
+How can I set a checkbox for each unique value and filter the data by using `contains` instead of `equalTo`? For example:
 
-The filtering for this column uses checkboxes.
-
-I would like to have a checkbox for each unique value and filter with "_Contains_" instead of "_EqualTo_".
-
-For example:
-````
+```
 AAA
 BBB
 CCC
-````
+```
 
 ## Solution
-  
-Since the built-in multi-checkbox filtering will use the data from the Grid, the values will match the entire field value. For customizing the filter you could define custom dataSource for the filter in that column (_with the unique values_) and modify the filter expression to be changed to "__contains__" within the **filter** event of the Grid. This approach is demonstrated in the following example:
+
+The built-in multi-checkbox filtering uses the data from the Grid and the values will match the entire field value.
+
+To customize the filter:
+
+1. Define a custom dataSource for the filter in the column with the unique values.
+
+1. Within the `filter` event of the Grid, modify the filter expression and change them to `contains`.
 
 
-````html
+```html
 <div id="grid"></div>
-  
+
 <script>
 $("#grid").kendoGrid({
   filter: function(e){
@@ -77,7 +75,6 @@ $("#grid").kendoGrid({
   filterable: true,
     dataSource: [ { someField: "AAA, BBB" }, { someField: "CCC" } ]
   });
-  
-</script>
-````
 
+</script>
+```

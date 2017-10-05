@@ -14,8 +14,8 @@ res_type: kb
 <table>
  <tr>
   <td>Product</td>
-  <td>Editor for Progress Kendo UI</td>
-  <td>Dialog for Progress Kendo UI</td>
+  <td>Progress Kendo UI Editor</td>
+  <td>Progress Kendo UI Dialog</td>
  </tr>
  <tr>
   <td>Progress Kendo UI version</td>

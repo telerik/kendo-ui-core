@@ -1,19 +1,41 @@
 ---
-title: Convert the Kendo UI Grid to property grid
-description: An example on how to convert the Kendo UI Grid to property grid
+title: Convert Kendo UI Grids to Property Grids
+description: An example on how to convert the Kendo UI Grid to a property grid.
 type: how-to
-page_title: Convert the Kendo UI Grid to property grid | Kendo UI Grid
+page_title: Transform Kendo UI Grids into Property Grids | Kendo UI Grid
 slug: property-grid
 tags: grid, property-grid
-ticketid: 
 res_type: kb
 ---
 
+## Environment
+
+<table>
+ <tr>
+  <td>Product</td>
+  <td>Progress Kendo UI Grid</td>
+ </tr>
+ <tr>
+  <td>Operating System</td>
+  <td>Windows 10 64bit</td>
+ </tr>
+ <tr>
+  <td>Browser</td>
+  <td>IE For PC</td>
+ </tr>
+ <tr>
+  <td>Browser Version</td>
+  <td>11</td>
+ </tr>
+</table>
+
 ## Description
 
-How can I convert the Kendo UI Grid to property grid? A common scenario is to convert ordinary grids to property grids for users with narrow screens. This can be easily achieved by modifying the shape of the data.
+How can I convert a Kendo UI Grid to a property grid for users with narrow screens to apply?
 
 ## Solution
+
+Modify the shape of the data.
 
 ```html       
         <style>
@@ -46,7 +68,7 @@ How can I convert the Kendo UI Grid to property grid? A common scenario is to co
 
             </table>
             </script>
-            
+
             <script>
 
             var rawData,
@@ -68,7 +90,7 @@ How can I convert the Kendo UI Grid to property grid? A common scenario is to co
                     var currentItem = rawData[i];
                     var property = Object.keys(currentItem)[j];
                     data[i].records[j]["Property"] = property;
-                    data[i].records[j]["Value"] = currentItem[property]	
+                    data[i].records[j]["Value"] = currentItem[property]
                 }
                 }
 
