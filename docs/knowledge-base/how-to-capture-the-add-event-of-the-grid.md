@@ -48,7 +48,7 @@ Still, I can suggest using jQuery to attach an event handler to the button using
 
 Please check the example demonstrating this:
 
-html```
+````html
       <div id="example">
       <div id="grid"></div>
 
@@ -122,4 +122,4 @@ html```
         }
       </script>
     </div>
-```
+````

@@ -468,21 +468,8 @@ var __meta__ = { // jshint ignore:line
 
         close: function() {
             this._activeItem = null;
-        //     var isFiltered = this.dataSource.filter() ? this.dataSource.filter().filters.length > 0 : false;
-        //     var that = this;
-        //     if(isFiltered){
-        //      //   debugger
-        //        // this.listView.skipUpdate(true);
-        //    //    this.dataSource.filter(this.options.filter);
-        //       //  setTimeout(function(){
-        //             that._filterSource();
-        //         //    },10);
-            
-               
-        //     }
 
             this.popup.close();
-            
         },
 
         open: function() {
@@ -877,6 +864,8 @@ var __meta__ = { // jshint ignore:line
                     }
                 }
             } else if ((key === keys.DELETE || key === keys.BACKSPACE) && !hasValue) {
+                that._state = "";
+
                 if (that.options.tagMode === "single") {
                     listView.value([]);
                     that._change();
@@ -1128,7 +1117,7 @@ var __meta__ = { // jshint ignore:line
             });
         },
 
-        _selectValue: function(added, removed) {
+        _selectValue: function (added, removed) {
             var that = this;
             var values = that.value();
             var total = that.dataSource.total();

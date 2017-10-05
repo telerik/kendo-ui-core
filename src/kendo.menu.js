@@ -354,6 +354,25 @@ var __meta__ = { // jshint ignore:line
         item.filter(":last-child").addClass(LAST);
     }
 
+    function updateHasAriaPopup (parents) {
+        if (parents && parents.length) {
+            for (var index in parents) {
+                var parentLi = parents.eq(index);
+                if (parentLi.find("ul").length) {
+                    parentLi.attr("aria-haspopup", true);
+                } else {
+                    parentLi.removeAttr("aria-haspopup");
+                }
+            }
+        }
+    }
+
+    function getParentLiItems(group) {
+        if (!group.hasClass(MENU)) {
+            return group.parentsUntil("." + MENU, "li");
+        }
+    }
+
     function storeItemSelectEventHandler (element, options) {
         var selectHandler = getItemSelectEventHandler(options);
         if(selectHandler) {
@@ -846,6 +865,7 @@ var __meta__ = { // jshint ignore:line
 
             updateArrow(referenceItem);
             updateFirstLast(inserted.group.find(".k-first, .k-last").add(inserted.items));
+            updateHasAriaPopup(getParentLiItems(inserted.group));
 
             return this;
         },
@@ -946,12 +966,17 @@ var __meta__ = { // jshint ignore:line
             element.remove();
 
             if (group && !group.children(allItemsSelector).length) {
+                var parentItems = getParentLiItems(group);
+
                 var container = group.parent(animationContainerSelector);
+
                 if (container.length) {
                     container.remove();
                 } else {
                     group.remove();
                 }
+
+                updateHasAriaPopup(parentItems);
             }
 
             if (parent.length) {

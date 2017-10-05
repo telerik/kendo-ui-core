@@ -108,8 +108,8 @@ code, em {
 :target:before {
     content: "";
     display: block;
-    height: 85px;
-    margin: -85px 0 0;
+    height: 125px;
+    margin: -125px 0 0;
 }
 
 #page-header:after {

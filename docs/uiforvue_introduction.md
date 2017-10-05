@@ -2,17 +2,15 @@
 title: Progress<sup>®</sup> Kendo UI Wrappers for Vue
 page_title: Overview | Progress Kendo UI Wrappers for Vue
 description: "Download and install Progress Kendo UI for Vue, and run a sample application."
-slug: uiforvue_introduction.md
+slug: uiforvue_introduction
 isNew: true
 position: 12
 ---
 
 # Progress<sup>®</sup> Kendo UI Wrappers for Vue
 
-The Kendo UI Wrappers for Vue.js provide an easy and native (for Vue.js) way to use and configure Kendo UI widgets in your Vue.js application.
+The Kendo UI wrappers for Vue are part of the Kendo UI suite for jQuery.
 
-That means that although you are using Vue directives or components to setup the UI component, the functionality comes from the jQuery Kendo UI widgets.
+They provide an easy way to use and configure Kendo UI widgets in your Vue.js application. This means that although you might be using Vue directives or components to set up the user interface with Kendo UI, the underlying functionality of the UI controls comes from the Kendo UI for jQuery suite.
 
-For more information about the usage of the Kendo UI Wrappers for Vue, refer to the following documentation site:
-
-[http://docs.telerik.com/kendo-ui-wrappers-vue/introduction](http://docs.telerik.com/kendo-ui-wrappers-vue/introduction)
+For more information, refer to the [official documentation on Kendo UI Wrappers for Vue](http://docs.telerik.com/kendo-ui-wrappers-vue/introduction).

@@ -49,7 +49,13 @@ The following example demonstrates how to define the item template for the Kendo
 
 ### Set the Editor Template
 
-The following example demonstrates how to define the `EditorTemplate` for the model. You need to declare the editor template in a file that uses the name of the edited model, for example `ProductViewModel.cshtml`. Place this file in the `Views\Shared\EditorTemplates` directory of your project.
+The following example demonstrates how to define the `EditorTemplate` for the model.
+
+You need to:
+1. Declare the editor template in a file that uses the name of the edited model&mdash;for example `ProductViewModel.cshtml`.
+1. Place this file in the `Views\Shared\EditorTemplates` directory of your project.
+
+###### Example
 
 		@model Kendo.Mvc.Examples.Models.ProductViewModel
 		<div class="product-view">
