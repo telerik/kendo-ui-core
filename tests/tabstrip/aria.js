@@ -247,4 +247,11 @@ test("uses id of the LI element for the aria-activedescendant", function() {
 
     equal(tabstrip.element.attr("aria-activedescendant"), "custom");
 });
+
+test("disabled attribute renders aria-disabled", function() {
+    div = $("<div><ul id='test'><li class='k-state-active'>Test</li><li disabled>Test2</li></ul></div>")
+    var tabstrip = div.kendoTabStrip().data("kendoTabStrip");
+
+    ok(div.find("li:last").is("[aria-disabled='true']"));
+});
 })();

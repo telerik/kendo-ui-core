@@ -15,7 +15,7 @@ res_type: kb
 <table>
  <tr>
   <td>Product</td>
-  <td>Grid for Progress Kendo UI</td>
+  <td>Progress Kendo UI Grid</td>
  </tr>
 </table>
 

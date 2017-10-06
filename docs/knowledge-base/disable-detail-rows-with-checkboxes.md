@@ -14,7 +14,7 @@ res_type: kb
 <table>
  <tr>
   <td>Product</td>
-  <td>Grid for Progress Kendo UI</td>
+  <td>Progress Kendo UI Grid</td>
  </tr>
  <tr>
   <td>Progress Kendo UI version</td>
@@ -22,6 +22,7 @@ res_type: kb
  </tr>
 </table>
  
+
 ## Description
 
 When I change a value, all detail Grid rows collapse. How can I show and hide detail rows based on the checkbox in the master row of a Kendo UI Grid?

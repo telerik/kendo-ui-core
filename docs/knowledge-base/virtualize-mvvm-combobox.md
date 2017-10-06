@@ -15,7 +15,7 @@ res_type: kb
 <table>
  <tr>
   <td>Product</td>
-  <td>MVVM for Progress Kendo UI</td>
+  <td>Progress Kendo UI MVVM</td>
  </tr>
  <tr>
   <td>Operating System</td>

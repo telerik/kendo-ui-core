@@ -1,14 +1,15 @@
 ---
-title: How to filter items in ListBox
-description: Filtering items in ListBox
+title: Filter ListBox Items
+description: An example on how to filter items to match the search conditions in a Kendo UI ListBox.
 type: how-to
-page_title: Filter ListBox items
+page_title: Filter Items to Match the Search Conditions | Kendo UI ListBox
 slug: listbox-how-to-filter-items
 tags: listbox, filter, search, contains, items
 res_type: kb
 ---
 
 ## Environment
+
 <table>
  <tr>
   <td>Product</td>
@@ -16,17 +17,13 @@ res_type: kb
  </tr>
 </table>
 
-
 ## Description
 
-I have a ListBox that contains a lot of items. I want to add a filter that will show only the items matching the search condition.
+How can I add a filter that will show only the ListBox items which match the search conditions?
 
 ## Solution
-  
-An external input element can be used as search box. The string entered there can be retrieved and used in the DataSource `filter` method.
 
-A live example is available in [this dojo](http://dojo.telerik.com/EworIV/3).
-
+Use an external input element as a search box. You can retrieve the string that is entered in the input field and use it in the `filter` method of the DataSource.
 
 ````html
 <div class="demo-section k-content wide">
@@ -38,7 +35,7 @@ A live example is available in [this dojo](http://dojo.telerik.com/EworIV/3).
           <select id="optional"></select>
           <select id="selected"></select>
         </div>
-      </div> 
+      </div>
       <script>
         $(document).ready(function () {
 
@@ -94,3 +91,4 @@ A live example is available in [this dojo](http://dojo.telerik.com/EworIV/3).
       </script>
 ````
 
+For the complete implementation of the approach, refer to [this runnable example](http://dojo.telerik.com/EworIV/3).

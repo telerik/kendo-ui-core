@@ -14,7 +14,7 @@ res_type: kb
 <table>
  <tr>
   <td>Product</td>
-  <td>Grid for ASP.NET Core</td>
+  <td>Progress Kendo UI Grid for ASP.NET Core</td>
  </tr>
  <tr>
   <td>Kendo Version</td>

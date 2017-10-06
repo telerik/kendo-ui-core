@@ -14,10 +14,11 @@ res_type: kb
 <table>
  <tr>
   <td>Product</td>
-  <td>Grid for Progress Kendo UI</td>
+  <td>Progress Kendo UI Grid</td>
  </tr>
 </table>
- 
+
+
 ## Description
 
 My Grid uses row mode for filtering. I need the `FilterMultiCheck` to appear in the filter row and not in the header.

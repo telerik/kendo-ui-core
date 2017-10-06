@@ -14,7 +14,7 @@ res_type: kb
 <table>
  <tr>
   <td>Product</td>
-  <td>ListBox for Progress Kendo UI</td>
+  <td>Progress Kendo UI ListBox</td>
  </tr>
  <tr>
   <td>Operating System</td>
@@ -29,7 +29,8 @@ res_type: kb
   <td>Latest</td>
  </tr>
 </table>
- 
+
+
 ## Description
 
 I want to use the ListBox to reorder items in a bound data source but although the items of the ListBox visually reorder on the screen, these changes are not reflected in the data source behind it.

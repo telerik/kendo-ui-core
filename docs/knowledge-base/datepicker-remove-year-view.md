@@ -14,7 +14,7 @@ res_type: kb
 <table>
  <tr>
   <td>Product</td>
-  <td>Date/Time Pickers for Progress Kendo UI</td>
+  <td>Progress Kendo UI DatePicker</td>
  </tr>
  <tr>
   <td>Progress Kendo UI version</td>
@@ -22,6 +22,7 @@ res_type: kb
  </tr>
 </table>
  
+
 ## Description
 
 Can I disable the display of the year in the DatePicker? How can I enable my users to select only a day from a month while I hide from them the option to select the year?

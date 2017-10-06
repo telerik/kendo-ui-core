@@ -1,21 +1,21 @@
 ---
-title: How do I capture the add new row event?
-description: An example on how to capture the add event of the Grid
+title: Capture the Event for Adding New Rows
+description: An example on how to capture the add event of the Kendo UI Grid.
 type: how-to
-page_title: How to Capture the Add Event of the Grid
+page_title: Capture the add Event | Kendo UI Grid
 slug: how-to-capture-the-add-event-of-the-grid
-position:
+previous_url: /knowledge-base/how-to-capture-the-add-event-of-the-grid
 tags: add, event, grid
 ticketid: 1097353
 res_type: kb
-
 ---
 
 ## Environment
+
 <table>
  <tr>
   <td>Product</td>
-  <td>Grid for Progress® Kendo UI®</td>
+  <td>Progress Kendo UI Grid</td>
  </tr>
  <tr>
   <td>Operating System</td>
@@ -35,20 +35,19 @@ res_type: kb
  </tr>
 </table>
 
-
 ## Description
 
-I have enabled the add new row button in the toolbar, but I'd like to capture that event so that I can insert my own values (ie. current datetime) into one of the grid fields.
+I have a Kendo UI Grid which displays an **Add New Row** button in its toolbar.
+
+How can I capture the `add` event behind the button functionality and be able to insert own values in a field&mdash;for example, date and time?
 
 ## Solution
 
-Currently, the Kendo UI Grid does not support an event which is fired when the Add record button is clicked.
+The Kendo UI Grid does not provide a built-in solution for capturing its `add` event when the user clicks the button. However, you can work around this issue by using jQuery.
 
-Still, I can suggest using jQuery to attach an event handler to the button using its class "k-grid-add". The event handler can be attached to the dataBound event of the Grid.
+Attach an event handler for the **Add New Row** button to the `dataBound` event of the Grid by using its `k-grid-add` class.
 
-Please check the example demonstrating this:
-
-````html
+```html
       <div id="example">
       <div id="grid"></div>
 
@@ -122,4 +121,4 @@ Please check the example demonstrating this:
         }
       </script>
     </div>
-````
+```

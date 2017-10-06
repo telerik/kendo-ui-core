@@ -50,7 +50,8 @@ res_type: kb
   <td>Razor</td>
  </tr>
 </table>
- 
+
+
 ## Description
 
 I have an ASP.NET MVC Grid with regular filters and local filtering. How can I add custom filters and combine the regular filters with the custom ones?
@@ -59,4 +60,4 @@ I have an ASP.NET MVC Grid with regular filters and local filtering. How can I a
 
 To allow the application of both filter types, wrap the custom filter in an additional filter with the `"OR"` criteria.
 
-For the complete implementation of this approach, refer to [this runnable example](http://dojo.telerik.com/AgIgO/17), which applies the [`filter`](http://docs.telerik.com/kendo-ui/api/javascript/data/datasource#methods-filter) method of the DataSource.
+For the complete implementation of the approach, refer to [this runnable example](http://dojo.telerik.com/AgIgO/17), which applies the [`filter`](http://docs.telerik.com/kendo-ui/api/javascript/data/datasource#methods-filter) method of the DataSource.

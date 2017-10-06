@@ -14,7 +14,7 @@ res_type: kb
 <table>
  <tr>
   <td>Product</td>
-  <td>AutoComplete for Progress Kendo UI</td>
+  <td>Progress Kendo UI AutoComplete</td>
  </tr>
 </table>
 

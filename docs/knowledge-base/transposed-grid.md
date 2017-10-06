@@ -1,19 +1,36 @@
 ---
-title: Transpose Kendo UI Grid
-description: An example on how to transpose Kendo UI Grid
+title: Transpose Grids
+description: An example on how to transpose the Kendo UI Grid.
 type: how-to
-page_title: Transposed grid| Kendo UI Grid
+page_title: Transpose Grids | Kendo UI Grid
 slug: transposed-grid
-tags: grid,transpose
-ticketid: 
 res_type: kb
 ---
 
+## Environment
+
+<table>
+ <tr>
+  <td>Product</td>
+  <td>Progress Kendo UI Grid</td>
+ </tr>
+ <tr>
+  <td>Operating System</td>
+  <td>Windows 10 64bit</td>
+ </tr>
+ <tr>
+  <td>Browser</td>
+  <td>IE For PC</td>
+ </tr>
+</table>
+
 ## Description
 
-How can I flip the axis so my rows become columns and vice versa? This can be easily achieved by modifying the shape of the data.
+How can I flip the axis of the Kendo UI Grid, so that its rows become columns and vice versa?
 
 ## Solution
+
+Modify the shape of the data.
 
 ```html       
     <style>

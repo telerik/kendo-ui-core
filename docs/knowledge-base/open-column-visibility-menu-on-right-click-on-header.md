@@ -1,11 +1,10 @@
 ---
-title: Open column visibility menu on right on column header
-description: Learn how to customize the Kendo Grid by adding custom menu that opens on right click of the column header.
+title: Implement Toggle Visibility Menu on Right-Clicking the Column Header
+description: An example on how to add a custom menu that opens when the user right-clicks the column header of the Kendo UI Grid.
 type: how-to
-page_title: Open column visibility menu on right on column header | Kendo UI Grid
+page_title: Implement Custom Menu for Toggling the Visibility of Columns on Right-Clicking the Column Header | Kendo UI Grid
 slug: open-column-visibility-menu-on-right-click-on-header
-tags: grid, right-click, hide,show,columns
-ticketid: 
+tags: grid, right-click, hide, show, columns
 res_type: kb
 ---
 
@@ -14,7 +13,7 @@ res_type: kb
 <table>
  <tr>
   <td>Product</td>
-  <td>Grid for Progress Kendo UI</td>
+  <td>Progress Kendo UI Grid</td>
  </tr>
  <tr>
   <td>Progress Kendo UI version</td>
@@ -24,9 +23,11 @@ res_type: kb
 
 ## Description
 
-How can I create a popup menu for toggling columns visibility that opens on right click of the column header?
+How can I create a popup menu for toggling the visibility of the Kendo UI Grid columns which opens when the user right-clicks the column header?
 
 ## Solution
+
+The following example demonstrates how to apply the necessary approach.
 
 ```       
         <div id="example">
@@ -34,9 +35,8 @@ How can I create a popup menu for toggling columns visibility that opens on righ
 
             <script>
 
-
             function toggleMenu(e){
-                e.preventDefault(); 
+                e.preventDefault();
 
                 var popup =	$('#checkboxes').data('kendoPopup');
                 popup.open();
@@ -55,7 +55,7 @@ How can I create a popup menu for toggling columns visibility that opens on righ
                     return {title: x.title? x.title:x.field, field: x.field}
                 }).forEach(function(x,y) {
 
-                    var div = $('<div/>');	
+                    var div = $('<div/>');
                     var label = $('<label/>')
                     var checkbox = $('<input type="checkbox" checked>')
 
@@ -74,7 +74,7 @@ How can I create a popup menu for toggling columns visibility that opens on righ
                         grid.hideColumn(+$(e.target).attr('data-index'))
                     }
 
-                    }) 
+                    })
                     container.append(div);
                 });          
                 }
@@ -98,8 +98,6 @@ How can I create a popup menu for toggling columns visibility that opens on righ
                 })
                 }
             }
-
-
 
             $(document).ready(function() {
 

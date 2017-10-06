@@ -1,8 +1,8 @@
 ---
-title: Use both multi checkbox and default filtering
-description: An example on how to modify the Kendo UI Grid to use both multi checkbox and default filtering.
+title: Use Both Multi-Checkbox and Default Grid Filtering
+description: An example on how to modify the Kendo UI Grid to use both its multi-checkbox and default filtering.
 type: how-to
-page_title:  Use both multi checkbox and default filtering | Kendo UI Grid
+page_title: Use Multi-Checkbox and Default Filtering | Kendo UI Grid
 slug: use-both-multi-and-default-filtering
 tags: grid, filtering, multi, default
 ticketid: 1120044
@@ -14,7 +14,7 @@ res_type: kb
 <table>
  <tr>
   <td>Product</td>
-  <td>Grid for Progress Kendo UI</td>
+  <td>Progress Kendo UI Grid</td>
  </tr>
  <tr>
   <td>Progress Kendo UI version</td>
@@ -24,11 +24,11 @@ res_type: kb
 
 ## Description
 
-How can I modify the Kendo UI Grid to use both multi checkbox and default filtering?
+How can I modify the Kendo UI Grid to use both multi-checkbox and default filtering?
 
 ## Solution
 
-When the [`filterMenuInit`](http://docs.telerik.com/kendo-ui/api/javascript/ui/grid#events-filterMenuInit) event is fired, append a Kendo ListView widget containing the checkboxes to the filtering menu.
+When the [`filterMenuInit`](http://docs.telerik.com/kendo-ui/api/javascript/ui/grid#events-filterMenuInit) event fires, append a Kendo UI ListView, which contains the checkboxes, to the filtering menu.
 
 ```       
         <div id="grid"></div>
@@ -165,7 +165,7 @@ When the [`filterMenuInit`](http://docs.telerik.com/kendo-ui/api/javascript/ui/g
             }
         </script>
         <style type="text/css">
-            .checkbox-ontainer 
+            .checkbox-ontainer
             {
             max-height: 200px;
             overflow:auto;

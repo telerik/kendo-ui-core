@@ -1,20 +1,21 @@
 ---
-title: How to increase the width to potentially show full column values
-description: An example on how to increase the width of the filter menu
+title: Increase Width to Potentially Show Full Column Values
+description: An example on how to increase the width of the filter menu in the Kendo UI Grid for ASP.NET MVC.
 type: how-to
-page_title: How to Increase the Width of the Filter Menu
-slug: how-to-increase-the-width-of-the-filter-menu
+page_title: Increase the Width of the Filter Menu | Kendo UI Grid
+slug: increase-the-width-of-the-filter-menu
+previous_url: /knowledge-base/how-to-increase-the-width-of-the-filter-menu
 tags: grid, filter, width
 ticketid: 1133304
 res_type: kb
-
 ---
 
 ## Environment
+
 <table>
  <tr>
   <td>Product</td>
-  <td>Progress® Kendo UI® Grid for ASP.NET MVC</td>
+  <td>Progress Kendo UI Grid for ASP.NET MVC</td>
  </tr>
  <tr>
   <td>Operating System</td>
@@ -42,12 +43,12 @@ res_type: kb
 
 ## Description
 
-Is there a way to make the filter menu wider?
+How can I make the filter menu of the Grid wider?
 
 ## Solution
-  
-The desired result can be achieved using CSS rules to expand the width of the container and the elements that are located inside it:  
-  
+
+Use CSS rules to expand the width of the container and the elements that are located inside it. To avoid the impact of the selector on the other page elements, you might need to modify it.
+
 ```
 .k-animation-container>form {
   width: 300px;
@@ -59,12 +60,10 @@ The desired result can be achieved using CSS rules to expand the width of the co
   width: 100%;
 }
 ```
-  
-Please have in mind that selectors may need to be modified and made more specific in order to not affect all other elements on the page.  
-  
-Also, the width of the container can be set per menu on the [filterMenuInit]((http://docs.telerik.com/kendo-ui/api/javascript/ui/grid#events-filterMenuInit) ) event:  
-  
-````html
+
+On the [`filterMenuInit`](http://docs.telerik.com/kendo-ui/api/javascript/ui/grid#events-filterMenuInit) event, you can also set the width of the container per menu.  
+
+```html
 <div id="grid"></div>
 
 <style>
@@ -75,7 +74,7 @@ Also, the width of the container can be set per menu on the [filterMenuInit]((ht
         width: 100%;
       }      
 </style>
-  
+
 <script>
         $(document).ready(function() {
           $("#grid").kendoGrid({
@@ -125,6 +124,6 @@ Also, the width of the container can be set per menu on the [filterMenuInit]((ht
                       }
                      ]
           });
-        }); 
+        });
 </script>
-````
+```

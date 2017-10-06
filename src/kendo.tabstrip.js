@@ -129,6 +129,7 @@ var __meta__ = { // jshint ignore:line
 
         tabs.filter("li[disabled]")
             .addClass(DISABLEDSTATE)
+            .attr("aria-disabled", "true")
             .removeAttr("disabled");
 
         tabs.filter(":not([class*=k-state])")
@@ -320,9 +321,7 @@ var __meta__ = { // jshint ignore:line
             }
 
             if (focused) {
-                if (focused[0].id === id) {
-                    focused.removeAttr("id");
-                }
+                that.tabGroup.children("#" + id).removeAttr("id");
                 focused.removeClass(FOCUSEDSTATE);
             }
 
@@ -825,7 +824,8 @@ var __meta__ = { // jshint ignore:line
             element.each(function () {
                 $(this)
                     .toggleClass(DEFAULTSTATE, enable)
-                    .toggleClass(DISABLEDSTATE, !enable);
+                    .toggleClass(DISABLEDSTATE, !enable)
+                    .attr("aria-disabled", !enable);
             });
         },
 

@@ -1,8 +1,8 @@
 ---
-title: MultiSelect to Behave as TagBox
-description: How to configure and customize the Kendo UI MultiSelect widget to accept custom user input and not to display its pop-up drop-down.
+title: Set MultiSelects to Behave as TagBoxes
+description: An example on how to configure and customize the Kendo UI MultiSelect to accept custom user input and not display its pop-up drop-down.
 type: how-to
-page_title: Accept custom input with no drop-down shown | Kendo UI MultiSelect
+page_title: Accept Custom Input with No Drop-Down Shown | Kendo UI MultiSelect
 slug: multiselect-as-tagbox
 tags: kendo, multiselect, tagbox, no-dropdown
 ticketid: 1131556
@@ -20,11 +20,19 @@ res_type: kb
 
 ## Description
 
-How to configure and customize the **MultiSelect** widget to behave as a **TagBox**. This means to allow the MultiSelect to accept custom text and display it as tag (by automatically adding the free text entry to the DataSource of the widget). Also, the drop-down of the widget should never be opened. 
+I want to enable the MultiSelect to:
+
+* Accept custom text.
+* Display the custom text as a tag by automatically adding the free text entry to its DataSource.
+* Not open its drop-down.
+
+How can I configure and customize the MultiSelect to behave as a TagBox?
 
 ## Solution
 
-To achieve the desired, a handler for the **Enter** keyup event should be attached for the **input** element of the MultiSelect. This handler simply adds the new text to the DataSource and selects the newly created entry. A CSS rule to force the pop-up to always remain hidden is also used:
+1. Attach a handler for the `keyup` event of `Enter` to the `input` element of the MultiSelect. As a result, the handler adds the new text to the DataSource and selects the newly created entry.
+
+1. Use a CSS rule to force the pop-up to always remain hidden.
 
 ````html
 <style>
@@ -74,5 +82,5 @@ To achieve the desired, a handler for the **Enter** keyup event should be attach
 
 ## See Also
 
-* [Kendo UI MultiSelect JavaScript API Reference](http://docs.telerik.com/kendo-ui/api/javascript/ui/multiselect)
-* [Kendo UI MultiSelect Add new item demo](http://demos.telerik.com/kendo-ui/multiselect/addnewitem)
+* [JavaScript API Reference of the MultiSelect](http://docs.telerik.com/kendo-ui/api/javascript/ui/multiselect)
+* [Demo on Adding New MulsiSelect Items](http://demos.telerik.com/kendo-ui/multiselect/addnewitem)

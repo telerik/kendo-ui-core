@@ -1,8 +1,8 @@
 ---
-title: Group columns which are bound to object
-description: An example on how to group columns when they are bound to objects
+title: Group Grid Columns Which Are Bound to Objects
+description: An example on how to group Kendo UI Grid columns when they are bound to objects.
 type: how-to
-page_title: Group columns which are bound to object | Kendo UI Grid
+page_title: Group Columns Which Are Bound to Objects | Kendo UI Grid
 slug: group-columns-which-are-bound-to-object
 tags: grid, group, custom
 ticketid: 1116551
@@ -14,7 +14,7 @@ res_type: kb
 <table>
  <tr>
   <td>Product</td>
-  <td>Grid for Progress Kendo UI</td>
+  <td>Progress Kendo UI Grid</td>
  </tr>
  <tr>
   <td>Progress Kendo UI version</td>
@@ -28,7 +28,9 @@ How can I group columns which are bound to objects?
 
 ## Solution
 
-When the [`group`](http://docs.telerik.com/kendo-ui/api/javascript/ui/grid#events-group) event is fired, check if there is a group by the column which is bound to an object. If there is such group use the [`group`](http://docs.telerik.com/kendo-ui/api/javascript/data/datasource#methods-group) method of the dataSource to add a group by one of the properties of the object.
+1. When the [`group`](http://docs.telerik.com/kendo-ui/api/javascript/ui/grid#events-group) event fires, check for a group by the column which is bound to an object.
+
+1. If such a group exists, use the [`group`](http://docs.telerik.com/kendo-ui/api/javascript/data/datasource#methods-group) method of the dataSource to add a group by one of the properties of the object.
 
 ```       
     <div id="grid"></div>
@@ -42,14 +44,14 @@ When the [`group`](http://docs.telerik.com/kendo-ui/api/javascript/ui/grid#event
 
           setTimeout(function(){
             $('.k-group-indicator a.k-link').each(function(_,x){
-							x= $(x);	
+							x= $(x);
               if(x.text().includes(".")){
                 x.text(x.text().split(".")[0]);
               }
             })
-            
+
              $('.k-grouping-row p').each(function(_,x){
-							x= $(x);	
+							x= $(x);
               if(x.text().includes(".")){
                 var splitted = x.text().split(":");
                 x.text(splitted[0].split(".")[0] +":"+ splitted[splitted.length-1]);

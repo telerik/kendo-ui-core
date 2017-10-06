@@ -14,7 +14,7 @@ res_type: kb
 <table>
  <tr>
   <td>Product</td>
-  <td>Progress Kendo UI Professional</td>
+  <td>Progress Kendo UI for jQuery</td>
  </tr>
  <tr>
   <td>NodeJS</td>
@@ -36,7 +36,7 @@ I use Git Credential Manager. After it prompts for my username and password, Bow
 
 ## Solution
 
-To solve this issue, use the following approach:
+The following example demonstrates how to apply the necessary approach.
 
 ```
 /*

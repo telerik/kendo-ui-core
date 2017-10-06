@@ -14,7 +14,7 @@ res_type: kb
 <table>
  <tr>
   <td>Product</td>
-  <td>ComboBox for Progress Kendo UI</td>
+  <td>Progress Kendo UI ComboBox</td>
  </tr>
  <tr>
   <td>Operating System</td>

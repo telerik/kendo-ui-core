@@ -4,6 +4,7 @@ description: "The date filters of the Grid are not correctly persisted after ken
 type: troubleshooting
 page_title: Filters Are Not Correctly Persisted After Saving and Loading the Grid State | Kendo UI Grid
 slug: grid-filters-are-not-correctly-persisted-after-saving-and-loading-the-grid-stateposition
+previous_url: /knowledge-base/the-grid-filters-are-not-correctly-persisted-after-saving-and-loading-the-grid-state
 tags: grid, filter, persist
 ticketid: 1126061
 res_type: kb
@@ -14,7 +15,7 @@ res_type: kb
 <table>
  <tr>
   <td>Product</td>
-  <td>Grid for Progress Kendo UI</td>
+  <td>Progress Kendo UI Grid</td>
  </tr>
  <tr>
   <td>Operating System</td>

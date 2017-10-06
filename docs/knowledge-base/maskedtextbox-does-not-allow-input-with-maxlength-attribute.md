@@ -14,13 +14,14 @@ res_type: kb
 <table>
  <tr>
   <td>Product</td>
-  <td>MaskedTextBox for Progress Kendo UI</td>
+  <td>Progress Kendo UI MaskedTextBox</td>
  </tr>
  <tr>
   <td>Kendo Version</td>
   <td>From 2017.2.504</td>
  </tr>
 </table>
+
  
 ## Description
 
