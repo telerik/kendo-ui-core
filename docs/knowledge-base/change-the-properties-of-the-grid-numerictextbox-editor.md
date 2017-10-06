@@ -29,7 +29,8 @@ res_type: kb
   <td>59.0.3071.115</td>
  </tr>
 </table>
- 
+
+
 ## Description
 
 I have numbers coming back with up to 16 decimal places and they render properly in the Kendo UI Grid I use. However, each time I edit the Grid, it cuts the number way down to three decimal places.

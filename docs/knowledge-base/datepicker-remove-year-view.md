@@ -22,6 +22,7 @@ res_type: kb
  </tr>
 </table>
  
+
 ## Description
 
 Can I disable the display of the year in the DatePicker? How can I enable my users to select only a day from a month while I hide from them the option to select the year?

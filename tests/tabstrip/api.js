@@ -261,6 +261,7 @@ test('disable method should disable item', function() {
     tabstrip.disable(item);
 
     ok(item.hasClass('k-state-disabled'));
+    ok(item.is('[aria-disabled="true"]'));
 });
 
 test('enable method should enable disabled item', function() {
@@ -271,6 +272,7 @@ test('enable method should enable disabled item', function() {
     tabstrip.enable(item);
 
     ok(item.hasClass('k-state-default'));
+    ok(item.is('[aria-disabled="false"]'));
 });
 
 test('select method should show content', function() {

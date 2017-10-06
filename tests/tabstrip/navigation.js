@@ -116,6 +116,24 @@ test("selects first if last is selected", function() {
     ok(div.find(".k-item:first").hasClass("k-state-active"));
 });
 
+test("remove activedescendant id when passing through disabled item", function() {
+    div.kendoTabStrip({animation: false});
+    addItems(3);
+    var tabstrip = div.data("kendoTabStrip");
+    tabstrip.disable(tabstrip.items()[1]);
+    div.focus();
+
+    for (var i = 0; i < 3; i++) {
+        div.trigger({
+            type: "keydown",
+            keyCode: keys.RIGHT
+        });
+        console.log(div.html());
+    }
+
+    equal(tabstrip.tabGroup.children("#" + tabstrip._ariaId).length, 1);
+});
+
 test("selects prev item on key UP", function() {
     div.kendoTabStrip({tabPosition: "left"});
     addItems(2);

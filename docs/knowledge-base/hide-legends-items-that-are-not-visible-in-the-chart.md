@@ -1,20 +1,21 @@
 ---
-title: How to hide legends that have no visual appearance in chart
-description: An example on how to hide legends that have no visual appearance in chart.
+title: Hide Chart Legends That Have No Visual Appearance
+description: An example on how to hide the Kendo UI Chart legends which have no visual appearance in the widget.
 type: how-to
-page_title: How to hide legends items that are not visible in the Chart
-slug: how-to-hide-legends-items-that-are-not-visible-in-the-chart
+page_title: Hide the Non-Visible Legends Items | Kendo UI Chart
+slug: hide-legends-items-that-are-not-visible-in-the-chart
+previous_url: /knowledge-base/how-to-hide-legends-items-that-are-not-visible-in-the-chart
 tags: chart, legend
 ticketid: 1125941
 res_type: kb
-
 ---
 
 ## Environment
+
 <table>
  <tr>
   <td>Product</td>
-  <td>Chart for Progress® Kendo UI®</td>
+  <td>Progress Kendo UI Chart</td>
  </tr>
  <tr>
   <td>Operating System</td>
@@ -33,17 +34,15 @@ res_type: kb
 
 ## Description
 
-We have a chart that is showing legends for all the series multiplied by the grouping configured against the data source.
-Some times we will have no data against some of the dynamically created series and under those circumstances we would like to hide those specific legend items.
+My Chart shows legends for all the series that are multiplied by the grouping and configured against the data source. Sometimes I will have no data against some of the dynamically created series.
+
+How can I hide the specific legend items for which I will not have any data to show?  
 
 ## Solution
 
-The desired result can be achieved using the [legend.item.visual](http://docs.telerik.com/kendo-ui/api/javascript/dataviz/ui/chart#configuration-legend.item.visual) property of the Chart.
-It will allow using custom logic to determine which legend item has to be added and which does not.
+To allow the use of custom logic and determine whether a legend item will be added or not, use the [`legend.item.visual`](http://docs.telerik.com/kendo-ui/api/javascript/dataviz/ui/chart#configuration-legend.item.visual) property of the Chart.
 
-Please check the following example demonstrating this:
-
-````html
+```html
   <div id="chart"></div>
     <script>
       $("#chart").kendoChart({
@@ -90,5 +89,4 @@ Please check the following example demonstrating this:
         ]
       });
     </script>
-````
-
+```

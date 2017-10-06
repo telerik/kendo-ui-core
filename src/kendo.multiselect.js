@@ -794,11 +794,14 @@ var __meta__ = { // jshint ignore:line
                     tag = tag.next();
                     that.currentTag(tag[0] ? tag : null);
                 }
-            } else if (e.ctrlKey && key === keys.A  && visible) {
+            } else if (e.ctrlKey && key === keys.A && visible) {
                 if (listView._selectedIndices.length === listView.items().length) {
                     that._activeItem = null;
                 }
-                that._selectRange(0, listView.items().length - 1);
+
+                if (listView.items().length) {
+                    that._selectRange(0, listView.items().length -1);
+                }
             } else if (key === keys.ENTER && visible) {
                 that._select(listView.focus()).done(function() {
                     that._change();
@@ -806,22 +809,22 @@ var __meta__ = { // jshint ignore:line
                 });
                 e.preventDefault();
             } else if (key === keys.SPACEBAR && e.ctrlKey && visible) {
-                if (that._activeItem && listView.focus()[0] === that._activeItem[0]) {
+                if (that._activeItem && listView.focus() && listView.focus()[0] === that._activeItem[0]) {
                     that._activeItem = null;
                 }
-                if (!$(listView.focus()[0]).hasClass(SELECTEDCLASS)) {
+                if (!$(listView.focus()).hasClass(SELECTEDCLASS)) {
                     that._activeItem = listView.focus();
                 }
-                that._select(listView.focus()).done(function() {
+                that._select(listView.focus()).done(function () {
                     that._change();
                 });
             } else if (key === keys.SPACEBAR && e.shiftKey && visible) {
-                var activeIndex = listView.getElementIndex(that._getActiveItem()[0]);
-                var currentIndex = listView.getElementIndex(listView.focus()[0]);
-                that._selectRange(
-                    activeIndex,
-                    currentIndex
-                    );
+                var activeIndex = listView.getElementIndex(that._getActiveItem());
+                var currentIndex = listView.getElementIndex(listView.focus());
+
+                if (activeIndex !== undefined && currentIndex !== undefined) {
+                    that._selectRange(activeIndex, currentIndex);
+                }
 
                 e.preventDefault();
             } else if (key === keys.ESC) {
@@ -852,7 +855,7 @@ var __meta__ = { // jshint ignore:line
                     if (e.ctrlKey && e.shiftKey) {
                         that._selectRange(
                             listView.getElementIndex(listView.focus()[0]),
-                            listView.element.children().length - 1
+                            listView.element.children().length -1
                         );
                     }
                     listView.focusLast();
@@ -883,11 +886,13 @@ var __meta__ = { // jshint ignore:line
             } else if (that.popup.visible() && (key === keys.PAGEDOWN || key === keys.PAGEUP)) {
                 e.preventDefault();
 
-                var direction = key === keys.PAGEDOWN ? 1 : -1;
+                var direction = key === keys.PAGEDOWN ? 1: -1;
                 listView.scrollWith(direction * listView.screenHeight());
             } else {
                 clearTimeout(that._typingTimeout);
-                setTimeout(function() { that._scale(); });
+                setTimeout(function() {
+                    that._scale();
+                });
                 that._search();
             }
         },

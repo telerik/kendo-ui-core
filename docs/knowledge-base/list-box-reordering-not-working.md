@@ -29,7 +29,8 @@ res_type: kb
   <td>Latest</td>
  </tr>
 </table>
- 
+
+
 ## Description
 
 I want to use the ListBox to reorder items in a bound data source but although the items of the ListBox visually reorder on the screen, these changes are not reflected in the data source behind it.

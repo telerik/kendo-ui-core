@@ -50,7 +50,8 @@ res_type: kb
   <td>Razor</td>
  </tr>
 </table>
- 
+
+
 ## Description
 
 I have an ASP.NET MVC Grid with regular filters and local filtering. How can I add custom filters and combine the regular filters with the custom ones?

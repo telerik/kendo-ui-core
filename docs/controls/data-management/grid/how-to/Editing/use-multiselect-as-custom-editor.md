@@ -53,7 +53,7 @@ The following example demonstrates how to use the MultiSelect as a custom editor
 
           change: function() {
             var widget = this.widget;
-            var value = widget.options.valuePritive ? widget.value() : widget.dataItems();
+            var value = widget.options.valuePrimitive ? widget.value() : widget.dataItems();
 
             this._initChange = true;
             this.bindings.multiValue.set(value);
@@ -99,9 +99,6 @@ The following example demonstrates how to use the MultiSelect as a custom editor
       var vm = kendo.observable({
           countries: ['Canada', 'Mexico', 'United States'],
           dataSource: new kendo.data.DataSource({
-            change: function(e){
-              console.log(1)
-            },
               data: [{
                   id: 1,
                   product: 'X002',
