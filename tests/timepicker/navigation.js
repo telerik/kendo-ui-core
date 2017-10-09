@@ -205,6 +205,16 @@
         ok(!timepicker.timeView.ul.find("li.k-state-selected")[0]);
     });
 
+    test("do not change input value if not valid time if dateInput option is enabled ", function() {
+       input.kendoTimePicker({
+            dateInput:true
+        });
+
+        input.focus().val("10:minutes AM/PM").trigger("focusout");
+
+        equal(input.val(), "10:minutes AM/PM");
+    });
+
     test("do not clear input if not valid time", function() {
         var timepicker = input.kendoTimePicker({
             value: new Date(2000, 10, 10, 10, 0, 0)

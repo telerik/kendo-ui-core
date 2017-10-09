@@ -1,5 +1,5 @@
 (function(f, define){
-    define([ "./kendo.calendar", "./kendo.popup" ], f);
+    define([ "./kendo.calendar", "./kendo.popup",  "./kendo.dateinput" ], f);
 })(function(){
 
 var __meta__ = { // jshint ignore:line

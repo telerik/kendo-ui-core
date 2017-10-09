@@ -503,14 +503,22 @@
     });
 
     test("skip binding for first input in combobox", function() {
-        var editable = div.append($('<div><input name="baz" data-role="combobox"/></div>')).kendoEditable({
+        var editable = div.append($('<div><span class="k-combobox"><input name="baz" class="k-input" role="combobox"/></span></div>')).kendoEditable({
+            model: defaultModel,
+            clearContainer: false
+        });
+        var inputs = div.find("input").filter("[data-bind]");
+        equal(inputs.length, 0);
+    });
+
+    test("do not skip binding for datepicker", function() {
+        var editable = div.append($('<div><input name="baz" role="combobox" data-role="datepicker"/></div>')).kendoEditable({
             model: defaultModel,
             clearContainer: false
         });
         var inputs = div.find("input").filter("[data-bind]");
         equal(inputs.length, 1);
-        equal(inputs.attr("data-role"), "combobox");
-        equal(inputs.is(":visible"), false);
+        equal(inputs.attr("data-role"), "datepicker");
     });
 
     test("does not bind select element of listbox widget", function() {
