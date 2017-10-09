@@ -64,7 +64,8 @@ var __meta__ = { // jshint ignore:line
                 global: true,
                 allowSelection: true,
                 filter: (!supportEventDelegation ? "." + SELECTABLE + " " : "") + that.options.filter,
-                tap: proxy(that._tap, that)
+                tap: proxy(that._tap, that),
+                touchAction: multiple ? "none" : "pan-x pan-y"
             });
 
             if (multiple) {

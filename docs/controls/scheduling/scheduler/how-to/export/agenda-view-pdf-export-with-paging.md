@@ -67,7 +67,7 @@ The following example demonstrates how to achieve this.
               nextRow.prepend($("<td class='inserted'></td>"));
             }
 
-            currentCell.attr("rowspan", 0);
+            currentCell.attr("rowspan", 1);
           })
 
           drawing.drawDOM("#scheduler .k-scheduler-content", {

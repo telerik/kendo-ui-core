@@ -1032,6 +1032,7 @@ var __meta__ = { // jshint ignore:line
                 that._focused = item;
                 if (item.is("." + DISABLEDSTATE)) {
                     item.addClass(FOCUSEDSTATE);
+                    that._current(item);
                 }
                 if (that._scrollableModeActive) {
                     that._scrollTabsToItem(item);

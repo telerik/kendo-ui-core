@@ -839,10 +839,14 @@ var __meta__ = { // jshint ignore:line
                 that.close();
             } else if (key === keys.HOME) {
                 if (visible) {
-                    if (e.ctrlKey && e.shiftKey) {
-                        that._selectRange(listView.getElementIndex(listView.focus()[0]), 0);
+                    if (!listView.focus()) {
+                        that.close();
+                    } else {
+                        if (e.ctrlKey && e.shiftKey) {
+                            that._selectRange(listView.getElementIndex(listView.focus()[0]), 0);
+                        }
+                        listView.focusFirst();
                     }
-                    listView.focusFirst();
                 } else if (!hasValue) {
                     tag = that.tagList[0].firstChild;
 
@@ -852,13 +856,17 @@ var __meta__ = { // jshint ignore:line
                 }
             } else if (key === keys.END) {
                 if (visible) {
-                    if (e.ctrlKey && e.shiftKey) {
-                        that._selectRange(
-                            listView.getElementIndex(listView.focus()[0]),
-                            listView.element.children().length -1
-                        );
+                    if (!listView.focus()) {
+                        that.close();
+                    } else {
+                        if (e.ctrlKey && e.shiftKey) {
+                            that._selectRange(
+                                listView.getElementIndex(listView.focus()[0]),
+                                listView.element.children().length - 1
+                            );
+                        }
+                        listView.focusLast();
                     }
-                    listView.focusLast();
                 } else if (!hasValue) {
                     tag = that.tagList[0].lastChild;
 

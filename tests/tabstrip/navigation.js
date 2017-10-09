@@ -128,10 +128,25 @@ test("remove activedescendant id when passing through disabled item", function()
             type: "keydown",
             keyCode: keys.RIGHT
         });
-        console.log(div.html());
     }
 
     equal(tabstrip.tabGroup.children("#" + tabstrip._ariaId).length, 1);
+});
+
+test("add activedescendant id when on disabled item when navigating on", function() {
+    div.kendoTabStrip({animation: false});
+    addItems(3);
+    var tabstrip = div.data("kendoTabStrip");
+    tabstrip.disable(tabstrip.items()[1]);
+    div.focus();
+    tabstrip._current(div.find(".k-item:first"));
+
+    div.trigger({
+        type: "keydown",
+        keyCode: keys.RIGHT
+    });
+
+    ok(tabstrip.tabGroup.children("#" + tabstrip._ariaId).hasClass("k-state-disabled"));
 });
 
 test("selects prev item on key UP", function() {
