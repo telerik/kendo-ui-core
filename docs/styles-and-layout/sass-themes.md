@@ -11,7 +11,11 @@ position: 2
 
 As of the R1 2017 release, the Kendo UI distribution includes Sass-based themes.
 
-Currently, Kendo UI delivers a single Sass theme. This is the **Default v2** theme which is a modern update of the Kendo UI Default theme. The work on revamping the Kendo UI Bootstrap theme has also started and the new theme is soon expected to be available.
+Currently, Kendo UI delivers two Sass themes:
+
+* **Default v2** - a modern update of the Kendo UI Default theme.
+* **Bootstrap v4** - has linked variables to the famous Bootstrap, in order to achieve similarity in the look and feel. Therefore, customizing the original Bootstrap theme will affect the Kendo UI theme as well.
+
 
 ## Overview
 
@@ -24,7 +28,7 @@ In Kendo UI, the Sass-based themes demonstrate the following differences from th
 - Each Sass-based theme is represented by a single CSS file that combines the layout and the themes of the components. As a result, you do not need to match a theme with its common file.
 - Based on the widget you work with, the Sass-based themes can build a part of the widget theme in a similar way the Download Builder trims unused scripts.
 - The Sass-based themes are available on NPM. Each theme is stored as an NPM package and can be easily upgraded.
-- Each Sass-based theme is compatible with the [Kendo UI components for Angular 2](http://www.telerik.com/kendo-angular-ui/). This enables you to port parts of your application to Angular 2 while maintaining their styling.
+- Each Sass-based theme is compatible with the [Kendo UI components for Angular](http://www.telerik.com/kendo-angular-ui/). This enables you to port parts of your application to Angular 2 while maintaining their styling.
 
 ## Browser Limitations
 
@@ -55,7 +59,7 @@ To get a complete theme by using its pre-built CSS files, apply either of the fo
 The Kendo UI Sass-based themes are located on the Progress NPM registry:
 
 * **Kendo UI Default Theme**&mdash;Available as @progress/kendo-theme-default.
-* **Kendo UI Bootstrap Theme**&mdash;Available as @progress/kendo-theme-bootstrap.
+* **Kendo UI Bootstrap v4 Theme**&mdash;Available as @progress/kendo-theme-bootstrap.
 
 To access the Progress NPM registry, you need an active Telerik account with an active commercial license. For more information on how to access the NPM registry, refer to the [installation instructions for Kendo UI Professional]({% slug kendoui_npm_packages_kendoui_installation %}#kendo-ui-professional).
 

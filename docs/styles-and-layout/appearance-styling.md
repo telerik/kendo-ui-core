@@ -64,7 +64,7 @@ Some themes require a different common (base) stylesheet that applies different 
 | CSS Files   | Contents and Application |
 |:---         |:---                     |
 | `kendo.common.css`                | This is the default base stylesheet, which is required by the majority of the Kendo UI themes. |
-| `kendo.common-bootstrap.css`      | The base stylesheet for the Bootstrap theme. Use this file instead of `kendo.common.css` and only with `kendo.bootstrap.css` theme file to achieve Bootstrap-like widget dimensions. |
+| `kendo.common-bootstrap.css`      | The base stylesheet for the Bootstrap (v3) theme. Use this file instead of `kendo.common.css` and only with `kendo.bootstrap.css` theme file to achieve Bootstrap-like widget dimensions. |
 | `kendo.common-material.css`       | The base stylesheet for the Material and MaterialBlack themes. Use this file instead of `kendo.common.css` and only with `kendo.material.css` or `kendo.materialblack.css` theme files. |
 | `kendo.common-nova.css`           | The base stylesheet for the Nova theme. Use this file instead of `kendo.common.css` and only with `kendo.nova.css`. |
 | `kendo.common-fiori.css`          | The base stylesheet for the Fiori theme available in the enterprise bundles of Kendo UI. Use this file instead of `kendo.common.css` and only with `kendo.fiori.css`. |
@@ -236,7 +236,7 @@ The Kendo UI `.less` files, including the styling of the Kendo UI hybrid widgets
 To create a custom theme with Kendo UI, choose either of the two possible ways:
 
 1. Use the [Kendo UI ThemeBuilder](http://demos.telerik.com/kendo-ui/themebuilder/). For detailed information on how to configure its options, refer to the [section on the Less Theme Builder](#theme-builder).
-2. Modify a `.less` file to achieve a theme of your liking. To do so, choose one of the available `kendo.*.less` files depending on what you want to achieve. Copy it to your project and rename it. Change the colors and run the [Less command-line compiler](http://lesscss.org/#using-less-command-line-usage) on it.   
+2. Modify a `.less` file to achieve a theme of your liking. To do so, choose one of the available `kendo.*.less` files depending on what you want to achieve. Copy it to your project and rename it. Change the colors and run the [Less command-line compiler](http://lesscss.org/#using-less-command-line-usage) on it.
 
 ## Less Theme Builder
 

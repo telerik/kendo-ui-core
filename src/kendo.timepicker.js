@@ -889,7 +889,7 @@ var __meta__ = { // jshint ignore:line
             }
 
             that._value = date;
-            if (that._dateInput) {
+            if (that._dateInput && date) {
                 that._dateInput.value(date || value);
             } else {
                 that.element.val(kendo.toString(date || value, options.format, options.culture));

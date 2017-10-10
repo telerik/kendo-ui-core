@@ -431,6 +431,17 @@ test("DateTimePicker does not call change on blur if no text change", function()
     equal(+datetimepicker.value(), +date);
 });
 
+test("do not change input value if not a valid time is typed and dateInput option is enabled ", function() {
+    input.kendoDateTimePicker({
+            dateInput:true,
+            value: new Date(1919, 0, 1)
+        });
+
+        input.focus().val("1/1/year 12:00 AM").trigger("focusout");
+
+        equal(input.val(), "1/1/year 12:00 AM");
+});
+
 test("DateTimePicker does not call change on ENTER if no text change", function() {
     var date = new Date(1919, 0, 1),
         datetimepicker = input.kendoDateTimePicker({

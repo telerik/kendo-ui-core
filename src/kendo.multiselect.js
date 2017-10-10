@@ -720,7 +720,11 @@ var __meta__ = { // jshint ignore:line
         },
 
         _getActiveItem: function() {
-            return this._activeItem || $(this.listView.items()[this.listView._selectedIndices.length - 1]) || this.listView.focus();
+            return this._activeItem || $(this.listView.items()[this._getSelectedIndices().length - 1]) || this.listView.focus();
+        },
+
+        _getSelectedIndices: function() {
+            return this.listView._selectedIndices || this.listView._selectedIndexes;
         },
 
         _keydown: function(e) {
@@ -795,7 +799,7 @@ var __meta__ = { // jshint ignore:line
                     that.currentTag(tag[0] ? tag : null);
                 }
             } else if (e.ctrlKey && key === keys.A && visible) {
-                if (listView._selectedIndices.length === listView.items().length) {
+                if (this._getSelectedIndices().length === listView.items().length) {
                     that._activeItem = null;
                 }
 
@@ -1227,7 +1231,7 @@ var __meta__ = { // jshint ignore:line
             var that = this;
             var listView = this.listView;
             var maxSelectedItems = this.options.maxSelectedItems;
-            var indices = listView._selectedIndices.slice();
+            var indices = this._getSelectedIndices().slice();
             var indicesToSelect = [];
             var i;
 
@@ -1248,7 +1252,7 @@ var __meta__ = { // jshint ignore:line
             for (i = 0; i < indicesToSelect.length; i++) {
                 var index = indicesToSelect[i];
 
-                if (listView._selectedIndices.indexOf(index) == -1) {
+                if (this._getSelectedIndices().indexOf(index) == -1) {
                     indices.push(index);
                 } else {
                     indices.splice(indices.indexOf(index), 1);

@@ -1030,10 +1030,10 @@ var __meta__ = { // jshint ignore:line
             if (item.is("." + DISABLEDSTATE + (!collapse ? ",." + ACTIVESTATE : ""))) {
                 oldFocusedTab.removeClass(FOCUSEDSTATE);
                 that._focused = item;
-                if (item.is("." + DISABLEDSTATE)) {
-                    item.addClass(FOCUSEDSTATE);
-                    that._current(item);
-                }
+
+                item.addClass(FOCUSEDSTATE);
+                that._current(item);
+
                 if (that._scrollableModeActive) {
                     that._scrollTabsToItem(item);
                 }

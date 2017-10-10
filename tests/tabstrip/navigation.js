@@ -133,7 +133,7 @@ test("remove activedescendant id when passing through disabled item", function()
     equal(tabstrip.tabGroup.children("#" + tabstrip._ariaId).length, 1);
 });
 
-test("add activedescendant id when on disabled item when navigating on", function() {
+test("add activedescendant id on disabled item when navigating on it", function() {
     div.kendoTabStrip({animation: false});
     addItems(3);
     var tabstrip = div.data("kendoTabStrip");
@@ -147,6 +147,27 @@ test("add activedescendant id when on disabled item when navigating on", functio
     });
 
     ok(tabstrip.tabGroup.children("#" + tabstrip._ariaId).hasClass("k-state-disabled"));
+});
+
+test("add activedescendant id when navigation from disabled item to active item", function() {
+    div.kendoTabStrip({animation: false});
+    addItems(3);
+    var tabstrip = div.data("kendoTabStrip");
+    tabstrip.disable(tabstrip.items()[1]);
+    div.focus();
+    tabstrip.activateTab(div.find(".k-item:first"));
+
+    div.trigger({
+        type: "keydown",
+        keyCode: keys.RIGHT
+    });
+
+    div.trigger({
+        type: "keydown",
+        keyCode: keys.LEFT
+    });
+
+    ok(div.find(".k-item:first").is("#" +  tabstrip._ariaId));
 });
 
 test("selects prev item on key UP", function() {
