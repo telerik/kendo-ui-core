@@ -1117,6 +1117,7 @@ var __meta__ = { // jshint ignore:line
 
                         that._configurePopupOverflow(popup, li);
 
+                        popup._hovered = true;
                         popup.open();
 
                         that._initPopupScrolling(popup);

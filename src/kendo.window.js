@@ -37,6 +37,7 @@
             KWINDOWTITLE = ".k-window-title",
             KWINDOWTITLEBAR = KWINDOWTITLE + "bar",
             KWINDOWCONTENT = ".k-window-content",
+            KDIALOGCONTENT = ".k-dialog-content",
             KWINDOWRESIZEHANDLES = ".k-resize-handle",
             KOVERLAY = ".k-overlay",
             KCONTENTFRAME = "k-content-frame",
@@ -199,7 +200,7 @@
                     });
 
                     globalWindow.on("focus" + NS, function(){
-                        $(KWINDOWCONTENT).each(function(i, element){
+                        $(KWINDOWCONTENT).not(KDIALOGCONTENT).each(function(i, element){
                             kendo.widgetInstance($(element))._blur();
                         });
                     });

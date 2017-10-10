@@ -127,9 +127,15 @@ Defines the width of the column resize handle in pixels. Apply a larger value fo
 
     <div id="grid"></div>
     <script>
-    $("#grid").kendoGrid({
-        columnResizeHandleWidth: 6
+    var dataSource = new kendo.data.DataSource({
+      data: [ { name: "Jane Doe", age: 11 }, { name: "John Doe", age: 12 }]
     });
+    $("#grid").kendoGrid({
+      columnResizeHandleWidth:20,
+      dataSource: dataSource,
+      resizable:true
+    });
+
     </script>
 
 ### columns `Array`
@@ -2831,29 +2837,29 @@ For more information, please refer to the [Window configuration API](/api/javasc
     <div id="grid"></div>
     <script>
 
-    function myOpenEventHandler(e) {
-        console.log(e);
-    }
+      function myOpenEventHandler(e) {
+        var confirm =   window.confirm('Do you want to edit this record?');
+        if(!confirm){
+          e.preventDefault()
+        }
+      }
 
-    $("#grid").kendoGrid({
-      columns: [
-        { field: "name" },
-        { field: "age" },
-        { command: "edit" }
-      ],
-      dataSource: [
-          { id: 1, name: "Jane Doe", age: 30 },
-          { id: 2, name: "John Doe", age: 33 }
-      ],
-      editable: {
-        mode: "popup",
-        window: {
+      var dataSource = new kendo.data.DataSource({
+        data: [ { name: "Jane Doe", age: 11 }, { name: "John Doe", age: 12 }]
+      });
+
+      $("#grid").kendoGrid({
+        columns:['name','age', {command:'edit'}],
+        dataSource:dataSource,
+        editable: {
+          mode: "popup",
+          window: {
             title: "My Custom Title",
             animation: false,
             open: myOpenEventHandler
+          }
         }
-      }
-    });
+      });
     </script>
 
 ### excel `Object`
