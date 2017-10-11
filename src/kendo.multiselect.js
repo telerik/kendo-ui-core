@@ -342,7 +342,10 @@ var __meta__ = { // jshint ignore:line
                 that.listView.skipUpdate(true);
             }
 
-            that._filterSource();
+            if(that.listView.bound() && that.listView.isFiltered()) {
+                that._clearFilter();
+            }
+
             that.element.blur();
         },
 
