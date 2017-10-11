@@ -165,6 +165,17 @@ test("navigate should focus day on next row in month view", function() {
     equal(dateview.calendar._table.find(".k-state-focused").text(), focusedDate.getDate() + "");
 });
 
+test("do not change input value if not a valid date is typed and dateInput option is enabled ", function() {
+    input.kendoDatePicker({
+            dateInput:true,
+            value: new Date()
+        });
+
+        input.focus().val("10/22/year").trigger("focusout");
+
+        equal(input.val(), "10/22/year");
+});
+
 //YEAR VIEW
 test("navigate should focus next month in year view", function() {
     dateview = new DateView({value: new Date(2000, 10, 10), start: "month", depth: "month", min: new Date(1999, 10, 10), max: new Date(2111, 10, 10)});

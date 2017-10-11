@@ -42,7 +42,7 @@ To configure an ASP.NET Core Web Application to use Telerik UI for ASP.NET Core:
 >
 > If you are configuring an existing project, skip this step.
 
-To create an ASP.NET Core Web Application:
+To create an ASP.NET Core Web Application (with or without Razor Pages):
 
 1. Select **File** > **New Project**.
 2. Choose **Templates** > **Visual C#** > **Web** > **ASP.NET Core Web Application (.NET Core)**.
@@ -137,7 +137,9 @@ To add the NuGet packages:
 
 7. Register the Kendo UI styles and scripts in `~/Views/Shared/_Layout.cshtml`.
 
-    Note, that in the default .NET Core template the jQuery scripts will be included at the end of the `<body>` element. In order to load properly the Telerik UI for ASP.NET HTML helpers, you will need to move the jQuery scripts to the `<head>`. The Kendo UI client-side scripts should be loaded after jQuery.
+	> **Important**
+    >
+    > Note, that in the default .NET Core template the jQuery scripts will be included at the end of the `<body>` element. In order to load properly the Telerik UI for ASP.NET HTML helpers, you will need to move the jQuery scripts and the Kendo UI client-side scripts to the `<head>`. The Kendo UI scripts should be loaded after jQuery.
 
     ###### Example
 
