@@ -1,8 +1,8 @@
 ---
-title: Kendo UI Gird Button Command and Persistant State
-description: An example an how to persis state and function references
+title: Kendo UI Grid Button Command and Persist State
+description: An example an how to persist state and function references
 type: how-to
-page_title: How to Persis State and Function References
+page_title: How to Persist State and Function References
 slug: how-to-persist-state-and-function-references
 tags: grid, persist, state, function, reference
 ticketid: 1133697
