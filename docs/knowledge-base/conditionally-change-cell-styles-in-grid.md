@@ -1,32 +1,36 @@
 ---
-title: Conditional style in Grid HtmlHelper cells
-description: Change appearance of grid cells based on condition
+title: Conditionally Change Cell Styles in Grid HtmlHelpers
+description: An example on how to change the appearance of the Grid cells based on condition in ASP.NET Core projects.
 type: how-to
-page_title: Conditionally change appearance of Grid cells
+page_title: Conditionally Change the Appearance of Grid Cells | UI for ASP.NET Core
 slug: conditionally-change-cell-styles-in-grid
-tags: grid,style,template,condition,color,different,core,htmlhelper,mvc,widget
+tags: grid, style, template, condition, color, different, core, htmlhelper, mvc, widget
 res_type: kb
-
 ---
 
 ## Environment
+
 <table>
  <tr>
   <td>Product</td>
-  <td>Grid for ASP.NET Core/Grid for ASP.NET MVC</td>
+  <td>UI for ASP.NET Core/ UI for ASP.NET MVC</td>
  </tr>
 </table>
 
 
 ## Description
 
-I want to change the appearance of cells in the Grid based on a value in the row.
+How can I change the appearance of the Grid cells based on a value in the row in ASP.NET Core projects?
 
 ## Solution
 
-Call JavaScript function from the column ClientTemplate. The DataItem will be available and can be passed as argument to the function. Custom logic can be used to return different templates based on specific condition.
+1. From the column `ClientTemplate`, call the JavaScript `templateFunction` function. As a result, the `DataItem` becomes available.
 
-Column definition:
+1. Pass the `DataItem` as an argument to the function.
+
+1. Use custom logic, based on the specific condition, to return different templates.
+
+The following example demonstrates how to apply the column definition.
 
 ```C#
 columns.Bound(c => c.ContactName).ClientTemplate("#=templateFunction(data)#");
@@ -48,4 +52,3 @@ function templateFunction(item) {
     color: red;
 }
 ```
-

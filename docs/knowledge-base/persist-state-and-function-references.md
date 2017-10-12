@@ -1,20 +1,21 @@
 ---
-title: Kendo UI Gird Button Command and Persistant State
-description: An example an how to persis state and function references
+title: Persist Function References of Custom Command Buttons in the Grid
+description: An example on how to persist the function references of the custom command buttons in the Kendo UI Grid after serialization.
 type: how-to
-page_title: How to Persis State and Function References
-slug: how-to-persist-state-and-function-references
+page_title: Persist the Command Button State and Function References | Kendo UI Grid
+slug: persist-state-and-function-references
+previous_url: /knowledge-base/how-to-persist-state-and-function-references
 tags: grid, persist, state, function, reference
 ticketid: 1133697
 res_type: kb
-
 ---
 
 ## Environment
+
 <table>
  <tr>
   <td>Product</td>
-  <td>Grid for Progress® Kendo UI®</td>
+  <td>Progress Kendo UI Grid</td>
  </tr>
  <tr>
   <td>Operating System</td>
@@ -37,15 +38,13 @@ res_type: kb
 
 ## Description
 
-The custom command buttons in the Grid are losing function references after serialization.
+How can I persist the function references of the custom command buttons in the Kendo UI Grid after serialization?
 
 ## Solution
 
-The function reference has to be added to the parsed JSON file just before passing the options to the [setOptions](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid#methods-setOptions) method of the Grid.
+Just before you pass the options to the [`setOptions`](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid#methods-setOptions) method of the Grid, add the function reference to the parsed JSON file.
 
-Please check the following example demonstrating this.
-
-````html
+```html
     <div id="example">
       <div class="box wide">
         <a href="#" class="k-button" id="save">Save State</a>
@@ -121,10 +120,4 @@ Please check the following example demonstrating this.
         });
       </script>
     </div>
-````
-
-## Suggested Workarounds
-
-## Notes
-
-## See Also
+```

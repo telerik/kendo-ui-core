@@ -1,8 +1,8 @@
 ---
-title: How to place vertical scrollbar at the top of the Kendo UI Grid
-description: Sync external vertical scrollbar over the Grid with the inner scrollbar
-type: troubleshooting
-page_title: How to render second vertical scrollbar for the Grid
+title: Place Vertical Scrollbars at the Top of Grids
+description: An example on how to synchronize an external vertical scrollbar with the inner scrollbar of the Grid.
+type: how-to
+page_title: Render a Second Vertical Scrollbar | Kendo UI Grid
 slug: grid-two-scrollbars
 tags: grid, scroll, scrollbar, vertical
 res_type: kb
@@ -23,14 +23,17 @@ res_type: kb
 
 ## Description
 
-I want to have second vertical scrollbar at the top of the Grid, synced with the built-in scrollbar.
+How can I implement a second vertical scrollbar at the top of the Grid which is synced with the built-in scrollbar?
 
 ## Solution
 
-You could create a scrollable container outside of the Grid and ensure that its width matches the width of the Grid`s data container. Then, within the __scroll__ event of both scrollbars we can sync them accordingly. The event handlers in the following example are attached within the __dataBound__ event of the Grid.
+1. Create a scrollable container outside the Grid.
+1. Make sure that its width matches the width of the data container of the Grid.
+1. Sync both scrollbars within their `scroll` event accordingly.
 
-#### Example
-````html
+The following example attaches the event handlers within the `dataBound` event of the Grid.
+
+```html
 	<div id="example">
 		<div id="dummyScrollWrapper" style="overflow-x: scroll; margin-right:17px; margin-left:2px;">
 			<div id="dummyScroll" style="height: 20px;">
@@ -105,4 +108,4 @@ You could create a scrollable container outside of the Grid and ensure that its 
 			});
 		</script>
 	</div>
-````
+```

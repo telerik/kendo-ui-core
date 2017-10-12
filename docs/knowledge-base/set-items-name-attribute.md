@@ -1,8 +1,8 @@
 ---
-title: Set Name Attribute to ComboBox Items
-description: An example on how to set the name attribute of Kendo UI ComboBox items.
+title: Set the name Attribute to ComboBox Items
+description: An example on how to set the name attribute to the items of the Kendo UI ComboBox.
 type: how-to
-page_title: Set the name attribute to ComboBox items after they are loaded | Kendo UI ComboBox
+page_title: Set the name Attribute to ComboBox Items after They Load | Kendo UI ComboBox
 slug: set-items-name-attribute
 tags: combobox, name, id, attribute, set, render
 ticketid: 1129715
@@ -32,13 +32,13 @@ res_type: kb
 
 ## Description
 
-How can I set the name attribute of the ComboBox items?
+I want to display a name to each individual item of my Kendo UI ComboBox.
+
+How can I set the `name` attribute to each of the ComboBox items?
 
 ## Solution
 
-In scenarios, which require each individual ComboBox item to have a `name` attribute rendered:
-
-1. In the ComboBox dataBound event handler, using the widget's API, get the array of DOM elements corresponding to the data items from the DataSource and the data items themselves.
+1. In the `dataBound` event handler of the ComboBox and by using the API of the widget, get the array of the DOM elements which correspond to the data items from the DataSource and the data items themselves.
 
 1. Use the jQuery `attr` method to set the attribute.
 

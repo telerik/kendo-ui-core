@@ -1,21 +1,20 @@
 ---
-title: Bind the viewModel in No Data Template of ComboBox.
-description: An example on how to bind the viewModel in No Data Template in ComboBox for Kendo UI.
+title: Bind the viewModel in the noData Template of the ComboBox
+description: An example on how to bind the viewModel in the noData template of the Kendo UI ComboBox.
 type: how-to
-page_title: Bind the viewModel in No Data Template | Kendo UI ComboBox
+page_title: Bind the viewModel in the noData Template | Kendo UI ComboBox
 slug: bind-model-nodatatemplate-combobox
 tags: combobox, kendoui, kendo, mvvm, nodatatemplate, event, trigger, bind, viewmodel
 ticketid: 1133381
-pitsid:
 res_type: kb
-
 ---
 
 ## Environment
+
 <table>
  <tr>
   <td>Product</td>
-  <td>ComboBox for Progress® Kendo UI®</td>
+  <td>Progress Kendo UI ComboBox</td>
  </tr>
  <tr>
   <td>Operating System</td>
@@ -34,16 +33,15 @@ res_type: kb
 
 ## Description
 
-How to trigger the click event of a button, nested in the noDataTemplate of the ComboBox widget
+How to trigger the `click` event of a button which is nested in the `noDataTemplate` of the ComboBox?
 
 ## Solution
 
-Since the noDataTemplate is initially hidden, the binding of the model is not applied to it. This causes the inability to trigger any events of widgets nested in the template. This is why
-you should manually bind of the viewModel, once the template is rendered.
+The `noDataTemplate` is initially hidden which means that the binding of the model is not applied to it. This logic causes the inability to trigger events of widgets that are nested in the template. As a result, once the template is rendered, you have to manually bind of the `viewModel` in the `dataBound` event of the Combobox.
 
-This could be achieved in the dataBound event of the Combobox. First, you need to check the number of rendered items. Zero items suggest that the noDataTemplate is rendered. Therefore, 
- you can manually invoke the bind of the viewModel, using the client API of the ComboBox:
+1. Check the number of rendered items. Zero items suggest that the `noDataTemplate` is rendered.
 
+1. Manually invoke the binding of the `viewModel` by using the client API of the ComboBox.
 
 ```html
 
@@ -64,10 +62,10 @@ This could be achieved in the dataBound event of the Combobox. First, you need t
 </div>
 </script>
 
-Fruits: <select id="combobox" data-role="combobox" data-filter="startswith" data-bind="source:fruits, 
+Fruits: <select id="combobox" data-role="combobox" data-filter="startswith" data-bind="source:fruits,
                             events: {                              
                               dataBound: onDataBound
-                              }" data-text-field="fruit" data-value-field="id" data-no-data-template="noDataTemplate" data-template="template"> 
+                              }" data-text-field="fruit" data-value-field="id" data-no-data-template="noDataTemplate" data-template="template">
             </select>
 <br/><br/>
 

@@ -1,34 +1,35 @@
 ---
-title: Grid default filter operator
-description: Set default filter operators row filterable Kendo Ui Grid
+title: Set the Default Filter Operator in the Grid
+description: An example on how to set the default filter operators of the Kendo UI Grid rows.
 type: how-to
-page_title: Set default grid filter operators
+page_title: Set the Default Filter Operator | Kendo UI Grid
 slug: default-grid-filter
-tags: grid,default filter,row filter,operator,kendo grid
+tags: grid, default filter, row filter, operator, kendo grid
 ticketid: 1114303
 res_type: kb
-
 ---
 
 ## Environment
+
 <table>
  <tr>
   <td>Product</td>
-  <td>Grid for Progress® Kendo UI®</td>
+  <td>Progress Kendo UI Grid</td>
  </tr>
 </table>
 
 
 ## Description
 
-The grid automatically selects the firts filter operator in the dropdown. I want the filter operator which is selected by default to be a different one. How can I do that?
+The Grid automatically selects the first filter operator in the dropdown.
+
+How can I change the default filter operator and select to display a different one?
 
 ## Solution
 
-- on the [`dataBound`](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid#events-dataBound) event of the grid, find the filter dropdown and [`select()`](https://docs.telerik.com/kendo-ui/api/javascript/ui/dropdownlist#methods-select) the desired default filter option
+1. On the [`dataBound`](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid#events-dataBound) event of the Grid, find the filter dropdown and [`select()`](https://docs.telerik.com/kendo-ui/api/javascript/ui/dropdownlist#methods-select) the desired default filter option.
 
-
-- on the [`filter`](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid#events-filter) event of the grid, if the filter is cleared, select the desired default filter option
+1. On the [`filter`](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid#events-filter) event of the Grid, if the filter is cleared, select the desired default filter option.
 
 ```html
 
@@ -59,7 +60,7 @@ The grid automatically selects the firts filter operator in the dropdown. I want
                   mode: "row"
                 },
                 pageable: true,
-                columns: 
+                columns:
                 [{
                   field: "OrderID",
                   width: 50,
@@ -72,14 +73,14 @@ The grid automatically selects the firts filter operator in the dropdown. I want
                   field: "OrderDate",
                   title: "Order Date",
                   format: "{0:MM/dd/yyyy}",
-                  width:200	
+                  width:200
                 }],
                 filter: function(e){
                   if(!e.filter){
                     if(e.field === "ShippedDate" || e.field === "OrderDate"){
                       var filterCell = e.sender.thead.find(".k-filtercell[data-field='" + e.field + "']");
                       var filterDropDown = filterCell.find("[data-role='dropdownlist']").data("kendoDropDownList")
-                      filterDropDown.select(3); 
+                      filterDropDown.select(3);
                       filterDropDown.trigger("change");
                     }
                   }
@@ -89,7 +90,7 @@ The grid automatically selects the firts filter operator in the dropdown. I want
               grid.one("dataBound", function(e){
                 var filterCell = e.sender.thead.find(".k-filtercell[data-field='OrderDate']");
                 var filterDropDown = filterCell.find("[data-role='dropdownlist']").data("kendoDropDownList");
-                filterDropDown.select(3); 
+                filterDropDown.select(3);
                 filterDropDown.trigger("change");
               });
             });

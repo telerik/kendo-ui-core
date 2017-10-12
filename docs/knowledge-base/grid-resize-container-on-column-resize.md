@@ -1,8 +1,8 @@
 ---
-title: How to resize the Kendo UI Grid when a column resized
-description: Changing the width of the Grid after column resize
-type: troubleshooting
-page_title: Resizing the Grid after column is resized
+title: Resize the Grid When a Column Is Resized
+description: An example on how to change the width of the Grid after resizing any of its columns.
+type: how-to
+page_title: Resize the Widget after Its Column Is Resized | Kendo UI Grid
 slug: grid-resize-container-on-column-resize
 tags: grid, scroll, scrollbar, vertical
 res_type: kb
@@ -23,14 +23,13 @@ res_type: kb
 
 ## Description
 
-I need the Kendo UI Grid to resize after a column is resized, so it could adjust its width accordingly, without distoring the other columns width.
+How can I resize the Grid after one of its columns is resized, so that it adjusts its width accordingly and without distorting the widths of the other columns?
 
 ## Solution
 
-The requirement could be achieved by manually changing the width of the wrapping element of the Grid to match the width of the table element for the data. In the example below we are using the columnResize event for resizing the wrapping container.
+Manually change the width of the Grid-wrapping element to match the width of the table element for the data. For resizing the wrapping container, the following example utilizes the `columnResize` event.
 
-#### Example
-````html
+```html
         <div id="example">
             <div id="grid"></div>
             <script>
@@ -98,4 +97,4 @@ The requirement could be achieved by manually changing the width of the wrapping
             	});
             </script>
         </div>
-````
+```

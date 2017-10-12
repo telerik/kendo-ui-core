@@ -137,9 +137,9 @@ To add the NuGet packages:
 
 7. Register the Kendo UI styles and scripts in `~/Views/Shared/_Layout.cshtml`.
 
-	> **Important**
+	  > **Important**
     >
-    > Note, that in the default .NET Core template the jQuery scripts will be included at the end of the `<body>` element. In order to load properly the Telerik UI for ASP.NET HTML helpers, you will need to move the jQuery scripts and the Kendo UI client-side scripts to the `<head>`. The Kendo UI scripts should be loaded after jQuery.
+    > In the default .NET Core template, the jQuery scripts are included at the end of the `<body>` element. To properly load the Telerik UI for ASP.NET HtmlHelpers, move the jQuery scripts and the Kendo UI client-side scripts to the `<head>` element and make sure that the Kendo UI scripts are loaded after the jQuery ones.
 
     ###### Example
 

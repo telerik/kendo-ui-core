@@ -1,8 +1,8 @@
 ---
-title: How to Display Frozen Rows in Kendo UI Grid
-description: Display frozen rows in Kendo UI Grid based on a value from the model
-type: troubleshooting
-page_title: Render frozen rows in the Grid
+title: Display Frozen Rows in Grids
+description: An example on how to display frozen rows in a Kendo UI Grid based on a value from the model.
+type: how-to
+page_title: Render Frozen Rows | Kendo UI Grid
 slug: grid-frozen-rows
 tags: grid, frozen rows, frozen, row, data item, model
 res_type: kb
@@ -23,14 +23,18 @@ res_type: kb
 
 ## Description
 
-I want to have frozen rows in Grid based on some condition or a value from the model.
+How can I display frozen rows in a Kendo UI Grid based on a condition or a value from the model?
 
-## Possible Solution
+## Solution
 
-For simple scenario where you only need to display particular rows at the top of the Grid, even after scrolling, you can clone the rendered records and append them to the header of the Grid. Following is an example with such implementation, where we are using a value from the model to determine whether or not to add the records to the header.
+If you only want to display particular rows at the top of the Grid, even after scrolling:
 
-#### Example
-````html
+1. Clone the rendered records.
+1. Append the rendered records to the header of the Grid.
+
+The following example demonstrates the full implementation of this approach and uses a value from the model to determine whether or not to add the records to the header.
+
+```html
 	<style>
 		.customHeaderRowStyles td{
 			background: #bde0ed!important;
@@ -62,12 +66,12 @@ For simple scenario where you only need to display particular rows at the top of
                   var item = row.clone();                
                   item.addClass("customHeaderRowStyles");
                   var thead = e.sender.element.find(".k-grid-header table thead");
-                  thead.append(item); 
+                  thead.append(item);
                 	e.sender.element.height(e.sender.element.height() + row.height());                
                   row.hide();
               }
             })
-    				
+
     			},
     			pageable: {
     				refresh: true,
@@ -92,4 +96,4 @@ For simple scenario where you only need to display particular rows at the top of
     	});
     </script>
 </div>
-````
+```

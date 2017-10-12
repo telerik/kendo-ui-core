@@ -1,8 +1,8 @@
 ---
-title: Set Date Cell Format During Excel Export in Reorderable Grid
+title: Set Date Cell Format during Excel Export in Reorderable Grid
 description: An example on how to change the format for date columns in a reorderable, dynamic Kendo UI Grid.
 type: how-to
-page_title: Format Date Columns Values Before Exporting to Excel | Kendo UI Grid
+page_title: Format Date Columns Values before Exporting to Excel | Kendo UI Grid
 slug: date-format-excel-export-grid
 tags: grid, excel, export, format, date, cells
 ticketid: 1133130
@@ -10,10 +10,11 @@ res_type: kb
 ---
 
 ## Environment
+
 <table>
  <tr>
   <td>Product</td>
-  <td>Grid for Progress® Kendo UI®</td>
+  <td>Progress Kendo UI Grid</td>
  </tr>
  <tr>
   <td>Progress Kendo UI version</td>
@@ -23,16 +24,14 @@ res_type: kb
 
 ## Description
 
-How can I change the format of a date column during the Excel Export in the Kendo UI grid?
+How can I change the format of a date column during the Excel export in the Kendo UI Grid?
 
 ## Solution
-
-To change the format during Excel export:
 
 1. Subscribe to the [`excelExport`](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid#events-excelExport) event of the Grid.
 1. In the `excelExport` event handler, get all the `fields` and their `models`.
 1. Based on the `model` type, push the index of the column in an array.
-1. Loop through the rows and change the values and the format of the desired columns. 
+1. Loop through the rows and change the values and the format of the desired columns.
 
 ```html
 <div id="grid"></div>
@@ -130,4 +129,4 @@ To change the format during Excel export:
 
 ## See Also
 
-[Set Cell Format During Excel Export Article](https://docs.telerik.com/kendo-ui/controls/data-management/grid/how-to/excel/cell-format)
+* [Setting the Cell Format of the Grid during Excel Export](https://docs.telerik.com/kendo-ui/controls/data-management/grid/how-to/excel/cell-format)

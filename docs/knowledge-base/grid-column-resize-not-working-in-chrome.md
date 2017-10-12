@@ -1,37 +1,37 @@
 ---
-title: Column resize not working in Chrome when page is zoomed
-description: Grid columns cannot be resized in Chrome version 61 if zoom is enabled
+title: Resizing of Grid Columns Is Not Working in Chrome When the Page Is Zoomed
+description: Resizing of Grid columns is not working when zooming is enabled in Chrome version 61.
 type: troubleshooting
-page_title: Cannot resize Grid columns in Chrome when zoomed
+page_title: Cannot Resize Columns in Chrome When Page Is Zoomed | Kendo UI Grid
 slug: grid-column-resize-not-working-in-chrome
-tags: grid,columns,resize,not,working,chrome,zoom,scale,latest,61,version,breaks,size,width,change
+tags: grid, columns, resize, not, working, chrome, zoom, scale, latest, 61, version, breaks, size, width, change
 ticketid: 1132050
 res_type: kb
-
 ---
 
 ## Environment
+
 <table>
  <tr>
   <td>Product</td>
-  <td>Grid for Progress® Kendo UI®</td>
+  <td>Progress Kendo UI Grid</td>
  </tr><tr>
   <td>Progress Kendo UI version</td>
   <td>Created with version 2017.3.913</td>
  </tr>
 </table>
 
-
 ## Description
 
-Column resize doesn't work in the latest Chrome version when the scale is not 100% or the page is zoomed.
-
+When the scale is not 100% or when I zoom the page, the column resize feature of the Grid doesn't work in the latest Chrome version.
 
 ## Solution
 
-Override the internal **_positionColumnResizeHandle** method. Make sure you test that all enabled features work as expected in your environment.
+1. Override the internal `positionColumnResizeHandle` method. 
 
-````html
+1. Test that all enabled features work as expected in your environment.
+
+```html
 <div id="example">
       <div id="grid"></div>
 
@@ -112,10 +112,4 @@ Override the internal **_positionColumnResizeHandle** method. Make sure you tes
         });
       </script>
     </div>
-````
-
-
-
-
-
-
+```

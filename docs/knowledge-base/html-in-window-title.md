@@ -1,8 +1,8 @@
 ---
-title: Set HTML in the Kendo UI Window title
+title: Insert HTML in the Window Title
 description: An example on how to inject HTML in the Kendo UI Window title.
 type: how-to
-page_title: Set HTML in the Kendo UI Window title | Kendo UI Window
+page_title: Inject HTML in the Title | Kendo UI Window
 slug: set-html-in-window-title
 tags: window, title, html
 res_type: kb
@@ -19,18 +19,15 @@ res_type: kb
 
 ## Description
 
-How can I set HTML in the Kendo UI Window title?
+How can I insert HTML in the title of a Kendo UI Window?
 
-## Cause
+## Suggested Workaround
 
-As of the 2017 R1 SP1 release, Kendo UI Window no longer allows HTML to be inserted through the `title` property of the widget in order to prevent script injection.
+As of the 2017 R1 SP1 release and to prevent script injection, the Kendo UI Window no longer allows the adding of HTML through the `title` property of the widget. However, you can still work around the issue by programmatically inserting HTML in the title of the widget.
 
-## Solution
+1. Query the Window container for the `.k-window-title` class.
 
-To programatically insert HTML in the Widow's title:
-
-  1. Query the Window container for the .k-window-title class.
-  2. Insert the desired HTML with jQuery.
+1. Insert the desired HTML with jQuery.
 
 ```html
   <div id="example">

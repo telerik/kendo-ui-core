@@ -1,20 +1,21 @@
 ---
-title: Last Row Оften Get Behind the Scrollbar When Virtual Scrolling Is Enabled
-description: An example on how to resize the Grid when the last row is hidden behind the scrollbar
-type: how-to 
-page_title: How to Resize the Grid When the Last Row is Hidden Behind the Scrollbar
-slug: how-to-resize-the-grid-when-the-last-row-is-hidden-behind-the-scrollbar
+title: Persist the Resizing of the Last Grid Row When Virtual Scrolling Is Enabled
+description: An example on how to resize the Kendo UI Grid when its last row is hidden behind the scrollbar.
+type: how-to
+page_title: Resize the Grid When the Last Row Is Hidden behind the Scrollbar | Kendo UI Grid
+slug: resize-the-grid-when-the-last-row-is-hidden-behind-the-scrollbar
+previous_url: /knowledge-base/how-to-resize-the-grid-when-the-last-row-is-hidden-behind-the-scrollbar
 tags: grid, virtualization, scroll, resize
 ticketid: 1134254
 res_type: kb
-
 ---
 
 ## Environment
+
 <table>
  <tr>
   <td>Product</td>
-  <td>Grid for Progress® Kendo UI®</td>
+  <td>Progress Kendo UI Grid</td>
  </tr>
  <tr>
   <td>Operating System</td>
@@ -37,15 +38,17 @@ res_type: kb
 
 ## Description
 
-The last row of the Grid with virtualization gets hidden if the horizontal scrollbar appears after column resize.
+The last row of the Grid with virtualization gets hidden if the horizontal scrollbar appears after resizing the column.
+
+How can I persist the resizing of the last row in the Kendo UI Grid when virtual scrolling is enabled?
 
 ## Solution
 
-The issue occurs because the scrollbar is not part of the initial Grid height. In this scenario, we can suggest to programmatically resize the Grid after [column resizing](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid#events-columnResize) to ensure that the row will be visible.
+The reason for this issue is that the scrollbar is not part of the initial Grid height.
 
-Please check the runnable example demonstrating this:
+To ensure that the row will be visible, programmatically resize the Grid after the [column resizing](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid#events-columnResize).
 
-````html
+```html
 <div id="grid" style="height: 380px;width:400px"></div>
     <style>
       .k-virtual-scrollable-wrap td {
@@ -101,4 +104,4 @@ Please check the runnable example demonstrating this:
         }
       });
     </script>
-````
+```

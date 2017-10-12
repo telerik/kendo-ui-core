@@ -1,71 +1,76 @@
 ---
-title: Copy paste multiple rows from Excel to Kendo Grid
-description: How to implement copy paste rows from excel to kendo grid
+title: Copy and Paste Multiple Rows from Excel to the Grid
+description: An example on how to copy and paste rows from Excel to Kendo UI Grid.
 type: how-to
-page_title: Copy paste multiple rows to Kendo UI Grid with CRUD operations 
+page_title: Copy-Paste Multiple Rows with CRUD Operations | Kendo UI Grid
 slug: grid-paste-data-from-excel-batch-edit
-tags: grid,excel,copy,paste,multiple,rows,batch,edit,crud
+tags: grid, excel, copy, paste, multiple, rows, batch, edit, crud
 ticketid: 1133411
 res_type: kb
-
 ---
 
 ## Environment
+
 <table>
  <tr>
   <td>Product</td>
-  <td>Progress® Kendo UI® Grid</td>
+  <td>Progress Kendo UI Grid</td>
  </tr>
 </table>
 
 
 ## Description
 
-I am trying to implement copy/paste multiple rows from Excel to kendo Grid. I am using the example you have in the documentation:[`Copy Data from Excel`](https://docs.telerik.com/kendo-ui/controls/data-management/grid/how-to/excel/copy-from-excel-to-grid) But after the paste is done, none of the events are firing and also its taking a long time to add rows.
+I am trying to implement the copy-and-paste functionality for multiple rows from Excel to the Kendo UI Grid. I am using the example on [copying data from Excel](https://docs.telerik.com/kendo-ui/controls/data-management/grid/how-to/excel/copy-from-excel-to-grid), but after I paste them, none of the events fire andit takes much time to add rows.
+
+How can I enable the copying of multiple rows from Excel and pasting them in the Grid?  
 
 ## Solution
 
-The Kendo UI Grid which will feature copy/paste of multiple rows should have its CRUD operations configured. The best approach would be to use a [`batch`](http://docs.telerik.com/kendo-ui/api/javascript/data/datasource#configuration-batch) data source so you can send all the requests at once. You can adjust the textarea width and height so it excludes the pager and the scrollbar.
+1. Configure the CRUD operations for the Grid in which you want to implement the copy-paste functionality by using a [`batch`](http://docs.telerik.com/kendo-ui/api/javascript/data/datasource#configuration-batch) data source to send all the requests at once.
 
-```
-if($(e.target).hasClass("k-link")){
-  return;
-}
- 
-// crete a textarea element which will act as a clipboard
-var textarea = $("<textarea>");
-// position the textarea on top of the grid and make it transparent
-textarea.css({
-  position: 'absolute',
-  opacity: 0,
-  top: offset.top,
-  left: offset.left,
-  border: 'none',
-  width: $(this).find("table").width(),
-  height: $(this).find(".k-grid-content").height()
-})
-```
+1. Adjust the width and height of the text area to exclude the pager and the scrollbar.
 
+    ```
+    if($(e.target).hasClass("k-link")){
+      return;
+    }
 
-Also to give it a more Kendo UI themed look, add the dirty indicator to each new item and its fields.
-
-```
-dataBound: function(e){
-  var grid = this;
-  var rows = grid.items();
-  rows.each(function(idx, row){
-   var dataItem = grid.dataItem(row);
-   if(dataItem.isNew()){
-    var td = $(row).find("td");
-    td.each(function(idx, cell){
-     if($(cell).text()){
-       $(cell).prepend("<span class='k-dirty'></span>");
-     }
+    // crete a textarea element which will act as a clipboard
+    var textarea = $("<textarea>");
+    // position the textarea on top of the grid and make it transparent
+    textarea.css({
+      position: 'absolute',
+      opacity: 0,
+      top: offset.top,
+      left: offset.left,
+      border: 'none',
+      width: $(this).find("table").width(),
+      height: $(this).find(".k-grid-content").height()
     })
-   }
-  })
- }
- ```
+    ```
+
+1. To add a native Kendo UI look and feel, add the dirty indicator to each new item and its fields.
+
+    ```
+    dataBound: function(e){
+      var grid = this;
+      var rows = grid.items();
+      rows.each(function(idx, row){
+       var dataItem = grid.dataItem(row);
+       if(dataItem.isNew()){
+        var td = $(row).find("td");
+        td.each(function(idx, cell){
+         if($(cell).text()){
+           $(cell).prepend("<span class='k-dirty'></span>");
+         }
+        })
+       }
+      })
+     }
+    ```
+
+The following example demonstrates the full implementation of the approach.
 
 ```html
     <div id="example">
@@ -155,11 +160,11 @@ dataBound: function(e){
             if($(e.target).hasClass("k-link")){
               return;
             }
-            // get the grid position
+            // Get the position of the Grid.
             var offset = $(this).find("table").offset();
-            // crete a textarea element which will act as a clipboard
+            // Crete a textarea element which will act as a clipboard.
             var textarea = $("<textarea>");
-            // position the textarea on top of the grid and make it transparent
+            // Position the textarea on top of the Grid and make it transparent.
             textarea.css({
               position: 'absolute',
               opacity:0,
@@ -171,7 +176,7 @@ dataBound: function(e){
             })
               .appendTo('body')
               .on('paste', function () {
-              // handle the paste event                         
+              // Handle the paste event.                         
               setTimeout(function () {
 
                 kendo.ui.progress($("#grid"), true);
@@ -194,10 +199,10 @@ dataBound: function(e){
               });
 
             }).on('focusout', function () {
-              // remove the textarea when it loses focus
+              // Remove the textarea when it loses focus.
               $(this).remove();
             });
-            // focus the textarea
+            // Focus the textarea.
             setTimeout(function () {
               textarea.focus();
             });
