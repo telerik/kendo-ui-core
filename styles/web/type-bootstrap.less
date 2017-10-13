@@ -110,8 +110,8 @@
 @draghandle-hover-shadow: none;
 @alt-background-color: lighten(@base, 4%);
 @nested-alt-background-color: darken(@alt-background-color, 8%);
-@cell-border-color: darken(@base, 1%);
-@column-highlight-background-color: darken(@base, 1%);
+@cell-border-color: darken(@base, 10%);
+@column-highlight-background-color: lighten(@base, 1%);
 @active-filter-background-color: @background;
 @scheduler-background-color: @background;
 @current-time-color: darken(@background, 14%);
@@ -558,7 +558,9 @@ html .km-pane-wrapper .k-header
     border-color: @cell-border-color;
 }
 
-.k-nonwork-hour
+.k-nonwork-hour,
+.k-scheduler-dayview .k-today.k-nonwork-hour,
+.k-scheduler-timelineview .k-today.k-nonwork-hour
 {
     background-color: @scheduler-nonwork-background-color;
 }

@@ -128,7 +128,7 @@ To reference an existing Kendo UI DateInput instance, use the [`jQuery.data()`](
 * [Overview of the Kendo UI DatePicker Widget](http://demos.telerik.com/kendo-ui/datepicker/index)
 * [Overview of the Kendo UI DateTimePicker Widget](http://demos.telerik.com/kendo-ui/datetimepicker/index)
 * [Overview of the Kendo UI TimePicker Widget](http://demos.telerik.com/kendo-ui/datetimepicker/index)
-* [Telerik UI for ASP.NET MVC API Reference Folder](http://docs.telerik.com/kendo-ui/api/Kendo.Mvc/AggregateFunction)
+* [Telerik UI for ASP.NET MVC API Reference Folder](http://docs.telerik.com/aspnet-mvc/api/Kendo.Mvc/AggregateFunction)
 * [Telerik UI for ASP.NET MVC HtmlHelpers Folder]({% slug overview_autocompletehelper_aspnetmvc %})
 * [Tutorials on Telerik UI for ASP.NET MVC]({% slug overview_timeefficiencyapp_aspnetmvc6 %})
 * [Telerik UI for ASP.NET MVC Troubleshooting]({% slug troubleshooting_aspnetmvc %})
