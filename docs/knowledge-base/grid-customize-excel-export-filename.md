@@ -1,38 +1,39 @@
 ---
-title: Kendo UI Grid export to Excel customize export filename with current date and time
-description: How to customize the grid excel export filename
+title: Customize the Excel Export Filename of the Grid by Adding Current Date and Time
+description: An example on how to customize the Excel export filename of the Grid by adding the current date and time of generation.
 type: how-to
-page_title: Add the current date and time to the excel export filename 
+page_title: Add the Current Date and Time to the Excel Export Filename | Kendo UI Grid
 slug: grid-customize-excel-export-filename
-tags: grid, excel,export,datetime,customize,customise
+tags: grid, excel, export, datetime, customize, customize
 ticketid: 1130491
 res_type: kb
-
 ---
 
 ## Environment
+
 <table>
  <tr>
   <td>Product</td>
-  <td>Grid for Progress® Kendo UI®</td>
+  <td>Progress Kendo UI Grid</td>
  </tr>
 </table>
 
 
 ## Description
 
-I need to add the current date and time to the  export filename. How can I do that?
+How can I add the current date and time to the Excel export filename of the Grid?
 
 ## Solution
 
-To add the current date and time to the workbook filename, you can use the [`excelExport`](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid#events-excelExport) event. It has the workbook in its event data and you can rename it. 
-With the help of [`kendo.toString()`](https://docs.telerik.com/kendo-ui/framework/globalization/dateformatting) method or another way to format the date, just concatenate it to the filename as your application requires, for example:
+1. Use the [`excelExport`](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid#events-excelExport) event which has the workbook in its event data to rename it.
 
-```
-excelExport: function(e) {
-  e.workbook.fileName = kendo.toString(new Date, "d") + " Grid.xlsx";
-}
-```
+1. With the help of the [`kendo.toString()`](https://docs.telerik.com/kendo-ui/framework/globalization/dateformatting) method or another way to format the date, concatenate the date to the filename:
+
+    ```
+    excelExport: function(e) {
+      e.workbook.fileName = kendo.toString(new Date, "d") + " Grid.xlsx";
+    }
+    ```
 
 ```html
     <div id="grid"></div>
@@ -54,4 +55,3 @@ excelExport: function(e) {
     grid.saveAsExcel();
     </script>
 ```
-

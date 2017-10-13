@@ -1,8 +1,8 @@
 ---
-title: Prevent Submission of Value not Present in the ComboBox DataSource
-description: An example on how to prevent the submission of value not present in Kendo UI ComboBox DataSource.
+title: Prevent Submission of Value that Is not Present in the ComboBox DataSource
+description: An example on how to prevent the submission of a value that is not present in the DataSource of the Kendo UI ComboBox.
 type: how-to
-page_title: Prevent the submission of value not present in the ComboBox DataSource | Kendo UI ComboBox
+page_title: Prevent the Submission of Non-Present Values in the DataSource | Kendo UI ComboBox
 slug: prevent-submission-of-missing-value
 tags: combobox, prevent, submit, submission, value, missing, not, present, datasource
 ticketid: 1133314
@@ -32,13 +32,11 @@ res_type: kb
 
 ## Description
 
-How can I prevent the submission of a value entered in the ComboBox input, when this value does not match any of the items in the ComboBox DataSource?
+How can I prevent the submission of a value that is entered in the input of the ComboBox when this value does not match any of the items in the DataSource?
 
 ## Solution
 
-To prevent the submission of such value:
-
-1. In the handler of the ComboBox change event, which will fire on blurring the widget, check if the entered text matches an item in the DataSource and if it does not, replace the entered text with an empty string.
+In the handler of the ComboBox `change` event which fires on blurring the widget, check if the entered text matches an item in the DataSource. If it does not, replace the entered text with an empty string.
 
 ```html
 	<input id="combobox"  />

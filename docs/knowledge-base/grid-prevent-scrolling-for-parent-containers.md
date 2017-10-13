@@ -1,8 +1,8 @@
 ---
-title: How to prevent the scrolling of the parent containers when we reach the last record of the Grid
-description: Preventing the scrolling of wrapping containers
+title: Parent Containers Continue to Scroll When the Last Grid Record Is Reached
+description: When the last Grid record is reached, the parent container continues to scroll.
 type: troubleshooting
-page_title: Need to prevent the propagation of the Grid scrolling 
+page_title: Cannot Prevent the Propagation of Scrolling | Kendo UI Grid
 slug: grid-prevent-scrolling-for-parent-containers
 tags: grid, scroll, scrollbar, vertical
 res_type: kb
@@ -23,14 +23,15 @@ res_type: kb
 
 ## Description
 
-When I have scrollable Grid and that Grid is placed within scrollable containers, once I reach at the bottom or top position of the Grid`s scrollbar, the parent elements start to scroll.
+I have a scrollable Grid which is placed within a scrollable container. When I reach the top or bottom position of the Grid scrollbar, the scrolling is not prevented and the parent element starts to scroll.
 
 ## Solution
 
-The easiest way for preventing the propagation of the scroll event is to handle that event for the scrollable container of the Grid and conditionally prevent the scrolling when the scroll position is either at the top or at the bottom
+1. Handle the `scroll` event of the scrollable container of the Grid.
 
-#### Example
-````html
+1. Conditionally prevent the scrolling when the scroll position is either at the top or at the bottom of the Grid.
+
+```html
 <div id="example">
 		<div id="parentScrollableElement" style="overflow: auto; width: 600px; height: 600px;">
 			<div style="height: 1000px">
@@ -80,4 +81,4 @@ The easiest way for preventing the propagation of the scroll event is to handle 
 			});
 		</script>
 	</div>
-````
+```

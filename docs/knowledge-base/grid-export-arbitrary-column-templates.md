@@ -1,8 +1,8 @@
 ---
-title: Export Grid with Multiple Column Templates and Arbitrary Template Content
-description: An example showing how to export N column templates that might contain additional HTML.
+title: Export to Excel Grids with Multiple Column Templates and Arbitrary Template Content
+description: An example on how to export multiple column templates that might contain additional HTML.
 type: how-to
-page_title: How to Export to Excel Grid with Many Template Columns that contain HTML in Their Templates | Kendo UI Grid
+page_title: Export to Excel Grids with Many Template Columns and HTML Content in Their Templates | Kendo UI Grid
 slug: grid-export-arbitrary-column-templates
 tags: grid, export, excel, templates
 res_type: kb
@@ -19,13 +19,16 @@ res_type: kb
 
 ## Description
 
-Exporting a Grid with one or two template columns is simple and can be handled using the [Column Template Example]({% slug howto_use_column_template_grid %}) approach. However, if you have a Grid with dynamic columns or a big number of template columns using hard-coded field names and indexes is not possible. Additionally, each template column could contain different type of templates—from HTML strings to special character values. The following example shows how to handle such scenarios.
+I am exporting a Grid with one and two template columns by using the approach from the [column template article]({% slug howto_use_column_template_grid %}). However, I have Grids with dynamic columns and multiple template columns and to use hard-coded field names and indexes is not possible. Additionally, each template column contains different type of templates&mdash;from HTML strings to special character values.
+
+How can I export my Kendo UI Grid with multiple template columns with arbitrary HTML template content to Excel?
 
 ## Solution
 
-The following example shows how to traverse the exported content of the Grid in the `excelExport` event and replace the cell content for template columns. Check the comments for better understanding of the code.
+1. Traverse the exported content of the Grid in the `excelExport` event.
+1. Replace the cell content for template columns.
 
-> This example produces text-only content in the exported Excel file. Kendo UI Grid can export only data values to Excel.
+> The following example produces text-only content in the exported Excel file. The Grid is able to export only data values to Excel.
 
 ```html
     <div id="example">
@@ -113,4 +116,4 @@ The following example shows how to traverse the exported content of the Grid in 
 
 ## See Also
 
-* [Export Only Text From Grid Header and Footer Cells which Contain HTML]({% slug export-only-the-text-from-the-grid-cell-which-contains-html %})
+* [Exporting Only Text from the Header and Footer Cells of the Grid]({% slug export-only-the-text-from-the-grid-cell-which-contains-html %})
