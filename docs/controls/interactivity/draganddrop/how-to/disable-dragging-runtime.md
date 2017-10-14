@@ -10,9 +10,10 @@ slug: howto_enableanddisabledraggingatruntime_intercativityandux
 Your project might require you to enable or disable the Kendo UI Drag-and-Drop functionality during runtime.
 
 To achieve this behavior:
+
 1. Initialize the Drag-and-Drop feature on the parent container.
-1. Use a filter to specify which items will be draggable.
-1. Change the class of the items to enable and disable them.
+2. Use a filter to specify which items will be draggable.
+3. Change the class of the items to enable and disable them.
 
 The following example demonstrates how to accomplish this scenario.
 
