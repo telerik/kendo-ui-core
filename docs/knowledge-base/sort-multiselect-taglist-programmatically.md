@@ -1,5 +1,5 @@
 ---
-title: Sort MultiSelect TagList Programatically
+title: Sort MultiSelect TagList Programmatically
 description: An example on how to programmatically sort the TagList of the Kendo UI MultiSelect.
 type: how-to
 page_title: Sort TagList Programmatically | Kendo UI MultiSelect
@@ -9,6 +9,7 @@ res_type: kb
 ---
 
 ## Environment
+
 <table>
  <tr>
   <td>Product</td>
@@ -18,11 +19,11 @@ res_type: kb
 
 ## Description
 
-How can I sort the selected values of the MultiSelect alphabetically?
+How can I alphabetically sort the selected values in the Kendo UI MultiSelect?
 
 ## Solution
 
-Use the `change` and `dataBound` events of the MultiSelect to change the order of the items in the TagList.
+Change the order of the items in the TagList by using the `change` and `dataBound` events of the MultiSelect.
 
 ```html
 <div id="example">

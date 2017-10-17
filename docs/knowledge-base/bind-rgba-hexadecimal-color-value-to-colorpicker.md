@@ -2,13 +2,14 @@
 title: Bind RGBA Hexadecimal Color Value to ColorPicker
 description: An example on how to create a custom MVVM binding to allow the Kendo UI ColorPicker to accept RGBA hexadecimal values.
 type: how-to
-page_title: Bind RGBA hexadecimal color value to ColorPicker | Kendo UI ColorPicker
+page_title: Bind RGBA Hexadecimal Color Value to ColorPicker | Kendo UI ColorPicker
 slug: bind-rgba-hexadecimal-color-value-to-colorpicker
 tags: colorpicker, mvvm, rgba, hexadecimal, color
 res_type: kb
 ---
 
 ## Environment
+
 <table>
  <tr>
   <td>Product</td>
@@ -18,7 +19,7 @@ res_type: kb
 
 ## Description
 
-How can I make a custom MVVM binding to bind a RGBA hexadecimal color value to the ColorPicker widget?
+How can I make a custom MVVM binding to bind a RGBA hexadecimal color value to the Kendo UI ColorPicker widget?
 
 ## Solution
 

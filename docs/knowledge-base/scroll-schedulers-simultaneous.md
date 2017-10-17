@@ -1,21 +1,20 @@
 ---
-title: Kendo Schedulers Simontanious Scroll
-description: An example on how to implement simontanious scroll between Schedulers
+title: Apply Simultaneous Scroll to Schedulers
+description: An example on how to implement simultaneous scroll across Kendo UI Schedulers.
 type: how-to
-page_title: Implement Simontanious Scroll Between Schedulers in Timeline View | Kendo UI Scheduler
+page_title: Implement Simultaneous Scroll across Schedulers in Timeline View | Kendo UI Scheduler
 slug: scroll-schedulers-simultaneous
-position: 0
-tags: kendoui, kendo, scheduler, scroll, simontanious
+tags: kendoui, kendo, scheduler, scroll, simultaneous
 ticketid: 1133971
 res_type: kb
-
 ---
 
 ## Environment
+
 <table>
  <tr>
   <td>Product</td>
-  <td>Scheduler for Progress® Kendo UI®</td>
+  <td>Progress Kendo UI Scheduler</td>
  </tr>
  <tr>
   <td>Operating System</td>
@@ -34,16 +33,17 @@ res_type: kb
 
 ## Description
 
-I am trying to use two Kendo Schedulers in Timeline View to display related Data. I want to control the scroll bar so that when I scroll the one
-scheduler, the other should scroll accordingly. 
+I am trying to use two Kendo UI Schedulers in a timeline view to display the related data.
+
+How can I control the scroll bar of the Schedulers so that when I scroll one of the Schedulers, the other Scheduler scrolls accordingly?
 
 ## Solution
 
-1. Get a reference to the element with class **.k-scheduler-content** in the schedulers, in order to hook the scroll event with jQuery.
-1. Acquire the **scrollLeft** value of the scrolled element, in order to set it to the other.
-1. Make sure that the scroll events are unbound, when you use the [scrollLeft](https://api.jquery.com/scrollleft/) method, in order to avoid recursion.
+1. Hook the `scroll` event with jQuery by getting a reference to the element with the `.k-scheduler-content` class in the Schedulers.
+1. To set it to the other Scheduler, acquire the `scrollLeft` value of the scrolled element.
+1. To avoid recursion when you use the [`scrollLeft`](https://api.jquery.com/scrollleft/) method, make sure that the `scroll` events are unbound.
 
-``` html 
+``` html
 <div id="scheduler"></div>
 
 <div id="scheduler1"></div>

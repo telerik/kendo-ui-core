@@ -343,6 +343,7 @@ var __meta__ = { // jshint ignore:line
             }
 
             if(that.listView.bound() && that.listView.isFiltered()) {
+                that.persistTagList = true;
                 that._clearFilter();
             }
 
@@ -375,6 +376,7 @@ var __meta__ = { // jshint ignore:line
             };
 
             if (customIndex === undefined) {
+                that.persistTagList = false;
                 listView.select(listView.select()[position]).done(done);
             } else {
                 option = that.element[0].children[customIndex];
@@ -488,6 +490,7 @@ var __meta__ = { // jshint ignore:line
 
                 that.listView.skipUpdate(true);
 
+                that.persistTagList = true;
                 that._filterSource();
                 that._focusItem();
             } else if (that._allowOpening()) {
@@ -573,6 +576,7 @@ var __meta__ = { // jshint ignore:line
             }
 
             if (clearFilters) {
+                that.persistTagList = false;
                 that._clearFilter();
             }
 
@@ -580,6 +584,7 @@ var __meta__ = { // jshint ignore:line
             that._old = listView.value(); //get a new array reference
 
             if (!clearFilters) {
+                that.persistTagList = false;
                 that._fetchData();
             }
         },
@@ -1138,6 +1143,20 @@ var __meta__ = { // jshint ignore:line
             });
         },
 
+        updatePersistTagList: function(added, removed){
+            if(this.persistTagList.added &&
+                this.persistTagList.added.length === removed.length &&
+                this.persistTagList.removed &&
+                this.persistTagList.removed.length === added.length){
+                     this.persistTagList = false;
+             }else{
+                 this.persistTagList = { 
+                     added: added,
+                     removed: removed
+                 };
+             }
+        },
+
         _selectValue: function (added, removed) {
             var that = this;
             var values = that.value();
@@ -1147,6 +1166,12 @@ var __meta__ = { // jshint ignore:line
             var removedItem;
             var addedItem;
             var idx;
+
+            if(this.persistTagList){
+                this.updatePersistTagList(added, removed);
+
+                return;
+            }
 
             that._angularTagItems("cleanup");
 
@@ -1220,6 +1245,7 @@ var __meta__ = { // jshint ignore:line
                 return resolved;
             }
 
+            that.persistTagList = false;
             return listView.select(candidate).done(function() {
                 that._placeholder();
 
@@ -1266,6 +1292,7 @@ var __meta__ = { // jshint ignore:line
                 return;
             }
 
+            that.persistTagList = false;
             return listView.select(indices).done(function() {
                 indices.forEach(function(index) {
                     var dataItem  = listView.dataItemByIndex(index);
