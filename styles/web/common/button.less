@@ -89,8 +89,8 @@ input[type="reset"].k-button-expand
 
 .k-button-icon,
 .k-split-button-arrow {
-    height: calc(1.72em + (2*@button-padding-y) + 2px); // proper vertical alignment for elastic behavior
-    width: calc(1.72em + (2*@button-padding-y) + 2px);
+    height: ~"calc(1.72em + (2*@{button-padding-y}) + 2px)"; // proper vertical alignment for elastic behavior
+    width: ~"calc(1.72em + (2*@{button-padding-y}) + 2px)";
     padding: @button-padding-y calc(@button-padding-x/2);
 }
 .k-overflow-group .k-button-icon {

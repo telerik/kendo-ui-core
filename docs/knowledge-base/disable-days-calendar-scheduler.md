@@ -1,35 +1,33 @@
 ---
-title: Disable days in the popup calendar of Scheduler
-description: An example on how to disable days in the popup calendar of Scheduler
+title: Disable Days in the Popup Calendar of the Scheduler
+description: An example on how to disable days in the popup calendar of the kendo UI Scheduler.
 type: how-to
-page_title: Disable days in the popup calendar of Scheduler | Kendo UI Scheduler
+page_title: Disable Days in Popup Calendars | Kendo UI Scheduler
 slug: disable-days-calendar-scheduler
-position: 0
 tags: kendo, kendoui, scheduler, disable, days, calendar, popup
 ticketid: 1134481
 res_type: kb
-
 ---
 
 ## Environment
+
 <table>
  <tr>
   <td>Product</td>
-  <td>Scheduler for Progress® Kendo UI®</td>
+  <td>Progress Kendo UI Scheduler</td>
  </tr>
 </table>
 
 
 ## Description
-How to disable days (trying to disable Sundays) in the popup calendar in the Scheduler widget?
+
+How to disable particular days&mdash;for example, Sundays&mdash; in the popup calendar of the Kendo UI Scheduler widget?
 
 ## Solution
 
-In order to disable the dates in the calendar, incorporated in the Scheduler, you should go through the folowing steps:
-
-1. Subscribe for the click event of the Date link.
-1. Get a reference to the Kendo Calendar.
-1. Use setOptions method to specify the disabledDates with a timeOut. (the timeout is needed, because at the time of the click event, the calendar is not yet initialized)
+1. Subscribe for the `click` event of the date link.
+1. Get a reference to the Kendo UI Calendar.
+1. Use the `setOptions` method to specify the `disabledDates` with a `timeOut`. You need the timeout because at the time of the `click` event, the calendar is not yet initialized.
 
 ```html
 <div id="scheduler"></div>

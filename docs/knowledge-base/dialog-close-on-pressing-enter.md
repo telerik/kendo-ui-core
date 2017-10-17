@@ -1,8 +1,8 @@
 ---
 title: Close Dialog on Pressing Enter
-description: An example on how to close Kendo UI Dialog on pressing Enter key.
+description: An example on how to close the Kendo UI Dialog on pressing the Enter key.
 type: how-to
-page_title: Close Dialog on Pressing Enter key | Kendo UI Dialog
+page_title: Close Dialog on Pressing Enter Key | Kendo UI Dialog
 slug: dialog-close-on-pressing-enter
 tags: dialog, close, pressing, enter, key
 ticketid: 1129150
@@ -32,11 +32,12 @@ res_type: kb
 
 ## Description
 
-How can I close a Dialog by pressing Enter key?
+How can I close a Kendo UI Dialog by pressing the `Enter` key?
 
 ## Solution
 
-Attach a `keypress` handler to the document, in the handler check whether the Dialog is open and call its `close` method.
+1. If the Dialog is open, in the handler check attach a `keypress` handler to the document.
+1. Call its `close` method.
 
 ```html
 	<script>

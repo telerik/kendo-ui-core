@@ -9,9 +9,9 @@ position: 1
 
 # Hybrid Switch HtmlHelper Overview
 
-The hybrid SplitView HtmlHelper extension is a server-side wrapper for the [hybrid Kendo UI SplitView](http://demos.telerik.com/kendo-ui/m/index#splitview/index) widget.
+The hybrid Switch HtmlHelper extension is a server-side wrapper for the [hybrid Kendo UI Switch](http://demos.telerik.com/kendo-ui/m/index#switch/mobile) widget.
 
-It allows you to configure the hybrid Kendo UI SplitView from server-side code.
+It allows you to configure the hybrid Kendo UI Switch from server-side code.
 
 ## Configuration
 
