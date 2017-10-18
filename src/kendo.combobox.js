@@ -541,7 +541,7 @@ var __meta__ = { // jshint ignore:line
             this.selectedIndex = idx;
 
             if (idx === -1 && !dataItem) {
-                text = this.input[0].value;
+                text = this._accessor();
                 if (this.options.syncValueAndText) {
                     value = text;
                 }
@@ -563,6 +563,7 @@ var __meta__ = { // jshint ignore:line
 
             this._placeholder();
             this._triggerCascade();
+
         },
 
         _setDomInputValue: function(text){
@@ -693,6 +694,7 @@ var __meta__ = { // jshint ignore:line
                         that._accessor(text);
                     }
 
+                    that._cascadeTriggered = true;
                     that._triggerCascade();
                 }
 

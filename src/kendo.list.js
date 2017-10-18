@@ -620,12 +620,16 @@ var __meta__ = { // jshint ignore:line
 
             if (value !== unifyType(that._old, typeof value)) {
                 trigger = true;
-            } else if (index !== undefined && index !== that._oldIndex) {
+            } else if (index !== undefined && index !== that._oldIndex && !that.listView.isFiltered()) {
                 trigger = true;
             }
 
             if (trigger) {
-                that._old = value;
+                if (that._old === null) {
+                    that._old = value;
+                } else {
+                    that._old = that.dataItem() ? that.dataItem()[that.options.dataValueField] : null;
+                }
                 that._oldIndex = index;
 
                 if (!that._typing) {
@@ -865,10 +869,8 @@ var __meta__ = { // jshint ignore:line
 
         _triggerCascade: function() {
             var that = this;
-            var noDataItemSelection = that._oldIndex == -1 || that.selectedIndex == -1;
 
-            if (!that._cascadeTriggered || that._old !== that.value() ||
-                (noDataItemSelection && that._oldIndex !== that.selectedIndex)) {
+            if (!that._cascadeTriggered || that.value() !== unifyType(that._old, typeof that.value())) {
                 that._cascadeTriggered = true;
                 that.trigger(CASCADE, { userTriggered: that._userTriggered });
             }
@@ -1184,7 +1186,11 @@ var __meta__ = { // jshint ignore:line
                         if (!that.popup.visible()) {
                             that._blur();
                         }
-                        that._oldIndex = that.selectedIndex;
+                        if (that._old === null) {
+                            that._old = that.value();
+                        } else {
+                            that._old = that.dataItem() ? that.dataItem()[that.options.dataValueField] : null;
+                        }
                     });
                 }
 

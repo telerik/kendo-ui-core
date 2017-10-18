@@ -189,11 +189,10 @@ test("clicking an item raises the change event of HTML select", 1, function() {
     combobox.ul.children().eq(1).trigger(CLICK);
 });
 
-test("raise change on custom value", 2, function() {
+test("raise change on custom value", 1, function() {
     combobox = new ComboBox(input, {
         dataSource: [{text: "foo"}, {text: "bar"}],
         change: function() {
-            equal(combobox._old, "foo");
             equal(combobox.value(), "foo");
         }
     });
@@ -220,7 +219,7 @@ test("raise change on custom text with empty value", 2, function() {
             .focusout();
 });
 
-test("raise change on custom value if element is select", 2, function() {
+test("raise change on custom value if element is select", 1, function() {
     var select = $("<select><option value=1>foo1</option><option value=3>foo3</option></select>");
     combobox = new ComboBox(select, {
         dataSource: [{text: "foo"}, {text: "bar"}]
@@ -228,7 +227,6 @@ test("raise change on custom value if element is select", 2, function() {
 
     select.bind("change", function() {
         equal(combobox.value(), "custom value");
-        equal(combobox._old, "custom value");
     });
 
     combobox.input
@@ -632,17 +630,14 @@ test("ComboBox trigger cascade when selected index is changed", 2, function() {
         suggest: true
     }).data("kendoComboBox");
 
+    combobox.bind("cascade", function() {
+        equal(combobox.value(), "1");
+        equal(combobox.text(), "1");
+    });
+
     combobox.input.focus().val("1");
     combobox.search("1");
     combobox.input.blur();
-
-    combobox.bind("cascade", function() {
-        equal(combobox.value(), "1");
-        equal(combobox.text(), "foo");
-    });
-
-    combobox.search("f");
-    combobox.ul.children(":first").click();
 });
 
 test("ComboBox does not trigger cascade when selected index is changed due to filtering", 3, function() {
@@ -731,17 +726,14 @@ test("ComboBox trigger change when selected index is changed", 2, function() {
         suggest: true
     }).data("kendoComboBox");
 
+    combobox.bind("change", function() {
+        equal(combobox.value(), "1");
+        equal(combobox.text(), "1");
+    });
+
     combobox.input.focus().val("1");
     combobox.search("1");
     combobox.input.blur();
-
-    combobox.bind("change", function() {
-        equal(combobox.value(), "1");
-        equal(combobox.text(), "foo");
-    });
-
-    combobox.search("f");
-    combobox.ul.children(":first").click();
 });
 
 test("ComboBox triggers filtering event on data source filter", 3, function() {
