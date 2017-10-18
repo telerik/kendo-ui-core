@@ -12,6 +12,7 @@ The following example demonstrates how to set the Grid with an Excel-like filter
 To set a single Data Source for all filter menus, the example uses the [`columns.filterable.dataSource`](/api/javascript/ui/grid#configuration-columns.filterable.dataSource) property of the Grid.
 
 To observe this behavior:
+
 1. Filter the **Product Name** column.
 2. Open the **Unit Price** column. Note that the values are filtered based on the currently applied filter on the **Product Name** column.
 

@@ -10,6 +10,7 @@ slug: howto_move_shapes_with_arrow_keys
 Your project might require you to move the shapes of the Diagram by pressing the arrow keys.
 
 To achieve this behavior:
+
 1. Handle the `load` event of the Diagram and check whether the selected item is a shape.
 2. If the clicked object is a shape, assign a handler to the standard `keyPress` event of the `window` object.
 3. To move the shape depending on the pressed key, use the `bounds()` method of the `Shape`.

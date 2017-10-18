@@ -10,6 +10,7 @@ slug: howto_modify_undoredo_stack
 The following example demonstrates how to add custom actions to the undo-redo stack of the Diagram to cover custom interactions such as changing the color of the shape.
 
 To achieve this behavior:
+
 1. Handle the event that triggers the change. For example, the `click` event of the button in this how-to example.
 2. Declare a custom `Unit` class by using the `init`, `undo`, and `redo` methods.
 3. Create an instance of this class.

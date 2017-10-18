@@ -10,6 +10,7 @@ slug: howto_show_context_menu_over_shapes
 The following example demonstrates how to show a Kendo UI ContextMenu when pressing the right button of the mouse over the Diagram shapes.
 
 To achieve this behavior:
+
 1. Initialize a [Kendo UI ContextMenu]({% slug overview_kendoui_contextmenu_widget %}) setting its target as the ID of the Diagram and filter it by a `g` element.
 2. Handle the [`open` event](/api/javascript/ui/contextmenu#events-open) of the ContextMenu. If the target is a connection, it is possible to cancel the event. If the target is a shape, it is possible to store the `dataItem` in a variable.
 3. Handle the [`select` event](/api/javascript/ui/contextmenu#events-select) of the ContextMenu where you can perform a custom action based on the context of the shape.

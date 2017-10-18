@@ -10,6 +10,7 @@ slug: howto_pan_with_mouse_wheel
 The following example demonstrates how to pan the Kendo UI Diagram when scrolling with the mouse.
 
 To achieve this behavior:
+
 1. Handle the [`zoomStart` event](/api/javascript/dataviz/ui/diagram#events-zoomStart) of the Kendo UI Diagram.
 2. Get the delta from the arguments, that is `e.meta.delta`.
 3. Pan the Diagram with the new coordinates by using the [`pan` method](/api/javascript/dataviz/ui/diagram#methods-pan).

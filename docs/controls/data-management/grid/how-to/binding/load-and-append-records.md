@@ -13,6 +13,7 @@ The following example demonstrates how to load more records when scrolling the G
 The difference between this scenario and virtual scrolling is that here the number of records constantly increases, while virtual scrolling replaces the existing records with new ones. Note that when you increase the page size, the data requests are slower.
 
 To achieve this behavior:
+
 1. Subscribe to the `scroll` event of the Grid data container and increment the page size by a desired value.
 2. Use a flag to prevent multiple simultaneous page size increments. The flag should be set in the `scroll` event handler, and cleared in the `dataBound` event handler of the Grid.
 
