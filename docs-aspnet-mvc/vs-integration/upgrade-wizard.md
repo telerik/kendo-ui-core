@@ -32,7 +32,7 @@ The **Information Page** of the Upgrade Project Wizard describes the files and a
 
 ### Projects for Upgrade
 
-On the next page, the Wizard lists all projects from the solution that use Telerik UI for ASP.NET MVC. This enables you to choose the projects that will be updated and the version to which they will be upgraded.
+On the next page, the Wizard lists all projects from the solution that use Progress&reg; Telerik&reg; UI for ASP.NET MVC. This enables you to choose the projects that will be updated and the version to which they will be upgraded.
 
 It is recommended to upgrade all projects to the selected version. The Compatibility button will invoke the [Upgrade API Analyzer tool](http://docs.telerik.com/aspnet-mvc/vs-integration/upgrade-api-analyzer):
 
@@ -66,9 +66,9 @@ The **Create Backup** page provides the following options:
 
 ## See Also
 
-* [Visual Studio Integration Overview]({% slug overview_visualstudio_aspnetmvc %})
+* [VS Integration Overview]({% slug overview_visualstudio_aspnetmvc %})
 * [Create Projects]({% slug newprojectwizards_visualstudio_aspnetmvc %})
 * [Configure Projects]({% slug projectwizardconfig_visualstudio_aspnetmvc %})
 * [Convert Projects]({% slug projectwizardcoversion_visualstudio_aspnetmvc %})
-* [Visual Studio Extensions Options]({% slug vsextensionsoptions_visualstudio_aspnetmvc %})
+* [VS Extensions Options]({% slug vsextensionsoptions_visualstudio_aspnetmvc %})
 * [Download New Versions]({% slug latestversionretrieval_visualstudio_aspnetmvc %})

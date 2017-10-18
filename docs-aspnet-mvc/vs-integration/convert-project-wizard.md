@@ -25,7 +25,7 @@ The conversion wizard has three steps:
 
 ### Distribution Selection
 
-The distribution selection lets you choose the version of the Telerik UI for ASP.NET MVC you want to use.
+The distribution selection lets you choose the version of the Progress&reg; Telerik&reg; UI for ASP.NET MVC you want to use.
 
 **Figure 1. Distribution selection**
 
@@ -58,9 +58,9 @@ It is possible to convert an existing Telerik MVC Extensions project by using th
 
 ## See Also
 
-* [Visual Studio Integration Overview]({% slug overview_visualstudio_aspnetmvc %})
+* [VS Integration Overview]({% slug overview_visualstudio_aspnetmvc %})
 * [Create Projects]({% slug newprojectwizards_visualstudio_aspnetmvc %})
 * [Configure Projects]({% slug projectwizardconfig_visualstudio_aspnetmvc %})
 * [Upgrade Projects]({% slug projectwizardupgrade_visualstudio_aspnetmvc %})
-* [Visual Studio Extensions Options]({% slug vsextensionsoptions_visualstudio_aspnetmvc %})
+* [VS Extensions Options]({% slug vsextensionsoptions_visualstudio_aspnetmvc %})
 * [Download New Versions]({% slug latestversionretrieval_visualstudio_aspnetmvc %})

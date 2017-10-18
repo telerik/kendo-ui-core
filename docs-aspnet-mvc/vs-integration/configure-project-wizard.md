@@ -8,7 +8,7 @@ position: 6
 
 # Configuring Projects
 
-This article demonstrates how to configure a Progress&reg; Telerik&reg; Telerik UI for ASP.NET MVC application.
+This article demonstrates how to configure a Progress&reg; Telerik&reg; UI for ASP.NET MVC application.
 
 ## Getting Started
 
@@ -20,7 +20,7 @@ To open the **Project Configuration Wizard**, click **Telerik** > **Telerik UI f
 
 ### Visual Themes
 
-The first page of the **Project Configuration Wizard** enables you to change the visual theme of your Telerik UI for ASP.NET MVC application.
+The first page of the **Project Configuration Wizard** enables you to change the visual theme of your Progress&reg; Telerik&reg; UI for ASP.NET MVC application.
 
 **Figure 1. Visual theme configuration page of the Project Configuration Wizard**
 
@@ -42,9 +42,9 @@ The second page of the **Project Configuration Wizard** enables you to modify th
 
 ## See Also
 
-* [Visual Studio Integration Overview]({% slug overview_visualstudio_aspnetmvc %})
+* [VS Integration Overview]({% slug overview_visualstudio_aspnetmvc %})
 * [Create Projects]({% slug newprojectwizards_visualstudio_aspnetmvc %})
 * [Upgrade Projects]({% slug projectwizardupgrade_visualstudio_aspnetmvc %})
 * [Convert Projects]({% slug projectwizardcoversion_visualstudio_aspnetmvc %})
-* [Visual Studio Extensions Options]({% slug vsextensionsoptions_visualstudio_aspnetmvc %})
+* [VS Extensions Options]({% slug vsextensionsoptions_visualstudio_aspnetmvc %})
 * [Download New Versions]({% slug latestversionretrieval_visualstudio_aspnetmvc %})

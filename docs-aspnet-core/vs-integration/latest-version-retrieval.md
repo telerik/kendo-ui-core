@@ -1,14 +1,14 @@
 ---
 title: Downloading New Versions
-page_title: Downloading New Versions | Visual Studio Integration
-description: "Learn how to keep your projects updated when using Telerik UI for ASP.NET Core."
+page_title: Downloading New Versions | UI for ASP.NET Core Visual Studio Integration
+description: "Learn how to keep your projects updated when using Progress&reg; Telerik&reg; UI for ASP.NET Core."
 slug: latestversionretrieval_visualstudio_aspnetcore
 position: 3
 ---
 
 # Downloading New Versions
 
-The Telerik UI for ASP.NET Core Visual Studio (VS) extensions help you keep your projects updated. The Latest Version Acquirer tool automatically retrieves the latest Telerik UI for ASP.NET Core distribution available on the Telerik web site.
+The Progress&reg; Telerik&reg; UI for ASP.NET Core Visual Studio (VS) extensions help you keep your projects updated. The Latest Version Acquirer tool automatically retrieves the latest Progress&reg; Telerik&reg; UI for ASP.NET Core distribution available on the Telerik web site.
 
 **Figure 1. The dialog for getting the latest version**
 
@@ -38,9 +38,9 @@ The Telerik UI for ASP.NET Core Visual Studio (VS) extensions help you keep your
 
 > **Important**
 > * The **Download** buttons of the **New Project Wizard** launch the **Latest Version Acquirer** tool.
-> * The **Latest Version Acquirer** tool downloads the `.zip` files, containing the latest Telerik UI for ASP.NET Core binaries and any resources that are vital for a Telerik UI for ASP.NET Core application. These get unpacked in the `%APPDATA%\Telerik\Updates` folder by default. If you find the list of the offered packages too long and you do not need the older versions, close the Visual Studio and use the Windows Explorer to delete these distributions.
+> * The **Latest Version Acquirer** tool downloads the `.zip` files, containing the latest Telerik UI for ASP.NET Core binaries and any resources that are vital for a Telerik UI for ASP.NET Core application. These get unpacked in the `%APPDATA%\Telerik\Updates` folder by default. If you find the list of the offered packages too long and you do not need the older versions, close the VS and use the Windows Explorer to delete these distributions.
 
 ## See Also
 
-* [Visual Studio Integration Overview]({% slug overview_visualstudio_aspnetcore %})
+* [VS Integration Overview]({% slug overview_visualstudio_aspnetcore %})
 * [Creating Projects]({% slug newprojectwizards_visualstudio_aspnetcore %})

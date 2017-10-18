@@ -1,12 +1,12 @@
 ---
 title: Creating Kendo UI Professional Projects
 page_title: Creating Kendo UI Professional Projects | UI for ASP.NET MVC Visual Studio Integration
-description: "Learn how to create a new Progress&reg; Kendo UI&reg; Professional application."
+description: "Learn how to create a new Progress&reg; Kendo UI&reg; for jQuery application."
 slug: newprojectwizard_visualstudio_kendoui
 position: 3
 ---
 
-# Creating Kendo UI Professional Projects
+# Creating Kendo UI for jQuery Projects
 
 This article demonstrates how to create a new Progress&reg; Kendo UI&reg; for jQuery application.
 
@@ -28,7 +28,7 @@ To start the **Create New Project Wizard**, follow either of the approaches belo
 1. Click **File** > **New** > **Project**.
 2. Navigate to the Kendo UI ASP.NET MVC 5 project templates under **Telerik** > **Web**.
 
-The wizard detects all the installed versions of Telerik UI for ASP.NET MVC and lists them in the **Version** combobox. This enables you to select a version you want to apply to your project.
+The wizard detects all the installed versions of Progress&reg; Telerik&reg; UI for ASP.NET MVC and lists them in the **Version** combobox. This enables you to select a version you want to apply to your project.
 
 **Figure 1. New Kendo UI Project Wizard**
 
@@ -53,9 +53,9 @@ As a result, the wizard:
 
 ## See Also
 
-* [Visual Studio Integration Overview]({% slug overview_visualstudio_aspnetmvc %})
+* [VS Integration Overview]({% slug overview_visualstudio_aspnetmvc %})
 * [Configure Projects]({% slug projectwizardconfig_visualstudio_aspnetmvc %})
 * [Upgrade Projects]({% slug projectwizardupgrade_visualstudio_aspnetmvc %})
 * [Convert Projects]({% slug projectwizardcoversion_visualstudio_aspnetmvc %})
-* [Visual Studio Extensions Options]({% slug vsextensionsoptions_visualstudio_aspnetmvc %})
+* [VS Extensions Options]({% slug vsextensionsoptions_visualstudio_aspnetmvc %})
 * [Download New Versions]({% slug latestversionretrieval_visualstudio_aspnetmvc %})
