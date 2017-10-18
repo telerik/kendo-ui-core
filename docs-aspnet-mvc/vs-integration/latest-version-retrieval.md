@@ -1,20 +1,20 @@
 ---
 title: Downloading New Versions
-page_title: Downloading New Versions | Telerik UI for ASP.NET MVC Visual Studio Integration
-description: "Learn how to keep your projects updated when using Telerik UI for ASP.NET MVC."
+page_title: Downloading New Versions | UI for ASP.NET MVC Visual Studio Integration
+description: "Learn how to keep your projects updated when using Progress&reg; Telerik&reg; UI for ASP.NET MVC."
 slug: latestversionretrieval_visualstudio_aspnetmvc
 position: 10
 ---
 
 # Downloading New Versions
 
-With the Telerik UI for ASP.NET MVC Visual Studio Extensions you keep your projects in an up-to-date state. The Latest Version Acquirer tool automatically retrieves the latest Telerik UI for ASP.NET MVC distribution available on the Telerik website.
+With the Telerik UI for ASP.NET MVC Visual Studio Extensions you keep your projects in an up-to-date state. The Latest Version Acquirer tool automatically retrieves the latest Progress&reg; Telerik&reg; UI for ASP.NET MVC distribution available on the Telerik website.
 
-Once a day, upon loading a project with Telerik UI for ASP.NET MVC controls, the extensions query the Telerik website for a new version of Telerik UI for ASP.NET MVC. A notification gets displayed when a new version is discovered.
+Once a day, upon loading a project with Telerik UI for ASP.NET MVC controls, the extensions query the Telerik website for a new version of Progress&reg; Telerik&reg; UI for ASP.NET MVC. A notification gets displayed when a new version is discovered.
 
 **Figure 1. A displayed notification upon locating a new Telerik UI for ASP.NET MVC version**
 
-![Notification](/vs-integration/images/notification.png)
+![Notification](images/notification.png)
 
 > **Important**
 >
@@ -24,7 +24,7 @@ Clicking **Update Now** starts the Latest Version Acquirer tool, prompting for y
 
 **Figure 2. The Get the Latest Version dialog**
 
-![Get latest version](/vs-integration/images/lva1.png)
+![Get latest version](images/lva1.png)
 
 > **Important**
 >
@@ -38,9 +38,11 @@ The download starts automatically after a confirmation window.
 
 **Figure 3, 4 and 5. The dialog indicating the download progress**
 
-![Get latest version](/vs-integration/images/lva2.png)
-![Get latest version](/vs-integration/images/lva3.png)
-![Get latest version](/vs-integration/images/lva4.png)
+![Get latest version](images/lva2.png)
+
+![Get latest version](images/lva3.png)
+
+![Get latest version](images/lva4.png)
 
 Once the download succeeds, the latest version of Telerik UI for ASP.NET MVC is available to use in the **Upgrade Wizard** and the **New Project Wizard**.
 

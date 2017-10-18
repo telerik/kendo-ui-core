@@ -1,27 +1,27 @@
 ---
 title: Creating Projects
-page_title: Creating Projects | Telerik UI for ASP.NET MVC Visual Studio Integration
-description: "Learn how to create a new Telerik UI for ASP.NET MVC application."
+page_title: Creating Projects | UI for ASP.NET MVC Visual Studio Integration
+description: "Learn how to create a new Progress&reg; Telerik&reg; UI for ASP.NET MVC application."
 slug: newprojectwizards_visualstudio_aspnetmvc
 position: 2
 ---
 
 # Creating Projects
 
-This article demonstrates how to create a new Telerik UI for ASP.NET MVC application.
+This article demonstrates how to create a new Progress&reg; Telerik&reg; UI for ASP.NET MVC application.
 
 ## Getting Started
 
 ### The Basics
 
-New Telerik UI for ASP.NET MVC applications are created by using the **Create New Project Wizard**.
+New Progress&reg; Telerik&reg; UI for ASP.NET MVC applications are created by using the **Create New Project Wizard**.
 
 To start the **Create New Project Wizard**, follow either of the approaches below.
 
 **Approach 1**   
 
 1. Go to the Telerik menu.   
-2. Click **Telerik** > **UI for ASP.NET MVC** > **Create New Telerik Project**.
+2. Click **Telerik** > **Telerik UI for ASP.NET MVC** > **Create New Telerik Project**.
 
 **Approach 2**
 
@@ -30,11 +30,11 @@ To start the **Create New Project Wizard**, follow either of the approaches belo
 
 For convenience, the same project templates are located under the **Visual C#** > **Web** and **Visual Basic** > **Web** nodes.
 
-The wizard detects all the installed versions of UI for ASP.NET MVC and lists them in the **Version** combobox. This enables you to select a version you want to apply to your project.
+The wizard detects all the installed versions of Telerik UI for ASP.NET MVC and lists them in the **Version** combobox. This enables you to select a version you want to apply to your project.
 
 **Figure 1. New Project Wizard**
 
-![New Project Wizard](/vs-integration/images/new_project.png)
+![New Project Wizard](images/new_project.png)
 
 ### Project Settings
 

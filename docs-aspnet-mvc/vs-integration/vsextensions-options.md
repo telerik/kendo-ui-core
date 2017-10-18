@@ -1,7 +1,7 @@
 ---
 title: Visual Studio Extensions Options
-page_title: Visual Studio Extensions Options | Telerik UI for ASP.NET MVC Visual Studio Integration
-description: "Learn how to use the settings Visual Studio provides that allow you to configure the Telerik UI for ASP.NET MVC Visual Studio Extensions to best suit your needs."
+page_title: Visual Studio Extensions Options | UI for ASP.NET MVC Visual Studio Integration
+description: "Learn how to use the settings Visual Studio provides that allow you to configure the Progress&reg; Telerik&reg; UI for ASP.NET MVC Visual Studio Extensions to best suit your needs."
 slug: vsextensionsoptions_visualstudio_aspnetmvc
 position: 9
 ---
@@ -14,7 +14,7 @@ It can be accessed by clicking on **Telerik** > **VSExtensions Options**.
 
 **Figure 1. The Options menu**
 
-![Options menu](/vs-integration/images/options_menu.png)
+![Options menu](images/options_menu.png)
 
 The **Extensions Options** dialog contains two sets of options that affect the Telerik UI for ASP.NET MVC Visual Studio Extensions.
 
@@ -24,7 +24,7 @@ The settings under the General category affect all of the installed Telerik Visu
 
 **Figure 2. The General Settings Options dialog**
 
-![Options Dialog](/vs-integration/images/options.png)
+![Options Dialog](images/options.png)
 
 ### Project Setup
 
@@ -51,7 +51,7 @@ All settings under the Kendo UI category affect only the Telerik UI for ASP.NET 
 
 **Figure 3. The Telerik UI for ASP.NET MVC Settings dialog**
 
-![Options Dialog](/vs-integration/images/options_kendo.png)
+![Options Dialog](images/options_kendo.png)
 
 ### Latest Version Retrieval
 

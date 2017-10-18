@@ -1,26 +1,26 @@
 ---
 title: Upgrading Projects
-page_title: Upgrading Projects | Telerik UI for ASP.NET MVC Visual Studio Integration
-description: "Learn how to upgrade a Telerik UI for ASP.NET MVC application."
+page_title: Upgrading Projects | UI for ASP.NET MVC Visual Studio Integration
+description: "Learn how to upgrade a Progress&reg; Telerik&reg; UI for ASP.NET MVC application."
 slug: projectwizardupgrade_visualstudio_aspnetmvc
 position: 7
 ---
 
 # Upgrading Projects
 
-This article demonstrates how to upgrade a Telerik UI for ASP.NET MVC application.
+This article demonstrates how to upgrade a Progress&reg; Telerik&reg; UI for ASP.NET MVC application.
 
 ## Getting Started
 
 ### The Basics
 
-The Upgrade Project Wizard upgrades existing Telerik UI for ASP.NET MVC applications.
+The Upgrade Project Wizard upgrades existing Progress&reg; Telerik&reg; UI for ASP.NET MVC applications.
 
-To open the wizard, click **Telerik** > **UI for ASP.NET MVC** > **Upgrade Wizard**.
+To open the wizard, click **Telerik** > **Telerik UI for ASP.NET MVC** > **Upgrade Wizard**.
 
 **Figure 1. Launch the Upgrade Wizard**
 
-![Choose projects](/vs-integration/images/upgrade_menu.png)
+![Choose projects](images/upgrade_menu.png)
 
 ### Files for Upgrade
 
@@ -28,7 +28,7 @@ The **Information Page** of the Upgrade Project Wizard describes the files and a
 
 **Figure 2. Information page**
 
-![Information page](/vs-integration/images/upgrade_warning.png)
+![Information page](images/upgrade_warning.png)
 
 ### Projects for Upgrade
 
@@ -42,7 +42,7 @@ It is recommended to upgrade all projects to the selected version. The Compatibi
 
 **Figure 3. Choose projects and distribution version**
 
-![Choose projects and distribution version](/vs-integration/images/upgrade_version.png)
+![Choose projects and distribution version](images/upgrade_version.png)
 
 ### Project Resources for Upgrade
 
@@ -50,7 +50,7 @@ The **Upgrade Project Resources** page allows you to update the editor templates
 
 **Figure 4. Update Project Resources page**
 
-![Update Project Resources](/vs-integration/images/upgrade_settings.png)
+![Update Project Resources](images/upgrade_settings.png)
 
 ### Backup Creation
 
@@ -62,7 +62,7 @@ The **Create Backup** page provides the following options:
 
 **Figure 5. Create Backup page**
 
-![Create Backup](/vs-integration/images/upgrade_backup.png)
+![Create Backup](images/upgrade_backup.png)
 
 ## See Also
 
