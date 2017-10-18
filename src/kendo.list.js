@@ -865,10 +865,8 @@ var __meta__ = { // jshint ignore:line
 
         _triggerCascade: function() {
             var that = this;
-            var noDataItemSelection = that._oldIndex == -1 || that.selectedIndex == -1;
 
-            if (!that._cascadeTriggered || that._old !== that.value() ||
-                (noDataItemSelection && that._oldIndex !== that.selectedIndex)) {
+            if (!that._cascadeTriggered || that._old !== that.value() || that._oldIndex !== that.selectedIndex) {
                 that._cascadeTriggered = true;
                 that.trigger(CASCADE, { userTriggered: that._userTriggered });
             }

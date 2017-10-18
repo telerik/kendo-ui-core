@@ -478,7 +478,7 @@
     });
 
 
-    test("DropDownList triggers cascade when item is selected via keyboard", 2, function() {
+    test("DropDownList triggers cascade when item is selected via keyboard", 3, function() {
         var dropdownlist = new DropDownList(input, {
             dataSource: ["foo", "bar"],
             cascade: function() {
