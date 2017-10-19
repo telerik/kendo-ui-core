@@ -245,6 +245,7 @@ if (kendo.ui.Editor) {
 kendo.ui.Editor.prototype.options.messages =
 $.extend(true, kendo.ui.Editor.prototype.options.messages,{
   "bold": "Полужирный",
+  "cleanFormatting": "Очистить формат",
   "createLink": "Вставить гиперссылку",
   "fontName": "Шрифт",
   "fontNameInherit": "(шрифт как в документе)",
