@@ -171,6 +171,26 @@
         equal(multiselect.tagList.children().length, 5);
     });
 
+    test("MultiSelect deselects all on CTRL+A if already selected", function() {
+        var multiselect = new MultiSelect(select);
+
+        multiselect.open();
+
+        multiselect.input.trigger({
+            type: "keydown",
+            keyCode: 65,
+            ctrlKey: true
+        });
+
+        multiselect.input.trigger({
+            type: "keydown",
+            keyCode: 65,
+            ctrlKey: true
+        });
+
+        equal(multiselect.tagList.children().length, 0);
+    });
+
     test("MultiSelect respects maxSelectedItems on CTRL+A", function () {
         var multiselect = new MultiSelect(select, {
             maxSelectedItems: 2

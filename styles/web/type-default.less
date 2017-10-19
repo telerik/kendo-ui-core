@@ -46,7 +46,7 @@
 @primary-disabled-background-color: lighten(@accent, 8%);
 @primary-disabled-border-color: @primary-disabled-text-color;
 @primary-disabled-gradient: @selected-gradient;
-@tooltip-texture: url('textures/highlight.png');
+@tooltip-texture: @texture;
 @sprite-image: url('@{image-folder}/sprite.png');
 @inverse-text-color: contrast(@normal-text-color);
 @select-background-color: @base;
@@ -173,7 +173,9 @@
 @theme-name: ~"default";
 
 @import "common/mixins.less";
-@import "mixins/all.less";
+// @import "mixins/all.less";
+@import "mixins/gradients.less";
+@import "mixins/border-radius.less";
 @import "themes/type.less";
 @import "themes/button.less";
 
