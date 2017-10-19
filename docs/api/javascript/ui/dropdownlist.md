@@ -1295,7 +1295,7 @@ Refresh the popup by rendering all items again.
 
 ### search
 
-Selects an item, which starts with the provided value.
+If the DropDownList filter is enabled, the method searches and filters the results available in the drop-down. If no filter is configured for the widget it selects the first item, which starts with the provided value.
 
 #### Parameters
 
