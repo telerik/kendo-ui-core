@@ -1,26 +1,26 @@
 ---
 title: Upgrading Projects
-page_title: Upgrading Projects | Telerik UI for ASP.NET MVC Visual Studio Integration
-description: "Learn how to upgrade a Telerik UI for ASP.NET MVC application."
+page_title: Upgrading Projects | UI for ASP.NET MVC Visual Studio Integration
+description: "Learn how to upgrade a Progress&reg; Telerik&reg; UI for ASP.NET MVC application."
 slug: projectwizardupgrade_visualstudio_aspnetmvc
 position: 7
 ---
 
 # Upgrading Projects
 
-This article demonstrates how to upgrade a Telerik UI for ASP.NET MVC application.
+This article demonstrates how to upgrade a Progress&reg; Telerik&reg; UI for ASP.NET MVC application.
 
 ## Getting Started
 
 ### The Basics
 
-The Upgrade Project Wizard upgrades existing Telerik UI for ASP.NET MVC applications.
+The Upgrade Project Wizard upgrades existing Progress&reg; Telerik&reg; UI for ASP.NET MVC applications.
 
-To open the wizard, click **Telerik** > **UI for ASP.NET MVC** > **Upgrade Wizard**.
+To open the wizard, click **Telerik** > **Telerik UI for ASP.NET MVC** > **Upgrade Wizard**.
 
 **Figure 1. Launch the Upgrade Wizard**
 
-![Choose projects](/vs-integration/images/upgrade_menu.png)
+![Choose projects](images/upgrade_menu.png)
 
 ### Files for Upgrade
 
@@ -28,11 +28,11 @@ The **Information Page** of the Upgrade Project Wizard describes the files and a
 
 **Figure 2. Information page**
 
-![Information page](/vs-integration/images/upgrade_warning.png)
+![Information page](images/upgrade_warning.png)
 
 ### Projects for Upgrade
 
-On the next page, the Wizard lists all projects from the solution that use Telerik UI for ASP.NET MVC. This enables you to choose the projects that will be updated and the version to which they will be upgraded.
+On the next page, the Wizard lists all projects from the solution that use Progress&reg; Telerik&reg; UI for ASP.NET MVC. This enables you to choose the projects that will be updated and the version to which they will be upgraded.
 
 It is recommended to upgrade all projects to the selected version. The Compatibility button will invoke the [Upgrade API Analyzer tool](http://docs.telerik.com/aspnet-mvc/vs-integration/upgrade-api-analyzer):
 
@@ -42,7 +42,7 @@ It is recommended to upgrade all projects to the selected version. The Compatibi
 
 **Figure 3. Choose projects and distribution version**
 
-![Choose projects and distribution version](/vs-integration/images/upgrade_version.png)
+![Choose projects and distribution version](images/upgrade_version.png)
 
 ### Project Resources for Upgrade
 
@@ -50,7 +50,7 @@ The **Upgrade Project Resources** page allows you to update the editor templates
 
 **Figure 4. Update Project Resources page**
 
-![Update Project Resources](/vs-integration/images/upgrade_settings.png)
+![Update Project Resources](images/upgrade_settings.png)
 
 ### Backup Creation
 
@@ -62,13 +62,13 @@ The **Create Backup** page provides the following options:
 
 **Figure 5. Create Backup page**
 
-![Create Backup](/vs-integration/images/upgrade_backup.png)
+![Create Backup](images/upgrade_backup.png)
 
 ## See Also
 
-* [Visual Studio Integration Overview]({% slug overview_visualstudio_aspnetmvc %})
+* [VS Integration Overview]({% slug overview_visualstudio_aspnetmvc %})
 * [Create Projects]({% slug newprojectwizards_visualstudio_aspnetmvc %})
 * [Configure Projects]({% slug projectwizardconfig_visualstudio_aspnetmvc %})
 * [Convert Projects]({% slug projectwizardcoversion_visualstudio_aspnetmvc %})
-* [Visual Studio Extensions Options]({% slug vsextensionsoptions_visualstudio_aspnetmvc %})
+* [VS Extensions Options]({% slug vsextensionsoptions_visualstudio_aspnetmvc %})
 * [Download New Versions]({% slug latestversionretrieval_visualstudio_aspnetmvc %})

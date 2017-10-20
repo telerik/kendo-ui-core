@@ -1,14 +1,14 @@
 ---
 title: Creating Projects
-page_title: Creating Projects | Visual Studio Integration
-description: "Learn how to create a new Telerik UI for ASP.NET Core application."
+page_title: Creating Projects | UI for ASP.NET Core Visual Studio Integration
+description: "Learn how to create a new Progress&reg; Telerik&reg; UI for ASP.NET Core application."
 slug: newprojectwizards_visualstudio_aspnetcore
 position: 2
 ---
 
 # Creating Projects
 
-This article demonstrates how to create a new Telerik UI for ASP.NET Core application.
+This article demonstrates how to create a new Progress&reg; Telerik&reg; UI for ASP.NET Core application.
 
 ## Getting Started
 
@@ -21,12 +21,12 @@ To start the **Create New Project Wizard**, follow either of the approaches belo
 **Approach 1**
 
 1. Go to the Telerik menu.
-2. Click **Telerik** > **UI for ASP.NET Core** > **Create New Telerik Project**.
+2. Click **Telerik** > **Telerik UI for ASP.NET Core** > **Create New Telerik Project**.
 
 **Approach 2**
 
 1. Click **File** > **New** > **Project**.
-2. Navigate to the Telerik ASP.NET Core project templates under **Telerik** > **Web**.
+2. Navigate to the Telerik ASP.NET MVC Core project templates under **Telerik** > **Web**.
 
 For convenience, the same project templates are located under the **Visual C#** > **Web** and **Visual C#** > **.NET Core** nodes.
 
@@ -57,5 +57,5 @@ As a result, the wizard:
 
 ## See Also
 
-* [Visual Studio Integration Overview]({% slug overview_visualstudio_aspnetcore %})
+* [VS Integration Overview]({% slug overview_visualstudio_aspnetcore %})
 * [Downloading New Versions]({% slug latestversionretrieval_visualstudio_aspnetcore %})
