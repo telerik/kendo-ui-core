@@ -5,7 +5,7 @@ type: how-to
 page_title: How to Show Different Currencies in the Grid | Kendo UI Grid
 slug: how-to-show-different-currencies-in-the-grid
 tags: grid, currencies
-ticketid: 1105869:
+ticketid: 1105869
 res_type: kb
 
 ---
