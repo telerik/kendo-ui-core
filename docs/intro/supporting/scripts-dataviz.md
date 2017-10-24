@@ -22,10 +22,7 @@ Below are listed the script files for the Kendo UI Charts widgets.&nbsp;&nbsp;
 | | kendo.drawing.js | |
 | | kendo.dataviz.core.js | |
 | | kendo.dataviz.themes.js | |
-| | kendo.dataviz.chart.js | Polar & Radar feature (optional) |
-| | kendo.dataviz.chart.polar.js | Polar & Radar feature (optional) |
-| | kendo.dataviz.chart.js | Funnel chart feature (optional) |
-| | kendo.dataviz.chart.funnel.js | Funnel chart feature (optional) |
+| | kendo.dataviz.chart.js | |
 | | kendo.pdf.js | PDF export feature (optional) |
 | | kendo.dataviz.chart.js | |
 | [Sparkline](http://demos.telerik.com/kendo-ui/sparklines/index) | jquery.js | |
