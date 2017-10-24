@@ -218,12 +218,10 @@ The following client-side events are supported in the server binding mode:
 
 - `Change`
 - `ColumnHide`
-- `ColumnLock`
 - `ColumnMenuInit`
 - `ColumnReorder`
 - `ColumnResize`
 - `ColumnShow`
-- `ColumnUnlock`
 - `DetailCollapse`
 - `DetailExpand`
 - `ExcelExport`
@@ -234,7 +232,8 @@ The following client-side events are supported in the server binding mode:
 
 > **Important**
 >
-> The other client-side events, which are related to data-binding and CRUD data operations, will not be raised when the Grid is configured for server binding.
+> * The other client-side events, which are related to data-binding and CRUD data operations, will not be raised when the Grid is configured for server binding.
+> * Locked columns are not supported. To support locked columns, use [Ajax binding]({% slug ajaxbinding_grid_aspnetmvc %}) instead.
 
 ## See Also
 

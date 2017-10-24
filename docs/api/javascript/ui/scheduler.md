@@ -7086,6 +7086,14 @@ The event handler function context (available via the `this` keyword) will be se
 
 #### Event Data
 
+##### e.start `Date`
+
+The final start date of the resized task.
+
+##### e.end `Date`
+
+The final end date of the resized task.
+
 ##### e.event `kendo.data.SchedulerEvent`
 
 The event which is being resized.
