@@ -1190,7 +1190,7 @@ var __meta__ = { // jshint ignore:line
                 that.element.append(that.overflowAnchor);
 
                 if (that.isMobile) {
-                    that.overflowAnchor.append('<span class="km-icon k-mi-more-v"></span>');
+                    that.overflowAnchor.append('<span class="km-icon km-more"></span>');
                     overflowContainer = actionSheetWrap(overflowContainer);
                 } else {
                     that.overflowAnchor.append('<span class="k-icon k-i-more-vertical"></span>');
