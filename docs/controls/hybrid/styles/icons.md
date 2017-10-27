@@ -446,7 +446,7 @@ Keep in mind that icons with Unicode codes from `\e0ca` to `\e0f0` are the origi
   text-align: center;
   color: #787878;
 }
-.button {
+.additional-icons .button {
     display: block;
     width: 48px;
     height: 48px;
@@ -458,7 +458,7 @@ Keep in mind that icons with Unicode codes from `\e0ca` to `\e0f0` are the origi
     border: 1px solid #ebecee;
     background-color: #f5f7f8;
 }
-.button:after
+.additional-icons .button:after
 {
     position: static;
     display: block;

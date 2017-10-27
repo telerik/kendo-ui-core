@@ -80,8 +80,7 @@ After changing your Telerik password, you need to reset your credentials in the 
 ###### Example
 
 ```
-NuGet Sources Update -Name "telerik.com " -Source "https://nuget.telerik.com/nuget" ^
-      -UserName "your login email" -Password "your new password"
+NuGet Sources Update -Name "telerik.com" -Source "https://nuget.telerik.com/nuget" -UserName "your login email" -Password "your new password"
 ``` 
 
 ## See Also

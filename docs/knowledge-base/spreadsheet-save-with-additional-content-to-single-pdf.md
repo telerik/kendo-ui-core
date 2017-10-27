@@ -150,7 +150,16 @@ In order to achieve the desired you could use the *Spreadsheet.Sheet.draw()* met
 				  group.children.unshift(header);
 				  group.options.set("pdf.margin", "1cm");
 				  
-				  group.append(spread);
+				  var length = spread.children.length;
+                                  if (length > 0) {
+	                            for (var i = 0; i < length; i ++) {
+		                      var currentChild = spread.children[0];
+                                      group.append(currentChild);
+                                    }
+                                  } else {
+                                    group.append(spread);
+                                  }
+				  
 				  return kendo.drawing.exportPDF(group);
 				}).done(function(data) {
 				  var d = new Date();
