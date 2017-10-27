@@ -586,6 +586,11 @@
 .k-i-page-portrait::before { content: "\e906"; }
 .k-i-page-landscape::before { content: "\e922"; }
 
-//RTL overrides
-.k-rtl .k-i-collapse:before { content: "\e002"; }
-.k-rtl .k-i-expand:before { content: "\e007"; }
+
+// RTL icons
+.k-rtl .k-i-indent-increase,
+.k-rtl .k-i-indent-decrease,
+.k-rtl .k-i-expand,
+.k-rtl .k-i-collapse {
+    transform: scaleX(-1);
+}
