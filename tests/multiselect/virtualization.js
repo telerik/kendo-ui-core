@@ -355,7 +355,7 @@
 
         jasmine.clock().tick(300);
 
-        equal(callsAfterFilter.length, 3);
+        equal(callsAfterFilter.length, 5);
         equal(callsAfterFilter[0].pageSize, multiselect.dataSource.options.pageSize);
         equal(callsAfterFilter[0].skip, 0);
         equal(callsAfterFilter[1].skip, 80);

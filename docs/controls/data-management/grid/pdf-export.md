@@ -309,7 +309,7 @@ The following example demonstrates how to post files to the server.
 
 The default fonts in PDF files do not support Unicode. To support international characters we need to embed an external font.
 
-Kendo UI ships the [Deja Vu font family](http://dejavu-fonts.org/wiki/Main_Page) as part of its distributions. For more details on this, see the article on [custom fonts and PDF]({% slug drawingofhtmlelements_drawingapi %}#configuration-Custom).
+Kendo UI ships the [Deja Vu font family](https://dejavu-fonts.github.io) as part of its distributions. For more details on this, see the article on [custom fonts and PDF]({% slug drawingofhtmlelements_drawingapi %}#configuration-Custom).
 
 The following example demonstrates how to handle custom fonts.
 

@@ -668,11 +668,14 @@ var __meta__ = { // jshint ignore:line
         },
 
         dataItemByIndex: function(index) {
-            var take = this.itemCount;
-            var skip = this._getSkip(index, take);
-            var view = this._getRange(skip, take);
+            var that = this;
+            var take = that.itemCount;
+            var skip = that._getSkip(index, take);
 
-            return this._findDataItem(view, [index - skip]);
+            that.mute(function() {
+                that.dataSource.range(skip, take);
+            });
+            return that._findDataItem(that.dataSource.view(), [index - skip]);
         },
 
         selectedDataItems: function() {
