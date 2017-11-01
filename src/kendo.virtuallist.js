@@ -672,9 +672,15 @@ var __meta__ = { // jshint ignore:line
             var take = that.itemCount;
             var skip = that._getSkip(index, take);
 
+            //should not return item if data is not loaded
+            if (!that._getRange(skip, take).length) {
+                return null;
+            }
+
             that.mute(function() {
                 that.dataSource.range(skip, take);
             });
+
             return that._findDataItem(that.dataSource.view(), [index - skip]);
         },
 
