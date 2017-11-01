@@ -20,7 +20,7 @@ Kendo UI achieves high performance templates through the use of several techniqu
 
 1. John Resig, creator of jQuery, has one of the best core micro-templating philosophies in his aptly titled [JavaScript Micro-Templating](http://ejohn.org/blog/javascript-micro-templating/) article. This is the starting point and baseline for Kendo UI Templates. If Kendo UI can meet or exceed John's speed, it meets the goal for fast templating.
 2. While John uses `array` Push and Join functions to build his templates, Kendo UI discovered that simple string concatenation (`+=`) performs even faster in many browsers, especially Chrome.
-3. The biggest speed booster is that eliminating the [JavaScript `with` block](https://developer.mozilla.org/index.php?title=En/Core_JavaScript_1.5_Reference/Statements/With) inside the template builder delivers a huge performance improvement. Some templates prefer the scope-helping `with` block, so Kendo UI templates use `with` blocking by default, but it can be easily disabled. When you do not need it, you can realize the full speed gains in your template rendering.
+3. The biggest speed booster is that eliminating the [JavaScript `with` block](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/with) inside the template builder delivers a huge performance improvement. Some templates prefer the scope-helping `with` block, so Kendo UI templates use `with` blocking by default, but it can be easily disabled. When you do not need it, you can realize the full speed gains in your template rendering.
 
 ## Comparison
 
@@ -70,7 +70,7 @@ $("#results").html(window.kendouiTemplate(sharedVariables));
 
 `with` JavaScript keyword is used to extend the scope chain for a statement. Anything inside a `with` block will use the context defined by `with`, thus saving repetitive scope code. It is generally considered to be a feature of JavaScript that should be avoided.
 
-Learn more about `with` and its pros and cons on the [Mozilla Developer Network](https://developer.mozilla.org/index.php?title=En/Core_JavaScript_1.5_Reference/Statements/With).
+Learn more about `with` and its pros and cons on the [Mozilla Developer Network](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/with).
 
 For Kendo UI Templates, disabling `with` can impact the way you reference the data used in your template.
 

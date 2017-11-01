@@ -1,4 +1,9 @@
 $(document).ready(function () {
+
+    var Feedback = {};
+
+    var $window = $(window);
+
     var cookieVariablesNames = ['feedbackSubmitted', 'path', 'uuid'];
     var defaultFormValues = {
         email: "",
@@ -73,18 +78,11 @@ $(document).ready(function () {
         }
     };
 
-    var checkIfYesNoSubmitted = function () {
-        //If cookie for feedback is set hide the buttons
-        if (getCookieByName("yesNoFeedback")) {
-            toggleFeedbackButtons(false);
-
-            return true;
-        } else {
-            toggleFeedbackButtons(true);
-
-            return false;
-        }
-    };
+    if (getCookieByName("yesNoFeedback")) {
+        toggleFeedbackButtons(false);
+    } else {
+        toggleFeedbackButtons(true);
+    }
 
     //FORM
     //Init the form popup window
@@ -158,7 +156,7 @@ $(document).ready(function () {
     }).data("kendoValidator");
 
     // text validation is disabled for the new design of the form. In order to enable it
-    // it must be reworked!!! 
+    // it must be reworked!!!
     var textAreaValidator = function (selector, formModelKey) {
         return $(selector).kendoValidator({
             validateOnBlur: false,
@@ -255,67 +253,139 @@ $(document).ready(function () {
     $("#yesButton").click(function () {
         setCookieByName("yesNoFeedback", "Yes");
         toggleFeedbackButtons(false);
-        updateNavigationOffset();
+        Feedback.closeFeedback();
+        Feedback.adjustNavigationPosition();
     });
     $("#noButton").click(function () {
         setCookieByName("yesNoFeedback", "No");
         toggleFeedbackButtons(false);
-        updateNavigationOffset();
+        Feedback.closeFeedback();
+        Feedback.adjustNavigationPosition();
         win.center().open();
     });
     $("#additional-feedback-button").click(function () {
         win.center().open();
     });
 
-    var delay = true;
-    var executing = false;
-    function updateNavigationOffset() {
-        var footer = $("#feedback-section").height() + $("footer").height() + 40
-        var windowHeight = $(window).height();
-        $("#page-article").css("min-height", windowHeight - 121 - footer)
-        var top = $("#page-inner-content").height() + 119 - footer;
-        var scroll = $(window).scrollTop() + windowHeight;
-        var bottom = 0;
-        if (!window.matchMedia('(max-width: 1200px)').matches) {
-            bottom = Math.max(0, scroll - top);
-        }
 
-        $("#page-nav").css("bottom", bottom);
-        if (!getCookieByName("yesNoFeedback") && !getCookieByName("yesNoFeedbackClosed") && scroll - top < 56) {
-            if (!executing) {
-                if (delay) {
-                    executing = true;
-                    setTimeout(function () {
-                        executing = false;
-                        delay = false;
-                        updateNavigationOffset();
-                    }, 10000);
-                }
-                else
-                    $("#feedback-section").addClass("fixed");
-                $("#feedback-section-dummy").show();
-            }
-        }
-        else {
-            $("#feedback-section").removeClass("fixed");
-            $("#feedback-section-dummy").hide();
-        }
+    var windowHeight = $window.height();
+    var headerHeight = $(".TK-Hat").outerHeight() + $("#page-header").outerHeight();
+    var footerHeight = $("#feedback-section").outerHeight() + $("footer").outerHeight();
+    var articleHeight = windowHeight - (headerHeight + footerHeight);
+    var feedbackOffsetTop = document.body.scrollHeight - footerHeight;
+    var shouldOverlayFeedback = !getCookieByName("yesNoFeedback") && !getCookieByName("yesNoFeedbackClosed");
+    var showingFeedbackBar = false;
+    var scrollFold = $window.scrollTop() + windowHeight;
+    var feedbackPinned = false;
+
+    function updateVariables() {
+        windowHeight = $window.height();
+        headerHeight = $(".TK-Hat").outerHeight() + $("#page-header").outerHeight();
+        footerHeight = $("#feedback-section").outerHeight() + $("footer").outerHeight();
+        articleHeight = windowHeight - (headerHeight + footerHeight);
+        feedbackOffsetTop = document.body.scrollHeight - footerHeight;
+        scrollFold = $window.scrollTop() + windowHeight;
     }
 
-    $(window).scroll(function () {
-        updateNavigationOffset();
+    Feedback = $.extend(Feedback, {
+
+        init: function() {
+
+            Feedback._events();
+
+            Feedback.adjustArticleHeight();
+            Feedback.adjustNavigationPosition();
+
+            if (shouldOverlayFeedback) {
+
+                showingFeedbackBar = true;
+
+                window.setTimeout(function() {
+                    showingFeedbackBar = false;
+                    Feedback.adjustFeedbackPoistion();
+                    Feedback.adjustNavigationPosition();
+                }, 10000);
+            }
+
+        },
+
+
+        // #region events
+        _events: function() {
+            $window.scroll(Feedback._window_scroll);
+            $window.resize(Feedback._window_resize);
+            $("#close-button").click(Feedback._button_click);
+        },
+        _window_scroll: function() {
+            updateVariables();
+
+            scrollFold = $window.scrollTop() + windowHeight;
+
+            Feedback.adjustFeedbackPoistion();
+            Feedback.adjustNavigationPosition();
+        },
+        _window_resize: function() {
+            updateVariables();
+
+            Feedback.adjustArticleHeight();
+            Feedback.adjustFeedbackPoistion();
+            Feedback.adjustNavigationPosition();
+        },
+        _button_click: function() {
+            Feedback.closeFeedback();
+            Feedback.adjustNavigationPosition();
+        },
+        // #endregion
+
+
+        // #region adjusters
+        adjustNavigationPosition: function Feedback_adjustNavigationPosition() {
+            var bottom = 0;
+
+            if (!window.matchMedia('(max-width: 1200px)').matches) {
+                bottom = Math.max(feedbackPinned ? $("#feedback-section").outerHeight() : 0, scrollFold - feedbackOffsetTop );
+            }
+
+            $("#page-nav").css("bottom", bottom);
+        },
+        adjustArticleHeight: function Feedback_adjustArticleHeight() {
+            $("#page-article").css("min-height", articleHeight);
+        },
+        adjustFeedbackPoistion: function Feedback_adjustFeedbackPosition() {
+            if (!shouldOverlayFeedback || showingFeedbackBar) {
+                return;
+            }
+
+            if (scrollFold - $("#feedback-section").outerHeight() < feedbackOffsetTop) {
+                Feedback.pinFeedback();
+            }
+            else {
+                Feedback.unpinFeedback();
+            }
+        },
+        // #endregion
+
+
+        // #region feedback bar
+        pinFeedback: function Feedback_pinFeedback() {
+            feedbackPinned = true;
+            $("#feedback-section").addClass("fixed");
+            $("#feedback-section-dummy").show();
+        },
+        unpinFeedback: function Feedback_pinFeedback() {
+            feedbackPinned = false;
+            $("#feedback-section").removeClass("fixed");
+            $("#feedback-section-dummy").hide();
+        },
+        closeFeedback: function Feedback_pinFeedback() {
+            shouldOverlayFeedback = false;
+            setCookieByName("yesNoFeedbackClosed");
+            Feedback.unpinFeedback();
+        }
+        // #endregion
+
     });
 
-    $(window).resize(function () {
-        updateNavigationOffset();
-    });
+    Feedback.init();
 
-    $("#close-button").click(function () {
-        setCookieByName("yesNoFeedbackClosed");
-        updateNavigationOffset();
-    });
-
-    checkIfYesNoSubmitted();
-    updateNavigationOffset();
 });
-
