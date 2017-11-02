@@ -8426,7 +8426,7 @@ The widget instance which fired the event.
 
 ### cellClose
 
-Fired when "incell" edit mode is used and the cell is going to be closed. The event is triggerd after saving or canceling the chages, but before the cell is closed.
+Fired when "incell" edit mode is used and the cell is going to be closed. The event is triggerd after saving or canceling the changes, but before the cell is closed.
 
 The event handler function context (available via the `this` keyword) will be set to the widget instance.
 
