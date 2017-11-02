@@ -173,6 +173,7 @@ var __meta__ = { // jshint ignore:line
             this._state = "";
             this._dataSource();
 
+            this.persistTagList = false;
             this.listView.setDataSource(this.dataSource);
 
             if (this.options.autoBind) {

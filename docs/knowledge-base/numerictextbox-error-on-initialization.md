@@ -1,6 +1,6 @@
 ---
 title: NumericTextBox Throws Error on Initialization
-description: "NumericTextBox throws а "Cannot read property '_move' of undefined" error on initialization."
+description: "NumericTextBox throws а *Cannot read property '_move' of undefined* error on initialization."
 type: troubleshooting
 page_title: Error Message When Creating NumericTextBox | Kendo UI for jQuery
 slug: numerictextbox-error-on-initialization
