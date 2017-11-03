@@ -1,14 +1,15 @@
 ---
-title: How to Refresh Particular Row Without Rendering the Entire Grid
-description: How to render the content of particular row when manually changing its values, without refreshing the entire Grid
+title: Refresh Particular Rows without Rendering the Entire Grid
+description: An example on how to render the content of a particular Kendo UI Grid row when manually changing its values and without refreshing the entire Grid.
 type: how-to
-page_title: How to refresh the content of a row | Kendo UI Grid
+page_title: Refresh the Content of a Row Only | Kendo UI Grid
 slug: grid-update-particular-row-without-refresh
 tags: grid, row, update, render
 res_type: kb
 ---
 
 ## Environment
+
 <table>
  <tr>
   <td>Product</td>
@@ -22,15 +23,15 @@ res_type: kb
 
 ## Description
 
-How can I refresh the HTML of Grid record to apply the manual changes, but without refreshing the entire Grid?
+How can I refresh the HTML of Grid record to apply the manual changes but avoid refreshing the entire Grid?
 
 ## Solution
 
-If the changes are made to the dataItem without using its set method, although that the item will contain the new values, those values will not be applied to the HTML. In order to appy those changes we will have to traverse all cells and manually populate the new content:
+If you apply changes to the `dataItem` without using its `set` method, although the item will contain the new values, these values will not be applied to the HTML. To apply the changes, traverse all cells and manually populate the new content.
 
-#### Example
+
 ```html
-<input type='button' value='Change first cell value' onclick='changeFirstCellValue()' /> 
+<input type='button' value='Change first cell value' onclick='changeFirstCellValue()' />
 <div id="grid"></div>
 <script>
   function changeFirstCellValue(){
@@ -41,7 +42,7 @@ If the changes are made to the dataItem without using its set method, although t
     dataItem.dirty = true;
     kendoFastReDrawRow(grid, firstRow);
   }
-  
+
 $("#grid").kendoGrid({
     selectable: "multiple cell",
     allowCopy: true,
@@ -56,7 +57,7 @@ $("#grid").kendoGrid({
         { productName: "Bread", category: "Food" }
     ]
 });
-  
+
   function kendoFastReDrawRow(grid, row) {
     var dataItem = grid.dataItem(row);
 

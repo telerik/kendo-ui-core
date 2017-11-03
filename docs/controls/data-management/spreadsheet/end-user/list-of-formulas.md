@@ -8,7 +8,7 @@ position: 2
 
 # List of Formulas and Functions
 
-The following table provides a list of the formulas and functions the Spreadsheet supports. 
+The following table provides a list of the formulas and functions the Spreadsheet supports.
 
 | Formulas and functions	  | Description				                                    
 | :--- 						          | :---						                                    
@@ -271,7 +271,7 @@ For more information on how to create formulas and what their syntax is, see the
 
 ## Array Formulas
 
-Similar to Excel, the Kendo UI Spreadsheet widget supports [array formulas](https://support.office.com/en-us/article/Guidelines-and-examples-of-array-formulas-7d94a64e-3ff3-4686-9372-ecfd5caa57c7?ui=en-US&rs=en-US&ad=US), which return a matrix of values.  They must be entered like in Excel, by pre-selecting the target range and pressing Ctrl+Shift+Enter to save the formula.
+Similar to Excel, the Kendo UI Spreadsheet supports [array formulas](https://support.office.com/en-us/article/Guidelines-and-examples-of-array-formulas-7d94a64e-3ff3-4686-9372-ecfd5caa57c7?ui=en-US&rs=en-US&ad=US) which return a matrix of values. You have to enter them in the same way as in Excel&mdash;by pre-selecting the target range and pressing `Ctrl`+`Shift`+`Enter` to save the formula.
 
 ## See Also
 

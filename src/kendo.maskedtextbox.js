@@ -385,7 +385,7 @@ var __meta__ = { // jshint ignore:line
                 if(type === "mouseup" && that.__pasting) {
                     return;
                 }
-                if (input.value !== value) {
+                if (input.value && input.value !== value) {
                     that.inputChange(that.__backward);
                 }
             });

@@ -482,7 +482,11 @@ The following example demonstrates how to use a function that doubles each numbe
         [ "m", "matrix" ]
     ]);
 
-To use this formula, we would select a range, for example `A1:B2`, press F12 and type `=doublematrix(C3:D4)`, and press Ctrl+Shift+Enter (same as in Excel).  Now, cells A1:B2 will get the doubles of values from C3:D4.
+To use this formula:
+
+1. Select a range&mdash;for example `A1:B2`.
+1. Press `F12` and type `=doublematrix(C3:D4)`.
+1. Press `Ctrl`+`Shift`+`Enter` (same as in Excel). As a result, cells `A1:B2` get the doubles of the values from `C3:D4`.
 
 The following table lists some of the methods and properties the `Matrix` objects provide.
 

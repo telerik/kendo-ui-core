@@ -1,16 +1,15 @@
 ---
-title: Highlight Matched Text in the ComboBox Items
-description: An example of how highlight the text in the ComboBox items that matches the search criteria
+title: Highlight Matched Text from ComboBox Items
+description: An example on how to highlight the text in the Kendo UI ComboBox items, which matches the search criteria.
 type: how-to
-page_title: Highlight the ComboBox Items Text which matches the search text | Kendo UI ComboBox
+page_title: Highlight the Item Text Which Matches Search Criteria | Kendo UI ComboBox
 slug: combobox-highlight-matched-text
-position: 0
 tags: kendo, kendo-ui, combobox, search, text, highlight
 res_type: kb
-
 ---
 
 ## Environment
+
 <table>
  <tr>
   <td>Product</td>
@@ -25,9 +24,9 @@ How the matched text in the ComboBox items could be highlighted?
 
 ## Solution
 
-Implement the *dataBound* event handler for the widget as below:
+Implement the `dataBound` event handler for the widget.
 
-````html
+```html
 <style>
   .highlight {
     background-color: yellow;
@@ -42,25 +41,25 @@ Implement the *dataBound* event handler for the widget as below:
     var combo = e.sender;
     var items = combo.items();
     var inputText = $('.k-input').val().toLowerCase();
-    
+
 	for (var i = 0; i < items.length; i += 1) {
       var item = $(items[i]);
       var itemHtml = item.html();
       var startIndex = itemHtml.toLowerCase().indexOf(inputText);
       var endIndex = startIndex + inputText.length;
-      
+
 	  var outputHtml = [
-		itemHtml.slice(0, startIndex), 
+		itemHtml.slice(0, startIndex),
 		'<span class="highlight">',
 		itemHtml.slice(startIndex, endIndex),
 		'</span>',
 		itemHtml.slice(endIndex)
 	  ].join('');
-      
+
 	  item.html(outputHtml);
     }
   }
-  
+
   $(document).ready(function() {
     $("#products").kendoComboBox({
       placeholder: "Select product",
@@ -81,10 +80,8 @@ Implement the *dataBound* event handler for the widget as below:
     });
   });
 </script>
-
-````
+```
 
 ## See Also
 
-* [Kendo UI ComboBox JavaScript API Reference](https://docs.telerik.com/kendo-ui/api/javascript/ui/combobox)
-
+* [API Reference of the ComboBox](https://docs.telerik.com/kendo-ui/api/javascript/ui/combobox)

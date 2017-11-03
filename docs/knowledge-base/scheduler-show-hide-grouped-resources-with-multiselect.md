@@ -1,14 +1,15 @@
 ---
-title: Scheduler Show/Hide Grouped Resources with MultiSelect
-description: An example on how to filter grouped resources in Kendo UI Scheduler.
+title: Show or Hide Grouped Resources with MultiSelect in Scheduler
+description: An example on how to filter grouped resources in a Kendo UI Scheduler.
 type: how-to
-page_title: Show/Hide Grouped Resource in Scheduler | Kendo UI Scheduler
+page_title: Show or Hide Grouped Resources | Kendo UI Scheduler
 slug: show-hide-grouped-resources-with-multiselect-in-scheduler
 tags: show, hide, resources, grouped, scheduler, multiselect
 res_type: kb
 ---
 
 ## Environment
+
 <table>
  <tr>
   <td>Product</td>
@@ -18,12 +19,12 @@ res_type: kb
 
 ## Description
 
-How to filter Scheduler resources and show/hide filtered tasks in the DOM?
+How to filter the Kendo UI Scheduler resources and show or hide the filtered tasks in the DOM?
 
 ## Solution
 
-* Use `change` event of the MultiSelect widget to define which of the loaded scheduler resources are to be filtered and then hidden or shown.
-* Use `hideFilteredRows()` to hide or show the rows from the Scheduler view that correspond to the deselected or selected MultiSelect items.
+1. Use the `change` event of the MultiSelect widget to define which of the loaded Scheduler resources are to be, first, filtered and, then, hidden or shown.
+1. Use the `hideFilteredRows()` method to hide or show the rows from the Scheduler view which correspond to the deselected or selected MultiSelect items.
 
 ```html
 <div id="example">

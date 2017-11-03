@@ -1,43 +1,38 @@
 ---
-title: Grid Excel Export Master and Details in Separate Sheets
-description: How to export grid hierarchy in two separate sheets in excel
+title: Export Master and Detail Grids to Excel in Separate Sheets
+description: An example on how to export hierarchical Kendo UI Grids in separate sheets in Excel.
 type: how-to
-page_title: Grid - Export Master and Details in Separate Sheets
+page_title: Excel Export Master and Detail Grids in Separate Sheets | Kendo UI Grid
 slug: grid-excel-export-hierarchy-master-and-detail-separate-sheets
-position:
 tags: grid,kendo,excel,export,hierarchy,detail,separate,sheets
-teampulseid:
 ticketid: 1079757
-pitsid:
 res_type: kb
-
 ---
 
 ## Environment
+
 <table>
  <tr>
   <td>Product</td>
-  <td>Grid for Progress® Kendo UI®</td>
+  <td>Progress Kendo UI Grid</td>
+  <td>Progress Kendo UI Excel Export</td>
  </tr>
 </table>
 
 
 ## Description
 
-I am tying to implement excel export of a master detail grid based on the url (http://docs.telerik.com/kendo-ui/controls/data-management/grid/how-to/excel/detail-grid-export. I followed your example and was able to implement successfully. But users does not like the way the data is exported for each summary row the details are being injected. It prevents them to instantly do the pivots and do detailed analysis. They propose to have separate sheets for rows of master grid and all detailed records of each row in another sheet.
+I implemented the Excel export of a master-detail Grid based on the URL by following [this example](http://docs.telerik.com/kendo-ui/controls/data-management/grid/how-to/excel/detail-grid-export). However, users want me to change the way the data is exported for each summary row and how the details are injected because this behavior prevents them from instantly checking the pivots and making a detailed analysis.
+
+How can I have separate sheets for the rows of the master Grid and for all detailed records of each row?
 
 ## Solution
-  
-- Make a single call to read all the data  
-  
-- obtain only the sheet configuration of the generated result and assign it to a variable  
-  
-- obtain only the sheet from the event data of the **excelExpot **event (e.workbook is the master grid workbook by default) and assign it to a variable  
-  
-- create a new workbook and pass the sheets in the sheet configuration property as array with the variables from 2. and 3.  
-  
-The runnable demo is available at:  
-  
+
+1. Make a single call to read all the data.  
+1. Obtain only the sheet configuration of the generated result and assign it to a variable.
+1. Obtain only the sheet from the event data of the `excelExpot` event (by default, `e.workbook` is the master Grid workbook) and assign it to a variable.  
+1. Create a new workbook and pass the sheets in the `sheet` configuration property as an array with the variables from the two previous steps.  
+
 ```html
 <div id="grid"></div>
     <script>
@@ -87,19 +82,19 @@ The runnable demo is available at:
             // get the export results
             var detailExports = $.makeArray(arguments);
             var sheets = [workbook.sheets[0], detailExports[0].sheet ];
-            
+
             //add sheets name
             sheets[0].title = "Employees";            
             sheets[1].title = "Orders";
-            
+
             var headerColumnsCount = sheets[1].rows[0].cells.length - 1;
-            
+
             // add filter for second sheet
             sheets[1].filter = {
             	from: 0,
               to: headerColumnsCount
             };
-            
+
             // save the workbook            
            kendo.saveAs({
               dataURI: new kendo.ooxml.Workbook({
@@ -136,7 +131,7 @@ The runnable demo is available at:
           }, {
             field: "ShipAddress"
           },{
-            field: "ShipName" 
+            field: "ShipName"
           }],
           dataSource: dataSource
         });
@@ -174,11 +169,9 @@ The runnable demo is available at:
       }
     </script>
 ```
-  
-Resources:   
-  
-[Export of all data](http://docs.telerik.com/kendo-ui/controls/data-management/grid/excel-export#excel-export-of-all-data)
-  
-[Sheets filter API](http://docs.telerik.com/kendo-ui/api/javascript/ooxml/workbook#configuration-sheets.filter)
-  
-[Sheets columns width API](http://docs.telerik.com/kendo-ui/api/javascript/ooxml/workbook#configuration-sheets.columns.width)
+
+## See Also
+
+* [Exporting All Data](http://docs.telerik.com/kendo-ui/controls/data-management/grid/excel-export#excel-export-of-all-data)
+* [sheets.filter API](http://docs.telerik.com/kendo-ui/api/javascript/ooxml/workbook#configuration-sheets.filter)
+* [sheets.columns.width API](http://docs.telerik.com/kendo-ui/api/javascript/ooxml/workbook#configuration-sheets.columns.width)

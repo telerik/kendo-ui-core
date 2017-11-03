@@ -1,8 +1,8 @@
 ---
-title: How to Hide Expand Icon for the Detail Template in Grid Conditionally
-description: Example for hiding the expand icon for the detail template in Kendo UI Grid based on a model value
+title: Conditionally Hide Expand Icons for the Detail Template in Grid
+description: An example on how to hide the expand icon for the detail template in a Kendo UI Grid based on a model value.
 type: how-to
-page_title: How to hide the expand icon for the detail template in Kendo UI Grid based on a model value 
+page_title: Hide the Expand Icon for the Detail Template Based on a Model Value | Kendo UI Grid
 slug: grid-hide-expand-icon-based-on-field-value
 tags: grid, expand, collapse, hierarchy, detailTemplate
 res_type: kb
@@ -23,13 +23,14 @@ res_type: kb
 
 ## Description
 
-How can I hide the expand/collapse icon for the detail template in Kendo UI Grid, based on a hasChildren value that I have in the model?
+How can I hide the expand/collapse icon for the detail template in a Kendo UI Grid based on the `hasChildren` value which I have in the model?
 
 ## Solution
 
-You can traverse the rows of the Grid within the __dataBound__ event and hide the icon conditionally. The data item could be retrieved from the TR element by the __dataItem__ method of the Grid:
+1. Traverse the rows of the Grid within the `dataBound` event.
+1. Conditionally hide the icon.
+1. To retrieve the data item, access the `<tr>` element by the `dataItem` method of the Grid.
 
-#### Example
 ```html
        <div id="example">
             <div id="grid"></div>
@@ -58,7 +59,7 @@ You can traverse the rows of the Grid within the __dataBound__ event and hide th
                               if(!dataItem.hasChildren){
                                 row.find(".k-hierarchy-cell").html("");
                               }
-                              
+
                             })
                         },
                         columns: [
@@ -72,10 +73,10 @@ You can traverse the rows of the Grid within the __dataBound__ event and hide th
                 });
 
                 function detailInit(e) {
-                    
+
                 }
             </script>
-           
+
         </div>
 
 ```

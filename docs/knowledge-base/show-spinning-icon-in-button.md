@@ -1,6 +1,6 @@
 ---
-title: Show spinning icon in Button
-description: An example on how to add spinning icon to the Kendo UI Button.
+title: Show Spinning Icon in Button
+description: An example on how to add a spinning icon to the Kendo UI Button.
 type: how-to
 page_title: Show Spinning Icon | Kendo UI Button
 slug: show-spinning-icon-in-button
@@ -9,6 +9,7 @@ res_type: kb
 ---
 
 ## Environment
+
 <table>
  <tr>
   <td>Product</td>
@@ -18,13 +19,13 @@ res_type: kb
 
 ## Description
 
-How can I sort add spinning icon to the Kendo UI Button?
+How can I add a spinning icon to the Kendo UI Button?
 
 ## Solution
 
-* Use `icon` option of the Button to define a name of an existing icon in the Kendo UI theme sprite. This will apply the icon as a background image of a `span` element inside the Button.
-
-* Define a spinnning keyframe and apply the animation on the .k-icon class.
+1. Use the `icon` option of the Button to define a name of an existing icon in the Kendo UI theme sprite. As a result, the icon is applied as a background image of a `span` element inside the Button.
+1. Define a spinning keyframe.
+1. Apply the animation on the `.k-icon` class.
 
 ```html
 <div id="example">

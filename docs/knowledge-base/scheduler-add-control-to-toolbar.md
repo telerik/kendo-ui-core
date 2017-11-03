@@ -1,20 +1,20 @@
 ---
-title: How to Add a Control to the Scheduler Toolbar.
-description: Example of how to add a DropDownList or other control to the Scheduler toolbar.
+title: Add a Control to the Toolbar of the Scheduler
+description: An example on how to add a DropDownList or other control to the toolbar of the Kendo UI Scheduler.
 type: how-to
-page_title: How to Add a Control to the Scheduler Toolbar.
+page_title: Add a Control to the Toolbar | Kendo UI Scheduler
 slug: scheduler-add-control-to-toolbar
 tags: add, control, scheduler, toolbar, dropdownlist, template
 ticketid: 1133588
 res_type: kb
-
 ---
 
 ## Environment
+
 <table>
  <tr>
   <td>Product</td>
-  <td>Scheduler for Progress® Kendo UI®</td>
+  <td>Progress Kendo UI Scheduler</td>
  </tr>
  <tr>
   <td>Operating System</td>
@@ -29,17 +29,19 @@ res_type: kb
 
 ## Description
 
-I'm working on a Scheduler and would like to add a DropDownList to its toolbar, but unlike the Grid, there is no `toolbar.template` property in the API.
+I want to add a DropDownList to the toolbar of the Scheduler, but unlike the Grid, it does not feature a `toolbar.template` API property.
+
+How can I add a specific control to the Scheduler toolbar?
 
 ## Solution
 
-Although there is no property in the API that allows for a template to be added in the Toolbar, we can implement this functionality by using jQuery:
+To implement the scenario, use jQuery.
 
-````html
+```html
 <div id="scheduler"></div>
-  
+
 <script>
-  var scheduler = $("#scheduler").kendoScheduler({ 
+  var scheduler = $("#scheduler").kendoScheduler({
     date: new Date("2017/6/6"),
     dataSource: [
       {
@@ -50,10 +52,10 @@ Although there is no property in the API that allows for a template to be added 
       }
     ]
   }).getKendoScheduler();
-  
+
   var dropDown = $("<input id='products'/>");
   $(scheduler.toolbar).prepend(dropDown);
-  
+
   $("#products").kendoDropDownList({
     dataTextField: "ProductName",
     dataValueField: "ProductID",
@@ -67,9 +69,8 @@ Although there is no property in the API that allows for a template to be added 
     }
   });  
 </script>
-````
-
+```
 
 ## See Also
 
-* [Kendo UI Scheduler API](https://docs.telerik.com/kendo-ui/api/javascript/ui/scheduler).
+* [API Reference of the Scheduler](https://docs.telerik.com/kendo-ui/api/javascript/ui/scheduler).

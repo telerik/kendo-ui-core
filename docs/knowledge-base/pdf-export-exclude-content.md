@@ -1,6 +1,6 @@
 ---
 title: Exclude Content from PDF Export with Drawing API
-description: An example on how to exclude specific content from export with Kendo UI Drawing API.
+description: An example on how to exclude specific content while exporting to PDF by using the Kendo UI Drawing API.
 type: how-to
 page_title: Prevent the Export of Content to PDF | Kendo UI Drawing API
 slug: pdf-export-exclude-content
@@ -36,7 +36,7 @@ How can I exclude elements within the exported content and prevent them from bei
 
 ## Solution
 
-Elements that you do not want to be exported can be hidden just before the export begins through CSS and shown again after the export finishes. This is possible by adding the special `k-pdf-export` class to the selector of a CSS rule that hides the specified elements. The special class will be automatically added to the elements just before the start of the export process and removed when it finishes. Hiding the elements for the duration of the export will result in them being excluded from the exported PDF. 
+Elements that you do not want to be exported can be hidden just before the export begins by using CSS and then shown again after the export finishes. This is possible by adding the special `k-pdf-export` class to the selector of a CSS rule that hides the specified elements. The special class is automatically added to the elements just before the start of the export process and removed when it finishes. Hiding the elements for the duration of the export excludes them from the exported PDF.
 
 ```html
 	<div id="example">

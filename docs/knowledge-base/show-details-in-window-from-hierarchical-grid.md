@@ -1,20 +1,21 @@
 ---
-title: Kendo UI Window in Hierarchical Grid
-description: An example on how to using Window in a Hierarchical Grid
+title: Display Details of Hierarchical Grid in Window
+description: An example on how to use a window to display details of a hierarchical Grid.
 type: how-to
-page_title: How to Show Details in Window From Hierarchical Grid | Kendo UI Grid
-slug: how-to-show-details-in-window-from-hierarchical-grid
+page_title: Show Details of Hierarchical Grids in a Window | Kendo UI Grid
+slug: show-details-in-window-from-hierarchical-grid
 tags: grid, hierarchical, window, details
+previous_url: /knowledge-base/how-to-show-details-in-window-from-hierarchical-grid
 ticketid: 1132144
 res_type: kb
-
 ---
 
 ## Environment
+
 <table>
  <tr>
   <td>Product</td>
-  <td>Grid for Progress® Kendo UI®</td>
+  <td>Progress Kendo UI Grid</td>
  </tr>
  <tr>
   <td>Operating System</td>
@@ -35,14 +36,16 @@ res_type: kb
 
 
 ## Description
-I have a scenario, where I want to show or open a Kendo window from click of a link in Nested or Child Template of the Grid. I couldn't get it to working because I am unable to find the object of link to open Kendo Window.
+
+I want to show or open a Kendo UI Window by clicking a link in a nested or child template of the Grid but I cannot find the object of the link to open the Kendo UI Window.
+
+How can I show the details of a hierarchical in a Kendo UI Window?
 
 ## Solution
-  
-Please check an example demonstrating the described scenario.
-The main points are to have a custom command which will change the content on the Window based on the current dataItem associated with the clicked row.
 
-````html
+Create a custom command which changes the content of the Window based on the current `dataItem` that is associated with the clicked row.
+
+```html
 <div id="example">
       <div id="grid"></div>
       <div id="details"></div>
@@ -174,4 +177,4 @@ The main points are to have a custom command which will change the content on th
         display: inline;
       }
     </style>
-````
+```

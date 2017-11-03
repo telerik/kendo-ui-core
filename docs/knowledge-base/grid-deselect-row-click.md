@@ -1,18 +1,19 @@
 ---
-title: Deselect row on click
-description: Example on how to deselect rows in Kendo Grid
+title: Deselect Grid Rows on Click
+description: An example on how to deselect rows on a click in a Kendo UI Grid.
 type: how-to
-page_title: Deselect row on click | Kendo UI Grid
+page_title: Deselect Rows on Click | Kendo UI Grid
 slug: grid-deselect-row-click
 tags: grid, selection, remove, deselect, unselect, select, row, click
 res_type: kb
 ---
 
 ## Environment
+
 <table>
  <tr>
   <td>Product</td>
-  <td>Grid for Progress® Kendo UI®</td>
+  <td>Progress Kendo UI Grid</td>
  </tr>
  <tr>
   <td>Progress Kendo UI version</td>
@@ -22,14 +23,13 @@ res_type: kb
 
 ## Description
 
-I enabled selection in the Grid and would like to remove the selection from a row when clicking on it second time.
+How can I remove the selection functionality from a selectable Grid row when the user clicks on it a second time?
 
 ## Solution
 
-When selection is enabled in the Grid component the built-in option for deselecting a row is Ctrl+click. 
+When you enable selection, the built-in option for deselecting a row is by using the `Ctrl` + click shortcut.
 
-In order to deselect a row by just clicking, without holding the Ctrl key you can use the approach below:
-
+The following example demonstrates how to deselect a row by clicking only, that is, without holding the `Ctrl` key.
 
 ```html
 <script src="https://demos.telerik.com/kendo-ui/content/shared/js/orders.js"></script>
@@ -87,5 +87,5 @@ In order to deselect a row by just clicking, without holding the Ctrl key you ca
     });
 
     });
-</script> 
+</script>
 ```

@@ -31,31 +31,15 @@ The Kendo UI Core Bower package is available as a public Git repository while th
 
 The Kendo UI Core Bower package is hosted on a [public Git repository](https://github.com/kendo-labs/bower-kendo-ui) and is also registered as `kendo-ui-core` in the Bower registry.
 
-To install the Kendo UI Core Bower package, run the following command.
+To install the Kendo UI Core Bower package, run the `bower install kendo-ui-core` command.
 
-###### Example
-
-```sh
-bower install kendo-ui-core
-```
-
-You can check the available versions of Kendo UI Core Bower package by running the following command:
-
-```sh
-bower info kendo-ui-core --verbose
-```
+To check the available versions of Kendo UI Core Bower package, run the `bower info kendo-ui-core --verbose` command.
 
 ### Kendo UI Professional
 
 The Kendo UI Professional Bower package is hosted on a private Git repository. To access the package, you need an active subscription for Kendo UI or DevCraft. Bower prompts you to enter your username and password during the installation and update processes.
 
-To install the Kendo UI Professional Bower package, run the following command.
-
-###### Example
-
-```sh
-bower install https://bower.telerik.com/bower-kendo-ui.git
-```
+To install the Kendo UI Professional Bower package, run the `bower install https://bower.telerik.com/bower-kendo-ui.git` command.
 
 You can also add the package to the `bower.json` file, as the following example demonstrates.
 
@@ -67,11 +51,7 @@ You can also add the package to the `bower.json` file, as the following example 
 }
 ```
 
-You can check the available versions of Kendo UI Professional Bower package by running the following command:
-
-```sh
-bower info kendo-ui --verbose
-```
+To check the available versions of Kendo UI Professional Bower package, run the `bower info kendo-ui --verbose` command.
 
 > **Important**
 >

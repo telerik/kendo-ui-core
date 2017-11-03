@@ -1,8 +1,8 @@
 ---
-title: Display the Event Title in the Confirm Delete Prompt
-description: How to display the title of the task/event in the confirm delete prompt dialog of the Kendo UI Scheduler.
+title: Display the Event Title in the Delete Confirm Prompt
+description: An example on how to display the title of the task or event in the Delete confirmation dialog of the Kendo UI Scheduler.
 type: how-to
-page_title: Inject the Task Title to be displayed in the Confirm Delete Dialog | Kendo UI Scheduler
+page_title: Inject the Task Title for Display in the Delete Confirm Dialog | Kendo UI Scheduler
 slug: scheduler-inject-task-title-in-the-confirm-delete-prompt
 tags: kendo, scheduler, delete-task, delete-prompt
 res_type: kb
@@ -19,22 +19,22 @@ res_type: kb
 
 ## Description
 
-How to display the task title in the confirm delete prompt of the Kendo Scheduler?
+How can I display the task title in the **Delete** confirmation dialog of the Kendo UI Scheduler?
 
 ## Solution
 
-To achieve the above, the *dataBound* event should be handled. A click event handler should be attached to the *k-event-delete* `<a>` element:
+Handle the `dataBound` event and attach a `click` event handler to the `k-event-delete` `<a>` element.
 
 ```html
 	<div id="scheduler"></div>
-	
+
     <script>
 		$(function() {
 			var handleDeleteClick = function(e) {
 				var targetEvent = $(e.target.closest('.k-event'));
 				var eventText = targetEvent.find('.k-event-template:not(.k-event-time)').text();
 				var recurrenceEventIcon = targetEvent.find('.k-event-actions .k-i-reload');
-				
+
 				setTimeout(function() {
 					var messageElement = $('.k-popup-message');
 					var currentText = messageElement.text();
@@ -113,4 +113,4 @@ To achieve the above, the *dataBound* event should be handled. A click event han
 
 ## See Also
 
-* [Kendo Scheduler API Reference](http://docs.telerik.com/kendo-ui/api/javascript/ui/scheduler)
+* [API Reference of the Scheduler](http://docs.telerik.com/kendo-ui/api/javascript/ui/scheduler)

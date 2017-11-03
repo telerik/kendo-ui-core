@@ -1,21 +1,20 @@
 ---
-title: Kendo Spreadsheet Delete Disabled Cells Content with ContextMenu
-description: An example on how to delete the content of disabled cells with ContextMenu command
+title: Delete Disabled Cell Content with ContextMenu in Spreadsheet
+description: An example on how to delete the content of disabled Spreadsheet cells with a ContextMenu command.
 type: how-to
-page_title: Delete Disabled Cells' Content with ContextMenu Command | Kendo UI Spreadsheet
+page_title: Delete Disabled Cell Content with ContextMenu Command | Kendo UI Spreadsheet
 slug: spreadsheet-delete-disabled-cells-content
-position: 0
 tags: kendo, kendoui, spreadsheet, delete, disabled, cells, contextmenu
 ticketid: 1135315
 res_type: kb
-
 ---
 
 ## Environment
+
 <table>
  <tr>
   <td>Product</td>
-  <td>Progress® Kendo UI® Spreadsheet</td>
+  <td>Progress Kendo UI Spreadsheet</td>
  </tr>
  <tr>
   <td>Operating System</td>
@@ -34,17 +33,17 @@ res_type: kb
 
 ## Description
 
-I am using the context menu to delete a row from the Spreadsheet. However, when there is a disabled cell in that row, the delete command from the ContextMenu is not executed.
+I use the Kendo UI ContextMenu to delete rows from the Spreadsheet.
+
+How can I delete a disabled cell in a Spreadsheet row through the **Delete** command from the ContextMenu?
 
 ## Solution
 
-In order to achieve the desired behavior, you should follow these steps:
+1. Bind the `select` event to the ContextMenu of the Spreadsheet.
+1. Determine whether the currently selected command is **Delete**.
+1. Enable the current selection (which is the entire row) and clear it.
 
-1. Bind the select event for the ContextMenu of the Spreadsheet.
-1. Determine whether the currently selected command is Delete.
-1. Enable the current selection (which is the entire row) and set clear it.
-
-``` html
+```html
 <div id="spreadsheet"></div>
 <script>
     $(function() {

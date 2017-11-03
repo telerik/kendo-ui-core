@@ -1,20 +1,20 @@
 ---
-title: Printing of Barcode
-description: An example on how to print the Barcode
+title: Print the Barcode
+description: An example on how to print a Kendo UI Barcode.
 type: how-to
-page_title: How to Print the Barcode
+page_title: Print the Barcode | Kendo UI Barcode
 slug: barcode-how-to-print-the-barcode
 tags: barcode, print
 ticketid: 1136001
 res_type: kb
-
 ---
 
 ## Environment
+
 <table>
  <tr>
   <td>Product</td>
-  <td>Barcode for Progress® Kendo UI®</td>
+  <td>Progress Kendo UI Barcode</td>
  </tr>
  <tr>
   <td>Operating System</td>
@@ -36,15 +36,13 @@ res_type: kb
 
 ## Description
 
-I need an example on how to print the Barcode.
+How can I print the Kendo UI Barcode?
 
 ## Solution
 
-The Barcode can be printed on another page by opening a new window and placing the Barcode DOM elements on the page.
+You can print the Barcode on another page by opening a new window and placing the Barcode DOM elements on the page.
 
-Please check the following example demonstrating this:
-
-````html
+```html
     <button class="k-button">Print</button>
     <div id="toPrint">
       <span id="manchego"></span>
@@ -89,4 +87,4 @@ Please check the following example demonstrating this:
         }  
       }           
     </style>
-````
+```
