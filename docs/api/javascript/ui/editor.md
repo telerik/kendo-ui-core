@@ -2167,7 +2167,7 @@ The available editor commands are:
 *   Links, images and files
         - **createLink**, **unlink**, **insertImage**, **insertFile**
 *   Table editing
-        - **createTable**, **addColumnLeft**, **addColumnRight**, **addRowAbove**, **addRowBelow**, **deleteRow**, **deleteColumn**
+        - **tableWizard**, **createTable**, **addColumnLeft**, **addColumnRight**, **addRowAbove**, **addRowBelow**, **deleteRow**, **deleteColumn**
 *   Structural markup and styles
         - **formatting**, **cleanFormatting**
 *   Snippets

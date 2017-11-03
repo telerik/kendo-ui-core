@@ -516,7 +516,6 @@ The fields which can be used in the template are:
 * max - the value of the "max" aggregate (if specified)
 * min - the value of the "min" aggregate (if specified)
 * sum - the value of the "sum" aggregate (if specified)
-* data - provides access to all available aggregates, e.g. `data.fieldName1.sum` or `data.fieldName2.average`
 
 #### Example - specify column footer template
 
