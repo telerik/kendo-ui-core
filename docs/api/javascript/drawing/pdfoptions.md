@@ -15,7 +15,7 @@ The creator of the PDF document.
 ### date `Date`
 The date when the PDF document is created. Defaults to `new Date()`.
 
-### imgDPI
+### imgDPI `Number`
 The forced resolution (in dpi) of the images in the exported PDF document.
 By default, the images are exported at their full resolution.
 
