@@ -1,20 +1,20 @@
 ---
-title: Compare 2 Columns in AngularJS Kendo Grid
-description: An example on how to compare two columns in Grid
+title: Compare Two Columns in AngularJS Grids
+description: An example on how to compare two columns of a Kendo UI Grid in AngularJS.
 type: how-to
-page_title: How to Compare Two Columns in Grid
+page_title: Compare Two Columns | Kendo UI Grid
 slug: grid-how-to-compare-two-columns-in-grid
 tags: grid, angularjs, compare
 ticketid: 1122028
 res_type: kb
-
 ---
 
 ## Environment
+
 <table>
  <tr>
   <td>Product</td>
-  <td>Grid for Progress® Kendo UI®</td>
+  <td>Progress Kendo UI Grid</td>
  </tr> <tr>
   <td>Made with version</td>
   <td>2017.2.621</td>
@@ -22,15 +22,14 @@ res_type: kb
 
 
 ## Description
-How do I compare two columns and then change the background color of one columns.
+
+How can I compare two Grid columns and then change the background color of one of them in AngularJS projects?
 
 ## Solution
 
-The desired result can be achieved using the [column.template](docs.telerik.com/kendo-ui/api/javascript/ui/grid#configuration-columns.template) property and an if statement inside the [template](http://docs.telerik.com/kendo-ui/framework/templates/overview#template-syntax) to compare the values from the columns.
+Use the [`column.template`](docs.telerik.com/kendo-ui/api/javascript/ui/grid#configuration-columns.template) property and an `if` statement inside the [template](http://docs.telerik.com/kendo-ui/framework/templates/overview#template-syntax) to compare the values from the columns.
 
-Please check the following example demonstrating this:
-
-````html
+```html
     <div id="example" ng-app="KendoDemos">
       <div ng-controller="MyCtrl">
         <kendo-grid options="mainGridOptions">
@@ -110,4 +109,4 @@ Please check the following example demonstrating this:
         background-color:red
       }
     </style>
-````
+```

@@ -1,8 +1,8 @@
 ---
-title: Retrive Information / Perform Validation on the Server before Saving Event
-description: An example of how to perform server validation before saving a new or edited Kendo UI Scheduler task / event.
+title: Retrieve Information on the Server before Saving Events
+description: An example on how to perform server validation before saving a new or edited Kendo UI Scheduler task or event.
 type: how-to
-page_title: Perform Server Validation before Saving New or Edited Task | Kendo UI Scheduler
+page_title: Perform Server Validation before Saving New or Edited Tasks | Kendo UI Scheduler
 slug: scheduler-perform-server-validation-before-saving-task
 tags: kendo, scheduler, server-validation, save-task
 res_type: kb
@@ -19,15 +19,17 @@ res_type: kb
 
 ## Description
 
-How to perform a server check / validation before a new or edited task / event is being saved to the Kendo Scheduler?
+How can I perform a server check (validation) before a new or edited task or event is saved in the Kendo UI Scheduler?
 
 ## Solution
 
-To achieve the above, the save event should be handled and the default action should be prevented. An AJAX request to the server should be sent and depending on the response, the task should or should not be manually saved to the Scheduler.
+1. Handle the `save` event and prevent the default action.
+1. Send an AJAX request to the server.
+1. Depending on the response, manually save the task in the Scheduler.
 
 ```html
 	<div id="scheduler"></div>
-	
+
 	<script>
 		$("#scheduler").kendoScheduler({
 			date: new Date("2013/6/6"),
@@ -78,4 +80,4 @@ To achieve the above, the save event should be handled and the default action sh
 
 ## See Also
 
-* [Kendo Scheduler API Reference](http://docs.telerik.com/kendo-ui/api/javascript/ui/scheduler)
+* [API Reference of the Scheduler](http://docs.telerik.com/kendo-ui/api/javascript/ui/scheduler)

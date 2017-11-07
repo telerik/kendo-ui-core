@@ -1,11 +1,11 @@
 ---
-title: Spreadsheet .saveAsPDF and More Content in a Single PDF
-description: Merge the Kendo Spreadsheet into the same file, where other parts of the page are combined.
+title: Mix and Save Spreadsheet and Other Type of Content in Single PDF
+description: An example on how to merge the Kendo UI Spreadsheet into the same PDF file on which other parts of the page are combined.
 type: how-to
 page_title: Save Spreadsheet and Other Content to the Same PDF | Kendo UI Spreadsheet
 slug: spreadsheet-save-with-additional-content-to-single-pdf
 tags: spreadsheet,pdf,drawing,single-pdf
-ticketid: 1135953 
+ticketid: 1135953
 res_type: kb
 ---
 
@@ -15,16 +15,17 @@ res_type: kb
  <tr>
   <td>Product</td>
   <td>Progress Kendo UI Spreadsheet</td>
+  <td>Progress Kendo UI PDF Export</td>
  </tr>
 </table>
 
 ## Description
 
-I am able to combine different sections of the HTML page into a single PDF file, but I also need to merge the Kendo Spreadsheet into the same file.
+How can I merge the content of a Kendo UI Spreadsheet into the same PDF file which contains other content as well?
 
 ## Solution
 
-In order to achieve the desired you could use the *Spreadsheet.Sheet.draw()* method, which is internally used by the Spreadsheet PDF export:
+Use the `Spreadsheet.Sheet.draw()` method which is internally used by the Spreadsheet PDF Export.
 
 ```html
 	<input type="button" id="btn" value="Export"/>
@@ -141,7 +142,7 @@ In order to achieve the desired you could use the *Spreadsheet.Sheet.draw()* met
 		  var spreadsheet = jQuery("#spreadsheet").data("kendoSpreadsheet");
 		  if (null != spreadsheet) {
 			var currentSheet = spreadsheet.activeSheet();
-			
+
 			currentSheet.draw(function(spread){
 			  kendo.drawing.drawDOM(jQuery("#Checklist")).done(function(header) {
 				kendo.drawing.drawDOM("#Init", {
@@ -149,7 +150,7 @@ In order to achieve the desired you could use the *Spreadsheet.Sheet.draw()* met
 				}).then(function(group){
 				  group.children.unshift(header);
 				  group.options.set("pdf.margin", "1cm");
-				  
+
 				  var length = spread.children.length;
                                   if (length > 0) {
 	                            for (var i = 0; i < length; i ++) {
@@ -159,15 +160,15 @@ In order to achieve the desired you could use the *Spreadsheet.Sheet.draw()* met
                                   } else {
                                     group.append(spread);
                                   }
-				  
+
 				  return kendo.drawing.exportPDF(group);
 				}).done(function(data) {
 				  var d = new Date();
 				  var name = jQuery("#Id").data("kendoMaskedTextBox").value();
 				  name += "_";
 				  name += kendo.toString(d, "yyyyMMddHHmmss");
-				  name += ".pdf"; 
-				  
+				  name += ".pdf";
+
 				  kendo.saveAs({
 					dataURI: data,
 					fileName: name
@@ -183,7 +184,6 @@ In order to achieve the desired you could use the *Spreadsheet.Sheet.draw()* met
 
 ## See Also
 
-* [Kendo Spreadsheet API Reference](http://docs.telerik.com/kendo-ui/api/javascript/ui/spreadsheet)
-* [Kendo Drawing Group API Reference](https://docs.telerik.com/kendo-ui/api/javascript/drawing/group)
-* [Kendo Drawing API Reference](https://docs.telerik.com/kendo-ui/api/javascript/drawing)
-
+* [API Reference of the Spreadsheet](http://docs.telerik.com/kendo-ui/api/javascript/ui/spreadsheet)
+* [API Reference of the Drawing Group](https://docs.telerik.com/kendo-ui/api/javascript/drawing/group)
+* [API Reference of the Drawing](https://docs.telerik.com/kendo-ui/api/javascript/drawing)

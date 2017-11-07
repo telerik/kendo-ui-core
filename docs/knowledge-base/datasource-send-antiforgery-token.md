@@ -1,22 +1,20 @@
 ---
-title: Send AntiForgery token
-description: 
+title: Cannot Send AntiForgery Token
+description: Cannot send my anti-forgery token as it is not available on the server. 
 type: troubleshooting
-page_title:
-slug:
-position: 0
+page_title: AntiForgery Token Is Not Available on the Server | Kendo UI DataSource
+slug: datasource-send-antiforgery-token
 tags: security, authentication, dataSource
-teampulseid:
 ticketid: 1116629
-pitsid:
-
+res_type: kb
 ---
 
 ## Environment
+
 <table>
  <tr>
   <td>Product</td>
-  <td>DataSource for Progress® Kendo UI®</td>
+  <td>Progress Kendo UI DataSource</td>
  </tr>
  <tr>
   <td>Operating System</td>
@@ -35,11 +33,13 @@ pitsid:
 
 ## Description
 
-I am using the transport.read.data method to send my anti-forgery token, but it is no available on the server. 
+I use the `transport.read.data` method to send my anti-forgery token, but it is not available on the server.
+
+How can I send my anti-forgery token when using Kendo UI for jQuery?
 
 ## Solution
 
-The anti-forgery token should be send along with request form data. The read should make a POST request in order the anti-forgery token to be accessible on the server. 
+Send the anti-forgery token along with the request form data. In order for the anti-forgery token to be accessible on the server, `read` should make a `POST` request.
 
 ```
 function readData() {
@@ -53,13 +53,3 @@ function readData() {
     }
 
 ```
-
-## Suggested Workarounds
-
-## Steps to Reproduce
-
-## Error Message
-
-## Cause\Possible Cause(s)
-
-## Notes

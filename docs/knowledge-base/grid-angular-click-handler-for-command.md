@@ -1,8 +1,8 @@
 ---
-title: How to Attach Click Event Handler for Custom Command in AngularJS Grid
-description: Attaching handler for the custom command click event in AngularJS 
+title: Attach click Event Handler for Custom Commands in AngularJS Grid
+description: An example on how to attach a click event handler for a custom command in an AngularJS Grid.
 type: how-to
-page_title: How to attach handler for the command click event in Kendo UI Grid in AngularJS
+page_title: Attach a Handler for the Command click Event in AngularJS | Kendo UI Grid
 slug: grid-angular-click-handler-for-command
 tags: grid, angularJS, event, command, handler
 res_type: kb
@@ -23,11 +23,11 @@ res_type: kb
 
 ## Description
 
-How to attach handler for the click event of a custom button to a function defined in the scope.
+How can I attach a handler for the `click` event of a custom button to a function that is defined in the scope of a Kendo UI Grid in AngularJS projects?
 
 ## Solution
 
-#### Example
+The following example demonstrates how to apply the necessary approach.
 
 ```
 	<div id="example" ng-app="KendoDemos">
@@ -49,7 +49,7 @@ How to attach handler for the click event of a custom button to a function defin
           console.log(data.uid);
 					return false;
 				}
-				
+
 				$scope.returnWindow = function () {
 					return $window;
 				}

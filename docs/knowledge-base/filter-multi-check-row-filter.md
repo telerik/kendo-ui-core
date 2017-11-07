@@ -55,4 +55,4 @@ Move the built-in menu to the filter row and, if not needed, hide the rest of th
     }
     ```
 
-For the complete implementation, refer to [this Dojo example](http://dojo.telerik.com/eVOjE)  
+For the complete implementation, refer to [this Dojo example](http://dojo.telerik.com/eVOjE).  

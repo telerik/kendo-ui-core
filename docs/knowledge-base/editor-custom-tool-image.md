@@ -1,8 +1,8 @@
 ---
 title: Set Image to Custom Tool in Editor
-description: An example on how to set an image to a custom tool added to the Kendo UI Editor.
+description: An example on how to set an image to a custom tool that is added to the Kendo UI Editor.
 type: how-to
-page_title: Set Background Image to Custom Tool in Editor | Kendo UI Editor
+page_title: Set Background Image to Custom Tool | Kendo UI Editor
 slug: editor-custom-tool-image
 tags: editor, custom, tool, button, image, background
 ticketid: 1135501
@@ -32,11 +32,11 @@ res_type: kb
 
 ## Description
 
-How can I set an image to the custom tool I added to the Editor?
+How can I set an image to the custom tool that I added to the Editor?
 
 ## Solution
 
-When you add a custom tool to the Editor and set its `name` option, a class based on the specified name will be automatically added to the corresponding HTML element of the custom tool. So for instance, if you have set the tool's name to `customButton`, the `k-i-custom-button` class will be added to the tool's span element. This class can be used as a selector in a CSS rule, which can set a background-image to the custom tool: 
+When you add a custom tool to the Editor and set its `name` option, a class that is based on the specified name is automatically added to the corresponding HTML element of the custom tool. For example, if you set the tool name to `customButton`, the `k-i-custom-button` class is added to the `span` element of the tool. You can use this class as a selector in a CSS rule, which can set a background-image to the custom tool.
 
 ```html
 	<textarea id="editor"></textarea>

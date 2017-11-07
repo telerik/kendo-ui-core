@@ -8,7 +8,7 @@ position: 2
 
 # List of Formulas and Functions
 
-The following table provides a list of the formulas and functions the Spreadsheet supports. 
+The following table provides a list of the formulas and functions the Spreadsheet supports.
 
 | Formulas and functions	  | Description				                                    
 | :--- 						          | :---						                                    

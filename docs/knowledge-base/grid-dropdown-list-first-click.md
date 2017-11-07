@@ -1,20 +1,20 @@
 ---
-title: How To Open the Popup of a Custom DropDownList Editor in Grid with Batch Editing on Cell Click.
-description: An example on how to display the list of a Grid's DropDown with one click instead of two.
+title: Open Popup of Custom DropDownList Editor on Cell Click in Grid with Batch Editing
+description: An example on how to display the list of a Grid DropDownList with one click instead of two.
 type: how-to
-page_title: How To Open the Popup of a Custom DropDownList Editor in Grid with Batch Editing on Cell Click.
+page_title: Open the Popup of a Custom DropDownList Editor on Cell Click in Batch Editing | Kendo UI Grid
 slug: grid-dropdown-list-first-click
 tags: show, list, dropdown, dropdownlist, grid, first, click, single
 ticketid: 1087864
 res_type: kb
-
 ---
 
 ## Environment
+
 <table>
  <tr>
   <td>Product</td>
-  <td>Grid for Progress® Kendo UI®</td>
+  <td>Progress Kendo UI Grid</td>
  </tr>
  <tr>
   <td>Operating System</td>
@@ -32,21 +32,26 @@ res_type: kb
 
 ## Description
 
-When using a DropDownList Custom Editor in an editable Grid, the first click will focus on the cell and show the Dropdown, while the second click will show the list. I want to show the list on the first click of the cell.
+When using a custom DropDownList editor in an editable Grid, the first click focuses on the cell and shows the drop-down and the second click shows the list.
+
+How can I show the drop-down list in the editable Grid with one cell click?
 
 ## Solution
 
-In order to implement this functionality, we can subscribe to the [edit event of the Kendo UI Grid API](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid#events-edit) which is triggered when you click on the cell, check if the cell contains a DropDownList, and if it does, triggering the [open method of the Kendo UI DropDownList API](https://docs.telerik.com/kendo-ui/api/javascript/ui/dropdownlist#methods-open): 
+Subscribe to the [`edit`](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid#events-edit) event of the Grid:
 
-````javascript
+The event:
+1. Triggers when the user clicks on the cell.
+1. Checks if the cell contains a DropDownList.
+1. If the cell contains a DropDownList, the event triggers the [`open`](https://docs.telerik.com/kendo-ui/api/javascript/ui/dropdownlist#methods-open) method of the DropDownList.
+
+```javascript
 edit:function(e){
    var dropdown = e.container.find('[data-role=dropdownlist]').data('kendoDropDownList');
    if(dropdown){
       dropdown.open();
    }
 }
-````
+```
 
-## See Also
-
-In order to see a working example, [take a look at the following Kendo UI Dojo](http://dojo.telerik.com/OWIGe).
+For the complete implementation, refer to [this Dojo example](http://dojo.telerik.com/OWIGe).

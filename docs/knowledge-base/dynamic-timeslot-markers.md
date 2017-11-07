@@ -1,14 +1,15 @@
 ---
-title: Custom Time Ruler Indicators in Gantt
-description: An example on how to set custom time ruler indicators in Kendo UI Gantt.
+title: Set Custom Time Ruler Indicators in Gantt
+description: An example on how to set custom time ruler indicators in the Kendo UI Gantt.
 type: how-to
-page_title: Custom Time Ruler Indicators in Gantt | Kendo UI Gantt
+page_title: Define Custom Time Ruler Indicators in Gantt | Kendo UI Gantt
 slug: custom-time-ruler-indicators-in-gantt
 tags: time, ruler, indicators, gantt
 res_type: kb
 ---
 
 ## Environment
+
 <table>
  <tr>
   <td>Product</td>
@@ -18,12 +19,14 @@ res_type: kb
 
 ## Description
 
-The Gantt charts have the default feature of displaying a red marker on top of the time slot for the current date/time. Is it possible to add this marker to any other time slot other than the current date ?
+By default, the Gantt charts display a red marker on top of the time slot for the current date/time.
+
+How can I add this marker to any other time slot other than the current date?
 
 ## Solution
 
-* Override the `_renderCurrentTime()` method to allow rendering the ruler markup at specific time slot.
-* Use the modified `_renderCurrentTime` method in the Gantt's `dataBound` event to dynamically set the ruler indicators at specific time slots.
+1. Override the `_renderCurrentTime()` method to allow the rendering of the ruler markup at a specific time slot.
+1. Use the modified `_renderCurrentTime` method in the `dataBound` event of the Gantt to dynamically set the ruler indicators at specific time slots.
 
 ```html
 <div id="example">

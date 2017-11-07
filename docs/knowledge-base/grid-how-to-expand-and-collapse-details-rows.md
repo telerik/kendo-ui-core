@@ -1,20 +1,20 @@
 ---
-title: Grid Expand All Collapse All Detail Rows
-description: An example on how to expand and collapse all detail rows
+title: Expand and Collapse All Detail Rows in Grid
+description: An example on how to expand and collapse all detail rows in a Kendo UI Grid.
 type: how-to
-page_title: How to Expand And Collapse Detail Rows
+page_title: Expand and Collapse All Detail Rows | Kendo UI Grid
 slug: grid-how-to-expand-and-collapse-details-rows
 tags: grid, expand, collapse, details
 ticketid: 1137592
 res_type: kb
-
 ---
 
 ## Environment
+
 <table>
  <tr>
   <td>Product</td>
-  <td>Grid for Progress® Kendo UI®</td>
+  <td>Progress Kendo UI Grid</td>
  </tr>
  <tr>
   <td>Operating System</td>
@@ -36,17 +36,15 @@ res_type: kb
 
 ## Description
 
-I have a grid with nested children shown in detail templates.
-Is there a built in solution to an expand all/collapse all button the header row?
-I want to be able to expand all detail templates and collapse all detail templates with the click of a button.
+I have a Grid with nested children which are shown in detail templates.
+
+Does the Grid feature a built-in solution to add an **Expand All** and **Collapse All** button in the header row? How can I expand and collapse all detail templates with the click of a button?
 
 ## Solution
-  
-Тhe desired result can be achieved using the [expandRow](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid#methods-expandRow) and [collapseRow](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid#methods-closeCell) methods of the Grid.
-  
-Please refer to the example demonstrating this:
 
-````html
+Use the [`expandRow`](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid#methods-expandRow) and [`collapseRow`](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid#methods-closeCell) methods of the Grid.
+
+```html
 <div id="example">
       <button class="k-button" id="expand">Expand All</button>
       <button class="k-button" id="collapse">Collapse All</button>
@@ -137,5 +135,4 @@ Please refer to the example demonstrating this:
         })
       </script>
     </div>
-````
-  
+```

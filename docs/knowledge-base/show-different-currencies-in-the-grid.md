@@ -1,21 +1,23 @@
 ---
-title: Mixed Currency in Grid
-description: An example on how to show different currencies in the Grid
+title: Display Mixed Currencies in Grid
+description: An example on how to show different currencies in the Kendo UI Grid.
 type: how-to
-page_title: How to Show Different Currencies in the Grid | Kendo UI Grid
-slug: how-to-show-different-currencies-in-the-grid
+page_title: Show Different Currencies | Kendo UI Grid
+slug: show-different-currencies-in-the-grid
 tags: grid, currencies
+previous_url: /knowledge-base/how-to-show-different-currencies-in-the-grid
 ticketid: 1105869
 res_type: kb
-
 ---
 
 ## Environment
+
 <table>
  <tr>
   <td>Product</td>
-  <td>Grid for Progress® Kendo UI®</td>
- </tr> <tr>
+  <td>Progress Kendo UI Grid</td>
+ </tr>
+ <tr>
   <td>Made with version</td>
   <td>2017.1.223</td>
  </tr>
@@ -23,23 +25,16 @@ res_type: kb
 
 
 ## Description
-I have a global sales application where sales staff work on accounts around the globe.  They are asking to see the currency in the format for the country within the same grid.
 
-Example:
+I have a global sales application in which the sales staff work on accounts around the globe. They need to see the currency in the culture format of their countries in the same Grid. For example, `User 1, $1,000.00`, `User 2, €2.000,00`, `User 3, £50.000.000,00`.
 
-User 1, $1,000.00
-
-User 2, €2.000,00
-
-User 3, £50.000.000,00
+How can I display different currencies in the same Grid?
 
 ## Solution
 
-This can be achieved via custom approach using a [column.template](http://docs.telerik.com/kendo-ui/api/javascript/ui/grid#configuration-columns.template) property of the Grid. This will require an information for every data item shown which is the correct currency. Also, a manual format has to be used for every currency.
-   
-Please check an example demonstrating this:  
+Use a custom approach by utilizing the [`column.template`](http://docs.telerik.com/kendo-ui/api/javascript/ui/grid#configuration-columns.template) property of the Grid. This logic requires information about which the correct currency for each displayed data item is and you need to use a manual format for every currency.
 
-````html
+```html
 <div id="example">
       <div id="grid"></div>
       <script>
@@ -98,4 +93,4 @@ Please check an example demonstrating this:
         }
       </script>
     </div>
-````
+```

@@ -1,21 +1,20 @@
 ---
-title: Kendo AutoComplete Angular JS binding with WebAPI
-description: An example on how to bind Kendo UI AutoComplete for AngularJS with WebAPI
+title: Bind AutoComplete for AngularJS with WebAPI
+description: An example on how to bind the Kendo UI AutoComplete for AngularJS with WebAPI.
 type: how-to
-page_title: Implement WebAPI binding for AngularJS AutoComple | AutoComplete for KendoUI
+page_title: Implement WebAPI Binding in AngularJS | Kendo UI AutoComplete
 slug: autocomplete-angularjs-bind-webapi
-position: 0
 tags: kendoui, kendo, autocomplete, webapi, angularjs
 ticketid: 1136078
 res_type: kb
-
 ---
 
 ## Environment
+
 <table>
  <tr>
   <td>Product</td>
-  <td>AutoComplete for Progress® Kendo UI®</td>
+  <td>Progress Kendo UI AutoComplete</td>
  </tr>
  <tr>
   <td>Operating System</td>
@@ -34,13 +33,11 @@ res_type: kb
 
 ## Description
 
-How to bind mu kendo AutoComplete widget to WebAPI in AngularJS scenario?
+How can I bind a Kendo UI AutoComplete to the WebAPI in an AngularJS scenario?
 
 ## Solution
 
-In order to achieve the needed scenario, you would need to set the dataSource type to webapi and the Transport's read URL to the method in your controller:
-
-
+Set the `dataSource` type to `webapi` and the `transport` `read` URL to the method in your controller.
 
 ```html
 <div id="example" ng-app="KendoDemos">
@@ -50,7 +47,7 @@ In order to achieve the needed scenario, you would need to set the dataSource ty
                k-data-text-field="'Name'"
                k-data-value-field="'Id'"
                options="autoCompleteOptions" style="width: 21%;" />
-      
+
     </div>
 </div><script>
   angular.module("KendoDemos", [ "kendo.directives" ])
@@ -71,7 +68,7 @@ In order to achieve the needed scenario, you would need to set the dataSource ty
                       }
                   }
               };
-              
+
           })              
 </script>
 

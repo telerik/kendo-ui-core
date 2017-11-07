@@ -1,8 +1,8 @@
 ---
-title: Check/Uncheck Checkbox in TreeView on Node Selection
-description: An example on how to check/uncheck checkbox when node is selected in a TreeView
+title: Check and Uncheck Checkbox in TreeView on Node Selection
+description: An example on how to check and uncheck a checkbox by selecting a node in a Kendo UI TreeView.
 type: how-to
-page_title: Check/Uncheck Checkbox on Node Selection | Kendo UI TreeView
+page_title: Check and Uncheck Checkboxes on Node Selection | Kendo UI TreeView
 slug: check-checkbox-on-select-node
 tags: check, checkbox, select, node, treeview
 ticketid: 1135299
@@ -32,11 +32,11 @@ res_type: kb
 
 ## Description
 
-How to check/uncheck checkboxes in a TreeView on selecting a node?
+How to check and uncheck checkboxes in a TreeView on selecting a node?
 
 ## Solution
 
-In the handler of the TreeView `select` event, find the checkbox of the selected node and check/uncheck it accordingly by calling jQuery prop() method.
+In the handler of the TreeView `select` event, find the checkbox of the selected node and check or uncheck it accordingly by calling the `jQuery prop()` method.
 
 ```html
 	<div id="treeview"></div>
@@ -69,8 +69,8 @@ In the handler of the TreeView `select` event, find the checkbox of the selected
                 ]
             }]
         });
-      
-        function onSelect(e) { 
+
+        function onSelect(e) {
  		   e.preventDefault();						
  		   var checkbox = $(e.node).find(":checkbox");
  		   var checked = checkbox.prop("checked");

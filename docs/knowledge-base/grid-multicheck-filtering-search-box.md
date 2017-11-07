@@ -1,8 +1,8 @@
 ---
-title: Define Checkbox Filtering with Search Box
-description: An example on how to show MultiCheck filtering with a search box in the Kendo UI Grid. 
+title: Define Checkbox Filtering with Search Box in Grid
+description: An example on how to show a multi-check filtering with a search box in the Kendo UI Grid.
 type: how-to
-page_title: Display Search  with MultiCheck Filtering | Kendo UI Grid
+page_title: Display Search with Multi-Check Filtering | Kendo UI Grid
 slug: grid-multicheck-filtering-search-box
 tags: grid, multicheck, filtering, search box
 ticketid:
@@ -10,10 +10,11 @@ res_type: kb
 ---
 
 ## Environment
+
 <table>
  <tr>
   <td>Product</td>
-  <td>Grid for Progress® Kendo UI®</td>
+  <td>Progress Kendo UI Grid</td>
  </tr>
  <tr>
   <td>Progress Kendo UI version</td>
@@ -23,11 +24,9 @@ res_type: kb
 
 ## Description
 
-How can I show a search box when checkbox filtering is enabled in the Kendo UI Grid?
+How can I show a search box when the checkbox filtering of a Kendo UI Grid is enabled?
 
 ## Solution
-
-To display the checkbox:
 
 1. Set the [`columns.filterable.multi`](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid#configuration-columns.filterable.multi) configuration to `true`.
 1. Set the [`columns.filterable.search`](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid#configuration-columns.filterable.search) configuration to `true`.

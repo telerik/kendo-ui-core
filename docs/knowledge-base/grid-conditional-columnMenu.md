@@ -1,8 +1,8 @@
 ---
-title: Conditionally Show ColumnMenu Options per Column
-description: I want to show the filter and sort options in the columnMenu conditionally
+title: Conditionally Show ColumnMenu Options per Grid Column
+description: An example on how to conditionally show the filter and sort options in the columnMenu of the Kendo UI Grid.
 type: how-to
-page_title: Showing columnMenu options for specific columns
+page_title: Show columnMenu Options for Specific Columns | Kendo UI Grid
 slug: grid-conditional-columnMenu
 tags: grid, columnMenu, columns
 res_type: kb
@@ -23,13 +23,13 @@ res_type: kb
 
 ## Description
 
-How to show the __columnMenu__ options for few column only and keep only the filtering options for other.
+How can I show the `columnMenu` options for some columns only and keep the filtering options for other columns only?
 
 ## Solution
 
-The __columnMenu__ could be customized within the __columnMenuInit__ even per column. In the following example, we are hiding the __columnMenu__ options for few columns and we are exposing the filtering for them directly in the popup:
+Customize the `columnMenu` within the `columnMenuInit` event per column.
 
-#### Example
+The following example demonstrates how to hide the `columnMenu` options for some of the columns and expose the filtering for them directly in the popup.
 
 ```html
        <div id="example">

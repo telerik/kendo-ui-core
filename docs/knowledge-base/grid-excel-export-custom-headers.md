@@ -1,16 +1,12 @@
 ---
-title: Grid Excel Export Insert Custom Headers
-description: How to Add an extra row to the grid excel export for custom headers
+title: Export Custom Headers to Excel in Grid
+description: An example on how to add an extra row to the Excel Export for custom Kendo UI Grid headers.
 type: how-to
-page_title: How to add Custom Headers to the Grid Excel Export
+page_title: Add Custom Headers When Exporting to Excel | Kendo UI Grid
 slug: grid-excel-export-custom-headers
-position:
 tags: grid, excel, export, custom, headers, kendo
-teampulseid:
 ticketid: 1081450
-pitsid:
 res_type: kb
-
 ---
 
 ## Environment
@@ -18,27 +14,31 @@ res_type: kb
 <table>
  <tr>
   <td>Product</td>
-  <td>Progress® Kendo UI</td>
+  <td>Progress Kendo UI Grid</td>
+  <td>Progress Kendo UI Excel Export</td>
  </tr>
 </table>
 
 
 ## Description
 
-Is there a way to also add extra information to the grid Excel export, or does the export only the data within the grid?  I'd like a custom header to be exported for a title and styled in a different way etc.? To summarise, I would like to make some changes to the appearance and content of the Kendo UI Grid Excel Export.
+I want to make changes to the appearance and the content of the Kendo UI Grid when I export it to Excel.
+
+How can I:
+* Add extra information to the Grid when I export it to Excel?  
+* Export a custom header for a title and then style it in a different way? 
+
+Does the Grid export only the already existing data in it?
 
 ## Solution
 
-The Kendo UI Grid triggers an [`excelExport`](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid#events-excelExport) event, which contains the workbook as part of the event data.  
-Here is a breakdown of the example below:  
-  
-1. I changed the `name` of the sheet via the [`sheets.name`](http://docs.telerik.com/kendo-ui/api/javascript/ooxml/workbook#configuration-sheets.name) configuration property.
-  
-e.g. `sheets[0].name = "Orders";`  
+The Grid triggers an [`excelExport`](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid#events-excelExport) event which contains the workbook as part of the event data.  
 
-2. I inserted a new row of cells at position 0 that contains the custom headers.  
-  
-3. I styled the new headers with a new background color, font size and horizontal alignment as well as row height.  
+The example demonstrates how to export additional information to Excel by implementing the following actions:
+
+1. Change the name of the sheet by using the [`sheets.name`](http://docs.telerik.com/kendo-ui/api/javascript/ooxml/workbook#configuration-sheets.name) configuration property. For example, `sheets[0].name = "Orders";`.
+1. Insert a new row of cells which contains the custom headers at position `0`.  
+1. Style the new headers with a new background color, font size, horizontal alignment, and row height.  
 
 ```html
 
@@ -55,7 +55,7 @@ e.g. `sheets[0].name = "Orders";`
                   filterable: true
                 },
                 excelExport: function(e){
-                
+
                   var sheet = e.workbook.sheets[0];
                   sheet.frozenRows = 2;
                   sheet.mergedCells = ["B1:E1"];
@@ -121,13 +121,9 @@ e.g. `sheets[0].name = "Orders";`
           </script>
         </div>
 ```
-  
-Workbook API reference:  
-  
-[http://docs.telerik.com/kendo-ui/api/javascript/ooxml/workbook](http://docs.telerik.com/kendo-ui/api/javascript/ooxml/workbook)  
-  
-The complete list of configurable cell options is available at:  
-  
-[http://docs.telerik.com/kendo-ui/api/javascript/ooxml/workbook\#configuration-sheets.rows.cells](http://docs.telerik.com/kendo-ui/api/javascript/ooxml/workbook#configuration-sheets.rows.cells)  
-  
-More on appearance: [http://docs.telerik.com/kendo-ui/framework/excel/appearance](http://docs.telerik.com/kendo-ui/framework/excel/appearance)
+
+## See Also
+
+* [Workbook API reference](http://docs.telerik.com/kendo-ui/api/javascript/ooxml/workbook)  
+* [Complete List of Configurable Cell Options](http://docs.telerik.com/kendo-ui/api/javascript/ooxml/workbook#configuration-sheets.rows.cells)  
+* [More Information on Appearance](http://docs.telerik.com/kendo-ui/framework/excel/appearance)

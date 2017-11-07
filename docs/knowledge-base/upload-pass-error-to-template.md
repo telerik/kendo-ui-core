@@ -1,11 +1,10 @@
 ---
 title: Display Validation Error Message in the Upload File Template
-description: How to display the message from validation error in a custom file template of Kendo UI Upload.
+description: An example on how to display the message from the validation error in a custom file template of a Kendo UI Upload.
 type: how-to
 page_title: Pass Error Message to the File Template | Kendo UI Upload
 slug: upload-pass-error-to-template
 tags: kendo,upload,error,file-template,template
-ticketid: 0
 res_type: kb
 ---
 
@@ -20,13 +19,15 @@ res_type: kb
 
 ## Description
 
-How to pass the message from validation error to the custom file template of Kendo Upload? How to display that message?
+How can I pass the message from a validation error to the custom file template of the Kendo UI Upload? How can I display that message?
 
 ## Solution
 
-Use the Upload *select* event handler to retrieve the error validation message. You can assign it to a field in the *file* object. Then you could display the value for that field in the file template:
+1. Use the `select` event handler of the Upload to retrieve the error validation message.
+1. Assign it to a field in the `file` object.
+1. Display the value for that field in the file template.
 
-````html
+```html
 <base href="https://demos.telerik.com/kendo-ui/upload/validation">
 
 <script id="fileTemplate" type="text/x-kendo-template">
@@ -34,10 +35,10 @@ Use the Upload *select* event handler to retrieve the error validation message. 
       <span class="k-progress"></span>
       #if (!files[0].error) { # <span class="k-file-extension-wrapper"><span class="k-file-extension"> #= files[0].extension # # } #
       #if (files[0].error) { # <span class="k-file-invalid-extension-wrapper"> <span class="k-file-invalid-icon">! # } #
-  		</span> 
+  		</span>
         <span class="k-file-state"></span>
       </span>
-      
+
       <span class="k-file-name-size-wrapper">
         <span #if (files[0].error) { # class="k-file-name k-file-name-invalid" # } #
         # if (!files[0].error) { # class="k-file-name" # } # > #= name # </span>
@@ -82,9 +83,9 @@ Use the Upload *select* event handler to retrieve the error validation message. 
     });
   });
 </script>
-````
+```
 
 ## See Also
 
-* [Kendo UI Upload JavaScript API Reference](https://docs.telerik.com/kendo-ui/api/javascript/ui/upload)
-* [Kendo UI Upload Validation Demo](https://demos.telerik.com/kendo-ui/upload/validation)
+* [API Reference of the Upload](https://docs.telerik.com/kendo-ui/api/javascript/ui/upload)
+* [Validation Demo of the Upload](https://demos.telerik.com/kendo-ui/upload/validation)

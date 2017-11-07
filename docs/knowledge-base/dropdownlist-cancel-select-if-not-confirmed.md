@@ -1,8 +1,8 @@
 ---
-title: AngularJS - Perform DropDownList Select Only if Confirmed
-description: In AngularJS application, how to cancel or not the actual selection of an item in the DropDownList using Kendo Confirm Dialog
+title: Perform DropDownList Selection in AngularJS Only If Confirmed
+description: An example on how to cancel or not the actual selection of an item in the DropDownList by using the Kendo UI confirmation Dialog in AngularJS applications.
 type: how-to
-page_title: Cancel Selection if not Confirmed in AngularJS | Kendo UI DropDownList
+page_title: Cancel Selection in AngularJS If Not Confirmed | Kendo UI DropDownList
 slug: dropdownlist-cancel-select-if-not-confirmed
 tags: kendoui, kendo, angular, angularjs, dropdownlist, dialog, cancel-select, cancel, confirm
 res_type: kb
@@ -19,22 +19,22 @@ res_type: kb
 
 ## Description
 
-How to cancel or not the actual selection of an item in the Kendo DropDownList depending on a chosen option from a Kendo Confirm Dialog. How to implement the above in AngularJS app?
+How to cancel (or not) the actual selection of an item in the Kendo UI DropDownList depending on a selected option from a Kendo UI confirmation Dialog and implement the approach in AngularJS applications?
 
 ## Solution
 
-To cancel the selection first save the old value and then revert back to it. Revert the value if the *Cancel* option has been chosen.
+Save the old value and, then, revert back to it. Revert the value if the **Cancel** option was selected.
 
 ```html
 <div id="example" ng-app="KendoDemos">
   <div class="demo-section k-content" ng-controller="MyCtrl">
     <h4>Static data</h4>
     <select kendo-drop-down-list="catDropdown" k-options="catDropdownOptions"></select>
-    <div kendo-dialog="dialog" 
+    <div kendo-dialog="dialog"
          k-title="'Select option'"
          k-on-open="dialogVisible = true"
-         k-on-close="dialogVisible = false" 
-         k-width="300" 
+         k-on-close="dialogVisible = false"
+         k-width="300"
          k-height="150"
          k-actions="dialogActions"
          k-modal="true"
@@ -50,13 +50,13 @@ To cancel the selection first save the old value and then revert back to it. Rev
     function onCancel(e) {
       $scope.catDropdown.value($scope.oldValue);
     }
-    $scope.dialogActions = [{ 
-      text: 'Cancel', 
+    $scope.dialogActions = [{
+      text: 'Cancel',
       action: onCancel
-    }, { 
-      text: 'OK', 
-      primary: true 
-    }];	
+    }, {
+      text: 'OK',
+      primary: true
+    }];
     $scope.text = '';
     $scope.oldValue = '';
     $scope.catDropdownOptions = {
@@ -64,12 +64,12 @@ To cancel the selection first save the old value and then revert back to it. Rev
       dataValueField: 'id',
       optionLabel: 'Select a Category',
       dataSource: [
-        {id:1, desc:'A'}, 
-        {id:2, desc:'B'}, 
-        {id:3, desc:'C'}, 
+        {id:1, desc:'A'},
+        {id:2, desc:'B'},
+        {id:3, desc:'C'},
         {id:4, desc:'D'}
       ],
-      select: function (e) { 
+      select: function (e) {
         $scope.oldValue = e.sender.value();
         if (e.sender.value() != e.dataItem.id) {
           $scope.text = e.dataItem.desc;
@@ -83,5 +83,5 @@ To cancel the selection first save the old value and then revert back to it. Rev
 
 ## See Also
 
-* [JavaScript API Reference of the DropDownList](http://docs.telerik.com/kendo-ui/api/javascript/ui/dropdownlist)
-* [DropDownList AngularJS demo](http://demos.telerik.com/kendo-ui/dropdownlist/angular)
+* [API Reference of the DropDownList](http://docs.telerik.com/kendo-ui/api/javascript/ui/dropdownlist)
+* [AngularJS Demo of the DropDownList](http://demos.telerik.com/kendo-ui/dropdownlist/angular)

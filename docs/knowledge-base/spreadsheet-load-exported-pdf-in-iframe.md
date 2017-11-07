@@ -1,34 +1,33 @@
 ---
-title: How to Create an Inline PDF from a Kendo Spreadsheet and Embed it in an iFrame?
-description: Ho to generate a PDF from the Kendo Spreadsheet and load the PDF in an iframe element
+title: Create an Inline PDF from a Kendo Spreadsheet and Embed it in an iFrame
+description: An example on how to generate a PDF from the Kendo Spreadsheet and load the PDF in an iframe element
 type: how-to
-page_title: Export Spreadsheet to PDF and Load the File in iFrame
+page_title: Export Spreadsheet to PDF and Load the File in iFrame | Kendo UI Spreadsheet
 slug: spreadsheet-load-exported-pdf-in-iframe
-position: 0
 tags: kendo, kendoui, spreadsheet, pdf, iframe, base64, embed
 ticketid: 1138153
 res_type: kb
-
 ---
 
 ## Environment
+
 <table>
  <tr>
   <td>Product</td>
-  <td>Spreadsheet for Progress® Kendo UI®</td>
+  <td>Progress Kendo UI Spreadsheet</td>
  </tr>
 </table>
 
 
 ## Description
 
-We need to generate a PDF from a Kendo spreadsheet and display the PDF in a separate `<iframe>`.
+How can I generate a PDF from a Kendo UI Spreadsheet and display the PDF in a separate `<iframe>`?
 
 ## Solution
 
-You could load the generated base64 PDF data in the `<iframe>` element. To do that you could use the *draw()* method of the Spreadsheet Sheet object. To properly load the data in the `<iframe>` the below sample should be opened in [full screen mode of Dojo](http://runner.telerik.io/fullscreen/UVAyu/3):  
+Load the generated base64 PDF data in the `<iframe>` element. To do that, use the `draw()` method of the Spreadsheet `Sheet` object. To properly load the data in the `<iframe>`, opne the following example in the [full screen mode of the Dojo](http://runner.telerik.io/fullscreen/UVAyu/3).
 
-````html
+```html
 <input type="button" id="btn" value="PDF export Spreadsheet" />
 <div id="spreadsheet" style="width: 100%;"></div>
 <div id="pdf_preview" style="height:400px; width:400px"></div>
@@ -47,7 +46,7 @@ You could load the generated base64 PDF data in the `<iframe>` element. To do th
         });
       });
     });
-	
+
     $("#spreadsheet").kendoSpreadsheet({
       excel: {
         proxyURL: "https://demos.telerik.com/kendo-ui/service/export"
@@ -61,9 +60,9 @@ You could load the generated base64 PDF data in the `<iframe>` element. To do th
     });
   });
 </script>
-````
+```
 
 ## See Also
 
-* [Kendo Spreadsheet API Reference](http://docs.telerik.com/kendo-ui/api/javascript/ui/spreadsheet)
-* [Kendo Spreadsheet Sheet API Reference](https://docs.telerik.com/kendo-ui/api/javascript/spreadsheet/sheet)
+* [API Reference of the Spreadsheet](http://docs.telerik.com/kendo-ui/api/javascript/ui/spreadsheet)
+* [`sheet`](https://docs.telerik.com/kendo-ui/api/javascript/spreadsheet/sheet)

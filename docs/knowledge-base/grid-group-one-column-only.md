@@ -1,8 +1,8 @@
 ---
-title: Allow Only One Grouped Column
-description: An example on how to restrict the user from grouping by more than one column in the Kendo UI Grid. 
+title: Allow Only One Grouped Column in Grid
+description: An example on how to restrict the user from grouping more than one column in the Kendo UI Grid.
 type: how-to
-page_title: Group Only One Field at Time | Kendo UI Grid
+page_title: Group Only One Column at a Time | Kendo UI Grid
 slug: grid-group-one-column-only
 tags: grid, grouping, singe column
 ticketid: 1135530
@@ -10,10 +10,11 @@ res_type: kb
 ---
 
 ## Environment
+
 <table>
  <tr>
   <td>Product</td>
-  <td>Grid for Progress® Kendo UI®</td>
+  <td>Progress Kendo UI Grid</td>
  </tr>
  <tr>
   <td>Progress Kendo UI version</td>
@@ -23,14 +24,12 @@ res_type: kb
 
 ## Description
 
-How can I group only one column at a time in the Kendo UI Grid? How to restrict the user from grouping more than one column in the Kendo UI Grid?
+How can I group only one column at a time in the Kendo UI Grid? How can I restrict the user from grouping more than one column in the Kendo UI Grid?
 
 ## Solution
 
-To allow only one grouped column:
-
 1. Handle the [`dataBinding`](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid#events-dataBinding) event of the Grid.
-1. In the event handler, based on the number of groups, leave only the last one.
+1. In the event handler and based on the number of groups, leave only the last one.
 
 ```html
 <div id="example">

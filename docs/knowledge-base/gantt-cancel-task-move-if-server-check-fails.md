@@ -1,34 +1,35 @@
 ---
-title: Cancel Gantt Task Move if the New Start and End Does Not Pass Server Validation
-description: Perform server validation on Gantt task move. If it fails, cancel the new start and end
+title: Cancel Gantt Task Move If the New Start and End Do Not Pass Server Validation
+description: An example on how to perform server validation on the Kendo UI Gantt task move and cancel the new start and end if it fails.
 type: how-to
-page_title: Save Moved Gantt Task Position Only After Server Validation
+page_title: Save Moved Task Position Only After Server Validation | Kendo UI Gantt
 slug: gantt-cancel-task-move-if-server-check-fails
-position: 0
 tags: kendo, kendoui, gantt, validation, move-task, cancel-move
 ticketid: 1138180
 res_type: kb
-
 ---
 
 ## Environment
+
 <table>
  <tr>
   <td>Product</td>
-  <td>Progress® Kendo UI® Gantt</td>
+  <td>Progress Kendo UI Gantt</td>
  </tr>
 </table>
 
 
 ## Description
 
-On move (drag and drop) of a Gantt task, we need to validate if the new start and end dates are valid based on server validation logic. The validation will be called with an AJAX request. If the validation fails, we need to keep the initial start and end date for that task.
+On moving (drag and drop) a Gantt task and based on server validation logic, I want to validate if the new start and end dates are valid.
+
+How can I call the validation an AJAX request and, if the validation fails, to keep the initial start and end date for that task?
 
 ## Solution
-  
-You could perform a custom check on the server in the *[moveEnd](https://docs.telerik.com/kendo-ui/api/javascript/ui/gantt#events-moveEnd)* Gantt event. The default change should be prevented and if the validation passes, the new *start* and *end* dates should be saved for that task:  
 
-````html
+Perform a custom check on the server in the [`moveEnd`](https://docs.telerik.com/kendo-ui/api/javascript/ui/gantt#events-moveEnd) event of the Gantt. As a result, the default change is prevented and if the validation passes, the new start and end dates are saved for that task.  
+
+```html
 <div id="gantt"></div>
 
 <script>
@@ -62,8 +63,8 @@ You could perform a custom check on the server in the *[moveEnd](https://docs.te
     }
   });
 </script>
-````
+```
 
 ## See Also
 
-* [Kendo Gantt API Reference](http://docs.telerik.com/kendo-ui/api/javascript/ui/gantt)
+* [API Reference of the Gantt](http://docs.telerik.com/kendo-ui/api/javascript/ui/gantt)

@@ -2,9 +2,9 @@
 title: Remove Spinners from Numeric Editors in MVC Grid
 description: An example on how to remove the side arrows of the NumericTextBox editor in the ASP.NET MVC Grid.
 type: how-to
-page_title: Remove Spinner Arrows of NumericTextBox Editor | Kendo UI Grid for ASP.NET MVC
+page_title: Remove Spinner Arrows of NumericTextBox Editor | UI for ASP.NET MVC
 slug: grid-mvc-remove-spinner-numerictextbox-editor
-tags: grid treelist, NumericTextBox, spinners, editor, remove 
+tags: grid treelist, NumericTextBox, spinners, editor, remove
 ticketid: 1132419, 1134869
 res_type: kb
 ---
@@ -13,7 +13,7 @@ res_type: kb
 <table>
  <tr>
   <td>Product</td>
-  <td>Progress® Kendo UI® Grid for ASP.NET MVC</td>
+  <td>Progress Kendo UI Grid for ASP.NET MVC</td>
  </tr>
  <tr>
   <td>Progress Kendo UI version</td>
@@ -23,23 +23,24 @@ res_type: kb
 
 ## Description
 
-How do I remove the spinners from the editor of a "[DataType("Integer")]" field?
+How can I remove the spinners from the editor of a `"[DataType("Integer")]"` field?
 
 ## Solution
 
-To remove the spinners:
+1. Under `Views/Shared/EditorTemplates`, add a `.cshtml` file with the following definition:
 
-1. Under `Views/Shared/EditorTemplates` add a CSHTML file with a definition like this:
-	
 	`NoSpinners.cshtml`
 
 		@model int?
-		  
+
 		@(Html.Kendo().NumericTextBoxFor(m => m)
 		      .HtmlAttributes(new { style = "width:100%" })
 		      .Spinners(false)
 		)
-1. Open the model that you are editing in the Grid and add a [UIHint("NoSpinners")] annotation to the integer field that should not show spinners:
+
+1. Open the model that you are editing in the Grid.
+
+1. Add a `[UIHint("NoSpinners")]` annotation to the integer field which does not show spinners:
 
 		[DisplayName("Units in stock")]
 		[UIHint("NoSpinners")]
@@ -50,4 +51,6 @@ To remove the spinners:
 		    set;
 		}
 
-1. Make sure that the `NoSpinners` string must match the name of the editor template file. [Screenshot reference](https://www.screencast.com/t/NpPf3qWtsD).
+1. Make sure that the `NoSpinners` string matches the name of the editor template file.
+
+For e reference of the end result, refer to this [screenshot](https://www.screencast.com/t/NpPf3qWtsD).

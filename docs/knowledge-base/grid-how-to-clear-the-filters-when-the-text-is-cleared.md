@@ -1,20 +1,20 @@
 ---
-title: Filter Menu Customization Not Firing the Filter Event When the Text is Cleared
-description: An example on how to clear the filters when the text is cleared
+title: Clear Filters When Text Is Cleared in Grid
+description: An example on how to clear the filters when the text is cleared in a Kendo UI Grid.
 type: how-to
-page_title: How to Clear the Filters When the Text is Cleared | Kendo UI Grid
+page_title: Clear the Filters When the Text is Cleared | Kendo UI Grid
 slug: grid-how-to-clear-the-filters-when-the-text-is-cleared
 tags: grid, filter, clear
 ticketid: 1136856
 res_type: kb
-
 ---
 
 ## Environment
+
 <table>
  <tr>
   <td>Product</td>
-  <td>Grid for Progress® Kendo UI®</td>
+  <td>Progress Kendo UI Grid</td>
  </tr>
  <tr>
   <td>Operating System</td>
@@ -35,34 +35,25 @@ res_type: kb
 
 ## Description
 
-The steps for replication on [ColumnMenu demo](http://demos.telerik.com/kendo-ui/grid/column-menu)
+How can I make the filter menu customization in the Grid fire the `filter` event when the text is cleared?
 
-1\. Note the count as 1-30 of 830 items.
+To replicate the [**ColumnMenu** demo](http://demos.telerik.com/kendo-ui/grid/column-menu):
 
-2\. Click on the Ship Country column menu.
-
-3\. Select Filter \> Select Contains from the dropdown and enter the text France. Click the Filter button.
-
-4\. The grid refreshes and the count shows 1 - 30 of 77 items.
-
-5\. Go back to Ship Country \> Filter menu and backspace the text France to blank.
-
-6\. Click on the Filter button.
-
-7\. Nothing happens, count stays as 1-30 of 77 items.
-
-
+1. Note the count as 1-30 of 830 items.
+1. Click the **Ship Country** column menu.
+1. From the drop-down, select **Filter** > **Contains**.
+1. Enter **France** and click the **Filter** button.
+1. The Grid refreshes and the count shows 1-30 of 77 items.
+1. Go back to the **Ship Country** > **Filter** menu and backspace **France** to blank.
+1. Click the **Filter** button. As a result, nothing happens and the count stays as 1-30 of 77 items.
 
 ## Solution
 
-  
-Currently, this behavior is expected as when the filter has to be removed, we expect the user to click on the clear button next to the filter button.
-  
-In this scenario, we can suggest using the [ColumnMenuInit](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid#events-columnMenuInit) event to attach an event handler to the filter button, and if the value of the text box is an empty string to clear the filters with the [filter](https://docs.telerik.com/kendo-ui/api/javascript/data/datasource#methods-filter) method. 
-  
-Please refer to the example demonstrating this:
+The described behavior is expected because when the filter has to be removed, the user is expected to click the **Clear** button next to the **Filter** button.
 
-````html
+In this scenario, use the [`ColumnMenuInit`](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid#events-columnMenuInit) event to attach an event handler to the **Filter** button and, if the value of the text box is an empty string, to clear the filters with the [`filter`](https://docs.telerik.com/kendo-ui/api/javascript/data/datasource#methods-filter) method.
+
+```html
 <div id="example">
             <div id="grid"></div>
 
@@ -98,7 +89,7 @@ Please refer to the example demonstrating this:
                             if(val == ""){
                               e.sender.dataSource.filter({})
                             }
-                              
+
                           })
                         },
                         columnMenu: true,
@@ -122,4 +113,4 @@ Please refer to the example demonstrating this:
                 });
             </script>
         </div>
-````
+```

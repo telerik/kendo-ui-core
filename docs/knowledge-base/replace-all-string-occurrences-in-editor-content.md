@@ -1,5 +1,5 @@
 ---
-title: Replace all string occurrences in Editor content
+title: Replace All String Occurrences in Editor Content
 description: An example on how to replace all string occurrences in the Kendo UI Editor content.
 type: how-to
 page_title: Replace All String Occurrences | Kendo UI Editor
@@ -9,6 +9,7 @@ res_type: kb
 ---
 
 ## Environment
+
 <table>
  <tr>
   <td>Product</td>
@@ -18,11 +19,11 @@ res_type: kb
 
 ## Description
 
-How can I replace all specific string occurences in the Kendo UI Editor content?
+How can I replace all specific string occurrences in the Kendo UI Editor content?
 
 ## Solution
 
-* Use `deserioalization.custom` option of the Editor to plug a custom callback that will return the modified content.
+Use the `deserioalization.custom` option of the Editor to plug a custom callback that will return the modified content.
 
 ```html
 <div id="example">

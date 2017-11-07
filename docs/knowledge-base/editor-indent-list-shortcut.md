@@ -1,21 +1,20 @@
 ---
-title: Kendo Editor Shortcuts to Indent/Outdent a List
-description: An example on how to implement a shortcuts to indent and outdent an ordered list in Kendo Editor 
+title: Implement Editor Shortcuts to Indent or Outdent a List
+description: An example on how to implement shortcuts to indent or outdent an ordered list in a Kendo UI Editor.
 type: how-to
-page_title: Implement Shortcuts for Indent and Outdent to an ordered list | Kendo UI Editor
+page_title: Implement Shortcuts to Indent or Outdent Ordered Lists | Kendo UI Editor
 slug: editor-indent-list-shortcut
-position: 0
 tags: kendo, kendoui, editor, shortcuts, tab, ordered, list, indent, outdent
 ticketid: 1136197
 res_type: kb
-
 ---
 
 ## Environment
+
 <table>
  <tr>
   <td>Product</td>
-  <td>Editor for Progress® Kendo UI®</td>
+  <td>Progress Kendo UI Editor</td>
  </tr>
  <tr>
   <td>Operating System</td>
@@ -30,16 +29,15 @@ res_type: kb
 
 ## Description
 
-How to use **Tab** and **Shift+Tab** as shortcuts to indent and outdent a ordered list in Kendo Editor
+How can I use `Tab` and `Shift`+`Tab` as shortcuts to indent or outdent an ordered list in the Kendo UI Editor?
 
 ## Solution
 
-The implementation for such shortcuts, could be applyed by the following steps:
-
-1. Handle the keydown event of Kendo Editor.
-1. Subscribe for the Tab key's keyCode (9) and prevent the default operation.
-1. Check if Shift key is pressed and use the **exec** method to trigger the outdent command.
-1. Otherwise, use the same method and trigger the indent command. 
+1. Handle the `keydown` event of the Kendo UI Editor.
+1. Subscribe for the `keyCode` (`9`) of the `Tab` key.
+1. Prevent the default operation.
+1. Check if the `Shift` key is pressed.
+1. Use the `exec` method to trigger the outdent command. Otherwise, use the same method and trigger the indent command.
 
 ```html
 <textarea id="editor"></textarea>
