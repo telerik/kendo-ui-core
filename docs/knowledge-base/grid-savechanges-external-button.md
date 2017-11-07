@@ -1,0 +1,76 @@
+---
+title: Trigger SaveChanges Outside the Grid
+description: An example on how to invoke the saveChanges method from a button in the Kendo UI Grid. 
+type: how-to
+page_title: Save Grid Changes from External Button | Kendo UI Grid
+slug: grid-savechanges-external-button
+tags: grid, saveChanges, button
+ticketid: 1135977
+res_type: kb
+---
+
+## Environment
+<table>
+ <tr>
+  <td>Product</td>
+  <td>Grid for Progress® Kendo UI®</td>
+ </tr>
+ <tr>
+  <td>Progress Kendo UI version</td>
+  <td>Created with the 2017.3.1026 version</td>
+ </tr>
+</table>
+
+## Description
+
+How can I save the changes from an outside button in the Kendo UI Grid?
+
+## Solution
+
+To save the changes programmatically:
+
+1. Select the Grid.
+1. Use the [`saveChanges`](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid#methods-saveChanges) method.
+
+```html
+<button id="saveChanges">Save Changes</button>
+<br /><br />
+<div id="grid"></div>
+
+<script>
+    $("#grid").kendoGrid({
+        columns: [{
+                field: "name"
+            },
+            {
+                field: "age"
+            }
+        ],
+        dataSource: {
+            data: [{
+                    id: 1,
+                    name: "Jane Doe",
+                    age: 30
+                },
+                {
+                    id: 2,
+                    name: "John Doe",
+                    age: 33
+                }
+            ],
+            schema: {
+                model: {
+                    id: "id"
+                }
+            }
+        },
+        editable: true
+    });
+    $("#saveChanges").kendoButton({
+        click: function(e) {
+            var grid = $("#grid").data("kendoGrid");
+            grid.saveChanges();
+        }
+    })
+</script>
+```

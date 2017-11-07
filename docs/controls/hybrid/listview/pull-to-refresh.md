@@ -67,15 +67,11 @@ The Pull-to-refresh pattern solves the issue that occurs when you have to displa
         template: $("#pull-to-refresh-template").text(),
     });
 
-This is the live example of the representation above:
-
-<a class="jsbin-embed" href="http://jsbin.com/ukitas/1/embed?live">JS Bin</a><script src="http://static.jsbin.com/js/embed.js"></script>
-
 ### Send Additional Parameters
 
 The Hybrid UI ListView provides a way to define the [`pullParameters`](/api/mobile/listview#pullparameters-function) function, which will add its result to the data that is sent to the server. This data will be available in the DataSource's [`parameterMap`](/api/framework/datasource#transportparametermap-function) function.
 
-**Step 1** Modify the above example to send [an additional parameter](https://dev.twitter.com/docs/api/1.1/get/search/tweets#api-param-since_id) to the Twitter service.
+**Step 1** Modify the above example to send an additional parameter to the Twitter service.
 
 ###### Example
 
@@ -118,10 +114,6 @@ The Hybrid UI ListView provides a way to define the [`pullParameters`](/api/mobi
             data: "results" // the data which the data source will be bound to is in the "results" field
         }
     });
-
-This is the live example of the representation above:
-
-<a class="jsbin-embed" href="http://jsbin.com/iloqid/1/embed?live">JS Bin</a><script src="http://static.jsbin.com/js/embed.js"></script>
 
 ## See Also
 

@@ -20,7 +20,7 @@ The offline sample application requires:
 
 * [.NET 4.5](https://www.microsoft.com/en-us/download/details.aspx?id=30653)
 * [ASP.NET MVC 4](http://www.asp.net/mvc/mvc4) or [ASP.NET MVC 5](http://www.asp.net/mvc/mvc5)
-* [Visual Studio 2012](https://www.microsoft.com/en-us/download/details.aspx?id=34673) or [Visual Studio 2013](https://www.visualstudio.com/downloads/download-visual-studio-vs)
+* [Visual Studio](https://www.visualstudio.com/downloads/)
 * LocalDB
 
 ## Environments

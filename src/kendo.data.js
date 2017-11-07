@@ -259,22 +259,24 @@ var __meta__ = { // jshint ignore:line
             return -1;
         },
 
-        forEach: function(callback) {
-            var idx = 0,
-                length = this.length;
+        forEach: function(callback, thisArg) {
+            var idx = 0;
+            var length = this.length;
+            var context = thisArg || window;
 
             for (; idx < length; idx++) {
-                callback(this[idx], idx, this);
+                callback.call(context, this[idx], idx, this);
             }
         },
 
-        map: function(callback) {
-            var idx = 0,
-                result = [],
-                length = this.length;
+        map: function(callback, thisArg) {
+            var idx = 0;
+            var result = [];
+            var length = this.length;
+            var context = thisArg || window;
 
             for (; idx < length; idx++) {
-                result[idx] = callback(this[idx], idx, this);
+                result[idx] = callback.call(context, this[idx], idx, this);
             }
 
             return result;
@@ -315,15 +317,16 @@ var __meta__ = { // jshint ignore:line
             return result;
         },
 
-        filter: function(callback) {
-            var idx = 0,
-                result = [],
-                item,
-                length = this.length;
+        filter: function(callback, thisArg) {
+            var idx = 0;
+            var result = [];
+            var item;
+            var length = this.length;
+            var context = thisArg || window;
 
             for (; idx < length; idx++) {
                 item = this[idx];
-                if (callback(item, idx, this)) {
+                if (callback.call(context, item, idx, this)) {
                     result[result.length] = item;
                 }
             }
@@ -331,27 +334,29 @@ var __meta__ = { // jshint ignore:line
             return result;
         },
 
-        find: function(callback) {
-            var idx = 0,
-                item,
-                length = this.length;
+        find: function(callback, thisArg) {
+            var idx = 0;
+            var item;
+            var length = this.length;
+            var context = thisArg || window;
 
             for (; idx < length; idx++) {
                 item = this[idx];
-                if (callback(item, idx, this)) {
+                if (callback.call(context, item, idx, this)) {
                     return item;
                 }
             }
         },
 
-        every: function(callback) {
-            var idx = 0,
-                item,
-                length = this.length;
+        every: function(callback, thisArg) {
+            var idx = 0;
+            var item;
+            var length = this.length;
+            var context = thisArg || window;
 
             for (; idx < length; idx++) {
                 item = this[idx];
-                if (!callback(item, idx, this)) {
+                if (!callback.call(context, item, idx, this)) {
                     return false;
                 }
             }
@@ -359,14 +364,15 @@ var __meta__ = { // jshint ignore:line
             return true;
         },
 
-        some: function(callback) {
-            var idx = 0,
-                item,
-                length = this.length;
+        some: function(callback, thisArg) {
+            var idx = 0;
+            var item;
+            var length = this.length;
+            var context = thisArg || window;
 
             for (; idx < length; idx++) {
                 item = this[idx];
-                if (callback(item, idx, this)) {
+                if (callback.call(context, item, idx, this)) {
                     return true;
                 }
             }

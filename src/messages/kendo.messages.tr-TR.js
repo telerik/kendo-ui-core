@@ -364,7 +364,7 @@ kendo.ui.Upload.prototype.options.localization =
 $.extend(true, kendo.ui.Upload.prototype.options.localization,{
   "cancel": "İptal Et",
   "dropFilesHere": "Yüklemek için dosyaları buraya bırakın",
-  "headerStatusUploaded": "Tamalandı",
+  "headerStatusUploaded": "Tamamlandı",
   "headerStatusUploading": "Yükleniyor",
   "remove": "Kaldır",
   "retry": "Tekrar Dene",

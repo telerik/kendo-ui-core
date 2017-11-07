@@ -17,7 +17,7 @@ Built around the HTML5 form validation attributes, it supports a variety of buil
 
 ### Usage of HTML5 Attributes
 
-One of the highly anticipated features in HTML5 is the arrival of new [HTML5 form validation attributes](https://developer.mozilla.org/en-US/docs/Web/Guide/HTML/Forms_in_HTML#Constraint_Validation). When used, these attributes set constraints on HTML inputs, which are enforced by the browser. The available constraints include:
+One of the highly anticipated features in HTML5 is the arrival of new [HTML5 form validation attributes](https://developer.mozilla.org/en-US/docs/Web/Guide/HTML/HTML5/Constraint_validation). When used, these attributes set constraints on HTML inputs, which are enforced by the browser. The available constraints include:
 
 - required
 - pattern (regex)
