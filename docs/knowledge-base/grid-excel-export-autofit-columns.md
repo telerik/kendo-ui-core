@@ -34,6 +34,8 @@ To set the Kendo UI Workbook [`columns width to autoWidth`](https://docs.telerik
 excelExport: function(e) {
   var columns = e.workbook.sheets[0].columns;
   columns.forEach(function(column){
+    // also delete the width if it is set
+    delete column.width;
     column.autoWidth = true;
   });
 }
@@ -54,6 +56,7 @@ excelExport: function(e) {
       excelExport: function(e) {
         var columns = e.workbook.sheets[0].columns;
         columns.forEach(function(column){
+          delete column.width;
           column.autoWidth = true;
         });
       }

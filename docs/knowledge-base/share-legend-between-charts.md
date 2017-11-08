@@ -33,18 +33,6 @@ Handle the [`legendItemClick`](http://docs.telerik.com/kendo-ui/api/javascript/d
 The following example demonstrates the full implementation of the approach.  
 
 ```html
-<!DOCTYPE html>
-<html>
-  <head>
-    <style>html { font-size: 14px; font-family: Arial, Helvetica, sans-serif; }</style>
-    <title></title>
-    <link rel="stylesheet" href="https://kendo.cdn.telerik.com/2017.2.621/styles/kendo.common.min.css" />
-    <link rel="stylesheet" href="https://kendo.cdn.telerik.com/2017.2.621/styles/kendo.material.min.css" />
-
-    <script src="https://kendo.cdn.telerik.com/2017.2.621/js/jquery.min.js"></script>
-    <script src="https://kendo.cdn.telerik.com/2017.2.621/js/kendo.all.min.js"></script>
-  </head>
-  <body>
     <div id="example">
       <div class="demo-section k-content wide">
         <div id="chart" style="width:400px; height: 250px"></div>
@@ -115,10 +103,6 @@ The following example demonstrates the full implementation of the approach.
         $(document).ready(createChart);
       </script>
     </div>
-
-
-  </body>
-</html>
 ```
 
 ## Notes
