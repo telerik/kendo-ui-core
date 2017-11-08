@@ -2362,7 +2362,7 @@ The content-type HTTP header sent to the server. The default is `"application/x-
     <script>
     var dataSource = new kendo.data.DataSource({
       transport: {
-        create: {
+        read: {
           /* omitted for brevity */
           contentType: "application/json"
         }
