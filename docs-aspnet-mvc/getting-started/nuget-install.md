@@ -84,6 +84,16 @@ NuGet Sources Update -Name "telerik.com " -Source "https://nuget.telerik.com/nug
       -UserName "your login email" -Password "your new password"
 ``` 
 
+### Nuget Package Takes Too Long to Install/Update on Visual Studio
+
+In order to resolve this, the auto-sync can be disabled from the _references.js file by modifying the following line:
+
+```
+/// <autosync enabled="false" />.
+```
+
+Also, the project can be disconnected from the source control before running the Update Wizard.
+
 ## See Also
 
 * [Telerik UI for ASP.NET MVC Fundamentals]({% slug fundamentals_aspnetmvc %})
