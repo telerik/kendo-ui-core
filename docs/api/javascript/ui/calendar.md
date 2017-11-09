@@ -587,7 +587,8 @@ Gets/Sets the selected dates for the calendar.
     <div id="calendar"></div>
     <script>
         $("#calendar").kendoCalendar({
-            selectDates: [new Date(2013, 10, 10), new Date(2015, 10, 10)]
+            selectDates: [new Date(2013, 10, 10), new Date(2015, 10, 10)],
+            selectable: "multiple"
         });
 
         var calendar = $("#calendar").data("kendoCalendar");
@@ -600,7 +601,8 @@ Gets/Sets the selected dates for the calendar.
     <div id="calendar"></div>
     <script>
         $("#calendar").kendoCalendar({
-            selectDates: [new Date(2013, 10, 10), new Date(2015, 10, 10)]
+            selectDates: [new Date(2013, 10, 10), new Date(2015, 10, 10)],
+            selectable: "multiple"
         });
 
         var calendar = $("#calendar").data("kendoCalendar");

@@ -672,7 +672,7 @@ withAngularTests("Angular (UI Core)", function(runTest){
             dataValueField : "id"
         };
         $scope.ns = { test: 1 };
-        $("<div isolated-scope><select kendo-dropdownlist='ns.list' ng-model='ns.test' k-options='options'></select></div>").appendTo(dom);
+        $("<div isolated-scope><select kendo-dropdownlist=ns.list ng-model='ns.test' k-options='options'></select></div>").appendTo(dom);
         expect(2);
         setTimeout(function(){
             var dl = $scope.ns.list;
