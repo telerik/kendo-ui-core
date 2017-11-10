@@ -33,7 +33,7 @@ With this configuration, only scripts that originate from [http://htmlui.com](ht
 
 Alternatively, site owners can grant wide-open access with the always ready to party asterisk: `__Access-Control-Allow-Origin: *__`.
 
-Now, any site that wants to load a resource directly using Ajax can do so without getting the browser security error. It's a very helpful technique for modern apps that often load data using JavaScript, and hopefully more modern web APIs will start to support CORS. You can already find CORS in action with the [`GeoNames.org`](http://www.geonames.org/export/ws-overview.html) and [`Last.fm`](http://www.last.fm/api) APIs. Twitter does not yet support CORS, but [they are considering it](https://twittercommunity.com/t/access-control-allow-origin/7253) for APIs that already support JSONP. Facebook does not support CORS.
+Now, any site that wants to load a resource directly using Ajax can do so without getting the browser security error. It's a very helpful technique for modern apps that often load data using JavaScript, and hopefully more modern web APIs will start to support CORS. You can already find CORS in action with the [`GeoNames.org`](http://www.geonames.org/export/ws-overview.html), [`Last.fm`](http://www.last.fm/api) and [Google](https://developers.google.com/api-client-library/javascript/features/cors) APIs. 
 
 ### Server-Side Setting
 

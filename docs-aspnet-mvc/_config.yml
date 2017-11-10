@@ -256,6 +256,11 @@ defaults:
     values:
         product: "aspnet-mvc"
 
+    scope:
+        path: "api"
+    values:
+        editable: false
+
 type_links:
     "kendo.Class": "/api/javascript/class"
     "kendo.data.DataSource": "/api/javascript/data/datasource"
