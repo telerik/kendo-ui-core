@@ -35,29 +35,29 @@ When the [columns setting](https://docs.telerik.com/kendo-ui/api/javascript/ui/g
 <script>
     //example data received from remote source via jQuery ajax merthod
     var data = [{
-    "Name": "John",
-    "Role": "Developer",
-    "Dept": "Dev",
-    "Date": "\/Date(836438400000)\/",
-    "Balance": 23
+        "Name": "John",
+        "Role": "Developer",
+        "Dept": "Dev",
+        "Date": "\/Date(836438400000)\/",
+        "Balance": 23
     }, {
-    "Name": "Jane",
-    "Role": "Developer",
-    "Dept": "Dev",
-    "Date": "\/Date(836438400000)\/",
-    "Balance": 23
+        "Name": "Jane",
+        "Role": "Developer",
+        "Dept": "Dev",
+        "Date": "\/Date(836438400000)\/",
+        "Balance": 23
     }, {
-    "Name": "James",
-    "Role": "QA",
-    "Dept": "Dev",
-    "Date": "\/Date(836438400000)\/",
-    "Balance": 23
+        "Name": "James",
+        "Role": "QA",
+        "Dept": "Dev",
+        "Date": "\/Date(836438400000)\/",
+        "Balance": 23
     }, {
-    "Name": "Jimmy",
-    "Role": "Designer",
-    "Dept": "Dev",
-    "Date": "\/Date(836438400000)\/",
-    "Balance": 23
+        "Name": "Jimmy",
+        "Role": "Designer",
+        "Dept": "Dev",
+        "Date": "\/Date(836438400000)\/",
+        "Balance": 23
     }];
 
     //in the success handler of the ajax method call the function below with the received data:
@@ -66,85 +66,85 @@ When the [columns setting](https://docs.telerik.com/kendo-ui/api/javascript/ui/g
 
     function generateGrid(gridData) {
 
-    var model = generateModel(gridData[0]);
+        var model = generateModel(gridData[0]);
 
-    var parseFunction;
+        var parseFunction;
 
-    if (dateFields.length > 0) {
-        parseFunction = function (response) {
-        for (var i = 0; i < response.length; i++) {
-            for (var fieldIndex = 0; fieldIndex < dateFields.length; fieldIndex++) {
-            var record = response[i];
-            record[dateFields[fieldIndex]] = kendo.parseDate(record[dateFields[fieldIndex]]);
-            }
+        if (dateFields.length > 0) {
+            parseFunction = function (response) {
+                for (var i = 0; i < response.length; i++) {
+                    for (var fieldIndex = 0; fieldIndex < dateFields.length; fieldIndex++) {
+                        var record = response[i];
+                        record[dateFields[fieldIndex]] = kendo.parseDate(record[dateFields[fieldIndex]]);
+                    }
+                }
+                return response;
+            };
         }
-        return response;
-        };
-    }
 
-    var grid = $("#grid").kendoGrid({
-        dataSource: {
-        data: gridData,
-        schema: {
-            model: model,
-            parse: parseFunction
-        }
-        },
-        editable: true,
-        sortable: true
-    });
+        var grid = $("#grid").kendoGrid({
+            dataSource: {
+                data: gridData,
+                schema: {
+                    model: model,
+                    parse: parseFunction
+                }
+            },
+            editable: true,
+            sortable: true
+        });
     }
 
     function generateModel(gridData) {
-    var model = {};
-    model.id = "ID";
-    var fields = {};
-    for (var property in gridData) {
-        var propType = typeof gridData[property];
+        var model = {};
+        model.id = "ID";
+        var fields = {};
+        for (var property in gridData) {
+            var propType = typeof gridData[property];
 
-        if (propType == "number") {
-        fields[property] = {
-            type: "number",
-            validation: {
-            required: true
+            if (propType == "number") {
+                fields[property] = {
+                    type: "number",
+                    validation: {
+                        required: true
+                    }
+                };
+            } else if (propType == "boolean") {
+                fields[property] = {
+                    type: "boolean",
+                    validation: {
+                        required: true
+                    }
+                };
+            } else if (propType == "string") {
+                var parsedDate = kendo.parseDate(gridData[property]);
+                if (parsedDate) {
+                    fields[property] = {
+                        type: "date",
+                        validation: {
+                            required: true
+                        }
+                    };
+                    dateFields.push(property);
+                } else {
+                    fields[property] = {
+                        validation: {
+                            required: true
+                        }
+                    };
+                }
+            } else {
+                fields[property] = {
+                    validation: {
+                        required: true
+                    }
+                };
             }
-        };
-        } else if (propType == "boolean") {
-        fields[property] = {
-            type: "boolean",
-            validation: {
-            required: true
-            }
-        };
-        } else if (propType == "string") {
-        var parsedDate = kendo.parseDate(gridData[property]);
-        if (parsedDate) {
-            fields[property] = {
-            type: "date",
-            validation: {
-                required: true
-            }
-            };
-            dateFields.push(property);
-        } else {
-            fields[property] = {
-            validation: {
-                required: true
-            }
-            };
+
         }
-        } else {
-        fields[property] = {
-            validation: {
-            required: true
-            }
-        };
-        }
+        model.fields = fields;
 
-    }
-    model.fields = fields;
-
-    return model;
+        return model;
     }
 </script>
 ````
