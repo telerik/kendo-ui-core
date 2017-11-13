@@ -102,17 +102,19 @@
         ok(changeWasCalled);
     });
 
-    test("_change does not raise change event if value has't changed", 0, function() {
-        var changeWasCalled = false, dropdownlist = new DropDownList(input, {
-            dataSource: ["foo", "bar"]
+    test("change event is triggered once after setOptions", 1, function() {
+        var dropdownlist = new DropDownList(input, {
+            value: ""
         });
+        var counter = 0;
+        dropdownlist.setDataSource(["foo", "bar"]);
+        dropdownlist.setOptions({change: function() {
+            counter++
+        }});
 
-        dropdownlist.bind("change", function() {
-            ok(false);
-        });
-
-        dropdownlist.value("foo");
-        dropdownlist.wrapper.focus().focusout();
+        dropdownlist.open();
+        dropdownlist.ul.find("li:last").click();
+        equal(counter, 1);
     });
 
     test("_change raises change event if selectedIndex has changed", 1, function() {

@@ -405,6 +405,20 @@ test("Adding dynamic content element renders properly on root and inner levels",
     m.destroy();
 });
 
+test("_itemHasChildren returns true when there is content item", function () {
+    var m = new kendo.ui.Menu("<ul></ul>");
+
+    m.append([
+        {
+            text: "Item 1",
+            content: "Item 1 Content"
+        }
+    ]);
+
+    ok(m._itemHasChildren(m.element.children("li:first")));
+    m.destroy();
+});
+
 test("Adding dynamic contentUrl element renders contents on root and inner levels", function () {
     var m = new kendo.ui.Menu("<ul></ul>");
 

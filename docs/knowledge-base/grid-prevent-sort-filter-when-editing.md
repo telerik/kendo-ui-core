@@ -1,0 +1,114 @@
+---
+title: Prevent sorting and filtering while in edit mode
+description: An example on how to prevent filter and sort operations in Grid when an item is being created/edited
+type: how-to
+page_title: Prevent sort and filter while editing | Kendo UI Grid
+slug: grid-prevent-sort-filter-when-editing
+tags: grid, prevent, sort, filter, edit, create, insert
+res_type: kb
+---
+
+## Environment
+
+<table>
+ <tr>
+  <td>Product</td>
+  <td>Progress Kendo UI Grid</td>
+ </tr>
+</table>
+
+
+## Description
+
+I have Grid with inline editing. I want to disable sorting and filtering for the Grid while the users are editing or creating a record. 
+
+## Solution
+
+For this scenario it is suitable to handle the mousedown event for the Grid header. In the handler you can check if there is an edited row in the Grid and cancel the action if necessary. 
+
+
+````html
+<div id="grid"></div>
+
+<script>
+    $(document).ready(function () {
+        var crudServiceBaseUrl = "https://demos.telerik.com/kendo-ui/service",
+            dataSource = new kendo.data.DataSource({
+                transport: {
+                    read: {
+                        url: crudServiceBaseUrl + "/Products",
+                        dataType: "jsonp"
+                    },
+                    update: {
+                        url: crudServiceBaseUrl + "/Products/Update",
+                        dataType: "jsonp"
+                    },
+                    destroy: {
+                        url: crudServiceBaseUrl + "/Products/Destroy",
+                        dataType: "jsonp"
+                    },
+                    create: {
+                        url: crudServiceBaseUrl + "/Products/Create",
+                        dataType: "jsonp"
+                    },
+                    parameterMap: function (options, operation) {
+                        if (operation !== "read" && options.models) {
+                            return { models: kendo.stringify(options.models) };
+                        }
+                    }
+                },
+                batch: true,
+                pageSize: 20,
+                schema: {
+                    model: {
+                        id: "ProductID",
+                        fields: {
+                            ProductID: { editable: false, nullable: true },
+                            ProductName: { validation: { required: true } },
+                            UnitPrice: { type: "number", validation: { required: true, min: 1 } },
+                            Discontinued: { type: "boolean" },
+                            UnitsInStock: { type: "number", validation: { min: 0, required: true } }
+                        }
+                    }
+                }
+            });
+
+        $("#grid").kendoGrid({
+            dataSource: dataSource,
+            pageable: true,
+            height: 550,
+            toolbar: ["create"],
+            sortable: true,
+            filterable: true,
+            columns: [
+                "ProductName",
+                { field: "UnitPrice", title: "Unit Price", format: "{0:c}", width: "120px" },
+                { field: "UnitsInStock", title: "Units In Stock", width: "120px" },
+                { field: "Discontinued", width: "120px", editor: customBoolEditor },
+                { command: ["edit", "destroy"], title: "&nbsp;", width: "250px" }],
+            editable: "inline"
+        });
+
+        $(".k-grid").on("mousedown", ".k-grid-header th", function (e) {
+            // prevent sorting/filtering for the current Grid only
+            var grid = $(this).closest(".k-grid");
+            var editRow = grid.find(".k-grid-edit-row");
+
+            // prevent sorting/filtering while any Grid is being edited
+            //var editRow = $(".k-grid-edit-row");
+
+            if (editRow.length > 0) {
+                alert("Please complete the editing operation before sorting or filtering");
+                e.preventDefault();
+            }
+        });
+    });
+
+    function customBoolEditor(container, options) {
+        var guid = kendo.guid();
+        $('<input class="k-checkbox" id="' + guid + '" type="checkbox" name="Discontinued" data-type="boolean" data-bind="checked:Discontinued">').appendTo(container);
+        $('<label class="k-checkbox-label" for="' + guid + '">​</label>').appendTo(container);
+    }
+</script>
+````
+

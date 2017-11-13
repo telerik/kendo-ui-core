@@ -30,7 +30,7 @@ What should I write in ajax's response?
 
 ## Solution
 
-If the desired result is to show the text on two lines without using the [column.template](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid#configuration-columns.template) I can suggest using the "**<br/\>**" tag.  
+If the desired result is to show the text on two lines without using the [column.template](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid#configuration-columns.template) I can suggest using the "**br**" tag.  
   
 This can be achieved by sending the tag as part of the response and setting the [encoding](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid#configuration-columns.encoded) to false:  
   
@@ -45,5 +45,6 @@ $("#grid").kendoGrid({
   ],
   dataSource: [ { name: "Jane Doe </br> test" } ]
 });
+</script>
 ````
   
