@@ -137,6 +137,7 @@ var __meta__ = { // jshint ignore:line
             var that = this;
             var currentOptions = that.options;
             var virtual = currentOptions.virtual;
+            var changeEventOption = {change: proxy(that._listChange, that)};
             var listBoundHandler = proxy(that._listBound, that);
 
             virtual = typeof virtual === "object" ? virtual : {};
@@ -146,7 +147,6 @@ var __meta__ = { // jshint ignore:line
                 selectable: true,
                 dataSource: that.dataSource,
                 click: proxy(that._click, that),
-                change: proxy(that._listChange, that),
                 activate: proxy(that._activateItem, that),
                 deactivate: proxy(that._deactivateItem, that),
                 dataBinding: function() {
@@ -159,7 +159,7 @@ var __meta__ = { // jshint ignore:line
                 groupTemplate: currentOptions.groupTemplate,
                 fixedGroupTemplate: currentOptions.fixedGroupTemplate,
                 template: currentOptions.template
-            }, options, virtual);
+            }, options, virtual, changeEventOption);
 
             if (!options.template) {
                 options.template = "#:" + kendo.expr(options.dataTextField, "data") + "#";

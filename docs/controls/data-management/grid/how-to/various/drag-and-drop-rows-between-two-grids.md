@@ -13,7 +13,7 @@ The following example demonstrates how to drag and drop rows between two Kendo U
 ###### Example
 
 ```html
-<div id="grid1"></div>
+    <div id="grid1"></div>
     <br /><br /><br />
     <div id="grid2"></div>
     <script>
@@ -22,7 +22,7 @@ The following example demonstrates how to drag and drop rows between two Kendo U
           data: [
             { "ID": 1, "Name": "James" },
             { "ID": 2, "Name": "John" },
-            { "ID": 3, "Name": "Jane" }
+            { "ID": 3, "Name": "Jane" },
           ],
           pageSize: 5
         });
@@ -31,7 +31,7 @@ The following example demonstrates how to drag and drop rows between two Kendo U
           data: [
             { "ID": 4, "Name": "Alex" },
             { "ID": 5, "Name": "Allen" },
-            { "ID": 6, "Name": "Anton" }
+            { "ID": 6, "Name": "Anton" },
           ],
           pageSize: 5
         });
@@ -74,7 +74,7 @@ The following example demonstrates how to drag and drop rows between two Kendo U
         });
 
 
-        grid1.table.kendoDropTarget({
+        grid1.wrapper.kendoDropTarget({
           drop: function (e) {
             var dataItem = dataSource2.getByUid(e.draggable.currentTarget.data("uid"));
             dataSource2.remove(dataItem);
@@ -82,8 +82,7 @@ The following example demonstrates how to drag and drop rows between two Kendo U
           },
           group: "gridGroup2",
         });
-
-        grid2.table.kendoDropTarget({
+        grid2.wrapper.kendoDropTarget({
           drop: function (e) {
             var dataItem = dataSource1.getByUid(e.draggable.currentTarget.data("uid"));
             dataSource1.remove(dataItem);
@@ -91,7 +90,6 @@ The following example demonstrates how to drag and drop rows between two Kendo U
           },
           group: "gridGroup1",
         });
-
       });
     </script>
 ```

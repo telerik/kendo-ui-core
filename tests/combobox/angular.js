@@ -182,7 +182,7 @@
 
     ngTest("combobox with autoBind:false skips binding when value is null", 2, function() {
         angular.module("kendo.tests").controller("mine", function($scope) {
-            var colors = new kendo.data.ObservableArray([ { color: "red", value: 1 }, { color: "green", value: 2 }, { color: "blue", value: 3 } ]);
+            var colors = new kendo.data.ObservableArray([ { color: "", value: null }, { color: "red", value: 1 }, { color: "green", value: 2 }, { color: "blue", value: 3 } ]);
 
             $scope.colors = new kendo.data.DataSource({ data: colors }),
             $scope.selectedColor = null;
@@ -195,7 +195,7 @@
         var widget = QUnit.fixture.find("select").getKendoComboBox();
 
         equal(widget.listView.bound(), false);
-        equal(widget.value(), "");
+        equal(widget.dataItem(), null);
     });
 
 

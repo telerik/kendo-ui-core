@@ -7,7 +7,7 @@ slug: howto_resize_by_dragging_and_apply_the_new_size_grid
 
 # Resize the Grid by Dragging and Apply the New Size
 
-The example below demonstrates how to resize the Kendo UI Grid by dragging its bottom-right corner.
+>The example below demonstrates how to resize the Kendo UI Grid by dragging its bottom-right corner. The handler will be shown only at the bottom-right corner of the Grid after hover.
 
 ###### Example
 
@@ -35,7 +35,6 @@ The example below demonstrates how to resize the Kendo UI Grid by dragging its b
         height: 300px;
       }
     </style>
-    <p>Drag the handle at the bottom-right Grid corner to resize the widget and apply a new page size.</p>
     <div class="grid-wrap">
       <div id="grid1" class="kendogrid"></div>
     </div>

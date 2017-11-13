@@ -678,7 +678,10 @@ withAngularTests("Angular (UI Core)", function(runTest){
             var dl = $scope.ns.list;
             equal(dom.find("h1").length, 1);
             dl.value(2);
+
             dl.element.trigger("change");
+            dl.trigger("change");
+
             equal($scope.ns.test, 2);
             start();
         }, 100);

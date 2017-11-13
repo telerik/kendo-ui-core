@@ -481,6 +481,17 @@ html .km-pane-wrapper .k-header
     border-color: transparent;
 }
 
+.k-mobile-list .k-check:checked,
+.k-mobile-list .k-edit-field [type=checkbox]:checked {
+  font-family: 'WebComponentsIcons';
+  background-image: none;
+}
+
+.k-mobile-list .k-check:checked:before,
+.k-mobile-list .k-edit-field [type=checkbox]:checked:before {
+  content: "\e118";
+}
+
 .k-i-loading {
     background-image: url('@{image-folder}/loading.gif');
 }

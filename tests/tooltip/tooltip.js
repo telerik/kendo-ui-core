@@ -14,9 +14,7 @@
 
         teardown: function() {
             kendo.effects.enable();
-            if (container.data("kendoTooltip")) {
-                container.kendoTooltip("destroy");
-            }
+            kendo.destroy(QUnit.fixture);
         }
     });
 
