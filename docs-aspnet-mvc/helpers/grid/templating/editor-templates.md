@@ -39,7 +39,9 @@ The following example demonstrates the code that will be used to get the editor 
 
 If the Grid is configured for pop-up editing, the [`Html.EditorForModel`](https://msdn.microsoft.com/en-us/library/system.web.mvc.html.editorextensions.editorformodel.aspx) is used to get the editor HTML for the whole model.
 
-Fro more information on ASP.NET MVC editor templates, refer to [this blog post series on ASP.NET MVC 2 templates](http://bradwilson.typepad.com/blog/2009/10/aspnet-mvc-2-templates-part-1-introduction.html).
+For more information on ASP.NET MVC editor templates, refer to [this blog post series on ASP.NET MVC 2 templates](http://bradwilson.typepad.com/blog/2009/10/aspnet-mvc-2-templates-part-1-introduction.html).
+
+For a runnable example on using custom popup templates, refer to [this demo](https://github.com/telerik/ui-for-aspnet-mvc-examples/tree/master/grid/custom-popup-editor).
 
 ### Create Custom Editors for Bound Properties
 

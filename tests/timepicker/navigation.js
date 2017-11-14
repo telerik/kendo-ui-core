@@ -12,10 +12,7 @@
         },
         teardown: function() {
             kendo.effects.enable();
-            var widget = kendo.widgetInstance(input);
-            if (widget) {
-                widget.destroy();
-            }
+            kendo.destroy(QUnit.fixture);
         }
     });
 

@@ -6,6 +6,7 @@
 
         teardown: function() {
            // QUnit.fixture.find("#scroller").kendoMobileScroller("destroy");
+            kendo.destroy(QUnit.fixture);
             QUnit.fixture.empty();
         }
     });

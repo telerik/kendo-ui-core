@@ -10,7 +10,7 @@ module("kendo.ui.DateTimePicker navigation", {
     },
     teardown: function() {
         kendo.effects.enable();
-        input.data("kendoDateTimePicker").destroy();
+        kendo.destroy(QUnit.fixture);
     }
 });
 
