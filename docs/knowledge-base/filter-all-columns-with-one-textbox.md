@@ -6,6 +6,7 @@ page_title: Filter all columns with single textbox | Kendo UI Grid
 slug: filter-all-columns-with-one-textbox
 tags: grid, filter, all, columns, single, input, textbox, one
 res_type: kb
+component: grid
 ---
 
 ## Environment

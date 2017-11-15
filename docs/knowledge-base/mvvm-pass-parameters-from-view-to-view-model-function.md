@@ -9,6 +9,7 @@ tags: kendo, kendoui, mvvm, pass-parameters, visible, invisible
 ticketid: 1138171
 res_type: kb
 
+component: mvvm
 ---
 
 ## Environment

@@ -7,6 +7,7 @@ slug: adjust-bar-chart-height-by-number-of-bars
 tags: chart, bar chart, height, adjust, bars
 ticketid: 1097053
 res_type: kb
+component: chart
 ---
 
 ## Environment

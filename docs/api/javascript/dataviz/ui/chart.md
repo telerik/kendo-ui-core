@@ -3,6 +3,7 @@ title: Chart
 page_title: Configuration, methods and events of Kendo UI DataViz Chart
 description: Learn how to configure Kendo UI Javascript chart widget in a few easy steps, use and change methods and events.
 res_type: api
+component: bulletchart
 ---
 
 # kendo.dataviz.ui.Chart

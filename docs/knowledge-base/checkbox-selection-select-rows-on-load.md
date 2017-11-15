@@ -7,6 +7,7 @@ slug: checkbox-selection-select-rows-on-load
 tags: checkbox selection, grid, kendo ui
 ticketid: 1117204
 res_type: kb
+component: grid
 ---
 
 ## Environment

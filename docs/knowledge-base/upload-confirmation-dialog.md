@@ -7,6 +7,7 @@ slug: upload-confirmation-dialog
 tags: kendo, upload, dialog, confirm
 ticketid: 1113102
 res_type: kb
+component: upload
 ---
 
 ## Environment

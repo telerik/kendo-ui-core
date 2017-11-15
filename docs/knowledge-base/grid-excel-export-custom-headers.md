@@ -7,6 +7,7 @@ slug: grid-excel-export-custom-headers
 tags: grid, excel, export, custom, headers, kendo
 ticketid: 1081450
 res_type: kb
+component: grid
 ---
 
 ## Environment

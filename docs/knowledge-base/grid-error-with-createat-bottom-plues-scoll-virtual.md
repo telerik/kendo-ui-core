@@ -8,6 +8,7 @@ tags: grid, editing, virtual, scroll, create
 ticketid: 1137381
 res_type: kb
 
+component: grid
 ---
 
 ## Environment

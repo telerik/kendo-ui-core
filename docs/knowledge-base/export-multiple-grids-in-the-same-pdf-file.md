@@ -7,6 +7,7 @@ slug: export-multiple-grids-in-the-same-pdf-file
 tags: kendo ui, mvc, pdf, multiple, grids, same, file, grid
 ticketid: 1131735
 res_type: kb
+component: grid
 ---
 
 ## Environment

@@ -8,6 +8,7 @@ previous_url: /knowledge-base/how-to-resize-the-grid-when-the-last-row-is-hidden
 tags: grid, virtualization, scroll, resize
 ticketid: 1134254
 res_type: kb
+component: grid
 ---
 
 ## Environment

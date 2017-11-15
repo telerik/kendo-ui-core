@@ -8,6 +8,7 @@ previous_url: /knowledge-base/how-to-hide-legends-items-that-are-not-visible-in-
 tags: chart, legend
 ticketid: 1125941
 res_type: kb
+component: chart
 ---
 
 ## Environment

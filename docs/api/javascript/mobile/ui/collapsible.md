@@ -3,6 +3,7 @@ title: Collapsible
 page_title: Configuration, methods and events of Kendo UI Mobile Collapsible widget
 description: Configuration, methods and events of Kendo UI Mobile Collapsible widget.
 res_type: api
+component: collapsible_mobile
 ---
 
 # kendo.mobile.ui.Collapsible

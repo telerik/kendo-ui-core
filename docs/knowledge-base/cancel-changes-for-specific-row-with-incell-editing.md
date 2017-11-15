@@ -7,6 +7,7 @@ slug: cancel-changes-for-specific-row-with-incell-editing
 tags: grid, editing
 ticketid: 1111657
 res_type: kb
+component: grid
 ---
 
 ## Environment

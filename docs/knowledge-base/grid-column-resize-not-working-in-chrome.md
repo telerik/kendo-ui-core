@@ -7,6 +7,7 @@ slug: grid-column-resize-not-working-in-chrome
 tags: grid, columns, resize, not, working, chrome, zoom, scale, latest, 61, version, breaks, size, width, change
 ticketid: 1132050
 res_type: kb
+component: grid
 ---
 
 ## Environment

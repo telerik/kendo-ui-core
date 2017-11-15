@@ -6,6 +6,7 @@ page_title: Highlight the Item Text Which Matches Search Criteria | Kendo UI Com
 slug: combobox-highlight-matched-text
 tags: kendo, kendo-ui, combobox, search, text, highlight
 res_type: kb
+component: combobox
 ---
 
 ## Environment

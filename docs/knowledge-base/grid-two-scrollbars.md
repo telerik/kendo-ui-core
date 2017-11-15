@@ -6,6 +6,7 @@ page_title: Render a Second Vertical Scrollbar | Kendo UI Grid
 slug: grid-two-scrollbars
 tags: grid, scroll, scrollbar, vertical
 res_type: kb
+component: grid
 ---
 
 ## Environment

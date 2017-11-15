@@ -5,6 +5,7 @@ type: troubleshooting
 page_title: Grid Wrapper for React is Causing an Error in Internet Explorer | Kendo UI Wrappers for React
 slug: react-grid-shimjs-missing
 res_type: kb
+component: grid
 ---
 
 ## Environment

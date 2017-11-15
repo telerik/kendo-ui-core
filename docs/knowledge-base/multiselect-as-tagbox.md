@@ -7,6 +7,7 @@ slug: multiselect-as-tagbox
 tags: kendo, multiselect, tagbox, no-dropdown
 ticketid: 1131556
 res_type: kb
+component: multiselect
 ---
 
 ## Environment

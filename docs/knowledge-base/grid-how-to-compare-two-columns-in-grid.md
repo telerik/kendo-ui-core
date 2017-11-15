@@ -7,6 +7,7 @@ slug: grid-how-to-compare-two-columns-in-grid
 tags: grid, angularjs, compare
 ticketid: 1122028
 res_type: kb
+component: grid
 ---
 
 ## Environment

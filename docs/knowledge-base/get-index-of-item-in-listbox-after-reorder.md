@@ -7,6 +7,7 @@ slug: get-index-of-item-in-listbox-after-reorder
 tags: listbox, datasource
 ticketid: 1112980
 res_type: kb
+component: listbox
 ---
 
 ## Environment

@@ -6,6 +6,7 @@ page_title: Conditionally Change the Appearance of Grid Cells | UI for ASP.NET C
 slug: conditionally-change-cell-styles-in-grid
 tags: grid, style, template, condition, color, different, core, htmlhelper, mvc, widget
 res_type: kb
+component: grid
 ---
 
 ## Environment

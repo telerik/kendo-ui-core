@@ -7,6 +7,7 @@ slug: grid-savechanges-external-button
 tags: grid, saveChanges, button
 ticketid: 1135977
 res_type: kb
+component: grid
 ---
 
 ## Environment

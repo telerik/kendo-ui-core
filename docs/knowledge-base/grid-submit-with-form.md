@@ -8,6 +8,7 @@ tags: grid, editing, form
 ticketid: 1137684
 res_type: kb
 
+component: grid
 ---
 
 ## Environment

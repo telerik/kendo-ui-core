@@ -3,6 +3,7 @@ title: MaskedTextBox
 page_title: Configuration, methods and events of Kendo UI MaskedTextBox
 description: Code examples and tips how to configure MaskedTextBox widget, use available methods and events.
 res_type: api
+component: maskedtextbox
 ---
 
 # kendo.ui.MaskedTextBox

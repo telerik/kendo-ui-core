@@ -7,6 +7,7 @@ slug: grid-dropdownlist-column-template
 tags: grid, column, template, dropdownlist
 ticketid: 1138249
 res_type: kb
+component: grid
 ---
 
 ## Environment

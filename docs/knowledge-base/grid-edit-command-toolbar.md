@@ -6,6 +6,7 @@ page_title: Edit/Update commands in toolbar | Kendo UI Grid
 slug: grid-edit-command-toolbar
 tags: grid, toolbar, edit, update, command, template, custom, replace, move, 
 res_type: kb
+component: grid
 ---
 
 ## Environment

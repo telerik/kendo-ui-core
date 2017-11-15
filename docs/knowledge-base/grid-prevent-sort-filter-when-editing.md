@@ -6,6 +6,7 @@ page_title: Prevent sort and filter while editing | Kendo UI Grid
 slug: grid-prevent-sort-filter-when-editing
 tags: grid, prevent, sort, filter, edit, create, insert
 res_type: kb
+component: grid
 ---
 
 ## Environment

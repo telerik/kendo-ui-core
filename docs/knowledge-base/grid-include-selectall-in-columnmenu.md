@@ -6,6 +6,7 @@ page_title: Displaying SelectAll in the ColumnMenu for Showing and Hiding the Co
 slug: grid-include-selectall-in-columnmenu
 tags: kendoui, kendo, grid, column menu, select all
 res_type: kb
+component: grid
 ---
 
 ## Environment

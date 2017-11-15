@@ -6,6 +6,7 @@ page_title: Grouping the Checkboxes in the Filter Menu by Different Field
 slug: grid-group-filter-checkboxes
 tags: kendoui, kendo, grid, filtering, checkbox filter
 res_type: kb
+component: grid
 ---
 
 ## Environment

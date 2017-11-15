@@ -7,6 +7,7 @@ slug: grid-excel-export-hierarchy-master-and-detail-separate-sheets
 tags: grid,kendo,excel,export,hierarchy,detail,separate,sheets
 ticketid: 1079757
 res_type: kb
+component: grid
 ---
 
 ## Environment

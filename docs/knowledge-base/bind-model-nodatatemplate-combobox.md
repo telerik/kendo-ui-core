@@ -7,6 +7,7 @@ slug: bind-model-nodatatemplate-combobox
 tags: combobox, kendoui, kendo, mvvm, nodatatemplate, event, trigger, bind, viewmodel
 ticketid: 1133381
 res_type: kb
+component: combobox
 ---
 
 ## Environment

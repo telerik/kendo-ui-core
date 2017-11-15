@@ -7,6 +7,7 @@ slug: numerictextbox-error-on-initialization
 tags: numerictextbox, error
 ticketid: 1130422, 1127229, 1122877, 1120172
 res_type: kb
+component: numerictextbox
 ---
 
 ## Environment

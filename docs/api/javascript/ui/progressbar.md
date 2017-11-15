@@ -3,6 +3,7 @@ title: ProgressBar
 page_title: Configuration, fields, methods and events of Kendo UI ProgressBar
 description: How to configure and control Kendo UI ProgressBar widget
 res_type: api
+component: progressbar
 ---
 
 # kendo.ui.ProgressBar

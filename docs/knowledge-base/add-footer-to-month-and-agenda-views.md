@@ -7,6 +7,7 @@ slug: add-footer-to-month-and-agenda-views
 tags: add, footer, month, agenda, views, scheduler
 ticketid: 1116003
 res_type: kb
+component: scheduler
 ---
 
 ## Environment

@@ -7,6 +7,7 @@ slug: clear-selection-all-pages-grid
 tags: clear selection, persistSelection, grid, all pages
 ticketid: 1133757
 res_type: kb
+component: grid
 ---
 
 ## Environment

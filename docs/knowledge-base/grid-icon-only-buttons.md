@@ -7,6 +7,7 @@ slug: grid-icon-only-buttons
 tags: grid, editing, buttons, kendo ui, icons
 ticketid: 663290
 res_type: kb
+component: grid
 ---
 
 ## Environment

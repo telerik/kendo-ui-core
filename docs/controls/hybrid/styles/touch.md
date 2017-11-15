@@ -5,6 +5,7 @@ description: "Handle user-initiated touch events in the Hybrid UI framework of K
 previous_url: /controls/hybrid/touch
 slug: touchevents_hybridkendoui
 position: 4
+component: touch
 ---
 
 # Touch Events

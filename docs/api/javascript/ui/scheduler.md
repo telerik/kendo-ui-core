@@ -3,6 +3,7 @@ title: Scheduler
 page_title: Configuration, methods and events of Kendo UI Scheduler
 description: How to configure and control methods in Scheduler UI widget, which events to use to open, close, change, select.
 res_type: api
+component: scheduler
 ---
 
 # kendo.ui.Scheduler
@@ -5053,6 +5054,33 @@ The fields which can be used in the template are:
     });
     </script>
 
+### views.name `String`
+
+The name of the view. Typically, used to get the name of the currently selected view via the [view method](methods-view).
+
+#### Example - select a view
+
+    <div id="scheduler"></div>
+    <script>
+      $("#scheduler").kendoScheduler({
+        date: new Date("2013/6/6"),
+        views: [ "day", "month" ],
+        dataSource: [
+          {
+            id: 1,
+            start: new Date("2013/6/6 08:00 AM"),
+            end: new Date("2013/6/6 09:00 AM"),
+            title: "Interview"
+          }
+        ]
+      });
+
+      var scheduler = $("#scheduler").data("kendoScheduler");
+      var viewName = scheduler.view().name;
+
+      alert(viewName)
+    </script>
+
 ### views.selected `Boolean` *(default: false)*
 
 If set to `true` the view will be initially selected by the scheduler widget.
@@ -5507,6 +5535,10 @@ The [data source](/api/javascript/data/schedulerdatasource) of the widget. Confi
     var event = scheduler.dataSource.at(0);
     scheduler.dataSource.remove(event);
     </script>
+
+### resources `Array`
+
+The resources of the widget. Configured via the [resources](#configuration-resources) option.
 
 ## Methods
 

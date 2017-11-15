@@ -6,6 +6,7 @@ page_title: Generate model dynamically | Kendo UI Grid
 slug: grid-generate-model-from-data
 tags: grid, data, model, dynamic, columns, generate
 res_type: kb
+component: grid
 ---
 
 ## Environment

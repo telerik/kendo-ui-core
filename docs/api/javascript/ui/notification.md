@@ -2,6 +2,7 @@
 title: Notification
 description: Configuration, methods and events of the Kendo UI Notification
 res_type: api
+component: notification
 ---
 
 # kendo.ui.Notification

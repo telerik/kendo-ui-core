@@ -6,6 +6,7 @@ page_title: Implement Custom Menu for Toggling the Visibility of Columns on Righ
 slug: open-column-visibility-menu-on-right-click-on-header
 tags: grid, right-click, hide, show, columns
 res_type: kb
+component: grid
 ---
 
 ## Environment

@@ -8,6 +8,7 @@ tags: grid, child, nested, properties, template, detail, detailtemplate, clientt
 ticketid: 1139311
 res_type: kb
 
+component: grid
 ---
 
 ## Environment

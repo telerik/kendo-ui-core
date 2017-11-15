@@ -7,6 +7,7 @@ slug: upload-by-clicking-custom-button
 tags: upload, file, clicking, custom, button, selected
 ticketid: 1138317
 res_type: kb
+component: upload
 ---
 
 ## Environment

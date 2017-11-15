@@ -6,6 +6,7 @@ page_title: Calculating and Displaying Custom Aggregate Result in Kendo UI Grid
 slug: grid-custom-aggregate-by-unique-value
 tags: kendoui, kendo, aggregates, custom aggregates
 res_type: kb
+component: grid
 ---
 
 ## Environment

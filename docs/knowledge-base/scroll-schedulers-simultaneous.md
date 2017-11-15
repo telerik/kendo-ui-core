@@ -7,6 +7,7 @@ slug: scroll-schedulers-simultaneous
 tags: kendoui, kendo, scheduler, scroll, simultaneous
 ticketid: 1133971
 res_type: kb
+component: scheduler
 ---
 
 ## Environment

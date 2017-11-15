@@ -8,7 +8,7 @@ position: 0
 tags: kendo, kendoui, mvc, upload, additional-parameters, send-fields
 ticketid: 1138520
 res_type: kb
-
+component: upload
 ---
 
 ## Environment

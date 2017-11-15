@@ -6,6 +6,7 @@ page_title: Prevent page scroll when DropDownList is opened | Kendo UI DropDownL
 slug: dropdownlist-prevent-page-scroll
 tags: prevent, page, scroll, dropdownlist, open
 res_type: kb
+component: dropdownlist
 ---
 
 ## Environment

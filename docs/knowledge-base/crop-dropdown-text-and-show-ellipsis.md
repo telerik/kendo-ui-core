@@ -7,6 +7,7 @@ slug: crop-dropdown-text-and-show-ellipsis
 tags: crop, dropdownlist, dropdown, ellipsis, overflow
 ticketid: 1084518
 res_type: kb
+component: dropdownlist
 ---
 
 ## Environment

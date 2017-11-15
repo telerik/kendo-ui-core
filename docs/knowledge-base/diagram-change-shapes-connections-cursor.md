@@ -8,6 +8,7 @@ tags: diagram, shape, connection
 ticketid: 1137455
 res_type: kb
 
+component: diagram
 ---
 
 ## Environment

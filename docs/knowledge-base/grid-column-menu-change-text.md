@@ -7,6 +7,7 @@ slug: grid-column-menu-change-text
 tags: grid, columnmenu, columns
 ticketid: 1135439
 res_type: kb
+component: grid
 ---
 
 ## Environment

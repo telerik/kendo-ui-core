@@ -11,6 +11,7 @@ ticketid: 1137653
 pitsid:
 res_type: kb
 
+component: grid
 ---
 
 ## Environment

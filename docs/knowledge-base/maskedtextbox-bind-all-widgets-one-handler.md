@@ -7,6 +7,7 @@ slug: maskedtextbox-bind-all-widgets-one-handler
 tags: maskedtextbox, bind, events
 ticketid: 1136846
 res_type: kb
+component: maskedtextbox
 ---
 
 ## Environment

@@ -6,6 +6,7 @@ page_title: Implement Double-Click Batch Editing with Selecatble Grid
 slug: grid-edit-cell-on-double-click
 tags: grid, batch, incell, double-click
 res_type: kb
+component: grid
 ---
 
 ## Environment

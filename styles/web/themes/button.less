@@ -66,6 +66,7 @@
         color: @disabled-text-color;
         border-color: @disabled-border-color;
         background-color: @disabled-background-color;
+        box-shadow: none;
         .composite-background(@disabled-gradient);
         .box-shadow(none);
     }
@@ -134,6 +135,7 @@
         color: @primary-disabled-text-color;
         border-color: @primary-disabled-border-color;
         background-color: @primary-disabled-background-color;
+        box-shadow: none;
         .composite-background(@primary-disabled-gradient);
         .box-shadow(none);
     }
@@ -145,37 +147,6 @@
 
 // Button group
 .k-button-group {
-
-    // Normal button
-    .k-button {
-        .box-shadow(none);
-    }
-
-    // Focused state
-    .k-button:focus,
-    .k-button.k-state-focused,
-    > input[type="radio"]:focus + .k-button,
-    > input[type="checkbox"]:focus + .k-button {
-        .box-shadow(@button-focused-shadow);
-    }
-
-    // Selected state
-    .k-button:active,
-    .k-button.k-state-active,
-    > input[type="radio"]:checked + .k-button,
-    > input[type="checkbox"]:checked + .k-button {
-        color: @button-active-text-color;
-        background-color: @button-active-background;
-        border-color: @button-active-border-color;
-        .composite-background(@selected-gradient);
-
-        &:hover {
-            color: @primary-hover-text-color;
-            border-color: @primary-hover-border-color;
-            background-color: @primary-hover-background-color;
-        }
-    }
-
 
     // Border-radius
     .k-button {

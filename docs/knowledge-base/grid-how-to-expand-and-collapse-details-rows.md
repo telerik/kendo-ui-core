@@ -7,6 +7,7 @@ slug: grid-how-to-expand-and-collapse-details-rows
 tags: grid, expand, collapse, details
 ticketid: 1137592
 res_type: kb
+component: grid
 ---
 
 ## Environment

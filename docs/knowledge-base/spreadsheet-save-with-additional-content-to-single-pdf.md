@@ -7,6 +7,7 @@ slug: spreadsheet-save-with-additional-content-to-single-pdf
 tags: spreadsheet,pdf,drawing,single-pdf
 ticketid: 1135953
 res_type: kb
+component: spreadsheet
 ---
 
 ## Environment

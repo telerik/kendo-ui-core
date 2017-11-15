@@ -6,6 +6,7 @@ page_title: Show columnMenu Options for Specific Columns | Kendo UI Grid
 slug: grid-conditional-columnMenu
 tags: grid, columnMenu, columns
 res_type: kb
+component: grid
 ---
 
 ## Environment

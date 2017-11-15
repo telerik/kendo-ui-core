@@ -6,6 +6,7 @@ page_title: Persist the State of Custom Filters | Kendo UI Grid
 slug: grid-persist-customized-filter
 tags: grid, filtering, persist, state, custom, filter, template, restore, session, localstorage
 res_type: kb
+component: grid
 ---
 
 ## Environment

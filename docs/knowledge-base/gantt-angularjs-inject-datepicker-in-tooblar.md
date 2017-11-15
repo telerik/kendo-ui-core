@@ -7,6 +7,7 @@ slug: gantt-angularjs-inject-datepicker-in-tooblar
 tags: kendo, kendoui, gantt, angular, angularjs, datepicker, toolbar, inject, insert-picker
 ticketid: 
 res_type: kb
+component: gantt
 ---
 
 ## Environment

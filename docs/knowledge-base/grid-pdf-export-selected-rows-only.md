@@ -7,6 +7,7 @@ slug: grid-pdf-export-selected-rows-only
 tags: pdf, export, grid, selected rows
 ticketid: 1135051
 res_type: kb
+component: grid
 ---
 
 ## Environment

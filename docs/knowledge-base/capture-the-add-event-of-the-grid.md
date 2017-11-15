@@ -8,6 +8,7 @@ previous_url: /knowledge-base/how-to-capture-the-add-event-of-the-grid
 tags: add, event, grid
 ticketid: 1097353
 res_type: kb
+component: grid
 ---
 
 ## Environment

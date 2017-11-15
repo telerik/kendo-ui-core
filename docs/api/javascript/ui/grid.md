@@ -3,6 +3,7 @@ title: Grid
 page_title: Configuration, methods and events of Kendo UI Grid
 description: Code examples for Grid UI widget configuration. Learn how to use methods and which events to set once the grid UI widget detail is initialized and expanded.
 res_type: api
+component: grid
 ---
 
 # kendo.ui.Grid
@@ -501,9 +502,10 @@ The function context (available via the `this` keyword) will be set to the grid 
     });
     </script>
 
-### columns.command.iconClass `String`
+### columns.command.iconClass `String|Object`
 
-The class for the [web font icon](http://docs.telerik.com/kendo-ui/styles-and-layout/icons-web) of the button.
+The class for the [web font icon](http://docs.telerik.com/kendo-ui/styles-and-layout/icons-web) of the button. 
+When it is defined as an object it allows to customize the web font icon for the "edit", "update" and "cancel" command buttons.
 
 > Grid commands are rendered as anchors (`<a>`) with a `span` inside. The icon for the button depends on the **iconClass** which is rendered as a class for the inner span.
 > Default commands have a predefined **iconClass** value.
@@ -521,6 +523,96 @@ The class for the [web font icon](http://docs.telerik.com/kendo-ui/styles-and-la
        }
       ],
       dataSource: [ { name: "Jane Doe" } ]
+    });
+    </script>
+
+#### Example - provide an custom iconClass for the update and cancel command buttons
+    <div id="grid"></div>
+    <script>
+    $("#grid").kendoGrid({
+      columns: [
+        { field: "name" },
+        { command: [{
+            name: "edit",
+            iconClass: {
+                edit: "k-icon k-i-edit",
+                update: "k-icon k-i-copy",
+                cancel: "k-icon k-i-arrow-60-up"
+              }
+            }]
+       }
+      ],
+      dataSource: [ { name: "Jane Doe" } ],
+      editable: "inline"
+    });
+    </script>
+
+### columns.command.iconClass.edit `String`
+
+The class for the [web font icon](http://docs.telerik.com/kendo-ui/styles-and-layout/icons-web) of the edit command button.
+
+#### Example - provide an custom iconClass for the edit command button
+    <div id="grid"></div>
+    <script>
+    $("#grid").kendoGrid({
+      columns: [
+        { field: "name" },
+        { command: [{
+            name: "edit",
+            iconClass: {
+                edit: "k-icon k-i-edit"
+              }
+            }]
+       }
+      ],
+      dataSource: [ { name: "Jane Doe" } ],
+      editable: "inline"
+    });
+    </script>
+
+### columns.command.iconClass.update `String`
+
+The class for the [web font icon](http://docs.telerik.com/kendo-ui/styles-and-layout/icons-web) of the update command button.
+
+#### Example - provide an custom iconClass for the update command button
+    <div id="grid"></div>
+    <script>
+    $("#grid").kendoGrid({
+      columns: [
+        { field: "name" },
+        { command: [{
+            name: "edit",
+            iconClass: {
+                update: "k-icon k-i-copy"
+              }
+            }]
+       }
+      ],
+      dataSource: [ { name: "Jane Doe" } ],
+      editable: "inline"
+    });
+    </script>
+
+### columns.command.iconClass.cancel `String`
+
+The class for the [web font icon](http://docs.telerik.com/kendo-ui/styles-and-layout/icons-web) of the cancel command button.
+
+#### Example - provide an custom iconClass for the update command button
+    <div id="grid"></div>
+    <script>
+    $("#grid").kendoGrid({
+      columns: [
+        { field: "name" },
+        { command: [{
+            name: "edit",
+            iconClass: {
+                cancel: "k-icon k-i-copy"
+              }
+            }]
+       }
+      ],
+      dataSource: [ { name: "Jane Doe" } ],
+      editable: "inline"
     });
     </script>
 

@@ -7,6 +7,7 @@ slug: map-reverse-location-coordinates
 tags: kendo ui map, location, coordinates, longitude, latitude
 ticketid: 1111871
 res_type: kb
+component: map
 ---
 
 ## Environment

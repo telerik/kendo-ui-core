@@ -7,6 +7,7 @@ slug: datasource-send-antiforgery-token
 tags: security, authentication, dataSource
 ticketid: 1116629
 res_type: kb
+component: data_source
 ---
 
 ## Environment

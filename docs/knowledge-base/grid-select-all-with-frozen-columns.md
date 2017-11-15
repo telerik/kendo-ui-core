@@ -6,6 +6,7 @@ page_title: Using Template Column with CheckBoxes for Selecting Rows with Locked
 slug: grid-select-all-with-frozen-columns
 tags: kendoui, kendo, grid, locked columns, frozen columns, checkbox selection, checkboxes
 res_type: kb
+component: grid
 ---
 
 ## Environment

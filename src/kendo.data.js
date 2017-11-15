@@ -651,12 +651,19 @@ var __meta__ = { // jshint ignore:line
 
         "boolean": function(value) {
             if (typeof value === STRING) {
-                return value.toLowerCase() === "true";
+                if (value.toLowerCase() === "null") {
+                    return null;
+                } else {
+                    return value.toLowerCase() === "true";
+                }
             }
             return value != null ? !!value : value;
         },
 
         "string": function(value) {
+            if (typeof value === STRING && value.toLowerCase() === "null") {
+                return null;
+            }
             return value != null ? (value + "") : value;
         },
 

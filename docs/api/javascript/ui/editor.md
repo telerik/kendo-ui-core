@@ -3,6 +3,7 @@ title: Editor
 page_title: Configuration, methods and events of Kendo UI Editor
 description: Help guide for proper configuration of Editor UI widget, and how to use methods and events.
 res_type: api
+component: editor
 ---
 
 # kendo.ui.Editor

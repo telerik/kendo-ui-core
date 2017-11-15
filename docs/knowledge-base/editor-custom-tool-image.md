@@ -7,6 +7,7 @@ slug: editor-custom-tool-image
 tags: editor, custom, tool, button, image, background
 ticketid: 1135501
 res_type: kb
+component: editor
 ---
 
 ## Environment

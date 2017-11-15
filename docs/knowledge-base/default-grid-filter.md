@@ -7,6 +7,7 @@ slug: default-grid-filter
 tags: grid, default filter, row filter, operator, kendo grid
 ticketid: 1114303
 res_type: kb
+component: grid
 ---
 
 ## Environment

@@ -7,6 +7,7 @@ slug: check-checkbox-on-select-node
 tags: check, checkbox, select, node, treeview
 ticketid: 1135299
 res_type: kb
+component: treeview
 ---
 
 ## Environment

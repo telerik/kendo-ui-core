@@ -7,6 +7,7 @@ slug: grid-how-to-clear-the-filters-when-the-text-is-cleared
 tags: grid, filter, clear
 ticketid: 1136856
 res_type: kb
+component: grid
 ---
 
 ## Environment

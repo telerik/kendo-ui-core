@@ -6,6 +6,7 @@ page_title: Resize the Widget after Its Column Is Resized | Kendo UI Grid
 slug: grid-resize-container-on-column-resize
 tags: grid, scroll, scrollbar, vertical
 res_type: kb
+component: grid
 ---
 
 ## Environment

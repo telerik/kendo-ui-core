@@ -6,6 +6,7 @@ page_title: Pass Error Message to the File Template | Kendo UI Upload
 slug: upload-pass-error-to-template
 tags: kendo,upload,error,file-template,template
 res_type: kb
+component: upload
 ---
 
 ## Environment

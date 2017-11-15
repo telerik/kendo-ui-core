@@ -7,6 +7,7 @@ slug: disable-detail-rows-with-checkboxes
 tags: kendo ui, grid, detail template
 ticketid: 1110784
 res_type: kb
+component: grid
 ---
 
 ## Environment

@@ -7,6 +7,7 @@ slug: grid-add-hierarchy-runtime
 tags: grid, hierarchy, setoptions, runtime
 ticketid: 1135018
 res_type: kb
+component: grid
 ---
 
 ## Environment

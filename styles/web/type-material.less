@@ -2067,9 +2067,11 @@ html .km-pane-wrapper .km-widget,
 // Material button
 .k-button:focus,
 .k-button.k-state-focused {
-    border-color: @button-focused-border-color;
-    background-color: @button-focused-border-color;
+    border-color: @button-hover-background-color;
+    background-color: @button-hover-background-color;
 }
+.k-button:active,
+.k-button.k-state-active,
 .k-button:active:hover,
 .k-button.k-state-active:hover {
     color: @button-active-text-color;
@@ -2324,20 +2326,6 @@ div.k-splitbar.k-state-focused .k-icon,
     background-color: @primary-disabled-background-color;
     .composite-background(@primary-disabled-gradient);
     .box-shadow(none);
-}
-
-.k-widget .k-button:active,
-.k-widget .k-button.k-state-active {
-    color: @button-text-color;
-    background-color: @button-active-background;
-    border-color: @hover-border-color;
-}
-
-.k-widget .k-button:active:hover,
-.k-widget .k-button.k-state-active:hover {
-    color: @button-hover-text-color;
-    border-color: @button-hover-border-color;
-    background-color: @button-hover-background-color;
 }
 
 .k-dropdown .k-state-default

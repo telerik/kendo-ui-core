@@ -6,6 +6,7 @@ page_title: Configuring Custom Filter for ForeignKey Column in Kendo UI Grid
 slug: grid-custom-filter-with-foreignkey-column
 tags: kendoui, kendo, grid, filtering, foreign key, custom filtering
 res_type: kb
+component: grid
 ---
 
 ## Environment
