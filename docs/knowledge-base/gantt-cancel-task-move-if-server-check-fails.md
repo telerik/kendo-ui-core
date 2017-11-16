@@ -7,6 +7,7 @@ slug: gantt-cancel-task-move-if-server-check-fails
 tags: kendo, kendoui, gantt, validation, move-task, cancel-move
 ticketid: 1138180
 res_type: kb
+component: gantt
 ---
 
 ## Environment

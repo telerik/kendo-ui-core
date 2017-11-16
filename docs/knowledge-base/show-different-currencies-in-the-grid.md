@@ -8,6 +8,7 @@ tags: grid, currencies
 previous_url: /knowledge-base/how-to-show-different-currencies-in-the-grid
 ticketid: 1105869
 res_type: kb
+component: grid
 ---
 
 ## Environment

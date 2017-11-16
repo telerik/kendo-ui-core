@@ -6,6 +6,7 @@ page_title: Bind RGBA Hexadecimal Color Value to ColorPicker | Kendo UI ColorPic
 slug: bind-rgba-hexadecimal-color-value-to-colorpicker
 tags: colorpicker, mvvm, rgba, hexadecimal, color
 res_type: kb
+component: colorpicker
 ---
 
 ## Environment

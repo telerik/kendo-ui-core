@@ -8,6 +8,7 @@ previous_url: /knowledge-base/fix_the_checkbox_selection_with_custom_grid
 tags: grid, selectiong, checkbox
 ticketid: 1128288
 res_type: kb
+component: grid
 ---
 
 ## Environment

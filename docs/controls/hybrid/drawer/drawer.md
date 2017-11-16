@@ -4,6 +4,7 @@ page_title: Overview | Hybrid UI Drawer
 description: "Initialize and use a Hybrid UI Drawer component in Kendo UI framework."
 slug: overview_hybriddrawer
 position: 1
+component: drawer_mobile
 ---
 
 # Drawer Overview

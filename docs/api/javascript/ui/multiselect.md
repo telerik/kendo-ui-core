@@ -2,6 +2,7 @@
 title: MultiSelect
 page_title: Configuration, methods and events of Kendo UI MultiSelect
 res_type: api
+component: multiselect
 ---
 
 # kendo.ui.MultiSelect

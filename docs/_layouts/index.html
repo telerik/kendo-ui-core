@@ -4,6 +4,8 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width">
         {% if page.res_type %}<meta name="restype" content="{{ page.res_type }}">{% else %}<meta name="restype" content="documentation">{% endif %}
+        <meta name="product" content="{{ page.product }}">
+        {% if page.component %}<meta name="subproduct" content="{{ page.component }}">{% endif %}
         <title>{% if page.page_title %}{{ page.page_title }}{% else %}{{ page.title }}{% endif %}</title>
         <link rel="shortcut icon" href="{{site.baseurl}}/favicon.ico"/>
         {% if page.description %}<meta name="description" content="{{page.description}}">{% endif %}

@@ -1,12 +1,12 @@
 ---
-title: Place a DatePicker in the Gantt Toolbar in AngularJS Application
-description: An example on how to inject a DatePicker widget in the Kendo UI Gantt in AngularJS application.
+title: Add DatePicker to Gantt Toolbar in AngularJS Applications
+description: An example on how to inject a Kendo UI DatePicker widget in the Kendo UI Gantt in AngularJS applications.
 type: how-to
-page_title: Inject DatePicker in the Gantt Toolbar | Kendo UI Gantt
+page_title: Place DatePicker in the Toolbar | Kendo UI Gantt
 slug: gantt-angularjs-inject-datepicker-in-tooblar
 tags: kendo, kendoui, gantt, angular, angularjs, datepicker, toolbar, inject, insert-picker
-ticketid: 
 res_type: kb
+component: gantt
 ---
 
 ## Environment
@@ -21,11 +21,12 @@ res_type: kb
 
 ## Description
 
-In AngularJS scenario, how to insert a DatePicker widget within the Kendo Gantt toolbar? How to use the picker to change the Gantt visible dates?
+How can I insert a Kendo UI DatePicker widget into the toolbar of the Kendo UI Gantt in AngularJS scenarios? How can I use the DatePicker to change the visible dates of the Gantt?
 
 ## Solution
 
-Pass a template with a single input element to the Gantt toolbar. Then, in the Gantt `dataBound` event initialize the picker and assign a handler for its `change` event:
+1. Pass a template to the Gantt toolbar with a single input element.
+1. In the `dataBound` event of the Gantt, initialize the DatePicker and assign a handler for its `change` event.
 
 ```html
 <div ng-app="KendoDemo" ng-controller="MyCtrl">
@@ -39,16 +40,16 @@ Pass a template with a single input element to the Gantt toolbar. Then, in the G
 		var end = new Date();
 		start.setDate(start.getDate() - 30);
 		end.setDate(end.getDate() + 30);
-		
+
 		$scope.ganttOptions = {
-		  toolbar: [{ 
-			template: '<input id="picker" />' 
+		  toolbar: [{
+			template: '<input id="picker" />'
 		  }],
 		  dataBound: function(e) {
 			var gantt = e.sender;
 			var pickerElement = gantt.element.find('#picker');
 			var picker = pickerElement.getKendoDatePicker();
-			
+
 			if (!picker) {
 			  pickerElement.kendoDatePicker({
 				change: function(e) {

@@ -85,9 +85,9 @@ The method allows defining diffent start day by using the second parameter.
 
 The given date.
 
-##### weekStart `Date` *(optional)*
+##### weekStart `Number` *(optional)*
 
-The date representing what day of week is considered as a starting point. This parameter is optional because by default Monday is considered as a first day of the week.  
+The day number (from 0 (Sunday) to 6 (Saturday)) representing what day of week is considered as a starting point. This parameter is optional because by default Monday (1) is considered as a first day of the week.  
 
 #### Returns
 

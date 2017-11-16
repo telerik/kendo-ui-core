@@ -1,20 +1,21 @@
 ---
-title: How to Set a New Line in the Column From Data
-description: An example on How to Set New Line Based On the Data
+title: Set New Lines in Grid Column From Data
+description: An example on how to set a new line based on the data of a Kendo UI Grid.
 type: how-to
 page_title: How to Set a New Line Based On the Data
 slug: grid-how-to-set-new-line-based-on-the-data
-tags: grid,
+tags: grid
 ticketid: 1138306
 res_type: kb
-
+component: grid
 ---
 
 ## Environment
+
 <table>
  <tr>
   <td>Product</td>
-  <td>Grid for Progress® Kendo UI®</td>
+  <td>Progress Kendo UI Grid</td>
  </tr> <tr>
   <td>Made with version</td>
   <td>2017.3.1026</td>
@@ -24,17 +25,14 @@ res_type: kb
 
 ## Description
 
-I would like to set the '/ n' in the response string and display it in the column without using the template.
-What should I write in ajax's response?
-'/n' doesn't work!
+How can I set the `/ n` in the response string and display it in the Grid column without using the template? What do I have to write in the AJAX response?
 
 ## Solution
 
-If the desired result is to show the text on two lines without using the [column.template](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid#configuration-columns.template) I can suggest using the "**br**" tag.  
-  
-This can be achieved by sending the tag as part of the response and setting the [encoding](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid#configuration-columns.encoded) to false:  
-  
-Please check the following example demonstrating this:
+To display the text on two lines without implementing the [`column.template`](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid#configuration-columns.template), use the `br` tag.  
+
+1. Send the tag as part of the response.
+1. Set [`encoding`](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid#configuration-columns.encoded) to `false`.  
 
 ````html
 <div id="grid"></div>
@@ -47,4 +45,3 @@ $("#grid").kendoGrid({
 });
 </script>
 ````
-  

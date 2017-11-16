@@ -7,6 +7,7 @@ slug: implement-more-events-button-in-week-view
 tags: implement, show, more, events, button, scheduler, month, week, view
 ticketid: 1117416
 res_type: kb
+component: scheduler
 ---
 
 ## Environment

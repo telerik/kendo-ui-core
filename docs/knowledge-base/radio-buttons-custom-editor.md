@@ -7,6 +7,7 @@ slug: radio-buttons-custom-editor
 tags: radio buttons, grid, editor
 ticketid: 1117548
 res_type: kb
+component: grid
 ---
 
 ## Environment

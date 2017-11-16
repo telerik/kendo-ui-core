@@ -6,6 +6,7 @@ page_title:  Select or deselect item on row click | Kendo UI Grid
 slug: select-or-deselect-item-on-row-click
 tags: grid, selection, remove, deselect, unselect, select, row, click, multiple, persist
 res_type: kb
+component: grid
 ---
 
 ## Environment

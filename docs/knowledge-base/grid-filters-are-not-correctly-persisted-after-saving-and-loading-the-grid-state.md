@@ -8,6 +8,7 @@ previous_url: /knowledge-base/the-grid-filters-are-not-correctly-persisted-after
 tags: grid, filter, persist
 ticketid: 1126061
 res_type: kb
+component: grid
 ---
 
 ## Environment

@@ -6,6 +6,7 @@ page_title: Replace All String Occurrences | Kendo UI Editor
 slug: replace-all-string-occurrences-in-editor-content
 tags: replace, string, occurrences, content, editor
 res_type: kb
+component: editor
 ---
 
 ## Environment

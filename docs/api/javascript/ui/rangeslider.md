@@ -150,7 +150,7 @@ The argument, which defines whether to enable/disable the **RangeSlider**.
 
 ### value
 
-The value method gets or sets the start and end values of the **RangeSlider**. It
+The value method gets or sets the values of the **RangeSlider**. It
 accepts an array as parameter, and returns an object array with the start and end
 selection values.
 
@@ -164,10 +164,40 @@ selection values.
         $(document).ready(function() {
             $("#rangeslider").kendoRangeSlider();
             var rangeSlider = $("#rangeslider").getKendoRangeSlider();
-  	        rangeSlider.value();
+  	        rangeSlider.value([1, 5]);
         });
     </script>
-    
+
+#### Parameters
+
+##### startEndArray `Array`
+
+Array of two numbers—start and end.
+
+#### Returns
+
+`Array` The value of the RangeSlider.
+
+### values
+
+The values method gets or sets the start and end values of the **RangeSlider**. It
+accepts either an an array as parameter or two parameters—start and end, and returns an object array with the start and end
+selection values.
+
+#### Example
+
+	<div id="rangeslider" style="width: 200px;">
+        <input />
+        <input />
+    </div>
+    <script>
+        $(document).ready(function() {
+            $("#rangeslider").kendoRangeSlider();
+            var rangeSlider = $("#rangeslider").getKendoRangeSlider();
+  	        rangeSlider.values(1, 5);
+        });
+    </script>
+
 #### Parameters
 
 ##### selectionStart `Number`

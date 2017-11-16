@@ -6,6 +6,7 @@ page_title: Show or Hide Grouped Resources | Kendo UI Scheduler
 slug: show-hide-grouped-resources-with-multiselect-in-scheduler
 tags: show, hide, resources, grouped, scheduler, multiselect
 res_type: kb
+component: scheduler
 ---
 
 ## Environment

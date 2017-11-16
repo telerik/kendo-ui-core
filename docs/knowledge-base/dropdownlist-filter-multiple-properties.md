@@ -1,12 +1,13 @@
 ---
-title: Filter by Multiple Properties in DropDownList
-description: An example on how to filter by multiple properties in DropDownList
+title: Filter DropDownList by Multiple Properties
+description: An example on how to filter the Kendo UI DropDownList by multiple properties.
 type: how-to
 page_title: Filter by Multiple Properties | Kendo UI DropDownList
 slug: dropdownlist-filter-multiple-properties
 tags: dropdownlist
 ticketid: 1138305
 res_type: kb
+component: dropdownlist
 ---
 
 ## Environment
@@ -32,11 +33,12 @@ res_type: kb
 
 ## Description
 
-How to filter by multiple properties in Kendo UI DropDownList?
+How can I filter the DropDownList items by multiple properties?
 
 ## Solution
 
-Prevent the default behavior of the filtering event. Use the dataSource filter method, to apply the custom filtering.
+1. Prevent the default behavior of the `filter` event.
+1. Use the `dataSource` filter method to apply the custom filtering.
 
 ```html
 	<input id="customers" style="width: 100%;"/>            
@@ -60,7 +62,7 @@ Prevent the default behavior of the filtering event. Use the dataSource filter m
               	filtering: function(ev){
                 	var filterValue = ev.filter.value;
                   ev.preventDefault();
-                  
+
                   this.dataSource.filter({
                     logic: "or",
                     filters: [

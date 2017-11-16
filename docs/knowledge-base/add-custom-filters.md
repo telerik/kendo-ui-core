@@ -8,6 +8,7 @@ slug: add-custom-filters
 tags: grid, filter
 ticketid: 1118405
 res_type: kb
+component: grid
 ---
 
 ## Environment

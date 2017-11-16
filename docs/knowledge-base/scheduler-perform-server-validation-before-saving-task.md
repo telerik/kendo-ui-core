@@ -6,6 +6,7 @@ page_title: Perform Server Validation before Saving New or Edited Tasks | Kendo 
 slug: scheduler-perform-server-validation-before-saving-task
 tags: kendo, scheduler, server-validation, save-task
 res_type: kb
+component: scheduler
 ---
 
 ## Environment

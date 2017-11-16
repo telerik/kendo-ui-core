@@ -4,6 +4,7 @@ page_title: Overview | Hybrid UI SplitView
 description: "Learn about the jQuery-based Kendo UI tablet pane and customize the Hybrid UI SplitView component."
 slug: overview_hybridsplitview
 position: 1
+component: splitview_mobile
 ---
 
 # SplitView Overview

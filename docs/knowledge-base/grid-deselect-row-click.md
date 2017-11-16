@@ -6,6 +6,7 @@ page_title: Deselect Rows on Click | Kendo UI Grid
 slug: grid-deselect-row-click
 tags: grid, selection, remove, deselect, unselect, select, row, click
 res_type: kb
+component: grid
 ---
 
 ## Environment

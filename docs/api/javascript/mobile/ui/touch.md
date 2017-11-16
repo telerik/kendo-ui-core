@@ -1,6 +1,7 @@
 ---
 title: Touch
 res_type: api
+component: touch
 ---
 
 # kendo.ui.Touch

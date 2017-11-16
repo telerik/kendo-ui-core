@@ -3,6 +3,7 @@ title: NavBar
 page_title: Configuration, methods and events of Kendo UI Mobile NavBar
 description: How to use methods in Mobile NavBar widget.
 res_type: api
+component: navbar_mobile
 ---
 
 # kendo.mobile.ui.NavBar

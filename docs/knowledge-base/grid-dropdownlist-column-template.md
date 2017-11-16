@@ -1,19 +1,21 @@
 ---
-title: Drop Down List Column Always Visible
-description: An example on how to add DropDownList column template in the Kendo UI Grid. 
+title: Make DropDownList Column Always Visible
+description: An example on how to add a DropDownList column template to the Kendo UI Grid.
 type: how-to
-page_title: DropDownList Column Template | Kendo UI Grid
+page_title: Implement DropDownList Column Template | Kendo UI Grid
 slug: grid-dropdownlist-column-template
 tags: grid, column, template, dropdownlist
 ticketid: 1138249
 res_type: kb
+component: grid
 ---
 
 ## Environment
+
 <table>
  <tr>
   <td>Product</td>
-  <td>Grid for Progress® Kendo UI®</td>
+  <td>Progress Kendo UI Grid</td>
  </tr>
  <tr>
   <td>Progress Kendo UI version</td>
@@ -23,7 +25,7 @@ res_type: kb
 
 ## Description
 
-How can I make the drop down list editors always visible in the Kendo UI Grid?
+How can I make the drop-down list editors always visible in the Grid?
 
 ## Solution
 
@@ -31,10 +33,8 @@ How can I make the drop down list editors always visible in the Kendo UI Grid?
 >
 > The implementation of this functionality might lead to slow Grid performance.
 
-To make the drop down list editors always visible:
-
 1. Use the [`columns.template`](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid#configuration-columns.template) configuration to add inputs to the column cells.
-1. In the [`dataBound`](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid#events-dataBound) event handler initialize DropDownLists for every input.
+1. In the [`dataBound`](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid#events-dataBound) event handler, initialize a DropDownList for each input.
 
 ```html
 <div id="grid"></div>

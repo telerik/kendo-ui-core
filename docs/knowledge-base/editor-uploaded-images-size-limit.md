@@ -7,6 +7,7 @@ slug: editor-uploaded-images-size-limit
 tags: editor, set, size, limit, images, imagebrowser
 ticketid: 1135009
 res_type: kb
+component: editor
 ---
 
 ## Environment

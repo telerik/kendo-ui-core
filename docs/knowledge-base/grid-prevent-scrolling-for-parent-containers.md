@@ -6,6 +6,7 @@ page_title: Cannot Prevent the Propagation of Scrolling | Kendo UI Grid
 slug: grid-prevent-scrolling-for-parent-containers
 tags: grid, scroll, scrollbar, vertical
 res_type: kb
+component: grid
 ---
 
 ## Environment

@@ -7,6 +7,7 @@ slug: barcode-how-to-print-the-barcode
 tags: barcode, print
 ticketid: 1136001
 res_type: kb
+component: barcode
 ---
 
 ## Environment

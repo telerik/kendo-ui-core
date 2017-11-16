@@ -7,6 +7,7 @@ slug: change-header-color-child-grids
 tags: kendo ui, mvc, grid, hierarchy, child grids, header colors
 ticketid: 1101311
 res_type: kb
+component: grid
 ---
 
 ## Environment

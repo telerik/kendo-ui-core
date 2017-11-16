@@ -3,6 +3,7 @@ title: TabStrip
 page_title: Configuration, methods and events of Kendo UI TabStrip
 description: Easily disable all animations, set the parameters, used for the visual animation and the effects used in TabStrip UI widget.
 res_type: api
+component: tabstrip
 ---
 
 # kendo.ui.TabStrip

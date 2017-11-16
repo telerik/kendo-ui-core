@@ -4,6 +4,7 @@ page_title: Overview | Hybrid UI ActionSheet
 description: "Initiate the Hybrid UI ActionSheet to display a set of choices in Kendo UI."
 slug: overview_hybridactionsheet
 position: 1
+component: actionsheet_mobile
 ---
 
 # ActionSheet Overview

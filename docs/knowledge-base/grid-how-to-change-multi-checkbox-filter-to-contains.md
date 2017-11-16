@@ -7,6 +7,7 @@ slug: grid-how-to-change-multi-checkbox-filter-to-contains
 tags: grid, filter, multi-checkbox, contains
 ticketid: 1132412
 res_type: kb
+component: grid
 ---
 
 ## Environment

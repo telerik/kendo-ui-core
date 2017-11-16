@@ -7,6 +7,7 @@ slug: grid-bound-checkbox-editable-column
 tags: checkbox, template, column, grid, boolean, bound, dirty flag, edit mode, batch, editable
 ticketid: 1132606
 res_type: kb
+component: grid
 ---
 
 ## Environment

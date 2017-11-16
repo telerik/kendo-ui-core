@@ -7,6 +7,7 @@ slug: grid-ambiguous-widgetfactory
 tags: ambiguous, grid, upgrade, WidgetFactory
 ticketid: 1117665
 res_type: kb
+component: grid
 ---
 
 ## Environment

@@ -7,6 +7,7 @@ slug: insert-rows-when-exporting-grid-to-excel
 tags: grid, excel, export, add, rows
 ticketid: 1116551
 res_type: kb
+component: grid
 ---
 
 ## Environment

@@ -50,7 +50,7 @@ Below are listed the 2 corresponding steps for you to follow.
         )
 
         <script>
-            function onRequestEnd = function(e) {
+            var onRequestEnd = function(e) {
                 if (e.response.Data && e.response.Data.length) {
                     var data = e.response.Data;
                     if (this.group().length && e.type == "read") {

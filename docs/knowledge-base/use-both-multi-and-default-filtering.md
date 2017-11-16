@@ -7,6 +7,7 @@ slug: use-both-multi-and-default-filtering
 tags: grid, filtering, multi, default
 ticketid: 1120044
 res_type: kb
+component: grid
 ---
 
 ## Environment

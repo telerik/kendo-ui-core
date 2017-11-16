@@ -7,6 +7,7 @@ slug: grid-multicheck-filtering-search-box
 tags: grid, multicheck, filtering, search box
 ticketid:
 res_type: kb
+component: grid
 ---
 
 ## Environment

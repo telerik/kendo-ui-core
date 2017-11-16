@@ -7,6 +7,7 @@ slug: spreadsheet-load-exported-pdf-in-iframe
 tags: kendo, kendoui, spreadsheet, pdf, iframe, base64, embed
 ticketid: 1138153
 res_type: kb
+component: spreadsheet
 ---
 
 ## Environment

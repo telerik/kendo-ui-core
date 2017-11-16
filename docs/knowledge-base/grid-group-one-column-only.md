@@ -7,6 +7,7 @@ slug: grid-group-one-column-only
 tags: grid, grouping, singe column
 ticketid: 1135530
 res_type: kb
+component: grid
 ---
 
 ## Environment

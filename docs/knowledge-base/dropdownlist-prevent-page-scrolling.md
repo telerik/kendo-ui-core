@@ -1,14 +1,16 @@
 ---
-title: Prevent page scroll when DropDownList is opened
-description: An example on how to prevent page scroll when DropDownList is opened.
+title: Prevent PageSscroll When DropDownList is Opened
+description: An example on how to prevent the scrolling of the page when the Kendo UI DropDownList is opened.
 type: how-to
-page_title: Prevent page scroll when DropDownList is opened | Kendo UI DropDownList
+page_title: Prevent Scrolling of the Page on Opening | Kendo UI DropDownList
 slug: dropdownlist-prevent-page-scroll
 tags: prevent, page, scroll, dropdownlist, open
 res_type: kb
+component: dropdownlist
 ---
 
 ## Environment
+
 <table>
  <tr>
   <td>Product</td>
@@ -18,12 +20,12 @@ res_type: kb
 
 ## Description
 
-How to prevent page scroll when DropDownList is opened?
+How can I prevent the page scroll when the DropDownList is opened?
 
 ## Solution
 
-* Query the DropDownList `ul` element and attach a `wheel` event handler to its parent.
-* Prevent default action if scroll is at the beginning or end of the DropDownList ListView.
+1. Query the `ul` element of the DropDownList and attach a `wheel` event handler to its parent.
+1. Prevent the default action if the scroll is at the beginning or at the end of the DropDownList ListView.
 
 ```html
 <div id="example">

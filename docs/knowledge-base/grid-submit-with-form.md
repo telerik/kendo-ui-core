@@ -1,16 +1,17 @@
 ---
 title: Edit Grid as Part of a Form and Send Data to Server on Form Submit
-description: How to create a Grid that is edited entirely client-side as part of a form and submit it on form submit
+description: An example on how to create a Kendo UI Grid that is edited entirely on the client as part of a form and submit it on a form submit.
 type: how-to
-page_title: Edit Grid on the Client as Part of a Form
+page_title: Edit on the Client as Part of a Form | Kendo UI Grid
 slug: grid-edit-inside-form
 tags: grid, editing, form
 ticketid: 1137684
 res_type: kb
-
+component: grid
 ---
 
 ## Environment
+
 <table>
  <tr>
   <td>Product</td>
@@ -20,11 +21,15 @@ res_type: kb
 
 
 ## Description
-I want to display invoice-like form, where there is master data on top and a list in which you can add and edit items client-side. Then, I want to submit all form changes on a single button click.
+
+How can I:
+* Display an invoice-like form with master data on top and a list in which you can add and edit items on the client?
+* Submit all form changes on a single button click?
 
 ## Solution
-You can achieve this if you bind the Grid to a static array and implement local CRUD operations with `"incell"` editing mode. When a change in the data occurs, populate a hidden input inside the form with a string representation of the data. When the form submits, the hidden input data will also be automatically submitted to the server.
 
+1. Bind the Grid to a static array and implement local CRUD operations with the `"incell"` editing mode.
+1. When a change in the data occurs, populate a hidden input inside the form with a string representation of the data. As a result, when the form submits, the hidden input data is also automatically submitted to the server.
 
 ```html
     <form class="invoice" action="url" method = "POST">
@@ -142,13 +147,13 @@ You can achieve this if you bind the Grid to a static array and implement local 
           ],
           editable: "incell"
         });
-        
+
         $("form.invoice").submit(function(e){
           // Prevent default submit of dummy form. Remove this in actual project.
           e.preventDefault();
         	var form = $(e.target);
           var formData = form.serializeArray();
-          
+
           console.log(formData);
         });
       });

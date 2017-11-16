@@ -6,6 +6,7 @@ page_title: Inject HTML in the Title | Kendo UI Window
 slug: set-html-in-window-title
 tags: window, title, html
 res_type: kb
+component: window
 ---
 
 ## Environment

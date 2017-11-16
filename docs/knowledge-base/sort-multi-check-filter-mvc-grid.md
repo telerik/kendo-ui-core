@@ -7,6 +7,7 @@ slug: sort-multi-check-filter-mvc-grid
 tags: grid, ASP.NET MVC, filter, multi, multi-filter, multi-checkbox, checkbox, not sorted
 ticketid: 1116585
 res_type: kb
+component: grid
 ---
 
 ## Environment

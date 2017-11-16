@@ -1,19 +1,21 @@
 ---
 title: Disable Popup Editor Animations
-description: An example on how to remove the animation of the popup editor in the Kendo UI Grid. 
+description: An example on how to remove the animation of the popup editor in the Kendo UI Grid.
 type: how-to
 page_title: Remove Popup Window Animation | Kendo UI Grid
 slug: grid-popup-editor-remove-animation
 tags: grid, popup, editor, animation
 ticketid: 1135955
 res_type: kb
+component: grid
 ---
 
 ## Environment
+
 <table>
  <tr>
   <td>Product</td>
-  <td>Grid for Progress® Kendo UI®</td>
+  <td>Progress Kendo UI Grid</td>
  </tr>
  <tr>
   <td>Progress Kendo UI version</td>
@@ -23,11 +25,11 @@ res_type: kb
 
 ## Description
 
-How can I remove the opening and closing animations of the popup editor window in the Kendo UI Grid?
+How can I remove the opening and closing animations of the popup editor window in the Grid?
 
 ## Solution
 
-To disable the animations, override the default animation configuration of the Window.
+Override the default animation configuration of the Window.
 
 ```
 $.fn.kendoWindow.widget.prototype.options.animation = false;

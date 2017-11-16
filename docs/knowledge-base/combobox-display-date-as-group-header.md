@@ -7,6 +7,7 @@ slug: combobox-display-date-as-group-header
 tags: kendo, kendoui, combobox, grouping, group-heder, date
 ticketid: 1138203
 res_type: kb
+component: combobox
 ---
 
 ## Environment

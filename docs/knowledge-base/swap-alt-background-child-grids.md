@@ -7,6 +7,7 @@ slug: swap-alt-background-child-grids
 tags: kendo ui, mvc, grid, hierarchy, child grids, alt color
 ticketid: 1114254
 res_type: kb
+component: grid
 ---
 
 ## Environment

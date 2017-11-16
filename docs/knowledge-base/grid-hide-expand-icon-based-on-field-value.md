@@ -6,6 +6,7 @@ page_title: Hide the Expand Icon for the Detail Template Based on a Model Value 
 slug: grid-hide-expand-icon-based-on-field-value
 tags: grid, expand, collapse, hierarchy, detailTemplate
 res_type: kb
+component: grid
 ---
 
 ## Environment

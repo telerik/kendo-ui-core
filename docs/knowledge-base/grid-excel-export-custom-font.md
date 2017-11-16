@@ -1,36 +1,35 @@
 ---
-title: Kendo UI Grid Excel Export customize font family and font size
-description: Custom font for the excel export of the Kendo UI Grid
+title: Customize Font Family and Font Size in Grid When Exporting to Excel
+description: An example on how to set a custom font for the Excel export of the Kendo UI Grid.
 type: how-to
-page_title: Set custom font family and font size - excel export Kendo UI Grid 
+page_title: Set Custom Font Family and Font Size When Exporting to Excel | Kendo UI Grid
 slug: grid-excel-export-custom-font
-position:
 tags: excel, export, grid, font, font-family, row, font-size
-teampulseid:
 ticketid: 1137653
-pitsid:
 res_type: kb
-
+component: grid
 ---
 
 ## Environment
+
 <table>
  <tr>
   <td>Product</td>
-  <td>Grid for Progress® Kendo UI®</td>
+  <td>Progress Kendo UI Grid</td>
  </tr>
 </table>
 
 
 ## Description
 
-I need to change the font size and font family of the excel export in the Kendo UI Grid 
+How can I change the font size and font family of the Excel export in the Grid?
 
 ## Solution
 
-To change the font size of the cells, you need to loop over them and set each one. You can add a handler to the [`excelExport`](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid#events-excelExport) event of the Kendo UI Grid to loop over the workbook.
-If the font size becomes too large for the row, you will need to also increase the [`row height`](https://docs.telerik.com/kendo-ui/api/javascript/ooxml/workbook#configuration-sheets.rows.height).
-Finally, to change the font name, utilize the sheet rows cells [`fontName`](https://docs.telerik.com/kendo-ui/api/javascript/ooxml/workbook#configuration-sheets.rows.cells.fontName) property.
+1. Loop over the Grid cells and set each of them.
+1. Add a handler to the [`excelExport`](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid#events-excelExport) event of the Grid to loop over the workbook.
+1. If the font size becomes too large for the row, increase the row [`height`](https://docs.telerik.com/kendo-ui/api/javascript/ooxml/workbook#configuration-sheets.rows.height).
+1. To change the font name, utilize the [`fontName`](https://docs.telerik.com/kendo-ui/api/javascript/ooxml/workbook#configuration-sheets.rows.cells.fontName) property of the sheet row cells.
 
 ```
 excelExport: function(e) {
@@ -47,9 +46,9 @@ excelExport: function(e) {
 ```html
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/2.4.0/jszip.min.js"></script>
 
-  
+
     <div id="grid" ></div>
-  
+
     <script>
       $("#grid").kendoGrid({
         toolbar: ["excel"],

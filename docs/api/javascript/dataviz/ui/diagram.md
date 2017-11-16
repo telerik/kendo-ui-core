@@ -3,6 +3,7 @@ title: Diagram
 page_title: API Reference for methods, objects and properties in the math module of Kendo diagram
 description: Examples and detailed explanation of Kendo UI methods and properties.
 res_type: api
+component: diagram
 ---
 
 # kendo.dataviz.ui.Diagram

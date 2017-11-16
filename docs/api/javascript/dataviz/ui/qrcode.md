@@ -3,6 +3,7 @@ title: QRCode
 page_title: Configuration, methods and events of Kendo UI DataViz QRCode
 description: Learn the configuration options for QRCode widget, set its options, use methods properly.
 res_type: api
+component: qrcode
 ---
 
 # kendo.dataviz.ui.QRCode

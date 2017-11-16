@@ -2,6 +2,7 @@
 title: ListBox
 description: Configuration, methods and events of the Kendo UI ListBox
 res_type: api
+component: listbox
 ---
 
 # kendo.ui.ListBox

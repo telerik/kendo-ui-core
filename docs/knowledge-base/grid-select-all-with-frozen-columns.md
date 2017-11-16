@@ -1,11 +1,12 @@
 ---
-title: Using CheckBox Template for Selecting Rows in Kendo UI Grid with Locked Columns
-description: An example for configuring a template column to handle rows selection with frozen columns
+title: Use CheckBox Template for Selecting Rows in Grid with Locked Columns
+description: An example on how to configure a template column to handle row selection with frozen columns in the Kendo UI Grid.
 type: how-to
-page_title: Using Template Column with CheckBoxes for Selecting Rows with Locked Columns in Kendo UI Grid
+page_title: Use Template Column with CheckBoxes for Selecting Rows with Locked Columns | Kendo UI Grid
 slug: grid-select-all-with-frozen-columns
 tags: kendoui, kendo, grid, locked columns, frozen columns, checkbox selection, checkboxes
 res_type: kb
+component: grid
 ---
 
 ## Environment
@@ -19,11 +20,11 @@ res_type: kb
 
 ## Description
 
-How to create a checkbox column for selecting rows in Grid and render a select-all in the header when I have locked/frozen columns? 
+How can I create a checkbox column for selecting rows in the Grid and render a **Select All** option in the header when the Grid has locked (frozen) columns enabled?
 
 ## Solution
 
-When there are locked columns in the Grid, it will render two separate tables for the data, so this should be taken into account when we manually select all records within the click event of the checkbox in the header for selecting all records.
+Manually select all records within the `click` event of the checkbox for selecting all records in the header. Note that a Grid with locked (frozen) columns renders two separate tables for its data.
 
 ```html
    <div id="grid"></div>
@@ -119,7 +120,7 @@ When there are locked columns in the Grid, it will render two separate tables fo
             {
               field:"ProductName",
               width: 200
-            }, 
+            },
             {
               field: "UnitPrice",
               title: "Unit Price",
@@ -142,7 +143,7 @@ When there are locked columns in the Grid, it will render two separate tables fo
           editable: "inline"
         }).data("kendoGrid");
 
-        //bind click event to the checkbox
+        //bind the click event to the checkbox
         grid.element.on("click", ".k-checkbox" , selectRow);
         $('#header-chb').change(function(ev){
           var checked = ev.target.checked;

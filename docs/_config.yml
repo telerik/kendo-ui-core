@@ -604,6 +604,370 @@ defaults:
     values:
         layout: "kb-page"
 
+    ## Component Tags
+-
+    scope:
+        path: "controls/gauges/lineargauge"
+    values:
+        component: "gauge"
+
+-
+    scope:
+        path: "controls/gauges/radialgauge"
+    values:
+        component: "gauge"
+
+-
+    scope:
+        path: "controls/editors/autocomplete"
+    values:
+        component: "autocomplete"
+
+-
+    scope:
+        path: "controls/barcodes/barcode"
+    values:
+        component: "barcode"
+
+-
+    scope:
+        path: "controls/charts/chart-types/bullet-charts"
+    values:
+        component: "bulletchart"
+
+-
+    scope:
+        path: "controls/navigation/button"
+    values:
+        component: "button"
+
+-
+    scope:
+        path: "controls/scheduling/calendar"
+    values:
+        component: "calendar"
+
+-
+    scope:
+        path: "controls/charts"
+    values:
+        component: "chart"
+
+-
+    scope:
+        path: "controls/editors/colorpicker"
+    values:
+        component: "colorpicker"
+
+-
+    scope:
+        path: "controls/editors/combobox"
+    values:
+        component: "combobox"
+
+-
+    scope:
+        path: "framework/datasource"
+    values:
+        component: "data_source"
+
+-
+    scope:
+        path: "controls/editors/datepicker"
+    values:
+        component: "datepicker"
+
+-
+    scope:
+        path: "controls/editors/timepicker"
+    values:
+        component: "timepicker"
+
+-
+    scope:
+        path: "controls/editors/dateinput"
+    values:
+        component: "dateinput"
+
+-
+    scope:
+        path: "controls/diagrams-and-maps/diagram"
+    values:
+        component: "diagram"
+
+-
+    scope:
+        path: "controls/layout/dialog"
+    values:
+        component: "dialog"
+
+-
+    scope:
+        path: "controls/interactivity/draganddrop"
+    values:
+        component: "drag_and_drop"
+
+-
+    scope:
+        path: "framework/drawing"
+    values:
+        component: "drawing_api"
+
+-
+    scope:
+        path: "controls/editors/dropdownlist"
+    values:
+        component: "dropdownlist"
+
+-
+    scope:
+        path: "controls/editors/editor"
+    values:
+        component: "editor"
+
+-
+    scope:
+        path: "controls/interactivity/fx"
+    values:
+        component: "effects"
+
+-
+    scope:
+        path: "controls/scheduling/gantt"
+    values:
+        component: "gantt"
+
+-
+    scope:
+        path: "framework/globalization"
+    values:
+        component: "globalization"
+
+-
+    scope:
+        path: "controls/data-management/grid"
+    values:
+        component: "grid"
+
+-
+    scope:
+        path: "framework/hierarchicaldatasource"
+    values:
+        component: "hierarchical_data_source"
+
+-
+    scope:
+        path: "controls/editors/listbox"
+    values:
+        component: "listbox"
+
+-
+    scope:
+        path: "controls/data-management/listview"
+    values:
+        component: "listview"
+
+-
+    scope:
+        path: "controls/hybrid/listview"
+    values:
+        component: "listview_mobile"
+
+-
+    scope:
+        path: "framework/mvvm"
+    values:
+        component: "mvvm"
+
+-
+    scope:
+        path: "controls/diagrams-and-maps/map"
+    values:
+        component: "map"
+
+-
+    scope:
+        path: "controls/editors/maskedtextbox"
+    values:
+        component: "maskedtextbox"
+
+-
+    scope:
+        path: "controls/media/mediaplayer"
+    values:
+        component: "mediaplayer"
+
+-
+    scope:
+        path: "controls/navigation/menu"
+    values:
+        component: "menu"
+
+-
+    scope:
+        path: "controls/editors/multiselect"
+    values:
+        component: "multiselect"
+
+-
+    scope:
+        path: "controls/layout/notification"
+    values:
+        component: "notification"
+
+-
+    scope:
+        path: "controls/editors/numerictextbox"
+    values:
+        component: "numerictextbox"
+
+-
+    scope:
+        path: "controls/navigation/panelbar"
+    values:
+        component: "panelbar"
+
+-
+    scope:
+        path: "controls/data-management/pivotgrid"
+    values:
+        component: "pivotgrid"
+
+-
+    scope:
+        path: "controls/interactivity/progressbar"
+    values:
+        component: "progressbar"
+
+-
+    scope:
+        path: "controls/barcodes/qrcode"
+    values:
+        component: "qrcode"
+
+-
+    scope:
+        path: "controls/layout/responsivepanel"
+    values:
+        component: "responsivepanel"
+
+-
+    scope:
+        path: "framework/spa"
+    values:
+        component: "spa"
+
+-
+    scope:
+        path: "controls/scheduling/scheduler"
+    values:
+        component: "scheduler"
+
+-
+    scope:
+        path: "controls/hybrid/scrollview"
+    values:
+        component: "scrollview_mobile"
+
+-
+    scope:
+        path: "controls/editors/slider"
+    values:
+        component: "slider"
+
+-
+    scope:
+        path: "controls/interactivity/sortable"
+    values:
+        component: "sortable"
+
+-
+    scope:
+        path: "controls/charts/sparkline"
+    values:
+        component: "sparkline"
+
+-
+    scope:
+        path: "controls/layout/splitter"
+    values:
+        component: "splitter"
+
+-
+    scope:
+        path: "controls/data-management/spreadsheet"
+    values:
+        component: "spreadsheet"
+
+-
+    scope:
+        path: "controls/navigation/tabstrip"
+    values:
+        component: "tabstrip"
+
+-
+    scope:
+        path: "api/javascript/kendo#methods-template"
+    values:
+        component: "templates"
+
+-
+    scope:
+        path: "framework/templates"
+    values:
+        component: "templates"
+
+-
+    scope:
+        path: "controls/navigation/toolbar"
+    values:
+        component: "toolbar"
+
+-
+    scope:
+        path: "controls/layout/tooltip"
+    values:
+        component: "tooltip"
+
+-
+    scope:
+        path: "controls/data-management/treelist"
+    values:
+        component: "treelist"
+
+-
+    scope:
+        path: "controls/charts/treemap"
+    values:
+        component: "treemap"
+
+-
+    scope:
+        path: "controls/navigation/treeview"
+    values:
+        component: "treeview"
+
+-
+    scope:
+        path: "controls/editors/upload"
+    values:
+        component: "upload"
+
+-
+    scope:
+        path: "controls/editors/validator"
+    values:
+        component: "validator"
+
+-
+    scope:
+        path: "controls/layout/window"
+    values:
+        component: "window"
+
+    ## End Component Tags
+
+
 type_links:
     "kendo.Class": "/api/javascript/class"
     "kendo.data.DataSource": "/api/javascript/data/datasource"

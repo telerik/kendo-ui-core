@@ -6,6 +6,7 @@ page_title: Sort TagList Programmatically | Kendo UI MultiSelect
 slug: sort-multiselect-taglist-programmatically
 tags: multiselect, sort, taglist, programmatically, selected, items
 res_type: kb
+component: multiselect
 ---
 
 ## Environment

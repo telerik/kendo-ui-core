@@ -6,6 +6,7 @@ page_title: Inject the Task Title for Display in the Delete Confirm Dialog | Ken
 slug: scheduler-inject-task-title-in-the-confirm-delete-prompt
 tags: kendo, scheduler, delete-task, delete-prompt
 res_type: kb
+component: scheduler
 ---
 
 ## Environment

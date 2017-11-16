@@ -1,20 +1,21 @@
 ---
-title: Use CSS to disable dirty indicator in Kendo UI Grid
-description: An example on how to disable dirty indicators in the Kendo UI Grid using CSS
+title: Disable Dirty Indicators in Grid by Using CSS
+description: An example on how to disable dirty indicators in the Kendo UI Grid by using CSS.
 type: how-to
-page_title: Use CSS to disable dirty indicator in Kendo UI Grid
+page_title: Disable Dirty Indicators by Using CSS | Kendo UI Grid
 slug: disable-dirty-indicator-using-css
 tags: dirty, indicator, grid, disable, css
 ticketid: 1136481
 res_type: kb
-
+component: grid
 ---
 
 ## Environment
+
 <table>
  <tr>
   <td>Product</td>
-  <td>Grid for Progress® Kendo UI®</td>
+  <td>Progress Kendo UI Grid</td>
  </tr>
  <tr>
   <td>Operating System</td>
@@ -32,21 +33,21 @@ res_type: kb
 
 ## Description
 
-I'm working with a Kendo UI Grid and would like to disable the dirty indicator that appears when using batch editing.
+How can I disable the dirty indicator which appears when the Grid uses batch editing?
 
 ## Solution
 
-In order to disable the dirty indicator, we can use CSS and take advantage of the `.k-dirty` class:
+Use CSS and utilize the `.k-dirty` class.
 
-````css
+```css
 <style>
   .k-dirty{
     display: none;      
   }
 </style>
-````
+```
 
-To see a working example, take a look at the following sample in the Kendo UI Dojo:
+For the full implementation, open the following example in the Dojo.
 
 ```html
 <style>
@@ -127,4 +128,4 @@ To see a working example, take a look at the following sample in the Kendo UI Do
 
 ## See Also
 
-* [Kendo UI Customization of Appearance.](https://docs.telerik.com/kendo-ui/styles-and-layout/appearance-styling#customization-of-appearance)
+* [Customization of Appearance in Kendo UI](https://docs.telerik.com/kendo-ui/styles-and-layout/appearance-styling#customization-of-appearance)

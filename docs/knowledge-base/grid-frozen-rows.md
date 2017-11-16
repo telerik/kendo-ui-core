@@ -6,6 +6,7 @@ page_title: Render Frozen Rows | Kendo UI Grid
 slug: grid-frozen-rows
 tags: grid, frozen rows, frozen, row, data item, model
 res_type: kb
+component: grid
 ---
 
 ## Environment

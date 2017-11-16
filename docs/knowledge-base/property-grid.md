@@ -6,6 +6,7 @@ page_title: Transform Kendo UI Grids into Property Grids | Kendo UI Grid
 slug: property-grid
 tags: grid, property-grid
 res_type: kb
+component: grid
 ---
 
 ## Environment

@@ -1,20 +1,21 @@
 ---
-title: Check if Particular Item is Selected in Kendo UI ListView
-description: An example on how to check if a particular item corresponds to a property os selected items in ListView
+title: Check If Particular ListView Item Is Selected
+description: An example on how to check if a particular item corresponds to a property of the selected items in the Kendo UI ListView.
 type: how-to
-page_title: Check if Particular Item is Selected in Kendo UI ListView
+page_title: Check If Particular Item Is Selected | Kendo UI ListView
 slug: check-listview-item-selected
 tags: listview, item, selected, check
 ticketid: 1134915
 res_type: kb
-
+component: listview
 ---
 
 ## Environment
+
 <table>
  <tr>
   <td>Product</td>
-  <td>ListView for Progress® Kendo UI®</td>
+  <td>Progress Kendo UI ListView</td>
  </tr>
  <tr>
   <td>Operating System</td>
@@ -32,11 +33,12 @@ res_type: kb
 
 ## Description
 
-I'm working with a Kendo UI ListView and need to check if certain value corresponds to a property of a DataItem of the selected items.
+How can I check if a certain value corresponds to a DataItem property of the selected ListView items?
 
 ## Solution
 
-In order to check if a particular item is selected in the ListBox, we can take advantage of the `select` method of the Kendo UI ListView API to get a list of all the selected items and then, by getting their index, we can access its corresponding DataItem and properties:
+1. Use the `select` method of the Kendo UI ListView API to get a list of all the selected items.
+1. Access its corresponding DataItem and properties by getting their index.
 
 ```html
 <div id="example">
@@ -159,4 +161,4 @@ In order to check if a particular item is selected in the ListBox, we can take a
 
 ## See Also
 
-* [Select method in the Kendo UI API](https://docs.telerik.com/kendo-ui/api/javascript/ui/listview#methods-select)
+* [API Reference of the `select` Method](https://docs.telerik.com/kendo-ui/api/javascript/ui/listview#methods-select)

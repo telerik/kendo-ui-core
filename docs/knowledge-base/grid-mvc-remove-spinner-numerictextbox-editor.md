@@ -4,9 +4,10 @@ description: An example on how to remove the side arrows of the NumericTextBox e
 type: how-to
 page_title: Remove Spinner Arrows of NumericTextBox Editor | UI for ASP.NET MVC
 slug: grid-mvc-remove-spinner-numerictextbox-editor
-tags: grid treelist, NumericTextBox, spinners, editor, remove
+tags: NumericTextBox, spinners, editor, remove
 ticketid: 1132419, 1134869
 res_type: kb
+component: numerictextbox
 ---
 
 ## Environment

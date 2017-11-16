@@ -7,6 +7,7 @@ slug: editor-indent-list-shortcut
 tags: kendo, kendoui, editor, shortcuts, tab, ordered, list, indent, outdent
 ticketid: 1136197
 res_type: kb
+component: editor
 ---
 
 ## Environment

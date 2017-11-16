@@ -6,6 +6,7 @@ page_title: Change Resource for an Event with a ContextMenu | Kendo UI Scheduler
 slug: scheduler-change-resource-for-event-using-contextmenu
 tags: kendo, scheduler, agenda-view, contextmenu, resources
 res_type: kb
+component: scheduler
 ---
 
 ## Environment

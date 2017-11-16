@@ -7,6 +7,7 @@ slug: disable-nodatatemplate-in-mvc-dropdowns
 tags: disable, nodatatemplate, mvc, wrappers, autocomplete, multiselect, combobox, dropdownlist
 ticketid: 1062781
 res_type: kb
+component: autocomplete
 ---
 
 ## Environment

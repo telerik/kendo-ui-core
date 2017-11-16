@@ -3,6 +3,7 @@ title: TimePicker
 page_title: Configuration, methods and events of Kendo UI TimePicker
 description: What type of animations you can use in TimePicker UI widget, find supported methods and see which events are triggered once the value is changed.
 res_type: api
+component: timepicker
 ---
 
 # kendo.ui.TimePicker

@@ -7,6 +7,7 @@ slug: upload-synchronous-file-type-validate
 tags: upload, synchronous, validate, validation, file, type
 ticketid: 1138370
 res_type: kb
+component: upload
 ---
 
 ## Environment
