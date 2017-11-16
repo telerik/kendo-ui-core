@@ -1,8 +1,8 @@
 ---
-title: Editing Cells on Double-Click in Kendo UI Grid
-description: An example for editing cells in Batch edit mode on double-click.
+title: Edit Cells on Double-Click in Grid
+description: An example on how to edit cells in the batch edit mode of the Kendo UI Grid on double-click.
 type: how-to
-page_title: Implement Double-Click Batch Editing with Selecatble Grid
+page_title: Implement Double-Click Batch Editing in Selectable Grids | Kendo UI Grid
 slug: grid-edit-cell-on-double-click
 tags: grid, batch, incell, double-click
 res_type: kb
@@ -20,11 +20,13 @@ component: grid
 
 ## Description
 
-How can I edit cells on double-click in editable Grid with enabled selection?
+How can I edit cells on double-click in an editable Grid when selection is enabled?
 
 ## Solution
 
-For achieving the desired behavior you will have to disable the built-in editing mechanism of the Grid and use the __editCell__ and __closeCell__ methods within the double-click event of the TD elements
+1. Disable the built-in editing mechanism of the Grid.
+1. Use the `editCell` and `closeCell` methods within the `dblclick` event of the `td` elements.
+
 ```html
 <script src="https://demos.telerik.com/kendo-ui/content/shared/js/orders.js"></script>
 
@@ -74,7 +76,7 @@ For achieving the desired behavior you will have to disable the built-in editing
           var grid = $("#grid").getKendoGrid();
           grid.editCell(cell);
       });
-      
+
       $("#grid tbody").on("blur", "td", function(e) {
         var cellElement = this;
         var cell = $(cellElement);
@@ -83,5 +85,5 @@ For achieving the desired behavior you will have to disable the built-in editing
    	 });
 
     });
-</script> 
+</script>
 ```

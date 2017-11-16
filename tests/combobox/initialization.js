@@ -1259,6 +1259,16 @@ test("adds class to the wrapper if clearButton is enabled", function() {
     ok(combobox.wrapper.hasClass("k-combobox-clearable"));
 });
 
+test("adds class hidden to the wrapper if clearButton is enabled and value is null", function() {
+    var combobox = new ComboBox(input, {
+        clearButton: true
+    });
+
+    combobox._hideBusy()
+
+    ok(combobox._clear.hasClass("k-hidden"));
+});
+
 test("does not add k-combobox-clearable class if clearButton is turned off", function() {
     var combobox = new ComboBox(input, {
         clearButton: false

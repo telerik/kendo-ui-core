@@ -37,6 +37,7 @@ var __meta__ = { // jshint ignore:line
         DISABLED = "disabled",
         READONLY = "readonly",
         CHANGE = "change",
+        LOADING = "k-i-loading",
         DEFAULT = "k-state-default",
         FOCUSED = "k-state-focused",
         STATEDISABLED = "k-state-disabled",
@@ -750,6 +751,15 @@ var __meta__ = { // jshint ignore:line
                         that._state = STATE_ACCEPT;
                     }
                 });
+        },
+
+        _hideBusy: function () {
+            var that = this;
+            clearTimeout(that._busy);
+            that._arrowIcon.removeClass(LOADING);
+            that._focused.attr("aria-busy", false);
+            that._busy = null;
+            that._toggleCloseVisibility();
         },
 
         _click: function(e) {

@@ -1,8 +1,8 @@
 ---
-title: Automatically persist Grid state
-description: Persist state of Grid on page close
+title: Persist the State of the Grid Automatically
+description: An example on how to persist the state of the Kendo UI Grid on page close.
 type: how-to
-page_title: Persit Grid state automatically | Kendo UI Grid
+page_title: Persist State Automatically | Kendo UI Grid
 slug: grid-automatically-persist-state
 tags: grid, state, persisting, persist, automatic, leave, page, save, restore, changes, options, keep, recreate, retain, load
 ticketid: 1138864
@@ -22,14 +22,13 @@ component: grid
 
 ## Description
 
-I would like to persist the sort, filter, group options automatically when the users leave the page. When they come back the Grid should look as it was left before closing the tab. 
+How can I automatically persist the sort, filter, and group Grid options when the user leaves the page and keep the look of the Grid the same as the user closed the tab?
 
 ## Solution
 
-The state for the Grid is persisted in the [beforeunload event](https://developer.mozilla.org/en-US/docs/Web/API/WindowEventHandlers/onbeforeunload) handler. This way any operations performed by the users before leaving the page will be persisted. In order to restore the state you can use the [document.ready event](https://learn.jquery.com/using-jquery-core/document-ready/).
+The state of the Grid is persisted in the [`beforeunload`](https://developer.mozilla.org/en-US/docs/Web/API/WindowEventHandlers/onbeforeunload) event handler. This way, any operation which the user performs before leaving the page is persisted. To restore the Grid state, use the [`document.ready`](https://learn.jquery.com/using-jquery-core/document-ready/) event.
 
-Furthermore the autoBind property for the Grid takes into account if there are already any persisted options. This prevents requesting the data multiple times.
-
+The `autoBind` property of the Grid is able to detect any options that are already persisted, which prevents the multiple requests of data.
 
 ````html
 <div id="grid"></div>
@@ -96,4 +95,3 @@ $(document).ready(function () {
 });
 </script>
 ````
-

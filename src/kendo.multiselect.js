@@ -926,7 +926,7 @@ var __meta__ = { // jshint ignore:line
             that._loading.addClass(HIDDENCLASS);
             that._request = false;
             that._busy = null;
-            that._showClear();
+            that._toggleCloseVisibility();
         },
 
         _showBusyHandler: function() {

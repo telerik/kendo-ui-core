@@ -958,4 +958,14 @@
 
         equal(noData.text(), multiselect.dataSource.total());
     });
+
+    test("adds class hidden to the wrapper if clearButton is enabled and value is null", function() {
+        var multiselect = new MultiSelect(select, {
+            clearButton: true
+        });
+    
+        multiselect._hideBusy()
+    
+        ok(multiselect._clear.hasClass("k-hidden"));
+    });
 })();

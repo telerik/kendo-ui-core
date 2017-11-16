@@ -1,8 +1,8 @@
 ---
-title: Using Custom Filter for ForeignKey Column in Kendo UI Grid
-description: An example for customizing the filter of a foreign key column
+title: Use Custom Filter for ForeignKey Column in Grid
+description: An example on how to customize the filter of a foreign key column in a Kendo UI Grid.
 type: how-to
-page_title: Configuring Custom Filter for ForeignKey Column in Kendo UI Grid
+page_title: Configure Custom Filter for ForeignKey Column | Kendo UI Grid
 slug: grid-custom-filter-with-foreignkey-column
 tags: kendoui, kendo, grid, filtering, foreign key, custom filtering
 res_type: kb
@@ -20,11 +20,13 @@ component: grid
 
 ## Description
 
-How to use custom filter over a foreignKey column in the Grid? 
+How can I use a custom filter over a `foreignKey` column in the Grid?
 
 ## Solution
 
-By default, the Grid will match internally the __values__ collection in the column with the corresponding value field from the __dataItem__ and it will create a collection with the unique values for the filtering of the ForeignKey column. With custom filtering, the matching and the creation of the unique values collection should be handled manually.
+By default, the Grid internally matches the `values` collection in the column with the corresponding value field from the `dataItem` and creates a collection with the unique values for the filtering of the `foreignKey` column.
+
+Apply custom filtering and manually handle the matching and the creation of the unique values collection.
 
 ```html
        <script src="../content/shared/js/products.js" type="text/javascript"></script>
@@ -57,9 +59,9 @@ By default, the Grid will match internally the __values__ collection in the colu
                     "value": 8,
                     "text": "Seafood"
                 }];
-              
+
 var filterDataSource = new kendo.data.DataSource({});
-              
+
 	function onFilterMenuInit(e) {
         var grid = e.sender;
         e.container.data("kendoPopup").bind("open", function () {
@@ -69,7 +71,7 @@ var filterDataSource = new kendo.data.DataSource({});
           if(e.field == "CategoryID"){
             var popup = e.container.data("kendoPopup").element;
             var checkboxes = popup.find("input[type='checkbox']");
-            
+
             checkboxes.each(function(){
               var checkbox = $(this);              
               if(!checkbox.hasClass("k-check-all")){
@@ -102,11 +104,11 @@ var filterDataSource = new kendo.data.DataSource({});
             return result;
         }
     }
-                  
+
 		function onChange(e) {
         filterDataSource.data(e.items);
     }
-              
+
                 $(document).ready(function () {
                     var dataSource = new kendo.data.DataSource({
                         pageSize: 20,
@@ -125,7 +127,7 @@ var filterDataSource = new kendo.data.DataSource({});
                             }
                         }
                     });
-                  
+
 
                     $("#grid").kendoGrid({
                         dataSource: dataSource,
@@ -142,12 +144,12 @@ var filterDataSource = new kendo.data.DataSource({});
                             { command: "destroy", title: " ", width: "150px", filterable: { multi: true, dataSource: filterDataSource }}],
                         editable: true
                     });
-                  
-                  
-                  
+
+
+
                 });
-              
-              
+
+
             </script>
         </div>
 ```

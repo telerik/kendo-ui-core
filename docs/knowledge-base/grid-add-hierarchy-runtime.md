@@ -1,8 +1,8 @@
 ---
 title: Dynamically Add Hierarchical Grid
-description: An example on how to dynamically add hierarchy levels to the Kendo UI Grid. 
+description: An example on how to dynamically add hierarchy levels to the Kendo UI Grid.
 type: how-to
-page_title: Create Hierarchy Levels Runtime | Kendo UI Grid
+page_title: Create Hierarchy Levels at Runtime | Kendo UI Grid
 slug: grid-add-hierarchy-runtime
 tags: grid, hierarchy, setoptions, runtime
 ticketid: 1135018
@@ -11,10 +11,11 @@ component: grid
 ---
 
 ## Environment
+
 <table>
  <tr>
   <td>Product</td>
-  <td>Grid for Progress® Kendo UI®</td>
+  <td>Progress Kendo UI Grid</td>
  </tr>
  <tr>
   <td>Progress Kendo UI version</td>
@@ -24,14 +25,12 @@ component: grid
 
 ## Description
 
-How can I add hierarchy levels dynamically to the Kendo UI Grid?
+How can I dynamically add hierarchy levels to the Grid?
 
 ## Solution
 
-To add hierarchy levels dynamically:
-
 1. Use the [`setOptions`](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid#methods-setOptions) method of the Grid.
-1. In the `setOptions` properties, object add the [`detailTemplate`](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid#configuration-detailTemplate) configuration and the [`detailInit`](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid#events-detailInit) event.
+1. In the `setOptions` properties, add the [`detailTemplate`](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid#configuration-detailTemplate) configuration and the [`detailInit`](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid#events-detailInit) event.
 
 ```html
 <div id="example">

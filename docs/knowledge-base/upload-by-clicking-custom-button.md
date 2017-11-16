@@ -1,8 +1,8 @@
 ---
-title: Upload a File by Clicking a Custom Button
+title: Upload Files by Clicking Custom Buttons
 description: An example on how to trigger the upload with Kendo UI Upload by clicking a custom button.
 type: how-to
-page_title: Upload the selected file by clicking on a custom button | Kendo UI Upload
+page_title: Upload Selected Files by Clicking Custom Buttons | Kendo UI Upload
 slug: upload-by-clicking-custom-button
 tags: upload, file, clicking, custom, button, selected
 ticketid: 1138317
@@ -37,7 +37,8 @@ How can I hide the default Upload button and upload the selected file by clickin
 
 ## Solution
 
-The Upload's default Clear and Upload butons can be hidden with CSS and the upload can be triggered by clicking the default button with jQuery in the custom button's click handler.  
+1. Hide the default **Clear** and **Upload** buttons of the Upload by using CSS.
+1. Allow the trigger of the upload by clicking the default button by using jQuery in the click handler of the custom button.  
 
 ```html
 	<input type="file" name="files" id="files"/>
@@ -50,7 +51,7 @@ The Upload's default Clear and Upload butons can be hidden with CSS and the uplo
 				autoUpload: false
 			}
 		});
-	  
+
 		function uploadSelected() {
 		  $(".k-upload-selected").click();
 		}
@@ -58,6 +59,6 @@ The Upload's default Clear and Upload butons can be hidden with CSS and the uplo
 	<style>  
 	  .k-clear-selected, .k-upload-selected {
 		display: none !important;
-	  } 
+	  }
 	</style>
 ```

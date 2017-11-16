@@ -73,25 +73,14 @@ The [Kendo UI Packages](../../kendo-ui/intro/installation/nuget-install) are lis
 
 ## Troubleshooting
 
-### Getting Error [Telerik Nuget] The V2 feed at '...' returned an unexpected status code '401 Logon failed.' After Changing Telerik Password
+### After changing my Telerik password, I get [Telerik Nuget] The V2 feed at '...' returned an unexpected status code '401 Logon failed.' error
 
-After changing your Telerik password, you need to reset your credentials in the `NuGet.config` file. To do this, run the following command:
+After changing your Telerik password, you need to reset your credentials in the `NuGet.config` file. To do this, run the `NuGet Sources Update -Name "telerik.com" -Source "https://nuget.telerik.com/nuget" -UserName "your login email" -Password "your new password"` command.
 
-###### Example
+### NuGet package takes too long to install or update on Visual Studio
 
-```
-NuGet Sources Update -Name "telerik.com" -Source "https://nuget.telerik.com/nuget" -UserName "your login email" -Password "your new password"
-``` 
-
-### Nuget Package Takes Too Long to Install/Update on Visual Studio
-
-In order to resolve this, the auto-sync can be disabled from the _references.js file by modifying the following line:
-
-```
-/// <autosync enabled="false" />.
-```
-
-Also, the project can be disconnected from the source control before running the Update Wizard.
+* Disable the auto-sync in the `_references.js` file by modifying the following `/// <autosync enabled="false" />` line.
+* You can also disconnect the project from the source control before running the Update Wizard.
 
 ## See Also
 

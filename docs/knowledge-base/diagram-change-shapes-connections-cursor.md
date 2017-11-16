@@ -1,17 +1,17 @@
 ---
 title: Change the Pointer Cursor When Hovering a Shape or Connection in the Diagram
-description: How to get rid of the hand cursor when hover over a shape or connection in a Kendo UI Diagram?
+description: An example on how to get rid of the hand cursor on hovering over a shape or a connection in a Kendo UI Diagram.
 type: how-to
-page_title: How to Change the Cursor on Shape or Connection Hover in the Diagram
+page_title: Change Cursor on Shape or Connection Hover | Kendo UI Diagram
 slug: diagram-change-shapes-connections-cursor
 tags: diagram, shape, connection
 ticketid: 1137455
 res_type: kb
-
 component: diagram
 ---
 
 ## Environment
+
 <table>
  <tr>
   <td>Product</td>
@@ -21,13 +21,25 @@ component: diagram
 
 
 ## Description
-We don't want to give users the impression that the Diagram is clickable, is there a way to keep the default cursor when they hover over a shape or a connection in the Kendo UI Diagram?
+
+I want to provide the user with the impression that the Diagram is not clickable.
+
+How can I keep the default cursor when the user hovers over a shape or a connection in the Diagram?
 
 ## Solution
-There are two possible ways to approach this task.
 
-### Change the cursor dynamically when a series or a connection is hovered
-To do this, add a `mouseEnter` event handler and change the cursor of the hovered element:
+Use either of the following approaches:
+
+* [Change the cursor dynamically](#change-the-cursor-dynamically)
+* [Change the cursor when the Diagram is bound](#change-the-cursor-when-the-diagram-is-bound)
+
+To prevent user interaction and display the widget as a static image, in the configuration of the Diagram set `editable: false` and `selectable: false`.
+
+### Change the Cursor Dynamically
+
+To dynamically change the cursor when a series or a connection is hovered:
+1. Add a `mouseEnter` event handler.
+1. Change the cursor of the hovered element.
 
 ```html
     <div id="diagram"></div>
@@ -136,8 +148,9 @@ To do this, add a `mouseEnter` event handler and change the cursor of the hovere
     </script>
 ```
 
-### Change the cursor when the Diagram is bound
-You can access all shapes and connections in the `dataBound` event of the Diagram and change their cursor:
+### Change the Cursor When  the Diagram Is Bound
+
+Access all shapes and connections in the `dataBound` event of the Diagram and change their cursor.
 
 ```html
     <div id="diagram"></div>
@@ -249,6 +262,3 @@ You can access all shapes and connections in the `dataBound` event of the Diagra
       $(document).ready(createDiagram);
     </script>
 ```
-
-## Notes
-If you want to prevent any user interaction with the Diagram and display it as a static image, set `editable: false` and `selectable: false`in the widget configuration.

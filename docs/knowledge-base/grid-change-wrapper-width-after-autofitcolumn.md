@@ -1,8 +1,8 @@
 ---
-title: Changing the Width of the Grid After Using AutoFitColumn Method Over All Grid Columns
-description: An example for calculating the width of the Grid after using autoFitColumn
+title: Change the Width after Using AutoFitColumn Method over All Grid Columns
+description: An example on how to calculate the width of the Kendo UI Grid after using the autoFitColumn method.
 type: how-to
-page_title: Calculating the New Width of the Kendo UI Grid After Using AutoFitColumn Method
+page_title: Calculate New Width after Using AutoFitColumn Method | Kendo UI Grid
 slug: grid-change-wrapper-width-after-autofitcolumn
 tags: kendoui, kendo, grid, column width, grid width
 res_type: kb
@@ -20,11 +20,14 @@ component: grid
 
 ## Description
 
-How to change the width of the Grid after using the autoFitColumn method for all columns? 
+How can I change the width of the Grid after using the `autoFitColumn` method for all Grid columns?
 
 ## Solution
 
-When the Grid is rendered and the autoFitColumn method is executed over all column, you could retrieve the calculated the total width of the columns, include the scrollbar width if the scrolling is enabled and manually set that total to the wrapping element of the Grid.
+When the Grid is rendered and you execute the `autoFitColumn` method over all of its columns:
+1. Retrieve the calculated total width of the columns
+1. If scrolling is enabled, include the scrollbar width.
+1. Manually set that total to the wrapping element of the Grid.
 
 ```html
 <div id="example">

@@ -1,8 +1,8 @@
 ---
-title: Table in a DropDownList
-description: An example on how to display a Table in a DropDownList
+title: Render Embedded Tables in DropDownLists
+description: An example on how to display a table in a Kendo UI DropDownList.
 type: how-to
-page_title: Display Table in DropDownList | Kendo UI DropDownList
+page_title: Display Tables | Kendo UI DropDownList
 slug: dropdownlist-with-embedded-table
 tags: dropdownlist, table
 ticketid: 1137036
@@ -33,16 +33,16 @@ component: dropdownlist
 
 ## Description
 
-How to display a table inside a Kendo UI DropDownList
+How can I display a table inside a DropDownList?
 
 ## Solution
 
-A template is used for each row of the table. To customize the header of the embedded Grid, the headerTemplate is used. 
+Use a template for each row of the table and utilize the `headerTemplate` to customize the header of the embedded Grid.
 
 ```html
 	<input id="dropdownlist" />
-  
-	<script id="template" type="text/x-kendo-template"> 
+
+	<script id="template" type="text/x-kendo-template">
 		<table>
 			<tr class="combo-tr">
 				<td class="combo-td">${band}</td>
@@ -51,8 +51,8 @@ A template is used for each row of the table. To customize the header of the emb
 			</tr>
 		</table>  
 	</script>
-	
-	
+
+
 	<script>    
 			var data = [
 				{ id: 1, band: "Iron Maiden", song: "Wasted Years", album: "Ed Hunter" },
@@ -60,7 +60,7 @@ A template is used for each row of the table. To customize the header of the emb
 				{ id: 3, band: "Mr. Big", song: "Seven Impossible Days", album: "Japandemonium" },
 				{ id: 4, band: "Unknown Band", song: "Some Song", album: "The Album" }
 			];
-			
+
 			$("#dropdownlist").kendoDropDownList({
 				optionLabel: "Please select a band...",
 				dataSource: data,
@@ -76,17 +76,17 @@ A template is used for each row of the table. To customize the header of the emb
 								</table>`,
 				template: kendo.template($("#template").html())
 			});
-			
+
 	</script>
-			
+
 	<style>	 
 		.combo-td{
 			width:150px;
 		}
-		
+
 		.combo-hd-td{
 			width:150px;
 			font-weight: bold;
-		} 
+		}
 	</style>
 ```

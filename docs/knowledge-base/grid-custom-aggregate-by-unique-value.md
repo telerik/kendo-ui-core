@@ -1,8 +1,8 @@
 ---
-title: Calculate Custom Aggregates By Unique Value in Kendo UI Grid
-description: An example for displaying custom aggregate result in Grid
+title: Calculate Custom Aggregates by Unique Value in Grid
+description: An example on how to display custom aggregate results in a Kendo UI Grid.
 type: how-to
-page_title: Calculating and Displaying Custom Aggregate Result in Kendo UI Grid
+page_title: Calculate and Display Custom Aggregate Results | Kendo UI Grid
 slug: grid-custom-aggregate-by-unique-value
 tags: kendoui, kendo, aggregates, custom aggregates
 res_type: kb
@@ -20,11 +20,13 @@ component: grid
 
 ## Description
 
-How to display the count of each unique value in the current view as custom aggregate? 
+How can I display the count of each unique value in the current view of the Grid as custom aggregate?
 
 ## Solution
 
-The easiest way for achieving such requirement would be to create a wrapping element with specific selector in the footer or groupFooter template and within the __dataBound__ event of the Grid, go through the __view__ or the __data__ collection for the custom calculations and finally, manually populate the element in the template.
+1. Create a wrapping element with a specific selector in the footer or in the `groupFooter` template.
+1. Within the `dataBound` event of the Grid, go through the `view` or the `data` collection for the custom calculations.
+1. Manually populate the element in the template.
 
 ```html
 <div id="example">
@@ -54,7 +56,7 @@ The easiest way for achieving such requirement would be to create a wrapping ele
                       summary[dataItem.ContactTitle] ++;
                     }                    
                   })
-                  
+
                   var wrapper = e.sender.element.find(".summaryWrapper");
                   for (var prop in summary) {
                     wrapper.append("<div>"+ prop + "total: "+summary[prop]+"</div>");

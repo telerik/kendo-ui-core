@@ -1,8 +1,8 @@
 ---
-title: Generate DataSource model from the retrieved data
-description: An example on how to generate the Model from the data returned by the server
+title: Generate DataSource Model from Retrieved Data
+description: An example on how to generate the Model from the data that is returned by the server in a Kendo UI Grid.
 type: how-to
-page_title: Generate model dynamically | Kendo UI Grid
+page_title: Generate Model Dynamically | Kendo UI Grid
 slug: grid-generate-model-from-data
 tags: grid, data, model, dynamic, columns, generate
 res_type: kb
@@ -21,13 +21,15 @@ component: grid
 
 ## Description
 
-I have dynamic data and would like to generate the DataSource Model based on that. It needs to include validation and use the correct data types. 
+How can I generate the DataSource Model based on the dynamic data I have in the Grid so that it includes validation and uses the correct data types?
 
 ## Solution
 
-To generate the model for DataSource you can iterate through the data and try parsing each field to determine what type it is. Based on that the respective model properties can be defined. If necessary validation properties can also be included. 
+1. Iterate through the data and try to parse each field to determine what type it is.
+1. Based on that, define the respective model properties.
+1. If necessary, you can also include validation properties.
 
-When the [columns setting](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid#configuration-columns) in Grid is omitted a column will be generated for each field in the model.
+If you omit the [`columns`](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid#configuration-columns) setting of the Grid, a column is generated for each field in the model.
 
 
 ````html
@@ -61,7 +63,7 @@ When the [columns setting](https://docs.telerik.com/kendo-ui/api/javascript/ui/g
         "Balance": 23
     }];
 
-    //in the success handler of the ajax method call the function below with the received data:
+    //in the success handler of the AJAX method call the function below with the received data:
     var dateFields = [];
     generateGrid(data);
 
@@ -149,4 +151,3 @@ When the [columns setting](https://docs.telerik.com/kendo-ui/api/javascript/ui/g
     }
 </script>
 ````
-

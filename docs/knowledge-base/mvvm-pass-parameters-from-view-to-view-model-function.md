@@ -1,52 +1,53 @@
 ---
-title: How to Pass an Argument from View to a ViewModel Function?
-description: How to pass string parameters from view to viewModel function that controls an element visibility
+title: Pass Arguments from View to ViewModel Functions
+description: An example on how to pass string parameters from the view to the viewModel function which controls an element visibility in Kendo UI.
 type: how-to
-page_title: In MVVM Pass String Parameters from View to ViewModel Function
+page_title: Pass String Parameters from View to ViewModel Functions in MVVM | Kendo UI for jQuery
 slug: mvvm-pass-parameters-from-view-to-view-model-function
-position: 0
 tags: kendo, kendoui, mvvm, pass-parameters, visible, invisible
 ticketid: 1138171
 res_type: kb
-
 component: mvvm
 ---
 
 ## Environment
+
 <table>
  <tr>
   <td>Product</td>
-  <td>MVVM for Progress® Kendo UI®</td>
+  <td>Progress Kendo UI MVVM</td>
  </tr>
 </table>
 
 ## Description
 
-I am building a screen where specific controls are going to be visible depending on the option selected in a DropDownList. I would like to be able to use a single function defined in the viewModel to control these elements visibility. Therefore, I want to pass a different argument to that function, according to the actual HTML element it is used for. Is this achievable?   
+I am building a screen where, depending on the selected option from a DropDownList, specific controls will be visible.
+
+How can I use a single function that is defined in the `viewModel` to control the visibility of these elements? How can I pass a different argument to that function according to the actual HTML element it is used for?   
 
 ## Solution
-  
-You could pass a single string argument as function parameter in this case. If for example, you need to pass an array, you could pass it as a string with certain delimiter:
+
+Pass a single string argument as a function parameter. For example, if you need to pass an array, pass it as a string with a certain delimiter.
 
 ````html
 <div>
   <label for="selection">Selection: </label>
   <input id="selection"
-         data-role="dropdownlist" 
-         data-text-field="txt" 
+         data-role="dropdownlist"
+         data-text-field="txt"
          data-value-field="id"
-         data-bind="source: selectionDataSource, 
+         data-bind="source: selectionDataSource,
                     value: selectedOption"/>
 </div>
 <div data-bind="visible: visibleTextBox('1q3')">
   <label for="amount">Textbox 1: </label>
-  <input id="amount" 
+  <input id="amount"
          data-role="numerictextbox"
          data-bind="value: defaultTextBox1Value"/>
 </div>
 <div data-bind="visible: visibleTextBox('2q4')">
   <label for="initialAmount">Textbox 2: </label>
-  <input id="initialAmount" 
+  <input id="initialAmount"
          data-role="numerictextbox"
          data-bind="value: defaultTextBox2Value"/>
 </div>
@@ -67,7 +68,7 @@ You could pass a single string argument as function parameter in this case. If f
     visibleTextBox: function(values) {
       var valuesArray = values.split('q');
       var currentSelectedOption = this.get('selectedOption');
-	  
+
       if (valuesArray.includes(currentSelectedOption.toString())) {
         return true;
       } else {
@@ -81,4 +82,4 @@ You could pass a single string argument as function parameter in this case. If f
 
 ## See Also
 
-* [Kendo MVVM Documentation](https://docs.telerik.com/kendo-ui/framework/mvvm/overview)
+* [MVVM in Kendo UI](https://docs.telerik.com/kendo-ui/framework/mvvm/overview)

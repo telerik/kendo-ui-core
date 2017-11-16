@@ -19,14 +19,13 @@ The following example demonstrates how to get all flagged cells in the Spreadshe
     function getFlaggedCells(e) {
       var spreadsheet = e.sender;
       var sheet = spreadsheet.activeSheet();
-      var cellsStates = sheet.range('A3:E8').getState();
-      for (var r in cellsStates.data) {
-        for(var c in cellsStates.data[r]){
-          if (cellsStates.data[r][c].validation && !cellsStates.data[r][c].validation.value) {
-            console.log(r+","+c);
+      var range = sheet.range('A3:E8');
+
+      range.forEachCell(function (row, column, cell) {
+          if(cell.validation && !cell.validation.value) {
+          	console.log("Row: " + row + " Col: " + column);
           }
-        }
-      }
+      });
     }
 
     $(function() {

@@ -1,8 +1,8 @@
 ---
-title: Include SelectAll for the Columns Section in Kendo UI Grid ColumnMenu
-description: An example for rendering SelectAll in the column menu of the Grid columns
+title: Include SelectAll for Grid Column Sections in ColumnMenu
+description: An example on how to render SelectAll in the column menu of the Grid columns.
 type: how-to
-page_title: Displaying SelectAll in the ColumnMenu for Showing and Hiding the Columns
+page_title: Display SelectAll in the ColumnMenu for Showing and Hiding Columns | Kendo UI Grid
 slug: grid-include-selectall-in-columnmenu
 tags: kendoui, kendo, grid, column menu, select all
 res_type: kb
@@ -20,11 +20,13 @@ component: grid
 
 ## Description
 
-How to render _"Select All"_ in the Column Menu for showing and hiding all columns with a checkbox? 
+How can I render a **Select All** option in the column menu of the Grid and show and hide all columns through a checkbox?
 
 ## Solution
 
-You can render such checkbox within the __columnMenuInit__ event of the Grid, but it will not be possible to remove all columns, because there should be at least one visible column in the Grid. 
+Render the checkbox within the `columnMenuInit` event of the Grid.
+
+> You will always need to have at least one visible column in the Grid.
 
 ```html
   <style>
@@ -42,16 +44,16 @@ You can render such checkbox within the __columnMenuInit__ event of the Grid, bu
                     columnMenuInit: function (e) {
                         var mylist = e.container.find(".k-columns-item>ul");
                         var listitems = mylist.children('li').get();                  
-                      
+
                         $(listitems).find("input").click(function(e){
                           if(!$(this).hasClass("custom-class")){
                              var allChecked = $(this).closest("ul").find("li.k-item input:checked").length == $(this).closest("ul").find("li.k-item input").length;
                              $(".custom-class input")[0].checked = allChecked;
                           }
                         })
-                        
+
                         $("<li class='custom-class'><span class='k-link'><input type='checkbox' checked onclick='checkAll(this)'/>SelectAll</span></li>").insertBefore(e.container.find(".k-columns-item>ul>li").first());
-                      
+
                     },
                     dataSource: {
                         type: "odata",

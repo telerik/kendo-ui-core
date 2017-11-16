@@ -1,6 +1,6 @@
 ---
 title: Bind Change Event Function to All MaskedTextBox Widgets
-description: An example on how to bind change event handler function to all Kendo UI MaskedTextBox widgets.
+description: An example on how to bind the change event handler function to all Kendo UI MaskedTextBox widgets.
 type: how-to
 page_title: Subscribe All Widgets to One Handler | Kendo UI MaskedTextBox
 slug: maskedtextbox-bind-all-widgets-one-handler
@@ -11,10 +11,11 @@ component: maskedtextbox
 ---
 
 ## Environment
+
 <table>
  <tr>
   <td>Product</td>
-  <td>MaskedTextBox for Progress® Kendo UI®</td>
+  <td>Progress Kendo UI MaskedTextBox</td>
  </tr>
  <tr>
   <td>Progress Kendo UI version</td>
@@ -24,18 +25,19 @@ component: maskedtextbox
 
 ## Description
 
-How can I bind all Kendo UI MaskedTextBox change events to a single event handler function?
+How can I bind the `change` events of all MaskedTextBoxes to a single event handler function?
 
 ## Solution
 
 To bind all the widgets, utilize any of the following approaches:
 
-* [After the page load](#after-the-page-load)
-* [Before the page load](#before-the-page-load)
+* [After the page loads](#after-the-page-loads)
+* [Before the page loads](#before-the-page-loads)
 
-### After the page load
+### After the Page Loads
 
-After all the MaskedTextBoxes are initialized, select them with the data-role attribute jQuery selector. Then, loop through the array and attach the [`change`](https://docs.telerik.com/kendo-ui/api/javascript/ui/maskedtextbox#events-change) handler to every MaskedTextBox.
+1. After all the MaskedTextBoxes initialize, select them with the jQuery data-role attribute selector.
+1. Loop through the array and attach the [`change`](https://docs.telerik.com/kendo-ui/api/javascript/ui/maskedtextbox#events-change) handler to every MaskedTextBox.
 
 ```html
 <input id="maskedtextbox1" />
@@ -59,9 +61,9 @@ After all the MaskedTextBoxes are initialized, select them with the data-role at
 </script>
 ```
 
-### Before the page load
+### Before the Page Loads
 
-Override the default [`change`](https://docs.telerik.com/kendo-ui/api/javascript/ui/maskedtextbox#events-change) event handler function before the MaskedTextBoxes initialization.
+Override the default [`change`](https://docs.telerik.com/kendo-ui/api/javascript/ui/maskedtextbox#events-change) event handler function before the MaskedTextBoxes initializes.
 
 ```html
 <script>
