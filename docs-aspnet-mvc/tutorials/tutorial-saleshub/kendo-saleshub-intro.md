@@ -31,7 +31,7 @@ To view the demo of the Kendo UI Sales Hub sample project, refer to [demos.teler
 
 ### Get the Source Code
 
-Start by getting the source for the [SalesHub from GitHub](https://github.com/telerik/kendo-saleshub-demo).
+Start by getting the source for the [SalesHub from GitHub](https://github.com/telerik/ui-for-aspnet-mvc-examples/tree/master/saleshub).
 
 > **Important**
 >

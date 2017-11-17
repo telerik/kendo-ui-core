@@ -54,8 +54,6 @@ var __meta__ = { // jshint ignore:line
 
             multiple = that.options.multiple;
 
-            INPUTSELECTOR = that.options.inputSelectors;
-
             if (this.options.aria && multiple) {
                 that.element.attr("aria-multiselectable", true);
             }
@@ -318,14 +316,14 @@ var __meta__ = { // jshint ignore:line
 
         _select: function(e) {
             if (this._allowSelection(e.event.target)) {
-                if (!msie || (msie && !$(kendo._activeElement()).is(INPUTSELECTOR))) {
+                if (!msie || (msie && !$(kendo._activeElement()).is(this.options.inputSelectors))) {
                     e.preventDefault();
                 }
             }
         },
 
         _allowSelection: function(target) {
-            if ($(target).is(INPUTSELECTOR)) {
+            if ($(target).is(this.options.inputSelectors)) {
                 this.userEvents.cancel();
                 this._downTarget = null;
                 return false;

@@ -689,6 +689,25 @@ test("click on selected date should close the dateView", 1, function() {
       .click();
 });
 
+test("Spacebar should not select a date and close the popup", function() {
+    var event = { keyCode: keys.SPACEBAR, preventDefault: $.noop };
+
+    var datepicker = input.kendoDatePicker({
+        start: "month",
+        depth: "month"
+    }).data("kendoDatePicker");
+
+    var dateview = datepicker.dateView;
+
+    dateview.open();
+
+    dateview.calendar._focus(dateview._current);
+
+    dateview.move(event);
+
+    ok(dateview.popup.visible());
+});
+
 test("Alt + Down should open the calendar", function() {
     var event = { type: "keydown", keyCode: keys.DOWN, altKey: true, preventDefault: $.noop };
 

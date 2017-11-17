@@ -631,12 +631,6 @@ defaults:
 
 -
     scope:
-        path: "controls/charts/chart-types/bullet-charts"
-    values:
-        component: "bulletchart"
-
--
-    scope:
         path: "controls/navigation/button"
     values:
         component: "button"

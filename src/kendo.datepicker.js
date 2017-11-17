@@ -211,8 +211,11 @@ var __meta__ = { // jshint ignore:line
                     e.preventDefault();
                     return true;
                 }
+                //spacebar selects a date in the calendar
+                if (key != keys.SPACEBAR) {
+                    that._current = calendar._move(e);
+                }
 
-                that._current = calendar._move(e);
                 handled = true;
             }
 

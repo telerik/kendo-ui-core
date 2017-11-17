@@ -525,6 +525,7 @@ var __meta__ = { // jshint ignore:line
             }
             that.selectable = new Selectable(that.wrapper, {
                 aria: true,
+                //excludes the anchor element
                 inputSelectors: "input,textarea,.k-multiselect-wrap,select,button,.k-button>span,.k-button>img,span.k-icon.k-i-arrow-60-down,span.k-icon.k-i-arrow-60-up",
                 multiple: selectableOptions.multiple,
                 filter: "table.k-month:eq(0) " + CELLSELECTORVALID,

@@ -90,6 +90,27 @@ test("remove returns the removed model", function() {
     equal(dataSource.remove(model), model);
 });
 
+test("remove does not wrap other items", function() {
+    var dataSource = new kendo.data.DataSource( {
+        pageSize: 2,
+        data: [
+            { id: 1, value: "value1" },
+            { id: 2, value: "value2" },
+            { id: 3, value: "value3" }
+        ],
+        schema: {
+            model: {
+                id: "id"
+            }
+        }
+    });
+    dataSource.read();
+
+    dataSource.remove({ id: 4, value: "value4" });
+
+    ok(!(dataSource._data[2] instanceof kendo.data.ObservableObject));
+});
+
 test("cancelChanges restores removed model", function() {
     dataSource.remove(dataSource.get(1));
 

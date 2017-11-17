@@ -2303,6 +2303,18 @@ html .km-pane-wrapper .km-widget,
         {
             position: absolute;
         }
+
+        .km-pane-wrapper .k-pager-numbers,
+        .km-pane-wrapper .k-grid .k-pager-numbers {
+            transform: translate(-50%, -100%);
+            -webkit-transform: translate(-50%, -100%);
+        }
+
+        .km-pane-wrapper .k-pager-numbers.k-state-expanded,
+        .km-pane-wrapper .k-grid .k-pager-numbers.k-state-expanded {
+            transform: translate(-50%, -100%);
+            -webkit-transform: translate(-50%, -100%);
+        }
     }
 
     .k-grid .k-pager-numbers:not(.k-state-expanded) {

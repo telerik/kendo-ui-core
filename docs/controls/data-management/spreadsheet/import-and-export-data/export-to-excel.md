@@ -14,9 +14,13 @@ The output files are in the OOXML Spreadsheet format with an `.xlsx` extension. 
 
 ## User Interface
 
-The default toolbar configuration includes an **Excel Export** button. Clicking on it opens a dialog box for entering the file name.
+The default toolbar configuration includes an **Export** button. Clicking on it opens a dialog box for entering the file name and selecting the desired output format for the exported document.
 
-**Figure 1: Exporting to Excel**
+**Figure 1: Activating Export Dialog**
+
+![Export to Excel](activate-export.png)
+
+**Figure 2: Export Dialog**
 
 ![Export to Excel](export-to-excel.png)
 

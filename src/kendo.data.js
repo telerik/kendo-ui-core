@@ -2219,15 +2219,15 @@ var __meta__ = { // jshint ignore:line
         }
     }
 
-    function removeModel(data, model, skip, take) {
+    function removeModel(data, model) {
         var length = data.length;
-        var startIndex = skip || 0;
-        var endIndex = typeof(take) !== "undefined" ? math.min(startIndex + take, length) : length;
+        var dataItem;
         var idx;
 
-        for (idx = startIndex; idx < endIndex; idx++) {
-            var dataItem = data.at(idx);
-            if (dataItem.uid == model.uid) {
+        for (idx = 0; idx < length; idx++) {
+            dataItem = data[idx];
+
+            if (dataItem.uid && dataItem.uid == model.uid) {
                 data.splice(idx, 1);
                 return dataItem;
             }
@@ -2759,11 +2759,7 @@ var __meta__ = { // jshint ignore:line
                 hasGroups = that._isServerGrouped();
 
             this._eachItem(that._data, function(items) {
-                if (that.options.useRanges && !that.options.serverPaging) {
-                    result = removeModel(items, model, that.currentRangeStart(), that.take());
-                } else {
-                    result = removeModel(items, model);
-                }
+                result = removeModel(items, model);
 
                 if (result && hasGroups) {
                     if (!result.isNew || !result.isNew()) {
@@ -4213,25 +4209,16 @@ var __meta__ = { // jshint ignore:line
         _removeModelFromRanges: function(model) {
             var that = this;
             var result,
-                found,
                 range;
 
             for (var idx = 0, length = this._ranges.length; idx < length; idx++) {
                 range = this._ranges[idx];
 
                 this._eachItem(range.data, function(items) {
-                    if (that.options.useRanges && !that.options.serverPaging) {
-                        result = removeModel(items, model, that.currentRangeStart(), that.take());
-                    } else {
-                        result = removeModel(items, model);
-                    }
-
-                    if (result) {
-                        found = true;
-                    }
+                    result = removeModel(items, model);
                 });
 
-                if (found) {
+                if (result) {
                     break;
                 }
             }

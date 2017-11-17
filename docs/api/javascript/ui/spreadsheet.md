@@ -59,7 +59,7 @@ The width of the header column in pixels.
 
 Configures the Kendo UI Spreadsheet Excel export settings.
 
-### excel.fileName `String` *(default: "Spreasheet.xslx")*
+### excel.fileName `String` *(default: "Spreadsheet.xslx")*
 
 Specifies the file name of the exported Excel file.
 

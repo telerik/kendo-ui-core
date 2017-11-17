@@ -70,6 +70,7 @@ function equalRanges(actualRanges, expectedRanges) {
 function equalRange(actualRange, expectedRange) {
     equal(actualRange.start, expectedRange.start);
     equal(actualRange.end, expectedRange.end);
+    equal(actualRange.data.length, expectedRange.dataLength);
 }
 
 test("prefetch projects request parameters", 2, function() {
@@ -1547,15 +1548,11 @@ test("ranges are updated when model is removed from the first range after range 
     dataSource.remove(dataSource.at(0));
 
     equalRanges(dataSource._ranges, [
-        { start: 0, end: 9 },
-        { start: 19, end: 29 },
-        { start: 39, end: 49 },
-        { start: 59, end: 69 }
+        { start: 0, end: 9, dataLength: 9 },
+        { start: 19, end: 29, dataLength: 10 },
+        { start: 39, end: 49, dataLength: 10 },
+        { start: 59, end: 69, dataLength: 10 }
     ]);
-    equal(dataSource._ranges[0].data.length, 9);
-    equal(dataSource._ranges[1].data.length, 10);
-    equal(dataSource._ranges[2].data.length, 10);
-    equal(dataSource._ranges[3].data.length, 10);
 });
 
 test("ranges are updated when model is removed from a middle range after range is called with remote binding", function() {
@@ -1571,15 +1568,11 @@ test("ranges are updated when model is removed from a middle range after range i
     dataSource.remove(dataSource.at(0));
 
     equalRanges(dataSource._ranges, [
-        { start: 0, end: 10 },
-        { start: 20, end: 29 },
-        { start: 39, end: 49 },
-        { start: 59, end: 69 }
+        { start: 0, end: 10, dataLength: 10 },
+        { start: 20, end: 29, dataLength: 9 },
+        { start: 39, end: 49, dataLength: 10 },
+        { start: 59, end: 69, dataLength: 10 }
     ]);
-    equal(dataSource._ranges[0].data.length, 10);
-    equal(dataSource._ranges[1].data.length, 9);
-    equal(dataSource._ranges[2].data.length, 10);
-    equal(dataSource._ranges[3].data.length, 10);
 });
 
 test("ranges are updated when model is removed from the last range after range is called with remote binding", function() {
@@ -1593,15 +1586,27 @@ test("ranges are updated when model is removed from the last range after range i
     dataSource.remove(dataSource.at(0));
 
     equalRanges(dataSource._ranges, [
-        { start: 0, end: 10 },
-        { start: 20, end: 30},
-        { start: 40, end: 50 },
-        { start: 60, end: 69 }
+        { start: 0, end: 10, dataLength: 10 },
+        { start: 20, end: 30, dataLength: 10 },
+        { start: 40, end: 50, dataLength: 10 },
+        { start: 60, end: 69, dataLength: 9 }
     ]);
-    equal(dataSource._ranges[0].data.length, 10);
-    equal(dataSource._ranges[1].data.length, 10);
-    equal(dataSource._ranges[2].data.length, 10);
-    equal(dataSource._ranges[3].data.length, 9);
+});
+
+test("model is removed when it is not in current range bounds with local binding", function() {
+    var total = 100;
+    var pageSize = 20;
+    var dataSource = new DataSource({
+        pageSize: pageSize,
+        data: generator(total)
+    });
+    dataSource.read();
+
+    var removedModel = dataSource.at(total - 1);
+    dataSource.remove(removedModel);
+
+    equalRange(dataSource._ranges[0], { start: 0, end: total - 1, dataLength: total - 1 });
+    equal(dataSource._getByUid(removedModel.uid, dataSource._ranges[0].data), null);
 });
 
 test("model is removed after canceling changes on added model on last page", function() {
@@ -1707,7 +1712,7 @@ test("cancelChanges() resets ranges to the first page with remote binding", func
     dataSource.range(20, 30);
     dataSource.cancelChanges();
 
-    equalRanges(dataSource._ranges, [{ start: 0, end: 16 }]);
+    equalRanges(dataSource._ranges, [{ start: 0, end: 16, dataLength: 16 }]);
     equal(dataSource._ranges[0].data.length, 16);
 });
 
@@ -1722,7 +1727,7 @@ test("cancelChanges() after adding a new item updates ranges with local binding"
     var item = dataSource.insert(0, dataSource.get(0));
     dataSource.cancelChanges(item);
 
-    equalRanges(dataSource._ranges, [{ start: 0, end: total }]);
+    equalRanges(dataSource._ranges, [{ start: 0, end: total, dataLength: total }]);
     equal(dataSource._ranges[0].data.length, total);
     equal(dataSource.data().length, total);
 });
@@ -1743,7 +1748,7 @@ test("cancelChanges() after adding a new item with schema.model updates ranges w
     var item = dataSource.insert(0, dataSource.get(0));
     dataSource.cancelChanges(item);
 
-    equalRanges(dataSource._ranges, [{ start: 0, end: total }]);
+    equalRanges(dataSource._ranges, [{ start: 0, end: total, dataLength: total }]);
     equal(dataSource._ranges[0].data.length, total);
 });
 
@@ -1763,7 +1768,7 @@ test("cancelChanges() after adding a new item with schema.model partially update
     var item = dataSource.insert(30, dataSource.get(0));
     dataSource.cancelChanges(item);
 
-    equalRanges(dataSource._ranges, [{ start: 0, end: total }]);
+    equalRanges(dataSource._ranges, [{ start: 0, end: total, dataLength: total }]);
     equal(dataSource._ranges[0].data.length, total);
     equal(dataSource.data().length, total);
 });
@@ -1777,7 +1782,7 @@ test("cancelChanges() after adding a new item updates ranges with remote binding
     var item = dataSource.insert(0, dataSource.get(30));
     dataSource.cancelChanges(item);
 
-    equalRanges(dataSource._ranges, [{ start: 0, end: 10 }]);
+    equalRanges(dataSource._ranges, [{ start: 0, end: 10, dataLength: 10 }]);
     equal(dataSource._ranges[0].data.length, 10);
 });
 
@@ -1799,9 +1804,9 @@ test("cancelChanges() after adding a new item with schema.model updates ranges w
     dataSource.cancelChanges(item);
 
     equalRanges(dataSource._ranges, [
-        { start: 0, end: 10 },
-        { start: 10, end: 20 },
-        { start: 30, end: 40 }
+        { start: 0, end: 10, dataLength: 10 },
+        { start: 10, end: 20, dataLength: 10 },
+        { start: 30, end: 40, dataLength: 10 }
     ]);
     equal(dataSource._ranges[0].data.length, 10);
     equal(dataSource._ranges[1].data.length, 10);
@@ -1827,10 +1832,10 @@ test("cancelChanges() after adding a new item with schema.model partially update
     dataSource.cancelChanges(item);
 
     equalRanges(dataSource._ranges, [
-        { start: 0, end: 10 },
-        { start: 10, end: 20 },
-        { start: 30, end: 40 },
-        { start: 50, end: 60 }
+        { start: 0, end: 10, dataLength: 10 },
+        { start: 10, end: 20, dataLength: 10 },
+        { start: 30, end: 40, dataLength: 10 },
+        { start: 50, end: 60, dataLength: 10 }
     ]);
     equal(dataSource._ranges[0].data.length, 10);
     equal(dataSource._ranges[1].data.length, 10);
@@ -1917,7 +1922,7 @@ test("the first range is updated when model is added at index 0 with local bindi
 
     dataSource.insert(0, { value: 1 });
 
-    equalRanges(dataSource._ranges, [{ start: 0, end: 48 }]);
+    equalRanges(dataSource._ranges, [{ start: 0, end: 48, dataLength: total + 1 }]);
     equal(dataSource._ranges[0].data[0].value, 1);
     equal(dataSource._ranges[0].data.length, 48);
     equal(dataSource.data().length, 48);
@@ -1936,7 +1941,7 @@ test("the first range is updated when model is added at index 0 after range is c
 
     dataSource.insert(0, { value: 1 });
 
-    equalRanges(dataSource._ranges, [{ start: 0, end: 48 }]);
+    equalRanges(dataSource._ranges, [{ start: 0, end: 48, dataLength: total + 1 }]);
     equal(dataSource._ranges[0].data[0].value, 1);
     equal(dataSource._ranges[0].data.length, 48);
     equal(dataSource.data().length, 48);
@@ -1955,7 +1960,7 @@ test("ranges are updated when model is added at the end with local binding", fun
 
     dataSource.insert(dataSource.total(), { value: 1 });
 
-    equalRanges(dataSource._ranges, [{ start: 0, end: 48 }]);
+    equalRanges(dataSource._ranges, [{ start: 0, end: 48, dataLength: total + 1 }]);
     equal(dataSource._ranges[0].data[47].value, 1);
     equal(dataSource._ranges[0].data.length, 48);
     equal(dataSource.data().length, 48);
@@ -2006,12 +2011,11 @@ test("ranges are updated when model is added at index 0 after range is called wi
     dataSource.insert(0, { value: 1 });
 
     equalRanges(dataSource._ranges, [
-        { start: 0, end: 11 },
-        { start: 11, end: 21 },
-        { start: 31, end: 41 }
+        { start: 0, end: 11, dataLength: 11 },
+        { start: 11, end: 21, dataLength: 10 },
+        { start: 31, end: 41, dataLength: 10 }
     ]);
     equal(dataSource._ranges[0].data[0].value, 1);
-    equal(dataSource._ranges[0].data.length, 11);
     equal(dataSource.data().length, 11);
 });
 
@@ -2026,12 +2030,11 @@ test("ranges are updated when model is added at the end after range is called wi
     dataSource.insert(dataSource.total(), { value: 1});
 
     equalRanges(dataSource._ranges, [
-        { start: 0, end: 10 },
-        { start: 820, end: 830 },
-        { start: 830, end: 832 }
+        { start: 0, end: 10, dataLength: 10 },
+        { start: 820, end: 830, dataLength: 10 },
+        { start: 830, end: 832, dataLength: 2 }
     ]);
     equal(dataSource._ranges[2].data[1].value, 1);
-    equal(dataSource._ranges[2].data.length, 2);
     equal(dataSource.data().length, 11);
 });
 
@@ -2078,13 +2081,11 @@ test("ranges are updated when model is added at index 0 with server grouping", f
     dataSource.insert(0, {});
 
     equalRanges(dataSource._ranges, [
-        { start: 0, end: 11 },
-        { start: 21, end: 31 }
+        { start: 0, end: 11, dataLength: 2 },
+        { start: 21, end: 31, dataLength: 1 }
     ]);
-    equal(dataSource._ranges[0].data.length, 2);
     equal(dataSource._ranges[0].data[0].items.length, 1);
     equal(dataSource._ranges[0].data[1].items.length, 10);
-    equal(dataSource._ranges[1].data.length, 1);
     equal(dataSource._ranges[1].data[0].items.length, 10);
     equal(dataSource.data().length, 2);
 });
@@ -2134,15 +2135,12 @@ test("ranges are updated when model is added at the end with server grouping", f
     dataSource.insert(total, {});
 
     equalRanges(dataSource._ranges, [
-        { start: 0, end: 10 },
-        { start: 20, end: 30 },
-        { start: 90, end: 101 }
+        { start: 0, end: 10, dataLength: 1 },
+        { start: 20, end: 30, dataLength: 1 },
+        { start: 90, end: 101, dataLength: 2 }
     ]);
-    equal(dataSource._ranges[0].data.length, 1);
     equal(dataSource._ranges[0].data[0].items.length, 10);
-    equal(dataSource._ranges[1].data.length, 1);
     equal(dataSource._ranges[1].data[0].items.length, 10);
-    equal(dataSource._ranges[2].data.length, 2);
     equal(dataSource._ranges[2].data[0].items.length, 10);
     equal(dataSource._ranges[2].data[1].items.length, 1);
     equal(dataSource.data().length, 2);
