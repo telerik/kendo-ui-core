@@ -642,10 +642,16 @@ var __meta__ = { // jshint ignore:line
 
     var parsers = {
         "number": function(value) {
+            if (typeof value === STRING && value.toLowerCase() === "null") {
+                return null;
+            }
             return kendo.parseFloat(value);
         },
 
         "date": function(value) {
+            if (typeof value === STRING && value.toLowerCase() === "null") {
+                return null;
+            }
             return kendo.parseDate(value);
         },
 
