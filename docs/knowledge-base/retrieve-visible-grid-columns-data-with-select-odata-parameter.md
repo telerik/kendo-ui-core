@@ -1,0 +1,107 @@
+---
+title: Retrieve only the visible Grid columns data with $select odata parameter
+description: An example on how to retrieve only the visible columns data with $select odata parameter in the Kendo UI Grid.
+type: how-to
+page_title: Retrieve visible columns data with $select odata parameter | Kendo UI Grid
+slug: retrieve-visible-grid-columns-data-with-select-odata-parameter
+tags: retrieve, visible, columns, data, $select, odata
+ticketid: 1138950
+res_type: kb
+component: grid
+---
+
+## Environment
+<table>
+ <tr>
+  <td>Product</td>
+  <td>Grid for Progress® Kendo UI®</td>
+ </tr>
+</table>
+
+
+## Description
+
+How can we retrieve only the visible columns data from the remote service with a $select odata parameter?
+
+## Solution
+
+* Pass additional parameters to the odata service, using `transport.read.data` option.
+* Query the odata service to retrieve only the visible columns data.
+
+```html
+<div id="example">
+    <div id="grid"></div>
+</div>
+
+<script>
+    $(document).ready(function() {
+        $("#grid").kendoGrid({
+            dataSource: {
+                type: "odata",
+                transport: {
+                    read: {
+                        url: "https://demos.telerik.com/kendo-ui/service/Northwind.svc/Orders",
+                        data: {
+                        $select: getColumns
+                        }
+                    }
+                },
+                schema: {
+                    model: {
+                        fields: {
+                            OrderID: { type: "number" },
+                            Freight: { type: "number" },
+                            ShipName: { type: "string" },
+                            OrderDate: { type: "date" },
+                            ShipCity: { type: "string" }
+                        }
+                    }
+                },
+                pageSize: 20,
+                serverPaging: true,
+                serverFiltering: true,
+                serverSorting: true
+            },
+            height: 550,
+            filterable: true,
+            sortable: true,
+            pageable: true,
+            columnMenu: true,
+            columnShow: function() {
+                this.dataSource.read();
+            },
+            columns: [{
+                field:"OrderID",
+                filterable: false
+                },
+                "Freight",
+                {
+                    field: "OrderDate",
+                    title: "Order Date",
+                    format: "{0:MM/dd/yyyy}"
+                },
+                {
+                    field: "ShipName",
+                    title: "Ship Name"
+                },
+                {
+                    field: "ShipCity",
+                    title: "Ship City"
+            }]
+        });
+
+        function getColumns() {
+            return $("#grid").data("kendoGrid")
+                .columns
+                .filter(item => !item.hidden)
+                .map(function(item) {
+                    return item.field
+                }).join(",");
+        }
+    });
+  </script>
+```
+
+## See Also
+
+* [API Reference of the Grid](http://docs.telerik.com/kendo-ui/api/javascript/ui/grid)
