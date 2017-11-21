@@ -527,9 +527,9 @@ Opens a Dialog and brings it on top of any other open Dialog or Window instances
     dialog.open();
     </script>
 
-### title `String|jQuery` *(optional)*
+### title `String` *(optional)*
 
-Gets or sets the title of a Dialog. Can be an HTML string or jQuery object. Supports chaining when used as a setter.
+Gets or sets the title of a Dialog. Can be a text string. Supports chaining when used as a setter. If passed to the method, an HTML string would be escaped.
 
 #### Parameters
 

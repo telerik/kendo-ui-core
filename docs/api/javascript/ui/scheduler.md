@@ -5056,7 +5056,7 @@ The fields which can be used in the template are:
 
 ### views.name `String`
 
-The name of the view. Typically, used to get the name of the currently selected view via the [view method](methods-view).
+The name of the view. Typically, used to get the name of the currently selected view via the [view method](#methods-view).
 
 #### Example - select a view
 

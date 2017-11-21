@@ -597,7 +597,7 @@ The class for the [web font icon](http://docs.telerik.com/kendo-ui/styles-and-la
 
 The class for the [web font icon](http://docs.telerik.com/kendo-ui/styles-and-layout/icons-web) of the cancel command button.
 
-#### Example - provide an custom iconClass for the update command button
+#### Example - provide an custom iconClass for the cancel command button
     <div id="grid"></div>
     <script>
     $("#grid").kendoGrid({

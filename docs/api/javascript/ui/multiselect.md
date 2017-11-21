@@ -549,7 +549,7 @@ The hint displayed by the widget when it is empty. Not set by default.
 
 #### Example - specify placeholder as HTML attribute
 
-    <select id="multiselect data-placeholder="Select..." multiple="multiple">
+    <select id="multiselect" data-placeholder="Select..." multiple="multiple">
         <option>Item1</option>
         <option>Item2</option>
     </select>
@@ -1779,7 +1779,7 @@ The filter descriptor that will be used to filter the data source.
           var filter = e.filter;
 
           if (!filter.value) {
-            //prevent filtering if the filter does not value
+            //prevent filtering if the filter does not have value
             e.preventDefault();
           }
       }

@@ -1,8 +1,8 @@
 ---
 title: Open Gantt Task Editor on Treelist Click
-description: An example on how to show the task Editor when a task in the treelist section of the Kendo UI Gantt is clicked.
+description: An example on how to show the task editor when a task in the Treelist section of the Kendo UI Gantt is clicked.
 type: how-to
-page_title: Show Editor on task selection in the treelist | Kendo UI Gantt
+page_title: Show Editor on Task Selection in the Treelist | Kendo UI Gantt
 slug: gantt-open-editor-on-treelist-click
 tags: gantt, open, show, task, select, editor, treelist, click
 ticketid: 1139636
@@ -33,11 +33,12 @@ component: gantt
 
 ## Description
 
-How can I show the Gantt's Editor when I select tasks in the treelist?
+How can I show the editor of the Gantt when I select tasks in the treelist?
 
 ## Solution
 
-Attach a click handler to the rows in the Gantt's treelist. Call the Gantt's `editTask` method, passing the selected task's dataItem as a parameter.
+1. Attach a click handler to the rows in the treelist of the Gantt.
+1. Call the `editTask` method of the Gantt and pass the dataItem of the selected task as a parameter.
 
 ```html
 	<script>

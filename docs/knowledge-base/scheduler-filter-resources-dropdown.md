@@ -1,21 +1,20 @@
 ---
-title: Filter resource using combo box in kendo scheduler control
-description: An example on how to flter resource using combo box in Kndo Sheduler control
+title: Filter Resources by Using a Kendo UI ComboBox in Scheduler
+description: An example on how to filter the resource of the Kendo UI Scheduler widget by using the Kendo UI ComboBox.
 type: how-to
-page_title: Implement filtering of resoucres in Scheduler, using ComboBox | Kendo UI Scheduler
+page_title: Implement Resource Filtering by Using ComboBox | Kendo UI Scheduler
 slug: scheduler-filter-resources-dropdown
-position: 
-tags: kendo, kendoui, combobox, scheduler, filter, resources, 
+tags: kendo, kendoui, combobox, scheduler, filter, resources,
 ticketid: 1138727
 res_type: kb
-
 ---
 
 ## Environment
+
 <table>
  <tr>
   <td>Product</td>
-  <td>Scheduler for Progress® Kendo UI®</td>
+  <td>Progress Kendo UI Scheduler</td>
  </tr>
  <tr>
   <td>Operating System</td>
@@ -34,17 +33,16 @@ res_type: kb
 
 ## Description
 
-How can I filter the events by resources in kendo Scheduler, using ComboBox or DropDown.
+How can I filter the events by resources in the Scheduler with a Kendo UI ComboBox or DropDownList?
 
 ## Solution
 
-In order to achieve this scenario, you should make sure that the following steps the followed:
-1. You would need to have a separate ComboBox/DropDown widget on the page.
-1. his widget should be supplied with data, identical to the resources used for the Scheduler.
-1. Subscribe to the Change event of the widget.
-1. Filter the data source of the Scheduler, using the selection of the ComboBox/DropDown
+1. Make sure that you have a separate ComboBox or DropDownList widget on the page.
+1. Supply the widget with data which is identical to the resources that are used for the Scheduler.
+1. Subscribe to the `change` event of the widget.
+1. Filter the data source of the Scheduler by using the selection of the ComboBox or DropDownList.
 
-The following implementation of the change even of the ComboBox/DropDown demonstrates the above suggestion:
+For the full implementation of the approach, refer to [this Dojo example](http://dojo.telerik.com/@nenchef/ipuzUN/2).
 
 ```html
 <div id="example">
@@ -235,7 +233,3 @@ The following implementation of the change even of the ComboBox/DropDown demonst
     });
 </script>
 ```
-
-Here is a runnable example on the matter:
-
-http://dojo.telerik.com/@nenchef/ipuzUN/2

@@ -1,8 +1,8 @@
 ---
-title: Change default workbook name in Spreadsheet export dialog
-description: An example on how to change the default workbook name in the export dialog of the Kendo UI Spreadsheet.
+title: Change Default Workbook Name in Spreadsheet Export Dialog
+description: An example on how to change the default name of the workbook in the export dialog of the Kendo UI Spreadsheet.
 type: how-to
-page_title: Change default workbook name in export dialog | Kendo UI Spreadsheet
+page_title: Change Default Workbook Name in Export Dialog | Kendo UI Spreadsheet
 slug: spreadsheet-change-export-dialog-default-workbook-name
 tags: workbook, default, name, change, spreadsheet
 ticketid: 1140511
@@ -11,23 +11,24 @@ component: spreadsheet
 ---
 
 ## Environment
+
 <table>
  <tr>
   <td>Product</td>
-  <td>Spreadsheet for Progress® Kendo UI®</td>
+  <td>Progress Kendo UI Spreadsheet</td>
  </tr>
 </table>
 
 
 ## Description
 
-How can I change the default workbook filename that appears in the Export dialog of the Spreadsheet?
+How can I change the default filename of the workbook which appears in the Export dialog of the Spreadsheet?
 
 ## Solution
 
-* Attach a click event handler to the Spreadsheet export button.
-* Query the DOM and get a reference to the Window widget which contains the export form.
-* Retrieve the corresponding ViewModel and updated the name property value.
+1. Attach a `click` event handler to the **Export** button of the Spreadsheet.
+1. Query the DOM and get a reference to the Window widget which contains the export form.
+1. Retrieve the corresponding ViewModel and update the `name` property value.
 
 ```html
 <div id="example">

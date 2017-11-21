@@ -20,7 +20,7 @@ component: scheduler
 
 ## Description
 
-How to change the displayed groups in a Kendo UI Scheduler to reflect the selected resource values?
+How can I change the displayed groups in a Kendo UI Scheduler to reflect the selected resource values?
 
 ## Solution
 
@@ -110,20 +110,20 @@ How to change the displayed groups in a Kendo UI Scheduler to reflect the select
         }
       ]
     });
-	
+
     $("#people :checkbox").change(function(e) {
       var availableOwners = {
         "1": { text: "Alex", value: 1, color: "#f8a398" },
         "2": { text: "Bob", value: 2, color: "#51a0ed" },
         "3": { text: "Charlie", value: 3, color: "#56ca85" }
       };
-	  
+
       var checked = $.map($("#people :checked"), function(checkbox) {
         return availableOwners[$(checkbox).val()];
       });
-	  
+
       var scheduler = $("#scheduler").data("kendoScheduler");
-	  
+
       if (!checked.length) {
         delete scheduler.options.group;
       } else {
@@ -132,7 +132,7 @@ How to change the displayed groups in a Kendo UI Scheduler to reflect the select
           orientation: "horizontal"
         };
       }
-	  
+
       scheduler.resources[0].dataSource.data(checked);
       scheduler.view(scheduler.view().name);
     });

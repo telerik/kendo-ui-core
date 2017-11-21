@@ -3283,6 +3283,9 @@ Configuration for file browser dialog.
     <textarea id="editor"></textarea>
     <script>
     $("#editor").kendoEditor({
+	  tools: [
+		"insertFile"
+	  ],
       fileBrowser: {
         transport: {
           read: "filebrowser/read",
@@ -3305,6 +3308,9 @@ Defines the allowed file extensions.
     <textarea id="editor"></textarea>
     <script>
     $("#editor").kendoEditor({
+	  tools: [
+		"insertFile"
+	  ],
       fileBrowser: {
         /* omitted for brevity */
         fileTypes: "*.zip"
@@ -3321,6 +3327,9 @@ Defines the initial folder to display, relative to the root.
     <textarea id="editor"></textarea>
     <script>
     $("#editor").kendoEditor({
+	  tools: [
+		"insertFile"
+	  ],
       fileBrowser: {
         /* omitted for brevity */
         path: "/uploads/"
@@ -3343,6 +3352,9 @@ Options or URL for remote file retrieval.
     <textarea id="editor"></textarea>
     <script>
     $("#editor").kendoEditor({
+	  tools: [
+		"insertFile"
+	  ],
       fileBrowser: {
         transport: {
           read: "/filebrowser/read"
@@ -3356,6 +3368,9 @@ Options or URL for remote file retrieval.
     <textarea id="editor"></textarea>
     <script>
     $("#editor").kendoEditor({
+	  tools: [
+		"insertFile"
+	  ],
       fileBrowser: {
         transport: {
           read: function(options) {
@@ -3380,6 +3395,9 @@ Refer to the [jQuery.ajax](http://api.jquery.com/jQuery.ajax) documentation for 
     <textarea id="editor"></textarea>
     <script>
     $("#editor").kendoEditor({
+	  tools: [
+		"insertFile"
+	  ],
       fileBrowser: {
         transport: {
           read: {
@@ -3401,6 +3419,9 @@ Refer to the [jQuery.ajax](http://api.jquery.com/jQuery.ajax) documentation for 
     <textarea id="editor"></textarea>
     <script>
     $("#editor").kendoEditor({
+	  tools: [
+		"insertFile"
+	  ],
       fileBrowser: {
         transport: {
           read: {
@@ -3419,6 +3440,9 @@ Refer to the [jQuery.ajax](http://api.jquery.com/jQuery.ajax) documentation for 
     <textarea id="editor"></textarea>
     <script>
     $("#editor").kendoEditor({
+	  tools: [
+		"insertFile"
+	  ],
       fileBrowser: {
         transport: {
           read: {
@@ -3441,6 +3465,9 @@ Refer to the [jQuery.ajax](http://api.jquery.com/jQuery.ajax) documentation for 
     <textarea id="editor"></textarea>
     <script>
     $("#editor").kendoEditor({
+	  tools: [
+		"insertFile"
+	  ],
       fileBrowser: {
         transport: {
           read: {
@@ -3461,6 +3488,9 @@ Refer to the [jQuery.ajax](http://api.jquery.com/jQuery.ajax) documentation for 
     <textarea id="editor"></textarea>
     <script>
     $("#editor").kendoEditor({
+	  tools: [
+		"insertFile"
+	  ],
       fileBrowser: {
         transport: {
           read: {
@@ -3481,6 +3511,9 @@ The remote url to call when fetching list of items.
     <textarea id="editor"></textarea>
     <script>
     $("#editor").kendoEditor({
+	  tools: [
+		"insertFile"
+	  ],
       fileBrowser: {
         transport: {
           read: {
@@ -3496,6 +3529,9 @@ The remote url to call when fetching list of items.
     <textarea id="editor"></textarea>
     <script>
     $("#editor").kendoEditor({
+	  tools: [
+		"insertFile"
+	  ],
       fileBrowser: {
         transport: {
           read: {
@@ -3518,6 +3554,9 @@ The URL which will handle the upload of the new files. If not specified the Uplo
     <textarea id="editor"></textarea>
     <script>
     $("#editor").kendoEditor({
+	  tools: [
+		"insertFile"
+	  ],
       fileBrowser: {
         transport: {
           uploadUrl: "/upload"
@@ -3535,6 +3574,9 @@ The URL responsible for serving the original file. A file name placeholder shoul
     <textarea id="editor"></textarea>
     <script>
     $("#editor").kendoEditor({
+	  tools: [
+		"insertFile"
+	  ],
       fileBrowser: {
         transport: {
           fileUrl: "/content/files/{0}" //the placeholder will be replaced with the current virtual path and selected file name
@@ -3548,6 +3590,9 @@ The URL responsible for serving the original file. A file name placeholder shoul
     <textarea id="editor"></textarea>
     <script>
     $("#editor").kendoEditor({
+	  tools: [
+		"insertFile"
+	  ],
       fileBrowser: {
         transport: {
           fileUrl: function (e) {
@@ -3568,6 +3613,9 @@ Options or URL which will handle the file and directory deletion. If not specifi
     <textarea id="editor"></textarea>
     <script>
     $("#editor").kendoEditor({
+	  tools: [
+		"insertFile"
+	  ],
       fileBrowser: {
         transport: {
           destroy: "/destroy"
@@ -3586,6 +3634,9 @@ Refer to the [jQuery.ajax](http://api.jquery.com/jQuery.ajax) documentation for 
     <textarea id="editor"></textarea>
     <script>
     $("#editor").kendoEditor({
+	  tools: [
+		"insertFile"
+	  ],
       fileBrowser: {
         transport: {
           destroy: {
@@ -3606,6 +3657,9 @@ Refer to the [jQuery.ajax](http://api.jquery.com/jQuery.ajax) documentation for 
     <textarea id="editor"></textarea>
     <script>
     $("#editor").kendoEditor({
+	  tools: [
+		"insertFile"
+	  ],
       fileBrowser: {
         transport: {
           destroy: {
@@ -3624,6 +3678,9 @@ Refer to the [jQuery.ajax](http://api.jquery.com/jQuery.ajax) documentation for 
     <textarea id="editor"></textarea>
     <script>
     $("#editor").kendoEditor({
+	  tools: [
+		"insertFile"
+	  ],
       fileBrowser: {
         transport: {
           destroy: {
@@ -3649,6 +3706,9 @@ Refer to the [jQuery.ajax](http://api.jquery.com/jQuery.ajax) documentation for 
     <textarea id="editor"></textarea>
     <script>
     $("#editor").kendoEditor({
+	  tools: [
+		"insertFile"
+	  ],
       fileBrowser: {
         transport: {
           destroy: {
@@ -3669,6 +3729,9 @@ Refer to the [jQuery.ajax](http://api.jquery.com/jQuery.ajax) documentation for 
     <textarea id="editor"></textarea>
     <script>
     $("#editor").kendoEditor({
+	  tools: [
+		"insertFile"
+	  ],
       fileBrowser: {
         transport: {
           destroy: {
@@ -3688,6 +3751,9 @@ The remote url to call when creating a new record.
     <textarea id="editor"></textarea>
     <script>
     $("#editor").kendoEditor({
+	  tools: [
+		"insertFile"
+	  ],
       fileBrowser: {
         transport: {
           destroy: {
@@ -3703,6 +3769,9 @@ The remote url to call when creating a new record.
     <textarea id="editor"></textarea>
     <script>
     $("#editor").kendoEditor({
+	  tools: [
+		"insertFile"
+	  ],
       fileBrowser: {
         transport: {
           destroy: {
@@ -3727,6 +3796,9 @@ Options or URL which will handle the directory creation. If not specified that c
     <textarea id="editor"></textarea>
     <script>
     $("#editor").kendoEditor({
+	  tools: [
+		"insertFile"
+	  ],
       fileBrowser: {
         transport: {
           create: "/create"
@@ -3745,6 +3817,9 @@ Refer to the [jQuery.ajax](http://api.jquery.com/jQuery.ajax) documentation for 
     <textarea id="editor"></textarea>
     <script>
     $("#editor").kendoEditor({
+	  tools: [
+		"insertFile"
+	  ],
       fileBrowser: {
         transport: {
           create: {
@@ -3765,6 +3840,9 @@ Refer to the [jQuery.ajax](http://api.jquery.com/jQuery.ajax) documentation for 
     <textarea id="editor"></textarea>
     <script>
     $("#editor").kendoEditor({
+	  tools: [
+		"insertFile"
+	  ],
       fileBrowser: {
         transport: {
           create: {
@@ -3783,6 +3861,9 @@ Refer to the [jQuery.ajax](http://api.jquery.com/jQuery.ajax) documentation for 
     <textarea id="editor"></textarea>
     <script>
     $("#editor").kendoEditor({
+	  tools: [
+		"insertFile"
+	  ],
       fileBrowser: {
         transport: {
           create: {
@@ -3808,6 +3889,9 @@ Refer to the [jQuery.ajax](http://api.jquery.com/jQuery.ajax) documentation for 
     <textarea id="editor"></textarea>
     <script>
     $("#editor").kendoEditor({
+	  tools: [
+		"insertFile"
+	  ],
       fileBrowser: {
         transport: {
           create: {
@@ -3828,6 +3912,9 @@ Refer to the [jQuery.ajax](http://api.jquery.com/jQuery.ajax) documentation for 
     <textarea id="editor"></textarea>
     <script>
     $("#editor").kendoEditor({
+	  tools: [
+		"insertFile"
+	  ],
       fileBrowser: {
         transport: {
           create: {
@@ -3847,6 +3934,9 @@ The remote url to call when creating a new record.
     <textarea id="editor"></textarea>
     <script>
     $("#editor").kendoEditor({
+	  tools: [
+		"insertFile"
+	  ],
       fileBrowser: {
         transport: {
           create: {
@@ -3862,6 +3952,9 @@ The remote url to call when creating a new record.
     <textarea id="editor"></textarea>
     <script>
     $("#editor").kendoEditor({
+	  tools: [
+		"insertFile"
+	  ],
       fileBrowser: {
         transport: {
           create: {
@@ -3939,6 +4032,9 @@ Defines text for upload button.
     <textarea id="editor"></textarea>
     <script>
     $("#editor").kendoEditor({
+	  tools: [
+		"insertFile"
+	  ],
       fileBrowser: {
         messages: {
           uploadFile: "Upload a file"
@@ -3956,6 +4052,9 @@ Defines text for order by label.
     <textarea id="editor"></textarea>
     <script>
     $("#editor").kendoEditor({
+	  tools: [
+		"insertFile"
+	  ],
       fileBrowser: {
         messages: {
           orderBy: "Order by"
@@ -3973,6 +4072,9 @@ Defines text for Name item of order by drop down list.
     <textarea id="editor"></textarea>
     <script>
     $("#editor").kendoEditor({
+	  tools: [
+		"insertFile"
+	  ],
       fileBrowser: {
         messages: {
           orderByName: "Filename"
@@ -3990,6 +4092,9 @@ Defines text for Size item of order by drop down list.
     <textarea id="editor"></textarea>
     <script>
     $("#editor").kendoEditor({
+	  tools: [
+		"insertFile"
+	  ],
       fileBrowser: {
         messages: {
           orderBySize: "File size"
@@ -4007,6 +4112,9 @@ Defines text for dialog shown when the directory not found error occurs.
     <textarea id="editor"></textarea>
     <script>
     $("#editor").kendoEditor({
+	  tools: [
+		"insertFile"
+	  ],
       fileBrowser: {
         messages: {
           directoryNotFound: "Directory not found!"
@@ -4024,6 +4132,9 @@ Defines text displayed when folder does not contain items.
     <textarea id="editor"></textarea>
     <script>
     $("#editor").kendoEditor({
+	  tools: [
+		"insertFile"
+	  ],
       fileBrowser: {
         messages: {
           emptyFolder: "Folder is empty"
@@ -4041,6 +4152,9 @@ Defines text for dialog shown when the file or directory is deleted.
     <textarea id="editor"></textarea>
     <script>
     $("#editor").kendoEditor({
+	  tools: [
+		"insertFile"
+	  ],
       fileBrowser: {
         messages: {
           deleteFile: "Are you sure? This action cannot be undone."
@@ -4058,6 +4172,9 @@ Defines text for dialog shown when an invalid file is set for upload.
     <textarea id="editor"></textarea>
     <script>
     $("#editor").kendoEditor({
+	  tools: [
+		"insertFile"
+	  ],
       fileBrowser: {
         messages: {
           invalidFileType: "Supported file types are {1}. Please retry your upload."
@@ -4075,6 +4192,9 @@ Defines text for dialog shown when an already existing file is set for upload.
     <textarea id="editor"></textarea>
     <script>
     $("#editor").kendoEditor({
+	  tools: [
+		"insertFile"
+	  ],
       fileBrowser: {
         messages: {
           overwriteFile: "Do you want to overwrite the file with name '{0}'?"
@@ -4092,6 +4212,9 @@ Defines text for search box placeholder.
     <textarea id="editor"></textarea>
     <script>
     $("#editor").kendoEditor({
+	  tools: [
+		"insertFile"
+	  ],
       fileBrowser: {
         messages: {
           search: "Find"
