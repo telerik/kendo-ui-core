@@ -29,6 +29,10 @@ component: grid
   <td>Browser Version</td>
   <td>58.0.3029.110</td>
  </tr>
+  <tr>
+  <td>Made With Version</td>
+  <td>2017.2.504</td>
+ </tr>
 </table>
 
 ## Description
@@ -51,7 +55,7 @@ The Kendo UI Grid does not provide a built-in solution for achieving this behavi
 
 > **Important**
 >
-> This approach will prevent the item from being updated in the database. However, the old values will be visually reverted after `saveChanges`.  
+> This approach will prevent the item from being updated in the database. However, the old values will be visually reverted after `cancelChanges`.  
 
 For more details, refer to the following articles:  
 
@@ -59,6 +63,103 @@ For more details, refer to the following articles:
 * [http://docs.telerik.com/kendo-ui/api/javascript/data/datasource\#methods-cancelChanges](http://docs.telerik.com/kendo-ui/api/javascript/data/datasource#methods-cancelChanges)  
 * [http://docs.telerik.com/kendo-ui/api/javascript/ui/grid\#configuration-columns.command](http://docs.telerik.com/kendo-ui/api/javascript/ui/grid#configuration-columns.command)  
 
-To resolve the resulting scroll-related issue, [restore the scroll position by using a custom approach](http://docs.telerik.com/kendo-ui/controls/data-management/grid/appearance#restore-scroll-positions). For a demo on how to implement this approach, refer to the [modified version of the previously provided example](http://dojo.telerik.com/iGEPE/2).
+To resolve the resulting scroll-related issue which will occur after the refresh, [restore the scroll position by using a custom approach](http://docs.telerik.com/kendo-ui/controls/data-management/grid/appearance#restore-scroll-positions).
 
-Because of the usage of a custom approach, the event is expected to cancel the changes for a specific row. I hope the button click event or another event to be suitable as well for executing the custom logic.  
+For a demo on how to implement this approach, refer to the following example:
+
+````html
+<div id="example">
+      <div id="grid"></div>
+
+      <script>
+        $(document).ready(function () {
+          var scrollOffset = {
+            left: 0,
+            top: 0
+          };
+          var crudServiceBaseUrl = "https://demos.telerik.com/kendo-ui/service",
+              dataSource = new kendo.data.DataSource({
+                transport: {
+                  read:  {
+                    url: crudServiceBaseUrl + "/Products",
+                    dataType: "jsonp"
+                  },
+                  update: {
+                    url: crudServiceBaseUrl + "/Products/Update",
+                    dataType: "jsonp"
+                  },
+                  destroy: {
+                    url: crudServiceBaseUrl + "/Products/Destroy",
+                    dataType: "jsonp"
+                  },
+                  create: {
+                    url: crudServiceBaseUrl + "/Products/Create",
+                    dataType: "jsonp"
+                  },
+                  parameterMap: function(options, operation) {
+                    if (operation !== "read" && options.models) {
+                      return {models: kendo.stringify(options.models)};
+                    }
+                  }
+                },
+                batch: true,
+                pageSize: 20,
+                schema: {
+                  model: {
+                    id: "ProductID",
+                    fields: {
+                      ProductID: { editable: false, nullable: true },
+                      ProductName: { validation: { required: true } },
+                      UnitPrice: { type: "number", validation: { required: true, min: 1} },
+                      Discontinued: { type: "boolean" },
+                      UnitsInStock: { type: "number", validation: { min: 0, required: true } }
+                    }
+                  }
+                }
+              });
+
+          $("#grid").kendoGrid({
+            dataSource: dataSource,
+            navigatable: true,
+            pageable: true,
+            dataBound:function(e){
+              var container = e.sender.wrapper.children(".k-grid-content"); // or ".k-virtual-scrollable-wrap"
+              container.scrollLeft(scrollOffset.left);
+              container.scrollTop(scrollOffset.top); // use only if virtual scrolling is disabled
+            },
+            height: 550,
+            toolbar: ["create", "save", "cancel"],
+            columns: [
+              "ProductName",
+              { field: "UnitPrice", title: "Unit Price", format: "{0:c}", width: 120 },
+              { field: "UnitsInStock", title: "Units In Stock", width: 120 },
+              { field: "Discontinued", width: 120, editor: customBoolEditor },
+              { command: [{
+                name: "Cancel",
+                click: function(e) {
+                  // prevent page scroll position change
+                  e.preventDefault();
+                  //console.log(e.toElement.offsetParent.parentElement)
+                  var row = e.target.closest('tr')
+                  var uid = $(row).data(uid)
+                  dataSource = $("#grid").data("kendoGrid").dataSource
+                  var item = dataSource.getByUid(uid.uid);
+                  dataSource.cancelChanges(item);
+                  var container = this.wrapper.children(".k-grid-content"); // or ".k-virtual-scrollable-wrap"
+                  scrollOffset.left = container.scrollLeft();
+                  scrollOffset.top = container.scrollTop();
+                  this.refresh()
+                }
+              }]
+              }],
+            editable: true
+          });
+        });
+
+        function customBoolEditor(container, options) {
+          $('<input class="k-checkbox" type="checkbox" name="Discontinued" data-type="boolean" data-bind="checked:Discontinued">').appendTo(container);
+          $('<label class="k-checkbox-label">​</label>').appendTo(container);
+        }
+      </script>
+    </div>
+````

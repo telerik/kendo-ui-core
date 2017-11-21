@@ -440,18 +440,25 @@ See [Scrollable Tabs](/controls/navigation/tabstrip/overview#configuration-Scrol
 #### Example - disable scrolling
 
     <div id="tabstrip">
-        <ul>
-            <li>Tab 1</li>
-            <li>Tab 2</li>
-        </ul>
-        <div>Content 1</div>
-        <div>Content 2</div>
-    </div>
-
-    <script>
-        $("#tabstrip").kendoTabStrip({
-            scrollable: false
-        });
+		<ul>
+			<li>Tab Header Number 1</li>
+			<li>Tab Header Number 2</li>
+			<li>Tab Header Number 3</li>
+			<li>Tab Header Number 4</li>
+			<li>Tab Header Number 5</li>
+			<li>Tab Header Number 6</li>
+		</ul>
+		<div>Content 1</div>
+		<div>Content 2</div>
+		<div>Content 3</div>
+		<div>Content 4</div>
+		<div>Content 5</div>
+		<div>Content 6</div>
+	</div>
+	<script>
+		$("#tabstrip").kendoTabStrip({
+			scrollable: false
+		});
     </script>
 
 ### scrollable.distance `Number` *(default: 200)*
@@ -461,21 +468,28 @@ Sets the scroll amount (in pixels) applied when the user clicks on a scroll butt
 #### Example
 
     <div id="tabstrip">
-        <ul>
-            <li>Tab 1</li>
-            <li>Tab 2</li>
-        </ul>
-        <div>Content 1</div>
-        <div>Content 2</div>
-    </div>
-
-    <script>
-        $("#tabstrip").kendoTabStrip({
-            scrollable: {
-                distance: 300
-            }
-        });
-    </script>
+		<ul>
+			<li>Tab Header Number 1</li>
+			<li>Tab Header Number 2</li>
+			<li>Tab Header Number 3</li>
+			<li>Tab Header Number 4</li>
+			<li>Tab Header Number 5</li>
+			<li>Tab Header Number 6</li>
+		</ul>
+		<div>Content 1</div>
+		<div>Content 2</div>
+		<div>Content 3</div>
+		<div>Content 4</div>
+		<div>Content 5</div>
+		<div>Content 6</div>
+	</div>
+	<script>
+		$("#tabstrip").kendoTabStrip({
+			scrollable: {
+				distance: 30
+			}
+		});
+	</script>
 
 ### tabPosition `String`*(default: "top")*
 

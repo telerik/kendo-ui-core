@@ -63,10 +63,11 @@ The following example demonstrates how to use the TreeView for batch editing in 
 					edit: function (e) {
 						//checking if a cell from the Test column is opened for editing
 						var dummyInput = e.container.find("input[name='test']");
-						if (dummyInput) {
+						if (dummyInput.length > 0) {
 							var treeView = $(e.container).find(".treeViewEditor").data("kendoTreeView");
 							var originalItem = treeView.findByText(dummyInput.val());
 							if (originalItem != null) {
+								// Select the item based on the field value
 								treeView.select(originalItem);
 							}
 						}
