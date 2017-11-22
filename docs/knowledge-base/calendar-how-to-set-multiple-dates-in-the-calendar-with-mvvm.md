@@ -1,16 +1,16 @@
 ---
-title: How to Set Multiple Dates in the Calendar With MVVM?
-description: An example on how to set multiple dates in the calendar with mvvm.
+title: Set Multiple Dates in the Calendar with MVVM
+description: An example on how to set multiple dates in the Kendo UI Calendar with MVVM.
 type: how-to
-page_title: How to Set Multiple Dates in the Calendar With MVVM
+page_title: Set Multiple Dates in with MVVM | Kendo UI Calendar
 slug: calendar-how-to-set-multiple-dates-in-the-calendar-with-mvvm
 tags: calendar, multiple, dates, mvvm, binding
 ticketid: 1140439
 res_type: kb
-
 ---
 
 ## Environment
+
 <table>
  <tr>
   <td>Product</td>
@@ -24,13 +24,11 @@ res_type: kb
 
 ## Description
 
-How to set multiple dates as selected from the viewModel?
+How can I set multiple Calendar dates as selected from the `viewModel`?
 
 ## Solution
 
-The desired result can be achieved with [custom binding](https://docs.telerik.com/kendo-ui/framework/mvvm/bindings/custom#custom-widget-binding).
-
-Please check the following example demonstrating this.
+Use [custom binding](https://docs.telerik.com/kendo-ui/framework/mvvm/bindings/custom#custom-widget-binding).
 
 ````html
 <div data-role="calendar" id="calendar" data-selectable="multiple" data-bind="selectDates: dates"></div>

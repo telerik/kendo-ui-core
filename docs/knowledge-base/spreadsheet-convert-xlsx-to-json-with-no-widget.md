@@ -1,6 +1,6 @@
 ---
 title: Convert an XLSX File to JSON without Using a Spreadsheet Widget
-description: An example on how to convert an XLSX file to JSON without initializing a Spreadsheet widget.
+description: An example on how to convert an XLSX file to JSON without initializing a Kendo UI Spreadsheet widget.
 type: how-to
 page_title: Convert XLSX Data to JSON | Kendo UI Spreadsheet
 slug: spreadsheet-convert-xlsx-to-json-with-no-widget
@@ -21,12 +21,12 @@ component: spreadsheet
 
 ## Description
 
-How to convert an XLSX file to JSON without initializing a Spreadsheet widget?
+How can I convert an XLSX file to JSON without initializing a Spreadsheet widget?
 
 ## Solution
 
-The required conversion could be achieved by using a `kendo.spreadsheet.Workbook` object:
- 
+Use a `kendo.spreadsheet.Workbook` object.
+
 ```html
 <div>
   1. Click to load an .xlsx file
@@ -41,10 +41,10 @@ The required conversion could be achieved by using a `kendo.spreadsheet.Workbook
 <script>
   $('#btn').on('click', function() {
     var file = document.getElementById("fileForUpload").files[0];
-    
+
     if (file) {
       var workbook = new kendo.spreadsheet.Workbook({});
-      
+
       workbook.fromFile(file).then(function(){
         var jsonContent = workbook.toJSON();
         console.log(jsonContent);

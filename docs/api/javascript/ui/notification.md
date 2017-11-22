@@ -26,6 +26,7 @@ Indicates the period in milliseconds after which a notification can be dismissed
     $("#notification").kendoNotification({
         allowHideAfter: 1000
     });
+	$("#notification").getKendoNotification().show("Kendo Notification");
     </script>
 
 ### animation `Object|Boolean`
@@ -41,6 +42,7 @@ Defines custom show and hide animations via an Kendo UI Animation object. Settin
     $("#notification").kendoNotification({
         animation: false
     });
+	$("#notification").getKendoNotification().show("Kendo Notification");
     </script>
 
 #### Example - slide animations
@@ -58,6 +60,7 @@ Defines custom show and hide animations via an Kendo UI Animation object. Settin
             }
         }
     });
+	$("#notification").getKendoNotification().show("Kendo Notification");
     </script>
 
 ### appendTo `String|Element|jQuery` *(default: null)*
@@ -72,6 +75,7 @@ Defines the element to which the notifications will be appended or prepended (de
     $("#notification").kendoNotification({
         appendTo: "#container"
     });
+	$("#notification").getKendoNotification().show("Kendo Notification");
     </script>
 
 #### Example - set appendTo as a DOM element
@@ -83,6 +87,7 @@ Defines the element to which the notifications will be appended or prepended (de
     $("#notification").kendoNotification({
         appendTo: container
     });
+	$("#notification").getKendoNotification().show("Kendo Notification");
     </script>
 
 #### Example - set appendTo as a jQuery object
@@ -93,6 +98,7 @@ Defines the element to which the notifications will be appended or prepended (de
     element.kendoNotification({
         appendTo: element
     });
+	$("#notification").getKendoNotification().show("Kendo Notification");
     </script>
 
 ### autoHideAfter `Number` *(default: 5000)*
@@ -106,6 +112,7 @@ Indicates the period in milliseconds after which a notification disappears autom
     $("#notification").kendoNotification({
         autoHideAfter: 3000
     });
+	$("#notification").getKendoNotification().show("Kendo Notification");
     </script>
 
 #### Example - disable automatic hiding
@@ -115,6 +122,7 @@ Indicates the period in milliseconds after which a notification disappears autom
     $("#notification").kendoNotification({
         autoHideAfter: 0
     });
+	$("#notification").getKendoNotification().show("Kendo Notification");
     </script>
 
 ### button `Boolean` *(default: false)*
@@ -128,6 +136,7 @@ Determines whether the notifications will include a hide button. **This setting 
     $("#notification").kendoNotification({
         button: true
     });
+	$("#notification").getKendoNotification().show("Kendo Notification");
     </script>
 
 ### height `Number|String` *(default: null)*
@@ -141,6 +150,7 @@ Defines the notifications' height. Numbers are treated as pixels.
     $("#notification").kendoNotification({
         height: 50
     });
+	$("#notification").getKendoNotification().show("Kendo Notification");
     </script>
 
 #### Example - set height as a string
@@ -150,6 +160,7 @@ Defines the notifications' height. Numbers are treated as pixels.
     $("#notification").kendoNotification({
         height: "4em"
     });
+	$("#notification").getKendoNotification().show("Kendo Notification");
     </script>
 
 ### hideOnClick `Boolean` *(default: true)*
@@ -163,6 +174,7 @@ Determines whether notifications can be hidden by clicking anywhere on their con
     $("#notification").kendoNotification({
         hideOnClick: false
     });
+	$("#notification").getKendoNotification().show("Kendo Notification");
     </script>
 
 ### position `Object`
@@ -184,6 +196,7 @@ It determines the position of the first notification on the screen, as well as w
             right: 20
         }
     });
+	$("#notification").getKendoNotification().show("Kendo Notification");
     </script>
 
 ### position.bottom `Number` *(default: 20)*
@@ -199,6 +212,7 @@ Determines the pixel position of the first popup notification with regard to the
             bottom: 30
         }
     });
+	$("#notification").getKendoNotification().show("Kendo Notification");
     </script>
 
 ### position.left `Number` *(default: null)*
@@ -214,6 +228,7 @@ Determines the pixel position of the first popup notification with regard to the
             left: 30
         }
     });
+	$("#notification").getKendoNotification().show("Kendo Notification");
     </script>
 
 ### position.pinned `Boolean` *(default: true)*
@@ -229,6 +244,7 @@ Determines whether the popup notifications will move together with the other pag
             pinned: false
         }
     });
+	$("#notification").getKendoNotification().show("Kendo Notification");
     </script>
 
 ### position.right `Number` *(default: 20)*
@@ -244,6 +260,7 @@ Determines the pixel position of the first popup notification with regard to the
             right: 30
         }
     });
+	$("#notification").getKendoNotification().show("Kendo Notification");
     </script>
 
 ### position.top `Number` *(default: null)*
@@ -259,6 +276,7 @@ Determines the position of the first popup notification with regard to the viewp
             top: 30
         }
     });
+	$("#notification").getKendoNotification().show("Kendo Notification");
     </script>
 
 ### stacking `String` *(default: "default")*
@@ -277,6 +295,7 @@ The `"default"` setting takes into consideration the applied `position` settings
         },
         stacking: "down"
     });
+	$("#notification").getKendoNotification().show("Kendo Notification");
     </script>
 
 ### templates `Array` *(default: [])*
@@ -349,6 +368,7 @@ Defines the notifications' width. Numbers are treated as pixels.
     $("#notification").kendoNotification({
         width: 300
     });
+	$("#notification").getKendoNotification().show("Kendo Notification");
     </script>
 
 #### Example - set width as a string
@@ -358,6 +378,7 @@ Defines the notifications' width. Numbers are treated as pixels.
     $("#notification").kendoNotification({
         width: "20em"
     });
+	$("#notification").getKendoNotification().show("Kendo Notification");
     </script>
 
 ## Methods
@@ -491,7 +512,7 @@ If this argument is not supplied, then `"info"` is assumed.
 
     var notificationWidget = $("#notification").kendoNotification().data("kendoNotification");
 
-    notificationWidget.showText(getNotificationMessag);
+    notificationWidget.showText(getNotificationMessage());
     </script>
 
 ### showText
@@ -531,12 +552,13 @@ If this argument is not supplied, then `"info"` is assumed.
     }
 
     var notificationWidget = $("#notification").kendoNotification({
-        templates: {
-            myAlert: "<div>System alert: #= myMessage #</div>"
-        }
-    }).data("kendoNotification");
-
-    notificationWidget.show(getNotificationMessage, "myAlert");
+		templates: [{
+			type: "myAlert",
+			template: "<div>System alert: #= myMessage #</div>"
+		}]
+	}).data("kendoNotification");
+	
+	notificationWidget.show(getNotificationMessage(), "myAlert");
     </script>
 
 ### success
@@ -583,6 +605,8 @@ The jQuery object, which wraps the element being hidden.
     $("#notification").kendoNotification({
         hide: onHide
     });
+	
+	$("#notification").getKendoNotification().show("Kendo Notification");
     </script>
 
 ### show
@@ -607,4 +631,6 @@ The jQuery object, which wraps the element being displayed.
     $("#notification").kendoNotification({
         show: onShow
     });
+	
+	$("#notification").getKendoNotification().show("Kendo Notification");
     </script>

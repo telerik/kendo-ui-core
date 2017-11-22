@@ -1,20 +1,20 @@
 ---
-title: Draw a Custom Target Line Over a Bar
-description: An Example on How to Draw a Custom Target Line Over a Bar
+title: Draw a Custom Target Line over a Bar
+description: An example on how to draw a custom target line over a bar in the Kendo UI Chart.  
 type: how-to
-page_title: How to Draw a Custom Target Line Over a Bar
+page_title: Draw a Custom Target Line over a Bar | Kendo UI Chart
 slug: chart-how-to-draw-a-custom-target-line-over-a-bar
 tags: chart, bar, target,
 ticketid: 1140477
 res_type: kb
-
 ---
 
 ## Environment
+
 <table>
  <tr>
   <td>Product</td>
-  <td>Chart for Progress® Kendo UI®</td>
+  <td>Progress Kendo UI Chart</td>
  </tr>
  <tr>
   <td>Operating System</td>
@@ -36,17 +36,17 @@ res_type: kb
 
 ## Description
 
-We have a requirement to show target lines for each bar.
+How can I show target lines for each Chart bar?
 
 ## Solution
 
-1) The Built-in solution is the [Bullet Chart](http://demos.telerik.com/kendo-ui/bullet-charts/index)
-  
-2) Currently, making an individual line only over a single bar is achievable using [custom visuals](https://docs.telerik.com/kendo-ui/api/javascript/dataviz/ui/chart#configuration-seriesDefaults.visual).
+Use either of the following approaches:
+1. Implement the [Kendo UI Bullet Chart](http://demos.telerik.com/kendo-ui/bullet-charts/index), or
+1. Utilize [custom visuals](https://docs.telerik.com/kendo-ui/api/javascript/dataviz/ui/chart#configuration-seriesDefaults.visual).
 
-Please check the example demonstrating this:
+The following example demonstrates how to use the custom visuals approach.
 
-````html
+```html
 <div id="example">
       <div id="chart-mmHg"></div>
     </div>
@@ -63,9 +63,9 @@ Please check the example demonstrating this:
           { "current": 100, "target": 100},
           { "current": 99, "target": 98},
           { "current": 100, "target": 100},
-          { "current": 80, "target": 90} 
+          { "current": 80, "target": 90}
         ] },        
-                        { name: "Switch Gear", data: 
+                        { name: "Switch Gear", data:
                          [
                            { "current": 90, "target": 95},
                            { "current": 95, "target": 100},
@@ -95,7 +95,7 @@ Please check the example demonstrating this:
               var target = axis.slot(e.dataItem.target).origin.y;
               var path = new kendo.drawing.Path({ stroke: { width: 2, color: e.options.target.color } }).moveTo(e.rect.origin.x, target).lineTo(e.rect.topRight().x, target);
               visual.append(path);
-              
+
               return visual;
             }
 
@@ -150,4 +150,4 @@ Please check the example demonstrating this:
       $(document).bind("kendo:skinChange", createChart);
     </script>
     </div>
-````
+```

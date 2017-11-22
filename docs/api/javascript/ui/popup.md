@@ -47,7 +47,7 @@ Configures the opening and closing animations of the popup. Setting the `animati
     <script>
     $("#popup").kendoPopup({
       animation: false
-    });
+    }).data("kendoPopup").open();
     </script>
 
 #### Example - configure the animation
@@ -65,7 +65,7 @@ Configures the opening and closing animations of the popup. Setting the `animati
          duration: 300
        }
       }
-    });
+    }).data("kendoPopup").open();
     </script>
 
 ### animation.close `Object`
@@ -83,7 +83,7 @@ The animation played when the popup is closed.
          duration: 300
        }
       }
-    });
+    }).data("kendoPopup").open();
     </script>
 
 ### animation.close.effects `String`
@@ -111,7 +111,7 @@ The animation played when the calendar popup is opened.
          duration: 300
        }
       }
-    });
+    }).data("kendoPopup").open();
     </script>
 
 ### animation.open.effects `String`
@@ -136,7 +136,7 @@ Specifies the element that will be used as an anchor. The widget will open next 
     <script>
         $("#popup").kendoPopup({
             anchor: $("#datepicker")
-        });
+        }).data("kendoPopup").open();
     </script>
 
 ### appendTo `String|jQuery`*(default: document.body)*
@@ -154,7 +154,7 @@ Which element the popup will be appended to. The element needs to be relatively 
         $("#popup").kendoPopup({
             anchor: $("#datepicker"),
             appendTo: $("#container")
-        });
+        }).data("kendoPopup").open();
     </script>
 
 ### collision `String`*(default: "fit flip")*
@@ -201,7 +201,7 @@ The available "x" positions are:
         $("#popup").kendoPopup({
             anchor: $("#datepicker"),
             origin: "top left"
-        });
+        }).data("kendoPopup").open();
     </script>
 
 ### position `String`*(default: "top left")*
@@ -228,7 +228,7 @@ The available "x" positions are:
         $("#popup").kendoPopup({
             anchor: $("#datepicker"),
             position: "bottom left"
-        });
+        }).data("kendoPopup").open();
     </script>
 
 ## Methods
@@ -281,7 +281,8 @@ Re-positions the popup element
     $("#popup").kendoPopup();
 
     var popup = $("#popup").data("kendoPopup");
-
+	
+	popup.open();
     popup.position();
     </script>
 
@@ -304,9 +305,11 @@ The new configuration options.
     var popup = $("#popup").data("kendoPopup");
 
     popup.setOptions({
-        origin: "top left"
+        origin: "top left",
         position: "bottom left"
     });
+	
+	popup.open();
     </script>
 
 ### visible
@@ -346,9 +349,9 @@ The widget instance which fired the event.
     <script>
     $("#popup").kendoPopup({
         activate: function(e) {
-            e.preventDefault(); //prevent popup closing
+            console.log(e.sender.element[0]);
         }
-    });
+    }).data("kendoPopup").open();
     </script>
 
 #### Example - subscribe to the "activate" event after initialization
@@ -360,8 +363,10 @@ The widget instance which fired the event.
     var popup = $("#popup").data("kendoPopup");
 
     popup.bind("activate", function(e) {
-        e.preventDefault(); //prevent popup closing
+        console.log(e.sender.element[0]);
     });
+	
+	popup.open();
     </script>
 
 ### close
@@ -382,7 +387,7 @@ The widget instance which fired the event.
         close: function(e) {
             e.preventDefault(); //prevent popup closing
         }
-    });
+    }).data("kendoPopup").open();
     </script>
 
 #### Example - subscribe to the "close" event after initialization
@@ -396,6 +401,8 @@ The widget instance which fired the event.
     popup.bind("close", function(e) {
         e.preventDefault(); //prevent popup closing
     });
+	
+	popup.open();
     </script>
 
 ### deactivate
@@ -414,9 +421,9 @@ The widget instance which fired the event.
     <script>
     $("#popup").kendoPopup({
         deactivate: function(e) {
-            e.preventDefault(); //prevent popup closing
+            console.log(e.sender.element[0]);
         }
-    });
+    }).data("kendoPopup").open();
     </script>
 
 #### Example - subscribe to the "deactivate" event after initialization
@@ -428,8 +435,10 @@ The widget instance which fired the event.
     var popup = $("#popup").data("kendoPopup");
 
     popup.bind("deactivate", function(e) {
-        e.preventDefault(); //prevent popup closing
+        console.log(e.sender.element[0]);
     });
+	
+	popup.open();
     </script>
 
 ### open
@@ -448,9 +457,9 @@ The widget instance which fired the event.
     <script>
     $("#popup").kendoPopup({
         open: function(e) {
-            e.preventDefault(); //prevent popup closing
+            e.preventDefault(); //prevent popup opening
         }
-    });
+    }).data("kendoPopup").open();
     </script>
 
 #### Example - subscribe to the "open" event after initialization
@@ -462,6 +471,8 @@ The widget instance which fired the event.
     var popup = $("#popup").data("kendoPopup");
 
     popup.bind("open", function(e) {
-        e.preventDefault(); //prevent popup closing
+        e.preventDefault(); //prevent popup opening
     });
+	
+	popup.open();
     </script>

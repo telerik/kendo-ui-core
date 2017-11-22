@@ -1,13 +1,12 @@
 ---
-title: How to Create Header and Footer Rows for a Spreadsheet with DataSource 
-description: An example of how to insert custom header and footer in a Spreadsheet Sheet loading its data with DataSource from a remote call.
+title: Create Header and Footer Rows for a Spreadsheet with DataSource
+description: An example on how to insert a custom header and footer in a Kendo UI Spreadsheet sheet and load its data with a DataSource from a remote call.
 type: how-to
-page_title: Insert Custom Header and Footer in a Spreadsheet Bound to DataSource
+page_title: Insert Custom Header and Footer in Spreadsheet with DataSource | Kendo UI Spreadsheet
 slug: spreadsheet-with-datasource-insert-header-and-footer
 tags: kendo, kendoui, spreadsheet, datasource, footer, header
 ticketid: 1140923
 res_type: kb
-
 ---
 
 ## Environment
@@ -21,11 +20,18 @@ res_type: kb
 
 ## Description
 
-I am using Spreadsheet with DataSource configured for one of its Sheets. The data is loading as expected from a remote call. I would like to have additional Header and Footer rows that are not part of the data returned.
+I am using a Spreadsheet that is bound to a DataSource which is configured for one of its sheets. The data is loading as expected from a remote call.
+
+How can I have additional header and footer rows that are not part of the returned data?
 
 ## Solution
-  
-To achieve the required you will have to insert the Header and the Footer manually using the Spreadsheet client-side API. The DataSource [`requestEnd`](https://docs.telerik.com/kendo-ui/api/javascript/data/datasource#events-requestEnd) event needs to be handled:  
+
+1. Manually insert the header and the footer by using the client-side API of the Spreadsheet.
+1. Handle the [`requestEnd`](https://docs.telerik.com/kendo-ui/api/javascript/data/datasource#events-requestEnd) event of the DataSource.
+
+    The header row is inserted through the [`Sheet.insertRow()`](https://docs.telerik.com/kendo-ui/api/javascript/spreadsheet/sheet#methods-insertRow) method. Then, the range for the row is retrieved through [`Sheet.range()`](https://docs.telerik.com/kendo-ui/api/javascript/spreadsheet/sheet#methods-range). The values are set [`Range.values()`](https://docs.telerik.com/kendo-ui/api/javascript/spreadsheet/range#methods-values).  
+
+> This approach is not applicable if the data is edited and saved by using the other DataSource transport methods (`Update`, `Create`, and `Destroy`). Such scenarios do not support the insertion of a custom header or footer.
 
 ````html
 <div id="spreadsheet" style="width: 100%"></div>
@@ -33,7 +39,7 @@ To achieve the required you will have to insert the Header and the Footer manual
 <script>
   $(function() {
     var crudServiceBaseUrl = "https://demos.telerik.com/kendo-ui/service";
-	
+
     function onRequestEnd(e) {
       // Check the request type
       if (e.type === 'read') {
@@ -54,7 +60,7 @@ To achieve the required you will have to insert the Header and the Footer manual
         }, 0);
       }
     }
-	
+
     var dataSource = new kendo.data.DataSource({
       requestEnd: onRequestEnd,
       transport: {
@@ -69,7 +75,7 @@ To achieve the required you will have to insert the Header and the Footer manual
         }
       }
     });
-	
+
     $("#spreadsheet").kendoSpreadsheet({
       columns: 20,
       rows: 100,
@@ -119,10 +125,6 @@ To achieve the required you will have to insert the Header and the Footer manual
   });
 </script>
 ````
-  
-Note, that the header row is inserted using the [`Sheet.insertRow()`](https://docs.telerik.com/kendo-ui/api/javascript/spreadsheet/sheet#methods-insertRow) method. Then the range for the row is retrieved ([`Sheet.range()`](https://docs.telerik.com/kendo-ui/api/javascript/spreadsheet/sheet#methods-range)) and the values are set ([`Range.values()`](https://docs.telerik.com/kendo-ui/api/javascript/spreadsheet/range#methods-values)).  
-  
-Keep in mind, that the above suggestion would not be applicable if the data is being edited and saved using the other DataSource transport methods (Update, Create, Destroy). In such scenario inserting custom header / footer would not be supported.  
 
 ## See Also
 

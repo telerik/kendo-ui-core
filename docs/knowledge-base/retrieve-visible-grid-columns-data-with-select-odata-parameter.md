@@ -1,8 +1,8 @@
 ---
-title: Retrieve only the visible Grid columns data with $select odata parameter
-description: An example on how to retrieve only the visible columns data with $select odata parameter in the Kendo UI Grid.
+title: Retrieve Only the Visible Grid Columns Data with the $select oData Parameter
+description: An example on how to retrieve only the visible columns data with the $select oData parameter in the Kendo UI Grid.
 type: how-to
-page_title: Retrieve visible columns data with $select odata parameter | Kendo UI Grid
+page_title: Retrieve Visible Columns Data with the $select oData Parameter | Kendo UI Grid
 slug: retrieve-visible-grid-columns-data-with-select-odata-parameter
 tags: retrieve, visible, columns, data, $select, odata
 ticketid: 1138950
@@ -11,22 +11,23 @@ component: grid
 ---
 
 ## Environment
+
 <table>
  <tr>
   <td>Product</td>
-  <td>Grid for Progress® Kendo UI®</td>
+  <td>Progress Kendo UI Grid</td>
  </tr>
 </table>
 
 
 ## Description
 
-How can we retrieve only the visible columns data from the remote service with a $select odata parameter?
+How can I retrieve the columns data that is visible only from the remote service by using the `$select` oData parameter?
 
 ## Solution
 
-* Pass additional parameters to the odata service, using `transport.read.data` option.
-* Query the odata service to retrieve only the visible columns data.
+1. Pass additional parameters to the oData service by using the `transport.read.data` option.
+1. Query the oData service to retrieve only the visible columns data.
 
 ```html
 <div id="example">

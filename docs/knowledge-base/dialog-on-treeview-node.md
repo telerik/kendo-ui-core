@@ -1,8 +1,8 @@
 ---
 title: Show Dialog on TreeView Node Selection
-description: An example on how to show node data in Dialog on selecting a Treeview node
+description: An example on how to show the node data in the Kendo UI Dialog on selecting a TreeView node.
 type: how-to
-page_title: Display TreeView Node Data in Dialog | Kendo UI TreeView 
+page_title: Display Node Data in Dialog | Kendo UI TreeView
 slug: dialog-on-treeview-node
 tags: dialog, treeview, node
 ticketid: 1139187
@@ -33,16 +33,17 @@ res_type: kb
 
 ## Description
 
-How to display TreeView node data in Kendo Dialog on node selection?
+How can I display TreeView node data in a Kendo UI Dialog on node selection?
 
 ## Solution
 
-The dataItem of the selected node is accessed. The data from the dataItem is passed to the content method of the Dialog widget. 
+1. Access the `dataItem` of the selected node.
+1. Pass the data from the `dataItem` to the `content` method of the Dialog.
 
 ```html
 	<div id="treeview"></div>
 	<div id="dialog"></div>               
-		
+
 	<script>
 		var data = new kendo.data.HierarchicalDataSource({
 			transport: {
@@ -58,17 +59,17 @@ The dataItem of the selected node is accessed. The data from the dataItem is pas
 				}
 			}
 		});
-	
+
 		$("#treeview").kendoTreeView({
 			dataSource: data,
 			dataTextField: "FullName",
 			select: onSelect
 		});
-		
+
 		$("#dialog").kendoDialog({                    		
 			title: "Customer Details",  			
 			visible: false,
-				actions: 
+				actions:
 				[{
 					text: "OK",
 					action: function(e){
@@ -80,11 +81,11 @@ The dataItem of the selected node is accessed. The data from the dataItem is pas
 					text: "Cancel"
 				}]
 		})
-		
+
 		function onSelect(e){    
 			var treeView = $('#treeview').data('kendoTreeView');
 			var data = treeView.dataItem(e.node);
-			var content = '<b>FullName: </b>' + data.FullName + '</br><b>EmployeeId: </b>' + data.EmployeeId; 
+			var content = '<b>FullName: </b>' + data.FullName + '</br><b>EmployeeId: </b>' + data.EmployeeId;
 			var dialog = $("#dialog").data("kendoDialog");
 			dialog.content(content);
 			dialog.open();

@@ -2,7 +2,7 @@
 title: Cancel Changes Per Row by Using the Incell Editing Mode of the Grid
 description: An example on how to cancel the changes for a specific Kendo UI Grid row when the Grid is in the incell editing mode.
 type: how-to
-page_title: Cancel Changes for Specific Grid Row in Incell Editing Mode | Kendo UI Grid
+page_title: Cancel Changes for Specific Row in Incell Editing Mode | Kendo UI Grid
 slug: cancel-changes-for-specific-row-with-incell-editing
 tags: grid, editing
 ticketid: 1111657
@@ -63,9 +63,7 @@ For more details, refer to the following articles:
 * [http://docs.telerik.com/kendo-ui/api/javascript/data/datasource\#methods-cancelChanges](http://docs.telerik.com/kendo-ui/api/javascript/data/datasource#methods-cancelChanges)  
 * [http://docs.telerik.com/kendo-ui/api/javascript/ui/grid\#configuration-columns.command](http://docs.telerik.com/kendo-ui/api/javascript/ui/grid#configuration-columns.command)  
 
-To resolve the resulting scroll-related issue which will occur after the refresh, [restore the scroll position by using a custom approach](http://docs.telerik.com/kendo-ui/controls/data-management/grid/appearance#restore-scroll-positions).
-
-For a demo on how to implement this approach, refer to the following example:
+To resolve the resulting scroll-related issue which occurs after the refresh, [restore the scroll position by using a custom approach](http://docs.telerik.com/kendo-ui/controls/data-management/grid/appearance#restore-scroll-positions).
 
 ````html
 <div id="example">

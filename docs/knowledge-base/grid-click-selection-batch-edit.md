@@ -1,20 +1,19 @@
 ---
-title: Implement Single Row Selection on Click in Batch Edit Grid
-description: An example on how to allow click selection on a grid with batch edit mode enabled
+title: Implement Single-Row Selection on Click in Batch Edit Grid
+description: An example on how to allow click selection in a Kendo UI Grid in batch edit mode.
 type: how-to
-page_title: Implement Single Row Selection on Click in Batch Edit Grid
+page_title: Implement Single-Row Selection on Click in Batch Edit Mode | Kendo UI Grid
 slug: grid-click-selection-batch-edit
 tags: single, row, selection, grid, batch, edit, mode
 ticketid: 1125960
 res_type: kb
-
 ---
 
 ## Environment
 <table>
  <tr>
   <td>Product</td>
-  <td>Grid for Progress® Kendo UI®</td>
+  <td>Progress Kendo UI Grid</td>
  </tr>
  <tr>
   <td>Operating System</td>
@@ -32,11 +31,13 @@ res_type: kb
 
 ## Description
 
-The default behavior of a Grid in Batch Edit mode is to become editable when a row is clicked; how can I implement single row selection on click and enter edit mode on double click instead?
+The default behavior of a Grid in batch edit mode is to become editable when a row is clicked.
+
+How can I implement a single-row selection on click and make the Grid enter the edit mode on a double click instead?
 
 ## Solution
 
-In order to implement the functionality described above, take advantage of the `closeCell` and `editCell` methods of the Kendo UI Grid API on single click and double click respectively:
+Use the `closeCell` and `editCell` methods of the Grid on single or double click respectively.
 
 ```html
 <div id="example">
@@ -120,5 +121,5 @@ In order to implement the functionality described above, take advantage of the `
 
 ## See Also
 
-* [closeCell method reference.](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid#methods-closeCell)
-* [editCell method reference.](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid#methods-editCell)
+* [API Reference of the `closeCell` Method](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid#methods-closeCell)
+* [API Reference of the `editCell` Method](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid#methods-editCell)

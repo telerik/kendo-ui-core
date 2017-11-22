@@ -1,8 +1,8 @@
 ---
 title: Change the Columns Headers in a DataSource Bound Spreadsheet
-description: An example on how to manually alter the columns headers in a Spreadsheet populated from a DataSource.
+description: An example on how to manually alter the headers of the columns in a Kendo UI Spreadsheet which is populated from a DataSource.
 type: how-to
-page_title: Rename the Default Headers when Using DataSource | Kendo UI Spreadsheet
+page_title: Rename the Default Headers When Using DataSource | Kendo UI Spreadsheet
 slug: spreadsheet-rename-headers-from-datasource
 tags: kendo, kendoui, spreadsheet, datasource, headers
 res_type: kb
@@ -21,12 +21,12 @@ component: spreadsheet
 
 ## Description
 
-How to manually alter the columns headers in a Spreadsheet populated from a DataSource?
+How can I manually alter the headers of the columns in a Spreadsheet which is populated from a DataSource?
 
 ## Solution
 
-To achive the desired the first [`requestEnd`](https://docs.telerik.com/kendo-ui/api/javascript/data/datasource#events-requestEnd) event of the DataSource should be handled:
- 
+Handle the first [`requestEnd`](https://docs.telerik.com/kendo-ui/api/javascript/data/datasource#events-requestEnd) event of the DataSource.
+
 ```html
 <div id="spreadsheet" style="width: 100%"></div>
 
@@ -34,16 +34,16 @@ To achive the desired the first [`requestEnd`](https://docs.telerik.com/kendo-ui
   $(function() {
     var crudServiceBaseUrl = "https://demos.telerik.com/kendo-ui/service";
     var shouldPopulateHeader = true;
-	
+
     var dataSource = new kendo.data.DataSource({
       requestEnd: function (e) {
         setTimeout(function(e) {
           if(shouldPopulateHeader) {
             shouldPopulateHeader = false;
-			
+
             var spreadsheet = $("#spreadsheet").data("kendoSpreadsheet");
             var sheet = spreadsheet.activeSheet();
-            
+
             // Change the default headers for the first and the second column
             sheet.batch(function(){
               sheet.range("A1").value("SERVICE ID");
@@ -71,7 +71,7 @@ To achive the desired the first [`requestEnd`](https://docs.telerik.com/kendo-ui
         }
       }
     });
-	
+
     $("#spreadsheet").kendoSpreadsheet({
       columns: 20,
       rows: 100,
