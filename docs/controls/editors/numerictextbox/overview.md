@@ -122,7 +122,7 @@ Because of its complex rendering, you need additional implementation if you focu
 
 ### Value Precision
 
-The NumericTextBox uses a JavaScript [`Number`](http://ecma262-5.com/ELS5_HTML.htm#Section_8.5) object to keep its value which has a certain precision limitation. In general, the `Number` object persists its precision up to 16 digits. Numbers longer than 16 digits get converted to exponential numbers and lose their precision. Because the widget relies on a `Number` object, it gets the same precision limitation.
+The NumericTextBox uses a JavaScript `Number` object to keep its value which has a certain precision limitation. In general, the `Number` object persists its precision up to 16 digits. Numbers longer than 16 digits get converted to exponential numbers and lose their precision. Because the widget relies on a `Number` object, it gets the same precision limitation.
 
 This limitation comes from JavaScript itself and you cannot work around it in a feasible way. You are recommended to use an `<input>` element with server validation because some server languages can parse long numbers.
 

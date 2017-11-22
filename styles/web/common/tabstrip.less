@@ -51,7 +51,6 @@
     position: relative;
     border-style: solid;
     border-width: 1px 1px 0;
-    margin: 0 -1px 0 0;
     padding: 0;
     vertical-align: top;
 }
@@ -68,8 +67,13 @@
     padding-bottom: 1px;
 }
 
-.k-tabstrip-top .k-tabstrip-items .k-state-active,
-.k-panelbar .k-tabstrip-top .k-tabstrip-items .k-state-active {
+.k-tabstrip-top > .k-tabstrip-items .k-item,
+.k-panelbar .k-tabstrip-items .k-item {
+    margin: 0 -1px 0 0;
+}
+
+.k-tabstrip-top > .k-tabstrip-items .k-state-active,
+.k-panelbar .k-tabstrip-top > .k-tabstrip-items .k-state-active {
    border-bottom-width: 1px;
    margin-bottom: -2px;
    padding-bottom: 0px;
@@ -218,7 +222,7 @@
 .k-tabstrip-left > .k-tabstrip-items .k-state-active,
 .k-panelbar .k-tabstrip-left > .k-tabstrip-items .k-state-active
 {
-    margin-right: -2px;
+    margin-right: -1px;
     padding-right: 1px;
 }
 

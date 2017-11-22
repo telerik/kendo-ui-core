@@ -1,0 +1,7 @@
+# what's this?
+# - http://editorconfig.org
+
+[*.js]
+end_of_line = lf
+indent_style = space
+indent_size = 4

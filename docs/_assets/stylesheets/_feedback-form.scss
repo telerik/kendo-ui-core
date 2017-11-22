@@ -29,15 +29,17 @@
 
 #feedback-section.fixed #close-button {
     display: block;
+    height: 18px;
+    width: 18px;
 }
 
 #close-button img {
-    width: 24px;
-    height: 24px;
+    width: 18px;
+    height: 18px;
 }
 
 #feedback-section .side-title {
-    font-size: 20px;
+    font-size: 14px;
     margin-bottom: 0;
     margin-right: 15px;
     flex: 1;
@@ -45,14 +47,39 @@
 
 footer,
 #feedback-menu-container {
-    max-width: 930px;
+    margin-left: 18%;
     padding: 13px 4em 13px 0;
+    padding-left: 6em;
 }
 
-footer,
 #feedback-menu-container {
-    margin-left: 18%;
-    padding-left: 6em;
+    max-width: 930px;
+}
+
+@-webkit-keyframes hide-feedback-form-animation {
+    0%   { opacity: 1; }
+    100% { opacity: 0; height: 0; }
+}
+@-moz-keyframes hide-feedback-form-animation {
+    0%   { opacity: 1; }
+    100% { opacity: 0; height: 0; }
+}
+@-o-keyframes hide-feedback-form-animation {
+    0%   { opacity: 1; }
+    100% { opacity: 0; height: 0; }
+}
+@keyframes hide-feedback-form-animation {
+    0%   { opacity: 1; }
+    100% { opacity: 0; height: 0; }
+}
+
+.hide-feedback-form {
+    -webkit-animation: hide-feedback-form-animation 1s ease-out;
+    -moz-animation: hide-feedback-form-animation 1s ease-out;
+    -o-animation: hide-feedback-form-animation 1s ease-out;
+    animation: hide-feedback-form-animation 1s ease-out;
+    animation-fill-mode: forwards;
+    animation-delay: 2s;
 }
 
 @media (max-width: 1200px) {
@@ -75,7 +102,7 @@ footer,
 
 #helpful-buttons-container,
 #feedback-submitted-container {
-    font-size: 20px;
+    font-size: 14px;
     width: 100%;
     text-decoration: none;
     display: flex;

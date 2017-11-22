@@ -1149,6 +1149,20 @@ test("ComboBox does not bind on open if minLength & autoBind: false", function()
     ok(combobox.popup.visible());
 });
 
+test("ComboBox does not bind on open if minLength & autoBind: true", function() {
+    var combobox = new ComboBox(input, {
+        minLength: 3,
+        filter: "contains"
+    });
+
+    combobox.dataSource.bind("change", function() {
+        ok(false, "dataSource should not be read");
+    })
+    combobox.wrapper.find(".k-icon:last").click();
+
+    ok(combobox.popup.visible());
+});
+
 //no data template
 test("ComboBox builds a noDataTemplate", function() {
     var combobox = new ComboBox(input, {

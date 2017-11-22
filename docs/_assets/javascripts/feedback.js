@@ -78,8 +78,12 @@ $(document).ready(function () {
         }
     };
 
+    var hideFeedback = function () {
+        $("#feedback-container").hide();
+    };
+
     if (getCookieByName("yesNoFeedback")) {
-        toggleFeedbackButtons(false);
+        hideFeedback();
     } else {
         toggleFeedbackButtons(true);
     }
@@ -254,19 +258,20 @@ $(document).ready(function () {
         setCookieByName("yesNoFeedback", "Yes");
         toggleFeedbackButtons(false);
         Feedback.closeFeedback();
+        Feedback.hideFeedbackForm();
         Feedback.adjustNavigationPosition();
     });
     $("#noButton").click(function () {
         setCookieByName("yesNoFeedback", "No");
         toggleFeedbackButtons(false);
         Feedback.closeFeedback();
+        Feedback.hideFeedbackForm();
         Feedback.adjustNavigationPosition();
         win.center().open();
     });
     $("#additional-feedback-button").click(function () {
         win.center().open();
     });
-
 
     var windowHeight = $window.height();
     var headerHeight = $(".TK-Hat").outerHeight() + $("#page-header").outerHeight();
@@ -289,7 +294,7 @@ $(document).ready(function () {
 
     Feedback = $.extend(Feedback, {
 
-        init: function() {
+        init: function () {
 
             Feedback._events();
 
@@ -300,7 +305,7 @@ $(document).ready(function () {
 
                 showingFeedbackBar = true;
 
-                window.setTimeout(function() {
+                window.setTimeout(function () {
                     showingFeedbackBar = false;
                     Feedback.adjustFeedbackPoistion();
                     Feedback.adjustNavigationPosition();
@@ -311,12 +316,12 @@ $(document).ready(function () {
 
 
         // #region events
-        _events: function() {
+        _events: function () {
             $window.scroll(Feedback._window_scroll);
             $window.resize(Feedback._window_resize);
             $("#close-button").click(Feedback._button_click);
         },
-        _window_scroll: function() {
+        _window_scroll: function () {
             updateVariables();
 
             scrollFold = $window.scrollTop() + windowHeight;
@@ -324,14 +329,14 @@ $(document).ready(function () {
             Feedback.adjustFeedbackPoistion();
             Feedback.adjustNavigationPosition();
         },
-        _window_resize: function() {
+        _window_resize: function () {
             updateVariables();
 
             Feedback.adjustArticleHeight();
             Feedback.adjustFeedbackPoistion();
             Feedback.adjustNavigationPosition();
         },
-        _button_click: function() {
+        _button_click: function () {
             Feedback.closeFeedback();
             Feedback.adjustNavigationPosition();
         },
@@ -343,7 +348,7 @@ $(document).ready(function () {
             var bottom = 0;
 
             if (!window.matchMedia('(max-width: 1200px)').matches) {
-                bottom = Math.max(feedbackPinned ? $("#feedback-section").outerHeight() : 0, scrollFold - feedbackOffsetTop );
+                bottom = Math.max(feedbackPinned ? $("#feedback-section").outerHeight() : 0, scrollFold - feedbackOffsetTop);
             }
 
             $("#page-nav").css("bottom", bottom);
@@ -372,15 +377,18 @@ $(document).ready(function () {
             $("#feedback-section").addClass("fixed");
             $("#feedback-section-dummy").show();
         },
-        unpinFeedback: function Feedback_pinFeedback() {
+        unpinFeedback: function Feedback_unpinFeedback() {
             feedbackPinned = false;
             $("#feedback-section").removeClass("fixed");
             $("#feedback-section-dummy").hide();
         },
-        closeFeedback: function Feedback_pinFeedback() {
+        closeFeedback: function Feedback_closeFeedback() {
             shouldOverlayFeedback = false;
             setCookieByName("yesNoFeedbackClosed");
             Feedback.unpinFeedback();
+        },
+        hideFeedbackForm: function Feedback_hideFeedbackForm() {
+            $("#feedback-section").addClass("hide-feedback-form");
         }
         // #endregion
 
