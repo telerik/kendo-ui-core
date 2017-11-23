@@ -1291,4 +1291,20 @@ test("does not add k-combobox-clearable class if clearButton is turned off", fun
     ok(!combobox.wrapper.hasClass("k-combobox-clearable"));
 });
 
+test("_syncValueAndText is true value when syncValueAndText is true", function() {
+    var combobox = new ComboBox(input, {
+        syncValueAndText: true
+    });
+
+    ok(combobox._syncValueAndText());
+});
+
+test("_syncValueAndText is false value when syncValueAndText is false", function() {
+    var combobox = new ComboBox(input, {
+        syncValueAndText: true
+    });
+
+    ok(combobox._syncValueAndText());
+});
+
 })();

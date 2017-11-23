@@ -52,21 +52,21 @@ On the next screen, you are presented with the Model and Data Context options.
 
 1. Enter the Controller and View names.  
 
-		**Figure 4. The Grid options**
+	**Figure 4. The Grid options**
 
-		![Grid options](/helpers/grid/images/scaffolding/kendo_ui_grid1.png)
+	![Grid options](/helpers/grid/images/scaffolding/kendo_ui_grid1.png)
 
 1. The **Model Class** DropDownList contains all model types from the active project. In this example, you are going to list products in the Chart. Select the **Product** entity.
 
-		**Figure 5. The Model class**
+	**Figure 5. The Model class**
 
-		![Model Class](/helpers/grid/images/scaffolding/model_class.png)
+	![Model Class](/helpers/grid/images/scaffolding/model_class.png)
 
 1. From the **Data Context Class** DropDownList, select the **Entity Framework Data Model** class to be used. In this example, it is **NorthwindEntities**.  
 
-		**Figure 6. The Data Context class**
+	**Figure 6. The Data Context class**
 
-		![Data Context Class](/helpers/grid/images/scaffolding/data_context_class.png)
+	![Data Context Class](/helpers/grid/images/scaffolding/data_context_class.png)
 
 ### Use View Model Objects
 
@@ -85,9 +85,9 @@ On the next screen, you are presented with the Model and Data Context options.
 
 1. Select the **ProductViewModel** class from the **ViewModel Class** DropDownList.  
 
-		**Figure 7. The ViewModel class**
+	**Figure 7. The ViewModel class**
 
-		![ViewModel Class](/helpers/grid/images/scaffolding/view_model_class.png)
+	![ViewModel Class](/helpers/grid/images/scaffolding/view_model_class.png)
 
 > **Important**
 >
@@ -97,27 +97,27 @@ On the next screen, you are presented with the Model and Data Context options.
 
 1. Click the **Chart options** item on the left.  
 
-		**Figure 8. The options when setting the Chart functionalities**
+	**Figure 8. The options when setting the Chart functionalities**
 
-		![Grid options](/helpers/chart/images/scaffolding/kendo_ui_chart2.png)  
+	![Grid options](/helpers/chart/images/scaffolding/kendo_ui_chart2.png)  
 
-		This screen contains the Chart functionalities that you can configure before scaffolding:
-		* **Data Binding Type**&mdash;Remote or Local.
-		* **Title**&mdash;Define the `Title` of the Chart.   
-		* **Show Tooltip**&mdash;Show the tooltip.    
-		* **Show Legend**&mdash;Show a legend. The available options are `Bottom` and `Top`.
+	This screen contains the Chart functionalities that you can configure before scaffolding:
+	* **Data Binding Type**&mdash;Remote or Local.
+	* **Title**&mdash;Define the `Title` of the Chart.   
+	* **Show Tooltip**&mdash;Show the tooltip.    
+	* **Show Legend**&mdash;Show a legend. The available options are `Bottom` and `Top`.
 
-		**Figure 9. The legend options**
+	**Figure 9. The legend options**
 
-		![Legend options](/helpers/chart/images/scaffolding/legend.png)
+	![Legend options](/helpers/chart/images/scaffolding/legend.png)
 
-		* **Series Type**&mdash;Select the series type. Each series type shows different **Series Options** configuration.
+	* **Series Type**&mdash;Select the series type. Each series type shows different **Series Options** configuration.
 
-				**Figure 10. The series options**
+		**Figure 10. The series options**
 
-				![Series options](/helpers/chart/images/scaffolding/series_options_1.png)
+		![Series options](/helpers/chart/images/scaffolding/series_options_1.png)
 
-		* **Add More Series**&mdash;Add one additional configuration panel for a series.
+	* **Add More Series**&mdash;Add one additional configuration panel for a series.
 
 Each field marked with an asterisk `*` is mandatory and the rest of the fields are optional.
 

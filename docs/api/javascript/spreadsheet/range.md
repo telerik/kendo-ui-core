@@ -1177,7 +1177,7 @@ The `type` Can be set to "warning" or "reject". By default the type is "warning"
 
 The `comparerType` Can be set to "greaterThan", "lessThan", "between", "equalTo", "notEqualTo", "greaterThanOrEqualTo", "lessThanOrEqualTo", "notBetween" or "custom".
 
-The `dataType` Can be set to "date", "text", "number" or "custom".
+The `dataType` Can be set to "date", "text", "number", "list" or "custom".
 
 The `from` This key holds formula or value. Used as first or only compare value depending on specified comparer.
 

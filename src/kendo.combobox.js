@@ -782,6 +782,10 @@ var __meta__ = { // jshint ignore:line
             });
         },
 
+        _syncValueAndText: function () {
+            return this.options.syncValueAndText;
+        },
+
         _inputValue: function() {
             return this.text();
         },

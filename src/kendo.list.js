@@ -995,7 +995,9 @@ var __meta__ = { // jshint ignore:line
                 if (value === null) {
                     value = "";
                 }
-                element.value = value;
+                if(this._syncValueAndText()){
+                    element.value = value;
+                }
             }
         },
 
@@ -1024,6 +1026,10 @@ var __meta__ = { // jshint ignore:line
                     element.selectedIndex = idx;
                 }
             }
+        },
+
+        _syncValueAndText: function () {
+            return true;
         },
 
         _custom: function(value) {

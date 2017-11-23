@@ -100,7 +100,8 @@ var __meta__ = { // jshint ignore:line
                 })
                 .on("wheel" + NS, function(e) {
                     var scrollArea = $(this).find(".k-list").parent();
-                    if ((scrollArea.scrollTop() === 0 && e.originalEvent.deltaY < 0) ||
+
+                    if (scrollArea.length && (scrollArea.scrollTop() === 0 && e.originalEvent.deltaY < 0) ||
                         (scrollArea.scrollTop() === scrollArea.prop('scrollHeight') - scrollArea.prop('offsetHeight') && e.originalEvent.deltaY > 0)) {
                             e.preventDefault();
                     }

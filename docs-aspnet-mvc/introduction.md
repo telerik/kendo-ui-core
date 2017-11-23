@@ -29,7 +29,7 @@ Telerik UI for ASP.NET MVC supports:
 
 * [.NET Framework 3.5](https://www.microsoft.com/en-us/download/details.aspx?id=21) and later
 * [ASP.NET MVC 3](http://www.asp.net/mvc/mvc3) and later
-* [Visual Studio 2010](https://www.microsoft.com/en-us/download/details.aspx?id=23507) and later
+* Visual Studio 2010 and later
 * [IIS 5](https://www.microsoft.com/en-us/download/details.aspx?id=24843) and later
 * [C#](https://msdn.microsoft.com/en-us/library/aa288436(v=vs.71).aspx) / [VB.NET](http://www.tutorialspoint.com/vb.net/)
 * [SharePoint 2010](https://msdn.microsoft.com/en-us/library/office/dd776256(v=office.12).aspx) and later
