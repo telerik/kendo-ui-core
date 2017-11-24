@@ -591,19 +591,18 @@ body .k-datetimepicker .k-select
     border-radius: 4px;
     border-color: #C5C5C5;
     background-color: #FFF;
-    min-height: 2.04em;
     padding-right: (@grid-size + (@grid-size/4 + 2px));
 }
 
 .k-multiselect-wrap .k-input
 {
     background-color: transparent;
-    height: 1.31em;
-    line-height: 1.31em;
-    padding: 0.18em 0;
+    height: @input-height;
+    line-height: @input-height;
+    padding: 0.175em;
     text-indent: @input-indent;
     border: 0;
-    margin: 1px 0 0;
+    margin: 0;
     float: left;
 }
 
@@ -648,7 +647,7 @@ body .k-datetimepicker .k-select
         box-sizing: border-box;
         overflow: hidden;
         text-overflow: ellipsis;
-        height: (@input-height + .354em);
+        height: (@input-height + .35em);
     }
 }
 
@@ -708,6 +707,7 @@ body .k-datetimepicker .k-select
 
 .k-input
 {
+    font-size: inherit;
     padding: 0.25em 0;
 }
 
@@ -726,7 +726,7 @@ body .k-datetimepicker .k-select
 input.k-textbox,
 textarea.k-textbox
 {
-    padding: 2px .3em;
+    padding: 0.177em 0;
 }
 
 input.k-textbox

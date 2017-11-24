@@ -19,12 +19,14 @@ $(function () {
 	$("input").kendoNumericTextBox();
 
     //wire focus of all numerictextbox widgets on the page
-    $("input[type=text]").bind("focus", function () {
+    $("input[type=text]").on("focus", function () {
         var input = $(this);
             clearTimeout(input.data("selectTimeId")); //stop started time out if any
 
             var selectTimeId = setTimeout(function()  {
                 input.select();
+                // To make this work on iOS, too, replace the above line with the following one. Discussed in https://stackoverflow.com/q/3272089
+                // input[0].setSelectionRange(0, 9999);
             });
 
             input.data("selectTimeId", selectTimeId);

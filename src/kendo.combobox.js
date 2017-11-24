@@ -46,7 +46,8 @@ var __meta__ = { // jshint ignore:line
         STATE_ACCEPT = "accept",
         STATE_REBIND = "rebind",
         HOVEREVENTS = "mouseenter" + ns + " mouseleave" + ns,
-        proxy = $.proxy;
+        proxy = $.proxy,
+        newLineRegEx = /(\r\n|\n|\r)/gm;
 
     var ComboBox = Select.extend({
         init: function(element, options) {
@@ -667,8 +668,8 @@ var __meta__ = { // jshint ignore:line
             }
 
             dataItem = that.dataItem();
-
-            if (dataItem && that._text(dataItem) === text) {
+            
+            if (dataItem && that._text(dataItem).replace && that._text(dataItem).replace(newLineRegEx,"") === text) {
                 value = that._value(dataItem);
 
                 if (value === List.unifyType(that._old, typeof value)) {
@@ -979,7 +980,7 @@ var __meta__ = { // jshint ignore:line
                 if (that._prev !== value) {
                     that._prev = value;
 
-                    if (that.options.filter === "none") {
+                    if (that.options.filter === "none" && that.options.virtual) {
                         that.listView.select(-1);
                     }
 

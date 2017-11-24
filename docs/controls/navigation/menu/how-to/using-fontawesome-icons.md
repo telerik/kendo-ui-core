@@ -12,7 +12,7 @@ The example below demonstrates how to include custom [FontAwesome](http://fortaw
 ###### Example
 
 ```html
-    <link href="http://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
+    <link href="https://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
     <h3>Menu with font awesome icons</h3>
     <div id="menu"></div>
     <script>

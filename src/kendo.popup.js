@@ -99,11 +99,11 @@ var __meta__ = { // jshint ignore:line
                     that._hovered = true;
                 })
                 .on("wheel" + NS, function(e) {
-                    var scrollArea = $(this).find(".k-list").parent();
-
-                    if (scrollArea.length && (scrollArea.scrollTop() === 0 && e.originalEvent.deltaY < 0) ||
-                        (scrollArea.scrollTop() === scrollArea.prop('scrollHeight') - scrollArea.prop('offsetHeight') && e.originalEvent.deltaY > 0)) {
-                            e.preventDefault();
+                    var list = $(this).find(".k-list");
+                    var scrollArea = list.parent();
+                    if (list.length && list.is(":visible") && ((scrollArea.scrollTop() === 0 && e.originalEvent.deltaY < 0) ||
+                        (scrollArea.scrollTop() === scrollArea.prop('scrollHeight') - scrollArea.prop('offsetHeight') && e.originalEvent.deltaY > 0))) {
+                           e.preventDefault();
                     }
                 })
                 .on("mouseleave" + NS, function() {

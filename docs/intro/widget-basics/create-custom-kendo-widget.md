@@ -356,7 +356,84 @@ The demonstration below uses two widgets that are initialized. The first one tak
 
 ###### Example
 
-<iframe style="width: 100%; height: 300px" src="http://jsfiddle.net/burkeholland/N9DfB/embedded/result,js,html,css" allowfullscreen="allowfullscreen" frameborder="0"></iframe>
+```html
+   <div id="repeater"></div>
+
+    <div id="container">
+      <div data-role="repeater" data-source="dataSource" data-template="template"></div>
+    </div>
+
+    <script type="text/x-kendo-template" id="template">
+    <div style="float: left; color: salmon; margin-right: 10px"><h1>#= data.ProductName #</h1></div>
+    </script>
+
+    <script>
+      (function() {
+        var kendo = window.kendo,
+            ui = kendo.ui,
+            Widget = ui.Widget,
+
+            CHANGE = "change";
+
+        var Repeater = Widget.extend({
+          init: function(element, options) {
+            var that = this;
+
+            kendo.ui.Widget.fn.init.call(that, element, options);
+            that.template = kendo.template(that.options.template || "<p><strong>#= data #</strong></p>");
+
+            that._dataSource();
+          },
+          options: {
+            name: "Repeater",
+            autoBind: true,
+            template: ""
+          },
+          refresh: function() {
+            var that = this,
+                view = that.dataSource.view(),
+                html = kendo.render(that.template, view);
+
+            that.element.html(html);
+          },
+          _dataSource: function() {
+            var that = this;
+            // returns the datasource OR creates one if using array or configuration object
+
+            that.dataSource = kendo.data.DataSource.create(that.options.dataSource);
+
+            // bind to the change event to refresh the widget
+            that.dataSource.bind(CHANGE, function() {
+              that.refresh();
+            });
+
+            if (that.options.autoBind) {
+              that.dataSource.fetch();
+            }
+          }
+        });
+
+        ui.plugin(Repeater);
+
+      })(jQuery);
+
+
+
+      var dataSource = new kendo.data.DataSource({
+        type: "odata",
+        transport: {
+          read: "https://demos.telerik.com/kendo-ui/service/Northwind.svc/Products"
+        }
+      });
+
+      kendo.bind($("#container"));
+
+      $("#repeater").kendoRepeater({
+        dataSource: [ "item1", "item2", "item3" ]
+      });
+    </script>
+
+```
 
 ## Use MVVM
 
@@ -508,7 +585,7 @@ Now, you have a fully enabled MVVM in your widget. Define the widget as demonstr
 
 ###### Example
 
-    <div data-role="repeater" data-bind="source: dataSource">
+    <div data-role="repeater" data-bind="source: dataSource"></div>
     <script>
         var viewModel = kendo.observable({
             dataSource:  new kendo.data.DataSource({
@@ -528,11 +605,9 @@ In the complete example below note that when you add an item to the DataSource, 
 ###### Example
 
 ```html
-<label for="newItem">Enter A New Item</input>
+        <label for="newItem">Enter A New Item</label>
         <input id="newItem" data-bind="value: newItem" class="k-input" />
         <button class="k-button" data-bind="click: add">Add Item</button>
-
-        <div id="repeater"></div>
 
         <div data-role="repeater" data-bind="source: items" data-template="template"></div>
 
