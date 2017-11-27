@@ -568,6 +568,7 @@ var __meta__ = { // jshint ignore:line
                 return oldValue;
             }
 
+            that.persistTagList = false;
             that.requireValueMapper(that.options, value);
 
             value = that._normalizeValues(value);
@@ -577,7 +578,6 @@ var __meta__ = { // jshint ignore:line
             }
 
             if (clearFilters) {
-                that.persistTagList = false;
                 that._clearFilter();
             }
 
@@ -585,7 +585,6 @@ var __meta__ = { // jshint ignore:line
             that._old = listView.value(); //get a new array reference
 
             if (!clearFilters) {
-                that.persistTagList = false;
                 that._fetchData();
             }
         },

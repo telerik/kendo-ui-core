@@ -93,6 +93,35 @@ Load a file from the file system and use it to populate the Spreadsheet widget. 
 )
 ```
 
+### Load Data Using BindTo Model and Spreadsheet document model
+
+Load data using BindTo method and Spreadsheet document model.
+
+###### Example
+
+```tab-cs
+	public class HomeController : Controller
+    {   
+        public ActionResult Index()
+        {            
+            var document = new Telerik.Windows.Documents.Spreadsheet.Model.Workbook();
+            var worksheet = document.Worksheets.Add();
+            worksheet.Cells[0, 0].SetValue("1.23");
+            worksheet.Name = "Worksheet 1";
+
+            return View(Telerik.Web.Spreadsheet.Workbook.FromDocument(document));
+        }
+    }
+```
+```tab-cshtml
+@model Telerik.Web.Spreadsheet.Workbook
+
+@(Html.Kendo().Spreadsheet()
+    .Name("spreadsheet")
+    .BindTo(Model)
+);
+```
+
 ### Save Workbook to External File
 
 Post a Workbook to a controller and save it as a local file. The supported file extensions are `.xlsx`, `.csv`, `.txt`, `.pdf`, and `.json`.

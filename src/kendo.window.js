@@ -877,12 +877,13 @@
                     hideOptions  = this._animationOptions("close"),
                     doc = $(document);
 
-                if (wrapper.is(VISIBLE) && !that.trigger(CLOSE, { userTriggered: !systemTriggered })) {
-                    if (that._closing) {
-                        return;
-                    }
+                if (that._closing) {
+                    return;
+                }
 
-                    that._closing = true;
+                that._closing = true;
+
+                if (wrapper.is(VISIBLE) && !that.trigger(CLOSE, { userTriggered: !systemTriggered })) {
                     options.visible = false;
 
                     $(KWINDOW).each(function(i, element) {

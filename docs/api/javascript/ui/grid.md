@@ -1105,21 +1105,21 @@ Specifies the default operator that will be used for the cell filtering.
               columns: [
                 {
                     field: "name",
-                    type: "string",
                     filterable: {
                         cell: {
                             operator: "neq"
                         }
                     }
                 },
-                { field: "age", type: "number" } ],
+                { field: "age" } ],
             filterable: { mode: "row" },
             dataSource: {
             	data: [ { name: "Jane", age: 30 }, { name: "John", age: 33 }],
               schema:{
               	model:{
                   	fields: {
-                      	age: { type: "number" }
+                      	age: { type: "number" },
+                        name: {type: "string"}
                       }
                   }
               }
