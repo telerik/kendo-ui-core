@@ -159,10 +159,10 @@ fonts in fonts/
    <li><span class="k-icon k-i-undo"></span> .k-i-undo</li>
    <li><span class="k-icon k-i-redo"></span> .k-i-redo</li>
    <li><span class="k-icon k-i-reset"></span> .k-i-reset</li>
-   <li><span class="k-icon k-i-reload"></span> .k-i-reload<br /> .k-i-refresh</li>
+   <li><span class="k-icon k-i-reload"></span> .k-i-reload<br /> .k-i-refresh<br /> .k-i-recurrence</li>
    <li><span class="k-icon k-i-non-recurrence"></span> .k-i-non-recurrence</li>
    <li><span class="k-icon k-i-reset-sm"></span> .k-i-reset-sm</li>
-   <li><span class="k-icon k-i-reload-sm"></span> .k-i-reload-sm<br /> .k-i-refresh-sm</li>
+   <li><span class="k-icon k-i-reload-sm"></span> .k-i-reload-sm<br /> .k-i-refresh-sm<br /> .k-i-recurrence-sm</li>
    <li><span class="k-icon k-i-clock"></span> .k-i-clock</li>
    <li><span class="k-icon k-i-calendar"></span> .k-i-calendar</li>
    <li><span class="k-icon k-i-save"></span> .k-i-save<br /> .k-i-floppy</li>
@@ -181,15 +181,15 @@ fonts in fonts/
    <li><span class="k-icon k-i-cancel-outline"></span> .k-i-cancel-outline</li>
    <li><span class="k-icon k-i-cancel-circle"></span> .k-i-cancel-circle</li>
    <li><span class="k-icon k-i-check"></span> .k-i-check<br /> .k-i-checkmark</li>
-   <li><span class="k-icon k-i-check-outline"></span> .k-i-check-outline<br /> .k-i-checkmark-outline</li>
+   <li><span class="k-icon k-i-check-outline"></span> .k-i-check-outline<br /> .k-i-checkmark-outline<br /> .k-i-success</li>
    <li><span class="k-icon k-i-check-circle"></span> .k-i-check-circle<br /> .k-i-checkmark-circle</li>
    <li><span class="k-icon k-i-close"></span> .k-i-close<br /> .k-i-x</li>
-   <li><span class="k-icon k-i-close-outline"></span> .k-i-close-outline<br /> .k-i-x-outline</li>
+   <li><span class="k-icon k-i-close-outline"></span> .k-i-close-outline<br /> .k-i-x-outline<br /> .k-i-error</li>
    <li><span class="k-icon k-i-close-circle"></span> .k-i-close-circle<br /> .k-i-x-circle</li>
    <li><span class="k-icon k-i-plus"></span> .k-i-plus</li>
    <li><span class="k-icon k-i-plus-outline"></span> .k-i-plus-outline</li>
    <li><span class="k-icon k-i-plus-circle"></span> .k-i-plus-circle</li>
-   <li><span class="k-icon k-i-minus"></span> .k-i-minus</li>
+   <li><span class="k-icon k-i-minus"></span> .k-i-minus<br /> .k-i-kpi-trend-equal</li>
    <li><span class="k-icon k-i-minus-outline"></span> .k-i-minus-outline</li>
    <li><span class="k-icon k-i-minus-circle"></span> .k-i-minus-circle</li>
    <li><span class="k-icon k-i-sort-asc"></span> .k-i-sort-asc</li>
@@ -228,6 +228,9 @@ fonts in fonts/
    <li><span class="k-icon k-i-connector"></span> .k-i-connector</li>
    <li><span class="k-icon k-i-plus-sm"></span> .k-i-plus-sm</li>
    <li><span class="k-icon k-i-minus-sm"></span> .k-i-minus-sm</li>
+   <li><span class="k-icon k-i-kpi-status-deny"></span> .k-i-kpi-status-deny</li>
+   <li><span class="k-icon k-i-kpi-status-hold"></span> .k-i-kpi-status-hold</li>
+   <li><span class="k-icon k-i-kpi-status-open"></span> .k-i-kpi-status-open</li>
 </ul>
 
 ### Alerts and Notifications
@@ -236,7 +239,7 @@ fonts in fonts/
     <li><span class="k-icon k-i-notification"></span> .k-i-notification<br /> .k-i-bell</li>
     <li><span class="k-icon k-i-information"></span> .k-i-information<br /> .k-i-info</li>
     <li><span class="k-icon k-i-question"></span> .k-i-question<br /> .k-i-help</li>
-    <li><span class="k-icon k-i-warning"></span> .k-i-warning<br /> .k-i-exception<br /> .k-i-error</li>
+    <li><span class="k-icon k-i-warning"></span> .k-i-warning<br /> .k-i-exception</li>
 </ul>
 
 ### Editing
@@ -494,9 +497,9 @@ fonts in fonts/
     <li><span class="k-icon k-i-arrow-45-down-right"></span> .k-i-arrow-45-down-right<br /> .k-i-collapse-se<br /> .k-i-resize-se</li>
     <li><span class="k-icon k-i-arrow-45-down-left"></span> .k-i-arrow-45-down-left<br /> .k-i-collapse-sw<br /> .k-i-resize-sw</li>
     <li><span class="k-icon k-i-arrow-45-up-left"></span> .k-i-arrow-45-up-left<br />  .k-i-collapse-nw<br />  .k-i-resize-new</li>
-    <li><span class="k-icon k-i-arrow-60-up"></span> .k-i-arrow-60-up</li>
+    <li><span class="k-icon k-i-arrow-60-up"></span> .k-i-arrow-60-up<br /> .k-i-kpi-trend-increase</li>
     <li><span class="k-icon k-i-arrow-60-right"></span> .k-i-arrow-60-right</li>
-    <li><span class="k-icon k-i-arrow-60-down"></span> .k-i-arrow-60-down</li>
+    <li><span class="k-icon k-i-arrow-60-down"></span> .k-i-arrow-60-down<br /> .k-i-kpi-trend-decrease</li>
     <li><span class="k-icon k-i-arrow-60-left"></span> .k-i-arrow-60-left</li>
     <li><span class="k-icon k-i-arrow-end-up"></span> .k-i-arrow-end-up</li>
     <li><span class="k-icon k-i-arrow-end-right"></span> .k-i-arrow-end-right</li>
@@ -504,11 +507,11 @@ fonts in fonts/
     <li><span class="k-icon k-i-arrow-end-left"></span> .k-i-arrow-end-left</li>
     <li><span class="k-icon k-i-arrow-double-60-up"></span> .k-i-arrow-double-60-up</li>
     <li><span class="k-icon k-i-arrow-seek-up"></span> .k-i-arrow-seek-up</li>
-    <li><span class="k-icon k-i-arrow-double-60-right"></span> .k-i-arrow-double-60-right</li>
+    <li><span class="k-icon k-i-arrow-double-60-right"></span> .k-i-arrow-double-60-right<br /> .k-i-forward-sm</li>
     <li><span class="k-icon k-i-arrow-seek-right"></span> .k-i-arrow-seek-right</li>
     <li><span class="k-icon k-i-arrow-double-60-down"></span> .k-i-arrow-double-60-down</li>
     <li><span class="k-icon k-i-arrow-seek-down"></span> .k-i-arrow-seek-down</li>
-    <li><span class="k-icon k-i-arrow-double-60-left"></span> .k-i-arrow-double-60-left</li>
+    <li><span class="k-icon k-i-arrow-double-60-left"></span> .k-i-arrow-double-60-left<br /> .k-i-rewind-sm</li>
     <li><span class="k-icon k-i-arrows-kpi"></span> .k-i-arrows-kpi<br /> .k-i-kpi</li>
     <li><span class="k-icon k-i-arrows-no-change"></span> .k-i-arrows-no-change</li>
     <li><span class="k-icon k-i-arrow-overflow-down"></span> .k-i-arrow-overflow-down</li>

@@ -99,7 +99,7 @@ var __meta__ = { // jshint ignore:line
                     that._hovered = true;
                 })
                 .on("wheel" + NS, function(e) {
-                    var list = $(this).find(".k-list");
+                    var list = $(e.target).find(".k-list");
                     var scrollArea = list.parent();
                     if (list.length && list.is(":visible") && ((scrollArea.scrollTop() === 0 && e.originalEvent.deltaY < 0) ||
                         (scrollArea.scrollTop() === scrollArea.prop('scrollHeight') - scrollArea.prop('offsetHeight') && e.originalEvent.deltaY > 0))) {

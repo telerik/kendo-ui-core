@@ -995,9 +995,7 @@ var __meta__ = { // jshint ignore:line
                 if (value === null) {
                     value = "";
                 }
-                if(this._syncValueAndText()){
                     element.value = value;
-                }
             }
         },
 
@@ -1230,7 +1228,9 @@ var __meta__ = { // jshint ignore:line
 
                     that._select(current);
                 } else if (that.input) {
-                    that._accessor(that.input.val());
+                    if(that._syncValueAndText() || that._isSelect){
+                        that._accessor(that.input.val());
+                    }
                     that.listView.value(that.input.val());
                 }
 
