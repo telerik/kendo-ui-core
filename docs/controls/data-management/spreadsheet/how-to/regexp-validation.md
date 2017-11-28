@@ -17,7 +17,7 @@ To work around this issue, use a `custom` validation type that allows you to pas
 <script>
  // Define a REGEXP_MATCH function that returns true if a string
  // matches a given pattern (regexp).
- kendo.spreadsheet.defineFunction("REGEXP_MATCH", function(str, pattern, s){
+ kendo.spreadsheet.defineFunction("REGEXP_MATCH", function(str, pattern, flags){
      var rx;
      try {
          rx = flags ? new RegExp(pattern, flags) : new RegExp(pattern);
