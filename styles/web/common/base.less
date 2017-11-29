@@ -463,7 +463,7 @@ div.k-window-content
     background-clip: border-box;
 }
 
-@checkbox-tick-icon-content: "\2713";
+@checkbox-tick-icon-content: "\e118";
 @checkbox-border-width: 1px;
 @checkbox-size: 14px;
 @checkbox-check-size: @checkbox-size;
@@ -500,6 +500,7 @@ input.k-checkbox,
 }
 
 .k-checkbox-label:before {
+  font: @checkbox-size "WebComponentsIcons", monospace;
   content: "";
   position: absolute;
   top: 0;

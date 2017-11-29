@@ -679,6 +679,10 @@
                     return that;
                 }
 
+                if(that.options.pinned && !that._isPinned) {
+                    that.pin();
+                }
+
                 if (!that.options.pinned) {
                     scrollTop = documentWindow.scrollTop();
                     scrollLeft = documentWindow.scrollLeft();
@@ -1212,7 +1216,6 @@
 
                     that._isPinned = true;
                     that.options.pinned = true;
-                    that.options.draggable = false;
                 }
             },
 
@@ -1229,7 +1232,6 @@
 
                     that._isPinned = false;
                     that.options.pinned = false;
-                    that.options.draggable = true;
                 }
             },
 

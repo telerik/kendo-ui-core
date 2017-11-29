@@ -52,7 +52,7 @@ To align the Popup to a specific element, use the `anchor` option. The Popup ope
 
 ###### Example
 
-  <style>
+	<style>
       .content {
         padding: 10px;
         color: #787878;
@@ -75,8 +75,9 @@ To align the Popup to a specific element, use the `anchor` option. The Popup ope
         width: 100px;
         height: 70px;
       }
-  </style>
-    <div class="anchor content">Anchor</div><button> Open/Close </button>
+	</style>
+    <div class="anchor content">Anchor</div>
+	<button> Open/Close </button>
     <div class="popup content" id="popup">
       <ul>
         <li>Item 1</li>

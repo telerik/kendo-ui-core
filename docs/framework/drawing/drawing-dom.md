@@ -401,19 +401,24 @@ The example below uses an absolute positioning to move the container off the scr
 ###### Example
 
     <style>
-      #content {
+      #export-container {
         position: absolute;
         width: 800px;
         left: -10000px;
         top: 0;
       }
     </style>
+    <div id="export-container">
+        <div id="content">
+            Lorem ipsum dolor sit amet, ad dolores conceptam eos, et his quodsi blandit. Quas sanctus omittam eos no, alia laoreet oportere eos no. Ex eum munere tritani atomorum, id natum assentior vis. Ad vitae prompta omnesque nam, nonumy sapientem principes cu est. Usu molestie vivendum ut, reque tation primis in sit, cum apeirian iudicabit te. Ad atqui luptatum pertinacia est.
+        </div>
+    </div>
     <script>
-        drawing.drawDOM("#content", {
+        kendo.drawing.drawDOM("#content", {
           paperSize: "A4",
           margin: "2cm"
         }).then(function(group){
-          drawing.pdf.saveAs(group, "filename.pdf");
+          kendo.drawing.pdf.saveAs(group, "filename.pdf");
         });
     </script>
 

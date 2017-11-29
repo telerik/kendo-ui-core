@@ -474,6 +474,17 @@
         equal(dialog.wrapper.css("position"), "fixed");
     });
 
+    test("center method should pin if pinned is enabled and element is hidden", 2, function() {
+        var dialog = createWindow({
+            pinned: true,
+            visible: false
+        }, $("<div class='wnd' style='display: none;'></div>").appendTo(QUnit.fixture));
+
+        notEqual(dialog.wrapper.css("position"), "fixed");
+        dialog.center();
+        equal(dialog.wrapper.css("position"), "fixed");
+    });
+
     test("creating window with an int zero top position applies a top style", function() {
         var dialog = createWindow({
             position: {
