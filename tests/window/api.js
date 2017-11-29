@@ -534,6 +534,18 @@
         ok(!dialog.options.visible);
     });
 
+    test("pin() does not affect draggable", function() {
+        var dialog = createWindow({
+            visible: true,
+            animation: false,
+            draggable: true
+        });
+
+        dialog.pin();
+
+        equal(dialog.options.draggable, true);
+    });
+
     test("pin() sets position:fixed style to wrapper", function() {
         var dialog = createWindow({
             visible: true,
@@ -589,6 +601,20 @@
 
         spacerDiv.remove();
     });
+
+    test("unpin() does not affect draggable", function() {
+        var dialog = createWindow({
+            visible: true,
+            animation: false,
+            draggable: true,
+            pinned: true
+        });
+
+        dialog.unpin();
+
+        equal(dialog.options.draggable, true);
+    });
+
 
     test("unpin() removes position:fixed style from wrapper", function() {
         var dialog = createWindow({

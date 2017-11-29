@@ -34,8 +34,6 @@ Create a `scrollToHour` method that:
     <div ng-controller="MyCtrl">
         <button class="k-button" ng-click="scrollToHour(22)">Scroll to 10 PM</button>
         <div kendo-scheduler k-options="schedulerOptions">
-            <span k-event-template class='custom-event'>{{dataItem.title}}</span>
-            <div k-all-day-event-template class='custom-all-day-event'>{{dataItem.title}}</div>
         </div>
     </div>
 </div>
