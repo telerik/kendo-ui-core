@@ -160,8 +160,12 @@ gulp.task("custom", function() {
         });
     }
 
+    if (files.indexOf(',') !== -1) {
+        files = `{${files}}`;
+    }
+
     var included = [];
-    var src = gulp.src(`src/kendo.{${files}}.js`)
+    var src = gulp.src(`src/kendo.${files}.js`)
                 .pipe(gatherAmd.gatherCustom())
                 .pipe(filter(function(file) {
                     if (included.indexOf(file.path) === -1) {
