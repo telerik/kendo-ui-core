@@ -32,7 +32,7 @@ The following example demonstrates how use the [`filter`](/api/javascript/data/d
                             catalog: "Adventure Works DW 2008R2",
                             cube: "Adventure Works"
                         },
-                        read: "http://demos.telerik.com/olap/msmdpump.dll"
+                        read: "https://demos.telerik.com/olap/msmdpump.dll"
                     },
                     schema: {
                         type: "xmla"

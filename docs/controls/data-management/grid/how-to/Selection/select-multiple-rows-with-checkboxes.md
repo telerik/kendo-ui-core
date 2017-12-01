@@ -41,12 +41,26 @@ The following example demonstrates how to select multiple rows by using the chec
           { field: "foo" },
           { field: "bar" }
         ],
-        dataBound: function () {
-          $(".checkbox").bind("change", function (e) {
+        dataBound: function (e) {
+          $(".checkbox").bind("click", function (e) {
+            e.stopPropagation();
             $(e.target).closest("tr").toggleClass("k-state-selected");
           });
+          
+          var rows = e.sender.element.find("tr");
+          rows.each(function(e){
+            $(this).children().first().on("click", onFirstTDClick);
+          })
         }
-      })
+      });
+      
+      function onFirstTDClick(e){
+        e.stopPropagation();
+        var tr = $(e.target).closest("tr");
+
+        tr.find('[type=checkbox]').prop('checked', !tr.hasClass("k-state-selected"));
+        tr.toggleClass("k-state-selected");
+      }
     </script>
 ```
 

@@ -13,7 +13,7 @@ The following example demonstrates how to use the MultiSelect as a column filter
 ###### Example
 
 ```html
-    <script src="http://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.7.0/underscore-min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.7.0/underscore-min.js"></script>
     <div id="grid"></div>
     <script>
       var data = [

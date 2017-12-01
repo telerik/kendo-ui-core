@@ -49,7 +49,7 @@ The following example attaches the event handlers within the `dataBound` event o
 					dataSource: {
 						type: "odata",
 						transport: {
-							read: "http://demos.telerik.com/kendo-ui/service/Northwind.svc/Orders"
+							read: "https://demos.telerik.com/kendo-ui/service/Northwind.svc/Orders"
 						},
 						schema: {
 							model: {

@@ -250,9 +250,9 @@ The directive will update the `birthday` variable with the selected `Date` objec
 
 ### The k-value-primitive Attribute
 
-As of the Kendo UI Q3 2014 (2014.3.1119) release, the `k-value-primitve` attribute has been introduced for the DropDownList, ComboBox, MultiSelect, and AutoComplete widgets.
+As of the Kendo UI Q3 2014 (2014.3.1119) release, the `k-value-primitive` attribute has been introduced for the DropDownList, ComboBox, MultiSelect, and AutoComplete widgets.
 
-The `k-value-primitve` option enables you to set the widget to either use primitive or object values. It works in a similar way as the `data-value-primitive` option in the [MVVM value binding]({% slug valuebinding_mvvm_kendoui %}#use-the-value-binding-with-a-select-widget-to-update-the-view-model-field-with-the-value-field-when-the-initial-value-is-null). By using this option you can always apply the `k-ng-model` attribute no matter if you are using primitive or non-primitive values. By default, the attribute is set to `false`.
+The `k-value-primitive` option enables you to set the widget to either use primitive or object values. It works in a similar way as the `data-value-primitive` option in the [MVVM value binding]({% slug valuebinding_mvvm_kendoui %}#use-the-value-binding-with-a-select-widget-to-update-the-view-model-field-with-the-value-field-when-the-initial-value-is-null). By using this option you can always apply the `k-ng-model` attribute no matter if you are using primitive or non-primitive values. By default, the attribute is set to `false`.
 
 #### Setting to false
 
