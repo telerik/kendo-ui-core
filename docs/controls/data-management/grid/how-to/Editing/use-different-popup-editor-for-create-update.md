@@ -46,6 +46,7 @@ The following example demonstrates how to use different popup editors in a Grid 
               dataValueField: "CategoryID",
               change: function(){
                 e.model.Category.CategoryName=this.text();
+                e.model.ProductID = e.sender.dataSource.data().length;
               },
               dataSource: {
                 type: "odata",
