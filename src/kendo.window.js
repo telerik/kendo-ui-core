@@ -810,7 +810,7 @@
 
                         overlay.show();
 
-                        $(window).on("focus", function() {
+                        $(window).on("focus"+ NS, function() {
                             if (contentElement.data("isFront")) {
                                 that.element.focus();
                             }
@@ -1377,6 +1377,7 @@
                     .find(".k-resize-handle,.k-window-titlebar").off(NS);
 
                 $(window).off("resize" + NS + this._marker);
+                $(window).off("focus"+ NS);
 
                 clearTimeout(this._loadingIconTimeout);
 

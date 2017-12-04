@@ -177,7 +177,7 @@ The `ToDataSourceResult` method uses the `DataSourceRequest` parameter and LINQ 
 
 > **Important**
 >
-> If your data is `IQueryable<T>` returned by a LINQ-enabled provider&Mdash;Entity Framework, LINQ to SQL, Telerik OpenAccess, NHibernate or other&mdash;the LINQ expressions, created by the `ToDataSourceResult` method, are converted to SQL and executed by the database server.
+> If your data is `IQueryable<T>` returned by a LINQ-enabled provider&mdash;Entity Framework, LINQ to SQL, Telerik OpenAccess, NHibernate or other&mdash;the LINQ expressions, created by the `ToDataSourceResult` method, are converted to SQL and executed by the database server.
 
 ## Common Scenarios
 
