@@ -25,7 +25,7 @@ The following example demonstrates how to update the value of the NumericTextBox
             </div>
             <div>
                 <h4>Result</h4>
-                Value: {{ value }}
+                Value: {% raw %}{{ value }}{% endraw %}
             </div>
         </div>
         <script>
