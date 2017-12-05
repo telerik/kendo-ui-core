@@ -10,6 +10,7 @@ component: combobox
 ---
 
 ## Environment
+
 <table>
  <tr>
   <td>Product</td>
@@ -20,13 +21,13 @@ component: combobox
 
 ## Description
 
-How can we use subscript indicators in the ComboBox widget?
+How can I use subscript indicators in the ComboBox widget?
 
 ## Solution
 
-* Provide a new jQuery instance method by extending the jQuery prototype ($.fn) object.
-* Check for `<sup>` tags in the input string, parse the group content and replace it with the corresponding subscript character.
-* Transform the input in the `change event` of the ComboBox.
+1. Provide a new jQuery instance method by extending the jQuery prototype (`$.fn`) object.
+1. Check for `<sup>` tags in the input string, parse the group content, and replace it with the corresponding subscript character.
+1. Transform the input in the `change` event of the ComboBox.
 
 ```html
 <div id="example">

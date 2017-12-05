@@ -1,8 +1,8 @@
 ---
-title: Custom Insert Symbol Tool for the Editor
-description: An example on how to add a custom insert symbol tool to the Kendo UI Editor.
+title: Implement Custom InsertSymbol Tool for Editor
+description: An example on how to add a custom insert-symbol tool to the Kendo UI Editor.
 type: how-to
-page_title: Add a custom insert symbol tool | Kendo UI Editor
+page_title: Add a Custom InsertSymbol Tool | Kendo UI Editor
 slug: editor-custom-insert-symbol-tool
 tags: editor, custom, tool, insert, symbol
 ticketid: 1141847
@@ -38,7 +38,8 @@ How can I add a custom `InsertSymbol` tool to the Editor?
 ## Solution
 
 1. Set a template to the custom tool and initialize a DropDownList in it.
-1. In the `change` event handler of the DropDownList call the `exec` API method of the Editor and execute the `insertHtml` command. Pass the selected symbol in the DropDownList to the method. 
+1. In the `change` event handler of the DropDownList, call the `exec` API method of the Editor and execute the `insertHtml` command.
+1. Pass the selected symbol to the method in the DropDownList.
 
 ```html
 	<textarea id="editor" rows="10" cols="30" style="width:100%;height:400px">

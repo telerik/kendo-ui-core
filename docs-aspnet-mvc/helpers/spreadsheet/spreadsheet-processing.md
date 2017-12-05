@@ -93,9 +93,9 @@ Load a file from the file system and use it to populate the Spreadsheet widget. 
 )
 ```
 
-### Load Data Using BindTo Model and Spreadsheet document model
+### Load Data Using BindTo Model and Spreadsheet Document Model
 
-Load data using BindTo method and Spreadsheet document model.
+Load the data by using the `BindTo` method and the Spreadsheet document model.
 
 ###### Example
 

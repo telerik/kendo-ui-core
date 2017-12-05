@@ -1,8 +1,8 @@
 ---
-title: Show Gantt Task Progress Handle when Using Task Template 
-description: An example on how to display progress drag handle for the Kendo UI Gantt tasks when a taskTemplate is set.
+title: Show Gantt Task Progress Handle When Using Task Template
+description: An example on how to display a progress drag handle for the Kendo UI Gantt tasks when a taskTemplate is set.
 type: how-to
-page_title: Display task progress drag handle when taskTemplate is used | Kendo UI Gantt
+page_title: Display Task Progress Drag Handle When taskTemplate Is Used | Kendo UI Gantt
 slug: gantt-task-progress-drag-handle
 tags: gantt, task, progress, drag, handle, template
 ticketid: 1107725
@@ -33,48 +33,48 @@ component: gantt
 
 ## Description
 
-How can I display a task progress drag handle when I have set a taskTemplate for the Gantt?
+How can I display a task progress drag handle when I set a `taskTemplate` for the Gantt?
 
 ## Solution
 
 For the full implementation of the approach, refer to [this Dojo example](http://dojo.telerik.com/OmONA).
 
-1. Add a div with class `progress` in the template, in order to show the task progress.  
+1. Show the task progress by adding a `div` with the `progress` class in the template.  
 
-```html
-	<script id="task-template" type="text/x-kendo-template">
-		# if (resources[0]) { #
-		<div class="template" style="background-color: #= resources[0].color #;">
-			<img class="resource-img" src="../content/web/gantt/resources/#:resources[0].id#.jpg" alt="#: resources[0].id #" />
-			<div class="wrapper">
-				<strong class="title">#= title # </strong>
-				<span class="resource">#= resources[0].name #</span>
-			</div>
-			<div class="progress" style="width:#= (100 * parseFloat(percentComplete)) #%"> </div>
-		</div>
-		# } else { #
-		<div class="template">
-			<div class="wrapper">
-				<strong class="title">#= title # </strong>
-				<span class="resource">no resource assigned</span>
-			</div>
-			<div class="progress" style="width:#= (100 * parseFloat(percentComplete)) #%"> </div>
-		</div>
-		# } #
-	</script>
-```
+    ```html
+    	<script id="task-template" type="text/x-kendo-template">
+    		# if (resources[0]) { #
+    		<div class="template" style="background-color: #= resources[0].color #;">
+    			<img class="resource-img" src="../content/web/gantt/resources/#:resources[0].id#.jpg" alt="#: resources[0].id #" />
+    			<div class="wrapper">
+    				<strong class="title">#= title # </strong>
+    				<span class="resource">#= resources[0].name #</span>
+    			</div>
+    			<div class="progress" style="width:#= (100 * parseFloat(percentComplete)) #%"> </div>
+    		</div>
+    		# } else { #
+    		<div class="template">
+    			<div class="wrapper">
+    				<strong class="title">#= title # </strong>
+    				<span class="resource">no resource assigned</span>
+    			</div>
+    			<div class="progress" style="width:#= (100 * parseFloat(percentComplete)) #%"> </div>
+    		</div>
+    		# } #
+    	</script>
+    ```
 
-2. In the dataBound event handler of the Gantt append a div with class `k-task-draghandle` to the element, which wraps the task.
+2. In the `dataBound` event handler of the Gantt, append a `div` with the `k-task-draghandle` class to the element which wraps the task.
 
-```html
-	<script>
-		var handleIsAppended = false;
-		
-		function onDataBound(e) {
-			if(!handleIsAppended) {
-				$(".k-task-wrap").append("<div class='k-task-draghandle'></div>");
-				handleIsAppended = true;
-			}
-		}
-	</script>
-```
+    ```html
+    	<script>
+    		var handleIsAppended = false;
+
+    		function onDataBound(e) {
+    			if(!handleIsAppended) {
+    				$(".k-task-wrap").append("<div class='k-task-draghandle'></div>");
+    				handleIsAppended = true;
+    			}
+    		}
+    	</script>
+    ```

@@ -1,6 +1,6 @@
 ---
-title: Prevent Specific Columns Reorder
-description: An example on how to prevent reordering for specific columns in the Kendo UI Grid. 
+title: Prevent Specific Column Reordering in Grid
+description: An example on how to prevent the reordering of specific columns in the Kendo UI Grid.
 type: how-to
 page_title: Prevent Column Reordering | Kendo UI Grid
 slug: grid-prevent-columns-reordering
@@ -10,10 +10,11 @@ res_type: kb
 ---
 
 ## Environment
+
 <table>
  <tr>
   <td>Product</td>
-  <td>Grid for Progress® Kendo UI®</td>
+  <td>Progress Kendo UI Grid</td>
  </tr>
  <tr>
   <td>Progress Kendo UI version</td>
@@ -25,13 +26,9 @@ res_type: kb
 
 How can I prevent a specific column to be reordered in the Kendo UI Grid?
 
-## Solution
-
-No verified solution available. Check the [suggested workaround](#suggested-workaround) instead.
-
 ## Suggested Workaround
 
-To prevent reordering for a column:
+The Kendo UI Grid does not provide a built-in solution for achieving this behavior. However, you can still work around the issue.
 
 1. In the [`dataBound`](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid#events-dataBound) event handler, save the column in a global variable.
 1. In the [`columnReorder`](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid#events-columnReorder) event handler, use the [`reorderColumn`](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid#methods-reorderColumn) method to position the column in the desired spot.
@@ -40,7 +37,7 @@ To prevent reordering for a column:
 <div id="grid"></div>
 <script>
 	var nonReordableColumn;  
-	  
+
 	$("#grid").kendoGrid({
 	  columns: [
 	    { field: "fname" },
@@ -57,7 +54,7 @@ To prevent reordering for a column:
 	  reorderable: true,
 	  columnReorder: function(e) {
 	    var grid = e.sender;
-	  
+
 	    setTimeout(function (e) {
 	        grid.reorderColumn(0, nonReordableColumn);
 	    }, 1)

@@ -1,22 +1,20 @@
 ---
-title: Dynamically Filter Resources Groups using MultiSelect in Kendo Scheduler
-description: An example on how to filter the groups of resources in Kendo Scheduler
+title: Dynamically Filter Resource Groups by Using MultiSelect in Scheduler
+description: An example on how to filter the groups of the resources in the Kendo UI Scheduler.
 type: how-to
-page_title: Implement resources groups filtering in Scheduler using MultiSelect | Kendo UI Scheduler
+page_title: Implement Resource Group Filtering by Using MultiSelect | Kendo UI Scheduler
 slug: scheduler-filter-groups-resources-multiselect
-position: 0
 tags: kendo, kendoui, scheduler, resources, groping, show, hide, filter, multiselect
 ticketid: 1138727
-pitsid:
 res_type: kb
-
 ---
 
 ## Environment
+
 <table>
  <tr>
   <td>Product</td>
-  <td>Scheduler for Progress® Kendo UI®</td>
+  <td>Progress Kendo UI Scheduler</td>
  </tr>
  <tr>
   <td>Operating System</td>
@@ -35,20 +33,17 @@ res_type: kb
 
 ## Description
 
-I want to show only selected resources groups in scheduler control. I want to use kendo MultiSelect to perform this operation.
+How can I show only the selected resource groups in the Scheduler and use the Kendo UI MultiSelect to perform this operation?
 
 ## Solution
 
-In order to achieve the desired functionality, you would need to have your MultiSelect bound to the resources data source, which the Scheduler uses.
-Then follow the next steps for implementation:
-
-1. Subscribe to the change event of the MultiSelect
-1. Store the dataItems, which represent the selected resources, in an array
-1. Update the resources of the Scheduler, base on the selection on the MultiSelect, by passing the array to the data method of the Scheduler DataSource object
-1. Reset the selected view of the Scheduler, in order to refresh the layout
+1. Bind the MultiSelect to the data source with the resources which the Scheduler uses.
+1. Subscribe to the `change` event of the MultiSelect.
+1. Store the dataItems, which represent the selected resources, in an array.
+1. Update the resources of the Scheduler, based on the selection on the MultiSelect, by passing the array to the `data` method of the DataSource object in the Scheduler.
+1. Refresh the layout by resetting the selected view of the Scheduler.
 
 ```html
-
 <body>
     <input type="text" id="comboBox" name="comboBox" />
     <div id="example">
@@ -213,5 +208,4 @@ Then follow the next steps for implementation:
         });
     </script>
 </body>
-
 ```

@@ -1,8 +1,8 @@
 ---
 title: Show Full Days in Scheduler TimelineWeek View
-description: An example on how to show full days in Scheduler TimelineWeek View
+description: An example on how to show full days in the TimelineWeek view of the Scheduler.
 type: how-to
-page_title: Show Full Days in Scheduler TimelineWeek View | Kendo UI Scheduler 
+page_title: Show Full Days in the TimelineWeek View | Kendo UI Scheduler
 slug: scheduler-timelineweek-full-days
 tags: scheduler, timelineweek
 ticketid: 1141234
@@ -32,11 +32,12 @@ res_type: kb
 
 ## Description
 
-How to show full days without hours in Scheduler TimelineWeek view?
+How can I show full days without hours in the `TimelineWeek` view of the Scheduler?
 
 ## Solution
 
-The majorTick should be equal to a full day in monutes. There should be only one slot per majorTick. DateHeaderTemplate should be configured to show the day of the week. The row showing the hours could be hidden.
+1. Set the `majorTick` as equal to a full day in minutes and leave only one slot per `majorTick`.
+1. Configure the `DateHeaderTemplate` to show the day of the week and, optionally, hide the hour display of the row.
 
 ```html
 <div id="scheduler"></div>
@@ -45,7 +46,7 @@ $(document).ready(function(){
   	$("#scheduler").kendoScheduler({
   		date: new Date("2013/6/6"),
   		height: 500,
-  		views: [ 
+  		views: [
   		   	"day",
   		    {
   		 		type: "timelineWeek",
@@ -54,7 +55,7 @@ $(document).ready(function(){
   		 		minorTickCount: 1,
   		 		dateHeaderTemplate: kendo.template("<strong>#=kendo.toString(date, 'dddd')# </strong>"),
   		    }
-  		], 
+  		],
   		dataSource: [
   		{
   		    id: 1,

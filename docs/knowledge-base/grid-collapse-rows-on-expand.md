@@ -1,8 +1,8 @@
 ---
-title: One Expanded Row Only
-description: An example on how to have only a single row expanded at a time in the Kendo UI Grid. 
+title: Expand One Grid Row Only at a Time
+description: An example on how to have only a single row expanded at a time in the Kendo UI Grid.
 type: how-to
-page_title: Collapse Other Rows on a Row Expand | Kendo UI Grid
+page_title: Collapse Other Rows on Row Expand | Kendo UI Grid
 slug: grid-collapse-rows-on-expand
 tags: grid, hierarchy, collapse, expand
 ticketid: 1141804
@@ -10,10 +10,11 @@ res_type: kb
 ---
 
 ## Environment
+
 <table>
  <tr>
   <td>Product</td>
-  <td>Grid for Progress® Kendo UI®</td>
+  <td>Progress Kendo UI Grid</td>
  </tr>
  <tr>
   <td>Progress Kendo UI version</td>
@@ -27,8 +28,6 @@ res_type: kb
 How can I force the other rows to collapse when I expand a row in the Kendo UI Grid?
 
 ## Solution
-
-To collapse the expanded rows:
 
 1. Handle the [`detailExpand`](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid#events-detailExpand) event of the Grid.
 1. In the event handler, use the [`collapseRow`](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid#methods-collapseRow) method for every master row.

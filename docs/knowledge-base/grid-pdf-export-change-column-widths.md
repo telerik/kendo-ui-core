@@ -1,8 +1,8 @@
 ---
-title: Change column widths during PDF Export
+title: Change Column Widths during PDF Export
 description: An example on how to override the column widths of the Kendo UI Grid for PDF Export.
 type: how-to
-page_title: Change Grid columns width | Kendo UI Grid
+page_title: Change Grid Columns Width | Kendo UI Grid
 slug: grid-pdf-export-change-column-widths
 tags: grid, column, width, pdf, export
 res_type: kb
@@ -24,11 +24,11 @@ component: grid
 
 ## Description
 
-How can I change the width of the grid columns when I export them to PDF?
+How can I change the width of the Grid columns when I export them to PDF?
 
 ## Solution
 
-You can achive that using only CSS rules because the PDF Export appends a `k-pdf-export` class to all the elements and then removes it. So you can target the `colgroup > col`. 
+The PDF Export appends a `k-pdf-export` class to all the elements and then removes it. That is why, you can target the `colgroup > col` setting and use CSS rules.  
 
 ```
 .k-pdf-export colgroup > col {
@@ -77,7 +77,7 @@ You can also target specific columns by using the `:nth-child()` selector.
         left: 30px;
         right: 30px;
       }
-      
+
       .k-pdf-export colgroup > col {
         width: 50px !important;        
       }
@@ -151,3 +151,4 @@ You can also target specific columns by using the `:nth-child()` selector.
         ]
       });
     </script>
+```

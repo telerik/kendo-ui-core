@@ -1,6 +1,6 @@
 ---
 title: Use Custom Edit Form in Diagram
-description: An example on how to display custom UI when editing the Diagram shapes
+description: An example on how to display custom UI when editing the shapes of the Kendo UI Diagram.
 type: how-to
 page_title: Use Edit Form Template for Diagram Shapes | Kendo UI Grid
 slug: diagram-custom-edit-form
@@ -26,13 +26,16 @@ How can I implement custom UI for editing the Diagram shapes?
 
 ## Solution
 
-You can set the Diagram [editable.shapeTemplate](/api/javascript/dataviz/ui/diagram#configuration-editable.shapeTemplate) property. In the edit form template, you can take advantage of MVVM bindings to automatically apply user modifications in the edited shape data item.
+1. Set the [`editable.shapeTemplate`](/api/javascript/dataviz/ui/diagram#configuration-editable.shapeTemplate) property of the Diagram.
+1. In the edit form template, use MVVM bindings to automatically apply user modifications in the edited shape data item.
 
-Following, you can see an example of a Diagram with a `shapeTemplate` defined to display a DropDownList and a ColorPicker when editing the shape values.
+> You can utilize the same approach to customize the connection edit form through the [`editable.connectionTemplate`](/api/javascript/dataviz/ui/diagram#configuration-editable.connectionTemplate) property.
+
+The following example demonstrates how to define a `shapeTemplate` to display a DropDownList and a ColorPicker when editing the shape values of the Diagram.
 
 ```html
         <div id="diagram" style="height:600px;"></div>
-        
+
         <script id="popup-editor" type="text/x-kendo-template">
           <h3>Edit Shape Data</h3>
           <p>
@@ -121,7 +124,7 @@ Following, you can see an example of a Diagram with a `shapeTemplate` defined to
                   fields: {
                     id: { from: "Id", type: "number", editable: false },
                     JobTitle: { type: "string" },
-                    Color: { type: "string", defaultValue: "#fff", 
+                    Color: { type: "string", defaultValue: "#fff",
                             parse: function(val){
                       				return val== "" ? "#fff" : val;
 														}
@@ -210,7 +213,3 @@ Following, you can see an example of a Diagram with a `shapeTemplate` defined to
           $(document).ready(createDiagram);
         </script>
 ```
-
-## Notes
-
-You can use the same approach to customize the connection edit form through the [editable.connectionTemplate](/api/javascript/dataviz/ui/diagram#configuration-editable.connectionTemplate) property.

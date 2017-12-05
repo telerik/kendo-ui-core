@@ -1,6 +1,6 @@
 ---
-title: Display the Title on Multiple Lines and Use Different Fonts
-description: An example on how to display a blank line in the title an how to use different fonts for every line in the Kendo UI Chart. 
+title: Display the Chart Title on Multiple Lines and Use Different Fonts
+description: An example on how to display a blank line in the title and use different fonts for every line in the Kendo UI Chart.
 type: how-to
 page_title: Display Subtitle with an Empty Line and Different Fonts | Kendo UI Chart
 slug: chart-title-empty-line-different-fonts
@@ -10,10 +10,11 @@ res_type: kb
 ---
 
 ## Environment
+
 <table>
  <tr>
   <td>Product</td>
-  <td>Chart for Progress® Kendo UI®</td>
+  <td>Progress Kendo UI Chart</td>
  </tr>
  <tr>
   <td>Progress Kendo UI version</td>
@@ -26,8 +27,6 @@ res_type: kb
 How can I display a subtitle with an empty line and smaller font in the Kendo UI Chart?
 
 ## Solution
-
-To display a subtitle with a different font:
 
 1. Split the [`text`](https://docs.telerik.com/kendo-ui/api/javascript/dataviz/ui/chart#configuration-title.text) into three lines by using line feed characters(`\n`).
 1. Handle the [`render`](https://docs.telerik.com/kendo-ui/api/javascript/dataviz/ui/chart#events-render) event of the Chart.
