@@ -1,21 +1,20 @@
 ---
-title: Kendo UI file upload Validation
-description: An Example on How To Validate the Selection and File Extension in Kendo Upload
+title: Validate Files and File Extensions on Upload
+description: An example on how to validate the selection and file extension in the Kendo UI Upload.
 type: how-to
-page_title: Implement file and extension validation on submit | Kendo UI Upload
+page_title: Implement File and Extension Validation on Submit | Kendo UI Upload
 slug: upload-validate-extensions
-position: 0
 tags: kendo, kendoui, upload, validate, submit, extension, file
 ticketid: 1138527
 res_type: kb
-
 ---
 
 ## Environment
+
 <table>
  <tr>
   <td>Product</td>
-  <td>Upload for Progress® Kendo UI®</td>
+  <td>Progress Kendo UI Upload</td>
  </tr>
  <tr>
   <td>Operating System</td>
@@ -34,13 +33,13 @@ res_type: kb
 
 ## Description
 
-How can I validate the kendo Upload widget on form submit, using the kendo Validator. I also want to validate whether a file with the allowed exctensions is selected.
+How can I validate the Kendo UI Upload widget on `form` submit by using the Kendo UI Validator? How can I validate whether a file with the allowed extensions is selected?
 
 ## Solution
 
-In order to validate, whether a file is selected and it has the correct extension, you should create a custom rule for the kendo Validator:
+To validate whether a file is selected and that the selected file has the correct extension, create a custom rule for the Kendo UI Validator.
 
-```html 
+```html
 <!DOCTYPE html>
 <html>
 

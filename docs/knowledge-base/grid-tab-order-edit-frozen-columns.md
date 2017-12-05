@@ -1,11 +1,11 @@
 ---
-title: Keep tab order on edited row with frozen columns
-description: An example on how to keep focus on edited inputs when frozen columns are enabled.
+title: Keep Tab Order on Edited Grid Row with Frozen Columns
+description: An example on how to keep the focus on edited inputs when the frozen columns functionality of the Kendo UI Grid is enabled.
 type: how-to
-page_title: Tab through editors when columns are frozen | Kendo UI Grid
+page_title: Tab through Editors When Columns Are Frozen | Kendo UI Grid
 slug: grid-tab-order-edit-frozen-columns
 tags: grid, frozen, columns, tab, order, focus, input, buttons, tabbing, tabindex
-ticketid: 1142004 
+ticketid: 1142004
 res_type: kb
 component: grid
 ---
@@ -26,19 +26,17 @@ component: grid
 
 ## Description
 
-I have a Grid with frozen columns and editing is enabled. When I tab through the edited cells the focus moves to the edit buttons on previous rows.
-
+How can I keep the focus when I tab through the edited Grid cells when the Grid has its frozen columns enabled?  
 
 ## Solution
 
-The observed behavior is caused by the default order in which the browser will focus elements on the page. When frozen columns are enabled the locked columns will be rendered in a separate table element. When tab is clicked the browser moves the focus to the first focusable element in the next table. That is why the buttons are focused first. 
+The default order in which the browser focuses elements on the page cause the rendering of the frozen (locked) columns in a separate `table` element. When the `Tab` key is clicked, the browser moves the focus to the first focusable element in the next table and the buttons are focused first.
 
-The following approach can be used to change the default behavior. 
+To keep the tab order:
 
-* handle the Grid [dataBound event](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid#events-dataBound)
-* get reference of all edit and delete buttons
-* increase the [tabindex attribute](https://developer.mozilla.org/en-US/docs/Web/HTML/Global_attributes/tabindex) for the buttons
-
+1. Handle the [`dataBound`](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid#events-dataBound) event of the Grid.
+1. Get the reference of all **Edit** and **Delete** buttons.
+1. Increase the [`tabindex`](https://developer.mozilla.org/en-US/docs/Web/HTML/Global_attributes/tabindex) attributes for the buttons.
 
 ```html
 <div id="grid"></div>
@@ -125,4 +123,3 @@ The following approach can be used to change the default behavior.
 </script>
 </div>
 ```
-

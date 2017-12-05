@@ -1,6 +1,6 @@
 ---
 title: Edit Rows in Detail Template
-description: An example on how to edit the records in the relevant detail rows in the Kendo UI Grid. 
+description: An example on how to edit the records in the relevant detail rows of the Kendo UI Grid.
 type: how-to
 page_title: Use Detail Template to Edit Master Rows | Kendo UI Grid
 slug: grid-detail-template-edit-master-rows
@@ -10,10 +10,11 @@ res_type: kb
 ---
 
 ## Environment
+
 <table>
  <tr>
   <td>Product</td>
-  <td>Grid for Progress® Kendo UI®</td>
+  <td>Progress Kendo UI Grid</td>
  </tr>
  <tr>
   <td>Progress Kendo UI version</td>
@@ -23,11 +24,11 @@ res_type: kb
 
 ## Description
 
-How can I edit master rows in the relevant detail rows in the Kendo UI Grid? How can I prevent the Grid from collapsing when I edit an item in a detail row?
+How can I edit the master rows in the relevant detail rows of the Kendo UI Grid? How can I prevent the Grid from collapsing when I edit an item in a detail row?
 
-## Solution
+## Possible Workarounds
 
-To workaround the default behavior, we should fake the editing process. To do that, in the [`detailInit`](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid#events-detailInit) event handler:
+To work around the default behavior, fake the editing process in the [`detailInit`](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid#events-detailInit) event handler.
 
 1. Select all inputs in the `detailCell` element.
 1. Attach a [`change`](https://api.jquery.com/change/) event handler to every input.

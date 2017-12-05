@@ -1,8 +1,8 @@
 ---
 title: Vertically Tab Cells in Editable Grid
-description: An example on how to tab through columns vertically in the Kendo UI Grid. 
+description: An example on how to vertically tab through the columns of the Kendo UI Grid.
 type: how-to
-page_title: Tabbing Through Columns Vertically | Kendo UI Grid
+page_title: Tab through Columns Vertically | Kendo UI Grid
 slug: grid-tab-vertically
 tags: grid, tab, editing, vertical
 ticketid: 1140359
@@ -10,10 +10,11 @@ res_type: kb
 ---
 
 ## Environment
+
 <table>
  <tr>
   <td>Product</td>
-  <td>Grid for Progress® Kendo UI®</td>
+  <td>Progress Kendo UI Grid</td>
  </tr>
  <tr>
   <td>Progress Kendo UI version</td>
@@ -23,14 +24,12 @@ res_type: kb
 
 ## Description
 
-How can I navigate down through the columns vertically when using the TAB button in the Kendo UI Grid?
+How can I vertically navigate down through the columns when I use the `Tab` key in the Kendo UI Grid?
 
 ## Solution
 
-To tab vertically:
-
-1. Handle the table [`keydown`](https://api.jquery.com/keydown/) event.
-1. If the key is `TAB`, prevent the default behavior.
+1. Handle the [`keydown`](https://api.jquery.com/keydown/) table event.
+1. If the key is `Tab`, prevent the default behavior.
 1. Calculate the next cell based on the current position.
 1. Use the [`editCell`](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid#methods-editCell) method of the Grid to change the cell.
 

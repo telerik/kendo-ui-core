@@ -1,8 +1,8 @@
 ---
-title: ListView PDF Export All Pages 
-description: An example on how to export all pages to a PDF file in the Kendo UI ListView. 
+title: Export All ListView Pages to PDF
+description: An example on how to export all pages of a Kendo UI ListView to a PDF file.
 type: how-to
-page_title: All Pages PDF Export | Kendo UI ListView
+page_title: Export All Pages to PDF | Kendo UI ListView
 slug: listview-pdf-export-all-pages
 tags: listview, pdf, export, all pages
 ticketid: 1139418
@@ -10,11 +10,12 @@ res_type: kb
 ---
 
 ## Environment
+
 <table>
  <tr>
   <td>Product</td>
-  <td>ListView for Progress® Kendo UI®</td>
- </tr> 
+  <td>Progress Kendo UI ListView</td>
+ </tr>
  <tr>
   <td>Progress Kendo UI version</td>
   <td>Created with the 2017.3.1026 version</td>
@@ -23,11 +24,9 @@ res_type: kb
 
 ## Description
 
-How can I export all the pages to a PDF file in the Kendo UI ListView?
+How can I export all ListView pages to a PDF file?
 
 ## Solution
-
-To PDF export all the pages:
 
 1. Select the Pager of the ListView.
 1. Save the `dataSource` [`pageSize`](https://docs.telerik.com/kendo-ui/api/javascript/data/datasource#methods-pageSize) in a variable.

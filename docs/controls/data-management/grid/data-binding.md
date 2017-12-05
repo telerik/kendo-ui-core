@@ -33,7 +33,7 @@ Kendo UI provides a powerful [data binding framework](http://demos.telerik.com/k
               read: {
                 url: "https://api.flickr.com/services/feeds/photos_public.gne",
                 data: {
-                  tags: "nature", 
+                  tags: "nature",
                   format: "json"
                 },
                 dataType: "jsonp", // "jsonp" is required for cross-domain requests; use "json" for same-domain requests
@@ -64,7 +64,7 @@ Kendo UI provides a powerful [data binding framework](http://demos.telerik.com/k
 * The `url` points the location of the data you want to bind the widget to.
 * The `data` lists additional url parameters that need to be sent to the remote point.
 * The `dataType` indicates the format of the response in which the data source is expected to be&mdash;JSONP in the example. JSONP is a way of returning JSON from a cross-browser request without getting blocked. It basically wraps the JSON response in a callback to intentionally mislead the browser. It is not recommended to do so unless you fully trust your data.
-* The `schema` indicates to the Grid what the schema of the response is. 
+* The `schema` indicates to the Grid what the schema of the response is.
 * The `data` functions as the JSON element to repeat on&mdash;Kendo UI looks for this element to bind each row in the Grid to an item in this element. The server returns data as an `items` array so the repeating item is `"items"`.
 * The `model` describes the structure of the data. Using it, you can specify the data type of each field in the data for proper handling, as well as explicitly state which is the unique id field when needed.
 
@@ -89,7 +89,7 @@ The following example demonstrates how to specify the `field` attribute in the c
               read: {
                 url: "https://api.flickr.com/services/feeds/photos_public.gne",
                 data: {
-                  tags: "nature", 
+                  tags: "nature",
                   format: "json"
                 },
                 dataType: "jsonp", // "jsonp" is required for cross-domain requests; use "json" for same-domain requests
@@ -115,7 +115,7 @@ The following example demonstrates how to specify the `field` attribute in the c
           selectable: true
         });
       });
-    </script> 
+    </script>
 
 ```
 
@@ -140,7 +140,7 @@ The following example demonstrates how to indicate to the Grid the way you want 
               read: {
                 url: "https://api.flickr.com/services/feeds/photos_public.gne",
                 data: {
-                  tags: "nature", 
+                  tags: "nature",
                   format: "json"
                 },
                 dataType: "jsonp", // "jsonp" is required for cross-domain requests; use "json" for same-domain requests
@@ -171,7 +171,7 @@ The following example demonstrates how to indicate to the Grid the way you want 
 
 ### Set the Row Template
 
-You may want to display more complex templates for the columns in the Grid, for example you may want to display multiple field values in a single column, while the content of other  columns may need to be iterated in order to generate the template output. In such scenarios, you can use a `rowTemplate` to describe the structure of the entire row inside a single template.
+You may want to display more complex templates for the columns in the Grid&mdash;for example, multiple field values in a single column&mdash;while the content of the other columns may need to be iterated to generate the template output. In such scenarios, you can use `rowTemplate` to describe the structure of the entire row inside a single template.
 
 The following example demonstrates how to fully customize the Grid by applying additional styles to it. Note that the number of `td` elements in the template matches the number of columns in the Grid definition.
 
@@ -222,7 +222,7 @@ The following example demonstrates how to fully customize the Grid by applying a
               read: {
                 url: "https://api.flickr.com/services/feeds/photos_public.gne",
                 data: {
-                  tags: "nature", 
+                  tags: "nature",
                   format: "json"
                 },
                 dataType: "jsonp", // "jsonp" is required for cross-domain requests; use "json" for same-domain requests
@@ -266,7 +266,7 @@ The following example demonstrates how to fully customize the Grid by applying a
       .tag:hover {
         background-color: lightblue;
       }
-      
+
       .strong {
         font-weight: bold;
       }

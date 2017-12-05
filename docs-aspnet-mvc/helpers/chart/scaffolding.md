@@ -74,14 +74,14 @@ On the next screen, you are presented with the Model and Data Context options.
 
 1. If you have not yet created it, add a new class to the `~/Models` folder. Name it `ProductViewModel`.
 
-		###### Example
+	###### Example
 
-			        public class ProductViewModel
-			        {
-			            public int ProductID { get; set; }
-			            public string ProductName { get; set; }
-			            public short? UnitsInStock { get; set; }
-			        }
+			public class ProductViewModel
+      {
+          public int ProductID { get; set; }
+          public string ProductName { get; set; }
+          public short? UnitsInStock { get; set; }
+      }
 
 1. Select the **ProductViewModel** class from the **ViewModel Class** DropDownList.  
 

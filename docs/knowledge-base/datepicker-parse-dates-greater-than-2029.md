@@ -1,8 +1,8 @@
 ---
-title: Parse two-digit dates greater than 2029
-description: An example on how to parse dates after 2029 entered with two digits.  
+title: Parse Two-Digit Dates Greater Than 2029
+description: An example on how to parse dates after year 2029 which are entered with two digits in the Kendo UI DatePicker.  
 type: how-to
-page_title: Parse two-digit dates greater than 2029 | Kendo UI DatePicker
+page_title: Parse Two-Digit Dates Greater Than 2029 | Kendo UI DatePicker
 slug: datepicker-parse-dates-greater-than-2029
 tags: datepicker, date, parse, 1930, 2029, greater, correct, parseformat, after, century
 ticketid: 1141658
@@ -25,13 +25,13 @@ res_type: kb
 
 ## Description
 
-I am using custom parseFormat with two-digit year for DatePicker. When the value for the year is greater than 29 the year is parsed as 19xx.
+I am using custom `parseFormat` with a two-digit year in the DatePicker. When the value for the year is greater than 29, the year is parsed as 19xx.
+
+How can I implement the parsing of two-digit dates that are greater than 2029?
 
 ## Solution
 
-This behavior is controlled by the **twoDigitYearMax** property. The default value for it is 2029 and this is why this is the max parsed year. In order to parse years after this you should change the property. 
-
-The following example demonstrates the approach.
+This behavior is controlled by the `twoDigitYearMax` property whose default value is 2029. As a result, 2029 is the maximum year that can be parsed. To parse years that are greater than 2029, change the property.
 
 ```html
 <div class="demo-section k-content">

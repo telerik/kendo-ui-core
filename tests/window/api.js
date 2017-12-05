@@ -1233,6 +1233,7 @@
 
         equal($("body").css("overflow"), "hidden");
         equal($("html").css("overflow"), "hidden");
+        dialog.close();
     });
 
     test("restore() restores body's and html's original overflow after maximize()", 2, function() {
@@ -1282,5 +1283,22 @@
 
         equal($("body").css("overflow"), "hidden");
         equal($("html").css("overflow"), "hidden");
+    });
+
+    test("closing maximized window retrieved original body's and html's overflow", 2, function() {
+        var dialog = createWindow({
+                visible: true,
+                animation: false
+            });
+
+        // QUnit.fixture's document is initially with overflow:hidden
+        $(QUnit.fixture[0].ownerDocument).find("html, body").css("overflow", "scroll");
+
+        dialog.maximize();
+        dialog.open();
+        dialog.close();
+
+        equal($("body").css("overflow"), "scroll");
+        equal($("html").css("overflow"), "scroll");
     });
 })();

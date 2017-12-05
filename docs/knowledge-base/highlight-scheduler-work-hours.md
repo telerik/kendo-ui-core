@@ -10,6 +10,7 @@ component: scheduler
 ---
 
 ## Environment
+
 <table>
  <tr>
   <td>Product</td>
@@ -20,12 +21,12 @@ component: scheduler
 
 ## Description
 
-How can we higlight work hours in the Kendo UI Scheduler?
+How can I highlight work hours in the Kendo UI Scheduler?
 
 ## Solution
 
-* Iterate over the cells in the Scheduler content.
-* Apply custom CSS based on the current time and group.
+1. Iterate over the cells in the Scheduler content.
+1. Apply custom CSS based on the current time and group.
 
 ```html
 <div id="example">

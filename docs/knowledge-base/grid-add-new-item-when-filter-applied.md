@@ -1,8 +1,8 @@
 ---
-title: Add new item when filter is applied
+title: Add New Item When Filter Is Applied
 description: An example on how to show the inserted item when the Grid data is filtered.
 type: how-to
-page_title: Show inserted item when filter is applied in Grid | Kendo UI Grid
+page_title: Show Inserted Items When Filter Is Applied | Kendo UI Grid
 slug: grid-add-new-item-when-filter-applied
 tags: grid, insert, add, new, item, filter, visible, record
 ticketid: 1141908
@@ -26,21 +26,20 @@ component: grid
 
 ## Description
 
-When filter is applied to the Grid component the new items that are inserted are not visible.
-
+How can I display the newly inserted items in the Grid when filtering is applied?
 
 ## Solution
 
-The behavior is observed because the filter condition is applied to the DataSource. When a new item is inserted the values in it are empty and usually this will not match the specified filter. Thus the new item will not be visible.
+The filter condition is applied to the DataSource and as a result, when a new item is inserted, the values in it are empty, which, usually, does not match the specified filter and the new item is not visible.
 
-There are couple of approaches for changing the behavior.
+To successfully add new items, apply the respective approach depending on the following scenarios:
 
-* [When the filter is set initially](#when-the-filter-is-set-initially)
-* [Filter is initially unknown and applied by the user](#filter-is-initially-unknown-and-applied-by-the-user)
+* [The filter is initially set](#when-the-filter-is-initially-set)
+* [The filter is initially unknown and is applied by the user](#filter-is-initially-unknown-and-is-applied-by-user)
 
-### When the filter is set initially  
+### When the Filter Is Initially Set   
 
-In that case the empty value can be added to the initial filter condition:
+In this scenario, add the empty value to the initial filter condition.
 
 ````JavaScript
 filter: {
@@ -58,7 +57,7 @@ filter: {
 }
 ````
 
-This approach is illustrated in the following example:
+The following example demonstrates how to implement the suggested approach.
 
 ```html
 <div id="grid"></div>
@@ -143,13 +142,12 @@ This approach is illustrated in the following example:
 </script>
 ```
 
+### Filter Is Initially Unknown and Is Applied by User
 
+In most scenarios, the Grid does not have any filters that are initially set. The user can apply filters at some point and try to insert new records after this.
 
-### Filter is initially unknown and applied by the user
-
-In most scenarios the Grid will not have any filters initially. The users may apply filters at some point and try to insert new records after this. 
-
-With such scenario the applied filters can be retrieved in the DataSource change event. Then an additional filter can be added that will match an empty value for the Model.
+1. Retrieve the applied filters in the `change` event of the DataSource.
+1. Add an additional filter that will match an empty value for the Model.
 
 ````JavaScript
 change: function (e) {
@@ -173,7 +171,7 @@ change: function (e) {
 }
 ````
 
-The following example outlines the approach:
+The following example demonstrates how to implement the suggested approach.
 
 ```html
 <div id="grid"></div>

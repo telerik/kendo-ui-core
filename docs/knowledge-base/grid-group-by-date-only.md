@@ -1,8 +1,8 @@
 ---
-title: Ignore Time Portion of DateTime when Grouping in Grid
-description: An example on how to group by datetime field without taking into account different times, only the dates.
+title: Ignore Time Portion of DateTime in Grid When Grouping
+description: An example on how to group the Kendo UI Grid data by the datetime field without taking into account different times but only the dates.
 type: how-to
-page_title: Ignore Time Portion of DateTime when Grouping in Grid
+page_title: Ignore Time Portion of DateTime when Grouping | Kendo UI Grid
 slug: grid-group-by-date-only
 tags: ignore, group, grouping, time, datetime, grid
 ticketid: 1140806
@@ -11,10 +11,11 @@ res_type: kb
 ---
 
 ## Environment
+
 <table>
  <tr>
   <td>Product</td>
-  <td>Grid for Progress® Kendo UI®</td>
+  <td>Progress Kendo UI Grid</td>
  </tr>
  <tr>
   <td>Operating System</td>
@@ -32,11 +33,14 @@ res_type: kb
 
 ## Description
 
-When grouping in a Grid by a datetime field, same days with different times are grouped separately; how can the time portion of the datetime be ignored so grouping happens by date only?
+When grouping in a Grid by a `datetime` field, same days with different times are grouped separately.
+
+How can I ignore the time portion of the `datetime` so that grouping happens by date only?
 
 ## Solution
 
-In order to implement the functionality described above, we take advantage of the `parse` function of a DataSource `schema` to generate a new field containing only the date portion of the datetime value; then we bind the column to the newly created field while using the `template` property to display the datetime field instead:
+1. Generate a new field which contains only the date portion of the `datetime` value by using the `parse` function of a DataSource `schema`.
+1. Bind the column to the newly created field and use the `template` property to display the `datetime` field instead.
 
 ```html
 <div id="grid"></div>
@@ -63,8 +67,8 @@ In order to implement the functionality described above, we take advantage of th
               OrderId: response[i].OrderId,
               OrderDate: response[i].OrderDate,
               OrderDateNoTime: new Date(
-                dateNoTime.getFullYear(), 
-                dateNoTime.getMonth(), 
+                dateNoTime.getFullYear(),
+                dateNoTime.getMonth(),
                 dateNoTime.getDate()
               )
             };
@@ -83,9 +87,9 @@ In order to implement the functionality described above, we take advantage of th
     },
     columns: [
       { field: "OrderId", title: "Order ID" },
-      { 
-        field: "OrderDateNoTime", 
-        title: "Order Date", 
+      {
+        field: "OrderDateNoTime",
+        title: "Order Date",
         template: "#= kendo.toString(OrderDate, 'yyyy/MM/dd HH:mm:ss') #",
         groupHeaderTemplate: "#= kendo.toString(value, 'yyyy/MM/dd') #"
       }
@@ -97,5 +101,5 @@ In order to implement the functionality described above, we take advantage of th
 
 ## See Also
 
-* [DataSource schema.parse function reference.](https://docs.telerik.com/kendo-ui/api/javascript/data/datasource#configuration-schema.parse)
-* [Kendo UI Templates Overview.](https://docs.telerik.com/kendo-ui/framework/templates/overview)
+* [Api Reference of the DataSource schema.parse Function](https://docs.telerik.com/kendo-ui/api/javascript/data/datasource#configuration-schema.parse)
+* [Kendo UI Templates Overview](https://docs.telerik.com/kendo-ui/framework/templates/overview)

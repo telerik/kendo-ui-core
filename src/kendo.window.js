@@ -1157,17 +1157,25 @@
             },
 
             _storeOverflowRule: function($element){
+                if(this._isOverflowStored($element)){
+                    return;
+                }
+
                 var overflowRule = $element.get(0).style.overflow;
 
-                if(overflowRule){
+                if(typeof overflowRule === "string"){
                     $element.data(DATADOCOVERFLOWRULE, overflowRule);
                 }
+            },
+
+            _isOverflowStored: function ($element){
+                return typeof $element.data(DATADOCOVERFLOWRULE) === "string";
             },
 
             _restoreOverflowRule: function($element){
                 var overflowRule = $element.data(DATADOCOVERFLOWRULE);
 
-                if(overflowRule){
+                if(overflowRule !== null && overflowRule !== undefined){
                     $element.css(OVERFLOW, overflowRule);
                     $element.removeData(DATADOCOVERFLOWRULE);
                 } else {

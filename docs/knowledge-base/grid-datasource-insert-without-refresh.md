@@ -1,8 +1,8 @@
 ---
-title: Create an Item in the DataSource Without Refreshing the Grid
-description: An example on how to add an item in the dataSource without refreshing in the Kendo UI Grid. 
+title: Create an Item in the DataSource without Refreshing the Grid
+description: An example on how to add an item to the dataSource without refreshing the Kendo UI Grid.
 type: how-to
-page_title: Insert Items in the DataSource Without Rebinding | Kendo UI Grid  
+page_title: Insert Items in the DataSource without Rebinding | Kendo UI Grid  
 slug: grid-datasource-insert-without-refresh
 tags: grid, datasource, insert, change, rebind
 ticketid: 1142171
@@ -10,10 +10,11 @@ res_type: kb
 ---
 
 ## Environment
+
 <table>
  <tr>
   <td>Product</td>
-  <td>Grid for Progress® Kendo UI®</td>
+  <td>Progress Kendo UI Grid</td>
  </tr>
  <tr>
   <td>Progress Kendo UI version</td>
@@ -27,11 +28,9 @@ How can I prevent the Kendo UI Grid from refreshing when I insert an item in the
 
 ## Solution
 
-To prevent the refreshing:
-
-1. Unbind the dataSource `change` event handler from the Grid.
+1. Unbind the `change` event handler of the dataSource from the Grid.
 1. Insert the item.
-1. Bind the dataSource `change` event handler to the Grid.
+1. Bind the `change` event handler of the dataSource to the Grid.
 
 ```html
 <div id="grid"></div>

@@ -1,8 +1,8 @@
 ---
 title: Display Material Icons in Grid Command Column
-description: An example on how to show Google's Material icons in the Kendo UI Grid edit command buttons
+description: An example on how to show Google's Material icons in the Kendo UI Grid edit command buttons.
 type: how-to
-page_title: Use Material Icons in Grid Edit Command Buttons | Kendo UI Grid
+page_title: Use Material Icons in Edit Command Buttons | Kendo UI Grid
 slug: grid-use-material-icons
 tags: grid, editing, material-icons
 ticketid: 1139682
@@ -22,15 +22,15 @@ component: grid
 
 ## Description
 
-How can I use Google's [Materal icons](https://material.io/icons/) in Grid edit command buttons?
+How can I use Google's [Materal icons](https://material.io/icons/) in the edit command buttons of the Grid?
 
 ## Solution
 
-The Material icons require spcific HTML to be rendered in the column cell and you cannot display them in a command column. The solution in this case is to use a column template and declare the needed HTML.
+The Material icons require specific HTML to be rendered in the column cell and you cannot display them in a command column. To work around this issue, use a column template and declare the needed HTML.
 
-To simulate the built-in `"edit"` command button actions (Edit, Update, Cancel), you also need to add custom JavaScript logic that triggers the corresponding actions in the Grid.
+To simulate the built-in `"edit"` command button actions (**Edit**, **Update**, **Cancel**), you also need to add custom JavaScript logic that triggers the corresponding actions in the Grid.
 
-The following example demonstrates such implementation:
+The following example demonstrates how to implement the suggested approach.
 
 ```html
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
@@ -103,9 +103,9 @@ The following example demonstrates such implementation:
 
         $("#grid").on("click", ".custom-button", function(e){
           var btn = $(this);
-          
+
           e.preventDefault();
-          
+
           if(btn.hasClass("edit-button")){
             var row = btn.closest("tr");
             grid.editRow(row);

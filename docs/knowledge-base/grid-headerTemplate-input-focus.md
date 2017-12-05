@@ -1,6 +1,6 @@
 ---
-title: Focus Column Header Input When Navigatable is True 
-description: An example on how to allow focusing an input in the column header when the navigatable configuration is true in the Kendo UI Grid. 
+title: Focus Column Header Input When navigatable Is true
+description: An example on how to allow the focusing of an input in the column header when the navigatable configuration of the Kendo UI Grid is true.
 type: how-to
 page_title: Focus Input in the Column headerTemplate | Kendo UI Grid
 slug: grid-headerTemplate-input-focus
@@ -10,10 +10,11 @@ res_type: kb
 ---
 
 ## Environment
+
 <table>
  <tr>
   <td>Product</td>
-  <td>Grid for Progress® Kendo UI®</td>
+  <td>Progress Kendo UI Grid</td>
  </tr>
  <tr>
   <td>Progress Kendo UI version</td>
@@ -23,7 +24,7 @@ res_type: kb
 
 ## Description
 
-How can I allow the user to click on an input in the headerTemplate of a column when the navigatable property is true in the Kendo UI Grid?
+How can I allow the user to click on an input in the `headerTemplate` of a column when the `navigatable` property of the Kendo UI Grid is `true`?
 
 ## Solution
 
