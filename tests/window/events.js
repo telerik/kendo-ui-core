@@ -110,6 +110,31 @@
         equal(triggers, 1);
     });
 
+    test("clicking the close button triggers close event", function() {
+        var triggers = 0,
+            dialog = createWindow({
+                close: function() {
+                    ok(true);
+                }
+            });
+
+        dialog.wrapper.find(".k-i-close").trigger("click");
+    });
+
+    test("clicking the close button triggers close event when default is prevented", 2, function() {
+        var triggers = 0,
+            dialog = createWindow({
+                animation: false,
+                close: function(ev) {
+                    ok(true);
+                    ev.preventDefault();
+                }
+            });
+
+        dialog.wrapper.find(".k-i-close").trigger("click");
+        dialog.wrapper.find(".k-i-close").trigger("click");
+    });
+
     test("minimize triggers minimize event", function() {
         var triggers = 0,
             dialog = createWindow({

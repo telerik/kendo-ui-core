@@ -879,15 +879,17 @@
                     options = that.options,
                     showOptions = this._animationOptions("open"),
                     hideOptions  = this._animationOptions("close"),
-                    doc = $(document);
+                    doc = $(document),
+                    defaultPrevented;
 
                 if (that._closing) {
                     return;
                 }
 
-                that._closing = true;
+                defaultPrevented = that.trigger(CLOSE, { userTriggered: !systemTriggered });
+                that._closing = !defaultPrevented;
 
-                if (wrapper.is(VISIBLE) && !that.trigger(CLOSE, { userTriggered: !systemTriggered })) {
+                if (wrapper.is(VISIBLE) && !defaultPrevented) {
                     options.visible = false;
 
                     $(KWINDOW).each(function(i, element) {
