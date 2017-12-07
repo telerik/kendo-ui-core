@@ -358,8 +358,6 @@ This added degree of control makes it a cinch to precisely style apps for differ
 
 To get a better understanding of how Kendo UI hybrid Application works, check the features provided by the [application class]({% slug overview_hybridapplication %}).
 
-To see a complete tutorial including guidelines and recommendations about how to build mobile applications for phones and tables with Kendo UI hybrid widgets and application tools, visit [this link](http://www.kendouimobileguide.com/).
-
 ## See Also
 
 Articles and how-to examples on the Hybrid UI components in Kendo UI:
