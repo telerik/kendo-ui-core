@@ -36,11 +36,11 @@ How can I sort the items between connected ListBoxes when I drag an item from on
 ```html
 <div id="example" role="application">
     <div class="demo-section k-content">
-        <img src="../content/web/listbox/arrow-left2right.png" alt="drag-indicator" class="arrow" />
+        <img src="http://demos.telerik.com/kendo-ui/content/web/listbox/arrow-left2right.png" alt="drag-indicator" class="arrow" />
         <br />
         <select id="discontinued"></select>
         <select id="available"></select>
-        <img src="../content/web/listbox/arrow-right2left.png" alt="drag-indicator" class="arrow" />
+        <img src="http://demos.telerik.com/kendo-ui/content/web/listbox/arrow-right2left.png" alt="drag-indicator" class="arrow" />
     </div>
 </div>
 
