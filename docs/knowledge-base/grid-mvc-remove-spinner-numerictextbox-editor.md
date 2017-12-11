@@ -1,6 +1,6 @@
 ---
-title: Remove Spinners from Numeric Editors in MVC Grid
-description: An example on how to remove the side arrows of the NumericTextBox editor in the ASP.NET MVC Grid.
+title: Remove Spinners from NumericTextBox Editors in MVC Grid
+description: An example on how to remove the side arrows of the NumericTextBox editor in the Kendo UI Grid for ASP.NET MVC.
 type: how-to
 page_title: Remove Spinner Arrows of NumericTextBox Editor | UI for ASP.NET MVC
 slug: grid-mvc-remove-spinner-numerictextbox-editor
@@ -11,6 +11,7 @@ component: numerictextbox
 ---
 
 ## Environment
+
 <table>
  <tr>
   <td>Product</td>
@@ -54,8 +55,8 @@ How can I remove the spinners from the editor of a `"[DataType("Integer")]"` fie
 
 1. Make sure that the `NoSpinners` string matches the name of the editor template file.
 
-For e reference of the end result, refer to this [screenshot](https://www.screencast.com/t/NpPf3qWtsD).
+For e reference of the end result, refer to [this screenshot](https://www.screencast.com/t/NpPf3qWtsD).
 
 ## See Also
 
-[Remove Up and Down Arrows From The Grid Numeric Editors](https://docs.telerik.com/kendo-ui/knowledge-base/grid-remove-spinners-from-the-grid-numerictextbox-editor)
+* [Remove Up and Down Arrows from the Grid NumericTextBox Editors](https://docs.telerik.com/kendo-ui/knowledge-base/grid-remove-spinners-from-the-grid-numerictextbox-editor)

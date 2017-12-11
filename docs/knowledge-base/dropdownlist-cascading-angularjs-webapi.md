@@ -12,10 +12,11 @@ res_type: kb
 ---
 
 ## Environment
+
 <table>
  <tr>
   <td>Product</td>
-  <td>DropDownList for Progress® Kendo UI®</td>
+  <td>Progress Kendo UI DropDownList</td>
  </tr>
  <tr>
   <td>Operating System</td>
@@ -34,13 +35,11 @@ res_type: kb
 
 ## Description
 
-How can I have cascading DropDownLists configured with transport data binding. I need to implement this with WebAPI and I use AnguarJS
+How can I implement cascading DropDownLists, which are configured with the `transport` data binding, together with WebAPI in an AnguarJS application?
 
 ## Solution
 
-In order to achieve the desired functionality, you should have the child dropdownlist configured to be aware of his parent widget and from which fields it should cascade. This should be achieved, by setting the **k-cascade-from** and **k-cascade-from-field**.
-
-The example below, demonstrates full implementation of the scenario:
+Configure the child DropDownList by setting the `k-cascade-from` and `k-cascade-from-field`. As a result, it "becomes aware" of its parent DropDownList from whose fields it will cascade.
 
 ```html
 
@@ -101,7 +100,7 @@ The example below, demonstrates full implementation of the scenario:
           })
 </script>
 
----------Controller Implementatoin-------------
+---------Controller Implementation-------------
  public class ProductsController : ApiController
     {
         [Route("api/Products/Get")]

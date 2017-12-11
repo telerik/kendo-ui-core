@@ -1,8 +1,8 @@
 ---
-title: Pass additional parameters to custom DataSource
-description: An example on how to send additional parameters to a custom DataSource
+title: Pass Additional Parameters to Custom DataSource
+description: An example on how to send additional parameters to a custom DataSource in the Kendo UI Grid.
 type: how-to
-page_title: Pass parameters to custom DataSource | Telerik Grid for ASP.NET MVC
+page_title: Pass Parameters to Custom DataSource in the Grid | UI for ASP.NET MVC
 slug: grid-additional-parameters-custom-datasource
 tags: grid, custom, datasource, additional, parameters
 res_type: kb
@@ -24,35 +24,36 @@ component: grid
 
 ## Description
 
-I have a hierarchical Grid with [Custom DataSource](http://demos.telerik.com/aspnet-mvc/grid/custom-datasource). I have a ClientHandlerDescriptor defined as [described here](https://docs.telerik.com/aspnet-mvc/getting-started/custom-datasource#common-scenarios) and would like to pass additional parameters to the ClientHandlerDescriptor.
+I have a hierarchical Grid with a [custom DataSource](http://demos.telerik.com/aspnet-mvc/grid/custom-datasource) and a `ClientHandlerDescriptor` which is defined as [described here](https://docs.telerik.com/aspnet-mvc/getting-started/custom-datasource#common-scenarios).
+
+How can I pass additional parameters to the `ClientHandlerDescriptor`?
 
 ## Solution
 
-If you are using ClientHandlerDescriptor for reading the data you can define the JavaScript handler like below. 
+1. If you are using the `ClientHandlerDescriptor` for reading the data, define the JavaScript handler.
 
-```
-.Transport(new
-{
-    read = new Kendo.Mvc.ClientHandlerDescriptor() { HandlerName = "function(options) {customRead(options, '#=ID#')}" },
-})
-```
+    ```
+    .Transport(new
+    {
+        read = new Kendo.Mvc.ClientHandlerDescriptor() { HandlerName = "function(options) {customRead(options, '#=ID#')}" },
+    })
+    ```
 
-The `customRead` JavaScript handler will accept the default `options` argument as well as the ID of the **parent Grid**. 
+1. The `customRead` JavaScript handler will accept the default `options` argument as well as the `ID` of the parent Grid.
 
-```JavaScript
-function customRead(options, id) {
-    $.ajax({
-      method: "POST",
-      url: '@Url.Action("ActionName", "ControllerName")',
-      dataType: "json",
-      data: {
-        ID: id,
-		// more data here
-      },
-      success: function(data) {
-        options.success(data);
-      }
-    });
-}
-```
-
+    ```JavaScript
+    function customRead(options, id) {
+        $.ajax({
+          method: "POST",
+          url: '@Url.Action("ActionName", "ControllerName")',
+          dataType: "json",
+          data: {
+            ID: id,
+    		// more data here
+          },
+          success: function(data) {
+            options.success(data);
+          }
+        });
+    }
+    ```

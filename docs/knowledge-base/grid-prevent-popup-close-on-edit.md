@@ -1,8 +1,8 @@
 ---
-title: Prevent Grid PopUp editor from closing on update/create
-description: An example on how to keep the Grid popup editor open after update is finished
+title: Prevent Grid Popup Editor from Closing on Update and Create
+description: An example on how to keep the Kendo UI Grid popup editor open after an update is finished.
 type: how-to
-page_title: Keep Grid popup open | Kendo UI Grid
+page_title: Keep Popup Open | Kendo UI Grid
 slug: grid-prevent-popup-close-on-edit
 tags: grid, edit, popup, prevent, cancel, stop, close, edit, insert, create, modal, reopen, keep, open
 res_type: kb
@@ -24,15 +24,13 @@ component: grid
 
 ## Description
 
-I want to keep popup editor open after I update or insert a record in the Grid.
+How can I keep the popup editor of the Grid open after I update or insert a record?
 
 ## Solution
 
-To implement the feature you can handle the Grid [edit event](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid#events-edit) and attach handler for the PopUp window [close event](https://docs.telerik.com/kendo-ui/api/javascript/ui/window#events-close). 
-
-In the close handler e.preventDefault() will be called to prevent the popup from closing. In order to allow the users to close the editor the flag can also be set when the cancel and close buttons are clicked.
-
-The example below illustrates the approach.
+1. Handle the [`edit`](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid#events-edit) event of the Grid and attach an event handler for the [`close`](https://docs.telerik.com/kendo-ui/api/javascript/ui/window#events-close) event of the Popup window.
+1. In the `close` handler, the `e.preventDefault()` method will be called to prevent the popup from closing.
+1. To allow the user to close the editor, set the flag when the **Cancel** and **Close** buttons are clicked.
 
 ```html
 <div id="grid"></div>
@@ -120,4 +118,3 @@ The example below illustrates the approach.
     }
 </script>
 ```
-

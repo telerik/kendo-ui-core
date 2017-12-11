@@ -1,20 +1,20 @@
 ---
-title: Custom Theme Created Using Sass ThemeBuilder Doesn't Affect Charts
-description: Theme created using ThemeBuilder changes style of every control except the Charts
+title: The Custom Theme That Is Created by Using SASS ThemeBuilder Doesn't Affect Charts
+description: The theme which is created through the ThemeBuilder changes the style of every Kendo UI control except for the Charts.
 type: troubleshooting
-page_title: Custom Theme Created Using Sass ThemeBuilder Doesn't Affect Charts
+page_title: Custom Theme Created through the SASS ThemeBuilder Doesn't Affect the MVC Charts | Kendo UI Charts
 slug: chart-style-not-affected-by-sass-theme
 tags: chart, theme, themebuilder, style, sass
 ticketid: 1141887
 res_type: kb
-
 ---
 
 ## Environment
+
 <table>
  <tr>
   <td>Product</td>
-  <td>Progress® Kendo UI® Charts for ASP.NET MVC</td>
+  <td>Progress Kendo UI Charts for ASP.NET MVC</td>
  </tr>
  <tr>
   <td>Operating System</td>
@@ -32,15 +32,15 @@ res_type: kb
 
 ## Description
 
-I created a new Sass theme using the ThemeBuilder tool, downloaded it, and added a reference to it in my `Layout.cshtml` file. The theme works as expected throughout all the application but it doesn't affect the charts even though I chose new colors for the series.
+I created a new SASS theme by using the Kendo UI ThemeBuilder tool, downloaded it, and added a reference to it in my `Layout.cshtml` file. The theme works as expected for the whole application but it doesn't affect the Charts even though I chose new colors for the series.
 
-## Cause\ Possible Cause(s)
+## Cause
 
-As the Charts are very specific Widgets, they require a custom property to be set before recognizing the new styles.
+The Charts require you to set a custom property before they recognize the new styles.
 
 ## Solution
 
-Set the `theme` property of the Kendo UI Charts to `"sass"`
+Set the `theme` property of the Kendo UI Charts to `"sass"`.
 
 ````c#
 @(Html.Kendo().Chart()
@@ -49,5 +49,6 @@ Set the `theme` property of the Kendo UI Charts to `"sass"`
 ````
 
 ## See Also
-* [Progress Sass ThemeBuilder.](http://themebuilder.telerik.com/aspnet-mvc)
-* [API Reference for theme property.](https://docs.telerik.com/kendo-ui/api/javascript/dataviz/ui/chart#configuration-theme)
+
+* [Progress SASS ThemeBuilder](http://themebuilder.telerik.com/aspnet-mvc)
+* [API Reference of the theme Property](https://docs.telerik.com/kendo-ui/api/javascript/dataviz/ui/chart#configuration-theme)

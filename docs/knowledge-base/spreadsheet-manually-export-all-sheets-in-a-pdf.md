@@ -1,6 +1,6 @@
 ---
 title: Manually Export All Sheets in a Single PDF
-description: An example on how to manually export all Spreadsheet Sheets in a single PDF.
+description: An example on how to manually export all Kendo UI Spreadsheet sheets in a single PDF.
 type: how-to
 page_title: Save Sheets on Separate Pages in the same PDF | Kendo UI Spreadsheet
 slug: spreadsheet-manually-export-all-sheets-in-a-pdf
@@ -22,7 +22,7 @@ component: spreadsheet
 
 ## Description
 
-How can I manually export the contents of all Sheets in a Kendo UI Spreadsheet into the same PDF file? I need to retain each Sheet on a separate page.
+How can I manually export the contents of all sheets in a Kendo UI Spreadsheet into the same PDF file, so that I can retain each sheet on a separate page?
 
 ## Solution
 
@@ -37,75 +37,75 @@ Use the `Spreadsheet.Sheet.draw()` method which is internally used by the Spread
     $("#spreadsheet").kendoSpreadsheet({
       sheets: [{
         name: "Food Order",
-        columns: [{ 
-          width: 500, 
-          index: 0 
+        columns: [{
+          width: 500,
+          index: 0
         }],
         rows: [{
           height: 70,
           cells: [{
-            index: 0, 
-            value: "Test", 
-            fontSize: 32, 
+            index: 0,
+            value: "Test",
+            fontSize: 32,
             background: "rgb(96,181,255)",
-            textAlign: "center", 
+            textAlign: "center",
             color: "white"
           }]
         }]
       },{
         name: "Test",
-        columns: [{ 
-          width: 500, 
-          index: 0 
+        columns: [{
+          width: 500,
+          index: 0
         }],
         rows: [{
           height: 70,
           cells: [{
-            index: 0, 
-            value: "Another", 
-            fontSize: 32, 
+            index: 0,
+            value: "Another",
+            fontSize: 32,
             background: "rgb(96,181,255)",
-            textAlign: "center", 
+            textAlign: "center",
             color: "white"
           }]
         }]
       },{
         name: "Another",
-        columns: [{ 
-          width: 500, 
-          index: 0 
+        columns: [{
+          width: 500,
+          index: 0
         }],
         rows: [{
           height: 70,
           cells: [{
-            index: 0, 
-            value: "Invoice #52 - 06/23/2015", 
-            fontSize: 32, 
+            index: 0,
+            value: "Invoice #52 - 06/23/2015",
+            fontSize: 32,
             background: "rgb(96,181,255)",
-            textAlign: "center", 
+            textAlign: "center",
             color: "white"
           }]
         }]
       }]
     });
-	
+
     $('#btn').on('click', function() {
       var spreadsheet = $("#spreadsheet").data("kendoSpreadsheet");
-	  
+
       if (null != spreadsheet) {
         var sheets = spreadsheet.sheets();
         var sheetPdfs = [];
 		var group = new kendo.drawing.Group();
-		
+
         sheets.forEach(function(sheet) {
           sheet.draw({ paperSize: 'A4' }, function(sheetPdf) {
             sheetPdfs.push(sheetPdf)
           })
         })
-        
+
         for (var i = 0; i < sheets.length; i++) {
           var currentSheetChildren = sheetPdfs[i].children;
-		  
+
           for (var j = currentSheetChildren.length; j > 0; j --) {
             group.append(currentSheetChildren[0]);
           }
@@ -115,8 +115,8 @@ Use the `Spreadsheet.Sheet.draw()` method which is internally used by the Spread
           	top: 10,
             left: 10
           },
-          multiPage: true, 
-          paperSize: 'A4', 
+          multiPage: true,
+          paperSize: 'A4',
           landscape: false
         }).done(function(data) {
           kendo.saveAs({
@@ -127,7 +127,7 @@ Use the `Spreadsheet.Sheet.draw()` method which is internally used by the Spread
       }
     });
   });
-</script>	
+</script>
 ```
 
 ## See Also
