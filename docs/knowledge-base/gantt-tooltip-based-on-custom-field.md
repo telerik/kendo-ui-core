@@ -1,8 +1,8 @@
 ---
 title: Show Different Gantt Task Tooltip Based on a Field in the DataSource
-description: An example on how to display different Tooltip content on hovering Kendo UI Gantt tasks based on the value of a custom field.
+description: An example on how to display different tooltip content on hovering Kendo UI Gantt tasks based on the value of a custom field.
 type: how-to
-page_title: Show Tooltip content based on Gantt task custom field value | Kendo UI Gantt
+page_title: Show Tooltip Content Based on Custom Task Field Value | Kendo UI Gantt
 slug: gantt-tooltip-based-on-custom-field
 tags: gantt, show, tooltip, different, task, field, custom, datasource
 ticketid: 1142071
@@ -33,17 +33,17 @@ component: gantt
 
 ## Description
 
-How can I display a different Tooltip for Gantt tasks that have different custom field values. 
+How can I display a different tooltip for Gantt tasks that have different custom field values?
 
 ## Solution
 
-1. Set the `tooltip.template` configuration option of the Gantt. 
-1. In the template access the custom field value of the task the Tooltip will depend on.
-1. Conditionally load different template content based on the custom field value.
+1. Set the `tooltip.template` configuration option of the Gantt.
+1. In the template, access the custom field value of the task that the tooltip will depend on.
+1. Based on the custom field value, conditionally load different template content.
 
 ```html
 	<div id="gantt"></div>
-  
+
 	<script type="text/x-kendo-template" id="myTemplate">
 		#if(task.customField == "type1"){#
 			<div style="background-color: lightgreen;">Type 1 tooltip template</div>
@@ -53,7 +53,7 @@ How can I display a different Tooltip for Gantt tasks that have different custom
 			<div>#: task.title #</div>
 		#}#
 	</script>
-  
+
 	<script>
 		$("#gantt").kendoGantt({
 			tooltip: {

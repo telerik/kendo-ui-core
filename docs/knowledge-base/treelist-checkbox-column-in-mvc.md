@@ -1,16 +1,16 @@
 ---
-title: Bind Checkbox on Treelist
-description: An article on how to bind checkbox on TreeList
+title: Bind Checkboxes in the MVC TreeList
+description: An example on how to add a checkbox column to the Kendo UI TreeList which will set the initial checked state based on model values.
 type: how-to
-page_title: Checkbox Column in MVC TreeList
+page_title: Add a Checkbox Column in TreeList | UI for ASP.NET MVC
 slug: treelist-checkbox-column-in-mvc
 tags: treelist, checkbox
 ticketid: 1141320
 res_type: kb
-
 ---
 
 ## Environment
+
 <table>
  <tr>
   <td>Product</td>
@@ -45,13 +45,11 @@ res_type: kb
 
 ## Description
 
-How to add a checkbox column in the TreeList which will initially set the checkboxes checked/unchecked status based on the model values?
+How can I add a checkbox column to the TreeList which will set an initial checked or unchecked state of the checkboxes based on the model values?
 
 ## Solution
 
-This could be achieved using the [Template](https://docs.telerik.com/aspnet-mvc/api/Kendo.Mvc.UI.Fluent/TreeListColumnBuilder#templatesystemstring) method of the TreeList column.
-
-Please check the following code snippet demonstrating this:
+Use the [`template`](https://docs.telerik.com/aspnet-mvc/api/Kendo.Mvc.UI.Fluent/TreeListColumnBuilder#templatesystemstring) method of the TreeList column.
 
 ````
 columns.Add().Field(e => e.CheckBoxColumnField).Template(

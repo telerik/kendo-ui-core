@@ -1,22 +1,20 @@
 ---
-title: Gantt Rows expand and Collapse All
-description: An example on how to implement a functionality to expand/collapse all tasks
+title: Expand and Collapse All Gantt Rows
+description: An example on how to implement a functionality to expand and collapse all kendo UI Gantt tasks.
 type: how-to
-page_title: Implement Expand/Collapse All Tasks on a Button Click | Kendo UI Gantt
+page_title: Implement Expand and Collapse All Tasks on a Button Click | Kendo UI Gantt
 slug: gantt-expand-collapse-alltasks
-position: 0
 tags: kendo, kendoui, gantt, expand, collapse, all, tasks, button, click
 ticketid: 1142128
-pitsid:
 res_type: kb
-
 ---
 
 ## Environment
+
 <table>
  <tr>
   <td>Product</td>
-  <td>Gantt for Progress® Kendo UI®</td>
+  <td>Progress Kendo UI Gantt</td>
  </tr>
  <tr>
   <td>Operating System</td>
@@ -35,16 +33,14 @@ res_type: kb
 
 ## Description
 
-I would like to have a button on the page, which should be able to expand/collapse all tasks in my Gantt.
+How can I add a button which will expand or collapse all tasks in my Gantt?
 
 ## Solution
 
-In order to achieve the desired functionality, you should follow the steps below:
-
-1. Add a button on your page and subscribe for its click event.
-1. In the click function, you can get a reference to the DataSource of the Gantt (all tasks rendered in it)
-1. Implement a loop, in order to iterate through all tasks.
-1. Use set("expanded", [true/false]), in order to manage the expanded state
+1. Add a button to your page and subscribe for its `click` event.
+1. In the `click` function, get a reference to the DataSource of the Gantt (all tasks that are rendered in it).
+1. Implement a loop to iterate through all tasks.
+1. Use `set("expanded", [true/false])` to manage the expanded state.
 
 ```html
 

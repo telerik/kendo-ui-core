@@ -1,20 +1,20 @@
 ---
-title: Add Footer With Buttons to Kendo Window
-description: An example on how to add a footer with buttons to a resizable Kendo Window
+title: Add Footer With Buttons to the Window
+description: An example on how to add a footer with buttons to a resizable Kendo UI Window.
 type: how-to
-page_title: Add Footer With Buttons to Kendo Window
+page_title: Add Footer With Buttons | Kendo UI Window
 slug: window-add-footer-with-buttons
 tags: window, footer, buttons, resizable, scrollable
 ticketid: 1142513
 res_type: kb
-
 ---
 
 ## Environment
+
 <table>
  <tr>
   <td>Product</td>
-  <td>Window for Progress® Kendo UI®</td>
+  <td>Progress Kendo UI Window</td>
  </tr>
  <tr>
   <td>Operating System</td>
@@ -32,11 +32,11 @@ res_type: kb
 
 ## Description
 
-How can a footer with buttons be added to a resizable, scrollable Kendo UI Window?
+How can I add a footer with buttons to a resizable and scrollable Kendo UI Window?
 
 ## Solution
 
-Using CSS, we can position the footer with custom buttons at the bottom of the Window:
+Position the footer with the custom buttons at the bottom of the Window by using the following CSS rules.  
 
 ```html
 <div id="window">
@@ -69,7 +69,7 @@ Using CSS, we can position the footer with custom buttons at the bottom of the W
   });
 </script>
 
-<style scoped> 
+<style scoped>
   .armchair{
     overflow: auto;
     height: calc(100% - 90px);
@@ -78,7 +78,7 @@ Using CSS, we can position the footer with custom buttons at the bottom of the W
   .window-footer{
     position: absolute;
     bottom: 0;
-    display: block; 
+    display: block;
     width: 95%;
     margin-top: 150px;
     padding: 19px 0 20px;
@@ -90,4 +90,4 @@ Using CSS, we can position the footer with custom buttons at the bottom of the W
 
 ## See Also
 
-* [Kendo UI Window Overview.](https://docs.telerik.com/kendo-ui/controls/layout/window/overview)
+* [Kendo UI Window Overview](https://docs.telerik.com/kendo-ui/controls/layout/window/overview)

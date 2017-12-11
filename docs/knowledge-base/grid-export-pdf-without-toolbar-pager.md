@@ -1,20 +1,20 @@
 ---
-title: Exclude Toolbar and Pager from Grid Pdf Export
-description: An example on how to export the Grid to Pdf without the toolbar and pager
+title: Exclude Toolbar and Pager from Grid PDF Export
+description: An example on how to export the Kendo UI Grid to PDF without the toolbar and pager.
 type: how-to
-page_title: Exclude Toolbar and Pager from Grid Pdf Export
+page_title: Exclude Toolbar and Pager from PDF Export | Kendo UI Grid
 slug: grid-export-pdf-without-toolbar-pager
 tags: grid, export, pdf, toolbar, pager, ignore, exclude
 ticketid: 1143253
 res_type: kb
-
 ---
 
 ## Environment
+
 <table>
  <tr>
   <td>Product</td>
-  <td>Grid for Progress® Kendo UI®</td>
+  <td>Progress Kendo UI Grid</td>
  </tr>
  <tr>
   <td>Operating System</td>
@@ -32,11 +32,13 @@ res_type: kb
 
 ## Description
 
-When exporting a Kendo UI Grid to Pdf, the custom Toolbar and Pager are included; how can I prevent them from appearing in the exported Pdf file?
+When I export a Kendo UI Grid to PDF, the custom toolbar and pager are included.
+
+How can I prevent the custom toolbar and pager from appearing in the exported PDF file?
 
 ## Solution
 
-Using the following CSS, we can prevent the Toolbar and Pager from being exported when using the export to pdf functionality of the Kendo UI Grid:
+Use the following CSS rules.
 
 ````css
 .k-pdf-export .k-grid-toolbar,
@@ -46,13 +48,13 @@ Using the following CSS, we can prevent the Toolbar and Pager from being exporte
 }
 ````
 
-The result:
+The following example demonstrates the outcome of the suggested approach.
 
 ```html
 <div id="example">
 
   <div id="grid"></div>
-  
+
   <script type="text/x-kendo-template" id="template">
     <div class="toolbar">
       <label class="category-label" for="category">Test input:</label>
@@ -203,4 +205,4 @@ The result:
 
 ## See Also
 
-* [Kendo UI Grid PDF Export Overview.](https://docs.telerik.com/kendo-ui/controls/data-management/grid/pdf-export)
+* [Exporting the Kendo UI Grid to PDF](https://docs.telerik.com/kendo-ui/controls/data-management/grid/pdf-export)

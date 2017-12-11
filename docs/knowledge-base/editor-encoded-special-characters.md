@@ -1,6 +1,6 @@
 ---
-title: Set Encoded Special Characters as Editor Value
-description: An example on how to display decoded special characters in the Editor.
+title: Set Encoded Special Characters as Editor Values
+description: An example on how to display decoded special characters in the Kendo UI Editor.
 type: how-to
 page_title: Programmatically set encoded special characters as value | Kendo UI Editor
 slug: editor-encoded-special-characters
@@ -33,17 +33,17 @@ component: editor
 
 ## Description
 
-How can I set encoded special characters as Editor value and display them decoded?
+How can I set the encoded special characters as Editor values and display them decoded?
 
 ## Solution
 
-Decode the encoded special characters prior to passing them as a parameter to the `value` method of the Editor.
+Prior to passing them as a parameter to the `value` method of the Editor, decode the encoded special characters.
 
 ```html
 <textarea id="editor"></textarea>
 <script>
 	$("#editor").kendoEditor();
-  
+
 	var editor = $("#editor").data("kendoEditor");
 	var encodedString = "&lt;p&gt;Paragraph with a &gt; special character inside.&lt;/p&gt";
 	var parser = new DOMParser;
@@ -51,7 +51,7 @@ Decode the encoded special characters prior to passing them as a parameter to th
 		'<!doctype html><body>' + encodedString,
 		'text/html');
 	var decodedString = dom.body.textContent;
-    
+
 	editor.value(decodedString);
 </script>
 ```

@@ -1,20 +1,20 @@
 ---
-title: Alternate Colors in DropDownList Items
-description: An example on how to implement alternating colors in a Kendo UI DropDownList
+title: Alternate Colors of DropDownList Items
+description: An example on how to implement alternating colors in a Kendo UI DropDownList.
 type: how-to
-page_title: Alternate Colors in DropDownList Items
+page_title: Alternate Colors of Items | Kendo UI DropDownList
 slug: dropdownlist-alternate-color-items
 tags: dropdownlist, dropdown, list, items, color, alternate, background
 ticketid: 1141949
 res_type: kb
-
 ---
 
 ## Environment
+
 <table>
  <tr>
   <td>Product</td>
-  <td>DropDownList for Progress® Kendo UI®</td>
+  <td>Progress Kendo UI DropDownList</td>
  </tr>
  <tr>
   <td>Operating System</td>
@@ -32,11 +32,11 @@ res_type: kb
 
 ## Description
 
-How can alternating colors be implemented in the items of a Kendo UI DropDownList?
+How can I implement alternating colors in the items of a Kendo UI DropDownList?
 
 ## Solution
 
-In a Kendo UI DropDownList, the background color of items can be alternated using CSS:
+Use the following CSS rules:
 
 ````css
  #countries-list ul li:nth-of-type(odd) {
@@ -77,4 +77,4 @@ In a Kendo UI DropDownList, the background color of items can be alternated usin
 
 ## See Also
 
-* [DropDownList Overview.](https://docs.telerik.com/kendo-ui/controls/editors/dropdownlist/overview)
+* [DropDownList Overview](https://docs.telerik.com/kendo-ui/controls/editors/dropdownlist/overview)
