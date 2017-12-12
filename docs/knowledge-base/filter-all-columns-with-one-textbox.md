@@ -4,7 +4,7 @@ description: Example on how to filter all columns with single textbox
 type: how-to
 page_title: Filter all columns with single textbox | Kendo UI Grid
 slug: filter-all-columns-with-one-textbox
-tags: grid, filter, all, columns, single, input, textbox, one
+tags: grid, filter, all, columns, single, input, textbox, one, global, search, entire, whole
 res_type: kb
 component: grid
 ---
@@ -23,7 +23,7 @@ component: grid
 
 ## Description
 
-I want the users to search through all columns of the grid using one single input field.
+I want the users to search through all columns of the grid using one single input field. How can I implement a global grid search?
 
 ## Solution
 
@@ -39,9 +39,18 @@ Within the [input event](https://developer.mozilla.org/en-US/docs/Web/Events/inp
       <div id="grid"></div>
 
       <script>        
-
         function isNumeric(n) {
           return !isNaN(parseFloat(n)) && isFinite(n);
+        }
+
+        function getBoolean(str) {
+          if("true".startsWith(str)){
+            return true;
+          } else if("false".startsWith(str)){
+            return false;
+          } else {
+            return null;
+          }          
         }
 
         $(document).ready(function () {
@@ -101,11 +110,9 @@ Within the [input event](https://developer.mozilla.org/en-US/docs/Web/Events/inp
             var grid = $('#grid').data('kendoGrid');
             var columns = grid.columns;
 
-
             var filter = { logic: 'or', filters: [] };
             columns.forEach(function (x) {
               if (x.field) {
-                debugger
                 var type = grid.dataSource.options.schema.model.fields[x.field].type;
                 if (type == 'string') {
                   filter.filters.push({
@@ -120,10 +127,8 @@ Within the [input event](https://developer.mozilla.org/en-US/docs/Web/Events/inp
                       field: x.field,
                       operator: 'eq',
                       value: e.target.value
-                    })
-
-                  }              
-
+                    });
+                  }    
 
                 } else if (type == 'date') {
                   var date = new Date(e.target.value)
@@ -135,14 +140,19 @@ Within the [input event](https://developer.mozilla.org/en-US/docs/Web/Events/inp
                       value: date
                     })
                   }
-                }
+                } else if (type == 'boolean' && getBoolean(e.target.value) !== null) {
+                  var bool = getBoolean(e.target.value);
+                  filter.filters.push({
+                    field: x.field,
+                    operator: 'eq',
+                    value: bool
+                  });
+                }               
               }
-
-            })
+            });
             grid.dataSource.filter(filter);
-          })
+          });
         });
-
       </script>
     </div>
 ```
