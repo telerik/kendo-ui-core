@@ -1387,7 +1387,7 @@
                     .find(".k-resize-handle,.k-window-titlebar").off(NS);
 
                 $(window).off("resize" + NS + this._marker);
-                $(window).off("focus"+ NS);
+                $(window).off(NS);
 
                 clearTimeout(this._loadingIconTimeout);
 
