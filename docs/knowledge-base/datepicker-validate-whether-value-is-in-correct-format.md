@@ -1,11 +1,10 @@
 ---
-title: Validate whether value is in correct format
-description: An example on how to validate whether value is in correct format of the Kendo UI DatePicker and DateTimePicker widgets.
+title: Validate If Value Is in the Correct Format
+description: An example on how to validate whether value is in the correct format in the Kendo UI DatePicker and DateTimePicker widgets.
 type: how-to
-page_title: Validate whether value is in correct format| Kendo UI DatePicker
+page_title: Validate Whether Value Is in the Correct Format | Kendo UI DatePicker
 slug: datepicker-validate-whether-value-is-in-correct-format
 tags: kendo, ui, datepicker, datetimepicker, validate, format,correct, value,input
-ticketid: 
 res_type: kb
 component: datepicker
 ---
@@ -16,6 +15,7 @@ component: datepicker
  <tr>
   <td>Product</td>
   <td>Progress Kendo UI DatePicker</td>
+  <td>Progress Kendo UI DateTimePicker</td>
  </tr>
  <tr>
   <td>Progress Kendo UI version</td>
@@ -26,15 +26,11 @@ component: datepicker
 
 ## Description
 
-Can I validate whether the input of the user is in the correct format?
+How can I validate whether the input of the user in the DatePicker is in the correct format?
 
 ## Solution
 
-A possible solution is to use the [Kendo Validator](https://docs.telerik.com/kendo-ui/controls/editors/validator/overview) and create a custom validation rule which validates the format of the date.
-
-### DatePicker
-
-The following example demonstrates the full implementation of the approach.
+Use the [Kendo UI Validator](https://docs.telerik.com/kendo-ui/controls/editors/validator/overview) and create a custom validation rule which validates the format of the date.
 
 ```html
     <h2>Use client-side validation:</h2>
@@ -89,6 +85,6 @@ The following example demonstrates the full implementation of the approach.
 
 ## See Also
 
-* [DatePicker API Reference](http://docs.telerik.com/kendo-ui/api/javascript/ui/datepicker)
-* [DateTimePicker API Reference](http://docs.telerik.com/kendo-ui/api/javascript/ui/datetimepicker)
-* [Calendar API Reference](http://docs.telerik.com/kendo-ui/api/javascript/ui/calendar)
+* [API Reference of the DatePicker](http://docs.telerik.com/kendo-ui/api/javascript/ui/datepicker)
+* [API Reference of the DateTimePicker](http://docs.telerik.com/kendo-ui/api/javascript/ui/datetimepicker)
+* [API Reference of the Calendar](http://docs.telerik.com/kendo-ui/api/javascript/ui/calendar)

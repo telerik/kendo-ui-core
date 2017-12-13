@@ -803,7 +803,7 @@ var __meta__ = { // jshint ignore:line
 
             wrapper[0].style.cssText = DOMelement.style.cssText;
             element.css({
-                width: "100%",
+                width: "",
                 height: DOMelement.style.height
             });
 

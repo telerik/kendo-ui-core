@@ -1,8 +1,8 @@
 ---
-title: Open the popup editor of a Kendo UI Grid on double click of a row
-description: Open the popup editor of a Kendo UI Grid on double click of a row
+title: Open the Popup Editor on Double Click of a Grid Row
+description: An example on how to open the popup editor of a Kendo UI Grid by double-clicking a row.
 type: how-to
-page_title: Open the popup editor of a Kendo UI Grid on double click of a row | Kendo UI Grid
+page_title: Open the Popup Editor on Double Click of a Row | Kendo UI Grid
 slug: grid-open-edit-popup-on-double-click-of-row
 tags: grid, editor, popup, double, click, row, on, of, open,edit
 res_type: kb
@@ -10,10 +10,11 @@ component: grid
 ---
 
 ## Environment
+
 <table>
  <tr>
   <td>Product</td>
-  <td>Grid for Progress® Kendo UI®</td>
+  <td>Progress Kendo UI Grid</td>
  </tr>
  <tr>
   <td>Progress Kendo UI version</td>
@@ -23,12 +24,12 @@ component: grid
 
 ## Description
 
-I have a grid and I want to open the popup editor when I double click a row.
+How can I open the popup editor when I double-click a Grid row?
 
 ## Solution
 
-Within the [databound event](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid#events-dataBound) handler attach a handler to the double click event of the `tr` element. When the double click event of the row is fired, edit the clicked row using the [editRow method](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid#methods-editRow).
-    
+1. Within the [`databound`](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid#events-dataBound) event handler, attach a handler to the double-click event of the `tr` element.
+1. When the double-click event of the row is fired, edit the clicked row by using the [`editRow`](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid#methods-editRow) method.
 
 ```html
 
@@ -95,7 +96,7 @@ Within the [databound event](https://docs.telerik.com/kendo-ui/api/javascript/ui
         function onDataBound() {
           var grid = this;
 
-          grid.element.find('tbody tr[data-uid]').dblclick(function (e) {
+          grid.element.on('dblclick','tbody tr[data-uid]',function (e) {
             grid.editRow($(e.target).closest('tr'));
           })
         }
@@ -107,7 +108,7 @@ Within the [databound event](https://docs.telerik.com/kendo-ui/api/javascript/ui
         }
       </script>
     </div>
-    
+
     <style>
       tbody tr:hover{
         cursor: pointer

@@ -5,7 +5,7 @@
     position: relative;
     display: block;
     vertical-align: middle;
-    line-height: 2.9em;
+    padding: 0.28571428em;
 }
 
 .k-toolbar .k-button .k-sprite,
@@ -16,24 +16,11 @@
     margin-bottom: -5px;
 }
 
-.k-toolbar .k-input
-{
-    line-height: inherit;
-    height: inherit;
-    padding-top: 2px;
-    padding-bottom: 2px;
-}
-
 .k-toolbar .k-input:before
 {
     content: "\a0";
     display: inline-block;
     width: 0;
-}
-
-.k-ie .k-toolbar .k-input
-{
-    height: 1.65em;
 }
 
 .k-toolbar .k-combobox .k-dropdown-wrap:before,
@@ -66,6 +53,7 @@
 
 .k-toolbar > * {
     display: inline-block;
+    vertical-align: middle;
 }
 
 .k-toolbar .k-separator
@@ -73,7 +61,7 @@
     border-width: 0 0 0 1px;
     border-style: solid;
     width: 1px;
-    line-height: inherit;
+    line-height: calc((30/14)*1em);
 }
 
 .k-toolbar .k-button-group
@@ -96,12 +84,11 @@
 .k-toolbar .k-split-button,
 .k-toolbar .k-button-group,
 .k-toolbar .k-widget,
-.k-toolbar .k-textbox,
+.k-toolbar span:not(.k-maskedtextbox) .k-textbox,
 .k-toolbar label,
 .k-toolbar .k-separator
 {
     margin: 0 .2em;
-    line-height: 1.72em;
     vertical-align: middle;
 }
 
@@ -123,16 +110,23 @@
 
 .k-toolbar .k-overflow-anchor
 {
+    position: absolute;
+    top: -1px;
+    right: -1px;
+    bottom: -1px;
+    width: calc((40/14)*1em);
+    margin: 0;
+    line-height: inherit;
     border-width: 0 0 0 1px;
     border-style: solid;
-    height: 3em;
-    width: 3em;
-    line-height: inherit;
-    padding: 0 .5em;
-    margin: 0;
-    position: relative;
-    float: right;
     border-radius: 0;
+
+    & > .k-icon {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        margin: -8px;
+    }
 }
 
 .k-overflow-container .k-item

@@ -1,8 +1,8 @@
 ---
-title: Filter a grid with the Kendo UI MultiSelect widget
-description: An example on how to customize the filter in order to use the MultiSelect widget.
+title: Filter Grid by Using the MultiSelect
+description: An example on how to customize the kendo UI Grid filter and use the Kendo UI MultiSelect widget.
 type: how-to
-page_title:  Filter a grid with the Kendo UI MultiSelect widget | Kendo UI Grid
+page_title:  Filter the Grid with the MultiSelect Widget | Kendo UI Grid
 slug: filter-grid-with-multi-select-widget
 tags: kendo ui, mvc, grid, multi, select, filter, custom,
 ticketid: 1129339
@@ -15,7 +15,7 @@ component: grid
 <table>
  <tr>
   <td>Product</td>
-  <td>Grid for Progress Kendo UI</td>
+  <td>Progress Kendo UI Grid</td>
  </tr>
  <tr>
    <td>Progress Kendo UI version</td>
@@ -25,11 +25,13 @@ component: grid
 
 ## Description
 
-How can I apply multiple filters for single field with the Kendo UI MultiSelect widget?
+How can I apply multiple filters in a Grid for a single field with the Kendo UI MultiSelect widget?
 
 ## Solution
 
-Use the `columns.filterable.ui` for menu filtering and `columns.filterable.cell.template` for row filtering in order to specify which function will create the custom filter widget. In that function create MultiSelect widget and when the `change` event is fired apply the filters to the grid based on the currently selected items.
+1. Specify which function will create the custom filter widget by using the `columns.filterable.ui` for menu filtering and `columns.filterable.cell.template` for row filtering.
+1. In that function, create a MultiSelect widget.
+1. When the `change` event is fired, apply the filters to the Grid based on the currently selected items.
 
 ```html
     <div id="example">

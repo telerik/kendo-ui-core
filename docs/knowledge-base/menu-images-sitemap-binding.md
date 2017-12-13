@@ -1,8 +1,8 @@
 ---
-title: Display Images in Menu Items when Using Sitemap Binding 
-description: An example on how to display images in the items when the Menu is bound using sitemap binding.
+title: Display Images in Menu Items When Using Sitemap Binding
+description: An example on how to display images in the items when the Knedo UI Menu is bound by using a sitemap binding.
 type: how-to
-page_title: Show Images in Items when Using Sitemap Binding | Menu for ASP.NET MVC
+page_title: Show Images in Items When Using Sitemap Binding | UI for ASP.NET MVC
 slug: menu-images-sitemap-binding
 tags: menu, show, display, images, items, sitemap, binding, xml
 ticketid: 1143354
@@ -15,7 +15,7 @@ component: menu
 <table>
  <tr>
   <td>Product</td>
-  <td>Menu for ASP.NET MVC</td>
+  <td>Progress Kendo UI Menu for ASP.NET MVC</td>
  </tr>
  <tr>
   <td>Operating System</td>
@@ -33,17 +33,17 @@ component: menu
 
 ## Description
 
-I have set urls to different images for the items in the xml file I am binding the Menu to, how can I configure the Menu to display those images?
+How can I display images, which are set to different URLs, for the items in the `.xml` file to which I am binding the Menu?
 
 ## Solution
 
-1. The image url can stored as an attribute value in the xml file, as in the example below, in which the **image** attribute is used for that purpose.
+1. Store the image URL as an attribute value in the `.xml` file where the `image` attribute is used for that purpose.
 
 ```html
 	<siteMapNode controller="menu" action="sitemapbinding" title="Baseball" image="/Content/shared/icons/sports/baseball.png" />
 ```
 
-1. The attribute can be accessed in the binding configuration of the Menu and its value set as `ImageUrl` value. 
+1. Access the attribute in the binding configuration of the Menu and set its value as an `ImageUrl` value.
 
 ```html
 	@(Html.Kendo().Menu()
@@ -52,7 +52,7 @@ I have set urls to different images for the items in the xml file I am binding t
 			if (value.Attributes["image"] != null)
 			{
 				item.ImageUrl = value.Attributes["image"].ToString();
-			} 
+			}
 		})
 	)
 ```

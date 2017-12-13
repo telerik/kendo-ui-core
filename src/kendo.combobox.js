@@ -874,7 +874,7 @@ var __meta__ = { // jshint ignore:line
 
             input.addClass(element.className)
                  .css({
-                    width: "100%",
+                    width: "",
                     height: element.style.height
                  })
                  .attr({

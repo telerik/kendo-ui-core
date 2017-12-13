@@ -209,7 +209,6 @@
 .k-textbox > input,
 .k-autocomplete,
 .k-dropdown-wrap,
-.k-toolbar,
 .k-group-footer td,
 .k-grid-footer,
 .k-footer-template td,
@@ -239,7 +238,6 @@
 .k-splitbar,
 .k-dropzone-active,
 .k-tiles,
-.k-toolbar,
 .k-tooltip,
 .k-button-group .k-tool,
 .k-upload-files,
@@ -248,6 +246,10 @@
 .k-dateinput.k-state-disabled > .k-textbox:hover
 {
     border-color: @widget-border-color;
+}
+
+.k-toolbar .k-separator {
+    border-color: @button-border-color
 }
 
 .k-group,
@@ -286,12 +288,15 @@ td.k-group-cell,
 }
 
 .k-alt,
-.k-separator,
 .k-resource.k-alt,
 .k-pivot-layout > tbody > tr:first-child > td:first-child,
 .k-calendar .k-alt
 {
     background-color: @alt-background-color;
+}
+
+.k-separator {
+    background-color: fade(@alt-background-color, 10);
 }
 
 .k-pivot-rowheaders .k-alt .k-alt,

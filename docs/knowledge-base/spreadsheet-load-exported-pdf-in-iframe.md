@@ -1,6 +1,6 @@
 ---
-title: Create an Inline PDF from a Kendo Spreadsheet and Embed it in an iFrame
-description: An example on how to generate a PDF from the Kendo Spreadsheet and load the PDF in an iframe element
+title: Create an Inline PDF from the Spreadsheet and Embed It in an iFrame
+description: An example on how to generate a PDF from the Kendo UI Spreadsheet and load the PDF in an iframe element.
 type: how-to
 page_title: Export Spreadsheet to PDF and Load the File in iFrame | Kendo UI Spreadsheet
 slug: spreadsheet-load-exported-pdf-in-iframe

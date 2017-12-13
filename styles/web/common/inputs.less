@@ -36,30 +36,25 @@ span.k-dropdown,
 .k-autocomplete > .k-i-close,
 .k-combobox > .k-dropdown-wrap > .k-i-close,
 .k-multiselect > .k-multiselect-wrap > .k-i-close {
+    font-size: 100%;
     display: none;
     position: absolute;
-    right: 0;
+    right: (@grid-size/4 + 2px);
+    cursor: pointer;
 }
 
 .k-autocomplete > .k-i-close,
 .k-combobox > .k-dropdown-wrap > .k-i-close {
-    bottom: 0;
     top: 50%;
     transform: translateY(-50%);
 }
 
 .k-combobox > .k-dropdown-wrap > .k-i-close {
-    font-size: 100%;
     right: 2.4em;
 }
 
 .k-multiselect > .k-multiselect-wrap > .k-i-close {
     top: (@grid-size/2 - 2px);
-}
-
-.k-autocomplete > .k-i-close,
-.k-multiselect > .k-multiselect-wrap > .k-i-close {
-    margin-right: (@grid-size/4 + 2px);
 }
 
 .k-autocomplete,
@@ -71,12 +66,6 @@ span.k-dropdown,
             outline: none;
         }
     }
-}
-
-.k-autocomplete > .k-hidden,
-.k-combobox > .k-dropdown-wrap > .k-hidden,
-.k-multiselect .k-hidden {
-    display: none !important;
 }
 
 .k-multiselect {
@@ -89,25 +78,10 @@ span.k-dropdown,
     }
 }
 
-.k-autocomplete,
-.k-combobox > .k-dropdown-wrap {
-    &.k-state-border-down {
-        > .k-i-close {
-           margin-top: -1px;
-        }
-    }
-}
-
-.k-filter-menu .k-combobox,
-.k-filter-menu .k-datepicker,
-.k-filter-menu .k-timepicker,
-.k-filter-menu .k-datetimepicker,
-.k-filter-menu .k-numerictextbox,
-.k-filter-menu .k-dropdown,
-.k-filter-menu .k-autocomplete,
-.k-filter-menu .k-textbox
-{
-    width: 13.2em;
+.k-autocomplete > .k-hidden,
+.k-combobox > .k-dropdown-wrap > .k-hidden,
+.k-multiselect .k-hidden {
+    display: none !important;
 }
 
 .k-autocomplete,
@@ -122,6 +96,18 @@ span.k-dropdown,
 .k-toolbar .k-split-button
 {
     white-space: nowrap;
+}
+
+.k-filter-menu .k-combobox,
+.k-filter-menu .k-datepicker,
+.k-filter-menu .k-timepicker,
+.k-filter-menu .k-datetimepicker,
+.k-filter-menu .k-numerictextbox,
+.k-filter-menu .k-dropdown,
+.k-filter-menu .k-autocomplete,
+.k-filter-menu .k-textbox
+{
+    width: 13.2em;
 }
 
 .k-colorpicker,
@@ -141,11 +127,6 @@ span.k-dropdown,
 {
     position: relative;
     cursor: default;
-}
-
-.k-dropdown-wrap
-{
-    position: relative;
 }
 
 .k-dropdown-wrap,
@@ -224,11 +205,20 @@ span.k-dropdown,
 {
     border-width: 1px;
     border-style: solid;
-    padding: 0 1.9em 0 0;
 }
 
-.k-numeric-wrap.k-expand-padding
+.k-dropdown-wrap
 {
+    position: relative;
+}
+
+.k-dropdown-wrap,
+.k-numeric-wrap,
+.k-picker-wrap {
+    padding-right: 2em;
+}
+
+.k-numeric-wrap .k-expand-padding {
     padding-right: 0;
 }
 
@@ -240,12 +230,16 @@ span.k-dropdown,
 
 .k-textbox.k-space-left
 {
-    padding-left: 1.9em;
+    padding-left: 2em;
 }
 
 .k-textbox.k-space-right
 {
-    padding-right: 1.9em;
+    padding-right: 2em;
+}
+
+.k-picker-wrap .k-input {
+    margin: 0;
 }
 
 .k-textbox .k-icon
@@ -291,7 +285,6 @@ span.k-textbox:after
 .k-combobox .k-input
 {
     width: 100%;
-    vertical-align: top;
 }
 
 .k-picker-wrap .k-input,
@@ -341,11 +334,7 @@ span.k-datetimepicker .k-select+.k-select
 .k-autocomplete .k-input
 {
     display: block;
-}
-
-.k-combobox .k-icon
-{
-    /*margin-top: 1px;*/
+    width: 100%;
 }
 
 .k-dropdown .k-select,
@@ -368,28 +357,40 @@ span.k-datetimepicker .k-select+.k-select
 
 .k-textbox > input,
 .k-autocomplete .k-input,
+.k-multiselect-wrap .k-input,
 .k-picker-wrap .k-input,
 .k-numeric-wrap .k-input,
 .k-dropdown-wrap .k-input,
 .k-selectbox .k-input
 {
-    height: @input-height;
     line-height: @input-height;
-    padding: 0.177em 0;
+    padding: 0.17857143em 0;
     text-indent: @input-indent;
     border: 0;
     margin: 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
-.k-combobox .k-dropdown-wrap:before,
-.k-picker-wrap:before,
-.k-numeric-wrap:before
-{
-    content: "\a0";
+.k-dropdown-wrap .k-input:before {
+    content: "";
     display: inline-block;
-    width: 0;
-    height: @input-height;
-    padding-bottom: 0.3em;
+}
+
+.k-ie {
+    .k-textbox > input,
+    .k-autocomplete .k-input,
+    .k-multiselect-wrap .k-input,
+    .k-picker-wrap .k-input,
+    .k-numeric-wrap .k-input,
+    .k-dropdown-wrap .k-input,
+    .k-selectbox .k-input {
+        height: @input-height;
+    }
+
+    input.k-textbox {
+        height: ~"calc(@{input-height} + 2*@{input-padding-y} + 2px)";
+    }
 }
 
 /* fix missing bottom border on browser zoom in Chrome */
@@ -419,12 +420,11 @@ span.k-datetimepicker .k-select+.k-select
 .k-numeric-wrap .k-select,
 .k-dropdown-wrap .k-select
 {
-    min-height: @input-height;
     line-height: (@input-height + .35em);
     vertical-align: middle;
     -moz-box-sizing: border-box;
     text-align: center;
-    width: 1.9em;
+    width: 2em;
     height: 100%;
 }
 
@@ -596,6 +596,7 @@ body .k-datetimepicker .k-select
 
 .k-multiselect-wrap .k-input
 {
+    min-width: 25px;
     background-color: transparent;
     height: @input-height;
     line-height: @input-height;
@@ -625,8 +626,9 @@ body .k-datetimepicker .k-select
 .k-multiselect .k-i-loading
 {
     position: absolute;
-    right: 3px;
-    bottom: 4px;
+    top: auto;
+    right: 0.4em;
+    bottom: 0.4em;
 }
 
 .k-multiselect-wrap .k-select
@@ -643,12 +645,18 @@ body .k-datetimepicker .k-select
 .k-multiselect-clearable,
 .k-combobox-clearable {
     .k-input {
-        padding-right: 1.9em;
-        box-sizing: border-box;
         overflow: hidden;
         text-overflow: ellipsis;
-        height: (@input-height + .35em);
     }
+}
+
+.k-combobox-clearable .k-input {
+    width: calc(100% - 2em);
+    padding-right: 2em;
+}
+
+.k-multiselect-clearable .k-multiselect-wrap {
+    padding-right: 2em;
 }
 
 /* Date/Time Pickers */
@@ -693,11 +701,6 @@ body .k-datetimepicker .k-select
     vertical-align: middle;
 }
 
-.k-picker-wrap .k-input
-{
-    margin: 0;
-}
-
 .k-time-popup .k-item
 {
     padding: 1px 3px;
@@ -729,11 +732,9 @@ textarea.k-textbox
     padding: 0.177em 0;
 }
 
-input.k-textbox
-{
-    height: (@input-height + 0.48em);
+input.k-textbox {
+    line-height: @input-height;
     text-indent: @input-indent;
-    line-height: 1.6em;
 }
 
 .k-ie input.k-textbox
@@ -777,11 +778,11 @@ span.k-numerictextbox
     }
 
     .k-i-arrow-60-up {
-        top: 2px;
+        top: 0;
     }
 
     .k-i-arrow-60-down {
-        bottom: 2px;
+        bottom: 0;
     }
 }
 
@@ -1085,7 +1086,7 @@ span.k-numerictextbox
     .k-i-warning {
         display: none;
         position: absolute;
-        width: 1.9em;
+        width: 2em;
         right: 0;
         top: 50%;
         transform: translateY(-50%);
@@ -1247,7 +1248,7 @@ span.k-numerictextbox
     .k-multiselect-clearable,
     .k-combobox-clearable {
         .k-input {
-            padding-left: 1.9em;
+            padding-left: 2em;
             padding-right: 0.177em;
         }
     }

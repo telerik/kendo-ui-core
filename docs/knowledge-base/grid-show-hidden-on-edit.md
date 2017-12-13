@@ -1,8 +1,8 @@
 ---
-title: Show hidden columns when editing
-description: Example on how to show hidden columns when editing
+title: Show Hidden Columns When Editing the Grid
+description: An example on how to show the hidden columns when editing a Kendo UI Grid.
 type: how-to
-page_title: Show hidden columns when editing | Kendo UI Grid
+page_title: Show Hidden Columns When Editing the Grid | Kendo UI Grid
 slug: grid-show-hidden-on-edit
 tags: grid, edit, show, hidden, on, editor
 res_type: kb
@@ -10,10 +10,11 @@ component: grid
 ---
 
 ## Environment
+
 <table>
  <tr>
   <td>Product</td>
-  <td>Grid for Progress® Kendo UI®</td>
+  <td>Progress Kendo UI Grid</td>
  </tr>
  <tr>
   <td>Progress Kendo UI version</td>
@@ -23,12 +24,14 @@ component: grid
 
 ## Description
 
-I have a grid in inline edit mode with hidden columns and the user should be able to edit them.
+How can I display the hidden rows in a Grid in inline edit mode so that the user is able to edit them?
 
 ## Solution
 
-Simply toggle the visibility of the column using the built-in methods of the Kendo Grid. Show the column using [showColumn](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid#methods-showColumn) method within the [beforeEdit](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid#events-beforeEdit) event handler and hide it using [hideColumn](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid#methods-hideColumn) when [save](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid#events-save) event is fired.
-    
+Toggle the visibility of the column by using the built-in methods of the Grid.
+
+1. Within the [`beforeEdit`](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid#events-beforeEdit) event handler, show the column by using the [`showColumn`](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid#methods-showColumn) method.
+1. When the [`save`](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid#events-save) event is fired, hide the column by using the [`hideColumn`](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid#methods-hideColumn) method.
 
 ```html
 

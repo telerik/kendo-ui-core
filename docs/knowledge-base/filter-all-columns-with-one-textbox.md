@@ -1,8 +1,8 @@
 ---
-title: Filter all columns with single textbox
-description: Example on how to filter all columns with single textbox
+title: Filter All Grid Columns with Single Textbox
+description: An example on how to filter all columns with a single textbox in the Kendo UI Grid.
 type: how-to
-page_title: Filter all columns with single textbox | Kendo UI Grid
+page_title: Filter All Columns with Single Textbox | Kendo UI Grid
 slug: filter-all-columns-with-one-textbox
 tags: grid, filter, all, columns, single, input, textbox, one, global, search, entire, whole
 res_type: kb
@@ -10,10 +10,11 @@ component: grid
 ---
 
 ## Environment
+
 <table>
  <tr>
   <td>Product</td>
-  <td>Grid for Progress® Kendo UI®</td>
+  <td>Progress Kendo UI Grid</td>
  </tr>
  <tr>
   <td>Progress Kendo UI version</td>
@@ -23,12 +24,12 @@ component: grid
 
 ## Description
 
-I want the users to search through all columns of the grid using one single input field. How can I implement a global grid search?
+How can I implement a global Grid search and enable the users to search through all Grid columns by using a single input field?
 
 ## Solution
 
-Within the [input event](https://developer.mozilla.org/en-US/docs/Web/Events/input) handler of the text box, build a filter query using the value of the textbox. Then filter the data source using the [filter method](https://docs.telerik.com/kendo-ui/api/javascript/data/datasource#methods-filter).
-    
+1. Within the [`input`](https://developer.mozilla.org/en-US/docs/Web/Events/input) event handler of the textbox, build a filter query by using the value of the textbox.
+1. Filter the data source by using the [`filter`](https://docs.telerik.com/kendo-ui/api/javascript/data/datasource#methods-filter) method.
 
 ```html
 

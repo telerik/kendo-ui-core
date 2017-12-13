@@ -1,8 +1,8 @@
 ---
-title: Prevent sorting and filtering while in edit mode
-description: An example on how to prevent filter and sort operations in Grid when an item is being created/edited
+title: Prevent Sorting and Filtering While Grid Is in Edit Mode
+description: An example on how to prevent the filter and sort operations in the Kendo UI Grid when an item is created or edited.
 type: how-to
-page_title: Prevent sort and filter while editing | Kendo UI Grid
+page_title: Prevent Sorting and Filtering While Editing | Kendo UI Grid
 slug: grid-prevent-sort-filter-when-editing
 tags: grid, prevent, sort, filter, edit, create, insert
 res_type: kb
@@ -21,12 +21,11 @@ component: grid
 
 ## Description
 
-I have Grid with inline editing. I want to disable sorting and filtering for the Grid while the users are editing or creating a record. 
+How can I disable sorting and filtering for a Grid with inline editing while the users are editing or creating a record?
 
 ## Solution
 
-For this scenario it is suitable to handle the mousedown event for the Grid header. In the handler you can check if there is an edited row in the Grid and cancel the action if necessary. 
-
+Handle the `mousedown` event for the Grid header. In the handler, check if an edited Grid row exists and cancel the action if necessary.
 
 ````html
 <div id="grid"></div>
@@ -112,4 +111,3 @@ For this scenario it is suitable to handle the mousedown event for the Grid head
     }
 </script>
 ````
-

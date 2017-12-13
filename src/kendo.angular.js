@@ -186,6 +186,10 @@ var __meta__ = { // jshint ignore:line
                         if (!/\S/.test(first.text()) && /^\?/.test(first.val())) {
                             first.remove();
                         }
+
+                        for (var i = 0; i < options.length; i++) {
+                            $(options[i]).off("$destroy");
+                        }
                     }
                 }(element[0].options));
             }

@@ -936,7 +936,6 @@ div.k-filebrowser-dropzone em,
     color: @header-text-color;
 }
 
-.k-autocomplete.k-state-active,
 .k-picker-wrap.k-state-active,
 .k-numeric-wrap.k-state-active,
 .k-dropdown-wrap.k-state-active,
@@ -964,21 +963,6 @@ div.k-filebrowser-dropzone em,
 div.k-filebrowser-dropzone em
 {
     color: @hover-text-color;
-}
-
-.k-autocomplete.k-state-hover,
-.k-autocomplete.k-state-focused,
-.k-picker-wrap.k-state-hover,
-.k-picker-wrap.k-state-focused,
-.k-numeric-wrap.k-state-hover,
-.k-numeric-wrap.k-state-focused,
-.k-dropdown-wrap.k-state-hover,
-.k-dropdown-wrap.k-state-focused
-{
-    background-color: @select-hover-background-color;
-    .composite-background(@hover-gradient);
-    background-position: 50% 50%;
-    border-color: @select-border-color;
 }
 
 .km-pane-wrapper .k-mobile-list input:not([type="checkbox"]):not([type="radio"]),
@@ -1931,6 +1915,7 @@ html .km-pane-wrapper .km-widget,
 
 /* /Column Menu */
 
+// Normal state
 .k-autocomplete.k-state-default,
 .k-picker-wrap.k-state-default,
 .k-numeric-wrap.k-state-default,
@@ -1942,7 +1927,7 @@ html .km-pane-wrapper .km-widget,
     border-color: @drop-down-border-color;
 }
 
-.k-autocomplete.k-state-hover,
+// Hover state
 .k-picker-wrap.k-state-hover,
 .k-numeric-wrap.k-state-hover,
 .k-dropdown-wrap.k-state-hover
@@ -1950,6 +1935,11 @@ html .km-pane-wrapper .km-widget,
     background-color: @select-hover-background-color;
     .composite-background(@hover-gradient);
     background-position: 50% 50%;
+    border-color: @drop-down-hover-border-color;
+}
+
+.k-autocomplete.k-state-hover,
+.k-multiselect.k-header.k-state-hover {
     border-color: @drop-down-hover-border-color;
 }
 
@@ -1967,15 +1957,20 @@ textarea.k-textbox,
     border-color: @drop-down-hover-border-color;
 }
 
-.k-autocomplete.k-state-focused,
+// Focused state
 .k-picker-wrap.k-state-focused,
 .k-numeric-wrap.k-state-focused,
-.k-dropdown-wrap.k-state-focused,
-.k-multiselect.k-header.k-state-focused
+.k-dropdown-wrap.k-state-focused
 {
     background-color: @select-hover-background-color;
     .composite-background(@hover-gradient);
     background-position: 50% 50%;
+    border-color: @drop-down-focused-border-color;
+    .box-shadow(@focused-shadow);
+}
+
+.k-autocomplete.k-state-focused,
+.k-multiselect.k-header.k-state-focused {
     border-color: @drop-down-focused-border-color;
     .box-shadow(@focused-shadow);
 }
