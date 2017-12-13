@@ -412,6 +412,7 @@ var __meta__ = { // jshint ignore:line
         refresh: function(e) {
             var that = this,
                 options = that.options,
+                encoded = kendo.getter(options.dataEncodedField),
                 text = kendo.getter(options.dataTextField),
                 content = kendo.getter(options.dataContentField),
                 contentUrl = kendo.getter(options.dataContentUrlField),
@@ -437,6 +438,10 @@ var __meta__ = { // jshint ignore:line
                 tab = {
                     text: text(view[idx])
                 };
+
+                if (options.dataEncodedField) {
+                    tab.encoded = encoded(view[idx]);
+                }
 
                 if (options.dataContentField) {
                     tab.content = content(view[idx]);
@@ -543,6 +548,7 @@ var __meta__ = { // jshint ignore:line
 
         options: {
             name: "TabStrip",
+            dataEncodedField: "",
             dataTextField: "",
             dataContentField: "",
             dataImageUrlField: "",
