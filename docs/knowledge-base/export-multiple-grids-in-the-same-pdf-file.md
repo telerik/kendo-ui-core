@@ -1,8 +1,8 @@
 ---
-title: Export multiple grids in the same pdf file
-description: An example on how to export multiple grids in the same pdf file.
+title: Export Multiple Grids in the Same PDF File
+description: An example on how to export multiple Kendo UI Grids in the same PDF file.
 type: how-to
-page_title: Export multiple grids in the same pdf file | Kendo UI Grid
+page_title: Export Multiple Grids in the Same PDF File | Kendo UI Grid
 slug: export-multiple-grids-in-the-same-pdf-file
 tags: kendo ui, mvc, pdf, multiple, grids, same, file, grid
 ticketid: 1131735
@@ -15,7 +15,7 @@ component: grid
 <table>
  <tr>
   <td>Product</td>
-  <td>Grid for Progress Kendo UI</td>
+  <td>Progress Kendo UI Grid</td>
  </tr>
  <tr>
    <td>Progress Kendo UI version</td>
@@ -25,11 +25,13 @@ component: grid
 
 ## Description
 
-How can I export many grids in the same `pdf` file?
+How can I export many Grids in the same PDF file?
 
 ## Solution
 
-Simply export one of the grids using `_drawPDF` function. Then in the callback of the promise, export the rest of the grids and append the result to the export of the initially exported grid.
+1. Export one of the Grids by using the `_drawPDF` function.
+1. In the callback of the promise, export the other Grids.
+1. Append the result to the export of the initially exported Grid.
 
 ```html
         <div id="example">

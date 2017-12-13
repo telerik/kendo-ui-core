@@ -1,10 +1,10 @@
 ---
-title: Place Edit/Update buttons to Grid toolbar
-description: Example on how to use toolbar template with edit and update commands
+title: Place Edit or Update Buttons to Grid Toolbar
+description: An example on how to use the toolbar template with the edit and update commands in the Kendo UI Grid.
 type: how-to
-page_title: Edit/Update commands in toolbar | Kendo UI Grid
+page_title: Implement the Edit or Update Commands in the Toolbar | Kendo UI Grid
 slug: grid-edit-command-toolbar
-tags: grid, toolbar, edit, update, command, template, custom, replace, move, 
+tags: grid, toolbar, edit, update, command, template, custom, replace, move,
 res_type: kb
 component: grid
 ---
@@ -24,13 +24,13 @@ component: grid
 
 ## Description
 
-I want to limit the number of columns in the Grid. To save space I want to move the Edit and Update buttons to the Grid toolbar. 
+How can I limit the number of columns in the Grid and move the **Edit** and **Update** buttons to the toolbar to save space?
 
 ## Solution
 
 1. Enable selection for the Grid.
-1. Define a toolbar template that will hold all custom buttons used for editing. 
-1. Handle the click event for the buttons to enter/exit edit mode. 
+1. Define a toolbar template that will hold all custom buttons used for editing.
+1. Handle the click event for the buttons to enter/exit edit mode.
 
 ````html
 <style>

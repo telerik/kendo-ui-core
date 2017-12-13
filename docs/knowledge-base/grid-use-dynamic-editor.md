@@ -1,8 +1,8 @@
 ---
-title: Use dynamic editor
-description: Example on how to use dynamic editor
+title: Use Dynamic Editor in the Grid
+description: An example on how to use a dynamic editor in the Kendo UI Grid.
 type: how-to
-page_title: Use dynamic editor | Kendo UI Grid
+page_title: Use Dynamic Editor | Kendo UI Grid
 slug: grid-use-dynamic-editor
 tags: grid, editor, dynamic, different, single, input, textbox
 res_type: kb
@@ -10,10 +10,11 @@ component: grid
 ---
 
 ## Environment
+
 <table>
  <tr>
   <td>Product</td>
-  <td>Grid for Progress® Kendo UI®</td>
+  <td>Progress Kendo UI Grid</td>
  </tr>
  <tr>
   <td>Progress Kendo UI version</td>
@@ -23,12 +24,12 @@ component: grid
 
 ## Description
 
-I have a column which editor depends on the value of the record.
+How can I have a column whose editor depends on the value of the Grid record?
 
 ## Solution
 
-Place a condition within the [columns.editor](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid#configuration-columns.editor) function and based on that condition add the  corresponding editor template.
-    
+1. Place a condition within the [`columns.editor`](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid#configuration-columns.editor) function.
+1. Based on that condition, add the corresponding editor template.
 
 ```html
 
@@ -36,7 +37,7 @@ Place a condition within the [columns.editor](https://docs.telerik.com/kendo-ui/
 
 
     <script>
-      $(document).ready(function () { 
+      $(document).ready(function () {
         var dataSource1 = new kendo.data.DataSource({
           data: [{id:1,value:"value1"},{id:2,value:"value2"},{id:3,value:"value3"}],
           schema: {
@@ -52,7 +53,7 @@ Place a condition within the [columns.editor](https://docs.telerik.com/kendo-ui/
           dataSource: dataSource1,
           pageable: true,
           height: 500,
-          columns: [ 
+          columns: [
             { field: "id", title: "ID", width: "200px"},
             { field: "value", title: "Value", width: "200px", editor: dynamicEditor}],
           editable: "incell"
@@ -71,11 +72,11 @@ Place a condition within the [columns.editor](https://docs.telerik.com/kendo-ui/
             });
           }
           else if(options.model.id == 2){
-            var input = $('<input type="text" class="k-input k-textbox" name="value" data-bind="value:value">'); 
-            input.appendTo(container); 
+            var input = $('<input type="text" class="k-input k-textbox" name="value" data-bind="value:value">');
+            input.appendTo(container);
           }else{
-            var input = $('<input type="checkbox" name="value" data-bind="value:value">'); 
-            input.appendTo(container); 
+            var input = $('<input type="checkbox" name="value" data-bind="value:value">');
+            input.appendTo(container);
           }
         };
 

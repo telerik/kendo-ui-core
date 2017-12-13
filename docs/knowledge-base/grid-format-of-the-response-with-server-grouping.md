@@ -1,20 +1,20 @@
 ---
-title: Server Response With ServerGrouping
-description: An example with response expected with serverGrouping
+title: Format Server Response with ServerGrouping in Grid
+description: An example on how to format a server response with serverGrouping in the Kendo UI Grid.
 type: how-to
-page_title: Format of the Response With ServerGrouping
+page_title: Format the Response with ServerGrouping | Kendo UI Grid
 slug: grid-format-of-the-response-with-server-grouping
 tags: grid, server, grouping
 ticketid: 1138311
 res_type: kb
-
 ---
 
 ## Environment
+
 <table>
  <tr>
   <td>Product</td>
-  <td>Grid for Progress® Kendo UI®</td>
+  <td>Progress Kendo UI Grid</td>
  </tr>
  <tr>
   <td>Operating System</td>
@@ -36,13 +36,13 @@ res_type: kb
 
 ## Description
 
-How to format the server response when serverGrouping is set to true?
+How can I format the server response when `serverGrouping` in the Grid is set to `true`?
 
 ## Solution
 
-The expected format can be observed [here](https://docs.telerik.com/kendo-ui/framework/datasource/basic-usage#server-grouping).
+Parse the server response and group the Grid.
 
-Please check the following example parsing the server response and grouping the Grid:
+To view the expected format, refer to [this demo](https://docs.telerik.com/kendo-ui/framework/datasource/basic-usage#server-grouping).
 
 ````html
    <div id="grid"></div>

@@ -1,8 +1,8 @@
 ---
-title: Add Footer With Buttons to the Window
+title: Add Footer with Buttons to the Window
 description: An example on how to add a footer with buttons to a resizable Kendo UI Window.
 type: how-to
-page_title: Add Footer With Buttons | Kendo UI Window
+page_title: Add Footer with Buttons | Kendo UI Window
 slug: window-add-footer-with-buttons
 tags: window, footer, buttons, resizable, scrollable
 ticketid: 1142513

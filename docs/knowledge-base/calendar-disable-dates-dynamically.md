@@ -1,8 +1,8 @@
 ---
-title: Disable dates of the Kendo UI Calendar dynamically
-description: An example on how to disable dates of the Kendo UI Calendar dynamically.
+title: Disable Dates in Calendar Dynamically
+description: An example on how to dynamically disable dates in the Kendo UI Calendar.
 type: how-to
-page_title:  Disable dates of the Kendo UI Calendar dynamically| Kendo UI Calendar
+page_title: Disable Dates Dynamically | Kendo UI Calendar
 slug: calendar-disable-dates-dynamically
 tags: calendar, disable, dates, dynamically, javascript,js
 res_type: kb
@@ -13,7 +13,7 @@ res_type: kb
 <table>
  <tr>
   <td>Product</td>
-  <td>Calendar for Progress® Kendo UI®</td>
+  <td>Progress Kendo UI Calendar</td>
  </tr> <tr>
   <td>Made with version</td>
   <td>2017.3.1026</td>
@@ -23,11 +23,12 @@ res_type: kb
 
 ## Description
 
-How can I disable dates of the Kendo UI Calendar after the initialization of the widget?
+How can I disable dates in the Calendar after the widget was initialized?
 
 ## Solution
 
-Use [destroy method](https://docs.telerik.com/kendo-ui/api/javascript/ui/calendar#methods-destroy) to destroy the calendar and then initialize once again with disabled dates.
+1. Destroy the Calendar by using the [`destroy`](https://docs.telerik.com/kendo-ui/api/javascript/ui/calendar#methods-destroy) method.
+1. Initialize the Calendar with the disabled dates.
 
 ````html
     <div id="calendar"></div>

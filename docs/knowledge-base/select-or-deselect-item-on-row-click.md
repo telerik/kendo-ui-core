@@ -1,8 +1,8 @@
 ---
-title: Select or deselect item on row click
-description: Example on how to select or deselect when clicking a row in Kendo Grid
+title: Select or Deselect Items on Row Click in Grid
+description: An example on how to select or deselect by clicking a row in the Kendo UI Grid.
 type: how-to
-page_title:  Select or deselect item on row click | Kendo UI Grid
+page_title: Select or Deselect Items on Row Click | Kendo UI Grid
 slug: select-or-deselect-item-on-row-click
 tags: grid, selection, remove, deselect, unselect, select, row, click, multiple, persist
 res_type: kb
@@ -10,10 +10,11 @@ component: grid
 ---
 
 ## Environment
+
 <table>
  <tr>
   <td>Product</td>
-  <td>Grid for Progress® Kendo UI®</td>
+  <td>Progress Kendo UI Grid</td>
  </tr>
  <tr>
   <td>Progress Kendo UI version</td>
@@ -23,14 +24,11 @@ component: grid
 
 ## Description
 
-I enabled selection in the Grid and would like to select and deselect multiple rows by simply clicking on a row.
+How can I select and deselect multiple rows by clicking on a row in a Grid with enabled selection?
 
 ## Solution
 
-When selection is enabled in the Grid component the built-in option for deselecting a row or selecting multiple rows is Ctrl+click. 
-
-In order to deselect a row or select multiple rows by just clicking, without holding the Ctrl key you can use the approach below:
-
+When selection is enabled in the Grid component, the built-in option for deselecting a row or selecting multiple rows is `Ctrl`+ click. To deselect a row or select multiple rows by row clicking and without holding the `Ctrl` key, use the following approach. 
 
 ```html
 
@@ -106,5 +104,5 @@ In order to deselect a row or select multiple rows by just clicking, without hol
         });
 
       });
-    </script> 
+    </script>
 ```
