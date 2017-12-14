@@ -810,9 +810,9 @@
 
                         overlay.show();
 
-                        $(window).on("focus"+ NS, function() {
-                            if (contentElement.data("isFront")) {
-                                that.element.focus();
+                        $(window).on("focus", function() {
+                            if (contentElement.data("isFront") && !$(document.activeElement).closest(contentElement).length) {
+                               that.element.focus();
                             }
                         });
                     }

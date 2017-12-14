@@ -815,7 +815,13 @@ var __meta__ = { // jshint ignore:line
             return elements.get((current + (e.shiftKey ? -1 : 1)) % count);
         },
         _focus: function(element){
+            if (element.nodeName == "IFRAME") {
+                element.contentWindow.document.body.focus();
+                return;
+            }
+
             element.focus();
+
             if (element.nodeName == "INPUT" && element.setSelectionRange && this._haveSelectionRange(element)) {
                 element.setSelectionRange(0, element.value.length);
             }
