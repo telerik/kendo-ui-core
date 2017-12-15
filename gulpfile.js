@@ -233,7 +233,7 @@ gulp.task('mdspell', shell.task(
 ['cd docs && mdspell "**/*.md" -n -a --report']
 ));
 
-[ 'pro', 'core' ].forEach(function(flavor) {
+[ 'core' ].forEach(function(flavor) {
     gulp.task('npm-' + flavor, [ 'cjs', 'styles' ] , function() {
         var js = gulp.src('dist/cjs/**/*').pipe(gulp.dest('dist/npm/js'));
 
