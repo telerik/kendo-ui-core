@@ -1,34 +1,35 @@
 ---
-title: How to set change the icons of update and cancel buttons
-description: An example how to change the icons of the Update and Cancel buttons in the Kendo UI Grid
+title: Change the Icons of Update and Cancel Buttons
+description: An example on how to change the icons of the Update and Cancel buttons in the Kendo UI Grid.
 type: how-to
-page_title: Custom buttons | Kendo UI Grid
+page_title: Implement Custom Buttons | Kendo UI Grid
 slug: grid-custom-icons-in-buttons
 tags: grid, custom, buttons, icons, image, background, update, cancel, edit
 ticketid: 1144053
 res_type: kb
-
 ---
 
 ## Environment
+
 <table>
  <tr>
   <td>Product</td>
-  <td>Progress® Kendo UI® Grid</td>
+  <td>Progress Kendo UI Grid</td>
  </tr>
 </table>
 
 
 ## Description
 
-I can edit the text and styles of the commands (like: command.Edit().Text(" ").HtmlAttributes(new { @class = "k-icon k-i-pencil" });)
-I have not found a way to reach the buttons, that show up in the new-item line. How can I change text and images of the "Update" and "Cancel" Button that show up in the line when editing and also when adding a new item?
+I am able to edit the text and styles of the commands&mdash;such as `command.Edit().Text(" ").HtmlAttributes(new { @class = "k-icon k-i-pencil" });`&mdash;but I have not found a way to reach the buttons which show up in the new-item line.
+
+How can I change the text and images of the **Update** and **Cancel** buttons which show up in the line while editing and while adding a new item?
 
 ## Solution
 
-To change the text of the Update and Cancel commands, you can currently pass the desired text to the Edit command like below(the same template is used when adding a new record, so this will alter the Update and Cancel commands in both cases- update and create operations):
+To change the text of the `update` and `cancel` commands, pass the desired text to the `edit` command. To add a new record, use the same template&mdash;it will change the `update` and `cancel` commands during both update and create operations.
 
-#### ASP.NET MVC Example
+The following example demonstrates how to implement the approach in ASP.NET MVC.
 
 ```
 columns.Command(command => {
@@ -39,30 +40,30 @@ columns.Command(command => {
  })
 ```
 
-#### JavaScript Example
+The following example demonstrates how to implement the approach in JavaScript.
 
 ```
-{ 
-  command: [{ 
+{
+  command: [{
   name: "edit",
   iconClass:"k-icon k-i-copy",
-  text: { 
+  text: {
      edit: "Custom edit",
      cancel: "Custom cancel",
-     update: "Custom update" 
+     update: "Custom update"
   }
  }]
 }
 
 ```
 
-However, the ability to change the icons will come in the next major release - the beginning of next year. Meanwhile, you can achieve the same with CSS rules, for example:
+However, the option to change the icons is scheduled for the next major Kendo UI release at the beginning of next year. Meanwhile, you can achieve the same with CSS rules, as demonstrated in the following example.
 
 ```
 .k-grid-update .k-icon:before{
   content: "\e143";
 }
-   
+
  .k-grid-cancel .k-icon:before{
   content: "\e400";
 }
@@ -101,5 +102,5 @@ However, the ability to change the icons will come in the next major release - t
       .k-grid-cancel .k-icon:before{
         content: "\e400";
       }
-    </style> 
+    </style>
 ```
