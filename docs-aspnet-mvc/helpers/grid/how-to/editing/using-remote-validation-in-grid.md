@@ -37,7 +37,10 @@ To start using the remote validation in the Grid:
 
                         var url = input.attr("data-val-remote-url");
                         var postData = {};
-                        postData[input.attr("data-val-remote-additionalfields").split(".")[1]] = input.val();
+                        var addFields = input.attr("data-val-remote-additionalfields").replace(/\*./g, "").split(",");
+                        $.each(addFields, function (index, val) {
+                            postData[val] = $("input[name='" + val + "']").val();
+                        });
 
                         var validator = this;
                         var currentInput = input;
