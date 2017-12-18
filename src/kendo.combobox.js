@@ -667,7 +667,7 @@ var __meta__ = { // jshint ignore:line
             }
 
             dataItem = that.dataItem();
-            
+
             if (dataItem && that._text(dataItem).replace && that._text(dataItem).replace(newLineRegEx,"") === text) {
                 value = that._value(dataItem);
 
@@ -677,13 +677,13 @@ var __meta__ = { // jshint ignore:line
                 }
             }
 
-            if (ignoreCase && !that.listView.value().length) {
+            if (ignoreCase) {
                 loweredText = loweredText.toLowerCase();
             }
 
             that._select(function(data) {
                 data = that._text(data);
-                if (ignoreCase && !that.listView.value().length) {
+                if (ignoreCase) {
                     data = (data + "").toLowerCase();
                 }
 

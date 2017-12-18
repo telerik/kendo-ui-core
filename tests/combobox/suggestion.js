@@ -178,6 +178,22 @@ test("suggest() should suggest correctly", function() {
     equal(combobox.input.selectedText(), "tton");
 });
 
+test("suggest() suggest correctly after typing multiple times", function() {
+    combobox = input.kendoComboBox({
+        dataTextField: "text",
+        dataValueField: "value",
+        dataSource: [{text:"cotton"}, {text: "Cotton"}, {text: "Cotton/Polyester"}],
+        suggest: true
+    }).data("kendoComboBox");
+
+    for (var i = 0;i < 3; i++) {
+        combobox.input.type("co");
+        combobox.suggest("cotton");
+    }
+
+    equal(combobox.text(), "cotton");
+});
+
 test("suggest method appends text only", function() {
     combobox = input.kendoComboBox({
         dataTextField: "text",
