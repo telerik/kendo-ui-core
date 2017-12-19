@@ -1,8 +1,8 @@
 ---
 title: Collapse Groups in Grid by Default
-description: An example on how to have groups in Grid collapsed by default.
+description: An example on how to have groups in a Kendo UI Grid which are collapsed by default.
 type: how-to
-page_title: Grid Groups Default Collapsed | Kendo UI Grid
+page_title: Set Groups as Collapsed by Default | Kendo UI Grid
 slug: grid-collapse-groups
 tags: grid, groups, grouping, collapse, default, expand, prevent, fold
 ticketid: 1144787
@@ -25,13 +25,12 @@ component: grid
 
 ## Description
 
-I have grouping enabled in Grid and would like the Groups to be collapsed by default
+How can I render Kendo UI Grid groups as collapsed by default?
 
 ## Solution
 
-Handle the Grid [dataBound event](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid#events-dataBound) and iterate through each group calling [collapseGroup](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid#methods-collapseGroup) for it.
-
-
+1. Handle the [`dataBound`](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid#events-dataBound) event of the Grid.
+1. Iterate through each group by calling [`collapseGroup`](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid#methods-collapseGroup) for it.
 
 ```html
 <div id="grid"></div>

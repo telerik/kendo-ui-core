@@ -1,16 +1,16 @@
 ---
 title: Editable Grid Removes Milliseconds from DateTime Fields
-description: During edit the Grid removes the milliseconds portion from DateTime fields
+description: During editing, the Kendo UI Grid removes the milliseconds portion from the DateTime fields.
 type: troubleshooting
-page_title: Grid Clears Milliseconds from DateTime Fields When Editing Records
+page_title: Grid Clears Milliseconds from DateTime Fields When Editing Records | Kendo UI Grid
 slug: grid-persist-milliseconds-during-edit
 tags: grid, editing
 ticketid: 1142164
 res_type: kb
-
 ---
 
 ## Environment
+
 <table>
  <tr>
   <td>Product</td>
@@ -21,26 +21,26 @@ res_type: kb
 
 ## Description
 
-When editing an MVC Grid, the model that is sent to the server upon clicking Update has the milliseconds reset to zero for date fields that previously had their milliseconds set to a non-zero value.
+When editing an MVC Grid, the model that is sent to the server upon clicking **Update** has the milliseconds reset to zero for date fields which previously had their milliseconds set to a non-zero value.
 
 ## Steps to Reproduce
 
-1. Bind a Grid column to a `DateTime` field, which has milliseconds explicitly set to a value different than 0.
+1. Bind a Grid column to a `DateTime` field which has milliseconds explicitly set to a value different from zero.
 2. Edit the Grid and save the changes.
 
-The DateTime values are sent to the server with milliseconds reset to 0, even if the given field was not edited.
+The `DateTime` values are sent to the server with their milliseconds reset to zero even when the given field was not edited.
 
 ## Cause
 
-The reason for this behavior is that the date objects are serialized using a `"g"` (general) date format that does not include the milliseconds value.
+The date objects are serialized by using a `"g"` (general) date format that does not include the milliseconds value.
 
 ## Solution
 
-To fix this, the default date serialization should be overridden before the request is sent to the server. To do this, add a `Data` function to the DataSource `Update` request configuration, where you can process dates before they are sent out:
+Before the request is sent to the server, override the default date serialization by adding a `Data` function to the configuration of the `Update` DataSource request. There, you can process dates before they are sent out.
 
 ```
     .Update(update => update.Action("Products_Update", "Grid").Data("serializeDates"))
-``` 
+```
 
 ```
     function serializeDates(data) {
