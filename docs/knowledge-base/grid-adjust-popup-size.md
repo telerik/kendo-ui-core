@@ -1,8 +1,8 @@
 ---
 title: Change Size of Popup Editor
-description: An example on how to specify dimensions for the Grid popup editor.
+description: An example on how to specify dimensions for the Kendo UI Grid popup editor.
 type: how-to
-page_title: Grid Change Popup editor dimensions | Kendo UI Grid
+page_title: Change Popup Editor Dimensions | Kendo UI Grid
 slug: grid-adjust-popup-size
 tags: grid, popup, edit, editor, window, size, width, height, dimensions
 ticketid: 1144949
@@ -25,13 +25,12 @@ component: grid
 
 ## Description
 
-I want to change the width and height of the popup editor window in Grid. 
+How can I change the width and height of the popup editor window in the Grid?
 
 ## Solution
 
-Handle the Grid [edit event](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid#events-edit) and add custom css that specifies the dimensions of the popup wrapper explicitly.
-
-Add custom CSS rule that sets auto width and height for *.k-edit-form-container*.
+1. Handle the [`edit`](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid#events-edit) event of the Grid and add a custom CSS rule which explicitly specifies the dimensions of the popup wrapper.
+1. Add a custom CSS rule which sets an auto width and height for `.k-edit-form-container`.
 
 ```html
 
