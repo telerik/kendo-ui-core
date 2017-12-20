@@ -76,7 +76,8 @@
 
 .k-toolbar .k-button-group .k-button
 {
-    margin: 0 0 0 -1px;
+    margin-left: -1px;
+    margin-right: 0;
     border-radius: 0;
 }
 
@@ -104,12 +105,12 @@
 .k-toolbar .k-split-button .k-button,
 .k-toolbar .k-button-group .k-group-start
 {
-    margin: 0;
+    margin-left: 0;
 }
 
 .k-toolbar .k-split-button .k-split-button-arrow
 {
-    margin: 0 0 0 -1px;
+    margin-left: -1px;
 }
 
 .k-toolbar .k-overflow-anchor
@@ -208,4 +209,12 @@
     border-bottom: 0;
     margin-bottom: 0;
     padding-bottom: 1px;
+}
+
+.k-rtl {
+
+    .k-toolbar .k-overflow-anchor {
+        right: auto;
+        left: -1px;
+    }
 }

@@ -505,4 +505,22 @@
 
         equal(textbox._text.attr("title"), 20);
     });
+
+	test("NumericTextBox should persist decimals when used with culture which decimal mark is coma and factor specified.", function() {
+		kendo.culture('de-DE');
+
+		var textbox = new NumericTextBox(input, {
+            culture: "de-DE",
+            format: "p4",
+			decimals:4,
+			factor:100
+        });
+
+		textbox.element.val("12,44");
+		textbox.element.trigger("blur");
+
+        equal(textbox.element.val(), "12,44");
+
+        kendo.culture('en-EN');
+	});
 })();

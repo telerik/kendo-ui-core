@@ -5540,6 +5540,32 @@ The [data source](/api/javascript/data/schedulerdatasource) of the widget. Confi
 
 The resources of the widget. Configured via the [resources](#configuration-resources) option.
 
+### calendar `kendo.ui.Calendar`
+
+The [Calendar widget](/api/javascript/ui/calendar) of the Scheduler. The toolbar Calendar widget allows navigation directly to the chosen date. It will only be available after it has been opened for the first time.
+
+#### Example - get the Calendar selected value
+    <input type="button" class="k-button" value="Click to get Calendar" id="btn"/>
+	<div id="scheduler"></div>
+	
+	<script>
+	  $("#scheduler").kendoScheduler({
+		date: new Date("2013/6/6")
+	  });   
+	  
+	  $('#btn').on('click', function() {
+		var scheduler = $("#scheduler").getKendoScheduler();
+		var calendar = scheduler.calendar;
+		
+		if (!calendar) {
+			alert("Calendar is yet not initialized.");
+		} else {
+			alert("Current date in calendar: " + calendar.value());
+		}
+	  });
+	</script>
+	
+
 ## Methods
 
 ### addEvent

@@ -215,7 +215,7 @@ span.k-dropdown,
 .k-dropdown-wrap,
 .k-numeric-wrap,
 .k-picker-wrap {
-    padding-right: 2em;
+    padding-right: calc(@input-height + .35em);
 }
 
 .k-numeric-wrap .k-expand-padding {
@@ -285,6 +285,7 @@ span.k-textbox:after
 .k-combobox .k-input
 {
     width: 100%;
+    box-sizing: border-box;
 }
 
 .k-picker-wrap .k-input,
@@ -420,11 +421,11 @@ span.k-datetimepicker .k-select+.k-select
 .k-numeric-wrap .k-select,
 .k-dropdown-wrap .k-select
 {
-    line-height: (@input-height + .35em);
+    line-height: calc(@input-height + .35em);
     vertical-align: middle;
     -moz-box-sizing: border-box;
     text-align: center;
-    width: 2em;
+    width: calc(@input-height + .35em);
     height: 100%;
 }
 
@@ -650,24 +651,23 @@ body .k-datetimepicker .k-select
 }
 
 .k-combobox-clearable .k-input {
-    width: calc(100% - 2em);
-    padding-right: 2em;
+    padding-right: calc(@input-height + .35em);
 }
 
 .k-multiselect-clearable .k-multiselect-wrap {
-    padding-right: 2em;
+    padding-right: calc(@input-height + .35em);
 }
 
 /* Date/Time Pickers */
 
 .k-datetimepicker .k-picker-wrap
 {
-    padding-right: 3.8em;
+    padding-right: 4em;
 }
 
 .k-datetimepicker .k-select
 {
-    width: 3.8em;
+    width: 4em;
 
     .k-link-date
     {
@@ -795,14 +795,14 @@ span.k-numerictextbox
 .k-colorpicker
 {
     .k-picker-wrap {
-        line-height: 2em;
+        line-height: calc(@input-height + .35em);
     }
 
     .k-selected-color {
         vertical-align: top;
         display: inline-block;
-        height: 2em;
-        width: 2em;
+        height: calc(@input-height + .35em);
+        width: calc(@input-height + .35em);
         .k-i-line {
             font-size: 2em;
             color: #FF525E;
@@ -1243,11 +1243,19 @@ span.k-numerictextbox
 // RTL
 .k-rtl {
 
+    .k-dropdown-wrap,
+    .k-picker-wrap,
+    .k-numeric-wrap
+    {
+        padding-right: 0;
+        padding-left: calc(@input-height + .35em);
+    }
+
     .k-autocomplete-clearable,
     .k-multiselect-clearable,
     .k-combobox-clearable {
         .k-input {
-            padding-left: 2em;
+            padding-left: calc(@input-height + .35em);
             padding-right: 0.177em;
         }
     }

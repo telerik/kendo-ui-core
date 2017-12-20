@@ -374,7 +374,7 @@ var __meta__ = { // jshint ignore:line
                 factor = that.options.factor;
 
             if(factor && factor !== 1){
-                value = parseFloat(value);
+                value = kendo.parseFloat(value);
                 if(value !== null) {
                     value = value/factor;
                 }
