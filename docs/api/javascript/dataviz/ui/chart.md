@@ -1495,7 +1495,7 @@ The width of the crosshair in pixels.
 
 ### categoryAxis.field `String`
 
-The data item field which contains the category name. Requires the [dataSource](#configuration-dataSource) option to be set.
+The data item field which contains the category name. Requires the [dataSource](#configuration-dataSource) option to be set. **The field name should be a valid Javascript identifier and should contain only alphanumeric characters (or "$" or "_"), and may not start with a digit.**
 
 #### Example - set the category axis field
 
@@ -10561,7 +10561,7 @@ The data item field which contains a boolean value indicating whether the sector
 
 ### series.field `String` *(default: "value")*
 
-The data item field which contains the series value.
+The data item field which contains the series value. **The field name should be a valid Javascript identifier and should contain only alphanumeric characters (or "$" or "_"), and may not start with a digit.**
 
 #### Example - set the chart series field
 

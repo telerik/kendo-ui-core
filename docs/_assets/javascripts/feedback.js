@@ -211,16 +211,10 @@ $(document).ready(function () {
 
     feedbackForm.submit(function (e) {
         e.preventDefault();
-        //if form is processing do nothing.
         if (formIsProcessing) {
             return;
         }
         formIsProcessing = true;
-        //if(isFormModelEmpty()){
-        //	formPopupNotification.show("Please provide some feedback before submitting the form.", "Error");
-        //	formIsProcessing = false;
-        //	return;
-        //}
 
         if (textAreaValidator("#feedback-code-sample-text-input", "outdatedSample").validate() &&
             textAreaValidator("#feedback-more-information-text-input", "otherMoreInformation").validate() &&
@@ -299,6 +293,7 @@ $(document).ready(function () {
             Feedback._events();
 
             Feedback.adjustArticleHeight();
+            updateVariables();
             Feedback.adjustNavigationPosition();
 
             if (shouldOverlayFeedback) {

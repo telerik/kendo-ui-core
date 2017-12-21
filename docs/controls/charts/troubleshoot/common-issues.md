@@ -13,18 +13,18 @@ This page provides solutions for common problems related to the Kendo UI Charts.
 
 ## Rendering
 
-### Chart Labels Overlap in Internet Explorer After Refresh
+### Chart Labels Overlap after Refresh in Internet Explorer
 
-This is a browser specific limitation due to the lack of events that can be handled in regards to the font loading of the browser. There are two options to work around this behaviour:
+This limitation is browser-specific and is due to the lack of events that can be handled in regards to the font loading of the browser.
 
-1. Delay the Kendo UI Chart initialization
-2. Add the [`@telerik/kendo-pack-fonts`](https://www.npmjs.com/package/@telerik/kendo-pack-fonts) module or check the [Pack fonts for export how-to article]({% slug howto_packfontsforpdfexport_drawingapi %})
+**Solution**
 
-###### Example using kendo-pack-fonts 
+To work around this issue, either:
 
-> **Important**
->
-> Open in Dojo in fullscreen mode in IE
+* Delay the initialization of the Chart, or
+* Add the [`@telerik/kendo-pack-fonts`](https://www.npmjs.com/package/@telerik/kendo-pack-fonts) module. For more information on how to implement this approach, refer to the article on [packing fonts for export]({% slug howto_packfontsforpdfexport_drawingapi %}).
+
+The following Dojo example demonstrates how to handle the issue by using `kendo-pack-fonts`. In Internet Explorer, open the implementation in full-screen mode.
 
 ```html
  <script src="https://cdn.rawgit.com/telerik/kendo-pack-fonts/8dc63142/sample/fonts.js"></script>
@@ -151,11 +151,9 @@ For display, the browser will substitute the selected font with whatever is prov
 
 **Solution**
 
-The solution is to [make the fonts available for embedding]({% slug pdfderawingexport_drawingapi %}#configuration-Custom). This means that the fonts should be available as binary TTF files and registered for export.
+The solution is to [make the fonts available for embedding]({% slug pdfderawingexport_drawingapi %}#configuration-Custom). This means that the fonts should be available as binary TTF files and registered for export, which is demonstrated in the [PDF Export demo on Charts](http://demos.telerik.com/kendo-ui/pdf-export/index) as well.
 
-This is demonstrated in the [PDF Export demo on Charts](http://demos.telerik.com/kendo-ui/pdf-export/index) as well.
-
-The example below demonstrates how to embed fonts in exported PDF.
+The following example demonstrates how to embed fonts in exported PDF.
 
 ###### Example
 

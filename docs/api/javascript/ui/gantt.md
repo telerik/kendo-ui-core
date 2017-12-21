@@ -305,7 +305,7 @@ The configuration of the Gantt columns. An array of JavaScript objects or string
 ### columns.field `String`
 
 The field to which the column is bound. The value of this field is displayed by the column during data binding.
-**The field name should be a valid Javascript identifier and should contain no spaces, no special characters, and the first character should be a letter.**
+**The field name should be a valid Javascript identifier and should contain only alphanumeric characters (or "$" or "_"), and may not start with a digit.**
 
 #### Example - three columns bound to the "title", "start" and "end" fields
 

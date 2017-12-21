@@ -103,7 +103,7 @@ The [template](/api/javascript/kendo#methods-template) which renders the alterna
 
 ### autoBind `Boolean` *(default: true)*
 
-If set to `false`, the Grid will not bind to the data source during initialization, i.e. it will not call the [`fetch`](/api/javascript/data/datasource#methods-fetch) method of the [dataSource](#fields-dataSource) instance. In such scenarios data binding will occur when the [change](/api/javascript/data/datasource#events-change) event of the
+If set to `false`, the Grid will not bind to the data source during initialization, i.e. it will not call the [`fetch`](/api/javascript/data/datasource#methods-fetch) method of the [dataSource](/api/javascript/ui/grid/fields/dataSource) instance. In such scenarios data binding will occur when the [change](/api/javascript/data/datasource#events-change) event of the
 dataSource instance is fired. By default, `autoBind` is set to `true` and the widget will bind to the data source specified in the configuration.
 
 > Setting `autoBind` to `false` is useful when multiple widgets are bound to the same data source. Disabling automatic binding ensures that the shared data source doesn't make more than one request to the remote service.
@@ -142,7 +142,7 @@ Defines the width of the column resize handle in pixels. Apply a larger value fo
 ### columns `Array`
 
 The configuration of the grid columns. An array of JavaScript objects or strings. JavaScript objects are interpreted as column configurations. Strings are interpreted as the
-[field](#configuration-columns.field) to which the column is bound. The grid will create a column for every item of the array.
+[field](columns.field) to which the column is bound. The grid will create a column for every item of the array.
 
 > If this setting is **not** specified the grid will create a column for every field of the data item.
 
@@ -174,7 +174,7 @@ The configuration of the grid columns. An array of JavaScript objects or strings
 
 ### columns.aggregates `Array`
 
-The aggregate(s) which are calculated when the grid is grouped by the columns [field](#configuration-columns.field).
+The aggregate(s) which are calculated when the grid is grouped by the columns [field](columns.field).
 The supported aggregates are "average", "count", "max", "min" and "sum".
 
 #### Example - set column aggregates
@@ -269,9 +269,9 @@ The "edit" built-in command switches the current table row in edit mode.
 
 The "destroy" built-in command removes the data item to which the current table row is bound.
 
-Custom commands are supported by specifying the [click](#configuration-columns.command.click) option.
+Custom commands are supported by specifying the [click](columns.command.click) option.
 
-> The built-in "edit" and "destroy" commands work *only* if editing is enabled via the [editable](#configuration-editable) option. The "edit" command supports "inline" and "popup" editing modes.
+> The built-in "edit" and "destroy" commands work *only* if editing is enabled via the [editable](editable) option. The "edit" command supports "inline" and "popup" editing modes.
 
 #### Example - set command as a string
     <div id="grid"></div>
@@ -357,7 +357,7 @@ The name of the command. The built-in commands are "edit" and "destroy". Can be 
 
 ### columns.command.text `String|Object`
 
-The text displayed by the command button and the "cancel", "edit" and "update" texts of the edit command. If not set the [name](#configuration-columns.command.name) option is used as the button text.
+The text displayed by the command button and the "cancel", "edit" and "update" texts of the edit command. If not set the [name](columns.command.name) option is used as the button text.
 
 #### Example - customize the text of the command
     <div id="grid"></div>
@@ -504,7 +504,7 @@ The function context (available via the `this` keyword) will be set to the grid 
 
 ### columns.command.iconClass `String|Object`
 
-The class for the [web font icon](http://docs.telerik.com/kendo-ui/styles-and-layout/icons-web) of the button. 
+The class for the [web font icon](http://docs.telerik.com/kendo-ui/styles-and-layout/icons-web) of the button.
 When it is defined as an object it allows to customize the web font icon for the "edit", "update" and "cancel" command buttons.
 
 > Grid commands are rendered as anchors (`<a>`) with a `span` inside. The icon for the button depends on the **iconClass** which is rendered as a class for the inner span.
@@ -636,13 +636,13 @@ The JavaScript function executed when the cell/row is about to be opened for edi
       editable: true,
       dataSource: [ { name: "Jane", salary: 2000 }, { name: "Bill", salary: 2000 } ]
     });
-    </script>    
+    </script>
 
 ### columns.editor `Function`
 
 Provides a way to specify a custom editing UI for the column. Use the `container` parameter to create the editing UI.
 
-> The editing UI should contain an element whose `name` HTML attribute is set as the column [field](#configuration-columns.field).
+> The editing UI should contain an element whose `name` HTML attribute is set as the column [field](columns.field).
 
 > Validation settings defined in the `model.fields` configuration will **not** be applied automatically. In order the validation to work, **the developer is responsible for attaching the corresponding validation attributes to the editor input** the `data-bind` attribute is whitespace sensitive. In case the custom editor is a widget, the developer should [customize the validation warning tooltip position](/framework/validator/overview#customizing-the-tooltip-position) in order to avoid visual issues.
 
@@ -660,7 +660,7 @@ The name of the field to which the column is bound.
 
 ##### options.format `String`
 
-The format string of the column specified via the [format](#configuration-columns.format) option.
+The format string of the column specified via the [format](columns.format) option.
 
 ##### options.model `kendo.data.Model`
 
@@ -668,7 +668,7 @@ The model instance to which the current table row is bound.
 
 ##### options.values `Array`
 
-Array of values specified via the [values](#configuration-columns.values) option.
+Array of values specified via the [values](columns.values) option.
 
 #### Example - create a custom column editor using the Kendo UI AutoComplete
 
@@ -758,7 +758,7 @@ If set to `true` the column value will be HTML-encoded before it is displayed. I
 
 The field to which the column is bound. The value of this field is displayed in the column's cells during data binding.
 Only columns that are bound to a field can be sortable or filterable.
-**The field name should be a valid Javascript identifier and should contain no spaces, no special characters, and the first character should be a letter.**
+**The field name should be a valid Javascript identifier and should contain only alphanumeric characters (or "$" or "_"), and may not start with a digit.**
 
 #### Example - specify the column field
 
@@ -778,7 +778,7 @@ Only columns that are bound to a field can be sortable or filterable.
 ### columns.filterable `Boolean|Object` *(default: true)*
 
 If set to `true` a filter menu will be displayed for this column when filtering is enabled. If set to `false` the filter menu will not be displayed. By default a filter menu is displayed
-for all columns when filtering is enabled via the [filterable](#configuration-filterable) option.
+for all columns when filtering is enabled via the [filterable](filterable) option.
 
 Can be set to a JavaScript object which represents the filter menu configuration.
 
@@ -907,7 +907,7 @@ Specifies the name of the field which will provide the text representation for t
                       }
                   }
               },
-              { field: "age" } 
+              { field: "age" }
             ],
             filterable: { mode: "row" },
             dataSource: {
@@ -993,7 +993,7 @@ Specifies the width of the input before it is initialized or turned into a widge
 
 Specifies the AutoComplete `filter` option. The possible values are the same as the ones for the AutoComplete `filter` option - `"startswith"`, `"endswith"`, `"contains"`. The `"contains"` operator performs a case-insensitive search. To perform a case-sensitive filtering, set a custom filtering function through the [`dataSource.filter.operator`](/api/javascript/data/datasource#configuration-filter.operator) option.
 
-> This operator is completely independent from the operator used for the filtering on this column. For more inforamtion, check [`operator`](#configuration-columns.filterable.cell.operator).
+> This operator is completely independent from the operator used for the filtering on this column. For more inforamtion, check [`operator`](columns.filterable.cell.operator).
 
 #### Example - Specifying suggestionOperator option for the filter cell of a column
 
@@ -1020,7 +1020,7 @@ Specifies the AutoComplete `filter` option. The possible values are the same as 
                       }
                   }
               }
-            } 
+            }
           });
     </script>
 
@@ -1095,7 +1095,7 @@ When set to false the Grid will not render the cell filtering widget for that sp
 
 Specifies the default operator that will be used for the cell filtering.
 
-> If you want to change how the AutoComplete suggestions are filtered use [suggestionOperator](#configuration-columns.filterable.suggestionOperator).
+> If you want to change how the AutoComplete suggestions are filtered use [suggestionOperator](columns.filterable.suggestionOperator).
 
 #### Example - Specifying default operator for cell filtering.
 
@@ -1255,7 +1255,7 @@ Use this option to enable the MultiCheck filtering support for that column.
 
 ### columns.filterable.dataSource `Object|Array|kendo.data.DataSource`
 
-The dataSource configuration for the items that will be used when [columns.filterable.multi](#configuration-columns.filterable.multi) is enabled.
+The dataSource configuration for the items that will be used when [columns.filterable.multi](columns.filterable.multi) is enabled.
 
 #### Example - provide custom DataSource for the checkbox filtering.
     <div id="grid"></div>
@@ -1317,10 +1317,10 @@ Allows customization on the logic that renders the checkboxes when using checkbo
 
 ### columns.filterable.operators `Object`
 
-The property is identical to [`filterable.operators`](#configuration-filterable.operators), but is used for a specific column.
+The property is identical to [`filterable.operators`](filterable.operators), but is used for a specific column.
 
 ### columns.filterable.search `Boolean` *(default: false)*
-Controls whether to show a search box when [checkbox filtering](#configuration-columns.filterable.multi) is enabled.
+Controls whether to show a search box when [checkbox filtering](columns.filterable.multi) is enabled.
 
 #### Example - Enable checkbox filter search
     <div id="grid"></div>
@@ -1339,7 +1339,7 @@ Controls whether to show a search box when [checkbox filtering](#configuration-c
     </script>
 
 ### columns.filterable.ignoreCase `Boolean` *(default: true)*
-Toggles between case-insensitive (default) and case-sensitive [searching](#configuration-columns.filterable.search).
+Toggles between case-insensitive (default) and case-sensitive [searching](columns.filterable.search).
 
 #### Example - Enable checkbox filter search
     <div id="grid"></div>
@@ -1362,9 +1362,9 @@ Toggles between case-insensitive (default) and case-sensitive [searching](#confi
 
 The role data attribute of the widget used in the filter menu or a JavaScript function which initializes that widget.
 
-> This feature is not supported for columns which have their [values](#configuration-columns.values) option set and Boolean columns.
+> This feature is not supported for columns which have their [values](columns.values) option set and Boolean columns.
 
-> If [filterable.mode](#configuration-filterable.mode) is set to 'row', [columns.filterable.cell.template](#configuration-columns.filterable.cell.template) should be used to customize the input.
+> If [filterable.mode](filterable.mode) is set to 'row', [columns.filterable.cell.template](columns.filterable.cell.template) should be used to customize the input.
 
 #### Example - specify the filter UI as a string
     <div id="grid"></div>
@@ -1568,7 +1568,7 @@ If set to false the column will not be groupable (requires Grid groupable proper
 
 ### columns.groupHeaderTemplate `String|Function`
 
-The [template](/api/javascript/kendo#methods-template) which renders the group header when the grid is grouped by the column [field](#configuration-columns.field). By default the name of the field
+The [template](/api/javascript/kendo#methods-template) which renders the group header when the grid is grouped by the column [field](columns.field). By default the name of the field
 and the current group value is displayed.
 
 The fields which can be used in the template are:
@@ -1719,7 +1719,7 @@ The table header cell will look like this: `<th class="table-header-cell" style=
 
 ### columns.headerTemplate `String|Function`
 
-The [template](/api/javascript/kendo#methods-template) which renders the column header content. By default the value of the [title](#configuration-columns.title) column option
+The [template](/api/javascript/kendo#methods-template) which renders the column header content. By default the value of the [title](columns.title) column option
 is displayed in the column header cell.
 
 > If sorting is enabled, the column header content will be wrapped in a `<a>` element. As a result the template **must** contain only inline elements.
@@ -1786,7 +1786,7 @@ If set to `true` the column will be displayed as locked (frozen) in the grid. Al
 
 If set to `false` the column will remain in the side of the grid into which its own locked configuration placed it.
 
-> This option is meaningful when the grid has columns which are configured with a [locked](#configuration-columns.locked) value. Setting it explicitly to `false` will
+> This option is meaningful when the grid has columns which are configured with a [locked](columns.locked) value. Setting it explicitly to `false` will
 prevent the user from locking or unlocking this column using the user interface.
 
 #### Example - lockable columns
@@ -1810,7 +1810,7 @@ prevent the user from locking or unlocking this column using the user interface.
 
 The pixel screen width below which the user will not be able to resize the column via the UI.
 
-> This option is meaningful when the grid is set as [resizable](#configuration-resizable).
+> This option is meaningful when the grid is set as [resizable](resizable).
 
 #### Example - set the column width as a number
      <div id="grid"></div>
@@ -1830,7 +1830,7 @@ The pixel screen width below which the user will not be able to resize the colum
 
 ### columns.minScreenWidth `Number`
 
-The pixel screen width below which the column will be hidden. The setting takes precedence over the [`hidden`](/api/javascript/ui/grid#configuration-columns.hidden) setting,
+The pixel screen width below which the column will be hidden. The setting takes precedence over the [`hidden`](/api/javascript/ui/grid/configuration/columns.hidden) setting,
 so the two should not be used at the same time.
 
 #### Example - lockable columns
@@ -1855,7 +1855,7 @@ If set to `true` the grid will render a select column with checkboxes in each ce
 
 > **Note:** The checkbox column selection functionality has two limitations:
 > * It is not integrated with the keyboard navigation
-> * It is not integrated with the currently existing select functionality of the grid which is enabled via the [selectable option](#configuration-selectable).
+> * It is not integrated with the currently existing select functionality of the grid which is enabled via the [selectable option](selectable).
 > They are mutually exclusive and we recommend using only one of the approaches for enabling selection.
 
 #### Example - disable sorting
@@ -1873,8 +1873,8 @@ If set to `true` the grid will render a select column with checkboxes in each ce
 
 ### columns.sortable `Boolean|Object` *(default: true)*
 
-If set to `true` the user can click the column header and sort the grid by the column [field](#configuration-columns.field) when sorting is enabled. If set to `false` sorting will
-be disabled for this column. By default all columns are sortable if sorting is enabled via the [sortable](#configuration-sortable) option.
+If set to `true` the user can click the column header and sort the grid by the column [field](columns.field) when sorting is enabled. If set to `false` sorting will
+be disabled for this column. By default all columns are sortable if sorting is enabled via the [sortable](sortable) option.
 
 #### Example - disable sorting
 
@@ -1972,7 +1972,7 @@ Determines the inital (from un-sorted to sorted state) sort direction. The suppo
 ### columns.template `String|Function`
 
 The [template](/api/javascript/kendo#methods-template) which renders the column content. The grid renders table rows (`<tr>`) which represent the data source items.
-Each table row consists of table cells (`<td>`) which represent the grid columns. By default the HTML-encoded value of the [field](#configuration-columns.field) is displayed in the column.
+Each table row consists of table cells (`<td>`) which represent the grid columns. By default the HTML-encoded value of the [field](columns.field) is displayed in the column.
 
 > Use the `template` to customize the way the column displays its value.
 
@@ -2021,7 +2021,7 @@ Each table row consists of table cells (`<td>`) which represent the grid columns
 
 ### columns.title `String`
 
-The text that is displayed in the column header cell. If not set the [field](#configuration-columns.field) is used.
+The text that is displayed in the column header cell. If not set the [field](columns.field) is used.
 
 > **Note:** Column titles should not contain HTML entities or tags. If such exist, they should be encoded.
 
@@ -2100,7 +2100,7 @@ This example displays "Beverages" and "Food" in the "category" column instead of
 
 ### columns.menu `Boolean`
 
-If set to `true` the column will be visible in the grid column menu. By default the column menu includes all data-bound columns (ones that have their [field](#configuration-columns.field) set).
+If set to `true` the column will be visible in the grid column menu. By default the column menu includes all data-bound columns (ones that have their [field](columns.field) set).
 
 #### Example - hide a column from the column menu
     <div id="grid"></div>
@@ -2171,7 +2171,7 @@ If set to `true` the column menu would allow the user to select (show and hide) 
 
 ### columnMenu.filterable `Boolean` *(default: true)*
 
-If set to `true` the column menu would allow the user to filter the grid. By default the column menu allows the user to filter if filtering is enabled via the [filterable](#configuration-filterable).
+If set to `true` the column menu would allow the user to filter the grid. By default the column menu allows the user to filter if filtering is enabled via the [filterable](filterable).
 
 #### Example - disable column menu filtering
 
@@ -2195,7 +2195,7 @@ If set to `true` the column menu would allow the user to filter the grid. By def
 
 ### columnMenu.sortable `Boolean` *(default: true)*
 
-If set to `true` the column menu would allow the user to sort the grid by the column field. By default the column menu allows the user to sort if sorting is enabled via the [sortable](#configuration-sortable) option.
+If set to `true` the column menu would allow the user to sort the grid by the column field. By default the column menu allows the user to sort if sorting is enabled via the [sortable](sortable) option.
 
 > If this option is set to `false` the user could still sort by clicking the column header cell.
 
@@ -3041,7 +3041,7 @@ Enables or disables column filtering in the Excel file. Not to be mistaken with 
     </script>
 
 ### excel.forceProxy `Boolean` *(default: false)*
-If set to true, the content will be forwarded to [proxyURL](#configuration-excel.proxyURL) even if the browser supports saving files locally.
+If set to true, the content will be forwarded to [proxyURL](excel.proxyURL) even if the browser supports saving files locally.
 
 ### excel.proxyURL `String` *(default: null)*
 
@@ -3350,7 +3350,7 @@ The text of the option which represents the "or" logical operation.
 
 ### filterable.messages.search `String` *(default: "Search")*
 
-The placeholder of the search input for columns with the [search](#configuration-columns.filterable.search) option set to true.
+The placeholder of the search input for columns with the [search](columns.filterable.search) option set to true.
 
 #### Example - set the "search" message
 
@@ -3380,7 +3380,7 @@ The placeholder of the search input for columns with the [search](#configuration
 
 ### filterable.messages.selectValue `String` *(default: "-Select value-")*
 
-The text of the DropDownList displayed in the filter menu for columns whose [values](#configuration-columns.values) option is set.
+The text of the DropDownList displayed in the filter menu for columns whose [values](columns.values) option is set.
 
 #### Example - set the "selectValue" message
 
@@ -3439,7 +3439,7 @@ The text of the cancel button in the filter menu header (available in mobile mod
 
 ### filterable.messages.selectedItemsFormat `String` *(default: "{0} items selected")*
 
-The format string for selected items count in filter menu when [search](#configuration-columns.filterable.multi) option set to true.
+The format string for selected items count in filter menu when [search](columns.filterable.multi) option set to true.
 
 #### Example - set the "selectedItemsFormat" text
 
@@ -3589,7 +3589,7 @@ This will cause one additional read request per string column. The AutoComplete 
 The text of the filter operators displayed in the filter menu.
 
 > * If `operators` are defined manually, the default messages will be overridden too. To control the `operators` and still use the default messages, retrieve them from the `FilterCell` prototype - `kendo.ui.FilterCell.fn.options.operators.{type}`, where the type can be `"string"`, `"date"`, `"number"`, and `"enums"`.
-> * If the same options are specific to a column, it is possible to use the [column filterable configuration of the Grid](/api/javascript/ui/grid#configuration-columns.filterable.operators).
+> * If the same options are specific to a column, it is possible to use the [column filterable configuration of the Grid](/api/javascript/ui/grid/configuration/columns.filterable.operators).
 > * In multiple Grids, it is possible to override the filterable options of the Kendo UI FilterMenu before the Grids are initialized. Then the new filter options will be available for all Grids without further configurations.
 
 #### Example - override the filterable options in multiple Grids
@@ -4594,7 +4594,7 @@ The text of the "less than" filter operator.
 
 ### filterable.operators.enums `Object`
 
-The texts of the filter operators displayed for columns which have their [values](#configuration-columns.values) option set.
+The texts of the filter operators displayed for columns which have their [values](columns.values) option set.
 
 > Omitting an operator will exclude it from the DropDownList with the available operators.
 
@@ -5337,7 +5337,7 @@ If set to `true` the grid will display a pager. By default paging is disabled.
 
 Can be set to a JavaScript object which represents the pager configuration.
 
-> Don't forget to set a [`pageSize`](/api/javascript/data/datasource#configuration-pageSize), no matter if paging is performed client-side or server-side. A `pageSize` can be defined in the `pageable` settings, or in the [`dataSource`](/api/javascript/ui/grid#configuration-dataSource) settings. If an already existing dataSource instance is passed to the Grid, then the [`pageSize`](/api/javascript/data/datasource#configuration-pageSize) option should be set in the dataSource's settings and not in the `pageable` settings.
+> Don't forget to set a [`pageSize`](/api/javascript/data/datasource#configuration-pageSize), no matter if paging is performed client-side or server-side. A `pageSize` can be defined in the `pageable` settings, or in the [`dataSource`](/api/javascript/ui/grid/configuration/dataSource) settings. If an already existing dataSource instance is passed to the Grid, then the [`pageSize`](/api/javascript/data/datasource#configuration-pageSize) option should be set in the dataSource's settings and not in the `pageable` settings.
 
 #### Example - enable paging
 
@@ -5369,7 +5369,7 @@ If set to `false` the grid will toggle the pager visibility as follows:
 * when the total amount of items initially set in the DataSource is less than the pageSize number the pager will be hidden.
 * when the total amount of items initially set in the DataSource is greater than or equal to the pageSize number the pager will be shown.
 * when the total amount of items in the DataSource becomes less than the pageSize number (after delete, filter operation or pageSize change) the pager will be hidden.
-* when the total amount of items in the DataSource becomes greater than or equal to the pageSize number (after an insert, filter operation or pageSize change) the pager will be shown. 
+* when the total amount of items in the DataSource becomes greater than or equal to the pageSize number (after an insert, filter operation or pageSize change) the pager will be shown.
 
 Introduced in the Kendo UI 2017 R3 release.
 
@@ -5449,7 +5449,7 @@ If set to `true` the pager will display buttons for going to the first, previous
 
 If set to `true` the pager will display buttons for navigating to specific pages. By default those buttons are displayed.
 
-Using `pageable.numeric` and [`pageable.input`](#configuration-pageable.input) at the same time is not recommended.
+Using `pageable.numeric` and [`pageable.input`](pageable.input) at the same time is not recommended.
 
 #### Example - hide the numeric pager buttons
 
@@ -5503,7 +5503,7 @@ The maximum number of buttons displayed in the numeric pager. The pager will dis
 
 If set to `true` the pager will display an input element which allows the user to type a specific page number. By default the page input is not displayed.
 
-Using `pageable.input` and [`pageable.numeric`](#configuration-pageable.numeric) at the same time is not recommended.
+Using `pageable.input` and [`pageable.numeric`](pageable.numeric) at the same time is not recommended.
 
 #### Example - show the pager input
 
@@ -6144,7 +6144,7 @@ Specifies the file name of the exported PDF file.
     </script>
 
 ### pdf.forceProxy `Boolean` *(default: false)*
-If set to true, the content will be forwarded to [proxyURL](#configuration-pdf.proxyURL) even if the browser supports saving files locally.
+If set to true, the content will be forwarded to [proxyURL](pdf.proxyURL) even if the browser supports saving files locally.
 
 ### pdf.keywords `String` *(default: null)*
 
@@ -6294,7 +6294,7 @@ Available template variables include:
 
 > **Important**
 >
-> Using a template requires setting [paper size](#configuration-pdf.paperSize)
+> Using a template requires setting [paper size](pdf.paperSize)
 
 ### pdf.repeatHeaders `Boolean` *(default: false)*
 
@@ -6427,11 +6427,11 @@ Sets the title of the PDF file.
 
 Sets a value indicating whether the selection will be persisted when sorting, paging, filtering and etc are performed.
 
-> **Note:** Selection persistence works only for row selection. 
+> **Note:** Selection persistence works only for row selection.
 >
 > In order for selection persistence to work correctly, you need to define an ID field in [`schema.model`](/api/javascript/data/datasource#configuration-schema.model).
 >
-> Selection persistence does not work for new items when the Grid DataSource is in offline mode. In offline mode, newly added items do not have IDs, which are required for selection persistence to work. 
+> Selection persistence does not work for new items when the Grid DataSource is in offline mode. In offline mode, newly added items do not have IDs, which are required for selection persistence to work.
 
 #### Example - enables selection persistence
     <div id="grid"></div>
@@ -6965,7 +6965,7 @@ The [template](/api/javascript/kendo#methods-template) which renders the command
 
 ### toolbar.text `String`
 
-The text displayed by the command button. If not set the [name](#configuration-toolbar.name)` option would be used as the button text instead.
+The text displayed by the command button. If not set the [name](toolbar.name)` option would be used as the button text instead.
 
 #### Example - set the text of the toolbar button
     <div id="grid"></div>
@@ -6991,9 +6991,10 @@ The text displayed by the command button. If not set the [name](#configuration-t
 
 ### columns `Array`
 
-The columns of the grid initialized from the [columns](#configuration-columns) option. Every item from the `columns` array has the same fields as the corresponding [columns](#configuration-columns) option.
+The columns of the grid initialized from the [columns](/api/javascript/ui/grid/configuration/columns) option. Every item from the `columns` array has the same fields as the corresponding [columns](/api/javascript/ui/grid/configuration/columns) option.
 
 #### Example - iterate the grid columns
+
     <div id="grid"></div>
     <script>
     $("#grid").kendoGrid({
@@ -7011,13 +7012,14 @@ The columns of the grid initialized from the [columns](#configuration-columns) o
       console.log(grid.columns[i].field); // displays "name" and then "age"
     }
     </script>
+
 ### dataSource `kendo.data.DataSource`
 
-The [data source](/api/javascript/data/datasource) of the widget. Configured via the [dataSource](#configuration-dataSource) option.
+The [data source](/api/javascript/data/datasource) of the widget. Configured via the [dataSource](/api/javascript/ui/grid/configuration/dataSource) option.
 
 > Changes to the data source will be reflected in the widget.
 
-> Assigning a new data source would have no effect. Use the [setDataSource](#methods-setDataSource) method instead.
+> Assigning a new data source would have no effect. Use the [setDataSource](/api/javascript/ui/grid/methods/setDataSource) method instead.
 
 #### Example - add a data item to the data source
 
@@ -7135,7 +7137,7 @@ The jQuery object which represents the grid locked content element. Available on
 
 Adds an empty data item to the grid. In "incell" and "inline" editing mode a table row will be appended. Popup window will be displayed in "popup" editing mode.
 
-Fires the [edit](#events-edit) event.
+Fires the [edit](/api/javascript/ui/grid/events/edit) event.
 
 #### Example - add a new data item
 
@@ -7170,11 +7172,11 @@ Applies the minimum possible width for the specified column, so that all text fi
 
 ##### column `Number|String|Object`
 
-The index of the column, or the [field](#configuration-columns.field) to which the columns is bound, or the column object obtained from the [columns](#fields-columns) collection.
+The index of the column, or the [field](/api/javascript/ui/grid/configuration/columns.field) to which the columns is bound, or the column object obtained from the [columns](/api/javascript/ui/grid/fields/columns) collection.
 
 When using multicolumn headers, using an index is not allowed. In such scenarios, please use a field name or a column object as a method argument.
 
-> The method ignores and does not resize [hidden](#configuration-columns.hidden) columns.
+> The method ignores and does not resize [hidden](/api/javascript/ui/grid/configuration/columns.hidden) columns.
 >
 > Auto-fitting all columns at once is a resource-intensive operation and is not recommended. A better option is to auto-fit only a few columns that have the most variable content in terms of length. Alternatively, disable scrolling and allow the [browser to adjust all column widths automatically](/controls/data-management/grid/appearance#widths), according to their content.
 >
@@ -7352,7 +7354,7 @@ A string, DOM element or jQuery object which represents the table cell. A string
 
 ### clearSelection
 
-Clears the currently selected table rows or cells (depending on the current selection [mode](#configuration-selectable)).
+Clears the currently selected table rows or cells (depending on the current selection [mode](/api/javascript/ui/grid/configuration/selectable)).
 
 #### Example - clear selection
 
@@ -7377,9 +7379,9 @@ Clears the currently selected table rows or cells (depending on the current sele
 
 ### closeCell
 
-Stops editing the table cell which is in edit mode. Requires "incell" [edit mode](#configuration-editable.mode).
+Stops editing the table cell which is in edit mode. Requires "incell" [edit mode](/api/javascript/ui/grid/configuration/editable.mode).
 
-> When keyboard navigation is used, the Grid [`table`](#fields-table) must be focused programmatically after calling `closeCell`.
+> When keyboard navigation is used, the Grid [`table`](/api/javascript/ui/grid/fields/table) must be focused programmatically after calling `closeCell`.
 
 #### Parameters
 
@@ -7578,9 +7580,9 @@ Prepares the widget for safe removal from DOM. Detaches all event handlers and r
 
 ### editCell
 
-Switches the specified table cell in edit mode. Requires "incell" [edit mode](#configuration-editable.mode).
+Switches the specified table cell in edit mode. Requires "incell" [edit mode](/api/javascript/ui/grid/configuration/editable.mode).
 
-Fires the [edit](#events-edit) event.
+Fires the [edit](/api/javascript/ui/grid/events/edit) event.
 
 #### Parameters
 
@@ -7614,9 +7616,9 @@ The jQuery object which represents the table cell.
 
 ### editRow
 
-Switches the specified table row in edit mode. Requires "inline" or "popup" [edit mode](#configuration-editable.mode).
+Switches the specified table row in edit mode. Requires "inline" or "popup" [edit mode](/api/javascript/ui/grid/configuration/editable.mode).
 
-Fires the [edit](#events-edit) event.
+Fires the [edit](/api/javascript/ui/grid/events/edit) event.
 
 #### Parameters
 
@@ -7720,7 +7722,7 @@ Expands specified master row.
 Retrieves the options that are currently enabled or disabled on the Grid, also gives the current state of the dataSource.
 Use this method if you want to save the state of the Grid into a variable. It is also possible to extract and store only some of the Grid options.
 
-> Please refer to the [`setOptions()`](#methods-setOptions) method documentation for more important information.
+> Please refer to the [`setOptions()`](setOptions) method documentation for more important information.
 
 #### Parameters
 
@@ -7761,7 +7763,7 @@ Hides the specified grid column.
 
 ##### column `Number|String|Object`
 
-The index of the column, or the [field](#configuration-columns.field) to which the columns is bound, or the column object obtained from the [columns](#fields-columns) collection.
+The index of the column, or the [field](/api/javascript/ui/grid/configuration/columns.field) to which the columns is bound, or the column object obtained from the [columns](/api/javascript/ui/grid/fields/columns) collection.
 
 When using multicolumn headers, using an index will hide a top-level column together will all its "child columns". In such scenarios, using field names or column objects may be more appropriate.
 
@@ -7840,7 +7842,7 @@ Locks (freezes) a column, allowing users to see it at all times when scrolling.
 
 ##### column `Number|String`
 
-The index of the column or the [field](#configuration-columns.field) to which the columns is bound.
+The index of the column or the [field](/api/javascript/ui/grid/configuration/columns.field) to which the columns is bound.
 
 > In order to use this method, the grid must be initialized with at least one locked column, and should have unlocked columns left after the target column is locked.
 
@@ -7890,7 +7892,7 @@ Renders all table rows using the current data items.
 
 Removes the specified table row from the grid. Also removes the corresponding data item from the data source.
 
-Fires the [remove](#events-remove) event.
+Fires the [remove](/api/javascript/ui/grid/events/remove) event.
 
 #### Parameters
 
@@ -7955,7 +7957,7 @@ The column whose position should be changed.
 
 ### saveAsExcel
 
-Initiates the Excel export. Also fires the [`excelExport`](#events-excelExport) event.
+Initiates the Excel export. Also fires the [`excelExport`](/api/javascript/ui/grid/events/excelExport) event.
 
 > Calling this method could trigger the browser built-in popup blocker in some cases. To avoid that, always call it as a response to an end-user action e.g. button click.
 
@@ -7982,12 +7984,12 @@ Initiates the Excel export. Also fires the [`excelExport`](#events-excelExport) 
 
 ### saveAsPDF
 
-Initiates the PDF export and returns a promise. Also triggers the [pdfExport](#events-pdfExport) event.
+Initiates the PDF export and returns a promise. Also triggers the [pdfExport](/api/javascript/ui/grid/events/pdfExport) event.
 
 > Calling this method may trip the built-in browser pop-up blocker. To avoid that, call this method as a response to an end-user action, e.g. a button click.
 
 #### Returns
-`Promise` A promise that will be resolved when the export completes. The same promise is available in the [pdfExport](#events-pdfExport) event arguments.
+`Promise` A promise that will be resolved when the export completes. The same promise is available in the [pdfExport](/api/javascript/ui/grid/events/pdfExport) event arguments.
 
 #### Example - manually initiate PDF export
 
@@ -8015,7 +8017,7 @@ Initiates the PDF export and returns a promise. Also triggers the [pdfExport](#e
 
 Saves any pending changes by calling the [sync](/api/javascript/data/datasource#methods-sync) method.
 
-Fires the [saveChanges](#events-saveChanges) event.
+Fires the [saveChanges](/api/javascript/ui/grid/events/saveChanges) event.
 
 #### Example - save changes
 
@@ -8140,7 +8142,7 @@ Gets an array that holds the id field values of the selected rows.
     var grid = $("#grid").data("kendoGrid");
     grid.select("tr:eq(2)");
     console.log(grid.selectedKeyNames()); // displays the id field value for the selected row
-    </script>    
+    </script>
 
 #### Example - select a row by Model UID
 
@@ -8238,7 +8240,7 @@ The data source to which the widget should be bound.
 ### setOptions
 
 Sets the options of the Grid. Use this method if you want to enable/disable a particular feature/option or to load
-the complete state obtained previously with the [`getOptions`](#methods-getOptions) method.
+the complete state obtained previously with the [`getOptions`](getOptions) method.
 
 When `setOptions` is called, the Grid widget will be destroyed and recreated. If the widget is bound to remote data, a new read request will be made.
 
@@ -8254,7 +8256,7 @@ When `setOptions` is called, the Grid widget will be destroyed and recreated. If
 > This is because the server templates are rendered server-side and do not have corresponding configuration options included in the JavaScript initialization statement that creates the
 > Grid object client-side. As a result, the templates will be lost once the `setOptions()` method is invoked.
 > There are two options to avoid the issue - use JavaScript initialization instead of an MVC wrapper, or add template configuration to the retrieved Grid state with the JavaScript
-> equivalent syntax (e.g. [`headerTemplate`](/api/javascript/ui/grid#configuration-columns.headerTemplate) and [`toolbar`](/api/javascript/ui/grid#configuration-toolbar)).
+> equivalent syntax (e.g. [`headerTemplate`](/api/javascript/ui/grid/configuration/columns.headerTemplate) and [`toolbar`](/api/javascript/ui/grid/configuration/toolbar)).
 
 #### Parameters
 
@@ -8292,7 +8294,7 @@ Shows the specified column.
 
 ##### column `Number|String|Object`
 
-The index of the column, or the [field](#configuration-columns.field) to which the columns is bound, or the column object obtained from the [columns](#fields-columns) collection.
+The index of the column, or the [field](/api/javascript/ui/grid/configuration/columns.field) to which the columns is bound, or the column object obtained from the [columns](/api/javascript/ui/grid/fields/columns) collection.
 
 When using multicolumn headers, using an index will hide a top-level column together will all its "child columns". In such scenarios, using field names or column objects may be more appropriate.
 
@@ -8363,7 +8365,7 @@ Unlocks (unfreezes) a column.
 
 ##### column `Number|String`
 
-The index of the column or the [field](#configuration-columns.field) to which the columns is bound.
+The index of the column or the [field](/api/javascript/ui/grid/configuration/columns.field) to which the columns is bound.
 
 > In order to use this method, the grid must be initialized with at least one locked column, and there should be locked columns left after the target column is unlocked.
 
@@ -8441,7 +8443,7 @@ The widget instance which fired the event.
 
 ### cancel
 
-Fired when the user clicks the "cancel" button (in inline or popup [editing mode](#configuration-editable.mode)) or closes the popup window.
+Fired when the user clicks the "cancel" button (in inline or popup [editing mode](/api/javascript/ui/grid/configuration/editable.mode)) or closes the popup window.
 
 The event handler function context (available via the `this` keyword) will be set to the widget instance.
 
@@ -8449,7 +8451,7 @@ The event handler function context (available via the `this` keyword) will be se
 
 ##### e.container `jQuery`
 
-The jQuery object that represents the edit container element. More information is available in the [edit event arguments' description](#events-edit).
+The jQuery object that represents the edit container element. More information is available in the [edit event arguments' description](edit).
 
 ##### e.model `kendo.data.Model`
 
@@ -8528,7 +8530,7 @@ The event handler function context (available via the `this` keyword) will be se
 
 ##### e.container `jQuery`
 
-The jQuery object that represents the edit container element. More information is available in the [edit event arguments' description](#events-edit).
+The jQuery object that represents the edit container element. More information is available in the [edit event arguments' description](edit).
 
 ##### e.model `kendo.data.Model`
 
@@ -8646,7 +8648,7 @@ The event handler function context (available via the `this` keyword) will be se
 
 ##### e.column `Object`
 
-A JavaScript object which represents the [column](#configuration-columns) configuration.
+A JavaScript object which represents the [column](/api/javascript/ui/grid/configuration/columns) configuration.
 
 ##### e.sender `kendo.ui.Grid`
 
@@ -8704,7 +8706,7 @@ The event handler function context (available via the `this` keyword) will be se
 
 ##### e.column `Object`
 
-A JavaScript object which represents the [column](#configuration-columns) configuration.
+A JavaScript object which represents the [column](/api/javascript/ui/grid/configuration/columns) configuration.
 
 ##### e.sender `kendo.ui.Grid`
 
@@ -8882,7 +8884,7 @@ The event handler function context (available via the `this` keyword) will be se
 
 ##### e.column `Object`
 
-A JavaScript object which represents the [column](#configuration-columns) configuration.
+A JavaScript object which represents the [column](/api/javascript/ui/grid/configuration/columns) configuration.
 
 ##### e.newIndex `Number`
 
@@ -8948,7 +8950,7 @@ The event handler function context (available via the `this` keyword) will be se
 
 ##### e.column `Object`
 
-A JavaScript object which represents the [column](#configuration-columns) configuration.
+A JavaScript object which represents the [column](/api/javascript/ui/grid/configuration/columns) configuration.
 
 ##### e.newWidth `Number`
 
@@ -9012,7 +9014,7 @@ The event handler function context (available via the `this` keyword) will be se
 
 ##### e.column `Object`
 
-A JavaScript object which represents the [column](#configuration-columns) configuration.
+A JavaScript object which represents the [column](/api/javascript/ui/grid/configuration/columns) configuration.
 
 ##### e.sender `kendo.ui.Grid`
 
@@ -9070,7 +9072,7 @@ The event handler function context (available via the `this` keyword) will be se
 
 ##### e.column `Object`
 
-A JavaScript object which represents the [column](#configuration-columns) configuration.
+A JavaScript object which represents the [column](/api/javascript/ui/grid/configuration/columns) configuration.
 
 ##### e.sender `kendo.ui.Grid`
 
@@ -9471,7 +9473,7 @@ The event handler function context (available via the `this` keyword) will be se
 
 ##### e.container `jQuery`
 
-The jQuery object of the edit container element, which wraps the editing UI. Depending on the [Grid edit mode](#configuration-editable.mode), the container is different:
+The jQuery object of the edit container element, which wraps the editing UI. Depending on the [Grid edit mode](/api/javascript/ui/grid/configuration/editable.mode), the container is different:
 
 * "incell" edit mode - the container element is a table cell
 * "inline" edit mode - the container is a table row
@@ -10047,7 +10049,7 @@ The widget instance which fired the event.
 
 > Important: This event is available with the Q3 2015 SP1 release.
 
-Fired when [navigatable](#configuration-navigatable) is enabled and the user change current item with either
+Fired when [navigatable](/api/javascript/ui/grid/configuration/navigatable) is enabled and the user change current item with either
 mouse or keyboard interaction.
 
 The event handler function context (available via the `this` keyword) will be set to the widget instance.
@@ -10365,7 +10367,7 @@ The data item to which the table row is bound. If `e.model.id` is null, then a n
 
 ##### e.container `jQuery`
 
-The jQuery object representing the current edit container element. More information is available in the [edit event arguments' description](#events-edit).
+The jQuery object representing the current edit container element. More information is available in the [edit event arguments' description](edit).
 
 ##### e.sender `kendo.ui.Grid`
 
@@ -10373,11 +10375,11 @@ The widget instance which fired the event.
 
 ##### e.values `Object`
 
-The values entered by the user. **Available only when the [editable.mode](#configuration-editable.mode) option is set to "incell".**
+The values entered by the user. **Available only when the [editable.mode](/api/javascript/ui/grid/configuration/editable.mode) option is set to "incell".**
 
 ##### e.preventDefault `Function`
 
-If invoked, prevents the save action. In "incell" [editable.mode](#configuration-editable.mode) the edited table cell will exit edit mode. In "inline" and "popup" edit modes, the edit form will remain open.
+If invoked, prevents the save action. In "incell" [editable.mode](/api/javascript/ui/grid/configuration/editable.mode) the edited table cell will exit edit mode. In "inline" and "popup" edit modes, the edit form will remain open.
 
 #### Example - subscribe to the "save" event during initialization
     <div id="grid"></div>

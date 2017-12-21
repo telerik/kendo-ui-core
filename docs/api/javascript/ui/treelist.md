@@ -431,7 +431,7 @@ If set to `true` the column will show the icons that are used for expanding and 
 ### columns.field `String`
 
 The field to which the column is bound. The value of this field is displayed by the column during data binding.
-**The field name should be a valid Javascript identifier and should contain no spaces, no special characters, and the first character should be a letter.**
+**The field name should be a valid Javascript identifier and should contain only alphanumeric characters (or "$" or "_"), and may not start with a digit.**
 
 #### Example - specify the column field
 

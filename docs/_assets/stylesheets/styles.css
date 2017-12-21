@@ -408,6 +408,12 @@ h6 {
   text-transform: uppercase;
   font-weight: 700; }
 
+.api-breadcrumbs-container {
+  padding: 10px 2em 0 18%;
+  font-family: Roboto, Helvetica, Arial, sans-serif;
+  max-width: 930px;
+  margin: 10px 1em 0 6em; }
+
 #markdown-toc + #page-article {
   /* adjust for ToC fixed positioning */
   padding-top: 80px; }
