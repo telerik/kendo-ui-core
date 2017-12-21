@@ -223,9 +223,14 @@ $(document).ready(function () {
             return;
         }
         formIsProcessing = true;
-       
 
-        if (canSubmitFeedback()) {
+        if (textAreaValidator("#feedback-code-sample-text-input", "outdatedSample").validate() &&
+            textAreaValidator("#feedback-more-information-text-input", "otherMoreInformation").validate() &&
+            textAreaValidator("#feedback-text-errors-text-input", "textErrors").validate() &&
+            textAreaValidator("#feedback-inaccurate-content-text-input", "inaccurateContent").validate() &&
+            textAreaValidator("#feedback-other-text-input", "otherFeedback").validate() &&
+            emptyFormValidator.validate() &&
+            emailValidator.validate()) {
             win.close();
             setCookieByName("submittingFeedback")
             formModel.yesNoFeedback = getCookieByName("yesNoFeedback") || "Not submitted";
@@ -296,6 +301,7 @@ $(document).ready(function () {
             Feedback._events();
 
             Feedback.adjustArticleHeight();
+            updateVariables();
             Feedback.adjustNavigationPosition();
 
             if (shouldOverlayFeedback) {

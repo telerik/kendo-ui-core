@@ -1,8 +1,8 @@
 ---
-title: Cancel Changes Per Row by Using the Incell Editing Mode of the Grid
-description: An example on how to cancel the changes for a specific Kendo UI Grid row when the Grid is in the incell editing mode.
+title: Cancel Changes Per Row by Using the In-Cell Editing Mode of the Grid
+description: An example on how to cancel the changes for a specific Kendo UI Grid row when the Grid is in the in-cell editing mode.
 type: how-to
-page_title: Cancel Changes for Specific Row in Incell Editing Mode | Kendo UI Grid
+page_title: Cancel Changes for Specific Row in In-Cell Editing Mode | Kendo UI Grid
 slug: cancel-changes-for-specific-row-with-incell-editing
 tags: grid, editing
 ticketid: 1111657
