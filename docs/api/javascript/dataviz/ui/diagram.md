@@ -21,20 +21,20 @@ data source is fired. By default the widget will bind to the data source specifi
 
     <div id="diagram"></div>
     <script>
-    $("#diagram").kendoDiagram({
+      $("#diagram").kendoDiagram({
         dataSource: [{
-           "name": "Telerik",
-           "items": [
-               {"name": "Kendo"},
-               {"name": "Icenium"}
-           ]
+          "name": "Telerik",
+          "items": [
+            {"name": "Kendo"},
+            {"name": "Icenium"}
+          ]
         }],
         template: "#= item.name #",
         autoBind: false
-    });
+      });
 
-    // Fetching data will trigger "change" on the dataSource
-    $("#diagram").getKendoDiagram().dataSource.fetch();
+      // Fetching data will trigger "change" on the dataSource
+      $("#diagram").getKendoDiagram().dataSource.fetch();
     </script>
 
 ### connectionDefaults `Object`
@@ -122,7 +122,7 @@ The static text displayed on the connection.
 A function returning a visual element to render for the content of a connection.
 
 #### Example - Connection content visual
-```html
+
     <div id="diagram"></div>
     <script>
       $("#diagram").kendoDiagram({
@@ -156,7 +156,7 @@ A function returning a visual element to render for the content of a connection.
         }
       });
     </script>
-```
+
 
 ### connectionDefaults.editable `Boolean|Object` *(default: true)*
 
@@ -305,18 +305,26 @@ Defines the highlight color when the pointer is hovering over the connection.
 
 #### Example - turning the connection red on hover
 
-     connectionDefaults: {
-                hover: {
-                    stroke: {color: "red"}
-                },
-                stroke: {
-                    color: "#979797",
-                    width: 4
-                },
-                type: "polyline",
-                startCap: "FilledCircle",
-                endCap: "ArrowEnd"
-            }
+    <div id="diagram"></div>
+    <script>
+      var Point = kendo.dataviz.diagram.Point;
+      var diagram = $("#diagram").kendoDiagram({
+        connectionDefaults: {
+          hover: {
+            stroke: {color: "red"}
+          },
+          stroke: {
+            color: "#979797",
+            width: 4
+          },
+          type: "polyline",
+          startCap: "FilledCircle",
+          endCap: "ArrowEnd"
+        }
+
+      }).getKendoDiagram();
+      diagram.connect(new Point(100,100), new Point(300,100));
+    </script>
 
 ### connectionDefaults.selectable `Boolean` *(default: true)*
 
@@ -328,24 +336,32 @@ Defines the connection selection configuration.
 
 ##### Example - Styling the connection selection
 
-     connectionDefaults: {
-                hover: {
-                    stroke: {color: "red"}
-                },
-                stroke: {
-                    color: "#979797",
-                    width: 4
-                },
-                type: "polyline",
-                startCap: "FilledCircle",
-                endCap: "ArrowEnd",
-                selection: {
-                    handles: {
-                        fill: {color: "Yellow"},
-                        stroke: {color: "White"}
-                    }
-                }
+    <div id="diagram"></div>
+    <script>
+      var Point = kendo.dataviz.diagram.Point;
+      var diagram = $("#diagram").kendoDiagram({
+        connectionDefaults: {
+          hover: {
+            stroke: {color: "red"}
+          },
+          stroke: {
+            color: "#979797",
+            width: 4
+          },
+          type: "polyline",
+          startCap: "FilledCircle",
+          endCap: "ArrowEnd",
+          selection: {
+            handles: {
+              fill: {color: "Yellow"},
+              stroke: {color: "White"}
             }
+          }
+        }
+
+      }).getKendoDiagram();
+      diagram.connect(new Point(100,100), new Point(300,100));
+    </script>
 
 ### connectionDefaults.selection.handles `Object`
 
@@ -923,33 +939,121 @@ Specifies the connection editor template which shows up when editing the connect
 Assuming that the diagram is data bound and that the connection data contains properties 'meaning' and 'domain'.
 These can be edited by setting a Kendo template and a diagram configuration as follows.
 
-     <script id="popup-editor" type="text/x-kendo-template">
-        <h3>Edit Connection Data</h3>
-        <p>
-            <label>Semantic meaning:<input name="meaning" /></label>
-        </p>
-        <p>
-            <label>Domain: <input data-role="domain" name="domain" /></label>
-        </p>
+
+    <script id="popup-editor" type="text/x-kendo-template">
+    <h3>Edit Connection Data</h3>
+    <p>
+        <label>Semantic meaning:<input name="meaning" /></label>
+      </p>
+    <p>
+        <label>Domain: <input data-role="domain" name="domain" /></label>
+      </p>
     </script>
 
     <div id="diagram"></div>
     <script>
-    $("#diagram").kendoDiagram({
+      var serviceRoot = "https://demos.telerik.com/kendo-ui/service";
+
+      var shapesDataSource = {
+        batch: false,
+        transport: {
+          read: {
+            url: serviceRoot + "/DiagramShapes",
+            dataType: "jsonp"
+          },
+          update: {
+            url: serviceRoot + "/DiagramShapes/Update",
+            dataType: "jsonp"
+          },
+          destroy: {
+            url: serviceRoot + "/DiagramShapes/Destroy",
+            dataType: "jsonp"
+          },
+          create: {
+            url: serviceRoot + "/DiagramShapes/Create",
+            dataType: "jsonp"
+          },
+          parameterMap: function (options, operation) {
+            if (operation !== "read") {
+              return { models: kendo.stringify(options.models || [options]) };
+            }
+          }
+        },
+        schema: {
+          model: {
+            id: "id",
+            fields: {
+              id: { from: "Id", type: "number", editable: false },
+              JobTitle: { type: "string" },
+              Color: { type: "string" }
+            }
+          }
+        }
+      };
+
+      var connectionsDataSource = {
+        batch: false,
+        transport: {
+          read: {
+            url: serviceRoot + "/DiagramConnections",
+            dataType: "jsonp"
+          },
+          update: {
+            url: serviceRoot + "/DiagramConnections/Update",
+            dataType: "jsonp"
+          },
+          destroy: {
+            url: serviceRoot + "/DiagramConnections/Destroy",
+            dataType: "jsonp"
+          },
+          create: {
+            url: serviceRoot + "/DiagramConnections/Create",
+            dataType: "jsonp"
+          },
+          parameterMap: function (options, operation) {
+            if (operation !== "read") {
+              return { models: kendo.stringify(options.models || [options]) };
+            }
+          }
+        },
+        schema: {
+          model: {
+            id: "id",
+            fields: {
+              id: { from: "Id", type: "number", editable: false },
+              from: { from: "FromShapeId", type: "number" },
+              to: { from: "ToShapeId", type: "number" },
+              fromX: { from: "FromPointX", type: "number" },
+              fromY: { from: "FromPointY", type: "number" },
+              toX: { from: "ToPointX", type: "number" },
+              toY: { from: "ToPointY", type: "number" }
+            }
+          }
+        }
+      };
+
+      function onDataBound(e) {
+        var that = this;
+        setTimeout(function () {
+          that.bringIntoView(that.shapes);
+        }, 0);
+      }
+
+      $("#diagram").kendoDiagram({
         readOnly: false,
         dataSource: shapesDataSource,
         connectionsDataSource: connectionsDataSource,
         editable: {
-            tools: ["edit"],
-            connectionTemplate: kendo.template($("#popup-editor").html())
+          tools: ["edit"],
+          connectionTemplate: kendo.template($("#popup-editor").html())
         },
         connectionDefaults: {
-           editable: {
-                tools: ["edit"]
-            }
+          editable: {
+            tools: ["edit"]
+          }
         },
         dataBound: onDataBound
-    });
+      });
     </script>
 
 See also the Kendo data-bound sample for a similar example.
@@ -2840,15 +2944,17 @@ Whether the addition should be recorded in the undo-redo stack.
 
 #### Example - adding a Connection to the diagram
 
+    <div id="diagram"></div>
     <script>
-    var Point = kendo.dataviz.diagram.Point;
-    $("#diagram").kendoDiagram();
-    var diagram = $("#diagram").data("kendoDiagram");
-    var shape1 = diagram.addShape(new Point(100, 100));
-    var shape2 = diagram.addShape(new Point(300, 200));
+      var Shape = kendo.dataviz.diagram.Shape;
+      $("#diagram").kendoDiagram();
 
-    var connection = new kendo.dataviz.diagram.Connection(shape1, shape2, { stroke: { color: "red" } });
-    diagram.addConnection(connection);
+      var diagram = $("#diagram").data("kendoDiagram");
+      var shape1 = diagram.addShape( new Shape({x:100, y:100, fill: "red"}));
+      var shape2 = diagram.addShape( new Shape({x:300, y:200, fill: "red"}));
+
+      var connection = new kendo.dataviz.diagram.Connection(shape1, shape2, { stroke: { color: "red" } });
+      diagram.addConnection(connection);
     </script>
 
 ### addShape
@@ -2867,14 +2973,15 @@ Whether the addition should be recorded in the undo-redo stack.
 
 #### Example - adding a shape to the diagram
 
+    <div id="diagram"></div>
     <script>
-    var Point = kendo.dataviz.diagram.Point;
-    $("#diagram").kendoDiagram();
-    var diagram = $("#diagram").data("kendoDiagram");
+      var Shape = kendo.dataviz.diagram.Shape;
+      $("#diagram").kendoDiagram();
+      var diagram = $("#diagram").data("kendoDiagram");
 
-     diagram.addShape(new Point(100, 100));
-     var shape = new kendo.dataviz.diagram.Shape({x:500, y:100, fill: "red"});
-     diagram.addShape(shape);
+      diagram.addShape(new Point(100, 100));
+      var shape = new Shape({x:500, y:100, fill: "red"});
+      diagram.addShape(shape);
     </script>
 
 #### Returns
@@ -2929,44 +3036,50 @@ Brings one or more items into the view in function of various criteria.
 
 This will offset/pan the diagram to bring the rectangle at position (500,500) into view.
 
+    <div id="diagram"></div>  
     <script>
-        var Point = kendo.dataviz.diagram.Point;
-        $("#diagram").kendoDiagram();
-        var diagram = $("#diagram").data("kendoDiagram");
+      var Shape = kendo.dataviz.diagram.Shape;
+      $("#diagram").kendoDiagram();
+      var diagram = $("#diagram").data("kendoDiagram");
 
-        var shape1 = diagram.addShape(new Point(100, 100));
-        var shape2 = diagram.addShape(new Point(400, 100));
-        var con = diagram.connect(shape1,shape2);
+      var shape1 = diagram.addShape(new Shape({x:100, y:100, fill: "red"}));
+      var shape2 = diagram.addShape(new Shape({x:400, y:100, fill: "red"}));
+      var con = diagram.connect(shape1,shape2);
 
-        diagram.bringIntoView(new kendo.dataviz.diagram.Rect(500, 500, 10, 10));
+      setTimeout(function(){
+        diagram.bringIntoView(new kendo.dataviz.diagram.Rect({height:500, width:500, x:10, y:10}));
+      }, 2000)
     </script>
 
 #### Example - bring an item into view
 
 The second shape has a vertical position of 1000 and is off the screen at launch. Upon clicking the diagram this item will be in the view.
 
+    <div id="diagram"></div>
     <script>
-        var Point = kendo.dataviz.diagram.Point;
-        var shape2;
-        function init()
+      var Shape = kendo.dataviz.diagram.Shape;
+      var shape2;
+      var diagram;
+
+      function init()
+      {
+        var diagramElement = $("#diagram").kendoDiagram();
+        diagram = diagramElement.data("kendoDiagram");
+        diagramElement.css("width", "1200");
+        diagramElement.css("height", "800");
+      }
+      $(document).ready(
+        function()
         {
-            var diagramElement = $("#canvas").kendoDiagram();
-            diagram = diagramElement.data("kendoDiagram");
-            diagramElement.css("width", "1200");
-            diagramElement.css("height", "800");
-        }
-        $(document).ready(
-                function()
-                {
-                    init();
-                    var shape1 = diagram.addShape(new Point(100, 100));
-                    shape2 = diagram.addShape(new Point(400, 1000));
-                    var con = diagram.connect(shape1, shape2);
-                });
-        $(document).click(function()
-        {
-            diagram.bringIntoView(shape2);
+          init();
+          var shape1 = diagram.addShape(new Shape({x:100, y:100, fill: "red"}));
+          shape2 = diagram.addShape(new Shape({x:400, y:1000, fill: "red"}));
+          var con = diagram.connect(shape1, shape2);
         });
+      $(document).click(function()
+                        {
+        diagram.bringIntoView(shape2);
+      });
     </script>
 
 ### cancelEdit
@@ -3000,34 +3113,47 @@ The options of the new connection. See [connections](#configuration-connections)
 
 #### Example - connecting two shapes using the Auto-connector
 
-    <script>
-    var Point = kendo.dataviz.diagram.Point;
-    $("#diagram").kendoDiagram();
-    var diagram = $("#diagram").data("kendoDiagram");
-    var shape1 = diagram.addShape(new Point(100, 100));
-    var shape2 = diagram.addShape(new Point(400, 100));
-    var connection = diagram.connect(shape1, shape2)
+    <div id="diagram"></div>
+    
+    <script>      
+      var Shape = kendo.dataviz.diagram.Shape;      
+      $("#diagram").kendoDiagram();
+      
+      var diagram = $("#diagram").data("kendoDiagram");
+      var shape1 = diagram.addShape(new Shape({x:100, y:100, fill: "red"}));
+      var shape2 = diagram.addShape(new Shape({x:400, y:1000, fill: "red"}));
+      var connection = diagram.connect(shape1, shape2)
+      
     </script>
 
 #### Example - connecting two shapes using the specific connectors
 
+    <div id="diagram"></div>
     <script>
-    var Point = kendo.dataviz.diagram.Point;
-    $("#diagram").kendoDiagram();
-    var diagram = $("#diagram").data("kendoDiagram");
-    var shape1 = diagram.addShape(new Point(100, 100));
-    var shape2 = diagram.addShape(new Point(400, 100));
-    var connection = diagram.connect(shape1.getConnector["Top"], shape2.getConnector["Bottom"])
+      var Shape = kendo.dataviz.diagram.Shape; 
+      $("#diagram").kendoDiagram();
+      
+      var diagram = $("#diagram").data("kendoDiagram");      
+      var shape1 = diagram.addShape(new Shape({x:100, y:100, fill: "red"}));
+      var shape2 = diagram.addShape(new Shape({x:400, y:100, fill: "red"}));
+   
+      var connection = diagram.connect(shape1.getConnector["top"], shape2.getConnector["bottom"]);
+      
     </script>
 
 #### Example - creating a half-floating connection
 
+    <div id="diagram"></div>
+
     <script>
-    var Point = kendo.dataviz.diagram.Point;
-    $("#diagram").kendoDiagram();
-    var diagram = $("#diagram").data("kendoDiagram");
-    var shape = diagram.addShape(new Point(100, 100));
-    var connection = diagram.connect(new Point(150,150), shape)
+      var Shape = kendo.dataviz.diagram.Shape;
+      var Point = kendo.dataviz.diagram.Point;
+      $("#diagram").kendoDiagram();
+      
+      var diagram = $("#diagram").data("kendoDiagram");
+      var shape = diagram.addShape(new Shape({x:100, y:100, fill: "red"}));
+      
+      var connection = diagram.connect(new Point(250,350), shape)
     </script>
 
 Note that the Shape holds an indexed connectors collection. Instead of accessing a default or custom connector by means of the **getConnector("name-of-connector")** method you could use **connectors[index]** instead.
@@ -3081,19 +3207,23 @@ Prepares the widget for safe removal from the DOM. Detaches all event handlers a
 > This method does not remove the widget element from the DOM.
 
 #### Example
+
+    <div id="diagram"></div>
     <script>
-    $("#diagram").kendoDiagram({
-      dataSource: [{
+      $("#diagram").kendoDiagram({
+        dataSource: [{
           "name" : "Telerik",
           "items": [
-              {"name": "Kendo"},
-              {"name": "Icenium"}
+            {"name": "Kendo"},
+            {"name": "Icenium"}
           ]
-      }],
-      template: "#= item.name #"
-    });
-    var diagram = $("#diagram").data("kendoDiagram");
-    diagram.destroy();
+        }],
+        template: "#= item.name #"
+      });
+      
+      var diagram = $("#diagram").data("kendoDiagram");
+      diagram.destroy();
+      
     </script>
 
 ### documentToModel
@@ -3176,6 +3306,7 @@ for more details.
 `Promise` A promise that will be resolved with a PNG image encoded as a Data URI.
 
 #### Example - Exporting a diagram to an image
+
     <div id="diagram"></div>
     <script>
         $("#diagram").kendoDiagram({
@@ -3214,6 +3345,7 @@ Parameters for the exported PDF file.
 `Promise` A promise that will be resolved with a PDF file encoded as a Data URI.
 
 #### Example - Exporting a diagram to a PDF file
+
     <div id="diagram"></div>
     <script>
         $("#diagram").kendoDiagram({
@@ -3259,6 +3391,7 @@ Resolves the promise with the raw SVG document without the Data URI prefix.
 `Promise` A promise that will be resolved with a SVG document encoded as a Data URI.
 
 #### Example - Exporting a diagram to an SVG document
+
     <div id="diagram"></div>
     <script>
         $("#diagram").kendoDiagram({
@@ -3466,15 +3599,17 @@ Whether the removal should be recorded in the undo-redo stack.
 
 #### Example - removing items
 
+    <div id="diagram"></div>
+    
     <script>
-        var Point = kendo.dataviz.diagram.Point;
-        $("#diagram").kendoDiagram();
-        var diagram = $("#diagram").data("kendoDiagram");
+      var Shape = kendo.dataviz.diagram.Shape;
+      $("#diagram").kendoDiagram();
+      var diagram = $("#diagram").data("kendoDiagram");
 
-        var shape1 = diagram.addShape(new Point(100, 100));
-        var shape2 = diagram.addShape(new Point(400, 100));
-        var con = diagram.connect(shape1,shape2);
-        diagram.remove([shape1, shape2, con]);
+      var shape1 = diagram.addShape(new Shape({x:100, y:100, fill: "red"}));
+      var shape2 = diagram.addShape(new Shape({x:400, y:100, fill: "red"}));
+      var con = diagram.connect(shape1,shape2);
+      diagram.remove([shape1, shape2, con]);
     </script>
 
 ### resize
@@ -3610,16 +3745,18 @@ Undoes the previous action.
 
 #### Example - undoing items removal
 
-    <script>
-        var Point = kendo.dataviz.diagram.Point;
-        $("#diagram").kendoDiagram();
-        var diagram = $("#diagram").data("kendoDiagram");
+    <div id="diagram"></div>
 
-        var shape1 = diagram.addShape(new Point(100, 100));
-        var shape2 = diagram.addShape(new Point(400, 100));
-        var con = diagram.connect(shape1,shape2);
-        diagram.remove([shape1, shape2], true);
-        diagram.undo();
+    <script>
+      var Shape = kendo.dataviz.diagram.Shape;
+      $("#diagram").kendoDiagram();
+      var diagram = $("#diagram").data("kendoDiagram");
+
+      var shape1 = diagram.addShape(new Shape({x:100, y:100, fill: "red"}));
+      var shape2 = diagram.addShape(new Shape({x:400, y:100, fill: "red"}));
+      var con = diagram.connect(shape1,shape2);
+      diagram.remove([shape1, shape2, con]);
+      diagram.undo()
     </script>
 
 ### viewToDocument
@@ -3703,20 +3840,28 @@ The widget instance which fired the event.
 
 #### Example - handling the add event
 
-     $('<div id="diagram" />').kendoDiagram({
-         shapes: [{
-             id: "id1",
-             type: "Rectangle",
-             x: 0,
-             y: 0,
-             width: 100,
-             height: 100
-         }],
-         add: function(e) {
-             var addedShape = e.shape;
-             // 'this' refers to the widget here
-         }
-     });
+    <script>
+      var diagramElement = $('<div id="diagram" />').kendoDiagram({
+        shapes: [{
+          id: "id1",
+          type: "Rectangle",
+          x: 0,
+          y: 0,
+          width: 100,
+          height: 100
+        }],
+        add: function(e) {
+          var addedShape = e.shape;         
+          // 'this' refers to the widget here
+        }
+      });      
+
+      $('body').append(diagramElement);
+
+      var diagram = diagramElement.data('kendoDiagram');
+
+      diagram.addShape(new kendo.dataviz.diagram.Shape({x:100, y:100, fill: "red"}))
+    </script>
 
 ### cancel
 
@@ -3764,49 +3909,52 @@ Fired when the user clicks on a shape or a connection.
 
 #### Example - handling the click event
 
-     $("#diagram").kendoDiagram({
-                 shapes: [
-                     {
-                         id: "1",
-                         content: {
-                             text: "Monday"
-                         }
-                     },
-                     {
-                         id: "2",
-                         content: "Tuesday"
-                     }
-                 ],
-                 connections: [
+    <div id='diagram'></div>
+    <script>
+      $("#diagram").kendoDiagram({
+        shapes: [
+          {
+            id: "1",
+            content: {
+              text: "Monday"
+            }
+          },
+          {
+            id: "2",
+            content: "Tuesday"
+          }
+        ],
+        connections: [
 
-                     {
-                         from: "1",
-                         to: "2"
-                     }
-                 ],
-                 layout: {
-                     type: "tree"
-                 },
-                 click: function(e) {
-                     if(e.item instanceof kendo.dataviz.diagram.Shape)
-                         console.log(e.item.options.content? e.item.options.content.text: "No content.");
-                     else
-                         console.log("Clicked a connection.");
-                 },
-                 shapeDefaults: {
-                     type: "circle",
-                     width: 70,
-                     height: 70,
-                     hover: {
-                         fill: "Orange"
-                     }
-                 },
-                 connectionDefaults: {
-                     type: "polyline",
-                     startCap: "FilledCircle",
-                     endCap: "ArrowEnd"
-                 }
-             })
+          {
+            from: "1",
+            to: "2"
+          }
+        ],
+        layout: {
+          type: "tree"
+        },
+        click: function(e) {
+          if(e.item instanceof kendo.dataviz.diagram.Shape)
+            console.log(e.item.options.content? e.item.options.content.text: "No content.");
+          else
+            console.log("Clicked a connection.");
+        },
+        shapeDefaults: {
+          type: "circle",
+          width: 70,
+          height: 70,
+          hover: {
+            fill: "Orange"
+          }
+        },
+        connectionDefaults: {
+          type: "polyline",
+          startCap: "FilledCircle",
+          endCap: "ArrowEnd"
+        }
+      })
+    </script>
 
 #### Event Data
 

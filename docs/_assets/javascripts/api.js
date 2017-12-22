@@ -221,7 +221,7 @@ function ensureCorrectNavigation() {
         var hashIndex = hash.indexOf('#');
         var dashIndex = hash.indexOf('-');
         if (hashIndex > -1 && hashIndex < dashIndex) {
-            var newPath = hash.replace('#', '/').replace('-', '/');
+            var newPath = hash.replace('#', '/').replace('-', '/').toLowerCase();
             window.location.replace(window.location.origin + window.location.pathname + newPath);
             return true;
         }
