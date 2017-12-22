@@ -1145,7 +1145,7 @@ var __meta__ = { // jshint ignore:line
                 if (e.altKey) {
                     that.toggle(down);
                 } else {
-                    if (!listView.bound()) {
+                    if (!listView.bound() && !that.ul[0].firstChild) {
                         if (!that._fetch) {
                             that.dataSource.one(CHANGE, function() {
                                 that._fetch = false;

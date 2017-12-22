@@ -103,7 +103,7 @@ The [template](/api/javascript/kendo#methods-template) which renders the alterna
 
 ### autoBind `Boolean` *(default: true)*
 
-If set to `false`, the Grid will not bind to the data source during initialization, i.e. it will not call the [`fetch`](/api/javascript/data/datasource#methods-fetch) method of the [dataSource](/api/javascript/ui/grid/fields/dataSource) instance. In such scenarios data binding will occur when the [change](/api/javascript/data/datasource#events-change) event of the
+If set to `false`, the Grid will not bind to the data source during initialization, i.e. it will not call the [`fetch`](/api/javascript/data/datasource#methods-fetch) method of the [dataSource](/api/javascript/ui/grid/fields/datasource) instance. In such scenarios data binding will occur when the [change](/api/javascript/data/datasource#events-change) event of the
 dataSource instance is fired. By default, `autoBind` is set to `true` and the widget will bind to the data source specified in the configuration.
 
 > Setting `autoBind` to `false` is useful when multiple widgets are bound to the same data source. Disabling automatic binding ensures that the shared data source doesn't make more than one request to the remote service.
@@ -178,6 +178,7 @@ The aggregate(s) which are calculated when the grid is grouped by the columns [f
 The supported aggregates are "average", "count", "max", "min" and "sum".
 
 #### Example - set column aggregates
+
     <div id="grid"></div>
     <script>
     $("#grid").kendoGrid({
@@ -234,6 +235,7 @@ The columns which should be rendered as child columns under this group column he
 **Note that group column cannot be data bound and supports limited number of bound column settings - such as title, headerTemplate, locked
 
 #### Example - set column group column for displaying multicolumn headers
+
     <div id="grid"></div>
     <script>
     $("#grid").kendoGrid({
@@ -274,6 +276,7 @@ Custom commands are supported by specifying the [click](columns.command.click) o
 > The built-in "edit" and "destroy" commands work *only* if editing is enabled via the [editable](editable) option. The "edit" command supports "inline" and "popup" editing modes.
 
 #### Example - set command as a string
+
     <div id="grid"></div>
     <script>
     $("#grid").kendoGrid({
@@ -287,6 +290,7 @@ Custom commands are supported by specifying the [click](columns.command.click) o
     </script>
 
 #### Example - set command as array of strings
+
     <div id="grid"></div>
     <script>
     $("#grid").kendoGrid({
@@ -300,6 +304,7 @@ Custom commands are supported by specifying the [click](columns.command.click) o
     </script>
 
 #### Example - set command as array of objects
+
     <div id="grid"></div>
     <script>
     $("#grid").kendoGrid({
@@ -326,6 +331,7 @@ Custom commands are supported by specifying the [click](columns.command.click) o
 The JavaScript function executed on initialization of the row which will determine whether the command button will be visible. The function receives a the data item object for the row as an argument.
 
 #### Example - set the command name
+
     <div id="grid"></div>
     <script>
     $("#grid").kendoGrid({
@@ -343,6 +349,7 @@ The JavaScript function executed on initialization of the row which will determi
 The name of the command. The built-in commands are "edit" and "destroy". Can be set to a custom value.
 
 #### Example - set the command name
+
     <div id="grid"></div>
     <script>
     $("#grid").kendoGrid({
@@ -360,6 +367,7 @@ The name of the command. The built-in commands are "edit" and "destroy". Can be 
 The text displayed by the command button and the "cancel", "edit" and "update" texts of the edit command. If not set the [name](columns.command.name) option is used as the button text.
 
 #### Example - customize the text of the command
+
     <div id="grid"></div>
     <script>
     $("#grid").kendoGrid({
@@ -373,6 +381,7 @@ The text displayed by the command button and the "cancel", "edit" and "update" t
     </script>
 
 #### Example - customize the "edit", "cancel" and "update" text of the edit command
+
     <div id="grid"></div>
     <script>
     $("#grid").kendoGrid({
@@ -402,6 +411,7 @@ The text displayed by the command button and the "cancel", "edit" and "update" t
 The "edit" text of the edit command.
 
 #### Example - customize the edit text of the edit command
+
     <div id="grid"></div>
     <script>
     $("#grid").kendoGrid({
@@ -419,6 +429,7 @@ The "edit" text of the edit command.
 The "cancel" text of the edit command.
 
 #### Example - customize the cancel text of the edit command
+
     <div id="grid"></div>
     <script>
     $("#grid").kendoGrid({
@@ -436,6 +447,7 @@ The "cancel" text of the edit command.
 The "update" text of the edit command.
 
 #### Example - customize the update text of the edit command
+
     <div id="grid"></div>
     <script>
     $("#grid").kendoGrid({
@@ -453,6 +465,7 @@ The "update" text of the edit command.
 The CSS class applied to the command button.
 
 #### Example - set the CSS class of the command
+
     <div id="grid"></div>
     <script>
     $("#grid").kendoGrid({
@@ -479,6 +492,7 @@ The function context (available via the `this` keyword) will be set to the grid 
 > Grid custom commands are rendered as anchors (`<a>`) with no `href` value. Prevent the click event in the click function in order to avoid shifting of the page scroll position.
 
 #### Example - handle the click event of the custom command button
+
     <div id="grid"></div>
     <script>
     $("#grid").kendoGrid({
@@ -511,6 +525,7 @@ When it is defined as an object it allows to customize the web font icon for the
 > Default commands have a predefined **iconClass** value.
 
 #### Example - provide an iconClass for the grid command column
+
     <div id="grid"></div>
     <script>
     $("#grid").kendoGrid({
@@ -527,6 +542,7 @@ When it is defined as an object it allows to customize the web font icon for the
     </script>
 
 #### Example - provide an custom iconClass for the update and cancel command buttons
+
     <div id="grid"></div>
     <script>
     $("#grid").kendoGrid({
@@ -552,6 +568,7 @@ When it is defined as an object it allows to customize the web font icon for the
 The class for the [web font icon](http://docs.telerik.com/kendo-ui/styles-and-layout/icons-web) of the edit command button.
 
 #### Example - provide an custom iconClass for the edit command button
+
     <div id="grid"></div>
     <script>
     $("#grid").kendoGrid({
@@ -575,6 +592,7 @@ The class for the [web font icon](http://docs.telerik.com/kendo-ui/styles-and-la
 The class for the [web font icon](http://docs.telerik.com/kendo-ui/styles-and-layout/icons-web) of the update command button.
 
 #### Example - provide an custom iconClass for the update command button
+
     <div id="grid"></div>
     <script>
     $("#grid").kendoGrid({
@@ -598,6 +616,7 @@ The class for the [web font icon](http://docs.telerik.com/kendo-ui/styles-and-la
 The class for the [web font icon](http://docs.telerik.com/kendo-ui/styles-and-layout/icons-web) of the cancel command button.
 
 #### Example - provide an custom iconClass for the cancel command button
+
     <div id="grid"></div>
     <script>
     $("#grid").kendoGrid({
@@ -621,6 +640,7 @@ The class for the [web font icon](http://docs.telerik.com/kendo-ui/styles-and-la
 The JavaScript function executed when the cell/row is about to be opened for edit. The result returned will determine whether an editor for the column will be created.
 
 #### Example - conditionally edit a cell
+
     <div id="grid"></div>
     <script>
     $("#grid").kendoGrid({
@@ -1211,6 +1231,7 @@ populated at the time the template function is called, if the Grid uses remote b
 If set to `true` the filter menu of the column allows the user to input a second criterion.
 
 #### Example - disable the second filter criterion for the name field.
+
     <div id="grid"></div>
     <script>
       $("#grid").kendoGrid({
@@ -1239,6 +1260,7 @@ Use this option to enable the MultiCheck filtering support for that column.
 > If you have enabled the columns.multi option and your Grid uses serverPaging (or ServerOperations(true) when using the MVC wrappers) you will need to provide columns.filterable.dataSource. Otherwise, a negative impact on the performance could be observed.
 
 #### Example - enable checkbox filtering support.
+
     <div id="grid"></div>
     <script>
     $("#grid").kendoGrid({
@@ -1258,6 +1280,7 @@ Use this option to enable the MultiCheck filtering support for that column.
 The dataSource configuration for the items that will be used when [columns.filterable.multi](columns.filterable.multi) is enabled.
 
 #### Example - provide custom DataSource for the checkbox filtering.
+
     <div id="grid"></div>
     <script>
     $("#grid").kendoGrid({
@@ -1278,6 +1301,7 @@ The dataSource configuration for the items that will be used when [columns.filte
 Controls whether to show or not the checkAll checkbox before the other checkboxes when using checkbox filtering.
 
 #### Example - provide custom DataSource for the FilterMultiCheck filtering.
+
     <div id="grid"></div>
     <script>
     $("#grid").kendoGrid({
@@ -1298,7 +1322,8 @@ Controls whether to show or not the checkAll checkbox before the other checkboxe
 Allows customization on the logic that renders the checkboxes when using checkbox filtering.
 
 #### Example - provide custom DataSource for the FilterMultiCheck filtering.
-     <div id="grid"></div>
+
+    <div id="grid"></div>
     <script>
         $("#grid").kendoGrid({
             columns: [ {
@@ -1323,6 +1348,7 @@ The property is identical to [`filterable.operators`](filterable.operators), but
 Controls whether to show a search box when [checkbox filtering](columns.filterable.multi) is enabled.
 
 #### Example - Enable checkbox filter search
+
     <div id="grid"></div>
     <script>
         $("#grid").kendoGrid({
@@ -1342,6 +1368,7 @@ Controls whether to show a search box when [checkbox filtering](columns.filterab
 Toggles between case-insensitive (default) and case-sensitive [searching](columns.filterable.search).
 
 #### Example - Enable checkbox filter search
+
     <div id="grid"></div>
     <script>
         $("#grid").kendoGrid({
@@ -1367,6 +1394,7 @@ The role data attribute of the widget used in the filter menu or a JavaScript fu
 > If [filterable.mode](filterable.mode) is set to 'row', [columns.filterable.cell.template](columns.filterable.cell.template) should be used to customize the input.
 
 #### Example - specify the filter UI as a string
+
     <div id="grid"></div>
     <script>
     $("#grid").kendoGrid({
@@ -1528,6 +1556,7 @@ The format that is applied to the value before it is displayed. Takes the form "
 > The [kendo.format](/api/javascript/kendo#methods-format) function is used to format the value.
 
 #### Example - specify the column format string
+
     <div id="grid"></div>
     <script>
     $("#grid").kendoGrid({
@@ -1725,6 +1754,7 @@ is displayed in the column header cell.
 > If sorting is enabled, the column header content will be wrapped in a `<a>` element. As a result the template **must** contain only inline elements.
 
 #### Example - column header template as a string
+
     <div id="grid"></div>
     <script>
     $("#grid").kendoGrid({
@@ -1737,6 +1767,7 @@ is displayed in the column header cell.
     </script>
 
 #### Example - column header template as a Kendo UI template function with conditional logic
+
     <div id="grid"></div>
     <script>
     $("#grid").kendoGrid({
@@ -1753,6 +1784,7 @@ is displayed in the column header cell.
 If set to `true` the column will not be displayed in the grid. By default all columns are displayed.
 
 #### Example - hide columns
+
     <div id="grid"></div>
     <script>
     $("#grid").kendoGrid({
@@ -1771,6 +1803,7 @@ If set to `true` the column will be displayed as locked (frozen) in the grid. Al
 > **Important**: Row template and detail features are not supported in combination with column locking. If [multi-column headers](http://demos.telerik.com/kendo-ui/grid/multicolumnheaders) are used, it is possible to lock (freeze) a column at the topmost level only.
 
 #### Example - locked columns
+
     <div id="grid"></div>
     <script>
     $("#grid").kendoGrid({
@@ -1790,6 +1823,7 @@ If set to `false` the column will remain in the side of the grid into which its 
 prevent the user from locking or unlocking this column using the user interface.
 
 #### Example - lockable columns
+
     <div id="grid"></div>
     <script>
     $("#grid").kendoGrid({
@@ -1813,6 +1847,7 @@ The pixel screen width below which the user will not be able to resize the colum
 > This option is meaningful when the grid is set as [resizable](resizable).
 
 #### Example - set the column width as a number
+
      <div id="grid"></div>
      <script>
      $("#grid").kendoGrid({
@@ -1834,6 +1869,7 @@ The pixel screen width below which the column will be hidden. The setting takes 
 so the two should not be used at the same time.
 
 #### Example - lockable columns
+
     <div id="grid"></div>
     <script>
     $("#grid").kendoGrid({
@@ -2006,6 +2042,7 @@ Each table row consists of table cells (`<td>`) which represent the grid columns
     </script>
 
 #### Example - set the template as a function which returns a string
+
     <div id="grid"></div>
     <script>
     $("#grid").kendoGrid({
@@ -2040,6 +2077,7 @@ The text that is displayed in the column header cell. If not set the [field](col
 The width of the column. Numeric values are treated as pixels. **For more important information, please refer to [Column Widths](/controls/data-management/grid/appearance#column-widths)**.
 
 #### Example - set the column width as a string
+
      <div id="grid"></div>
      <script>
      $("#grid").kendoGrid({
@@ -2055,6 +2093,7 @@ The width of the column. Numeric values are treated as pixels. **For more import
      </script>
 
 #### Example - set the column width as a number
+
      <div id="grid"></div>
      <script>
      $("#grid").kendoGrid({
@@ -2103,6 +2142,7 @@ This example displays "Beverages" and "Food" in the "category" column instead of
 If set to `true` the column will be visible in the grid column menu. By default the column menu includes all data-bound columns (ones that have their [field](columns.field) set).
 
 #### Example - hide a column from the column menu
+
     <div id="grid"></div>
     <script>
     $("#grid").kendoGrid({
@@ -2530,6 +2570,7 @@ Check [Detail Template](http://demos.telerik.com/kendo-ui/grid/detailtemplate) f
 > The detail template content cannot be wider than the total width of all master columns, unless the detail template is scrollable.
 
 #### Example - specify detail template as a function
+
     <script id="detail-template" type="text/x-kendo-template">
       <div>
         Name: #: name #
@@ -2554,6 +2595,7 @@ Check [Detail Template](http://demos.telerik.com/kendo-ui/grid/detailtemplate) f
     </script>
 
 #### Example - specify detail template as a string
+
     <div id="grid"></div>
     <script>
     $("#grid").kendoGrid({
@@ -2582,6 +2624,7 @@ Can be set to a JavaScript object which represents the editing configuration.
 > The "incell" editing mode combined with DataSource `autoSync: true` setting is not supported when using server-side grouping in the Grid. To be able to save edited values on each change, you can disable server-side grouping or trigger a DataSource `sync()` manually inside the [`cellClose` event](#events-cellClose).
 
 #### Example - enable editing
+
     <div id="grid"></div>
     <script>
     $("#grid").kendoGrid({
@@ -2598,6 +2641,7 @@ Can be set to a JavaScript object which represents the editing configuration.
     </script>
 
 #### Example - enable popup editing
+
     <div id="grid"></div>
     <script>
     $("#grid").kendoGrid({
@@ -2625,6 +2669,7 @@ Can be set to a string which will be used as the confirmation text.
 Can be set to a function which will be called, passing the model instance, to return the confirmation text.
 
 #### Example - disable delete confirmation
+
     <div id="grid"></div>
     <script>
     $("#grid").kendoGrid({
@@ -2644,6 +2689,7 @@ Can be set to a function which will be called, passing the model instance, to re
     </script>
 
 #### Example - set delete confirmation text
+
     <div id="grid"></div>
     <script>
     $("#grid").kendoGrid({
@@ -2690,6 +2736,7 @@ If confirmation is enabled the grid will display a confirmation dialog when the 
 If the grid is in mobile mode this text will be used for the cancel button.
 
 #### Example - change the cancel delete button text
+
     <div id="grid"></div>
     <script>
     $("#grid").kendoGrid({
@@ -2716,6 +2763,7 @@ If confirmation is enabled the grid will display a confirmation dialog when the 
 If the grid is in mobile mode this text will be used for the confirm button.
 
 #### Example - change the confirm delete button text
+
     <div id="grid"></div>
     <script>
     $("#grid").kendoGrid({
@@ -2765,6 +2813,7 @@ The position at which new data items are inserted in the grid. Must be set to ei
 If set to `true` the user can delete data items from the grid by clicking the "destroy" command button. Deleting is enabled by default.
 
 #### Example - disable deleting
+
     <div id="grid"></div>
     <script>
     $("#grid").kendoGrid({
@@ -3062,6 +3111,7 @@ The proxy should return the decoded file with the "Content-Disposition" header s
 `attachment; filename="<fileName.xslx>"`.
 
 #### Example - set the server proxy URL
+
     <div id="grid"></div>
     <script>
     $("#grid").kendoGrid({
@@ -3133,6 +3183,7 @@ If set to `true` the filter menu allows the user to input a second criterion.
 The text messages displayed in the filter menu. Use it to customize or localize the filter menu messages.
 
 #### Example - customize filter menu messages
+
     <div id="grid"></div>
     <script>
     $("#grid").kendoGrid({
@@ -3264,6 +3315,7 @@ The text rendered for the title attribute of the filter menu form.
 The text of the radio button for `false` values. Displayed when filtering `Boolean` fields.
 
 #### Example - set the "isFalse" message
+
     <div id="grid"></div>
     <script>
     $("#grid").kendoGrid({
@@ -3296,6 +3348,7 @@ The text of the radio button for `false` values. Displayed when filtering `Boole
 The text of the radio button for `true` values. Displayed when filtering `Boolean` fields.
 
 #### Example - set the "isTrue" message
+
     <div id="grid"></div>
     <script>
     $("#grid").kendoGrid({
@@ -3532,7 +3585,8 @@ The text of the value item in filter menu (available in mobile mode only).
 The label used for the check-all checkbox.
 
 #### Example - change the checkAll default message.
-     <div id="grid"></div>
+
+    <div id="grid"></div>
     <script>
       $("#grid").kendoGrid({
         columns: [{
@@ -3692,6 +3746,7 @@ In this example only two operators would be displayed in the DropDownList - "Equ
 The text of the "equal" filter operator.
 
 #### Example - set the string "equal" operator
+
     <div id="grid"></div>
     <script>
     $("#grid").kendoGrid({
@@ -3717,6 +3772,7 @@ The text of the "equal" filter operator.
 The text of the "not equal" filter operator.
 
 #### Example - set the string "not equal" operator
+
     <div id="grid"></div>
     <script>
     $("#grid").kendoGrid({
@@ -3742,6 +3798,7 @@ The text of the "not equal" filter operator.
 The text of the "isnull" filter operator.
 
 #### Example - set the string "isnull" operator
+
     <div id="grid"></div>
     <script>
     $("#grid").kendoGrid({
@@ -3767,6 +3824,7 @@ The text of the "isnull" filter operator.
 The text of the "isnotnull" filter operator.
 
 #### Example - set the string "isnotnull" operator
+
     <div id="grid"></div>
     <script>
     $("#grid").kendoGrid({
@@ -3792,6 +3850,7 @@ The text of the "isnotnull" filter operator.
 The text of the "isempty" filter operator.
 
 #### Example - set the string "isempty" operator
+
     <div id="grid"></div>
     <script>
     $("#grid").kendoGrid({
@@ -3817,6 +3876,7 @@ The text of the "isempty" filter operator.
 The text of the "isnotempty" filter operator.
 
 #### Example - set the string "isnotempty" operator
+
     <div id="grid"></div>
     <script>
     $("#grid").kendoGrid({
@@ -3842,6 +3902,7 @@ The text of the "isnotempty" filter operator.
 The text of the "starts with" filter operator.
 
 #### Example - set the string "starts with" operator
+
     <div id="grid"></div>
     <script>
     $("#grid").kendoGrid({
@@ -4279,6 +4340,7 @@ The texts of the filter operators displayed for columns bound to date fields.
 > Omitting an operator will exclude it from the DropDownList with the available operators.
 
 #### Example - set date operators
+
     <div id="grid"></div>
     <script>
     $("#grid").kendoGrid({
@@ -4814,6 +4876,7 @@ The text messages displayed during grouping.
 The text displayed in the grouping drop area.
 
 #### Example - set the "empty" grouping message
+
     <div id="grid"></div>
     <script>
     $("#grid").kendoGrid({
@@ -5227,6 +5290,7 @@ Can be set to a string `phone` or `tablet` which will force the widget to use ad
 The grid uses same layout for both `phone` and `tablet`.
 
 #### Example - enable adaptive rendering auto detect
+
     <div id="grid"></div>
     <script>
     $("#grid").kendoGrid({
@@ -5246,6 +5310,7 @@ The grid uses same layout for both `phone` and `tablet`.
     </script>
 
 #### Example - force adaptive rendering
+
     <div id="grid"></div>
     <script>
     $("#grid").kendoGrid({
@@ -5337,7 +5402,7 @@ If set to `true` the grid will display a pager. By default paging is disabled.
 
 Can be set to a JavaScript object which represents the pager configuration.
 
-> Don't forget to set a [`pageSize`](/api/javascript/data/datasource#configuration-pageSize), no matter if paging is performed client-side or server-side. A `pageSize` can be defined in the `pageable` settings, or in the [`dataSource`](/api/javascript/ui/grid/configuration/dataSource) settings. If an already existing dataSource instance is passed to the Grid, then the [`pageSize`](/api/javascript/data/datasource#configuration-pageSize) option should be set in the dataSource's settings and not in the `pageable` settings.
+> Don't forget to set a [`pageSize`](/api/javascript/data/datasource#configuration-pageSize), no matter if paging is performed client-side or server-side. A `pageSize` can be defined in the `pageable` settings, or in the [`dataSource`](/api/javascript/ui/grid/configuration/datasource) settings. If an already existing dataSource instance is passed to the Grid, then the [`pageSize`](/api/javascript/data/datasource#configuration-pageSize) option should be set in the dataSource's settings and not in the `pageable` settings.
 
 #### Example - enable paging
 
@@ -5425,6 +5490,7 @@ The number of data items which will be displayed in the grid. **This setting wil
 If set to `true` the pager will display buttons for going to the first, previous, next and last pages. By default those buttons are displayed.
 
 #### Example - hide the first, previous, next, and last buttons
+
     <div id="grid"></div>
     <script>
     $("#grid").kendoGrid({
@@ -6322,6 +6388,7 @@ The proxy should return the decoded file with the "Content-Disposition" header s
 `attachment; filename="<fileName.pdf>"`.
 
 #### Example - set the server proxy URL
+
     <div id="grid"></div>
     <script>
     $("#grid").kendoGrid({
@@ -6378,6 +6445,7 @@ the proxy should set the "Content-Disposition" header to `inline; filename="<fil
 Sets the subject of the PDF file.
 
 #### Example - set the subject
+
     <div id="grid"></div>
     <script>
     $("#grid").kendoGrid({
@@ -6403,6 +6471,7 @@ Sets the subject of the PDF file.
 Sets the title of the PDF file.
 
 #### Example - set the title
+
     <div id="grid"></div>
     <script>
     $("#grid").kendoGrid({
@@ -6434,6 +6503,7 @@ Sets a value indicating whether the selection will be persisted when sorting, pa
 > Selection persistence does not work for new items when the Grid DataSource is in offline mode. In offline mode, newly added items do not have IDs, which are required for selection persistence to work.
 
 #### Example - enables selection persistence
+
     <div id="grid"></div>
     <script>
     $("#grid").kendoGrid({
@@ -6599,6 +6669,7 @@ Can also be set to the following string values:
 > When the selectable property is set to "multiple, row" or "multiple, cell" the Grid cannot be scrollable on mobile devices as both are listening on the same event.
 
 #### Example - set selectable as a boolean
+
     <div id="grid"></div>
     <script>
     $("#grid").kendoGrid({
@@ -6615,6 +6686,7 @@ Can also be set to the following string values:
     </script>
 
 #### Example - set selectable as a string
+
     <div id="grid"></div>
     <script>
     $("#grid").kendoGrid({
@@ -6769,6 +6841,7 @@ The "excel" command exports the grid data in MS Excel format.
 The "pdf" command exports the grid data in PDF format.
 
 #### Example - configure the Grid Toolbar as a string template
+
     <div id="grid"></div>
     <script>
     $("#grid").kendoGrid({
@@ -6791,6 +6864,7 @@ The "pdf" command exports the grid data in PDF format.
     </script>
 
 #### Example - configure the Grid Toolbar template with a function
+
     <div id="grid"></div>
     <script>
     $("#grid").kendoGrid({
@@ -6813,6 +6887,7 @@ The "pdf" command exports the grid data in PDF format.
     </script>
 
 #### Example - configure the Grid Toolbar as an array of commands
+
     <div id="grid"></div>
     <script>
     $("#grid").kendoGrid({
@@ -6846,6 +6921,7 @@ The class for the [web font icon](http://docs.telerik.com/kendo-ui/styles-and-la
 > Built-in commands have a predefined **iconClass** value.
 
 #### Example - provide an iconClass for a toolbar command
+
     <div id="grid"></div>
     <script>
     $("#grid").kendoGrid({
@@ -6877,6 +6953,7 @@ The name of the toolbar command. Either a built-in ("cancel", "create", "save", 
 This class can be used to obtain reference to the button after Grid initialization and attach click handlers.
 
 #### Example - specify the name of the command
+
     <div id="grid"></div>
     <script>
     $("#grid").kendoGrid({
@@ -6968,6 +7045,7 @@ The [template](/api/javascript/kendo#methods-template) which renders the command
 The text displayed by the command button. If not set the [name](toolbar.name)` option would be used as the button text instead.
 
 #### Example - set the text of the toolbar button
+
     <div id="grid"></div>
     <script>
     $("#grid").kendoGrid({
@@ -7015,11 +7093,11 @@ The columns of the grid initialized from the [columns](/api/javascript/ui/grid/c
 
 ### dataSource `kendo.data.DataSource`
 
-The [data source](/api/javascript/data/datasource) of the widget. Configured via the [dataSource](/api/javascript/ui/grid/configuration/dataSource) option.
+The [data source](/api/javascript/data/datasource) of the widget. Configured via the [dataSource](/api/javascript/ui/grid/configuration/datasource) option.
 
 > Changes to the data source will be reflected in the widget.
 
-> Assigning a new data source would have no effect. Use the [setDataSource](/api/javascript/ui/grid/methods/setDataSource) method instead.
+> Assigning a new data source would have no effect. Use the [setDataSource](/api/javascript/ui/grid/methods/setdatasource) method instead.
 
 #### Example - add a data item to the data source
 
@@ -7901,6 +7979,7 @@ Fires the [remove](/api/javascript/ui/grid/events/remove) event.
 A string, DOM element or jQuery object which represents the table row. A string is treated as a jQuery selector.
 
 #### Example - remove the first table row
+
     <div id="grid"></div>
     <script>
     $("#grid").kendoGrid({
@@ -7957,7 +8036,7 @@ The column whose position should be changed.
 
 ### saveAsExcel
 
-Initiates the Excel export. Also fires the [`excelExport`](/api/javascript/ui/grid/events/excelExport) event.
+Initiates the Excel export. Also fires the [`excelExport`](/api/javascript/ui/grid/events/excelexport) event.
 
 > Calling this method could trigger the browser built-in popup blocker in some cases. To avoid that, always call it as a response to an end-user action e.g. button click.
 
@@ -7984,12 +8063,12 @@ Initiates the Excel export. Also fires the [`excelExport`](/api/javascript/ui/gr
 
 ### saveAsPDF
 
-Initiates the PDF export and returns a promise. Also triggers the [pdfExport](/api/javascript/ui/grid/events/pdfExport) event.
+Initiates the PDF export and returns a promise. Also triggers the [pdfExport](/api/javascript/ui/grid/events/pdfexport) event.
 
 > Calling this method may trip the built-in browser pop-up blocker. To avoid that, call this method as a response to an end-user action, e.g. a button click.
 
 #### Returns
-`Promise` A promise that will be resolved when the export completes. The same promise is available in the [pdfExport](/api/javascript/ui/grid/events/pdfExport) event arguments.
+`Promise` A promise that will be resolved when the export completes. The same promise is available in the [pdfExport](/api/javascript/ui/grid/events/pdfexport) event arguments.
 
 #### Example - manually initiate PDF export
 
@@ -8017,7 +8096,7 @@ Initiates the PDF export and returns a promise. Also triggers the [pdfExport](/a
 
 Saves any pending changes by calling the [sync](/api/javascript/data/datasource#methods-sync) method.
 
-Fires the [saveChanges](/api/javascript/ui/grid/events/saveChanges) event.
+Fires the [saveChanges](/api/javascript/ui/grid/events/savechanges) event.
 
 #### Example - save changes
 
@@ -8256,7 +8335,7 @@ When `setOptions` is called, the Grid widget will be destroyed and recreated. If
 > This is because the server templates are rendered server-side and do not have corresponding configuration options included in the JavaScript initialization statement that creates the
 > Grid object client-side. As a result, the templates will be lost once the `setOptions()` method is invoked.
 > There are two options to avoid the issue - use JavaScript initialization instead of an MVC wrapper, or add template configuration to the retrieved Grid state with the JavaScript
-> equivalent syntax (e.g. [`headerTemplate`](/api/javascript/ui/grid/configuration/columns.headerTemplate) and [`toolbar`](/api/javascript/ui/grid/configuration/toolbar)).
+> equivalent syntax (e.g. [`headerTemplate`](/api/javascript/ui/grid/configuration/columns.headertemplate) and [`toolbar`](/api/javascript/ui/grid/configuration/toolbar)).
 
 #### Parameters
 
@@ -8408,6 +8487,7 @@ The data item which is going to be edited. Use its [isNew](/api/javascript/data/
 The widget instance which fired the event.
 
 #### Example - subscribe to the "beforeEdit" event during initialization
+
     <div id="grid"></div>
     <script>
     $("#grid").kendoGrid({
@@ -8610,6 +8690,7 @@ The widget instance which fired the event.
     </script>
 
 #### Example - get the selected data item(s) when using cell selection
+
     <div id="grid"></div>
     <script>
     function grid_change(e) {
@@ -8804,6 +8885,7 @@ The widget instance which fired the event.
     </script>
 
 #### Example - subscribe to the "columnMenuInit" event after initialization
+
     <div id="grid"></div>
     <script>
     function grid_columnMenuInit(e) {
@@ -8965,6 +9047,7 @@ The previous column width.
 The widget instance which fired the event.
 
 #### Example - subscribe to the "columnResize" event during initialization
+
     <div id="grid"></div>
     <script>
     $("#grid").kendoGrid({
@@ -8984,6 +9067,7 @@ The widget instance which fired the event.
     </script>
 
 #### Example - subscribe to the "columnResize" event after initialization
+
     <div id="grid"></div>
     <script>
     function grid_columnResize(e) {
@@ -9268,6 +9352,7 @@ The jQuery object which represents the master table row.
 The widget instance which fired the event.
 
 #### Example - subscribe to the "detailCollapse" event during initialization
+
     <div id="grid"></div>
     <script>
     $("#grid").kendoGrid({
@@ -9287,6 +9372,7 @@ The widget instance which fired the event.
     </script>
 
 #### Example - subscribe to the "detailCollapse" event after initialization
+
     <div id="grid"></div>
     <script>
     function grid_detailCollapse(e) {
@@ -9328,6 +9414,7 @@ The jQuery object which represents the master table row.
 The widget instance which fired the event.
 
 #### Example - subscribe to the "detailExpand" event during initialization
+
     <div id="grid"></div>
     <script>
     $("#grid").kendoGrid({
@@ -9347,6 +9434,7 @@ The widget instance which fired the event.
     </script>
 
 #### Example - subscribe to the "detailExpand" event after initialization
+
     <div id="grid"></div>
     <script>
     function grid_detailExpand(e) {
@@ -9489,6 +9577,7 @@ The data item which is going to be edited. Use its [isNew](/api/javascript/data/
 The widget instance which fired the event.
 
 #### Example - subscribe to the "edit" event during initialization
+
     <div id="grid"></div>
     <script>
     $("#grid").kendoGrid({
@@ -9942,6 +10031,7 @@ If invoked prevents collapsing of the group.
 The widget instance which fired the event.
 
 #### Example - subscribe to the "groupCollapse" event during initialization
+
     <div id="grid"></div>
     <script>
     $("#grid").kendoGrid({
@@ -9961,6 +10051,7 @@ The widget instance which fired the event.
     </script>
 
 #### Example - subscribe to the "groupCollapse" event after initialization
+
     <div id="grid"></div>
     <script>
     function grid_groupCollapse(e) {
@@ -10006,6 +10097,7 @@ If invoked prevents expanding of the group.
 The widget instance which fired the event.
 
 #### Example - subscribe to the "groupExpand" event during initialization
+
     <div id="grid"></div>
     <script>
     $("#grid").kendoGrid({
@@ -10025,6 +10117,7 @@ The widget instance which fired the event.
     </script>
 
 #### Example - subscribe to the "groupExpand" event after initialization
+
     <div id="grid"></div>
     <script>
     function grid_groupExpand(e) {
@@ -10382,6 +10475,7 @@ The values entered by the user. **Available only when the [editable.mode](/api/j
 If invoked, prevents the save action. In "incell" [editable.mode](/api/javascript/ui/grid/configuration/editable.mode) the edited table cell will exit edit mode. In "inline" and "popup" edit modes, the edit form will remain open.
 
 #### Example - subscribe to the "save" event during initialization
+
     <div id="grid"></div>
     <script>
     $("#grid").kendoGrid({
@@ -10415,6 +10509,7 @@ If invoked, prevents the save action. In "incell" [editable.mode](/api/javascrip
     </script>
 
 #### Example - subscribe to the "save" event after initialization
+
     <div id="grid"></div>
     <script>
     function grid_save(e) {
@@ -10466,6 +10561,7 @@ If invoked the grid will not call the [sync](/api/javascript/data/datasource#met
 The widget instance which fired the event.
 
 #### Example - subscribe to the "saveChanges" event during initialization
+
     <div id="grid"></div>
     <script>
     $("#grid").kendoGrid({

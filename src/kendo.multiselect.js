@@ -888,7 +888,7 @@ var __meta__ = { // jshint ignore:line
                     }
                 }
             } else if ((key === keys.DELETE || key === keys.BACKSPACE) && !hasValue) {
-                that._state = "";
+                that._state = ACCEPT;
 
                 if (that.options.tagMode === "single") {
                     listView.value([]);

@@ -326,6 +326,9 @@ var __meta__ = { // jshint ignore:line
                 // Setting the below flag will prevent this from happening
                 that.popup._hovered = true;
                 that._openPopup();
+                if(that.options.virtual){
+                    that._focusItem();
+                }
             }
         },
 
