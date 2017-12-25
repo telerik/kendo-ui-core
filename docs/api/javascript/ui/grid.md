@@ -1115,7 +1115,7 @@ When set to false the Grid will not render the cell filtering widget for that sp
 
 Specifies the default operator that will be used for the cell filtering.
 
-> If you want to change how the AutoComplete suggestions are filtered use [suggestionOperator](columns.filterable.suggestionOperator).
+> If you want to change how the AutoComplete suggestions are filtered use [suggestionOperator](columns.filterable.cell.suggestionoperator).
 
 #### Example - Specifying default operator for cell filtering.
 
@@ -3090,7 +3090,7 @@ Enables or disables column filtering in the Excel file. Not to be mistaken with 
     </script>
 
 ### excel.forceProxy `Boolean` *(default: false)*
-If set to true, the content will be forwarded to [proxyURL](excel.proxyURL) even if the browser supports saving files locally.
+If set to true, the content will be forwarded to [proxyURL](excel.proxyurl) even if the browser supports saving files locally.
 
 ### excel.proxyURL `String` *(default: null)*
 
@@ -6210,7 +6210,7 @@ Specifies the file name of the exported PDF file.
     </script>
 
 ### pdf.forceProxy `Boolean` *(default: false)*
-If set to true, the content will be forwarded to [proxyURL](pdf.proxyURL) even if the browser supports saving files locally.
+If set to true, the content will be forwarded to [proxyURL](pdf.proxyurl) even if the browser supports saving files locally.
 
 ### pdf.keywords `String` *(default: null)*
 
@@ -6360,7 +6360,7 @@ Available template variables include:
 
 > **Important**
 >
-> Using a template requires setting [paper size](pdf.paperSize)
+> Using a template requires setting [paper size](pdf.papersize)
 
 ### pdf.repeatHeaders `Boolean` *(default: false)*
 
@@ -7800,7 +7800,7 @@ Expands specified master row.
 Retrieves the options that are currently enabled or disabled on the Grid, also gives the current state of the dataSource.
 Use this method if you want to save the state of the Grid into a variable. It is also possible to extract and store only some of the Grid options.
 
-> Please refer to the [`setOptions()`](setOptions) method documentation for more important information.
+> Please refer to the [`setOptions()`](setoptions) method documentation for more important information.
 
 #### Parameters
 
@@ -8319,7 +8319,7 @@ The data source to which the widget should be bound.
 ### setOptions
 
 Sets the options of the Grid. Use this method if you want to enable/disable a particular feature/option or to load
-the complete state obtained previously with the [`getOptions`](getOptions) method.
+the complete state obtained previously with the [`getOptions`](getoptions) method.
 
 When `setOptions` is called, the Grid widget will be destroyed and recreated. If the widget is bound to remote data, a new read request will be made.
 
