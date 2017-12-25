@@ -33,8 +33,7 @@ How can I implement a global Grid search and enable the users to search through 
 
 ```html
 
- <div id="example">
-
+    <div id="example">
       Filter all fields:
       <input id='filter' class='k-textbox'/>
       <div id="grid"></div>
@@ -55,56 +54,27 @@ How can I implement a global Grid search and enable the users to search through 
         }
 
         $(document).ready(function () {
-          var crudServiceBaseUrl = "https://demos.telerik.com/kendo-ui/service",
-              dataSource = new kendo.data.DataSource({
-                transport: {
-                  read:  {
-                    url: crudServiceBaseUrl + "/Products",
-                    dataType: "jsonp"
-                  },
-                  update: {
-                    url: crudServiceBaseUrl + "/Products/Update",
-                    dataType: "jsonp"
-                  },
-                  destroy: {
-                    url: crudServiceBaseUrl + "/Products/Destroy",
-                    dataType: "jsonp"
-                  },
-                  create: {
-                    url: crudServiceBaseUrl + "/Products/Create",
-                    dataType: "jsonp"
-                  },
-                  parameterMap: function(options, operation) {
-                    if (operation !== "read" && options.models) {
-                      return {models: kendo.stringify(options.models)};
-                    }
-                  }
-                },
-                batch: true,
-                pageSize: 20,
-                schema: {
-                  model: {
-                    id: "ProductID",
-                    fields: {
-                      ProductID: { editable: false, nullable: true },
-                      ProductName: { type:"string", validation: { required: true } },
-                      UnitPrice: { type: "number", validation: { required: true, min: 1} },
-                      Discontinued: { type: "boolean" },
-                      UnitsInStock: { type: "number", validation: { min: 0, required: true } }
-                    }
+          $("#grid").kendoGrid({
+            dataSource: {
+              data: [{ name: "John", dob: new Date(2017,10,12), id:4, isAdmin:true },{ name: "Tim", dob: new Date(1998,3,11), id:5, isAdmin:true },{ name: "Jane", dob: new Date(2000,11,12), id:6,isAdmin:false }],
+              schema: {
+                model: {
+                  fields: {
+                    id: { type: "number" },
+                    name: { type: "string" },
+                    dob: { type: "date" },
+                    isAdmin :{type:"boolean"}
                   }
                 }
-              });
-
-          $("#grid").kendoGrid({
-            dataSource: dataSource,
-            pageable: true,
+              }
+            },
             height: 550,
             columns: [
-              "ProductName",
-              { field: "UnitPrice", title: "Unit Price", format: "{0:c}", width: "120px" },
-              { field: "UnitsInStock", title:"Units In Stock", width: "120px" },
-              { field: "Discontinued", width: "120px"}]
+              { field:"id"}, 
+              { field: "dob", format: "{0:dd/MM/yyyy}"},
+              { field: "name"},
+              { field: "isAdmin", title: "Is Admin"}
+            ]
           });
 
           $('#filter').on('input', function (e) {
@@ -132,14 +102,17 @@ How can I implement a global Grid search and enable the users to search through 
                   }    
 
                 } else if (type == 'date') {
-                  var date = new Date(e.target.value)
-
-                  if (!isNaN(date.getTime()) ) {
-                    filter.filters.push({
-                      field: x.field,
-                      operator: 'eq',
-                      value: date
-                    })
+                  var data = grid.dataSource.data();
+                  for (var i=0;i<data.length ; i++){
+                    var dateStr = kendo.format(x.format, data[i][x.field]); 
+                    // change to includes() if you wish to filter that way https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/includes
+                    if(dateStr.startsWith(e.target.value)){ 
+                      filter.filters.push({
+                        field: x.field,
+                        operator:'eq',
+                        value: data[i][x.field]
+                      })
+                    }
                   }
                 } else if (type == 'boolean' && getBoolean(e.target.value) !== null) {
                   var bool = getBoolean(e.target.value);
