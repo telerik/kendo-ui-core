@@ -1,8 +1,8 @@
 ---
 title: AutoSync Does Not Work in Grid When Using Server Grouping
-description: When the Grid is grouped using server-side grouping, AutoSync does not work during editing
+description: When the Kendo UI Grid is grouped by using the server-side grouping, the AutoSync does not work during editing.
 type: troubleshooting
-page_title: Grid Cannot AutoSync Changes if it is Grouped Using Server-Side Grouping
+page_title: Grid Cannot AutoSync Changes If It Is Grouped by Using Server-Side Grouping | Kendo UI Grid
 slug: grid-no-autosync-when-server-grouping
 tags: grid, editing, grouping
 ticketid: 1145291, 1144037
@@ -25,29 +25,34 @@ I have the `autoSync` option set to `true` in the Grid. If I enable server-side 
 
 ## Steps to Reproduce
 
-1. Create a Grid with `editable: true` and `groupable: true` settings.
-1. Set `autoSync: true` and `serverGrouping: true` in the Grid DataSource.
-1. Group the Grid by a column.
+1. Create a Grid with the `editable: true` and `groupable: true` settings.
+1. In the DataSource of the Grid, set `autoSync: true` and `serverGrouping: true`.
+1. Group the Grid by columns.
 1. Try to change a cell value in the Grid.
 
-The Grid does not sync the changed value to the server. Auto-sync starts working if you un-group the Grid.
+The Grid does not sync the changed value with the server. The auto-sync starts working if you ungroup the Grid.
 
 ## Cause
-This is a limitation in the Grid widget. The default `"incell"` editing mode combined with the DataSource `autoSync: true` setting is not supported when using server-side grouping in the Grid.
+
+This behavior is a limitation in the Grid. The default `"incell"` editing mode combined with the `autoSync: true` DataSource setting is not supported when you use server-side grouping in the Grid.
 
 ## Suggested Workarounds
 
-There are a couple of workarounds that you can try:
+You can either:
+* [Disable server operations](#disabling-server-operations), or
+* [Save values manually](#saving-values-manually).
 
-### Disable server operations
+### Disabling Server Operations
 
-The most straightforward workaround is to disable server-side grouping by setting `serverGrouping: false` in the Grid `dataSource` configuration. For the MVC Grid, you need to set `ServerOperations(false)` in the `DataSource` configuration. 
+In the `dataSource` configuration of the Grid, set `serverGrouping: false`. For the MVC Grid, set `ServerOperations(false)` in the `DataSource` configuration.
 
-This workaround, could lead to decrease in client-side performance of the Grid, especially if handling large amounts of data.
+> **Important**
+>
+> This approach might decrease client-side performance especially when the Grid handles large amounts of data.
 
-### Save values manually
+### Saving Values Manually
 
-Another option is to manually call the Grid [`saveChanges()`](/api/javascript/ui/grid#methods-saveChanges) method in the [`cellClose`](/api/javascript/ui/grid#events-cellClose) event, when the Grid is grouped:
+When the Grid is grouped, manually call the [`saveChanges()`](/api/javascript/ui/grid#methods-saveChanges) method of the Grid in the [`cellClose`](/api/javascript/ui/grid#events-cellClose) event. This approach guarantees that the changes which are made in the cell before it was closed will be sent to the server.
 
 ```
     function onCellClose(e) {
@@ -57,5 +62,3 @@ Another option is to manually call the Grid [`saveChanges()`](/api/javascript/ui
         }
     }
 ```
-
-This ensures that changes made in the Grid cell before it was closed will be sent to the server.
