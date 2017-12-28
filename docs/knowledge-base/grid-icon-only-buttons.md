@@ -1,5 +1,5 @@
 ---
-title: Use Grid Edit Buttons with Icons only and No Text
+title: Use Grid Edit Buttons with Icons Only and No Text
 description: An example on how to remove the text from the Edit buttons of a Kendo UI Grid and leave only the icons.
 type: how-to
 page_title: Use the Grid Edit Buttons only with Icons and without Text | Kendo UI Grid
@@ -29,9 +29,7 @@ How can I use the **Edit**, **Delete**, **Update**, **Cancel**, and **Add** butt
 
 ## Solution
 
-1. Set the `text` of the `command` to a space:
-
-    http://docs.telerik.com/kendo-ui/api/javascript/ui/grid#configuration-columns.command.text
+1. Set [`command.text`](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid/configuration/columns.command.text) to a space.
 
     ```
         columns: [
@@ -42,13 +40,17 @@ How can I use the **Edit**, **Delete**, **Update**, **Cancel**, and **Add** butt
         ]
     ```
 
-    http://docs.telerik.com/kendo-ui/api/javascript/ui/grid#configuration-toolbar.text
+2. Set [`toolbar.text`](http://docs.telerik.com/kendo-ui/api/javascript/ui/grid#configuration-toolbar.text) to a space.
 
     ```
         toolbar: [{name: "create", text: " "}]
     ```
 
-1. In addition, reset some of the default margins of the buttons' icons to `0` (zero) by using CSS.
+3. In addition, reset some of the default margins of the buttons' icons to `0` (zero) by using CSS.
+
+    > **Important**
+    >
+    > The selectors in the CSS rules override the styles of the Kendo UI theme.
 
     ```
       .k-grid .k-grid-toolbar .k-grid-add,
@@ -68,20 +70,10 @@ How can I use the **Edit**, **Delete**, **Update**, **Cancel**, and **Add** butt
       }
     ```
 
-For the complete example, refer to http://dojo.telerik.com/ojoViD.
+The following example demonstrates the full implementation of the suggested approach.
 
-```
-<!DOCTYPE html>
-<html>
-  <head>
-    <title>Kendo UI Grid Icon Buttons</title>
-    <link rel="stylesheet" href="https://kendo.cdn.telerik.com/2017.2.504/styles/kendo.common.min.css" />
-    <link rel="stylesheet" href="https://kendo.cdn.telerik.com/2017.2.504/styles/kendo.default.min.css" />
-
-    <script src="https://kendo.cdn.telerik.com/2017.2.504/js/jquery.min.js"></script>
-    <script src="https://kendo.cdn.telerik.com/2017.2.504/js/kendo.all.min.js"></script>
-    <style>
-
+```html
+    <style>      
       .k-grid .k-grid-toolbar .k-grid-add,
       .k-grid tbody .k-grid-edit,
       .k-grid tbody .k-grid-update,
@@ -99,8 +91,6 @@ For the complete example, refer to http://dojo.telerik.com/ojoViD.
       }
 
     </style>
-  </head>
-  <body>
     <div id="example">
       <div id="grid"></div>
 
@@ -162,11 +152,4 @@ For the complete example, refer to http://dojo.telerik.com/ojoViD.
 
       </script>
     </div>
-
-  </body>
-</html>
 ```
-
-## Notes
-
-The selectors in the CSS rules override the styles of the Kendo UI theme.

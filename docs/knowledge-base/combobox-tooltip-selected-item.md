@@ -1,8 +1,8 @@
 ---
 title: Show Tooltip on Selected Item in ComboBox
-description: An example on how to show Tooltip on selected Item in ComboBox
+description: An example on how to show a Kendo UI Tooltip on a selected item in the Kendo UI ComboBox.
 type: how-to
-page_title: Show Tooltip on Selected Item in ComboBox | Kendo UI Tooltip 
+page_title: Show Tooltip on Selected Item | Kendo UI Tooltip
 slug: combobox-tooltip-selected-item
 tags: combobox, tooltip, selected
 ticketid: 1143333  
@@ -33,14 +33,17 @@ res_type: kb
 
 ## Description
 
-How to show Tooltip on selected item in ComboBox?
+How can I show a tooltip on a selected item in the ComboBox?
 
 ## Solution
 
-Subscribe to the select event of ComboBox. In the event handler check the text of the selected item. Destroy the previously created Tooltip. Create Tooltip with the text of the select item.
+1. Subscribe to the `select` event of ComboBox.
+1. In the event handler, check the text of the selected item.
+1. Destroy the Tooltip that was previously created.
+1. Create a Tooltip with the text of the selected item.
 
 ```html
-<input id="combobox" /> 
+<input id="combobox" />
 <script>      
     $("#combobox").kendoComboBox({
         placeholder: "Select product",
@@ -56,11 +59,11 @@ Subscribe to the select event of ComboBox. In the event handler check the text o
             }
         }
     });
-    
+
     $('.k-widget.k-combobox').kendoTooltip({  
 	   		content: "No value selected"
 	  });
-    
+
     function onSelect(e){
      	var text = e.item.text();
      	$(".k-widget.k-combobox").data("kendoTooltip").destroy();    
