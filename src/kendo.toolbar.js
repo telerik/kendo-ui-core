@@ -1457,7 +1457,7 @@ var __meta__ = { // jshint ignore:line
                 }
 
                 if (keyCode === keys.HOME) {
-                    if (target.is(".k-dropdown")) {
+                    if (target.is(".k-dropdown") || target.is("input")) {
                         return;
                     }
 
@@ -1468,7 +1468,7 @@ var __meta__ = { // jshint ignore:line
                     }
                     e.preventDefault();
                 } else if (keyCode === keys.END) {
-                    if (target.is(".k-dropdown")) {
+                    if (target.is(".k-dropdown") || target.is("input")) {
                         return;
                     }
                     if (this.overflowAnchor && $(this.overflowAnchor).css("visibility") != "hidden") {

@@ -243,4 +243,53 @@
         ok(!getPrevFocusable.calls);
     });
 
+    test("end moves focus to the last button", 1, function() {
+        var toolbar = container.kendoToolBar({
+            items: [
+                { type: "button", id: "foo", text: "foo" },
+                { type: "button", id: "bar", text: "bar" },
+                { type: "button", id: "baz", text: "baz" }
+            ]
+        }).data("kendoToolBar");
+
+        $("#foo").focus();
+        $("#foo").press(keys.END);
+
+        ok($(document.activeElement).is("#baz"));
+    });
+
+    test("home moves focus to the first button", 1, function() {
+        var toolbar = container.kendoToolBar({
+            items: [
+                { type: "button", id: "foo", text: "foo" },
+                { type: "button", id: "bar", text: "bar" },
+                { type: "button", id: "baz", text: "baz" }
+            ]
+        }).data("kendoToolBar");
+
+        $("#baz").focus();
+        $("#baz").press(keys.HOME);
+
+        ok($(document.activeElement).is("#foo"));
+    });
+
+    test("home and end does not move focus from inputs", 2, function() {
+        var toolbar = container.kendoToolBar({
+            items: [
+                { type: "button", id: "foo", text: "foo" },
+                { template: '<input id="field1" value="Text data here" />' },
+                { type: "button", id: "baz", text: "baz" }
+            ]
+        }).data("kendoToolBar");
+
+        $("#field1").focus();
+        $("#field1").press(keys.HOME);
+
+        ok($(document.activeElement).is("#field1"));
+
+        $("#field1").press(keys.END);
+
+        ok($(document.activeElement).is("#field1"));
+    });
+
 })();

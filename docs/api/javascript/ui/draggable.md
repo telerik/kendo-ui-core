@@ -61,7 +61,7 @@ If set to `true` the widget will auto-scroll the container when the mouse/finger
       }
     </style>
 
-### container `jQuery`
+### container `String | jQuery`*(default: null)*
 
 If set, the hint movement is constrained to the container boundaries.
 
