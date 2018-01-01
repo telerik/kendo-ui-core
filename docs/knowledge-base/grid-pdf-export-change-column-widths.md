@@ -98,7 +98,7 @@ You can also target specific columns by using the `:nth-child()` selector.
   <body>
 
     <!-- Load Pako Deflate library to enable PDF compression -->
-    <script src="http://kendo.cdn.telerik.com/2017.2.621/js/pako_deflate.min.js"></script>
+    <script src="https://kendo.cdn.telerik.com/2017.2.621/js/pako_deflate.min.js"></script>
 
     <div id="grid"></div>
     <script type="x/kendo-template" id="page-template">
@@ -129,7 +129,7 @@ You can also target specific columns by using the `:nth-child()` selector.
         dataSource: {
           type: "odata",
           transport: {
-            read: "http://demos.telerik.com/kendo-ui/service/Northwind.svc/Products"
+            read: "https://demos.telerik.com/kendo-ui/service/Northwind.svc/Products"
           },
           pageSize: 10
         },
