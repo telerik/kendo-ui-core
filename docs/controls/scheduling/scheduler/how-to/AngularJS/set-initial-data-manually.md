@@ -129,7 +129,7 @@ The following example demonstrates how to manually set initial data in the Kendo
 
           result.push(new kendo.data.SchedulerEvent({
             id: event.TaskID,
-            taksId: event.TaskID,
+            taskId: event.TaskID,
             start: kendo.parseDate(event.Start),
             end: kendo.parseDate(event.End),
             title: event.Title,
