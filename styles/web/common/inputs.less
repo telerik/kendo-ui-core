@@ -345,16 +345,17 @@ span.k-datetimepicker .k-select + .k-select {
 }
 
 .k-ie {
-    .k-textbox > input,
     .k-autocomplete .k-input,
     .k-multiselect-wrap .k-input,
-    .k-picker-wrap .k-input,
-    .k-numeric-wrap .k-input,
     .k-dropdown-wrap .k-input,
     .k-selectbox .k-input {
         height: @input-height;
     }
 
+    .k-textbox > input,
+    .k-picker-wrap .k-input,
+    .k-numeric-wrap .k-input,
+    .k-combobox .k-input,
     input.k-textbox {
         height: ~"calc(@{input-height} + 2*@{input-padding-y} + 2px)";
     }
