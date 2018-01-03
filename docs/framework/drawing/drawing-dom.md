@@ -347,7 +347,7 @@ If you want to change the appearance of the PDF output as it appears in the brow
 
 ### The `.k-pdf-export` Class
 
-This CSS class is applied to a DOM element just before the drawing starts, and is removed shortly afterwards.
+This CSS class is applied to each individual page just before the drawing starts, and is removed shortly afterwards. For multipage exports, it is better to use the [`kendo-pdf-document`](#the-kendo-pdf-document-element) element because styles are applied to the whole export at once.
 
 The example below demonstrates how to define a style that places a border around all paragraphs in the PDF output.
 
