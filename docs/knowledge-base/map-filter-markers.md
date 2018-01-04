@@ -3,7 +3,7 @@ title: Filter Kendo UI Map Markers Dynamically
 description: Dynamic filter for Map widget markers
 type: how-to
 page_title: Filtering Markers Layer in Kendo UI Map
-slug: map_filter_markers
+slug: map-filter-markers
 position: 
 tags: Map, Filter, Markers
 res_type: kb
@@ -29,7 +29,7 @@ I want to filter the Kendo UI Map markers layer dynamically.
 Since the markers layer will be added to the Map widget with the initialization, in order to filter the markers we will have to re-initialize the Map with the filtered data:
 
 #### Example
-
+````html
     <div id="example">
  
     <div id="map"></div>
@@ -76,4 +76,4 @@ Since the markers layer will be added to the Map widget with the initialization,
         $(document).ready(createMap);
     </script>
 	</div>
-
+````
