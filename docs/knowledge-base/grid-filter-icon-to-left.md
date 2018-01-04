@@ -3,7 +3,7 @@ title: Moving Kendo UI Grid Filter Icon To Left
 description: Displaying filter icon at most left position in the Grid header
 type: how-to
 page_title: How To Display Filter Icon Before the Title in the Grid Header
-slug: grid_filter_icon_to_left
+slug: grid-filter-icon-to-left
 position: 
 tags: Grid, Filter icon, Left position
 res_type: kb
@@ -30,7 +30,7 @@ Due to the way that the filter icon is positioned in the header, it receives the
 
 	<style>
 	  .k-grid-header .k-grid-filter, .k-grid-header .k-header-column-menu{
-		margin-left: -1.3em!important;
+		margin-left: -5px!important;
 		margin-right: 0!important;
 		
 	  }
@@ -42,18 +42,19 @@ Due to the way that the filter icon is positioned in the header, it receives the
 
 	
 #### Example
+````html
+<base href="https://demos.telerik.com/kendo-ui/grid/local-data-binding">
+  <style>
+      .k-grid-header .k-grid-filter, .k-grid-header .k-header-column-menu{
+        margin-left: -5px!important;
+        margin-right: 0!important;
 
-		<style>
-		  .k-grid-header .k-grid-filter, .k-grid-header .k-header-column-menu{
-			margin-left: -1.3em!important;
-			margin-right: 0!important;
-			
-		  }
-		  
-		  .k-grid-header .k-grid-filter, .k-grid-header .k-header-column-menu{
-			float: left!important;
-		  }
-		</style>
+      }
+
+      .k-grid-header .k-grid-filter, .k-grid-header .k-header-column-menu{
+        float: left!important;
+      }
+    </style>
   
         <script src="../content/shared/js/people.js"></script>
         <div id="example">
@@ -136,4 +137,4 @@ Due to the way that the filter icon is positioned in the header, it receives the
 
             </script>
         </div>
-
+````
