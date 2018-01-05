@@ -57,7 +57,7 @@ To initiate Excel export through code, call the [`saveAsExcel`](/api/javascript/
 > **Important**
 > * By default, the Grid exports the current page of the data with sorting, filtering, grouping, and aggregates applied.
 > * The Grid uses the current column order, visibility, and dimensions to generate the Excel file.
-> * The Grid does not export the current CSS theme in the Excel file. For more information on how to change the visual appearance of the Excel document, refer to the below section about [customization of the Excel document]({% slug exporting_excel_kendoui_grid_widget %}#customize-the-excel-document).
+> * The Grid does not export the current CSS theme in the Excel file. For more information on how to change the visual appearance of the Excel document, refer to the below section about [customization of the Excel document]({% slug exporting_excel_kendoui_grid_widget %}#excel-customization).
 > * The Grid exports only data-bound columns. All columns that do not have their [field](/api/javascript/ui/grid#configuration-columns.field) option set are ignored.
 > * The [`format`](/api/javascript/ui/grid#configuration-columns.format) option is not used during export. For more information, refer to the section on [column formats]({% slug exporting_excel_kendoui_grid_widget %}#limitations).
 > * The [`template`](/api/javascript/ui/grid#configuration-columns.template) option is not used during export. For more information, refer to the section on [column templates]({% slug exporting_excel_kendoui_grid_widget %}#limitations).

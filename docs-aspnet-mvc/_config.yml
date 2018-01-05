@@ -1,5 +1,5 @@
 # The public documentation URL, used for sitemap.xml
-url: "http://docs.telerik.com/aspnet-mvc"
+url: "https://docs.telerik.com/aspnet-mvc"
 
 # Exclude files which should not be in the output
 exclude: [readme.md, Gemfile, Gemfile.lock,api_sort.rb,SlugLog.log]
