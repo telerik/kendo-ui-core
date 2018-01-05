@@ -878,4 +878,54 @@ test("trigger set when setting value", 1, function() {
     combobox.value(value);
 });
 
+test("raised change event on blur after filtering", 1, function() {
+    var combobox = new ComboBox(input, {
+        dataValueField: "id",
+        dataTextField: "name",
+        dataSource: [
+            { id: 1, name: "name1" },
+            { id: 2, name: "name2" },
+            { id: 3, name: "name3" }
+        ],
+        change: function() {
+            ok(true);
+        }
+    });
+
+    combobox.input.val("n");
+    combobox._search();
+    combobox.open();
+    combobox.input.trigger({
+        type: "keydown",
+        keyCode: kendo.keys.DOWN
+    });
+    combobox.input.focus().blur();
+});
+
+test("not raise change event on selecting current item after filtering", 0, function() {
+    var combobox = new ComboBox(input, {
+        dataValueField: "id",
+        dataTextField: "name",
+        value: 2,
+        dataSource: [
+            { id: 1, name: "foo" },
+            { id: 2, name: "boo" }
+        ],
+        change: function() {
+            ok(false);
+        }
+    });
+
+    combobox.input.trigger({
+        type: "keydown",
+        keyCode: kendo.keys.BACKSPACE
+    });
+    combobox._search();
+    combobox.open();
+    combobox.input.trigger({
+        type: "keydown",
+        keyCode: kendo.keys.DOWN
+    });
+    combobox.input.focus().blur();
+});
 })();

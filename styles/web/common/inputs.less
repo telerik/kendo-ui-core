@@ -355,9 +355,12 @@ span.k-datetimepicker .k-select + .k-select {
     .k-textbox > input,
     .k-picker-wrap .k-input,
     .k-numeric-wrap .k-input,
-    .k-combobox .k-input,
+    .k-combobox .k-input {
+        height: ~"calc(@{input-height} + .35em)";
+    }
+
     input.k-textbox {
-        height: ~"calc(@{input-height} + 2*@{input-padding-y} + 2px)";
+        height: ~"calc(@{input-height} + .35em + 2px)";
     }
 }
 
@@ -910,14 +913,5 @@ span.k-numerictextbox {
     .k-numeric-wrap {
         padding-right: 0;
         padding-left: calc(@input-height + .35em);
-    }
-
-    .k-autocomplete-clearable,
-    .k-multiselect-clearable,
-    .k-combobox-clearable {
-        .k-input {
-            padding-left: calc(@input-height + .35em);
-            padding-right: 0.177em;
-        }
     }
 }

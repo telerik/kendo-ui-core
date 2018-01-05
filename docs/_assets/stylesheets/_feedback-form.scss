@@ -22,20 +22,20 @@
 #close-button {
     display: none;
     right: 1.2em;
-    bottom: 9px;
+    bottom: 14px;
     position: absolute;
     cursor: pointer;
 }
 
 #feedback-section.fixed #close-button {
     display: block;
-    height: 18px;
-    width: 18px;
+    height: 14px;
+    width: 14px;
 }
 
 #close-button img {
-    width: 18px;
-    height: 18px;
+    width: 14px;
+    height: 14px;
 }
 
 #feedback-section .side-title {

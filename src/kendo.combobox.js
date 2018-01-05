@@ -230,6 +230,7 @@ var __meta__ = { // jshint ignore:line
             var that = this;
             var value = that.value();
 
+            that._userTriggered = true;
             that._inputWrapper.removeClass(FOCUSED);
             clearTimeout(that._typingTimeout);
             that._typingTimeout = null;
@@ -545,6 +546,10 @@ var __meta__ = { // jshint ignore:line
 
             this.selectedIndex = idx;
 
+            if (this.options.autoBind) {
+                this._valueBeforeCascade = this._old;
+            }
+
             if (idx === -1 && !dataItem) {
                 text = this._accessor();
                 if (this.options.syncValueAndText) {
@@ -568,7 +573,6 @@ var __meta__ = { // jshint ignore:line
 
             this._placeholder();
             this._triggerCascade();
-
         },
 
         _setDomInputValue: function(text){

@@ -620,6 +620,8 @@ var __meta__ = { // jshint ignore:line
 
             if (value !== unifyType(that._old, typeof value)) {
                 trigger = true;
+            } else if (that._valueBeforeCascade !== undefined && that._valueBeforeCascade !== unifyType(that._old, typeof that._valueBeforeCascade) && that._userTriggered) {
+                trigger = true;
             } else if (index !== undefined && index !== that._oldIndex && !that.listView.isFiltered()) {
                 trigger = true;
             }

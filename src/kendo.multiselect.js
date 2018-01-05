@@ -351,7 +351,7 @@ var __meta__ = { // jshint ignore:line
             that.element.blur();
         },
 
-        _removeTag: function(tag) {
+        _removeTag: function(tag, shouldTrigger) {
             var that = this;
             var state = that._state;
             var position = tag.index();
@@ -372,7 +372,9 @@ var __meta__ = { // jshint ignore:line
 
             var done = function() {
                 that.currentTag(null);
-                that._change();
+                if (shouldTrigger) {
+                    that._change();
+                }
                 that._close();
             };
 
@@ -393,24 +395,24 @@ var __meta__ = { // jshint ignore:line
             var target = $(e.currentTarget);
 
             if (!target.children(".k-i-arrow-60-down").length) {
-                this._removeTag(target.closest(LI));
+                this._removeTag(target.closest(LI), true);
             }
         },
 
         _clearClick: function() {
             var that = this;
 
-            if(that.options.tagMode === "single"){
+            if (that.options.tagMode === "single"){
                 that.value([]);
-            }else{
+            } else{
                 that.tagList.children().each(function(index, tag) {
-                    that._removeTag($(tag));
+                    that._removeTag($(tag), false);
                 });
             }
 
             that.input.val("");
             that._search();
-            that.trigger("change");
+            that.trigger(CHANGE);
             that.focus();
         },
 
@@ -845,8 +847,9 @@ var __meta__ = { // jshint ignore:line
                     e.preventDefault();
                 } else {
                     that.tagList.children().each(function(index, tag) {
-                        that._removeTag($(tag));
+                        that._removeTag($(tag), false);
                     });
+                    that.trigger(CHANGE);
                 }
 
                 that.close();
@@ -902,7 +905,7 @@ var __meta__ = { // jshint ignore:line
                 }
 
                 if (tag && tag[0]) {
-                    that._removeTag(tag);
+                    that._removeTag(tag, true);
                 }
             } else if (that.popup.visible() && (key === keys.PAGEDOWN || key === keys.PAGEUP)) {
                 e.preventDefault();

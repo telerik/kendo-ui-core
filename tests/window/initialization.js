@@ -454,7 +454,13 @@
     });
 
     test("creating pinned window pins the window if initially visible", function() {
-        var dialog = createWindow({ pinned: true });
+        var dialog = createWindow({
+            pinned: true,
+            position: {
+                top:0,
+                left:0
+            }
+        });
         equal(dialog.wrapper.css("position"), "fixed");
     });
 

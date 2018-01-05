@@ -299,4 +299,18 @@
             keyCode: kendo.keys.BACKSPACE
         });
     });
+
+    test("trigger change event when clear all items", 1, function() {
+        var multiselect = new MultiSelect(select, {
+            change: function() {
+                ok(true);
+            },
+            value: ["1", "2"]
+        });
+
+        multiselect.input.trigger({
+            type: "keydown",
+            keyCode: kendo.keys.ESC
+        });
+    });
 })();

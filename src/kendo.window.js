@@ -212,7 +212,7 @@
 
                 this._draggable();
 
-                if (options.pinned && isVisible) {
+                if (options.pinned && this.wrapper.is(":visible")) {
                     that.pin();
                 }
 
