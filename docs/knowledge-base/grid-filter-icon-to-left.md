@@ -4,6 +4,7 @@ description: Displaying filter icon at most left position in the Grid header
 type: how-to
 page_title: How To Display Filter Icon Before the Title in the Grid Header
 slug: grid-filter-icon-to-left
+previous_url: /knowledge-base/grid_filter_icon_to_left
 position: 
 tags: Grid, Filter icon, Left position
 res_type: kb

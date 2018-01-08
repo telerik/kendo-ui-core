@@ -4,6 +4,7 @@ description: Dynamic filter for Map widget markers
 type: how-to
 page_title: Filtering Markers Layer in Kendo UI Map
 slug: map-filter-markers
+previous_url: /knowledge-base/map_filter_markers
 position: 
 tags: Map, Filter, Markers
 res_type: kb
