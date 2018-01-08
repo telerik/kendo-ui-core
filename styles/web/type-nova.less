@@ -229,7 +229,7 @@ textarea.k-textbox:hover,
     background-color: fadeout(@info, 75%);
 }
 
-.k-state-focused {
+.k-state-focused:not(.k-button) {
     box-shadow: inset 0 0 0 1px darken(@widget-border-color, 35%);
 }
 
@@ -344,7 +344,9 @@ textarea.k-textbox:hover,
     opacity: 1;
 }
 
-.k-state-disabled .k-icon {
+.k-state-disabled .k-icon,
+.k-state-disabled .k-button .k-icon,
+.k-button.k-state-disabled .k-icon {
     opacity: .2;
 }
 
@@ -728,6 +730,12 @@ input.k-textbox:active {
     border-color: @warning;
     .box-shadow(none);
     border-radius: 0;
+}
+
+/* Badge */
+.k-badge {
+    background-color: @accent;
+    color: contrast(@accent, @normal-background, @normal-text-color, 0.5);
 }
 
 /* TreeView */

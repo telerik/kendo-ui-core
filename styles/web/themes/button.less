@@ -18,21 +18,16 @@
         .box-shadow(@button-hover-shadow);
     }
 
-    // Focused state
-    &:focus,
-    &.k-state-focused {
-        border-color: @button-focused-border-color;
-        .box-shadow(@button-focused-shadow);
-    }
-
     // Pressed state
     &:active,
     &.k-state-active {
         color: @button-active-text-color;
         background-color: @button-active-background;
         border-color: @button-active-border-color;
+        box-shadow: none;
         .composite-background(@button-active-gradient);
         .box-shadow(@button-active-shadow);
+        .box-shadow(none);
     }
     &.k-state-active {
         &:hover {
@@ -42,33 +37,30 @@
         }
     }
 
-    // Focus active
-    &:focus:active:not(.k-state-disabled):not([disabled]) {
-        .box-shadow(@button-focused-active-shadow);
-    }
-
     // Disabled state
     &[disabled],
-    &[disabled]:hover,
-    &[disabled]:focus,
-    &[disabled]:active,
-    &[disabled]:hover:active,
     .k-state-disabled &,
     .k-state-disabled &:hover,
-    .k-state-disabled &:focus,
-    .k-state-disabled &:active,
-    .k-state-disabled &:active:active,
     &.k-state-disabled,
-    &.k-state-disabled:hover,
-    &.k-state-disabled:focus,
-    &.k-state-disabled:active,
-    &.k-state-disabled:hover:active {
+    &.k-state-disabled:hover {
         color: @disabled-text-color;
         border-color: @disabled-border-color;
         background-color: @disabled-background-color;
-        box-shadow: none;
         .composite-background(@disabled-gradient);
-        .box-shadow(none);
+    }
+
+    // Focused state
+    &:focus,
+    &.k-state-focused,
+    &.k-state-focused:hover,
+    .k-state-disabled &:focus {
+        border-color: @button-focused-border-color;
+        .box-shadow(@button-focused-shadow);
+    }
+
+    // Focus active
+    &:focus:active:not(.k-state-disabled):not([disabled]) {
+        .box-shadow(@button-focused-active-shadow);
     }
 
 }
@@ -137,7 +129,6 @@
         background-color: @primary-disabled-background-color;
         box-shadow: none;
         .composite-background(@primary-disabled-gradient);
-        .box-shadow(none);
     }
 
 }
@@ -154,16 +145,34 @@
     }
 
     .k-group-start,
-    .k-button:first-child {
+    .k-item:first-child .k-button {
         .border-left-radius();
     }
     .k-group-end,
-    .k-button:last-child {
+    .k-item:last-child .k-button {
         .border-right-radius();
     }
     .k-group-start.k-group-end,
-    .k-button:first-child:last-child {
+    .k-item:first-child:last-child .k-button {
         .border-radius();
     }
 
+}
+.k-rtl .k-button-group {
+    .k-item .k-button {
+        .border-radius( 0 );
+    }
+
+    .k-group-start,
+    .k-item:first-child .k-button {
+        .border-right-radius();
+    }
+    .k-group-end,
+    .k-item:last-child .k-button {
+        .border-left-radius();
+    }
+    .k-group-start.k-group-end,
+    .k-item:first-child:last-child .k-button {
+        .border-radius();
+    }
 }

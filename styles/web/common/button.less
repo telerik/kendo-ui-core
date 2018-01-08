@@ -15,7 +15,6 @@
     align-items: center;
     justify-content: center;
     vertical-align: middle;
-    overflow: hidden;
     user-select: none;
     cursor: pointer;
     outline: none;
@@ -38,11 +37,16 @@
         outline: 0;
     }
 
+    .k-text {
+        overflow: hidden;
+    }
+
     .k-icon,
     .k-image,
     .k-sprite {
         color: inherit;
         align-self: center;
+        pointer-events: none;
     }
 
 
@@ -54,9 +58,9 @@
         .k-image,
         .k-sprite {
             margin-right: 3px;
-            margin-right: .3rem;
-            margin-left: -3px;
-            margin-left: -.3rem;
+            margin-right: .1875rem;
+            margin-left: -2px;
+            margin-left: -.125rem;
         }
     }
 
@@ -151,6 +155,7 @@ input[type="reset"].k-button-expand {
 .k-button-group {
     margin: 0;
     padding: 0;
+    border-width: 0;
     list-style: none;
     white-space: nowrap;
     display: inline-block;
@@ -159,9 +164,28 @@ input[type="reset"].k-button-expand {
     vertical-align: middle;
     position: relative;
 
+    .k-item {
+        position: relative;
+    }
+    .k-item + .k-item {
+        margin-left: -1px;
+    }
+
     .k-button {
         // .border-radius( 0 );
         position: relative;
+    }
+
+    // stretched button group
+    &.k-button-group-stretched {
+
+        .k-item {
+            flex: 1 0 auto;
+        }
+
+        .k-button {
+            width: 100%;
+        }
     }
 
     .k-button:active,
@@ -171,6 +195,10 @@ input[type="reset"].k-button-expand {
     .k-button:hover,
     .k-button.k-state-hover {
         z-index: 3;
+    }
+    .k-button.k-state-disabled,
+    &.k-state-disabled .k-button {
+        z-index: auto;
     }
     .k-button:focus,
     .k-button.k-state-focused {
@@ -201,4 +229,29 @@ input[type="reset"].k-button-expand {
         pointer-events: none;
     }
 
+}
+.k-rtl .k-button-group {
+
+    .k-button {
+        margin: 0;
+    }
+    .k-item + .k-item {
+        margin-right: -1px;
+    }
+
+}
+.k-ie9 .k-button-group {
+
+    &:after {
+        content: "";
+        display: block;
+        clear: both;
+    }
+
+    .k-item{
+        float: left;
+    }
+}
+.k-ie9 .k-rtl .k-button-group .k-item{
+    float: right;
 }

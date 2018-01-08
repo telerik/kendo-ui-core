@@ -15,7 +15,7 @@
 
     module("PanelBar aria", {
         setup: function() {
-            ul = $('<ul id="test" />').appendTo(QUnit.fixture).appendTo(QUnit.fixture);
+            ul = $('<ul id="test" />').appendTo(QUnit.fixture);
             panelbar = ul.kendoPanelBar().data("kendoPanelBar");
         },
         teardown: function() {

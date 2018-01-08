@@ -5,29 +5,27 @@
     module("panelbar ajax loading", {
         setup: function() {
             kendo.effects.disable();
-
-            QUnit.fixture.append(
-                '<ul class="k-widget k-panelbar k-reset" id="panelbar" style="width: 300px; float: left; visibility: hidden; position: absolute;">' +
-                '    <li><a>Pure ASP.NET MVC components</a>' +
-                '       <div></div>' +
-                '   </li>' +
-                '   <li><a>Completely Open Source</a>' +
-                '       <div></div>' +
-                '   </li>' +
-                '   <li><a>Exceptional Performance</a>' +
-                '       <div></div>' +
-                '   </li>' +
-                '   <li><a>Based on jQuery</a>' +
-                '       <div></div>' +
-                '   </li>' +
-                '   <li>Wide Cross-browser support' +
-                '       <div></div>' +
-                '   </li>' +
-                '   <li>Wide Cross-browser support' +
-                '       <div></div>' +
-                '   </li>' +
-                '</ul>'
-            );
+            ul = $('<ul class="k-widget k-panelbar k-reset" id="panelbar" style="width: 300px; float: left; visibility: hidden; position: absolute;">' +
+                    '    <li><a>Pure ASP.NET MVC components</a>' +
+                    '       <div></div>' +
+                    '   </li>' +
+                    '   <li><a>Completely Open Source</a>' +
+                    '       <div></div>' +
+                    '   </li>' +
+                    '   <li><a>Exceptional Performance</a>' +
+                    '       <div></div>' +
+                    '   </li>' +
+                    '   <li><a>Based on jQuery</a>' +
+                    '       <div></div>' +
+                    '   </li>' +
+                    '   <li>Wide Cross-browser support' +
+                    '       <div></div>' +
+                    '   </li>' +
+                    '   <li>Wide Cross-browser support' +
+                    '       <div></div>' +
+                    '   </li>' +
+                    '</ul>');
+            ul.appendTo(QUnit.fixture);
 
             $.mockjaxSettings.responseTime = 0;
 
@@ -52,8 +50,6 @@
                 }
             });
 
-            ul = $("#panelbar");
-
             panelbar = new kendo.ui.PanelBar(ul, {
                 animation: false,
                 contentUrls: [
@@ -72,6 +68,7 @@
     }
 
     test("PanelBar renders anchor instead of span if contentUrl", function() {
+        debugger;
         var children = ul.find("li:last").children();
 
         equal(children.filter("a").length, 1);

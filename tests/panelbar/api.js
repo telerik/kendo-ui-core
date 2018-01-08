@@ -30,88 +30,86 @@
     module("api", {
         setup: function() {
             kendo.effects.disable();
+            ul = $('<ul id="panelbar">' +
+                    '    <li class="k-item k-state-default"><span class="k-link k-header">Mail<span' +
+                    '            class="k-icon k-i-arrow-60-down k-panelbar-expand"></span></span>' +
+                    '        <ul style="display: none;" class="k-group">' +
+                    '            <li class="k-item k-state-default"><span class="k-link">Personal Folders</span>' +
+                    '            </li>' +
+                    '            <li class="k-item k-state-default"><span class="k-link">Deleted Items</span>' +
+                    '            </li>' +
+                    '            <li class="k-item k-state-disabled"><span class="k-link">Inbox</span>' +
+                    '            </li>' +
+                    '            <li class="k-item k-state-default"><span class="k-link">My Mail</span>' +
+                    '            </li>' +
+                    '            <li class="k-item k-state-default"><span class="k-link">Sent Items</span>' +
+                    '            </li>' +
+                    '            <li class="k-item k-state-default"><span class="k-link">Outbox</span>' +
+                    '            </li>' +
+                    '            <li class="k-item k-state-default"><span class="k-link">Search Folders</span>' +
+                    '            </li>' +
+                    '        </ul>' +
+                    '    </li>' +
+                    '    <li class="k-item k-state-disabled"><span class="k-link k-header">Contacts<span' +
+                    '            class="k-icon k-i-arrow-60-down k-panelbar-expand"></span></span>' +
+                    '        <ul class="k-group" style="display: none;">' +
+                    '            <li class="k-item k-state-default"><span class="k-link">My Contacts</span>' +
+                    '            </li>' +
+                    '            <li class="k-item k-state-default"><span class="k-link">Address Cards</span>' +
+                    '            </li>' +
+                    '            <li class="k-item k-state-default"><span class="k-link">Phone List</span>' +
+                    '            </li>' +
+                    '            <li class="k-item k-state-default"><span class="k-link">Shared Contacts</span>' +
+                    '            </li>' +
+                    '        </ul>' +
+                    '    </li>' +
+                    '    <li class="k-item k-state-default"><span class="k-link k-header">Tasks<span' +
+                    '            class="k-icon k-i-arrow-60-down k-panelbar-expand"></span></span>' +
+                    '        <ul class="k-group" style="display: none;">' +
+                    '            <li class="k-item k-state-default"><span class="k-link">My Tasks</span>' +
+                    '            </li>' +
+                    '            <li class="k-item k-state-default"><span class="k-link">Shared Tasks</span>' +
+                    '            </li>' +
+                    '            <li class="k-item k-state-default"><span class="k-link">Active Tasks</span>' +
+                    '            </li>' +
+                    '            <li class="k-item k-state-default"><span class="k-link">Completed Tasks</span>' +
+                    '            </li>' +
+                    '        </ul>' +
+                    '    </li>' +
+                    '    <li class="k-item k-state-active"><span class="k-link k-header k-state-selected">Notes<span' +
+                    '            class="k-icon k-i-arrow-60-up k-panelbar-collapse"></span></span>' +
+                    '        <ul class="k-group" style="display: block;">' +
+                    '            <li class="k-item k-state-default"><span class="k-link">My Notes</span>' +
+                    '            </li>' +
+                    '            <li class="k-item k-state-default"><span class="k-link">Notes List</span>' +
+                    '            </li>' +
+                    '            <li class="k-item k-state-default"><span class="k-link">Shared Notes</span>' +
+                    '            </li>' +
+                    '            <li class="k-item k-state-default"><span class="k-link">Archive</span>' +
+                    '            </li>' +
+                    '        </ul>' +
+                    '    </li>' +
+                    '    <li class="k-item k-state-default"><span class="k-link k-header">Folders List<span' +
+                    '            class="k-icon k-i-arrow-60-down k-panelbar-expand"></span></span>' +
+                    '        <ul class="k-group" style="display: none;">' +
+                    '            <li class="k-item k-state-default"><span class="k-link">My Client.Net</span>' +
+                    '            </li>' +
+                    '            <li class="k-item k-state-default"><span class="k-link">My Profile</span>' +
+                    '            </li>' +
+                    '            <li class="k-item k-state-default"><span class="k-link">My Support Tickets</span>' +
+                    '            </li>' +
+                    '            <li class="k-item k-state-default"><span class="k-link">My Licenses</span>' +
+                    '            </li>' +
+                    '            <li class="k-item k-state-default"><span class="k-link">My Licenses</span>' +
+                    '               <input />' +
+                    '            </li>' +
+                    '        </ul>' +
+                    '    </li>' +
+                    '</ul>' +
+                    '<ul id="empty_panelbar"></ul>');
 
-            QUnit.fixture.append(
-                '<ul id="panelbar">' +
-                '    <li class="k-item k-state-default"><span class="k-link k-header">Mail<span' +
-                '            class="k-icon k-i-arrow-60-down k-panelbar-expand"></span></span>' +
-                '        <ul style="display: none;" class="k-group">' +
-                '            <li class="k-item k-state-default"><span class="k-link">Personal Folders</span>' +
-                '            </li>' +
-                '            <li class="k-item k-state-default"><span class="k-link">Deleted Items</span>' +
-                '            </li>' +
-                '            <li class="k-item k-state-disabled"><span class="k-link">Inbox</span>' +
-                '            </li>' +
-                '            <li class="k-item k-state-default"><span class="k-link">My Mail</span>' +
-                '            </li>' +
-                '            <li class="k-item k-state-default"><span class="k-link">Sent Items</span>' +
-                '            </li>' +
-                '            <li class="k-item k-state-default"><span class="k-link">Outbox</span>' +
-                '            </li>' +
-                '            <li class="k-item k-state-default"><span class="k-link">Search Folders</span>' +
-                '            </li>' +
-                '        </ul>' +
-                '    </li>' +
-                '    <li class="k-item k-state-disabled"><span class="k-link k-header">Contacts<span' +
-                '            class="k-icon k-i-arrow-60-down k-panelbar-expand"></span></span>' +
-                '        <ul class="k-group" style="display: none;">' +
-                '            <li class="k-item k-state-default"><span class="k-link">My Contacts</span>' +
-                '            </li>' +
-                '            <li class="k-item k-state-default"><span class="k-link">Address Cards</span>' +
-                '            </li>' +
-                '            <li class="k-item k-state-default"><span class="k-link">Phone List</span>' +
-                '            </li>' +
-                '            <li class="k-item k-state-default"><span class="k-link">Shared Contacts</span>' +
-                '            </li>' +
-                '        </ul>' +
-                '    </li>' +
-                '    <li class="k-item k-state-default"><span class="k-link k-header">Tasks<span' +
-                '            class="k-icon k-i-arrow-60-down k-panelbar-expand"></span></span>' +
-                '        <ul class="k-group" style="display: none;">' +
-                '            <li class="k-item k-state-default"><span class="k-link">My Tasks</span>' +
-                '            </li>' +
-                '            <li class="k-item k-state-default"><span class="k-link">Shared Tasks</span>' +
-                '            </li>' +
-                '            <li class="k-item k-state-default"><span class="k-link">Active Tasks</span>' +
-                '            </li>' +
-                '            <li class="k-item k-state-default"><span class="k-link">Completed Tasks</span>' +
-                '            </li>' +
-                '        </ul>' +
-                '    </li>' +
-                '    <li class="k-item k-state-active"><span class="k-link k-header k-state-selected">Notes<span' +
-                '            class="k-icon k-i-arrow-60-up k-panelbar-collapse"></span></span>' +
-                '        <ul class="k-group" style="display: block;">' +
-                '            <li class="k-item k-state-default"><span class="k-link">My Notes</span>' +
-                '            </li>' +
-                '            <li class="k-item k-state-default"><span class="k-link">Notes List</span>' +
-                '            </li>' +
-                '            <li class="k-item k-state-default"><span class="k-link">Shared Notes</span>' +
-                '            </li>' +
-                '            <li class="k-item k-state-default"><span class="k-link">Archive</span>' +
-                '            </li>' +
-                '        </ul>' +
-                '    </li>' +
-                '    <li class="k-item k-state-default"><span class="k-link k-header">Folders List<span' +
-                '            class="k-icon k-i-arrow-60-down k-panelbar-expand"></span></span>' +
-                '        <ul class="k-group" style="display: none;">' +
-                '            <li class="k-item k-state-default"><span class="k-link">My Client.Net</span>' +
-                '            </li>' +
-                '            <li class="k-item k-state-default"><span class="k-link">My Profile</span>' +
-                '            </li>' +
-                '            <li class="k-item k-state-default"><span class="k-link">My Support Tickets</span>' +
-                '            </li>' +
-                '            <li class="k-item k-state-default"><span class="k-link">My Licenses</span>' +
-                '            </li>' +
-                '            <li class="k-item k-state-default"><span class="k-link">My Licenses</span>' +
-                '               <input />' +
-                '            </li>' +
-                '        </ul>' +
-                '    </li>' +
-                '</ul>' +
-                '<ul id="empty_panelbar"></ul>'
-            );
+            ul.appendTo(QUnit.fixture);
 
-            ul = $("#panelbar");
             empty_panelbar = $("#empty_panelbar");
 
             panelbar = new PanelBar(ul, {

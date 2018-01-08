@@ -21,7 +21,7 @@
 @button-active-gradient: @selected-gradient;
 @button-active-shadow: false;
 @button-focused-border-color: contrast(@base, lighten(@base, 1%), darken(@base, 14%), 0.5);
-@button-focused-shadow: inset 0 0 3px 1px @hover-border-color;
+@button-focused-shadow: inset 0 0 3px 1px contrast(@base, @hover-border-color, lighten(@hover-border-color, 20%), 0.5);
 @button-focused-active-shadow: inset 0 0 3px 1px darken(@selected-border-color, 10%);
 // Primary button
 @primary-text-color: lighten(@selected-text-color, 12%);
@@ -472,6 +472,12 @@ html .km-pane-wrapper .k-header
 .k-mobile-list .k-edit-field [type=radio]:checked
 {
     opacity: @default-icon-opacity;
+}
+
+/* Badge */
+.k-badge {
+    background-color: @accent;
+    color: contrast(@accent, @normal-background, @normal-text-color, 0.4);
 }
 
 .k-tool

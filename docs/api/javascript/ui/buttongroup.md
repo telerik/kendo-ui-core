@@ -1,0 +1,237 @@
+---
+title: ButtonGroup
+page_title: Configuration, methods and events of Kendo UI ButtonGroup
+description: Learn how to define the initially selected button, select a button and get the currently selected button.
+res_type: api
+---
+
+# kendo.ui.ButtonGroup
+
+## Configuration
+
+### enable `Boolean` *(default: true)*
+
+Defines if the widget is initially enabled or disabled. By default, it is enabled.
+
+#### Example
+
+      <ul id="buttongroup">
+        <li>Option 1</li>
+        <li>Option 2</li>
+        <li>Option 3</li>
+      </ul>
+
+    <script>
+		$("#buttongroup").kendoButtonGroup({
+			enable: false
+		});
+    </script>
+
+### index `Number`
+
+Defines the initially selected Button (zero based index).
+
+#### Example
+
+      <ul id="buttongroup">
+        <li>Option 1</li>
+        <li>Option 2</li>
+        <li>Option 3</li>
+      </ul>
+
+    <script>
+		$("#buttongroup").kendoButtonGroup({
+			index: 1
+		});
+    </script>
+
+### selection `String` *(default "single")*
+
+Defines the selection type.
+
+#### Example
+
+      <ul id="buttongroup">
+        <li>Option 1</li>
+        <li>Option 2</li>
+        <li>Option 3</li>
+      </ul>
+
+    <script>
+		$("#buttongroup").kendoButtonGroup({
+			selection: "multiple"
+		});
+    </script>
+
+## Methods
+
+### badge
+
+#### Parameters
+
+##### button `Selector|Number`
+
+The target button specified either as a jQuery selector/object or as an button index.
+
+##### value `String|Boolean`
+
+The target value to be set or false to be removed.
+
+#### Returns
+
+`String|kendo.ui.Button` the badge value if invoked without parameters, otherwise the ButtonGroup object.
+
+#### Example
+
+	<ul id="buttongroup">
+		<li>Option 1</li>
+		<li>Option 2</li>
+		<li>Option 3</li>
+	</ul>
+
+    <script>
+		var buttonGroup = $("#buttongroup").kendoButtonGroup({
+			select: function(e) {
+				console.log("selected index:" + e.index);
+			},
+			enable: false,
+			index: 0
+		}).data("kendoButtonGroup");
+
+		buttonGroup.badge(0,5);
+    </script>
+
+### current
+
+Get the currently selected Button.
+
+#### Returns
+
+`jQuery` the jQuery object representing the currently selected button.
+
+#### Example - get the index of the currently selected Button
+
+	<ul id="buttongroup">
+		<li>Option 1</li>
+		<li>Option 2</li>
+		<li>Option 3</li>
+	</ul>
+
+    <script>
+		$("#buttongroup").kendoButtonGroup({
+			select: function(e) {
+				var index = this.current().index();
+				console.log(index);
+			}
+		});
+    </script>
+
+### destroy
+
+Prepares the **ButtonGroup** for safe removal from DOM. Detaches all event handlers and removes jQuery.data attributes to avoid memory leaks. Calls destroy method of any child Kendo widgets.
+
+> **Important:** This method does not remove the ButtonGroup element from DOM.
+
+#### Example
+
+      <ul id="buttongroup">
+        <li>Option 1</li>
+        <li>Option 2</li>
+        <li>Option 3</li>
+      </ul>
+
+      <a onclick="destroy">Destroy the ButtonGroup</a>
+
+    <script>
+		$("#buttongroup").kendoButtonGroup();
+
+		function destroy() {
+			$("#buttongroup").data("kendoButtonGroup").destroy(); //detach events
+			$("#buttongroup").remove(); //remove the button group from the DOM
+		}
+    </script>
+
+### enable
+
+Enables or disables the widget.
+
+#### Parameters
+
+##### enable `Boolean`
+
+A boolean flag that indicates whether the widget should be enabled or disabled.
+
+#### Example
+
+	<a onclick="enable">Enable</a>
+	<ul id="buttongroup">
+		<li>Option 1</li>
+		<li>Option 2</li>
+		<li>Option 3</li>
+	</ul>
+
+    <script>
+	$("#buttongroup").kendoButtonGroup({
+		enable: false
+	});
+    function enable() {
+        $("#btnGroup").data("kendoButtonGroup").enable(true);
+    }
+    </script>
+
+### select
+
+Select a Button.
+
+#### Parameters
+
+##### li `jQuery | Number`
+
+LI element or index of the Button.
+
+#### Example
+
+	<ul id="buttongroup">
+		<li>Option 1</li>
+		<li>Option 2</li>
+		<li>Option 3</li>
+	</ul>
+
+
+    <script>
+      var buttongroup = $("#buttongroup").kendoButtonGroup().data("kendoButtonGroup");
+
+      // selects by jQuery object
+      buttongroup.select(buttongroup.element.children().eq(0));
+      // selects by index
+      buttongroup.select(1);
+    </script>
+
+## Events
+
+### select
+
+Fires when a Button is selected.
+
+#### Example - get the index of the currently selected Button
+
+	<ul id="buttongroup">
+		<li>Option 1</li>
+		<li>Option 2</li>
+		<li>Option 3</li>
+	</ul>
+
+    <script>
+		$("#buttongroup").kendoButtonGroup({
+			select: function(e) {
+				var index = this.current().index();
+				console.log(index);
+			}
+		});
+    </script>
+
+#### Event Data
+
+##### e.index `Number`
+
+The index of the selected button

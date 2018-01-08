@@ -1,6 +1,6 @@
 (function() {
 var isRaised;
-
+var div;
 var argsCheck = false;
 
 //handlers
@@ -11,7 +11,6 @@ function Select(e) {
     } else
         isRaised = true;
 }
-
 
 var tabstrip;
 var template = '<div id="tabstrip">' +
@@ -45,11 +44,12 @@ var template = '<div id="tabstrip">' +
             '</div>';
 
 var tabstripSetup = function() {
-    QUnit.fixture.append(template);
+    div = $(template);
+    div.appendTo(QUnit.fixture);
 
     var localCounter = 0;
 
-    tabstrip = new kendo.ui.TabStrip("#tabstrip", {
+    tabstrip = new kendo.ui.TabStrip(div, {
         animation: false,
         select: Select,
         contentUrls: [
@@ -109,7 +109,7 @@ module('tabstrip ajax loading', {
 });
 
 function getRootItem(index) {
-    return $('#tabstrip').find('.k-item').eq(index)
+    return div.find('.k-item').eq(index);
 }
 
 test('clicking should make clicked item active even before AJAX request', 1, function() {
@@ -117,6 +117,12 @@ test('clicking should make clicked item active even before AJAX request', 1, fun
 
     item.find('> .k-link').trigger('click');
     ok(item.hasClass('k-state-active'));
+});
+
+test('ajax content url should be attached to item', function() {
+    var item = getRootItem(4);
+
+    equal(item.find('> .k-link').data('contentUrl'), 'ajax-view-one.html');
 });
 
 asyncTest('clicking should make all items except clicked unactive', function() {
@@ -128,12 +134,6 @@ asyncTest('clicking should make all items except clicked unactive', function() {
         equal(item.parent().find('.k-state-active').length, 1);
         start();
     });
-});
-
-test('ajax content url should be attached to item', function() {
-    var item = getRootItem(4);
-
-    equal(item.find('> .k-link').data('contentUrl'), 'ajax-view-one.html');
 });
 
 asyncTest('loading ajax content should trigger adding the loading element to the tab', function() {
