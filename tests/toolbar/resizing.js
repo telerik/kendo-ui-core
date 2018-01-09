@@ -312,4 +312,38 @@
         equal(toolbar.overflowAnchor.css("visibility"), "hidden");
     });
 
+    test("hide method hides overflow buttons", 1, function() {
+        container.width(150);
+
+        var toolbar = container.kendoToolBar({
+            items: [
+                { type: "button", id: "foo", text: "foo" },
+                { type: "button", id: "bar", text: "bar" },
+                { type: "button", id: "baz", text: "baz" },
+                { type: "button", id: "qux", text: "qux" }
+            ]
+        }).data("kendoToolBar");
+
+        toolbar.hide("#qux")
+
+        ok($("#qux_overflow").hasClass("k-overflow-hidden"), "#qux_overflow is hidden");
+    });
+
+    test("Overflow anchor is NOT shown when buttons are hidden via hide method", 1, function() {
+        container.width(150);
+
+        var toolbar = container.kendoToolBar({
+            mobile: true,
+            items: [
+                { type: "button", id: "foo", text: "foo" },
+                { type: "button", id: "bar", text: "bar" }
+            ]
+        }).data("kendoToolBar");
+
+        toolbar.hide("#foo")
+        toolbar.hide("#bar")
+
+        equal(toolbar.overflowAnchor.css("visibility"), "hidden");
+    });
+
 })();

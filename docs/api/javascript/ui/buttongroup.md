@@ -63,6 +63,151 @@ Defines the selection type.
 		});
     </script>
 
+### items `Array`
+
+A JavaScript array that contains the ButtonGroup's items configuration.
+
+#### Example - initialize ButtonGroup with items
+
+    <div id="buttonGroup"></div>
+    <script>
+        $("#buttonGroup").kendoButtonGroup({
+            items: [
+                { text: "Align Left", icon: "align-left", selected: true},
+                { text: "Align Center", icon: "align-center"},
+                { text: "Align Right", icon: "align-right"},
+            ]
+        });
+    </script>
+
+### items.attributes `Object`
+
+Specifies the HTML attributes of a ButtonGroup item.
+
+> HTML attributes which are JavaScript keywords (e.g. class) must be quoted.
+
+#### Example - adding custom class to a button
+
+    <div id="buttonGroup"></div>
+
+    <script>
+        $("#buttonGroup").kendoButtonGroup({
+            items: [
+                { text: "Align Left", icon: "align-left"},
+                { text: "Align Center", icon: "align-center", attributes: {class: "red"}},
+                { text: "Align Right", icon: "align-right"},
+            ]
+        });
+    </script>
+
+    <style>
+        .red { background-color: red; }
+    </style>
+
+### items.badge `String`
+
+Specifies the badge of a button.
+
+#### Example
+
+    <div id="buttonGroup"></div>
+
+    <script>
+        $("#buttonGroup").kendoButtonGroup({
+            items: [
+                { text: "foo",  badge: "2" },
+                { text: "bar" }
+            ]
+        });
+    </script>
+
+### items.enabled `Boolean` *(default: true)*
+
+Specifies if a button is enabled.
+
+#### Example
+
+    <div id="buttonGroup"></div>
+
+    <script>
+        $("#buttonGroup").kendoButtonGroup({
+            items: [
+                { text: "foo",  enabled: false },
+                { text: "bar" }
+            ]
+        });
+    </script>
+
+### items.icon `String`
+
+If set, the ButtonGroup will render an icon in the button.
+
+#### Example
+
+    <div id="buttonGroup"></div>
+
+    <script>
+    $("#buttonGroup").kendoButtonGroup({
+      items: [
+					{ icon: "align-left" },
+					{ icon: "align-center" },
+					{ icon: "align-right" }
+      ]
+    });
+    </script>
+
+### items.imageUrl `String`
+
+If set, the ButtonGroup will render an image with the specified URL in the button.
+
+#### Example
+
+    <div id="buttonGroup"></div>
+
+    <script>
+    var baseUrl = "https://demos.telerik.com/kendo-ui/content/shared/icons";
+    $("#buttonGroup").kendoButtonGroup({
+      items: [
+					{ text: "foo", imageUrl: baseUrl + "/sports/snowboarding.png" },
+					{ text: "bar", imageUrl: baseUrl + "/sports/snowboarding.png" }
+      ]
+    });
+    </script>
+
+### items.selected `Boolean` *(default: false)*
+
+Specifies if a button is initially selected.
+
+#### Example
+
+    <div id="buttonGroup"></div>
+
+    <script>
+        $("#buttonGroup").kendoButtonGroup({
+            items: [
+                { text: "foo",  selected: true },
+                { text: "bar" }
+            ]
+        });
+    </script>
+
+### items.text `String`
+
+Specifies the text of the ButtonGroup item.
+
+#### Example
+
+    <div id="buttonGroup"></div>
+
+    <script>
+        $("#buttonGroup").kendoButtonGroup({
+            items: [
+                { text: "foo" },
+                { text: "bar" }
+            ]
+        });
+    </script>
+
 ## Methods
 
 ### badge

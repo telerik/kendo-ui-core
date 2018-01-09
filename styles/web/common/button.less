@@ -65,11 +65,12 @@
     }
 
     // Disabled state
-    &[disabled]
-    .k-state-disabled &
+    &[disabled],
+    .k-state-disabled &,
     &.k-state-disabled {
         cursor: default;
         outline: 0;
+        box-shadow: none;
     }
 
 }

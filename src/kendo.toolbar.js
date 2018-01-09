@@ -111,6 +111,9 @@ var __meta__ = { // jshint ignore:line
 
             hide: function() {
                 this.element.addClass(STATE_HIDDEN).hide();
+                if(this.overflow && this.overflowHidden){
+                    this.overflowHidden();
+                }
                 this.options.hidden = true;
             },
 
@@ -309,7 +312,8 @@ var __meta__ = { // jshint ignore:line
             init: function(options, toolbar) {
                 this.overflow = true;
 
-                Button.fn.init.call(this, options, toolbar);
+                Button.fn.init.call(this, $.extend({}, options), toolbar);
+                // Button.fn.init.call(this, options, toolbar);
 
                 var element = this.element;
 
