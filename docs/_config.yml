@@ -609,13 +609,13 @@ defaults:
     scope:
         path: "controls/gauges/lineargauge"
     values:
-        component: "gauge"
+        component: "gauges"
 
 -
     scope:
         path: "controls/gauges/radialgauge"
     values:
-        component: "gauge"
+        component: "gauges"
 
 -
     scope:
@@ -645,13 +645,13 @@ defaults:
     scope:
         path: "controls/charts"
     values:
-        component: "chart"
+        component: "charts"
 
 -
     scope:
         path: "controls/editors/colorpicker"
     values:
-        component: "colorpicker"
+        component: "color-picker"
 
 -
     scope:
@@ -663,19 +663,19 @@ defaults:
     scope:
         path: "framework/datasource"
     values:
-        component: "data_source"
+        component: "data-source"
 
 -
     scope:
         path: "controls/editors/datepicker"
     values:
-        component: "datepicker"
+        component: "date-time-pickers"
 
 -
     scope:
         path: "controls/editors/timepicker"
     values:
-        component: "timepicker"
+        component: "date-time-pickers"
 
 -
     scope:
@@ -699,13 +699,13 @@ defaults:
     scope:
         path: "controls/interactivity/draganddrop"
     values:
-        component: "drag_and_drop"
+        component: "drag-and-drop"
 
 -
     scope:
         path: "framework/drawing"
     values:
-        component: "drawing_api"
+        component: "drawing-api"
 
 -
     scope:
@@ -747,7 +747,7 @@ defaults:
     scope:
         path: "framework/hierarchicaldatasource"
     values:
-        component: "hierarchical_data_source"
+        component: "hierarchical-data-source"
 
 -
     scope:
@@ -765,7 +765,7 @@ defaults:
     scope:
         path: "controls/hybrid/listview"
     values:
-        component: "listview_mobile"
+        component: "mobile-listview"
 
 -
     scope:
@@ -801,7 +801,7 @@ defaults:
     scope:
         path: "controls/editors/multiselect"
     values:
-        component: "multiselect"
+        component: "multi-select"
 
 -
     scope:
@@ -813,7 +813,7 @@ defaults:
     scope:
         path: "controls/editors/numerictextbox"
     values:
-        component: "numerictextbox"
+        component: "numeric-textbox"
 
 -
     scope:
@@ -861,7 +861,7 @@ defaults:
     scope:
         path: "controls/hybrid/scrollview"
     values:
-        component: "scrollview_mobile"
+        component: "scrollview"
 
 -
     scope:
@@ -951,7 +951,7 @@ defaults:
     scope:
         path: "controls/editors/validator"
     values:
-        component: "validator"
+        component: "validation"
 
 -
     scope:

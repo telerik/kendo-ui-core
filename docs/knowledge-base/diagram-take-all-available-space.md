@@ -1,8 +1,8 @@
 ---
-title: Make diagram take all available white space
-description: Make diagram take all available white space
+title: Make Diagram Take All Available Space
+description: An example on how to make the Kendo UI Diagram take all white space that is available.
 type: how-to
-page_title: Make diagram take all available white space | Kendo UI Diagram
+page_title: Enable the Diagram to Take All Space That Is Available | Kendo UI Diagram
 slug: diagram-take-all-available-space
 tags: diagram, resize, adjust, stretch, fit, space, available, width, container, expand
 ticketid: 1146668
@@ -10,6 +10,7 @@ res_type: kb
 ---
 
 ## Environment
+
 <table>
 	<tr>
 		<td>Created with version</td>
@@ -17,18 +18,19 @@ res_type: kb
 	</tr>
 	<tr>
 		<td>Product</td>
-		<td>Progress® Kendo UI® Diagram</td>
+		<td>Progress Kendo UI Diagram</td>
 	</tr>
 </table>
 
 
 ## Description
-I would like the diagram to resize in order to take all available space in the container.
+
+How can I make the Diagram resize and take all space that is available in the container?
 
 
 ## Solution
-Call [resize() method](https://docs.telerik.com/kendo-ui/api/javascript/dataviz/ui/diagram#methods-resize) when the size of the container changes to adjust the diagram size.
 
+When the size of the container changes, call the [`resize()`](https://docs.telerik.com/kendo-ui/api/javascript/dataviz/ui/diagram#methods-resize) method to adjust the size of the Diagram.
 
 ```html
 <table style="width: 100%">

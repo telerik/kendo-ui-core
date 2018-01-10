@@ -1,8 +1,8 @@
 ---
-title: Prevent sorting with checkbox in header
-description: An example on how to have sortable column with checkbox in the header.
+title: Prevent Sorting with Checkbox in Header
+description: An example on how to implement a sortable column with a checkbox in the Kendo UI Grid header.
 type: how-to
-page_title: Sortable column with checkbox in header | Kendo UI Grid
+page_title: Implement Sortable Columns with Checkboxes in the Headers | Kendo UI Grid
 slug: grid-sort-column-checkbox-header
 tags: grid, sort, header, checkbox, template, prevent, enable
 ticketid: 1141908
@@ -26,12 +26,13 @@ component: grid
 
 ## Description
 
-I have a Grid with header template for a column. The template contains a checkbox. When the checkbox is clicked that sorts the column. 
+My Grid has a header template, which contains a checkbox, for a column. When I click the checkbox, the column gets sorted.
+
+How can I prevent the sorting of the column which uses a header template and has a checkbox in its header?
 
 ## Solution
 
-In order to have only the checkbox checked/unchecked when clicking it you should handle the click event for it and prevent [event propagation](https://developer.mozilla.org/en-US/docs/Web/API/Event/stopPropagation).
-
+To allow the selection and deselection of the checkbox only and prevent the [event propagation](https://developer.mozilla.org/en-US/docs/Web/API/Event/stopPropagation), handle the `click` event.
 
 ```html
 <base href="https://demos.telerik.com/kendo-ui/grid/index">

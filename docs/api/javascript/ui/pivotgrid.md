@@ -38,7 +38,7 @@ If the `dataSource` option is an existing [kendo.data.PivotDataSource](/api/java
                     cube: "Adventure Works"
                 },
                 read: {
-                    url: "http://demos.telerik.com/olap/msmdpump.dll",
+                    url: "https://demos.telerik.com/olap/msmdpump.dll",
                     dataType: "text",
                     contentType: "text/xml",
                     type: "POST"
@@ -66,7 +66,7 @@ If the `dataSource` option is an existing [kendo.data.PivotDataSource](/api/java
                 cube: "Adventure Works"
             },
             read: {
-                url: "http://demos.telerik.com/olap/msmdpump.dll",
+                url: "https://demos.telerik.com/olap/msmdpump.dll",
                 dataType: "text",
                 contentType: "text/xml",
                 type: "POST"
@@ -108,7 +108,7 @@ data source is fired. By default the widget will bind to the data source specifi
                     cube: "Adventure Works"
                 },
                 read: {
-                    url: "http://demos.telerik.com/olap/msmdpump.dll",
+                    url: "https://demos.telerik.com/olap/msmdpump.dll",
                     dataType: "text",
                     contentType: "text/xml",
                     type: "POST"
@@ -145,7 +145,7 @@ If set to `false` the user will not be able to add/close/reorder current fields 
                     cube: "Adventure Works"
                 },
                 read: {
-                    url: "http://demos.telerik.com/olap/msmdpump.dll",
+                    url: "https://demos.telerik.com/olap/msmdpump.dll",
                     dataType: "text",
                     contentType: "text/xml",
                     type: "POST"
@@ -186,7 +186,7 @@ Specifies the file name of the exported Excel file.
                     cube: "Adventure Works"
                 },
                 read: {
-                    url: "http://demos.telerik.com/olap/msmdpump.dll",
+                    url: "https://demos.telerik.com/olap/msmdpump.dll",
                     dataType: "text",
                     contentType: "text/xml",
                     type: "POST"
@@ -223,7 +223,7 @@ Enables or disables column filtering in the Excel file. Not to be mistaken with 
                     cube: "Adventure Works"
                 },
                 read: {
-                    url: "http://demos.telerik.com/olap/msmdpump.dll",
+                    url: "https://demos.telerik.com/olap/msmdpump.dll",
                     dataType: "text",
                     contentType: "text/xml",
                     type: "POST"
@@ -276,7 +276,7 @@ The proxy should return the decoded file with the "Content-Disposition" header s
                     cube: "Adventure Works"
                 },
                 read: {
-                    url: "http://demos.telerik.com/olap/msmdpump.dll",
+                    url: "https://demos.telerik.com/olap/msmdpump.dll",
                     dataType: "text",
                     contentType: "text/xml",
                     type: "POST"
@@ -318,7 +318,7 @@ The author of the PDF document.
                     cube: "Adventure Works"
                 },
                 read: {
-                    url: "http://demos.telerik.com/olap/msmdpump.dll",
+                    url: "https://demos.telerik.com/olap/msmdpump.dll",
                     dataType: "text",
                     contentType: "text/xml",
                     type: "POST"
@@ -362,7 +362,7 @@ The creator of the PDF document.
                     cube: "Adventure Works"
                 },
                 read: {
-                    url: "http://demos.telerik.com/olap/msmdpump.dll",
+                    url: "https://demos.telerik.com/olap/msmdpump.dll",
                     dataType: "text",
                     contentType: "text/xml",
                     type: "POST"
@@ -399,7 +399,7 @@ The date when the PDF document is created. Defaults to `new Date()`.
                     cube: "Adventure Works"
                 },
                 read: {
-                    url: "http://demos.telerik.com/olap/msmdpump.dll",
+                    url: "https://demos.telerik.com/olap/msmdpump.dll",
                     dataType: "text",
                     contentType: "text/xml",
                     type: "POST"
@@ -436,7 +436,7 @@ Specifies the file name of the exported PDF file.
                     cube: "Adventure Works"
                 },
                 read: {
-                    url: "http://demos.telerik.com/olap/msmdpump.dll",
+                    url: "https://demos.telerik.com/olap/msmdpump.dll",
                     dataType: "text",
                     contentType: "text/xml",
                     type: "POST"
@@ -476,7 +476,7 @@ Specifies the keywords of the exported PDF file.
                     cube: "Adventure Works"
                 },
                 read: {
-                    url: "http://demos.telerik.com/olap/msmdpump.dll",
+                    url: "https://demos.telerik.com/olap/msmdpump.dll",
                     dataType: "text",
                     contentType: "text/xml",
                     type: "POST"
@@ -513,7 +513,7 @@ Set to `true` to reverse the paper dimensions if needed such that width is the l
                     cube: "Adventure Works"
                 },
                 read: {
-                    url: "http://demos.telerik.com/olap/msmdpump.dll",
+                    url: "https://demos.telerik.com/olap/msmdpump.dll",
                     dataType: "text",
                     contentType: "text/xml",
                     type: "POST"
@@ -556,7 +556,7 @@ units are "mm", "cm", "in" and "pt" (default).
                     cube: "Adventure Works"
                 },
                 read: {
-                    url: "http://demos.telerik.com/olap/msmdpump.dll",
+                    url: "https://demos.telerik.com/olap/msmdpump.dll",
                     dataType: "text",
                     contentType: "text/xml",
                     type: "POST"
@@ -619,7 +619,7 @@ Supported values:
                     cube: "Adventure Works"
                 },
                 read: {
-                    url: "http://demos.telerik.com/olap/msmdpump.dll",
+                    url: "https://demos.telerik.com/olap/msmdpump.dll",
                     dataType: "text",
                     contentType: "text/xml",
                     type: "POST"
@@ -669,7 +669,7 @@ The proxy should return the decoded file with the "Content-Disposition" header s
                     cube: "Adventure Works"
                 },
                 read: {
-                    url: "http://demos.telerik.com/olap/msmdpump.dll",
+                    url: "https://demos.telerik.com/olap/msmdpump.dll",
                     dataType: "text",
                     contentType: "text/xml",
                     type: "POST"
@@ -711,7 +711,7 @@ the proxy should set the "Content-Disposition" header to `inline; filename="<fil
                     cube: "Adventure Works"
                 },
                 read: {
-                    url: "http://demos.telerik.com/olap/msmdpump.dll",
+                    url: "https://demos.telerik.com/olap/msmdpump.dll",
                     dataType: "text",
                     contentType: "text/xml",
                     type: "POST"
@@ -748,7 +748,7 @@ Sets the subject of the PDF file.
                     cube: "Adventure Works"
                 },
                 read: {
-                    url: "http://demos.telerik.com/olap/msmdpump.dll",
+                    url: "https://demos.telerik.com/olap/msmdpump.dll",
                     dataType: "text",
                     contentType: "text/xml",
                     type: "POST"
@@ -785,7 +785,7 @@ Sets the title of the PDF file.
                     cube: "Adventure Works"
                 },
                 read: {
-                    url: "http://demos.telerik.com/olap/msmdpump.dll",
+                    url: "https://demos.telerik.com/olap/msmdpump.dll",
                     dataType: "text",
                     contentType: "text/xml",
                     type: "POST"
@@ -820,7 +820,7 @@ If set to `true` the user will be able to filter by using the field menu.
                     cube: "Adventure Works"
                 },
                 read: {
-                    url: "http://demos.telerik.com/olap/msmdpump.dll",
+                    url: "https://demos.telerik.com/olap/msmdpump.dll",
                     dataType: "text",
                     contentType: "text/xml",
                     type: "POST"
@@ -857,7 +857,7 @@ Can be set to a JavaScript object which represents the sorting configuration.
                     cube: "Adventure Works"
                 },
                 read: {
-                    url: "http://demos.telerik.com/olap/msmdpump.dll",
+                    url: "https://demos.telerik.com/olap/msmdpump.dll",
                     dataType: "text",
                     contentType: "text/xml",
                     type: "POST"
@@ -894,7 +894,7 @@ If set to `true` the user can get the pivotgrid in unsorted state by clicking th
                     cube: "Adventure Works"
                 },
                 read: {
-                    url: "http://demos.telerik.com/olap/msmdpump.dll",
+                    url: "https://demos.telerik.com/olap/msmdpump.dll",
                     dataType: "text",
                     contentType: "text/xml",
                     type: "POST"
@@ -930,7 +930,7 @@ The width of the table columns. Value is treated as pixels.
                     cube: "Adventure Works"
                 },
                 read: {
-                    url: "http://demos.telerik.com/olap/msmdpump.dll",
+                    url: "https://demos.telerik.com/olap/msmdpump.dll",
                     dataType: "text",
                     contentType: "text/xml",
                     type: "POST"
@@ -964,7 +964,7 @@ The height of the PivotGrid. Numeric values are treated as pixels.
                     cube: "Adventure Works"
                 },
                 read: {
-                    url: "http://demos.telerik.com/olap/msmdpump.dll",
+                    url: "https://demos.telerik.com/olap/msmdpump.dll",
                     dataType: "text",
                     contentType: "text/xml",
                     type: "POST"
@@ -994,7 +994,7 @@ The height of the PivotGrid. Numeric values are treated as pixels.
                     cube: "Adventure Works"
                 },
                 read: {
-                    url: "http://demos.telerik.com/olap/msmdpump.dll",
+                    url: "https://demos.telerik.com/olap/msmdpump.dll",
                     dataType: "text",
                     contentType: "text/xml",
                     type: "POST"
@@ -1043,7 +1043,7 @@ For information about the tuple structure check this [link](/api/javascript/data
                     cube: "Adventure Works"
                 },
                 read: {
-                    url: "http://demos.telerik.com/olap/msmdpump.dll",
+                    url: "https://demos.telerik.com/olap/msmdpump.dll",
                     dataType: "text",
                     contentType: "text/xml",
                     type: "POST"
@@ -1095,7 +1095,7 @@ About the data item structure review this [help topic](/api/javascript/data/pivo
                     cube: "Adventure Works"
                 },
                 read: {
-                    url: "http://demos.telerik.com/olap/msmdpump.dll",
+                    url: "https://demos.telerik.com/olap/msmdpump.dll",
                     dataType: "text",
                     contentType: "text/xml",
                     type: "POST"
@@ -1147,7 +1147,7 @@ About the data item structure review this [help topic](/api/javascript/data/pivo
                     cube: "Adventure Works"
                 },
                 read: {
-                    url: "http://demos.telerik.com/olap/msmdpump.dll",
+                    url: "https://demos.telerik.com/olap/msmdpump.dll",
                     dataType: "text",
                     contentType: "text/xml",
                     type: "POST"
@@ -1199,7 +1199,7 @@ About the data item structure review this [help topic](/api/javascript/data/pivo
                     cube: "Adventure Works"
                 },
                 read: {
-                    url: "http://demos.telerik.com/olap/msmdpump.dll",
+                    url: "https://demos.telerik.com/olap/msmdpump.dll",
                     dataType: "text",
                     contentType: "text/xml",
                     type: "POST"
@@ -1248,7 +1248,7 @@ For information about the tuple structure check this [link](/api/javascript/data
                     cube: "Adventure Works"
                 },
                 read: {
-                    url: "http://demos.telerik.com/olap/msmdpump.dll",
+                    url: "https://demos.telerik.com/olap/msmdpump.dll",
                     dataType: "text",
                     contentType: "text/xml",
                     type: "POST"
@@ -1287,7 +1287,7 @@ The text messages displayed in the fields sections.
                     cube: "Adventure Works"
                 },
                 read: {
-                    url: "http://demos.telerik.com/olap/msmdpump.dll",
+                    url: "https://demos.telerik.com/olap/msmdpump.dll",
                     dataType: "text",
                     contentType: "text/xml",
                     type: "POST"
@@ -1324,7 +1324,7 @@ The text messages displayed in the measure fields sections.
                     cube: "Adventure Works"
                 },
                 read: {
-                    url: "http://demos.telerik.com/olap/msmdpump.dll",
+                    url: "https://demos.telerik.com/olap/msmdpump.dll",
                     dataType: "text",
                     contentType: "text/xml",
                     type: "POST"
@@ -1361,7 +1361,7 @@ The text messages displayed in the column fields sections.
                     cube: "Adventure Works"
                 },
                 read: {
-                    url: "http://demos.telerik.com/olap/msmdpump.dll",
+                    url: "https://demos.telerik.com/olap/msmdpump.dll",
                     dataType: "text",
                     contentType: "text/xml",
                     type: "POST"
@@ -1398,7 +1398,7 @@ The text messages displayed in the row fields sections.
                     cube: "Adventure Works"
                 },
                 read: {
-                    url: "http://demos.telerik.com/olap/msmdpump.dll",
+                    url: "https://demos.telerik.com/olap/msmdpump.dll",
                     dataType: "text",
                     contentType: "text/xml",
                     type: "POST"
@@ -1447,7 +1447,7 @@ The text messages displayed in the field menu.
                     cube: "Adventure Works"
                 },
                 read: {
-                    url: "http://demos.telerik.com/olap/msmdpump.dll",
+                    url: "https://demos.telerik.com/olap/msmdpump.dll",
                     dataType: "text",
                     contentType: "text/xml",
                     type: "POST"
@@ -1487,7 +1487,7 @@ The text messages displayed in fields filter.
                     cube: "Adventure Works"
                 },
                 read: {
-                    url: "http://demos.telerik.com/olap/msmdpump.dll",
+                    url: "https://demos.telerik.com/olap/msmdpump.dll",
                     dataType: "text",
                     contentType: "text/xml",
                     type: "POST"
@@ -1527,7 +1527,7 @@ The text message displayed for the menu item which performs ascending sort.
                     cube: "Adventure Works"
                 },
                 read: {
-                    url: "http://demos.telerik.com/olap/msmdpump.dll",
+                    url: "https://demos.telerik.com/olap/msmdpump.dll",
                     dataType: "text",
                     contentType: "text/xml",
                     type: "POST"
@@ -1567,7 +1567,7 @@ The text message displayed for the menu item which performs descending sort.
                     cube: "Adventure Works"
                 },
                 read: {
-                    url: "http://demos.telerik.com/olap/msmdpump.dll",
+                    url: "https://demos.telerik.com/olap/msmdpump.dll",
                     dataType: "text",
                     contentType: "text/xml",
                     type: "POST"
@@ -1607,7 +1607,7 @@ The text messages of the fields filter menu item.
                     cube: "Adventure Works"
                 },
                 read: {
-                    url: "http://demos.telerik.com/olap/msmdpump.dll",
+                    url: "https://demos.telerik.com/olap/msmdpump.dll",
                     dataType: "text",
                     contentType: "text/xml",
                     type: "POST"
@@ -1647,7 +1647,7 @@ The text messages of the filter button.
                     cube: "Adventure Works"
                 },
                 read: {
-                    url: "http://demos.telerik.com/olap/msmdpump.dll",
+                    url: "https://demos.telerik.com/olap/msmdpump.dll",
                     dataType: "text",
                     contentType: "text/xml",
                     type: "POST"
@@ -1687,7 +1687,7 @@ The text messages of the include menu item.
                     cube: "Adventure Works"
                 },
                 read: {
-                    url: "http://demos.telerik.com/olap/msmdpump.dll",
+                    url: "https://demos.telerik.com/olap/msmdpump.dll",
                     dataType: "text",
                     contentType: "text/xml",
                     type: "POST"
@@ -1727,7 +1727,7 @@ The title of the include fields dialog.
                     cube: "Adventure Works"
                 },
                 read: {
-                    url: "http://demos.telerik.com/olap/msmdpump.dll",
+                    url: "https://demos.telerik.com/olap/msmdpump.dll",
                     dataType: "text",
                     contentType: "text/xml",
                     type: "POST"
@@ -1767,7 +1767,7 @@ The text of the clear filter expressions button.
                     cube: "Adventure Works"
                 },
                 read: {
-                    url: "http://demos.telerik.com/olap/msmdpump.dll",
+                    url: "https://demos.telerik.com/olap/msmdpump.dll",
                     dataType: "text",
                     contentType: "text/xml",
                     type: "POST"
@@ -1807,7 +1807,7 @@ The text of the OK button in the include fields dialog.
                     cube: "Adventure Works"
                 },
                 read: {
-                    url: "http://demos.telerik.com/olap/msmdpump.dll",
+                    url: "https://demos.telerik.com/olap/msmdpump.dll",
                     dataType: "text",
                     contentType: "text/xml",
                     type: "POST"
@@ -1847,7 +1847,7 @@ The text of the cancel button in the include fields dialog.
                     cube: "Adventure Works"
                 },
                 read: {
-                    url: "http://demos.telerik.com/olap/msmdpump.dll",
+                    url: "https://demos.telerik.com/olap/msmdpump.dll",
                     dataType: "text",
                     contentType: "text/xml",
                     type: "POST"
@@ -1894,7 +1894,7 @@ The text of the filter operators displayed in the filter menu.
                     cube: "Adventure Works"
                 },
                 read: {
-                    url: "http://demos.telerik.com/olap/msmdpump.dll",
+                    url: "https://demos.telerik.com/olap/msmdpump.dll",
                     dataType: "text",
                     contentType: "text/xml",
                     type: "POST"
@@ -1936,7 +1936,7 @@ The text of the "contains" filter operator.
                     cube: "Adventure Works"
                 },
                 read: {
-                    url: "http://demos.telerik.com/olap/msmdpump.dll",
+                    url: "https://demos.telerik.com/olap/msmdpump.dll",
                     dataType: "text",
                     contentType: "text/xml",
                     type: "POST"
@@ -1978,7 +1978,7 @@ The text of the "Does not contain" filter operator.
                     cube: "Adventure Works"
                 },
                 read: {
-                    url: "http://demos.telerik.com/olap/msmdpump.dll",
+                    url: "https://demos.telerik.com/olap/msmdpump.dll",
                     dataType: "text",
                     contentType: "text/xml",
                     type: "POST"
@@ -2020,7 +2020,7 @@ The text of the "Starts with" filter operator.
                     cube: "Adventure Works"
                 },
                 read: {
-                    url: "http://demos.telerik.com/olap/msmdpump.dll",
+                    url: "https://demos.telerik.com/olap/msmdpump.dll",
                     dataType: "text",
                     contentType: "text/xml",
                     type: "POST"
@@ -2062,7 +2062,7 @@ The text of the "Ends with" filter operator.
                     cube: "Adventure Works"
                 },
                 read: {
-                    url: "http://demos.telerik.com/olap/msmdpump.dll",
+                    url: "https://demos.telerik.com/olap/msmdpump.dll",
                     dataType: "text",
                     contentType: "text/xml",
                     type: "POST"
@@ -2104,7 +2104,7 @@ The text of the "equal" filter operator.
                     cube: "Adventure Works"
                 },
                 read: {
-                    url: "http://demos.telerik.com/olap/msmdpump.dll",
+                    url: "https://demos.telerik.com/olap/msmdpump.dll",
                     dataType: "text",
                     contentType: "text/xml",
                     type: "POST"
@@ -2146,7 +2146,7 @@ The text of the "not equal" filter operator.
                     cube: "Adventure Works"
                 },
                 read: {
-                    url: "http://demos.telerik.com/olap/msmdpump.dll",
+                    url: "https://demos.telerik.com/olap/msmdpump.dll",
                     dataType: "text",
                     contentType: "text/xml",
                     type: "POST"
@@ -2186,7 +2186,7 @@ The [data source](/api/javascript/data/pivotdatasource) of the widget. Configure
                     cube: "Adventure Works"
                 },
                 read: {
-                    url: "http://demos.telerik.com/olap/msmdpump.dll",
+                    url: "https://demos.telerik.com/olap/msmdpump.dll",
                     dataType: "text",
                     contentType: "text/xml",
                     type: "POST"
@@ -2248,7 +2248,7 @@ The fields of the result object:
                         cube: "Adventure Works"
                     },
                     read: {
-                        url: "http://demos.telerik.com/olap/msmdpump.dll",
+                        url: "https://demos.telerik.com/olap/msmdpump.dll",
                         dataType: "text",
                         contentType: "text/xml",
                         type: "POST"
@@ -2310,7 +2310,7 @@ The fields of the result object:
                         cube: "Adventure Works"
                     },
                     read: {
-                        url: "http://demos.telerik.com/olap/msmdpump.dll",
+                        url: "https://demos.telerik.com/olap/msmdpump.dll",
                         dataType: "text",
                         contentType: "text/xml",
                         type: "POST"
@@ -2353,7 +2353,7 @@ Prepares the widget for safe removal from DOM. Detaches all event handlers and r
                     cube: "Adventure Works"
                 },
                 read: {
-                    url: "http://demos.telerik.com/olap/msmdpump.dll",
+                    url: "https://demos.telerik.com/olap/msmdpump.dll",
                     dataType: "text",
                     contentType: "text/xml",
                     type: "POST"
@@ -2389,7 +2389,7 @@ Renders all content using the current data items.
                     cube: "Adventure Works"
                 },
                 read: {
-                    url: "http://demos.telerik.com/olap/msmdpump.dll",
+                    url: "https://demos.telerik.com/olap/msmdpump.dll",
                     dataType: "text",
                     contentType: "text/xml",
                     type: "POST"
@@ -2431,7 +2431,7 @@ The data source to which the widget should be bound.
                     cube: "Adventure Works"
                 },
                 read: {
-                    url: "http://demos.telerik.com/olap/msmdpump.dll",
+                    url: "https://demos.telerik.com/olap/msmdpump.dll",
                     dataType: "text",
                     contentType: "text/xml",
                     type: "POST"
@@ -2453,7 +2453,7 @@ The data source to which the widget should be bound.
                 cube: "Adventure Works"
             },
             read: {
-                url: "http://demos.telerik.com/olap/msmdpump.dll",
+                url: "https://demos.telerik.com/olap/msmdpump.dll",
                 dataType: "text",
                 contentType: "text/xml",
                 type: "POST"
@@ -2491,7 +2491,7 @@ Initiates the Excel export. Also fires the [`excelExport`](#events-excelExport) 
                     cube: "Adventure Works"
                 },
                 read: {
-                    url: "http://demos.telerik.com/olap/msmdpump.dll",
+                    url: "https://demos.telerik.com/olap/msmdpump.dll",
                     dataType: "text",
                     contentType: "text/xml",
                     type: "POST"
@@ -2536,7 +2536,7 @@ Initiates the PDF export and returns a promise. Also triggers the [pdfExport](#e
                     cube: "Adventure Works"
                 },
                 read: {
-                    url: "http://demos.telerik.com/olap/msmdpump.dll",
+                    url: "https://demos.telerik.com/olap/msmdpump.dll",
                     dataType: "text",
                     contentType: "text/xml",
                     type: "POST"
@@ -2592,7 +2592,7 @@ The widget instance which fired the event.
                     cube: "Adventure Works"
                 },
                 read: {
-                    url: "http://demos.telerik.com/olap/msmdpump.dll",
+                    url: "https://demos.telerik.com/olap/msmdpump.dll",
                     dataType: "text",
                     contentType: "text/xml",
                     type: "POST"
@@ -2626,7 +2626,7 @@ The widget instance which fired the event.
                     cube: "Adventure Works"
                 },
                 read: {
-                    url: "http://demos.telerik.com/olap/msmdpump.dll",
+                    url: "https://demos.telerik.com/olap/msmdpump.dll",
                     dataType: "text",
                     contentType: "text/xml",
                     type: "POST"
@@ -2673,7 +2673,7 @@ The widget instance which fired the event.
                     cube: "Adventure Works"
                 },
                 read: {
-                    url: "http://demos.telerik.com/olap/msmdpump.dll",
+                    url: "https://demos.telerik.com/olap/msmdpump.dll",
                     dataType: "text",
                     contentType: "text/xml",
                     type: "POST"
@@ -2707,7 +2707,7 @@ The widget instance which fired the event.
                     cube: "Adventure Works"
                 },
                 read: {
-                    url: "http://demos.telerik.com/olap/msmdpump.dll",
+                    url: "https://demos.telerik.com/olap/msmdpump.dll",
                     dataType: "text",
                     contentType: "text/xml",
                     type: "POST"
@@ -2766,7 +2766,7 @@ The path to the field that will be expanded.
                     cube: "Adventure Works"
                 },
                 read: {
-                    url: "http://demos.telerik.com/olap/msmdpump.dll",
+                    url: "https://demos.telerik.com/olap/msmdpump.dll",
                     dataType: "text",
                     contentType: "text/xml",
                     type: "POST"
@@ -2800,7 +2800,7 @@ The path to the field that will be expanded.
                     cube: "Adventure Works"
                 },
                 read: {
-                    url: "http://demos.telerik.com/olap/msmdpump.dll",
+                    url: "https://demos.telerik.com/olap/msmdpump.dll",
                     dataType: "text",
                     contentType: "text/xml",
                     type: "POST"
@@ -2859,7 +2859,7 @@ The path to the field that will be collapsed.
                     cube: "Adventure Works"
                 },
                 read: {
-                    url: "http://demos.telerik.com/olap/msmdpump.dll",
+                    url: "https://demos.telerik.com/olap/msmdpump.dll",
                     dataType: "text",
                     contentType: "text/xml",
                     type: "POST"
@@ -2893,7 +2893,7 @@ The path to the field that will be collapsed.
                     cube: "Adventure Works"
                 },
                 read: {
-                    url: "http://demos.telerik.com/olap/msmdpump.dll",
+                    url: "https://demos.telerik.com/olap/msmdpump.dll",
                     dataType: "text",
                     contentType: "text/xml",
                     type: "POST"
@@ -2969,7 +2969,7 @@ If invoked the grid will not save the generated file.
                     cube: "Adventure Works"
                 },
                 read: {
-                    url: "http://demos.telerik.com/olap/msmdpump.dll",
+                    url: "https://demos.telerik.com/olap/msmdpump.dll",
                     dataType: "text",
                     contentType: "text/xml",
                     type: "POST"
@@ -3002,7 +3002,7 @@ If invoked the grid will not save the generated file.
                     cube: "Adventure Works"
                 },
                 read: {
-                    url: "http://demos.telerik.com/olap/msmdpump.dll",
+                    url: "https://demos.telerik.com/olap/msmdpump.dll",
                     dataType: "text",
                     contentType: "text/xml",
                     type: "POST"
@@ -3058,7 +3058,7 @@ A promise that will be resolved when the export completes.
                     cube: "Adventure Works"
                 },
                 read: {
-                    url: "http://demos.telerik.com/olap/msmdpump.dll",
+                    url: "https://demos.telerik.com/olap/msmdpump.dll",
                     dataType: "text",
                     contentType: "text/xml",
                     type: "POST"
@@ -3090,7 +3090,7 @@ A promise that will be resolved when the export completes.
                     cube: "Adventure Works"
                 },
                 read: {
-                    url: "http://demos.telerik.com/olap/msmdpump.dll",
+                    url: "https://demos.telerik.com/olap/msmdpump.dll",
                     dataType: "text",
                     contentType: "text/xml",
                     type: "POST"

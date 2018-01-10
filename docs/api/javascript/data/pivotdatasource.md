@@ -22,7 +22,7 @@ The configuration of columns axis members. An array of JavaScript objects or str
 #### Example - set the columns
 
     <script>
-    var dataSource = new kendo.data.DataSource({
+    var dataSource = new kendo.data.PivotDataSource({
       type: "xmla",
       columns: ["[Date].[Calendar]"],
       transport: {
@@ -30,7 +30,7 @@ The configuration of columns axis members. An array of JavaScript objects or str
             catalog: "Adventure Works DW 2008R2",
             cube: "Adventure Works"
         },
-        read: "http://demos.telerik.com/olap/msmdpump.dll"
+        read: "https://demos.telerik.com/olap/msmdpump.dll"
       },
       schema: {
         type: "xmla"
@@ -46,7 +46,7 @@ If set to true the member will be expanded.
 #### Example - set the column as expanded
 
     <script>
-    var dataSource = new kendo.data.DataSource({
+    var dataSource = new kendo.data.PivotDataSource({
       type: "xmla",
       columns: [{ name: "[Date].[Calendar]", expand: true }],
       transport: {
@@ -54,7 +54,7 @@ If set to true the member will be expanded.
             catalog: "Adventure Works DW 2008R2",
             cube: "Adventure Works"
         },
-        read: "http://demos.telerik.com/olap/msmdpump.dll"
+        read: "https://demos.telerik.com/olap/msmdpump.dll"
       },
       schema: {
         type: "xmla"
@@ -70,7 +70,7 @@ The hierarchical name of the column
 #### Example - set the column name
 
     <script>
-    var dataSource = new kendo.data.DataSource({
+    var dataSource = new kendo.data.PivotDataSource({
       type: "xmla",
       columns: [{ name: "[Date].[Calendar]", expand: false }],
       transport: {
@@ -78,7 +78,7 @@ The hierarchical name of the column
             catalog: "Adventure Works DW 2008R2",
             cube: "Adventure Works"
         },
-        read: "http://demos.telerik.com/olap/msmdpump.dll"
+        read: "https://demos.telerik.com/olap/msmdpump.dll"
       },
       schema: {
         type: "xmla"
@@ -105,7 +105,7 @@ or [kpiTrendTemplate](/api/javascript/ui/pivotgrid#configuration-kpiTrendTemplat
 #### Example - set the measures
 
     <script>
-    var dataSource = new kendo.data.DataSource({
+    var dataSource = new kendo.data.PivotDataSource({
       type: "xmla",
       measures: ["[Measures].[Internet Order Lines Count]"],
       transport: {
@@ -113,7 +113,7 @@ or [kpiTrendTemplate](/api/javascript/ui/pivotgrid#configuration-kpiTrendTemplat
             catalog: "Adventure Works DW 2008R2",
             cube: "Adventure Works"
         },
-        read: "http://demos.telerik.com/olap/msmdpump.dll"
+        read: "https://demos.telerik.com/olap/msmdpump.dll"
       },
       schema: {
         type: "xmla"
@@ -129,7 +129,7 @@ An string array which values are interpreted as the name of the measures to be l
 #### Example - set the measures
 
     <script>
-    var dataSource = new kendo.data.DataSource({
+    var dataSource = new kendo.data.PivotDataSource({
       type: "xmla",
       measures: {
           values: ["[Measures].[Internet Order Lines Count]"]
@@ -139,7 +139,7 @@ An string array which values are interpreted as the name of the measures to be l
             catalog: "Adventure Works DW 2008R2",
             cube: "Adventure Works"
         },
-        read: "http://demos.telerik.com/olap/msmdpump.dll"
+        read: "https://demos.telerik.com/olap/msmdpump.dll"
       },
       schema: {
         type: "xmla"
@@ -155,7 +155,7 @@ The name of the axis on which the measures will be displayed. Supported values a
 #### Example - set the measures axis
 
     <script>
-    var dataSource = new kendo.data.DataSource({
+    var dataSource = new kendo.data.PivotDataSource({
       type: "xmla",
       measures: {
           values: ["[Measures].[Internet Order Lines Count]", "[Measures].[Days Current Quarter to Date]"],
@@ -166,7 +166,7 @@ The name of the axis on which the measures will be displayed. Supported values a
             catalog: "Adventure Works DW 2008R2",
             cube: "Adventure Works"
         },
-        read: "http://demos.telerik.com/olap/msmdpump.dll"
+        read: "https://demos.telerik.com/olap/msmdpump.dll"
       },
       schema: {
         type: "xmla"
@@ -182,7 +182,7 @@ The configuration of rows axis members. An array of JavaScript objects or string
 #### Example - set the columns
 
     <script>
-    var dataSource = new kendo.data.DataSource({
+    var dataSource = new kendo.data.PivotDataSource({
       type: "xmla",
       rows: ["[Date].[Calendar]"],
       transport: {
@@ -190,7 +190,7 @@ The configuration of rows axis members. An array of JavaScript objects or string
             catalog: "Adventure Works DW 2008R2",
             cube: "Adventure Works"
         },
-        read: "http://demos.telerik.com/olap/msmdpump.dll"
+        read: "https://demos.telerik.com/olap/msmdpump.dll"
       },
       schema: {
         type: "xmla"
@@ -206,7 +206,7 @@ If set to true the member will be expanded.
 #### Example - set the rows as expanded
 
     <script>
-    var dataSource = new kendo.data.DataSource({
+    var dataSource = new kendo.data.PivotDataSource({
       type: "xmla",
       columns: [{ name: "[Date].[Calendar]", expand: true }],
       transport: {
@@ -214,7 +214,7 @@ If set to true the member will be expanded.
             catalog: "Adventure Works DW 2008R2",
             cube: "Adventure Works"
         },
-        read: "http://demos.telerik.com/olap/msmdpump.dll"
+        read: "https://demos.telerik.com/olap/msmdpump.dll"
       },
       schema: {
         type: "xmla"
@@ -230,7 +230,7 @@ The hierarchical name of the rows
 #### Example - set the rows name
 
     <script>
-    var dataSource = new kendo.data.DataSource({
+    var dataSource = new kendo.data.PivotDataSource({
       type: "xmla",
       rows: [{ name: "[Date].[Calendar]", expand: false }],
       transport: {
@@ -238,7 +238,7 @@ The hierarchical name of the rows
             catalog: "Adventure Works DW 2008R2",
             cube: "Adventure Works"
         },
-        read: "http://demos.telerik.com/olap/msmdpump.dll"
+        read: "https://demos.telerik.com/olap/msmdpump.dll"
       },
       schema: {
         type: "xmla"
@@ -267,15 +267,15 @@ If the value of `transport.discover` is omitted the data source uses `transport.
 #### Example - set the discover remote service
 
     <script>
-    var dataSource = new kendo.data.DataSource({
+    var dataSource = new kendo.data.PivotDataSource({
       type: "xmla",
       transport: {
         connection: {
             catalog: "Adventure Works DW 2008R2",
             cube: "Adventure Works"
         },
-        discover: "http://demos.telerik.com/olap/msmdpump.dll",
-        read: "http://demos.telerik.com/olap/msmdpump.dll"
+        discover: "https://demos.telerik.com/olap/msmdpump.dll",
+        read: "https://demos.telerik.com/olap/msmdpump.dll"
       },
       schema: {
         type: "xmla"
@@ -297,13 +297,13 @@ The catalog name.
 #### Example - set the connection catalog name
 
     <script>
-    var dataSource = new kendo.data.DataSource({
+    var dataSource = new kendo.data.PivotDataSource({
       type: "xmla",
       transport: {
         connection: {
             catalog: "Adventure Works DW 2008R2"
         },
-        read: "http://demos.telerik.com/olap/msmdpump.dll",
+        read: "https://demos.telerik.com/olap/msmdpump.dll",
       },
       schema: {
         type: "xmla"
@@ -319,14 +319,14 @@ The cube name in the current data source.
 #### Example - set the cube catalog name
 
     <script>
-    var dataSource = new kendo.data.DataSource({
+    var dataSource = new kendo.data.PivotDataSource({
       type: "xmla",
       transport: {
         connection: {
             catalog: "Adventure Works DW 2008R2",
             cube: "Adventure Works"
         },
-        read: "http://demos.telerik.com/olap/msmdpump.dll",
+        read: "https://demos.telerik.com/olap/msmdpump.dll",
       },
       schema: {
         type: "xmla"
@@ -1023,14 +1023,14 @@ Get the parsed axes data
 #### Example - get the axes data
 
     <script>
-    var dataSource = new kendo.data.DataSource({
+    var dataSource = new kendo.data.PivotDataSource({
       type: "xmla",
       columns: ["[Date].[Calendar]"],
       transport: {
         connection: {
             catalog: "Adventure Works DW 2008R2"
         },
-        read: "http://demos.telerik.com/olap/msmdpump.dll"
+        read: "https://demos.telerik.com/olap/msmdpump.dll"
       },
       schema: {
         type: "xmla"
@@ -1059,11 +1059,11 @@ The name of the catalog.
 #### Example - set the catalog
 
     <script>
-    var dataSource = new kendo.data.DataSource({
+    var dataSource = new kendo.data.PivotDataSource({
       type: "xmla",
       columns: ["[Date].[Calendar]"],
       transport: {
-        read: "http://demos.telerik.com/olap/msmdpump.dll"
+        read: "https://demos.telerik.com/olap/msmdpump.dll"
       },
       schema: {
         type: "xmla"
@@ -1076,14 +1076,14 @@ The name of the catalog.
 #### Example - get the catalog name
 
     <script>
-    var dataSource = new kendo.data.DataSource({
+    var dataSource = new kendo.data.PivotDataSource({
       type: "xmla",
       columns: ["[Date].[Calendar]"],
       transport: {
         connection: {
             catalog: "Adventure Works DW 2008R2"
         },
-        read: "http://demos.telerik.com/olap/msmdpump.dll"
+        read: "https://demos.telerik.com/olap/msmdpump.dll"
       },
       schema: {
         type: "xmla"
@@ -1111,14 +1111,14 @@ The columns configuration. Accepts the same values as the [columns](#configurati
 #### Example - set the columns
 
     <script>
-    var dataSource = new kendo.data.DataSource({
+    var dataSource = new kendo.data.PivotDataSource({
       type: "xmla",
       transport: {
         connection: {
             catalog: "Adventure Works DW 2008R2",
             cube: "Adventure Works"
         },
-        read: "http://demos.telerik.com/olap/msmdpump.dll"
+        read: "https://demos.telerik.com/olap/msmdpump.dll"
       },
       schema: {
         type: "xmla"
@@ -1131,14 +1131,14 @@ The columns configuration. Accepts the same values as the [columns](#configurati
 #### Example - get the columns name
 
     <script>
-    var dataSource = new kendo.data.DataSource({
+    var dataSource = new kendo.data.PivotDataSource({
       type: "xmla",
       columns: ["[Date].[Calendar]"],
       transport: {
         connection: {
             catalog: "Adventure Works DW 2008R2"
         },
-        read: "http://demos.telerik.com/olap/msmdpump.dll"
+        read: "https://demos.telerik.com/olap/msmdpump.dll"
       },
       schema: {
         type: "xmla"
@@ -1166,14 +1166,14 @@ The name of the cube.
 #### Example - set the cube
 
     <script>
-    var dataSource = new kendo.data.DataSource({
+    var dataSource = new kendo.data.PivotDataSource({
       type: "xmla",
       columns: ["[Date].[Calendar]"],
       transport: {
         connection: {
             catalog: "Adventure Works DW 2008R2"
         },
-        read: "http://demos.telerik.com/olap/msmdpump.dll"
+        read: "https://demos.telerik.com/olap/msmdpump.dll"
       },
       schema: {
         type: "xmla"
@@ -1188,7 +1188,7 @@ The name of the cube.
 #### Example - get the cube name
 
     <script>
-    var dataSource = new kendo.data.DataSource({
+    var dataSource = new kendo.data.PivotDataSource({
       type: "xmla",
       columns: ["[Date].[Calendar]"],
       transport: {
@@ -1196,7 +1196,7 @@ The name of the cube.
             catalog: "Adventure Works DW 2008R2",
             cube: "Adventure Works"
         },
-        read: "http://demos.telerik.com/olap/msmdpump.dll"
+        read: "https://demos.telerik.com/olap/msmdpump.dll"
       },
       schema: {
         type: "xmla"
@@ -1224,13 +1224,13 @@ The options of the discover request
 #### Example
 
     <script>
-    var dataSource = new kendo.data.DataSource({
+    var dataSource = new kendo.data.PivotDataSource({
       type: "xmla",
       transport: {
         connection: {
             catalog: "Adventure Works DW 2008R2"
         },
-        read: "http://demos.telerik.com/olap/msmdpump.dll"
+        read: "https://demos.telerik.com/olap/msmdpump.dll"
       },
       schema: {
         type: "xmla"
@@ -1266,7 +1266,7 @@ The path that uniquely specifies the tuple member that needs to be expanded.
     <!-- Real life demo: http://docs.telerik.com/kendo-ui/web/pivotgrid/how-to/expand-multiple-dimensions -->
 
     <script>
-    var dataSource = new kendo.data.DataSource({
+    var dataSource = new kendo.data.PivotDataSource({
       type: "xmla",
       columns: [{ name: "[Date].[Calendar]", expand: true }, { name: "[Product].[Category]" } ],
       rows: [{ name: "[Geography].[City]" }],
@@ -1275,7 +1275,7 @@ The path that uniquely specifies the tuple member that needs to be expanded.
         connection: {
             catalog: "Adventure Works DW 2008R2"
         },
-        read: "http://demos.telerik.com/olap/msmdpump.dll"
+        read: "https://demos.telerik.com/olap/msmdpump.dll"
       },
       schema: {
         type: "xmla"
@@ -1310,7 +1310,7 @@ The path that uniquely specifies the tuple member that needs to be expanded.
     <!-- Real life demo: http://docs.telerik.com/kendo-ui/web/pivotgrid/how-to/expand-multiple-dimensions -->
 
     <script>
-    var dataSource = new kendo.data.DataSource({
+    var dataSource = new kendo.data.PivotDataSource({
       type: "xmla",
       rows: [{ name: "[Date].[Calendar]", expand: true }, { name: "[Product].[Category]" } ],
       columns: [{ name: "[Geography].[City]" }],
@@ -1319,7 +1319,7 @@ The path that uniquely specifies the tuple member that needs to be expanded.
         connection: {
             catalog: "Adventure Works DW 2008R2"
         },
-        read: "http://demos.telerik.com/olap/msmdpump.dll"
+        read: "https://demos.telerik.com/olap/msmdpump.dll"
       },
       schema: {
         type: "xmla"
@@ -1354,14 +1354,14 @@ The measures configuration. Accepts the same values as the [measures](#configura
 #### Example - set the measures
 
     <script>
-    var dataSource = new kendo.data.DataSource({
+    var dataSource = new kendo.data.PivotDataSource({
       type: "xmla",
       transport: {
         connection: {
             catalog: "Adventure Works DW 2008R2",
             cube: "Adventure Works"
         },
-        read: "http://demos.telerik.com/olap/msmdpump.dll"
+        read: "https://demos.telerik.com/olap/msmdpump.dll"
       },
       schema: {
         type: "xmla"
@@ -1374,14 +1374,14 @@ The measures configuration. Accepts the same values as the [measures](#configura
 #### Example - get the measures
 
     <script>
-    var dataSource = new kendo.data.DataSource({
+    var dataSource = new kendo.data.PivotDataSource({
       type: "xmla",
       measures: ["[Measures].[Internet Order Lines Count]"],
       transport: {
         connection: {
             catalog: "Adventure Works DW 2008R2"
         },
-        read: "http://demos.telerik.com/olap/msmdpump.dll"
+        read: "https://demos.telerik.com/olap/msmdpump.dll"
       },
       schema: {
         type: "xmla"
@@ -1403,7 +1403,7 @@ Get the name of the axis on which measures are displayed.
 #### Example - set the measures
 
     <script>
-    var dataSource = new kendo.data.DataSource({
+    var dataSource = new kendo.data.PivotDataSource({
       type: "xmla",
       measures: {
           values: ["[Measures].[Internet Order Lines Count]", "[Measures].[Days Current Quarter to Date]"],
@@ -1414,7 +1414,7 @@ Get the name of the axis on which measures are displayed.
             catalog: "Adventure Works DW 2008R2",
             cube: "Adventure Works"
         },
-        read: "http://demos.telerik.com/olap/msmdpump.dll"
+        read: "https://demos.telerik.com/olap/msmdpump.dll"
       },
       schema: {
         type: "xmla"
@@ -1442,14 +1442,14 @@ The rows configuration. Accepts the same values as the [row](#configuration-rows
 #### Example - set the rows
 
     <script>
-    var dataSource = new kendo.data.DataSource({
+    var dataSource = new kendo.data.PivotDataSource({
       type: "xmla",
       transport: {
         connection: {
             catalog: "Adventure Works DW 2008R2",
             cube: "Adventure Works"
         },
-        read: "http://demos.telerik.com/olap/msmdpump.dll"
+        read: "https://demos.telerik.com/olap/msmdpump.dll"
       },
       schema: {
         type: "xmla"
@@ -1462,14 +1462,14 @@ The rows configuration. Accepts the same values as the [row](#configuration-rows
 #### Example - get the rows name
 
     <script>
-    var dataSource = new kendo.data.DataSource({
+    var dataSource = new kendo.data.PivotDataSource({
       type: "xmla",
       rows: ["[Date].[Calendar]"],
       transport: {
         connection: {
             catalog: "Adventure Works DW 2008R2"
         },
-        read: "http://demos.telerik.com/olap/msmdpump.dll"
+        read: "https://demos.telerik.com/olap/msmdpump.dll"
       },
       schema: {
         type: "xmla"
@@ -1491,10 +1491,10 @@ Request catalogs information.
 #### Example
 
     <script>
-    var dataSource = new kendo.data.DataSource({
+    var dataSource = new kendo.data.PivotDataSource({
       type: "xmla",
       transport: {
-        read: "http://demos.telerik.com/olap/msmdpump.dll"
+        read: "https://demos.telerik.com/olap/msmdpump.dll"
       },
       schema: {
         type: "xmla"
@@ -1518,13 +1518,13 @@ Request cubes schema information.
 #### Example
 
     <script>
-    var dataSource = new kendo.data.DataSource({
+    var dataSource = new kendo.data.PivotDataSource({
       type: "xmla",
       transport: {
         connection: {
             catalog: "Adventure Works DW 2008R2"
         },
-        read: "http://demos.telerik.com/olap/msmdpump.dll"
+        read: "https://demos.telerik.com/olap/msmdpump.dll"
       },
       schema: {
         type: "xmla"
@@ -1548,13 +1548,13 @@ Request dimensions schema information.
 #### Example
 
     <script>
-    var dataSource = new kendo.data.DataSource({
+    var dataSource = new kendo.data.PivotDataSource({
       type: "xmla",
       transport: {
         connection: {
             catalog: "Adventure Works DW 2008R2"
         },
-        read: "http://demos.telerik.com/olap/msmdpump.dll"
+        read: "https://demos.telerik.com/olap/msmdpump.dll"
       },
       schema: {
         type: "xmla"
@@ -1584,13 +1584,13 @@ The name of the dimensions which is 'owner' of the hierarchy.
 #### Example
 
     <script>
-    var dataSource = new kendo.data.DataSource({
+    var dataSource = new kendo.data.PivotDataSource({
       type: "xmla",
       transport: {
         connection: {
             catalog: "Adventure Works DW 2008R2"
         },
-        read: "http://demos.telerik.com/olap/msmdpump.dll"
+        read: "https://demos.telerik.com/olap/msmdpump.dll"
       },
       schema: {
         type: "xmla"
@@ -1622,13 +1622,13 @@ The name of the hierarchy which is 'owner' of the level.
 #### Example
 
     <script>
-    var dataSource = new kendo.data.DataSource({
+    var dataSource = new kendo.data.PivotDataSource({
       type: "xmla",
       transport: {
         connection: {
             catalog: "Adventure Works DW 2008R2"
         },
-        read: "http://demos.telerik.com/olap/msmdpump.dll"
+        read: "https://demos.telerik.com/olap/msmdpump.dll"
       },
       schema: {
         type: "xmla"
@@ -1654,13 +1654,13 @@ Request measures schema information.
 #### Example
 
     <script>
-    var dataSource = new kendo.data.DataSource({
+    var dataSource = new kendo.data.PivotDataSource({
       type: "xmla",
       transport: {
         connection: {
             catalog: "Adventure Works DW 2008R2"
         },
-        read: "http://demos.telerik.com/olap/msmdpump.dll"
+        read: "https://demos.telerik.com/olap/msmdpump.dll"
       },
       schema: {
         type: "xmla"
@@ -1672,5 +1672,3 @@ Request measures schema information.
             console.log(measures);
         });
     </script>
-
-

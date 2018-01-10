@@ -1,16 +1,16 @@
 ---
-title: Expanding Inner Grouped Rows
-description: An example on how to expand the inner grouped rows
+title: Expand Inner Grouped Rows
+description: An example on how to expand the inner grouped rows in a Kendo UI Grid.
 type: how-to
-page_title: How to Expand the Inner Grouped Rows of the Grid
+page_title: Expand the Inner Grouped Rows | Kendo UI Grid
 slug: grid-expanding-inner-grouped-rows
-position: 
 tags: filter, grid, group, expand
 ticketid: 1145080
 res_type: kb
 ---
 
 ## Environment
+
 <table>
 	<tr>
 		<td>Product Version</td>
@@ -18,23 +18,23 @@ res_type: kb
 	</tr>
 	<tr>
 		<td>Product</td>
-		<td>Grid for Progress® Kendo UI®</td>
+		<td>Progress Kendo UI Grid</td>
 	</tr>
 </table>
 
-
 ## Description
 
-I have a grid that is grouped by site and then room number.
-I would like to have the grid open up with all the rows collapsed. This I am able to do. What I need help in is when I manually expand a row, I would like to automatically expand any rows within that group as well.
+My Grid is grouped by site and then room number, and when it displays its content, all rows are collapsed as intended.
+
+How can I automatically expand any rows within that group when I manually expand a row?
 
 ## Solution  
-  
-In this scenario, we can suggest to programmatically [expand](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid#methods-expandGroup) all items of the parent grouping field on the [groupExpand](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid#events-groupExpand) event:  
-  
-I made an example demonstrating this. Manually collapse all subgroups and then the main group after that notice how the subgroups are programmatically expanded once the main group is expanded:  
 
-````html
+Programmatically [expand](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid#methods-expandGroup) all items of the parent grouping field on the [`groupExpand`](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid#events-groupExpand) event:  
+
+The following example demonstrates how to implement the suggested approach&mdash;manually collapse all subgroups and then the main group to see how the subgroups programmatically expand once the main group gets expanded too.  
+
+```html
 <div id="example">
       <div id="grid"></div>
       <script>
@@ -91,4 +91,3 @@ I made an example demonstrating this. Manually collapse all subgroups and then t
       </script>
     </div>
 ````
-

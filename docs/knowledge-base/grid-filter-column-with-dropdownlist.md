@@ -1,16 +1,16 @@
 ---
-title: Filter Column With DropDownList
-description: An example on how to filter column with complex objects
+title: Filter Columns with DropDownList
+description: An example on how to filter Kendo UI Grid columns with complex objects.
 type: how-to
-page_title: Filter Column With Complex Objects
+page_title: Filter Columns with Complex Objects | Kendo UI Grid
 slug: grid-filter-column-with-dropdownlist
-position: 
 tags: grid, filter, dropdownlist
 ticketid: 1144229
 res_type: kb
 ---
 
 ## Environment
+
 <table>
 	<tr>
 		<td>Product Version</td>
@@ -18,22 +18,19 @@ res_type: kb
 	</tr>
 	<tr>
 		<td>Product</td>
-		<td>Grid for Progress® Kendo UI®</td>
+		<td>Progress Kendo UI Grid</td>
 	</tr>
 </table>
 
-
 ## Description
 
-How to filter a column with a DropDown editor when it is bound to a complex object?
+How can I filter a column with a drop-down editor when the column is bound to a complex object?
 
 ## Solution
 
-This could be achieved by programmatically applying the filters on the [filter](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid/events/filter) event of the Grid. It will also require to programmatically clear the filters for that column when the clear button is clicked.
+Programmatically apply the filters on the [`filter`](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid/events/filter) event of the Grid. This approach  also requires you to programmatically clear the filters for that column when the user clicks the **Clear** button.
 
-Please check the following example demonstrating this:
-
-````html
+```html
    <script src="https://demos.telerik.com/kendo-ui/content/shared/js/products.js"></script>
     <div id="example">
       <div id="grid"></div>
@@ -199,5 +196,4 @@ Please check the following example demonstrating this:
 
       </script>
     </div>
-````
-
+```
