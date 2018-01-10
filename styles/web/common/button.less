@@ -58,9 +58,9 @@
         .k-image,
         .k-sprite {
             margin-right: 3px;
-            margin-right: .1875rem;
+            margin-right: .1875em;
             margin-left: -2px;
-            margin-left: -.125rem;
+            margin-left: -.125em;
         }
     }
 
@@ -165,27 +165,19 @@ input[type="reset"].k-button-expand {
     vertical-align: middle;
     position: relative;
 
-    .k-item {
-        position: relative;
-    }
-    .k-item + .k-item {
-        margin-left: -1px;
-    }
-
     .k-button {
         // .border-radius( 0 );
         position: relative;
+    }
+    .k-button + .k-button {
+        margin-left: -1px;
     }
 
     // stretched button group
     &.k-button-group-stretched {
 
-        .k-item {
-            flex: 1 0 auto;
-        }
-
         .k-button {
-            width: 100%;
+            flex: 1 0 auto;
         }
     }
 
@@ -234,9 +226,9 @@ input[type="reset"].k-button-expand {
 .k-rtl .k-button-group {
 
     .k-button {
-        margin: 0;
+        margin-left: 0;
     }
-    .k-item + .k-item {
+    .k-button + .k-button {
         margin-right: -1px;
     }
 
@@ -249,10 +241,10 @@ input[type="reset"].k-button-expand {
         clear: both;
     }
 
-    .k-item{
+    .k-button {
         float: left;
     }
 }
-.k-ie9 .k-rtl .k-button-group .k-item{
+.k-ie9 .k-rtl .k-button-group .k-button {
     float: right;
 }

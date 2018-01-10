@@ -142,15 +142,15 @@
     }
 
     .k-group-start,
-    .k-item:first-child .k-button {
+    .k-button:first-child {
         .border-left-radius();
     }
     .k-group-end,
-    .k-item:last-child .k-button {
+    .k-button:last-child {
         .border-right-radius();
     }
     .k-group-start.k-group-end,
-    .k-item:first-child:last-child .k-button {
+    .k-button:first-child:last-child {
         .border-radius();
     }
 
@@ -159,9 +159,7 @@
         // Disabled state
         &[disabled],
         .k-state-disabled &,
-        .k-state-disabled &:hover,
-        &.k-state-disabled,
-        &.k-state-disabled:hover {
+        &.k-state-disabled {
             color: @disabled-text-color;
             border-color: @disabled-border-color;
             background-color: @disabled-background-color;
@@ -190,20 +188,20 @@
 
 }
 .k-rtl .k-button-group {
-    .k-item .k-button {
+    .k-button {
         .border-radius( 0 );
     }
 
     .k-group-start,
-    .k-item:first-child .k-button {
+    .k-button:first-child {
         .border-right-radius();
     }
     .k-group-end,
-    .k-item:last-child .k-button {
+    .k-button:last-child {
         .border-left-radius();
     }
     .k-group-start.k-group-end,
-    .k-item:first-child:last-child .k-button {
+    .k-button:first-child:last-child {
         .border-radius();
     }
 }

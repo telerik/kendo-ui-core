@@ -39,7 +39,9 @@ var __meta__ = { // jshint ignore:line
             options.enable = options.enable && !element.attr(DISABLED);
             that.enable(options.enable);
 
-            that._tabindex();
+            if (options.enable) {
+                that._tabindex();
+            }
 
             that._graphics();
 
@@ -176,6 +178,11 @@ var __meta__ = { // jshint ignore:line
             element.toggleClass(DISABLEDSTATE, !enable)
                    .attr("aria-disabled", !enable)
                    .attr(DISABLED, !enable);
+
+            if (enable) {
+                that._tabindex();
+            }
+
             // prevent 'Unspecified error' in IE when inside iframe
             try {
                 element.blur();

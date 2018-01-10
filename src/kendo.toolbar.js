@@ -551,6 +551,7 @@ var __meta__ = { // jshint ignore:line
             },
 
             createPopup: function() {
+                var that = this;
                 var options = this.options;
                 var element = this.element;
 
@@ -568,16 +569,48 @@ var __meta__ = { // jshint ignore:line
                     isRtl: this.toolbar._isRtl,
                     copyAnchorStyles: false,
                     animation: options.animation,
-                    open: adjustPopupWidth,
+                    open: function(e){
+                        var isDefaultPrevented = that.toolbar.trigger(OPEN, { target: element });
+
+                        if(isDefaultPrevented){
+                            e.preventDefault();
+                            return;
+                        }
+
+                        that.adjustPopupWidth(e.sender);
+                    },
                     activate: function() {
                         this.element.find(":kendoFocusable").first().focus();
                     },
-                    close: function() {
+                    close: function(e) {
+                        var isDefaultPrevented = that.toolbar.trigger(CLOSE, { target: element });
+                        if(isDefaultPrevented){
+                            e.preventDefault();
+                        }
                         element.focus();
                     }
                 }).data("kendoPopup");
 
                 this.popup.element.on(CLICK, "a.k-button", preventClick);
+            },
+
+            adjustPopupWidth: function (popup) {
+                var anchor = popup.options.anchor,
+                    computedWidth = outerWidth(anchor),
+                    width;
+
+                kendo.wrap(popup.element).addClass("k-split-wrapper");
+
+                if (popup.element.css("box-sizing") !== "border-box") {
+                    width = computedWidth - (outerWidth(popup.element) - popup.element.width());
+                } else {
+                    width = computedWidth;
+                }
+
+                popup.element.css({
+                    fontFamily: anchor.css("font-family"),
+                    "min-width": width
+                });
             },
 
             remove: function() {
@@ -767,25 +800,6 @@ var __meta__ = { // jshint ignore:line
         });
 
         kendo.toolbar.OverflowTemplateItem = OverflowTemplateItem;
-
-        function adjustPopupWidth() {
-            var anchor = this.options.anchor,
-                computedWidth = outerWidth(anchor),
-                width;
-
-            kendo.wrap(this.element).addClass("k-split-wrapper");
-
-            if (this.element.css("box-sizing") !== "border-box") {
-                width = computedWidth - (outerWidth(this.element) - this.element.width());
-            } else {
-                width = computedWidth;
-            }
-
-            this.element.css({
-                fontFamily: anchor.css("font-family"),
-                "min-width": width
-            });
-        }
 
         function toggleActive(e) {
             if (!e.target.is(".k-toggle-button")) {
@@ -1563,8 +1577,7 @@ var __meta__ = { // jshint ignore:line
             },
 
             _toggle: function(e) {
-                var splitButton = $(e.target).closest("." + SPLIT_BUTTON).data("splitButton"),
-                    isDefaultPrevented;
+                var splitButton = $(e.target).closest("." + SPLIT_BUTTON).data("splitButton");
 
                 e.preventDefault();
 
@@ -1572,15 +1585,7 @@ var __meta__ = { // jshint ignore:line
                     return;
                 }
 
-                if (splitButton.popup.element.is(":visible")) {
-                    isDefaultPrevented = this.trigger(CLOSE, { target: splitButton.element });
-                } else {
-                    isDefaultPrevented = this.trigger(OPEN, { target: splitButton.element });
-                }
-
-                if (!isDefaultPrevented) {
-                    splitButton.toggle();
-                }
+                splitButton.toggle();
             },
 
             _toggleOverflow: function() {

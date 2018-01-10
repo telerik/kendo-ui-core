@@ -1,16 +1,16 @@
 ---
-title: Filter Kendo UI Map Markers Dynamically
-description: Dynamic filter for Map widget markers
+title: Filter Map Markers Dynamically
+description: An example on how to dynamically filter the markers of the Kendo UI Map.
 type: how-to
-page_title: Filtering Markers Layer in Kendo UI Map
+page_title: Filter Marker Layer | Kendo UI Map
 slug: map-filter-markers
 previous_url: /knowledge-base/map_filter_markers
-position: 
-tags: Map, Filter, Markers
+tags: map, filter, markers
 res_type: kb
 ---
 
 ## Environment
+
 <table>
 	<tr>
 		<td>Product Version</td>
@@ -18,21 +18,21 @@ res_type: kb
 	</tr>
 	<tr>
 		<td>Product</td>
-		<td>Kendo UI Map</td>
+		<td>Progress Kendo UI Map</td>
 	</tr>
 </table>
 
-
 ## Description
-I want to filter the Kendo UI Map markers layer dynamically.
+
+How can I dynamically filter the layer of markers in the Map?
 
 ## Solution
-Since the markers layer will be added to the Map widget with the initialization, in order to filter the markers we will have to re-initialize the Map with the filtered data:
 
-#### Example
-````html
+The marker layer is added to the Map when the Map is initialized. To filter the markers, re-initialize the Map with the filtered data.
+
+```html
     <div id="example">
- 
+
     <div id="map"></div>
 
     <script>
@@ -60,13 +60,13 @@ Since the markers layer will be added to the Map widget with the initialization,
                     locationField: "latlng",
                     titleField: "name"
                 }],
-              
+
             });
-          
-          setTimeout(function(){ //to simulate dynamic filtering 
+
+          setTimeout(function(){ //to simulate dynamic filtering
             var map =$("#map").data("kendoMap");
             var options = map.options;
-            
+
             options.layers[1].dataSource.filter = [{field: "name", operator: "startswith", value: "F"}]; // 1 points to the markers layer that we want to filter
             map.destroy();
             map.setOptions(options);
@@ -77,4 +77,4 @@ Since the markers layer will be added to the Map widget with the initialization,
         $(document).ready(createMap);
     </script>
 	</div>
-````
+```

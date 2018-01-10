@@ -1,16 +1,16 @@
 ---
-title: Moving Kendo UI Grid Filter Icon To Left
-description: Displaying filter icon at most left position in the Grid header
+title: Move Filter Icons in the Grid to the Left
+description: An example on how to display the filter icon in the leftmost position of the Kendo UI Grid header.
 type: how-to
-page_title: How To Display Filter Icon Before the Title in the Grid Header
+page_title: Display Filter Icon before the Title in the Header | Kendo UI Grid
 slug: grid-filter-icon-to-left
 previous_url: /knowledge-base/grid_filter_icon_to_left
-position: 
 tags: Grid, Filter icon, Left position
 res_type: kb
 ---
 
 ## Environment
+
 <table>
 	<tr>
 		<td>Product Version</td>
@@ -18,32 +18,38 @@ res_type: kb
 	</tr>
 	<tr>
 		<td>Product</td>
-		<td>Grid for Progress® Kendo UI®</td>
+		<td>Progress Kendo UI Grid</td>
 	</tr>
 </table>
 
 
 ## Description
-When I tab through the application, the filter icon in the headers is focused before the header title, although that it is visually displayed before it. I want to display the filter icon before the title.
+
+When I tab through the application, the filter icon in the Grid headers is focused before the header title although the header title is visually displayed before the filter icon.
+
+How can I display the Grid filter icon before the title?
 
 ## Solution
-Due to the way that the filter icon is positioned in the header, it receives the focus before the title, because it is actually rendered first in the DOM. However, we can easily change the position with the following CSS:
 
+Due to the way the filter icon is positioned in the header, the filter icon receives the focus before the title because it is rendered in the DOM before the title. To change the position of the filter icon, use CSS.
+
+```html
 	<style>
 	  .k-grid-header .k-grid-filter, .k-grid-header .k-header-column-menu{
 		margin-left: -5px!important;
 		margin-right: 0!important;
-		
+
 	  }
-	  
+
 	  .k-grid-header .k-grid-filter, .k-grid-header .k-header-column-menu{
 		float: left!important;
 	  }
 	</style>
+```
 
-	
-#### Example
-````html
+The following example demonstrates the full implementation of the suggested approach.
+
+```html
 <base href="https://demos.telerik.com/kendo-ui/grid/local-data-binding">
   <style>
       .k-grid-header .k-grid-filter, .k-grid-header .k-header-column-menu{
@@ -56,7 +62,7 @@ Due to the way that the filter icon is positioned in the header, it receives the
         float: left!important;
       }
     </style>
-  
+
         <script src="../content/shared/js/people.js"></script>
         <div id="example">
         <div id="grid"></div>
@@ -138,4 +144,4 @@ Due to the way that the filter icon is positioned in the header, it receives the
 
             </script>
         </div>
-````
+```

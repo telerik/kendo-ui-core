@@ -18,6 +18,17 @@
                     target: this
                 });
             };
+
+            $.fn.bubblePress = function (key, shiftKey, altKey, delegateTarget) {
+                $(this).trigger({
+                    type: "keydown",
+                    keyCode: key,
+                    shiftKey: shiftKey,
+                    altKey: altKey,
+                    target: this[0],
+                    delegateTarget: delegateTarget || this
+                });
+            };
         },
 
         teardown: function() {
@@ -290,6 +301,37 @@
         $("#field1").press(keys.END);
 
         ok($(document.activeElement).is("#field1"));
+    });
+
+    test("splitButton navigation triggers close and open events", 4, function() {
+        container.kendoToolBar({
+            items: [
+                { type: "splitButton", id: "foo", text: "foo", menuButtons: [
+                    { id: "option1", text: "option1" },
+                    { id: "option2", text: "option2" }
+                ] }
+            ],
+            close: function(e) {
+                ok(true, "close event triggered.")
+            },
+            open: function(e) {
+                ok(true, "open event triggered.")
+            }
+        });
+
+        var splitButton = $("#foo_wrapper");
+        var popupElement = $("#splitButton_optionlist");
+        var option = $("#option1")
+
+        splitButton.focus();
+        // open popup
+        splitButton.press(keys.DOWN, false, true);
+        // close popup
+        option.bubblePress(keys.UP, false, true, popupElement);
+        // open popup
+        splitButton.press(keys.DOWN, false, true);
+        // close popup
+        option.bubblePress(keys.TAB, false, false, popupElement);
     });
 
 })();

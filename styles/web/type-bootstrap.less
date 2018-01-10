@@ -283,10 +283,12 @@
 
 .k-grouping-row td,
 td.k-group-cell,
-.k-resize-handle-inner
+.k-resize-handle-inner,
+.k-grid .k-state-selected:hover .k-group-cell
 {
     background-color: @header-background-color;
 }
+
 
 .k-list-container
 {
@@ -498,6 +500,7 @@ thead.k-grid-header tr:first-child {
 .k-badge {
     background-color: @accent;
     color: contrast(@accent, @normal-background, @normal-text-color, 0.5);
+    border-radius: @inner-border-radius;
 }
 
 .k-tool
