@@ -563,7 +563,7 @@
                 { type: "button", togglable: true, text: "bar", selected: true, overflow: "always" }
             ]
         });
-        
+
         ok(container.find(".k-toggle-button.k-state-active").length);
         equal($(".k-overflow-button.k-state-active").length, 2);
     });
@@ -1079,7 +1079,7 @@
         component = splitButton.popup.element.find(".k-split-button");
 
         equal(component.prop("tagName"), "LI");
-        equal(component.children(".k-overflow-button").length, 4); //3 items + 1 main button
+        equal(component.find(".k-overflow-button").length, 4); //3 items + 1 main button
     });
 
     test("Overflow SplitButton items are wrapped in a li tag which has data-uid attribute", 2, function() {

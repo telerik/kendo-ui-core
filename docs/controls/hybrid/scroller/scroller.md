@@ -4,7 +4,7 @@ page_title: Overview | Hybrid UI Scroller
 description: "Achieve a touch-friendly scrolling functionality of the contents of a given DOM element by using the hybrid Kendo UI Scroller widget."
 slug: overview_hybridscroller
 position: 1
-component: scroller_mobile
+component: scroller
 ---
 
 # Scroller Overview

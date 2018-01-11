@@ -568,4 +568,26 @@
        ok(!($("#splitButton_wrapper").hasClass("k-state-hidden")));
     });
 
+    test("toggle method toggles splitButton's togglabale option", 3, function() {
+        var toolbar = container.kendoToolBar({
+             items: [
+                 { type: "splitButton", id: "splitButton", text: "Split Button", menuButtons: [
+                         { id: "option1", text: "Option 1", togglable: true, group: "myGroup" },
+                         { id: "option2", text: "Option 2", togglable: true, group: "myGroup" },
+                         { id: "option3", text: "Option 3", togglable: true, group: "myGroup" }
+                     ]
+                 }
+             ]
+        }).data("kendoToolBar");
+
+        toolbar.toggle($("#option1"), true);
+
+        ok($("#option1").hasClass("k-state-active"));
+
+        toolbar.toggle($("#option2"), true);
+
+        ok(!$("#option1").hasClass("k-state-active"));
+        ok($("#option2").hasClass("k-state-active"));
+     });
+
 })();

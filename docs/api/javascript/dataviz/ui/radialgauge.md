@@ -3,7 +3,7 @@ title: RadialGauge
 page_title: Configuration, methods and events of Kendo UI DataViz RadialGauge
 description: Learn the configuration options for Radial Gauge widget, set the color and size of the border, use methods properly.
 res_type: api
-component: gauge
+component: gauges
 ---
 
 # kendo.dataviz.ui.RadialGauge
@@ -15,7 +15,7 @@ component: gauge
 The gauge area configuration options.
 This is the entire visible area of the gauge.
 
-### gaugeArea.background `Object`*(default: "white")*
+### gaugeArea.background `String`*(default: "white")*
 
  The background of the gauge area.
 Any valid CSS color string will work here, including hex and rgb.

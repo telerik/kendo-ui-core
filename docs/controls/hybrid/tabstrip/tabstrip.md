@@ -4,7 +4,7 @@ page_title: Overview | Hybrid UI TabStrip
 description: "Initialize the hybrid mobile Kendo UI TabStrip widget and create custom icons."
 slug: overview_hybridtabstrip
 position: 1
-component: tabstrip_mobile
+component: mobile-tabstrip
 ---
 
 # TabStrip Overview

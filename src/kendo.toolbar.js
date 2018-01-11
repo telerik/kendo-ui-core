@@ -61,6 +61,8 @@ var __meta__ = { // jshint ignore:line
         OVERFLOW_ALWAYS = "always",
         OVERFLOW_HIDDEN = "k-overflow-hidden",
 
+        OPTION_LIST_SUFFIX = "_optionlist",
+
         KENDO_UID_ATTR = kendo.attr("uid");
 
         kendo.toolbar = {};
@@ -131,7 +133,11 @@ var __meta__ = { // jshint ignore:line
 
             twin: function() {
                 var uid = this.element.attr(KENDO_UID_ATTR);
-                if (this.overflow) {
+                if (this.overflow && this.options.splitContainerId) {
+                    return $("#" + this.options.splitContainerId)
+                            .find("[" + KENDO_UID_ATTR + "='" + uid + "']")
+                            .data(this.options.type);
+                } else if (this.overflow) {
                     return this.toolbar
                             .element
                             .find("[" + KENDO_UID_ATTR + "='" + uid + "']")
@@ -313,7 +319,6 @@ var __meta__ = { // jshint ignore:line
                 this.overflow = true;
 
                 Button.fn.init.call(this, $.extend({}, options), toolbar);
-                // Button.fn.init.call(this, options, toolbar);
 
                 var element = this.element;
 
@@ -556,7 +561,7 @@ var __meta__ = { // jshint ignore:line
                 var element = this.element;
 
                 this.popupElement
-                        .attr("id", options.id + "_optionlist")
+                        .attr("id", options.id + OPTION_LIST_SUFFIX)
                         .attr(KENDO_UID_ATTR, options.rootUid);
 
                 if (options.mobile) {
@@ -656,16 +661,18 @@ var __meta__ = { // jshint ignore:line
             init: function(options, toolbar) {
                 var element = this.element = $('<li class="' + SPLIT_BUTTON + '"></li>'),
                     items = options.menuButtons,
-                    item;
+                    item, splitContainerId;
 
                 this.options = options;
                 this.toolbar = toolbar;
                 this.overflow = true;
+                splitContainerId = (options.id || options.uid) + OPTION_LIST_SUFFIX;
 
-                this.mainButton = new OverflowButton($.extend({ isChild: true }, options));
+                this.mainButton = new OverflowButton($.extend({ }, options));
                 this.mainButton.element.appendTo(element);
+
                 for (var i = 0; i < items.length; i++) {
-                    item = new OverflowButton($.extend({ mobile: options.mobile, isChild: true }, items[i]), this.toolbar);
+                    item = new OverflowButton($.extend({ mobile: options.mobile, type: "button", splitContainerId: splitContainerId }, items[i]), this.toolbar);
                     item.element.appendTo(element);
                 }
 

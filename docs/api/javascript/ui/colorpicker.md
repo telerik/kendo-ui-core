@@ -2,7 +2,7 @@
 title: ColorPicker
 page_title: Configuration, methods and events of Kendo UI ColorPicker
 res_type: api
-component: colorpicker
+component: color-picker
 ---
 
 # kendo.ui.ColorPicker

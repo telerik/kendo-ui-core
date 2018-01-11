@@ -7,7 +7,7 @@ slug: datepicker-remove-year-view
 tags: kendo ui, datepicker, datetimepicker, year view
 ticketid: 1115942, 1116792
 res_type: kb
-component: datepicker
+component: date-time-pickers
 ---
 
 ## Environment

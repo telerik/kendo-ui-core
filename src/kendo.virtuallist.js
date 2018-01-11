@@ -1460,11 +1460,11 @@ var __meta__ = { // jshint ignore:line
 
             if (selectable === true || !indices.length) { //deselect everything
                 for (var idx = 0; idx < selectedIndexes.length; idx++) {
-                    if (selectedDataItems[idx]) {
-                        this._getElementByDataItem(selectedDataItems[idx]).removeClass(SELECTED);
-                    } else if (selectedIndexes[idx] !== undefined) {
+                    if (selectedIndexes[idx] !== undefined) {
                         this._getElementByIndex(selectedIndexes[idx]).removeClass(SELECTED);
-                    }
+                    } else if (selectedDataItems[idx]) {
+                        this._getElementByDataItem(selectedDataItems[idx]).removeClass(SELECTED);
+                    } 
 
                     removed.push({
                         index: selectedIndexes[idx],

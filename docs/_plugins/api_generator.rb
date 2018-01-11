@@ -61,6 +61,11 @@ module Jekyll
 
               if new_content === ""
                 new_content += page_schema.main_page_header
+
+                new_content+= '<div id="api-filter">
+                <i class="fa fa-search search-icon"></i>
+                <input type="search" class="search" placeholder="Filter..." />
+              </div>'
               end
 
               if last_category != page_schema.category

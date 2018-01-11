@@ -16,7 +16,7 @@ The following example demonstrates how to define the DateInput by using the Date
 
 ###### Example
 
-        <kendo-dateinput name="dateinput1"></kendo-dateinput>
+    <kendo-dateinput name="dateinput1"></kendo-dateinput>
 
 ## Configuration
 
@@ -24,64 +24,52 @@ The DateInput tag helper configuration options are passed as attributes of the t
 
 ###### Example
 
-```tab-cshtml
-
-        @(Html.Kendo().DateInput()
-                .Name("dateinput1")
-                .Format("MMMM yyyy")
-                .Value(DateTime.Now)
-        )
-```
 ```tab-tagHelper
-
-        <kendo-dateinput name="dateinput1" format="MMMM yyyy" value="DateTime.Now">
-        </kendo-dateinput>
+<kendo-dateinput name="dateinput1" format="MMMM yyyy" value="DateTime.Now">
+</kendo-dateinput>
 ```
+```tab-cshtml
+@(Html.Kendo().DateInput()
+        .Name("dateinput1")
+        .Format("MMMM yyyy")
+        .Value(DateTime.Now)
+)
+```
+
 
 ## Event Handling
 
 You can subscribe to all DateInput [events](http://docs.telerik.com/kendo-ui/api/javascript/ui/dateinput#events).
 
-### By Handler Name
-
 The following example demonstrates how to subscribe to events by a handler name.
 
 ###### Example
 
-```tab-Razor
+```tab-tagHelper
+<kendo-dateinput name="dateinput" style='width: 100%;' on-change="onChangeHandler">
+</kendo-dateinput>
 
-        @(Html.Kendo().DateInput()
-          .Name("dateinput")
-          .Events(e => e
-                .Change("dateInput_change")
-          )
-        )
-        <script>
-        function dateInput_change() {
-            //Handle the change event
-        }
-        </script>
+<script>
+    function onChangeHandler(e) {
+        // add logic here
+    }
+</script>
 ```
-
-### By Template Delegate
-
-The following example demonstrates how to subscribe to events by a template delegate.
-
-###### Example
-
 ```tab-Razor
-
-    @(Html.Kendo().DateInput()
-      .Name("dateinput")
-      .Events(e => e
-          .Change(@<text>
-            function() {
-                //Handle the change event inline.
-            }
-            </text>)
-      )
+@(Html.Kendo().DateInput()
+    .Name("dateinput")
+    .Events(e => e
+    .Change("dateInput_change")
     )
+)
+
+<script>
+    function dateInput_change() {
+            //Handle the change event
+    }
+</script>
 ```
+
 
 ## Reference
 
@@ -91,13 +79,13 @@ To reference an existing Kendo UI DateInput instance, use the [`jQuery.data()`](
 
 ###### Example
 
-        //Put this after your Kendo UI DateInput for ASP.NET Core declaration.
-        <script>
+    //Put this after your Kendo UI DateInput for ASP.NET Core declaration.
+    <script>
         $(function() {
-        //Notice that the Name() of the DateInput is used to get its client-side instance.
-        var dateInput = $("#dateinput").data("kendoDateInput");
+            //Notice that the Name() of the DateInput is used to get its client-side instance.
+            var dateInput = $("#dateinput").data("kendoDateInput");
         });
-        </script>
+    </script>
 
 
 ## See Also

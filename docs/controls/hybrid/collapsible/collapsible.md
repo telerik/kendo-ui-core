@@ -4,7 +4,7 @@ page_title: Overview | Hybrid UI Collapsible
 description: "Create collapsible blocks of content by using the hybrid mobile Kendo UI Collapsible widget and learn how to nest widgets inside it."
 slug: overview_hybridcollapsible
 position: 1
-component: collapsible_mobile
+component: collapsible
 ---
 
 # Overview Collapsible

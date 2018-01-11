@@ -3,7 +3,7 @@ title: Switch
 page_title: Configuration, methods and events of Kendo UI Mobile Switch
 description: How to quickly configure the checked and unchecked state of Mobile Switch widget.
 res_type: api
-component: switch_mobile
+component: switch
 ---
 
 # kendo.mobile.ui.Switch

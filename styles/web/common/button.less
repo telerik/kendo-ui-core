@@ -90,9 +90,15 @@ input[type="reset"].k-button-expand {
     width: 100%;
 }
 
+// TODO improve elastic behavior
+.k-button-icon {
+    height: ~"calc(1.72em + (2*@{button-padding-y}) + 2px)"; // proper vertical alignment for elastic behavior
+}
+.k-split-button-arrow {
+    display: inline-block; // fix height
+}
 .k-button-icon,
 .k-split-button-arrow {
-    height: ~"calc(1.72em + (2*@{button-padding-y}) + 2px)"; // proper vertical alignment for elastic behavior
     width: ~"calc(1.72em + (2*@{button-padding-y}) + 2px)";
     padding: @button-padding-y calc(@button-padding-x/2);
 }

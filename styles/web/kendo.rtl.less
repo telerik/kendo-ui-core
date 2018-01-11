@@ -6,8 +6,8 @@
 }
 
 .k-rtl .k-badge {
-    right: auto;
-    left: -1em;
+    margin-left: 0;
+    margin-right: 6px;
 }
 
 /* AutoComplete */
@@ -920,10 +920,19 @@
 
 /* ToolBar */
 
-.k-rtl .k-overflow-anchor
-{
-    float: left;
-    border-width: 0 1px 0 0;
+
+.k-rtl {
+
+    .k-toolbar .k-overflow-anchor {
+        right: auto;
+        left: -1px;
+        border-width: 0 1px 0 0;
+    }
+
+    .k-toolbar .k-toolbar-first-visible {
+        margin-left: 0.2em;
+        margin-right: 0;
+    }
 }
 
 .k-rtl .k-toolbar .k-button-group .k-button,

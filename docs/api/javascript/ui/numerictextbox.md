@@ -3,7 +3,7 @@ title: NumericTextBox
 page_title: Configuration, methods and events of Kendo UI NumericTextBox
 description: Code examples and tips how to configure NumericTextBox widget, use available methods and events.
 res_type: api
-component: numerictextbox
+component: numeric-textbox
 ---
 
 # kendo.ui.NumericTextBox
