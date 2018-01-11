@@ -36,7 +36,6 @@ layout: index
 
     <div id="page-article">
         <article>
-            {% if page.is_main %}{% include api-filter.html %}{% endif %}
             {% if page.slug == 'knowledge_base' %}{% include kb-last-updated-articles.html %} {% else %} {{ content }} {% endif %}
         </article>
     </div>

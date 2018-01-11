@@ -6,7 +6,7 @@ page_title: Validate Whether Value Is in the Correct Format | Kendo UI DatePicke
 slug: datepicker-validate-whether-value-is-in-correct-format
 tags: kendo, ui, datepicker, datetimepicker, validate, format,correct, value,input
 res_type: kb
-component: datepicker
+component: date-time-pickers
 ---
 
 ## Environment

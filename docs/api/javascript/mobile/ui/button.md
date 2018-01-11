@@ -3,7 +3,7 @@ title: Button
 page_title: Configuration, methods and events of Kendo UI Mobile Button
 description: Find which events to use in Mobile Button Widget.
 res_type: api
-component: button_mobile
+component: mobile-button
 ---
 
 # kendo.mobile.ui.Button

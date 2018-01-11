@@ -4,7 +4,7 @@ page_title: Overview | Hybrid UI NavBar
 description: "Initialize and use the Hybrid UI NavBar widget in the Kendo UI framework."
 slug: overview_hybridnavbar
 position: 1
-component: navbar_mobile
+component: navbar
 ---
 
 # NavBar Overview

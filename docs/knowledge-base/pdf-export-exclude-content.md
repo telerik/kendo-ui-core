@@ -7,7 +7,7 @@ slug: pdf-export-exclude-content
 tags: pdf, export, content, exclude, drawing, api
 ticketid: 1135598
 res_type: kb
-component: drawing_api
+component: drawing-api
 ---
 
 ## Environment

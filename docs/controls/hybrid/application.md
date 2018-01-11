@@ -5,7 +5,7 @@ description: "Initiate the Kendo UI Application for mobile and handle its naviga
 previous_url: /howto/universal-mobile-apps-html5
 slug: overview_hybridapplication
 position: 4
-component: application_mobile
+component: application
 ---
 
 # Application

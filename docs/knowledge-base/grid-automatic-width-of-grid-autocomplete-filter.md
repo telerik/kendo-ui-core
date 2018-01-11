@@ -1,8 +1,8 @@
 ---
-title: Set the Width of the Grid Row Filter Suggestions
-description: An example of how to set the width of the Grid row filter suggestions
+title: Set the Width of the Row Filter Suggestions in Grids
+description: An example on how to set the width of the row filter suggestions in the Kendo UI Grid.
 type: how-to
-page_title: Automatic Width of the Grid AutoComplete Filter
+page_title: Set Automatic Width to the AutoComplete Filter | Kendo UI Grid
 slug: grid-automatic-width-of-grid-autocomplete-filter
 tags: grid, filter, width, suggestions
 ticketid: 1144763
@@ -10,6 +10,7 @@ res_type: kb
 ---
 
 ## Environment
+
 <table>
 	<tr>
 		<td>Product Version</td>
@@ -17,24 +18,23 @@ res_type: kb
 	</tr>
 	<tr>
 		<td>Product</td>
-		<td>Grid for Progress® Kendo UI®</td>
+		<td>Progress Kendo UI Grid</td>
 	</tr>
 </table>
 
 
 ## Description
 
-How do I set the width of the filter drop down in the grid header when there are long texts in the drop down?  Basically I do not want wrapping, but at the same time I do not want to increase the column width.
-
-The length needs to approximately match the length of the longest text.
+How can I set the width of the filter drop-down in the Grid header when the drop-down contains long texts:
+* Without wrapping the content?
+* Without increasing the column width?
+* Setting the length to approximately match the length of the longest text?
 
 ## Solution
-  
-The desired result can be achieved by programmatically setting the [autoWidth](https://docs.telerik.com/kendo-ui/api/javascript/ui/autocomplete#configuration-autoWidth) property of the AutoComplete when the Grid is [initialized](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid#events-dataBound):  
-  
-Please check the example demonstrating this:
 
-````html
+Programmatically set the [`autoWidth`](https://docs.telerik.com/kendo-ui/api/javascript/ui/autocomplete#configuration-autoWidth) property of the AutoComplete when the Grid is [initialized](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid#events-dataBound).
+
+```html
  <div id="example">
             <div id="grid"></div>
             <script>
@@ -70,7 +70,7 @@ Please check the example demonstrating this:
                             mode: "row"
                         },
                         pageable: true,
-                        columns: 
+                        columns:
                         [{
                             field: "OrderID",
                             width: 225,
@@ -107,5 +107,4 @@ Please check the example demonstrating this:
                 });
             </script>
         </div>
-````
-
+```
