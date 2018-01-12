@@ -725,6 +725,7 @@ var __meta__ = { // jshint ignore:line
                 return value === undefined || value === null ? "" : value;
             }
 
+            that._toggleCloseVisibility();
             that.requireValueMapper(that.options, value);
 
             that.trigger("set", { value: value });

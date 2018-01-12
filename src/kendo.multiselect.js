@@ -570,6 +570,7 @@ var __meta__ = { // jshint ignore:line
                 return oldValue;
             }
 
+            that._toggleCloseVisibility();
             that.persistTagList = false;
             that.requireValueMapper(that.options, value);
 
@@ -928,6 +929,7 @@ var __meta__ = { // jshint ignore:line
             that._loading.addClass(HIDDENCLASS);
             that._request = false;
             that._busy = null;
+
             that._toggleCloseVisibility();
         },
 
