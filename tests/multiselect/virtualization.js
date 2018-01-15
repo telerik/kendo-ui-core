@@ -306,6 +306,31 @@
         multiselect.value(10);
     });
 
+    asyncTest("MultiSelect selects values after open when autoBind false", 1, function() {
+        var multiselect = new MultiSelect(select, {
+            close: function(e) { e.preventDefault(); },
+            height: CONTAINER_HEIGHT,
+            autoBind: false,
+            animation: false,
+            dataTextField: "text",
+            dataValueField: "value",
+            dataSource: createAsyncDataSource(),
+            virtual: {
+                valueMapper: function(o) { o.success(o.value); },
+                itemHeight: 40
+            },
+            value: ["0", "15"]
+        });
+
+        multiselect.one("dataBound", function() {
+            start();
+            equal(multiselect.tagList.children().length, 2);
+        });
+
+        multiselect.open();
+    });
+
+
     test("request only pages related to the values after filter reset", 5, function() {
         jasmine.clock().install();
 

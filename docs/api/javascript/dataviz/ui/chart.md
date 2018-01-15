@@ -7215,6 +7215,27 @@ If set to `true` the legend items will be reversed.
 
 Available in versions 2013.3.1306 and later.
 
+### legend.spacing `Number`
+
+The spacing between the labels in pixels when the [legend.orientation](#configuration-legend.orientation) is "horizontal".
+
+#### Example - set the chart legend spacing
+
+    <div id="chart"></div>
+    <script>
+    $("#chart").kendoChart({
+      legend: {
+        position: "bottom",
+        spacing: 100
+      },
+      series: [
+        { name: "Series 1", data: [1, 2, 3] },
+        { name: "Series 2", data: [3, 4, 5] },
+        { name: "Series 3", data: [6, 7, 8] }
+      ]
+    });
+    </script>
+
 ### legend.visible `Boolean` *(default: true)*
 
 If set to `true` the chart will display the legend. By default the chart legend is visible.
@@ -18849,7 +18870,7 @@ The color of the crosshair. Accepts a valid CSS color string, including hex and 
     });
     </script>
 
-### valueAxis.crosshair.dashType `string` *(default: "solid")*
+### valueAxis.crosshair.dashType `String` *(default: "solid")*
 
 The dash type of the crosshair.
 
@@ -23364,7 +23385,7 @@ The color of the crosshair. Accepts a valid CSS color string, including hex and 
     });
     </script>
 
-### xAxis.crosshair.dashType `string` *(default: "solid")*
+### xAxis.crosshair.dashType `String` *(default: "solid")*
 
 The dash type of the crosshair.
 
@@ -28152,7 +28173,7 @@ The color of the crosshair. Accepts a valid CSS color string, including hex and 
     });
     </script>
 
-### yAxis.crosshair.dashType `string` *(default: "solid")*
+### yAxis.crosshair.dashType `String` *(default: "solid")*
 
 The dash type of the crosshair.
 
