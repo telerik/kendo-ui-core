@@ -14,9 +14,15 @@ The Window tag helper helps you configure the Kendo UI Window widget in ASP.NET 
 
 The following example demonstrates how to define the Window by using the Window tag helper.
 
+> **Important**
+>
+> A change in the Window's tag names has been introduced in R1 2018, in order to ensure tag naming consistency across the Telerik UI for ASP.NET Core suite. Previously it was possible to nest content directly within the `<kendo-window>` tag, since R1 2018 content must be nested within a `<content>` tag.
+
 ###### Example
 
-        <kendo-window name="window1">Window contents</kendo-window>
+        <kendo-window name="window1">
+			<content>Window contents</content>
+		</kendo-window>
 
 ## Configuration
 
@@ -53,19 +59,21 @@ The Window tag helper configuration options are passed as attributes of the tag.
 
         <kendo-window name="window" title="About Alvar Aalto" draggable="true"
             width="400" on-close="onClose">
-            <div class="armchair">
-                <img src="@Url.Content("~/shared/web/window/armchair-402.png")"
-                    alt="Artek Alvar Aalto - Armchair 402" />
-                Artek Alvar Aalto - Armchair 402
-            </div>
+			<content>
+				<div class="armchair">
+					<img src="@Url.Content("~/shared/web/window/armchair-402.png")"
+						alt="Artek Alvar Aalto - Armchair 402" />
+					Artek Alvar Aalto - Armchair 402
+				</div>
 
-            <p>
-                Alvar Aalto is one of the greatest names in modern architecture and design.
-                Glassblowers at the iittala factory still meticulously handcraft the legendary
-                vases that are variations on one theme, fluid organic shapes that let the end user
-                ecide the use. Interpretations of the shape in new colors and materials add to the
-                growing Alvar Aalto Collection that remains true to his original design.
-            </p>
+				<p>
+					Alvar Aalto is one of the greatest names in modern architecture and design.
+					Glassblowers at the iittala factory still meticulously handcraft the legendary
+					vases that are variations on one theme, fluid organic shapes that let the end user
+					ecide the use. Interpretations of the shape in new colors and materials add to the
+					growing Alvar Aalto Collection that remains true to his original design.
+				</p>
+			</content>
         </kendo-window>
 ```
 

@@ -14,13 +14,19 @@ The Dialog tag helper helps you configure the Kendo UI Dialog widget in ASP.NET 
 
 The following example demonstrates how to define the Dialog by using the Dialog tag helper.
 
+> **Important**
+>
+> A change in the Dialog's tags has been introduced in R1 2018, in order to allow more complex configuration of the widget. Previously it was possible to nest content directly within the `<kendo-dialog>` tag, since R1 2018 content must be nested within a `<content>` tag.
+
 ###### Example
 
-        <kendo-dialog name="dialog1">Dialog contents</kendo-dialog>
+        <kendo-dialog name="dialog1">
+			<content>Dialog contents</content>
+		</kendo-dialog>
 
 ## Configuration
 
-The Dialog tag helper configuration options are passed as attributes of the tag. Its content is placed between the opening and closing tags.
+The Dialog tag helper configuration options are passed as attributes of the tag. Its content is placed within a `<content>` tag.
 
 ###### Example
 
@@ -28,20 +34,38 @@ The Dialog tag helper configuration options are passed as attributes of the tag.
         @(Html.Kendo().Dialog()
             .Name("dialog")
             .Title("Software Update")
-            .Content("Do you agree terms and conditions?")
+            .Content("<p>A new version of <strong>Kendo UI</strong> is available. Would you like to download and install it now?<p>")
             .Modal(false)
+			.Actions(actions =>
+			{
+				actions.Add().Text("Skip this version");
+				actions.Add().Text("Remind me later");
+				actions.Add().Text("Install update").Primary(true);
+			})
             .Events(ev => ev.Close("dialog_close"))
         )
 ```
 ```tab-tagHelper
-        <kendo-dialog name="dialog" title="Software Update" closable="false" modal="false"
-                content="Do you agree terms and conditions?" on-close="dialog_close">
-        </kendo-dialog>
+		<kendo-dialog name="dialog" title="Software Update" modal="false" on-close="dialog_close">
+			<content>
+				<p>A new version of <strong>Kendo UI</strong> is available. Would you like to download and install it now?<p>
+			</content>
+			<actions>            
+				<action text="Skip this version">
+				</action>
+				<action text="Remind me later">
+				</action>
+				<action primary="true" text="Install update">
+				</action>
+			</actions>
+		</kendo-dialog>
 ```
 
-> **Important**
->
-> The Dialog tag helper does not provide options for adding actions. For more information on how to work around this limitation, refer to the demo on using the [Razor syntax helper method](http://demos.telerik.com/aspnet-core/dialog/index).
+Simple content can be set through the `content` attribute:
+
+###### Example
+
+        <kendo-dialog name="dialog" title="Software Update" content="Some content"></kendo-dalog>
 
 ## See Also
 

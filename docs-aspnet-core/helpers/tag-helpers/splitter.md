@@ -16,55 +16,59 @@ The Splitter pane tags do not automatically render `div` elements. Therefore, th
 
 The following example demonstrates how to define the Splitter by using the Splitter tag helper.
 
+> **Important**
+>
+> A change in the Splitter's tag names has been introduced in R1 2018, in order to ensure tag naming consistency across the Telerik UI for ASP.NET Core suite. Previously the tag name of the pane has been `<kendo-splitter-pane>`, since R1 2018 release it has been changed to `<pane>`.
+
 ###### Example
 
     <kendo-splitter name="vertical" orientation="SplitterOrientation.Vertical">
-        <kendo-splitter-pane scrollable="false" collapsible="false">
+        <pane scrollable="false" collapsible="false">
             <div id="top-pane">
                 <kendo-splitter name="horizontal" style="height: 100%; width:100%;" orientation="SplitterOrientation.Horizontal">
-                    <kendo-splitter-pane size="220px" collapsible="true">
+                    <pane size="220px" collapsible="true">
                         <div id="left-pane">
                             <div class="pane-content">
                                 <h3>Inner splitter / left pane</h3>
                                 <p>Resizable and collapsible.</p>
                             </div>
                         </div>
-                    </kendo-splitter-pane>
-                    <kendo-splitter-pane>
+                    </pane>
+                    <pane>
                         <div id="center-pane">
                             <div class="pane-content">
                                 <h3>Inner splitter / center pane</h3>
                                 <p>Resizable only.</p>
                             </div>
                         </div>
-                    </kendo-splitter-pane>
-                    <kendo-splitter-pane size="220px" collapsible="true">
+                    </pane>
+                    <pane size="220px" collapsible="true">
                         <div id="right-pane">
                             <div class="pane-content">
                                 <h3>Inner splitter / right pane</h3>
                                 <p>Resizable and collapsible.</p>
                             </div>
                         </div>
-                    </kendo-splitter-pane>
+                    </pane>
                 </kendo-splitter>
             </div>
-        </kendo-splitter-pane>
-        <kendo-splitter-pane size="100px" collapsible="false">
+        </pane>
+        <pane size="100px" collapsible="false">
             <div id="middle-pane">
                 <div class="pane-content">
                     <h3>Outer splitter / middle pane</h3>
                     <p>Resizable only.</p>
                 </div>
             </div>
-        </kendo-splitter-pane>
-        <kendo-splitter-pane size="100px" collapsible="false" resizable="false">
+        </pane>
+        <pane size="100px" collapsible="false" resizable="false">
             <div id="bottom-pane">
                 <div class="pane-content">
                     <h3>Outer splitter / bottom pane</h3>
                     <p>Non-resizable and non-collapsible.</p>
                 </div>
             </div>
-        </kendo-splitter-pane>
+        </pane>
     </kendo-splitter>
 
 
@@ -101,7 +105,7 @@ The Splitter tag helper supports all the configuration options that the HtmlHelp
 ```tab-tagHelper
 
         <kendo-splitter name="splitter1" orientation="SplitterOrientation.Vertical">
-            <kendo-splitter-pane collapsed="false" collapsed-size="240px" collapsible="true"
+            <pane collapsed="false" collapsed-size="240px" collapsible="true"
                                  content-url="optionalUrl" max-size="240px" min-size="240px"
                                  resizable="true" scrollable="true" size="240px">
                 <div id="top-pane">
@@ -109,7 +113,7 @@ The Splitter tag helper supports all the configuration options that the HtmlHelp
                         Top Pane Content
                     </div>
                 </div>
-            </kendo-splitter-pane>
+            </pane>
         </kendo-splitter>
 ```
 

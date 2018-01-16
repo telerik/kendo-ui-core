@@ -32,14 +32,9 @@ The DropDownList tag helper configuration options are passed as attributes of th
           .DataValueField("ProductID")
           .HtmlAttributes(new { style = "width:100%;" })
           .Filter(FilterType.Contains)
-          .DataSource(source =>
-          {
-              source.Read(read =>
-              {
-                  read.Action("GetProducts", "Home");
-              })
-              .ServerFiltering(true);
-          })
+          .DataSource(source => source
+              .Read(read => read.Action("GetProducts", "Home"))
+          )
     )
 ```
 ```tab-tagHelper
@@ -49,18 +44,12 @@ The DropDownList tag helper configuration options are passed as attributes of th
                         datatextfield="ProductName"
                         datavaluefield="ProductID"
                         style="width: 100%;">
-        <datasource type="DataSourceTagHelperType.Custom" server-filtering="true">
+        <datasource type="DataSourceTagHelperType.Custom">
             <transport>
-                <read url="@Url.Action("GetProducts", "Home")" data="onAdditionalData" />
+                <read url="@Url.Action("GetProducts", "Home")" />
             </transport>
         </datasource>
     </kendo-dropdownlist>
-
-    <script>
-        function onAdditionalData() {
-            return kendo.ui.DropDownList.requestData(jQuery("#products"));
-        }
-    </script>
 ```
 
 ## See Also

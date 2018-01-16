@@ -1297,4 +1297,17 @@
 
         equal(dropdownlist.noData, null);
     });
+
+    test("open, close and refresh - the popup should be closed", function() {
+        var dropdownlist = new DropDownList(input, {
+            dataSource: ["Apples", "Oranges"],
+            animation: false
+        });
+
+        dropdownlist.open();
+        dropdownlist.close();
+        dropdownlist.refresh();
+
+        equal(dropdownlist.popup.visible(), false);
+    });
 })();

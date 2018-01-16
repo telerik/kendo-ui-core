@@ -14,6 +14,10 @@ The Upload tag helper helps you configure the Kendo UI Upload widget in ASP.NET 
 
 The following example demonstrates how to define the Upload by using the Upload tag helper.
 
+> **Important**
+>
+> A change in the Upload's tag names has been introduced in R1 2018, in order to ensure tag naming consistency across the Telerik UI for ASP.NET Core suite. Since R1 2018 release the `<kendo-upload-async-settings> tag name has been changed to `<async>`, `<kendo-upload-files>` to `<files>`, `<kendo-upload-file>` to `<file>`, `<kendo-upload-localization-settings>` to `<localization>`, `<kendo-upload-validation-settings>` to `<validation>`.
+
 ###### Example
 
         <kendo-upload drop-zone="drop-zone1" name="test">

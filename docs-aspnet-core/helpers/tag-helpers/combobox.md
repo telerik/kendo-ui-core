@@ -35,14 +35,9 @@ The ComboBox tag helper configuration options are passed as attributes of the ta
           .Filter(FilterType.Contains)
           .AutoBind(false)
           .MinLength(3)
-          .DataSource(source =>
-          {
-              source.Read(read =>
-              {
-                  read.Action("GetProducts", "Home");
-              })
-              .ServerFiltering(true);
-          })
+          .DataSource(source => source
+              .Read(read => read.Action("GetProducts", "Home"))
+          )
     )
 ```
 ```tab-tagHelper
@@ -53,18 +48,12 @@ The ComboBox tag helper configuration options are passed as attributes of the ta
                         datavaluefield="ProductID"
                         auto-bind="false"
                         min-length="3" style="width: 100%;">
-        <datasource type="DataSourceTagHelperType.Custom" server-filtering="true">
+        <datasource type="DataSourceTagHelperType.Custom">
             <transport>
-                <read url="@Url.Action("GetProducts", "Home")" data="onAdditionalData" />
+                <read url="@Url.Action("GetProducts", "Home")" />
             </transport>
         </datasource>
     </kendo-combobox>
-
-    <script>
-        function onAdditionalData() {
-            return kendo.ui.ComboBox.requestData(jQuery("#products"));
-        }
-    </script>
 ```
 
 ## See Also
