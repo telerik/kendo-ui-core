@@ -16,16 +16,16 @@ The following example demonstrates how to define the Upload by using the Upload 
 
 > **Important**
 >
-> A change in the Upload's tag names has been introduced in R1 2018, in order to ensure tag naming consistency across the Telerik UI for ASP.NET Core suite. Since R1 2018 release the `<kendo-upload-async-settings> tag name has been changed to `<async>`, `<kendo-upload-files>` to `<files>`, `<kendo-upload-file>` to `<file>`, `<kendo-upload-localization-settings>` to `<localization>`, `<kendo-upload-validation-settings>` to `<validation>`.
+> A change in the Upload's tag names has been introduced in R1 2018, in order to ensure tag naming consistency across the Telerik UI for ASP.NET Core suite. Since R1 2018 release the `<kendo-upload-async-settings>` tag name has been changed to `<async>`, `<kendo-upload-files>` to `<files>`, `<kendo-upload-file>` to `<file>`, `<kendo-upload-localization-settings>` to `<localization>`, `<kendo-upload-validation-settings>` to `<validation>`.
 
 ###### Example
 
         <kendo-upload drop-zone="drop-zone1" name="test">
-            <kendo-upload-async-settings auto-upload="true" />
-            <kendo-upload-validation-settings allowed-extensions="@Model.Extensions" />
-            <kendo-upload-files>
-                <kendo-upload-file name="dummy" size="1024"/>
-            </kendo-upload-files>
+            <async auto-upload="true" />
+            <validation allowed-extensions="@Model.Extensions" />
+            <files>
+                <file name="dummy" size="1024" />
+            </files>
         </kendo-upload>
 
 
@@ -46,11 +46,11 @@ The Upload tag helper configuration options are passed as attributes of the tag 
 ```
 ```tab-tagHelper
         <kendo-upload drop-zone="drop-zone1" name="test">
-            <kendo-upload-async-settings auto-upload="true" />
-            <kendo-upload-validation-settings allowed-extensions="@Model.Extensions" />
-            <kendo-upload-files>
-                <kendo-upload-file name="dummy" size="1024"/>
-            </kendo-upload-files>
+            <async auto-upload="true" />
+            <validation allowed-extensions="@Model.Extensions" />
+            <files>
+                <file name="dummy" size="1024" />
+            </files>
         </kendo-upload>
 ```
 
