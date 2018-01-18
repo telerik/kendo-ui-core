@@ -45,7 +45,7 @@ The following example demonstrates how to initialize the ButtonGroup.
 
 ## Icons
 
-Kendo UI ButtonGroup provides a method for configuring icons - `.Icon()`.
+The ButtonGroup provides the `.Icon()` method for configuring icons.
 
 ###### Example
 
@@ -72,7 +72,7 @@ Kendo UI ButtonGroup provides a method for configuring icons - `.Icon()`.
             }) %>
 ```
 
-The above configuration is expected to produce the HTML output from the following example.
+The previous configuration is expected to produce the HTML output from the following example.
 
 ###### Example
 
@@ -92,46 +92,46 @@ The above configuration is expected to produce the HTML output from the followin
 
 ### Enable and Disable ButtonGroup
 
-Kendo UI ButtonGroup can be configured to be initially disabled via its `.Enable()` setting. The ButtonGroup can also be disabled or enabled at any time with JavaScript by using its `.Enable()` method with a Boolean argument.
-
-The example below demonstrates how to enable and disable the ButtonGroup.
-
-The following example demonstrates how to use `.Enable()`.
-
-###### Example
-
-```tab-Razor
-
-        @(Html.Kendo().ButtonGroup()
-            .Name("select-period")
-            .Enable(false)
-            .Items(t =>
-                {
-                        t.Add().Text("Month");
-                        t.Add().Text("Quarter");
-                        t.Add().Text("Year");
-                }))
-```
-```tab-ASPX
-
-        <%= Html.Kendo().ButtonGroup()
-            .Name("select-period")
-            .Enable(false)
-            .Items(t =>
-                {
-                        t.Add().Text("Month");
-                        t.Add().Text("Quarter");
-                        t.Add().Text("Year");
-                }) %>
-```
+You can configure the ButtonGroup as initially disabled by using its `.Enable()` setting. The ButtonGroup can also be disabled or enabled at any time with JavaScript by using its `.Enable()` method with a Boolean argument.
 
 For more information on the [`enable` method of the ButtonGroup](http://docs.telerik.com/kendo-ui/api/javascript/ui/buttongroup#methods-enable), refer to the [API of the ButtonGroup control](http://docs.telerik.com/kendo-ui/api/javascript/ui/buttongroup).
 
+The following example demonstrates how to enable and disable the ButtonGroup over the `.Enable()` configuration.
+
+###### Example
+
+```tab-Razor
+
+        @(Html.Kendo().ButtonGroup()
+            .Name("select-period")
+            .Enable(false)
+            .Items(t =>
+                {
+                        t.Add().Text("Month");
+                        t.Add().Text("Quarter");
+                        t.Add().Text("Year");
+                }))
+```
+```tab-ASPX
+
+        <%= Html.Kendo().ButtonGroup()
+            .Name("select-period")
+            .Enable(false)
+            .Items(t =>
+                {
+                        t.Add().Text("Month");
+                        t.Add().Text("Quarter");
+                        t.Add().Text("Year");
+                }) %>
+```
+
 ### Index
 
-Initially selected index of the Kendo UI ButtonGroup can be configured via its `index` property. An index could be selected via `select()` method with a Integer argument.
+You can configure the initially selected index of the ButtonGroup by using its `index` property. An index can be selected through the `select()` method with a Integer argument.
 
-The example below demonstrates how to select a button by its index.
+For more information on the [`index` setting of the ButtonGroup](http://docs.telerik.com/kendo-ui/api/javascript/ui/buttongroup#configuration-index), refer to the [API of the ButtonGroup control](http://docs.telerik.com/kendo-ui/api/javascript/ui/buttongroup).
+
+The following example demonstrates how to select a button by its index.
 
 ###### Example
 
@@ -160,12 +160,11 @@ The example below demonstrates how to select a button by its index.
                 }) %>
 ```
 
-For more information on the [`index` setting of the ButtonGroup](http://docs.telerik.com/kendo-ui/api/javascript/ui/buttongroup#configuration-index), refer to the [API of the ButtonGroup control](http://docs.telerik.com/kendo-ui/api/javascript/ui/buttongroup).
-
-
 ### Selection
 
-Kendo UI ButtonGroup can restrict the numbers of Buttons that can be selected via its `.Selection()` property. It can be configured with `single` or `multiple` selection.
+The ButtonGroup enables you to restrict the number of Buttons that can be selected through its `.Selection()` property. The property can be configured for a `single` or `multiple` selection.
+
+For more information on the [`selection` setting of the ButtonGroup](http://docs.telerik.com/kendo-ui/api/javascript/ui/buttongroup#configuration-selection), refer to the [API of the ButtonGroup control](http://docs.telerik.com/kendo-ui/api/javascript/ui/buttongroup).
 
 The following example demonstrates how to use `.Selection()`.
 
@@ -195,8 +194,6 @@ The following example demonstrates how to use `.Selection()`.
                         t.Add().Text("Year");
                 }) %>
 ```
-
-For more information on the [`selection` setting of the ButtonGroup](http://docs.telerik.com/kendo-ui/api/javascript/ui/buttongroup#configuration-selection), refer to the [API of the ButtonGroup control](http://docs.telerik.com/kendo-ui/api/javascript/ui/buttongroup).
 
 ## Reference
 

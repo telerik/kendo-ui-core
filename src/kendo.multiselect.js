@@ -500,6 +500,18 @@ var __meta__ = { // jshint ignore:line
             } else if (that._allowOpening()) {
                 // In some cases when the popup is opened resize is triggered which will cause it to close
                 // Setting the below flag will prevent this from happening
+                if (!that.options.autoBind && that.tagList.children().length !== that.value().length) {
+                    var dataItems = that.listView._valueIndices(that._initialValues).map(function (index) {
+                        return {
+                            dataItem: that.listView.dataItemByIndex(index)
+                        };
+                    });
+                    that.persistTagList = false;
+                    that.listView.selectedDataItems(dataItems);
+                    that._selectValue(dataItems, []);
+                    that.persistTagList = true;
+                }
+
                 that.popup._hovered = true;
                 that.popup.open();
                 that._focusItem();

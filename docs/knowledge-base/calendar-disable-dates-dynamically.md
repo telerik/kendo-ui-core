@@ -1,5 +1,5 @@
 ---
-title: Disable Dates in Calendar Dynamically
+title: Disable Dynamically Dates in Calendar
 description: An example on how to dynamically disable dates in the Kendo UI Calendar.
 type: how-to
 page_title: Disable Dates Dynamically | Kendo UI Calendar

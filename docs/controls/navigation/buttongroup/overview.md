@@ -14,14 +14,14 @@ The [Kendo UI ButtonGroup widget](http://demos.telerik.com/kendo-ui/buttongroup/
 
 ### Initialize the ButtonGroup
 
-The Kendo UI ButtonGroup widget can be initialized in two ways:
+To initialize the ButtonGroup, either use:
 
-* From HTML markup
-* From a JSON data object
+* HTML markup, or
+* A JSON data object.
 
 #### Using HTML Markup
 
-The example below demonstrates how to initialize Kendo UI ButtonGroup from HTML markup.
+The following example demonstrates how to initialize Kendo UI ButtonGroup from HTML markup.
 
 ###### Example
 
@@ -37,7 +37,7 @@ The example below demonstrates how to initialize Kendo UI ButtonGroup from HTML 
 
 #### Using JSON Data Object
 
-The example below demonstrates how to initialize Kendo UI ButtonGroup from a JSON data object.
+The following example demonstrates how to initialize Kendo UI ButtonGroup from a JSON data object.
 
 ###### Example
 
@@ -55,11 +55,13 @@ The example below demonstrates how to initialize Kendo UI ButtonGroup from a JSO
 
 ## Configuration
 
-### Enable or Disable ButtonGroup
+### Enable or Disable the ButtonGroup
 
-Kendo UI ButtonGroup can be configured to be initially disabled via its `enable` property. The ButtonGroup can also be disabled or enabled at any time with JavaScript by using its `enable()` method with a Boolean argument.
+You can configure the ButtonGroup to be initially disabled by using its `enable` property. The ButtonGroup can also be disabled or enabled at any time with JavaScript by using the `enable()` method with a Boolean argument.
 
-The example below demonstrates how to enable and disable the ButtonGroup.
+For more information on the [`enable`](/api/javascript/ui/ButtonGroup#configuration-enable) property and the [`enable`](/api/javascript/ui/ButtonGroup#methods-enable) method of the ButtonGroup, refer to the [ButtonGroup API](/api/javascript/ui/ButtonGroup).
+
+The following example demonstrates how to enable and disable the ButtonGroup.
 
 ###### Example
 
@@ -84,13 +86,13 @@ The example below demonstrates how to enable and disable the ButtonGroup.
 
 	</script>
 
-For more information on the ButtonGroup [`enable` property](/api/javascript/ui/ButtonGroup#configuration-enable) and the [`enable` method](/api/javascript/ui/ButtonGroup#methods-enable), refer to the [ButtonGroup API](/api/javascript/ui/ButtonGroup).
-
 ### Index
 
-Initially selected index of the Kendo UI ButtonGroup can be configured via its `index` property. An index could be selected via `select()` method with a Integer argument.
+The initially selected index of the ButtonGroup can be configured by using its `index` property. An index can also be selected over the `select()` method with an Integer argument.
 
-The example below demonstrates how to select a button by its index.
+For more information on the [`index`](/api/javascript/ui/ButtonGroup#configuration-index) property and the [`select`](/api/javascript/ui/ButtonGroup#methods-select) method of the ButtonGroup, refer to the [ButtonGroup API](/api/javascript/ui/ButtonGroup).
+
+The following example demonstrates how to select a button by its index.
 
 ###### Example
 
@@ -115,11 +117,9 @@ The example below demonstrates how to select a button by its index.
 
 	</script>
 
-For more information on the ButtonGroup [`index` property](/api/javascript/ui/ButtonGroup#configuration-index) and the [`select` method](/api/javascript/ui/ButtonGroup#methods-select), refer to the [ButtonGroup API](/api/javascript/ui/ButtonGroup).
-
 ### Selection
 
-Kendo UI ButtonGroup can restrict the numbers of Buttons that can be selected via its selection property. It can be configured with `single` or `multiple` selection.
+The Kendo UI ButtonGroup enables you to restrict the number of Buttons that can be selected through the `selection` property. The property can be configured for a `single` or `multiple` selection.
 
 ###### Example
 
@@ -135,9 +135,9 @@ Kendo UI ButtonGroup can restrict the numbers of Buttons that can be selected vi
         });
     </script>
 
-### Add Icons
+### Icons
 
-Kendo UI ButtonGroup provides two properties for configuring icons - `icon` and `imageUrl`. Use only one of them with a particular Button instance.
+The ButtonGroup provides the `icon` and `imageUrl` properties for configuring icons. To set a particular Button instance, use only one of them.
 
 ###### Example
 
@@ -153,9 +153,11 @@ Kendo UI ButtonGroup provides two properties for configuring icons - `icon` and 
         });
     </script>
 
-### Add Badges
+### Badges
 
-Kendo UI ButtonGroup provides possibility to add badges in its Buttons. You could use `badge` property or the `badge` method for update or add operation.
+The ButtonGroup provides options for adding badges to its Buttons. To add or update badges, use the `badge` property or the `badge` method.
+
+For more information on the ButtonGroup [`badge` method](/api/javascript/ui/ButtonGroup#methods-badge), refer to the [ButtonGroup API](/api/javascript/ui/ButtonGroup).
 
 ###### Example
 
@@ -171,11 +173,9 @@ Kendo UI ButtonGroup provides possibility to add badges in its Buttons. You coul
         });
     </script>
 
-For more information on the ButtonGroup [`badge` method](/api/javascript/ui/ButtonGroup#methods-badge), refer to the [ButtonGroup API](/api/javascript/ui/ButtonGroup).
-
 ### Accessibility
 
-Kendo UI ButtonGroup container has a `role=group` attribute that semantically defines the group of the buttons. The togglable buttons use `aria-pressed` attribute and have the `role="button"` role. Initializing a ButtonGroup from `ul` element requires setting a corresponding tabindex to the child `li` elements. Changing focused Button in the Kendo ButtonGroup could be made via Left/Right keyboard navigation.
+The ButtonGroup container has a `role=group` attribute that semantically defines the group of the buttons. The togglable buttons use the `aria-pressed` attribute and adopt the `role="button"` role. Initializing a ButtonGroup from a `ul` element requires you to set a corresponding tabindex to the child `li` elements. To change the focused Button in the ButtonGroup, usea the `Left Arrow` or `Right Arrow` keys.
 
 ## See Also
 

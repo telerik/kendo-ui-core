@@ -16,7 +16,7 @@ The following example demonstrates how to define the Window by using the Window 
 
 > **Important**
 >
-> A change in the Window's tag names has been introduced in R1 2018, in order to ensure tag naming consistency across the Telerik UI for ASP.NET Core suite. Previously it was possible to nest content directly within the `<kendo-window>` tag, since R1 2018 content must be nested within a `<content>` tag.
+> To ensure the tag-naming consistency across the Telerik UI for ASP.NET Core suite, the Kendo UI R1 2018 release introduces a change in the tag names of the Window. Previously, it was possible to nest content directly in the `<kendo-window>` tag while now, after the release, the content must be nested within a `<content>` tag.
 
 ###### Example
 

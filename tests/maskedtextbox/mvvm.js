@@ -292,4 +292,16 @@
         dom.data("kendoMaskedTextBox").value("(42)");
         dom.data("kendoMaskedTextBox").trigger("change");
     });
+
+    test("mask should not be parsed to number", function() {
+        dom = $('<input data-bind="value:value" data-mask="000" data-role="maskedtextbox"/>');
+
+        var observable = kendo.observable({
+            value: "123aaa",
+        });
+
+        kendo.bind(dom, observable);
+
+        equal(dom.val(), "123")
+    });
 })();

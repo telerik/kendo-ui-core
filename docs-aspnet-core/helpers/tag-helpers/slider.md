@@ -1,6 +1,6 @@
 ---
-title: Slider 
-page_title: Slider  | Telerik UI for ASP.NET Core Tag Helpers
+title: Slider
+page_title: Slider | Telerik UI for ASP.NET Core Tag Helpers
 description: "Learn the basics when working with the Slider tag helper for ASP.NET Core (MVC 6 or ASP.NET Core MVC)."
 previous_url: /aspnet-core/helpers/slider
 slug: taghelpers_slider_aspnetcore
@@ -18,7 +18,7 @@ The following example demonstrates how to define the Slider by using the Slider 
 
         <kendo-slider name="slider"
                       increase-button-title="Right"
-                      decrease-button-title="Left" 
+                      decrease-button-title="Left"
                       min="0" max="30"
                       small-step="1"
                       large-step="10"
@@ -47,7 +47,7 @@ The Slider tag helper configuration options are passed as attributes of the tag.
 
         <kendo-slider name="slider"
                       increase-button-title="Right"
-                      decrease-button-title="Left" 
+                      decrease-button-title="Left"
                       min="0" max="30"
                       small-step="1"
                       large-step="10"

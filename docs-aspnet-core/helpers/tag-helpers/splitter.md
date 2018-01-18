@@ -18,7 +18,7 @@ The following example demonstrates how to define the Splitter by using the Split
 
 > **Important**
 >
-> A change in the Splitter's tag names has been introduced in R1 2018, in order to ensure tag naming consistency across the Telerik UI for ASP.NET Core suite. Previously the tag name of the pane has been `<kendo-splitter-pane>`, since R1 2018 release it has been changed to `<pane>`.
+> To ensure the tag-naming consistency across the Telerik UI for ASP.NET Core suite, the Kendo UI R1 2018 release introduces a change in the tag names of the Splitter. Previously, the tag name of the pane was `<kendo-splitter-pane>` while now, after the release, it is changed to `<pane>`.
 
 ###### Example
 

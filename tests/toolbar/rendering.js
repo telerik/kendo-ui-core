@@ -90,6 +90,28 @@
         ok(button.hasClass("k-state-disabled"));
     });
 
+    test("splitbutton with enable: false receives k-state-disabled class", 2, function() {
+        container.kendoToolBar({
+            items: [{
+                    type: "splitButton",
+                    id: "foo",
+                    text: "foo",
+                    enable: false,
+                    menuButtons: [
+                        { id: "btn", text: "text" }
+                    ]
+                }
+            ]
+        });
+
+
+        var mainbutton = container.find("#foo");
+        var splitbutton = mainbutton.parent(".k-split-button");
+
+        ok(mainbutton.hasClass("k-state-disabled"));
+        ok(splitbutton.hasClass("k-state-disabled"));
+    });
+
     test("by default button does not have k-primary class", 1, function() {
         container.kendoToolBar({
             items: [

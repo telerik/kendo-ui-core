@@ -16,11 +16,13 @@ Note that the content of this article necessitates your understanding of the [fu
 
 The Button widget can be initialized from any element with any content. However, using the `button` or `a` elements is more reasonable. When using a `button` element inside a `form`, you should be aware that the default `type` HTML attribute for buttons is `submit`. Clicking the button will submit the form and reload the page. If this is not desired, then use an explicit `type="button"` HTML attribute.
 
-Kendo UI Button can include both inline and block elements, but make sure to take into account web standards, which prohibit placing block elements&mdash;for example, `div` and `p`&mdash;inside inline elements&mdash;for example, `a` and `span`.
+The Kendo UI Button can include both inline and block elements, but make sure to take into account web standards, which prohibit placing block elements&mdash;for example, `div` and `p`&mdash;inside inline elements&mdash;for example, `a` and `span`.
 
-Placing clickable elements with their own special behavior inside the Button widget (e.g., hyperlinks, textboxes, etc.) may cause undesired side effects.
+Placing clickable elements with their own special behavior inside the Button widget (for example, hyperlinks, textboxes, and other) may cause undesired side effects.
 
 ### Initialize the Button
+
+The following example demonstrates how to initialize a single button.
 
     <button type="button" id="refreshButton">Refresh</button>
 

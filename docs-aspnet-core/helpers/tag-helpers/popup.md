@@ -1,6 +1,6 @@
 ---
-title: Popup 
-page_title: Popup  | Telerik UI for ASP.NET Core Tag Helpers
+title: Popup
+page_title: Popup | Telerik UI for ASP.NET Core Tag Helpers
 description: "Learn the basics when working with the Popup tag helper for ASP.NET Core (MVC 6 or ASP.NET Core MVC)."
 previous_url: /aspnet-core/helpers/popup
 slug: taghelpers_popup_aspnetcore
@@ -12,7 +12,9 @@ The Popup tag helper helps you configure the Kendo UI Popup widget in ASP.NET Co
 
 ## Basic Usage
 
-The Popup is used in the configuration of other tag helpers. The following example demonstrates how to define the popup animation configuration of the Kendo UI Tooltip tag helper.
+The Popup is used in the configuration of other tag helpers.
+
+The following example demonstrates how to define the popup animation configuration of the Kendo UI Tooltip tag helper.
 
 ###### Example
 

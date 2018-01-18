@@ -21,7 +21,7 @@ position: 1
 
 ### Download and Install
 
-You can download Progress Telerik UI for PHP from the [official download page](http://demos.telerik.com/php-ui/). The distribution `.zip` file contains the following directories:
+You can download Progress Telerik UI for PHP from the [official download page](https://www.telerik.com/account/product-download?product=KENDOUIPHP). The distribution `.zip` file contains the following directories:
 
 * `/js`&mdash;These are the minified JavaScript files.
 * `/styles`&mdash;The minified CSS files and background images used by the themes.

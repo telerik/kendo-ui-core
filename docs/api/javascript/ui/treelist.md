@@ -617,7 +617,7 @@ is displayed in the column header cell.
 
 ### columns.minScreenWidth `Number`
 
-The pixel screen width below which the column will be hidden. The setting takes precedence over the [`hidden`](/api/javascript/ui/grid#configuration-columns.hidden) setting,
+The pixel screen width below which the column will be hidden. The setting takes precedence over the [`hidden`](/api/javascript/ui/treelist#configuration-columns.hidden) setting,
 so the two should not be used at the same time.
 
 #### Example - lockable columns
@@ -757,7 +757,7 @@ The text that is displayed in the column header cell. If not set the [field](#co
 
 ### columns.width `String|Number`
 
-The width of the column. Numeric values are treated as pixels. **For more important information, please refer to [Column Widths](/web/grid/walkthrough#column-widths)**.
+The width of the column. Numeric values are treated as pixels. **For more important information, please refer to [Column Widths](/web/treelist/walkthrough#column-widths)**.
 
 #### Example - set the column width as a string
      <div id="treelist"></div>
@@ -813,7 +813,7 @@ If set to `true` the column will not be displayed in the treelist. By default al
 
 ### columns.menu `Boolean`
 
-If set to `true` the column will be visible in the grid column menu. By default the column menu includes all data-bound columns (ones that have their [field](#configuration-columns.field) set).
+If set to `true` the column will be visible in the treelist column menu. By default the column menu includes all data-bound columns (ones that have their [field](#configuration-columns.field) set).
 
 #### Example - hide a column from the column menu
 
@@ -837,7 +837,7 @@ If set to `true` the column will be visible in the grid column menu. By default 
 
 ### columns.locked `Boolean` *(default: false)*
 
-If set to `true` the column will be displayed as locked (frozen) in the treelist. Also see the information about [Frozen Columns](/controls/data-management/grid/appearance#locked-columns) in the Grid Appearance article.
+If set to `true` the column will be displayed as locked (frozen) in the treelist. Also see the information about [Frozen Columns](/controls/data-management/treelist/appearance#locked-columns) in the Grid Appearance article.
 
 #### Example - locked columns
 
@@ -1582,7 +1582,7 @@ If set to `true` the user can filter the data source using the treelist filter m
 
 Can be set to a JavaScript object which represents the filter menu configuration.
 
-> All other [`filterable` options from Grid](/api/javascript/ui/grid#configuration-filterable) can be used, except for `filterable.mode`, which is always `menu`.
+> All other [`filterable` options from Grid](/api/javascript/ui/treelist#configuration-filterable) can be used, except for `filterable.mode`, which is always `menu`.
 
 #### Example - enable and configure filtering
 
@@ -1676,9 +1676,9 @@ If set to `true` the filter menu allows the user to input a second criteria.
 The text messages displayed in the filter menu. Use it to customize or localize the filter menu messages.
 
 #### Example - customize filter menu messages
-    <div id="grid"></div>
+    <div id="treelist"></div>
     <script>
-    $("#grid").kendoTreeList({
+    $("#treelist").kendoTreeList({
       columns: [
         { field: "name" },
         { field: "age" }
@@ -1704,9 +1704,9 @@ The text of the option which represents the "and" logical operation.
 
 #### Example - set the "and" message
 
-    <div id="grid"></div>
+    <div id="treelist"></div>
     <script>
-    $("#grid").kendoTreeList({
+    $("#treelist").kendoTreeList({
       columns: [
         { field: "name" },
         { field: "age" }
@@ -1729,9 +1729,9 @@ The text of the button which clears the filter.
 
 #### Example - set the "clear" message
 
-    <div id="grid"></div>
+    <div id="treelist"></div>
     <script>
-    $("#grid").kendoTreeList({
+    $("#treelist").kendoTreeList({
       columns: [
         { field: "name" },
         { field: "age" }
@@ -1754,9 +1754,9 @@ The text of the button which applies the filter.
 
 #### Example - set the "filter" message
 
-    <div id="grid"></div>
+    <div id="treelist"></div>
     <script>
-    $("#grid").kendoTreeList({
+    $("#treelist").kendoTreeList({
       columns: [
         { field: "name" },
         { field: "age" }
@@ -1779,9 +1779,9 @@ The text of the information message on the top of the filter menu.
 
 #### Example - set the "info" message
 
-    <div id="grid"></div>
+    <div id="treelist"></div>
     <script>
-    $("#grid").kendoTreeList({
+    $("#treelist").kendoTreeList({
       columns: [
         { field: "name" },
         { field: "age" }
@@ -1807,9 +1807,9 @@ The text rendered for the title attribute of the filter menu form.
 The text of the radio button for `false` values. Displayed when filtering `Boolean` fields.
 
 #### Example - set the "isFalse" message
-    <div id="grid"></div>
+    <div id="treelist"></div>
     <script>
-    $("#grid").kendoTreeList({
+    $("#treelist").kendoTreeList({
       columns: [
         { field: "active" }
       ],
@@ -1839,9 +1839,9 @@ The text of the radio button for `false` values. Displayed when filtering `Boole
 The text of the radio button for `true` values. Displayed when filtering `Boolean` fields.
 
 #### Example - set the "isTrue" message
-    <div id="grid"></div>
+    <div id="treelist"></div>
     <script>
-    $("#grid").kendoTreeList({
+    $("#treelist").kendoTreeList({
       columns: [
         { field: "active" }
       ],
@@ -1872,9 +1872,9 @@ The text of the option which represents the "or" logical operation.
 
 #### Example - set the "or" message
 
-    <div id="grid"></div>
+    <div id="treelist"></div>
     <script>
-    $("#grid").kendoTreeList({
+    $("#treelist").kendoTreeList({
       columns: [
         { field: "name" },
         { field: "age" }
@@ -1897,9 +1897,9 @@ The text of the DropDownList displayed in the filter menu for columns whose [val
 
 #### Example - set the "selectValue" message
 
-    <div id="grid"></div>
+    <div id="treelist"></div>
     <script>
-    $("#grid").kendoTreeList({
+    $("#treelist").kendoTreeList({
       columns: [
         { field: "productName" },
         { field: "category", values: [
@@ -1926,9 +1926,9 @@ The text of the cancel button in the filter menu header (available in mobile mod
 
 #### Example - set the cancel button text
 
-    <div id="grid"></div>
+    <div id="treelist"></div>
     <script>
-    $("#grid").kendoTreeList({
+    $("#treelist").kendoTreeList({
       columns: [
         { field: "productName" },
         { field: "category", values: [
@@ -1956,9 +1956,9 @@ The text of the operator item in filter menu (available in mobile mode only).
 
 #### Example - set the text of operator item
 
-    <div id="grid"></div>
+    <div id="treelist"></div>
     <script>
-    $("#grid").kendoTreeList({
+    $("#treelist").kendoTreeList({
       columns: [
         { field: "productName" },
         { field: "category", values: [
@@ -3159,7 +3159,7 @@ The click handler of the toolbar command. Used for custom toolbar commands.
 
 ### toolbar.name `String`
 
-The name of the toolbar command. Either a built-in ("create", "excel", "pdf") or custom. The `name` is reflected in one of the CSS classes, which is applied to the button - `k-grid-name`.
+The name of the toolbar command. Either a built-in ("create", "excel", "pdf") or custom. The `name` is reflected in one of the CSS classes, which is applied to the button - `k-treelist-name`.
 This class can be used to get a reference to the button (after TreeList initialization) and attach click handlers.
 
 #### Example - specify the name of the command
@@ -3209,7 +3209,7 @@ The text displayed by the command button. If not set the [name](#configuration-t
 
 The columns of the treelist initialized from the [columns](#configuration-columns) option. Every item from the `columns` array has the same fields as the corresponding [columns](#configuration-columns) option.
 
-#### Example - iterate the grid columns
+#### Example - iterate the treelist columns
     <div id="treelist"></div>
 	<script>
 		$("#treelist").kendoTreeList({

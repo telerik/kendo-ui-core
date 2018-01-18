@@ -16,7 +16,12 @@ The following example demonstrates how to define the Upload by using the Upload 
 
 > **Important**
 >
-> A change in the Upload's tag names has been introduced in R1 2018, in order to ensure tag naming consistency across the Telerik UI for ASP.NET Core suite. Since R1 2018 release the `<kendo-upload-async-settings>` tag name has been changed to `<async>`, `<kendo-upload-files>` to `<files>`, `<kendo-upload-file>` to `<file>`, `<kendo-upload-localization-settings>` to `<localization>`, `<kendo-upload-validation-settings>` to `<validation>`.
+> To ensure the tag-naming consistency across the Telerik UI for ASP.NET Core suite, the Kendo UI R1 2018 release introduces a change in the tag names of the Upload. As of the Kendo UI R1 2018 release:
+> * The `<kendo-upload-async-settings>` tag name is changed to `<async>`
+> * The `<kendo-upload-files>` tag name is changed to `<files>`.
+> * The `<kendo-upload-file>` tag name is changed to `<file>`.
+> * The `<kendo-upload-localization-settings>` tag name is changed to `<localization>`.
+> * The `<kendo-upload-validation-settings>` tag name is changed to `<validation>`.
 
 ###### Example
 

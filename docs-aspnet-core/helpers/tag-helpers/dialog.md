@@ -16,7 +16,7 @@ The following example demonstrates how to define the Dialog by using the Dialog 
 
 > **Important**
 >
-> A change in the Dialog's tags has been introduced in R1 2018, in order to allow more complex configuration of the widget. Previously it was possible to nest content directly within the `<kendo-dialog>` tag, since R1 2018 content must be nested within a `<content>` tag.
+> To enable more complex widget configuration scenarios, the Kendo UI R1 2018 release introduces a change in the tags of the Dialog. Previously, it was possible to nest content directly in the `<kendo-dialog>` tag while now, after the release, the content must be nested within a `<content>` tag.
 
 ###### Example
 
@@ -61,7 +61,7 @@ The Dialog tag helper configuration options are passed as attributes of the tag.
 		</kendo-dialog>
 ```
 
-Simple content can be set through the `content` attribute:
+To set simple content, use the `content` attribute.
 
 ###### Example
 

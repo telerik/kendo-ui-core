@@ -11619,14 +11619,18 @@ The margin of the labels. A numeric value will set all margins.
 
     <div id="chart"></div>
     <script>
-    $("#chart").kendoChart({
-      series: [
-        {
-          margin: 10,
-          data: [1, 2, 3]
-        }
-      ]
-    });
+      $("#chart").kendoChart({
+        series: [
+          {
+            labels: {
+              visible: true,
+              format: "{0:C}",
+              margin:20
+            },
+            data: [1, 2, 3]
+          }
+        ]
+      });
     </script>
 
 ### series.labels.margin.bottom `Number` *(default: 0)*

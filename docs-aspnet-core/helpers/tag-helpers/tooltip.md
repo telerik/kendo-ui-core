@@ -1,6 +1,6 @@
 ---
-title: Tooltip 
-page_title: Tooltip  | Telerik UI for ASP.NET Core Tag Helpers
+title: Tooltip
+page_title: Tooltip | Telerik UI for ASP.NET Core Tag Helpers
 description: "Learn the basics when working with the Tooltip tag helper for ASP.NET Core (MVC 6 or ASP.NET Core MVC)."
 previous_url: /aspnet-core/helpers/tooltip
 slug: taghelpers_tooltip_aspnetcore

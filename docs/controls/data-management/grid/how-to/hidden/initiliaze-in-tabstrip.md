@@ -9,7 +9,7 @@ slug: howto_initializegridintabstrip_grid
 
 Your project might require you to initialize a Grid within a TabStrip.
 
-To achieve this behavior, use the `activate` event to resize the Grid according to the dimensions of its container. To see the example, refer to [this how-to article]({% slug overview_kendoui_tabstrip_widget %}).
+To achieve this behavior, use the `activate` event to resize the Grid according to the dimensions of its container. To see the example, refer to [this how-to article]({% slug initialize_thegrid_tabstrip_widget %}).
 
 ## See Also
 
