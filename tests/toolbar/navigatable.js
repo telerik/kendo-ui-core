@@ -334,4 +334,22 @@
         option.bubblePress(keys.TAB, false, false, popupElement);
     });
 
+    test("splitButotn popup is not opened when disabled", 0, function() {
+        container.kendoToolBar({
+            items: [
+                { type: "splitButton", id: "foo", text: "foo", enable:false, menuButtons: [
+                    { id: "option1", text: "option1" },
+                    { id: "option2", text: "option2" }
+                ] }
+            ],
+            open: function(e) {
+                ok(true, "open event triggered.")
+            }
+        });
+
+        var splitButton = $("#foo_wrapper");
+
+        splitButton.focus();
+        splitButton.press(keys.DOWN, false, true);
+    });
 })();

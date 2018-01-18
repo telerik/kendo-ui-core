@@ -10,6 +10,10 @@ slug: howto_create_checkbox_filter_menu_grid
 
 The following example demonstrates how to create a menu functionality based on a checkbox filter in a Grid.
 
+> Important
+>
+> The functionality is available out of the box using the [columns.filterable.multi](/api/javascript/ui/grid/configuration/columns.filterable.multi) property.
+
 ###### Example
 
 ```html

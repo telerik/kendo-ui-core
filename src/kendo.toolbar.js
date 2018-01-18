@@ -625,14 +625,18 @@ var __meta__ = { // jshint ignore:line
             },
 
             toggle: function() {
-                this.popup.toggle();
+                if(this.options.enable || this.popup.visible()){
+                    this.popup.toggle();
+                }
             },
 
             enable: function(isEnabled) {
                 if (isEnabled === undefined) {
                     isEnabled = true;
                 }
+
                 this.mainButton.enable(isEnabled);
+                this.element.toggleClass(STATE_DISABLED, !isEnabled);
                 this.options.enable = isEnabled;
             },
 

@@ -258,7 +258,7 @@ Sets the name of the exported workbook sheet.
         dataURI: workbook.toDataURL(),
         fileName: "Test.xlsx"
     });
-  </script>
+    </script>
 
 ### sheets.rows `Array`
 

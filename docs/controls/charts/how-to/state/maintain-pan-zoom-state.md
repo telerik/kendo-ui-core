@@ -33,8 +33,10 @@ The example below demonstrates how to store and load the axis range. Changes are
         var axisMax = 10;
 
         function updateRange(e) {
-          axisMin = e.axisRanges.axis.min;
-          axisMax = e.axisRanges.axis.max;
+          var axis = e.sender.getAxis('axis')
+          var range = axis.range()
+          axisMin = range.min;
+          axisMax = range.max;
         }
 
         function restoreRange(e) {

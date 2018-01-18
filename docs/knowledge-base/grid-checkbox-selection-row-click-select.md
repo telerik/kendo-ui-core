@@ -1,0 +1,107 @@
+---
+title: Row Click Selects Checkbox
+description: An example on how to select a row with checkbox selection by clicking the row of the Kendo UI Grid.
+type: how-to
+page_title: Clicking Rows Selects Checkbox | Kendo UI Grid
+slug: grid-checkbox-selection-row-click-select
+tags: grid, checkbox selection, kendo ui
+ticketid: 1144198
+res_type: kb
+component: grid
+---
+
+## Environment
+<table>
+	<tr>
+		<td>Product Version</td>
+		<td>2017.3 1026</td>
+	</tr>
+	<tr>
+		<td>Product</td>
+		<td>Grid for Progress® Kendo UI®</td>
+	</tr>
+</table>
+
+
+## Description
+
+How can I select rows with checkboxes by clicking anywhere on the row in the Kendo UI Grid?
+
+## Solution
+
+To select rows by clicking anywhere on the row:
+
+1. Handle the [`click`](https://api.jquery.com/click/) event of the row.
+1. In the event handler, programmatically `click` on the checkbox.
+
+```html
+<div id="example">
+    <div id="grid"></div>
+
+    <script>
+        $(document).ready(function() {
+            $("#grid").kendoGrid({
+                dataSource: {
+                    pageSize: 10,
+                    transport: {
+                        read: {
+                            url: "https://demos.telerik.com/kendo-ui/service/Products",
+                            dataType: "jsonp"
+                        }
+                    },
+                    schema: {
+                        model: {
+                            id: "ProductID"
+                        }
+                    }
+                },
+                dataBound: onDataBound,
+                pageable: true,
+                scrollable: false,
+                persistSelection: true,
+                sortable: true,
+                columns: [{
+                        selectable: true,
+                        width: "50px"
+                    },
+                    {
+                        field: "ProductName",
+                        title: "Product Name"
+                    },
+                    {
+                        field: "UnitPrice",
+                        title: "Unit Price",
+                        format: "{0:c}"
+                    },
+                    {
+                        field: "UnitsInStock",
+                        title: "Units In Stock"
+                    },
+                    {
+                        field: "Discontinued"
+                    }
+                ]
+            });
+        });
+
+        function onDataBound(e) {
+            var grid = e.sender;
+            var rows = grid.tbody.find("[role='row']");
+
+            rows.unbind("click");
+            rows.on("click", onClick)
+
+        };
+
+        function onClick(e) {
+            if ($(e.target).hasClass("k-checkbox-label")) {
+                return;
+            }
+            var row = $(e.target).closest("tr");
+            var checkbox = $(row).find(".k-checkbox");
+
+            checkbox.click();
+        };
+    </script>
+</div>
+```
