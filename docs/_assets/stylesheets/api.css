@@ -160,3 +160,15 @@ h2 a:first-child + a code:before {
 #api-filter input[type="search"]::-webkit-search-results-decoration {
   display: none;
 }
+
+#page-inner-content {
+  min-height: 100%;
+}
+
+footer {
+  position: absolute;
+  bottom: 0;
+  left:0;
+  right: 0;
+  margin-bottom: 0;
+}

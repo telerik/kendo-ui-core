@@ -38,13 +38,14 @@ All items which are marked as dirty, will be updated at the next data source syn
 ```
 // grid columns configuration
 columns: [
- { field: "Discontinued", width: "130px", template: "<span class='k-dirty' ng-show={{dataItem.dirty}}></span>{{dataItem.Discontinued}}", editor: $scope.discontinuedEditor },
+ { field: "Discontinued", width: "130px", template: "<span class='k-dirty' ng-show={% raw %}{{dataItem.dirty}}{% endraw %}></span>{% raw %}{{dataItem.Discontinued}}{% endraw %}", editor: $scope.discontinuedEditor },
 ],
 
-// editor declaration
-$scope.discontinuedEditor = function(container, options) {
- var editor = $('<nz-toggle ng-model=\'dataItem.Discontinued\' on-toggle=\'dataItem.dirty=true\'></nz-toggle>').appendTo(container);
-};
+// editor declaration - use the on-toggle event handle to mark the dataItem as dirty so you can show the dirty flag in the template above
+ $scope.discontinuedEditor = function(container, options) {
+   var editor = $("<nz-toggle ng-model='dataItem.Discontinued' on-toggle='dataItem.dirty=true'></nz-toggle>")
+   .appendTo(container);
+ };
 
 ```
 
@@ -125,14 +126,14 @@ $scope.discontinuedEditor = function(container, options) {
     });
 
     $scope.productsDropDownEditor = function(container, options) {
-      var editor = $('<input k-auto-bind=false kendo-drop-down-list required k-data-text-field="\'ProductName\'" k-data-value-field="\'ProductName\'" k-data-source="ddlDataSource" data-bind="value:ProductName"/>')
-      .appendTo(container);
-    }
+        var editor = $('<input k-auto-bind=false kendo-drop-down-list required k-data-text-field="\'ProductName\'" k-data-value-field="\'ProductName\'" k-data-source="ddlDataSource" data-bind="value:ProductName"/>')
+        .appendTo(container);
+    };
 
     $scope.discontinuedEditor = function(container, options) {
-      var editor = $('<nz-toggle ng-model=\'dataItem.Discontinued\' on-toggle=\'dataItem.dirty=true\'></nz-toggle>')
-      .appendTo(container);
-    }
+        var editor = $("<nz-toggle ng-model='dataItem.Discontinued' on-toggle='dataItem.dirty=true'></nz-toggle>")
+        .appendTo(container);
+      };
 
     $scope.mainGridOptions = {
       dataSource: $scope.dataSource,
@@ -141,7 +142,7 @@ $scope.discontinuedEditor = function(container, options) {
       toolbar: ["create", "save"],
       columns: [
         { field:"ProductName",title:"Product Name",editor: $scope.productsDropDownEditor },
-        { field: "Discontinued", width: "130px", template: "<span class='k-dirty' ng-show={% raw %}{{ dataItem.dirty }}{% endraw %}></span>{% raw %}{{ dataItem.Discontinued }}{% endraw %}", editor: $scope.discontinuedEditor },
+        { field: "Discontinued", width: "130px", template: "<span class='k-dirty' ng-show={% raw %}{{dataItem.dirty}}{% endraw %}></span>{% raw %}{{dataItem.Discontinued}}{% endraw %}", editor: $scope.discontinuedEditor },
         { command: "destroy", title: " ", width: "150px" }],
       editable: true
     };
