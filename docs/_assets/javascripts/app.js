@@ -13,7 +13,7 @@ function scrollNodeIntoView(li) {
 
 
 function selectNode(hash, scroll) {
-    var li = $("#page-tree li:has(>div>span>a[href='" + hash + "'])");
+    var li = $("#page-tree li:has(>div>span>div>a[href='" + hash + "'])");
 
     if (li.length) {
         var treeview = $("#page-tree").data("kendoTreeView");

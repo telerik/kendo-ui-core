@@ -757,7 +757,7 @@ The text that is displayed in the column header cell. If not set the [field](#co
 
 ### columns.width `String|Number`
 
-The width of the column. Numeric values are treated as pixels. **For more important information, please refer to [Column Widths](/web/treelist/walkthrough#column-widths)**.
+The width of the column. Numeric values are treated as pixels. **For more important information, please refer to [Column Widths](/web/grid/walkthrough#column-widths)**.
 
 #### Example - set the column width as a string
      <div id="treelist"></div>
@@ -837,7 +837,7 @@ If set to `true` the column will be visible in the treelist column menu. By defa
 
 ### columns.locked `Boolean` *(default: false)*
 
-If set to `true` the column will be displayed as locked (frozen) in the treelist. Also see the information about [Frozen Columns](/controls/data-management/treelist/appearance#locked-columns) in the Grid Appearance article.
+If set to `true` the column will be displayed as locked (frozen) in the treelist. Also see the information about [Frozen Columns](/controls/data-management/grid/appearance#locked-columns) in the Grid Appearance article.
 
 #### Example - locked columns
 

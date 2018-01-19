@@ -267,6 +267,11 @@ Below are listed the steps for you to follow when configuring the Kendo UI Grid 
 
 1. Build and run the application.
 
+## OData Support
+
+With the R1 2018 release the Grid component supports Batch operations with OData. The steps below describe how to configure the Grid to enable the feature. A runnable example illustrating the functionality is available in [this GitHub repository](https://github.com/telerik/ui-for-aspnet-mvc-examples/tree/master/grid/grid-odata-example).
+
+
 ## See Also
 
 Other articles on the Kendo UI Grid for ASP.NET MVC:
