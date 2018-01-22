@@ -266,7 +266,7 @@ var __meta__ = { // jshint ignore:line
                 logic: "and"
             };
 
-            if (isValidFilterExpr(filter)) {
+            if (isValidFilterExpr(filter) && $.trim(filter.value).length) {
                 newExpression.filters.push(filter);
             }
 
@@ -472,6 +472,11 @@ var __meta__ = { // jshint ignore:line
                 if (!this._isFilterEnabled()) {
                     this._searchByWord(word);
                 } else {
+                    if ($.trim(word).length && this.listView) {
+                        this.listView._emptySearch = false;
+                    } else {
+                        this.listView._emptySearch = true;
+                    }
                     this._filter({word: word, open: true});
                 }
             }
@@ -751,7 +756,8 @@ var __meta__ = { // jshint ignore:line
             list.css({
                 fontFamily: wrapper.css("font-family"),
                 width: this.options.autoWidth ? "auto" : width,
-                minWidth: width
+                minWidth: width,
+                whiteSpace: this.options.autoWidth ? "nowrap" : width
             })
             .data(WIDTH, width);
 
@@ -2337,7 +2343,7 @@ var __meta__ = { // jshint ignore:line
                         that.value(that._getValues(result.unchanged));
                     }
                 }
-            } else if (that.isFiltered() || that._skipUpdate) {
+            } else if (that.isFiltered() || that._skipUpdate || that._emptySearch) {
                 that.focus(0);
                 if (that._skipUpdate) {
                     that._skipUpdate = false;

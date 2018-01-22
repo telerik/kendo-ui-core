@@ -1128,7 +1128,7 @@ test("setOptions removes noData template", function() {
                     { id: 1, name: "name1" },
                     { id: 2, name: "name2" },
                     { id: 3, name: "name3" }
-                ],
+                ]
                 // filter: {field: "id", value: 1, operator: "equals"}
             }
         });
@@ -1137,7 +1137,7 @@ test("setOptions removes noData template", function() {
         combobox.search("name");
         combobox.dataSource.bind("change", function() {
             start();
-            equal(JSON.stringify(combobox.dataSource.filter()), JSON.stringify({"filters":[{"value":"","field":"name","operator":"startswith","ignoreCase":true}],"logic":"and"}));
+            equal(JSON.stringify(combobox.dataSource.filter()), JSON.stringify({"filters":[],"logic":"and"}));
         });
         combobox._clear.click();
     });

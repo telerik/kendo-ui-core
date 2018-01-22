@@ -153,7 +153,8 @@ var __meta__ = { // jshint ignore:line
             tagTemplate: "",
             groupTemplate: "#:data#",
             fixedGroupTemplate: "#:data#",
-            clearButton: true
+            clearButton: true,
+            autoWidth: false
         },
 
         events: [

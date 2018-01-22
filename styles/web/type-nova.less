@@ -233,6 +233,11 @@ textarea.k-textbox:hover,
     box-shadow: inset 0 0 0 1px darken(@widget-border-color, 35%);
 }
 
+.k-split-button:focus
+{
+    outline:none;
+}
+
 .k-state-hover,
 .k-state-hover:hover,
 .k-splitbar-horizontal-hover:hover,
@@ -348,6 +353,10 @@ textarea.k-textbox:hover,
 .k-state-disabled .k-button .k-icon,
 .k-button.k-state-disabled .k-icon {
     opacity: .2;
+}
+
+.k-split-button.k-state-disabled .k-icon {
+    opacity: 1;
 }
 
 /* Loading indicator */
@@ -1336,6 +1345,7 @@ table:not(.k-scheduler-dayview) .k-scheduler-header-wrap .k-today {
         border-color: @widget-border-color;
     }
 
+    // Active state
     .k-button:active,
     .k-button.k-state-active {
         color: @inversed-text-color;
@@ -1362,12 +1372,22 @@ table:not(.k-scheduler-dayview) .k-scheduler-header-wrap .k-today {
         border-color: @selected-background;
     }
 
+    // Disabled state
     .k-button.k-state-disabled,
     .k-button.k-state-disabled:hover,
-    .k-button.k-state-disabled:active {
+    .k-button.k-state-disabled:active,
+    .k-state-disabled.k-split-button > .k-button {
         color: @disabled-text-color;
         border-color: lighten(@hover-text-color, 20%);
         background-color: @widget-background-color;
+    }
+
+    // Focused state
+    .k-button:focus,
+    .k-button.k-state-disabled:focus,
+    .k-split-button:focus > .k-button {
+        border-color: @button-focused-border-color;
+        .box-shadow(@button-focused-shadow);
     }
 }
 

@@ -146,7 +146,8 @@ var __meta__ = { // jshint ignore:line
             groupTemplate: "#:data#",
             fixedGroupTemplate: "#:data#",
             clearButton: true,
-            syncValueAndText: true
+            syncValueAndText: true,
+            autoWidth: false
         },
 
         events:[

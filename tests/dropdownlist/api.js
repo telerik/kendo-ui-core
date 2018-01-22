@@ -43,6 +43,19 @@
        equal(dropdownlist.text(), 2);
    });
 
+   test("value method should select optionLabel if it does not exist", function() {
+        dropdownlist =  new DropDownList(input, {
+            optionLabel: "select",
+            dataTextField: "text",
+            dataValueField: "value",
+            dataSource: [{text: "foo", value: 1}, {text:2, value:0}]
+        });
+
+        dropdownlist.value(3);
+
+        equal(dropdownlist.text(), "select");
+    });
+
    test("value method should de-select the selected value if no value", function() {
        dropdownlist = createDropDownList();
        dropdownlist.select(1);

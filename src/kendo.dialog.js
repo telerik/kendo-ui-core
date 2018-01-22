@@ -172,8 +172,7 @@
                     elementMaxHeight = parseFloat(maxHeight, 10) - that._uiHeight() - paddingBox.vertical;
                     if (elementMaxHeight > 0) {
                         element.css({
-                            maxHeight: ceil(elementMaxHeight) + "px",
-                            overflow: "hidden"
+                            maxHeight: ceil(elementMaxHeight) + "px"
                         });
                     }
                 }
@@ -201,8 +200,7 @@
 
                 if (elementHeight > 0) {
                     that.element.css({
-                        height: ceil(elementHeight) + "px",
-                        overflow: "hidden"
+                        height: ceil(elementHeight) + "px"
                     });
                 }
             },
