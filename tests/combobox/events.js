@@ -198,9 +198,12 @@ test("raise change on custom value", 1, function() {
     });
 
     combobox.input
-            .focus()
-            .val("foo")
-            .focusout();
+                .focus()
+                .val("foo");
+
+    combobox.open();
+
+    combobox.input.focusout();
 });
 
 test("raise change on custom text with empty value", 2, function() {
@@ -215,8 +218,11 @@ test("raise change on custom text with empty value", 2, function() {
 
     combobox.input
             .focus()
-            .val("foo")
-            .focusout();
+            .val("foo");
+
+    combobox.open();
+
+    combobox.input.focusout();
 });
 
 test("raise change on custom value if element is select", 1, function() {
@@ -231,8 +237,11 @@ test("raise change on custom value if element is select", 1, function() {
 
     combobox.input
             .focus()
-            .val("custom value")
-            .focusout();
+            .val("custom value");
+
+    combobox.open();
+
+    combobox.input.focusout();
 });
 
 test("raise change on custom text with empty value (select)", 2, function() {
@@ -249,8 +258,11 @@ test("raise change on custom text with empty value (select)", 2, function() {
 
     combobox.input
             .focus()
-            .val("custom value")
-            .focusout();
+            .val("custom value");
+
+    combobox.open();
+
+    combobox.input.focusout();
 });
 
 test("raise change if empty input after selection", 1, function() {
@@ -267,8 +279,11 @@ test("raise change if empty input after selection", 1, function() {
 
     combobox.select(0);
 
-    combobox.input.focus().val("").press(kendo.keys.BACKSPACE).focusout();
+    combobox.input.focus().val("").press(kendo.keys.BACKSPACE);
 
+    combobox.open();
+
+    combobox.input.focusout();
 });
 
 asyncTest("change with custom value on blur", 2, function() {
@@ -287,6 +302,8 @@ asyncTest("change with custom value on blur", 2, function() {
         equal(combobox.value(), "test");
         equal(combobox.text(), "test");
     });
+
+    combobox.open();
 
     combobox.input.focusout();
 });

@@ -1234,7 +1234,9 @@ var __meta__ = { // jshint ignore:line
                         return;
                     }
 
-                    that._select(current);
+                    that._select(current).done(function() {
+                        that._old = that.listView.isFiltered() ? null : that.value();
+                    });
                 } else if (that.input) {
                     if(that._syncValueAndText() || that._isSelect){
                         that._accessor(that.input.val());

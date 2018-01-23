@@ -247,7 +247,9 @@ var __meta__ = { // jshint ignore:line
             }
 
             that._placeholder();
-            that._blur();
+            if (that.popup.visible()) {
+                that._blur();
+            }
 
             that.element.blur();
         },
@@ -547,7 +549,7 @@ var __meta__ = { // jshint ignore:line
 
             this.selectedIndex = idx;
 
-            if (this.options.autoBind) {
+            if (this.listView.isFiltered()) {
                 this._valueBeforeCascade = this._old;
             }
 
