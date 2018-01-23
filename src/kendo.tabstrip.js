@@ -1236,7 +1236,8 @@ var __meta__ = { // jshint ignore:line
                 hasCloseAnimation = close && "effects" in close,
                 neighbours = item.parent().children(),
                 oldTab = neighbours.filter("." + ACTIVESTATE),
-                itemIndex = neighbours.index(item);
+                itemIndex = neighbours.index(item),
+                isAnimationEnabled = animation && "duration" in animation && "effects" in animation;
 
             close = extend( hasCloseAnimation ? close : extend({ reverse: true }, animation), { hide: true });
             // deactivate previously active tab
@@ -1321,7 +1322,7 @@ var __meta__ = { // jshint ignore:line
                                 that.scrollWrap.css("height", "").css("height");
 
                                 // Force IE and Edge rendering to fix visual glitches telerik/kendo-ui-core#2777.
-                                if (kendo.support.browser.msie || kendo.support.browser.edge) {
+                                if (isAnimationEnabled && (kendo.support.browser.msie || kendo.support.browser.edge)) {
                                     contentHolder.finish().animate({
                                         opacity: 0.9
                                     },"fast", "linear", function(){
