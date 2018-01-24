@@ -284,6 +284,7 @@ var __meta__ = { // jshint ignore:line
             autoBind: true,
             loadOnDemand: true,
             expandMode: "multiple",
+            template: "",
             dataTextField: null
         },
 

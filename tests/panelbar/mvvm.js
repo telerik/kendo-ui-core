@@ -4,6 +4,7 @@
     module('panelbar MVVM', {
         setup: function() {
             QUnit.fixture.html('<script type="text/x-kendo-template" id="template"><li>${text}</li></script>');
+            QUnit.fixture.html('<script type="text/x-kendo-template" id="textTemplate">${text}</script>');
         },
         teardown: function() {
             kendo.destroy(dom);
@@ -61,7 +62,7 @@
     });
 
     test("source binding is skipped if set to target element", function() {
-        dom = $('<ul id="container" data-template="template" data-bind="source:items"></ul>');
+        dom = $('<ul id="container" data-template="textTemplate" data-bind="source:items"></ul>');
 
         var observable = kendo.observable({ items: [{text: "foo"}, {text:"bar" }] });
 

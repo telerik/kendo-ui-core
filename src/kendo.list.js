@@ -632,10 +632,10 @@ var __meta__ = { // jshint ignore:line
             }
 
             if (trigger) {
-                if (that._old === null) {
-                    that._old = value;
+                if (that._old === null || value === "") {
+                    that._valueBeforeCascade = that._old = value;
                 } else {
-                    that._old = that.dataItem() ? that.dataItem()[that.options.dataValueField] : null;
+                    that._valueBeforeCascade = that._old = that.dataItem() ? that.dataItem()[that.options.dataValueField] : null;
                 }
                 that._oldIndex = index;
 
@@ -757,7 +757,7 @@ var __meta__ = { // jshint ignore:line
                 fontFamily: wrapper.css("font-family"),
                 width: this.options.autoWidth ? "auto" : width,
                 minWidth: width,
-                whiteSpace: this.options.autoWidth ? "nowrap" : width
+                whiteSpace: this.options.autoWidth ? "nowrap" : "normal"
             })
             .data(WIDTH, width);
 
@@ -878,7 +878,8 @@ var __meta__ = { // jshint ignore:line
         _triggerCascade: function() {
             var that = this;
 
-            if (!that._cascadeTriggered || that.value() !== unifyType(that._old, typeof that.value())) {
+            if (!that._cascadeTriggered || that.value() !== unifyType(that._cascadedValue, typeof that.value())) {
+                that._cascadedValue = that.value();
                 that._cascadeTriggered = true;
                 that.trigger(CASCADE, { userTriggered: that._userTriggered });
             }
@@ -984,7 +985,7 @@ var __meta__ = { // jshint ignore:line
                 return that.selectedIndex;
             } else {
                 return that._select(candidate).done(function() {
-                    that._old = that._accessor();
+                    that._cascadeValue = that._old = that._accessor();
                     that._oldIndex = that.selectedIndex;
                 });
             }
@@ -1198,10 +1199,10 @@ var __meta__ = { // jshint ignore:line
                         if (!that.popup.visible()) {
                             that._blur();
                         }
-                        if (that._old === null) {
-                            that._old = that.value();
+                        if (that._cascadedValue === null) {
+                            that._cascadedValue = that.value();
                         } else {
-                            that._old = that.dataItem() ? that.dataItem()[that.options.dataValueField] : null;
+                            that._cascadedValue = that.dataItem() ? that.dataItem()[that.options.dataValueField] : null;
                         }
                     });
                 }
@@ -1234,9 +1235,7 @@ var __meta__ = { // jshint ignore:line
                         return;
                     }
 
-                    that._select(current).done(function() {
-                        that._old = that.listView.isFiltered() ? null : that.value();
-                    });
+                    that._select(current);
                 } else if (that.input) {
                     if(that._syncValueAndText() || that._isSelect){
                         that._accessor(that.input.val());
