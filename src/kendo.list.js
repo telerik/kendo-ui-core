@@ -266,7 +266,7 @@ var __meta__ = { // jshint ignore:line
                 logic: "and"
             };
 
-            if (isValidFilterExpr(filter)) {
+            if (isValidFilterExpr(filter) && $.trim(filter.value).length) {
                 newExpression.filters.push(filter);
             }
 
@@ -472,6 +472,11 @@ var __meta__ = { // jshint ignore:line
                 if (!this._isFilterEnabled()) {
                     this._searchByWord(word);
                 } else {
+                    if ($.trim(word).length && this.listView) {
+                        this.listView._emptySearch = false;
+                    } else {
+                        this.listView._emptySearch = true;
+                    }
                     this._filter({word: word, open: true});
                 }
             }
@@ -627,10 +632,10 @@ var __meta__ = { // jshint ignore:line
             }
 
             if (trigger) {
-                if (that._old === null) {
-                    that._old = value;
+                if (that._old === null || value === "") {
+                    that._valueBeforeCascade = that._old = value;
                 } else {
-                    that._old = that.dataItem() ? that.dataItem()[that.options.dataValueField] : null;
+                    that._valueBeforeCascade = that._old = that.dataItem() ? that.dataItem()[that.options.dataValueField] : null;
                 }
                 that._oldIndex = index;
 
@@ -751,7 +756,8 @@ var __meta__ = { // jshint ignore:line
             list.css({
                 fontFamily: wrapper.css("font-family"),
                 width: this.options.autoWidth ? "auto" : width,
-                minWidth: width
+                minWidth: width,
+                whiteSpace: this.options.autoWidth ? "nowrap" : "normal"
             })
             .data(WIDTH, width);
 
@@ -872,7 +878,8 @@ var __meta__ = { // jshint ignore:line
         _triggerCascade: function() {
             var that = this;
 
-            if (!that._cascadeTriggered || that.value() !== unifyType(that._old, typeof that.value())) {
+            if (!that._cascadeTriggered || that.value() !== unifyType(that._cascadedValue, typeof that.value())) {
+                that._cascadedValue = that.value();
                 that._cascadeTriggered = true;
                 that.trigger(CASCADE, { userTriggered: that._userTriggered });
             }
@@ -978,7 +985,7 @@ var __meta__ = { // jshint ignore:line
                 return that.selectedIndex;
             } else {
                 return that._select(candidate).done(function() {
-                    that._old = that._accessor();
+                    that._cascadeValue = that._old = that._accessor();
                     that._oldIndex = that.selectedIndex;
                 });
             }
@@ -1192,10 +1199,10 @@ var __meta__ = { // jshint ignore:line
                         if (!that.popup.visible()) {
                             that._blur();
                         }
-                        if (that._old === null) {
-                            that._old = that.value();
+                        if (that._cascadedValue === null) {
+                            that._cascadedValue = that.value();
                         } else {
-                            that._old = that.dataItem() ? that.dataItem()[that.options.dataValueField] : null;
+                            that._cascadedValue = that.dataItem() ? that.dataItem()[that.options.dataValueField] : null;
                         }
                     });
                 }
@@ -2337,7 +2344,7 @@ var __meta__ = { // jshint ignore:line
                         that.value(that._getValues(result.unchanged));
                     }
                 }
-            } else if (that.isFiltered() || that._skipUpdate) {
+            } else if (that.isFiltered() || that._skipUpdate || that._emptySearch) {
                 that.focus(0);
                 if (that._skipUpdate) {
                     that._skipUpdate = false;

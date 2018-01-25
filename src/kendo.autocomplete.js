@@ -166,7 +166,8 @@ var __meta__ = { // jshint ignore:line
             animation: {},
             virtual: false,
             value: null,
-            clearButton: true
+            clearButton: true,
+            autoWidth: false
         },
 
         _dataSource: function() {

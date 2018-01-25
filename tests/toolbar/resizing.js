@@ -36,6 +36,35 @@
         ok(!overflowButtons.eq(1).hasClass("k-overflow-hidden"), "Second item is visible");
     });
 
+    test("buttons after hidden groups should be hidden as well no matter that there is sufficient space to show them", 4, function() {
+        container.width(250);
+        var toolbar = container.kendoToolBar({
+            items: [
+                { type: "button", id: "foo", text: "foo" },
+                {
+                    type: "buttonGroup",
+                    buttons: [
+                        { text: "Left", },
+                        { text: "Center" },
+                        { text: "Right" }
+                    ]
+                },
+                { type: "button", id: "bar", text: "bar" }
+            ]
+        }).data("kendoToolBar");
+
+        container.find(".k-overflow-anchor").width(28);
+        container.find(".k-button:not(.k-overflow-anchor)").width(50);
+
+        var toolbarButtons = container.find("#foo, #bar");
+        ok(toolbarButtons.eq(0).is(":visible"), "First button is visible");
+        ok(toolbarButtons.eq(1).is(":hidden"), "Second button is hidden");
+
+        var overflowButtons = toolbar.popup.element.find(">li");
+        ok(overflowButtons.eq(0).hasClass("k-overflow-hidden"), "First item is hidden");
+        ok(!overflowButtons.eq(1).hasClass("k-overflow-hidden"), "Second item is visible");
+    });
+
     test("buttons with overflow: always are always hidden upon initialization", 4, function() {
         var toolbar = container.kendoToolBar({
             items: [

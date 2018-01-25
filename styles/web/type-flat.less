@@ -2143,8 +2143,12 @@ html .km-pane-wrapper .km-widget,
 }
 
 .k-split-button:focus > .k-button {
-    background: transparent;
     border-color: transparent;
+}
+
+.k-toolbar .k-button.k-state-disabled:focus {
+    border-color: @button-focused-border-color;
+    .box-shadow(@button-focused-shadow);
 }
 
 .k-editor .k-tool:focus

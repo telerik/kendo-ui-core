@@ -100,6 +100,7 @@ var __meta__ = { // jshint ignore:line
                 that.tagList.attr(ID, id);
             }
 
+            that._initialOpen = true;
             that._aria(id);
             that._dataSource();
             that._ignoreCase();
@@ -153,7 +154,8 @@ var __meta__ = { // jshint ignore:line
             tagTemplate: "",
             groupTemplate: "#:data#",
             fixedGroupTemplate: "#:data#",
-            clearButton: true
+            clearButton: true,
+            autoWidth: false
         },
 
         events: [
@@ -498,6 +500,22 @@ var __meta__ = { // jshint ignore:line
                 that._filterSource();
                 that._focusItem();
             } else if (that._allowOpening()) {
+
+                //selects values in autoBind false and non virtual scenario on initial load
+                if (!that.options.autoBind && !that.options.virtual && that._initialOpen){
+                    var dataItems = that.listView._valueIndices(that._initialValues).map(function (index) {
+                        return {
+                            dataItem: that.listView.dataItemByIndex(index)
+                        };
+                    });
+                    that.persistTagList = false;
+                    that._selectValue(dataItems, []);
+                    that.listView._values = that._initialValues;
+                    that.listView.selectedDataItems(dataItems);
+                    that.persistTagList = true;
+                    that._initialOpen = false;
+                }
+
                 // In some cases when the popup is opened resize is triggered which will cause it to close
                 // Setting the below flag will prevent this from happening
                 that.popup._hovered = true;
@@ -1185,9 +1203,10 @@ var __meta__ = { // jshint ignore:line
                 for (idx = removed.length - 1; idx > -1; idx--) {
                     removedItem = removed[idx];
 
-                    tagList[0].removeChild(tagList[0].children[removedItem.position]);
-
-                    that._setOption(getter(removedItem.dataItem), false);
+                    if (tagList.children().length) {
+                        tagList[0].removeChild(tagList[0].children[removedItem.position]);
+                        that._setOption(getter(removedItem.dataItem), false);
+                    }
                 }
 
                 for (idx = 0; idx < added.length; idx++) {

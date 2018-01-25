@@ -146,7 +146,8 @@ var __meta__ = { // jshint ignore:line
             groupTemplate: "#:data#",
             fixedGroupTemplate: "#:data#",
             clearButton: true,
-            syncValueAndText: true
+            syncValueAndText: true,
+            autoWidth: false
         },
 
         events:[
@@ -546,16 +547,18 @@ var __meta__ = { // jshint ignore:line
 
             this.selectedIndex = idx;
 
-            if (this.options.autoBind) {
+            if (this.listView.isFiltered() && idx !== -1) {
                 this._valueBeforeCascade = this._old;
             }
 
             if (idx === -1 && !dataItem) {
-                text = this._accessor();
                 if (this.options.syncValueAndText) {
+                    text = this._accessor();
                     value = text;
                 }
-
+                else {
+                    text = this.text();
+                }
                 this.listView.focus(-1);
             } else {
                 if (dataItem || dataItem === 0) {
@@ -936,6 +939,44 @@ var __meta__ = { // jshint ignore:line
                 that._firstItem();
             } else if (key === keys.END) {
                 that._lastItem();
+            } else if (key === keys.ENTER) {
+                var current = that.listView.focus();
+                var dataItem = that.dataItem();
+                var shouldTrigger = true;
+
+                if (!that.popup.visible() && (!dataItem || that.text() !== that._text(dataItem))) {
+                    current = null;
+                }
+
+                if (current) {
+                    if (that.popup.visible()) {
+                        e.preventDefault();
+                    }
+
+                    dataItem = that.listView.dataItemByIndex(that.listView.getElementIndex(current));
+
+                    if(dataItem){
+                        shouldTrigger = that._value(dataItem) !==  List.unifyType(that.value(), typeof that._value(dataItem));
+                    }
+
+                    if (shouldTrigger && that.trigger("select", { dataItem: dataItem, item: current })) {
+                        return;
+                    }
+
+                    that._userTriggered = true;
+
+                    that._select(current).done(function() {
+                        that._blur();
+                        that._valueBeforeCascade = that._old = that.value();
+                    });
+                } else {
+                    if(that._syncValueAndText() || that._isSelect){
+                        that._accessor(that.input.val());
+                    }
+
+                    that.listView.value(that.input.val());
+                    that._blur();
+                }
             } else if (key != keys.TAB && !that._move(e)) {
                that._search();
             } else if (key === keys.ESC && !that.popup.visible()) {

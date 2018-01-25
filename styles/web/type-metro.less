@@ -2064,6 +2064,11 @@ html .km-pane-wrapper .km-widget,
     box-shadow: inset 0 1px 0 lighten(@secondary-border-color, 30%);
 }
 
+.k-toolbar .k-button.k-state-disabled:focus {
+    border-color: @button-focused-border-color;
+    .box-shadow(@button-focused-shadow);
+}
+
 .k-column-menu .k-separator
 {
     border-color: @secondary-border-color;
@@ -2161,7 +2166,7 @@ html .km-pane-wrapper .km-widget,
 
 .k-split-button:focus > .k-button {
     background: transparent;
-    border-color: transparent;
+    border-color: @button-focused-border-color;
 }
 
 .k-editor .k-tool:focus

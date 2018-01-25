@@ -237,9 +237,8 @@ The target value to be set or false to be removed.
     <script>
 		var buttonGroup = $("#buttongroup").kendoButtonGroup({
 			select: function(e) {
-				console.log("selected index:" + e.index);
+				console.log("selected index:" + e.indices);
 			},
-			enable: false,
 			index: 0
 		}).data("kendoButtonGroup");
 
@@ -377,6 +376,6 @@ Fires when a Button is selected.
 
 #### Event Data
 
-##### e.index `Number`
+##### e.indices `Array`
 
-The index of the selected button
+The indices of the selected buttons

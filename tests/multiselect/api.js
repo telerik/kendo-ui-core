@@ -458,7 +458,7 @@ asyncTest("value method selects item that exists only in unfiltered source (asyn
                 transport: {
                     read: "",
                     parameterMap: function(options) {
-                        equal(options.filter.filters[0].value, "");
+                        equal(options.filter.filters.length, 0);
                     }
                 }
             }

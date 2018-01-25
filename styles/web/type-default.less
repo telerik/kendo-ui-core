@@ -2097,6 +2097,11 @@ textarea.k-textbox,
     box-shadow: inset 0 1px 0 lighten(@secondary-border-color, 30%);
 }
 
+.k-toolbar .k-button.k-state-disabled:focus {
+    border-color: @button-focused-border-color;
+    .box-shadow(@button-focused-shadow);
+}
+
 .k-column-menu .k-separator
 {
     border-color: @secondary-border-color;

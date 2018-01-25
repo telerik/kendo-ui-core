@@ -1567,13 +1567,6 @@ div.k-filebrowser-dropzone em
     border-radius: @border-radius 0 0 @border-radius;
 }
 
-.k-toolbar:not(.k-spreadsheet-toolbar) .k-button-group {
-
-    .k-button:focus {
-        border-color: @button-focused-border-color;
-    }
-}
-
 .k-group-start.k-group-end.k-tool
 {
     border-radius: @border-radius;
@@ -2085,6 +2078,15 @@ html .km-pane-wrapper .km-widget,
 .k-toolbar-last-visible.k-overflow-group
 {
     box-shadow: inset 0 1px 0 lighten(@secondary-border-color, 30%);
+}
+
+.k-toolbar:not(.k-spreadsheet-toolbar) {
+
+     .k-button-group .k-button:focus,
+     .k-button.k-state-disabled:focus {
+        border-color: @button-focused-border-color;
+        .box-shadow(@button-focused-shadow);
+    }
 }
 
 .k-column-menu .k-separator

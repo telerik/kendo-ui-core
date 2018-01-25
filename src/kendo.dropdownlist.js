@@ -90,6 +90,9 @@ var __meta__ = { // jshint ignore:line
 
             that._aria();
 
+            //should read changed value of closed dropdownlist
+            that.wrapper.attr("aria-live", "polite");
+
             that._enable();
 
             that._oldIndex = that.selectedIndex = -1;
@@ -104,6 +107,12 @@ var __meta__ = { // jshint ignore:line
             that._initList();
 
             that._cascade();
+
+            that.one("set", function(e) {
+                if (!e.sender.listView.bound() && that.hasOptionLabel()) {
+                    that._textAccessor(that._optionLabelText());
+                }
+            });
 
             if (options.autoBind) {
                 that.dataSource.fetch();
@@ -157,7 +166,8 @@ var __meta__ = { // jshint ignore:line
             valueTemplate: null,
             optionLabelTemplate: null,
             groupTemplate: "#:data#",
-            fixedGroupTemplate: "#:data#"
+            fixedGroupTemplate: "#:data#",
+            autoWidth: false
         },
 
         events: [
