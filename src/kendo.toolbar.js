@@ -929,6 +929,8 @@ var __meta__ = { // jshint ignore:line
                     for (var i = 0; i < options.items.length; i++) {
                         that.add(options.items[i]);
                     }
+                    // debugger
+                    that._shrink(that.element.innerWidth());
                 }
 
                 that.userEvents = new kendo.UserEvents(document, {
@@ -1065,13 +1067,7 @@ var __meta__ = { // jshint ignore:line
                     }
 
                     if (tool) {
-                        if (that.options.resizable) {
-                            tool.element.appendTo(that.element).css("visibility", "hidden");
-                            that._shrink(that.element.innerWidth());
-                            tool.element.css("visibility", "visible");
-                        } else {
-                            tool.element.appendTo(that.element);
-                        }
+                        tool.element.appendTo(that.element);
 
                         that.angular("compile", function(){
                             return { elements: tool.element.get() };
@@ -1635,12 +1631,12 @@ var __meta__ = { // jshint ignore:line
             _shrink: function(containerWidth) {
                 var commandElement,
                     visibleCommands;
-
                 if (containerWidth < this._childrenWidth()) {
                     visibleCommands = this.element.children(":visible:not([data-overflow='never'], ." + OVERFLOW_ANCHOR + ")");
 
                     for (var i = visibleCommands.length - 1; i >= 0; i--) {
                         commandElement = visibleCommands.eq(i);
+
                         if (containerWidth > this._childrenWidth()) {
                             break;
                         } else {

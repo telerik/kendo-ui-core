@@ -62,16 +62,33 @@ How can I delete a disabled cell in a Spreadsheet row through the **Delete** com
             rowContextMenu = spreadsheet.rowHeaderContextMenu();
 
         rowContextMenu.bind("select", function(e) {
+			var command = $(e.item).text();
+			var sheet = spreadsheet.activeSheet();
+			var selection = sheet.selection();
+			var rowsToBeDeleted = [];
+			var shouldManuallyDelete = false;
+			
+			if (command == "Delete") {
+				selection.forEachCell(function(row, col, cell) {
+					var enabled = cell.enable;
 
-            var command = $(e.item).text();
+					if (rowsToBeDeleted.indexOf(row) < 0) {
+						rowsToBeDeleted.push(row);
+					}
+					
+					if (!shouldManuallyDelete && enabled === false) {
+						shouldManuallyDelete = true;
+					}
+				});
+			 
+				if (shouldManuallyDelete) {
+					selection.enable(true);
 
-            if (command == "Delete") {
-                var sheet = spreadsheet.activeSheet(),
-                    selection = sheet.selection();
-
-                selection.enable(true)
-                selection.value([])
-            }
+					for(var i = rowsToBeDeleted.length; i > 0; i--) {
+						sheet.deleteRow(rowsToBeDeleted[i - 1]);
+					}
+				}
+			}
         });
     });
 </script>
