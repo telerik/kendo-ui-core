@@ -929,7 +929,6 @@ var __meta__ = { // jshint ignore:line
                     for (var i = 0; i < options.items.length; i++) {
                         that.add(options.items[i]);
                     }
-                    // debugger
                     that._shrink(that.element.innerWidth());
                 }
 
