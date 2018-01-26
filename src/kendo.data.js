@@ -3921,6 +3921,7 @@ var __meta__ = { // jshint ignore:line
             this._skipRequestsInProgress = true;
 
             skip = math.min(skip || 0, this.total());
+            callback = isFunction(callback) ? callback : noop;
 
             var that = this,
                 pageSkip = math.max(math.floor(skip / take), 0) * take,
@@ -3930,43 +3931,9 @@ var __meta__ = { // jshint ignore:line
             data = that._findRange(skip, math.min(skip + take, that.total()));
 
             if (data.length) {
+                that._processRangeData(data, skip, take, pageSkip, size);
 
-                that._pending = undefined;
-
-                that._skip = skip > that.skip() ? math.min(size, (that.totalPages() - 1) * that.take()) : pageSkip;
-
-                that._currentRangeStart = skip;
-
-                that._take = take;
-
-                var paging = that.options.serverPaging;
-                var sorting = that.options.serverSorting;
-                var filtering = that.options.serverFiltering;
-                var aggregates = that.options.serverAggregates;
-                try {
-                    that.options.serverPaging = true;
-                    if (!that._isServerGrouped() && !(that.group() && that.group().length)) {
-                        that.options.serverSorting = true;
-                    }
-                    that.options.serverFiltering = true;
-                    that.options.serverPaging = true;
-                    that.options.serverAggregates = true;
-
-                    if (paging) {
-                        that._detachObservableParents();
-                        that._data = data = that._observe(data);
-                    }
-                    that._process(data);
-                } finally {
-                    that.options.serverPaging = paging;
-                    that.options.serverSorting = sorting;
-                    that.options.serverFiltering = filtering;
-                    that.options.serverAggregates = aggregates;
-                }
-
-                if (isFunction(callback)) {
-                    callback();
-                }
+                callback();
 
                 return;
             }
@@ -3986,6 +3953,9 @@ var __meta__ = { // jshint ignore:line
                     that.prefetch(size, take, function() {
                         that.range(skip, take, callback );
                     });
+                } else {
+                    that._processRangeData(data, skip, take, pageSkip, size);
+                    callback();
                 }
             }
         },
@@ -4071,6 +4041,43 @@ var __meta__ = { // jshint ignore:line
                 return data.concat(temp);
             }
             return data.concat(range.slice(skip, take));
+        },
+
+        _processRangeData: function(data, skip, take, pageSkip, size) {
+            var that = this;
+
+            that._pending = undefined;
+
+            that._skip = skip > that.skip() ? math.min(size, (that.totalPages() - 1) * that.take()) : pageSkip;
+
+            that._currentRangeStart = skip;
+
+            that._take = take;
+
+            var paging = that.options.serverPaging;
+            var sorting = that.options.serverSorting;
+            var filtering = that.options.serverFiltering;
+            var aggregates = that.options.serverAggregates;
+            try {
+                that.options.serverPaging = true;
+                if (!that._isServerGrouped() && !(that.group() && that.group().length)) {
+                    that.options.serverSorting = true;
+                }
+                that.options.serverFiltering = true;
+                that.options.serverPaging = true;
+                that.options.serverAggregates = true;
+
+                if (paging) {
+                    that._detachObservableParents();
+                    that._data = data = that._observe(data);
+                }
+                that._process(data);
+            } finally {
+                that.options.serverPaging = paging;
+                that.options.serverSorting = sorting;
+                that.options.serverFiltering = filtering;
+                that.options.serverAggregates = aggregates;
+            }
         },
 
         skip: function() {

@@ -441,6 +441,19 @@ test("range if count is undefined return all data", function() {
     equal(result.length, 8);
 });
 
+test("range returns empty view when data total is 0", function() {
+    var dataSource = new DataSource({
+        total: function() { return 0; }
+    });
+    dataSource.read();
+
+    dataSource.range(5, 10);
+
+    equal(dataSource.view().length, 0);
+    equal(dataSource.skip(), 0);
+    equal(dataSource.take(), 10);
+});
+
 test("range fetches range accross pages where last page is partial", function() {
     var dataSource = new DataSource({
         pageSize: 3,

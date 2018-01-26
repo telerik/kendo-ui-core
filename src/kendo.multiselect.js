@@ -502,17 +502,8 @@ var __meta__ = { // jshint ignore:line
             } else if (that._allowOpening()) {
 
                 //selects values in autoBind false and non virtual scenario on initial load
-                if (!that.options.autoBind && !that.options.virtual && that._initialOpen){
-                    var dataItems = that.listView._valueIndices(that._initialValues).map(function (index) {
-                        return {
-                            dataItem: that.listView.dataItemByIndex(index)
-                        };
-                    });
-                    that.persistTagList = false;
-                    that._selectValue(dataItems, []);
-                    that.listView._values = that._initialValues;
-                    that.listView.selectedDataItems(dataItems);
-                    that.persistTagList = true;
+                if (!that.options.autoBind && !that.options.virtual && that.options.value && !$.isPlainObject(that.options.value[0])){
+                    that.value(that._initialValues);
                     that._initialOpen = false;
                 }
 

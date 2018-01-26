@@ -2294,7 +2294,7 @@ var __meta__ = { // jshint ignore:line
 
             this.element[0].innerHTML = html;
 
-            if (isGrouped && dataContext.length) {
+            if (isGrouped && dataContext.length && this._bound) {
                 this._renderHeader();
             }
         },
