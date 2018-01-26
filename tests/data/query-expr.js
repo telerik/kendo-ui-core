@@ -612,4 +612,18 @@ test("carriage return in strings is escaped", function() {
     }), "(((d || '')+'').toLowerCase() == \"foo  bar\")");
 });
 
+test("isnullorempty", function() {
+    equal(compile({
+        logic: "and",
+        filters: [ { field: "foo", operator: "isnullorempty" } ]
+    }), "(!d.foo)");
+});
+
+test("isnotnullorempty", function() {
+    equal(compile({
+        logic: "and",
+        filters: [ { field: "foo", operator: "isnotnullorempty" } ]
+    }), "(!!d.foo)");
+});
+
 }());

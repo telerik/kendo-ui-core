@@ -2140,4 +2140,20 @@ test("group on empty array", function() {
     equal(result.length, 0);
 });
 
+test("filter isnullorempty on string", function() {
+    var data = [{ name: null }, { name: "" }, { name: " " }, { name: "bar" }, { name: "foo"}];
+
+    var result = new Query(data).filter({ field: "name", operator: "isnullorempty" }).toArray();
+
+    equal(result.length, 2);
+});
+
+test("filter isnotnullorempty on string", function() {
+    var data = [{ name: null }, { name: "" }, { name: " " }, { name: "bar" }, { name: "foo"}];
+
+    var result = new Query(data).filter({ field: "name", operator: "isnotnullorempty" }).toArray();
+
+    equal(result.length, 3);
+});
+
 }());
