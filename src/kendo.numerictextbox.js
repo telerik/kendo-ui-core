@@ -557,7 +557,7 @@ var __meta__ = { // jshint ignore:line
                 precision = numberFormat.decimals;
             }
 
-            if (precision === 0) {
+            if (precision === 0 && that.options.restrictDecimals) {
                 return INTEGER_REGEXP;
             }
 

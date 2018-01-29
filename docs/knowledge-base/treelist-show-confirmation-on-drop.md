@@ -1,16 +1,15 @@
 ---
-title: Show Confirmation in TreeList When Doing Drag and Drop
-description: Show a confirmation dialog before changing the position of a dropped row in the Kendo UI TreeList
+title: Show Confirmation in TreeList When Doing Drag-and-Drop
+description: An example on how to show a confirmation dialog before changing the position of a dropped row in the Kendo UI TreeList.
 type: how-to
-page_title: Show Confirmation for Items Drag and Drop in the TreeList | Kendo UI TreeList
+page_title: Show Confirmation for Dragged and Dropped Items | Kendo UI TreeList
 slug: treelist-show-confirmation-on-drop
-position: 
-tags: 
 ticketid: 1130225
 res_type: kb
 ---
 
 ## Environment
+
 <table>
 	<tr>
 		<td>Product</td>
@@ -24,14 +23,16 @@ res_type: kb
 
 
 ## Description
-I want to add dialog confirmation to TreeList on drag of a row. If the user selects `Cancel` I want to prevent the transfer of the row.
+
+How can I add a dialog confirmation to the TreeList on dragging a row and prevent the transfer of the row if the user selects **Cancel**?
 
 ## Solution
-The dialog confirmation is an asynchronous action. If you want to add it during drag and drop you first need to prevent the drop action, so it does not complete while you wait for a confirmation from the user. When the user confirms the drag action, you can manually change the parent id of the dragged element to move it under the new parent. Follow these steps:
+
+The dialog confirmation is an asynchronous action. To add it during the drag-and-drop, prevent the drop action so it does not complete while you wait for a confirmation from the user. When the user confirms the drag action, manually change the parent `id` of the dragged element to move it under the new parent.
 
 1. Handle the `drop` event and call `e.preventDefault()`.
 1. Show a confirmation dialog.
-1. In the confirmation callback function, change the parent ID value of the dragged row to the ID value of the destination row. 
+1. In the confirmation callback function, change the parent `id` value of the dragged row to the `id` value of the destination row.
 
 ```html
     <div id="example">
@@ -80,7 +81,7 @@ The dialog confirmation is an asynchronous action. If you want to add it during 
           drop: function(e){
             if(e.valid){
               e.preventDefault();
-              kendo.confirm("Are you sure that you want to move "+ e.source.FirstName 
+              kendo.confirm("Are you sure that you want to move "+ e.source.FirstName
                             + " under " + e.destination.FirstName + "?").then(function () {
                 e.source.set("ReportsTo", e.destination.EmployeeID);
                 e.sender.refresh();

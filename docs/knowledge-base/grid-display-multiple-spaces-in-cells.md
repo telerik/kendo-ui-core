@@ -1,8 +1,8 @@
 ---
-title: Show multiple spaces in Grid cells
-description: An example on how to have multiple spaces in the cells of Kendo UI Grid.
+title: Show Multiple Spaces in Grid Cells
+description: An example on how to have multiple spaces in the cells of the Kendo UI Grid.
 type: how-to
-page_title: Display whitespaces in grid cells | Kendo UI Grid
+page_title: Display Whitespaces in Cells | Kendo UI Grid
 slug: grid-display-multiple-spaces-in-cells
 tags: grid, spaces, multiple, display, show, keep, whitespaces, intervals
 res_type: kb
@@ -24,11 +24,11 @@ component: grid
 
 ## Description
 
-When I enter a value with multiple spaces in the Grid they are trimmed to a single space. I would like all spaces displayed.
+When I enter a value with multiple spaces in the Grid, how can I display all spaces and avoid trimming the spaces down to a single space?  
 
 ## Solution
 
-This is due to the default HTML behavior. By default additional spaces will be trimmed in HTML. In order to display the text as-is you can specify [template](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid/configuration/columns.template) for the Grid cell that will display the value in a [pre element](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/pre).
+The skipping of all spaces but one is due to the default HTML behavior&mdash;in HTML, additional spaces are trimmed. To display the text as is, specify a [`template`](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid/configuration/columns.template) for the Grid cell which will display the value in a [`pre`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/pre) element.
 
 ```html
 <div id="grid"></div>

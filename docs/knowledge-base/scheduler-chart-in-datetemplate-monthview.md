@@ -1,8 +1,8 @@
 ---
-title: Month View Scheduler with Kendo Charts Integrated in Each Date
+title: Integrate Month View Scheduler with Charts in Each Date
 description: An AngularJS example on how to inject a Chart into each date of the Kendo UI Scheduler month view.
 type: how-to
-page_title: Chart in the DateTemplate of the Month View | Kendo UI Scheduler
+page_title: Inject Chart in the DateTemplate of the Month View | Kendo UI Scheduler
 slug: scheduler-chart-in-datetemplate-monthview
 tags: kendo, kendo-ui, scheduler, chart, datetemplate, month-view, hide
 res_type: kb
@@ -20,11 +20,11 @@ component: scheduler
 
 ## Description
 
-In AngularJS scenario, how to inject a Chart into each date of the Kendo UI Scheduler month view?
+How can I inject a Chart into each date of the Scheduler month view in AngularJS?
 
 ## Solution
 
-To achieve the desired, the Chart should be placed and initialized in the [dayTemplate](https://docs.telerik.com/kendo-ui/api/javascript/ui/scheduler#configuration-views.dayTemplate) of the Scheduler Month view.
+Place and initialize the Chart in the [`dayTemplate`](https://docs.telerik.com/kendo-ui/api/javascript/ui/scheduler#configuration-views.dayTemplate) of the Scheduler `month` view.
 
 ```html
 <div id="example" ng-app="KendoDemos">
@@ -39,26 +39,26 @@ To achieve the desired, the Chart should be placed and initialized in the [dayTe
 <script>
   angular.module("KendoDemos", [ "kendo.directives" ])
     .controller("MyCtrl", function($scope){
-    
+
 	var baseDate = new Date(2013, 4, 1).getTime();
-	
+
     $scope.schedulerOptions = {
       dataBound: function(e) {
         var scheduler = e.sender;
         var element = scheduler.element;
         var days = element.find('.k-scheduler-content .k-scheduler-table td[role="gridcell"]');
-        
+
 		for (var i = 0; i < days.length; i++) {
           var element = $(days[i]);
           var slot = scheduler.slotByElement(element);
-          
+
 		  if (!slot) {
             continue;
           }
-          
+
 		  var dateTime = slot.startDate.getTime();
           var divided = dateTime / baseDate;
-          
+
 		  $("#chart" + dateTime).kendoChart({
             chartArea: {
               height: 140

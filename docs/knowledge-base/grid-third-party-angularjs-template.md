@@ -1,16 +1,16 @@
 ---
-title: Use a Third Party Angular Editor Template in the Kendo UI Grid for AngularJS
-description: How To Use Third Party AngularJS editors in the Kendo UI Grid
+title: Use a Third-Party Angular Editor Template in the Grid for AngularJS
+description: An example on how to use third-party AngularJS editors in the Kendo UI Grid.
 type: how-to
-page_title: How To Bind the Kendo Grid dataItems in Third Party AngularJS templates | Kendo UI Grid
+page_title: Bind the dataItems in Third-Party AngularJS Templates | Kendo UI Grid
 slug: grid-third-party-angularjs-template
-position: 
 tags: grid, angularjs, column template, third party, editor, compile
 ticketid: 1086179
 res_type: kb
 ---
 
 ## Environment
+
 <table>
 	<tr>
 		<td>Product Version</td>
@@ -18,22 +18,21 @@ res_type: kb
 	</tr>
 	<tr>
 		<td>Product</td>
-		<td>Grid for Progress® Kendo UI®</td>
+		<td>Progress Kendo UI Grid</td>
 	</tr>
 </table>
 
 
 ## Description
 
-I am trying to bind `ng-model` in a nz-toggle - Double and Triple-State Toggle for Angular directive for booleans in the Kendo UI Grid but it is not working. The value is not bound in the editor.
-  
+I am trying to bind `ng-model` in an `nz-toggle` (a double- and triple-state toggle for Angular directive for Booleans) in the Grid but it is not working.
 
+How can I bind the value in the editor of a third-party Angular editor template when working with the Kendo UI Grid?
 
 ## Solution
 
-You can use the ng-model `dataItem.field` to bind the third party angular editor in the grid. You will also need an event that the third-party library offers so you can mark the dataItem as dirty.
-
-All items which are marked as dirty, will be updated at the next data source sync.
+1. Bind the third-party Angular editor in the Grid by using the ng-model `dataItem.field`.
+1. Use an event that the third-party library offers so you can mark the `dataItem` as dirty. As a result, all items which are marked as dirty will be updated at the next sync of the data source.
 
 ```
 // grid columns configuration
@@ -49,7 +48,7 @@ columns: [
 
 ```
 
-###### Example:
+The following example demonstrates the implementation of the suggested approach.
 
 ```html
 <link rel="stylesheet" href="https://rawgit.com/tannerlinsley/nz-toggle/master/dist/nz-toggle.min.css"/>
@@ -57,7 +56,7 @@ columns: [
     <div id="example" ng-app="KendoDemos">
       <div ng-controller="MyCtrl">
         <h3>
-          This example features: 
+          This example features:
         </h3>
         <ul>
           <li>

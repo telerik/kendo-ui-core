@@ -1,11 +1,11 @@
 ---
-title: Change the default filter operator
-description: An example on how to change the default filter operator.
+title: Change the Default Filter Operator
+description: An example on how to change the default filter operator in the Kendo UI Grid.
 type: how-to
-page_title: Change the default filter operator | Kendo UI Grid
+page_title: Change the Default Filter Operator | Kendo UI Grid
 slug: grid-change-default-filter-operator
 tags: grid, filter, filtering, change, default, operator, menu
-ticketid: 1147525 
+ticketid: 1147525
 res_type: kb
 component: grid
 ---
@@ -25,11 +25,11 @@ component: grid
 
 ## Description
 
-How can I change the default filter operator?
+How can I change the default filter operator of the Grid?
 
 ## Solution
 
-Within the [filterMenuInit](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid/events/filtermenuinit) change the valud of the Kendo DropDownList using its api.
+Within [`filterMenuInit`](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid/events/filtermenuinit), change the value of the DropDownList by using its API.
 
 ```html
     <div id="example">

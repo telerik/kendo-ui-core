@@ -2,7 +2,7 @@
 title: Show Pager on Top and Bottom
 description: An example on how to show the Kendo UI Grid pager on top and bottom.
 type: how-to
-page_title: Duplicate Grid Pager | Kendo UI Grid
+page_title: Duplicate Pager | Kendo UI Grid
 slug: grid-show-pager-top-bottom
 tags: grid, pager, duplicate, top, bottom, multiply, clone
 res_type: kb
@@ -24,11 +24,11 @@ component: grid
 
 ## Description
 
-I would like to show the pager in the Grid both above and below the items. 
+How can I show the pager in the Grid both above and below the items?
 
 ## Solution
 
-The example below illustrates how the Pager can be duplicated and added above the Grid items.
+The following example demonstrates how you can duplicate and add the Pager above the Grid items.
 
 ```html
 <div id="grid"></div>

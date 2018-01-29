@@ -2217,7 +2217,7 @@ var __meta__ = { // jshint ignore:line
 
             var visibleItem = this._firstVisibleItem();
 
-            if (visibleItem) {
+            if (visibleItem && visibleItem.group) {
                 this.header.html(template(visibleItem.group));
             }
         },

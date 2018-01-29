@@ -1,8 +1,8 @@
 ---
 title: Get Current Time in MediaPlayer
-description: An example on how to get the elapsed time in MediaPlayer.
+description: An example on how to get the elapsed time in the Kendo UI MediaPlayer.
 type: how-to
-page_title: Get the current time in MediaPlayer | Kendo UI MediaPlayer
+page_title: Get the Current Time | Kendo UI MediaPlayer
 slug: mediaplayer-get-current-time
 tags: mediaplayer, current, time, seek, get, position, seconds, played, elapsed
 res_type: kb
@@ -24,16 +24,13 @@ component: menu
 
 ## Description
 
-I want to get the current time that is reached when playing media file. 
+How can I get the current time which is reached when playing a media file?
 
 ## Solution
 
-1. Get reference of the `.k-mediaplayer-currenttime` span element showing the current time and extract the text from it.
-1. Split the text and push in an array
-1. Iterate over the array and convert the time in seconds
-
-The example below illustrates the approach:
-
+1. Get a reference of the `.k-mediaplayer-currenttime` span element, which shows the current time, and extract the text from it.
+1. Split the text and push in an array.
+1. Iterate over the array and convert the time in seconds.
 
 ```html
 <div id="mediaplayer" style="height:360px"></div>
@@ -70,4 +67,3 @@ The example below illustrates the approach:
 
 </script>
 ```
-

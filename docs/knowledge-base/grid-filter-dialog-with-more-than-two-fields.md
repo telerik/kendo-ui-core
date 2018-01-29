@@ -1,20 +1,20 @@
 ---
-title: Set Grid's Filter Dialog With More than Two Fields
-description: An example on how to configure the filter dialog to show more than two fields
+title: Set Filter Dialog with Two or More Fields in Grid
+description: An example on how to configure the filter dialog of the Kendo UI Grid to show more than two fields.
 type: how-to
-page_title: Set Grid's Filter Dialog With More than Two Fields
+page_title: Set Filter Dialog with More Than Two Fields | Kendo UI Grid
 slug: grid-filter-dialog-with-more-than-two-fields
 tags: grid, filter, dialog, more, than, two, fields, multiple, filtering
 ticketid: 1147919
 res_type: kb
-
 ---
 
 ## Environment
+
 <table>
  <tr>
   <td>Product</td>
-  <td>Grid for Progress® Kendo UI®</td>
+  <td>Progress Kendo UI Grid</td>
  </tr>
  <tr>
   <td>Operating System</td>
@@ -32,13 +32,13 @@ res_type: kb
 
 ## Description
 
-The Kendo UI Grid API includes the `filterable.extra` property which allows the user to input a second criterion in the filter menu. 
+The Kendo UI Grid API includes the `filterable.extra` property which allows the user to add a second criterion in the filter menu.
 
-Is it possible to display a Filter Dialog with 3 or more fields?
+How can I display a filter dialog with three or more fields?
 
 ## Solution
 
-In order to display three or more fields in the filter dialog of a Kendo UI Grid, we must manually change the contents of the filter menu container and its logic by subscribing to the `filterMenuInit` event of the API:
+Manually change the content of the filter menu container and its logic by subscribing to the `filterMenuInit` event of the API.
 
 ```html
 <script src="https://demos.telerik.com/kendo-ui/content/shared/js/people.js"></script>
@@ -73,15 +73,15 @@ In order to display three or more fields in the filter dialog of a Kendo UI Grid
             .empty()
             .append($('<span>First name: </span><br /><input id="first-name-operators" /><input id="first-name-tb" class="k-textbox" /><br /><input id="first-logic" /><br /><span>Last name: </span><br /><input id="last-name-operators" /><input id="last-name-tb" class="k-textbox" /><br /><input id="second-logic" /><br /><span>JobTitle: </span><br /><input id="job-title-operators" /><input id="job-title-tb" class="k-textbox" /><div><button type="submit" class="k-button k-primary" id="submit">Filter</button><button type="reset" class="k-button" id="clear">Clear</button></div>'));
           var operators = ['eq', 'startswith', 'contains'];
-          
+
           $('#first-name-operators, #last-name-operators, #job-title-operators').kendoDropDownList({
             dataSource: operators
           });
-          
+
           $('#first-logic, #second-logic').kendoDropDownList({
             dataSource: ['and', 'or']
           });
-          
+
           $('#submit').kendoButton({
             click: function(){
               var firstName = $('#first-name-tb').val();
@@ -91,7 +91,7 @@ In order to display three or more fields in the filter dialog of a Kendo UI Grid
               var lastNameOperator = $('#last-name-operators').data('kendoDropDownList').value();
               var titleOperator = $('#job-title-operators').data('kendoDropDownList').value();
               var logic = $('#first-logic').data('kendoDropDownList').value();
-              
+
               var filter = {
                 logic: logic,
                 filters: [{
@@ -108,11 +108,11 @@ In order to display three or more fields in the filter dialog of a Kendo UI Grid
                     value: title
                   }]
               }
-              
+
               e.sender.dataSource.filter(filter);
             }
           });
-          
+
           $('#clear').kendoButton({
             click: function(){
               e.sender.dataSource.filter({});
@@ -128,5 +128,5 @@ In order to display three or more fields in the filter dialog of a Kendo UI Grid
 
 ## See Also
 
-* [filterMenuInit Event API Reference.](https://docs.telerik.com/kendo-ui/controls/layout/window/overview)
-* [filterable.extra Property API Reference.](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid/configuration/filterable.extra)
+* [API Reference of the filterMenuInit Event](https://docs.telerik.com/kendo-ui/controls/layout/window/overview)
+* [API Reference of the filterable.extra Property](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid/configuration/filterable.extra)

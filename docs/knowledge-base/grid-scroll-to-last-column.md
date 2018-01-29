@@ -1,8 +1,8 @@
 ---
-title: Scroll to Last Grid column
-description: An example on how to scroll the last column in Kendo Grid into view.
+title: Scroll to the Last Grid Column
+description: An example on how to scroll the last column of the Kendo UI Grid into view.
 type: how-to
-page_title: Scroll last column into view | Kendo UI Grid
+page_title: Scroll the Last Column into View | Kendo UI Grid
 slug: grid-scroll-to-last-column
 tags: kendoui, kendo, grid, column, scroll, view, move
 res_type: kb
@@ -20,14 +20,13 @@ component: grid
 
 ## Description
 
-I have a grid with a lot of columns and would like to scroll the last column into view when the Grid is loaded initially.
+How can I scroll the last column into view when a Grid with many columns is initially loaded?
 
 ## Solution
 
-1. Handle the Grid [dataBound event](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid/events/databound). 
-1. In the handler get reference of the last column and its offset. 
-1. Call [scrollLeft method](https://api.jquery.com/scrollleft/) with the acquired offset.
-
+1. Handle the [`dataBound`](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid/events/databound) event of the Grid.
+1. In the handler, get a reference of the last column and its offset.
+1. Call the [`scrollLeft`](https://api.jquery.com/scrollleft/) method with the acquired offset.
 
 ```html
 <div id="grid" style="width: 400px;"></div>

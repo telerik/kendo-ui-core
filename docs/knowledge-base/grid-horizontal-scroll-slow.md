@@ -1,16 +1,17 @@
 ---
-title: Horizontal Scrollbar Moving Slow
-description: The Grid component horizontal scrollbar moves very slow
+title: The Horizontal Scrollbar of the Grid Moves Slowly
+description: The horizontal scrollbar of the Kendo UI Grid moves very slowly.
 type: troubleshooting
-page_title: Grid Slow Horizontal Scroll
+page_title: The Horizontal Scrollbar Moves Slowly | Kendo UI Grid
 slug: grid-horizontal-scroll-slow
-position: 
+position:
 tags: grid, scroll, horizontal, moving, slow, not, working, scrollbar
 ticketid: 1149398
 res_type: kb
 ---
 
 ## Environment
+
 <table>
 	<tr>
 		<td>Product Version</td>
@@ -18,35 +19,39 @@ res_type: kb
 	</tr>
 	<tr>
 		<td>Product</td>
-		<td>Grid for Progress® Kendo UI®</td>
+		<td>Progress Kendo UI Grid</td>
 	</tr>
 </table>
 
 
 ## Description
-The horizontal scrollbar in the Grid does not behave correctly. When I click on the empty space in the scrollbar it moves very little.
 
-## Cause\Possible Cause(s)
-By default the Grid is using two event handlers to synchronize horizontal scrolling. One is for the Grid data area and one is for the headers. This is done to address some edge cases where the data cells and the header can get misaligned. This feature may cause the horizontal scrollbar to move slower and with smaller increments.
+The horizontal scrollbar in the Grid does not behave correctly. When I click on the empty space in the scrollbar, it moves only little by little.
+
+## Cause
+
+By default, the Grid uses two event handlers to synchronize its horizontal scrolling&mdash;one for the Grid data area and the other one for the headers. This approach is implemented to address some edge cases where the data cells and the header can get misaligned. This feature may cause the horizontal scrollbar to move slower and with smaller increments.
 
 ## Solution
-In order to change the behavior you can detach the scroll handler for the Grid header: 
 
-```JavaScript
-$("#grid").data("kendoGrid").wrapper.find(".k-grid-header-wrap").off("scroll.kendoGrid");
-```
+To change the default behavior:
 
-If there are multiple Grid components on the page it is possible to iterrate through them when the page is loaded and detach the header scroll handler for each one:
+1. Detach the scroll handler for the Grid header.
 
+		```JavaScript
+		$("#grid").data("kendoGrid").wrapper.find(".k-grid-header-wrap").off("scroll.kendoGrid");
+		```
 
-```JavaScript
-$.each($(".k-grid"), function (index, value) {
-    $(value).data("kendoGrid").wrapper.find(".k-grid-header-wrap").off("scroll.kendoGrid");
-    }
-);
-```
+1. If the page contains multiple Grid components, iterate through them when the page is loaded and detach the header scroll handler for each one.
 
-The example below illustrates the approach:
+		```JavaScript
+		$.each($(".k-grid"), function (index, value) {
+		    $(value).data("kendoGrid").wrapper.find(".k-grid-header-wrap").off("scroll.kendoGrid");
+		    }
+		);
+		```
+
+The following example demonstrates the implementation of the suggested approach.
 
 ```html
 <div id="grid" style="width: 600px;"></div>
@@ -89,4 +94,3 @@ The example below illustrates the approach:
     });
 </script>
 ```
-

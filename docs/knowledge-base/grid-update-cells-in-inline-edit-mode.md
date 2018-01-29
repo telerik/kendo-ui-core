@@ -1,20 +1,20 @@
 ---
-title: Update Contiguous Cells in Grid's Row While in Inline Edit Mode
-description: An example on how to update the value of contiguous cells while on inline edit mode
+title: Update Adjacent Cells in Grid Rows while in Inline Edit Mode
+description: An example on how to update the value of adjacent cells while the Kendo UI Grid is in inline edit mode.
 type: how-to
-page_title: Update Contiguous Cells in Grid's Row While in Inline Edit Mode
+page_title: Update Adjacent Cells in Rows in Inline Edit Mode | Kendo UI Grid
 slug: grid-update-cells-in-inline-edit-mode
 tags: grid, inline, edit, mode, update, cells, next, contiguous
 ticketid: 1147034
 res_type: kb
-
 ---
 
 ## Environment
+
 <table>
  <tr>
   <td>Product</td>
-  <td>Grid for Progress® Kendo UI®</td>
+  <td>Progress Kendo UI Grid</td>
  </tr>
  <tr>
   <td>Operating System</td>
@@ -32,17 +32,17 @@ res_type: kb
 
 ## Description
 
-I'm working on an application that takes advantage of the Kendo UI Grid in inline edit mode. There's a ProductName Field and when I change its value, I would like to also update the model and the cells in the row that corresponds to said value.
+My Grid has a `ProductName` field and is in the inline edit mode. When I change the value of the `ProductName` field, the Model is not updated and the change is not reflected in the affected row cells.
 
-I tried updating the Model but the change is not reflected in the cells of the row in edit mode.
-
-How can I update the values of the row currently in Edit Mode? 
+How can I update the Model and, respectively, the row cells which correspond to the value I provide to the `ProductName` field when the Grid is in its inline editing mode?
 
 ## Solution
 
-In order to update the value of cells in an inline edit row mode when another field in the same row changes, while having the new value reflected still in edit mode, we subscribe to the `change` event of the Kendo UI Grid API and, when triggered, check if its `action` corresponds to `itemchange` and its `field` to the one we choose.
+To update the value of the Grid cells in an inline edit row mode when another field in the same row changes and while having the new value reflected still in edit mode:
 
-If both conditions are met, we can get the `DataItem` of the row being edited and update it using the `set` method, which will propagate the changes in the GUI.
+1. Subscribe to the `change` event of the Grid.
+1. When the event is triggered, check if its `action` corresponds to `itemchange` and its `field` to the one you choose.
+1. If both conditions are met, get the `DataItem` of the row that is edited and update it by using the `set` method, which will propagate the changes in the GUI.
 
 ```html
 <div id="example">
@@ -112,7 +112,7 @@ If both conditions are met, we can get the `DataItem` of the row being edited an
       $('<input class="k-checkbox" id="' + guid + '" type="checkbox" name="Discontinued" data-type="boolean" data-bind="checked:Discontinued">').appendTo(container);
       $('<label class="k-checkbox-label" for="' + guid + '">​</label>').appendTo(container);
     }
-  
+
     function onChange(e) {
       if (e.action == "itemchange" && e.field == "ProductName")
       {
@@ -129,5 +129,5 @@ If both conditions are met, we can get the `DataItem` of the row being edited an
 
 ## See Also
 
-* [Set Method API Reference.](https://docs.telerik.com/kendo-ui/api/javascript/data/model#methods-set)
-* [Change Event API Reference.](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid/events/change)
+* [The set Method of the Grid](https://docs.telerik.com/kendo-ui/api/javascript/data/model#methods-set)
+* [The change Event of the Grid](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid/events/change)

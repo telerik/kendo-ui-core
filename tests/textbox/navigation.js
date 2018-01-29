@@ -190,9 +190,10 @@
         kendo.culture("en-US");
     });
 
-    test("Prevent decimal separator if decimals: 0", 1, function() {
+    test("Prevent decimal separator if decimals is set to 0 and restrictDecimals is enabled", 1, function() {
         var textbox = new NumericTextBox(input, {
-            decimals: 0
+            decimals: 0,
+            restrictDecimals:true
         });
 
         input.pressKey(".", {
@@ -200,6 +201,19 @@
                 ok(true);
             }
         });
+    });
+
+    test("Allow decimal separator if decimals is set to 0 and restrictDecimals is disabled", 1, function() {
+        var textbox = new NumericTextBox(input, {
+            decimals: 0,
+            value:1
+        });
+
+        var period = ".";
+        var event = jQuery.Event(  'keypress', { keyCode: period.charCodeAt(0), which: period.charCodeAt(0) });
+
+        input.trigger(event);
+        ok(!event.isDefaultPrevented())
     });
 
     asyncTest("Avoid exception when group separator is empty string", function() {

@@ -502,17 +502,8 @@ var __meta__ = { // jshint ignore:line
             } else if (that._allowOpening()) {
 
                 //selects values in autoBind false and non virtual scenario on initial load
-                if (!that.options.autoBind && !that.options.virtual && that._initialOpen){
-                    var dataItems = that.listView._valueIndices(that._initialValues).map(function (index) {
-                        return {
-                            dataItem: that.listView.dataItemByIndex(index)
-                        };
-                    });
-                    that.persistTagList = false;
-                    that._selectValue(dataItems, []);
-                    that.listView._values = that._initialValues;
-                    that.listView.selectedDataItems(dataItems);
-                    that.persistTagList = true;
+                if (!that.options.autoBind && !that.options.virtual && that.options.value && !$.isPlainObject(that.options.value[0])){
+                    that.value(that._initialValues);
                     that._initialOpen = false;
                 }
 
@@ -837,11 +828,17 @@ var __meta__ = { // jshint ignore:line
                     that._selectRange(0, listView.items().length -1);
                 }
             } else if (key === keys.ENTER && visible) {
+                e.preventDefault();
+
+                if (listView.focus().hasClass(SELECTEDCLASS)) {
+                    that._close();
+                    return;
+                }
+
                 that._select(listView.focus()).done(function() {
                     that._change();
                     that._close();
                 });
-                e.preventDefault();
             } else if (key === keys.SPACEBAR && e.ctrlKey && visible) {
                 if (that._activeItem && listView.focus() && listView.focus()[0] === that._activeItem[0]) {
                     that._activeItem = null;

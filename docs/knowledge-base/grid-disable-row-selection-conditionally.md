@@ -1,6 +1,6 @@
 ---
-title: Conditional Row Selection
-description: An example on how to select rows conditionally in the Kendo UI Grid.
+title: Select Rows on Conditions
+description: An example on how to conditionally select rows in the Kendo UI Grid.
 type: how-to
 page_title: Disable Selection of Specific Rows | Kendo UI Grid
 slug: grid-disable-row-selection-conditionally
@@ -11,6 +11,7 @@ component: grid
 ---
 
 ## Environment
+
 <table>
 	<tr>
 		<td>Product Version</td>
@@ -18,21 +19,19 @@ component: grid
 	</tr>
 	<tr>
 		<td>Product</td>
-		<td>Grid for Progress® Kendo UI®</td>
+		<td>Progress Kendo UI Grid</td>
 	</tr>
 </table>
 
 
 ## Description
 
-How can I disable the selection for specific rows in the Kendo UI Grid?
+How can I disable the selection of specific rows in the Grid?
 
 ## Solution
 
-To disable the selection for specific rows:
-
 1. Handle the [`change`](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid/events/change) event of the Grid.
-1. In the event handler, based on a condition, remove the "k-state-selected" class from the desired rows.
+1. In the event handler, based on a condition, remove the `k-state-selected` class from the desired rows.
 
 ```html
 <div id="grid"></div>

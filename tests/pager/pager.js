@@ -699,4 +699,24 @@
         $(document.body).trigger("mousedown");
         ok(!pager.list.hasClass("k-state-expanded"));
     });
+
+    test("page size is correctly calculated when all options is set and total is not set", function() {
+        var dataSource = new DataSource({
+            pageSize: 1,
+            data: [1,2,3]
+        });
+
+        var pager = $("<div />").appendTo(QUnit.fixture).kendoPager({
+            dataSource: dataSource,
+            pageSizes: true
+        });
+        dataSource._total = 0;
+        dataSource._online = true;
+        var dropdownlist = pager.find(".k-pager-sizes select").data("kendoDropDownList");
+        dropdownlist.dataSource.at(0).set("value", "All");
+        dropdownlist.value("All");
+        dropdownlist.element.trigger("change");
+
+        equal(dataSource._pageSize, 3);
+    });
 })();

@@ -1,8 +1,8 @@
 ---
-title: Custom MVVM Binding in Custom Widget
-description: An example on how to implement custom MVVM binding in a custom Kendo UI widget.
+title: Implement Custom MVVM Bindings in Custom Widgets
+description: An example on how to implement custom MVVM bindings in custom Kendo UI widgets for jQuery.
 type: how-to
-page_title: Custom MVVM Binding in Custom Widget | Kendo UI for jQuery
+page_title: Implement Custom MVVM Bindings in Custom Widgets | Kendo UI for jQuery
 slug: mvvm-custom-binding-on-custom-widget
 tags: kendo, kendoui, mvvm, custom-binding, custom-widget
 ticketid: 1144432
@@ -21,11 +21,13 @@ component: mvvm
 
 ## Description
 
-I have a custom widget and I currently use the value binding to set data inside it via MVVM. I would like to be able to provide a second value to another (custom) property via MVVM.
+I have a custom Kendo UI widget for jQuery which currently uses the value binding to set data inside it over MVVM.
+
+How can I provide a second value to another custom property over MVVM?
 
 ## Solution
 
-To achieve the desired, custom widget and [custom binding](https://docs.telerik.com/kendo-ui/framework/mvvm/bindings/custom#custom-widget-binding) should be defined:
+Define a custom widget and [custom binding](https://docs.telerik.com/kendo-ui/framework/mvvm/bindings/custom#custom-widget-binding).
 
 ````html
 <div data-role="somewidget" data-bind="value: value, bgcolour: bgColour" ></div>
@@ -40,19 +42,19 @@ To achieve the desired, custom widget and [custom binding](https://docs.telerik.
     refresh: function() {
       var that = this,
           value = that.bindings["bgcolour"].get(); //get the value from the View-Model
-		  
+
       $(that.element).css('background-color', value); //update the widget
     }
   });
-  
+
   var kendo = window.kendo,
       ui = kendo.ui,
       Widget = ui.Widget;
-	  
+
   var SomeWidget = Widget.extend({
     init: function (element, options) {
       var that = this;
-	  
+
       kendo.ui.Widget.fn.init.call(that, element, options);
       that.refresh();
     },        
@@ -82,9 +84,9 @@ To achieve the desired, custom widget and [custom binding](https://docs.telerik.
       this.element.css('background-color', this._bgcolour);
     }
   });
-  
+
   ui.plugin(SomeWidget);
-  
+
   //View-Model source
   var viewModel = kendo.observable({
     value: "Test it",
@@ -93,11 +95,11 @@ To achieve the desired, custom widget and [custom binding](https://docs.telerik.
       this.set('bgColour', '#0000ff');
     }
   });
-  
+
   kendo.bind(document.body, viewModel);    
 </script>
 ````
 
 ## See Also
 
-* [MVVM in Kendo UI](https://docs.telerik.com/kendo-ui/framework/mvvm/overview)
+* [kendo UI MVVM Pattern](https://docs.telerik.com/kendo-ui/framework/mvvm/overview)

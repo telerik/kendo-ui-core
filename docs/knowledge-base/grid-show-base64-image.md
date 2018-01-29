@@ -1,11 +1,11 @@
 ---
-title: Show base64 image in Grid
-description: An example on how to show base64 encoded image in Kendo Grid.
+title: Show base64 Image in Grid
+description: An example on how to show base64-encoded images in the Kendo UI Grid.
 type: how-to
-page_title: Base64 encoded image in Grid | Kendo UI Grid
+page_title: Render base64-Encoded Images | Kendo UI Grid
 slug: grid-show-base64-image
 tags: grid, image, base64, encoded, cell, template, show, display
-ticketid: 1149817 
+ticketid: 1149817
 res_type: kb
 ---
 
@@ -22,12 +22,12 @@ res_type: kb
 
 ## Description
 
-I would like to show a base64-encoded image in the Grid.
-
+How can I display a base64-encoded image in the Grid?
 
 ## Solution
 
-Specify a field in the server-side model that will hold the base64-encoded string. When the Grid reads the data use a [column.template](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid/configuration/columns.template) to display the image. 
+1. Specify a field in the server-side model that will hold the base64-encoded string.
+1. When the Grid reads the data, display the image by using [`column.template`](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid/configuration/columns.template).
 
 
 ```html

@@ -775,7 +775,7 @@ var __meta__ = { // jshint ignore:line
         },
         _focusableElements: function(){
             var elements = this.element.find(focusableNodesSelector).filter(function(i, item){
-                return item.tabIndex >= 0 && $(item).is(':visible') && !$(item).is(':disabled');
+                return item.tabIndex >= 0 && $(item).is(':visible') && !$(item).is('[disabled]');
             });
 
             if (this.element.is("[tabindex]")) {
