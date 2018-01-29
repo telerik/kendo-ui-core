@@ -9046,6 +9046,28 @@ Sets the title of the PDF file.
       chart.saveAsPDF();
     </script>
 
+### persistSeriesVisibility `Boolean` *(default: false)*
+
+Specifies if the series visible option should be persisted when changing the dataSource data.
+
+#### Example - persist visibility when changing the data
+    <div id="chart"></div>
+    <script>
+      $("#chart").kendoChart({
+          persistSeriesVisibility: true,
+          dataSource: [{ value: 1 }, { value: 2 }],
+          series: [
+              { name: "Series 1", field: "value" },
+              { name: "Series 2", field: "value" }
+          ]
+      });
+
+      var chart = $("#chart").getKendoChart();
+
+      chart.findSeriesByIndex(1).toggleVisibility(false);
+      chart.dataSource.data([{ value: 3 }, { value: 4 }]);
+    </script>
+
 ### plotArea `Object`
 
 The plot area configuration options. The plot area is the area which displays the series.

@@ -9,6 +9,21 @@ slug: taghelpers_chart_aspnetcore
 
 The Chart tag helper helps you configure the Kendo UI Chart widget in ASP.NET Core applications.
 
+The [Kendo UI Charts](http://demos.telerik.com/aspnet-core/) use modern browser technologies to render high-quality data visualizations. All graphics are rendered on the client by using [Scalable Vector Graphics (SVG)](https://en.wikipedia.org/wiki/Scalable_Vector_Graphics) with a fallback to [Canvas](http://www.canvasgfx.com/).
+
+Kendo UI Charts support the following series types:
+
+* Bar and Column
+* Line and Vertical Line
+* Area and Vertical Area
+* Bullet
+* Pie and Donut
+* Scatter
+* Scatter Line
+* Bubble
+* Radar and Polar
+
+
 ## Basic Usage
 
 The following example demonstrates how to define the Chart by using the Chart tag helper.

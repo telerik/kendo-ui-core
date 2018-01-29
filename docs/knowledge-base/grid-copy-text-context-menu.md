@@ -1,8 +1,8 @@
 ---
-title: Copy Cell contents with Context Menu
+title: Copy Cell Content in Grid by Using Context Menu
 description: An example on how to use context menu for copying cell content in Kendo Grid.
 type: how-to
-page_title: Copy text in cell with ContextMenu | Kendo UI Grid
+page_title: Copy Text in Cells with Context Menu | Kendo UI Grid
 slug: grid-copy-text-context-menu
 tags: kendoui, kendo, grid, column, content, copy, menu, selection
 res_type: kb
@@ -20,14 +20,15 @@ component: grid
 
 ## Description
 
-I have a Kendo Grid with selection enabled. Since text cannot be selected with mouse drag I would like to have context menu to copy the contents of a cell.
+I have a Kendo UI Grid with its selection features enabled and I cannot select the text over a mouse-drag action.  
+
+How can I use the context menu to copy the contents of a Grid cell?
 
 ## Solution
 
 1. Reference the third-party [clipboard.js library](https://clipboardjs.com/).
-1. Add Kendo ContextMenu that targets the Grid component
-1. Handle the ContextMenu [select event](https://docs.telerik.com/kendo-ui/api/javascript/ui/contextmenu#events-select) and push the cell content to the clipboard.
-
+1. Add the Kendo UI ContextMenu that targets the Grid component.
+1. Handle the [`select`](https://docs.telerik.com/kendo-ui/api/javascript/ui/contextmenu#events-select) events of the ContextMenu and push the cell content to the clipboard.
 
 ```html
 <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/1.7.1/clipboard.min.js"></script>

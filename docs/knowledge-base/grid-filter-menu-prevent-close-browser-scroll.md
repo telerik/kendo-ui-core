@@ -1,8 +1,8 @@
 ---
-title: Prevent Kendo Grid Filter Menu from Closing on Browser Scroll
-description: An example on how to prevent the filter menu from closing when the browser scrolls in the Kendo UI Grid.
+title: Prevent Grid Filter Menu from Closing on Browser Scroll
+description: An example on how to prevent the Kendo UI Grid filter menu from closing when the browser scrolls.
 type: how-to
-page_title: Prevent Browser Scroll from Closing the Filter Popup | Kendo UI Grid
+page_title: Prevent Closing the Filter Popup on Browser Scroll | Kendo UI Grid
 slug: grid-filter-menu-prevent-close-browser-scroll
 tags: grid, filtering, menu, popup, prevent, close, scroll
 ticketid: 1147708
@@ -11,6 +11,7 @@ component: grid
 ---
 
 ## Environment
+
 <table>
 	<tr>
 		<td>Product Version</td>
@@ -18,22 +19,20 @@ component: grid
 	</tr>
 	<tr>
 		<td>Product</td>
-		<td>Grid for Progress® Kendo UI®</td>
+		<td>Progress Kendo UI Grid</td>
 	</tr>
 </table>
 
 
 ## Description
 
-How can I prevent the filter pop-up from closing when the user scrolls the page in the Kendo UI Grid?
+How can I prevent the filter popup from closing when the user scrolls the page of the Grid?
 
 ## Solution
 
-To prevent the filter from closing:
-
 1. Handle the [`scroll`](https://api.jquery.com/scroll/) event of the `window`.
 1. In the event handler, set a global variable to `true`.
-1. In the [`filterMenuInit`](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid/events/filtermenuinit) event handler of the Grid, bind the [`close`](https://docs.telerik.com/kendo-ui/api/javascript/ui/popup#events-close) event to the `Popup` Widget.
+1. In the [`filterMenuInit`](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid/events/filtermenuinit) event handler of the Grid, bind the [`close`](https://docs.telerik.com/kendo-ui/api/javascript/ui/popup#events-close) event to the Popup widget.
 1. Based on the global variable, prevent the default behavior in the `close` event handler.
 
 ```html

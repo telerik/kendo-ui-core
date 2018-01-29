@@ -1,5 +1,5 @@
 ---
-title: Merge Cells in the Footer
+title: Merge Cells in the Grid Footer
 description: An example on how to fake merging cells in the footer of the Kendo UI Grid.
 type: how-to
 page_title: Combine Footer Cells | Kendo UI Grid
@@ -10,6 +10,7 @@ res_type: kb
 ---
 
 ## Environment
+
 <table>
 	<tr>
 		<td>Product Version</td>
@@ -17,22 +18,22 @@ res_type: kb
 	</tr>
 	<tr>
 		<td>Product</td>
-		<td>Grid for Progress® Kendo UI®</td>
+		<td>Progress Kendo UI Grid</td>
 	</tr>
 </table>
 
 
 ## Description
 
-How can I merge cells in the footer of the Kendo UI Grid?
+How can I merge cells in the footer of the Grid?
 
 ## Solution
 
-For the current version, merging cells is not possible out of the box, to fake this behavior:
+For the current version, it is not possible to merge cells out of the box. However, you cans till work around this issue.
 
-1. Use the [`footerTemplate`](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid/configuration/columns.footertemplate) configuration to add the desired content in a cell.
+1. Add the desired content in a cell by using the [`footerTemplate`](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid/configuration/columns.footertemplate) configuration.
 1. Set the `overflow: visible;` and `white-space: nowrap;` styles for this cell.
-1. Use CSS to remove the borders from the desired cells.
+1. Remove the borders from the desired cells by using CSS.
 
     ```html
     <style>

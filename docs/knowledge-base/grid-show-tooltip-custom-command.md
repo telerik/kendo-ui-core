@@ -1,8 +1,8 @@
 ---
 title: Show Tooltip for Grid Custom Command Buttons
-description: Display a tooltip when hovering custom command buttons in the Grid | Kendo UI Grid
+description: An example on how to display a tooltip when hovering custom command buttons in the Kendo UI Grid.
 type: how-to
-page_title: Display a Tooltip for Custom Command Buttons
+page_title: Display a Tooltip for Custom Command Buttons | Kendo UI Grid
 slug: grid-show-tooltip-custom-command
 tags: grid, command, tooltip
 ticketid: 1148238
@@ -10,10 +10,12 @@ res_type: kb
 ---
 
 ## Environment
+
 <table>
 	<tr>
 		<td>Product</td>
 		<td>Progress Kendo UI Grid</td>
+		<td>Progress Kendo UI Tooltip</td>
 	</tr>
 	<tr>
 		<td>Product Version</td>
@@ -23,17 +25,19 @@ res_type: kb
 
 
 ## Description
-I want to know how to show a tooltip for Kendo UI Grid custom command buttons.
+
+How can I show a tooltip for the Grid custom command buttons?
 
 ## Solution
-There is no property for setting a tooltip to command buttons but you can easily add one with custom code. 
 
-1. Set a `name` to the custom command button. This will produce a `k-grid-commandName` class in the button HTML output:
-	
+The Grid does not support a property for setting a tooltip to its command buttons. However, you can work around this issue by using a custom approach.
+
+1. Set a `name` to the custom command button to produce a `k-grid-commandName` class in the button HTML output.
+
 	```
 	    <a role="button" class="k-button k-button-icontext k-grid-custom" href="#">Do Stuff</a>
 	```
-1. Create a Kendo UI Tooltip, which `filter` property is set to include the `k-grid-commandName` class. 
+1. Create a Kendo UI Tooltip whose `filter` property is set to include the `k-grid-commandName` class.
 
 ```html
       <div id="grid"></div>

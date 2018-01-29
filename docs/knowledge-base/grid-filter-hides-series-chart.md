@@ -1,8 +1,8 @@
 ---
 title: Hide Series of the Pie Chart by Filtering the Grid
-description: An example on how to hide and show series of the Kendo UI Pie Chart by filtering the Kendo UI Grid.
+description: An example on how to show and hide series of the Kendo UI Pie Chart by filtering the Kendo UI Grid.
 type: how-to
-page_title: Filtering Grid Hides Series in the Chart | Kendo UI Grid
+page_title: Filter Grid to Hide Chart Series | Kendo UI Grid
 slug: grid-filter-hides-series-chart
 tags: grid, pie chart, filter, hide, series
 ticketid: 1145170
@@ -11,6 +11,7 @@ component: grid
 ---
 
 ## Environment
+
 <table>
 	<tr>
 		<td>Product Version</td>
@@ -18,19 +19,19 @@ component: grid
 	</tr>
 	<tr>
 		<td>Product</td>
-		<td>Grid for Progress® Kendo UI®</td>
+		<td>Progress Kendo UI Grid</td>
+		<td>Progress Kendo UI Chart</td>
 	</tr>
 </table>
 
 
 ## Description
 
-How can I hide series from the Kendo UI Pie Chart by filtering the Kendo UI Grid?
-How can I filter the Kendo UI Grid by hiding series in the Kendo UI Chart?
+How can I hide series from the Pie Chart by filtering the Grid and vice versa?
 
 ## Solution
 
-To hide the series by filtering the Grid:
+To hide the Chart series by filtering the Grid:
 
 1. In the [`filter`](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid/events/filter) event handler of the Grid, based on the filters, programmatically click on the legend labels of the Chart.
 1. In the [`legendItemClick`](https://docs.telerik.com/kendo-ui/api/javascript/dataviz/ui/chart#events-legendItemClick) event handler of the Chart, based on the hidden series, filter the Grid.

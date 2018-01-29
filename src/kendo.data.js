@@ -1178,6 +1178,12 @@ var __meta__ = { // jshint ignore:line
             },
             isnotnull: function(a) {
                 return "(" + a + " != null)";
+            },
+            isnullorempty: function(a) {
+                return "(" + a + " === null) || (" + a + " === '')";
+            },
+            isnotnullorempty: function(a) {
+                return "(" + a + " !== null) && (" + a + " !== '')";
             }
         };
     })();
@@ -3930,11 +3936,9 @@ var __meta__ = { // jshint ignore:line
 
             data = that._findRange(skip, math.min(skip + take, that.total()));
 
-            if (data.length) {
+            if (data.length || that.total() === 0) {
                 that._processRangeData(data, skip, take, pageSkip, size);
-
                 callback();
-
                 return;
             }
 
@@ -3953,9 +3957,6 @@ var __meta__ = { // jshint ignore:line
                     that.prefetch(size, take, function() {
                         that.range(skip, take, callback );
                     });
-                } else {
-                    that._processRangeData(data, skip, take, pageSkip, size);
-                    callback();
                 }
             }
         },

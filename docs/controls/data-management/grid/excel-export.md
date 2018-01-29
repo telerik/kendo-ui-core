@@ -110,7 +110,7 @@ The [`excelExport`](/api/javascript/ui/grid#events-excelExport) event allows cus
 
 The `workbook` event argument exposes the generated Excel workbook configuration.
 
-For a better understanding about how Excel documents work, refer to the [introductory article on Excel]({% slug introduction_excelexport_kendoui %}#excel-document-creation).
+For a better understanding about how Excel documents work, refer to the [introductory article on Excel]({% slug introduction_excelexport_kendoui %}#excel-document-creation) and the [Excel Export Appearance article]({% slug appearance_excelexport_kendoui %}).
 
 For more information on how to use the `background` option to set the background color of alternating rows while exporting the Grid to Excel, refer to [this example]({% slug howto_configure_color_alternating_rows_grid %}).
 

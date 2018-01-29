@@ -1,11 +1,11 @@
 ---
-title: Spreadsheet Date Validation Based on Previous Column Date
-description: An example on how validate a date in the Kendo UI Spreadsheet, based on the previous column date.
+title: Validate Spreadsheet Dates Based on Previous Column Date
+description: An example on how to validate a date in the Kendo UI Spreadsheet based on the previous column date.
 type: how-to
 page_title: Date Validation Based on Previous Column Value | Kendo UI Spreadsheet
 slug: spreadsheet-date-validation-based-on-previous-column-date
 tags: kendo, kendo-ui, spreadsheet, validation, date, previous-column
-ticketid: 1149122 
+ticketid: 1149122
 res_type: kb
 component: spreadsheet
 ---
@@ -21,15 +21,20 @@ component: spreadsheet
 
 ## Description
 
-I would like to know how to configure date validation based on the previous column date value. Current column date value should be always greater than or equal to previous column date. If my previous column is blank, the validation should check the column before that instead.
+I want to set my Spreadsheet in the following way:
+
+1. The date value in the current column to be always greater than or equal to the date value from the previous column.
+1. If my previous column is blank, the validation to check the column before the previous one.
+
+How can I configure the date validation in the Spreadsheet based on a date value from a previous column?
 
 ## Solution
 
-In order to achieve the desired, [the cell validation](https://demos.telerik.com/kendo-ui/spreadsheet/validation) should be configured in the following way:
+Configure the [cell validation](https://demos.telerik.com/kendo-ui/spreadsheet/validation) in the following way:
 
 ```html
     <div id="spreadsheet" style="width: 100%;"></div>
-	
+
 	<script>
 	  $(function() {
 		$("#spreadsheet").kendoSpreadsheet({
