@@ -3790,37 +3790,15 @@ div.k-scheduler-marquee:after {
             box-shadow: none;
         }
         &.k-dialog-button-layout-stretched {
-            width: 100%;
             .k-button {
-                display: inline-block;
-                padding: 1.5em 0;
-                border-radius: 0;
-                border-bottom: 0;
-                box-shadow: none;
-            }
-            .k-button:first-child {
-            border-bottom-left-radius: @border-radius;
-            border-left: 0;
-            }
-            .k-button:last-child {
-                border-bottom-right-radius: @border-radius;
-                border-right: 0;
+                padding: 15px;
             }
         }
         &.k-dialog-button-layout-normal {
-            width: auto;
-            margin: 0;
-            padding: 1em;
-            text-align: right;
             .k-button {
-                margin-left: 0.5em;
                 background: none;
                 border: none;
-                border-radius: 0;
-                box-shadow: none;
-                &:first-child {
-                    margin-left: 0;
-                }
+                margin: 0;
                 &.k-primary {
                     color: @selected-background;
                 }

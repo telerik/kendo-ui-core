@@ -18,7 +18,7 @@
 {
     position: static;
     margin: 0;
-    padding: 0.6em 0.8em 1em 0.8em;
+    padding: 0.8em;
     width: auto;
 }
 
@@ -51,6 +51,47 @@
 {
     margin: 0;
     padding: 0;
+}
+
+.k-dialog {
+    overflow: hidden;
+
+    .k-dialog-buttongroup {
+        width: 100%;
+        box-sizing: border-box;
+
+        .k-button {
+            display: inline-block;
+            text-overflow: ellipsis;
+            display: inline-block;
+        }
+
+        &.k-dialog-button-layout-stretched {
+            .k-button {
+                margin: 0;
+                border-radius: 0;
+                border-bottom: 0;
+                border-width: 1px 0 0 1px;
+            }
+            .k-button:first-child {
+            border-left-width: 0;
+            }
+            .k-button:last-child {
+                border-right-width: 0;
+            }
+        }
+        &.k-dialog-button-layout-normal {
+            padding: 1em;
+            justify-content: flex-end;
+            flex-wrap: wrap;
+            .k-button {
+                margin-left: 0.5em;
+                &:first-child {
+                margin-left: 0;
+                }
+            }
+        }
+    }
 }
 
 .k-dialog .k-dialog-titlebar .k-dialog-actions {
