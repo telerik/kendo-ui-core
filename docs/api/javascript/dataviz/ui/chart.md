@@ -33368,6 +33368,10 @@ Hides the chart tooltip.
 
 Returns the chart [plotArea](/api/javascript/dataviz/chart/chart_plotarea).
 
+#### Returns
+
+`kendo.dataviz.ChartPlotArea` The chart plot area.
+
 #### Example - use the plotArea backgroundVisual to change the background
 
     <div id="chart"></div>

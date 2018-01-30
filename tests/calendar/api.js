@@ -886,4 +886,26 @@ test("_current is not set if date is disabled", 1, function() {
     equal(calendar.value(), null);
 });
 
+test("selectDates selects unique dates", 1, function() {
+    var calendar = new Calendar(div, {
+        selectDates: [new Date(2018, 0, 10), new Date(2018, 0, 11)],
+        selectable: "multiple"
+    });
+
+    calendar.selectDates([new Date(2018, 0, 20), new Date(2018, 0, 20)]);
+
+    deepEqual(calendar.selectDates(), [new Date(2018, 0, 20)]);
+});
+
+test("selectDates selects empty array", 1, function() {
+    var calendar = new Calendar(div, {
+        selectDates: [new Date(2018, 0, 10), new Date(2018, 0, 11)],
+        selectable: "multiple"
+    });
+
+    calendar.selectDates([]);
+
+    deepEqual(calendar.selectDates(), []);
+});
+
 })();

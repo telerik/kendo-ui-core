@@ -115,7 +115,7 @@ var __meta__ = { // jshint ignore:line
                         }
                         if(that._view.name != "month" || options.selectable == "single") {
                              that._click($(link));
-                        }                               
+                        }
                     })
                     .on("mouseup" + ns, "table.k-content, .k-footer", function() {
                         that._focusView(that.options.focusOnNav !== false);
@@ -129,10 +129,10 @@ var __meta__ = { // jshint ignore:line
             if(that._isMultipleSelection() && that.options.weekNumber) {
                 element.on(CLICK, WEEKCOLUMNSELECTOR, function(e) {
                         var first = $(e.currentTarget).closest("tr").find(CELLSELECTORVALID).first(),
-                            last = that.selectable._lastActive = $(e.currentTarget).closest("tr").find(CELLSELECTORVALID).last();                         
+                            last = that.selectable._lastActive = $(e.currentTarget).closest("tr").find(CELLSELECTORVALID).last();
                         that.selectable.selectRange(first, last, { event: e});
                         that._current = that._value = that._toDateObject(last.find("a"));
-                        that._class(FOCUSED, that._current);           
+                        that._class(FOCUSED, that._current);
                 });
             }
 
@@ -428,9 +428,9 @@ var __meta__ = { // jshint ignore:line
             validSelectedDates = $.grep(datesUnique, function(value) {
                 if(value) {
                     return +that._validateValue(new Date(value.setHours(0, 0, 0, 0))) === +value;
-                }   
+                }
             });
-            that._selectDates = validSelectedDates.length > 0? validSelectedDates: that._selectDates;
+            that._selectDates = validSelectedDates.length > 0 ? validSelectedDates : (datesUnique.length === 0 ? datesUnique : that._selectDates);
             that._visualizeSelectedDatesInView();
         },
 
@@ -454,20 +454,20 @@ var __meta__ = { // jshint ignore:line
                 that._cell.removeClass(SELECTED);
             } else {
                 that._changeView = !value || view && view.compare(value, that._current) !== 0;
-                that.navigate(value);                            
+                that.navigate(value);
             }
         },
 
         _validateValue: function(value) {
-            var that = this,                
+            var that = this,
                 options = that.options,
                 min = options.min,
-                max = options.max;               
+                max = options.max;
 
             if (value === null) {
                 that._current = createDate(that._current.getFullYear(), that._current.getMonth(), that._current.getDate());
             }
-            
+
             value = parse(value, options.format, options.culture);
 
             if (value !== null) {
@@ -484,7 +484,7 @@ var __meta__ = { // jshint ignore:line
                 that._value = null;
             }
 
-            return that._value;      
+            return that._value;
         },
 
         _visualizeSelectedDatesInView: function() {
@@ -499,7 +499,7 @@ var __meta__ = { // jshint ignore:line
             var cells = that._table
                 .find(CELLSELECTOR)
                 .filter(function(index, element) {
-                    return selectedDates[$(element.firstChild).attr(kendo.attr(VALUE))];                      
+                    return selectedDates[$(element.firstChild).attr(kendo.attr(VALUE))];
                 });
             if(cells.length > 0) {
                 that.selectable._selectElement(cells, true);
@@ -536,12 +536,12 @@ var __meta__ = { // jshint ignore:line
 
         _onRelatedTarget: function(target) {
             var that = this;
-            
+
             if(that.selectable.options.multiple && target.is(CELLSELECTORVALID)) {
                 that._current = that._toDateObject(target.find("a"));
                 that._class(FOCUSED, that._toDateObject(target.find("a")));
             }
-            
+
         },
 
         _onSelect: function(e) {
@@ -561,9 +561,9 @@ var __meta__ = { // jshint ignore:line
 
             if(eventArgs.event.ctrlKey) {
                 if($(eventArgs.event.currentTarget).is(CELLSELECTORVALID)) {
-                    that._toggleSelection($(eventArgs.event.currentTarget));       
+                    that._toggleSelection($(eventArgs.event.currentTarget));
                 }
-                else {        
+                else {
                     that._cellsBySelector(CELLSELECTORVALID).each(function(index, element){
                         var value = that._toDateObject($(element).find("a"));
                         that._deselect(value);
@@ -579,9 +579,9 @@ var __meta__ = { // jshint ignore:line
             }
             else {
                 that._selectDates = [];
-                that._addSelectedCellsToArray();            
+                that._addSelectedCellsToArray();
             }
-             that.trigger(CHANGE);  
+             that.trigger(CHANGE);
         },
 
         _destroySelectable: function() {
@@ -602,22 +602,22 @@ var __meta__ = { // jshint ignore:line
                 }
                 else {
                     that._deselect(date);
-                }    
+                }
         },
-        
+
         //shift selection
         _rangeSelection: function(toDateCell, startDate) {
             var that = this,
                 fromDate  = startDate || that._toDateObject(that.selectable.value().first().find("a")),
                 toDate = that._toDateObject(toDateCell.find("a")),
                 daysDifference;
-			
+
             if(that.selectable._lastActive || that._value) {
                 fromDate = that.selectable._lastActive? that._toDateObject(that.selectable._lastActive.find("a")): new Date(+that._value);
             } else {
                 that.selectable._lastActive = startDate? that._cellByDate(that._view.toDateString(startDate), CELLSELECTORVALID): that.selectable.value().first();
             }
-            
+
             that._selectDates = [];
             daysDifference = daysBetweenTwoDates(fromDate, toDate);
             addDaysToArray(that._selectDates, daysDifference, fromDate, that.options.disableDates);
@@ -635,14 +635,14 @@ var __meta__ = { // jshint ignore:line
             that.selectable.value().each(function(index, item) {
                 var date = that._toDateObject($(item.firstChild));
                 if(!that.options.disableDates(date)) {
-                    that._selectDates.push(date);              
-                }     
+                    that._selectDates.push(date);
+                }
             });
         },
 
         _deselect: function(date) {
             var that = this;
-                
+
             var currentDateIndex = that._selectDates.map(Number).indexOf(+date);
             if(currentDateIndex != -1) {
                 that._selectDates.splice(currentDateIndex, 1);
@@ -657,7 +657,7 @@ var __meta__ = { // jshint ignore:line
             return +date <= +lastDateInView && +date >= +firstDateInView;
         },
 
-        
+
 
         _move: function(e) {
             var that = this,
@@ -700,7 +700,7 @@ var __meta__ = { // jshint ignore:line
                 currentValue.setFullYear(temp.getFullYear());
                 prevent = true;
             }
-            
+
             if (e.ctrlKey) {
                 if (key == keys.RIGHT && !isRtl || key == keys.LEFT && isRtl) {
                     that.navigateToFuture();
@@ -720,8 +720,8 @@ var __meta__ = { // jshint ignore:line
 
                     var focusedDate = that._toDateObject($(that._cell[0]).find("a"));
                     that._class(FOCUSED, focusedDate);
-                    
-                }  
+
+                }
             } else if(e.shiftKey) {
                 if (value !== undefined || method) {
                     if (!method) {
@@ -735,11 +735,11 @@ var __meta__ = { // jshint ignore:line
                     min = createDate(min.getFullYear(), min.getMonth(), min.getDate());
                     if (isInRange(currentValue, min, max)) {
                         if(that._isMultipleSelection()) {
-                            that._keyboardRangeSelection(e, currentValue);  
+                            that._keyboardRangeSelection(e, currentValue);
                         }
                         else {
                             that._focus(restrictValue(currentValue, options.min, options.max));
-                        }   
+                        }
                     }
                 }
             } else {
@@ -784,7 +784,7 @@ var __meta__ = { // jshint ignore:line
                         }
                         else {
                             that._focus(restrictValue(currentValue, options.min, options.max));
-                        }             
+                        }
                     }
                 }
             }
@@ -807,13 +807,13 @@ var __meta__ = { // jshint ignore:line
                 fromDate = that.selectable._lastActive? that._toDateObject(that.selectable._lastActive.find("a")): currentValue;
                 daysDifference = daysBetweenTwoDates(fromDate, new Date(+currentValue));
 
-                addDaysToArray(that._selectDates, daysDifference, fromDate, that.options.disableDates);    
+                addDaysToArray(that._selectDates, daysDifference, fromDate, that.options.disableDates);
 
                 that.navigate(currentValue);
                 that._current = currentValue;
                 that.selectable._lastActive = that.selectable._lastActive || that._cellByDate(that._view.toDateString(currentValue), CELLSELECTORVALID);
                 that.trigger(CHANGE);
-                return;               
+                return;
             }
             that.selectable.options.filter = that.wrapper.find("table").length > 1 && +currentValue > +that._current? "table.k-month:eq(1) " + CELLSELECTORVALID: "table.k-month:eq(0) " + CELLSELECTORVALID;
             that._class(FOCUSED, currentValue);
@@ -834,7 +834,7 @@ var __meta__ = { // jshint ignore:line
 
             if ($(that._cell[0]).hasClass(SELECTED)) {
                 that.selectable._unselect($(that._cell[0]));
-                that.selectable.trigger(CHANGE, { event: event});  
+                that.selectable.trigger(CHANGE, { event: event});
             }
             else {
                 that.selectable.value($(that._cell[0]), { event: event});
@@ -1730,8 +1730,8 @@ var __meta__ = { // jshint ignore:line
             nextDay = new Date(nextDay.setDate(nextDay.getDate() + i));
             if(!disableDates(nextDay)) {
                 array.push(nextDay);
-            }         
-        }  
+            }
+        }
     }
 
     function mousetoggle(e) {
