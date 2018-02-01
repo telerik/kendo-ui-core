@@ -384,7 +384,9 @@ var __meta__ = { // jshint ignore:line
             if (!isNaN(pageSize)){
                 dataSource.pageSize(pageSize);
             } else if ((value + "").toLowerCase() == "all") {
-                dataSource.pageSize(dataSource.total() ? dataSource.total() : MAX_VALUE);
+                dataSource._pageSize = undefined;
+                dataSource._take = undefined;
+                dataSource.fetch();
             }
         },
 

@@ -1014,6 +1014,44 @@ test("third combo is bound when only local data is used", function() {
         combo.value("");
     });
 
+
+    test("child widget does not trigger dataBound on selecting list options", 0, function() {
+        var combo = new ComboBox(parent, {
+            animation: false,
+            dataValueField: "id",
+            dataTextField: "text",
+            dataSource: [
+                {text: "item1", id: "1", text2: "i"},
+                {text: "item3", id: "2", text2: "i"}
+            ],
+            autoBind: false
+        });
+
+        var combo2 = new ComboBox(child.attr("id", "child"), {
+            dataValueField: "text",
+            dataTextField: "text",
+            cascadeFrom: "parent",
+            autoBind: false,
+            dataSource: {
+                data: [
+                    {text: "item1", id: "1"},
+                    {text: "item2", id: "1"},
+                    {text: "item3", id: "2"},
+                    {text: "item4", id: "2"}
+                ]
+            },
+            dataBound: function() {
+                ok(false);
+            }
+        });
+
+        combo.open();
+        combo.input.trigger({
+            type: "keydown",
+            keyCode: kendo.keys.Down
+        });
+    });
+
     asyncTest("keep custom value of the widget it is custom", 3, function() {
         var deferred = $.Deferred();
         var combo = new ComboBox(parent, {

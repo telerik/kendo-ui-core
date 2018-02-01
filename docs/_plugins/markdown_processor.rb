@@ -63,7 +63,19 @@ module Jekyll
     class ApiHeaderIdFilter < HTML::Pipeline::Filter
 
         def call
+            # Headers in the new API design
+            doc.css('div.api-article').each do |node|
+              node = node.next_element
+              until node.nil?
+                if node.name == 'h3'
+                  node['id'] = node.text == 'Related Properties' ? 'related-properties' : sanitaze_id(node.text)
+                end
 
+                node = node.next_element
+              end
+            end
+
+            # Headers in the old API design
             doc.css('h2').each do |node|
                 text = node.text
 
@@ -77,11 +89,7 @@ module Jekyll
                     break if node.name == 'h2'
 
                     if node.name == 'h3'
-                        id = node.text
-                        id.gsub!(/ .*/, '')
-                        id.gsub!(/`[^`]*`/, '')
-                        id.gsub!(/\\/,'')
-                        id.gsub!(/\*[^*]*\*/, '')
+                        id = sanitaze_id(node.text)
                         node['id'] = "#{prefix}-#{id}"
                     end
 
@@ -89,10 +97,16 @@ module Jekyll
                 end
 
             end
-
             doc
         end
 
+        def sanitaze_id(id)
+          id.gsub!(/ .*/, '')
+          id.gsub!(/`[^`]*`/, '')
+          id.gsub!(/\\/,'')
+          id.gsub!(/\*[^*]*\*/, '')
+          id
+        end
     end
 
     # based on https://github.com/jch/html-pipeline/blob/master/lib/html/pipeline/toc_filter.rb

@@ -38,19 +38,20 @@ To change the default behavior:
 
 1. Detach the scroll handler for the Grid header.
 
-		**JavaScript**
-		
-			$("#grid").data("kendoGrid").wrapper.find(".k-grid-header-wrap").off("scroll.kendoGrid");
-		
+    **JavaScript**
+
+        $("#grid").data("kendoGrid").wrapper.find(".k-grid-header-wrap").off("scroll.kendoGrid");
+    
 
 1. If the page contains multiple Grid components, iterate through them when the page is loaded and detach the header scroll handler for each one.
 
-		**JavaScript**
-		
-			$.each($(".k-grid"), function (index, value) {
-			    $(value).data("kendoGrid").wrapper.find(".k-grid-header-wrap").off("scroll.kendoGrid");
-		    	}
-			);
+    **JavaScript**
+
+        $.each($(".k-grid"), function (index, value) {
+            $(value).data("kendoGrid").wrapper.find(".k-grid-header-wrap").off("scroll.kendoGrid");
+            }
+        );
+    
 
 The following example demonstrates the implementation of the suggested approach.
 

@@ -34,7 +34,8 @@ layout: index
     {% if page.editable %}<a id="page-edit-link" href="https://github.com/telerik/kendo-ui-core/edit/master/docs/{{ page.parent_path | replace: '.html','' }}.md"><span class="k-icon k-i-pencil"></span> Edit this page</a>{% endif %}
     <div class="api-breadcrumbs-container"></div>
     <div id="page-article">
-        <article class="{{page.sub_category}}">
+      <div class="api-toc-container"></div>
+      <article class="{{page.sub_category}}">
           {{ content }}
         </article>
     </div>

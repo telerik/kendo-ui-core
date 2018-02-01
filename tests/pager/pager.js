@@ -600,7 +600,7 @@
 
         dropdownlist.element.trigger("change");
 
-        equal(dataSource.pageSize(), dataSource.total());
+        ok(!dataSource.pageSize());
     });
 
     test("totalPages returns 0 when showing all pages of an empty data source", function() {
@@ -641,7 +641,7 @@
         var select = pager.find(".k-pager-sizes select");
         select.val("all").trigger("change");
 
-        equal(dataSource.pageSize(), 5);
+        ok(!dataSource.pageSize());
     });
 
     test("displays refresh button", function() {
@@ -717,6 +717,7 @@
         dropdownlist.value("All");
         dropdownlist.element.trigger("change");
 
-        equal(dataSource._pageSize, 3);
+        ok(!dataSource._pageSize);
+        ok(!dataSource._take);
     });
 })();
