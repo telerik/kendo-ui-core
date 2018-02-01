@@ -26,7 +26,7 @@ var __meta__ = { // jshint ignore:line
         DISABLED = "disabled",
         MOUSEDOWN = "down",
         DOCUMENT_ELEMENT = $(document.documentElement),
-        MAX_SAFE_INTEGER = 9007199254740991,
+        MAX_VALUE = Number.MAX_VALUE,
         iconTemplate = kendo.template('<a href="\\#" aria-label="#=text#" title="#=text#" class="k-link k-pager-nav #= wrapClassName #"><span class="k-icon #= className #"></span></a>');
 
     function button(template, idx, text, numeric, title) {
@@ -338,7 +338,7 @@ var __meta__ = { // jshint ignore:line
 
             if (options.pageSizes) {
                 var hasAll = that.element.find(".k-pager-sizes option[value='all']").length > 0;
-                var selectAll = hasAll && (pageSize === this.dataSource.total() || pageSize == MAX_SAFE_INTEGER);
+                var selectAll = hasAll && (pageSize === this.dataSource.total() || pageSize == MAX_VALUE);
                 var text = pageSize;
                 if (selectAll) {
                     pageSize = "all";
@@ -384,7 +384,9 @@ var __meta__ = { // jshint ignore:line
             if (!isNaN(pageSize)){
                 dataSource.pageSize(pageSize);
             } else if ((value + "").toLowerCase() == "all") {
-                dataSource.pageSize(dataSource.total() ? dataSource.total() : MAX_SAFE_INTEGER);
+                dataSource._pageSize = undefined;
+                dataSource._take = undefined;
+                dataSource.fetch();
             }
         },
 

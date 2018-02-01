@@ -556,6 +556,26 @@ mvcCoreVersion: "2018.1.117"
 ## Progress NPM Registry
 registry_url: 'https://registry.npm.telerik.com/'
 
+## Describing API reference articles which contain child properties which shall be rendered (grouped) on a same page
+api:
+-
+    file: "api/javascript/ui/grid"
+    group_parents:
+      - "allowCopy"
+      - "columns.command"
+      - "columns.filterable.cell"
+      - "columns.sortable"
+      - "columnMenu.messages"
+      - "filterable.messages"
+      - "filterable.operators.string"
+      - "filterable.operators.number"
+      - "filterable.operators.date"
+      - "filterable.operators.enums"
+      - "messages.commands"
+      - "noRecords"
+      - "pageable.messages"
+      - "pdf.margin"
+
 ## Assign layout and category per different paths
 defaults:
 -

@@ -1416,6 +1416,9 @@ var __meta__ = { // jshint ignore:line
                 } else {
                     parent.one("dataBound", function() {
                         that._toggleCascadeOnFocus();
+                        if (parent.popup.visible()) {
+                            parent._focused.focus();
+                        }
                     });
 
                     if (!parent.value()) {
