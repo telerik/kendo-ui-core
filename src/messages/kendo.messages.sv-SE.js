@@ -155,6 +155,19 @@ $.extend(true, kendo.ui.FilterCell.prototype.options.messages,{
 });
 }
 
+/* FilterMultiCheck messages */
+
+if (kendo.ui.FilterMultiCheck) {
+  kendo.ui.FilterMultiCheck.prototype.options.messages =
+      $.extend(true, kendo.ui.FilterMultiCheck.prototype.options.messages, {
+          "checkAll": "Markera alla",
+          "clear": "Rensa",
+          "filter": "Filtrera",
+          "search": "Sök",
+          "selectedItemsFormat": "{0} alternativ valt"
+      });
+}
+
 /* FilterMenu messages */
 
 if (kendo.ui.FilterMenu) {
@@ -213,7 +226,7 @@ $.extend(true, kendo.ui.Groupable.prototype.options.messages,{
 if (kendo.ui.Pager) {
 kendo.ui.Pager.prototype.options.messages =
 $.extend(true, kendo.ui.Pager.prototype.options.messages,{
-  "allPages": "All",
+  "allPages": "Alla",
   "display": "{0} - {1} av {2} poster",
   "empty": "Det finns inga poster",
   "first": "Gå till första sidan",
@@ -242,8 +255,8 @@ $.extend(true, kendo.ui.Upload.prototype.options.localization,{
   "statusFailed": "misslyckades",
   "statusUploaded": "uppladdad",
   "statusUploading": "laddar upp",
-  "headerStatusUploaded": "Done",
-  "headerStatusUploading": "Uploading..."
+  "headerStatusUploaded": "Uppladdad",
+  "headerStatusUploading": "Laddar upp..."
 });
 }
 
@@ -297,7 +310,7 @@ $.extend(true, kendo.ui.Editor.prototype.options.messages,{
   "linkText": "Text",
   "linkToolTip": "Skärmtips",
   "linkWebAddress": "Webbadress",
-  "search": "Search",
+  "search": "Sök",
   "createTable": "Skapa tabell",
   "addColumnLeft": "Lägg till vänsterkolumn",
   "addColumnRight": "Lägg till högerkolumn",
@@ -347,7 +360,7 @@ $.extend(true, kendo.ui.Scheduler.prototype.options.messages,{
     "deleteWindowSeries": "Ta bort serien",
     "deleteWindowTitle": "Ta bort återkommande objekt",
     "editRecurring": "Vill du redigera enbart detta tillfälle eller hela serien?",
-    "editWindowOccurrence": "Redigera återkommade tillfälle",
+    "editWindowOccurrence": "Redigera återkommande tillfälle",
     "editWindowSeries": "Redigera serie",
     "editWindowTitle": "Redigera återkommande objekt"
   },
@@ -372,7 +385,7 @@ $.extend(true, kendo.ui.Scheduler.prototype.options.messages,{
 if (kendo.ui.Dialog) {
 kendo.ui.Dialog.prototype.options.messages =
 $.extend(true, kendo.ui.Dialog.prototype.options.localization, {
-  "close": "Stänga"
+  "close": "Stäng"
 });
 }
 
