@@ -74,7 +74,7 @@ module Jekyll
             items.each {|item| sort!(item['items']) if item['items'] }
 
             # sorty by position, directory or file and then title (ignoring case)
-            items.sort_by! {|a| [a['position'] || 1000000, a.has_key?('items') ? -1 : 1,  a['text'].downcase]}
+            items.sort_by! {|a| [a['position'] || 1000000, a.has_key?('items') ? -1 : 1,  a['text'].nil? ? a['path'] : a["text"].downcase]}
         end
 
     end

@@ -193,7 +193,9 @@ $.extend(true, kendo.ui.FilterCell.prototype.options.operators,{
     "isnull": "Je null",
     "isnotnull": "Není null",
     "isempty": "Je prázdná",
-    "isnotempty": "Není prázdná"
+    "isnotempty": "Není prázdná",
+    "isnullorempty": "Nemá hodnotu",
+    "isnotnullorempty": "Má hodnotu"
   },
   "number": {
     "eq": "Je rovno",
@@ -258,7 +260,9 @@ $.extend(true, kendo.ui.FilterMenu.prototype.options.operators,{
     "isnull": "Je null",
     "isnotnull": "Není null",
     "isempty": "Je prázdná",
-    "isnotempty": "Není prázdná"
+    "isnotempty": "Není prázdná",
+    "isnullorempty": "Nemá hodnotu",
+    "isnotnullorempty": "Má hodnotu"
   },
   "number": {
     "eq": "Je rovno",

@@ -1178,6 +1178,12 @@ var __meta__ = { // jshint ignore:line
             },
             isnotnull: function(a) {
                 return "(" + a + " != null)";
+            },
+            isnullorempty: function(a) {
+                return "(" + a + " === null) || (" + a + " === '')";
+            },
+            isnotnullorempty: function(a) {
+                return "(" + a + " !== null) && (" + a + " !== '')";
             }
         };
     })();

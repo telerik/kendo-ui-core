@@ -329,6 +329,14 @@ The text of the "does not contain" filter operator.
 
 The text of the "ends with" filter operator.
 
+### operators.string.isnullorempty `String` *(default: "Has no value")*
+
+The text of the "isnullorempty" filter operator.
+
+### operators.string.isnotnullorempty `String` *(default: "Has value")*
+
+The text of the "isnotnullorempty" filter operator.
+
 ### operators.number `Object`
 
 The texts of the filter operators displayed for columns bound to number fields.

@@ -42,8 +42,8 @@ The following example demonstrates how to validate a DropDownList in AngularJS a
     </form>
     <hr>
     <tt>user = {{user}}</tt><br/>
-    <tt>myForm.country.$valid = {{myForm.country.$valid}}</tt><br/>
-    <tt>myForm.country.$error = {{myForm.country.$error}}</tt><br/>
+    <tt>myForm.country.$valid = {{'{{'}}myForm.country.$valid}}</tt><br/>
+    <tt>myForm.country.$error = {{'{{'}}myForm.country.$error}}</tt><br/>
   </div>
 </div>
 ```
