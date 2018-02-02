@@ -42,9 +42,9 @@ The `JSON.stringify()` method that is internally used by the `kendo.stringify()`
 
 ## Solution
 
-Programmatically apply the time offset before the filter is set again. For a runnable example, refer to [this Dojo](http://dojo.telerik.com/EgAQUR/4).
+Programmatically apply the time offset before the filter is set again.
 
-```
+```html
  <body>
 
     <div id="example">

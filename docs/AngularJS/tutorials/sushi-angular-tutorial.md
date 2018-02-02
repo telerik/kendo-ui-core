@@ -346,7 +346,7 @@ Now you are going to customize the ListView item template&mdash;add the image of
         </a>
     </script>
 
-Inside the template use the AngularJS directives and the double curly brace notation `{{ }}` to bind expressions to elements.
+Inside the template use the AngularJS directives and the double curly brace notation `{{'{{'}} }}` to bind expressions to elements.
 
 > **Important**
 >
@@ -487,7 +487,7 @@ The **Cart** View is going to show the Sushi products, added to the cart, as wel
 ###### Example
 
     <kendo-mobile-view id="cart" k-title="'Cart'" k-layout="'default'" ng-controller="cartController">
-        <h2 id="total">{{sushiCart.showTotal()}}</h2>
+        <h2 id="total">{{'{{'}}sushiCart.showTotal()}}</h2>
         <img src="content/images/sad.png" id="empty-icon">
         <kendo-mobile-button id="checkout" class="red-button" href="#!done" k-on-click="sushiCart.checkout()" ng-show="sushiCart.added.length">Checkout</kendo-mobile-button>
         <div kendo-mobile-list-view="cartList" id="cartList" class="item-list" k-template="templates.cartItemTemplate" k-data-source="sushiCart.added"></div>
@@ -504,7 +504,7 @@ In the `cartList` ListView, provide information about how many times the item wa
         <a class="details-link" data-role="listview-link" href="\#!details?id={{dataItem.id}}">
             <img ng-src="content/images/75/{{dataItem.image}}" />
             <h2>{{dataItem.name}} (x {{dataItem.ordered}})</h2>
-            <span class="price">total: {{dataItem.price * dataItem.ordered | currency}}</span>
+            <span class="price">total: {{'{{'}}dataItem.price * dataItem.ordered | currency}}</span>
         </a>
     </script>
 
@@ -655,7 +655,7 @@ The total price is displayed in the **Cart** View.
 
 ###### Example
 
-    <h2 id="total">{{sushiCart.showTotal()}}</h2>
+    <h2 id="total">{{'{{'}}sushiCart.showTotal()}}</h2>
 
 ### Toggling Visibility of Labels
 

@@ -55,6 +55,7 @@
 @tabs-normal-gradient: "#303553 0%, #072138 100%";
 @tabs-hover-bg: #081421;
 @tabs-hover-gradient: "#202333 0%, #081421 100%";
+@secondary-border-color: darken(@base, 12%);
 @secondary-widget-background-color: darken(@widget-background-color, 2%);
 @disabled-text-color: darken(@base, 23%);
 @disabled-border-color: darken(@base, 6%);
@@ -352,7 +353,7 @@ textarea.k-textbox:hover,
 .k-state-disabled .k-icon,
 .k-state-disabled .k-button .k-icon,
 .k-button.k-state-disabled .k-icon {
-    opacity: .2;
+    opacity: .7;
 }
 
 .k-split-button.k-state-disabled .k-icon {
@@ -1378,8 +1379,11 @@ table:not(.k-scheduler-dayview) .k-scheduler-header-wrap .k-today {
     .k-button.k-state-disabled:active,
     .k-state-disabled.k-split-button > .k-button {
         color: @disabled-text-color;
-        border-color: lighten(@hover-text-color, 20%);
+        border-color: @disabled-border-color;
         background-color: @widget-background-color;
+    }
+    .k-button-group .k-button.k-state-disabled {
+        border-color: transparent;
     }
 
     // Focused state
@@ -1396,10 +1400,25 @@ table:not(.k-scheduler-dayview) .k-scheduler-header-wrap .k-today {
     color: @link-text-color;
 }
 
-.k-overflow-container .k-overflow-button.k-state-active,
-.k-split-container .k-button.k-state-active {
-    color: @selected-text-color;
+.k-overflow-container .k-separator {
+    border-color: @secondary-border-color;
 }
+
+    // Active state
+    .k-overflow-container .k-overflow-button.k-state-active,
+    .k-split-container .k-button.k-state-active {
+        color: @selected-text-color;
+    }
+
+    // Disabled state
+    .k-overflow-container .k-state-disabled .k-overflow-button,
+    .k-split-container .k-state-disabled .k-button {
+        color: @disabled-text-color;
+
+        &:focus {
+            border-color: @button-focused-border-color;
+        }
+    }
 
 /* Upload */
 .k-file,

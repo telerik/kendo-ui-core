@@ -119,10 +119,10 @@ Every new child is bound with distinct values.
       }]);
     </script>
   <div ng-app="test" ng-controller="testController">
-    {{hierarchyFieldIds}}
+    {{'{{'}}hierarchyFieldIds}}
     <div ng-repeat="field in placeholder track by $index">
       <select kendo-dropdownlist
-              data-index="{{$index}}"
+              data-index="{{'{{'}}$index}}"
               k-data-source="hierarchyFields[$index]"
               k-data-text-field="'Name'"
               k-data-value-field="'Id'"

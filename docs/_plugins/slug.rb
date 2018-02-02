@@ -1,4 +1,4 @@
-class SlugTag < Liquid::Block
+class SlugTag < Liquid::Tag
     @@page_by_slug = nil
 
     def initialize(tag_name, text, tokens)

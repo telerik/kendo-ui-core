@@ -24,8 +24,8 @@ The following example demonstrates how to use the AngularJS copy functionality i
 
           <pre>
           dateObject: {{ info.dateObject | date:"EEEE, MMMM d, yyyy" }}
-          typeof dateObject: {{ getType(info.dateObject) }}
-          dateObject instanceof Date: {{ isDate(info.dateObject) }}
+          typeof dateObject: {{'{{'}} getType(info.dateObject) }}
+          dateObject instanceof Date: {{'{{'}} isDate(info.dateObject) }}
         </pre>
 
         </div>

@@ -65,6 +65,9 @@
     &.k-state-disabled:active {
         box-shadow: none;
     }
+    .k-state-disabled &:focus:active {
+        .box-shadow(@button-focused-shadow);
+    }
 
 }
 .k-split-button {

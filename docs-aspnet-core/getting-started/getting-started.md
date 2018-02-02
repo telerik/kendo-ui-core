@@ -9,48 +9,37 @@ position: 1
 
 # Getting Started with Progress<sup>®</sup> Telerik<sup>®</sup> UI for ASP.NET Core
 
-This article demonstrates how to configure an ASP.NET Core project to use Telerik UI for ASP.NET Core.
+This article demonstrates how to configure an ASP.NET Core project to use Telerik UI for ASP.NET Core in Visual Studio 2017.
 
 ## Prerequisites
 
-The prerequisites you need depend on the Visual Studio (VS) version your project requires:
+The prerequisites for creating and running an ASP.NET Core on Windows with Visual Studio 2017 are described on the [.NET Core documentation site](https://docs.microsoft.com/en-us/dotnet/core/windows-prerequisites).
 
-* [VS 2017](#using-vs-2017)
-* [VS 2015](#using-vs-2015)
-
-### Using VS 2017
-
-1. Download [VS 2017](https://www.microsoft.com/net/core#windowsvs2017).
-2. Use the VS Installer to [install the .NET Core workload](https://www.microsoft.com/net/core#windowsvs2017).
-
-### Using VS 2015   
-
-1. Download [VS 2015 with Update 3](https://blogs.msdn.microsoft.com/visualstudio/2016/06/27/visual-studio-2015-update-3-and-net-core-1-0-available-now/).
-3. Download [NET Core 1.1.0 - VS 2015 Tooling Preview 2](https://www.microsoft.com/net/download/core).
-4. (Optional) Download [.NET SDK Core for Windows](https://www.microsoft.com/net/download/core).
+> **Important**
+>
+> It's possible to use Visual Studio 2015 only for .NET Core 1.x development, but it's not recommended for the following reasons:
+>
+> * The .NET Core tooling is a preview version, which is not officially supported.
+> * The projects are project.json-based, which is deprecated.
+>
+> Note also, that if you use VS 2015, in order to ensure the matching of the ASP.NET Core version which is distributed with the Telerik UI for ASP.NET Core, you need to manually change the `Microsoft.AspNetCore.Routing` and `Microsoft.AspNetCore.Mvc` versions to `1.1.0` in `project.json`.
 
 ## Configuration
 
-To configure an ASP.NET Core Web Application to use Telerik UI for ASP.NET Core:
+Configure an ASP.NET Core Web Application to use Telerik UI for ASP.NET Core:
 
 1. Create an [ASP.NET Core Web Application](#configuration-Create).
 2. Add the [Kendo UI NuGet package](#configuration-Add).
 
 ### Create ASP.NET Core Project
 
-> **Important**
->
-> If you are configuring an existing project, skip this step.
-
-To create an ASP.NET Core Web Application (with or without Razor Pages):
-
 1. Select **File** > **New Project**.
-2. Choose **Templates** > **Visual C#** > **Web** > **ASP.NET Core Web Application (.NET Core)**.
+2. Choose **Installed** > **Visual C#** > **Web** > **ASP.NET Core Web Application**.
 3. Set a name and location for the project and click **OK**.
-4. Select **Web Application** from the **ASP.NET Core Templates** section.
+4. Select **Web Application** from the **ASP.NET Core Templates** dialog.
 5. Click **OK** to create the project.
 
-### Add NuGet Packages
+### Add the Telerik UI for ASP.NET Core NuGet Package
 
 > **Important**
 >
@@ -64,58 +53,53 @@ To add the NuGet packages:
 
   ![NuGet package manager](images/manage-nuget-packages.png)
 
-2. Select the Telerik package source and search for `Telerik.UI.for.AspNet.Core`.
+2. Click the `Browse` tab, select the Telerik package source and search for `Telerik.UI.for.AspNet.Core`.
 
-3. Install the `Telerik.UI.for.AspNet.Core` package. This should add a line to your `project.json` (for VS2015) or `csproj` (for VS2017) similar to the examples below.
-
-    > **Important**
-    >
-    > If you use VS 2015 and to ensure the matching of the ASP.NET Core version which is distributed with the Telerik UI for ASP.NET Core, you need to manually change the `Microsoft.AspNetCore.Routing` and `Microsoft.AspNetCore.Mvc` versions to `1.1.0` in `project.json`.
+3. Install the `Telerik.UI.for.AspNet.Core` package. This should add a line to your `.csproj` file similar to the example below.
 
     ###### Example
 
-    ```tab-VS2017
+		<PackageReference Include="Telerik.UI.for.AspNet.Core" Version="{{ site.mvcCoreVersion }}" />
 
-           <PackageReference Include="Telerik.UI.for.AspNet.Core" Version="{{ site.mvcCoreVersion }}" />
-    ```
-    ```tab-VS2015
+4. Open `Startup.cs` and update it in the way demonstrated in the following examples:
 
-            "dependencies": {
-                ...
-                "Telerik.UI.for.AspNet.Core": "{{ site.mvcCoreVersion }}"
-            }
-    ```
+	* Locate the `ConfigureServices` method and add the calls shown in the code snippet below:
 
-4. Open `Startup.cs` by using a text editor (IDE) and update it in the way demonstrated in the following examples.
+		###### Example
 
-    Locate the `ConfigureServices` method and add the calls shown in the code snippet below:
+			public void ConfigureServices(IServiceCollection services)
+			{
+				...
+				// Maintain property names during serialization. See:
+				// https://github.com/aspnet/Announcements/issues/194
+				services
+					.AddMvc()
+					.AddJsonOptions(options => 
+						options.SerializerSettings.ContractResolver = new DefaultContractResolver());
 
-    ###### Example
+				// Add Kendo UI services to the services container
+				services.AddKendo();
+			}
+		
+	* Add the required using for `Newtonsoft.Json.Serialization`:
+			
+		###### Example
 
-            public void ConfigureServices(IServiceCollection services)
-            {
-                ...
-                // Maintain property names during serialization. See:
-                // https://github.com/aspnet/Announcements/issues/194
-                services
-                    .AddMvc()
-                    .AddJsonOptions(options => options.SerializerSettings.ContractResolver = new DefaultContractResolver());
+			...
+			using Newtonsoft.Json.Serialization;
+			...
 
-                // Add Kendo UI services to the services container
-                services.AddKendo();
-            }
+	* Locate the `Configure` method and add a call to `app.UseKendo` at the end.
 
-    Locate the `Configure` method and add a call to `app.UseKendo` at the end.
+		###### Example
 
-    ###### Example
+			public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory)
+			{
+				...
 
-            public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory)
-            {
-                ...
-
-                // Configure Kendo UI
-                app.UseKendo(env);
-            }
+				// Configure Kendo UI
+				app.UseKendo(env);
+			}
 
 5. Import the `Kendo.Mvc.UI` namespace in `~/Views/_ViewImports.cshtml` through `@using Kendo.Mvc.UI`.
 
@@ -137,7 +121,7 @@ To add the NuGet packages:
 
 7. Register the Kendo UI styles and scripts in `~/Views/Shared/_Layout.cshtml`.
 
-	  > **Important**
+	> **Important**
     >
     > In the default .NET Core template, the jQuery scripts are included at the end of the `<body>` element. To properly load the Telerik UI for ASP.NET HtmlHelpers, move the jQuery scripts and the Kendo UI client-side scripts to the `<head>` element and make sure that the Kendo UI scripts are loaded after the jQuery ones.
 
@@ -146,29 +130,29 @@ To add the NuGet packages:
         <head>
             ...
 
-            <environment names="Development">
+            <environment include="Development">
                 ...
 
                 <link rel="stylesheet" href="~/lib/kendo-ui/styles/kendo.common-nova.min.css" />
                 <link rel="stylesheet" href="~/lib/kendo-ui/styles/kendo.nova.min.css" />
             </environment>
-            <environment names="Staging,Production">
+            <environment exclude="Development">
                 ...
 
-            <link rel="stylesheet"
+				<link rel="stylesheet"
                     href="https://kendo.cdn.telerik.com/{{ site.cdnVersion }}/styles/kendo.common-nova.min.css"
                     asp-fallback-href="~/lib/kendo-ui/styles/kendo.common-nova.min.css"
                     asp-fallback-test-class="k-common-test-class"
                     asp-fallback-test-property="opacity" asp-fallback-test-value="0" />
 
-            <link rel="stylesheet"
+				<link rel="stylesheet"
                     href="https://kendo.cdn.telerik.com/{{ site.cdnVersion }}/styles/kendo.nova.min.css"
                     asp-fallback-href="~/lib/kendo-ui/styles/kendo.nova.min.css"
                     asp-fallback-test-class="k-theme-test-class"
                     asp-fallback-test-property="opacity" asp-fallback-test-value="0" />
             </environment>
 
-            <environment names="Development">
+            <environment include="Development">
                 ...
 
                 <script src="~/lib/jquery/dist/jquery.js"></script>
@@ -177,7 +161,7 @@ To add the NuGet packages:
                 <script src="~/lib/kendo-ui/js/kendo.all.min.js"></script>
                 <script src="~/lib/kendo-ui/js/kendo.aspnetmvc.min.js"></script>
             </environment>
-            <environment names="Staging,Production">
+            <environment exclude="Development">
                 ...
 
                 <script src="https://ajax.aspnetcdn.com/ajax/jquery/jquery-2.2.0.min.js"
@@ -201,19 +185,17 @@ To add the NuGet packages:
             ...
         </head>
 
-    <!--*-->
 8. Use a Kendo UI widget by adding the snippet from the following example to `~/Views/Home/Index.cshtml`.
 
     ###### Example
 
-                <h2>Kendo UI DatePicker</h2>
+		<h2>Kendo UI DatePicker</h2>
 
-                @(Html.Kendo().DatePicker()
-                        .Name("datepicker")
-                )
+		@(Html.Kendo().DatePicker()
+				.Name("datepicker")
+		)
 
-                <!--_-->
-    Now that all is done, you can see the sample page.
+	Now that all is done, you can see the sample page.
 
     **Figure 3. The end result&mdash;a sample page**
 
