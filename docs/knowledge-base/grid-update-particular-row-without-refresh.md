@@ -102,3 +102,7 @@ $("#grid").kendoGrid({
 }
 </script>
 ```
+
+## Notes
+
+This example is based on a [post by Adam Yaxley](https://stackoverflow.com/a/23959005) on Stack Overflow.

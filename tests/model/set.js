@@ -134,6 +134,21 @@ test("dirtyField is dirty if is already dirty and set event is prevented", 1, fu
     ok(model.dirtyFields["foo"]);
 });
 
+test("equalSet event is triggered if the same value is set", function() {
+    var args = {};
+    var model = new Model({
+        foo: "bar"
+    });
+    model.bind("equalSet", function(e) {
+        args = e;
+    });
+
+    model.set("foo", "bar");
+
+    equal(args.field, "foo");
+    equal(args.value, "bar");
+});
+
 test("model is not dirty if the same string value is set", function() {
     var m = new Model({
         foo: "foo"
