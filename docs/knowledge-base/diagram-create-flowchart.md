@@ -1,16 +1,16 @@
 ---
-title: Create Flowchart from Local Data Using Kendo UI Diagram
-description: How to create a flowchart from local data for shapes and connections using Kendo UI Diagram
+title: Create Flowchart from Local Data by Using the Diagram
+description: An example on how to create a flowchart from local data for shapes and connections by using the Kendo UI Diagram.
 type: how-to
-page_title: Create a Flowchart Using Kendo UI Diagram
+page_title: Create Flowcharts | Kendo UI Diagram
 slug: diagram-create-flowchart
-position: 
 tags: diagram, flowchart
 ticketid: 1147424
 res_type: kb
 ---
 
 ## Environment
+
 <table>
 	<tr>
 		<td>Product Version</td>
@@ -24,14 +24,18 @@ res_type: kb
 
 
 ## Description
-I want to create a [flowchart](https://en.wikipedia.org/wiki/Flowchart) and use JSON or local data to bind the shapes. 
+
+How can I create a [flowchart](https://en.wikipedia.org/wiki/Flowchart) and use JSON or local data to bind the shapes?
 
 ## Solution
-You can create data sets for the Diagram shapes and connections and a client-side function that maps this data to shape and connection properties. 
 
-Some of the flowchart shapes are available as pre-defined shape [types](/api/javascript/dataviz/diagram/shape#configuration-type) in the Diagram. You can define the rest of the shapes using a [Path](/api/javascript/dataviz/diagram/path) object.
+Create data sets for the Diagram shapes and connections, and a client-side function that maps this data to the `shape` and `connection` properties.
 
-The following example shows a simple flowchart implementation using a common function to generate all shapes.
+Some of the flowchart shapes are available as pre-defined shape [`types`](/api/javascript/dataviz/diagram/shape#configuration-type) in the Diagram. Define the rest of the shapes by using a [`Path`](/api/javascript/dataviz/diagram/path) object.
+
+For more information on how to create custom shapes in the Diagram, refer to the example on the [Diagram Builder](https://demos.telerik.com/kendo-ui/html5-diagram-sample-app). For a full list of the `shape` and `connection` properties in the Diagram, refer to its [`model`](/controls/diagrams-and-maps/diagram/editing#model-fields) fields.
+
+The following example demonstrates how to implement a simple flowchart by using a common function to generate all shapes.
 
 ```html
     <div id="diagram"></div>
@@ -78,7 +82,7 @@ The following example shows a simple flowchart implementation using a common fun
 
           return shape;
         }
-        
+
         var data = [{
           'id': 1,
           'textData': 'Start',
@@ -103,7 +107,7 @@ The following example shows a simple flowchart implementation using a common fun
           'positionX': 399.5,
           'positionY': 290
         }];
-        
+
         var connectionsData = [{
         	'fromShapeId': 1,
           'toShapeId': 2
@@ -114,11 +118,11 @@ The following example shows a simple flowchart implementation using a common fun
         	'fromShapeId': 3,
           'toShapeId': 1
         }];
-        
+
         for(var i = 0; i < data.length; i++) {
         	diagram.addShape(createShape(data[i]));
         }
-        
+
         for(var j = 0; j < connectionsData.length; j++){
           var sourceShape = diagram.getShapeById(connectionsData[j].fromShapeId);
           var targetShape = diagram.getShapeById(connectionsData[j].toShapeId);
@@ -127,8 +131,3 @@ The following example shows a simple flowchart implementation using a common fun
       });
     </script>
 ```
-
-## See Also
-
-* [Diagram Builder Example](https://demos.telerik.com/kendo-ui/html5-diagram-sample-app) - this demo shows how to create custom shapes in the Diagram
-* [Diagram Model Fields](/controls/diagrams-and-maps/diagram/editing#model-fields) - see a full list of the shape and connection properties in the Diagram

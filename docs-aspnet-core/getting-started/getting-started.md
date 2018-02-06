@@ -9,20 +9,19 @@ position: 1
 
 # Getting Started with Progress<sup>®</sup> Telerik<sup>®</sup> UI for ASP.NET Core
 
-This article demonstrates how to configure an ASP.NET Core project to use Telerik UI for ASP.NET Core in Visual Studio 2017.
+This article demonstrates how to configure an ASP.NET Core project to use Telerik UI for ASP.NET Core in Visual Studio (VS) 2017.
 
 ## Prerequisites
 
-The prerequisites for creating and running an ASP.NET Core on Windows with Visual Studio 2017 are described on the [.NET Core documentation site](https://docs.microsoft.com/en-us/dotnet/core/windows-prerequisites).
+The prerequisites for creating and running an ASP.NET Core on Windows with VS 2017 are described on the [.NET Core documentation site](https://docs.microsoft.com/en-us/dotnet/core/windows-prerequisites).
 
 > **Important**
 >
-> It's possible to use Visual Studio 2015 only for .NET Core 1.x development, but it's not recommended for the following reasons:
+> You can use Visual Studio 2015 only for .NET Core 1.x development. However, this approach is not recommended because:
+> * The .NET Core tooling is in a preview version which is not officially supported.
+> * The projects are `project.json`-based which is deprecated.
 >
-> * The .NET Core tooling is a preview version, which is not officially supported.
-> * The projects are project.json-based, which is deprecated.
->
-> Note also, that if you use VS 2015, in order to ensure the matching of the ASP.NET Core version which is distributed with the Telerik UI for ASP.NET Core, you need to manually change the `Microsoft.AspNetCore.Routing` and `Microsoft.AspNetCore.Mvc` versions to `1.1.0` in `project.json`.
+> If you use Visual Studio 2015, to ensure the matching of the ASP.NET Core version which is distributed with the Telerik UI for ASP.NET Core, manually change the `Microsoft.AspNetCore.Routing` and `Microsoft.AspNetCore.Mvc` versions to `1.1.0` in `project.json`.
 
 ## Configuration
 
@@ -34,7 +33,7 @@ Configure an ASP.NET Core Web Application to use Telerik UI for ASP.NET Core:
 ### Create ASP.NET Core Project
 
 1. Select **File** > **New Project**.
-2. Choose **Installed** > **Visual C#** > **Web** > **ASP.NET Core Web Application**.
+2. Select **Installed** > **Visual C#** > **Web** > **ASP.NET Core Web Application**.
 3. Set a name and location for the project and click **OK**.
 4. Select **Web Application** from the **ASP.NET Core Templates** dialog.
 5. Click **OK** to create the project.
@@ -53,17 +52,17 @@ To add the NuGet packages:
 
   ![NuGet package manager](images/manage-nuget-packages.png)
 
-2. Click the `Browse` tab, select the Telerik package source and search for `Telerik.UI.for.AspNet.Core`.
+2. Click the **Browse** tab, select the Telerik package source and search for `Telerik.UI.for.AspNet.Core`.
 
-3. Install the `Telerik.UI.for.AspNet.Core` package. This should add a line to your `.csproj` file similar to the example below.
+3. Install the `Telerik.UI.for.AspNet.Core` package. It adds a line to your `.csproj` file similar to the following example.
 
     ###### Example
 
 		<PackageReference Include="Telerik.UI.for.AspNet.Core" Version="{{ site.mvcCoreVersion }}" />
 
-4. Open `Startup.cs` and update it in the way demonstrated in the following examples:
+4. Open `Startup.cs` and update it in the following way:
 
-	* Locate the `ConfigureServices` method and add the calls shown in the code snippet below:
+	* Locate the `ConfigureServices` method and add the calls.
 
 		###### Example
 
@@ -74,15 +73,15 @@ To add the NuGet packages:
 				// https://github.com/aspnet/Announcements/issues/194
 				services
 					.AddMvc()
-					.AddJsonOptions(options => 
+					.AddJsonOptions(options =>
 						options.SerializerSettings.ContractResolver = new DefaultContractResolver());
 
 				// Add Kendo UI services to the services container
 				services.AddKendo();
 			}
-		
-	* Add the required using for `Newtonsoft.Json.Serialization`:
-			
+
+	* Add the required `using Newtonsoft.Json.Serialization` line.
+
 		###### Example
 
 			...
@@ -121,7 +120,7 @@ To add the NuGet packages:
 
 7. Register the Kendo UI styles and scripts in `~/Views/Shared/_Layout.cshtml`.
 
-	> **Important**
+	  > **Important**
     >
     > In the default .NET Core template, the jQuery scripts are included at the end of the `<body>` element. To properly load the Telerik UI for ASP.NET HtmlHelpers, move the jQuery scripts and the Kendo UI client-side scripts to the `<head>` element and make sure that the Kendo UI scripts are loaded after the jQuery ones.
 

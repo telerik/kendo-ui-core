@@ -1,8 +1,8 @@
 ---
-title: Use Kendo Calendar widget in MultiSelect.
-description: An example on how to dynamically display the selected dates from the Calendar 
+title: Dynamically Display the Selected Calendar Dates
+description: An example on how to dynamically display the selected dates from the Kendo UI Calendar.
 type: how-to
-page_title: Dynamically display the selected dates from the Calendar | Kendo UI Calendar
+page_title: Dynamically Display the Selected Dates from the Calendar | Kendo UI Calendar
 slug: calendar-dynamically-display-selection
 tags: kendo, kendoui, calendar, multiselect, dynamical, select
 ticketid: 1145054
@@ -10,6 +10,7 @@ res_type: kb
 ---
 
 ## Environment
+
 <table>
 	<tr>
 		<td>Product Version</td>
@@ -23,11 +24,14 @@ res_type: kb
 
 
 ## Description
-In order to have the Kendo UI Calendar display its selected dates dynamically in another widget/container, you should follow the next steps:
 
-1. Enable the multiple selection of the Calendar through its selectable property (set to "multiple") 
-2. Subscribe for the Change event of the Calendar
-3. Update a preferable container by appending the selected values of the Calender with span elements
+How can I make the Calendar dynamically display the selected dates in another widget or container?
+
+## Solution  
+
+1. Enable the multiple selection of the Calendar through its `selectable` property (set it to `"multiple"`).
+2. Subscribe for the `change` event of the Calendar.
+3. Update a preferable container by appending the selected values of the Calendar with `span` elements.
 
 ```html
 <div class="demo-section k-content" style="text-align: center;">
