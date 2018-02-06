@@ -694,5 +694,28 @@
             equal(input.val(), "2");
         });
 
+        test("setting the same model field value triggers validation", function() {
+            var MyModel = Model.define({
+                fields: {
+                    foo: {
+                        type: "number"
+                    }
+                }
+            }),
+            model = new MyModel({ foo: 1 }),
+            editable = new Editable(div, { fields: [{
+                field: "foo",
+                editor: function(container) {
+                    container.append($('<input data-bind="value:foo" />'));
+                }
+            }], model: model }),
+            validateInput = stub(editable.validatable, "validateInput");
+
+            model.set("foo", 1);
+            var input = validateInput.args("validateInput", 0)[0];
+            equal(input.length, 1);
+            equal(input.val(), "1");
+        })
+
     })();
 })();

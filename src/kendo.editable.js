@@ -24,7 +24,7 @@ var __meta__ = { // jshint ignore:line
         ERRORTEMPLATE = '<div class="k-widget k-tooltip k-tooltip-validation" style="margin:0.5em"><span class="k-icon k-i-warning"> </span>' +
                     '#=message#<div class="k-callout k-callout-n"></div></div>',
         CHANGE = "change";
-
+    var EQUAL_SET = "equalSet";
     var specialRules = ["url", "email", "number", "date", "boolean"];
 
     function fieldType(field) {
@@ -253,6 +253,7 @@ var __meta__ = { // jshint ignore:line
             Widget.fn.destroy.call(that);
 
             that.options.model.unbind("set", that._validateProxy);
+            that.options.model.unbind(EQUAL_SET, that._validateProxy);
 
             kendo.unbind(that.element);
 
@@ -323,6 +324,9 @@ var __meta__ = { // jshint ignore:line
 
             that.options.model.unbind("set", that._validateProxy);
             that.options.model.bind("set", that._validateProxy);
+
+            that.options.model.unbind(EQUAL_SET, that._validateProxy);
+            that.options.model.bind(EQUAL_SET, that._validateProxy);
 
             that.validatable = new kendo.ui.Validator(container, {
                 validateOnBlur: false,

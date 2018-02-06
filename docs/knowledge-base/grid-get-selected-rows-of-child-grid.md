@@ -1,6 +1,6 @@
 ---
 title: Get the Selected Rows of a Child Grid
-description: An example on how to get the selected rows of a child grid
+description: An example on how to get the selected rows of a child Kendo UI Grid.
 type: how-to
 page_title: Get the Selected Rows of a Child Grid | Kendo UI Gird
 slug: grid-get-selected-rows-of-child-grid
@@ -24,13 +24,13 @@ component: listview
 
 ## Description
 
-I have a Hierarchical Grid and would like to access the selected rows of a nested grid.
+How can I access the selected rows of a nested grid in my hierarchical Grid?
 
 ## Solution
 
-1. Add a unique Id to each child grid
-2. Within the [detailExpand](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid/events/detailexpand) event handler save the Id of the expanded child grid.
-3. Use the saved Id in order to access the child grid.
+1. Add a unique `Id` to each child Grid.
+2. In the [`detailExpand`](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid/events/detailexpand) event handler, save the `Id` of the expanded child Grid.
+3. Use the saved `Id` to access the child Grid.
 
 ```html
     <div id="example">

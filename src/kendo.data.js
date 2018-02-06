@@ -788,6 +788,8 @@ var __meta__ = { // jshint ignore:line
                             that.dirtyFields[field] = false;
                         }
                     }
+                } else {
+                    that.trigger("equalSet", { field: field, value: value });
                 }
             }
         },

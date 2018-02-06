@@ -6,7 +6,7 @@
     <body>
       {% capture site_url %}{% if site.url %}{{ site.url }}{% else %}{{ site.github.url }}{% endif %}{% endcapture %}
       {% for post in site.html_pages %}
-        <a href="{{ site_url }}{{ post.url | replace:'.html','' }}">{{ site_url }}{{ post.url | replace:'.html','' }}</a>
+        <a href="https://kendobuild.telerik.com/kendo-ui{{ post.url | replace:'.html','' }}">https://kendobuild.telerik.com/kendo-ui{{ post.url | replace:'.html','' }}</a>
       {% endfor %}
     </body>
 </html>
