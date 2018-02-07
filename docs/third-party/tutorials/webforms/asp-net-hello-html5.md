@@ -110,7 +110,7 @@ If **HTML5** is not available in the select box, ensure that you are running at 
 
 [HTML5 Schema Validation Support Prior To 2008 SP 1.](http://blogs.msdn.com/b/webdevtools/archive/2009/11/18/html-5-intellisense-and-validation-schema-for-visual-studio-2008-and-visual-web-developer.aspx)
 
-Add some filler text to the article section. You can use a Lorem Ipsum generator, such as [this one](http://dalekipsum.com/) to do this for you.
+Add some filler text to the article section. You can use a Lorem Ipsum generator, such as [this one](https://www.lipsum.com/) to do this for you.
 
 **Figure 6: Adding a text**
 

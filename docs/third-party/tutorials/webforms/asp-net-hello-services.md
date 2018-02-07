@@ -156,7 +156,7 @@ Open the `Global.asax` file. Under the `Application_Start` method, add the follo
             defaults: new { id = System.Web.Http.RouteParameter.Optional });
     }
 
-This block initializes routing for Web API. This is how it knows to route URLs to certain controllers. In this case, the default route says that anything coming after `/api` on the root should be routed to a controller. It is also passing an optional `id` parameter to the end of the URL. If the `id` is passed, it is handed off to the proper method. If nothing is passed, it is ignored. This means that the route for the `EmployeesController` will be something like [http://your-server/api/employees](http://yourserver/api/employees).
+This block initializes routing for Web API. This is how it knows to route URLs to certain controllers. In this case, the default route says that anything coming after `/api` on the root should be routed to a controller. It is also passing an optional `id` parameter to the end of the URL. If the `id` is passed, it is handed off to the proper method. If nothing is passed, it is ignored. This means that the route for the `EmployeesController` will be something like `http://your-server/api/employees`.
 
 #### Test the Application
 
@@ -229,7 +229,7 @@ Press `F5` to run the application again. Navigate to the **api/employees** URL. 
 
 ### Get JSON Data With AJAX
 
-Now that data is being returned by the service, it is possible to use jQuery to call that service with [AJAX](http://en.wikipedia.org/wiki/Ajax_(programming) and get the results in JSON format instead of XML. Once the data has been retrieved as JSON, it is much easier to work with it and create a user interface. For this demonstration, you are going to retrieve the list of employees and display each employee in an HTML table row.
+Now that data is being returned by the service, it is possible to use jQuery to call that service with [AJAX](http://en.wikipedia.org/wiki/Ajax_%28programming%29) and get the results in JSON format instead of XML. Once the data has been retrieved as JSON, it is much easier to work with it and create a user interface. For this demonstration, you are going to retrieve the list of employees and display each employee in an HTML table row.
 
 ### Add jQuery to Project
 

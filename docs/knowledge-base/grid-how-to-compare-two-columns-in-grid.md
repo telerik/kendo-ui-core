@@ -28,7 +28,7 @@ How can I compare two Grid columns and then change the background color of one o
 
 ## Solution
 
-Use the [`column.template`](docs.telerik.com/kendo-ui/api/javascript/ui/grid#configuration-columns.template) property and an `if` statement inside the [template](http://docs.telerik.com/kendo-ui/framework/templates/overview#template-syntax) to compare the values from the columns.
+Use the [`column.template`](/api/javascript/ui/grid#configuration-columns.template) property and an `if` statement inside the [template](/framework/templates/overview#template-syntax) to compare the values from the columns.
 
 ```html
     <div id="example" ng-app="KendoDemos">

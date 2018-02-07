@@ -60,8 +60,6 @@ var __meta__ = { // jshint ignore:line
 
              options.placeholder = options.placeholder || element.attr("placeholder");
 
-             that._initialOptions = extend({}, options);
-
              min = that.min(element.attr("min"));
              max = that.max(element.attr("max"));
              step = that._parse(element.attr("step"));
@@ -73,10 +71,12 @@ var __meta__ = { // jshint ignore:line
              if (options.max === NULL && max !== NULL) {
                  options.max = max;
              }
-
+             
              if (!isStep && step !== NULL) {
                  options.step = step;
              }
+
+             that._initialOptions = extend({}, options);
 
              that._reset();
              that._wrapper();

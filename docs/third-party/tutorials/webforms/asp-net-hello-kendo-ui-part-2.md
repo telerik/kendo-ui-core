@@ -121,7 +121,7 @@ With this change, the Grid puts the entire row in edit mode when you click the *
 
 ### Specify Model for DataSource
 
-However, you will notice that the Grid currently has the `BirthDate` field as a textbox and allows you to completely null out the **LastName**. This is not ideal. You can add constraints for column editing by specifying a model in the schema on the DataSource. The [`Model`](http://api/framework/model) object specifies a client-side model structure that can describe the data in terms of type and validation rules.
+However, you will notice that the Grid currently has the `BirthDate` field as a textbox and allows you to completely null out the **LastName**. This is not ideal. You can add constraints for column editing by specifying a model in the schema on the DataSource. The [`Model`](/api/javascript/data/model) object specifies a client-side model structure that can describe the data in terms of type and validation rules.
 
 Add a `model` to the `schema` declaration specifying that the `id` is mapped to the **Id** field from the database. Then specify a `fields` object. Each object in the fields can be either a simple string, or an object that provides some more information about the `model` field. To specify that fields are required, add a `validation` object. Also, specify that its type is `date`, so that the Grid gives you a [DatePicker](http://demos.telerik.com/kendo-ui/web/datepicker) for the **BirthDate** column when in edit mode.
 

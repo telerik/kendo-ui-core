@@ -16,7 +16,7 @@ The [`kendo.format`](/api/javascript/kendo#format) and [`kendo.toString`](/api/j
 
 ### Standard
 
-The `standard` formats are retrieved from the used Kendo culture script defined with [kendo.culture]()  method.
+The `standard` formats are retrieved from the used Kendo culture script defined with [kendo.culture](/api/javascript/kendo#methods-culture) method.
 
 #### The 'd' Specifier
 

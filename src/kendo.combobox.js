@@ -316,10 +316,10 @@ var __meta__ = { // jshint ignore:line
             if ((!that.listView.bound() && state !== STATE_FILTER) || state === STATE_ACCEPT) {
                 that._open = true;
                 that._state = STATE_REBIND;
-                if ((that.options.minLength !== 1 && !that.value()) || (isFiltered && that.selectedIndex === -1)) {
+                if ((that.options.minLength !== 1 && !isFiltered) || (isFiltered && that.value() && that.selectedIndex === -1 )) {
                     that.refresh();
                     that._openPopup();
-                    that.listView.bound(false);
+                    that.listView.bound(false); 
                 } else {
                     that._filterSource();
                 }

@@ -195,6 +195,22 @@
         }, 200);
     });
 
+    asyncTest("form reset support for keeping min max attributes", 2, function() {
+        input.attr("min", "0");
+        input.attr("max", "100");
+
+        var form = $("<form/>").appendTo(QUnit.fixture).append(input),
+            textbox = new NumericTextBox(input);
+
+        form[0].reset();
+
+        setTimeout(function() {
+            equal(textbox.element[0].getAttribute("min"), "0");
+            equal(textbox.element[0].getAttribute("max"), "100");
+            start();
+        }, 200);
+    });
+
     asyncTest("support for form defined by attribute", 2, function() {
         input.attr("form", "form1").attr("value", "123");
 

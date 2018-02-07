@@ -41,11 +41,11 @@ The example below demonstrates the two options of how to use custom icons for th
           title: "Window Title"
         }).data("kendoWindow");
 
-        win.wrapper.find(".k-i-foo").click(function(e) {
+        win.wrapper.find(".k-i-foo").parent().click(function(e) {
           $("#time-foo").html(returnTimeString());
         });
 
-        win.wrapper.find(".k-i-clock").click(function(e) {
+        win.wrapper.find(".k-i-clock").parent().click(function(e) {
           $("#time-clock").html(returnTimeString());
         });
 

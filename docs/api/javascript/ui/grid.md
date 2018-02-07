@@ -9670,7 +9670,9 @@ The array of data items used to create the Excel workbook. Available since versi
 
 ##### e.workbook `kendo.ooxml.Workbook`
 
-The Excel [workbook configuration object](/api/javascript/ooxml/workbook#configuration). Used to initialize a `kendo.ooxml.Workbook` class. Modifications of the workbook will reflect in the output Excel document.
+The Excel [workbook configuration object](/api/javascript/ooxml/workbook#configuration). Used to initialize a `kendo.ooxml.Workbook` class. Modifications of the workbook will reflect in the output Excel document. 
+
+> When the Kendo UI Grid is configured for excel export, the workbook is extended internally with a `fileName` property which is used when the file is saved. The default name is "Export.xlsx". See the example below which shows how to change the name of the exported document.
 
 ##### e.preventDefault `Function`
 

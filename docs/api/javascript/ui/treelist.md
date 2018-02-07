@@ -14,57 +14,84 @@ Represents the Kendo UI TreeList widget. Inherits from [Widget](/api/javascript/
 
 ### autoBind `Boolean` *(default: true)*
 
-If set to `false` the widget will not bind to the data source during initialization. In this case data binding will occur when the [change](/api/javascript/data/datasource#events-change) event of the
-data source is fired. By default the widget will bind to the data source specified in the configuration.
+If set to `false` the widget will not bind to the specified DataSource during initialization. In this case data binding will occur when the [change](/api/javascript/data/datasource#events-change) event of the
+DataSource is fired. By default the widget will bind to the DataSource specified in the configuration.
 
-> Setting `autoBind` to `false` is useful when multiple widgets are bound to the same data source. Disabling automatic binding ensures that the shared data source doesn't make more than one request to the remote service.
+> Setting `autoBind` to `false` is useful when multiple widgets are bound to the same DataSource. Disabling automatic binding ensures that the shared DataSource doesn't make more than one request to the remote service.
 
 #### Example - disable automatic binding
 
-    <div id="treeList"></div>
+    <div id="treelist"></div>
+    <button id="btn">Bind TreeList</button>
     <script>
-        var dataSource = new kendo.data.TreeListDataSource({
-          data: [ { name: "Jane Doe" }, { name: "John Doe" }]
-        });
-        $("#treeList").kendoTreeList({
-          columns: [ "name" ],
-          autoBind: false,
-          dataSource: dataSource
-        });
-        dataSource.read(); // "read()" will fire the "change" event of the dataSource and the widget will be bound
+      var dataSource = new kendo.data.TreeListDataSource({
+        transport: {
+          read: {
+            url: "https://demos.telerik.com/kendo-ui/service/EmployeeDirectory/All",
+            dataType: "jsonp"
+          }
+        },
+        schema: {
+          model: {
+            id: "EmployeeID",
+            parentId: "ReportsTo",
+            fields: {
+              ReportsTo: { field: "ReportsTo",  nullable: true },
+              EmployeeID: { field: "EmployeeId", type: "number" },
+              Extension: { field: "Extension", type: "number" }
+            },
+            expanded: true
+          }
+        }
+      });
+      var treelist = $("#treelist").kendoTreeList({
+        dataSource: dataSource,
+        columns: [
+          { field: "FirstName" }, { field: "LastName" }, { field: "Position" }
+        ],
+        autoBind: false
+      }).data("kendoTreeList");
+      
+      $("#btn").click(function(){
+        treelist.dataSource.read();
+      });
     </script>
 
 ### columns `Array`
 
 The configuration of the treelist columns. An array of JavaScript objects or strings. JavaScript objects are interpreted as column configurations. Strings are interpreted as the
-[field](#configuration-columns.field) to which the column is bound. The treelist will create a column for every item of the array.
+[field](#configuration-columns.field) to which the column is bound. The TreeList will create a column for each item of the array.
 
 #### Example - specify treelist columns as array of strings
 
-    <div id="treeList"></div>
+    <div id="treelist"></div>
     <script>
-        var dataSource = new kendo.data.TreeListDataSource({
-          data: [ { name: "Jane Doe" }, { name: "John Doe" }]
-        });
-        $("#treeList").kendoTreeList({
-          columns: [ "name" ],
-          dataSource: dataSource
-        });
+      $("#treelist").kendoTreeList({
+        columns: [
+          "lastName",
+          "position"
+        ],
+        dataSource: [
+          { id: 1, parentId: null, lastName: "Jackson", position: "CEO" },
+          { id: 2, parentId: 1, lastName: "Weber", position: "	VP, Engineering" }
+        ]
+      });
     </script>
 
 #### Example - specify treelist columns as array of objects
 
-    <div id="treeList"></div>
+    <div id="treelist"></div>
     <script>
-        var dataSource = new kendo.data.TreeListDataSource({
-          data: [ { name: "Jane Doe" }, { name: "John Doe" }]
-        });
-        $("#treeList").kendoTreeList({
-          columns: [
-              { field: "name", title: "Name" }
-          ],
-          dataSource: dataSource
-        });
+      $("#treelist").kendoTreeList({
+        columns: [
+          { field: "lastName", title: "Last Name" },
+          { field: "position", title: "Position" }
+        ],
+        dataSource: [
+          { id: 1, parentId: null, lastName: "Jackson", position: "CEO" },
+          { id: 2, parentId: 1, lastName: "Weber", position: "	VP, Engineering" }
+        ]
+      });
     </script>
 
 ### columns.attributes `Object`
@@ -75,22 +102,30 @@ HTML attributes of the table cell (`<td>`) rendered for the column.
 
 #### Example - specify column HTML attributes
 
-    <div id="treeList"></div>
+    <div id="treelist"></div>
     <script>
-      var dataSource = new kendo.data.TreeListDataSource({
-        data: [ { name: "Jane Doe" }, { name: "John Doe" }]
-      });
-      $("#treeList").kendoTreeList({
-        columns: [ {
-          field: "name",
-          attributes: {
-            "class": "name-cell",
-            style: "text-align: right"
+      $("#treelist").kendoTreeList({
+        columns: [
+          { field: "lastName" },
+          { 
+            field: "position",
+            attributes: {
+              "class": "highlight",
+              style: "text-align: right"
+            }
           }
-        } ],
-        dataSource: dataSource
+        ],
+        dataSource: [
+          { id: 1, parentId: null, lastName: "Jackson", position: "CEO" },
+          { id: 2, parentId: 1, lastName: "Weber", position: "	VP, Engineering" }
+        ]
       });
     </script>
+    <style>
+      .highlight {
+        color: red;
+      }
+    </style>
 
 The table cells would look like this: `<td class="name-cell" style="text-align: right">...</td>`.
 
@@ -114,47 +149,83 @@ Custom commands are supported by specifying the [click](#configuration-columns.c
 
 #### Example - set command as array of strings
 
-    <div id="treeList"></div>
-    <script>
-        var dataSource = new kendo.data.TreeListDataSource({
-          data: [ { name: "Jane Doe" }, { name: "John Doe" }]
-        });
-        $("#treeList").kendoTreeList({
-          columns: [
-              { field: "name" },
-              { command: ["edit", "destroy"] }
-          ],
-          editable: true,
-          dataSource: dataSource
-        });
-    </script>
+      <div id="treelist"></div>
+
+      <script>
+          var crudServiceBaseUrl = "https://demos.telerik.com/kendo-ui/service";
+
+          $("#treelist").kendoTreeList({
+            editable: true,
+            height: 540,
+            columns: [
+              { field: "FirstName", expandable: true, title: "First Name", width: 220 },
+              { field: "LastName", title: "Last Name", width: 100 },
+              { field: "Position" },
+              { title: "Edit", command: [ "createChild", "edit" ], width: 180 }
+            ],
+            dataSource: {
+              transport: {
+                read:  {
+                  url: crudServiceBaseUrl + "/EmployeeDirectory/All",
+                  dataType: "jsonp"
+                },
+                update: {
+                  url: crudServiceBaseUrl + "/EmployeeDirectory/Update",
+                  dataType: "jsonp"
+                },
+                create: {
+                  url: crudServiceBaseUrl + "/EmployeeDirectory/Create",
+                  dataType: "jsonp"
+                },
+                parameterMap: function(options, operation) {
+                  if (operation !== "read" && options.models) {
+                    return {models: kendo.stringify(options.models)};
+                  }
+                }
+              },
+              schema: {
+                model: {
+                  id: "EmployeeId",
+                  parentId: "ReportsTo",
+                  fields: {
+                    EmployeeId: { type: "number", editable: false, nullable: false },
+                    ReportsTo: { nullable: true, type: "number" },
+                    FirstName: { validation: { required: true } },
+                    LastName: { validation: { required: true } },
+                    Position: { type: "string" }
+                  },
+                  expanded: true
+                }
+              }
+            }
+          });
+      </script>
 
 #### Example - set command as array of objects
 
-    <div id="treeList"></div>
+    <div id="treelist"></div>
     <script>
-        var dataSource = new kendo.data.TreeListDataSource({
-          data: [ { name: "Jane Doe" }, { name: "John Doe" }]
-        });
-        $("#treeList").kendoTreeList({
-          columns: [
-            { field: "name" },
+      $("#treelist").kendoTreeList({
+        columns: [
+          { field: "lastName", title: "Last Name" },
+          { field: "position", title: "Position" },
+          { command: [
             {
-                command: [
-                    {
-                        name: "details",
-                        text: "details",
-                        click: function(e) {
-                            // command button click handler
-                        }
-                    },
-                    { name: "destroy" } // built-in "destroy" command
-                ]
-            }
-          ],
-          editable: true,
-          dataSource: dataSource
-        });
+              name: "details",
+              text: "Details",
+              click: function(e) {
+                // command button click handler
+              },
+              imageClass: "k-i-info"
+            },
+            { name: "destroy" } // built-in "destroy" command
+          ]}
+        ],
+        dataSource: [
+          { id: 1, parentId: null, lastName: "Jackson", position: "CEO" },
+          { id: 2, parentId: 1, lastName: "Weber", position: "	VP, Engineering" }
+        ]
+      });
     </script>
 
 ### columns.command.className `String`
@@ -163,20 +234,32 @@ The CSS class applied to the command button.
 
 #### Example - set the CSS class of the command
 
-    <div id="treeList"></div>
+    <div id="treelist"></div>
     <script>
-        var dataSource = new kendo.data.TreeListDataSource({
-          data: [ { name: "Jane Doe" }, { name: "John Doe" }]
-        });
-        $("#treeList").kendoTreeList({
-          columns: [
-              { field: "name" },
-              { command: [{ name: "edit", className: "btn-edit" }] }
-          ],
-          editable: true,
-          dataSource: dataSource
-        });
+      $("#treelist").kendoTreeList({
+        columns: [
+          { field: "lastName", title: "Last Name" },
+          { field: "position", title: "Position" },
+          { command: [
+            {
+              name: "details",
+              text: "Details",
+              className: "btn-details"
+            }
+          ]}
+        ],
+        dataSource: [
+          { id: 1, parentId: null, lastName: "Jackson", position: "CEO" },
+          { id: 2, parentId: 1, lastName: "Weber", position: "	VP, Engineering" }
+        ]
+      });
     </script>
+    <style>
+      .btn-details {
+        color: green;
+        font-weight: bold;
+      }
+    </style>
 
 ### columns.command.imageClass `String`
 
@@ -184,28 +267,25 @@ The CSS class applied to the icon span of the command button.
 
 #### Example - set the CSS class of the command icon
 
-    <div id="treeList"></div>
+    <div id="treelist"></div>
     <script>
-        var dataSource = new kendo.data.TreeListDataSource({
-          data: [ { name: "Jane Doe" }, { name: "John Doe" }]
-        });
-        $("#treeList").kendoTreeList({
-          columns: [
-              { field: "name" },
-              { command: [
-                {
-                  name: "remove",
-                  text: "Remove",
-                  imageClass: "k-i-delete", // show delete icon
-                  click: function(e) {
-                      // button click handler
-                  }
-                }
-              ] }
-          ],
-          editable: true,
-          dataSource: dataSource
-        });
+      $("#treelist").kendoTreeList({
+        columns: [
+          { field: "lastName", title: "Last Name" },
+          { field: "position", title: "Position" },
+          { command: [
+            {
+              name: "details",
+              text: "Details",
+              imageClass: "k-i-info"
+            }
+          ]}
+        ],
+        dataSource: [
+          { id: 1, parentId: null, lastName: "Jackson", position: "CEO" },
+          { id: 2, parentId: 1, lastName: "Weber", position: "VP, Engineering" }
+        ]
+      });
     </script>
 
 ### columns.command.click `Function`
@@ -216,30 +296,31 @@ The function context (available via the `this` keyword) will be set to the treel
 
 #### Example - handle the click event of the custom command button
 
-    <div id="treeList"></div>
+    <div id="treelist"></div>
     <script>
-        var dataSource = new kendo.data.TreeListDataSource({
-          data: [ { name: "Jane Doe" }, { name: "John Doe" }]
-        });
-        $("#treeList").kendoTreeList({
-          columns: [
-              { field: "name" },
-              { command: [ {
-                    name: "details",
-                    text: "details",
-                    click: function(e) {
-                        // e.target is the DOM element representing the button
-                        var tr = $(e.target).closest("tr"); // get the current table row (tr)
-                        // get the data bound to the current table row
-                        var data = this.dataItem(tr);
-                        console.log("Details for: " + data.name);
-                    }
-                  } ]
+      $("#treelist").kendoTreeList({
+        columns: [
+          { field: "lastName", title: "Last Name" },
+          { field: "position", title: "Position" },
+          { command: [
+            {
+              name: "details",
+              text: "Details",
+              click: function(e) {
+                // e.target is the DOM element representing the button
+                var tr = $(e.target).closest("tr"); // get the current table row (tr)
+                // get the data bound to the current table row
+                var data = this.dataItem(tr);
+                console.log("Details for: " + data.lastName);
               }
-          ],
-          editable: true,
-          dataSource: dataSource
-        });
+            }
+          ]}
+        ],
+        dataSource: [
+          { id: 1, parentId: null, lastName: "Jackson", position: "CEO" },
+          { id: 2, parentId: 1, lastName: "Weber", position: "VP, Engineering" }
+        ]
+      });
     </script>
 
 ### columns.command.name `String`
@@ -248,19 +329,25 @@ The name of the command. The built-in command names are "edit", "createChild" an
 
 #### Example - set the command name
 
-    <div id="treeList"></div>
+    <div id="treelist"></div>
     <script>
-        var dataSource = new kendo.data.TreeListDataSource({
-          data: [ { name: "Jane Doe" }, { name: "John Doe" }]
-        });
-        $("#treeList").kendoTreeList({
-          columns: [
-              { field: "name" },
-              { command: [{ name: "edit" }] }
-          ],
-          editable: true,
-          dataSource: dataSource
-        });
+      $("#treelist").kendoTreeList({
+        columns: [
+          { field: "lastName", title: "Last Name" },
+          { field: "position", title: "Position" },
+          { command: [
+            {
+              name: "details",
+              text: "Details",
+              imageClass: "k-i-info"
+            }
+          ]}
+        ],
+        dataSource: [
+          { id: 1, parentId: null, lastName: "Jackson", position: "CEO" },
+          { id: 2, parentId: 1, lastName: "Weber", position: "VP, Engineering" }
+        ]
+      });
     </script>
 
 ### columns.command.text `String`
@@ -269,28 +356,33 @@ The text displayed by the command button. If not set the [name](#configuration-c
 
 #### Example - customize the text of the command
 
-    <div id="treeList"></div>
+    <div id="treelist"></div>
     <script>
-        var dataSource = new kendo.data.TreeListDataSource({
-          data: [ { name: "Jane Doe" }, { name: "John Doe" }]
-        });
-        $("#treeList").kendoTreeList({
-          columns: [
-              { field: "name" },
-              { command: [{ name: "edit", text: "Edit current item" }] }
-          ],
-          editable: true,
-          dataSource: dataSource
-        });
+      $("#treelist").kendoTreeList({
+        columns: [
+          { field: "lastName", title: "Last Name" },
+          { field: "position", title: "Position" },
+          { command: [
+            {
+              name: "custom",
+              text: "Details"
+            }
+          ]}
+        ],
+        dataSource: [
+          { id: 1, parentId: null, lastName: "Jackson", position: "CEO" },
+          { id: 2, parentId: 1, lastName: "Weber", position: "VP, Engineering" }
+        ]
+      });
     </script>
 
 ### columns.editor `Function`
 
 Provides a way to specify a custom editing UI for the column. Use the `container` parameter to create the editing UI.
 
-> The editing UI should contain an element whose `name` HTML attribute is set as the column [field](#configuration-columns.field).
+> The editing UI should contain an element that has a `name` HTML attribute set and that attribute value should match the [field](#configuration-columns.field) name.
 
-> Validation settings defined in the `model.fields` configuration will **not** be applied automatically. In order the validation to work, **the developer is responsible for attaching the corresponding validation attributes to the editor input**. In case the custom editor is a widget, the developer should [customize the validation warning tooltip position](/framework/validator/overview#customizing-the-tooltip-position) in order to avoid visual issues.
+> Validation settings defined in the `model.fields` configuration will **not** be applied automatically. In order for the validation to work, **the developer is responsible for attaching the corresponding validation attributes to the editor input**. In case the custom editor is a widget, the developer can [customize the validation warning tooltip position](/framework/validator/overview#customizing-the-tooltip-position) to avoid visual issues.
 
 #### Parameters
 
@@ -314,76 +406,76 @@ The model instance to which the current table row is bound.
 
 #### Example - create a custom column editor using the Kendo UI AutoComplete
 
-    <div id="treeList"></div>
+    <div id="treelist"></div>
     <script>
-        $("#treeList").kendoTreeList({
-            columns: [
-                {
-                    field: "name",
-                    editor: function(container, options) {
-                        // create an input element
-                        var input = $("<input/>");
-                        // set its name to the field to which the column is bound ('name' in this case)
-                        input.attr("name", options.field);
-                        // append it to the container
-                        input.appendTo(container);
-                        // initialize a Kendo UI AutoComplete
-                        input.kendoAutoComplete({
-                            dataTextField: "name",
-                            dataSource: [
-                                { name: "Jane Doe" },
-                                { name: "Maria Anders" }
-                            ]
-                        });
-                    }
-                },
-                { command: [ "edit" ] }
-            ],
-            editable: true,
-            dataSource: {
-                data: [ { name: "Jane Doe" } ]
+      $("#treelist").kendoTreeList({
+        columns: [
+          {
+            field: "lastName",
+            editor: function(container, options) {
+              // create an input element
+              var input = $("<input/>");
+              // set its name to the field to which the column is bound ('lastName' in this case)
+              input.attr("name", options.field);
+              // append it to the container
+              input.appendTo(container);
+              // initialize a Kendo UI AutoComplete
+              input.kendoAutoComplete({
+                dataTextField: "lastName",
+                dataSource: [
+                  { lastName: "Jackson" },
+                  { lastName: "Strong" },
+                  { lastName: "Simon"}
+                ]
+              });
             }
-        });
+          },
+          { field: "position"},
+          { command: [ "edit" ] }
+        ],
+        editable: true,
+        dataSource: [
+          { id: 1, parentId: null, lastName: "Jackson", position: "CEO" },
+          { id: 2, parentId: 1, lastName: "Weber", position: "VP, Engineering" }
+        ]
+      });
     </script>
 
 #### Example - create a custom column editor with validation
 
-    <div id="treeList"></div>
+    <div id="treelist"></div>
     <script>
-        $("#treeList").kendoTreeList({
-            columns: [
-                {
-                    field: "name",
-                    editor: function(container, options) {
-                        // create input element and add the validation attribute
-                        var input = $('<input name="' + options.field + '" required="required" />');
-                        // set its name to the field to which the column is bound ('name' in this case)
-                        input.attr("name", options.field);
-                        // append it to the container
-                        input.appendTo(container);
-                        // initialize a Kendo UI AutoComplete
-                        input.kendoAutoComplete({
-                            dataTextField: "name",
-                            dataSource: [
-                                { name: "Jane Doe" },
-                                { name: "Maria Anders" }
-                            ]
-                        });
-
-                        // create tooltipElement element, NOTE: data-for attribute should match editor's name attribute
-                        var tooltipElement = $('<span class="k-invalid-msg" data-for="' + options.field + '"></span>');
-                        // append the tooltip element
-                        tooltipElement.appendTo(container);
-                    }
-                },
-                { command: [ "edit" ] }
-            ],
-            editable: true,
-            scrollable: false,
-            dataSource: {
-                data: [ { name: "Jane Doe" } ]
+      $("#treelist").kendoTreeList({
+        columns: [
+          {
+            field: "lastName",
+            editor: function(container, options) {
+              // create input element and add the validation attribute
+              var input = $('<input name="' + options.field + '" required="required" />');
+              // set its name to the field to which the column is bound ('lastName' in this case)
+              input.attr("name", options.field);
+              // append it to the container
+              input.appendTo(container);
+              // initialize a Kendo UI AutoComplete
+              input.kendoAutoComplete({
+                dataTextField: "lastName",
+                dataSource: [
+                  { lastName: "Jackson" },
+                  { lastName: "Strong" },
+                  { lastName: "Simon"}
+                ]
+              });
             }
-        });
+          },
+          { field: "position"},
+          { command: [ "edit" ] }
+        ],
+        editable: "popup",
+        dataSource: [
+          { id: 1, parentId: null, lastName: "Jackson", position: "CEO" },
+          { id: 2, parentId: 1, lastName: "Weber", position: "VP, Engineering" }
+        ]
+      });
     </script>
 
 ### columns.encoded `Boolean` *(default: true)*
@@ -392,16 +484,20 @@ If set to `true` the column value will be HTML-encoded before it is displayed. I
 
 #### Example - prevent HTML encoding
 
-    <div id="treeList"></div>
+    <div id="treelist"></div>
     <script>
-        $("#treeList").kendoTreeList({
-            columns: [
-                { field: "name", encoded: false },
-            ],
-            dataSource: {
-                data: [ { name: "<strong>Jane Doe</strong>" } ]
-            }
-        });
+      $("#treelist").kendoTreeList({
+        columns: [
+          { field: "lastName"},
+          { field: "position", encoded: false},
+          { command: [ "edit" ] }
+        ],
+        editable: "popup",
+        dataSource: [
+          { id: 1, parentId: null, lastName: "Jackson", position: "<strong>CEO</strong>" },
+          { id: 2, parentId: 1, lastName: "Weber", position: "VP, Engineering" }
+        ]
+      });
     </script>
 
 ### columns.expandable `Boolean` *(default: false)*
@@ -435,16 +531,19 @@ The field to which the column is bound. The value of this field is displayed by 
 
 #### Example - specify the column field
 
-    <div id="treeList"></div>
     <script>
-        $("#treeList").kendoTreeList({
-            columns: [
-                { field: "name" },
-            ],
-            dataSource: {
-                data: [ { name: "Jane Doe" } ]
-            }
-        });
+      $("#treelist").kendoTreeList({
+        columns: [
+          { field: "lastName" },
+          { field: "position" },
+          { command: [ "edit" ] }
+        ],
+        editable: "popup",
+        dataSource: [
+          { id: 1, parentId: null, lastName: "Jackson", position: "CEO" },
+          { id: 2, parentId: 1, lastName: "Weber", position: "VP, Engineering" }
+        ]
+      });
     </script>
 
 ### columns.filterable `Boolean|Object` *(default: true)*
@@ -456,16 +555,18 @@ Can be set to a JavaScript object which represents the filter menu configuration
 
 #### Example - disable filtering
 
-    <div id="treeList"></div>
     <script>
-    $("#treeList").kendoTreeList({
-      columns: [
-        { field: "name", filterable: false },
-        { field: "age" }
-      ],
-      filterable: true,
-      dataSource: [ { name: "Jane", age: 30 }, { name: "John", age: 33 }]
-    });
+      $("#treelist").kendoTreeList({
+        columns: [
+          { field: "lastName" },
+          { field: "position", filterable: false }
+        ],
+        editable: "popup",
+        dataSource: [
+          { id: 1, parentId: null, lastName: "Jackson", position: "CEO" },
+          { id: 2, parentId: 1, lastName: "Weber", position: "VP, Engineering" }
+        ]
+      });
     </script>
 
 ### columns.filterable.ui `String|Function`
@@ -476,34 +577,66 @@ The `role` [data attribute](/framework/data-attribute-initialization) of the wid
 
     <div id="treelist"></div>
     <script>
-    $("#treelist").kendoTreeList({
-      columns: [ {
-        field: "date",
-        filterable: {
-          ui: "datetimepicker" // use Kendo UI DateTimePicker
+      $("#treelist").kendoTreeList({
+        columns: [
+          { field: "lastName" },
+          { field: "position" },
+          { 
+            field: "hireDate", 
+            filterable: { 
+              ui: "datetimepicker" // use Kendo UI DateTimePicker
+            }
+          }
+        ],
+        filterable: true,
+        dataSource: {
+          data: [
+            { id: 1, parentId: null, lastName: "Jackson", position: "CEO", hireDate: new Date(2012, 2, 3) },
+            { id: 2, parentId: 1, lastName: "Weber", position: "VP, Engineering", hireDate: new Date(2012, 7, 13) }
+          ],
+          schema: {
+            model: {
+              fields: {
+                hireDate: { type: "date" }
+              }
+            }
+          }
         }
-      } ],
-      filterable: true,
-      dataSource: [ { date: new Date() }, { date: new Date() } ]
-    });
+      });
     </script>
 
 #### Example - initialize the filter UI
 
     <div id="treelist"></div>
     <script>
-    $("#treelist").kendoTreeList({
-      columns: [ {
-        field: "date",
-        filterable: {
-          ui: function(element) {
-            element.kendoDateTimePicker(); // initialize a Kendo UI DateTimePicker
+      $("#treelist").kendoTreeList({
+        columns: [
+          { field: "lastName" },
+          { field: "position" },
+          { 
+            field: "hireDate", 
+            filterable: { 
+              ui: function(element) {
+                element.kendoDateTimePicker(); // initialize a Kendo UI DateTimePicker
+              }
+            }
+          }
+        ],
+        filterable: true,
+        dataSource: {
+          data: [
+            { id: 1, parentId: null, lastName: "Jackson", position: "CEO", hireDate: new Date(2012, 2, 3) },
+            { id: 2, parentId: 1, lastName: "Weber", position: "VP, Engineering", hireDate: new Date(2012, 7, 13) }
+          ],
+          schema: {
+            model: {
+              fields: {
+                hireDate: { type: "date" }
+              }
+            }
           }
         }
-      } ],
-        filterable: true,
-        dataSource: [ { date: new Date() }, { date: new Date() } ]
-    });
+      });
     </script>
 
 ### columns.footerTemplate `String|Function`
@@ -552,18 +685,21 @@ The format that is applied to the value before it is displayed. Takes the form "
 
 #### Example - specify the column format string
 
-    <div id="treeList"></div>
+    <div id="treelist"></div>
     <script>
-        $("#treeList").kendoTreeList({
-            columns: [ {
-                field: "date",
-                format: "{0: yyyy-MM-dd HH:mm:ss}"
-            }, {
-                field: "number",
-                format: "{0:c}"
-            } ],
-            dataSource: [ { date: new Date(), number: 3.1415 } ]
-        });
+      $("#treelist").kendoTreeList({
+        columns: [
+          { field: "lastName" },
+          { field: "successRate", format: "{0:p}" },
+          { field: "hireDate", format: "{0:dd/MMM/yyyy}" }
+        ],
+        dataSource: {
+          data: [
+            { id: 1, parentId: null, lastName: "Jackson", successRate: 0.7, hireDate: new Date(2012, 2, 3) },
+            { id: 2, parentId: 1, lastName: "Weber", successRate: 0.8, hireDate: new Date(2012, 7, 13) }
+          ]
+        }
+      });
     </script>
 
 ### columns.headerAttributes `Object`
@@ -577,11 +713,14 @@ HTML attributes of the table header cell (`<th>`) rendered for the column.
     <div id="treeList"></div>
     <script>
       var dataSource = new kendo.data.TreeListDataSource({
-        data: [ { name: "Jane Doe" }, { name: "John Doe" }]
+          data: [
+            { id: 1, parentId: null, lastName: "Jackson" },
+            { id: 2, parentId: 1, lastName: "Weber" }
+          ]
       });
       $("#treeList").kendoTreeList({
         columns: [ {
-          field: "name",
+          field: "lastName",
           headerAttributes: {
             "class": "name-header",
             style: "text-align: right"
@@ -606,11 +745,14 @@ is displayed in the column header cell.
     <script>
         $("#treelist").kendoTreeList({
             columns: [ {
-                field: "name",
+                field: "lastName",
                 headerTemplate: '<input type="checkbox" id="check-all" /><label for="check-all">check all</label>'
             }],
             dataSource: {
-                data: [ { name: "Jane Doe" } ]
+                data: [
+                    { id: 1, parentId: null, lastName: "Jackson" },
+                    { id: 2, parentId: 1, lastName: "Weber" }
+                ]
             }
         });
     </script>
@@ -620,7 +762,7 @@ is displayed in the column header cell.
 The pixel screen width below which the column will be hidden. The setting takes precedence over the [`hidden`](/api/javascript/ui/treelist#configuration-columns.hidden) setting,
 so the two should not be used at the same time.
 
-#### Example - lockable columns
+#### Example - Hide columns when screen is smaller than a given width
 
     <div id="treelist"></div>
     <script>
@@ -631,8 +773,8 @@ so the two should not be used at the same time.
             { field: "age", width: 250, minScreenWidth: 750 } //column will become hidden if screen size is less than 750px
           ],
           dataSource: [
-              { id: 1, name: "Jane Doe", age: 31, city: "Boston" },
-              { id: 2, name: "John Doe", age: 55, city: "New York" }
+              { id: 1, parentId: null, name: "Jane Doe", age: 31, city: "Boston" },
+              { id: 2, parentId: 1, name: "John Doe", age: 55, city: "New York" }
           ]
         });
     </script>
@@ -646,14 +788,20 @@ be disabled for this column. By default all columns are sortable if sorting is e
 
     <div id="treelist"></div>
     <script>
-        $("#treelist").kendoTreeList({
-            columns: [
-                { sortable: false, field: "id" },
-                { field: "name" }
-            ],
-            sortable: true,
-            dataSource: [ { id: 1, name: "Jane Doe" }, { id: 2, name: "John Doe" } ]
-        });
+      $("#treelist").kendoTreeList({
+        columns: [
+          { field: "lastName" },
+          { field: "position", sortable: false }
+        ],
+        sortable: true,
+        dataSource: {
+          data: [
+            { id: 1, parentId: null, lastName: "Jackson", position: "CEO" },
+            { id: 2, parentId: 1, lastName: "Weber", position: "VP, Engineering" },
+            { id: 3, parentId: 1, lastName: "Carr", position: "VP, Finance" }
+          ]
+        }
+      });
     </script>
 
 ### columns.sortable.compare `Function`
@@ -674,9 +822,9 @@ A JavaScript function which is used to compare the values - should return -1 if 
       $("#treeList").kendoTreeList({
         dataSource: {
           data: [
-                { id: 1, item: "two" },
-                { id: 2, item: "one" },
-                { id: 3, item: "three" }
+                { id: 1, parentId: null, item: "two" },
+                { id: 2, parentId: 1, item: "one" },
+                { id: 3, parentId: 1, item: "three" }
             ]
         },
         sortable: true,
@@ -702,13 +850,18 @@ Each table row consists of table cells (`<td>`) which represent the treelist col
 
     <div id="treelist"></div>
     <script>
-    $("#treelist").kendoTreeList({
-      columns: [ {
-        field: "name",
-        template: "<strong>#: name #</strong>"
-      }],
-      dataSource: [ { name: "Jane Doe" }, { name: "John Doe" } ]
-    });
+      $("#treelist").kendoTreeList({
+        columns: [
+          { field: "lastName" },
+          { field: "position", template: "<strong>#: position #</strong>" }
+        ],
+        dataSource: {
+          data: [
+            { id: 1, parentId: null, lastName: "Jackson", position: "CEO" },
+            { id: 2, parentId: 1, lastName: "Weber", position: "VP, Engineering" }
+          ]
+        }
+      });
     </script>
 
 #### Example - external template with conditional formatting and button handler
@@ -749,45 +902,59 @@ The text that is displayed in the column header cell. If not set the [field](#co
 
     <div id="treelist"></div>
     <script>
-    $("#treelist").kendoTreeList({
-      columns: [ { field: "name", title: "Name" } ],
-      dataSource: [ { name: "Jane Doe" }, { name: "John Doe" } ]
-    });
+      $("#treelist").kendoTreeList({
+        columns: [
+          { field: "lastName", title: "Last Name" },
+          { field: "position", title: "Position" }
+        ],
+        dataSource: {
+          data: [
+            { id: 1, parentId: null, lastName: "Jackson", position: "CEO" },
+            { id: 2, parentId: 1, lastName: "Weber", position: "VP, Engineering" }
+          ]
+        }
+      });
     </script>
 
 ### columns.width `String|Number`
 
-The width of the column. Numeric values are treated as pixels. **For more important information, please refer to [Column Widths](/web/grid/walkthrough#column-widths)**.
+The width of the column. Numeric values are treated as pixels.
 
 #### Example - set the column width as a string
-     <div id="treelist"></div>
-     <script>
-     $("#treelist").kendoTreeList({
-       columns: [
-         { field: "name", width: "200px" },
-         { field: "age" }
-       ],
-       dataSource: [
-         { name: "Jane Doe", age: 30 },
-         { name: "John Doe", age: 33 }
-       ]
-     });
-     </script>
+
+    <div id="treelist"></div>
+    <script>
+      $("#treelist").kendoTreeList({
+        columns: [
+          { field: "lastName", width: "200px" },
+          { field: "position" }
+        ],
+        dataSource: {
+          data: [
+            { id: 1, parentId: null, lastName: "Jackson", position: "CEO" },
+            { id: 2, parentId: 1, lastName: "Weber", position: "VP, Engineering" }
+          ]
+        }
+      });
+    </script>
 
 #### Example - set the column width as a number
-     <div id="treelist"></div>
-     <script>
-     $("#treelist").kendoTreeList({
-       columns: [
-         { field: "name", width: 200 },
-         { field: "age" }
-       ],
-       dataSource: [
-         { name: "Jane Doe", age: 30 },
-         { name: "John Doe", age: 33 }
-       ]
-     });
-     </script>
+
+    <div id="treelist"></div>
+    <script>
+      $("#treelist").kendoTreeList({
+        columns: [
+          { field: "lastName", width: 200 },
+          { field: "position" }
+        ],
+        dataSource: {
+          data: [
+            { id: 1, parentId: null, lastName: "Jackson", position: "CEO" },
+            { id: 2, parentId: 1, lastName: "Weber", position: "VP, Engineering" }
+          ]
+        }
+      });
+    </script>
 
 ### columns.hidden `Boolean` *(default: false)*
 
@@ -841,48 +1008,48 @@ If set to `true` the column will be displayed as locked (frozen) in the treelist
 
 #### Example - locked columns
 
-    <div id="treeList"></div>
+    <div id="treeList" style="width: 500px"></div>
     <script>
-        $("#treeList").kendoTreeList({
-            columns: [
-                { field: "id", locked: true, width: 100},
-                { field: "name", width: 200 },
-                { field: "age", width: 150 }
-            ],
-            dataSource: {
-                data: [
-                    { id: 1, parentId: null, name: "Jane Doe", age: 22 },
-                    { id: 2, parentId: 1, name: "John Doe", age: 24 }
-                ]
-            }
-        });
+      $("#treeList").kendoTreeList({
+        columns: [
+          { field: "id", locked: true, width: 100},
+          { field: "name", width: 200 },
+          { field: "age", width: 250 }
+        ],
+        dataSource: {
+          data: [
+            { id: 1, parentId: null, name: "Jane Doe", age: 22 },
+            { id: 2, parentId: 1, name: "John Doe", age: 24 }
+          ]
+        }
+      });
     </script>
 
 ### columns.lockable `Boolean` *(default: true)*
 
-If set to `false` the column will remain in the side of the treelist into which its own locked configuration placed it.
+If set to `false` the column will remain in the side of the TreeList into which its own locked configuration placed it.
 
 > This option is meaningful when the treelist has columns which are configured with a [locked](#configuration-columns.locked) value. Setting it explicitly to `false` will
 prevent the user from locking or unlocking this column using the user interface.
 
 #### Example - lockable columns
 
-    <div id="treeList"></div>
+    <div id="treeList" style="width: 500px"></div>
     <script>
-        $("#treeList").kendoTreeList({
-            columns: [
-                { field: "id", locked: true, lockable: false, width: 100},
-                { field: "name", width: 200 },
-                { field: "age", width: 150, lockable: false }
-            ],
-            reorderable: true,
-            dataSource: {
-                data: [
-                    { id: 1, parentId: null, name: "Jane Doe", age: 22 },
-                    { id: 2, parentId: 1, name: "John Doe", age: 24 }
-                ]
-            }
-        });
+      $("#treeList").kendoTreeList({
+        columns: [
+          { field: "id", locked: true, width: 100},
+          { field: "name", width: 200 },
+          { field: "age", width: 250, lockable: false }
+        ],
+        reorderable: true,
+        dataSource: {
+          data: [
+            { id: 1, parentId: null, name: "Jane Doe", age: 22 },
+            { id: 2, parentId: 1, name: "John Doe", age: 24 }
+          ]
+        }
+      });
     </script>
 
 ### resizable `Boolean` *(default: false)*
@@ -963,50 +1130,53 @@ Can be set to a JavaScript object which represents the column menu configuration
 
 If set to `true` the column menu would allow the user to select (show and hide) treelist columns. By default the column menu allows column selection.
 
-#### Example - disable column selection
+#### Example - disable column show/hide using the column menu
 
     <div id="treeList"></div>
     <script>
-        $("#treeList").kendoTreeList({
-            columns: [
-                { field: "name" },
-                { field: "age" }
-            ],
-            columnMenu: {
-                columns: false
-            },
-            dataSource: {
-                data: [
-                    { id: 1, parentId: null, name: "Jane Doe", age: 22 },
-                    { id: 2, parentId: 1, name: "John Doe", age: 24 }
-                ]
-            }
-        });
+      $("#treeList").kendoTreeList({
+        columns: [
+          { field: "name" },
+          { field: "age" }
+        ],
+        columnMenu: {
+          columns: false
+        },
+        sortable: true,
+        dataSource: {
+          data: [
+            { id: 1, parentId: null, name: "Jane Doe", age: 22 },
+            { id: 2, parentId: 1, name: "John Doe", age: 24 },
+            { id: 3, parentId: 1, name: "Jenny Doe", age: 14 }
+          ]
+        }
+      });
     </script>
 
 ### columnMenu.filterable `Boolean` *(default: true)*
 
-If set to `true` the column menu would allow the user to filter the treelist. By default the column menu allows the user to filter if filtering is enabled via the [filterable](#configuration-filterable).
+If set to `true` the column menu will allow the user to filter the TreeList. By default the column menu allows the user to filter if filtering is enabled via the [filterable](#configuration-filterable).
 
 #### Example - disable column menu filtering
 
     <div id="treeList"></div>
     <script>
-        $("#treeList").kendoTreeList({
-            columns: [
-                { field: "name" },
-                { field: "age" }
-            ],
-            columnMenu: {
-                filterable: false
-            },
-            dataSource: {
-                data: [
-                    { id: 1, parentId: null, name: "Jane Doe", age: 22 },
-                    { id: 2, parentId: 1, name: "John Doe", age: 24 }
-                ]
-            }
-        });
+      $("#treeList").kendoTreeList({
+        columns: [
+          { field: "name" },
+          { field: "age" }
+        ],
+        filterable: true,
+        columnMenu: {
+          filterable: false
+        },
+        dataSource: {
+          data: [
+            { id: 1, parentId: null, name: "Jane Doe", age: 22 },
+            { id: 2, parentId: 1, name: "John Doe", age: 24 }
+          ]
+        }
+      });
     </script>
 
 ### columnMenu.sortable `Boolean` *(default: true)*
@@ -1024,13 +1194,15 @@ If set to `true` the column menu would allow the user to sort the treelist by th
                 { field: "name" },
                 { field: "age" }
             ],
+            sortable: true,
             columnMenu: {
                 sortable: false
             },
             dataSource: {
                 data: [
                     { id: 1, parentId: null, name: "Jane Doe", age: 22 },
-                    { id: 2, parentId: 1, name: "John Doe", age: 24 }
+                    { id: 2, parentId: 1, name: "John Doe", age: 24 },
+                    { id: 3, parentId: 1, name: "Jenny Doe", age: 14 }
                 ]
             }
         });
@@ -1044,26 +1216,29 @@ The text messages displayed in the column menu. Use it to customize or localize 
 
     <div id="treeList"></div>
     <script>
-        $("#treeList").kendoTreeList({
-            columns: [
-                { field: "name" },
-                { field: "age" }
-            ],
-            columnMenu: {
-                messages: {
-                  columns: "Choose columns",
-                  filter: "Apply filter",
-                  sortAscending: "Sort (asc)",
-                  sortDescending: "Sort (desc)"
-                }
-            },
-            dataSource: {
-                data: [
-                    { id: 1, parentId: null, name: "Jane Doe", age: 22 },
-                    { id: 2, parentId: 1, name: "John Doe", age: 24 }
-                ]
-            }
-        });
+      $("#treeList").kendoTreeList({
+        columns: [
+          { field: "name" },
+          { field: "age" }
+        ],
+        sortable: true,
+        filterable: true,
+        columnMenu: {
+          messages: {
+            columns: "Choose columns",
+            filter: "Apply filter",
+            sortAscending: "Sort (asc)",
+            sortDescending: "Sort (desc)"
+          }
+        },
+        dataSource: {
+          data: [
+            { id: 1, parentId: null, name: "Jane Doe", age: 22 },
+            { id: 2, parentId: 1, name: "John Doe", age: 24 },
+            { id: 3, parentId: 1, name: "Jenny Doe", age: 14 }
+          ]
+        }
+      });
     </script>
 
 ### columnMenu.messages.columns `String` *(default: "Columns")*
@@ -1101,23 +1276,25 @@ The text message displayed for the filter menu item.
 
     <div id="treeList"></div>
     <script>
-        $("#treeList").kendoTreeList({
-            columns: [
-                { field: "name" },
-                { field: "age" }
-            ],
-            columnMenu: {
-                messages: {
-                  filter: "Apply filter",
-                }
-            },
-            dataSource: {
-                data: [
-                    { id: 1, parentId: null, name: "Jane Doe", age: 22 },
-                    { id: 2, parentId: 1, name: "John Doe", age: 24 }
-                ]
-            }
-        });
+      $("#treeList").kendoTreeList({
+        columns: [
+          { field: "name" },
+          { field: "age" }
+        ],
+        filterable: true,
+        columnMenu: {
+          messages: {
+            filter: "Apply filter"
+          }
+        },
+        dataSource: {
+          data: [
+            { id: 1, parentId: null, name: "Jane Doe", age: 22 },
+            { id: 2, parentId: 1, name: "John Doe", age: 24 },
+            { id: 3, parentId: 1, name: "Jenny Doe", age: 14 }
+          ]
+        }
+      });
     </script>
 
 ### columnMenu.messages.sortAscending `String` *(default: "Sort Ascending")*
@@ -1128,23 +1305,25 @@ The text message displayed for the menu item which performs ascending sort.
 
     <div id="treeList"></div>
     <script>
-        $("#treeList").kendoTreeList({
-            columns: [
-                { field: "name" },
-                { field: "age" }
-            ],
-            columnMenu: {
-                messages: {
-                  sortAscending: "Sort (asc)",
-                }
-            },
-            dataSource: {
-                data: [
-                    { id: 1, parentId: null, name: "Jane Doe", age: 22 },
-                    { id: 2, parentId: 1, name: "John Doe", age: 24 }
-                ]
-            }
-        });
+      $("#treeList").kendoTreeList({
+        columns: [
+          { field: "name" },
+          { field: "age" }
+        ],
+        sortable: true,
+        columnMenu: {
+          messages: {
+            sortAscending: "Sort (asc)"
+          }
+        },
+        dataSource: {
+          data: [
+            { id: 1, parentId: null, name: "Jane Doe", age: 22 },
+            { id: 2, parentId: 1, name: "John Doe", age: 24 },
+            { id: 3, parentId: 1, name: "Jenny Doe", age: 14 }
+          ]
+        }
+      });
     </script>
 
 ### columnMenu.messages.sortDescending `String` *(default: "Sort Descending")*
@@ -1155,133 +1334,221 @@ The text message displayed for the menu item which performs descending sort.
 
     <div id="treeList"></div>
     <script>
-        $("#treeList").kendoTreeList({
-            columns: [
-                { field: "name" },
-                { field: "age" }
-            ],
-            columnMenu: {
-                messages: {
-                  sortDescending: "Sort (desc)",
-                }
-            },
-            dataSource: {
-                data: [
-                    { id: 1, parentId: null, name: "Jane Doe", age: 22 },
-                    { id: 2, parentId: 1, name: "John Doe", age: 24 }
-                ]
-            }
-        });
+      $("#treeList").kendoTreeList({
+        columns: [
+          { field: "name" },
+          { field: "age" }
+        ],
+        sortable: true,
+        columnMenu: {
+          messages: {
+            sortDescending: "Sort (desc)"
+          }
+        },
+        dataSource: {
+          data: [
+            { id: 1, parentId: null, name: "Jane Doe", age: 22 },
+            { id: 2, parentId: 1, name: "John Doe", age: 24 },
+            { id: 3, parentId: 1, name: "Jenny Doe", age: 14 }
+          ]
+        }
+      });
     </script>
 
 ### dataSource `Object|Array|kendo.data.TreeListDataSource`
 
-The data source of the widget which is used to render table rows. Can be a JavaScript object which represents a valid data source configuration, a JavaScript array or an existing [kendo.data.DataSource](/api/javascript/data/datasource)
-instance.
+The data source of the widget which is used to render table rows. Can be a JavaScript object which represents a valid [kendo.data.TreeListDataSource](/api/javascript/data/treelistdatasource) configuration, a JavaScript array or an existing [kendo.data.TreeListDataSource](/api/javascript/data/treelistdatasource) instance.
 
-If the `dataSource` option is set to a JavaScript object or array the widget will initialize a new [kendo.data.DataSource](/api/javascript/data/datasource) instance using that value as data source configuration.
+If the `dataSource` option is set to a JavaScript object or an array the widget will initialize a new [kendo.data.DataSource](/api/javascript/data/treelistdatasource) instance using that value as DataSource configuration.
 
-If the `dataSource` option is an existing `kendo.data.DataSource` instance, the widget will use that instance and will **not** initialize a new one.
+If the `dataSource` option is an existing `kendo.data.TreeListDataSource` instance, the widget will use that instance and will **not** initialize a new one.
 
 #### Example - set dataSource as a JavaScript object
 
-    <div id="treelist"></div>
+    <div id="treeList"></div>
     <script>
-    $("#treelist").kendoTreeList({
-      columns: [
-        { field: "name" },
-        { field: "age" }
-      ],
-      dataSource: {
-        data: [
-          { name: "Jane Doe", age: 30 },
-          { name: "John Doe", age: 33 }
-        ]
-      }
-    });
+      $("#treeList").kendoTreeList({
+        columns: [
+          { field: "name" },
+          { field: "age" }
+        ],
+        dataSource: {
+          data: [
+            { id: 1, parentId: null, name: "Jane Doe", age: 22 },
+            { id: 2, parentId: 1, name: "John Doe", age: 24 },
+            { id: 3, parentId: 1, name: "Jenny Doe", age: 14 }
+          ]
+        }
+      });
     </script>
 
 #### Example - set dataSource as a JavaScript array
 
-    <div id="treelist"></div>
+    <div id="treeList"></div>
     <script>
-    $("#treelist").kendoTreeList({
-      columns: [
-        { field: "name" },
-        { field: "age" }
-      ],
-      dataSource: [
-        { name: "Jane Doe", age: 30 },
-        { name: "John Doe", age: 33 }
-      ]
-    });
+      $("#treeList").kendoTreeList({
+        columns: [
+          { field: "name" },
+          { field: "age" }
+        ],
+        sortable: true,
+        columnMenu: {
+          messages: {
+            sortDescending: "Sort (desc)"
+          }
+        },
+        dataSource: [
+            { id: 1, parentId: null, name: "Jane Doe", age: 22 },
+            { id: 2, parentId: 1, name: "John Doe", age: 24 },
+            { id: 3, parentId: 1, name: "Jenny Doe", age: 14 }
+        ]
+      });
     </script>
 
 #### Example - set dataSource as an existing kendo.data.TreeListDataSource instance
 
-    <div id="treelist"></div>
-    <script>
-    var dataSource = new kendo.data.TreeListDataSource({
-      transport: {
-        read: {
-          url: "https://demos.telerik.com/kendo-ui/service/products",
-          dataType: "jsonp"
-        }
-      }
-    });
-    $("#treelist").kendoTreeList({
-      dataSource: dataSource,
-      columns: [
-        { field: "ProductName" }
-      ]
-    });
-    </script>
+      <div id="treelist"></div>
+
+      <script>
+        var service = "https://demos.telerik.com/kendo-ui/service";
+
+        $("#treelist").kendoTreeList({
+          dataSource: new kendo.data.TreeListDataSource({
+            transport: {
+              read: {
+                url: service + "/EmployeeDirectory/All",
+                dataType: "jsonp"
+              }
+            },
+            schema: {
+              model: {
+                id: "EmployeeID",
+                parentId: "ReportsTo",
+                fields: {
+                  ReportsTo: { field: "ReportsTo",  nullable: true },
+                  EmployeeID: { field: "EmployeeId", type: "number" },
+                  Extension: { field: "Extension", type: "number" }
+                },
+                expanded: true
+              }
+            }
+          }),
+          height: 400,
+          columns: [
+            { field: "FirstName", title: "First Name", width: 220},
+            { field: "LastName", title: "Last Name", width: 160 },
+            { field: "Position" }
+          ]
+        });
+      </script>
 
 ### editable `Boolean|Object` *(default: false)*
 
-If set to `true` the user would be able to edit the data to which the treelist is bound. By default editing is disabled.
+If set to `true` the user would be able to edit the data to which the TreeList is bound. By default, editing is disabled.
 
 Can be set to a string ("inline" or "popup") to specify the editing mode. The default editing mode is "inline".
 
 Can be set to a JavaScript object which represents the editing configuration.
 
 > The "inline" and "popup" editing modes are triggered by the "edit" column command. Thus it is required to have a column with an "edit" command.
+>
+> To have edit operations work correctly in the TreeList, the `dataSource` has to be [configured for CRUD operations](/framework/datasource/crud).
 
 #### Example - enable editing
 
-    <div id="treeList"></div>
-    <script>
-        $("#treeList").kendoTreeList({
-          columns: [
-            { field: "name" },
-            { field: "age" },
-            { command: [ "edit" ] }
-          ],
-          editable: true,
-          dataSource: [
-              { name: "Jane Doe", age: 30 },
-              { name: "John Doe", age: 33 }
-          ]
-        });
-    </script>
+      <script>
+          var crudServiceBaseUrl = "https://demos.telerik.com/kendo-ui/service";
+
+          $("#treelist").kendoTreeList({
+            editable: true,
+            height: 540,
+            columns: [
+              { field: "FirstName", title: "First Name", width: 220 },
+              { field: "LastName", title: "Last Name", width: 100 },
+              { field: "Position" },
+              { title: "Edit", command: [ "edit" ], width: 180 }
+            ],
+            dataSource: {
+              transport: {
+                read:  {
+                  url: crudServiceBaseUrl + "/EmployeeDirectory/All",
+                  dataType: "jsonp"
+                },
+                update: {
+                  url: crudServiceBaseUrl + "/EmployeeDirectory/Update",
+                  dataType: "jsonp"
+                },
+                parameterMap: function(options, operation) {
+                  if (operation !== "read" && options.models) {
+                    return {models: kendo.stringify(options.models)};
+                  }
+                }
+              },
+              schema: {
+                model: {
+                  id: "EmployeeId",
+                  parentId: "ReportsTo",
+                  fields: {
+                    EmployeeId: { type: "number", editable: false, nullable: false },
+                    ReportsTo: { nullable: true, type: "number" },
+                    FirstName: { validation: { required: true } },
+                    LastName: { validation: { required: true } },
+                    Position: { type: "string" }
+                  },
+                  expanded: true
+                }
+              }
+            }
+          });
+      </script>
 
 #### Example - enable popup editing
 
-    <div id="treeList"></div>
-    <script>
-        $("#treeList").kendoTreeList({
-          columns: [
-            { field: "name" },
-            { field: "age" },
-            { command: [ "edit" ] }
-          ],
-          editable: "popup",
-          dataSource: [
-              { name: "Jane Doe", age: 30 },
-              { name: "John Doe", age: 33 }
-          ]
-        });
-    </script>
+      <script>
+          var crudServiceBaseUrl = "https://demos.telerik.com/kendo-ui/service";
+
+          $("#treelist").kendoTreeList({
+            editable: "popup",
+            height: 540,
+            columns: [
+              { field: "FirstName", title: "First Name", width: 220 },
+              { field: "LastName", title: "Last Name", width: 100 },
+              { field: "Position" },
+              { title: "Edit", command: [ "edit" ], width: 180 }
+            ],
+            dataSource: {
+              transport: {
+                read:  {
+                  url: crudServiceBaseUrl + "/EmployeeDirectory/All",
+                  dataType: "jsonp"
+                },
+                update: {
+                  url: crudServiceBaseUrl + "/EmployeeDirectory/Update",
+                  dataType: "jsonp"
+                },
+                parameterMap: function(options, operation) {
+                  if (operation !== "read" && options.models) {
+                    return {models: kendo.stringify(options.models)};
+                  }
+                }
+              },
+              schema: {
+                model: {
+                  id: "EmployeeId",
+                  parentId: "ReportsTo",
+                  fields: {
+                    EmployeeId: { type: "number", editable: false, nullable: false },
+                    ReportsTo: { nullable: true, type: "number" },
+                    FirstName: { validation: { required: true } },
+                    LastName: { validation: { required: true } },
+                    Position: { type: "string" }
+                  },
+                  expanded: true
+                }
+              }
+            }
+          });
+      </script>
 
 ### editable.mode `String` *(default: "inline")*
 
@@ -1291,23 +1558,53 @@ The editing mode to use. The supported editing modes are "inline" and "popup".
 
 #### Example - specify inline editing mode
 
-    <div id="treeList"></div>
-    <script>
-        $("#treeList").kendoTreeList({
-          columns: [
-            { field: "name" },
-            { field: "age" },
-            { command: [ "edit" ] }
-          ],
-          editable: {
-            mode: "inline"
-          },
-          dataSource: [
-              { name: "Jane Doe", age: 30 },
-              { name: "John Doe", age: 33 }
-          ]
-        });
-    </script>
+      <script>
+          var crudServiceBaseUrl = "https://demos.telerik.com/kendo-ui/service";
+
+          $("#treelist").kendoTreeList({
+            editable: {
+                mode: "inline"
+            },
+            height: 540,
+            columns: [
+              { field: "FirstName", title: "First Name", width: 220 },
+              { field: "LastName", title: "Last Name", width: 100 },
+              { field: "Position" },
+              { title: "Edit", command: [ "edit" ], width: 180 }
+            ],
+            dataSource: {
+              transport: {
+                read:  {
+                  url: crudServiceBaseUrl + "/EmployeeDirectory/All",
+                  dataType: "jsonp"
+                },
+                update: {
+                  url: crudServiceBaseUrl + "/EmployeeDirectory/Update",
+                  dataType: "jsonp"
+                },
+                parameterMap: function(options, operation) {
+                  if (operation !== "read" && options.models) {
+                    return {models: kendo.stringify(options.models)};
+                  }
+                }
+              },
+              schema: {
+                model: {
+                  id: "EmployeeId",
+                  parentId: "ReportsTo",
+                  fields: {
+                    EmployeeId: { type: "number", editable: false, nullable: false },
+                    ReportsTo: { nullable: true, type: "number" },
+                    FirstName: { validation: { required: true } },
+                    LastName: { validation: { required: true } },
+                    Position: { type: "string" }
+                  },
+                  expanded: true
+                }
+              }
+            }
+          });
+      </script>
 
 ### editable.move `Boolean` *(default: false)*
 
@@ -1315,127 +1612,222 @@ Enables drag&drop UI of rows between parents.
 
 #### Example - use drag&drop for editing row parent node
 
-    <div id="treeList"></div>
-    <script>
-        $("#treeList").kendoTreeList({
-          columns: [
-            { field: "name" },
-            { field: "age" },
-            { command: [ "edit" ] }
-          ],
+        var service = "https://demos.telerik.com/kendo-ui/service";
+
+        $("#treelist").kendoTreeList({
+          dataSource: {
+            transport: {
+              read: {
+                url: service + "/EmployeeDirectory/All",
+                dataType: "jsonp"
+              }
+            },
+            schema: {
+              model: {
+                id: "EmployeeID",
+                parentId: "ReportsTo",
+                fields: {
+                  ReportsTo: { field: "ReportsTo",  nullable: true },
+                  EmployeeID: { field: "EmployeeId", type: "number" },
+                  Extension: { field: "Extension", type: "number" }
+                },
+                expanded: true
+              }
+            }
+          },
+          height: 540,
           editable: {
             move: true
           },
-          dataSource: [
-              { name: "Jane Doe", age: 30 },
-              { name: "John Doe", age: 33 }
+          columns: [
+            { field: "FirstName", title: "First Name", width: 220 },
+            { field: "LastName", title: "Last Name", width: 160 },
+            { field: "Position" }
           ]
         });
-    </script>
+      </script>
 
 ### editable.template `String|Function`
 
 The [template](/api/javascript/kendo#methods-template) which renders the popup editor.
 
-The template should contain elements whose `name` HTML attributes are set as the editable fields. This is how the treelist will know
-which field to update. The other option is to use [MVVM](/framework/mvvm/overview) bindings in order to bind HTML elements to data item fields.
+The template should contain elements which `name` HTML attribute is set to the name of the editable field. This is how the TreeList will know
+which field to bind each editor to. The other option is to use [MVVM](/framework/mvvm/overview) bindings in order to bind HTML elements to data item fields.
 
 > Use the `role` data attribute to initialize Kendo UI widgets in the template. Check [data attribute initialization](/framework/data-attribute-initialization) for more info.
 
 #### Example - customize the popup editor
 
-    <div id="treeList"></div>
-    <script id="popup-editor" type="text/x-kendo-template">
-      <h3>Edit Person</h3>
-      <p>
-        <label>Name:<input name="name" /></label>
-      </p>
-      <p>
-        <label>Age: <input data-role="numerictextbox" name="age" /></label>
-      </p>
-    </script>
-    <script>
-        $("#treeList").kendoTreeList({
-          columns: [
-            { field: "name" },
-            { field: "age" },
-            { command: [ "edit" ] }
-          ],
-          editable: {
-            mode: "popup",
-            template: kendo.template($("#popup-editor").html())
+      <div id="treelist"></div>
+      <script id="popup-editor" type="text/x-kendo-template">
+  			<h3>Edit Person</h3>
+  			<p>
+  			  <label>First Name:<input name="FirstName" /></label>
+  			</p>
+  			<p>
+  			  <label>Last Name:<input name="LastName" /></label>
+  			</p>
+  			<p>
+  			  <label>Position: 
+              <select name="Position">
+          	    <option>Software Developer</option>
+                <option>Team Lead</option>
+                <option>Technical Lead</option>
+        	  </select>
+        	</label>
+        </p>
+      </script>
+      <script>
+        var service = "https://demos.telerik.com/kendo-ui/service";
+
+        $("#treelist").kendoTreeList({
+          dataSource: {
+            transport: {
+              read: {
+                url: service + "/EmployeeDirectory/All",
+                dataType: "jsonp"
+              }
+            },
+            schema: {
+              model: {
+                id: "EmployeeID",
+                parentId: "ReportsTo",
+                fields: {
+                  ReportsTo: { field: "ReportsTo",  nullable: true },
+                  EmployeeID: { field: "EmployeeId", type: "number" },
+                  Extension: { field: "Extension", type: "number" }
+                },
+                expanded: true
+              }
+            }
           },
-          dataSource: [
-              { name: "Jane Doe", age: 30 },
-              { name: "John Doe", age: 33 }
+          height: 540,
+          editable: {
+            template: kendo.template($("#popup-editor").html()),
+            mode: "popup"
+          },
+          columns: [
+            { field: "FirstName", title: "First Name", width: 220 },
+            { field: "LastName", title: "Last Name", width: 160 },
+            { field: "Position" },
+            { command: ["edit"] }
           ]
         });
-    </script>
+      </script>
 
 #### Example - using MVVM in the popup editor template
 
-    <div id="treeList"></div>
-    <script id="popup-editor" type="text/x-kendo-template">
-      <h3>Edit Person</h3>
-      <p>
-        <label>Name:<input data-bind="value: name" /></label>
-      </p>
-      <p>
-        <label>Age:<input data-role="numerictextbox" data-bind="value:age" /></label>
-      </p>
-    </script>
-    <script>
-        $("#treeList").kendoTreeList({
-          columns: [
-            { field: "name" },
-            { field: "age" },
-            { command: [ "edit" ] }
-          ],
-          editable: {
-            mode: "popup",
-            template: kendo.template($("#popup-editor").html())
+      <div id="treelist"></div>
+      <script id="popup-editor" type="text/x-kendo-template">
+  			<h3>Edit Person</h3>
+  			<p>
+  			  <label>First Name:<input data-bind="value: FirstName" /></label>
+  			</p>
+  			<p>
+  			  <label>Last Name:<input data-bind="value: LastName" /></label>
+  			</p>
+  			<p>
+  			  <label>Position: 
+          <select data-bind="value: Position">
+          	<option>CEO</option>
+            <option>Team Lead</option>
+            <option>Technical Lead</option>
+        	</select>
+        	</label>
+        </p>
+      </script>
+      <script>
+        var service = "https://demos.telerik.com/kendo-ui/service";
+
+        $("#treelist").kendoTreeList({
+          dataSource: {
+            transport: {
+              read: {
+                url: service + "/EmployeeDirectory/All",
+                dataType: "jsonp"
+              }
+            },
+            schema: {
+              model: {
+                id: "EmployeeID",
+                parentId: "ReportsTo",
+                fields: {
+                  ReportsTo: { field: "ReportsTo",  nullable: true },
+                  EmployeeID: { field: "EmployeeId", type: "number" },
+                  Extension: { field: "Extension", type: "number" }
+                },
+                expanded: true
+              }
+            }
           },
-          dataSource: [
-              { name: "Jane Doe", age: 30 },
-              { name: "John Doe", age: 33 }
+          height: 540,
+          editable: {
+            template: kendo.template($("#popup-editor").html()),
+            mode: "popup"
+          },
+          columns: [
+            { field: "FirstName", title: "First Name", width: 220 },
+            { field: "LastName", title: "Last Name", width: 160 },
+            { field: "Position" },
+            { command: ["edit"] }
           ]
         });
-    </script>
+      </script>
 
 ### editable.window `Object`
 
-Configures the Kendo UI Window instance, which is used when the TreeList edit mode is "popup". The configuration is optional.
+Configures the Kendo UI Window instance, which is used when the TreeList edit mode is "popup".
 
 For more information, please refer to the [Window configuration API](/api/javascript/ui/window).
 
 #### Example - TreeList popup Window configuration
 
-    <div id="treeList"></div>
-    <script>
-        function myOpenEventHandler(e) {
-            // ...
-        }
+      <div id="treelist"></div>
+      <script>
+        var service = "https://demos.telerik.com/kendo-ui/service";
 
-        $("#treeList").kendoTreeList({
-          columns: [
-            { field: "name" },
-            { field: "age" },
-            { command: [ "edit" ] }
-          ],
+        $("#treelist").kendoTreeList({
+          dataSource: {
+            transport: {
+              read: {
+                url: service + "/EmployeeDirectory/All",
+                dataType: "jsonp"
+              }
+            },
+            schema: {
+              model: {
+                id: "EmployeeID",
+                parentId: "ReportsTo",
+                fields: {
+                  ReportsTo: { field: "ReportsTo",  nullable: true },
+                  EmployeeID: { field: "EmployeeId", type: "number" },
+                  Extension: { field: "Extension", type: "number" }
+                },
+                expanded: true
+              }
+            }
+          },
+          height: 540,
           editable: {
             mode: "popup",
             window: {
-                title: "My Custom Title",
-                animation: false,
-                open: myOpenEventHandler
+              title: "My Custom Title",
+              animation: false,
+              open: myOpenEventHandler
             }
           },
-          dataSource: [
-              { name: "Jane Doe", age: 30 },
-              { name: "John Doe", age: 33 }
+          columns: [
+            { field: "FirstName", title: "First Name", width: 220 },
+            { field: "LastName", title: "Last Name", width: 160 },
+            { field: "Position" },
+            { command: ["edit"] }
           ]
         });
-    </script>
+
+        function myOpenEventHandler(e) {
+          // ...
+        }
+      </script>
 
 ### excel `Object`
 
@@ -1496,7 +1888,7 @@ Enables or disables column filtering in the Excel file. Not to be mistaken with 
           { field: "Position" }
         ],
         excel: {
-          filterable: false
+          filterable: true
         },
         dataSource: {
           transport: {
@@ -1582,8 +1974,6 @@ If set to `true` the user can filter the data source using the treelist filter m
 
 Can be set to a JavaScript object which represents the filter menu configuration.
 
-> All other [`filterable` options from Grid](/api/javascript/ui/treelist#configuration-filterable) can be used, except for `filterable.mode`, which is always `menu`.
-
 #### Example - enable and configure filtering
 
     <div id="treeList"></div>
@@ -1591,8 +1981,13 @@ Can be set to a JavaScript object which represents the filter menu configuration
         $("#treeList").kendoTreeList({
           height: "100em",
           columns: [
-            { field: "name" },
-            { field: "age" }
+            { field: "lastName" },
+            { field: "position" },
+            { field: "extension" }
+          ],
+          dataSource: [
+            { id: 1, parentId: null, lastName: "Jackson", position: "CEO", extension: 8241 },
+            { id: 2, parentId: 1, lastName: "Weber", position: "	VP, Engineering", extension: 8342 }
           ],
           filterable: {
             extra: false,
@@ -1639,11 +2034,7 @@ Can be set to a JavaScript object which represents the filter menu configuration
                 neq: "Not equal to"
               }
             }
-          },
-          dataSource: [
-              { name: "Jane Doe", age: 30 },
-              { name: "John Doe", age: 33 }
-          ]
+          }
         });
     </script>
 
@@ -1653,22 +2044,22 @@ If set to `true` the filter menu allows the user to input a second criteria.
 
 #### Example - disable the extra filtering criteria
 
-    <div id="treeList"></div>
+    <div id="treelist"></div>
     <script>
-        $("#treeList").kendoTreeList({
-          height: "100em",
-          columns: [
-            { field: "name" },
-            { field: "age" }
-          ],
-          filterable: {
-            extra: false
-          },
-          dataSource: [
-              { name: "Jane Doe", age: 30 },
-              { name: "John Doe", age: 33 }
-          ]
-        });
+      $("#treelist").kendoTreeList({
+        columns: [
+          { field: "lastName" },
+          { field: "position" },
+          { field: "extension" }
+        ],
+        dataSource: [
+          { id: 1, parentId: null, lastName: "Jackson", position: "CEO", extension: 8241 },
+          { id: 2, parentId: 1, lastName: "Weber", position: "	VP, Engineering", extension: 8342 }
+        ],
+        filterable: {
+          extra: false
+        }
+      });
     </script>
 
 ### filterable.messages `Object`
@@ -1676,26 +2067,28 @@ If set to `true` the filter menu allows the user to input a second criteria.
 The text messages displayed in the filter menu. Use it to customize or localize the filter menu messages.
 
 #### Example - customize filter menu messages
+
     <div id="treelist"></div>
     <script>
-    $("#treelist").kendoTreeList({
-      columns: [
-        { field: "name" },
-        { field: "age" }
-      ],
-      dataSource: [
-        { name: "Jane Doe", age: 30 },
-        { name: "John Doe", age: 33 }
-      ],
-      filterable: {
-        messages: {
-          and: "and",
-          or: "or",
-          filter: "Apply filter",
-          clear: "Clear filter"
+      $("#treelist").kendoTreeList({
+        columns: [
+          { field: "lastName" },
+          { field: "position" },
+          { field: "extension" }
+        ],
+        dataSource: [
+          { id: 1, parentId: null, lastName: "Jackson", position: "CEO", extension: 8241 },
+          { id: 2, parentId: 1, lastName: "Weber", position: "	VP, Engineering", extension: 8342 }
+        ],
+        filterable: {
+          messages: {
+            and: "and",
+            or: "or",
+            filter: "Apply filter",
+            clear: "Clear filter"
+          }
         }
-      }
-    });
+      });
     </script>
 
 ### filterable.messages.and `String` *(default: "And")*
@@ -1706,21 +2099,22 @@ The text of the option which represents the "and" logical operation.
 
     <div id="treelist"></div>
     <script>
-    $("#treelist").kendoTreeList({
-      columns: [
-        { field: "name" },
-        { field: "age" }
-      ],
-      dataSource: [
-        { name: "Jane Doe", age: 30 },
-        { name: "John Doe", age: 33 }
-      ],
-      filterable: {
-        messages: {
-          and: "and"
+      $("#treelist").kendoTreeList({
+        columns: [
+          { field: "lastName" },
+          { field: "position" },
+          { field: "extension" }
+        ],
+        dataSource: [
+          { id: 1, parentId: null, lastName: "Jackson", position: "CEO", extension: 8241 },
+          { id: 2, parentId: 1, lastName: "Weber", position: "	VP, Engineering", extension: 8342 }
+        ],
+        filterable: {
+          messages: {
+            and: "and"
+          }
         }
-      }
-    });
+      });
     </script>
 
 ### filterable.messages.clear `String` *(default: "Clear")*
@@ -1731,21 +2125,22 @@ The text of the button which clears the filter.
 
     <div id="treelist"></div>
     <script>
-    $("#treelist").kendoTreeList({
-      columns: [
-        { field: "name" },
-        { field: "age" }
-      ],
-      dataSource: [
-        { name: "Jane Doe", age: 30 },
-        { name: "John Doe", age: 33 }
-      ],
-      filterable: {
-        messages: {
-          clear: "Clear filter"
+      $("#treelist").kendoTreeList({
+        columns: [
+          { field: "lastName" },
+          { field: "position" },
+          { field: "extension" }
+        ],
+        dataSource: [
+          { id: 1, parentId: null, lastName: "Jackson", position: "CEO", extension: 8241 },
+          { id: 2, parentId: 1, lastName: "Weber", position: "	VP, Engineering", extension: 8342 }
+        ],
+        filterable: {
+          messages: {
+            clear: "Clear filter"
+          }
         }
-      }
-    });
+      });
     </script>
 
 ### filterable.messages.filter `String` *(default: "Filter")*
@@ -1756,21 +2151,22 @@ The text of the button which applies the filter.
 
     <div id="treelist"></div>
     <script>
-    $("#treelist").kendoTreeList({
-      columns: [
-        { field: "name" },
-        { field: "age" }
-      ],
-      dataSource: [
-        { name: "Jane Doe", age: 30 },
-        { name: "John Doe", age: 33 }
-      ],
-      filterable: {
-        messages: {
-          filter: "Apply filter"
+      $("#treelist").kendoTreeList({
+        columns: [
+          { field: "lastName" },
+          { field: "position" },
+          { field: "extension" }
+        ],
+        dataSource: [
+          { id: 1, parentId: null, lastName: "Jackson", position: "CEO", extension: 8241 },
+          { id: 2, parentId: 1, lastName: "Weber", position: "	VP, Engineering", extension: 8342 }
+        ],
+        filterable: {
+          messages: {
+            filter: "Apply filter"
+          }
         }
-      }
-    });
+      });
     </script>
 
 ### filterable.messages.info `String` *(default: "Show items with value that: ")*
@@ -1781,21 +2177,22 @@ The text of the information message on the top of the filter menu.
 
     <div id="treelist"></div>
     <script>
-    $("#treelist").kendoTreeList({
-      columns: [
-        { field: "name" },
-        { field: "age" }
-      ],
-      dataSource: [
-        { name: "Jane Doe", age: 30 },
-        { name: "John Doe", age: 33 }
-      ],
-      filterable: {
-        messages: {
-          info: "Filter by: "
+      $("#treelist").kendoTreeList({
+        columns: [
+          { field: "lastName" },
+          { field: "position" },
+          { field: "extension" }
+        ],
+        dataSource: [
+          { id: 1, parentId: null, lastName: "Jackson", position: "CEO", extension: 8241 },
+          { id: 2, parentId: 1, lastName: "Weber", position: "	VP, Engineering", extension: 8342 }
+        ],
+        filterable: {
+          messages: {
+            info: "Filter by: "
+          }
         }
-      }
-    });
+      });
     </script>
 
 ### filterable.messages.title `String` *(default: "Show items with value that: ")*
@@ -1807,31 +2204,34 @@ The text rendered for the title attribute of the filter menu form.
 The text of the radio button for `false` values. Displayed when filtering `Boolean` fields.
 
 #### Example - set the "isFalse" message
+
     <div id="treelist"></div>
     <script>
-    $("#treelist").kendoTreeList({
-      columns: [
-        { field: "active" }
-      ],
-      dataSource: {
-        data: [
-          { active: true },
-          { active: false }
+      $("#treelist").kendoTreeList({
+        columns: [
+          { field: "lastName" },
+          { field: "position" },
+          { field: "available" }
         ],
-        schema: {
-          model: {
-            fields: {
-              active: { type: "boolean" }
+        dataSource: {
+          data: [
+            { id: 1, parentId: null, lastName: "Jackson", position: "CEO", available: true },
+            { id: 2, parentId: 1, lastName: "Weber", position: "	VP, Engineering", available: false }
+          ],
+          schema: {
+            model: {
+              fields: {
+                available: {type: "boolean"}
+              }
             }
           }
+        },
+        filterable: {
+          messages: {
+            isFalse: "False"
+          }
         }
-      },
-      filterable: {
-        messages: {
-          isFalse: "False"
-        }
-      }
-    });
+      });
     </script>
 
 ### filterable.messages.isTrue `String` *(default: "is true")*
@@ -1839,31 +2239,34 @@ The text of the radio button for `false` values. Displayed when filtering `Boole
 The text of the radio button for `true` values. Displayed when filtering `Boolean` fields.
 
 #### Example - set the "isTrue" message
+
     <div id="treelist"></div>
     <script>
-    $("#treelist").kendoTreeList({
-      columns: [
-        { field: "active" }
-      ],
-      dataSource: {
-        data: [
-          { active: true },
-          { active: false }
+      $("#treelist").kendoTreeList({
+        columns: [
+          { field: "lastName" },
+          { field: "position" },
+          { field: "available" }
         ],
-        schema: {
-          model: {
-            fields: {
-              active: { type: "boolean" }
+        dataSource: {
+          data: [
+            { id: 1, parentId: null, lastName: "Jackson", position: "CEO", available: true },
+            { id: 2, parentId: 1, lastName: "Weber", position: "	VP, Engineering", available: false }
+          ],
+          schema: {
+            model: {
+              fields: {
+                available: {type: "boolean"}
+              }
             }
           }
+        },
+        filterable: {
+          messages: {
+            isTrue: "True"
+          }
         }
-      },
-      filterable: {
-        messages: {
-          isTrue: "True"
-        }
-      }
-    });
+      });
     </script>
 
 ### filterable.messages.or `String` *(default: "Or")*
@@ -1874,50 +2277,23 @@ The text of the option which represents the "or" logical operation.
 
     <div id="treelist"></div>
     <script>
-    $("#treelist").kendoTreeList({
-      columns: [
-        { field: "name" },
-        { field: "age" }
-      ],
-      dataSource: [
-        { name: "Jane Doe", age: 30 },
-        { name: "John Doe", age: 33 }
-      ],
-      filterable: {
-        messages: {
-          or: "or"
+      $("#treelist").kendoTreeList({
+        columns: [
+          { field: "lastName" },
+          { field: "position" },
+          { field: "extension" }
+        ],
+        dataSource: [
+          { id: 1, parentId: null, lastName: "Jackson", position: "CEO", extension: 8241 },
+          { id: 2, parentId: 1, lastName: "Weber", position: "	VP, Engineering", extension: 8342 }
+        ],
+        filterable: true,
+        filterable: {
+          messages: {
+            or: "or"
+          }
         }
-      }
-    });
-    </script>
-
-### filterable.messages.selectValue `String` *(default: "-Select value-")*
-
-The text of the DropDownList displayed in the filter menu for columns whose [values](#configuration-columns.values) option is set.
-
-#### Example - set the "selectValue" message
-
-    <div id="treelist"></div>
-    <script>
-    $("#treelist").kendoTreeList({
-      columns: [
-        { field: "productName" },
-        { field: "category", values: [
-            { text: "Beverages", value: 1 },
-            { text: "Food", value: 2 },
-          ]
-        }
-      ],
-      dataSource: [
-        { productName: "Tea", category: 1 },
-        { productName: "Ham", category: 2 }
-      ],
-      filterable: {
-        messages: {
-          selectValue: "Select category"
-        }
-      }
-    });
+      });
     </script>
 
 ### filterable.messages.cancel `String` *(default: "Cancel")*
@@ -1928,53 +2304,301 @@ The text of the cancel button in the filter menu header (available in mobile mod
 
     <div id="treelist"></div>
     <script>
-    $("#treelist").kendoTreeList({
-      columns: [
-        { field: "productName" },
-        { field: "category", values: [
-            { text: "Beverages", value: 1 },
-            { text: "Food", value: 2 },
-          ]
+      $("#treelist").kendoTreeList({
+        columns: [
+          { field: "lastName" },
+          { field: "position" },
+          { field: "extension" }
+        ],
+        dataSource: [
+          { id: 1, parentId: null, lastName: "Jackson", position: "CEO", extension: 8241 },
+          { id: 2, parentId: 1, lastName: "Weber", position: "	VP, Engineering", extension: 8342 }
+        ],
+        filterable: {
+          messages: {
+            cancel: "Reject"
+          }
         }
-      ],
-      dataSource: [
-        { productName: "Tea", category: 1 },
-        { productName: "Ham", category: 2 }
-      ],
-      mobile: "phone",
-      filterable: {
-        messages: {
-          cancel: "Reject"
-        }
-      }
-    });
+      });
     </script>
 
-### filterable.messages.operator `String` *(default: "Operator")*
+### filterable.operators `Object`
 
-The text of the operator item in filter menu (available in mobile mode only).
+The text of the filter operators displayed in the filter menu.
 
-#### Example - set the text of operator item
+> In multiple TreeLists, it is possible to override the filterable options of the Kendo UI FilterMenu before the TreeLists are initialized. Then the new filter options will be available for all TreeLists without further configuration.
+
+#### Example - override the filterable options in multiple TreeLists
+
+    <h4>TreeList One</h4>
+    <div id="treeList1"></div>
+    <h4>TreeList Two</h4>
+    <div id="treeList2"></div>
+
+    <script>
+      kendo.ui.FilterMenu.fn.options.operators.string = {
+        eq: "Equal to...",
+        neq: "Not equal to..."
+      };
+
+      $("#treeList1").kendoTreeList({
+        columns: [
+          "lastName",
+          "position"
+        ],
+        filterable: {
+          extra: false
+        },
+        dataSource: {
+          data: [
+            { id: 1, parentId: null, lastName: "Jackson", position: "CEO" },
+            { id: 2, parentId: 1, lastName: "Weber", position: "  VP, Engineering" }
+          ]
+        }
+      });
+
+      $("#treeList2").kendoTreeList({
+        columns: [
+          { field: "lastName" },
+          { field: "position" }
+        ],
+        filterable: {
+          extra: false
+        },
+        dataSource: {
+          data: [
+            { id: 1, parentId: null, lastName: "Jackson", position: "CEO" },
+            { id: 2, parentId: 1, lastName: "Weber", position: "  VP, Engineering" }
+          ]
+        }
+      });
+    </script>
+
+### filterable.operators.string `Object`
+
+The texts of the filter operators displayed for columns bound to string fields.
+
+> Omitting an operator will exclude it from the DropDownList with the available operators.
+
+#### Example - set string operators
+
+    <div id="treeList"></div>
+
+    <script>
+      $("#treeList").kendoTreeList({
+        columns: [
+          "lastName",
+          "position"
+        ],
+        filterable: {
+          extra: false,
+          operators: {
+          	string: {
+            	contains: "Contains...",
+              startswith: "Starts with..."
+            }
+          }
+        },
+        dataSource: {
+          data: [
+            { id: 1, parentId: null, lastName: "Jackson", position: "CEO" },
+            { id: 2, parentId: 1, lastName: "Weber", position: "  VP, Engineering" }
+          ]
+        }
+      });
+    </script>
+
+In this example only two operators will be displayed in the DropDownList - "Contains..." and "Starts with...".
+
+### filterable.operators.string.eq `String` *(default: "Is equal to")*
+
+The text of the `eq` (equal to) filter operator.
+
+### filterable.operators.string.neq `String` *(default: "Is not equal to")*
+
+The text of the `ne` (not equal to) filter operator.
+
+### filterable.operators.string.isnull `String` *(default: "Is null")*
+
+The text of the `isnull` filter operator.
+
+### filterable.operators.string.isnotnull `String` *(default: "Is not null")*
+
+The text of the `isnotnull` filter operator.
+
+### filterable.operators.string.isempty `String` *(default: "Is empty")*
+
+The text of the `isempty` filter operator.
+
+### filterable.operators.string.isnotempty `String` *(default: "Is not empty")*
+
+The text of the `isnotempty` filter operator.
+
+### filterable.operators.string.startswith `String` *(default: "Starts with")*
+
+The text of the `startswith` filter operator.
+
+### filterable.operators.string.contains `String` *(default: "Contains")*
+
+The text of the `contains` filter operator.
+
+### filterable.operators.string.doesnotcontain `String` *(default: "Does not contain")*
+
+The text of the `doesnotcontain` filter operator.
+
+### filterable.operators.string.endswith `String` *(default: "Ends with")*
+
+The text of the `endswith` filter operator.
+
+### filterable.operators.number `Object`
+
+The texts of the filter operators displayed for columns bound to number fields.
+
+> Omitting an operator will exclude it from the DropDownList with the available operators.
+
+#### Example - set number operators
 
     <div id="treelist"></div>
     <script>
-    $("#treelist").kendoTreeList({
-      columns: [
-        { field: "productName" },
-        { field: "category", values: [
-            { text: "Beverages", value: 1 },
-            { text: "Food", value: 2 },
-          ]
+      $("#treelist").kendoTreeList({
+        columns: [
+          { field: "lastName" },
+          { field: "position" },
+          { field: "extension" }
+        ],
+        dataSource: {
+          data: [
+            { id: 1, parentId: null, lastName: "Jackson", position: "CEO", extension: 8241 },
+            { id: 2, parentId: 1, lastName: "Weber", position: "	VP, Engineering", extension: 8342 }
+          ],
+          schema: {
+            model: {
+              fields: {
+                extension: { type: "number" }
+              }
+            }
+          }
+        },
+        filterable: {
+          extra: false,
+          operators: {
+            number: {
+              eq: "Equal to...",
+              neq: "Not equal to..."
+            }
+          }
         }
-      ],
-      dataSource: [
-        { productName: "Tea", category: 1 },
-        { productName: "Ham", category: 2 }
-      ],
-      mobile: "phone",
-      filterable: {
-        messages: {
+      });
+    </script>
 
+In this example only two operators will be displayed in the operators DropDownList - "Equal to..." and "Not equal to...".
+
+### filterable.operators.number.eq `String` *(default: "Is equal to")*
+
+The text of the `eq` (equal to) filter operator.
+
+### filterable.operators.number.neq `String` *(default: "Is not equal to")*
+
+The text of the `ne` (not equal to) filter operator.
+
+### filterable.operators.number.isnull `String` *(default: "Is null")*
+
+The text of the `isnull` filter operator.
+
+### filterable.operators.number.isnotnull `String` *(default: "Is not null")*
+
+The text of the `isnotnull` filter operator.
+
+### filterable.operators.number.gte `String` *(default: "Is greater than or equal to")*
+
+The text of the `gte` (greater than or equal to) filter operator.
+
+### filterable.operators.number.gt `String` *(default: "Is greater than")*
+
+The text of the `gt` (greater than) filter operator.
+
+### filterable.operators.number.lte `String` *(default: "Is less than or equal to")*
+
+The text of the `lte` (less than or equal to) filter operator.
+
+### filterable.operators.number.lt `String` *(default: "Is less than")*
+
+The text of the `lt` (less than) filter operator.
+
+### filterable.operators.date `Object`
+
+The texts of the filter operators displayed for columns bound to date fields.
+
+> Omitting an operator will exclude it from the DropDownList with the available operators.
+
+#### Example - set date operators
+
+    <div id="treelist"></div>
+    <script>
+      $("#treelist").kendoTreeList({
+        columns: [
+          { field: "lastName" },
+          { field: "position" },
+          { field: "hireDate", format: "{0:MM/dd/yyyy}" }
+        ],
+        dataSource: {
+          data: [
+            { id: 1, parentId: null, lastName: "Jackson", position: "CEO", hireDate: new Date() },
+            { id: 2, parentId: 1, lastName: "Weber", position: "	VP, Engineering", hireDate: new Date() }
+          ],
+          schema: {
+            model: {
+              fields: {
+                hireDate: { type: "date" }
+              }
+            }
+          }
+        },
+        filterable: {
+          extra: false,
+          operators: {
+            date: {
+              lt: "Is before...",
+              gt: "Is after..."
+            }
+          }
+        }
+      });
+    </script>
+
+In this example only two operators will be displayed in the operators DropDownList - "Is before..." and "Is after...".
+
+### filterable.operators.date.eq `String` *(default: "Is equal to")*
+
+The text of the `eq` (equal to) filter operator.
+
+### filterable.operators.date.neq `String` *(default: "Is not equal to")*
+
+The text of the `ne` (not equal to) filter operator.
+
+### filterable.operators.date.isnull `String` *(default: "Is null")*
+
+The text of the `isnull` filter operator.
+
+### filterable.operators.date.isnotnull `String` *(default: "Is not null")*
+
+The text of the `isnotnull` filter operator.
+
+### filterable.operators.date.gte `String` *(default: "Is after or equal to")*
+
+The text of the `gte` (greater than or equal to) filter operator.
+
+### filterable.operators.date.gt `String` *(default: "Is after")*
+
+The text of the `gt` (greater than) filter operator.
+
+### filterable.operators.date.lte `String` *(default: "Is before or equal to")*
+
+The text of the "lte" (less than or equal to) filter operator.
+
+### filterable.operators.date.lt `String` *(default: "Is before")*
+
+The text of the `lt` (less than) filter operator.
 
 ### height `Number|String`
 
@@ -2022,31 +2646,31 @@ Defines the text of the command buttons that are shown within the TreeList. Used
 
     <div id="treeList"></div>
     <script>
-    $("#treeList").kendoTreeList({
-      dataSource: [
-        { id: 1, parentId: null, name: "Jane Doe", age: 22 },
-        { id: 2, parentId: 1, name: "John Doe", age: 24 }
-      ],
-      toolbar: [ "create", "pdf", "excel" ],
-      columns: [ "name", "age", { command: [ "edit", "destroy", "createchild" ] } ],
-      editable: true,
-      messages: {
-        noRows: "No records",
-        loading: "Fetching records...",
-        requestFailed: "Fetching failed.",
-        retry: "Reload",
-        commands: {
-          edit: "Edit",
-          update: "Update",
-          canceledit: "Cancel",
-          create: "Add new record",
-          createchild: "Add child record",
-          destroy: "Delete",
-          excel: "Export to Excel",
-          pdf: "Export to PDF"
+      $("#treeList").kendoTreeList({
+        dataSource: [
+          { id: 1, parentId: null, name: "Jane Doe", age: 22 },
+          { id: 2, parentId: 1, name: "John Doe", age: 24 }
+        ],
+        toolbar: [ "create", "pdf", "excel" ],
+        columns: [ "name", "age", { command: [ "edit", "destroy", "createchild" ] } ],
+        editable: true,
+        messages: {
+          noRows: "No records",
+          loading: "Fetching records...",
+          requestFailed: "Fetching failed.",
+          retry: "Reload",
+          commands: {
+            edit: "Modify",
+            update: "Save",
+            canceledit: "Discard",
+            create: "Add New",
+            createchild: "Add Child",
+            destroy: "Remove",
+            excel: "Export XSLX",
+            pdf: "Export to PDF"
+          }
         }
-      }
-    });
+      });
     </script>
 
 ### messages.commands `Object`
@@ -2057,27 +2681,27 @@ Defines the text for the command buttons used across the widget.
 
     <div id="treeList"></div>
     <script>
-    $("#treeList").kendoTreeList({
-      dataSource: [
-        { id: 1, parentId: null, name: "Jane Doe", age: 22 },
-        { id: 2, parentId: 1, name: "John Doe", age: 24 }
-      ],
-      toolbar: [ "create", "pdf", "excel" ],
-      columns: [ "name", "age", { command: [ "edit", "destroy", "createchild" ] } ],
-      editable: true,
-      messages: {
-        commands: {
-          edit: "Edit",
-          update: "Update",
-          canceledit: "Cancel",
-          create: "Add new record",
-          createchild: "Add child record",
-          destroy: "Delete",
-          excel: "Export to Excel",
-          pdf: "Export to PDF"
+      $("#treeList").kendoTreeList({
+        dataSource: [
+          { id: 1, parentId: null, name: "Jane Doe", age: 22 },
+          { id: 2, parentId: 1, name: "John Doe", age: 24 }
+        ],
+        toolbar: [ "create", "pdf", "excel" ],
+        columns: [ "name", "age", { command: [ "edit", "destroy", "createchild" ] } ],
+        editable: true,
+        messages: {
+          commands: {
+            edit: "Modify",
+            update: "Save",
+            canceledit: "Discard",
+            create: "Add New",
+            createchild: "Add Child",
+            destroy: "Remove",
+            excel: "Export XSLX",
+            pdf: "Export to PDF"
+          }
         }
-      }
-    });
+      });
     </script>
 
 ### messages.commands.canceledit `String` *(default: "Cancel")*
@@ -2093,12 +2717,11 @@ Defines the text of the "Cancel" button that discards the changes during editing
         { id: 1, parentId: null, name: "Jane Doe", age: 22 },
         { id: 2, parentId: 1, name: "John Doe", age: 24 }
       ],
-      toolbar: [ "create", "pdf", "excel" ],
-      columns: [ "name", "age", { command: [ "edit", "destroy", "createchild" ] } ],
+      columns: [ "name", "age", { command: [ "edit" ] } ],
       editable: true,
       messages: {
         commands: {
-          canceledit: "Cancel"
+          canceledit: "Discard"
         }
       }
     });
@@ -2117,12 +2740,12 @@ Defines the text of the "Add new record" button that adds new data rows.
         { id: 1, parentId: null, name: "Jane Doe", age: 22 },
         { id: 2, parentId: 1, name: "John Doe", age: 24 }
       ],
-      toolbar: [ "create", "pdf", "excel" ],
-      columns: [ "name", "age", { command: [ "edit", "destroy", "createchild" ] } ],
+      toolbar: [ "create" ],
+      columns: [ "name", "age" ],
       editable: true,
       messages: {
         commands: {
-          create: "Add new record"
+          create: "Add new"
         }
       }
     });
@@ -2141,12 +2764,12 @@ Defines the text of the "Add child record" button that adds new child data rows.
         { id: 1, parentId: null, name: "Jane Doe", age: 22 },
         { id: 2, parentId: 1, name: "John Doe", age: 24 }
       ],
-      toolbar: [ "create", "pdf", "excel" ],
-      columns: [ "name", "age", { command: [ "edit", "destroy", "createchild" ] } ],
+      toolbar: [ "create" ],
+      columns: [ "name", "age", { command: [ "createchild" ] } ],
       editable: true,
       messages: {
         commands: {
-          createchild: "Add child record"
+          createchild: "Add child item"
         }
       }
     });
@@ -2165,12 +2788,11 @@ Defines the text of the "Delete" button that deletes a data row.
         { id: 1, parentId: null, name: "Jane Doe", age: 22 },
         { id: 2, parentId: 1, name: "John Doe", age: 24 }
       ],
-      toolbar: [ "create", "pdf", "excel" ],
-      columns: [ "name", "age", { command: [ "edit", "destroy", "createchild" ] } ],
+      columns: [ "name", "age", { command: [ "destroy" ] } ],
       editable: true,
       messages: {
         commands: {
-          destroy: "Delete"
+          destroy: "Remove"
         }
       }
     });
@@ -2189,12 +2811,11 @@ Defines the text of the "Edit" button that shows the editable fields for the row
         { id: 1, parentId: null, name: "Jane Doe", age: 22 },
         { id: 2, parentId: 1, name: "John Doe", age: 24 }
       ],
-      toolbar: [ "create", "pdf", "excel" ],
-      columns: [ "name", "age", { command: [ "edit", "destroy", "createchild" ] } ],
+      columns: [ "name", "age", { command: [ "edit" ] } ],
       editable: true,
       messages: {
         commands: {
-          edit: "Edit"
+          edit: "Modify"
         }
       }
     });
@@ -2213,12 +2834,11 @@ Defines the text of the "Export to Excel" button that exports the widget data in
         { id: 1, parentId: null, name: "Jane Doe", age: 22 },
         { id: 2, parentId: 1, name: "John Doe", age: 24 }
       ],
-      toolbar: [ "create", "pdf", "excel" ],
-      columns: [ "name", "age", { command: [ "edit", "destroy", "createchild" ] } ],
-      editable: true,
+      toolbar: [ "excel" ],
+      columns: [ "name", "age" ],
       messages: {
         commands: {
-          excel: "Export to Excel"
+          excel: "Export to XLSX"
         }
       }
     });
@@ -2237,12 +2857,11 @@ Defines the text of the "Export to PDF" button that exports the widget data in P
         { id: 1, parentId: null, name: "Jane Doe", age: 22 },
         { id: 2, parentId: 1, name: "John Doe", age: 24 }
       ],
-      toolbar: [ "create", "pdf", "excel" ],
-      columns: [ "name", "age", { command: [ "edit", "destroy", "createchild" ] } ],
-      editable: true,
+      toolbar: [ "pdf" ],
+      columns: [ "name", "age" ],
       messages: {
         commands: {
-          pdf: "Export to PDF"
+          pdf: "Export data to PDF"
         }
       }
     });
@@ -2261,12 +2880,12 @@ Defines the text of the "Update" button that applies the changes during editing.
         { id: 1, parentId: null, name: "Jane Doe", age: 22 },
         { id: 2, parentId: 1, name: "John Doe", age: 24 }
       ],
-      toolbar: [ "create", "pdf", "excel" ],
-      columns: [ "name", "age", { command: [ "edit", "destroy", "createchild" ] } ],
+      toolbar: [ "create" ],
+      columns: [ "name", "age", { command: [ "edit" ] } ],
       editable: true,
       messages: {
         commands: {
-          update: "Update"
+          update: "Save"
         }
       }
     });
@@ -2280,18 +2899,34 @@ Defines the text of the "Loading..." message when the widget loads its root-leve
 
     <div id="treeList"></div>
     <script>
-    $("#treeList").kendoTreeList({
-      dataSource: [
-        { id: 1, parentId: null, name: "Jane Doe", age: 22 },
-        { id: 2, parentId: 1, name: "John Doe", age: 24 }
-      ],
-      toolbar: [ "create", "pdf", "excel" ],
-      columns: [ "name", "age", { command: [ "edit", "destroy", "createchild" ] } ],
-      editable: true,
-      messages: {
-        loading: "Fetching records..."
-      }
-    });
+      $("#treeList").kendoTreeList({
+        dataSource: {
+          transport: {
+            read: {
+              url: "https://demos.telerik.com/kendo-ui/service/EmployeeDirectory",
+              dataType: "jsonp"
+            }
+          },
+          schema: {
+            model: {
+              id: "EmployeeId",
+              parentId: "ReportsTo",
+              fields: {
+                EmployeeId: { type: "number", nullable: false },
+                ReportsTo: { field: "ReportsTo", nullable: true }
+              }
+            }
+          }
+        },
+        columns: [                             
+          { field: "FirstName", title: "First Name", width: 250 },
+          { field: "LastName", title: "Last Name" },
+          { field: "Position" }],
+        editable: true,
+        messages: {
+          loading: "Fetching records..."
+        }
+      });
     </script>
 
 ### messages.noRows `String` *(default: "No records to display")*
@@ -2302,18 +2937,13 @@ Defines the text of "No records to display" message when the widget does not sho
 
     <div id="treeList"></div>
     <script>
-    $("#treeList").kendoTreeList({
-      dataSource: [
-        { id: 1, parentId: null, name: "Jane Doe", age: 22 },
-        { id: 2, parentId: 1, name: "John Doe", age: 24 }
-      ],
-      toolbar: [ "create", "pdf", "excel" ],
-      columns: [ "name", "age", { command: [ "edit", "destroy", "createchild" ] } ],
-      editable: true,
-      messages: {
-        noRows: "No records"
-      }
-    });
+      $("#treeList").kendoTreeList({
+        dataSource: [],
+        columns: [ "name", "age" ],
+        messages: {
+          noRows: "No data"
+        }
+      });
     </script>
 
 ### messages.requestFailed `String` *(default: "Request failed.")*
@@ -2324,18 +2954,23 @@ Defines the text of "Request failed." message when the widget fails to load its 
 
     <div id="treeList"></div>
     <script>
-    $("#treeList").kendoTreeList({
-      dataSource: [
-        { id: 1, parentId: null, name: "Jane Doe", age: 22 },
-        { id: 2, parentId: 1, name: "John Doe", age: 24 }
-      ],
-      toolbar: [ "create", "pdf", "excel" ],
-      columns: [ "name", "age", { command: [ "edit", "destroy", "createchild" ] } ],
-      editable: true,
-      messages: {
-        requestFailed: "Fetching failed."
-      }
-    });
+      $("#treeList").kendoTreeList({
+        dataSource: {
+          transport: {
+            read: {
+              url: "https://example.com"
+            }
+          }
+        },
+        columns: [                             
+          { field: "FirstName", title: "First Name", width: 250 },
+          { field: "LastName", title: "Last Name" },
+          { field: "Position" }],
+        editable: true,
+        messages: {
+          requestFailed: "Fetching failed."
+        }
+      });
     </script>
 
 ### messages.retry `String` *(default: "Retry")*
@@ -2346,39 +2981,46 @@ Defines the text of "Retry" message assigned to the button that tries to load ro
 
     <div id="treeList"></div>
     <script>
-    $("#treeList").kendoTreeList({
-      dataSource: [
-        { id: 1, parentId: null, name: "Jane Doe", age: 22 },
-        { id: 2, parentId: 1, name: "John Doe", age: 24 }
-      ],
-      toolbar: [ "create", "pdf", "excel" ],
-      columns: [ "name", "age", { command: [ "edit", "destroy", "createchild" ] } ],
-      editable: true,
-      messages: {
-        retry: "Reload"
-      }
-    });
+      $("#treeList").kendoTreeList({
+        dataSource: {
+          transport: {
+            read: {
+              url: "https://example.com"
+            }
+          }
+        },
+        columns: [                             
+          { field: "FirstName", title: "First Name", width: 250 },
+          { field: "LastName", title: "Last Name" },
+          { field: "Position" }],
+        editable: true,
+        messages: {
+          retry: "Try again"
+        }
+      });
     </script>
 
 ### navigatable `Boolean` *(default: false)*
 
-If set to `true` the use could navigate the widget using the keyboard navigation. By default keyboard navigation is disabled.
+If set to `true` the user can navigate the widget using the keyboard. By default, keyboard navigation is disabled.
 
 #### Example - enable keyboard navigation
 
     <div id="treeList"></div>
     <script>
-    $("#treeList").kendoTreeList({
-      columns: [
-        { field: "name" },
-        { field: "age" }
-      ],
-      dataSource: [
-        { id: 1, parentId: null, name: "Jane Doe", age: 22 },
-        { id: 2, parentId: 1, name: "John Doe", age: 24 }
-      ],
-      navigatable: true
-    });
+      $("#treeList").kendoTreeList({
+        columns: [
+          { field: "name" },
+          { field: "age" }
+        ],
+        sortable: true,
+        dataSource: [
+          { id: 1, parentId: null, name: "Jane Doe", age: 22 },
+          { id: 2, parentId: 1, name: "John Doe", age: 24 },
+          { id: 2, parentId: 1, name: "Jenny Doe", age: 3 }
+        ],
+        navigatable: true
+      });
     </script>
 
 > Check [Keyboard navigation](http://demos.telerik.com/kendo-ui/treelist/keyboard-navigation) for a live demo.
@@ -2937,19 +3579,35 @@ Scrolling renders separate tables for the header and data area. For accessibilit
 
 #### Example - disable scrolling
 
-    <div id="treeList"></div>
+    <div id="treelist"></div>
     <script>
-        $("#treeList").kendoTreeList({
-          columns: [
-            { field: "name" },
-            { field: "age" }
-          ],
-          scrollable: false,
-          dataSource: [
-              { name: "Jane Doe", age: 30 },
-              { name: "John Doe", age: 33 }
-          ]
-        });
+      $("#treelist").kendoTreeList({
+        columns: [
+          { field: "FirstName", title: "First Name" },
+          { field: "LastName", title: "Last Name", width: 160 },
+          { field: "Position" }
+        ],
+        scrollable: false,
+        dataSource: {
+          transport: {
+            read: {
+              url: "https://demos.telerik.com/kendo-ui/service/EmployeeDirectory/All",
+              dataType: "jsonp"
+            }
+          },
+          schema: {
+            model: {
+              id: "EmployeeID",
+              fields: {
+                parentId: { field: "ReportsTo",  nullable: true },
+                EmployeeID: { field: "EmployeeId", type: "number" },
+                Extension: { field: "Extension", type: "number" }
+              },
+              expanded: true
+            }
+          }
+        }
+      });
     </script>
 
 ### selectable `Boolean|String` *(default: false)*
@@ -2967,34 +3625,36 @@ Can also be set to the following string values:
 
     <div id="treeList"></div>
     <script>
-        $("#treeList").kendoTreeList({
-          columns: [
-            { field: "name" },
-            { field: "age" }
-          ],
-          selectable: true,
-          dataSource: [
-              { name: "Jane Doe", age: 30 },
-              { name: "John Doe", age: 33 }
-          ]
-        });
+      $("#treeList").kendoTreeList({
+        columns: [
+          { field: "name" },
+          { field: "age" }
+        ],
+        selectable: true,
+        dataSource: [
+          { id: 1, parentId: null, name: "Jane Doe", age: 22 },
+          { id: 2, parentId: 1, name: "John Doe", age: 24 },
+          { id: 3, parentId: 1, name: "Jenny Doe", age: 3 }
+        ]
+      });
     </script>
 
 #### Example - set selectable as a string
 
     <div id="treeList"></div>
     <script>
-        $("#treeList").kendoTreeList({
-          columns: [
-            { field: "name" },
-            { field: "age" }
-          ],
-          selectable: "multiple, row",
-          dataSource: [
-              { name: "Jane Doe", age: 30 },
-              { name: "John Doe", age: 33 }
-          ]
-        });
+      $("#treeList").kendoTreeList({
+        columns: [
+          { field: "name" },
+          { field: "age" }
+        ],
+        selectable: "multiple, row",
+        dataSource: [
+          { id: 1, parentId: null, name: "Jane Doe", age: 22 },
+          { id: 2, parentId: 1, name: "John Doe", age: 24 },
+          { id: 3, parentId: 1, name: "Jenny Doe", age: 3 }
+        ]
+      });
     </script>
 
 ### sortable `Boolean|Object` *(default: false)*
@@ -3007,63 +3667,73 @@ Can be set to a JavaScript object which represents the sorting configuration.
 
     <div id="treeList"></div>
     <script>
-        $("#treeList").kendoTreeList({
-          columns: [
-            { field: "name" },
-            { field: "age" }
-          ],
-          sortable: true,
-          dataSource: [
-              { name: "Jane Doe", age: 30 },
-              { name: "John Doe", age: 33 }
-          ]
-        });
+      $("#treeList").kendoTreeList({
+        columns: [
+          { field: "name" },
+          { field: "age" }
+        ],
+        sortable: true,
+        dataSource: [
+          { id: 1, parentId: null, name: "Jane Doe", age: 22, expanded: true },
+          { id: 2, parentId: 1, name: "John Doe", age: 24 },
+          { id: 3, parentId: 1, name: "Jenny Doe", age: 3 }
+        ]
+      });
     </script>
 
 ### sortable.allowUnsort `Boolean` *(default: true)*
 
-If set to `true` the user can get the treelist in its unsorted state by clicking the sorted column header.
+If set to `true` the user can get the TreeList in its unsorted state by clicking the sorted column header.
 
 #### Example - do not allow unsorting
 
     <div id="treeList"></div>
     <script>
-        $("#treeList").kendoTreeList({
-          columns: [
-            { field: "name" },
-            { field: "age" }
+      $("#treeList").kendoTreeList({
+        columns: [
+          { field: "name" },
+          { field: "age" }
+        ],
+        sortable: {
+          allowUnsort: false
+        },
+        dataSource: {
+          data: [
+            { id: 1, parentId: null, name: "Jane Doe", age: 22, expanded: true },
+            { id: 2, parentId: 1, name: "John Doe", age: 24 },
+            { id: 3, parentId: 1, name: "Jenny Doe", age: 3 }
           ],
-          sortable: {
-              allowUnsort: false
-          },
-          dataSource: [
-              { name: "Jane Doe", age: 30 },
-              { name: "John Doe", age: 33 }
-          ]
-        });
+          sort: { field: "name", dir: "asc" }
+        }
+      });
     </script>
 
 ### sortable.mode `String` *(default: "single")*
 
-The sorting mode. If set to "single" the user can sort by one column. If set to "multiple" the user can sort by multiple columns.
+The sorting mode. If set to "single" the user can sort by one column at a time. If set to "multiple" the user can sort by multiple columns.
 
 #### Example - allow multiple column sorting
 
     <div id="treeList"></div>
     <script>
-        $("#treeList").kendoTreeList({
-          columns: [
-            { field: "name" },
-            { field: "age" }
+      $("#treeList").kendoTreeList({
+        columns: [
+          { field: "name" },
+          { field: "age" }
+        ],
+        sortable: {
+          mode: "multiple"
+        },
+        dataSource: {
+          data: [
+            { id: 1, parentId: null, name: "Jane Doe", age: 22, expanded: true },
+            { id: 2, parentId: 1, name: "John Doe", age: 24 },
+            { id: 3, parentId: 1, name: "Jenny Doe", age: 3 },
+            { id: 4, parentId: 1, name: "John Doe", age: 22 }
           ],
-          sortable: {
-              mode: "multiple"
-          },
-          dataSource: [
-              { name: "Jane Doe", age: 30 },
-              { name: "John Doe", age: 33 }
-          ]
-        });
+          sort: { field: "name", dir: "asc" }
+        }
+      });
     </script>
 
 ### toolbar `String|Function|Array`
@@ -3083,55 +3753,74 @@ If an `Array` value is assigned, it will be treated as the list of commands disp
 
 #### Example - configure the TreeList Toolbar as a string template
 
-    <div id="treeList"></div>
-    <script>
+      <div id="treeList"></div>
+      <script>
         $("#treeList").kendoTreeList({
-          toolbar: "<p>My string template in a paragraph.</p>",
+            toolbar: "<p>My string template in a paragraph.</p>",
           columns: [
             { field: "name" },
             { field: "age" }
           ],
-          dataSource: [
-              { name: "Jane Doe", age: 30 },
-              { name: "John Doe", age: 33 }
-          ]
+          sortable: {
+            mode: "multiple"
+          },
+          dataSource: {
+            data: [
+              { id: 1, parentId: null, name: "Jane Doe", age: 22, expanded: true },
+              { id: 2, parentId: 1, name: "John Doe", age: 24 },
+              { id: 3, parentId: 1, name: "Jenny Doe", age: 3 }
+            ]
+          }
         });
-    </script>
+      </script>
 
 #### Example - configure the TreeList Toolbar template with a function
 
     <div id="treeList"></div>
+    <script type="text/x-kendo-template" id="template">
+			<label for="enableChk"><input type="checkbox" id="enableChk"/>Enable</label>
+    </script>
     <script>
-        $("#treeList").kendoTreeList({
-          toolbar: kendo.template("<p>My function template.</p>"),
-          columns: [
-            { field: "name" },
-            { field: "age" }
-          ],
-          dataSource: [
-              { name: "Jane Doe", age: 30 },
-              { name: "John Doe", age: 33 }
+      $("#treeList").kendoTreeList({
+        toolbar: kendo.template($("#template").html()),
+        columns: [
+          { field: "name" },
+          { field: "age" }
+        ],
+        sortable: {
+          mode: "multiple"
+        },
+        dataSource: {
+          data: [
+            { id: 1, parentId: null, name: "Jane Doe", age: 22, expanded: true },
+            { id: 2, parentId: 1, name: "John Doe", age: 24 },
+            { id: 3, parentId: 1, name: "Jenny Doe", age: 3 }
           ]
-        });
+        }
+      });
     </script>
 
 #### Example - configure the TreeList Toolbar as an array of commands
 
     <div id="treeList"></div>
     <script>
-        $("#treeList").kendoTreeList({
-          toolbar: [
-            { name: "create" }
-          ],
-          columns: [
-            { field: "name" },
-            { field: "age" }
-          ],
-          dataSource: [
-              { name: "Jane Doe", age: 30 },
-              { name: "John Doe", age: 33 }
+      $("#treeList").kendoTreeList({
+        toolbar: ["excel", "pdf"],
+        columns: [
+          { field: "name" },
+          { field: "age" }
+        ],
+        sortable: {
+          mode: "multiple"
+        },
+        dataSource: {
+          data: [
+            { id: 1, parentId: null, name: "Jane Doe", age: 22, expanded: true },
+            { id: 2, parentId: 1, name: "John Doe", age: 24 },
+            { id: 3, parentId: 1, name: "Jenny Doe", age: 3 }
           ]
-        });
+        }
+      });
     </script>
 
 ### toolbar.click `Function`
@@ -3142,44 +3831,75 @@ The click handler of the toolbar command. Used for custom toolbar commands.
 
     <div id="treeList"></div>
     <script>
-        $("#treeList").kendoTreeList({
-          toolbar: [
-            { name: "custom", click: function() { alert("custom"); } }
-          ],
-          columns: [
-            { field: "name" },
-            { field: "age" }
-          ],
-          dataSource: [
-              { name: "Jane Doe", age: 30 },
-              { name: "John Doe", age: 33 }
+      $("#treeList").kendoTreeList({
+        toolbar: [
+          { name: "custom", click: function() { alert("custom"); } }
+        ],
+        columns: [
+          { field: "name" },
+          { field: "age" }
+        ],
+        sortable: {
+          mode: "multiple"
+        },
+        dataSource: {
+          data: [
+            { id: 1, parentId: null, name: "Jane Doe", age: 22, expanded: true },
+            { id: 2, parentId: 1, name: "John Doe", age: 24 },
+            { id: 3, parentId: 1, name: "Jenny Doe", age: 3 }
           ]
-        });
+        }
+      });
     </script>
 
-### toolbar.name `String`
+### toolbar.imageClass `String`
 
-The name of the toolbar command. Either a built-in ("create", "excel", "pdf") or custom. The `name` is reflected in one of the CSS classes, which is applied to the button - `k-treelist-name`.
-This class can be used to get a reference to the button (after TreeList initialization) and attach click handlers.
+A class name to render inside the toolbar button. When you set this option, the TreeList renders an additional `span` element inside the toolbar button, with a class name set to the option value. This allows you to display an icon inside your custom toolbar commands.
 
 #### Example - specify the name of the command
 
     <div id="treeList"></div>
     <script>
-        $("#treeList").kendoTreeList({
-          toolbar: [
-            { name: "create" },
-            { name: "custom" }
-          ],
-          columns: [
-            { field: "name" },
-            { field: "age" }
-          ],
-          dataSource: [
-              { name: "Jane Doe", age: 30 },
-              { name: "John Doe", age: 33 }
+      $("#treeList").kendoTreeList({
+        toolbar: [{name: "custom", text: "About", imageClass: "k-i-info" }],
+        columns: [
+          "lastName",
+          "position"
+        ],
+        dataSource: [
+          { id: 1, parentId: null, lastName: "Jackson", position: "CEO" },
+          { id: 2, parentId: 1, lastName: "Weber", position: "  VP, Engineering" }
+        ]
+      });
+    </script>
+
+### toolbar.name `String`
+
+The name of the toolbar command. Either a built-in ("create", "excel", "pdf") or a custom string. The `name` is output in the HTML as a value of the `data-command` attribute of the button.
+
+#### Example - specify the name of the command
+
+    <div id="treeList"></div>
+    <script>
+      $("#treeList").kendoTreeList({
+        toolbar: [
+          { name: "custom", click: function() { alert("custom"); } }
+        ],
+        columns: [
+          { field: "name" },
+          { field: "age" }
+        ],
+        sortable: {
+          mode: "multiple"
+        },
+        dataSource: {
+          data: [
+            { id: 1, parentId: null, name: "Jane Doe", age: 22, expanded: true },
+            { id: 2, parentId: 1, name: "John Doe", age: 24 },
+            { id: 3, parentId: 1, name: "Jenny Doe", age: 3 }
           ]
-        });
+        }
+      });
     </script>
 
 ### toolbar.text `String`
@@ -3188,51 +3908,61 @@ The text displayed by the command button. If not set the [name](#configuration-t
 
     <div id="treeList"></div>
     <script>
-        $("#treeList").kendoTreeList({
-          toolbar: [
-            { name: "create", text: "Add new" }
-          ],
-          columns: [
-            { field: "name" },
-            { field: "age" }
-          ],
-          dataSource: [
-              { name: "Jane Doe", age: 30 },
-              { name: "John Doe", age: 33 }
+      $("#treeList").kendoTreeList({
+        toolbar: [
+          { name: "custom", text: "My Command" }
+        ],
+        columns: [
+          { field: "name" },
+          { field: "age" }
+        ],
+        sortable: {
+          mode: "multiple"
+        },
+        dataSource: {
+          data: [
+            { id: 1, parentId: null, name: "Jane Doe", age: 22, expanded: true },
+            { id: 2, parentId: 1, name: "John Doe", age: 24 },
+            { id: 3, parentId: 1, name: "Jenny Doe", age: 3 }
           ]
-        });
+        }
+      });
     </script>
 
 ## Fields
 
 ### columns `Array`
 
-The columns of the treelist initialized from the [columns](#configuration-columns) option. Every item from the `columns` array has the same fields as the corresponding [columns](#configuration-columns) option.
+The columns of the TreeList initialized from the [columns](#configuration-columns) option. Every item from the `columns` array has the same fields as the corresponding [columns](#configuration-columns) option.
 
-#### Example - iterate the treelist columns
+#### Example - iterate the TreeList columns
+
+    <button id="countBtn">Log Column Names</button>
     <div id="treelist"></div>
-	<script>
-		$("#treelist").kendoTreeList({
-		  columns: [
-		    { field: "name" },
-		    { field: "age" }
-		  ],
-		  dataSource: [
-		    { name: "Jane Doe", age: 30 },
-		    { name: "John Doe", age: 33 }
-		  ]
-		});
-		var treelist = $("#treelist").data("kendoTreeList");
-		for (var i = 0; i < treelist.columns.length; i++) {
-		  console.log(treelist.columns[i].field); // displays "name" and then "age"
-		}
-	</script>
+    <script>
+      $("#treelist").kendoTreeList({
+        columns: [
+          { field: "lastName" },
+          { field: "position" }
+        ],
+        dataSource: [
+          { id: 1, parentId: null, lastName: "Jackson", position: "CEO" },
+          { id: 2, parentId: 1, lastName: "Weber", position: "	VP, Engineering" }
+        ]
+      });
+      $("#countBtn").click(function(e){
+        var treelist = $("#treelist").data("kendoTreeList");
+        for (var i = 0; i < treelist.columns.length; i++) {
+          console.log(treelist.columns[i].field); // displays "lastName" and then "position"
+        }
+      });
+    </script>
 
 ## Methods
 
 ### addRow
 
-Adds an empty data item to the treelist. In "inline" editing mode a table row will be appended. A popup window will be displayed in "popup" editing mode.
+Adds an empty data item to the TreeList. In "inline" editing mode a table row will be appended. A popup window will be displayed in "popup" editing mode.
 
 Fires the [edit](#events-edit) event.
 
@@ -3244,48 +3974,118 @@ A string, DOM element or jQuery object which represents the parent table row. A 
 
 #### Example - add a new root data item
 
-    <div id="treeList"></div>
-    <script>
-        $("#treeList").kendoTreeList({
-          columns: [
-            { field: "name" },
-            { field: "age" }
-          ],
-          dataSource: {
-            data: [
-              { id: 1, name: "Jane Doe", age: 30, parentId: null }
-            ],
-            schema: {
-              model: { id: "id" }
-            }
-          },
-          editable: "inline"
+      <script>
+          var crudServiceBaseUrl = "https://demos.telerik.com/kendo-ui/service";
+
+          $("#treelist").kendoTreeList({
+            dataSource: {
+              transport: {
+                read:  {
+                  url: crudServiceBaseUrl + "/EmployeeDirectory/All",
+                  dataType: "jsonp"
+                },
+                update: {
+                  url: crudServiceBaseUrl + "/EmployeeDirectory/Update",
+                  dataType: "jsonp"
+                },
+                create: {
+                  url: crudServiceBaseUrl + "/EmployeeDirectory/Create",
+                  dataType: "jsonp"
+                },
+                parameterMap: function(options, operation) {
+                  if (operation !== "read" && options.models) {
+                    return {models: kendo.stringify(options.models)};
+                  }
+                }
+              },
+              batch: true,
+              schema: {
+                model: {
+                  id: "EmployeeId",
+                  parentId: "ReportsTo",
+                  fields: {
+                    EmployeeId: { type: "number", editable: false, nullable: false },
+                    ReportsTo: { nullable: true, type: "number" },
+                    FirstName: { validation: { required: true } },
+                    LastName: { validation: { required: true } },
+                    Position: { type: "string" }
+                  },
+                  expanded: true
+                }
+              }
+            },
+            height: 300,
+            editable: true,
+            columns: [
+              { field: "FirstName", expandable: true, title: "First Name", width: 220 },
+              { field: "LastName", title: "Last Name", width: 100 },
+              { field: "Position" },
+              { command: ["edit"]}
+            ]
+          });
+        $("#add").click(function(){
+        	$("#treelist").data("kendoTreeList").addRow();
         });
-        var treeList = $("#treeList").data("kendoTreeList");
-        treeList.addRow();
-    </script>
+      </script>
 
 #### Example - add a new child data item
 
-    <div id="treeList"></div>
-    <script>
-       $("#treeList").kendoTreeList({
-          columns: [
-            { field: "id" },
-            { field: "name" },
-            { field: "age" }
-          ],
-          dataSource: {
-            data: [
-              { id: 1, name: "Jane Doe", age: 30, parentId: null },
-              { id: 2, name: "Jane Doe", age: 30, parentId: 1 }
+      <button id="add">Add New Row</button>
+      <div id="treelist"></div>
+  
+      <script>
+          var crudServiceBaseUrl = "https://demos.telerik.com/kendo-ui/service";
+
+          $("#treelist").kendoTreeList({
+            dataSource: {
+              transport: {
+                read:  {
+                  url: crudServiceBaseUrl + "/EmployeeDirectory/All",
+                  dataType: "jsonp"
+                },
+                update: {
+                  url: crudServiceBaseUrl + "/EmployeeDirectory/Update",
+                  dataType: "jsonp"
+                },
+                create: {
+                  url: crudServiceBaseUrl + "/EmployeeDirectory/Create",
+                  dataType: "jsonp"
+                },
+                parameterMap: function(options, operation) {
+                  if (operation !== "read" && options.models) {
+                    return {models: kendo.stringify(options.models)};
+                  }
+                }
+              },
+              batch: true,
+              schema: {
+                model: {
+                  id: "EmployeeId",
+                  parentId: "ReportsTo",
+                  fields: {
+                    EmployeeId: { type: "number", editable: false, nullable: false },
+                    ReportsTo: { nullable: true, type: "number" },
+                    FirstName: { validation: { required: true } },
+                    LastName: { validation: { required: true } },
+                    Position: { type: "string" }
+                  },
+                  expanded: true
+                }
+              }
+            },
+            height: 300,
+            editable: true,
+            columns: [
+              { field: "FirstName", expandable: true, title: "First Name", width: 220 },
+              { field: "LastName", title: "Last Name", width: 100 },
+              { field: "Position" },
+              { command: ["edit"]}
             ]
-          },
-          editable: "inline"
+          });
+        $("#add").click(function(){
+        	$("#treelist").data("kendoTreeList").addRow("#treelist tbody>tr:first");
         });
-        var treeList = $("#treeList").data("kendoTreeList");
-        treeList.addRow($("#treeList tbody>tr:first"));
-    </script>
+      </script>
 
 ### autoFitColumn
 
@@ -3308,12 +4108,12 @@ The index of the column, or the [field](#configuration-columns.field) to which t
           { field: "Position" }
         ],
         dataSource: [
-          { id: 1, Name: "Daryl Sweeney", Position: "CEO", parentId: null },
+          { id: 1, Name: "Daryl Sweeney", Position: "CEO", parentId: null, expanded: true },
           { id: 2, Name: "Guy Wooten", Position: "Chief Technical Officer", parentId: 1 }
         ]
       });
       var treeList = $("#treeList").data("kendoTreeList");
-      treeList.autoFitColumn(0);
+      treeList.autoFitColumn(1);
     </script>
 
 #### Example - autofit a column by field
@@ -3327,12 +4127,12 @@ The index of the column, or the [field](#configuration-columns.field) to which t
           { field: "Position" }
         ],
         dataSource: [
-          { id: 1, Name: "Daryl Sweeney", Position: "CEO", parentId: null },
+          { id: 1, Name: "Daryl Sweeney", Position: "CEO", parentId: null, expanded: true },
           { id: 2, Name: "Guy Wooten", Position: "Chief Technical Officer", parentId: 1 }
         ]
       });
       var treeList = $("#treeList").data("kendoTreeList");
-      treeList.autoFitColumn("Name");
+      treeList.autoFitColumn("Position");
     </script>
 
 #### Example - autofit a column by column object reference
@@ -3346,12 +4146,12 @@ The index of the column, or the [field](#configuration-columns.field) to which t
           { field: "Position" }
         ],
         dataSource: [
-          { id: 1, Name: "Daryl Sweeney", Position: "CEO", parentId: null },
+          { id: 1, Name: "Daryl Sweeney", Position: "CEO", parentId: null, expanded: true },
           { id: 2, Name: "Guy Wooten", Position: "Chief Technical Officer", parentId: 1 }
         ]
       });
       var treeList = $("#treeList").data("kendoTreeList");
-      treeList.autoFitColumn(treeList.columns[0]);
+      treeList.autoFitColumn(treeList.columns[1]);
     </script>
 
 ### cancelRow
@@ -3360,27 +4160,62 @@ Cancels editing for the table row which is in edit mode. Reverts any changes mad
 
 #### Example - cancel editing
 
-    <div id="treeList"></div>
-    <script>
-        $("#treeList").kendoTreeList({
-          columns: [
-            { field: "name" },
-            { field: "age" }
-          ],
+      <button id="cancel">Cancel Editing</button>
+      <div id="treelist"></div>
+
+      <script>
+        var crudServiceBaseUrl = "https://demos.telerik.com/kendo-ui/service";
+
+        $("#treelist").kendoTreeList({
           dataSource: {
-            data: [
-              { id: 1, name: "Jane Doe", age: 30, parentId: null }
-            ],
+            transport: {
+              read:  {
+                url: crudServiceBaseUrl + "/EmployeeDirectory/All",
+                dataType: "jsonp"
+              },
+              update: {
+                url: crudServiceBaseUrl + "/EmployeeDirectory/Update",
+                dataType: "jsonp"
+              },
+              create: {
+                url: crudServiceBaseUrl + "/EmployeeDirectory/Create",
+                dataType: "jsonp"
+              },
+              parameterMap: function(options, operation) {
+                if (operation !== "read" && options.models) {
+                  return {models: kendo.stringify(options.models)};
+                }
+              }
+            },
+            batch: true,
             schema: {
-              model: { id: "id" }
+              model: {
+                id: "EmployeeId",
+                parentId: "ReportsTo",
+                fields: {
+                  EmployeeId: { type: "number", editable: false, nullable: false },
+                  ReportsTo: { nullable: true, type: "number" },
+                  FirstName: { validation: { required: true } },
+                  LastName: { validation: { required: true } },
+                  Position: { type: "string" }
+                },
+                expanded: true
+              }
             }
           },
-          editable: "inline"
+          height: 300,
+          editable: true,
+          columns: [
+            { field: "FirstName", expandable: true, title: "First Name", width: 220 },
+            { field: "LastName", title: "Last Name", width: 100 },
+            { field: "Position" },
+            { command: ["edit"]}
+          ]
         });
-        var treeList = $("#treeList").data("kendoTreeList");
-        treeList.editRow($("#treeList tbody>tr:eq(0)"));
-        treeList.cancelRow();
-    </script>
+        $("#cancel").click(function(){
+          $("#treelist").data("kendoTreeList").cancelRow();
+        });
+      </script>
 
 ### clearSelection
 
@@ -3388,23 +4223,25 @@ Clears the currently selected table rows or cells (depending on the current sele
 
 #### Example - clear selection
 
+    <button id="clear">Clear Selection</button>
     <div id="treeList"></div>
     <script>
-        $("#treeList").kendoTreeList({
-          columns: [
-            { field: "name" },
-            { field: "age" }
-          ],
-          dataSource: [
-            { name: "Jane Doe", age: 30 },
-            { name: "John Doe", age: 33 },
-          ],
-          selectable: true
-        });
+      $("#treeList").kendoTreeList({
+        columns: [
+          { field: "name" },
+          { field: "age" }
+        ],
+        dataSource: [
+          { id: 1, parentId: null, name: "Jane Doe", age: 22, expanded: true },
+          { id: 2, parentId: 1, name: "John Doe", age: 24 },
+          { id: 3, parentId: 1, name: "Jenny Doe", age: 3 }
+        ],
+        selectable: true
+      });
+      $("#clear").click(function(){
         var treeList = $("#treeList").data("kendoTreeList");
-        // select the first table row
-        treeList.select($("#treeList tr:eq(1)"));
         treeList.clearSelection();
+      });
     </script>
 
 ### collapse
@@ -3423,17 +4260,25 @@ A string, DOM element or jQuery object which represents the table row. A string 
 
 #### Example
 
+    <button id="collapse">Collapse TreeList</button>
     <div id="treeList"></div>
     <script>
-        $("#treeList").kendoTreeList({
-            columns: [ "id", "name" ],
-            dataSource: [
-                { id: 1, parentId: null, name: "Jane Doe", age: 30 },
-                { id: 2, parentId: 1, name: "John Doe", age: 33 }
-            ]
-        });
+      $("#treeList").kendoTreeList({
+        columns: [
+          { field: "name" },
+          { field: "age" }
+        ],
+        dataSource: [
+          { id: 1, parentId: null, name: "Jane Doe", age: 22, expanded: true },
+          { id: 2, parentId: 1, name: "John Doe", age: 24 },
+          { id: 3, parentId: 1, name: "Jenny Doe", age: 3 }
+        ],
+        selectable: true
+      });
+      $("#collapse").click(function(){
         var treeList = $("#treeList").data("kendoTreeList");
         treeList.collapse($("#treeList tbody>tr:eq(0)"));
+      });
     </script>
 
 ### dataItem
@@ -3459,14 +4304,15 @@ A string, DOM element or jQuery object which represents the table row. A string 
             { field: "name" },
             { field: "age" }
           ],
-          dataSource: [
-              { name: "Jane Doe", age: 30 },
-              { name: "John Doe", age: 33 }
-          ]
+        dataSource: [
+          { id: 1, parentId: null, name: "Jane Doe", age: 22, expanded: true },
+          { id: 2, parentId: 1, name: "John Doe", age: 24 },
+          { id: 3, parentId: 1, name: "Jenny Doe", age: 3 }
+        ],
         });
         var treeList = $("#treeList").data("kendoTreeList");
         var data = treeList.dataItem("tbody>tr:eq(1)");
-        console.log(data.age); // displays "33"
+        console.log(data.age); // displays "22"
     </script>
 
 ### destroy
@@ -3477,17 +4323,25 @@ Prepares the widget for safe removal from DOM. Detaches all event handlers and r
 
 #### Example
 
+    <button id="destroy">Destroy and remove TreeList</button>
     <div id="treeList"></div>
     <script>
-        $("#treeList").kendoTreeList({
-          columns: [ "name", "age" ],
-          dataSource: [
-              { name: "Jane Doe", age: 30 },
-              { name: "John Doe", age: 33 }
-          ]
-        });
-        var treeList = $("#treeList").data("kendoTreeList");
-        treeList.destroy();
+      $("#treeList").kendoTreeList({
+        columns: [
+          { field: "name" },
+          { field: "age" }
+        ],
+        dataSource: [
+          { id: 1, parentId: null, name: "Jane Doe", age: 22, expanded: true },
+          { id: 2, parentId: 1, name: "John Doe", age: 24 },
+          { id: 3, parentId: 1, name: "Jenny Doe", age: 3 }
+        ]
+      });
+      $("#destroy").click(function(){
+        $("#treeList").data("kendoTreeList").destroy(); // destroy the TreeList
+
+        $("#treeList").remove(); // remove all TreeList HTML
+      });
     </script>
 
 ### editRow
@@ -3504,26 +4358,62 @@ The jQuery object which represents the table row.
 
 #### Example - switch the first row to edit mode
 
-    <div id="treeList"></div>
-    <script>
-        $("#treeList").kendoTreeList({
-          columns: [
-            { field: "name" },
-            { field: "age" }
-          ],
+      <button id="edit">Edit First Row</button>
+      <div id="treelist"></div>
+
+      <script>
+        var crudServiceBaseUrl = "https://demos.telerik.com/kendo-ui/service";
+
+        $("#treelist").kendoTreeList({
           dataSource: {
-            data: [
-              { id: 1, name: "Jane Doe", age: 30, parentId: null }
-            ],
+            transport: {
+              read:  {
+                url: crudServiceBaseUrl + "/EmployeeDirectory/All",
+                dataType: "jsonp"
+              },
+              update: {
+                url: crudServiceBaseUrl + "/EmployeeDirectory/Update",
+                dataType: "jsonp"
+              },
+              create: {
+                url: crudServiceBaseUrl + "/EmployeeDirectory/Create",
+                dataType: "jsonp"
+              },
+              parameterMap: function(options, operation) {
+                if (operation !== "read" && options.models) {
+                  return {models: kendo.stringify(options.models)};
+                }
+              }
+            },
+            batch: true,
             schema: {
-              model: { id: "id" }
+              model: {
+                id: "EmployeeId",
+                parentId: "ReportsTo",
+                fields: {
+                  EmployeeId: { type: "number", editable: false, nullable: false },
+                  ReportsTo: { nullable: true, type: "number" },
+                  FirstName: { validation: { required: true } },
+                  LastName: { validation: { required: true } },
+                  Position: { type: "string" }
+                },
+                expanded: true
+              }
             }
           },
-          editable: "inline"
+          height: 300,
+          editable: true,
+          columns: [
+            { field: "FirstName", expandable: true, title: "First Name", width: 220 },
+            { field: "LastName", title: "Last Name", width: 100 },
+            { field: "Position" },
+            { command: ["edit"]}
+          ]
         });
-        var treeList = $("#treeList").data("kendoTreeList");
-        treeList.editRow($("#treeList tbody>tr:eq(0)"));
-    </script>
+        $("#edit").click(function(){
+          $("#treelist").data("kendoTreeList").editRow($("#treelist tbody>tr:eq(0)"));
+        });
+      </script>
 
 ### expand
 
@@ -3541,30 +4431,44 @@ A string, DOM element or jQuery object which represents the table row. A string 
 
 #### Example
 
+    <button id="expand">Expand TreeList</button>
     <div id="treeList"></div>
     <script>
-        $("#treeList").kendoTreeList({
-            columns: [ "id", "name" ],
-            dataSource: [
-                { id: 1, parentId: null, name: "Jane Doe", age: 30 },
-                { id: 2, parentId: 1, name: "John Doe", age: 33 }
-            ]
-        });
+      $("#treeList").kendoTreeList({
+        columns: [
+          { field: "name" },
+          { field: "age" }
+        ],
+        dataSource: [
+          { id: 1, parentId: null, name: "Jane Doe", age: 22 },
+          { id: 2, parentId: 1, name: "John Doe", age: 24 },
+          { id: 3, parentId: 1, name: "Jenny Doe", age: 3 }
+        ]
+      });
+      $("#expand").click(function(){
         var treeList = $("#treeList").data("kendoTreeList");
         treeList.expand($("#treeList tbody>tr:eq(0)"));
+      });
     </script>
 
 #### Example - expand row of a data item with a given id
 
+    <button id="expand">Expand item with ID = 1</button>
     <div id="treeList"></div>
     <script>
-        $("#treeList").kendoTreeList({
-            columns: [ "id", "name" ],
-            dataSource: [
-                { id: 1, parentId: null, name: "Jane Doe", age: 30 },
-                { id: 2, parentId: 1, name: "John Doe", age: 33 }
-            ]
-        });
+      $("#treeList").kendoTreeList({
+        columns: [
+          { field: "id" },
+          { field: "name" },
+          { field: "age" }
+        ],
+        dataSource: [
+          { id: 1, parentId: null, name: "Jane Doe", age: 22 },
+          { id: 2, parentId: 1, name: "John Doe", age: 24 },
+          { id: 3, parentId: 1, name: "Jenny Doe", age: 3 }
+        ]
+      });
+      $("#expand").click(function(){
         var treeList = $("#treeList").data("kendoTreeList");
 
         // find item with id = 1 in datasource
@@ -3574,6 +4478,7 @@ A string, DOM element or jQuery object which represents the table row. A string 
         var row = treeList.content.find("tr[data-uid=" + dataItem.uid + "]")
 
         treeList.expand(row);
+      });
     </script>
 
 ### itemFor
@@ -3594,21 +4499,29 @@ A model from the DataSource, or the id of a model in the DataSource.
 
 #### Example - get row from model
 
+    <button id="itemFor">Highlight the row with Jane</button>
     <div id="treeList"></div>
     <script>
-        $("#treeList").kendoTreeList({
-          columns: [
-            { field: "name" },
-            { field: "age" }
-          ],
-          dataSource: [
-              { id: 1, name: "Jane Doe", age: 30 },
-              { id: 2, name: "John Doe", age: 33 }
-          ]
-        });
+      $("#treeList").kendoTreeList({
+        columns: [
+          { field: "id" },
+          { field: "name" },
+          { field: "age" }
+        ],
+        dataSource: [
+          { id: 1, parentId: null, name: "Jane Doe", age: 22, expanded: true },
+          { id: 2, parentId: 1, name: "John Doe", age: 24 },
+          { id: 3, parentId: 1, name: "Jenny Doe", age: 3 }
+        ],
+        selectable: true
+      });
+      $("#itemFor").click(function(){
         var treeList = $("#treeList").data("kendoTreeList");
         var jane = treeList.dataSource.get(1);
         var row = treeList.itemFor(jane);
+        
+        treeList.select(row);
+      });
     </script>
 
 ### items
@@ -3625,20 +4538,26 @@ Renders all table rows using the current data items.
 
 #### Example - refresh the widget
 
-    <div id="treeList"></div>
+    <button id="btn">Refresh</button>
+    <div id="treelist"></div>
     <script>
-        $("#treeList").kendoTreeList({
-          columns: [
-            { field: "name" },
-            { field: "age" }
-          ],
-          dataSource: [
-              { name: "Jane Doe", age: 30 },
-              { name: "John Doe", age: 33 }
-          ]
-        });
-        var treeList = $("#treeList").data("kendoTreeList");
-        treeList.refresh();
+      var treelist = $("#treelist").kendoTreeList({
+        columns: [
+          { field: "id" },
+          { field: "name" },
+          { field: "age" }
+        ],
+        dataSource: [
+          { id: 1, parentId: null, name: "Jane Doe", age: 22, expanded: true },
+          { id: 2, parentId: 1, name: "John Doe", age: 24 },
+          { id: 3, parentId: 1, name: "Jenny Doe", age: 3 }
+        ]
+      }).data("kendoTreeList");
+      $("#btn").click(function(){
+        var treelist = $("#treelist").data("kendoTreeList");
+        treelist.dataSource.at(0).name="Marta Stewart";
+        treelist.refresh();
+      });
     </script>
 
 ### removeRow
@@ -3655,25 +4574,56 @@ A string, DOM element or jQuery object which represents the table row. A string 
 
 #### Example - remove the first table row
 
-    <div id="treeList"></div>
+    <button id="btn">Remove second row</button>
+    <div id="treelist"></div>
     <script>
-        $("#treeList").kendoTreeList({
-          columns: [
-            { field: "name" },
-            { field: "age" }
-          ],
-          dataSource: {
-            data: [
-              { id: 1, name: "Jane Doe", age: 30, parentId: null }
-            ],
-            schema: {
-              model: { id: "id" }
-            }
+      var dataSource = new kendo.data.TreeListDataSource({
+        transport: {
+          read: {
+            url: "https://demos.telerik.com/kendo-ui/service/EmployeeDirectory/All",
+            dataType: "jsonp"
           },
-          editable: "inline"
-        });
-        var treeList = $("#treeList").data("kendoTreeList");
-        treeList.removeRow($("#treeList tbody>tr:first"));
+          destroy: {
+            url: "https://demos.telerik.com/kendo-ui/service/EmployeeDirectory/Destroy",
+            dataType: "jsonp"
+          },
+          parameterMap: function(options, operation) {
+            if (operation !== "read" && options.models) {
+              return {models: kendo.stringify(options.models)};
+            }
+          }
+        },
+        batch: true,
+        schema: {
+          model: {
+            id: "EmployeeId",
+            parentId: "ReportsTo",
+            fields: {
+              EmployeeId: { type: "number", editable: false, nullable: false },
+              ReportsTo: { nullable: true, type: "number" },
+              HireDate: {type: "date"},
+              BirthDate: {type: "date"}
+            },
+            expanded: true
+          }
+        }
+      });
+
+      $("#treelist").kendoTreeList({
+        dataSource: dataSource,
+        toolbar: [ "create" ],
+        editable: "popup",
+        height: 540,
+        columns: [
+          { field: "FirstName", expandable: true, title: "First Name", width: 250 },
+          { field: "LastName", title: "Last Name" },
+          { field: "Position" }
+        ]
+      });
+      $("#btn").click(function(){
+        var treelist = $("#treelist").data("kendoTreeList");
+        treelist.removeRow($("#treelist tbody>tr:nth(1)"));
+      });
     </script>
 
 ### saveAsExcel
@@ -3735,26 +4685,62 @@ Fires the [edit](#events-save) event.
 
 #### Example - save row
 
-    <div id="treeList"></div>
+    <button id="save">Save Row</button>
+    <div id="treelist"></div>
+
     <script>
-        $("#treeList").kendoTreeList({
-          columns: [
-            { field: "name" },
-            { field: "age" }
-          ],
-          dataSource: {
-            data: [
-              { id: 1, name: "Jane Doe", age: 30, parentId: null }
-            ],
-            schema: {
-              model: { id: "id" }
+      var crudServiceBaseUrl = "https://demos.telerik.com/kendo-ui/service";
+
+      $("#treelist").kendoTreeList({
+        dataSource: {
+          transport: {
+            read:  {
+              url: crudServiceBaseUrl + "/EmployeeDirectory/All",
+              dataType: "jsonp"
+            },
+            update: {
+              url: crudServiceBaseUrl + "/EmployeeDirectory/Update",
+              dataType: "jsonp"
+            },
+            create: {
+              url: crudServiceBaseUrl + "/EmployeeDirectory/Create",
+              dataType: "jsonp"
+            },
+            parameterMap: function(options, operation) {
+              if (operation !== "read" && options.models) {
+                return {models: kendo.stringify(options.models)};
+              }
             }
           },
-          editable: "inline"
-        });
-        var treeList = $("#treeList").data("kendoTreeList");
-        treeList.editRow($("#treeList tbody>tr:eq(0)"));
-        treeList.saveRow();
+          batch: true,
+          schema: {
+            model: {
+              id: "EmployeeId",
+              parentId: "ReportsTo",
+              fields: {
+                EmployeeId: { type: "number", editable: false, nullable: false },
+                ReportsTo: { nullable: true, type: "number" },
+                FirstName: { validation: { required: true } },
+                LastName: { validation: { required: true } },
+                HireDate: {type: "date"},
+                BirthDate: {type: "date"}
+              },
+              expanded: true
+            }
+          }
+        },
+        height: 300,
+        editable: true,
+        columns: [
+          { field: "FirstName", expandable: true, title: "First Name", width: 220 },
+          { field: "LastName", title: "Last Name", width: 100 },
+          { field: "Position" },
+          { command: ["edit"]}
+        ]
+      });
+      $("#save").click(function(){
+        $("#treelist").data("kendoTreeList").saveRow($("treelist .k-grid-edit-row"));
+      });
     </script>
 
 ### select
@@ -3765,7 +4751,7 @@ Gets or sets the table rows (or cells) which are selected.
 
 ##### rows `Element|jQuery`
 
-A string, DOM element or jQuery object which represents the table row(s) or cell(s). A string is treated as a jQuery selector.
+A DOM element or jQuery object which represents the table row(s) or cell(s).
 
 #### Returns
 
@@ -3773,43 +4759,55 @@ A string, DOM element or jQuery object which represents the table row(s) or cell
 
 #### Example - select the first table cell
 
+    <button id="btn">Highlight third row</button>
     <div id="treeList"></div>
     <script>
-        $("#treeList").kendoTreeList({
-          columns: [
-            { field: "name" },
-            { field: "age" }
-          ],
-          dataSource: [
-              { name: "Jane Doe", age: 30 },
-              { name: "John Doe", age: 33 }
-          ],
-          selectable: "cell"
-        });
+      $("#treeList").kendoTreeList({
+        columns: [
+          { field: "id" },
+          { field: "name" },
+          { field: "age" }
+        ],
+        dataSource: [
+          { id: 1, parentId: null, name: "Jane Doe", age: 22, expanded: true },
+          { id: 2, parentId: 1, name: "John Doe", age: 24 },
+          { id: 3, parentId: 1, name: "Jenny Doe", age: 3 }
+        ],
+        selectable: true
+      });
+      $("#btn").click(function(){
         var treeList = $("#treeList").data("kendoTreeList");
-        treeList.select($("#treeList td:eq(0)"));
+
+        treeList.select($("#treeList tbody>tr:nth(2)"));
+      });
     </script>
 
 #### Example - get the selected table row
 
+    <button id="btn">Get selected row info</button>
     <div id="treeList"></div>
     <script>
-        $("#treeList").kendoTreeList({
-          columns: [
-            { field: "name" },
-            { field: "age" }
-          ],
-          dataSource: [
-              { name: "Jane Doe", age: 30 },
-              { name: "John Doe", age: 33 }
-          ],
-          selectable: "row"
-        });
+      $("#treeList").kendoTreeList({
+        columns: [
+          { field: "id" },
+          { field: "name" },
+          { field: "age" }
+        ],
+        dataSource: [
+          { id: 1, parentId: null, name: "Jane Doe", age: 22, expanded: true },
+          { id: 2, parentId: 1, name: "John Doe", age: 24 },
+          { id: 3, parentId: 1, name: "Jenny Doe", age: 3 }
+        ],
+        selectable: true
+      });
+      $("#btn").click(function(){
         var treeList = $("#treeList").data("kendoTreeList");
-        treeList.select($("#treeList tr:eq(1)"));
         var row = treeList.select();
-        var data = treeList.dataItem(row);
-        console.log(data.name); // displays "Jane Doe"
+        if(row.length > 0){
+          var data = treeList.dataItem(row);
+          console.log(data.name);
+        }
+      });
     </script>
 
 ### setDataSource
@@ -3824,24 +4822,31 @@ The data source to which the widget should be bound.
 
 #### Example - set the data source
 
+    <button id="btn">Change DataSource</button>
     <div id="treeList"></div>
     <script>
-        $("#treeList").kendoTreeList({
-          columns: [
-            { field: "name" },
-            { field: "age" }
-          ],
-          dataSource: [
-              { name: "Jane Doe", age: 30 }
-          ]
-        });
-        var dataSource = new kendo.data.TreeListDataSource({
-          data: [
-            { name: "John Doe", age: 33 }
-          ]
-        });
+      $("#treeList").kendoTreeList({
+        columns: [
+          { field: "id" },
+          { field: "name" },
+          { field: "age" }
+        ],
+        dataSource: [
+          { id: 1, parentId: null, name: "Jane Doe", age: 22, expanded: true },
+          { id: 2, parentId: 1, name: "John Doe", age: 24 },
+          { id: 3, parentId: 1, name: "Jenny Doe", age: 3 }
+        ]
+      });
+      $("#btn").click(function(){
         var treeList = $("#treeList").data("kendoTreeList");
-        treeList.setDataSource(dataSource);
+        var dsNew = new kendo.data.TreeListDataSource({
+          data: [          
+            { id: 1, parentId: null, name: "Mark Jameson", age: 26, expanded: true },
+            { id: 2, parentId: 1, name: "Joe Reeves", age: 22 },
+          ]
+        });
+        treeList.setDataSource(dsNew);
+      });
     </script>
 
 ### showColumn
@@ -3856,44 +4861,48 @@ The index of the column, or the [field](#configuration-columns.field) to which t
 
 #### Example - show a hidden column by index
 
+    <button id="btn">Show Age Column</button>
     <div id="treeList"></div>
     <script>
-        $("#treeList").kendoTreeList({
-            columns: [
-                { field: "name" },
-                { field: "age", hidden: true }
-            ],
-            dataSource: {
-                data: [
-                    { id: 1, parentId: null, name: "Jane Doe", age: 22 },
-                    { id: 2, parentId: 1, name: "John Doe", age: 24 }
-                ]
-            }
-        });
-
-        var treelist = $("#treeList").data("kendoTreeList");
-        treelist.showColumn(1);
+      $("#treeList").kendoTreeList({
+        columns: [
+          { field: "id" },
+          { field: "name" },
+          { field: "age", hidden: true }
+        ],
+        dataSource: [
+          { id: 1, parentId: null, name: "Jane Doe", age: 22, expanded: true },
+          { id: 2, parentId: 1, name: "John Doe", age: 24 },
+          { id: 3, parentId: 1, name: "Jenny Doe", age: 3 }
+        ]
+      });
+      $("#btn").click(function(){
+        var treeList = $("#treeList").data("kendoTreeList");
+        treeList.showColumn(2);
+      });
     </script>
 
 #### Example - show a hidden column by field
 
+    <button id="btn">Show Age Column</button>
     <div id="treeList"></div>
     <script>
-        $("#treeList").kendoTreeList({
-            columns: [
-                { field: "name" },
-                { field: "age", hidden: true }
-            ],
-            dataSource: {
-                data: [
-                    { id: 1, parentId: null, name: "Jane Doe", age: 22 },
-                    { id: 2, parentId: 1, name: "John Doe", age: 24 }
-                ]
-            }
-        });
-
-        var treelist = $("#treeList").data("kendoTreeList");
-        treelist.showColumn("age");
+      $("#treeList").kendoTreeList({
+        columns: [
+          { field: "id" },
+          { field: "name" },
+          { field: "age", hidden: true }
+        ],
+        dataSource: [
+          { id: 1, parentId: null, name: "Jane Doe", age: 22, expanded: true },
+          { id: 2, parentId: 1, name: "John Doe", age: 24 },
+          { id: 3, parentId: 1, name: "Jenny Doe", age: 3 }
+        ]
+      });
+      $("#btn").click(function(){
+        var treeList = $("#treeList").data("kendoTreeList");
+        treeList.showColumn("age");
+      });
     </script>
 
 ### hideColumn
@@ -3906,46 +4915,50 @@ Hides the specified column.
 
 The index of the column, or the [field](#configuration-columns.field) to which the columns is bound.
 
-#### Example - hide column by index
+#### Example - hide a column by index
 
+    <button id="btn">Hide Age Column</button>
     <div id="treeList"></div>
     <script>
-        $("#treeList").kendoTreeList({
-            columns: [
-                { field: "name" },
-                { field: "age" }
-            ],
-            dataSource: {
-                data: [
-                    { id: 1, parentId: null, name: "Jane Doe", age: 22 },
-                    { id: 2, parentId: 1, name: "John Doe", age: 24 }
-                ]
-            }
-        });
-
-        var treelist = $("#treeList").data("kendoTreeList");
-        treelist.hideColumn(1);
+      $("#treeList").kendoTreeList({
+        columns: [
+          { field: "id" },
+          { field: "name" },
+          { field: "age" }
+        ],
+        dataSource: [
+          { id: 1, parentId: null, name: "Jane Doe", age: 22, expanded: true },
+          { id: 2, parentId: 1, name: "John Doe", age: 24 },
+          { id: 3, parentId: 1, name: "Jenny Doe", age: 3 }
+        ]
+      });
+      $("#btn").click(function(){
+        var treeList = $("#treeList").data("kendoTreeList");
+        treeList.hideColumn(2);
+      });
     </script>
 
-#### Example - show a hidden column by field
+#### Example - hide a column by field
 
+    <button id="btn">Hide Age Column</button>
     <div id="treeList"></div>
     <script>
-        $("#treeList").kendoTreeList({
-            columns: [
-                { field: "name" },
-                { field: "age" }
-            ],
-            dataSource: {
-                data: [
-                    { id: 1, parentId: null, name: "Jane Doe", age: 22 },
-                    { id: 2, parentId: 1, name: "John Doe", age: 24 }
-                ]
-            }
-        });
-
-        var treelist = $("#treeList").data("kendoTreeList");
-        treelist.hideColumn("age");
+      $("#treeList").kendoTreeList({
+        columns: [
+          { field: "id" },
+          { field: "name" },
+          { field: "age" }
+        ],
+        dataSource: [
+          { id: 1, parentId: null, name: "Jane Doe", age: 22, expanded: true },
+          { id: 2, parentId: 1, name: "John Doe", age: 24 },
+          { id: 3, parentId: 1, name: "Jenny Doe", age: 3 }
+        ]
+      });
+      $("#btn").click(function(){
+        var treeList = $("#treeList").data("kendoTreeList");
+        treeList.hideColumn("age");
+      });
     </script>
 
 ### lockColumn
@@ -3962,24 +4975,26 @@ The index of the column or the [field](#configuration-columns.field) to which th
 
 #### Example - lock a column
 
-    <div id="treeList"></div>
+    <button id="btn">Lock Age Column</button>
+    <div id="treeList" style="width: 400px"></div>
     <script>
-        $("#treeList").kendoTreeList({
-            columns: [
-                { field: "id", locked: true, width: 100},
-                { field: "name", width: 200 },
-                { field: "age", width: 150 }
-            ],
-            dataSource: {
-                data: [
-                    { id: 1, parentId: null, name: "Jane Doe", age: 22 },
-                    { id: 2, parentId: 1, name: "John Doe", age: 24 }
-                ]
-            }
-        });
-
-        var treelist = $("#treeList").data("kendoTreeList");
-        treelist.lockColumn("age");
+      $("#treeList").kendoTreeList({
+        columns: [
+          { field: "id", locked: true, width: 150 },
+          { field: "name", width: 150 },
+          { field: "age", width: 150 }
+        ],
+        dataSource: [
+          { id: 1, parentId: null, name: "Jane Doe", age: 22, expanded: true },
+          { id: 2, parentId: 1, name: "John Doe", age: 24 },
+          { id: 3, parentId: 1, name: "Jenny Doe", age: 3 }
+        ],
+        scrollable: true
+      });
+      $("#btn").click(function(){
+        var treeList = $("#treeList").data("kendoTreeList");
+        treeList.lockColumn("age");
+      });
     </script>
 
 ### unlockColumn
@@ -3996,24 +5011,26 @@ The index of the column or the [field](#configuration-columns.field) to which th
 
 #### Example - unlock a column
 
-    <div id="treeList"></div>
+    <button id="btn">Unlock Name Column</button>
+    <div id="treeList" style="width: 400px"></div>
     <script>
-        $("#treeList").kendoTreeList({
-            columns: [
-                { field: "id", locked: true, width: 100},
-                { field: "name", width: 200 },
-                { field: "age", locked: true, width: 150 }
-            ],
-            dataSource: {
-                data: [
-                    { id: 1, parentId: null, name: "Jane Doe", age: 22 },
-                    { id: 2, parentId: 1, name: "John Doe", age: 24 }
-                ]
-            }
-        });
-
-        var treelist = $("#treeList").data("kendoTreeList");
-        treelist.unlockColumn("age");
+      $("#treeList").kendoTreeList({
+        columns: [
+          { field: "id", locked: true, width: 150 },
+          { field: "name", locked: true, width: 150 },
+          { field: "age", width: 150 }
+        ],
+        dataSource: [
+          { id: 1, parentId: null, name: "Jane Doe", age: 22, expanded: true },
+          { id: 2, parentId: 1, name: "John Doe", age: 24 },
+          { id: 3, parentId: 1, name: "Jenny Doe", age: 3 }
+        ],
+        scrollable: true
+      });
+      $("#btn").click(function(){
+        var treeList = $("#treeList").data("kendoTreeList");
+        treeList.unlockColumn("name");
+      });
     </script>
 
 ### reorderColumn
@@ -4032,23 +5049,26 @@ The column whose position should be changed.
 
 #### Example - move a column
 
+    <button id="btn">Switch Name and Age Column</button>
     <div id="treeList"></div>
     <script>
-        $("#treeList").kendoTreeList({
-            columns: [
-                { field: "name" },
-                { field: "age" }
-            ],
-            dataSource: {
-                data: [
-                    { id: 1, parentId: null, name: "Jane Doe", age: 22 },
-                    { id: 2, parentId: 1, name: "John Doe", age: 24 }
-                ]
-            }
-        });
-
-        var treelist = $("#treeList").data("kendoTreeList");
-        treelist.reorderColumn(1, treelist.columns[0]);
+      $("#treeList").kendoTreeList({
+        columns: [
+          { field: "id" },
+          { field: "name" },
+          { field: "age" }
+        ],
+        dataSource: [
+          { id: 1, parentId: null, name: "Jane Doe", age: 22, expanded: true },
+          { id: 2, parentId: 1, name: "John Doe", age: 24 },
+          { id: 3, parentId: 1, name: "Jenny Doe", age: 3 }
+        ],
+        selectable: true
+      });
+      $("#btn").click(function(){
+        var treeList = $("#treeList").data("kendoTreeList");
+        treeList.reorderColumn(2, treeList.columns[1]);
+      });
     </script>
 
 ## Events
@@ -4139,56 +5159,62 @@ The widget instance which fired the event.
 
     <div id="treeList"></div>
     <script>
-        $("#treeList").kendoTreeList({
-          columns: [
-            { field: "name" },
-            { field: "age" }
-          ],
-          dataSource: [
-            { name: "Jane Doe", age: 30 },
-            { name: "John Doe", age: 33 }
-          ],
-          selectable: "multiple, row",
-          change: function(e) {
-            var selectedRows = this.select();
-            var selectedDataItems = [];
-            for (var i = 0; i < selectedRows.length; i++) {
-              var dataItem = this.dataItem(selectedRows[i]);
-              selectedDataItems.push(dataItem);
-            }
-            // selectedDataItems contains all selected data items
+      $("#treeList").kendoTreeList({
+        columns: [
+          { field: "id" },
+          { field: "name" },
+          { field: "age" }
+        ],
+        dataSource: [
+          { id: 1, parentId: null, name: "Jane Doe", age: 22, expanded: true },
+          { id: 2, parentId: 1, name: "John Doe", age: 24 },
+          { id: 3, parentId: 1, name: "Jenny Doe", age: 3 }
+        ],
+        selectable: "multiple, row",
+        change: function(e) {
+          var selectedRows = this.select();
+          var selectedDataItems = [];
+          for (var i = 0; i < selectedRows.length; i++) {
+            var dataItem = this.dataItem(selectedRows[i]);
+            selectedDataItems.push(dataItem);
           }
-        });
+          // selectedDataItems contains all selected data items
+          console.log(selectedDataItems.length);
+        }
+      });
     </script>
 
 #### Example - get the selected data item(s) when using cell selection
 
     <div id="treeList"></div>
     <script>
-        function change(e) {
-          var selectedCells = this.select();
-          var selectedDataItems = [];
-          for (var i = 0; i < selectedCells.length; i++) {
-            var dataItem = this.dataItem(selectedCells[i].parentNode);
-            if ($.inArray(dataItem, selectedDataItems) < 0) {
-              selectedDataItems.push(dataItem);
-            }
+      function change(e) {
+        var selectedCells = this.select();
+        var selectedDataItems = [];
+        for (var i = 0; i < selectedCells.length; i++) {
+          var dataItem = this.dataItem(selectedCells[i].parentNode);
+          if ($.inArray(dataItem, selectedDataItems) < 0) {
+            selectedDataItems.push(dataItem);
           }
-          // selectedDataItems contains all selected data items
         }
-        $("#treeList").kendoTreeList({
-          columns: [
-            { field: "name" },
-            { field: "age" }
-          ],
-          dataSource: [
-            { name: "Jane Doe", age: 30 },
-            { name: "John Doe", age: 33 }
-          ],
-          selectable: "multiple, cell"
-        });
-        var treeList = $("#treeList").data("kendoTreeList");
-        treeList.bind("change", change);
+        // selectedDataItems contains all selected data items
+        console.log(selectedDataItems.length + " data items selected.");
+      }
+      $("#treeList").kendoTreeList({
+        columns: [
+          { field: "id" },
+          { field: "name" },
+          { field: "age" }
+        ],
+        dataSource: [
+          { id: 1, parentId: null, name: "Jane Doe", age: 22, expanded: true },
+          { id: 2, parentId: 1, name: "John Doe", age: 24 },
+          { id: 3, parentId: 1, name: "Jenny Doe", age: 3 }
+        ],
+        selectable: "multiple, cell"
+      });
+      var treeList = $("#treeList").data("kendoTreeList");
+      treeList.bind("change", change);
     </script>
 
 ### collapse
@@ -4221,7 +5247,7 @@ If invoked prevents the collapse action. The child table rows will not be hidden
             { field: "Position" }
           ],
           dataSource: [
-            { id: 1, Name: "Daryl Sweeney", Position: "CEO", parentId: null },
+            { id: 1, Name: "Daryl Sweeney", Position: "CEO", parentId: null, expanded: true },
             { id: 2, Name: "Guy Wooten", Position: "Chief Technical Officer", parentId: 1 }
           ],
           collapse: function(e) {
@@ -4243,7 +5269,7 @@ If invoked prevents the collapse action. The child table rows will not be hidden
             { field: "Position" }
           ],
           dataSource: [
-            { id: 1, Name: "Daryl Sweeney", Position: "CEO", parentId: null },
+            { id: 1, Name: "Daryl Sweeney", Position: "CEO", parentId: null, expanded: true },
             { id: 2, Name: "Guy Wooten", Position: "Chief Technical Officer", parentId: 1 }
           ]
         });
@@ -4379,49 +5405,90 @@ The model of the source row.
 
 #### Example - subscribe to the "dragstart" event before initialization
 
-    <div id="treeList"></div>
-     <script>
-        $("#treeList").kendoTreeList({
-          columns: [
-            { field: "Name" },
-            { field: "Position" }
-          ],
-          editable: {
-            move: true
+    <div id="treelist"></div>
+    <script>
+      var service = "https://demos.telerik.com/kendo-ui/service";
+
+      $("#treelist").kendoTreeList({
+        dataSource: {
+          transport: {
+            read: {
+              url: service + "/EmployeeDirectory/All",
+              dataType: "jsonp"
+            }
           },
-          dataSource: [
-            { id: 1, Name: "Daryl Sweeney", Position: "CEO", parentId: null },
-            { id: 2, Name: "Guy Wooten", Position: "Chief Technical Officer", parentId: 1 }
-          ],
-          dragstart: function(e) {
-            console.log("dragstart", e.source);
+          schema: {
+            model: {
+              id: "EmployeeID",
+              parentId: "ReportsTo",
+              fields: {
+                ReportsTo: { field: "ReportsTo",  nullable: true },
+                EmployeeID: { field: "EmployeeId", type: "number" },
+                Extension: { field: "Extension", type: "number" }
+              },
+              expanded: true
+            }
           }
-        });
+        },
+        height: 540,
+        editable: {
+          move: true
+        },
+        columns: [
+          { field: "FirstName", title: "First Name", width: 220 },
+          { field: "LastName", title: "Last Name", width: 160 },
+          { field: "Position" }
+        ],
+        dragstart: function(e) {
+          console.log("dragstart", e.source);
+        }
+      });
     </script>
 
 #### Example - subscribe to the "dragstart" event after initialization
 
     <div id="treeList"></div>
     <script>
-        function dragstart(e) {
-            console.log("dragstart");
-        }
-        $("#treeList").kendoTreeList({
-          columns: [
-            { field: "Name" },
-            { field: "Position" }
-          ],
-          editable: {
-            move: true
-          },
-          dataSource: [
-            { id: 1, Name: "Daryl Sweeney", Position: "CEO", parentId: null },
-            { id: 2, Name: "Guy Wooten", Position: "Chief Technical Officer", parentId: 1 }
-          ]
-        });
+      var service = "https://demos.telerik.com/kendo-ui/service";
 
-        var treeList = $("#treeList").data("kendoTreeList");
-        treeList.bind("dragstart", dragstart);
+      function dragstart(e) {
+        console.log("dragstart");
+      }
+
+      $("#treeList").kendoTreeList({
+        dataSource: {
+          transport: {
+            read: {
+              url: service + "/EmployeeDirectory/All",
+              dataType: "jsonp"
+            }
+          },
+          schema: {
+            model: {
+              id: "EmployeeID",
+              parentId: "ReportsTo",
+              fields: {
+                ReportsTo: { field: "ReportsTo",  nullable: true },
+                EmployeeID: { field: "EmployeeId", type: "number" },
+                Extension: { field: "Extension", type: "number" }
+              },
+              expanded: true
+            }
+          }
+        },
+        height: 540,
+        editable: {
+          move: true
+        },
+        columns: [
+          { field: "FirstName", title: "First Name", width: 220 },
+          { field: "LastName", title: "Last Name", width: 160 },
+          { field: "Position" }
+        ]
+      });
+
+      var treeList = $("#treeList").data("kendoTreeList");
+      treeList.bind("dragstart", dragstart);
     </script>
 
 ### drag
@@ -4448,49 +5515,90 @@ The widget instance which fired the event.
 
 #### Example - subscribe to the "drag" event before initialization
 
-    <div id="treeList"></div>
-     <script>
-        $("#treeList").kendoTreeList({
-          columns: [
-            { field: "Name" },
-            { field: "Position" }
-          ],
-          editable: {
-            move: true
+    <div id="treelist"></div>
+    <script>
+      var service = "https://demos.telerik.com/kendo-ui/service";
+
+      $("#treelist").kendoTreeList({
+        dataSource: {
+          transport: {
+            read: {
+              url: service + "/EmployeeDirectory/All",
+              dataType: "jsonp"
+            }
           },
-          dataSource: [
-            { id: 1, Name: "Daryl Sweeney", Position: "CEO", parentId: null },
-            { id: 2, Name: "Guy Wooten", Position: "Chief Technical Officer", parentId: 1 }
-          ],
-          drag: function(e) {
-            console.log("drag", e.source, e.target);
+          schema: {
+            model: {
+              id: "EmployeeID",
+              parentId: "ReportsTo",
+              fields: {
+                ReportsTo: { field: "ReportsTo",  nullable: true },
+                EmployeeID: { field: "EmployeeId", type: "number" },
+                Extension: { field: "Extension", type: "number" }
+              },
+              expanded: true
+            }
           }
-        });
+        },
+        height: 540,
+        editable: {
+          move: true
+        },
+        columns: [
+          { field: "FirstName", title: "First Name", width: 220 },
+          { field: "LastName", title: "Last Name", width: 160 },
+          { field: "Position" }
+        ],
+        drag: function(e) {
+          console.log("dragging", e.source, e.target);
+        }
+      });
     </script>
 
 #### Example - subscribe to the "drag" event after initialization
 
     <div id="treeList"></div>
     <script>
-        function drag(e) {
-            console.log("drag");
-        }
-        $("#treeList").kendoTreeList({
-          columns: [
-            { field: "Name" },
-            { field: "Position" }
-          ],
-          editable: {
-            move: true
-          },
-          dataSource: [
-            { id: 1, Name: "Daryl Sweeney", Position: "CEO", parentId: null },
-            { id: 2, Name: "Guy Wooten", Position: "Chief Technical Officer", parentId: 1 }
-          ]
-        });
+      var service = "https://demos.telerik.com/kendo-ui/service";
 
-        var treeList = $("#treeList").data("kendoTreeList");
-        treeList.bind("drag", drag);
+      function drag(e) {
+        console.log("dragging");
+      }
+
+      $("#treeList").kendoTreeList({
+        dataSource: {
+          transport: {
+            read: {
+              url: service + "/EmployeeDirectory/All",
+              dataType: "jsonp"
+            }
+          },
+          schema: {
+            model: {
+              id: "EmployeeID",
+              parentId: "ReportsTo",
+              fields: {
+                ReportsTo: { field: "ReportsTo",  nullable: true },
+                EmployeeID: { field: "EmployeeId", type: "number" },
+                Extension: { field: "Extension", type: "number" }
+              },
+              expanded: true
+            }
+          }
+        },
+        height: 540,
+        editable: {
+          move: true
+        },
+        columns: [
+          { field: "FirstName", title: "First Name", width: 220 },
+          { field: "LastName", title: "Last Name", width: 160 },
+          { field: "Position" }
+        ]
+      });
+
+      var treeList = $("#treeList").data("kendoTreeList");
+      treeList.bind("drag", drag);
     </script>
 
 ### dragend
@@ -4517,49 +5625,90 @@ The widget instance which fired the event.
 
 #### Example - subscribe to the "dragend" event before initialization
 
-    <div id="treeList"></div>
-     <script>
-        $("#treeList").kendoTreeList({
-          columns: [
-            { field: "Name" },
-            { field: "Position" }
-          ],
-          editable: {
-            move: true
+    <div id="treelist"></div>
+    <script>
+      var service = "https://demos.telerik.com/kendo-ui/service";
+
+      $("#treelist").kendoTreeList({
+        dataSource: {
+          transport: {
+            read: {
+              url: service + "/EmployeeDirectory/All",
+              dataType: "jsonp"
+            }
           },
-          dataSource: [
-            { id: 1, Name: "Daryl Sweeney", Position: "CEO", parentId: null },
-            { id: 2, Name: "Guy Wooten", Position: "Chief Technical Officer", parentId: 1 }
-          ],
-          dragend: function(e) {
-            console.log("dragend", e.source, e.destination);
+          schema: {
+            model: {
+              id: "EmployeeID",
+              parentId: "ReportsTo",
+              fields: {
+                ReportsTo: { field: "ReportsTo",  nullable: true },
+                EmployeeID: { field: "EmployeeId", type: "number" },
+                Extension: { field: "Extension", type: "number" }
+              },
+              expanded: true
+            }
           }
-        });
+        },
+        height: 540,
+        editable: {
+          move: true
+        },
+        columns: [
+          { field: "FirstName", title: "First Name", width: 220 },
+          { field: "LastName", title: "Last Name", width: 160 },
+          { field: "Position" }
+        ],
+        dragend: function(e) {
+          console.log("drag ended", e.source, e.destination);
+        }
+      });
     </script>
 
 #### Example - subscribe to the "dragend" event after initialization
 
     <div id="treeList"></div>
     <script>
-        function dragend(e) {
-            console.log("dragend");
-        }
-        $("#treeList").kendoTreeList({
-          columns: [
-            { field: "Name" },
-            { field: "Position" }
-          ],
-          editable: {
-            move: true
-          },
-          dataSource: [
-            { id: 1, Name: "Daryl Sweeney", Position: "CEO", parentId: null },
-            { id: 2, Name: "Guy Wooten", Position: "Chief Technical Officer", parentId: 1 }
-          ]
-        });
+      var service = "https://demos.telerik.com/kendo-ui/service";
 
-        var treeList = $("#treeList").data("kendoTreeList");
-        treeList.bind("dragend", dragend);
+      function dragend(e) {
+        console.log("drag ended");
+      }
+
+      $("#treeList").kendoTreeList({
+        dataSource: {
+          transport: {
+            read: {
+              url: service + "/EmployeeDirectory/All",
+              dataType: "jsonp"
+            }
+          },
+          schema: {
+            model: {
+              id: "EmployeeID",
+              parentId: "ReportsTo",
+              fields: {
+                ReportsTo: { field: "ReportsTo",  nullable: true },
+                EmployeeID: { field: "EmployeeId", type: "number" },
+                Extension: { field: "Extension", type: "number" }
+              },
+              expanded: true
+            }
+          }
+        },
+        height: 540,
+        editable: {
+          move: true
+        },
+        columns: [
+          { field: "FirstName", title: "First Name", width: 220 },
+          { field: "LastName", title: "Last Name", width: 160 },
+          { field: "Position" }
+        ]
+      });
+
+      var treeList = $("#treeList").data("kendoTreeList");
+      treeList.bind("dragend", dragend);
     </script>
 
 ### drop
@@ -4605,49 +5754,91 @@ As a general rule, use `preventDefault` to manually handle the drag&drop operati
 
 #### Example - subscribe to the "drop" event before initialization
 
-    <div id="treeList"></div>
-     <script>
-        $("#treeList").kendoTreeList({
-          columns: [
-            { field: "Name" },
-            { field: "Position" }
-          ],
-          editable: {
-            move: true
+    <div id="treelist"></div>
+    <script>
+      var service = "https://demos.telerik.com/kendo-ui/service";
+
+      $("#treelist").kendoTreeList({
+        dataSource: {
+          transport: {
+            read: {
+              url: service + "/EmployeeDirectory/All",
+              dataType: "jsonp"
+            }
           },
-          dataSource: [
-            { id: 1, Name: "Daryl Sweeney", Position: "CEO", parentId: null },
-            { id: 2, Name: "Guy Wooten", Position: "Chief Technical Officer", parentId: 1 }
-          ],
-          drop: function(e) {
-            console.log("drop", e.source, e.destination, e.valid);
+          schema: {
+            model: {
+              id: "EmployeeID",
+              parentId: "ReportsTo",
+              fields: {
+                ReportsTo: { field: "ReportsTo",  nullable: true },
+                EmployeeID: { field: "EmployeeId", type: "number" },
+                Extension: { field: "Extension", type: "number" }
+              },
+              expanded: true
+            }
           }
-        });
+        },
+        height: 540,
+        editable: {
+          move: true
+        },
+        columns: [
+          { field: "FirstName", title: "First Name", width: 220 },
+          { field: "LastName", title: "Last Name", width: 160 },
+          { field: "Position" }
+        ],
+        drop: function(e) {
+          console.log("drop", e.source, e.destination, e.valid);
+        }
+      });
     </script>
 
 #### Example - subscribe to the "drop" event after initialization
 
     <div id="treeList"></div>
     <script>
-        function drop(e) {
-            console.log("drop");
-        }
-        $("#treeList").kendoTreeList({
-          columns: [
-            { field: "Name" },
-            { field: "Position" }
-          ],
-          editable: {
-            move: true
-          },
-          dataSource: [
-            { id: 1, Name: "Daryl Sweeney", Position: "CEO", parentId: null },
-            { id: 2, Name: "Guy Wooten", Position: "Chief Technical Officer", parentId: 1 }
-          ]
-        });
+      var service = "https://demos.telerik.com/kendo-ui/service";
 
-        var treeList = $("#treeList").data("kendoTreeList");
-        treeList.bind("drop", drop);
+      function drop(e) {
+        debugger
+        console.log("row dropped");
+      }
+
+      $("#treeList").kendoTreeList({
+        dataSource: {
+          transport: {
+            read: {
+              url: service + "/EmployeeDirectory/All",
+              dataType: "jsonp"
+            }
+          },
+          schema: {
+            model: {
+              id: "EmployeeID",
+              parentId: "ReportsTo",
+              fields: {
+                ReportsTo: { field: "ReportsTo",  nullable: true },
+                EmployeeID: { field: "EmployeeId", type: "number" },
+                Extension: { field: "Extension", type: "number" }
+              },
+              expanded: true
+            }
+          }
+        },
+        height: 540,
+        editable: {
+          move: true
+        },
+        columns: [
+          { field: "FirstName", title: "First Name", width: 220 },
+          { field: "LastName", title: "Last Name", width: 160 },
+          { field: "Position" }
+        ]
+      });
+
+      var treeList = $("#treeList").data("kendoTreeList");
+      treeList.bind("drop", drop);
     </script>
 
 ### edit
@@ -4672,48 +5863,114 @@ The widget instance which fired the event.
 
 #### Example - subscribe to the "edit" event before initialization
 
-    <div id="treeList"></div>
-     <script>
-        $("#treeList").kendoTreeList({
-          columns: [
-            { field: "Name" },
-            { field: "Position" },
-            { command: [ "edit" ] }
-          ],
-          editable: true,
-          dataSource: [
-            { id: 1, Name: "Daryl Sweeney", Position: "CEO", parentId: null },
-            { id: 2, Name: "Guy Wooten", Position: "Chief Technical Officer", parentId: 1 }
-          ],
-          edit: function(e) {
-            console.log("edit");
+    <div id="treelist"></div>
+
+    <script>
+      var crudServiceBaseUrl = "https://demos.telerik.com/kendo-ui/service";
+
+      $("#treelist").kendoTreeList({
+        dataSource: {
+          transport: {
+            read:  {
+              url: crudServiceBaseUrl + "/EmployeeDirectory/All",
+              dataType: "jsonp"
+            },
+            update: {
+              url: crudServiceBaseUrl + "/EmployeeDirectory/Update",
+              dataType: "jsonp"
+            },
+            parameterMap: function(options, operation) {
+              if (operation !== "read" && options.models) {
+                return {models: kendo.stringify(options.models)};
+              }
+            }
+          },
+          batch: true,
+          schema: {
+            model: {
+              id: "EmployeeId",
+              parentId: "ReportsTo",
+              fields: {
+                EmployeeId: { type: "number", editable: false, nullable: false },
+                ReportsTo: { nullable: true, type: "number" },
+                FirstName: { validation: { required: true } },
+                LastName: { validation: { required: true } },
+                Position: { type: "string" }
+              },
+              expanded: true
+            }
           }
-        });
+        },
+        height: 300,
+        editable: true,
+        columns: [
+          { field: "FirstName", expandable: true, title: "First Name", width: 220 },
+          { field: "LastName", title: "Last Name", width: 100 },
+          { field: "Position" },
+          { command: ["edit"] }
+        ],
+        edit: function(e) {
+          console.log("edit");
+        }
+      });
     </script>
 
 #### Example - subscribe to the "edit" event after initialization
 
-    <div id="treeList"></div>
-     <script>
-        function edit(e) {
-            console.log("edit");
-        }
-        $("#treeList").kendoTreeList({
-          columns: [
-            { field: "Name" },
-            { field: "Position" },
-            { command: [ "edit" ] }
-          ],
-          editable: true,
-          dataSource: [
-            { id: 1, Name: "Daryl Sweeney", Position: "CEO", parentId: null },
-            { id: 2, Name: "Guy Wooten", Position: "Chief Technical Officer", parentId: 1 }
-          ]
-        });
+    <div id="treelist"></div>
 
-        var treeList = $("#treeList").data("kendoTreeList");
-        treeList.bind("edit", edit);
-        treeList.dataSource.fetch();
+    <script>
+      var crudServiceBaseUrl = "https://demos.telerik.com/kendo-ui/service";
+
+      function edit(e) {
+        console.log("edit");
+      }
+
+      $("#treelist").kendoTreeList({
+        dataSource: {
+          transport: {
+            read:  {
+              url: crudServiceBaseUrl + "/EmployeeDirectory/All",
+              dataType: "jsonp"
+            },
+            update: {
+              url: crudServiceBaseUrl + "/EmployeeDirectory/Update",
+              dataType: "jsonp"
+            },
+            parameterMap: function(options, operation) {
+              if (operation !== "read" && options.models) {
+                return {models: kendo.stringify(options.models)};
+              }
+            }
+          },
+          batch: true,
+          schema: {
+            model: {
+              id: "EmployeeId",
+              parentId: "ReportsTo",
+              fields: {
+                EmployeeId: { type: "number", editable: false, nullable: false },
+                ReportsTo: { nullable: true, type: "number" },
+                FirstName: { validation: { required: true } },
+                LastName: { validation: { required: true } },
+                Position: { type: "string" }
+              },
+              expanded: true
+            }
+          }
+        },
+        height: 300,
+        editable: true,
+        columns: [
+          { field: "FirstName", expandable: true, title: "First Name", width: 220 },
+          { field: "LastName", title: "Last Name", width: 100 },
+          { field: "Position" },
+          { command: ["edit"] }
+        ]
+      });
+
+      var treeList = $("#treelist").data("kendoTreeList");
+      treeList.bind("edit", edit);
     </script>
 
 ### excelExport
@@ -4742,44 +5999,47 @@ If invoked the treelist will not save the generated file.
 
     <div id="treeList"></div>
     <script>
-    $("#treeList").kendoTreeList({
-      toolbar: ["excel"],
-      columns: [
-        { field: "Name" },
-        { field: "Position" }
-      ],
-      dataSource: [
-        { id: 1, Name: "Daryl Sweeney", Position: "CEO", parentId: null },
-        { id: 2, Name: "Guy Wooten", Position: "Chief Technical Officer", parentId: 1 }
-      ],
-      excelExport: function(e) {
-        e.workbook.fileName = "Employees.xslx";
-      }
-    });
-    var treelist = $("#treelist").data("kendoTreeList");
-    treelist.saveAsExcel();
+      $("#treeList").kendoTreeList({
+        toolbar: ["excel"],
+        columns: [
+          { field: "Name" },
+          { field: "Position" }
+        ],
+        dataSource: [
+          { id: 1, Name: "Daryl Sweeney", Position: "CEO", parentId: null },
+          { id: 2, Name: "Guy Wooten", Position: "Chief Technical Officer", parentId: 1 }
+        ],
+        excelExport: function(e) {
+          e.workbook.fileName = "Employees.xlsx";
+        }
+      });
+      var treeList = $("#treeList").data("kendoTreeList");
+      treeList.saveAsExcel();
     </script>
 
 #### Example - subscribe to the "excelExport" event after initialization
 
     <div id="treeList"></div>
     <script>
-    $("#treeList").kendoTreeList({
-      toolbar: ["excel"],
-      columns: [
-        { field: "Name" },
-        { field: "Position" }
-      ],
-      dataSource: [
-        { id: 1, Name: "Daryl Sweeney", Position: "CEO", parentId: null },
-        { id: 2, Name: "Guy Wooten", Position: "Chief Technical Officer", parentId: 1 }
-      ],
-    });
-    var treelist = $("#treelist").data("kendoTreeList");
-    treelist.bind("excelExport", function(e) {
-        e.workbook.fileName = "Employees.xslx";
-    });
-    treelist.saveAsExcel();
+      $("#treeList").kendoTreeList({
+        toolbar: ["excel"],
+        columns: [
+          { field: "Name" },
+          { field: "Position" }
+        ],
+        dataSource: [
+          { id: 1, Name: "Daryl Sweeney", Position: "CEO", parentId: null },
+          { id: 2, Name: "Guy Wooten", Position: "Chief Technical Officer", parentId: 1 }
+        ],
+        excelExport: function(e) {
+          e.workbook.fileName = "Employees.xlsx";
+        }
+      });
+      var treeList = $("#treeList").data("kendoTreeList");
+      treeList.bind("excelExport", function(e) {
+        e.workbook.fileName = "Employees.xlsx";
+      });
+      treeList.saveAsExcel();
     </script>
 
 ### expand
@@ -4824,24 +6084,23 @@ If invoked prevents the expand action. The child table rows will not be shown.
 #### Example - subscribe to the "expand" event after initialization
 
     <div id="treeList"></div>
-     <script>
-        function expand(e) {
-            console.log("expand");
-        }
-        $("#treeList").kendoTreeList({
-          columns: [
-            { field: "Name" },
-            { field: "Position" }
-          ],
-          dataSource: [
-            { id: 1, Name: "Daryl Sweeney", Position: "CEO", parentId: null },
-            { id: 2, Name: "Guy Wooten", Position: "Chief Technical Officer", parentId: 1 }
-          ]
-        });
+    <script>
+      function expand(e) {
+        console.log("expand");
+      }
+      $("#treeList").kendoTreeList({
+        columns: [
+          { field: "Name" },
+          { field: "Position" }
+        ],
+        dataSource: [
+          { id: 1, Name: "Daryl Sweeney", Position: "CEO", parentId: null },
+          { id: 2, Name: "Guy Wooten", Position: "Chief Technical Officer", parentId: 1 }
+        ]
+      });
 
-        var treeList = $("#treeList").data("kendoTreeList");
-        treeList.bind("expand", expand);
-        treeList.dataSource.fetch();
+      var treeList = $("#treeList").data("kendoTreeList");
+      treeList.bind("expand", expand);
     </script>
 
 ### filterMenuInit
@@ -4866,61 +6125,67 @@ The widget instance which fired the event.
 
 #### Example - subscribe to the "filterMenuInit" event during initialization
 
-    <div id="treelist"></div>
+    <div id="treeList"></div>
     <script>
-        $("#treelist").kendoTreeList({
-          columns: [
-            { field: "name" }
-          ],
-          dataSource: [
-            { name: "Jane Doe"},
-            { name: "John Doe"}
-          ],
-          filterable: true,
-          filterMenuInit: function(e) {
-            if (e.field == "name") {
-              var firstValueDropDown = e.container.find("select:eq(0)").data("kendoDropDownList");
-              firstValueDropDown.value("contains");
-              firstValueDropDown.trigger("change");
+      $("#treeList").kendoTreeList({
+        columns: [
+          { field: "id" },
+          { field: "name" },
+          { field: "age" }
+        ],
+        dataSource: [
+          { id: 1, parentId: null, name: "Jane Doe", age: 22, expanded: true },
+          { id: 2, parentId: 1, name: "John Doe", age: 24 },
+          { id: 3, parentId: 1, name: "Jenny Doe", age: 3 }
+        ],
+        filterable: true,
+        filterMenuInit: function(e) {
+          if (e.field == "name") {
+            var firstValueDropDown = e.container.find("select:eq(0)").data("kendoDropDownList");
+            firstValueDropDown.value("contains");
+            firstValueDropDown.trigger("change");
 
-              var logicDropDown = e.container.find("select:eq(1)").data("kendoDropDownList");
-              logicDropDown.value("or");
-              logicDropDown.trigger("change");
+            var logicDropDown = e.container.find("select:eq(1)").data("kendoDropDownList");
+            logicDropDown.value("or");
+            logicDropDown.trigger("change");
 
-              var secondValueDropDown = e.container.find("select:eq(2)").data("kendoDropDownList");
-              secondValueDropDown.value("contains");
-              secondValueDropDown.trigger("change");
-            }
+            var secondValueDropDown = e.container.find("select:eq(2)").data("kendoDropDownList");
+            secondValueDropDown.value("contains");
+            secondValueDropDown.trigger("change");
           }
-        });
+        }
+      });
     </script>
 
 #### Example - subscribe to the "filterMenuInit" event during initialization and change the default operators
 
     <div id="treelist"></div>
     <script>
-        function treelist_filterMenuInit(e) {
-          if (e.field == "name") {
-            var firstValueDropDown = e.container.find("select:eq(0)").data("kendoDropDownList");
-            firstValueDropDown.value("contains");
-            var logicDropDown = e.container.find("select:eq(1)").data("kendoDropDownList");
-            logicDropDown.value("or");
-            var secondValueDropDown = e.container.find("select:eq(2)").data("kendoDropDownList");
-            secondValueDropDown.value("contains");
-          }
+      function treelist_filterMenuInit(e) {
+        if (e.field == "name") {
+          var firstValueDropDown = e.container.find("select:eq(0)").data("kendoDropDownList");
+          firstValueDropDown.value("contains");
+          var logicDropDown = e.container.find("select:eq(1)").data("kendoDropDownList");
+          logicDropDown.value("or");
+          var secondValueDropDown = e.container.find("select:eq(2)").data("kendoDropDownList");
+          secondValueDropDown.value("contains");
         }
-        $("#treelist").kendoTreeList({
-          columns: [
-            { field: "name" }
-          ],
-          dataSource: [
-            { name: "Jane Doe"},
-            { name: "John Doe"}
-          ],
-          filterable: true
-        });
-        var treelist = $("#treelist").data("kendoTreeList");
-        treelist.bind("filterMenuInit", treelist_filterMenuInit);
+      }
+      $("#treelist").kendoTreeList({
+        columns: [
+          { field: "id" },
+          { field: "name" },
+          { field: "age" }
+        ],
+        dataSource: [
+          { id: 1, parentId: null, name: "Jane Doe", age: 22, expanded: true },
+          { id: 2, parentId: 1, name: "John Doe", age: 24 },
+          { id: 3, parentId: 1, name: "Jenny Doe", age: 3 }
+        ],
+        filterable: true
+      });
+      var treelist = $("#treelist").data("kendoTreeList");
+      treelist.bind("filterMenuInit", treelist_filterMenuInit);
     </script>
 
 ### pdfExport
@@ -4945,42 +6210,44 @@ A promise that will be resolved when the export completes.
 
     <div id="treeList"></div>
     <script>
-    $("#treeList").kendoTreeList({
-      toolbar: ["pdf"],
-      columns: [
-        { field: "Name" },
-        { field: "Position" }
-      ],
-      dataSource: [
-        { id: 1, Name: "Daryl Sweeney", Position: "CEO", parentId: null },
-        { id: 2, Name: "Guy Wooten", Position: "Chief Technical Officer", parentId: 1 }
-      ],
-      pdfExport: function(e) {
-      }
-    });
-    var treelist = $("#treelist").data("kendoTreeList");
-    treelist.saveAsPDF();
+      $("#treeList").kendoTreeList({
+        toolbar: ["pdf"],
+        columns: [
+          { field: "Name" },
+          { field: "Position" }
+        ],
+        dataSource: [
+          { id: 1, Name: "Daryl Sweeney", Position: "CEO", parentId: null },
+          { id: 2, Name: "Guy Wooten", Position: "Chief Technical Officer", parentId: 1 }
+        ],
+        pdfExport: function(e) {
+          console.log("exporting PDF");
+        }
+      });
+      var treelist = $("#treeList").data("kendoTreeList");
+      treelist.saveAsPDF();
     </script>
 
 #### Example - subscribe to the "pdfExport" event after initialization
 
     <div id="treeList"></div>
     <script>
-    $("#treeList").kendoTreeList({
-      toolbar: ["pdf"],
-      columns: [
-        { field: "Name" },
-        { field: "Position" }
-      ],
-      dataSource: [
-        { id: 1, Name: "Daryl Sweeney", Position: "CEO", parentId: null },
-        { id: 2, Name: "Guy Wooten", Position: "Chief Technical Officer", parentId: 1 }
-      ],
-    });
-    var treelist = $("#treelist").data("kendoTreeList");
-    treelist.bind("pdfExport", function(e) {
-    });
-    treelist.saveAsPDF();
+      $("#treeList").kendoTreeList({
+        toolbar: ["pdf"],
+        columns: [
+          { field: "Name" },
+          { field: "Position" }
+        ],
+        dataSource: [
+          { id: 1, Name: "Daryl Sweeney", Position: "CEO", parentId: null },
+          { id: 2, Name: "Guy Wooten", Position: "Chief Technical Officer", parentId: 1 }
+        ],
+      });
+      var treelist = $("#treeList").data("kendoTreeList");
+      treelist.bind("pdfExport", function(e) {
+        console.log("exporting pdf");
+      });
+      treelist.saveAsPDF();
     </script>
 
 ### remove
@@ -5009,46 +6276,110 @@ If invoked prevents the removal of the data item. The table rows will remain unc
 
 #### Example - subscribe to the "remove" event before initialization
 
-    <div id="treeList"></div>
-     <script>
-        $("#treeList").kendoTreeList({
-          columns: [
-            { field: "Name" },
-            { field: "Position" },
-            { command: [ "destroy" ] }
-          ],
-          dataSource: [
-            { id: 1, Name: "Daryl Sweeney", Position: "CEO", parentId: null },
-            { id: 2, Name: "Guy Wooten", Position: "Chief Technical Officer", parentId: 1 }
-          ],
-          remove: function(e) {
-            console.log("remove");
+    <div id="treelist"></div>
+    <script>
+
+      $("#treelist").kendoTreeList({
+        dataSource: {
+          transport: {
+            read: {
+              url: "https://demos.telerik.com/kendo-ui/service/EmployeeDirectory/All",
+              dataType: "jsonp"
+            },
+            destroy: {
+              url: "https://demos.telerik.com/kendo-ui/service/EmployeeDirectory/Destroy",
+              dataType: "jsonp"
+            },
+            parameterMap: function(options, operation) {
+              if (operation !== "read" && options.models) {
+                return {models: kendo.stringify(options.models)};
+              }
+            }
+          },
+          batch: true,
+          schema: {
+            model: {
+              id: "EmployeeId",
+              parentId: "ReportsTo",
+              fields: {
+                EmployeeId: { type: "number", editable: false, nullable: false },
+                ReportsTo: { nullable: true, type: "number" },
+                HireDate: {type: "date"},
+                BirthDate: {type: "date"}
+              },
+              expanded: true
+            }
           }
-        });
+        },
+        toolbar: [ "create" ],
+        editable: "popup",
+        height: 540,
+        columns: [
+          { field: "FirstName", expandable: true, title: "First Name", width: 250 },
+          { field: "LastName", title: "Last Name" },
+          { field: "Position" },
+          { command: ["destroy"] }
+        ],
+        remove: function(e) {
+          console.log("remove");
+        }
+      });
     </script>
 
 #### Example - subscribe to the "remove" event after initialization
 
     <div id="treeList"></div>
-     <script>
-        function remove(e) {
-            console.log("remove");
-        }
-        $("#treeList").kendoTreeList({
-          columns: [
-            { field: "Name" },
-            { field: "Position" },
-            { command: [ "destroy" ] }
-          ],
-          dataSource: [
-            { id: 1, Name: "Daryl Sweeney", Position: "CEO", parentId: null },
-            { id: 2, Name: "Guy Wooten", Position: "Chief Technical Officer", parentId: 1 }
-          ]
-        });
+    <script>
 
-        var treeList = $("#treeList").data("kendoTreeList");
-        treeList.bind("remove", remove);
-        treeList.dataSource.fetch();
+      $("#treeList").kendoTreeList({
+        dataSource: {
+          transport: {
+            read: {
+              url: "https://demos.telerik.com/kendo-ui/service/EmployeeDirectory/All",
+              dataType: "jsonp"
+            },
+            destroy: {
+              url: "https://demos.telerik.com/kendo-ui/service/EmployeeDirectory/Destroy",
+              dataType: "jsonp"
+            },
+            parameterMap: function(options, operation) {
+              if (operation !== "read" && options.models) {
+                return {models: kendo.stringify(options.models)};
+              }
+            }
+          },
+          batch: true,
+          schema: {
+            model: {
+              id: "EmployeeId",
+              parentId: "ReportsTo",
+              fields: {
+                EmployeeId: { type: "number", editable: false, nullable: false },
+                ReportsTo: { nullable: true, type: "number" },
+                HireDate: {type: "date"},
+                BirthDate: {type: "date"}
+              },
+              expanded: true
+            }
+          }
+        },
+        toolbar: [ "create" ],
+        editable: "popup",
+        height: 540,
+        columns: [
+          { field: "FirstName", expandable: true, title: "First Name", width: 250 },
+          { field: "LastName", title: "Last Name" },
+          { field: "Position" },
+          { command: ["destroy"] }
+        ]
+      });
+
+      function remove(e) {
+        console.log("remove");
+      }
+
+      var treeList = $("#treeList").data("kendoTreeList");
+      treeList.bind("remove", remove);
     </script>
 
 ### save
@@ -5074,47 +6405,107 @@ The widget instance which fired the event.
 #### Example - subscribe to the "save" event before initialization
 
     <div id="treeList"></div>
-     <script>
-        $("#treeList").kendoTreeList({
-          columns: [
-            { field: "Name" },
-            { field: "Position" },
-            { command: [ "edit" ] }
-          ],
-          editable: true,
-          dataSource: [
-            { id: 1, Name: "Daryl Sweeney", Position: "CEO", parentId: null },
-            { id: 2, Name: "Guy Wooten", Position: "Chief Technical Officer", parentId: 1 }
-          ],
-          save: function(e) {
-            console.log("save");
+    <script>
+
+      $("#treeList").kendoTreeList({
+        dataSource: {
+          transport: {
+            read: {
+              url: "https://demos.telerik.com/kendo-ui/service/EmployeeDirectory/All",
+              dataType: "jsonp"
+            },
+            update: {
+              url: "https://demos.telerik.com/kendo-ui/service/EmployeeDirectory/Update",
+              dataType: "jsonp"
+            },
+            parameterMap: function(options, operation) {
+              if (operation !== "read" && options.models) {
+                return {models: kendo.stringify(options.models)};
+              }
+            }
+          },
+          batch: true,
+          schema: {
+            model: {
+              id: "EmployeeId",
+              parentId: "ReportsTo",
+              fields: {
+                EmployeeId: { type: "number", editable: false, nullable: false },
+                ReportsTo: { nullable: true, type: "number" },
+                HireDate: {type: "date"},
+                BirthDate: {type: "date"}
+              },
+              expanded: true
+            }
           }
-        });
+        },
+        editable: "popup",
+        height: 540,
+        columns: [
+          { field: "FirstName", expandable: true, title: "First Name", width: 250 },
+          { field: "LastName", title: "Last Name" },
+          { field: "Position" },
+          { command: ["edit"] }
+        ],
+        save: function(e){
+          console.log("save row");
+        }
+      });
     </script>
 
 #### Example - subscribe to the "save" event after initialization
 
     <div id="treeList"></div>
-     <script>
-        function save(e) {
-            console.log("save");
-        }
-        $("#treeList").kendoTreeList({
-          columns: [
-            { field: "Name" },
-            { field: "Position" },
-            { command: [ "edit" ] }
-          ],
-          editable: true,
-          dataSource: [
-            { id: 1, Name: "Daryl Sweeney", Position: "CEO", parentId: null },
-            { id: 2, Name: "Guy Wooten", Position: "Chief Technical Officer", parentId: 1 }
-          ]
-        });
+    <script>
 
-        var treeList = $("#treeList").data("kendoTreeList");
-        treeList.bind("save", save);
-        treeList.dataSource.fetch();
+      $("#treeList").kendoTreeList({
+        dataSource: {
+          transport: {
+            read: {
+              url: "https://demos.telerik.com/kendo-ui/service/EmployeeDirectory/All",
+              dataType: "jsonp"
+            },
+            update: {
+              url: "https://demos.telerik.com/kendo-ui/service/EmployeeDirectory/Update",
+              dataType: "jsonp"
+            },
+            parameterMap: function(options, operation) {
+              if (operation !== "read" && options.models) {
+                return {models: kendo.stringify(options.models)};
+              }
+            }
+          },
+          batch: true,
+          schema: {
+            model: {
+              id: "EmployeeId",
+              parentId: "ReportsTo",
+              fields: {
+                EmployeeId: { type: "number", editable: false, nullable: false },
+                ReportsTo: { nullable: true, type: "number" },
+                HireDate: {type: "date"},
+                BirthDate: {type: "date"}
+              },
+              expanded: true
+            }
+          }
+        },
+        editable: "popup",
+        height: 540,
+        columns: [
+          { field: "FirstName", expandable: true, title: "First Name", width: 250 },
+          { field: "LastName", title: "Last Name" },
+          { field: "Position" },
+          { command: ["edit"] }
+        ]
+      });
+
+      function save(e) {
+        console.log("save row");
+      }
+
+      var treeList = $("#treeList").data("kendoTreeList");
+      treeList.bind("save", save);
     </script>
 
 ### columnShow
@@ -5137,46 +6528,50 @@ The widget instance which fired the event.
 
     <div id="treeList"></div>
     <script>
-        $("#treeList").kendoTreeList({
-            columns: [
-                { field: "name" },
-                { field: "age" }
-            ],
-            dataSource: {
-                data: [
-                    { id: 1, parentId: null, name: "Jane Doe", age: 22 },
-                    { id: 2, parentId: 1, name: "John Doe", age: 24 }
-                ]
-            },
-            columnShow: function(e) {
-                console.log(e.column.field); // displays the field of the hidden column
-            }
-        });
+      $("#treeList").kendoTreeList({
+        columns: [
+          { field: "id" },
+          { field: "name" },
+          { field: "age" }
+        ],
+        dataSource: {
+          data: [
+            { id: 1, parentId: null, name: "Jane Doe", age: 22 },
+            { id: 2, parentId: 1, name: "John Doe", age: 24 }
+          ]
+        },
+        columnMenu: true,
+        columnShow: function(e) {
+          console.log(e.column.field); // displays the field of the shown column
+        }
+      });
     </script>
 
 #### Example - subscribe to the "columnShow" event after initialization
 
     <div id="treeList"></div>
     <script>
-        function treelist_columnShow(e) {
-            console.log(e.column.field); // displays the field of the hidden column
-        }
+      function treelist_columnShow(e) {
+        console.log(e.column.field); // displays the field of the shown column
+      }
 
-        $("#treeList").kendoTreeList({
-            columns: [
-                { field: "name" },
-                { field: "age" }
-            ],
-            dataSource: {
-                data: [
-                    { id: 1, parentId: null, name: "Jane Doe", age: 22 },
-                    { id: 2, parentId: 1, name: "John Doe", age: 24 }
-                ]
-            }
-        });
-
-        var treelist = $("#treeList").data("kendoTreeList");
-        treelist.bind("columnShow", treelist_columnShow);
+      $("#treeList").kendoTreeList({
+        columns: [
+          { field: "id" },
+          { field: "name" },
+          { field: "age" }
+        ],
+        dataSource: {
+          data: [
+            { id: 1, parentId: null, name: "Jane Doe", age: 22 },
+            { id: 2, parentId: 1, name: "John Doe", age: 24 }
+          ]
+        },
+        columnMenu: true
+      });
+      
+      var treelist = $("#treeList").data("kendoTreeList");
+      treelist.bind("columnShow", treelist_columnShow);
     </script>
 
 ### columnHide
@@ -5199,46 +6594,50 @@ The widget instance which fired the event.
 
     <div id="treeList"></div>
     <script>
-        $("#treeList").kendoTreeList({
-            columns: [
-                { field: "name" },
-                { field: "age" }
-            ],
-            dataSource: {
-                data: [
-                    { id: 1, parentId: null, name: "Jane Doe", age: 22 },
-                    { id: 2, parentId: 1, name: "John Doe", age: 24 }
-                ]
-            },
-            columnHide: function(e) {
-                console.log(e.column.field); // displays the field of the visible column
-            }
-        });
+      $("#treeList").kendoTreeList({
+        columns: [
+          { field: "id" },
+          { field: "name" },
+          { field: "age" }
+        ],
+        dataSource: {
+          data: [
+            { id: 1, parentId: null, name: "Jane Doe", age: 22 },
+            { id: 2, parentId: 1, name: "John Doe", age: 24 }
+          ]
+        },
+        columnMenu: true,
+        columnHide: function(e){
+          console.log(e.column.field); // displays the field of the hidden column
+        }
+      });
     </script>
 
 #### Example - subscribe to the "columnHide" event after initialization
 
     <div id="treeList"></div>
     <script>
-        function treelist_columnHide(e) {
-            console.log(e.column.field); // displays the field of the visible column
-        }
+      function treelist_columnHide(e) {
+        console.log(e.column.field); // displays the field of the hidden column
+      }
 
-        $("#treeList").kendoTreeList({
-            columns: [
-                { field: "name" },
-                { field: "age" }
-            ],
-            dataSource: {
-                data: [
-                    { id: 1, parentId: null, name: "Jane Doe", age: 22 },
-                    { id: 2, parentId: 1, name: "John Doe", age: 24 }
-                ]
-            }
-        });
-
-        var treelist = $("#treeList").data("kendoTreeList");
-        treelist.bind("columnHide", treelist_columnHide);
+      $("#treeList").kendoTreeList({
+        columns: [
+          { field: "id" },
+          { field: "name" },
+          { field: "age" }
+        ],
+        dataSource: {
+          data: [
+            { id: 1, parentId: null, name: "Jane Doe", age: 22 },
+            { id: 2, parentId: 1, name: "John Doe", age: 24 }
+          ]
+        },
+        columnMenu: true
+      });
+      
+      var treelist = $("#treeList").data("kendoTreeList");
+      treelist.bind("columnHide", treelist_columnHide);
     </script>
 
 ### columnReorder
@@ -5354,7 +6753,7 @@ The widget instance which fired the event.
             },
             resizable: true,
             columnResize: function(e) {
-                console.log(e.column.field, e.newWidth, e.oldWidth);
+                console.log(e.column[0].field, e.newWidth, e.oldWidth);
             }
         });
     </script>
@@ -5364,7 +6763,7 @@ The widget instance which fired the event.
     <div id="treeList"></div>
     <script>
         function treelist_columnResize(e) {
-          console.log(e.column.field, e.newWidth, e.oldWidth);
+          console.log(e.column[0].field, e.newWidth, e.oldWidth);
         }
 
         $("#treeList").kendoTreeList({
@@ -5409,62 +6808,62 @@ The widget instance which fired the event.
 
     <div id="treeList"></div>
     <script>
-        $("#treeList").kendoTreeList({
-            columns: [
-                { field: "name" },
-                { field: "age" }
-            ],
-            dataSource: {
-                data: [
-                    { id: 1, parentId: null, name: "Jane Doe", age: 22 },
-                    { id: 2, parentId: 1, name: "John Doe", age: 24 }
-                ]
-            },
-            columnMenu: true,
-            columnMenuInit: function(e) {
-                var menu = e.container.find(".k-menu").data("kendoMenu");
-                var field = e.field;
-                menu.append({ text: "Custom" });
-                menu.bind("select", function(e) {
-                    if ($(e.item).text() == "Custom") {
-                        console.log("Custom button for", field);
-                    }
-                });
+      $("#treeList").kendoTreeList({
+        columns: [
+          { field: "name" },
+          { field: "age" }
+        ],
+        dataSource: {
+          data: [
+            { id: 1, parentId: null, name: "Jane Doe", age: 22 },
+            { id: 2, parentId: 1, name: "John Doe", age: 24 }
+          ]
+        },
+        columnMenu: true,
+        columnMenuInit: function(e) {
+          var menu = e.container.find(".k-menu").data("kendoMenu");
+          var field = e.field;
+          menu.append({ text: "Custom" });
+          menu.bind("select", function(e) {
+            if ($(e.item).text() == "Custom") {
+              console.log("Custom button for", field);
             }
-        });
+          });
+        }
+      });
     </script>
 
 #### Example - subscribe to the "columnMenuInit" event after initialization
 
     <div id="treeList"></div>
     <script>
-        function treelist_columnMenuInit(e) {
-            var menu = e.container.find(".k-menu").data("kendoMenu");
-            var field = e.field;
-            menu.append({ text: "Custom" });
-            menu.bind("select", function(e) {
-                if ($(e.item).text() == "Custom") {
-                    console.log("Custom button for", field);
-                }
-            });
-        }
-
-        $("#treeList").kendoTreeList({
-            columns: [
-                { field: "name" },
-                { field: "age" }
-            ],
-            dataSource: {
-                data: [
-                    { id: 1, parentId: null, name: "Jane Doe", age: 22 },
-                    { id: 2, parentId: 1, name: "John Doe", age: 24 }
-                ]
-            },
-            columnMenu: true
+      function treelist_columnMenuInit(e) {
+        var menu = e.container.find(".k-menu").data("kendoMenu");
+        var field = e.field;
+        menu.append({ text: "Custom" });
+        menu.bind("select", function(e) {
+          if ($(e.item).text() == "Custom") {
+            console.log("Custom button for", field);
+          }
         });
+      }
 
-        var treelist = $("#treeList").data("kendoTreeList");
-        treelist.bind("columnMenuInit", treelist_columnMenuInit);
+      $("#treeList").kendoTreeList({
+        columns: [
+          { field: "name" },
+          { field: "age" }
+        ],
+        dataSource: {
+          data: [
+            { id: 1, parentId: null, name: "Jane Doe", age: 22 },
+            { id: 2, parentId: 1, name: "John Doe", age: 24 }
+          ]
+        },
+        columnMenu: true
+      });
+
+      var treelist = $("#treeList").data("kendoTreeList");
+      treelist.bind("columnMenuInit", treelist_columnMenuInit);
     </script>
 
 ### columnLock
@@ -5479,58 +6878,58 @@ The event handler function context (available via the `this` keyword) will be se
 
 A JavaScript object which represents the [column](#configuration-columns) configuration.
 
-##### e.sender `kendo.ui.Grid`
+##### e.sender `kendo.ui.TreeList`
 
 The widget instance which fired the event.
 
 #### Example - subscribe to the "columnLock" event during initialization
 
-    <div id="treeList"></div>
+    <div id="treeList" style="width: 400px"></div>
     <script>
-        $("#treeList").kendoTreeList({
-            columns: [
-                { field: "id", locked: true, width: 100},
-                { field: "name", width: 200 },
-                { field: "age", width: 150 }
-            ],
-            columnMenu: true,
-            dataSource: {
-                data: [
-                    { id: 1, parentId: null, name: "Jane Doe", age: 22 },
-                    { id: 2, parentId: 1, name: "John Doe", age: 24 }
-                ]
-            },
-            columnLock: function(e) {
-                console.log(e.column.field); // displays the field of the just locked column
-            }
-        });
+      $("#treeList").kendoTreeList({
+        columns: [
+          { field: "id", locked: true, width: 150 },
+          { field: "name", width: 150 },
+          { field: "age", width: 150 }
+        ],
+        dataSource: [
+          { id: 1, parentId: null, name: "Jane Doe", age: 22, expanded: true },
+          { id: 2, parentId: 1, name: "John Doe", age: 24 },
+          { id: 3, parentId: 1, name: "Jenny Doe", age: 3 }
+        ],
+        scrollable: true,
+        columnMenu: true,
+        columnLock: function(e) {
+          console.log(e.column.field); // displays the field of the just locked column
+        }
+      });
     </script>
 
 #### Example - subscribe to the "columnLock" event after initialization
 
-    <div id="treeList"></div>
+    <div id="treeList" style="width: 400px"></div>
     <script>
-        function treeList_columnLock(e) {
-            console.log(e.column.field); // displays the field of the just locked column
-        }
+      function treeList_columnLock(e) {
+        console.log(e.column.field); // displays the field of the just locked column
+      }
 
-        $("#treeList").kendoTreeList({
-            columns: [
-                { field: "id", locked: true, width: 100},
-                { field: "name", width: 200 },
-                { field: "age", width: 150 }
-            ],
-            columnMenu: true,
-            dataSource: {
-                data: [
-                    { id: 1, parentId: null, name: "Jane Doe", age: 22 },
-                    { id: 2, parentId: 1, name: "John Doe", age: 24 }
-                ]
-            }
-        });
+      $("#treeList").kendoTreeList({
+        columns: [
+          { field: "id", locked: true, width: 150 },
+          { field: "name", width: 150 },
+          { field: "age", width: 150 }
+        ],
+        dataSource: [
+          { id: 1, parentId: null, name: "Jane Doe", age: 22, expanded: true },
+          { id: 2, parentId: 1, name: "John Doe", age: 24 },
+          { id: 3, parentId: 1, name: "Jenny Doe", age: 3 }
+        ],
+        scrollable: true,
+        columnMenu: true
+      });
 
-        var treeList = $("#treeList").data("kendoTreeList");
-        treeList.bind("columnLock", treeList_columnLock);
+      var treeList = $("#treeList").data("kendoTreeList");
+      treeList.bind("columnLock", treeList_columnLock);
     </script>
 
 ### columnUnlock
@@ -5545,56 +6944,56 @@ The event handler function context (available via the `this` keyword) will be se
 
 A JavaScript object which represents the [column](#configuration-columns) configuration.
 
-##### e.sender `kendo.ui.Grid`
+##### e.sender `kendo.ui.TreeList`
 
 The widget instance which fired the event.
 
 #### Example - subscribe to the "columnUnlock" event during initialization
 
-    <div id="treeList"></div>
+    <div id="treeList" style="width: 400px"></div>
     <script>
-        $("#treeList").kendoTreeList({
-            columns: [
-                { field: "id", locked: true, width: 100},
-                { field: "name", width: 200, locked: true },
-                { field: "age", width: 150 }
-            ],
-            columnMenu: true,
-            dataSource: {
-                data: [
-                    { id: 1, parentId: null, name: "Jane Doe", age: 22 },
-                    { id: 2, parentId: 1, name: "John Doe", age: 24 }
-                ]
-            },
-            columnUnlock: function(e) {
-                console.log(e.column.field); // displays the field of the just unlocked column
-            }
-        });
+      $("#treeList").kendoTreeList({
+        columns: [
+          { field: "id", locked: true, width: 150 },
+          { field: "name", width: 150 },
+          { field: "age", width: 150 }
+        ],
+        dataSource: [
+          { id: 1, parentId: null, name: "Jane Doe", age: 22, expanded: true },
+          { id: 2, parentId: 1, name: "John Doe", age: 24 },
+          { id: 3, parentId: 1, name: "Jenny Doe", age: 3 }
+        ],
+        scrollable: true,
+        columnMenu: true,
+        columnUnlock: function (e) {
+          console.log(e.column.field); // displays the field of the just locked column
+        }
+      });
     </script>
 
 #### Example - subscribe to the "columnUnlock" event after initialization
 
-    <div id="treeList"></div>
+    <div id="treeList" style="width: 400px"></div>
     <script>
-        function treeList_columnUnlock(e) {
-            console.log(e.column.field); // displays the field of the just unlocked column
-        }
+      function treeList_columnUnlock(e) {
+        console.log(e.column.field); // displays the field of the just locked column
+      }
 
-        $("#treeList").kendoTreeList({
-            columns: [
-                { field: "id", locked: true, width: 100},
-                { field: "name", width: 200, locked: true },
-                { field: "age", width: 150 }
-            ],
-            columnMenu: true,
-            dataSource: {
-                data: [
-                    { id: 1, parentId: null, name: "Jane Doe", age: 22 },
-                    { id: 2, parentId: 1, name: "John Doe", age: 24 }
-                ]
-            }
-        });
+      $("#treeList").kendoTreeList({
+        columns: [
+          { field: "id", locked: true, width: 150 },
+          { field: "name", width: 150 },
+          { field: "age", width: 150 }
+        ],
+        dataSource: [
+          { id: 1, parentId: null, name: "Jane Doe", age: 22, expanded: true },
+          { id: 2, parentId: 1, name: "John Doe", age: 24 },
+          { id: 3, parentId: 1, name: "Jenny Doe", age: 3 }
+        ],
+        scrollable: true,
+        columnMenu: true
+      });
 
-        var treeList = $("#treeList").data("kendoTreeList");
-        treeList.bind("columnUnlock", treeList_columnUnlock);
+      var treeList = $("#treeList").data("kendoTreeList");
+      treeList.bind("columnUnlock", treeList_columnUnlock);
     </script>
