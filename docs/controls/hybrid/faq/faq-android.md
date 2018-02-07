@@ -20,7 +20,7 @@ WebKit mask icons break in Android when mixed with CSS3 transforms, which the Hy
 
 The rendering hardware acceleration that Android 4.0 has indeed performs much better than Android 2.x for View transitions. However, the preparation of the hardware accelerated layer that runs the animation takes considerable time. Your application would be actually much more responsive if you disable the hardware acceleration from the manifest file.
 
-For more information on this issue, check the [article on performance](P% slug performance_hybridkendoui %).
+For more information on this issue, check the [article on performance]({% slug performance_hybridkendoui %}).
 
 ### I have some inputs with type date and time. When I test on Jelly Bean, I can see date/time pickers in the browser, but they do not work in PhoneGap. Why?
 

@@ -278,7 +278,7 @@ The default fonts in PDF files do not support Unicode. To support international 
 > * Fonts must be loaded by the browser before the Chart is initialized. It is usually sufficient to make use of the font on a portion of the page.
 > * The Chart pre-loads automatically in browsers that support the [CSS Font Loading Module](https://developer.mozilla.org/en-US/docs/Web/API/FontFaceSet/load).
 
-Kendo UI ships the [Deja Vu font family](http://dejavu-fonts.org/wiki/Main_Page) as part of its distributions. For more details on the supported fonts by Kendo UI, refer to the article on [custom fonts and PDF]({% slug drawingofhtmlelements_drawingapi %}#configuration-Custom).
+Kendo UI ships the [Deja Vu font family](https://dejavu-fonts.github.io/) as part of its distributions. For more details on the supported fonts by Kendo UI, refer to the article on [custom fonts and PDF]({% slug drawingofhtmlelements_drawingapi %}#configuration-Custom).
 
 The example below demonstrates how to handle custom fonts by embedding a custom font for a Chart title.
 

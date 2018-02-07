@@ -182,6 +182,4 @@ The ButtonGroup container has a `role=group` attribute that semantically defines
 Other articles on Kendo UI ButtonGroup:
 
 * [Overview of the ASP.NET MVC HtmlHelper Extension for the ButtonGroup Widget](http://docs.telerik.com/aspnet-mvc/helpers/buttongroup/overview)
-* [Overview of the ButtonGroup JSP Tag]({% slug overview_buttongroup_uiforjsp %})
-* [Overview of the ButtonGroup PHP Class]({% slug overview_buttongroup_uiforphp %})
-* [ButtonGroup JavaScript API Reference](/api/javascript/ui/ButtonGroup)
+* [ButtonGroup JavaScript API Reference](/api/javascript/ui/buttongroup)

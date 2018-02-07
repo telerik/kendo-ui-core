@@ -217,6 +217,10 @@ Gets or sets the fullscreen mode of the widget.
 
 The value that indicates whether the widget should enter or exit fullscreen.
 
+#### Returns
+
+`Boolean` The current fullscreen configuration.
+
 ### volume
 
 Gets or sets a value between 0 and 100 that specifies the volume of the video.
@@ -242,6 +246,10 @@ Gets or sets a value between 0 and 100 that specifies the volume of the video.
 ##### value `Number`
 
 The value between 0 and 100 that specifies the volume of the player.
+
+#### Returns
+
+`Number` The current volume configuration.
 
 ### mute
 
@@ -271,9 +279,17 @@ The value that indicates whether the player is muted.
 
 The value indicates if the sound has to be muted.
 
+#### Returns
+
+`Boolean` The current mute configuration.
+
 ### isEnded
 
 Gets a value indicating whether the media has finished playing.
+
+#### Returns
+
+`Boolean` A value indicating whether the media has finished playing.
 
 #### Example
 
@@ -293,6 +309,10 @@ Gets a value indicating whether the media has finished playing.
 
 Gets a value indicating whether the media is paused, stopped, or ended.
 
+#### Returns
+
+`Boolean` A value indicating whether the media is paused, stopped, or ended.
+
 #### Example
 
     <div id="mediaplayer" />
@@ -310,6 +330,10 @@ Gets a value indicating whether the media is paused, stopped, or ended.
 ### isPlaying
 
 Gets a value indicating whether the media is currently playing.
+
+#### Returns
+
+`Boolean` A value indicating whether the media is currently playing.
 
 #### Example
 
@@ -384,6 +408,10 @@ Proceeds the video to a certain time.
 
 The time offset in milliseconds.
 
+#### Returns
+
+`Number` The current seek configuration.
+
 ### stop
 
 Stops the currently played video.
@@ -406,6 +434,10 @@ Stops the currently played video.
 
 Gets a reference to the title bar.
 
+#### Returns
+
+`jQuery` The title bar of the media player.
+
 #### Example
 
     <div id="mediaplayer" />
@@ -423,6 +455,10 @@ Gets a reference to the title bar.
 ### toolbar
 
 Gets a reference to the toolbar.
+
+#### Returns
+
+`kendo.ui.ToolBar` The tool bar of the media player.
 
 #### Example
 

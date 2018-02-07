@@ -60,8 +60,6 @@ var __meta__ = { // jshint ignore:line
 
              options.placeholder = options.placeholder || element.attr("placeholder");
 
-             that._initialOptions = extend({}, options);
-
              min = that.min(element.attr("min"));
              max = that.max(element.attr("max"));
              step = that._parse(element.attr("step"));
@@ -73,10 +71,12 @@ var __meta__ = { // jshint ignore:line
              if (options.max === NULL && max !== NULL) {
                  options.max = max;
              }
-
+             
              if (!isStep && step !== NULL) {
                  options.step = step;
              }
+
+             that._initialOptions = extend({}, options);
 
              that._reset();
              that._wrapper();
@@ -212,6 +212,25 @@ var __meta__ = { // jshint ignore:line
             });
         },
 
+        setOptions: function (options) {
+            var that = this;
+            Widget.fn.setOptions.call(that, options);
+
+            that._arrows();
+            that._text.prop("placeholder", that.options.placeholder);
+            that._placeholder(that.options.placeholder);
+            that.element.attr({
+                "aria-valuemin": that.options.min !== NULL ? that.options.min*that.options.factor : that.options.min,
+                "aria-valuemax": that.options.max !== NULL ? that.options.max*that.options.factor : that.options.max
+            });
+
+            that.options.format = extractFormat(that.options.format);
+
+            if (options.value !== undefined) {
+                that.value(options.value);
+            }
+        },
+
         destroy: function() {
             var that = this;
 
@@ -310,10 +329,12 @@ var __meta__ = { // jshint ignore:line
                 that._inputWrapper.addClass("k-expand-padding");
             }
 
-            that._upArrow = arrows.eq(0);
-            that._upArrowEventHandler = new kendo.UserEvents(that._upArrow, { release: _release });
-            that._downArrow = arrows.eq(1);
-            that._downArrowEventHandler = new kendo.UserEvents(that._downArrow, { release: _release });
+            if (!that._upArrow && !that._downArrow) {
+                that._upArrow = arrows.eq(0);
+                that._upArrowEventHandler = new kendo.UserEvents(that._upArrow, { release: _release });
+                that._downArrow = arrows.eq(1);
+                that._downArrowEventHandler = new kendo.UserEvents(that._downArrow, { release: _release });
+            }
         },
 
         _validation: function () {

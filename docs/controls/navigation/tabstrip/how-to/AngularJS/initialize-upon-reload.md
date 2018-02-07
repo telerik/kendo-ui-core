@@ -10,7 +10,7 @@ slug: howto_initializeproperlyuponreload_tabstrip
 Sometimes the styles of a Kendo UI TabStrip do not persist when it is reloaded. This behavior might be caused by a timing issue because of applying `k-ng-delay` and the inability of the widget to initialize accordingly.
 
 To ensure that the Kendo UI TabStrip is properly initialized, choose one of the following solutions:
-* Use the `select` method of the TabStrip to have the widget pre-selected. For more information on how to do it, refer to the article on [`select`](api/javascript/ui/tabstrip#methods-select) and the [introductory article on the TabStrip]({% slug overview_kendoui_tabstrip_widget %}#configuration-Select).
+* Use the `select` method of the TabStrip to have the widget pre-selected. For more information on how to do it, refer to the article on [`select`](/api/javascript/ui/tabstrip#methods-select) and the [introductory article on the TabStrip]({% slug overview_kendoui_tabstrip_widget %}#configuration-Select).
 * Load your styles correctly with `k-ng-delay` by using the `$timeout` service. For more information on how to do this, refer to the example below.
 * Configure the TabStrip to [recreate itself automatically]({% slug angularjs_integration_directives %}#widget-update-upon-option-changes) when part of the settings are changed.
 
