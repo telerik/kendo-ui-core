@@ -53,6 +53,8 @@ To download Telerik UI for ASP.NET Core:
 
 1. In the **Installation**  section select to download the Telerik online installer (`exe` file), the `MSI` installer file directly.
 
+The Telerik UI for ASP.NET Core suite can be included in a project via NuGet without locally installing the suite on the machine. Further information on how to configure such application could be found in the [Getting Started article]({% slug gettingstarted_aspnetmvc6_aspnetmvc %}#configuration-Add).
+
 ## Installation
 
 Run Telerik UI for ASP.NET Core installer. The automatic setup will guide you through the rest of the installation.
@@ -83,13 +85,15 @@ Telerik UI for ASP.NET Core comes with a sample .NET Core application available 
 * The .NET Core application built with Visual Studio 2015.
 * The .NET Core application built with Visual Studio 2017.
 
+This sample application is an offline version of the [Telerik UI for ASP.NET Core Demos](http://demos.telerik.com/aspnet-core).
+
 ### Running the Sample Application
 
 To run the sample application:
 
 1. Navigate to the installation directory of Telerik UI for ASP.NET Core.
 
-1. Open the sample Visual Studio Solution:
+1. Open the sample Visual Studio Project:
 
 * Open `wrappers\aspnetcore\Examples\AspNet.Core\VS2015\Kendo.Mvc.Examples\Kendo.Mvc.Examples.xproj` with Visual Studio 2015; or
 * Open `wrappers\aspnetcore\Examples\AspNet.Core\VS2017\Kendo.Mvc.Examples\Kendo.Mvc.Examples.xproj` with Visual Studio 2017.
@@ -98,7 +102,7 @@ To run the sample application:
 
 ### Distribution Contents
 
-The sample application Visual Studio solution contains the following items:
+The sample application Visual Studio Project contains the following items:
 
 * `Views`&mdash;the Razor views.
 * `Controllers`&mdash;Controller classes.
@@ -107,12 +111,31 @@ The sample application Visual Studio solution contains the following items:
 
 ## Upgrade
 
+You can upgrade the version of the Telerik UI for ASP.NET Core wrappers and also switch from a trial to a developer license.
+
 ### Upgrade to Newer Versions
 
-You can upgrade the version of the Telerik UI for ASP.NET Core wrappers manually to a newer version:
+To update Telerik UI for ASP.NET MVC to a new version, either:
 
-1. Replace all [scripts, styles, and images](#distribution-contents) related to Telerik UI for ASP.NET Core with the desired version of the framework. [Download](#download) the desired version from the **Download** section of your account.
-1. Change the reference to the new [Kendo.MVC dll]({% slug gettingstarted_aspnetmvc6_aspnetmvc %}#configuration-Add). Verify that the dll refers to the correct ASP.NET Core version.
+* Upgrade with NuGet and Bower, or
+* Manually replace the references and files.
+
+#### Upgrade with NuGet and Bower
+
+To upgrade the version with NuGet and Bower:
+
+1. In Visual Studio open the NuGet Package Manager on the **Installed** tab and click **Update** for the **Telerik.UI.for.AspNet.Core** package;
+1. In Visual Studio open the Bower Package Manager on the **Installed** tab and click **Update** for the **kendo-ui** package;
+1. Manually replace in the application any references pointing to the old Kendo UI resource files (scripts and styles).
+
+Note, that both [NuGet](https://docs.telerik.com/aspnet-mvc/getting-started/nuget-install#set-up-nuget-package-source) and [Bower](https://docs.telerik.com/kendo-ui/intro/installation/bower-install#kendo-ui-professional) require authentication in order to properly load Telerik and Kendo packages.
+
+#### Manual Upgrade
+
+1. [Download](#download) the desired version from the **Download** section of your account;
+1. Replace all [scripts, styles, and images](#distribution-contents) related to Telerik UI for ASP.NET Core with the desired version of the framework;
+1. Change the reference to the new Kendo.MVC dll. Verify that the dll refers to the correct ASP.NET Core version;
+1. Manually replace in the app any references pointing to the old Kendo UI resource files (scripts and styles).
 
 ### Upgrade From Trial to Licensed Versions
 

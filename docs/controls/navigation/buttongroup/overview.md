@@ -59,7 +59,7 @@ The following example demonstrates how to initialize Kendo UI ButtonGroup from a
 
 You can configure the ButtonGroup to be initially disabled by using its `enable` property. The ButtonGroup can also be disabled or enabled at any time with JavaScript by using the `enable()` method with a Boolean argument.
 
-For more information on the [`enable`](/api/javascript/ui/ButtonGroup#configuration-enable) property and the [`enable`](/api/javascript/ui/ButtonGroup#methods-enable) method of the ButtonGroup, refer to the [ButtonGroup API](/api/javascript/ui/ButtonGroup).
+For more information on the [`enable`](/api/javascript/ui/buttongroup#configuration-enable) property and the [`enable`](/api/javascript/ui/buttongroup#methods-enable) method of the ButtonGroup, refer to the [ButtonGroup API](/api/javascript/ui/buttongroup).
 
 The following example demonstrates how to enable and disable the ButtonGroup.
 
@@ -90,7 +90,7 @@ The following example demonstrates how to enable and disable the ButtonGroup.
 
 The initially selected index of the ButtonGroup can be configured by using its `index` property. An index can also be selected over the `select()` method with an Integer argument.
 
-For more information on the [`index`](/api/javascript/ui/ButtonGroup#configuration-index) property and the [`select`](/api/javascript/ui/ButtonGroup#methods-select) method of the ButtonGroup, refer to the [ButtonGroup API](/api/javascript/ui/ButtonGroup).
+For more information on the [`index`](/api/javascript/ui/buttongroup#configuration-index) property and the [`select`](/api/javascript/ui/buttongroup#methods-select) method of the ButtonGroup, refer to the [ButtonGroup API](/api/javascript/ui/buttongroup).
 
 The following example demonstrates how to select a button by its index.
 
@@ -157,7 +157,7 @@ The ButtonGroup provides the `icon` and `imageUrl` properties for configuring ic
 
 The ButtonGroup provides options for adding badges to its Buttons. To add or update badges, use the `badge` property or the `badge` method.
 
-For more information on the ButtonGroup [`badge` method](/api/javascript/ui/ButtonGroup#methods-badge), refer to the [ButtonGroup API](/api/javascript/ui/ButtonGroup).
+For more information on the ButtonGroup [`badge` method](/api/javascript/ui/buttongroup#methods-badge), refer to the [ButtonGroup API](/api/javascript/ui/buttongroup).
 
 ###### Example
 

@@ -216,7 +216,8 @@ var __meta__ = { // jshint ignore:line
             var that = this;
             Widget.fn.setOptions.call(that, options);
 
-            that._arrows();
+            that._arrowsWrap.toggle(that.options.spinners);
+            that._inputWrapper.toggleClass("k-expand-padding", !that.options.spinners);
             that._text.prop("placeholder", that.options.placeholder);
             that._placeholder(that.options.placeholder);
             that.element.attr({
@@ -321,7 +322,7 @@ var __meta__ = { // jshint ignore:line
                 arrows = $(buttonHtml("increase", options.upArrowText) + buttonHtml("decrease", options.downArrowText))
                         .insertAfter(element);
 
-                arrows.wrapAll('<span class="k-select"/>');
+                that._arrowsWrap = arrows.wrapAll('<span class="k-select"/>').parent();
             }
 
             if (!spinners) {
@@ -329,12 +330,10 @@ var __meta__ = { // jshint ignore:line
                 that._inputWrapper.addClass("k-expand-padding");
             }
 
-            if (!that._upArrow && !that._downArrow) {
-                that._upArrow = arrows.eq(0);
-                that._upArrowEventHandler = new kendo.UserEvents(that._upArrow, { release: _release });
-                that._downArrow = arrows.eq(1);
-                that._downArrowEventHandler = new kendo.UserEvents(that._downArrow, { release: _release });
-            }
+            that._upArrow = arrows.eq(0);
+            that._upArrowEventHandler = new kendo.UserEvents(that._upArrow, { release: _release });
+            that._downArrow = arrows.eq(1);
+            that._downArrowEventHandler = new kendo.UserEvents(that._downArrow, { release: _release });
         },
 
         _validation: function () {

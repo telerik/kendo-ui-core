@@ -80,17 +80,27 @@
 
 .k-toolbar .k-split-button {
     padding-left: 0;
+    border: 1px solid transparent;
+
+    .k-button {
+        margin: -1px 0 -1px -1px;
+    }
+
+    .k-split-button-arrow {
+        margin: -1px;
+    }
 }
 
-.k-toolbar .k-split-button .k-button,
 .k-toolbar .k-button-group .k-group-start {
     margin-left: 0;
     margin-right: 0;
 }
 
-.k-toolbar .k-split-button .k-split-button-arrow {
-    margin-left: -1px;
+.k-toolbar .k-button-icontext {
+    padding-right: .8em;
 }
+
+
 
 .k-toolbar .k-overflow-anchor {
     position: absolute;
@@ -108,6 +118,10 @@
         left: 50%;
         margin: -8px;
     }
+}
+
+.k-overflow-container .k-button-group .k-button {
+    margin: 0;
 }
 
 .k-overflow-container .k-item {
@@ -137,10 +151,6 @@
     margin-top: -1px;
 }
 
-.k-overflow-container .k-button-group {
-    padding: 0;
-}
-
 .k-overflow-container .k-button-group > li {
     display: block;
 }
@@ -150,7 +160,6 @@
     border-width: 1px 0;
     border-style: solid;
     border-radius: 0;
-    padding: 2px 0;
     margin: 1px 0;
 }
 

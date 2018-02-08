@@ -10,13 +10,13 @@ position: 1
 
 The Kendo UI PivotGrid for PHP is a server-side wrapper for the [Kendo UI PivotGrid](/api/javascript/ui/pivotgrid) widget.
 
-For more information on the OLAP concept supported by the Kendo UI PivotGrid for PHP, refer to the articles about [OLAP fundamentals]({% slug fundamentals_pivotgrid_widget %}), [setup an OLAP cube]({% slug olap_cube_setup_pivotgrid_widget %}), or [use the Kendo UI OLAP service](http://demos.telerik.com/olap/msmdpump.dll).
+For more information on the OLAP concept supported by the Kendo UI PivotGrid for PHP, refer to the articles about [OLAP fundamentals]({% slug fundamentals_pivotgrid_widget %}), [setup an OLAP cube]({% slug olap_cube_setup_pivotgrid_widget %}), or use the Kendo UI OLAP service at `http://demos.telerik.com/olap/msmdpump.dll`. Note that the service URL does not open directly in the browser.
 
 ## Getting Started
 
 ### Configuration
 
-Below are listed the steps for you to follow when configuring the Kendo UI PivotGrid for PHP to do Ajax binding to an **Adventure Works** cube hosted on [http://demos.telerik.com/olap/msmdpump.dll](http://demos.telerik.com/olap/msmdpump.dll).
+Below are listed the steps for you to follow when configuring the Kendo UI PivotGrid for PHP to do Ajax binding to an **Adventure Works** cube hosted on `http://demos.telerik.com/olap/msmdpump.dll`.
 
 **Step 1** Make sure you followed all the steps from the [introductory article on Telerik UI for PHP]({% slug overview_uiforphp %})&mdash;include the autoloader, JavaScript, and CSS files.
 

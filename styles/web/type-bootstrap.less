@@ -80,7 +80,6 @@
 @error-text-color: lighten(@normal-text-color, 22%);
 @error-background-color: darken(@base, 3%);
 @error-border-color: darken(@background, 14%);
-@disabled-text-color: darken(@base, 29%);
 @notification-info-background-color: @info;
 @notification-info-text-color: darken(@info, 50%);
 @notification-info-border-color: darken(@info, 10%);
@@ -164,6 +163,7 @@
 @window-shadow-style: 1px 1px 7px 1px;
 @filter-menu-content-background: @background;
 @icon-background-color: transparent;
+@disabled-text-color: darken(@base, 29%);
 @disabled-background-color: @background;
 @disabled-border-color: darken(@base, 12%);
 @disabled-gradient: none;
@@ -1562,6 +1562,18 @@ div.k-filebrowser-dropzone em
     border-radius: @border-radius 0 0 @border-radius;
 }
 
+.k-overflow-container {
+
+    .k-button-group .k-button {
+        border-radius: @border-radius;
+    }
+
+    .k-separator {
+        border-color: @secondary-border-color;
+    }
+}
+
+
 .k-group-start.k-group-end.k-tool
 {
     border-radius: @border-radius;
@@ -2175,20 +2187,6 @@ html .km-pane-wrapper .km-widget,
     background-color: transparent;
 }
 
-.k-split-button:focus {
-    outline: none;
-}
-
-.k-split-button:focus {
-    background-color: @button-background-color;
-    box-shadow: 0 0 8px 0 lighten(@accent, 13%);
-}
-
-.k-split-button:focus > .k-button {
-    background: transparent;
-    border-color: @button-focused-border-color;
-}
-
 .k-editor .k-tool:focus
 {
    outline: 0;
@@ -2689,10 +2687,6 @@ td.k-state-focused.k-state-selected,
 
 .k-panelbar > li .k-state-selected.k-state-hover {
     .box-shadow(none);
-}
-
-.k-overflow-container .k-state-disabled .k-button.k-state-active:hover {
-    color: @disabled-text-color;
 }
 
 .k-pager-wrap

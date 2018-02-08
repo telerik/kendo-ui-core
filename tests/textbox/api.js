@@ -544,5 +544,29 @@
         equal(textbox.element.attr("aria-valuemin"), "2");
         equal(textbox.element.attr("aria-valuemax"), "40");
         equal(textbox.value(), 14);
+    });
+
+    test("NumericTextBox setOptons correctly shows spinners", function() {
+		var textbox = new NumericTextBox(input, {
+            spinners: false
+        });
+		textbox.setOptions({
+            spinners: true
+        });
+
+        equal(textbox._arrowsWrap.is(":visible"), true);
+        equal(textbox._inputWrapper.hasClass("k-expand-padding"), false);
+    });
+
+    test("NumericTextBox setOptons correctly hides spinners", function() {
+		var textbox = new NumericTextBox(input, {
+            spinners: true
+        });
+		textbox.setOptions({
+            spinners: false
+        });
+
+        equal(textbox._arrowsWrap.is(":visible"), false);
+        equal(textbox._inputWrapper.hasClass("k-expand-padding"), true);
 	});
 })();

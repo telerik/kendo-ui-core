@@ -108,7 +108,7 @@ If **HTML5** is not available in the select box, ensure that you are running at 
 
 **Figure 5: The HTML5 schema validation support prior to Visual Studio 2008 SP 1**
 
-[HTML5 Schema Validation Support Prior To 2008 SP 1.](http://blogs.msdn.com/b/webdevtools/archive/2009/11/18/html-5-intellisense-and-validation-schema-for-visual-studio-2008-and-visual-web-developer.aspx)
+[HTML5 Schema Validation Support Prior To 2008 SP 1.](https://blogs.msdn.microsoft.com/webdev/2009/11/18/html-5-intellisense-and-validation-schema-for-visual-studio-2008-and-visual-web-developer/)
 
 Add some filler text to the article section. You can use a Lorem Ipsum generator, such as [this one](https://www.lipsum.com/) to do this for you.
 

@@ -1,10 +1,10 @@
 ---
-title: Convert Kendo UI Grids to Property Grids
+title: Convert Kendo UI Grid to Property Grid
 description: An example on how to convert the Kendo UI Grid to a property grid.
 type: how-to
-page_title: Transform Kendo UI Grids into Property Grids | Kendo UI Grid
+page_title: Transform Kendo UI Grid into Property Grid | Kendo UI Grid
 slug: property-grid
-tags: grid, property-grid
+tags: grid, property, mobile, vertical, change, orientation
 res_type: kb
 component: grid
 ---
@@ -38,7 +38,7 @@ How can I convert a Kendo UI Grid to a property grid for users with narrow scree
 
 Modify the shape of the data.
 
-```html       
+```html
         <style>
             tbody td:first-child{
             background-color:#d5d5d5;
