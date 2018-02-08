@@ -2081,9 +2081,28 @@ textarea.k-textbox,
     border-color: @secondary-border-color;
 }
 
-.k-overflow-container .k-overflow-group
-{
-    box-shadow: inset 0 1px 0 lighten(@secondary-border-color, 30%), 0 1px 0 lighten(@secondary-border-color, 30%);
+// Toolbar
+.k-toolbar {
+
+    .k-button.k-state-disabled:focus {
+        border-color: @button-focused-border-color;
+        .box-shadow(@button-focused-shadow);
+    }
+}
+
+.k-overflow-container {
+
+    .k-button-group .k-button {
+        border-radius: @border-radius;
+    }
+
+    .k-overflow-group {
+        box-shadow: inset 0 1px 0 lighten(@secondary-border-color, 30%), 0 1px 0 lighten(@secondary-border-color, 30%);
+    }
+
+    .k-separator {
+        border-color: @secondary-border-color;
+    }
 }
 
 .k-toolbar-first-visible.k-overflow-group,
@@ -2095,11 +2114,6 @@ textarea.k-textbox,
 .k-toolbar-last-visible.k-overflow-group
 {
     box-shadow: inset 0 1px 0 lighten(@secondary-border-color, 30%);
-}
-
-.k-toolbar .k-button.k-state-disabled:focus {
-    border-color: @button-focused-border-color;
-    .box-shadow(@button-focused-shadow);
 }
 
 .k-column-menu .k-separator
@@ -2168,19 +2182,6 @@ textarea.k-textbox,
 .k-scheduler-table .k-state-hover .k-icon
 {
     background-color: transparent;
-}
-
-.k-split-button:focus {
-    outline:none;
-}
-
-.k-split-button:focus {
-    box-shadow: inset 0 0 4px 2px @hover-border-color;
-}
-
-.k-split-button:focus > .k-button {
-    background: transparent;
-    border-color: @button-focused-border-color;
 }
 
 .k-editor .k-tool:focus

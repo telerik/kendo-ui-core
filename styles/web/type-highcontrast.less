@@ -2005,6 +2005,10 @@ html .km-pane-wrapper .km-widget,
     box-shadow: 0 1px 0 lighten(@secondary-border-color, 30%);
 }
 
+.k-overflow-container .k-button-group .k-button {
+    border-radius:  @border-radius;
+}
+
 .k-toolbar-last-visible.k-overflow-group
 {
     box-shadow: inset 0 1px 0 lighten(@secondary-border-color, 30%);
@@ -2105,19 +2109,6 @@ html .km-pane-wrapper .km-widget,
 .k-scheduler-table .k-state-hover .k-icon
 {
     background-color: transparent;
-}
-
-.k-split-button:focus {
-    outline:none;
-}
-
-.k-split-button:focus {
-    box-shadow: inset 0 0 4px 2px @button-text-color;
-}
-
-.k-split-button:focus > .k-button {
-    background: transparent;
-    border-color: @button-focused-border-color;
 }
 
 .k-editor .k-tool:focus

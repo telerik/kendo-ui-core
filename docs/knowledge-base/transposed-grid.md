@@ -1,9 +1,10 @@
 ---
-title: Transpose Grids
-description: An example on how to transpose the Kendo UI Grid.
+title: Transpose Grid data
+description: An example on how to transpose the Kendo UI Grid data.
 type: how-to
-page_title: Transpose Grids | Kendo UI Grid
+page_title: Transpose Grid data | Kendo UI Grid
 slug: transposed-grid
+tags: vertical, grid, transpose, data, transposed, columns, rows, change, orientation, switch
 res_type: kb
 ---
 
@@ -32,7 +33,7 @@ How can I flip the axis of the Kendo UI Grid, so that its rows become columns an
 
 Modify the shape of the data.
 
-```html       
+```html
     <style>
         tbody td:first-child{
         background-color:#d5d5d5;
@@ -61,21 +62,19 @@ Modify the shape of the data.
             data[i] = {};
             for(var j =0; j < dataLength; j+=1 ){
                 var currentItem = rawData[j]
-                var property = Object.keys(currentItem)[i];              
+                var property = Object.keys(currentItem)[i];
                 if(j === 0){
                 data[i]["Property"] = property;
                 }
                 data[i][currentItem.FirstName] = currentItem[property]
-            }            
-            }          
-
-            debugger
+            }
+            }
 
             $("#grid").kendoGrid({
             dataSource: {
                 data: data,
                 pageSize: 20,
-            },            
+            },
             scrollable:true
             });
         });

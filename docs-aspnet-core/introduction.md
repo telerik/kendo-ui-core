@@ -9,6 +9,8 @@ position: 1
 
 # Overview of Progress<sup>®</sup> Telerik<sup>®</sup> UI for ASP.NET Core
 
+[Telerik UI for ASP.NET Core](http://www.telerik.com/aspnet-core-ui) is a set of server-side wrappers that allows using the [Kendo UI widgets](../kendo-ui/introduction) in .NET Core.
+
 This article demonstrates how to use Telerik UI for ASP.NET Core in ASP.NET Core applications.
 
 ## The Basics
@@ -30,41 +32,115 @@ The repositories below contain source code, instructions, and issue trackers for
 - [ASP.NET MVC Announcements](https://github.com/aspnet/announcements/) for important changes.
 - [Telerik UI for ASP.NET Core Demos and Sample Applications](http://demos.telerik.com/aspnet-core).
 
-## The Sample Application
+## Requirements
 
-### On Windows
+Telerik UI for ASP.NET Core requires .NET Core.
 
-To be able to run the sample application on Windows, make sure you provide for the requirements listed below.
+The offline sample application requires:
 
-- Download [Visual Studio 2015](https://www.visualstudio.com/en-us/downloads/download-visual-studio-vs.aspx).
-- Download [Visual Studio 2015 Update 3](https://www.visualstudio.com/en-us/news/releasenotes/vs2015-update3-vs).
-- Download [NET Core 1.0.0 - VS 2015 Tooling Preview 2](https://www.microsoft.com/net/core#windows).
-- Optional Download [.NET SDK Core for Windows](https://www.microsoft.com/net/core#windows).
-- Install [SQLite3](http://mislav.net/rails/install-sqlite3/).
-- Download the matching release of the [Sample Application](https://github.com/telerik/ui-for-aspnet-mvc-6-demos/releases).
-- Open the `Kendo.Mvc.Examples.sln` solution in Visual Studio.
-- Run the application.
+* [.NET Core](https://www.microsoft.com/net/learn/get-started)
+* [Visual Studio](https://www.visualstudio.com/downloads/)
 
-### On Linux
+## Download
 
-To be able to run the sample application on Linux, make sure you provide for the requirements listed below.
+To download Telerik UI for ASP.NET Core:
 
-- For information on installing ASP.NET Core on Linux, refer to [this article](http://docs.asp.net/en/latest/getting-started/installing-on-linux.html).
-- Install [SQLite3](http://mislav.net/rails/install-sqlite3/).
-- Download the matching release of the [Sample Application](https://github.com/telerik/ui-for-aspnet-mvc-6-demos/releases).
-- Navigate to the `Kendo.Mvc.Examples` folder using the Terminal.
-- Restore the packages using the `dnu restore` command.
-- Run the application using the `dnx web` command.
-- In your browser, navigate to `localhost:5000`.
+1. Log in to your [Telerik account](https://www.telerik.com/login/).
 
-### On Docker Engine
+1. Click **Downloads** in the top navigation.
 
-To be able to run the sample application on Docker Engine (multi-platform), make sure you provide for the requirements listed below.
+1. Click **Progress<sup>®</sup> Telerik<sup>®</sup> UI for ASP.NET Core**.
 
-- See [Install Docker Engine](https://docs.docker.com/engine/installation/) on one of the supported platforms.
-- Pull the latest [Kendo offline demos image](https://hub.docker.com/r/telerik/kendo_offline_demos/).
-- Run the image inside the desired container using `sudo docker run -d -p 5000:5000 --name web telerik/kendo_offline_demos:latest`.
-- In your browser navigate to `localhost:5000`.
+1. In the **Installation**  section select to download the Telerik online installer (`exe` file), the `MSI` installer file directly.
+
+The Telerik UI for ASP.NET Core suite can be included in a project via NuGet without locally installing the suite on the machine. Further information on how to configure such application could be found in the [Getting Started article]({% slug gettingstarted_aspnetmvc6_aspnetmvc %}#configuration-Add).
+
+## Installation
+
+Run Telerik UI for ASP.NET Core installer. The automatic setup will guide you through the rest of the installation.
+
+### Location
+
+The setup installs Telerik UI for ASP.NET Core in `C:\Program Files (x86)\Progress\Telerik UI for ASP.NET Core <version>`.
+
+### Distribution Contents
+
+Telerik UI for ASP.NET Core contains the following directories:
+
+* `js`&mdash;These are the minified JavaScript files.
+* `styles`&mdash;The minified CSS files and images used by the themes.
+* `src`&mdash;The complete JavaScript, CSS, and C# source code. Note that this directory is not available in the trial version.
+* `typescript`&mdash;The TypeScript definitions for the Kendo combined scripts (*kendo.all*, *kendo.dataviz*, *kendo.web* and *kendo.mobile*).
+* `vsdoc`&mdash;The intellisense definitions for the Kendo combined scripts (as the above).
+* `VSExtensions`&mdash;The extensions for Visual Studio 2015 and 2017.
+* `wrappers\aspnetcore\Binaries\AspNet.Core`&mdash;Containing the .nupkg NuGet package file.
+* `wrappers\aspnetcore\Examples\AspNet.Core\VS2015`&mdash;The ASP.NET Core sample application built with Visual Studio 2015.
+* `wrappers\aspnetcore\Examples\AspNet.Core\VS2017`&mdash;The ASP.NET Core sample application built with Visual Studio 2017.
+* `wrappers\aspnetcore\EditorTemplates\razor`&mdash;The ready-to-use editor templates based on the Kendo UI widgets.
+
+## Sample Application
+
+Telerik UI for ASP.NET Core comes with a sample .NET Core application available in 2 versions:
+
+* The .NET Core application built with Visual Studio 2015.
+* The .NET Core application built with Visual Studio 2017.
+
+This sample application is an offline version of the [Telerik UI for ASP.NET Core Demos](http://demos.telerik.com/aspnet-core).
+
+### Running the Sample Application
+
+To run the sample application:
+
+1. Navigate to the installation directory of Telerik UI for ASP.NET Core.
+
+1. Open the sample Visual Studio Project:
+
+* Open `wrappers\aspnetcore\Examples\AspNet.Core\VS2015\Kendo.Mvc.Examples\Kendo.Mvc.Examples.xproj` with Visual Studio 2015; or
+* Open `wrappers\aspnetcore\Examples\AspNet.Core\VS2017\Kendo.Mvc.Examples\Kendo.Mvc.Examples.xproj` with Visual Studio 2017.
+
+1. Press `CTRL+F5` to build and run the application.
+
+### Distribution Contents
+
+The sample application Visual Studio Project contains the following items:
+
+* `Views`&mdash;the Razor views.
+* `Controllers`&mdash;Controller classes.
+* `Models`&mdash;Model classes.
+* `wwwroot`&mdash;the web app root, containing the LocalDB sample database (in the *App_Data* folder) and the other client resources (libraries, scripts, styles and others).
+
+## Upgrade
+
+You can upgrade the version of the Telerik UI for ASP.NET Core wrappers and also switch from a trial to a developer license.
+
+### Upgrade to Newer Versions
+
+To update Telerik UI for ASP.NET MVC to a new version, either:
+
+* Upgrade with NuGet and Bower, or
+* Manually replace the references and files.
+
+#### Upgrade with NuGet and Bower
+
+To upgrade the version with NuGet and Bower:
+
+1. In Visual Studio open the NuGet Package Manager on the **Installed** tab and click **Update** for the **Telerik.UI.for.AspNet.Core** package;
+1. In Visual Studio open the Bower Package Manager on the **Installed** tab and click **Update** for the **kendo-ui** package;
+1. Manually replace in the application any references pointing to the old Kendo UI resource files (scripts and styles).
+
+Note, that both [NuGet](https://docs.telerik.com/aspnet-mvc/getting-started/nuget-install#set-up-nuget-package-source) and [Bower](https://docs.telerik.com/kendo-ui/intro/installation/bower-install#kendo-ui-professional) require authentication in order to properly load Telerik and Kendo packages.
+
+#### Manual Upgrade
+
+1. [Download](#download) the desired version from the **Download** section of your account;
+1. Replace all [scripts, styles, and images](#distribution-contents) related to Telerik UI for ASP.NET Core with the desired version of the framework;
+1. Change the reference to the new Kendo.MVC dll. Verify that the dll refers to the correct ASP.NET Core version;
+1. Manually replace in the app any references pointing to the old Kendo UI resource files (scripts and styles).
+
+### Upgrade From Trial to Licensed Versions
+
+1. Before upgrading to a licensed version, delete (uninstall) the trial version from your machine. This eliminates the possibility for trial assemblies to end up in the project references or in production.
+1. [Install](#installation) the licensed Kendo UI version and follow the steps for updating the Telerik UI for ASP.NET Core version.
 
 ## See Also
 
