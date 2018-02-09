@@ -50,7 +50,7 @@ HTML5 is entirely dependent on the browser in which the application is running, 
 
 HTML5 has more to do with the browser technology rather than with ASP.NET. ASP.NET is as capable as any other platform of producing HTML5 applications. Due to the enterprise adoption of the entire Microsoft stack (Windows, Office, Active Directory, and IE), however, ASP.NET developers are sometimes limited in their ability to move their web applications forward into the HTML5 space.
 
-There are available workarounds and solutions different scenarios you might come across while considering the possible limitations of a browser. These are commonly referred to as [polyfills](http://remysharp.com/2010/10/08/what-is-a-polyfill/). Polyfills make HTML5 available when a certain feature is not supported by the browser. This is done by injecting the functionality that is missing by using JavaScript.
+There are available workarounds and solutions different scenarios you might come across while considering the possible limitations of a browser. These are commonly referred to as [polyfills](https://remysharp.com/2010/10/08/what-is-a-polyfill/). Polyfills make HTML5 available when a certain feature is not supported by the browser. This is done by injecting the functionality that is missing by using JavaScript.
 
 ## Create Sample Application
 
@@ -172,7 +172,7 @@ Switch to the **HTML** tab. The `<html>` tag has now a long string of classes. E
 
 The list of resources for HTML5 on the web is unprecedented in its variety and depth. Virtually any topic is well documented with runnable examples and code. Some of the valuable resources for HTML5 development include:
 
-* [HTML5 Rocks](http://html5rocks.com)
+* [HTML5 Rocks](https://www.html5rocks.com/en/)
 * [HTML5 Doctor](http://html5doctor.com/)
 * [Modernizr Website](http://modernizr.com/)
 

@@ -39,7 +39,7 @@ How can I create an infinite scroll in the Kendo ListView?
 
       <script type="text/x-kendo-template" id="template">
         <div id="#=OrderID#" class="product">
-            <img src="../content/web/foods/#= EmployeeID #.jpg" alt="#: ShipCity # image" />
+            <img src="https://demos.telerik.com/kendo-ui/content/web/foods/#= EmployeeID #.jpg" alt="#: ShipCity # image" />
             <h3>#:ShipName#</h3>
             <p>#:ShipCity#</p>
         </div>

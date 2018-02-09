@@ -75,7 +75,7 @@ Using [Fontello](http://fontello.com/) is pretty straightforward&mdash;pick the 
 
 #### Create Icons Manually
 
-The manual approach is considerably more difficult. First, create the desired icons using a vector editing software such as Inkscape or Adobe Illustrator. Export them to the `SVG` format. Consult [these](http://www.webdesignerdepot.com/2012/01/how-to-make-your-own-icon-webfont/) [articles](http://cleversomeday.wordpress.com/2010/02/09/inkscape-dings/) about `SVG` font creation using [Inkscape](http://inkscape.org/). Import the `SVG` icons in Inkscape and create the `SVG` font icon by icon, assigning them to separate characters. After creating the `SVG` font, convert it to `TTF`/`WOFF` formats, using the [Online Font Converter](https://onlinefontconverter.com/) or other similar service.
+The manual approach is considerably more difficult. First, create the desired icons using a vector editing software such as Inkscape or Adobe Illustrator. Export them to the `SVG` format. Consult [these](http://www.webdesignerdepot.com/2012/01/how-to-make-your-own-icon-webfont/) [articles](http://cleversomeday.wordpress.com/2010/02/09/inkscape-dings/) about `SVG` font creation using [Inkscape](https://inkscape.org/en). Import the `SVG` icons in Inkscape and create the `SVG` font icon by icon, assigning them to separate characters. After creating the `SVG` font, convert it to `TTF`/`WOFF` formats, using the [Online Font Converter](https://onlinefontconverter.com/) or other similar service.
 
 The example below demonstrates how to load the two fonts (`TTF`/`WOFF`) with `@font-face`.
 

@@ -28,9 +28,9 @@ For more information, refer to the web site on [global administrative areas](htt
 
 ### Explore Data
 
-A traditional [desktop geographic information system (GIS)](https://en.wikipedia.org/wiki/Geographic_information_system) application can be invaluable for exploring new datasets. The open-source [QGIS](http://www.qgis.org/en/site/) project is an excellent choice in this regard.
+A traditional [desktop geographic information system (GIS)](https://en.wikipedia.org/wiki/Geographic_information_system) application can be invaluable for exploring new datasets. The open-source [QGIS](https://www.qgis.org/en/site/) project is an excellent choice in this regard.
 
-Start by [importing the Esri Shapefile](http://docs.qgis.org/testing/en/docs/user_manual/working_with_vector/supported_data.html#esri-shapefiles) for the data set. With the help of the [Identify tool](http://docs.qgis.org/testing/en/docs/user_manual/introduction/general_tools.html#identify) you can quickly inspect the available metadata.
+Start by [importing the Esri Shapefile](https://docs.qgis.org/testing/en/docs/user_manual/working_with_vector/index.html) for the data set. With the help of the [Identify tool](https://docs.qgis.org/testing/en/docs/user_manual/introduction/general_tools.html#identify) you can quickly inspect the available metadata.
 
 **Figure 2: Identifying of the results**
 

@@ -414,7 +414,7 @@ An object with the new options. All [configuration](qrcode#configuration) option
 
 ### svg
 
-Returns the [SVG](http://www.w3.org/Graphics/SVG/) representation of the qrcode. The returned string is a self-contained SVG document that can be used as is or converted to other formats using tools like [Inkscape](http://inkscape.org/) and
+Returns the [SVG](http://www.w3.org/Graphics/SVG/) representation of the qrcode. The returned string is a self-contained SVG document that can be used as is or converted to other formats using tools like [Inkscape](https://inkscape.org/en) and
 [ImageMagick](http://www.imagemagick.org/). Both programs provide command-line interface suitable for server-side processing.
 
 > This method is obsoleted by [exportSVG](#methods-exportSVG), but will remain fully functional.

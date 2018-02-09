@@ -15,6 +15,7 @@ var __meta__ = { // jshint ignore:line
     var kendo = window.kendo,
         TimeView = kendo.TimeView,
         parse = kendo.parseDate,
+        support = kendo.support,
         activeElement = kendo._activeElement,
         extractFormat = kendo._extractFormat,
         calendar = kendo.calendar,
@@ -29,6 +30,7 @@ var __meta__ = { // jshint ignore:line
         CHANGE = "change",
         ns = ".kendoDateTimePicker",
         CLICK = "click" + ns,
+        UP = support.mouseAndTouchPresent ? kendo.applyEventMap("up", ns.slice(1)) : CLICK,
         DISABLED = "disabled",
         READONLY = "readonly",
         DEFAULT = "k-state-default",
@@ -138,13 +140,13 @@ var __meta__ = { // jshint ignore:line
             timeButtonText: "Open the time view",
             dateInput: false,
             weekNumber: false
-    },
+        },
 
-    events: [
-        OPEN,
-        CLOSE,
-        CHANGE
-    ],
+        events: [
+            OPEN,
+            CLOSE,
+            CHANGE
+        ],
 
         setOptions: function(options) {
             var that = this,
@@ -218,22 +220,15 @@ var __meta__ = { // jshint ignore:line
                        });
 
                dateIcon.on(MOUSEDOWN, preventDefault)
-                        .on(CLICK, function() {
+                        .on(UP, function(e) {
                             that.toggle("date");
-
-                            if (!kendo.support.touch && element[0] !== activeElement()) {
-                                element.focus();
-                            }
+                            that._focusElement(e.type);
                         });
 
-
                timeIcon.on(MOUSEDOWN, preventDefault)
-                        .on(CLICK, function() {
+                        .on(UP, function(e) {
                             that.toggle("time");
-
-                            if (!kendo.support.touch && element[0] !== activeElement()) {
-                                element.focus();
-                            }
+                            that._focusElement(e.type);
                         });
 
             } else {
@@ -244,6 +239,14 @@ var __meta__ = { // jshint ignore:line
                 element.attr(DISABLED, disable)
                        .attr(READONLY, readonly)
                        .attr(ARIA_DISABLED, disable);
+            }
+        },
+
+        _focusElement: function(eventType) {
+            var element = this.element;
+
+            if ((!support.touch || (support.mouseAndTouchPresent && !(eventType || "").match(/touch/i))) && element[0] !== activeElement()) {
+                element.focus();
             }
         },
 

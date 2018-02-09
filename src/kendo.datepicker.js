@@ -16,12 +16,14 @@ var __meta__ = { // jshint ignore:line
     Widget = ui.Widget,
     parse = kendo.parseDate,
     keys = kendo.keys,
+    support = kendo.support,
     template = kendo.template,
     activeElement = kendo._activeElement,
     DIV = "<div />",
     SPAN = "<span />",
     ns = ".kendoDatePicker",
     CLICK = "click" + ns,
+    UP = support.mouseAndTouchPresent ? kendo.applyEventMap("up", ns.slice(1)) : CLICK,
     OPEN = "open",
     CLOSE = "close",
     CHANGE = "change",
@@ -445,7 +447,7 @@ var __meta__ = { // jshint ignore:line
                            that._inputWrapper.addClass(FOCUSED);
                        });
 
-               icon.on(CLICK, proxy(that._click, that))
+               icon.on(UP, proxy(that._click, that))
                    .on(MOUSEDOWN, preventDefault);
             } else {
                 wrapper
@@ -536,13 +538,17 @@ var __meta__ = { // jshint ignore:line
             that._inputWrapper.removeClass(FOCUSED);
         },
 
-        _click: function() {
-            var that = this,
-                element = that.element;
+        _click: function(e) {
+            var that = this;
 
             that.dateView.toggle();
+            that._focusElement(e.type);
+        },
 
-            if (!kendo.support.touch && element[0] !== activeElement()) {
+        _focusElement: function(eventType) {
+            var element = this.element;
+
+            if ((!support.touch || (support.mouseAndTouchPresent && !(eventType || "").match(/touch/i))) && element[0] !== activeElement()) {
                 element.focus();
             }
         },

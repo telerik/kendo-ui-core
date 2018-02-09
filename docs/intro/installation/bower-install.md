@@ -147,7 +147,7 @@ The Git client, bundled in Visual Studio, is unable to authenticate with the Ken
 Use a Windows port of Git and your stored credentials instead of the built-in client:
 
 1. Store your [credentials](#store-on-windows).
-1. Install [Git for Windows](https://git-for-windows.github.io/).
+1. Install [Git for Windows](https://gitforwindows.org/).
 1. Right-click the **Bower** folder under **Dependencies**.
 1. Select **Configure external tools**.
 1. Uncheck `$(DevEnvDir)\Extensions\Microsoft\Web Tools\External\git` and/or `$(VSINSTALLDIR)\Web\External\git`.
