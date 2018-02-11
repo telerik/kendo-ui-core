@@ -8,7 +8,8 @@
                 "apply": "确定",
                 "cancel": "取消",
                 "noColor": "无颜色",
-                "clearColor": "清除颜色"
+                "clearColor": "清除颜色",
+                "previewInput": "颜色十六进制代码"
             });
     }
 
@@ -19,7 +20,8 @@
                 "apply": "确定",
                 "cancel": "取消",
                 "noColor": "无颜色",
-                "clearColor": "清除颜色"
+                "clearColor": "清除颜色",
+                "previewInput": "颜色十六进制代码"
             });
     }
 
@@ -72,6 +74,7 @@
                 "backColor": "文字背景色",
                 "style": "样式",
                 "emptyFolder": "文件夹为空",
+                "editAreaTitle": "在可编辑区域可按 F10 跳转工具栏。",
                 "uploadFile": "上传文件",
                 "overflowAnchor": "更多功能",
                 "orderBy": "排序方式：",
@@ -94,16 +97,17 @@
                 "dialogUpdate": "更新",
                 "dialogInsert": "插入",
                 "dialogButtonSeparator": "或",
+                "dialogOk": "确定",
                 "dialogCancel": "取消",
                 "cleanFormatting": "清除格式",
                 "createTable": "创建表格",
+                "createTableHint": "创建一个 {0} 行 {1} 列的表格",
                 "addColumnLeft": "在左侧插入列",
                 "addColumnRight": "在右侧插入列",
                 "addRowAbove": "在上方插入行",
                 "addRowBelow": "在下方插入行",
                 "deleteRow": "删除行",
                 "deleteColumn": "删除列",
-                "dialogOk": "确定",
                 "tableWizard": "表格向导",
                 "tableTab": "表格",
                 "cellTab": "单元格",
@@ -140,7 +144,9 @@
                 "alignRemove": "移除对齐",
                 "columns": "列",
                 "rows": "行",
-                "selectAllCells": "选择所有单元格"
+                "selectAllCells": "选择所有单元格",
+                "exportAs": "导出",
+                "import": "导入"
             });
     }
 
@@ -226,6 +232,7 @@
         kendo.ui.FilterMenu.prototype.options.messages =
             $.extend(true, kendo.ui.FilterMenu.prototype.options.messages,{
                 "info": "筛选条件：",
+                "title": "筛选条件：",
                 "isTrue": "是",
                 "isFalse": "否",
                 "filter": "筛选",
@@ -235,6 +242,9 @@
                 "selectValue": "-= 请选择 =-",
                 "operator": "运算符",
                 "value": "值",
+                "additionalValue": "附加值",
+                "additionalOperator": "附加运算",
+                "logic": "筛选逻辑",
                 "cancel": "取消"
             });
     }
@@ -293,7 +303,9 @@
                 "checkAll": "全选",
                 "clear": "清空",
                 "filter": "筛选",
-                "search": "搜索"
+                "search": "搜索",
+                "cancel": "取消",
+                "selectedItemsFormat": "已选择 {0} 条数据"
             });
     }
 
@@ -337,6 +349,21 @@
                 }
             });
     }
+    
+    /* GanttTimeline messages */
+    if (kendo.ui.GanttTimeline) {
+        kendo.ui.GanttTimeline.prototype.options.messages =
+            $.extend(true, kendo.ui.GanttTimeline.prototype.options.messages,{
+                "views": {
+                    "day": "日视图",
+                    "week": "周视图",
+                    "month": "月视图",
+                    "year": "年视图",
+                    "start": "任务开始",
+                    "end": "任务结束"
+                }
+            });
+    }
 
     /* Grid messages */
     if (kendo.ui.Grid) {
@@ -360,7 +387,7 @@
                     "confirmDelete": "确定删除"
                 },
                 "noRecords": "无相关数据",
-                "expandCollapseColumnHeader": "..."
+                "expandCollapseColumnHeader": ""
             });
     }
 
@@ -448,10 +475,33 @@
             });
     }
 
+    /* PivotSettingTarget messages */
+    if (kendo.ui.PivotSettingTarget) {
+        kendo.ui.PivotSettingTarget.prototype.options.messages =
+            $.extend(true, kendo.ui.PivotSettingTarget.prototype.options.messages,{
+                "empty": "拖拽字段到此处"
+            });
+    }
+    
+    /* PivotConfigurator messages */
+    if (kendo.ui.PivotConfigurator) {
+        kendo.ui.PivotConfigurator.prototype.options.messages =
+            $.extend(true, kendo.ui.PivotConfigurator.prototype.options.messages,{
+                "measures": "拖拽数据字段到此处",
+                "columns": "拖拽列字段到此处",
+                "rows": "拖拽行字段到此处",
+                "measuresLabel": "量",
+                "columnsLabel": "列",
+                "rowsLabel": "行",
+                "fieldsLabel": "字段"
+            });
+    }
+
     /* RecurrenceEditor messages */
     if (kendo.ui.RecurrenceEditor) {
         kendo.ui.RecurrenceEditor.prototype.options.messages =
             $.extend(true, kendo.ui.RecurrenceEditor.prototype.options.messages,{
+                "recurrenceEditorTitle": "周期类型事件编辑",
                 "frequencies": {
                     "never": "从不",
                     "hourly": "每小时",
@@ -507,6 +557,56 @@
                 }
             });
     }
+    
+    /* MobileRecurrenceEditor messages */
+    if (kendo.ui.MobileRecurrenceEditor) {
+        kendo.ui.MobileRecurrenceEditor.prototype.options.messages =
+            $.extend(true, kendo.ui.MobileRecurrenceEditor.prototype.options.messages,{
+                "cancel": "取消",
+                "update": "保存",
+                "endTitle": "周期截止",
+                "repeatTitle": "周期模式",
+                "headerTitle": "周期事件",
+                "end": {
+                    "patterns": {
+                        "never": "从不",
+                        "after": "重复...",
+                        "on": "止于..."
+                    },
+                    "never": "从不",
+                    "after": "周期后截止",
+                    "on": "周期时截止"
+                },
+                "daily": {
+                    "interval": ""
+                },
+                "hourly": {
+                    "interval": ""
+                },
+                "weekly": {
+                    "interval": ""
+                },
+                "monthly": {
+                    "interval": "",
+                    "repeatBy": "重复到：",
+                    "dayOfMonth": "几号",
+                    "dayOfWeek": "周几",
+                    "repeatEvery": "全部重复",
+                    "every": "每",
+                    "day": "天"
+                },
+                "yearly": {
+                    "interval": "",
+                    "repeatBy": "重复到：",
+                    "dayOfMonth": "几号",
+                    "dayOfWeek": "周几",
+                    "repeatEvery": "全部重复",
+                    "every": "每",
+                    "month": "月",
+                    "day": "天"
+                }
+            });
+    }
 
     /* Scheduler messages */
     if (kendo.ui.Scheduler) {
@@ -519,10 +619,13 @@
                 "showFullDay": "显示全天",
                 "showWorkDay": "显示工作时间",
                 "today": "今天",
+                "pdf": "导出 PDF",
                 "save": "保存",
                 "cancel": "取消",
                 "destroy": "删除",
                 "deleteWindowTitle": "删除事件",
+                "next": "往后",
+                "previous": "往前",
                 "ariaSlotLabel": "从 {0:t} 到 {1:t} 的选择",
                 "ariaEventLabel": "在 {1:D} {2:t} 的 {0}",
                 "editable": {
@@ -698,7 +801,9 @@
                         "showHint": "选定单元格时显示",
                         "hintTitle": "选定时的标题",
                         "hintMessage": "选定时的信息",
-                        "ignoreBlank": "忽略空值"
+                        "ignoreBlank": "忽略空值",
+                        "showListButton": "显示序列按钮",
+                        "showCalendarButton": "显示日历按钮"
                     },
                     "placeholders": {
                         "typeTitle": "请输入标题",
@@ -726,6 +831,21 @@
                 "modifyMergedDialog": {
                     "errorMessage": "不能更改已合并单元格的局部。"
                 },
+                "rangeDisabledDialog": {
+                    "errorMessage": "指定范围包含禁用单元格。"
+                },
+                "incompatibleRangesDialog": {
+                    "errorMessage": "范围不匹配"
+                },
+                "noFillDirectionDialog": {
+                    "errorMessage": "无法判断填充方向"
+                },
+                "duplicateSheetNameDialog": {
+                    "errorMessage": "工作表名称重复"
+                },
+                "overflowDialog": {
+                    "errorMessage": "不能粘贴，因为复制区域和粘贴区域的大小和形状不一样。"
+                },
                 "useKeyboardDialog": {
                     "title": "复制和粘贴",
                     "errorMessage": "不能通过菜单调用这些操作，请使用键盘快捷键代替：",
@@ -737,6 +857,14 @@
                 },
                 "unsupportedSelectionDialog": {
                     "errorMessage": "不能在多选的情况下执行该操作。"
+                },
+                "linkDialog": {
+                    "title": "链接",
+                    "labels": {
+                        "text": "链接文字",
+                        "url": "链接地址",
+                        "removeLink": "移除链接"
+                    }
                 }
             });
     }
@@ -822,12 +950,14 @@
                 "deleteColumn": "删除整列",
                 "deleteRow": "删除整行",
                 "excelImport": "从 Excel 导入...",
+                "exportAs": "导出为...",
                 "filter": "筛选",
                 "fontFamily": "字体",
                 "fontSize": "字号",
                 "format": "定制格式...",
                 "formatTypes": {
                     "automatic": "自动",
+                    "text": "文本",
                     "number": "数字",
                     "percent": "百分比",
                     "financial": "财务",
@@ -861,7 +991,9 @@
                     "redo": "重做",
                     "undo": "撤消"
                 },
+                "toggleGridlines": "切换网格线",
                 "saveAs": "另存为...",
+                "sort": "排序",
                 "sortAsc": "升序排列",
                 "sortDesc": "降序排列",
                 "sortButtons": {
@@ -873,7 +1005,8 @@
                 "textColor": "文字颜色",
                 "textWrap": "文字换行",
                 "underline": "下划线",
-                "validation": "数据验证..."
+                "validation": "数据验证...",
+                "hyperlink": "链接"
             });
     }
 
@@ -881,9 +1014,17 @@
         kendo.spreadsheet.messages.view =
             $.extend(true, kendo.spreadsheet.messages.view,{
                 "errors": {
+                    "openUnsupported": "不支持的格式，请选择一个后缀名为 .xlsx 的文件。",
                     "shiftingNonblankCells": "由于数据可能丢失无法插入单元格，请选择另一处插入或者从工作表的尾部删除数据。",
+                    "insertColumnWhenRowIsSelected": "在选择所有列时不能插入列。",
+                    "insertRowWhenColumnIsSelected": "在选择所有行时不能插入行。",
                     "filterRangeContainingMerges": "无法在包含合并单元格的情况下进行筛选",
-                    "validationError": "你输入的值不符合当前单元格的验证规则。"
+                    "sortRangeContainingMerges": "无法在包含合并单元格的情况下排序",
+                    "cantSortMultipleSelection": "无法在多选的情况下排序",
+                    "cantSortNullRef": "无法在没有选择的情况下排序",
+                    "cantSortMixedCells": "无法在包含有混合形状单元格的情况下排序",
+                    "validationError": "你输入的值不符合当前单元格的验证规则。",
+                    "cannotModifyDisabled": "不能修改被禁用的单元格。"
                 },
                 "tabs": {
                     "home": "开始",
@@ -898,7 +1039,8 @@
         kendo.ui.Slider.prototype.options =
             $.extend(true, kendo.ui.Slider.prototype.options,{
                 "increaseButtonTitle": "增加",
-                "decreaseButtonTitle": "减少"
+                "decreaseButtonTitle": "减少",
+                "dragHandleTitle": "拖"
             });
     }
 
@@ -955,6 +1097,16 @@
     if (kendo.ui.TreeView) {
         kendo.ui.TreeView.prototype.options.messages =
             $.extend(true, kendo.ui.TreeView.prototype.options.messages,{
+                "loading": "载入中...",
+                "requestFailed": "请求失败！",
+                "retry": "重试"
+            });
+    }
+
+    /* PanelBar messages */
+    if (kendo.ui.PanelBar) {
+        kendo.ui.PanelBar.prototype.options.messages =
+            $.extend(true, kendo.ui.PanelBar.prototype.options.messages,{
                 "loading": "载入中...",
                 "requestFailed": "请求失败！",
                 "retry": "重试"
@@ -1024,7 +1176,7 @@
     if (kendo.ui.Calendar) {
         kendo.ui.Calendar.prototype.options.messages =
             $.extend(true, kendo.ui.Calendar.prototype.options.messages, {
-                "weekColumnHeader": "..."
+                "weekColumnHeader": ""
             });
     }
 
@@ -1066,6 +1218,29 @@
                 "minute": "分",
                 "second": "秒",
                 "dayperiod": "上午/下午"
+            });
+    }
+
+    /* Mobile Messages ------------------------------ */
+
+    /* Mobile Scroller */
+    if (kendo.mobile.ui.Scroller) {
+        kendo.mobile.ui.Scroller.prototype.options.messages =
+            $.extend(true, kendo.mobile.ui.Scroller.prototype.options.messages, {
+                "pullTemplate": "下拉刷新",
+                "releaseTemplate": "释放刷新",
+                "refreshTemplate": "刷新中..."
+            });
+    }
+
+    /* Mobile ListView */
+    if (kendo.mobile.ui.ListView) {
+        kendo.mobile.ui.ListView.prototype.options.messages =
+            $.extend(true, kendo.mobile.ui.ListView.prototype.options.messages, {
+                "loadMoreText": "点击载入更多",
+                "pullTemplate": "下拉刷新",
+                "releaseTemplate": "释放刷新",
+                "refreshTemplate": "刷新中..."
             });
     }
 
