@@ -5489,6 +5489,10 @@ Sets the title of the PDF file.
       chart.saveAsPDF();
     </script>
 
+### persistSeriesVisibility `Boolean` *(default: true)*
+
+Specifies if the series visible option should be persisted when changing the dataSource data.
+
 ### plotArea `Object`
 
 The plot area configuration options. This is the area containing the plotted series.
