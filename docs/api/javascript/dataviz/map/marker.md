@@ -5,6 +5,7 @@ res_type: api
 ---
 
 # kendo.dataviz.map.Marker
+
 Represents a Map marker with title and location.
 
 ## Configuration

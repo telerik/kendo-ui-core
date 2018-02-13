@@ -85,7 +85,7 @@ If the `dataSource` option is an existing [kendo.data.PivotDataSource](/api/java
 
 ### autoBind `Boolean` *(default: true)*
 
-If set to `false` the widget will not bind to the data source during initialization. In this case data binding will occur when the [change](/api/javascript/data/datasource#events-change) event of the
+If set to `false` the widget will not bind to the data source during initialization. In this case data binding will occur when the [change](/api/javascript/data/datasource/events/change) event of the
 data source is fired. By default the widget will bind to the data source specified in the configuration.
 
 > Setting `autoBind` to `false` is useful when multiple widgets are bound to the same data source. Disabling automatic binding ensures that the shared data source doesn't make more than one request to the remote service.
@@ -1009,14 +1009,14 @@ The height of the PivotGrid. Numeric values are treated as pixels.
 
 ### columnHeaderTemplate `String|Function`
 
-The [template](/api/javascript/kendo#methods-template) which renders the content of the column header cell. By default it renders the *caption* of the tuple member.
+The [template](/api/javascript/kendo/methods/template) which renders the content of the column header cell. By default it renders the *caption* of the tuple member.
 
 The fields which can be used in the template are:
 
 * member - the member of the corresponding column header cell
 * tuple - the tuple of the corresponding column header cell
 
-For information about the tuple structure check this [link](/api/javascript/data/pivotdatasource#configuration-schema.axes).
+For information about the tuple structure check this [link](/api/javascript/data/pivotdatasource/configuration/schema.axes).
 
 #### Example - emphasize the title of a specific member
 
@@ -1058,7 +1058,7 @@ For information about the tuple structure check this [link](/api/javascript/data
 
 ### dataCellTemplate `String|Function`
 
-The [template](/api/javascript/kendo#methods-template) which renders the content of the data cell. By default renders the formatted value (fmtValue) of the data item.
+The [template](/api/javascript/kendo/methods/template) which renders the content of the data cell. By default renders the formatted value (fmtValue) of the data item.
 
 The fields which can be used in the template are:
 
@@ -1067,8 +1067,8 @@ The fields which can be used in the template are:
 * measure - the value of the data cell measure
 * dataItem - the data item itself
 
-For information about the tuple structure check this [link](/api/javascript/data/pivotdatasource#configuration-schema.axes).
-About the data item structure review this [help topic](/api/javascript/data/pivotdatasource#configuration-schema.data).
+For information about the tuple structure check this [link](/api/javascript/data/pivotdatasource/configuration/schema.axes).
+About the data item structure review this [help topic](/api/javascript/data/pivotdatasource/configuration/schema.data).
 
 #### Example - emphasize the values in *2005*
 
@@ -1110,7 +1110,7 @@ About the data item structure review this [help topic](/api/javascript/data/pivo
 
 ### kpiStatusTemplate `String|Function`
 
-The [template](/api/javascript/kendo#methods-template) which renders the content of the `KPI Status` value. By default renders "open", "hold" and "denied" status icons.
+The [template](/api/javascript/kendo/methods/template) which renders the content of the `KPI Status` value. By default renders "open", "hold" and "denied" status icons.
 
 The fields which can be used in the template are:
 
@@ -1119,8 +1119,8 @@ The fields which can be used in the template are:
 * measure - the value of the data cell measure
 * dataItem - the data item itself
 
-For information about the tuple structure check this [link](/api/javascript/data/pivotdatasource#configuration-schema.axes).
-About the data item structure review this [help topic](/api/javascript/data/pivotdatasource#configuration-schema.data).
+For information about the tuple structure check this [link](/api/javascript/data/pivotdatasource/configuration/schema.axes).
+About the data item structure review this [help topic](/api/javascript/data/pivotdatasource/configuration/schema.data).
 
 #### Example - specify a custom template for the KPI Status measure
 
@@ -1162,7 +1162,7 @@ About the data item structure review this [help topic](/api/javascript/data/pivo
 
 ### kpiTrendTemplate `String|Function`
 
-The [template](/api/javascript/kendo#methods-template) which renders the content of the `KPI Trend` value. By default renders "increase", "decrease" and "equal" status icons.
+The [template](/api/javascript/kendo/methods/template) which renders the content of the `KPI Trend` value. By default renders "increase", "decrease" and "equal" status icons.
 
 The fields which can be used in the template are:
 
@@ -1171,8 +1171,8 @@ The fields which can be used in the template are:
 * measure - the value of the data cell measure
 * dataItem - the data item itself
 
-For information about the tuple structure check this [link](/api/javascript/data/pivotdatasource#configuration-schema.axes).
-About the data item structure review this [help topic](/api/javascript/data/pivotdatasource#configuration-schema.data).
+For information about the tuple structure check this [link](/api/javascript/data/pivotdatasource/configuration/schema.axes).
+About the data item structure review this [help topic](/api/javascript/data/pivotdatasource/configuration/schema.data).
 
 #### Example - specify a custom template for the KPI Trend measure
 
@@ -1214,14 +1214,14 @@ About the data item structure review this [help topic](/api/javascript/data/pivo
 
 ### rowHeaderTemplate `String|Function`
 
-The [template](/api/javascript/kendo#methods-template) which renders the content of the row header cell. By default it renders the *caption* of the tuple member.
+The [template](/api/javascript/kendo/methods/template) which renders the content of the row header cell. By default it renders the *caption* of the tuple member.
 
 The fields which can be used in the template are:
 
 * member - the member of the corresponding row header cell
 * tuple - the tuple of the corresponding row header cell
 
-For information about the tuple structure check this [link](/api/javascript/data/pivotdatasource#configuration-schema.axes).
+For information about the tuple structure check this [link](/api/javascript/data/pivotdatasource/configuration/schema.axes).
 
 #### Example - emphasize the title of a specific member
 
@@ -2163,7 +2163,7 @@ The text of the "not equal" filter operator.
 
 ### dataSource `kendo.data.PivotDataSource`
 
-The [data source](/api/javascript/data/pivotdatasource) of the widget. Configured via the [dataSource](#configuration-dataSource) option.
+The [data source](/api/javascript/data/pivotdatasource) of the widget. Configured via the [dataSource](/configuration/datasource) option.
 
 > Changes of the data source will be reflected in the widget.
 

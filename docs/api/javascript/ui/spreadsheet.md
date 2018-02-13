@@ -1171,7 +1171,7 @@ Those tools which are part of a tool group are defined as array. For example `["
             toolbar: {
                 home: [
                     // for all available options, see the toolbar items configuration
-                    // http://docs.telerik.com/kendo-ui/api/javascript/ui/toolbar#configuration-items
+                    // http://docs.telerik.com/kendo-ui/api/javascript/ui/toolbar/configuration/items
                     {
                         type: "button",
                         text: "Custom",

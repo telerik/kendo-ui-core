@@ -54,7 +54,7 @@ The following example demonstrates how to initialize the TreeList and bind it to
 </script>
 ```
 
-Note that the data objects contain both an `id` and a `parentId` field which describe the hierarchy of items. These field names can be changed via the [`schema.model` definition](/api/javascript/data/datasource#configuration-schema-model).
+Note that the data objects contain both an `id` and a `parentId` field which describe the hierarchy of items. These field names can be changed via the [`schema.model` definition](/api/javascript/data/datasource/configuration/schema-model).
 
 ### Bind to Remote Data
 

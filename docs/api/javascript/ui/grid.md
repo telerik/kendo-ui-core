@@ -65,7 +65,7 @@ Changes the delimeter between the items on the same row. Use this option if you 
 
 ### altRowTemplate `String|Function`
 
-The [template](/api/javascript/kendo#methods-template) which renders the alternating table rows. Be default the grid renders a table row (`<tr>`) for every data source item.
+The [template](/api/javascript/kendo/methods/template) which renders the alternating table rows. Be default the grid renders a table row (`<tr>`) for every data source item.
 
 > The outermost HTML element in the template must be a table row (`<tr>`). That table row must have the `uid` data attribute set to `#= uid #`. The grid uses the `uid` data attribute to determine the data to which a table row is bound to.
 > Set the `class` of the table row to `k-alt` to get the default "alternating" look and feel.
@@ -103,7 +103,7 @@ The [template](/api/javascript/kendo#methods-template) which renders the alterna
 
 ### autoBind `Boolean` *(default: true)*
 
-If set to `false`, the Grid will not bind to the data source during initialization, i.e. it will not call the [`fetch`](/api/javascript/data/datasource#methods-fetch) method of the [dataSource](/api/javascript/ui/grid/fields/datasource) instance. In such scenarios data binding will occur when the [change](/api/javascript/data/datasource#events-change) event of the
+If set to `false`, the Grid will not bind to the data source during initialization, i.e. it will not call the [`fetch`](/api/javascript/data/datasource/methods/fetch) method of the [dataSource](/api/javascript/ui/grid/fields/datasource) instance. In such scenarios data binding will occur when the [change](/api/javascript/data/datasource/events/change) event of the
 dataSource instance is fired. By default, `autoBind` is set to `true` and the widget will bind to the data source specified in the configuration.
 
 > Setting `autoBind` to `false` is useful when multiple widgets are bound to the same data source. Disabling automatic binding ensures that the shared data source doesn't make more than one request to the remote service.
@@ -1011,7 +1011,7 @@ Specifies the width of the input before it is initialized or turned into a widge
 
 ### columns.filterable.cell.suggestionOperator `String` *(default: "startswith")*
 
-Specifies the AutoComplete `filter` option. The possible values are the same as the ones for the AutoComplete `filter` option - `"startswith"`, `"endswith"`, `"contains"`. The `"contains"` operator performs a case-insensitive search. To perform a case-sensitive filtering, set a custom filtering function through the [`dataSource.filter.operator`](/api/javascript/data/datasource#configuration-filter.operator) option.
+Specifies the AutoComplete `filter` option. The possible values are the same as the ones for the AutoComplete `filter` option - `"startswith"`, `"endswith"`, `"contains"`. The `"contains"` operator performs a case-insensitive search. To perform a case-sensitive filtering, set a custom filtering function through the [`dataSource.filter.operator`](/api/javascript/data/datasource/configuration/filter.operator) option.
 
 > This operator is completely independent from the operator used for the filtering on this column. For more inforamtion, check [`operator`](columns.filterable.cell.operator).
 
@@ -1466,7 +1466,7 @@ HTML attributes of the column footer. The `footerAttributes` option can be used 
 The table footer cell will look like this: `<td class="table-footer-cell" style="text-align: right; font-size: 14px">Min: 30 Max: 33</td>`.
 
 ### columns.footerTemplate `String|Function`
-The [template](/api/javascript/kendo#methods-template) which renders the footer table cell for the column.
+The [template](/api/javascript/kendo/methods/template) which renders the footer table cell for the column.
 
 The fields which can be used in the template are:
 
@@ -1553,7 +1553,7 @@ The fields which can be used in the template are:
 The format that is applied to the value before it is displayed. Takes the form "{0:format}" where "format" is a [standard number format](/api/javascript/kendo#standard-number-formats),
 [custom number format](/api/javascript/kendo#standard-number-formats), [standard date format](/api/javascript/kendo#standard-date-formats) or a [custom date format](/api/javascript/kendo#custom-date-formats).
 
-> The [kendo.format](/api/javascript/kendo#methods-format) function is used to format the value.
+> The [kendo.format](/api/javascript/kendo/methods/format) function is used to format the value.
 
 #### Example - specify the column format string
 
@@ -1597,7 +1597,7 @@ If set to false the column will not be groupable (requires Grid groupable proper
 
 ### columns.groupHeaderTemplate `String|Function`
 
-The [template](/api/javascript/kendo#methods-template) which renders the group header when the grid is grouped by the column [field](columns.field). By default the name of the field
+The [template](/api/javascript/kendo/methods/template) which renders the group header when the grid is grouped by the column [field](columns.field). By default the name of the field
 and the current group value is displayed.
 
 The fields which can be used in the template are:
@@ -1661,7 +1661,7 @@ The fields which can be used in the template are:
 
 ### columns.groupFooterTemplate `String|Function`
 
-The [template](/api/javascript/kendo#methods-template) which renders the group footer when the grid is grouped by the column field. By default the group footer is not displayed.
+The [template](/api/javascript/kendo/methods/template) which renders the group footer when the grid is grouped by the column field. By default the group footer is not displayed.
 
 The fields which can be used in the template are:
 
@@ -1748,7 +1748,7 @@ The table header cell will look like this: `<th class="table-header-cell" style=
 
 ### columns.headerTemplate `String|Function`
 
-The [template](/api/javascript/kendo#methods-template) which renders the column header content. By default the value of the [title](columns.title) column option
+The [template](/api/javascript/kendo/methods/template) which renders the column header content. By default the value of the [title](columns.title) column option
 is displayed in the column header cell.
 
 > If sorting is enabled, the column header content will be wrapped in a `<a>` element. As a result the template **must** contain only inline elements.
@@ -2007,7 +2007,7 @@ Determines the inital (from un-sorted to sorted state) sort direction. The suppo
 
 ### columns.template `String|Function`
 
-The [template](/api/javascript/kendo#methods-template) which renders the column content. The grid renders table rows (`<tr>`) which represent the data source items.
+The [template](/api/javascript/kendo/methods/template) which renders the column content. The grid renders table rows (`<tr>`) which represent the data source items.
 Each table row consists of table cells (`<td>`) which represent the grid columns. By default the HTML-encoded value of the [field](columns.field) is displayed in the column.
 
 > Use the `template` to customize the way the column displays its value.
@@ -2564,7 +2564,7 @@ If the `dataSource` option is an existing [kendo.data.DataSource](/api/javascrip
 
 ### detailTemplate `String|Function`
 
-The [template](/api/javascript/kendo#methods-template) which renders the detail rows.
+The [template](/api/javascript/kendo/methods/template) which renders the detail rows.
 Check [Detail Template](http://demos.telerik.com/kendo-ui/grid/detailtemplate) for a live demo.
 
 > The detail template content cannot be wider than the total width of all master columns, unless the detail template is scrollable.
@@ -2866,13 +2866,13 @@ The editing mode to use. The supported editing modes are "incell", "inline" and 
 
 ### editable.template `String|Function`
 
-The [template](/api/javascript/kendo#methods-template) which renders popup editor.
+The [template](/api/javascript/kendo/methods/template) which renders popup editor.
 
 The template should contain elements whose `name` HTML attributes are set as the editable fields. This is how the grid will know
 which field to update. The other option is to use [MVVM](/framework/mvvm/overview) bindings in order to bind HTML elements to data item fields.
 
 > Use the `role` data attribute to initialize Kendo UI widgets in the template. Check [data attribute initialization](/framework/data-attribute-initialization) for more info.
-> The validation that is set in `schema.model`(/api/javascript/data/datasource#configuration-schema.model) is not mapped automatically. As a result, when you use the `editable.template` option, you have to add the validation for every element manually.
+> The validation that is set in `schema.model`(/api/javascript/data/datasource/configuration/schema.model) is not mapped automatically. As a result, when you use the `editable.template` option, you have to add the validation for every element manually.
 
 #### Example - customize the popup editor
 
@@ -5373,7 +5373,7 @@ If set to `true` and current view contains no records, message similar to "No re
 
 ### noRecords.template `String|Function`
 
-The [template](/api/javascript/kendo#methods-template) which is rendered when current view contains no records.
+The [template](/api/javascript/kendo/methods/template) which is rendered when current view contains no records.
 
 #### Example - customize the noRecords message
 
@@ -5402,7 +5402,7 @@ If set to `true` the grid will display a pager. By default paging is disabled.
 
 Can be set to a JavaScript object which represents the pager configuration.
 
-> Don't forget to set a [`pageSize`](/api/javascript/data/datasource#configuration-pageSize), no matter if paging is performed client-side or server-side. A `pageSize` can be defined in the `pageable` settings, or in the [`dataSource`](/api/javascript/ui/grid/configuration/datasource) settings. If an already existing dataSource instance is passed to the Grid, then the [`pageSize`](/api/javascript/data/datasource#configuration-pageSize) option should be set in the dataSource's settings and not in the `pageable` settings.
+> Don't forget to set a [`pageSize`](/api/javascript/data/datasource/configuration/pagesize), no matter if paging is performed client-side or server-side. A `pageSize` can be defined in the `pageable` settings, or in the [`dataSource`](/api/javascript/ui/grid/configuration/datasource) settings. If an already existing datasource instance is passed to the grid, then the [`pagesize`](/api/javascript/data/datasource/configuration/pagesize) option should be set in the dataSource's settings and not in the `pageable` settings.
 
 #### Example - enable paging
 
@@ -5718,7 +5718,7 @@ The text messages displayed in pager. Use this option to customize or localize t
 
 ### pageable.messages.display `String` *(default: "{0} - {1} of {2} items")*,
 
-The pager info text. Uses [kendo.format](/api/javascript/kendo#methods-format).
+The pager info text. Uses [kendo.format](/api/javascript/kendo/methods/format).
 
 Contains three placeholders:
 - {0} - the first data item index
@@ -5804,7 +5804,7 @@ The label displayed before the pager input.
 
 ### pageable.messages.of `String` *(default: "of {0}")*,
 
-The label displayed before the pager input. Uses [kendo.format](/api/javascript/kendo#methods-format). Contains one optional placeholder {0} which represents the total number of pages.
+The label displayed before the pager input. Uses [kendo.format](/api/javascript/kendo/methods/format). Contains one optional placeholder {0} which represents the total number of pages.
 
 #### Example - set the label after the pager input
 
@@ -6498,7 +6498,7 @@ Sets a value indicating whether the selection will be persisted when sorting, pa
 
 > **Note:** Selection persistence works only for row selection.
 >
-> In order for selection persistence to work correctly, you need to define an ID field in [`schema.model`](/api/javascript/data/datasource#configuration-schema.model).
+> In order for selection persistence to work correctly, you need to define an ID field in [`schema.model`](/api/javascript/data/datasource/configuration/schema.model).
 >
 > Selection persistence does not work for new items when the Grid DataSource is in offline mode. In offline mode, newly added items do not have IDs, which are required for selection persistence to work.
 
@@ -6583,7 +6583,7 @@ the [Column widths](/web/grid/appearance#column-widths) help section for additio
 
 ### rowTemplate `String|Function`
 
-The [template](/api/javascript/kendo#methods-template) which renders rows. Be default renders a table row (`<tr>`) for every data source item.
+The [template](/api/javascript/kendo/methods/template) which renders rows. Be default renders a table row (`<tr>`) for every data source item.
 
 > The outermost HTML element in the template must be a table row (`<tr>`). That table row must have the `uid` data attribute set to `#= uid #`. The grid uses the `uid` data attribute to determine the data to which a table row is bound to.
 
@@ -6822,7 +6822,7 @@ The sorting mode. If set to "single" the user can sort by one column. If set to 
 ### toolbar `String|Function|Array`
 
 If a `String` value is assigned to the `toolbar` configuration option, it will be treated as a single string template for the whole grid Toolbar,
-and the string value will be passed as an argument to a [`kendo.template()`](/api/javascript/kendo#methods-template) function.
+and the string value will be passed as an argument to a [`kendo.template()`](/api/javascript/kendo/methods/template) function.
 
 If a `Function` value is assigned (it may be a kendo.template() function call or a generic function reference), then the return value of the function will be used to render the Grid Toolbar contents.
 
@@ -6985,7 +6985,7 @@ This class can be used to obtain reference to the button after Grid initializati
 
 ### toolbar.template `String|Function`
 
-The [template](/api/javascript/kendo#methods-template) which renders the command. By default renders a button.
+The [template](/api/javascript/kendo/methods/template) which renders the command. By default renders a button.
 
 #### Example - set the template as a function
 
@@ -7069,7 +7069,7 @@ The text displayed by the command button. If not set the [name](toolbar.name)` o
 
 ### columns `Array`
 
-The columns of the grid initialized from the [columns](/api/javascript/ui/grid/configuration/columns) option. Every item from the `columns` array has the same fields as the corresponding [columns](/api/javascript/ui/grid/configuration/columns) option.
+The columns of the grid initialized from the [columns](/api/javascript/ui/grid/configuration/columns) option. every item from the `columns` array has the same fields as the corresponding [columns](/api/javascript/ui/grid/configuration/columns) option.
 
 #### Example - iterate the grid columns
 
@@ -7906,7 +7906,7 @@ When using multicolumn headers, using an index will hide a top-level column toge
 
 ### items
 
-Obtains an Array of the DOM elements, which correspond to the data items from the Kendo UI DataSource [view](/api/javascript/data/datasource#methods-view) (e.g. the ones on the current page).
+Obtains an Array of the DOM elements, which correspond to the data items from the Kendo UI DataSource [view](/api/javascript/data/datasource/methods/view) (e.g. the ones on the current page).
 
 #### Returns
 
@@ -8094,7 +8094,7 @@ Initiates the PDF export and returns a promise. Also triggers the [pdfExport](/a
 
 ### saveChanges
 
-Saves any pending changes by calling the [sync](/api/javascript/data/datasource#methods-sync) method.
+Saves any pending changes by calling the [sync](/api/javascript/data/datasource/methods/sync) method.
 
 Fires the [saveChanges](/api/javascript/ui/grid/events/savechanges) event.
 
@@ -8482,7 +8482,7 @@ The event will be fired only when the Grid is `selectable`.
 
 ##### e.model `kendo.data.Model`
 
-The data item which is going to be edited. Use its [isNew](/api/javascript/data/model#methods-isNew) method to check if the data item is new (created) or not (edited).
+The data item which is going to be edited. Use its [isNew](/api/javascript/data/model/methods/isnew) method to check if the data item is new (created) or not (edited).
 
 ##### e.sender `kendo.ui.Grid`
 
@@ -9572,7 +9572,7 @@ e.g. to [attach additional events](/intro/installation/events-and-methods#bind-t
 
 ##### e.model `kendo.data.Model`
 
-The data item which is going to be edited. Use its [isNew](/api/javascript/data/model#methods-isNew) method to check if the data item is new (created) or not (edited).
+The data item which is going to be edited. Use its [isNew](/api/javascript/data/model/methods/isnew) method to check if the data item is new (created) or not (edited).
 
 ##### e.sender `kendo.ui.Grid`
 
@@ -10558,7 +10558,7 @@ The event handler function context (available via the `this` keyword) will be se
 
 ##### e.preventDefault `Function`
 
-If invoked the grid will not call the [sync](/api/javascript/data/datasource#methods-sync) method of the data source.
+If invoked the grid will not call the [sync](/api/javascript/data/datasource/methods/sync) method of the data source.
 
 ##### e.sender `kendo.ui.Grid`
 

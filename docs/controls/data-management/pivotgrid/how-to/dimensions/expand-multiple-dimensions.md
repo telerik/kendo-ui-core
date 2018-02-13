@@ -12,7 +12,7 @@ You might need to reset the expanding that has occurred and revert to your CMS.
 
 In order for the expand to properly work, set fully qualified names to the expanded tuples as shown in the following code snippet with the `[Calendar Year].&[2005]` configuration.
 
-The following example demonstrates how to expand multiple column dimensions by using the [`dataBound`](/api/javascript/ui/pivotgrid#events-dataBound) event of the PivotGrid.
+The following example demonstrates how to expand multiple column dimensions by using the [`dataBound`](/api/javascript/ui/pivotgrid/events/databound) event of the PivotGrid.
 
 ###### Example
 

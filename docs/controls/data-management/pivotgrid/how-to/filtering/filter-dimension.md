@@ -8,7 +8,7 @@ slug: howto_filter_dimensions_pivotgrid
 
 # Filter Dimensions
 
-The following example demonstrates how use the [`filter`](/api/javascript/data/datasource#configuration-filter) option of the Data Source to filter the result set.
+The following example demonstrates how use the [`filter`](/api/javascript/data/datasource/configuration/filter) option of the Data Source to filter the result set.
 
 ###### Example
 

@@ -636,7 +636,7 @@ kendo.bind(document.body, viewModel);
 In order for a widget to support [`value` binding](http://docs.telerik.com/kendo-ui/framework/mvvm/bindings/value), you need to:
 
 * Add a `value` method to the widget, which sets the current widget value and returns the current value if no arguments are passed.
-* [Trigger](http://docs.telerik.com/kendo-ui/api/javascript/ui/widget#methods-trigger) the widget change event when the widget value is changed.
+* [Trigger](http://docs.telerik.com/kendo-ui/api/javascript/ui/widget/methods/trigger) the widget change event when the widget value is changed.
 
 The following examples demonstrate how to create a simple input widget that selects the value on focus.
 

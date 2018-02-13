@@ -28,7 +28,7 @@ How can I persist expanded rows after grid refresh?
 
 ## Solution
 
-A possible solution is to save the expanded rows in the [localStorage](https://developer.mozilla.org/en-US/docs/Web/API/Window/localStorage) of the browser. Within the [detailExpand](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid#events-detailExpand) event handler add the expanded row to the `localStorage` and then remove it within the [detailCollapse](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid#events-detailCollapse) event handler. Finally, when the [dataBound](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid#events-dataBound) event is fired, expand all rows saved to the `localStorage` using the [expandRow](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid#methods-expandRow) method.
+A possible solution is to save the expanded rows in the [localStorage](https://developer.mozilla.org/en-US/docs/Web/API/Window/localStorage) of the browser. Within the [detailExpand](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid/events/detailexpand) event handler add the expanded row to the `localStorage` and then remove it within the [detailCollapse](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid/events/detailcollapse) event handler. Finally, when the [dataBound](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid/events/databound) event is fired, expand all rows saved to the `localStorage` using the [expandRow](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid/methods/expandrow) method.
 
 ```html
   <div id="example">
@@ -122,7 +122,7 @@ A possible solution is to save the expanded rows in the [localStorage](https://d
           var items = localStorage['expanded'];
           var grid = this;
           if(items){
-            items = JSON.parse(items);            
+            items = JSON.parse(items);
             items.forEach(function(x){
               var item = grid.dataSource.view().find(function(y){
                 return y.EmployeeID == x;
@@ -153,7 +153,7 @@ A possible solution is to save the expanded rows in the [localStorage](https://d
         }
 
         function onDetailCollapse(e){
-          var item = this.dataItem(e.masterRow);          
+          var item = this.dataItem(e.masterRow);
           var items =JSON.parse(localStorage['expanded']);
 
           items = items.filter(function(x){

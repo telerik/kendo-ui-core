@@ -70,7 +70,7 @@ The widget will use the `,` separator for the `recurrenceException` values to co
 
 **Scheduler**
 
-The widget will keep the selection state on `blur`. The change was introduced to behave similarly to the Kendo UI Grid. To bring the old behavior back, use the [`select`](http://docs.telerik.com/kendo-ui/api/javascript/ui/scheduler#methods-select) method to clear the selection on `blur`.
+The widget will keep the selection state on `blur`. The change was introduced to behave similarly to the Kendo UI Grid. To bring the old behavior back, use the [`select`](http://docs.telerik.com/kendo-ui/api/javascript/ui/scheduler/methods/select) method to clear the selection on `blur`.
 
 ## Kendo UI 2016 Q1
 
@@ -82,7 +82,7 @@ The widget will keep the selection state on `blur`. The change was introduced to
 
 **DropDownList/ComboBox/MultiSelect**
 
-The widget will clear the applied filter if the user decides to set a new value using the [`value`](/api/javascript/ui/dropdownlist#methods-value) method.
+The widget will clear the applied filter if the user decides to set a new value using the [`value`](/api/javascript/ui/dropdownlist/methods/value) method.
 
 **DropDownList/ComboBox**
 

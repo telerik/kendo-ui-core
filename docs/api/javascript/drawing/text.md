@@ -5,6 +5,7 @@ res_type: api
 ---
 
 # kendo.drawing.Text : kendo.drawing.Element
+
 Draws a single line of text at the given position.
 
 #### Example - creating a text

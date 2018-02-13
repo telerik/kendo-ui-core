@@ -31,7 +31,7 @@ How can I allow the users to select or deselect ListView items only with the mou
 1. Handle the `mousedown` event for the ListView component.
 1. Prevent the `click` event for the items in the ListView.
 1. Check the clicked target and if it is a ListView item, keep it in an array. If the item is already selected, remove it from the array.
-1. Call the [`select()`](https://docs.telerik.com/kendo-ui/api/javascript/ui/listview#methods-select) method with the populated array of items.
+1. Call the [`select()`](https://docs.telerik.com/kendo-ui/api/javascript/ui/listview/methods/select) method with the populated array of items.
 
 
 ```html

@@ -32,7 +32,7 @@ How can I set the width of the filter drop-down in the Grid header when the drop
 
 ## Solution
 
-Programmatically set the [`autoWidth`](https://docs.telerik.com/kendo-ui/api/javascript/ui/autocomplete#configuration-autoWidth) property of the AutoComplete when the Grid is [initialized](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid#events-dataBound).
+Programmatically set the [`autoWidth`](https://docs.telerik.com/kendo-ui/api/javascript/ui/autocomplete/configuration/autowidth) property of the AutoComplete when the Grid is [initialized](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid/events/databound).
 
 ```html
  <div id="example">
@@ -103,7 +103,7 @@ Programmatically set the [`autoWidth`](https://docs.telerik.com/kendo-ui/api/jav
                             title: "Order Date",
                             format: "{0:MM/dd/yyyy}"
                         }]
-                    });                 
+                    });
                 });
             </script>
         </div>

@@ -5,6 +5,7 @@ res_type: api
 ---
 
 # kendo.drawing.LinearGradient : kendo.drawing.Gradient
+
 Represents a linear color gradient.
 
 #### Example - creating a linear gradient

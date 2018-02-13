@@ -112,9 +112,9 @@ The example below demonstrates how to manage the hiding settings of a notificati
 
 By default, Kendo UI Notification creates popups, which overlay the other page content. If you do not define any position settings, the first popup will be displayed near the bottom-right corner of the browser viewport and subsequent popups will stack upwards.
 
-You can independently control positioning and stacking. If you do not define any stacking settings, the popups will stack upwards or downwards, depending on the positioning settings. For example, popups displayed at the top of the viewport will stack downwards and vice versa. The automatic settings of the stacking functionality comply with a common preference among users. However, you can render leftward or rightward stacking by explicitly defining the respective settings.  
+You can independently control positioning and stacking. If you do not define any stacking settings, the popups will stack upwards or downwards, depending on the positioning settings. For example, popups displayed at the top of the viewport will stack downwards and vice versa. The automatic settings of the stacking functionality comply with a common preference among users. However, you can render leftward or rightward stacking by explicitly defining the respective settings.
 
-Popups are [pinned](/api/javascript/ui/notification#configuration-position.pinned) by default, which means that they do not change their position when users scroll the page. The pinned functionality is achieved by applying a `position:fixed` style to the popups. If you want to let the popups move together with the scrolled page, use the `position:absolute` style.
+Popups are [pinned](/api/javascript/ui/notification/configuration/position.pinned) by default, which means that they do not change their position when users scroll the page. The pinned functionality is achieved by applying a `position:fixed` style to the popups. If you want to let the popups move together with the scrolled page, use the `position:absolute` style.
 
 If the popup content is expected to vary and stacking is likely to occur, it is a good idea to define explicit dimensions. In this way, the popups are aligned and look better when stacked next to one another.
 
@@ -149,7 +149,7 @@ Stacking works with the help of a Globally Unique Identifier (GUID), which is ge
 
 When a popup notification message from a given stack is hidden, the remaining visible popups do not move. If automatic moving and repositioning is desired, it can be achieved, as shown in the [Move Visible Notifications after Hiding Others]({% slug howto_move_notifications_after_hiding_others %}) how-to article.
 
-> **Important**  
+> **Important**
 >
 > The usage of more than one Notification widget instances, which display notifications at the same place on the page, is not recommended because the notifications from the multiple instances will overlap.
 
@@ -176,7 +176,7 @@ The example below demonstrates how to enable static notifications.
 
 ### Change Settings for Specific Notification Messages
 
-It is possible for a single Notification widget instance to display different messages with different settings, e.g. messages related to automatic hiding, hide timeouts, etc. To apply the desired configuration options, use the [`setOptions`](/api/javascript/ui/widget#methods-setOptions) method. The new options will apply to all messages displayed later on. To restore or change the widget settings again, use `setOptions` as many times as necessary.
+It is possible for a single Notification widget instance to display different messages with different settings, e.g. messages related to automatic hiding, hide timeouts, etc. To apply the desired configuration options, use the [`setOptions`](/api/javascript/ui/widget/methods/setoptions) method. The new options will apply to all messages displayed later on. To restore or change the widget settings again, use `setOptions` as many times as necessary.
 
 ###### Example
 
@@ -227,7 +227,7 @@ For more information on the configuration options, refer to the [Kendo UI Notifi
 
 ## Templates
 
-> **Important**  
+> **Important**
 >
 > The content of this section is intended to users that are familiar with [Kendo UI templates]({% slug overview_kendoui_templatescomponent %}).
 

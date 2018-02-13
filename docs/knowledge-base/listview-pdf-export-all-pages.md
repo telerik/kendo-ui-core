@@ -29,7 +29,7 @@ How can I export all ListView pages to a PDF file?
 ## Solution
 
 1. Select the Pager of the ListView.
-1. Save the `dataSource` [`pageSize`](https://docs.telerik.com/kendo-ui/api/javascript/data/datasource#methods-pageSize) in a variable.
+1. Save the `dataSource` [`pageSize`](https://docs.telerik.com/kendo-ui/api/javascript/data/datasource/methods/pagesize) in a variable.
 1. Change the `pageSize` to display all the items.
 1. Use the [Kendo UI Drawing API](https://demos.telerik.com/kendo-ui/pdf-export/index) to export the desired content.
 1. When the export promise is done, set the old `pageSize` to the `dataSource` of the Pager.    

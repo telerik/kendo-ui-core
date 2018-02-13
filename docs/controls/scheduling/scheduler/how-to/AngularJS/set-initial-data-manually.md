@@ -116,7 +116,7 @@ The following example demonstrates how to manually set initial data in the Kendo
         //set data
         ds.data(transformData(response));
 
-        //set another DataSource using widget setDataSource if like: http://docs.telerik.com/kendo-ui/api/javascript/ui/scheduler#methods-setDataSource
+        //set another DataSource using widget setDataSource if like: http://docs.telerik.com/kendo-ui/api/javascript/ui/scheduler/methods/setDataSource
       });
       }
 

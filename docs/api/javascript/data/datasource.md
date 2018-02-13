@@ -165,7 +165,7 @@ makes a HTTP request for every CRUD operation.
 
 ### data `Array|String`
 
-The array of data items which the data source contains. The data source will wrap those items as [`kendo.data.ObservableObject`](/api/javascript/data/observableobject) or [`kendo.data.Model`](/api/javascript/data/model) (if [`schema.model`](#configuration-schema-model) is set).
+The array of data items which the data source contains. The data source will wrap those items as [`kendo.data.ObservableObject`](/api/javascript/data/observableobject) or [`kendo.data.Model`](/api/javascript/data/model) (if [`schema.model`](/configuration/schema-model) is set).
 
 Can be set to a string value if the [`schema.type`](#configuration-schema.type) option is set to `"xml"`.
 
@@ -659,7 +659,7 @@ The data item field to group by.
 
 ### inPlaceSort `Boolean` *(default: false)*
 
-If set to `true` the original `Array` used as [`data`](#configuration-data) will be sorted when sorting operation is performed. This setting supported only with local data, bound to a JavaScript array via the [`data`](#configuration-data) option. 
+If set to `true` the original `Array` used as [`data`](#configuration-data) will be sorted when sorting operation is performed. This setting supported only with local data, bound to a JavaScript array via the [`data`](#configuration-data) option.
 
 ### offlineStorage `String|Object`
 
@@ -1038,7 +1038,7 @@ The result should have the following format:
 
 The data item (model) configuration.
 
-If set to an object, the [`Model.define`](/api/javascript/data/model#model.define) method will be used to initialize the data source model.
+If set to an object, the [`Model.define`](/api/javascript/data/model/methods/define) method will be used to initialize the data source model.
 
 If set to an existing [`kendo.data.Model`](/api/javascript/data/model) instance, the data source will use that instance and will **not** initialize a new one.
 
@@ -1459,7 +1459,7 @@ The field by which the data items are sorted.
       console.log(data[0].age); // displays "33"
     });
     </script>
-	
+
 ### sort.compare `Function`
 
 Function which can be used for custom comparing of the DataSource items.
@@ -1482,9 +1482,9 @@ Function which can be used for custom comparing of the DataSource items.
           { id: 3, item: "three" },
           { id: 4, item: "four" }
         ],
-        sort: { field: "item", dir: "asc", compare: function(a, b) {          
+        sort: { field: "item", dir: "asc", compare: function(a, b) {
           return numbers[a.item] - numbers[b.item];
-        } 
+        }
               }
       });
 
@@ -2387,7 +2387,7 @@ Refer to the [`jQuery.ajax`](http://api.jquery.com/jQuery.ajax) documentation fo
           dataType: "jsonp", // "jsonp" is required for cross-domain requests; use "json" for same-domain requests
           data:  {
               skip: 0,
-              take: 2 
+              take: 2
           }
         }
       }
@@ -2406,7 +2406,7 @@ Refer to the [`jQuery.ajax`](http://api.jquery.com/jQuery.ajax) documentation fo
           data: function() {
               return {
                   skip: 0,
-                  take: 2 
+                  take: 2
               };
           }
         }
@@ -2623,7 +2623,7 @@ A callback that should be called in case of failure of any of the operations.
               read:  function(options){
                 $.ajax({
                   url: "https://demos.telerik.com/kendo-ui/service/products",
-                  dataType: "jsonp", 
+                  dataType: "jsonp",
                   success: function(result) {
                     options.success(result);
                   },
@@ -2659,15 +2659,15 @@ A callback that should be called in case of failure of any of the operations.
               }
             }
           });
-        
+
           dataSource.read().then(function(){
             var productOne = dataSource.at(1),
-                productTwo = dataSource.at(2); 
+                productTwo = dataSource.at(2);
             productOne.set("UnitPrice",42);
             productTwo.set("UnitPrice",42);
-            dataSource.sync();          
-          });			
-    
+            dataSource.sync();
+          });
+
       </script>
 
 ### transport.update `Object|String|Function`
@@ -3183,10 +3183,10 @@ The optional data item (model). If specified, only the changes of this data item
 Gets or sets the data items of the data source.
 
 If the data source is bound to a remote service (via the [`transport`](#configuration-transport) option), the `data` method will return the service response.
-Every item from the response is wrapped in a [`kendo.data.ObservableObject`](/api/javascript/data/observableobject) or [`kendo.data.Model`](/api/javascript/data/model) (if the [`schema.model`](#configuration-schema.model) option is set).
+Every item from the response is wrapped in a [`kendo.data.ObservableObject`](/api/javascript/data/observableobject) or [`kendo.data.Model`](/api/javascript/data/model) (if the [`schema.model`](/configuration/schema.model) option is set).
 
 If the data source is bound to a JavaScript array (via the [`data`](#configuration-data) option), the `data` method will return the items of that array.
-Every item from the array is wrapped in a [`kendo.data.ObservableObject`](/api/javascript/data/observableobject) or [`kendo.data.Model`](/api/javascript/data/model) (if the [`schema.model`](#configuration-schema.model) option is set).
+Every item from the array is wrapped in a [`kendo.data.ObservableObject`](/api/javascript/data/observableobject) or [`kendo.data.Model`](/api/javascript/data/model) (if the [`schema.model`](/configuration/schema.model) option is set).
 
 If the data source is grouped (via the [`group`](#configuration-group) option or the [group](#methods-group) method) and the [`serverGrouping`](#configuration-serverGrouping) is set to `true`, the `data` method will return the group items.
 

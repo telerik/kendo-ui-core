@@ -9,7 +9,7 @@ slug: howto_rendercustomsymbols_forbubblelayers_map
 
 The Bubble Layer allows you to define the way symbols are rendered.
 
-This approach works by defining a [`symbol`](/api/javascript/dataviz/ui/map#configuration-layers.symbol) function that uses the [Drawing API]({% slug overview_kendoui_drawingapi %}) to define the shape. The symbol is typically a [Group](/api/javascript/drawing/group) of shapes.
+This approach works by defining a [`symbol`](/api/javascript/dataviz/ui/map/configuration/layers.symbol) function that uses the [Drawing API]({% slug overview_kendoui_drawingapi %}) to define the shape. The symbol is typically a [Group](/api/javascript/drawing/group) of shapes.
 
 The following example demonstrates how to render 200-kilometer lines in West-East direction as a symbol. Note that the lines get longer the farther you go North, which is due to that fact that the example uses the [Mercator Projection](https://en.wikipedia.org/wiki/Mercator_projection).
 
@@ -52,7 +52,7 @@ The following example demonstrates how to render 200-kilometer lines in West-Eas
 
             // Find locations 100km west and east of center
             //
-            // http://docs.telerik.com/kendo-ui/api/javascript/dataviz/map/location#methods-destination
+            // http://docs.telerik.com/kendo-ui/api/javascript/dataviz/map/location/methods/destination
             //
             // Actual distance can be bound to e.dataItem fields
             var l1 = location.destination(100000, 270);
@@ -60,7 +60,7 @@ The following example demonstrates how to render 200-kilometer lines in West-Eas
 
             // View (screen) coordinates for the locations
             //
-            // http://docs.telerik.com/kendo-ui/api/javascript/dataviz/ui/map#methods-locationToView
+            // http://docs.telerik.com/kendo-ui/api/javascript/dataviz/ui/map/methods/locationToView
             var p1 = map.locationToView(l1);
             var p2 = map.locationToView(l2);
 

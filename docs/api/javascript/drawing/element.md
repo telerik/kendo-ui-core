@@ -5,6 +5,7 @@ res_type: api
 ---
 
 # kendo.drawing.Element : kendo.Class
+
 An abstract base class representing common members of all drawing elements.
 
 ## Constructor Parameters

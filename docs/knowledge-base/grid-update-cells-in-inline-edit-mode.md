@@ -129,5 +129,5 @@ To update the value of the Grid cells in an inline edit row mode when another fi
 
 ## See Also
 
-* [The set Method of the Grid](https://docs.telerik.com/kendo-ui/api/javascript/data/model#methods-set)
+* [The set Method of the Grid](https://docs.telerik.com/kendo-ui/api/javascript/data/model/methods/set)
 * [The change Event of the Grid](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid/events/change)

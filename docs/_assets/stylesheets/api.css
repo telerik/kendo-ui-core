@@ -95,6 +95,7 @@
   overflow-wrap: break-word;
   width: 270px;
   margin-top: 60px;
+  /* bottom: 84px; */
 }
 
 @media (min-width: 1660px) {
@@ -153,6 +154,7 @@
   list-style: none;
   margin: 0;
   padding: 0;
+  overflow-y: auto;
 }
 
 .api-toc-container .active-toc-item, .links-container>ul .selected-dropdown-breadcrumb {
@@ -247,6 +249,21 @@ h2 a:first-child+a code:before {
   vertical-align: middle;
 }
 
+.constructor-parameters:before {
+  background-color: #4b6584;
+  content: "CP";
+}
+
+.properties:before {
+  background-color: #10ac84;
+  content: "P";
+}
+
+.class-methods:before {
+  background-color: #feca57;
+  content: "CM";
+}
+
 .configuration:before {
   background-color: #1ab125;
   content: "C";
@@ -304,7 +321,7 @@ h2 a:first-child+a code:before {
   min-height: 100%;
 }
 
-footer {
+#markdown-toc~footer {
   position: absolute;
   bottom: 0;
   left: 0;

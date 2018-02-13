@@ -33,7 +33,7 @@ How can I use this color to the marker on the Map based on the field value?
 
 The Kendo UI Map does not provide a built-in solution for achieving this behavior. However, you can still work around this issue.
 
-After the marker is created, the [`markerActivate`](http://docs.telerik.com/kendo-ui/api/javascript/dataviz/ui/map#events-markerActivate) event is fired. Although the styles of the markers come from the selected themes styles, handle the `markerActivate` event, get reference to the rendered element, and manually change its color by using jQuery.
+After the marker is created, the [`markerActivate`](http://docs.telerik.com/kendo-ui/api/javascript/dataviz/ui/map/events/markeractivate) event is fired. Although the styles of the markers come from the selected themes styles, handle the `markerActivate` event, get reference to the rendered element, and manually change its color by using jQuery.
 
 ```
 markerActivate: function(e) {

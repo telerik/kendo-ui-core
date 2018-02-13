@@ -14,8 +14,8 @@ As of the [Kendo UI Q3 2014 (2014.3.1119) release](https://www.telerik.com/suppo
 
 To enable PDF export, include the corresponding toolbar command and configure the export settings.
 
-* [Toolbar Configuration](/api/javascript/ui/grid#configuration-toolbar)
-* [PDF Export Configuration](/api/javascript/ui/grid#configuration-pdf)
+* [Toolbar Configuration](/api/javascript/ui/grid/configuration/toolbar)
+* [PDF Export Configuration](/api/javascript/ui/grid/configuration/pdf)
 * [Online Demo](http://demos.telerik.com/kendo-ui/grid/pdf-export)
 
 It is highly recommended that you include the Pako Deflate library in the page to enable compression.
@@ -53,7 +53,7 @@ The following example demonstrates how to enable the PDF export functionality of
     </script>
 ```
 
-To initiate PDF export via code, call the [`saveAsPdf`](/api/javascript/ui/grid.html#methods-saveAsPdf) method.
+To initiate PDF export via code, call the [`saveAsPdf`](/api/javascript/ui/grid.html/methods/saveaspdf) method.
 
 > **Important**
 > * By default, Kendo UI Grid exports the current page of the data with sorting, filtering, grouping, and aggregates applied.
@@ -63,7 +63,7 @@ To initiate PDF export via code, call the [`saveAsPdf`](/api/javascript/ui/grid.
 
 ### Export of All Pages
 
-By default, the Kendo UI Grid exports only the current page of data. To export all pages set the [`allPages`](/api/javascript/ui/grid#configuration-pdf.allPages) option to `true`.
+By default, the Kendo UI Grid exports only the current page of data. To export all pages set the [`allPages`](/api/javascript/ui/grid/configuration/pdf.allpages) option to `true`.
 
 > **Important**
 >
@@ -100,7 +100,7 @@ The following example demonstrates how to export all the pages of a Kendo UI Gri
 
 ### Fit to Paper Size
 
-By default, the [paper size](/api/javascript/ui/grid#configuration-pdf.paperSize) of the exported document is determined by the size of the Grid on the screen. For detailed information on the conversion from screen to document units, refer to the article on [dimensions and CSS units]({% slug drawingofhtmlelements_drawingapi %}#dimensions-and-css-units#).
+By default, the [paper size](/api/javascript/ui/grid/configuration/pdf.papersize) of the exported document is determined by the size of the Grid on the screen. For detailed information on the conversion from screen to document units, refer to the article on [dimensions and CSS units]({% slug drawingofhtmlelements_drawingapi %}#dimensions-and-css-units#).
 
 This implies that the document can contain pages with different dimensions if the size of the Grid is not uniform for each data page.
 
@@ -241,7 +241,7 @@ The following example demonstrates how to export a Grid by using a page template
 
 ### Server Proxy
 
-Internet Explorer 9 and Safari do not support the option for saving a file and require the implementation of a [server proxy]({% slug overview_savingfiles_kendoui %}#browser-support). Set the [`proxyURL`](/api/javascript/ui/grid#configuration-pdf.proxyURL) option to specify the server proxy URL, as shown below.
+Internet Explorer 9 and Safari do not support the option for saving a file and require the implementation of a [server proxy]({% slug overview_savingfiles_kendoui %}#browser-support). Set the [`proxyURL`](/api/javascript/ui/grid/configuration/pdf.proxyurl) option to specify the server proxy URL, as shown below.
 
 ###### Example
 
@@ -378,7 +378,7 @@ All [known limitations]({% slug drawingofhtmlelements_drawingapi %}#known-limita
 Note that even with the proper CORS headers, IE9 will not be able to load images or fonts from another domain, and could raise an uncatchable security exception. If you need to support IE9, make sure you host images and fonts on the same domain as the application.
 
 * The maximum document size is limited to 5080x5080mm (200x200 inches) by the PDF 1.5 specification. Larger files might not open in all viewers.
-* Older browsers, such as Internet Explorer 9 and Safari, require the implementation of a server proxy. For more information on this, refer to [the `proxyUrl` configuration section](/api/javascript/ui/grid#configuration-pdf.proxyURL).
+* Older browsers, such as Internet Explorer 9 and Safari, require the implementation of a server proxy. For more information on this, refer to [the `proxyUrl` configuration section](/api/javascript/ui/grid/configuration/pdf.proxyurl).
 
 ## Further Reading
 

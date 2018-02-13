@@ -118,7 +118,7 @@ Now construct the path by issuing the commands shown below.
         .lineTo(150, 0).lineTo(150, 65).lineTo(0, 65)
         .close();
 
-Set the line initial position with a [`moveTo`](/api/javascript/drawing/path#methods-moveTo) command. The three sides are drawn by using the [`lineTo`](/api/javascript/drawing/path#methods-lineTo) commands. The last command [`closes`](/api/javascript/drawing/path#methods-close) the path, drawing a straight line to the initial position.
+Set the line initial position with a [`moveTo`](/api/javascript/drawing/path/methods/moveto) command. The three sides are drawn by using the [`lineTo`](/api/javascript/drawing/path/methods/lineto) commands. The last command [`closes`](/api/javascript/drawing/path/methods/close) the path, drawing a straight line to the initial position.
 
 Since this is a rectangle, use the alternative [`fromRect`](/api/javascript/drawing/path#fromrect) static method, as demonstrated below.
 

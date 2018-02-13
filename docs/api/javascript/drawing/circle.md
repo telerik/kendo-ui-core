@@ -5,6 +5,7 @@ res_type: api
 ---
 
 # kendo.drawing.Circle : kendo.drawing.Element
+
 Draws a circle with set geometry, fill and stroke.
 
 #### Example - creating a circle

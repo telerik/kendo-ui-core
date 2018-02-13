@@ -9,7 +9,7 @@ slug: howto_bindcharttosheet_spreadsheet_widget
 
 The following example demonstrates how to extract the Spreadsheet data and populate a Kendo UI Chart with it.
 
-The Chart is updated on sheet upon a [`change`](/api/javascript/spreadsheet/sheet#events-change) event.
+The Chart is updated on sheet upon a [`change`](/api/javascript/spreadsheet/sheet/events/change) event.
 
 ###### Example
 
@@ -82,7 +82,7 @@ The Chart is updated on sheet upon a [`change`](/api/javascript/spreadsheet/shee
 
     function bindChart(chart, sheet, range) {
         // Change will fire when the sheet data changes
-        // http://docs.telerik.com/kendo-ui/api/javascript/spreadsheet/sheet#events-change
+        // http://docs.telerik.com/kendo-ui/api/javascript/spreadsheet/sheet/events/change
         sheet.bind("change", function(e) {
             if (e.recalc) {
                update();

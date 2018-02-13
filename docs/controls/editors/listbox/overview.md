@@ -142,7 +142,7 @@ Selected items can be reordered by using any of the following approaches:
 
 ### Dragging and Dropping
 
-To enable the drag-and-drop feature of the ListBox, set its [`draggable`](/api/javascript/ui/listbox#configuration-draggable) property to `true`. You can also customize the drag-and-drop behavior of the widget by using its `draggable.placeholder` and `draggable.hint` options.
+To enable the drag-and-drop feature of the ListBox, set its [`draggable`](/api/javascript/ui/listbox/configuration/draggable) property to `true`. You can also customize the drag-and-drop behavior of the widget by using its `draggable.placeholder` and `draggable.hint` options.
 
 ##### Example
 
@@ -243,7 +243,7 @@ You can configure the ListBox messages for each toolbar command button. The mess
             });
         });
     </script>
-```   
+```
 
 ## See Also
 

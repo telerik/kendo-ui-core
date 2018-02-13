@@ -5,6 +5,7 @@ res_type: api
 ---
 
 # kendo.dataviz.map.Location : kendo.Class
+
 Represents a geographic location.
 
 ## Constructor Parameters

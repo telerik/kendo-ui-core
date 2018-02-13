@@ -30,7 +30,7 @@ How can I scroll the Kendo UI Grid when a row is selected?
 
 To programmatically scroll the Grid:
 
-1. Handle the [`change`](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid#events-change) event.
+1. Handle the [`change`](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid/events/change) event.
 1. Calculate the distance.
 1. In an [`animate`](https://api.jquery.com/animate/) effect, use the [`scrollTop`](https://api.jquery.com/scrollTop/) of the `.k-grid-content` element.
 

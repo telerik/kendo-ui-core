@@ -37,7 +37,7 @@ To bind all the widgets, utilize any of the following approaches:
 ### After the Page Loads
 
 1. After all the MaskedTextBoxes initialize, select them with the jQuery data-role attribute selector.
-1. Loop through the array and attach the [`change`](https://docs.telerik.com/kendo-ui/api/javascript/ui/maskedtextbox#events-change) handler to every MaskedTextBox.
+1. Loop through the array and attach the [`change`](https://docs.telerik.com/kendo-ui/api/javascript/ui/maskedtextbox/events/change) handler to every MaskedTextBox.
 
 ```html
 <input id="maskedtextbox1" />
@@ -63,7 +63,7 @@ To bind all the widgets, utilize any of the following approaches:
 
 ### Before the Page Loads
 
-Override the default [`change`](https://docs.telerik.com/kendo-ui/api/javascript/ui/maskedtextbox#events-change) event handler function before the MaskedTextBoxes initializes.
+Override the default [`change`](https://docs.telerik.com/kendo-ui/api/javascript/ui/maskedtextbox/events/change) event handler function before the MaskedTextBoxes initializes.
 
 ```html
 <script>

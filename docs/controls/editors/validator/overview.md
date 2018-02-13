@@ -124,7 +124,7 @@ The `email` rule constrains the value to a valid email format.
 
      <input type="email" name="email" />
 
-The `date` rule constrains the value to a valid date format. To validate the input, use [`kendo.parseDate`](/api/javascript/kendo#methods-parseDate).
+The `date` rule constrains the value to a valid date format. To validate the input, use [`kendo.parseDate`](/api/javascript/kendo/methods/parsedate).
 
 ###### Example
 

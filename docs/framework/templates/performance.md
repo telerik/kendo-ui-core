@@ -168,4 +168,4 @@ Other articles on Kendo UI Templates:
 
 * [Templates Overview]({% slug overview_kendoui_templatescomponent %})
 * [Load Templates from External Files]({% slug externalteplateloading_templatescomponent %})
-* [JavaScript API Reference: template](/api/javascript/kendo#methods-template)
+* [JavaScript API Reference: template](/api/javascript/kendo/methods/template)

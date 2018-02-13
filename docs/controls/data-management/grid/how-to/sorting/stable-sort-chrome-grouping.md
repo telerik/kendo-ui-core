@@ -9,7 +9,7 @@ slug: howto_implement_stable_sortwithgroupingin_chrome_grid
 
 The implementation of the built-in sorting algorithm in Google Chrome [is not guaranteed to be stable](https://bugs.chromium.org/p/v8/issues/detail?id=90).
 
-A [non-stable sorting algorithm](https://en.wikipedia.org/wiki/Sorting_algorithm#Stability) might cause items with the same sorting order to change places. When the Grid is grouped by a given field, you can use the [`sort`](/api/javascript/data/datasource#methods-sort) method in the [`group`](/api/javascript/ui/grid#events-group) event handler to programmatically sort the items within each group in the preferred order.
+A [non-stable sorting algorithm](https://en.wikipedia.org/wiki/Sorting_algorithm#Stability) might cause items with the same sorting order to change places. When the Grid is grouped by a given field, you can use the [`sort`](/api/javascript/data/datasource/methods/sort) method in the [`group`](/api/javascript/ui/grid/events/group) event handler to programmatically sort the items within each group in the preferred order.
 
 The following example demonstrates how to apply a stable sort function by using a position field in the Grid.
 

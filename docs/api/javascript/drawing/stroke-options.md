@@ -5,6 +5,7 @@ res_type: api
 ---
 
 # kendo.drawing.StrokeOptions
+
 Shape stroke configuration options.
 
 ## Fields

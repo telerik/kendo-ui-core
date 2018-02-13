@@ -9,7 +9,7 @@ slug: howto_zoomondblclick_map
 
 The following example demonstrates how to zoom the Map upon a double click.
 
-The event coordinates are mapped to the location by using the [`eventToLocation`](/api/javascript/dataviz/ui/map#methods-eventToLocation) method.
+The event coordinates are mapped to the location by using the [`eventToLocation`](/api/javascript/dataviz/ui/map/methods/eventtolocation) method.
 
 ###### Example
 

@@ -14,7 +14,7 @@ This approach prevents the appearance of white space in the widget when the sum 
 To achieve this behavior:
 
 1. Store the initial width of the Grid in a variable.
-2. To call the method that performs the necessary calculations, use the [`dataBound`](http://docs.telerik.com/kendo-ui/api/javascript/ui/grid#events-dataBound), [`columnShow`](http://docs.telerik.com/kendo-ui/api/javascript/ui/grid#events-columnShow), and [`columnHide`](http://docs.telerik.com/kendo-ui/api/javascript/ui/grid#events-columnHide) events.
+2. To call the method that performs the necessary calculations, use the [`dataBound`](http://docs.telerik.com/kendo-ui/api/javascript/ui/grid/events/databound), [`columnShow`](http://docs.telerik.com/kendo-ui/api/javascript/ui/grid/events/columnshow), and [`columnHide`](http://docs.telerik.com/kendo-ui/api/javascript/ui/grid/events/columnhide) events.
 
 To access and loop through the columns, the `setGridWidth()` method:
 * Uses the [`columns`](http://docs.telerik.com/kendo-ui/api/javascript/ui/grid#fields-columns) field of the Grid.
@@ -59,7 +59,7 @@ To access and loop through the columns, the `setGridWidth()` method:
                     OrderID: { type: "number" },
                     ShipCountry: { type: "string" },
                     ShipName: { type: "string" },
-                    ShipAddress: { type: "string" }                                        
+                    ShipAddress: { type: "string" }
                   }
                 }
               },

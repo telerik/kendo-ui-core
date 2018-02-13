@@ -8,7 +8,7 @@ position: 2
 
 # Walkthrough
 
-The [Kendo UI Grid widget](http://demos.telerik.com/kendo-ui/grid/index) is a powerful component of the Kendo UI toolkit and an essential part of almost any user interface. The Grid control is quick to set up and is packed with features such as [sorting](/api/javascript/ui/grid#configuration-sortable), [grouping](/api/javascript/ui/grid#configuration-groupable), [paging](/api/javascript/ui/grid#configuration-pageable), and [editing](/api/javascript/ui/grid#events-edit).
+The [Kendo UI Grid widget](http://demos.telerik.com/kendo-ui/grid/index) is a powerful component of the Kendo UI toolkit and an essential part of almost any user interface. The Grid control is quick to set up and is packed with features such as [sorting](/api/javascript/ui/grid/configuration/sortable), [grouping](/api/javascript/ui/grid/configuration/groupable), [paging](/api/javascript/ui/grid/configuration/pageable), and [editing](/api/javascript/ui/grid/events/edit).
 
 ## Data Binding
 
@@ -77,7 +77,7 @@ For more information on binding the Grid to a remote data source, refer to the a
 
 ### Selection
 
-To enable selection in the Grid set the [`selectable`](/api/javascript/ui/grid#configuration-selectable) option to `true`. This enables the default single-row selection option.
+To enable selection in the Grid set the [`selectable`](/api/javascript/ui/grid/configuration/selectable) option to `true`. This enables the default single-row selection option.
 
 ###### Example
 
@@ -96,10 +96,10 @@ It is also possible to set the `selectable` option to any of the following value
 * `multiple row`
 * `multiple cell`
 
-Since R2 2017 SP1, the Grid widget provides another option for enabling multiple selection by rendering a checkbox column. This functionality is enabled through the [`columns.selectable`](/api/javascript/ui/grid#configuration-columns.selectable) property. Enabling the `selectable` property of a column will also render a checkbox in the header, which allows selecting/deselecting of all rows on the current page.
+Since R2 2017 SP1, the Grid widget provides another option for enabling multiple selection by rendering a checkbox column. This functionality is enabled through the [`columns.selectable`](/api/javascript/ui/grid/configuration/columns.selectable) property. Enabling the `selectable` property of a column will also render a checkbox in the header, which allows selecting/deselecting of all rows on the current page.
 
 > **Important**
-> The built-in checkbox selection is not integrated with the select functionality of the grid enabled via the Grid's [`selectable`](/api/javascript/ui/grid#configuration-selectable) option. They are mutually exclusive and we recommend using only one of the approaches for enabling selection.
+> The built-in checkbox selection is not integrated with the select functionality of the grid enabled via the Grid's [`selectable`](/api/javascript/ui/grid/configuration/selectable) option. They are mutually exclusive and we recommend using only one of the approaches for enabling selection.
 
 ###### Example
 
@@ -157,8 +157,8 @@ The `multiple cell` value enables the selection of multiple cells within the Gri
 
 When the multiple selection is enabled, it is possible to select multiple rows or cells by dragging the mouse cursor and select them in a similar way to a block of text.
 
-> **Important**  
-> * In a Grid that is rebound (paging, filtering, sorting, editing, or virtual scrolling occur), the selection persists only if you enable the [`persistSelection`](/api/javascript/ui/grid#configuration-persistSelection) property. The `persistSelection` is applicable only for row selection. To persist the row selection and avoid the usage of the `persistSelection` property, refer to the example on [how to persist row selection during data operations]({% slug howto_persist_row_selection_paging_sorting_filtering_grid %}).    
+> **Important**
+> * In a Grid that is rebound (paging, filtering, sorting, editing, or virtual scrolling occur), the selection persists only if you enable the [`persistSelection`](/api/javascript/ui/grid/configuration/persistselection) property. The `persistSelection` is applicable only for row selection. To persist the row selection and avoid the usage of the `persistSelection` property, refer to the example on [how to persist row selection during data operations]({% slug howto_persist_row_selection_paging_sorting_filtering_grid %}).
 > * Selection performance may decrease when the page size is too large, or if no paging is used, and the Grid is rendering hundreds or thousands of items. This behavior is most frequently seen in Internet Explorer. Grouping, hierarchy, and frozen columns also have a negative impact on the selection performance, because these features make the HTML output of the Grid more complex. Therefore, it is recommended to use paging and a reasonable page size.
 
 ### Paging
@@ -185,7 +185,7 @@ If you decide to use server paging, be prepared to handle the requests to the se
 
 For example, if you want to show page 3 out of a 60-record dataset split into 10 records per page, the Grid will send `skip: 20`, `top: 10`.
 
-In general, the Grid is platform-agnostic. This means that it works with HTTP requests sending and receiving JSON payload. For example, to bind the widget to a specific data subset (only to a particular page), instruct the dataSource to use [`serverPaging`](/api/javascript/data/datasource#configuration-serverPaging). In this way, it will directly use the received data. The same rule applies to the filtering, grouping, aggregation, and sorting operations.
+In general, the Grid is platform-agnostic. This means that it works with HTTP requests sending and receiving JSON payload. For example, to bind the widget to a specific data subset (only to a particular page), instruct the dataSource to use [`serverPaging`](/api/javascript/data/datasource/configuration/serverpaging). In this way, it will directly use the received data. The same rule applies to the filtering, grouping, aggregation, and sorting operations.
 
 ###### Example
 
@@ -274,7 +274,7 @@ By default, sorting is disabled.
 
 Sorting is also a function that can be pushed to the server for increased performance. This is done through the data source itself and by setting the `serverSorting` option on the data source to `true`. When you delegate the sorting to the server, you will receive the default `orderBy` parameter. This field will contain the field name of the column to sort by in the dataset.
 
-Sorting is supported in two formats:  
+Sorting is supported in two formats:
 * Single-column sorting
 * Multi-column sorting
 

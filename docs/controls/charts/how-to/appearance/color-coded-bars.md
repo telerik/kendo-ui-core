@@ -17,7 +17,7 @@ This behavior is usually achieved through stacked bar series. However, if you ne
 
 ![Color-coded ranges](/controls/charts/how-to/images/color-coded-bars.png)
 
-To implement this functionality, define a [`series.visual`](/api/javascript/dataviz/ui/chart#configuration-series.visual) that draws the ranges dynamically. Note that the visual remains in use until the next [`render` event](/api/javascript/dataviz/ui/chart#events-render). This allows you to update it asynchronously or in real-time.
+To implement this functionality, define a [`series.visual`](/api/javascript/dataviz/ui/chart/configuration/series.visual) that draws the ranges dynamically. Note that the visual remains in use until the next [`render` event](/api/javascript/dataviz/ui/chart/events/render). This allows you to update it asynchronously or in real-time.
 
 The example below demonstrates how to implement color-coded ranges (stripes) in bars when working with Kendo UI Charts.
 
@@ -34,7 +34,7 @@ The example below demonstrates how to implement color-coded ranges (stripes) in 
         series: [{
           type: "bar",
           data: [10, 20, 30],
-          // http://docs.telerik.com/kendo-ui/api/javascript/dataviz/ui/chart#configuration-series.visual
+          // http://docs.telerik.com/kendo-ui/api/javascript/dataviz/ui/chart/configuration/series.visual
           visual: function(e) {
             // http://docs.telerik.com/kendo-ui/api/javascript/geometry/rect
             var left = e.rect.topLeft();

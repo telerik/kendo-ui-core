@@ -52,7 +52,7 @@ In the `dataSource` configuration of the Grid, set `serverGrouping: false`. For 
 
 ### Saving Values Manually
 
-When the Grid is grouped, manually call the [`saveChanges()`](/api/javascript/ui/grid#methods-saveChanges) method of the Grid in the [`cellClose`](/api/javascript/ui/grid#events-cellClose) event. This approach guarantees that the changes which are made in the cell before it was closed will be sent to the server.
+When the Grid is grouped, manually call the [`saveChanges()`](/api/javascript/ui/grid/methods/savechanges) method of the Grid in the [`cellClose`](/api/javascript/ui/grid/events/cellclose) event. This approach guarantees that the changes which are made in the cell before it was closed will be sent to the server.
 
 ```
     function onCellClose(e) {

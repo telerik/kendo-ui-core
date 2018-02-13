@@ -12,7 +12,7 @@ The Spreadsheet allows you to store and load data in a native JSON format.
 
 The format follows the same structure as the [widget configuration](/api/javascript/ui/spreadsheet#configuration). It is designed to be used both for direct storage and as an [intermediate format]({% slug serverside_processing_spreadsheet_widget %}).
 
-> **Important**  
+> **Important**
 >
 > Once the Spreadsheet goes out of its Beta version, an official JSON schema will be published.
 
@@ -25,7 +25,7 @@ The information that is persisted includes:
 
 ## Serialization API
 
-The Spreadsheet client-side API includes the [`fromJSON`](/api/javascript/ui/spreadsheet#methods-fromJSON) and [`toJSON`](/api/javascript/ui/spreadsheet#methods-toJSON) methods for loading and storing its state. To load the Spreadsheet with data, pass an object matching the required schema to `fromJSON`. This resets the widget and clears all existing data.
+The Spreadsheet client-side API includes the [`fromJSON`](/api/javascript/ui/spreadsheet/methods/fromjson) and [`toJSON`](/api/javascript/ui/spreadsheet/methods/tojson) methods for loading and storing its state. To load the Spreadsheet with data, pass an object matching the required schema to `fromJSON`. This resets the widget and clears all existing data.
 
 The following example demonstrates how to load data by using `fromJSON`.
 

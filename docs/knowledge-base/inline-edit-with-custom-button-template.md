@@ -126,7 +126,7 @@ Use the `addRow` and `removeRow` methods of the Grid.
 
 ## See Also
 
-* [API Reference of the `editRow` Method](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid#methods-editRow).
-* [API Reference of the `removeRow` Method](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid#methods-removeRow).
-* [API Reference of the `columns.template` Property](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid#configuration-columns.template).
+* [API Reference of the `editRow` Method](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid/methods/editrow).
+* [API Reference of the `removeRow` Method](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid/methods/removerow).
+* [API Reference of the `columns.template` Property](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid/configuration/columns.template).
 * [Working with Templates in Kendo UI](https://docs.telerik.com/kendo-ui/framework/templates/overview)

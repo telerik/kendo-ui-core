@@ -14,15 +14,15 @@ You can use server filtering for displaying only a subset of data. Basically, th
 
 ## Configuration
 
-Server-filtering is based on the filtering capability of the DataSource component. You also need to be familiar with the filtering configuration of the component. For more information, refer to the DataSource [`serverFiltering`](/api/javascript/data/datasource#configuration-serverFiltering) option. Once you configure the DataSource to perform server filtering, you only need to additionally define the [`filter`](/api/javascript/ui/combobox#configuration-filter) property of the widget.
+Server-filtering is based on the filtering capability of the DataSource component. You also need to be familiar with the filtering configuration of the component. For more information, refer to the DataSource [`serverFiltering`](/api/javascript/data/datasource/configuration/serverfiltering) option. Once you configure the DataSource to perform server filtering, you only need to additionally define the [`filter`](/api/javascript/ui/combobox/configuration/filter) property of the widget.
 
 For detailed information on how to configure the server filtering functionality, refer to the [ComboBox server filtering demo](http://demos.telerik.com/kendo-ui/combobox/serverfiltering).
 
 ## Advantages
 
-You can use the server-filtering feature to display only a subset of data. This is quite useful when the dataset is large and contains thousands or more records. In such situations, define a minimum filter length by using the [`minLength`](/api/javascript/ui/combobox#configuration-minLength) option. For instance, if you set this option to `3`, the widget will not start filtering the dataset until at least 3 characters are entered.
+You can use the server-filtering feature to display only a subset of data. This is quite useful when the dataset is large and contains thousands or more records. In such situations, define a minimum filter length by using the [`minLength`](/api/javascript/ui/combobox/configuration/minlength) option. For instance, if you set this option to `3`, the widget will not start filtering the dataset until at least 3 characters are entered.
 
-Another benefit you gain from server filtering is the option to bind the widget to only one data item&mdash;the selected one. In this way, you avoid the need to retrieve the whole dataset when you want to display the selected value or text. This approach boosts the loading time of the widget. To apply this approach, send the selected value to the server and return only the matching data item. Use the  [`data`](/api/javascript/data/datasource#configuration-transport.read.data) callback of the DataSource.
+Another benefit you gain from server filtering is the option to bind the widget to only one data item&mdash;the selected one. In this way, you avoid the need to retrieve the whole dataset when you want to display the selected value or text. This approach boosts the loading time of the widget. To apply this approach, send the selected value to the server and return only the matching data item. Use the  [`data`](/api/javascript/data/datasource/configuration/transport.read.data) callback of the DataSource.
 
 ###### Example
 

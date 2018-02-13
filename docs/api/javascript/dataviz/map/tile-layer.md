@@ -5,6 +5,7 @@ res_type: api
 ---
 
 # kendo.dataviz.map.TileLayer : kendo.dataviz.map.Layer
+
 A tile layer for displaying raster maps.
 
 ## Constructor Parameters

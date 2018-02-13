@@ -9,7 +9,7 @@ slug: howto_gridfiltering_excellike_grid
 
 The following example demonstrates how to set the Grid with an Excel-like filter that has sorted and unique items.
 
-To set a single Data Source for all filter menus, the example uses the [`columns.filterable.dataSource`](/api/javascript/ui/grid#configuration-columns.filterable.dataSource) property of the Grid.
+To set a single Data Source for all filter menus, the example uses the [`columns.filterable.dataSource`](/api/javascript/ui/grid/configuration/columns.filterable.datasource) property of the Grid.
 
 To observe this behavior:
 

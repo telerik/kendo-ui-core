@@ -269,7 +269,7 @@ all data items which begin with the current widget value are displayed in the su
 
 ### fixedGroupTemplate `String|Function`
 
-The [template](/api/javascript/kendo#methods-template) used to render the fixed header group. By default the widget displays only the value of the current group.
+The [template](/api/javascript/kendo/methods/template) used to render the fixed header group. By default the widget displays only the value of the current group.
 
     <input id="customers" style="width: 400px" />
     <script>
@@ -291,7 +291,7 @@ The [template](/api/javascript/kendo#methods-template) used to render the fixed 
 
 ### footerTemplate `String|Function`
 
-The [template](/api/javascript/kendo#methods-template) used to render the footer template. The footer template receives the widget itself as a part of the data argument. Use the widget fields directly in the template.
+The [template](/api/javascript/kendo/methods/template) used to render the footer template. The footer template receives the widget itself as a part of the data argument. Use the widget fields directly in the template.
 
 #### Parameters
 
@@ -315,7 +315,7 @@ The widget instance.
 
 ### groupTemplate `String|Function`
 
-The [template](/api/javascript/kendo#methods-template) used to render the groups. By default the widget displays only the value of the group.
+The [template](/api/javascript/kendo/methods/template) used to render the groups. By default the widget displays only the value of the group.
 
     <input id="customers" style="width: 400px" />
     <script>
@@ -404,7 +404,7 @@ The minimum number of characters the user must type before a search is performed
 
 ### noDataTemplate `String|Function` *(default: "NO DATA FOUND.")*
 
-The [template](/api/javascript/kendo#methods-template) used to render the "no data" template, which will be displayed if no results are found or the underlying data source is empty.
+The [template](/api/javascript/kendo/methods/template) used to render the "no data" template, which will be displayed if no results are found or the underlying data source is empty.
 The noData template receives the widget itself as a part of the data argument. The template will be evaluated on every widget data bound.
 
 > **Important** The popup will open when 'noDataTemplate' is defined
@@ -540,7 +540,7 @@ Specifies a static HTML content, which will be rendered as a header of the popup
 
 ### template `String|Function`
 
-The [template](/api/javascript/kendo#methods-template) used to render the suggestions. By default the widget displays only the text of the suggestion (configured via `dataTextField`).
+The [template](/api/javascript/kendo/methods/template) used to render the suggestions. By default the widget displays only the text of the suggestion (configured via `dataTextField`).
 
 #### Example - specify template as a function
 
@@ -835,7 +835,7 @@ For more information, refer to the [article on virtualization]({% slug virtualiz
 
 ### dataSource `kendo.data.DataSource`
 
-The [data source](/api/javascript/data/datasource) of the widget. Configured via the [dataSource](#configuration-dataSource) option.
+The [data source](/api/javascript/data/datasource) of the widget. Configured via the [dataSource](/configuration/datasource) option.
 
 > Changes of the data source will be reflected in the widget.
 
@@ -1010,7 +1010,7 @@ Focuses the widget.
 
 ### items
 
-Obtains an Array of the DOM elements, which correspond to the data items from the Kendo UI DataSource [view](/api/javascript/data/datasource#methods-view) (e.g. the ones that match the user's last filtering input).
+Obtains an Array of the DOM elements, which correspond to the data items from the Kendo UI DataSource [view](/api/javascript/data/datasource/methods/view) (e.g. the ones that match the user's last filtering input).
 
 #### Returns
 
@@ -1080,7 +1080,7 @@ in the current datasource view, which represents only the active range/page. Hen
 
 > **Important:** This method **does not trigger** [change](#events-change) event.
 This could affect [MVVM value binding](/framework/mvvm/bindings/value). The model bound to the widget will not be updated.
-You can overcome this behavior trigerring the `change` event manually using [trigger("change")](/api/javascript/observable#methods-trigger) method.
+You can overcome this behavior trigerring the `change` event manually using [trigger("change")](/api/javascript/observable/methods/trigger) method.
 
     <input id="autocomplete" />
     <script>
@@ -1163,7 +1163,7 @@ Gets or sets the value of the widget.
 
 > **Important:** This method **does not trigger** [change](#events-change) event.
 This could affect [MVVM value binding](/framework/mvvm/bindings/value). The model bound to the widget will not be updated.
-You can overcome this behavior trigerring the `change` event manually using [trigger("change")](/api/javascript/observable#methods-trigger) method.
+You can overcome this behavior trigerring the `change` event manually using [trigger("change")](/api/javascript/observable/methods/trigger) method.
 
     <input id="autocomplete" />
     <script>
@@ -1330,7 +1330,7 @@ The widget instance which fired the event.
 
 The filter descriptor that will be used to filter the data source.
 
-> The data source filters the data items client-side unless the [data source serverFiltering](/api/javascript/data/datasource#configuration-serverFiltering) option is set to `true`.
+> The data source filters the data items client-side unless the [data source serverFiltering](/api/javascript/data/datasource/configuration/serverfiltering) option is set to `true`.
 
 #### Example - subscribe to the "filtering" event during initialization
 

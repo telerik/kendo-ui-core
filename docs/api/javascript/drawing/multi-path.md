@@ -5,6 +5,7 @@ res_type: api
 ---
 
 # kendo.drawing.MultiPath : kendo.drawing.Element
+
 Draws a composite path consisting of multiple sub-paths.
 Using composite paths is more efficient than drawing the paths individually.
 

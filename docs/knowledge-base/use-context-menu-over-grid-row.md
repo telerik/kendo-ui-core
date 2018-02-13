@@ -37,7 +37,7 @@ How can I append a Kendo UI ContextMenu to each cell or part of the cells in a K
 1. On the `select` event of the ContextMenu, retrieve the row information by using the `dataItem` method of the Grid.
 
 For more information, refer to:  
-* [http://docs.telerik.com/kendo-ui/api/javascript/ui/grid\#methods-dataItem](http://docs.telerik.com/kendo-ui/api/javascript/ui/grid#methods-dataItem)  
-* [http://docs.telerik.com/kendo-ui/api/javascript/ui/contextmenu\#events-select](http://docs.telerik.com/kendo-ui/api/javascript/ui/contextmenu#events-select)  
+* [http://docs.telerik.com/kendo-ui/api/javascript/ui/grid\/methods/dataitem](http://docs.telerik.com/kendo-ui/api/javascript/ui/grid/methods/dataitem)  
+* [http://docs.telerik.com/kendo-ui/api/javascript/ui/contextmenu\/events/select](http://docs.telerik.com/kendo-ui/api/javascript/ui/contextmenu/events/select)  
 
 For the full implementation of the approach, refer to [this Dojo example](http://dojo.telerik.com/iNuXet).

@@ -13,8 +13,8 @@ Sometimes you might need to calculate and set the major unit for the values axis
 In this scenario, you also need to name the axis. The effective axis range is available in the `render` event handler.
 
 The API reference for the relevant methods and events that are used in the following example are:
-* The [`render` event](/api/javascript/dataviz/ui/chart#events-render)
-* The [`getAxis()` method](/api/javascript/dataviz/ui/chart#methods-getAxis)
+* The [`render` event](/api/javascript/dataviz/ui/chart/events/render)
+* The [`getAxis()` method](/api/javascript/dataviz/ui/chart/methods/getaxis)
 * The [`kendo.dataviz.ChartAxis` API](/api/javascript/dataviz/chart/chart_axis)
 
 ###### Example
@@ -90,8 +90,8 @@ The API reference for the relevant methods and events that are used in the follo
             // Effective axis range is available in the render event
             //
             // See
-            // http://docs.telerik.com/kendo-ui/api/javascript/dataviz/ui/chart#events-render
-            // http://docs.telerik.com/kendo-ui/api/javascript/dataviz/ui/chart#methods-getAxis
+            // http://docs.telerik.com/kendo-ui/api/javascript/dataviz/ui/chart/events/render
+            // http://docs.telerik.com/kendo-ui/api/javascript/dataviz/ui/chart/methods/getAxis
             // http://docs.telerik.com/kendo-ui/api/javascript/dataviz/chart/chart_axis
             var range = e.sender.getAxis("value").range();
             var majorUnit = range.max / 3;

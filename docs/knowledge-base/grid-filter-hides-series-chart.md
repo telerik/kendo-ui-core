@@ -34,7 +34,7 @@ How can I hide series from the Pie Chart by filtering the Grid and vice versa?
 To hide the Chart series by filtering the Grid:
 
 1. In the [`filter`](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid/events/filter) event handler of the Grid, based on the filters, programmatically click on the legend labels of the Chart.
-1. In the [`legendItemClick`](https://docs.telerik.com/kendo-ui/api/javascript/dataviz/ui/chart#events-legendItemClick) event handler of the Chart, based on the hidden series, filter the Grid.
+1. In the [`legendItemClick`](https://docs.telerik.com/kendo-ui/api/javascript/dataviz/ui/chart/events/legenditemclick) event handler of the Chart, based on the hidden series, filter the Grid.
 
 ```html
 <div id="grid"></div>

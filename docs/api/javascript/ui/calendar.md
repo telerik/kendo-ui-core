@@ -122,7 +122,7 @@ note that a check for an empty `date` is needed, as the widget can work with a n
 
 ### footer `String|Function`
 
- The [template](/api/javascript/kendo#methods-template) which renders the footer. If false, the footer will not be rendered.
+ The [template](/api/javascript/kendo/methods/template) which renders the footer. If false, the footer will not be rendered.
 
 #### Example - specify footer template as a function
 
@@ -256,13 +256,13 @@ Allows customization of the week column header text. Set the value to make the w
 
 ### month.weekNumber `String`
 
- The template to be used for rendering the cells in "week" column. By default, the widget renders the calculated week of the year. 
+ The template to be used for rendering the cells in "week" column. By default, the widget renders the calculated week of the year.
  The properties available in the data object are:
 
  * currentDate - returns the first date of the current week.
  * weekNumber - calculated week number.
 
- These properties can be used in the template to make additional calculations. 
+ These properties can be used in the template to make additional calculations.
 
 #### Example - specify week number template as a string
 
@@ -304,7 +304,7 @@ Allows customization of the week column header text. Set the value to make the w
 
 ### selectable `String`  *(default: "single")*
 
-By default user is able to select a single date. The property can also be set to "multiple" in order the multiple  date selection to be enabled. More information about multiple selection can be found in the [Selection]({% slug overview_kendoui_calendar_widget %}#selection) article.  
+By default user is able to select a single date. The property can also be set to "multiple" in order the multiple  date selection to be enabled. More information about multiple selection can be found in the [Selection]({% slug overview_kendoui_calendar_widget %}#selection) article.
 
 #### Example - enable the multiple selection
 
@@ -319,9 +319,9 @@ By default user is able to select a single date. The property can also be set to
 
 ### selectDates `Array`  *(default: [])*
 
-Specifies which dates to be selected when the calendar is initialized. 
+Specifies which dates to be selected when the calendar is initialized.
 
-> **Important:** This configuration option requires the [selectable](/api/javascript/ui/calendar#configuration-selectable): "multiple" option to be set.
+> **Important:** This configuration option requires the [selectable](/api/javascript/ui/calendar/configuration/selectable): "multiple" option to be set.
 
 #### Example - set two dates to be selected upon calendar initialization
 
@@ -336,7 +336,7 @@ Specifies which dates to be selected when the calendar is initialized.
 
 ### weekNumber `Boolean` *(default: false)*
 
-If set to `true` a week of the year will be shown on the left side of the calendar.  
+If set to `true` a week of the year will be shown on the left side of the calendar.
 
 #### Example - enable the week of the year option
 
@@ -581,7 +581,7 @@ Navigates to the upper view.
 
 Gets/Sets the selected dates for the calendar.
 
-> **Important:** This method requires the [selectable](/api/javascript/ui/calendar#configuration-selectable): "multiple" option to be set.
+> **Important:** This method requires the [selectable](/api/javascript/ui/calendar/configuration/selectable): "multiple" option to be set.
 
 #### Example - gets the selected dates of the widget
 

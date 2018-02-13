@@ -116,7 +116,7 @@ For a live preview, click [here](http://dojo.telerik.com/@valchev/exeS).
 
 ### Making the Application SEO-Friendly
 
-To [create a SEO (Search Engine Optimization)-friendly](http://googlewebmastercentral.blogspot.com/2009/10/proposal-for-making-ajax-crawlable.html) mobile application, all you need to do is turn on the [`hashBang`](/api/javascript/mobile/application#configuration-hashBang) configuration. The configuration can also be set directly [in the markup]({% slug angularjs_integration_directives %}#widget-options-in-html).
+To [create a SEO (Search Engine Optimization)-friendly](http://googlewebmastercentral.blogspot.com/2009/10/proposal-for-making-ajax-crawlable.html) mobile application, all you need to do is turn on the [`hashBang`](/api/javascript/mobile/application/configuration/hashbang) configuration. The configuration can also be set directly [in the markup]({% slug angularjs_integration_directives %}#widget-options-in-html).
 
 ###### Example
 
@@ -284,7 +284,7 @@ Add a new mobile View called **Our Menu** and add a new ListView with ID `menuLi
 
 ## Using Event Handlers
 
-Now you are going to configure the ListView located in the **Home** View to display only the featured products and the ListView located in **Our Menu** View to display a list of all products grouped by their first letter and ordered alphabetically. To do that, use the [DataSource API](/api/javascript/data/datasource#methods) and the [`beforeShow`](/api/javascript/mobile/ui/view#events-beforeShow) event of the mobile View.
+Now you are going to configure the ListView located in the **Home** View to display only the featured products and the ListView located in **Our Menu** View to display a list of all products grouped by their first letter and ordered alphabetically. To do that, use the [DataSource API](/api/javascript/data/datasource#methods) and the [`beforeshow`](/api/javascript/mobile/ui/view/events/beforeshow) event of the mobile View.
 
 Add the `k-on-before-show` attribute to the View elements and specify the event handler name.
 

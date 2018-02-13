@@ -83,7 +83,7 @@ where more information can be found.
 
 The `Unknown DataSource transport type json` warning might be caused by either of the following reasons:
 
-* Invalid Kendo UI DataSource [`type`](/api/javascript/data/datasource#configuration-type) configuration is set. For example:
+* Invalid Kendo UI DataSource [`type`](/api/javascript/data/datasource/configuration/type) configuration is set. For example:
 
     ```
     dataSource: {
@@ -97,11 +97,11 @@ The `Unknown DataSource transport type json` warning might be caused by either o
 
 Use a valid `type` value, or remove the `type` property, or add the corresponding missing file&mdash;for example, `kendo.aspnetmvc.min.js` when using the Kendo UI MVC wrappers.
 
-Note that the [dataSource `type`](/api/javascript/data/datasource#configuration-type) differs from the [`type` of the transport actions](/api/javascript/data/datasource#configuration-transport.read.type).
+Note that the [dataSource `type`](/api/javascript/data/datasource/configuration/type) differs from the [`type` of the transport actions](/api/javascript/data/datasource/configuration/transport.read.type).
 
 ### Input Widgets Do Not Raise Change Event When API Is Used
 
-The change event of an input widget is triggered only by user action. DOM elements work in the same way. If you need to trigger an event manually use the [trigger method](/api/javascript/ui/widget#methods-trigger).
+The change event of an input widget is triggered only by user action. DOM elements work in the same way. If you need to trigger an event manually use the [trigger method](/api/javascript/ui/widget/methods/trigger).
 
 ### Creating Multiple Widgets Throws JavaScript Errors
 
@@ -131,7 +131,7 @@ Some third-party modal popups prevent access to focusable elements, which are re
 There are two ways to avoid this problem:
 
 * Disable the modal popup's modality, so that elements outside it can be focused.
-* Use a [modal](/api/javascript/ui/window#configuration-modal) [Kendo UI Window]({% slug overview_kendoui_window_widget %}) instead of a third-party popup.
+* Use a [modal](/api/javascript/ui/window/configuration/modal) [Kendo UI Window]({% slug overview_kendoui_window_widget %}) instead of a third-party popup.
 
 ### Widgets Do Not Work Correctly on Touch Devices
 
@@ -151,7 +151,7 @@ The reason for this issue is a bug in the aforementioned jQuery version. Accordi
 
 ### Incorrect Appearance or Errors Occur in Hidden Widgets
 
-If you display widgets that have been in an initially hidden container, call their [`resize()`](/api/javascript/ui/widget#methods-resize) method after you show them. Initializing widgets on elements with the `style="display: none;"` configuration might cause errors, such as inability to calculate dimensions and positions or even throw errors. The reason for this behavior is that such calculations are not available for elements that are not rendered by the browser.
+If you display widgets that have been in an initially hidden container, call their [`resize()`](/api/javascript/ui/widget/methods/resize) method after you show them. Initializing widgets on elements with the `style="display: none;"` configuration might cause errors, such as inability to calculate dimensions and positions or even throw errors. The reason for this behavior is that such calculations are not available for elements that are not rendered by the browser.
 
 **Solution**
 

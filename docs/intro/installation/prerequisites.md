@@ -86,7 +86,7 @@ As of the Kendo UI 2014 Q2 release, the Kendo UI widgets support [AngularJS](htt
 
 ### JSZip Library
 
-The [JSZip library](https://stuk.github.io/jszip/) is a necessary prerequisite for your widgets to support the [Excel export feature]({% slug introduction_excelexport_kendoui %}) as well as the import of Excel files in the Kendo UI Spreadsheet. The Excel export feature was first included in the [Kendo UI 2014.3.1119 (Q3 2014) release]({% slug breakingchanges2014_kendoui%}). Include the JSZip library only if you wish to provide the Excel export or import [`fromFile()`](/api/javascript/ui/spreadsheet#methods-fromFile) functionalities.
+The [JSZip library](https://stuk.github.io/jszip/) is a necessary prerequisite for your widgets to support the [Excel export feature]({% slug introduction_excelexport_kendoui %}) as well as the import of Excel files in the Kendo UI Spreadsheet. The Excel export feature was first included in the [Kendo UI 2014.3.1119 (Q3 2014) release]({% slug breakingchanges2014_kendoui%}). Include the JSZip library only if you wish to provide the Excel export or import [`fromFile()`](/api/javascript/ui/spreadsheet/methods/fromfile) functionalities.
 
 ### The script Tag Placement
 

@@ -204,13 +204,13 @@ If the URL contains a protocol, set `iframe` to `false`, otherwise the JSON resp
         <p><strong>This example will not work, unless you define a valid JSON service URL for `content.url`.</p>
         <p>The expected JSON response is:
             <pre>
-            
+
             { username: "...my username here..." }
-            
+
             </pre>
-        </strong></p>    
+        </strong></p>
     </div>
-    
+
     <script>
     $("#dialog").kendoWindow({
       content: {
@@ -565,7 +565,7 @@ Indicates whether the window is maximized.
     var dialog = $("#dialog").data("kendoWindow");
     dialog.maximize();
     var maximized = dialog.isMaximized();
-    </script>    
+    </script>
 
 ### isMinimized
 
@@ -583,7 +583,7 @@ Indicates whether the window is minimized.
     var dialog = $("#dialog").data("kendoWindow");
     dialog.minimize();
     var minimized = dialog.isMinimized();
-    </script>   
+    </script>
 
 ### maximize
 
@@ -657,7 +657,7 @@ The user will still be able to move the Window with the mouse or keyboard.
 
 ### refresh
 
-Refreshes the content of a Window from a remote URL or the initially defined [content template](/api/javascript/ui/window#configuration-content.template).
+Refreshes the content of a Window from a remote URL or the initially defined [content template](/api/javascript/ui/window/configuration/content.template).
 **Note that passing `data` and non-GET requests cannot be sent to an iframe**, as they require a form with a target attribute.
 
 #### Parameters

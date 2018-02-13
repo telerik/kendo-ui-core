@@ -36,7 +36,7 @@ Kendo UI is a well-suited solution when building SharePoint add-ins because of t
 * Easy integration with the SharePoint REST API.
 * Built-in themes, including one that matches the Office 365 look and feel.
 * Built-in export functionalities to most common office formats, such as Excel, PDF, and image files.
-* Widely-recognized accessibility standards like WAI-ARIA, WCAG 2.0, and Section 508.  
+* Widely-recognized accessibility standards like WAI-ARIA, WCAG 2.0, and Section 508.
 
 ## Configuration
 
@@ -48,26 +48,26 @@ The proper configuration of the Kendo UI DataSource ensures its proper connectio
 
 To configure the Kendo UI Data Source:
 
-1. **Use the [`transport`](http://docs.telerik.com/kendo-ui/api/javascript/data/datasource#configuration-transport) option.**  
-    To enable the Data Source to utilize the SharePoint services and perform CRUD operation against them, use `transport`. Note that you need to define a model for the Data Source because it drives the serialization plumbing.  
+1. **Use the [`transport`](http://docs.telerik.com/kendo-ui/api/javascript/data/datasource/configuration/transport) option.**
+    To enable the Data Source to utilize the SharePoint services and perform CRUD operation against them, use `transport`. Note that you need to define a model for the Data Source because it drives the serialization plumbing.
 
-2. **Include the `accept` request-header.**   
-    To inform the receiving endpoint to issue a reply through JSON, include the `accept` request-header with the JSON MIME-type specified.  
+2. **Include the `accept` request-header.**
+    To inform the receiving endpoint to issue a reply through JSON, include the `accept` request-header with the JSON MIME-type specified.
 
-3. **Define the `data()` function.**  
-    The `data()` function is necessary to parse the payload that is returned by the SharePoint REST API due to the presence of the `odata=verbose` request-header.  
+3. **Define the `data()` function.**
+    The `data()` function is necessary to parse the payload that is returned by the SharePoint REST API due to the presence of the `odata=verbose` request-header.
 
 For more information on the Kendo UI Data Source abstraction, refer to [its introductory article]({% slug overview_kendoui_datasourcecomponent %}).
 
 ### CRUD Data Operations
 
-1. **Use the URL property of the `read` operation.**  
+1. **Use the URL property of the `read` operation.**
     SharePoint exposes services through the `<server>/<site>/_api/<feature_area>/<resource>` URI structure. To load data from the service endpoint, configure the Data Source through the `URL` property of the `read` operation.
 
-2. **Set the `create` operation.**   
+2. **Set the `create` operation.**
     The DataSource has to use the `POST` request method for the `create` operations because the SharePoint services are RESTful. To ensure it is provided to the receiving service, you also need to define a `X-RequestDigest` request-header.
 
-3. **Set the `update` and `destroy` operations.**   
+3. **Set the `update` and `destroy` operations.**
     The `update` and `destroy` operations target service endpoints through the `MERGE` and `DELETE` request methods respectively. To set the `update` and `destroy` operation, configure the `update` and `destroy` methods.
 
 ## See Also

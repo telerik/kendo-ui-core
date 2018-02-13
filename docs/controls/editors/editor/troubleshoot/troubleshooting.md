@@ -18,9 +18,9 @@ Pasting in the Editor requires permission to access **Clipboard** data.
 
 **Solution**
 
-Users with strict security settings might be required to apply either of the following approaches:   
+Users with strict security settings might be required to apply either of the following approaches:
 
-* Add the site in the trusted site zone.  
+* Add the site in the trusted site zone.
 * Adjust their Internet options so that the **Allow Programmatic Clipboard Access** setting is set to either **Allowed** or **Prompt**.
 
 ### Pasted MS Word Styles Are Not Retained
@@ -29,7 +29,7 @@ By design, the Editor strives to output a clean and XHTML-compatible markup. Tha
 
 **Solution**
 
-Ideally, the output of the Editor has to be styled via a stylesheet provided through the [stylesheets configuration option](/api/javascript/ui/editor#configuration-stylesheets). It allows for the whole pasted content to be consistently styled across your site.
+Ideally, the output of the Editor has to be styled via a stylesheet provided through the [stylesheets configuration option](/api/javascript/ui/editor/configuration/stylesheets). It allows for the whole pasted content to be consistently styled across your site.
 
 If wrong pasting removes semantics or actual content along with the styles:
 
@@ -56,7 +56,7 @@ Firefox cannot handle `iframe` elements properly when they are moved to the DOM.
 
 **Solution**
 
-When you use an Editor inside a popup, which moves elements to the DOM, either first initialize the popup (for example, a Kendo UI Window, a jQuery dialog, or other) or call the [`refresh`](/api/javascript/ui/editor#methods-refresh) method.
+When you use an Editor inside a popup, which moves elements to the DOM, either first initialize the popup (for example, a Kendo UI Window, a jQuery dialog, or other) or call the [`refresh`](/api/javascript/ui/editor/methods/refresh) method.
 
 ## Layout and Display
 
@@ -76,7 +76,7 @@ The reason for the issue is the functionalities of the browser.
 
 **Solution**
 
-Call the [`refresh`](/api/javascript/ui/editor#methods-refresh) method of the Editor after the widget becomes visible. Refreshing the widget recreates the `iframe`.
+Call the [`refresh`](/api/javascript/ui/editor/methods/refresh) method of the Editor after the widget becomes visible. Refreshing the widget recreates the `iframe`.
 
 Another possible approach is to use the inline mode of the Editor, that is, to create the Editor from a `div` element.
 
@@ -90,7 +90,7 @@ By default, the Editor stores its value encoded. When the page is retrieved from
 
 **Solution**
 
-Set the [`encoded`](/api/javascript/ui/editor#configuration-encoded) property to `false`. The value of the Editor is expected to be posted unencoded to the server.
+Set the [`encoded`](/api/javascript/ui/editor/configuration/encoded) property to `false`. The value of the Editor is expected to be posted unencoded to the server.
 
 If you are using ASP.NET, make sure that you either disable the ASP.NET security validation or set the `AllowHtml` attribute on the model field that will receive the HTML string. For more information, refer to the documentation on [requesting validation in ASP.NET](http://blogs.learnnowonline.com/blog/bid/199703/ASP-NET-MVC-Request-Validation-Protection-AllowHtml-Attribute).
 

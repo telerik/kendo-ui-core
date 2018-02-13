@@ -13,7 +13,7 @@ By definition, responsive web design, or responsiveness, is an approach to web d
 
 ## Kendo UI in Responsive Web Pages
 
-Most Kendo UI widgets work and auto-resize when used in responsive web pages out of the box. Several widgets are going to need an additional [`kendo.resize`](/api/javascript/kendo#methods-resize) if their dimensions are set to percentage values.
+Most Kendo UI widgets work and auto-resize when used in responsive web pages out of the box. Several widgets are going to need an additional [`kendo.resize`](/api/javascript/kendo/methods/resize) if their dimensions are set to percentage values.
 
 ### Non-Autoresizing Widgets in Container
 
@@ -90,7 +90,7 @@ The example below demonstrates how to auto-resize a chart with a 100% width.
 
 ### Individual Widget Resizing
 
-Each Kendo UI widget has a `resize()` method which can be used to trigger a layout readjustment instead of using [`kendo.resize`](/api/javascript/kendo#methods-resize). The `resize` method of the widget accepts a single Boolean parameter, which defines whether the control should execute its layout adjustment algorithm even if the widget dimensions have not changed (`"force"` mode).
+Each Kendo UI widget has a `resize()` method which can be used to trigger a layout readjustment instead of using [`kendo.resize`](/api/javascript/kendo/methods/resize). The `resize` method of the widget accepts a single Boolean parameter, which defines whether the control should execute its layout adjustment algorithm even if the widget dimensions have not changed (`"force"` mode).
 
 ### Apply `resize()` Method
 

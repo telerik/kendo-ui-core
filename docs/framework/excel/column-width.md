@@ -14,7 +14,7 @@ By default, all columns in Excel have the same width set (64px). If the cell val
 
 ### Set Column Width
 
-The [`width`](/api/javascript/ooxml/workbook#configuration-sheets.columns.width) configuration option specifies the column width in pixels.
+The [`width`](/api/javascript/ooxml/workbook/configuration/sheets.columns.width) configuration option specifies the column width in pixels.
 
 The example below demonstrates how to set the width of a column in a worksheet.
 
@@ -47,7 +47,7 @@ kendo.saveAs({
 
 ### Enable Automatic Column Width
 
-Enable the automatic width calculation by setting the [`autoWidth`](/api/javascript/ooxml/workbook#configuration-sheets.columns.autoWidth) option to `true`, as demonstrated in the example below. When set, the he column stretches to accommodate the longest cell value.
+Enable the automatic width calculation by setting the [`autoWidth`](/api/javascript/ooxml/workbook/configuration/sheets.columns.autowidth) option to `true`, as demonstrated in the example below. When set, the he column stretches to accommodate the longest cell value.
 
 ###### Example
 

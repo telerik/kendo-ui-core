@@ -10,7 +10,7 @@ position: 4
 
 The Editor works with standard [`range`](https://developer.mozilla.org/en/docs/Web/API/Range) objects that provide a polyfill for Internet Explorer versions that do not fully support them.
 
-To set the Editor selection, create a `Range` object that specifies the desired selection and pass it to the [`selectRange`](/api/javascript/ui/editor#methods-selectRange) method.
+To set the Editor selection, create a `Range` object that specifies the desired selection and pass it to the [`selectRange`](/api/javascript/ui/editor/methods/selectrange) method.
 
 The following example demonstrates how to set the Editor selections.
 

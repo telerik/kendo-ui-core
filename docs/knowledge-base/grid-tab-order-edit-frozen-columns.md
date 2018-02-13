@@ -34,7 +34,7 @@ The default order in which the browser focuses elements on the page cause the re
 
 To keep the tab order:
 
-1. Handle the [`dataBound`](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid#events-dataBound) event of the Grid.
+1. Handle the [`dataBound`](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid/events/databound) event of the Grid.
 1. Get the reference of all **Edit** and **Delete** buttons.
 1. Increase the [`tabindex`](https://developer.mozilla.org/en-US/docs/Web/HTML/Global_attributes/tabindex) attributes for the buttons.
 

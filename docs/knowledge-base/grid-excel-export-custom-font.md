@@ -27,9 +27,9 @@ How can I change the font size and font family of the Excel export in the Grid?
 ## Solution
 
 1. Loop over the Grid cells and set each of them.
-1. Add a handler to the [`excelExport`](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid#events-excelExport) event of the Grid to loop over the workbook.
-1. If the font size becomes too large for the row, increase the row [`height`](https://docs.telerik.com/kendo-ui/api/javascript/ooxml/workbook#configuration-sheets.rows.height).
-1. To change the font name, utilize the [`fontName`](https://docs.telerik.com/kendo-ui/api/javascript/ooxml/workbook#configuration-sheets.rows.cells.fontName) property of the sheet row cells.
+1. Add a handler to the [`excelExport`](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid/events/excelexport) event of the Grid to loop over the workbook.
+1. If the font size becomes too large for the row, increase the row [`height`](https://docs.telerik.com/kendo-ui/api/javascript/ooxml/workbook/configuration/sheets.rows.height).
+1. To change the font name, utilize the [`fontName`](https://docs.telerik.com/kendo-ui/api/javascript/ooxml/workbook/configuration/sheets.rows.cells.fontname) property of the sheet row cells.
 
 ```
 excelExport: function(e) {

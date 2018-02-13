@@ -353,7 +353,7 @@ The supported filter values are `startswith`, `endswith` and `contains`.
 
 ### fixedGroupTemplate `String|Function`
 
-The [template](/api/javascript/kendo#methods-template) used to render the fixed header group. By default the widget displays only the value of the current group.
+The [template](/api/javascript/kendo/methods/template) used to render the fixed header group. By default the widget displays only the value of the current group.
 
     <select id="customers" style="width: 400px;"></select>
     <script>
@@ -377,7 +377,7 @@ The [template](/api/javascript/kendo#methods-template) used to render the fixed 
 
 ### footerTemplate `String|Function`
 
-The [template](/api/javascript/kendo#methods-template) used to render the footer template. The footer template receives the widget itself as a part of the data argument. Use the widget fields directly in the template.
+The [template](/api/javascript/kendo/methods/template) used to render the footer template. The footer template receives the widget itself as a part of the data argument. Use the widget fields directly in the template.
 
 #### Parameters
 
@@ -402,7 +402,7 @@ The widget instance.
 
 ### groupTemplate `String|Function`
 
-The [template](/api/javascript/kendo#methods-template) used to render the groups. By default the widget displays only the value of the group.
+The [template](/api/javascript/kendo/methods/template) used to render the groups. By default the widget displays only the value of the group.
 
     <select id="customers" style="width: 400px;"></select>
     <script>
@@ -511,7 +511,7 @@ A zero value means that a request will be made as soon as the user focuses the w
 
 ### noDataTemplate `String|Function` *(default: "NO DATA FOUND.")*
 
-The [template](/api/javascript/kendo#methods-template) used to render the "no data" template, which will be displayed if no results are found or the underlying data source is empty.
+The [template](/api/javascript/kendo/methods/template) used to render the "no data" template, which will be displayed if no results are found or the underlying data source is empty.
 The noData template receives the widget itself as a part of the data argument. The template will be evaluated on every widget data bound.
 
 > **Important** The popup will open when 'noDataTemplate' is defined
@@ -698,7 +698,7 @@ Specifies a static HTML content, which will be rendered as a header of the popup
 
 ### itemTemplate `String|Function`
 
-The [template](/api/javascript/kendo#methods-template) used to render the items in the popup list.
+The [template](/api/javascript/kendo/methods/template) used to render the items in the popup list.
 
 #### Example - specify template as a function
 
@@ -738,7 +738,7 @@ The [template](/api/javascript/kendo#methods-template) used to render the items 
 
 ### tagTemplate `String|Function`
 
-The [template](/api/javascript/kendo#methods-template) used to render the tags.
+The [template](/api/javascript/kendo/methods/template) used to render the tags.
 
 #### Template Data for the 'multiple' [tagMode](#configuration-tagMode)
 
@@ -758,7 +758,7 @@ A list of the selected data items.
 
 ##### data.currentTotal `Array`
 
-The current dataSource total value. If it is server filtered, it will show the current length of the [view](/api/javascript/data/datasource#methods-view).
+The current dataSource total value. If it is server filtered, it will show the current length of the [view](/api/javascript/data/datasource/methods/view).
 
 ##### data.maxTotal `Array`
 
@@ -1176,7 +1176,7 @@ The widget will pass the selected value(s) in the `valueMapper` function. In tur
 
 ### dataSource `kendo.data.DataSource`
 
-The [data source](/api/javascript/data/datasource) of the widget. Configured via the [dataSource](#configuration-dataSource) option.
+The [data source](/api/javascript/data/datasource) of the widget. Configured via the [dataSource](/configuration/datasource) option.
 
 > Changes of the data source will be reflected in the widget.
 
@@ -1373,7 +1373,7 @@ Focuses the widget.
 
 ### items
 
-Obtains an Array of the DOM elements, which correspond to the data items from the Kendo UI DataSource [view](/api/javascript/data/datasource#methods-view).
+Obtains an Array of the DOM elements, which correspond to the data items from the Kendo UI DataSource [view](/api/javascript/data/datasource/methods/view).
 
 #### Returns
 
@@ -1518,7 +1518,7 @@ Gets or sets the value of the MultiSelect.
 
 > **Important:** This method **does not trigger** [change](#events-change) event.
 This could affect [MVVM value binding](/framework/mvvm/bindings/value). The model bound to the widget will not be updated.
-You can overcome this behavior trigerring the `change` event manually using [trigger("change")](/api/javascript/observable#methods-trigger) method.
+You can overcome this behavior trigerring the `change` event manually using [trigger("change")](/api/javascript/observable/methods/trigger) method.
 
     <select id="multiselect" multiple="multiple">
         <option>Item1</option>
@@ -1726,7 +1726,7 @@ The widget instance which fired the event.
 
 The filter descriptor that will be used to filter the data source.
 
-> The data source filters the data items client-side unless the [data source serverFiltering](/api/javascript/data/datasource#configuration-serverFiltering) option is set to `true`.
+> The data source filters the data items client-side unless the [data source serverFiltering](/api/javascript/data/datasource/configuration/serverfiltering) option is set to `true`.
 
 #### Example - subscribe to the "filtering" event during initialization
 

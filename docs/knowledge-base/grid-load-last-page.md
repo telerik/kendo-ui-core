@@ -31,8 +31,8 @@ How can I make the Grid show its last page by default?
 
 1. Handle the first [`dataBound`](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid/events/databound) event of the Grid.
 1. In the event handler:
-	1. Get the length of the items by using the [`data`](https://docs.telerik.com/kendo-ui/api/javascript/data/datasource#methods-data) method of the `dataSource`.
-	1. Get the current page size by using the [`pageSize`](https://docs.telerik.com/kendo-ui/api/javascript/data/datasource#methods-pageSize) method of the `dataSource`.
+	1. Get the length of the items by using the [`data`](https://docs.telerik.com/kendo-ui/api/javascript/data/datasource/methods/data) method of the `dataSource`.
+	1. Get the current page size by using the [`pageSize`](https://docs.telerik.com/kendo-ui/api/javascript/data/datasource/methods/pagesize) method of the `dataSource`.
 	1. Divide these numbers, parse, and increment the result. Use the final result to set the new `pageSize`.
 
 	    ```html

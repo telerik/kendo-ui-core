@@ -9,7 +9,7 @@ slug: howto_configure_color_alternating_rows_grid
 
 The following example demonstrates how to customize the Excel document that the Grid generates during exporting.
 
-To set the background color of the alternating rows, the demo uses the [`background`](/api/javascript/ooxml/workbook#configuration-sheets.rows.cells.background) option of the cell. For more information on how Excel documents work, refer to the [introductory help topic on Excel](/framework/excel/introduction#create-excel-document).
+To set the background color of the alternating rows, the demo uses the [`background`](/api/javascript/ooxml/workbook/configuration/sheets.rows.cells.background) option of the cell. For more information on how Excel documents work, refer to the [introductory help topic on Excel](/framework/excel/introduction#create-excel-document).
 
 ###### Example
 
@@ -49,7 +49,7 @@ To set the background color of the alternating rows, the demo uses the [`backgro
 
 ## See Also
 
-* [JavaScript API Reference of the Grid](/api/javascript/ui/grid#configuration-excel)
+* [JavaScript API Reference of the Grid](/api/javascript/ui/grid/configuration/excel)
 * [How to Align Footer Cells]({% slug howto_alignfootercells_grid %})
 * [How to Export Checked Columns Only]({% slug howto_export_checked_columns_only_grid %})
 * [How to Export Detail Grids]({% slug howto_exportto_excel_masterand_detail_grid %})

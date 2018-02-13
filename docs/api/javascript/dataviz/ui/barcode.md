@@ -308,7 +308,7 @@ The width of the barcode in pixels.  By default the width is 300.
 
 ### exportImage
 Exports the barcode as an image.
-The result can be saved using [kendo.saveAs](/api/javascript/kendo#methods-saveAs).
+The result can be saved using [kendo.saveAs](/api/javascript/kendo/methods/saveas).
 
 The export operation is asynchronous and returns a [promise](http://api.jquery.com/Types/#Promise).
 The promise will be resolved with a PNG image encoded as a [Data URI](https://developer.mozilla.org/en-US/docs/data_URIs).
@@ -347,7 +347,7 @@ The height of the exported image. Defaults to the barcode height.
 
 ### exportPDF
 Exports the barcode as a PDF file.
-The result can be saved using [kendo.saveAs](/api/javascript/kendo#methods-saveAs).
+The result can be saved using [kendo.saveAs](/api/javascript/kendo/methods/saveas).
 
 The export operation is asynchronous and returns a [promise](http://api.jquery.com/Types/#Promise).
 The promise will be resolved with a PDF file encoded as a [Data URI](https://developer.mozilla.org/en-US/docs/data_URIs).
@@ -380,7 +380,7 @@ Parameters for the exported PDF file.
 
 ### exportSVG
 Exports the barcode as an SVG document.
-The result can be saved using [kendo.saveAs](/api/javascript/kendo#methods-saveAs).
+The result can be saved using [kendo.saveAs](/api/javascript/kendo/methods/saveas).
 
 The export operation is asynchronous and returns a [promise](http://api.jquery.com/Types/#Promise).
 The promise will be resolved with a SVG document encoded as a [Data URI](https://developer.mozilla.org/en-US/docs/data_URIs).

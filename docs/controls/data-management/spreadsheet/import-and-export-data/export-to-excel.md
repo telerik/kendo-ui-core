@@ -26,7 +26,7 @@ The default toolbar configuration includes an **Export** button. Clicking it ope
 
 ## API Export Reference
 
-The Spreadsheet client-side API includes the [`saveAsExcel`](/api/javascript/ui/spreadsheet#methods-saveAsExcel) method for initiating the export via JavaScript. This method does not ask you to specify a file name. Instead, it sets the value in [`excel.fileName`](/api/javascript/ui/spreadsheet.html#configuration-excel.fileName).
+The Spreadsheet client-side API includes the [`saveAsExcel`](/api/javascript/ui/spreadsheet/methods/saveasexcel) method for initiating the export via JavaScript. This method does not ask you to specify a file name. Instead, it sets the value in [`excel.fileName`](/api/javascript/ui/spreadsheet.html/configuration/excel.filename).
 
 ## Known Issues
 

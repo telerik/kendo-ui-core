@@ -34,11 +34,11 @@ If you try to convert the previously created JavaScript `Date` to a JSON string 
 
 ## Configuration
 
-You can define a [timezone](/api/javascript/ui/scheduler#configuration-timezone) option to Kendo UI Scheduler. It indicates to the widget what timezone to apply when displaying the appointment dates.
+You can define a [timezone](/api/javascript/ui/scheduler/configuration/timezone) option to Kendo UI Scheduler. It indicates to the widget what timezone to apply when displaying the appointment dates.
 
-The timezones option is not set by default and, therefore, the [event dates will be created based on the current client timezone offset](#configuration-Scheduler). This means that users from different timezones will see different start and end times. On the other hand, setting the Scheduler [timezone](/api/javascript/ui/scheduler#configuration-timezone) will force the widget to show the same start and end times regardless of the user's timezone.
+The timezones option is not set by default and, therefore, the [event dates will be created based on the current client timezone offset](#configuration-Scheduler). This means that users from different timezones will see different start and end times. On the other hand, setting the Scheduler [timezone](/api/javascript/ui/scheduler/configuration/timezone) will force the widget to show the same start and end times regardless of the user's timezone.
 
-> **Important**  
+> **Important**
 > * When you use remote binding, Kendo UI Scheduler expects to receive UTC dates. Respectively, it will send them back to the server in UTC. The service in use is responsible for keeping the dates in UTC, without offsetting them against its local time.
 > * When you bind the Scheduler to a remote service, keep the `timezone` option always set to, for example, `"Etc/UTC"`.
 > * When the `timezone` option of the Scheduler is not set, the current system timezone offset is used.
@@ -50,11 +50,11 @@ Based on the specifics of the JavaScript `Date` object explained above, the Sche
 
 1.  [`SchedulerEvent`](/api/javascript/data/schedulerevent) instances are created, where start/end dates are instantiated as JavaScript `Date` objects. During the process the [dates will be offset against the local time](http://www.ecma-international.org/ecma-262/6.0/#sec-localtime).
 
-2. If the [`timezone`](/api/javascript/ui/scheduler#configuration-timezone) option is defined, the widget removes the local timezone offset, converting dates to UTC. Then, it applies the defined timezone value, e.g. **America/New_York**.
+2. If the [`timezone`](/api/javascript/ui/scheduler/configuration/timezone) option is defined, the widget removes the local timezone offset, converting dates to UTC. Then, it applies the defined timezone value, e.g. **America/New_York**.
 
 ### Send Events to Remote Service
 
-1. If the [`timezone`](/api/javascript/ui/scheduler#configuration-timezone) option is defined, the widget removes the applied timezone offset, e.g. **America/New_York**, converting dates to UTC. Then, it applies the local time.
+1. If the [`timezone`](/api/javascript/ui/scheduler/configuration/timezone) option is defined, the widget removes the applied timezone offset, e.g. **America/New_York**, converting dates to UTC. Then, it applies the local time.
 
 2. [`SchedulerEvent`](/api/javascript/data/schedulerevent) instances are serialized using [`JSON.stringify`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/JSON/stringify). In the process, the dates are converted to UTC and then formatted according to the [ISO8601 format](https://en.wikipedia.org/wiki/ISO_8601).
 
@@ -93,7 +93,7 @@ The example below demonstrates how to bind the Scheduler to local dates when the
     </script>
 ````
 
-If you run the second example below, the Scheduler will show the dates according to the UTC convention. This means that the event will be displayed as scheduled for 4:00pm if you are in the **Europe/Berlin** timezone, for instance, while if you are in the **Europe/Sofia** timezone, the event will appear as scheduled for 5:00pm.  
+If you run the second example below, the Scheduler will show the dates according to the UTC convention. This means that the event will be displayed as scheduled for 4:00pm if you are in the **Europe/Berlin** timezone, for instance, while if you are in the **Europe/Sofia** timezone, the event will appear as scheduled for 5:00pm.
 
 > **Important**
 >

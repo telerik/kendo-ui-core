@@ -30,7 +30,7 @@ How can I keep the popup editor centered (like a modal window) when the browser 
 
 1. Add a handler on the browser window `onresize` event.
 1. Find the Kendo UI Window instance.
-1. Center it programmatically by using the [`center()`](https://docs.telerik.com/kendo-ui/api/javascript/ui/window#methods-center) method.
+1. Center it programmatically by using the [`center()`](https://docs.telerik.com/kendo-ui/api/javascript/ui/window/methods/center) method.
 
 ```
 window.onresize = function () {  

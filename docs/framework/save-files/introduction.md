@@ -8,7 +8,7 @@ position: 1
 
 # Overview of File Saving
 
-Since its 2014 Q3 release, Kendo UI allows you to save files on the client machine. This is done via the [`kendo.saveAs`](/api/javascript/kendo#methods-saveAs) method.
+Since its 2014 Q3 release, Kendo UI allows you to save files on the client machine. This is done via the [`kendo.saveAs`](/api/javascript/kendo/methods/saveas) method.
 
 ## Configuration
 

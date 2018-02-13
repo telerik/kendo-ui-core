@@ -14,7 +14,7 @@ Kendo UI exposes methods which convert a specified string to a [`Date`](https://
 
 ### Parse without Specifying Format
 
-The [`kendo.parseDate(string)`](/api/javascript/kendo#methods-parseDate) method converts a string to a JavaScript Date object taking into account the culture's set of default formats.
+The [`kendo.parseDate(string)`](/api/javascript/kendo/methods/parsedate) method converts a string to a JavaScript Date object taking into account the culture's set of default formats.
 
 ###### Example
 
@@ -41,7 +41,7 @@ When you use formats for parsing UTC date strings, apply the `zzz` specifier to 
 
 ### Parse by Specifying Format
 
-The [`kendo.parseDate(string, format)`](/api/javascript/kendo#methods-parseDate) method converts a string to a JavaScript Date object taking into account the specified formats.
+The [`kendo.parseDate(string, format)`](/api/javascript/kendo/methods/parsedate) method converts a string to a JavaScript Date object taking into account the specified formats.
 
 ###### Example
 
@@ -50,7 +50,7 @@ The [`kendo.parseDate(string, format)`](/api/javascript/kendo#methods-parseDate)
 
 ### Parse by Specifying Format and Culture Name
 
-The [`kendo.parseDate(string, format, cultureName)`](/api/javascript/kendo#methods-parseDate) method converts a string to a JavaScript Date object taking into account the specified formats and culture.
+The [`kendo.parseDate(string, format, cultureName)`](/api/javascript/kendo/methods/parsedate) method converts a string to a JavaScript Date object taking into account the specified formats and culture.
 
 ###### Example
 

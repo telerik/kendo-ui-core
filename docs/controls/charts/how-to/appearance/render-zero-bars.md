@@ -10,7 +10,7 @@ slug: howto_renderzerobars_charts
 
 By default, bars with a zero value are not rendered because they have a zero size.
 
-The following example demonstrates how to use the [`series.visual`](/api/javascript/dataviz/ui/chart#configuration-series.visual) function to render an element for zero bars.
+The following example demonstrates how to use the [`series.visual`](/api/javascript/dataviz/ui/chart/configuration/series.visual) function to render an element for zero bars.
 
 ###### Example
 

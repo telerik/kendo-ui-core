@@ -30,7 +30,7 @@ Before going on reading, make sure you are familiar with the following topics:
 
 To reorder the table rows of the Grid, initialize the Sortable widget on the Grid's [`table` element](/api/javascript/ui/grid#fields-table). Normally, the `filter` property of the Sortable should select all `tr` elements that are direct children of the table's `tbody` element, e.g. `filter: ">tbody >tr"`.
 
-> **Important**  
+> **Important**
 >
 > In an AngularJS application initialize the Sortable widget as a parent directive. The `filter` configuration option selects all `tr` elements that are children of the `.k-grid` wrapper. For detailed information, refer to [this example]({% slug howto_usesortablewith_gridinbatcheditablemode_angular_sortable %}).
 
@@ -102,7 +102,7 @@ If you use the `inline` or `popup` editing mode, set a more specific filter whic
 
 The draggable functionality of the Sortable prevents the `mousedown` event. As a result, the `change` event of the editor input does not fire, which in turn prevents the MVVM from saving the updated value.
 
-If you use the `batch` (or `incell`) editing modes, the code from the example above applied to the inline and popup editing modes is not working. The solution to this issue is to use [custom editors](http://docs.telerik.com/kendo-ui/api/javascript/ui/grid#configuration-columns.editor) and configure them to [update when the `input` event fires](http://docs.telerik.com/kendo-ui/framework/mvvm/bindings/value#controlling-when-the-view-model-is-updated)&mdash;by default, the framework listens for the `change` event. To implement the solution, add the `data-value-update="input"` attribute to the editor inputs. The downside of this approach is that the input event does not work for old versions of the Internet Explorer.
+If you use the `batch` (or `incell`) editing modes, the code from the example above applied to the inline and popup editing modes is not working. The solution to this issue is to use [custom editors](http://docs.telerik.com/kendo-ui/api/javascript/ui/grid/configuration/columns.editor) and configure them to [update when the `input` event fires](http://docs.telerik.com/kendo-ui/framework/mvvm/bindings/value#controlling-when-the-view-model-is-updated)&mdash;by default, the framework listens for the `change` event. To implement the solution, add the `data-value-update="input"` attribute to the editor inputs. The downside of this approach is that the input event does not work for old versions of the Internet Explorer.
 
 > **Important**
 >
@@ -161,7 +161,7 @@ The example below demonstrates how to shift the position of the items in the Dat
         grid.dataSource.sync(); //submit the changes through the update transport and refresh the Grid
     }
 
-The example below demonstrates how to send the `newIndex` and `oldIndex` to the server.    
+The example below demonstrates how to send the `newIndex` and `oldIndex` to the server.
 
 ###### Example
 

@@ -1,6 +1,6 @@
 ---
 title: Sort ListBox Items on Add
-description: An example on how to sort the Kendo UI ListBox items when a new one is added.  
+description: An example on how to sort the Kendo UI ListBox items when a new one is added.
 type: how-to
 page_title: Sort Items on Adding a New One | Kendo UI ListBox
 slug: listbox-sort-items-on-add
@@ -29,9 +29,9 @@ How can I sort the items between connected ListBoxes when I drag an item from on
 
 ## Solution
 
-1. To initially order the items, specify the [`sort`](https://docs.telerik.com/kendo-ui/api/javascript/data/datasource#configuration-sort) option of the DataSource component.
-1. To sort the items when the user drops a new item, handle the [`add`](https://docs.telerik.com/kendo-ui/api/javascript/ui/listbox#events-add) event and prevent the default behavior.
-1. Manually add the item to the respective DataSource and call the [`sort()`](https://docs.telerik.com/kendo-ui/api/javascript/data/datasource#methods-sort) method.
+1. To initially order the items, specify the [`sort`](https://docs.telerik.com/kendo-ui/api/javascript/data/datasource/configuration/sort) option of the DataSource component.
+1. To sort the items when the user drops a new item, handle the [`add`](https://docs.telerik.com/kendo-ui/api/javascript/ui/listbox/events/add) event and prevent the default behavior.
+1. Manually add the item to the respective DataSource and call the [`sort()`](https://docs.telerik.com/kendo-ui/api/javascript/data/datasource/methods/sort) method.
 
 ```html
 <div id="example" role="application">

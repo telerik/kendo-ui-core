@@ -40,7 +40,7 @@ The Placeholder is the element which indicates where the dragged item will be pl
 
 > **Important**  
 >
-> The placeholder element is appended to the Sortable DOM element container. Because of this, jQuery's `index` method returns unexpected results while dragging. If you want to get the index of a given item in the Sortable collection, use widget's [`indexOf`](/api/javascript/ui/sortable#methods-indexof) method.
+> The placeholder element is appended to the Sortable DOM element container. Because of this, jQuery's `index` method returns unexpected results while dragging. If you want to get the index of a given item in the Sortable collection, use widget's [`indexOf`](/api/javascript/ui/sortable/methods/indexof) method.
 
 #### Customize the Placeholder
 

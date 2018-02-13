@@ -30,7 +30,7 @@ How can I vertically and horizontally scroll and focus an event that is placed o
 1. Calculate its position according to the Scheduler content element.
 1. Scroll the Scheduler view to that position.
 
-You can also select the desired event by using the [`select`](https://docs.telerik.com/kendo-ui/api/javascript/ui/scheduler#methods-select) method.
+You can also select the desired event by using the [`select`](https://docs.telerik.com/kendo-ui/api/javascript/ui/scheduler/methods/select) method.
 
 ````html
 <div id="example" class="k-content">

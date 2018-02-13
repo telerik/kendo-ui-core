@@ -28,11 +28,11 @@ My Grid is grouped by site and then room number, and when it displays its conten
 
 How can I automatically expand any rows within that group when I manually expand a row?
 
-## Solution  
+## Solution
 
-Programmatically [expand](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid#methods-expandGroup) all items of the parent grouping field on the [`groupExpand`](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid#events-groupExpand) event:  
+Programmatically [expand](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid/methods/expandgroup) all items of the parent grouping field on the [`groupExpand`](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid/events/groupexpand) event:
 
-The following example demonstrates how to implement the suggested approach&mdash;manually collapse all subgroups and then the main group to see how the subgroups programmatically expand once the main group gets expanded too.  
+The following example demonstrates how to implement the suggested approach&mdash;manually collapse all subgroups and then the main group to see how the subgroups programmatically expand once the main group gets expanded too.
 
 ```html
 <div id="example">

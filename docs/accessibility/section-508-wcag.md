@@ -99,7 +99,7 @@ Place the widget inside the `label` element which in turn focuses the first visi
 
 ### Messages Support
 
-Widgets, such as the Grid and Calendar, require additional configuration to enable them to successfully pass the Section 508 validation. Due to the fact that they render their content in tables, each table header element should contain text. To achieve this behavior, use the [`messages.expandCollapseColumnHeader`](/api/javascript/ui/grid#configuration-messages.expandCollapseColumnHeader) and [`messages.weekColumnHeader`](/api/javascript/ui/calendar#configuration-messages.weekColumnHeader) configuration options.
+Widgets, such as the Grid and Calendar, require additional configuration to enable them to successfully pass the Section 508 validation. Due to the fact that they render their content in tables, each table header element should contain text. To achieve this behavior, use the [`messages.expandCollapseColumnHeader`](/api/javascript/ui/grid/configuration/messages.expandcollapsecolumnheader) and [`messages.weekColumnHeader`](/api/javascript/ui/calendar/configuration/messages.weekcolumnheader) configuration options.
 
 The following example demonstrates how to specify a text for the expand/collapse column.
 

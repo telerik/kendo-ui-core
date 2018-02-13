@@ -18,17 +18,17 @@ To retrieve and display only a subset of the whole dataset, the virtualization f
 
 ### Data
 
-In the context of the widget, data virtualization is accomplished by using the `DataSource` paging functionality and remote data retrieval. In this way, the widget retrieves only a specified data page instead of requesting the whole dataset at once. To ensure the proper functioning of the widgets, you need to configure the `DataSource` paging correctly. For more information, see the [server paging](/api/javascript/data/datasource#configuration-serverPaging) configuration.
+In the context of the widget, data virtualization is accomplished by using the `DataSource` paging functionality and remote data retrieval. In this way, the widget retrieves only a specified data page instead of requesting the whole dataset at once. To ensure the proper functioning of the widgets, you need to configure the `DataSource` paging correctly. For more information, see the [server paging](/api/javascript/data/datasource/configuration/serverpaging) configuration.
 
 ### UI
 
-The widget uses a specific strategy of reusing a list of DOM elements for displaying the corresponding data chunk. The number of these elements is determined based on the [`height`](/api/javascript/ui/combobox#configuration-height) and [`itemHeight`](#itemheight) options. Once the number is calculated, the widget creates those elements and starts reusing them to display the current data source page.
+The widget uses a specific strategy of reusing a list of DOM elements for displaying the corresponding data chunk. The number of these elements is determined based on the [`height`](/api/javascript/ui/combobox/configuration/height) and [`itemHeight`](#itemheight) options. Once the number is calculated, the widget creates those elements and starts reusing them to display the current data source page.
 
 ### Data and UI Combined
 
-To ensure the correct work of the widget, the DataSource `pageSize` value is calculated automatically based on the (([`height`](/api/javascript/ui/combobox#configuration-height) / [`itemHeight`](#itemheight)) * 4) formula. The ComboBox iteself does the calculation and the defined `pageSize` value is overridden if it does not match the calculated one.
+To ensure the correct work of the widget, the DataSource `pageSize` value is calculated automatically based on the (([`height`](/api/javascript/ui/combobox/configuration/height) / [`itemHeight`](#itemheight)) * 4) formula. The ComboBox iteself does the calculation and the defined `pageSize` value is overridden if it does not match the calculated one.
 
-> **Important**  
+> **Important**
 >
 > To avoid multiple initial requests, define a correct `pageSize` value.
 
@@ -95,7 +95,7 @@ To enable the virtualization in a ComboBox, follow the example below. It demonst
 
 All items in the virtualized list must have the same height. If you do not specify a height value, the framework automatically sets the `itemHeight` in the way they are set in the current theme and font size.
 
-> **Important**  
+> **Important**
 >
 > If you do not specify an `itemHeight` option, the widget performs an extra DataSource request. This, however, rarely causes any critical issues.
 
@@ -105,14 +105,14 @@ The virtualized list container must have a `height` option set in pixels. If you
 
 ### Set Page Size
 
-To ensure the proper work of the virtualized list, the widget calculates the `pageSize` value automatically based on the (([`height`](/api/javascript/ui/combobox#configuration-height) / [`itemHeight`](#itemheight)) * 4) formula and overrides the custom `pageSize` value.
+To ensure the proper work of the virtualized list, the widget calculates the `pageSize` value automatically based on the (([`height`](/api/javascript/ui/combobox/configuration/height) / [`itemHeight`](#itemheight)) * 4) formula and overrides the custom `pageSize` value.
 
 Consider the following scenario about a widget:
 - The `height` is `520px`
 - The `itemHeight` is `26`
 In this case, the `pageSize` will be set to `80`, because ((520 / 26) * 4) is equal to `80`.
 
-> **Important**  
+> **Important**
 >
 > To prevent the DataSource from making multiple requests for the same data, set the correct `pageSize` value using the aforementioned formula.
 
@@ -258,7 +258,7 @@ The `valueMapper` is expected to return a data item or a list of data items when
 
 Other articles on the Kendo UI ComboBox:
 
-* [Virtual Setup](/api/javascript/ui/combobox#configuration-virtual)
+* [Virtual Setup](/api/javascript/ui/combobox/configuration/virtual)
 * [How to Configure Deferred Value Binding]({% slug howto_configure_deffered_value_binding_combobox %})
 * [How to Implement Cascading with Local Data]({% slug howto_implement_cascading_local_data_combobox %})
 * [How to Select Items on Tab]({% slug howto_select_items_ontab_combobox %})

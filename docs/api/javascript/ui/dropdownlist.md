@@ -169,7 +169,7 @@ Use it to set the Id of the parent DropDownList widget.
 
 ### cascadeFromField `String`
 
-Defines the field to be used to filter the data source. If not defined the [parent's dataValueField option will be used](/api/javascript/ui/dropdownlist#configuration-dataValueField).
+Defines the field to be used to filter the data source. If not defined the [parent's dataValueField option will be used](/api/javascript/ui/dropdownlist/configuration/datavaluefield).
 [Help topic showing how cascading functionality works](/web/dropdownlist/cascading)
 
 #### Example
@@ -359,7 +359,7 @@ The supported filter values are `startswith`, `endswith` and `contains`.
 
 ### fixedGroupTemplate `String|Function`
 
-The [template](/api/javascript/kendo#methods-template) used to render the fixed header group. By default the widget displays only the value of the current group.
+The [template](/api/javascript/kendo/methods/template) used to render the fixed header group. By default the widget displays only the value of the current group.
 
     <input id="customers" style="width: 400px" />
     <script>
@@ -382,7 +382,7 @@ The [template](/api/javascript/kendo#methods-template) used to render the fixed 
 
 ### footerTemplate `String|Function`
 
-The [template](/api/javascript/kendo#methods-template) used to render the footer template. The footer template receives the widget itself as a part of the data argument. Use the widget fields directly in the template.
+The [template](/api/javascript/kendo/methods/template) used to render the footer template. The footer template receives the widget itself as a part of the data argument. Use the widget fields directly in the template.
 
 #### Parameters
 
@@ -407,7 +407,7 @@ The widget instance.
 
 ### groupTemplate `String|Function`
 
-The [template](/api/javascript/kendo#methods-template) used to render the groups. By default the widget displays only the value of the group.
+The [template](/api/javascript/kendo/methods/template) used to render the groups. By default the widget displays only the value of the group.
 
     <input id="customers" style="width: 400px" />
     <script>
@@ -500,7 +500,7 @@ The minimum number of characters the user must type before a filter is performed
 
 ### noDataTemplate `String|Function` *(default: "NO DATA FOUND.")*
 
-The [template](/api/javascript/kendo#methods-template) used to render the "no data" template, which will be displayed if no results are found or the underlying data source is empty.
+The [template](/api/javascript/kendo/methods/template) used to render the "no data" template, which will be displayed if no results are found or the underlying data source is empty.
 The noData template receives the widget itself as a part of the data argument. The template will be evaluated on every widget data bound.
 
 > **Important** The popup will open when 'noDataTemplate' is defined
@@ -640,7 +640,7 @@ The available "x" positions are:
  Note that the optionLabel will not be available if the widget is empty.
 
 > * If `optionLabel` is an object, it needs to have at least `dataValueField` and `dataTextField` properties. Otherwise, widget will show `undefined`.
-Note that the very same optionLabel object will be passed to the [valueTemplate](/api/javascript/ui/dropdownlist#configuration-valueTemplate). **You need to ensure that all required by the valueTemplate properties are present
+Note that the very same optionLabel object will be passed to the [valueTemplate](/api/javascript/ui/dropdownlist/configuration/valuetemplate). **You need to ensure that all required by the valueTemplate properties are present
 in the optionLabel object**.
 > * Since Q1 2015 (2015.1.318), the option label is rendered as a separate header template. The benefits of this change are:
 - the widget's value will be empty string even when `dataValueField` and `dataTextField` options are equal or not defined
@@ -678,9 +678,9 @@ in the optionLabel object**.
 
 ### optionLabelTemplate `String|Function`
 
-The [template](/api/javascript/kendo#methods-template) used to render the option label.
+The [template](/api/javascript/kendo/methods/template) used to render the option label.
 
-> Define the [optionLabel](/api/javascript/kendo#configuration-optionLabel) as **object** if complex template structure is used
+> Define the [optionLabel](/api/javascript/kendo/configuration/optionlabel) as **object** if complex template structure is used
 
 ### headerTemplate `String|Function`
 
@@ -706,7 +706,7 @@ Specifies a static HTML content, which will be rendered as a header of the popup
 
 ### template `String|Function`
 
-The [template](/api/javascript/kendo#methods-template) used to render the items. By default the widget displays only the text of the data item (configured via `dataTextField`).
+The [template](/api/javascript/kendo/methods/template) used to render the items. By default the widget displays only the text of the data item (configured via `dataTextField`).
 
 #### Example - specify template as a function
 
@@ -746,7 +746,7 @@ The [template](/api/javascript/kendo#methods-template) used to render the items.
 
 ### valueTemplate `String|Function`
 
-The [valueTemplate](/api/javascript/kendo#methods-template) used to render the selected value. By default the widget displays only the text of the data item (configured via `dataTextField`).
+The [valueTemplate](/api/javascript/kendo/methods/template) used to render the selected value. By default the widget displays only the text of the data item (configured via `dataTextField`).
 
 #### Example - specify valueTemplate as a function
 
@@ -1002,7 +1002,7 @@ The widget will pass the selected value(s) in the `valueMapper` function. In tur
 
 ### dataSource `kendo.data.DataSource`
 
-The [data source](/api/javascript/data/datasource) of the widget. Configured via the [dataSource](#configuration-dataSource) option.
+The [data source](/api/javascript/data/datasource) of the widget. configured via the [datasource](/configuration/datasource) option.
 
 > * Changes of the data source will be reflected in the widget.
 > * Assigning a new data source would have no effect. Use the [setDataSource](#methods-setDataSource) method instead.
@@ -1185,7 +1185,7 @@ Focuses the widget.
 
 ### items
 
-Obtains an Array of the DOM elements, which correspond to the data items from the Kendo UI DataSource [view](/api/javascript/data/datasource#methods-view).
+Obtains an Array of the DOM elements, which correspond to the data items from the Kendo UI DataSource [view](/api/javascript/data/datasource/methods/view).
 
 #### Returns
 
@@ -1332,7 +1332,7 @@ Gets or sets the selected item. Selects the item provided as an argument and upd
 in the current datasource view, which represents only the active range/page. Hence it will not work properly.
 > * This method **does not trigger** [change](#events-change) event.
 This could affect [MVVM value binding](/framework/mvvm/bindings/value). The model bound to the widget will not be updated.
-You can overcome this behavior trigerring the `change` event manually using [trigger("change")](/api/javascript/observable#methods-trigger) method.
+You can overcome this behavior trigerring the `change` event manually using [trigger("change")](/api/javascript/observable/methods/trigger) method.
 
     <input id="dropdownlist" />
     <script>
@@ -1514,7 +1514,7 @@ Gets or sets the value of the DropDownList. The value will not be set if there i
 > * The widget will **clear the applied filter** if a new value is set. Thus it ensures that the original/whole data set is available for selection.
 > * This method **does not trigger** [change](#events-change) event.
 This could affect [MVVM value binding](/framework/mvvm/bindings/value). The model bound to the widget will not be updated.
-You can overcome this behavior trigerring the `change` event manually using [trigger("change")](/api/javascript/observable#methods-trigger) method.
+You can overcome this behavior trigerring the `change` event manually using [trigger("change")](/api/javascript/observable/methods/trigger) method.
 
     <input id="dropdownlist" />
     <script>
@@ -1558,7 +1558,7 @@ Fired when the value of the widget is changed by the user. As of 2015 Q3 SP1 cas
 
 The event handler function context (available via the `this` keyword) will be set to the widget instance.
 
-> The event is not fired when the value of the widget is changed programmatically. If you need to handle changes made by API, wire the [cascade](/api/javascript/ui/dropdownlist#events-cascade) event.
+> The event is not fired when the value of the widget is changed programmatically. If you need to handle changes made by API, wire the [cascade](/api/javascript/ui/dropdownlist/events/cascade) event.
 
 #### Event Data
 
@@ -1688,7 +1688,7 @@ The widget instance which fired the event.
 
 The filter descriptor that will be used to filter the data source.
 
-> The data source filters the data items client-side unless the [data source serverFiltering](/api/javascript/data/datasource#configuration-serverFiltering) option is set to `true`.
+> The data source filters the data items client-side unless the [data source serverFiltering](/api/javascript/data/datasource/configuration/serverfiltering) option is set to `true`.
 
 #### Example - subscribe to the "filtering" event during initialization
 

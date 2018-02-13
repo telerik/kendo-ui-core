@@ -15,7 +15,7 @@ The following examples demonstrate how to skip non-editable cells of a Grid duri
 
 > **Important**
 >
-> Both examples work only if [`navigatable`](/api/javascript/ui/grid#configuration-navigatable) is disabled and the locked (frozen) columns are not used.
+> Both examples work only if [`navigatable`](/api/javascript/ui/grid/configuration/navigatable) is disabled and the locked (frozen) columns are not used.
 
 ## Skip Specific Columns
 
@@ -62,7 +62,7 @@ The following example demonstrates how to skip all cells from a given column.
     grid.table.on('keydown', function(e) {
       if (e.keyCode === kendo.keys.TAB && $($(e.target).closest('.k-edit-cell'))[0]) {
         e.preventDefault();
-        var currentNumberOfItems = grid.dataSource.view().length;    
+        var currentNumberOfItems = grid.dataSource.view().length;
         var row = $(e.target).closest('tr').index();
         var col = grid.cellIndex($(e.target).closest('td'));
 
@@ -85,9 +85,9 @@ The following example demonstrates how to skip all cells from a given column.
           }
 
           // wait for cell to close and Grid to rebind when changes have been made
-          setTimeout(function() {                  
+          setTimeout(function() {
             grid.editCell(grid.tbody.find("tr:eq(" + nextCellRow + ") td:eq(" + nextCellCol + ")"));
-          });            
+          });
         }
       }
     });

@@ -7,7 +7,7 @@ slug: howto_displayloadingindicator_overwindow_window
 
 # Display Loading Indicator over Window
 
-The example below demonstrates how to display a [Kendo-UI-style loading indicator](/api/javascript/ui/ui#methods-progress) over the Window content area while (or before) a remote request is made.
+The example below demonstrates how to display a [Kendo-UI-style loading indicator](/api/javascript/ui/ui/methods/progress) over the Window content area while (or before) a remote request is made.
 
 The loading overlay must be displayed over the Window [widget `element`](/framework/widgets/wrapper-element) or some of its ancestors. This ensures that the overlay is removed automatically when the new content is loaded and rendered.
 

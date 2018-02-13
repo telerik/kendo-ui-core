@@ -9,7 +9,7 @@ slug: initialize_thegrid_panelbar_widget
 
 The example below demonstrates how to use the `activate` event when initializing the Grid within the PanelBar so as it is resized according to the dimensions of its container.
 
-> **Important**  
+> **Important**
 > In addition to the Kendo UI PanelBar, this example can be applied to the TabStrip and Window widgets, which, too, act as hidden containers for the Grid.
 
 ###### Example
@@ -68,6 +68,6 @@ Other articles on the Kendo UI PanelBar:
 
 * [PanelBar JavaScript API Reference](/api/javascript/ui/panelbar)
 * [Initialize the Grid inside a Hidden Container]({% slug appearance_kendoui_grid_widget %}#hidden-containers)
-* [JavaScript API Reference: Configure PanelBar Animations](/api/javascript/ui/panelbar#configuration-animation)
+* [JavaScript API Reference: Configure PanelBar Animations](/api/javascript/ui/panelbar/configuration/animation)
 
 For more runnable examples on the Kendo UI PanelBar widget, browse its [**How To** documentation folder]({% slug howto_use_custom_content_containers_in_the_panelbar_widget %}).

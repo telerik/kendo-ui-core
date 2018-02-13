@@ -33,7 +33,7 @@ To get the `dataItem` for the last selected row:
 
 1. Subscribe for the [`click`](https://api.jquery.com/click/) event of the checkboxes by using a jQuery selector.
 1. In the `click` event handler, get the row by using the [`closest`](https://api.jquery.com/closest/) jQuery method.
-1. Get the row data by using the [`dataItem`](http://docs.telerik.com/kendo-ui/api/javascript/ui/grid#methods-dataItem) method of the Grid.
+1. Get the row data by using the [`dataItem`](http://docs.telerik.com/kendo-ui/api/javascript/ui/grid/methods/dataitem) method of the Grid.
 
 ```html
 <div id="example">
@@ -113,4 +113,4 @@ The checkbox selectable column is available as of the Kendo UI R2 2017 SP1 relea
 
 * [Frequently Asked Questions on Checkbox Selection]({% slug frequently_asked_questions_grid %})
 * [Grid Checkbox Selection Demo](http://demos.telerik.com/kendo-ui/grid/checkbox-selection)
-* [API Reference for the columns.selectable Configuration](http://docs.telerik.com/kendo-ui/api/javascript/ui/grid#configuration-columns.selectable)
+* [API Reference for the columns.selectable Configuration](http://docs.telerik.com/kendo-ui/api/javascript/ui/grid/configuration/columns.selectable)

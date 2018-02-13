@@ -5,6 +5,7 @@ res_type: api
 ---
 
 # kendo.drawing.Gradient : kendo.Class
+
 An abstract base class representing common members of all gradients.
 
 ## Constructor Parameters

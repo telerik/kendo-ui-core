@@ -62,9 +62,9 @@ To create an Excel document (workbook), follow the steps:
 
 **Step 1** Instantiate a [`kendo.ooxml.Workbook`](/api/javascript/ooxml/workbook). The workbook has an array of sheets. Sheets have rows and rows have cells.
 
-**Step 2** Call the [`toDataURL`](/api/javascript/ooxml/workbook#methods-toDataURL) or [`toDataURLAsync`](/api/javascript/ooxml/workbook#methods-toDataURLAsync) methods of the workbook to get the output Excel file as a data URI.
+**Step 2** Call the [`toDataURL`](/api/javascript/ooxml/workbook/methods/todataurl) or [`toDataURLAsync`](/api/javascript/ooxml/workbook/methods/todataurlasync) methods of the workbook to get the output Excel file as a data URI.
 
-**Step 3** Call the [`kendo.saveAs`](/api/javascript/kendo#methods-saveAs) method to save the Excel file on the client machine.
+**Step 3** Call the [`kendo.saveAs`](/api/javascript/kendo/methods/saveas) method to save the Excel file on the client machine.
 
 The example below demonstrates how to create an Excel workbook.
 

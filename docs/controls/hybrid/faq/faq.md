@@ -27,7 +27,7 @@ Due to issues related to simultaneous handling of `mouse` and `touch` events on 
 
 ### I have several text entry forms in my application, but I experience strange issues in Android and WP8. Why?
 
-Android has severe problems with input elements, especially when mixed with CSS3 transforms, which the hybrid mobile Kendo UI Scroller uses for faster animation. Windows Phone 8 on the other hand switches off transforms when an input element is focused, thus stopping any scrolling and resetting the scroller to top. Check the [article on form elements]({% slug forms_hybridkendoui %}) for more information about both topics. To avoid these issues, refer to View's [`useNativeScroller`](/api/javascript/mobile/ui/view#configuration-useNativeScrolling) configuration option, or the Scroller's [`useNative`](/api/javascript/mobile/ui/scroller#configuration-useNative) option, which is available as of Kendo UI Q1 2013.
+Android has severe problems with input elements, especially when mixed with CSS3 transforms, which the hybrid mobile Kendo UI Scroller uses for faster animation. Windows Phone 8 on the other hand switches off transforms when an input element is focused, thus stopping any scrolling and resetting the scroller to top. Check the [article on form elements]({% slug forms_hybridkendoui %}) for more information about both topics. To avoid these issues, refer to View's [`useNativeScroller`](/api/javascript/mobile/ui/view/configuration/usenativescrolling) configuration option, or the Scroller's [`useNative`](/api/javascript/mobile/ui/scroller/configuration/usenative) option, which is available as of Kendo UI Q1 2013.
 
 ### My application looks different in all platforms. Why?
 

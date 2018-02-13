@@ -263,7 +263,7 @@ note that a check for an empty `date` is needed, as the widget can work with a n
 
 ### footer `String`
 
- The [template](/api/javascript/kendo#methods-template) which renders the footer of the calendar. If false, the footer will not be rendered.
+ The [template](/api/javascript/kendo/methods/template) which renders the footer of the calendar. If false, the footer will not be rendered.
 
 #### Example - specify footer template as a function
 
@@ -363,13 +363,13 @@ note that a check for an empty `date` is needed, as the widget can work with a n
 
 ### month.weekNumber `String`
 
- The template to be used for rendering the cells in "week" column. By default, the widget renders the calculated week of the year. 
+ The template to be used for rendering the cells in "week" column. By default, the widget renders the calculated week of the year.
  The properties available in the data object are:
 
  * currentDate - returns the first date of the current week.
  * weekNumber - calculated week number.
 
- These properties can be used in the template to make additional calculations.  
+ These properties can be used in the template to make additional calculations.
 
 #### Example - specify week number template as a string
 
@@ -421,7 +421,7 @@ The template used for rendering cells in the calendar "month" view, which are ou
 
 ### weekNumber `Boolean` *(default: false)*
 
-If set to `true` a week of the year will be shown on the left side of the calendar. It is possible to define a template in order to customize what will be displayed.  
+If set to `true` a week of the year will be shown on the left side of the calendar. It is possible to define a template in order to customize what will be displayed.
 
 #### Example - enable the week of the year option
 
@@ -830,7 +830,7 @@ The time value to set for a DateTimePicker, expressed as a Date object or as a s
 
 > * This method **does not trigger** [change](#events-change) event.
 This could affect [MVVM value binding](/framework/mvvm/bindings/value). The model bound to the widget will not be updated.
-You can overcome this behavior trigerring the `change` event manually using [trigger("change")](/api/javascript/observable#methods-trigger) method.
+You can overcome this behavior trigerring the `change` event manually using [trigger("change")](/api/javascript/observable/methods/trigger) method.
 
     <input id="datetimepicker" />
     <script>

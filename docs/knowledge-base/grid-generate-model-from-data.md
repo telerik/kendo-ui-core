@@ -29,7 +29,7 @@ How can I generate the DataSource Model based on the dynamic data I have in the 
 1. Based on that, define the respective model properties.
 1. If necessary, you can also include validation properties.
 
-If you omit the [`columns`](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid#configuration-columns) setting of the Grid, a column is generated for each field in the model.
+If you omit the [`columns`](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid/configuration/columns) setting of the Grid, a column is generated for each field in the model.
 
 
 ````html

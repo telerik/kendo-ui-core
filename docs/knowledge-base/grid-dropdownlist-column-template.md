@@ -33,8 +33,8 @@ How can I make the drop-down list editors always visible in the Grid?
 >
 > The implementation of this functionality might lead to slow Grid performance.
 
-1. Use the [`columns.template`](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid#configuration-columns.template) configuration to add inputs to the column cells.
-1. In the [`dataBound`](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid#events-dataBound) event handler, initialize a DropDownList for each input.
+1. Use the [`columns.template`](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid/configuration/columns.template) configuration to add inputs to the column cells.
+1. In the [`dataBound`](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid/events/databound) event handler, initialize a DropDownList for each input.
 
 ```html
 <div id="grid"></div>

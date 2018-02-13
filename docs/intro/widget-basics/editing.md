@@ -26,12 +26,12 @@ You can configure the editing functionality through setting the available option
 
 The Kendo UI widgets that support editing have the following configuration options:
 
-- `editable`&mdash;Controls whether the editing is enabled or not. For instance, the editing functionality in the Kendo UI Grid widget is disabled by default. For detailed information, refer to [the API article on editing of the Grid](/api/javascript/ui/grid#configuration-editable).
+- `editable`&mdash;Controls whether the editing is enabled or not. For instance, the editing functionality in the Kendo UI Grid widget is disabled by default. For detailed information, refer to [the API article on editing of the Grid](/api/javascript/ui/grid/configuration/editable).
 - `editable.template`&mdash;Allows you to define a custom editor template.
 
 > **Important**
 >
-> Some widgets provide additional `editable` options. For more details, see the particular widget API documentation. For example, the Grid widget can disable the `remove` functionality by using the [`editable.destroy`](/api/javascript/ui/grid#configuration-editable.destroy) option.
+> Some widgets provide additional `editable` options. For more details, see the particular widget API documentation. For example, the Grid widget can disable the `remove` functionality by using the [`editable.destroy`](/api/javascript/ui/grid/configuration/editable.destroy) option.
 
 ### Events
 
@@ -42,7 +42,7 @@ The Kendo UI widgets that support editing have the following common events:
 - `remove`&mdash;Triggered before the model is removed.
 
 > **Important**
-> * Only the Scheduler widget supports prevention of the [`edit`](/api/javascript/ui/scheduler#events-edit), [`save`](/api/javascript/ui/scheduler#events-edit), and [`remove`](/api/javascript/ui/scheduler#events-edit) events.
+> * Only the Scheduler widget supports prevention of the [`edit`](/api/javascript/ui/scheduler/events/edit), [`save`](/api/javascript/ui/scheduler/events/edit), and [`remove`](/api/javascript/ui/scheduler/events/edit) events.
 > * The widget uses only one editor form. It applies the same editor template for the `create` and `update` actions.
 
 ### Setup
@@ -50,7 +50,7 @@ The Kendo UI widgets that support editing have the following common events:
 To enable the editing functionality of the widget, perform the following steps:
 
 1. Configure the [CRUD](/framework/datasource/crud) (Create, Read, Update, Destroy) data operation actions of the DataSource.
-2. Define the model fields by using the [`schema.model`](/api/javascript/data/datasource#configuration-schema.model) option.
+2. Define the model fields by using the [`schema.model`](/api/javascript/data/datasource/configuration/schema.model) option.
 3. Enable the `editable` option.
 
 For more information on how to set up the editing functionality in Kendo UI widgets, refer to the [article on editing of the Grid]({% slug editing_kendoui_grid_widget %}). The approaches are largely applicable, with minor differences, to the other Kendo UI widgets which support the editing functionality.
@@ -59,7 +59,7 @@ For more information on how to set up the editing functionality in Kendo UI widg
 
 ### Building Editor Forms
 
-A Kendo UI widget builds an editor form dynamically based on the [`schema.model`](/api/javascript/data/model#methods-Model.define) structure and more specifically the `fields` collection, as demonstrated in the example below.
+A Kendo UI widget builds an editor form dynamically based on the [`schema.model`](/api/javascript/data/model/methods/model.define) structure and more specifically the `fields` collection, as demonstrated in the example below.
 
 ###### Example
 
@@ -84,7 +84,7 @@ The auto-generated editor form is bound to the model through the [Kendo UI MVVM 
 
 Once the form is created, the widget performs the following actions:
 
-1. It [binds](/api/javascript/kendo#methods-bind) the editor fields to the model.
+1. It [binds](/api/javascript/kendo/methods/bind) the editor fields to the model.
 2. Triggers the `edit` event.
 3. Shows the editor form.
 4. Updates the model based on the changes made in the editors.
@@ -102,7 +102,7 @@ This connection respects the following rules:
 
 - On initial load, the editor form is populated using the model values.
 - The model is updated when the related `editor` triggers a `change` event. The `value binding` gets its value and populates the model field.
-- The form editors are updated when the [`ObservableObject` API](/api/javascript/data/observableobject) is used. Use the [`set` method](/api/javascript/data/observableobject#methods-set) if you want to update the corresponding UI editors. If this API is omitted, the editors do not change.
+- The form editors are updated when the [`ObservableObject` API](/api/javascript/data/observableobject) is used. Use the [`set` method](/api/javascript/data/observableobject/methods/set) if you want to update the corresponding UI editors. If this API is omitted, the editors do not change.
 
 ## Common Scenarios
 
@@ -153,7 +153,7 @@ If you want to modify the `model` by updating the relevant editor, trigger the `
 
 > **Important**
 >
-> The Kendo UI widgets have their own [`trigger` method](/api/javascript/observable#methods-trigger), which must be used to trigger the `change` event.
+> The Kendo UI widgets have their own [`trigger` method](/api/javascript/observable/methods/trigger), which must be used to trigger the `change` event.
 
 ### Adding Additional Editors without Using Kendo UI MVVM Bindings
 
@@ -195,11 +195,11 @@ Wire the `edit` event of the widget. You will get the model from the passed argu
 
 ### Accessing Models by UID
 
-Every model has a unique identifier. It is applied to the HTML element that holds the editor form. You are able to recognize that element by the `data-uid` HTML attribute. Use that `uid` value to get the model from the DataSource of the widget by using [`getByUid` method](/api/javascript/data/datasource#methods-getByUid).
+Every model has a unique identifier. It is applied to the HTML element that holds the editor form. You are able to recognize that element by the `data-uid` HTML attribute. Use that `uid` value to get the model from the DataSource of the widget by using [`getByUid` method](/api/javascript/data/datasource/methods/getbyuid).
 
 ### Finding Out If Models Are New
 
-If you need to differentiate between `create` and `update` actions, use the [`Model.isNew()` method](/api/javascript/data/model#methods-isNew).
+If you need to differentiate between `create` and `update` actions, use the [`Model.isNew()` method](/api/javascript/data/model/methods/isnew).
 
 ## Troubleshooting
 
@@ -211,13 +211,13 @@ A common scenario is to modify the model in the `edit` event of the widget. This
 
 Here are the actions that are taken during a model update and which create the issue:
 
-1. A model field is updated using the [`set` method](/api/javascript/data/observableobject#methods-set).
+1. A model field is updated using the [`set` method](/api/javascript/data/observableobject/methods/set).
 2. The model gets the new value, compares it to the current one and, if they are different, the new value is ready to be set.
 3. UI validation is triggered. Note that it uses the editor element value to perform the validation check. However, it is invalid and hence the new value that we try to set is ignored.
 
 **Solution**
 
-Define a valid `defaulValue` by using the [`schema.model.fields.defaultValue` option](/api/javascript/data/model#methods-Model.define).
+Define a valid `defaulValue` by using the [`schema.model.fields.defaultValue` option](/api/javascript/data/model/methods/model.define).
 
 ## See Also
 

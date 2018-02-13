@@ -257,7 +257,7 @@ To use newly created themes:
 1. Click **Download theme**. As a result, the following files become available:
 
     * `kendo.custom.css`&mdash;The custom theme for most widgets. You can use this theme instead of any `kendo.[theme].css` one.
-    * `kendo.custom.json`&mdash;The custom theme for widgets that use `SVG`/`Canvas` rendering (charting widgets). Use the contents of this file to [create a custom Chart theme]({% slug howto_customizechartthemes_charts %}). Set a custom theme name by using the [`theme`](/api/javascript/dataviz/ui/chart#configuration-theme)  configuration option.
+    * `kendo.custom.json`&mdash;The custom theme for widgets that use `SVG`/`Canvas` rendering (charting widgets). Use the contents of this file to [create a custom Chart theme]({% slug howto_customizechartthemes_charts %}). Set a custom theme name by using the [`theme`](/api/javascript/dataviz/ui/chart/configuration/theme)  configuration option.
     * `kendo.custom.less`&mdash;The [Less](http://lesscss.org/) that includes the custom theme. Use this file when you compile the theme dynamically.
 
 > **Important**

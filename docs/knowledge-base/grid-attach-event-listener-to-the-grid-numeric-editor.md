@@ -28,7 +28,7 @@ How can I bind to the `spin` event of the NumericTextBox editor in the Grid?
 
 ## Solution
 
-[Bind](https://docs.telerik.com/kendo-ui/intro/widget-basics/events-and-methods#event-binding-after-initialization) to the NumericTextBox on the [`edit`](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid#events-edit) event of the Grid.
+[Bind](https://docs.telerik.com/kendo-ui/intro/widget-basics/events-and-methods#event-binding-after-initialization) to the NumericTextBox on the [`edit`](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid/events/edit) event of the Grid.
 
 ````
   edit:function(e){

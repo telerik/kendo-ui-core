@@ -93,7 +93,7 @@ The `id` of the parent task. Required for child tasks.
         parentId: 1,
         start: new Date("2014/6/17 9:00"),
         end: new Date("2014/6/17 11:00")
-    });    
+    });
     </script>
 
 ### percentComplete `String|Number|Object` *(default: 0)*
@@ -320,7 +320,7 @@ The title of the task which is displayed by the Gantt widget.
 
 See the [Model methods](/api/framework/model#methods) for all inherited methods.
 
-### GanttTask.define
+### define
 
 Defines a new `GanttTask` type using the provided options.
 

@@ -13,7 +13,7 @@ The following example demonstrates how to use the Template feature of the [Drawi
 To style the header and footer elements:
 
 * Use an inline style tag, as in the following example.
-* If the Editor is in its [classic mode]({% slug overview_kendoui_editor_widget %}#classic-mode), add an external CSS file to the [`options.stylesheets array`](/api/javascript/ui/editor#configuration-stylesheets) and apply the needed decoration.
+* If the Editor is in its [classic mode]({% slug overview_kendoui_editor_widget %}#classic-mode), add an external CSS file to the [`options.stylesheets array`](/api/javascript/ui/editor/configuration/stylesheets) and apply the needed decoration.
 * If the Editor is in its [inline mode]({%slug overview_kendoui_editor_widget%}#inline-mode), directly reference the implemented CSS file to the page.
 
 ###### Example

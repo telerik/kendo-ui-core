@@ -26,10 +26,10 @@ How can I implement custom UI for editing the Diagram shapes?
 
 ## Solution
 
-1. Set the [`editable.shapeTemplate`](/api/javascript/dataviz/ui/diagram#configuration-editable.shapeTemplate) property of the Diagram.
+1. Set the [`editable.shapeTemplate`](/api/javascript/dataviz/ui/diagram/configuration/editable.shapetemplate) property of the Diagram.
 1. In the edit form template, use MVVM bindings to automatically apply user modifications in the edited shape data item.
 
-> You can utilize the same approach to customize the connection edit form through the [`editable.connectionTemplate`](/api/javascript/dataviz/ui/diagram#configuration-editable.connectionTemplate) property.
+> You can utilize the same approach to customize the connection edit form through the [`editable.connectionTemplate`](/api/javascript/dataviz/ui/diagram/configuration/editable.connectiontemplate) property.
 
 The following example demonstrates how to define a `shapeTemplate` to display a DropDownList and a ColorPicker when editing the shape values of the Diagram.
 

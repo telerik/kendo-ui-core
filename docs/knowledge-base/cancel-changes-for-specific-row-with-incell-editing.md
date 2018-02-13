@@ -39,9 +39,9 @@ component: grid
 
 I use a Grid with a remote Datasource with the `batch:true` setup. The Grid is in the incell editing mode. The toolbar of the Grid has the `create`, `save,` and `cancel` commands. The problem is that the `cancel` command discards all made changes.
 
-In other words, I need my Grid to have both of the following commands:  
-1. The `cancel` command of the row which discards only the changes of the corresponding row, and   
-1. The `cancel` command of the toolbar which discards all changes that are made.  
+In other words, I need my Grid to have both of the following commands:
+1. The `cancel` command of the row which discards only the changes of the corresponding row, and
+1. The `cancel` command of the toolbar which discards all changes that are made.
 
 How can I provide a `cancel` command per row and at the same time keep the above configurations?
 
@@ -55,13 +55,13 @@ The Kendo UI Grid does not provide a built-in solution for achieving this behavi
 
 > **Important**
 >
-> This approach will prevent the item from being updated in the database. However, the old values will be visually reverted after `cancelChanges`.  
+> This approach will prevent the item from being updated in the database. However, the old values will be visually reverted after `cancelChanges`.
 
-For more details, refer to the following articles:  
+For more details, refer to the following articles:
 
-* [http://docs.telerik.com/kendo-ui/api/javascript/data/datasource\#methods-getByUid](http://docs.telerik.com/kendo-ui/api/javascript/data/datasource#methods-getByUid)  
-* [http://docs.telerik.com/kendo-ui/api/javascript/data/datasource\#methods-cancelChanges](http://docs.telerik.com/kendo-ui/api/javascript/data/datasource#methods-cancelChanges)  
-* [http://docs.telerik.com/kendo-ui/api/javascript/ui/grid\#configuration-columns.command](http://docs.telerik.com/kendo-ui/api/javascript/ui/grid#configuration-columns.command)  
+* [http://docs.telerik.com/kendo-ui/api/javascript/data/datasource\/methods/getbyuid](http://docs.telerik.com/kendo-ui/api/javascript/data/datasource/methods/getbyuid)
+* [http://docs.telerik.com/kendo-ui/api/javascript/data/datasource\/methods/cancelchanges](http://docs.telerik.com/kendo-ui/api/javascript/data/datasource/methods/cancelchanges)
+* [http://docs.telerik.com/kendo-ui/api/javascript/ui/grid\/configuration/columns.command](http://docs.telerik.com/kendo-ui/api/javascript/ui/grid/configuration/columns.command)
 
 To resolve the resulting scroll-related issue which occurs after the refresh, [restore the scroll position by using a custom approach](http://docs.telerik.com/kendo-ui/controls/data-management/grid/appearance#restore-scroll-positions).
 

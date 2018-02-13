@@ -166,7 +166,7 @@ The supported effects are **"expandVertical"** and **"fadeIn"**.
 
 ### autoBind `Boolean` *(default: true)*
 
-If set to `false` the widget will not bind to the data source during initialization. In this case data binding will occur when the [change](/api/javascript/data/datasource#events-change) event of the
+If set to `false` the widget will not bind to the data source during initialization. In this case data binding will occur when the [change](/api/javascript/data/datasource/events/change) event of the
 data source is fired. By default the widget will bind to the data source specified in the configuration.
 
 > Setting `autoBind` to `false` is useful when multiple widgets are bound to the same data source. Disabling automatic binding ensures that the shared data source does not make more than one request to the remote service.
@@ -284,7 +284,7 @@ Sets the name attribute of the checkbox inputs. That name will be posted to the 
 
 ### checkboxes.template `String|Function`
 
-The [template](/api/javascript/kendo#methods-template) which renders the checkboxes. Can be used to allow posting of
+The [template](/api/javascript/kendo/methods/template) which renders the checkboxes. Can be used to allow posting of
 additional information along the TreeView checkboxes.
 
 The fields which can be used in the template are:
@@ -1144,7 +1144,7 @@ The node that follows the inserted node.
 
 ### items
 
-Obtains an Array of the DOM elements, which correspond to the data items from the Kendo UI DataSource [view](/api/javascript/data/datasource#methods-view).
+Obtains an Array of the DOM elements, which correspond to the data items from the Kendo UI DataSource [view](/api/javascript/data/datasource/methods/view).
 
 #### Returns
 

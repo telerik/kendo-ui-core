@@ -5,6 +5,7 @@ res_type: api
 ---
 
 # kendo.dataviz.map.BingLayer : kendo.dataviz.map.TileLayer
+
 A tile layer backed by Bing Maps.
 
 ## Constructor Parameters

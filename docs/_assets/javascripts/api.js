@@ -1,4 +1,4 @@
-var API_CATEGORIES = ['configuration', 'fields', 'methods', 'events'];
+var API_CATEGORIES = ['configuration', 'fields', 'methods', 'events', 'class methods', 'properties', 'constructor parameters'];
 var NESTED_ELEMENT_MARK = '.';
 var COLUMNS_STYLE_CLASS_NAME = 'columns';
 var API_SUBPAGE_TITLE = 'related-properties';
@@ -9,7 +9,7 @@ var COLUMN_HEIGHT_TOLLERANCE = 40;
 var filterControl = null;
 var previousSearch = "";
 
-function findApiCategoryIndex(values) {
+function getApiCategoryAndIndex(values) {
     var startIndex = -1;
     var category = "";
     $.each(values, function (index, value) {
@@ -26,10 +26,32 @@ function findApiCategoryIndex(values) {
     };
 }
 
+function findApiCategoryIndexFromPath(path) {
+    var startIndex = -1;
+    $.each(API_CATEGORIES, function (index, value) {
+        startIndex = path.indexOf(value.toLowerCase());
+        if (startIndex > -1) {
+            return false;
+        }
+    });
+
+    return startIndex;
+}
+
+function capitalizeSingle(value) {
+    var newValue = '';
+    $.each(value.split(/ |-/), function (index, item) {
+        if (index > 0) {
+            newValue += ' ';
+        }
+        newValue += item.charAt(0).toUpperCase() + item.slice(1).toLowerCase();
+    });
+    return newValue;
+}
+
 function capitalize(values) {
     for (var i = 0; i < values.length; i++) {
-        var value = values[i];
-        values[i] = value.charAt(0).toUpperCase() + value.slice(1).toLowerCase();
+        values[i] = capitalizeSingle(values[i]);
     }
 
     return values;
@@ -47,11 +69,11 @@ function separatePageParts(values, breadcrumbs) {
 }
 
 function getBreadcrumbsInfo(values) {
-    var startIndex = findApiCategoryIndex(values).index;
+    var startIndex = getApiCategoryAndIndex(values).index;
     var breadcrumbs = values.slice(startIndex - 1, values.length - 1);
     capitalize(breadcrumbs);
     var pagePartsCount = separatePageParts(values, breadcrumbs);
-    categoryInfo = findApiCategoryIndex(breadcrumbs);
+    categoryInfo = getApiCategoryAndIndex(breadcrumbs);
 
     return {
         categoryIndex: categoryInfo.index,
@@ -74,6 +96,12 @@ function buildToc() {
 
         if (headersCount > 1) {
             tocContainer.append('<div class="api-toc-title">In this article</div><ul>' + listItems + '</ul>');
+
+            var list = tocContainer.children('ul:first-of-type');
+            var windowHeight = $(window).outerHeight();
+            var footerHeight = $("#feedback-section").outerHeight() + $("footer").outerHeight();
+            var listTop = list.offset().top - $(window).scrollTop();
+            list.css('max-height', windowHeight - listTop - footerHeight);
         }
     }
 }
@@ -88,11 +116,7 @@ function repeat(string, count) {
 }
 
 function buildApiBreadcrumbs(data) {
-    if ($('#markdown-toc').length > 0) {
-        return;
-    }
-
-    var path = $(location).attr('pathname').split('/');
+    var path = decodeURI($(location).attr('pathname')).split('/');
     var breadcrumbsInfo = getBreadcrumbsInfo(path);
     var breadcrumbs = breadcrumbsInfo.breadcrumbs;
     breadcrumbs = breadcrumbs.slice(0, breadcrumbs.length);
@@ -109,7 +133,9 @@ function buildApiBreadcrumbs(data) {
             lastHref + '#' + breadcrumb :
             relativePathBackPath + breadcrumb;
 
-        links += '<a href="' + href.toLowerCase() + '">' + breadcrumb + '</a>';
+        href = href.replace(' ', '-');
+        var linkText = i === 0 ? data.public_name : breadcrumb;
+        links += '<a href="' + href.toLowerCase() + '">' + linkText + '</a>';
         if (i > 0) {
             links += getBreadcrumbDropDownContent(data, breadcrumbsInfo, i - 1, lastHref);
         }
@@ -141,7 +167,7 @@ function getBreadcrumbDropDownContent(data, breadcrumbsInfo, nestingLevel, lastH
         if (shouldAppendItemToDropDown(item, scopeFilter, nestingLevel, breadcrumbsInfo.nestingLevel)) {
             var href;
             if (isApiCategory) {
-                href = lastHref + '#' + item.toLowerCase();
+                href = lastHref + '#' + item.replace(' ', '-').toLowerCase();
             } else {
                 href = getPrefix(item, data.group_parents) + item;
             }
@@ -153,7 +179,7 @@ function getBreadcrumbDropDownContent(data, breadcrumbsInfo, nestingLevel, lastH
     return dropDownContent;
 }
 
-function getPrefix(item, prefixes){
+function getPrefix(item, prefixes) {
     var result = '';
     $.each(prefixes, function (index, prefix) {
         if (item.indexOf(prefix) > -1) {
@@ -240,7 +266,8 @@ function setupColumnsInternal(category, subCategory, mainNestingLevel) {
 
 function setupColumns() {
     for (var i = 0; i < API_CATEGORIES.length; i++) {
-        setupColumnsInternal(API_CATEGORIES[i], API_CATEGORIES[i], 0);
+        var category = API_CATEGORIES[i].replace(' ', '-');
+        setupColumnsInternal(category, category, 0);
     }
 
     var subCategory = $('#page-article > article').attr('class');
@@ -342,22 +369,23 @@ function attachToApiPageEvents() {
     }
 
     breadcrumbDropDown = $('.links-container > a');
-    if (breadcrumbDropDown.length && breadcrumbDropDown.next('ul').length) {
+    if (breadcrumbDropDown.length) {
         breadcrumbDropDown.mouseenter(function (e) {
             e.preventDefault();
             $('.links-container').children('ul').hide();
 
             var dropDownContent = $(this).next('ul');
-            dropDownContent.css('left', dropDownContent.position().left + $(this).position().left);
-            if (dropDownContent.is(':hidden')) {
-                dropDownContent.show();
-            } else {
-                dropDownContent.hide();
+            if (dropDownContent.length) {
+                dropDownContent.css('left', dropDownContent.position().left + $(this).position().left);
+                if (dropDownContent.is(':hidden')) {
+                    dropDownContent.show();
+                } else {
+                    dropDownContent.hide();
+                }
+                dropDownContent.mouseleave(function () {
+                    $(this).hide();
+                });
             }
-
-            dropDownContent.mouseleave(function () {
-                $(this).hide();
-            });
         });
     }
 
@@ -372,9 +400,12 @@ function attachToApiPageEvents() {
 }
 
 function getDataForCurrentPage(data) {
-    var dataItemForPage;
+    var searchedApiReferenceControl = decodeURI(window.location.pathname).toLowerCase();
+    var startIndex = searchedApiReferenceControl.indexOf('api/javascript');
+    var endIndex = findApiCategoryIndexFromPath(searchedApiReferenceControl);
+    searchedApiReferenceControl = searchedApiReferenceControl.substring(startIndex, endIndex - 1);
     $.each(data, function (index, dataItem) {
-        if (window.location.pathname.indexOf(dataItem.control)) {
+        if (searchedApiReferenceControl === dataItem.control) {
             dataItemForPage = dataItem;
             return false;
         }
@@ -387,7 +418,9 @@ $(document).ready(function () {
     $.get("/kendo-ui/api.json", function (data) {
         if (!ensureCorrectNavigation()) {
             setupColumns();
-            buildApiBreadcrumbs(getDataForCurrentPage(data));
+            if (!$('#markdown-toc').length) {
+                buildApiBreadcrumbs(getDataForCurrentPage(data));
+            }
             buildToc();
             attachToApiPageEvents();
         }

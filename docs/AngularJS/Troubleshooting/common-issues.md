@@ -29,7 +29,7 @@ For example, a DatePicker with an empty `value` attribute will not initialize.
     });
 ```
 
-In the previous example, the widget checks the `tag` element attributes and finds a `value` attribute, because it has a [`value`](/api/javascript/ui/datepicker#configuration-value) option. The evaluation against the `$scope` returns `undefined` and the widget does not initialize.
+In the previous example, the widget checks the `tag` element attributes and finds a `value` attribute, because it has a [`value`](/api/javascript/ui/datepicker/configuration/value) option. The evaluation against the `$scope` returns `undefined` and the widget does not initialize.
 
 **Solution**
 

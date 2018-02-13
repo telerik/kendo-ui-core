@@ -79,7 +79,7 @@ Each configuration option can be set with the `data` attribute of the target ele
 
 > **Important**
 >
-> The camelCase options are set through dash-separated attributes. For example, the [`ignoreCase`](/api/javascript/ui/autocomplete#configuration-ignoreCase) option of the AutoComplete is set through `data-ignore-case`.
+> The camelCase options are set through dash-separated attributes. For example, the [`ignoreCase`](/api/javascript/ui/autocomplete/configuration/ignorecase) option of the AutoComplete is set through `data-ignore-case`.
 
 Options which start with `data` do not require an additional `"data"` in the attribute name. For example, the `dataTextField` option is set through the `data-text-field` attribute and `dataSource` is set through the `data-source` attribute.
 

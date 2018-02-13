@@ -209,7 +209,7 @@ Removes data entries in order to avoid memory leaks.
 
 ### exportImage
 Exports the QRCode as an image.
-The result can be saved using [kendo.saveAs](/api/javascript/kendo#methods-saveAs).
+The result can be saved using [kendo.saveAs](/api/javascript/kendo/methods/saveas).
 
 The export operation is asynchronous and returns a [promise](http://api.jquery.com/Types/#Promise).
 The promise will be resolved with a PNG image encoded as a [Data URI](https://developer.mozilla.org/en-US/docs/data_URIs).
@@ -247,7 +247,7 @@ The height of the exported image. Defaults to the QRCode height.
 
 ### exportPDF
 Exports the QRCode as a PDF file.
-The result can be saved using [kendo.saveAs](/api/javascript/kendo#methods-saveAs).
+The result can be saved using [kendo.saveAs](/api/javascript/kendo/methods/saveas).
 
 The export operation is asynchronous and returns a [promise](http://api.jquery.com/Types/#Promise).
 The promise will be resolved with a PDF file encoded as a [Data URI](https://developer.mozilla.org/en-US/docs/data_URIs).
@@ -279,7 +279,7 @@ Parameters for the exported PDF file.
 
 ### exportSVG
 Exports the QRCode as an SVG document.
-The result can be saved using [kendo.saveAs](/api/javascript/kendo#methods-saveAs).
+The result can be saved using [kendo.saveAs](/api/javascript/kendo/methods/saveas).
 
 The export operation is asynchronous and returns a [promise](http://api.jquery.com/Types/#Promise).
 The promise will be resolved with a SVG document encoded as a [Data URI](https://developer.mozilla.org/en-US/docs/data_URIs).

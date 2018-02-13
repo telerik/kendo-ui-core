@@ -264,4 +264,4 @@ Other articles on Kendo UI Templates:
 
 * [Template Performance]({% slug performance_kendoui_templatescomponent %})
 * [Load Templates from External Files]({% slug externalteplateloading_templatescomponent %})
-* [JavaScript API Reference: template](/api/javascript/kendo#methods-template)
+* [JavaScript API Reference: template](/api/javascript/kendo/methods/template)

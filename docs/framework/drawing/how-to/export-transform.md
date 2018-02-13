@@ -11,7 +11,7 @@ The example below demonstrates how to apply geometric transformations during exp
 
 The aim of the example is to produce a PNG image of a section of the page at 4x the original resolution. This is done by applying an uniform 2x scale on the X and Y dimensions. The operation is carried out while the content is still represented in a vector form. No loss of quality occurs.
 
-For more information, refer to the [Transformation API article](/api/javascript/geometry/transformation#methods-scale).
+For more information, refer to the [Transformation API article](/api/javascript/geometry/transformation/methods/scale).
 
 ###### Example
 

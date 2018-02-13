@@ -8,7 +8,7 @@ res_type: api
 
 Represents one or more rectangular regions of cells in a given [Sheet](/api/javascript/spreadsheet/sheet). Inherits from [Class](/api/javascript/class).
 
-An instance of a range object may be obtained as a return value from the Sheet [range](/api/javascript/spreadsheet/sheet#methods-range) or [selection](/api/javascript/spreadsheet/sheet#methods-selection) methods.
+An instance of a range object may be obtained as a return value from the Sheet [range](/api/javascript/spreadsheet/sheet/methods/range) or [selection](/api/javascript/spreadsheet/sheet/methods/selection) methods.
 
 ## Methods
 

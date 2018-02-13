@@ -32,7 +32,7 @@ The Upload supports three types of validation:
 
 The `allowedExtensions` array object lists all file extensions that are allowed. If the user tries to select a file with an extension that is not included in the array, the validation will fail.
 
-The validation messages are displayed differently depending on whether the [`async.batch`](/api/javascript/ui/upload#configuration-async.batch) option is enabled.
+The validation messages are displayed differently depending on whether the [`async.batch`](/api/javascript/ui/upload/configuration/async.batch) option is enabled.
 
 **Figure 1: Batch mode is disabled**
 

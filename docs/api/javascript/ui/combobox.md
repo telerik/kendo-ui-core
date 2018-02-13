@@ -162,7 +162,7 @@ Use it to set the Id of the parent ComboBox widget.
 
 ### cascadeFromField `String`
 
-Defines the field to be used to filter the data source. If not defined the [parent's dataValueField option will be used](/api/javascript/ui/combobox#configuration-dataValueField).
+Defines the field to be used to filter the data source. If not defined the [parent's dataValueField option will be used](/api/javascript/ui/combobox/configuration/datavaluefield).
 [Help topic showing how cascading functionality works](/web/combobox/cascading)
 
 #### Example
@@ -365,7 +365,7 @@ The supported filter values are `startswith`, `endswith` and `contains`.
 
 ### fixedGroupTemplate `String|Function`
 
-The [template](/api/javascript/kendo#methods-template) used to render the fixed header group. By default the widget displays only the value of the current group.
+The [template](/api/javascript/kendo/methods/template) used to render the fixed header group. By default the widget displays only the value of the current group.
 
     <input id="customers" style="width: 400px" />
     <script>
@@ -388,7 +388,7 @@ The [template](/api/javascript/kendo#methods-template) used to render the fixed 
 
 ### footerTemplate `String|Function`
 
-The [template](/api/javascript/kendo#methods-template) used to render the footer template. The footer template receives the widget itself as a part of the data argument. Use the widget fields directly in the template.
+The [template](/api/javascript/kendo/methods/template) used to render the footer template. The footer template receives the widget itself as a part of the data argument. Use the widget fields directly in the template.
 
 #### Parameters
 
@@ -413,7 +413,7 @@ The widget instance.
 
 ### groupTemplate `String|Function`
 
-The [template](/api/javascript/kendo#methods-template) used to render the groups. By default the widget displays only the value of the group.
+The [template](/api/javascript/kendo/methods/template) used to render the groups. By default the widget displays only the value of the group.
 
     <input id="customers" style="width: 400px" />
     <script>
@@ -507,7 +507,7 @@ The minimum number of characters the user must type before a search is performed
 
 ### noDataTemplate `String|Function` *(default: "NO DATA FOUND.")*
 
-The [template](/api/javascript/kendo#methods-template) used to render the "no data" template, which will be displayed if no results are found or the underlying data source is empty.
+The [template](/api/javascript/kendo/methods/template) used to render the "no data" template, which will be displayed if no results are found or the underlying data source is empty.
 The noData template receives the widget itself as a part of the data argument. The template will be evaluated on every widget data bound.
 
 > **Important** The popup will open when 'noDataTemplate' is defined
@@ -714,7 +714,7 @@ Specifies a static HTML content, which will be rendered as a header of the popup
 
 ### template `String|Function`
 
-The [template](/api/javascript/kendo#methods-template) used to render the items. By default the widget displays only the text of the data item (configured via `dataTextField`).
+The [template](/api/javascript/kendo/methods/template) used to render the items. By default the widget displays only the text of the data item (configured via `dataTextField`).
 
 #### Example - specify template as a function
 
@@ -960,7 +960,7 @@ The widget will pass the selected value(s) in the `valueMapper` function. In tur
 
 ### dataSource `kendo.data.DataSource`
 
-The [data source](/api/javascript/data/datasource) of the widget. Configured via the [dataSource](#configuration-dataSource) option.
+The [data source](/api/javascript/data/datasource) of the widget. Configured via the [dataSource](/configuration/datasource) option.
 
 > Changes of the data source will be reflected in the widget.
 
@@ -1147,7 +1147,7 @@ Focuses the widget.
 
 ### items
 
-Obtains an Array of the DOM elements, which correspond to the data items from the Kendo UI DataSource [view](/api/javascript/data/datasource#methods-view).
+Obtains an Array of the DOM elements, which correspond to the data items from the Kendo UI DataSource [view](/api/javascript/data/datasource/methods/view).
 
 #### Returns
 
@@ -1259,7 +1259,7 @@ in the current datasource view, which represents only the active range/page. Hen
 
 > **Important:** This method **does not trigger** [change](#events-change) event.
 This could affect [MVVM value binding](/framework/mvvm/bindings/value). The model bound to the widget will not be updated.
-You can overcome this behavior trigerring the `change` event manually using [trigger("change")](/api/javascript/observable#methods-trigger) method.
+You can overcome this behavior trigerring the `change` event manually using [trigger("change")](/api/javascript/observable/methods/trigger) method.
 
     <input id="combobox" />
     <script>
@@ -1412,7 +1412,7 @@ there are no matches then the text will be considered as a custom value of the w
 
 > **Important:** This method **does not trigger** [change](#events-change) event.
 This could affect [MVVM value binding](/framework/mvvm/bindings/value). The model bound to the widget will not be updated.
-You can overcome this behavior trigerring the `change` event manually using [trigger("change")](/api/javascript/observable#methods-trigger) method.
+You can overcome this behavior trigerring the `change` event manually using [trigger("change")](/api/javascript/observable/methods/trigger) method.
 
     <input id="combobox" />
     <script>
@@ -1481,7 +1481,7 @@ Gets or sets the value of the ComboBox.
 
 > **Important:** This method **does not trigger** [change](#events-change) event.
 This could affect [MVVM value binding](/framework/mvvm/bindings/value). The model bound to the widget will not be updated.
-You can overcome this behavior trigerring the `change` event manually using [trigger("change")](/api/javascript/observable#methods-trigger) method.
+You can overcome this behavior trigerring the `change` event manually using [trigger("change")](/api/javascript/observable/methods/trigger) method.
 
     <input id="combobox" />
     <script>
@@ -1526,7 +1526,7 @@ Fired when the value of the widget is changed by the user. As of 2015 Q3 SP1 cas
 The event handler function context (available via the `this` keyword) will be set to the widget instance.
 
 > **Important:** The event is not fired when the value of the widget is changed from code.
-> **Important:** The event is not fired when the value of the widget is changed programmatically. If you need to handle changes made by API, wire the [cascade](/api/javascript/ui/combobox#events-cascade) event.
+> **Important:** The event is not fired when the value of the widget is changed programmatically. If you need to handle changes made by API, wire the [cascade](/api/javascript/ui/combobox/events/cascade) event.
 
 #### Event Data
 
@@ -1654,7 +1654,7 @@ The widget instance which fired the event.
 
 The filter descriptor that will be used to filter the data source.
 
-> The data source filters the data items client-side unless the [data source serverFiltering](/api/javascript/data/datasource#configuration-serverFiltering) option is set to `true`.
+> The data source filters the data items client-side unless the [data source serverFiltering](/api/javascript/data/datasource/configuration/serverfiltering) option is set to `true`.
 
 #### Example - subscribe to the "filtering" event during initialization
 

@@ -321,8 +321,8 @@ The data item that this shape is bound to, if any.
 The visual element representing the shape.
 
 This is either the result returned from
-[shape.visual](/api/javascript/dataviz/ui/diagram#configuration-shapeDefaults.visual)
-or a [predefined type](/api/javascript/dataviz/ui/diagram#configuration-shapes.type).
+[shape.visual](/api/javascript/dataviz/ui/diagram/configuration/shapedefaults.visual)
+or a [predefined type](/api/javascript/dataviz/ui/diagram/configuration/shapes.type).
 
 ### visual `kendo.dataviz.diagram.Group`
 

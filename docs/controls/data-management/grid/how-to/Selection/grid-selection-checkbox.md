@@ -7,7 +7,7 @@ slug: howto_make_selection_checkbox_column_grid
 
 # Make Selection with Checkbox Column
 
-As of the Kendo UI R2 2017 SP1 release, the [selection of columns with checkboxes](http://docs.telerik.com/kendo-ui/api/javascript/ui/grid#configuration-columns.selectable) is a built-in feature for
+As of the Kendo UI R2 2017 SP1 release, the [selection of columns with checkboxes](http://docs.telerik.com/kendo-ui/api/javascript/ui/grid/configuration/columns.selectable) is a built-in feature for
 the Grid.
 
 For earlier versions, refer to the following example. It demonstrates how to select a Grid row by using a checkbox, preserve the selection between pages, and get the IDs of the selected items from all pages.

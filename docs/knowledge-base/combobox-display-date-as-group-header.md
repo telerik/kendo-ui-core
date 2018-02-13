@@ -26,9 +26,9 @@ I am adding a grouping for the items of the ComboBox. The value (the field) for 
 
 How van I render the date in a standard format and not like `/DATE/14987988000000`.
 
-## Solution  
+## Solution
 
-To properly display properly the group headers, configure a [`groupTemplate`](https://docs.telerik.com/kendo-ui/api/javascript/ui/combobox#configuration-groupTemplate) and a [`fixedGroupTemplate`](https://docs.telerik.com/kendo-ui/api/javascript/ui/combobox#configuration-fixedGroupTemplate).  
+To properly display properly the group headers, configure a [`groupTemplate`](https://docs.telerik.com/kendo-ui/api/javascript/ui/combobox/configuration/grouptemplate) and a [`fixedGroupTemplate`](https://docs.telerik.com/kendo-ui/api/javascript/ui/combobox/configuration/fixedgrouptemplate).
 
 ```html
 <input id="customers" style="width: 400px" />

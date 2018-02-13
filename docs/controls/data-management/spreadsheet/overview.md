@@ -26,7 +26,7 @@ Out of the box, the Spreadsheet supports:
 
 Each of these features is exposed as a user interface (UI) to the end user and as API calls for further UI customization to the developer.
 
-> **Important**  
+> **Important**
 >
 > The Spreadsheet supports Internet Explorer 9 or later versions.
 
@@ -54,7 +54,7 @@ To find the detailed list of configuration options supported by the Spreadsheet,
 
 ### Using the Spreadsheet API
 
-The Spreadsheet instance exposes [methods](/api/javascript/ui/spreadsheet#methods) for sheet instance retrieval, insertion, and deletion. The most commonly used one is the [`activeSheet`](/api/javascript/ui/spreadsheet#methods-activeSheet) method.
+The Spreadsheet instance exposes [methods](/api/javascript/ui/spreadsheet#methods) for sheet instance retrieval, insertion, and deletion. The most commonly used one is the [`activeSheet`](/api/javascript/ui/spreadsheet/methods/activesheet) method.
 
 The [`sheet`](/api/javascript/spreadsheet/sheet) object instance interface enables you to get and set settings and data on the sheet level.
 
@@ -97,7 +97,7 @@ For more information on the data-binding Spreadsheet functionality, refer to the
 
 ## Mobile Integration
 
-The Spreadsheet is primarily targeted at desktop users. Its performance and functionalities are limited on mobile devices.  
+The Spreadsheet is primarily targeted at desktop users. Its performance and functionalities are limited on mobile devices.
 
 ## See Also
 

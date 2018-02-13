@@ -49,7 +49,7 @@ How can I disable timeslots for a specific day and style them?
     <script>
 
       function getColorBasedOnHour(date) {
-        var myDate = new Date("Thu Jun 13 2013 08:30:00 GMT+0300");      
+        var myDate = new Date("Thu Jun 13 2013 08:30:00 GMT+0300");
 
   			if(date.getDay() == myDate.getDay())
        	 return "#A9A9A9"
@@ -60,7 +60,7 @@ How can I disable timeslots for a specific day and style them?
           date: new Date("2013/6/13"),
           add: function(e) {
 
-              var myDate = new Date("Thu Jun 13 2013 08:30:00 GMT+0300");   
+              var myDate = new Date("Thu Jun 13 2013 08:30:00 GMT+0300");
          			if(e.event.start.getDay() == myDate.getDay())
               {
                   setTimeout(function() {
@@ -148,4 +148,4 @@ How can I disable timeslots for a specific day and style them?
 
 For more information on modifying the appearance of slots, refer to [this example](http://docs.telerik.com/kendo-ui/controls/scheduling/scheduler/how-to/appearance/set-slot-background-color-using-slot-templates).
 
-The functionality that the example demonstrates is not applicable to `MonthView` because [`slotTemplate` is not supported](http://docs.telerik.com/kendo-ui/api/javascript/ui/scheduler#configuration-views.slotTemplate).
+The functionality that the example demonstrates is not applicable to `MonthView` because [`slotTemplate` is not supported](http://docs.telerik.com/kendo-ui/api/javascript/ui/scheduler/configuration/views.slottemplate).

@@ -118,9 +118,9 @@ The template wraps the `value` in a `<div>` HTML element. The structure of the d
 
 You can configure the Calendar to display the week number and also use the week number template to customize the cells in the **Week** column.
 
-### Rendering of Week Numbers   
+### Rendering of Week Numbers
 
-The [`weekNumber`](/api/javascript/ui/calendar#configuration-weekNumber) option enables the Calendar to display the week number on an annual base to the left side of month view and as a separate column.
+The [`weekNumber`](/api/javascript/ui/calendar/configuration/weeknumber) option enables the Calendar to display the week number on an annual base to the left side of month view and as a separate column.
 
 ###### Example
 
@@ -142,7 +142,7 @@ The week-number template intends to customize the cells in the **Week** column. 
 * `currentDate`&mdash;Returns the first date of the current week.
 * `weekNumber`&mdash;The calculated week number.
 
-You can use these properties in the template to make additional calculations.  
+You can use these properties in the template to make additional calculations.
 
 ###### Example
 
@@ -176,7 +176,7 @@ By default, the user can select a single date from the Calendar by using the mou
 
 ### Multiple Date Selection
 
-As of the Kendo UI 2017 R3 release, the Calendar allows you to implement the multiple date selection by using the [`selectable`](/api/javascript/ui/calendar#configuration-selectable) configuration property.
+As of the Kendo UI 2017 R3 release, the Calendar allows you to implement the multiple date selection by using the [`selectable`](/api/javascript/ui/calendar/configuration/selectable) configuration property.
 
 ###### Example
 

@@ -43,7 +43,7 @@ Does the Grid feature a built-in solution to add an **Expand All** and **Collaps
 
 ## Solution
 
-Use the [`expandRow`](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid#methods-expandRow) and [`collapseRow`](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid#methods-closeCell) methods of the Grid.
+Use the [`expandRow`](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid/methods/expandrow) and [`collapseRow`](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid/methods/closecell) methods of the Grid.
 
 ```html
 <div id="example">
@@ -125,14 +125,14 @@ Use the [`expandRow`](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid#m
           var grid = $("#grid").data("kendoGrid");
           $( ".k-master-row" ).each(function( index ) {
             grid.expandRow(this);
-          });         
+          });
         })
 
         $('#collapse').click(function(e){
           var grid = $("#grid").data("kendoGrid");
           $( ".k-master-row" ).each(function( index ) {
             grid.collapseRow(this);
-          });         
+          });
         })
       </script>
     </div>

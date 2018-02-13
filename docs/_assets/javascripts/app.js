@@ -112,6 +112,11 @@ if (location.pathname.indexOf("/api/") < 0) {
             }
         });
     });
+} else if (location.pathname.indexOf("/api/javascript/") >= 0) {
+    var pathAsLower = location.pathname.toLowerCase();
+    if (pathAsLower !== location.pathname) {
+        window.location.replace(window.location.href.toLowerCase());
+    }
 }
 
 function navigationTemplate(root) {
@@ -199,7 +204,7 @@ $(function(){
         $("#page-article h2").each(function() {
             var h2 = $(this);
 
-            if (!/fields|configuration|properties|events|methods/i.test(h2.text())) {
+            if (!/fields|configuration|properties|events|class methods|constructor parameters|methods/i.test(h2.text())) {
                 return;
             }
 

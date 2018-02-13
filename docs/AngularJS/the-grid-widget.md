@@ -16,7 +16,7 @@ This article outlines some of its particularities regarding the AngularJS integr
 
 > **Important**
 >
-> AngularJS evaluates a template expression placed as [`column.title`](/api/javascript/ui/grid#configuration-columns.title) content. To avoid this behavior, set a [`ng-non-bindable`](https://docs.angularjs.org/api/ng/directive/ngNonBindable) attribute through the [`headerAttributes`](/api/javascript/ui/grid#configuration-columns.headerAttributes) so that AngularJS skips the expression evaluation.
+> AngularJS evaluates a template expression placed as [`column.title`](/api/javascript/ui/grid/configuration/columns.title) content. To avoid this behavior, set a [`ng-non-bindable`](https://docs.angularjs.org/api/ng/directive/ngNonBindable) attribute through the [`headerAttributes`](/api/javascript/ui/grid/configuration/columns.headerattributes) so that AngularJS skips the expression evaluation.
 
 The following example demonstrates how to use the `headerAttributes` to prevent the execution of expressions inside the title content.
 
@@ -219,7 +219,7 @@ The following example demonstrates how to use the `sum` aggregate in a `footerTe
 <script src="https://demos.telerik.com/kendo-ui/content/shared/js/products.js"></script>
 
   <div id="example" ng-app="KendoDemos">
-    <div ng-controller="MyCtrl">      
+    <div ng-controller="MyCtrl">
       <kendo-grid options="mainGridOptions" k-data-source="ds"></kendo-grid>
     </div>
   </div>
@@ -240,7 +240,7 @@ The following example demonstrates how to use the `sum` aggregate in a `footerTe
         aggregate: [
           { field: "UnitPrice", aggregate: "sum" },
           { field: "UnitsInStock", aggregate: "sum" }
-        ]});      
+        ]});
 
       $scope.mainGridOptions = {
         height: 500,
@@ -258,7 +258,7 @@ The following example demonstrates how to use the `sum` aggregate in a `footerTe
             groupFooterTemplate: "{% raw %}{{ dataItem.UnitsInStock.sum }}{% endraw %}"
           }
         ]
-      };      
+      };
     });
   </script>
 ```

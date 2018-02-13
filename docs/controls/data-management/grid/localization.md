@@ -23,7 +23,7 @@ The Grid widget provides a way to localize the user interface by using configura
 		{ name: "cancel", text: "Custom Cancel" }
 	]
 
-Find more info in the [`toolbar`](/api/javascript/ui/grid#configuration-toolbar) section of the Grid API reference.
+Find more info in the [`toolbar`](/api/javascript/ui/grid/configuration/toolbar) section of the Grid API reference.
 
 ## Columns
 
@@ -40,7 +40,7 @@ Find more info in the [`toolbar`](/api/javascript/ui/grid#configuration-toolbar)
         }
     }
 
-Find more information in the [`columnMenu.messages`](/api/javascript/ui/grid#configuration-columnMenu.messages) section of the Grid JavaScript API reference.
+Find more information in the [`columnMenu.messages`](/api/javascript/ui/grid/configuration/columnmenu.messages) section of the Grid JavaScript API reference.
 
 ### Commands
 
@@ -64,7 +64,7 @@ Find more information in the [`columnMenu.messages`](/api/javascript/ui/grid#con
         }
     ]
 
-Find more information in the [`columns.command`](/api/javascript/ui/grid#configuration-columns.command) section of the Grid JavaScript API reference.
+Find more information in the [`columns.command`](/api/javascript/ui/grid/configuration/columns.command) section of the Grid JavaScript API reference.
 
 ## Filter
 
@@ -119,7 +119,7 @@ Find more information in the [`columns.command`](/api/javascript/ui/grid#configu
 		}
 	}
 
-Find more information in the [`filterable`](/api/javascript/ui/grid#configuration-filterable.messages) section of the Grid JavaScript API reference.
+Find more information in the [`filterable`](/api/javascript/ui/grid/configuration/filterable.messages) section of the Grid JavaScript API reference.
 
 ## Grouping Header
 
@@ -131,7 +131,7 @@ Find more information in the [`filterable`](/api/javascript/ui/grid#configuratio
         }
     }
 
-Find more information in the [`groupable.messages`](/api/javascript/ui/grid#configuration-columnMenu.messages) section of the Grid JavaScript API reference.
+Find more information in the [`groupable.messages`](/api/javascript/ui/grid/configuration/columnmenu.messages) section of the Grid JavaScript API reference.
 
 ## Pager
 

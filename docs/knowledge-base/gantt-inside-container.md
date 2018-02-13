@@ -35,7 +35,7 @@ The reason for this issue is that the Gantt was initialized in a hidden (`displa
     .Deferred()
     )
     ```
-1. Initialize the widget on the first [`activate`](https://docs.telerik.com/kendo-ui/api/javascript/ui/panelbar#events-activate) event of the PanelBarItem that contains it.
+1. Initialize the widget on the first [`activate`](https://docs.telerik.com/kendo-ui/api/javascript/ui/panelbar/events/activate) event of the PanelBarItem that contains it.
 
     ```JavaScript
     function onActivate(e) {

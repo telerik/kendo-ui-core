@@ -17,8 +17,8 @@ To achieve this behavior:
 
 Either of the following scenarios occur:
 
-1. The DropDownList is already bound when it is opened. In this case, execute `adjustDropDownWidth` in the [`open`](/api/javascript/ui/dropdownlist#events-open) event.
-1. The DropDownList triggers a remote request after it is opened. In this case, execute `adjustDropDownWidth` in the [`dataBound`](/api/javascript/ui/dropdownlist#events-dataBound) event.
+1. The DropDownList is already bound when it is opened. In this case, execute `adjustDropDownWidth` in the [`open`](/api/javascript/ui/dropdownlist/events/open) event.
+1. The DropDownList triggers a remote request after it is opened. In this case, execute `adjustDropDownWidth` in the [`dataBound`](/api/javascript/ui/dropdownlist/events/databound) event.
 
 The following example demonstrates how to automatically adjust the width of a DropDownList depending on its list items.
 

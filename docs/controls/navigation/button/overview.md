@@ -55,7 +55,7 @@ Although each Button represents a separate widget instance on the page, multiple
 
 #### Apply kendo.init()
 
-This approach allows you to initialize multiple Button widgets at once, but with different configuration options. For more information, refer to [Data Attribute Initialization]({% slug initialize_widgets_using_markup_installation %}) and [`kendo.init()` method description](/api/javascript/kendo#methods-init).
+This approach allows you to initialize multiple Button widgets at once, but with different configuration options. For more information, refer to [Data Attribute Initialization]({% slug initialize_widgets_using_markup_installation %}) and [`kendo.init()` method description](/api/javascript/kendo/methods/init).
 
 ###### Example
 
@@ -102,7 +102,7 @@ The example below demonstrates how to enable and disable the Button.
 
 	</script>
 
-For more information on the Button [`enable` property](/api/javascript/ui/button#configuration-enable) and the [`enable` method](/api/javascript/ui/button#methods-enable), refer to the [Button API](/api/javascript/ui/button).    
+For more information on the Button [`enable` property](/api/javascript/ui/button/configuration/enable) and the [`enable` method](/api/javascript/ui/button/methods/enable), refer to the [Button API](/api/javascript/ui/button).
 
 ## Add Icons
 

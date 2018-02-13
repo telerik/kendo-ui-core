@@ -154,7 +154,7 @@ The example below demonstrates how to initialize a Dialog, center, and configure
             width: 200,
             height: 200,
             title: "Dialog Title",
-            visible: false            
+            visible: false
         }).data("kendoDialog");
     });
 
@@ -256,7 +256,7 @@ The example below demonstrates how to access an existing Dialog instance.
 
 ### Access DOM Elements
 
-Similar to other Kendo UI widgets, the Dialog has two DOM elements, which can be accessed and used to customize the appearance of the widget or its content. These are the [`wrapper` and `element`]({% slug widgetwrapperandelement_references_gettingstarted %}) elements of the widget, which are provided as fields of the widget object. In specific scenarios, the Dialog wrapper can be used to tweak the position or the size of the widget although this is normally done through the API and the [`setOptions` method](/api/javascript/ui/widget#methods-setOptions).
+Similar to other Kendo UI widgets, the Dialog has two DOM elements, which can be accessed and used to customize the appearance of the widget or its content. These are the [`wrapper` and `element`]({% slug widgetwrapperandelement_references_gettingstarted %}) elements of the widget, which are provided as fields of the widget object. In specific scenarios, the Dialog wrapper can be used to tweak the position or the size of the widget although this is normally done through the API and the [`setOptions` method](/api/javascript/ui/widget/methods/setoptions).
 
 ###### Example
 
@@ -283,7 +283,7 @@ Apply the CSS style to the scrollbar container below the Dialog as demonstrated 
 
 To create a Kendo UI Dialog instance multiple times with the same ID, make sure that the existing instance with this ID is [destroyed](#configuration-Destroy) first. Widgets with the same ID [cannot exist and work properly]({% slug initialize_widgets_using_jquery_plugins_installation %}#duplicate-initialization) at one and the same time.
 
-Alternatively, do not destroy the existing Dialog instance&mdash;[open](/api/javascript/ui/dialog#methods-open) it and [set new static content](/api/javascript/ui/dialog#methods-content) if needed.
+Alternatively, do not destroy the existing Dialog instance&mdash;[open](/api/javascript/ui/dialog/methods/open) it and [set new static content](/api/javascript/ui/dialog/methods/content) if needed.
 
 ## See Also
 
