@@ -112,11 +112,6 @@ if (location.pathname.indexOf("/api/") < 0) {
             }
         });
     });
-} else if (location.pathname.indexOf("/api/javascript/") >= 0) {
-    var pathAsLower = location.pathname.toLowerCase();
-    if (pathAsLower !== location.pathname) {
-        window.location.replace(window.location.href.toLowerCase());
-    }
 }
 
 function navigationTemplate(root) {

@@ -661,6 +661,7 @@ api:
       - "connectorDefaults.stroke"
 -
     file: "api/javascript/dataviz/map/marker-layer"
+    skip_redirect: true
     group_parents:
       - "---"
 -
