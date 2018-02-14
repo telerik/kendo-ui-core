@@ -31,9 +31,9 @@ How can I get all the data items of the selected rows when using the selectable 
 
 To get the `dataItem` for each selected row:
 
-1. In the [`change`](http://docs.telerik.com/kendo-ui/api/javascript/ui/grid#events-change) event handler, get and save the rows in a variable by using the [`select`](http://docs.telerik.com/kendo-ui/api/javascript/ui/grid#methods-select) method.
+1. In the [`change`](http://docs.telerik.com/kendo-ui/api/javascript/ui/grid/events/change) event handler, get and save the rows in a variable by using the [`select`](http://docs.telerik.com/kendo-ui/api/javascript/ui/grid/methods/select) method.
 1. Loop through the rows by using the [`each`](https://api.jquery.com/each/) jQuery method.
-1. Get every row data by using the [`dataItem`](http://docs.telerik.com/kendo-ui/api/javascript/ui/grid#methods-dataItem) method.
+1. Get every row data by using the [`dataItem`](http://docs.telerik.com/kendo-ui/api/javascript/ui/grid/methods/dataitem) method.
 
 ```html
 <div id="example">
@@ -106,4 +106,4 @@ The checkbox selectable column is available as of the Kendo UI R2 2017 SP1 relea
 
 * [Frequently Asked Questions on Checkbox Selection]({% slug frequently_asked_questions_grid %})
 * [Grid Checkbox Selection Demo](http://demos.telerik.com/kendo-ui/grid/checkbox-selection)
-* [API Reference for the columns.selectable Configuration](http://docs.telerik.com/kendo-ui/api/javascript/ui/grid#configuration-columns.selectable)
+* [API Reference for the columns.selectable Configuration](http://docs.telerik.com/kendo-ui/api/javascript/ui/grid/configuration/columns.selectable)

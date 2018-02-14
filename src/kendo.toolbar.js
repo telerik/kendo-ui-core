@@ -1265,6 +1265,7 @@ var __meta__ = { // jshint ignore:line
                     e.preventDefault();
 
                     if (e.keyCode === keys.ESC || e.keyCode === keys.TAB || (e.altKey && e.keyCode === keys.UP)) {
+
                         that._toggleOverflow();
                         that.overflowAnchor.focus();
                     } else if (e.keyCode === keys.DOWN) {
@@ -1383,9 +1384,11 @@ var __meta__ = { // jshint ignore:line
 
                 that.element
                     .attr("tabindex", 0)
-                    .focus(function() {
+                    .on("focusin", function(ev) {
+                        var target = $(ev.target);
                         var element = $(this).find(":kendoFocusable:first");
-                        if (element.length === 0) {
+
+                        if (!target.is("." + TOOLBAR) || element.length === 0) {
                             return;
                         }
 

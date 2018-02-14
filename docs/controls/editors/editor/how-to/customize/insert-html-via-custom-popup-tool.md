@@ -14,8 +14,8 @@ However, this is not required as demonstrated in the following example. It shows
 
 For additional information about the code used in the example, refer to:
 
-* [How to Configure Editor Tools](/api/javascript/ui/editor#configuration-tools)
-* [How to Execute Editor Commands](/api/javascript/ui/editor#methods-exec)
+* [How to Configure Editor Tools](/api/javascript/ui/editor/configuration/tools)
+* [How to Execute Editor Commands](/api/javascript/ui/editor/methods/exec)
 * [Editor Custom Tools Demo](http://demos.telerik.com/kendo-ui/editor/custom-tools)
 * [How to Configure a Window](/api/javascript/ui/window)
 * [How to Obtain Widget's Element from Its Client Object](/framework/widgets/wrapper-element)

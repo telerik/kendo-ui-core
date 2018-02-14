@@ -53,7 +53,7 @@ $("#grid").kendoGrid({
 
 ## See Also
 
-* [JavaScript API Reference of the Grid](/api/javascript/ui/grid#configuration-excel)
+* [JavaScript API Reference of the Grid](/api/javascript/ui/grid/configuration/excel)
 * [How to Align Footer Cells]({% slug howto_alignfootercells_grid %})
 * [How to Configure Color for Alternating Rows]({% slug howto_configure_color_alternating_rows_grid %})
 * [How to Export Checked Columns Only]({% slug howto_export_checked_columns_only_grid %})

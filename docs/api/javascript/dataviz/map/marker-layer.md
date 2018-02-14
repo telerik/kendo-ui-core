@@ -5,6 +5,7 @@ res_type: api
 ---
 
 # kendo.dataviz.map.MarkerLayer : kendo.dataviz.map.Layer
+
 Represents a data-bound marker layer.
 
 ## Constructor Parameters

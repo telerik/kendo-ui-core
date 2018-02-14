@@ -39,6 +39,6 @@ How can I avoid the display of HTML content in the output Excel file and show ju
 
 ## Solution  
 
-Configure the [`excelExport`](http://docs.telerik.com/kendo-ui/api/javascript/ui/grid#events-excelExport) event by setting only the text value to the cells with jQuery.
+Configure the [`excelExport`](http://docs.telerik.com/kendo-ui/api/javascript/ui/grid/events/excelexport) event by setting only the text value to the cells with jQuery.
 
 For the full implementation of the solution, refer to [this Dojo](http://dojo.telerik.com/EtESI).

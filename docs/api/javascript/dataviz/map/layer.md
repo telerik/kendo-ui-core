@@ -6,6 +6,7 @@ res_type: api
 ---
 
 # kendo.dataviz.map.Layer : kendo.Class
+
 Represents an individual map layer.
 
 ## Constructor Parameters

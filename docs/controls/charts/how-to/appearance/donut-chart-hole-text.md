@@ -12,8 +12,8 @@ In some scenarios, you might need to display some content in the center of a Ken
 
 To achieve this behavior:
 
-1. Locate the center point. For more information, refer to the [`series.visual`](/api/javascript/dataviz/ui/chart#configuration-series.visual) API call.    
-2. Plot `Text` or other `Shapes` to achieve this behavior by using the [`render` event](/api/javascript/dataviz/ui/chart#events-render).
+1. Locate the center point. For more information, refer to the [`series.visual`](/api/javascript/dataviz/ui/chart/configuration/series.visual) API call.
+2. Plot `Text` or other `Shapes` to achieve this behavior by using the [`render` event](/api/javascript/dataviz/ui/chart/events/render).
 
 The example below demonstrates how to place some text in the center of a Kendo UI Donut Chart.
 
@@ -87,7 +87,7 @@ The example below demonstrates how to place some text in the center of a Kendo U
             // The center and radius are populated by now.
             // We can ask a circle geometry to calculate the bounding rectangle for us.
             //
-            // http://docs.telerik.com/kendo-ui/api/javascript/geometry/circle#methods-bbox
+            // http://docs.telerik.com/kendo-ui/api/javascript/geometry/circle/methods/bbox
             var circleGeometry = new geom.Circle(center, radius);
             var bbox = circleGeometry.bbox();
 
@@ -100,8 +100,8 @@ The example below demonstrates how to place some text in the center of a Kendo U
 
             // Align the text in the bounding box
             //
-            // http://docs.telerik.com/kendo-ui/api/javascript/drawing#methods-align
-            // http://docs.telerik.com/kendo-ui/api/javascript/drawing#methods-vAlign
+            // http://docs.telerik.com/kendo-ui/api/javascript/drawing/methods/align
+            // http://docs.telerik.com/kendo-ui/api/javascript/drawing/methods/vAlign
             draw.align([text], bbox, "center");
             draw.vAlign([text], bbox, "center");
 

@@ -60,7 +60,7 @@ This second option assumes that you are familiar with the process of [generating
 1. Compile your custom Kendo UI Bootstrap theme and use it together with [`kendo.common-bootstrap.min.css`]({% slug themesandappearnce_kendoui_desktopwidgets %}#common-css-files).
 1. There is no straightforward relationship between all Bootstrap Less variables and all Kendo UI Less variables. The variable mappings inside `bootstrap-mapper.less` have been created to achieve a decent level of compatibility and follow common sense logic. It is possible to change a specific mapping to change the logic by which the custom Kendo UI theme is generated.
 
-For any suggestion how to improve the [`bootstrap-mapper.less` file](https://github.com/telerik/kendo-ui-core/blob/master/styles/web/bootstrap-mapper.less) you are willing to share, feel free to send your [pull request to the Kendo UI Core repository](https://github.com/telerik/kendo-ui-core/#how-to-contribute).  
+For any suggestion how to improve the [`bootstrap-mapper.less` file](https://github.com/telerik/kendo-ui-core/blob/master/styles/web/bootstrap-mapper.less) you are willing to share, feel free to send your [pull request to the Kendo UI Core repository](https://github.com/telerik/kendo-ui-core/#how-to-contribute).
 
 ### Nest Widgets and Bootstrap Grid Layout
 
@@ -151,7 +151,7 @@ To resolve this issue, follow some of the possible solutions below.
 
 ## Known Limitations
 
-* Bootstrap modal dialogs prevent access to Kendo UI popups, which are opened by widgets placed inside the modal dialog. In such cases, use non-modal Bootstrap dialogs or [modal](/api/javascript/ui/window#configuration-modal) [Kendo UI Windows]({% slug overview_kendoui_window_widget %}).
+* Bootstrap modal dialogs prevent access to Kendo UI popups, which are opened by widgets placed inside the modal dialog. In such cases, use non-modal Bootstrap dialogs or [modal](/api/javascript/ui/window/configuration/modal) [Kendo UI Windows]({% slug overview_kendoui_window_widget %}).
 * The latest version of the Bootstrap library introduces code in the `bootstrap.js` file that prevents the input in elements with `data-role=filter`. This causes trouble with data input in filter menu input elements.
 
 ## See Also

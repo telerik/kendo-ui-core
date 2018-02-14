@@ -10,11 +10,11 @@ slug: howto_showoverlaywhileloading_charts
 
 In some cases, the loading of a Chart might take longer time than the user expects. For such scenarios, you can configure the Kendo UI Chart to show the progress of the process.
 
-The example below demonstrates how to display a loading indicator while the data of a Kendo UI Chart is loading. The loading indicator is cleared in the [`render`](/api/javascript/dataviz/ui/chart#events-render) event.
+The example below demonstrates how to display a loading indicator while the data of a Kendo UI Chart is loading. The loading indicator is cleared in the [`render`](/api/javascript/dataviz/ui/chart/events/render) event.
 
 > **Important**
 >
-> Replace it with the [`dataBound`](/api/javascript/dataviz/ui/chart#events-dataBound) event for Kendo UI versions prior to 2014.3.1119.
+> Replace it with the [`dataBound`](/api/javascript/dataviz/ui/chart/events/databound) event for Kendo UI versions prior to 2014.3.1119.
 
 ###### Example
 

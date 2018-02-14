@@ -29,10 +29,10 @@ How can I have separate sheets for the rows of the master Grid and for all detai
 
 ## Solution
 
-1. Make a single call to read all the data.  
+1. Make a single call to read all the data.
 1. Obtain only the sheet configuration of the generated result and assign it to a variable.
-1. Obtain only the sheet from the event data of the `excelExpot` event (by default, `e.workbook` is the master Grid workbook) and assign it to a variable.  
-1. Create a new workbook and pass the sheets in the `sheet` configuration property as an array with the variables from the two previous steps.  
+1. Obtain only the sheet from the event data of the `excelExpot` event (by default, `e.workbook` is the master Grid workbook) and assign it to a variable.
+1. Create a new workbook and pass the sheets in the `sheet` configuration property as an array with the variables from the two previous steps.
 
 ```html
 <div id="grid"></div>
@@ -85,7 +85,7 @@ How can I have separate sheets for the rows of the master Grid and for all detai
             var sheets = [workbook.sheets[0], detailExports[0].sheet ];
 
             //add sheets name
-            sheets[0].title = "Employees";            
+            sheets[0].title = "Employees";
             sheets[1].title = "Orders";
 
             var headerColumnsCount = sheets[1].rows[0].cells.length - 1;
@@ -96,7 +96,7 @@ How can I have separate sheets for the rows of the master Grid and for all detai
               to: headerColumnsCount
             };
 
-            // save the workbook            
+            // save the workbook
            kendo.saveAs({
               dataURI: new kendo.ooxml.Workbook({
                 sheets: sheets
@@ -174,5 +174,5 @@ How can I have separate sheets for the rows of the master Grid and for all detai
 ## See Also
 
 * [Exporting All Data](http://docs.telerik.com/kendo-ui/controls/data-management/grid/excel-export#excel-export-of-all-data)
-* [sheets.filter API](http://docs.telerik.com/kendo-ui/api/javascript/ooxml/workbook#configuration-sheets.filter)
-* [sheets.columns.width API](http://docs.telerik.com/kendo-ui/api/javascript/ooxml/workbook#configuration-sheets.columns.width)
+* [sheets.filter API](http://docs.telerik.com/kendo-ui/api/javascript/ooxml/workbook/configuration/sheets.filter)
+* [sheets.columns.width API](http://docs.telerik.com/kendo-ui/api/javascript/ooxml/workbook/configuration/sheets.columns.width)

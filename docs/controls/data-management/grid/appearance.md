@@ -60,7 +60,7 @@ When you apply virtual scrolling, the HTML output is different.
         </div>
     </div>
 
-> **Important**  
+> **Important**
 >
 > To achieve a maximum level of accessibility through assistive technologies, disable the scrolling feature of the Grid.
 
@@ -88,7 +88,7 @@ The `#GridID` allows the application of styles only to a particular Grid instanc
 
 ### Restore Scroll Positions
 
-In some scenarios, the scroll position of the Grid might be reset when the widget is rebound. To avoid this behavior, save the scroll position in the [`dataBinding`](/api/javascript/ui/grid#events-dataBinding) event and restore it in the [`dataBound`](/api/javascript/ui/grid#events-dataBound) event. The scrollable container is `div.k-grid-content` and it is possible to retrieve it as a child element of the widget [`wrapper`]({% slug widgetwrapperandelement_references_gettingstarted %}).
+In some scenarios, the scroll position of the Grid might be reset when the widget is rebound. To avoid this behavior, save the scroll position in the [`dataBinding`](/api/javascript/ui/grid/events/databinding) event and restore it in the [`databound`](/api/javascript/ui/grid/events/databound) event. The scrollable container is `div.k-grid-content` and it is possible to retrieve it as a child element of the widget [`wrapper`]({% slug widgetwrapperandelement_references_gettingstarted %}).
 
 If virtual scrolling is enabled, the scrollable data container is `div.k-virtual-scrollable-wrap` and it is scrolled only horizontally.
 
@@ -174,7 +174,7 @@ When using virtual scrolling, the data table of the Grid is not placed inside a 
 Virtual scrolling relies on a fake scrollbar. Its size is not determined by the browser, but is calculated based on the average row height of the data that is already loaded. As a result, variable row heights may cause unexpected behavior, such as inability to scroll to the last rows on the last page.
 
 To ensure that all table rows have the same heights, use either of the options:
-* Disable text wrapping.  
+* Disable text wrapping.
 * Set an explicit row height that is large enough (as demonstrated in the following example).
 
 ###### Example
@@ -214,7 +214,7 @@ If the total number of items is large and the scrolling is fast, the table of th
     * Initialize the Grid while its element is still visible.
     * Initialize the Grid in a suitable event of the parent widget - for example, in the `activate` event of the TabStrip.
 * Because of height-related browser limitations (which cannot be avoided), virtual scrolling works with up to one or two million records. The exact number of records depends on the browser and the row height. If you use a row count that is larger than the browser can handle, unexpected widget behavior or JavaScript errors might occur. In such cases, revert to standard paging.
-* Refreshing or replacing the Grid data in the virtual mode has to be accompanied by resetting the position of the virtual scrollbar to zero&mdash;for example, by using `$('#GridID .k-scrollbar').scrollTop(0);`. In some scenarios, you might also need to call the [`refresh()` method](http://docs.telerik.com/kendo-ui/api/javascript/ui/grid#methods-refresh).
+* Refreshing or replacing the Grid data in the virtual mode has to be accompanied by resetting the position of the virtual scrollbar to zero&mdash;for example, by using `$('#GridID .k-scrollbar').scrollTop(0);`. In some scenarios, you might also need to call the [`refresh()` method](http://docs.telerik.com/kendo-ui/api/javascript/ui/grid/methods/refresh).
 * Programmatic scrolling to a particular Grid row is not supported when virtual scrolling is enabled, because it is not possible to reliably predict the exact scroll offset of the row.
 * When the Grid is `navigatable`, keyboard navigation supports only the `Up Arrow` and `Down Arrow` keys. The `Page Up` and `Page Down` key scrolling is not supported.
 * The Grid does not persist [selection](#selection) when virtual scrolling occurs. To achieve this behavior, [use this custom implementation]({% slug howto_persist_row_selection_paging_sorting_filtering_grid %}). The new [persistSelection](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid/configuration/persistselection) can work with single selection using the following [example]({%slug grid-virtual-scrolling-with-persist-single-selection %}). The multiple selection is not recomended as the old page is removed from the DOM when scrolling and this can breake the selection as the DOM elements do not exist after scrolling to the new page.
@@ -225,7 +225,7 @@ When virtual scrolling is not supported or recommended, revert to standard pagin
 
 The endless scroll mode is suitable for displaying large number of items. At the same time, advanced features such as editing, grouping, filtering, sorting, and hierarchy are also supported.
 
-To enable endless scrolling, set the [`scrollable.endless`](/api/javascript/ui/grid#configuration-scrollable.endless) property to `true`.
+To enable endless scrolling, set the [`scrollable.endless`](/api/javascript/ui/grid/configuration/scrollable.endless) property to `true`.
 
 The Grid supports endless scrolling both when it is bound to local and remote data:
 * When bound to local data arrays, the Grid serializes all items to the client and while the user scrolls, the widget displays new items.
@@ -343,7 +343,7 @@ For a runnable example of the previously discussed scenario, refer to the articl
 
 ### Configure the Loading Indicator
 
-Internally, the Grid uses the [`kendo.ui.progress`](/api/javascript/ui/ui#methods-progress) method to display a loading overlay during remote `read` requests.
+Internally, the Grid uses the [`kendo.ui.progress`](/api/javascript/ui/ui/methods/progress) method to display a loading overlay during remote `read` requests.
 
 If the scrolling functionality of the Grid is disabled, the overlay is displayed over the whole Grid.
 
@@ -464,9 +464,9 @@ The color value of the `#ccc` border has to match the color of the cell border f
 
 ### Locked Columns
 
-Locked (frozen) columns allow part of the columns to be visible at all times during horizontal Grid scrolling. When writing custom code, relying on selectors, or targeting the Grid table, you need to consider that the Grid creates separate tables for its locked and scrollable sections. The locked columns are inside a `.k-grid-content-locked` element and the scrollable content is inside a `.k-grid-content` one.  
+Locked (frozen) columns allow part of the columns to be visible at all times during horizontal Grid scrolling. When writing custom code, relying on selectors, or targeting the Grid table, you need to consider that the Grid creates separate tables for its locked and scrollable sections. The locked columns are inside a `.k-grid-content-locked` element and the scrollable content is inside a `.k-grid-content` one.
 
-The Grid allows you to lock columns on one side of the table. For the feature to work properly, provide the following configuration settings:  
+The Grid allows you to lock columns on one side of the table. For the feature to work properly, provide the following configuration settings:
 
 * Enable [scrolling](#scrolling).
 * Lock at least one column initially.
@@ -488,7 +488,7 @@ Frozen columns rely on row height synchronization between the frozen and non-fro
         line-height: 18px;
     }
 
-> **Important**  
+> **Important**
 > * The [JavaScript API of the Grid](/api/javascript/ui/grid) allows you to lock and unlock columns on the fly. However, this is possible only if at least one column is initially locked during initialization. The HTML output and script behavior of the Grid are very different when frozen columns are used. That is why the widget cannot switch between frozen and unfrozen mode after initialization.
 > * The locked columns can be positioned only on the left side of the Grid. Positioning them on the right side is not supported.
 > * The row template and detail features are not supported in combination with column locking. It is possible to lock a column at the topmost level only, if you use [multi-column headers](http://demos.telerik.com/kendo-ui/grid/multicolumnheaders).
@@ -499,7 +499,7 @@ Frozen columns rely on row height synchronization between the frozen and non-fro
 
 It is possible to get a table row in the Grid by the ID of the data item. To achieve this behavior, follow the steps below:
 
-1. Make sure the [ID field is defined in the model configuration](/api/javascript/data/model#configuration-Example) of the Grid dataSource.
+1. Make sure the [ID field is defined in the model configuration](/api/javascript/data/model/configuration/example) of the Grid dataSource.
 2. Retrieve the row model, the model UID, and the Grid table row consecutively:
 
 ###### Example
@@ -512,7 +512,7 @@ It is possible to get a table row in the Grid by the ID of the data item. To ach
 
 It is possible to manually add a table row with some user-friendly message when the dataSource does not return any data&mdash;for example, as a result of filtering.
 
-The following example demonstrates how to add a table row in the [`dataBound`](/api/javascript/ui/grid#events-dataBound) event handler of the Grid.
+The following example demonstrates how to add a table row in the [`dataBound`](/api/javascript/ui/grid/events/databound) event handler of the Grid.
 
 ###### Example
 

@@ -16,23 +16,23 @@ This article demonstrates the basic concepts of pasting to editable elements as 
 
 The Editor facilitates the DOM clipboard events. Any content that is pasted is first processed by the browser.
 
-After the browser processes the content, the [`pasteCleanup`](/api/javascript/ui/editor#configuration-pasteCleanup) options are applied to help you control what is going to be pasted.
+After the browser processes the content, the [`pasteCleanup`](/api/javascript/ui/editor/configuration/pastecleanup) options are applied to help you control what is going to be pasted.
 
 ## Common Scenarios
 
 ### Clean HTML on Paste
 
-The built-in [`pasteCleanup`](/api/javascript/ui/editor#configuration-pasteCleanup) options are:
+The built-in [`pasteCleanup`](/api/javascript/ui/editor/configuration/pastecleanup) options are:
 
-* [`none`](/api/javascript/ui/editor#configuration-pasteCleanup.none)&mdash;Disables all options, meaning that none of the `pasteCleanup` options will be executed. The option is disabled by default.
-* [`all`](/api/javascript/ui/editor#configuration-pasteCleanup.all)&mdash;Strips all HTML tags and leaves only plain text; disabled by default.
-* [`keepNewLines`](/api/javascript/ui/editor#configuration-pasteCleanup.keepNewLines)&mdash;Removes all HTML elements, such as the `all` option, but preserves new lines; disabled by default.
-* [`span`](/api/javascript/ui/editor#configuration-pasteCleanup.span)&mdash;Removes the `span` elements from the copied content; disabled by default.
-* [`css`](/api/javascript/ui/editor#configuration-pasteCleanup.css)&mdash;Removes the `style` and `class` attributes out of all HTML elements from the copied content; disabled by default.
-* [`msTags`](/api/javascript/ui/editor#configuration-pasteCleanup.msTags)&mdash;Strips the MS Word specific tags when pasting content and cleans up extra metadata. The option is enabled by default.
-* [`msAllFormatting`](/api/javascript/ui/editor#configuration-pasteCleanup.msAllFormatting)&mdash;Strips the MS Word specific tags and removes the font-name and font-size decoration derived from MS Word; disabled by default.
-* [`msConvertLists`](/api/javascript/ui/editor#configuration-pasteCleanup.msConvertLists)&mdash;Converts MS Word lists to HTML lists; enabled by default.
-* [`custom`](/api/javascript/ui/editor#configuration-pasteCleanup.custom)&mdash;Uses a callback function to create [s custom `pasteCleanup` option](#create-your-own-pastecleanup-fucntion).
+* [`none`](/api/javascript/ui/editor/configuration/pastecleanup.none)&mdash;Disables all options, meaning that none of the `pasteCleanup` options will be executed. The option is disabled by default.
+* [`all`](/api/javascript/ui/editor/configuration/pastecleanup.all)&mdash;Strips all HTML tags and leaves only plain text; disabled by default.
+* [`keepNewLines`](/api/javascript/ui/editor/configuration/pastecleanup.keepnewlines)&mdash;Removes all HTML elements, such as the `all` option, but preserves new lines; disabled by default.
+* [`span`](/api/javascript/ui/editor/configuration/pastecleanup.span)&mdash;Removes the `span` elements from the copied content; disabled by default.
+* [`css`](/api/javascript/ui/editor/configuration/pastecleanup.css)&mdash;Removes the `style` and `class` attributes out of all HTML elements from the copied content; disabled by default.
+* [`msTags`](/api/javascript/ui/editor/configuration/pastecleanup.mstags)&mdash;Strips the MS Word specific tags when pasting content and cleans up extra metadata. The option is enabled by default.
+* [`msAllFormatting`](/api/javascript/ui/editor/configuration/pastecleanup.msallformatting)&mdash;Strips the MS Word specific tags and removes the font-name and font-size decoration derived from MS Word; disabled by default.
+* [`msConvertLists`](/api/javascript/ui/editor/configuration/pastecleanup.msconvertlists)&mdash;Converts MS Word lists to HTML lists; enabled by default.
+* [`custom`](/api/javascript/ui/editor/configuration/pastecleanup.custom)&mdash;Uses a callback function to create [s custom `pasteCleanup` option](#create-your-own-pastecleanup-fucntion).
 
 The following example demonstrates how to copy the HTML content above the Editor and paste it in the content area. Because of the enabled `span` option, the `span` tags are removed.
 

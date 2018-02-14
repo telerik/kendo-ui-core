@@ -68,5 +68,5 @@ How can I get the `DataValueField` from the selected item on the `change` event 
     ```
 
 For more information, refer to the articles on:
-* The [`select`](http://docs.telerik.com/kendo-ui/api/javascript/ui/listbox#methods-select) event of the ListBox.
-* The [`dataItem`](http://docs.telerik.com/kendo-ui/api/javascript/ui/listbox#methods-dataItem) method of the ListBox.
+* The [`select`](http://docs.telerik.com/kendo-ui/api/javascript/ui/listbox/methods/select) event of the ListBox.
+* The [`dataItem`](http://docs.telerik.com/kendo-ui/api/javascript/ui/listbox/methods/dataitem) method of the ListBox.

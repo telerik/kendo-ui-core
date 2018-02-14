@@ -7,7 +7,7 @@ slug: howto_handleuniqueidentifiers_menu
 
 # Handle Unique Identifiers with Menu Items
 
-Commonly, you are required to handle custom identifiers with click handlers or, as in this case, by using the [`select`](/api/javascript/ui/menu#events-select) event.
+Commonly, you are required to handle custom identifiers with click handlers or, as in this case, by using the [`select`](/api/javascript/ui/menu/events/select) event.
 
 To provide for the functionality, the Kendo UI Menu mainly uses the HTML elements that are rendered. That is why you can use custom HTML attributes to serve you as unique identifiers in your code.  
 

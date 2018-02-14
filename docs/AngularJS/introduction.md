@@ -211,7 +211,7 @@ To bind the value of widgets that provide a `value()` method to the AngularJS sc
       <label>Birthday: <input kendo-date-picker ng-model="birthday" /></label>
       <p>
         Your selection: {% raw %}{{ birthday }}{% endraw %}
-      </p>  
+      </p>
     </div>
     <script>
     angular.module("app", ["kendo.directives"]).controller("MyCtrl", function($scope) {
@@ -409,7 +409,7 @@ The following example demonstrates how to use some of these local variables.
           console.log("Selected: "+ selected.selected,data,dataIteam,angularDataItem);
           console.log("data: ", data);
           console.log("dataIteam: ", dataIteam);
-          console.log("angularDataItem: ", angularDataItem);                    
+          console.log("angularDataItem: ", angularDataItem);
         }
         $scope.mainGridOptions = {
           dataSource: {
@@ -679,7 +679,7 @@ AngularJS creates a new scope for the content placed in a window. The reason for
 
 The available workaround is either:
 
-* To use the [`appendTo`](http://docs.telerik.com/kendo-ui/api/javascript/ui/window#configuration-appendTo) option to append the window to another HTML element which is part of the Angular application and scope, or
+* To use the [`appendTo`](http://docs.telerik.com/kendo-ui/api/javascript/ui/window/configuration/appendto) option to append the window to another HTML element which is part of the Angular application and scope, or
 * To initialize the AngularJS application on the body.
 
 The following example demonstrates the first approach and it shows how to find the window or popup element and get the scope from it.

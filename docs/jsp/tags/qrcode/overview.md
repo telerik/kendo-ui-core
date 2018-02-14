@@ -34,7 +34,7 @@ Below are listed the steps for you to follow when configuring the Kendo UI QRCod
         <kendo:qRCode name="qrcode" value="foo" >
         </kendo:qRCode>
 
-**Step 4** Choose the appropriate [error correction level](/api/javascript/dataviz/ui/qrcode#configuration-errorCorrection) and [encoding](/api/javascript/dataviz/ui/qrcode#configuration-encoding).
+**Step 4** Choose the appropriate [error correction level](/api/javascript/dataviz/ui/qrcode/configuration/errorcorrection) and [encoding](/api/javascript/dataviz/ui/qrcode/configuration/encoding).
 
 ###### Example
 

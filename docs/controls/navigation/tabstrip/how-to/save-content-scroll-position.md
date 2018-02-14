@@ -7,7 +7,7 @@ slug: howto_savecontentscrollposition_tabstrip
 
 # Save Content Scroll Position
 
-The scroll position of the TabStrip content might be reset when changing the active tab. This depends on the browser behavior. If persisting the scroll position is required, use the [`select`](/api/javascript/ui/tabstrip#events-select) event to save the current scroll position, and the [`activate`](/api/javascript/ui/tabstrip#events-activate) event to restore it.
+The scroll position of the TabStrip content might be reset when changing the active tab. This depends on the browser behavior. If persisting the scroll position is required, use the [`select`](/api/javascript/ui/tabstrip/events/select) event to save the current scroll position, and the [`activate`](/api/javascript/ui/tabstrip/events/activate) event to restore it.
 
 ###### Example
 

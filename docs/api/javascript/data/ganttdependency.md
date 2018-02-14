@@ -151,7 +151,7 @@ The type of the dependency. The type is a value between 0 and 3, representing th
 
 See the [Model methods](/api/framework/model#methods) for all inherited methods.
 
-### GanttDependency.define
+### define
 
 Defines a new `GanttDependency` type using the provided options.
 

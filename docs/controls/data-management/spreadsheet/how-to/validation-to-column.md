@@ -9,7 +9,7 @@ slug: howto_validationtocolumn_spreadsheet_widget
 
 The following example demonstrates how to set a validation rule to a column range.
 
-To apply the validation rule to the specific range, it uses the [`range.validation`](/api/javascript/spreadsheet/range#methods-validation) method.
+To apply the validation rule to the specific range, it uses the [`range.validation`](/api/javascript/spreadsheet/range/methods/validation) method.
 
 ###### Example
 

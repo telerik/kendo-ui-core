@@ -91,7 +91,7 @@ The following example demonstrates how to define the interval in minutes between
 
 The widget keeps the input value unchanged, even when the typed date is invalid. This behavior results because of the following reasons:
 
-- The widget allows different date parse formats which require unrestricted user input. For more information, refer to the [`parseFormats`](/api/javascript/ui/timepicker#configuration-parseFormats) option.
+- The widget allows different date parse formats which require unrestricted user input. For more information, refer to the [`parseFormats`](/api/javascript/ui/timepicker/configuration/parseformats) option.
 - The widget does not automatically update the typed text when it is invalid. If the widget changes the input value, this leads to unexpected behavior.
 
 The best way to validate the TimePicker is to use a client-validation framework such as the [Kendo UI Validator]({% slug overview_kendoui_validator_widget %}). It enables you to provide end users with meaningful error message and point them to the right actions to resolve an issue. For more information, refer to the [online validation demos](http://demos.telerik.com/kendo-ui/validator/custom-validation).

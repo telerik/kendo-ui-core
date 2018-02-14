@@ -25,7 +25,7 @@ How can I apply custom styling to a holiday time-slot in the Scheduler month vie
 
 ## Solution
 
-Implement a [`dataBound`](http://docs.telerik.com/kendo-ui/api/javascript/ui/scheduler#events-dataBound) event handler. In the handler, iterate over all the sloths that are available on the screen and alter the styling for the required dates, use the following approach:  
+Implement a [`dataBound`](http://docs.telerik.com/kendo-ui/api/javascript/ui/scheduler/events/databound) event handler. In the handler, iterate over all the sloths that are available on the screen and alter the styling for the required dates, use the following approach:  
 
 ```html
 	<div id="scheduler"></div>

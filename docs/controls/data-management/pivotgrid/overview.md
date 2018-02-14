@@ -75,7 +75,7 @@ The previous code results in the following PivotGrid widget.
 
 ### Filtering
 
-The PivotGrid uses [`kendo.data.PivotDataSource`](/api/framework/pivotdatasource) to perform `label` filtration. That being said, it filters only by the caption value of the members. The filter descriptor is similar to [the filter option of the `kendo.data.DataSource`](/api/javascript/data/datasource#configuration-filter). It contains:
+The PivotGrid uses [`kendo.data.PivotDataSource`](/api/framework/pivotdatasource) to perform `label` filtration. That being said, it filters only by the caption value of the members. The filter descriptor is similar to [the filter option of the `kendo.data.DataSource`](/api/javascript/data/datasource/configuration/filter). It contains:
 
 - `field`&mdash;The full path to the tuple member. For example, `[Date].[Calendar].[Calendar Year].&[2005]`.
 - `operator`&mdash;All operators that work with strings. Note that the widget treats field values as strings.
@@ -89,7 +89,7 @@ For a demo, refer to the runnable how-to example on [filtering a dimension]({% s
 
 ### Sorting
 
-The widget supports sorting by the caption name of the members. The structure of the `sort` descriptor is similar to [the sort option of the `kendo.data.DataSource`](/api/javascript/data/datasource#configuration-sort). It contains:
+The widget supports sorting by the caption name of the members. The structure of the `sort` descriptor is similar to [the sort option of the `kendo.data.DataSource`](/api/javascript/data/datasource/configuration/sort). It contains:
 
 - `field`&mdash;The name of the dimension, e.g. `[Date].[Calendar]`.
 - `dir`&mdash;The direction of the sorting.
@@ -116,7 +116,7 @@ The following example demonstrates how to access an existing PivotGrid instance.
 
 ### Binding to Large Flat Data
 
-When the PivotGrid is bound to a flat-data structure, it processes the data on the client (browser) and creates a client cube representation [(configuration)](/api/javascript/data/pivotdatasource#configuration-schema.cube). This means that the widget uses the processing power of the browser to project the data and produces the required categorized data output. Although the PivotGrid does not restrict the maximum data amount bound to itself, the data has limits that are directly related to the browser capability to handle the loaded dataset.
+When the PivotGrid is bound to a flat-data structure, it processes the data on the client (browser) and creates a client cube representation [(configuration)](/api/javascript/data/pivotdatasource/configuration/schema.cube). This means that the widget uses the processing power of the browser to project the data and produces the required categorized data output. Although the PivotGrid does not restrict the maximum data amount bound to itself, the data has limits that are directly related to the browser capability to handle the loaded dataset.
 
 The symptoms for an overloaded browser are:
 

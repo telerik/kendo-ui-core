@@ -9,7 +9,7 @@ slug: howto_addhspaetitles_map
 
 The following example demonstrates how to add a title text for shapes in the Map widget that are loaded from GeoJSON.
 
-In particular, it shows how to add a [`Text`](/api/javascript/drawing/text) element positioned over the shape center. Shape layers are rendered by using the [Drawing API]({% slug overview_kendoui_drawingapi %}). To render additional elements, use the [`shapeCreated`](/api/javascript/dataviz/ui/map#events-shapeCreated) event.
+In particular, it shows how to add a [`Text`](/api/javascript/drawing/text) element positioned over the shape center. Shape layers are rendered by using the [Drawing API]({% slug overview_kendoui_drawingapi %}). To render additional elements, use the [`shapeCreated`](/api/javascript/dataviz/ui/map/events/shapecreated) event.
 
 ###### Example
 

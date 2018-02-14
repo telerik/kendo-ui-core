@@ -5,6 +5,7 @@ res_type: api
 ---
 
 # kendo.drawing.OptionsStore : kendo.Class
+
 Stores nested settings and notifies an (optional) observer of changes.
 
 ###### Example - initializing an options store

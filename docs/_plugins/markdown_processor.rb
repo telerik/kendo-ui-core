@@ -79,7 +79,7 @@ module Jekyll
             doc.css('h2').each do |node|
                 text = node.text
 
-                next unless text =~ /^(Configuration|Events|Properties|Methods|Class Methods|Fields)$/
+                next unless text =~ /^(Configuration|Events|Properties|Methods|Class Methods|Fields|Constructor Parameters)$/
 
                 prefix = text.downcase.gsub(' ', '-')
 

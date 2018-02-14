@@ -18,7 +18,7 @@ Though the examples below use the Grid as a sample, the configurations apply to 
 
 The DataSource component can work with local data or remote data. In both cases the CRUD operations are managed by the Kendo UI DataSource `transport`. This is a JavaScript object that can be configured to execute predefined functions or make requests to predefined URLs on certain events.
 
-For detailed information on the DataSource `transport`, refer to the [DataSource API documentation](/api/javascript/data/datasource#configuration-transport).
+For detailed information on the DataSource `transport`, refer to the [DataSource API documentation](/api/javascript/data/datasource/configuration/transport).
 
 > **Important**
 >
@@ -34,7 +34,7 @@ The DataSource `schema` has several important roles, with the most notable ones 
 
 You must configure the first two settings no matter whether local or remote CRUD operations are used. The only case when they are not needed is for scenarios when all data fields are of the string type and there is no editing.
 
-For detailed information on the DataSource `schema`, refer to the [DataSource API documentation](/api/javascript/data/datasource#configuration-schema).
+For detailed information on the DataSource `schema`, refer to the [DataSource API documentation](/api/javascript/data/datasource/configuration/schema).
 
 ## Local or Custom Transport CRUD Operations
 
@@ -100,8 +100,8 @@ The `update` configuration setting of the DataSource should define a function th
 > **Important**
 > * The Kendo UI DataSource uses the ID value to determine whether a data item is new or existing.
 > * If the ID value is `zero`, it is assumed that the data item is new, so the `create` function is executed.
-> * If you need to use zero ID values, then change the [`defaultValue`](/api/javascript/data/model#methods-Model.define) of the ID field to -1 in
-[`schema.model.fields`](/api/javascript/data/datasource#configuration-schema.model).
+> * If you need to use zero ID values, then change the [`defaultValue`](/api/javascript/data/model/methods/model.define) of the ID field to -1 in
+[`schema.model.fields`](/api/javascript/data/datasource/configuration/schema.model).
 
 ### Create (Local)
 
@@ -109,7 +109,7 @@ The `create` function should perform a similar routine as the `update` one with 
 
 * The newly created data items have no ID, so they must be added by the function script or returned by the remote service.
 * The newly created data items must be returned in the `success` method with their IDs assigned. Otherwise, the DataSource instance is going to operate with incorrect data and subsequent data operations can fail.
-* If the [`schema.data`](/api/javascript/data/datasource#configuration-schema.data) configuration is set, the `success` method should receive the created data item in an object _with the same structure_ as the object that is passed to the `success` method of the `read` function. See the example below.
+* If the [`schema.data`](/api/javascript/data/datasource/configuration/schema.data) configuration is set, the `success` method should receive the created data item in an object _with the same structure_ as the object that is passed to the `success` method of the `read` function. See the example below.
 
 ###### Example
 
@@ -310,7 +310,7 @@ For detailed information on these settings, refer to the [article about the Kend
 
 ### Read (Remote)
 
-The `read` service defined by the DataSource transport should return data in the expected format&mdash;JSON, JSONP, XML, oData. By default, the expected format is JSON. If the response is not a plain array of objects, a [`schema`](/api/javascript/data/datasource#configuration-schema) must be defined, which will describe the structure of the response and especially, [where the data is](/api/javascript/data/datasource#configuration-schema.data).
+The `read` service defined by the DataSource transport should return data in the expected format&mdash;JSON, JSONP, XML, oData. By default, the expected format is JSON. If the response is not a plain array of objects, a [`schema`](/api/javascript/data/datasource/configuration/schema) must be defined, which will describe the structure of the response and especially, [where the data is](/api/javascript/data/datasource/configuration/schema.data).
 
 The example below uses a `read` transport configuration. The assumed server response is a plain JSON array of objects.
 
@@ -339,7 +339,7 @@ The example below uses a `read` transport configuration. The assumed server resp
     });
 
 <!--*-->
-Here is a modified version of the above example, which requires the usage of a `schema`, due to the more complex response structure. The declared `itemCount` does not match the number of returned items, which is normal when using [server paging](/api/javascript/data/datasource#configuration-serverPaging)&mdash;the server response contains only the items from the current page, but information about the [total number of items](/api/javascript/data/datasource#configuration-schema.total) is provided, so that a correct paging interface can be generated, if needed.
+Here is a modified version of the above example, which requires the usage of a `schema`, due to the more complex response structure. The declared `itemCount` does not match the number of returned items, which is normal when using [server paging](/api/javascript/data/datasource/configuration/serverpaging)&mdash;the server response contains only the items from the current page, but information about the [total number of items](/api/javascript/data/datasource/configuration/schema.total) is provided, so that a correct paging interface can be generated, if needed.
 
 ###### Example
 
@@ -384,7 +384,7 @@ For more information on handling repetitive requests performed while filtering i
 
 The `update` service expects the edited data items and should return the same items (including all data fields) as a confirmation of the successful save operation. An empty response is also treated as a valid success response.
 
-If [`schema.data`](/api/javascript/data/datasource#configuration-schema.data) is set and the server response is not empty, then the server response must have _the same structure_, as the response of the `read` request.
+If [`schema.data`](/api/javascript/data/datasource/configuration/schema.data) is set and the server response is not empty, then the server response must have _the same structure_, as the response of the `read` request.
 
 The example below demonstrates a case with no `schema.data`.
 
@@ -455,7 +455,7 @@ Also, check the notes on IDs in the above [Update (Local)]({% slug cruddataopera
 
 The `create` action should perform a similar routine as `update`, with one notable difference&mdash;the newly created data items have no IDs, so they must be assigned server-side and returned by the remote service.
 
-If [`schema.data`](/api/javascript/data/datasource#configuration-schema.data) is set, then the server response should have the **same structure**, as the response of the `read` request. See example below.
+If [`schema.data`](/api/javascript/data/datasource/configuration/schema.data) is set, then the server response should have the **same structure**, as the response of the `read` request. See example below.
 
 
 ###### Example with no schema.data
@@ -552,7 +552,7 @@ The `destroy` action submits the data items that should be deleted, or just its 
 In all four transport actions (read, update, create, destroy), an error can be triggered. There are two options:
 
 * A standard error can be returned via an empty response and an [HTTP status code](http://en.wikipedia.org/wiki/List_of_HTTP_status_codes).
-* A custom error can be returned with a `200` HTTP status code and an error message assigned to an `errors` field in the response, or any other field, specified in [`schema.errors`](/api/javascript/data/datasource#configuration-schema.errors).
+* A custom error can be returned with a `200` HTTP status code and an error message assigned to an `errors` field in the response, or any other field, specified in [`schema.errors`](/api/javascript/data/datasource/configuration/schema.errors).
 
 <!-- exit list -->
 
@@ -615,7 +615,7 @@ The example below demonstrates a custom error.
     });
 
 <!--*-->
-When an `error` event is fired, the DataSource does not process any data items, which may also be part of the server response. For example, if an update action fails due to conflicting edits, and the data needs to be refreshed from the server, you need to call the [`read`](/api/javascript/data/datasource#methods-read) method of the DataSource in the error handler. Sending the new data together with the error response is not going to populate the DataSource with the new values.
+When an `error` event is fired, the DataSource does not process any data items, which may also be part of the server response. For example, if an update action fails due to conflicting edits, and the data needs to be refreshed from the server, you need to call the [`read`](/api/javascript/data/datasource/methods/read) method of the DataSource in the error handler. Sending the new data together with the error response is not going to populate the DataSource with the new values.
 
 ## Sample Apps and Examples
 

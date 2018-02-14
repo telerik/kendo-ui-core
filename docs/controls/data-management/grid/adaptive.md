@@ -16,7 +16,7 @@ For instance, when you filter or edit data on a mobile device, Kendo UI slides i
 
 ### Enabling Adaptive Rendering
 
-To enable the adaptive rendering feature, set the [`mobile`](/api/javascript/ui/grid#configuration-mobile) property to `true`, `phone`, or `tablet`.
+To enable the adaptive rendering feature, set the [`mobile`](/api/javascript/ui/grid/configuration/mobile) property to `true`, `phone`, or `tablet`.
 
 ###### Example
 
@@ -170,7 +170,7 @@ The following example demonstrates how to add multiple adaptive Grids to the sam
 
 When in adaptive mode, the Grid generates some auxiliary markup, which needs to be removed if the widget is to be [destroyed]({% slug destroywidgets_kendoui_gettingstarted %}) manually.
 
-The recommended approach is to call [`kendo.destroy()`](/api/javascript/kendo#methods-destroy) over the closest `.km-pane-wrapper` ancestor of the Grid, which is created around the Grid widget. Then, remove the whole `.km-pane-wrapper` element from the DOM. To recreate the Grid, insert a new `<div>` at the same place where the previous Grid `<div>` was placed initially.
+The recommended approach is to call [`kendo.destroy()`](/api/javascript/kendo/methods/destroy) over the closest `.km-pane-wrapper` ancestor of the Grid, which is created around the Grid widget. Then, remove the whole `.km-pane-wrapper` element from the DOM. To recreate the Grid, insert a new `<div>` at the same place where the previous Grid `<div>` was placed initially.
 
 ## See Also
 

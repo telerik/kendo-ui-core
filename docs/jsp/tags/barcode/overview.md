@@ -27,7 +27,7 @@ Below are listed the steps for you to follow when configuring the Kendo UI Barco
             return "/dataviz/barcode/index";
         }
 
-**Step 3** Add a barcode with the default [`type`](/api/javascript/dataviz/ui/barcode#configuration-type) (Code39).
+**Step 3** Add a barcode with the default [`type`](/api/javascript/dataviz/ui/barcode/configuration/type) (Code39).
 
 ###### Example
 

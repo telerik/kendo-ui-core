@@ -43,9 +43,9 @@ The following example demonstrates how to configure the dataSource for CRUD (Cre
 
 ### Define Fields through schema
 
-The following example demonstrates how to declare fields definitions through the DataSource [`schema.model `](/api/javascript/data/datasource#configuration-schema.model).
+The following example demonstrates how to declare fields definitions through the DataSource [`schema.model `](/api/javascript/data/datasource/configuration/schema.model).
 
-> **Important**  
+> **Important**
 >
 > Define the `id` field of the data items in `schema.model.id`. This ensures the correct adding, editing, and deleting of items.
 
@@ -139,7 +139,7 @@ If some of the values in the foreign key column are `null`, an issue related to 
 To avoid this behavior, consider any of the following options:
 
 * Use zeros instead of nulls to match the data values with the declared data field type.
-* Use a [custom column editor](http://demos.telerik.com/kendo-ui/grid/editing-custom) with manually configured DropDownList that has a [`valuePrimitive`](/api/javascript/ui/dropdownlist#configuration-valuePrimitive) setting set to `true`.
+* Use a [custom column editor](http://demos.telerik.com/kendo-ui/grid/editing-custom) with manually configured DropDownList that has a [`valuePrimitive`](/api/javascript/ui/dropdownlist/configuration/valueprimitive) setting set to `true`.
 
 ## Custom Editors
 

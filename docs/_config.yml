@@ -559,6 +559,537 @@ registry_url: 'https://registry.npm.telerik.com/'
 ## Describing API reference articles which contain child properties which shall be rendered (grouped) on a same page
 api:
 -
+    file: "api/javascript/kendo"
+    group_parents:
+      - "support"
+-
+    file: "api/javascript/data/datasource"
+    group_parents:
+      - "aggregate"
+      - "filter"
+      - "group"
+      - "schema"
+      - "sort"
+      - "transport.create"
+      - "transport.destroy"
+      - "transport.read"
+      - "transport.signalr"
+      - "transport.update"
+-
+    file: "api/javascript/data/ganttdatasource"
+    group_parents:
+      - "schema"
+-
+    file: "api/javascript/data/ganttdependencydatasource"
+    group_parents:
+      - "schema"
+-
+    file: "api/javascript/data/hierarchicaldatasource"
+    group_parents:
+      - "schema"
+-
+    file: "api/javascript/data/pivotdatasource"
+    group_parents:
+      - "columns"
+      - "measures"
+      - "rows"
+      - "transport"
+      - "schema"
+-
+    file: "api/javascript/data/schedulerdatasource"
+    group_parents:
+      - "schema"
+-
+    file: "api/javascript/data/treelistdatasource"
+    group_parents:
+      - "schema"
+-
+    file: "api/javascript/dataviz/diagram/circle"
+    group_parents:
+      - "fill"
+      - "stroke"
+-
+    file: "api/javascript/dataviz/diagram/connection"
+    group_parents:
+      - "content"
+      - "stroke"
+      - "startCap"
+      - "endCap"
+      - "points"
+-
+    file: "api/javascript/dataviz/diagram/connector"
+    group_parents:
+      - "hover"
+      - "hover.fill"
+      - "hover.stroke"
+      - "fill"
+      - "stroke"
+-
+    file: "api/javascript/dataviz/diagram/line"
+    group_parents:
+      - "stroke"
+-
+    file: "api/javascript/dataviz/diagram/path"
+    group_parents:
+      - "endCap"
+      - "fill"
+      - "startCap"
+      - "stroke"
+-
+    file: "api/javascript/dataviz/diagram/polyline"
+    group_parents:
+      - "endCap"
+      - "fill"
+      - "startCap"
+      - "stroke"
+-
+    file: "api/javascript/dataviz/diagram/rectangle"
+    group_parents:
+      - "fill"
+      - "stroke"
+-
+    file: "api/javascript/dataviz/diagram/shape"
+    group_parents:
+      - "stroke"
+      - "fill"
+      - "hover"
+      - "connectors"
+      - "rotation"
+      - "content"
+      - "connectorDefaults.hover"
+      - "connectorDefaults.fill"
+      - "connectorDefaults.stroke"
+-
+    file: "api/javascript/dataviz/map/marker-layer"
+    skip_redirect: true
+    group_parents:
+      - "---"
+-
+    file: "api/javascript/dataviz/map/marker"
+    group_parents:
+      - "tooltip.animation"
+      - "tooltip.content"
+-
+    file: "api/javascript/dataviz/ui/barcode"
+    group_parents:
+      - "border"
+      - "padding"
+      - "text.margin"
+-
+    file: "api/javascript/dataviz/ui/chart"
+    group_parents:
+      - "axisDefaults.crosshair"
+      - "axisDefaults.labels"
+      - "axisDefaults.line"
+      - "axisDefaults.majorGridLines"
+      - "axisDefaults.majorTicks"
+      - "axisDefaults.minorGridLines"
+      - "axisDefaults.minorTicks"
+      - "axisDefaults.plotBands"
+      - "axisDefaults.title"
+      - "categoryAxis.autoBaseUnitSteps"
+      - "categoryAxis.crosshair"
+      - "categoryAxis.labels"
+      - "categoryAxis.line"
+      - "categoryAxis.majorGridLines"
+      - "categoryAxis.majorTicks"
+      - "categoryAxis.minorGridLines"
+      - "categoryAxis.minorTicks"
+      - "categoryAxis.plotBands"
+      - "categoryAxis.select"
+      - "categoryAxis.title"
+      - "categoryAxis.notes.icon"
+      - "categoryAxis.notes.label"
+      - "categoryAxis.notes.line"
+      - "categoryAxis.notes.data.icon"
+      - "categoryAxis.notes.data.label"
+      - "categoryAxis.notes.data.line"
+      - "chartArea"
+      - "legend.border"
+      - "legend.incactiveItems"
+      - "legend.item"
+      - "legend.labels"
+      - "legend.margin"
+      - "legend.padding"
+      - "panes.border"
+      - "panes.margin"
+      - "panes.padding"
+      - "panes.title"
+      - "pannable"
+      - "pdf.margin"
+      - "plotArea"
+      - "series.border"
+      - "series.connectors"
+      - "series.errorBars"
+      - "series.highlight"
+      - "series.labels.border"
+      - "series.labels.margin"
+      - "series.labels.padding"
+      - "series.labels.from"
+      - "series.labels.to"
+      - "series.line"
+      - "series.markers.border"
+      - "series.markers.from"
+      - "series.markers.to"
+      - "series.outliers"
+      - "series.extremes"
+      - "series.negativeValues"
+      - "series.overlay"
+      - "series.stack"
+      - "series.target"
+      - "series.tooltip"
+      - "series.notes.icon"
+      - "series.notes.label"
+      - "series.notes.line"
+      - "seriesDefaults.border"
+      - "seriesDefaults.labels.border"
+      - "seriesDefaults.labels.margin"
+      - "seriesDefaults.labels.padding"
+      - "seriesDefaults.labels.from"
+      - "seriesDefaults.labels.to"
+      - "seriesDefaults.overlay"
+      - "seriesDefaults.tooltip"
+      - "seriesDefaults.notes.icon"
+      - "seriesDefaults.notes.label"
+      - "seriesDefaults.notes.line"
+      - "title"
+      - "tooltip"
+      - "valueAxis.crosshair"
+      - "valueAxis.labels"
+      - "valueAxis.line"
+      - "valueAxis.majorGridLines"
+      - "valueAxis.majorTicks"
+      - "valueAxis.minorGridLines"
+      - "valueAxis.minorTicks"
+      - "valueAxis.plotBands"
+      - "valueAxis.title"
+      - "valueAxis.notes.icon"
+      - "valueAxis.notes.label"
+      - "valueAxis.notes.line"
+      - "valueAxis.notes.data.icon"
+      - "valueAxis.notes.data.label"
+      - "valueAxis.notes.data.line"
+      - "xAxis.crosshair"
+      - "xAxis.labels"
+      - "xAxis.line"
+      - "xAxis.majorGridLines"
+      - "xAxis.majorTicks"
+      - "xAxis.minorGridLines"
+      - "xAxis.minorTicks"
+      - "xAxis.plotBands"
+      - "xAxis.title"
+      - "xAxis.notes.icon"
+      - "xAxis.notes.label"
+      - "xAxis.notes.line"
+      - "xAxis.notes.data.icon"
+      - "xAxis.notes.data.label"
+      - "xAxis.notes.data.line"
+      - "yAxis.crosshair"
+      - "yAxis.labels"
+      - "yAxis.line"
+      - "yAxis.majorGridLines"
+      - "yAxis.majorTicks"
+      - "yAxis.minorGridLines"
+      - "yAxis.minorTicks"
+      - "yAxis.plotBands"
+      - "yAxis.title"
+      - "yAxis.notes.icon"
+      - "yAxis.notes.label"
+      - "yAxis.notes.line"
+      - "yAxis.notes.data.icon"
+      - "yAxis.notes.data.label"
+      - "yAxis.notes.data.line"
+      - "zoomable"
+-
+    file: "api/javascript/dataviz/ui/diagram"
+    group_parents:
+      - "connectionDefaults.content"
+      - "connectionDefaults.editable"
+      - "connectionDefaults.endCap"
+      - "connectionDefaults.hover"
+      - "connectionDefaults.selection"
+      - "connectionDefaults.startCap"
+      - "connectionDefaults.stroke"
+      - "connections.content"
+      - "connections.editable"
+      - "connections.endCap"
+      - "connections.from"
+      - "connections.hover"
+      - "connections.points"
+      - "connections.selection"
+      - "connections.startCap"
+      - "connections.stroke"
+      - "connections.to"
+      - "editable.drag"
+      - "editable.resize"
+      - "editable.rotate"
+      - "editable.tools"
+      - "layout.grid"
+      - "pannable"
+      - "pdf.margin"
+      - "selectable"
+      - "shapeDefaults.connectors"
+      - "shapeDefaults.connectorDefaults"
+      - "shapeDefaults.content"
+      - "shapeDefaults.editable"
+      - "shapeDefaults.fill"
+      - "shapeDefaults.hover"
+      - "shapeDefaults.rotation"
+      - "shapeDefaults.stroke"
+      - "shape.connectors"
+      - "shape.connectorDefaults"
+      - "shape.content"
+      - "shape.editable"
+      - "shape.fill"
+      - "shape.hover"
+      - "shape.rotation"
+      - "shape.stroke"
+-
+    file: "api/javascript/dataviz/ui/lineargauge"
+    group_parents:
+      - "gaugeArea.border"
+      - "gaugeArea.margin"
+      - "pointer.border"
+      - "pointer.track.border"
+      - "scale.line"
+      - "scale.labels.border"
+      - "scale.labels.margin"
+      - "scale.labels.padding"
+      - "scale.majorTicks"
+      - "scale.minorTicks"
+      - "scale.ranges"
+-
+    file: "api/javascript/dataviz/ui/map"
+    group_parents:
+      - "controls.attribution"
+      - "controls.navigator"
+      - "controls.zoom"
+      - "layerDefaults.marker.tooltip.animation"
+      - "layerDefaults.marker.tooltip.content"
+      - "layerDefaults.shape.style.fill"
+      - "layerDefaults.shape.style.stroke"
+      - "layerDefaults.bubble.style.fill"
+      - "layerDefaults.bubble.style.stroke"
+      - "layerDefaults.tile"
+      - "layerDefaults.bing"
+      - "layers.tooltip.animation"
+      - "layers.tooltip.content"
+      - "layers.style.fill"
+      - "layers.style.stroke"
+      - "markerDefaults.tooltip.animation"
+      - "markerDefaults.tooltip.content"
+      - "markers.tooltip.animation"
+      - "markers.tooltip.content"
+-
+    file: "api/javascript/dataviz/ui/qrcode"
+    group_parents:
+      - "border"
+-
+    file: "api/javascript/dataviz/ui/radialgauge"
+    group_parents:
+      - "gaugeArea.border"
+      - "gaugeArea.margin"
+      - "pointer"
+      - "scale.labels.border"
+      - "scale.labels.margin"
+      - "scale.labels.padding"
+      - "scale.majorTicks"
+      - "scale.ranges"
+-
+    file: "api/javascript/dataviz/ui/sparkline"
+    group_parents:
+      - "categoryAxis.crosshair"
+      - "categoryAxis.labels"
+      - "categoryAxis.line"
+      - "categoryAxis.majorGridLines"
+      - "categoryAxis.majorTicks"
+      - "categoryAxis.minorGridLines"
+      - "categoryAxis.minorTicks"
+      - "categoryAxis.plotBands"
+      - "categoryAxis.select"
+      - "categoryAxis.title"
+      - "categoryAxis.notes.icon"
+      - "categoryAxis.notes.label"
+      - "categoryAxis.notes.line"
+      - "categoryAxis.notes.data.icon"
+      - "categoryAxis.notes.data.label"
+      - "categoryAxis.notes.data.line"
+      - "chartArea"
+      - "plotArea"
+      - "series.border"
+      - "series.connectors"
+      - "series.errorBars"
+      - "series.highlight"
+      - "series.labels"
+      - "series.line"
+      - "series.markers"
+      - "series.target"
+      - "series.tooltip"
+      - "series.notes.icon"
+      - "series.notes.label"
+      - "series.notes.line"
+      - "seriesDefaults.border"
+      - "seriesDefaults.labels"
+      - "seriesDefaults.tooltip"
+      - "tooltip"
+      - "valueAxis.crosshair"
+      - "valueAxis.labels"
+      - "valueAxis.line"
+      - "valueAxis.majorGridLines"
+      - "valueAxis.majorTicks"
+      - "valueAxis.minorGridLines"
+      - "valueAxis.minorTicks"
+      - "valueAxis.plotBands"
+      - "valueAxis.title"
+      - "valueAxis.notes.icon"
+      - "valueAxis.notes.label"
+      - "valueAxis.notes.line"
+      - "valueAxis.notes.data.icon"
+      - "valueAxis.notes.data.label"
+      - "valueAxis.notes.data.line"
+-
+    file: "api/javascript/drawing/surface"
+    group_parents:
+      - "tooltip.animation"
+-
+    file: "api/javascript/mobile/ui/actionsheet"
+    group_parents:
+      - "popup"
+-
+    file: "api/javascript/mobile/ui/listview"
+    group_parents:
+      - "messages"
+      - "filterable"
+-
+    file: "api/javascript/mobile/ui/popover"
+    group_parents:
+      - "pane"
+      - "popup"
+-
+    file: "api/javascript/mobile/ui/scroller"
+    group_parents:
+      - "messages"
+-
+    file: "api/javascript/ooxml/workbook"
+    group_parents:
+      - "sheets.columns"
+      - "sheets.freezePane"
+      - "sheets.filter"
+      - "sheets.rows.cells.borderBottom"
+      - "sheets.rows.cells.borderLeft"
+      - "sheets.rows.cells.borderTop"
+      - "sheets.rows.cells.borderRight"
+-
+    file: "api/javascript/ui/alert"
+    group_parents:
+      - "messages"
+-
+    file: "api/javascript/ui/autocomplete"
+    group_parents:
+      - "animation"
+      - "virtual"
+-
+    file: "api/javascript/ui/buttongroup"
+    group_parents:
+      - "items"
+-
+    file: "api/javascript/ui/calendar"
+    group_parents:
+      - "messages"
+      - "month"
+-
+    file: "api/javascript/ui/colorpalette"
+    group_parents:
+      - "tileSize"
+-
+    file: "api/javascript/ui/colorpicker"
+    group_parents:
+      - "tileSize"
+      - "messages"
+-
+    file: "api/javascript/ui/combobox"
+    group_parents:
+      - "animation"
+      - "popup"
+      - "virtual"
+-
+    file: "api/javascript/ui/confirm"
+    group_parents:
+      - "messages"
+-
+    file: "api/javascript/ui/contextmenu"
+    group_parents:
+      - "animation"
+-
+    file: "api/javascript/ui/dateinput"
+    group_parents:
+      - "messages"
+-
+    file: "api/javascript/ui/datepicker"
+    group_parents:
+      - "animation"
+      - "month"
+-
+    file: "api/javascript/ui/datetimepicker"
+    group_parents:
+      - "animation"
+      - "month"
+-
+    file: "api/javascript/ui/dialog"
+    group_parents:
+      - "actions"
+      - "animation"
+      - "messages"
+-
+    file: "api/javascript/ui/dropdownlist"
+    group_parents:
+      - "animation"
+      - "popup"
+      - "virtual"
+-
+    file: "api/javascript/ui/editor"
+    group_parents:
+      - "deserialization"
+      - "immutables"
+      - "pasteCleanup"
+      - "pdf.margin"
+      - "tools.items"
+      - "imageBrowser.transport.read"
+      - "imageBrowser.transport.destroy"
+      - "imageBrowser.transport.create"
+      - "imageBrowser.schema.model.fields"
+      - "imageBrowser.messages"
+      - "fileBrowser.transport.read"
+      - "fileBrowser.transport.destroy"
+      - "fileBrowser.transport.create"
+      - "fileBrowser.schema.model.fields"
+      - "fileBrowser.messages"
+-
+    file: "api/javascript/ui/filtermenu"
+    group_parents:
+      - "messages"
+      - "operators.string"
+      - "operators.number"
+      - "operators.date"
+      - "operators.enums"
+-
+    file: "api/javascript/ui/flatcolorpicker"
+    group_parents:
+      - "messages"
+-
+    file: "api/javascript/ui/gantt"
+    group_parents:
+      - "assignments"
+      - "currentTimeMarker"
+      - "messages.actions"
+      - "messages.editor"
+      - "messages.views"
+      - "pdf.margin"
+      - "range"
+      - "toolbar"
+      - "tooltip"
+      - "views.range"
+-
     file: "api/javascript/ui/grid"
     group_parents:
       - "allowCopy"
@@ -575,6 +1106,165 @@ api:
       - "noRecords"
       - "pageable.messages"
       - "pdf.margin"
+-
+    file: "api/javascript/ui/listbox"
+    group_parents:
+      - "draggable"
+      - "messages"
+      - "toolbar"
+-
+    file: "api/javascript/ui/mediaplayer"
+    group_parents:
+      - "messages"
+-
+    file: "api/javascript/ui/menu"
+    group_parents:
+      - "animation"
+      - "openOnClick"
+      - "scrollable"
+-
+    file: "api/javascript/ui/multiselect"
+    group_parents:
+      - "animation"
+      - "popup"
+      - "virtual"
+-
+    file: "api/javascript/ui/notification"
+    group_parents:
+      - "position"
+      - "templates"
+-
+    file: "api/javascript/ui/pager"
+    group_parents:
+      - "messages"
+-
+    file: "api/javascript/ui/panelbar"
+    group_parents:
+      - "animation"
+      - "messages"
+-
+    file: "api/javascript/ui/pivotconfigurator"
+    group_parents:
+      - "sortable"
+      - "messages.fieldMenu.operators"
+-
+    file: "api/javascript/ui/pivotgrid"
+    group_parents:
+      - "excel"
+      - "pdf.margin"
+      - "sortable"
+      - "messages.fieldMenu.operators"
+-
+    file: "api/javascript/ui/popup"
+    group_parents:
+      - "animation"
+-
+    file: "api/javascript/ui/prompt"
+    group_parents:
+      - "messages"
+-
+    file: "api/javascript/ui/rangeslider"
+    group_parents:
+      - "tooltip"
+-
+    file: "api/javascript/ui/scheduler"
+    group_parents:
+      - "currentTimeMarker"
+      - "group"
+      - "messages.editor"
+      - "messages.recurrenceEditor.daily"
+      - "messages.recurrenceEditor.end"
+      - "messages.recurrenceEditor.frequencies"
+      - "messages.recurrenceEditor.monthly"
+      - "messages.recurrenceEditor.offsetPositions"
+      - "messages.recurrenceEditor.weekly"
+      - "messages.recurrenceEditor.weekdays"
+      - "messages.recurrenceEditor.yearly"
+      - "messages.recurrenceMessages"
+      - "messages.views"
+      - "pdf.margin"
+      - "resources"
+      - "views.editable"
+      - "views.group"
+-
+    file: "api/javascript/ui/slider"
+    group_parents:
+      - "tooltip"
+-
+    file: "api/javascript/ui/sortable"
+    group_parents:
+      - "cursorOffset"
+-
+    file: "api/javascript/ui/splitter"
+    group_parents:
+      - "panes"
+-
+    file: "api/javascript/ui/spreadsheet"
+    group_parents:
+      - "defaultCellStyle"
+      - "excel"
+      - "pdf.margin"
+      - "sheets.columns"
+      - "sheets.filter"
+      - "sheets.rows.cells.borderBottom"
+      - "sheets.rows.cells.borderLeft"
+      - "sheets.rows.cells.borderTop"
+      - "sheets.rows.cells.borderRight"
+      - "sheets.rows.cells.validation"
+      - "sheets.sort"
+      - "toolbar"
+-
+    file: "api/javascript/ui/tabstrip"
+    group_parents:
+      - "animation"
+      - "scrollable"
+-
+    file: "api/javascript/ui/timepicker"
+    group_parents:
+      - "animation"
+-
+    file: "api/javascript/ui/toolbar"
+    group_parents:
+      - "items.buttons"
+      - "items.menuButtons"
+-
+    file: "api/javascript/ui/tooltip"
+    group_parents:
+      - "animation"
+      - "content"
+-
+    file: "api/javascript/ui/treelist"
+    group_parents:
+      - "columns.command"
+      - "columns.filterable"
+      - "columnMenu.messages"
+      - "editable"
+      - "excel"
+      - "filterable.messages"
+      - "filterable.operators.string"
+      - "filterable.operators.number"
+      - "filterable.operators.date"
+      - "messages.commands"
+      - "pdf.margin"
+      - "sortable"
+      - "toolbar"
+-
+    file: "api/javascript/ui/treeview"
+    group_parents:
+      - "animation"
+      - "checkboxes"
+      - "messages"
+-
+    file: "api/javascript/ui/upload"
+    group_parents:
+      - "files"
+      - "validation"
+-
+    file: "api/javascript/ui/window"
+    group_parents:
+      - "animation"
+      - "content"
+      - "position"
 
 ## Assign layout and category per different paths
 defaults:
@@ -921,7 +1611,7 @@ defaults:
 
 -
     scope:
-        path: "api/javascript/kendo#methods-template"
+        path: "api/javascript/kendo/methods/template"
     values:
         component: "templates"
 

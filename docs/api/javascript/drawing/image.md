@@ -5,6 +5,7 @@ res_type: api
 ---
 
 # kendo.drawing.Image : kendo.drawing.Element
+
 Draws a bitmap image with a given source URL into the specified [rectangle](../geometry/rect).
 
 #### Example - draw an image

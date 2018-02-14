@@ -14,7 +14,7 @@ Represents the Kendo UI TreeList widget. Inherits from [Widget](/api/javascript/
 
 ### autoBind `Boolean` *(default: true)*
 
-If set to `false` the widget will not bind to the specified DataSource during initialization. In this case data binding will occur when the [change](/api/javascript/data/datasource#events-change) event of the
+If set to `false` the widget will not bind to the specified DataSource during initialization. In this case data binding will occur when the [change](/api/javascript/data/datasource/events/change) event of the
 DataSource is fired. By default the widget will bind to the DataSource specified in the configuration.
 
 > Setting `autoBind` to `false` is useful when multiple widgets are bound to the same DataSource. Disabling automatic binding ensures that the shared DataSource doesn't make more than one request to the remote service.
@@ -51,7 +51,7 @@ DataSource is fired. By default the widget will bind to the DataSource specified
         ],
         autoBind: false
       }).data("kendoTreeList");
-      
+
       $("#btn").click(function(){
         treelist.dataSource.read();
       });
@@ -107,7 +107,7 @@ HTML attributes of the table cell (`<td>`) rendered for the column.
       $("#treelist").kendoTreeList({
         columns: [
           { field: "lastName" },
-          { 
+          {
             field: "position",
             attributes: {
               "class": "highlight",
@@ -141,7 +141,7 @@ The configuration of the column command(s). If set the column would display a bu
 
 Custom commands are supported by specifying the [click](#configuration-columns.command.click) option.
 
-> Each custom command requires you to explicitly specify its [name](/api/javascript/ui/treelist.html#configuration-columns.command.name).
+> Each custom command requires you to explicitly specify its [name](/api/javascript/ui/treelist.html/configuration/columns.command.name).
 >
 > A command column cannot be [expandable](#configuration-columns.expandable).
 >
@@ -581,9 +581,9 @@ The `role` [data attribute](/framework/data-attribute-initialization) of the wid
         columns: [
           { field: "lastName" },
           { field: "position" },
-          { 
-            field: "hireDate", 
-            filterable: { 
+          {
+            field: "hireDate",
+            filterable: {
               ui: "datetimepicker" // use Kendo UI DateTimePicker
             }
           }
@@ -613,9 +613,9 @@ The `role` [data attribute](/framework/data-attribute-initialization) of the wid
         columns: [
           { field: "lastName" },
           { field: "position" },
-          { 
-            field: "hireDate", 
-            filterable: { 
+          {
+            field: "hireDate",
+            filterable: {
               ui: function(element) {
                 element.kendoDateTimePicker(); // initialize a Kendo UI DateTimePicker
               }
@@ -641,7 +641,7 @@ The `role` [data attribute](/framework/data-attribute-initialization) of the wid
 
 ### columns.footerTemplate `String|Function`
 
-The [template](/api/javascript/kendo#methods-template) which renders the footer table cell for the column.
+The [template](/api/javascript/kendo/methods/template) which renders the footer table cell for the column.
 
 The fields which can be used in the template are:
 
@@ -681,7 +681,7 @@ The fields which can be used in the template are:
 The format that is applied to the value before it is displayed. Takes the form "{0:format}" where "format" is a [standard number format](/api/javascript/kendo#standard-number-formats),
 [custom number format](/api/javascript/kendo#custom-number-formats), [standard date format](/api/javascript/kendo#standard-date-formats) or a [custom date format](/api/javascript/kendo#custom-date-formats).
 
-> The [kendo.format](/api/javascript/kendo#methods-format) function is used to format the value.
+> The [kendo.format](/api/javascript/kendo/methods/format) function is used to format the value.
 
 #### Example - specify the column format string
 
@@ -734,7 +734,7 @@ The table headers would look like this: `<th class="name-header" style="text-ali
 
 ### columns.headerTemplate `String|Function`
 
-The [template](/api/javascript/kendo#methods-template) which renders the column header content. By default the value of the [title](#configuration-columns.title) column option
+The [template](/api/javascript/kendo/methods/template) which renders the column header content. By default the value of the [title](/configuration/columns.title) column option
 is displayed in the column header cell.
 
 > If sorting is enabled, the column header content will be wrapped in an `<a>` element. As a result the template **must** contain only inline elements.
@@ -759,7 +759,7 @@ is displayed in the column header cell.
 
 ### columns.minScreenWidth `Number`
 
-The pixel screen width below which the column will be hidden. The setting takes precedence over the [`hidden`](/api/javascript/ui/treelist#configuration-columns.hidden) setting,
+The pixel screen width below which the column will be hidden. The setting takes precedence over the [`hidden`](/api/javascript/ui/treelist/configuration/columns.hidden) setting,
 so the two should not be used at the same time.
 
 #### Example - Hide columns when screen is smaller than a given width
@@ -841,7 +841,7 @@ A JavaScript function which is used to compare the values - should return -1 if 
 
 ### columns.template `String|Function`
 
-The [template](/api/javascript/kendo#methods-template) which renders the column content. The treelist renders table rows (`<tr>`) which represent the data source items.
+The [template](/api/javascript/kendo/methods/template) which renders the column content. The treelist renders table rows (`<tr>`) which represent the data source items.
 Each table row consists of table cells (`<td>`) which represent the treelist columns. By default the HTML-encoded value of the [field](#configuration-columns.field) is displayed in the column.
 
 > Use the `template` to customize the way the column displays its value.
@@ -1649,7 +1649,7 @@ Enables drag&drop UI of rows between parents.
 
 ### editable.template `String|Function`
 
-The [template](/api/javascript/kendo#methods-template) which renders the popup editor.
+The [template](/api/javascript/kendo/methods/template) which renders the popup editor.
 
 The template should contain elements which `name` HTML attribute is set to the name of the editable field. This is how the TreeList will know
 which field to bind each editor to. The other option is to use [MVVM](/framework/mvvm/overview) bindings in order to bind HTML elements to data item fields.
@@ -1668,7 +1668,7 @@ which field to bind each editor to. The other option is to use [MVVM](/framework
   			  <label>Last Name:<input name="LastName" /></label>
   			</p>
   			<p>
-  			  <label>Position: 
+  			  <label>Position:
               <select name="Position">
           	    <option>Software Developer</option>
                 <option>Team Lead</option>
@@ -1727,7 +1727,7 @@ which field to bind each editor to. The other option is to use [MVVM](/framework
   			  <label>Last Name:<input data-bind="value: LastName" /></label>
   			</p>
   			<p>
-  			  <label>Position: 
+  			  <label>Position:
           <select data-bind="value: Position">
           	<option>CEO</option>
             <option>Team Lead</option>
@@ -2918,7 +2918,7 @@ Defines the text of the "Loading..." message when the widget loads its root-leve
             }
           }
         },
-        columns: [                             
+        columns: [
           { field: "FirstName", title: "First Name", width: 250 },
           { field: "LastName", title: "Last Name" },
           { field: "Position" }],
@@ -2962,7 +2962,7 @@ Defines the text of "Request failed." message when the widget fails to load its 
             }
           }
         },
-        columns: [                             
+        columns: [
           { field: "FirstName", title: "First Name", width: 250 },
           { field: "LastName", title: "Last Name" },
           { field: "Position" }],
@@ -2989,7 +2989,7 @@ Defines the text of "Retry" message assigned to the button that tries to load ro
             }
           }
         },
-        columns: [                             
+        columns: [
           { field: "FirstName", title: "First Name", width: 250 },
           { field: "LastName", title: "Last Name" },
           { field: "Position" }],
@@ -3739,7 +3739,7 @@ The sorting mode. If set to "single" the user can sort by one column at a time. 
 ### toolbar `String|Function|Array`
 
 If a `String` value is assigned to the `toolbar` configuration option, it will be treated as a single string template for the whole treelist Toolbar,
-and the string value will be passed as an argument to a [`kendo.template()`](/api/javascript/kendo#methods-template) function.
+and the string value will be passed as an argument to a [`kendo.template()`](/api/javascript/kendo/methods/template) function.
 
 If a `Function` value is assigned (it may be a `kendo.template()` function call or a generic function reference), then the return value of the function will be used to render the treelist Toolbar contents.
 
@@ -4032,7 +4032,7 @@ A string, DOM element or jQuery object which represents the parent table row. A 
 
       <button id="add">Add New Row</button>
       <div id="treelist"></div>
-  
+
       <script>
           var crudServiceBaseUrl = "https://demos.telerik.com/kendo-ui/service";
 
@@ -4519,14 +4519,14 @@ A model from the DataSource, or the id of a model in the DataSource.
         var treeList = $("#treeList").data("kendoTreeList");
         var jane = treeList.dataSource.get(1);
         var row = treeList.itemFor(jane);
-        
+
         treeList.select(row);
       });
     </script>
 
 ### items
 
-Obtains an Array of the DOM elements, which correspond to the data items from the Kendo UI DataSource [view](/api/javascript/data/datasource#methods-view).
+Obtains an Array of the DOM elements, which correspond to the data items from the Kendo UI DataSource [view](/api/javascript/data/datasource/methods/view).
 
 #### Returns
 
@@ -4840,7 +4840,7 @@ The data source to which the widget should be bound.
       $("#btn").click(function(){
         var treeList = $("#treeList").data("kendoTreeList");
         var dsNew = new kendo.data.TreeListDataSource({
-          data: [          
+          data: [
             { id: 1, parentId: null, name: "Mark Jameson", age: 26, expanded: true },
             { id: 2, parentId: 1, name: "Joe Reeves", age: 22 },
           ]
@@ -5855,7 +5855,7 @@ The jQuery object representing the container element. That element contains the 
 
 ##### e.model `kendo.data.TreeListModel`
 
-The data item which is going to be edited. Use its [isNew](/api/javascript/data/model#methods-isNew) method to check if the data item is new (created) or not (edited).
+The data item which is going to be edited. Use its [isNew](/api/javascript/data/model/methods/isnew) method to check if the data item is new (created) or not (edited).
 
 ##### e.sender `kendo.ui.TreeList`
 
@@ -6569,7 +6569,7 @@ The widget instance which fired the event.
         },
         columnMenu: true
       });
-      
+
       var treelist = $("#treeList").data("kendoTreeList");
       treelist.bind("columnShow", treelist_columnShow);
     </script>
@@ -6635,7 +6635,7 @@ The widget instance which fired the event.
         },
         columnMenu: true
       });
-      
+
       var treelist = $("#treeList").data("kendoTreeList");
       treelist.bind("columnHide", treelist_columnHide);
     </script>

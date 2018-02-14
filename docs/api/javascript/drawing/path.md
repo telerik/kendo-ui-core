@@ -5,6 +5,7 @@ res_type: api
 ---
 
 # kendo.drawing.Path : kendo.drawing.Element
+
 Represents a path consisting of linear or cubic Bézier curve segments.
 
 #### Example - draw a path

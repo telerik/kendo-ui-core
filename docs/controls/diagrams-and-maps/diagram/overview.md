@@ -102,7 +102,7 @@ The default layout algorithm is the top-down tree layout. You can change this to
 
     diagram.layout({ type: "ForceDirected" });
 
-For detailed information on the layout types and options, refer to the [Diagram API reference on layout](/api/javascript/dataviz/ui/diagram#configuration-layout).
+For detailed information on the layout types and options, refer to the [Diagram API reference on layout](/api/javascript/dataviz/ui/diagram/configuration/layout).
 
 ## Configuration
 

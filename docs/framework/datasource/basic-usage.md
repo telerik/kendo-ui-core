@@ -84,7 +84,7 @@ Operations conducted by the DataSource against this remote endpoint are performe
 
 ## Data Filtration
 
-Filtering local data is a trivial task using the DataSource. The component accepts a list of one or more filter expressions. They can be combined by using the `and` or `or` logical operators. For more details about the filter expression structure, refer to the documentation on the [`filter`](/api/javascript/data/datasource#configuration-filter) configuration option.
+Filtering local data is a trivial task using the DataSource. The component accepts a list of one or more filter expressions. They can be combined by using the `and` or `or` logical operators. For more details about the filter expression structure, refer to the documentation on the [`filter`](/api/javascript/data/datasource/configuration/filter) configuration option.
 
 ### Local Filtering
 
@@ -121,9 +121,9 @@ Avoid it when working with large datasets because it might lead to performance i
 
 Server filtering is convenient for large datasets.
 
-Be sure to set the [`schema`](/api/javascript/data/datasource#configuration-schema) and the [`filter`](/api/javascript/data/datasource#configuration-filter) properties as necessary.
+Be sure to set the [`schema`](/api/javascript/data/datasource/configuration/schema) and the [`filter`](/api/javascript/data/datasource/configuration/filter) properties as necessary.
 
-The example below features local data but the data returned by the [`transport`](/api/javascript/data/datasource#configuration-transport) is going to be evaluated the same way.
+The example below features local data but the data returned by the [`transport`](/api/javascript/data/datasource/configuration/transport) is going to be evaluated the same way.
 
 ###### Example
 

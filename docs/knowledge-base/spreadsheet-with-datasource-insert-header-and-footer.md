@@ -27,9 +27,9 @@ How can I have additional header and footer rows that are not part of the return
 ## Solution
 
 1. Manually insert the header and the footer by using the client-side API of the Spreadsheet.
-1. Handle the [`requestEnd`](https://docs.telerik.com/kendo-ui/api/javascript/data/datasource#events-requestEnd) event of the DataSource.
+1. Handle the [`requestEnd`](https://docs.telerik.com/kendo-ui/api/javascript/data/datasource/events/requestend) event of the DataSource.
 
-    The header row is inserted through the [`Sheet.insertRow()`](https://docs.telerik.com/kendo-ui/api/javascript/spreadsheet/sheet#methods-insertRow) method. Then, the range for the row is retrieved through [`Sheet.range()`](https://docs.telerik.com/kendo-ui/api/javascript/spreadsheet/sheet#methods-range). The values are set [`Range.values()`](https://docs.telerik.com/kendo-ui/api/javascript/spreadsheet/range#methods-values).  
+    The header row is inserted through the [`Sheet.insertRow()`](https://docs.telerik.com/kendo-ui/api/javascript/spreadsheet/sheet/methods/insertrow) method. Then, the range for the row is retrieved through [`Sheet.range()`](https://docs.telerik.com/kendo-ui/api/javascript/spreadsheet/sheet/methods/range). The values are set [`Range.values()`](https://docs.telerik.com/kendo-ui/api/javascript/spreadsheet/range/methods/values).
 
 > This approach is not applicable if the data is edited and saved by using the other DataSource transport methods (`Update`, `Create`, and `Destroy`). Such scenarios do not support the insertion of a custom header or footer.
 

@@ -12,7 +12,7 @@ component: diagram
 
 ### autoBind `Boolean` *(default: true)*
 
-If set to `false` the widget will not bind to the data source during initialization. In this case data binding will occur when the [change](/api/javascript/data/datasource#events-change) event of the
+If set to `false` the widget will not bind to the data source during initialization. In this case data binding will occur when the [change](/api/javascript/data/datasource/events/change) event of the
 data source is fired. By default the widget will bind to the data source specified in the configuration.
 
 > Setting `autoBind` to `false` is useful when multiple widgets are bound to the same data source. Disabling automatic binding ensures that the shared data source doesn't make more than one request to the remote service.
@@ -107,7 +107,7 @@ The font weight of the connection content text.
 
 ### connectionDefaults.content.template `String|Function`
 
-The [template](/api/javascript/kendo#methods-template) which renders the labels.
+The [template](/api/javascript/kendo/methods/template) which renders the labels.
 
 The fields which can be used in the template are:
 
@@ -172,7 +172,7 @@ Specifies if the connections can be removed.
 
 ### connectionDefaults.editable.tools `Array`
 
-Specifies the toolbar tools. Supports all options supported for the [toolbar.items](/api/javascript/ui/toolbar#configuration-items). Predefined tools are:
+Specifies the toolbar tools. Supports all options supported for the [toolbar.items](/api/javascript/ui/toolbar/configuration/items). Predefined tools are:
 
 * "edit" - The elected item can be edited
 * "delete" - The selected items can be deleted
@@ -505,7 +505,7 @@ The font weight of the connection content text.
 
 ### connections.content.template `String|Function`
 
-The [template](/api/javascript/kendo#methods-template) which renders the labels.
+The [template](/api/javascript/kendo/methods/template) which renders the labels.
 
 The fields which can be used in the template are:
 
@@ -525,7 +525,7 @@ Defines the shape editable options.
 
 ### connections.editable.tools `Array`
 
-Specifies the the toolbar tools. Supports all options supported for the [toolbar.items](/api/javascript/ui/toolbar#configuration-items). Predefined tools are:
+Specifies the the toolbar tools. Supports all options supported for the [toolbar.items](/api/javascript/ui/toolbar/configuration/items). Predefined tools are:
 
 * "edit" - The selected item can be edited
 * "delete" - The selected items can be deleted
@@ -1251,7 +1251,7 @@ Specifies the shape editor template. See the 'editable.connectionTemplate' for a
 
 ### editable.tools `Array`
 
-Specifies the the toolbar tools. Supports all options supported for the [toolbar.items](/api/javascript/ui/toolbar#configuration-items). Predefined tools are:
+Specifies the the toolbar tools. Supports all options supported for the [toolbar.items](/api/javascript/ui/toolbar/configuration/items). Predefined tools are:
 
 * "edit" - The selected item can be edited.
 * "createShape" - Adds an empty shape data item and a popup window is displayed.
@@ -2171,7 +2171,7 @@ The font weight of the shape content text.
 
 ### shapeDefaults.content.template `String|Function`
 
-The [`template`](/api/javascript/kendo#methods-template) which renders the labels.
+The [`template`](/api/javascript/kendo/methods/template) which renders the labels.
 
 The fields which can be used in the template are:
 
@@ -2199,7 +2199,7 @@ Specifies if the shapes can be removed.
 
 ### shapeDefaults.editable.tools `Array`
 
-Specifies the toolbar tools. Provides all options that are supported for [`toolbar.items`](/api/javascript/ui/toolbar#configuration-items). The predefined tools are:
+Specifies the toolbar tools. Provides all options that are supported for [`toolbar.items`](/api/javascript/ui/toolbar/configuration/items). The predefined tools are:
 
 * "edit" - The selected item can be edited.
 * "delete" - The selected items can be deleted.
@@ -2673,7 +2673,7 @@ The font weight of the shape content text.
 
 ### shapes.content.template `String|Function`
 
-The [template](/api/javascript/kendo#methods-template) which renders the labels.
+The [template](/api/javascript/kendo/methods/template) which renders the labels.
 
 The fields which can be used in the template are:
 
@@ -2693,7 +2693,7 @@ Specifies whether the connectors should appear on hover.
 
 ### shapes.editable.tools `Array`
 
-Specifies the toolbar tools. Provides all options supported for [`toolbar.items`](/api/javascript/ui/toolbar#configuration-items). The predefined tools are:
+Specifies the toolbar tools. Provides all options supported for [`toolbar.items`](/api/javascript/ui/toolbar/configuration/items). The predefined tools are:
 
 * "edit" - The selected item can be edited.
 * "delete" - The selected items can be deleted.
@@ -2873,7 +2873,7 @@ Defines the y-coordinate of the shape when added to the Diagram.
 
 ### template `String|Function` *(default: "")*
 
-The [`template`](/api/javascript/kendo#methods-template) which renders the content of the shape when bound to a dataSource. The names you can use in the template correspond to the properties used in the dataSource. For an example, refer to the dataSource topic below.
+The [`template`](/api/javascript/kendo/methods/template) which renders the content of the shape when bound to a dataSource. The names you can use in the template correspond to the properties used in the dataSource. For an example, refer to the dataSource topic below.
 
 ### theme `String`
 
@@ -3036,7 +3036,7 @@ Brings one or more items into the view in function of various criteria.
 
 This will offset/pan the diagram to bring the rectangle at position (500,500) into view.
 
-    <div id="diagram"></div>  
+    <div id="diagram"></div>
     <script>
       var Shape = kendo.dataviz.diagram.Shape;
       $("#diagram").kendoDiagram();
@@ -3114,31 +3114,31 @@ The options of the new connection. See [connections](#configuration-connections)
 #### Example - connecting two shapes using the Auto-connector
 
     <div id="diagram"></div>
-    
-    <script>      
-      var Shape = kendo.dataviz.diagram.Shape;      
+
+    <script>
+      var Shape = kendo.dataviz.diagram.Shape;
       $("#diagram").kendoDiagram();
-      
+
       var diagram = $("#diagram").data("kendoDiagram");
       var shape1 = diagram.addShape(new Shape({x:100, y:100, fill: "red"}));
       var shape2 = diagram.addShape(new Shape({x:400, y:1000, fill: "red"}));
       var connection = diagram.connect(shape1, shape2)
-      
+
     </script>
 
 #### Example - connecting two shapes using the specific connectors
 
     <div id="diagram"></div>
     <script>
-      var Shape = kendo.dataviz.diagram.Shape; 
+      var Shape = kendo.dataviz.diagram.Shape;
       $("#diagram").kendoDiagram();
-      
-      var diagram = $("#diagram").data("kendoDiagram");      
+
+      var diagram = $("#diagram").data("kendoDiagram");
       var shape1 = diagram.addShape(new Shape({x:100, y:100, fill: "red"}));
       var shape2 = diagram.addShape(new Shape({x:400, y:100, fill: "red"}));
-   
+
       var connection = diagram.connect(shape1.getConnector["top"], shape2.getConnector["bottom"]);
-      
+
     </script>
 
 #### Example - creating a half-floating connection
@@ -3149,10 +3149,10 @@ The options of the new connection. See [connections](#configuration-connections)
       var Shape = kendo.dataviz.diagram.Shape;
       var Point = kendo.dataviz.diagram.Point;
       $("#diagram").kendoDiagram();
-      
+
       var diagram = $("#diagram").data("kendoDiagram");
       var shape = diagram.addShape(new Shape({x:100, y:100, fill: "red"}));
-      
+
       var connection = diagram.connect(new Point(250,350), shape)
     </script>
 
@@ -3220,10 +3220,10 @@ Prepares the widget for safe removal from the DOM. Detaches all event handlers a
         }],
         template: "#= item.name #"
       });
-      
+
       var diagram = $("#diagram").data("kendoDiagram");
       diagram.destroy();
-      
+
     </script>
 
 ### documentToModel
@@ -3267,10 +3267,10 @@ A diagram item to edit.
 ### exportImage
 
 Exports the diagram content as an image.
-The result can be saved using [kendo.saveAs](/api/javascript/kendo#methods-saveAs).
+The result can be saved using [kendo.saveAs](/api/javascript/kendo/methods/saveas).
 
 The full content of the diagram will be exported in 1:1 scale.
-If exporting the current view is desired then the [kendo.drawing.drawDOM](/api/javascript/drawing#methods-drawDOM)
+If exporting the current view is desired then the [kendo.drawing.drawDOM](/api/javascript/drawing/methods/drawdom)
 method should be called on a container element.
 
 The export operation is asynchronous and returns a [promise](http://api.jquery.com/Types/#Promise).
@@ -3331,7 +3331,7 @@ for more details.
 ### exportPDF
 
 Exports the diagram content as a PDF file.
-The result can be saved using [kendo.saveAs](/api/javascript/kendo#methods-saveAs).
+The result can be saved using [kendo.saveAs](/api/javascript/kendo/methods/saveas).
 
 The export operation is asynchronous and returns a [promise](http://api.jquery.com/Types/#Promise).
 The promise will be resolved with a PDF file encoded as a [Data URI](https://developer.mozilla.org/en-US/docs/data_URIs).
@@ -3370,10 +3370,10 @@ Parameters for the exported PDF file.
 ### exportSVG
 
 Exports the diagram content as an SVG document.
-The result can be saved using [kendo.saveAs](/api/javascript/kendo#methods-saveAs).
+The result can be saved using [kendo.saveAs](/api/javascript/kendo/methods/saveas).
 
 The full content of the diagram will be exported in 1:1 scale.
-If exporting the current view is desired then the [kendo.drawing.drawDOM](/api/javascript/drawing#methods-drawDOM)
+If exporting the current view is desired then the [kendo.drawing.drawDOM](/api/javascript/drawing/methods/drawdom)
 method should be called on a container element.
 
 The export operation is asynchronous and returns a [promise](http://api.jquery.com/Types/#Promise).
@@ -3600,7 +3600,7 @@ Whether the removal should be recorded in the undo-redo stack.
 #### Example - removing items
 
     <div id="diagram"></div>
-    
+
     <script>
       var Shape = kendo.dataviz.diagram.Shape;
       $("#diagram").kendoDiagram();
@@ -3851,10 +3851,10 @@ The widget instance which fired the event.
           height: 100
         }],
         add: function(e) {
-          var addedShape = e.shape;         
+          var addedShape = e.shape;
           // 'this' refers to the widget here
         }
-      });      
+      });
 
       $('body').append(diagramElement);
 

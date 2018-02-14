@@ -44,23 +44,32 @@ module Jekyll
 
     def generate(site)
       if site.layouts.key? 'api-index'
-        api_sub_pages = Array.new
+        api_groups = Array.new
+        site.config['api'].each_entry do |element|
+          children = Array.new
+          element['group_parents'].each_entry do |child|
+            children << child
+          end
+          api_groups <<  { "control"  => element['file'], "group_parents" => children, "categories" => {} }
+        end
 
+        api_sub_pages = Array.new
         site.pages.each_entry do |page|
-          if page.path.include? "api/javascript/ui/grid.md"
+          if page.path.include? "api/javascript/effects/"
+            next
+          end
+          if page.path.include? "api/javascript"
             dir = page.path
             dir.sub!(".md", "")
 
-            api_groups = Array.new
-            site.config['api'].each_entry do |element|
-              children = Array.new
-              element['group_parents'].each_entry do |child|
-                children << child
-              end
-              api_groups <<  { "control"  => element['file'], "group_parents" => children, "categories" => {} }
+            api_group = api_groups.detect { |g| g["control"] === dir }
+            if api_group == nil
+              api_group = { "control"  => dir, "group_parents" => Array.new, "categories" => {} }
+              api_groups << api_group
             end
+            api_group["public_name"] = page['title']
 
-            pages = ApiPageParser.new(page.clone, api_groups[0]["group_parents"]).get_pages()
+            pages = ApiPageParser.new(page.clone, api_group["group_parents"]).parse_pages()
 
             page.data['is_main'] = true
             page.data['is_api'] = true
@@ -86,11 +95,10 @@ module Jekyll
 
               new_content += "#{get_link_for_sub_page(page, page_schema)}\n"
 
-              add_pages(api_groups, page_schema)
+              add_pages(api_group, page_schema)
             end
 
             page.content = new_content
-            export_groups_json(site, api_groups)
 
           end
         end
@@ -98,21 +106,21 @@ module Jekyll
         api_sub_pages.each_entry do |new_page|
           site.pages << new_page
         end
-
+        export_groups_json(site, api_groups)
       end
     end
 
-    def add_pages(api_groups, page_schema)
-       if api_groups[0]["categories"][page_schema.category] == nil
-        api_groups[0]["categories"][page_schema.category] = Array.new
-      end
-
-      api_groups[0]["categories"][page_schema.category] << page_schema.name
-      child_page_names = page_schema.data['group_page_names'];
-      if child_page_names
-        child_page_names.each do |child_page_name|
-          api_groups[0]["categories"][page_schema.category] << child_page_name
+    def add_pages(api_group, page_schema)
+        if api_group["categories"][page_schema.category] == nil
+          api_group["categories"][page_schema.category] = Array.new
         end
+
+        api_group["categories"][page_schema.category] << page_schema.name
+        child_page_names = page_schema.data['group_page_names'];
+        if child_page_names
+          child_page_names.each do |child_page_name|
+            api_group["categories"][page_schema.category] << child_page_name
+          end
       end
     end
 
@@ -125,12 +133,14 @@ module Jekyll
 
     def get_link_for_sub_page(page, sub_page_schema)
       text = sub_page_schema.name
-      link = "* [#{text}](#{page.data['title'].downcase}/#{sub_page_schema.category.downcase}/#{text.downcase})"
+      page_link = page.path.split('/').last
+      page_link.sub!(".md", "")
+      link = "* [#{text}](#{page_link.downcase}/#{sub_page_schema.category.downcase}/#{text.downcase})"
 
       child_page_names = sub_page_schema.data['group_page_names'];
       if child_page_names
         child_page_names.each do |child_page_name|
-          link += "\n* [#{child_page_name}](#{page.data['title'].downcase}/#{sub_page_schema.category.downcase}/#{text.downcase}##{child_page_name})"
+          link += "\n* [#{child_page_name}](#{page_link.downcase}/#{sub_page_schema.category.downcase}/#{text.downcase}##{child_page_name})"
         end
       end
 
@@ -153,7 +163,7 @@ module Jekyll
   class ApiPageParser
     @@known_types = [:codeblock, :p, :a, :header, :blank, :codespan, :blockquote, :ul, :li, :strong]
     @@block_containers = [:blockquote, :ul, :li, :p, :strong ]
-    @@categories = ['Configuration', 'Fields', 'Methods', 'Events']
+    @@categories = ['Constructor Parameters', 'Configuration', 'Fields', 'Properties', 'Methods', 'Class Methods', 'Events']
 
     def initialize(page, groups)
       name = page.name
@@ -163,7 +173,7 @@ module Jekyll
       @groups = groups
     end
 
-    def get_pages()
+    def parse_pages()
       @pages = parse(@markdown)
     end
 
@@ -215,6 +225,8 @@ module Jekyll
           data = @data.clone
           data['page_title'] = get_page_title(page_name)
           data['title'] = page_name
+          data['description'] = get_page_description(page_name, category)
+
           page_schemas << ApiPageSchema.new(page_name, body, category, data, header)
 
           if is_group_start(page_name)
@@ -234,6 +246,7 @@ module Jekyll
             data = @data.clone
             data['page_title'] = get_page_title(page_name)
             data['title'] = page_name
+            data['description'] = get_page_description(page_name, category)
             data['group_page_names'] = Array.new
             page_schemas << ApiPageSchema.new(page_name, body, category, data, header)
             group_parents << page_schemas.last
@@ -257,6 +270,7 @@ module Jekyll
             data = @data.clone
             data['page_title'] = get_page_title(page_name)
             data['title'] = page_name
+            data['description'] = get_page_description(page_name, category)
             prepare_links_for_page(values, page_name, "")
             page_schemas << ApiPageSchema.new(page_name, body, category, data, header)
           end
@@ -315,8 +329,26 @@ module Jekyll
       element.children.slice(start_index..end_index)
     end
 
-    def get_page_title(string)
-      return "#{string} - API Reference - Kendo UI #{@data['title']}"
+    def get_page_title(name)
+      return "#{name} - API Reference - Kendo UI #{@data['title']}"
+    end
+
+    def get_page_description(name, category)
+      categ = category.downcase
+      specific_description = ''
+      if categ == 'methods' || categ == 'class methods'
+        specific_description = "use the #{name} method"
+      elsif categ == 'properties' || categ == 'fields' || categ == 'configuration'
+        specific_description = "configure the #{name} property"
+      elsif categ == 'events'
+        specific_description = "use the #{name} event"
+      elsif categ == 'constructor parameters'
+        specific_description = "use the #{name} parameter of the constructor"
+      else
+        specific_description = "use the #{name}"
+      end
+
+      return "In this article you can see how to #{specific_description} of the Kendo UI #{@data['title']}.";
     end
 
     def child_index(element, text)

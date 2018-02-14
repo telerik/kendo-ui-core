@@ -28,7 +28,7 @@ How can I auto-fit the Grid data in the exported Excel?
 
 ## Solution
 
-Set the column width of the Kendo UI Workbook to [`autoWidth`](https://docs.telerik.com/kendo-ui/api/javascript/ooxml/workbook#configuration-sheets.columns.autoWidth) by adding a handler to the [`excelExport`](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid#events-excelExport) event of the Grid. Loop over the columns and set `autoWidth` to `true`.
+Set the column width of the Kendo UI Workbook to [`autoWidth`](https://docs.telerik.com/kendo-ui/api/javascript/ooxml/workbook/configuration/sheets.columns.autowidth) by adding a handler to the [`excelexport`](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid/events/excelexport) event of the Grid. Loop over the columns and set `autoWidth` to `true`.
 
 ```
 excelExport: function(e) {

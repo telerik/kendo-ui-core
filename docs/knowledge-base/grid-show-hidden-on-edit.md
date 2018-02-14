@@ -30,8 +30,8 @@ How can I display the hidden rows in a Grid in inline edit mode so that the user
 
 Toggle the visibility of the column by using the built-in methods of the Grid.
 
-1. Within the [`beforeEdit`](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid#events-beforeEdit) event handler, show the column by using the [`showColumn`](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid#methods-showColumn) method.
-1. When the [`save`](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid#events-save) event is fired, hide the column by using the [`hideColumn`](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid#methods-hideColumn) method.
+1. Within the [`beforeEdit`](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid/events/beforeedit) event handler, show the column by using the [`showColumn`](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid/methods/showcolumn) method.
+1. When the [`save`](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid/events/save) event is fired, hide the column by using the [`hideColumn`](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid/methods/hidecolumn) method.
 
 ```html
 

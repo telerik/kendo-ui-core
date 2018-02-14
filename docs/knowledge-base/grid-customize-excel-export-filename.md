@@ -26,7 +26,7 @@ How can I add the current date and time to the Excel export filename of the Gri
 
 ## Solution
 
-1. Use the [`excelExport`](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid#events-excelExport) event which has the workbook in its event data to rename it.
+1. Use the [`excelExport`](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid/events/excelexport) event which has the workbook in its event data to rename it.
 
 1. With the help of the [`kendo.toString()`](https://docs.telerik.com/kendo-ui/framework/globalization/dateformatting) method or another way to format the date, concatenate the date to the filename:
 

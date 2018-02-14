@@ -29,7 +29,7 @@ How can I change the size of the stroke next to the legend text in the Kendo UI 
 
 ## Solution
 
-1. Handle the [`render`](https://docs.telerik.com/kendo-ui/api/javascript/dataviz/ui/chart#events-render) event of the Chart.
+1. Handle the [`render`](https://docs.telerik.com/kendo-ui/api/javascript/dataviz/ui/chart/events/render) event of the Chart.
 1. In the `render` event handler, select the desired `path` with jQuery.
 1. Change the `stroke-width` attribute of the `path`.
 

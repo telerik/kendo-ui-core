@@ -5,6 +5,7 @@ res_type: api
 ---
 
 # kendo.drawing.FillOptions
+
 Shape fill configuration options.
 
 ## Fields

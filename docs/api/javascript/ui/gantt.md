@@ -214,7 +214,7 @@ The field of the assignment data item which represents the amount of the assigne
 
 ### autoBind `Boolean` *(default: true)*
 
-If set to `false` the widget will not bind to the data source during initialization. In this case data binding will occur when the [change](/api/javascript/data/datasource#events-change) event of the
+If set to `false` the widget will not bind to the data source during initialization. In this case data binding will occur when the [change](/api/javascript/data/datasource/events/change) event of the
 data source is fired. By default the widget will bind to the data source specified in the configuration.
 
 > Setting `autoBind` to `false` is useful when multiple widgets are bound to the same data source. Disabling automatic binding ensures that the shared data source doesn't make more than one request to the remote service.
@@ -384,7 +384,7 @@ The text that is displayed in the column header cell. If not set the [field](#co
 The format that is applied to the value before it is displayed. Takes the form "{0:format}" where "format" is a [standard number format](/api/javascript/kendo#standard-number-formats),
 [custom number format](/api/javascript/kendo#custom-number-formats), [standard date format](/api/javascript/kendo#standard-date-formats) or a [custom date format](/api/javascript/kendo#custom-date-formats).
 
-> The [kendo.format](/api/javascript/kendo#methods-format) function is used to format the value.
+> The [kendo.format](/api/javascript/kendo/methods/format) function is used to format the value.
 
 #### Example - set format for the start and end column
 
@@ -1336,7 +1336,7 @@ If set to `false` the user won't be able to resize tasks.
 
 ### editable.template `String|Function`
 
-The [template](/api/javascript/kendo#methods-template) which renders the editor.
+The [template](/api/javascript/kendo/methods/template) which renders the editor.
 
 The template should contain elements whose `name` HTML attributes are set as the editable fields. This is how the Gantt will know
 which field to update. The other option is to use [MVVM](/framework/mvvm/overview) bindings in order to bind HTML elements to data item fields.
@@ -2971,7 +2971,7 @@ If set to `false`, the day view will show all hours of the day. By default the v
 
 ### taskTemplate `String|Function`
 
-The [template](/api/javascript/kendo#methods-template) used to render the gantt tasks.
+The [template](/api/javascript/kendo/methods/template) used to render the gantt tasks.
 
 The fields which can be used in the template are the [task fields](/api/javascript/data/gantttask)
 
@@ -3012,7 +3012,7 @@ The fields which can be used in the template are the [task fields](/api/javascri
 ### toolbar `String|Function|Array`
 
 If a `String` value is assigned to the `toolbar` configuration option, it will be treated as a single string template for the whole Gantt Toolbar,
-and the string value will be passed as an argument to a [`kendo.template()`](/api/javascript/kendo#methods-template) function.
+and the string value will be passed as an argument to a [`kendo.template()`](/api/javascript/kendo/methods/template) function.
 
 If a `Function` value is assigned (it may be a kendo.template() function call or a generic function reference), then the return value of the function will be used to render the Gantt Toolbar contents.
 
@@ -3112,7 +3112,7 @@ This class can be used to obtain reference to the button after Gantt initializat
 
 ### toolbar.template `String|Function`
 
-The [template](/api/javascript/kendo#methods-template) which renders the command. By default renders a button.
+The [template](/api/javascript/kendo/methods/template) which renders the command. By default renders a button.
 
 #### Example - set the template as a function
     <div id="gantt"></div>
@@ -3217,7 +3217,7 @@ The task tooltip configuration options.
 
 ### tooltip.template `String|Function`
 
-The [template](/api/javascript/kendo#methods-template) which renders the tooltip.
+The [template](/api/javascript/kendo/methods/template) which renders the tooltip.
 
 The fields which can be used in the template are:
 
@@ -3426,7 +3426,7 @@ The size of the time slot headers. Values are treated as pixels.
 
 ### views.timeHeaderTemplate `String|Function`
 
-The [template](/api/javascript/kendo#methods-template) used to render the time slots in "day" view
+The [template](/api/javascript/kendo/methods/template) used to render the time slots in "day" view
 
 #### Example
 
@@ -3451,7 +3451,7 @@ The [template](/api/javascript/kendo#methods-template) used to render the time s
 
 ### views.dayHeaderTemplate `String|Function`
 
-The [template](/api/javascript/kendo#methods-template) used to render the day slots in "day" and "week" views.
+The [template](/api/javascript/kendo/methods/template) used to render the day slots in "day" and "week" views.
 
 #### Example - dayHeaderTemplate set for "day" view.
 
@@ -3503,7 +3503,7 @@ The [template](/api/javascript/kendo#methods-template) used to render the day sl
 
 ### views.weekHeaderTemplate `String|Function`
 
-The [template](/api/javascript/kendo#methods-template) used to render the week slots in "week" and "month" views.
+The [template](/api/javascript/kendo/methods/template) used to render the week slots in "week" and "month" views.
 
 #### Example - weekHeaderTemplate set for "week" view
 
@@ -3556,7 +3556,7 @@ The [template](/api/javascript/kendo#methods-template) used to render the week s
 
 ### views.monthHeaderTemplate `String|Function`
 
-The [template](/api/javascript/kendo#methods-template) used to render the month slots in "month" and "year" views.
+The [template](/api/javascript/kendo/methods/template) used to render the month slots in "month" and "year" views.
 
 #### Example - monthHeaderTemplate set for "month" view
 
@@ -3611,7 +3611,7 @@ The [template](/api/javascript/kendo#methods-template) used to render the month 
 
 ### views.yearHeaderTemplate `String|Function`
 
-The [template](/api/javascript/kendo#methods-template) used to render the year slots in "year" view.
+The [template](/api/javascript/kendo/methods/template) used to render the year slots in "year" view.
 
 #### Example
 
@@ -3674,7 +3674,7 @@ with a gantt task.
 ### resources.dataFormatField `String` *(default: "format")*
 
 The field of the resource data item containing the format of the resource value, which could be assigned to a gantt task.
-The data item format value could be any valid [kendo format](/api/javascript/kendo#methods-format).
+The data item format value could be any valid [kendo format](/api/javascript/kendo/methods/format).
 
 #### Example - set the resource data format field
 
@@ -3885,7 +3885,7 @@ The height of the table rows. Numeric values are treated as pixels.
 
 ### dataSource `kendo.data.GanttDataSource`
 
-The [data source](/api/javascript/data/ganttdatasource) of the widget. Configured via the [dataSource](#configuration-dataSource) option.
+The [data source](/api/javascript/data/ganttdatasource) of the widget. Configured via the [datasource](/configuration/datasource) option.
 
 > Changes of the data source will be reflected in the widget.
 
@@ -3991,7 +3991,7 @@ The [data source](/api/javascript/data/ganttdatasource) of the widget. Configure
 
 ### dependencies `kendo.data.GanttDependencyDataSource`
 
-The [dependencies data source](/api/javascript/data/ganttdependencydatasource) of the widget. Configured via the [dependencies](#configuration-dependencies) option.
+The [dependencies data source](/api/javascript/data/ganttdependencydatasource) of the widget. Configured via the [dependencies](/configuration/dependencies) option.
 
 > Changes of the data source will be reflected in the widget.
 

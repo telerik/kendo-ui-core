@@ -10,7 +10,7 @@ slug: howto_aggregatedata_piecharts
 
 In some scenarios, you might need to aggregate Pie Chart data and to override the sort order of the categories.
 
-The example below demonstrates how to achieve this behavior by using the [dataSource aggregates](/api/javascript/data/datasource#configuration-aggregate).
+The example below demonstrates how to achieve this behavior by using the [dataSource aggregates](/api/javascript/data/datasource/configuration/aggregate).
 
 ###### Example
 
@@ -32,7 +32,7 @@ The example below demonstrates how to achieve this behavior by using the [dataSo
         },
         {
           "source": "Nuclear",
-          "percentage": 30            
+          "percentage": 30
         }
       ];
 

@@ -14,11 +14,11 @@ There is no built-in UI for the exporting functionality. To initiate the export,
 
 ## PDF Export
 
-To initiate the export in PDF through code, call the [`saveAsPdf`](/api/javascript/dataviz/ui/chart#methods-saveAsPdf) method.
+To initiate the export in PDF through code, call the [`saveAsPdf`](/api/javascript/dataviz/ui/chart/methods/saveaspdf) method.
 
 For more information on PDF export, refer to:
 
-* [PDF Export API Configuration](/api/javascript/dataviz/ui/chart#configuration-pdf)
+* [PDF Export API Configuration](/api/javascript/dataviz/ui/chart/configuration/pdf)
 * [Online Demo](http://demos.telerik.com/kendo-ui/chart-api/pdf-export)
 
 To enable compression, it is highly recommended that you include the [Pako Deflate library](https://github.com/nodeca/pako) in the page.
@@ -96,9 +96,9 @@ For more information on how to do this, refer to the [online demo](http://demos.
 
 The advanced export functionality is delivered though the following methods:
 
-* [`exportPDF`](/api/javascript/dataviz/ui/chart#methods-exportPDF)
-* [`exportImage`](/api/javascript/dataviz/ui/chart#methods-exportImage)
-* [`exportSVG`](/api/javascript/dataviz/ui/chart#methods-exportSVG)
+* [`exportPDF`](/api/javascript/dataviz/ui/chart/methods/exportpdf)
+* [`exportImage`](/api/javascript/dataviz/ui/chart/methods/exportimage)
+* [`exportSVG`](/api/javascript/dataviz/ui/chart/methods/exportsvg)
 
 The example below demonstrates how to obtain an image from the Chart.
 
@@ -135,7 +135,7 @@ The example below demonstrates how to obtain an image from the Chart.
 
 ### Server Proxy
 
-Internet Explorer 9 and Safari do not support the option for saving a file and require the implementation of a [server proxy]({% slug overview_savingfiles_kendoui %}#browser-support). Set the [`proxyURL`](/api/javascript/ui/grid#configuration-pdf.proxyURL) option to specify the server proxy URL, as shown below.
+Internet Explorer 9 and Safari do not support the option for saving a file and require the implementation of a [server proxy]({% slug overview_savingfiles_kendoui %}#browser-support). Set the [`proxyURL`](/api/javascript/ui/grid/configuration/pdf.proxyurl) option to specify the server proxy URL, as shown below.
 
 ###### Example
 
@@ -366,7 +366,7 @@ All [known limitations]({% slug drawingofhtmlelements_drawingapi %}#known-limita
 Below are listed the most important ones for you to note:
 
 * The maximum document size is limited to 5080x5080mm (200x200 inches) by the PDF 1.5 specification. Larger files might not open in all viewers.
-* Older browsers, such as Internet Explorer 9 and Safari, require the implementation of a server proxy. For more information on this, refer to [the `proxyUrl` configuration section](/api/javascript/ui/grid#configuration-pdf.proxyURL).
+* Older browsers, such as Internet Explorer 9 and Safari, require the implementation of a server proxy. For more information on this, refer to [the `proxyUrl` configuration section](/api/javascript/ui/grid/configuration/pdf.proxyurl).
 
 ## Further Reading
 

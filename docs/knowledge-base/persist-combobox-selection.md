@@ -33,7 +33,7 @@ In web pages I have the Persistence Manager control to preserve the user options
 
 ## Solution
 
-Retrieve the selected item and keep it in `localStorage` by using the [`select()`](http://docs.telerik.com/kendo-ui/api/javascript/ui/combobox#methods-select) method. When necessary, set an item as selected again by using `select()`.
+Retrieve the selected item and keep it in `localStorage` by using the [`select()`](http://docs.telerik.com/kendo-ui/api/javascript/ui/combobox/methods/select) method. When necessary, set an item as selected again by using `select()`.
 
 ```html
   <div  >

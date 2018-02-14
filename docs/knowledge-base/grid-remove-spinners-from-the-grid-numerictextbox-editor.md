@@ -28,7 +28,7 @@ How can I remove the spinners of the NumericTextBoxes which are used as default 
 
 ## Solution
 
-Set a custom editor for the numeric columns by using the [`column.editor`](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid#configuration-columns.editor) property of the Grid.
+Set a custom editor for the numeric columns by using the [`column.editor`](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid/configuration/columns.editor) property of the Grid.
 
 ````html
     <div id="example">

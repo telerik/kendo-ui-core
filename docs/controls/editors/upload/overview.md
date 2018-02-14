@@ -73,9 +73,9 @@ For detailed information on the chunk upload functionality Kendo UI Upload suppo
 
 ### Identify Files When Uploading
 
-Regardless of the mode of operation, a unique identifier (`uid`) is generated for each file. In the case of a synchronous or asynchronous upload with the [batch option](/api/javascript/ui/upload#configuration-async.batch) enabled, the single `uid` that is generated, stands for the whole batch of files, selected at the same time. In the case of asynchronous upload with the [batch option](/api/javascript/ui/upload#configuration-async.batch) disabled, a `uid` is generated for each separate file.
+Regardless of the mode of operation, a unique identifier (`uid`) is generated for each file. In the case of a synchronous or asynchronous upload with the [batch option](/api/javascript/ui/upload/configuration/async.batch) enabled, the single `uid` that is generated, stands for the whole batch of files, selected at the same time. In the case of asynchronous upload with the [batch option](/api/javascript/ui/upload/configuration/async.batch) disabled, a `uid` is generated for each separate file.
 
-The generated `uid` is added to the [`cancel`](/api/javascript/ui/upload#events-cancel) [`error`](/api/javascript/ui/upload#events-error), [`progress`](/api/javascript/ui/upload#events-progress), [`remove`](/api/javascript/ui/upload#events-remove), [`select`](/api/javascript/ui/upload#events-select), and [`upload`](/api/javascript/ui/upload#events-upload) events as a property of the `e.files` collection.
+The generated `uid` is added to the [`cancel`](/api/javascript/ui/upload/events/cancel) [`error`](/api/javascript/ui/upload/events/error), [`progress`](/api/javascript/ui/upload/events/progress), [`remove`](/api/javascript/ui/upload/events/remove), [`select`](/api/javascript/ui/upload/events/select), and [`upload`](/api/javascript/ui/upload/events/upload) events as a property of the `e.files` collection.
 
 ## Reference
 

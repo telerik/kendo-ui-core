@@ -29,7 +29,7 @@ How can I change the format of a date column during the Excel export in the Kend
 
 ## Solution
 
-1. Subscribe to the [`excelExport`](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid#events-excelExport) event of the Grid.
+1. Subscribe to the [`excelExport`](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid/events/excelexport) event of the Grid.
 1. In the `excelExport` event handler, get all the `fields` and their `models`.
 1. Based on the `model` type, push the index of the column in an array.
 1. Loop through the rows and change the values and the format of the desired columns.

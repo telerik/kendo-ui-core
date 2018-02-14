@@ -92,7 +92,7 @@ The DatePicker enables you to disable certain days, such as weekends, national h
 
 To disable a date, either:
 * Set and array of dates, or
-* Add a function to determine the return value as the date that is disabled.  
+* Add a function to determine the return value as the date that is disabled.
 
 ### Set an Array
 
@@ -138,7 +138,7 @@ When you disable dates by adding a function, determine its return value as `true
 
 The widget is designed to keep the input value unchanged, even when the typed date is invalid. This is due the following facts:
 
-- The widget allows different date parse formats, which require unrestricted user input. For more information, refer to the [`parseFormats`](/api/javascript/ui/datepicker#configuration-parseFormats) option.
+- The widget allows different date parse formats, which require unrestricted user input. For more information, refer to the [`parseFormats`](/api/javascript/ui/datepicker/configuration/parseformats) option.
 - The widget does not update automatically the typed text when it is invalid. Such a change in the input value that is made by the widget, leads to unexpected behavior.
 
 The best way to validate the DatePicker widget is to use a client-validation framework such as the [Kendo UI Validator]({% slug overview_kendoui_validator_widget %}). In this way, you can provide a meaningful error message to the end user that prompts the right actions for them to resolve the issue. For more details, refer to the [online custom validation demos](http://demos.telerik.com/kendo-ui/validator/custom-validation).

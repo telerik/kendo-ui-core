@@ -9,7 +9,7 @@ slug: initialize_thegrid_tabstrip_widget
 
 The example below demonstrates how to use the `activate` event when initializing the Grid within the TabStrip so as it is resized according to the dimensions of its container.
 
-> **Important**  
+> **Important**
 >
 > In addition to the Kendo UI TabStrip, this example can be applied to the PanelBar and Window widgets, which, too, act as hidden containers for the Grid.
 
@@ -63,8 +63,8 @@ The example below demonstrates how to use the `activate` event when initializing
 
 Other articles and how-to examples related to the Kendo UI TabStrip:
 
-* [Initialize the Grid inside a Hidden Container](/web/grid/appearance#initialize-the-grid-inside-a-hidden-container)    
-* [JavaScript API Reference: Configure TabStrip Animations](/api/javascript/ui/tabstrip#configuration-animation)
+* [Initialize the Grid inside a Hidden Container](/web/grid/appearance#initialize-the-grid-inside-a-hidden-container)
+* [JavaScript API Reference: Configure TabStrip Animations](/api/javascript/ui/tabstrip/configuration/animation)
 * [How to Display Buttons at the Bottom]({% slug howto_displaybuttonsatthebottom_tabstrip %})
 * [How to Save Content Scroll Position]({% slug howto_savecontentscrollposition_tabstrip %})
 * [How to Scroll TabStrip with Keyboard]({% slug howto_scrolltabstripwithkeyboard_tabstrip %})

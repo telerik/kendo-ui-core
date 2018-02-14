@@ -14,7 +14,7 @@ Represents the Kendo UI ListView widget. Inherits from [Widget](/api/javascript/
 
 ### autoBind `Boolean` *(default: true)*
 
-If set to `false` the widget will not bind to the data source during initialization. In this case data binding will occur when the [change](/api/javascript/data/datasource#events-change) event of the
+If set to `false` the widget will not bind to the data source during initialization. In this case data binding will occur when the [change](/api/javascript/data/datasource/events/change) event of the
 data source is fired. By default the widget will bind to the data source specified in the configuration.
 
 > Setting `autoBind` to `false` is useful when multiple widgets are bound to the same data source. Disabling automatic binding ensures that the shared data source does not make more than one request to the remote service.
@@ -257,7 +257,7 @@ Template to be used for rendering the alternate items in the ListView.
 
 ### dataSource `kendo.data.DataSource`
 
-The [data source](/api/javascript/data/datasource) of the widget. Configured via the [dataSource](#configuration-dataSource) option.
+The [data source](/api/javascript/data/datasource) of the widget. Configured via the [dataSource](/configuration/datasource) option.
 
 > Changes of the data source will be reflected in the widget.
 
@@ -444,7 +444,7 @@ jQuery object which represents the item to be edited.
 
 ### items
 
-Obtains an Array of the DOM elements, which correspond to the data items from the Kendo UI DataSource [view](/api/javascript/data/datasource#methods-view).
+Obtains an Array of the DOM elements, which correspond to the data items from the Kendo UI DataSource [view](/api/javascript/data/datasource/methods/view).
 
 #### Returns
 
@@ -474,7 +474,7 @@ Reloads the data and repaints the list view.
 
 ### remove
 
-Removes specified ListView item. Triggers [remove](#events-remove) event and if not prevented calls DataSource [sync](/api/javascript/data/datasource#methods-sync) method.
+Removes specified ListView item. Triggers [remove](#events-remove) event and if not prevented calls DataSource [sync](/api/javascript/data/datasource/methods/sync) method.
 
 #### Example
 
@@ -503,7 +503,7 @@ jQuery object which represents the item to be removed.
 
 ### save
 
-Saves edited ListView item. Triggers [save](#events-save) event. If save event is not prevented and validation succeeds will call DataSource [sync](/api/javascript/data/datasource#methods-sync) method.
+Saves edited ListView item. Triggers [save](#events-save) event. If save event is not prevented and validation succeeds will call DataSource [sync](/api/javascript/data/datasource/methods/sync) method.
 
 #### Example
 
@@ -924,7 +924,7 @@ The model to be edited.
 
 ### remove
 
-Fires before the list view item is removed. If it is not prevented will call DataSource [sync](/api/javascript/data/datasource#methods-sync) method.
+Fires before the list view item is removed. If it is not prevented will call DataSource [sync](/api/javascript/data/datasource/methods/sync) method.
 
 The event handler function context (available via the `this` keyword) will be set to the widget instance.
 

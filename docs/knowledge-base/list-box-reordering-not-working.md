@@ -45,6 +45,6 @@ The Kendo UI ListBox does not provide a built-in solution for achieving this beh
 Apply custom logic on the `reorder` event of the widget by manually removing the item from one position and then inserting it in the new one. For more information, refer to:  
 
 * [http://dojo.telerik.com/Edeco/4](http://dojo.telerik.com/Edeco/4)  
-* [http://docs.telerik.com/kendo-ui/api/javascript/data/datasource\#methods-insert](http://docs.telerik.com/kendo-ui/api/javascript/data/datasource#methods-insert)  
-* [http://docs.telerik.com/kendo-ui/api/javascript/data/datasource\#methods-indexOf](http://docs.telerik.com/kendo-ui/api/javascript/data/datasource#methods-indexOf)  
+* [http://docs.telerik.com/kendo-ui/api/javascript/data/datasource\/methods/insert](http://docs.telerik.com/kendo-ui/api/javascript/data/datasource/methods/insert)  
+* [http://docs.telerik.com/kendo-ui/api/javascript/data/datasource\/methods/indexof](http://docs.telerik.com/kendo-ui/api/javascript/data/datasource/methods/indexof)  
   

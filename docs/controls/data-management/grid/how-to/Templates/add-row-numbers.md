@@ -7,7 +7,7 @@ slug: howto_addrownumbers_grid
 
 # Add Row Numbers
 
-The following example demonstrates how to implement row numbers in a Grid by using the [`page()`](/api/javascript/data/datasource#methods-page) and [`pageSize()`](/api/javascript/data/datasource#methods-pageSize) methods of the Data Source.
+The following example demonstrates how to implement row numbers in a Grid by using the [`page()`](/api/javascript/data/datasource/methods/page) and [`pageSize()`](/api/javascript/data/datasource/methods/pagesize) methods of the Data Source.
 
 ###### Example
 

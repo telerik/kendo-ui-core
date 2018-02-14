@@ -29,10 +29,10 @@ I want to have a Grid with some of its checkboxes checked by default when it loa
 
 ## Solution
 
-1. In the [`dataBound`](http://docs.telerik.com/kendo-ui/api/javascript/ui/grid#events-dataBound) event handler, get and save all the rows.
+1. In the [`dataBound`](http://docs.telerik.com/kendo-ui/api/javascript/ui/grid/events/databound) event handler, get and save all the rows.
 1. Loop through the rows by using the jQuery [`each`](https://api.jquery.com/each/) method.
-1. Get every row data by using the [`dataItem`](http://docs.telerik.com/kendo-ui/api/javascript/ui/grid#methods-dataItem) method.
-1. Set the current row as selected by using the [`select`](http://docs.telerik.com/kendo-ui/api/javascript/ui/grid#methods-select) method.
+1. Get every row data by using the [`dataItem`](http://docs.telerik.com/kendo-ui/api/javascript/ui/grid/methods/dataitem) method.
+1. Set the current row as selected by using the [`select`](http://docs.telerik.com/kendo-ui/api/javascript/ui/grid/methods/select) method.
 
 ```html
 <div id="example">
@@ -108,4 +108,4 @@ The checkbox selectable column is available as of the Kendo UI R2 2017 SP1 relea
 
 * [Frequently Asked Questions on Checkbox Selection]({% slug frequently_asked_questions_grid %})
 * [Grid Checkbox Selection Demo](http://demos.telerik.com/kendo-ui/grid/checkbox-selection)
-* [API Reference for the columns.selectable Configuration](http://docs.telerik.com/kendo-ui/api/javascript/ui/grid#configuration-columns.selectable)
+* [API Reference for the columns.selectable Configuration](http://docs.telerik.com/kendo-ui/api/javascript/ui/grid/configuration/columns.selectable)

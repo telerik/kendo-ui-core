@@ -25,9 +25,9 @@ How can I populate the **Assignments** edit dialog based on the `StartDate` and 
 
 ## Solution
 
-1. Handle the [`edit`](https://docs.telerik.com/kendo-ui/api/javascript/ui/gantt#events-edit) event of the Gantt.
+1. Handle the [`edit`](https://docs.telerik.com/kendo-ui/api/javascript/ui/gantt/events/edit) event of the Gantt.
 1. In the `edit` event, retrieve and store the start and end date in global variables.
-1. Trigger the [`read()`](https://docs.telerik.com/kendo-ui/api/javascript/data/datasource#methods-read) call on the Resources DataSource.
+1. Trigger the [`read()`](https://docs.telerik.com/kendo-ui/api/javascript/data/datasource/methods/read) call on the Resources DataSource.
 
     ```JavaScript
     function onEdit(e) {
@@ -41,7 +41,7 @@ How can I populate the **Assignments** edit dialog based on the `StartDate` and 
     }
     ```
 
-1. Configure a [`Data()`](https://docs.telerik.com/kendo-ui/api/javascript/data/datasource#configuration-transport.read.data) function for the Resources Read action. As a result, you will be able to filter the returned Resources based on the start and end time of the task on the server.
+1. Configure a [`Data()`](https://docs.telerik.com/kendo-ui/api/javascript/data/datasource/configuration/transport.read.data) function for the Resources Read action. As a result, you will be able to filter the returned Resources based on the start and end time of the task on the server.
 
     ```C#
     .Resources(r => r

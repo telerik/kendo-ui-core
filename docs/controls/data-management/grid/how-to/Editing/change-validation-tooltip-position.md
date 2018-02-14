@@ -12,7 +12,7 @@ By design, validation messages inside the Grid are tooltips that are displayed o
 The following example demonstrates how to change this behavior and display the validation messages at a specific position in the popup edit form of the Grid.
 
 The approach relies on the following milestones:
-* Usage of a [popup edit form template](/api/javascript/ui/grid#configuration-editable.template).
+* Usage of a [popup edit form template](/api/javascript/ui/grid/configuration/editable.template).
 * The validation messages are put in [placeholders]({% slug overview_kendoui_validator_widget %}#customization-of-tooltip-position) that are wrapped in custom parents and positioned with the help of custom CSS styles.
 * The [width of the popup edit form may need to be increased]({% slug howto_increase_popup_edit_formand_textbox_grid %}).
 

@@ -100,7 +100,7 @@ Each Grid is exported in a separate Excel sheet. For additional information abou
 
 ## See Also
 
-* [JavaScript API Reference of the Grid](/api/javascript/ui/grid#configuration-excel)
+* [JavaScript API Reference of the Grid](/api/javascript/ui/grid/configuration/excel)
 * [How to Align Footer Cells]({% slug howto_alignfootercells_grid %})
 * [How to Configure Color for Alternating Rows]({% slug howto_configure_color_alternating_rows_grid %})
 * [How to Export Detail Grids]({% slug howto_exportto_excel_masterand_detail_grid %})

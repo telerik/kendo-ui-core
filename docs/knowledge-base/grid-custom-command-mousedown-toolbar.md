@@ -171,12 +171,12 @@ How can I create custom buttons which respond to the jQuery `mousedown` event?
 For more information on how to implement the approach, refer to the following resources:
 
 <ul>
-    <li><a href="https://docs.telerik.com/kendo-ui/api/javascript/ui/grid#configuration-toolbar">https://docs.telerik.com/kendo-ui/api/javascript/ui/grid#configuration-toolbar</a></li>
-    <li><a href="https://docs.telerik.com/kendo-ui/api/javascript/ui/grid#configuration-toolbar.iconClass">https://docs.telerik.com/kendo-ui/api/javascript/ui/grid#configuration-toolbar.iconClass</a></li>
-    <li><a href="https://docs.telerik.com/kendo-ui/api/javascript/ui/grid#configuration-toolbar.text">https://docs.telerik.com/kendo-ui/api/javascript/ui/grid#configuration-toolbar.text</a></li>
-    <li><a href="https://docs.telerik.com/kendo-ui/api/javascript/ui/grid#methods-addRow">https://docs.telerik.com/kendo-ui/api/javascript/ui/grid#methods-addRow</a></li>
-    <li><a href="https://docs.telerik.com/kendo-ui/api/javascript/ui/grid#methods-saveChanges">https://docs.telerik.com/kendo-ui/api/javascript/ui/grid#methods-saveChanges</a></li>
-    <li><a href="https://docs.telerik.com/kendo-ui/api/javascript/ui/grid#methods-saveChanges"></a><a href="https://docs.telerik.com/kendo-ui/api/javascript/ui/grid#methods-cancelChanges">https://docs.telerik.com/kendo-ui/api/javascript/ui/grid#methods-cancelChanges</a></li>
+    <li><a href="https://docs.telerik.com/kendo-ui/api/javascript/ui/grid/configuration/toolbar">https://docs.telerik.com/kendo-ui/api/javascript/ui/grid/configuration/toolbar</a></li>
+    <li><a href="https://docs.telerik.com/kendo-ui/api/javascript/ui/grid/configuration/toolbar.iconClass">https://docs.telerik.com/kendo-ui/api/javascript/ui/grid/configuration/toolbar.iconClass</a></li>
+    <li><a href="https://docs.telerik.com/kendo-ui/api/javascript/ui/grid/configuration/toolbar.text">https://docs.telerik.com/kendo-ui/api/javascript/ui/grid/configuration/toolbar.text</a></li>
+    <li><a href="https://docs.telerik.com/kendo-ui/api/javascript/ui/grid/methods/addRow">https://docs.telerik.com/kendo-ui/api/javascript/ui/grid/methods/addRow</a></li>
+    <li><a href="https://docs.telerik.com/kendo-ui/api/javascript/ui/grid/methods/saveChanges">https://docs.telerik.com/kendo-ui/api/javascript/ui/grid/methods/saveChanges</a></li>
+    <li><a href="https://docs.telerik.com/kendo-ui/api/javascript/ui/grid/methods/saveChanges"></a><a href="https://docs.telerik.com/kendo-ui/api/javascript/ui/grid/methods/cancelChanges">https://docs.telerik.com/kendo-ui/api/javascript/ui/grid/methods/cancelChanges</a></li>
     <li><a href="https://api.jquery.com/mousedown/">https://api.jquery.com/mousedown/</a></li>
     <li><a href="https://api.jquery.com/unbind/">https://api.jquery.com/unbind/</a></li>
     <li><a href="https://api.jquery.com/blur/">https://api.jquery.com/blur/</a></li>

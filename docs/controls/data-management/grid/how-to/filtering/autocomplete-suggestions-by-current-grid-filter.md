@@ -12,8 +12,8 @@ The AutoComplete filter of the Grid is bound to the whole data source of the Gri
 
 However, it is possible to show the AutoComplete results only for the current filter of the Grid. To achieve this  by following the steps below:
 
-1. Handle the [`dataBound` event of the Grid](/api/javascript/ui/grid#events-dataBound).
-2. Get the [data source filter of the Grid](/api/javascript/data/datasource.html#methods-filter) in the dataBound handler and set it as a filter to the AutoComplete data source.
+1. Handle the [`dataBound` event of the Grid](/api/javascript/ui/grid/events/databound).
+2. Get the [data source filter of the Grid](/api/javascript/data/datasource.html/methods/filter) in the dataBound handler and set it as a filter to the AutoComplete data source.
 
 The following example demonstrates how to use the AutoComplete for filtering and consider the current filter of the Grid.
 

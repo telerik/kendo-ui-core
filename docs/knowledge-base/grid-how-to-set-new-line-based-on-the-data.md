@@ -29,10 +29,10 @@ How can I set the `/ n` in the response string and display it in the Grid column
 
 ## Solution
 
-To display the text on two lines without implementing the [`column.template`](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid#configuration-columns.template), use the `br` tag.  
+To display the text on two lines without implementing the [`column.template`](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid/configuration/columns.template), use the `br` tag.
 
 1. Send the tag as part of the response.
-1. Set [`encoding`](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid#configuration-columns.encoded) to `false`.  
+1. Set [`encoding`](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid/configuration/columns.encoded) to `false`.
 
 ````html
 <div id="grid"></div>

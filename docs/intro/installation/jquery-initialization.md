@@ -19,7 +19,7 @@ Some Kendo UI widgets have specific requirements about the element types they mu
 
 While it is theoretically possible to initialize several different Kendo UI widgets from the same DOM element, it might lead to undesired side effects.
 
-> **Important**  
+> **Important**
 >
 > It is strongly recommended to initialize the Kendo UI widgets from HTML elements, which are part of the DOM tree. Creating widgets from [document fragments](https://developer.mozilla.org/en-US/docs/Web/API/DocumentFragment) might cause undesired side effects or lead to JavaScript errors.
 
@@ -63,7 +63,7 @@ The following example demonstrates how to instantiate multiple Buttons with a si
     </script>
 ```
 
-> **Important**  
+> **Important**
 >
 > The jQuery convention for returning the selected DOM element from most methods applies to the widget initialization methods. This allows for chaining jQuery methods.
 
@@ -89,7 +89,7 @@ It is theoretically possible to initialize a Kendo UI widget which is inside an 
 
 ## Duplicate Initialization
 
-When initializing a widget, the goal is to get the instance object. However, recreating a widget instance turns out to be a common issue.   
+When initializing a widget, the goal is to get the instance object. However, recreating a widget instance turns out to be a common issue.
 
 ### Overview
 
@@ -142,7 +142,7 @@ To check whether a widget instance already exists for a certain DOM element, use
 
 To configure a Kendo UI widget, pass a configuration object&mdash;key/value pairs&mdash;as an argument to the jQuery plug-in method. The supported configuration options and events for each widget are listed in the [API reference](/api/javascript/kendo) of the respective widget. The configuration object might also contain event handlers that will be bound to the corresponding widget events.
 
-The following example demonstrates how to set the [`height`](/api/javascript/ui/grid#configuration-height), [`columns`](/api/javascript/ui/grid#configuration-columns) and [`dataSource`](/api/javascript/ui/grid#configuration-dataSource) configuration options of the Grid widget.
+The following example demonstrates how to set the [`height`](/api/javascript/ui/grid/configuration/height), [`columns`](/api/javascript/ui/grid/configuration/columns) and [`dataSource`](/api/javascript/ui/grid/configuration/datasource) configuration options of the Grid widget.
 
 ###### Example
 

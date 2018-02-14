@@ -8,7 +8,7 @@ position: 6
 
 # Sheets
 
-To create multiple sheets in an Excel workbook, use the [`sheets`](/api/javascript/ooxml/workbook#configuration-sheets) option, as demonstrated in the example below. Every item from that array represents a new sheet with its own rows and cells.
+To create multiple sheets in an Excel workbook, use the [`sheets`](/api/javascript/ooxml/workbook/configuration/sheets) option, as demonstrated in the example below. Every item from that array represents a new sheet with its own rows and cells.
 
 ###### Example
 

@@ -29,7 +29,7 @@ How can I group only one column at a time in the Kendo UI Grid? How can I restri
 
 ## Solution
 
-1. Handle the [`dataBinding`](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid#events-dataBinding) event of the Grid.
+1. Handle the [`dataBinding`](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid/events/databinding) event of the Grid.
 1. In the event handler and based on the number of groups, leave only the last one.
 
 ```html

@@ -11,9 +11,9 @@ You project might require you to edit records by using a detail template along w
 
 To achieve this behavior:
 
-* Use the [`detailTemplate`](/api/javascript/ui/grid#configuration-detailTemplate) configuration option to create a template that contains the views for both the read-only and the editing mode.
-* Handle the [`edit` event](/api/javascript/ui/grid#events-edit) to bind the custom editor from the detail template to the respective model field. Toggle the visibility of the detail template views&mdash;that is, show the editor and hide the one, used for displaying the value.
-* Similarly, handle the [`save`](/api/javascript/ui/grid#events-save) and the [`cancel`](/api/javascript/ui/grid#events-cancel) events to toggle back the detail template views.
+* Use the [`detailTemplate`](/api/javascript/ui/grid/configuration/detailtemplate) configuration option to create a template that contains the views for both the read-only and the editing mode.
+* Handle the [`edit` event](/api/javascript/ui/grid/events/edit) to bind the custom editor from the detail template to the respective model field. Toggle the visibility of the detail template views&mdash;that is, show the editor and hide the one, used for displaying the value.
+* Similarly, handle the [`save`](/api/javascript/ui/grid/events/save) and the [`cancel`](/api/javascript/ui/grid/events/cancel) events to toggle back the detail template views.
 
 The following example demonstrates how to edit records by using a different detail template in the editing mode of the Grid.
 

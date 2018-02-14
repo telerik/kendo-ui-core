@@ -9,7 +9,7 @@ slug: howto_zoomonarea_map
 
 The following example demonstrates how to center the map view on a specified area in the Map widget.
 
-To define the area, use a set of markers. You can use any list of locations. Then, you need to build an [`extent`](/api/javascript/dataviz/map/extent) that encompasses all locations and [set it on the map as a visible area](/api/javascript/dataviz/ui/map#methods-extent).
+To define the area, use a set of markers. You can use any list of locations. Then, you need to build an [`extent`](/api/javascript/dataviz/map/extent) that encompasses all locations and [set it on the map as a visible area](/api/javascript/dataviz/ui/map/methods/extent).
 
 ###### Example
 

@@ -37,11 +37,11 @@ component: charts
 
 My Chart shows legends for all the series that are multiplied by the grouping and configured against the data source. Sometimes I will have no data against some of the dynamically created series.
 
-How can I hide the specific legend items for which I will not have any data to show?  
+How can I hide the specific legend items for which I will not have any data to show?
 
 ## Solution
 
-To allow the use of custom logic and determine whether a legend item will be added or not, use the [`legend.item.visual`](http://docs.telerik.com/kendo-ui/api/javascript/dataviz/ui/chart#configuration-legend.item.visual) property of the Chart.
+To allow the use of custom logic and determine whether a legend item will be added or not, use the [`legend.item.visual`](http://docs.telerik.com/kendo-ui/api/javascript/dataviz/ui/chart/configuration/legend.item.visual) property of the Chart.
 
 ```html
   <div id="chart"></div>

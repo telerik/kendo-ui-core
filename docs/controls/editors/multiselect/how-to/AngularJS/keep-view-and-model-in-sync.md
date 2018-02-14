@@ -13,7 +13,7 @@ slug: howto_keepviewandmodelinsync_angular_multiselect
 
 To keep the view and model in sync:
 
-1. Attach an event listener to the [`select`](/api/javascript/ui/multiselect#events-select) event by using `k-on-select`.
+1. Attach an event listener to the [`select`](/api/javascript/ui/multiselect/events/select) event by using `k-on-select`.
 
 2. If `"Unknown"` is selected, all other options are deselected by assigning the value of `"Unknown"` to the model.
 
@@ -21,7 +21,7 @@ To keep the view and model in sync:
 
 3. If any other option is selected, find the `"Unknown"` option and remove it from the model. Then, add the current selection.
 
-You can implement a similar result by following the same steps and using the [`change`](/api/javascript/ui/multiselect#events-change) event handler. In this case, it is not necessary to add the current selection from **Step 3**.
+You can implement a similar result by following the same steps and using the [`change`](/api/javascript/ui/multiselect/events/change) event handler. In this case, it is not necessary to add the current selection from **Step 3**.
 
 The following example demonstrates how to keep in sync the view and the model of a Kendo UI MultiSelect in AngularJS applications.
 

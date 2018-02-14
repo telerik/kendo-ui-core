@@ -161,4 +161,4 @@ How can I check if a certain value corresponds to a DataItem property of the sel
 
 ## See Also
 
-* [API Reference of the `select` Method](https://docs.telerik.com/kendo-ui/api/javascript/ui/listview#methods-select)
+* [API Reference of the `select` Method](https://docs.telerik.com/kendo-ui/api/javascript/ui/listview/methods/select)

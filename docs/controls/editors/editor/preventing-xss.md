@@ -38,12 +38,12 @@ The Editor itself can do little to protect you from XSS attacks because maliciou
 
 By design, the Editor does not allow the execution of scripts inside its content area. This is achieved by transforming all `script` tags in the content to `k:script` tags.
 
-When the Editor content is submitted, the `k:script` tags are either completely removed, or transformed back to `script` tags. This depends on the [`serialization.scripts`](/api/javascript/ui/editor#configuration-serialization.scripts) property.
+When the Editor content is submitted, the `k:script` tags are either completely removed, or transformed back to `script` tags. This depends on the [`serialization.scripts`](/api/javascript/ui/editor/configuration/serialization.scripts) property.
 
 To allow the execution of scripts inside the Editor content:
 
 * Enable the script serialization.
-* Obtain the value of the Editor through its [`value()`](/api/javascript/ui/editor#methods-value) method.
+* Obtain the value of the Editor through its [`value()`](/api/javascript/ui/editor/methods/value) method.
 * Extract the `script` tags.
 * Place the `script` tags elsewhere on the page where they can be evaluated by the browser.
 

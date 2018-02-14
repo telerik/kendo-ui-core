@@ -13,11 +13,11 @@ The following example demonstrates how to save an entered custom item to the rem
 To achieve this:
 
 * Configure the ComboBox DataSource for [`create`](/framework/datasource/crud) operations.
-* Use the [`change` event](/api/javascript/ui/combobox#events-change) of the ComboBox to detect when a custom text is typed.
-* In the `change` handler, check what the [index of the selected item](/api/javascript/ui/combobox#methods-select ) is or retrieve the [current data item](/api/javascript/ui/combobox#methods-dataItem).
-* If the selected index is `-1` (minus one), or if the data item is `null`, obtain the custom user input with the [`text()`](/api/javascript/ui/combobox#methods-text) method.
-* [Add](/api/javascript/data/datasource#methods-add) a new data item to the ComboBox [dataSource](/api/javascript/ui/combobox#fields-dataSource ). This will trigger a request to the remote service if [`autoSync`](/api/javascript/data/datasource#configuration-autoSync) is set to `true`. Otherwise, [`sync()`](/api/javascript/data/datasource#methods-sync) manually.
-* Before adding the new data item, attach a [one-time](/intro/widget-basics/events-and-methods#events) [`dataBound`](/api/javascript/ui/combobox#events-dataBound) handler and in that handler, use the [`text()`](/api/javascript/ui/combobox#methods-text) method to re-apply the custom user input. In the example below, this is as an existing data item.
+* Use the [`change` event](/api/javascript/ui/combobox/events/change) of the ComboBox to detect when a custom text is typed.
+* In the `change` handler, check what the [index of the selected item](/api/javascript/ui/combobox/methods/select ) is or retrieve the [current data item](/api/javascript/ui/combobox/methods/dataitem).
+* If the selected index is `-1` (minus one), or if the data item is `null`, obtain the custom user input with the [`text()`](/api/javascript/ui/combobox/methods/text) method.
+* [Add](/api/javascript/data/datasource/methods/add) a new data item to the ComboBox [dataSource](/api/javascript/ui/combobox/fields/datasource ). This will trigger a request to the remote service if [`autoSync`](/api/javascript/data/datasource/configuration/autosync) is set to `true`. Otherwise, [`sync()`](/api/javascript/data/datasource/methods/sync) manually.
+* Before adding the new data item, attach a [one-time](/intro/widget-basics/events-and-methods#events) [`dataBound`](/api/javascript/ui/combobox/events/databound) handler and in that handler, use the [`text()`](/api/javascript/ui/combobox/methods/text) method to re-apply the custom user input. In the example below, this is as an existing data item.
 
 > **Important**
 >
@@ -28,7 +28,7 @@ To achieve this:
 ```html
 <div id="example">
 
-  <input id="combobox" style="width: 240px" />    
+  <input id="combobox" style="width: 240px" />
 
 </div>
 
@@ -60,7 +60,7 @@ To achieve this:
               // this request structure is required by our data service. Related to batch: true
               return { models: kendo.stringify(options.models) };
             }
-          }            
+          }
         },
         schema: {
           model: {
@@ -70,7 +70,7 @@ To achieve this:
               ProductName: { type: "string" },
             }
           }
-        }          
+        }
       }
     });
 

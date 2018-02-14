@@ -36,7 +36,7 @@ Depending on the element from which the Editor is created, it assumes 2 mode typ
 
 If you initialize the Editor from a `<textarea>` element, it assumes its classic mode. The `textarea` is not visible and is used to hold the value of the widget. You can type in the `contenteditable iframe` that is created. In the past, `iframes` used to be the only element that allowed for the content to be editable in most browsers.
 
-The classic Editor posts its value automatically because it is based on a `form` element. The tools of the Editor are always visible. Its content does not reside on the main web page and the styling of the page does not influence the editable content. To apply custom styles to the editable content, [inject them through the configuration of the Editor](/api/javascript/ui/editor#configuration-stylesheets).
+The classic Editor posts its value automatically because it is based on a `form` element. The tools of the Editor are always visible. Its content does not reside on the main web page and the styling of the page does not influence the editable content. To apply custom styles to the editable content, [inject them through the configuration of the Editor](/api/javascript/ui/editor/configuration/stylesheets).
 
 [Demo of the Classic Mode Editor](http://demos.telerik.com/kendo-ui/web/editor/index.html)
 
@@ -52,7 +52,7 @@ The inline Editor does not post its value. Posting the value of an inline Editor
 
 [Demo of the Inline Mode Editor](http://demos.telerik.com/kendo-ui/web/editor/inline-editing.html)
 
-> **Important**  
+> **Important**
 >
 > Because of the limited `iframe` support provided by the iOS Safari browser, it is recommended to use the inline Editor mode on iOS devices.
 

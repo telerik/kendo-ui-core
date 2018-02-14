@@ -12,7 +12,7 @@ component: charts
 
 ### autoBind `Boolean` *(default: true)*
 
-If set to `false` the widget will not bind to the data source during initialization. In this case data binding will occur when the [change](/api/javascript/data/datasource#events-change) event of the
+If set to `false` the widget will not bind to the data source during initialization. In this case data binding will occur when the [change](/api/javascript/data/datasource/events/change) event of the
 data source is fired. By default the widget will bind to the data source specified in the configuration.
 
 > Setting `autoBind` to `false` is useful when multiple widgets are bound to the same data source. Disabling automatic binding ensures that the shared data source doesn't make more than one request to the remote service.
@@ -139,7 +139,7 @@ The tooltip font.
 
 ### axisDefaults.crosshair.tooltip.format `String` *(default: "{0}")*
 
-The format used to display the tooltip. Uses [kendo.format](/api/javascript/kendo#methods-format). Contains one placeholder ("{0}") which represents the category value.
+The format used to display the tooltip. Uses [kendo.format](/api/javascript/kendo/methods/format). Contains one placeholder ("{0}") which represents the category value.
 
 ### axisDefaults.crosshair.tooltip.padding `Number|Object` *(default: 0)*
 
@@ -163,7 +163,7 @@ The top padding of the crosshair tooltip.
 
 ### axisDefaults.crosshair.tooltip.template `String|Function`
 
-The [template](/api/javascript/kendo#methods-template) which renders the tooltip.
+The [template](/api/javascript/kendo/methods/template) which renders the tooltip.
 
 The fields which can be used in the template are:
 
@@ -191,7 +191,7 @@ The font style of the labels.
 
 ### axisDefaults.labels.format `String` *(default: "{0}")*
 
-The format used to display the labels. Uses [kendo.format](/api/javascript/kendo#methods-format). Contains one placeholder ("{0}") which represents the category value.
+The format used to display the labels. Uses [kendo.format](/api/javascript/kendo/methods/format). Contains one placeholder ("{0}") which represents the category value.
 
 ### axisDefaults.labels.margin `Number|Object` *(default: 0)*
 
@@ -259,7 +259,7 @@ The label rendering step - render every n-th label. By default every label is re
 
 ### axisDefaults.labels.template `String|Function`
 
-The [template](/api/javascript/kendo#methods-template) which renders the labels.
+The [template](/api/javascript/kendo/methods/template) which renders the labels.
 
 The fields which can be used in the template are:
 
@@ -699,8 +699,6 @@ The months unit steps.
 ### categoryAxis.autoBaseUnitSteps.years `Array` *(default: [1, 2, 3, 5, 10, 25, 50])*
 
 The years unit steps.
-
-#### Example
 
 ### categoryAxis.axisCrossingValue `Object|Date|Array`
 
@@ -1220,7 +1218,7 @@ The tooltip font.
 
 ### categoryAxis.crosshair.tooltip.format `String` *(default: "{0}")*
 
-The format used to display the tooltip. Uses [kendo.format](/api/javascript/kendo#methods-format). Contains one placeholder ("{0}") which represents the category value.
+The format used to display the tooltip. Uses [kendo.format](/api/javascript/kendo/methods/format). Contains one placeholder ("{0}") which represents the category value.
 
 #### Example - set the category axis crosshair tooltip format
 
@@ -1378,7 +1376,7 @@ The top padding of the crosshair tooltip.
 
 ### categoryAxis.crosshair.tooltip.template `String|Function`
 
-The [template](/api/javascript/kendo#methods-template) which renders the tooltip.
+The [template](/api/javascript/kendo/methods/template) which renders the tooltip.
 
 The fields which can be used in the template are:
 
@@ -1786,7 +1784,7 @@ The `{0}` placeholder represents the category value.
 The chart will choose the appropriate format for the current [categoryAxis.baseUnit](#configuration-categoryAxis.baseUnit).
 Setting the [categoryAxis.labels.format](#configuration-categoryAxis.labels.format) option will override the date formats.
 
-See also: [kendo.format](/api/javascript/kendo#methods-format).
+See also: [kendo.format](/api/javascript/kendo/methods/format).
 
 > Not supported for radar charts. Use [categoryAxis.labels.format](#configuration-categoryAxis.labels.format) instead.
 
@@ -1818,6 +1816,7 @@ See also: [kendo.format](/api/javascript/kendo#methods-format).
 The format used when [categoryAxis.baseUnit](#configuration-categoryAxis.baseUnit) is set to "days".
 
 #### Example - set the days format
+
     <div id="chart"></div>
     <script>
     $("#chart").kendoChart({
@@ -1845,6 +1844,7 @@ The format used when [categoryAxis.baseUnit](#configuration-categoryAxis.baseUni
 The format used when [categoryAxis.baseUnit](#configuration-categoryAxis.baseUnit) is set to "hours".
 
 #### Example - set the hours format
+
     <div id="chart"></div>
     <script>
     $("#chart").kendoChart({
@@ -1873,6 +1873,7 @@ The format used when [categoryAxis.baseUnit](#configuration-categoryAxis.baseUni
 The format used when [categoryAxis.baseUnit](#configuration-categoryAxis.baseUnit) is set to "months".
 
 #### Example - set the months format
+
     <div id="chart"></div>
     <script>
     $("#chart").kendoChart({
@@ -1901,6 +1902,7 @@ The format used when [categoryAxis.baseUnit](#configuration-categoryAxis.baseUni
 The format used when [categoryAxis.baseUnit](#configuration-categoryAxis.baseUnit) is set to "weeks".
 
 #### Example - set the weeks format
+
     <div id="chart"></div>
     <script>
     $("#chart").kendoChart({
@@ -1929,6 +1931,7 @@ The format used when [categoryAxis.baseUnit](#configuration-categoryAxis.baseUni
 The format used when [categoryAxis.baseUnit](#configuration-categoryAxis.baseUnit) is set to "years".
 
 #### Example - set the years format
+
     <div id="chart"></div>
     <script>
     $("#chart").kendoChart({
@@ -1975,7 +1978,7 @@ The font style of the labels.
 
 ### categoryAxis.labels.format `String` *(default: "{0}")*
 
-The format used to display the labels. Uses [kendo.format](/api/javascript/kendo#methods-format). Contains one placeholder ("{0}") which represents the category value.
+The format used to display the labels. Uses [kendo.format](/api/javascript/kendo/methods/format). Contains one placeholder ("{0}") which represents the category value.
 
 #### Example - set the category axis label format
 
@@ -2369,7 +2372,7 @@ The label rendering step - render every n-th label. By default every label is re
 
 ### categoryAxis.labels.template `String|Function`
 
-The [template](/api/javascript/kendo#methods-template) which renders the labels.
+The [template](/api/javascript/kendo/methods/template) which renders the labels.
 
 The fields which can be used in the template are:
 
@@ -4856,7 +4859,7 @@ The font style of the label.
 
 ### categoryAxis.notes.label.template `String|Function`
 
-The [template](/api/javascript/kendo#methods-template) which renders the labels.
+The [template](/api/javascript/kendo/methods/template) which renders the labels.
 
 The fields which can be used in the template are:
 
@@ -4931,7 +4934,7 @@ The rotation angle of the label. By default the label are not rotated.
 
 ### categoryAxis.notes.label.format `String` *(default: "{0}")*
 
-The format used to display the notes label. Uses [kendo.format](/api/javascript/kendo#methods-format). Contains one placeholder ("{0}") which represents the category value.
+The format used to display the notes label. Uses [kendo.format](/api/javascript/kendo/methods/format). Contains one placeholder ("{0}") which represents the category value.
 
 #### Example - set the category axis notes label format
 
@@ -5459,7 +5462,7 @@ The font style of the note label.
 
 ### categoryAxis.notes.data.label.template `String|Function`
 
-The [template](/api/javascript/kendo#methods-template) which renders the labels.
+The [template](/api/javascript/kendo/methods/template) which renders the labels.
 
 The fields which can be used in the template are:
 
@@ -5540,7 +5543,7 @@ The rotation angle of the label. By default the label are not rotated.
 
 ### categoryAxis.notes.data.label.format `String` *(default: "{0}")*
 
-The format used to display the note label. Uses [kendo.format](/api/javascript/kendo#methods-format). Contains one placeholder ("{0}") which represents the category value.
+The format used to display the note label. Uses [kendo.format](/api/javascript/kendo/methods/format). Contains one placeholder ("{0}") which represents the category value.
 
 #### Example - set the category axis note label format
 
@@ -6431,7 +6434,7 @@ The font style of the labels.
 
 ### legend.inactiveItems.labels.template `String|Function`
 
-The [template](/api/javascript/kendo#methods-template) which renders the labels.
+The [template](/api/javascript/kendo/methods/template) which renders the labels.
 
 The fields which can be used in the template are:
 
@@ -6858,7 +6861,7 @@ The top padding of the labels.
 
 ### legend.labels.template `String|Function`
 
-The [template](/api/javascript/kendo#methods-template) which renders the labels.
+The [template](/api/javascript/kendo/methods/template) which renders the labels.
 
 The fields which can be used in the template are:
 
@@ -11616,7 +11619,7 @@ The font style of the labels.
 
 ### series.labels.format `String|Function` *(default: "{0}")*
 
-The format of the labels. Uses [kendo.format](/api/javascript/kendo#methods-format).
+The format of the labels. Uses [kendo.format](/api/javascript/kendo/methods/format).
 
 #### Example - set the chart series label format
 
@@ -11891,7 +11894,7 @@ The rotation angle of the labels. By default, the labels are not rotated.
 
 ### series.labels.template `String|Function`
 
-The [template](/api/javascript/kendo#methods-template) which renders the chart series label.
+The [template](/api/javascript/kendo/methods/template) which renders the chart series label.
 
 The fields which can be used in the template are:
 
@@ -12017,7 +12020,7 @@ The font style of the **from** labels.
 
 ### series.labels.from.format `String|Function` *(default: "{0}")*
 
-The format of the **from** labels. Uses [kendo.format](/api/javascript/kendo#methods-format).
+The format of the **from** labels. Uses [kendo.format](/api/javascript/kendo/methods/format).
 
 ### series.labels.from.margin `Number|Object` *(default: 5)*
 
@@ -12074,7 +12077,7 @@ The position of the **from** labels.
 
 ### series.labels.from.template `String|Function`
 
-The [template](/api/javascript/kendo#methods-template) which renders the chart series **from** label.
+The [template](/api/javascript/kendo/methods/template) which renders the chart series **from** label.
 
 The fields which can be used in the template are:
 
@@ -12135,7 +12138,7 @@ The font style of the **to** labels.
 
 ### series.labels.to.format `String|Function` *(default: "{0}")*
 
-The format of the **to** labels. Uses [kendo.format](/api/javascript/kendo#methods-format).
+The format of the **to** labels. Uses [kendo.format](/api/javascript/kendo/methods/format).
 
 ### series.labels.to.margin `Number|Object` *(default: 5)*
 
@@ -12192,7 +12195,7 @@ The position of the **to** labels.
 
 ### series.labels.to.template `String|Function`
 
-The [template](/api/javascript/kendo#methods-template) which renders the chart series **to** label.
+The [template](/api/javascript/kendo/methods/template) which renders the chart series **to** label.
 
 The fields which can be used in the template are:
 
@@ -13397,7 +13400,7 @@ The name of the chart series which is visible in the legend.
     });
     </script>
 
-The name can also be a [template](/api/javascript/kendo#methods-template) which sets the name of the series when bound to grouped data source.
+The name can also be a [template](/api/javascript/kendo/methods/template) which sets the name of the series when bound to grouped data source.
 
 The fields which can be used in the template are:
 
@@ -14141,7 +14144,7 @@ The tooltip font.
 
 ### series.tooltip.format `String`
 
-The format of the labels. Uses [kendo.format](/api/javascript/kendo#methods-format).
+The format of the labels. Uses [kendo.format](/api/javascript/kendo/methods/format).
 
 Format placeholders:
 
@@ -14301,7 +14304,7 @@ The top padding of the tooltip.
 
 ### series.tooltip.template `String|Function`
 
-The [template](/api/javascript/kendo#methods-template) which renders the tooltip.
+The [template](/api/javascript/kendo/methods/template) which renders the tooltip.
 
 The fields which can be used in the template are:
 
@@ -15028,7 +15031,7 @@ The font style of the label.
 
 ### series.notes.label.template `String|Function`
 
-The [template](/api/javascript/kendo#methods-template) which renders the labels.
+The [template](/api/javascript/kendo/methods/template) which renders the labels.
 
 The fields which can be used in the template are:
 
@@ -15115,7 +15118,7 @@ The rotation angle of the label. By default the label are not rotated.
 
 ### series.notes.label.format `String` *(default: "{0}")*
 
-The format used to display the notes label. Uses [kendo.format](/api/javascript/kendo#methods-format). Contains one placeholder ("{0}") which represents the axis value.
+The format used to display the notes label. Uses [kendo.format](/api/javascript/kendo/methods/format). Contains one placeholder ("{0}") which represents the axis value.
 
 #### Example - set the series notes label format
 
@@ -15808,7 +15811,7 @@ The font style of the labels.
 
 ### seriesDefaults.labels.format `String` *(default: "{0}")*
 
-The format of the labels. Uses [kendo.format](/api/javascript/kendo#methods-format).
+The format of the labels. Uses [kendo.format](/api/javascript/kendo/methods/format).
 
 #### Example - set the chart series label format
 
@@ -16065,7 +16068,7 @@ The rotation angle of the labels. By default, the labels are not rotated.
 
 ### seriesDefaults.labels.template `String|Function`
 
-The [template](/api/javascript/kendo#methods-template) which renders the chart series label.
+The [template](/api/javascript/kendo/methods/template) which renders the chart series label.
 
 The fields which can be used in the template are:
 
@@ -16196,7 +16199,7 @@ The font style of the **from** labels.
 
 ### seriesDefaults.labels.from.format `String` *(default: "{0}")*
 
-The format of the **from** labels. Uses [kendo.format](/api/javascript/kendo#methods-format).
+The format of the **from** labels. Uses [kendo.format](/api/javascript/kendo/methods/format).
 
 ### seriesDefaults.labels.from.margin `Number|Object` *(default: 0)*
 
@@ -16240,7 +16243,7 @@ The top padding of the **from** labels.
 
 ### seriesDefaults.labels.from.template `String|Function`
 
-The [template](/api/javascript/kendo#methods-template) which renders the chart series **from** label.
+The [template](/api/javascript/kendo/methods/template) which renders the chart series **from** label.
 
 The fields which can be used in the template are:
 
@@ -16304,7 +16307,7 @@ The font style of the **to** labels.
 
 ### seriesDefaults.labels.to.format `String` *(default: "{0}")*
 
-The format of the **to** labels. Uses [kendo.format](/api/javascript/kendo#methods-format).
+The format of the **to** labels. Uses [kendo.format](/api/javascript/kendo/methods/format).
 
 ### seriesDefaults.labels.to.margin `Number|Object` *(default: 0)*
 
@@ -16348,7 +16351,7 @@ The top padding of the **to** labels.
 
 ### seriesDefaults.labels.to.template `String|Function`
 
-The [template](/api/javascript/kendo#methods-template) which renders the chart series **to** label.
+The [template](/api/javascript/kendo/methods/template) which renders the chart series **to** label.
 
 The fields which can be used in the template are:
 
@@ -16792,7 +16795,7 @@ The tooltip font.
 
 ### seriesDefaults.tooltip.format `String`
 
-The format of the labels. Uses [kendo.format](/api/javascript/kendo#methods-format).
+The format of the labels. Uses [kendo.format](/api/javascript/kendo/methods/format).
 
 Format placeholders:
 
@@ -16951,7 +16954,7 @@ The top padding of the tooltip.
 
 ### seriesDefaults.tooltip.template `String|Function`
 
-The [template](/api/javascript/kendo#methods-template) which renders the tooltip.
+The [template](/api/javascript/kendo/methods/template) which renders the tooltip.
 
 The fields which can be used in the template are:
 
@@ -17563,7 +17566,7 @@ The font style of the label.
 
 ### seriesDefaults.notes.label.template `String|Function`
 
-The [template](/api/javascript/kendo#methods-template) which renders the labels.
+The [template](/api/javascript/kendo/methods/template) which renders the labels.
 
 The fields which can be used in the template are:
 
@@ -17656,7 +17659,7 @@ The rotation angle of the label. By default the label are not rotated.
 
 ### seriesDefaults.notes.label.format `String` *(default: "{0}")*
 
-The format used to display the notes label. Uses [kendo.format](/api/javascript/kendo#methods-format). Contains one placeholder ("{0}") which represents the axis value.
+The format used to display the notes label. Uses [kendo.format](/api/javascript/kendo/methods/format). Contains one placeholder ("{0}") which represents the axis value.
 
 #### Example - set the seriesDefaults notes label format
 
@@ -18480,7 +18483,7 @@ The tooltip font.
 
 ### tooltip.format `String`
 
-The format of the labels. Uses [kendo.format](/api/javascript/kendo#methods-format).
+The format of the labels. Uses [kendo.format](/api/javascript/kendo/methods/format).
 
 Format placeholders:
 
@@ -18668,7 +18671,7 @@ If set to `true` the chart will display a single tooltip for every category.
 
 ### tooltip.sharedTemplate `String|Function`
 
-The [template](/api/javascript/kendo#methods-template) which renders the shared tooltip.
+The [template](/api/javascript/kendo/methods/template) which renders the shared tooltip.
 
 The fields which can be used in the template are:
 
@@ -18703,7 +18706,7 @@ The fields which can be used in the template are:
 
 ### tooltip.template `String|Function`
 
-The [template](/api/javascript/kendo#methods-template) which renders the tooltip.
+The [template](/api/javascript/kendo/methods/template) which renders the tooltip.
 
 The fields which can be used in the template are:
 
@@ -19212,7 +19215,7 @@ The tooltip font.
 
 ### valueAxis.crosshair.tooltip.format `String` *(default: "{0}")*
 
-The format used to display the tooltip. Uses [kendo.format](/api/javascript/kendo#methods-format). Contains one placeholder ("{0}") which represents the value value.
+The format used to display the tooltip. Uses [kendo.format](/api/javascript/kendo/methods/format). Contains one placeholder ("{0}") which represents the value value.
 
 #### Example - set the value axis crosshair tooltip format
 
@@ -19364,7 +19367,7 @@ The top padding of the crosshair tooltip.
 
 ### valueAxis.crosshair.tooltip.template `String|Function`
 
-The [template](/api/javascript/kendo#methods-template) which renders the tooltip.
+The [template](/api/javascript/kendo/methods/template) which renders the tooltip.
 
 The fields which can be used in the template are:
 
@@ -19723,7 +19726,7 @@ The font style of the labels.
 
 ### valueAxis.labels.format `String` *(default: "{0}")*
 
-The format used to display the labels. Uses [kendo.format](/api/javascript/kendo#methods-format). Contains one placeholder ("{0}") which represents the category value.
+The format used to display the labels. Uses [kendo.format](/api/javascript/kendo/methods/format). Contains one placeholder ("{0}") which represents the category value.
 
 #### Example - set the value axis label format
 
@@ -20084,7 +20087,7 @@ Every n-th label is rendered where n is the step
 
 ### valueAxis.labels.template `String|Function`
 
-The [template](/api/javascript/kendo#methods-template) which renders the labels.
+The [template](/api/javascript/kendo/methods/template) which renders the labels.
 
 The fields which can be used in the template are:
 
@@ -22393,7 +22396,7 @@ The font style of the label.
 
 ### valueAxis.notes.label.template `String|Function`
 
-The [template](/api/javascript/kendo#methods-template) which renders the labels.
+The [template](/api/javascript/kendo/methods/template) which renders the labels.
 
 The fields which can be used in the template are:
 
@@ -22468,7 +22471,7 @@ The rotation angle of the label. By default the label are not rotated.
 
 ### valueAxis.notes.label.format `String` *(default: "{0}")*
 
-The format used to display the notes label. Uses [kendo.format](/api/javascript/kendo#methods-format). Contains one placeholder ("{0}") which represents the axis value.
+The format used to display the notes label. Uses [kendo.format](/api/javascript/kendo/methods/format). Contains one placeholder ("{0}") which represents the axis value.
 
 #### Example - set the value axis notes label format
 
@@ -22996,7 +22999,7 @@ The font style of the note label.
 
 ### valueAxis.notes.data.label.template `String|Function`
 
-The [template](/api/javascript/kendo#methods-template) which renders the labels.
+The [template](/api/javascript/kendo/methods/template) which renders the labels.
 
 The fields which can be used in the template are:
 
@@ -23077,7 +23080,7 @@ The rotation angle of the label. By default the label are not rotated.
 
 ### valueAxis.notes.data.label.format `String` *(default: "{0}")*
 
-The format used to display the note label. Uses [kendo.format](/api/javascript/kendo#methods-format). Contains one placeholder ("{0}") which represents the axis value.
+The format used to display the note label. Uses [kendo.format](/api/javascript/kendo/methods/format). Contains one placeholder ("{0}") which represents the axis value.
 
 #### Example - set the value axis note label format
 
@@ -23724,7 +23727,7 @@ The tooltip font.
 
 ### xAxis.crosshair.tooltip.format `String` *(default: "{0}")*
 
-The format used to display the tooltip. Uses [kendo.format](/api/javascript/kendo#methods-format). Contains one placeholder ("{0}") which represents the value value.
+The format used to display the tooltip. Uses [kendo.format](/api/javascript/kendo/methods/format). Contains one placeholder ("{0}") which represents the value value.
 
 #### Example - set the scatter chart x axis crosshair tooltip format
 
@@ -23876,7 +23879,7 @@ The top padding of the crosshair tooltip.
 
 ### xAxis.crosshair.tooltip.template `String|Function`
 
-The [template](/api/javascript/kendo#methods-template) which renders the tooltip.
+The [template](/api/javascript/kendo/methods/template) which renders the tooltip.
 
 The fields which can be used in the template are:
 
@@ -24221,7 +24224,7 @@ The culture to use when formatting date values. See the [globalization overview]
 
 ### xAxis.labels.dateFormats `Object`
 
-The format used to display the labels when the x values are dates. Uses [kendo.format](/api/javascript/kendo#methods-format). Contains one placeholder ("{0}") which represents the category value.
+The format used to display the labels when the x values are dates. Uses [kendo.format](/api/javascript/kendo/methods/format). Contains one placeholder ("{0}") which represents the category value.
 
 > The chart will choose the appropriate format for the current [xAxis.baseUnit](#configuration-xAxis.baseUnit). Setting the [categoryAxis.labels.format](#configuration-categoryAxis.labels.format) option will override the date formats.
 
@@ -24426,7 +24429,7 @@ The font style of the labels.
 
 ### xAxis.labels.format `String`
 
-The format used to display the labels. Uses [kendo.format](/api/javascript/kendo#methods-format). Contains one placeholder ("{0}") which represents the category value.
+The format used to display the labels. Uses [kendo.format](/api/javascript/kendo/methods/format). Contains one placeholder ("{0}") which represents the category value.
 
 #### Example - set the scatter chart x axis label format
 
@@ -24817,7 +24820,7 @@ The label rendering step - render every n-th label. By default every label is re
 
 ### xAxis.labels.template `String|Function`
 
-The [template](/api/javascript/kendo#methods-template) which renders the labels.
+The [template](/api/javascript/kendo/methods/template) which renders the labels.
 
 The fields which can be used in the template are:
 
@@ -26738,6 +26741,7 @@ The supported values are:
 is of type `Date`. Set the `xAsix.type` when such behavior is undesired.
 
 #### Example - set the scatter chart x axis type
+
     <div id="chart"></div>
     <script>
     $("#chart").kendoChart({
@@ -26757,7 +26761,7 @@ is of type `Date`. Set the `xAsix.type` when such behavior is undesired.
     });
     </script>
 
-### Example - using logarithmic x axis for the scatter chart
+#### Example - using logarithmic x axis for the scatter chart
 
     <div id="chart"></div>
     <script>
@@ -27177,7 +27181,7 @@ The font style of the label.
 
 ### xAxis.notes.label.template `String|Function`
 
-The [template](/api/javascript/kendo#methods-template) which renders the labels.
+The [template](/api/javascript/kendo/methods/template) which renders the labels.
 
 The fields which can be used in the template are:
 
@@ -27252,7 +27256,7 @@ The rotation angle of the label. By default the label are not rotated.
 
 ### xAxis.notes.label.format `String` *(default: "{0}")*
 
-The format used to display the notes label. Uses [kendo.format](/api/javascript/kendo#methods-format). Contains one placeholder ("{0}") which represents the axis value.
+The format used to display the notes label. Uses [kendo.format](/api/javascript/kendo/methods/format). Contains one placeholder ("{0}") which represents the axis value.
 
 #### Example - set the x axis notes label format
 
@@ -27780,7 +27784,7 @@ The font style of the note label.
 
 ### xAxis.notes.data.label.template `String|Function`
 
-The [template](/api/javascript/kendo#methods-template) which renders the labels.
+The [template](/api/javascript/kendo/methods/template) which renders the labels.
 
 The fields which can be used in the template are:
 
@@ -27861,7 +27865,7 @@ The rotation angle of the label. By default the label are not rotated.
 
 ### xAxis.notes.data.label.format `String` *(default: "{0}")*
 
-The format used to display the note label. Uses [kendo.format](/api/javascript/kendo#methods-format). Contains one placeholder ("{0}") which represents the axis value.
+The format used to display the note label. Uses [kendo.format](/api/javascript/kendo/methods/format). Contains one placeholder ("{0}") which represents the axis value.
 
 #### Example - set the x axis note label format
 
@@ -28512,7 +28516,7 @@ The tooltip font.
 
 ### yAxis.crosshair.tooltip.format `String` *(default: "{0}")*
 
-The format used to display the tooltip. Uses [kendo.format](/api/javascript/kendo#methods-format). Contains one placeholder ("{0}") which represents the value value.
+The format used to display the tooltip. Uses [kendo.format](/api/javascript/kendo/methods/format). Contains one placeholder ("{0}") which represents the value value.
 
 #### Example - set the scatter chart y axis crosshair tooltip format
 
@@ -28664,7 +28668,7 @@ The top padding of the crosshair tooltip.
 
 ### yAxis.crosshair.tooltip.template `String|Function`
 
-The [template](/api/javascript/kendo#methods-template) which renders the tooltip.
+The [template](/api/javascript/kendo/methods/template) which renders the tooltip.
 
 The fields which can be used in the template are:
 
@@ -29007,7 +29011,7 @@ The culture to use when formatting date values. See the [globalization overview]
 
 ### yAxis.labels.dateFormats `Object`
 
-The format used to display the labels when the x values are dates. Uses [kendo.format](/api/javascript/kendo#methods-format). Contains one placeholder ("{0}") which represents the category value.
+The format used to display the labels when the x values are dates. Uses [kendo.format](/api/javascript/kendo/methods/format). Contains one placeholder ("{0}") which represents the category value.
 
 > The chart will choose the appropriate format for the current [yAxis.baseUnit](#configuration-yAxis.baseUnit). Setting the [categoryAxis.labels.format](#configuration-categoryAxis.labels.format) option will override the date formats.
 
@@ -29212,7 +29216,7 @@ The font style of the labels.
 
 ### yAxis.labels.format `String`
 
-The format used to display the labels. Uses [kendo.format](/api/javascript/kendo#methods-format). Contains one placeholder ("{0}") which represents the category value.
+The format used to display the labels. Uses [kendo.format](/api/javascript/kendo/methods/format). Contains one placeholder ("{0}") which represents the category value.
 
 #### Example - set the scatter chart y axis label format
 
@@ -29560,7 +29564,7 @@ The label rendering step - render every n-th label. By default every label is re
 
 ### yAxis.labels.template `String|Function`
 
-The [template](/api/javascript/kendo#methods-template) which renders the labels.
+The [template](/api/javascript/kendo/methods/template) which renders the labels.
 
 The fields which can be used in the template are:
 
@@ -31913,7 +31917,7 @@ The font style of the label.
 
 ### yAxis.notes.label.template `String|Function`
 
-The [template](/api/javascript/kendo#methods-template) which renders the labels.
+The [template](/api/javascript/kendo/methods/template) which renders the labels.
 
 The fields which can be used in the template are:
 
@@ -31988,7 +31992,7 @@ The rotation angle of the label. By default the label are not rotated.
 
 ### yAxis.notes.label.format `String` *(default: "{0}")*
 
-The format used to display the notes label. Uses [kendo.format](/api/javascript/kendo#methods-format). Contains one placeholder ("{0}") which represents the axis value.
+The format used to display the notes label. Uses [kendo.format](/api/javascript/kendo/methods/format). Contains one placeholder ("{0}") which represents the axis value.
 
 #### Example - set the y axis notes label format
 
@@ -32516,7 +32520,7 @@ The font style of the note label.
 
 ### yAxis.notes.data.label.template `String|Function`
 
-The [template](/api/javascript/kendo#methods-template) which renders the labels.
+The [template](/api/javascript/kendo/methods/template) which renders the labels.
 
 The fields which can be used in the template are:
 
@@ -32597,7 +32601,7 @@ The rotation angle of the label. By default the label are not rotated.
 
 ### yAxis.notes.data.label.format `String` *(default: "{0}")*
 
-The format used to display the note label. Uses [kendo.format](/api/javascript/kendo#methods-format). Contains one placeholder ("{0}") which represents the axis value.
+The format used to display the note label. Uses [kendo.format](/api/javascript/kendo/methods/format). Contains one placeholder ("{0}") which represents the axis value.
 
 #### Example - set the y axis note label format
 
@@ -32903,7 +32907,7 @@ Specifies an axis that should not be zoomed. The supported values are `none`, `x
 
 ### dataSource `kendo.data.DataSource`
 
-The [data source](/api/javascript/data/datasource) of the widget. Configured via the [dataSource](#configuration-dataSource) option.
+The [data source](/api/javascript/data/datasource) of the widget. Configured via the [dataSource](/configuration/datasource) option.
 
 > Changes of the data source will be reflected in the widget.
 
@@ -32996,7 +33000,7 @@ The drawing surface of the Chart. See [Drawing API](http://docs.telerik.com/kend
         });
 
         function onShapeMouseEnter(e) {
-            // http://docs.telerik.com/kendo-ui/api/javascript/drawing/surface#events-mouseenter
+            // http://docs.telerik.com/kendo-ui/api/javascript/drawing/surface/events/mouseenter
             console.log(e);
         }
     </script>
@@ -33025,7 +33029,7 @@ Prepares the widget for safe removal from DOM. Detaches all event handlers and r
 
 ### exportImage
 Exports the chart as an image.
-The result can be saved using [kendo.saveAs](/api/javascript/kendo#methods-saveAs).
+The result can be saved using [kendo.saveAs](/api/javascript/kendo/methods/saveas).
 
 The export operation is asynchronous and returns a [promise](http://api.jquery.com/Types/#Promise).
 The promise will be resolved with a PNG image encoded as a [Data URI](https://developer.mozilla.org/en-US/docs/data_URIs).
@@ -33088,7 +33092,7 @@ for more details.
 
 ### exportPDF
 Exports the chart as a PDF file.
-The result can be saved using [kendo.saveAs](/api/javascript/kendo#methods-saveAs).
+The result can be saved using [kendo.saveAs](/api/javascript/kendo/methods/saveas).
 
 The export operation is asynchronous and returns a [promise](http://api.jquery.com/Types/#Promise).
 The promise will be resolved with a PDF file encoded as a [Data URI](https://developer.mozilla.org/en-US/docs/data_URIs).
@@ -33130,7 +33134,7 @@ Parameters for the exported PDF file.
 
 ### exportSVG
 Exports the chart as an SVG document.
-The result can be saved using [kendo.saveAs](/api/javascript/kendo#methods-saveAs).
+The result can be saved using [kendo.saveAs](/api/javascript/kendo/methods/saveas).
 
 The export operation is asynchronous and returns a [promise](http://api.jquery.com/Types/#Promise).
 The promise will be resolved with a SVG document encoded as a [Data URI](https://developer.mozilla.org/en-US/docs/data_URIs).

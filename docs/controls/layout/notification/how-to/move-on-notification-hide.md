@@ -15,8 +15,8 @@ The position settings, which are normally applied to the Notification widget, sh
 
 The example is based on the following API and widget functionality:
 
-* [`appendTo`](/api/javascript/ui/notification#configuration-appendTo) setting
-* [`stacking`](/api/javascript/ui/notification#configuration-stacking) setting
+* [`appendTo`](/api/javascript/ui/notification/configuration/appendto) setting
+* [`stacking`](/api/javascript/ui/notification/configuration/stacking) setting
 * [Positioning and Stacking]({% slug overview_kendoui_notification_widget %}#configuration-Position) documentation,
 which also explains how to [change the auto-hide timeout on the fly]({% slug overview_kendoui_notification_widget %}#change-settings-for-specific-notification-messages)
 

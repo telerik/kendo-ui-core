@@ -121,5 +121,5 @@ Use the `closeCell` and `editCell` methods of the Grid on single or double click
 
 ## See Also
 
-* [API Reference of the `closeCell` Method](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid#methods-closeCell)
-* [API Reference of the `editCell` Method](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid#methods-editCell)
+* [API Reference of the `closeCell` Method](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid/methods/closecell)
+* [API Reference of the `editCell` Method](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid/methods/editcell)

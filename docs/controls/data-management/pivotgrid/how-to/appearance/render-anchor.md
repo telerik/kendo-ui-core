@@ -10,9 +10,9 @@ slug: howto_render_rowheader_captionas_anchor_pivotgrid
 
 The PivotGrid allows you to render header captions as anchors.
 
-To render column and cell caption fields as anchors, use the [`columnHeaderTemplate`](/api/javascript/ui/pivotgrid#configuration-columnHeaderTemplate) or the [`dataCellTemplate`](/api/javascript/ui/pivotgrid#configuration-dataCellTemplate) options respectively.
+To render column and cell caption fields as anchors, use the [`columnHeaderTemplate`](/api/javascript/ui/pivotgrid/configuration/columnheadertemplate) or the [`dataCellTemplate`](/api/javascript/ui/pivotgrid/configuration/datacelltemplate) options respectively.
 
-To render row header caption fields as anchors, use the [`rowHeaderTemplate`](/api/javascript/ui/pivotgrid#configuration-rowHeaderTemplate) option. The following example demonstrates how to achieve this behavior.
+To render row header caption fields as anchors, use the [`rowHeaderTemplate`](/api/javascript/ui/pivotgrid/configuration/rowheadertemplate) option. The following example demonstrates how to achieve this behavior.
 
 ###### Example
 

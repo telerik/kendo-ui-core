@@ -47,7 +47,7 @@ How can I persist the resizing of the last row in the Kendo UI Grid when virtual
 
 The reason for this issue is that the scrollbar is not part of the initial Grid height.
 
-To ensure that the row will be visible, programmatically resize the Grid after the [column resizing](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid#events-columnResize).
+To ensure that the row will be visible, programmatically resize the Grid after the [column resizing](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid/events/columnresize).
 
 ```html
 <div id="grid" style="height: 380px;width:400px"></div>

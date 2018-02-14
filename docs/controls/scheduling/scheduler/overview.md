@@ -317,7 +317,7 @@ In addition, the Scheduler needs a fixed pixel width for itself or some of its a
 
 Kendo UI Scheduler supports adaptive enhancements like changes in styling and behavior in order to remain consistent with the specific user device experience. For instance, when editing on a mobile device, Kendo UI will slide in a new screen for the user, which is a departure from the more desktop-like popup behaviors.
 
-To enable the adaptive rendering feature, set the [`mobile`](/api/javascript/ui/scheduler#configuration-mobile) property to `true`, `"phone"` or `"tablet"`.
+To enable the adaptive rendering feature, set the [`mobile`](/api/javascript/ui/scheduler/configuration/mobile) property to `true`, `"phone"` or `"tablet"`.
 
 The Kendo UI adaptive mode requires scripts, which are normally part of the Kendo UI Mobile (Hybrid) library (`kendo.mobile.min.js`). However, these scripts are also included in `kendo.web.min.js` and `kendo.all.min.js`. If you are using [individual widget scripts]({% slug include_only_what_you_need_kendoui_installation %}#individual-widget-scripts) or a [custom combined script]({% slug include_only_what_you_need_kendoui_installation %}#employ-download-builder), make sure the relevant scripts are included.
 

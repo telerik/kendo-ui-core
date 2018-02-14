@@ -522,5 +522,51 @@
         equal(textbox.element.val(), "12,44");
 
         kendo.culture('en-EN');
+    });
+
+    test("NumericTextBox setOptons works as expected", function() {
+		var textbox = new NumericTextBox(input, {
+            min: 1,
+            max: 20,
+            value: 4,
+            factor:100,
+            placeholder: "test"
+        });
+		textbox.setOptions({
+            min: 2,
+            max: 40,
+            value: 14,
+            factor:1,
+            placeholder: "new holder"
+        });
+
+        equal(textbox._text.attr("placeholder"), "new holder");
+        equal(textbox.element.attr("aria-valuemin"), "2");
+        equal(textbox.element.attr("aria-valuemax"), "40");
+        equal(textbox.value(), 14);
+    });
+
+    test("NumericTextBox setOptons correctly shows spinners", function() {
+		var textbox = new NumericTextBox(input, {
+            spinners: false
+        });
+		textbox.setOptions({
+            spinners: true
+        });
+
+        equal(textbox._arrowsWrap.is(":visible"), true);
+        equal(textbox._inputWrapper.hasClass("k-expand-padding"), false);
+    });
+
+    test("NumericTextBox setOptons correctly hides spinners", function() {
+		var textbox = new NumericTextBox(input, {
+            spinners: true
+        });
+		textbox.setOptions({
+            spinners: false
+        });
+
+        equal(textbox._arrowsWrap.is(":visible"), false);
+        equal(textbox._inputWrapper.hasClass("k-expand-padding"), true);
 	});
 })();

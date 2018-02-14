@@ -20,8 +20,8 @@ To achieve this behavior and ignore the exact time when you filter the data:
 The helper field is intended to hold only the date, so that the Grid data is later filtered by it while displaying the original `datetime` field.
 
 To create the helper field:
-* Use the [`dataSource.schema.parse`](/api/javascript/data/datasource#configuration-schema.parse) configuration to create a new field that is intended to hold the date only.
-* Use the data-holding field in the [`columns`](/api/javascript/ui/grid#configuration-columns) definition, but provide a [`template`](/api/javascript/ui/grid#configuration-columns.template) that will visualize the initial datetime field.
+* Use the [`dataSource.schema.parse`](/api/javascript/data/datasource/configuration/schema.parse) configuration to create a new field that is intended to hold the date only.
+* Use the data-holding field in the [`columns`](/api/javascript/ui/grid/configuration/columns) definition, but provide a [`template`](/api/javascript/ui/grid/configuration/columns.template) that will visualize the initial datetime field.
 
 ###### Example
 
@@ -88,8 +88,8 @@ Before applying it, you have to handle the `filterMenuInit` event to transform t
 
 To achieve the filter change:
 
-* Handle the [`filterMenuInit` event](/api/javascript/ui/grid#events-filterMenuInit) and conditionally apply custom logic to modify the filter so that it looks for dates, selected from the DatePicker, between the start and the end of day.
-* Use the [`dataSource.filter()` method](/api/javascript/data/datasource#methods-filter) and pass the modified filter configuration to it.
+* Handle the [`filterMenuInit` event](/api/javascript/ui/grid/events/filtermenuinit) and conditionally apply custom logic to modify the filter so that it looks for dates, selected from the DatePicker, between the start and the end of day.
+* Use the [`dataSource.filter()` method](/api/javascript/data/datasource/methods/filter) and pass the modified filter configuration to it.
 
 ###### Example
 

@@ -573,7 +573,7 @@ Detaches event handlers and removes data entries in order to avoid memory leaks.
 
 ### exportImage
 Exports the Gauge as an image.
-The result can be saved using [kendo.saveAs](/api/javascript/kendo#methods-saveAs).
+The result can be saved using [kendo.saveAs](/api/javascript/kendo/methods/saveas).
 
 The export operation is asynchronous and returns a [promise](http://api.jquery.com/Types/#Promise).
 The promise will be resolved with a PNG image encoded as a [Data URI](https://developer.mozilla.org/en-US/docs/data_URIs).
@@ -617,7 +617,7 @@ The height of the exported image. Defaults to the Gauge height.
 
 ### exportPDF
 Exports the Gauge as a PDF file.
-The result can be saved using [kendo.saveAs](/api/javascript/kendo#methods-saveAs).
+The result can be saved using [kendo.saveAs](/api/javascript/kendo/methods/saveas).
 
 The export operation is asynchronous and returns a [promise](http://api.jquery.com/Types/#Promise).
 The promise will be resolved with a PDF file encoded as a [Data URI](https://developer.mozilla.org/en-US/docs/data_URIs).
@@ -654,7 +654,7 @@ Parameters for the exported PDF file.
 
 ### exportSVG
 Exports the Gauge as an SVG document.
-The result can be saved using [kendo.saveAs](/api/javascript/kendo#methods-saveAs).
+The result can be saved using [kendo.saveAs](/api/javascript/kendo/methods/saveas).
 
 The export operation is asynchronous and returns a [promise](http://api.jquery.com/Types/#Promise).
 The promise will be resolved with a SVG document encoded as a [Data URI](https://developer.mozilla.org/en-US/docs/data_URIs).

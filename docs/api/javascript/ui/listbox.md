@@ -11,7 +11,7 @@ component: listbox
 
 ### autoBind `Boolean` *(default: true)*
 
-If set to `false`, the widget will not bind to the data source during initialization. In this case, the data binding will occur when the [`change`](/api/javascript/data/datasource#events-change) event of the data source is fired. By default, the ListBox will bind to the data source that is specified in the configuration.
+If set to `false`, the widget will not bind to the data source during initialization. In this case, the data binding will occur when the [`change`](/api/javascript/data/datasource/events/change) event of the data source is fired. By default, the ListBox will bind to the data source that is specified in the configuration.
 
 > Setting `autoBind` to `false` is useful when multiple widgets are bound to the same data source. Disabling automatic binding ensures that the shared data source does not make more than one request to the remote service.
 
@@ -34,8 +34,8 @@ If set to `false`, the widget will not bind to the data source during initializa
 
  The `id` of the target ListBox to which items from the source ListBox will be transferred and vice versa. If you have to transfer items from the target ListBox over its toolbar, then you also need to set its `connectWith` option.
 
-> * It is not recommended to set the same `connectWith` option on two or more ListBoxes because the behavior of the `transferFrom` and `transferAllFrom` [tools](/api/javascript/ui/listbox#configuration-toolbar.tools) is not deterministic.
-> * Configuring a bi-directional relationship between two ListBoxes results in duplicated behavior of their `transferTo` and `transferFrom` options, and `transferAllTo` and `transferAllFrom` tools. If your project does not require such behavior, remove some of the relationships from the [tools](/api/javascript/ui/listbox#configuration-toolbar.tools) option.
+> * It is not recommended to set the same `connectWith` option on two or more ListBoxes because the behavior of the `transferFrom` and `transferAllFrom` [tools](/api/javascript/ui/listbox/configuration/toolbar.tools) is not deterministic.
+> * Configuring a bi-directional relationship between two ListBoxes results in duplicated behavior of their `transferTo` and `transferFrom` options, and `transferAllTo` and `transferAllFrom` tools. If your project does not require such behavior, remove some of the relationships from the [tools](/api/javascript/ui/listbox/configuration/toolbar.tools) option.
 
 #### Example - set up a one-way connection from ListBoxA to ListBoxB
 
@@ -671,10 +671,10 @@ The built-in tools are:
 - `"moveUp"` - Moves up the selected ListBox items.
 - `"moveDown"` - Moves down the selected ListBox items.
 - `"remove"` - Removes the selected ListBox items.
-- `"transferTo"` - Moves the selected items from the current ListBox to the target that is defined in the [`connectWith`](/api/javascript/ui/listbox#configuration-connectWith) option.
-- `"transferFrom"` - Moves the selected items from the ListBox that is defined in the [`connectWith`](/api/javascript/ui/listbox#configuration-connectWith) option to the current ListBox.
-- `"transferAllTo"` - Moves all items from the current ListBox to the target that is defined in the [`connectWith`](/api/javascript/ui/listbox#configuration-connectWith) option.
-- `"transferAllFrom"` - Moves all items from the ListBox that is defined in the [`connectWith`](/api/javascript/ui/listbox#configuration-connectWith) option to the current ListBox.
+- `"transferTo"` - Moves the selected items from the current ListBox to the target that is defined in the [`connectWith`](/api/javascript/ui/listbox/configuration/connectwith) option.
+- `"transferFrom"` - Moves the selected items from the ListBox that is defined in the [`connectWith`](/api/javascript/ui/listbox/configuration/connectwith) option to the current ListBox.
+- `"transferAllTo"` - Moves all items from the current ListBox to the target that is defined in the [`connectWith`](/api/javascript/ui/listbox/configuration/connectwith) option.
+- `"transferAllFrom"` - Moves all items from the ListBox that is defined in the [`connectWith`](/api/javascript/ui/listbox/configuration/connectwith) option to the current ListBox.
 
 #### Example
 
@@ -833,7 +833,7 @@ Indicates whether the items should be enabled or disabled.
 
 ### items
 
-Obtains an array of the DOM elements which correspond to the data items from the [`view`](/api/javascript/data/datasource#methods-view) method of the Kendo UI DataSource.
+Obtains an array of the DOM elements which correspond to the data items from the [`view`](/api/javascript/data/datasource/methods/view) method of the Kendo UI DataSource.
 
 #### Returns
 

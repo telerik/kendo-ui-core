@@ -31,13 +31,13 @@ How can I use radio buttons as a custom editor in the Kendo UI Grid?
 
 To create an editor with radio buttons:
 
-1. Configure a [`columns.editable`](http://docs.telerik.com/kendo-ui/api/javascript/ui/grid#configuration-columns.editable) function that will always return `false`.
-1. Configure a [`columns.template`](http://docs.telerik.com/kendo-ui/api/javascript/ui/grid#configuration-columns.template)  function.
-    1. Get the current value based on the [`dataItem`](http://docs.telerik.com/kendo-ui/api/javascript/ui/grid#methods-dataItem).
+1. Configure a [`columns.editable`](http://docs.telerik.com/kendo-ui/api/javascript/ui/grid/configuration/columns.editable) function that will always return `false`.
+1. Configure a [`columns.template`](http://docs.telerik.com/kendo-ui/api/javascript/ui/grid/configuration/columns.template)  function.
+    1. Get the current value based on the [`dataItem`](http://docs.telerik.com/kendo-ui/api/javascript/ui/grid/methods/dataitem).
     1. Add a radio button for every value in an array.
     1. Based on the current value, select the relevant radio button.
 1. Subscribe to the `click` event of the buttons.
-1. In the `click` event handler, [`set`](http://docs.telerik.com/kendo-ui/api/javascript/data/model#methods-set) the new value of the `dataItem`.
+1. In the `click` event handler, [`set`](http://docs.telerik.com/kendo-ui/api/javascript/data/model/methods/set) the new value of the `dataItem`.
 
 ```html
 <script src="https://demos.telerik.com/kendo-ui/content/shared/js/products.js" type="text/javascript"></script>

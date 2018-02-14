@@ -29,8 +29,8 @@ How can I use the Kendo UI ContextMenu to add, edit, and delete rows in the Kend
 ## Solution
 
 1. Create a Kendo UI ContextMenu that will have the desired actions.
-1. Set the [`filter`](https://docs.telerik.com/kendo-ui/api/javascript/ui/contextmenu#configuration-filter) of the ContextMenu to `td`.
-1. In the [`select`](https://docs.telerik.com/kendo-ui/api/javascript/ui/contextmenu#events-select) event handler of the ContextMenu:
+1. Set the [`filter`](https://docs.telerik.com/kendo-ui/api/javascript/ui/contextmenu/configuration/filter) of the ContextMenu to `td`.
+1. In the [`select`](https://docs.telerik.com/kendo-ui/api/javascript/ui/contextmenu/events/select) event handler of the ContextMenu:
 	1. Get the row of the `target`.
 	1. Based on the selection and in a `switch/case`, invoke the relevant method of the Grid.
 
@@ -166,4 +166,4 @@ How can I use the Kendo UI ContextMenu to add, edit, and delete rows in the Kend
         });
     </script>
 </div>
-```    
+```

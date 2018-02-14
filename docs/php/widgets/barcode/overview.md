@@ -18,7 +18,7 @@ Below are listed the steps for you to follow when configuring the Kendo UI Barco
 
 **Step 1** Make sure you followed all the steps from the [introductory article on Telerik UI for PHP]({% slug overview_uiforphp %})&mdash;include the autoloader, JavaScript, and CSS files.
 
-**Step 2** Add a Barcode with the default [`type`](/api/javascript/dataviz/ui/barcode#configuration-type) (Code39).
+**Step 2** Add a Barcode with the default [`type`](/api/javascript/dataviz/ui/barcode/configuration/type) (Code39).
 
 ###### Example
 

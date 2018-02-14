@@ -12,7 +12,7 @@ component: validation
 
 ### errorTemplate `String`
 
-The [template](/api/javascript/kendo#methods-template) which renders the validation message.
+The [template](/api/javascript/kendo/methods/template) which renders the validation message.
 
 > The `errorTemplate` content must be enclosed in a single DOM element parent. There are no restrictions with regard to nested child elements.
 

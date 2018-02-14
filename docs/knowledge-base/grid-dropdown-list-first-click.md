@@ -39,12 +39,12 @@ How can I show the drop-down list in the editable Grid with one cell click?
 
 ## Solution
 
-Subscribe to the [`edit`](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid#events-edit) event of the Grid:
+Subscribe to the [`edit`](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid/events/edit) event of the Grid:
 
 The event:
 1. Triggers when the user clicks on the cell.
 1. Checks if the cell contains a DropDownList.
-1. If the cell contains a DropDownList, the event triggers the [`open`](https://docs.telerik.com/kendo-ui/api/javascript/ui/dropdownlist#methods-open) method of the DropDownList.
+1. If the cell contains a DropDownList, the event triggers the [`open`](https://docs.telerik.com/kendo-ui/api/javascript/ui/dropdownlist/methods/open) method of the DropDownList.
 
 ```javascript
 edit:function(e){

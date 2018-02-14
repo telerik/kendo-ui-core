@@ -9,7 +9,7 @@ slug: howto_alignfootercells_grid
 
 The following example demonstrates how to align the footer cells during Excel export.
 
-To achieve this behavior, you can usually use HTML and CSS. However, Excel does not supported these options. To set the alignment, the demo uses the [`hAlign`](/api/javascript/ooxml/workbook#configuration-sheets.rows.cells.hAlign) option of the cell.
+To achieve this behavior, you can usually use HTML and CSS. However, Excel does not supported these options. To set the alignment, the demo uses the [`hAlign`](/api/javascript/ooxml/workbook/configuration/sheets.rows.cells.halign) option of the cell.
 
 For more information on how Excel documents work, refer to the [introductory article on Excel]({% slug introduction_excelexport_kendoui %}).
 
@@ -90,7 +90,7 @@ For more information on how Excel documents work, refer to the [introductory art
 
 ## See Also
 
-* [JavaScript API Reference of the Grid](/api/javascript/ui/grid#configuration-excel)
+* [JavaScript API Reference of the Grid](/api/javascript/ui/grid/configuration/excel)
 * [How to Configure Color for Alternating Rows]({% slug howto_configure_color_alternating_rows_grid %})
 * [How to Export Detail Grids]({% slug howto_exportto_excel_masterand_detail_grid %})
 * [How to Export Checked Columns Only]({% slug howto_export_checked_columns_only_grid %})

@@ -28,7 +28,7 @@ How can I edit the master rows in the relevant detail rows of the Kendo UI Grid?
 
 ## Possible Workarounds
 
-To work around the default behavior, fake the editing process in the [`detailInit`](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid#events-detailInit) event handler.
+To work around the default behavior, fake the editing process in the [`detailInit`](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid/events/detailinit) event handler.
 
 1. Select all inputs in the `detailCell` element.
 1. Attach a [`change`](https://api.jquery.com/change/) event handler to every input.

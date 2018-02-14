@@ -27,7 +27,7 @@ How can I get the instance of the second DropDownList to reload the data of the 
 
 ## Solution
 
-Implement an event handler for the [`edit`](http://docs.telerik.com/kendo-ui/api/javascript/ui/scheduler#events-edit) event of the Scheduler. This function adds a [`change`](http://docs.telerik.com/kendo-ui/api/javascript/ui/dropdownlist#events-change) event handler to the first of the two DropDownLists. This `change` event handler successfully [changes the available options](http://docs.telerik.com/kendo-ui/api/javascript/ui/dropdownlist#methods-setDataSource) in the second DropDownList by altering its DataSource.
+Implement an event handler for the [`edit`](http://docs.telerik.com/kendo-ui/api/javascript/ui/scheduler/events/edit) event of the Scheduler. This function adds a [`change`](http://docs.telerik.com/kendo-ui/api/javascript/ui/dropdownlist/events/change) event handler to the first of the two DropDownLists. This `change` event handler successfully [changes the available options](http://docs.telerik.com/kendo-ui/api/javascript/ui/dropdownlist/methods/setdatasource) in the second DropDownList by altering its DataSource.
 
 ```html
   <div id="example">

@@ -29,7 +29,7 @@ How can I implement a global Grid search and enable the users to search through 
 ## Solution
 
 1. Within the [`input`](https://developer.mozilla.org/en-US/docs/Web/Events/input) event handler of the textbox, build a filter query by using the value of the textbox.
-1. Filter the data source by using the [`filter`](https://docs.telerik.com/kendo-ui/api/javascript/data/datasource#methods-filter) method.
+1. Filter the data source by using the [`filter`](https://docs.telerik.com/kendo-ui/api/javascript/data/datasource/methods/filter) method.
 
 ```html
 

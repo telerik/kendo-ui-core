@@ -101,5 +101,5 @@ How can I ignore the time portion of the `datetime` so that grouping happens by 
 
 ## See Also
 
-* [Api Reference of the DataSource schema.parse Function](https://docs.telerik.com/kendo-ui/api/javascript/data/datasource#configuration-schema.parse)
+* [Api Reference of the DataSource schema.parse Function](https://docs.telerik.com/kendo-ui/api/javascript/data/datasource/configuration/schema.parse)
 * [Kendo UI Templates Overview](https://docs.telerik.com/kendo-ui/framework/templates/overview)

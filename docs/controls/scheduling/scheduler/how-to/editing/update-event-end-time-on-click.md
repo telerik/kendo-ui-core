@@ -102,7 +102,7 @@ The following example demonstrates how to update the end time of an event on cli
 
             scheduler.wrapper.on("click", ".k-event", function(e) {
 							var uid = $(this).data("uid");
-              //http://docs.telerik.com/kendo-ui/api/javascript/ui/scheduler#methods-occurrenceByUid
+              //http://docs.telerik.com/kendo-ui/api/javascript/ui/scheduler/methods/occurrenceByUid
               var event = scheduler.occurrenceByUid(uid);
               var end = new Date(event.end);
 

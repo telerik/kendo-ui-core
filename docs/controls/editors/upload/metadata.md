@@ -71,7 +71,7 @@ To receive metadata from the save handler, follow the steps below:
                 echo json_encode($data);
             ?>
 
-2. Declare a handler for the [`success` event](/api/javascript/ui/upload#events-success) and process the response.
+2. Declare a handler for the [`success` event](/api/javascript/ui/upload/events/success) and process the response.
 
     ###### Example
 

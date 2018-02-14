@@ -165,7 +165,7 @@ The default base unit is determined by the smallest duration between categories,
 
 ##### Manual configuration
 
-The [`base unit`](/api/javascript/dataviz/ui/chart#configuration-categoryAxis.baseUnit) can also be specified manually. The valid options are:
+The [`base unit`](/api/javascript/dataviz/ui/chart/configuration/categoryaxis.baseunit) can also be specified manually. The valid options are:
 
 * minutes
 * hours

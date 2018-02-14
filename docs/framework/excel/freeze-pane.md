@@ -8,13 +8,13 @@ position: 3
 
 # Freeze Rows and Columns
 
-Kendo UI allows you to freeze both columns and rows via the [`freezePane`](/api/javascript/ooxml/workbook#configuration-sheets.freezePane) option.
+Kendo UI allows you to freeze both columns and rows via the [`freezePane`](/api/javascript/ooxml/workbook/configuration/sheets.freezepane) option.
 
 ## Rows
 
 Freezing the first row of an Excel sheet is a common requirement. It allows you to scroll the rest of the document without losing the header.
 
-Kendo UI enables row freezing via the [`rowSplit`](/api/javascript/ooxml/workbook#configuration-sheets.freezePane.rowSplit) option. Set that option to the number of rows you want to freeze.
+Kendo UI enables row freezing via the [`rowSplit`](/api/javascript/ooxml/workbook/configuration/sheets.freezepane.rowsplit) option. Set that option to the number of rows you want to freeze.
 
 The example below demonstrates how to freeze the top row in a worksheet.
 
@@ -61,9 +61,9 @@ kendo.saveAs({
 
 ## Columns
 
-Kendo UI enables column freezing via the [`colSplit`](/api/javascript/ooxml/workbook#configuration-sheets.freezePane.colSplit) option. Set that option to the number of columns you want to freeze.
+Kendo UI enables column freezing via the [`colSplit`](/api/javascript/ooxml/workbook/configuration/sheets.freezepane.colsplit) option. Set that option to the number of columns you want to freeze.
 
-The example below demonstrates how to freeze the first two columns and the top row in a worksheet.  
+The example below demonstrates how to freeze the first two columns and the top row in a worksheet.
 
 ###### Example
 

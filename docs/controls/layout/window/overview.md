@@ -32,7 +32,7 @@ When a Window is initialized, it is automatically displayed as open near the loc
 
 ### HTML Structure and DOM Placement
 
-By default, the Window is created as a child of the `<body>` element. This behavior is configurable through the [`appendTo` setting](/api/javascript/ui/window#configuration-appendTo).
+By default, the Window is created as a child of the `<body>` element. This behavior is configurable through the [`appendTo` setting](/api/javascript/ui/window/configuration/appendto).
 
 The example below demonstrates the possible markup before the initialization of the Kendo UI Window.
 
@@ -143,7 +143,7 @@ The example below demonstrates how to initialize a Window, center, and configure
             width: 200,
             height: 200,
             title: "Centered Window",
-            visible: false            
+            visible: false
         }).data("kendoWindow");
     });
 
@@ -168,7 +168,7 @@ The Window provides built-in support for asynchronously loading content from a U
 
 > **Important**
 > * Loading full pages inside the Window with AJAX&mdash;pages with a `DOCTYPE`, `html`, `head`, and `body` tags&mdash;causes various undesired side-effects&mdash;breaks the DOM tree, deletes widget instances, and throws Javascript errors.
-> * If the Window has no set dimensions, it is probably going to resize after the AJAX content is loaded. This naturally changes the position of the widget on the screen. To center the Window, either [`center`](/api/javascript/ui/window#methods-center) it in the [`refresh`](/api/javascript/ui/window#events-refresh) event handler, or set some explicit [dimensions](/api/javascript/ui/window#configuration-height).
+> * If the Window has no set dimensions, it is probably going to resize after the AJAX content is loaded. This naturally changes the position of the widget on the screen. To center the Window, either [`center`](/api/javascript/ui/window/methods/center) it in the [`refresh`](/api/javascript/ui/window/events/refresh) event handler, or set some explicit [dimensions](/api/javascript/ui/window/configuration/height).
 
 The example below demonstrates how to initialize the Window and configure its content loading.
 
@@ -217,7 +217,7 @@ The example below demonstrates how to access the `window` and `document` objects
         // which is equivalent to
         // var iframeDocumentObject = iframeWindowObject.document;
 
-        var iframejQuery = iframeWindowObject.$; // if jQuery is registered inside the iframe page, of course    
+        var iframejQuery = iframeWindowObject.$; // if jQuery is registered inside the iframe page, of course
     });
 
     </script>
@@ -231,7 +231,7 @@ The example below demonstrates how to access the `window` and `document` objects
 By default, after the Window is initialized, it is moved in the DOM and placed as a child of the `body` element. This behavior easily positions it on top of all other page content, but might cause undesired side-effects if the Window is created from an element inside a form, because the moved form fields will not be submitted. To avoid such issues, use any of the following approaches:
 
 1. Place the whole form, including its opening and closing tags, inside the element from which the Window is created.
-2. If some parts of the Window need to remain outside it, use the [`appendTo`](/api/javascript/ui/window#configuration-appendTo) property, so that the widget remains inside the form.
+2. If some parts of the Window need to remain outside it, use the [`appendTo`](/api/javascript/ui/window/configuration/appendto) property, so that the widget remains inside the form.
 
 When the Window contains a form, which is submitted through a standard POST request, the widget will close and the page will reload. If you have to avoid this behavior, submit the form through Ajax. The approach is strongly recommended when the submitted data is validated on the server, because in such cases the Dialog is expected to remain visible and to display the validation messages that might be returned.
 
@@ -239,7 +239,7 @@ When the Window contains a form, which is submitted through a standard POST requ
 
 Unlike most widgets, Kendo UI Window is completely removed from the DOM when [destroyed](/framework/widgets/destroy). This means that the element, from which it was initialized, no longer exists on the page. Therefore, you are able to create a new Window instance only from another element.
 
-If you want to destroy a Window instance when it is being closed, the earliest recommended time to do that is the [`deactivate`](/api/javascript/ui/window#events-deactivate) event.
+If you want to destroy a Window instance when it is being closed, the earliest recommended time to do that is the [`deactivate`](/api/javascript/ui/window/events/deactivate) event.
 
 ### Print
 
@@ -308,7 +308,7 @@ If the Window is displaying a page in an iframe and the page needs to access the
 
 ### Access DOM Elements
 
-Similar to other Kendo UI widgets, the Window has two DOM elements, which can be accessed and used to customize the appearance of the widget or its content. These are the [`wrapper` and `element`]({% slug widgetwrapperandelement_references_gettingstarted %}) elements of the widget, which are provided as fields of the widget object. In specific scenarios, the Window wrapper can be used to tweak the position or the size of the widget although this is normally done through the API and the [`setOptions` method](/api/javascript/ui/window#methods-setOptions).
+Similar to other Kendo UI widgets, the Window has two DOM elements, which can be accessed and used to customize the appearance of the widget or its content. These are the [`wrapper` and `element`]({% slug widgetwrapperandelement_references_gettingstarted %}) elements of the widget, which are provided as fields of the widget object. In specific scenarios, the Window wrapper can be used to tweak the position or the size of the widget although this is normally done through the API and the [`setOptions` method](/api/javascript/ui/window/methods/setoptions).
 
 ###### Example
 
@@ -335,7 +335,7 @@ Apply the CSS style to the scrollbar container below the Window as demonstrated 
 
 To create a Kendo UI Window instance multiple times with the same ID, make sure that the existing instance with this ID is [destroyed](#configuration-Destroy) first. Widgets with the same ID [cannot exist and work properly]({% slug initialize_widgets_using_jquery_plugins_installation %}#duplicate-initialization) at one and the same time.
 
-Alternatively, do not destroy the existing Window instance&mdash;[open](/api/javascript/ui/window#methods-open) it and [refresh](/api/javascript/ui/window#methods-refresh) its Ajax content or [set new static content](/api/javascript/ui/dialog#methods-content) if needed.
+Alternatively, do not destroy the existing Window instance&mdash;[open](/api/javascript/ui/window/methods/open) it and [refresh](/api/javascript/ui/window/methods/refresh) its Ajax content or [set new static content](/api/javascript/ui/dialog/methods/content) if needed.
 
 ## See Also
 

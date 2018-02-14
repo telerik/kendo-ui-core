@@ -206,7 +206,7 @@ Loads the sheet from an object in the format defined in the [sheet configuration
 
 > The configuration and cell values will be merged.
 >
-> **Note:** the Sheet objects are not resizable.  If you use this method you must make sure that the JSON does not contain more rows or columns than defined when the `Spreadsheet` object has been constructed.  To reload a full spreadsheet from JSON, we recommend using Spreadsheet's [fromJSON](/api/javascript/ui/spreadsheet#methods-fromJSON) method.
+> **Note:** the Sheet objects are not resizable.  If you use this method you must make sure that the JSON does not contain more rows or columns than defined when the `Spreadsheet` object has been constructed.  To reload a full spreadsheet from JSON, we recommend using Spreadsheet's [fromJSON](/api/javascript/ui/spreadsheet/methods/fromjson) method.
 
 #### Parameters
 

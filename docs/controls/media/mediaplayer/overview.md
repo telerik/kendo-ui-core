@@ -142,7 +142,7 @@ function buttonClick() {
 
 ## Keyboard Navigation
 
-The MediaPlayer supports keyboard navigation. To enable it, use the [`navigatable`](/api/javascript/ui/mediaplayer#configuration-navigatable) property.
+The MediaPlayer supports keyboard navigation. To enable it, use the [`navigatable`](/api/javascript/ui/mediaplayer/configuration/navigatable) property.
 
 The following list provides the built-in keyboard commands of the MediaPlayer:
 
@@ -174,7 +174,7 @@ To localize the tooltip texts from the interface, use the configuration options 
 </script>
 ```
 
-For a complete list of [localizable messages](/api/javascript/ui/mediaplayer#configuration-messages), refer to the [MediaPlayer API documentation](/api/javascript/ui/mediaplayer).
+For a complete list of [localizable messages](/api/javascript/ui/mediaplayer/configuration/messages), refer to the [MediaPlayer API documentation](/api/javascript/ui/mediaplayer).
 
 All Kendo UI widgets, including the MediaPlayer, also allow you to add script files and implement [global localization]({% slug overview_localization_kendoui %}) for your application.
 

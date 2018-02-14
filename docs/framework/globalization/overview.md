@@ -18,7 +18,7 @@ Globalization is the process of designing and developing an application that wor
 
 [Kendo UI provides a way to internationalize the current page using a culture script](http://demos.telerik.com/kendo-ui/globalization/index). Kendo UI exposes culture (`cultureName`) method which allows you to select the culture script corresponding to the `<language code>-<country/region code>`.
 
-For detailed information on the `culture` method, refer to the [API reference article on this method](/api/javascript/kendo#methods-culture).
+For detailed information on the `culture` method, refer to the [API reference article on this method](/api/javascript/kendo/methods/culture).
 
 ### Define Current Culture
 
@@ -55,8 +55,8 @@ The default culture, which Kendo UI widgets uses is "en-US".
 
 Kendo UI exposes methods, which can format the number or date objects using a specific format string and the current specified culture. These are:
 
-- [`kendo.toString(object, format, [culture])`](/api/javascript/kendo#methods-toString)&mdash;This method returns a string representation of the current object while taking into account the given format and culture.
-- [`kendo.format(format, arguments)`](/api/javascript/kendo#methods-format)&mdash;Replaces each format item in a specified string with the text equivalent of a corresponding object's value.
+- [`kendo.toString(object, format, [culture])`](/api/javascript/kendo/methods/tostring)&mdash;This method returns a string representation of the current object while taking into account the given format and culture.
+- [`kendo.format(format, arguments)`](/api/javascript/kendo/methods/format)&mdash;Replaces each format item in a specified string with the text equivalent of a corresponding object's value.
 
 For detailed information, refer to [this article]({%slug dateformatting_kendoui_globalization %}).
 
@@ -64,9 +64,9 @@ For detailed information, refer to [this article]({%slug dateformatting_kendoui_
 
 Kendo UI exposes methods which convert the specified string to a date or number object.
 
-- [`kendo.parseInt(string, [culture])`](/api/javascript/kendo#methods-parseInt)&mdash;This method converts a string to a whole number using the specified culture (current culture by default).
-- [`kendo.parseFloat(string, [culture])`](/api/javascript/kendo#methods-parseFloat)&mdash;Converts a string to a number with floating point using the specified culture (current culture by default).
-- [`kendo.parseDate(string, [formats], [culture])`](/api/javascript/kendo#methods-parseDate)&mdash;Converts a string to a JavaScript Date object, taking into account the given format/formats (or the given culture's set of default formats).
+- [`kendo.parseInt(string, [culture])`](/api/javascript/kendo/methods/parseint)&mdash;This method converts a string to a whole number using the specified culture (current culture by default).
+- [`kendo.parseFloat(string, [culture])`](/api/javascript/kendo/methods/parsefloat)&mdash;Converts a string to a number with floating point using the specified culture (current culture by default).
+- [`kendo.parseDate(string, [formats], [culture])`](/api/javascript/kendo/methods/parsedate)&mdash;Converts a string to a JavaScript Date object, taking into account the given format/formats (or the given culture's set of default formats).
 
 For detailed information, refer to [this article]({% slug dateparsing_kendoui_globalization %}).
 

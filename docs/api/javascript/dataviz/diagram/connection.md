@@ -36,7 +36,7 @@ The font weight of the connection content text.
 
 ### content.template `String|Function`
 
-The [template](/api/javascript/kendo#methods-template) which renders the labels.
+The [template](/api/javascript/kendo/methods/template) which renders the labels.
 
 The fields which can be used in the template are:
 

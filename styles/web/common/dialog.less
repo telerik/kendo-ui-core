@@ -16,7 +16,7 @@
 
 .k-dialog .k-dialog-titlebar
 {
-    position: static;
+    position: relative;
     margin: 0;
     padding: 0.8em;
     width: auto;
@@ -27,13 +27,14 @@
     margin: 0;
     padding: 0;
     width: auto;
-    max-width: calc(100% - 16px - 1.8em);
+    max-width: calc(100% - 20px);
     display: inline-block;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
     font-size: 1.2em;
     line-height: 1.2em;
+    vertical-align: top;
 }
 
 .k-dialog .k-content
@@ -95,7 +96,8 @@
 }
 
 .k-dialog .k-dialog-titlebar .k-dialog-actions {
-    top: .6em;
+    top: 50%;
+    margin-top: -11px;
     right: .8em;
     padding: 0;
 }

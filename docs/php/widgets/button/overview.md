@@ -162,7 +162,7 @@ The example below demonstrates how to use the `enable` method.
 
     echo $disabledButton->render();
 
-For more information on the [`enable` method of the Button](/api/javascript/ui/button#methods-enable), refer to the [Button API](/api/javascript/ui/button).
+For more information on the [`enable` method of the Button](/api/javascript/ui/button/methods/enable), refer to the [Button API](/api/javascript/ui/button).
 
 ## Reference
 

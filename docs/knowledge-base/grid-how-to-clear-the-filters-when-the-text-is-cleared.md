@@ -52,7 +52,7 @@ To replicate the [**ColumnMenu** demo](http://demos.telerik.com/kendo-ui/grid/co
 
 The described behavior is expected because when the filter has to be removed, the user is expected to click the **Clear** button next to the **Filter** button.
 
-In this scenario, use the [`ColumnMenuInit`](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid#events-columnMenuInit) event to attach an event handler to the **Filter** button and, if the value of the text box is an empty string, to clear the filters with the [`filter`](https://docs.telerik.com/kendo-ui/api/javascript/data/datasource#methods-filter) method.
+In this scenario, use the [`ColumnMenuInit`](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid/events/columnmenuinit) event to attach an event handler to the **Filter** button and, if the value of the text box is an empty string, to clear the filters with the [`filter`](https://docs.telerik.com/kendo-ui/api/javascript/data/datasource/methods/filter) method.
 
 ```html
 <div id="example">
@@ -72,7 +72,7 @@ In this scenario, use the [`ColumnMenuInit`](https://docs.telerik.com/kendo-ui/a
                                         OrderID: { type: "number" },
                                         ShipCountry: { type: "string" },
                                         ShipName: { type: "string" },
-                                        ShipAddress: { type: "string" }                                        
+                                        ShipAddress: { type: "string" }
                                     }
                                 }
                             },

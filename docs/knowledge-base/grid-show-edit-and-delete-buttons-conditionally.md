@@ -27,11 +27,11 @@ How can I hide some of the Grid columns and conditionally display **Edit** and *
 
 ## Solution
 
-The column configuration of the Grid for ASP.NET MVC has a `Hidden()` ([`columns.hidden`](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid#configuration-columns.hidden)) property that expects a Boolean value which can be used for such purposes.  
+The column configuration of the Grid for ASP.NET MVC has a `Hidden()` ([`columns.hidden`](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid/configuration/columns.hidden)) property that expects a Boolean value which can be used for such purposes.
 
 The following example demonstrates how to pass a value in the ViewBag for a key and give it a `true` or `false` value in the controller, and then access it in the Razor template.
 
-To individually fine-tune a command, use the [`command visible`](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid#configuration-columns.command.visible) function.
+To individually fine-tune a command, use the [`command visible`](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid/configuration/columns.command.visible) function.
 
 ###### Razor Example
 

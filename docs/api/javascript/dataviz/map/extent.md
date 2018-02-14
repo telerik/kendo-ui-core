@@ -5,6 +5,7 @@ res_type: api
 ---
 
 # kendo.dataviz.map.Extent : kendo.Class
+
 Represents a geographic region defined by two extreme locations (North West and South East).
 
 ## Constructor Parameters

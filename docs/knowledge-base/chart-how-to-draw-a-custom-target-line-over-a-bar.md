@@ -1,6 +1,6 @@
 ---
 title: Draw a Custom Target Line over a Bar
-description: An example on how to draw a custom target line over a bar in the Kendo UI Chart.  
+description: An example on how to draw a custom target line over a bar in the Kendo UI Chart.
 type: how-to
 page_title: Draw a Custom Target Line over a Bar | Kendo UI Chart
 slug: chart-how-to-draw-a-custom-target-line-over-a-bar
@@ -42,7 +42,7 @@ How can I show target lines for each Chart bar?
 
 Use either of the following approaches:
 1. Implement the [Kendo UI Bullet Chart](http://demos.telerik.com/kendo-ui/bullet-charts/index), or
-1. Utilize [custom visuals](https://docs.telerik.com/kendo-ui/api/javascript/dataviz/ui/chart#configuration-seriesDefaults.visual).
+1. Utilize [custom visuals](https://docs.telerik.com/kendo-ui/api/javascript/dataviz/ui/chart/configuration/seriesdefaults.visual).
 
 The following example demonstrates how to use the custom visuals approach.
 
@@ -64,7 +64,7 @@ The following example demonstrates how to use the custom visuals approach.
           { "current": 99, "target": 98},
           { "current": 100, "target": 100},
           { "current": 80, "target": 90}
-        ] },        
+        ] },
                         { name: "Switch Gear", data:
                          [
                            { "current": 90, "target": 95},

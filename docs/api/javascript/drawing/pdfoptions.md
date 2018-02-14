@@ -5,6 +5,7 @@ res_type: api
 ---
 
 # kendo.drawing.PDFOptions
+
 PDF generation options.
 
 ## Fields

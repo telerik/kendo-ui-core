@@ -13,7 +13,7 @@ The Kendo UI Chart with scatter series provides an option for you to freely draw
 To achieve this behavior:
 
 1. Draw a rectangle with gradient fill on a scatter plot at specified coordinates.
-2. Create custom elements in the [`render` event](/api/javascript/dataviz/ui/chart#events-render) to ensure they survive redraws.
+2. Create custom elements in the [`render` event](/api/javascript/dataviz/ui/chart/events/render) to ensure they survive redraws.
 
 For a list of all available drawing primitives, refer to the introductory article on the [Drawing API]({% slug overview_kendoui_drawingapi %}).
 

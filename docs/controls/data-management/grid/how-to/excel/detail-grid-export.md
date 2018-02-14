@@ -9,7 +9,7 @@ slug: howto_exportto_excel_masterand_detail_grid
 
 The following examples demonstrate how to export detail Grids to Excel and merge their workbooks with the master Grid workbook.
 
-To get the workbook of the detail Grids, the demos use the [`excelExport`](/api/javascript/ui/grid#events-excelExport) event. This event is prevented to avoid the saving of an Excel file for each detail Grid. For more information on how Excel documents work, refer to the [introductory help topic on Excel](/framework/excel/introduction#create-excel-document).
+To get the workbook of the detail Grids, the demos use the [`excelExport`](/api/javascript/ui/grid/events/excelexport) event. This event is prevented to avoid the saving of an Excel file for each detail Grid. For more information on how Excel documents work, refer to the [introductory help topic on Excel](/framework/excel/introduction#create-excel-document).
 
 ###### Example - detail Grid export to Excel (all pages and details)
 
@@ -342,7 +342,7 @@ To get the workbook of the detail Grids, the demos use the [`excelExport`](/api/
 
 ## See Also
 
-* [JavaScript API Reference of the Grid](/api/javascript/ui/grid#configuration-excel)
+* [JavaScript API Reference of the Grid](/api/javascript/ui/grid/configuration/excel)
 * [How to Align Footer Cells]({% slug howto_alignfootercells_grid %})
 * [How to Configure Color for Alternating Rows]({% slug howto_configure_color_alternating_rows_grid %})
 * [How to Export Checked Columns Only]({% slug howto_export_checked_columns_only_grid %})

@@ -12,13 +12,13 @@ The following example demonstrates how to change the default pager of the Grid t
 
 To achieve this behavior:
 
-1. Remove the default pager buttons on the first [`dataBound`](/api/javascript/ui/grid#events-dataBound) event.
+1. Remove the default pager buttons on the first [`dataBound`](/api/javascript/ui/grid/events/databound) event.
 1. Create a Kendo UI Slider in their place.
-1. Change the page of the Grid DataSource on the [`change`](/api/javascript/ui/slider#events-change) event of the Slider.
+1. Change the page of the Grid DataSource on the [`change`](/api/javascript/ui/slider/events/change) event of the Slider.
 
 > **Important**
 >
-> When you apply this approach, the [`page`](/api/javascript/data/datasource#methods-page) method of the Grid does not fire.
+> When you apply this approach, the [`page`](/api/javascript/data/datasource/methods/page) method of the Grid does not fire.
 
 ###### Example
 

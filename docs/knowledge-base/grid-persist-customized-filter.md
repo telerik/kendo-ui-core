@@ -30,7 +30,7 @@ How can I persist the customized Grid filters when I save and restore the Grid s
 
 The `JSON.stringify()` method is not able to serialize function references. As a result and because, generally, stringification is used for the retrieved Grid state, all configuration fields which represent function references are lost and the custom filters are not restored.
 
-Add the function references back to the de-serialized configuration object before passing it to the [`setOptions`](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid#methods-setOptions) method.
+Add the function references back to the de-serialized configuration object before passing it to the [`setOptions`](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid/methods/setoptions) method.
 
 ```html
 <script src="https://demos.telerik.com/kendo-ui/content/shared/js/people.js"></script>

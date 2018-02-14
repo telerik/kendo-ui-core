@@ -12,7 +12,7 @@ The Spreadsheet widget supports binding individual sheets to a [Data Source](/fr
 
 This allows you to quickly bring data from external data sources into the Spreadsheet and, optionally, edit it. Data Source binding switches the sheet to a special data-bound mode. It differs from the standard behavior in the following ways:
 
-* Column headers are inferred from the data item fields. Configure the column headers and ordering by using the [sheet `setDataSource` method](/api/javascript/spreadsheet/sheet#methods-setDataSource).
+* Column headers are inferred from the data item fields. Configure the column headers and ordering by using the [sheet `setDataSource` method](/api/javascript/spreadsheet/sheet/methods/setdatasource).
 * Cell styles, formulas, and formats are not persisted in the data source.
 * Row height and column width are not persisted in the data source.
 * Sorting and filtering are applied locally.

@@ -18,7 +18,7 @@ The chunk upload of files enables the user to send large files, which are upload
 
 To enable the chunk upload:
 
-1. Set up the [`async.chunkSize`](/api/javascript/ui/upload#configuration-async.chunkSize) option of the Upload.
+1. Set up the [`async.chunkSize`](/api/javascript/ui/upload/configuration/async.chunksize) option of the Upload.
 
     ###### Example
 
@@ -45,9 +45,9 @@ To enable the chunk upload:
 
 To modify or fine-tune the chunk upload, use any of the following configuration options:
 
-* [`async.concurrent`](/api/javascript/ui/upload#configuration-async.concurrent)&mdash;Controls whether the selected files are uploaded simultaneously or one after the other.
-* [`async.autoRetryAfter`](/api/javascript/ui/upload#configuration-async.autoRetryAfter)&mdash;The time interval in milliseconds after which the Upload attempts to retry a failed upload.
-* [`async.maxAutoRetries`](/api/javascript/ui/upload#configuration-async.maxAutoRetries)&mdash;The number of attempts the Upload makes to retry a failed upload before reporting it.
+* [`async.concurrent`](/api/javascript/ui/upload/configuration/async.concurrent)&mdash;Controls whether the selected files are uploaded simultaneously or one after the other.
+* [`async.autoRetryAfter`](/api/javascript/ui/upload/configuration/async.autoretryafter)&mdash;The time interval in milliseconds after which the Upload attempts to retry a failed upload.
+* [`async.maxAutoRetries`](/api/javascript/ui/upload/configuration/async.maxautoretries)&mdash;The number of attempts the Upload makes to retry a failed upload before reporting it.
 
 ###### Example
 

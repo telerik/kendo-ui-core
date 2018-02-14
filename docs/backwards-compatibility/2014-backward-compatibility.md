@@ -85,7 +85,7 @@ All configuration options for text customization are nested in a `messages` obje
 
 **Editor**
 
-Because of security precautions, scripts are no longer posted to the server by default. To allow scripts to be posted to the server, set the [`serialization.scripts` configuration option](/api/javascript/ui/editor#configuration-serialization.scripts) to `true`. Note that for true protection from cross-site scripting, you still need server-side sanitization, as noted in the [preventing cross-site scripting](/web/editor/preventing-xss) help topic.
+Because of security precautions, scripts are no longer posted to the server by default. To allow scripts to be posted to the server, set the [`serialization.scripts` configuration option](/api/javascript/ui/editor/configuration/serialization.scripts) to `true`. Note that for true protection from cross-site scripting, you still need server-side sanitization, as noted in the [preventing cross-site scripting](/web/editor/preventing-xss) help topic.
 
 ```tab-Old
 	$("#editor").kendoEditor();
@@ -101,7 +101,7 @@ Because of security precautions, scripts are no longer posted to the server by d
 
 **PivotDataSource**
 
-The measure aggregator of the [client pivot cube](/api/javascript/data/pivotdatasource#configuration-schema.cube) uses **objects** instead of numbers for the `state` argument. The field you should set to accumulate the value is called `accumulator`.
+The measure aggregator of the [client pivot cube](/api/javascript/data/pivotdatasource/configuration/schema.cube) uses **objects** instead of numbers for the `state` argument. The field you should set to accumulate the value is called `accumulator`.
 
 ```tab-Old
 	aggregate: function(value, state) { return value + state; }
@@ -124,9 +124,9 @@ The measure aggregator of the [client pivot cube](/api/javascript/data/pivotdata
 
 * The Kendo UI Q2 2014 release introduces an additional TabStrip wrapper `div` which verifies that the changes in the height of the TabStrip will not affect the page scrolling position.
 
-* The `activate` event of the TabStrip has been renamed to [`show`](/api/javascript/ui/tabstrip#events-show) and fires at the beginning of the open animation. A new [`activate`](/api/javascript/ui/tabstrip#events-activate) event has been introduced and is fired at the end of the open animation. This is done for consistency with the rest of the widgets.
+* The `activate` event of the TabStrip has been renamed to [`show`](/api/javascript/ui/tabstrip/events/show) and fires at the beginning of the open animation. A new [`activate`](/api/javascript/ui/tabstrip/events/activate) event has been introduced and is fired at the end of the open animation. This is done for consistency with the rest of the widgets.
 
-* The TabStrip automatically calls [`kendo.resize`](/api/javascript/kendo#methods-resize) to its contents in both [`show`](/api/javascript/ui/tabstrip#events-show) and [`activate`](/api/javascript/ui/tabstrip#events-activate) events.
+* The TabStrip automatically calls [`kendo.resize`](/api/javascript/kendo/methods/resize) to its contents in both [`show`](/api/javascript/ui/tabstrip/events/show) and [`activate`](/api/javascript/ui/tabstrip/events/activate) events.
 
 **TreeView**
 

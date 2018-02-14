@@ -18,8 +18,8 @@ The Kendo UI DataSource has many abilities and responsibilities, among which to:
 * Process serialization formats to and from a remote endpoint.
 * [synchronize updates&mdash;create, update, delete](/framework/datasource/crud) to and from a remote endpoint.
 * [Maintain an in-memory cache of data, including changes](/framework/datasource/offline) for updating to a remote endpoint.
-* Calculate and maintain [aggregates](/api/javascript/data/datasource#methods-aggregate), [sorting order](/api/javascript/data/datasource#methods-sort) and [paging](/api/javascript/data/datasource#methods-page).
-* Provide a query mechanism via [filter expressions](/api/javascript/data/datasource#methods-filter).
+* Calculate and maintain [aggregates](/api/javascript/data/datasource/methods/aggregate), [sorting order](/api/javascript/data/datasource/methods/sort) and [paging](/api/javascript/data/datasource/methods/page).
+* Provide a query mechanism via [filter expressions](/api/javascript/data/datasource/methods/filter).
 
 In other words, the DataSource fully supports CRUD  (Create, Read, Update, Destroy) data operations, and provides both client-side and server-side support for sorting, paging, filtering, grouping, and aggregates.
 

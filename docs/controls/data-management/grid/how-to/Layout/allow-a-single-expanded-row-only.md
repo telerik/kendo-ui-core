@@ -10,8 +10,8 @@ slug: howto_allowonlyasingleexpandedrow_grid
 A scenario might require the expanding of a single row in a master Grid at a specific time.
 
 To achieve this behavior:
-* Handle the [`detailExpand`](http://docs.telerik.com/kendo-ui/api/javascript/ui/grid#events-detailExpand) event.
-* Find any previously expanded rows and collapse them by using the [`collapseRow()`](http://docs.telerik.com/kendo-ui/api/javascript/ui/grid#methods-collapseRow) method.
+* Handle the [`detailExpand`](http://docs.telerik.com/kendo-ui/api/javascript/ui/grid/events/detailexpand) event.
+* Find any previously expanded rows and collapse them by using the [`collapseRow()`](http://docs.telerik.com/kendo-ui/api/javascript/ui/grid/methods/collapserow) method.
 
 The following example demonstrates how to collapse a Grid row that was previously expanded (if any) when the user expands a new one.
 

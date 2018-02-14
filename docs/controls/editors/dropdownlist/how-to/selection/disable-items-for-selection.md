@@ -12,7 +12,7 @@ The Kendo UI DropDownList provides an option for displaying list items as non-ac
 
 A possible approach to make items appear as disabled is to apply the `k-state-disabled` CSS class in a Kendo UI Template.
 
-To prevent the future selection of disabled items, add an event handler to the [`select`](/api/javascript/ui/dropdownlist#events-select) event and call `e.preventDefault()`.
+To prevent the future selection of disabled items, add an event handler to the [`select`](/api/javascript/ui/dropdownlist/events/select) event and call `e.preventDefault()`.
 
 ###### Example
 

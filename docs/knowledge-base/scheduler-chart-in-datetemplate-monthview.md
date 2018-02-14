@@ -24,7 +24,7 @@ How can I inject a Chart into each date of the Scheduler month view in AngularJS
 
 ## Solution
 
-Place and initialize the Chart in the [`dayTemplate`](https://docs.telerik.com/kendo-ui/api/javascript/ui/scheduler#configuration-views.dayTemplate) of the Scheduler `month` view.
+Place and initialize the Chart in the [`dayTemplate`](https://docs.telerik.com/kendo-ui/api/javascript/ui/scheduler/configuration/views.daytemplate) of the Scheduler `month` view.
 
 ```html
 <div id="example" ng-app="KendoDemos">

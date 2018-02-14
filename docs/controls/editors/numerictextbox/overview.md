@@ -95,19 +95,19 @@ The following example demonstrates how to create a percentage NumericTextBox.
 
 ### Precision of Numbers
 
-The widget controls the precision of the entered number by using the value of the [`decimals`](/api/javascript/ui/numerictextbox#configuration-decimals) option. The number is limited to the `decimals` length.
+The widget controls the precision of the entered number by using the value of the [`decimals`](/api/javascript/ui/numerictextbox/configuration/decimals) option. The number is limited to the `decimals` length.
 
-By default, the widget does not restrict the length of the typed value. To enforce a specific fraction length during editing, set the [`restrictDecimals`](/api/javascript/ui/numerictextbox#configuration-restrictDecimals) option to `true`.
+By default, the widget does not restrict the length of the typed value. To enforce a specific fraction length during editing, set the [`restrictDecimals`](/api/javascript/ui/numerictextbox/configuration/restrictdecimals) option to `true`.
 
 ### Rounding of Numbers
 
-The widget controls the precision of the entered number using the half-up rounding technique. To disable this functionality, use the [`round`](/api/javascript/ui/numerictextbox#configuration-round) configuration option. Once you turn off the rounding, the value is truncated up to the desired precision length without rounding it.
+The widget controls the precision of the entered number using the half-up rounding technique. To disable this functionality, use the [`round`](/api/javascript/ui/numerictextbox/configuration/round) configuration option. Once you turn off the rounding, the value is truncated up to the desired precision length without rounding it.
 
 ### Range Validation
 
 You can restrict the value of the NumericTextBox to a specific range by using either of the following approaches:
 
-- Restrict the input value between a specific [`min`](/api/javascript/ui/numerictextbox#configuration-min) and [`max`](/api/javascript/ui/numerictextbox#configuration-max) range. The typed value gets modified to fit the range on `blur`.
+- Restrict the input value between a specific [`min`](/api/javascript/ui/numerictextbox/configuration/min) and [`max`](/api/javascript/ui/numerictextbox/configuration/max) range. The typed value gets modified to fit the range on `blur`.
 - Use a custom Kendo UI Validator rule to restrict the input value. The invalid value keeps unchanged and the user is notified for the incorrect input with a friendly error message.
 
     For more details, refer to the article on the [custom validation rules]({% slug overview_kendoui_validator_widget %}#custom-rules-for-validation) of the Validator.
@@ -126,7 +126,7 @@ The NumericTextBox uses a JavaScript `Number` object to keep its value which has
 
 This limitation comes from JavaScript itself and you cannot work around it in a feasible way. You are recommended to use an `<input>` element with server validation because some server languages can parse long numbers.
 
-On the other hand, if the user enters a number with a greater precision than is currently configured through the `decimals` property, the widget value will be rounded. For more details and examples, refer to the [API documentation on `decimals`](/api/javascript/ui/numerictextbox#configuration-decimals).
+On the other hand, if the user enters a number with a greater precision than is currently configured through the `decimals` property, the widget value will be rounded. For more details and examples, refer to the [API documentation on `decimals`](/api/javascript/ui/numerictextbox/configuration/decimals).
 
 ### Input Type
 

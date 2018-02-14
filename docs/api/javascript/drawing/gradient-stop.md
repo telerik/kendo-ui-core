@@ -5,6 +5,7 @@ res_type: api
 ---
 
 # kendo.drawing.GradientStop : kendo.Class
+
 Represents a gradient color stop.
 
 ## Constructor Parameters

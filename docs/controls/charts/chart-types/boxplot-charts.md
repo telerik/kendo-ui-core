@@ -91,7 +91,7 @@ The Box Plot Chart orientation can be changed by setting the series type to `ver
 
 ### Customizing Outliers
 
-Outliers are values that appear outside of the range closed by the lower and upper values (inner fences). There are two types of outliers in a box plot based on their distance from the inner fences—mild and extreme. The Box Plot Chart renders them by default as crosses (mild) and circles (extreme). To let you configure them separately, the Chart has two configuration options—[`series.outliers`](/api/javascript/dataviz/ui/chart#configuration-series.outliers) for mild outliers and [`series.extremes`](/api/javascript/dataviz/ui/chart#configuration-series.extremes) for extreme outliers. You can use them to customize the outliers, as shown below:
+Outliers are values that appear outside of the range closed by the lower and upper values (inner fences). There are two types of outliers in a box plot based on their distance from the inner fences—mild and extreme. The Box Plot Chart renders them by default as crosses (mild) and circles (extreme). To let you configure them separately, the Chart has two configuration options—[`series.outliers`](/api/javascript/dataviz/ui/chart/configuration/series.outliers) for mild outliers and [`series.extremes`](/api/javascript/dataviz/ui/chart/configuration/series.extremes) for extreme outliers. You can use them to customize the outliers, as shown below:
 
 ###### Example
 

@@ -19,7 +19,7 @@ The Kendo UI TabStrip widget can be initialized in two ways:
 * From HTML markup
 * From a JSON data object
 
-> **Important**  
+> **Important**
 > * As TabStrip should be initialized after the DOM is fully loaded, make sure you create it within a $(document).ready() statement.
 > * It is not required for the tabs of the widget to have content. Therefore, if you need to have tabs with no content, it is safe to omit their associated `div` elements.
 
@@ -142,7 +142,7 @@ The example below demonstrates how to add a new TabStrip tab.
 
 ### Scrollable Tabs
 
-As of 2015 Q2 (2015.2.624) version Kendo UI TabStrip supports scrollable tabs for `tabPosition` of `"top"` and `"bottom"`. During initialization, the widget checks if the tabs fit in the available horizontal space and if not, scroll buttons will appear on the widget sides. This behavior is enabled by default, but [can be disabled](/api/javascript/ui/tabstrip#configuration-scrollable).
+As of 2015 Q2 (2015.2.624) version Kendo UI TabStrip supports scrollable tabs for `tabPosition` of `"top"` and `"bottom"`. During initialization, the widget checks if the tabs fit in the available horizontal space and if not, scroll buttons will appear on the widget sides. This behavior is enabled by default, but [can be disabled](/api/javascript/ui/tabstrip/configuration/scrollable).
 
 If the TabStrip has no fixed width and is placed in a fluid layout, it can re-check whether tab scrolling is necessary, or is no longer required. To achieve this, execute the widget's [`resize()` method](/using-kendo-in-responsive-web-pages#individual-widget-resizing), e.g. in `window.resize`. The `resize` method will also show the right scroll button if the last and selected tab becomes invisible as a result of TabStrip shrinking.
 
@@ -152,7 +152,7 @@ For additional information on the configuration, events, and methods of the widg
 
 The TabStrip content containers are scrollable by default. This allows the widget to display scrollbars if it has a fixed height and holds large content that cannot fit. If needed, it is possible to disable TabStrip content scrolling. This can help in scenarios where the TabStrip hosts a widget such as a Menu that needs to overflow outside the TabStrip. For more information and a runnable example, check the following how-to article: [Disable TabStrip Content Scrolling](/controls/navigation/tabstrip/how-to/disable-content-scrolling)
 
-Depending on the browser, the content's scroll position may be reset when changing the active tab. If persisting the scroll position is required, use the [`select`](/api/javascript/ui/tabstrip#events-select) event to save the current scroll position, and the [`activate`](/api/javascript/ui/tabstrip#events-activate) event to restore it. Here is an example: [Save TabStrip Content Scroll Position](/controls/navigation/tabstrip/how-to/save-content-scroll-position)
+Depending on the browser, the content's scroll position may be reset when changing the active tab. If persisting the scroll position is required, use the [`select`](/api/javascript/ui/tabstrip/events/select) event to save the current scroll position, and the [`activate`](/api/javascript/ui/tabstrip/events/activate) event to restore it. Here is an example: [Save TabStrip Content Scroll Position](/controls/navigation/tabstrip/how-to/save-content-scroll-position)
 
 ### Select Tab on Initial Load
 
@@ -176,7 +176,7 @@ The example below demonstrates how to manually select a default tab using HTML.
         <div></div>
     </div>
 
-The example below demonstrates how to initialize a TabStrip and select the first tab via `select` (element).  
+The example below demonstrates how to initialize a TabStrip and select the first tab via `select` (element).
 
 ###### Example
 

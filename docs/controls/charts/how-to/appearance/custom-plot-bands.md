@@ -10,7 +10,7 @@ slug: howto_rendercustomplotbands_charts
 
 You might need to create your own plot bands as a custom overlay.
 
-To achieve this behavior, create custom elements in the [`render` event](/api/javascript/dataviz/ui/chart#events-render) to ensure they survive redraws. Note that you can extend the techniques shown here to create much more complex annotations as well.
+To achieve this behavior, create custom elements in the [`render` event](/api/javascript/dataviz/ui/chart/events/render) to ensure they survive redraws. Note that you can extend the techniques shown here to create much more complex annotations as well.
 
 For a list of all available drawing primitives, refer to the introductory article on the [Drawing API]({% slug overview_kendoui_drawingapi %}).
 
@@ -39,7 +39,7 @@ The example below demonstrates how to render a custom plot band in a Column Kend
         render: function(e) {
           // Locate value slot
           //
-          // http://docs.telerik.com/kendo-ui/api/javascript/dataviz/chart/chart_axis#methods-slot
+          // http://docs.telerik.com/kendo-ui/api/javascript/dataviz/chart/chart_axis/methods/slot
           var valueAxis = e.sender.getAxis("valueAxis");
           var valueSlot = valueAxis.slot(650);
 
@@ -109,7 +109,7 @@ The example below demonstrates how to render a custom plot band in a Bar Kendo U
         render: function(e) {
           // Locate value slot
           //
-          // http://docs.telerik.com/kendo-ui/api/javascript/dataviz/chart/chart_axis#methods-slot
+          // http://docs.telerik.com/kendo-ui/api/javascript/dataviz/chart/chart_axis/methods/slot
           var valueAxis = e.sender.getAxis("valueAxis");
           var valueSlot = valueAxis.slot(650);
 

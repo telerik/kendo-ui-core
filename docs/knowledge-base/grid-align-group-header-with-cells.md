@@ -28,7 +28,7 @@ I am looking for a way to:
 
 ## Solution
 
-Access all available aggregates by using the `aggregates` field in the [`groupHeaderTemplate`](/api/javascript/ui/grid#configuration-columns.groupHeaderTemplate).
+Access all available aggregates by using the `aggregates` field in the [`groupHeaderTemplate`](/api/javascript/ui/grid/configuration/columns.groupheadertemplate).
 
 To display the different aggregates in separate cells that are aligned with the columns:
 

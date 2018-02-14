@@ -43,7 +43,7 @@ How can I persist the function references of the custom command buttons in the K
 
 ## Solution
 
-Just before you pass the options to the [`setOptions`](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid#methods-setOptions) method of the Grid, add the function reference to the parsed JSON file.
+Just before you pass the options to the [`setOptions`](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid/methods/setoptions) method of the Grid, add the function reference to the parsed JSON file.
 
 ```html
     <div id="example">

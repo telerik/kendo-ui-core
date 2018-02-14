@@ -2329,7 +2329,7 @@ Only applicable for the formatting tool. Specifies the context in which the opti
 
 ### tools.palette `String|Array` *(default: null)*
 
-Specifies the [color palette](/api/javascript/ui/colorpicker#configuration-palette) for "foreColor" and "backColor" tools.
+Specifies the [color palette](/api/javascript/ui/colorpicker/configuration/palette) for "foreColor" and "backColor" tools.
 
 #### Example - "websafe" palette
 
@@ -2357,7 +2357,7 @@ Specifies the [color palette](/api/javascript/ui/colorpicker#configuration-palet
 
 ### tools.columns `Number`
 
-Specifies the [colors columns](/api/javascript/ui/colorpicker#configuration-columns) for "foreColor" and "backColor" tools when list of colors are defined.
+Specifies the [colors columns](/api/javascript/ui/colorpicker/configuration/columns) for "foreColor" and "backColor" tools when list of colors are defined.
 
 #### Example - specified columns of the colors
 

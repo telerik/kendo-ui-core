@@ -736,7 +736,7 @@ Enables (if set to `true`) or disables (if set to `false`) the display of a file
 
 ### template `String|Function`
 
-Sets a [template](/api/javascript/kendo#methods-template) for rendering the files in the file list.
+Sets a [template](/api/javascript/kendo/methods/template) for rendering the files in the file list.
 
 The `template` data `Array` consists of:
 

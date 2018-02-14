@@ -32,17 +32,17 @@ How can I select all rows on all Kendo UI Grid pages?
 >
 > The implementation of this functionality might lead to slow Grid performance.
 
-1. Set the [`persistSelection`](http://docs.telerik.com/kendo-ui/api/javascript/ui/grid#configuration-persistSelection) configuration of the Grid to `true`.
+1. Set the [`persistSelection`](http://docs.telerik.com/kendo-ui/api/javascript/ui/grid/configuration/persistselection) configuration of the Grid to `true`.
 1. Use a jQuery selector to subscribe for the [`click`](https://api.jquery.com/click/) event of the master checkbox.
 1. In the `click` event handler:
-	1. Save the current page size in a global variable by using the [`pageSize`](http://docs.telerik.com/kendo-ui/api/javascript/data/datasource#methods-pageSize) method of the Kendo UI dataSource.
+	1. Save the current page size in a global variable by using the [`pageSize`](http://docs.telerik.com/kendo-ui/api/javascript/data/datasource/methods/pagesize) method of the Kendo UI dataSource.
 	1. Show all the rows on a single page by using the `pageSize` method.
-	1. Select all the rows by using the [`select`](http://docs.telerik.com/kendo-ui/api/javascript/ui/grid#methods-select) method of the Kendo UI Grid.
+	1. Select all the rows by using the [`select`](http://docs.telerik.com/kendo-ui/api/javascript/ui/grid/methods/select) method of the Kendo UI Grid.
 	1. Bring back the old page size by using the `pageSize` method.
 
 ```html
 <link rel="stylesheet" href="https://demos.telerik.com/kendo-ui/content/shared/styles/examples-offline.css">
-<script src="https://demos.telerik.com/kendo-ui/content/shared/js/console.js"></script>  
+<script src="https://demos.telerik.com/kendo-ui/content/shared/js/console.js"></script>
 
 
 <div id="example">
@@ -139,4 +139,4 @@ The checkbox selectable column is available as of the Kendo UI R2 2017 SP1 relea
 
 * [Frequently Asked Questions on Checkbox Selection]({% slug frequently_asked_questions_grid %})
 * [Grid Checkbox Selection Demo](http://demos.telerik.com/kendo-ui/grid/checkbox-selection)
-* [API Reference for the columns.selectable Configuration](http://docs.telerik.com/kendo-ui/api/javascript/ui/grid#configuration-columns.selectable)
+* [API Reference for the columns.selectable Configuration](http://docs.telerik.com/kendo-ui/api/javascript/ui/grid/configuration/columns.selectable)

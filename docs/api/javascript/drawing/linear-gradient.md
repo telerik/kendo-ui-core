@@ -5,6 +5,7 @@ res_type: api
 ---
 
 # kendo.drawing.LinearGradient : kendo.drawing.Gradient
+
 Represents a linear color gradient.
 
 #### Example - creating a linear gradient
@@ -65,7 +66,7 @@ Contains [GradientStop](gradient-stop) instances.
 
 ### addStop
 Adds a color stop to the gradient.
-Inherited from [Gradient.addStop](gradient#methods-addStop)
+Inherited from [Gradient.addStop](/api/javascript/drawwing/gradient/methods/addstop)
 
 #### Parameters
 
@@ -113,7 +114,7 @@ For example [0, 0] is top left and [1, 1] is bottom right.
 
 ### removeStop
 Removes a color stop from the gradient.
-Inherited from [Gradient.removeStop](gradient#methods-removeStop)
+Inherited from [Gradient.removeStop](/api/javascript/drawwing/gradient/methods/removestop)
 
 #### Parameters
 

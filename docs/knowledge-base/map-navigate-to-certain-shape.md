@@ -33,7 +33,7 @@ How can I navigate and zoom to shape object with an shape object reference?
 
 The Kendo UI Map does not provide a built-in solution for achieving this behavior. However, you can still achieve it with some code.
 
-Find the shape object from the data source of the map, then calculate the center of the shape using its coordinates and navigate to the center of the shape using the [center method](https://docs.telerik.com/kendo-ui/api/javascript/dataviz/ui/map#methods-center).
+Find the shape object from the data source of the map, then calculate the center of the shape using its coordinates and navigate to the center of the shape using the [center method](https://docs.telerik.com/kendo-ui/api/javascript/dataviz/ui/map/methods/center).
 
 
 The following example demonstrates the full implementation of the approach.

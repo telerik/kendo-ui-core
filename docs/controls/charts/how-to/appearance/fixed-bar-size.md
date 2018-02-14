@@ -10,7 +10,7 @@ slug: howto_usefixedbarsize_charts
 
 You might need to set the size of the default drawing element of the bars to the same size.
 
-The example below demonstrates how to use the [`series.visual`](/api/javascript/dataviz/ui/chart#configuration-series.visual) function to scale the default drawing element of the bars and achieve this behavior.
+The example below demonstrates how to use the [`series.visual`](/api/javascript/dataviz/ui/chart/configuration/series.visual) function to scale the default drawing element of the bars and achieve this behavior.
 
 ###### Example
 
@@ -24,12 +24,12 @@ The example below demonstrates how to use the [`series.visual`](/api/javascript/
           data: [1, 2],
           visual: function(e) {
             //create the default visual
-            var visual = e.createVisual();        
+            var visual = e.createVisual();
             //scale it so that it has the predefined size
             visual.transform(kendo.geometry.transform().scale(1, BAR_SIZE / e.rect.size.height, e.rect.center() ));
             return visual;
           }
-        }]            
+        }]
       });
     </script>
     </div>

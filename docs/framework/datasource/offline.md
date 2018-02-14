@@ -22,7 +22,7 @@ Offline support allows data-bound Kendo UI widgets to function without active se
 
 ### Set Offline Storage
 
-Set the [`offlineStorage`](/api/javascript/data/datasource#configuration-offlineStorage) option to enable offline storage. The DataSource uses this value as a key when saving and loading its state. By default, the Kendo UI DataSource uses the [`localStorage`](https://developer.mozilla.org/en-US/docs/Web/API/Web_Storage_API) option to persist its offline state.
+Set the [`offlineStorage`](/api/javascript/data/datasource/configuration/offlinestorage) option to enable offline storage. The DataSource uses this value as a key when saving and loading its state. By default, the Kendo UI DataSource uses the [`localStorage`](https://developer.mozilla.org/en-US/docs/Web/API/Web_Storage_API) option to persist its offline state.
 
 > **Important**
 >
@@ -51,13 +51,13 @@ The example below demonstrates how to set the offline storage key.
 
 ### Go Online
 
-By default, the DataSource is online. All data item changes, such as create, update, and destroy, go to the remote service configured via the [`transport`](/api/javascript/data/datasource#configuration-transport) option.
+By default, the DataSource is online. All data item changes, such as create, update, and destroy, go to the remote service configured via the [`transport`](/api/javascript/data/datasource/configuration/transport) option.
 
-To go back to online mode, call the `online` method with `true` as an argument. The DataSource immediately calls the [`sync`](/api/javascript/data/datasource#methods-sync) method to send all offline changes to the remote service.
+To go back to online mode, call the `online` method with `true` as an argument. The DataSource immediately calls the [`sync`](/api/javascript/data/datasource/methods/sync) method to send all offline changes to the remote service.
 
 ### Go Offline
 
-To switch to offline mode call the [`online`](/api/javascript/data/datasource#methods-online) method  with `false` as an argument. From now on the DataSource is going to persist all data item changes in offline storage.
+To switch to offline mode call the [`online`](/api/javascript/data/datasource/methods/online) method  with `false` as an argument. From now on the DataSource is going to persist all data item changes in offline storage.
 
 The example below demonstrates how to go in offline mode.
 
@@ -102,7 +102,7 @@ The example below demonstrates how to go in offline mode.
 
 ### Get Current Offline State
 
-The [`offlineData`](/api/javascript/data/datasource#methods-offlineData) method returns the current offline state of the DataSource. The state is an array of JavaScript objects that represent the data items. Changed data items have a `__state__` field attached. That field indicates the type of change: `"create"`, `"update"` or `"destroy"`. Unmodified data items do not have a `__state__` field.
+The [`offlineData`](/api/javascript/data/datasource/methods/offlinedata) method returns the current offline state of the DataSource. The state is an array of JavaScript objects that represent the data items. Changed data items have a `__state__` field attached. That field indicates the type of change: `"create"`, `"update"` or `"destroy"`. Unmodified data items do not have a `__state__` field.
 
 The example below demonstrates how to get the offline state.
 
@@ -146,7 +146,7 @@ The example below demonstrates how to get the offline state.
 
 > **Important**
 >
-> If the [`serverGrouping`](/api/javascript/data/datasource#configuration-serverGrouping) option is set to `true` the `offlineData` returns an array of groups in the following way `{ value:"group value", field:"group field", items: [ /* data items in the group */ ] }`.
+> If the [`serverGrouping`](/api/javascript/data/datasource/configuration/servergrouping) option is set to `true` the `offlineData` returns an array of groups in the following way `{ value:"group value", field:"group field", items: [ /* data items in the group */ ] }`.
 
 ## Customization
 

@@ -98,9 +98,9 @@ Measures can be defined as a list of objects with `name` and `type` fields:
         type: "status"
     }]
 
-> The `type` value can be defined to "status" or "trend" to render [kpiStatusTemplate](/api/javascript/ui/pivotgrid#configuration-kpiStatusTemplate)
-or [kpiTrendTemplate](/api/javascript/ui/pivotgrid#configuration-kpiTrendTemplate). If type is not defined, then the
-[dataCellTemplate](/api/javascript/ui/pivotgrid#configuration-dataCellTemplate) will be used.
+> The `type` value can be defined to "status" or "trend" to render [kpiStatusTemplate](/api/javascript/ui/pivotgrid/configuration/kpistatustemplate)
+or [kpiTrendTemplate](/api/javascript/ui/pivotgrid/configuration/kpitrendtemplate). If type is not defined, then the
+[dataCellTemplate](/api/javascript/ui/pivotgrid/configuration/datacelltemplate) will be used.
 
 #### Example - set the measures
 

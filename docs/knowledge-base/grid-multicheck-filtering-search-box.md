@@ -29,8 +29,8 @@ How can I show a search box when the checkbox filtering of a Kendo UI Grid is en
 
 ## Solution
 
-1. Set the [`columns.filterable.multi`](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid#configuration-columns.filterable.multi) configuration to `true`.
-1. Set the [`columns.filterable.search`](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid#configuration-columns.filterable.search) configuration to `true`.
+1. Set the [`columns.filterable.multi`](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid/configuration/columns.filterable.multi) configuration to `true`.
+1. Set the [`columns.filterable.search`](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid/configuration/columns.filterable.search) configuration to `true`.
 
 ```html
 <div id="example">

@@ -246,7 +246,7 @@ The example below demonstrates how to detect `Back` button press in a route.
     </script>
 ```
 
-> If you want to globally detect back navigation in the Router, use its [back event](/api/javascript/router#events-back).
+> If you want to globally detect back navigation in the Router, use its [back event](/api/javascript/router/events/back).
 
 ## See Also
 
