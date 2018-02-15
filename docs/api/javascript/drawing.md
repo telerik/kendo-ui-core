@@ -53,7 +53,7 @@ Converts the given DOM element to a [Drawing API](/framework/drawing/overview) s
 
 The operation is asynchronous and returns a [promise](http://api.jquery.com/Types/#Promise).
 
-The promise will be resolved with the root [Group](drawing/group) of the scene.
+The promise will be resolved with the root [Group](/api/javascript/drawing/group) of the scene.
 
 #### Parameters
 
@@ -107,6 +107,7 @@ The [page template](/framework/drawing/drawing-dom#page-template-headers-and-foo
 `Promise` A promise that will be resolved with the root Group of the scene.
 
 #### Example - Exporting a DOM element to an image
+
     <div id="calendar"></div>
     <script>
         $("#calendar").kendoCalendar();
@@ -128,6 +129,7 @@ The [page template](/framework/drawing/drawing-dom#page-template-headers-and-foo
     </script>
 
 #### Example - Exporting a DOM element to a PDF file (via Base64-encoded string)
+
     <div id="calendar"></div>
     <script>
         $("#calendar").kendoCalendar();
@@ -152,6 +154,7 @@ The [page template](/framework/drawing/drawing-dom#page-template-headers-and-foo
     </script>
 
 #### Example - Exporting a DOM element to a PDF Base64-encoded string and send it to the server via jQuery.post()
+
     <div id="calendar"></div>
     <script>
         $("#calendar").kendoCalendar();
@@ -179,6 +182,7 @@ The [page template](/framework/drawing/drawing-dom#page-template-headers-and-foo
     </script>
 
 #### Example - Exporting a DOM element to a PDF file (direct)
+
     <div id="calendar"></div>
     <script>
         $("#calendar").kendoCalendar();

@@ -323,7 +323,7 @@ If set to `false` the widget will be disabled and will not allow user input. The
 
 ### enforceMinLength `Boolean` *(default: false)*
 
-If set to `true` the widget will not show all items when the text of the search input cleared. By default the widget shows all items when the text of the search input is cleared. Works in conjunction with [minLength](#configuration-minLength).
+If set to `true` the widget will not show all items when the text of the search input cleared. By default the widget shows all items when the text of the search input is cleared. Works in conjunction with [minLength](/api/javascript/ui/combobox#configuration-minLength).
 
 #### Example - enforce minLength
 
@@ -351,7 +351,7 @@ If set to `true` the widget will not show all items when the text of the search 
 
 ### filter `String`*(default: "none")*
 
-The filtering method used to determine the suggestions for the current value. Filtration is turned off by default, and can be performed over `string` values only (either the widget's data has to be an array of strings, or over the field, configured in the [`dataTextField`](#configuration-dataTextField) option).
+The filtering method used to determine the suggestions for the current value. Filtration is turned off by default, and can be performed over `string` values only (either the widget's data has to be an array of strings, or over the field, configured in the [`dataTextField`](/api/javascript/ui/combobox#configuration-dataTextField) option).
 The supported filter values are `startswith`, `endswith` and `contains`.
 
 #### Example - set the filter
@@ -494,7 +494,7 @@ The index of the initially selected item. The index is `0` based.
 
 The minimum number of characters the user must type before a search is performed. Set to higher value than `1` if the search could match a lot of items.
 
-> Widget will initiate a request when input value is cleared. If you would like to prevent this behavior please check the [filtering](#events-filtering) event for more details.
+> Widget will initiate a request when input value is cleared. If you would like to prevent this behavior please check the [filtering](/api/javascript/ui/combobox/events/filtering) event for more details.
 
 #### Example - set minLength
 
@@ -960,11 +960,11 @@ The widget will pass the selected value(s) in the `valueMapper` function. In tur
 
 ### dataSource `kendo.data.DataSource`
 
-The [data source](/api/javascript/data/datasource) of the widget. Configured via the [dataSource](/configuration/datasource) option.
+The [data source](/api/javascript/data/datasource) of the widget. Configured via the [dataSource](/api/javascript/ui/combobox/configuration/datasource) option.
 
 > Changes of the data source will be reflected in the widget.
 
-> **Important:** Assigning a new data source would have no effect. Use the [setDataSource](#methods-setDataSource) method instead.
+> **Important:** Assigning a new data source would have no effect. Use the [setDataSource](/api/javascript/ui/combobox/methods/setdatasource) method instead.
 
 #### Example - add a data item to the data source
     <input id="combobox" />
@@ -1252,12 +1252,12 @@ The filter value.
 
 Gets or sets the selected item. Selects the item provided as an argument and updates the value and text of the widget.
 
-> **Important:** If the widget is not bound (e.g. `autoBind` is set to `false`), the `select` method will **not** pre-fetch the data before continuing with the selection and value setting (unlike the [value](#methods-value) method), and no item will be selected.
+> **Important:** If the widget is not bound (e.g. `autoBind` is set to `false`), the `select` method will **not** pre-fetch the data before continuing with the selection and value setting (unlike the [value](/api/javascript/ui/combobox/methods/value) method), and no item will be selected.
 
 > **Important:** When **virtualization** is enabled, the method **does not support** selection with a *function predicate*. The predicate function looks only
 in the current datasource view, which represents only the active range/page. Hence it will not work properly.
 
-> **Important:** This method **does not trigger** [change](#events-change) event.
+> **Important:** This method **does not trigger** [change](/api/javascript/ui/combobox/events/change) event.
 This could affect [MVVM value binding](/framework/mvvm/bindings/value). The model bound to the widget will not be updated.
 You can overcome this behavior trigerring the `change` event manually using [trigger("change")](/api/javascript/observable/methods/trigger) method.
 
@@ -1410,7 +1410,7 @@ there are no matches then the text will be considered as a custom value of the w
 
 > **Important:** When the `autoBind` option is set to *false*, the widget will update only the selected text. The widget will stay **unbound**.
 
-> **Important:** This method **does not trigger** [change](#events-change) event.
+> **Important:** This method **does not trigger** [change](/api/javascript/ui/combobox/events/change) event.
 This could affect [MVVM value binding](/framework/mvvm/bindings/value). The model bound to the widget will not be updated.
 You can overcome this behavior trigerring the `change` event manually using [trigger("change")](/api/javascript/observable/methods/trigger) method.
 
@@ -1479,7 +1479,7 @@ Gets or sets the value of the ComboBox.
 
 > **Important:** The widget will **clear the applied filter** if a new value is set. Thus it ensures that the original/whole data set is available for selection.
 
-> **Important:** This method **does not trigger** [change](#events-change) event.
+> **Important:** This method **does not trigger** [change](/api/javascript/ui/combobox/events/change) event.
 This could affect [MVVM value binding](/framework/mvvm/bindings/value). The model bound to the widget will not be updated.
 You can overcome this behavior trigerring the `change` event manually using [trigger("change")](/api/javascript/observable/methods/trigger) method.
 

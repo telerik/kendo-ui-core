@@ -1102,7 +1102,7 @@ Get or sets the columns configuration.
 
 ##### val `Array`
 
-The columns configuration. Accepts the same values as the [columns](#configuration-columns) option.
+The columns configuration. Accepts the same values as the [columns](/api/javascript/data/pivotdatasource#configuration-columns) option.
 
 #### Returns
 
@@ -1345,7 +1345,7 @@ Get or sets the measures configuration.
 
 ##### val `Array`
 
-The measures configuration. Accepts the same values as the [measures](#configuration-measures-values) option.
+The measures configuration. Accepts the same values as the [measures](/api/javascript/data/pivotdatasource#configuration-measures-values) option.
 
 #### Returns
 
@@ -1433,7 +1433,7 @@ Get or sets the rows configuration.
 
 ##### val `Array`
 
-The rows configuration. Accepts the same values as the [row](#configuration-rows) option.
+The rows configuration. Accepts the same values as the [row](/api/javascript/data/pivotdatasource#configuration-rows) option.
 
 #### Returns
 

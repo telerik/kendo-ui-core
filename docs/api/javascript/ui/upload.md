@@ -68,7 +68,7 @@ The batch mode applies to multiple files which are selected simultaneously. File
 
 When `async.chunkSize` is set, the selected files are uploaded chunk by chunk with the declared size. Each request sends a separate file blob and additional string metadata to the server. This metadata is in a stringified JSON format and contains the `chunkIndex`, `contentType`, `totalFileSize`, `totalChunks`, and `uploadUid` properties. These properties enable the validation and combination of the file on the server side. The response also returns a JSON object with the `uploaded` and `fileUid` properties, which notifies the client what the next chunk is.
 
-> The `async.chunkSize` property is available only when [`async.batch`](#configuration-async.batch) is set to `false`.
+> The `async.chunkSize` property is available only when [`async.batch`](/api/javascript/ui/upload#configuration-async.batch) is set to `false`.
 
 #### Example
 
@@ -87,7 +87,7 @@ When `async.chunkSize` is set, the selected files are uploaded chunk by chunk wi
 
 By default, the selected files are uploaded one after the other. When `async.concurrent` is set to `true`, all selected files start to upload simultaneously.
 
-> The `async.concurrent` property is available only when [`async.chunkSize`](#configuration-async.chunkSize) is set.
+> The `async.concurrent` property is available only when [`async.chunkSize`](/api/javascript/ui/upload#configuration-async.chunkSize) is set.
 
 #### Example
 
@@ -125,7 +125,7 @@ If `async.autoRetryAfter` is set, the failed upload request is repeated after th
 
 Sets the maximum number of attempts that are performed if an upload fails.
 
-> The `async.maxAutoRetries` property is available only when [`async.autoRetryAfter`](#configuration-async.autoRetryAfter) is set.
+> The `async.maxAutoRetries` property is available only when [`async.autoRetryAfter`](/api/javascript/ui/upload#configuration-async.autoRetryAfter) is set.
 
 #### Example
 

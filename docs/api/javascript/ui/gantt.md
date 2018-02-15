@@ -264,7 +264,7 @@ Defines the width of the column resize handle in pixels. Apply a larger value fo
 ### columns `Array`
 
 The configuration of the Gantt columns. An array of JavaScript objects or strings. A JavaScript objects are interpreted as column configurations. Strings are interpreted as the
-[field](#configuration-columns.field) to which the column is bound. The Gantt will create a column for every item of the array.
+[field](/api/javascript/ui/gantt#configuration-columns.field) to which the column is bound. The Gantt will create a column for every item of the array.
 
 > If this setting is **not** specified the Gantt will create a single column for the task title.
 
@@ -343,7 +343,7 @@ The field to which the column is bound. The value of this field is displayed by 
 
 ### columns.title `String`
 
-The text that is displayed in the column header cell. If not set the [field](#configuration-columns.field) is used.
+The text that is displayed in the column header cell. If not set the [field](/api/javascript/ui/gantt#configuration-columns.field) is used.
 
 #### Example - set the title of a column
 
@@ -1538,7 +1538,7 @@ Sets the end of the work day.
 
 The start of working week (index based).
 
-> The `workWeekEnd` option is supported when [showWorkDays](#configuration-showWorkDays) is `true`.
+> The `workWeekEnd` option is supported when [showWorkDays](/api/javascript/ui/gantt#configuration-showWorkDays) is `true`.
 
 #### Example
 
@@ -1563,7 +1563,7 @@ The start of working week (index based).
 
 The end of working week (index based).
 
-> The `workWeekEnd` option is supported when [showWorkDays](#configuration-showWorkDays) is `true`.
+> The `workWeekEnd` option is supported when [showWorkDays](/api/javascript/ui/gantt#configuration-showWorkDays) is `true`.
 
 #### Example
 
@@ -2571,7 +2571,7 @@ Specifies the file name of the exported PDF file.
     </script>
 
 ### pdf.forceProxy `Boolean` *(default: false)*
-If set to true, the content will be forwarded to [proxyURL](#configuration-pdf.proxyURL) even if the browser supports saving files locally.
+If set to true, the content will be forwarded to [proxyURL](/api/javascript/ui/gantt#configuration-pdf.proxyURL) even if the browser supports saving files locally.
 
 ### pdf.keywords `String` *(default: null)*
 
@@ -2908,7 +2908,7 @@ If set to `true` allows users to resize columns by dragging their header borders
 
 ### selectable `Boolean` *(default: true)*
 
-If set to `false` the user won't be able to select tasks in the Gantt. By default selection is enabled and triggers the [change event](#events-change).
+If set to `false` the user won't be able to select tasks in the Gantt. By default selection is enabled and triggers the [change event](/api/javascript/ui/gantt/events/change).
 
 #### Example
 
@@ -3169,7 +3169,7 @@ The [template](/api/javascript/kendo/methods/template) which renders the command
 
 ### toolbar.text `String`
 
-The text displayed by the command button. If not set the [name](#configuration-toolbar.name)` option would be used as the button text instead.
+The text displayed by the command button. If not set the [name](/api/javascript/ui/gantt#configuration-toolbar.name)` option would be used as the button text instead.
 
 #### Example - set the text of the toolbar button
     <div id="gantt"></div>
@@ -3277,7 +3277,7 @@ By default the Kendo UI Gantt widget displays "day", "week", and "month" views.
 
 If set to some date and it is between the range start and range end of the selected view, the timeline of the currently selected view is scrolled to start from this date.
 
-Overrides the [date](#configuration-date) option of the gantt.
+Overrides the [date](/api/javascript/ui/gantt#configuration-date) option of the gantt.
 
 #### Example
     <div id="gantt1"></div>
@@ -3312,7 +3312,7 @@ Configures the view range settings.
 
 If set to some date the timeline of the view will start from this date.
 
-Overrides the [range.start](#configuration-range.start) option of the gantt.
+Overrides the [range.start](/api/javascript/ui/gantt#configuration-range.start) option of the gantt.
 
 #### Example
 
@@ -3342,7 +3342,7 @@ Overrides the [range.start](#configuration-range.start) option of the gantt.
 
 If set to some date the timeline of the view will end to this date.
 
-Overrides the [range.end](#configuration-range.end) option of the gantt.
+Overrides the [range.end](/api/javascript/ui/gantt#configuration-range.end) option of the gantt.
 
 #### Example
 
@@ -3885,11 +3885,11 @@ The height of the table rows. Numeric values are treated as pixels.
 
 ### dataSource `kendo.data.GanttDataSource`
 
-The [data source](/api/javascript/data/ganttdatasource) of the widget. Configured via the [datasource](/configuration/datasource) option.
+The [data source](/api/javascript/data/ganttdatasource) of the widget. Configured via the [datasource](/api/javascript/ui/gantt/configuration/datasource) option.
 
 > Changes of the data source will be reflected in the widget.
 
-> Assigning a new data source would have no effect. Use the [setDataSource](#methods-setDataSource) method instead.
+> Assigning a new data source would have no effect. Use the [setDataSource](/api/javascript/ui/gantt/methods/setdatasource) method instead.
 
 #### Example - add a Gantt task to the data source
 
@@ -3991,11 +3991,11 @@ The [data source](/api/javascript/data/ganttdatasource) of the widget. Configure
 
 ### dependencies `kendo.data.GanttDependencyDataSource`
 
-The [dependencies data source](/api/javascript/data/ganttdependencydatasource) of the widget. Configured via the [dependencies](/configuration/dependencies) option.
+The [dependencies data source](/api/javascript/data/ganttdependencydatasource) of the widget. Configured via the [dependencies](/api/javascript/ui/gantt/configuration/dependencies) option.
 
 > Changes of the data source will be reflected in the widget.
 
-> Assigning a new data source would have no effect. Use the [setDependenciesDataSource](#methods-setDependenciesDataSource) method instead.
+> Assigning a new data source would have no effect. Use the [setDependenciesDataSource](/api/javascript/ui/gantt/methods/setdependenciesdatasource) method instead.
 
 #### Example - add a dependency to the dependencies data source
 
@@ -4375,12 +4375,12 @@ The task which should be removed. Also accepts a string which is the `uid` of th
 
 ### saveAsPDF
 
-Initiates the PDF export and returns a promise. Also triggers the [pdfExport](#events-pdfExport) event.
+Initiates the PDF export and returns a promise. Also triggers the [pdfExport](/api/javascript/ui/gantt/events/pdfexport) event.
 
 > Calling this method may trip the built-in browser pop-up blocker. To avoid that, call this method as a response to an end-user action, e.g. a button click.
 
 #### Returns
-`Promise` A promise that will be resolved when the export completes. The same promise is available in the [pdfExport](#events-pdfExport) event arguments.
+`Promise` A promise that will be resolved when the export completes. The same promise is available in the [pdfExport](/api/javascript/ui/gantt/events/pdfexport) event arguments.
 
 #### Example - manually initiate PDF export
     <button id="export">Export to PDF</button>
@@ -5147,7 +5147,7 @@ The event handler function context (available via the `this` keyword) will be se
 
 ##### e.column `Object`
 
-A JavaScript object which represents the [column](#configuration-columns) configuration.
+A JavaScript object which represents the [column](/api/javascript/ui/gantt#configuration-columns) configuration.
 
 ##### e.newWidth `Number`
 

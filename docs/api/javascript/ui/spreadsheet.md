@@ -91,7 +91,7 @@ Specifies the file name of the exported Excel file.
 ```
 
 ### excel.forceProxy `Boolean` *(default: false)*
-If set to true, the content will be forwarded to [proxyURL](#configuration-excel.proxyURL) even if the browser supports saving files locally.
+If set to true, the content will be forwarded to [proxyURL](/api/javascript/ui/spreadsheet#configuration-excel.proxyURL) even if the browser supports saving files locally.
 
 ### excel.proxyURL `String` *(default: null)*
 
@@ -315,7 +315,7 @@ An option indicating whether to fit the spreadsheet content to page width.
 ```
 
 ### pdf.forceProxy `Boolean` *(default: false)*
-If set to true, the content will be forwarded to [proxyURL](#configuration-pdf.proxyURL) even if the browser supports saving files locally.
+If set to true, the content will be forwarded to [proxyURL](/api/javascript/ui/spreadsheet#configuration-pdf.proxyURL) even if the browser supports saving files locally.
 
 ### pdf.guidelines `Boolean` *(default: false)*
 An option indicating whether to export the cell guidelines.
@@ -347,7 +347,7 @@ An option indicating whether to export the cell guidelines.
 ### pdf.hCenter `Boolean` *(default: false)*
 An option indicating whether to center the content horizontally.
 
-See also [vCenter](#configuration-pdf.vCenter).
+See also [vCenter](/api/javascript/ui/spreadsheet#configuration-pdf.vCenter).
 
 #### Example - center content horizontally
 ```
@@ -650,7 +650,7 @@ Sets the title of the PDF file.
 ### pdf.vCenter `Boolean` *(default: false)*
 An option indicating whether to center the content vertically.
 
-See also [hCenter](#configuration-pdf.hCenter).
+See also [hCenter](/api/javascript/ui/spreadsheet#configuration-pdf.hCenter).
 
 #### Example - center content vertically
 ```
@@ -698,7 +698,7 @@ An array defining the columns in this sheet and their content.
 The zero-based index of the column. Required to ensure correct positioning.
 
 ### sheets.columns.width `Number`
-The width of the column in pixels. Defaults to [columnWidth](#configuration-columnWidth).
+The width of the column in pixels. Defaults to [columnWidth](/api/javascript/ui/spreadsheet#configuration-columnWidth).
 
 ### sheets.dataSource `kendo.data.DataSource`
 The data source instance for this sheet.
@@ -749,17 +749,17 @@ The supported filters are:
   * dynamic - filters based on dynamic criteria
 
 ### sheets.filter.columns.index `Number`
-The index of the column **relative to** the [filter range](#configuration-sheets.filter.ref).
+The index of the column **relative to** the [filter range](/api/javascript/ui/spreadsheet#configuration-sheets.filter.ref).
 
 ### sheets.filter.columns.logic `String`
-The logical operator to apply to [filter criteria](#configuration-sheets.filter.columns.criteria).
+The logical operator to apply to [filter criteria](/api/javascript/ui/spreadsheet#configuration-sheets.filter.columns.criteria).
 
 Possible values are `and`, `or`.
 
 ### sheets.filter.columns.type `String`
 The filter sub-type, if any.
 
-Applicable types according to the [main filter](#configuration-sheets.filter.columns.filter).
+Applicable types according to the [main filter](/api/javascript/ui/spreadsheet#configuration-sheets.filter.columns.filter).
 * top
     * topNumber
     * topPercent
@@ -1080,7 +1080,7 @@ Available options are:
 Will wrap the cell content if set to `true`.
 
 ### sheets.rows.height `Number`
-The row height in pixels. Defaults to [rowHeight](#configuration-rowHeight).
+The row height in pixels. Defaults to [rowHeight](/api/javascript/ui/spreadsheet#configuration-rowHeight).
 
 ### sheets.rows.index `Number`
 The absolute row index. Required to ensure correct positioning.
@@ -1361,7 +1361,7 @@ The file or blob, usually obtained through a file input.
 
 ### saveAsExcel
 
-Initiates the Excel export. Also fires the [`excelExport`](#events-excelExport) event.
+Initiates the Excel export. Also fires the [`excelExport`](/api/javascript/ui/spreadsheet/events/excelexport) event.
 
 > Calling this method could trigger the browser built-in popup blocker in some cases. To avoid that, always call it as a response to an end-user action e.g. button click.
 
@@ -1396,16 +1396,16 @@ Initiates the Excel export. Also fires the [`excelExport`](#events-excelExport) 
 
 ### saveAsPDF
 
-Initiates the PDF export. Also fires the [`pdfExport`](#events-pdfExport) event.
+Initiates the PDF export. Also fires the [`pdfExport`](/api/javascript/ui/spreadsheet/events/pdfexport) event.
 
 > Calling this method could trigger the browser built-in popup blocker in some cases. To avoid that, always call it as a response to an end-user action e.g. button click.
 
 #### Parameters
 ##### options `Object`
-An options object with the same structure as the [pdf](#configuration-pdf) options.
+An options object with the same structure as the [pdf](/api/javascript/ui/spreadsheet#configuration-pdf) options.
 
 #### Returns
-`Promise` A promise that will be resolved when the export completes. The same promise is available in the [pdfExport](#events-pdfExport) event arguments.
+`Promise` A promise that will be resolved when the export completes. The same promise is available in the [pdfExport](/api/javascript/ui/spreadsheet/events/pdfexport) event arguments.
 
 
 #### Example - manually initiate PDF export

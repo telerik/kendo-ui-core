@@ -819,7 +819,7 @@ Defines the data source of the connections.
 
 #### Example - settings the connectionsDataSource and dynamic labelling
 
-Note that the 'from' and 'to' fields in the connectionsDataSource refer to the 'id' of the dataSource. The label on the connection is set via the [connectionsDefaults.content.template](#configuration-connectionDefaults.content.template).
+Note that the 'from' and 'to' fields in the connectionsDataSource refer to the 'id' of the dataSource. The label on the connection is set via the [connectionsDefaults.content.template](/api/javascript/dataviz/ui/diagram#configuration-connectionDefaults.content.template).
 
     <div id="diagram"></div>
     <script>
@@ -1130,91 +1130,91 @@ The 'editable.resize' configuration below collects pretty much all of the availa
 
 ### editable.resize.handles `Object`
 
-Specifies the settings of the resizing handles. See the [editable.resize](#configuration-editable.resize) configuration for an example.
+Specifies the settings of the resizing handles. See the [editable.resize](/api/javascript/dataviz/ui/diagram#configuration-editable.resize) configuration for an example.
 
 ### editable.resize.handles.fill `String|Object`
 
-Specifies the fill settings of the resizing handles. See the [editable.resize](#configuration-editable.resize) configuration for an example.
+Specifies the fill settings of the resizing handles. See the [editable.resize](/api/javascript/dataviz/ui/diagram#configuration-editable.resize) configuration for an example.
 
 
 ### editable.resize.handles.fill.color `String`
 
-Specifies the fill color of the resizing handles. See the [editable.resize](#configuration-editable.resize) configuration for an example.
+Specifies the fill color of the resizing handles. See the [editable.resize](/api/javascript/dataviz/ui/diagram#configuration-editable.resize) configuration for an example.
 
 
 ### editable.resize.handles.fill.opacity `Number` *(default: 1)*
 
-Specifies the fill opacity of the resizing handles. See the [editable.resize](#configuration-editable.resize) configuration for an example.
+Specifies the fill opacity of the resizing handles. See the [editable.resize](/api/javascript/dataviz/ui/diagram#configuration-editable.resize) configuration for an example.
 
 
 ### editable.resize.handles.height `Number`
 
-Specifies the height of the resizing handles. See the [editable.resize](#configuration-editable.resize) configuration for an example.
+Specifies the height of the resizing handles. See the [editable.resize](/api/javascript/dataviz/ui/diagram#configuration-editable.resize) configuration for an example.
 
 
 ### editable.resize.handles.hover `Object`
 
-Specifies the settings of the resizing handles on hovering over them. See the [editable.resize](#configuration-editable.resize) configuration for an example.
+Specifies the settings of the resizing handles on hovering over them. See the [editable.resize](/api/javascript/dataviz/ui/diagram#configuration-editable.resize) configuration for an example.
 
 
 ### editable.resize.handles.hover.fill `String|Object`
 
-Specifies the fill settings on hovering over the resizing handles. See the [editable.resize](#configuration-editable.resize) configuration for an example.
+Specifies the fill settings on hovering over the resizing handles. See the [editable.resize](/api/javascript/dataviz/ui/diagram#configuration-editable.resize) configuration for an example.
 
 
 ### editable.resize.handles.hover.fill.color `String`
 
-Specifies the fill color on hovering over the resizing handles. See the [editable.resize](#configuration-editable.resize) configuration for an example.
+Specifies the fill color on hovering over the resizing handles. See the [editable.resize](/api/javascript/dataviz/ui/diagram#configuration-editable.resize) configuration for an example.
 
 
 ### editable.resize.handles.hover.fill.opacity `Number` *(default: 1)*
 
-Specifies the fill opacity on hovering over the resizing handles. See the [editable.resize](#configuration-editable.resize) configuration for an example.
+Specifies the fill opacity on hovering over the resizing handles. See the [editable.resize](/api/javascript/dataviz/ui/diagram#configuration-editable.resize) configuration for an example.
 
 
 ### editable.resize.handles.hover.stroke `Object`
 
-Specifies the stroke on hovering over the resizing handles. See the [editable.resize](#configuration-editable.resize) configuration for an example.
+Specifies the stroke on hovering over the resizing handles. See the [editable.resize](/api/javascript/dataviz/ui/diagram#configuration-editable.resize) configuration for an example.
 
 
 ### editable.resize.handles.hover.stroke.color `String`
 
-Specifies the stroke color on hovering over the resizing handles. See the [editable.resize](#configuration-editable.resize) configuration for an example.
+Specifies the stroke color on hovering over the resizing handles. See the [editable.resize](/api/javascript/dataviz/ui/diagram#configuration-editable.resize) configuration for an example.
 
 
 ### editable.resize.handles.hover.stroke.dashType `String`
 
-Specifies the stroke dash type on hovering over the resizing handles. See the [editable.resize](#configuration-editable.resize) configuration for an example.
+Specifies the stroke dash type on hovering over the resizing handles. See the [editable.resize](/api/javascript/dataviz/ui/diagram#configuration-editable.resize) configuration for an example.
 
 
 ### editable.resize.handles.hover.stroke.width `Number`
 
-Specifies the stroke color on hovering over the resizing handles. See the [editable.resize](#configuration-editable.resize) configuration for an example.
+Specifies the stroke color on hovering over the resizing handles. See the [editable.resize](/api/javascript/dataviz/ui/diagram#configuration-editable.resize) configuration for an example.
 
 
 ### editable.resize.handles.stroke `Object`
 
-Specifies the stroke of the resizing handles. See the [editable.resize](#configuration-editable.resize) configuration for an example.
+Specifies the stroke of the resizing handles. See the [editable.resize](/api/javascript/dataviz/ui/diagram#configuration-editable.resize) configuration for an example.
 
 
 ### editable.resize.handles.stroke.color `String`
 
-Specifies the stroke color of the resizing handles. See the [editable.resize](#configuration-editable.resize) configuration for an example.
+Specifies the stroke color of the resizing handles. See the [editable.resize](/api/javascript/dataviz/ui/diagram#configuration-editable.resize) configuration for an example.
 
 
 ### editable.resize.handles.stroke.dashType `String`
 
-Specifies the stroke dash type of the resizing handles. See the [editable.resize](#configuration-editable.resize) configuration for an example.
+Specifies the stroke dash type of the resizing handles. See the [editable.resize](/api/javascript/dataviz/ui/diagram#configuration-editable.resize) configuration for an example.
 
 
 ### editable.resize.handles.stroke.width `Number`
 
-Specifies the stroke thickness of the resizing handles. See the [editable.resize](#configuration-editable.resize) configuration for an example.
+Specifies the stroke thickness of the resizing handles. See the [editable.resize](/api/javascript/dataviz/ui/diagram#configuration-editable.resize) configuration for an example.
 
 
 ### editable.resize.handles.width `Number`
 
-Specifies the width of the resizing handles. See the [editable.resize](#configuration-editable.resize) configuration for an example.
+Specifies the width of the resizing handles. See the [editable.resize](/api/javascript/dataviz/ui/diagram#configuration-editable.resize) configuration for an example.
 
 
 ### editable.rotate `Boolean|Object` *(default: true)*
@@ -1442,7 +1442,7 @@ The subtype further defines the layout type by specifying in greater detail the 
 
 ### layout.tipOverTreeStartLevel `Number` *(default: 0)*
 
-Specifies the start level when the [subtype](#configuration-layout.subtype) is `tipOver`.
+Specifies the start level when the [subtype](/api/javascript/dataviz/ui/diagram#configuration-layout.subtype) is `tipOver`.
 
 #### Example - set the tipOver layout start level
 
@@ -1524,7 +1524,7 @@ Defines the pannable options.
 
 ### pannable.key `String` *(default: "ctrl")*
 
-Defines the meta key that will be used while panning the Diagram. To avoid clashed, verify that the `pannable.key` and [`selectable.key`](#configuration-selectable.key) options are different. The available values are:
+Defines the meta key that will be used while panning the Diagram. To avoid clashed, verify that the `pannable.key` and [`selectable.key`](/api/javascript/dataviz/ui/diagram#configuration-selectable.key) options are different. The available values are:
 
 * "none" - No activation key
 * "ctrl" - The activation key will be `Ctrl`
@@ -1535,7 +1535,7 @@ Defines the meta key that will be used while panning the Diagram. To avoid clash
 
 ### pdf `Object`
 
-Configures the export settings for the [`saveAsPDF`](#methods-saveAsPDF) method.
+Configures the export settings for the [`saveAsPDF`](/api/javascript/dataviz/ui/diagram/methods/saveaspdf) method.
 
 ### pdf.author `String` *(default: null)*
 
@@ -1637,7 +1637,7 @@ Specifies the file name of the exported PDF file.
 
 ### pdf.forceProxy `Boolean` *(default: false)*
 
-If set to `true`, the content is forwarded to [`proxyURL`](#configuration-pdf.proxyURL) even if the browser supports the saving of files locally.
+If set to `true`, the content is forwarded to [`proxyURL`](/api/javascript/dataviz/ui/diagram#configuration-pdf.proxyURL) even if the browser supports the saving of files locally.
 
 #### Example - use proxy
     <div id="diagram"></div>
@@ -1901,7 +1901,7 @@ Defines the selectable options.
 
 ### selectable.key `String` *(default: "none")*
 
-Defines the meta key when doing a visual selection through drawing a rectangular area around shapes in the canvas. This option does not change the way a single shape is selected when using click or tap. To avoid clashes, verify that the `selectable.key` and [`pannable.key`](#configuration-pannable.key) are different. The available values are:
+Defines the meta key when doing a visual selection through drawing a rectangular area around shapes in the canvas. This option does not change the way a single shape is selected when using click or tap. To avoid clashes, verify that the `selectable.key` and [`pannable.key`](/api/javascript/dataviz/ui/diagram#configuration-pannable.key) are different. The available values are:
 
 * "none" - No activation key
 * "ctrl" - The activation key will be `Ctrl`
@@ -2857,7 +2857,7 @@ Specifies the type of the Shape using any of the built-in shape type.
 
 ### shapes.visual `Function`
 
-A function returning a visual element to render for this shape. For more information, refer to [`visual`](#configuration-shapeDefaults.visual).
+A function returning a visual element to render for this shape. For more information, refer to [`visual`](/api/javascript/dataviz/ui/diagram#configuration-shapeDefaults.visual).
 
 ### shapes.width `Number` *(default: 100)*
 
@@ -3109,7 +3109,7 @@ The target definition of the connection. This can be a Shape, a Connector or a P
 
 ##### options `Object`
 
-The options of the new connection. See [connections](#configuration-connections) options.
+The options of the new connection. See [connections](/api/javascript/dataviz/ui/diagram#configuration-connections) options.
 
 #### Example - connecting two shapes using the Auto-connector
 
@@ -3511,7 +3511,7 @@ A more detailed overview of layout and graph analysis can be found below.
 
 ##### options `Object`
 
-The layout options. See [options.layout](#configuration-layout) for a full reference.
+The layout options. See [options.layout](/api/javascript/dataviz/ui/diagram#configuration-layout) for a full reference.
 
 ### load
 

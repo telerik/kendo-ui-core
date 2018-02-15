@@ -132,7 +132,7 @@ Gets the parent of the array if such parent exists.
 
 Removes the last item from an array and returns that item. Equivalent of [Array.prototype.pop](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/pop).
 
-> **Important**: The `pop` method raises the [change](#events-change) event. The `action` field of the
+> **Important**: The `pop` method raises the [change](/api/javascript/data/observablearray/events/change) event. The `action` field of the
 event argument is set to `"remove"`. The `items` field of the event argument is the array that contains the removed item.
 
 #### Returns
@@ -153,7 +153,7 @@ event argument is set to `"remove"`. The `items` field of the event argument is 
 Appends the given items to the array and returns the new length of the array. Equivalent of [Array.prototype.push](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/push).
 The new items are wrapped as `ObservableObject` if they are complex objects.
 
-> **Important**: The `push` method raises the [change](#events-change) event. The `action` field of the
+> **Important**: The `push` method raises the [change](/api/javascript/data/observablearray/events/change) event. The `action` field of the
 event argument is set to `"add"`. The `items` field of the event argument is the array that contains the appended items.
 
 #### Returns
@@ -216,7 +216,7 @@ end of the sequence.
 Changes an `ObservableArray`, by adding new items while removing old items. Equivalent of
 [Array.prototype.splice](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/splice)
 
-> **Important**: The `splice` method raises the [change](#events-change) event once or twice depending on the change. The `action` field of the
+> **Important**: The `splice` method raises the [change](/api/javascript/data/observablearray/events/change) event once or twice depending on the change. The `action` field of the
 event argument is set to `"add"` (if items are added) or `"remove` (if items are removed). The `items` field of the event argument is the array that
 contains the appended items or removed items. In the above example the `change` event will be raised two times - first because "baseball" is removed and
 second because "tennis" and "hockey" are added.
@@ -288,7 +288,7 @@ Returns a JavaScript Array which represents the contents of the `ObservableArray
 
 Adds one or more items to the beginning of an `ObservableArray` and returns the new length.  Equivalent of [Array.prototype.unshift](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/unshift).
 
-> **Important**: The `unshift` method raises the [change](#events-change) event. The `action` field of the
+> **Important**: The `unshift` method raises the [change](/api/javascript/data/observablearray/events/change) event. The `action` field of the
 event argument is set to `"add"`. The `items` field of the event argument is an array that
 contains the new items.
 

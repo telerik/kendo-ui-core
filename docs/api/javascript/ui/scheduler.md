@@ -68,7 +68,7 @@ The fields which can be used in the template are:
 
 If set to `true` the scheduler will display a slot for "all day" events.
 
-> The option is a shorthand to the view's `allDaySlot` option. To define the `daySlot` visibility using a **data-** attribute set the [views.allDaySlot](#configuration-views.allDaySlot) option directly.
+> The option is a shorthand to the view's `allDaySlot` option. To define the `daySlot` visibility using a **data-** attribute set the [views.allDaySlot](/api/javascript/ui/scheduler#configuration-views.allDaySlot) option directly.
 
 #### Example - hide the all day slot
     <div id="scheduler"></div>
@@ -786,7 +786,7 @@ The configuration of the scheduler resource(s) grouping.
 
 ### group.date `Boolean` *(default: false)*
 
-If set to `true` and the [group.resources](#configuration-group.resources) has some resources set the view is grouped by date.
+If set to `true` and the [group.resources](/api/javascript/ui/scheduler#configuration-group.resources) has some resources set the view is grouped by date.
 
 #### Example - define group by date
     <div id="scheduler"></div>
@@ -3345,7 +3345,7 @@ Specifies the file name of the exported PDF file.
     </script>
 
 ### pdf.forceProxy `Boolean` *(default: false)*
-If set to true, the content will be forwarded to [proxyURL](#configuration-pdf.proxyURL) even if the browser supports saving files locally.
+If set to true, the content will be forwarded to [proxyURL](/api/javascript/ui/scheduler#configuration-pdf.proxyURL) even if the browser supports saving files locally.
 
 ### pdf.keywords `String` *(default: null)*
 
@@ -3802,7 +3802,7 @@ The field of the scheduler event which contains the resource id.
 
 ### resources.multiple `Boolean` *(default: false)*
 
-If set to `true` the scheduler event can be assigned multiple instances of the resource. The scheduler event field specified via the [field](#configuration-resources.field) option will contain an array of resources.
+If set to `true` the scheduler event can be assigned multiple instances of the resource. The scheduler event field specified via the [field](/api/javascript/ui/scheduler#configuration-resources.field) option will contain an array of resources.
 By default only one resource instance can be assigned to an event.
 
 #### Example - multiple resources
@@ -3852,7 +3852,7 @@ By default only one resource instance can be assigned to an event.
 
 ### resources.name `String`
 
-The name of the resource used to distinguish resource. If not set the value of the [field](#configuration-resources.field) option is used.
+The name of the resource used to distinguish resource. If not set the value of the [field](/api/javascript/ui/scheduler#configuration-resources.field) option is used.
 
 #### Example - set the resource title
 
@@ -3893,7 +3893,7 @@ The name of the resource used to distinguish resource. If not set the value of t
 
 ### resources.title `String`
 
-The user friendly title of the resource displayed in the scheduler edit form. If not set the value of the [field](#configuration-resources.field) option is used.
+The user friendly title of the resource displayed in the scheduler edit form. If not set the value of the [field](/api/javascript/ui/scheduler#configuration-resources.field) option is used.
 
 #### Example - set the resource title
 
@@ -3932,7 +3932,7 @@ The user friendly title of the resource displayed in the scheduler edit form. If
 
 ### resources.valuePrimitive `Boolean` *(default: true)*
 
-Set to `false` if the scheduler event field specified via the [field](#configuration-resources.field) option contains a resource data item.
+Set to `false` if the scheduler event field specified via the [field](/api/javascript/ui/scheduler#configuration-resources.field) option contains a resource data item.
 By default the scheduler expects that field to contain a primitive value (string, number) which corresponds to the "value" of the resource (specified via `dataValueField`).
 
 #### Example - set valuePrimitive to false
@@ -3997,7 +3997,7 @@ If set to true the user would be able to select scheduler cells and events. By d
 
 If set to true the view will be initially shown in business hours mode. By default view is displayed in full day mode.
 
-> The `showWorkHours` option is supported when [views.type](#configuration-views.type) is set to "day" or "week".
+> The `showWorkHours` option is supported when [views.type](/api/javascript/ui/scheduler#configuration-views.type) is set to "day" or "week".
 
 #### Example - enable selection
 
@@ -4245,7 +4245,7 @@ The fields which can be used in the template are:
 * start `Date` - the event start date
 * title `String` - the event title
 
-> The `allDayEventTemplate` option is supported when [views.type](#configuration-views.type) is set to "day" or "week".
+> The `allDayEventTemplate` option is supported when [views.type](/api/javascript/ui/scheduler#configuration-views.type) is set to "day" or "week".
 
 #### Example - set the all day event template
     <script id="event-template" type="text/x-kendo-template">
@@ -4293,7 +4293,7 @@ The fields which can be used in the template are:
 
 If set to `true` the scheduler will display a slot for "all day" events.
 
-> The `allDaySlot` option is supported when [views.type](#configuration-views.type) is set to "day" or "week".
+> The `allDaySlot` option is supported when [views.type](/api/javascript/ui/scheduler#configuration-views.type) is set to "day" or "week".
 
 #### Example - hide the all day slot
     <div id="scheduler"></div>
@@ -4327,7 +4327,7 @@ The fields which can be used in the template are:
 
 * resources() - returns the relevant resources for the current slot.
 
-> The `allDaySlotTemplate` option is supported when [views.type](#configuration-views.type) is set to "day", "week" or "workWeek".
+> The `allDaySlotTemplate` option is supported when [views.type](/api/javascript/ui/scheduler#configuration-views.type) is set to "day", "week" or "workWeek".
 
 #### Example - set the date header template
     <div id="scheduler"></div>
@@ -4389,7 +4389,7 @@ The fields which can be used in the template are:
 
 The width of the table columns in timeline views. Value is treated as pixels.
 
-> The `columnWidth` option is supported when [views.type](#configuration-views.type) is set to "timeline", "timelineWeek", "timelineWorkWeek" or "timelineMonth".
+> The `columnWidth` option is supported when [views.type](/api/javascript/ui/scheduler#configuration-views.type) is set to "timeline", "timelineWeek", "timelineWorkWeek" or "timelineMonth".
 
 #### Example - set the columnWidth in timelineWeek view
 
@@ -4426,7 +4426,7 @@ The fields which can be used in the template are:
 
 * date - represents the major tick date.
 
-> The `dateHeaderTemplate` option is supported when [views.type](#configuration-views.type) is set to "day", "week", "workweek" and "timeline" views.
+> The `dateHeaderTemplate` option is supported when [views.type](/api/javascript/ui/scheduler#configuration-views.type) is set to "day", "week", "workweek" and "timeline" views.
 
 #### Example - set the date header template
     <div id="scheduler"></div>
@@ -4460,7 +4460,7 @@ The fields which can be used in the template are:
 
 * resources() - returns the relevant resources for the current slot.
 
-> The `dayTemplate` option is supported when [views.type](#configuration-views.type) is set to "month".
+> The `dayTemplate` option is supported when [views.type](/api/javascript/ui/scheduler#configuration-views.type) is set to "month".
 
 #### Example - set the day template in month view
 
@@ -4523,7 +4523,7 @@ The fields which can be used in the template are:
 
 If set to `true` the user would be able to create new scheduler events and modify or delete existing ones.
 
-Overrides the [editable](#configuration-editable) option of the scheduler.
+Overrides the [editable](/api/javascript/ui/scheduler#configuration-editable) option of the scheduler.
 
 #### Example - disable view editing
 
@@ -4668,7 +4668,7 @@ The fields which can be used in the template are:
 
 * date `Date` - represents the event date.
 
-> The `eventDateTemplate` option is supported when [views.type](#configuration-views.type) is set to "agenda".
+> The `eventDateTemplate` option is supported when [views.type](/api/javascript/ui/scheduler#configuration-views.type) is set to "agenda".
 
 #### Example - set the event date template
 
@@ -4697,7 +4697,7 @@ The fields which can be used in the template are:
 
 The height of the scheduler event rendered in month and timeline views.
 
-> The `eventHeight` option is supported when [views.type](#configuration-views.type) is set to "month", "timeline", "timelineWeek", "timelineWorkWeek" or "timelineMonth".
+> The `eventHeight` option is supported when [views.type](/api/javascript/ui/scheduler#configuration-views.type) is set to "month", "timeline", "timelineWeek", "timelineWorkWeek" or "timelineMonth".
 
 #### Example - set the event height in month view
 
@@ -4790,7 +4790,7 @@ The fields which can be used in the template are:
 * start `Date` - the event start date
 * title `String` - the event title
 
-> The `eventTimeTemplate` option is supported when [views.type](#configuration-views.type) is set to "agenda".
+> The `eventTimeTemplate` option is supported when [views.type](/api/javascript/ui/scheduler#configuration-views.type) is set to "agenda".
 
 #### Example - set the event time template
     <script id="event-time-template" type="text/x-kendo-template">
@@ -4827,9 +4827,9 @@ The configuration of the view resource(s) grouping.
 
 ### views.group.date `Boolean` *(default: false)*
 
-If set to `true` and the [group.resources](#configuration-group.resources) has some resources set the view is grouped by date.
+If set to `true` and the [group.resources](/api/javascript/ui/scheduler#configuration-group.resources) has some resources set the view is grouped by date.
 
-Overrides the [date](#configuration-group.date) option of the scheduler.
+Overrides the [date](/api/javascript/ui/scheduler#configuration-group.date) option of the scheduler.
 
 #### Example - define group by date
     <div id="scheduler"></div>
@@ -4931,7 +4931,7 @@ The orientation of the group headers. Supported values are *horizontal* or *vert
 
 The number of minutes represented by a major tick.
 
-> The `majorTick` option is supported when [views.type](#configuration-views.type) is set to "day" or "week".
+> The `majorTick` option is supported when [views.type](/api/javascript/ui/scheduler#configuration-views.type) is set to "day" or "week".
 
 #### Example - set the major tick
 
@@ -4966,7 +4966,7 @@ The fields which can be used in the template are:
 
 * date - represents the major tick date.
 
-> The `majorTimeHeaderTemplate` option is supported when [views.type](#configuration-views.type) is set to "day", "week", "workweek" and "timeline" views.
+> The `majorTimeHeaderTemplate` option is supported when [views.type](/api/javascript/ui/scheduler#configuration-views.type) is set to "day", "week", "workweek" and "timeline" views.
 
 #### Example - set the major time header template
 
@@ -4995,7 +4995,7 @@ The fields which can be used in the template are:
 
 The number of time slots to display per major tick.
 
-> The `minorTickCount` option is supported when [views.type](#configuration-views.type) is set to "day", "week" or "timeline".
+> The `minorTickCount` option is supported when [views.type](/api/javascript/ui/scheduler#configuration-views.type) is set to "day", "week" or "timeline".
 
 #### Example - set the number of time slots
 
@@ -5030,7 +5030,7 @@ The fields which can be used in the template are:
 
 * date - represents the major tick date.
 
-> The `minorTimeHeaderTemplate` option is supported when [views.type](#configuration-views.type) is set to "day" or "week".
+> The `minorTimeHeaderTemplate` option is supported when [views.type](/api/javascript/ui/scheduler#configuration-views.type) is set to "day" or "week".
 
 #### Example - set the minor time header template
     <div id="scheduler"></div>
@@ -5056,7 +5056,7 @@ The fields which can be used in the template are:
 
 ### views.name `String`
 
-The name of the view. Typically, used to get the name of the currently selected view via the [view method](#methods-view).
+The name of the view. Typically, used to get the name of the currently selected view via the [view method](/api/javascript/ui/scheduler/methods/view).
 
 #### Example - select a view
 
@@ -5144,7 +5144,7 @@ The format used to display the selected date when viewport is narrow, and the da
 
 If set to true the view will be initially shown in business hours mode. By default view is displayed in full day mode.
 
-> The `showWorkHours` option is supported when [views.type](#configuration-views.type) is set to "day" or "week".
+> The `showWorkHours` option is supported when [views.type](/api/javascript/ui/scheduler#configuration-views.type) is set to "day" or "week".
 
 #### Example - enable selection
 
@@ -5175,7 +5175,7 @@ The fields which can be used in the template are:
 
 * resources() - returns the relevant resources for the current slot.
 
-> The `slotTemplate` option is supported when [views.type](#configuration-views.type) is set to "day", "week", "workWeek" or "timeline" views.
+> The `slotTemplate` option is supported when [views.type](/api/javascript/ui/scheduler#configuration-views.type) is set to "day", "week", "workWeek" or "timeline" views.
 
 #### Example - set the slot template
     <div id="scheduler"></div>
@@ -5315,7 +5315,7 @@ The type of the view. The built-in views are: "day", "week", "workWeek", "month"
 
 The start of working week (index based).
 
-> The `workWeekStart` option is supported when [views.type](#configuration-views.type) is set to "day" or "week".
+> The `workWeekStart` option is supported when [views.type](/api/javascript/ui/scheduler#configuration-views.type) is set to "day" or "week".
 
 #### Example - set the start day of the work week to Tuesday
 
@@ -5341,7 +5341,7 @@ The start of working week (index based).
 
 The end of working week (index based).
 
-> The `workWeekEnd` option is supported when [views.type](#configuration-views.type) is set to "day" or "week".
+> The `workWeekEnd` option is supported when [views.type](/api/javascript/ui/scheduler#configuration-views.type) is set to "day" or "week".
 
 #### Example - set the end day of the work week to Saturday
 
@@ -5430,7 +5430,7 @@ Sets the end of the work day when the  "Show business hours" button is clicked.
 
 The start of working week (index based).
 
-> The `workWeekStart` option is supported when [views.type](#configuration-views.type) is set to "day" or "week".
+> The `workWeekStart` option is supported when [views.type](/api/javascript/ui/scheduler#configuration-views.type) is set to "day" or "week".
 
 #### Example - set the start day of the work week to Tuesday
 
@@ -5454,7 +5454,7 @@ The start of working week (index based).
 
 The end of working week (index based).
 
-> The `workWeekEnd` option is supported when [views.type](#configuration-views.type) is set to "day" or "week".
+> The `workWeekEnd` option is supported when [views.type](/api/javascript/ui/scheduler#configuration-views.type) is set to "day" or "week".
 
 #### Example - set the end day of the work week to Saturday
 
@@ -5478,11 +5478,11 @@ The end of working week (index based).
 
 ### dataSource `kendo.data.SchedulerDataSource`
 
-The [data source](/api/javascript/data/schedulerdatasource) of the widget. Configured via the [dataSource](/configuration/datasource) option.
+The [data source](/api/javascript/data/schedulerdatasource) of the widget. Configured via the [dataSource](/api/javascript/ui/scheduler/configuration/datasource) option.
 
 > Changes of the data source will be reflected in the widget.
 
-> Assigning a new data source would have no effect. Use the [setDataSource](#methods-setDataSource) method instead.
+> Assigning a new data source would have no effect. Use the [setDataSource](/api/javascript/ui/scheduler/methods/setdatasource) method instead.
 
 #### Example - add a data item to the data source
     <div id="scheduler"></div>
@@ -5538,7 +5538,7 @@ The [data source](/api/javascript/data/schedulerdatasource) of the widget. Confi
 
 ### resources `Array`
 
-The resources of the widget. Configured via the [resources](#configuration-resources) option.
+The resources of the widget. Configured via the [resources](/api/javascript/ui/scheduler#configuration-resources) option.
 
 ### calendar `kendo.ui.Calendar`
 
@@ -5906,12 +5906,12 @@ Get the relevant resources for a given slot.
 
 ### saveAsPDF
 
-Initiates the PDF export and returns a promise. Also triggers the [pdfExport](#events-pdfExport) event.
+Initiates the PDF export and returns a promise. Also triggers the [pdfExport](/api/javascript/ui/scheduler/events/pdfexport) event.
 
 > Calling this method may trip the built-in browser pop-up blocker. To avoid that, call this method as a response to an end-user action, e.g. a button click.
 
 #### Returns
-`Promise` A promise that will be resolved when the export completes. The same promise is available in the [pdfExport](#events-pdfExport) event arguments.
+`Promise` A promise that will be resolved when the export completes. The same promise is available in the [pdfExport](/api/javascript/ui/scheduler/events/pdfexport) event arguments.
 
 #### Example - manually initiate PDF export
 
@@ -6098,7 +6098,7 @@ Get the time slot from given element.
 
 Gets or sets the current Scheduler view.
 
-To get the current Scheduler view name, use the [`viewName` method](#methods-viewName).
+To get the current Scheduler view name, use the [`viewName` method](/api/javascript/ui/scheduler/methods/viewname).
 
 #### Parameters
 

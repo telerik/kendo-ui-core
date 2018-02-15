@@ -856,7 +856,7 @@ Obtains an array of the DOM elements which correspond to the data items from the
 
 ### refresh
 
-Reloads the data and repaints the ListBox. Triggers the [`dataBound`](#events-dataBound) event.
+Reloads the data and repaints the ListBox. Triggers the [`dataBound`](/api/javascript/ui/listbox/events/databound) event.
 
 #### Example
 

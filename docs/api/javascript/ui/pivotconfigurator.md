@@ -1278,11 +1278,11 @@ The text of the "not equal" filter operator.
 
 ### dataSource `kendo.data.PivotDataSource`
 
-The [data source](/api/javascript/data/pivotdatasource) of the widget. Configured via the [dataSource](/configuration/datasource) option.
+The [data source](/api/javascript/data/pivotdatasource) of the widget. Configured via the [dataSource](/api/javascript/ui/pivotconfigurator/configuration/datasource) option.
 
 > Changes of the data source will be reflected in the widget.
 
-> Assigning a new data source would have no effect. Use the [setDataSource](#methods-setDataSource) method instead.
+> Assigning a new data source would have no effect. Use the [setDataSource](/api/javascript/ui/pivotconfigurator/methods/setdatasource) method instead.
 
 #### Example - get reference to the widget data source
 

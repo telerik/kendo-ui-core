@@ -326,7 +326,7 @@ or a [predefined type](/api/javascript/dataviz/ui/diagram/configuration/shapes.t
 
 ### visual `kendo.dataviz.diagram.Group`
 
-A container for the [shapeVisual](#fields-shapeVisual) element.
+A container for the [shapeVisual](/api/javascript/dataviz/diagram/shape#fields-shapeVisual) element.
 
 Positioning and transformations are applied on this container.
 

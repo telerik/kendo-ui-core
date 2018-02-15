@@ -111,7 +111,7 @@ Returns a copy of the list filtered according to the expression
 
 ##### expression `Object`
 
-The filter configuration. Accepts the same values as the [filter](datasource#configuration-filter) option (**check there for more examples**).
+The filter configuration. Accepts the same values as the [filter](/api/javascript/datasource#configuration-filter) option (**check there for more examples**).
 
 #### Returns
 
@@ -125,7 +125,7 @@ Returns a copy of the list grouped according to the descriptor
 
 ##### descriptor `Object`
 
-The grouping configuration. Accepts the same values as the [group](datasource#configuration-group) option.
+The grouping configuration. Accepts the same values as the [group](/api/javascript/datasource#configuration-group) option.
 
 #### Returns
 
@@ -145,7 +145,7 @@ The data items collection
 
 ##### options `Object`
 
-Accepts the same values as the [DataSource query](datasource#methods-query) method.
+Accepts the same values as the [DataSource query](/api/javascript/datasource/methods/query) method.
 
 #### Returns
 

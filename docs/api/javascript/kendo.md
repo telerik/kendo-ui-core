@@ -53,7 +53,7 @@ These include tokens used by ASP.NET, Ruby on Rails and others.
 `Object` An object that contains common CSRF tokens found on the page
 
 ### bind
-Binds a HTML View to a View-Model and initializes Kendo UI widgets from DOM elements based on `data-role` attributes, similar to [`kendo.init()`](#methods-init).
+Binds a HTML View to a View-Model and initializes Kendo UI widgets from DOM elements based on `data-role` attributes, similar to [`kendo.init()`](/api/javascript/kendo/methods/init).
 
 Model View ViewModel ([MVVM](http://en.wikipedia.org/wiki/Model_View_ViewModel)) is a design pattern which helps developers separate the Model from the View. The View-Model part of MVVM is responsible for
 exposing the data objects from the Model in such a way that those objects are easily consumed in the View.
@@ -267,7 +267,7 @@ Finds all Kendo widgets that are children of the specified element and calls the
 
 ### format
 
-Replaces each format item in a specified string with the text equivalent of a corresponding object's value. Uses [toString](#methods-toString) for every format item.
+Replaces each format item in a specified string with the text equivalent of a corresponding object's value. Uses [toString](/api/javascript/kendo/methods/tostring) for every format item.
 
 #### Parameters
 
@@ -492,7 +492,7 @@ Renders the specified template using the provided array.
 
 ##### template `Function`
 
-The Kendo UI template which should be rendered. Create one via the [template](#methods-template) method.
+The Kendo UI template which should be rendered. Create one via the [template](/api/javascript/kendo/methods/template) method.
 
 ##### data `Array`
 

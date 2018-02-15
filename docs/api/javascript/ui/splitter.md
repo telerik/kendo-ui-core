@@ -731,7 +731,7 @@ The expanding pane of the Splitter.
 
 ### layoutChange
 
-**This event is now obsolete and will be removed in the future. Please use the [`resize`](#events-resize) event instead.**
+**This event is now obsolete and will be removed in the future. Please use the [`resize`](/api/javascript/ui/splitter/events/resize) event instead.**
 
 Fires when the splitter layout has changed
 

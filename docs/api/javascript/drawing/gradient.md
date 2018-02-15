@@ -17,13 +17,13 @@ The configuration of this gradient.
 
 ### stops `Array`
 The color stops of the gradient.
-Can contain either plain objects or [GradientStop](gradient-stop) instances.
+Can contain either plain objects or [GradientStop](/api/javascript/drawing/gradient-stop) instances.
 
 ## Fields
 
 ### stops `Array`
 The array of gradient color stops.
-Contains [GradientStop](gradient-stop) instances.
+Contains [GradientStop](/api/javascript/drawing/gradient-stop) instances.
 
 ### options `kendo.drawing.OptionsStore`
 The configuration options of the gradient.

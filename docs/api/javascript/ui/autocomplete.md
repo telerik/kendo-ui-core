@@ -228,7 +228,7 @@ If set to `false` the widget will be disabled and will not allow user input. The
 
 ### enforceMinLength `Boolean` *(default: false)*
 
-If set to `true` the widget will not show all items when the text of the search input cleared. By default the widget shows all items when the text of the search input is cleared. Works in conjunction with [minLength](#configuration-minLength).
+If set to `true` the widget will not show all items when the text of the search input cleared. By default the widget shows all items when the text of the search input is cleared. Works in conjunction with [minLength](/api/javascript/ui/autocomplete#configuration-minLength).
 
 #### Example - enforce minLength
 
@@ -387,7 +387,7 @@ If set to `false` case-sensitive search will be performed to find suggestions. T
 
 The minimum number of characters the user must type before a search is performed. Set to higher value than `1` if the search could match a lot of items.
 
-> Widget will initiate a request when input value is cleared. If you would like to prevent this behavior please check the [filtering](#events-filtering) event for more details.
+> Widget will initiate a request when input value is cleared. If you would like to prevent this behavior please check the [filtering](/api/javascript/ui/autocomplete/events/filtering) event for more details.
 
 #### Example - set minLength
 
@@ -835,11 +835,11 @@ For more information, refer to the [article on virtualization]({% slug virtualiz
 
 ### dataSource `kendo.data.DataSource`
 
-The [data source](/api/javascript/data/datasource) of the widget. Configured via the [dataSource](/configuration/datasource) option.
+The [data source](/api/javascript/data/datasource) of the widget. Configured via the [dataSource](/api/javascript/ui/autocomplete/configuration/datasource) option.
 
 > Changes of the data source will be reflected in the widget.
 
-> **Important:** Assigning a new data source would have no effect. Use the [setDataSource](#methods-setDataSource) method instead.
+> **Important:** Assigning a new data source would have no effect. Use the [setDataSource](/api/javascript/ui/autocomplete/methods/setdatasource) method instead.
 
 #### Example - add a data item to the data source
     <input id="autocomplete" />
@@ -1078,7 +1078,7 @@ Selects the item provided as an argument and updates the value of the widget.
 > **Important:** When **virtualization** is enabled, the method **does not support** selection with a *function predicate*. The predicate function looks only
 in the current datasource view, which represents only the active range/page. Hence it will not work properly.
 
-> **Important:** This method **does not trigger** [change](#events-change) event.
+> **Important:** This method **does not trigger** [change](/api/javascript/ui/autocomplete/events/change) event.
 This could affect [MVVM value binding](/framework/mvvm/bindings/value). The model bound to the widget will not be updated.
 You can overcome this behavior trigerring the `change` event manually using [trigger("change")](/api/javascript/observable/methods/trigger) method.
 
@@ -1161,7 +1161,7 @@ The value to set.
 
 Gets or sets the value of the widget.
 
-> **Important:** This method **does not trigger** [change](#events-change) event.
+> **Important:** This method **does not trigger** [change](/api/javascript/ui/autocomplete/events/change) event.
 This could affect [MVVM value binding](/framework/mvvm/bindings/value). The model bound to the widget will not be updated.
 You can overcome this behavior trigerring the `change` event manually using [trigger("change")](/api/javascript/observable/methods/trigger) method.
 

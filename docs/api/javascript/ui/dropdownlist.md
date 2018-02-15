@@ -317,7 +317,7 @@ If set to `false` the widget will be disabled and will not allow user input. The
 
 ### enforceMinLength `Boolean` *(default: false)*
 
-If set to `true` the widget will not show all items when the text of the search input cleared. By default the widget shows all items when the text of the search input is cleared. Works in conjunction with [minLength](#configuration-minLength).
+If set to `true` the widget will not show all items when the text of the search input cleared. By default the widget shows all items when the text of the search input is cleared. Works in conjunction with [minLength](/api/javascript/ui/dropdownlist#configuration-minLength).
 
 #### Example - enforce minLength
 
@@ -344,7 +344,7 @@ If set to `true` the widget will not show all items when the text of the search 
 
 ### filter `String`*(default: "none")*
 
-The filtering method used to determine the suggestions for the current value. Filtration is turned off by default, and can be performed over `string` values only (either the widget's data has to be an array of strings, or over the field, configured in the [`dataTextField`](#configuration-dataTextField) option).
+The filtering method used to determine the suggestions for the current value. Filtration is turned off by default, and can be performed over `string` values only (either the widget's data has to be an array of strings, or over the field, configured in the [`dataTextField`](/api/javascript/ui/dropdownlist#configuration-dataTextField) option).
 The supported filter values are `startswith`, `endswith` and `contains`.
 
 #### Example - set the filter
@@ -485,7 +485,7 @@ The index of the initially selected item. The index is `0` based.
 
 The minimum number of characters the user must type before a filter is performed. Set to higher value than `1` if the search could match a lot of items.
 
-> Widget will initiate a request when input value is cleared. If you would like to prevent this behavior please check the [filtering](#events-filtering) event for more details.
+> Widget will initiate a request when input value is cleared. If you would like to prevent this behavior please check the [filtering](/api/javascript/ui/dropdownlist/events/filtering) event for more details.
 
 #### Example - set minLength
 
@@ -680,7 +680,7 @@ in the optionLabel object**.
 
 The [template](/api/javascript/kendo/methods/template) used to render the option label.
 
-> Define the [optionLabel](/api/javascript/kendo/configuration/optionlabel) as **object** if complex template structure is used
+> Define the [optionLabel](/api/javascript/dropdownlist/configuration/optionlabel) as **object** if complex template structure is used
 
 ### headerTemplate `String|Function`
 
@@ -1002,10 +1002,10 @@ The widget will pass the selected value(s) in the `valueMapper` function. In tur
 
 ### dataSource `kendo.data.DataSource`
 
-The [data source](/api/javascript/data/datasource) of the widget. configured via the [datasource](/configuration/datasource) option.
+The [data source](/api/javascript/data/datasource) of the widget. configured via the [datasource](/api/javascript/ui/dropdownlist/configuration/datasource) option.
 
 > * Changes of the data source will be reflected in the widget.
-> * Assigning a new data source would have no effect. Use the [setDataSource](#methods-setDataSource) method instead.
+> * Assigning a new data source would have no effect. Use the [setDataSource](/api/javascript/ui/dropdownlist/methods/setdatasource) method instead.
 
 #### Example - add a data item to the data source
     <input id="dropdownlist" />
@@ -1326,11 +1326,11 @@ The search value.
 
 Gets or sets the selected item. Selects the item provided as an argument and updates the value and text of the widget.
 
-> * If the widget is not bound (e.g. `autoBind` is set to `false`), the `select` method will **not** pre-fetch the data before continuing with the selection and value setting (unlike the [value](#methods-value) method), and no item will be selected.
-> * The numeric argument indicates the item index in the dropdown, not in the dataSource. If an [`optionLabel`](#configuration-optionLabel) is used, the dropdown item index can be obtained by incrementing the respective dataSource item index by 1.
+> * If the widget is not bound (e.g. `autoBind` is set to `false`), the `select` method will **not** pre-fetch the data before continuing with the selection and value setting (unlike the [value](/api/javascript/ui/dropdownlist/methods/value) method), and no item will be selected.
+> * The numeric argument indicates the item index in the dropdown, not in the dataSource. If an [`optionLabel`](/api/javascript/ui/dropdownlist#configuration-optionLabel) is used, the dropdown item index can be obtained by incrementing the respective dataSource item index by 1.
 > * When **virtualization** is enabled, the method **does not support** selection with a *function predicate*. The predicate function looks only
 in the current datasource view, which represents only the active range/page. Hence it will not work properly.
-> * This method **does not trigger** [change](#events-change) event.
+> * This method **does not trigger** [change](/api/javascript/ui/dropdownlist/events/change) event.
 This could affect [MVVM value binding](/framework/mvvm/bindings/value). The model bound to the widget will not be updated.
 You can overcome this behavior trigerring the `change` event manually using [trigger("change")](/api/javascript/observable/methods/trigger) method.
 
@@ -1512,7 +1512,7 @@ Gets or sets the value of the DropDownList. The value will not be set if there i
 > * If the widget is not bound (e.g. `autoBind` is set to `false`), the `value` method will pre-fetch the data before continuing with the value setting.
 **This does not apply when MVVM binding is used.**
 > * The widget will **clear the applied filter** if a new value is set. Thus it ensures that the original/whole data set is available for selection.
-> * This method **does not trigger** [change](#events-change) event.
+> * This method **does not trigger** [change](/api/javascript/ui/dropdownlist/events/change) event.
 This could affect [MVVM value binding](/framework/mvvm/bindings/value). The model bound to the widget will not be updated.
 You can overcome this behavior trigerring the `change` event manually using [trigger("change")](/api/javascript/observable/methods/trigger) method.
 

@@ -315,7 +315,7 @@ Resolves the promise with the raw SVG document without the Data URI prefix.
 
 Returns a PNG image of the qrcode encoded as a [Data URL](https://developer.mozilla.org/en-US/docs/data_URIs).
 
-> This method is deprecated and replaced by [exportImage](#methods-exportImage).
+> This method is deprecated and replaced by [exportImage](/api/javascript/dataviz/ui/qrcode/methods/exportimage).
 
 #### Returns
 
@@ -396,7 +396,7 @@ Sets new options to the QRCode and redraws it.
 
 ##### options `Object`
 
-An object with the new options. All [configuration](qrcode#configuration) options can be set.
+An object with the new options. All [configuration](/api/javascript/dataviz/ui/qrcode#configuration) options can be set.
 
 #### Example
 
@@ -417,7 +417,7 @@ An object with the new options. All [configuration](qrcode#configuration) option
 Returns the [SVG](http://www.w3.org/Graphics/SVG/) representation of the qrcode. The returned string is a self-contained SVG document that can be used as is or converted to other formats using tools like [Inkscape](http://inkscape.org/) and
 [ImageMagick](http://www.imagemagick.org/). Both programs provide command-line interface suitable for server-side processing.
 
-> This method is obsoleted by [exportSVG](#methods-exportSVG), but will remain fully functional.
+> This method is obsoleted by [exportSVG](/api/javascript/dataviz/ui/qrcode/methods/exportsvg), but will remain fully functional.
 
 #### Returns
 

@@ -312,6 +312,67 @@
         ok(dialog.wrapper.is(":visible"));
     });
 
+    test("setOptions modifies actions", function() {
+        var dialog = createDialog({
+            actions: [{
+                text: "OK"
+            }]
+        });
+
+        dialog.setOptions({
+            actions:[
+                { text: "OK" },
+                { text: "Cancel" }
+            ]
+        });
+
+        equal(dialog.wrapper.find(".k-dialog-buttongroup .k-button").length, 2);
+    });
+
+    test("setOptions modifies title", function() {
+        var dialog = createDialog({
+            actions: [{
+                text: "OK"
+            }]
+        });
+
+        dialog.setOptions({
+            title: "Test"
+        });
+
+        equal(dialog.title(), "Test");
+    });
+
+    test("setOptions modifies modality", function() {
+        var dialog = createDialog({
+            actions: [{
+                text: "OK"
+            }],
+            modal: true
+        });
+
+        dialog.setOptions({
+            modal: false
+        });
+
+        equal(dialog.options.modal, false);
+    });
+
+    test("setOptions modifies modality", function() {
+        var dialog = createDialog({
+            actions: [{
+                text: "OK"
+            }],
+            modal: true
+        });
+
+        dialog.setOptions({
+            content: "test"
+        });
+
+        equal(dialog.element.html(), "test");
+    });
+
     test("center should track for resize", function() {
         var dialog = createDialog({ visible: false });
         trackMethodCall(dialog, "_centerOnResize");

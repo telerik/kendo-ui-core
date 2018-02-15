@@ -13,7 +13,7 @@ The base class of the Kendo UI MVVM-style bindings. Creates custom MVVM bindings
 
 ### bindings `Object`
 
-Represents all bindings applied to the current HTML [element](#fields-element). Gets or sets the current view-model field value.
+Represents all bindings applied to the current HTML [element](/api/javascript/data/binder#fields-element). Gets or sets the current view-model field value.
 
 #### Example - getting the view model field
 

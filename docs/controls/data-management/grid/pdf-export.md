@@ -53,7 +53,7 @@ The following example demonstrates how to enable the PDF export functionality of
     </script>
 ```
 
-To initiate PDF export via code, call the [`saveAsPdf`](/api/javascript/ui/grid.html/methods/saveaspdf) method.
+To initiate PDF export via code, call the [`saveAsPdf`](/api/javascript/ui/grid/methods/saveaspdf) method.
 
 > **Important**
 > * By default, Kendo UI Grid exports the current page of the data with sorting, filtering, grouping, and aggregates applied.

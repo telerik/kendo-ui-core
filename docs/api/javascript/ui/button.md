@@ -77,7 +77,7 @@ The `img` element can be added automatically by the widget, or an existing eleme
 ### spriteCssClass `String`
 
 Defines a CSS class (or multiple classes separated by spaces), which will be used for applying a background image to a `span` element inside the **Button**.
-In case you want to use an icon from the Kendo UI theme sprite background image, it is easier to use the [`icon` property](#configuration-icon).
+In case you want to use an icon from the Kendo UI theme sprite background image, it is easier to use the [`icon` property](/api/javascript/ui/button#configuration-icon).
 
 The `span` element can be added automatically by the widget, or an existing element can be used, if it has a `k-sprite` CSS class applied.
 

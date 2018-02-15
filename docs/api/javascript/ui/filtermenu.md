@@ -238,7 +238,7 @@ The text of the option which represents the "or" logical operation.
 
 ### messages.selectValue `String` *(default: "-Select value-")*
 
-The text of the DropDownList displayed in the filter menu for columns whose [values](#configuration-columns.values) option is set.
+The text of the DropDownList displayed in the filter menu for columns whose [values](/api/javascript/ui/filtermenu#configuration-columns.values) option is set.
 
 #### Example - set the "selectValue" message
 
@@ -459,7 +459,7 @@ The text of the "less than" filter operator.
 
 ### operators.enums `Object`
 
-The texts of the filter operators displayed for columns which have their [values](#configuration-columns.values) option set.
+The texts of the filter operators displayed for columns which have their [values](/api/javascript/ui/filtermenu#configuration-columns.values) option set.
 
 > Omitting an operator will exclude it from the DropDownList with the available operators.
 
@@ -483,7 +483,7 @@ The text of the "isnotnull" filter operator.
 
 ### dataSource `kendo.data.DataSource`
 The [data source](/api/javascript/data/datasource) of the widget.
-Configured via the [dataSource](#configuration-dataSource) option.
+Configured via the [dataSource](/api/javascript/ui/filtermenu#configuration-dataSource) option.
 
 ### field `String`
 

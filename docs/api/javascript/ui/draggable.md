@@ -265,7 +265,7 @@ Suitable for touch oriented user interface, in order to avoid collision with the
 When set to `true`, the widget will be activated after the user taps and holds the finger on the element for a short amount of time.
 
 The *draggable* will also be activated by pressing, holding and lifting the finger without any movement. Dragging it afterwards will initiate the drag immediately.
-The activated mode can be canceled by calling [`cancelHold`](#methods-cancelHold).
+The activated mode can be canceled by calling [`cancelHold`](/api/javascript/ui/draggable/methods/cancelhold).
 
 #### Example - hold to drag
 

@@ -68,7 +68,7 @@
     }
 
     test("PanelBar renders anchor instead of span if contentUrl", function() {
-        debugger;
+
         var children = ul.find("li:last").children();
 
         equal(children.filter("a").length, 1);

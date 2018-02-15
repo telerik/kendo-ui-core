@@ -12,7 +12,7 @@ res_type: api
 
 The sheets of the workbook. Every sheet represents a page from the final Excel file.
 
-See [sheets configuration](#configuration-sheets).
+See [sheets configuration](/api/javascript/ooxml/workbook#configuration-sheets).
 
 ## Configuration
 
@@ -145,18 +145,18 @@ The width of the column in pixels.
 ### sheets.freezePane `Object`
 
 Deprecated in versions 2015.3 and newer. Use
-[frozenColumns](#configuration-sheets.frozenColumns) and
-[frozenRows](#configuration-sheets.frozenRows) instead.
+[frozenColumns](/api/javascript/ooxml/workbook#configuration-sheets.frozenColumns) and
+[frozenRows](/api/javascript/ooxml/workbook#configuration-sheets.frozenRows) instead.
 
 ### sheets.freezePane.colSplit `Number` *(default: 0)*
 
 Deprecated in versions 2015.3 and newer. Use
-[frozenColumns](#configuration-sheets.frozenColumns) instead.
+[frozenColumns](/api/javascript/ooxml/workbook#configuration-sheets.frozenColumns) instead.
 
 ### sheets.freezePane.rowSplit `Number` *(default: 0)*
 
 Deprecated in versions 2015.3 and newer. Use
-[frozenRows](#configuration-sheets.frozenRows) instead.
+[frozenRows](/api/javascript/ooxml/workbook#configuration-sheets.frozenRows) instead.
 
 ### sheets.frozenColumns `Number` *(default: 0)*
 The number of frozen columns in this sheet.
@@ -534,7 +534,7 @@ Sets the font used to display the cell value.
 
 ### sheets.rows.cells.fontName `String` *(default: "Calibri")*
 
-Deprecated in versions 2015.3 and newer. Use [fontFamily](#configuration-sheets.rows.cells.fontFamily) instead.
+Deprecated in versions 2015.3 and newer. Use [fontFamily](/api/javascript/ooxml/workbook#configuration-sheets.rows.cells.fontFamily) instead.
 
 ### sheets.rows.cells.fontSize `Number` *(default: 11)*
 
@@ -609,7 +609,7 @@ Sets the formula that Excel uses to compute and display the cell value
 
 ### sheets.rows.cells.hAlign `String`
 
-Deprecated in versions 2015.3 and newer. Use [textAlign](#configuration-sheets.rows.cells.textAlign) instead.
+Deprecated in versions 2015.3 and newer. Use [textAlign](/api/javascript/ooxml/workbook#configuration-sheets.rows.cells.textAlign) instead.
 
 ### sheets.rows.cells.index `Object`
 The zero-based index of the cell in the row.
@@ -754,7 +754,7 @@ Setting it to `true` wraps the cell value.
 
 ### sheets.rows.cells.vAlign `String` *(default: "bottom")*
 
-Deprecated in versions 2015.3 and newer. Use [verticalAlign](#configuration-sheets.rows.cells.verticalAlign) instead.
+Deprecated in versions 2015.3 and newer. Use [verticalAlign](/api/javascript/ooxml/workbook#configuration-sheets.rows.cells.verticalAlign) instead.
 
 ### sheets.rows.cells.verticalAlign `String` *(default: "bottom")*
 
@@ -854,7 +854,7 @@ The row height in pixels.
 A boolean value indicating if the sheet grid lines should be displayed.
 
 ### sheets.title `String`
-Deprecated in versions 2015.3 and newer. Use [name](#configuration-sheets.name) instead.
+Deprecated in versions 2015.3 and newer. Use [name](/api/javascript/ooxml/workbook#configuration-sheets.name) instead.
 
 ## Methods
 
@@ -864,7 +864,7 @@ Creates an Excel file that represents the current workbook and returns it as a d
 
 > **Important**
 >
-> The `toDataURL` method supports only JSZip 2.* versions. If you need to use JSZip 3.*, call the [`toDataURLAsync`](#methods-toDataURLAsync) method instead.
+> The `toDataURL` method supports only JSZip 2.* versions. If you need to use JSZip 3.*, call the [`toDataURLAsync`](/api/javascript/ooxml/workbook/methods/todataurlasync) method instead.
 
 #### Returns
 

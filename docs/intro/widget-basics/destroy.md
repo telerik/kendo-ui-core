@@ -62,7 +62,7 @@ The Kendo UI widgets are destroyed automatically when the web page is unloaded.
 
 ### Destroy Widgets Created through MVVM
 
-To properly destroy widgets [created declaratively]({% slug dataattributes_configuration_installation %}) through the [Kendo UI MVVM mechanism]({% slug overview_mvvmpattern_kendoui %}), first use the [`kendo.unbind()`](/api/javascript/kendo/methods/unbind) method to remove any MVVM bindings related to the widget, and then call [`kendo.destroy()`](/api/framework/kendo/methods/destroy) for the appropriate container, or the [`destroy()`](/api/javascript/ui/widget/methods/destroy) method of each widget inside this container.
+To properly destroy widgets [created declaratively]({% slug dataattributes_configuration_installation %}) through the [Kendo UI MVVM mechanism]({% slug overview_mvvmpattern_kendoui %}), first use the [`kendo.unbind()`](/api/javascript/kendo/methods/unbind) method to remove any MVVM bindings related to the widget, and then call [`kendo.destroy()`](/api/javascript/kendo/methods/destroy) for the appropriate container, or the [`destroy()`](/api/javascript/ui/widget/methods/destroy) method of each widget inside this container.
 
 ### Destroy Multiple Widgets
 

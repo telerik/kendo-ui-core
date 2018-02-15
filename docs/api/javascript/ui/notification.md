@@ -65,7 +65,7 @@ Defines custom show and hide animations via an Kendo UI Animation object. Settin
 
 ### appendTo `String|Element|jQuery` *(default: null)*
 
-Defines the element to which the notifications will be appended or prepended (depending on the [stacking](#configuration-stacking) direction).
+Defines the element to which the notifications will be appended or prepended (depending on the [stacking](/api/javascript/ui/notification#configuration-stacking) direction).
 
 #### Example - set appendTo as a selector string
 
@@ -349,13 +349,13 @@ Describes the HTML markup of the different notification types as Kendo UI templa
 
 **Required.** Specified a unique identifier, which is used to retrieve the correct template when a notification of this type is shown.
 
-See the [example above](#configuration-templates).
+See the [example above](/api/javascript/ui/notification#configuration-templates).
 
 ### templates.template `String` *(default: "")*
 
 Defines a Kendo UI template to be used with the corresponding notification type.
 
-See the [example above](#configuration-templates).
+See the [example above](/api/javascript/ui/notification#configuration-templates).
 
 ### width `Number|String` *(default: null)*
 
@@ -385,7 +385,7 @@ Defines the notifications' width. Numbers are treated as pixels.
 
 ### error
 
-This is a shorthand method for [`show(data, "error")`](#methods-show)
+This is a shorthand method for [`show(data, "error")`](/api/javascript/ui/notification/methods/show)
 
 #### Parameters
 
@@ -398,7 +398,7 @@ This is a shorthand method for [`show(data, "error")`](#methods-show)
 Returns a jQuery collection of all visible notifications, displayed by the given widget instance. Each item in the collection is a `div.k-notification` element.
 
 This method is useful for quick removal of all visible messages before showing new ones. After obtaining all visible messages, **remove** them from the DOM
-instead of [hiding](#methods-hide) them, unless animations are disabled. This is because animations are asynchronous and the new messages
+instead of [hiding](/api/javascript/ui/notification/methods/hide) them, unless animations are disabled. This is because animations are asynchronous and the new messages
 will be shown on the wrong places before the old ones have been hidden. Another thing to keep in mind is that when using
 [**popup**](/web/notification/overview#popup-messages) notification messages, you should remove the [**parent**](/web/notification/overview#html-output)
 of each member of the collection, returned by the `getNotifications()` method. In this case the parent will be a `div.k-animation-container` element.
@@ -449,7 +449,7 @@ of each member of the collection, returned by the `getNotifications()` method. I
 Hides all notifications from the given widget instance.
 
 If you intend to use this method to dispose of all visible messages before showing new ones,
-then use the [`getNotifications()`](#methods-getNotifications) method instead, unless animations are disabled.
+then use the [`getNotifications()`](/api/javascript/ui/notification/methods/getnotifications) method instead, unless animations are disabled.
 
 #### Example
 
@@ -465,7 +465,7 @@ then use the [`getNotifications()`](#methods-getNotifications) method instead, u
 
 ### info
 
-This is a shorthand method for [`show(data, "info")`](#methods-show)
+This is a shorthand method for [`show(data, "info")`](/api/javascript/ui/notification/methods/show)
 
 #### Parameters
 
@@ -486,11 +486,11 @@ Displays a notification.
 
 **Required**. The string content for the notification; or the object with the values for the variables inside the notification template; or the function, which returns the required string or an object.
 
-> **Important** The content **will not** be HTML-encoded. Use the [showText](#methods-showText) if you only intend to show plain text.
+> **Important** The content **will not** be HTML-encoded. Use the [showText](/api/javascript/ui/notification/methods/showtext) if you only intend to show plain text.
 
 ##### type `String`
 
-The notification type. Built-in types include `"info"`, `"success"`, `"warning"` and `"error"`. Custom types should match the types from the [template configuration](#configuration-templates).
+The notification type. Built-in types include `"info"`, `"success"`, `"warning"` and `"error"`. Custom types should match the types from the [template configuration](/api/javascript/ui/notification#configuration-templates).
 If this argument is not supplied, then `"info"` is assumed.
 
 #### Example - Use the show method with a template and custom arguments
@@ -519,7 +519,7 @@ If this argument is not supplied, then `"info"` is assumed.
 
 Displays a plain-text notification.
 
-This is a safer version of the [show](#methods-show) method that assumes that you want to encode any markup passed in as a message.
+This is a safer version of the [show](/api/javascript/ui/notification/methods/show) method that assumes that you want to encode any markup passed in as a message.
 
 #### Parameters
 
@@ -529,7 +529,7 @@ This is a safer version of the [show](#methods-show) method that assumes that yo
 
 ##### type `String`
 
-The notification type. Built-in types include `"info"`, `"success"`, `"warning"` and `"error"`. Custom types should match the types from the [template configuration](#configuration-templates).
+The notification type. Built-in types include `"info"`, `"success"`, `"warning"` and `"error"`. Custom types should match the types from the [template configuration](/api/javascript/ui/notification#configuration-templates).
 If this argument is not supplied, then `"info"` is assumed.
 
 #### Example - Use the showText method to display a string
@@ -563,7 +563,7 @@ If this argument is not supplied, then `"info"` is assumed.
 
 ### success
 
-This is a shorthand method for [`show(data, "success")`](#methods-show)
+This is a shorthand method for [`show(data, "success")`](/api/javascript/ui/notification/methods/show)
 
 #### Parameters
 
@@ -573,7 +573,7 @@ This is a shorthand method for [`show(data, "success")`](#methods-show)
 
 ### warning
 
-This is a shorthand method for [`show(data, "warning")`](#methods-show)
+This is a shorthand method for [`show(data, "warning")`](/api/javascript/ui/notification/methods/show)
 
 #### Parameters
 

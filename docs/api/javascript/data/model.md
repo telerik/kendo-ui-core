@@ -262,10 +262,10 @@ ObservableObject API reference.
 
 ### get event
 
-Raised when the `get` method is invoked. Inherited from `kendo.data.ObservableObject`. Examples and more info can be found in the [get](/api/javascript/data/observableobject/events/get) section of the
+Raised when the `get` method is invoked. Inherited from `kendo.data.ObservableObject`. Examples and more info can be found in the [get](/api/javascript/data/observableobject/events/get event) section of the
 ObservableObject API reference.
 
 ### set event
 
-Raised when the `set` method is invoked. Inherited from `kendo.data.ObservableObject`. Examples and more info can be found in the [set](/api/javascript/data/observableobject/events/set) section of the
+Raised when the `set` method is invoked. Inherited from `kendo.data.ObservableObject`. Examples and more info can be found in the [set](/api/javascript/data/observableobject/events/set event) section of the
 ObservableObject API reference.

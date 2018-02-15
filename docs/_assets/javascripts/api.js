@@ -181,8 +181,9 @@ function getBreadcrumbDropDownContent(data, breadcrumbsInfo, nestingLevel, lastH
 
 function getPrefix(item, prefixes) {
     var result = '';
+    var searchedItem = item.toLowerCase();
     $.each(prefixes, function (index, prefix) {
-        if (item.indexOf(prefix) > -1) {
+        if (searchedItem === prefix.toLowerCase()) {
             result = prefix + '#';
             return false;
         }

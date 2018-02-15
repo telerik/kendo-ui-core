@@ -431,7 +431,7 @@ Specifies whether the TabStrip should be keyboard navigatable.
 
 If enabled, the TabStrip will display buttons that will scroll the tabs horizontally, when they cannot fit the TabStrip width. By default scrolling is enabled.
 
-The feature requires `"top"` or `"bottom"` [`tabPosition`](#configuration-tabPosition).
+The feature requires `"top"` or `"bottom"` [`tabPosition`](/api/javascript/ui/tabstrip#configuration-tabPosition).
 
 Unless disabled, `scrollable` must be set to a JavaScript object, which represents the scrolling configuration.
 
@@ -494,7 +494,7 @@ Sets the scroll amount (in pixels) applied when the user clicks on a scroll butt
 ### tabPosition `String`*(default: "top")*
 
 Specifies the position of the widget tabs. Valid values are `"top"` (default), `"left"`, `"right"` and `"bottom"`.
-A [**fade animation**](#configuration-animation) is highly recommended with any of the non-default tab position settings.
+A [**fade animation**](/api/javascript/ui/tabstrip#configuration-animation) is highly recommended with any of the non-default tab position settings.
 
 #### Example
 

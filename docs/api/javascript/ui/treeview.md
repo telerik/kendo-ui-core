@@ -1361,7 +1361,7 @@ The node that should be toggled.
 ### updateIndeterminate
 
 Updates the indeterminate state of the TreeView checkboxes.
-Call it after using the insert / remove API on TreeViews with [checkChildren: true](#configuration-checkboxes.checkChildren).
+Call it after using the insert / remove API on TreeViews with [checkChildren: true](/api/javascript/ui/treeview#configuration-checkboxes.checkChildren).
 Use to improve performance when checking multiple checkboxes through code.
 
 #### Parameters

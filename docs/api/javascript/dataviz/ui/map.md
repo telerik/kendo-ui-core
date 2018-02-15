@@ -1807,7 +1807,7 @@ The URL template for tile layers. Template variables:
 * x - X coordinate of the tile
 * y - Y coordinate of the tile
 * zoom - zoom level
-* subdomain - Subdomain for this tile. See [subdomains](#configuration-layers-tile-subdomains)
+* subdomain - Subdomain for this tile. See [subdomains](/api/javascript/dataviz/ui/map#configuration-layers-tile-subdomains)
 
 #### Example - set default URL template for all tile layers
     <div id="map"></div>
@@ -2235,7 +2235,7 @@ The culture to be used for the bing map tiles.
 The data item field which contains the marker (symbol) location.
 The field should be an array with two numbers - latitude and longitude in decimal degrees.
 
-Requires the [dataSource](#configuration-layers-dataSource) option to be set.
+Requires the [dataSource](/api/javascript/dataviz/ui/map#configuration-layers-dataSource) option to be set.
 
 Only applicable to "marker" and "bubble" layers.
 
@@ -2290,7 +2290,7 @@ The size of the image tile in pixels.
 ### layers.titleField `String` *(default: "title")*
 
 The data item field which contains the marker title.
-Requires the [dataSource](#configuration-layers-dataSource) option to be set.
+Requires the [dataSource](/api/javascript/dataviz/ui/map#configuration-layers-dataSource) option to be set.
 
 #### Example - bind marker title
     <div id="map"></div>
@@ -3306,7 +3306,7 @@ The URL template for tile layers. Template variables:
 * x - X coordinate of the tile
 * y - Y coordinate of the tile
 * zoom - zoom level
-* subdomain - Subdomain for this tile. See [subdomains](#configuration-layers-tile-subdomains)
+* subdomain - Subdomain for this tile. See [subdomains](/api/javascript/dataviz/ui/map#configuration-layers-tile-subdomains)
 
 #### Example - setting URL template for tile layer
     <div id="map"></div>
@@ -4582,7 +4582,7 @@ The event on which the tooltip will be shown. Predefined values are "mouseenter"
 The minimum zoom level.
 Typical web maps use zoom levels from 0 (whole world) to 19 (sub-meter features).
 
-> The map [zoom](#configuration-zoom) is clamped to the [minZoom, maxZoom] interval.
+> The map [zoom](/api/javascript/dataviz/ui/map#configuration-zoom) is clamped to the [minZoom, maxZoom] interval.
 
 #### Example - limit zoom out to level 3
     <div id="map"></div>
@@ -4603,7 +4603,7 @@ Typical web maps use zoom levels from 0 (whole world) to 19 (sub-meter features)
 The maximum zoom level.
 Typical web maps use zoom levels from 0 (whole world) to 19 (sub-meter features).
 
-> The map [zoom](#configuration-zoom) is clamped to the [minZoom, maxZoom] interval.
+> The map [zoom](/api/javascript/dataviz/ui/map#configuration-zoom) is clamped to the [minZoom, maxZoom] interval.
 
 #### Example - limit zoom in to level 10
     <div id="map"></div>
@@ -4876,7 +4876,7 @@ The DOM or jQuery mouse event.
 Retrieves relative (view) coordinates that correspond to this mouse event.
 Layer elements positioned on these coordinates will appear under the mouse cursor.
 
-View coordinates are no longer valid after a map [reset](#events-reset).
+View coordinates are no longer valid after a map [reset](/api/javascript/dataviz/ui/map/events/reset).
 
 #### Parameters
 
@@ -5286,7 +5286,7 @@ The setter is chainable, i.e. returns the map instance.
 ##### level `Number`
 
 The new zoom level. The value is clamped to the
- [[minZoom](#configuration-minZoom), [maxZoom](#configuration-maxZoom)] interval.
+ [[minZoom](/api/javascript/dataviz/ui/map#configuration-minZoom), [maxZoom](/api/javascript/dataviz/ui/map#configuration-maxZoom)] interval.
 
 #### Returns
 
@@ -5427,7 +5427,7 @@ The source widget instance.
 Fired when a marker has been created and is about to be displayed.
 Cancelling the event will prevent the marker from being shown.
 
-Use [markerActivate](#events-markerActivate) if you need to access the marker DOM element.
+Use [markerActivate](/api/javascript/dataviz/ui/map/events/markeractivate) if you need to access the marker DOM element.
 
 > Markers are automatically created for GeoJSON Point geometries. If the markerCreated event is cancelled a regular shape (circle) will be created instead.
 

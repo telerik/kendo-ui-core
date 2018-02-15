@@ -2621,7 +2621,7 @@ Can be set to a JavaScript object which represents the editing configuration.
 
 > The "inline" and "popup" editing modes are triggered by the "edit" column command. Thus it is required to have a column with an "edit" command.
 >
-> The "incell" editing mode combined with DataSource `autoSync: true` setting is not supported when using server-side grouping in the Grid. To be able to save edited values on each change, you can disable server-side grouping or trigger a DataSource `sync()` manually inside the [`cellClose` event](#events-cellClose).
+> The "incell" editing mode combined with DataSource `autoSync: true` setting is not supported when using server-side grouping in the Grid. To be able to save edited values on each change, you can disable server-side grouping or trigger a DataSource `sync()` manually inside the [`cellClose` event](/api/javascript/ui/grid/events/cellclose).
 
 #### Example - enable editing
 
