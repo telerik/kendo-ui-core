@@ -9,6 +9,7 @@ res_type: api
 Represents a linear color gradient.
 
 #### Example - creating a linear gradient
+
     <div id="surface" />
     <script>
       var draw = kendo.drawing;
@@ -54,13 +55,13 @@ The configuration of this LinearGradient.
 
 ### stops `Array`
 The color stops of the gradient.
-Can contain either plain objects or [GradientStop](gradient-stop) instances.
+Can contain either plain objects or [GradientStop](/api/javascript/drawing/gradient-stop) instances.
 
 ## Fields
 
 ### stops `Array`
 The array of gradient color stops.
-Contains [GradientStop](gradient-stop) instances.
+Contains [GradientStop](/api/javascript/drawing/gradient-stop) instances.
 
 ## Methods
 

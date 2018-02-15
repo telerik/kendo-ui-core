@@ -257,11 +257,11 @@ Template to be used for rendering the alternate items in the ListView.
 
 ### dataSource `kendo.data.DataSource`
 
-The [data source](/api/javascript/data/datasource) of the widget. Configured via the [dataSource](/configuration/datasource) option.
+The [data source](/api/javascript/data/datasource) of the widget. Configured via the [dataSource](/api/javascript/ui/listview/configuration/datasource) option.
 
 > Changes of the data source will be reflected in the widget.
 
-> **Important:** Assigning a new data source would have no effect. Use the [setDataSource](#methods-setDataSource) method instead.
+> **Important:** Assigning a new data source would have no effect. Use the [setDataSource](/api/javascript/ui/listview/methods/setdatasource) method instead.
 
 ## Methods
 
@@ -414,7 +414,7 @@ Prepares the **ListView** for safe removal from DOM. Detaches all event handlers
 
 ### edit
 
-Edit specified ListView item. Fires the [edit](#events-edit) event.
+Edit specified ListView item. Fires the [edit](/api/javascript/ui/listview/events/edit) event.
 
 #### Example
 
@@ -474,7 +474,7 @@ Reloads the data and repaints the list view.
 
 ### remove
 
-Removes specified ListView item. Triggers [remove](#events-remove) event and if not prevented calls DataSource [sync](/api/javascript/data/datasource/methods/sync) method.
+Removes specified ListView item. Triggers [remove](/api/javascript/ui/listview/events/remove) event and if not prevented calls DataSource [sync](/api/javascript/data/datasource/methods/sync) method.
 
 #### Example
 
@@ -503,7 +503,7 @@ jQuery object which represents the item to be removed.
 
 ### save
 
-Saves edited ListView item. Triggers [save](#events-save) event. If save event is not prevented and validation succeeds will call DataSource [sync](/api/javascript/data/datasource/methods/sync) method.
+Saves edited ListView item. Triggers [save](/api/javascript/ui/listview/events/save) event. If save event is not prevented and validation succeeds will call DataSource [sync](/api/javascript/data/datasource/methods/sync) method.
 
 #### Example
 

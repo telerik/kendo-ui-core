@@ -305,7 +305,7 @@ If set to `false` the widget will be disabled and will not allow user input. The
 
 ### enforceMinLength `Boolean` *(default: false)*
 
-If set to `true` the widget will not show all items when the text of the search input cleared. By default the widget shows all items when the text of the search input is cleared. Works in conjunction with [minLength](#configuration-minLength).
+If set to `true` the widget will not show all items when the text of the search input cleared. By default the widget shows all items when the text of the search input is cleared. Works in conjunction with [minLength](/api/javascript/ui/multiselect#configuration-minLength).
 
 #### Example - enforce minLength
 
@@ -336,7 +336,7 @@ If set to `true` the widget will not show all items when the text of the search 
 
 ### filter `String`*(default: "startswith")*
 
-The filtering method used to determine the suggestions for the current value. Filtration is turned of by default, and can be performed over `string` values only (either the widget's data has to be an array of strings, or over the field, configured in the [`dataTextField`](#configuration-dataTextField) option).
+The filtering method used to determine the suggestions for the current value. Filtration is turned of by default, and can be performed over `string` values only (either the widget's data has to be an array of strings, or over the field, configured in the [`dataTextField`](/api/javascript/ui/multiselect#configuration-dataTextField) option).
 The supported filter values are `startswith`, `endswith` and `contains`.
 
 #### Example - set the filter
@@ -477,7 +477,7 @@ If set to `false` case-sensitive search will be performed to find suggestions. T
 The minimum number of characters the user must type before a search is performed. Set to a higher value if the search could match a lot of items.
 A zero value means that a request will be made as soon as the user focuses the widget.
 
-> Widget will initiate a request when input value is cleared. If you would like to prevent this behavior please check the [filtering](#events-filtering) event for more details.
+> Widget will initiate a request when input value is cleared. If you would like to prevent this behavior please check the [filtering](/api/javascript/ui/multiselect/events/filtering) event for more details.
 
 #### Example - set minLength
 
@@ -740,13 +740,13 @@ The [template](/api/javascript/kendo/methods/template) used to render the items 
 
 The [template](/api/javascript/kendo/methods/template) used to render the tags.
 
-#### Template Data for the 'multiple' [tagMode](#configuration-tagMode)
+#### Template Data for the 'multiple' [tagMode](/api/javascript/ui/multiselect#configuration-tagMode)
 
 ##### data `Object`
 
 The dataitem that corresponds to the selected value.
 
-#### Template Data for the 'single' [tagMode](#configuration-tagMode)
+#### Template Data for the 'single' [tagMode](/api/javascript/ui/multiselect#configuration-tagMode)
 
 ##### data.values `Array`
 
@@ -835,7 +835,7 @@ The mode used to render the selected tags. The available modes are:
 - `single` - renders only one tag that shows the number of the selected values
 
 > Every tagMode has a specific `tagTemplate` value. If you would like to control the content of the rendered tags,
-set a custom a [tagTemplate](#configuration-tagTemplate) value.
+set a custom a [tagTemplate](/api/javascript/ui/multiselect#configuration-tagTemplate) value.
 
 ### value `Array`*(default: [])*
 
@@ -1176,11 +1176,11 @@ The widget will pass the selected value(s) in the `valueMapper` function. In tur
 
 ### dataSource `kendo.data.DataSource`
 
-The [data source](/api/javascript/data/datasource) of the widget. Configured via the [dataSource](/configuration/datasource) option.
+The [data source](/api/javascript/data/datasource) of the widget. Configured via the [dataSource](/api/javascript/ui/multiselect/configuration/datasource) option.
 
 > Changes of the data source will be reflected in the widget.
 
-> **Important:** Assigning a new data source would have no effect. Use the [setDataSource](#methods-setDataSource) method instead.
+> **Important:** Assigning a new data source would have no effect. Use the [setDataSource](/api/javascript/ui/multiselect/methods/setdatasource) method instead.
 
 #### Example - add a data item to the data source
 
@@ -1516,7 +1516,7 @@ Gets or sets the value of the MultiSelect.
 
 > **Important:** The widget will **clear the applied filter** if a new value is set. Thus it ensures that the original/whole data set is available for selection.
 
-> **Important:** This method **does not trigger** [change](#events-change) event.
+> **Important:** This method **does not trigger** [change](/api/javascript/ui/multiselect/events/change) event.
 This could affect [MVVM value binding](/framework/mvvm/bindings/value). The model bound to the widget will not be updated.
 You can overcome this behavior trigerring the `change` event manually using [trigger("change")](/api/javascript/observable/methods/trigger) method.
 

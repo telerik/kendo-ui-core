@@ -417,7 +417,7 @@ Resolves the promise with the raw SVG document without the Data URI prefix.
 
 Returns a PNG image of the barcode encoded as a [Data URL](https://developer.mozilla.org/en-US/docs/data_URIs).
 
-> This method is deprecated and replaced by [exportImage](#methods-exportImage).
+> This method is deprecated and replaced by [exportImage](/api/javascript/dataviz/ui/barcode/methods/exportimage).
 
 #### Returns
 
@@ -495,7 +495,7 @@ Adjusts the widget layout to match the size of the container.
 
 > **Important**
 >
-> If a fixed width is set using the [width](#configuration-width) option, the [resize](#methods-resize) method will not adjust the widget to match the size of the container. In this case, update both the container's width and the widget's width to the appropriate value.
+> If a fixed width is set using the [width](/api/javascript/dataviz/ui/barcode#configuration-width) option, the [resize](/api/javascript/dataviz/ui/barcode/methods/resize) method will not adjust the widget to match the size of the container. In this case, update both the container's width and the widget's width to the appropriate value.
 
 #### Example
 
@@ -523,7 +523,7 @@ Defines whether the widget should proceed with resizing even if the element dime
 Returns the [SVG](http://www.w3.org/Graphics/SVG/) representation of the barcode. The returned string is a self-contained SVG document that can be used as is or converted to other formats using tools like [Inkscape](https://inkscape.org/en) and
 [ImageMagick](http://www.imagemagick.org/). Both programs provide command-line interface suitable for server-side processing.
 
-> This method is obsoleted by [exportSVG](#methods-exportSVG), but will remain fully functional.
+> This method is obsoleted by [exportSVG](/api/javascript/dataviz/ui/barcode/methods/exportsvg), but will remain fully functional.
 
 #### Returns
 

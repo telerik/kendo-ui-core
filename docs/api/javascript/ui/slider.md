@@ -29,7 +29,7 @@ The title of the increase button of the **Slider**.
 The delta with which the value will change when the user presses the Page Up or Page Down key (the drag
 handle must be focused). Note: `largeStep` will also set a large tick for every large step.
 
-Must be a positive number, larger than [smallStep](#configuration-smallStep).
+Must be a positive number, larger than [smallStep](/api/javascript/ui/slider#configuration-smallStep).
 
 ### max `Number`*(default: 10)*
 

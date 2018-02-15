@@ -813,9 +813,9 @@ Enables or disables nodes.
 
 #### Parameters
 
-##### nodes `jQuery|Element|String`
+##### nodes `jQuery|Element|String|Boolean`
 
-The nodes that are to be enabled/disabled.
+The nodes that are to be enabled/disabled. Or, if *Boolean* parameter is passed, all nodes will be enabled/disabled.
 
 ##### enable `Boolean` *(optional, default: true)*
 
@@ -838,6 +838,23 @@ Whether the nodes should be enabled or disabled.
 
     // enable all items
     treeview.enable(".k-item");
+    </script>
+
+#### Example - enable all nodes
+
+    <div id="treeview"></div>
+    <script>
+    $("#treeview").kendoTreeView({
+      dataSource: [
+        { text: "foo", enabled: false },
+        { text: "bar", enabled: false }
+      ]
+    });
+
+    var treeview = $("#treeview").data("kendoTreeView");
+
+    // enable all items
+    treeview.enable(true);
     </script>
 
 ### expand
@@ -1361,7 +1378,7 @@ The node that should be toggled.
 ### updateIndeterminate
 
 Updates the indeterminate state of the TreeView checkboxes.
-Call it after using the insert / remove API on TreeViews with [checkChildren: true](#configuration-checkboxes.checkChildren).
+Call it after using the insert / remove API on TreeViews with [checkChildren: true](/api/javascript/ui/treeview#configuration-checkboxes.checkChildren).
 Use to improve performance when checking multiple checkboxes through code.
 
 #### Parameters

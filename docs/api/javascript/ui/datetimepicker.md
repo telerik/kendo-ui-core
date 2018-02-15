@@ -151,7 +151,7 @@ The duration of the open animation in milliseconds.
 
 ### dates `Array`
 
-Specifies a list of dates, which will be passed to the [month template](#configuration-month.content) of the DateView.
+Specifies a list of dates, which will be passed to the [month template](/api/javascript/ui/datetimepicker#configuration-month.content) of the DateView.
 All dates, which match the date portion of the selected date will be used to re-bind the TimeView.
 
 #### Example - specify a list of dates
@@ -828,7 +828,7 @@ The time value to set for a DateTimePicker, expressed as a Date object or as a s
 
 `Date` The time value of a DateTimePicker.
 
-> * This method **does not trigger** [change](#events-change) event.
+> * This method **does not trigger** [change](/api/javascript/ui/datetimepicker/events/change) event.
 This could affect [MVVM value binding](/framework/mvvm/bindings/value). The model bound to the widget will not be updated.
 You can overcome this behavior trigerring the `change` event manually using [trigger("change")](/api/javascript/observable/methods/trigger) method.
 

@@ -60,7 +60,7 @@ DataSource is fired. By default the widget will bind to the DataSource specified
 ### columns `Array`
 
 The configuration of the treelist columns. An array of JavaScript objects or strings. JavaScript objects are interpreted as column configurations. Strings are interpreted as the
-[field](#configuration-columns.field) to which the column is bound. The TreeList will create a column for each item of the array.
+[field](/api/javascript/ui/treelist#configuration-columns.field) to which the column is bound. The TreeList will create a column for each item of the array.
 
 #### Example - specify treelist columns as array of strings
 
@@ -139,13 +139,13 @@ The configuration of the column command(s). If set the column would display a bu
 
 * The "destroy" built-in command removes the data item to which the current table row is bound.
 
-Custom commands are supported by specifying the [click](#configuration-columns.command.click) option.
+Custom commands are supported by specifying the [click](/api/javascript/ui/treelist#configuration-columns.command.click) option.
 
-> Each custom command requires you to explicitly specify its [name](/api/javascript/ui/treelist.html/configuration/columns.command.name).
+> Each custom command requires you to explicitly specify its [name](/api/javascript/ui/treelist/configuration/columns.command.name).
 >
-> A command column cannot be [expandable](#configuration-columns.expandable).
+> A command column cannot be [expandable](/api/javascript/ui/treelist#configuration-columns.expandable).
 >
-> The built-in "edit", "createChild" and "destroy" commands work *only* if editing is enabled via the [editable](#configuration-editable) option, and the TreeList DataSource is configured for [CRUD operations](http://docs.telerik.com/kendo-ui/framework/datasource/crud). The "edit" command supports "inline" and "popup" editing modes.
+> The built-in "edit", "createChild" and "destroy" commands work *only* if editing is enabled via the [editable](/api/javascript/ui/treelist#configuration-editable) option, and the TreeList DataSource is configured for [CRUD operations](http://docs.telerik.com/kendo-ui/framework/datasource/crud). The "edit" command supports "inline" and "popup" editing modes.
 
 #### Example - set command as array of strings
 
@@ -325,7 +325,7 @@ The function context (available via the `this` keyword) will be set to the treel
 
 ### columns.command.name `String`
 
-The name of the command. The built-in command names are "edit", "createChild" and "destroy". Check the [`columns.command`](#configuration-columns.command) section for additional important information. When set to a custom value, the `name` is rendered as a `data-command` attribute.
+The name of the command. The built-in command names are "edit", "createChild" and "destroy". Check the [`columns.command`](/api/javascript/ui/treelist#configuration-columns.command) section for additional important information. When set to a custom value, the `name` is rendered as a `data-command` attribute.
 
 #### Example - set the command name
 
@@ -352,7 +352,7 @@ The name of the command. The built-in command names are "edit", "createChild" an
 
 ### columns.command.text `String`
 
-The text displayed by the command button. If not set the [name](#configuration-columns.command.name) option is used as the button text.
+The text displayed by the command button. If not set the [name](/api/javascript/ui/treelist#configuration-columns.command.name) option is used as the button text.
 
 #### Example - customize the text of the command
 
@@ -380,7 +380,7 @@ The text displayed by the command button. If not set the [name](#configuration-c
 
 Provides a way to specify a custom editing UI for the column. Use the `container` parameter to create the editing UI.
 
-> The editing UI should contain an element that has a `name` HTML attribute set and that attribute value should match the [field](#configuration-columns.field) name.
+> The editing UI should contain an element that has a `name` HTML attribute set and that attribute value should match the [field](/api/javascript/ui/treelist#configuration-columns.field) name.
 
 > Validation settings defined in the `model.fields` configuration will **not** be applied automatically. In order for the validation to work, **the developer is responsible for attaching the corresponding validation attributes to the editor input**. In case the custom editor is a widget, the developer can [customize the validation warning tooltip position](/framework/validator/overview#customizing-the-tooltip-position) to avoid visual issues.
 
@@ -398,7 +398,7 @@ The name of the field to which the column is bound.
 
 ##### options.format `String`
 
-The format string of the column specified via the [format](#configuration-columns.format) option.
+The format string of the column specified via the [format](/api/javascript/ui/treelist#configuration-columns.format) option.
 
 ##### options.model `kendo.data.TreeListModel`
 
@@ -504,7 +504,7 @@ If set to `true` the column value will be HTML-encoded before it is displayed. I
 
 If set to `true` the column will show the icons that are used for expanding and collapsing child rows. By default, the first column of the TreeList is expandable.
 
-> An expandable column cannot hold [commands](#configuration-columns.command).
+> An expandable column cannot hold [commands](/api/javascript/ui/treelist#configuration-columns.command).
 
 #### Example - make the second column expandable
 
@@ -549,7 +549,7 @@ The field to which the column is bound. The value of this field is displayed by 
 ### columns.filterable `Boolean|Object` *(default: true)*
 
 If set to `true` a filter menu will be displayed for this column when filtering is enabled. If set to `false` the filter menu will not be displayed. By default a filter menu is displayed
-for all columns when filtering is enabled via the [filterable](#configuration-filterable) option.
+for all columns when filtering is enabled via the [filterable](/api/javascript/ui/treelist#configuration-filterable) option.
 
 Can be set to a JavaScript object which represents the filter menu configuration.
 
@@ -734,7 +734,7 @@ The table headers would look like this: `<th class="name-header" style="text-ali
 
 ### columns.headerTemplate `String|Function`
 
-The [template](/api/javascript/kendo/methods/template) which renders the column header content. By default the value of the [title](/configuration/columns.title) column option
+The [template](/api/javascript/kendo/methods/template) which renders the column header content. By default the value of the [title](/api/javascript/ui/treelist/configuration/columns.title) column option
 is displayed in the column header cell.
 
 > If sorting is enabled, the column header content will be wrapped in an `<a>` element. As a result the template **must** contain only inline elements.
@@ -781,8 +781,8 @@ so the two should not be used at the same time.
 
 ### columns.sortable `Boolean|Object` *(default: true)*
 
-If set to `true` the user can click the column header and sort the treelist by the column [field](#configuration-columns.field) when sorting is enabled. If set to `false` sorting will
-be disabled for this column. By default all columns are sortable if sorting is enabled via the [sortable](#configuration-sortable) option.
+If set to `true` the user can click the column header and sort the treelist by the column [field](/api/javascript/ui/treelist#configuration-columns.field) when sorting is enabled. If set to `false` sorting will
+be disabled for this column. By default all columns are sortable if sorting is enabled via the [sortable](/api/javascript/ui/treelist#configuration-sortable) option.
 
 #### Example - disable sorting
 
@@ -842,7 +842,7 @@ A JavaScript function which is used to compare the values - should return -1 if 
 ### columns.template `String|Function`
 
 The [template](/api/javascript/kendo/methods/template) which renders the column content. The treelist renders table rows (`<tr>`) which represent the data source items.
-Each table row consists of table cells (`<td>`) which represent the treelist columns. By default the HTML-encoded value of the [field](#configuration-columns.field) is displayed in the column.
+Each table row consists of table cells (`<td>`) which represent the treelist columns. By default the HTML-encoded value of the [field](/api/javascript/ui/treelist#configuration-columns.field) is displayed in the column.
 
 > Use the `template` to customize the way the column displays its value.
 
@@ -896,7 +896,7 @@ Each table row consists of table cells (`<td>`) which represent the treelist col
 
 ### columns.title `String`
 
-The text that is displayed in the column header cell. If not set the [field](#configuration-columns.field) is used.
+The text that is displayed in the column header cell. If not set the [field](/api/javascript/ui/treelist#configuration-columns.field) is used.
 
 #### Example - set the title of the column
 
@@ -980,7 +980,7 @@ If set to `true` the column will not be displayed in the treelist. By default al
 
 ### columns.menu `Boolean`
 
-If set to `true` the column will be visible in the treelist column menu. By default the column menu includes all data-bound columns (ones that have their [field](#configuration-columns.field) set).
+If set to `true` the column will be visible in the treelist column menu. By default the column menu includes all data-bound columns (ones that have their [field](/api/javascript/ui/treelist#configuration-columns.field) set).
 
 #### Example - hide a column from the column menu
 
@@ -1029,7 +1029,7 @@ If set to `true` the column will be displayed as locked (frozen) in the treelist
 
 If set to `false` the column will remain in the side of the TreeList into which its own locked configuration placed it.
 
-> This option is meaningful when the treelist has columns which are configured with a [locked](#configuration-columns.locked) value. Setting it explicitly to `false` will
+> This option is meaningful when the treelist has columns which are configured with a [locked](/api/javascript/ui/treelist#configuration-columns.locked) value. Setting it explicitly to `false` will
 prevent the user from locking or unlocking this column using the user interface.
 
 #### Example - lockable columns
@@ -1155,7 +1155,7 @@ If set to `true` the column menu would allow the user to select (show and hide) 
 
 ### columnMenu.filterable `Boolean` *(default: true)*
 
-If set to `true` the column menu will allow the user to filter the TreeList. By default the column menu allows the user to filter if filtering is enabled via the [filterable](#configuration-filterable).
+If set to `true` the column menu will allow the user to filter the TreeList. By default the column menu allows the user to filter if filtering is enabled via the [filterable](/api/javascript/ui/treelist#configuration-filterable).
 
 #### Example - disable column menu filtering
 
@@ -1181,7 +1181,7 @@ If set to `true` the column menu will allow the user to filter the TreeList. By 
 
 ### columnMenu.sortable `Boolean` *(default: true)*
 
-If set to `true` the column menu would allow the user to sort the treelist by the column field. By default the column menu allows the user to sort if sorting is enabled via the [sortable](#configuration-sortable) option.
+If set to `true` the column menu would allow the user to sort the treelist by the column field. By default the column menu allows the user to sort if sorting is enabled via the [sortable](/api/javascript/ui/treelist#configuration-sortable) option.
 
 > If this option is set to `false` the user could still sort by clicking the column header cell.
 
@@ -1913,7 +1913,7 @@ Enables or disables column filtering in the Excel file. Not to be mistaken with 
 
 ### excel.forceProxy `Boolean` *(default: false)*
 
-If set to true, the content will be forwarded to [proxyURL](#configuration-excel.proxyURL) even if the browser supports saving files locally.
+If set to true, the content will be forwarded to [proxyURL](/api/javascript/ui/treelist#configuration-excel.proxyURL) even if the browser supports saving files locally.
 
 ### excel.proxyURL `String` *(default: null)*
 
@@ -3198,7 +3198,7 @@ Specifies the file name of the exported PDF file.
 
 ### pdf.forceProxy `Boolean` *(default: false)*
 
-If set to true, the content will be forwarded to [proxyURL](#configuration-pdf.proxyURL) even if the browser supports saving files locally.
+If set to true, the content will be forwarded to [proxyURL](/api/javascript/ui/treelist#configuration-pdf.proxyURL) even if the browser supports saving files locally.
 
 ### pdf.keywords `String` *(default: null)*
 
@@ -3904,7 +3904,7 @@ The name of the toolbar command. Either a built-in ("create", "excel", "pdf") or
 
 ### toolbar.text `String`
 
-The text displayed by the command button. If not set the [name](#configuration-toolbar.name)` option would be used as the button text instead.
+The text displayed by the command button. If not set the [name](/api/javascript/ui/treelist#configuration-toolbar.name)` option would be used as the button text instead.
 
     <div id="treeList"></div>
     <script>
@@ -3933,7 +3933,7 @@ The text displayed by the command button. If not set the [name](#configuration-t
 
 ### columns `Array`
 
-The columns of the TreeList initialized from the [columns](#configuration-columns) option. Every item from the `columns` array has the same fields as the corresponding [columns](#configuration-columns) option.
+The columns of the TreeList initialized from the [columns](/api/javascript/ui/treelist#configuration-columns) option. Every item from the `columns` array has the same fields as the corresponding [columns](/api/javascript/ui/treelist#configuration-columns) option.
 
 #### Example - iterate the TreeList columns
 
@@ -3964,7 +3964,7 @@ The columns of the TreeList initialized from the [columns](#configuration-column
 
 Adds an empty data item to the TreeList. In "inline" editing mode a table row will be appended. A popup window will be displayed in "popup" editing mode.
 
-Fires the [edit](#events-edit) event.
+Fires the [edit](/api/javascript/ui/treelist/events/edit) event.
 
 #### Parameters
 
@@ -4095,7 +4095,7 @@ Applies the minimum possible width for the specified column, so that all text fi
 
 ##### column `Number|String|Object`
 
-The index of the column, or the [field](#configuration-columns.field) to which the columns is bound, or the column object obtained from the [columns](#fields-columns) collection.
+The index of the column, or the [field](/api/javascript/ui/treelist#configuration-columns.field) to which the columns is bound, or the column object obtained from the [columns](/api/javascript/ui/treelist#fields-columns) collection.
 
 #### Example - autofit a column by index
 
@@ -4219,7 +4219,7 @@ Cancels editing for the table row which is in edit mode. Reverts any changes mad
 
 ### clearSelection
 
-Clears the currently selected table rows or cells (depending on the current selection [mode](#configuration-selectable)).
+Clears the currently selected table rows or cells (depending on the current selection [mode](/api/javascript/ui/treelist#configuration-selectable)).
 
 #### Example - clear selection
 
@@ -4348,7 +4348,7 @@ Prepares the widget for safe removal from DOM. Detaches all event handlers and r
 
 Switches the specified table row to edit mode.
 
-Fires the [edit](#events-edit) event.
+Fires the [edit](/api/javascript/ui/treelist/events/edit) event.
 
 #### Parameters
 
@@ -4564,7 +4564,7 @@ Renders all table rows using the current data items.
 
 Removes the specified table row from the treelist. Also removes the corresponding data item from the data source.
 
-Fires the [remove](#events-remove) event.
+Fires the [remove](/api/javascript/ui/treelist/events/remove) event.
 
 #### Parameters
 
@@ -4628,7 +4628,7 @@ A string, DOM element or jQuery object which represents the table row. A string 
 
 ### saveAsExcel
 
-Initiates the Excel export. Also fires the [`excelExport`](#events-excelExport) event.
+Initiates the Excel export. Also fires the [`excelExport`](/api/javascript/ui/treelist/events/excelexport) event.
 
 > Calling this method could trigger the browser built-in popup blocker in some cases. To avoid that, always call it as a response to an end-user action e.g. button click.
 
@@ -4652,12 +4652,12 @@ Initiates the Excel export. Also fires the [`excelExport`](#events-excelExport) 
 
 ### saveAsPDF
 
-Initiates the PDF export and returns a promise. Also triggers the [pdfExport](#events-pdfExport) event.
+Initiates the PDF export and returns a promise. Also triggers the [pdfExport](/api/javascript/ui/treelist/events/pdfexport) event.
 
 > Calling this method may trip the built-in browser pop-up blocker. To avoid that, call this method as a response to an end-user action, e.g. a button click.
 
 #### Returns
-`Promise` A promise that will be resolved when the export completes. The same promise is available in the [pdfExport](#events-pdfExport) event arguments.
+`Promise` A promise that will be resolved when the export completes. The same promise is available in the [pdfExport](/api/javascript/ui/treelist/events/pdfexport) event arguments.
 
 #### Example - manually initiate PDF export
 
@@ -4681,7 +4681,7 @@ Initiates the PDF export and returns a promise. Also triggers the [pdfExport](#e
 
 Switches the table row which is in edit mode and saves any changes made by the user.
 
-Fires the [edit](#events-save) event.
+Fires the [edit](/api/javascript/ui/treelist/events/save) event.
 
 #### Example - save row
 
@@ -4857,7 +4857,7 @@ Shows the specified column.
 
 ##### column `Number|String`
 
-The index of the column, or the [field](#configuration-columns.field) to which the columns is bound.
+The index of the column, or the [field](/api/javascript/ui/treelist#configuration-columns.field) to which the columns is bound.
 
 #### Example - show a hidden column by index
 
@@ -4913,7 +4913,7 @@ Hides the specified column.
 
 ##### column `Number|String`
 
-The index of the column, or the [field](#configuration-columns.field) to which the columns is bound.
+The index of the column, or the [field](/api/javascript/ui/treelist#configuration-columns.field) to which the columns is bound.
 
 #### Example - hide a column by index
 
@@ -4969,7 +4969,7 @@ Locks (freezes) a column, allowing users to see it at all times when scrolling.
 
 ##### column `Number|String`
 
-The index of the column or the [field](#configuration-columns.field) to which the columns is bound.
+The index of the column or the [field](/api/javascript/ui/treelist#configuration-columns.field) to which the columns is bound.
 
 > In order to use this method, the treelist must be initialized with at least one locked column, and should have unlocked columns left after the target column is locked.
 
@@ -5005,7 +5005,7 @@ Unlocks (unfreezes) a column.
 
 ##### column `Number|String`
 
-The index of the column or the [field](#configuration-columns.field) to which the columns is bound.
+The index of the column or the [field](/api/javascript/ui/treelist#configuration-columns.field) to which the columns is bound.
 
 > In order to use this method, the treelist must be initialized with at least one locked column, and there should be locked columns left after the target column is unlocked.
 
@@ -5075,7 +5075,7 @@ The column whose position should be changed.
 
 ### cancel
 
-Fired when the user clicks the "cancel" button (in inline or popup [editing mode](#configuration-editable.mode)) or closes the popup window.
+Fired when the user clicks the "cancel" button (in inline or popup [editing mode](/api/javascript/ui/treelist#configuration-editable.mode)) or closes the popup window.
 
 The event handler function context (available via the `this` keyword) will be set to the widget instance.
 
@@ -6396,7 +6396,7 @@ The data item to which the table row is bound.
 
 ##### e.container `jQuery`
 
-The jQuery object representing the current editor container element. If the [editable.mode](#configuration-editable.mode) is "inline", the container will be the edited row. If it is "popup" then the container element will be the window element.
+The jQuery object representing the current editor container element. If the [editable.mode](/api/javascript/ui/treelist#configuration-editable.mode) is "inline", the container will be the edited row. If it is "popup" then the container element will be the window element.
 
 ##### e.sender `kendo.ui.TreeList`
 
@@ -6518,7 +6518,7 @@ The event handler function context (available via the `this` keyword) will be se
 
 ##### e.column `Object`
 
-A JavaScript object which represents the [column](#configuration-columns) configuration.
+A JavaScript object which represents the [column](/api/javascript/ui/treelist#configuration-columns) configuration.
 
 ##### e.sender `kendo.ui.TreeList`
 
@@ -6584,7 +6584,7 @@ The event handler function context (available via the `this` keyword) will be se
 
 ##### e.column `Object`
 
-A JavaScript object which represents the [column](#configuration-columns) configuration.
+A JavaScript object which represents the [column](/api/javascript/ui/treelist#configuration-columns) configuration.
 
 ##### e.sender `kendo.ui.TreeList`
 
@@ -6650,7 +6650,7 @@ The event handler function context (available via the `this` keyword) will be se
 
 ##### e.column `Object`
 
-A JavaScript object which represents the [column](#configuration-columns) configuration.
+A JavaScript object which represents the [column](/api/javascript/ui/treelist#configuration-columns) configuration.
 
 ##### e.newIndex `Number`
 
@@ -6722,7 +6722,7 @@ The event handler function context (available via the `this` keyword) will be se
 
 ##### e.column `Object`
 
-A JavaScript object which represents the [column](#configuration-columns) configuration.
+A JavaScript object which represents the [column](/api/javascript/ui/treelist#configuration-columns) configuration.
 
 ##### e.newWidth `Number`
 
@@ -6876,7 +6876,7 @@ The event handler function context (available via the `this` keyword) will be se
 
 ##### e.column `Object`
 
-A JavaScript object which represents the [column](#configuration-columns) configuration.
+A JavaScript object which represents the [column](/api/javascript/ui/treelist#configuration-columns) configuration.
 
 ##### e.sender `kendo.ui.TreeList`
 
@@ -6942,7 +6942,7 @@ The event handler function context (available via the `this` keyword) will be se
 
 ##### e.column `Object`
 
-A JavaScript object which represents the [column](#configuration-columns) configuration.
+A JavaScript object which represents the [column](/api/javascript/ui/treelist#configuration-columns) configuration.
 
 ##### e.sender `kendo.ui.TreeList`
 

@@ -1805,7 +1805,7 @@ Specifies the file name of the exported PDF file.
     </script>
 
 ### pdf.forceProxy `Boolean` *(default: false)*
-If set to true, the content will be forwarded to [proxyURL](#configuration-pdf.proxyURL) even if the browser supports saving files locally.
+If set to true, the content will be forwarded to [proxyURL](/api/javascript/ui/editor#configuration-pdf.proxyURL) even if the browser supports saving files locally.
 
 ### pdf.keywords `String` *(default: null)*
 
@@ -4298,7 +4298,7 @@ Executes an editor command on the currently selected text.
 
 ##### name `String`
 
-The name of the command to be executed. The available names match the list of [tools](#configuration-tools), plus `"undo"` and `"redo"`.
+The name of the command to be executed. The available names match the list of [tools](/api/javascript/ui/editor#configuration-tools), plus `"undo"` and `"redo"`.
 
 ##### params `String|Object` *(optional)*
 
@@ -4444,12 +4444,12 @@ Reinitializes the editing area iframe. Should be used after moving the editor in
 
 ### saveAsPDF
 
-Initiates the PDF export and returns a promise. Also triggers the [pdfExport](#events-pdfExport) event.
+Initiates the PDF export and returns a promise. Also triggers the [pdfExport](/api/javascript/ui/editor/events/pdfexport) event.
 
 > Calling this method may trip the built-in browser pop-up blocker. To avoid that, call this method as a response to an end-user action, e.g. a button click.
 
 #### Returns
-`Promise` A promise that will be resolved when the export completes. The same promise is available in the [pdfExport](#events-pdfExport) event arguments.
+`Promise` A promise that will be resolved when the export completes. The same promise is available in the [pdfExport](/api/javascript/ui/editor/events/pdfexport) event arguments.
 
 #### Example - manually initiate PDF export
 

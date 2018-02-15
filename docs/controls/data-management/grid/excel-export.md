@@ -52,7 +52,7 @@ The following example demonstrates how to enable the Excel export functionality 
     </script>
 ```
 
-To initiate Excel export through code, call the [`saveAsExcel`](/api/javascript/ui/grid.html/methods/saveasexcel) method.
+To initiate Excel export through code, call the [`saveAsExcel`](/api/javascript/ui/grid/methods/saveasexcel) method.
 
 > **Important**
 > * By default, the Grid exports the current page of the data with sorting, filtering, grouping, and aggregates applied.
@@ -224,7 +224,7 @@ The Grid does not use [column templates](/api/javascript/ui/grid/configuration/c
 
 #### Column Format
 
-The Grid does not use [column formats](/api/javascript/ui/grid.html/configuration/columns.format) during the Excel export because some Kendo UI formats are incompatible with Excel. To format the cell values, set the [`format`](/api/javascript/ooxml/workbook.html/configuration/sheets.rows.cells.format) option of the cells.
+The Grid does not use [column formats](/api/javascript/ui/grid/configuration/columns.format) during the Excel export because some Kendo UI formats are incompatible with Excel. To format the cell values, set the [`format`](/api/javascript/ooxml/workbook/configuration/sheets.rows.cells.format) option of the cells.
 
 For more information on the formats that are supported by Excel, refer to [this page](https://support.office.com/en-us/article/Create-a-custom-number-format-78f2a361-936b-4c03-8772-09fab54be7f4).
 

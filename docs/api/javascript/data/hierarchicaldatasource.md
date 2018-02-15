@@ -333,7 +333,7 @@ Gets or sets the filter configuration. It applies the filter to all loaded nodes
 
 ##### value `Object` *(optional)*
 
-The filter configuration. Accepts the same values as the [`filter`](#configuration-filter) option (**check there for more examples**).
+The filter configuration. Accepts the same values as the [`filter`](/api/javascript/data/hierarchicaldatasource#configuration-filter) option (**check there for more examples**).
 
 #### Returns
 

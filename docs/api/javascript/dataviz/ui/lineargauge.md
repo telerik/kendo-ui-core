@@ -853,7 +853,7 @@ converted to other formats using tools like [Inkscape](https://inkscape.org/en) 
 [ImageMagick](http://www.imagemagick.org/).
 Both programs provide command-line interface suitable for server-side processing.
 
-> This method is obsoleted by [exportSVG](#methods-exportSVG), but will remain fully functional.
+> This method is obsoleted by [exportSVG](/api/javascript/dataviz/ui/lineargauge/methods/exportsvg), but will remain fully functional.
 
 #### Example
 
@@ -877,7 +877,7 @@ Both programs provide command-line interface suitable for server-side processing
 
 Returns a PNG image of the gauge encoded as a [Data URL](https://developer.mozilla.org/en-US/docs/data_URIs).
 
-> This method is obsoleted and replaced by [exportImage](#methods-exportImage), but will remain fully functional.
+> This method is obsoleted and replaced by [exportImage](/api/javascript/dataviz/ui/lineargauge/methods/exportimage), but will remain fully functional.
 
 #### Returns
 

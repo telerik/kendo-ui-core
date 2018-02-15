@@ -27,7 +27,7 @@ The Excel export is enabled by default when `kendo.ooxml.min.js` is loaded on th
 * [Excel Export Configuration](/api/javascript/ui/pivotgrid/configuration/excel)
 * [Online Demo](http://demos.telerik.com/kendo-ui/pivotgrid/excel-export)
 
-To initiate Excel export by using code, call the [`saveAsExcel`](/api/javascript/ui/pivotgrid.html/methods/saveasexcel) method.
+To initiate Excel export by using code, call the [`saveAsExcel`](/api/javascript/ui/pivotgrid/methods/saveasexcel) method.
 
 ### Features
 

@@ -41,7 +41,7 @@ data source is fired. By default the widget will bind to the data source specifi
 
 ### axisDefaults `Object`
 
-The default options for all chart axes. Accepts the options supported by [categoryAxis](#configuration-categoryAxis), [valueAxis](#configuration-valueAxis), [xAxis](#configuration-xAxis) and [yAxis](#configuration-yAxis).
+The default options for all chart axes. Accepts the options supported by [categoryAxis](/api/javascript/dataviz/ui/chart#configuration-categoryAxis), [valueAxis](/api/javascript/dataviz/ui/chart#configuration-valueAxis), [xAxis](/api/javascript/dataviz/ui/chart#configuration-xAxis) and [yAxis](/api/javascript/dataviz/ui/chart#configuration-yAxis).
 
 #### Example - set the default axis options
 
@@ -69,7 +69,7 @@ The color to apply to all axis elements. Accepts a valid CSS color string, inclu
 
 The crosshair configuration options.
 
-> The crosshair is displayed when the [axisDefaults.crosshair.visible](#configuration-axisDefaults.crosshair.visible) option is set to `true`.
+> The crosshair is displayed when the [axisDefaults.crosshair.visible](/api/javascript/dataviz/ui/chart#configuration-axisDefaults.crosshair.visible) option is set to `true`.
 
 ### axisDefaults.crosshair.color `String`
 
@@ -97,7 +97,7 @@ The opacity of the crosshair. By default the crosshair is opaque.
 
 The crosshair tooltip options.
 
-> The crosshair tooltip is displayed when the [axisDefaults.crosshair.tooltip.visible](#configuration-axisDefaults.crosshair.tooltip.visible) option is set to `true`.
+> The crosshair tooltip is displayed when the [axisDefaults.crosshair.tooltip.visible](/api/javascript/dataviz/ui/chart#configuration-axisDefaults.crosshair.tooltip.visible) option is set to `true`.
 
 ### axisDefaults.crosshair.tooltip.background `String`
 
@@ -498,7 +498,7 @@ Angles increase clockwise and zero is to the left. Negative values are acceptabl
 
 The title configuration of the axis.
 
-> The [axisDefaults.title.text](#configuration-axisDefaults.title.text) option must be set in order to display the title.
+> The [axisDefaults.title.text](/api/javascript/dataviz/ui/chart#configuration-axisDefaults.title.text) option must be set in order to display the title.
 
 ### axisDefaults.title.background `String`
 
@@ -639,15 +639,15 @@ The category axis configuration options.
 
 ### categoryAxis.autoBaseUnitSteps `Object`
 
-The discrete [categoryAxis.baseUnitStep](#configuration-categoryAxis.baseUnitStep) values when
-either [categoryAxis.baseUnit](#configuration-categoryAxis.baseUnit) is set to "fit" or
-[categoryAxis.baseUnitStep](#configuration-categoryAxis.baseUnitStep) is set to "auto".
+The discrete [categoryAxis.baseUnitStep](/api/javascript/dataviz/ui/chart#configuration-categoryAxis.baseUnitStep) values when
+either [categoryAxis.baseUnit](/api/javascript/dataviz/ui/chart#configuration-categoryAxis.baseUnit) is set to "fit" or
+[categoryAxis.baseUnitStep](/api/javascript/dataviz/ui/chart#configuration-categoryAxis.baseUnitStep) is set to "auto".
 
 The axis will try to divide the active period into successively larger intervals.
 It will start from x-second intervals, where x is picked from the autoBaseUnitSteps.seconds array.
 Then it will move to minutes, seconds and so on.
 This will continue until the number of intervals is less than
-[maxDateGroups](#configuration-categoryAxis.maxDateGroups).
+[maxDateGroups](/api/javascript/dataviz/ui/chart#configuration-categoryAxis.maxDateGroups).
 
 #### Example - set category axis auto base unit steps
 
@@ -760,17 +760,17 @@ The supported values are:
 * "months"
 * "years"
 
-Setting `baseUnit` to "fit" will set such base unit and [categoryAxis.baseUnitStep](#configuration-categoryAxis.baseUnitStep)
-that the total number of categories does not exceed [categoryAxis.maxDateGroups](#configuration-categoryAxis.maxDateGroups).
+Setting `baseUnit` to "fit" will set such base unit and [categoryAxis.baseUnitStep](/api/javascript/dataviz/ui/chart#configuration-categoryAxis.baseUnitStep)
+that the total number of categories does not exceed [categoryAxis.maxDateGroups](/api/javascript/dataviz/ui/chart#configuration-categoryAxis.maxDateGroups).
 
-Series data is aggregated for the specified base unit using the [series.aggregate](#configuration-series.aggregate) function.
+Series data is aggregated for the specified base unit using the [series.aggregate](/api/javascript/dataviz/ui/chart#configuration-series.aggregate) function.
 
 ### categoryAxis.baseUnitStep `Object` *(default: 1)*
 
 The step (interval) between categories in base units. Setting it to "auto" will set the step to such value
-that the total number of categories does not exceed [categoryAxis.maxDateGroups](#configuration-categoryAxis.maxDateGroups).
+that the total number of categories does not exceed [categoryAxis.maxDateGroups](/api/javascript/dataviz/ui/chart#configuration-categoryAxis.maxDateGroups).
 
-This option is ignored if [categoryAxis.baseUnit](#configuration-categoryAxis.baseUnit) is set to "fit".
+This option is ignored if [categoryAxis.baseUnit](/api/javascript/dataviz/ui/chart#configuration-categoryAxis.baseUnit) is set to "fit".
 
 ### categoryAxis.categories `Array`
 
@@ -792,8 +792,8 @@ The category names. The chart will create a category for every item of the array
 
 ### categoryAxis.color `String`
 
-The color to apply to all axis elements. Accepts a valid CSS color string, including hex and rgb. Can be overridden by [categoryAxis.labels.color](#configuration-categoryAxis.labels.color) and
-[categoryAxis.line.color](#configuration-categoryAxis.line.color).
+The color to apply to all axis elements. Accepts a valid CSS color string, including hex and rgb. Can be overridden by [categoryAxis.labels.color](/api/javascript/dataviz/ui/chart#configuration-categoryAxis.labels.color) and
+[categoryAxis.line.color](/api/javascript/dataviz/ui/chart#configuration-categoryAxis.line.color).
 
 #### Example - set the category axis color as a hex string
 
@@ -844,7 +844,7 @@ The color to apply to all axis elements. Accepts a valid CSS color string, inclu
 
 The crosshair configuration options.
 
-> The crosshair is displayed when the [categoryAxis.crosshair.visible](#configuration-categoryAxis.crosshair.visible) option is set to `true`.
+> The crosshair is displayed when the [categoryAxis.crosshair.visible](/api/javascript/dataviz/ui/chart#configuration-categoryAxis.crosshair.visible) option is set to `true`.
 
 #### Example - set the category axis crosshair options
 
@@ -948,7 +948,7 @@ The opacity of the crosshair. By default the crosshair is opaque.
 
 The crosshair tooltip options.
 
-> The crosshair tooltip is displayed when the [categoryAxis.crosshair.tooltip.visible](#configuration-categoryAxis.crosshair.tooltip.visible) option is set to `true`.
+> The crosshair tooltip is displayed when the [categoryAxis.crosshair.tooltip.visible](/api/javascript/dataviz/ui/chart#configuration-categoryAxis.crosshair.tooltip.visible) option is set to `true`.
 
 #### Example - configure the category axis crosshair tooltip
 
@@ -1493,7 +1493,7 @@ The width of the crosshair in pixels.
 
 ### categoryAxis.field `String`
 
-The data item field which contains the category name. Requires the [dataSource](#configuration-dataSource) option to be set. **The field name should be a valid Javascript identifier and should contain only alphanumeric characters (or "$" or "_"), and may not start with a digit.**
+The data item field which contains the category name. Requires the [dataSource](/api/javascript/dataviz/ui/chart#configuration-dataSource) option to be set. **The field name should be a valid Javascript identifier and should contain only alphanumeric characters (or "$" or "_"), and may not start with a digit.**
 
 #### Example - set the category axis field
 
@@ -1519,7 +1519,7 @@ If set to `true` the chart will position categories and series points on major t
 
 The default value is `false` except for "area", "verticalArea", "rangeArea" and "verticalRangeArea".
 
-> This option is ignored if the [series.type](#configuration-series.type) option is set to "bar", "column", "boxPlot", "ohlc", "candlestick" or "waterfall".
+> This option is ignored if the [series.type](/api/javascript/dataviz/ui/chart#configuration-series.type) option is set to "bar", "column", "boxPlot", "ohlc", "candlestick" or "waterfall".
 
 #### Example - justify categories and series
 
@@ -1778,15 +1778,15 @@ The culture to use when formatting date values. See the [globalization overview]
 
 ### categoryAxis.labels.dateFormats `Object`
 
-The format used to display labels for [date category axis](#configuration-categoryAxis.type).
+The format used to display labels for [date category axis](/api/javascript/dataviz/ui/chart#configuration-categoryAxis.type).
 The `{0}` placeholder represents the category value.
 
-The chart will choose the appropriate format for the current [categoryAxis.baseUnit](#configuration-categoryAxis.baseUnit).
-Setting the [categoryAxis.labels.format](#configuration-categoryAxis.labels.format) option will override the date formats.
+The chart will choose the appropriate format for the current [categoryAxis.baseUnit](/api/javascript/dataviz/ui/chart#configuration-categoryAxis.baseUnit).
+Setting the [categoryAxis.labels.format](/api/javascript/dataviz/ui/chart#configuration-categoryAxis.labels.format) option will override the date formats.
 
 See also: [kendo.format](/api/javascript/kendo/methods/format).
 
-> Not supported for radar charts. Use [categoryAxis.labels.format](#configuration-categoryAxis.labels.format) instead.
+> Not supported for radar charts. Use [categoryAxis.labels.format](/api/javascript/dataviz/ui/chart#configuration-categoryAxis.labels.format) instead.
 
 #### Example - set category axis date formats
 
@@ -1813,7 +1813,7 @@ See also: [kendo.format](/api/javascript/kendo/methods/format).
 
 ### categoryAxis.labels.dateFormats.days `String` *(default: "M/d")*
 
-The format used when [categoryAxis.baseUnit](#configuration-categoryAxis.baseUnit) is set to "days".
+The format used when [categoryAxis.baseUnit](/api/javascript/dataviz/ui/chart#configuration-categoryAxis.baseUnit) is set to "days".
 
 #### Example - set the days format
 
@@ -1841,7 +1841,7 @@ The format used when [categoryAxis.baseUnit](#configuration-categoryAxis.baseUni
 
 ### categoryAxis.labels.dateFormats.hours `String` *(default: "HH:mm")*
 
-The format used when [categoryAxis.baseUnit](#configuration-categoryAxis.baseUnit) is set to "hours".
+The format used when [categoryAxis.baseUnit](/api/javascript/dataviz/ui/chart#configuration-categoryAxis.baseUnit) is set to "hours".
 
 #### Example - set the hours format
 
@@ -1870,7 +1870,7 @@ The format used when [categoryAxis.baseUnit](#configuration-categoryAxis.baseUni
 
 ### categoryAxis.labels.dateFormats.months `String` *(default: "MMM 'yy")*
 
-The format used when [categoryAxis.baseUnit](#configuration-categoryAxis.baseUnit) is set to "months".
+The format used when [categoryAxis.baseUnit](/api/javascript/dataviz/ui/chart#configuration-categoryAxis.baseUnit) is set to "months".
 
 #### Example - set the months format
 
@@ -1899,7 +1899,7 @@ The format used when [categoryAxis.baseUnit](#configuration-categoryAxis.baseUni
 
 ### categoryAxis.labels.dateFormats.weeks `String` *(default: "M/d")*
 
-The format used when [categoryAxis.baseUnit](#configuration-categoryAxis.baseUnit) is set to "weeks".
+The format used when [categoryAxis.baseUnit](/api/javascript/dataviz/ui/chart#configuration-categoryAxis.baseUnit) is set to "weeks".
 
 #### Example - set the weeks format
 
@@ -1928,7 +1928,7 @@ The format used when [categoryAxis.baseUnit](#configuration-categoryAxis.baseUni
 
 ### categoryAxis.labels.dateFormats.years `String` *(default: "yyyy")*
 
-The format used when [categoryAxis.baseUnit](#configuration-categoryAxis.baseUnit) is set to "years".
+The format used when [categoryAxis.baseUnit](/api/javascript/dataviz/ui/chart#configuration-categoryAxis.baseUnit) is set to "years".
 
 #### Example - set the years format
 
@@ -3012,19 +3012,19 @@ The skip of the category axis major ticks.
 ### categoryAxis.max `Object`
 
 The last date displayed on the category date axis. By default, the minimum date is the same as the last category.
-This is often used in combination with the [categoryAxis.min](#configuration-categoryAxis.min) and [categoryAxis.roundToBaseUnit](#configuration-categoryAxis.roundToBaseUnit) options to
+This is often used in combination with the [categoryAxis.min](/api/javascript/dataviz/ui/chart#configuration-categoryAxis.min) and [categoryAxis.roundToBaseUnit](/api/javascript/dataviz/ui/chart#configuration-categoryAxis.roundToBaseUnit) options to
 set up a fixed date range.
 
 ### categoryAxis.maxDateGroups `Number` *(default: 10)*
 
 The maximum number of groups (categories) to display when
-[categoryAxis.baseUnit](#configuration-categoryAxis.baseUnit) is set to "fit" or
-[categoryAxis.baseUnitStep](#configuration-categoryAxis.baseUnitStep) is set to "auto".
+[categoryAxis.baseUnit](/api/javascript/dataviz/ui/chart#configuration-categoryAxis.baseUnit) is set to "fit" or
+[categoryAxis.baseUnitStep](/api/javascript/dataviz/ui/chart#configuration-categoryAxis.baseUnitStep) is set to "auto".
 
 ### categoryAxis.min `Object`
 
 The first date displayed on the category date axis. By default, the minimum date is the same as the first category.
-This is often used in combination with the [categoryAxis.min](#configuration-categoryAxis.min) and [categoryAxis.roundToBaseUnit](#configuration-categoryAxis.roundToBaseUnit) options to
+This is often used in combination with the [categoryAxis.min](/api/javascript/dataviz/ui/chart#configuration-categoryAxis.min) and [categoryAxis.roundToBaseUnit](/api/javascript/dataviz/ui/chart#configuration-categoryAxis.roundToBaseUnit) options to
 set up a fixed date range.
 
 ### categoryAxis.minorGridLines `Object`
@@ -3405,7 +3405,7 @@ The skip of the category axis minor ticks.
 
 ### categoryAxis.name `String` *(default: "primary")*
 
-The unique axis name. Used to associate a series with a category axis using the [series.categoryAxis](#configuration-series.categoryAxis) option.
+The unique axis name. Used to associate a series with a category axis using the [series.categoryAxis](/api/javascript/dataviz/ui/chart#configuration-series.categoryAxis) option.
 
 > **Important**
 >
@@ -3581,7 +3581,7 @@ If set to `true` the category axis direction will be reversed. By default catego
 
 If set to `true` the chart will round the first and last date to the nearest base unit.
 
-The `roundToBaseUnit` option will be ignored if [series.type](#configuration-series.type) is set to "bar", "column", "boxPlot", "ohlc", "candlestick" or "waterfall".
+The `roundToBaseUnit` option will be ignored if [series.type](/api/javascript/dataviz/ui/chart#configuration-series.type) is set to "bar", "column", "boxPlot", "ohlc", "candlestick" or "waterfall".
 
 ### categoryAxis.select `Object`
 
@@ -3808,7 +3808,7 @@ Angles increase clockwise and zero is to the left. Negative values are acceptabl
 
 The title configuration of the category axis.
 
-> The [categoryAxis.title.text](#configuration-categoryAxis.title.text) option must be set in order to display the title.
+> The [categoryAxis.title.text](/api/javascript/dataviz/ui/chart#configuration-categoryAxis.title.text) option must be set in order to display the title.
 
 
 #### Example - set the category axis title
@@ -4466,7 +4466,7 @@ If set to `true` the chart will display the category axis. By default the catego
 
 ### categoryAxis.weekStartDay `Number` *(default: kendo.days.Sunday)*
 
-The week start day when [categoryAxis.baseUnit](#configuration-categoryAxis.baseUnit) is set to "weeks".
+The week start day when [categoryAxis.baseUnit](/api/javascript/dataviz/ui/chart#configuration-categoryAxis.baseUnit) is set to "weeks".
 
 The supported values are:
 
@@ -6095,7 +6095,7 @@ The chart legend configuration options.
 
 ### legend.align `String` *(default: "center")*
 
-The legend horizontal alignment when the [legend.position](#configuration-legend.position) is "top" or "bottom" and the vertical alignment when the [legend.position](#configuration-legend.position) is "left" or "right".
+The legend horizontal alignment when the [legend.position](/api/javascript/dataviz/ui/chart#configuration-legend.position) is "top" or "bottom" and the vertical alignment when the [legend.position](/api/javascript/dataviz/ui/chart#configuration-legend.position) is "left" or "right".
 
 The supported values are:
 
@@ -6263,7 +6263,7 @@ The width of the border in pixels. By default the border width is set to zero wh
 
 ### legend.height `Number`
 
-The legend height when the [legend.orientation](#configuration-legend.orientation) is set to "vertical".
+The legend height when the [legend.orientation](/api/javascript/dataviz/ui/chart#configuration-legend.orientation) is set to "vertical".
 
 #### Example - set the chart legend height for custom positioned legend
 
@@ -7210,7 +7210,7 @@ The supported values are:
 
 * "right" - the legend is positioned on the right.
 
-* "custom" - the legend is positioned using [legend.offsetX](#configuration-legend.offsetX) and [legend.offsetY](#configuration-legend.offsetY).
+* "custom" - the legend is positioned using [legend.offsetX](/api/javascript/dataviz/ui/chart#configuration-legend.offsetX) and [legend.offsetY](/api/javascript/dataviz/ui/chart#configuration-legend.offsetY).
 
 ### legend.reverse `Boolean` *(default: false)*
 
@@ -7220,7 +7220,7 @@ Available in versions 2013.3.1306 and later.
 
 ### legend.spacing `Number`
 
-The spacing between the labels in pixels when the [legend.orientation](#configuration-legend.orientation) is "horizontal".
+The spacing between the labels in pixels when the [legend.orientation](/api/javascript/dataviz/ui/chart#configuration-legend.orientation) is "horizontal".
 
 #### Example - set the chart legend spacing
 
@@ -7260,7 +7260,7 @@ If set to `true` the chart will display the legend. By default the chart legend 
 
 ### legend.width `Number`
 
-The legend width when the [legend.orientation](#configuration-legend.orientation) is set to "horizontal".
+The legend width when the [legend.orientation](/api/javascript/dataviz/ui/chart#configuration-legend.orientation) is set to "horizontal".
 
 #### Example - set the chart legend width for custom positioned legend
 
@@ -7934,7 +7934,7 @@ The top padding of the chart panes.
 
 The title configuration of the chart pane.
 
-> The [panes.title.text](#configuration-panes.title.text) option must be set in order to display the title.
+> The [panes.title.text](/api/javascript/dataviz/ui/chart#configuration-panes.title.text) option must be set in order to display the title.
 
 #### Example - set the chart pane title
 
@@ -8699,7 +8699,7 @@ Specifies an axis that should not be panned. The supported values are `none`, `x
     </script>
 
 ### pdf `Object`
-Configures the export settings for the [saveAsPDF](#methods-saveAsPDF) method.
+Configures the export settings for the [saveAsPDF](/api/javascript/dataviz/ui/chart/methods/saveaspdf) method.
 
 ### pdf.author `String` *(default: null)*
 The author of the PDF document.
@@ -8771,7 +8771,7 @@ The date when the PDF document is created. Defaults to `new Date()`.
     </script>
 
 ### pdf.forceProxy `Boolean` *(default: false)*
-If set to true, the content will be forwarded to [proxyURL](#configuration-pdf.proxyURL) even if the browser supports saving files locally.
+If set to true, the content will be forwarded to [proxyURL](/api/javascript/dataviz/ui/chart#configuration-pdf.proxyURL) even if the browser supports saving files locally.
 
 #### Example - use proxy
     <div id="chart"></div>
@@ -9532,7 +9532,7 @@ The supported values are:
 
 The name of the value axis to use.
 
-> The `axis` option is supported for scatter plots. See [xAxis](#configuration-series.xAxis) and [yAxis](#configuration-series.yAxis) for scatter plots.
+> The `axis` option is supported for scatter plots. See [xAxis](/api/javascript/dataviz/ui/chart#configuration-series.xAxis) and [yAxis](/api/javascript/dataviz/ui/chart#configuration-series.yAxis) for scatter plots.
 
 #### Example - set the chart series value axis
 
@@ -9554,7 +9554,7 @@ The name of the value axis to use.
 
 The border of the chart series.
 
-> The `border` option is supported when [series.type](#configuration-series.type) is set to "bar", "column", "donut", "pie", "bubble", "boxPlot", "candlestick", "ohlc" or "candlestick".
+> The `border` option is supported when [series.type](/api/javascript/dataviz/ui/chart#configuration-series.type) is set to "bar", "column", "donut", "pie", "bubble", "boxPlot", "candlestick", "ohlc" or "candlestick".
 
 #### Example - set the chart series border
 
@@ -9728,7 +9728,7 @@ The data item field which contains the category name or date.
 
 The data field containing the close value.
 
-> The `closeField` option is supported when [series.type](#configuration-series.type) is set to "candlestick" or "ohlc".
+> The `closeField` option is supported when [series.type](/api/javascript/dataviz/ui/chart#configuration-series.type) is set to "candlestick" or "ohlc".
 
 #### Example - set the chart series high field
     <div id="chart"></div>
@@ -9809,7 +9809,7 @@ The series base color. The supported values are:
 
 The data item field which contains the series color.
 
-> The `colorField` option is supported when [series.type](#configuration-series.type)
+> The `colorField` option is supported when [series.type](/api/javascript/dataviz/ui/chart#configuration-series.type)
 is set to "bar", "column", "rangeBar", "rangeColumn", "bubble", "donut", "pie", "candlestick", "ohlc" or "waterfall".
 
 #### Example - set the chart series color field
@@ -9831,8 +9831,8 @@ is set to "bar", "column", "rangeBar", "rangeColumn", "bubble", "donut", "pie", 
 
 The label connectors options.
 
-> The `connectors` option is supported when [series.type](#configuration-series.type) is set to "donut" or "pie" and
-[series.labels.visible](#configuration-series.labels.visible) is set to `true`.
+> The `connectors` option is supported when [series.type](/api/javascript/dataviz/ui/chart#configuration-series.type) is set to "donut" or "pie" and
+[series.labels.visible](/api/javascript/dataviz/ui/chart#configuration-series.labels.visible) is set to `true`.
 
 #### Example - configure the label connectors
     <div id="chart"></div>
@@ -9919,7 +9919,7 @@ The width of the connector line.
 
 The data item field containing the current value.
 
-> The `currentField` option is supported when [series.type](#configuration-series.type) is set to "bullet" or "verticalBullet".
+> The `currentField` option is supported when [series.type](/api/javascript/dataviz/ui/chart#configuration-series.type) is set to "bullet" or "verticalBullet".
 
 #### Example - set the bullet chart series current field
     <div id="chart"></div>
@@ -9939,7 +9939,7 @@ The data item field containing the current value.
 
 The dash type of line chart.
 
-> The `dashType` option is taken into consideration only if the [series.type](#configuration-series.type) option is set to "line".
+> The `dashType` option is taken into consideration only if the [series.type](/api/javascript/dataviz/ui/chart#configuration-series.type) option is set to "line".
 
 The following dash types are supported:
 
@@ -9969,9 +9969,9 @@ The array of data items which represent the series data.
 
 Can be set to :
 
-* Array of objects. Each point is bound to the field specified via the [series.field](#configuration-series.field) option.
-* Array of numbers. Supported when the [series.type](#configuration-series.type) option is set to "area", "bar", "column", "donut", "pie", "line" or "waterfall".
-* Array of arrays of numbers. Supported when the [series.type](#configuration-series.type) option is set to "bubble", "scatter", "scatterLine", "ohlc", "rangeBar", "rangeArea" or polar series.
+* Array of objects. Each point is bound to the field specified via the [series.field](/api/javascript/dataviz/ui/chart#configuration-series.field) option.
+* Array of numbers. Supported when the [series.type](/api/javascript/dataviz/ui/chart#configuration-series.type) option is set to "area", "bar", "column", "donut", "pie", "line" or "waterfall".
+* Array of arrays of numbers. Supported when the [series.type](/api/javascript/dataviz/ui/chart#configuration-series.type) option is set to "bubble", "scatter", "scatterLine", "ohlc", "rangeBar", "rangeArea" or polar series.
     * Bubble series need arrays of three values - X value, Y value and Size value e.g. `[1, 1, 10]`
     * Scatter and scatter line series need arrays of two values - X value and Y value
     * OHLC and candlestick series need arrays of four values - open, high, low and close
@@ -10027,7 +10027,7 @@ Can be set to :
 
 The series color when the open value is greater than the close value.
 
-> The `downColor` option is supported when [series.type](#configuration-series.type) is set to "candlestick".
+> The `downColor` option is supported when [series.type](/api/javascript/dataviz/ui/chart#configuration-series.type) is set to "candlestick".
 
 #### Example - set the chart series down color
 
@@ -10050,7 +10050,7 @@ The series color when the open value is greater than the close value.
 
 The data field containing the color applied when the open value is greater than the close value.
 
-> The `downColorField` option is supported when [series.type](#configuration-series.type) is set to "candlestick".
+> The `downColorField` option is supported when [series.type](/api/javascript/dataviz/ui/chart#configuration-series.type) is set to "candlestick".
 
 #### Example - set the chart series down color field
 
@@ -10073,7 +10073,7 @@ The data field containing the color applied when the open value is greater than 
 
 The space in pixels between the different segments of the funnel chart.
 
-> The `segmentSpacing` option is supported when [series.type](#configuration-series.type) is set to "funnel".
+> The `segmentSpacing` option is supported when [series.type](/api/javascript/dataviz/ui/chart#configuration-series.type) is set to "funnel".
 
 #### Example - set the chart series segmentSpacing field
 
@@ -10096,7 +10096,7 @@ The space in pixels between the different segments of the funnel chart.
 
 ### series.summaryField `String` *(default: "summary")*
 
-The data item field which contains the summary type for [waterfall](#configuration-series.type) series.
+The data item field which contains the summary type for [waterfall](/api/javascript/dataviz/ui/chart#configuration-series.type) series.
 Summary columns are optional and can be one of two types:
 
 * "runningTotal" - Displays the sum of all items since the last "runningTotal" point.
@@ -10130,7 +10130,7 @@ Summary columns are optional and can be one of two types:
 
 `neckRatio` specifies the ratio top-base/bottom-base of the whole chart. neckRatio set to three means the top base is three times smaller than the bottom base.
 
-> The `neckRatio` option is supported when [series.type](#configuration-series.type) is set to "funnel" and dynamicSlope set to `false`.
+> The `neckRatio` option is supported when [series.type](/api/javascript/dataviz/ui/chart#configuration-series.type) is set to "funnel" and dynamicSlope set to `false`.
 
 #### Example - set the chart series neckRatio field
 
@@ -10153,7 +10153,7 @@ Summary columns are optional and can be one of two types:
 
 ### series.dynamicSlope `Boolean` *(default: false)*
 
-> The `dynamicSlope` option is supported when [series.type](#configuration-series.type) is set to "funnel".
+> The `dynamicSlope` option is supported when [series.type](/api/javascript/dataviz/ui/chart#configuration-series.type) is set to "funnel".
 
 When set to true the ratio of the bases of each segment is calculated based on the ratio of currentDataItem.value/nextDataItem.value
 The last element is always created like a rectangle since there is no following element.
@@ -10180,7 +10180,7 @@ The last element is always created like a rectangle since there is no following 
 
 ### series.dynamicHeight `Boolean` *(default: true)*
 
-> The `dynamicHeight` option is supported when [series.type](#configuration-series.type) is set to "funnel".
+> The `dynamicHeight` option is supported when [series.type](/api/javascript/dataviz/ui/chart#configuration-series.type) is set to "funnel".
 
 When set to `false` all segments become with the same height, otherwise the height of each segment is based on its value.
 
@@ -10207,7 +10207,7 @@ When set to `false` all segments become with the same height, otherwise the heig
 
 The error bars of the chart series.
 
-> The `errorBars` option is supported when [series.type](#configuration-series.type) is set to "bar", "column", "line", "area", "scatter", "scatterLine" or "bubble".
+> The `errorBars` option is supported when [series.type](/api/javascript/dataviz/ui/chart#configuration-series.type) is set to "bar", "column", "line", "area", "scatter", "scatterLine" or "bubble".
 
 #### Example - set the chart series error bars
 
@@ -10228,7 +10228,7 @@ The error bars of the chart series.
 
 The error bars value.
 
-> The `value` option is supported when [series.type](#configuration-series.type) is set to "bar", "column", "line" or "area".
+> The `value` option is supported when [series.type](/api/javascript/dataviz/ui/chart#configuration-series.type) is set to "bar", "column", "line" or "area".
 
 The following value types are supported:
 
@@ -10303,9 +10303,9 @@ A function that can be used to create a custom visual for the error bars. The av
 
 ### series.errorBars.xValue `String|Number|Array|Function`
 
-The xAxis error bars value. See the [series.errorBars.value option](#configuration-series.errorBars.value) for a list of the supported value types.
+The xAxis error bars value. See the [series.errorBars.value option](/api/javascript/dataviz/ui/chart#configuration-series.errorBars.value) for a list of the supported value types.
 
-> The `xValue` option is supported when [series.type](#configuration-series.type) is set to "scatter", "scatterLine" or "bubble".
+> The `xValue` option is supported when [series.type](/api/javascript/dataviz/ui/chart#configuration-series.type) is set to "scatter", "scatterLine" or "bubble".
 
 #### Example - set the error bars xAxis value
 
@@ -10324,9 +10324,9 @@ The xAxis error bars value. See the [series.errorBars.value option](#configurati
 
 ### series.errorBars.yValue `String|Number|Array|Function`
 
-The yAxis error bars value. See the [series.errorBars.value option](#configuration-series.errorBars.value) for a list of the supported value types.
+The yAxis error bars value. See the [series.errorBars.value option](/api/javascript/dataviz/ui/chart#configuration-series.errorBars.value) for a list of the supported value types.
 
-> The `yValue` option is supported when [series.type](#configuration-series.type) is set to "scatter", "scatterLine" or "bubble".
+> The `yValue` option is supported when [series.type](/api/javascript/dataviz/ui/chart#configuration-series.type) is set to "scatter", "scatterLine" or "bubble".
 
 #### Example - set the error bars yAxis value
 
@@ -10462,9 +10462,9 @@ The following dash types are supported:
 
 ### series.errorLowField `String` *(default: "errorLow")*
 
-The data item field which contains the [series.errorBars](#configuration-series.errorBars) low value.
+The data item field which contains the [series.errorBars](/api/javascript/dataviz/ui/chart#configuration-series.errorBars) low value.
 
-> The `errorLowField` option is supported when [series.type](#configuration-series.type) is set to "bar", "column", "line" or "area".
+> The `errorLowField` option is supported when [series.type](/api/javascript/dataviz/ui/chart#configuration-series.type) is set to "bar", "column", "line" or "area".
 
 #### Example
 
@@ -10482,9 +10482,9 @@ The data item field which contains the [series.errorBars](#configuration-series.
 
 ### series.errorHighField `String` *(default: "errorHigh")*
 
-The data item field which contains the [series.errorBars](#configuration-series.errorBars) high value.
+The data item field which contains the [series.errorBars](/api/javascript/dataviz/ui/chart#configuration-series.errorBars) high value.
 
-> The `errorHighField` option is supported when [series.type](#configuration-series.type) is set to "bar", "column", "line" or "area".
+> The `errorHighField` option is supported when [series.type](/api/javascript/dataviz/ui/chart#configuration-series.type) is set to "bar", "column", "line" or "area".
 
 #### Example
 
@@ -10502,9 +10502,9 @@ The data item field which contains the [series.errorBars](#configuration-series.
 
 ### series.xErrorLowField `String` *(default: "xErrorLow")*
 
-The data item field which contains the [series.errorBars](#configuration-series.errorBars) xAxis low value.
+The data item field which contains the [series.errorBars](/api/javascript/dataviz/ui/chart#configuration-series.errorBars) xAxis low value.
 
-> The `xErrorLowField` option is supported when [series.type](#configuration-series.type) is set to "scatter", "scatterLine" or "bubble".
+> The `xErrorLowField` option is supported when [series.type](/api/javascript/dataviz/ui/chart#configuration-series.type) is set to "scatter", "scatterLine" or "bubble".
 
 #### Example
 
@@ -10522,9 +10522,9 @@ The data item field which contains the [series.errorBars](#configuration-series.
 
 ### series.xErrorHighField `String` *(default: "xErrorHigh")*
 
-The data item field which contains the [series.errorBars](#configuration-series.errorBars) xAxis high value.
+The data item field which contains the [series.errorBars](/api/javascript/dataviz/ui/chart#configuration-series.errorBars) xAxis high value.
 
-> The `xErrorHighField` option is supported when [series.type](#configuration-series.type) is set to "scatter", "scatterLine" or "bubble".
+> The `xErrorHighField` option is supported when [series.type](/api/javascript/dataviz/ui/chart#configuration-series.type) is set to "scatter", "scatterLine" or "bubble".
 
 #### Example
 
@@ -10542,9 +10542,9 @@ The data item field which contains the [series.errorBars](#configuration-series.
 
 ### series.yErrorLowField `String` *(default: "yErrorLow")*
 
-The data item field which contains the [series.errorBars](#configuration-series.errorBars) yAxis low value.
+The data item field which contains the [series.errorBars](/api/javascript/dataviz/ui/chart#configuration-series.errorBars) yAxis low value.
 
-> The `yErrorLowField` option is supported when [series.type](#configuration-series.type) is set to "scatter", "scatterLine" or "bubble".
+> The `yErrorLowField` option is supported when [series.type](/api/javascript/dataviz/ui/chart#configuration-series.type) is set to "scatter", "scatterLine" or "bubble".
 
 #### Example
 
@@ -10562,9 +10562,9 @@ The data item field which contains the [series.errorBars](#configuration-series.
 
 ### series.yErrorHighField `String` *(default: "yErrorHigh")*
 
-The data item field which contains the [series.errorBars](#configuration-series.errorBars) yAxis high value.
+The data item field which contains the [series.errorBars](/api/javascript/dataviz/ui/chart#configuration-series.errorBars) yAxis high value.
 
-> The `yErrorHighField` option is supported when [series.type](#configuration-series.type) is set to "scatter", "scatterLine" or "bubble".
+> The `yErrorHighField` option is supported when [series.type](/api/javascript/dataviz/ui/chart#configuration-series.type) is set to "scatter", "scatterLine" or "bubble".
 
 #### Example
 
@@ -10584,7 +10584,7 @@ The data item field which contains the [series.errorBars](#configuration-series.
 
 The data item field which contains a boolean value indicating whether the sector is exploded.
 
-> The `explodeField` option is supported when [series.type](#configuration-series.type) is set to "donut" or "pie".
+> The `explodeField` option is supported when [series.type](/api/javascript/dataviz/ui/chart#configuration-series.type) is set to "donut" or "pie".
 
 #### Example - set the chart series explode field
 
@@ -10908,9 +10908,9 @@ The data item field which contains the series outliers value.
 
 The distance between categories expressed as a percentage of the bar width.
 
-See the related [spacing](#configuration-series.spacing) setting.
+See the related [spacing](/api/javascript/dataviz/ui/chart#configuration-series.spacing) setting.
 
-> The `gap` option is supported when [series.type](#configuration-series.type) is set to "bar", "column", "candlestick", "ohlc", "radarColumn" or "waterfall".
+> The `gap` option is supported when [series.type](/api/javascript/dataviz/ui/chart#configuration-series.type) is set to "bar", "column", "candlestick", "ohlc", "radarColumn" or "waterfall".
 
 #### Example - remove distance between categories
 
@@ -10940,7 +10940,7 @@ See the related [spacing](#configuration-series.spacing) setting.
 
 The data field containing the high value.
 
-> The `highField` option is supported when [series.type](#configuration-series.type) is set to "candlestick" or "ohlc".
+> The `highField` option is supported when [series.type](/api/javascript/dataviz/ui/chart#configuration-series.type) is set to "candlestick" or "ohlc".
 
 #### Example - set the chart series high field
     <div id="chart"></div>
@@ -10986,7 +10986,7 @@ The chart series highlighting configuration options.
 
 The border of the highlighted chart series. The color is computed automatically from the base point color.
 
-> The `border` option is supported when [series.type](#configuration-series.type) is set to "donut", "bubble", "pie", "candlestick" or "ohlc".
+> The `border` option is supported when [series.type](/api/javascript/dataviz/ui/chart#configuration-series.type) is set to "donut", "bubble", "pie", "candlestick" or "ohlc".
 
 #### Example - set the chart highlight border
 
@@ -11075,7 +11075,7 @@ The width of the border in pixels. By default the border width is set to zero wh
 
 The highlight color. Accepts a valid CSS color string, including hex and rgb.
 
-> The `color` option is supported when [series.type](#configuration-series.type) is set to "donut" or "pie".
+> The `color` option is supported when [series.type](/api/javascript/dataviz/ui/chart#configuration-series.type) is set to "donut" or "pie".
 
 #### Example - set the chart highlight color
 
@@ -11096,7 +11096,7 @@ The highlight color. Accepts a valid CSS color string, including hex and rgb.
 
 The line of the highlighted chart series. The color is computed automatically from the base point color.
 
-> The `line` option is supported when [series.type](#configuration-series.type) is set to "candlestick" or "ohlc".
+> The `line` option is supported when [series.type](/api/javascript/dataviz/ui/chart#configuration-series.type) is set to "candlestick" or "ohlc".
 
 #### Example - set the highlight line
 
@@ -11210,7 +11210,7 @@ The width of the line.
 
 The opacity of the highlighted points.
 
-> The `opacity` option is supported when [series.type](#configuration-series.type) is set to "bubble", "pie" or "donut".
+> The `opacity` option is supported when [series.type](/api/javascript/dataviz/ui/chart#configuration-series.type) is set to "bubble", "pie" or "donut".
 
 #### Example - set the highlight opacity
 
@@ -11296,7 +11296,7 @@ The available argument fields are:
 * series - the point series.
 * stackValue - the cumulative point value on the stack. Available only for stackable series.
 * percentage - the point value represented as a percentage value. Available only for donut, pie and 100% stacked charts.
-* runningTotal - the sum of point values since the last "runningTotal" [summary point](#configuration-series.summaryField). Available for waterfall series.
+* runningTotal - the sum of point values since the last "runningTotal" [summary point](/api/javascript/dataviz/ui/chart#configuration-series.summaryField). Available for waterfall series.
 * total - the sum of all previous series values. Available for waterfall series.
 * from - the "from" point highlight visual options. Available for "rangeArea" and "verticalRangeArea" series.
 * to - the "to" point highlight visual options. Available for "rangeArea" and "verticalRangeArea" series.
@@ -11329,7 +11329,7 @@ The available argument fields are:
 
 The diameter of the donut hole in pixels.
 
-> The `holeSize` option is supported when [series.type](#configuration-series.type) is set to "donut".
+> The `holeSize` option is supported when [series.type](/api/javascript/dataviz/ui/chart#configuration-series.type) is set to "donut".
 
 #### Example - set the donut chart hole size
     <div id="chart"></div>
@@ -11349,7 +11349,7 @@ The diameter of the donut hole in pixels.
 
 The chart series label configuration.
 
-> The chart displays the series labels when the [series.labels.visible](#configuration-series.labels.visible) option is set to `true`.
+> The chart displays the series labels when the [series.labels.visible](/api/javascript/dataviz/ui/chart#configuration-series.labels.visible) option is set to `true`.
 
 #### Example - configure the chart series label
 
@@ -11372,7 +11372,7 @@ The chart series label configuration.
 
 ### series.labels.align `String`
 
-The label alignment when [series.type](#configuration-series.type) is set to "donut", "funnel" or "pie".
+The label alignment when [series.type](/api/javascript/dataviz/ui/chart#configuration-series.type) is set to "donut", "funnel" or "pie".
 
 The supported values  for "donut" and "pie" are:
 
@@ -11582,7 +11582,7 @@ The text color of the labels. Accepts a valid CSS color string, including hex an
 
 ### series.labels.distance `Number` *(default: 35)*
 
-The distance of the labels when [series.type](#configuration-series.type) is set to "donut" or "pie".
+The distance of the labels when [series.type](/api/javascript/dataviz/ui/chart#configuration-series.type) is set to "donut" or "pie".
 
 #### Example - set the chart series label distance
     <div id="chart"></div>
@@ -11904,7 +11904,7 @@ The fields which can be used in the template are:
 * series - the data series
 * stackValue - the cumulative point value on the stack. Available only for stackable series.
 * value - the point value. Can be a number or object containing each bound field.
-* runningTotal - the sum of point values since the last "runningTotal" [summary point](#configuration-series.summaryField). Available for waterfall series.
+* runningTotal - the sum of point values since the last "runningTotal" [summary point](/api/javascript/dataviz/ui/chart#configuration-series.summaryField). Available for waterfall series.
 * total - the sum of all previous series values. Available for waterfall series.
 
 > The text can be split into multiple lines by using line feed characters ("\n").
@@ -11978,7 +11978,7 @@ A function that can be used to create a custom visual for the labels. The availa
 
 The chart series **from** label configuration.
 
-> The chart displays the series **from** labels when the [series.labels.visible](#configuration-series.labels.visible) option is set to `true` or when the [series.labels.from.visible](#configuration-series.labels.from.visible) option is set to `true`.
+> The chart displays the series **from** labels when the [series.labels.visible](/api/javascript/dataviz/ui/chart#configuration-series.labels.visible) option is set to `true` or when the [series.labels.from.visible](/api/javascript/dataviz/ui/chart#configuration-series.labels.from.visible) option is set to `true`.
 
 ### series.labels.from.background `String|Function`
 
@@ -12096,7 +12096,7 @@ If set to `true` the chart will display the series **from** labels. By default c
 
 The chart series **to** label configuration.
 
-> The chart displays the series **to** labels when the [series.labels.visible](#configuration-series.labels.visible) option is set to `true` or when the [series.labels.to.visible](#configuration-series.labels.to.visible) option is set to `true`.
+> The chart displays the series **to** labels when the [series.labels.visible](/api/javascript/dataviz/ui/chart#configuration-series.labels.visible) option is set to `true` or when the [series.labels.to.visible](/api/javascript/dataviz/ui/chart#configuration-series.labels.to.visible) option is set to `true`.
 
 ### series.labels.to.background `String|Function`
 
@@ -12214,7 +12214,7 @@ If set to `true` the chart will display the series **to** labels. By default cha
 
 The chart line configuration options.
 
-> The `line` option is supported when the [series.type](#configuration-series.type) option is set to "area", "candlestick", "ohlc" or "waterfall".
+> The `line` option is supported when the [series.type](/api/javascript/dataviz/ui/chart#configuration-series.type) option is set to "area", "candlestick", "ohlc" or "waterfall".
 
 #### Example - configure the chart line options
 
@@ -12303,11 +12303,11 @@ The supported values are:
 
 > The default value is "normal".
 
-> The `style` option is supported when [series.type](#configuration-series.type) is set to "area", "rangeArea", "polarArea" or "radarArea".
+> The `style` option is supported when [series.type](/api/javascript/dataviz/ui/chart#configuration-series.type) is set to "area", "rangeArea", "polarArea" or "radarArea".
 
-> The `step` value is supported only when [series.type](#configuration-series.type) is set to "area" or "rangeArea".
+> The `step` value is supported only when [series.type](/api/javascript/dataviz/ui/chart#configuration-series.type) is set to "area" or "rangeArea".
 
-> For *line series*, use [series.style](#configuration-series.style).
+> For *line series*, use [series.style](/api/javascript/dataviz/ui/chart#configuration-series.style).
 
 #### Example - set the chart line width
 
@@ -12331,7 +12331,7 @@ The supported values are:
 
 The data field containing the low value.
 
-> The `lowField` option is supported when [series.type](#configuration-series.type) is set to "candlestick" or "ohlc".
+> The `lowField` option is supported when [series.type](/api/javascript/dataviz/ui/chart#configuration-series.type) is set to "candlestick" or "ohlc".
 
 #### Example - set the chart series high field
     <div id="chart"></div>
@@ -12462,8 +12462,8 @@ The top margin of the labels.
 
 The chart series marker configuration.
 
-> The chart displays the series labels when the [series.markers.visible](#configuration-series.markers.visible) option is set to `true`.
-> The `markers` option is supported when [series.type](#configuration-series.type) is set to "area", "rangeArea", "line", "scatter", "scatterLine", "radarLine", "radarArea", "polarLine", "polarScatter" or "polarArea".
+> The chart displays the series labels when the [series.markers.visible](/api/javascript/dataviz/ui/chart#configuration-series.markers.visible) option is set to `true`.
+> The `markers` option is supported when [series.type](/api/javascript/dataviz/ui/chart#configuration-series.type) is set to "area", "rangeArea", "line", "scatter", "scatterLine", "radarLine", "radarArea", "polarLine", "polarScatter" or "polarArea".
 
 #### Example - set the chart series markers
 
@@ -12893,7 +12893,7 @@ The rotation angle of the markers.
 
 ### series.outliers `Object`
 
-The chart series outliers configuration. Applies to **mild** outliers. Also check [`series.extremes`](#configuration-series.extremes).
+The chart series outliers configuration. Applies to **mild** outliers. Also check [`series.extremes`](/api/javascript/dataviz/ui/chart#configuration-series.extremes).
 
 #### Example - set the chart series outliers
 
@@ -13095,7 +13095,7 @@ The rotation angle of the outliers.
 
 ### series.extremes `Object`
 
-The chart series extremes configuration. Applies to **extreme** outliers. Also check [`series.outliers`](#configuration-series.outliers).
+The chart series extremes configuration. Applies to **extreme** outliers. Also check [`series.outliers`](/api/javascript/dataviz/ui/chart#configuration-series.outliers).
 
 #### Example - set the chart series extremes
 
@@ -13343,7 +13343,7 @@ The behavior for handling missing values. The supported values are:
 
 > The default value is "interpolate", except for "area" and stacked series which default to "zero".
 
-> The `missingValues` option is supported when [series.type](#configuration-series.type) is set to "area", "rangeArea", "line", "scatterLine", "radarLine", "radarArea", "polarLine" or "polarArea".
+> The `missingValues` option is supported when [series.type](/api/javascript/dataviz/ui/chart#configuration-series.type) is set to "area", "rangeArea", "line", "scatterLine", "radarLine", "radarArea", "polarLine" or "polarArea".
 
 #### Example - set the missing values behavior
     <div id="chart"></div>
@@ -13367,9 +13367,9 @@ The supported values are:
 
 > The default value is "normal".
 
-> The `style` option is supported when [series.type](#configuration-series.type) is set to "line", "scatterLine", "radarLine" or "polarLine".
+> The `style` option is supported when [series.type](/api/javascript/dataviz/ui/chart#configuration-series.type) is set to "line", "scatterLine", "radarLine" or "polarLine".
 
-> The `step` value is only supported when [series.type](#configuration-series.type) is set to "line".
+> The `step` value is only supported when [series.type](/api/javascript/dataviz/ui/chart#configuration-series.type) is set to "line".
 
 > The `smooth` options is not supported for stacked area series with missing values.
 
@@ -13534,7 +13534,7 @@ The series opacity. By default the series are opaque.
 
 The data field containing the open value.
 
-> The `openField` option is supported when [series.type](#configuration-series.type) is set to "candlestick" or "ohlc".
+> The `openField` option is supported when [series.type](/api/javascript/dataviz/ui/chart#configuration-series.type) is set to "candlestick" or "ohlc".
 
 #### Example - set the chart series high field
     <div id="chart"></div>
@@ -13598,7 +13598,7 @@ The supported values are:
 
 The padding around the chart (equal on all sides).
 
-> The `padding` option is supported when [series.type](#configuration-series.type) is set to "donut" or "pie".
+> The `padding` option is supported when [series.type](/api/javascript/dataviz/ui/chart#configuration-series.type) is set to "donut" or "pie".
 
 #### Example - set the donut chart series padding
     <div id="chart"></div>
@@ -13652,9 +13652,9 @@ The data field containing the bubble size value.
 
 The distance between series points within a category. Expressed as a percentage of the bar width.
 
-See the related [gap](#configuration-series.gap) setting.
+See the related [gap](/api/javascript/dataviz/ui/chart#configuration-series.gap) setting.
 
-> The `spacing` option is supported when [series.type](#configuration-series.type) is set to "bar", "column", "candlestick", "ohlc" or "radarColumn".
+> The `spacing` option is supported when [series.type](/api/javascript/dataviz/ui/chart#configuration-series.type) is set to "bar", "column", "candlestick", "ohlc" or "radarColumn".
 
 #### Example - remove spacing between series points
 
@@ -13675,9 +13675,9 @@ See the related [gap](#configuration-series.gap) setting.
 ### series.stack `Boolean|String|Object` *(default: false)*
 
 A boolean value indicating if the series should be stacked.
-A string value is interpreted as [series.stack.group](#configuration-series.stack.group).
+A string value is interpreted as [series.stack.group](/api/javascript/dataviz/ui/chart#configuration-series.stack.group).
 
-> The `stack` options is supported when [series.type](#configuration-series.type) is set to "bar", "column", "line", "area", "verticalLine", "verticalArea", "radarLine", "radarArea" or "radarColumn". All series in the stack must be of the same type.
+> The `stack` options is supported when [series.type](/api/javascript/dataviz/ui/chart#configuration-series.type) is set to "bar", "column", "line", "area", "verticalLine", "verticalArea", "radarLine", "radarArea" or "radarColumn". All series in the stack must be of the same type.
 
 > Stack settings of the first series are inherited as a default value by the rest of the series, in case they are not overridden.
 
@@ -13716,7 +13716,7 @@ The type of stack to plot. The following types are supported:
 
 Indicates that the series should be stacked in a group with the specified name.
 
-> The `group` option is supported when [series.type](#configuration-series.type) is set to "bar" or "column".
+> The `group` option is supported when [series.type](/api/javascript/dataviz/ui/chart#configuration-series.type) is set to "bar" or "column".
 
 #### Example - configure stack groups
 
@@ -13754,7 +13754,7 @@ Angles increase clockwise and zero is to the left. Negative values are acceptabl
 
 The configuration options of the target
 
-> The `target` option is supported when [series.type](#configuration-series.type) is set to "bullet" or "verticalBullet".
+> The `target` option is supported when [series.type](/api/javascript/dataviz/ui/chart#configuration-series.type) is set to "bullet" or "verticalBullet".
 
 #### Example - configure the bullet chart target
 
@@ -13970,7 +13970,7 @@ The width of the line.
 
 The data item field containing the target value.
 
-> The `currentField` option is supported when [series.type](#configuration-series.type) is set to "bullet" or "verticalBullet".
+> The `currentField` option is supported when [series.type](/api/javascript/dataviz/ui/chart#configuration-series.type) is set to "bullet" or "verticalBullet".
 
 #### Example - set the bullet chart series current field
     <div id="chart"></div>
@@ -13992,7 +13992,7 @@ The data item field containing the target value.
 
 The chart series tooltip configuration options.
 
-> The chart series tooltip is displayed when the [series.tooltip.visible](#configuration-series.tooltip.visible) option is set to `true`.
+> The chart series tooltip is displayed when the [series.tooltip.visible](/api/javascript/dataviz/ui/chart#configuration-series.tooltip.visible) option is set to `true`.
 
 #### Example - configure the chart series tooltip
 
@@ -14312,7 +14312,7 @@ The fields which can be used in the template are:
 * dataItem - the original data item used to construct the point. Will be null if binding to array.
 * series - the data series
 * value - the point value (either a number or an object)
-* runningTotal - the sum of point values since the last "runningTotal" [summary point](#configuration-series.summaryField). Available for waterfall series.
+* runningTotal - the sum of point values since the last "runningTotal" [summary point](/api/javascript/dataviz/ui/chart#configuration-series.summaryField). Available for waterfall series.
 * total - the sum of all previous series values. Available for waterfall series.
 
 #### Example - set the chart series tooltip template
@@ -14448,7 +14448,7 @@ or series name (for other available series types) in the legend.
 
 The data item field which indicates whether to show the point category name in the legend.
 
-> The `visibleInLegendField` option is supported when [series.type](#configuration-series.type) is set to "funnel", "donut" or "pie".
+> The `visibleInLegendField` option is supported when [series.type](/api/javascript/dataviz/ui/chart#configuration-series.type) is set to "funnel", "donut" or "pie".
 
 #### Example - set the chart series visible in legend field
 
@@ -14483,7 +14483,7 @@ A function that can be used to create a custom visual for the points. Applicable
 * sender - the chart instance.
 * series - the point series.
 * percentage - the point value represented as a percentage value. Available only for donut, pie and 100% stacked charts.
-* runningTotal - the sum of point values since the last "runningTotal" [summary point](#configuration-series.summaryField). Available for waterfall series.
+* runningTotal - the sum of point values since the last "runningTotal" [summary point](/api/javascript/dataviz/ui/chart#configuration-series.summaryField). Available for waterfall series.
 * total - the sum of all previous series values. Available for waterfall series.
 * radius - the segment radius. Available for donut and pie series.
 * innerRadius - the segment inner radius. Available for donut series.
@@ -14524,7 +14524,7 @@ A function that can be used to create a custom visual for the points. Applicable
 
 The line width.
 
-> The `width` option is supported when [series.type](#configuration-series.type) is set to "line", "scatterLine", "radarLine" or "polarLine".
+> The `width` option is supported when [series.type](/api/javascript/dataviz/ui/chart#configuration-series.type) is set to "line", "scatterLine", "radarLine" or "polarLine".
 
 #### Example - set the chart line width
     <div id="chart"></div>
@@ -14542,7 +14542,7 @@ The line width.
 
 The name of the X axis to use.
 
-> The `xAxis` option is supported when [series.type](#configuration-series.type) is set to "bubble", "scatter", "scatterLine" or polar series.
+> The `xAxis` option is supported when [series.type](/api/javascript/dataviz/ui/chart#configuration-series.type) is set to "bubble", "scatter", "scatterLine" or polar series.
 
 For polar series the xAxis range is expressed in degrees.
 
@@ -14550,7 +14550,7 @@ For polar series the xAxis range is expressed in degrees.
 
 The data item field containing the X value.
 
-> The `xField` option is supported when [series.type](#configuration-series.type) is set to "bubble", "scatter", "scatterLine" or polar series.
+> The `xField` option is supported when [series.type](/api/javascript/dataviz/ui/chart#configuration-series.type) is set to "bubble", "scatter", "scatterLine" or polar series.
 
 #### Example - set the chart series x field
 
@@ -14577,7 +14577,7 @@ The name of the Y axis to use.
 
 The data item field containing the Y value.
 
-> The `yField` option is supported when [series.type](#configuration-series.type) is set to "bubble", "scatter" or "scatterLine".
+> The `yField` option is supported when [series.type](/api/javascript/dataviz/ui/chart#configuration-series.type) is set to "bubble", "scatter" or "scatterLine".
 
 #### Example - set the chart series y field
 
@@ -15353,7 +15353,7 @@ The default options for all series.
 
 ### seriesDefaults.area `Object`
 
-The area chart series options. Accepts all values supported by the [series](#configuration-series) option.
+The area chart series options. Accepts all values supported by the [series](/api/javascript/dataviz/ui/chart#configuration-series) option.
 
 #### Example - set the area chart default options
     <div id="chart"></div>
@@ -15374,7 +15374,7 @@ The area chart series options. Accepts all values supported by the [series](#con
 
 ### seriesDefaults.bar `Object`
 
-The bar chart series options. Accepts all values supported by the [series](#configuration-series) option.
+The bar chart series options. Accepts all values supported by the [series](/api/javascript/dataviz/ui/chart#configuration-series) option.
 
 #### Example - set the bar chart default options
     <div id="chart"></div>
@@ -15488,7 +15488,7 @@ The width of the border in pixels. By default the border width is set to zero wh
 
 ### seriesDefaults.bubble `Object`
 
-The bubble chart series options. Accepts all values supported by the [series](#configuration-series) option.
+The bubble chart series options. Accepts all values supported by the [series](/api/javascript/dataviz/ui/chart#configuration-series) option.
 
 #### Example - set the bubble chart default options
     <div id="chart"></div>
@@ -15508,7 +15508,7 @@ The bubble chart series options. Accepts all values supported by the [series](#c
 
 ### seriesDefaults.candlestick `Object`
 
-The candlestick chart series options. Accepts all values supported by the [series](#configuration-series) option.
+The candlestick chart series options. Accepts all values supported by the [series](/api/javascript/dataviz/ui/chart#configuration-series) option.
 
 #### Example - set the candlestick chart default options
     <div id="chart"></div>
@@ -15528,7 +15528,7 @@ The candlestick chart series options. Accepts all values supported by the [serie
 
 ### seriesDefaults.column `Object`
 
-The column chart series options. Accepts all values supported by the [series](#configuration-series) option.
+The column chart series options. Accepts all values supported by the [series](/api/javascript/dataviz/ui/chart#configuration-series) option.
 
 #### Example - set the column chart default options
     <div id="chart"></div>
@@ -15548,7 +15548,7 @@ The column chart series options. Accepts all values supported by the [series](#c
 
 ### seriesDefaults.donut `Object`
 
-The donut chart series options. Accepts all values supported by the [series](#configuration-series) option.
+The donut chart series options. Accepts all values supported by the [series](/api/javascript/dataviz/ui/chart#configuration-series) option.
 
 #### Example - set the donut chart default options
     <div id="chart"></div>
@@ -15587,7 +15587,7 @@ The distance between category clusters.
 
 The chart series label configuration.
 
-> The chart displays the series labels when the [seriesDefaults.labels.visible](#configuration-seriesDefaults.labels.visible) option is set to `true`.
+> The chart displays the series labels when the [seriesDefaults.labels.visible](/api/javascript/dataviz/ui/chart#configuration-seriesDefaults.labels.visible) option is set to `true`.
 
 #### Example - configure the chart series label
 
@@ -16077,7 +16077,7 @@ The fields which can be used in the template are:
 * percentage - the point value represented as a percentage value. Available for donut, funnel and pie series.
 * series - the data series
 * value - the point value. Can be a number or object containing each bound field.
-* runningTotal - the sum of point values since the last "runningTotal" [summary point](#configuration-series.summaryField). Available for waterfall series.
+* runningTotal - the sum of point values since the last "runningTotal" [summary point](/api/javascript/dataviz/ui/chart#configuration-series.summaryField). Available for waterfall series.
 * total - the sum of all previous series values. Available for waterfall series.
 
 > The text can be split into multiple lines by using line feed characters ("\n").
@@ -16157,7 +16157,7 @@ A function that can be used to create a custom visual for the labels. The availa
 
 The chart series **from** label configuration.
 
-> The chart displays the series labels when the [seriesDefaults.labels.visible](#configuration-seriesDefaults.labels.visible) option is set to `true` or when the [seriesDefaults.labels.from.visible](#configuration-seriesDefaults.labels.from.visible) option is set to `true`.
+> The chart displays the series labels when the [seriesDefaults.labels.visible](/api/javascript/dataviz/ui/chart#configuration-seriesDefaults.labels.visible) option is set to `true` or when the [seriesDefaults.labels.from.visible](/api/javascript/dataviz/ui/chart#configuration-seriesDefaults.labels.from.visible) option is set to `true`.
 
 ### seriesDefaults.labels.from.background `String`
 
@@ -16252,7 +16252,7 @@ The fields which can be used in the template are:
 * percentage - the point value represented as a percentage value. Available for donut, funnel and pie series.
 * series - the data series
 * value - the point value. Can be a number or object containing each bound field.
-* runningTotal - the sum of point values since the last "runningTotal" [summary point](#configuration-series.summaryField). Available for waterfall series.
+* runningTotal - the sum of point values since the last "runningTotal" [summary point](/api/javascript/dataviz/ui/chart#configuration-series.summaryField). Available for waterfall series.
 * total - the sum of all previous series values. Available for waterfall series.
 
 > The text can be split into multiple lines by using line feed characters ("\n").
@@ -16265,7 +16265,7 @@ If set to `true` the chart will display the series **from** labels. By default c
 
 The chart series **to** label configuration.
 
-> The chart displays the series labels when the [seriesDefaults.labels.visible](#configuration-seriesDefaults.labels.visible) option is set to `true` or when the [seriesDefaults.labels.to.visible](#configuration-seriesDefaults.labels.to.visible) option is set to `true`.
+> The chart displays the series labels when the [seriesDefaults.labels.visible](/api/javascript/dataviz/ui/chart#configuration-seriesDefaults.labels.visible) option is set to `true` or when the [seriesDefaults.labels.to.visible](/api/javascript/dataviz/ui/chart#configuration-seriesDefaults.labels.to.visible) option is set to `true`.
 
 ### seriesDefaults.labels.to.background `String`
 
@@ -16360,7 +16360,7 @@ The fields which can be used in the template are:
 * percentage - the point value represented as a percentage value. Available for donut, funnel and pie series.
 * series - the data series
 * value - the point value. Can be a number or object containing each bound field.
-* runningTotal - the sum of point values since the last "runningTotal" [summary point](#configuration-series.summaryField). Available for waterfall series.
+* runningTotal - the sum of point values since the last "runningTotal" [summary point](/api/javascript/dataviz/ui/chart#configuration-series.summaryField). Available for waterfall series.
 * total - the sum of all previous series values. Available for waterfall series.
 
 > The text can be split into multiple lines by using line feed characters ("\n").
@@ -16371,7 +16371,7 @@ If set to `true` the chart will display the series **to** labels. By default cha
 
 ### seriesDefaults.line `Object`
 
-The line chart series options. Accepts all values supported by the [series](#configuration-series) option.
+The line chart series options. Accepts all values supported by the [series](/api/javascript/dataviz/ui/chart#configuration-series) option.
 
 #### Example - set the line chart default options
     <div id="chart"></div>
@@ -16392,7 +16392,7 @@ The line chart series options. Accepts all values supported by the [series](#con
 
 ### seriesDefaults.ohlc `Object`
 
-The ohlc chart series options. Accepts all values supported by the [series](#configuration-series) option.
+The ohlc chart series options. Accepts all values supported by the [series](/api/javascript/dataviz/ui/chart#configuration-series) option.
 
 #### Example - set the ohlc chart default options
     <div id="chart"></div>
@@ -16459,7 +16459,7 @@ The supported values are:
 
 ### seriesDefaults.pie `Object`
 
-The pie chart series options. Accepts all values supported by the [series](#configuration-series) option.
+The pie chart series options. Accepts all values supported by the [series](/api/javascript/dataviz/ui/chart#configuration-series) option.
 
 #### Example - set the pie chart default options
     <div id="chart"></div>
@@ -16479,7 +16479,7 @@ The pie chart series options. Accepts all values supported by the [series](#conf
 
 ### seriesDefaults.rangeArea `Object`
 
-The range area chart series options. Accepts all values supported by the [series](#configuration-series) option.
+The range area chart series options. Accepts all values supported by the [series](/api/javascript/dataviz/ui/chart#configuration-series) option.
 
 #### Example - set the area chart default options
     <div id="chart"></div>
@@ -16499,7 +16499,7 @@ The range area chart series options. Accepts all values supported by the [series
 
 ### seriesDefaults.scatter `Object`
 
-The scatter chart series options. Accepts all values supported by the [series](#configuration-series) option.
+The scatter chart series options. Accepts all values supported by the [series](/api/javascript/dataviz/ui/chart#configuration-series) option.
 
 #### Example - set the scatter chart default options
 
@@ -16521,7 +16521,7 @@ The scatter chart series options. Accepts all values supported by the [series](#
 
 ### seriesDefaults.scatterLine `Object`
 
-The scatterLine chart series options. Accepts all values supported by the [series](#configuration-series) option.
+The scatterLine chart series options. Accepts all values supported by the [series](/api/javascript/dataviz/ui/chart#configuration-series) option.
 
 #### Example - set the scatterLine chart default options
 
@@ -16545,7 +16545,7 @@ The scatterLine chart series options. Accepts all values supported by the [serie
 
 The space between the chart series as proportion of the series width.
 
-> The `spacing` option is supported when [series.type](#configuration-series.type) is set to "bar", "column", "candlestick", "ohlc" and "candlestick".
+> The `spacing` option is supported when [series.type](/api/javascript/dataviz/ui/chart#configuration-series.type) is set to "bar", "column", "candlestick", "ohlc" and "candlestick".
 
 #### Example - set the chart series spacing
 
@@ -16566,7 +16566,7 @@ The space between the chart series as proportion of the series width.
 
 A boolean value indicating if the series should be stacked.
 
-> The `stack` options is supported when [series.type](#configuration-series.type) is set to "bar", "column", "line", "area", "verticalLine", "verticalArea", "radarLine", "radarArea" and "radarColumn".
+> The `stack` options is supported when [series.type](/api/javascript/dataviz/ui/chart#configuration-series.type) is set to "bar", "column", "line", "area", "verticalLine", "verticalArea", "radarLine", "radarArea" and "radarColumn".
 
 #### Example - configure stack series
 
@@ -16643,7 +16643,7 @@ The supported values are:
 
 The chart series tooltip configuration options.
 
-> The chart series tooltip is displayed when the [seriesDefaults.tooltip.visible](#configuration-series.tooltip.visible) option is set to `true`.
+> The chart series tooltip is displayed when the [seriesDefaults.tooltip.visible](/api/javascript/dataviz/ui/chart#configuration-series.tooltip.visible) option is set to `true`.
 
 #### Example - configure the chart series tooltip
 
@@ -16962,7 +16962,7 @@ The fields which can be used in the template are:
 * dataItem - the original data item used to construct the point. Will be null if binding to array.
 * series - the data series
 * value - the point value (either a number or an object)
-* runningTotal - the sum of point values since the last "runningTotal" [summary point](#configuration-series.summaryField). Available for waterfall series.
+* runningTotal - the sum of point values since the last "runningTotal" [summary point](/api/javascript/dataviz/ui/chart#configuration-series.summaryField). Available for waterfall series.
 * total - the sum of all previous series values. Available for waterfall series.
 
 #### Example - set the chart series tooltip template
@@ -17009,7 +17009,7 @@ If set to `true` the chart will display the series tooltip. By default the serie
 
 ### seriesDefaults.verticalArea `Object`
 
-The verticalArea chart series options. Accepts all values supported by the [series](#configuration-series) option.
+The verticalArea chart series options. Accepts all values supported by the [series](/api/javascript/dataviz/ui/chart#configuration-series) option.
 
 #### Example - set the verticalArea chart default options
     <div id="chart"></div>
@@ -17029,7 +17029,7 @@ The verticalArea chart series options. Accepts all values supported by the [seri
 
 ### seriesDefaults.verticalLine `Object`
 
-The verticalLine chart series options. Accepts all values supported by the [series](#configuration-series) option.
+The verticalLine chart series options. Accepts all values supported by the [series](/api/javascript/dataviz/ui/chart#configuration-series) option.
 
 #### Example - set the verticalLine chart default options
     <div id="chart"></div>
@@ -17049,7 +17049,7 @@ The verticalLine chart series options. Accepts all values supported by the [seri
 
 ### seriesDefaults.verticalRangeArea `Object`
 
-The verticalRangeArea chart series options. Accepts all values supported by the [series](#configuration-series) option.
+The verticalRangeArea chart series options. Accepts all values supported by the [series](/api/javascript/dataviz/ui/chart#configuration-series) option.
 
 #### Example - set the verticalArea chart default options
     <div id="chart"></div>
@@ -18345,7 +18345,7 @@ If set to `true` the chart will display the title. By default the title will be 
 
 The chart series tooltip configuration options.
 
-> The chart series tooltip is displayed when the [tooltip.visible](#configuration-series.tooltip.visible) option is set to `true`.
+> The chart series tooltip is displayed when the [tooltip.visible](/api/javascript/dataviz/ui/chart#configuration-series.tooltip.visible) option is set to `true`.
 
 #### Example - configure the chart series tooltip
 
@@ -18714,7 +18714,7 @@ The fields which can be used in the template are:
 * dataItem - the original data item used to construct the point. Will be null if binding to array.
 * series - the data series
 * value - the point value (either a number or an object)
-* runningTotal - the sum of point values since the last "runningTotal" [summary point](#configuration-series.summaryField). Available for waterfall series.
+* runningTotal - the sum of point values since the last "runningTotal" [summary point](/api/javascript/dataviz/ui/chart#configuration-series.summaryField). Available for waterfall series.
 * total - the sum of all previous series values. Available for waterfall series.
 
 #### Example - set the chart series tooltip template
@@ -18856,7 +18856,7 @@ The color of the value axis. Accepts a valid CSS color string, including hex and
 
 The crosshair configuration options.
 
-> The crosshair is displayed when the [valueAxis.crosshair.visible](#configuration-valueAxis.crosshair.visible) option is set to `true`.
+> The crosshair is displayed when the [valueAxis.crosshair.visible](/api/javascript/dataviz/ui/chart#configuration-valueAxis.crosshair.visible) option is set to `true`.
 
 #### Example - set the value axis crosshair options
 
@@ -18957,7 +18957,7 @@ The opacity of the crosshair. By default the crosshair is opaque.
 
 The crosshair tooltip options.
 
-> The crosshair tooltip is displayed when the [valueAxis.crosshair.tooltip.visible](#configuration-valueAxis.crosshair.tooltip.visible) option is set to `true`.
+> The crosshair tooltip is displayed when the [valueAxis.crosshair.tooltip.visible](/api/javascript/dataviz/ui/chart#configuration-valueAxis.crosshair.tooltip.visible) option is set to `true`.
 
 #### Example - configure the value axis crosshair tooltip
 
@@ -20543,7 +20543,7 @@ The skip of the value axis major grid lines.
 ### valueAxis.majorUnit `Number`
 
 The interval between major divisions.
-If the [valueAxis.type](#configuration-valueAxis.type) is set to `"log"`, the majorUnit value will be used for the base of the logarithm.
+If the [valueAxis.type](/api/javascript/dataviz/ui/chart#configuration-valueAxis.type) is set to `"log"`, the majorUnit value will be used for the base of the logarithm.
 
 #### Example - set the value axis major unit
 
@@ -21152,8 +21152,8 @@ The skip of the value axis minor ticks.
 
 ### valueAxis.minorUnit `Number`
 
-The interval between minor divisions. It defaults to 1/5 of the [valueAxis.majorUnit](#configuration-valueAxis.majorUnit).
-If the [valueAxis.type](#configuration-valueAxis.type) is set to `"log"`, the minorUnit value represents the number of divisions between two major units and defaults to the major unit minus one.
+The interval between minor divisions. It defaults to 1/5 of the [valueAxis.majorUnit](/api/javascript/dataviz/ui/chart#configuration-valueAxis.majorUnit).
+If the [valueAxis.type](/api/javascript/dataviz/ui/chart#configuration-valueAxis.type) is set to `"log"`, the minorUnit value represents the number of divisions between two major units and defaults to the major unit minus one.
 
 #### Example - set the value axis minor unit
 
@@ -21189,7 +21189,7 @@ If the [valueAxis.type](#configuration-valueAxis.type) is set to `"log"`, the mi
 
 ### valueAxis.name `String` *(default: "primary")*
 
-The unique axis name. Used to associate a series with a value axis using the [series.axis](#configuration-series.axis) option.
+The unique axis name. Used to associate a series with a value axis using the [series.axis](/api/javascript/dataviz/ui/chart#configuration-series.axis) option.
 
 #### Example - set the value axis name
 
@@ -21399,7 +21399,7 @@ If set to `true` the value axis direction will be reversed. By default categorie
 
 The title configuration of the value axis.
 
-> The [valueAxis.title.text](#configuration-valueAxis.title.text) option must be set in order to display the title.
+> The [valueAxis.title.text](/api/javascript/dataviz/ui/chart#configuration-valueAxis.title.text) option must be set in order to display the title.
 
 
 #### Example - set the value axis title
@@ -23256,7 +23256,7 @@ A function that can be used to create a custom visual for the notes. The availab
 
 ### xAxis `Array`
 
-The X-axis configuration options of the scatter chart X-axis. Supports all [valueAxis](#configuration-valueAxis) options.
+The X-axis configuration options of the scatter chart X-axis. Supports all [valueAxis](/api/javascript/dataviz/ui/chart#configuration-valueAxis) options.
 
 #### Example - set the scatter chart x axis
     <div id="chart"></div>
@@ -23373,7 +23373,7 @@ The color of the axis. Accepts a valid CSS color string, including hex and rgb.
 
 The crosshair configuration options.
 
-> The crosshair is displayed when the [xAxis.crosshair.visible](#configuration-xAxis.crosshair.visible) option is set to `true`.
+> The crosshair is displayed when the [xAxis.crosshair.visible](/api/javascript/dataviz/ui/chart#configuration-xAxis.crosshair.visible) option is set to `true`.
 
 #### Example - set the scatter chart x axis crosshair options
 
@@ -23470,7 +23470,7 @@ The opacity of the crosshair. By default the crosshair is opaque.
 
 The crosshair tooltip options.
 
-> The crosshair tooltip is displayed when the [xAxis.crosshair.tooltip.visible](#configuration-xAxis.crosshair.tooltip.visible) option is set to `true`.
+> The crosshair tooltip is displayed when the [xAxis.crosshair.tooltip.visible](/api/javascript/dataviz/ui/chart#configuration-xAxis.crosshair.tooltip.visible) option is set to `true`.
 
 #### Example - configure the scatter chart x axis crosshair tooltip
 
@@ -24226,7 +24226,7 @@ The culture to use when formatting date values. See the [globalization overview]
 
 The format used to display the labels when the x values are dates. Uses [kendo.format](/api/javascript/kendo/methods/format). Contains one placeholder ("{0}") which represents the category value.
 
-> The chart will choose the appropriate format for the current [xAxis.baseUnit](#configuration-xAxis.baseUnit). Setting the [categoryAxis.labels.format](#configuration-categoryAxis.labels.format) option will override the date formats.
+> The chart will choose the appropriate format for the current [xAxis.baseUnit](/api/javascript/dataviz/ui/chart#configuration-xAxis.baseUnit). Setting the [categoryAxis.labels.format](/api/javascript/dataviz/ui/chart#configuration-categoryAxis.labels.format) option will override the date formats.
 
 #### Example - set the scatter chart x axis date formats
 
@@ -24256,7 +24256,7 @@ The format used to display the labels when the x values are dates. Uses [kendo.f
 
 ### xAxis.labels.dateFormats.days `String` *(default: "M/d")*
 
-The format used when [xAxis.baseUnit](#configuration-xAxis.baseUnit) is set to "days".
+The format used when [xAxis.baseUnit](/api/javascript/dataviz/ui/chart#configuration-xAxis.baseUnit) is set to "days".
 
 #### Example - set the days format
 
@@ -24287,7 +24287,7 @@ The format used when [xAxis.baseUnit](#configuration-xAxis.baseUnit) is set to "
 
 ### xAxis.labels.dateFormats.hours `String` *(default: "HH:mm")*
 
-The format used when [xAxis.baseUnit](#configuration-xAxis.baseUnit) is set to "hours".
+The format used when [xAxis.baseUnit](/api/javascript/dataviz/ui/chart#configuration-xAxis.baseUnit) is set to "hours".
 
 #### Example - set the hours format
 
@@ -24318,7 +24318,7 @@ The format used when [xAxis.baseUnit](#configuration-xAxis.baseUnit) is set to "
 
 ### xAxis.labels.dateFormats.months `String` *(default: "MMM 'yy")*
 
-The format used when [xAxis.baseUnit](#configuration-xAxis.baseUnit) is set to "months".
+The format used when [xAxis.baseUnit](/api/javascript/dataviz/ui/chart#configuration-xAxis.baseUnit) is set to "months".
 
 #### Example - set the months format
 
@@ -24349,7 +24349,7 @@ The format used when [xAxis.baseUnit](#configuration-xAxis.baseUnit) is set to "
 
 ### xAxis.labels.dateFormats.weeks `String` *(default: "M/d")*
 
-The format used when [xAxis.baseUnit](#configuration-xAxis.baseUnit) is set to "weeks".
+The format used when [xAxis.baseUnit](/api/javascript/dataviz/ui/chart#configuration-xAxis.baseUnit) is set to "weeks".
 
 #### Example - set the weeks format
     <div id="chart"></div>
@@ -24379,7 +24379,7 @@ The format used when [xAxis.baseUnit](#configuration-xAxis.baseUnit) is set to "
 
 ### xAxis.labels.dateFormats.years `String` *(default: "yyyy")*
 
-The format used when [xAxis.baseUnit](#configuration-xAxis.baseUnit) is set to "years".
+The format used when [xAxis.baseUnit](/api/javascript/dataviz/ui/chart#configuration-xAxis.baseUnit) is set to "years".
 
 #### Example - set the years format
     <div id="chart"></div>
@@ -25824,8 +25824,8 @@ The skip of the x axis major ticks.
 ### xAxis.majorUnit `Number`
 
 The interval between major divisions.
-If this is a date axis the value represents the number of [xAxis.baseUnits](#configuration-xAxis.baseUnit) between major divisions.
-If the [xAxis.type](#configuration-xAxis.type) is set to `"log"`, the majorUnit value will be used for the base of the logarithm.
+If this is a date axis the value represents the number of [xAxis.baseUnits](/api/javascript/dataviz/ui/chart#configuration-xAxis.baseUnit) between major divisions.
+If the [xAxis.type](/api/javascript/dataviz/ui/chart#configuration-xAxis.type) is set to `"log"`, the majorUnit value will be used for the base of the logarithm.
 
 #### Example - set the scatter chart x axis major unit
     <div id="chart"></div>
@@ -25910,8 +25910,8 @@ The minimum value of the axis.
 
 ### xAxis.minorUnit `Number`
 
-The interval between minor divisions. It defaults to 1/5 of the [xAxis.majorUnit](#configuration-xAxis.majorUnit).
-If the [xAxis.type](#configuration-xAxis.type) is set to `"log"`, the minorUnit value represents the number of divisions between two major units and defaults to the major unit minus one.
+The interval between minor divisions. It defaults to 1/5 of the [xAxis.majorUnit](/api/javascript/dataviz/ui/chart#configuration-xAxis.majorUnit).
+If the [xAxis.type](/api/javascript/dataviz/ui/chart#configuration-xAxis.type) is set to `"log"`, the minorUnit value represents the number of divisions between two major units and defaults to the major unit minus one.
 
 #### Example - set the logarithmic x axis minor unit
 
@@ -25934,7 +25934,7 @@ If the [xAxis.type](#configuration-xAxis.type) is set to `"log"`, the minorUnit 
 
 ### xAxis.name `String` *(default: "primary")*
 
-The unique axis name. Used to associate a series with a x axis using the [series.xAxis](#configuration-series.xAxis) option.
+The unique axis name. Used to associate a series with a x axis using the [series.xAxis](/api/javascript/dataviz/ui/chart#configuration-series.xAxis) option.
 
 #### Example - set the scatter chart x axis name
 
@@ -26147,7 +26147,7 @@ Angles increase counterclockwise and zero is to the right. Negative values are a
 
 The title configuration of the scatter chart x axis.
 
-> The [xAxis.title.text](#configuration-xAxis.title.text) option must be set in order to display the title.
+> The [xAxis.title.text](/api/javascript/dataviz/ui/chart#configuration-xAxis.title.text) option must be set in order to display the title.
 
 #### Example - set the scatter chart x axis title
     <div id="chart"></div>
@@ -28045,7 +28045,7 @@ A function that can be used to create a custom visual for the notes. The availab
 
 ### yAxis `Array`
 
-The y axis configuration options of the scatter chart. Supports all [valueAxis](#configuration-valueAxis) options.
+The y axis configuration options of the scatter chart. Supports all [valueAxis](/api/javascript/dataviz/ui/chart#configuration-valueAxis) options.
 
 #### Example - set the scatter chart y axis
     <div id="chart"></div>
@@ -28162,7 +28162,7 @@ The color of the axis. Accepts a valid CSS color string, including hex and rgb.
 
 The crosshair configuration options.
 
-> The crosshair is displayed when the [yAxis.crosshair.visible](#configuration-yAxis.crosshair.visible) option is set to `true`.
+> The crosshair is displayed when the [yAxis.crosshair.visible](/api/javascript/dataviz/ui/chart#configuration-yAxis.crosshair.visible) option is set to `true`.
 
 #### Example - set the scatter chart y axis crosshair options
 
@@ -28259,7 +28259,7 @@ The opacity of the crosshair. By default the crosshair is opaque.
 
 The crosshair tooltip options.
 
-> The crosshair tooltip is displayed when the [yAxis.crosshair.tooltip.visible](#configuration-yAxis.crosshair.tooltip.visible) option is set to `true`.
+> The crosshair tooltip is displayed when the [yAxis.crosshair.tooltip.visible](/api/javascript/dataviz/ui/chart#configuration-yAxis.crosshair.tooltip.visible) option is set to `true`.
 
 #### Example - configure the scatter chart y axis crosshair tooltip
 
@@ -29013,7 +29013,7 @@ The culture to use when formatting date values. See the [globalization overview]
 
 The format used to display the labels when the x values are dates. Uses [kendo.format](/api/javascript/kendo/methods/format). Contains one placeholder ("{0}") which represents the category value.
 
-> The chart will choose the appropriate format for the current [yAxis.baseUnit](#configuration-yAxis.baseUnit). Setting the [categoryAxis.labels.format](#configuration-categoryAxis.labels.format) option will override the date formats.
+> The chart will choose the appropriate format for the current [yAxis.baseUnit](/api/javascript/dataviz/ui/chart#configuration-yAxis.baseUnit). Setting the [categoryAxis.labels.format](/api/javascript/dataviz/ui/chart#configuration-categoryAxis.labels.format) option will override the date formats.
 
 #### Example - set the scatter chart y axis date formats
 
@@ -29043,7 +29043,7 @@ The format used to display the labels when the x values are dates. Uses [kendo.f
 
 ### yAxis.labels.dateFormats.days `String` *(default: "M/d")*
 
-The format used when [yAxis.baseUnit](#configuration-yAxis.baseUnit) is set to "days".
+The format used when [yAxis.baseUnit](/api/javascript/dataviz/ui/chart#configuration-yAxis.baseUnit) is set to "days".
 
 #### Example - set the days format
 
@@ -29074,7 +29074,7 @@ The format used when [yAxis.baseUnit](#configuration-yAxis.baseUnit) is set to "
 
 ### yAxis.labels.dateFormats.hours `String` *(default: "HH:mm")*
 
-The format used when [yAxis.baseUnit](#configuration-yAxis.baseUnit) is set to "hours".
+The format used when [yAxis.baseUnit](/api/javascript/dataviz/ui/chart#configuration-yAxis.baseUnit) is set to "hours".
 
 #### Example - set the hours format
 
@@ -29105,7 +29105,7 @@ The format used when [yAxis.baseUnit](#configuration-yAxis.baseUnit) is set to "
 
 ### yAxis.labels.dateFormats.months `String` *(default: "MMM 'yy")*
 
-The format used when [yAxis.baseUnit](#configuration-yAxis.baseUnit) is set to "months".
+The format used when [yAxis.baseUnit](/api/javascript/dataviz/ui/chart#configuration-yAxis.baseUnit) is set to "months".
 
 #### Example - set the months format
 
@@ -29136,7 +29136,7 @@ The format used when [yAxis.baseUnit](#configuration-yAxis.baseUnit) is set to "
 
 ### yAxis.labels.dateFormats.weeks `String` *(default: "M/d")*
 
-The format used when [yAxis.baseUnit](#configuration-yAxis.baseUnit) is set to "weeks".
+The format used when [yAxis.baseUnit](/api/javascript/dataviz/ui/chart#configuration-yAxis.baseUnit) is set to "weeks".
 
 #### Example - set the weeks format
     <div id="chart"></div>
@@ -29166,7 +29166,7 @@ The format used when [yAxis.baseUnit](#configuration-yAxis.baseUnit) is set to "
 
 ### yAxis.labels.dateFormats.years `String` *(default: "yyyy")*
 
-The format used when [yAxis.baseUnit](#configuration-yAxis.baseUnit) is set to "years".
+The format used when [yAxis.baseUnit](/api/javascript/dataviz/ui/chart#configuration-yAxis.baseUnit) is set to "years".
 
 #### Example - set the years format
     <div id="chart"></div>
@@ -30568,8 +30568,8 @@ The skip of the y axis major ticks.
 ### yAxis.majorUnit `Number`
 
 The interval between major divisions.
-If this is a date axis the value represents the number of [xAxis.baseUnits](#configuration-xAxis.baseUnit) between major divisions.
-If the [yAxis.type](#configuration-yAxis.type) is set to `"log"`, the majorUnit value will be used for the base of the logarithm.
+If this is a date axis the value represents the number of [xAxis.baseUnits](/api/javascript/dataviz/ui/chart#configuration-xAxis.baseUnit) between major divisions.
+If the [yAxis.type](/api/javascript/dataviz/ui/chart#configuration-yAxis.type) is set to `"log"`, the majorUnit value will be used for the base of the logarithm.
 
 #### Example - set the scatter chart y axis major unit
     <div id="chart"></div>
@@ -30654,8 +30654,8 @@ The minimum value of the axis.
 
 ### yAxis.minorUnit `Number`
 
-The interval between minor divisions. It defaults to 1/5 of the [yAxis.majorUnit](#configuration-yAxis.majorUnit).
-If the [yAxis.type](#configuration-yAxis.type) is set to `"log"`, the minorUnit value represents the number of divisions between two major units and defaults to the major unit minus one.
+The interval between minor divisions. It defaults to 1/5 of the [yAxis.majorUnit](/api/javascript/dataviz/ui/chart#configuration-yAxis.majorUnit).
+If the [yAxis.type](/api/javascript/dataviz/ui/chart#configuration-yAxis.type) is set to `"log"`, the minorUnit value represents the number of divisions between two major units and defaults to the major unit minus one.
 
 #### Example - set the logarithmic y axis minor unit
 
@@ -30678,7 +30678,7 @@ If the [yAxis.type](#configuration-yAxis.type) is set to `"log"`, the minorUnit 
 
 ### yAxis.name `String` *(default: "primary")*
 
-The unique axis name. Used to associate a series with a y axis using the [series.yAxis](#configuration-series.yAxis) option.
+The unique axis name. Used to associate a series with a y axis using the [series.yAxis](/api/javascript/dataviz/ui/chart#configuration-series.yAxis) option.
 
 #### Example - set the scatter chart y axis name
 
@@ -30885,7 +30885,7 @@ If set to `true` the value axis direction will be reversed. By default values in
 
 The title configuration of the scatter chart y axis.
 
-> The [yAxis.title.text](#configuration-yAxis.title.text) option must be set in order to display the title.
+> The [yAxis.title.text](/api/javascript/dataviz/ui/chart#configuration-yAxis.title.text) option must be set in order to display the title.
 
 #### Example - set the scatter chart y axis title
     <div id="chart"></div>
@@ -32907,11 +32907,11 @@ Specifies an axis that should not be zoomed. The supported values are `none`, `x
 
 ### dataSource `kendo.data.DataSource`
 
-The [data source](/api/javascript/data/datasource) of the widget. Configured via the [dataSource](/configuration/datasource) option.
+The [data source](/api/javascript/data/datasource) of the widget. Configured via the [dataSource](/api/javascript/dataviz/ui/chart/configuration/datasource) option.
 
 > Changes of the data source will be reflected in the widget.
 
-> Assigning a new data source would have no effect. Use the [setDataSource](#methods-setDataSource) method instead.
+> Assigning a new data source would have no effect. Use the [setDataSource](/api/javascript/dataviz/ui/chart/methods/setdatasource) method instead.
 
 #### Example - add a data item to the data source
 
@@ -32967,7 +32967,7 @@ The [data source](/api/javascript/data/datasource) of the widget. Configured via
 
 The [configuration](#configuration) options with which the chart is initialized.
 
-> Call the [refresh](#methods-refresh) method after modifying the `options` field.
+> Call the [refresh](/api/javascript/dataviz/ui/chart/methods/refresh) method after modifying the `options` field.
 
 #### Example - change the chart options
 
@@ -33178,7 +33178,7 @@ Resolves the promise with the raw SVG document without the Data URI prefix.
 
 ### findAxisByName
 
-An alias for the existing [getAxis](#methods-getAxis) method.
+An alias for the existing [getAxis](/api/javascript/dataviz/ui/chart/methods/getaxis) method.
 
 #### Parameters
 
@@ -33468,7 +33468,7 @@ Adjusts the chart layout to match the size of the container.
 Defines whether the widget should proceed with resizing even if the element dimensions have not changed.
 
 ### saveAsPDF
-Saves the Chart as a PDF file using the options specified in [options.pdf](#configuration-pdf).
+Saves the Chart as a PDF file using the options specified in [options.pdf](/api/javascript/dataviz/ui/chart#configuration-pdf).
 
 > Calling this method could trigger the browser built-in popup blocker in some cases. To avoid that always call it as a response to end-user action e.g. button click.
 
@@ -33583,7 +33583,7 @@ converted to other formats using tools like [Inkscape](https://inkscape.org/en) 
 [ImageMagick](http://www.imagemagick.org/).
 Both programs provide command-line interface suitable for server-side processing.
 
-> This method is obsoleted by [exportSVG](#methods-exportSVG), but will remain fully functional.
+> This method is obsoleted by [exportSVG](/api/javascript/dataviz/ui/chart/methods/exportsvg), but will remain fully functional.
 
 #### Returns
 
@@ -33607,7 +33607,7 @@ Both programs provide command-line interface suitable for server-side processing
 
 Returns a PNG image of the chart encoded as a [Data URL](https://developer.mozilla.org/en-US/docs/data_URIs).
 
-> This method is deprecated and replaced by [exportImage](#methods-exportImage).
+> This method is deprecated and replaced by [exportImage](/api/javascript/dataviz/ui/chart/methods/exportimage).
 
 #### Returns
 
@@ -33669,7 +33669,7 @@ A string representing the series name or the category name or an object with the
 * value - the point value.
 * series - the point series.
 * percentage - the point value represented as a percentage value. Available only for donut, pie and 100% stacked charts.
-* runningTotal - the sum of point values since the last "runningTotal" [summary point](#configuration-series.summaryField). Available for waterfall series.
+* runningTotal - the sum of point values since the last "runningTotal" [summary point](/api/javascript/dataviz/ui/chart#configuration-series.summaryField). Available for waterfall series.
 * total - the sum of all previous series values. Available for waterfall series.
 
 ##### options.series `String`
@@ -34376,7 +34376,7 @@ Can be used, for example, to remove loading indicators.
 
 The event handler function context (available via the `this` keyword) will be set to the widget instance.
 
-> Calling [setOptions](#methods-setOptions) in the event handler is not recommended and can cause an endless loop or a JavaScript error.
+> Calling [setOptions](/api/javascript/dataviz/ui/chart/methods/setoptions) in the event handler is not recommended and can cause an endless loop or a JavaScript error.
 
 #### Event Data
 
@@ -34723,7 +34723,7 @@ The data point category
 
 A list of all points that are in the same category. Each item has the same fields - value, series, dataItem, etc.
 
-Defined only when a [shared tooltip](#configuration-tooltip.shared) is in use.
+Defined only when a [shared tooltip](/api/javascript/dataviz/ui/chart#configuration-tooltip.shared) is in use.
 Available in versions 2014.3.1306 and later.
 
 ##### e.dataItem `Object`

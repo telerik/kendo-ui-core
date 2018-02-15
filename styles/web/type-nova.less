@@ -1401,6 +1401,7 @@ table:not(.k-scheduler-dayview) .k-scheduler-header-wrap .k-today {
         border-radius: 0;
     }
 
+    .k-overflow-group,
     .k-separator {
         border-color: @secondary-border-color;
     }
@@ -2230,14 +2231,12 @@ html .km-pane-wrapper .km-widget,
 }
 
 .k-spreadsheet-sheets-items {
+    color: @inactive-header-text;
     .composite-background(@tabs-normal-gradient);
 }
 
 .k-spreadsheet-sheets-items,
 .k-spreadsheet-tabstrip {
-    .k-state-default .k-link {
-        color: @inactive-header-text;
-    }
 
     .k-item.k-state-hover,
     .k-item.k-state-active,

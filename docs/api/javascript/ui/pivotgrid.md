@@ -237,7 +237,7 @@ Enables or disables column filtering in the Excel file. Not to be mistaken with 
     </script>
 
 ### excel.forceProxy `Boolean` *(default: false)*
-If set to true, the content will be forwarded to [proxyURL](#configuration-excel.proxyURL) even if the browser supports saving files locally.
+If set to true, the content will be forwarded to [proxyURL](/api/javascript/ui/pivotgrid#configuration-excel.proxyURL) even if the browser supports saving files locally.
 
 ### excel.proxyURL `String` *(default: null)*
 
@@ -450,7 +450,7 @@ Specifies the file name of the exported PDF file.
     </script>
 
 ### pdf.forceProxy `Boolean` *(default: false)*
-If set to true, the content will be forwarded to [proxyURL](#configuration-pdf.proxyURL) even if the browser supports saving files locally.
+If set to true, the content will be forwarded to [proxyURL](/api/javascript/ui/pivotgrid#configuration-pdf.proxyURL) even if the browser supports saving files locally.
 
 ### pdf.keywords `String` *(default: null)*
 
@@ -2163,11 +2163,11 @@ The text of the "not equal" filter operator.
 
 ### dataSource `kendo.data.PivotDataSource`
 
-The [data source](/api/javascript/data/pivotdatasource) of the widget. Configured via the [dataSource](/configuration/datasource) option.
+The [data source](/api/javascript/data/pivotdatasource) of the widget. Configured via the [dataSource](/api/javascript/ui/pivotgrid/configuration/datasource) option.
 
 > Changes of the data source will be reflected in the widget.
 
-> Assigning a new data source would have no effect. Use the [setDataSource](#methods-setDataSource) method instead.
+> Assigning a new data source would have no effect. Use the [setDataSource](/api/javascript/ui/pivotgrid/methods/setdatasource) method instead.
 
 #### Example - get reference to the widget data source
 
@@ -2469,7 +2469,7 @@ The data source to which the widget should be bound.
 
 ### saveAsExcel
 
-Initiates the Excel export. Also fires the [`excelExport`](#events-excelExport) event.
+Initiates the Excel export. Also fires the [`excelExport`](/api/javascript/ui/pivotgrid/events/excelexport) event.
 
 > Calling this method could trigger the browser built-in popup blocker in some cases. To avoid that, always call it as a response to an end-user action e.g. button click.
 
@@ -2511,12 +2511,12 @@ Initiates the Excel export. Also fires the [`excelExport`](#events-excelExport) 
 
 ### saveAsPDF
 
-Initiates the PDF export and returns a promise. Also triggers the [pdfExport](#events-pdfExport) event.
+Initiates the PDF export and returns a promise. Also triggers the [pdfExport](/api/javascript/ui/pivotgrid/events/pdfexport) event.
 
 > Calling this method may trip the built-in browser pop-up blocker. To avoid that, call this method as a response to an end-user action, e.g. a button click.
 
 #### Returns
-`Promise` A promise that will be resolved when the export completes. The same promise is available in the [pdfExport](#events-pdfExport) event arguments.
+`Promise` A promise that will be resolved when the export completes. The same promise is available in the [pdfExport](/api/javascript/ui/pivotgrid/events/pdfexport) event arguments.
 
 #### Example - manually initiate PDF export
 
@@ -2910,7 +2910,7 @@ The path to the field that will be collapsed.
 
 ### excelExport
 
-Fired when [`saveAsExcel`](#methods-saveAsExcel) method is called.
+Fired when [`saveAsExcel`](/api/javascript/ui/pivotgrid/methods/saveasexcel) method is called.
 
 #### Event Data
 

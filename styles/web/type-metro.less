@@ -909,7 +909,6 @@ td.k-state-focused.k-state-selected
 .k-other-month.k-state-hover .k-link,
 div.k-filebrowser-dropzone em,
 .k-draghandle:hover,
-.k-split-button:focus,
 .k-listbox .k-item:hover:not(.k-state-disabled)
 {
     .composite-background(@hover-gradient);
@@ -2165,7 +2164,7 @@ html .km-pane-wrapper .km-widget,
 }
 
 .k-split-button:focus > .k-button {
-    color: @hover-text-color;
+    color: inherit;
     background: transparent;
     border-color: @button-focused-border-color;
 }

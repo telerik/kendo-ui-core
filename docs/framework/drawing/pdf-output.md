@@ -53,7 +53,7 @@ Use a few functions exported to `kendo.drawing.pdf` to generate the binary data 
 
 The `proxyUrl` and `callback` arguments are optional. The `proxyUrl` is necessary for the download to work with Internet Explorer 9 and Safari and is not going to be used for other browsers. The `callback` will be invoked when the file has been successfully generated (generation could be asynchronous).
 
-For more information on the `proxyURL`, refer to [`kendo.saveAs`](/api/javascript/kendo.html/methods/saveas).
+For more information on the `proxyURL`, refer to [`kendo.saveAs`](/api/javascript/kendo/methods/saveas).
 
 ### Use Blob Object
 

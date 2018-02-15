@@ -20,7 +20,7 @@ the DOM.
 
 Specifies whether the widget should display the Apply / Cancel buttons.
 
-Applicable only for the HSV selector, when a [`pallete`](#configuration-palette) is not specified.
+Applicable only for the HSV selector, when a [`pallete`](/api/javascript/ui/colorpicker#configuration-palette) is not specified.
 
 #### Example
 
@@ -35,7 +35,7 @@ Applicable only for the HSV selector, when a [`pallete`](#configuration-palette)
 
 Specifies whether the widget should display the 'Clear color' button.
 
-Applicable only for the HSV selector, when a [`pallete`](#configuration-palette) is not specified.
+Applicable only for the HSV selector, when a [`pallete`](/api/javascript/ui/colorpicker#configuration-palette) is not specified.
 
 #### Example
 
@@ -48,7 +48,7 @@ Applicable only for the HSV selector, when a [`pallete`](#configuration-palette)
 
 ### columns `Number`
 
-The number of columns to show in the color dropdown when a [`pallete`](#configuration-palette) is specified.
+The number of columns to show in the color dropdown when a [`pallete`](/api/javascript/ui/colorpicker#configuration-palette) is specified.
 This is automatically initialized for the "basic" and "websafe" palettes.
 If you use a custom palette then you can set this to some value that makes sense for your colors.
 

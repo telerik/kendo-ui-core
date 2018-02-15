@@ -15,7 +15,7 @@ Represents the Kendo UI Popup widget. Inherits from [Widget](/api/javascript/ui/
 
 Configures the margins, which will be added to the popup size, if its position should end up being next to the viewport edges. By default, the adjustment amount in both dimensions is zero.
 
-The property takes effect only if [`collision`](#configuration-collision) is set to `"fit"` for the respective dimension (`width` or `height`).
+The property takes effect only if [`collision`](/api/javascript/ui/popup#configuration-collision) is set to `"fit"` for the respective dimension (`width` or `height`).
 
     <div style="height:500px;">&nbsp;</div>
     <p style="text-align:right;"><input id="datepicker" /></p>

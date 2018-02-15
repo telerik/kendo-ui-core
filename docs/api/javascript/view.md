@@ -162,7 +162,7 @@ Fires after the View is rendered (either by calling `render`, or by being render
 
 ### transitionStart
 
-Fires when the view transition starts. The `type` event data is set to either `"show"` or `"hide"`. For more details on view Transitions check the [layout showIn](layout#methods-showIn) method.
+Fires when the view transition starts. The `type` event data is set to either `"show"` or `"hide"`. For more details on view Transitions check the [layout showIn](/api/javascript/layout#methods-showIn) method.
 
 #### Example
 
@@ -182,7 +182,7 @@ Fires when the view transition starts. The `type` event data is set to either `"
 
 ### transitionEnd
 
-Fires after the view transition container has its `k-fx-end` class set. The `type` event data is set to either `"show"` or `"hide"`. For more details on view Transitions check the [layout showIn](layout#methods-showIn) method.
+Fires after the view transition container has its `k-fx-end` class set. The `type` event data is set to either `"show"` or `"hide"`. For more details on view Transitions check the [layout showIn](/api/javascript/layout#methods-showIn) method.
 
 #### Example
 

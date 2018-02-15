@@ -2695,7 +2695,7 @@ The supported values are:
 
 > The default value is "normal".
 
-> The `style` option is supported when [series.type](#configuration-series.type) is set to "area".
+> The `style` option is supported when [series.type](/api/javascript/dataviz/ui/sparkline#configuration-series.type) is set to "area".
 
 ### series.markers `Object`
 
@@ -2757,7 +2757,7 @@ The behavior for handling missing values. The supported values are:
 
 > The default value is "interpolate", except for "area" and stacked series which default to "zero".
 
-> The `missingValues` option is supported when [series.type](#configuration-series.type) is set to "area", "line", "scatterLine", "radarLine", "radarArea", "polarLine" or "polarArea".
+> The `missingValues` option is supported when [series.type](/api/javascript/dataviz/ui/sparkline#configuration-series.type) is set to "area", "line", "scatterLine", "radarLine", "radarArea", "polarLine" or "polarArea".
 
 #### Example - set the missing values behavior
     <div id="chart"></div>
@@ -2781,7 +2781,7 @@ The supported values are:
 
 > The default value is "normal".
 
-> The `style` option is supported when [series.type](#configuration-series.type) is set to "line".
+> The `style` option is supported when [series.type](/api/javascript/dataviz/ui/sparkline#configuration-series.type) is set to "line".
 
 ### series.negativeColor `String`
 
@@ -2836,9 +2836,9 @@ Space between points as proportion of the point width.
 ### series.stack `Boolean|String|Object` *(default: false)*
 
 A Boolean value indicating if the series should be stacked.
-A string value is interpreted as [series.stack.group](#configuration-series.stack.group).
+A string value is interpreted as [series.stack.group](/api/javascript/dataviz/ui/sparkline#configuration-series.stack.group).
 
-> The `stack` options is supported when [series.type](#configuration-series.type) is set to "bar", "column", "line", "area", "verticalLine", "verticalArea", "radarLine", "radarArea" and "radarColumn".
+> The `stack` options is supported when [series.type](/api/javascript/dataviz/ui/sparkline#configuration-series.type) is set to "bar", "column", "line", "area", "verticalLine", "verticalArea", "radarLine", "radarArea" and "radarColumn".
 
 > Stack settings of the first series are applied to the rest of the series.
 
@@ -2877,7 +2877,7 @@ The type of stack to plot. The following types are supported:
 
 Indicates that the series should be stacked in a group with the specified name.
 
-> The `group` option is supported when [series.type](#configuration-series.type) is set to "bar" or "column".
+> The `group` option is supported when [series.type](/api/javascript/dataviz/ui/sparkline#configuration-series.type) is set to "bar" or "column".
 
 #### Example - configure stack groups
 
@@ -3382,7 +3382,7 @@ The default options for all pie series. For more details see the series options.
 
 A Boolean value indicating if the series should be stacked.
 
-> The `stack` options is supported when [series.type](#configuration-series.type) is set to "bar", "column", "line", "area", "verticalLine", "verticalArea", "radarLine", "radarArea" and "radarColumn".
+> The `stack` options is supported when [series.type](/api/javascript/dataviz/ui/sparkline#configuration-series.type) is set to "bar", "column", "line", "area", "verticalLine", "verticalArea", "radarLine", "radarArea" and "radarColumn".
 
 #### Example - configure stack series
 
@@ -5462,7 +5462,7 @@ Detaches event handlers and removes data entries in order to avoid memory leaks.
 ### exportImage
 Exports the chart as an image.
 
-Inherited from [Chart.exportImage](chart#methods-exportImage)
+Inherited from [Chart.exportImage](/api/javascript/dataviz/ui/chart/methods/exportimage)
 
 #### Parameters
 
@@ -5482,7 +5482,7 @@ The height of the exported image. Defaults to the chart height.
 ### exportPDF
 Exports the chart as a PDF file.
 
-Inherited from [Chart.exportPDF](chart#methods-exportPDF)
+Inherited from [Chart.exportPDF](/api/javascript/dataviz/ui/chart/methods/exportpdf)
 
 #### Parameters
 
@@ -5496,7 +5496,7 @@ Parameters for the exported PDF file.
 ### exportSVG
 Exports the chart as an SVG document.
 
-Inherited from [Chart.exportSVG](chart#methods-exportSVG)
+Inherited from [Chart.exportSVG](/api/javascript/dataviz/ui/chart/methods/exportsvg)
 
 #### Parameters
 
@@ -5552,7 +5552,7 @@ converted to other formats using tools like [Inkscape](https://inkscape.org/en) 
 [ImageMagick](http://www.imagemagick.org/).
 Both programs provide command-line interface suitable for server-side processing.
 
-> This method is obsoleted by [exportSVG](#methods-exportSVG), but will remain fully functional.
+> This method is obsoleted by [exportSVG](/api/javascript/dataviz/ui/sparkline/methods/exportsvg), but will remain fully functional.
 
 #### Returns
 
@@ -5575,7 +5575,7 @@ Both programs provide command-line interface suitable for server-side processing
 
 Returns a PNG image of the sparkline encoded as a [Data URL](https://developer.mozilla.org/en-US/docs/data_URIs).
 
-> This method is deprecated and replaced by [exportImage](#methods-exportImage).
+> This method is deprecated and replaced by [exportImage](/api/javascript/dataviz/ui/sparkline/methods/exportimage).
 
 #### Returns
 

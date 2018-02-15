@@ -467,7 +467,7 @@ Specifies width of the window.
 
 Centers the window within the viewport.
 
-If the Window has no set dimensions and is centered before its content is loaded with Ajax, it is probably going to resize after the content is loaded. This naturally changes the position of the widget on the screen and it is no longer centered. If this is a requirement, then either center the Window in its [`refresh`](#events-refresh) event, or set some [explicit dimensions](#configuration-height).
+If the Window has no set dimensions and is centered before its content is loaded with Ajax, it is probably going to resize after the content is loaded. This naturally changes the position of the widget on the screen and it is no longer centered. If this is a requirement, then either center the Window in its [`refresh`](/api/javascript/ui/window/events/refresh) event, or set some [explicit dimensions](/api/javascript/ui/window#configuration-height).
 
 #### Returns
 
@@ -621,7 +621,7 @@ Maximizes a Window to its title bar.
 
 ### open
 
-Opens a Window and brings it on top of any other open Window instances by calling [`toFront`](#methods-tofront) internally.
+Opens a Window and brings it on top of any other open Window instances by calling [`toFront`](/api/javascript/ui/window/methods/tofront) internally.
 
 #### Returns
 
@@ -746,7 +746,7 @@ Restores a maximized or minimized Window to its previous state. Triggers the res
 
 Allows the Window to be configured with new options.
 
-If you change the [content url](#configuration-content), call [`refresh`](#methods-refresh) afterwards. Another option is to execute the `refresh` method with the new URL directly.
+If you change the [content url](/api/javascript/ui/window#configuration-content), call [`refresh`](/api/javascript/ui/window/methods/refresh) afterwards. Another option is to execute the `refresh` method with the new URL directly.
 
 Changing the size or position of the Window requires the widget to not be in maximized or minimized state.
 
@@ -802,7 +802,7 @@ The title of the Window.
 
 ### toFront
 
-Increases the `z-index` style of a Window [`wrapper`](/intro/widget-basics/wrapper-element) to bring the instance on top of other open Windows. This method is executed automatically when the [`open`](#methods-open) method is used.
+Increases the `z-index` style of a Window [`wrapper`](/intro/widget-basics/wrapper-element) to bring the instance on top of other open Windows. This method is executed automatically when the [`open`](/api/javascript/ui/window/methods/open) method is used.
 
 #### Returns
 
