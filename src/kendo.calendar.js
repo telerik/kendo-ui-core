@@ -559,7 +559,7 @@ var __meta__ = { // jshint ignore:line
                 return;
             }
 
-            if(eventArgs.event.ctrlKey) {
+            if(eventArgs.event.ctrlKey || eventArgs.event.metaKey) {
                 if($(eventArgs.event.currentTarget).is(CELLSELECTORVALID)) {
                     that._toggleSelection($(eventArgs.event.currentTarget));
                 }
