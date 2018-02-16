@@ -143,8 +143,8 @@
 
         var dialog = dom.data("kendoDialog");
 
-        equal(dialog.wrapper.width(), 212);
-        equal(dialog.wrapper.height(), 233);
+        equal(dialog.wrapper.outerWidth(), 212);
+        equal(dialog.wrapper.outerHeight(), 233);
     });
 
     test("set content through data attribute", function() {
