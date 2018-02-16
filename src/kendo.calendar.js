@@ -559,7 +559,7 @@ var __meta__ = { // jshint ignore:line
                 return;
             }
 
-            if(eventArgs.event.ctrlKey || eventArgs.event.metaKey) {
+            if(eventArgs.event.ctrlKey) {
                 if($(eventArgs.event.currentTarget).is(CELLSELECTORVALID)) {
                     that._toggleSelection($(eventArgs.event.currentTarget));
                 }
@@ -701,7 +701,7 @@ var __meta__ = { // jshint ignore:line
                 prevent = true;
             }
 
-            if (e.ctrlKey) {
+            if (e.ctrlKey || e.metaKey) {
                 if (key == keys.RIGHT && !isRtl || key == keys.LEFT && isRtl) {
                     that.navigateToFuture();
                     prevent = true;
