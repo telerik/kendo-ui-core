@@ -538,7 +538,7 @@
           "second": "zweiten",
           "third": "dritten",
           "fourth": "vierten",
-          "last": "letzten",
+          "last": "letzten"
         },
         "weekdays": {
           "day": "Tag",
@@ -605,10 +605,10 @@
           "timezoneEditorButton": "Zeitzone",
           "timezoneTitle": "Zeitzone",
           "noTimezone": "Keine Zeitzone",
-          "editorTitle": "Termin",
+          "editorTitle": "Termin"
         },
         "defaultRowText": "Alle Termine",
-        "pdf": "Exportieren als PDF",
+        "pdf": "Exportieren als PDF"
       });
   }
 
