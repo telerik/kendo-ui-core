@@ -1,5 +1,29 @@
 (function ($, undefined) {
-  /* Filter cell operator messages */
+/* FlatColorPicker messages */
+
+if (kendo.ui.FlatColorPicker) {
+  kendo.ui.FlatColorPicker.prototype.options.messages =
+  $.extend(true, kendo.ui.FlatColorPicker.prototype.options.messages, {
+      "apply": "Anwenden",
+      "cancel": "Abbrechen",
+      "noColor": "keine Farbe",
+      "clearColor": "Farbe löschen"
+  });
+}
+
+/* ColorPicker messages */
+
+if (kendo.ui.ColorPicker) {
+  kendo.ui.ColorPicker.prototype.options.messages =
+  $.extend(true, kendo.ui.ColorPicker.prototype.options.messages, {
+      "apply": "Anwenden",
+      "cancel": "Abbrechen",
+      "noColor": "keine Farbe",
+      "clearColor": "Farbe löschen"
+  });
+}
+
+/* Filter cell operator messages */
 
   if (kendo.ui.FilterCell) {
     kendo.ui.FilterCell.prototype.options.operators =
