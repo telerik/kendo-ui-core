@@ -141,7 +141,10 @@
 
                 that._closable(that.wrapper);
                 that._dimensions();
-                that._overlay(options.modal && that.wrapper.is(VISIBLE)).css({ opacity: 0.5 });
+
+                if (options.modal !== undefined) {
+                    that._overlay(that.wrapper.is(VISIBLE)).css({ opacity: 0.5 });
+                }
 
                 if (options.title !== undefined) {
                     that.title(options.title);
@@ -355,15 +358,15 @@
                 var titlebarActions = titlebar.find(".k-window-actions");
                 var closeAction = titlebarActions.length ? titlebarActions.find(".k-dialog-close") : wrapper.find(".k-dialog-close");
 
-                if (options.closable !== false && !closeAction.length) {
+                closeAction.remove();
+
+                if (options.closable !== false) {
                     if (options.title !== false) {
                         titlebarActions.append(templates.close(options));
                     }
                     else {
                         wrapper.prepend(templates.close(options));
                     }
-                } else if (options.closable === false){
-                    closeAction.remove();
                 }
             },
 

@@ -61,6 +61,7 @@
 @disabled-border-color: darken(@base, 6%);
 @disabled-background-color: @widget-background-color;
 @disabled-gradient: none;
+@header-background-color: @accent;
 @inputs-border-radius: 3px;
 @input-validation-error: darken(@error, 25%);
 @column-highlight-background-color: darken(@background, 4%);
@@ -1320,6 +1321,7 @@ table:not(.k-scheduler-dayview) .k-scheduler-header-wrap .k-today {
 .k-editor.k-header,
 .editorToolbarWindow.k-header,
 .k-filebrowser .k-header {
+    color: @widget-text-color;
     background-color: @widget-background-color;
     border-color: @widget-border-color;
 }
@@ -2295,6 +2297,8 @@ html .km-pane-wrapper .km-widget,
             }
         }
         &.k-dialog-button-layout-normal {
+            border-top: solid 1px @widget-border-color;
+
             .k-button {
                 border-radius: @border-radius;
             }
