@@ -282,7 +282,7 @@ There are two ways of navigation:
 
 ### Instances
 
-You can reference a hybrid Application instance by using the code from the example below. Once a reference is established, use the [hybrid Application API](../http://docs.telerik.com/kendo-ui/api/javascript/mobile/application#methods) to control its behavior.
+You can reference a hybrid Application instance by using the code from the example below. Once a reference is established, use the [hybrid Application API](https://docs.telerik.com/kendo-ui/api/javascript/mobile/application#methods) to control its behavior.
 
 ###### Example
 

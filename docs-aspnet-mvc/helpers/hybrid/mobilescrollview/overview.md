@@ -118,7 +118,7 @@ Below are listed the steps for you to follow when configuring the hybrid Kendo U
 
 ## Event Handling
 
-You can subscribe to all hybrid ScrollView [events](../http://docs.telerik.com/kendo-ui/api/javascript/mobile/ui/scrollview#events).
+You can subscribe to all hybrid ScrollView [events](https://docs.telerik.com/kendo-ui/api/javascript/mobile/ui/scrollview#events).
 
 ### By Handler Name
 
@@ -172,7 +172,7 @@ The following example demonstrates how to subscribe to events by a handler name.
 
 ### Instances
 
-You can reference a hybrid ScrollView instance by using the code from the example below. Once a reference is established, use the [hybrid ScrollView API](../http://docs.telerik.com/kendo-ui/api/javascript/mobile/ui/scrollview#methods) to control its behavior.
+You can reference a hybrid ScrollView instance by using the code from the example below. Once a reference is established, use the [hybrid ScrollView API](https://docs.telerik.com/kendo-ui/api/javascript/mobile/ui/scrollview#methods) to control its behavior.
 
 ###### Example
 
