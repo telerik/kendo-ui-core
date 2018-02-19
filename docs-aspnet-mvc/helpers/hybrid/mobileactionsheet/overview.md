@@ -114,7 +114,7 @@ Below are listed the steps for you to follow when configuring the hybrid Kendo U
 
 ## Event Handling
 
-You can subscribe to all hybrid ActionSheet [events](../http://docs.telerik.com/kendo-ui/api/javascript/mobile/ui/actionsheet#events).
+You can subscribe to all hybrid ActionSheet [events](https://docs.telerik.com/kendo-ui/api/javascript/mobile/ui/actionsheet#events).
 
 ### By Handler Name
 
@@ -171,7 +171,7 @@ The following example demonstrates how to subscribe to events by a handler name.
 
 ### Instances
 
-You can reference a hybrid ActionSheet instance by using the code from the example below. Once a reference is established, use the [hybrid ActionSheet API](../http://docs.telerik.com/kendo-ui/api/javascript/mobile/ui/actionsheet#methods) to control its behavior.
+You can reference a hybrid ActionSheet instance by using the code from the example below. Once a reference is established, use the [hybrid ActionSheet API](https://docs.telerik.com/kendo-ui/api/javascript/mobile/ui/actionsheet#methods) to control its behavior.
 
 ###### Example
 

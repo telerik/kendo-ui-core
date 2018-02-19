@@ -105,7 +105,7 @@ Below are listed the steps for you to follow when configuring the hybrid Kendo U
 
 ### Instances
 
-You can reference a hybrid NavBar instance by using the code from the example below. Once a reference is established, use the [hybrid NavBar API](../http://docs.telerik.com/kendo-ui/api/javascript/mobile/ui/navbar#methods) to control its behavior.
+You can reference a hybrid NavBar instance by using the code from the example below. Once a reference is established, use the [hybrid NavBar API](https://docs.telerik.com/kendo-ui/api/javascript/mobile/ui/navbar#methods) to control its behavior.
 
 ###### Example
 
