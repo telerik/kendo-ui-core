@@ -103,31 +103,19 @@
                 if (!that.options.visible) {
                     that.wrapper.hide();
                 } else {
-                    that.toFront();
-                    that._triggerInitOpen();
-                    that.trigger(OPEN);
-                    if (options.modal) {
-                        that._overlay(wrapper.is(VISIBLE)).css({ opacity: 0.5 });
-                        that._focusDialog();
-                    }
-                }
-
-                if (options.closable) {
-                    wrapper.autoApplyNS(NS);
-                    element.autoApplyNS(NS);
-
-                    wrapper.find(KICONCLOSE)
-                        .on("click", proxy(that._closeClick, that))
-                        .on("keydown", proxy(that._closeKeyHandler, that));
-
-                    element.on("keydown", proxy(that._keydown, that));
+                    that._triggerOpen();
                 }
             },
 
             setOptions: function(options) {
                 var that = this;
+                options = $.extend(that.options, options);
 
                 Widget.fn.setOptions.call(that, options);
+
+                if (options.title !== undefined) {
+                    that.title(options.title);
+                }
 
                 if (options.content) {
                     kendo.destroy(that.element.children());
@@ -139,15 +127,14 @@
                     that._createActionbar(that.wrapper);
                 }
 
+                that.wrapper.show();
                 that._closable(that.wrapper);
                 that._dimensions();
 
-                if (options.modal !== undefined) {
-                    that._overlay(that.wrapper.is(VISIBLE)).css({ opacity: 0.5 });
-                }
-
-                if (options.title !== undefined) {
-                    that.title(options.title);
+                if (!options.visible) {
+                    that.wrapper.hide();
+                } else {
+                    that._triggerOpen();
                 }
             },
 
@@ -361,12 +348,21 @@
                 closeAction.remove();
 
                 if (options.closable !== false) {
-                    if (options.title !== false) {
+                    if (options.title !== false && titlebarActions.length) {
                         titlebarActions.append(templates.close(options));
                     }
                     else {
                         wrapper.prepend(templates.close(options));
                     }
+
+                    wrapper.autoApplyNS(NS);
+                    that.element.autoApplyNS(NS);
+
+                    wrapper.find(KICONCLOSE)
+                        .on("click", proxy(that._closeClick, that))
+                        .on("keydown", proxy(that._closeKeyHandler, that));
+
+                    that.element.on("keydown", proxy(that._keydown, that));
                 }
             },
 
@@ -420,7 +416,7 @@
                 var that = this,
                     options = that.options,
                     lastButton = actionbar.children(KBUTTON + ":last"),
-                    currentSize = parseFloat(lastButton[0].style[WIDTH]),
+                    currentSize = parseFloat(lastButton[0] ? lastButton[0].style[WIDTH] : 0),
                     difference = HUNDREDPERCENT - (options.actions.length * currentSize);
 
                 if (difference > 0) {
@@ -465,6 +461,20 @@
 
                 if (!preventClose) {
                     that.close();
+                }
+            },
+
+            _triggerOpen: function() {
+                var that = this;
+                var options = that.options;
+                var wrapper = that.wrapper;
+
+                that.toFront();
+                that._triggerInitOpen();
+                that.trigger(OPEN);
+                if (options.modal) {
+                    that._overlay(wrapper.is(VISIBLE)).css({ opacity: 0.5 });
+                    that._focusDialog();
                 }
             },
 

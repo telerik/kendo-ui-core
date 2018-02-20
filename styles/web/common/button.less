@@ -248,7 +248,17 @@ input[type="reset"].k-button-expand {
     .k-button {
         float: left;
     }
+
+    &.k-dialog-buttongroup .k-button {
+        float: right;
+    }
 }
-.k-ie9 .k-rtl .k-button-group .k-button {
-    float: right;
+.k-ie9 .k-rtl .k-button-group {
+    .k-button {
+        float: right;
+    }
+
+    &.k-dialog-buttongroup .k-button {
+        float: left;
+    }
 }
