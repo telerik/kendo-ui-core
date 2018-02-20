@@ -1860,7 +1860,7 @@ Fired when the value of the widget is changed via API or user interaction.
 
 The widget instance which fired the event.
 
-#### Example - subscribe to the "select" event during initialization
+#### Example - subscribe to the "cascade" event during initialization
 
     <input id="dropdownlist" />
     <script>
@@ -1872,7 +1872,7 @@ The widget instance which fired the event.
     });
     </script>
 
-#### Example - subscribe to the "select" event after initialization
+#### Example - subscribe to the "cascade" event after initialization
 
     <input id="dropdownlist" />
     <script>
