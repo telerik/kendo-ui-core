@@ -35,6 +35,7 @@ module Jekyll
       self.data['parent_path'] = dir
       self.data['is_api'] = true
       self.data['publish'] = false
+      self.data.delete('previous_url')
     end
   end
 
@@ -191,7 +192,7 @@ module Jekyll
     def parse_element(element)
       description = ""
       if element.type === :codeblock
-        description += element_value(element).indent(4)
+        description += "\n#{element_value(element).indent(4)}"
       end
 
       if element.type === :blank

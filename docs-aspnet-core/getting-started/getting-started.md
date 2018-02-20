@@ -106,6 +106,7 @@ To add the NuGet packages:
 
             @using MyASPNETCoreProject
             @addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+            @addTagHelper *, Kendo.Mvc
             @using Kendo.Mvc.UI
 
 6. Copy the Kendo UI client-side resources. You can use either of the following approaches:

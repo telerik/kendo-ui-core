@@ -8,6 +8,30 @@ position: 250
 
 # Breaking Changes
 
+## Changes from 2018 R1
+
+To enable more complex widget configuration scenarios and ensure the tag-naming consistency across the Telerik UI for ASP.NET Core suite, the Kendo UI R1 2018 release introduces changes in the tags of the following wrappers:
+
+Dialog:
+
+* Previously, it was possible to nest content directly in the `<kendo-dialog>` tag while now, after the release, the content must be nested within a `<content>` tag.
+
+Window:
+
+* Previously, it was possible to nest content directly in the `<kendo-window>` tag while now, after the release, the content must be nested within a `<content>` tag.
+
+Upload:
+
+* The `<kendo-upload-async-settings>` tag name is changed to `<async>`
+* The `<kendo-upload-files>` tag name is changed to `<files>`.
+* The `<kendo-upload-file>` tag name is changed to `<file>`.
+* The `<kendo-upload-localization-settings>` tag name is changed to `<localization>`.
+* The `<kendo-upload-validation-settings>` tag name is changed to `<validation>`.
+
+Splitter:
+
+* Previously, the tag name of the pane was `<kendo-splitter-pane>` while now, after the release, it is changed to `<pane>`.
+
 [Telerik UI for ASP.NET Core](http://www.telerik.com/aspnet-core-ui) is a set of server-side wrappers that allows using the [Kendo UI widgets](../kendo-ui/introduction) from the server code.
 
 That is why, all important changes in the Kendo UI suite also apply to the client-side code and behavior of the Telerik UI for ASP.NET Core wrappers. For the list of all breaking changes, refer to the articles on the [Kendo UI breaking changes](../kendo-ui/backwards-compatibility/2017-backward-compatibility).
