@@ -285,7 +285,10 @@ var __meta__ = { // jshint ignore:line
                 }
             }
 
-            this.persistTagList = false;
+            if (this._state !== ACCEPT) {
+                this.persistTagList = false;
+            }
+
             this._selectValue(e.added, e.removed);
         },
 
