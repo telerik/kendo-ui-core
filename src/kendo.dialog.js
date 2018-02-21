@@ -124,33 +124,6 @@
                 }
             },
 
-            setOptions: function(options) {
-                var that = this;
-
-                Widget.fn.setOptions.call(that, options);
-
-                if (options.content) {
-                    kendo.destroy(that.element.children());
-                    that.element.html(options.content);
-                }
-
-                if (options.actions) {
-                    that.wrapper.children(KBUTTONGROUP).remove();
-                    that._createActionbar(that.wrapper);
-                }
-
-                that._closable(that.wrapper);
-                that._dimensions();
-
-                if (options.modal !== undefined) {
-                    that._overlay(that.wrapper.is(VISIBLE)).css({ opacity: 0.5 });
-                }
-
-                if (options.title !== undefined) {
-                    that.title(options.title);
-                }
-            },
-
             _dimensions: function() {
                 var that = this,
                     wrapper = that.wrapper,
@@ -321,6 +294,7 @@
                     options = that.options,
                     isRtl = kendo.support.isRtl(content),
                     titlebar = $(templates.titlebar(options)),
+                    titlebarActions = titlebar.find(".k-window-actions"),
                     titleId = (content.id || kendo.guid()) + "_title",
                     wrapper = $(that.wrapperTemplate(options));
 
@@ -329,6 +303,15 @@
                 content.addClass(KCONTENTCLASS);
                 that.appendTo.append(wrapper);
 
+                if (options.closable !== false) {
+                    if (options.title !== false) {
+                        titlebarActions.append(templates.close(options));
+                    }
+                    else {
+                        wrapper.append(templates.close(options));
+                    }
+                }
+
                 if (options.title !== false) {
                     wrapper.append(titlebar);
                     titlebar.attr("id", titleId);
@@ -336,8 +319,6 @@
                 } else {
                     wrapper.addClass(KTITLELESS);
                 }
-
-                that._closable(wrapper);
 
                 wrapper.append(content);
 
@@ -348,25 +329,6 @@
 
                 if (options.actions.length) {
                     that._createActionbar(wrapper);
-                }
-            },
-
-            _closable: function (wrapper) {
-                var that = this;
-                var options = that.options;
-                var titlebar = wrapper.children(KDIALOGTITLEBAR);
-                var titlebarActions = titlebar.find(".k-window-actions");
-                var closeAction = titlebarActions.length ? titlebarActions.find(".k-dialog-close") : wrapper.find(".k-dialog-close");
-
-                closeAction.remove();
-
-                if (options.closable !== false) {
-                    if (options.title !== false) {
-                        titlebarActions.append(templates.close(options));
-                    }
-                    else {
-                        wrapper.prepend(templates.close(options));
-                    }
                 }
             },
 
