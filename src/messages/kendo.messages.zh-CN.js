@@ -1,4 +1,4 @@
-/* JS for All Kendo UI Web Components Simplified Chinese (zh-CN) Language Pack | Written by IKKI | 2018-02-03 */
+/* JS for All Kendo UI Components Simplified Chinese (zh-CN) Language Pack | Written by IKKI | 2018-02-03 */
 (function ($, undefined) {
 
     /* FlatColorPicker messages */
@@ -349,7 +349,7 @@
                 }
             });
     }
-    
+
     /* GanttTimeline messages */
     if (kendo.ui.GanttTimeline) {
         kendo.ui.GanttTimeline.prototype.options.messages =
@@ -482,7 +482,7 @@
                 "empty": "拖拽字段到此处"
             });
     }
-    
+
     /* PivotConfigurator messages */
     if (kendo.ui.PivotConfigurator) {
         kendo.ui.PivotConfigurator.prototype.options.messages =
@@ -557,7 +557,7 @@
                 }
             });
     }
-    
+
     /* MobileRecurrenceEditor messages */
     if (kendo.ui.MobileRecurrenceEditor) {
         kendo.ui.MobileRecurrenceEditor.prototype.options.messages =
@@ -1044,7 +1044,7 @@
             });
     }
 
-    /* ListBox messaages */
+    /* ListBox messages */
     if (kendo.ui.ListBox) {
         kendo.ui.ListBox.prototype.options.messages =
             $.extend(true, kendo.ui.ListBox.prototype.options.messages,{
@@ -1156,7 +1156,7 @@
             });
     }
 
-    /* kendo.ui.progress method */
+    /* Progress messages */
     if (kendo.ui.progress) {
         kendo.ui.progress.messages =
             $.extend(true, kendo.ui.progress.messages, {
@@ -1164,7 +1164,7 @@
             });
     }
 
-    /* Dialog */
+    /* Dialog messages */
     if (kendo.ui.Dialog) {
         kendo.ui.Dialog.prototype.options.messages =
             $.extend(true, kendo.ui.Dialog.prototype.options.localization, {
@@ -1172,7 +1172,7 @@
             });
     }
 
-    /* Calendar */
+    /* Calendar messages */
     if (kendo.ui.Calendar) {
         kendo.ui.Calendar.prototype.options.messages =
             $.extend(true, kendo.ui.Calendar.prototype.options.messages, {
@@ -1180,7 +1180,7 @@
             });
     }
 
-    /* Alert */
+    /* Alert messages */
     if (kendo.ui.Alert) {
         kendo.ui.Alert.prototype.options.messages =
             $.extend(true, kendo.ui.Alert.prototype.options.localization, {
@@ -1188,7 +1188,7 @@
             });
     }
 
-    /* Confirm */
+    /* Confirm messages */
     if (kendo.ui.Confirm) {
         kendo.ui.Confirm.prototype.options.messages =
             $.extend(true, kendo.ui.Confirm.prototype.options.localization, {
@@ -1197,7 +1197,7 @@
             });
     }
 
-    /* Prompt */
+    /* Prompt messages */
     if (kendo.ui.Prompt) {
         kendo.ui.Prompt.prototype.options.messages =
             $.extend(true, kendo.ui.Prompt.prototype.options.localization, {
@@ -1206,7 +1206,7 @@
             });
     }
 
-    /* DateInput */
+    /* DateInput messages */
     if (kendo.ui.DateInput) {
         kendo.ui.DateInput.prototype.options.messages =
             $.extend(true, kendo.ui.DateInput.prototype.options.messages, {
@@ -1223,7 +1223,7 @@
 
     /* Mobile Messages ------------------------------ */
 
-    /* Mobile Scroller */
+    /* Mobile Scroller messages */
     if (kendo.mobile.ui.Scroller) {
         kendo.mobile.ui.Scroller.prototype.options.messages =
             $.extend(true, kendo.mobile.ui.Scroller.prototype.options.messages, {
@@ -1233,7 +1233,7 @@
             });
     }
 
-    /* Mobile ListView */
+    /* Mobile ListView messages */
     if (kendo.mobile.ui.ListView) {
         kendo.mobile.ui.ListView.prototype.options.messages =
             $.extend(true, kendo.mobile.ui.ListView.prototype.options.messages, {
