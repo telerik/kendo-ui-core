@@ -16,7 +16,7 @@
                 symbol: "%"
             },
             currency: {
-                name: "Chinese Yuan",
+                name: "人民币",
                 abbr: "CNY",
                 pattern: ["$-n","$n"],
                 decimals: 2,
