@@ -33,7 +33,7 @@ The following example is an excerpt from the declaration of the **Orders** Grid&
         .ServerOperation(true)
         .PageSize(20)
 
-The most important part of the DataSource configuration is the `ServerOperation(true)` function call. The passing of `true` to this function makes the resulting client-side Kendo UI DataSource include any [filters](../http://docs.telerik.com/kendo-ui/api/javascript/data/datasource#methods-filter) that are applied to it in the request, which it sends to the server. In passing along any filters that need to be applied, the DataSource will also pass up any paging information (if it has been configured for it) to the server in its request.
+The most important part of the DataSource configuration is the `ServerOperation(true)` function call. The passing of `true` to this function makes the resulting client-side Kendo UI DataSource include any [filters](https://docs.telerik.com/kendo-ui/api/javascript/data/datasource/methods/filter) that are applied to it in the request, which it sends to the server. In passing along any filters that need to be applied, the DataSource will also pass up any paging information (if it has been configured for it) to the server in its request.
 
 For the full declaration for the **Orders** Grid, refer to **Views/Home/Index.cshtml**.
 
@@ -156,7 +156,7 @@ The following code snippets are located in **Scripts/home.js**.
         }
     };
 
-During its [setup](kendo-saleshub-customer-TreeView), a `select` event handler is configured for the customer TreeeView and the `window.SalesHub.CustomerTreeView_Select` event handler is stated.
+During its [setup](kendo-saleshub-customer-treeview), a `select` event handler is configured for the customer TreeeView and the `window.SalesHub.CustomerTreeView_Select` event handler is stated.
 
 ###### Example
 

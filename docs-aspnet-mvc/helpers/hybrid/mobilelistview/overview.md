@@ -245,7 +245,7 @@ You can reference a hybrid Layout instance by using the [jQuery.data()](http://a
 
 ## Event Handling
 
-You can subscribe to all hybrid ListView [events](../http://docs.telerik.com/kendo-ui/api/javascript/mobile/ui/listview#events).
+You can subscribe to all hybrid ListView [events](https://docs.telerik.com/kendo-ui/api/javascript/ui/listview#events).
 
 ### By Handler Name
 
