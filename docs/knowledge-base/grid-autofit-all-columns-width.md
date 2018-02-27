@@ -1,16 +1,16 @@
 ---
-title: Automatically Fit Grid Columns Width to Show All Data
-description: An example on how to automatically fit all Grid columns width to show all data
+title: Automatically Fit Width of Grid Columns to Show All Data
+description: An example on how to automatically fit the width of all Kendo UI Grid columns to show all data.
 type: how-to
-page_title: Automatically Fit Grid Columns Witdh to Show All Data
+page_title: Automatically Fit Column Width to Show All Data | Kendo UI Grid
 slug: grid-autofit-all-columns-width
 tags: grid, autofit, auto, fit, automatically, columns, width, show, all, data
 ticketid: 1148885
 res_type: kb
-
 ---
 
 ## Environment
+
 <table>
  <tr>
   <td>Product</td>
@@ -36,9 +36,10 @@ How can I have the columns of a Kendo UI Grid automatically fit their width to a
 
 ## Solution
 
-In order to automatically fit the columns of a Kendo UI Grid, we subscribe to the `dataBound` event and take advantage of the `autoFitColumn` method:
+1. Subscribe to the `dataBound` event.
+1. Use the `autoFitColumn` method.
 
-If you just want to set their `checked` property to `true`, you could do this on the `dataBound` event:
+If you have to only set the `checked` property of the columns to `true`, use the `dataBound` event.
 
 ```html
   <div id="example">
@@ -153,6 +154,6 @@ If you just want to set their `checked` property to `true`, you could do this on
 
 ## See Also
 
-* [autoFitColumn method API Reference.](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid/methods/autofitcolumn)
-* [Kendo UI Grid Appearance Width Section.](https://docs.telerik.com/kendo-ui/controls/data-management/grid/appearance#width)
-* [dataBound event API Reference.](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid/events/databound)
+* [API Reference of the autoFitColumn Method](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid/methods/autofitcolumn)
+* [Appearance of the Grid](https://docs.telerik.com/kendo-ui/controls/data-management/grid/appearance#width)
+* [API Reference of the dataBound Event](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid/events/databound)

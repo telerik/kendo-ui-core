@@ -1,16 +1,16 @@
 ---
-title: Adjust Kendo Grid Row and Header Height of to Make them Smaller
-description: An example on how to make the height of Kendo Grid Rows and Header smaller
+title: Adjust Grid Row and Header Height to Make Them Smaller
+description: An example on how to make the height of the Kendo UI Grid rows and header smaller.
 type: how-to
-page_title: Adjust Kendo Grid Row and Header Height to Make them Smaller
+page_title: Adjust Row and Header Height to Make Them Smaller | Kendo UI Grid
 slug: grid-adjust-rows-and-header-height
 tags: grid, row, rows, header, smaller, size, adjust, css
 ticketid: 1151240
 res_type: kb
-
 ---
 
 ## Environment
+
 <table>
  <tr>
   <td>Product</td>
@@ -32,11 +32,11 @@ res_type: kb
 
 ## Description
 
-I'm trying to squeeze as much real-estate from my grid as possible, so I want to set the row heights (header and grid rows) to a minimum or specific height. How would I do that?
+How can I set the heights of the Grid rows, including the header, to a minimum or a specific height value?
 
 ## Solution
 
-In order to adjust the size of rows in both the body and the header, we take advantage of CSS and specify the `height` and `padding` properties for `th` elements inside the grid's `thead` and `tr` and `td` elements inside the grid's `tbody`:
+To adjust the size of the rows in both the body and the header, use CSS and specify the `height` and `padding` properties for the `th` elements inside the `thead` and `tr`, and the `td` elements inside the `tbody` of the Grid.
 
 ```html
 <div id="example">
@@ -117,4 +117,4 @@ In order to adjust the size of rows in both the body and the header, we take adv
 
 ## See Also
 
-* [Kendo UI Grid Appearance Guide on Height.](https://docs.telerik.com/kendo-ui/controls/data-management/grid/appearance#height)
+* [Setting the Height of the Kendo UI Grid](https://docs.telerik.com/kendo-ui/controls/data-management/grid/appearance#height)

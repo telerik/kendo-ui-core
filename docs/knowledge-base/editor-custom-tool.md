@@ -1,8 +1,8 @@
 ---
-title: Create custom tool
-description: An example on how to create a custom tool for the Editor.
+title: Create Custom Editor Tool
+description: An example on how to create a custom tool for the Kendo UI Editor.
 type: how-to
-page_title: Create custom Editor tool | Kendo UI Editor
+page_title: Create Custom Tool | Kendo UI Editor
 slug: editor-custom-tool
 tags: kendo, kendo-ui, editor, tool, custom-tool
 ticketid: 1142213
@@ -10,6 +10,7 @@ res_type: kb
 ---
 
 ## Environment
+
 <table>
 	<tr>
 		<td>Product Version</td>
@@ -24,11 +25,11 @@ res_type: kb
 
 ## Description
 
-Do you have a suggestion on how I could add a font-weight tool to the Editor, which value changes based on the selected font.
+How can I add a font-weight tool to the Editor whose value changes based on the selected font?
 
 ## Solution
 
-To achieve the desired result, a new tool for the Kendo UI Editor is registered as follows:
+Register a new tool for the Editor.
 
 ```html
 <textarea id="editor" rows="10" cols="30" style="width:100%;height:400px">
@@ -84,4 +85,5 @@ To achieve the desired result, a new tool for the Kendo UI Editor is registered 
 ```
 
 ## See Also
-* [API Reference of the Editor](https://docs.telerik.com/kendo-ui/api/javascript/ui/editor).
+
+* [API Reference of the Editor](https://docs.telerik.com/kendo-ui/api/javascript/ui/editor)

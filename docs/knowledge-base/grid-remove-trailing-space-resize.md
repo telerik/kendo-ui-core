@@ -1,8 +1,8 @@
 ---
 title: Remove Trailing Space When Resizing Grid Columns
-description: An example on how to fill empty space when resizing columns in Kendo UI Grid.
+description: An example on how to fill the empty space when the columns in the Kendo UI Grid are resized.
 type: how-to
-page_title: Remove empty space in Grid on resize | Kendo UI Grid
+page_title: Remove Empty Space on Resizing | Kendo UI Grid
 slug: grid-remove-trailing-space-resize
 tags: grid, resize, column, empty, space, blank, trailing, size
 ticketid: 1084792
@@ -25,14 +25,11 @@ component: grid
 
 ## Description
 
-I have a Grid with resizable columns. When the columns are resized to less than the Grid width there is blank space after the last column.
+How can I avoid the rendering of the blank space after the last column when the columns are resized to less than the width of a resizable Grid?
 
 ## Solution
 
-To remove the empty space that can be observed when columns are resized you can add empty column to the Grid. The width for it can be calculated manually so it fills the available space when columns are resized. 
-
-If the columns are wider than the Grid the empty column would be hidden.
-
+Add an empty column to the Grid. You can manually calculate its width, so that it fills the available space when the columns are resized. If the columns are wider than the Grid, the empty column is hidden.
 
 ```html
 <style>

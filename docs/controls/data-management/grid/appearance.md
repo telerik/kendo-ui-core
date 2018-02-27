@@ -217,7 +217,7 @@ If the total number of items is large and the scrolling is fast, the table of th
 * Refreshing or replacing the Grid data in the virtual mode has to be accompanied by resetting the position of the virtual scrollbar to zero&mdash;for example, by using `$('#GridID .k-scrollbar').scrollTop(0);`. In some scenarios, you might also need to call the [`refresh()` method](http://docs.telerik.com/kendo-ui/api/javascript/ui/grid/methods/refresh).
 * Programmatic scrolling to a particular Grid row is not supported when virtual scrolling is enabled, because it is not possible to reliably predict the exact scroll offset of the row.
 * When the Grid is `navigatable`, keyboard navigation supports only the `Up Arrow` and `Down Arrow` keys. The `Page Up` and `Page Down` key scrolling is not supported.
-* The Grid does not persist [selection](#selection) when virtual scrolling occurs. To achieve this behavior, [use this custom implementation]({% slug howto_persist_row_selection_paging_sorting_filtering_grid %}). The new [persistSelection](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid/configuration/persistselection) can work with single selection using the following [example]({%slug grid-virtual-scrolling-with-persist-single-selection %}). The multiple selection is not recomended as the old page is removed from the DOM when scrolling and this can breake the selection as the DOM elements do not exist after scrolling to the new page.
+* The Grid does not persist [selection](#selection) when virtual scrolling occurs. To achieve this behavior, [use this custom implementation]({% slug howto_persist_row_selection_paging_sorting_filtering_grid %}). The new [`persistSelection`](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid/configuration/persistselection) can work with the single selection functionality by using the following [example]({% slug grid-virtual-scrolling-with-persist-single-selection %}). The multiple selection functionality is not recommended as the old page is removed from the DOM when scrolling occurs which can break the selection as the DOM elements do not exist after the scrolling reaches the new page.
 
 When virtual scrolling is not supported or recommended, revert to standard paging or non-virtual scrolling without paging, depending on the number of data items.
 
@@ -499,7 +499,7 @@ Frozen columns rely on row height synchronization between the frozen and non-fro
 
 It is possible to get a table row in the Grid by the ID of the data item. To achieve this behavior, follow the steps below:
 
-1. Make sure the [ID field is defined in the model configuration](/api/javascript/data/model/configuration/example) of the Grid dataSource.
+1. Make sure the [ID field is defined in the model configuration](/api/javascript/data/model) of the Grid dataSource.
 2. Retrieve the row model, the model UID, and the Grid table row consecutively:
 
 ###### Example

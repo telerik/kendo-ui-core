@@ -5100,7 +5100,7 @@ The text of the title.
 The visibility of the title.
 
 ### pdf `Object`
-Configures the export settings for the [saveAsPDF](/api/javascript/dataviz/ui/stock-chart/methods/saveaspdf) method.
+Configures the export settings for the [saveAsPDF](/api/javascript/dataviz/ui/chart/methods/saveaspdf) method.
 
 ### pdf.author `String` *(default: null)*
 The author of the PDF document.

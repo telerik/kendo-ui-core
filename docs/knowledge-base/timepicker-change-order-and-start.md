@@ -1,16 +1,16 @@
 ---
 title: Change Order and Start Time in TimePicker Options List
-description: An example on how set a different time as the start time of a TimePicker and change the order of the options in the list
+description: An example on how set a different time as the start time and change the order of the options in the list of the Kendo UI TimePicker.
 type: how-to
-page_title: Change Order and Start Time in TimePicker Options List
+page_title: Change Order and Start Time in the Options List | Kendo UI TimePicker
 slug: timepicker-change-order-and-start
 tags: timepicker, start, order, change, time, picker, list
 ticketid: 1153029
 res_type: kb
-
 ---
 
 ## Environment
+
 <table>
  <tr>
   <td>Product</td>
@@ -32,11 +32,12 @@ res_type: kb
 
 ## Description
 
-I'm working on an application that uses the Kendo UI TimePicker and would like the options on its list to start at a specific time while showing the skipped ones at the end of the list.
+How can I set the options on the list of the TimePicker to start at a specific time while the skipped ones are rendered at the end of the list?
 
 ## Solution
 
-The described functionality can be implemented by subscribing to the `open` event of the Kendo UI TimePicker and traversing the items in the list while using jQuery to reorder them:
+1. Subscribe to the `open` event of the TimePicker.
+1. Traverse the items in the list while you use jQuery to reorder them.
 
 ```html
 <input id="timepicker" />
@@ -58,4 +59,4 @@ The described functionality can be implemented by subscribing to the `open` even
 
 ## See Also
 
-* [open event API Reference.](https://docs.telerik.com/kendo-ui/api/javascript/ui/timepicker/events/open)
+* [API Reference of the open Event](https://docs.telerik.com/kendo-ui/api/javascript/ui/timepicker/events/open)

@@ -1,16 +1,16 @@
 ---
-title: Lock and Unlock Grid Columns Using Toolbar Instead of Column Menu
-description: An example on how lock and unlock Grid columns using the Toolbar instead of a Column Menu
+title: Lock and Unlock Grid Columns by Using Toolbar instead of Column Menu
+description: An example on how to lock and unlock Kendo UI Grid columns by using the Toolbar instead of the Column Menu.
 type: how-to
-page_title: Lock and Unlock Grid Columns Using Toolbar Instead of Column Menu
+page_title: Lock and Unlock Columns with Toolbar instead of Column Menu | Kendo UI Grid
 slug: grid-lock-unlock-using-toolbar
 tags: grid, lock, unlock, toolbar, column, menu
 ticketid: 1150311
 res_type: kb
-
 ---
 
 ## Environment
+
 <table>
  <tr>
   <td>Product</td>
@@ -32,11 +32,13 @@ res_type: kb
 
 ## Description
 
-I'm working on an application that uses the Kendo UI Grid and doesn't need the Column Menu; how can I lock and unlock columns using checkboxes in the Toolbar instead?
+My Grid does not need the Column Menu anymore.
+
+How can I lock and unlock columns by using checkboxes in the Toolbar instead?
 
 ## Solution
 
-The functionality you describe can be implemented by taking advantage of the `lockColumn` and `unlockColumn` methods. In order to make changes through a custom control in the Toolbar of the Grid, we can use a custom Toolbar Template:
+Use the `lockColumn` and `unlockColumn` methods. To make changes through a custom control in the Toolbar of the Grid, use a custom Toolbar template.
 
 ```html
 <div id="grid"></div>
@@ -69,9 +71,9 @@ The functionality you describe can be implemented by taking advantage of the `lo
           $(this).attr("disabled", false);
         });          
       }
-      
+
       var grid = $("#grid").data("kendoGrid");
-      
+
       if (document.getElementById(id).checked) {
         grid.lockColumn(field);
       } else {
@@ -166,7 +168,7 @@ The functionality you describe can be implemented by taking advantage of the `lo
 
 ## See Also
 
-* [lockColumn method API Reference.](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid/methods/lockcolumn)
-* [unlockColumn method API Reference.](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid/methods/unlockcolumn)
-* [Kendo UI Templates Overview.](https://docs.telerik.com/kendo-ui/framework/templates/overview)
-* [Kendo UI Grid Toolbar Template Demo.](https://demos.telerik.com/kendo-ui/grid/toolbar-template)
+* [API Reference of the lockColumn Method](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid/methods/lockcolumn)
+* [API Reference of the unlockColumn Method](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid/methods/unlockcolumn)
+* [Kendo UI Templates Overview](https://docs.telerik.com/kendo-ui/framework/templates/overview)
+* [Kendo UI Grid Toolbar Template Demo](https://demos.telerik.com/kendo-ui/grid/toolbar-template)

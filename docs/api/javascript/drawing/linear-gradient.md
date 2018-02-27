@@ -67,7 +67,7 @@ Contains [GradientStop](/api/javascript/drawing/gradient-stop) instances.
 
 ### addStop
 Adds a color stop to the gradient.
-Inherited from [Gradient.addStop](/api/javascript/drawwing/gradient/methods/addstop)
+Inherited from [Gradient.addStop](/api/javascript/drawing/gradient/methods/addstop)
 
 #### Parameters
 
@@ -115,7 +115,7 @@ For example [0, 0] is top left and [1, 1] is bottom right.
 
 ### removeStop
 Removes a color stop from the gradient.
-Inherited from [Gradient.removeStop](/api/javascript/drawwing/gradient/methods/removestop)
+Inherited from [Gradient.removeStop](/api/javascript/drawing/gradient/methods/removestop)
 
 #### Parameters
 
