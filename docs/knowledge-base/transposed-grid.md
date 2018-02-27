@@ -1,8 +1,8 @@
 ---
-title: Transpose Grid data
-description: An example on how to transpose the Kendo UI Grid data.
+title: Transpose Grid Data
+description: An example on how to transpose the data of a Kendo UI Grid.
 type: how-to
-page_title: Transpose Grid data | Kendo UI Grid
+page_title: Transpose Data | Kendo UI Grid
 slug: transposed-grid
 tags: vertical, grid, transpose, data, transposed, columns, rows, change, orientation, switch
 res_type: kb

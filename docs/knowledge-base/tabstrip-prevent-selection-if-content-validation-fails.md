@@ -1,8 +1,8 @@
 ---
-title: Prevent tab selection if content validation fails
-description: An example on how to prevent tab selection upon validation errors in the tab content for the TabStrip
+title: Prevent Tab Selection When Content Validation Fails
+description: An example on how to prevent the tab selection upon validation errors in the tab content for the Kendo UI TabStrip.
 type: how-to
-page_title: Prevent tab selection if content validation fails | Kendo UI TabStrip
+page_title: Prevent Tab Selection When Validation Error Occurs | Kendo UI TabStrip
 slug: tabstrip-prevent-selection-if-content-validation-fails
 tags: kendo, kendo-ui, tabstrip, prevent, selection, validation
 ticketid: 769370
@@ -10,6 +10,7 @@ res_type: kb
 ---
 
 ## Environment
+
 <table>
 	<tr>
 		<td>Product Version</td>
@@ -24,11 +25,11 @@ res_type: kb
 
 ## Description
 
-I am trying to validate current tab on selection of other tab and prevent tab active if current tab validation is not passing.
+How can I validate the current tab when the user selects another tab and also prevent user interaction with the active tab if the current tab validation is not passing?
 
 ## Solution
 
-Use the TabStrip's select event to check for validation errors and prevent selection.
+To check for validation errors and prevent the selection, use the `select` event of the TabStrip.
 
 ```html
 <div id="tabstrip">
@@ -70,4 +71,5 @@ Use the TabStrip's select event to check for validation errors and prevent selec
 ```
 
 ## See Also
-* [API Reference of the TabStrip](https://docs.telerik.com/kendo-ui/api/javascript/ui/tabstrip).
+
+* [API Reference of the TabStrip](https://docs.telerik.com/kendo-ui/api/javascript/ui/tabstrip)

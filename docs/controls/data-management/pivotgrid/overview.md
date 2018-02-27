@@ -16,7 +16,7 @@ It allows the user to perform a complex analysis on the visualized data. The wid
 
 - [Get Acquainted with the PivotGrid Fundamentals](/web/pivotgrid/fundamentals)
 - [Set Up an OLAP Cube](/web/pivotgrid/olap-cube-setup), or
-- [Use Our OLAP Service](http://demos.telerik.com/olap/msmdpump.dll)
+- Use the Kendo UI OLAP Service&mdash;`http://demos.telerik.com/olap/msmdpump.dll` (the URL does not open directly in the browser).
 
 ## Getting Started
 

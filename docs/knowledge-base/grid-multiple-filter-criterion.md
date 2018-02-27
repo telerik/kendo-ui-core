@@ -1,8 +1,8 @@
 ---
-title: Create a filter widget with multiple filter criterion
-description: An example on how to create a filter widget with multiple filter criterion.
+title: Create Filter Widgets with Multiple Filter Criteria in Grid
+description: An example on how to create a filter widget with a multiple filter criterion in the Kendo UI Grid.
 type: how-to
-page_title: Create a filter widget with multiple filter criterion | Kendo UI Grid
+page_title: Create Filter Widgets with Multiple Filter Criteria | Kendo UI Grid
 slug: grid-multiple-filter-criterion
 tags: grid, multiple, filter, filters, criterion, extra, more, filtering, filtratrion, many
 res_type: kb
@@ -24,12 +24,12 @@ component: grid
 
 ## Description
 
-How can I create a filter widget with multiple filter criterion?
+How can I create a filter widget with a multiple filter criterion in the Grid?
 
 ## Solution
 
-Within the [filterMenuInit](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid/events/filtermenuinit) event handler add the required number of inputs and when the `click` event of the submit button is clicked build the filter query and filter the data source using the [flter method](https://docs.telerik.com/kendo-ui/api/javascript/data/datasource#methods-filter).
-
+1. In the [`filterMenuInit`](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid/events/filtermenuinit) event handler, add the required number of inputs.
+1. When the `click` event of the **Submit** button is clicked, build the filter query and filter the data source by using the [`flter`](https://docs.telerik.com/kendo-ui/api/javascript/data/datasource#methods-filter) method.
 
 ```html
     <h1>Ship Name column has custom filte UI</h1>
@@ -115,7 +115,7 @@ Within the [filterMenuInit](https://docs.telerik.com/kendo-ui/api/javascript/ui/
               }
 
 
-              var submit = $('<button type="submit" class="k-button k-primary">Filter</button>') 
+              var submit = $('<button type="submit" class="k-button k-primary">Filter</button>')
 
               $('<div >')
                 .append(submit)

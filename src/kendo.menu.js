@@ -1006,6 +1006,23 @@ var __meta__ = { // jshint ignore:line
                 }
             }
 
+            var visiblePopups = ">.k-popup:visible,>.k-animation-container>.k-popup:visible";
+            var closePopup = function () {
+                var popup = $(this).data(KENDOPOPUP);
+                if (popup) {
+                    // Use the built-in close method to play the hoverDelay from the options
+                    that.close($(this).closest("li.k-item"), true);
+                }
+            };
+
+            element.siblings()
+                   .find(visiblePopups)
+                   .each(closePopup);
+
+            if (overflowWrapper) {
+                element.find(visiblePopups).each(closePopup);
+            }
+
             if (that.options.openOnClick) {
                 that.clicked = true;
             }

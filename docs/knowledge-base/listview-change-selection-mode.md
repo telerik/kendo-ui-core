@@ -1,10 +1,10 @@
 ---
-title: Change selection mode in ListView
-description: An example on how to change the selection mode in ListView.
+title: Change Selection Mode in ListView
+description: An example on how to change the selection mode of the Kendo UI ListView.
 type: how-to
-page_title: Switch between single and multiple selection | Kendo UI ListView
+page_title: Switch between Single and Multiple Selection | Kendo UI ListView
 slug: listview-change-selection-mode
-tags: listview, select, mode, single, multiple, selection, change, switch, dynamic, 
+tags: listview, select, mode, single, multiple, selection, change, switch, dynamic,
 res_type: kb
 component: listview
 ---
@@ -24,15 +24,14 @@ component: listview
 
 ## Description
 
-How can I allow the users to change the selection mode in ListView based on a selection from a DropDownList or another component?
+How can I allow the user to change the selection mode in the ListView based on a selection from a DropDownList or another component?
 
 ## Solution
 
-1. Handle the `change` event for the DropDownList or the other component used for changing the selection mode.
+1. Handle the `change` event for the DropDownList or the other component that is used for changing the selection mode.
 1. Get the selected selection mode value.
-1. Call the `setOptions()` method with settings configuring the new selection mode.
-1. Call the [`refresh()`](https://docs.telerik.com/kendo-ui/api/javascript/ui/listview#methods-refresh) method for ListView.
-
+1. Call the `setOptions()` method with settings that configure the new selection mode.
+1. Call the [`refresh()`](https://docs.telerik.com/kendo-ui/api/javascript/ui/listview#methods-refresh) method for the ListView.
 
 ```html
 <script src="https://demos.telerik.com/kendo-ui/content/shared/js/products.js"></script>
@@ -144,5 +143,3 @@ How can I allow the users to change the selection mode in ListView based on a se
     }
 </style>
 ```
-
-
