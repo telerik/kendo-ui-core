@@ -78,7 +78,7 @@ Below are listed the steps for you to follow when configuring the hybrid Kendo U
 
 ## Event Handling
 
-You can subscribe to all hybrid View [events](http://docs.telerik.com/kendo-ui/api/javascript/mobile/ui/view#events).
+You can subscribe to all [hybrid View events](https://docs.telerik.com/kendo-ui/api/javascript/mobile/ui/view#events).
 
 ### By Handler Name
 
@@ -121,7 +121,7 @@ The following example demonstrates how to subscribe to events by a handler name.
 
 ### Instances
 
-You can reference a hybrid View instance by using the [jQuery.data()](http://api.jquery.com/jQuery.data/) method and the value specified through the `Name()` method. Once a reference is established, use the [hybrid View API](http://docs.telerik.com/kendo-ui/api/javascript/mobile/ui/view#methods) to control its behavior.
+You can reference a hybrid View instance by using the [jQuery.data()](http://api.jquery.com/jQuery.data/) method and the value specified through the `Name()` method. Once a reference is established, use the [hybrid View API](https://docs.telerik.com/kendo-ui/api/javascript/mobile/ui/view#events) to control its behavior.
 
 ###### Example
 
