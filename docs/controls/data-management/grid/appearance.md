@@ -499,7 +499,7 @@ Frozen columns rely on row height synchronization between the frozen and non-fro
 
 It is possible to get a table row in the Grid by the ID of the data item. To achieve this behavior, follow the steps below:
 
-1. Make sure the [ID field is defined in the model configuration](/api/javascript/data/model/configuration/example) of the Grid dataSource.
+1. Make sure the [ID field is defined in the model configuration](/api/javascript/data/model) of the Grid dataSource.
 2. Retrieve the row model, the model UID, and the Grid table row consecutively:
 
 ###### Example

@@ -36,7 +36,7 @@ For example, the chart type can be changed from a bar graph to a line graph by u
 
 **Figure 4. The side buttons through which the graphic representation of the data can be changed**
 
-![sales-by-genre-bar-button-highlight](/tutorials/tutorial-kendo-music-store/music-store-dashboard/images/sales-by-genre-bar-button-highlight.png)
+![sales-by-genre-bar-button-highlight](/tutorials/tutorial-kendo-music-stores/music-store-dashboard/images/sales-by-genre-bar-button-highlight.png)
 
 The **Sales By Genre** and **Searches By Genre** charts are built similarly, with simple declarative markup and powerful JavaScript piping. The chart is contained within its own `<div>`, with an accompanying `<span>` that contains the buttons for changing the chart type. The **Sales By Genre** chart is constructed as demonstrated in the example below.
 

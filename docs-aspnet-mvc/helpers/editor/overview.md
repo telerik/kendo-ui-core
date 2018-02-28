@@ -146,7 +146,7 @@ To reference an existing Kendo UI Editor instance, use the [`jQuery.data()`](htt
 * [Import and Export Various Documents]({% slug overview_importexportdpl_aspnetmvc %})
 * [Fundamentals of Telerik UI for ASP.NET MVC]({% slug fundamentals_aspnetmvc %})
 * [Scaffolding in Telerik UI for ASP.NET MVC]({% slug scaffolding_aspnetmvc %})
-* [Overview of the Kendo UI Editor Widget](https://docs.telerik.com/kendo-ui/controls/editors/editor/overview)
+* [Overview of the Kendo UI Editor Widget](http://docs.telerik.com/kendo-uii/controls/editors/editor/overview)
 * [Telerik UI for ASP.NET MVC API Reference Folder](http://docs.telerik.com/aspnet-mvc/api/Kendo.Mvc/AggregateFunction)
 * [Telerik UI for ASP.NET MVC HtmlHelpers Folder]({% slug overview_barcodehelper_aspnetmvc %})
 * [Tutorials on Telerik UI for ASP.NET MVC]({% slug overview_timeefficiencyapp_aspnetmvc6 %})
