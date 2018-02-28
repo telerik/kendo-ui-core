@@ -1257,10 +1257,6 @@ Omitting the array and specifying a single series is also acceptable.
     });
     </script>
 
-### navigator.visible `Boolean`*(default: true)*
-
-The visibility of the navigator.
-
 ### navigator.series.type `String`
 
 The type of the series. Available types:
@@ -2286,6 +2282,11 @@ Template variables:
 ### navigator.hint.format `String`
 
 The format of the hint.
+
+### navigator.visible `Boolean`*(default: true)*
+
+The visibility of the navigator.
+
 
 #### Example
 
@@ -5575,7 +5576,7 @@ The supported values are:
 * "svg" - renders the widget as inline SVG document, if available
 * "canvas" - renders the widget as a Canvas element, if available.
 
-### Example - Render as Canvas, if supported
+#### Example - Render as Canvas, if supported
 
     <div id="stock-chart"></div>
     <script>
