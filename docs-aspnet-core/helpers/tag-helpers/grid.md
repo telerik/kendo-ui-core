@@ -143,6 +143,83 @@ You can subscribe to all Grid [events](https://docs.telerik.com/kendo-ui/api/jav
    </script>
 ```
 
+### Editing
+
+The code snippet below shows a Grid that has CRUD operations configured. 
+
+```tab-tagHelper
+<kendo-grid name="grid" height="550">
+    <datasource  page-size="20" type="DataSourceTagHelperType.Custom" custom-type="odata" batch="true">
+        <transport>
+            <read url="https://demos.telerik.com/kendo-ui/service/Northwind.svc/Products" />
+            <update url="https://demos.telerik.com/kendo-ui/service/Northwind.svc/Products/Update"  />
+            <destroy url="https://demos.telerik.com/kendo-ui/service/Northwind.svc/Products/Destroy"   />
+            <create url="https://demos.telerik.com/kendo-ui/service/Northwind.svc/Products/Create" />
+        </transport>
+        <schema  >
+            <model id="ProductID">
+                <fields>
+                    <field name="ProductName"></field>
+                    <field name="UnitPrice" type="number"></field>
+                    <field name="UnitsInStock" type="number"></field>
+                </fields>
+            </model>
+        </schema>
+    </datasource>
+    <editable mode="incell" />
+    <pageable button-count="5" refresh="true" page-sizes="new int[] { 5, 10, 20 }">
+    </pageable>
+    <toolbar>
+        <toolbar-button name="create" text="Add new record"></toolbar-button>
+        <toolbar-button name="save" text="Save Changes"></toolbar-button>
+        <toolbar-button name="cancel" text="Cancel Changes"></toolbar-button>
+    </toolbar>
+    <columns>
+        <column field="ProductName" title="Product Name" width="240" />
+        <column field="UnitPrice" title="Unit Price" />
+        <column field="UnitsInStock" title="Units In Stock" />
+        <column field="Discontinued" title="Discontinued" width="150" />
+        <column>
+            <commands>
+                <column-command text="Delete" name="destroy"></column-command>
+            </commands>
+        </column>
+    </columns>
+</kendo-grid>
+```
+```tab-cshtml
+@(Html.Kendo().Grid<Kendo.Mvc.Examples.Models.ProductViewModel>()    
+    .Name("Grid")    
+    .Columns(columns => {        
+        columns.Bound(p => p.ProductName);
+        columns.Bound(p => p.UnitPrice).Width(140);
+        columns.Bound(p => p.UnitsInStock).Width(140);
+        columns.Bound(p => p.Discontinued).Width(100);
+        columns.Command(command => command.Destroy()).Width(150);
+    })
+    .ToolBar(toolbar => {
+        toolbar.Create();
+        toolbar.Save();        
+    })
+    .Editable(editable => editable.Mode(GridEditMode.InCell))
+    .Pageable()
+    .Sortable()
+    .Scrollable()
+    .DataSource(dataSource => dataSource        
+        .Ajax()         
+        .Batch(true)
+        .PageSize(20)
+        .ServerOperation(false)                
+        .Events(events => events.Error("error_handler"))
+        .Model(model => model.Id(p => p.ProductID))
+        .Create("Editing_Create", "Grid")
+        .Read("Editing_Read", "Grid")
+        .Update("Editing_Update", "Grid")
+        .Destroy("Editing_Destroy", "Grid")
+    )
+)
+```
+
 ## Hierarchy
 
 The Grid supports hierarchy and requirea a [`DetailInit`](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid/events/detailinit) function which will initialize the detail Grids by using the [Kendo UI Grid for jQuery](https://docs.telerik.com/kendo-ui/controls/data-management/grid/overview).
@@ -241,6 +318,152 @@ The Grid supports hierarchy and requirea a [`DetailInit`](https://docs.telerik.c
                     .ToClientTemplate()
             )
         </script>
+```
+
+### Editing
+
+The Kendo UI grid widget supports data editing operations (create, update, destroy) via a simple configuration of its data source. All you have to do to enable data editing capabilities for the widget is to:
+
+* set the grid's `editable` configuration option
+* declare field definitions through the `DataSource schema`
+* configure the DataSource for performing CRUD data operations defining its `transport->create/update/destroy` attributes
+
+
+```tab-tagHelper
+<kendo-grid name="grid" height="550">
+    <datasource  page-size="20" type="DataSourceTagHelperType.Custom" custom-type="odata" batch="true">
+        <transport>
+            <read url="https://demos.telerik.com/kendo-ui/service/Northwind.svc/Products" />
+            <update url="https://demos.telerik.com/kendo-ui/service/Northwind.svc/Products/Update"  />
+            <destroy url="https://demos.telerik.com/kendo-ui/service/Northwind.svc/Products/Destroy"   />
+            <create url="https://demos.telerik.com/kendo-ui/service/Northwind.svc/Products/Create" />
+        </transport>
+        <schema  >
+            <model id="ProductID">
+                <fields>
+                    <field name="ProductName"></field>
+                    <field name="UnitPrice" type="number"></field>
+                    <field name="UnitsInStock" type="number"></field>
+                </fields>
+            </model>
+        </schema>
+    </datasource>
+    <editable mode="incell" />
+    <pageable button-count="5" refresh="true" page-sizes="new int[] { 5, 10, 20 }">
+    </pageable>
+    <toolbar>
+        <toolbar-button name="create" text="Add new record"></toolbar-button>
+        <toolbar-button name="save" text="Save Changes"></toolbar-button>
+        <toolbar-button name="cancel" text="Cancel Changes"></toolbar-button>
+    </toolbar>
+    <columns>
+        <column field="ProductName" title="Product Name" width="240" />
+        <column field="UnitPrice" title="Unit Price" />
+        <column field="UnitsInStock" title="Units In Stock" />
+        <column field="Discontinued" title="Discontinued" width="150" />
+        <column>
+            <commands>
+                <column-command text="Delete" name="destroy"></column-command>
+            </commands>
+        </column>
+    </columns>
+</kendo-grid>
+```
+```tab-cshtml
+@(Html.Kendo().Grid<Kendo.Mvc.Examples.Models.ProductViewModel>()    
+    .Name("Grid")    
+    .Columns(columns => {        
+        columns.Bound(p => p.ProductName);
+        columns.Bound(p => p.UnitPrice).Width(140);
+        columns.Bound(p => p.UnitsInStock).Width(140);
+        columns.Bound(p => p.Discontinued).Width(100);
+        columns.Command(command => command.Destroy()).Width(150);
+    })
+    .ToolBar(toolbar => {
+        toolbar.Create();
+        toolbar.Save();        
+    })
+    .Editable(editable => editable.Mode(GridEditMode.InCell))
+    .Pageable()
+    .Navigatable()
+    .Sortable()
+    .Scrollable()
+    .DataSource(dataSource => dataSource        
+        .Ajax()         
+        .Batch(true)
+        .PageSize(20)
+        .ServerOperation(false)                
+        .Events(events => events.Error("error_handler"))
+        .Model(model => model.Id(p => p.ProductID))
+        .Create("Editing_Create", "Grid")
+        .Read("Editing_Read", "Grid")
+        .Update("Editing_Update", "Grid")
+        .Destroy("Editing_Destroy", "Grid")
+    )
+)
+```
+
+## Editing custom editor
+
+The sample below demonstrates how to set a custom editor (Kendo UI dropdown list in this case) as grid column editor by specifying the `ProductName` column's `editor` field. The value of this field points to a JavaScript function which instantiates the column editor for the corresponding column cells.
+
+###### Example
+
+```tab-tagHelper
+<kendo-grid name="grid" height="550">
+    <datasource  page-size="20">
+        <transport>
+            <read url="/Grid/Editing_Read" />
+            <update url="/Grid/Editing_Update" type="POST" />
+
+
+        </transport>
+        <schema  data="Data" total="Total">
+            <model id="ProductID">
+                <fields>
+                    <field name="ProductName" type="string"></field>
+                    <field name="UnitPrice" type="number"></field>
+                    <field name="UnitsInStock" type="number"></field>
+                    <field name="Discontinued" type="boolean"></field>
+                </fields>
+            </model>
+        </schema>
+    </datasource>
+    <groupable enabled="true" />
+    <editable mode="inline" enabled="true" />
+    <sortable enabled="true" />    
+    <pageable button-count="5" refresh="true" page-sizes="new int[] { 5, 10, 20 }">
+    </pageable>
+    <filterable enabled="true" />
+    <columns>
+        <column field="ProductName" editor="productNameEditor" title="Product Name" width="240" />
+        <column field="UnitPrice" title="UnitPrice" />
+        <column field="UnitsInStock" title="UnitsInStock" />
+        <column field="Discontinued" title="Discontinued" width="150" />
+        <column>
+            <commands>
+                <column-command  name="edit"></column-command>
+            </commands>
+        </column>
+    </columns>
+</kendo-grid>
+
+<script>
+    function productNameEditor(container, options) {
+        var grid = $('#grid').data('kendoGrid');
+        $('<input required name="' + options.field + '"/>')
+            .appendTo(container)
+            .kendoDropDownList({
+                dataSource: {
+                    data: grid.dataSource.data().map(function (x) {
+                        return x.ProductName;
+                    }).filter(function (value,index, self) {
+                        return self.indexOf(value) === index;
+                    })
+                }
+            });
+    }
+</script>
 ```
 
 ## See Also
