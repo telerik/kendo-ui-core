@@ -147,7 +147,7 @@ The following example demonstrates how to subscribe to events using a template d
 
 ## See Also
 
-* [MediaPlayer HtmlHelper for ASP.NET MVC](http://docs.telerik.com/aspnet-mvc/mediaplayer/listbox/overview)
+* [MediaPlayer HtmlHelper for ASP.NET MVC](https://docs.telerik.com/aspnet-mvc/helpers/mediaplayer/overview)
 * [MediaPlayer Official Demos](http://demos.telerik.com/aspnet-core/mediaplayer/index)
 * [Overview of the Kendo UI MediaPlayer Widget](http://docs.telerik.com/kendo-ui/controls/media/mediaplayer/overview)
 * [MediaPlayer JavaScript API Reference](http://docs.telerik.com/kendo-ui/api/javascript/ui/mediaplayer)
