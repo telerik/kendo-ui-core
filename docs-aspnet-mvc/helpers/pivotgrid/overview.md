@@ -21,7 +21,7 @@ For more information on the OLAP concepts, refer to the articles about:
 - [PivotGrid Fundamentals](http://docs.telerik.com/kendo-ui/controls/data-management/pivotgrid/overview)
 - [Setting Up OLAP Cubes](http://docs.telerik.com/kendo-ui/controls/data-management/pivotgrid/fundamentals)
 
-To use Telerik OLAP service, refer to **https://demos.telerik.com/olap/msmdpump.dll**.
+To use Telerik OLAP service, refer to [http://demos.telerik.com/olap/msmdpump.dll](http://demos.telerik.com/olap/msmdpump.dll).
 
 The Kendo UI PivotGrid for ASP.NET MVC also supports server and Ajax data-binding to a flat data. The widget creates a client-side cube allowing to categorize the flat data.
 
@@ -32,7 +32,7 @@ For more information, refer to the demos on:
 
 ### Configuration
 
-Below are listed the steps for you to follow when configuring the Kendo UI PivotGrid for ASP.NET MVC and doing Ajax binding to an **Adventure Works** cube, hosted on **https://demos.telerik.com/olap/msmdpump.dll**.
+Below are listed the steps for you to follow when configuring the Kendo UI PivotGrid for ASP.NET MVC and doing Ajax binding to an **Adventure Works** cube, hosted on [http://demos.telerik.com/olap/msmdpump.dll](http://demos.telerik.com/olap/msmdpump.dll).
 
 1. Create a new ASP.NET MVC 4 application. If you have the [Telerik UI for ASP.NET MVC Visual Studio Extensions]({% slug overview_aspnetmvc %}#kendo-ui-for-asp.net-mvc-visual-studio-extensions) installed, create a Telerik UI for ASP.NET MVC application. Name the application `KendoPivotGrid`. If you decide not to use the Telerik UI for ASP.NET MVC Visual Studio Extensions, follow the steps from the [introductory article]({% slug overview_aspnetmvc %}) to add Telerik UI for ASP.NET MVC to the application.
 
@@ -57,7 +57,7 @@ Below are listed the steps for you to follow when configuring the Kendo UI Pivot
                               .Catalog("Adventure Works DW 2008R2")
                               .Cube("Adventure Works"))
                           .Read(read => read
-                              .Url("https://demos.telerik.com/olap/msmdpump.dll")
+                              .Url("http://demos.telerik.com/olap/msmdpump.dll")
                               .DataType("text")
                               .ContentType("text/xml")
                               .Type(HttpVerbs.Post)
@@ -83,7 +83,7 @@ Below are listed the steps for you to follow when configuring the Kendo UI Pivot
                             .Catalog("Adventure Works DW 2008R2")
                             .Cube("Adventure Works"))
                         .Read(read => read
-                            .Url("https://demos.telerik.com/olap/msmdpump.dll")
+                            .Url("http://demos.telerik.com/olap/msmdpump.dll")
                             .DataType("text")
                             .ContentType("text/xml")
                             .Type(HttpVerbs.Post)
