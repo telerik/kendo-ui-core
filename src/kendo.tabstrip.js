@@ -7,7 +7,13 @@ var __meta__ = { // jshint ignore:line
     name: "TabStrip",
     category: "web",
     description: "The TabStrip widget displays a collection of tabs with associated tab content.",
-    depends: [ "data" ]
+    depends: [ "data" ],
+    features: [ {
+        id: "tabstrip-fx",
+        name: "Animation",
+        description: "Support for animation",
+        depends: [ "fx" ]
+    } ]
 };
 
 (function ($, undefined) {
