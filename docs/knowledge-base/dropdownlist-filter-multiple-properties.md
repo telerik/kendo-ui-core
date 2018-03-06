@@ -60,8 +60,8 @@ How can I filter the DropDownList items by multiple properties?
                     }
                 },
               	filtering: function(ev){
-                	var filterValue = ev.filter.value;
-                  ev.preventDefault();
+                	var filterValue = ev.filter != undefined ? ev.filter.value : "";
+                    ev.preventDefault();
 
                   this.dataSource.filter({
                     logic: "or",
