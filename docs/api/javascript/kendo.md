@@ -108,83 +108,6 @@ The View-Model which the elements are bound to. Wrapped as an instance of `kendo
 Optional namespace to look in when instantiating Kendo UI widgets. The valid namespaces are `kendo.ui`, `kendo.dataviz.ui` and `kendo.mobile.ui`. If omitted
 `kendo.ui` will be used. Multiple namespaces can be passed.
 
-
-### init
-
-Instantiates Kendo UI widgets in a given DOM element based on role data attributes.
-
-> **Important:** Kendo UI Mobile is not included in the default list of initialized namespaces. You can initialize it explicitly by
-  running `kendo.init(element, kendo.mobile.ui);`
-
-#### Example
-     <div id="view">
-        <div>
-            <input data-role="autocomplete" data-source="data" data-filter="startswith" data-placeholder="select country ..." />
-        </div>
-     </div>
-     <script>
-     var data = [ "Albania", "Andorra", "Armenia", "Austria", "Azerbaijan", "Belarus", "Belgium", "Bosnia & Herzegovina", "Bulgaria", "Croatia", "Cyprus"  ];
-
-     kendo.init($("#view"));
-     </script>
-
-#### Parameters
-
-##### element `String|jQuery|Element`
-
-The root element(s) from which the instantiation starts. Can be a valid jQuery string selector, a DOM element or a jQuery object. All descendant elements are traversed.
-
-##### namespace `Object` *(optional)*
-
-Optional namespace too look in when instantiating Kendo UI widgets. The valid namespaces are `kendo.ui`, `kendo.dataviz.ui` and `kendo.mobile.ui`. If omitted
-`kendo.ui` will be used. Multiple namespaces can be passed.
-
-#### Example
-
-     <div id="view">
-        <div>
-            <input data-role="autocomplete" data-source="data" data-filter="startswith" data-placeholder="select country ..." />
-            <button data-role="button" data-click="foo">Foo</button>
-        </div>
-     </div>
-
-     <script>
-     function foo(e) {
-         console.log(e.sender); // a mobile button
-     }
-     var data = [ "Albania", "Andorra", "Armenia", "Austria", "Azerbaijan", "Belarus", "Belgium", "Bosnia & Herzegovina", "Bulgaria", "Croatia", "Cyprus"  ];
-
-     kendo.init($("#view"), kendo.mobile.ui, kendo.ui);
-     </script>
-
-### observableHierarchy
-
-Creates an ObservableArray instance that is bound to a HierarchicalDataSource. Required to bind a HierarchicalDataSource-enabled widget (such as the Kendo UI TreeView) to a view-model.
-
-#### Example
-
-    <div data-role="treeview" data-bind="source: products"></div>
-    <script>
-    var viewModel = kendo.observable({
-      products: kendo.observableHierarchy([
-        {
-          text: "foo",
-          items: [
-            { text: "bar" }
-          ]
-        },
-        { text: "baz" }
-       ])
-    });
-    kendo.bind(document.body, viewModel);
-    </script>
-
-#### Parameters
-
-##### array `Array`
-
-The array that will be converted to an ObservableArray.
-
 ### confirm
 Opens a [Kendo UI Confirm](/api/javascript/ui/confirm) popup. Similar to the native [window.confirm()](https://developer.mozilla.org/en-US/docs/Web/API/Window/confirm) method.
 
@@ -286,6 +209,19 @@ The format string.
 #### See Also
 [Supported number formats](http://docs.telerik.com/kendo-ui/framework/globalization/numberformatting)
 
+### guid
+
+Generates a random GUID (globally unique identifier).
+
+#### Example
+    <script>
+    var value = kendo.guid();
+    console.log(value);
+    </script>
+
+#### Returns
+
+`String` The generated GUID.
 
 ### htmlEncode
 
@@ -306,6 +242,83 @@ The string that needs to be HTML encoded.
 #### Returns
 
 `String` The encoded string.
+
+### init
+
+Instantiates Kendo UI widgets in a given DOM element based on role data attributes.
+
+> **Important:** Kendo UI Mobile is not included in the default list of initialized namespaces. You can initialize it explicitly by
+  running `kendo.init(element, kendo.mobile.ui);`
+
+#### Example
+     <div id="view">
+        <div>
+            <input data-role="autocomplete" data-source="data" data-filter="startswith" data-placeholder="select country ..." />
+        </div>
+     </div>
+     <script>
+     var data = [ "Albania", "Andorra", "Armenia", "Austria", "Azerbaijan", "Belarus", "Belgium", "Bosnia & Herzegovina", "Bulgaria", "Croatia", "Cyprus"  ];
+
+     kendo.init($("#view"));
+     </script>
+
+#### Parameters
+
+##### element `String|jQuery|Element`
+
+The root element(s) from which the instantiation starts. Can be a valid jQuery string selector, a DOM element or a jQuery object. All descendant elements are traversed.
+
+##### namespace `Object` *(optional)*
+
+Optional namespace too look in when instantiating Kendo UI widgets. The valid namespaces are `kendo.ui`, `kendo.dataviz.ui` and `kendo.mobile.ui`. If omitted
+`kendo.ui` will be used. Multiple namespaces can be passed.
+
+#### Example
+
+     <div id="view">
+        <div>
+            <input data-role="autocomplete" data-source="data" data-filter="startswith" data-placeholder="select country ..." />
+            <button data-role="button" data-click="foo">Foo</button>
+        </div>
+     </div>
+
+     <script>
+     function foo(e) {
+         console.log(e.sender); // a mobile button
+     }
+     var data = [ "Albania", "Andorra", "Armenia", "Austria", "Azerbaijan", "Belarus", "Belgium", "Bosnia & Herzegovina", "Bulgaria", "Croatia", "Cyprus"  ];
+
+     kendo.init($("#view"), kendo.mobile.ui, kendo.ui);
+     </script>
+
+
+### observableHierarchy
+
+Creates an ObservableArray instance that is bound to a HierarchicalDataSource. Required to bind a HierarchicalDataSource-enabled widget (such as the Kendo UI TreeView) to a view-model.
+
+#### Example
+
+    <div data-role="treeview" data-bind="source: products"></div>
+    <script>
+    var viewModel = kendo.observable({
+      products: kendo.observableHierarchy([
+        {
+          text: "foo",
+          items: [
+            { text: "bar" }
+          ]
+        },
+        { text: "baz" }
+       ])
+    });
+    kendo.bind(document.body, viewModel);
+    </script>
+
+#### Parameters
+
+##### array `Array`
+
+The array that will be converted to an ObservableArray.
 
 ### parseDate
 

@@ -165,8 +165,8 @@ Each row has a `type` field that can be used to distinguish between the various 
 The possible values are:
 - `"header"`
 - `"footer"`
-- `"groupHeader"`
-- `"groupFooter"`
+- `"group-header"`
+- `"group-footer"`
 - `"data"`
 
 ### Multiple Grids

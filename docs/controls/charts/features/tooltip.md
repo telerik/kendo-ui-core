@@ -61,7 +61,7 @@ The point value can be formatted using the `format` property, as demonstrated in
         format: "Value: {0:N0}"
     }
 
-The format string supports a subset of the syntax available in Java and C#. Here "N0" indicates that the value should be rounded to a whole number and should have a thousands separator.
+Here "N0" indicates that the value should be rounded to a whole number and should have a thousands separator. You can learn more about the number and date formats supported by Kendo UI from the [Number Formatting](/framework/globalization/numberformatting) and [Date Formatting](/framework/globalization/dateformatting) articles.
 
 > **Important**
 >

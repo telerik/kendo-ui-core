@@ -18771,7 +18771,7 @@ If set to `true` the chart will play animations when displaying the series. By d
     });
     </script>
 
-### valueAxis `Array`
+### valueAxis `Array|Object`
 
 The value axis configuration options.
 
