@@ -1794,7 +1794,10 @@ var __meta__ = { // jshint ignore:line
             };
 
             parameterMap = options.parameterMap;
-            that.submit = options.submit;
+            
+            if (options.submit) {
+                that.submit = options.submit;
+            }           
 
             if (isFunction(options.push)) {
                 that.push = options.push;

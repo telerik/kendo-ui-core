@@ -229,7 +229,7 @@ Below are listed the steps for you to follow when configuring the hybrid Kendo U
 
 ### Instances
 
-You can reference a hybrid Layout instance by using the [jQuery.data()](http://api.jquery.com/jQuery.data/) method and the value specified through the `Name()` method. Once a reference is established, use the [hybrid ListView API](../http://docs.telerik.com/kendo-ui/api/javascript/mobile/ui/listview#methods) to control its behavior.
+You can reference a hybrid Layout instance by using the [jQuery.data()](http://api.jquery.com/jQuery.data/) method and the value specified through the `Name()` method. Once a reference is established, use the [hybrid ListView API](https://docs.telerik.com/kendo-ui/api/javascript/ui/listview#methods) to control its behavior.
 
 ###### Example
 

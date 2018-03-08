@@ -12272,7 +12272,7 @@ The line opacity. By default the line is opaque.
     });
     </script>
 
-### series.line.width `String` *(default: 4)*
+### series.line.width `Number` *(default: 4)*
 
 The line width in pixels.
 
@@ -13941,7 +13941,7 @@ The target line options.
     });
     </script>
 
-### series.target.line.width `Object|Function`
+### series.target.line.width `Number|Function`
 
 The width of the line.
 

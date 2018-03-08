@@ -42,6 +42,16 @@ test("navigate down should persist current viewedValue", function() {
     deepEqual(calendar.current(), value);
 });
 
+test("March 1st should have k-other-month class applied for leap and non-leap years", function() {
+    var value = new Date(2018, 1, 10);
+
+    calendar.value(value);
+
+    deepEqual(calendar.current(), value);
+
+    ok(div.find("a[data-value='2018/2/1']").closest("td").hasClass("k-other-month"));
+});
+
 //MONTH View
 test("navigate should not _move selection if value is bigger than max", function() {
     var event = { keyCode: keys.RIGHT, preventDefault: $.noop },

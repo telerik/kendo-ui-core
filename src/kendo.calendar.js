@@ -1747,10 +1747,9 @@ var __meta__ = { // jshint ignore:line
     }
 
     // creates date with full year
-    function createDate(year, month, date) {
-        var leapYear = 1904;
-        var dateObject = new DATE(leapYear, month, date);
-        dateObject.setFullYear(year);
+    function createDate(year, month, date) { 
+        var dateObject = new DATE();
+        dateObject.setFullYear(year, month, date);
         return dateObject;
     }
 
