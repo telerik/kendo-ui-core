@@ -2296,32 +2296,6 @@ The text of the option which represents the "or" logical operation.
       });
     </script>
 
-### filterable.messages.cancel `String` *(default: "Cancel")*
-
-The text of the cancel button in the filter menu header (available in mobile mode only).
-
-#### Example - set the cancel button text
-
-    <div id="treelist"></div>
-    <script>
-      $("#treelist").kendoTreeList({
-        columns: [
-          { field: "lastName" },
-          { field: "position" },
-          { field: "extension" }
-        ],
-        dataSource: [
-          { id: 1, parentId: null, lastName: "Jackson", position: "CEO", extension: 8241 },
-          { id: 2, parentId: 1, lastName: "Weber", position: "	VP, Engineering", extension: 8342 }
-        ],
-        filterable: {
-          messages: {
-            cancel: "Reject"
-          }
-        }
-      });
-    </script>
-
 ### filterable.operators `Object`
 
 The text of the filter operators displayed in the filter menu.
