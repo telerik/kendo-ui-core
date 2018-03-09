@@ -1748,7 +1748,7 @@ var __meta__ = { // jshint ignore:line
 
     // creates date with full year
     function createDate(year, month, date) { 
-        var dateObject = new DATE();
+        var dateObject = new DATE(year, month, date);
         dateObject.setFullYear(year, month, date);
         return dateObject;
     }

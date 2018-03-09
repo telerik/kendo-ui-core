@@ -25,12 +25,4 @@ To enable more complex widget configuration scenarios and ensure the tag-naming 
   * The `<kendo-upload-validation-settings>` tag name is now changed to `<validation>`.
 * Splitter&mdash;Previously, the tag name of the pane was `<kendo-splitter-pane>`. The tag name is now changed to `<pane>`.
 
-[Telerik UI for ASP.NET Core](http://www.telerik.com/aspnet-core-ui) is a set of server-side wrappers that allows you to use the [Kendo UI widgets](../kendo-ui/introduction) from the server code. That is why, all important changes in the Kendo UI suite also apply to the client-side code and behavior of the Telerik UI for ASP.NET Core wrappers. For the list of all breaking changes, refer to the articles on the [Kendo UI breaking changes](../kendo-ui/backwards-compatibility/2017-backward-compatibility).
-
-## See Also
-
-* [Kendo UI 2016 Breaking Changes](../kendo-ui/backwards-compatibility/2016-backward-compatibility)
-* [Kendo UI 2015 Breaking Changes](../kendo-ui/backwards-compatibility/2015-backward-compatibility)
-* [Kendo UI 2014 Breaking Changes](../kendo-ui/backwards-compatibility/2014-backward-compatibility)
-* [Kendo UI 2013 Breaking Changes](../kendo-ui/backwards-compatibility/2013-backward-compatibility)
-* [Kendo UI 2012 Breaking Changes](../kendo-ui/backwards-compatibility/2012-backward-compatibility)
+[Telerik UI for ASP.NET Core](http://www.telerik.com/aspnet-core-ui) is a set of server-side wrappers that allows you to use the [Kendo UI widgets](https://docs.telerik.com/kendo-ui/introduction) from the server code. That is why, all important changes in the Kendo UI suite also apply to the client-side code and behavior of the Telerik UI for ASP.NET Core wrappers. For the list of all breaking changes, refer to the articles on the [Kendo UI breaking changes](https://docs.telerik.com/kendo-ui/backwards-compatibility/2017-backward-compatibility).
