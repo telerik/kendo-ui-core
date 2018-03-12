@@ -60,11 +60,15 @@ The following example demonstrates how to initialize the TreeList and bind it to
 
 ```
 
-## Bind to Remote Data
+## Binding to Remote Data
 
-You can also bind the `TreeListDataSource` to remote data. This means that the TreeList will load items from a web service. Remote data binding enables the retrieval of data from the server and the saving of the TreeList data items to the server database.
+To bind the `TreeListDataSource` to remote data and make it load items from a web service, use the remote data binding functionality. It enables the retrieval of data from the server and the saving of the TreeList data items in the server database.
 
-The following example demonstrates how to enable the remote binding for the TreeList by setting the DataSource `transport`.
+The following example demonstrates how to enable the remote binding for the TreeList by setting the DataSource `transport`. The `parentId` is mapped from the `ReportsTo` field by the `<treelist-model id="EmployeeId" parent-id="ReportsTo" expanded="true">` line. The TreeList renders its hierarchy based on the `parentId`-`id` relationship.
+
+> **Important**
+>
+> When you use the `schema.model.fields` configuration, list all fields. Set the field which represents the `id` of the event through the `schema.model.id`. If these are not set, they will still work for displaying the data, but will post incomplete objects on the server when the items are edited.
 
 ###### Example
 
@@ -126,19 +130,11 @@ The following example demonstrates how to enable the remote binding for the Tree
         )
 ```
 
-Note that the `parentId` is mapped from the `ReportsTo` field by the `<treelist-model id="EmployeeId" parent-id="ReportsTo" expanded="true">` line. The TreeList renders its hierarchy based on the `parentId` - `id` relationship.
-
-> **Important**
->
-> When you use the `schema.model.fields` configuration, list all fields. Set the field which represents the `id` of the event through the `schema.model.id`. If these are not set, they will still work for displaying data, but will post incomplete objects on the server when editing items.
-
 ## TreeList API
 
 ### Methods and Fields
 
-The TreeList exposes a set of [methods](https://docs.telerik.com/kendo-ui/api/javascript/ui/treelist#methods) and [fields](https://docs.telerik.com/kendo-ui/api/javascript/ui/treelist#fields) you can use.
-
-The following example demonstrates how to apply the [API of the TreeList](https://docs.telerik.com/kendo-ui/api/javascript/ui/treelist).
+The TreeList exposes a set of [methods](https://docs.telerik.com/kendo-ui/api/javascript/ui/treelist#methods) and [fields](https://docs.telerik.com/kendo-ui/api/javascript/ui/treelist#fields).
 
 ###### Example
 
@@ -214,7 +210,7 @@ To handle the events, either:
 * Specify the JavaScript function which will handle the event during the initialization of the widget, or
 * Use the `bind` method of the widget after initialization.
 
-The event handler is the JavaScript function invoked when the event is fired. The argument of the event handler is a JavaScript object which contains event-specific data. Get a reference of the widget, which fired the event, via the `sender` field of the event argument. The function context of the event handler (available via the `this` keyword) is set to the instance of the widget which fired the event.
+The event handler is the JavaScript function which is invoked when the event is fired. The argument of the event handler is a JavaScript object which contains event-specific data. Get a reference of the widget, which fired the event, through the `sender` field of the event argument. The function context of the event handler, which is available through the `this` keyword, is set to the instance of the widget which fired the event.
 
 The following example demonstrates how to subscribe to a TreeList event during the initialization of the widget.
 

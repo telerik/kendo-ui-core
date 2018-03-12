@@ -1,6 +1,6 @@
 ---
 title: Make Page Number Responsive for SASS Themes
-description: An example on how to make the page numbers responsive in SASS themes.
+description: An example on how to make the page numbers in SASS themes responsive.
 type: how-to
 page_title: Responsive Pager for SASS Themes | Kendo UI Pager
 slug: pager-responsive-numbers-sass-themes
@@ -20,13 +20,15 @@ component: grid
 
 ## Description
 
-I would like to make the Kendo Pager show dropdown with the pages when the Grid is shown in smaller screens. This does not happen for the 
+How can I make the Pager show a drop-down list with the pages when the Grid is shown on smaller screens?
 
 ## Solution
 
-The pager in the SASS themes does not change to dropdown automatically like in the LESS themes. To change the behavior we suggest using one of the following workarounds. Note that you may need to adjust the CSS in order to fit in your specific scenario:
+Unlike the functionality in the LESS themes, in the SASS themes the Pager does not change to a drop-down list automatically. To work around this issue, use either the Kendo UI Default (v2) or the Kendo UI Bootstrap (v4) theme. Depending on your project and scenario, you may need to adjust the CSS.
 
-If you are using **Default-v2** theme: 
+### Using Default (v2) Theme
+
+For the full implementation of this approach, refer to [this runnable example](https://dojo.telerik.com/ewoFoxaB/2).
 
 ```
 <style>
@@ -88,7 +90,7 @@ If you are using **Default-v2** theme:
     .k-pager-wrap .k-pager-numbers .k-current-page {
         display: block;
     }
-    
+
     .k-pager-numbers.k-reset.k-state-expanded {
         border-width: 0;
         flex-direction: column-reverse;
@@ -98,10 +100,9 @@ If you are using **Default-v2** theme:
 </style>
 ```
 
-To see this code in action check out [this runnable example](https://dojo.telerik.com/ewoFoxaB/2).
+### Using Bootstrap (v4) Theme
 
-
-If you are using **Bootstrap-v4** theme: 
+For the full implementation of this approach, refer to [this runnable example](https://dojo.telerik.com/UkovECEy/3).
 
 ```
 <style>
@@ -158,7 +159,7 @@ If you are using **Bootstrap-v4** theme:
     .k-state-expanded li:not(.k-current-page) .k-link {
         border: none;  
     }
-    
+
     .k-pager-numbers.k-state-expanded .k-current-page {
         margin: -2em 0 0;
         padding: 0;
@@ -183,6 +184,3 @@ If you are using **Bootstrap-v4** theme:
     }
 </style>
 ```
-
-To see this code in action check out [this runnable example](https://dojo.telerik.com/UkovECEy/3).
-
