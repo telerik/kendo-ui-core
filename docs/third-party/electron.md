@@ -1,7 +1,7 @@
 ---
 title: Electron
 page_title: Electron | Kendo UI Third-Party Tools
-description: "Learn how to use Kendo UI widgets in an Electron app."
+description: "Learn how to use the Kendo UI widgets in an Electron application."
 slug: electron_integration_kendoui
 position: 12
 ---
@@ -10,13 +10,13 @@ position: 12
 
 [Electron](https://electronjs.org/) is a framework for creating native applications with web technologies like JavaScript, HTML, and CSS.
 
-## Add CSS and JavaScript References
+## Adding CSS and JavaScript References
 
-To use Kendo UI in your Electron app, include the required JavaScript and CSS files.
+To use Kendo UI in your Electron projects, include the required JavaScript and CSS files.
 
 ### Using Local Files
 
-Due to the Node.js integration of Electron, there are some extra symbols inserted into the DOM like `module`, `exports`, `require`. Use the `require` symbol to include the scripts.
+Due to the Node.js integration of Electron, some extra symbols were inserted into the DOM&mdash;`module`, `exports`, and `require`. To include the scripts, use the `require` symbol.
 
 ##### Example
 
@@ -30,7 +30,7 @@ Due to the Node.js integration of Electron, there are some extra symbols inserte
 
 ### Using CDN Services
 
-Unset `module` before including the jQuery library.
+Before you include the jQuery library, unset `module`.
 
 ##### Example
 
@@ -46,7 +46,7 @@ Unset `module` before including the jQuery library.
 
 ## Basic Usage
 
-The code example below assumes that the Kendo UI scripts and stylesheets are now added to the document.
+The following example assumes that the Kendo UI scripts and stylesheets were added to the document.
 
 ##### Example
 
@@ -73,7 +73,7 @@ The code example below assumes that the Kendo UI scripts and stylesheets are now
 ## See Also
 
 * [SharePoint Add-Ins]({% slug sharepoint_tutorials %})
-* [Twitter Bootstrap]({% slug twitterbootstrapintegration_integration_kendoui %})
+* [Bootstrap]({% slug twitterbootstrapintegration_integration_kendoui %})
 * [RequireJS]({% slug requirejs_integration_kendoui %})
 * [TypeScript]({% slug typescript_integration_kendoui %})
 * [Visual Studio IntelliSense]({% slug visualstudiointellisense_integration_kendoui %})

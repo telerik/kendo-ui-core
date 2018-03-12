@@ -1,7 +1,7 @@
 ---
 title: PivotGrid
-page_title: title: PivotGrid | Telerik UI for ASP.NET Core Tag Helpers
-description: "Learn the basics when working with the title: PivotGrid tag helper for ASP.NET Core (MVC 6 or ASP.NET Core MVC)."
+page_title: PivotGrid | Telerik UI for ASP.NET Core Tag Helpers
+description: "Learn the basics when working with the PivotGrid tag helper for ASP.NET Core (MVC 6 or ASP.NET Core MVC)."
 slug: taghelpers_pivotgrid_aspnetcore
 ---
 
@@ -76,7 +76,7 @@ The PivotGrid tag helper configuration options are passed as attributes of the t
                     .Url("https://demos.telerik.com/olap/msmdpump.dll")
                     .DataType("text")
                     .ContentType("text/xml")
-                    .Type(HttpVerbs.Post) 
+                    .Type(HttpVerbs.Post)
                 )
             )
             .Events(e => e.Error("onError"))

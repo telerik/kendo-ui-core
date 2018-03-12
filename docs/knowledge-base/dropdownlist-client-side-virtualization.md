@@ -1,8 +1,8 @@
 ---
-title: Client-side Virtualization in Kendo DropDownlist
-description: An example on client-side virtualization in Kendo DropDownlist
+title: Implement Client-Side Virtualization in DropDownlist
+description: An example on how to achieve a client-side virtualization in a Kendo UI DropDownlist.
 type: how-to
-page_title: Client-side Virtualization | Kendo UI DropDownList 
+page_title: Apply Client-Side Virtualization | Kendo UI DropDownList
 slug: dropdownlist-client-side-virtualization
 tags: dropdownlist, virtualization
 ticketid: 1150272  
@@ -32,21 +32,21 @@ res_type: kb
 
 ## Description
 
-How to create client-side virtualization in Kendo DropDownList?
+How can I create a client-side virtualization functionality in the DropDownList?
 
 ## Solution
 
-Based on the index of the currently selected value, the indexes of the next items, that should be rendered are calculated.
+Based on the index of the currently selected value, calculate the indexes of the next items that have to be rendered.
 
 ```html
 <input id="orders" style="width: 100%;" />
 <script>
-    var data = []; 
-    
+    var data = [];
+
     for(var i = 0; i < 20000; i++) {
       data.push({ ShipName: "Name " + (i + 1), OrderID: i + 1});
     }       
-    
+
     $("#orders").kendoDropDownList({
       value: 15000,         
       dataTextField: "ShipName",
@@ -82,7 +82,7 @@ Based on the index of the currently selected value, the indexes of the next item
         pageSize: 80
       }
     });
-    
+
     function convertValues(value) {
       var data = [];
       value = $.isArray(value) ? value : [value];
@@ -91,5 +91,5 @@ Based on the index of the currently selected value, the indexes of the next item
       }
       return data;
     }  
-</script> 
+</script>
 ```

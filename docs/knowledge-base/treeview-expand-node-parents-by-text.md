@@ -1,8 +1,8 @@
 ---
-title: Programatically expand node and parents
-description: How to Find and Expand Node by Given Node Text
+title: Programmatically Expand Node and Parents
+description: An example on how to find and expand the node by given node text in the Kendo UI TreeView.
 type: how-to
-page_title: Expand Node Parents | Kendo UI TreeView 
+page_title: Expand Node Parents | Kendo UI TreeView
 slug: treeview-expand-node-parents-by-text
 tags: treeview
 ticketid: 1153697  
@@ -32,13 +32,13 @@ res_type: kb
 
 ## Description
 
-How to expand all parent nodes by given child node text?
+How can I expand all parent nodes by given child node text?
 
 ## Solution
 
-1. Find the node by its text. 
-1. If it has parent expand the parent. 
-1. Repeat checking for parent node, while there is existing parent.
+1. Find the node by its text.
+1. If the node has a parent, expand the parent.
+1. Repeat the check for a parent node until you cover all existing parent nodes.
 
 ```html
 <div class="demo-section k-content">
@@ -64,25 +64,25 @@ How to expand all parent nodes by given child node text?
           }
         }
     });
-    
+
     $("#treeview").kendoTreeView({
         dataSource: homogeneous,
         loadOnDemand: false,
         dataTextField: "FullName"
     });
-    
+
     function expand(){
         var text = $('#text').val();     
         var treeview = $("#treeview").data("kendoTreeView");
-        
+
         var item = treeview.findByText(text);
-        
+
         if(item.length > 0){
           treeview.select(item)
-          var parent = treeview.parent(item); 
+          var parent = treeview.parent(item);
           while(parent && parent.length > 0){          	
             treeview.expand(parent);
-            parent = treeview.parent(parent); 
+            parent = treeview.parent(parent);
           }        
         }        
     }

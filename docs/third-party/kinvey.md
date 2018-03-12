@@ -1,7 +1,7 @@
 ---
 title: Kinvey
 page_title: Kinvey | Kendo UI Third-Party Tools
-description: "Learn how to use Kendo UI widgets with Kinvey services."
+description: "Learn how to use the Kendo UI widgets with Kinvey services."
 slug: kinveysupport_integration_kendoui
 position: 11
 ---

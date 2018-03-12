@@ -1,8 +1,8 @@
 ---
 title: Enter Date by Setting Only the Day
-description: An example on how to set value by setting only the day in Kendo UI DatePicker.
+description: An example on how to set a value by setting only the day in the Kendo UI DatePicker.
 type: how-to
-page_title: Set Date by entering only the Day | Kendo UI DatePicker
+page_title: Set Date by Entering Only the Day | Kendo UI DatePicker
 slug: datepicker-enter-day-only
 tags: kendo, datepicker, day, date, select, default, set
 res_type: kb
@@ -25,11 +25,11 @@ component: datepicker
 
 ## Description
 
-I have a DatePicker widget and would like to enter only the day part of the date. The rest should use the current month and year as default. 
+How can I enter only the day part of the date and let the rest of the DatePicker use the current month and year as default?
 
 ## Solution
 
-The example below illustrates how to achieve the functionality. 
+The following example demonstrates how to achieve the desired functionality.
 
 ```html
 <input id="datepicker" />

@@ -19,9 +19,7 @@ The following example demonstrates how to define the Grid by using the Grid tag 
 
 ## Configuration
 
-The Grid tag helper configuration options are passed as attributes of the tag. The Grid uses the [DataSource tag helper]({% slug taghelpers_datasource_aspnetcore %}) to bind its data.
-
-For more details on the Grid configurations, refer to the overview of the [MVC Grid HtmlHelper](https://docs.telerik.com/aspnet-mvc/helpers/grid/overview).
+The Grid tag helper configuration options are passed as attributes of the tag. The Grid uses the [DataSource tag helper]({% slug taghelpers_datasource_aspnetcore %}) to bind its data. For more details on the Grid configurations, refer to the overview of the [MVC Grid HtmlHelper](https://docs.telerik.com/aspnet-mvc/helpers/grid/overview).
 
 ###### Example
 
@@ -72,80 +70,9 @@ For more details on the Grid configurations, refer to the overview of the [MVC G
 )
 ```
 
-## Events
-
-You can subscribe to all Grid [events](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid#events).
-
-###### Example
-
-```tab-tagHelper
-        <kendo-grid name="grid" height="550" on-change="onChange" selectable="true">
-            <datasource type="DataSourceTagHelperType.Custom" custom-type="odata" page-size="20">
-                <transport>
-                    <read url="https://demos.telerik.com/kendo-ui/service/Northwind.svc/Customers" />
-                </transport>
-            </datasource>
-            <groupable enabled="true" />
-            <sortable enabled="true" />
-            <pageable button-count="5" refresh="true" page-sizes="new int[] { 5, 10, 20 }">
-            </pageable>
-
-            <filterable enabled="true" />
-            <columns>
-                <column field="ContactName" title="Contact Name" width="240" />
-                <column field="ContactTitle" title="Contact Title" />
-                <column field="CompanyName" title="Company Name" />
-                <column field="Country" title="Country" width="150" />
-            </columns>
-        </kendo-grid>
-
-        <script>
-            function onChange(e) {
-                var selectedRow = this.select();
-                var dataItem = this.dataItem(selectedRow);
-                console.log(dataItem)
-            }
-        </script>
-```
-```tab-cshtml
-
-    @(Html.Kendo().Grid<Kendo.Mvc.Examples.Models.CustomerViewModel>()
-        .Name("grid")
-        .Columns(columns =>
-        {
-            columns.Bound(c => c.ContactName).Title("Contact Name").Width(240).Filterable(ftb => ftb.Multi(true));
-            columns.Bound(c => c.ContactTitle).Title("Contact Title");
-            columns.Bound(c => c.CompanyName).Title("Company Name");
-            columns.Bound(c => c.Country).Title("Country").Width(150);
-        })
-        .Groupable()
-        .Events(events => events
-            .Change("onChange")
-        )
-        .Sortable()
-        .Pageable(pageable => pageable
-            .Refresh(true)
-            .PageSizes(true)
-            .ButtonCount(5))
-        .DataSource(dataSource => dataSource
-            .Ajax()
-            .Read(read => read.Action("Orders_Read", "Grid"))
-            .PageSize(20)
-        )
-    )
-
-    <script>
-            function onChange(e) {
-                var selectedRow = this.select();
-                var dataItem = this.dataItem(selectedRow);
-                console.log(dataItem)
-            }
-   </script>
-```
-
 ## Hierarchy
 
-The Grid supports hierarchy and requirea a [`DetailInit`](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid/events/detailinit) function which will initialize the detail Grids by using the [Kendo UI Grid for jQuery](https://docs.telerik.com/kendo-ui/controls/data-management/grid/overview).
+The Grid supports hierarchy and requires a [`DetailInit`](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid/events/detailinit) function which initializes the detail Grids by using the [Kendo UI Grid for jQuery](https://docs.telerik.com/kendo-ui/controls/data-management/grid/overview).
 
 ###### Example
 
@@ -243,14 +170,15 @@ The Grid supports hierarchy and requirea a [`DetailInit`](https://docs.telerik.c
         </script>
 ```
 
-### Editing
+## Editing
 
-The Kendo UI grid widget supports data editing operations (create, update, destroy) via a simple configuration of its data source. All you have to do to enable data editing capabilities for the widget is to:
+The Grid supports data editing operations (create, update, destroy) by configuring its data source.
 
-* set the grid's `editable` configuration option
-* declare field definitions through the `DataSource schema`
-* configure the DataSource for performing CRUD data operations defining its `transport->create/update/destroy` attributes
+To enable the data editing capabilities:
 
+* Set the `editable` option of the Grid.
+* Declare the field definitions through `DataSource schema`.
+* Configure the DataSource for performing CRUD data operations by defining its `transport->create/update/destroy` attributes.
 
 ```tab-tagHelper
 <kendo-grid name="grid" height="550">
@@ -326,9 +254,9 @@ The Kendo UI grid widget supports data editing operations (create, update, destr
 )
 ```
 
-## Editing custom editor
+## Custom Editors
 
-The sample below demonstrates how to set a custom editor (Kendo UI dropdown list in this case) as grid column editor by specifying the `ProductName` column's `editor` field. The value of this field points to a JavaScript function which instantiates the column editor for the corresponding column cells.
+The following example demonstrates how to set a Kendo UI DropDownList as a custom column editor for the Grid by specifying the `editor` field of the `ProductName` column. The value of this field points to a JavaScript function which instantiates the column editor for the corresponding column cells.
 
 ###### Example
 
@@ -389,11 +317,11 @@ The sample below demonstrates how to set a custom editor (Kendo UI dropdown list
 </script>
 ```
 
-## Column template
+## Column Templates
 
-The Kendo UI grid allows flexible customization of its columns in terms of layout and appearance by exposing column template feature for this purpose.
+The Grid allows for a flexible customization of its columns in terms of layout and appearance through its column template feature.
 
-In the following example we present how you can specify your own custom layout for the columns in the grid using images and property bindings from its underlying data source. The templates are defined via JavaScript functions.
+The following example demonstrates how to specify your own custom layout for the Grid columns by using images and property bindings from the underlying data source. The templates are defined by using JavaScript functions.
 
 ###### Example
 
@@ -505,11 +433,11 @@ In the following example we present how you can specify your own custom layout f
     </style>
 ```
 
-## Multi-column headers
+## Multi-Column Headers
 
-The Kendo UI grid supports multi-column headers by specifying column groups which incorporate inner column structures. Here the Contact Info and Location columns have nested columns, depicted via a nested column taghelpers.
+The Grid supports multi-column headers by specifying column groups which incorporate inner column structures.
 
-Operations like sorting and filtering are supported on each column level, regardless of the chosen multi-header pattern.
+In the following example, the **Contact Info** and **Location** columns have nested columns that are depicted by a nested column tag helpers. Operations like sorting and filtering are supported on each column level regardless of the selected multi-header pattern.
 
 ```tab-tagHelper
     <kendo-grid name="grid" reorderable="true"resizable="true" height="550">
@@ -550,7 +478,7 @@ Operations like sorting and filtering are supported on each column level, regard
             columns.Bound(c => c.CompanyName).Width(420);
             columns.Group(group => group
                 .Title("Contact Info")
-                .Columns(info => { 
+                .Columns(info => {
                     info.Bound(x => x.ContactTitle).Width(200);
                     info.Bound(x => x.ContactName).Width(200);
                     info.Group(g => g.Title("Location")
@@ -578,6 +506,77 @@ Operations like sorting and filtering are supported on each column level, regard
             .Read(read => read.Action("MultiColumn_Customers_Read", "Grid"))
         )
     )
+```
+
+## Events
+
+You can subscribe to all Grid [events](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid#events).
+
+###### Example
+
+```tab-tagHelper
+        <kendo-grid name="grid" height="550" on-change="onChange" selectable="true">
+            <datasource type="DataSourceTagHelperType.Custom" custom-type="odata" page-size="20">
+                <transport>
+                    <read url="https://demos.telerik.com/kendo-ui/service/Northwind.svc/Customers" />
+                </transport>
+            </datasource>
+            <groupable enabled="true" />
+            <sortable enabled="true" />
+            <pageable button-count="5" refresh="true" page-sizes="new int[] { 5, 10, 20 }">
+            </pageable>
+
+            <filterable enabled="true" />
+            <columns>
+                <column field="ContactName" title="Contact Name" width="240" />
+                <column field="ContactTitle" title="Contact Title" />
+                <column field="CompanyName" title="Company Name" />
+                <column field="Country" title="Country" width="150" />
+            </columns>
+        </kendo-grid>
+
+        <script>
+            function onChange(e) {
+                var selectedRow = this.select();
+                var dataItem = this.dataItem(selectedRow);
+                console.log(dataItem)
+            }
+        </script>
+```
+```tab-cshtml
+
+    @(Html.Kendo().Grid<Kendo.Mvc.Examples.Models.CustomerViewModel>()
+        .Name("grid")
+        .Columns(columns =>
+        {
+            columns.Bound(c => c.ContactName).Title("Contact Name").Width(240).Filterable(ftb => ftb.Multi(true));
+            columns.Bound(c => c.ContactTitle).Title("Contact Title");
+            columns.Bound(c => c.CompanyName).Title("Company Name");
+            columns.Bound(c => c.Country).Title("Country").Width(150);
+        })
+        .Groupable()
+        .Events(events => events
+            .Change("onChange")
+        )
+        .Sortable()
+        .Pageable(pageable => pageable
+            .Refresh(true)
+            .PageSizes(true)
+            .ButtonCount(5))
+        .DataSource(dataSource => dataSource
+            .Ajax()
+            .Read(read => read.Action("Orders_Read", "Grid"))
+            .PageSize(20)
+        )
+    )
+
+    <script>
+            function onChange(e) {
+                var selectedRow = this.select();
+                var dataItem = this.dataItem(selectedRow);
+                console.log(dataItem)
+            }
+   </script>
 ```
 
 ## See Also

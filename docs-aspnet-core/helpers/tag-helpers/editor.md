@@ -1,6 +1,6 @@
 ---
 title: Editor
-page_title: Editor  | Telerik UI for ASP.NET Core Tag Helpers
+page_title: Editor | Telerik UI for ASP.NET Core Tag Helpers
 description: "Learn the basics when working with the Editor tag helper for ASP.NET Core (MVC 6 or ASP.NET Core MVC)."
 slug: taghelpers_editor_aspnetcore
 ---
@@ -20,7 +20,7 @@ The following example demonstrates how to define the Editor by using the Editor 
 
 ## Configuration
 
-The Editor tag helper tools collection is passed through the nest `<tools>` tag.
+The tools collection of the Editor tag helper is passed through the nest `<tools>` tag.
 
 ###### Example
 
@@ -47,7 +47,7 @@ The Editor tag helper tools collection is passed through the nest `<tools>` tag.
 		)
 ```
 
-The tools in the tools collection can be adjusted and set up via the `<tools>` tag and their items collection can be defined via the `<tool-items>` and `<tool-item>` tags.
+You can adjust and set up the tools in the tools collection through the `<tools>` tag. To define their items collection, use the `<tool-items>` and `<tool-item>` tags.
 
 ###### Example
 
@@ -76,7 +76,7 @@ The tools in the tools collection can be adjusted and set up via the `<tools>` t
 	)
 ```
 
-You can specify content in the Editor tag helper by using the `<content>` tag or the `value` attribute.
+To specify a chunk of content in the Editor tag helper, use the `<content>` tag or the `value` attribute.
 
 ###### Example
 
@@ -100,9 +100,9 @@ You can specify content in the Editor tag helper by using the `<content>` tag or
 	)
 ```
 
-###### Example
+The `ImageBrowser` and `FileBrowser` dialogs are configured through the `<image-browser>` and `<file-browser>` tags.
 
-ImageBrowser and FileBrowser dialogs are configured through the `<image-browser>` and `<file-browser>` tags.
+###### Example
 
 ```tab-tagHelper
 	<kendo-editor name="editor">
@@ -142,7 +142,7 @@ ImageBrowser and FileBrowser dialogs are configured through the `<image-browser>
 	)
 ```
 
-Serialization, Deserialization and PasteCleanup settings are configured with the `<serialization>`, `<deserialization>`, `<paste-cleanup>` tags.
+The `serialization`, `deserialization` and `paste-cleanup` settings are configured with the `<serialization>`, `<deserialization>`, and `<paste-cleanup>` tags respectively.
 
 ###### Example
 
@@ -162,7 +162,7 @@ Serialization, Deserialization and PasteCleanup settings are configured with the
 	)
 ```
 
-Other Editor options you can configure through inner tags are PDF export (`<pdf>`), immutables (`<immutables>`), resizable (`<resizable>`) and messages (`<messages>`).
+To configure other Editor options, such as PDF export, immutables, rezisability or messages, use the respective inner tags&mdash;`<pdf>`, `<immutables>`, `<resizable>`, or `<messages>`.
 
 ###### Example
 

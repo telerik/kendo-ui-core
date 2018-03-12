@@ -30,7 +30,9 @@ The following example demonstrates how to define the Calendar by using the Calen
 
 ## Configuration
 
-The Calendar provides configuration options that can be set during initialization. The available properties are:
+The Calendar provides configuration options that can be set during initialization.
+
+The available properties are:
 
 * Selected date
 * Minimum and/or maximum date
@@ -43,7 +45,7 @@ The Calendar provides configuration options that can be set during initializatio
 
 ### Selected, Minimum, and Maximum Dates
 
-The following example demonstrates how to create a Calendar with a selected date and a defined minimum and maximum dates.
+The following example demonstrates how to create a Calendar with a selected date and a defined minimum and maximum dates. As a result, the Calendar does not navigate to a date that is earlier than the specified minimum date and also restricts the navigation to the maximum date you specified.
 
 ###### Example
 
@@ -66,8 +68,6 @@ The following example demonstrates how to create a Calendar with a selected date
 
 ```
 
-As a result, the Calendar does not navigate to a date that is earlier than the specified minimum date and also restricts the navigation to the maximum date you specified.
-
 ### Start View and Navigation Depth
 
 To define the first rendered view, use the `start` option. To control the navigation depth, set the `depth` option.
@@ -78,14 +78,6 @@ The following views are predefined:
 * `year`&mdash;Shows the months of the year.
 * `decade`&mdash;Shows the years of the decade.
 * `century`&mdash;Shows the decades of the century.
-
-### Selectable Month Calendars
-
-The following example demonstrates how to create a Calendar that allows users to select a month.
-
-###### Example
-
-
 
 ## Day Templates
 
@@ -112,12 +104,14 @@ The following example demonstrates how to create a Calendar by using a custom te
 
 The template wraps the `value` in a `<div>` HTML element. The structure of the `data` object that is passed to the template function:
 
+```
     data = {
         date: date, // Date object corresponding to the current cell
         title: kendo.toString(date, "D"),
         value: date.getDate(),
         dateString: "2011/0/1" // formatted date using yyyy/MM/dd format and month is zero-based
     };
+```
 
 ## Week Numbers
 
@@ -185,6 +179,12 @@ By default, the user can select a single date from the Calendar by using the mou
 
 As of the Kendo UI 2017 R3 release, the Calendar allows you to implement the multiple date selection by using the `selectable` configuration property.
 
+To perform the multiple date selection, the user can also use the keyboard:
+
+* `Ctrl` + mouse click on specific date marks the date as selected and other previously selected dates remain selected as well.
+* The selection of a date from a specific view without utilizing the `Ctrl` key, deselects all previously selected dates&mdash;including the previously selected dates from other views or months, and selects the date of the clicked cell.
+* The selection of a date that is already selected while holding the `Ctrl` key removes the date from the selection.
+
 ###### Example
 
 ```tab-tagHelper
@@ -202,12 +202,6 @@ As of the Kendo UI 2017 R3 release, the Calendar allows you to implement the mul
 
 ```
 
-To perform the multiple date selection, the user can also use the keyboard:
-
-* `Ctrl` + mouse click on specific date marks the date as selected and other previously selected dates remain selected as well.
-* The selection of a date from a specific view without utilizing the `Ctrl` key, deselects all previously selected dates&mdash;including the previously selected dates from other views or months, and selects the date of the clicked cell.
-* The selection of a date that is already selected while holding the `Ctrl` key removes the date from the selection.
-
 ### Range Date Selection
 
 The Calendar enables the range date selection over the keyboard. The usage of the `Shift` key allows the user to select a range of dates in the same month or across different months:
@@ -219,21 +213,6 @@ The Calendar enables the range date selection over the keyboard. The usage of th
 
 When the user clicks on a specific week number, the Calendar selects the entire week. The week selection functionality is a special case of range selection which starts from the first day of the week and selects all dates to the end of the week.
 
-## Keyboard Navigation
-
-The keyboard navigation of the Calendar works by listening to the key-down events on the wrapper element of the widget. The logic assumes that everything the user does is in accordance with the currently focused date cell and not the focused element of the browser.
-
-Depending on selection type (single or multiple), the Calendar behaves differently in terms of selecting and navigating with the keyboard. When the user applies the multiple date selection, the Calendar demonstrates the following keyboard navigation behavior:
-
-* The focusing or selection of a date from another month does not navigate to the corresponding month. The user is able to continue the selection of dates from the current view.
-* The pressing of `Space` or `Enter` on a specific date makes a single selection by deselecting all other selected dates.
-* The pressing of `Space` or `Enter` on a specific date while the user is holding the `Ctrl` key adds the date to the current selection. If the date is already selected, it is removed from the selection.
-* The pressing of `Shift` + `Enter` or `Space` performs a range selection. It selects all dates between the most recently selected date (with `Space` or `Enter` or a mouse click) and the date that holds the focused cell.
-* The pressing of `Shift` + `Up Arrow` or `Down Arrow` extends the selection up or down one row in the month view respectively.
-* The pressing of `Shift` + `Right Arrow` or `Left Arrow` adds the next or previous date to the current selection respectively.
-
-For a runnable example on performing date selection over the keyboard, refer to [this demo](http://demos.telerik.com/kendo-ui/calendar/keyboard-navigation).
-
 ## Disabling Dates
 
 The Calendar allows you to disable certain days which are not intended to be selected by the end user such as weekends, national holidays, and others.
@@ -243,7 +222,7 @@ To disable a date, either:
 * Set an array, or
 * Add a function.
 
-### Set an Array
+### Setting an Array
 
 When you set an array, list the days that need to be disabled by using the first letters from their names in English.
 
@@ -265,7 +244,7 @@ When you set an array, list the days that need to be disabled by using the first
 
 ```
 
-### Add a Function
+### Adding a Function
 
 When you add a function, determine its return value as `true` for the date that is disabled.
 
@@ -290,6 +269,21 @@ When you add a function, determine its return value as `true` for the date that 
     </script>
 
 ```
+
+## Keyboard Navigation
+
+The keyboard navigation of the Calendar works by listening to the key-down events on the wrapper element of the widget. The logic assumes that everything the user does is in accordance with the currently focused date cell and not the focused element of the browser.
+
+Depending on selection type (single or multiple), the Calendar behaves differently in terms of selecting and navigating with the keyboard. When the user applies the multiple date selection, the Calendar demonstrates the following keyboard navigation behavior:
+
+* The focusing or selection of a date from another month does not navigate to the corresponding month. The user is able to continue the selection of dates from the current view.
+* The pressing of `Space` or `Enter` on a specific date makes a single selection by deselecting all other selected dates.
+* The pressing of `Space` or `Enter` on a specific date while the user is holding the `Ctrl` key adds the date to the current selection. If the date is already selected, it is removed from the selection.
+* The pressing of `Shift` + `Enter` or `Space` performs a range selection. It selects all dates between the most recently selected date (with `Space` or `Enter` or a mouse click) and the date that holds the focused cell.
+* The pressing of `Shift` + `Up Arrow` or `Down Arrow` extends the selection up or down one row in the month view respectively.
+* The pressing of `Shift` + `Right Arrow` or `Left Arrow` adds the next or previous date to the current selection respectively.
+
+For a runnable example on performing date selection over the keyboard, refer to [this demo](http://demos.telerik.com/kendo-ui/calendar/keyboard-navigation).
 
 ## See Also
 

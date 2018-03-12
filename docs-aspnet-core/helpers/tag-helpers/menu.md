@@ -1,6 +1,6 @@
 ---
 title: Menu
-page_title: Menu  | Telerik UI for ASP.NET Core Tag Helpers
+page_title: Menu | Telerik UI for ASP.NET Core Tag Helpers
 description: "Learn the basics when working with the Menu tag helper for ASP.NET Core (MVC 6 or ASP.NET Core MVC)."
 slug: taghelpers_menu_aspnetcore
 ---
@@ -22,7 +22,10 @@ The following example demonstrates how to define the Menu by using the Menu tag 
 
 ### Menu
 
-The Menu items collection is passed through the nest `<items>` tag. Or you can also add `<li>` tags, which will not include the `menu-item` tag helper attributes to configure.
+To pass the Menu items collection, either:
+
+* Use the nested `<items>` tag, or
+* Add `<li>` tags. This approach will not include the `menu-item` tag helper attributes.
 
 ###### Example
 
@@ -50,7 +53,7 @@ The Menu items collection is passed through the nest `<items>` tag. Or you can a
 )
 ```
 
-Other configurable options for the Menu tag helper are: `<open-on-click>`, `<popup-animation>` and `<scrollable>`.
+To further configure the Menu tag helper, use its other options&mdash;`<open-on-click>`, `<popup-animation>`, and `<scrollable>`.
 
 ###### Example
 
@@ -88,7 +91,7 @@ Other configurable options for the Menu tag helper are: `<open-on-click>`, `<pop
 
 The Menu items are represented by the `menu-item` tag helper and render `<li>` tags inside the Menu root element. The `<menu-item>` utilizes different inner tags and attributes to let you configure the Menu items.
 
-The `menu-item` tag helper inherits the [AnchorTagHelper class](https://docs.microsoft.com/en-us/aspnet/core/mvc/views/tag-helpers/built-in/anchor-tag-helper) and thus you can utilize the native navigation attributes that comes with it.
+The `menu-item` tag helper inherits the [`AnchorTagHelper`](https://docs.microsoft.com/en-us/aspnet/core/mvc/views/tag-helpers/built-in/anchor-tag-helper) class which enables you to utilize the native navigation attributes that come with it.
 
 ###### Example
 
@@ -110,7 +113,7 @@ The `menu-item` tag helper inherits the [AnchorTagHelper class](https://docs.mic
 )
 ```
 
-You can also directly setup an URL that navigates to the desired location:
+You can also directly set up a URL that navigates to the desired location.
 
 ###### Example
 
@@ -122,7 +125,7 @@ You can also directly setup an URL that navigates to the desired location:
 </kendo-menu>
 ```
 
-To create popup menus you can configure the items by using the `<sub-items>` tag of the `menu-item`.
+To create popup menus, configure the items by using the `<sub-items>` tag of the `menu-item`.
 
 ###### Example
 
@@ -153,7 +156,7 @@ To create popup menus you can configure the items by using the `<sub-items>` tag
 )
 ```
 
-Just like the Kendo Menu helper method, you can customize the menu items by adding images, [icons](https://docs.telerik.com/kendo-ui/styles-and-layout/icons-web), custom CSS classes and DOM attributes.
+Identical to the Kendo UI Menu helper method, you can customize the Menu items by adding images, [icons](https://docs.telerik.com/kendo-ui/styles-and-layout/icons-web), custom CSS classes, and DOM attributes.
 
 ###### Example
 
@@ -188,7 +191,7 @@ Just like the Kendo Menu helper method, you can customize the menu items by addi
 )
 ```
 
-The popup of each menu item can be also defined with HTML syntax. For that you can use the `<content>` tag helper.
+You can also define the popup of each Menu item with HTML syntax by using the `<content>` tag helper.
 
 ###### Example
 
