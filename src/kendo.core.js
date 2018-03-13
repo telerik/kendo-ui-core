@@ -2885,7 +2885,7 @@ function pad(number, digits, end) {
         return value;
     }
 
-    function parseOptions(element, options) {
+    function parseOptions(element, options, source) {
         var result = {},
             option,
             value;
@@ -2897,7 +2897,11 @@ function pad(number, digits, end) {
 
                 if (templateRegExp.test(option)) {
                     if(typeof value === "string") {
-                        value = kendo.template($("#" + value).html());
+                        if($("#" + value).length){
+                            value = kendo.template($("#" + value).html());
+                        }else if (source){
+                            value = kendo.template(source[value]);
+                        }
                     } else {
                         value = element.getAttribute(option);
                     }

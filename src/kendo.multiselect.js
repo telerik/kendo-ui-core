@@ -285,7 +285,7 @@ var __meta__ = { // jshint ignore:line
                 }
             }
 
-            if (this._state !== ACCEPT) {
+            if (this._initialOpen && !this.options.autoBind) {
                 this.persistTagList = false;
             }
 
@@ -507,12 +507,12 @@ var __meta__ = { // jshint ignore:line
                 //selects values in autoBind false and non virtual scenario on initial load
                 if (that._initialOpen && !that.options.autoBind && !that.options.virtual && that.options.value && !$.isPlainObject(that.options.value[0])){
                     that.value(that._initialValues);
-                    that._initialOpen = false;
                 }
 
                 // In some cases when the popup is opened resize is triggered which will cause it to close
                 // Setting the below flag will prevent this from happening
                 that.popup._hovered = true;
+                that._initialOpen = false;
                 that.popup.open();
                 that._focusItem();
             }
@@ -831,6 +831,10 @@ var __meta__ = { // jshint ignore:line
                     that._selectRange(0, listView.items().length -1);
                 }
             } else if (key === keys.ENTER && visible) {
+                if (!listView.focus()) {
+                    return;
+                }
+
                 e.preventDefault();
 
                 if (listView.focus().hasClass(SELECTEDCLASS)) {

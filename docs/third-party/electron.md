@@ -8,7 +8,7 @@ position: 12
 
 # Electron
 
-[Electron](https://electronjs.org/) is a framework for creating native applications with web technologies like JavaScript, HTML, and CSS.
+[Electron](https://electronjs.org/) is a framework for creating native desktop applications with web technologies like JavaScript, HTML, and CSS.
 
 ## Adding CSS and JavaScript References
 
@@ -68,17 +68,12 @@ The following example assumes that the Kendo UI scripts and stylesheets were add
 
 ## Sample Application
 
+The sample app is aimed at executives, analysts, or sales representatives. It helps them establish targets based on insights into historical data as well as track sales and product performance in real time. It showcases some of the most popular Kendo UI widgets, such as Scheduler, Grid, TabStrip, Charts and Map in a real world scenario. It has a simple and responsive UI based on Bootstrap and works on a wide range of devices.
+
 <a href="https://github.com/telerik/kendo-electron-dashboard" target="_blank"><img src="/images/northwind.png"></a>
 
 ## See Also
 
-* [SharePoint Add-Ins]({% slug sharepoint_tutorials %})
-* [Bootstrap]({% slug twitterbootstrapintegration_integration_kendoui %})
-* [RequireJS]({% slug requirejs_integration_kendoui %})
-* [TypeScript]({% slug typescript_integration_kendoui %})
-* [Visual Studio IntelliSense]({% slug visualstudiointellisense_integration_kendoui %})
-* [Telerik Data Access]({% slug bindtotelerikdataaccesstool_integration_kendoui %})
-* [SystemJS Support]({% slug systemjs_integration_kendoui %})
-* [Webpack Support]({% slug webpacksupport_integration_kendoui %})
-* [Aurelia]({% slug aurelia_integration_kendoui %})
-* [Kinvey]({% slug kinveysupport_integration_kendoui %})
+* [Electron Documentation](https://electronjs.org/docs)
+* [Electron Application Distribution Documentation](https://electronjs.org/docs/tutorial/application-distribution)
+* [Electron FAQ](https://electronjs.org/docs/faq)

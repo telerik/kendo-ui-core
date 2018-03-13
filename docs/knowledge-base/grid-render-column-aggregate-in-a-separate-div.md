@@ -54,55 +54,7 @@ The following example demonstrates how to show the value inside a DIV:
                     ProductName: { type: "string" },
                     UnitPrice: { type: "number" },
                     UnitsOnOrder: { type: "number" },
-                    UnitsInStock: { type: "number" }  <body>
-    <div id="example">
-      <div id="agg"> </div>
-      <div id="grid"></div>
-      <script>
-        $(document).ready(function() {
-          $("#grid").kendoGrid({
-            dataSource: {
-              type: "odata",
-              transport: {
-                read: "https://demos.telerik.com/kendo-ui/service/Northwind.svc/Products"
-              },
-              schema:{
-                model: {
-                  fields: {
-                    UnitsInStock: { type: "number" },
-                    ProductName: { type: "string" },
-                    UnitPrice: { type: "number" },
-                    UnitsOnOrder: { type: "number" },
                     UnitsInStock: { type: "number" }
-                  }
-                }
-              },
-              pageSize: 7,
-              aggregate: [{ field: "UnitsInStock", aggregate: "sum" }]
-            },
-            sortable: true,
-            dataBound:function(e){
-              var aggSum = e.sender.dataSource.aggregates().UnitsInStock.sum
-              $('#agg').html("The sum of the Units In Stock column is: "+ aggSum)
-            },
-            scrollable: false,
-            pageable: true,
-            columns: [
-              { field: "ProductName", title: "Product Name"},
-              { field: "UnitPrice", title: "Unit Price", aggregates: ["sum"] },
-              { field: "UnitsOnOrder", title: "Units On Order" },
-              { field: "UnitsInStock", title: "Units In Stock"}
-            ]
-          });
-        });
-      </script>
-    </div>
-    <style>
-      #agg{
-        margin: 25px;
-      }
-    </style>
-  </body>
                   }
                 }
               },
