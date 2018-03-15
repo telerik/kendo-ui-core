@@ -2456,8 +2456,9 @@ The text message displayed in the column menu for locking a column.
     <script>
     $("#grid").kendoGrid({
       columns: [
-        { field: "name", lockable: true },
-        { field: "age" }
+        { locked: true, field: "id", width:200 },
+        { field: "name", width:400 },
+        { field: "age", width:400 }
       ],
       columnMenu: {
         messages: {
@@ -2466,8 +2467,8 @@ The text message displayed in the column menu for locking a column.
       },
       sortable: true,
       dataSource: [
-        { name: "Jane Doe", age: 30 },
-        { name: "John Doe", age: 33 }
+        { id: 1, name: "Jane Doe", age: 30 },
+        { id: 2, name: "John Doe", age: 33 }
       ]
     });
     </script>
@@ -2482,8 +2483,9 @@ The text message displayed in the column menu for unlocking a column.
     <script>
     $("#grid").kendoGrid({
       columns: [
-        { field: "name", lockable: true },
-        { field: "age" }
+        { locked: true, field: "id", width:200 },
+        { field: "name", width:400 },
+        { field: "age", width:400 }
       ],
       columnMenu: {
         messages: {
@@ -2492,8 +2494,8 @@ The text message displayed in the column menu for unlocking a column.
       },
       sortable: true,
       dataSource: [
-        { name: "Jane Doe", age: 30 },
-        { name: "John Doe", age: 33 }
+        { id: 1, name: "Jane Doe", age: 30 },
+        { id: 2, name: "John Doe", age: 33 }
       ]
     });
     </script>

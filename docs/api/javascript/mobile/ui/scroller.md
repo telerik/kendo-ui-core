@@ -231,7 +231,7 @@ Updates the scroller dimensions. Should be called after the contents of the scro
 
 #### Example
 
-``` html
+```
     <div data-role="view">
         <a data-role="button" data-click="addContent">Append content</a>
 

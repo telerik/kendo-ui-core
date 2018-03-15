@@ -801,11 +801,33 @@ footer p {
 #page-search .gsc-input {
     background-image: none !important;
     padding-right: 2px;
+    text-indent: 0 !important;
+}
+
+#page-search .gsc-input::placeholder{
+  opacity: 0 !important;
+}
+
+#page-search .gsc-input::-webkit-input-placeholder {
+  opacity: 0 !important;
+}
+
+#page-search .gsc-input:-moz-placeholder { /* Firefox 18- */
+  opacity: 0 !important;
+}
+
+#page-search .gsc-input::-moz-placeholder {  /* Firefox 19+ */
+  opacity: 0 !important;
+}
+
+#page-search .gsc-input:-ms-input-placeholder {
+  opacity: 0 !important;
 }
 
 #page-search td.gsc-search-button {
     background: transparent url(../images/search.png) no-repeat 50% 50%;
     cursor: pointer;
+    width: 32px !important;
 }
 
 #page-search input.gsc-search-button {
@@ -815,6 +837,11 @@ footer p {
     background: none;
     opacity: 0;
     padding: 8px 7px 7px;
+}
+
+
+#page-search button.gsc-search-button, #page-search .gcsc-branding {
+  display: none !important;
 }
 
 .toggle-nav,
