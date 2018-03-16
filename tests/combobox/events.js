@@ -158,6 +158,22 @@ test("change should be raised on tab", 1, function() {
     combobox.input.focusout();
 });
 
+test("change should not be raised on tab after already changed value", 1, function() {
+    combobox = new ComboBox(input, {
+        dataSource: ["One", "Two", "Three"],
+        change: function() {
+            ok(true);
+        }
+    });
+
+    combobox.input.focus();
+    combobox.open();
+    combobox.input.press(kendo.keys.DOWN);
+    combobox.input.press(kendo.keys.ENTER);
+    combobox.input.press(kendo.keys.TAB);
+    combobox.input.focusout();
+});
+
 test("_change raises change event if selectedIndex has changed", 1, function() {
     var select = $("<select/>");
 

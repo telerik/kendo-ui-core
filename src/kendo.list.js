@@ -635,7 +635,7 @@ var __meta__ = { // jshint ignore:line
                 if (that._old === null || value === "") {
                     that._valueBeforeCascade = that._old = value;
                 } else {
-                    that._valueBeforeCascade = that._old = that.dataItem() ? that.dataItem()[that.options.dataValueField] : null;
+                    that._valueBeforeCascade = that._old = that.dataItem() ? that.dataItem()[that.options.dataValueField] || that.dataItem() : null;
                 }
                 that._oldIndex = index;
 
@@ -1202,7 +1202,7 @@ var __meta__ = { // jshint ignore:line
                         if (that._cascadedValue === null) {
                             that._cascadedValue = that.value();
                         } else {
-                            that._cascadedValue = that.dataItem() ? that.dataItem()[that.options.dataValueField] : null;
+                            that._cascadedValue = that.dataItem() ? that.dataItem()[that.options.dataValueField] || that.dataItem() : null;
                         }
                     });
                 }
