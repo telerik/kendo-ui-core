@@ -2878,7 +2878,7 @@ The minimum symbol size for bubble layer symbols.
         });
     </script>
 
-### layers.maxZoom
+### layers.maxZoom `Number`
 
 The maximum zoom level at which to show this layer.
 
@@ -2902,7 +2902,7 @@ The maximum zoom level at which to show this layer.
         });
     </script>
 
-### layers.minZoom
+### layers.minZoom `Number`
 
 The minimum zoom level at which to show this layer.
 

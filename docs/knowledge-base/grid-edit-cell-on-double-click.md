@@ -45,7 +45,6 @@ How can I edit cells on double-click in an editable Grid when selection is enabl
             }
         }
         },
-        selectable: "multiple",
         pageable: {
         buttonCount: 5
         },
