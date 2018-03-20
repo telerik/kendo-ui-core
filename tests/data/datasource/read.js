@@ -872,4 +872,19 @@ test("read resolves promise when requestStart is prevented", 1, function() {
     jasmine.clock().uninstall();
 });
 
+test("_pageSize is not set to total if a pageSize is present in the options and it is larger than the total", 1, function() {
+    var dataSource = new DataSource({
+        pageSize: 4,
+        transport: {
+            read: function(options) {
+                options.success([1, 2, 4]);
+            }
+        }
+    });
+
+    dataSource.read()
+
+    equal(dataSource._pageSize, 4);
+});
+
 }());

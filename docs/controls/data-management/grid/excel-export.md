@@ -3,7 +3,7 @@ title: Excel Export
 page_title: Excel Export | Kendo UI Grid
 description: "Learn how to set the Excel export functionality of the Kendo UI Grid widget."
 slug: exporting_excel_kendoui_grid_widget
-position: 8
+position: 10
 ---
 
 # Excel Export

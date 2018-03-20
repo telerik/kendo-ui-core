@@ -3,7 +3,7 @@ title: Frequently Asked Questions
 page_title: Frequently Asked Questions | Kendo UI Grid
 description: "Find the most frequently asked questions related to the Kendo UI Grid widget and their answers."
 slug: frequently_asked_questions_grid
-position: 11
+position: 13
 ---
 
 # Frequently Asked Questions

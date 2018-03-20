@@ -4,7 +4,7 @@ page_title: Date Formats | Kendo UI Grid
 description: "The most common scenarios for using dates in the Kendo UI Grid on the client and on the server."
 previous_url: /controls/data-management/grid/date-formats-on-the-client-and-on-the-server
 slug: dateformats_kendoui_grid_widget
-position: 8
+position: 9
 ---
 
 # Date Formats

@@ -3,7 +3,7 @@ title: Appearance
 page_title: Appearance | Kendo UI Grid
 description: "Learn how to control the layout and appearance of the Kendo UI Grid widget."
 slug: appearance_kendoui_grid_widget
-position: 5
+position: 6
 ---
 
 # Appearance

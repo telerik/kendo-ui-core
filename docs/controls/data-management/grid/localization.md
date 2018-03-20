@@ -3,7 +3,7 @@ title: Localization
 page_title: Localization | Kendo UI Grid
 description: "Learn how to localize the content of the Kendo UI Grid widget."
 slug: localization_kendoui_grid_widget
-position: 7
+position: 8
 ---
 
 # Grid Localization

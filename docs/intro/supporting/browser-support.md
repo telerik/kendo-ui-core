@@ -133,7 +133,6 @@ The following table lists the operating systems and their versions that are comp
 | Android           | 2.3 or later          |
 | iOS               | 6.0 or later          |
 | Windows Phone     | 8.0 or later          |
-| Chrome for Mobile | Any version           |
 
 ### Notes on Operating System Support
 

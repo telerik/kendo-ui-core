@@ -3235,6 +3235,9 @@ var __meta__ = { // jshint ignore:line
                 that._total = that.reader.total(data);
                 if (that._pageSize > that._total) {
                     that._pageSize = that._total;
+                    if (that.options.pageSize && that.options.pageSize > that._pageSize) {
+                        that._pageSize = that.options.pageSize;
+                    }
                 }
 
                 if (that._aggregate && options.serverAggregates) {
