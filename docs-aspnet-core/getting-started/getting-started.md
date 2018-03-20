@@ -1,7 +1,7 @@
 ---
-title: Getting Started with Progress Telerik UI for ASP.NET Core
-page_title: Getting Started with Progress<sup>®</sup> Telerik<sup>®</sup> UI for ASP.NET Core | Telerik UI for ASP.NET Core
-description: "Learn the basics when working with Progress Telerik UI for ASP.NET Core (aka MVC 6 or ASP.NET Core MVC)."
+title: Getting Started with VS 2017
+page_title: Getting Started with Progress<sup>®</sup> Telerik<sup>®</sup> UI for ASP.NET Core and Visual Studio | Telerik UI for ASP.NET Core
+description: "Learn the basics when working with Progress Telerik UI for ASP.NET Core (aka MVC 6 or ASP.NET Core MVC) and Visual Studio."
 previous_url: /aspnetmvc-apps/mvc-6/getting-started, /mvc-6/getting-started
 slug: gettingstarted_aspnetmvc6_aspnetmvc
 position: 1
@@ -200,6 +200,7 @@ Configure an ASP.NET Core Web Application to use Telerik UI for ASP.NET Core:
 ## See Also
 
 * [Overview of Telerik UI for ASP.NET Core]({% slug overview_aspnetmvc6_aspnetmvc %})
-* [Get Started with Telerik UI for ASP.NET Core in ASP.NET Core Projects on Linux]({% slug gettingstartedlinux_aspnetmvc6_aspnetmvc %})
+* [Get Started with Telerik UI for ASP.NET Core and VS Code]({% slug gettingstartedvscode_aspnetmvc6_aspnetmvc %})
+* [Get Started with Telerik UI for ASP.NET Core on Linux / MacOS]({% slug gettingstartedlinux_aspnetmvc6_aspnetmvc %})
 * [Known Issues with Telerik UI for ASP.NET Core]({% slug knownissues_aspnetmvc6_aspnetmvc %})
 * [Tag Helpers for ASP.NET Core]({% slug taghelpers_aspnetmvc6_aspnetmvc %})

@@ -1004,7 +1004,7 @@ var __meta__ = { // jshint ignore:line
                 if (value === null) {
                     value = "";
                 }
-                    element.value = value;
+                element.value = value;
             }
         },
 
