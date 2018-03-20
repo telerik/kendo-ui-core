@@ -13,18 +13,11 @@ position: 1
 
 This article demonstrates how to use Telerik UI for ASP.NET Core in ASP.NET Core applications.
 
-## Getting Started
-
-To get started with Telerik UI for ASP.NET Core, consider the:
-
-* [Supported environments](#supported-environments)
-* [Resources](#resources)
-
-### Supported Environments
+## Supported Environments
 
 Telerik UI for ASP.NET Core targets the stable releases of the ASP.NET Core framework. The target runtime is [CoreCLR](https://github.com/dotnet/coreclr). The UI for ASP.NET Core suite also supports the full desktop CLR.
 
-### Resources
+## Resources
 
 To get started, refer to the [ASP.NET Core Documentation](http://docs.asp.net/en/latest/index.html).
 

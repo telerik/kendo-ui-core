@@ -285,10 +285,6 @@ var __meta__ = { // jshint ignore:line
                 }
             }
 
-            if (this._initialOpen && !this.options.autoBind) {
-                this.persistTagList = false;
-            }
-
             this._selectValue(e.added, e.removed);
         },
 
@@ -477,6 +473,7 @@ var __meta__ = { // jshint ignore:line
                 force = this._retrieveData;
             }
             this._retrieveData = false;
+            this.persistTagList = this._initialOpen && !this.listView.bound() ? false : true;
             List.fn._filterSource.call(this, filter, force);
         },
 
@@ -499,7 +496,6 @@ var __meta__ = { // jshint ignore:line
 
                 that.listView.skipUpdate(true);
 
-                that.persistTagList = true;
                 that._filterSource();
                 that._focusItem();
             } else if (that._allowOpening()) {

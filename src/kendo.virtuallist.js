@@ -1464,7 +1464,7 @@ var __meta__ = { // jshint ignore:line
                         this._getElementByIndex(selectedIndexes[idx]).removeClass(SELECTED);
                     } else if (selectedDataItems[idx]) {
                         this._getElementByDataItem(selectedDataItems[idx]).removeClass(SELECTED);
-                    } 
+                    }
 
                     removed.push({
                         index: selectedIndexes[idx],
@@ -1563,7 +1563,9 @@ var __meta__ = { // jshint ignore:line
             for (; idx < indices.length; idx++) {
                 position = -1;
                 index = indices[idx];
-                value = this._valueGetter(this.dataItemByIndex(index));
+                if (this.dataItemByIndex(index)) {
+                    value = this._valueGetter(this.dataItemByIndex(index));
+                }
 
                 for (j = 0; j < values.length; j++) {
                     if (value == values[j]) {

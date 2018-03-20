@@ -40,27 +40,23 @@ Configure an ASP.NET Core Web Application to use Telerik UI for ASP.NET Core:
 
 ### Add the Telerik UI for ASP.NET Core NuGet Package
 
-> **Important**
->
-> Before you continue, set up the [Telerik NuGet Private Feed](../../aspnet-mvc/getting-started/nuget-install#set-up-nuget-package-source). Store the password in clear text because the .NET Core tooling does not support encryption.
+1. Before you continue, set up the [`Telerik NuGet Private Feed`](../../aspnet-mvc/getting-started/nuget-install#set-up-nuget-package-source) with your `Telerik account credentials`. Store the password in `clear text` because the .NET Core tooling does not support encryption.
 
-To add the NuGet packages:
-
-1. Open the NuGet Package Manager.
+2. Open the NuGet Package Manager.
 
   **Figure 1. The NuGet package manager**
 
   ![NuGet package manager](images/manage-nuget-packages.png)
 
-2. Click the **Browse** tab, select the Telerik package source and search for `Telerik.UI.for.AspNet.Core`.
+3. Click the **Browse** tab, select the Telerik package source and search for `Telerik.UI.for.AspNet.Core`.
 
-3. Install the `Telerik.UI.for.AspNet.Core` package. It adds a line to your `.csproj` file similar to the following example.
+4. Install the `Telerik.UI.for.AspNet.Core` package. It adds a line to your `.csproj` file similar to the following example.
 
     ###### Example
 
 		<PackageReference Include="Telerik.UI.for.AspNet.Core" Version="{{ site.mvcCoreVersion }}" />
 
-4. Open `Startup.cs` and update it in the following way:
+5. Open `Startup.cs` and update it in the following way:
 
 	* Locate the `ConfigureServices` method and add the calls.
 
@@ -100,7 +96,7 @@ To add the NuGet packages:
 				app.UseKendo(env);
 			}
 
-5. Import the `Kendo.Mvc.UI` namespace in `~/Views/_ViewImports.cshtml` through `@using Kendo.Mvc.UI`.
+6. Import the `Kendo.Mvc.UI` namespace in `~/Views/_ViewImports.cshtml` through `@using Kendo.Mvc.UI`.
 
     ###### Example
 
@@ -109,7 +105,7 @@ To add the NuGet packages:
             @addTagHelper *, Kendo.Mvc
             @using Kendo.Mvc.UI
 
-6. Copy the Kendo UI client-side resources. You can use either of the following approaches:
+7. Copy the Kendo UI client-side resources. You can use either of the following approaches:
 
     * Manual installation&mdash;To manually install the resources, copy the `js` and `styles` folders from the `telerik.ui.for.aspnetmvc` archive to `wwwroot\lib\kendo-ui`. The archive is located in **Downloads** > **Telerik UI for ASP.NET Core** of your [www.telerik.com](http://www.telerik.com/) account.
 
@@ -119,7 +115,7 @@ To add the NuGet packages:
 
     * Bower package installation&mdash;For more information on how to achieve this, refer to the [Kendo UI Professional Bower package installation](../../kendo-ui/intro/installation/bower-install).
 
-7. Register the Kendo UI styles and scripts in `~/Views/Shared/_Layout.cshtml`.
+8. Register the Kendo UI styles and scripts in `~/Views/Shared/_Layout.cshtml`.
 
 	  > **Important**
     >
@@ -185,7 +181,7 @@ To add the NuGet packages:
             ...
         </head>
 
-8. Use a Kendo UI widget by adding the snippet from the following example to `~/Views/Home/Index.cshtml`.
+9. Use a Kendo UI widget by adding the snippet from the following example to `~/Views/Home/Index.cshtml`.
 
     ###### Example
 
