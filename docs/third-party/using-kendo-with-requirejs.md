@@ -70,29 +70,29 @@ The example below demonstrates how to use a bundle script with RequireJS.
 <!DOCTYPE HTML>
 <html>
   <head>
-
-    <link rel="stylesheet" href="https://kendo.cdn.telerik.com/2016.1.226/styles/kendo.common.min.css">
-    <link rel="stylesheet" href="https://kendo.cdn.telerik.com/2016.1.226/styles/kendo.default.min.css">
-
+  <link rel="stylesheet" href="https://kendo.cdn.telerik.com/2018.1.221/styles/kendo.common.min.css">
+  <link rel="stylesheet" href="https://kendo.cdn.telerik.com/2018.1.221/styles/kendo.default.min.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.1.1/require.js"></script>
   </head>
   <body>
-    <select id="dropdownlist"></select>
+    <div id="grid"></div>
     <script>
+      
       require.config({
         paths: {
-          "jquery": "https://code.jquery.com/jquery-1.9.1.min",
-          "kendo.all.min": "https://kendo.cdn.telerik.com/2016.1.226/js/kendo.all.min"
+          "jquery": "https://code.jquery.com/jquery-1.9.1.min",          
+          "jszip": "https://kendo.cdn.telerik.com/2018.1.221/js/jszip.min",
+          "kendo.all.min": "https://kendo.cdn.telerik.com/2018.1.221/js/kendo.all.min",
         }
       });
 
-      require([ "jquery", "kendo.all.min" ], function($, kendo) {
-        $("#dropdownlist").kendoDropDownList({
+      require([ "jquery", "jszip", "kendo.all.min" ], function($, JSZip, kendo) {
+        window.JSZip = JSZip;
+        $("#grid").kendoGrid({
+          toolbar:["excel"],
           dataSource: {
-            data: [{name:"Jane Doe", value: 1}, {name:"John Doe", value: 2}]
-          },
-          dataTextField: "name",
-          dataValueField: "value"
+            data: [{name:"Jane Doe"}, {name:"John Doe"}]
+          }
         });
       });
     </script>

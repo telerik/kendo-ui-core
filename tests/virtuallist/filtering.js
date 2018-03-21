@@ -187,14 +187,14 @@
         });
     });
 
-    asyncTest("removes selection when dataSource is filtered", 2, function() {
+    asyncTest("highlight selected items when dataSource is filtered", 2, function() {
         asyncDataSource.read().then(function() {
             virtualList.one("listBound", function() {
                 virtualList.one("listBound", function() {
                     start();
                     ok(virtualList.items().first().hasClass(SELECTED), "item is selected");
                 });
-                ok(!virtualList.items().first().hasClass(SELECTED), "item is selected");
+                ok(virtualList.items().first().hasClass(SELECTED), "item is selected");
                 asyncDataSource.filter([]);
             });
             virtualList.select(virtualList.items().first());
