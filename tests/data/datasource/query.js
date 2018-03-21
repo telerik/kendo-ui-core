@@ -70,6 +70,20 @@ test("query sets sort", function() {
 
 });
 
+test("query should sort the data array when inPlaceSort is enabled and filter is applied", function() {
+    var dataSource = new DataSource({
+        data: [{ id:1, bar: "foo" },{ id: 2, bar: "foo" }],
+        inPlaceSort: true
+    });
+
+    dataSource.query({ 
+        filter: { field: "id", operator: "eq", value: "1" }, 
+        sort: { field: "id", dir: "desc" 
+    }});
+    
+    equal(dataSource.data()[0].id, 2);
+});
+
 test("query sets custom comparer", function() {
     var dataSource = new DataSource({
         data: data

@@ -122,6 +122,10 @@ var __meta__ = { // jshint ignore:line
             result += " k-header";
         }
 
+        if (item.selected) {
+            result += " " + SELECTEDCLASS;
+        }
+
         return result;
     },
     textAttributes: function(url) {
