@@ -701,7 +701,7 @@ var __meta__ = { // jshint ignore:line
                 prevent = true;
             }
 
-            if (e.ctrlKey) {
+            if (e.ctrlKey || e.metaKey) {
                 if (key == keys.RIGHT && !isRtl || key == keys.LEFT && isRtl) {
                     that.navigateToFuture();
                     prevent = true;
