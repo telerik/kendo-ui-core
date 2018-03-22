@@ -2240,9 +2240,10 @@ function pad(number, digits, end) {
 
         support.customElements = ("registerElement" in window.document);
 
-        var chrome = support.browser.chrome;
+        var chrome = support.browser.chrome,
+            mozilla = support.browser.mozilla;
         support.msPointers = !chrome && window.MSPointerEvent;
-        support.pointers = !chrome && window.PointerEvent;
+        support.pointers = !chrome && !mozilla && window.PointerEvent;
         support.kineticScrollNeeded = mobileOS && (support.touch || support.msPointers || support.pointers);
     })();
 
