@@ -1718,6 +1718,10 @@ var __meta__ = { // jshint ignore:line
             skip = options.skip,
             take = options.take;
 
+        if (sort && inPlace) {
+            query = query.sort(sort, undefined, undefined, inPlace);
+        }
+
         if (filter) {
             query = query.filter(filter);
 
@@ -1728,13 +1732,8 @@ var __meta__ = { // jshint ignore:line
             total = query.toArray().length;
         }
 
-        if (sort) {
-            if (inPlace) {
-                query = query.sort(sort, undefined, undefined, inPlace);
-            }
-            else {
-                query = query.sort(sort);
-            }
+        if (sort && !inPlace) {
+            query = query.sort(sort);
 
             if (group) {
                 data = query.toArray();
