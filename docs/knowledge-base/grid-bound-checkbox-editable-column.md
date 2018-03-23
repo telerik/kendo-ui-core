@@ -29,11 +29,11 @@ How can I implement a checkbox in the Grid which is bound to the model and which
 
 The Grid acquires two modes&mdash;read and edit. Its read mode displays the text of the `dataItems`. When in edit mode, the Grid renders the appropriate editor and binds to its `dataItem` property value. This means that even though the Grid renders an editor as a template, it will still create the respective editor when in edit mode. As a result, you have to configure some settings programmatically.
 
-1. Manage the configuration of the columns.
+1. Manage the configuration of the columns. The `editable` setting is added to prevent the template cell from entering edit mode and generating an editor of its own.
 
     ```
     columns:[
-        { field: "Discontinued", template: '<input type="checkbox" #= Discontinued ? \'checked="checked"\' : "" # class="chkbx" />', width: 110 },
+        { field: "Discontinued", template: '<input type="checkbox" #= Discontinued ? \'checked="checked"\' : "" # class="chkbx" />', width: 110, editable: function(e){ return false; } }
     ]
     ```
 
@@ -56,8 +56,7 @@ The Grid acquires two modes&mdash;read and edit. Its read mode displays the text
 
 The following example demonstrates the full implementation of the approach.
 
-```html
-        <div id="grid"></div>
+    <div id="grid"></div>
     <script>
       var crudServiceBaseUrl = "https://demos.telerik.com/kendo-ui/service",
           dataSource = new kendo.data.DataSource({
@@ -84,7 +83,6 @@ The following example demonstrates the full implementation of the approach.
                 }
               }
             },
-            filter:{ field: "Discontinued", operator: "eq", value: true },
             batch: true,
             pageSize: 20,
             schema: {
@@ -111,22 +109,17 @@ The following example demonstrates the full implementation of the approach.
           "ProductName",
           { field: "UnitPrice", title: "Unit Price", format: "{0:c}", width: 110 },
           { field: "UnitsInStock", title: "Units In Stock", width: 110 },
-          { field: "Discontinued", template: '<input type="checkbox" #= Discontinued ? \'checked="checked"\' : "" # class="chkbx" />', width: 110 },
+          { field: "Discontinued", template: '<input type="checkbox" #= Discontinued ? \'checked="checked"\' : "" # class="chkbx" />', width: 110, editable: function(e){ return false; } },
           { command: "destroy", title: "&nbsp;", width: 100 }],
-        editable: true,
-        edit:function(e){
-        	if(e.container.find("input[type='checkbox']")){
-          	this.closeCell();
-          }
-        }
+        editable: true
       });
 
       $("#grid .k-grid-content").on("change", "input.chkbx", function(e) {
         var grid = $("#grid").data("kendoGrid"),
             dataItem = grid.dataItem($(e.target).closest("tr"));
-        		$(e.target).closest("td").prepend("<span class='k-dirty'></span>");
-        		dataItem.Discontinued = this.checked;
-        		dataItem.dirty = true;
+        $(e.target).closest("td").prepend("<span class='k-dirty'></span>");
+        dataItem.Discontinued = this.checked;
+        dataItem.dirty = true;
       });
     </script>
 ```

@@ -21,7 +21,7 @@ The following example demonstrates how to define the PanelBar by using the Panel
 
 ## Configuration
 
-The PanelBar tag helper configuration options are passed as attributes of the tag. Items could be configured by using nested `<items>` tag. The widget could be bound via to `bind-to` option or via `<hierarchical-datasource>` tag helper.
+The PanelBar tag helper configuration options are passed as attributes of the tag. Items could be configured by using nested `<items>` tag. The widget could be bound via `bind-to` option or via `<hierarchical-datasource>` tag helper.
 
 ###### Example
 

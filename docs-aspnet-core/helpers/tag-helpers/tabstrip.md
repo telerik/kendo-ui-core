@@ -25,7 +25,7 @@ The following example demonstrates how to define the TabStrip by using the TabSt
 To pass the TabStrip items collection, either:
 
 * Use the nested `<items>` tag, or
-* Add `<li>` tags. This approach will not include the `tabstrip-item` tag helper attributes. And you will need to also include `<div>` tags for teh content of the tabs.
+* Add `<li>` tags. This approach will not include the `tabstrip-item` tag helper attributes. And you will need to also include `<div>` tags for the content of the tabs.
 
 ###### Example
 
