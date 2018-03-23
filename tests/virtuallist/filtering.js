@@ -197,8 +197,9 @@
                 ok(virtualList.items().first().hasClass(SELECTED), "item is selected");
                 asyncDataSource.filter([]);
             });
-            virtualList.select(virtualList.items().first());
-            asyncDataSource.filter({ field: "letter", operator: "eq", value: "a" });
+            virtualList.select(virtualList.items().first()).then(function(){
+                asyncDataSource.filter({ field: "letter", operator: "eq", value: "a" });
+            });
         });
     });
 
