@@ -24,10 +24,6 @@
         return item.data("uid");
     }
 
-    function getToolElement(listbox, toolName) {
-        return listbox.wrapper.find("[data-command='" + toolName + "']");
-    }
-
     function toolIsDisabled(listbox, tool) {
         return getToolElement(listbox, tool).hasClass(DISABLED_STATE_CLASS);
     }
