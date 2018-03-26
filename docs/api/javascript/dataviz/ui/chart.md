@@ -34058,6 +34058,7 @@ The name of the series.
 The DOM element of the plot area.
 
 #### Example - subscribe to the "legendItemClick" event during initialization
+    <div id="chart"></div>
     <script>
       $("#chart").kendoChart({
         series: [

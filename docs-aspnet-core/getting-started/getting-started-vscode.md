@@ -17,7 +17,7 @@ This article demonstrates how to configure an ASP.NET Core project to use Teleri
 
 * Install [Visual Studio Code](https://code.visualstudio.com/).
 
-* Install the [VS Code C# Extenstion](https://marketplace.visualstudio.com/items?itemName=ms-vscode.csharp).
+* Install the [VS Code C# Extension](https://marketplace.visualstudio.com/items?itemName=ms-vscode.csharp).
 
 ## Creating the Application
 

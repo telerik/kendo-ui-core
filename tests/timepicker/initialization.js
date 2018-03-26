@@ -366,4 +366,17 @@
         equal(timepicker.value(), null);
         equal(timepicker.element.val(), kendo.toString(value, timepicker.options.format));
     });
+
+    test("Custom min and max values are passed correctly to the DateInput", function() {
+        var min = new Date(2000, 0, 1, 22, 0, 0);
+        var max = new Date(2000, 0, 1, 23, 0, 0);
+        var timepicker = input.kendoTimePicker({
+            dateInput: true,
+            min: min,
+            max: max
+        }).data("kendoTimePicker");
+
+        equal(timepicker._dateInput.min(), min);
+        equal(timepicker._dateInput.max(), max);
+    });
 })();

@@ -152,3 +152,8 @@ function clickTransferAllToButton(listbox, event) {
 function clickTransferAllFromButton(listbox, event) {
     clickButton(listbox, "transferAllFrom", event);
 }
+
+/* exported getToolElement */
+function getToolElement(listbox, toolName) {
+    return listbox.wrapper.find("[data-command='" + toolName + "']");
+}

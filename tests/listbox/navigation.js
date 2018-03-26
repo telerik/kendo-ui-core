@@ -10,6 +10,7 @@
         TRANSFER_ALL_FROM = "transferAllFrom",
         MOVE_UP = "moveUp",
         MOVE_DOWN = "moveDown";
+    var TABINDEX = "tabindex"
     var wrapper;
     var listbox;
 
@@ -22,7 +23,10 @@
                     dataSource: [ "Item1", "Item2", "Item3", "Item4", "Item5", "Item6", "Item7", "Item8", "Item9", "Item10"],
                     selectable: "multiple",
                     navigatable: true,
-                    reorderable: true
+                    reorderable: true,
+                    toolbar: {
+                        tools: [ "moveDown" ]
+                    }
             }).getKendoListBox();
             $(document.body).append(QUnit.fixture);
         },
@@ -40,6 +44,22 @@
 
     test("List element has tab index", 1, function() {
         ok(!isNaN(listA._getList().attr("tabindex")));
+    });
+
+    test("enabled tool should be focusable", function() {
+        listA.select(listA.items().first());
+
+        var tool = getToolElement(listA, MOVE_DOWN);
+
+        equal(tool.attr(TABINDEX), undefined);
+    });
+
+    test("disabled tool should not be focusable", function() {
+        listA.select(listA.items().last());
+
+        var tool = getToolElement(listA, MOVE_DOWN);
+
+        ok(tool.attr(TABINDEX) === "-1");
     });
 
     test("First item gets focused on keydown if focused item is not present", 2, function() {

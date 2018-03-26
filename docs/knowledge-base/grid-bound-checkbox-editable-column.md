@@ -56,6 +56,7 @@ The Grid acquires two modes&mdash;read and edit. Its read mode displays the text
 
 The following example demonstrates the full implementation of the approach.
 
+```html
     <div id="grid"></div>
     <script>
       var crudServiceBaseUrl = "https://demos.telerik.com/kendo-ui/service",
