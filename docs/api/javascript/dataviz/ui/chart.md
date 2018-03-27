@@ -34027,11 +34027,6 @@ The widget instance which fired the event.
 Fires when an legend item is clicked, before the selected series visibility is toggled.
 Can be cancelled.
 
-#### Example - prevent toggling the series visibility on legend item click
-    function onLegendItemClick(e) {
-        e.preventDefault();
-    }
-
 #### Event Data
 
 ##### e.pointIndex `Number`
@@ -34062,15 +34057,46 @@ The name of the series.
 
 The DOM element of the plot area.
 
+#### Example - subscribe to the "legendItemClick" event during initialization
+    <div id="chart"></div>
+    <script>
+      $("#chart").kendoChart({
+        series: [
+          { data: [6, 2, 3], name: "Task 1" },
+          { data: [1, 5, 2], name: "Task 2" }
+        ],
+        legendItemClick: function(e){
+        	console.log("Clicked an item with text: " + e.text);
+          
+          //prevent toggling the series visibility on legend item click
+          e.preventDefault();
+        }
+      });
+    </script>
+
+#### Example - subscribe to the "legendItemClick" event after initialization
+    <div id="chart"></div>
+    <script>
+      function chart_legendClick(e){
+        console.log("Clicked an item with text: " + e.text);
+
+        //prevent toggling the series visibility on legend item click
+        e.preventDefault();
+      }
+      $("#chart").kendoChart({
+        series: [
+          { data: [6, 2, 3], name: "Task 1" },
+          { data: [1, 5, 2], name: "Task 2" }
+        ]
+      });
+      var chart = $("#chart").data("kendoChart");      
+      chart.bind("legendItemClick", chart_legendClick);
+    </script>
+
+
 ### legendItemHover
 
 Fires when an legend item is hovered.
-
-#### Example
-
-    function onLegendItemHover(e) {
-        alert("Hovered " + e.text + " series");
-    }
 
 #### Event Data
 
@@ -34097,6 +34123,38 @@ The series index.
 ##### e.text `String`
 
 The name of the series.
+
+#### Example - subscribe to the "legendItemHover" event during initialization
+
+    <div id="chart"></div>
+    <script>
+      $("#chart").kendoChart({
+        series: [
+          { data: [6, 2, 3], name: "Task 1" },
+          { data: [1, 5, 2], name: "Task 2" }
+        ],
+        legendItemHover: function(e){
+        	console.log("Hovered an item with text: " + e.text);
+        }
+      });
+    </script>
+
+#### Example - subscribe to the "legendItemHover" event after initialization
+
+    <div id="chart"></div>
+    <script>
+      function chart_legendHover(e){
+        console.log("Hovered an item with text: " + e.text);
+      }
+      $("#chart").kendoChart({
+        series: [
+          { data: [6, 2, 3], name: "Task 1" },
+          { data: [1, 5, 2], name: "Task 2" }
+        ]
+      });
+      var chart = $("#chart").data("kendoChart");
+      chart.bind("legendItemHover", chart_legendHover);
+    </script>
 
 ### noteClick
 
@@ -34383,6 +34441,40 @@ The event handler function context (available via the `this` keyword) will be se
 ##### e.sender `kendo.dataviz.ui.Chart`
 
 The widget instance which fired the event.
+
+#### Example - subscribe to the "render" event during initialization
+    <div id="chart"></div>
+    <script>
+    $("#chart").kendoChart({
+      dataSource: [
+        { value: 1 }
+      ],
+      series: [
+        { field: "value" }
+      ],
+      render: function(e) {
+        console.log("render");
+      }
+    });
+    </script>
+
+#### Example - subscribe to the "render" event after initialization
+    <div id="chart"></div>
+    <script>
+    function chart_render(e) {
+      console.log("re");
+    }
+    $("#chart").kendoChart({
+      dataSource: [
+        { value: 1 }
+      ],
+      series: [
+        { field: "value" }
+      ]
+    });
+    var chart = $("#chart").data("kendoChart");
+    chart.bind("render", chart_render);
+    </script>
 
 ### select
 

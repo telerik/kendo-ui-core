@@ -309,7 +309,7 @@ note that a check for an empty `date` is needed, as the widget can work with a n
     <input id="datepicker" />
     <script>
     $("#datepicker").kendoDatePicker({
-        max: new Date(2013, 0, 1) // sets max date to Jan 1st, 2013
+        max: new Date() // sets max date to today's date
     });
     </script>
 
@@ -322,7 +322,7 @@ note that a check for an empty `date` is needed, as the widget can work with a n
     <input id="datepicker" />
     <script>
     $("#datepicker").kendoDatePicker({
-        min: new Date(2011, 0, 1) // sets min date to Jan 1st, 2011
+        min: new Date() // sets min date to today's date
     });
     </script>
 

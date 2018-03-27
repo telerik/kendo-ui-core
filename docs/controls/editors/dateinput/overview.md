@@ -18,13 +18,15 @@ The DateInput provides separate sections for days, months, years, hours, and min
 
 To initialize the DateInput, use the following example.
 
+```html
     <input id="dateInput" />
 
     <script>
-        $(document).ready(function(){
-            $("#dateInput").kendoDateInput();
-        });
+      $(document).ready(function(){
+        $("#dateInput").kendoDateInput();
+      });
     </script>
+```
 
 ## Configuration
 
@@ -40,18 +42,19 @@ The following example demonstrates how to create a non-editable DateInput with a
 
 ###### Example
 
+```html
     <input id="dateInput" />
 
     <script>
-        $(document).ready(function(){
-            $("#dateInput").kendoDateInput({
-                value: new Date(),
-                format: "dd/MM/yyyy",
-                readonly: true
-            })
+      $(document).ready(function(){
+        $("#dateInput").kendoDateInput({
+          value: new Date(),
+          format: "dd/MM/yyyy",
+          readonly: true
         });
+      });
     </script>
-
+```
 
 ## Validation
 
@@ -69,13 +72,15 @@ The following example demonstrates how to integrate the DateInput with the DateP
 
 ###### Example
 
+```html
     <input id="datepicker" />
 
     <script>
-    $("#datepicker").kendoDatePicker({
+      $("#datepicker").kendoDatePicker({
         dateInput: true
-    });
+      });
     </script>
+```
 
 ## Localization
 
@@ -83,18 +88,20 @@ The DateInput enables you to modify the text that is displayed in the placeholde
 
 ###### Example
 
+```html
     <input id="dateinput" />
 
     <script>
-    $("#dateinput").kendoDateInput({
+      $("#dateinput").kendoDateInput({
         format: "dd / MMMM / yyyy",
         messages:{
-            month:"____",
-            year:"____",
-            day:"__",
-            }
-    });
+          month:"____",
+          year:"____",
+          day:"__",
+        }
+      });
     </script>
+```
 
 ## See Also
 
