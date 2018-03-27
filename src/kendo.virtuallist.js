@@ -681,17 +681,24 @@ var __meta__ = { // jshint ignore:line
             var that = this;
             var take = that.itemCount;
             var skip = that._getSkip(index, take);
+            var view = this._getRange(skip, take);
 
             //should not return item if data is not loaded
             if (!that._getRange(skip, take).length) {
                 return null;
             }
 
-            that.mute(function() {
-                that.dataSource.range(skip, take);
-            });
+            if (that.options.type === "group") {
+                kendo.ui.progress($(that.wrapper), true);
+                that.mute(function() {
+                    that.dataSource.range(skip, take, function () {
+                        kendo.ui.progress($(that.wrapper), false);
+                    });
+                    view = that.dataSource.view();
+                });
+            }
 
-            return that._findDataItem(that.dataSource.view(), [index - skip]);
+            return that._findDataItem(view, [index - skip]);
         },
 
         selectedDataItems: function() {

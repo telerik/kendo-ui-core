@@ -1081,18 +1081,6 @@
             });
     }
 
-    if (kendo.ui.TreeList) {
-        kendo.ui.TreeList.prototype.options.columnMenu =
-            $.extend(true, kendo.ui.TreeList.prototype.options.columnMenu, {
-                "messages": {
-                    "columns": "字段列",
-                    "filter": "筛选",
-                    "sortAscending": "升序排列",
-                    "sortDescending": "降序排列"
-                }
-            });
-    }
-
     /* TreeView messages */
     if (kendo.ui.TreeView) {
         kendo.ui.TreeView.prototype.options.messages =

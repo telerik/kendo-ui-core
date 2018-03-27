@@ -855,18 +855,6 @@ $.extend(true, kendo.ui.TreeList.prototype.options.messages,{
 });
 }
 
-if (kendo.ui.TreeList) {
-kendo.ui.TreeList.prototype.options.columnMenu =
-$.extend(true, kendo.ui.TreeList.prototype.options.columnMenu, {
-    "messages": {
-        "columns": "Escolher colunas",
-        "filter": "Aplicar filtro",
-        "sortAscending": "Ordenar (asc)",
-        "sortDescending": "Ordenar (desc)"
-    }
-});
-}
-
 /* TreeView messages */
 
 if (kendo.ui.TreeView) {

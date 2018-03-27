@@ -1,25 +1,25 @@
-/** 
- * Kendo UI v2017.3.1026 (http://www.telerik.com/kendo-ui)                                                                                                                                              
- * Copyright 2017 Telerik AD. All rights reserved.                                                                                                                                                      
- *                                                                                                                                                                                                      
- * Kendo UI commercial licenses may be obtained at                                                                                                                                                      
- * http://www.telerik.com/purchase/license-agreement/kendo-ui-complete                                                                                                                                  
- * If you do not own a commercial license, this file shall be governed by the trial license terms.                                                                                                      
-                                                                                                                                                                                                       
-                                                                                                                                                                                                       
-                                                                                                                                                                                                       
-                                                                                                                                                                                                       
-                                                                                                                                                                                                       
-                                                                                                                                                                                                       
-                                                                                                                                                                                                       
-                                                                                                                                                                                                       
-                                                                                                                                                                                                       
-                                                                                                                                                                                                       
-                                                                                                                                                                                                       
-                                                                                                                                                                                                       
-                                                                                                                                                                                                       
-                                                                                                                                                                                                       
-                                                                                                                                                                                                       
+/**
+ * Kendo UI v2017.3.1026 (http://www.telerik.com/kendo-ui)
+ * Copyright 2017 Telerik AD. All rights reserved.
+ *
+ * Kendo UI commercial licenses may be obtained at
+ * http://www.telerik.com/purchase/license-agreement/kendo-ui-complete
+ * If you do not own a commercial license, this file shall be governed by the trial license terms.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 */
 
@@ -427,7 +427,7 @@ $.extend(true, kendo.ui.TreeList.prototype.options.messages,{
 if (kendo.ui.Groupable) {
 kendo.ui.Groupable.prototype.options.messages =
 $.extend(true, kendo.ui.Groupable.prototype.options.messages,{
-  "empty": "Prevucite zaglavlje kolone i pustite je ovde da se grupiraju do kolonom" 
+  "empty": "Prevucite zaglavlje kolone i pustite je ovde da se grupiraju do kolonom"
 });
 }
 
@@ -787,7 +787,7 @@ $.extend(true, kendo.spreadsheet.messages.dialogs,{
   },
   "useKeyboardDialog": {
     "title": "Kopiranje i umetanje",
-	
+
     "errorMessage": "Ove akcije se ne mogu pozivati preko menija. Umjesto toga koristite prečice na tastaturi:",
     "labels": {
       "forCopy": "za kopiranje",
@@ -997,18 +997,6 @@ $.extend(true, kendo.ui.TreeList.prototype.options.messages,{
       "excel": "Export u Excel",
       "pdf": "Export u PDF"
   }
-});
-}
-
-if (kendo.ui.TreeList) {
-kendo.ui.TreeList.prototype.options.columnMenu =
-$.extend(true, kendo.ui.TreeList.prototype.options.columnMenu, {
-    "messages": {
-        "columns": "Izberi kolona",
-        "filter": "Primeniti filter",
-        "sortAscending": "Sortiraj (rast)",
-        "sortDescending": "Sortiraj (sila)"
-    }
 });
 }
 

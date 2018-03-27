@@ -209,18 +209,6 @@ $.extend(true, kendo.ui.TreeList.prototype.options.messages,{
 });
 }
 
-if (kendo.ui.TreeList) {
-kendo.ui.TreeList.prototype.options.columnMenu =
-$.extend(true, kendo.ui.TreeList.prototype.options.columnMenu, {
-    "messages": {
-        "columns": "Choisissez les colonnes",
-        "filter": "Appliquer les filtres",
-        "sortAscending": "Tri (croissant)",
-        "sortDescending": "Tri (décroissant)"
-    }
-});
-}
-
 /* Pager messages */
 
 if (kendo.ui.Pager) {

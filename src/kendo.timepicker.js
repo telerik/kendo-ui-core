@@ -371,7 +371,9 @@ var __meta__ = { // jshint ignore:line
         _parse: function(value) {
             var that = this,
                 options = that.options,
-                current = that._value || TODAY;
+                min = getMilliseconds(options.min) != getMilliseconds(TODAY) ? options.min : null,
+                max = getMilliseconds(options.max) != getMilliseconds(TODAY) ? options.max : null,
+                current = that._value || min || max || TODAY;
 
             if (value instanceof DATE) {
                 return value;
