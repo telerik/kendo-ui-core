@@ -857,19 +857,6 @@ $.extend(true, kendo.ui.TreeList.prototype.options.messages, {
 });
 }
 
-if (kendo.ui.TreeList) {
-kendo.ui.TreeList.prototype.options.columnMenu =
-$.extend(true, kendo.ui.TreeList.prototype.options.columnMenu, {
-    "messages": {
-        "columns": "Zvoľte stĺpce",
-        "filter": "Použiť filter",
-        "sortAscending": "Usporiadať vzostupne",
-        "sortDescending": "Usporiadať zostupne"
-    }
-});
-}
-
-
 /* TreeView messages */
 
 if (kendo.ui.TreeView) {

@@ -967,18 +967,6 @@ $.extend(true, kendo.ui.TreeList.prototype.options.messages,{
 });
 }
 
-if (kendo.ui.TreeList) {
-kendo.ui.TreeList.prototype.options.columnMenu =
-$.extend(true, kendo.ui.TreeList.prototype.options.columnMenu, {
-    "messages": {
-        "columns": "Oszlopválasztás",
-        "filter": "Szűrés",
-        "sortAscending": "Rendezés (növekvő)",
-        "sortDescending": "Rendezés (csökkenő)"
-    }
-});
-}
-
 /* TreeView messages */
 
 if (kendo.ui.TreeView) {
