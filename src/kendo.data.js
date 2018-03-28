@@ -3251,8 +3251,7 @@ var __meta__ = { // jshint ignore:line
 
         success: function(data) {
             var that = this,
-                options = that.options,
-                requestParams;
+                options = that.options;
 
             that.trigger(REQUESTEND, { response: data, type: "read" });
 
@@ -3276,8 +3275,7 @@ var __meta__ = { // jshint ignore:line
                     that._aggregateResult = that._readAggregates(data);
                 }
 
-                requestParams = arguments.length > 1 ? arguments[1] : undefined;
-                data = that._readData(data, requestParams);
+                data = that._readData(data);
 
                 that._destroyed = [];
             } else {

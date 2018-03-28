@@ -52,45 +52,43 @@ The [virtual scrolling](https://demos.telerik.com/kendo-ui/grid/virtualization-r
 
 with External or Initial Filter
 
-This is something that is not related directly to the Kendo UI Grid, but is rather a general suggestion for handling huge amounts of data. The main idea is to have some additional filter criteria that will reduce the records bound to the Grid. Some projects allow using an external filter widget (_the DropDownList is most commonly used_) and its selected value is used for filtering the data prior to passing it to the Grid.
+Reducing the quantity of data by using external or initial filter is not directly related to the Kendo UI Grid but is a general approach for handling huge amounts of data. The concept is to implement additional filter criteria that will reduce the records which are bound to the Grid. Some projects allow the usage of external filter widgets, such as the DropDownList, and their selected value is used to filter the data prior to its passing it to the Grid. For example, if you have millions of orders from different companies, you can use an external DropDownList listing of all companies and then apply the currently selected one as an additional parameter in the read data operation of the dataSource. In this way, you can apply an initial filter and return only the orders from that company.
 
-As an example, let`s say that we have millions of orders from different companies. We can use external DropDownList listing all companies and we can use the currently selected one as additional parameter in the Read of the dataSource, so we can apply an initial filter and return the orders from that company only.
-
-We can also set initial filter criteria in the Grid`s dataSource for specific field, but the user will be able to remove it if the filtering is enabled and the column bound to that field is visible.
+To reduce the quantity of data, you can also set initial filter criteria for a specific field in the dataSource of the Grid. However, if filtering is enabled and the column which is bound to that field is visible, the user will be able to remove it.
 
 ### Using Fast Browsers
 
-Internet Explorer is known to have slow performance with too many DOM elements and event listeners on the page. Using Chrome seems to provide the best user experience in the context of the Kendo UI widgets.
+Internet Explorer is known for its slow performance when the widget uses too many DOM elements and event listeners on the page. Using Chrome seems to provide the best user experience in the context of the Kendo UI widgets.
 
 ## Avoiding Common Mistakes
 
 To manage commonly made mistakes, avoid:
-* Rendering everything
-* Excessive use of editors or widgets directly in the columns
-* Extreme number of columns
-* Expanding all content
+* [Rendering everything](#rendering-everything)
+* [Excessive use of editors or widgets directly in the columns](#excessive-use-of-editors-or-widgets-in-cells)
+* [Extreme number of columns](#using-too-many-columns)
+* [Expanding all content](#expanding-all-content)
 
 ### Rendering Everything
 
-Having too many records and columns without Paging or Virtual Scrolling will result in huge amount of DOM elements and event listeners. Some browser will be able to handle more records than others, but to deliver the best user experience we should avoid rendering more than 100 records without paging or virtualization. If we need to find specific records we can always enable Filtering, which is much faster than, for example, rendering 1000 records and scrolling down to find what we are looking for.
+If the Grid displays too many records and columns without having its paging or virtual scrolling functionalities enabled results in a huge amount of DOM elements and event listeners on the page. While some browsers are able to handle more records than others, avoid rendering more than 100 records per page without paging or virtualization so that the user gets the best experience. To find specific records, you can always enable filtering which is much faster than, for example, rendering 1,000 records and scrolling down to find what the user us looking for.
 
 ### Excessive Use of Editors or Widgets in Cells
 
-Rendering editors directly in the columns sounds and looks great, but it comes with a price. As mentioned earlier, initializing widgets in each cell is a slow operation and will be a major performance hit, especially when there are many records displayed in the Grid. Additionally, if we use custom code for two-way binding between the editors and the underlying data items, each change will initiate the re-rendering of the entire data, which on the other hand will trigger the initialization of the editors once again. You see how this great idea becomes a nightmare with a single click and we start to struggle with the extremely slow performance.
+Rendering editors directly in the columns looks great, but it comes with a price. As mentioned earlier, initializing widgets in each cell is a slow operation and will be a major performance issue especially when the Grid displays many records. Additionally, if you use custom code for the two-way binding between the editors and the underlying data items, each change will initiate the re-rendering of the entire data, which will trigger the initialization of the editors again and consequently lead to slow performance.
 
-At this point we decide to prevent the rebinding of the Grid after each change by removing the two-way binding and by changing the dataItem values manually (_changing the properties without using the "set" method and setting the dirty property to true_). Great, now we can edit multiple records without re-rendering the Grid, but we are still facing the issue with the initial initialization of the widget. The only thing that we can now is to reduce the pageSize drastically (5 or 10 records per page, depending on the number of columns).
+If you prevent the rebinding of the Grid after each change by removing the two-way binding and by changing the dataItem values manually&mdash;that is, changing the properties without using the `set` method and setting the dirty property to `true`, you can edit multiple records without re-rendering the Grid. However, the issue with the initial initialization of the widget is still present&mdash;to work around its, drastically reduce the `pageSize` up to five or ten records per page, depending on the number of columns.
 
 ### Using Too Many Columns
 
-Even with enabled Paging or Virtual Scrolling, having too many columns will slow down the rendering of the rows, because each column increases the cells in the DOM and our goal is to keep it as light as possible. We can always hide the column by setting the _"hidden"_ property to _"true"_, but this will actually make the things even worse, because the columns will still be rendered in the DOM, and in addition to that they will receive _"display: none"_ as inline style. Now what?
+While the Grid may have its paging or virtual scrolling enabled, having too many columns slows down the rendering of the rows because each column increases the cells in the DOM. You can hide the column by setting the `hidden` property to `true` but this approach makes things even worse because the columns are still rendered in the DOM and in addition to that they will receive `display: none` as an inline style.
 
-Well, for up to 20 columns we can still define all of them in the configuration of the Grid, but we will need to decrease the pageSize to 50 at most (1000 cells, which is still acceptable). We could even hide some of the columns and enable the columnMenu, so that the user can choose which columns to display. However, if we have 100 columns we might observe slow rendering. For such cases we can implement external logic for allowing the end user to choose a list of columns that will be rendered. We can then use that list to initialize the Grid with only that set of columns. The benefit here is that there will be no hidden columns rendered in the DOM and we will reduce the cell count drastically.
+To work around this issue, if your Grid displays up to 20 columns, define all of them in its configuration and decrease the `pageSize` to up to 50&mdash;that is, 1,000 cells which is acceptable. You can also hide some of the columns and enable the `columnMenu` so that the user can choose which columns to display. However, if your Grid displays 100 or more columns, implement external logic for allowing the end user to choose a list of columns that will be rendered. You can then use that list to initialize the Grid with only that set of columns. The benefit of this approach is that no hidden columns will be rendered in the DOM and you will reduce the cell count drastically.
 
-Another problem that we can face with too many columns is the usage of the autoFitColumn method, which travels each cell in the columns to retrieve the width of their content. Using __autoFitColumn__ should be avoided in such cases.
+Another issue you might encounter when the Grid displays too many columns is the usage of the `autoFitColumn` method which traverses each column cell to retrieve the width of its content. To work around this behavior, avoid using `autoFitColumn`.
 
 ### Expanding All Content
 
-What makes hierarchical Grid fast is the fact that the records for the child Grid in the detailTemplate requests the records only when the detail row is expanded. If we expand all detail rows initially, this will initialize all child Grids and will make multiple requests.
+Hierarchical Grids are fast when the records for the child Grids in the `detailTemplate` request the records only when the detail row is expanded. If you initially expand all detail rows, all child Grids will initialize and multiple requests will be made.
 
 ## See Also
 

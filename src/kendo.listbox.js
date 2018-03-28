@@ -153,6 +153,12 @@ var __meta__ = { // jshint ignore:line
             kendo.destroy(that.element);
         },
 
+        setOptions: function(options) {
+            Widget.fn.setOptions.call(this, options);
+            this._templates();
+            this._dataSource();
+        },
+
         events: [
             CHANGE,
             DATABOUND,
