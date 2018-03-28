@@ -1,6 +1,6 @@
 ---
 title: Getting Started with VS Code
-page_title: Getting Started with Progress<sup>®</sup> Telerik<sup>®</sup> UI for ASP.NET Core and Visual Studio Code | Telerik UI for ASP.NET Core | Telerik UI for ASP.NET Core
+page_title: Getting Started with Progress<sup>®</sup> Telerik<sup>®</sup> UI for ASP.NET Core and Visual Studio Code | Telerik UI for ASP.NET Core
 description: "Learn the basics when working with Progress Telerik UI for ASP.NET Core (aka MVC 6 or ASP.NET Core MVC) and VS Code."
 previous_url: /aspnetmvc-apps/mvc-6/getting-started-vscode, /mvc-6/getting-started-vscode
 slug: gettingstartedvscode_aspnetmvc6_aspnetmvc
@@ -14,14 +14,13 @@ This article demonstrates how to configure an ASP.NET Core project to use Teleri
 ## Prerequisites
 
 * Install [.NET Core 2.0 SDK](https://www.microsoft.com/net/learn/get-started/windows) or later.
-
 * Install [Visual Studio Code](https://code.visualstudio.com/).
-
 * Install the [VS Code C# Extension](https://marketplace.visualstudio.com/items?itemName=ms-vscode.csharp).
 
 ## Creating the Application
 
 1. Create a new project from the cli:
+
     ```sh
     mkdir MyTelerikApp
     cd MyTelerikApp
@@ -29,51 +28,54 @@ This article demonstrates how to configure an ASP.NET Core project to use Teleri
     ```
 
 1. Load the newly created project in VS Code.
-    - Select Yes to the Warn message `"Required assets to build and debug are missing from 'MvcMovie'. Add them?"`
-    - Select Restore to the Info message `"There are unresolved dependencies"`.
+    - Select **Yes** to the `"Required assets to build and debug are missing from 'MvcMovie'. Add them?"` warn message.
+    - Select **Restore** to the `"There are unresolved dependencies"` info message.
 
-1. Build and run the application by pressing **F5**.
+1. Build and run the application by pressing `F5`.
 
 ## Integrating Telerik UI for ASP.NET Core
 
 1. [Set up the Telerik Private NuGet Feed](https://docs.telerik.com/aspnet-mvc/getting-started/nuget-install#set-up-nuget-package-source).
 
 2. Install Kendo UI through the cli:
+
     ```sh
     dotnet add package Telerik.UI.for.AspNet.Core
     ```
 
-3. Register Kendo UI as a service in Startup.cs:
+3. Register Kendo UI as a service in `Startup.cs`:
 
-    Locate the `ConfigureServices method` and add the Kendo service:
-    ```cs
-    public void ConfigureServices(IServiceCollection services)
-    {
-        services.AddMvc();
-                .AddJsonOptions(options =>
-                    options.SerializerSettings.ContractResolver = new DefaultContractResolver());
-        services.AddKendo();
-    }
-    ```
+    * Locate the `ConfigureServices method` and add the Kendo UI service.
 
-    Add the required using `Newtonsoft.Json.Serialization` line:
-    ```cs
-    using Newtonsoft.Json.Serialization;
-    ```
+        ```cs
+        public void ConfigureServices(IServiceCollection services)
+        {
+            services.AddMvc();
+                    .AddJsonOptions(options =>
+                        options.SerializerSettings.ContractResolver = new DefaultContractResolver());
+            services.AddKendo();
+        }
+        ```
 
-    Locate the Configure method and add a call to `app.UseKendo` at the end:
-    ```cs
-    public void Configure(IApplicationBuilder app, IHostingEnvironment env)
-    {
-        // ...
+    * Add the required information by using `Newtonsoft.Json.Serialization` line.
 
-        app.UseKendo(env);
-    }
-    ```
+        ```cs
+        using Newtonsoft.Json.Serialization;
+        ```
 
-4. Import the Kendo.Mvc.UI namespace
+    * Locate the `configure` method and add a call to `app.UseKendo` at the end.
 
-    Open `~/Views/_ViewImports.cshtml` and add the following references:
+        ```cs
+        public void Configure(IApplicationBuilder app, IHostingEnvironment env)
+        {
+            // ...
+
+            app.UseKendo(env);
+        }
+        ```
+
+4. Import the `Kendo.Mvc.UI` namespace. Open `~/Views/_ViewImports.cshtml` and add the following references.
+
     ```cs
     @using MyTelerikApp
     @using MyTelerikApp.Models
@@ -82,19 +84,17 @@ This article demonstrates how to configure an ASP.NET Core project to use Teleri
     @using Kendo.Mvc.UI
     ```
 
-5. Copy the Kendo UI client-side resources and reference them in the application Layout.
+5. Copy the Kendo UI client-side resources and reference them in the application layout. Use either of the following approaches:
 
-    You can use one of the two approaches:
+    - To manually install the resources, copy the `js` and `styles` folders from the `telerik.ui.for.aspnetmvc` archive to `wwwroot\lib\kendo-ui`. The archive is located in **Downloads** > **Telerik UI for ASP.NET Core** of your [www.telerik.com account](https://www.telerik.com/account/).
 
-    - To manually install the resources, copy the js and styles folders from the telerik.ui.for.aspnetmvc archive to `wwwroot\lib\kendo-ui`. The archive is located in `Downloads` > `Telerik UI for ASP.NET Core` of your [www.telerik.com account](https://www.telerik.com/account/).
-
-    - Bower package installation — for more information on how to achieve this, refer to [the Kendo UI Professional Bower package installation](https://docs.telerik.com/kendo-ui/intro/installation/bower-install).
+    - For more information on how to use the Bower package installation, refer to [the Kendo UI Professional Bower package installation](https://docs.telerik.com/kendo-ui/intro/installation/bower-install).
 
 6. Register the Kendo UI styles and scripts in `~/Views/Shared/_Layout.cshtml`.
 
     > **Important**
     >
-    > In the default .NET Core template, the jQuery scripts are included at the end of the `<body>` element. To properly load the Telerik UI for `ASP.NET HtmlHelpers`, move the jQuery scripts and the Kendo UI client-side scripts to the `<head>` element and make sure that the Kendo UI scripts are loaded after the jQuery ones.
+    > In the default .NET Core template, the jQuery scripts are included at the end of the `<body>` element. To properly load the Telerik UI for ASP.NET HtmlHelpers, move the jQuery scripts and the Kendo UI client-side scripts to the `<head>` element and make sure that the Kendo UI scripts are loaded after the jQuery ones.
 
     ```html
     <head>

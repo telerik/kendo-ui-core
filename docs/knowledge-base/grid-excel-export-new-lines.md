@@ -1,15 +1,15 @@
 ---
-title: Export Grid to Excel With New Lines in the Data
-description: An example on how to export new lines within Grid data to Excel
+title: Export Grid to Excel with New Lines in the Data
+description: An example on how to export new lines to Excel within the data of a Kendo UI Grid.
 type: how-to
-page_title: Exporting Grid data with line breaks to Excel
+page_title: Export Data with Line Breaks to Excel | Kendo UI Grid
 slug: grid-excel-export-new-lines
 tags: grid, excel, export, new liens
 res_type: kb
-
 ---
 
 ## Environment
+
 <table>
  <tr>
   <td>Product</td>
@@ -35,7 +35,7 @@ I have new lines in the header titles of my Grid. How can I keep the line breaks
 
 ## Solution
 
-The line breaks in the HTML could not be handled by Excel as new lines, which is why we need to replace the break line tag with "\n" within the "excelExport" event of the Grid.
+The line breaks in the HTML cannot be handled by Excel as new lines. That is why you have to replace the break line tag by using an `\n` within the `excelExport` event of the Grid.
 
 ```html
 <div id="example">

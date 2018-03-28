@@ -1997,6 +1997,13 @@ var __meta__ = { // jshint ignore:line
         return function(data) {
             data = originalFunction(data);
 
+            return wrapDataAccessBase(model, converter, getters, originalFieldNames, fieldNames)(data);
+        };
+    }
+
+    function wrapDataAccessBase(model, converter, getters, originalFieldNames, fieldNames) {
+        return function(data) {
+
             if (data && !isEmptyObject(getters)) {
                 if (toString.call(data) !== "[object Array]" && !(data instanceof ObservableArray)) {
                     data = [data];
@@ -2073,6 +2080,7 @@ var __meta__ = { // jshint ignore:line
                 }
 
                 that._dataAccessFunction = dataFunction;
+                that._wrapDataAccessBase = wrapDataAccessBase(model, convertRecords, getters, originalFieldNames, fieldNames);
                 that.data = wrapDataAccess(dataFunction, model, convertRecords, getters, originalFieldNames, fieldNames);
                 that.groups = wrapDataAccess(groupsFunction, model, convertGroup, getters, originalFieldNames, fieldNames);
             }
@@ -3391,7 +3399,7 @@ var __meta__ = { // jshint ignore:line
                 this.offlineData(state.concat(destroyed));
 
                 if (updatePristine) {
-                    this._pristineData = this._readData(state);
+                    this._pristineData = this.reader._wrapDataAccessBase(state);
                 }
             }
         },

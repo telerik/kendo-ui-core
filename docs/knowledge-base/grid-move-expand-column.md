@@ -1,8 +1,8 @@
 ---
-title: Move the expand column
-description: An example on how to relocate the expand column.
+title: Move the Expand Column
+description: An example on how to relocate the expand column of a Kendo UI Grid.
 type: how-to
-page_title: Move the expand column | Kendo UI Grid
+page_title: Move the Expand Column | Kendo UI Grid
 slug: grid-move-expand-column
 tags: grid, expand, detail, column, nested, hierarchy, relocate, move
 res_type: kb
@@ -24,12 +24,12 @@ component: grid
 
 ## Description
 
-How can I relocate the expand column?
+How can I relocate the expand column of the Grid?
 
 ## Solution
 
-Within the [dataBound](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid/events/databound) rearrange the columns using jQuery.
- 
+Within the [`dataBound`](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid/events/databound) event, rearrange the columns by using jQuery.
+
 ```html
 <div id="example">
       <div id="grid"></div>

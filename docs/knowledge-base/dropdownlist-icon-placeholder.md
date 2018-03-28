@@ -1,16 +1,16 @@
 ---
 title: Place Icon in DropDownList Placeholder
-description: An example on how to place an icon in a DropDownList placeholder
+description: An example on how to place an icon in the placeholder of the Kendo UI DropDownList.
 type: how-to
-page_title: Place Icon in DropDownList Placeholder
+page_title: Place Icon in the Placeholder | Kendo UI DropDownList
 slug: dropdownlist-icon-placeholder
 tags: dropdownlist, icon, placeholder, place, web, font
 ticketid: 1153026
 res_type: kb
-
 ---
 
 ## Environment
+
 <table>
  <tr>
   <td>Product</td>
@@ -32,11 +32,12 @@ res_type: kb
 
 ## Description
 
-I'm working on an application that takes advantage of the Kendo UI DropDownList and would like to show a custom icon in its placeholder.
+How can I show a custom icon in the placeholder of the DropDownList?
 
 ## Solution
 
-The described functionality can be implemented by taking advantage of the `optionLabelTemplate` property of the DropDownList API. Using Kendo UI Templates, include an element that displays one of the available Kendo UI Web Font Icons:
+1. Use the `optionLabelTemplate` property of the DropDownList.
+1. By using the Kendo UI templates, include an element which displays one of the available Kendo UI web font icons.
 
 ```html
 <input id="dropdownlist" />
@@ -65,6 +66,6 @@ The described functionality can be implemented by taking advantage of the `optio
 
 ## See Also
 
-* [optionLabelTemplate property API Reference.](https://docs.telerik.com/kendo-ui/api/javascript/ui/dropdownlist/configuration/optionlabeltemplate)
-* [Kendo UI Templates Overview.](https://docs.telerik.com/kendo-ui/framework/templates/overview)
-* [Kendo UI Web Font Icons Reference.](https://docs.telerik.com/kendo-ui/styles-and-layout/icons-web)
+* [API Reference of the optionLabelTemplate Property](https://docs.telerik.com/kendo-ui/api/javascript/ui/dropdownlist/configuration/optionlabeltemplate)
+* [Overview of the Kendo UI Templates](https://docs.telerik.com/kendo-ui/framework/templates/overview)
+* [List of the Kendo UI Web Font Icons](https://docs.telerik.com/kendo-ui/styles-and-layout/icons-web)

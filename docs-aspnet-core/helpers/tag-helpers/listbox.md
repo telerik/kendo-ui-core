@@ -51,7 +51,17 @@ The following example demonstrates how to define the ListBox by using the ListBo
         )
 ```
 
-### Bind to Server-side Array
+## Data Binding
+
+You can bind the ListBox to:
+
+* [Server-side arrays](#binding-to-server-side-arrays)
+* [Client-side arrays](#binding-to-client-side-arrays)
+* [Remote data](#binding-to-remote-data)
+
+### Binding to Server-Side Arrays
+
+When you use complex data objects, apply the `dataTextField` and `dataValueField` properties to notify the widget of your preferred binding behavior.
 
 The following example demonstrates how to initialize the ListBox and bind it to a server-side array.
 
@@ -102,9 +112,7 @@ The following example demonstrates how to initialize the ListBox and bind it to 
     )
 ```
 
-When you use complex data objects, use the `dataTextField` and `dataValueField` properties to notify the widget of your preferred binding behavior.
-
-### Bind to Client-side Array
+### Binding to Client-Side Arrays
 
 The following example demonstrates how to initialize the ListBox and bind it to a client-side array.
 
@@ -160,9 +168,9 @@ The following example demonstrates how to initialize the ListBox and bind it to 
     </script>
 ```
 
-### Bind to Remote Data
+### Binding to Remote Data
 
-You can also bind the `DataSource` to remote data. The following example demonstrates how to bind the Kendo ListBox tag helper to a remote service.
+The following example demonstrates how to bind the Kendo UI ListBox tag helper to a remote service.
 
 ```tab-tagHelper
 
@@ -199,21 +207,21 @@ You can also bind the `DataSource` to remote data. The following example demonst
         )
 ```
 
-### Selection
+## Selection
 
-The ListBox has a default `single` selection. To configure multiple selection, add `selectable="ListBoxSelectable.Multiple" ` to its settings. When selected, multiple selected items move together, that is, the selected items are transferred to another Kendo ListBox tag helper together or reordered as a set among other items.
+The ListBox has a default `single` selection mode. To configure a multiple selection, add `selectable="ListBoxSelectable.Multiple" ` to its settings. When selected, multiple selected items move together, that is, the selected items are transferred to another Kendo UI ListBox tag helper together or reordered as a set among other items.
 
 ### Reordering of Selections
 
-Selected items can be reordered by using any of the following approaches:
+You can reorder selected items by using any of the following approaches:
 
-1. The `moveUp` and `moveDown` command buttons of the toolbar.
-1. The drag-and-drop functionality if the widget is `draggable`.
-1. The `Ctrl`+`Shift`+ <kbd>&darr;</kbd> or `Ctrl`+`Shift`+ <kbd>&uarr;</kbd> keyboard combination.
+* The **Move Up** and **Move Down** command buttons of the toolbar.
+* The drag-and-drop functionality if the widget is `draggable`.
+* The `Ctrl`+`Shift`+ <kbd>&darr;</kbd> or `Ctrl`+`Shift`+ <kbd>&uarr;</kbd> keyboard combinations.
 
 > **Important**
 >
-> Currently, the widget does not support the drag-and-drop feature for multiple selected items.
+> Currently, the ListBox widget does not support the drag-and-drop feature for multiple selected items.
 
 ###### Example
 
@@ -306,7 +314,7 @@ To enable the drag-and-drop feature of the ListBox, set its `draggable` property
     </script>
 ```
 
-### Item Templates
+## Item Templates
 
 The ListBox supports the use of templates for its items that are passed as а function or string.
 

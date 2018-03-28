@@ -1,16 +1,16 @@
 ---
-title: Populate Column Aggregate In a Separate DIV Element
-description: How to render a column aggregate in a separate div
-type: troubleshooting
-page_title: Render Column Aggregate In a Separate DIV Element
+title: Populate Column Aggregates In Separate div Elements
+description: An example on how to render a column aggregate of a Kendo UI Grid in a separate div element.
+type: how-to
+page_title: Render Column Aggregates In Separate div Elements | Kendo UI Grid
 slug: grid-render-column-aggregate-in-a-separate-div
-position: 
 tags: grid, aggregates
 ticketid: 1148127
 res_type: kb
 ---
 
 ## Environment
+
 <table>
 	<tr>
 		<td>Product Version</td>
@@ -25,15 +25,12 @@ res_type: kb
 
 ## Description
 
-My requirement is to populate a column aggregate/sum into a separate div element outside of the Grid.
+How can I populate a column aggregate (sum) into a separate `div` element outside the Grid?
 
 ## Solution
-  
-The aggregates for a column can be retrieved using the [aggregates](https://docs.telerik.com/kendo-ui/api/javascript/data/datasource#methods-aggregates)  method of the dataSource:  
-   
-  
-The following example demonstrates how to show the value inside a DIV:  
-  
+
+To retrieve the aggregate of a column, use the [`aggregates`](https://docs.telerik.com/kendo-ui/api/javascript/data/datasource#methods-aggregates) method of the dataSource.
+
 ````html
   <body>
     <div id="example">
@@ -84,6 +81,4 @@ The following example demonstrates how to show the value inside a DIV:
       }
     </style>
   </body>
-```` 
-  
-
+````

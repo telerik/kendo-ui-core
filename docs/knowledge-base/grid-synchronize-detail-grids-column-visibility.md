@@ -1,8 +1,8 @@
 ---
-title: Show and Hide Columns in All Detail Grids at the Same Time
-description: An example on how to apply column visibility changes to all detail Grids at the same time when using a column menu and keep column visibility in sync.
+title: Show and Hide Columns in All Detail Grids Simultaneously
+description: An example on how to apply column visibility changes to all detail Kendo UI Grids at the same time when you use a column menu, and keep column visibility in sync.
 type: how-to
-page_title: Apply Column Visibility Changes to All Detail Grids Using the Column Menu | Kendo UI Grid
+page_title: Apply Column Visibility Changes to All Detail Grids by Using the Column Menu | Kendo UI Grid
 slug: grid-show-hide-columns-in-all-detail-grids
 tags: grid, hierarchy, columns, column-menu
 ticketid: 1157518
@@ -20,16 +20,16 @@ res_type: kb
 
 ## Description
 
-I am looking for a way to make the column visibility changes of one detail table apply to all detail tables in a hierarchical Grid.
+How can I apply column visibility changes to one detail Grid and then implement them to all the detail Grids in a hierarchical Grid?
 
 ## Solution
 
-You can synchronize detail columns visibility in a hierarchical Grid by following these steps:
+Synchronize the visibility of the detail columns in the hierarchical Grid:
 
-1. Add `columnHide` and `columnShow` event handlers to the detail Grids.
-1. Declare an object variable that stores the columns visible state.
-1. Use the Grid `dataBound` event to initially populate the columns visible state and to restore them when a new Grid is loaded.
-1. When a column is hidden/shown in one Grid, manually hide/show it in all other loaded Grids and store its new state.
+1. Add the `columnHide` and `columnShow` event handlers to the detail Grids.
+1. Declare an object variable that stores the visible state of the columns.
+1. Use the `dataBound` event of the Grid to initially populate the visible state of the columns and to restore them when a new Grid is loaded.
+1. When a column is hidden or shown in one of the Grids, manually hide or show the column in all other Grids that are loaded and store its new state.
 
 The following example demonstrates the full implementation of the suggested approach.
 

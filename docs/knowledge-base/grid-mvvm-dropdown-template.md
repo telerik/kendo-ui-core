@@ -1,8 +1,8 @@
 ---
-title: Use a Kendo DropDownList widget in the column template of a MVVM Grid
-description: An example on how to use a Kendo DropDownList widget in the column template of a MVVM Grid.
+title: Use DropDownLists in the Column Template of MVVM Grids
+description: An example on how to use a Kendo UI DropDownList widget in the column template of an MVVM Kendo UI Grid.
 type: how-to
-page_title: Use a Kendo DropDownList widget in the column template of a MVVM Grid | Kendo UI Grid
+page_title: Use DropDownList Widgets in the Column Templates of MVVM Grids | Kendo UI Grid
 slug: grid-mvvm-dropdown-template
 tags: grid, mvvm, dropdown, list, drop, down, template, client, column
 res_type: kb
@@ -24,12 +24,13 @@ component: grid
 
 ## Description
 
-How can I create a Kendo DropDownList widget in the column template of a MVVM Grid?
+How can I create a Kendo DropDownList widget in the column template of an MVVM Grid?
 
 ## Solution
 
-Within the model add a property which returns the template and in the configuration of the grid specify that the template of the column is a property of the model.
- 
+1. Within the model, add a property which returns the template.
+1. In the configuration of the Grid, specify that the template of the column is a property of the model.
+
 ```html
     <div id="example">
       <div class="demo-section k-content wide">
@@ -47,10 +48,10 @@ Within the model add a property which returns the template and in the configurat
         <script>
           var viewModel = kendo.observable({          
             columnTemplateFunction:  function (dataItem) {
-              var input = 
+              var input =
                   `<input class="dropDown"
 data-role="dropdownlist"
-data-bind=" source: ActionsCollection, value: Action" 
+data-bind=" source: ActionsCollection, value: Action"
 style="width: 100%;"
 />`;
 

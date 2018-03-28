@@ -1,8 +1,8 @@
 ---
-title: Conditionally Hide Hierarchical Grid
-description: An example on how lto conditionally show the hierarchical grid
+title: Conditionally Hide Hierarchical Grids
+description: An example on how to conditionally show a hierarchical Kendo UI Grid.
 type: how-to
-page_title: Conditionally Hide Hierarchical Grid
+page_title: Conditionally Hide Hierarchical Grids | Kendo UI Grid
 slug: grid-conditional-hieararchical
 tags: grid, hierarchy, hiararchical, conditonal, hide, show
 ticketid: 1153473
@@ -11,6 +11,7 @@ res_type: kb
 ---
 
 ## Environment
+
 <table>
  <tr>
   <td>Product</td>
@@ -32,11 +33,12 @@ res_type: kb
 
 ## Description
 
-I'm working on an application that takes advantage of the Kendo UI Grid with Hierarchy functionality and would like to only show the child grid on certain elements.  
+How can I show just a child Grid on certain elements in the hierarchical Grid?  
 
 ## Solution
 
-In order to implemented the described functionality, subscribe to the `dataBound` event of the Kendo UI Grid API and loop through the rows to remove the expand arrow on the desired items using jQuery's `remove` method:
+1. Subscribe to the `dataBound` event of the Grid.
+1. Loop through the rows to remove the expand arrow on the desired items by using the `remove` jQuery method.
 
 ```html
 <div id="grid" /></div>
@@ -137,5 +139,5 @@ In order to implemented the described functionality, subscribe to the `dataBound
 
 ## See Also
 
-* [Kendo UI Grid dataBound event API Reference.](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid/events/databound)
-* [jQuery remove method API Reference.](https://api.jquery.com/remove/)
+* [API Reference of the dataBound Event](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid/events/databound)
+* [API Reference of the jQuery remove Method](https://api.jquery.com/remove/)

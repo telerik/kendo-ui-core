@@ -1,16 +1,16 @@
 ---
 title: Add Image to Resource on Timeline View
-description: An example demonstrating how to insert an image on the Timeline View Resources
+description: An example on how to insert an image on the Timeline view resources in the Kendo UI Scheduler.
 type: how-to
-page_title: Add Image to Resource on Timeline View
+page_title: Add Image to Resource on Timeline View | Kendo UI Scheduler
 slug: scheduler-timeline-view-resource-image
 tags: scheduler, timeline, view, resource, add, image
 ticketid: 1155292
 res_type: kb
-
 ---
 
 ## Environment
+
 <table>
  <tr>
   <td>Product</td>
@@ -20,11 +20,11 @@ res_type: kb
 
 ## Description
 
-I'm working on an application that uses the Kendo UI Scheduler and would like to add an image to the resources on the left-hand side of the Week view of the scheduler.
+How can I add an image to the resources on the left-hand side of the week view of the Scheduler?
 
 ## Solution
 
-The described functionality can be implemented by extending the view and overriding the functions that are responsible for rendering the title:
+Extend the view and override the functions that are responsible for rendering the title.
 
 ```html
 <div id="example" class="k-content">
@@ -212,4 +212,4 @@ The described functionality can be implemented by extending the view and overrid
 
 ## See Also
 
-* [Create custom views by inheriting built-in views Demo.](https://docs.telerik.com/kendo-ui/controls/scheduling/scheduler/how-to/custom-views/custom-view)
+* [Demo on Creating Custom Views through Inheriting Built-In Views](https://docs.telerik.com/kendo-ui/controls/scheduling/scheduler/how-to/custom-views/custom-view)

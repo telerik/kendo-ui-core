@@ -21,7 +21,7 @@ The following example demonstrates how to define the PanelBar by using the Panel
 
 ## Configuration
 
-The PanelBar tag helper configuration options are passed as attributes of the tag. Items could be configured by using nested `<items>` tag. The widget could be bound via `bind-to` option or via `<hierarchical-datasource>` tag helper.
+The PanelBar tag helper configuration options are passed as attributes of the tag. You can configure items by using a nested `<items>` tag and bind the widget by using either the `bind-to` option, or the `<hierarchical-datasource>` tag helper.
 
 ###### Example
 
@@ -95,6 +95,7 @@ The PanelBar tag helper configuration options are passed as attributes of the ta
       })
     )
 ```
+
 ## See Also
 
 * [Overview of Telerik UI for ASP.NET Core]({% slug overview_aspnetmvc6_aspnetmvc %})

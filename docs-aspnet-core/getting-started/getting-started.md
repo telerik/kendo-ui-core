@@ -40,7 +40,7 @@ Configure an ASP.NET Core Web Application to use Telerik UI for ASP.NET Core:
 
 ### Add the Telerik UI for ASP.NET Core NuGet Package
 
-1. Before you continue, set up the [`Telerik NuGet Private Feed`](../../aspnet-mvc/getting-started/nuget-install#set-up-nuget-package-source) with your `Telerik account credentials`. Store the password in `clear text` because the .NET Core tooling does not support encryption.
+1. Before you continue, set up the [Telerik NuGet Private Feed](../../aspnet-mvc/getting-started/nuget-install#set-up-nuget-package-source) with your Telerik account credentials. Store the password in clear text because the .NET Core tooling does not support encryption.
 
 2. Open the NuGet Package Manager.
 
@@ -201,6 +201,6 @@ Configure an ASP.NET Core Web Application to use Telerik UI for ASP.NET Core:
 
 * [Overview of Telerik UI for ASP.NET Core]({% slug overview_aspnetmvc6_aspnetmvc %})
 * [Get Started with Telerik UI for ASP.NET Core and VS Code]({% slug gettingstartedvscode_aspnetmvc6_aspnetmvc %})
-* [Get Started with Telerik UI for ASP.NET Core on Linux / MacOS]({% slug gettingstartedlinux_aspnetmvc6_aspnetmvc %})
+* [Get Started with Telerik UI for ASP.NET Core on Linux and MacOS]({% slug gettingstartedlinux_aspnetmvc6_aspnetmvc %})
 * [Known Issues with Telerik UI for ASP.NET Core]({% slug knownissues_aspnetmvc6_aspnetmvc %})
 * [Tag Helpers for ASP.NET Core]({% slug taghelpers_aspnetmvc6_aspnetmvc %})

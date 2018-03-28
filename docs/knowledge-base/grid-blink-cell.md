@@ -1,16 +1,16 @@
 ---
-title: Make Grid Cell Blink Temporarily Depending on DataItem Property
-description: An example on how to make one of the cells in a row blink if a certain condition is met
+title: Make Grid Cells Temporarily Blink Depending on DataItem Property
+description: An example on how to make one of the Kendo UI Grid cells in a row blink if a certain condition is met.
 type: how-to
-page_title: Make Grid Cell Blink Temporarily Depending on DataItem Property
+page_title: Make Cells Temporarily Blink Depending on the DataItem Property | Kendo UI Grid
 slug: grid-blink-cell
 tags: grid, blink, cell, highlight, background, color, css
 ticketid: 1156788
 res_type: kb
-
 ---
 
 ## Environment
+
 <table>
  <tr>
   <td>Product</td>
@@ -32,11 +32,12 @@ res_type: kb
 
 ## Description
 
-I'm working on an application that uses the Kendo UI Grid and I would like to have some cells blink by changing their background color if one of its properties matches certain criteria.
+How can I make some of the Grid cells blink by changing their background color if one of its properties matches certain criteria?
 
 ## Solution
 
-In order to implement the functionality you describe we take advantage of Kendo UI Templates to check if a boolean property is set to true and assign HTML classes to the relevant elements; then, by subscribing to the `dataBound` event, we can manipulate their colors at intervals of time of our choosing:
+1. Use the Kendo UI templates to check if a Boolean property is set to `true` and assign HTML classes to the relevant elements.
+1. Subscribe to the `dataBound` event to manipulate the colors at the desired time intervals.
 
 ```html
 <script src="https://demos.telerik.com/kendo-ui/content/shared/js/products.js"></script>
@@ -117,5 +118,5 @@ In order to implement the functionality you describe we take advantage of Kendo 
 
 ## See Also
 
-* [dataBound event API Reference.](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid/events/databound)
-* [Kendo UI Templates Overview.](https://docs.telerik.com/kendo-ui/framework/templates/overview)
+* [API Reference of the dataBound Event](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid/events/databound)
+* [Overview of the Kendo UI Templates](https://docs.telerik.com/kendo-ui/framework/templates/overview)

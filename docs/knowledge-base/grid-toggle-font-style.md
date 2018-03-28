@@ -1,16 +1,16 @@
 ---
-title: Toggle Grid's Font Style
-description: An example on how set a different time as the start time of a TimePicker and change the order of the options in the list
+title: Toggle Font Styles in Grids
+description: An example on how to set a different time value as the start time of a TimePicker and change the order of the options in the list of the Kendo UI Grid.
 type: how-to
-page_title: Toggle Grid's Font Style
+page_title: Toggle the Font Style | Kendo UI Grid
 slug: grid-toggle-font-style
 tags: grid, toggle, font, style, body
 ticketid: 1154127
 res_type: kb
-
 ---
 
 ## Environment
+
 <table>
  <tr>
   <td>Product</td>
@@ -32,11 +32,11 @@ res_type: kb
 
 ## Description
 
-I'm working on an application that uses the Kendo UI Grid and would like to be able to toggle between regular fonts and italics by clicking on a radio button in the toolbar.
+How can I toggle between regular fonts and italics by clicking on a radio button in the toolbar of the Grid?
 
 ## Solution
 
-The described functionality can be implemented by taking advantage of jQuery's `CSS` method and the radio button `change` event
+Use the `CSS` jQuery method and the `change` event of the radio button.
 
 ```html
 <div id="example">
@@ -148,4 +148,4 @@ The described functionality can be implemented by taking advantage of jQuery's `
 
 ## See Also
 
-* [jQuery css method API Reference.](http://api.jquery.com/css/)
+* [ API Reference of the css jQuery Method](http://api.jquery.com/css/)

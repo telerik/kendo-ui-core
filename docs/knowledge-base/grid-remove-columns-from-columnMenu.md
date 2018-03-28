@@ -1,16 +1,16 @@
 ---
-title: Remove Specific Grid Columns From ColumnMenu
-description: An example demonstrating how to hide columns from the columnMenu
+title: Remove Specific Grid Columns from ColumnMenu
+description: An example on how to hide columns from the columnMenu in the Kendo UI Grid.
 type: how-to
-page_title: How to remove specific column from columnMenu 
+page_title: Remove Specific Column from ColumnMenu | Kendo UI Grid
 slug: grid-remove-columns-from-columnmenu
-position: 
 tags: Grid, ColumnMenu, Columns
 ticketid: 1131816
 res_type: kb
 ---
 
 ## Environment
+
 <table>
 	<tr>
 		<td>Product</td>
@@ -20,10 +20,12 @@ res_type: kb
 
 
 ## Description
-I want to remove some columns from the columnMenu of the Grid.
+
+How can I remove specific columns from the columnMenu of the Grid?
 
 ## Solution
-Manipulating the columnMenu is achievable within the columnMenuInit event of the Grid, where the specific elements could be found based on the field name bound to the column and removed from the DOM:
+
+Manipulate the columnMenu within the `columnMenuInit` event of the Grid&mdah;with this approach, the specific elements cannot be found based on the field name that is bound to the column, and removed from the DOM.
 
 ````html
         <div id="example">
@@ -37,7 +39,7 @@ Manipulating the columnMenu is achievable within the columnMenuInit event of the
                 	mylist.find("[data-field="+ col +"]").closest("li").remove();  
                 })            		
               }
-              
+
             	$(document).ready(function () {
             		$("#grid").kendoGrid({
             			columnMenuInit: function (e) {

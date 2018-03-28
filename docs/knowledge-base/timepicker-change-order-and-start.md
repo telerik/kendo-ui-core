@@ -1,6 +1,6 @@
 ---
 title: Change Order and Start Time in TimePicker Options List
-description: An example on how set a different time as the start time and change the order of the options in the list of the Kendo UI TimePicker.
+description: An example on how set a different time value as the start time of a kendo UI TimePicker and change the order of the options in its list.
 type: how-to
 page_title: Change Order and Start Time in the Options List | Kendo UI TimePicker
 slug: timepicker-change-order-and-start
@@ -32,7 +32,7 @@ res_type: kb
 
 ## Description
 
-How can I set the options on the list of the TimePicker to start at a specific time while the skipped ones are rendered at the end of the list?
+How can I make the options on the TimePicker list start at a specific time while the TimePicker still shows the skipped ones at the end of its options list?
 
 ## Solution
 

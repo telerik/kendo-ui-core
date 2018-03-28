@@ -21,7 +21,7 @@ The following example demonstrates how to define the TreeView by using the TreeV
 
 ## Configuration
 
-The TreeView tag helper configuration options are passed as attributes of the tag. Items could be configured by using nested `<items>` tag. The widget could be bound to `<hierarchical-datasource>` too.
+The TreeView tag helper configuration options are passed as attributes of the tag. You can configure the items by using a nested `<items>` tag and also bind the widget to `<hierarchical-datasource>`.
 
 ###### Example
 
@@ -109,6 +109,7 @@ The TreeView tag helper configuration options are passed as attributes of the ta
         })
     )
 ```
+
 ## See Also
 
 * [Overview of Telerik UI for ASP.NET Core]({% slug overview_aspnetmvc6_aspnetmvc %})

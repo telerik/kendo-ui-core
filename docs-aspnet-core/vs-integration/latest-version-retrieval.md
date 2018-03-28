@@ -10,13 +10,13 @@ position: 3
 
 The Progress&reg; Telerik&reg; UI for ASP.NET Core Visual Studio (VS) extensions help you keep your projects updated. The Latest Version Acquirer tool automatically retrieves the latest Progress&reg; Telerik&reg; UI for ASP.NET Core distribution available on the Telerik web site.
 
-Once a day, upon loading a project with Progress&reg; Telerik&reg; UI for ASP.NET Core controls, the extensions query the Telerik website for a new version of Progress&reg; Telerik&reg; UI for ASP.NET Core. A notification gets displayed when a new version is discovered.
+Once a day, upon loading a project with Progress&reg; Telerik&reg; UI for ASP.NET Core controls, the extensions query the Telerik website for a new version of Progress&reg; Telerik&reg; UI for ASP.NET Core. When a new version is discovered a notification is displayed.
 
 **Figure 1. A displayed notification upon locating a new Telerik UI for ASP.NET Core version**
 
 ![Get latest version](images/lva_notification.png)
 
-Clicking **Update Now** starts the Latest Version Acquirer tool, prompting for your Telerik credentials in its first page. If you do not have a **www.telerik.com** account, you can create one through the **Create an account for free** link.
+Clicking **Update Now** starts the Latest Version Acquirer tool which, on its first page, prompts for your Telerik credentials. If you do not have a [www.telerik.com](www.telerik.com) account, you can create one through the **Create an account for free** link.
 
 **Figure 2. The dialog for getting the latest version**
 
