@@ -1,16 +1,16 @@
 ---
-title: Change Grid's Page Size Dinamically to Adjust for Height
-description: An example on how to change the page size of a Grid in order to display as many rows as possible in the available height
+title: Dynamically Change the Page Size of the Grid to Adjust Its Height
+description: An example on how to change the page size of a Kendo UI Grid so that it displays as many rows as possible within the available height.
 type: how-to
-page_title: Change Grid's Page Size Dinamically to Adjust for Height
+page_title: Change the Page Size Dynamically and Adjust the Height | Kendo UI Grid
 slug: grid-pagesize-relative-to-height
 tags: grid, page, size, pagesize, height, adjust
 ticketid: 1156556
 res_type: kb
-
 ---
 
 ## Environment
+
 <table>
  <tr>
   <td>Product</td>
@@ -32,11 +32,12 @@ res_type: kb
 
 ## Description
 
-I'm working on an application that uses the Kendo UI Grid and I would like to change its `pageSize` property when the `height` changes in order to always show as many rows as possible.
+How can I change the `pageSize` property of the Grid when the `height` changes so that as many rows as possible are always displayed.
 
 ## Solution
 
-By subscribing to the resize event of the window element, we can calculate how many rows would fit in the available space and change the pageSize using the DataSource's pageSize method:
+1. Calculate the number of rows that will fit in the available space by subscribing to the `resize` event of the `window` element.
+1. Change the `pageSize` by using the `pageSize` method of the dataSource.
 
 ```html
 <style>
@@ -121,5 +122,5 @@ By subscribing to the resize event of the window element, we can calculate how m
 
 ## See Also
 
-* [opageSize method API Reference.](https://docs.telerik.com/kendo-ui/api/javascript/data/datasource/methods/pagesize)
-* [jQuery resize event API Reference](https://api.jquery.com/resize/)
+* [API Reference of the pageSize Method](https://docs.telerik.com/kendo-ui/api/javascript/data/datasource/methods/pagesize)
+* [API Reference of the jQuery resize Event](https://api.jquery.com/resize/)

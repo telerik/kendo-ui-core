@@ -1,16 +1,16 @@
 ---
-title: Bind Two Schedulers Together to Display Same View and Date
-description: An example on how to bind two Schedulers together so they always display the same view and date
+title: Bind Two Schedulers Together to Display the Same View and Date
+description: An example on how to bind two Schedulers together so that they always display the same view and date.
 type: how-to
-page_title: Bind Two Schedulers Together to Display Same View and Date
+page_title: Bind Two Schedulers Together to Display Same View and Date | Kendo UI Scheduler
 slug: scheduler-bind-two-same-view-date
 tags: scheduler, bind, two, same, view, date
 ticketid: 1156354
 res_type: kb
-
 ---
 
 ## Environment
+
 <table>
  <tr>
   <td>Product</td>
@@ -32,11 +32,12 @@ res_type: kb
 
 ## Description
 
-I'm working on an application that displays two Kendo UI Schedulers in the same page and I would like to have them bound in a way such as if I change the View Type or Date in any of them, the other will change as well.
+My application displays two Kendo UI Schedulers on the same page. How can I bind them in such a way that if I change the view type or the date in any of them, the other will change too?
 
 ## Solution
 
-The described functionality can be implemented by subscribing to the `navigate` event of the Kendo UI Scheduler API; depending on whether the date or the view type is being changed, we can trigger the `date` or `view` methods of the same API.
+1. Subscribe to the `navigate` event of the Scheduler.
+1. Depending on whether the date or the view type is changed, trigger the `date` or `view` methods of the same API.
 
 ```html
 <div id="example">
@@ -404,6 +405,6 @@ The described functionality can be implemented by subscribing to the `navigate` 
 
 ## See Also
 
-* [navigate event API Reference.](https://docs.telerik.com/kendo-ui/api/javascript/ui/scheduler/events/navigate)
-* [view method API Reference.](https://docs.telerik.com/kendo-ui/api/javascript/ui/scheduler/methods/view)
-* [date method API Reference.](https://docs.telerik.com/kendo-ui/api/javascript/ui/scheduler/methods/date)
+* [API Reference of the navigate Event](https://docs.telerik.com/kendo-ui/api/javascript/ui/scheduler/events/navigate)
+* [API Reference of the view Method](https://docs.telerik.com/kendo-ui/api/javascript/ui/scheduler/methods/view)
+* [API Reference of the date Method](https://docs.telerik.com/kendo-ui/api/javascript/ui/scheduler/methods/date)

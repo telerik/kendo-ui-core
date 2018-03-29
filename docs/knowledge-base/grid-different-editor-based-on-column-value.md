@@ -1,8 +1,8 @@
 ---
-title: Use a different editor based on the value of a column in a Kendo Grid
-description: An example on how to use a different editor based on the value of a column in a Kendo Grid.
+title: Use Different Editors Based on the Column Values of the Grid
+description: An example on how to use a different editor based on the value of a column in a Kendo UI Grid.
 type: how-to
-page_title: Use a different editor based on the value of a column in a Kendo Grid | Kendo UI Grid
+page_title: Use Different Editor Based on the Column Value | Kendo UI Grid
 slug: grid-different-editor-based-on-column-value
 tags: grid, different, condition, editor, value, data, type, dynamic
 res_type: kb
@@ -24,15 +24,16 @@ component: grid
 
 ## Description
 
-How can I use a different editor based on the value of a column in a Kendo Grid?
+How can I use a different editor based on the column value in a Grid?
 
 > **Important**
 >
-> Bare in mind that having a field which contains different data types as strings might be a sign for an incorrect database structure.
+> If a field contains different data types as strings, it might be a sign of an incorrect database structure.
 
 ## Solution
 
-Place a condition within the [editor](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid/configuration/columns.editor) function and based on that condition return the corresponding editor.
+1. Place a condition within the [`editor`](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid/configuration/columns.editor) function.
+1. Based on that condition, return the corresponding editor.
 
 ```html
   <div id="example">
@@ -58,7 +59,7 @@ Place a condition within the [editor](https://docs.telerik.com/kendo-ui/api/java
       }, {
         "id": 5,
         "type": "numeric",
-        "editor": 5 
+        "editor": 5
       }];
 
       $(document).ready(function () {
@@ -121,7 +122,7 @@ Place a condition within the [editor](https://docs.telerik.com/kendo-ui/api/java
             break;
         }
       }
-      
+
       function dateEditor(container, options) {
         $('<input name="' + options.field + '"/>')
         .appendTo(container)
@@ -200,7 +201,7 @@ Place a condition within the [editor](https://docs.telerik.com/kendo-ui/api/java
           }
         })
       }
-      
+
       function numericEditor(container, options) {
         $('<input name="' + options.field + '"/>')
         .appendTo(container)

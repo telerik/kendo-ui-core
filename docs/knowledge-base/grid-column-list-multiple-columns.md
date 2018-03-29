@@ -1,8 +1,8 @@
 ---
-title: Show Columns List in Multiple Columns
-description: An example on how to show columns list in multiple columns the Kendo UI Grid.
+title: Show Column List in Multiple Columns
+description: An example on how to show a column list in multiple columns of the Kendo UI Grid.
 type: how-to
-page_title: Show Columns List in Multiple Columns | Kendo UI Grid
+page_title: Show Column List in Multiple Columns | Kendo UI Grid
 slug: grid-column-list-multiple-columns
 tags: grid, column, list, multiple, columns
 res_type: kb
@@ -24,11 +24,11 @@ res_type: kb
 
 ## Description
 
-I have a Grid with a lot of columns and would like to split the column menu in multiple columns.
+How can I split the column menu into multiple columns in a Grid that renders many columns?
 
 ## Solution
 
-The example below shows the custom CSS that can be used to achieve the functionality.
+Use custom CSS rules.
 
 ```html
 <style>

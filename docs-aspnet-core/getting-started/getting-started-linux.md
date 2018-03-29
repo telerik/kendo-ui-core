@@ -1,13 +1,13 @@
 ---
-title: Getting Started on Linux / MacOS
-page_title: Getting Started on Linux / MacOS | Progress Telerik UI for ASP.NET Core
+title: Getting Started on Linux and MacOS
+page_title: Getting Started on Linux and MacOS | Progress Telerik UI for ASP.NET Core
 description: "Learn the basics when working with Progress Telerik UI for ASP.NET Core (aka MVC 6 or ASP.NET Core MVC) on Linux."
 previous_url: /aspnetmvc-apps/mvc-6/getting-started-linux, /mvc-6/getting-started-linux
 slug: gettingstartedlinux_aspnetmvc6_aspnetmvc
 position: 3
 ---
 
-# Getting Started on Linux / MacOS
+# Getting Started on Linux and MacOS
 
 This article demonstrates how to configure an ASP.NET Core project that enables you to use Telerik UI for ASP.NET Core on Linux.
 

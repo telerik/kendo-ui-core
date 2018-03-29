@@ -1,16 +1,16 @@
 ---
-title: Set Different Chart Series Types According to DataItem Property
-description: An example on how to set different types of series for different points according to a DataItem property
+title: Set Different Chart Series Types According to the DataItem Property
+description: An example on how to set different types of the Kendo UI Chart series for different points according to the DataItem property.
 type: how-to
-page_title: Set Different Chart Series Types According to DataItem Property
+page_title: Set Different Series Types According to DataItem | Kendo UI Chart
 slug: chart-set-series-type-by-point-property
 tags: chart, series, type, dataitem, property, set
 ticketid: 1155950
 res_type: kb
-
 ---
 
 ## Environment
+
 <table>
  <tr>
   <td>Product</td>
@@ -32,11 +32,11 @@ res_type: kb
 
 ## Description
 
-I'm working on an application that uses the Kendo UI Charts and would like to dinamically set the series type, after the data has been bound, depending on a specific property of the points.
+How can I dynamically set the Chart series type after the data was bound and depending on a specific property of the points?
 
 ## Solution
 
-The described functionality can be implemented by taking advantage of the grouping capabilities of the Kendo UI Charts while setting the series `type` on the `dataBound` event:
+Use the grouping capabilities of the Chart while setting the series `type` on the `dataBound` event.
 
 ```html
 <div id="example">
@@ -117,5 +117,5 @@ The described functionality can be implemented by taking advantage of the groupi
 
 ## See Also
 
-* [dataBound event API Reference.](https://docs.telerik.com/kendo-ui/api/javascript/dataviz/ui/chart/events/databound)
-* [Binding to grouped data Chart Demo.](https://demos.telerik.com/kendo-ui/line-charts/grouped-data)
+* [API Reference of the dataBound Event](https://docs.telerik.com/kendo-ui/api/javascript/dataviz/ui/chart/events/databound)
+* [Demo on Binding to Grouped Data Chart](https://demos.telerik.com/kendo-ui/line-charts/grouped-data)

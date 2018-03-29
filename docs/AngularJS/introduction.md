@@ -83,7 +83,7 @@ The following example demonstrates an important detail&mdash;the `'Increment'` a
 
 #### Specifying Options from Controller
 
-The following example demonstrates how to specify options form the `controller` in AngularJS projects.
+The following example demonstrates how to specify options from the `controller` in AngularJS projects.
 
 ###### Example
 
@@ -713,12 +713,12 @@ The following example demonstrates the best solution in this case&mdash;to use a
 ````html
 	<div id="example" ng-app="KendoDemos">
 		<div ng-controller="Host">
-			<div kendo-window="editPopup" 
-				 k-modal="true" 
-				 k-title="'popupTitle'" 
+			<div kendo-window="editPopup"
+				 k-modal="true"
+				 k-title="'popupTitle'"
 				 k-width="300"
-				 k-resizable="false" 
-				 k-height="200" 
+				 k-resizable="false"
+				 k-height="200"
 				 k-visible="false">
 
 				<div ng-controller="Popup">
@@ -730,7 +730,7 @@ The following example demonstrates the best solution in this case&mdash;to use a
 						  k-data-source="datasources"></select>
 				</div>
 			</div>
-			<button kendo-button ng-click="Show()">Show</button> 
+			<button kendo-button ng-click="Show()">Show</button>
 		</div>
 	</div>
 

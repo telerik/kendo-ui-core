@@ -1,16 +1,16 @@
 ---
 title: Toggle Content of Cell on Click
-description: An example on how to toggle the contents of a Grid's cell on click
+description: An example on how to toggle the contents of a Kendo UI Grid cell on click.
 type: how-to
-page_title: Toggle Content of Cell on Click
+page_title: Toggle Content of Cell on Click | Kendo UI Grid
 slug: grid-click-to-toggle-cell
 tags: grid, click, toggle, cell, content
 ticketid: 1153472
 res_type: kb
-
 ---
 
 ## Environment
+
 <table>
  <tr>
   <td>Product</td>
@@ -32,11 +32,11 @@ res_type: kb
 
 ## Description
 
-I'm working on an application that uses the Kendo UI Grid and would like to Click on a Cell to toggle its contents between two different properties of the DataItem
+How can I toggle the cell content of a Grid between two different properties of the `DataItem` just by clicking the cell?  
 
 ## Solution
 
-The described functionality can be implemented by using a Kendo UI Template for the cell, that shows different properties depending on the value of a boolean field; when clicked, we change said value and the Template will update automatically:
+Use such a Kendo UI template for the cell that it shows different properties depending on the value of a Boolean field. When clicked, the provided value gets changed and the template will update automatically.
 
 ```html
 <script src="https://demos.telerik.com/kendo-ui/content/shared/js/products.js"></script>
@@ -138,4 +138,4 @@ The described functionality can be implemented by using a Kendo UI Template for 
 
 ## See Also
 
-* [Kendo UI Templates Overview.](https://docs.telerik.com/kendo-ui/framework/templates/overview)
+* [Overview of the Kendo UI Templates](https://docs.telerik.com/kendo-ui/framework/templates/overview)
