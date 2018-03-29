@@ -473,7 +473,6 @@ var __meta__ = { // jshint ignore:line
                 force = this._retrieveData;
             }
             this._retrieveData = false;
-            this.persistTagList = this._initialOpen && !this.listView.bound() ? false : true;
             List.fn._filterSource.call(this, filter, force);
         },
 
@@ -496,6 +495,7 @@ var __meta__ = { // jshint ignore:line
 
                 that.listView.skipUpdate(true);
 
+                that.persistTagList = that._initialOpen && !that.listView.bound() ? false : true;
                 that._filterSource();
                 that._focusItem();
             } else if (that._allowOpening()) {
