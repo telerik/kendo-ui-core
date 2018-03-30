@@ -681,17 +681,24 @@ var __meta__ = { // jshint ignore:line
             var that = this;
             var take = that.itemCount;
             var skip = that._getSkip(index, take);
+            var view = this._getRange(skip, take);
 
             //should not return item if data is not loaded
             if (!that._getRange(skip, take).length) {
                 return null;
             }
 
-            that.mute(function() {
-                that.dataSource.range(skip, take);
-            });
+            if (that.options.type === "group") {
+                kendo.ui.progress($(that.wrapper), true);
+                that.mute(function() {
+                    that.dataSource.range(skip, take, function () {
+                        kendo.ui.progress($(that.wrapper), false);
+                    });
+                    view = that.dataSource.view();
+                });
+            }
 
-            return that._findDataItem(that.dataSource.view(), [index - skip]);
+            return that._findDataItem(view, [index - skip]);
         },
 
         selectedDataItems: function() {
@@ -1474,7 +1481,7 @@ var __meta__ = { // jshint ignore:line
                         this._getElementByIndex(selectedIndexes[idx]).removeClass(SELECTED);
                     } else if (selectedDataItems[idx]) {
                         this._getElementByDataItem(selectedDataItems[idx]).removeClass(SELECTED);
-                    } 
+                    }
 
                     removed.push({
                         index: selectedIndexes[idx],
@@ -1573,7 +1580,9 @@ var __meta__ = { // jshint ignore:line
             for (; idx < indices.length; idx++) {
                 position = -1;
                 index = indices[idx];
-                value = this._valueGetter(this.dataItemByIndex(index));
+                if (this.dataItemByIndex(index)) {
+                    value = this._valueGetter(this.dataItemByIndex(index));
+                }
 
                 for (j = 0; j < values.length; j++) {
                     if (value == values[j]) {

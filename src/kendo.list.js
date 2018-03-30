@@ -1004,7 +1004,7 @@ var __meta__ = { // jshint ignore:line
                 if (value === null) {
                     value = "";
                 }
-                    element.value = value;
+                element.value = value;
             }
         },
 
@@ -1488,7 +1488,7 @@ var __meta__ = { // jshint ignore:line
         _cascadeSelect: function(parent, valueBeforeCascade) {
             var that = this;
             var dataItem = parent.dataItem();
-            var filterValue = dataItem ? dataItem[that.options.cascadeFromField] || parent._value(dataItem) : null;
+            var filterValue = dataItem ? parent._value(dataItem) : null;
             var valueField = that.options.cascadeFromField || parent.options.dataValueField;
             var expressions;
 

@@ -285,10 +285,6 @@ var __meta__ = { // jshint ignore:line
                 }
             }
 
-            if (this._initialOpen && !this.options.autoBind) {
-                this.persistTagList = false;
-            }
-
             this._selectValue(e.added, e.removed);
         },
 
@@ -499,7 +495,7 @@ var __meta__ = { // jshint ignore:line
 
                 that.listView.skipUpdate(true);
 
-                that.persistTagList = true;
+                that.persistTagList = that._initialOpen && !that.listView.bound() ? false : true;
                 that._filterSource();
                 that._focusItem();
             } else if (that._allowOpening()) {

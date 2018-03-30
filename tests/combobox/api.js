@@ -883,6 +883,38 @@ test("ComboBox does not change text if custom value is equal to options.value", 
     equal(combobox.text(), "text");
 });
 
+
+test("ComboBox displays text with pageSize", function() {
+    var combobox = new ComboBox(input, {
+        autoWidth: true,
+        dataTextField: "ProductName",
+        dataValueField: "ProductID",
+        minLenght: 3,
+        filter: "contains",
+        dataSource: {
+            pageSize: 2,
+            transport: {
+                read: function(options) {
+                    options.success([
+                        { ProductName: "Chai", ProductID: 1 },
+                        { ProductName: "Tofu", ProductID: 2 },
+                        { ProductName: "Test3", ProductID: 3 },
+                        { ProductName: "Chai3", ProductID: 4 },
+                        { ProductName: "Test4", ProductID: 5 }
+                    ]);
+                }
+            }
+        }
+    });
+
+    combobox.search("te");
+    combobox.open();
+    combobox.select(0);
+    combobox.input.blur();
+    combobox.open();
+    equal(combobox.text(), "Test3");
+});
+
 test("ComboBox clears selected value even when text option is set to empty string", function() {
     var combobox = new ComboBox(input, {
         animation: false,
