@@ -1793,10 +1793,10 @@ var __meta__ = { // jshint ignore:line
             };
 
             parameterMap = options.parameterMap;
-            
+
             if (options.submit) {
                 that.submit = options.submit;
-            }           
+            }
 
             if (isFunction(options.push)) {
                 that.push = options.push;
@@ -2670,6 +2670,9 @@ var __meta__ = { // jshint ignore:line
         },
 
         pushInsert: function(index, items) {
+            var that = this;
+            var rangeSpan = that._getCurrentRangeSpan();
+
             if (!items) {
                 items = index;
                 index = 0;
@@ -2698,6 +2701,10 @@ var __meta__ = { // jshint ignore:line
                     }
 
                     this._pristineData.push(pristine);
+
+                    if (rangeSpan && rangeSpan.length) {
+                        $(rangeSpan).last()[0].pristineData.push(pristine);
+                    }
 
                     index++;
                 }
@@ -3037,7 +3044,17 @@ var __meta__ = { // jshint ignore:line
         },
 
         _eachPristineItem: function(callback) {
-            this._eachItem(this._pristineData, callback);
+            var that = this;
+            var options = that.options;
+            var rangeSpan = that._getCurrentRangeSpan();
+
+            that._eachItem(that._pristineData, callback);
+
+            if (options.serverPaging && options.useRanges) {
+                each(rangeSpan, function(i, range) {
+                    that._eachItem(range.pristineData, callback);
+                });
+            }
         },
 
        _eachItem: function(data, callback) {
@@ -3407,8 +3424,21 @@ var __meta__ = { // jshint ignore:line
                 start = typeof(skip) !== "undefined" ? skip : (that._skip || 0),
                 end = start + that._flatData(data, true).length;
 
-            that._ranges.push({ start: start, end: end, data: data, timestamp: new Date().getTime() });
-            that._ranges.sort( function(x, y) { return x.start - y.start; } );
+            that._ranges.push({
+                start: start,
+                end: end,
+                data: data,
+                pristineData: data.toJSON(),
+                timestamp: that._timeStamp()
+            });
+
+            that._sortRanges();
+        },
+
+        _sortRanges: function() {
+            this._ranges.sort(function(x, y) {
+                return x.start - y.start;
+            });
         },
 
         error: function(xhr, status, errorThrown) {
@@ -4159,22 +4189,25 @@ var __meta__ = { // jshint ignore:line
                 temp = that._readData(data);
 
                 if (temp.length) {
-
                     for (idx = 0, length = that._ranges.length; idx < length; idx++) {
                         if (that._ranges[idx].start === skip) {
                             found = true;
                             range = that._ranges[idx];
+
+                            range.pristineData = temp;
+                            range.data = that._observe(temp);
+                            range.end = range.start + that._flatData(range.data, true).length;
+                            that._sortRanges();
+
                             break;
                         }
                     }
+
                     if (!found) {
-                        that._ranges.push(range);
+                        that._addRange(that._observe(temp), skip);
                     }
                 }
 
-                range.data = that._observe(temp);
-                range.end = range.start + that._flatData(range.data, true).length;
-                that._ranges.sort( function(x, y) { return x.start - y.start; } );
                 that._total = that.reader.total(data);
 
                 if (force || (timestamp >= that._currentRequestTimeStamp || !that._skipRequestsInProgress)) {
@@ -4262,7 +4295,29 @@ var __meta__ = { // jshint ignore:line
                     return true;
                 }
             }
+
             return false;
+        },
+
+        _getCurrentRangeSpan: function() {
+            var that = this;
+            var ranges = that._ranges;
+            var start = that.currentRangeStart();
+            var end = start + (that.take() || 0);
+            var rangeSpan = [];
+            var range;
+            var idx;
+            var length = ranges.length;
+
+            for (idx = 0; idx < length; idx++) {
+                range = ranges[idx];
+
+                if ((range.start <= start && range.end >= start) || (range.start >= start && range.start <= end)) {
+                    rangeSpan.push(range);
+                }
+            }
+
+            return rangeSpan;
         },
 
         _removeModelFromRanges: function(model) {

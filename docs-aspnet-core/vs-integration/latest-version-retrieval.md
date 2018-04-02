@@ -16,7 +16,7 @@ Once a day, upon loading a project with Progress&reg; Telerik&reg; UI for ASP.NE
 
 ![Get latest version](images/lva_notification.png)
 
-Clicking **Update Now** starts the Latest Version Acquirer tool which, on its first page, prompts for your Telerik credentials. If you do not have a [www.telerik.com](www.telerik.com) account, you can create one through the **Create an account for free** link.
+Clicking **Update Now** starts the Latest Version Acquirer tool which, on its first page, prompts for your Telerik credentials. If you do not have a [www.telerik.com](https://www.telerik.com) account, you can create one through the **Create an account for free** link.
 
 **Figure 2. The dialog for getting the latest version**
 
