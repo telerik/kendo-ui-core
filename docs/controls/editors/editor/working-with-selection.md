@@ -50,6 +50,56 @@ For the `Element` nodes, the range boundary is set between the child nodes:
 
 For more information, refer to the [tutorial on `Range` objects on Quirksmode](http://www.quirksmode.org/dom/range_intro.html).
 
+## Working with Custom Tools in IE
+
+Because IE keeps only a single instance of the Selection and the Range, having custom tools that steal the focus from the content area will apply th executed command at the begging of the content instead at the caret position. To prevent that from happening you can cache the Range and re-select it at the correct moments.
+
+The following example shows a custom tool with DropDownList and filtering enabled:
+
+ ###### Example
+
+    <textarea id="editor" rows="10" cols="30" style="width:100%;height:400px">
+    </textarea>
+
+    <script type="text/x-kendo-template" id="custom-template">
+        <label for='templateTool' style='vertical-align:middle;'>Insert tag:</label>
+        <input id='templateTool' style='width: 130px;' />
+    </script>
+
+    <script>
+        $("#editor").kendoEditor({
+            tools: [
+                {
+                    name: "customTemplate",
+                    template: $("#custom-template").html()
+                }
+            ]
+        });
+
+      var _Editor_Range = null;
+
+      $("#templateTool").kendoDropDownList({
+        filter: "contains",
+        dataTextField: "text",
+        dataValueField: "value",
+        change: function(e) {
+  				var editor = $("#editor").data("kendoEditor");
+          editor.selectRange(_Editor_Range);
+          editor.exec("inserthtml", { value: e.sender.value() });
+        },
+        open: function () {
+        	var editor = $("#editor").data("kendoEditor");
+          _Editor_Range = editor.getRange();
+        },
+        dataSource: [
+          { text: "Item1", value: 1 },
+          { text: "Item2", value: 2 },
+          { text: "Item3", value: 3 }
+        ]
+      });
+    </script>
+
+
 ## See Also
 
 Other articles on the Kendo UI Editor:

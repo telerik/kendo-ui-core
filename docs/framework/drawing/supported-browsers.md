@@ -3,7 +3,7 @@ title: Supported Browsers
 page_title: Supported Browsers | Kendo UI Drawing API
 description: "Learn about the browsers which the Kendo UI Drawing API supports."
 slug: supportedbrowsers_drawingapi
-position: 5
+position: 6
 ---
 
 # Supported Browsers
