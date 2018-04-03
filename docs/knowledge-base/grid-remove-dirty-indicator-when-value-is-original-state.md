@@ -1,8 +1,8 @@
 ---
-title: Remove Dirty Indicator when Value is in Original State 
+title: Remove Dirty Indicator when Value Is in Original State
 description: An example on how to remove the dirty indicator when the value is put back to the original state in the Kendo UI Grid.
 type: how-to
-page_title: Remove Dirty Flag when Cell Value is Changed to Original | Kendo UI Grid
+page_title: Remove Dirty Flag When Cell Value Is Changed to Original | Kendo UI Grid
 slug: grid-remove-dirty-indicator-when-value-is-original-state
 tags: grid, dirty, editing, batch
 ticketid: 1156822
@@ -10,6 +10,7 @@ res_type: kb
 ---
 
 ## Environment
+
 <table>
 	<tr>
 		<td>Product Version</td>
@@ -23,11 +24,11 @@ res_type: kb
 
 ## Description
 
-How can I remove the dirty indicators from the cells when the user changes the value to the original state in the Kendo UI Grid?
+How can I remove the dirty indicators from the cells when the user changes the value in the Kendo UI Grid to its original state?
 
 ## Solution
 
-To remove the dirty indicators, handle the [`save`](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid/events/save) event. In the event handler:
+To remove the dirty indicators, handle the [`save`](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid/events/save) event&mdash;in the event handler:
 
 1. Use the internal `_pristineForModel` method to get the original values.
 1. If the changed value is equal to the original value, `delete` the field from the `dirtyFields` object of the `model`.

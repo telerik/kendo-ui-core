@@ -1,45 +1,43 @@
 ---
-title: Printing tabular data in PDF
-page_title: Printing tabular data in PDF | Kendo UI Drawing API
-description: "Learn how to export a wide grid into PDF"
+title: Printing Tabular Data in PDF
+page_title: Printing Tabular Data in PDF | Kendo UI Drawing API
+description: "Learn how to export a wide Kendo UI Grid into PDF."
 slug: tabulardata_drawingapi
 position: 5
 ---
 
-# Printing tabular data in PDF
+# Printing Tabular Data in PDF
 
-Sometimes you might need to export to PDF a table with a large number of columns, however, the built-in PDF Export of the Kendo UI Grid will export as many columns as it can fit on a page with a defined page size. The default grid export mechanism uses the `drawDOM` function, which renders HTML content, but one limitation of `drawDOM` is that it cannot do horizontal page splitting, so the wide content will be truncated. An option is to use the `scale` argument to fit the content on page, but that still won't work when the grid is really wide because it can make the text too small.
+The built-in PDF Export of the Kendo UI Grid exports as many columns as it can fit on a page with a defined page size.
 
-For such situations we provide a static method that uses the Spreadsheet's print layout algorithm (therefore this feature requires the Kendo UI Spreadsheet to be loaded).
+The default export mechanism of the Grid uses the `drawDOM` function which renders HTML content. However, `drawDOM` cannot do horizontal page splitting and, as a result, wide content gets truncated. To work around this issue, you can fit the content on the page by using the `scale` argument but if the Grid is too wide, this approach will result in making the text too small.
 
-## kendo.spreadsheet.drawTabularData
+To export a table with a large number of columns to PDF, load the Kendo UI Spreadsheet and use the `kendo.spreadsheet.drawTabularData` static method which utilizes the print layout algorithm of the Spreadsheet widget.
 
-This function takes a data source and a columns object array and produces a Drawing Group which can then be saved as a multi-page PDF. Pages are ordered left-to-right, top-to-bottom.
+The `kendo.spreadsheet.drawTabularData` function takes a data source and a column object array, and produces a Drawing group which can then be saved as a multi-page PDF. By default, the order of the pages is from left to right and from top to bottom.
 
-> This method is independent from the Kendo UI Grid widget; it only requires the data
-> source and column titles.  It does not support more advanced grid features
-> such as HTML templates for rows/cells, it can only print the data.
+> The suggested approach is independent from the Kendo UI Grid implementations and requires only a data source and column titles. The approach does not support more advanced Grid features such as HTML row or cell templates.
 
-There are a number of parameters that control the aspect of the generated table:
+To control the generated table, use any of the following options:
 
-- `dataSource` — must be a data source containing tabular data, for example, a grid's data source.
-- `columns` — must be a grid's columns description (an array of objects containing title and field). These serve to display the header row, which is repeated on every page.
-- `guidelines` — controls whether the grid lines are displayed *(default: true)*
-- `guideColor` — the color of grid lines in CSS notation
-- `headerBackground` — background color for headers
-- `headerColor` - text color for headers
-- `oddBackground` - background for odd rows
-- `evenBackground` - background for even rows
-- `fontFamily` - the font family *(default: "Arial")*
-- `fontSize` - the font size *(default: 12)*
-- `paperSize` - the paper size *(default: A4)*
-- `margin` - content margin *(default: "1cm")*
-- `landscape` — the paper orientation *(default: true)*
-- `fitWidth` — whether to fit content on paper width. This will scale down content if needed to avoid horizontal splitting. *(default: false)*
-- `scale` — a scale factor. No scale is set by default. *(default: 1)*
-- `rowHeights` — the row height in screen pixels *(default 20)*
+- `dataSource`&mdash;Must be a data source which contains tabular data. For example, the data source of the Grid.
+- `columns`&mdash;Must be a columns description of the Grid, that is, an array of objects which contains a title and a field. The title and the field serve to display the header row which is repeated on every page.
+- `guidelines`&mdash;Controls whether the Grid lines are displayed. By default, `guidelines` is set to `true`.
+- `guideColor`&mdash;Sets the color of Grid lines in a CSS notation.
+- `headerBackground`&mdash;Stes the background color for headers.
+- `headerColor`&mdash;Sets the text color for the headers.
+- `oddBackground`&mdash;Sets the background for the odd rows.
+- `evenBackground`&mdash;Sets the background for the even rows.
+- `fontFamily`&mdash;Sets the font family. By default, `fontFamily` is set to `Arial`.
+- `fontSize`&mdash;Sets the font size. By default, `fontSize` is set to `12`.
+- `paperSize`&mdash;Sets the paper size. By default, `paperSize` is set to `A4`.
+- `margin`&mdash;Sets content margin. By default, `margin` is set to `1cm`.
+- `landscape`&mdash;Sets the paper orientation. By default, `landscape` is set to `true`.
+- `fitWidth`&mdash;Determines whether to fit content on paper width. This will scale down content if needed to avoid horizontal splitting. By default, `fitWidth` is set to `false`.
+- `scale`&mdash;Sets a scale factor. No scale is set by default. By default, `scale` is set to `1`.
+- `rowHeights`&mdash;Determines the row height in screen pixels. By default, `rowHeights` is set to `20`.
 
-###### Example:
+###### Example
 
 ```html
     <script src="https://kendo.cdn.telerik.com/2018.1.221/js/pako_deflate.min.js"></script>  

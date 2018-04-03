@@ -1,15 +1,16 @@
 ---
-title: Navigate Virtual Scrolling Grid with Up and Down Arrows
-description: An example on how to use the up and down arrows to navigate the Kendo UI Grid with virtual scrolling.
+title: Navigate Virtual Scrolling in Grid with Up and Down Arrows
+description: An example on how to use the Up and Down arrow buttons to navigate a Kendo UI Grid with its virtual scrolling enabled.
 type: how-to
 page_title: Use Up and Down Arrows to Navigate virtual Scrollbar | Kendo UI Grid
 slug: grid-navigate-virtual-scrolling-up-down-arrows
-tags: grid, virtual, scrolling, arrows, keyboard, navigate 
+tags: grid, virtual, scrolling, arrows, keyboard, navigate
 ticketid: 1156118
 res_type: kb
 ---
 
 ## Environment
+
 <table>
 	<tr>
 		<td>Product Version</td>
@@ -23,15 +24,13 @@ res_type: kb
 
 ## Description
 
-How can I navigate the virtual scrolling of the Kendo UI Grid with the keyboard arrows? 
+How can I navigate the virtual scrolling of the Kendo UI Grid with the **Up** and **Down** keyboard arrows?
 
 ## Solution
 
-To navigate the virtual scrolling with the up and down arrows:
-
-1. In the [`dataBound`](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid/events/databound) event handler, add `tabindex` to the `child` `div` of the `.k-scrollbar-vertical` container.
+1. In the [`dataBound`](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid/events/databound) event handler, add `tabindex` to the child `div` of the `.k-scrollbar-vertical` container.
 1. Handle the [`click`](https://api.jquery.com/click/) event of the table of the Grid.
-1. In the `click` event handler, [`focus`](https://api.jquery.com/focus/) the `child` `div` of the `.k-scrollbar-vertical` container.
+1. In the `click` event handler, [`focus`](https://api.jquery.com/focus/) the child `div` of the `.k-scrollbar-vertical` container.
 
 ```html
 <style>

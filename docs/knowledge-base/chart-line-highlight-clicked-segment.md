@@ -1,6 +1,6 @@
 ---
-title: Highlight Clicked Line Chart Segment
-description: An example on how to highlight the clicked line in the Kendo UI Line Chart.
+title: Highlight Clicked Line Chart Segments
+description: An example on how to highlight the clicked line segment in the Kendo UI Line Chart.
 type: how-to
 page_title: Highlight Line on Click | Kendo UI Chart
 slug: chart-line-highlight-clicked-segment
@@ -10,6 +10,7 @@ res_type: kb
 ---
 
 ## Environment
+
 <table>
 	<tr>
 		<td>Product Version</td>
@@ -27,7 +28,7 @@ How can I highlight the clicked line in the Kendo UI Line Chart?
 
 ## Solution
 
-To highlight the clicked line, handle the [`seriesClick`](https://docs.telerik.com/kendo-ui/api/javascript/dataviz/ui/chart/events/seriesclick) event. In the event handler, add a custom style class to the desired HTML elements.
+Handle the [`seriesClick`](https://docs.telerik.com/kendo-ui/api/javascript/dataviz/ui/chart/events/seriesclick) event&mdash;in the event handler, add a custom style class to the desired HTML elements.
 
 ```html
 <style>
@@ -109,5 +110,5 @@ To highlight the clicked line, handle the [`seriesClick`](https://docs.telerik.c
 
 ## See Also
 
-* [Explode Clicked Pie Chart Segment]({% slug howto_explodeclickedsegment_piecharts %})
-* [Highlight Clicked Bar Chart Segment]({% slug chart-bar-highlight-clicked-segment %})
+* [Explode Clicked Pie Chart Segments]({% slug howto_explodeclickedsegment_piecharts %})
+* [Highlight Clicked Bar Chart Segments]({% slug chart-bar-highlight-clicked-segment %})

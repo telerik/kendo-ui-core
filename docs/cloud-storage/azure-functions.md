@@ -1,79 +1,61 @@
 ---
 title: Consuming Data from Azure Functions
-page_title: Kendo Grid with Azure Functions | Kendo UI Consuming Data from Cloud Storage
-description: "Learn how to implement Azure Functions to execute remote CRUD operations for Kendo Grid."
+page_title: Consuming Data from Azure Functions | Kendo UI Cloud Storage
+description: "Learn how to implement Azure Functions to execute remote CRUD operations for the Kendo UI Grid."
 slug: azure_functions
 position: 1
 ---
 
-# Kendo Grid Integration with Azure Functions
+# Consuming Data from Azure Functions
 
-This article provides a step-bystep example of how to configure [Azure Functions](https://docs.microsoft.com/en-us/azure/azure-functions/) to serve data for a [Kendo UI Grid]({% overview_kendoui_grid_widget %}).
+This article provides a step-by-step tutorial on how to configure [Azure Functions](https://docs.microsoft.com/en-us/azure/azure-functions/) to serve data for a [Kendo UI Grid]({% slug overview_kendoui_grid_widget %}).
 
 ## Prerequisits
 
-The following tutorial requires basic knowledge on how the [Azure Portal]( https://docs.microsoft.com/en-us/azure/azure-portal/) is organized.
+Basic knowledge on how [Azure Portal]( https://docs.microsoft.com/en-us/azure/azure-portal/) is organized.
 
-## Create an Azure Functions Application
+## Creating Azure Functions Applications
 
-1. Follow the steps from the [Create your first function in the Azure portal quickstart](https://docs.microsoft.com/en-us/azure/azure-functions/functions-create-first-azure-function) . Follow the section [Create a function app]( https://docs.microsoft.com/en-us/azure/azure-functions/functions-create-first-azure-function#create-a-function-app);
+1. Follow the steps from [Create your first function in the Azure portal quickstart](https://docs.microsoft.com/en-us/azure/azure-functions/functions-create-first-azure-function) > [Create a function app]( https://docs.microsoft.com/en-us/azure/azure-functions/functions-create-first-azure-function#create-a-function-app).
+1. Provide the `kendo-grid-functions` name to the application and set the name of the storage account to `kendogridfunctions`.
+1. In [Azure Portal](https://portal.azure.com/), go to the newly created **kendo-grid-functions** application.
 
-1. Name the application `kendo-grid-functions` and set the name of the storage account to `kendogridfunctions`;
+## Creating HTTP-Triggered Functions for CRUD Operations
 
-1. In the [Azure Portal](https://portal.azure.com/) go to the newly created `kendo-grid-functions` app.
+Apply the following steps to individually set each function (read, create, destroy, and update):
 
-## Create HTTP Triggered Functions for the CRUD Operations
+1. On the left-side panel and under the application name, click the **+** (plus) symbol which, when the `Functions` section is hovered, appears to the right.
+1. If the **Get started quickly with a premade function** screen appears, click on the **Custom function** link at the bottom.
+1. Click the **HTTP trigger** option. On the panel that appears to the right, select the language and fill in a meaningful name for each function. Later on, the tutorial will demonstrate how to implement the Azure Functions in C#&mdash;therefore, select that language&mdash;and will use `Read`, `Create`, `Update`, and `Destroy` as names for the four functions.
 
-Follow the below steps for each of the four functions (read, create, destroy and update):
+## Integrating Input for the Read Function
 
-1. On the left-side panel, under the application name, click the plus symbol, which appears on the right when the `Functions` section is hovered;
+1. Expand the `Read` function and, under the function name on the left navigation panel, click the **Integrate** section.
+1. In the **Inputs** section, click the **New Input** button.
+1. Select **Azure Table Storage** as the input storage that will be integrated and click **Select**.
+1. Type **Product** for the partition key of the table.
+1. Chose the maximum number of records to read. In this case, the default value of 50 will be preserved.
+1. In **Storage account connection** to the right of the field, click the **new** link.
+1. Select the **kendogridfunctions** connection that was created during the initial setup of the application.
+1. Change **Table name** to **Products**.
+1. Click **Save** to save the newly integrated input table.
 
-1. If the `Get started quickly with a premade function` screen appears, click on `Custom function` link at the bottom;
+## Integrating Output for the Create, Destroy, and Update Functions
 
-1. Click on the `HTTP trigger` option. On the panel appearing on the right choose the language and fill in meaningful name for each function. Further in the example we will implement the Azure Functions in C#. Therefore, chose that language. Also, the names of the four functions will be: `Read`, `Create`, `Update` and `Destroy`.
+Configure an output integration for each of the other three functions (create, destroy, and update):
 
-## Integrate Input for the Read Function
+1. Click **New Output**.
+1. Select **Azure Table Storage**.
+1. Select **kendogridfunctions_STORAGE** for the storage account connection.
+1. Change **Table name** to **Products**.
 
-1. Expand the `Read` function and click on the `Integrate` section available below the function name in the left navigation panel;
+## Implementing the Model
 
-1. In the `Inputs` section click on the `New Input` button;
+The actual implementation requires you to first create a definition for the `Product` class:
 
-1. Select `Azure Table Storage` as input storage to be integrated and click `Select`;
-
-1. Type `Product` for Partition key of the Table;
-
-1. Chose the maximum number of records to read. In our case we won’t change the default value of 50;
-
-1. In the `Storage account connection` click on the `new` link available to the right of the field;
-
-1. Select the `kendogridfunctions` connection, that we have created on the initial set up of the application;
-
-1. Change the `Table name` to `Products`;
-
-1. Click `Save` to save the newly integrated input table;
-
-## Integrate Output for the Create, Destroy and Update Functions
-
-For each of the other three functions (Create, Destroy and Update) an output integration should be configured:
-
-1. Click on the `New Output`;
-
-1. Again, select `Azure Table Storage`;
-
-1. Select the `kendogridfunctions_STORAGE` for Storage account connection;
-
-1. Change the `Table name` to `Products`.
-
-## Implement the Model
-
-Now we will proceed with the actual implementation. First, create a definition for the `Product` class:
-
-1. Select the `Read` function;
-
-1. On the right side click on `View files`;
-
-1. Click on the `Add` button and name the new file `product.csx`;
-
+1. Select the `Read` function.
+1. On the right side, click **View files**.
+1. Click the **Add** button and provide the `product.csx` name to the new file.
 1. Place the following class definition in the file:
 
 	```C#
@@ -105,17 +87,16 @@ Now we will proceed with the actual implementation. First, create a definition f
 	}
 	```
 
-## Implement the Read Function
+## Implementing the Read Function
 
-Open the `run.csx` file under the `Read` function and follow the below steps:
-
-1. Before the first using, include the following load directive, that would allow you to use the Model class definition in the actual function:
+1. Under the `Read` function, open the `run.csx` file.
+1. Before the initial use, include the following `load` directive that allows you to use the `Model` class definition in the actual function.
 
 	```C#
 	#load "product.csx"
 	```
 
-1. Also include reference to the `Microsoft.WindowsAzure.Storage` and using for the `Table` library:
+1. Include a reference to the `Microsoft.WindowsAzure.Storage` and a `using` configuration for the `Table` library.
 
 	```C#
 	#r "Microsoft.WindowsAzure.Storage"
@@ -123,7 +104,7 @@ Open the `run.csx` file under the `Read` function and follow the below steps:
 	using Microsoft.WindowsAzure.Storage.Table;
 	```
 
-1. Then you could modify the function `Run` method definition to the following:
+1. Modify the definition of the `Run` function method. The newly added `inputTable` parameter allows you to get and return the products that are stored in the integrated table storage.
 
 	```C#
 	public static async Task<HttpResponseMessage> Run(HttpRequestMessage req, IQueryable<Product> inputTable, TraceWriter log)
@@ -140,13 +121,9 @@ Open the `run.csx` file under the `Read` function and follow the below steps:
 	}
 	```
 
-	Note the newly added `inputTable` parameter. That would allow you to get and return the Products stored in the integrated Table Storage.
+## Implementing the Create, Destroy, and Update Functions
 
-## Implement the Create, Destroy and Update Function
-
-Now we could proceed with the implementation of the Create, Destroy and Update functions:
-
-1. First, all of them should load the Product class and should refer the `Microsoft.WindowsAzure.Storage` and `Newtonsoft.Json` assemblies. The respective usings should also be present:
+Now you can proceed with the implementation of the other three functions. Make all three of them load the `Product` class and refer the `Microsoft.WindowsAzure.Storage` and `Newtonsoft.Json` assemblies. Add the respective `using` configurations.
 
 	```C#
 	#r "Newtonsoft.Json"
@@ -158,9 +135,9 @@ Now we could proceed with the implementation of the Create, Destroy and Update f
 	using Newtonsoft.Json;
 	```
 
-1. Then, the `Run` methods for the three functions will differ;
+As a result, the `Run` methods for each function differ.
 
-1. The method for the `Create` function:
+The following example demonstrates the `Run` method for the `Create` function.
 
 	```C#
 	public static async Task<HttpResponseMessage> Run(HttpRequestMessage req, CloudTable outputTable, TraceWriter log)
@@ -178,7 +155,7 @@ Now we could proceed with the implementation of the Create, Destroy and Update f
 	}
 	```
 
-1. The method for the `Destroy` function:
+The following example demonstrates the `Run` method for the `Destroy` function.
 
 	```C#
 	public static async Task<HttpResponseMessage> Run(HttpRequestMessage req, CloudTable outputTable, TraceWriter log)
@@ -194,7 +171,7 @@ Now we could proceed with the implementation of the Create, Destroy and Update f
 	}
 	```
 
-1. The method for the `Update` function:
+The following example demonstrates the `Run` method for the `Update` function.
 
 	```C#
 	public static async Task<HttpResponseMessage> Run(HttpRequestMessage req, CloudTable outputTable, TraceWriter log)
@@ -210,27 +187,20 @@ Now we could proceed with the implementation of the Create, Destroy and Update f
 	}
 	```
 
-## Configure the Application
+## Configuring the Application
 
-As the implementation is already in place, we will need some more configurations on the application and for each of the four functions:
+As the implementation is already in place, now you need to add specific configurations to the application and for each of the four functions.
 
-1. Click the application name and click `Platform features`;
+1. Click the application name and select **Platform features**.
+1. Under the **API** section, click **CORS**.
+1. Add the domain origin of the client-side application that will consume the functions data and click **Save**. In this case, the client-side application will be located in the kendo UI Dojo. Therefore, the `https://runner.telerik.io` origin is available.
+1. Go to the `Read` function and open the `function.json` file.
+1. In the **bindings / methods** section, remove **post** as an option.
+1. Open the same file for the other three functions but remove the `get` method.
 
-1. Under the `API` section click `CORS`;
+## Consuming the Implemented CRUD Endpoints on the Client
 
-1. Add the domain origin of the client-side app, that will consume the Functions data and click Save. In our case the client-side app will be in Dojo. Therefore, the `https://runner.telerik.io` origin has been added;
-
-1. Go to the `Read` function and open the `function.json` file;
-
-1. In the `bindings / methods` section remove the `post` as an option;
-
-1. Open the same file for the other three functions but remove the `get` method;
-
-## Consume the Implemented CRUD Endpoints on the Client
-
-Get the unique URL for each of the functions by clicking on the `Get Function URL` link available for each of them.
-
-It is now time to implement the client, that would consume the data from the Functions app. Implement the Kendo Grid in the following way and place the proper CRUD operations endpoints in the DataSource Transport configuration:
+Get the unique URL for each of the functions by clicking the **Get Function URL** link that is available for each of them. Now you need to implement the client that will consume the data from the functions application. The following example demonstrates how to implement the Kendo UI Grid and place the proper endpoints of the CRUD operations in the transport configuration of the data source. As a result, the Grid will be able to consume and edit the data from the Azure Functions application.
 
 ```HTML
 <div id="grid"></div>
@@ -294,8 +264,6 @@ It is now time to implement the client, that would consume the data from the Fun
 </script>
 ```
 
-That's it! The Kendo Grid should now be able to cosume and edit the data from the Azure Functions application.
-
 ## See Also
 
-* [Kendo Grid with CosmosDB]({% slug azure-cosmosdb %})
+* [Using the Kendo UI Grid with CosmosDB](...)

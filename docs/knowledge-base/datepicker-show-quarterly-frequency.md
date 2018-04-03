@@ -1,8 +1,8 @@
 ---
 title: Show Quarterly Frequency
-description: An example on how to show quarterly frequency in the Kendo UI DatePicker.
+description: An example on how to show a quarterly frequency in the Kendo UI DatePicker.
 type: how-to
-page_title: Quarterly Frequency | Kendo UI DatePicker
+page_title: Display Quarterly Frequency | Kendo UI DatePicker
 slug: datepicker-show-quarterly-frequency
 tags: datepicker, quarterly, frequency
 ticketid: 1153900
@@ -10,6 +10,7 @@ res_type: kb
 ---
 
 ## Environment
+
 <table>
 	<tr>
 		<td>Product Version</td>
@@ -23,14 +24,12 @@ res_type: kb
 
 ## Description
 
-How can I show quarterly frequency(March, June, September, and December) in the Kendo UI DatePicker?
+How can I show a quarterly frequency (March, June, September, and December) in the Kendo UI DatePicker?
 
 ## Solution
 
-To show quarterly frequency, handle the [`open`](https://docs.telerik.com/kendo-ui/api/javascript/ui/datepicker/events/open) event. In the event handler:
-
-1. Override the `click` event of the left and right Calendar arrows.
-1. Handle, the [`navigate`](https://docs.telerik.com/kendo-ui/api/javascript/ui/calendar/events/navigate) event of the Calendar. In the event handler, based on the `view`, disable the undesired months.
+1. Handle the [`open`](https://docs.telerik.com/kendo-ui/api/javascript/ui/datepicker/events/open) event&mdash;in the event handler, override the `click` event of the left and right Calendar arrows.
+1. Handle the [`navigate`](https://docs.telerik.com/kendo-ui/api/javascript/ui/calendar/events/navigate) event of the Calendar&mdash;in the event handler and based on the `view`, disable the undesired months.
 
 ```html
 <input id="datepicker" />

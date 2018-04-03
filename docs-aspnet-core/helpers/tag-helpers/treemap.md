@@ -26,9 +26,9 @@ The following example demonstrates how to define the TreeMap by using the TreeMa
         });
     </script>
 
-##  Bind to Remote Data
+## Binding to Remote Data
 
-You can also bind the `DataSource` to remote data. The following example demonstrates how to bind the Kendo TreeMap tag helper to a remote service.
+You can also bind the `DataSource` to remote data. The following example demonstrates how to bind the Kendo UI TreeMap tag helper to a remote service.
 
 ###### Example
 
@@ -60,7 +60,7 @@ You can also bind the `DataSource` to remote data. The following example demonst
         .TextField("Name")
         .HtmlAttributes(new { style = "height:600px; font-size: 12px;" })
     )
-    
+
 ```
 
 ## See Also

@@ -165,9 +165,21 @@ var __meta__ = { // jshint ignore:line
 
         open: function() {
             var that = this;
+            var popupHovered;
 
             that._calendar();
+
+            // In some cases when the popup is opened resize is triggered which will cause it to close
+            // Setting the below flag will prevent this from happening
+            // Reference: https://github.com/telerik/kendo/pull/7553
+            popupHovered = that.popup._hovered;
+            that.popup._hovered = true;
+
             that.popup.open();
+
+            setTimeout(function() {
+                that.popup._hovered = popupHovered;
+            }, 1);
         },
 
         close: function() {
