@@ -1413,8 +1413,9 @@ function pad(number, digits, end) {
                     }
 
                     if (count > 2) {
+                        minutesOffset = matches[0][0] + minutesOffset;
                         minutesOffset = parseInt(minutesOffset, 10);
-                        if (isNaN(minutesOffset) || outOfRange(minutesOffset, 0, 59)) {
+                        if (isNaN(minutesOffset) || outOfRange(minutesOffset, -59, 59)) {
                             return null;
                         }
                     }

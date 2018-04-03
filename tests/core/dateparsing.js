@@ -966,4 +966,14 @@ test('time portion is copied to new date', function() {
     deepEqual(result, new Date("2016/01/15 12:15:00"));
 });
 
+test('negative sign for minutes is taken into account when parsing', function() {
+    var date = new Date(2017, 1, 23, 10, 0, 0);
+    deepEqual(parse('2017-02-23T10:00:00-00:30'), new Date(2017, 1, 23, 10 + date.getTimezoneOffset()*(-1) / 60 , 30, 0));
+});
+
+test('positive sign for minutes is taken into account when parsing', function() {
+    var date = new Date(2017, 1, 23, 10, 0, 0);
+    deepEqual(parse('2017-02-23T10:00:00+00:30'), new Date(2017, 1, 23, 10 + date.getTimezoneOffset()*(-1) / 60, -30, 0));
+});
+
 }());

@@ -65,6 +65,8 @@ When you use complex data objects, apply the `dataTextField` and `dataValueField
 
 The following example demonstrates how to initialize the ListBox and bind it to a server-side array.
 
+###### Example
+
 ```tab-tagHelper
 
     var data = new string[] {
@@ -115,6 +117,8 @@ The following example demonstrates how to initialize the ListBox and bind it to 
 ### Binding to Client-Side Arrays
 
 The following example demonstrates how to initialize the ListBox and bind it to a client-side array.
+
+###### Example
 
 ```tab-tagHelper
 
@@ -171,6 +175,8 @@ The following example demonstrates how to initialize the ListBox and bind it to 
 ### Binding to Remote Data
 
 The following example demonstrates how to bind the Kendo UI ListBox tag helper to a remote service.
+
+###### Example
 
 ```tab-tagHelper
 

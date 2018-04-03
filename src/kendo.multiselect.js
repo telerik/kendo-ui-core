@@ -1296,7 +1296,7 @@ var __meta__ = { // jshint ignore:line
                         var candidate = listView.element.children()[index];
                         var isSelected = $(candidate).hasClass("k-state-selected");
 
-                        that.trigger(isSelected ? SELECT : DESELECT, {dataItem: dataItem, item: candidate});
+                        that.trigger(isSelected ? SELECT : DESELECT, {dataItem: dataItem, item: $(candidate)});
                     });
                     that._change();
                 });
