@@ -35,14 +35,14 @@ function remoteDataSource(callback, options) {
             serverPaging: true,
             transport: {
                 read: function(options) {
-                    var take = options.data.take,
-                    skip = options.data.skip;
-
+                    var take = options.data.take;
+                    var skip = options.data.skip;
                     var data = [];
 
                     for (var i = skip; i < Math.min(skip + take, total); i++) {
                         data.push({ OrderID: i, ContactName: "Contact " + i, ShipAddress: "Ship Address " + i });
                     }
+
                     callback();
                     options.success(data);
                 }
@@ -1853,6 +1853,27 @@ test("cancelChanges() after adding a new item with schema.model partially update
     equal(dataSource._ranges[0].data.length, 10);
     equal(dataSource._ranges[1].data.length, 10);
     equal(dataSource._ranges[2].data.length, 10);
+});
+
+test("cancelChanges() reverts updated model with remote binding", function() {
+    var dataSource = remoteDataSource($.noop, {
+        pageSize: 10,
+        schema: {
+            model: {
+                id: "OrderID",
+                OrderID: { type: "number" }
+            }
+        }
+    });
+    dataSource.options.useRanges = true;
+    dataSource.read();
+    dataSource.range(30, 10);
+    var item = dataSource.get(30);
+
+    item.set("ShipAddress", "new value");
+    dataSource.cancelChanges(item);
+
+    equal(dataSource.get(30).get("ShipAddress"), "Ship Address 30");
 });
 
 test("models within the range have correct parent - local paging", function() {

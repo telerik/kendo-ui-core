@@ -559,7 +559,7 @@ var __meta__ = { // jshint ignore:line
                 return;
             }
 
-            if(eventArgs.event.ctrlKey) {
+            if(eventArgs.event.ctrlKey || eventArgs.event.metaKey) {
                 if($(eventArgs.event.currentTarget).is(CELLSELECTORVALID)) {
                     that._toggleSelection($(eventArgs.event.currentTarget));
                 }
@@ -701,7 +701,7 @@ var __meta__ = { // jshint ignore:line
                 prevent = true;
             }
 
-            if (e.ctrlKey) {
+            if (e.ctrlKey || e.metaKey) {
                 if (key == keys.RIGHT && !isRtl || key == keys.LEFT && isRtl) {
                     that.navigateToFuture();
                     prevent = true;
@@ -1747,10 +1747,9 @@ var __meta__ = { // jshint ignore:line
     }
 
     // creates date with full year
-    function createDate(year, month, date) {
-        var leapYear = 1904;
-        var dateObject = new DATE(leapYear, month, date);
-        dateObject.setFullYear(year);
+    function createDate(year, month, date) { 
+        var dateObject = new DATE(year, month, date);
+        dateObject.setFullYear(year, month, date);
         return dateObject;
     }
 

@@ -88,6 +88,14 @@ List the components you want to be included in the custom build and separate the
 >
 > When complete, the `gulp` command outputs a `kendo.custom.min.js` file in the `src/dist` directory. The Gulp build task automatically resolves the needed dependencies for each component, so you do not have to list them. Do not use multiple custom combined scripts, as they will contain duplicate code. Instead, create one combined script file, which includes everything you need.
 
+If you want to compile not minified version of the custom script simply remove or comment out the following line from the `gulpfile.js`:
+
+```JavaScript
+    ...
+    .pipe(uglify())
+    ...
+```
+
 ## See Also
 
 Other articles on getting started with Kendo UI:

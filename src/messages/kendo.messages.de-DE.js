@@ -726,19 +726,42 @@ if (kendo.ui.Slider) {
       });
   }
 
-/* DateInput */
-if (kendo.ui.DateInput) {
-  kendo.ui.DateInput.prototype.options.messages =
-    $.extend(true, kendo.ui.DateInput.prototype.options.messages, {
-      "year": "Jahr",
-      "month": "Monat",
-      "day": "Tag",
-      "weekday": "Wochentag",
-      "hour": "Stunden",
-      "minute": "Minuten",
-      "second": "Sekunden",
-      "dayperiod": "AM/PM"
-    });
-}
+  /* DateInput */
+  if (kendo.ui.DateInput) {
+    kendo.ui.DateInput.prototype.options.messages =
+      $.extend(true, kendo.ui.DateInput.prototype.options.messages, {
+        "year": "Jahr",
+        "month": "Monat",
+        "day": "Tag",
+        "weekday": "Wochentag",
+        "hour": "Stunden",
+        "minute": "Minuten",
+        "second": "Sekunden",
+        "dayperiod": "AM/PM"
+      });
+  }
 
+  /* FlatColorPicker messages */
+
+  if (kendo.ui.FlatColorPicker) {
+    kendo.ui.FlatColorPicker.prototype.options.messages =
+    $.extend(true, kendo.ui.FlatColorPicker.prototype.options.messages, {
+        "apply": "Anwenden",
+        "cancel": "Abbrechen",
+        "noColor": "keine Farbe",
+        "clearColor": "Farbe löschen"
+    });
+  }
+
+  /* ColorPicker messages */
+
+  if (kendo.ui.ColorPicker) {
+    kendo.ui.ColorPicker.prototype.options.messages =
+    $.extend(true, kendo.ui.ColorPicker.prototype.options.messages, {
+        "apply": "Anwenden",
+        "cancel": "Abbrechen",
+        "noColor": "keine Farbe",
+        "clearColor": "Farbe löschen"
+    });
+  }
 })(window.kendo.jQuery);

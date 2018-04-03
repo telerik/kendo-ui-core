@@ -140,7 +140,7 @@ If set to true, the application router instance will use the [history pushState 
 
 ### root `String` *(default: "/")*
 
-Applicable if `pushState` is used and the application is deployed to a path different than `/`. If the application start page is hosted on `http://foo.com/myapp/`, the root option should be set to `/myapp/`.
+Applicable if `pushState` is used and the application is deployed to a path different than `/`. If the application start page is hosted on `//foo.com/myapp/`, the root option should be set to `/myapp/`.
 
 ### retina `Boolean`*(default: true)*
 

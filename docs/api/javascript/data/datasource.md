@@ -1504,7 +1504,7 @@ Function which can be used for custom comparing of the DataSource items.
 
 ### transport `Object`
 
-The configuration used to load and save the data items. A data source is remote or local based on the way of it retrieves data items.
+The configuration used to load and save the data items. A data source is remote or local based on the way it retrieves data items.
 
 Remote data sources load and save data items from and to a remote end-point (also known as remote service or server). The `transport` option describes the remote service configuration - URL, HTTP verb, HTTP headers, and others. The `transport` option can also be used to implement custom data loading and saving.
 

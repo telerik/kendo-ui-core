@@ -9,7 +9,7 @@ position: 1
 
 # Hybrid Layout HtmlHelper Overview
 
-The hybrid Layout HtmlHelper extension is a server-side wrapper for the [hybrid Kendo UI Layout](../http://docs.telerik.com/kendo-ui/api/javascript/mobile/ui/layout) widget.
+The hybrid Layout HtmlHelper extension is a server-side wrapper for the [hybrid Kendo UI Layout](https://docs.telerik.com/kendo-ui/api/javascript/mobile/ui/layout) widget.
 
 It allows you to configure the hybrid Kendo UI Layout from server-side code.
 
@@ -152,7 +152,7 @@ Below are listed the steps for you to follow when configuring the hybrid Kendo U
 
 ## Event Handling
 
-You can subscribe to all hybrid Layout [events](../http://docs.telerik.com/kendo-ui/api/javascript/mobile/ui/layout#events).
+You can subscribe to all hybrid Layout [events](https://docs.telerik.com/kendo-ui/api/javascript/mobile/ui/layout#events).
 
 ### By Handler Name
 
@@ -195,7 +195,7 @@ The following example demonstrates how to subscribe to events by a handler name.
 
 ### Instances
 
-You can reference a hybrid Layout instance by using the code from the example below. Once a reference is established, use the [hybrid Layout API](../http://docs.telerik.com/kendo-ui/api/javascript/mobile/ui/layout#methods) to control its behavior.
+You can reference a hybrid Layout instance by using the code from the example below. Once a reference is established, use the [hybrid Layout API](https://docs.telerik.com/kendo-ui/api/javascript/mobile/ui/layout) to control its behavior.
 
 ###### Example
 

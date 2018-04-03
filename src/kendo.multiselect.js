@@ -285,7 +285,6 @@ var __meta__ = { // jshint ignore:line
                 }
             }
 
-            this.persistTagList = false;
             this._selectValue(e.added, e.removed);
         },
 
@@ -496,20 +495,20 @@ var __meta__ = { // jshint ignore:line
 
                 that.listView.skipUpdate(true);
 
-                that.persistTagList = true;
+                that.persistTagList = that._initialOpen && !that.listView.bound() ? false : true;
                 that._filterSource();
                 that._focusItem();
             } else if (that._allowOpening()) {
 
                 //selects values in autoBind false and non virtual scenario on initial load
-                if (!that.options.autoBind && !that.options.virtual && that.options.value && !$.isPlainObject(that.options.value[0])){
+                if (that._initialOpen && !that.options.autoBind && !that.options.virtual && that.options.value && !$.isPlainObject(that.options.value[0])){
                     that.value(that._initialValues);
-                    that._initialOpen = false;
                 }
 
                 // In some cases when the popup is opened resize is triggered which will cause it to close
                 // Setting the below flag will prevent this from happening
                 that.popup._hovered = true;
+                that._initialOpen = false;
                 that.popup.open();
                 that._focusItem();
             }
@@ -828,6 +827,10 @@ var __meta__ = { // jshint ignore:line
                     that._selectRange(0, listView.items().length -1);
                 }
             } else if (key === keys.ENTER && visible) {
+                if (!listView.focus()) {
+                    return;
+                }
+
                 e.preventDefault();
 
                 if (listView.focus().hasClass(SELECTEDCLASS)) {
@@ -1293,7 +1296,7 @@ var __meta__ = { // jshint ignore:line
                         var candidate = listView.element.children()[index];
                         var isSelected = $(candidate).hasClass("k-state-selected");
 
-                        that.trigger(isSelected ? SELECT : DESELECT, {dataItem: dataItem, item: candidate});
+                        that.trigger(isSelected ? SELECT : DESELECT, {dataItem: dataItem, item: $(candidate)});
                     });
                     that._change();
                 });

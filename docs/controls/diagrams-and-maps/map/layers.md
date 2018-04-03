@@ -18,7 +18,7 @@ They are stacked from bottom to top in the order of definition and are oblivious
 
 Tile layers are suitable for:
 
-* Displaying raster maps from popular online providers such as [OpenStreetMap](http://www.openstreetmap.org/), [OpenWeatherMap](http://openweathermap.org/), [ArcGIS](https://developers.arcgis.com/en/), [Here (Nokia) Maps](https://developer.here.com/documentation/map-tile/topics/overview.html), and many more.
+* Displaying raster maps from popular online providers such as [OpenStreetMap](http://www.openstreetmap.org/), [OpenWeatherMap](http://openweathermap.org/), [ArcGIS](https://developers.arcgis.com/en/), and many more.
 * Any other Map Tile service that supports the [WGS 84 projection standards](https://en.wikipedia.org/wiki/World_Geodetic_System).
 
 [Microsoft Bing](http://msdn.microsoft.com/en-us/library/ff701713.aspx) provides dedicated support. Note that it requires you to [obtain an API key](http://msdn.microsoft.com/en-us/library/ff428642.aspx).

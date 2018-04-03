@@ -243,7 +243,7 @@ The default marker shape for all marker layers. The following pre-defined marker
 * pin
 
 Marker shapes are implemented as CSS classes on the marker element (span.k-marker).
-For example "pinTarget" is rendered as "k-marker-pin-target".
+For example "pinTarget" is rendered as "k-i-marker-pin-target".
 
 #### Example - setting default marker shape
     <div id="map"></div>
@@ -2878,7 +2878,7 @@ The minimum symbol size for bubble layer symbols.
         });
     </script>
 
-### layers.maxZoom
+### layers.maxZoom `Number`
 
 The maximum zoom level at which to show this layer.
 
@@ -2902,7 +2902,7 @@ The maximum zoom level at which to show this layer.
         });
     </script>
 
-### layers.minZoom
+### layers.minZoom `Number`
 
 The minimum zoom level at which to show this layer.
 

@@ -4233,9 +4233,22 @@ The HTML element which represents the editor content area. In the [classic Edito
 
     <textarea id="editor"></textarea>
     <script>
-    $("#editor").kendoEditor();
-    var editor = $("#editor").data("kendoEditor");
-    editor.body.style.backgroundColor = "#f00";
+      $("#editor").kendoEditor();
+      var editor = $("#editor").data("kendoEditor");
+      editor.body.style.backgroundColor = "#f00";
+    </script>
+
+### toolbar `Object`
+
+The toolbar instance of the Kendo Editor.
+
+#### Example
+
+    <div id="editor"></div>
+    <script>
+      $("#editor").kendoEditor();
+      var editor = $("#editor").data("kendoEditor");
+      editor.toolbar.window.open();
     </script>
 
 ## Methods

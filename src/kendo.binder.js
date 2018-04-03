@@ -1656,6 +1656,11 @@ var __meta__ = { // jshint ignore:line
     }
 
     function bindElement(element, source, roles, parents) {
+
+        if(!element){
+            return;
+        }
+
         var role = element.getAttribute("data-" + kendo.ns + "role"),
             idx,
             bind = element.getAttribute("data-" + kendo.ns + "bind"),
@@ -1679,7 +1684,7 @@ var __meta__ = { // jshint ignore:line
             bind = parseBindings(bind.replace(whiteSpaceRegExp, ""));
 
             if (!target) {
-                options = kendo.parseOptions(element, {textField: "", valueField: "", template: "", valueUpdate: CHANGE, valuePrimitive: false, autoBind: true});
+                options = kendo.parseOptions(element, {textField: "", valueField: "", template: "", valueUpdate: CHANGE, valuePrimitive: false, autoBind: true}, source);
                 options.roles = roles;
                 target = new BindingTarget(element, options);
             }

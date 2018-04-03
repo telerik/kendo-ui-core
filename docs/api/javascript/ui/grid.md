@@ -2456,8 +2456,9 @@ The text message displayed in the column menu for locking a column.
     <script>
     $("#grid").kendoGrid({
       columns: [
-        { field: "name", lockable: true },
-        { field: "age" }
+        { locked: true, field: "id", width:200 },
+        { field: "name", width:400 },
+        { field: "age", width:400 }
       ],
       columnMenu: {
         messages: {
@@ -2466,8 +2467,8 @@ The text message displayed in the column menu for locking a column.
       },
       sortable: true,
       dataSource: [
-        { name: "Jane Doe", age: 30 },
-        { name: "John Doe", age: 33 }
+        { id: 1, name: "Jane Doe", age: 30 },
+        { id: 2, name: "John Doe", age: 33 }
       ]
     });
     </script>
@@ -2482,8 +2483,9 @@ The text message displayed in the column menu for unlocking a column.
     <script>
     $("#grid").kendoGrid({
       columns: [
-        { field: "name", lockable: true },
-        { field: "age" }
+        { locked: true, field: "id", width:200 },
+        { field: "name", width:400 },
+        { field: "age", width:400 }
       ],
       columnMenu: {
         messages: {
@@ -2492,8 +2494,8 @@ The text message displayed in the column menu for unlocking a column.
       },
       sortable: true,
       dataSource: [
-        { name: "Jane Doe", age: 30 },
-        { name: "John Doe", age: 33 }
+        { id: 1, name: "Jane Doe", age: 30 },
+        { id: 2, name: "John Doe", age: 33 }
       ]
     });
     </script>
@@ -8156,6 +8158,8 @@ Switches the table row which is in edit mode and saves any changes made by the u
 
 Gets or sets the table rows (or cells) which are selected.
 
+If the Grid is using frozen (locked) columns and multiple cell selection with string selector, the `select` method will select and return **two** table cell elements. This is because the frozen columns feature works with the separate tables for the frozen and non-frozen columns. Each cell element corresponds to the jQuery selector applied for each table. One of the table cells will be a descendant of `div.k-grid-content-locked` and the other one will be a descendant of `div.k-grid-content`. The two `div`s are siblings in the Grid DOM structure. To select just one table cell please use jQuery selector to find the exact one cell from the specific table element and set `k-state-selected` class instead of using the `select` method.
+
 #### Parameters
 
 ##### rows `String|Element|jQuery`
@@ -8166,7 +8170,7 @@ A string, DOM element or jQuery object which represents the table row(s) or cell
 
 `jQuery` the selected table rows or cells.
 
-> If the Grid is using frozen (locked) columns and row selection, the `select` method will return **two** table row elements for each selected item. This is because the frozen columns feature works with the separate tables for the frozen and non-frozen columns. Each pair of table row elements that correspond to the same data item, will have the same `data-uid` attribute value. One of the table rows will be a descendant of `div.k-grid-content-locked` and the other one will be a descendant of `div.k-grid-content`. The two `div`s are siblings in the Grid DOM structure.
+> In case of using frozen (locked) columns and row selection, the `select` method will return **two** table row elements for each selected item. Each pair of table row elements that correspond to the same data item, will have the same `data-uid` attribute value. One of the table rows will be a descendant of `div.k-grid-content-locked` and the other one will be a descendant of `div.k-grid-content`.
 
 #### Example - select the first and second table rows
 

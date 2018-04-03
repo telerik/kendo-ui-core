@@ -83,7 +83,7 @@ The following example demonstrates an important detail&mdash;the `'Increment'` a
 
 #### Specifying Options from Controller
 
-The following example demonstrates how to specify options form the `controller` in AngularJS projects.
+The following example demonstrates how to specify options from the `controller` in AngularJS projects.
 
 ###### Example
 
@@ -711,44 +711,43 @@ The following example demonstrates the best solution in this case&mdash;to use a
 ###### Example
 
 ````html
-    <div ng-controller="Host">
-      <div class="demo-section k-content">
+	<div id="example" ng-app="KendoDemos">
+		<div ng-controller="Host">
+			<div kendo-window="editPopup"
+				 k-modal="true"
+				 k-title="'popupTitle'"
+				 k-width="300"
+				 k-resizable="false"
+				 k-height="200"
+				 k-visible="false">
 
-        <div kendo-window="editPopup" k-modal="true" k-title="'popupTitle'" k-width="300"
-               k-resizable="false" k-height="200" k-visible="false">
+				<div ng-controller="Popup">
+				  <span>Selected: {% raw %}{{dataview.DataSourceID}}{% endraw %} </span>
+				  <select kendo-drop-down-list style="width:230px;"
+						  ng-model="dataview.DataSourceID"
+						  k-data-text-field="'Name'"
+						  k-data-value-field="'ID'"
+						  k-data-source="datasources"></select>
+				</div>
+			</div>
+			<button kendo-button ng-click="Show()">Show</button>
+		</div>
+	</div>
 
-            <div ng-controller="Popup">
-              <span>Selected: {% raw %}{{dataview.DataSourceID}}{% endraw %} </span>
-              <select kendo-drop-down-list style="width:230px;"
-                      ng-model="dataview.DataSourceID"
-                      k-data-text-field="'Name'"
-                      k-data-value-field="'ID'"
-                      k-data-source="datasources"></select>
-            </div>
-
-        </div>
-
-        <button kendo-button ng-click="Show()">Show</button>
-
-     </div>
-
-     <script>
-      angular.module("KendoDemos", ["kendo.directives"])
-      .controller("Host", function($scope) {
-        $scope.Show = function() {
-          $scope.editPopup.center();
-          $scope.editPopup.open();
-        }
-      }).controller("Popup", function($scope) {
-        var datasources = [{ ID: 13, Name: "ID is 13" }, { ID: 14, Name: "ID is 14" }];
-        $scope.datasources = datasources;
-        var dataview = { DataSourceID: 14 };
-        $scope.dataview = dataview;
-      });
-
-     </script>
-
-    </div>
+	<script>
+		angular.module("KendoDemos", ["kendo.directives"])
+			.controller("Host", function($scope) {
+				$scope.Show = function() {
+				  $scope.editPopup.center();
+				  $scope.editPopup.open();
+				}
+			}).controller("Popup", function($scope) {
+				var datasources = [{ ID: 13, Name: "ID is 13" }, { ID: 14, Name: "ID is 14" }];
+				$scope.datasources = datasources;
+				var dataview = { DataSourceID: 14 };
+				$scope.dataview = dataview;
+			});
+	</script>
 ````
 
 ## Known Limitations

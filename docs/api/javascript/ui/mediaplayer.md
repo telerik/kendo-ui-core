@@ -221,6 +221,39 @@ The value that indicates whether the widget should enter or exit fullscreen.
 
 `Boolean` The current fullscreen configuration.
 
+### media
+
+Gets or sets the information about the media that is loaded in the widget.
+
+#### Example
+
+    <div id="mediaplayer" />
+    <script>
+      $("#mediaplayer").kendoMediaPlayer({
+        media: { title: "Digital Transformation: A New Way of Thinking", source: "https://www.youtube.com/watch?v=gNlya720gbk" }
+      });
+      // get a reference to the media player widget
+      var mediaPlayer = $("#mediaplayer").data("kendoMediaPlayer");
+      // check the currently loaded media
+      console.log(mediaPlayer.media());
+      // change the media loaded in the widget
+      mediaPlayer.media({
+                    title: "Responsive Website Delivers for Reeves Import Motorcars",
+                    poster: "http://img.youtube.com/vi/DYsiJRmIQZw/1.jpg",
+                    source: "https://www.youtube.com/watch?v=DYsiJRmIQZw"
+                });
+    </script>
+
+#### Parameters
+
+##### value `Object`
+
+The media configuration to load in the MediaPlayer. Accepts the same values as the [`media`](../configuration/media) option.
+
+#### Returns
+
+`Object` The current media configuration.
+
 ### volume
 
 Gets or sets a value between 0 and 100 that specifies the volume of the video.

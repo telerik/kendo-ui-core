@@ -1413,8 +1413,9 @@ function pad(number, digits, end) {
                     }
 
                     if (count > 2) {
+                        minutesOffset = matches[0][0] + minutesOffset;
                         minutesOffset = parseInt(minutesOffset, 10);
-                        if (isNaN(minutesOffset) || outOfRange(minutesOffset, 0, 59)) {
+                        if (isNaN(minutesOffset) || outOfRange(minutesOffset, -59, 59)) {
                             return null;
                         }
                     }
@@ -2240,9 +2241,10 @@ function pad(number, digits, end) {
 
         support.customElements = ("registerElement" in window.document);
 
-        var chrome = support.browser.chrome;
+        var chrome = support.browser.chrome,
+            mozilla = support.browser.mozilla;
         support.msPointers = !chrome && window.MSPointerEvent;
-        support.pointers = !chrome && window.PointerEvent;
+        support.pointers = !chrome && !mozilla && window.PointerEvent;
         support.kineticScrollNeeded = mobileOS && (support.touch || support.msPointers || support.pointers);
     })();
 
@@ -2885,7 +2887,7 @@ function pad(number, digits, end) {
         return value;
     }
 
-    function parseOptions(element, options) {
+    function parseOptions(element, options, source) {
         var result = {},
             option,
             value;
@@ -2897,7 +2899,11 @@ function pad(number, digits, end) {
 
                 if (templateRegExp.test(option)) {
                     if(typeof value === "string") {
-                        value = kendo.template($("#" + value).html());
+                        if($("#" + value).length){
+                            value = kendo.template($("#" + value).html());
+                        }else if (source){
+                            value = kendo.template(source[value]);
+                        }
                     } else {
                         value = element.getAttribute(option);
                     }

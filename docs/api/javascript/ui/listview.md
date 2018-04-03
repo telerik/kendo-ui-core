@@ -21,22 +21,26 @@ data source is fired. By default the widget will bind to the data source specifi
 
 #### Example - disable automatic binding
 
+    <button id="btn">Read Data</button>
     <div id ="listView"></div>
     <script>
-    var dataSource = new kendo.data.DataSource({
-      data: [ { name: "Jane Doe" }, { name: "John Doe" }]
-    });
-    $("#listView").kendoListView({
-         dataSource: dataSource,
-         template: "<div>#:name#</div>",
-         autoBind: false
-     });
-    dataSource.read(); // "read()" will fire the "change" event of the dataSource and the widget will be bound
+      var dataSource = new kendo.data.DataSource({
+        data: [ { name: "Jane Doe" }, { name: "John Doe" }]
+      });
+      $("#listView").kendoListView({
+        dataSource: dataSource,
+        template: "<div>#:name#</div>",
+        autoBind: false
+      });
+
+      $("#btn").click(function(){
+        dataSource.read(); // "read()" will fire the "change" event of the dataSource and the widget will be bound
+      });
     </script>
 
 ### dataSource `Object|Array|kendo.data.DataSource`
 
-The data source of the widget which is used render table rows. Can be a JavaScript object which represents a valid data source configuration, a JavaScript array or an existing [kendo.data.DataSource](/api/javascript/data/datasource)
+The data source of the widget which is used render table rows. Can be a JavaScript object which represents a valid [kendo.data.DataSource](/api/javascript/data/datasource) configuration, a JavaScript array or an existing [kendo.data.DataSource](/api/javascript/data/datasource)
 instance.
 
 If the `dataSource` option is set to a JavaScript object or array the widget will initialize a new [kendo.data.DataSource](/api/javascript/data/datasource) instance using that value as data source configuration.
@@ -86,61 +90,61 @@ If the `dataSource` option is an existing [kendo.data.DataSource](/api/javascrip
 
 ### editTemplate `Function`
 
-Specifies ListView item template in edit mode.
+Specifies the template for ListView items during edit mode.
 
 #### Example of
 
     <script type="text/x-kendo-tmpl" id="template">
-         <div>
-           <dl>
-             <dt>Name</dt> <dd>#:name#</dd>
-             <dt>Age</dt> <dd>#:age#</dd>
-           </dl>
-           <div>
-               <a class="k-button k-edit-button" href="\\#"><span class="k-icon k-edit"></span></a>
-               <a class="k-button k-delete-button" href="\\#"><span class="k-icon k-delete"></span></a>
-           </div>
-         </div>
-     </script>
+     <div>
+       <dl>
+         <dt>Name</dt> <dd>#:name#</dd>
+         <dt>Age</dt> <dd>#:age#</dd>
+      </dl>
+       <div>
+           <a class="k-button k-edit-button" href="\\#"><span class="k-icon k-i-edit"></span></a>
+           <a class="k-button k-delete-button" href="\\#"><span class="k-icon k-i-delete"></span></a>
+      </div>
+      </div>
+    </script>
 
-     <script type="text/x-kendo-tmpl" id="editTemplate">
-         <div>
-           <dl>
-             <dt>Name</dt>
-             <dd><input type="text" data-bind="value:name" name="name" required="required" /></dd>
-             <dt>Age</dt>
-             <dd><input type="text" data-bind="value:age" data-role="numerictextbox" data-type="number" name="age" required="required" /></dd>
-           </dl>
-           <div>
-               <a class="k-button k-update-button" href="\\#"><span class="k-icon k-update"></span></a>
-               <a class="k-button k-cancel-button" href="\\#"><span class="k-icon k-cancel"></span></a>
-           </div>
-         </div>
-     </script>
+    <script type="text/x-kendo-tmpl" id="editTemplate">
+     <div>
+       <dl>
+         <dt>Name</dt>
+         <dd><input type="text" data-bind="value:name" name="name" required="required" /></dd>
+         <dt>Age</dt>
+         <dd><input type="text" data-bind="value:age" data-role="numerictextbox" data-type="number" name="age" required="required" /></dd>
+      </dl>
+       <div>
+           <a class="k-button k-update-button" href="\\#"><span class="k-icon k-i-check"></span></a>
+           <a class="k-button k-cancel-button" href="\\#"><span class="k-icon k-i-cancel"></span></a>
+      </div>
+      </div>
+    </script>
 
-     <div id="listView"></div>
-     <script>
-     $("#listView").kendoListView({
+    <div id="listView"></div>
+    <script>
+      $("#listView").kendoListView({
         template: kendo.template($("#template").html()),
         editTemplate: kendo.template($("#editTemplate").html()),
         dataSource: {
-            data: [
-                { id: 1, name: "Jane Doe", age: 47 },
-                { id: 2, name: "John Doe", age: 50 }
-            ],
-            schema: {
-                model: {
-                    id: "id",
-                    fields: {
-                        id: { type: "number" },
-                        name: { type: "string" },
-                        age: { type: "number" }
-                    }
-                }
+          data: [
+            { id: 1, name: "Jane Doe", age: 47 },
+            { id: 2, name: "John Doe", age: 50 }
+          ],
+          schema: {
+            model: {
+              id: "id",
+              fields: {
+                id: { type: "number" },
+                name: { type: "string" },
+                age: { type: "number" }
+              }
             }
+          }
         }
-     });
-     </script>
+      });
+    </script>
 
 ### navigatable `Boolean` *(default: false)*
 
@@ -148,19 +152,37 @@ Specifies ListView item template in edit mode.
 
 #### Example
 
-     <div id ="listView"></div>
-     <script>
-     $("#listView").kendoListView({
-        dataSource: {
-            data: [
-                { name: "Jane Doe" },
-                { name: "John Doe" }
-            ]
-        },
-        template: "<div>#:name#</div>",
-        navigatable: true
-    });
-    </script>
+      <div id="listView"></div>
+
+      <script type="text/x-kendo-tmpl" id="template">
+        <div class="product-view k-widget">
+            <dl>
+                <dt>Product Name</dt>
+                <dd>#:ProductName#</dd>
+            </dl>
+        </div>
+      </script>
+
+      <script>
+        $(document).ready(function () {
+          var crudServiceBaseUrl = "https://demos.telerik.com/kendo-ui/service",
+              dataSource = new kendo.data.DataSource({
+                transport: {
+                  read:  {
+                    url: crudServiceBaseUrl + "/Products",
+                    dataType: "jsonp"
+                  }
+                },
+                pageSize: 10
+              });
+
+          var listView = $("#listView").kendoListView({
+            dataSource: dataSource,
+            navigatable: true,
+            template: kendo.template($("#template").html())
+          }).data("kendoListView");
+        });
+      </script>
 
 ### selectable `Boolean|String` *(default: false)*
 
@@ -181,19 +203,37 @@ Multiple item selection.
 
 #### Example of ListView with multiple selection enabled
 
-     <div id ="listView"></div>
-     <script>
-     $("#listView").kendoListView({
-        dataSource: {
-            data: [
-                { name: "Jane Doe" },
-                { name: "John Doe" }
-            ]
-        },
-        template: "<div>#:name#</div>",
-        selectable: "multiple"
-    });
-    </script>
+      <div id="listView"></div>
+
+      <script type="text/x-kendo-tmpl" id="template">
+        <div class="product-view k-widget">
+            <dl>
+                <dt>Product Name</dt>
+                <dd>#:ProductName#</dd>
+        </dl>
+        </div>
+      </script>
+
+      <script>
+        $(document).ready(function () {
+          var crudServiceBaseUrl = "https://demos.telerik.com/kendo-ui/service",
+              dataSource = new kendo.data.DataSource({
+                transport: {
+                  read:  {
+                    url: crudServiceBaseUrl + "/Products",
+                    dataType: "jsonp"
+                  }
+                },
+                pageSize: 10
+              });
+
+          var listView = $("#listView").kendoListView({
+            dataSource: dataSource,
+            selectable: "multiple",
+            template: kendo.template($("#template").html())
+          }).data("kendoListView");
+        });
+      </script>
 
 ### template `Function`
 
@@ -257,102 +297,194 @@ Template to be used for rendering the alternate items in the ListView.
 
 ### dataSource `kendo.data.DataSource`
 
-The [data source](/api/javascript/data/datasource) of the widget. Configured via the [dataSource](/api/javascript/ui/listview/configuration/datasource) option.
+The [DataSource](/api/javascript/data/datasource) of the widget. Configured via the [dataSource](/api/javascript/ui/listview/configuration/datasource) option.
 
-> Changes of the data source will be reflected in the widget.
+> Changes of the DataSource will be reflected in the widget.
 
-> **Important:** Assigning a new data source would have no effect. Use the [setDataSource](/api/javascript/ui/listview/methods/setdatasource) method instead.
+> **Important:** Assigning a new DataSource would have no effect. Use the [setDataSource](/api/javascript/ui/listview/methods/setdatasource) method instead.
 
 ## Methods
 
 ### add
 
-Inserts empty item as first item on the current view and prepare it for editing.
+Inserts an empty item as a first item in the ListView and puts it in edit mode.
 
 #### Example
 
-    <div id ="listView"></div>
+    <script type="text/x-kendo-tmpl" id="template">
+     <div>
+       <dl>
+         <dt>Name</dt> <dd>#:name#</dd>
+         <dt>Age</dt> <dd>#:age#</dd>
+      </dl>
+      </div>
+    </script>
+
+    <script type="text/x-kendo-tmpl" id="editTemplate">
+     <div>
+       <dl>
+         <dt>Name</dt>
+         <dd><input type="text" data-bind="value:name" name="name" required="required" /></dd>
+         <dt>Age</dt>
+         <dd><input type="text" data-bind="value:age" data-role="numerictextbox" data-type="number" name="age" required="required" /></dd>
+      </dl>
+       <div>
+          <a class="k-button k-update-button" href="\\#">
+          	<span class="k-icon k-i-check"></span>
+      		</a>
+          <a class="k-button k-cancel-button" href="\\#">
+          	<span class="k-icon k-i-cancel"></span>
+      		</a>
+      </div>
+      </div>
+    </script>
+    <button class="k-button" id="addBtn">Add New</button>
+    <div id="listView"></div>
     <script>
-    $("#listView").kendoListView({
-         dataSource: {
-            data: [
-                { name: "Jane Doe" },
-                { name: "John Doe" }
-            ]
-        },
-        template: "<div>#:name#</div>",
-        editTemplate: '<div><input type="text" name="name" data-bind="value:name" /></div>'
-    });
-    // get a reference to the list view widget
-    var listView = $("#listView").data("kendoListView");
-    // add item
-    listView.add();
+      $("#listView").kendoListView({
+        template: kendo.template($("#template").html()),
+        editTemplate: kendo.template($("#editTemplate").html()),
+        dataSource: {
+          data: [
+            { id: 1, name: "Jane Doe", age: 47 },
+            { id: 2, name: "John Doe", age: 50 }
+          ],
+          schema: {
+            model: {
+              id: "id",
+              fields: {
+                id: { type: "number" },
+                name: { type: "string" },
+                age: { type: "number" }
+              }
+            }
+          }
+        }
+      });
+      $("#addBtn").click(function(){
+        // get a reference to the ListView widget
+        var listView = $("#listView").data("kendoListView");
+        // add an item to the ListView
+        listView.add();
+      });
     </script>
 
 ### cancel
 
-Cancels changes in currently edited item.
+Cancels changes in the currently edited item.
 
 #### Example
 
-    <div id ="listView"></div>
+    <script type="text/x-kendo-tmpl" id="template">
+     <div>
+       <dl>
+         <dt>Name</dt> <dd>#:name#</dd>
+         <dt>Age</dt> <dd>#:age#</dd>
+      </dl>
+       <div>
+           <a class="k-button k-edit-button" href="\\#"><span class="k-icon k-i-edit"></span></a>
+      </div>
+      </div>
+    </script>
+
+    <script type="text/x-kendo-tmpl" id="editTemplate">
+     <div>
+       <dl>
+         <dt>Name</dt>
+         <dd><input type="text" data-bind="value:name" name="name" required="required" /></dd>
+         <dt>Age</dt>
+         <dd><input type="text" data-bind="value:age" data-role="numerictextbox" data-type="number" name="age" required="required" /></dd>
+      </dl>
+       <div>
+          <a class="k-button k-update-button" href="\\#">
+          	<span class="k-icon k-i-check"></span>
+      		</a>
+      </div>
+      </div>
+    </script>
+    <button class="k-button" id="cancelBtn">Cancel</button>
+    <div id="listView"></div>
     <script>
-    $("#listView").kendoListView({
-         dataSource: {
-            data: [
-                { name: "Jane Doe" },
-                { name: "John Doe" }
-            ]
-        },
-        template: "<div>#:name#</div>",
-        editTemplate: '<div><input type="text" name="name" data-bind="value:name" /></div>'
-    });
-    // get a reference to the list view widget
-    var listView = $("#listView").data("kendoListView");
-    // add item
-    listView.add();
-    // cancel changes in currently edited item
-    listView.cancel();
+      $("#listView").kendoListView({
+        template: kendo.template($("#template").html()),
+        editTemplate: kendo.template($("#editTemplate").html()),
+        dataSource: {
+          data: [
+            { id: 1, name: "Jane Doe", age: 47 },
+            { id: 2, name: "John Doe", age: 50 }
+          ],
+          schema: {
+            model: {
+              id: "id",
+              fields: {
+                id: { type: "number" },
+                name: { type: "string" },
+                age: { type: "number" }
+              }
+            }
+          }
+        }
+      });
+      $("#cancelBtn").click(function(){
+        $("#listView").data("kendoListView").cancel();
+      });
     </script>
 
 ### clearSelection
 
-Clears ListView selected items and triggers change event.
+Clears ListView selected items and triggers the [`change` event](/api/javascript/ui/listview/events/change).
 
 #### Example
 
-    <div id ="listView"></div>
+    <button class="k-button" id="clearBtn">Clear Selection</button>
+    <div id="listView"></div>
+
+    <script type="text/x-kendo-tmpl" id="template">
+        <div class="product-view k-widget">
+            <dl>
+                <dt>Product Name</dt>
+                <dd>#:ProductName#</dd>
+      </dl>
+      </div>
+    </script>
+
     <script>
-    $("#listView").kendoListView({
-         dataSource: {
-            data: [
-                { name: "Jane Doe" },
-                { name: "John Doe" }
-            ]
-        },
-        template: "<div>#:name#</div>",
-        selectable: true
-    });
-    // get a reference to the list view widget
-    var listView = $("#listView").data("kendoListView");
-    listView.clearSelection();
+      $("#clearBtn").click(function(){
+        $("#listView").data("kendoListView").clearSelection();
+      });
+      var crudServiceBaseUrl = "https://demos.telerik.com/kendo-ui/service",
+          dataSource = new kendo.data.DataSource({
+            transport: {
+              read:  {
+                url: crudServiceBaseUrl + "/Products",
+                dataType: "jsonp"
+              }
+            },
+            pageSize: 10
+          });
+
+      var listView = $("#listView").kendoListView({
+        dataSource: dataSource,
+        selectable: "multiple",
+        template: kendo.template($("#template").html())
+      }).data("kendoListView");
     </script>
 
 ### dataItem
 
-Returns the specified data item.
+Returns the data item corresponding to the passed row object or selector.
 
 #### Parameters
 
 ##### row `String|Element|jQuery`
 
-A string, DOM element or jQuery object which represents the listview item. A string is treated as a jQuery selector.
+A string, DOM element or jQuery object which represents the ListView item. A string is treated as a jQuery selector.
 
 #### Returns
 
-`kendo.data.ObservableObject` the data item to which the specified listview item is bound. [More information about the ObservableObject type...](/api/javascript/data/observableobject)
+`kendo.data.ObservableObject` The data item to which the specified ListView item is bound. More information about the ObservableObject type in [kendo.data.ObservableObject](/api/javascript/data/observableobject).
 
-#### Example - get the data item to which the first listview element is bound
+#### Example - get the data item to which the first ListView item is bound
 
     <div id ="listView"></div>
     <script>
@@ -370,9 +502,11 @@ A string, DOM element or jQuery object which represents the listview item. A str
 
 ### dataItems
 
+Returns the array of data items that the widget is bound to.
+
 #### Returns
 
-`kendo.data.ObservableArray` Returns the observable array that is bound to the widget
+`kendo.data.ObservableArray` The array of items that the ListView is bound to.
 
 #### Example
 
@@ -390,57 +524,101 @@ A string, DOM element or jQuery object which represents the listview item. A str
 
 ### destroy
 
-Prepares the **ListView** for safe removal from DOM. Detaches all event handlers and removes jQuery.data attributes to avoid memory leaks. Calls destroy method of any child Kendo widgets.
+Prepares the **ListView** for safe removal from DOM. Detaches all event handlers and removes `jQuery.data` attributes to avoid memory leaks. Calls `destroy` method of any child Kendo widgets.
 
 > **Important:** This method does not remove the ListView element from DOM.
 
 #### Example
 
+    <button id="destroy">Destroy and remove ListView</button>
     <div id ="listView"></div>
     <script>
-    $("#listView").kendoListView({
-         dataSource: {
-            data: [
-                { name: "Jane Doe" },
-                { name: "John Doe" }
-            ]
+      $("#listView").kendoListView({
+        dataSource: {
+          data: [
+            { name: "Jane Doe" },
+            { name: "John Doe" }
+          ]
         },
         template: "<div>#:name#</div>"
-    });
-    // get a reference to the list view widget
-    var listView = $("#listView").data("kendoListView");
-    listView.destroy();
+      });
+
+      $("#destroy").click(function(){
+        $("#listView").data("kendoListView").destroy(); // destroy the ListView
+
+        $("#listView").remove(); // remove all ListView HTML
+      });
     </script>
 
 ### edit
 
-Edit specified ListView item. Fires the [edit](/api/javascript/ui/listview/events/edit) event.
+Puts the specified ListView item in edit mode. Fires the [edit](/api/javascript/ui/listview/events/edit) event.
 
 #### Example
 
-    <div id ="listView"></div>
+    <script type="text/x-kendo-tmpl" id="template">
+     <div>
+       <dl>
+         <dt>Name</dt> <dd>#:name#</dd>
+         <dt>Age</dt> <dd>#:age#</dd>
+      </dl>
+      </div>
+    </script>
+
+    <script type="text/x-kendo-tmpl" id="editTemplate">
+     <div>
+       <dl>
+         <dt>Name</dt>
+         <dd><input type="text" data-bind="value:name" name="name" required="required" /></dd>
+         <dt>Age</dt>
+         <dd><input type="text" data-bind="value:age" data-role="numerictextbox" data-type="number" name="age" required="required" /></dd>
+      </dl>
+       <div>
+          <a class="k-button k-update-button" href="\\#">
+          	<span class="k-icon k-i-check"></span>
+      </a>
+          <a class="k-button k-cancel-button" href="\\#">
+          	<span class="k-icon k-i-cancel"></span>
+      </a>
+      </div>
+      </div>
+    </script>
+    <button class="k-button" id="editBtn">Edit First Item</button>
+    <div id="listView"></div>
     <script>
-    $("#listView").kendoListView({
-         dataSource: {
-            data: [
-                { name: "Jane Doe" },
-                { name: "John Doe" }
-            ]
-        },
-        template: "<div>#:name#</div>",
-        editTemplate: '<div><input type="text" name="name" data-bind="value:name" /></div>'
-    });
-    // get a reference to the list view widget
-    var listView = $("#listView").data("kendoListView");
-    // edit first list view item
-    listView.edit(listView.element.children().first());
+      $("#listView").kendoListView({
+        template: kendo.template($("#template").html()),
+        editTemplate: kendo.template($("#editTemplate").html()),
+        dataSource: {
+          data: [
+            { id: 1, name: "Jane Doe", age: 47 },
+            { id: 2, name: "John Doe", age: 50 }
+          ],
+          schema: {
+            model: {
+              id: "id",
+              fields: {
+                id: { type: "number" },
+                name: { type: "string" },
+                age: { type: "number" }
+              }
+            }
+          }
+        }
+      });
+      $("#editBtn").click(function(){
+        // get a reference to the ListView widget
+        var listView = $("#listView").data("kendoListView");
+        // edit the first ListView item
+        listView.edit(listView.element.children().first());
+      });
     </script>
 
 #### Parameters
 
 ##### item `jQuery`
 
-jQuery object which represents the item to be edited.
+A jQuery object which represents the item to be edited.
 
 ### items
 
@@ -452,47 +630,75 @@ Obtains an Array of the DOM elements, which correspond to the data items from th
 
 ### refresh
 
-Reloads the data and repaints the list view.
+Repaints the ListView using the data available in the DataSource.
 
 #### Example
 
+    <button id="refreshBtn" class="k-button">Refresh</button>
     <div id ="listView"></div>
     <script>
-    $("#listView").kendoListView({
-         dataSource: {
-            data: [
-                { name: "Jane Doe" },
-                { name: "John Doe" }
-            ]
+      $("#listView").kendoListView({
+        dataSource: {
+          transport: {
+            read: {
+              url: "https://demos.telerik.com/kendo-ui/service/Products",
+              dataType: "jsonp"
+            }
+          },
+          pageSize: 21
         },
-        template: "<div>#:name#</div>"
-    });
-    var listView = $("#listView").data("kendoListView");
-    // refreshes the list view
-    listView.refresh();
+        template: "<div style='margin: 8px'>#:ProductName#</div>"
+      });
+      $("#refreshBtn").click(function(){
+        var listView = $("#listView").data("kendoListView");
+        // refreshes the ListView
+        listView.refresh();
+      });
     </script>
 
 ### remove
 
-Removes specified ListView item. Triggers [remove](/api/javascript/ui/listview/events/remove) event and if not prevented calls DataSource [sync](/api/javascript/data/datasource/methods/sync) method.
+Removes the specified item from the ListView. Triggers [remove](/api/javascript/ui/listview/events/remove) event and if not prevented calls the DataSource [sync](/api/javascript/data/datasource/methods/sync) method.
 
 #### Example
 
-    <div id ="listView"></div>
+    <script type="text/x-kendo-tmpl" id="template">
+     <div>
+       <dl>
+         <dt>Name</dt> <dd>#:name#</dd>
+         <dt>Age</dt> <dd>#:age#</dd>
+      </dl>
+      </div>
+    </script>
+
+    <button class="k-button" id="deleteBtn">Remove First Item</button>
+    <div id="listView"></div>
     <script>
-    $("#listView").kendoListView({
-         dataSource: {
-            data: [
-                { name: "Jane Doe" },
-                { name: "John Doe" }
-            ]
-        },
-        template: "<div>#:name#</div>"
-    });
-    // get a reference to the list view widget
-    var listView = $("#listView").data("kendoListView");
-    // remove first list view item
-    listView.remove(listView.element.children().first());
+      $("#listView").kendoListView({
+        template: kendo.template($("#template").html()),
+        dataSource: {
+          data: [
+            { id: 1, name: "Jane Doe", age: 47 },
+            { id: 2, name: "John Doe", age: 50 }
+          ],
+          schema: {
+            model: {
+              id: "id",
+              fields: {
+                id: { type: "number" },
+                name: { type: "string" },
+                age: { type: "number" }
+              }
+            }
+          }
+        }
+      });
+      $("#deleteBtn").click(function(){
+        // get a reference to the list view widget
+        var listView = $("#listView").data("kendoListView");
+        // remove first list view item
+        listView.remove(listView.element.children().first());
+      });
     </script>
 
 #### Parameters
@@ -503,67 +709,112 @@ jQuery object which represents the item to be removed.
 
 ### save
 
-Saves edited ListView item. Triggers [save](/api/javascript/ui/listview/events/save) event. If save event is not prevented and validation succeeds will call DataSource [sync](/api/javascript/data/datasource/methods/sync) method.
+Saves the currently edited ListView item. Triggers the [save](/api/javascript/ui/listview/events/save) event. If the `save` event is not prevented and validation succeeds the ListView will call the DataSource [sync](/api/javascript/data/datasource/methods/sync) method.
 
 #### Example
 
+     <script type="text/x-kendo-tmpl" id="template">
+     <div>
+       <dl>
+         <dt>Name</dt> <dd>#:name#</dd>
+         <dt>Age</dt> <dd>#:age#</dd>
+      </dl>
+       <div>
+           <a class="k-button k-edit-button" href="\\#"><span class="k-icon k-i-edit"></span></a>
+      </div>
+      </div>
+    </script>
+
+    <script type="text/x-kendo-tmpl" id="editTemplate">
+     <div>
+       <dl>
+         <dt>Name</dt>
+         <dd><input type="text" data-bind="value:name" name="name" required="required" /></dd>
+         <dt>Age</dt>
+         <dd><input type="text" data-bind="value:age" data-role="numerictextbox" data-type="number" name="age" required="required" /></dd>
+      </dl>
+       <div>
+          <a class="k-button k-cancel-button" href="\\#">
+          	<span class="k-icon k-i-cancel"></span>
+      		</a>
+      </div>
+      </div>
+    </script>
+    <button class="k-button" id="saveBtn">Save</button>
     <div id="listView"></div>
     <script>
-    $("#listView").kendoListView({
+      $("#listView").kendoListView({
+        template: kendo.template($("#template").html()),
+        editTemplate: kendo.template($("#editTemplate").html()),
         dataSource: {
-            data: [
-                { id: 1, name: "Jane Doe", age: 47 },
-                { id: 2, name: "John Doe", age: 50 }
-            ],
-            schema: {
-                model: {
-                    id: "id",
-                    fields: {
-                        id: { type: "number" },
-                        name: { type: "string" },
-                        age: { type: "number" }
-                    }
-                }
+          data: [
+            { id: 1, name: "Jane Doe", age: 47 },
+            { id: 2, name: "John Doe", age: 50 }
+          ],
+          schema: {
+            model: {
+              id: "id",
+              fields: {
+                id: { type: "number" },
+                name: { type: "string" },
+                age: { type: "number" }
+              }
             }
-        },
-        template: "<div>#:name#</div>",
-        editTemplate: '<div><input type="text" name="name" data-bind="value:name" /></div>'
-     });
-    // get a reference to the list view widget
-    var listView = $("#listView").data("kendoListView");
-    // edit first list view item
-    listView.edit(listView.element.children().first());
-    // save edited item
-    listView.save();
+          }
+        }
+      });
+      $("#saveBtn").click(function(){
+        $("#listView").data("kendoListView").save();
+      });
     </script>
 
 ### select
 
-Get/set the selected ListView item(s).
+Gets/sets the selected ListView item(s).
 
 #### Example
 
+    <button class="k-button" id="selectBtn">Select First Item</button>
     <div id="listView"></div>
+
+    <script type="text/x-kendo-tmpl" id="template">
+        <div class="product-view k-widget">
+            <dl>
+                <dt>Product Name</dt>
+                <dd>#:ProductName#</dd>
+      </dl>
+      </div>
+    </script>
+
     <script>
-    $("#listView").kendoListView({
-        dataSource: {
-            data: [
-                { id: 1, name: "Jane Doe", age: 47 },
-                { id: 2, name: "John Doe", age: 50 }
-            ]
-        },
-        template: "<div>#:name#</div>",
-        selectable: true
-    });
-    // get a reference to the list view widget
-    var listView = $("#listView").data("kendoListView");
-    // selects first list view item
-    listView.select(listView.element.children().first());
+      var crudServiceBaseUrl = "https://demos.telerik.com/kendo-ui/service",
+          dataSource = new kendo.data.DataSource({
+            transport: {
+              read:  {
+                url: crudServiceBaseUrl + "/Products",
+                dataType: "jsonp"
+              }
+            },
+            pageSize: 10
+          });
+
+      var listView = $("#listView").kendoListView({
+        dataSource: dataSource,
+        selectable: "multiple",
+        template: kendo.template($("#template").html())
+      }).data("kendoListView");
+
+      $("#selectBtn").click(function(){
+        // get a reference to the ListView widget
+        var listView = $("#listView").data("kendoListView");
+        // selects first ListView item
+        listView.select(listView.element.children().first());
+      });
     </script>
 
 #### Returns
 
-`jQuery` the selected items if called without arguments.
+`jQuery` The selected items if called without arguments.
 
 #### Parameters
 
@@ -573,31 +824,39 @@ Items to select.
 
 ### setDataSource
 
-Sets the dataSource of an existing ListView and rebinds it.
+Sets the `dataSource` of an existing ListView and rebinds it.
 
 #### Parameters
 
 ##### dataSource `kendo.data.DataSource`
 
-The data source to which the widget should be bound.
+The DataSource to which the widget should be bound.
 
 #### Example - set the data source
 
+    <button class="k-button" id="dsBtn">Change DataSource</button>
     <div id="listView"></div>
+
     <script>
-    $("#listView").kendoListView({
-        template: "<div>#: name#</div>",
+      $("#listView").kendoListView({
+        template: "<div>#: ProductName#</div>",
         dataSource: [
-            { name: "Jane Doe", age: 30 }
+          { ProductName: "Chai" }
         ]
-    });
-    var dataSource = new kendo.data.DataSource({
-      data: [
-        { name: "John Doe", age: 33 }
-      ]
-    });
-    var listView = $("#listView").data("kendoListView");
-    listView.setDataSource(dataSource);
+      });
+      var dataSource = new kendo.data.DataSource({
+        transport: {
+          read: {
+            url: "https://demos.telerik.com/kendo-ui/service/Products",
+            dataType: "jsonp"
+          }
+        },
+        pageSize: 21
+      });
+      $("#dsBtn").click(function(){
+        var listView = $("#listView").data("kendoListView");
+        listView.setDataSource(dataSource);
+      });
     </script>
 
 ## Events
@@ -611,92 +870,92 @@ The event handler function context (available via the `this` keyword) will be se
 #### Example
 
     <script type="text/x-kendo-tmpl" id="template">
-        <div> #:name# </div>
+    <div> #:name# </div>
     </script>
 
     <script type="text/x-kendo-tmpl" id="editTemplate">
-         <div>
-           Name: <input type="text" data-bind="value:name" name="name" required="required" />
-           <div>
-               <a class="k-button k-update-button" href="\\#"><span class="k-icon k-update"></span></a>
-               <a class="k-button k-cancel-button" href="\\#"><span class="k-icon k-cancel"></span></a>
-           </div>
-         </div>
+     <div>
+       Name: <input type="text" data-bind="value:name" name="name" required="required" />
+       <div>
+           <a class="k-button k-update-button" href="\\#"><span class="k-icon k-i-check"></span></a>
+           <a class="k-button k-cancel-button" href="\\#"><span class="k-icon k-i-cancel"></span></a>
+      </div>
+      </div>
     </script>
 
     <div id="listView"></div>
     <script>
-    $("#listView").kendoListView({
+      $("#listView").kendoListView({
         template: kendo.template($("#template").html()),
         editTemplate: kendo.template($("#editTemplate").html()),
         dataSource: {
-            data: [
-                { id: 1, name: "Jane Doe", age: 47 },
-                { id: 2, name: "John Doe", age: 50 }
-            ],
-            schema: {
-                model: {
-                    id: "id",
-                    fields: {
-                        id: { type: "number" },
-                        name: { type: "string" },
-                        age: { type: "number" }
-                    }
-                }
+          data: [
+            { id: 1, name: "Jane Doe", age: 47 },
+            { id: 2, name: "John Doe", age: 50 }
+          ],
+          schema: {
+            model: {
+              id: "id",
+              fields: {
+                id: { type: "number" },
+                name: { type: "string" },
+                age: { type: "number" }
+              }
             }
+          }
         },
         cancel: function(e) {
-            e.preventDefault();
+					console.log("Cancelled editing of item with id " + e.model.id);
         }
-    });
-    var listView = $("#listView").data("kendoListView");
-    listView.edit(listView.element.children().first());
+      });
+      var listView = $("#listView").data("kendoListView");
+      listView.edit(listView.element.children().first());
     </script>
 
 #### To set after initialization
 
     <script type="text/x-kendo-tmpl" id="template">
-        <div> #:name# </div>
+    <div> #:name# </div>
     </script>
 
     <script type="text/x-kendo-tmpl" id="editTemplate">
-         <div>
-           Name: <input type="text" data-bind="value:name" name="name" required="required" />
-           <div>
-               <a class="k-button k-update-button" href="\\#"><span class="k-icon k-update"></span></a>
-               <a class="k-button k-cancel-button" href="\\#"><span class="k-icon k-cancel"></span></a>
-           </div>
-         </div>
+     <div>
+       Name: <input type="text" data-bind="value:name" name="name" required="required" />
+       <div>
+           <a class="k-button k-update-button" href="\\#"><span class="k-icon k-i-check"></span></a>
+           <a class="k-button k-cancel-button" href="\\#"><span class="k-icon k-i-cancel"></span></a>
+      </div>
+      </div>
     </script>
 
     <div id="listView"></div>
     <script>
-    $("#listView").kendoListView({
+      $("#listView").kendoListView({
         template: kendo.template($("#template").html()),
         editTemplate: kendo.template($("#editTemplate").html()),
         dataSource: {
-            data: [
-                { id: 1, name: "Jane Doe", age: 47 },
-                { id: 2, name: "John Doe", age: 50 }
-            ],
-            schema: {
-                model: {
-                    id: "id",
-                    fields: {
-                        id: { type: "number" },
-                        name: { type: "string" },
-                        age: { type: "number" }
-                    }
-                }
+          data: [
+            { id: 1, name: "Jane Doe", age: 47 },
+            { id: 2, name: "John Doe", age: 50 }
+          ],
+          schema: {
+            model: {
+              id: "id",
+              fields: {
+                id: { type: "number" },
+                name: { type: "string" },
+                age: { type: "number" }
+              }
             }
+          }
         }
-    });
-    var listView = $("#listView").data("kendoListView");
-    // bind to the cancel event
-    listView.bind("cancel", function(e) {
-        e.preventDefault();
-    });
-    listView.edit(listView.element.children().first());
+      });
+      var listView = $("#listView").data("kendoListView");
+      // bind to the cancel event
+      listView.bind("cancel", function(e) {
+        console.log("Cancelled editing of item with id " + e.model.id);
+      });
+      listView.edit(listView.element.children().first());
     </script>
 
 #### Event Data
@@ -707,209 +966,230 @@ The jQuery object that represents the edit form container element.
 
 ##### e.model `kendo.data.Model`
 
-The model to which the current grid row is bound to.
+The model to which the current ListView item is bound.
 
 ##### e.preventDefault `Function`
 
-If invoked prevents the cancel action. The row remains in edit mode.
+If invoked, prevents the cancel action. The item remains in edit mode.
 
 ### change
 
-Fires when the list view selection has changed.
+Fires when the ListView selection has changed.
 
 The event handler function context (available via the `this` keyword) will be set to the widget instance.
 
 #### Example
 
-     <div id="listView"></div>
-     <script>
-     $("#listView").kendoListView({
-        template: "<div>#: name#</div>",
-        dataSource: [
-            { name: "John Doe", age: 30 }
-        ],
-        selectable: true,
-        change: function() {
-            //handle event
+    <div id="listView"></div>
+
+    <script type="text/x-kendo-tmpl" id="template">
+        <div style="padding: 10px">
+            #: ProductName#
+      </div>
+    </script>
+
+    <script>
+      var crudServiceBaseUrl = "https://demos.telerik.com/kendo-ui/service",
+          dataSource = new kendo.data.DataSource({
+            transport: {
+              read:  {
+                url: crudServiceBaseUrl + "/Products",
+                dataType: "jsonp"
+              }
+            },
+            pageSize: 10
+          });
+
+      var listView = $("#listView").kendoListView({
+        dataSource: dataSource,
+        selectable: "multiple",
+        template: kendo.template($("#template").html()),
+        change: function(e){
+          // get ListView selection
+          var selectedItems = e.sender.select();
+          console.log(selectedItems);
         }
-     });
-     </script>
+      }).data("kendoListView");
+    </script>
 
 #### To set after initialization
 
-     <div id="listView"></div>
-     <script>
-     $("#listView").kendoListView({
-        template: "<div>#: name#</div>",
-        dataSource: [
-            { name: "John Doe", age: 30 }
-        ],
-        selectable: true
-     });
-     // get a reference to the list view
-     var listView = $("#listView").data("kendoListView");
-     // bind to the change event
-     listView.bind("change", function(e) {
-         // handle event
-     });
-     </script>
+    <div id="listView"></div>
+
+    <script type="text/x-kendo-tmpl" id="template">
+        <div style="padding: 10px">
+            #: ProductName#
+      </div>
+    </script>
+
+    <script>
+      var crudServiceBaseUrl = "https://demos.telerik.com/kendo-ui/service",
+          dataSource = new kendo.data.DataSource({
+            transport: {
+              read:  {
+                url: crudServiceBaseUrl + "/Products",
+                dataType: "jsonp"
+              }
+            },
+            pageSize: 10
+          });
+
+      var listView = $("#listView").kendoListView({
+        dataSource: dataSource,
+        selectable: "multiple",
+        template: kendo.template($("#template").html())
+      }).data("kendoListView");
+
+      listView.bind("change", function(e){
+        // get ListView selection
+        var selectedItems = e.sender.select();
+        console.log(selectedItems);
+      });
+    </script>
 
 ### dataBound
 
-Fires when the list view has received data from the data source and it is already rendered.
+Fires when the ListView has received data from the DataSource and it is already rendered.
 
 The event handler function context (available via the `this` keyword) will be set to the widget instance.
 
 #### Example
 
-     <div id="listView"></div>
-     <script>
-     $("#listView").kendoListView({
+    <div id="listView"></div>
+    <script>
+      $("#listView").kendoListView({
         template: "<div>#: name#</div>",
         dataSource: [
-            { name: "John Doe", age: 30 }
+          { name: "John Doe", age: 30 }
         ],
         dataBound: function() {
-            //handle event
+          console.log("ListView is bound and ready to render.");
         }
-     });
-     </script>
+      });
+    </script>
 
 ### dataBinding
 
-Fires when the list view is about to be rendered.
+Fires when the ListView is about to be bound.
 
 The event handler function context (available via the `this` keyword) will be set to the widget instance.
 
 #### Example
 
-     <div id="listView"></div>
-     <script>
-     $("#listView").kendoListView({
+    <div id="listView"></div>
+    <script>
+      $("#listView").kendoListView({
         template: "<div>#: name#</div>",
         dataSource: [
-            { name: "John Doe", age: 30 }
+          { name: "John Doe", age: 30 }
         ],
-        dataBinding: function() {
-            //handle event
+        dataBinding: function(e) {
+          // call e.preventDefault() if you want to cancel binding.
+          console.log("ListView is ready to bind to data").
         }
-     });
-     </script>
-
-#### To set after initialization
-
-     <div id="listView"></div>
-     <script>
-     $("#listView").kendoListView({
-        template: "<div>#: name#</div>",
-        dataSource: [
-            { name: "John Doe", age: 30 }
-        ]
-     });
-     // get a reference to the ListView
-     var listview = $("#listView").data("kendoListView");
-     // bind to the dataBinding event
-     listview.bind("dataBinding", function(e) {
-         // handle event
-     });
-     </script>
+      });
+    </script>
 
 ### edit
 
-Fires when the list view enters edit mode.
+Fires when the ListView enters edit mode.
 
 The event handler function context (available via the `this` keyword) will be set to the widget instance.
 
 #### Example
 
     <script type="text/x-kendo-tmpl" id="template">
-        <div> #:name# </div>
+    <div> #:name# 
+      	<div>
+           <a class="k-button k-edit-button" href="\\#"><span class="k-icon k-i-edit"></span></a>
+      </div>
+      </div>
     </script>
 
     <script type="text/x-kendo-tmpl" id="editTemplate">
-         <div>
-           Name: <input type="text" data-bind="value:name" name="name" required="required" />
-           <div>
-               <a class="k-button k-update-button" href="\\#"><span class="k-icon k-update"></span></a>
-               <a class="k-button k-cancel-button" href="\\#"><span class="k-icon k-cancel"></span></a>
-           </div>
-         </div>
+     <div>
+       Name: <input type="text" data-bind="value:name" name="name" required="required" />
+       <div>
+           <a class="k-button k-update-button" href="\\#"><span class="k-icon k-i-check"></span></a>
+           <a class="k-button k-cancel-button" href="\\#"><span class="k-icon k-i-cancel"></span></a>
+      </div>
+      </div>
     </script>
 
     <div id="listView"></div>
     <script>
-    $("#listView").kendoListView({
+      $("#listView").kendoListView({
         template: kendo.template($("#template").html()),
         editTemplate: kendo.template($("#editTemplate").html()),
         dataSource: {
-            data: [
-                { id: 1, name: "Jane Doe", age: 47 },
-                { id: 2, name: "John Doe", age: 50 }
-            ],
-            schema: {
-                model: {
-                    id: "id",
-                    fields: {
-                        id: { type: "number" },
-                        name: { type: "string" },
-                        age: { type: "number" }
-                    }
-                }
+          data: [
+            { id: 1, name: "Jane Doe", age: 47 },
+            { id: 2, name: "John Doe", age: 50 }
+          ],
+          schema: {
+            model: {
+              id: "id",
+              fields: {
+                id: { type: "number" },
+                name: { type: "string" },
+                age: { type: "number" }
+              }
             }
+          }
         },
         edit: function(e) {
-            //handle event
+          console.log("Editing of item with id " + e.model.id);
         }
-    });
-	var listView = $("#listView").data("kendoListView");
-    listView.edit(listView.element.children().first());
+      });
     </script>
 
 #### To set after initialization
 
     <script type="text/x-kendo-tmpl" id="template">
-        <div> #:name# </div>
+    <div> #:name# 
+      	<div>
+           <a class="k-button k-edit-button" href="\\#"><span class="k-icon k-i-edit"></span></a>
+      	</div>
+      </div>
     </script>
 
     <script type="text/x-kendo-tmpl" id="editTemplate">
-         <div>
-           Name: <input type="text" data-bind="value:name" name="name" required="required" />
-           <div>
-               <a class="k-button k-update-button" href="\\#"><span class="k-icon k-update"></span></a>
-               <a class="k-button k-cancel-button" href="\\#"><span class="k-icon k-cancel"></span></a>
-           </div>
-         </div>
+     <div>
+       Name: <input type="text" data-bind="value:name" name="name" required="required" />
+       <div>
+           <a class="k-button k-update-button" href="\\#"><span class="k-icon k-i-check"></span></a>
+           <a class="k-button k-cancel-button" href="\\#"><span class="k-icon k-i-cancel"></span></a>
+      </div>
+      </div>
     </script>
 
     <div id="listView"></div>
     <script>
-    $("#listView").kendoListView({
+      $("#listView").kendoListView({
         template: kendo.template($("#template").html()),
         editTemplate: kendo.template($("#editTemplate").html()),
         dataSource: {
-            data: [
-                { id: 1, name: "Jane Doe", age: 47 },
-                { id: 2, name: "John Doe", age: 50 }
-            ],
-            schema: {
-                model: {
-                    id: "id",
-                    fields: {
-                        id: { type: "number" },
-                        name: { type: "string" },
-                        age: { type: "number" }
-                    }
-                }
+          data: [
+            { id: 1, name: "Jane Doe", age: 47 },
+            { id: 2, name: "John Doe", age: 50 }
+          ],
+          schema: {
+            model: {
+              id: "id",
+              fields: {
+                id: { type: "number" },
+                name: { type: "string" },
+                age: { type: "number" }
+              }
             }
+          }
         }
-    });
-    // get a reference to the list view
-    var listView = $("#listView").data("kendoListView");
-    // bind to the edit event
-    listView.bind("edit", function(e) {
-        // handle event
-    });
-    listView.edit(listView.element.children().first());
+      });
+      var listView = $("#listView").data("kendoListView");
+      // bind to the edit event
+      listView.bind("edit", function(e) {
+        console.log("Editing of item with id " + e.model.id);
+      });
     </script>
 
 #### Event Data
@@ -924,73 +1204,72 @@ The model to be edited.
 
 ### remove
 
-Fires before the list view item is removed. If it is not prevented will call DataSource [sync](/api/javascript/data/datasource/methods/sync) method.
+Fires before the list view item is put in edit mode. If the event is not prevented, the ListView will call the DataSource [sync](/api/javascript/data/datasource/methods/sync) method.
 
 The event handler function context (available via the `this` keyword) will be set to the widget instance.
 
 #### Example
 
-    <div id="listView"></div>
+    <div id="listview"></div>
+
+    <script type="text/x-kendo-tmpl" id="template">
+      <div class="item">
+        <p>#: name # || #: age #</p>
+          <div class="edit-buttons">
+            <a class="k-button k-button-icontext k-delete-button" href="\\#"><span class="k-icon k-i-delete"></span></a>
+      </div>
+      </div>
+    </script>
+
     <script>
-    $("#listView").kendoListView({
-        template: "<div>#: name#</div>",
+      $("#listview").kendoListView({
         dataSource: {
-            data: [
-                { id: 1, name: "Jane Doe", age: 47 },
-                { id: 2, name: "John Doe", age: 50 }
-            ],
-            schema: {
-                model: {
-                    id: "id",
-                    fields: {
-                        id: { type: "number" },
-                        name: { type: "string" },
-                        age: { type: "number" }
-                    }
-                }
-            }
+          data:[
+            { id: 1, name: "Jane Doe", age: 30},
+            { id: 2, name: "John Doe", age: 33}
+          ],
+          schema: {
+            model: { id: "id" }
+          }
         },
+        template: kendo.template($("#template").html()),
         remove: function(e) {
-            //handle event
-            e.preventDefault();
+          console.log("Item with id "+ e.model.id + " deleted.");
         }
-    });
-    // get a reference to the list view
-    var listView = $("#listView").data("kendoListView");
-    listView.remove(listView.element.children().first());
+      });
     </script>
 
 #### To set after initialization
 
-    <div id="listView"></div>
+    <div id="listview"></div>
+
+    <script type="text/x-kendo-tmpl" id="template">
+      <div class="item">
+        <p>#: name # || #: age #</p>
+          <div class="edit-buttons">
+            <a class="k-button k-button-icontext k-delete-button" href="\\#"><span class="k-icon k-i-delete"></span></a>
+      </div>
+      </div>
+    </script>
+
     <script>
-    $("#listView").kendoListView({
-        template: "<div>#: name#</div>",
+      $("#listview").kendoListView({
         dataSource: {
-            data: [
-                { id: 1, name: "Jane Doe", age: 47 },
-                { id: 2, name: "John Doe", age: 50 }
-            ],
-            schema: {
-                model: {
-                    id: "id",
-                    fields: {
-                        id: { type: "number" },
-                        name: { type: "string" },
-                        age: { type: "number" }
-                    }
-                }
-            }
-        }
-    });
-    // get a reference to the list view
-    var listView = $("#listView").data("kendoListView");
-    // bind to the remove event
-    listView.bind("remove", function(e) {
-        // handle event
-        e.preventDefault();
-    });
-    listView.remove(listView.element.children().first());
+          data:[
+            { id: 1, name: "Jane Doe", age: 30},
+            { id: 2, name: "John Doe", age: 33}
+          ],
+          schema: {
+            model: { id: "id" }
+          }
+        },
+        template: kendo.template($("#template").html())
+      });
+
+      var listView = $("#listview").data("kendoListView");
+      listView.bind("remove", function(e) {
+        console.log("Item with id "+ e.model.id + " deleted.");
+      });
     </script>
 
 #### Event Data
@@ -1001,7 +1280,7 @@ The item element to be deleted.
 
 ##### e.model `kendo.data.Model`
 
-The model which to be deleted.
+The model to be deleted.
 
 ### save
 
@@ -1021,7 +1300,7 @@ The jQuery object representing the current ListView item.
 
 ##### e.sender `kendo.ui.ListView`
 
-The widget instance which fired the event.
+The ListView instance which fired the event.
 
 #### Example - subscribe to the "save" event
 
@@ -1031,18 +1310,18 @@ The widget instance which fired the event.
       <div class="item">
         <p>#: name # || #: age #</p>
           <div class="edit-buttons">
-            <a class="k-button k-button-icontext k-edit-button" href="\\#"><span class="k-icon k-edit"></span></a>
-            <a class="k-button k-button-icontext k-delete-button" href="\\#"><span class="k-icon k-delete"></span></a>
-          </div>
+            <a class="k-button k-button-icontext k-edit-button" href="\\#"><span class="k-icon k-i-edit"></span></a>
+            <a class="k-button k-button-icontext k-delete-button" href="\\#"><span class="k-icon k-i-delete"></span></a>
+      </div>
       </div>
     </script>
 
     <script type="text/x-kendo-tmpl" id="editTemplate">
       <div class="item">
         <div class="edit-buttons">
-            <a class="k-button k-button-icontext k-update-button" href="\\#"><span class="k-icon k-update"></span></a>
-            <a class="k-button k-button-icontext k-cancel-button" href="\\#"><span class="k-icon k-cancel"></span></a>
-        </div>
+            <a class="k-button k-button-icontext k-update-button" href="\\#"><span class="k-icon k-i-check"></span></a>
+            <a class="k-button k-button-icontext k-cancel-button" href="\\#"><span class="k-icon k-i-cancel"></span></a>
+      </div>
         <input type="text" class="k-textbox" data-bind="value:name" name="name" required="required" validationMessage="required" />
         <span data-for="name" class="k-invalid-msg"></span>
         <br />
@@ -1052,21 +1331,20 @@ The widget instance which fired the event.
     </script>
 
     <script>
-    $("#listview").kendoListView({
-      dataSource: {
-        data:[
-          { id: 1, name: "Jane Doe", age: 30},
-          { id: 2, name: "John Doe", age: 33}
-        ],
-        schema: {
-          model: { id: "id" }
+      $("#listview").kendoListView({
+        dataSource: {
+          data:[
+            { id: 1, name: "Jane Doe", age: 30},
+            { id: 2, name: "John Doe", age: 33}
+          ],
+          schema: {
+            model: { id: "id" }
+          }
+        },
+        template: kendo.template($("#template").html()),
+        editTemplate: kendo.template($("#editTemplate").html()),
+        save: function(e) {
+          console.log("Changes saved.");
         }
-      },
-      template: kendo.template($("#template").html()),
-      editTemplate: kendo.template($("#editTemplate").html()),
-      save: function(e) {
-        console.log("record is modified");
-        //handle event
-      }
-    });
+      });
     </script>

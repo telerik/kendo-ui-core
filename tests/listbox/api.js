@@ -169,6 +169,22 @@
         equal(dataItem, undefined);
     });
 
+    test("setOptions changes correctly the dataTextField and renders the changed items", function() {
+        listbox.setOptions({
+            dataSource: {
+                data: [{
+                    id: 1,
+                    newText: "newText1"
+                }]
+            },
+            dataTextField: "newText"
+        });
+        var items = listbox.items();
+
+        equal(items.length, 1);
+        equal(items.first().text(), "newText1");
+    });
+
     module("ListBox api", {
         setup: function() {
             listbox = createListBox();

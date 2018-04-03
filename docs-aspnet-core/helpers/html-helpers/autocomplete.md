@@ -11,7 +11,7 @@ The AutoComplete HtmlHelper extension is a server-side wrapper for the [Kendo UI
 
 It enables you to configure the Kendo UI AutoComplete widget from server-side code. The [AutoComplete](http://docs.telerik.com/kendo-ui/controls/editors/autocomplete/overview) provides suggestions depending on the typed text. It also allows multiple value entries. The suggestions shown by the widget come either from a local array or from a remote data service.
 
-For more information on the HtmlHelper, refer to the article on the [AutoComplete HtmlHelper for ASP.NET MVC](http://demos.telerik.com/aspnet-mvc/autocomplete/index).
+For more information on the HtmlHelper, refer to the article on the [AutoComplete HtmlHelper for ASP.NET MVC](https://docs.telerik.com/aspnet-mvc/helpers/autocomplete/overview).
 
 ## Basic Usage
 

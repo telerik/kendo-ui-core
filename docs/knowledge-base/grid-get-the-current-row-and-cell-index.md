@@ -1,16 +1,16 @@
 ---
-title: Determine the Current Cell in the Grid
-description: How to Get the Row and Cell Indices of a Focused Cell
+title: Grid Does Not Recognize Mouse Clicks on Touch-Screen Devices
+description: When using the Kendo UI Grid in Chrome or Firefox on a hybrid device (touch screen), the Grid fails to recognize the mouse clicks.
 type: troubleshooting
-page_title: Get Row and Cell Index in the Kendo UI Grid - for Hybrid and Web Apps
+page_title: Cannot Get Row and Cell Index on Hybrid Devices | Kendo UI Grid
 slug: grid-get-the-current-row-and-cell-index
-position: 
 tags: grid, cell, index, row, current, position, tap, touch, click
 ticketid: 1148726
 res_type: kb
 ---
 
 ## Environment
+
 <table>
 	<tr>
 		<td>Product Version</td>
@@ -24,19 +24,16 @@ res_type: kb
 
 ## Description
 
-Using the Kendo Grid in both Chrome and Firefox while on a hybrid device (touch screen) fails to recognize mouse clicks in the grid.  The most obvious things are that the "Current" cell can not be found, it is either undefined, or if coming from somewhere else in the grid, current is still the old cell.
+When I use the Grid in Chrome or Firefox while on a hybrid device (touch screen), the Grid fails to recognize mouse clicks&mdash;the current cell cannot be found and it is either undefined, or if coming from somewhere else in the Grid, the current cell is still the previous cell.
 
-## Cause\Possible Cause(s)
+## Cause
 
- The incorrect focus on mobile devices is a known issue
-
-[https://github.com/telerik/kendo-ui-core/issues/3631](https://github.com/telerik/kendo-ui-core/issues/3631)
-
-There is a workaround in the issue, also a runnable example and explanations below
+The incorrect focus on mobile devices is a [known issue](https://github.com/telerik/kendo-ui-core/issues/3631).
 
 ## Suggested Workarounds
 
-Add a `touchstart` and `click` event handlers to the [tbody](/api/javascript/ui/grid/fields/tbody) of the grid and get the current cell with jQuery:
+1. Add a `touchstart` and `click` event handlers to the [`tbody`](/api/javascript/ui/grid/fields/tbody) element of the Grid.
+1. Get the current cell with jQuery.
 
 ```
 if(kendo.support.touch){
@@ -46,6 +43,8 @@ if(kendo.support.touch){
   });  
 }
 ```
+
+The following example demonstrates how to fully implement the suggested workaround.
 
 ###### Example
 
@@ -109,7 +108,7 @@ if(kendo.support.touch){
               { field: "Discontinued", width: 120, editor: customBoolEditor },
               { command: "destroy", title: "&nbsp;", width: 150 }],
             editable: true,
-           
+
           }).data("kendoGrid").tbody.on("touchstart click", function(e){
             $("body").append("<div>" + $(e.target).html() + "</div>");
         	});

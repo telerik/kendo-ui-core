@@ -36,7 +36,7 @@ Use the navigation tree to your left to navigate through the chapters of this tu
 
 **Figure 2. The final look of the Kendo UI Music Store Dashboard**
 
-![kendo-music-store-intro-dashboard-screenshot](/tutorial-kendo-music-store/images/kendo-music-store-intro-dashboard-screenshot.png)
+![kendo-music-store-intro-dashboard-screenshot](/tutorials/tutorial-kendo-music-store/images/kendo-music-store-intro-dashboard-screenshot.png)
 
 The Dashboard builds upon the music store theme, adding a conceptual management dashboard to track the album performance. It focuses on [Kendo UI widgets rendering data visualization](http://www.telerik.com/kendo-ui) and the way Kendo UI and Sammy.js are used to create a visually rich single-page application.
 

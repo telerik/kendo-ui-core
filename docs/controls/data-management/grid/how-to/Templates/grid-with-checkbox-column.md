@@ -10,6 +10,8 @@ slug: howto_use_checkbox_column_templateand_edit_grid
 
 The following example demonstrates how to use checkboxes in the Grid column templates and perform editing.
 
+For more information on how to apply batch editing with a bound Boolean column, check the article about [adding model-bound and batch-editable checkbox columns to the Grid](/knowledge-base/grid-bound-checkbox-editable-column).
+
 ###### Example
 
 ```html

@@ -154,6 +154,33 @@
         multiselect.value(1);
     });
 
+    test("Multiselect value is not deselected on open", function() {
+        var multiselect = new MultiSelect(select, {
+            autoBind: false,
+            dataValueField: "value",
+            dataTextField: "text",
+            dataSource: [{text: "foo", value: 1}, {text:"bar", value:2}],
+            value: []
+        });
+
+        multiselect.open();
+
+        multiselect.input.trigger({
+            type: "keydown",
+            keyCode: kendo.keys.DOWN
+        });
+
+        multiselect.input.trigger({
+            type: "keydown",
+            keyCode: kendo.keys.ENTER
+        });
+
+        multiselect.close();
+        multiselect.open();
+
+        equal(multiselect.tagList.children().length, 1);
+    });
+
     test("MultiSelect supports multiple values", function() {
         popuplateSelect();
         var multiselect = new MultiSelect(select);

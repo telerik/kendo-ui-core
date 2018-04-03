@@ -60,45 +60,44 @@ By initializing the Menu using JSON, you can use assign a select handler for eac
 ###### Example
 
     <ul id="menu"></ul>
-
     <script>
-      $(document).ready(function() {
-        $("#menu").kendoMenu({
-          dataSource:
-          [{
-            text: "Item 1",
-            cssClass: "myClass",                         // (Optional) Add custom CSS class to the item, added 2012 Q3 SP1
-            url: "http://www.telerik.com"                // (Optional) Link URL if navigation is needed
-          },
-           {
-             text: "<b>Item 2</b>",
-             encoded: false,                              // Allows the use of HTML for item text
-             content: "text"                              // Content within an item
-           },
-           {
-             text: "Item 3",
-             imageUrl: "http://www.telerik.com/test.jpg", // (Optional) Item image URL
-             items: [{                                    // Sub-item collection
-                    text: "Sub Item 1"
+        $(document).ready(function () {
+            $("#menu").kendoMenu({
+                dataSource: [{
+                    text: "Item 1",
+                    cssClass: "myClass",                         // (Optional) Add custom CSS class to the item, added 2012 Q3 SP1
+                    url: "http://www.telerik.com"                // (Optional) Link URL if navigation is needed
                 },
                 {
-                    text: "Sub Item 2"
-                }]
-           },
-           {
-             text: "Item 4",
-             spriteCssClass: "imageClass3"                // (Optional) Item image sprite CSS class
-           },
-           {
-             text: "Item 5",
-             select: function(e) {                        // Item select event handler, optional
-                // e.sender - returns reference to the Kendo Menu widget
-                // e.target - returns the clicked element. Typically, the span.k-link element.
-
-                // handle event
-             }]
-        })
-      });
+                    text: "<b>Item 2</b>",
+                    encoded: false,                              // Allows the use of HTML for item text
+                    content: "text"                              // Content within an item
+                },
+                {
+                    text: "Item 3",
+                    imageUrl: "http://www.telerik.com/test.jpg", // (Optional) Item image URL
+                    items: [{                                    // Sub-item collection
+                        text: "Sub Item 1"
+                    },
+                    {
+                        text: "Sub Item 2"
+                    }]
+                },
+                {
+                    text: "Item 4",
+                    spriteCssClass: "imageClass3"                // (Optional) Item image sprite CSS class
+                },
+                {
+                    text: "Item 5"
+                }],
+                select: function (e) {                        // Item select event handler, optional
+                    // e.sender - returns reference to the Kendo Menu widget
+                    // e.target - returns the clicked element. Typically, the span.k-link element.
+    
+                    // handle event
+                }
+            })
+        });
     </script>
 
 ### Sample Case
@@ -254,10 +253,14 @@ Kendo UI Menu supports the following keyboard shortcuts and user actions:
 
 | SHORTCUT						| DESCRIPTION				                                                        |
 |:---                           |:---                                                                               |
+| `Home`                        | Focuses the first item                                                            |
+| `End`                         | Focuses the last item                                                             |
 | Left `Arrow` key              | <ul><li>Moves the active item on the root level of horizontal Menus to the left</li> <li>Closes an item group</li></ul> |
 | Right `Arrow` key             | <ul><li>Moves the active item on the root level of horizontal Menus to the right</li> <li>opens an item group of a vertical Menu</li> <li>Moves the active state to the next root item of a horizontal Menu, if the previous active item has been inside an item group</li></ul>        |
 | Up `Arrow` key                | Moves the active item of vertical Menu item groups upwards                        |
 | Down `Arrow` key              | <ul><li>Moves the active item of vertical Menu item groups downwards</li> <li>Opens an item group of a horizontal Menu</li></ul> |
+| `Enter`                       | Selects or navigates the focused item                                             |
+| `Space`                       | Selects or navigates the focused item                                             |
 | `Esc`                         | Closes an item group                                                              |
 | (`Shift`+) `Tab`              | Blurs the Menu and moves the focus to the next (previous) focusable page element  |
 

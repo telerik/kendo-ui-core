@@ -35,6 +35,7 @@ module Jekyll
       self.data['parent_path'] = dir
       self.data['is_api'] = true
       self.data['publish'] = false
+      self.data.delete('previous_url')
     end
   end
 
@@ -161,7 +162,7 @@ module Jekyll
   end
 
   class ApiPageParser
-    @@known_types = [:codeblock, :p, :a, :header, :blank, :codespan, :blockquote, :ul, :li, :strong]
+    @@known_types = [:codeblock, :p, :a, :header, :blank, :codespan, :blockquote, :ul, :li, :strong, :html_element]
     @@block_containers = [:blockquote, :ul, :li, :p, :strong ]
     @@categories = ['Constructor Parameters', 'Configuration', 'Fields', 'Properties', 'Methods', 'Class Methods', 'Events']
 
@@ -191,7 +192,11 @@ module Jekyll
     def parse_element(element)
       description = ""
       if element.type === :codeblock
-        description += element_value(element).indent(4)
+        description += "\n#{element_value(element).indent(4)}"
+      end
+
+      if element.type === :html_element
+        description += "\n#{KramdownExtensions::KramdownHtmlConverter.convert(element).indent(4)}"
       end
 
       if element.type === :blank
@@ -288,20 +293,18 @@ module Jekyll
     end
 
     def parse_page_body(index, siblings)
-      description = ""
-
+      text = ""
       siblings.slice(index + 1, siblings.size).each do |element|
         break if element.type == :header && element.options[:level] <= 3
-
-        # uncomment to debug
-        # raise "#{element.type}" unless @@known_types.include?(element.type)
-        # puts("inspect: #{element.inspect}")
-          description += parse_element(element)
+          # uncomment to debug
+          # raise "#{element.type}" unless @@known_types.include?(element.type)
+          # puts("inspect: #{element.inspect}")
+          text += parse_element(element)
+        # end
       end
 
-      description.strip
+      text.strip
     end
-
 
     def parse_main_page_header(root)
       header_content = ""
@@ -436,7 +439,7 @@ module Jekyll
         elsif child.type === :a
           element_value += element_link(child)
         elsif is_block_container_element(child.type)
-         element_value += element_block_container(child)
+         element_value += parse_element(child)
         elsif
           element_value += element_text(child)
         end
@@ -472,7 +475,7 @@ module Jekyll
     end
 
     def element_codespan(element)
-      element_value = "`#{element_text(element)}`"
+      element_value = "```#{element_text(element)}```"
     end
 
     def element_header(element, level)

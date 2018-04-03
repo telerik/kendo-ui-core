@@ -53,8 +53,8 @@
 @active-gradient: none;
 @active-shadow: none;
 @inverse-text-color: darken(@accent, 27%);
-@header-background-color: @base;
 @header-text-color: @normal-text-color;
+@header-background-color: @base;
 @group-background-color: @background;
 @group-border-color: lighten(@background, 26%);
 @content-background-color: @base;
@@ -2355,6 +2355,9 @@ html .km-pane-wrapper .km-widget,
             }
         }
         &.k-dialog-button-layout-normal {
+            border-top: solid 1px @widget-border-color;
+            background: @header-background-color;
+
             .k-button {
                 border-radius: @border-radius;
             }

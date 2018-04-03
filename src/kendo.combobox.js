@@ -319,7 +319,7 @@ var __meta__ = { // jshint ignore:line
                 if ((that.options.minLength !== 1 && !isFiltered) || (isFiltered && that.value() && that.selectedIndex === -1 )) {
                     that.refresh();
                     that._openPopup();
-                    that.listView.bound(false); 
+                    that.listView.bound(false);
                 } else {
                     that._filterSource();
                 }
@@ -553,7 +553,11 @@ var __meta__ = { // jshint ignore:line
 
             if (idx === -1 && !dataItem) {
                 if (this.options.syncValueAndText) {
-                    text = this._accessor();
+                    if (this.options.dataTextField === this.options.dataValueField) {
+                        text = this._accessor();
+                    } else {
+                        text = this.input[0].value;
+                    }
                     value = text;
                 }
                 else {

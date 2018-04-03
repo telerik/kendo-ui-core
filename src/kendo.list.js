@@ -635,7 +635,7 @@ var __meta__ = { // jshint ignore:line
                 if (that._old === null || value === "") {
                     that._valueBeforeCascade = that._old = value;
                 } else {
-                    that._valueBeforeCascade = that._old = that.dataItem() ? that.dataItem()[that.options.dataValueField] : null;
+                    that._valueBeforeCascade = that._old = that.dataItem() ? that.dataItem()[that.options.dataValueField] || that.dataItem() : null;
                 }
                 that._oldIndex = index;
 
@@ -1004,7 +1004,7 @@ var __meta__ = { // jshint ignore:line
                 if (value === null) {
                     value = "";
                 }
-                    element.value = value;
+                element.value = value;
             }
         },
 
@@ -1202,7 +1202,7 @@ var __meta__ = { // jshint ignore:line
                         if (that._cascadedValue === null) {
                             that._cascadedValue = that.value();
                         } else {
-                            that._cascadedValue = that.dataItem() ? that.dataItem()[that.options.dataValueField] : null;
+                            that._cascadedValue = that.dataItem() ? that.dataItem()[that.options.dataValueField] || that.dataItem() : null;
                         }
                     });
                 }
@@ -1488,7 +1488,7 @@ var __meta__ = { // jshint ignore:line
         _cascadeSelect: function(parent, valueBeforeCascade) {
             var that = this;
             var dataItem = parent.dataItem();
-            var filterValue = dataItem ? dataItem[that.options.cascadeFromField] || parent._value(dataItem) : null;
+            var filterValue = dataItem ? parent._value(dataItem) : null;
             var valueField = that.options.cascadeFromField || parent.options.dataValueField;
             var expressions;
 

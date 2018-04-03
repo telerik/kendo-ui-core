@@ -42,6 +42,16 @@ test("navigate down should persist current viewedValue", function() {
     deepEqual(calendar.current(), value);
 });
 
+test("March 1st should have k-other-month class applied for leap and non-leap years", function() {
+    var value = new Date(2018, 1, 10);
+
+    calendar.value(value);
+
+    deepEqual(calendar.current(), value);
+
+    ok(div.find("a[data-value='2018/2/1']").closest("td").hasClass("k-other-month"));
+});
+
 //MONTH View
 test("navigate should not _move selection if value is bigger than max", function() {
     var event = { keyCode: keys.RIGHT, preventDefault: $.noop },
@@ -688,9 +698,29 @@ test("two consecutive selections can be made with ctrl key", 2, function() {
     equal(calendar.element.find(".k-state-selected").length, 2);
 });
 
-test("deselecting a selcted date with ctrl key", 2, function() {
+test("two consecutive selections can be made with meta key", 2, function() {
+    var event = $.Event("click", { metaKey: true });
+    calendar.value(new Date(2015, 11, 16));
+    var currentCell = $(".k-state-selected");
+    currentCell.next().trigger(event);
+    equal(calendar.selectDates().length, 2);
+    equal(calendar.element.find(".k-state-selected").length, 2);
+});
+
+test("deselecting a selected date with ctrl key", 2, function() {
     calendar.value(new Date(2015, 11, 16));
     var event = $.Event("click", { ctrlKey: true }),
+        currentCell = $(".k-state-selected"),
+        nextCell = currentCell.next();
+    nextCell.trigger(event);
+    nextCell.trigger(event);
+    equal(calendar.selectDates().length, 1);
+    equal(calendar.element.find(".k-state-selected").length, 1);
+});
+
+test("deselecting a selected date with meta key", 2, function() {
+    calendar.value(new Date(2015, 11, 16));
+    var event = $.Event("click", { metaKey: true }),
         currentCell = $(".k-state-selected"),
         nextCell = currentCell.next();
     nextCell.trigger(event);

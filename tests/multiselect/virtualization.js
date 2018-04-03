@@ -466,4 +466,47 @@
         jasmine.clock().uninstall();
     });
 
+    test("highlight selected when filtering", 1, function() {
+        jasmine.clock().install();
+
+        var requests = [];
+        var watchRequests = false;
+
+        var transport = {
+            read: function(options) {
+                //gatter requests after rebind
+                if (watchRequests) {
+                    requests.push(options.data);
+                }
+
+                setTimeout(function() {
+                    if (options.data.filter && options.data.filter.filters.length) {
+                        options.success({ data: [{ id: 200, value: 200, text: "Item 200" }], total: 1 });
+                    } else {
+                        options.success({ data: generateData(options.data), total: 300 });
+                    }
+                }, 0);
+            }
+        };
+
+        var multiselect = new MultiSelect(select, {
+            animation: false,
+            height: CONTAINER_HEIGHT,
+            filter: "contains",
+            dataTextField: "text",
+            dataValueField: "value",
+            dataSource: createAsyncDataSource({ transport: transport }),
+            virtual: {
+                valueMapper: function(o) { o.success(o.value); },
+                itemHeight: 20
+            }
+        });
+        multiselect.value([200]);
+        jasmine.clock().tick(1);
+        multiselect.search("Item 200");
+        jasmine.clock().tick(1);
+        equal($(".k-state-selected").length, 1);
+        jasmine.clock().uninstall();
+    });
+
 })();

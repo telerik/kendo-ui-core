@@ -2,7 +2,50 @@
 
 var DataSource = kendo.data.DataSource;
 
-module("data source push");
+function remoteDataSource(options) {
+    var total = (options || {}).total || 100,
+        dataSource = new kendo.data.DataSource($.extend(true, {}, {
+            serverPaging: true,
+            transport: {
+                read: function(options) {
+                    var take = options.data.take;
+                    var skip = options.data.skip;
+                    var data = [];
+
+                    for (var i = skip; i < Math.min(skip + take, total); i++) {
+                        data.push({ OrderID: i, ContactName: "Contact " + i, ShipAddress: "Ship Address " + i });
+                    }
+
+                    options.success(data);
+                }
+            },
+            schema: {
+                model: {
+                    id: "OrderID"
+                },
+                total:  function () {
+                    return total;
+                }
+            },
+            pageSize: 10
+        }, options || {}));
+
+    dataSource._total = total;
+    return dataSource;
+}
+
+module("data source push", {
+    setup: function() {
+        //remove the setTimeout in dataSource.prefetch
+        timeout = window.setTimeout;
+        window.setTimeout = function(callback) {
+            callback();
+        };
+    },
+    teardown: function() {
+        window.setTimeout = timeout;
+    }
+});
 
 test("push is invoked when the data source is initialized", function(){
     var transport = stub({}, "push");
@@ -441,6 +484,18 @@ test("pushDestroy removes an existing from the pristine collection", function() 
     equal(dataSource._pristineData.length, 0);
 });
 
+test("pushDestroy removes an existing from the range pristine collection", function() {
+    var dataSource = remoteDataSource();
+    dataSource.options.useRanges = true;
+    dataSource.read();
+    dataSource.range(20, 10);
+
+    dataSource.pushDestroy({ OrderID: 20 });
+
+    equal(dataSource._ranges[1].pristineData.length, 9);
+    equal(dataSource._ranges[1].pristineData[0].OrderID, 21);
+});
+
 test("pushUpdate doesn't set the dirty flag", function() {
     var dataSource = new DataSource({
         schema: { model: { id: "id" } },
@@ -490,6 +545,17 @@ test("pushCreate inserts the item in the pristine collection", function() {
     equal(dataSource._pristineData[0].foo, item.foo);
 });
 
+test("pushCreate inserts the item in the range pristine collection", function() {
+    var dataSource = remoteDataSource();
+    dataSource.options.useRanges = true;
+    dataSource.read();
+    dataSource.range(20, 10);
+
+    dataSource.pushCreate({ OrderID: 100 });
+
+    equal(dataSource._ranges[1].pristineData[10].OrderID, 100);
+});
+
 test("pushUpdate updates the model instance in the pristine collection", function() {
     var dataSource = new DataSource({
         schema: { model: { id: "id" } },
@@ -501,6 +567,17 @@ test("pushUpdate updates the model instance in the pristine collection", functio
     dataSource.pushUpdate({ id: 1, foo: "bar" });
 
     equal(dataSource._pristineData[0].foo, "bar");
+});
+
+test("pushUpdate updates the model instance in the range pristine collection", function() {
+    var dataSource = remoteDataSource();
+    dataSource.options.useRanges = true;
+    dataSource.read();
+    dataSource.range(20, 10);
+
+    dataSource.pushUpdate({ OrderID: 20, ShipAddress: "new value" });
+
+    equal(dataSource._ranges[1].pristineData[0].ShipAddress, "new value");
 });
 
 test("items inserted via pushCreate remain in the data source after cancelChanges", function() {

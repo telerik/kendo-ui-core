@@ -36,7 +36,7 @@ Below are listed the 2 corresponding steps for you to follow.
         }
     ```
 
-2. Use the [`requestEnd`](/api/javascript/data/datasource#requestend) event of the DataSource to intercept and replace the incoming Date field with the time difference.
+2. Use the [`requestEnd`](https://docs.telerik.com/kendo-ui/api/javascript/data/datasource/events/requestend) event of the DataSource to intercept and replace the incoming Date field with the time difference.
 
     ###### Example
 

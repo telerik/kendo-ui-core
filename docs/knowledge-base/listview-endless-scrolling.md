@@ -1,8 +1,8 @@
 ---
-title: Endless scrolling of remote data in the Kendo ListView
+title: Allow Endless Scrolling of Remote Data in ListView
 description: An example on how to create an endless scrolling in the Kendo ListView
 type: how-to
-page_title: Endless scrolling of remote data in the Kendo ListView | Kendo UI ListView
+page_title: Enable Endless Scrolling of Remote Data | Kendo UI ListView
 slug: listview-endless-scrolling
 tags: listview, list, view, endless, infinite, scroll, remote, data
 res_type: kb
@@ -24,11 +24,14 @@ component: listview
 
 ## Description
 
-How can I create an infinite scroll in the Kendo ListView?
+How can I create an infinite scroll in the ListView?
 
 ## Solution
 
- Simply add an additional data source which will request new data once the user scrolls to the botton of the list view. Then attach an event handler to the scroll of the list view (will be fired when the user scrolls to the bottom). Within the scroll handler, request new items via the [query method](https://docs.telerik.com/kendo-ui/api/javascript/data/datasource#methods-query) of the additional data source. Once the requested items are received, add them to the data source of the listview using the [add method](https://docs.telerik.com/kendo-ui/api/javascript/data/datasource#methods-add).
+1. Add an additional data source which will request new data once the user scrolls to the bottom of the ListView.
+1. Attach an event handler to the scroll of the ListView which will be fired when the user scrolls to the bottom.
+1. In the scroll handler, request new items by using the [`query`](https://docs.telerik.com/kendo-ui/api/javascript/data/datasource#methods-query) method of the additional data source.
+1. Once the requested items are received, add them to the data source of the ListView by using the [`add`](https://docs.telerik.com/kendo-ui/api/javascript/data/datasource#methods-add) method.
 
 ```html
     <div id="example">
@@ -47,9 +50,9 @@ How can I create an infinite scroll in the Kendo ListView?
 
       <script>
         $(function() {
-          jQuery.fn.scrollTo = function(elem) { 
-            $(this).scrollTop($(this).scrollTop() - $(this).offset().top + elem.offset().top); 
-            return this; 
+          jQuery.fn.scrollTo = function(elem) {
+            $(this).scrollTop($(this).scrollTop() - $(this).offset().top + elem.offset().top);
+            return this;
           };
 
           var dataSource = new kendo.data.DataSource({

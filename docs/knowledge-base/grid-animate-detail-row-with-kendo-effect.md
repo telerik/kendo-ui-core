@@ -1,16 +1,16 @@
 ---
-title: Animate Detail Row Opening in Grid Using Kendo Effects
-description: An example on how to animate the opening of a Grid's Detail Row with Kendo Effects
+title: Animate Detail Row Which Opens with Kendo UI Effects in Grid
+description: An example on how to animate the opening of a detail row with Kendo UI Effects in a Kendo UI Grid.
 type: how-to
-page_title: Animate Detail Row Opening in Grid 
+page_title: Animate the Opening of Detail Rows | Kendo UI Grid
 slug: grid-animate-detail-row-with-kendo-effect
 tags: grid, aniamte, detail, row, detailrow, effect, slide in, fade, expand
 ticketid: 540440
 res_type: kb
-
 ---
 
 ## Environment
+
 <table>
  <tr>
   <td>Product</td>
@@ -32,13 +32,11 @@ res_type: kb
 
 ## Description
 
-How can I add a Kendo UI Animation Effect to the opening of a Grid's Detail Row?
+How can I add a Kendo UI Animation Effect to the opening of a detail row in the Grid?
 
-## Solution
+## Suggested Workarounds
 
-There's currently no option in the Kendo UI Grid API that allows for adding animations to the opening of a Detail Row, but taking advantage of the `detailInit` event and come custom CSS, the functionality described above could be implemented.
-
-Here's one basic implementation which serves as example:
+Use the `detailInit` event and custom CSS rules.
 
 ```html
 <div id="grid"></div>
@@ -202,5 +200,5 @@ Here's one basic implementation which serves as example:
 
 ## See Also
 
-* [detailInit event API Reference.](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid/events/detailinit)
-* [Slide In Animation Effect Demo.](https://demos.telerik.com/kendo-ui/fx/slidein) 
+* [API Reference of the detailInit Event](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid/events/detailinit)
+* [Slide-In Animation Effect Demo](https://demos.telerik.com/kendo-ui/fx/slidein)

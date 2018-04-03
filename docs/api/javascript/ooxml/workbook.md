@@ -235,6 +235,27 @@ The index of the first filterable column.
 
 The index of the last filterable column.
 
+### sheets.mergedCells `Array`
+
+A range of cells to merge into one. The value of the first cell in the range will be displayed in the new merged cell.
+
+    <script>
+      var workbook = new kendo.ooxml.Workbook({
+        sheets: [{
+          mergedCells: ["A1:D1"],
+          rows: [
+            { cells: [ { value: "Document Title" }  ] },
+            { cells: [ { value: 22 }, { value: 33 }, { value: 44 }, {value: 55}  ] }
+          ]
+        }]
+      });
+
+      kendo.saveAs({
+        dataURI: workbook.toDataURL(),
+        fileName: "Test.xlsx"
+      });
+    </script>
+
 ### sheets.name `String`
 
 Sets the name of the exported workbook sheet.

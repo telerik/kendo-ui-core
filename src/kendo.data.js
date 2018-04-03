@@ -1718,6 +1718,10 @@ var __meta__ = { // jshint ignore:line
             skip = options.skip,
             take = options.take;
 
+        if (sort && inPlace) {
+            query = query.sort(sort, undefined, undefined, inPlace);
+        }
+
         if (filter) {
             query = query.filter(filter);
 
@@ -1728,13 +1732,8 @@ var __meta__ = { // jshint ignore:line
             total = query.toArray().length;
         }
 
-        if (sort) {
-            if (inPlace) {
-                query = query.sort(sort, undefined, undefined, inPlace);
-            }
-            else {
-                query = query.sort(sort);
-            }
+        if (sort && !inPlace) {
+            query = query.sort(sort);
 
             if (group) {
                 data = query.toArray();
@@ -1794,7 +1793,10 @@ var __meta__ = { // jshint ignore:line
             };
 
             parameterMap = options.parameterMap;
-            that.submit = options.submit;
+
+            if (options.submit) {
+                that.submit = options.submit;
+            }
 
             if (isFunction(options.push)) {
                 that.push = options.push;
@@ -1995,6 +1997,13 @@ var __meta__ = { // jshint ignore:line
         return function(data) {
             data = originalFunction(data);
 
+            return wrapDataAccessBase(model, converter, getters, originalFieldNames, fieldNames)(data);
+        };
+    }
+
+    function wrapDataAccessBase(model, converter, getters, originalFieldNames, fieldNames) {
+        return function(data) {
+
             if (data && !isEmptyObject(getters)) {
                 if (toString.call(data) !== "[object Array]" && !(data instanceof ObservableArray)) {
                     data = [data];
@@ -2071,6 +2080,7 @@ var __meta__ = { // jshint ignore:line
                 }
 
                 that._dataAccessFunction = dataFunction;
+                that._wrapDataAccessBase = wrapDataAccessBase(model, convertRecords, getters, originalFieldNames, fieldNames);
                 that.data = wrapDataAccess(dataFunction, model, convertRecords, getters, originalFieldNames, fieldNames);
                 that.groups = wrapDataAccess(groupsFunction, model, convertGroup, getters, originalFieldNames, fieldNames);
             }
@@ -2092,6 +2102,28 @@ var __meta__ = { // jshint ignore:line
         }
     });
 
+    function fillLastGroup(originalGroup, newGroup) {
+        var currOriginal;
+        var currentNew;
+
+        if (newGroup.items && newGroup.items.length) {
+            for (var i = 0; i < newGroup.items.length; i++) {
+                currOriginal = originalGroup.items[i];
+                currentNew = newGroup.items[i];
+                if (currOriginal && currentNew) {
+                    if (currOriginal.hasSubgroups) {
+                        fillLastGroup(currOriginal, currentNew);
+                    } else if (currOriginal.field && currOriginal.value == currentNew.value) {
+                        currOriginal.items.push.apply(currOriginal.items, currentNew.items);
+                    } else {
+                        originalGroup.items.push.apply(originalGroup.items, [currentNew]);
+                    }
+                } else if (currentNew) {
+                    originalGroup.items.push.apply(originalGroup.items, [currentNew]);
+                }
+            }
+        }
+    }
     function mergeGroups(target, dest, skip, take) {
         var group,
             idx = 0,
@@ -2638,6 +2670,9 @@ var __meta__ = { // jshint ignore:line
         },
 
         pushInsert: function(index, items) {
+            var that = this;
+            var rangeSpan = that._getCurrentRangeSpan();
+
             if (!items) {
                 items = index;
                 index = 0;
@@ -2666,6 +2701,10 @@ var __meta__ = { // jshint ignore:line
                     }
 
                     this._pristineData.push(pristine);
+
+                    if (rangeSpan && rangeSpan.length) {
+                        $(rangeSpan).last()[0].pristineData.push(pristine);
+                    }
 
                     index++;
                 }
@@ -3005,7 +3044,17 @@ var __meta__ = { // jshint ignore:line
         },
 
         _eachPristineItem: function(callback) {
-            this._eachItem(this._pristineData, callback);
+            var that = this;
+            var options = that.options;
+            var rangeSpan = that._getCurrentRangeSpan();
+
+            that._eachItem(that._pristineData, callback);
+
+            if (options.serverPaging && options.useRanges) {
+                each(rangeSpan, function(i, range) {
+                    that._eachItem(range.pristineData, callback);
+                });
+            }
         },
 
        _eachItem: function(data, callback) {
@@ -3219,8 +3268,7 @@ var __meta__ = { // jshint ignore:line
 
         success: function(data) {
             var that = this,
-                options = that.options,
-                requestParams;
+                options = that.options;
 
             that.trigger(REQUESTEND, { response: data, type: "read" });
 
@@ -3235,14 +3283,16 @@ var __meta__ = { // jshint ignore:line
                 that._total = that.reader.total(data);
                 if (that._pageSize > that._total) {
                     that._pageSize = that._total;
+                    if (that.options.pageSize && that.options.pageSize > that._pageSize) {
+                        that._pageSize = that.options.pageSize;
+                    }
                 }
 
                 if (that._aggregate && options.serverAggregates) {
                     that._aggregateResult = that._readAggregates(data);
                 }
 
-                requestParams = arguments.length > 1 ? arguments[1] : undefined;
-                data = that._readData(data, requestParams);
+                data = that._readData(data);
 
                 that._destroyed = [];
             } else {
@@ -3284,6 +3334,12 @@ var __meta__ = { // jshint ignore:line
 
             if (that.options.endless) {
                 that._data.unbind(CHANGE, that._changeHandler);
+
+                if (that._isServerGrouped() && that._data[that._data.length - 1].value === data[0].value) {
+                    fillLastGroup(that._data[that._data.length - 1], data[0]);
+                    data.shift();
+                }
+
                 data = that._observe(data);
                 for (var i = 0; i < data.length; i++) {
                     that._data.push(data[i]);
@@ -3358,7 +3414,7 @@ var __meta__ = { // jshint ignore:line
                 this.offlineData(state.concat(destroyed));
 
                 if (updatePristine) {
-                    this._pristineData = this._readData(state);
+                    this._pristineData = this.reader._wrapDataAccessBase(state);
                 }
             }
         },
@@ -3368,8 +3424,21 @@ var __meta__ = { // jshint ignore:line
                 start = typeof(skip) !== "undefined" ? skip : (that._skip || 0),
                 end = start + that._flatData(data, true).length;
 
-            that._ranges.push({ start: start, end: end, data: data, timestamp: new Date().getTime() });
-            that._ranges.sort( function(x, y) { return x.start - y.start; } );
+            that._ranges.push({
+                start: start,
+                end: end,
+                data: data,
+                pristineData: data.toJSON(),
+                timestamp: that._timeStamp()
+            });
+
+            that._sortRanges();
+        },
+
+        _sortRanges: function() {
+            this._ranges.sort(function(x, y) {
+                return x.start - y.start;
+            });
         },
 
         error: function(xhr, status, errorThrown) {
@@ -4120,22 +4189,25 @@ var __meta__ = { // jshint ignore:line
                 temp = that._readData(data);
 
                 if (temp.length) {
-
                     for (idx = 0, length = that._ranges.length; idx < length; idx++) {
                         if (that._ranges[idx].start === skip) {
                             found = true;
                             range = that._ranges[idx];
+
+                            range.pristineData = temp;
+                            range.data = that._observe(temp);
+                            range.end = range.start + that._flatData(range.data, true).length;
+                            that._sortRanges();
+
                             break;
                         }
                     }
+
                     if (!found) {
-                        that._ranges.push(range);
+                        that._addRange(that._observe(temp), skip);
                     }
                 }
 
-                range.data = that._observe(temp);
-                range.end = range.start + that._flatData(range.data, true).length;
-                that._ranges.sort( function(x, y) { return x.start - y.start; } );
                 that._total = that.reader.total(data);
 
                 if (force || (timestamp >= that._currentRequestTimeStamp || !that._skipRequestsInProgress)) {
@@ -4223,7 +4295,29 @@ var __meta__ = { // jshint ignore:line
                     return true;
                 }
             }
+
             return false;
+        },
+
+        _getCurrentRangeSpan: function() {
+            var that = this;
+            var ranges = that._ranges;
+            var start = that.currentRangeStart();
+            var end = start + (that.take() || 0);
+            var rangeSpan = [];
+            var range;
+            var idx;
+            var length = ranges.length;
+
+            for (idx = 0; idx < length; idx++) {
+                range = ranges[idx];
+
+                if ((range.start <= start && range.end >= start) || (range.start >= start && range.start <= end)) {
+                    rangeSpan.push(range);
+                }
+            }
+
+            return rangeSpan;
         },
 
         _removeModelFromRanges: function(model) {

@@ -69,13 +69,13 @@ The following example demonstrates how to create a `dataItem` that holds an `all
             var values = this.value();
 
             if (dataItem.value === "ALL") {
-              this.value("");
+                this.value(values.includes("ALL") ? "ALL" : "");
             } else if (values.indexOf("ALL") !== -1) {
               values = $.grep(values, function(value) {
                 return value !== "ALL";
               });
 
-              this.value(values);
+              this.value(values.length === this.dataSource.view().length -1 ? "" : values);
             }
           }
         }).data("kendoMultiSelect");

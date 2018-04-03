@@ -87,7 +87,7 @@ Below are listed the steps for you to follow when configuring the Kendo UI Stock
 
 ## Event Handling
 
-You can subscribe to all StockChart [events](/api/javascript/dataviz/ui/stock-chart#events).
+You can subscribe to all StockChart [events](https://docs.telerik.com/kendo-ui/api/javascript/dataviz/ui/stock-chart#events).
 
 ### By Handler Name
 

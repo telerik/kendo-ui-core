@@ -142,7 +142,7 @@ To enable the drag-and-drop feature of the ListBox, set it as `Draggable()` and 
 
 ### Item Templates
 
-The ListBox supports the use of [templates](/kendo-ui/framework/templates/overview) for its items that are passed as а function or string.
+The ListBox supports the use of [templates](https://docs.telerik.com/kendo-ui/framework/templates/overview) for its items that are passed as а function or string.
 
 ###### Example
 

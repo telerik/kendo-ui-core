@@ -680,7 +680,7 @@ in the optionLabel object**.
 
 The [template](/api/javascript/kendo/methods/template) used to render the option label.
 
-> Define the [optionLabel](/api/javascript/dropdownlist/configuration/optionlabel) as **object** if complex template structure is used
+> Define the [optionLabel](/api/javascript/ui/dropdownlist/configuration/optionlabel) as **object** if complex template structure is used
 
 ### headerTemplate `String|Function`
 
@@ -1327,7 +1327,7 @@ The search value.
 Gets or sets the selected item. Selects the item provided as an argument and updates the value and text of the widget.
 
 > * If the widget is not bound (e.g. `autoBind` is set to `false`), the `select` method will **not** pre-fetch the data before continuing with the selection and value setting (unlike the [value](/api/javascript/ui/dropdownlist/methods/value) method), and no item will be selected.
-> * The numeric argument indicates the item index in the dropdown, not in the dataSource. If an [`optionLabel`](/api/javascript/ui/dropdownlist#configuration-optionLabel) is used, the dropdown item index can be obtained by incrementing the respective dataSource item index by 1.
+> * The numeric argument indicates the item index in the dropdown, not in the dataSource. If an [`optionLabel`](/api/javascript/ui/dropdownlist/configuration/optionlabel) is used, the dropdown item index can be obtained by incrementing the respective dataSource item index by 1.
 > * When **virtualization** is enabled, the method **does not support** selection with a *function predicate*. The predicate function looks only
 in the current datasource view, which represents only the active range/page. Hence it will not work properly.
 > * This method **does not trigger** [change](/api/javascript/ui/dropdownlist/events/change) event.
@@ -1860,7 +1860,7 @@ Fired when the value of the widget is changed via API or user interaction.
 
 The widget instance which fired the event.
 
-#### Example - subscribe to the "select" event during initialization
+#### Example - subscribe to the "cascade" event during initialization
 
     <input id="dropdownlist" />
     <script>
@@ -1872,7 +1872,7 @@ The widget instance which fired the event.
     });
     </script>
 
-#### Example - subscribe to the "select" event after initialization
+#### Example - subscribe to the "cascade" event after initialization
 
     <input id="dropdownlist" />
     <script>

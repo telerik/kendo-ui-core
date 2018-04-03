@@ -153,6 +153,12 @@ var __meta__ = { // jshint ignore:line
             kendo.destroy(that.element);
         },
 
+        setOptions: function(options) {
+            Widget.fn.setOptions.call(this, options);
+            this._templates();
+            this._dataSource();
+        },
+
         events: [
             CHANGE,
             DATABOUND,
@@ -1493,9 +1499,9 @@ var __meta__ = { // jshint ignore:line
 
             if (toolElement && command && command.canExecute) {
                 if (command.canExecute()) {
-                    $(toolElement).removeClass(DISABLED_STATE_CLASS);
+                    $(toolElement).removeClass(DISABLED_STATE_CLASS).removeAttr(TABINDEX);
                 } else {
-                    $(toolElement).addClass(DISABLED_STATE_CLASS);
+                    $(toolElement).addClass(DISABLED_STATE_CLASS).attr(TABINDEX, "-1");
                 }
             }
         }

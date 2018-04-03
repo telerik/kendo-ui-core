@@ -234,7 +234,7 @@ $.extend(true, kendo.ui.FilterMenu.prototype.options.messages,{
   "info": "Zobrazit položky s hodnotou, která:",
   "isTrue": "je pravda",
   "isFalse": "není pravda",
-  "filter": "Filtrovat",  
+  "filter": "Filtrovat",
   "clear": "Zrušit",
   "and": "A zároveň",
   "or": "Nebo",
@@ -966,18 +966,6 @@ $.extend(true, kendo.ui.TreeList.prototype.options.messages,{
       "excel": "Excel export",
       "pdf": "PDF export"
   }
-});
-}
-
-if (kendo.ui.TreeList) {
-kendo.ui.TreeList.prototype.options.columnMenu =
-$.extend(true, kendo.ui.TreeList.prototype.options.columnMenu, {
-    "messages": {
-        "columns": "Zvolit sloupce",
-        "filter": "Použít filtr",
-        "sortAscending": "Setřídit (vzest.)",
-        "sortDescending": "Setřídit (sest.)"
-    }
 });
 }
 

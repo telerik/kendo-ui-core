@@ -1,16 +1,16 @@
 ---
-title: How to Maintain Row Selection on Virtual Scrolling
-description: An example on how to persist single selection with virtualization
+title: Persist Row Selection on Virtual Scrolling in Grid
+description: An example on how to persist the single selection functionality of the Kendo UI Grid when you use it together with virtualization.
 type: troubleshooting
-page_title: Virtual Scrolling With Persist Single Selection
+page_title: Persist Single Row Selection When Virtual Scrolling Occurs | Kendo UI Grid
 slug: grid-virtual-scrolling-with-persist-single-selection
-position: 
 tags: grid, selection, virtual
 ticketid: 1139830
 res_type: kb
 ---
 
 ## Environment
+
 <table>
 	<tr>
 		<td>Product Version</td>
@@ -25,13 +25,11 @@ res_type: kb
 
 ## Description
 
-I want to persist selection when the virtual scrolling is used.
+How can I persist the single row selection when the virtual scrolling functionality of the Grid is used?
 
 ## Solution
 
-This could be achieved by programmatically handling the items selection collection on the Grid [change event](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid/events/change).
-
-Please check the following example demonstrating this:
+Programmatically handle the collection of item selection on the [`change`](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid/events/change) event of the Grid.
 
 ````html
 <div id="example">
@@ -79,7 +77,7 @@ Please check the following example demonstrating this:
             </script>
             <style>
 
-                /*horizontal Grid scrollbar should appear if the browser window is shrinked too much*/
+                /*A horizontal Grid scrollbar appears if the browser window is shrunk too much.*/
                 #grid table
                 {
                     min-width: 1190px;
@@ -132,7 +130,7 @@ Please check the following example demonstrating this:
             </script>
             <style>
 
-                /*horizontal Grid scrollbar should appear if the browser window is shrinked too much*/
+                /*A horizontal Grid scrollbar appears if the browser window is shrunk too much.*/
                 #grid table
                 {
                     min-width: 1190px;
