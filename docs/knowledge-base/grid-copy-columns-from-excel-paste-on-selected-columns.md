@@ -10,6 +10,7 @@ res_type: kb
 ---
 
 ## Environment
+
 <table>
 	<tr>
 		<td>Product Version</td>
@@ -23,14 +24,14 @@ res_type: kb
 
 ## Description
 
-How can I copy columns from excel and paste them on the selected columns in the Kendo UI Grid?
+How can I copy Excel columns and paste them on the selected columns in the Kendo UI Grid?
 
 ## Solution
 
-To paste on the selected columns, handle the [`keydown`](https://api.jquery.com/keydown/) event of the Grid. In the event handler, if the user is pasting:
+Handle the [`keydown`](https://api.jquery.com/keydown/) event of the Grid&mdash;in the event handler and if the user is pasting:
 
-1. Programatically [`focus`](https://api.jquery.com/focus/) an invisible textarea to paste the text there.
-1. Use the value of the textarea to create an array of a single cell values.
+1. Programmatically [`focus`](https://api.jquery.com/focus/) an invisible text-area to paste the content on it.
+1. Use the value of the text-area to create an array of single cell values.
 1. Get the selected cells of the Grid.
 1. For every selected cell, [`shift`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/shift) a value from the array.
 
@@ -69,7 +70,7 @@ grid.element.on('keydown', function(e) {
 		var grid = $("#grid").data("kendoGrid");
 		var rows = value.split('\n');
 		var data = [];
-		
+
 		for (var i = 0; i < rows.length; i++) {
 		var cells = rows[i].split('\t');
 		for (var j = 0; j < cells.length; j++) {

@@ -1,8 +1,8 @@
 ---
 title: Expand and Collapse Group of Columns on Button Click
-description: An example on how to expand and collapse a group of columns on button click in the Kendo UI Grid.
+description: An example on how to expand and collapse a group of columns on a button click in the Kendo UI Grid.
 type: how-to
-page_title: Expand and Collapse Columns Group with Header Button | Kendo UI Grid
+page_title: Expand and Collapse Column Groups with Header Button | Kendo UI Grid
 slug: grid-expand-collapse-columns-group-button-click
 tags: grid, multi-column, headers, expand, collapse, columns
 ticketid: 1158853
@@ -10,6 +10,7 @@ res_type: kb
 ---
 
 ## Environment
+
 <table>
 	<tr>
 		<td>Product Version</td>
@@ -27,10 +28,8 @@ How can I expand and collapse a group of columns with a button when I am using m
 
 ## Solution
 
-To expand and collapse a group of columns:
-
 1. Use [`headerTemplate`](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid/configuration/columns.headertemplate) to add a button to the desired column header.
-1. In the `click` event handler of the button, based on a condition, pass the desired columns as parameters to the [`hideColumn`](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid/methods/hidecolumn) or the [`showColumn`](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid/methods/showcolumn) methods.
+1. In the `click` event handler of the button and based on a condition, pass the desired columns as parameters to the [`hideColumn`](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid/methods/hidecolumn) or the [`showColumn`](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid/methods/showcolumn) methods.
 
 ```html
 <div id="example">

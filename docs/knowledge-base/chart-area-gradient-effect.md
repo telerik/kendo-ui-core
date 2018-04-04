@@ -1,8 +1,8 @@
 ---
 title: Apply Gradient Effect on Area Chart
-description: An example on how to apply gradient color effect on the Kendo UI Area Chart.
+description: An example on how to apply a gradient color effect to the Kendo UI Area Chart.
 type: how-to
-page_title: Gradient Color | Kendo UI Chart
+page_title: Apply Gradient Color | Kendo UI Chart
 slug: chart-area-gradient-effect
 tags: chart, area, gradient, effect, color
 ticketid: 1158735
@@ -10,6 +10,7 @@ res_type: kb
 ---
 
 ## Environment
+
 <table>
 	<tr>
 		<td>Product Version</td>
@@ -26,8 +27,6 @@ res_type: kb
 How can I apply a gradient color effect on the Kendo UI Area Chart?
 
 ## Solution
-
-To apply a gradient effect:
 
 1. Use an external gradient.
 1. Use the [`series.color`](https://docs.telerik.com/kendo-ui/api/javascript/dataviz/ui/chart/configuration/series.color) configuration to set the external gradient.

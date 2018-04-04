@@ -10,6 +10,8 @@ position: 4
 
 The Editor works with standard [`range`](https://developer.mozilla.org/en/docs/Web/API/Range) objects that provide a polyfill for Internet Explorer versions that do not fully support them.
 
+## Setting the Editor Selection
+
 To set the Editor selection, create a `Range` object that specifies the desired selection and pass it to the [`selectRange`](/api/javascript/ui/editor/methods/selectrange) method.
 
 The following example demonstrates how to set the Editor selections.
@@ -52,11 +54,11 @@ For more information, refer to the [tutorial on `Range` objects on Quirksmode](h
 
 ## Working with Custom Tools in IE
 
-Because IE keeps only a single instance of the Selection and the Range, having custom tools that steal the focus from the content area will apply th executed command at the begging of the content instead at the caret position. To prevent that from happening you can cache the Range and re-select it at the correct moments.
+Because Internet Explorer keeps a single instance of the selection and the range, any custom tools that draw the focus away from the content area apply the executed command at the begging of the content instead of at the caret position. To prevent this behavior, cache the range and re-select it at the correct moments.
 
-The following example shows a custom tool with DropDownList and filtering enabled:
+The following example shows how to implement a custom tool in a DropDownList with its filtering enabled.
 
- ###### Example
+###### Example
 
     <textarea id="editor" rows="10" cols="30" style="width:100%;height:400px">
     </textarea>

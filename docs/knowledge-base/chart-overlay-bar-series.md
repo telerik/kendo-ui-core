@@ -1,16 +1,16 @@
 ---
-title: Overlay Chart Bar Series
-description: How to display overlaid column/bar series where the top series is narrower tan the overlid one
+title: Overlay Bar Chart Series
+description: An example on how to display overlaid Column or Bar Chart series where the top series is narrower tan the overlaid series.
 type: how-to
-page_title: Display Chart Bar Series Overlaid on Top of Each Other
+page_title: Display Bar Chart Series That Are Overlaid on Top of Each Other | Kendo UI Chart
 slug: chart-overlay-bar-series
-position: 
 tags: chart, visual
 ticketid: 1158675, 1154649
 res_type: kb
 ---
 
 ## Environment
+
 <table>
 	<tr>
 		<td>Product Version</td>
@@ -24,22 +24,17 @@ res_type: kb
 
 
 ## Description
-I have a requirement to create a Chart in which we have two values in one category where:
 
-1. One bar is overlaid on the other.
-2. The top bar is narrower than the base one. 
-
-How can I accomplish this with Column/Bar charts in Kendo UI?
+How can I create a Kendo UI Column or Bar Chart with two values in the same category where:
+1. One of the bars overlays the other?
+2. The top bar is narrower than the base bar?
 
 ## Solution
-You can implement this with the Kendo UI Column/Bar series using:
 
-1. The [series.spacing](/api/javascript/dataviz/ui/chart/configuration/series.spacing) property with a -1 value to place one series on top of the other.
-2. A custom [visual](/api/javascript/dataviz/ui/chart/configuration/series.visual) for the top series to make their bar narrower.
+1. Use the [`series.spacing`](/api/javascript/dataviz/ui/chart/configuration/series.spacing) property with a value of `-1` (minus one) to place one series on top of the other.
+2. Apply a custom [`visual`](/api/javascript/dataviz/ui/chart/configuration/series.visual) for the top series to make their bar narrower.
 
-The following examples show how to implement this approach for Bar and Column series separately because the custom visual paths for the two series types differ.
-
-### Example - Overlay Chart Bar Series
+The following example demonstrates how to apply the suggested approach to a Bar Chart series.
 
 ````html
     <div id="chart"></div>
@@ -90,7 +85,7 @@ The following examples show how to implement this approach for Bar and Column se
     </script>
 ````
 
-### Example - Overlay Chart Column Series
+The following example demonstrates how to apply the suggested approach to a Column Chart series.
 
 ````html
     <div id="chart"></div>

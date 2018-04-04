@@ -1,5 +1,5 @@
 ---
-title: Animate the Resize Method 
+title: Animate the resize Method
 description: An example on how to animate the resize method of the Kendo UI Grid.
 type: how-to
 page_title: Change Height with Animation | Kendo UI Grid
@@ -10,6 +10,7 @@ res_type: kb
 ---
 
 ## Environment
+
 <table>
 	<tr>
 		<td>Product Version</td>
@@ -27,9 +28,7 @@ How can I animate the height resizing of the Kendo UI Grid?
 
 ## Solution
 
-To animate the height resizing:
-
-1. Use two simultaneous animations. First for the HTML element of the Grid, and second for the `.k-grid-content` HTML element.
+1. Use two simultaneous animations&mdash;the first one for the HTML element of the Grid and the second one for the `.k-grid-content` HTML element.
 2. When the animations are complete, invoke the [`resize`](https://docs.telerik.com/kendo-ui/api/javascript/ui/widget/methods/resize) method of the Grid.
 
 ```html

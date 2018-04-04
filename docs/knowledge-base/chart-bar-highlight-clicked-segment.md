@@ -1,6 +1,6 @@
 ---
-title: Highlight Clicked Bar Chart Segment
-description: An example on how to highlight the clicked bar in the Kendo UI Bar Chart.
+title: Highlight Clicked Bar Chart Segments
+description: An example on how to highlight the clicked bar segment in the Kendo UI Bar Chart.
 type: how-to
 page_title: Highlight Bar on Click | Kendo UI Chart
 slug: chart-bar-highlight-clicked-segment
@@ -10,6 +10,7 @@ res_type: kb
 ---
 
 ## Environment
+
 <table>
 	<tr>
 		<td>Product Version</td>
@@ -27,7 +28,7 @@ How can I highlight the clicked bar in the Kendo UI Bar Chart?
 
 ## Solution
 
-To highlight the clicked bar, handle the [`seriesClick`](https://docs.telerik.com/kendo-ui/api/javascript/dataviz/ui/chart/events/seriesclick) event. In the event handler, add a custom style class to the desired HTML elements.
+Handle the [`seriesClick`](https://docs.telerik.com/kendo-ui/api/javascript/dataviz/ui/chart/events/seriesclick) event&mdash;in the event handler, add a custom style class to the desired HTML elements.
 
 ```html
 <style>
@@ -97,5 +98,5 @@ To highlight the clicked bar, handle the [`seriesClick`](https://docs.telerik.co
 
 ## See Also
 
-* [Explode Clicked Pie Chart Segment]({% slug howto_explodeclickedsegment_piecharts %})
-* [Highlight Clicked Line Chart Segment]({% slug chart-line-highlight-clicked-segment %})
+* [Explode Clicked Pie Chart Segments]({% slug howto_explodeclickedsegment_piecharts %})
+* [Highlight Clicked Line Chart Segments]({% slug chart-line-highlight-clicked-segment %})

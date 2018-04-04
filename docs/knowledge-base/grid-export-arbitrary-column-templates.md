@@ -32,87 +32,100 @@ How can I export my Kendo UI Grid with multiple template columns with arbitrary 
 > The following example produces text-only content in the exported Excel file. The Grid is able to export only data values to Excel.
 
 ```html
-    <div id="example">
-      <div id="grid"></div>
-      <script>
-        $(document).ready(function() {
-          $("#grid").kendoGrid({
-            dataSource: {
-              type: "odata",
-              transport: {
-                read: "https://demos.telerik.com/kendo-ui/service/Northwind.svc/Orders"
-              },
-              schema: {
-                model : {
-                  fields: {
-                    OrderDate: {type: "date"}
-                  }
-                }
-              },
-              pageSize: 20
+    <div id="grid"></div>
+    <script>
+      $(document).ready(function() {
+        $("#grid").kendoGrid({
+          dataSource: {
+            type: "odata",
+            transport: {
+              read: "https://demos.telerik.com/kendo-ui/service/Northwind.svc/Orders"
             },
-            height: 550,
-            toolbar: ["excel"],
-            excel: {
-              allPages: true
-            },
-            excelExport: function (e) {
-              var dataSource = e.sender.dataSource;
-              var gridColumns = e.sender.columns;
-              var sheet = e.workbook.sheets[0];
-              var columnTemplates = [];
-              var dataItem;
-              // Create element to generate templates in.
-              var elem = document.createElement('div');
-
-              // Create a collection of the column templates, together with the current column index
-              for (var i = 0; i < gridColumns.length; i++) {
-                if (gridColumns[i].template) {
-                  columnTemplates.push({ cellIndex: i, template: kendo.template(gridColumns[i].template) });
-                }
-              }
-
-              // Traverse all exported rows.
-              for (var i = 1; i < sheet.rows.length; i++) {
-                var row = sheet.rows[i];
-                // Traverse the column templates and apply them for each row at the stored column position.
-
-                // Get the data item corresponding to the current row.
-                var dataItem = dataSource.at(i - 1);
-                for (var j = 0; j < columnTemplates.length; j++) {
-                  var columnTemplate = columnTemplates[j];
-                  // Generate the template content for the current cell.
-                  elem.innerHTML = columnTemplate.template(dataItem);
-                  if (row.cells[columnTemplate.cellIndex] != undefined)
-                    // Output the text content of the templated cell into the exported cell.
-                    row.cells[columnTemplate.cellIndex].value = elem.textContent || elem.innerText || "";
+            schema: {
+              model : {
+                fields: {
+                  OrderDate: {type: "date"}
                 }
               }
             },
-            pageable: true,
-            columns: [
-              {
-                field:"OrderID",
-                filterable: false
-              },
-              {
-                field: "OrderDate",
-                title: "Order Date",
-                template: "<em>#:kendo.toString(OrderDate, 'd')#</em>"
-              }, {
-                field: "ShipName",
-                title: "Ship Name",
-                template: "#:ShipName.toUpperCase()#"
-              }, {
-                field: "ShipCity",
-                title: "Ship City",
-                template: "<span style='color: green'>#:ShipCity#, #:ShipCountry#</span>"
-              }
-            ]
-          });
+            pageSize: 20
+          },
+          height: 550,
+          toolbar: ["excel"],
+          excel: {
+            allPages: true
+          },
+          excelExport: exportGridWithTemplatesContent,
+          pageable: true,
+          columns: [
+            {
+              field: "Freight",
+              hidden: true
+            },
+            {
+              field:"OrderID",
+              filterable: false
+            },
+            {
+              field: "OrderDate",
+              title: "Order Date",
+              template: "<em>#:kendo.toString(OrderDate, 'd')#</em>"
+            }, {
+              field: "ShipName",
+              title: "Ship Name",
+              template: "#:ShipName.toUpperCase()#"
+            }, {
+              field: "ShipCity",
+              title: "Ship City",
+              template: "<span style='color: green'>#:ShipCity#, #:ShipCountry#</span>"
+            }
+          ],
+          columnMenu: true
         });
-      </script>
-    </div>
+      });
+
+      function exportGridWithTemplatesContent(e){
+        var dataSource = e.sender.dataSource;
+        var gridColumns = e.sender.columns;
+        var sheet = e.workbook.sheets[0];
+        var visibleGridColumns = [];
+        var columnTemplates = [];
+        var dataItem;
+        // Create element to generate templates in.
+        var elem = document.createElement('div');
+
+        // Get a list of visible columns
+        for (var i = 0; i < gridColumns.length; i++) {
+          if (!gridColumns[i].hidden) {
+            visibleGridColumns.push(gridColumns[i]);
+          }
+        }
+
+        // Create a collection of the column templates, together with the current column index
+        for (var i = 0; i < visibleGridColumns.length; i++) {
+          if (visibleGridColumns[i].template) {
+            columnTemplates.push({ cellIndex: i, template: kendo.template(visibleGridColumns[i].template) });
+          }
+        }
+
+        // Traverse all exported rows.
+        for (var i = 1; i < sheet.rows.length; i++) {
+          var row = sheet.rows[i];
+          // Traverse the column templates and apply them for each row at the stored column position.
+
+          // Get the data item corresponding to the current row.
+          var dataItem = dataSource.at(i - 1);
+          for (var j = 0; j < columnTemplates.length; j++) {
+            var columnTemplate = columnTemplates[j];
+            // Generate the template content for the current cell.
+            elem.innerHTML = columnTemplate.template(dataItem);
+            if (row.cells[columnTemplate.cellIndex] != undefined)
+              // Output the text content of the templated cell into the exported cell.
+              row.cells[columnTemplate.cellIndex].value = elem.textContent || elem.innerText || "";
+          }
+        }
+      }
+    </script>
 ```
 
 ## See Also

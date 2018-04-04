@@ -1,8 +1,8 @@
 ---
-title: Persist Child Grids Checkbox Selection
-description: An example on how to persist the checkbox selection of the child Grids in the Kendo UI Grid.
+title: Persist Checkbox Selection in Child Grids
+description: An example on how to persist the checkbox selection in the child Grids of the Kendo UI Grid.
 type: how-to
-page_title: Save Child Grids Selected Rows During Paging | Kendo UI Grid
+page_title: Save Selected Rows During Paging in Child Grids | Kendo UI Grid
 slug: grid-persist-child-grids-checkbox-selection
 tags: grid, checkbox, selection, hierarchy, child, persist
 ticketid: 1150871
@@ -10,6 +10,7 @@ res_type: kb
 ---
 
 ## Environment
+
 <table>
 	<tr>
 		<td>Product Version</td>
@@ -26,8 +27,6 @@ res_type: kb
 How can I persist the selected rows of the child Grids when I change the page of the master Kendo UI Grid?
 
 ## Solution
-
-To persist the selected rows:
 
 1. Handle the [`change`](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid/events/change) event of the child Grids.
 1. In the `change` event handler, use the internal `_selectedIds` property to save the selected IDs in a global array.
