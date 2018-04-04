@@ -284,6 +284,9 @@ navigation:
     "copyright":
         title: "Copyright"
         position: 60
+    "kendo-in-the-cloud":
+        title: "Kendo UI in the Cloud"
+        position: 55
     "*how-to":
         title: "How To"
         position: 200

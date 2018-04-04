@@ -417,7 +417,7 @@ var __meta__ = { // jshint ignore:line
 
             that.effects = effects;
 
-            deferred.then($.proxy(that, "complete"));
+            deferred.done($.proxy(that, "complete"));
 
             element.data("animating", true);
 
@@ -739,7 +739,7 @@ var __meta__ = { // jshint ignore:line
                 children = that.children(),
                 childrenLength = children.length;
 
-            deferred.then($.proxy(that, "_complete"));
+            deferred.done($.proxy(that, "_complete"));
 
             element.data("animating", true);
 

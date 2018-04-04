@@ -39,91 +39,83 @@ To control the generated table, use any of the following options:
 
 ###### Example
 
-```html
-    <script src="https://kendo.cdn.telerik.com/2018.1.221/js/pako_deflate.min.js"></script>  
-    <script src="https://demos.telerik.com/kendo-ui/content/shared/js/products.js"></script>
+```
+<button onclick="saveTabularData()">Export PDF</button>
+<div id="grid"></div>
+<script>
+  function saveTabularData() {
+    kendo.spreadsheet.drawTabularData({
+      dataSource: grid.dataSource,
+      columns: grid.columns,
+      headerBackground: "#567",
+      headerColor: "#fff",
+      evenBackground: "#eee",
+    }).then(function(group){
+      kendo.pdf.saveAs(group, "test.pdf");
+    });
+  }
 
-    <script>
-      kendo.pdf.defineFont({
-        "DejaVu Sans" : "https://kendo.cdn.telerik.com/2018.1.221/styles/fonts/DejaVu/DejaVuSans.ttf"
-      });
-    </script>
-    <button onclick="saveTabularData()" class="k-button"><span class="k-icon k-i-pdf"></span>Export PDF</button>
-    <div id="grid"></div>
-    <script>
-      function saveTabularData() {
-        kendo.spreadsheet.drawTabularData({
-          dataSource: grid.dataSource,
-          columns: grid.columns,
-          headerBackground: "#567",
-          headerColor: "#fff",
-          evenBackground: "#eee"
-        }).then(function(group){
-          kendo.pdf.saveAs(group, "test.pdf");
-        });
-      }
-
-      $(document).ready(function() {
-        window.grid = $("#grid").kendoGrid({
-          dataSource: {
-            pageSize: 20,
-            data: products,
-            autoSync: true,
-            schema: {
-              model: {
-                id: "ProductID",
-                fields: {
-                  CategoryID: { from: "Category.CategoryID" },
-                  CategoryName: { from: "Category.CategoryName" }
-                }
-              }
+  $(document).ready(function() {
+    window.grid = $("#grid").kendoGrid({
+      dataSource: {
+        type: "odata",
+        transport: {
+          read: "https://demos.telerik.com/kendo-ui/service/Northwind.svc/Orders"
+        },
+        schema: {
+          model: {
+            fields: {
+              OrderID: { type: "number" },
+              Freight: { type: "number" },
+              ShipName: { type: "string" },
+              OrderDate: { type: "date" },
+              ShipCity: { type: "string" }
             }
-          },
-          height: 550,
-          filterable: true,
-          sortable: true,
-          pageable: true,
-          columns: [
-            {
-              field:"ProductID",
-              filterable: false
-            },
-            {
-              field: "CategoryID",
-              title: "Category ID"
-            },
-            {
-              field: "CategoryName",
-              title: "Category Name"
-            },
-            {
-              field: "ProductName",
-              title: "Product Name"
-            },
-            {
-              field: "SupplierID",
-              title: "Supplier ID"
-            }, {
-              field: "QuantityPerUnit",
-              title: "Quantity Per Unit"
-            }, {
-              field: "UnitPrice",
-              title: "Unit Price"
-            }, {
-              field: "UnitsInStock",
-              title: "Units In Stock"
-            }, {
-              field: "UnitsOnOrder",
-              title: "Units On Order"
-            }, {
-              field: "ReorderLevel",
-              title: "Reorder Level"
-            }, {
-              field: "Discontinued",
-              title: "Discontinued"
-            }
-          ]
-        }).getKendoGrid();
-      });
-    </script>
+          }
+        }
+      },
+      height: 550,
+      filterable: true,
+      sortable: true,
+      pageable: true,
+      columns: [
+        {
+          field:"OrderID",
+          filterable: false
+        },
+        {
+          field: "CustomerID",
+          title: "Customer ID"
+        },
+        {
+          field: "Freight",
+          title: "Freight"
+        },
+        {
+          field: "OrderDate",
+          title: "Order Date",
+          format: "{0:MM/dd/yyyy}"
+        }, {
+          field: "ShipName",
+          title: "Ship Name"
+        }, {
+          field: "ShipRegion",
+          title: "Ship Region"
+        }, {
+          field: "ShipCity",
+          title: "Ship City"
+        }, {
+          field: "ShipAddress",
+          title: "Ship Address"
+        }, {
+          field: "ShipPostalCode",
+         	title: "PO Code"
+        }, {
+          field: "ShipCountry",
+          title: "Ship Country"
+        }
+      ]
+    }).getKendoGrid();
+  });
+</script>
 ```

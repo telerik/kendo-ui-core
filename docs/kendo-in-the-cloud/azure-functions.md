@@ -1,6 +1,6 @@
 ---
 title: Consuming Data from Azure Functions
-page_title: Consuming Data from Azure Functions | Kendo UI Cloud Storage
+page_title: Consuming Data from Azure Functions | Kendo UI in the Cloud
 description: "Learn how to implement Azure Functions to execute remote CRUD operations for the Kendo UI Grid."
 slug: azure_functions
 position: 1
@@ -25,14 +25,33 @@ Basic knowledge on how [Azure Portal]( https://docs.microsoft.com/en-us/azure/az
 Apply the following steps to individually set each function (read, create, destroy, and update):
 
 1. On the left-side panel and under the application name, click the **+** (plus) symbol which, when the `Functions` section is hovered, appears to the right.
+
+	**Figure 1: Functions application overview**
+
+	![Functions application overview](/cloud-storage/images/create-new-function.png)
+
 1. If the **Get started quickly with a premade function** screen appears, click on the **Custom function** link at the bottom.
+
+	**Figure 2: Get started quickly with a premade function**
+
+	![Get started quickly with a premade function](/cloud-storage/images/new-function-quick-start.png)
+
 1. Click the **HTTP trigger** option. On the panel that appears to the right, select the language and fill in a meaningful name for each function. Later on, the tutorial will demonstrate how to implement the Azure Functions in C#&mdash;therefore, select that language&mdash;and will use `Read`, `Create`, `Update`, and `Destroy` as names for the four functions.
+
+	**Figure 3: New HTTP trigger function configuration**
+
+	![New HTTP trigger function configuration](/cloud-storage/images/new-function-configuration.png)
 
 ## Integrating Input for the Read Function
 
 1. Expand the `Read` function and, under the function name on the left navigation panel, click the **Integrate** section.
 1. In the **Inputs** section, click the **New Input** button.
 1. Select **Azure Table Storage** as the input storage that will be integrated and click **Select**.
+
+	**Figure 4: Integrate new input for the function**
+
+	![Integrate new input for the function](/cloud-storage/images/new-input-click.png)
+
 1. Type **Product** for the partition key of the table.
 1. Chose the maximum number of records to read. In this case, the default value of 50 will be preserved.
 1. In **Storage account connection** to the right of the field, click the **new** link.
@@ -40,14 +59,28 @@ Apply the following steps to individually set each function (read, create, destr
 1. Change **Table name** to **Products**.
 1. Click **Save** to save the newly integrated input table.
 
+	**Figure 5: New input configuration**
+
+	![New input configuration](/cloud-storage/images/new-input-configuration.png)
+
 ## Integrating Output for the Create, Destroy, and Update Functions
 
 Configure an output integration for each of the other three functions (create, destroy, and update):
 
 1. Click **New Output**.
-1. Select **Azure Table Storage**.
+1. Select **Azure Table Storage** and click **Select**.
+
+	**Figure 6: Integrate new output for the function**
+
+	![Integrate new output for the function](/cloud-storage/images/new-output-click.png)
+
 1. Select **kendogridfunctions_STORAGE** for the storage account connection.
 1. Change **Table name** to **Products**.
+1. Click **Save** to save the newly integrated output table.
+
+	**Figure 7: New output configuration**
+
+	![New output configuration](/cloud-storage/images/new-output-configuration.png)
 
 ## Implementing the Model
 
@@ -55,7 +88,17 @@ The actual implementation requires you to first create a definition for the `Pro
 
 1. Select the `Read` function.
 1. On the right side, click **View files**.
+
+	**Figure 8: Open the function files**
+
+	![Open the function files](/cloud-storage/images/open-function-files.png)
+
 1. Click the **Add** button and provide the `product.csx` name to the new file.
+
+	**Figure 9: Create new function file**
+
+	![Create new function file](/cloud-storage/images/add-product-file.png)
+
 1. Place the following class definition in the file:
 
 	```C#
@@ -125,67 +168,67 @@ The actual implementation requires you to first create a definition for the `Pro
 
 Now you can proceed with the implementation of the other three functions. Make all three of them load the `Product` class and refer the `Microsoft.WindowsAzure.Storage` and `Newtonsoft.Json` assemblies. Add the respective `using` configurations.
 
-	```C#
-	#r "Newtonsoft.Json"
-	#r "Microsoft.WindowsAzure.Storage"
-	#load "..\Read\product.csx"
+```C#
+#r "Newtonsoft.Json"
+#r "Microsoft.WindowsAzure.Storage"
+#load "..\Read\product.csx"
 
-	using System.Net;
-	using Microsoft.WindowsAzure.Storage.Table;
-	using Newtonsoft.Json;
-	```
+using System.Net;
+using Microsoft.WindowsAzure.Storage.Table;
+using Newtonsoft.Json;
+```
 
 As a result, the `Run` methods for each function differ.
 
 The following example demonstrates the `Run` method for the `Create` function.
 
-	```C#
-	public static async Task<HttpResponseMessage> Run(HttpRequestMessage req, CloudTable outputTable, TraceWriter log)
-	{
-		dynamic body = await req.Content.ReadAsStringAsync();
-		Product data = JsonConvert.DeserializeObject<Product>(body as string);
-		Product entity = data.ToEntity();
-		string newKey = Guid.NewGuid().ToString();
+```C#
+public static async Task<HttpResponseMessage> Run(HttpRequestMessage req, CloudTable outputTable, TraceWriter log)
+{
+	dynamic body = await req.Content.ReadAsStringAsync();
+	Product data = JsonConvert.DeserializeObject<Product>(body as string);
+	Product entity = data.ToEntity();
+	string newKey = Guid.NewGuid().ToString();
 
-		entity.RowKey = newKey;
-		var operation = TableOperation.Insert(entity);
-		await outputTable.ExecuteAsync(operation);
+	entity.RowKey = newKey;
+	var operation = TableOperation.Insert(entity);
+	await outputTable.ExecuteAsync(operation);
 
-		return req.CreateResponse(HttpStatusCode.OK, entity, "application/json");
-	}
-	```
+	return req.CreateResponse(HttpStatusCode.OK, entity, "application/json");
+}
+```
 
 The following example demonstrates the `Run` method for the `Destroy` function.
 
-	```C#
-	public static async Task<HttpResponseMessage> Run(HttpRequestMessage req, CloudTable outputTable, TraceWriter log)
-	{
-		dynamic body = await req.Content.ReadAsStringAsync();
-		Product data = JsonConvert.DeserializeObject<Product>(body as string);
-		Product entity = data.ToEntity();
+```C#
+public static async Task<HttpResponseMessage> Run(HttpRequestMessage req, CloudTable outputTable, TraceWriter log)
+{
+	dynamic body = await req.Content.ReadAsStringAsync();
+	Product data = JsonConvert.DeserializeObject<Product>(body as string);
+	Product entity = data.ToEntity();
 
-		var operation = TableOperation.Delete(entity);
-		await outputTable.ExecuteAsync(operation);
+	var operation = TableOperation.Delete(entity);
+	await outputTable.ExecuteAsync(operation);
 
-		return req.CreateResponse(HttpStatusCode.OK, entity, "application/json");
-	}
+	return req.CreateResponse(HttpStatusCode.OK, entity, "application/json");
+}
 	```
 
 The following example demonstrates the `Run` method for the `Update` function.
 
-	```C#
-	public static async Task<HttpResponseMessage> Run(HttpRequestMessage req, CloudTable outputTable, TraceWriter log)
-	{
-		dynamic body = await req.Content.ReadAsStringAsync();
-		Product data = JsonConvert.DeserializeObject<Product>(body as string);
-		Product entity = data.ToEntity();
+```C#
+public static async Task<HttpResponseMessage> Run(HttpRequestMessage req, CloudTable outputTable, TraceWriter log)
+{
+	dynamic body = await req.Content.ReadAsStringAsync();
+	Product data = JsonConvert.DeserializeObject<Product>(body as string);
+	Product entity = data.ToEntity();
 
-		var operation = TableOperation.Replace(entity);
-		await outputTable.ExecuteAsync(operation);
+	var operation = TableOperation.Replace(entity);
+	await outputTable.ExecuteAsync(operation);
 
-		return req.CreateResponse(HttpStatusCode.OK, entity, "application/json");
-	}
-	```
+	return req.CreateResponse(HttpStatusCode.OK, entity, "application/json");
+}
+```
 
 ## Configuring the Application
 
@@ -193,7 +236,17 @@ As the implementation is already in place, now you need to add specific configur
 
 1. Click the application name and select **Platform features**.
 1. Under the **API** section, click **CORS**.
+
+	**Figure 10: Application platform features**
+
+	![Application platform features](/cloud-storage/images/platform-features.png)
+
 1. Add the domain origin of the client-side application that will consume the functions data and click **Save**. In this case, the client-side application will be located in the kendo UI Dojo. Therefore, the `https://runner.telerik.io` origin is available.
+
+	**Figure 11: CORS configuration**
+
+	![CORS configuration](/cloud-storage/images/cors-save.png)
+
 1. Go to the `Read` function and open the `function.json` file.
 1. In the **bindings / methods** section, remove **post** as an option.
 1. Open the same file for the other three functions but remove the `get` method.
