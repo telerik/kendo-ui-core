@@ -319,4 +319,4 @@ Get the unique URL for each of the functions by clicking the **Get Function URL*
 
 ## See Also
 
-* [Using the Kendo UI Grid with CosmosDB](...)
+* [Using the Kendo UI Grid with CosmosDB]()
