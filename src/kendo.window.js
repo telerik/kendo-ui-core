@@ -503,6 +503,7 @@
                     newWidth, newHeight, w, h;
 
                 if (keyCode == keys.ESC && that._closable()) {
+                    e.stopPropagation();
                     that._close(false);
                 }
 
