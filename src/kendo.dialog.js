@@ -24,6 +24,7 @@
             KICONCLOSE = ".k-dialog-close",
             KCONTENTCLASS = "k-content k-window-content k-dialog-content",
             KCONTENT = ".k-content",
+            KSCROLL = "k-scroll",
             KTITLELESS = "k-dialog-titleless",
             KDIALOGTITLE = ".k-dialog-title",
             KDIALOGTITLEBAR = KDIALOGTITLE + "bar",
@@ -216,10 +217,22 @@
                     elementHeight = 0;
                 }
 
-                that.element.css({
+                element.css({
                     height: ceil(elementHeight) + "px"
                 });
 
+                this._applyScrollClassName(element);
+
+            },
+
+            _applyScrollClassName: function(element) {
+                    var hasScroll = element.get(0).scrollHeight > element.outerHeight();
+
+                    if (hasScroll){
+                        element.addClass(KSCROLL);
+                    } else {
+                        element.removeClass(KSCROLL);
+                    }
             },
 
             _uiHeight: function() {

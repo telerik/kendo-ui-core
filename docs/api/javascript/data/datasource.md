@@ -1527,6 +1527,41 @@ Local data sources are bound to a JavaScript array via the [`data`](/api/javascr
     });
     </script>
 
+### transport.cache `Boolean` *(default: false)*
+
+Specifies if the transport caches the result from read requests. The query parameters are used as a cache key and if the key is present in the cache, a new request to the server is not executed. The cache is kept in memory and thus cleared on page refresh.
+
+#### Example - specify the remote service configuration
+
+    <script>
+    var dataSource = new kendo.data.DataSource({
+      type: "odata",
+      transport: {
+        read: "https://demos.telerik.com/kendo-ui/service/Northwind.svc/Orders",
+        cache: true
+      },
+      schema: {
+        model: {
+          fields: {
+            OrderID: { type: "number" },
+            Freight: { type: "number" },
+            ShipName: { type: "string" },
+            OrderDate: { type: "date" },
+            ShipCity: { type: "string" }
+          }
+        }
+      },
+      pageSize: 20,
+      serverPaging: true,
+      serverFiltering: true,
+      serverSorting: true
+    });
+    dataSource.fetch(function() {
+      dataSource.page(2);
+      dataSource.page(1); //a new request is not executed
+    });
+    </script>
+
 ### transport.create `Object|String|Function`
 
 The configuration used when the data source saves newly created data items. Those are items added to the data source via the [`add`](/api/javascript/data/datasource/methods/add) or [`insert`](/api/javascript/data/datasource/methods/insert) methods.

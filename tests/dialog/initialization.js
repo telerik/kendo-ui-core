@@ -198,6 +198,18 @@
         equal(dialog.element.prop("style").getPropertyValue("height"), "0px");
     });
 
+    test("apply scroll class name to dialog content", function(){
+        var dialog = createDialog({ height: "100px", content: "<h2>Content</h2>" });
+
+        ok(dialog.element.hasClass("k-scroll"));
+    });
+
+    test("do not apply scroll class name to dialog content", function(){
+        var dialog = createDialog({ height: "100px"});
+
+        ok(!dialog.element.hasClass("k-scroll"));
+    });
+
     test("construction of modal dialog shows overlay", function() {
         createDialog({
             modal: true

@@ -28,19 +28,19 @@ Apply the following steps to individually set each function (read, create, destr
 
 	**Figure 1: Functions application overview**
 
-	![Functions application overview](/cloud-storage/images/create-new-function.png)
+	![Functions application overview](/kendo-in-the-cloud/images/create-new-function.png)
 
 1. If the **Get started quickly with a premade function** screen appears, click on the **Custom function** link at the bottom.
 
 	**Figure 2: Get started quickly with a premade function**
 
-	![Get started quickly with a premade function](/cloud-storage/images/new-function-quick-start.png)
+	![Get started quickly with a premade function](/kendo-in-the-cloud/images/new-function-quick-start.png)
 
 1. Click the **HTTP trigger** option. On the panel that appears to the right, select the language and fill in a meaningful name for each function. Later on, the tutorial will demonstrate how to implement the Azure Functions in C#&mdash;therefore, select that language&mdash;and will use `Read`, `Create`, `Update`, and `Destroy` as names for the four functions.
 
 	**Figure 3: New HTTP trigger function configuration**
 
-	![New HTTP trigger function configuration](/cloud-storage/images/new-function-configuration.png)
+	![New HTTP trigger function configuration](/kendo-in-the-cloud/images/new-function-configuration.png)
 
 ## Integrating Input for the Read Function
 
@@ -50,7 +50,7 @@ Apply the following steps to individually set each function (read, create, destr
 
 	**Figure 4: Integrate new input for the function**
 
-	![Integrate new input for the function](/cloud-storage/images/new-input-click.png)
+	![Integrate new input for the function](/kendo-in-the-cloud/images/new-input-click.png)
 
 1. Type **Product** for the partition key of the table.
 1. Chose the maximum number of records to read. In this case, the default value of 50 will be preserved.
@@ -61,7 +61,7 @@ Apply the following steps to individually set each function (read, create, destr
 
 	**Figure 5: New input configuration**
 
-	![New input configuration](/cloud-storage/images/new-input-configuration.png)
+	![New input configuration](/kendo-in-the-cloud/images/new-input-configuration.png)
 
 ## Integrating Output for the Create, Destroy, and Update Functions
 
@@ -72,7 +72,7 @@ Configure an output integration for each of the other three functions (create, d
 
 	**Figure 6: Integrate new output for the function**
 
-	![Integrate new output for the function](/cloud-storage/images/new-output-click.png)
+	![Integrate new output for the function](/kendo-in-the-cloud/images/new-output-click.png)
 
 1. Select **kendogridfunctions_STORAGE** for the storage account connection.
 1. Change **Table name** to **Products**.
@@ -80,7 +80,7 @@ Configure an output integration for each of the other three functions (create, d
 
 	**Figure 7: New output configuration**
 
-	![New output configuration](/cloud-storage/images/new-output-configuration.png)
+	![New output configuration](/kendo-in-the-cloud/images/new-output-configuration.png)
 
 ## Implementing the Model
 
@@ -91,13 +91,13 @@ The actual implementation requires you to first create a definition for the `Pro
 
 	**Figure 8: Open the function files**
 
-	![Open the function files](/cloud-storage/images/open-function-files.png)
+	![Open the function files](/kendo-in-the-cloud/images/open-function-files.png)
 
 1. Click the **Add** button and provide the `product.csx` name to the new file.
 
 	**Figure 9: Create new function file**
 
-	![Create new function file](/cloud-storage/images/add-product-file.png)
+	![Create new function file](/kendo-in-the-cloud/images/add-product-file.png)
 
 1. Place the following class definition in the file:
 
@@ -239,13 +239,13 @@ As the implementation is already in place, now you need to add specific configur
 
 	**Figure 10: Application platform features**
 
-	![Application platform features](/cloud-storage/images/platform-features.png)
+	![Application platform features](/kendo-in-the-cloud/images/platform-features.png)
 
 1. Add the domain origin of the client-side application that will consume the functions data and click **Save**. In this case, the client-side application will be located in the kendo UI Dojo. Therefore, the `https://runner.telerik.io` origin is available.
 
 	**Figure 11: CORS configuration**
 
-	![CORS configuration](/cloud-storage/images/cors-save.png)
+	![CORS configuration](/kendo-in-the-cloud/images/cors-save.png)
 
 1. Go to the `Read` function and open the `function.json` file.
 1. In the **bindings / methods** section, remove **post** as an option.

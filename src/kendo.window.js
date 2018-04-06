@@ -1465,7 +1465,7 @@
                 "</a>"
             ),
             titlebar: template(
-                "<div class='k-window-titlebar k-header'>&nbsp;" +
+                "<div class='k-window-titlebar k-header'>" +
                 "<span class='k-window-title'>#: title #</span>" +
                 "<div class='k-window-actions' />" +
                 "</div>"
