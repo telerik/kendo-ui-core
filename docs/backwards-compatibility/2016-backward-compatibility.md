@@ -15,6 +15,10 @@ position: 2
 
 #### Breaking Changes
 
+**AutoComplete**
+
+In AngularJS, Using the separator option will bind the primitive string value of the input. In case you need to bind multiple data items, you can consider the [MultiSelect widget]({%slug overview_kendoui_multiselect_widget%}).
+
 **Icons**
 
 Icon rendering across all widgets now have unified rendering, using the `k-i-` prefix. Code depending on icon classes might need to change.
