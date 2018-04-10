@@ -78,14 +78,7 @@ To see how the following example works, filter the date column in a range. As a 
             var filterCell = args.element.parents(".k-filtercell");
 
             filterCell.empty();
-            filterCell.html(`
-                            <span style="display:flex; justify-content:center;">
-                   		        <span>From:</span>
-								<input  class='start-date'/>
-                    			<span>To:</span>
-								<input  class='end-date'/>
-							</span>
-                            `);
+            filterCell.html('<span style="display:flex; justify-content:center;"><span>From:</span><input  class="start-date"/><span>To:</span><input  class="end-date"/></span>');
 
             $(".start-date", filterCell).kendoDatePicker({
                 change: function (e) {

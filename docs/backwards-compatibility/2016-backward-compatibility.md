@@ -17,7 +17,7 @@ position: 2
 
 **AutoComplete**
 
-In AngularJS, Using the separator option will bind the primitive string value of the input. In case you need to bind multiple data items, you can consider the [MultiSelect widget]({%slug overview_kendoui_multiselect_widget%}).
+In AngularJS, the usage of the `separator` option binds the primitive string value of the input. To bind multiple data items, consider the [MultiSelect]({%slug overview_kendoui_multiselect_widget%}) widget.
 
 **Icons**
 

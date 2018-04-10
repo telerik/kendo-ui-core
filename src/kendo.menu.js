@@ -30,7 +30,8 @@ var __meta__ = { // jshint ignore:line
         IMG = "img",
         OPEN = "open",
         MENU = "k-menu",
-        LINK = "k-link",
+        LINK = "k-link k-menu-link",
+        LINK_SELECTOR = ".k-link",
         LAST = "k-last",
         CLOSE = "close",
         TIMER = "timer",
@@ -301,7 +302,7 @@ var __meta__ = { // jshint ignore:line
             item.attr("role", "menuitem");
         }
 
-        if (!item.children("." + LINK).length) {
+        if (!item.children(LINK_SELECTOR).length) {
             item
                 .contents()      // exclude groups, real links, templates and empty text nodes
                 .filter(function() { return (!this.nodeName.match(excludedNodesRegExp) && !(this.nodeType == 3 && !$.trim(this.nodeValue))); })
@@ -1567,7 +1568,7 @@ var __meta__ = { // jshint ignore:line
                 targetElement = target[0],
                 nodeName = target[0] ? target[0].nodeName.toUpperCase() : "",
                 formNode = (nodeName == "INPUT" || nodeName == "SELECT" || nodeName == "BUTTON" || nodeName == "LABEL"),
-                link = target.closest("." + LINK),
+                link = target.closest(LINK_SELECTOR),
                 element = target.closest(allItemsSelector),
                 itemElement = element[0],
                 href = link.attr("href"), childGroup, childGroupVisible,

@@ -10,9 +10,9 @@ position: 1
 
 This article provides a step-by-step tutorial on how to configure [Azure Functions](https://docs.microsoft.com/en-us/azure/azure-functions/) to serve data for a [Kendo UI Grid]({% slug overview_kendoui_grid_widget %}).
 
-## Prerequisits
+## Prerequisites
 
-Basic knowledge on how [Azure Portal]( https://docs.microsoft.com/en-us/azure/azure-portal/) is organized.
+Basic knowledge on the organization of [Azure Portal]( https://docs.microsoft.com/en-us/azure/azure-portal/).
 
 ## Creating Azure Functions Applications
 
@@ -24,21 +24,21 @@ Basic knowledge on how [Azure Portal]( https://docs.microsoft.com/en-us/azure/az
 
 Apply the following steps to individually set each function (read, create, destroy, and update):
 
-1. On the left-side panel and under the application name, click the **+** (plus) symbol which, when the `Functions` section is hovered, appears to the right.
+1. On the left-side panel and under the application name, click the **+** (plus) symbol which, when the **Functions** section is hovered, appears to the right.
 
-	**Figure 1: Functions application overview**
+	**Figure 1: Overview of the application functions**
 
 	![Functions application overview](/kendo-in-the-cloud/images/create-new-function.png)
 
-1. If the **Get started quickly with a premade function** screen appears, click on the **Custom function** link at the bottom.
+1. If the **Get started quickly with a premade function** screen appears, click the **Custom function** link at the bottom.
 
-	**Figure 2: Get started quickly with a premade function**
+	**Figure 2: The Get started quickly with a premade function window**
 
 	![Get started quickly with a premade function](/kendo-in-the-cloud/images/new-function-quick-start.png)
 
 1. Click the **HTTP trigger** option. On the panel that appears to the right, select the language and fill in a meaningful name for each function. Later on, the tutorial will demonstrate how to implement the Azure Functions in C#&mdash;therefore, select that language&mdash;and will use `Read`, `Create`, `Update`, and `Destroy` as names for the four functions.
 
-	**Figure 3: New HTTP trigger function configuration**
+	**Figure 3: Configuring a new HTTP trigger function**
 
 	![New HTTP trigger function configuration](/kendo-in-the-cloud/images/new-function-configuration.png)
 
@@ -48,7 +48,7 @@ Apply the following steps to individually set each function (read, create, destr
 1. In the **Inputs** section, click the **New Input** button.
 1. Select **Azure Table Storage** as the input storage that will be integrated and click **Select**.
 
-	**Figure 4: Integrate new input for the function**
+	**Figure 4: Integrating the new input for the function**
 
 	![Integrate new input for the function](/kendo-in-the-cloud/images/new-input-click.png)
 
@@ -59,7 +59,7 @@ Apply the following steps to individually set each function (read, create, destr
 1. Change **Table name** to **Products**.
 1. Click **Save** to save the newly integrated input table.
 
-	**Figure 5: New input configuration**
+	**Figure 5: Configuring the new input**
 
 	![New input configuration](/kendo-in-the-cloud/images/new-input-configuration.png)
 
@@ -70,7 +70,7 @@ Configure an output integration for each of the other three functions (create, d
 1. Click **New Output**.
 1. Select **Azure Table Storage** and click **Select**.
 
-	**Figure 6: Integrate new output for the function**
+	**Figure 6: Integrating the new output for the function**
 
 	![Integrate new output for the function](/kendo-in-the-cloud/images/new-output-click.png)
 
@@ -78,7 +78,7 @@ Configure an output integration for each of the other three functions (create, d
 1. Change **Table name** to **Products**.
 1. Click **Save** to save the newly integrated output table.
 
-	**Figure 7: New output configuration**
+	**Figure 7: Configuring the new output**
 
 	![New output configuration](/kendo-in-the-cloud/images/new-output-configuration.png)
 
@@ -89,13 +89,13 @@ The actual implementation requires you to first create a definition for the `Pro
 1. Select the `Read` function.
 1. On the right side, click **View files**.
 
-	**Figure 8: Open the function files**
+	**Figure 8: Opening the function files**
 
 	![Open the function files](/kendo-in-the-cloud/images/open-function-files.png)
 
 1. Click the **Add** button and provide the `product.csx` name to the new file.
 
-	**Figure 9: Create new function file**
+	**Figure 9: Creating a new function file**
 
 	![Create new function file](/kendo-in-the-cloud/images/add-product-file.png)
 
@@ -237,13 +237,13 @@ As the implementation is already in place, now you need to add specific configur
 1. Click the application name and select **Platform features**.
 1. Under the **API** section, click **CORS**.
 
-	**Figure 10: Application platform features**
+	**Figure 10: The platform features of the application**
 
 	![Application platform features](/kendo-in-the-cloud/images/platform-features.png)
 
 1. Add the domain origin of the client-side application that will consume the functions data and click **Save**. In this case, the client-side application will be located in the kendo UI Dojo. Therefore, the `https://runner.telerik.io` origin is available.
 
-	**Figure 11: CORS configuration**
+	**Figure 11: Configuration of the CORS options**
 
 	![CORS configuration](/kendo-in-the-cloud/images/cors-save.png)
 
