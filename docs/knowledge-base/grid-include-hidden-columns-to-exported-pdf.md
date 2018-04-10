@@ -1,8 +1,8 @@
 ---
-title: Include the Hidden Columns to the Exported Pdf File
-description: An example on how to include the hidden columns to the exported Pdf file in a Kendo UI Grid.
+title: Include the Hidden Columns in the Exported PDF File
+description: An example on how to include the hidden columns in the exported PDF file in a Kendo UI Grid.
 type: how-to
-page_title: Include the Hidden Columns to the Exported Pdf File | Kendo UI Grid
+page_title: Export Hidden Columns in PDF | Kendo UI Grid
 slug: grid-include-hidden-columns-to-exported-pdf
 tags: grid, export, pdf, iclude, hidden, column, columns, exported, file, add, insert
 res_type: kb
@@ -24,12 +24,12 @@ component: grid
 
 ## Description
 
-How can I include the hidden columns to the exported Pdf file in a Kendo UI Grid?
+How can I include the hidden columns in the exported PDF file of the Grid?
 
 ## Solution
 
-A possible solution is to show the hidden columns using the [showColumn method](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid/methods/showcolumn) within the [pdfExport event](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid/events/pdfexport) handler and then when the export is done hide the columns that should not be visible via the [hideColumn method](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid/methods/hidecolumn).
-
+1. Show the hidden columns by using the [`showColumn`](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid/methods/showcolumn) method within the [`pdfExport`](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid/events/pdfexport) event handler.
+1. When the PDF export is done, hide the columns that are not intended to be visible by using the [`hideColumn`](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid/methods/hidecolumn) method.
 
 ```html
       <div id="example">
@@ -105,7 +105,7 @@ A possible solution is to show the hidden columns using the [showColumn method](
                 exportFlag = false;
               });
 
-            } 
+            }
           });
         });
       </script>
