@@ -132,7 +132,8 @@
     background-image: @texture;
 }
 
-.composite-background(@gradient) when not (@gradient = none) {
+
+.composite-background(@gradient) when not (@gradient = none) and not (@gradient = false) {
     background-image: @fallback-texture;
     background-image: @texture, ~"linear-gradient(to bottom, @{gradient})";
 }
