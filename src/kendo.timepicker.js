@@ -182,6 +182,7 @@ var __meta__ = { // jshint ignore:line
                 max = options.max,
                 msMin = getMilliseconds(min),
                 msMax = getMilliseconds(max),
+                msLastTime = getMilliseconds(lastTimeOption(options.interval)),
                 msInterval = options.interval * MS_PER_MINUTE,
                 toString = kendo.toString,
                 template = that.template,
@@ -197,8 +198,7 @@ var __meta__ = { // jshint ignore:line
                 length = MS_PER_DAY / msInterval;
             }
 
-
-            if (msMin != msMax) {
+            if (msMin != msMax || msLastTime === msMax) {
                 if (msMin > msMax) {
                     msMax += MS_PER_DAY;
                 }
@@ -504,6 +504,12 @@ var __meta__ = { // jshint ignore:line
 
     function getMilliseconds(date) {
         return date.getHours() * 60 * MS_PER_MINUTE + date.getMinutes() * MS_PER_MINUTE + date.getSeconds() * 1000 + date.getMilliseconds();
+    }
+
+    function lastTimeOption(interval) {
+        var date = new Date(2100, 0, 1);
+        date.setMinutes(-interval);
+        return date;
     }
 
     function isInRange(value, min, max) {

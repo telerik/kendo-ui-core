@@ -326,140 +326,6 @@ Custom commands are supported by specifying the [click](columns.command.click) o
     });
     </script>
 
-### columns.command.visible `Function`
-
-The JavaScript function executed on initialization of the row which will determine whether the command button will be visible. The function receives a the data item object for the row as an argument.
-
-#### Example - set the command name
-
-    <div id="grid"></div>
-    <script>
-    $("#grid").kendoGrid({
-      columns: [
-        { field: "name" },
-        { command: [{ name: "edit", visible: function(dataItem) { return dataItem.name==="Jane" } }] }
-      ],
-      editable: "popup",
-      dataSource: [ { name: "Jane" }, { name: "Bill" } ]
-    });
-    </script>
-
-### columns.command.name `String`
-
-The name of the command. The built-in commands are "edit" and "destroy". Can be set to a custom value.
-
-#### Example - set the command name
-
-    <div id="grid"></div>
-    <script>
-    $("#grid").kendoGrid({
-      columns: [
-        { field: "name" },
-        { command: [{ name: "edit" }] }
-      ],
-      editable: "popup",
-      dataSource: [ { name: "Jane Doe" } ]
-    });
-    </script>
-
-### columns.command.text `String|Object`
-
-The text displayed by the command button and the "cancel", "edit" and "update" texts of the edit command. If not set the [name](columns.command.name) option is used as the button text.
-
-#### Example - customize the text of the command
-
-    <div id="grid"></div>
-    <script>
-    $("#grid").kendoGrid({
-      columns: [
-        { field: "name" },
-        { command: [{ name: "destroy", text: "Remove" }] }
-      ],
-      editable: true,
-      dataSource: [ { name: "Jane Doe" } ]
-    });
-    </script>
-
-#### Example - customize the "edit", "cancel" and "update" text of the edit command
-
-    <div id="grid"></div>
-    <script>
-    $("#grid").kendoGrid({
-      columns: [
-        { field: "name" },
-        { field: "age" },
-        { command: [{ name: "edit",
-                      text: { edit: "Custom edit", cancel: "Custom cancel", update: "Custom update" } }] }
-      ],
-      dataSource: {
-        data: [
-          { id: 1, name: "Jane Doe", age: 30 },
-          { id: 2, name: "John Doe", age: 33 }
-        ],
-        schema: {
-          model: { id: "id" }
-        }
-      },
-      editable: {
-        mode: "inline"
-      }
-    });
-    </script>
-
-### columns.command.text.edit `String`
-
-The "edit" text of the edit command.
-
-#### Example - customize the edit text of the edit command
-
-    <div id="grid"></div>
-    <script>
-    $("#grid").kendoGrid({
-      columns: [
-        { field: "name" },
-        { command: [{ name: "edit", text: { edit: "Custom edit"} }] }
-      ],
-      editable: "inline",
-      dataSource: [ { name: "Jane Doe" } ]
-    });
-    </script>
-
-### columns.command.text.cancel `String`
-
-The "cancel" text of the edit command.
-
-#### Example - customize the cancel text of the edit command
-
-    <div id="grid"></div>
-    <script>
-    $("#grid").kendoGrid({
-      columns: [
-        { field: "name" },
-        { command: [{ name: "edit", text: { cancel: "Custom cancel"} }] }
-      ],
-      editable: "inline",
-      dataSource: [ { name: "Jane Doe" } ]
-    });
-    </script>
-
-### columns.command.text.update `String`
-
-The "update" text of the edit command.
-
-#### Example - customize the update text of the edit command
-
-    <div id="grid"></div>
-    <script>
-    $("#grid").kendoGrid({
-      columns: [
-        { field: "name" },
-        { command: [{ name: "edit", text: { update: "Custom Update"} }] }
-      ],
-      editable: "inline",
-      dataSource: [ { name: "Jane Doe" } ]
-    });
-    </script>
-
 ### columns.command.className `String`
 
 The CSS class applied to the command button.
@@ -563,6 +429,30 @@ When it is defined as an object it allows to customize the web font icon for the
     });
     </script>
 
+### columns.command.iconClass.cancel `String`
+
+The class for the [web font icon](http://docs.telerik.com/kendo-ui/styles-and-layout/icons-web) of the cancel command button.
+
+#### Example - provide an custom iconClass for the cancel command button
+
+    <div id="grid"></div>
+    <script>
+    $("#grid").kendoGrid({
+      columns: [
+        { field: "name" },
+        { command: [{
+            name: "edit",
+            iconClass: {
+                cancel: "k-icon k-i-copy"
+              }
+            }]
+       }
+      ],
+      dataSource: [ { name: "Jane Doe" } ],
+      editable: "inline"
+    });
+    </script>
+
 ### columns.command.iconClass.edit `String`
 
 The class for the [web font icon](http://docs.telerik.com/kendo-ui/styles-and-layout/icons-web) of the edit command button.
@@ -611,27 +501,166 @@ The class for the [web font icon](http://docs.telerik.com/kendo-ui/styles-and-la
     });
     </script>
 
-### columns.command.iconClass.cancel `String`
+### columns.command.name `String`
 
-The class for the [web font icon](http://docs.telerik.com/kendo-ui/styles-and-layout/icons-web) of the cancel command button.
+The name of the command. The built-in commands are "edit" and "destroy". Can be set to a custom value.
 
-#### Example - provide an custom iconClass for the cancel command button
+#### Example - set the command name
 
     <div id="grid"></div>
     <script>
     $("#grid").kendoGrid({
       columns: [
         { field: "name" },
-        { command: [{
-            name: "edit",
-            iconClass: {
-                cancel: "k-icon k-i-copy"
-              }
-            }]
-       }
+        { command: [{ name: "edit" }] }
       ],
-      dataSource: [ { name: "Jane Doe" } ],
-      editable: "inline"
+      editable: "popup",
+      dataSource: [ { name: "Jane Doe" } ]
+    });
+    </script>
+
+### columns.command.template `String`
+
+The template of the command column. 
+
+> Add the `k-grid-[command.name]` to any element in the template which requires the [`click`](#columns.command.click) handler to be called.
+
+#### Example - customize the template of the command column
+
+    <div id="grid"></div>
+    <script>
+      $("#grid").kendoGrid({
+        columns: [
+          { field: "name" },
+          { command: [
+            {
+              // for click to work when there is template, add class "k-grid-[command.name]" to some element, otherwise the click handler will not be triggered
+              name: "settings",
+              template: "Some text in the command column <a class='k-button k-grid-settings'><span class='k-icon k-i-settings'></span>Settings</a>",
+              click(e){
+                kendo.alert("Settings clicked!")
+              }
+            }  
+          ]
+          }
+        ],
+        dataSource: [{ name: "Jane Doe" }]
+      });
+    </script>
+
+### columns.command.text `String|Object`
+
+The text displayed by the command button and the "cancel", "edit" and "update" texts of the edit command. If not set the [name](columns.command.name) option is used as the button text.
+
+#### Example - customize the text of the command
+
+    <div id="grid"></div>
+    <script>
+    $("#grid").kendoGrid({
+      columns: [
+        { field: "name" },
+        { command: [{ name: "destroy", text: "Remove" }] }
+      ],
+      editable: true,
+      dataSource: [ { name: "Jane Doe" } ]
+    });
+    </script>
+
+#### Example - customize the "edit", "cancel" and "update" text of the edit command
+
+    <div id="grid"></div>
+    <script>
+    $("#grid").kendoGrid({
+      columns: [
+        { field: "name" },
+        { field: "age" },
+        { command: [{ name: "edit",
+                      text: { edit: "Custom edit", cancel: "Custom cancel", update: "Custom update" } }] }
+      ],
+      dataSource: {
+        data: [
+          { id: 1, name: "Jane Doe", age: 30 },
+          { id: 2, name: "John Doe", age: 33 }
+        ],
+        schema: {
+          model: { id: "id" }
+        }
+      },
+      editable: {
+        mode: "inline"
+      }
+    });
+    </script>
+
+### columns.command.text.edit `String`
+
+The "edit" text of the edit command.
+
+#### Example - customize the edit text of the edit command
+
+    <div id="grid"></div>
+    <script>
+    $("#grid").kendoGrid({
+      columns: [
+        { field: "name" },
+        { command: [{ name: "edit", text: { edit: "Custom edit"} }] }
+      ],
+      editable: "inline",
+      dataSource: [ { name: "Jane Doe" } ]
+    });
+    </script>
+
+### columns.command.text.cancel `String`
+
+The "cancel" text of the edit command.
+
+#### Example - customize the cancel text of the edit command
+
+    <div id="grid"></div>
+    <script>
+    $("#grid").kendoGrid({
+      columns: [
+        { field: "name" },
+        { command: [{ name: "edit", text: { cancel: "Custom cancel"} }] }
+      ],
+      editable: "inline",
+      dataSource: [ { name: "Jane Doe" } ]
+    });
+    </script>
+
+### columns.command.text.update `String`
+
+The "update" text of the edit command.
+
+#### Example - customize the update text of the edit command
+
+    <div id="grid"></div>
+    <script>
+    $("#grid").kendoGrid({
+      columns: [
+        { field: "name" },
+        { command: [{ name: "edit", text: { update: "Custom Update"} }] }
+      ],
+      editable: "inline",
+      dataSource: [ { name: "Jane Doe" } ]
+    });
+    </script>
+
+### columns.command.visible `Function`
+
+The JavaScript function executed on initialization of the row which will determine whether the command button will be visible. The function receives a the data item object for the row as an argument.
+
+#### Example - set the command name
+
+    <div id="grid"></div>
+    <script>
+    $("#grid").kendoGrid({
+      columns: [
+        { field: "name" },
+        { command: [{ name: "edit", visible: function(dataItem) { return dataItem.name==="Jane" } }] }
+      ],
+      editable: "popup",
+      dataSource: [ { name: "Jane" }, { name: "Bill" } ]
     });
     </script>
 
@@ -2629,17 +2658,28 @@ Can be set to a JavaScript object which represents the editing configuration.
 
     <div id="grid"></div>
     <script>
-    $("#grid").kendoGrid({
-      columns: [
-        { field: "name" },
-        { field: "age" }
-      ],
-      dataSource: [
-        { name: "Jane Doe", age: 30 },
-        { name: "John Doe", age: 33 }
-      ],
-      editable: true
-    });
+      $("#grid").kendoGrid({
+        toolbar: ["save"],
+        columns: [
+          { field: "name" },
+          { field: "age" }
+        ],
+        dataSource: {
+         data: [
+          { id: 1, name: "Jane Doe", age: 30 },
+          { id: 2, name: "John Doe", age: 33 }
+         ],
+         schema:{
+          model: {
+           id: "id",
+           fields: {
+             age: { type: "number"}
+           }
+          }
+         }
+        },
+        editable: true
+      });
     </script>
 
 #### Example - enable popup editing
@@ -2652,10 +2692,20 @@ Can be set to a JavaScript object which represents the editing configuration.
         { field: "age" },
         { command: "edit" }
       ],
-      dataSource: [
-        { name: "Jane Doe", age: 30 },
-        { name: "John Doe", age: 33 }
-      ],
+      dataSource: {
+       data: [
+        { id: 1, name: "Jane Doe", age: 30 },
+        { id: 2, name: "John Doe", age: 33 }
+       ],
+       schema:{
+        model: {
+         id: "id",
+         fields: {
+           age: { type: "number"}
+         }
+        }
+       }
+      },
       editable: "popup"
     });
     </script>
@@ -2680,10 +2730,20 @@ Can be set to a function which will be called, passing the model instance, to re
          { field: "age" },
          { command: "destroy" }
        ],
-       dataSource: [
-         { name: "Jane Doe", age: 30 },
-         { name: "John Doe", age: 33 }
-       ],
+       dataSource: {
+        data: [
+         { id: 1, name: "Jane Doe", age: 30 },
+         { id: 2, name: "John Doe", age: 33 }
+        ],
+        schema:{
+         model: {
+          id: "id",
+          fields: {
+            age: { type: "number"}
+          }
+         }
+        }
+       },
        editable: {
          confirmation: false
        }
@@ -2700,10 +2760,20 @@ Can be set to a function which will be called, passing the model instance, to re
          { field: "age" },
          { command: "destroy" }
        ],
-       dataSource: [
-         { name: "Jane Doe", age: 30 },
-         { name: "John Doe", age: 33 }
-       ],
+       dataSource: {
+        data: [
+         { id: 1, name: "Jane Doe", age: 30 },
+         { id: 2, name: "John Doe", age: 33 }
+        ],
+        schema:{
+         model: {
+          id: "id",
+          fields: {
+            age: { type: "number"}
+          }
+         }
+        }
+       },
        editable: {
          confirmation: "Are you sure that you want to delete this record?"
        }
@@ -2720,10 +2790,20 @@ Can be set to a function which will be called, passing the model instance, to re
          { field: "age" },
          { command: "destroy" }
        ],
-       dataSource: [
-         { name: "Jane Doe", age: 30 },
-         { name: "John Doe", age: 33 }
-       ],
+       dataSource: {
+        data: [
+         { id: 1, name: "Jane Doe", age: 30 },
+         { id: 2, name: "John Doe", age: 33 }
+        ],
+        schema:{
+         model: {
+          id: "id",
+          fields: {
+            age: { type: "number"}
+          }
+         }
+        }
+       },
        editable: {
          confirmation: function(e) {
              return  "Are you sure that you want to delete record for " + e.name + "?";
@@ -2747,10 +2827,20 @@ If the grid is in mobile mode this text will be used for the cancel button.
          { field: "age" },
          { command: "destroy" }
        ],
-       dataSource: [
-         { name: "Jane Doe", age: 30 },
-         { name: "John Doe", age: 33 }
-       ],
+       dataSource: {
+        data: [
+         { id: 1, name: "Jane Doe", age: 30 },
+         { id: 2, name: "John Doe", age: 33 }
+        ],
+        schema:{
+         model: {
+          id: "id",
+          fields: {
+            age: { type: "number"}
+          }
+         }
+        }
+       },
        mobile: "phone",
        editable: {
          confirmation: true,
@@ -2774,10 +2864,20 @@ If the grid is in mobile mode this text will be used for the confirm button.
          { field: "age" },
          { command: "destroy" }
        ],
-       dataSource: [
-         { name: "Jane Doe", age: 30 },
-         { name: "John Doe", age: 33 }
-       ],
+       dataSource: {
+        data: [
+         { id: 1, name: "Jane Doe", age: 30 },
+         { id: 2, name: "John Doe", age: 33 }
+        ],
+        schema:{
+         model: {
+          id: "id",
+          fields: {
+            age: { type: "number"}
+          }
+         }
+        }
+       },
        mobile: "phone",
        editable: {
          confirmation: true,
@@ -2799,10 +2899,20 @@ The position at which new data items are inserted in the grid. Must be set to ei
         { field: "name" },
         { field: "age" }
       ],
-      dataSource: [
-        { name: "Jane Doe", age: 30 },
-        { name: "John Doe", age: 33 }
-      ],
+      dataSource: {
+       data: [
+        { id: 1, name: "Jane Doe", age: 30 },
+        { id: 2, name: "John Doe", age: 33 }
+       ],
+       schema:{
+        model: {
+         id: "id",
+         fields: {
+           age: { type: "number"}
+         }
+        }
+       }
+      },
       editable: {
         createAt: "bottom"
       },
@@ -2824,10 +2934,20 @@ If set to `true` the user can delete data items from the grid by clicking the "d
         { field: "age" },
         { command: "destroy" }
       ],
-      dataSource: [
-        { name: "Jane Doe", age: 30 },
-        { name: "John Doe", age: 33 }
-      ],
+      dataSource: {
+       data: [
+        { id: 1, name: "Jane Doe", age: 30 },
+        { id: 2, name: "John Doe", age: 33 }
+       ],
+       schema:{
+        model: {
+         id: "id",
+         fields: {
+           age: { type: "number"}
+         }
+        }
+       }
+      },
       editable: {
         destroy: false
       },
@@ -2852,13 +2972,18 @@ The editing mode to use. The supported editing modes are "incell", "inline" and 
         { command: "edit" }
       ],
       dataSource: {
-        data: [
-          { id: 1, name: "Jane Doe", age: 30 },
-          { id: 2, name: "John Doe", age: 33 }
-        ],
-        schema: {
-          model: { id: "id" }
+       data: [
+        { id: 1, name: "Jane Doe", age: 30 },
+        { id: 2, name: "John Doe", age: 33 }
+       ],
+       schema:{
+        model: {
+         id: "id",
+         fields: {
+           age: { type: "number"}
+         }
         }
+       }
       },
       editable: {
         mode: "inline"
@@ -2896,13 +3021,18 @@ which field to update. The other option is to use [MVVM](/framework/mvvm/overvie
         { command: "edit" }
       ],
       dataSource: {
-        data: [
-          { id: 1, name: "Jane Doe", age: 30 },
-          { id: 2, name: "John Doe", age: 33 }
-        ],
-        schema: {
-          model: { id: "id" }
+       data: [
+        { id: 1, name: "Jane Doe", age: 30 },
+        { id: 2, name: "John Doe", age: 33 }
+       ],
+       schema:{
+        model: {
+         id: "id",
+         fields: {
+           age: { type: "number"}
+         }
         }
+       }
       },
       editable: {
         mode: "popup",
@@ -2931,13 +3061,18 @@ which field to update. The other option is to use [MVVM](/framework/mvvm/overvie
         { command: "edit" }
       ],
       dataSource: {
-        data: [
-          { id: 1, name: "Jane Doe", age: 30 },
-          { id: 2, name: "John Doe", age: 33 }
-        ],
-        schema: {
-          model: { id: "id" }
+       data: [
+        { id: 1, name: "Jane Doe", age: 30 },
+        { id: 2, name: "John Doe", age: 33 }
+       ],
+       schema:{
+        model: {
+         id: "id",
+         fields: {
+           age: { type: "number"}
+         }
         }
+       }
       },
       editable: {
         mode: "popup",
@@ -2960,10 +3095,20 @@ If set to `true` the user can edit data items when editing is enabled.
         { field: "age" },
         { command: "destroy" }
       ],
-      dataSource: [
-          { id: 1, name: "Jane Doe", age: 30 },
-          { id: 2, name: "John Doe", age: 33 }
-      ],
+      dataSource: {
+       data: [
+        { id: 1, name: "Jane Doe", age: 30 },
+        { id: 2, name: "John Doe", age: 33 }
+       ],
+       schema:{
+        model: {
+         id: "id",
+         fields: {
+           age: { type: "number"}
+         }
+        }
+       }
+      },
       editable: {
         mode: "incell",
         update: false
@@ -2990,7 +3135,18 @@ For more information, please refer to the [Window configuration API](/api/javasc
       }
 
       var dataSource = new kendo.data.DataSource({
-        data: [ { name: "Jane Doe", age: 11 }, { name: "John Doe", age: 12 }]
+       data: [
+        { id: 1, name: "Jane Doe", age: 30 },
+        { id: 2, name: "John Doe", age: 33 }
+       ],
+       schema:{
+        model: {
+         id: "id",
+         fields: {
+           age: { type: "number"}
+         }
+        }
+       }
       });
 
       $("#grid").kendoGrid({
@@ -3145,15 +3301,25 @@ Can be set to a JavaScript object which represents the filter menu configuration
         <div id="grid"></div>
         <script>
             $("#grid").kendoGrid({
-                columns: [
-                    { field: "name" },
-                    { field: "age" }
-                ],
-                filterable: true,
-                dataSource: [
-                    { name: "Jane Doe", age: 30 },
-                    { name: "John Doe", age: 33 }
-                ]
+              columns: [
+                  { field: "name" },
+                  { field: "age" }
+              ],
+              filterable: true,
+              dataSource: {
+               data: [
+                { id: 1, name: "Jane Doe", age: 30 },
+                { id: 2, name: "John Doe", age: 33 }
+               ],
+               schema:{
+                model: {
+                 id: "id",
+                 fields: {
+                   age: { type: "number"}
+                 }
+                }
+               }
+              }
           });
         </script>
 
@@ -3173,10 +3339,20 @@ If set to `true` the filter menu allows the user to input a second criterion.
       filterable: {
         extra: false
       },
-      dataSource: [
-        { name: "Jane Doe", age: 30 },
-        { name: "John Doe", age: 33 }
-      ]
+      dataSource: {
+       data: [
+        { id: 1, name: "Jane Doe", age: 30 },
+        { id: 2, name: "John Doe", age: 33 }
+       ],
+       schema:{
+        model: {
+         id: "id",
+         fields: {
+           age: { type: "number"}
+         }
+        }
+       }
+      }
     });
     </script>
 
@@ -3193,10 +3369,20 @@ The text messages displayed in the filter menu. Use it to customize or localize 
         { field: "name" },
         { field: "age" }
       ],
-      dataSource: [
-        { name: "Jane Doe", age: 30 },
-        { name: "John Doe", age: 33 }
-      ],
+      dataSource: {
+       data: [
+        { id: 1, name: "Jane Doe", age: 30 },
+        { id: 2, name: "John Doe", age: 33 }
+       ],
+       schema:{
+        model: {
+         id: "id",
+         fields: {
+           age: { type: "number"}
+         }
+        }
+       }
+      },
       filterable: {
         messages: {
           and: "and",
@@ -3221,10 +3407,20 @@ The text of the option which represents the "and" logical operation.
         { field: "name" },
         { field: "age" }
       ],
-      dataSource: [
-        { name: "Jane Doe", age: 30 },
-        { name: "John Doe", age: 33 }
-      ],
+      dataSource: {
+       data: [
+        { id: 1, name: "Jane Doe", age: 30 },
+        { id: 2, name: "John Doe", age: 33 }
+       ],
+       schema:{
+        model: {
+         id: "id",
+         fields: {
+           age: { type: "number"}
+         }
+        }
+       }
+      },
       filterable: {
         messages: {
           and: "and"
@@ -3246,10 +3442,20 @@ The text of the button which clears the filter.
         { field: "name" },
         { field: "age" }
       ],
-      dataSource: [
-        { name: "Jane Doe", age: 30 },
-        { name: "John Doe", age: 33 }
-      ],
+      dataSource: {
+       data: [
+        { id: 1, name: "Jane Doe", age: 30 },
+        { id: 2, name: "John Doe", age: 33 }
+       ],
+       schema:{
+        model: {
+         id: "id",
+         fields: {
+           age: { type: "number"}
+         }
+        }
+       }
+      },
       filterable: {
         messages: {
           clear: "Clear filter"
@@ -3271,10 +3477,20 @@ The text of the button which applies the filter.
         { field: "name" },
         { field: "age" }
       ],
-      dataSource: [
-        { name: "Jane Doe", age: 30 },
-        { name: "John Doe", age: 33 }
-      ],
+      dataSource: {
+       data: [
+        { id: 1, name: "Jane Doe", age: 30 },
+        { id: 2, name: "John Doe", age: 33 }
+       ],
+       schema:{
+        model: {
+         id: "id",
+         fields: {
+           age: { type: "number"}
+         }
+        }
+       }
+      },
       filterable: {
         messages: {
           filter: "Apply filter"
@@ -3296,10 +3512,20 @@ The text of the information message on the top of the filter menu.
         { field: "name" },
         { field: "age" }
       ],
-      dataSource: [
-        { name: "Jane Doe", age: 30 },
-        { name: "John Doe", age: 33 }
-      ],
+      dataSource: {
+       data: [
+        { id: 1, name: "Jane Doe", age: 30 },
+        { id: 2, name: "John Doe", age: 33 }
+       ],
+       schema:{
+        model: {
+         id: "id",
+         fields: {
+           age: { type: "number"}
+         }
+        }
+       }
+      },
       filterable: {
         messages: {
           info: "Filter by: "
@@ -3391,10 +3617,20 @@ The text of the option which represents the "or" logical operation.
         { field: "name" },
         { field: "age" }
       ],
-      dataSource: [
-        { name: "Jane Doe", age: 30 },
-        { name: "John Doe", age: 33 }
-      ],
+      dataSource: {
+       data: [
+        { id: 1, name: "Jane Doe", age: 30 },
+        { id: 2, name: "John Doe", age: 33 }
+       ],
+       schema:{
+        model: {
+         id: "id",
+         fields: {
+           age: { type: "number"}
+         }
+        }
+       }
+      },
       filterable: {
         messages: {
           or: "or"
@@ -3626,17 +3862,27 @@ This will cause one additional read request per string column. The AutoComplete 
         <div id="grid"></div>
         <script>
             $("#grid").kendoGrid({
-                columns: [
-                    { field: "name" },
-                    { field: "age" }
-                ],
-                filterable: {
-                    mode: "menu, row"
-                },
-                dataSource: [
-                    { name: "Jane Doe", age: 30 },
-                    { name: "John Doe", age: 33 }
-                ]
+              columns: [
+                  { field: "name" },
+                  { field: "age" }
+              ],
+              filterable: {
+                  mode: "menu, row"
+              },
+              dataSource: {
+               data: [
+                { id: 1, name: "Jane Doe", age: 30 },
+                { id: 2, name: "John Doe", age: 33 }
+               ],
+               schema:{
+                model: {
+                 id: "id",
+                 fields: {
+                   age: { type: "number"}
+                 }
+                }
+               }
+              }
           });
         </script>
 
