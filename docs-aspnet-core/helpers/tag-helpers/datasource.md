@@ -65,7 +65,7 @@ The DataSource supports the following types of binding:
 3. Custom (default one)&mdash; The custom type binding allows a full control over the DataSource options listed in the  [client-side API](http://docs.telerik.com/kendo-ui/api/javascript/data/datasource). For example the server operations have to be separately set (server-filtering, server-sorting, server-paging, server-grouping, and server-aggregates) instead of using `serverOperation` property (only applicable for Ajax and WebApi types of binding). 
 > The custom type binding is suitable for working with `oData` and `oData-v4` services. This is achievable because of [type](https://docs.telerik.com/kendo-ui/api/javascript/data/datasource/configuration/type) property and usage of predefined transport and schema settings for consuming such services. Since the custom type binding is the default type it can be omitted in the DataSource declaration. Please refer to the examples below in order to get a better idea of what the custom type binding can be used for.
 
-    ###### Example with consuming an odata service 
+###### Example with consuming an odata service 
 
 	<kendo-datasource name="dataSource1" custom-type="odata">
 	    <transport>
@@ -83,7 +83,7 @@ The DataSource supports the following types of binding:
 	    <scrollable enabled="true" />
 	</kendo-grid>
 
-    ###### Example with simple remote service
+###### Example with simple remote service
 
 	<kendo-datasource name="dataSource1">
 	    <transport>
