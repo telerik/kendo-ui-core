@@ -925,16 +925,18 @@ The field from the server response which contains server-side errors. Can be set
     var dataSource = new kendo.data.DataSource({
       transport: {
         read: {
-          url: "https://demos.telerik.com/kendo-ui/service/twitter/search",
-          dataType: "jsonp", // "jsonp" is required for cross-domain requests; use "json" for same-domain requests
-          data: { q: "aaaaa" }
+          url: "https://www.mocky.io/v2/5ad0597a3100004f004eac46",
         }
       },
       schema: {
-        errors: "error"
+        data: "items",
+        errors: function(response) {
+          console.log("errors as function", response.errors[0])
+          return response.errors; 
+        }
       },
       error: function(e) {
-        console.log(e.errors);
+        console.log("error event handler", e.errors[0]); 
       }
     });
     dataSource.fetch();

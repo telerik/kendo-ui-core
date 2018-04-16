@@ -1955,6 +1955,24 @@ be disabled for this column. By default all columns are sortable if sorting is e
     });
     </script>
 
+### columns.sortable.allowUnsort `Boolean` *(default: true)*
+
+If set to `true` the user can get the grid in unsorted state by clicking the sorted column header. If set to `false` the user will not be able to unsort the column once sorted.
+
+#### Example - disable unsorting
+
+    <div id="grid"></div>
+    <script>
+    $("#grid").kendoGrid({
+      columns: [
+        { sortable: { allowUnsort: false }, field: "id" },
+        { field: "name" }
+      ],
+      sortable: true,
+      dataSource: [ { id: 1, name: "Jane Doe" }, { id: 2, name: "John Doe" } ]
+    });
+    </script>
+
 ### columns.sortable.compare `Function`
 
 A JavaScript function which is used to compare the values. It has the same signature as the [compare function accepted by Array.sort](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/sort).

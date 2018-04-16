@@ -18,7 +18,7 @@ The below example demonstrates how files can be sent directly to the Azure Face 
 
 1. Create HTML markup for initializing an Upload widget, an image tag for displaying the uploaded image and a textarea that will be used to display the received data from the Face API:
 
-    ```html
+    ```
     <!DOCTYPE html>
     <html>
     <head>
