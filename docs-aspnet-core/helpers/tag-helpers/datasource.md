@@ -50,17 +50,30 @@ The DataSource tag helper configuration options are passed as attributes of the 
 The DataSource supports the following types of binding:
 
 1. Ajax&mdash;You have to set the server operations together by using the `server-operation` property. This approach is also applicable for the WebApi type of binding.
+     ###### Example
+
+        <kendo-datasource name="dataSource" type="DataSourceTagHelperType.Ajax" server-operation="false" page-size="5">
+            <transport>
+                <read url="/DataSource/Products_Read" />
+            </transport>
+        </kendo-datasource>
+
 2. WebApi&mdash;When you use the WebApi type of binding in an editable Grid, define the field types in the `schema` to use the correct editors for the field.
 
     ###### Example
 
-        <schema>
-        <model id="ProductID">
-            <fields>
-            <field name="ProductID" type="number"></field>
-            </fields>
-        </model>
-        </schema>
+        <kendo-datasource name="dataSource1" type="DataSourceTagHelperType.WebApi" server-operation="true">
+            <transport>
+                <read url="/api/Product" />
+            </transport>
+            <schema>
+                <model id="ProductID">
+                    <fields>
+                        <field name="ProductID" type="number"></field>
+                    </fields>
+                </model>
+            </schema>
+        </kendo-datasource>
 
 3. Custom (default one)&mdash; The custom type binding allows a full control over the DataSource options listed in the  [client-side API](http://docs.telerik.com/kendo-ui/api/javascript/data/datasource). For example the server operations have to be separately set (server-filtering, server-sorting, server-paging, server-grouping, and server-aggregates) instead of using `serverOperation` property (only applicable for Ajax and WebApi types of binding). 
 > The custom type binding is suitable for working with `oData` and `oData-v4` services. This is achievable because of [type](https://docs.telerik.com/kendo-ui/api/javascript/data/datasource/configuration/type) property and usage of predefined transport and schema settings for consuming such services. Since the custom type binding is the default type it can be omitted in the DataSource declaration. Please refer to the examples below in order to get a better idea of what the custom type binding can be used for.

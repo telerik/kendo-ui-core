@@ -202,3 +202,4 @@ The below example demonstrates how files can be sent directly to the Azure Face 
 * [Overview of the Upload widget](https://docs.telerik.com/kendo-ui/controls/editors/upload/overview)
 * [Upload widget API Reference](https://docs.telerik.com/kendo-ui/api/javascript/ui/upload)
 * [Consuming Data from Azure Functions]({% slug azure_functions %})
+* [Consuming Data from Amazon DynamoDB]({% slug aws_dynamodb %})

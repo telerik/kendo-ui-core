@@ -24,7 +24,7 @@ Basic knowledge on the organization of [Azure Portal]( https://docs.microsoft.co
 
 ## Add CSS and JavaScript References
 
-To use Kendo UI in the sample project, reference the required Kendo UI CSS and JavaScript files in the head tag of the _Layout.cshtml file.
+To use Kendo UI in the sample project, [add the Kendo UI CSS and JavaScript references](https://docs.telerik.com/kendo-ui/intro/installation/getting-started#add-css-and-javascript-references) in the head tag of the _Layout.cshtml file.
 
 ```HTML
 <head>
@@ -190,3 +190,4 @@ In order to consume the data from the end points and display it in the Grid, con
 * [Kendo UI Grid Overview]({% slug overview_kendoui_grid_widget %})
 * [Consuming Data From Azure Functions]({% slug azure_functions %})
 * [Integrating Kendo UI with Azure Face API]({% slug azure_faceapi %})
+* [Consuming Data from Amazon DynamoDB]({% slug aws_dynamodb %})

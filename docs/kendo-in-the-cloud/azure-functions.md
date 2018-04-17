@@ -322,3 +322,4 @@ Get the unique URL for each of the functions by clicking the **Get Function URL*
 * [Kendo UI Grid Overview]({% slug overview_kendoui_grid_widget %})
 * [Binding to Azure Cosmos DB]({% slug azure_cosmos_db %})
 * [Integrating Kendo UI with Azure Face API]({% slug azure_faceapi %})
+* [Consuming Data from Amazon DynamoDB]({% slug aws_dynamodb %})
