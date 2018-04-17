@@ -64,7 +64,7 @@ Configures the Kendo UI Spreadsheet Excel export settings.
 Specifies the file name of the exported Excel file.
 
 #### Example - set the default Excel file name
-```
+
     <div id="spreadsheet"></div>
     <script>
         $("#spreadsheet").kendoSpreadsheet({
@@ -88,7 +88,6 @@ Specifies the file name of the exported Excel file.
         var spreadsheet = $("#spreadsheet").data("kendoSpreadsheet");
         spreadsheet.saveAsExcel();
     </script>
-```
 
 ### excel.forceProxy `Boolean` *(default: false)*
 If set to true, the content will be forwarded to [proxyURL](/api/javascript/ui/spreadsheet#configuration-excel.proxyURL) even if the browser supports saving files locally.
@@ -112,7 +111,7 @@ The proxy should return the decoded file with the "Content-Disposition" header s
 `attachment; filename="<fileName.xslx>"`.
 
 #### Example - set the server proxy URL
-```
+
     <div id="spreadsheet"></div>
     <script>
         $("#spreadsheet").kendoSpreadsheet({
@@ -136,7 +135,6 @@ The proxy should return the decoded file with the "Content-Disposition" header s
         var spreadsheet = $("#spreadsheet").data("kendoSpreadsheet");
         spreadsheet.saveAsExcel();
     </script>
-```
 
 ### pdf `Object`
 
@@ -150,7 +148,7 @@ The area to export. Possible values:
 * "selection": Exports the selected area on the active sheet.
 
 #### Example - set export area
-```
+
     <div id="spreadsheet"></div>
     <script>
         $("#spreadsheet").kendoSpreadsheet({
@@ -171,14 +169,13 @@ The area to export. Possible values:
         var spreadsheet = $("#spreadsheet").data("kendoSpreadsheet");
         spreadsheet.saveAsPDF();
     </script>
-```
 
 ### pdf.author `String` *(default: null)*
 
 The author of the PDF document.
 
 #### Example - set the author
-```
+
     <div id="spreadsheet"></div>
     <script>
         $("#spreadsheet").kendoSpreadsheet({
@@ -199,14 +196,13 @@ The author of the PDF document.
         var spreadsheet = $("#spreadsheet").data("kendoSpreadsheet");
         spreadsheet.saveAsPDF();
     </script>
-```
 
 ### pdf.creator `String` *(default: "Kendo UI PDF Generator")*
 
 The creator of the PDF document.
 
 #### Example - set the creator
-```
+
     <div id="spreadsheet"></div>
     <script>
         $("#spreadsheet").kendoSpreadsheet({
@@ -227,14 +223,13 @@ The creator of the PDF document.
         var spreadsheet = $("#spreadsheet").data("kendoSpreadsheet");
         spreadsheet.saveAsPDF();
     </script>
-```
 
 ### pdf.date `Date`
 
 The date when the PDF document is created. Defaults to `new Date()`.
 
 #### Example - set the date
-```
+
     <div id="spreadsheet"></div>
     <script>
         $("#spreadsheet").kendoSpreadsheet({
@@ -255,14 +250,13 @@ The date when the PDF document is created. Defaults to `new Date()`.
         var spreadsheet = $("#spreadsheet").data("kendoSpreadsheet");
         spreadsheet.saveAsPDF();
     </script>
-```
 
 ### pdf.fileName `String` *(default: "Export.pdf")*
 
 Specifies the file name of the exported PDF file.
 
 #### Example - set the default PDF file name
-```
+
     <div id="spreadsheet"></div>
     <script>
         $("#spreadsheet").kendoSpreadsheet({
@@ -283,13 +277,12 @@ Specifies the file name of the exported PDF file.
         var spreadsheet = $("#spreadsheet").data("kendoSpreadsheet");
         spreadsheet.saveAsPDF();
     </script>
-```
 
 ### pdf.fitWidth `Boolean` *(default: false)*
 An option indicating whether to fit the spreadsheet content to page width.
 
 #### Example - fit spreadsheet to page width
-```
+
     <div id="spreadsheet"></div>
     <script>
         $("#spreadsheet").kendoSpreadsheet({
@@ -312,7 +305,6 @@ An option indicating whether to fit the spreadsheet content to page width.
         var spreadsheet = $("#spreadsheet").data("kendoSpreadsheet");
         spreadsheet.saveAsPDF();
     </script>
-```
 
 ### pdf.forceProxy `Boolean` *(default: false)*
 If set to true, the content will be forwarded to [proxyURL](/api/javascript/ui/spreadsheet#configuration-pdf.proxyURL) even if the browser supports saving files locally.
@@ -321,7 +313,7 @@ If set to true, the content will be forwarded to [proxyURL](/api/javascript/ui/s
 An option indicating whether to export the cell guidelines.
 
 #### Example - disable guidelines
-```
+
     <div id="spreadsheet"></div>
     <script>
         $("#spreadsheet").kendoSpreadsheet({
@@ -342,7 +334,6 @@ An option indicating whether to export the cell guidelines.
         var spreadsheet = $("#spreadsheet").data("kendoSpreadsheet");
         spreadsheet.saveAsPDF();
     </script>
-```
 
 ### pdf.hCenter `Boolean` *(default: false)*
 An option indicating whether to center the content horizontally.
@@ -350,7 +341,7 @@ An option indicating whether to center the content horizontally.
 See also [vCenter](/api/javascript/ui/spreadsheet#configuration-pdf.vCenter).
 
 #### Example - center content horizontally
-```
+
     <div id="spreadsheet"></div>
     <script>
         $("#spreadsheet").kendoSpreadsheet({
@@ -371,14 +362,13 @@ See also [vCenter](/api/javascript/ui/spreadsheet#configuration-pdf.vCenter).
         var spreadsheet = $("#spreadsheet").data("kendoSpreadsheet");
         spreadsheet.saveAsPDF();
     </script>
-```
 
 ### pdf.keywords `String` *(default: null)*
 
 Specifies the keywords of the exported PDF file.
 
 #### Example - set the keywords
-```
+
     <div id="spreadsheet"></div>
     <script>
         $("#spreadsheet").kendoSpreadsheet({
@@ -399,14 +389,13 @@ Specifies the keywords of the exported PDF file.
         var spreadsheet = $("#spreadsheet").data("kendoSpreadsheet");
         spreadsheet.saveAsPDF();
     </script>
-```
 
 ### pdf.landscape `Boolean` *(default: true)*
 
 Set to `true` to reverse the paper dimensions if needed such that width is the larger edge.
 
 #### Example - set portrait mode
-```
+
     <div id="spreadsheet"></div>
     <script>
         $("#spreadsheet").kendoSpreadsheet({
@@ -427,7 +416,6 @@ Set to `true` to reverse the paper dimensions if needed such that width is the l
         var spreadsheet = $("#spreadsheet").data("kendoSpreadsheet");
         spreadsheet.saveAsPDF();
     </script>
-```
 
 ### pdf.margin `Object`
 
@@ -435,7 +423,7 @@ Specifies the margins of the page (numbers or strings with units). Supported
 units are "mm", "cm", "in" and "pt" (default).
 
 #### Example - set the margins
-```
+
     <div id="spreadsheet"></div>
     <script>
         $("#spreadsheet").kendoSpreadsheet({
@@ -461,7 +449,6 @@ units are "mm", "cm", "in" and "pt" (default).
         var spreadsheet = $("#spreadsheet").data("kendoSpreadsheet");
         spreadsheet.saveAsPDF();
     </script>
-```
 
 ### pdf.margin.bottom `Number|String` *(default: 0)*
 
@@ -494,7 +481,7 @@ Supported values:
   Supported units are "mm", "cm", "in" and "pt".
 
 #### Example - set custom paper size
-```
+
     <div id="spreadsheet"></div>
     <script>
         $("#spreadsheet").kendoSpreadsheet({
@@ -515,7 +502,6 @@ Supported values:
         var spreadsheet = $("#spreadsheet").data("kendoSpreadsheet");
         spreadsheet.saveAsPDF();
     </script>
-```
 
 ### pdf.proxyURL `String` *(default: null)*
 
@@ -535,7 +521,7 @@ The proxy should return the decoded file with the "Content-Disposition" header s
 `attachment; filename="<fileName.pdf>"`.
 
 #### Example - set the server proxy URL
-```
+
     <div id="spreadsheet"></div>
     <script>
         $("#spreadsheet").kendoSpreadsheet({
@@ -556,7 +542,6 @@ The proxy should return the decoded file with the "Content-Disposition" header s
         var spreadsheet = $("#spreadsheet").data("kendoSpreadsheet");
         spreadsheet.saveAsPDF();
     </script>
-```
 
 ### pdf.proxyTarget `String` *(default: "_self")*
 
@@ -566,7 +551,7 @@ If you want to display the document in a new window or iframe,
 the proxy should set the "Content-Disposition" header to `inline; filename="<fileName.pdf>"`.
 
 #### Example - open the generated document in a new window
-```
+
     <div id="spreadsheet"></div>
     <script>
         $("#spreadsheet").kendoSpreadsheet({
@@ -589,14 +574,13 @@ the proxy should set the "Content-Disposition" header to `inline; filename="<fil
         var spreadsheet = $("#spreadsheet").data("kendoSpreadsheet");
         spreadsheet.saveAsPDF();
     </script>
-```
 
 ### pdf.subject `String` *(default: null)*
 
 Sets the subject of the PDF file.
 
 #### Example - set the subject
-```
+
     <div id="spreadsheet"></div>
     <script>
         $("#spreadsheet").kendoSpreadsheet({
@@ -617,14 +601,13 @@ Sets the subject of the PDF file.
         var spreadsheet = $("#spreadsheet").data("kendoSpreadsheet");
         spreadsheet.saveAsPDF();
     </script>
-```
 
 ### pdf.title `String` *(default: null)*
 
 Sets the title of the PDF file.
 
 #### Example - set the title
-```
+
     <div id="spreadsheet"></div>
     <script>
         $("#spreadsheet").kendoSpreadsheet({
@@ -645,7 +628,6 @@ Sets the title of the PDF file.
         var spreadsheet = $("#spreadsheet").data("kendoSpreadsheet");
         spreadsheet.saveAsPDF();
     </script>
-```
 
 ### pdf.vCenter `Boolean` *(default: false)*
 An option indicating whether to center the content vertically.
@@ -653,7 +635,7 @@ An option indicating whether to center the content vertically.
 See also [hCenter](/api/javascript/ui/spreadsheet#configuration-pdf.hCenter).
 
 #### Example - center content vertically
-```
+
     <div id="spreadsheet"></div>
     <script>
         $("#spreadsheet").kendoSpreadsheet({
@@ -674,7 +656,6 @@ See also [hCenter](/api/javascript/ui/spreadsheet#configuration-pdf.hCenter).
         var spreadsheet = $("#spreadsheet").data("kendoSpreadsheet");
         spreadsheet.saveAsPDF();
     </script>
-```
 
 ### rowHeight `Number` *(default: 20)*
 The default row height in pixels.
@@ -911,7 +892,7 @@ The cell value.
 The validation rule applied to the cell.
 
 #### Initialize Spreadsheet with validation data, using `sheets.rows` configuration option
-```
+
     <div id="spreadsheet"></div>
 
     <script type="text/javascript" charset="utf-8">
@@ -949,7 +930,6 @@ The validation rule applied to the cell.
             ]
         });
     </script>
-```
 
 ### sheets.rows.cells.validation.type `String`
 Defines the validation type. The acceptable options are *reject* or *warning*
@@ -978,92 +958,91 @@ Defines the *hint* message that will be displayed if value is invalid.
 The template is giving an access to the following variables: from{0}, to{1}, fromFormula{2}, toFormula{3}, dataType{4}, type{5} and comparerType{6}.
 
 #### Example - use validation template variables
-```
-<div id="example">
-      <div id="spreadsheet" style="width: 100%;"></div>
-      <script>
-        $(function() {
-          $("#spreadsheet").kendoSpreadsheet({
-            columns: 26,
-            rows: 30,
-            sheetsbar: false,
-            excel: {
-              // Required to enable Excel Export in some browsers
-              proxyURL: "//demos.telerik.com/kendo-ui/service/export"
-            },
-            sheets: [
-              {
-                name: "Validation Template",
 
-                rows: [
-                  {
-                    height: 25,
-                    cells: [
-                      {
-                        value: "15",
-                        validation: {
-                          dataType: "number",
-                          from: "B1",
-                          to:"C1",
-                          allowNulls: true,
-                          comparerType:"between" ,
-                          type: "reject",
-                          titleTemplate: "Number validation error",
-                          messageTemplate: "The number have to be between {0} and {1}"
-                        }
-
-                      },
-                      {
-                        value: "10",
-
-                      },
-                      {
-                        value: "20",
-
-                      },
-
-                    ]
-                  },
-                ],
-                columns: [
-                  {
-                    width: 100
-                  },
-                  {
-                    width: 215
-                  },
-                  {
-                    width: 115
-                  },
-                  {
-                    width: 115
-                  },
-                  {
-                    width: 115
-                  }
-                ]
-              },
-              {
-                name: "ListValues",
-                rows: [ //A1:B1
-                  {
-                    cells: [
-                      {
-                        value: true
-                      },
-                      {
-                        value: false
-                      }
-                    ]
-                  }
-                ]
-              }
-            ]
-          });
-        });
-      </script>
+	<div id="example">
+		<div id="spreadsheet" style="width: 100%;"></div>
+		<script>
+			$(function() {
+			$("#spreadsheet").kendoSpreadsheet({
+				columns: 26,
+				rows: 30,
+				sheetsbar: false,
+				excel: {
+				// Required to enable Excel Export in some browsers
+				proxyURL: "//demos.telerik.com/kendo-ui/service/export"
+				},
+				sheets: [
+				{
+					name: "Validation Template",
+	
+					rows: [
+					{
+						height: 25,
+						cells: [
+						{
+							value: "15",
+							validation: {
+							dataType: "number",
+							from: "B1",
+							to:"C1",
+							allowNulls: true,
+							comparerType:"between" ,
+							type: "reject",
+							titleTemplate: "Number validation error",
+							messageTemplate: "The number have to be between {0} and {1}"
+							}
+	
+						},
+						{
+							value: "10",
+	
+						},
+						{
+							value: "20",
+	
+						},
+	
+						]
+					},
+					],
+					columns: [
+					{
+						width: 100
+					},
+					{
+						width: 215
+					},
+					{
+						width: 115
+					},
+					{
+						width: 115
+					},
+					{
+						width: 115
+					}
+					]
+				},
+				{
+					name: "ListValues",
+					rows: [ //A1:B1
+					{
+						cells: [
+						{
+							value: true
+						},
+						{
+							value: false
+						}
+						]
+					}
+					]
+				}
+				]
+			});
+			});
+		</script>
     </div>
-```
 
 ### sheets.rows.cells.validation.titleTemplate `String`
 Defines the *hint* title that will be displayed if value is invalid.
@@ -1140,7 +1119,7 @@ The available tools are:
 Those tools which are part of a tool group are defined as array. For example `["bold", "italic", "underline"]`
 
 #### Example - customize home tab
-```
+
     <div id="spreadsheet"></div>
     <script>
         $("#spreadsheet").kendoSpreadsheet({
@@ -1149,10 +1128,9 @@ Those tools which are part of a tool group are defined as array. For example `["
             }
         });
     </script>
-```
 
 #### Example - disable home tab
-```
+
     <div id="spreadsheet"></div>
     <script>
         $("#spreadsheet").kendoSpreadsheet({
@@ -1161,10 +1139,9 @@ Those tools which are part of a tool group are defined as array. For example `["
             }
         });
     </script>
-```
 
 #### Example - show a custom tool
-```
+
     <div id="spreadsheet"></div>
     <script>
         $("#spreadsheet").kendoSpreadsheet({
@@ -1184,7 +1161,6 @@ Those tools which are part of a tool group are defined as array. For example `["
             }
         });
     </script>
-```
 
 ### toolbar.insert `Boolean|Array` *(default: true)*
 A boolean value indicating if the "insert" tab should be displayed or a collection of tools that will be shown in the "insert" tab.
@@ -1197,7 +1173,7 @@ The available tools are:
 Those tools which are part of a tool group are defined as array. For example `["deleteColumn", "deleteRow"]`
 
 #### Example - customize insert tab
-```
+
     <div id="spreadsheet"></div>
     <script>
         $("#spreadsheet").kendoSpreadsheet({
@@ -1206,10 +1182,9 @@ Those tools which are part of a tool group are defined as array. For example `["
             }
         });
     </script>
-```
 
 #### Example - disable insert tab
-```
+
     <div id="spreadsheet"></div>
     <script>
         $("#spreadsheet").kendoSpreadsheet({
@@ -1218,7 +1193,6 @@ Those tools which are part of a tool group are defined as array. For example `["
             }
         });
     </script>
-```
 
 ### toolbar.data `Boolean|Array` *(default: true)*
 A boolean value indicating if the "insert" tab should be displayed or a collection of tools that will be shown in the "insert" tab.
@@ -1230,7 +1204,7 @@ The available tools are:
 * **validation**
 
 #### Example - customize data tab
-```
+
     <div id="spreadsheet"></div>
     <script>
         $("#spreadsheet").kendoSpreadsheet({
@@ -1239,10 +1213,9 @@ The available tools are:
             }
         });
     </script>
-```
 
 #### Example - disable data tab
-```
+
     <div id="spreadsheet"></div>
     <script>
         $("#spreadsheet").kendoSpreadsheet({
@@ -1251,7 +1224,6 @@ The available tools are:
             }
         });
     </script>
-```
 
 ## Methods
 
@@ -1268,7 +1240,7 @@ The sheet to set as active.
 `kendo.spreadsheet.Sheet` the active sheet.
 
 #### Example - change the active Sheet
-```
+
     <div id="spreadsheet"></div>
     <script>
         $("#spreadsheet").kendoSpreadsheet({
@@ -1277,7 +1249,6 @@ The sheet to set as active.
         var sheets = $("#spreadsheet").data("kendoSpreadsheet").sheets();
         $("#spreadsheet").data("kendoSpreadsheet").activeSheet(sheets[1]);
     </script>
-```
 
 ### cellContextMenu
 Gets the cell contextMenu instance.
@@ -1287,7 +1258,7 @@ Gets the cell contextMenu instance.
 `kendo.ui.ContextMenu` The menu instance.
 
 #### Example - dynamically adding a context menu item and associating a selection command
-```
+
     <div id="spreadsheet"></div>
 
     <script>
@@ -1309,7 +1280,6 @@ Gets the cell contextMenu instance.
            });
         });
     </script>
-```
 
 ### rowHeaderContextMenu
 Gets the row header contextMenu instance.
@@ -1346,7 +1316,7 @@ The file or blob, usually obtained through a file input.
 `Promise` a promise that will be resolved when the import operation completes.
 
 #### Example - import file
-```
+
     <input id="file" type="file" />
     <div id="spreadsheet"></div>
     <script>
@@ -1357,7 +1327,6 @@ The file or blob, usually obtained through a file input.
             spreadsheet.fromFile(this.files[0]);
         });
     </script>
-```
 
 ### saveAsExcel
 
@@ -1366,7 +1335,7 @@ Initiates the Excel export. Also fires the [`excelExport`](/api/javascript/ui/sp
 > Calling this method could trigger the browser built-in popup blocker in some cases. To avoid that, always call it as a response to an end-user action e.g. button click.
 
 #### Example - manually initiate Excel export
-```
+
     <button id="export">Export to Excel</button>
     <div id="spreadsheet"></div>
     <script>
@@ -1392,7 +1361,6 @@ Initiates the Excel export. Also fires the [`excelExport`](/api/javascript/ui/sp
 
     <!-- Load JSZIP library to enable Excel export -->
     <script src="http://kendo.cdn.telerik.com/{{ site.cdnVersion }}/js/jszip.min.js"></script>
-```
 
 ### saveAsPDF
 
@@ -1409,7 +1377,7 @@ An options object with the same structure as the [pdf](/api/javascript/ui/spread
 
 
 #### Example - manually initiate PDF export
-```
+
     <button id="export">Export to PDF</button>
     <div id="spreadsheet"></div>
     <script>
@@ -1435,7 +1403,6 @@ An options object with the same structure as the [pdf](/api/javascript/ui/spread
 
     <!-- Load Pako library to enable PDF compression -->
     <script src="http://kendo.cdn.telerik.com/{{ site.cdnVersion }}/js/pako_deflate.min.js"></script>
-```
 
 ### sheetByName
 Returns a sheet matching the specified name, if any.
@@ -1638,7 +1605,6 @@ To hide this name from the custom names dropdown in the toolbar, pass `true`. Ev
 
 #### Example - define a few names
 
-```
     <div id="spreadsheet"></div>
     <script>
         $("#spreadsheet").kendoSpreadsheet();
@@ -1661,7 +1627,6 @@ To hide this name from the custom names dropdown in the toolbar, pass `true`. Ev
         // arbitrary formula
         spreadsheet.defineName("GoldenRatio", "(1+SQRT(5))/2");
     </script>
-```
 
 After that, it is possible to use any of those names in formulas. For example, a formula like `=SUM(CellsAbove)` will return the sum of the cells above it, no matter where it sits. Relative references, such as the `CellsAbove` example, are not compatible with other spreadsheets, such as Excel, LibreOffice, or Google Sheets.
 
@@ -2001,7 +1966,7 @@ The Excel [workbook configuration object](/api/javascript/ooxml/workbook#configu
 If invoked the spreadsheet will not save the generated file.
 
 #### Example - subscribe to the "excelExport" event during initialization
-```
+
     <div id="spreadsheet"></div>
     <script>
         $("#spreadsheet").kendoSpreadsheet({
@@ -2025,10 +1990,9 @@ If invoked the spreadsheet will not save the generated file.
         var spreadsheet = $("#spreadsheet").data("kendoSpreadsheet");
         spreadsheet.saveAsExcel();
     </script>
-```
 
 #### Example - subscribe to the "excelExport" event after initialization
-```
+
     <div id="spreadsheet"></div>
     <script>
         $("#spreadsheet").kendoSpreadsheet({
@@ -2053,7 +2017,6 @@ If invoked the spreadsheet will not save the generated file.
 
         spreadsheet.saveAsExcel();
     </script>
-```
 
 ### excelImport
 Fired when the user clicks the "Open" toolbar button.
@@ -2081,7 +2044,7 @@ The promise [progress handler](http://api.jquery.com/deferred.progress/) will be
 * progress - Number if the range 0 to 1, indicating the progress of the current import operation
 
 #### Example - monitor the progress of an import operation
-```
+
     <div id="spreadsheet"></div>
     <script>
         $("#spreadsheet").kendoSpreadsheet({
@@ -2098,7 +2061,6 @@ The promise [progress handler](http://api.jquery.com/deferred.progress/) will be
 
         // Click the Open command and select a file to import
     </script>
-```
 
 ### pdfExport
 
@@ -2119,7 +2081,7 @@ If invoked the spreadsheet will not save the generated file.
 A promise that will be resolved when the export completes.
 
 #### Example - Monitor export progress
-```
+
     <div id="spreadsheet"></div>
     <script>
         $("#spreadsheet").kendoSpreadsheet({
@@ -2142,4 +2104,3 @@ A promise that will be resolved when the export completes.
         var spreadsheet = $("#spreadsheet").data("kendoSpreadsheet");
         spreadsheet.saveAsPDF();
     </script>
-```
