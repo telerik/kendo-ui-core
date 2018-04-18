@@ -647,6 +647,8 @@ var __meta__ = { // jshint ignore:line
 
                 if (!that.filterInput) {
                     wrapper.on("keypress" + ns, proxy(that._keypress, that));
+                } else {
+                    wrapper.on("input" + ns, proxy(that._search, that));
                 }
 
             } else if (disable) {

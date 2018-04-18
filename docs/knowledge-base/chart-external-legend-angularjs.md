@@ -58,20 +58,21 @@ The following example shows the full implementation:
             <span ng-repeat="x in series" class="legend-item" ng-mouseenter="onMouseEnter($event)" ng-mouseleave="onMouseLeave($event)" ng-click="onLegendClick($event)">
               <span class="legend-marker" ng-style="{background: x.color}">
               </span>
-              <span>{{x.name}}</span>
+              <span>{% raw %}{{x.name}}{% endraw %}</span>
             </span>
           </div>
           <div kendo-chart="chart"
                k-legend="{ visible: false }"
-               k-series-defaults="{ type: 'line' }"
+               k-series-defaults="{ type: 'column', categoryField: 'ProductName' }"
                k-series="[
-                         { field: 'nuclear', name: 'Nuclear electricity' },
-                         { field: 'hydro', name: 'Hydro electricity' },
-                         { field: 'wind', name: 'Wind electricity' }
+                         { field: 'UnitPrice', name: 'UnitPrice' },
+                         { field: 'UnitsInStock', name: 'UnitsInStock' }
                          ]"
-               k-data-source="electricity"
+               k-category-axis="{labels: {rotation: 45}}"
+               k-data-source="productsData"
+               k-tooltip="{visible: true, template: '#:series.name#: #:value#'}"
                k-on-render="onRender(kendoEvent)"
-               style="height: 250px;"></div>
+               style="height: 450px;"></div>
         </div>
 
       </div>
@@ -79,17 +80,14 @@ The following example shows the full implementation:
         angular.module("KendoDemos", ["kendo.directives"])
           .controller("MyCtrl", function ($scope) {
           $scope.series = [];
-          $scope.electricity = new kendo.data.DataSource({
+          $scope.productsData = new kendo.data.DataSource({
             transport: {
               read: {
-                url: "../content/dataviz/js/spain-electricity.json",
-                dataType: "json"
+                url: "https://demos.telerik.com/kendo-ui/service/Products",
+                dataType: "jsonp"
               }
             },
-            sort: {
-              field: "year",
-              dir: "asc"
-            }
+            pageSize: 10
           });
           $scope.onRender = function (e) {
             // create a list of the Chart series to bind the legend to

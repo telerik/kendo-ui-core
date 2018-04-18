@@ -291,6 +291,7 @@ var __meta__ = { // jshint ignore:line
                     .on("keydown" + ns, proxy(that._keydown, that))
                     .on("focus" + ns, proxy(that._inputFocus, that))
                     .on("focusout" + ns, proxy(that._inputFocusout, that))
+                    .on("input" + ns, proxy(that._search, that))
                     .on("paste" + ns, proxy(that._inputPaste, that));
 
             } else {
