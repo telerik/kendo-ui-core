@@ -367,6 +367,7 @@ function attachToApiPageEvents() {
     filterControl = $('#api-filter input.search');
     if (filterControl.length) {
         filterControl.on('keyup', function () { filter(); });
+        filterControl.focus();
     }
 
     breadcrumbDropDown = $('.links-container > a');

@@ -67,6 +67,10 @@ Users with a commercial license might use the [custom download builder tool](htt
 >
 > Do not use multiple custom combined scripts, as they will contain duplicate code. Instead, create one combined script file, which includes everything you need.
 
+> **Important**
+>
+> Note, that it is not possible to load packages produced by the Download Builder using RequireJS. The tool will not create the required AMD modules.
+
 ### Use Gulp
 
 If you use the Kendo UI Core package, you can build a custom distribution using the `gulp` build tool by following the instructions in the [README article](https://github.com/telerik/kendo-ui-core#building-only-what-you-need).

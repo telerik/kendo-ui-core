@@ -434,6 +434,7 @@ var __meta__ = { // jshint ignore:line
 
                 that.input.on(KEYDOWN, proxy(that._keydown, that))
                     .on("paste" + ns, proxy(that._search, that))
+                    .on("input" + ns, proxy(that._search, that))
                     .on("focus" + ns, proxy(that._inputFocus, that))
                     .on("focusout" + ns, proxy(that._inputFocusout, that));
 
